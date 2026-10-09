@@ -157,12 +157,13 @@ The ones that carry the most weight:
   The catalogue prints either a closed form or a degree with its polynomial, never both,
   so every closed form here carries a derived pair.
   All four are null where nothing exact is known.
-  [`exact-values.json.gz`](exact-values.json.gz) collects them for every current case, keeps
-  its $n=1\ldots324$ entries and totals separate from the historical collection, and
-  checks each polynomial for irreducibility, a unique root in a rational interval and agreement
-  with the recorded side.
+  [`exact-values.json.gz`](exact-values.json.gz) collects them for every current case,
+  keeps its $n=1\ldots324$ entries and totals separate from the historical collection,
+  and checks each polynomial for irreducibility, a unique root in a rational interval
+  and agreement with the recorded side.
   Independent KKT values remain separate numerical diagnostics.
-  Its lossless storage is documented in [Generated Data Storage](#generated-data-storage).
+  Its lossless storage is documented in
+  [Generated Data Storage](#generated-data-storage).
   Native certificate sides and certified outward ceilings carry distinct provenance.
   Rehwaldt’s finite refinements require exact equality between the reported decimal,
   verified decimal, exact fraction and retained witness side, with complete source,
@@ -191,6 +192,9 @@ The ones that carry the most weight:
   Daniel’s superseded $n=102$ polynomial remains historical with its complete original
   root cell, source flags and V0/C0 envelope.
   The missing native geometry files remain an intake dependency under `think-8sm2`.
+  The child catalogue projects the three improving notes into its separate noncurrent
+  source collection and retains the superseded $n=102$ record in the raw archive,
+  preserving the complete metadata and V0/C0 assurance.
   Historical entries preserve printed integer polynomial-side pairs from compared
   retained primary catalogues and exact-solution articles, including superseded packings
   and facts beyond the frontier horizon.

@@ -1790,7 +1790,7 @@ def test_the_totals_partition_the_range() -> None:
     entries = list(_entries().values())
     totals = register["totals"]
     assert sum(totals[state] for state in exact.STATES) == len(entries) == 324
-    assert [totals[state] for state in exact.STATES] == [176, 63, 65, 17, 0, 3]
+    assert [totals[state] for state in exact.STATES] == [176, 64, 65, 16, 0, 3]
     assert totals["proved"] == 77
     with_polynomial = sum(1 for entry in entries if entry["polynomial"] is not None)
     assert totals["irreducible-certified"] == totals["root-isolated"] == with_polynomial == 321
@@ -1975,21 +1975,30 @@ def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
     numeric = {n for n, entry in entries.items() if entry["state"] == "numeric-only"}
     native = set(VERIFIED_FALLBACK_COUNTS)
     refinements = {68, 105, 292}
-    finite = native | refinements
+    arrangements = {266, 270, 272}
+    finite = native | refinements | arrangements
     assert len(ORIGINAL_VERIFIED_FALLBACK_COUNTS) == 33
-    assert len(native) == 31
-    assert native.isdisjoint(refinements)
+    assert len(native) == 29
+    assert native.isdisjoint(refinements | arrangements)
+    assert refinements.isdisjoint(arrangements)
     assert numeric == {29, 55, 71}
-    assert len(finite) == 34
+    assert len(finite) == 35
     assert len(exact.ROUTES) == 37
     assert numeric.isdisjoint(finite)
-    assert numeric | finite == set(exact.ROUTES)
+    # The new n266 pose uses the sweep bead with its explicit new-contact obligation.
+    assert numeric | finite == set(exact.ROUTES) | {266}
+    assert 266 not in exact.ROUTES
     for n in numeric | finite:
         entry = entries[n]
         routes = [note for note in entry["notes"] if note["kind"] == "route"]
-        (route,) = [note for note in routes if note["bead"] == exact.ROUTES[n][0]]
+        bead = exact.ROUTES.get(n, (exact.SWEEP_BEAD, ""))[0]
+        (route,) = [note for note in routes if note["bead"] == bead]
         assert route["bead"], n
-        diagnostics = [note for note in routes if note["bead"] == exact.SWEEP_BEAD]
+        diagnostics = [
+            note
+            for note in routes
+            if note["bead"] == exact.SWEEP_BEAD and "different points" in note["text"]
+        ]
         agreement = entry["checks"]["kkt_agreement_digits"]
         if (
             entry["kkt"] is not None
@@ -1999,24 +2008,29 @@ def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
         ):
             (diagnostic,) = diagnostics
             assert f"KKT value to {agreement} digits only" in diagnostic["text"], n
-            assert "different points" in diagnostic["text"], n
         else:
             assert not diagnostics, n
-        assert len(routes) == 1 + len(diagnostics), n
+        # A same-bead diagnostic may share the research note, but none disappears.
+        assert len(routes) == 1 + sum(note is not route for note in diagnostics), n
         if n in finite:
-            assert entries[n]["state"] == "rational", n
+            assert entry["state"] == "rational", n
             assert "ideal contact research open" in route["text"], n
             (provenance,) = [
                 note
-                for note in entries[n]["notes"]
+                for note in entry["notes"]
                 if note["kind"] in {"verified-witness-side", "verified-bound-ceiling"}
             ]
-            # The old n292 ceiling is tested against its retained prior-state record.
-            # Every current finite case is a native or explicit witness-side identity.
             assert provenance["kind"] == "verified-witness-side", n
             side = Fraction(entry["exact_form"])
             assert side == Fraction(entry["side"]["value"]), n
             assert entry["checks"]["root"]["interval"] == [str(side), str(side)], n
+        if n in arrangements:
+            assert "new #399 witness" in route["text"], n
+            assert "active contact system and a stable seed" in route["text"], n
+            assert "No KKT or local-minimum result" in route["text"], n
+            assert not any(
+                "batch holds a KKT local minimum" in note["text"] for note in routes
+            ), n
     assert exact.ROUTES[55][0] != exact.ROUTES[71][0]
     assert entries[126]["state"] == "rational"
     assert 126 not in exact.ROUTES
@@ -2158,8 +2172,40 @@ def test_the_eight_displaced_current_exact_sides_remain_in_history() -> None:
 
 def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier() -> None:
     rows = _register()["register"]["historical_entries"]
-    assert len(rows) == 170
-    assert sum(row["kind"] == "superseded" for row in rows) == 160
+    assert len(rows) == 175
+    assert sum(row["kind"] == "superseded" for row in rows) == 161
+    unreconciled = [row for row in rows if row["kind"] == "unreconciled-source"]
+    assert {row["n"] for row in unreconciled} == {102, 106, 152, 177}
+    assert len(unreconciled) == 4
+    for row in unreconciled:
+        current = _entries()[row["n"]]
+        assert row["algebraic_source"] == "reported-source-polynomial"
+        assert row["assurance"]["verification"] == "V0"
+        assert row["assurance"]["confirmation"] == "C0"
+        assert row["assurance"]["geometry_replay"] == "not-attempted"
+        assert row["assurance"]["lean_replay"] == "not-attempted"
+        assert Fraction(row["checks"]["root"]["interval"][1]) < Fraction(
+            current["side"]["value"]
+        )
+        assert current["state"] == "rational"
+        assert current["side"]["relation"] == "upper-bound"
+        assert row["polynomial"]["coefficients"] != current["polynomial"]["coefficients"]
+    source266 = exact.catalogue_entries()[266]
+    polynomial266 = source266.minimal_polynomial
+    assert polynomial266 is not None
+    (former266,) = [
+        row
+        for row in rows
+        if row["n"] == 266
+        and row["polynomial"]["coefficients"]
+        == [str(c) for c in normalized_polynomial(polynomial266)]
+    ]
+    assert former266["kind"] == "superseded"
+    assert former266["degree"] == 32
+    assert Fraction(former266["checks"]["root"]["interval"][0]) > Fraction(
+        _entries()[266]["side"]["value"]
+    )
+    assert _entries()[266]["state"] == "rational"
     invalid = [row for row in rows if row["kind"] == "source-invalid"]
     assert len(invalid) == 3
     n259 = next(row for row in invalid if row["n"] == 259)

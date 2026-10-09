@@ -37,13 +37,18 @@ exact elimination, branch selection, and geometric feasibility link it to the pa
 The table includes integers and rational values as well as nonrational radical forms.
 An exact rational feasibility bound $p/q$ in lowest terms has degree one and primitive
 polynomial $qs-p=0$. Native witness sides and certified outward ceilings have distinct
-provenance.
-The verified-bound projection requires the reported decimal, verified decimal
-and exact fraction to agree exactly, together with matching source/count evidence and
-retained certificate/replay custody.
-At $n = 292$, the represented rational is an outward ceiling above the native witness
-side. Its identity does not determine an ideal stationary side or the unknown optimum
-$s(n)$. “Claim” describes the geometric and global status recorded for that value.
+provenance. The Rehwaldt finite refinements require the reported decimal, verified
+decimal, exact fraction and retained witness side to agree exactly, together with
+matching source/count evidence, complete replay receipts and geometric custody.
+Daniel’s new arrangements retain the native fraction and full reported decimal, while
+the verified 16-place display is their least upward decimal ceiling.
+The linear polynomial describes the native fraction; the display ceiling remains
+separate.
+The earlier outward-ceiling identity at $n = 292$ remains in dated acquisition,
+prior-state records and receipt controls; the current catalogue uses the refined native
+fraction. These finite identities do not determine an ideal stationary side or the
+unknown optimum $s(n)$. “Claim” describes the geometric and global status recorded for
+each value.
 
 {{EXACT_FORMS}}
 
@@ -78,6 +83,14 @@ computed from it here; its citation identifies that expression rather than a pri
 equation. Citations for the same polynomial and isolated root are merged.
 A `source-invalid` row preserves a printed equation that may pass its algebraic checks,
 but the source row does not furnish a valid packing upper bound.
+An `unreconciled-source` row with `reported-source-polynomial` origin retains a
+separately reported root whose polynomial and isolating interval have been independently
+checked.
+Its geometry and Lean replay await verification, so its assurance remains V0/C0.
+The register preserves the complete source row, original checker flags and acquisition
+identity. A root below a current finite bound does not update that bound without a
+verified geometric realization and field-to-side linkage.
+
 Each entry carries its own attribution and source labels.
 Its checks compare the polynomial with the source’s side and, where retained, verify
 that the closed form selects that root.

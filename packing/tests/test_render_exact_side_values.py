@@ -389,6 +389,14 @@ def test_historical_source_statuses_attribution_and_invalid_geometry_are_visible
     assert "does not furnish a valid packing upper bound" in catalogue
     for entry in historical:
         assert entry["kind"] in summary
+        if entry.get("reported_source"):
+            heading = (
+                f"### Historical polynomial for $n={entry['n']}$ at side `{entry['side']}`"
+            )
+            section = catalogue.split(heading, 1)[1].split("### Historical polynomial", 1)[0]
+            assurance = entry["assurance"]
+            level = f"{assurance['verification']}/{assurance['confirmation']}"
+            assert level in section
         if entry.get("bead") is not None:
             assert entry["bead"] in catalogue
         for status in entry["source_statuses"]:

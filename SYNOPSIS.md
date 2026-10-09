@@ -582,17 +582,21 @@ Those definitions apply in the campaign artifacts and the beads too, not only he
 
 ### Exact-Side Collection, October 8
 
-The [exact-values register](packing/frontier/exact-values.json.gz) assembles 320 exact
-current sides for $n = 1\ldots324$: 176 integer, 62 rational, 65 radical closed forms
-and 17 minimal-polynomial sides.
+The [exact-values register](packing/frontier/exact-values.json.gz) assembles 321 exact
+current sides for $n = 1\ldots324$: 176 integer, 64 rational, 65 radical closed forms
+and 16 minimal-polynomial sides.
 The degree-672 polynomial at $n = 83$ is retained in full and independently checked; its
 source root index 27 remains stated and uncounted.
-No geometric or optimality rung changes.
+All 77 proved cases retain their status.
 
-The bounded retained-source extraction covers 182 polynomial/side pairs from 201
-occurrences, reaching $n = 2135$, with no undecoded rows.
-The register retains 170 historical entries, including three proposals explicitly
-invalidated by their source.
+The original retained-source extraction on October 7 decoded 182 polynomial/side pairs
+from 201 occurrences, reaching $n = 2135$, with no undecoded rows.
+The refreshed register retains 175 noncurrent source entries: 161 superseded, seven
+outside the frontier, three source-invalid and four unreconciled source-only roots.
+The four additional roots at $n = 102,106,152,177$ have independently checked
+polynomials and isolating intervals, but geometry and Lean replay await verification
+(V0/C0). Their complete source rows, native coefficient strings, flags and acquisition
+identity remain in the register; they do not update current bounds.
 The
 [independent mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
 and [generated paper](packing/devtools/templates/exact-side-values-article.md) keep
@@ -600,17 +604,27 @@ source attribution, algebraic checks, geometric realization and optimality separ
 
 The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html) has a
 searchable index and loads individual records and coefficient vectors when opened.
-Complete archives preserve the full printed catalogue; the bounded
+Complete archives preserve the full printed catalogue; the dated
 [payload measurement](packing/benchmarks/exact-catalogue-web/report.md) records the
 initial raw-byte reduction without making a latency claim.
+The latest source refresh independently reconstructs 519 normalized coefficient vectors
+and 6,273 integer strings, preserving all metadata.
+Its initial automatic payload is 362,534 bytes against a 5,257,078-byte complete HTML
+archive (6.90%, below the declared 10% checkpoint threshold).
 
-The four numeric-only current cases are $n = 29,55,71,105$, each with a bead in the
+The three numeric-only current cases are $n = 29,55,71$, each with a bead in the
 [continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md#remaining-work-and-beads).
-Thirty-two rational identities come from replayed native certificates; the additional
-$n = 292$ identity describes its certified outward decimal ceiling.
-Exact equality with the current reported side is required before either enters the
-register. The retained systems at $n = 29,55,71$ support elimination and real-branch
-selection; $n = 105$ needs a current contact system and confirmed KKT seed.
+There are 35 current finite witness-side projections: 29 original native certificate
+sides, three Rehwaldt refinements at $n = 68,105,292$ and three Daniel arrangements at
+$n = 266,270,272$. Rehwaldt admission requires exact equality among the reported and
+verified decimals, fraction and witness side.
+Daniel admission retains the native fraction and reported decimal while checking that
+the verified 16-place display is its least upward ceiling.
+The original 33 A1 projections, including the old $n = 292$ ceiling, remain dated
+evidence. The finite $n = 105$ representation gap is resolved; its ideal contact-system
+and KKT seed work stays open.
+The retained systems at $n = 29,55,71$ support elimination and real-branch selection.
+Each new Daniel pose needs its own active contacts and KKT seed.
 Ideal contact-system research continues under `think-s6np` and the batch lanes even when
 the finite certificate side is rational.
 Exact geometric witnesses and independent contact rederivations remain open.
