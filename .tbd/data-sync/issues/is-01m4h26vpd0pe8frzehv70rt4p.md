@@ -5,7 +5,7 @@ title: Integrate current main imports and requalify atlas cleanup PR 474
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -18,11 +18,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T19:28:29.900Z
-updated_at: 2026-10-09T22:24:07.271Z
+updated_at: 2026-10-09T23:01:36.552Z
 started_at: 2026-10-09T19:28:49.355Z
 ---
 Origin/main advanced from 6a0499ba4 to d3860c97a with imported scientific records and producer changes; PR474 is conflicting. Preserve all current main scientific imports while retaining reviewed cleanup behavior, refresh curated credit source snapshots against merged records, regenerate release exports and site, run appropriate gates, update PR context and independent review. No GitHub merge authorized. Root owns commits, local merge, canonical generation, PR mutation.
 
 ## Notes
 
-Resumed at51e8d39d1: currentmain d386 integration preserved, dedicated6365 repren Ahmed credit migration, measured balanced print layouts/all8canonicalexports pinnedb2e357, black printable annotations and current date. Website centeredSmallTriangle default with Fixed/Row/Global, grayRow grid reference, compactcomplete rightalignedrows; latestlegend onlyangles+contacts; preview591478/600000 and PDFs unchanged. CanonicalPDFchecks/renderinspection/openPreview/Finder complete; manual8799server running, automatedbrowsernavigation blocked. SeniorE sourcecoverage162paths complete, E1/E2/E3 fixed; formalpublication pending. Final51e8 edit65pass; reachablephase901.6s timeout after4227pass32skip11fail no completeverdict. Three moderate agents isolate actual failures in privateclones underu1pe; rootsolecommitter. Priorca01 exit120,b4 3consistencyfails+timeout,575 cancellation afterformatfailure retainedhonestly. Stillpending supportedtestrepairs/requiredpush,currenthead formalreviews,fast+actualdeferred immutabletreeCI,PRpublication and closeout. Protectedfollowups stayopen. NoGitHubmergeauthorized.
+Current published head d19d01f18, main d3860c97a, PR474 MERGEABLE but not ready. Exact merged tree f204077a at82cb1ffe; Packing/Pages failed and local push failed7 timing controls despite65 edit passes. Actual deferred38000279358 passed all13 named steps including195 slow tests and3 complete nonempty exhaustive shards. Reviews E/F published/verified; E1/E2/E3 fixed reply6090675133; F1 private guard repair integrated uncommitted. Linux-font and paper Figure2 overflow repairs tracked as children ofu1pe. Root owns source/commits/beads/GitHub. Require new published head qualification after pending repairs, preserve all previous failed/cancelled attempts; do not merge without user GitHub merge authorization.
