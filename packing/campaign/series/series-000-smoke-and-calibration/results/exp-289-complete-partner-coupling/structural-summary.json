@@ -1,0 +1,57 @@
+{
+  "schema": "n17-structural-intake-summary/v1",
+  "source_report": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/structural-intake.json",
+  "all_rows_checked": 1056,
+  "foreign_rows_checked": 992,
+  "total_residual_pieces": 91825,
+  "empty_residual_pieces": 0,
+  "total_residual_vertices": 348140,
+  "largest_coordinate_bits": 135,
+  "largest_row_by_piece_count": {
+    "owner": 20,
+    "pieces": 570,
+    "reference": {
+      "kind": "phase3",
+      "node": "n17-capture-pilot",
+      "row": 0,
+      "step": 14
+    },
+    "row_index": 0
+  },
+  "largest_piece_by_vertex_count": {
+    "largest_coordinate_bits": 109,
+    "owner": 5,
+    "piece_index": 32,
+    "row_index": 41,
+    "vertices": 8
+  },
+  "prospective_mathematical_comparisons": {
+    "all_coordinates_within4096_bits": true,
+    "all_raw_pieces_within256_vertices": true,
+    "all_rows_within4096_pieces": true,
+    "all_rows_within64_pieces": false,
+    "raw_vertices_within262144": false
+  },
+  "owner0_rows25_27": [
+    {
+      "row_index": 25,
+      "pieces": 7,
+      "vertices": 22
+    },
+    {
+      "row_index": 26,
+      "pieces": 4,
+      "vertices": 13
+    },
+    {
+      "row_index": 27,
+      "pieces": 11,
+      "vertices": 37
+    }
+  ],
+  "prospective_coupling_construct_vertices": 348264,
+  "prospective_sat_construct_vertices": 348153,
+  "largest_regional_original_piece_count": 22,
+  "count_scope": "Construction parsedvertices only; acceptedcustodyextractor worknotincluded; no newgeometrysigns.",
+  "coupling_predicates_evaluated": false
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "C2-HEADER_ONLY",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_bb_header",
+        "--manifest",
+        "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/inputs/C2-compact-manifest.json.gz",
+        "--compressed-sha256",
+        "d9260cd3b60570b506c7ace7e7130463f6880f07dddc28bdc63aba5da82b883d",
+        "--manifest-id",
+        "505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57",
+        "--max-seconds",
+        "30",
+        "--output",
+        "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/c2-header.json"
+      ]
+    },
+    {
+      "name": "C1-HEADER_ONLY",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_bb_header",
+        "--manifest",
+        "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/inputs/C1-compact-manifest.json.gz",
+        "--compressed-sha256",
+        "68125ef700518c52eb3e0a2c7e5e4b7e3ffed22cf920c64a8dbb3c46f407e560",
+        "--manifest-id",
+        "131e014393e8cc50ea643e38ae8a11d19bb3a1d133f3df23b54225d781a8db64",
+        "--max-seconds",
+        "30",
+        "--output",
+        "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/c1-header.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "60",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": null,
+    "fresh_seconds": null,
+    "combined_term_seconds": 60,
+    "combined_kill_seconds": 70,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "output_bytes": 1048576,
+    "cooperative_seconds_per_header": 30
+  },
+  "criterion": "Primary BOTH exact retained C1/C2 manifests complete HEADER_ONLY_PASS with complete original-cell halfplane enclosure, all21 pair roster, complete shifted closed-angle chart and exact input custody. This is header-only computational scope, NEVER FULL/tree/trig verification or ordinary admission. Prospectively C2 is evaluated first: its individual HEADER_ONLY_PASS selects ONE bounded FULL C2 replay even if separate C1 subsequently refuses; C2 refusal/resource exhaustion stops C2 acquisition/replay without unchanged retry. No actual header has yet been evaluated.",
+  "registered_at": "2026-10-08T04:02:34.357164+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch",
+  "finite_caps": {
+    "compressed_manifest_bytes": 1048576,
+    "decoded_manifest_bytes": 10485760,
+    "used_rational_bits": 4096,
+    "output_bytes_per_case": 1048576
+  },
+  "scope": "Two distinct input headers; not construction/fresh replay of one mathematical proof."
+}

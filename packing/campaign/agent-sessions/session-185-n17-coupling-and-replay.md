@@ -1,0 +1,1358 @@
+---
+title: "Session185 \u2014 n17 complete coupling and replay"
+softschema:
+  contract: packing.squares:AgentSession/v2
+  schema: ../schemas/agent-session.schema.yaml
+  envelope: session
+  status: enforced
+session:
+  id: session-185
+  title: n17 Complete Coupling and Exact Replay
+  date: '2026-10-07'
+  started_at: '2026-10-07T18:17:58Z'
+  deadline_at: '2026-10-07T22:17:58Z'
+  branch: codex/n17-state-review
+  goal: Make substantive verified progress toward n17 optimality with complete partner-pose coupling and
+    measured exact replay optimization; preserve all results and publish the four-hour handoff.
+  workflow_phases:
+  - workflow: insight-iteration
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-441
+    bead: think-hkqz
+    objective: Freeze complete partner-pose coupling mathematics while Sol implements disjoint finite
+      primitives and a matched replay profiler.
+    status: completed
+    entered_by: session_start
+    switch_reason: null
+    budget_minutes: 30
+    started_at: '2026-10-07T18:17:58Z'
+    deadline_at: '2026-10-07T18:47:58Z'
+    expected_output: Astra coupling contract, bounded target-free source controls and profile design;
+      complete continuation record.
+    validation_command: Focused new coupling/profile synthetic controls and packing-ledger check
+    kill_condition: No scientific target before preregistration and clean-source review; soundness or
+      custody alarm stops its lane.
+    fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected
+      mathematical discriminator.
+    outcome: Complete coupling contract and frozen47-control instrument passed sole-Astra mathematical
+      and independentSol mechanical source review; prospective replay baseline/phase budget frozen. H298/exp289
+      registered before target evaluation. Profile input-guard repairs and reusable phase runner continue
+      in the next slice. Phase switched at 2026-10-07T18:48:27.361776Z.
+    evidence:
+    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    stop_reason: Reviewed contract and prospectively registered first target; actual target remains unrun.
+    next_action: Freeze and independently review completed source before the first registered target.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-441
+    bead: think-hkqz
+    objective: Launch and freshly reconstruct registered full-row coupling on a clean source freeze; complete
+      same-object profiler source controls and preregistration in parallel.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: H298/exp289 mathematical contract and source reviews completed before measurement.
+    budget_minutes: 30
+    started_at: '2026-10-07T18:48:27.361776Z'
+    deadline_at: '2026-10-07T19:17:58Z'
+    expected_output: exp289 complete finite result or retained refusal/resource stop; next mathematical
+      selection; profile source and first preregistered two-process diagnostic.
+    validation_command: Frozen exp289 construction/fresh arrays inside240s supervisor; source/metadata
+      reviews and focused profile/phase-runner controls.
+    kill_condition: No scientific target before preregistration and clean-source review; soundness or
+      custody alarm stops its lane.
+    fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected
+      mathematical discriminator.
+    outcome: Coupling construction stopped at64-piece source ceiling beforepredicate; no mathnegative.
+      Input-only audit completedall1056rows:91825pieces/348140vertices/max570pieces/max135bits, sourcef7966.253s.
+      Author/independent50 SAT+auditcontrols passed; source-onlyfull-squarefallbackready; root broadpush
+      checkpoint55pass/6fail561.37s preserved and scopedfindingsrepaired. Phase switch observed 2026-10-07T19:23:30.435695Z.
+    evidence:
+    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    stop_reason: Actual input characterization selects a separate resource-amended replication and matchedreplaydiagnostic;
+      no targetsign reached.
+    next_action: Judge only the nonzero closed region primary criterion; preregister full-square SAT fallback
+      if common-core coupling misses.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-441
+    bead: think-hkqz
+    objective: Evaluate amended full-row coupling and matchedfullreplay observations; prepare stronger
+      guard-conditioned ownership source while all availablelanes continue.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Audited fullparent size explains input guard and permits prospective1024piece/1Mvertex
+      resource amendment without changing mathematicalcriterion.
+    budget_minutes: 30
+    started_at: '2026-10-07T19:23:30.435695Z'
+    deadline_at: '2026-10-07T19:47:58Z'
+    expected_output: Fresh complete amendedcoupling result or honestresource refusal; NONE/PHASES exactequivalence+observations;
+      jointlyconditionedownership sourcecontrols.
+    validation_command: Frozen exp289 construction/fresh arrays inside240s supervisor; source/metadata
+      reviews and focused profile/phase-runner controls.
+    kill_condition: No scientific target before preregistration and clean-source review; soundness or
+      custody alarm stops its lane.
+    fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected
+      mathematical discriminator.
+    outcome: Exp291 complete primary miss with fresh matched reconstruction/all1056+992 rows/17endpointcontrol.
+      Construction51.699s+fresh54.946s,106.929souter. Firstexp290attempt stopped12.202s processguardunavailable;
+      allpartials preserved, unchanged-regimeattempt2 active. Guardedauthor40controls/Astra sourceCLEAR;
+      independent40PASS with scopeclarification pending. Actual phase switch 2026-10-07T19:47:44.150600+00:00
+    evidence:
+    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    stop_reason: Complete common-core fixedpoint miss selects stronger full-square/joint discriminators;
+      no blind same-method repeat.
+    next_action: Astra selects next informative registered SAT or jointlyconditionedownership test; preserve
+      complete miss and exactreplay attempt2.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-441
+    bead: think-hkqz
+    objective: Select and evaluate stronger full-square or guard-conditioned discriminator; preserve matchedreplay
+      evidence; source-only progressjournal stays off frozen mathematics.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Fresh complete coupling miss, with stronger mathematically reviewed source ready.
+    budget_minutes: 31
+    started_at: '2026-10-07T19:47:44.150600+00:00'
+    deadline_at: '2026-10-07T20:17:58Z'
+    expected_output: Complete stronger exactdiscriminator or honest resource refusal, plus exact replay
+      observations and current PR/tracker evidence.
+    validation_command: Frozen exp289 construction/fresh arrays inside240s supervisor; source/metadata
+      reviews and focused profile/phase-runner controls.
+    kill_condition: No scientific target before preregistration and clean-source review; soundness or
+      custody alarm stops its lane.
+    fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected
+      mathematical discriminator.
+    outcome: Exp292 full-squareSAT COMPLETEprimarymiss withmatchedfreshreconstruction,34128quadraticmins,15/16negativewitnessesexactwallvalid;
+      soleAstra andSolactualscopeCLEAR. Pairedguard48author+48peerPASS andSTAGES33+33peerPASS/sourceCLEAR;
+      separatelypreregisteredH301/exp293,H302/exp294 targetunrun. Threehostedcoherencedebts identified;
+      nextcombinedfreeze tracksguard,indexesideas andrenderclose-report. Actualphaseswitch 2026-10-07T20:22:38.403436+00:00
+    evidence:
+    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    stop_reason: Full-squareuniversalpartner methodmiss selects genuinejointconditioning; measuredstageattribution
+      supports the efficiencyblock.
+    next_action: Evaluate separatelypreregisteredpoint-firstpairedguard andSTAGES, thenAstra choosesnextmathematicaldiscriminator
+      fromactualowned-set diagnostics.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-441
+    bead: think-hkqz
+    objective: 'Efficiency block(OR12): evaluate pairedjointownership andsame-objectexactstageattribution
+      whileAstra chooses proofprogress fromactualconditionaldomains, avoiding unchangedmethodrepetition.'
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Fresh complete coupling miss, with stronger mathematically reviewed source ready.
+    budget_minutes: 30
+    started_at: '2026-10-07T20:22:38.403436+00:00'
+    deadline_at: '2026-10-07T20:47:58Z'
+    expected_output: Freshpairedpoint/regionalresult orhonestresourcepartial; acceptedstageattribution;
+      concrete mathematicalroute selected fromsurvivingownedsets/covergeometry.
+    validation_command: Frozen exp289 construction/fresh arrays inside240s supervisor; source/metadata
+      reviews and focused profile/phase-runner controls.
+    kill_condition: No scientific target before preregistration and clean-source review; soundness or
+      custody alarm stops its lane.
+    fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected
+      mathematical discriminator.
+    outcome: Paired guard ownership completed and freshly matched a point-context method miss; all992
+      foreign rows survive, seven owners have nonempty pairwise-disjoint owned sets. STAGES matched all
+      mathematical payloads and attributes57.293s to coverage versus10.218s to collisions. Reviewed external
+      Cargo runtime repair9+9controls committed. Full101-step checkpoint launched on frozen0adfe at20:39:32Z
+      with external scratch and INT3600/KILL+10 ceiling. Actual CI shows a literal command-period error
+      and contaminated in-process synthetic fixture, both narrowly fixed; current-base five conflicts
+      resolved with upstream research preserved. Native partial cost checkpoint captured.
+    evidence:
+    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    stop_reason: Measured bottleneck and complete joint-method negative select a two-closed-child proof
+      discriminator and concurrent CI/upstream integration.
+    next_action: Register and validate deterministic two-child instrument; refresh current merge-ref CI;
+      coordinate all n17 issues.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-441
+    bead: think-hkqz
+    objective: Freeze, review and execute the preregistered two-closed-centre-child discriminator while
+      Sol repairs real CI failures and reviews all n17 issues.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Fresh joint miss and explicit user instructions select closed centre branching, green
+      CI and upstream issue integration.
+    budget_minutes: 30
+    started_at: '2026-10-07T20:50:27.909979+00:00'
+    deadline_at: '2026-10-07T21:17:58Z'
+    expected_output: Complete fresh closed region proof or retained method/resource miss; integrated current
+      base, verified CI repairs and linked issue inventory.
+    validation_command: Focused new synthetic controls and source reviews, then separately registered
+      guarded construction/fresh replay; actual hosted merge-ref CI asynchronously.
+    kill_condition: No scientific target before preregistration and clean-source review; soundness or
+      custody alarm stops its lane.
+    fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected
+      mathematical discriminator.
+    outcome: 'Exp295 completed fresh verified two-child method miss: owner18/x/cut471/250, all64rows both
+      children, nonemptyK56/105;23.7705snormalcleanup. Allseven n17issues reviewed and no duplicateclosures
+      justified;413request and405progress posted. Main6dd integratedd68a, newerbe817 READMEconflict under
+      additive repair. Actual phase switch 2026-10-07T21:27:07.727040+00:00'
+    evidence:
+    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    stop_reason: Complete split miss selects one simultaneous collective-angle-row discriminator; protected
+      finalization unchanged.
+    next_action: Freeze and review H304/exp296 whole-row union coverage; no new target starts after21:47:58Z.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-441
+    bead: think-hkqz
+    objective: Finish one preregistered collective-row coverage discriminator; retain global contact-normalization
+      lemma while Sol restores latest CI and consolidates issues.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Exact closed two-child miss and all-issue review select a genuinely new collective
+      angle-row discriminator.
+    budget_minutes: 21
+    started_at: '2026-10-07T21:27:07.727040+00:00'
+    deadline_at: '2026-10-07T21:47:58Z'
+    expected_output: Fresh exact lost-angle-union result or honest incomplete outcome; durable hand normalization
+      lemma and current-source CI evidence.
+    validation_command: Focused new synthetic controls and source reviews, then separately registered
+      guarded construction/fresh replay; actual hosted merge-ref CI asynchronously.
+    kill_condition: No scientific target before preregistration and clean-source review; soundness or
+      custody alarm stops its lane.
+    fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected
+      mathematical discriminator.
+    outcome: 'Exp296 accepted fresh exact necessary-domain restriction: owner18(label11) loses25/64 half-angle
+      parameter length under fixedowner0 tau53/128,25wholeclosedrows/all992;noownerempty/global/censuschange.13.699+14.177s/28.142snormalownedcleanup.
+      Globalnormalization/rank35/17parameter/contactlowerbound and qualitative compactness lift retainedsoleAstra
+      hand derivations. Oldfull0adfe completed95PASS5FAIL1SKIP3402.14s; no currentfullPASS. Actual phase
+      switch 2026-10-07T21:49:15.789989+00:00'
+    evidence:
+    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    stop_reason: Protected final30minutes now; last mathematical target completed well before21:47:58
+      research cutoff.
+    next_action: Preserve exact positive/negative outcomes and next quantitative regional lift; consolidatefinalsource,CI,costs,issuesandhandoff.
+  - workflow: review-planning-oversight
+    focus: process
+    recording: contemporaneous
+    clock_role: finalization
+    commitment: BC-440
+    bead: think-tvxs
+    objective: Consolidate all scientific receipts and hand derivations, current issue dispositions, native
+      measured costs and latest CI; close the four-hour scope with certification debt explicit.
+    status: stopped
+    entered_by: planned_checkpoint
+    switch_reason: User-authorized protected finalization reserve after completed final mathematical target.
+    budget_minutes: 30
+    started_at: '2026-10-07T21:49:15.789989+00:00'
+    deadline_at: '2026-10-07T22:17:58Z'
+    expected_output: Current PR404, source and exact receipts, honest certification/CI scope, measured
+      native cost, dispositions and concrete next handoff.
+    validation_command: Required records tier and relevant focused checks; latest required hosted CI asynchronously.
+      No new mathematical target or broad repeated full checkpoint.
+    kill_condition: No further scientific target; never relabel scoped checks or oldfullreceipt as newheadfullPASS.
+    fallback: Stop with think-7hy3 certification pending and preserve exact unresolved proof/CI obligations.
+    outcome: Reviewed exp296 exact25-row restriction and existence-only regional lift; full source/receipts/report
+      pushed8ae1. Sevenissues distinct; native aggregate and terminalagenda dispositions retained. Localpush
+      tierINCOMPLETE at240s,65db requiredCIgreen/latestHEAD pending; certification7hy3 remainsopen. Final
+      scientific/record freeze observed 2026-10-07T22:07:05.523271+00:00
+    evidence:
+    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    stop_reason: Reviewed terminal batch and prospective next mathematical obligations captured; certification
+      debt explicitly handed off.
+    next_action: think-7hy3
+  primary_bead: think-tvxs
+  status: stopped
+  budget:
+    wall_minutes: 240
+    max_cycles: 8
+    orientation_minutes: 30
+    checkpoint_minutes: 30
+    slice_minutes: 30
+    finalization_minutes: 30
+  stop_conditions:
+  - Fixed user-authorized deadline22:17:58Z; no mathematical target starts after21:47:58Z.
+  - Refuse unregistered targets, failed scientific controls, incomplete row/piece coverage or endpoint
+    loss.
+  - Stop each target at its separately frozen wall/RSS/input ceilings; preserve incomplete artifacts.
+  - Keep CI and scoped certification beside mathematical work; no idle blocking CI wait.
+  progress:
+    metric: New exactly verified closed exclusions/capture implications and measured replay cost, with
+      complete proof obligations retained
+    before: 60 admissions;36768 states/4683 D4 orbits; endpoint retained; unchanged side bounds. Specific
+      exp288 one-square relaxation witness accepted; global capture and certification7hy3 open.
+    after: Positive conditional25/64 half-angle-domain restriction forowner18 underfixedowner0; completedcomplete-methodmisses291/292/293/295
+      andacceptedNONE/PHASES/STAGESdiagnostics; unchanged60admissions/36768states/4683D4orbits/bounds.
+      Globalcapture/explicitregionalradius/fullcurrent-sourcecertification remainopen.
+  delegations:
+  - task: Astra complete coupling strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: completed
+    recording: contemporaneous
+    outcome: First-slice source or mathematical packet delivered; continues under a new phase2 delegation.
+      Delivered by 2026-10-07T18:48:27.361776Z.
+    evidence:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    files:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    checks:
+    - Sole-Astra mathematical source review CLEAR; no independent mathematical confirmation and no target
+      evaluated.
+    uncertainty: No actual new coupling/profile target evaluated.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue the declared phase2 lane.
+    phase: 1
+    budget_minutes: 30
+    started_at: '2026-10-07T18:20:12.721Z'
+    deadline_at: '2026-10-07T18:47:58Z'
+    expected_output: Complete992-row coupling, nonzero region criterion, endpoint-family safeguards and
+      subsequent mathematical selection.
+    validation_command: Source/implication mathematical read, not independent mathematical confirmation.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol complete coupling implementation
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: First-slice source or mathematical packet delivered; continues under a new phase2 delegation.
+      Delivered by 2026-10-07T18:48:27.361776Z.
+    evidence:
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    files:
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    checks:
+    - Author47 target-free controls PASS5.53s; independentSol47 PASS5.18s; Ruff/BasedPyright zero.
+    uncertainty: No actual new coupling/profile target evaluated.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue the declared phase2 lane.
+    phase: 1
+    budget_minutes: 30
+    started_at: '2026-10-07T18:20:33.400Z'
+    deadline_at: '2026-10-07T18:47:58Z'
+    expected_output: Retained finite instrument and synthetic controls implementing the frozen Astra contract.
+    validation_command: Focused pytest and static floors; fresh target waits source review.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol exact replay profile and independent mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: First-slice source or mathematical packet delivered; continues under a new phase2 delegation.
+      Delivered by 2026-10-07T18:48:27.361776Z.
+    evidence:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    files:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    checks:
+    - Initial19 target-free controls PASS0.69s; bounded-input repairs were still pending at phase1 close;
+      prospective NONE180/PHASES180 budget delivered.
+    uncertainty: No actual new coupling/profile target evaluated.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue the declared phase2 lane.
+    phase: 1
+    budget_minutes: 30
+    started_at: '2026-10-07T18:20:54.229Z'
+    deadline_at: '2026-10-07T18:47:58Z'
+    expected_output: Retained diagnostic on accepted replay objects, exact-equivalence controls and independent
+      coupling mechanics.
+    validation_command: Target-free profile controls; actual profile waits registration.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Astra complete coupling strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: completed
+    recording: contemporaneous
+    outcome: Phase2 source and auditpacketdelivered by 2026-10-07T19:23:30.435695Z.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/structural-intake.json
+    files: &id001
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    checks:
+    - Auditscopeonly;50 SAT/auditcontrols independentlyPASS2.72s; no newmathematicalsigns.
+    uncertainty: CouplingpredicateandSATtargetunrun; profilingtwo-process targetpending.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue in phase3.
+    phase: 2
+    budget_minutes: 30
+    started_at: '2026-10-07T18:48:27.361776Z'
+    deadline_at: '2026-10-07T19:17:58Z'
+    expected_output: Current coupling actual-result semantic review and prospective exact full-square
+      SAT/Lipschitz contract.
+    validation_command: Source/implication mathematical read, not independent mathematical confirmation.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope: *id001
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol complete coupling implementation
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase2 source and auditpacketdelivered by 2026-10-07T19:23:30.435695Z.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/structural-intake.json
+    files: &id002
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/devtools/run_registered_phases.py
+    - packing/tests/test_run_registered_phases.py
+    - packing/devtools/check_n17_full_square_partner_coupling.py
+    - packing/tests/test_check_n17_full_square_partner_coupling.py
+    - packing/devtools/report_n17_parent_geometry.py
+    - packing/tests/test_report_n17_parent_geometry.py
+    checks:
+    - Auditscopeonly;50 SAT/auditcontrols independentlyPASS2.72s; no newmathematicalsigns.
+    uncertainty: CouplingpredicateandSATtargetunrun; profilingtwo-process targetpending.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue in phase3.
+    phase: 2
+    budget_minutes: 30
+    started_at: '2026-10-07T18:48:27.361776Z'
+    deadline_at: '2026-10-07T19:17:58Z'
+    expected_output: Reusable bounded phase launcher controls and registered coupling result audit.; source-onlyfull-squareSAT
+      and input-onlyparentstructural audit before a distinctresource amendment.
+    validation_command: Focused pytest and static floors; fresh target waits source review.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope: *id002
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol exact replay profile and independent mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase2 source and auditpacketdelivered by 2026-10-07T19:23:30.435695Z.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/structural-intake.json
+    files: &id003
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    checks:
+    - Auditscopeonly;50 SAT/auditcontrols independentlyPASS2.72s; no newmathematicalsigns.
+    uncertainty: CouplingpredicateandSATtargetunrun; profilingtwo-process targetpending.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue in phase3.
+    phase: 2
+    budget_minutes: 30
+    started_at: '2026-10-07T18:48:27.361776Z'
+    deadline_at: '2026-10-07T19:17:58Z'
+    expected_output: Frozen NONE180/PHASES180 matched profiler and focused source-selector repair; no
+      changed cap.
+    validation_command: Target-free profile controls; actual profile waits registration.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope: *id003
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Astra complete coupling strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: completed
+    recording: contemporaneous
+    outcome: Phase3 review/source/experiment packet delivered; matchedagent continuation in phase4 at2026-10-07T19:47:44.150600+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    files:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    checks:
+    - Coupling51sourcecontrols+independent4; actualexp291 mechanicalCLEAR/freshPASS. Guarded40author+40independentPASS,
+      finalbudgetscopeclarification pending. Replayattempt1guardunavailable preserved; attempt2active.
+    uncertainty: Actualamended coupling/profile outcomespending.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue matchedactor phase4 with disjointscope.
+    phase: 3
+    budget_minutes: 30
+    started_at: '2026-10-07T19:23:30.435695Z'
+    deadline_at: '2026-10-07T19:47:58Z'
+    expected_output: Dated resourceamendment mathematical clearance, actualcoupling/SAT semantics, guard-conditionedjointdomain
+      contract.
+    validation_command: Source/implication mathematical read, not independent mathematical confirmation.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol complete coupling implementation
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase3 review/source/experiment packet delivered; matchedagent continuation in phase4 at2026-10-07T19:47:44.150600+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    files:
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/devtools/run_registered_phases.py
+    - packing/tests/test_run_registered_phases.py
+    - packing/devtools/check_n17_full_square_partner_coupling.py
+    - packing/tests/test_check_n17_full_square_partner_coupling.py
+    - packing/devtools/report_n17_parent_geometry.py
+    - packing/tests/test_report_n17_parent_geometry.py
+    - packing/devtools/check_n17_guard_conditioned_ownership.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    checks:
+    - Coupling51sourcecontrols+independent4; actualexp291 mechanicalCLEAR/freshPASS. Guarded40author+40independentPASS,
+      finalbudgetscopeclarification pending. Replayattempt1guardunavailable preserved; attempt2active.
+    uncertainty: Actualamended coupling/profile outcomespending.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue matchedactor phase4 with disjointscope.
+    phase: 3
+    budget_minutes: 30
+    started_at: '2026-10-07T19:23:30.435695Z'
+    deadline_at: '2026-10-07T19:47:58Z'
+    expected_output: Source-onlyguard-conditionedownership instrumentandmeaningfulsyntheticcontrols; no
+      actualtarget.
+    validation_command: Focused pytest and static floors; fresh target waits source review.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/devtools/run_registered_phases.py
+    - packing/tests/test_run_registered_phases.py
+    - packing/devtools/check_n17_full_square_partner_coupling.py
+    - packing/tests/test_check_n17_full_square_partner_coupling.py
+    - packing/devtools/report_n17_parent_geometry.py
+    - packing/tests/test_report_n17_parent_geometry.py
+    - packing/devtools/check_n17_guard_conditioned_ownership.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol exact replay profile and independent mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase3 review/source/experiment packet delivered; matchedagent continuation in phase4 at2026-10-07T19:47:44.150600+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    files:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    checks:
+    - Coupling51sourcecontrols+independent4; actualexp291 mechanicalCLEAR/freshPASS. Guarded40author+40independentPASS,
+      finalbudgetscopeclarification pending. Replayattempt1guardunavailable preserved; attempt2active.
+    uncertainty: Actualamended coupling/profile outcomespending.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue matchedactor phase4 with disjointscope.
+    phase: 3
+    budget_minutes: 30
+    started_at: '2026-10-07T19:23:30.435695Z'
+    deadline_at: '2026-10-07T19:47:58Z'
+    expected_output: Audited1024piece/1Mvertex source amendment and focusedtests; exactprofileauditandmechanicalreviewofnewjointinstrument.
+    validation_command: Target-free profile controls; actual profile waits registration.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Astra complete coupling strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: completed
+    recording: contemporaneous
+    outcome: Phase4 source/actualreview packet completed; sameactorcontinues underphase5 at2026-10-07T20:22:38.403436+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/summary.json
+    files:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    checks:
+    - SATactualfreshpayload/allrows/34128minima CLEAR; pairedguard48+48PASS andSTAGES33+33PASS/mathsourceCLEAR.
+    uncertainty: Fullcouplingmiss is method-specific; stronger discriminator and replay outcomes pending.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue matchedactorphase5.
+    phase: 4
+    budget_minutes: 31
+    started_at: '2026-10-07T19:47:44.150600+00:00'
+    deadline_at: '2026-10-07T20:17:58Z'
+    expected_output: Dated resourceamendment mathematical clearance, actualcoupling/SAT semantics, guard-conditionedjointdomain
+      contract.
+    validation_command: Source/implication mathematical read, not independent mathematical confirmation.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol complete coupling implementation
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase4 source/actualreview packet completed; sameactorcontinues underphase5 at2026-10-07T20:22:38.403436+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/summary.json
+    files:
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/devtools/run_registered_phases.py
+    - packing/tests/test_run_registered_phases.py
+    - packing/devtools/check_n17_full_square_partner_coupling.py
+    - packing/tests/test_check_n17_full_square_partner_coupling.py
+    - packing/devtools/report_n17_parent_geometry.py
+    - packing/tests/test_report_n17_parent_geometry.py
+    - packing/devtools/check_n17_guard_conditioned_ownership.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    checks:
+    - SATactualfreshpayload/allrows/34128minima CLEAR; pairedguard48+48PASS andSTAGES33+33PASS/mathsourceCLEAR.
+    uncertainty: Fullcouplingmiss is method-specific; stronger discriminator and replay outcomes pending.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue matchedactorphase5.
+    phase: 4
+    budget_minutes: 31
+    started_at: '2026-10-07T19:47:44.150600+00:00'
+    deadline_at: '2026-10-07T20:17:58Z'
+    expected_output: Source-onlyguard-conditionedownership instrumentandmeaningfulsyntheticcontrols; no
+      actualtarget.
+    validation_command: Focused pytest and static floors; fresh target waits source review.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/devtools/run_registered_phases.py
+    - packing/tests/test_run_registered_phases.py
+    - packing/devtools/check_n17_full_square_partner_coupling.py
+    - packing/tests/test_check_n17_full_square_partner_coupling.py
+    - packing/devtools/report_n17_parent_geometry.py
+    - packing/tests/test_report_n17_parent_geometry.py
+    - packing/devtools/check_n17_guard_conditioned_ownership.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol exact replay profile and independent mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase4 source/actualreview packet completed; sameactorcontinues underphase5 at2026-10-07T20:22:38.403436+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/summary.json
+    files:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    checks:
+    - SATactualfreshpayload/allrows/34128minima CLEAR; pairedguard48+48PASS andSTAGES33+33PASS/mathsourceCLEAR.
+    uncertainty: Fullcouplingmiss is method-specific; stronger discriminator and replay outcomes pending.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue matchedactorphase5.
+    phase: 4
+    budget_minutes: 31
+    started_at: '2026-10-07T19:47:44.150600+00:00'
+    deadline_at: '2026-10-07T20:17:58Z'
+    expected_output: Audited1024piece/1Mvertex source amendment and focusedtests; exactprofileauditandmechanicalreviewofnewjointinstrument.
+    validation_command: Target-free profile controls; actual profile waits registration.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Astra complete coupling strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: completed
+    recording: contemporaneous
+    outcome: Phase5 source and actual-result reviews completed; same actor continues in the next phase.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/mechanical-summary.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/mechanical-summary.json
+    files: &id004
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    checks:
+    - Fresh paired mathematical payload agreement and exact STAGES replay agreement; detailed scoped controls
+      retained.
+    uncertainty: Global capture and optimality remain open.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase6 mathematical or mechanical lane.
+    phase: 5
+    budget_minutes: 30
+    started_at: '2026-10-07T20:22:38.403436+00:00'
+    deadline_at: '2026-10-07T20:47:58Z'
+    expected_output: Dated resourceamendment mathematical clearance, actualcoupling/SAT semantics, guard-conditionedjointdomain
+      contract.
+    validation_command: Source/implication mathematical read, not independent mathematical confirmation.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope: *id004
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol complete coupling implementation
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase5 source and actual-result reviews completed; same actor continues in the next phase.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/mechanical-summary.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/mechanical-summary.json
+    files: &id005
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/devtools/run_registered_phases.py
+    - packing/tests/test_run_registered_phases.py
+    - packing/devtools/check_n17_full_square_partner_coupling.py
+    - packing/tests/test_check_n17_full_square_partner_coupling.py
+    - packing/devtools/report_n17_parent_geometry.py
+    - packing/tests/test_report_n17_parent_geometry.py
+    - packing/devtools/check_n17_guard_conditioned_ownership.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    - SYNOPSIS.md
+    - packing/campaign/ledger.md
+    checks:
+    - Fresh paired mathematical payload agreement and exact STAGES replay agreement; detailed scoped controls
+      retained.
+    uncertainty: Global capture and optimality remain open.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase6 mathematical or mechanical lane.
+    phase: 5
+    budget_minutes: 30
+    started_at: '2026-10-07T20:22:38.403436+00:00'
+    deadline_at: '2026-10-07T20:47:58Z'
+    expected_output: Source-onlyguard-conditionedownership instrumentandmeaningfulsyntheticcontrols; no
+      actualtarget.
+    validation_command: Focused pytest and static floors; fresh target waits source review.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope: *id005
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol exact replay profile and independent mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase5 source and actual-result reviews completed; same actor continues in the next phase.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/mechanical-summary.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/mechanical-summary.json
+    files: &id006
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    checks:
+    - Fresh paired mathematical payload agreement and exact STAGES replay agreement; detailed scoped controls
+      retained.
+    uncertainty: Global capture and optimality remain open.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase6 mathematical or mechanical lane.
+    phase: 5
+    budget_minutes: 30
+    started_at: '2026-10-07T20:22:38.403436+00:00'
+    deadline_at: '2026-10-07T20:47:58Z'
+    expected_output: Audited1024piece/1Mvertex source amendment and focusedtests; exactprofileauditandmechanicalreviewofnewjointinstrument.
+    validation_command: Target-free profile controls; actual profile waits registration.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope: *id006
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Astra complete coupling strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: completed
+    recording: contemporaneous
+    outcome: Phase6 source/review/coordination delivered at 2026-10-07T21:27:07.727040+00:00
+    evidence: &id007
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    files: *id007
+    checks:
+    - Actual exp295 mathematical acceptance CLEAR, two independent mechanical reviews CLEAR; current CI
+      requires additive latest-main README resolution.
+    uncertainty: No new census admission/global proof; source-only collective test not evaluated.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase7 declared disjoint lane.
+    phase: 6
+    budget_minutes: 30
+    started_at: '2026-10-07T20:50:27.909979+00:00'
+    deadline_at: '2026-10-07T21:17:58Z'
+    expected_output: Exact two-child source/math clearance, interpretation and upstream certificate admission
+      requirements.
+    validation_command: Source/implication mathematical read, not independent mathematical confirmation.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol complete coupling implementation
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase6 source/review/coordination delivered at 2026-10-07T21:27:07.727040+00:00
+    evidence: &id008
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    files: *id008
+    checks:
+    - Actual exp295 mathematical acceptance CLEAR, two independent mechanical reviews CLEAR; current CI
+      requires additive latest-main README resolution.
+    uncertainty: No new census admission/global proof; source-only collective test not evaluated.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase7 declared disjoint lane.
+    phase: 6
+    budget_minutes: 30
+    started_at: '2026-10-07T20:50:27.909979+00:00'
+    deadline_at: '2026-10-07T21:17:58Z'
+    expected_output: Source-only two-child instrument, meaningful controls and terminal registry views.
+    validation_command: Focused pytest and static floors; fresh target waits source review.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/devtools/run_registered_phases.py
+    - packing/tests/test_run_registered_phases.py
+    - packing/devtools/check_n17_full_square_partner_coupling.py
+    - packing/tests/test_check_n17_full_square_partner_coupling.py
+    - packing/devtools/report_n17_parent_geometry.py
+    - packing/tests/test_report_n17_parent_geometry.py
+    - packing/devtools/check_n17_guard_conditioned_ownership.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    - SYNOPSIS.md
+    - packing/campaign/ledger.md
+    - packing/devtools/check_n17_two_center_children.py
+    - packing/tests/test_check_n17_two_center_children.py
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol exact replay profile and independent mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase6 source/review/coordination delivered at 2026-10-07T21:27:07.727040+00:00
+    evidence: &id009
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    files: *id009
+    checks:
+    - Actual exp295 mathematical acceptance CLEAR, two independent mechanical reviews CLEAR; current CI
+      requires additive latest-main README resolution.
+    uncertainty: No new census admission/global proof; source-only collective test not evaluated.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase7 declared disjoint lane.
+    phase: 6
+    budget_minutes: 30
+    started_at: '2026-10-07T20:50:27.909979+00:00'
+    deadline_at: '2026-10-07T21:17:58Z'
+    expected_output: Narrow real CI fixes, all-n17 issue inventory and current-base engineering review.
+    validation_command: Target-free profile controls; actual profile waits registration.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    - packing/devtools/suite-file-costs.json
+    - packing/tests/test_census_n17_certified.py
+    - packing/tests/test_site_glyphs.py
+    - docs/project/reviews/review-2026-10-07-n17-issue-coordination.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Astra complete coupling strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: completed
+    recording: contemporaneous
+    outcome: Phase7 declared deliverables completed; fresh296 positive and source/metadata scoped reviews
+      CLEAR at 2026-10-07T21:49:15.789989+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/mechanical-summary.json
+    files:
+    - packing/devtools/check_n17_collective_row_coverage.py
+    - packing/tests/test_check_n17_collective_row_coverage.py
+    checks:
+    - Author23PASS1.87s/peer23PASS1.90s/staticszero; soleAstra actualscopeCLEAR; exact payloadfresh and5inputjoins
+      verified.
+    uncertainty: Globalcapture/current-sourcefullcertification and quantitative regionalradiusremainopen.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase8 final scope review withoutnewmathematicaltarget.
+    phase: 7
+    budget_minutes: 21
+    started_at: '2026-10-07T21:27:07.727040+00:00'
+    deadline_at: '2026-10-07T21:47:58Z'
+    expected_output: Sole-Astra collective criterion/source/actual math review and durable global contact-normalization
+      corollaries.
+    validation_command: Source/implication mathematical read, not independent mathematical confirmation.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol complete coupling implementation
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase7 declared deliverables completed; fresh296 positive and source/metadata scoped reviews
+      CLEAR at 2026-10-07T21:49:15.789989+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/mechanical-summary.json
+    files:
+    - packing/devtools/check_n17_collective_row_coverage.py
+    - packing/tests/test_check_n17_collective_row_coverage.py
+    checks:
+    - Author23PASS1.87s/peer23PASS1.90s/staticszero; soleAstra actualscopeCLEAR; exact payloadfresh and5inputjoins
+      verified.
+    uncertainty: Globalcapture/current-sourcefullcertification and quantitative regionalradiusremainopen.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase8 final scope review withoutnewmathematicaltarget.
+    phase: 7
+    budget_minutes: 21
+    started_at: '2026-10-07T21:27:07.727040+00:00'
+    deadline_at: '2026-10-07T21:47:58Z'
+    expected_output: Terminal295 and prospective296 typedrecords; NEWcollective instrument with target-free
+      controls.
+    validation_command: Focused pytest and static floors; fresh target waits source review.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/devtools/run_registered_phases.py
+    - packing/tests/test_run_registered_phases.py
+    - packing/devtools/check_n17_full_square_partner_coupling.py
+    - packing/tests/test_check_n17_full_square_partner_coupling.py
+    - packing/devtools/report_n17_parent_geometry.py
+    - packing/tests/test_report_n17_parent_geometry.py
+    - packing/devtools/check_n17_guard_conditioned_ownership.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    - SYNOPSIS.md
+    - packing/campaign/ledger.md
+    - packing/devtools/check_n17_two_center_children.py
+    - packing/tests/test_check_n17_two_center_children.py
+    - packing/devtools/check_n17_collective_row_coverage.py
+    - packing/tests/test_check_n17_collective_row_coverage.py
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol exact replay profile and independent mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase7 declared deliverables completed; fresh296 positive and source/metadata scoped reviews
+      CLEAR at 2026-10-07T21:49:15.789989+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/mechanical-summary.json
+    files:
+    - packing/devtools/check_n17_collective_row_coverage.py
+    - packing/tests/test_check_n17_collective_row_coverage.py
+    checks:
+    - Author23PASS1.87s/peer23PASS1.90s/staticszero; soleAstra actualscopeCLEAR; exact payloadfresh and5inputjoins
+      verified.
+    uncertainty: Globalcapture/current-sourcefullcertification and quantitative regionalradiusremainopen.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase8 final scope review withoutnewmathematicaltarget.
+    phase: 7
+    budget_minutes: 21
+    started_at: '2026-10-07T21:27:07.727040+00:00'
+    deadline_at: '2026-10-07T21:47:58Z'
+    expected_output: LatestREADMEmerge repair, collective peer controls and actualCI triage; issue summary
+      drafts.
+    validation_command: Target-free profile controls; actual profile waits registration.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    - packing/devtools/suite-file-costs.json
+    - packing/tests/test_census_n17_certified.py
+    - packing/tests/test_site_glyphs.py
+    - docs/project/reviews/review-2026-10-07-n17-issue-coordination.md
+    - README.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Astra complete coupling strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: completed
+    recording: contemporaneous
+    outcome: 'Final mathscope reviewCLEAR afterprecisePRcorrections: inherited992rows/fixedowner0/half-angleparameter/compactnessexistenceonly/no
+      independentnormalizationreview.'
+    evidence:
+    - docs/project/reviews/review-2026-10-07-n17-session-185-progress.md
+    files:
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    checks:
+    - Bounded mathematicalscope read; soleAstra, not independent proof confirmation.
+    uncertainty: Full current-source certification7hy3 and public nativebinarycustody unresolved; no global
+      proof or certifiedregionalradius.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: think-98mg
+    phase: 8
+    budget_minutes: 30
+    started_at: '2026-10-07T21:49:15.789989+00:00'
+    deadline_at: '2026-10-07T22:17:58Z'
+    expected_output: Final mathematicalscope and priority review of296/regional-lift/normalization handoff;
+      no new target.
+    validation_command: Source/implication mathematical read, not independent mathematical confirmation.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol complete coupling implementation
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Terminal296 records, conciseprogressreport and seven-issue dispositions auditedCLEAR; final405comment
+      drafted with verifiedreceipts/scope.
+    evidence:
+    - docs/project/reviews/review-2026-10-07-n17-session-185-progress.md
+    files:
+    - docs/project/reviews/review-2026-10-07-n17-issue-coordination.md
+    checks:
+    - Scoped records/metadata consistency review; peerJUnit8assertionsPASS but wholecommandINCOMPLETE.
+    uncertainty: Full current-source certification7hy3 and public nativebinarycustody unresolved; no global
+      proof or certifiedregionalradius.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: think-7hy3
+    phase: 8
+    budget_minutes: 30
+    started_at: '2026-10-07T21:49:15.789989+00:00'
+    deadline_at: '2026-10-07T22:17:58Z'
+    expected_output: Final mechanical consistency/common-documentation review of complete Session185 progress
+      summary and terminal records.
+    validation_command: Focused pytest and static floors; fresh target waits source review.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - docs/project/reviews/review-2026-10-07-n17-session-185-progress.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol exact replay profile and independent mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Enginepath focused8controlsPASS/staticszero; exact296private-workerselection201042713B belowunchanged192MiB;
+      oldfull95/5/1 scoped, required65dbCIgreen and new8ae1pending captured.
+    evidence:
+    - docs/project/reviews/review-2026-10-07-n17-session-185-progress.md
+    files:
+    - packing/devtools/check_soundness_perimeter.py
+    - packing/src/sqpack/cli/validate.py
+    checks:
+    - 8 authorfocusedcontrolsPASS5.88s;Ruff/format/BasedPyrightzero;latest8ae1CIpending.
+    uncertainty: Full current-source certification7hy3 and public nativebinarycustody unresolved; no global
+      proof or certifiedregionalradius.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: think-7hy3
+    phase: 8
+    budget_minutes: 30
+    started_at: '2026-10-07T21:49:15.789989+00:00'
+    deadline_at: '2026-10-07T22:17:58Z'
+    expected_output: LatestrequiredCI triage, complete oldfullcheckpoint scope and mechanical handoff.
+    validation_command: Target-free profile controls; actual profile waits registration.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    - packing/devtools/suite-file-costs.json
+    - packing/tests/test_census_n17_certified.py
+    - packing/tests/test_site_glyphs.py
+    - docs/project/reviews/review-2026-10-07-n17-issue-coordination.md
+    - README.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  outputs:
+  - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+  - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+  - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage
+  - docs/project/reviews/review-2026-10-07-n17-session-185-progress.md
+  - docs/project/reviews/review-2026-10-07-n17-issue-coordination.md
+  - packing/campaign/agent-sessions/session-185-frozen-full-checkpoint.json
+  checks:
+  - Launch source8de2ecd5b574fc2ff0174f552c00effaab6fcaf7 and PR404 retained; upstream main refreshed
+    without source merge.
+  - External scratch mounted/writable and task directories provisioned;22GiB available. Python3.14.7 remains
+    the project interpreter.
+  - Startup records tier completed44 steps:42pass/2fail in50.35s. Lint read in-progress untracked coupling
+    code; one obsolete SYNOPSIS negative-control anchor cannot fire. No full PASS inferred.
+  - Normal tbd pull/sync imported the preserved outbox and published the prior08zy closure plus new continuation
+    claims. Native binary export remains pending explicit approval.
+  - 'Latest inherited hosted run37656400552 at8de2: validate andsuite-c both failed the single stale Selected-next-entry
+    anchor; extracted raw logs preserved under attic/evidence/session-185-initial-records-8de2. Anchor
+    updatedto7hy3; relevant mutation awaits source-selector repair.'
+  - H298/exp289 regional coupling and H299/exp290 matched full replay diagnostic preregistered before
+    actual target execution.
+  - Independent root integration:97 coupling/profile/runner/anchor controls PASS7.11s with retained rawJUnit.
+  - 'Exp289: construction stopped incomplete3.176s at frozen64-piece row ceiling; supervision3.507s normalexitrc1/cleanup,
+    freshunstarted. Source provenancecleanfor target modules, unrelatedsource-onlySATwork in overalldirtyworkspace.
+    Mathematicalpredicateunrun.'
+  - 'Push-tier run64dac347f1ab4c3a8fcdc92da51aeba2 completed61steps/55pass/6fail in561.37s while source/records
+    were changing. Failures: agenda/map/terminalguardrecord integration, untrackedSAT evaluate-name falsepositive,
+    runtime-artifact boundary declarations and reachabletest consequences. Raw artifacts retained in attic/evidence/session-185-push-cd82;
+    no cleancheckpointclaimed.'
+  - Both source ratchet scans nowpass after preserving real runtime artifact boundaries and renaming the
+    SAT mathematical evaluator; no gate or checksum baseline weakened.
+  - Input-onlystructuralaudit complete6.252653916s normalrc0/cleanup; all1056/992 rows,91825pieces/348140vertices,
+    max570pieces/max135coordinatebits/maxpiece8vertices. Couplingworstconstruct348264/SAT348153/region22originalpieces.
+    Allcouplingpredicates remainunrun.
+  - 'First-hour reminder delivered: prioritize substantiveproofprogress, all4slotsworking, no idleCIwait;
+    retainresourcecriterion andchoose boundednextdiscriminators.'
+  - Exp291 completecriterion_missed/freshmatchingPASS/all1056+992/17endpoint;106.929s,744MBmaxsampled/cleanup.
+    Fourladdertests unstarted byfrozenstoprule. No newcensus/globalclaim.
+  - 'Secondhourgoalreminder20:17Z: significantmathprogressfirst, allfouravailablelanes, fastnarrowloops/noidleCIwait;
+    verifiedmethodmisses selectjointconditioning notmorecaps.'
+  - 'Hosteddb5400run37679703738: threecoherencedebts only (untrackedallowlistedguardfile,closereportdrift,ideasH300missing);
+    solefailingassertions inA/C correspond. NobroadPASSclaimed.'
+  - Pairedguard exp293 complete verified method miss151.778s; nonempty owned sets0/1/2/3/4/6/20 are pairwise
+    disjoint, regional skipped by the frozen monotonic criterion.
+  - STAGES exp294 accepted same-math diagnostic108.621s; coverage57.293s versus collisions10.218s selects
+    collective geometry and coverage as useful levers.
+  - Full101-step checkpoint frozen0adfe2c5e launched20:39:32Z in attached recovery worktree; browser dependencies
+    bound, task-specific external Cargo/cache/temp, process-count scheduling4/jobs3/inner2; directINT3600+10
+    cleanup ceiling, no aggregateRSS assertion.
+  - All31 GitHub issues inventoried:7 n17 mentions; issue413 reports17 verified/10 computed, with only
+    four upstreamFULL rows. Their artifacts and finite premises are still required before local admission.
+  - 'Thirdhour globalgoal reminder delivered: mathematical progress first, allfouravailable slots working,
+    CI asynchronous, protected last30min; actual phase6 overran deadline honestly.'
+  - Issue413 complete firstfourpackage request posted comment6047161738; issue405 current proof/diagnostic/census/coordination
+    checkpoint posted6047179993.
+  - Mergedceb71 hosted90.63s validate failed only expiredphase6/three delegation deadlines; A/C passed.
+    Currentphase7 transition and21minute slice budget repaired before nextfreeze; no production gate relaxation.
+  - Exp296 accepted exact positive25/64 HALF-ANGLE-PARAMETER loss underfixedowner0 tau53/128; all992rows
+    andfreshfullpayloadmatch,5premisebytesjoin, original17endpointcontrols;28.142461snormalrc0cleanup351830016Bsampleperliveprocess.
+  - Current65db hostedvalidate/merges/A/C/D/type/measure/pages/macPASS at21:46:08;Bstillpending. No fullnewsourcePASS.
+  - 'full gate: full at 0adfe2c5ee5ac349408dcebed411b91c6d62d068: failed (95PASS5FAIL1SKIP,3402.14s; exhausted/slow
+    behavioral lanespassed, no newhead certification)'
+  - Actual296outputpushedprivateworker selection213140038B overunchanged192MiB; exact296nonconsumerrootprune
+    preservesdeclaredinputcopyback,post201042713B/headroom283879B. EightfocusedselectorcontrolsPASS1.01/staticszero;
+    primaryreceiptsuntouched.
+  - Records tier21.90s failedonlySYNOPSISoldaggregate; exacttargetedSYNOPSISandledgerchecksPASS after5791.8correction
+    before65db scientificfreeze.
+  - 65db required packing/pages/mergeability allSUCCESS by21:46:27Z; final scientific/engineering terminal8ae1
+    pushed and requiredCI running. No full current-source certification follows.
+  - 'Terminal local push tier on reviewed source: outer240s INT/+10kill ceiling, exit124,0stepverdicts;
+    INCOMPLETE. Scopedargvabsence observed22:04:48Z; originalPID/PGID notretained so whole-descendantcleanup
+    unproved. Rawlog and cleanupobservation retained in attic/n17-four-hour-engineering/terminal-push-20261007/.'
+  - External engine-path repair author8controlsPASS5.88s/staticszero; independentJUnit8assertions0fail4.585s,
+    but peerwholecommandINCOMPLETE/TERM143afterMacpost-testhang. No productionengineprobe/fullPASS claimed.
+  - Final native aggregate cutoff22:04:39Z records51628.625agentseconds/13601.0elapsed-envelope-seconds,
+    live3/incomplete. Finalreceipt replaces overlapping partialreceipt in resource_rollups; laterpublication
+    work absent, lowerbound only.
+  - Finalrecords tier completed34.72s, failedonlystaleSYNOPSISagenda/sessioncounts, agenda-map andledger
+    terminalcoherence. Exactview/W10/finalphase-state repairs applied; no scientificcriterion or gate
+    relaxed.
+  stop_reason: Scientific work and reviewed finalization batch frozen within authorized window; full current-source
+    certification remains unresolved. Frozen full checkpoint95PASS/5FAIL/1SKIP; terminal local push tier
+    incomplete at240s ceiling. RequiredCI65db passed; latestHEAD CI asynchronous.
+  next_action: think-7hy3
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session185-final-checkpoint.yaml
+  ended_at: '2026-10-07T22:07:05.523271+00:00'
+  certification_pending: think-7hy3
+---
+# n17 Complete Coupling and Exact Replay
+
+The actual four-hour continuation of
+[the session plan](../../../docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md),
+following [Session184](session-184-n17-proof-contracts-and-instruments.md).
+The coordinator owns shared records and integration; workers own the declared disjoint
+source.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

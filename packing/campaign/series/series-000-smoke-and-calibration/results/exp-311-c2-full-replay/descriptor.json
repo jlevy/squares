@@ -1,0 +1,15 @@
+{
+  "schema": "n17-full-bb-replay-context/v1",
+  "candidate": "C2",
+  "inventory": "packing/campaign/retained/session-186-n17-issue358-readiness/C2-external-release-inventory.json",
+  "inventory_sha256": "d0b59b13cdfcd82a34f7076eda4d00d88359d0b368bac492dbd6b9a894aae1b5",
+  "objects": 161,
+  "compressed_bytes": 112191343,
+  "cache_root": "/Volumes/spud-ext1/agent-scratch/n17-six-hour-01a114fb/published-C2-cache",
+  "certificate_directory": "/Volumes/spud-ext1/agent-scratch/n17-six-hour-01a114fb/published-C2-cache/packing/campaign/retained/session-186-n17-issue358-readiness/C2",
+  "header_receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/c2-header.json",
+  "canonical_manifest": "505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57",
+  "compressed_manifest_sha256": "d9260cd3b60570b506c7ace7e7130463f6880f07dddc28bdc63aba5da82b883d",
+  "criterion": "ONE complete unsampled FULL C2 standing-verifier PASS, modefull, zero failures, all indexed nodes and trigonometric objects verified, closed complete tree, exact canonical manifest505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57 and original default UNIQUE_24cells. Compose ONLY with accepted310 C2HEADER_ONLYPASS and complete original-cell halfplane enclosure on identical compressed manifestd9260cd3b60570b506c7ace7e7130463f6880f07dddc28bdc63aba5da82b883d. Published input acquisition must validate ALL161 roster objects112191343compressedB before replay. FULLPASS permits subsequent separately reviewed ordinary clause admission and fresh census; neither acquisition/header/sample/partial nor metadata148union can admit anything. C2 potential13orbits84states/ZERO95tail; no endpointcapture/globaloptimality claim. Stop unchanged on refusal/resource/failure.",
+  "actual_acquisition_or_FULL_run": false
+}

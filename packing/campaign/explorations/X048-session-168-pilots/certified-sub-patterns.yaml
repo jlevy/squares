@@ -854,3 +854,57 @@ entries:
     verification:
       receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/s183-bc429-u31/verification.json
       verifier: kernel-streamed
+  - name: s184-tail-a-m3096311
+    cells:
+    - corner-SW
+    - corner-SE
+    - corner-NW
+    - side-S0
+    - side-N0
+    - side-W0
+    - side-E0
+    - side-N1
+    - side-W1
+    - side-E1
+    - side-S2
+    - side-N2
+    - interior-SW
+    - interior-NW
+    - interior-W
+    - interior-S
+    - interior-E
+    certifier: kernel
+    receipt: packing/campaign/series/series-000-smoke-and-calibration/results/exp-266-current-tail-a/tail-a-fresh-full-replay.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311/verification.json
+      verifier: kernel-streamed
+  - name: s184-tail-b-m3096315
+    cells:
+    - corner-SW
+    - corner-SE
+    - corner-NE
+    - side-S0
+    - side-N0
+    - side-W0
+    - side-E0
+    - side-N1
+    - side-W1
+    - side-E1
+    - side-S2
+    - side-N2
+    - interior-SW
+    - interior-NW
+    - interior-W
+    - interior-S
+    - interior-E
+    certifier: kernel
+    receipt: packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/tail-b-fresh-full-replay.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-b-m3096315
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-274-h287-current-tail-replication.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-b-m3096315/verification.json
+      verifier: kernel-streamed

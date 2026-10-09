@@ -43,7 +43,7 @@ def test_the_profiler_marks_each_step_of_either_checker(tmp_path: Path) -> None:
     assert saved["status"] == "PASS_SAVED_CLOSED"
     assert saved["node_sha256"] == tool.content_sha256(production.node)
     assert [step["step"] for step in recorder.steps] == list(range(count))
-    if Path("/proc/self/status").is_file():
+    if profiler.sys.platform == "darwin" or Path("/proc/self/status").is_file():
         assert all(step["rss_mb"] > 0 for step in recorder.steps)
     else:
         assert all(step["rss_mb"] == -1 for step in recorder.steps)
@@ -82,9 +82,11 @@ def test_the_profiler_marks_production_the_save_and_the_check(tmp_path: Path) ->
     count = verdict["steps_checked"]
     assert phases == ["produce"] * count + ["check"] * count
     report = recorder.report()
-    # RSS and resettable high-water marks are separate kernel capabilities. A missing
-    # /proc reading remains explicitly unavailable; every checker above still runs.
-    if Path("/proc/self/status").is_file():
+    # Current RSS and resettable high-water marks are separate capabilities.
+    if profiler.sys.platform == "darwin":
+        assert report["peak_rss_mb"] > 0
+        assert report["max_check_step_rss_mb"] > 0
+    elif Path("/proc/self/status").is_file():
         assert report["peak_rss_mb"] >= report["max_check_step_rss_mb"] > 0
     else:
         assert report["peak_rss_mb"] == report["max_check_step_rss_mb"] == -1
@@ -92,6 +94,41 @@ def test_the_profiler_marks_production_the_save_and_the_check(tmp_path: Path) ->
         assert report["peak_rss_mb"] >= report["peak_in_check_mb"] > 0
     else:
         assert report["peak_in_check_mb"] is None
+
+
+@pytest.mark.parametrize("reset", [False, True])
+def test_phase_peak_requires_a_successful_kernel_reset(
+    monkeypatch: pytest.MonkeyPatch, *, reset: bool
+) -> None:
+    peaks = iter([300, 120 if reset else 310])
+    monkeypatch.setattr(
+        profiler, "status_mb", lambda field: next(peaks) if field == "VmHWM" else 90
+    )
+    monkeypatch.setattr(profiler, "reset_peak", lambda: reset)
+    recorder = profiler.Recorder(None)
+    recorder.step("check", 0, 16)
+    report = recorder.report()
+    assert report["peak_before_check_mb"] == 300
+    assert report["peak_rss_mb"] == (300 if reset else 310)
+    assert report["max_check_step_rss_mb"] == 90
+    assert report["peak_in_check_mb"] == (120 if reset else None)
+
+
+def test_marks_use_current_memory_and_do_not_substitute_a_lifetime_peak(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(profiler, "current_memory_bytes", lambda: 12 * 1024 * 1024)
+    monkeypatch.setattr(profiler, "peak_memory_bytes", lambda: 90 * 1024 * 1024)
+    monkeypatch.setattr(profiler.sys, "platform", "darwin")
+    assert profiler.status_mb("VmRSS") == 12
+    assert profiler.status_mb("VmHWM") == 90
+
+    def unavailable() -> int:
+        raise OSError("native current memory unavailable")
+
+    monkeypatch.setattr(profiler, "current_memory_bytes", unavailable)
+    with pytest.raises(OSError, match="native current memory unavailable"):
+        _ = profiler.Recorder(None).sample()
 
 
 @pytest.mark.parametrize(

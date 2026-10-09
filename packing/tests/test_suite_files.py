@@ -463,6 +463,31 @@ def test_unrecorded_files_are_counted_in_the_shard_their_hash_gives_them() -> No
     assert suite_files.unrecorded_by_shard(costs, []) == [(0, 0), (0, 0)]
 
 
+def test_explicit_unknown_owners_keep_unknown_costs_and_recorded_weights_take_precedence() -> (
+    None
+):
+    names = tuple(suite_files.UNKNOWN_FOUR_SHARD_OWNERS)
+    unknown = RecordedCosts(shards=4, seconds={})
+    assert [suite_files.shard_of(n, unknown) for n in names] == [3, 1, 3, 1, 3, 2] + [2] * 5 + [
+        3
+    ]
+    assert suite_files.shard_totals(unknown) == [0, 0, 0, 0]
+    assert sum(row[1] for row in suite_files.unrecorded_by_shard(unknown, names)) == len(names)
+    assert sum(row[0] for row in suite_files.unrecorded_by_shard(unknown, names)) == len(names)
+    # A hosted cost, once recorded, owns the assignment instead of the unknown overlay.
+    recorded = RecordedCosts(shards=4, seconds={names[0]: 1.0})
+    assert suite_files.shard_of(names[0], recorded) == suite_files.pack(recorded)[names[0]]
+    assert suite_files.shard_of(names[0], recorded) == 1
+    assert sum(r[1] for r in suite_files.unrecorded_by_shard(recorded, names)) == len(names) - 1
+    # Other shard topologies retain their existing hash assignment and all coverage.
+    for count in (2, 3, 5):
+        for name in names:
+            assert (
+                suite_files.unrecorded_shard(name, count)
+                == suite_files.zlib.crc32(name.encode("utf-8")) % count + 1
+            )
+
+
 def test_the_unrecorded_share_warns_above_its_threshold_and_not_at_it() -> None:
     record = Path("devtools/suite-file-costs.json")
     message = suite_files.unrecorded_share_warning(

@@ -1,0 +1,66 @@
+{
+  "schema": "n17-n11-window-mechanical-summary/v1",
+  "complete": true,
+  "states": 95,
+  "windows_per_state": 576,
+  "exact_counts": 54720,
+  "obstructed_masks": [],
+  "maximum_count_distribution": {
+    "7": 48,
+    "6": 47
+  },
+  "full_payload_equal": true,
+  "fresh_verification_passed": true,
+  "all_source_bytes_match": true,
+  "source_files": 11,
+  "source_commit": "92c0420b93aeba1855cbe806e247171473cfe46d",
+  "outer_seconds": 2.043805792054627,
+  "cleanup_complete": true,
+  "ordinary_exclusions": 0,
+  "census_admission": false,
+  "global_bound_improved": false,
+  "optional_endpoint_window_control_performed": false,
+  "mathematical_review": "SoleAstra actual CLEAR",
+  "phases": [
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_n11_envelope_windows",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/certificate.json"
+      ],
+      "ended_at": "2026-10-08T02:29:13.001261Z",
+      "name": "construction",
+      "returncode": 0,
+      "started_at": "2026-10-08T02:29:12.052604Z",
+      "status": "completed",
+      "wall_seconds": 0.9485404169536196
+    },
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_n11_envelope_windows",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/replay.json"
+      ],
+      "ended_at": "2026-10-08T02:29:13.949396Z",
+      "name": "fresh_verification",
+      "returncode": 0,
+      "started_at": "2026-10-08T02:29:13.001891Z",
+      "status": "completed",
+      "wall_seconds": 0.9473880419973284
+    }
+  ]
+}
