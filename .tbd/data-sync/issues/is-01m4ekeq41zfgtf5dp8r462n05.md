@@ -5,7 +5,7 @@ title: Reconcile resumed intake ledger and dated source follow-ups
 kind: task
 status: in_progress
 priority: 1
-version: 24
+version: 25
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -21,10 +21,11 @@ child_order_hints:
   - is-01m4f8yza6a07tq8cm0xcsgn3s
   - is-01m4faevvjcq87x96y05cbwxjt
   - is-01m4fc7ct344rsjb3zx66rew0r
+  - is-01m4fdxw81pt2v4k29y9n58rn6
 hold: null
 hold_until: null
 created_at: 2026-10-08T20:32:09.852Z
-updated_at: 2026-10-09T04:05:19.280Z
+updated_at: 2026-10-09T04:14:49.601Z
 started_at: 2026-10-08T20:33:04.467Z
 ---
 Add missing425/438 mappings and445 engineering disposition; append all observed maintainer replies and dated375 source updates without changing older result scopes or claiming new replay. Preserve all prior rows and prefixes, give newly identified batch certificate custody an explicit child owner, and validate the enforced request contract on the current intake top.
