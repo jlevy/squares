@@ -3,9 +3,9 @@ type: is
 id: is-01m4f6vnx1z2zfbrj51ef6vsn7
 title: Reorder the poster information and align the final project URL
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 9
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m4e35s7r1e65r1qmpz250h0p
 hold: null
 hold_until: null
 created_at: 2026-10-09T02:11:17.535Z
-updated_at: 2026-10-09T04:44:07.225Z
+updated_at: 2026-10-09T13:44:10.813Z
 started_at: 2026-10-09T02:13:50.740Z
+closed_at: 2026-10-09T13:44:10.813Z
+close_reason: Implemented, independently reviewed and qualified for PR474 source 6ccbbf000f0c9b48f2985c07c9893f98fe73ba92 against main 6a0499ba4; combined tree c65da41410e89a8dedffe93d3c1e153adb05096d. Local named push 65/65 and hosted 93 fast + 13 actual deferred (106) plus Pages passed; final readiness receipts recorded.
+resolution: null
+duplicate_of: null
 ---
 Unify all poster body typography after the unchanged 57px two-line problem definition: eight legend entries, three ordered credit lines, diagram credit, date/version, project name and address use the same 48px font family, bold weight and 1.50em normalized line height. Keep explicit blank section breaks. The project and address differ only by black instead of gray and remain plain unlinked right-aligned text. Preserve title, triangle geometry, margins, scientific records and edition pin. Regenerate and inspect the actual PDF, then finish the ready-to-merge PR.
 

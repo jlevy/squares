@@ -3,9 +3,9 @@ type: is
 id: is-01m4g2jhzt6vgmd6yffk144zrr
 title: Remove stale-manifest coupling from maintained atlas updates
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m4e36h18crs5ws6c0fm80afy
 hold: null
 hold_until: null
 created_at: 2026-10-09T10:15:38.745Z
-updated_at: 2026-10-09T10:52:45.410Z
+updated_at: 2026-10-09T13:44:10.791Z
 started_at: 2026-10-09T10:17:36.909Z
+closed_at: 2026-10-09T13:44:10.791Z
+close_reason: Implemented, independently reviewed and qualified for PR474 source 6ccbbf000f0c9b48f2985c07c9893f98fe73ba92 against main 6a0499ba4; combined tree c65da41410e89a8dedffe93d3c1e153adb05096d. Local named push 65/65 and hosted 93 fast + 13 actual deferred (106) plus Pages passed; final readiness receipts recorded.
+resolution: null
+duplicate_of: null
 ---
 Fresh independent senior review found that the unified rigidity producer reads retained atlas entries before both complete and selected refresh paths generate replacement entries. A valid n13 reported-side normalization from 4.0 to 4, with unchanged exact-grid geometry and motion assessment, is rejected against the old manifest. Derive and pass prospective selected entries explicitly before figure publication; keep strict read-only n/side binding, source-assertion geometry matching and motion conflict refusal. Add real producer integration regressions for both complete and selected update paths and preserve refusal-before-write. Review the correction independently, then complete the required frozen-head local and hosted PR checkpoints.
 

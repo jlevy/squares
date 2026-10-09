@@ -3,9 +3,9 @@ type: is
 id: is-01m4g1ms3h9tav9yyptqqadq2c
 title: Stabilize the real partial-response timeout control
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m4fqjt02p8hxaxbgq056z2mq
 hold: null
 hold_until: null
 created_at: 2026-10-09T09:59:22.992Z
-updated_at: 2026-10-09T10:52:45.831Z
+updated_at: 2026-10-09T13:44:10.714Z
 started_at: 2026-10-09T09:59:42.896Z
+closed_at: 2026-10-09T13:44:10.714Z
+close_reason: Implemented, independently reviewed and qualified for PR474 source 6ccbbf000f0c9b48f2985c07c9893f98fe73ba92 against main 6a0499ba4; combined tree c65da41410e89a8dedffe93d3c1e153adb05096d. Local named push 65/65 and hosted 93 fast + 13 actual deferred (106) plus Pages passed; final readiness receipts recorded.
+resolution: null
+duplicate_of: null
 ---
 The complete 98ccc9ad push gate passed all normal tests but the exclusive partial-line transport control timed out before native readiness (no identities and no angles). Isolate its intended response phase using a genuine prevalidated engine while retaining real transport, the verifier-created 0.5-second deadline, all seven original assertions, and the total elapsed bound below two seconds including preparation and cleanup. Preserve actual failed evidence; review the test-only correction independently; require the complete new push gate and hosted verification before closeout. The underlying historical host cause remains unproved.
 

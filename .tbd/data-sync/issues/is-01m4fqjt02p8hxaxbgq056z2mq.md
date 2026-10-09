@@ -3,9 +3,9 @@ type: is
 id: is-01m4fqjt02p8hxaxbgq056z2mq
 title: Recover a complete final atlas pre-push receipt
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 11
+version: 12
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -18,8 +18,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T07:03:32.609Z
-updated_at: 2026-10-09T10:52:44.994Z
+updated_at: 2026-10-09T13:44:11.243Z
 started_at: 2026-10-09T07:04:18.320Z
+closed_at: 2026-10-09T13:44:11.243Z
+close_reason: Implemented, independently reviewed and qualified for PR474 source 6ccbbf000f0c9b48f2985c07c9893f98fe73ba92 against main 6a0499ba4; combined tree c65da41410e89a8dedffe93d3c1e153adb05096d. Local named push 65/65 and hosted 93 fast + 13 actual deferred (106) plus Pages passed; final readiness receipts recorded.
+resolution: null
+duplicate_of: null
 ---
 Recover a complete required pre-push receipt at the final reviewed atlas head without reducing coverage, default allocation, deadlines, or normal temporary retention. The first 9c64 run passed all 64 prechecks, then stopped without a final parent/pytest receipt about 349 seconds into the normal lane; retained worker rows include 9,645 passes, one stale centered-controls expectation failure, and 17 skips. Its termination cause is unresolved. Root intentionally stopped the next run to repair that deterministic test before another complete execution. A subagent owns the narrow test correction; senior review, final binding, a fully recorded pre-push run, hosted fast/deferred gates, and PR publication remain. Source, data pin and exports are unchanged by these test fixes. Preserve interrupted runs as history.
 
