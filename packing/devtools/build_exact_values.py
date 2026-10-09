@@ -65,16 +65,22 @@ from sympy.polys.domains import ZZ
 from sympy.polys.galoistools import gf_ddf_zassenhaus, gf_from_int_poly, gf_monic, gf_sqf_p
 from sympy.polys.numberfields.galoisgroups import galois_group
 
-from devtools import collect_reported_exact_roots as reported_roots
-from devtools import evand_arrangement_houses as arrangement_houses
-from devtools import evand_arrangement_reports as arrangement_reports
-from devtools import evand_exact_certificates as evand
 from devtools import (
+    acquire_source,
     refinement_custody,
     refinement_house_links,
     refinement_packets,
     upper_bound_packets,
 )
+from devtools import collect_reported_exact_roots as reported_roots
+from devtools import couzo_followup_reports as couzo_followup
+from devtools import couzo_refinement_reports as couzo_refinements
+from devtools import evand_arrangement_houses as arrangement_houses
+from devtools import evand_arrangement_reports as arrangement_reports
+from devtools import evand_exact_certificates as evand
+from devtools import evand_hunt_reports as hunt_reports
+from devtools import gupta_house_links as gupta_houses
+from devtools import ryxu_house_links as ryxu_houses
 from devtools.retained_data import (
     compressed_path,
     read_retained_text,
@@ -85,6 +91,7 @@ from sqpack import retained_json
 from sqpack.exact_values import (
     CATALOGUE,
     DERIVED_FROM_EXACT_FORM,
+    algebraic_fields,
     derive_from_exact_form,
     format_polynomial,
 )
@@ -144,6 +151,16 @@ GALOIS_DEGREES = range(2, 7)
 #: The route to an exact value, and the bead that owns it, for each numeric-only count
 #: with a lane of its own. Every other numeric-only count is the high-precision sweep's.
 ROUTES: dict[int, tuple[str, str]] = {
+    102: (
+        "think-eu89",
+        (
+            "Bind and convert the already retained current ry-xu certificate at "
+            "8dc415296f697f5140caea27c7a0193d52deb4e6 before deriving current-pose "
+            "contacts, a stable seed or any KKT/W6 result. The earlier evand "
+            "13ee36e5 input remains a historical fixture; its contact system and "
+            "local-minimum claims do not transfer to this new geometry."
+        ),
+    ),
     29: (
         "think-je8y",
         (
@@ -689,7 +706,7 @@ _FRACTION_PAREN = re.compile(r"\((\d+)/(\d+)\)")
 _FRACTION_BARE = re.compile(r"(?<![\d{])(\d+)/(\d+)")
 _COEFFICIENT_SPACE = re.compile(r"(\d|\})\s+\\sqrt")
 _LATEX_ALLOWED = re.compile(r"^[0-9 +\-\\{}a-z]*$")
-_TFRAC = re.compile(r"\\tfrac\{(\d+)\}\{(\d+)\}")
+_LATEX_FRACTION = re.compile(r"\\(?:tfrac|frac)\{([^{}]+)\}\{([^{}]+)\}")
 _LATEX_SQRT_INNER = re.compile(r"\\sqrt\{([^{}]*)\}")
 
 
@@ -706,9 +723,10 @@ def parse_form(text: str) -> sp.Expr:
 
 def latex_to_form(latex: str) -> str:
     """The inverse of `exact_form_latex` on the forms it writes, for the round trip."""
-    text = _TFRAC.sub(r"(\1/\2)", latex)
+    text = latex
     while True:
         replaced = _LATEX_SQRT_INNER.sub(r" sqrt(\1)", text)
+        replaced = _LATEX_FRACTION.sub(r"(\1)/(\2)", replaced)
         if replaced == text:
             return " ".join(text.split())
         text = replaced
@@ -982,6 +1000,8 @@ class VerifiedRationalInputs:
         self.packet_validated = False
         self.refinements_validated = False
         self.arrangements: arrangement_houses.VerifiedInputs | None = None
+        self.imported: dict[str, dict[int, dict]] = {}
+        self.source_facts: dict[str, dict[int, evand.Certificate]] = {}
 
     def evidence_row(self, n: int, identifier: str, source_key: str) -> dict:
         if self.evidence is None:
@@ -1112,6 +1132,20 @@ class VerifiedRationalInputs:
             "It establishes neither stationarity nor global optimality.",
             degree=1,
         )
+
+    def imported_source(self, source_key: str) -> dict[int, dict]:
+        """Bind complete current houses to retained native jobs once per build."""
+        if source_key not in self.imported:
+            if source_key == ryxu_houses.SOURCE_KEY:
+                self.source_facts[source_key] = ryxu_houses.reports.read_facts()
+                self.imported[source_key] = ryxu_houses.check_houses()
+            elif source_key == gupta_houses.reports.SOURCE_KEY:
+                self.source_facts[source_key] = gupta_houses.reports.read_facts()
+                gupta_houses.check_houses()
+                self.imported[source_key] = {n: {} for n in gupta_houses.NUMBERS}
+            else:
+                raise ValueError("unsupported imported finite source")
+        return self.imported[source_key]
 
     def provenance(self, n: int, rational: Fraction, replay: str, source_key: str) -> dict:
         evidence = self.evidence_row(n, replay, source_key)
@@ -1284,6 +1318,84 @@ def _explicit_arrangement_rational(
     return rational, note
 
 
+def _explicit_imported_exact(
+    n: int, packing: dict, inputs: VerifiedRationalInputs
+) -> tuple[dict, dict] | None:
+    """Admit the native finite identity separately from its least upward display."""
+    reported = packing["reported_upper_bound"]
+    source_key = reported.get("source_key")
+    if source_key not in {ryxu_houses.SOURCE_KEY, gupta_houses.reports.SOURCE_KEY}:
+        return None
+
+    def admit() -> tuple[dict, dict]:
+        numbers = (
+            ryxu_houses.NUMBERS
+            if source_key == ryxu_houses.SOURCE_KEY
+            else gupta_houses.NUMBERS
+        )
+        if packing.get("n") != n or packing.get("status") != "open" or n not in numbers:
+            raise ValueError("source/count does not name a selected open house")
+        radical = source_key == ryxu_houses.SOURCE_KEY and n == 51
+        reports = (
+            ryxu_houses.reports
+            if source_key == ryxu_houses.SOURCE_KEY
+            else gupta_houses.reports
+        )
+        certificate = ryxu_houses.radical.fact_path() if radical else reports.fact_path()
+        replay = "E-ryxu-432-radical-n51-feasibility" if radical else reports.EXACT_EVIDENCE
+        evidence = inputs.evidence_row(n, replay, source_key)
+        if evidence["certificate"] != certificate.relative_to(ROOT.parent).as_posix():
+            raise ValueError("evidence names a different complete source certificate")
+        if radical:
+            native = ryxu_houses.RADICAL_EXACT
+            display = ryxu_houses.radical_display()
+            receipt = reports.receipt_path().parent / "n051-radical-positive.json.xz"
+        else:
+            if source_key not in inputs.source_facts:
+                inputs.source_facts[source_key] = reports.read_facts()
+            native = str(inputs.source_facts[source_key][n].side)
+            display = evand.ceiling_decimal(Fraction(native), 16)
+            receipt = reports.receipt_path()
+        fields = algebraic_fields(native, None, None)
+        verified = packing.get("verified_upper_bound", {})
+        if (
+            type(reported.get("algebraic_degree")) is not int
+            or reported["algebraic_degree"] != fields["algebraic_degree"]
+            or reported.get("algebraic_source") not in {None, DERIVED_FROM_EXACT_FORM}
+            or replay not in verified.get("evidence", [])
+            or reported.get("value") != display
+            or verified.get("value") != display
+            or parse_form(str(reported.get("exact_form"))) != parse_form(native)
+            or parse_form(str(verified.get("exact_form"))) != parse_form(native)
+        ):
+            raise ValueError("current native form, degree, evidence or upward display differs")
+        if (
+            reported.get("minimal_polynomial") is not None
+            and _normalized(str(reported["minimal_polynomial"]))
+            != derive_from_exact_form(native).coefficients
+        ):
+            raise ValueError("supplied polynomial differs from the complete native side")
+        inputs.imported_source(source_key)
+        note = _note(
+            "verified-witness-side",
+            f"This is the complete finite {'Q(sqrt2)' if radical else 'rational'} "
+            f"native witness side from {source_key}; source facts "
+            f"{certificate.relative_to(ROOT.parent)}, replay {replay}, receipt "
+            f"{receipt.relative_to(ROOT.parent)}. The display is the least upward "
+            "sixteen-place ceiling; the algebraic identity names the native side. "
+            "It establishes neither stationarity nor global optimality.",
+            degree=2 if radical else 1,
+        )
+        return {**reported, **fields}, note
+
+    try:
+        admitted = admit()
+    except (OSError, ValueError, KeyError, TypeError, ZeroDivisionError) as error:
+        raise ExactValuesError(f"n = {n}: imported exact bound refused: {error}") from error
+
+    return admitted
+
+
 def _arrangement_notes(n: int) -> list[dict]:
     bead = ROUTES.get(n, (SWEEP_BEAD, ""))[0]
     return [
@@ -1332,6 +1444,7 @@ def build_entry(
     """One register entry from one record, its catalogue block and its KKT row."""
     reported = packing["reported_upper_bound"]
     inputs = verified_inputs or VerifiedRationalInputs()
+    imported = _explicit_imported_exact(n, packing, inputs)
     fallback = _verified_rational_fallback(n, packing, inputs)
     refinement = _explicit_refinement_rational(n, packing, inputs)
     arrangement = _explicit_arrangement_rational(n, packing, inputs)
@@ -1350,6 +1463,8 @@ def build_entry(
             ),
             "algebraic_source": DERIVED_FROM_EXACT_FORM,
         }
+    if imported is not None:
+        reported = imported[0]
     status = str(packing["status"])
     value = str(reported["value"])
     exact_form = reported.get("exact_form")
@@ -1365,6 +1480,8 @@ def build_entry(
         kkt = {"value": str(kkt_row["S_exact"]), "status": str(kkt_row["status"])}
 
     notes: list[dict] = [] if admitted is None else [admitted[1]]
+    if imported is not None:
+        notes.append(imported[1])
     checks: dict[str, Any] = {
         "irreducible": None,
         "root": None,
@@ -1398,7 +1515,9 @@ def build_entry(
             value,
             kkt,
             budget,
-            upward_ceiling=_certified_rational_ceiling(packing, coefficients),
+            upward_ceiling=(
+                imported is not None or _certified_rational_ceiling(packing, coefficients)
+            ),
         )
         checks.update(numeric)
         checks["catalogue"] = agreement_with_source
@@ -1440,16 +1559,16 @@ def build_entry(
     superseded = _superseded_note(reported, entry)
     if superseded is not None:
         notes.append(superseded)
-    if state == "numeric-only" or admitted is not None:
+    if state == "numeric-only" or admitted is not None or imported is not None:
         routes = (
             _arrangement_notes(n)
             if arrangement is not None
             else _numeric_only_notes(n, kkt_row)
         )
         for note in routes:
-            if admitted is not None and arrangement is None:
+            if (admitted is not None or imported is not None) and arrangement is None:
                 note["text"] = (
-                    "The finite rational bound leaves ideal contact research open. "
+                    "The finite native bound leaves ideal contact research open. "
                     + note["text"]
                 )
             same_route = next(
@@ -1522,30 +1641,396 @@ def _totals(entries: list[dict]) -> dict:
     return totals
 
 
-def append_reported_source_notes(entries: list[dict]) -> None:
-    """Retain checked source roots without assigning them a current bound or geometry."""
+def _standing_interval(entry: dict) -> tuple[Fraction, Fraction]:
+    root = entry.get("checks", {}).get("root")
+    if root is not None:
+        lo, hi = root["interval"]
+        return Fraction(lo), Fraction(hi)
+    if entry.get("exact_form") is not None:
+        return enclose(parse_form(entry["exact_form"]), GRID_PLACES)
+    value = Fraction(entry["side"]["value"])
+    return value, value
+
+
+def _source_disposition(lo: Fraction, hi: Fraction, current: dict) -> str:
+    """Compare isolated native identities; displayed ceilings do not decide standing."""
+    current_lo, current_hi = _standing_interval(current)
+    if lo == hi == current_lo == current_hi:
+        return "current-equal"
+    if hi < current_lo:
+        return "unreconciled-source"
+    if lo > current_hi:
+        return "superseded"
+    raise ExactValuesError(f"n = {current['n']}: source and standing root cells overlap")
+
+
+def append_reported_source_notes(entries: list[dict]) -> list[dict]:
+    """Keep improving source-only notes and move beaten source roots into history."""
     indexed = {entry["n"]: entry for entry in entries}
+    historical = []
     for candidate in reported_roots.collect():
         current = indexed[candidate["n"]]
-        upper = Fraction(candidate["checks"]["root"]["interval"][1])
-        if upper >= Fraction(current["side"]["value"]):
-            raise ExactValuesError(
-                f"n = {candidate['n']}: unreconciled source root is not strictly below "
-                "the current recorded bound"
-            )
-        current["notes"].append(
-            {
-                **{key: value for key, value in candidate.items() if key != "n"},
-                "kind": "unreconciled-source-polynomial",
-                "text": (
-                    "This independently checked source-only polynomial root lies below "
-                    "the current recorded bound. Source-reported feasibility remains "
-                    "V0/C0; binding to a complete new geometry and Lean replay are not "
-                    "attempted. It is not admitted as this current packing's side or "
-                    "as an upper bound."
-                ),
-            }
+        lo, hi = (Fraction(value) for value in candidate["checks"]["root"]["interval"])
+        disposition = _source_disposition(lo, hi, current)
+        text = (
+            "This independently checked source-only polynomial root lies below "
+            "the current recorded bound. Source-reported feasibility remains "
+            "V0/C0; binding to a complete new geometry and Lean replay are not "
+            "attempted. It is not admitted as this current packing's side or "
+            "as an upper bound."
+            if disposition == "unreconciled-source"
+            else "This independently checked source-only polynomial root is superseded "
+            "by the current recorded construction. Its source-reported feasibility "
+            "remains V0/C0; geometry and Lean replay are not attempted. It establishes "
+            "no current packing bound, current-pose identity or global optimum."
         )
+        if disposition == "unreconciled-source":
+            current["notes"].append(
+                {
+                    **{key: value for key, value in candidate.items() if key != "n"},
+                    "kind": "unreconciled-source-polynomial",
+                    "text": text,
+                }
+            )
+        else:
+            historical.append(
+                {
+                    **candidate,
+                    "kind": disposition,
+                    "text": text,
+                    "current_side": current["side"]["value"],
+                    "algebraic_source": "reported-source-polynomial",
+                }
+            )
+    return historical
+
+
+def _finite_source_history_row(
+    n: int,
+    side: Fraction,
+    current: dict,
+    *,
+    result: str,
+    source_key: str,
+    revision: str,
+    facts: Path,
+    original: str,
+    url: str,
+    receipt: Path | None,
+    confirmed: bool,
+    source_date: str = "2026-10-08",
+) -> dict | None:
+    disposition = _source_disposition(side, side, current)
+    if disposition == "current-equal":
+        return None
+    coefficients = (side.denominator, -side.numerator)
+    decimal = evand.terminating_decimal(side)
+    if decimal is None:
+        raise ExactValuesError("retained finite source side does not terminate")
+    checks, _root = polynomial_checks(n, coefficients, decimal, None)
+    checks.update(catalogue="not-in-catalogue", galois=None)
+    pending = disposition == "unreconciled-source"
+    replayed = receipt is not None
+    assurance = {
+        "result": result,
+        "source_key": source_key,
+        "revision": revision,
+        "facts": facts.relative_to(ROOT.parent).as_posix(),
+        "original_certificate": original,
+        "receipt": None if receipt is None else receipt.relative_to(ROOT.parent).as_posix(),
+        "verification": "V3" if confirmed else "V0",
+        "confirmation": "C3" if confirmed else "C0",
+        "algebraic_identity": "independently-checked",
+        "geometry_replay": "native-replay-retained" if replayed else "not-replayed",
+        "adoption": "pending" if pending else "not-selected",
+        "global_optimality": "not-established",
+    }
+    return {
+        "n": n,
+        "kind": disposition,
+        "algebraic_source": "derived-from-source-closed-form",
+        "current_side": current["side"]["value"],
+        "side": root_decimal(_root),
+        "exact_form": str(side),
+        "degree": 1,
+        "polynomial": {
+            "coefficients": [str(c) for c in coefficients],
+            "text": format_polynomial(coefficients),
+            "latex": polynomial_latex(coefficients),
+            "height_digits": len(str(max(abs(c) for c in coefficients))),
+        },
+        "checks": checks,
+        "sources": [
+            {
+                "path": facts.relative_to(ROOT.parent).as_posix(),
+                "url": url,
+                "kind": "derived-from-source-closed-form",
+                "locator": {"line": 1, "section": str(n)},
+                "source_flags": [f"source certificate; {result}"],
+            }
+        ],
+        "source_statuses": [
+            "pending-adoption" if pending else "superseded",
+            "scoped-finite-feasibility-confirmed" if confirmed else "source-reported",
+            "native-replay-retained" if replayed else "geometry-not-replayed",
+        ],
+        "attribution": {
+            "date_mentions": [source_date],
+            "source_text": [f"{source_key}; {result}; original {original}"],
+        },
+        "bead": None,
+        "source_certificate": assurance,
+        "text": (
+            "The exact linear identity names this finite source certificate's native "
+            "side. "
+            + (
+                "This improving offer is pending adoption and establishes no current bound. "
+                if pending
+                else "This source construction is superseded by the standing bound. "
+            )
+            + (
+                "Complete native replay is retained; "
+                if replayed
+                else "Geometry has not been replayed; "
+            )
+            + (
+                "scoped V3/C3 finite feasibility is preserved. "
+                if confirmed
+                else "the imported claim remains V0/C0. "
+            )
+            + "No stationarity, local-minimum, rigidity or global-optimality claim transfers."
+        ),
+    }
+
+
+def hunt_equal_bound_occurrence(
+    current: dict,
+    previous: dict | None,
+    certificate: evand.Certificate,
+    comparison: dict,
+) -> dict | None:
+    """Retain Daniel's scoped T-128 evidence without replacing Couzo's custody."""
+    try:
+        same_side = Fraction(comparison["exact_side"]) == certificate.side
+    except (KeyError, TypeError, ValueError) as error:
+        raise ExactValuesError(
+            "record-hunt equal-bound comparison lacks an exact side"
+        ) from error
+    if (
+        certificate.n != 155
+        or comparison.get("result") != "T-128"
+        or comparison.get("source_key") != couzo_refinements.SOURCE_KEY
+        or not same_side
+    ):
+        raise ExactValuesError("record-hunt equal-bound comparison does not name Couzo's T-128")
+    original = couzo_refinements.source_pins()[155]["certificate"]["path"]
+    expected = _finite_source_history_row(
+        155,
+        certificate.side,
+        current,
+        result="T-128",
+        source_key=couzo_refinements.SOURCE_KEY,
+        revision=couzo_refinements.REVISION,
+        facts=couzo_refinements.fact_path(),
+        original=original,
+        url=f"{couzo_refinements.SOURCE}/blob/{couzo_refinements.REVISION}/{original}",
+        receipt=couzo_refinements.receipt_path(),
+        confirmed=False,
+    )
+    if previous != expected:
+        raise ExactValuesError(
+            "record-hunt equal-bound occurrence differs from retained Couzo custody"
+        )
+    if expected is None:
+        return None
+    original = hunt_reports.certificate_path(155)
+    occurrence = _finite_source_history_row(
+        155,
+        certificate.side,
+        current,
+        result="T-128",
+        source_key=hunt_reports.SOURCE_KEY,
+        revision=hunt_reports.REVISION,
+        facts=hunt_reports.PACKET / "source" / original,
+        original=original,
+        url=f"{hunt_reports.SOURCE}/blob/{hunt_reports.REVISION}/{original}",
+        receipt=hunt_reports.receipt_path(),
+        confirmed=False,
+        source_date=hunt_reports.READ_ON,
+    )
+    assert occurrence is not None
+    occurrence["text"] = (
+        "This separately retained Daniel certificate is an equal-bound evidence update "
+        "to T-128. "
+        + occurrence["text"]
+        + " Equality of the certificate sides does not establish a connecting motion "
+        "or equivalence of local minima."
+    )
+    return occurrence
+
+
+def source_certificate_history(
+    entries: list[dict], *, verified_inputs: VerifiedRationalInputs | None = None
+) -> list[dict]:
+    """Project noncurrent exact source certificates without adopting their bounds."""
+    indexed = {entry["n"]: entry for entry in entries}
+    inputs = verified_inputs or VerifiedRationalInputs()
+    rows: dict[tuple[int, Fraction], dict] = {}
+
+    def add(n: int, side: Fraction, **metadata: Any) -> None:
+        row = _finite_source_history_row(n, side, indexed[n], **metadata)
+        if row is None:
+            return
+        identity = n, side
+        if identity in rows:
+            # One identity may have several independently retained source occurrences.
+            previous = rows[identity]
+            if previous["source_certificate"] != row["source_certificate"]:
+                raise ExactValuesError(
+                    "duplicate finite identity has distinct custody/assurance"
+                )
+            previous["sources"].extend(row["sources"])
+        else:
+            rows[identity] = row
+
+    confirmed_sources = (
+        (
+            ryxu_houses.reports,
+            ryxu_houses.SOURCE_KEY,
+            "T-125",
+            {n: ryxu_houses.reports.source_path(n) for n in ryxu_houses.reports.NUMBERS},
+        ),
+        (
+            gupta_houses.reports,
+            gupta_houses.reports.SOURCE_KEY,
+            "T-127",
+            {n: pin["certificate"] for n, pin in gupta_houses.reports.source_pins().items()},
+        ),
+    )
+    for reports, key, result, originals in confirmed_sources:
+        if key not in inputs.source_facts:
+            inputs.source_facts[key] = reports.read_facts()
+            reports.check_certification()
+        for n, certificate in inputs.source_facts[key].items():
+            evidence = inputs.evidence_row(n, reports.EXACT_EVIDENCE, key)
+            if (
+                evidence["certificate"]
+                != reports.fact_path().relative_to(ROOT.parent).as_posix()
+            ):
+                raise ExactValuesError("confirmed source history names a different certificate")
+            original = originals[n]
+            add(
+                n,
+                certificate.side,
+                result=result,
+                source_key=key,
+                revision=reports.REVISION,
+                facts=reports.fact_path(),
+                original=original,
+                url=f"{reports.SOURCE}/blob/{reports.REVISION}/{original}",
+                receipt=reports.receipt_path(),
+                confirmed=True,
+            )
+
+    pending_sources = (
+        (
+            couzo_refinements,
+            "T-128",
+            {n: couzo_refinements.fact_path() for n in couzo_refinements.NUMBERS},
+            {
+                n: pin["certificate"]["path"]
+                for n, pin in couzo_refinements.source_pins().items()
+            },
+        ),
+        (
+            couzo_followup,
+            "T-130",
+            {n: couzo_followup.fact_path(n) for n in couzo_followup.NUMBERS},
+            {n: couzo_followup.certificate_path(n) for n in couzo_followup.NUMBERS},
+        ),
+    )
+    for reports, result, fact_paths, originals in pending_sources:
+        facts = reports.read_facts()
+        reports.check_certification()
+        for n, certificate in facts.items():
+            original = originals[n]
+            add(
+                n,
+                certificate.side,
+                result=result,
+                source_key=reports.SOURCE_KEY,
+                revision=reports.REVISION,
+                facts=fact_paths[n],
+                original=original,
+                url=f"{reports.SOURCE}/blob/{reports.REVISION}/{original}",
+                receipt=reports.receipt_path(),
+                confirmed=False,
+            )
+
+    hunt_facts = hunt_reports.read_facts()
+    hunt_claims = hunt_reports.check_claims(hunt_facts)
+    hunt_reports.check_certification()
+    original = hunt_reports.certificate_path(132)
+    add(
+        132,
+        hunt_facts[132].side,
+        result="T-131",
+        source_key=hunt_reports.SOURCE_KEY,
+        revision=hunt_reports.REVISION,
+        facts=hunt_reports.PACKET / "source" / original,
+        original=original,
+        url=f"{hunt_reports.SOURCE}/blob/{hunt_reports.REVISION}/{original}",
+        receipt=hunt_reports.receipt_path(),
+        confirmed=False,
+        source_date=hunt_reports.READ_ON,
+    )
+    equal_side = next(row["equal_side"] for row in hunt_claims["results"] if row["n"] == 155)
+    occurrence = hunt_equal_bound_occurrence(
+        indexed[155], rows.get((155, hunt_facts[155].side)), hunt_facts[155], equal_side
+    )
+    evidence_occurrences = [] if occurrence is None else [occurrence]
+
+    coverage = safe_load((FRONTIER / "source-coverage.yaml").read_text())
+    for packet_name, numbers, revision in (
+        (
+            "evand-batch-105-130-2026-10-07",
+            (105, 130),
+            "7eef24f7221b8c3371d6171dd664b52541bbd479",
+        ),
+        ("evand-batch-292-2026-10-07", (292,), "f58a01774a733b232a88576470332185d8d11641"),
+    ):
+        packet = ROOT / "resources/web" / packet_name
+        problems = acquire_source.check(packet, ROOT.parent)
+        if problems:
+            raise ExactValuesError("reported batch certificate custody: " + "; ".join(problems))
+        record = json.loads(read_retained_text(packet / acquire_source.RECORD))
+        (source,) = record["sources"]
+        if source["source_commit"] != revision or source["source_url"] != evand.SOURCE:
+            raise ExactValuesError("reported batch certificate names a different source pin")
+        source_key = next(
+            row["source_key"] for row in coverage["sources"] if row["id"] == packet_name
+        )
+        for n in numbers:
+            original = f"s12/search/exact/batch/certs/n-{n:03d}.cert"
+            path = packet / "source" / original
+            certificate = evand.parse(read_retained_text(path), expected_n=n)
+            add(
+                n,
+                certificate.side,
+                result="T-129",
+                source_key=source_key,
+                revision=revision,
+                facts=path,
+                original=original,
+                url=f"{evand.SOURCE}/blob/{revision}/{original}",
+                receipt=None,
+                confirmed=False,
+                source_date="2026-10-07",
+            )
+    return sorted(
+        [*rows.values(), *evidence_occurrences],
+        key=lambda row: (row["n"], Fraction(row["exact_form"])),
+    )
 
 
 def build_record() -> dict:
@@ -1558,7 +2043,8 @@ def build_record() -> dict:
         )
         for n in KNOWN_BEST_CORPUS.numbers
     ]
-    append_reported_source_notes(entries)
+    historical = append_reported_source_notes(entries)
+    historical.extend(source_certificate_history(entries, verified_inputs=verified_inputs))
     return {
         "softschema": {
             "contract": CONTRACT,
@@ -1576,6 +2062,7 @@ def build_record() -> dict:
             },
             "totals": _totals(entries),
             "entries": entries,
+            "historical_entries": historical,
         },
     }
 

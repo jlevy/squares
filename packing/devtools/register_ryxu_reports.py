@@ -17,6 +17,7 @@ from devtools import render_case_verifiers
 from devtools import ryxu_house_links as houses
 from devtools.confirm_refinement_records import replace_row
 from devtools.register_refinement_reports import FOOTER, append_rows, dump, save
+from sqpack.exact_values import algebraic_fields
 from sqpack.yamlio import safe_load
 
 REPO = houses.REPO
@@ -34,8 +35,7 @@ def reported_bound(n: int) -> dict[str, Any]:
     bound = houses.bound(n)
     return {
         **bound,
-        "algebraic_degree": 2 if n == 51 else 1,
-        "minimal_polynomial": "9s^2-96s+206=0" if n == 51 else None,
+        **algebraic_fields(bound["exact_form"], None, None),
         "analytically_optimized": None,
         "catalogue_rigid": "not-stated",
         "construction_method": "unknown",

@@ -118,9 +118,37 @@ def test_retained_implementation_revision_must_name_the_executing_reader() -> No
 def test_cross_checkout_and_dirty_executing_reader_are_refused(tmp_path: Path) -> None:
     checkout = tmp_path / "input-checkout"
     subprocess.run(
-        ("git", "clone", "--shared", "--quiet", str(REPO), str(checkout)), check=True
+        ("git", "clone", "--shared", "--quiet", "--no-checkout", str(REPO), str(checkout)),
+        check=True,
+    )
+    # Keep every authenticated source and the clone-local reader package, while
+    # avoiding unrelated bulk during both the current and historical checkouts.
+    custody_paths = {
+        *(source.path for source in replay.SOURCES),
+        replay.READER_PATH,
+        "packing/devtools/__init__.py",
+    }
+    subprocess.run(
+        ("git", "-C", str(checkout), "sparse-checkout", "set", "--no-cone", "--stdin"),
+        input="".join(f"/{path}\n" for path in sorted(custody_paths)),
+        text=True,
+        check=True,
+    )
+    subprocess.run(
+        ("git", "-C", str(checkout), "checkout", "--quiet", "HEAD"),
+        check=True,
     )
 
+    def materialized_paths() -> set[str]:
+        paths: set[str] = set()
+        for directory, directories, names in checkout.walk():
+            directories[:] = [
+                name for name in directories if name not in {".git", "__pycache__"}
+            ]
+            paths.update((directory / name).relative_to(checkout).as_posix() for name in names)
+        return paths
+
+    assert materialized_paths() == custody_paths
     with pytest.raises(replay.T1ReplayError, match=r"executing T1 reader.*path"):
         replay.replay(checkout)
 
@@ -155,6 +183,7 @@ def test_cross_checkout_and_dirty_executing_reader_are_refused(tmp_path: Path) -
     )
     # The re-bound source revision postdates this reader, so the checkout now holds a
     # reader file; the refusal turns on its not being the executing one, not on absence.
+    assert materialized_paths() == custody_paths
     assert reader.resolve() != Path(replay.__file__).resolve()
     with pytest.raises(replay.T1ReplayError, match=r"executing T1 reader.*path"):
         replay.replay(checkout)

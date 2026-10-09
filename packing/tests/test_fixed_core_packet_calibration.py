@@ -16,6 +16,7 @@ import subprocess
 import sys
 import time
 from collections.abc import Callable
+from contextlib import suppress
 from copy import deepcopy
 from dataclasses import replace
 from fractions import Fraction
@@ -1432,32 +1433,77 @@ def test_each_execution_checkpoint_remains_partial_when_terminated(
     assert phase in cast(dict[str, object], rss["pids_by_phase"])
 
 
+@pytest.mark.parametrize("handler_delay", [0.0, 0.3])
 def test_timeout_kills_and_reaps_a_termination_resistant_process_group(
-    tmp_path: Path,
+    tmp_path: Path, handler_delay: float
 ) -> None:
     output = tmp_path / "timeout"
     output.mkdir()
     _seed(output)
+    ready = tmp_path / "termination-resistant-ready"
+    staged_ready = ready.with_suffix(".tmp")
     grandchild = (
-        "import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(60)"
+        "import os,signal,time;from pathlib import Path;"
+        "signal.signal(signal.SIGTERM,signal.SIG_IGN);"
+        f"Path({str(staged_ready)!r}).write_text('ready');"
+        f"os.replace({str(staged_ready)!r},{str(ready)!r});"
+        "time.sleep(60)"
     )
     leader = (
         "import signal,subprocess,sys,time;"
+        f"time.sleep({handler_delay!r});"
         "signal.signal(signal.SIGTERM,signal.SIG_IGN);"
         f"subprocess.Popen([sys.executable,'-c',{grandchild!r}]);"
         "time.sleep(60)"
     )
-    started = time.perf_counter()
-    status = calibration.supervise_worker(
-        (sys.executable, "-c", leader),
-        output,
-        repository=REPOSITORY,
-        expected_revision=REVISION,
-        external_seconds=0.2,
-        grace_seconds=0.05,
-        invocation_started=started,
-        external_deadline=started + 0.2,
-    )
+    command = (sys.executable, "-c", leader)
+
+    def wait_until_ready(process: subprocess.Popen[bytes]) -> None:
+        ready_deadline = time.monotonic() + 5.0
+        while not ready.is_file():
+            if process.poll() is not None:
+                raise AssertionError("fixture leader exited before signal readiness")
+            if time.monotonic() >= ready_deadline:
+                raise AssertionError("fixture signal readiness exceeded five seconds")
+            time.sleep(0.01)
+        assert ready.read_text() == "ready"
+
+    def waiting_launch[**P](
+        factory: Callable[P, subprocess.Popen[bytes]],
+    ) -> Callable[P, subprocess.Popen[bytes]]:
+        def launch(*args: P.args, **kwargs: P.kwargs) -> subprocess.Popen[bytes]:
+            process = factory(*args, **kwargs)
+            if process.args != command:
+                return process
+            try:
+                wait_until_ready(process)
+            except BaseException:
+                with suppress(ProcessLookupError, PermissionError):
+                    os.killpg(process.pid, signal.SIGKILL)
+                calibration._reap_process_group(process, grace_seconds=0.05)
+                raise
+            return process
+
+        return launch
+
+    # The child marker proves both handlers are installed: the leader ignores SIGTERM
+    # before spawning, and the child writes only after installing its own handler.
+    # Readiness remains launch time within the original external deadline.
+    with patch(
+        "devtools.calibrate_fixed_core_packet.subprocess.Popen",
+        new=waiting_launch(subprocess.Popen),
+    ):
+        started = time.perf_counter()
+        status = calibration.supervise_worker(
+            command,
+            output,
+            repository=REPOSITORY,
+            expected_revision=REVISION,
+            external_seconds=0.2,
+            grace_seconds=0.05,
+            invocation_started=started,
+            external_deadline=started + 0.2,
+        )
     receipt = json.loads((output / "result.json").read_bytes())
     assert status == 1
     assert receipt["status"] == "partial"
