@@ -5,7 +5,7 @@ title: Review and validate the atlas site cleanups
 kind: task
 status: in_progress
 priority: 2
-version: 35
+version: 36
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -20,10 +20,11 @@ child_order_hints:
   - is-01m4g7s24xrthh72q5ryfb5pfv
   - is-01m4g7s2kwntfe5p3g06ttgjak
   - is-01m4g7s31xde633mzd97dyg26w
+  - is-01m4g81mr0zn0mv1hw933m1ntt
 hold: null
 hold_until: null
 created_at: 2026-10-08T15:48:04.263Z
-updated_at: 2026-10-09T11:46:35.694Z
+updated_at: 2026-10-09T11:51:15.967Z
 started_at: 2026-10-08T15:49:07.449Z
 ---
 Review source changes and exported atlas, run focused checks and the change-reachable gate, then commit/push a focused PR and confirm CI. Keep the site cleanup epic open for further requests.
