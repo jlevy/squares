@@ -2483,7 +2483,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-10-08'
+  reviewed: '2026-10-09'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -2502,7 +2502,8 @@ sources:
     certified packings (franciscouzo-square-packing-2026) superseded its reports at n = 68, 103, 105,
     110 and 131, which are listed under superseded_reports. On 2026-10-05 the catalogue''s David Ellsworth
     packing (T-088), an optimization of the release''s own n = 69 packing, superseded its last current
-    report, also listed there.
+    report, also listed there. A fresh read on 2026-10-09 found the release page and data/results.json
+    byte-identical to the retained snapshot: no later release.
 
     '
 - id: schadt-n29-2025
@@ -2585,7 +2586,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-08'
+  reviewed: '2026-10-09'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -2607,7 +2608,9 @@ sources:
     The original supplement comment is no longer available. The identical n153 certificate remains
     accessible at https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n153/n153.cert.json;
     resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json binds its exact side
-    and rational triples to the retained original. This is provenance only, not a new result.'
+    and rational triples to the retained original. This is provenance only, not a new result. A fresh
+    read on 2026-10-09 found the update comment unchanged since its 2026-10-07T18:33:04Z edit and issue
+    401 closed with no later comment.'
 - id: squish-update-2026-10-07
   title: 'SQUISH update: seven additional and five tighter rational packings'
   role: source-repository

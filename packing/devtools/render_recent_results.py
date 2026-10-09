@@ -25,7 +25,14 @@ the interval decision several first-party certificates cite, does not make every
 decided hold the bound. Where only a reported bound rests on an entry, it is the current
 best as reported. An entry that holds no bound is a *second certificate* where it proves
 the exact value of a proved case (it cites that case's verified upper bound beside a
-lower bound of its own) and *superseded* where it is any other bound.
+lower bound of its own). Any other bound that holds none is *superseded* where its case
+records hold a bound at least as good as every bound it states, and *pending adoption*
+(`PENDING_ADOPTION`) where one it states is strictly better than the case record's, in
+a lane it can hold (`check_standing.improvements`): a report the case records have not
+taken in yet, such as `T-128`'s eight rational certificates, which nothing on record has
+replaced. Superseded means replaced, so it is decided by the numbers the entry's words
+state, compared exactly; an entry whose words state no bound the check reads is held to
+the structure alone, and is superseded wherever no case bound rests on it.
 
 **Standing is about bounds, so an entry whose evidence claims none has no standing**
 (`NO_STANDING`): no later bound supersedes a rigidity or a case exclusion. The views show
@@ -110,6 +117,10 @@ SECOND_CERTIFICATE = "second certificate"
 #: A second route to a proved value that this repository has not replayed: the same word
 #: as a replayed one would say it had been checked here.
 SECOND_CERTIFICATE_REPORTED = "second certificate, reported"
+#: A bound no case bound rests on, that states one strictly better than its case record
+#: holds in a lane it can hold: not yet taken into the case records, and replaced by
+#: nothing. The views draw no mark for it; its status says how far it has been checked.
+PENDING_ADOPTION = "pending adoption"
 SUPERSEDED = "superseded"
 #: The mark of a result of a kind that is no bound, part of which a later result implies,
 #: where its entry declares it (`superseded_by`, extent `part`); it is drawn after
@@ -123,6 +134,7 @@ STANDINGS = (
     HOLDS_REPORTED,
     SECOND_CERTIFICATE,
     SECOND_CERTIFICATE_REPORTED,
+    PENDING_ADOPTION,
     SUPERSEDED,
 )
 #: What `standing` returns for an entry whose evidence claims no bound: it has none.
@@ -476,7 +488,13 @@ def held(n: int, records: Records) -> Held:
 
 def standing(record: Mapping[str, Any], records: Records) -> str:
     """Whether an entry holds a case bound now, and if not, why not. An entry whose
-    evidence claims no bound has no standing, `NO_STANDING`."""
+    evidence claims no bound has no standing, `NO_STANDING`.
+
+    A bound that holds none is superseded only where nothing it states is strictly better
+    than its case records' bounds; where something is, it is `PENDING_ADOPTION`. An entry
+    better at some of its cases and beaten at others is pending adoption as a whole, as
+    an entry that still holds one case of several is the current best; asked of the
+    beaten cases alone (`result_overview.standing_on`), it is superseded there."""
     entry = str(record["id"])
     cases = [held(n, records) for n in _scope(record) if n in records.cases]
     if any(entry in case.verified for case in cases):
@@ -493,7 +511,10 @@ def standing(record: Mapping[str, Any], records: Records) -> str:
         if str(record["confirmation"]) in REPLAYED_RUNGS:
             return SECOND_CERTIFICATE
         return SECOND_CERTIFICATE_REPORTED
-    return SUPERSEDED
+    # `check_standing` reads this module, so its reader of stated bounds is imported here.
+    from devtools.check_standing import improvements  # noqa: PLC0415
+
+    return PENDING_ADOPTION if improvements(record, records) else SUPERSEDED
 
 
 def _declared(record: Mapping[str, Any], extent: str) -> tuple[str, ...]:
@@ -510,7 +531,9 @@ def superseded(record: Mapping[str, Any], held: str) -> bool:
     """Whether a table of results marks an entry superseded, given its standing `held`.
 
     A bound, a result whose `kind` is one of `BOUND_KINDS`, is superseded where no case
-    bound rests on it now, which is derived from the case records and never stored.
+    bound rests on it now and the case records hold one at least as good as each it
+    states, which is derived from the case records and never stored. A better bound they
+    have not taken in yet is pending adoption and not superseded: nothing replaced it.
     That a bound is only reported is the result's status (`devtools.result_status`:
     recorded), and a second proof of a value another result holds says so by its kind,
     simplification.

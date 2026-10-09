@@ -261,11 +261,18 @@ certificate is replayed from the repository before it enters the register.
 Two marks sit beside a status and are no part of it.
 
 - **Superseded** is the result’s place on the frontier: it is a bound, a result whose
-  [kind](#result-kinds) is lower bound, upper bound or optimality, and no case bound
-  rests on it now. It is derived from the case records by
-  `render_recent_results.standing`, and
-  [`devtools/check_standing.py`](packing/devtools/check_standing.py) holds it to the
-  bounds each entry states.
+  [kind](#result-kinds) is lower bound, upper bound or optimality, no case bound rests
+  on it now, and its cases hold a bound at least as good as each one it states.
+  Superseded means replaced.
+  A bound strictly better than its case’s, in a lane it can hold, that the case records
+  have not taken in yet is *pending adoption* and carries no mark: nothing has replaced
+  it, and its status says how far it has been checked.
+  `T-128`’s eight rational sides, each below the ceiling its case holds, are pending
+  adoption. Superseded is derived from the case records and the bounds each entry states
+  by `render_recent_results.standing`, and
+  [`devtools/check_standing.py`](packing/devtools/check_standing.py) holds it to those
+  bounds. An entry whose words state no bound the check reads is held to the case records
+  alone, so a report the case records do not cite states its sides.
   The mark names the results that supersede it, the ones its cases’ bounds rest on now
   (`render_recent_results.superseding`), so `T-037` reads *superseded by T-060*. A
   confirmed result may be superseded, and a recorded one may hold a case’s reported

@@ -340,6 +340,39 @@ def test_derived_metadata_cannot_add_raw_bytes_or_promote_source_claims(
 
 
 @pytest.mark.usefixtures("ordinary_source")
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    [
+        ("commit-root", "commit metadata"),
+        ("commit-parent", "commit metadata"),
+        ("tree-mode", "pinned Git root"),
+    ],
+)
+def test_retained_lineage_is_compared_whole_and_its_trees_rebuilt(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    derived_outputs: Mapping[str, bytes],
+    mutation: str,
+    message: str,
+) -> None:
+    """The retained commit block is held whole against PINS, and every tree is rebuilt."""
+    destination = write_derived(tmp_path, monkeypatch, derived_outputs)
+    path = destination / "acquisition/sources.json"
+    value = reports.read_json(path)
+    custody = value["sources"][0]["custody"]
+    commit = reports.COMMITS[2]
+    if mutation == "commit-root":
+        custody["commits"][commit]["tree"]["sha"] = "0" * 40
+    elif mutation == "commit-parent":
+        custody["commits"][commit]["parents"][0]["sha"] = "0" * 40
+    else:
+        custody["trees"][commit]["certificates/context.txt"]["mode"] = "100755"
+    path.write_text(json.dumps(value))
+    with pytest.raises(ValueError, match=message):
+        reports.check_packet(destination)
+
+
+@pytest.mark.usefixtures("ordinary_source")
 def test_fixed_schema_envelope_refuses_before_selected_schema_io(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

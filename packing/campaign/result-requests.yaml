@@ -199,7 +199,7 @@ issues:
     summary: Two faster implementations of standing n17 certificate checks are offered with same-host
       source benchmarks. The later comment points to Rust kernel-verifier PR410. Neither a new packing
       bound nor global optimality follows from checker speed.
-    read_through: '2026-10-08T17:37:33Z'
+    read_through: '2026-10-08T23:48:03Z'
     results:
     - key: faster-verifiers
       claim: A parallel driver and independent Rust verifier reportedly reproduce standing receipts
@@ -226,8 +226,19 @@ issues:
       reported:
       - result: faster-verifiers
         status: incomplete
+    - url: https://github.com/jlevy/squares/issues/400#issuecomment-6071299059
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: faster-verifiers
+        status: incomplete
     close_when: The named owner completes or explicitly dispositions the queued work and posts the recorded
       state; source status alone grants no theorem admission.
+    notes: The owner's 8 October review checkpoint reports completed reviews and passing full hosted
+      checkpoints for draft PR452 (BB decoded-node lifetime) and PR453 (atomic native receipts). Both
+      remain unmerged; neither adopts PR410 or qualifies the parallel or Rust checker on complete same-object
+      custody, and no admission, rating or bound changes. The contributor timings remain reports.
   - number: 405
     title: 'Prove n = 17 optimality: Bidwell family, explainer paper, and verifiable proof'
     author: jlevy
@@ -238,7 +249,7 @@ issues:
     summary: The owner’s global n17 research tracker requests a composed proof and explainer. Exact
       endpoint feasibility and local ingredients are established separately; complete global exclusion
       and capture remain unresolved.
-    read_through: '2026-10-08T18:29:58Z'
+    read_through: '2026-10-09T04:50:29Z'
     results:
     - key: global-program
       claim: Establish global optimality of the Bidwell/Hämäläinen endpoint family for17 independently
@@ -343,12 +354,60 @@ issues:
       reported:
       - result: global-program
         status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6069228392
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6070358282
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6071221013
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6073310240
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6073747397
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6074493493
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
     close_when: The named owner completes or explicitly dispositions the queued work and posts the recorded
       state; source status alone grants no theorem admission.
     notes: 'The six owner updates through 7 October report continued work, not global optimality. The
       latest accepts exp-296 only within its fixed-owner-0 conditional domain: 25 owner-18 rows are
       excluded, without a parent, guard, regional or census exclusion. The global bounds and census
-      remain unchanged, and the current full checkpoint is incomplete.'
+      remain unchanged, and the current full checkpoint is incomplete. The six owner updates of 8 and
+      9 October consolidate stack455 (#404, #454, #461) and the supporting PR452, PR453 and PR457 checkpoints,
+      and record PR464''s literature and SOS review with a conditional order-2 weighted-vertex reduction.
+      Each keeps 4.66044275 < s(17) <= 4.6755300936045509516342148538535054 and adds no T item, admission
+      or exclusion. The latest reports the research PRs failing only the unchanged source-copy cap and
+      proposes a landing order; none is merged, and the first-eight shared-centre LP under think-dvcs
+      is unimplemented and unrun.'
   - number: 413
     title: 'n17: work status of 27 sub-pattern exclusions (branch-and-bound certificates), to avoid
       duplicate work'
@@ -3211,6 +3270,16 @@ issues:
       kind: follow-up
       reported:
       - result: retained-internal-node-memory
+    - url: https://github.com/jlevy/squares/issues/445#issuecomment-6071298503
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: retained-internal-node-memory
     close_when: The existing owner decides closure after the maintained lifetime repair is published
       and the dated bounded resource scope remains explicit.
-    read_through: '2026-10-08T17:34:07Z'
+    notes: The owner's 8 October review checkpoint reports completed reviews and a passing full hosted
+      checkpoint for draft PR452 at 540577d3d, joined with main f0ec5b663 and not replayed against later
+      main. The repair remains unmerged; pass-one indexing stays O(N), and no constant-memory or
+      large-certificate claim is made.
+    read_through: '2026-10-08T23:48:00Z'
