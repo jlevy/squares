@@ -960,9 +960,10 @@ with their KKT points, inputs and solver reports;
 Both project exact routes accept both certificates and refuse all four controls.
 T-131 records the n = 132 side at V0/C0, pending independent review and adoption.
 The n = 155 side equals Couzo’s earlier issue451 certificate (T-128), with which it
-shares 152 of 155 exact poses.
-The source credits Couzo’s and Chaoweeraprasit’s packings as starting points and
-discloses Claude assistance under Daniel’s direction.
+shares 152 of 155 exact poses, differing only in the free and flat-motion squares the
+source’s report lists; it is recorded as an evidence update to T-128. The source credits
+Couzo’s and Chaoweeraprasit’s packings as starting points and discloses Claude
+assistance under Daniel’s direction.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

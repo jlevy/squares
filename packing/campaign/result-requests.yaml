@@ -3306,7 +3306,8 @@ issues:
       evand/square-packing at e008180, retained with their KKT points, inputs and solver reports. Both
       pass both maintained exact routes. The n132 side is new and recorded as T-131 at V0/C0, pending
       independent review and adoption. The n155 side equals Couzo's earlier issue451 certificate (T-128),
-      with which it shares 152 of 155 exact poses, so it maps to T-128. Author checkers and KKT evidence
+      with which it shares 152 of 155 exact poses, differing only in its free and flat-motion squares,
+      so it maps to T-128 as an evidence update. Author checkers and KKT evidence
       were not run here; no optimality is claimed.
     read_through: '2026-10-09T03:38:22Z'
     results:

@@ -784,6 +784,7 @@ The programs behind each result, by its cited evidence: who ran each check, how 
   - `E-gupta-438-exact-feasibility`, replayed here, independently re-implemented: `V-sqpack-verify`, `V-check-rational-witness-independent` (first-party); `V-gupta-complete-custody` (first-party, premises)
 - **T-128** — recorded
   - `E-couzo-451-rational-report`, the source’s own run: no program held
+  - `E-evand-465-record-hunt-report`, the source’s own run: no program held
 - **T-129** — recorded
   - `E-daniel-375-dated-105-130-report`, the source’s own run: no program held
   - `E-daniel-375-dated-292-report`, the source’s own run: no program held

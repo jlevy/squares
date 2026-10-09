@@ -13025,6 +13025,7 @@ results:
       published: '2026-10-08'
     evidence:
     - E-couzo-451-rational-report
+    - E-evand-465-record-hunt-report
     artifacts:
     - packing/resources/web/couzo-exact-refinements-2026-10-08/README.md
     - packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/case-inputs.json
@@ -13051,7 +13052,12 @@ results:
       The source author copied this repository''s sqpack verifier, so the exact_verify route overlaps
       that source checker. The second maintained rational-geometry route is a separate deciding implementation;
       both routes share certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
-      method. No two independent methods, human oversight or optimality is claimed.'
+      method. No two independent methods, human oversight or optimality is claimed.
+
+
+      On 2026-10-09 Evan Daniel''s issue 465 certificate hunt1_n155.cert was retained and replayed here: it states exactly this entry''s n155 side and differs from Couzo''s certificate
+      only in the free square and two flat-motion squares its report lists (E-evand-465-record-hunt-report).
+      It moves no rung.'
     next_rung: Preserve and validate each complete historical source house before any selected-house
       replacement, then independently review source-specific adoption and confirming records. Final
       exact-head CI remains required.
@@ -13210,9 +13216,15 @@ results:
       The exact side lies 84571108928763690161985083/20000000000000000000000000000 below the case''s
       selected and verified ceiling, Evan Daniel''s exact optimum of Francisco Couzo''s packing (T-098),
       which stays retained with its own replay. The source reports a different local minimum, reached
-      from Couzo''s packing by an uphill excursion. The same release''s n155 certificate states exactly
-      the n155 side Couzo''s issue451 certificate (T-128) registered a day earlier and shares 152 of its
-      155 exact poses, so no entry here repeats it; issue 465 maps it to T-128.
+      from Couzo''s packing by an uphill excursion.
+
+
+      The same release''s n155 certificate states exactly
+      the n155 side of Couzo''s issue451 certificate (T-128) and shares 152 of its 155 exact poses;
+      the three that differ are exactly the free square and the two flat-motion squares of the source''s
+      own report, so it is the same minimum modulo its zero modes. T-128''s side is pending adoption,
+      not a value a case record holds, so the n155 certificate is an evidence update to T-128 rather
+      than a new entry, and issue 465 maps it there.
 
 
       The source checks with its own verify_cert.py and verify_cert2.py, not run here. The two maintained

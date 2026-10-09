@@ -291,7 +291,7 @@ repositories:
   - url: https://github.com/evand/square-packing
     read_through: ed01e0d35f12168435fa9963e3c499721122492e
     read_on: '2026-10-09'
-    bead: think-iyij
+    bead: think-jtlq
     note: >-
       Read through ed01e0d on 2026-10-09 for #465 (think-iyij): the 61 commits of 7 and 8
       October from dbcb4c4 to ed01e0d. dbcb4c4 flattens s12/ into the repository root, so
@@ -303,11 +303,10 @@ repositories:
       31.859493881559810546..., s(1092) <= 33.840529687178261... and s(1228) <=
       35.847313543154434..., each below twice Couzo's record at 241, 273 and 307 and
       reported valid by both source checkers. They are not registered here, since the
-      beyond-horizon coverage schema is being changed elsewhere; think-iyij holds them
-      until a follow-up bead takes them. 7d047a9 adds Lean proofs (ExactQuad.lean) that 62
+      beyond-horizon coverage schema is being changed elsewhere; think-jtlq owns them. 7d047a9 adds Lean proofs (ExactQuad.lean) that 62
       quadratic register sides equal closed forms a + b sqrt(d), and ed01e0d says an issue
       about them is drafted: evidence for the exact-form and Lean local-minimum reports
-      (T-120 to T-124), to be taken from that issue. 604b43a to 77f3c0a state the
+      (T-120 to T-124), owned by think-63vx. 604b43a to 77f3c0a state the
       open-problems page as Lean propositions and prove the tiling bound s(k^2 n) <= k s(n),
       plateau implications and a conditional large-k tiling statement, none bounding a
       count. The rest is the packer's development (fq, hop, explore, chain, benchmarks,
@@ -315,7 +314,7 @@ repositories:
       n = 110), CI spot checks, site and docs refreshes, a k2m3 status line, the s(59)
       replay's TODO notes and TODO triage: nothing else to import. Not read: e059b1e,
       268af52 (certificates of three n = 126 packings reconstructed from a picture) and
-      1718a58, after ed01e0d. Earlier, the read through cca7bf1 covered the 38 commits of 6
+      1718a58, after ed01e0d, owned by think-ilwc. Earlier, the read through cca7bf1 covered the 38 commits of 6
       and 7 October from d9b563a to cca7bf1, whose changed paths the packets pinned at
       7eef24f, f58a017 and cca7bf1 retain only in part. They are the working history of
       registered imports: 7eef24f squashes the packing search behind #399's s(266), s(270)

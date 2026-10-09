@@ -11674,7 +11674,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-08'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
   identity:
     kind: upper-bound
@@ -11696,6 +11696,7 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-451-rational-report
+    - E-evand-465-record-hunt-report
     artifacts:
     - packing/resources/web/couzo-exact-refinements-2026-10-08/README.md
     - packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/case-inputs.json
@@ -11705,6 +11706,39 @@ urls:
     - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/execution-attempts.json
     - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/private-custody-668cc1a-v1.json
     - packing/devtools/couzo_refinement_reports.py
+  amendments:
+  - date: '2026-10-09'
+    reason: Cite Evan Daniel's issue 465 report atom as an evidence update at n = 155, whose certificate
+      states this entry's exact n155 side; scope, attribution, rungs and the claim are unchanged.
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 105
+        - 108
+        - 127
+        - 131
+        - 155
+        - 180
+        - 228
+        - 306
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo exact refinements 2026-10-08]'
+        published: '2026-10-08'
+      builds_on: null
+      evidence:
+      - E-couzo-451-rational-report
+      artifacts:
+      - packing/resources/web/couzo-exact-refinements-2026-10-08/README.md
+      - packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/case-inputs.json
+      - packing/resources/web/couzo-exact-refinements-2026-10-08/facts/complete-certificates-and-decimal-poses.json.xz
+      - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/exact-replay-incomplete-62268899-v1.json.xz
+      - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/execution-attempts.json
+      - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/private-custody-668cc1a-v1.json
+      - packing/devtools/couzo_refinement_reports.py
 - path: result/t-129.html
   canonical: result/t-129.html
   kind: result
