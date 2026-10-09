@@ -176,6 +176,46 @@ def test_linked_fact_refuses(private_packet: Path, tmp_path: Path) -> None:
         reports.read_facts()
 
 
+def test_receipt_admits_all_fifteen_jobs_with_both_routes() -> None:
+    positives = reports.check_certification()
+    assert tuple(positives) == reports.NUMBERS
+    record = kernel.read_xz(reports.receipt_path())
+    assert [(row["n"], row["control"]) for row in record["cases"]] == [
+        (n, control) for n in reports.NUMBERS for control in reports.JOBS
+    ]
+    for row in record["cases"]:
+        passed = row["control"] == "positive"
+        for route in reports.ROUTES:
+            assert row[route]["verification_passed"] is passed
+            assert row[route]["pairs_tested"] == row["n"] * (row["n"] - 1) // 2
+    assert sum(row["exact_verify"]["pairs_tested"] for row in record["cases"]) == 192423
+
+
+@pytest.mark.parametrize("kind", ["verdict", "limitations", "input", "order", "format"])
+def test_receipt_mutations_refuse_then_restore(private_packet: Path, kind: str) -> None:
+    target = private_packet / "receipts/exact-certification.json.xz"
+    original = target.read_bytes()
+    value = deepcopy(kernel.read_xz(target))
+    row = value["cases"][-1]
+    if kind == "verdict":
+        assert row["exact_verify"]["verification_passed"] is False
+        row["exact_verify"]["verification_passed"] = True
+    elif kind == "limitations":
+        row["independent"]["limitations"] = "Global optimality is proved."
+    elif kind == "input":
+        x = row["checker_input"]["poses"][-1][0]
+        row["checker_input"]["poses"][-1][0] = str(Fraction(x) + 1)
+    elif kind == "order":
+        value["cases"][0], value["cases"][-1] = value["cases"][-1], value["cases"][0]
+    else:
+        value["format"] = earlier.RECEIPT_FORMAT
+    kernel.save_xz(target, value)
+    with pytest.raises(kernel.ReportError):
+        reports.check_certification()
+    target.write_bytes(original)
+    assert tuple(reports.check_certification()) == reports.NUMBERS
+
+
 def test_replay_selection_refuses_unknown_and_repeated_counts() -> None:
     for selection in ([], [84, 84], [108]):
         with pytest.raises(reports.ReportError, match="replay selection"):
