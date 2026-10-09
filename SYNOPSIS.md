@@ -323,7 +323,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 436 | 233 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
 | Sessions | 185 | 105 completed; 80 stopped; all terminal |
 | Explorations | 49 | 29 linked to proposed hypotheses; 20 uncodified |
-| Hypotheses | 274 | 73 confirmed; 48 refuted; 71 blocked; 24 unresolved; 16 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Hypotheses | 274 | 73 confirmed; 48 refuted; 72 blocked; 24 unresolved; 15 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 245 | 93 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 124 | 124 registered, 94 by others |
 
@@ -5953,7 +5953,7 @@ round that names the hypothesis, control roles included.
 | [H-325](packing/campaign/hypotheses/H-325-n17-endpoint-state-cap-scan.md) | open | The endpoint’s own occupancy state is excluded at a cap one hundredth below $S^\ast$ | 0 | — |
 | [H-326](packing/campaign/hypotheses/H-326-n17-cap-ladder-lower-bound.md) | blocked | $s(17) > S^\ast - 1/100$ by exclusion of every residue orbit at a centred cap | 0 | — |
 | [H-327](packing/campaign/hypotheses/H-327-n17-hard-tail-decomposability.md) | open | Most distance-2 residue orbits contain an infeasible sub-pattern of arity at most ten | 0 | — |
-| [H-328](packing/campaign/hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) | open | Centre-only relaxations exclude no distance-2 orbit; the first-eight LP’s eight survivors are known from the W2 review, pending registration | 0 | — |
+| [H-328](packing/campaign/hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) | blocked | Centre-only relaxations exclude no distance-2 orbit; the first-eight LP’s eight survivors are known from the W2 review, pending registration | 0 | — |
 | [H-329](packing/campaign/hypotheses/H-329-n17-feature-forced-lp-terminal-certificate.md) | blocked | An exact dual-sheet patch certificate proves the widened projection theorem over the feature-forced angle box | 0 | — |
 | [H-330](packing/campaign/hypotheses/H-330-n17-no-mans-land-map.md) | blocked | The gap between exclusion reach and the terminal radius is confined to two directions | 0 | — |
 | [H-331](packing/campaign/hypotheses/H-331-n17-b2-branching-on-the-hard-tail.md) | blocked | Learned-weight angle splits bring branch and bound to the hard tail | 0 | — |

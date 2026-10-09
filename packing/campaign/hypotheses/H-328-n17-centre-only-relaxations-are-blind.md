@@ -48,7 +48,7 @@ hypothesis:
     project interpreter: devtools.n17_shared_centre_lp.build_model and check_primal over
     the retained vectors and the exp-247 receipt's cells, and an exact Fraction
     computation over the same cells.
-  instrument_ready: true
+  instrument_ready: false
   regime: >-
     n = 17; the H-266 cover in the U frame, every cell inside the centre box
     [1/2, U - 1/2]^2; the 95 distance-2 orbit representatives of the exp-308 descriptor,
@@ -74,9 +74,10 @@ hypothesis:
     endpoint control gives 810, as in exp-316), found unit-separated centres for all 95
     distance-2 representatives, and replayed the triple computation exactly. The X-051
     correction regenerated the other 87 vectors with the same search and retained all
-    96; the replay accepts them. No W6 round has registered any of this, so the
-    hypothesis reads as open until one does, and its expected information is
-    registration only. A survivor is relaxation survival: not a packing, an exclusion or
+    96; the replay accepts them. No W6 round has registered any of this. The
+    replays are `python -c` snippets, not a repository tool, so under OR-1 the
+    instrument is not ready and the hypothesis reads as blocked; its expected
+    information is registration only. A survivor is relaxation survival: not a packing, an exclusion or
     an admission.
 ---
 # H-328: What Cells and Centre Distances Can See

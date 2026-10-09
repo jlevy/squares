@@ -395,14 +395,16 @@ The repository’s `build_model` and `check_primal` accept each 34-vector, with 
 758, 758, 811, 811, 811 and 752 rows; the endpoint’s state, as a control, gives 810
 rows, the count exp-316 recorded.
 The review’s search found unit-separated centres in their own cells for all 95
-distance-2 orbit representatives of the exp-308 descriptor (exact minimum squared
-distance at least 1.00396), checking the other 87 against cell membership and distance
-only. For this correction the same search was rerun on those 87, and the vectors were
-rounded to rational grids and accepted only when `check_primal` and the exact distance
-check passed. All 87 were accepted.
-The 96 retained vectors sit on grids of 1/1000 (63 of them), 1/10000 (22), 1/100000 (8)
-and 1/1000000 (3); their exact minimum squared distances are 1.0020 to 1.0115, and their
-LPs have 750 to 864 rows.
+distance-2 orbit representatives of the exp-308 descriptor (its unrounded search
+reported a minimum squared distance of 1.00396), checking the other 87 against cell
+membership and distance only.
+For this correction the same search was rerun on those 87, and the vectors were rounded
+to rational grids and accepted only when `check_primal` and the exact distance check
+passed. All 87 were accepted.
+Over the 95 retained distance-2 vectors the exact minimum squared distance is
+$501001/500000\approx1.002002$. The 96 retained vectors sit on grids of 1/1000 (63 of
+them), 1/10000 (22), 1/100000 (8) and 1/1000000 (3); their exact minimum squared
+distances are 1.0020 to 1.0115, and their LPs have 750 to 864 rows.
 By the cover’s $D_4$ symmetry the result extends from each representative to its orbit.
 
 What follows, at its evidential level:
@@ -422,7 +424,8 @@ What follows, at its evidential level:
 - **Who produced it.** These are computations of the W2 review and of this correction,
   not a registered W6 experiment.
   [H-328](../hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) records the
-  determination and reads as open until a round replays it.
+  determination. It reads as blocked: its only instrument is the two `python -c` replays,
+  and OR-1 asks for a repository tool before a round registers it.
 
 **Replay.** The 96 vectors (the endpoint control, the first eight and the other 87) are
 retained with their row counts and exact minimum squared distances in
@@ -655,10 +658,10 @@ not timing fields.
 Each is a registry file under `hypotheses/` with `derived_from: [X-051]`; the summaries
 below give mechanism, falsifier, expected information and limits.
 H-325, H-327, H-332, H-335, H-336 and H-340 are runnable with existing tools and read as
-open in the ledger. H-328 also reads as open, but its outcome is already known from the
-W2 review; it waits only for a round that registers it by replaying the retained
-vectors. H-337 waits on the unmerged pull repair; the rest name an instrument that does
-not exist and read as blocked until it does.
+open in the ledger. H-328’s outcome is already known from the W2 review, but it reads as
+blocked until the replays become a repository tool (OR-1) and a round registers it.
+H-337 waits on the unmerged pull repair; the rest name an instrument that does not exist
+and read as blocked until it does.
 
 | Id | Claim | Mechanism | Falsifier | Expected information | Limits |
 | --- | --- | --- | --- | --- | --- |
@@ -684,7 +687,7 @@ not exist and read as blocked until it does.
 | Kind | Items |
 | --- | --- |
 | Computed here, exact rationals | the twenty-centre box witness in section 3.1 (190 pairwise squared distances, minimum exactly 1; all points inside $[1/2,522/125]^2$) |
-| Computed by the W2 review, exact rationals, accepted by the repository’s checker | section 3.1: centres in their own cells, pairwise squared distance at least 1, for the eight first-eight states (`build_model` and `check_primal`, 752 to 811 rows) and the endpoint control (810 rows); unit-separated centres in their own cells for all 95 distance-2 representatives (minimum squared distance at least 1.00396). Relaxation survival only |
+| Computed by the W2 review, exact rationals, accepted by the repository’s checker | section 3.1: centres in their own cells, pairwise squared distance at least 1, for the eight first-eight states (`build_model` and `check_primal`, 752 to 811 rows) and the endpoint control (810 rows); unit-separated centres in their own cells for all 95 distance-2 representatives (retained exact minimum squared distance $501001/500000\approx1.002002$). Relaxation survival only |
 | Computed in this correction, exact rationals, accepted by the repository’s checker | section 3.1: vectors for the 87 distance-2 representatives beyond the first eight, regenerated with the W2 search; the replay of all 96 retained vectors |
 | Computed here in floats, replayed exactly by the W2 review | section 3.2: for all 2,024 cell triples of `ring-3-voronoi-8-tabbed-unique`, a product vertex with all three squared distances at least $562823713/423200000$; smallest $M_{ijk}=1581577/250000$; smallest pair maximum squared distance $4077323093/2116000000$; no pair with maximum below 1 (agreeing with exp-314) |
 | Derived here, checked by the W2 review | section 3.2: the feasible vertex rules out every weighted-vertex and SOS certificate for every triple, at any order, with or without the ball |

@@ -1222,7 +1222,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | H-325 | open | proof | In the centred container at cap V = S* - 1/100 (walls at (U - V)/2 and |  | 0 |  |  |
 | H-326 | blocked | proof | s(17) > V_1 with V_1 = S* - 1/100 rounded down to a rational below the |  | 0 |  |  |
 | H-327 | open | proof | At least 60 of the 95 distance-2 residue orbits of the 60-entry ledger |  | 0 |  |  |
-| H-328 | open | proof | At U = 1169/250 on the H-266 cover, relaxations that keep only each ce |  | 0 |  |  |
+| H-328 | blocked | proof | At U = 1169/250 on the H-266 cover, relaxations that keep only each ce |  | 0 |  |  |
 | H-329 | blocked | proof | Every packing of 17 unit squares of side at most U' = 935106018721/200 |  | 0 |  |  |
 | H-330 | blocked | proof | Let m be the side margin at which the whole-state engines exclude the  |  | 0 |  |  |
 | H-331 | blocked | proof | With the B2 branching rule of issue 367 (Farkas multiplier shares accu |  | 0 |  |  |
