@@ -3,9 +3,9 @@ type: is
 id: is-01m4h0qnqn4f6w8p5q5sr1n9ba
 title: Address PR 475 mathematical review C and disposition research pilots
 kind: task
-status: closed
+status: open
 priority: 1
-version: 23
+version: 24
 delegate: claude-code@spud10.local
 labels:
   - n-17
@@ -32,10 +32,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T19:02:43.686Z
-updated_at: 2026-10-09T20:53:49.123Z
+updated_at: 2026-10-09T20:55:21.722Z
 started_at: 2026-10-09T19:12:19.614Z
-closed_at: 2026-10-09T20:53:49.122Z
-close_reason: All17 review items addressed or dispositioned; exact restricted-family checker retained; validation safeguards published1ace022dd. Final summary https://github.com/jlevy/squares/pull/475#issuecomment-6088884586. Local focused verification and independent review passed; hosted validation including corrected bead tree passed. Research proposals remain owner-selected follow-ups, not executed target experiments.
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -44,3 +44,5 @@ Published senior mathematical review C at https://github.com/jlevy/squares/pull/
 ## Notes
 
 Deeper review expands the same published review to C1-C17. Also address C16 slider-box inclusion ambiguity; C15 is a certificate-patch pricing correction; C17 proposes exact assignment-reuse cuts. C11 must add shared geometric pose information beyond already satisfiable binary relations and preserve parent-node dependencies. C12 should recover existing support-LP mixed rays before any new oracle, preserving slider tangent and sign-chamber constraints. C14 now includes a restricted exact-family/free-square distance argument; it is not a global capture certificate. Three maintained local recipe reruns passed in the existing checkout; these are corroboration, not independent hosted-certificate replay. Follow the updated review body for exact scope and disposition. No PR source edits were made.
+
+Reopened: Final PR475 validation compatibility correction: preserve quiet stderr for short successful validation by removing the unconditional startup message; retain the 30-second heartbeat and prompt failures. Reopened pending bounded regression evidence and publication.
