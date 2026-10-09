@@ -2070,8 +2070,8 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
 .site-atlas-grid .site-atlas-legend[hidden] {
   display: none;
 }
-/* The shared atlas key: four status items and four recency/color/degree items, each
-   column aligned left, with counts from the complete displayed corpus. */
+/* The web atlas key shows angle colors and contact shades, centered as a group
+   with each explanatory line aligned left. */
 .kpress .site-atlas-grid .site-atlas-legend {
   color: var(--site-support-color);
   column-gap: 1.2rem;
@@ -2105,6 +2105,7 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
 .site-atlas-swatches {
   display: inline-flex;
   gap: 1px;
+  margin-block-start: 0.125em;
 }
 .site-atlas-swatch {
   background: var(--site-atlas-swatch);
