@@ -71,9 +71,22 @@ def _candidate() -> RectangleDensityCandidate:
     return load_candidate(ANALYTIC, n=3, expected_side=Fraction(3, 2))
 
 
-@pytest.mark.parametrize("mode", ["wrong_sequence", "duplicate_key", "extra_output"])
-def test_invalid_resident_response_refuses(tmp_path: Path, mode: str) -> None:
-    with pytest.raises(CandidateError, match="Rust exact geometry refused"):
+@pytest.mark.parametrize(
+    ("mode", "reason"),
+    [
+        ("wrong_sequence", "Rust response identity or result count changed"),
+        ("duplicate_key", "duplicate Rust response key: version"),
+        ("extra_output", "Rust process emitted unsolicited output"),
+    ],
+)
+def test_invalid_resident_response_refuses(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mode: str, reason: str
+) -> None:
+    # Reach the malformed protocol response independently of snapshot/startup time.
+    # Real select waits keep their two-second bound; the timeout controls below keep
+    # the real clock.
+    monkeypatch.setattr(time, "monotonic", lambda: 0.0)
+    with pytest.raises(CandidateError, match="Rust exact geometry refused") as refused:
         verify_candidate(
             _candidate(),
             angle_indices=(0,),
@@ -82,6 +95,7 @@ def test_invalid_resident_response_refuses(tmp_path: Path, mode: str) -> None:
             backend="rust",
             rust_binary=_fake_server(tmp_path, mode),
         )
+    assert str(refused.value) == f"Rust exact geometry refused: {reason}"
 
 
 def test_partial_line_timeout_retains_unresolved_event_census(tmp_path: Path) -> None:
