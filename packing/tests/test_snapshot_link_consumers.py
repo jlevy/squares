@@ -103,3 +103,68 @@ def test_operational_links_preserve_checked_consumers_and_scientific_custody(
     assert copied.read_bytes() == output.read_bytes()
     copied.write_bytes(b"corrupted observation")
     assert output.read_bytes() == b"retained browser observation"
+
+
+def test_linked_directories_follow_the_same_checked_consumer_rule(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A linked pruned directory is recreated empty only for a link a worker checks."""
+    repo = tmp_path / "source"
+    packing = repo / "packing"
+    runs = packing / "benchmarks/math-startup/runs"
+    observations = runs / "historical"
+    observations.mkdir(parents=True)
+    (observations / "reference.pdf").write_bytes(b"retained browser observation")
+    archive = packing / "resources"
+    bundle = archive / "bundle"
+    bundle.mkdir(parents=True)
+    (bundle / "certificate.json").write_bytes(b"deciding scientific input")
+    review = repo / "docs/review.md"
+    review.parent.mkdir()
+    review.write_text(
+        "[observations](../packing/benchmarks/math-startup/runs/historical)\n"
+        "[bundle](../packing/resources/bundle)\n"
+    )
+    readme, synopsis = repo / "README.md", repo / "SYNOPSIS.md"
+    readme.write_text("[review](docs/review.md)\n")
+    synopsis.write_text("Synopsis\n")
+    campaign = packing / "campaign/record.md"
+    campaign.parent.mkdir()
+    campaign.write_text("Campaign\n")
+    register = packing / "frontier/results.yaml"
+    register.parent.mkdir()
+    register.write_text("results: []\n")
+    monkeypatch.setattr(controls, "REPO", repo)
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "HERE", Path("packing"))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({runs, archive}))
+    monkeypatch.setattr(
+        controls,
+        "DESCEND",
+        frozenset({packing / "benchmarks", packing / "benchmarks/math-startup"}),
+    )
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (runs, archive))
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (readme, synopsis, review.parent))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+
+    # The review's directory link to browser output is not followed in a worker; its
+    # link to the archive keeps the custody the file rule keeps.
+    assert controls.linked_pruned_directories() == [bundle]
+    index_fixture_source(repo)
+    tree = tmp_path / "worker"
+    controls.clone_tree(tree)
+    assert not (tree / observations.relative_to(repo)).exists()
+    landed = tree / bundle.relative_to(repo)
+    assert landed.is_dir()
+    assert not any(landed.iterdir())
+
+    for document, relative in (
+        (readme, "packing/benchmarks/math-startup/runs/historical"),
+        (synopsis, "packing/benchmarks/math-startup/runs/historical"),
+        (campaign, "../benchmarks/math-startup/runs/historical"),
+    ):
+        original = document.read_text()
+        document.write_text(original + f"[observations]({relative})\n")
+        assert controls.linked_pruned_directories() == [observations, bundle]
+        document.write_text(original)

@@ -1,0 +1,81 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 101,
+  "seconds": 4.993,
+  "files": [
+    {
+      "file": "packages/workbench/tests/test_shared_picture_sources.py",
+      "tests": 7,
+      "seconds": 0.371
+    },
+    {
+      "file": "packing/tests/test_evand_arrangement_reports.py",
+      "tests": 50,
+      "seconds": 1.15
+    },
+    {
+      "file": "packing/tests/test_lifted_q7_history.py",
+      "tests": 4,
+      "seconds": 0.249
+    },
+    {
+      "file": "packing/tests/test_ryxu_arrangement_reports.py",
+      "tests": 13,
+      "seconds": 0.143
+    },
+    {
+      "file": "packing/tests/test_ryxu_radical_n51.py",
+      "tests": 27,
+      "seconds": 3.08
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packages/workbench/tests/test_shared_picture_sources.py",
+      "packing/tests/test_evand_arrangement_reports.py",
+      "packing/tests/test_lifted_q7_history.py",
+      "packing/tests/test_ryxu_arrangement_reports.py",
+      "packing/tests/test_ryxu_radical_n51.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packages/workbench/tests/test_shared_picture_sources.py": 7,
+      "packing/tests/test_evand_arrangement_reports.py": 50,
+      "packing/tests/test_lifted_q7_history.py": 4,
+      "packing/tests/test_ryxu_arrangement_reports.py": 13,
+      "packing/tests/test_ryxu_radical_n51.py": 27
+    },
+    "deselected_tests": 0
+  }
+}

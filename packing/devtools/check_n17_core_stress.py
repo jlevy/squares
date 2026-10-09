@@ -27,6 +27,7 @@ from typing import Any
 from sympy import QQ
 from sympy.polys.rings import ring
 
+from devtools.bounded_diagnostics import same_content
 from devtools.check_n17_contact_chart import ANCHORS, CONTACTS, SOURCE
 from devtools.check_n17_endpoint_feasibility import (
     FROZEN_ROOT_REF,
@@ -37,17 +38,18 @@ from devtools.check_n17_endpoint_feasibility import (
     _layout,
     _object_unique,
     _read_limited,
+    interval_geometry,
+    require_retained_path,
     symbolic_identities,
 )
 from devtools.check_n17_endpoint_features import (
     AXES,
-    EXPECTED_COUNTS,
     FROZEN_ENDPOINT_REF,
     PARALLEL_PAIRS,
-    _frozen_bytes,
-    _require_endpoint_accepted,
+    interval_inventory,
     option_manifest,
     square_class,
+    symbolic_zero_proofs,
 )
 from devtools.check_n17_root_certificate import CertificateError, n17_polynomials
 from devtools.check_n17_root_certificate import check as check_root
@@ -1456,23 +1458,44 @@ def synthetic_controls() -> dict[str, Any]:
     return {"sections": sections, "passed": True, "seconds": time.monotonic() - started}
 
 
-def _require_features_accepted(
-    document: dict[str, Any], root: dict[str, Any], source: bytes
-) -> None:
-    if (
-        document.get("schema") != "n17-endpoint-feature-certificate/v1"
-        or document.get("criterion_passed") is not True
-        or document.get("root_git_ref") != FROZEN_ROOT_REF
-        or document.get("endpoint_git_ref") != FROZEN_ENDPOINT_REF
-        or document.get("source_sha256") != hashlib.sha256(source).hexdigest()
-        or document.get("inventory", {}).get("counts") != EXPECTED_COUNTS
-        or document.get("inventory", {}).get("box")
-        != {
-            "midpoint": root["box"]["midpoint"],
-            "inclusion_bounds": root["inclusion_bounds"],
-        }
+def _require_prerequisites(
+    root: dict[str, Any], endpoint: dict[str, Any], feature: dict[str, Any], source: bytes
+) -> dict[str, Any]:
+    """Replay the complete prerequisite semantics without historical Git objects.
+
+    The root proof alone does not prove the zero rows: symbolic_zero_proofs checks
+    those identities, including the endpoint foundation, before interval rows are
+    rebuilt. Outer Git references, timings and prior root-verification summaries
+    are provenance only. The later stress proof reuses the foundation's cache.
+    """
+    verified_root = check_root(root, source)
+    for document, schema in (
+        (endpoint, "n17-endpoint-feasibility/v1"),
+        (feature, "n17-endpoint-feature-certificate/v1"),
     ):
-        raise ValueError("frozen H-257 feature inventory is not accepted")
+        if (
+            type(document) is not dict
+            or document.get("schema") != schema
+            or document.get("criterion_passed") is not True
+            or document.get("source_sha256") != hashlib.sha256(source).hexdigest()
+        ):
+            raise ValueError("prerequisite schema, verdict or source is not accepted")
+    identities = symbolic_zero_proofs()
+    if not same_content(endpoint.get("identities"), identities["foundation"]) or not (
+        same_content(feature.get("identities"), identities)
+    ):
+        raise ValueError("prerequisite symbolic identities differ from the exact replay")
+    midpoint, radii = _root_box(root)
+    geometry = interval_geometry(midpoint, radii)
+    inventory = interval_inventory(midpoint, radii)
+    if (
+        geometry["geometry_passed"] is not True
+        or inventory["feature_passed"] is not True
+        or not same_content(endpoint.get("geometry"), geometry)
+        or not same_content(feature.get("inventory"), inventory)
+    ):
+        raise ValueError("prerequisite geometry or inventory differs from the exact replay")
+    return verified_root
 
 
 def _root_box(root: dict[str, Any]) -> tuple[tuple[Q, Q], tuple[Q, Q]]:
@@ -1547,19 +1570,20 @@ def main(argv: list[str] | None = None) -> int:
         return _refuse("root, endpoint and feature certificates are all required")
     root_path, endpoint_path, feature_path = (Path(str(path)) for path in inputs)
     try:
+        for path, reference in zip(
+            (root_path, endpoint_path, feature_path),
+            (FROZEN_ROOT_REF, FROZEN_ENDPOINT_REF, FROZEN_FEATURE_REF),
+            strict=True,
+        ):
+            require_retained_path(path, reference)
         source = _read_limited(args.source)
         root_raw = _read_limited(root_path)
         endpoint_raw = _read_limited(endpoint_path)
         feature_raw = _read_limited(feature_path)
-        _frozen_bytes(FROZEN_ROOT_REF, root_raw)
-        _frozen_bytes(FROZEN_ENDPOINT_REF, endpoint_raw)
-        _frozen_bytes(FROZEN_FEATURE_REF, feature_raw)
         root = json.loads(root_raw, object_pairs_hook=_object_unique)
         endpoint = json.loads(endpoint_raw, object_pairs_hook=_object_unique)
         feature = json.loads(feature_raw, object_pairs_hook=_object_unique)
-        root_verification = check_root(root, source)
-        _require_endpoint_accepted(endpoint, root, source)
-        _require_features_accepted(feature, root, source)
+        root_verification = _require_prerequisites(root, endpoint, feature, source)
         midpoint, radii = _root_box(root)
         symbolic_started = time.monotonic()
         identities = symbolic_residual_proofs()

@@ -1,0 +1,321 @@
+{
+  "audit_date_pdt": "2026-10-08",
+  "scope": "Source identity and extraction quality; not a mathematical certificate or whole-source transcription verification.",
+  "book": {
+    "source_url": "https://www.mit.edu/~parrilo/sdocag/MO13-Blekherman-Parrilo-Thomas.pdf",
+    "acquired_utc": "2026-10-09T02:59:56Z",
+    "title": "Semidefinite Optimization and Convex Algebraic Geometry",
+    "editors": [
+      "Grigoriy Blekherman",
+      "Pablo A. Parrilo",
+      "Rekha R. Thomas"
+    ],
+    "publication_copyright_year": 2013,
+    "pdf_pages": 487,
+    "pdf_bytes": 18185496,
+    "pdf_sha256": "52d69a45668534b19f82415f1a50986fdcfb69d946314f5c86bfab20a26899eb",
+    "raw_bytes": 1947879,
+    "raw_sha256": "3b7d90a854dce26ffe8e1a62bf4bfe9ac37082110c577d0ddf892eb1a7aa3ec2",
+    "extraction_command": "pdftotext -layout original.pdf original.raw.md",
+    "extraction_stderr_empty": true,
+    "replacement_characters": 0,
+    "non_whitespace_C0_glyphs": 2785,
+    "empty_extracted_pages": [],
+    "quality_verdict": "Complete page coverage and searchable prose; mathematical glyphs/layout are not reliable without PDF verification. Keep raw unmodified.",
+    "visually_checked": [
+      {
+        "pdf_page": 65,
+        "printed_page": "49",
+        "issues": [
+          "star glyph maps to U+0002",
+          "summation maps to U+0008",
+          "powers and indices flattened",
+          "matrix alignment only approximate"
+        ]
+      },
+      {
+        "pdf_page": 131,
+        "printed_page": "115",
+        "issues": [
+          "summation maps to U+0002",
+          "powers and indices flattened"
+        ],
+        "content": "Schmudgen Theorem3.136, Archimedean Definition3.137, Putinar Theorem3.138"
+      }
+    ],
+    "arabic_page_mapping_runs": [
+      {
+        "pdf_start": 17,
+        "pdf_end": 173,
+        "printed_start": 1,
+        "printed_end": 157,
+        "offset": 16
+      },
+      {
+        "pdf_start": 174,
+        "pdf_end": 264,
+        "printed_start": 159,
+        "printed_end": 249,
+        "offset": 15
+      },
+      {
+        "pdf_start": 265,
+        "pdf_end": 305,
+        "printed_start": 251,
+        "printed_end": 291,
+        "offset": 14
+      },
+      {
+        "pdf_start": 306,
+        "pdf_end": 418,
+        "printed_start": 293,
+        "printed_end": 405,
+        "offset": 13
+      },
+      {
+        "pdf_start": 419,
+        "pdf_end": 481,
+        "printed_start": 407,
+        "printed_end": 469,
+        "offset": 12
+      },
+      {
+        "pdf_start": 482,
+        "pdf_end": 487,
+        "printed_start": 471,
+        "printed_end": 476,
+        "offset": 11
+      }
+    ],
+    "mapping_warning": "PDF omits several blank printed pages; do not use one universal page offset. Arabic-page mapping ranges and offsets are supplied.",
+    "retention_recommendation": "Original PDF and full raw remain locally retained outside Git; the repository records official source URL, identity, coverage and quality limits. No bulk binary, cap change or source pruning.",
+    "independent_extractor_check": {
+      "mutool_installed": false,
+      "primary_python_3_14_modules_available": {
+        "PyMuPDF": false,
+        "pypdf": false,
+        "pdfplumber": false,
+        "pdfminer": false
+      },
+      "result": "No independent extractor already installed; no installation or additional extraction attempted."
+    },
+    "extractor_version": "Poppler pdftotext 25.05.0",
+    "mathematical_review": {
+      "model": "GPT-6 Astra",
+      "reasoning": "xhigh",
+      "printed_pages": [
+        70,
+        71,
+        92,
+        95,
+        100,
+        112,
+        115,
+        116,
+        117
+      ],
+      "pdf_pages": [
+        86,
+        87,
+        108,
+        111,
+        116,
+        128,
+        131,
+        132,
+        133
+      ],
+      "scope": "Cited sections and consequential statements compared against rendered originals; not the whole book."
+    }
+  },
+  "laplagne": {
+    "source_id": "arxiv:1810.04215v1",
+    "title": "Facial reduction for exact polynomial sum of squares decompositions",
+    "authors": [
+      "Santiago Laplagne"
+    ],
+    "submission_utc": "2018-10-09T19:00:09Z",
+    "retrieved": "2026-10-09 UTC",
+    "urls": {
+      "metadata": "https://arxiv.org/abs/1810.04215v1",
+      "pdf": "https://arxiv.org/pdf/1810.04215v1",
+      "tex_source": "https://arxiv.org/src/1810.04215v1",
+      "license": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+    },
+    "license": "arXiv non-exclusive distribution license 1.0",
+    "files": [
+      {
+        "name": "laplagne-2018-facial-reduction-exact-polynomial-sos-1810.04215v1.pdf",
+        "bytes": 255914,
+        "sha256": "16abe5892e4a956822689a45d60bd821b7d2f91a17521c12542ea2ac9ab2e5ac"
+      },
+      {
+        "name": "laplagne-2018-facial-reduction-exact-polynomial-sos-1810.04215v1.raw.md",
+        "bytes": 62596,
+        "sha256": "2634181dc3c4959b53a83e66f92bb00b89ea83cdf5cec1a030b8992d100da05e"
+      },
+      {
+        "name": "laplagne-1810.04215v1-arxiv-metadata.html",
+        "bytes": 41024,
+        "sha256": "318da6739758a4d902d689d40db3e4ae9da00122d3dd043818d904b5965607ab"
+      },
+      {
+        "name": "laplagne-1810.04215v1-source.tar.gz",
+        "bytes": 21933,
+        "sha256": "92d356b760089f26b9a152b1cf401ebbef96e0a1b6566143c51e881b873818a9"
+      },
+      {
+        "name": "laplagne-1810.04215v1-rationalSOS.tex",
+        "bytes": 66038,
+        "sha256": "707723a14610c5a6301c7211a9ac39cae8ba3156d32649edd4a2a7db573f4dde"
+      },
+      {
+        "name": "laplagne-1810.04215v1-rationalSOS.bbl",
+        "bytes": 2878,
+        "sha256": "ddf8b4457e00928208cd302e2b68ee692199cbd9deca99a686e0e3d12f9253a0"
+      }
+    ],
+    "archive_members": [
+      {
+        "name": "rationalSOS.bbl",
+        "bytes": 2878,
+        "type": "regular file"
+      },
+      {
+        "name": "rationalSOS.tex",
+        "bytes": 66038,
+        "type": "regular file"
+      }
+    ],
+    "archive_safety": {
+      "members_listed_before_extraction": true,
+      "absolute_or_parent_paths": false,
+      "links_or_special_members": false,
+      "total_member_bytes": 68916,
+      "member_count": 2,
+      "selected_members_read_via_tarfile_extractfile": true,
+      "tex_or_embedded_code_executed": false
+    },
+    "extraction": {
+      "command": "pdftotext -layout INPUT.pdf OUTPUT.raw.md",
+      "version": "Poppler pdftotext 25.05.0",
+      "exit": 0,
+      "raw_edited": false,
+      "pdf_pages": 19,
+      "page_chunks": 19,
+      "empty_pages": 0,
+      "raw_utf8": true,
+      "replacement_characters": 0,
+      "cid_markers": 0,
+      "nonwhitespace_control_characters": 15
+    },
+    "page_mapping": "PDF 1-based page equals printed page, 1 through 19",
+    "visual_pages_checked": [
+      1,
+      4,
+      6,
+      7,
+      9,
+      12,
+      14,
+      15,
+      19
+    ],
+    "tex_pdf_identity_checks": [
+      "Exact title and author match.",
+      "Section 3.1 Proposition 3.2 null-vector identity matches printed page 6.",
+      "Section 3.2 Proposition 3.4 field-trace identity matches printed page 6.",
+      "Example 3.5 root polynomial, trace vector, 6x6 matrix and two-square decomposition match printed page 7.",
+      "Theorem 5.1 long polynomial opening/closing terms and stated field match printed page 14.",
+      "The four algebraic-root branches and final proof square match printed page 15."
+    ],
+    "control_artifact_map": [
+      {
+        "pdf_page": 4,
+        "count": 1,
+        "meaning": "parenthesis glyph in Example 2.3 matrix product",
+        "tex_lines": [
+          210,
+          223
+        ]
+      },
+      {
+        "pdf_page": 6,
+        "count": 2,
+        "meaning": "left/right braces around stationary-zero equations",
+        "tex_lines": [
+          323,
+          325
+        ]
+      },
+      {
+        "pdf_page": 7,
+        "count": 4,
+        "meaning": "equation-system braces and gamma tuple parentheses",
+        "tex_lines": [
+          351,
+          357
+        ]
+      },
+      {
+        "pdf_page": 9,
+        "count": 2,
+        "meaning": "equation-system braces",
+        "tex_lines": [
+          441,
+          443
+        ]
+      },
+      {
+        "pdf_page": 12,
+        "count": 1,
+        "meaning": "end-of-proof square",
+        "tex_lines": [
+          574,
+          575
+        ]
+      },
+      {
+        "pdf_page": 15,
+        "count": 5,
+        "meaning": "large braces around first/fourth root branches and end-of-proof square",
+        "tex_lines": [
+          707,
+          710,
+          711,
+          728
+        ]
+      }
+    ],
+    "source_cautions": [
+      "Raw superscripts, fractions, radicals, overbars and matrix structure require the PDF or TeX.",
+      "TeX contains partial-plus-ordinal-character typo at lines 324 and 352; the rendered PDF does not visibly print the ordinal symbol. Do not silently normalize either source.",
+      "Example 3.8 repeats the x derivative three times in both TeX line 442 and printed PDF page 9; this is source content, not an extraction error.",
+      "Page 15 m2 contains variables u,v where surrounding branches use s,t; present in both TeX and PDF. Flag without reconstruction.",
+      "The source is a semantic equation cross-check, not proof that recompilation would reproduce identical PDF bytes.",
+      "PDF creation metadata dates 2021, while pinned arXiv version submission is 2018."
+    ],
+    "render_status": "All nine sampled images legible; initial Fontconfig warning did not prevent rendering.",
+    "retained_paths": {
+      "pdf": "packing/resources/papers/laplagne-2018-facial-reduction-exact-polynomial-sos-1810.04215v1.pdf",
+      "raw": "packing/resources/papers/laplagne-2018-facial-reduction-exact-polynomial-sos-1810.04215v1.raw.md",
+      "tex": "packing/resources/papers/laplagne-2018-facial-reduction-exact-polynomial-sos-1810.04215v1.tex",
+      "source_archive": "packing/resources/web/n17-sos-sources-2026-10-08/laplagne-1810.04215v1-source.tar.gz"
+    },
+    "mathematical_review": {
+      "model": "GPT-6 Astra",
+      "reasoning": "xhigh",
+      "printed_pdf_pages": [
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        14,
+        15
+      ],
+      "scope": "Relevant facial reduction arguments and rational-versus-real counterexample proof read; Maple computations and irreducibility not independently replayed."
+    }
+  }
+}
