@@ -24,8 +24,9 @@ Those statements are author claims here; no author program runs.
 The repository has no licence file, and its README states no reuse terms.
 `certificates/README.md` names the MIT-licensed solver that wrote the certificates,
 which does not license this bundle.
-Under the [existing retention policy](../known-best-packings/README.md) this packet
-therefore keeps no upstream byte: no certificate, decimal pose, SVG, README or program.
+Under the derived-only form of the
+[existing retention policy](../known-best-packings/README.md) this packet keeps no
+upstream byte: no certificate, decimal pose, SVG, README or program.
 No redistribution permission or licence determination is asserted.
 
 [`acquisition/sources.json`](acquisition/sources.json) records the commit, its parent

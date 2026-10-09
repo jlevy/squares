@@ -1,10 +1,11 @@
 """Couzo's five follow-up rational certificates at 2d32a6e: derived custody and replay.
 
-Francisco Couzo's repository states no licence, so under the Couzo retention policy
-(``resources/web/known-best-packings/README.md``, ``devtools.upper_bound_packets``) no
-upstream byte enters Git. ``acquire`` reads a local Git object store at the pinned
-commit, never a checkout, and writes exact rational Witness/v2 facts and the complete
-pinned tree. The packet keeps no certificate, decimal pose, SVG, prose or program.
+Francisco Couzo's repository states no licence, and this packet takes the derived-only
+form of the known-best retention policy (``resources/web/known-best-packings/README.md``,
+``devtools.upper_bound_packets``): no upstream byte enters Git. ``acquire`` reads a
+local Git object store at the pinned commit, never a checkout, and writes exact rational
+Witness/v2 facts and the complete pinned tree. The packet keeps no certificate, decimal
+pose, SVG, prose or program.
 
 Every digest comparison here crosses one boundary (OR-16): Couzo's repository, whose
 bytes stay outside Git. The expected values are its commit, tree and blob identities,
