@@ -296,6 +296,7 @@ def test_recovery_work_ceiling_is_incomplete_not_a_miss(
         tool.construct(rows, groups, prior, mode="point", deadline=deadline())
 
 
+@pytest.mark.slow
 def test_prior_proof_reconstructed_once_and_transitive_bytes_retained(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -336,8 +337,8 @@ def test_regional_mode_uses_transfer_once_not_a_second_prior_check(
     assert result["point_guard_exclusion_proved"] is False
 
 
-@pytest.mark.parametrize("kind", ["digest", "extra_role", "payload", "fresh_geometry"])
-def test_custody_or_fresh_payload_tamper_refuses(
+@pytest.mark.parametrize("kind", ["digest", "extra_role", "payload"])
+def test_custody_tamper_refuses(
     kind: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     doc = fixture(tmp_path, monkeypatch)
@@ -346,15 +347,25 @@ def test_custody_or_fresh_payload_tamper_refuses(
         doc["collective_certificate_sha256"] = "0" * 64
     elif kind == "extra_role":
         doc["transfer_certificate"] = "invented.json"
-    elif kind == "payload":
+    else:
         saved = tmp_path / doc["collective_replay"]
         data = json.loads(saved.read_text())
         data["owners"][0]["rows"][0]["covered"] = True
         raw = json.dumps(data).encode()
         saved.write_bytes(raw)
         doc["collective_replay_sha256"] = hashlib.sha256(raw).hexdigest()
-    else:
-        result["recovered_owned_groups"]["0"] = []
+    with pytest.raises(ValueError, match=r"differs|roles"):
+        tool.check(doc, result, deadline=deadline())
+
+
+@pytest.mark.slow
+def test_fresh_payload_tamper_refuses(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """`check` regenerates the whole payload before it compares, so a changed recovered
+    group is refused only after a second complete generation; the custody tampers above
+    are refused early in the second one."""
+    doc = fixture(tmp_path, monkeypatch)
+    result = tool.generate(doc, deadline=deadline())
+    result["recovered_owned_groups"]["0"] = []
     with pytest.raises(ValueError, match=r"differs|roles"):
         tool.check(doc, result, deadline=deadline())
 
@@ -494,6 +505,7 @@ def direct_fixture(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str,
     return result
 
 
+@pytest.mark.slow
 def test_direct_regional_replays_complete_component_without_reconditioning(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -573,6 +585,7 @@ def test_conflicting_byte_alias_is_refused_before_replacing_held_identity(
         tool.hold_file(path.name, "0" * 64, 100, held, deadline())
 
 
+@pytest.mark.slow
 def test_two_fresh_clean_processes_match_full_new_payload(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
