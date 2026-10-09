@@ -257,6 +257,8 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     afterwards by its existing owner. This is publication adaptation, not certification.
     """
     from devtools import confirm_refinement_records as refinement  # noqa: PLC0415
+    from devtools import evand_arrangement_reports as evand  # noqa: PLC0415
+    from devtools import register_evand_arrangements as evand_adoption  # noqa: PLC0415
     from devtools import render_case_verifiers  # noqa: PLC0415
     from devtools import squish_followup_packets as update  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as confirmation  # noqa: PLC0415
@@ -271,17 +273,18 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     is_refinement = source["source_key"] in {
         item.key for item in refinement.packets.SOURCES.values()
     }
-    if is_refinement or source["source_key"] == second.SOURCE_KEY:
+    if is_refinement or source["source_key"] in (evand.SOURCE_KEY, second.SOURCE_KEY):
         case = safe_load(existing.split("---\n", 2)[1])["packing"]
-        adopter = (
-            refinement.adopt_case
-            if is_refinement
-            else (
+        if is_refinement:
+            adopter = refinement.adopt_case
+        elif source["source_key"] == evand.SOURCE_KEY:
+            adopter = evand_adoption.adopt_case
+        else:
+            adopter = (
                 confirmation.adopt_verified
                 if confirmation.EXACT_EVIDENCE in case["verified_upper_bound"]["evidence"]
                 else second.adopt_report
             )
-        )
         return (
             adopter(n, existing, generated)
             if case["reported_upper_bound"]["source_key"] == source["source_key"]

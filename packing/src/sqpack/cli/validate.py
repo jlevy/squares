@@ -138,10 +138,12 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: corpus tripwires below are the sums over the current retained square motions.
 #: The three T-117/T-118 rational refinements replace the motions at 68, 105 and 292;
 #: these are the corresponding sums from their refreshed retained numerical screen.
+#: The T-119 poses at 266, 270 and 272 were re-screened against their current complete
+#: houses; their motions change only the full-corpus sums.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (27, 94, 86, 570),
     "n=1..200": (66, 539, 182, 2047),
-    "n=1..324": (121, 1494, 302, 4698),
+    "n=1..324": (120, 1500, 302, 4799),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

@@ -1,0 +1,1453 @@
+\documentclass[11pt]{amsart}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\frc}[1]{\{#1\}}
+\DeclareMathOperator{\dist}{dist}
+
+\title[Unbounded deficiency for unit squares at integer side]{Packing $k^2-c$ unit squares: \\ $s(k^2-c)=k$ for all large $k$}
+\author{Sungjoon Ryu}
+\date{Preprint, version 1.2, 7 October 2026}
+
+\raggedbottom
+\begin{document}
+
+\begin{abstract}
+Let $s(n)$ be the side of the smallest square into which $n$ non-overlapping unit squares can be packed.
+We show that for every fixed $c\ge 0$ one has $s(k^2-c)=k$ for all sufficiently large integers $k$.
+Equivalently, if $M(k)$ denotes the largest number of unit squares that can be placed in $[0,k]^2$ so that they are
+pairwise disjoint as closed sets, then $k^2-M(k)\to\infty$; in fact $k^2-M(k)\ge \kappa\log k$ for every $k\ge2$,
+with an absolute constant $\kappa>0$.
+The proof combines a sharpened form of the fundamental lemma of Roth and Vaughan, with an explicit constant and a
+further sharpening for nearly parallel pairs, with two simple observations: a closedness constraint on horizontal
+lines, which is special to integer sides, and a quantization of heights in columns of nearly axis-parallel squares,
+measured from the bottom and from the top side and organised over a continuum of scales; a count of the cracks that can
+break the quantization controls the columns, and an angular argument, sharpened by a computer-assisted branch-and-bound
+computation, bounds the overlap of the Roth--Vaughan rectangles at uncovered points. We obtain $\kappa=0.0353$, and
+$k^2-M(k)\ge(0.0657-o(1))\log k$ as $k\to\infty$. Since $k^2-M(k)\ge1$ for every $k\ge2$ by an
+elementary argument, the logarithmic bound has content only for $\log k>1/\kappa\approx28$, and the result should be
+regarded as qualitative. With Daniel's unrefereed computer-assisted result $s(k^2-3)=k$ ($k\ge6$), $\kappa=0.0541$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For $n\ge 1$ let $s(n)$ denote the side of the smallest square that contains $n$ unit squares with pairwise
+disjoint interiors (rotations allowed). Trivially $s(k^2)=k$, and $s(n)\le \lceil\sqrt n\,\rceil$.
+For $n=k^2-c$ with $c$ small compared with $k$ it is natural to expect that one cannot do better than the trivial
+$k\times k$ grid with $c$ squares removed. Nagamochi \cite{Nag} stated $s(k^2-1)=s(k^2-2)=k$ for all $k\ge2$;
+the scoring assertion of his Lemma~1, on which the published proof rests, has recently been shown to fail
+\cite{Che,Kar} (Karaku\c{s} points out that this does not disprove the rectangle bound that Nagamochi derives from
+it), and replacement proofs have been given: of $s(k^2-1)=k$ in \cite{Kar}, through a weaker rectangle bound proved with
+a strip measure, and of $s(k^2-2)=k$ (which implies $s(k^2-1)=k$), with a formalization in Lean, in \cite{Che}; see also
+the discussion in \cite{Dan}. For $k^2-3$ the values $k=3,\dots,7$ are known
+\cite{KS,Ben10,Ben16} ($k=5,6$ in the preprint \cite{Ben16}), and a computer-assisted proof of $s(k^2-3)=k$ for all $k\ge 6$, not yet refereed, has recently
+been announced \cite{Dan} (see Corollary~\ref{cor:evand} and the paragraph after it); the same repository has since announced, again by a computer-assisted and unrefereed argument, that
+$s(k^2-4)=k$ for all $k\ge5$ \cite[directory \texttt{s12/certificates/k2m4}]{Dan}. Friedman's survey \cite{Fri} contains the conjecture that $s(n^2-c)=n$ implies $s((n+1)^2-c)=n+1$, and Chung and
+Graham \cite[concluding remarks]{CG09} wrote that it seems likely that $s(n^2-1)=n$, and that the same should hold for
+$n^2-c$ unit squares when $c$ is fixed and $n$ is sufficiently large (attributing this to \cite{Fri}).
+On the other hand, $s(k^2-c)<k$ as soon as $c$ is large in terms of $k$: Arslanov, Mustafin and Shangitbayev
+\cite{AMS} show $s(n^2-n)<n$ for $n\ge 12$. Erd\H{o}s and Graham \cite{EG} packed a square of side $x$ with wasted
+area $O(x^{7/11})$, and this exponent was lowered several times (see the introductions of \cite{McC,Bui}); the exponent $3/5$
+was claimed by Chung and Graham \cite{CG}; an error in their argument was
+pointed out by Arslanov and Bui \cite{AB}, and the bound $O(x^{3/5})$ was re-established, independently and by different methods,
+in the preprints of Bui \cite{Bui} and of McClenagan \cite{McC} (the latter based on his 2024 thesis). Applied to $x$ slightly below $k$, this gives $s(k^2-Ck^{3/5})<k$ for large $k$.
+
+Following the notes \cite[file \texttt{s12/search/FRIEDMAN.md}]{Dan}, define
+\[
+c^*(k):=\max\{c\in\Z_{\ge0}:\ s(k^2-c)=k\}.
+\]
+Since $s$ is non-decreasing, $s(k^2-c)=k$ holds exactly for $0\le c\le c^*(k)$, and Friedman's conjecture says
+precisely that $c^*$ is non-decreasing. The results above give $3\le c^*(k)\le O(k^{3/5})$ for $k\ge3$; here the lower
+bound uses the unrefereed announcement \cite{Dan} for $k\ge 8$ (and the later announcement would give $c^*(k)\ge4$ for $k\ge5$), and the upper bound uses the preprints \cite{McC,Bui}
+(the refereed bound $O(x^{(3+\sqrt2)/7}\log x)$ of \cite{CG09} gives $c^*(k)=O(k^{(3+\sqrt2)/7}\log k)$).
+Whether $c^*(k)\to\infty$, i.e.\ whether for every fixed $c$ one has $s(k^2-c)=k$ for
+all large $k$, as expected in \cite{CG09}, is recorded as open in \cite{Dan}, where it is also observed that it does not follow from the lower bound
+of Roth and Vaughan \cite{RV}: their theorem \cite[p.~170, Theorem]{RV} states that the wasted area $w(\alpha)$ in a square of side $\alpha$
+satisfies $w(\alpha)\gg(\alpha\|\alpha\|)^{1/2}$ whenever $\alpha(\alpha-[\alpha])>1/6$, where $\|\alpha\|$ is the
+distance from $\alpha$ to the nearest integer, and this vanishes as $\alpha\to k^-$. We are not aware of a proof in the
+literature that $c^*(k)$ is unbounded.
+
+\begin{theorem}\label{thm:main}
+There is an absolute constant $\kappa>0$ such that for every integer $k\ge 2$, every family of $N$ unit
+squares in $[0,k]^2$ that are pairwise disjoint as closed sets satisfies
+\[
+k^2-N\ \ge\ \kappa\log k .
+\]
+One may take $\kappa=0.0353$ ($\kappa=0.0319$ without the computer-assisted Lemma~\ref{lem:Kw9}, see Remark~\ref{rem:const};
+both constants of this theorem use that lemma). Moreover, for every $k\ge2$ one has
+$k^2-N\ge1.99954\,(\log k-13.06675)/30.418$, so that $k^2-N\ge(0.0657-o(1))\log k$ as $k\to\infty$. (Here and below $\log$ is the
+natural logarithm.)
+\end{theorem}
+
+\begin{corollary}\label{cor:main}
+$c^*(k)\ge \kappa\log k-1$ for $k\ge 2$. In particular $c^*(k)\to\infty$: for every fixed $c$,
+$s(k^2-c)=k$ for all sufficiently large $k$. This confirms the expectation of Chung and Graham \cite{CG09} stated above.
+\end{corollary}
+
+\begin{corollary}[using an unrefereed computer-assisted result]\label{cor:evand}
+Assume that $s(k^2-3)=k$ for every integer $k\ge6$, as announced, with a computer-assisted proof that has not been
+refereed, in \cite[directory \texttt{s12/certificates/k2m3}]{Dan}. Then every family of $N$ unit squares in $[0,k]^2$ that are
+pairwise disjoint as closed sets satisfies $k^2-N\ge4$ if $k\ge6$, and
+\[
+k^2-N\ \ge\ 0.0541\,\log k\qquad\text{for every integer }k\ge2 .
+\]
+\end{corollary}
+
+\begin{proof}
+Let $k\ge6$. Since $s(k^2-3)=k$ is not less than $k$, Lemma~\ref{lem:red} gives $k^2-3>M(k)$, so $k^2-N\ge k^2-M(k)\ge4$.
+Let $F(k):=1.99954\,(\log k-13.06675)/30.418$ be the second bound of Theorem~\ref{thm:main}, and
+$L_4:=13.06675+4\cdot30.418/1.99954=73.91674\ldots$, so that $F(k)\ge4$ exactly when $\log k\ge L_4$. For $2\le k\le5$,
+Corollary~\ref{cor:W1} gives $k^2-N\ge1>0.0541\log5\ge0.0541\log k$. For $k\ge6$ with $\log k\le L_4$ we have $0.0541\log k\le0.0541\,L_4<3.999<4\le k^2-N$.
+For $\log k>L_4$, Theorem~\ref{thm:main} gives $k^2-N\ge F(k)$, and $F(k)/\log k=\frac{1.99954}{30.418}\big(1-\frac{13.06675}{\log k}\big)$
+increases with $\log k$ and equals $4/L_4>0.05411$ at $\log k=L_4$; hence $k^2-N\ge F(k)>0.05411\log k$.
+\end{proof}
+
+The assumption of Corollary~\ref{cor:evand} concerns all $k\ge6$ at once. In \cite{Dan} it is derived, for each such $k$, from a
+measure on $[0,k]^2$ of total mass $k^2-4D$, $D=423621306389/500000000000>3/4$, under which every closed unit square in
+$[0,k]^2$ has mass at least $1$; this property is reduced, for all $k\ge6$ simultaneously, to one finite statement about
+$[0,7]^2$. The reduction and the axis-parallel case of the finite statement are checked in Lean~4 (theorems
+\texttt{bentz\_of\_valid7}, \texttt{validAxis7} and \texttt{bentz\_of\_validTilt7} in \cite{Dan}), while the case of tilted squares is
+certified by an exact computer search in rational arithmetic and is not formalized. The finite statement was certified again by an independently written exact
+checker \cite{Wan}, and the Squares Project \cite[entry T-064]{Lev} replayed both checkers in full and rebuilt the Lean
+reduction. There is no refereed publication of this result, and the recorded reviews of it are by AI agents; the repository
+states that the work was produced by Claude (Anthropic) under human direction. Theorem~\ref{thm:main} does not use
+\cite{Dan}; Corollary~\ref{cor:evand} changes only the constant for all $k$, not the asymptotic slope $0.0657$. The assumption is
+needed only for $6\le k\le e^{58.71}$: for $\log k>13.06675+3\cdot30.418/1.99954=58.7042\ldots$ the second bound of
+Theorem~\ref{thm:main} exceeds $3$, and $W$ is an integer. Through $F$, Corollary~\ref{cor:evand} also uses the computer-assisted
+Lemma~\ref{lem:Kw9}; with $K_w=13$ (Remark~\ref{rem:const}) the same argument gives $4/86.0695\ldots>0.0464$.
+
+Since $k^2-N\ge1$ for every $k\ge2$ (Corollary~\ref{cor:W1}), the bound $\kappa\log k$ says something new only for
+$\log k>1/\kappa\approx28.3$; the second bound of the theorem exceeds $1$ only for $\log k>28.279$, so for smaller $k$ the
+theorem is just Corollary~\ref{cor:W1} (see Remark~\ref{rem:k}).
+
+\noindent\emph{Idea of the proof.}
+On a horizontal line the squares cut out pairwise disjoint closed intervals of $[0,k]$, so at most $k-1$ of
+them have length $\ge 1$ (Lemma~\ref{lem:G}). A square of inclination $a$ is cut in an interval of length
+$\sec a\ge 1$ except near its top and bottom (``ramps'', of height $\sin a$). Hence, unless the line carries
+some waste, it must either cross a square of large inclination, which by a sharpened form of the Roth--Vaughan fundamental lemma (Proposition~\ref{prop:FL}) costs
+waste proportional to the inclination, or cross a nearly axis-parallel square through its ramp. In the latter case
+we look down the column below that square: if the column is ``rigid'' (little vertical waste, only tiny
+inclinations) and avoids the narrow ``ends'' of the squares in it, heights in it are quantized, i.e.\ the square's
+corners sit within $1.265\cdot10^{-5}$ of integers, so its ramp cannot meet a line at a height whose fractional part is
+farther than that from $0$ and $1$. A rigid column through an end of a square must pass through a tight crack between
+two squares, and at most one crack per unit of height fits under a square; so the exceptional columns have measure about
+$1/C$, where $1/(Cs)$ is the inclination threshold for columns at scale $s$. Thus many columns
+must be non-rigid, which again costs waste. Since $k$ is an integer, the same holds for columns hanging from the top
+side. A line at height $y$ is treated with the inclination threshold $1/(C'd(y))$, where $d(y)$ is the distance to the
+nearer of the bottom and the top side, and each column is charged only at the least scale at which it fails to be rigid;
+integrating over heights $y$ with $y_{\min}\le d(y)\lesssim k/2$, where $y_{\min}=236000$ is an absolute constant, with the
+measure $dy/d(y)$ then gives a lower bound of order $\log k$; within this scheme the choice $C'=2\sqrt2$, $C=2$ is optimal.
+Lines this close to the walls can be used because the excess over $1$ of the long chords on a line is itself charged to the
+inclinations of the squares in the columns between them and the nearer side (Lemma~\ref{lem:Eline}), at a cost whose integral against $dy/d(y)$ is
+bounded. Further refinements matter for the constant: on a line
+with little waste the short chords cut from ramps add up to almost a full unit, for nearly parallel, nearly touching
+squares the fundamental lemma holds with a much better constant (Proposition~\ref{prop:FLpar}), and only the uncovered points
+of the Roth--Vaughan rectangles matter, where at most $13$ of them can overlap (Lemma~\ref{lem:Kw}), and at most $9$ by a
+computer-assisted refinement (Lemma~\ref{lem:Kw9}). Only the numerical constants ($\kappa=0.0353$ and the explicit bound)
+depend on the computer: with Lemma~\ref{lem:Kw} alone the proof gives $\kappa=0.0319$ (Remark~\ref{rem:const}).
+
+\section{Closed packings and the reduction}
+
+Throughout, a \emph{square} is a closed unit square. A \emph{closed packing} of $[0,k]^2$ is a finite family of squares
+contained in $[0,k]^2$ that are pairwise disjoint as closed sets. Put $M(k)$ for the maximum size of a closed packing
+of $[0,k]^2$ and, for a given closed packing, $W:=k^2-N$, the area of $[0,k]^2$ not covered by the squares.
+
+\begin{lemma}\label{lem:red}
+For integers $k\ge 2$ and $n\ge 1$: $s(n)<k$ if and only if $n\le M(k)$. Moreover $M(k)\le k^2-1$
+\textup{(}Corollary~\ref{cor:W1} below\textup{)}, so $c^*(k)=k^2-M(k)-1$.
+\end{lemma}
+
+\begin{proof}
+The minimum in the definition of $s(n)$ is attained by compactness. If $n$ squares with disjoint interiors lie in a
+square of side $s<k$, place that square concentrically in $[0,k]^2$, let $O$ be the common centre, and replace each centre $c_i$ by
+$O+\lambda(c_i-O)$ with $\lambda=k/s>1$, keeping orientations. If two of the original squares are separated by a line with normal $u$,
+the separation $u\cdot(c_2-c_1)\ge h_1(u)+h_2(u)$ (where $h_i(u)$ is the half-width of the $i$-th square in direction $u$) becomes strict after
+dilation, and every moved square stays in $[0,k]^2$: in coordinates centred at $O$, $|c_i\cdot e|+h_i(e)\le s/2$ for $e$ a
+coordinate direction implies $\lambda|c_i\cdot e|+h_i(e)\le \lambda s/2-(\lambda-1)h_i(e)\le k/2$. So we obtain a closed packing of $[0,k]^2$ with $n$ squares.
+Conversely, a closed packing has a positive minimum distance $\eta$ between its squares; contracting all centres
+about the centre of $[0,k]^2$ by a factor $\mu<1$ close to $1$ keeps the squares disjoint and places them in a
+concentric square of side $\mu k+(1-\mu)\sqrt 2<k$. Finally, $s(n)\le k$ always holds for $n\le k^2$, so
+for integers $0\le c<k^2$ we have $s(k^2-c)=k$ iff $k^2-c>M(k)$.
+\end{proof}
+
+Thus Theorem~\ref{thm:main} implies Corollary~\ref{cor:main}. Note that $W$ is an integer.
+
+\section{Elementary geometry}
+
+The \emph{inclination} $a(S)\in[0,\pi/4]$ of a square $S$ is the least angle between a side of $S$ and a side of
+$[0,k]^2$; the inclination $\theta(S_1,S_2)$ between two squares is the least angle between their sides
+(this is the quotient metric on $\R/(\pi/2)\Z$, with values in $[0,\pi/4]$), and we write $S_0:=\partial[0,k]^2$ with
+$\theta(S,S_0):=a(S)$. These are the definitions of \cite{RV}. Likewise, for a single side $\sigma$ of $[0,k]^2$ we put
+$\theta(S,\sigma)=\theta(\sigma,S):=a(S)$.
+
+\begin{lemma}\label{lem:geom}
+Let $S$ be a square with inclination $a$ and lowest point at height $v$.
+\begin{enumerate}[label=(\alph*)]
+\item The vertical extent of $S$ is $[v,v+\cos a+\sin a]$.
+\item For $y\in\mathcal M(S):=[v+\sin a,\ v+\cos a]$ (the \emph{middle band}, of length $\cos a-\sin a$) the line
+$y=\mathrm{const}$ meets $S$ in a segment of length $\sec a\ge 1$; for $y$ in the \emph{ramp set}
+$\mathcal R(S):=[v,v+\sin a)\cup(v+\cos a,\ v+\cos a+\sin a]$ the length is $<\sec a$. If $a=0$, then $\mathcal R(S)=\emptyset$.
+\item Symmetrically, for $x$ in the \emph{vertical middle band} $\mathcal M'(S)$, an interval of length
+$\cos a-\sin a$ \textup{(}defined in the proof; for $a=0$ it is the horizontal extent of $S$\textup{)}, the vertical line through $x$ meets $S$ in a segment of length $\sec a$, entering $S$ through a
+side of slope $\pm\tan a$; the lower endpoint of that segment has height in $[v,v+\sin a]$. The complement of
+$\mathcal M'(S)$ in the horizontal extent of $S$ (the \emph{vertical ramp set}) has total length $2\sin a$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For $a=0$ everything is clear. Let $0<a\le\pi/4$ and (up to reflection) let the vertices be
+$P_0=(x_0,v)$, $P_1=P_0+(\cos a,\sin a)$, $P_3=P_0+(-\sin a,\cos a)$, $P_2=P_1+P_3-P_0$, at heights
+$v,\ v+\sin a,\ v+\cos a,\ v+\cos a+\sin a$. For $y\in[v+\sin a,v+\cos a]$ the left and right boundary points lie on
+the parallel sides $P_0P_3$ and $P_1P_2$, which are at distance $1$ and have direction $(-\sin a,\cos a)$; hence the
+horizontal chord is $1/\cos a$. Outside this band one end of the chord lies on $P_0P_1$ or $P_3P_2$, and the chord is
+shorter. For (c), put $\mathcal M'(S):=[x_0,\ x_0+\cos a-\sin a]$ (in the reflected position, its mirror image
+$[x_0-\cos a+\sin a,\ x_0]$). On this interval the lower and upper boundary points lie on $P_0P_1$ and $P_3P_2$,
+parallel sides at distance $1$ with direction $(\cos a,\sin a)$, so the vertical chord is $\sec a$; the lower point
+has height $v+(x-x_0)\tan a\in[v,\ v+(\cos a-\sin a)\tan a]\subset[v,v+\sin a]$. The horizontal extent has length
+$\cos a+\sin a$, so the vertical ramp set has length $2\sin a$.
+\end{proof}
+
+For $y\in[0,k]$ let $\omega(y)$ be the length of the part of the segment $[0,k]\times\{y\}$ not covered by squares
+(the \emph{line waste}); by Fubini $\int_0^k\omega(y)\,dy=W$. Similarly, for a vertical segment $\sigma$ we call the
+length of $\sigma$ not covered by squares its \emph{vertical waste}; integrating the vertical waste of
+$\{x\}\times[0,k]$ over $x$ also gives $W$. Since a packing is finite, all functions of $y$ (or of $x$) considered
+below are piecewise continuous with finitely many pieces, and all sets of $y$ (or of $x$) that we define are finite
+unions of intervals; we shall not comment on measurability again.
+
+\begin{lemma}[closedness]\label{lem:G}
+Let $k\ge 2$. On every horizontal line, the squares of a closed packing of $[0,k]^2$ meet the segment
+$[0,k]\times\{y\}$ in pairwise disjoint closed intervals, and at most $k-1$ of these have length $\ge1$.
+\end{lemma}
+
+\begin{proof}
+Disjointness is inherited from the squares. If $k$ of the intervals had length $\ge 1$, their union would be a closed
+subset of $[0,k]$ of full measure, hence all of $[0,k]$, which is then a disjoint union of $k\ge2$ nonempty closed
+sets, contradicting connectedness.
+\end{proof}
+
+\begin{corollary}\label{cor:W1}
+For $k\ge2$ every closed packing of $[0,k]^2$ has $W\ge1$; that is, $M(k)\le k^2-1$.
+\end{corollary}
+
+\begin{proof}
+$W$ is an integer. If $W=0$, then $\omega(y)=0$ for some (indeed almost every) $y$, so the intervals cut out on that
+line cover $[0,k]$ up to a null set; each has length $\le\sqrt2<k$, so there are at least two, and as in the proof
+of Lemma~\ref{lem:G} their union is a closed set of full measure, hence $[0,k]$, a contradiction.
+\end{proof}
+
+For a square $S$ and $y\in\R$ let $c_S(y)$ be the length of the horizontal chord $S\cap(\R\times\{y\})$ (zero if the line
+misses $S$).
+
+\begin{lemma}[short chords]\label{lem:A}
+Let $k\ge 2$, $y\in(0,k)$ and $0<\alpha\le\frac\pi4$, and suppose that every square meeting the line $y$ has inclination
+$<\alpha$. Then
+\[
+\sum_{S:\ 0<c_S(y)<1}c_S(y)\ >\ 1-\omega(y)-(k-1)(\sec\alpha-1),
+\]
+the sum being over the squares $S$ of the packing. Moreover, for a square $S$ let $\Phi(S):=\{y:0<c_S(y)<1\}$. If
+$a:=a(S)>0$, then $\Phi(S)\subset\mathcal R(S)$, $|\Phi(S)|=2\sin a\cos a$ and $\int_{\Phi(S)}c_S(y)\,dy=\sin a\cos a$; if $a(S)=0$, then
+$\Phi(S)=\emptyset$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:geom}(b), a chord of length $\ge1$ has length at most $\sec a(S)<\sec\alpha$, and by Lemma~\ref{lem:G} there are
+at most $k-1$ such chords on the line; the chords cover a length $k-\omega(y)$ of $[0,k]$, which gives the inequality.
+For the second part let $a>0$ and let $v$ be the height of the lowest point of $S$; in the coordinates of the proof of
+Lemma~\ref{lem:geom}, for $v\le y\le v+\sin a$ the chord joins
+the sides $P_0P_3$ and $P_0P_1$ and has length $(y-v)(\tan a+\cot a)=(y-v)/(\sin a\cos a)$, which is $<1$ exactly for
+$y<v+\sin a\cos a$; symmetrically at the top, and in the middle band the chord is $\sec a\ge1$. Hence $\Phi(S)$ consists of two
+intervals of length $\sin a\cos a$ in $\mathcal R(S)$, on each of which $c_S$ grows linearly from $0$ to $1$, so its integral
+there is $\frac12\sin a\cos a$. If $a=0$, every nonzero chord has length $1$.
+\end{proof}
+
+Without an assumption on the inclinations, the same counting gives a bound in terms of the excess of the long chords.
+
+\begin{lemma}[short chords and the excess of long chords]\label{lem:E}
+Let $k\ge2$ and $y\in(0,k)$, and put
+\[
+E(y):=\sum_{S:\ c_S(y)\ge1}\big(c_S(y)-1\big),
+\]
+the sum being over the squares $S$ of the packing. Then
+\[
+\sum_{S:\ 0<c_S(y)<1}c_S(y)\ \ge\ 1-\omega(y)-E(y).
+\]
+\end{lemma}
+
+\begin{proof}
+The chords $S\cap(\R\times\{y\})$ lie in $[0,k]\times\{y\}$, are pairwise disjoint, and cover a length $k-\omega(y)$ of it. By
+Lemma~\ref{lem:G}, the number $n_L$ of squares with $c_S(y)\ge1$ is at most $k-1$, and these chords have total length
+$n_L+E(y)\le k-1+E(y)$. The remaining chords therefore have total length at least $k-\omega(y)-(k-1)-E(y)$.
+\end{proof}
+
+Under the assumption of Lemma~\ref{lem:A}, $E(y)<(k-1)(\sec\alpha-1)$ by Lemma~\ref{lem:geom}(b), so Lemma~\ref{lem:E} contains
+the inequality of Lemma~\ref{lem:A}; Lemma~\ref{lem:Eline} below bounds $E(y)$ instead by the waste.
+
+\section{A sharpened fundamental lemma and the cost of inclinations}
+
+Throughout this section $k\ge4$, a closed packing of $[0,k]^2$ is fixed, $S_0:=\partial[0,k]^2$, and the \emph{waste} is the set of
+points of $(0,k)^2$ that lie in no square; its area is $W$. (In the proof of Theorem~\ref{thm:main} this section and the next are used only for
+$k\ge10^{12}$; for $2\le k<10^{12}$ the theorem follows from Corollary~\ref{cor:W1}, see Section~6.) We begin with two elementary facts about gaps between convex sets.
+
+\begin{lemma}[convex gaps]\label{lem:cg}
+Let $I$ be an interval of length $\lambda$, let $0\le\varphi\le1$, and let $g\ge0$ be a continuous, convex, piecewise linear
+function on $I$ with finitely many break points, such that $|g'|\ge\varphi$ off the break points and the slope of $g$
+increases by at least $2$ at every break point. Then $\int_Ig\ge\varphi(2-\varphi)\lambda^2/4$.
+\end{lemma}
+
+\begin{proof}
+We may assume $\varphi>0$ and $\lambda>0$. Let $y^*$ be a minimum point of $g$ on the closure of $I$, and let $a$ and
+$b=\lambda-a$ be the lengths of the parts of $I$ to the left and to the right of $y^*$. If $y^*$ is an end point of $I$, then
+$g$ is monotone with $|g'|\ge\varphi$, so $g(y)\ge\varphi|y-y^*|$ and $\int_Ig\ge\varphi\lambda^2/2\ge\varphi(2-\varphi)\lambda^2/4$.
+Otherwise $y^*$ is a break point, since $g'\ne0$ elsewhere; let $-p\le0\le q$ be the slopes of $g$ just to the left and just
+to the right of $y^*$. Then $p,q\ge\varphi$ and $p+q\ge2$, and by convexity $g(y)\ge p(y^*-y)$ for $y<y^*$ and
+$g(y)\ge q(y-y^*)$ for $y>y^*$. By the Cauchy--Schwarz inequality, $\lambda^2=(a+b)^2\le(pa^2+qb^2)(1/p+1/q)$, so
+\[
+\int_Ig\ \ge\ \frac{pa^2+qb^2}2\ \ge\ \frac{\lambda^2}{2(1/p+1/q)} .
+\]
+Let, say, $p\le q$. If $q\ge2-\varphi$, then $1/p+1/q\le1/\varphi+1/(2-\varphi)$. If $q<2-\varphi$, then $q\ge1$ (as
+$p+q\ge2$) and $p\ge2-q$, so $1/p+1/q\le F(q):=1/(2-q)+1/q$; the function $F$ is convex on $(0,2)$ and symmetric about $1$,
+so $F(q)\le F(2-\varphi)=1/\varphi+1/(2-\varphi)$. In both cases $1/p+1/q\le2/(\varphi(2-\varphi))$, and the lemma follows.
+\end{proof}
+
+Let $(s,t)$ be Cartesian coordinates in the plane. For a square $Z$ let $[\tau^-(Z),\tau^+(Z)]$ be its projection to the
+$t$-axis, and for $\tau^-(Z)\le t\le\tau^+(Z)$ let $l_Z(t)$ and $r_Z(t)$ be the least and the largest $s$ with $(s,t)\in Z$.
+The vertices of $Z$ at which $t=\tau^+(Z)$ or $t=\tau^-(Z)$ are its \emph{$t$-extreme} vertices.
+
+\begin{lemma}[boundary functions]\label{lem:bd}
+The function $l_Z$ is convex and $r_Z$ is concave. Each of them is piecewise linear with at most one break point, at which
+the slope of $l_Z$ increases, and that of $r_Z$ decreases, by at least $2$. Off the break points $l_Z'(t)=\tan\psi$, where
+$\psi\in(-\frac\pi2,\frac\pi2)$ is the angle between the $t$-axis and the side of $Z$ containing $(l_Z(t),t)$, and similarly
+for $r_Z$. Moreover $\tau^+(Z)-\tau^-(Z)\ge1$.
+\end{lemma}
+
+\begin{proof}
+If a side of $Z$ is parallel to the $t$-axis, then $l_Z$ and $r_Z$ are constant and $\tau^+(Z)-\tau^-(Z)=1$. Otherwise let
+$w$ be the vertex of $Z$ with the least $s$. The two sides at $w$ have directions $(\cos\gamma,\sin\gamma)$ and
+$(\sin\gamma,-\cos\gamma)$ for some $0<\gamma<\frac\pi2$. The point $(l_Z(t),t)$ lies on the first side for $t\ge t(w)$ and on
+the second for $t\le t(w)$, where $ds/dt$ equals $\cot\gamma=\tan(\frac\pi2-\gamma)$ and $-\tan\gamma=\tan(-\gamma)$,
+respectively; the slope increases at $t(w)$ by $\cot\gamma+\tan\gamma=1/(\sin\gamma\cos\gamma)\ge2$, and $l_Z$ is
+convex. The case of $r_Z$ is symmetric, and $\tau^+(Z)-\tau^-(Z)=\cos\gamma+\sin\gamma\ge1$.
+\end{proof}
+
+For a square $S_1$ and $S_2$ either another square or $S_0$, let
+$L$ be the segment from the centre $c_1$ of $S_1$ to the centre $c_2$ of $S_2$, respectively to a point $c_2$ of $S_0$ nearest to
+$c_1$ (any choice will do), and let $R=R(S_1,S_2)$ be the closed rectangle of points at distance at most $\frac12$ from the line through $L$ whose
+orthogonal projection lies on $L$. This is the rectangle used by Roth and Vaughan \cite[\S3, p.~172]{RV}; the following
+proposition replaces their constant $c=10^{-10}$ by an explicit, much larger one. Let $u$ be the unit vector along $L$
+and $n$ a unit normal, and use the coordinates $(s,t)$ of $c_1+su+tn$; thus $R=\{0\le s\le|L|,\ |t|\le\frac12\}$.
+
+\begin{proposition}[sharpened fundamental lemma]\label{prop:FL}
+Let $\theta:=\theta(S_1,S_2)$, and let $m'$ be the number of squares $Z\notin\{S_1,S_2\}$ of the packing that have a
+$t$-extreme vertex $v\in R$ with $|t(v)|<\frac12$. Let $\mathcal T\subset(-\frac12,\frac12)$ be the set of the numbers $t(v)$
+for these vertices, and let $\lambda_1,\dots,\lambda_q$ be the lengths of the intervals into which the points of $\mathcal T$
+cut $(-\frac12,\frac12)$. Then the waste in $R$ has area at least
+$\frac{\theta(2-\theta)}4\sum_r\lambda_r^2\ge\theta(2-\theta)/(4(m'+1))$.
+\end{proposition}
+
+\begin{proof}
+Centres of squares lie in the convex set $[\frac12,k-\frac12]^2$. If $S_2$ is a square, $L$ lies in this set and $R$
+lies within $\frac12$ of it, so $R\subset[0,k]^2$. If $S_2=S_0$, then $L$ is perpendicular to a side of $[0,k]^2$ nearest
+to $c_1$, and $R$ is the rectangle of width $1$ standing on that side, centred at the foot of $L$; since
+$c_1\in[\frac12,k-\frac12]^2$, again $R\subset[0,k]^2$, and $[0,k]^2$ lies in the half-plane $\{s\le|L|\}$.
+Let $\Sigma:=\{|t|<\frac12\}$ be the open strip, $\lambda_t$ the line at height $t$, and $\ell_t:=\lambda_t\cap R$ for $|t|<\frac12$.
+The points $c_1+tn$ with $|t|<\frac12$ are at distance less than $\frac12$ from $c_1$, hence interior points of $S_1$;
+likewise the points $c_2+tn$ are interior points of $S_2$ if $S_2$ is a square.
+
+(a) \emph{Squares in the strip.} Let $Z\notin\{S_1,S_2\}$ be a square that meets some chord $\ell_{t_0}$, $|t_0|<\frac12$. The
+convex set $Z\cap\Sigma$ contains no interior point of $S_1$ or $S_2$, so it misses the segment $\Sigma\cap\{s=0\}$ and, if $S_2$
+is a square, the segment $\Sigma\cap\{s=|L|\}$; it therefore lies on one side of each of them, and as it meets $\ell_{t_0}$, we get
+$Z\cap\Sigma\subset R$ (in the wall case we also use $Z\subset\{s\le|L|\}$). Hence for $|t|<\frac12$ the square $Z$ meets $\ell_t$
+if and only if $\tau^-(Z)\le t\le\tau^+(Z)$, in the coordinates $(s,t)$. If $|\tau^+(Z)|<\frac12$, a $t$-extreme vertex of $Z$
+at which $t=\tau^+(Z)$ lies in $Z\cap\Sigma\subset R$, so $Z$ is one of the $m'$ squares of the statement; the same holds for
+$\tau^-(Z)$. Since $\tau^+(Z)-\tau^-(Z)\ge1$ (Lemma~\ref{lem:bd}), at most one of $\tau^\pm(Z)$ lies in $(-\frac12,\frac12)$.
+
+Consequently the numbers $\tau^\pm(Z)$ in $(-\frac12,\frac12)$, for all such $Z$, are exactly the points of $\mathcal T$, and
+$\mathcal T$ has at most $m'$ elements. Cutting $(-\frac12,\frac12)$ at the points of $\mathcal T$ gives $q\le m'+1$ open intervals
+$I_r$ of lengths $\lambda_r$, with $\sum_r\lambda_r=1$.
+
+(b) \emph{The same squares in the same order.} Fix $r$. By (a), for every square $Z\notin\{S_1,S_2\}$ either $Z$ meets $\ell_t$
+for all $t\in I_r$ or for none. Two disjoint compact convex sets that both meet all the lines $\lambda_t$, $t\in I_r$, are
+strictly separated by a line that is not parallel to $u$, so they appear in the same order on all these lines. Hence for
+$t\in I_r$ the chord $\ell_t$ meets the same squares in the same order, say $Z_0=S_1,Z_1,\dots,Z_M$, followed by $Z_{M+1}=S_2$
+(or the wall $S_0$). For $1\le i\le M+1$ and $t\in I_r$ let
+\[
+g_i(t):=l_{Z_i}(t)-r_{Z_{i-1}}(t)\ \ge0
+\]
+(with $l_{Z_{M+1}}\equiv|L|$ in the wall case); this is the length of the uncovered part of $\ell_t$ between $Z_{i-1}$ and
+$Z_i$, since by (a) the chord of each $Z_i$, $1\le i\le M$, on the line $\lambda_t$ lies in $\ell_t$. The regions swept by these
+uncovered parts for different $i$ and $r$ are disjoint parts of the waste in $R$.
+
+(c) \emph{Each gap is convex.} By Lemma~\ref{lem:bd}, $g_i$ is convex and piecewise linear on $I_r$, and at each of its break
+points its slope increases by at least $2$. Off the break points, $g_i'=\tan\psi'-\tan\psi$, where $\psi,\psi'\in(-\frac\pi2,\frac\pi2)$
+are the angles between $n$ and the sides of $Z_{i-1}$ and $Z_i$ (or the wall) bounding the gap, so
+\[
+|g_i'|\ \ge\ |\psi'-\psi|\ \ge\ \varphi_i:=\theta(Z_{i-1},Z_i),
+\]
+because the direction of a side of a square is congruent modulo $\pi/2$ to the orientation of the square. As
+$\varphi_i\le\frac\pi4<1$, Lemma~\ref{lem:cg} gives $\int_{I_r}g_i\ge\varphi_i(2-\varphi_i)\lambda_r^2/4$.
+
+(d) \emph{Summation.} By the triangle inequality for inclinations, $\sum_{i=1}^{M+1}\varphi_i\ge\theta$. Put
+$\varphi_i':=\min(\varphi_i,\theta)$; then $\sum_i\varphi_i'\ge\theta$ (either some $\varphi_i\ge\theta$, or $\varphi_i'=\varphi_i$ for all $i$), and
+since $x(2-x)$ is increasing on $[0,1]$,
+\[
+\sum_i\varphi_i(2-\varphi_i)\ \ge\ \sum_i\varphi_i'(2-\varphi_i')\ \ge\ (2-\theta)\sum_i\varphi_i'\ \ge\ \theta(2-\theta).
+\]
+Summing over $i$ and $r$, the waste in $R$ has area at least
+\[
+\sum_r\frac{\theta(2-\theta)\lambda_r^2}{4}\ \ge\ \frac{\theta(2-\theta)}{4q}\Big(\sum_r\lambda_r\Big)^2\ \ge\ \frac{\theta(2-\theta)}{4(m'+1)}.
+\qedhere
+\]
+\end{proof}
+
+For nearly parallel, nearly touching pairs the bound $\sum_r\lambda_r^2\ge1/(m'+1)$ is far from the truth: the cut points can
+only come from squares wedged into the two small triangles left free by $S_1$ and $S_2$ in $R$, and few of them fit there.
+We first record an elementary fact about sections of a square.
+
+\begin{lemma}[sections near a vertex]\label{lem:cone}
+Let $Z$ be a square, $e$ a unit vector, and $v$ a vertex of $Z$ at which $p\mapsto p\cdot e$ is smallest on $Z$. For
+$0\le\nu\le\frac34$ the line $\{p:p\cdot e=v\cdot e+\nu\}$ meets $Z$ in a segment of length at least $\min(2\nu,1)$.
+\end{lemma}
+
+\begin{proof}
+Measure heights by $p\cdot e-v\cdot e$, and let $0\le\psi\le\frac\pi2$ be the angle between one side at $v$ and the line
+$\{p\cdot e=v\cdot e\}$; the neighbours of $v$ are at heights $\sin\psi$ and $\cos\psi$, and the opposite vertex at
+$\sin\psi+\cos\psi\ge1$. If $\psi\in\{0,\frac\pi2\}$ every section at height $\nu\in(0,1]$ has length $1$. Otherwise the section at
+height $\nu$ has length $\nu/(\sin\psi\cos\psi)\ge2\nu$ for $\nu\le\min(\sin\psi,\cos\psi)$, length $1/\max(\sin\psi,\cos\psi)\ge1$ for
+$\nu$ between $\min(\sin\psi,\cos\psi)$ and $\max(\sin\psi,\cos\psi)$, and length $(\sin\psi+\cos\psi-\nu)/(\sin\psi\cos\psi)$ for larger $\nu$.
+In the last case, if $\nu\le\frac34$, then $\sin\psi,\cos\psi\le\frac34$; with $p:=\sin\psi+\cos\psi\in[1,\sqrt2]$ we get
+$p-\sin\psi\cos\psi=1-\frac12(p-1)^2\ge0.91>\nu$, so the length exceeds $1$.
+\end{proof}
+
+\begin{proposition}[nearly parallel pairs]\label{prop:FLpar}
+Let $S_1$ be a square and $S_2$ a square or $S_0$, at distance less than $d$, with $\theta:=\theta(S_1,S_2)\le\theta_1$, where
+$d,\theta_1\le10^{-5}$. Then $\sum_r\lambda_r^2\ge Q_*:=0.32$ in Proposition~\ref{prop:FL}, so the waste in $R(S_1,S_2)$ has
+area at least $Q_*\theta(2-\theta)/4$.
+\end{proposition}
+
+\begin{proof}
+Put $\varepsilon_1:=d+\theta_1\le2\cdot10^{-5}$ and $\varepsilon_0:=10^{-4}$. We use the notation of the proof of
+Proposition~\ref{prop:FL}; recall that every square $Z$ contributing a point of $\mathcal T$ satisfies $Z\cap\Sigma\subset R$ and
+$Z\cap(S_1\cup S_2)=\emptyset$. A point $\tau\in\mathcal T$ is \emph{deep} if $|\tau|\le\frac12-\varepsilon_0$. For each deep $\tau$
+fix a square $Z$ with $\tau^-(Z)=\tau$ or $\tau^+(Z)=\tau$; we call $\tau$ an \emph{upper} point in the first case, when $Z$ lies in
+$\{t\ge\tau\}$, with \emph{depth} $\frac12-\tau$, and a \emph{lower} point in the second case, with depth $\tau+\frac12$.
+Different points come from different squares, since at most one of $\tau^\pm(Z)$ lies in $(-\frac12,\frac12)$. For $t$ in the
+$t$-range of a set $X$ let $J_X(t)$ be the section of $X$ by the line $\lambda_t=\{p:t(p)=t\}$.
+
+(a) \emph{Shallow points.} Let $\lambda_r'$ be the lengths of the intervals into which the deep points cut $(-\frac12,\frac12)$.
+Adding the shallow points (those in $(\frac12-\varepsilon_0,\frac12)$ or $(-\frac12,-\frac12+\varepsilon_0)$) cuts only the top and
+the bottom interval, say of lengths $m_+\le1$ and $m_-\le1$; parts of length at least $m_+-\varepsilon_0$ and $m_--\varepsilon_0$ remain
+uncut, so $\sum_r\lambda_r^2\ge\sum_r\lambda_r'^2-4\varepsilon_0$ (if top and bottom interval coincide, the bound is
+$(1-2\varepsilon_0)^2$).
+
+(b) \emph{The wall case.} Let $S_2=S_0$. For each side of $[0,k]^2$ the distance from $S_1$ to that side equals the distance from
+$c_1$ to it minus $\frac12(\cos\theta+\sin\theta)$, so the side on which $R$ stands is also a side nearest to $S_1$. In coordinates in
+which $R=[-\frac12,\frac12]\times[0,|L|]$ stands on the $x$-axis and $t(p)=x$, $S_1$ has inclination $\theta$ and centre $(0,|L|)$, so it
+contains the square $(0,|L|)+[-\frac{\sigma_\theta}2,\frac{\sigma_\theta}2]^2$ with $\sigma_\theta:=1/(\cos\theta+\sin\theta)\ge1-\theta$; its lowest point is
+at height $<d$, so $|L|<d+\frac12(\cos\theta+\sin\theta)$ and $R\setminus S_1\subset\{y<|L|-\frac{\sigma_\theta}2\}\cup\{|x|>\frac{\sigma_\theta}2\}$, where
+$|L|-\frac{\sigma_\theta}2<d+\theta\le\varepsilon_1$. If $\tau=\tau^-(Z)$ were deep, Lemma~\ref{lem:cone} would give, for $0<\nu\le\varepsilon_0/2$, a
+section of $Z$ of length $\ge2\nu$ on the line $x=\tau+\nu$, which satisfies $|x|\le\frac12-\frac{\varepsilon_0}2<\frac{1-\theta}2\le\frac{\sigma_\theta}2$ (as $\theta<\varepsilon_0$); this section lies in $R\setminus S_1$,
+hence in $\{y<\varepsilon_1\}$, which is impossible for $\nu=\varepsilon_0/2>\varepsilon_1/2$. The same holds for $\tau^+$. So there are no deep
+points, and $\sum\lambda_r^2\ge(1-2\varepsilon_0)^2>Q_*$.
+
+(c) \emph{Normal form.} Let now $S_2$ be a square. Two disjoint convex polygons are separated by a line parallel to a side of
+one of them (the origin lies outside the convex polygon $S_1-S_2$, whose sides are parallel to sides of $S_1$ or $S_2$, so it
+violates one of the inequalities defining that polygon). Exchanging $S_1$ and $S_2$ if necessary (this does not change $R$ or
+$\sum\lambda_r^2$) and choosing coordinates, we may assume $S_1=[-\frac12,\frac12]^2$, $S_2\subset\{x\ge\frac12\}$, and $c_2=(a,b)$ with
+$b\ge0$. Then $S_2$ has inclination $\theta$, its projections to the axes have length $w:=\cos\theta+\sin\theta\in[1,1+\theta]$, and
+$S_2$ contains the axis-parallel square $S_2^\circ:=c_2+[-\frac{\sigma_\theta}2,\frac{\sigma_\theta}2]^2$, $\sigma_\theta:=1/w\ge1-\theta$. Since
+$S_2\subset\{x\ge\frac12\}$ and some point of $S_2$ is within $d$ of $S_1$, we have $1\le a<1+d+\frac\theta2$, $0\le b<1+d+\frac\theta2$, and
+$\ell:=a-\frac{\sigma_\theta}2$, the abscissa of the left side of $S_2^\circ$, satisfies $\frac12\le\ell<\frac12+d+\theta$. Put
+$h:=b/a\in[0,1+\varepsilon_1)$ and $\rho_h:=\sqrt{1+h^2}$, so that $|L|=a\rho_h$, and take $n=(-b,a)/|L|$, so that
+$t(x,y)=(ay-bx)/|L|$. A direct computation gives the levels of the vertices $V_1=(\frac12,\frac12)$, $V_2=(-\frac12,\frac12)$,
+$V_3=(\frac12,-\frac12)$ of $S_1$ and $V_1'=(\ell,b-\frac{\sigma_\theta}2)$, $V_2'=(\ell,b+\frac{\sigma_\theta}2)$,
+$V_3'=(\ell+\sigma_\theta,b-\frac{\sigma_\theta}2)$ of $S_2^\circ$:
+\begin{gather*}
+t(V_1)=\tfrac{1-h}{2\rho_h},\qquad t(V_2)=\tfrac{1+h}{2\rho_h},\qquad t(V_3)=-\tfrac{1+h}{2\rho_h},\\
+t(V_1')=-\sigma_\theta\tfrac{1-h}{2\rho_h},\qquad t(V_2')=\sigma_\theta\tfrac{1+h}{2\rho_h},\qquad t(V_3')=-\sigma_\theta\tfrac{1+h}{2\rho_h}.
+\end{gather*}
+On the line $\lambda_t$, with $s$ as coordinate, the lines $x=\frac12$, $x=\ell$, $y=\frac12$, $y=b-\frac{\sigma_\theta}2$ are met at
+$s=\frac{\rho_h}2+ht$, $s=\rho_h\ell+ht$, $s=(\frac{\rho_h}2-t)/h$ and $s=(\rho_h(b-\frac{\sigma_\theta}2)-t)/h$ respectively ($h>0$).
+
+(d) \emph{The free gap.} For $|t|<\frac12$ the points $c_1+tn$ and $c_2+tn$ lie in the interiors of $S_1$ and $S_2$, and
+$J_R(t)$ is the segment between them. Hence, if $Z$ contributes a point of $\mathcal T$ and $J_Z(t)\neq\emptyset$ with $|t|<\frac12$,
+then $J_Z(t)\subset J_R(t)\setminus(S_1\cup S_2)$ lies between $J_{S_1}(t)$ and $J_{S_2}(t)\supset J_{S_2^\circ}(t)$, and
+$|J_Z(t)|\le\Gamma(t)$, where $\Gamma(t)$ denotes the distance from the right end of $J_{S_1}(t)$ to the left end of
+$J_{S_2^\circ}(t)$. The right end of $J_{S_1}(t)$ lies on $x=\frac12$ for $t(V_3)\le t\le t(V_1)$ and on $y=\frac12$ for
+$t(V_1)\le t\le t(V_2)$; the left end of $J_{S_2^\circ}(t)$ lies on $y=b-\frac{\sigma_\theta}2$ for $t(V_3')\le t\le t(V_1')$ and on
+$x=\ell$ for $t(V_1')\le t\le t(V_2')$. If $h\le1$, put $t_{\rm lo}:=t(V_1')$ and $t_{\rm hi}:=\min(t(V_1),t(V_2'))$; for
+$t\in[t_{\rm lo},t_{\rm hi}]$ the two ends lie on $x=\frac12$ and $x=\ell$, so $\Gamma(t)=\rho_h(\ell-\frac12)$. If $h>1$, put
+$t_{\rm lo}:=t(V_1)<0$ and $t_{\rm hi}:=t(V_1')$; for $t\in[t_{\rm lo},t_{\rm hi}]$ they lie on $y=\frac12$ and $y=b-\frac{\sigma_\theta}2$,
+so $\Gamma(t)=\rho_h(b-\frac{\sigma_\theta}2-\frac12)/h$. In both cases $\Gamma\le\gamma_*:=1.415\,\varepsilon_1$ on $[t_{\rm lo},t_{\rm hi}]$, since
+$\ell-\frac12<\varepsilon_1$, $b-\frac{\sigma_\theta}2-\frac12<\varepsilon_1$, $\rho_h\le1.415$, and $\rho_h/h\le\sqrt2$ for $h>1$.
+
+(e) \emph{Depths.} Let $\tau=\tau^-(Z)$ be an upper point and suppose $\tau<t_{\rm hi}-1.5\gamma_*$. Put $t':=\tau+0.75\gamma_*$ if
+this is $\ge t_{\rm lo}$, and $t':=t_{\rm lo}$ otherwise. Then $t'\in[t_{\rm lo},t_{\rm hi}]$, $|t'|<\frac12$, and
+$0.75\gamma_*\le t'-\tau<\frac12$ (note $t_{\rm lo}\le0$ and $\tau\ge-\frac12+\varepsilon_0$), so by Lemma~\ref{lem:cone} and (d),
+$\gamma_*\ge\Gamma(t')\ge|J_Z(t')|\ge\min(2(t'-\tau),1)\ge1.5\gamma_*$, a contradiction. Hence every upper
+point has depth at most $D_u:=\frac12-t_{\rm hi}+1.5\gamma_*$, and symmetrically (using $t':=\tau-0.75\gamma_*$ or $t_{\rm hi}$) every
+lower point has depth at most $D_l:=\frac12+t_{\rm lo}+1.5\gamma_*$; in particular $D_u+D_l=1-(t_{\rm hi}-t_{\rm lo})+3\gamma_*\le1+\beta_1$
+with $\beta_1:=3\gamma_*$. Let $D(h):=\frac12-\frac{1-h}{2\rho_h}$; it is increasing, with derivative $(1+h)/(2\rho_h^3)$, and
+$D(h)\ge\frac12$ for $h\ge1$. By (c), if $h\le1$ then $\frac12-t(V_1)=D(h)$, $\frac12-t(V_2')\le\frac12-\frac{1+h}{2\rho_h}
++\frac{1+h}{2\rho_h}\theta\le0.71\theta$ (as $(1+h)/\rho_h\le\sqrt2$ for $0\le h\le1$) and $\frac12+t(V_1')\le D(h)+\frac\theta2$, while if $h>1$ then $\frac12-t(V_1')$ and
+$\frac12+t(V_1)$ are at most $\frac12\le D(h)$; so in all cases $D_u,D_l\le D(h)+0.71\theta+1.5\gamma_*\le D(h)+3\varepsilon_1$
+(as $\theta\le\varepsilon_1$ and $1.5\gamma_*<2.13\,\varepsilon_1$).
+
+(f) \emph{Two points on the same side.} Suppose $D(h)\ge0.19$; then $h\ge0.344$ (as $D(0.344)<0.19$), so that
+$\tau_*:=t(V_2')-\frac12>0$ and $t(V_1)\le t(V_2')\le t(V_2)$. Let $Z$ give an upper point $\tau$ of depth $\zeta$. Then
+\[
+t(V_2')-\tau=\zeta+\tau_*\ \le\ D_u+\tau_*\ \le\ D(h)+\frac{1+h}{2\rho_h}-\frac12+3\varepsilon_1\ =\ \frac h{\rho_h}+3\varepsilon_1\ <\ \frac34,
+\]
+and $\tau\ge\frac12-D_u>-0.02$. Hence for $t\in[\tau,t(V_2')]$ each of $Z$, $S_1$, $S_2^\circ$ has a nonempty section on $\lambda_t$ (the
+$t$-ranges of $S_1$ and $S_2^\circ$ contain $[t(V_3'),t(V_2')]\supset[-0.6,t(V_2')]$, and that of $Z$ contains $[\tau,\tau+1]$); the end points
+of these sections depend continuously on $t$ and the three sets are pairwise disjoint, so their order on $\lambda_t$ does not
+depend on $t$. By (d), applied at a level in $[\tau,\frac12)$, $J_Z(t)$ lies between $J_{S_1}(t)$ and $J_{S_2^\circ}(t)$ for all
+$t\in[\tau,t(V_2')]$. At the level $t(V_2')$ the section of $S_2^\circ$ is the point $V_2'$, and that of $S_1$ ends on the side $y=\frac12$;
+by (c) the gap between them is
+\[
+\Gamma_*:=\rho_h\Big(\ell-\frac12\Big)+\frac{\rho_h}{2h}\big(h-1+\sigma_\theta(1+h)\big)\ \le\ \rho_h+\rho_h\Big(\ell-\frac12\Big)\ <\ 2,
+\]
+and by Lemma~\ref{lem:cone} the section $J_Z(t(V_2'))$ has length at least $\min(2(\zeta+\tau_*),1)$. Now let two upper points of depths
+$\zeta'\le\zeta$ come from squares $Z',Z$. Their sections at the level $t(V_2')$ are disjoint and lie in a segment of length
+$\Gamma_*$; hence $\zeta'+\tau_*<\frac12$. If $\zeta+\tau_*\le\frac12$, then $2(\zeta'+\tau_*)+2(\zeta+\tau_*)\le\Gamma_*$, that is,
+$\zeta'\le\chi_u-\zeta$ with $\chi_u:=\frac12\Gamma_*-2\tau_*$. If $\zeta+\tau_*>\frac12$, then $2(\zeta'+\tau_*)+1\le\Gamma_*$, so
+\[
+\zeta'\ \le\ \frac{\Gamma_*}2-t(V_2')\ =\ \frac{h(h-1)}{2\rho_h}+\frac{\rho_h}2\Big(\ell-\frac12\Big)-\frac{(1-\sigma_\theta)(1+h)(1-h)^2}{4h\rho_h}
+\ <\ 1.1\,\varepsilon_1\ <\ \varepsilon_0,
+\]
+which is impossible for a deep point; so in this case there is at most one upper point. With
+$\chi(h):=1+\frac{\rho_h}2-\frac{1+h}{\rho_h}$ we get $\chi_u\le\chi(h)+(1-\sigma_\theta)\frac{1+h}{\rho_h}+\frac{\rho_h}2(\ell-\frac12)\le\chi(h)+2.2\varepsilon_1$.
+The lower points are treated in the same way below the strip, down to the level $-\frac12-\tau_*=t(V_3')$, where the section of
+$S_2^\circ$ is the point $V_3'$ and that of $S_1$ ends on $x=\frac12$ (as $t(V_3)\le t(V_3')\le t(V_1)$), at distance
+$\Gamma_l:=\rho_h(a-\frac{1-\sigma_\theta}2)\le\rho_h+\rho_h(a-1)$. For two lower points of depths $\zeta'\le\zeta$ this gives
+$\zeta'\le\chi_l-\zeta$ if $\zeta+\tau_*\le\frac12$, where $\chi_l:=\frac12\Gamma_l-2\tau_*\le\chi(h)+(1-\sigma_\theta)\frac{1+h}{\rho_h}+
+\frac{\rho_h}2(a-1)\le\chi(h)+2.2\varepsilon_1$, and $\zeta'\le\frac12\Gamma_l-\frac12-\tau_*\le\frac{h(h-1)}{2\rho_h}+\frac{\rho_h}2(a-1)+
+(1-\sigma_\theta)\frac{1+h}{2\rho_h}<1.8\,\varepsilon_1<\varepsilon_0$ otherwise.
+
+(g) \emph{Conclusion.} Let $\zeta_u\ge\zeta_u'$ ($\zeta_l\ge\zeta_l'$) be the largest and the second largest depth of an upper (lower)
+point, with the value $0$ if there is no such point. Consider the intervals $(\frac12-\zeta_u+\beta_1,\frac12-\zeta_u')$,
+$(-\frac12+\zeta_l',-\frac12+\zeta_l-\beta_1)$ and $(-\frac12+\zeta_l,\frac12-\zeta_u)$ (some may be empty). They contain no deep point: upper
+points have depth $\zeta_u$, $\zeta_u'$ or less than $\zeta_u'$, and lower points lie at levels $\le-\frac12+D_l\le\frac12-D_u+\beta_1\le
+\frac12-\zeta_u+\beta_1$; symmetrically for the second interval. They are pairwise disjoint, by the same inequality. Hence, with
+$\mu_u:=\zeta_u-\zeta_u'$ and $\mu_l:=\zeta_l-\zeta_l'$,
+\[
+\sum_r\lambda_r'^2\ \ge\ (1-\zeta_u-\zeta_l)_+^2+(\mu_u-\beta_1)_+^2+(\mu_l-\beta_1)_+^2\ \ge\ (1-\zeta_u-\zeta_l)_+^2+\mu_u^2+\mu_l^2-2.04\beta_1,
+\]
+since $(\mu-\beta_1)_+^2\ge\mu^2-2\beta_1\mu$ and $\mu\le D_u,D_l\le0.51$. If $D(h)<0.19$, then $\zeta_u,\zeta_l<0.1906$ and
+$\sum\lambda_r'^2\ge(1-0.3812)^2>0.38$, so by (a) $\sum_r\lambda_r^2\ge0.38-4\varepsilon_0>Q_*$. Let $D(h)\ge0.19$ and $\chi_*:=\max(\chi_u,\chi_l)$. By (f), on each side either $\mu=\zeta$ (at
+most one point) or $\mu\ge(2\zeta-\chi_*)_+$; in both cases $\mu^2\ge\xi(\zeta):=\min\{\zeta^2,((2\zeta-\chi_*)_+)^2\}$. Hence
+$\sum\lambda_r'^2\ge\Xi(\zeta_u,\zeta_l)-2.04\beta_1$ with $\Xi(z,z'):=(1-z-z')_+^2+\xi(z)+\xi(z')$. The function $\chi$ decreases on
+$[0,h_c]$ and increases on $[h_c,\infty)$, where $h_c^3+3h_c-2=0$ (indeed $\chi'(h)=(h^3+3h-2)/(2\rho_h^3)$), so
+$\chi_*\le\max(\chi(0.344),\chi(1.00002))+2.2\varepsilon_1<0.29295$. If $z+z'>1$, then $z,z'>0.49>\chi_*$ (as $z,z'\le\max(D_u,D_l)\le D(h)+3\varepsilon_1\le0.51$ by (e)) and $\Xi(z,z')\ge z^2+z'^2>0.48$.
+Otherwise, choosing one of the two expressions for each of $\xi(z)$ and $\xi(z')$, $\Xi$ is bounded below by the least of:
+$(1-z-z')^2+z^2+z'^2\ge\frac13$; $(1-z-z')^2+z^2+((2z'-\chi_*)_+)^2\ge\frac12(1-z')^2+((2z'-\chi_*)_+)^2\ge\frac19(2-\chi_*)^2$ (the
+minimum is at $z'=\frac{1+4\chi_*}9$; for $z'\le\frac{\chi_*}2$ the bound is $\frac12(1-\frac{\chi_*}2)^2$, which is larger); and
+$(1-z-z')^2+((2z-\chi_*)_+)^2+((2z'-\chi_*)_+)^2\ge\frac23(1-\chi_*)^2$ (a convex symmetric function, minimal at $z=z'=\frac{1+2\chi_*}6$).
+For $\chi_*<0.29295$ all these exceed $0.3237$, so $\sum\lambda_r'^2\ge0.3237-2.04\beta_1>0.3235$ (as $\beta_1=3\gamma_*\le8.5\cdot10^{-5}$). By (a),
+$\sum_r\lambda_r^2\ge0.3235-4\varepsilon_0>Q_*$.
+\end{proof}
+
+\begin{remark}
+Roth and Vaughan \cite[\S3, pp.~172--173]{RV} assume that $S_1$ and $S_2$ are at distance at most $1$, bound the number $m$ of
+squares meeting $R$ by $20$, and use a single strip of width $1/(4m+1)$ parallel to $L$ that contains no vertex in its
+interior, and a single trapezoid in it; this gives the lower bound $(4m+1)^{-2}\tan(\theta/2m)$, about
+$3.8\cdot10^{-6}\,\theta$ for $m=20$, and their lemma is stated with $c=10^{-10}$ \cite[p.~171, (3)]{RV}. In Proposition~\ref{prop:FL} the strip is cut
+only where the set of squares met by the chords changes, the gaps are allowed to be convex rather than affine, and all
+sub-bands and gaps are summed; with the count of Lemma~\ref{lem:count}(a) this gives $\theta(2-\theta)/40\ge\theta/33$ for pairs at
+distance less than $10^{-4}$, and Proposition~\ref{prop:FLpar} gives $0.32\,\theta(2-\theta)/4\ge\theta/6.26$ for pairs at distance
+less than $10^{-5}$ that are moreover nearly parallel. In randomized adversarial searches (with $S_2$ perturbed as in
+Proposition~\ref{prop:FLpar}) we found no configuration with $\sum\lambda_r^2<\frac13$; the value $\frac13$ is attained by two
+squares wedged into the two triangles at depth $\frac13$, and two deep points never seemed to share a triangle. Roth and Vaughan's standing
+assumption $\alpha(\alpha-[\alpha])>1/6$ on the side of the container plays no role here. A version of their lemma for squares
+joined by a path, with a constant derived from theirs, is given in \cite[Section~4]{BuiGood}.
+\end{remark}
+
+Let $\mathcal V_h$ consist of the squares of the packing together with the left and the right side of $[0,k]^2$. Two
+distinct members $P,Q$ of $\mathcal V_h$ are \emph{consecutive on the line $y$} ($0<y<k$) if both meet the segment
+$[0,k]\times\{y\}$ and the open segment between them on that line meets no square. Let $G_h$ be the graph on
+$\mathcal V_h$ in which $P$ and $Q$ are adjacent if they are consecutive on a set of lines $y$ of positive measure.
+Define $\mathcal V_v$ and $G_v$ in the same way, with vertical lines and the bottom and the top side of $[0,k]^2$.
+
+\begin{lemma}[visibility graphs are planar]\label{lem:planar}
+The graphs $G_h$ and $G_v$ are planar.
+\end{lemma}
+
+\begin{proof}
+We treat $G_h$. For every edge $e=\{P,Q\}$ choose a line $y_e\in(0,k)$ on which $P$ and $Q$ are consecutive, with
+$y_e\ne y_{e'}$ for $e\ne e'$ (each edge has a set of such lines of positive measure). Let $P$ be to the left of $Q$ on
+$y_e$, and let $a_e\in P$ and $b_e\in Q$ be the end points of the segment between them; $a_e\ne b_e$ if both are
+squares, since they are disjoint (if one of them is a side, possibly $a_e=b_e$, and the middle piece of the path below is empty). Represent a square by its centre, the left side by $o_-:=(-2,k/2)$ and the right side
+by $o_+:=(k+2,k/2)$, and draw $e$ as the path from the representative of $P$ to $a_e$, along $[a_e,b_e]$, and on to the
+representative of $Q$. Here the piece inside a square is the segment from its centre to the boundary point; it lies in
+the square, and all its points except the last one are interior points. The piece for the left side is the segment
+from $o_-$ to $(-1,y_e)$ followed by the segment from $(-1,y_e)$ to $(0,y_e)=a_e$, and symmetrically for the right side.
+Two such paths meet only in common end points. Indeed, segments from the centre of a square to distinct boundary points
+(the points $a_e$, $b_e$ of different edges lie on different lines) meet only at the centre, and different squares are
+disjoint. The open segments $(a_e,b_e)$ lie on distinct lines and meet no square. The pieces for the sides lie outside
+$(0,k)\times\mathbb R$, the horizontal ones lie on distinct lines, and the segments from $o_-$ to the distinct points
+$(-1,y_e)$ meet only at $o_-$ (likewise at $o_+$). So this is a plane drawing of $G_h$.
+\end{proof}
+
+For $0<d\le10^{-4}$ put $\Lambda=\Lambda(d):=d+\sqrt2$ and $R_0=R_0(d):=\sqrt{\Lambda^2+\frac14}<1.5001$. We use the
+following theorem of Fodor \cite[Theorem~1]{Fod}: \emph{the smallest circle that contains $12$ points with mutual distances at least $1$
+has radius $R_{12}=1.5148\ldots$} (explicitly, $R_{12}=1/(\sqrt3\,x_0)$, where $x_0$ is the smallest positive root of
+$9x^5-15x^4+7x^3-3x+1$). We also use Oler's inequality \cite[Theorem~1]{Ole} in the following Euclidean form, which is
+inequality~(1) of Folkman and Graham \cite{FG}, where it also receives a short proof: \emph{a compact convex set $X\subset\R^2$
+contains at most $\frac2{\sqrt3}A(X)+\frac12P(X)+1$ points with mutual distances at least $1$}, where $A$ and $P$ denote area and
+perimeter. (Oler's theorem is stated for the Minkowski distance of a convex, centrally symmetric Jordan curve, with the area
+divided by the critical determinant, which is $\sqrt3/2$ for the Euclidean norm, and for finite sets that lie in the closed region
+bounded by a Jordan polygon all of whose vertices belong to the set. The Euclidean form above follows by applying it to the boundary
+of the convex hull of the points, whose area and perimeter do not exceed those of $X$; collinear points are trivial. Folkman and
+Graham \cite[p.~751]{FG} make the same convex-hull reduction from their own inequality for planar simplicial complexes, which gives an
+independent proof of the form above.) Put
+\[
+K:=27,\qquad q_0:=10 .
+\]
+
+\begin{lemma}[counting]\label{lem:count}
+Let $0<d\le10^{-4}$.
+\begin{enumerate}[label=(\alph*)]
+\item If $S_1$ is a square and $S_2$ is a square or $S_0$, at distance $<d$, then $m'\le q_0-1=9$ in
+Proposition~\ref{prop:FL}; hence the waste in $R(S_1,S_2)$ has area at least $\theta(2-\theta)/(4q_0)$, $\theta=\theta(S_1,S_2)$.
+\item Let $k\ge4$ and let $G$ be $G_h$ or $G_v$. For an edge $e=\{P,Q\}$ of $G$ whose members are at distance $<d$ put $R_e:=R(P,Q)$ if
+both are squares, and $R_e:=R(P,S_0)$ if $P$ is a square and $Q$ a side. Then every point lies in $R_e$ for at most $K$
+such edges $e$ \textup{(}the two sides of $[0,k]^2$ that are vertices of $G$ are at distance $k>d$\textup{)}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Every point of a unit square is within $\frac{\sqrt2}2$ of its centre, so the centres of two squares at distance $<d$ are
+at distance $<\Lambda$, and the centre of a square at distance $<d$ from $S_0$ is at distance $<d+\frac{\sqrt2}2$ from
+$S_0$.
+
+(a) For each of the $m'$ squares $Z$ of Proposition~\ref{prop:FL} choose a vertex $v_Z$ as there, and let
+$Q_Z:=Z\cap B(v_Z,1)$; in coordinates in which $Z=[0,1]^2$ and $v_Z=0$ this is the quarter-disc $\{x,y\ge0,\ x^2+y^2\le1\}$,
+of area $\frac\pi4$. The sets $Q_Z$, $S_1$ and (if it is a square) $S_2$ are pairwise disjoint, and they lie in the closed
+$1$-neighbourhood $R+B(1)$ of $R$, because $v_Z,c_1,c_2\in R$ and $S_i\subset B(c_i,\frac{\sqrt2}2)$. By Steiner's formula,
+$R+B(1)$ has area $|L|+2(|L|+1)+\pi$. If $S_2$ is a square, then $|L|<\Lambda$ and
+$\frac\pi4m'+2\le3|L|+2+\pi$, so $m'\le\frac{12}\pi|L|+4<\frac{12}\pi\Lambda+4<10$. If $S_2=S_0$, then $|L|<d+\frac{\sqrt2}2$, and
+all these sets lie in $[0,k]^2$, hence in the closed half-plane $\mathcal H$ that is bounded by the line through the side of
+$[0,k]^2$ on which $R$ stands and contains $[0,k]^2$. The part of $R+B(1)$ in $\mathcal H$ has area $3|L|+1+\frac\pi2$ (we remove a
+$1\times1$ rectangle and two quarter-discs of radius $1$ beyond that line), whence $\frac\pi4m'+1\le3|L|+1+\frac\pi2$ and
+$m'\le\frac{12}\pi|L|+2<5$. Now apply Proposition~\ref{prop:FL}.
+
+(b) If $p\in R_e$, the projection of $p$ on the line of $L$ lies on $L$, so $p$ is within $\sqrt{|L|^2+\frac14}$ of both
+end points of $L$. For an edge joining two squares, both centres therefore lie in the open disc $B(p,R_0)$. For an edge
+joining a square $P$ and a side $Q$, the square is at distance $<d$ from $S_0\supset Q$, so (a) applies to $(P,S_0)$, and the
+centre of $P$ lies within $\sqrt{(d+\frac{\sqrt2}2)^2+\frac14}<R_0$ of $p$. Disjoint squares contain the disjoint open discs of
+radius $\frac12$ about their centres, so the centres are at mutual distance at least $1$; as $R_0<R_{12}$, at most $11$
+squares have their centre in $B(p,R_0)$. Recall that a simple planar graph with $v$ vertices has at most $\max(1,3v-6)$ edges, and that the edges in question are edges of the planar graph $G$ (Lemma~\ref{lem:planar}).
+If none of them contains a side of $[0,k]^2$, they span at most $11$ vertices, so there are at most $3\cdot11-6=27=K$ of them.
+
+Otherwise let $e_0=\{P_0,Q_0\}$ be one of them with $Q_0$ a side, and let $\sigma_0$ be the side of $[0,k]^2$ on which
+$R_{e_0}=R(P_0,S_0)$ stands. Then $p$ is at distance at most $|L_{e_0}|<d+\frac{\sqrt2}2$ from the line through $\sigma_0$, while every
+centre is at distance at least $\frac12$ from that line, on the same side as $[0,k]^2$. Hence, if $\nu$ is the unit normal of $\sigma_0$
+pointing away from $[0,k]^2$, every centre $z$ in question satisfies $(z-p)\cdot\nu<c_0:=d+\frac{\sqrt2}2-\frac12<0.20721$, so all these
+centres lie in the compact convex set $D_0:=\{z\in\overline B(p,R_0):(z-p)\cdot\nu\le c_0\}$. With
+$\phi:=\arccos(c_0/R_0)$, this set has area $R_0^2(\pi-\phi)+c_0\sqrt{R_0^2-c_0^2}<4.155$ and perimeter $2R_0(\pi-\phi)+2\sqrt{R_0^2-c_0^2}<8.1$,
+so by Oler's inequality it contains at most $\frac2{\sqrt3}\cdot4.155+\frac{8.1}2+1<9.85$, that is, at most $9$, centres.
+Moreover, only one side of $[0,k]^2$ occurs among the edges in question: if $\{P,Q\}$ is one of them with $Q$ the left side, then the
+centre of $P$ is within $d+\frac{\sqrt2}2$ of the left side and $p$ is within $\sqrt{(d+\frac{\sqrt2}2)^2+\frac14}$ of that centre, so $p$ is
+within $1.58$ of the left side; likewise for the right side (or for the bottom and the top side if $G=G_v$), and $k\ge4>3.16$. So the
+edges span at most $9+1$ vertices, and there are at most $3\cdot10-6=24<K$ of them.
+\end{proof}
+
+Only the uncovered points of the rectangles $R_e$ will matter below, and there the multiplicity is much smaller.
+
+\begin{lemma}[multiplicity at uncovered points]\label{lem:Kw}
+Let $0<d\le10^{-4}$, let $G$ be $G_h$ or $G_v$, and define $R_e$ for the edges $e$ of $G$ whose members are at distance $<d$ as
+in Lemma~\ref{lem:count}(b). Then every point of the waste lies in $R_e$ for at most $K_w:=13$ such edges.
+\end{lemma}
+
+\begin{proof}
+Let $p$ be a point of the waste, $\Lambda:=d+\sqrt2$, and call an edge $e$ of $G$ \emph{relevant} if its members are at distance
+$<d$ and $p\in R_e$; let $L_e$ be the segment defining $R_e$. Every square contains the closed disc of radius $\frac12$ about its
+centre, so every centre is at distance $>\frac12$ from $p$. As in the proof of Lemma~\ref{lem:count}(b), for a relevant $e$ the
+orthogonal projection of $p$ on the line of $L_e$ lies on $L_e$, and $p$ is at distance $\le\frac12$ from that line. If both
+members of $e$ are squares, then $|L_e|<\Lambda$ and $p$ is within $\sqrt{(\Lambda/2)^2+\frac14}$ of the nearer end point of $L_e$;
+if $e$ joins a square $P$ and a side, then $|L_e|<d+\frac{\sqrt2}2$ and $p$ is within $\sqrt{(d+\frac{\sqrt2}2)^2+\frac14}$ of the centre
+of $P$. As $\Lambda/2\le d+\frac{\sqrt2}2$, in both cases some member of $e$ is a square whose centre lies within
+$\rho_1:=\sqrt{(d+\frac{\sqrt2}2)^2+\frac14}<0.8662$ of $p$; we fix one such member and call its centre the \emph{inner centre}
+of $e$. Put $f(r_1,r_2):=(r_1^2+r_2^2-1)/(2r_1r_2)$; if two points are at distances $r_1,r_2$ from a point $z$ and at distance
+$\ge1$ from each other, the cosine of the angle they subtend at $z$ is at most $f(r_1,r_2)$.
+
+(a) \emph{Degree at a centre.} Let $c$ be the centre of a square $P$, $r:=|p-c|$, and let $e_1,\dots,e_m$ be the relevant edges
+containing $P$. Let $c_j$ be the end point of $L_{e_j}$ other than $c$: the centre of the other member, or, if the other member
+is a side, the point of $S_0$ used to define $R_{e_j}=R(P,S_0)$. The angle $\psi_j$ between $p-c$ and $c_j-c$ satisfies
+$\cos\psi_j\ge0$ and $r\sin\psi_j\le\frac12$, so $\psi_j\le\arcsin\frac1{2r}$, and all directions $c_j-c$ lie in an arc of length
+$2\arcsin\frac1{2r}$. At most one $e_j$ joins $P$ to a side: the two sides of $[0,k]^2$ that are vertices of $G$ are at distance $k$,
+while $P$ has width at most $\sqrt2<k-2d$ in the perpendicular direction. If $c_i$ and $c_j$ are centres, they are at distances in
+$[1,\Lambda)$ from $c$ (squares at distance $<d$) and at distance $\ge1$ from each other. For fixed $r_2\ge1$ the function
+$r_1\mapsto f(r_1,r_2)=\frac{r_1}{2r_2}+\frac{r_2^2-1}{2r_2}\cdot\frac1{r_1}$ is convex, and symmetrically in $r_2$, so the maximum of $f$ on
+$[1,\Lambda]^2$ is attained at a corner, where $f$ takes the values $\frac12$, $\frac\Lambda2$ and $1-\frac1{2\Lambda^2}$; hence the directions of
+$c_i-c$ and $c_j-c$ differ by at least $\gamma_0:=\arccos(1-\frac1{2\Lambda^2})$. If $c_i$ lies on a side $\sigma$ of $[0,k]^2$, then $c_i-c$ is
+a positive multiple of the unit normal $\nu$ of $\sigma$ pointing away from $[0,k]^2$, $c$ is at distance less than $d+\frac{\sqrt2}2$
+from the line of $\sigma$, and every centre $c_j$ is at distance at least $\frac12$ from it, on the same side; so
+$(c_j-c)\cdot\nu<d+\frac{\sqrt2}2-\frac12$, and as $|c_j-c|\ge1$ the two directions differ by more than
+$\arccos(d+\frac{\sqrt2}2-\frac12)>78^\circ>\gamma_0$. Consequently
+\[
+m\ \le\ D(r):=1+\Big\lfloor\frac{2\arcsin(1/(2r))}{\gamma_0}\Big\rfloor ,
+\]
+and $D(r)\le5$ for $r>\frac12$, since $\pi<5\gamma_0$.
+
+(b) \emph{Counting.} Let $c_1,\dots,c_n$ be the distinct inner centres, at distances $r_i\in(\frac12,\rho_1]$ from $p$. Every relevant
+edge contains the square of its inner centre, so by (a) there are at most $\sum_iD(r_i)$ relevant edges. Put $m_i:=\max(2,D(r_i))$, and
+$R_2:=\rho_1$, $R_m:=\min\big(\rho_1,1/(2\sin\frac{(m-1)\gamma_0}2)\big)$ for $m=3,4,5$; then $r_i\le R_{m_i}$. For $0<r_1,r_2<1$ we have
+$\partial f/\partial r_1=(r_1^2-r_2^2+1)/(2r_1^2r_2)>0$, and symmetrically, so two inner centres $c_i,c_j$ (at distance $\ge1$) are seen
+from $p$ at an angle at least $\gamma(m_i,m_j)$, where $\gamma(a,b):=\arccos f(R_a,R_b)$. Order the inner centres by their direction
+from $p$. If $n\ge3$, the angles between consecutive directions add up to $2\pi$, so $\sum_{i}\gamma(m_i,m_{i+1})\le2\pi$ (indices
+modulo $n$); if $n\le2$, then $\sum_im_i\le10$. Since $R_e$ does not depend on $d$, every edge that is relevant for $d$ is relevant
+for $10^{-4}$, so we may take $d=10^{-4}$, where
+$\gamma_0>41.406^\circ$, $\rho_1<0.86611$, $R_3<0.75598$, $R_4<0.56571$, $R_5<0.50396$, and $\gamma(a,b)\ge\gamma(2,2)>70.52^\circ$, so
+$n\le5$. A finite check of all sequences $(m_1,\dots,m_n)\in\{2,3,4,5\}^n$, $n\le5$, shows that every sequence with
+$\sum_im_i\ge15$ violates these angle conditions, with a margin of more than $25^\circ$, and that the only sequences with
+$\sum_im_i=14$ that satisfy them are, up to rotation, $(5,2,5,2)$ (which uses about $359^\circ$). The check, in $50$-digit
+arithmetic, is part of the accompanying script. So there are at most $14$ relevant edges, and at most $13$ unless two inner
+centres have class $5$.
+
+(c) \emph{Two centres of class $5$.} For an inner centre $c$ write $\deg(c)$ for the number of relevant edges containing its square;
+the number of relevant edges is at most $\sum_i\deg(c_i)$, and an edge both of whose members are squares with centres among
+$c_1,\dots,c_n$ is counted twice in this sum. Suppose that two inner centres, say $c_1$ and $c_3$, have class $5$, i.e.\ $r_1,r_3\le R_5<0.50396$. Then
+$1\le|c_1-c_3|\le2R_5<1.008$ and the angle at $p$ between $c_1-p$ and $c_3-p$ is at least $\gamma(5,5)>165.6^\circ$, so the angles of
+the triangle $pc_1c_3$ at $c_1$ and at $c_3$ are acute, and by the law of sines the angle at $c_1$ between $p-c_1$ and $c_3-c_1$ is at
+most $\psi:=\arcsin(R_5\sin(\pi-\gamma(5,5)))<7.19^\circ$. If $c_3$ is
+the other end point of a relevant edge at $c_1$, this edge is counted in $\deg(c_1)$ and in $\deg(c_3)$, so there are at most
+$\sum_iD(r_i)-1$ relevant edges. Otherwise let $c_j$ be the other end point of a relevant edge at $c_1$. If $c_j$ is a centre, it is
+the centre of a square other than that of $c_3$, so $|c_j-c_3|\ge1$; as $|c_j-c_1|$ and $|c_3-c_1|$ lie in $[1,\Lambda)$ (note $2R_5<\Lambda$),
+the argument of (a) shows that the directions of $c_j-c_1$ and $c_3-c_1$ differ by at least $\gamma_0$. If $c_j$ lies on a side, they
+differ by more than $78^\circ>\gamma_0$, as in (a). Hence the directions of the $c_j-c_1$ lie in the arc of half-width
+$\arcsin\frac1{2r_1}<90^\circ$ about the direction of $p-c_1$ from which the open arc of half-width $\gamma_0$ about the direction of
+$c_3-c_1$ has been removed, that is, in two closed arcs, each of length less than $90^\circ+7.19^\circ-41.406^\circ<2\gamma_0$. Each of them
+contains at most two of these directions, so $\deg(c_1)\le4=D(r_1)-1$, and again there are at most $\sum_iD(r_i)-1$ relevant
+edges. In all cases, by (b), there are at most $\sum_iD(r_i)-1\le\sum_im_i-1\le13$ relevant edges if two inner centres have class
+$5$, and at most $13$ otherwise.
+\end{proof}
+
+The proof of Lemma~\ref{lem:Kw} uses no property of $G$ except that the only sides involved are two opposite ones; the bound
+holds for any family of such pairs at distance $<d$. A computer-assisted refinement of the same counting gives the bound $9$, which
+is sharp for the number of all pairs at distance $<d$ (see the remark after the proof), though not known to be sharp for the edges
+of a single graph $G$.
+
+\begin{lemma}[multiplicity at uncovered points, computer-assisted]\label{lem:Kw9}
+Under the assumptions of Lemma~\ref{lem:Kw}, every point of the waste lies in $R_e$ for at most $K_w^*:=9$ of the edges $e$
+considered there.
+\end{lemma}
+
+\begin{proof}
+As in the proof of Lemma~\ref{lem:Kw} we may take $d=10^{-4}$ and $p=0$, and we keep the notation $\Lambda$, $\rho_1$, $\gamma_0$.
+Let $I$ be the set of \emph{all} centres within distance $\rho_1$ of $p$; they satisfy $\frac12<|c|\le\rho_1$ and are pairwise at
+distance at least $1$, so $n:=|I|\le5$. By the proof of Lemma~\ref{lem:Kw}, every relevant edge contains a square with centre in
+$I$. At most $E_{II}$ relevant edges join two squares with centres in $I$, where $E_{II}$ is the number of pairs in $I$ at distance
+less than $\Lambda$. Every other relevant edge joins a square with centre $c_i\in I$ either to a side of $[0,k]^2$ or to a square whose
+centre $x$ satisfies $|x|>\rho_1$, $1\le|x-c_i|<\Lambda$, $p\in R(c_i,x)$ and $|x-c_j|\ge1$ for all $c_j\in I\setminus\{c_i\}$, where
+$R(c_i,x)$ denotes the rectangle $R$ of the two squares with these centres; as in part~(a) of
+the proof of Lemma~\ref{lem:Kw}, the directions of the vectors $x-c_i$ of these centres are pairwise at least $\gamma_0$ apart. Let $D_i^*(I)$
+be the largest number of directions, pairwise at least $\gamma_0$ apart, in which such an $x$ exists, and let $W_I$ be the number of
+$c_i\in I$ that can belong to a relevant edge with a side (at most one per centre, since $\sqrt2<k-2d$). Then the number of relevant
+edges is at most
+\[
+U(I):=E_{II}+W_I+\sum_{c_i\in I}D_i^*(I) .
+\]
+A branch-and-bound computation over the parameters of $I$ shows that a computed upper bound of $U(I)$ is at most $9$ on every
+box of a cover of the parameter domain. Without a side,
+the centres are written in polar coordinates $(r_i,\vartheta_i)$ with $\vartheta_1=0\le\vartheta_2\le\dots\le\vartheta_n$ (after a rotation and
+relabelling). If a relevant edge contains a side, its rectangle $R(P,S_0)$ stands on a side of $[0,k]^2$ whose line is at
+distance $h<d+\frac{\sqrt2}2$ from $p$, and the rectangles of all relevant edges with a side stand on one and the same side $\sigma$: two of them on opposite sides would force
+$k<2d+\sqrt2$, which is impossible since $k\ge4$, and if $R(P,\sigma)$ and $R(P',\sigma')$ with adjacent sides $\sigma,\sigma'$ both contained $p$, then $P\ne P'$ (the rectangle of a square and a side is determined by the square) and, with the
+corner at the origin, the conditions $|p_x-c_x|\le\frac12$, $0\le p_x\le c'_x<d+\frac{\sqrt2}2$, $c_x\ge\frac12$ and the symmetric ones would give
+$|c-c'|^2\le\frac12$, which is impossible. We take $\sigma$ to be the line $y=-h$ and ignore the other sides (this only drops constraints); then every centre satisfies $y\ge-h+\frac12$, no normalisation of $\vartheta_1$ is used, and $h$ is a further
+parameter. For a box of parameters the directions are divided into $1440$ arcs of $0.25^\circ$ and $|x-c_i|$ into $6$ intervals; an arc
+is discarded only if for each interval one of the conditions $|x|>\rho_1$, $p\in R(c_i,x)$, $|x-c_j|\ge1$ (and $y\ge-h+\frac12$) fails for all
+parameters in the box and all points of the arc and the interval. Then $D_i^*(I)$ is bounded by the largest number of points,
+pairwise at least $\gamma_0$ apart, in the union of the remaining arcs (the largest of the circular greedy counts started at the beginning of each maximal run of
+arcs, or $\lfloor2\pi/\gamma_0\rfloor$ if no arc is discarded; this gives the maximum, since an optimal set can be rotated backwards, keeping all gaps, until one of its points reaches
+the start of its run, after which the $j$-th greedy point is never later than the $j$-th point of the rotated optimal set); $E_{II}$ by the number of pairs that may be at distance less
+than $\Lambda$; and $W_I$ by the number of centres that may lie within $d+\frac{\sqrt2}2$ of the side with $|c_{i,x}|\le\frac12$ and $c_{i,y}\ge0$.
+A box is accepted if it contains no admissible configuration (for every parameter of the box two centres are at distance less
+than $1$, or a centre is closer than $\frac12$ to the side), or, in the case with a side, if no side edge is possible (then it is covered by the case without a side), or
+if the bound is at most $9$; otherwise it is bisected. For every $n=1,\dots,5$, with and without a side, the computation
+terminated with all boxes accepted ($30{,}365$ accepted boxes without a side and $48{,}308$ with a side).
+
+The search itself is not relied upon: it used floating-point interval bounds with a safety margin of $10^{-9}$, and every accepted
+box was re-verified in ball (midpoint-radius interval) arithmetic with rigorous error bounds, using Arb~\cite{Arb}, which has been part
+of FLINT~\cite{FLINT} since version~3.0, through \texttt{python-flint}~\cite{pyflint} (version~0.9.0, with FLINT~3.6.0, at $96$-bit
+working precision), boxes being bisected further where the ball enclosures were too coarse (all $78{,}673$ boxes confirmed, with $59{,}238$ further bisections and largest rigorous bound $9$).
+In this re-verification the arcs of directions are closed and cover the whole circle (the floating-point end point of each arc is
+replaced, where necessary, by the starting point of the next one, and the floating-point value $\widetilde{2\pi}<2\pi$ by the exact
+$2\pi$), and every interval of an angle $\vartheta_i$ ending at $\widetilde{2\pi}$ is extended to the exact $2\pi$. This covers every
+admissible configuration with an angle in the arc $(\widetilde{2\pi},2\pi)$, which has length less than $2.5\cdot10^{-16}$: two centres
+with angles in this arc, or (without a side, where $\vartheta_1=0$) one such centre and $c_1$, would be at distance less than
+$\rho_1-\frac12+10^{-15}<1$, so only $\vartheta_n$ can lie in the arc, and only in the case with a side; replacing $\vartheta_n$ by
+$\widetilde{2\pi}$ then gives a configuration with ordered angles in the domain of the search, hence in an accepted box (the accepted boxes
+leave no gap, see below), whose $\vartheta_n$-interval ends at $\widetilde{2\pi}$ and is therefore extended, and the extended box contains the
+original configuration. The final count of
+points pairwise at least $\gamma_0$ apart in a union of arcs is a finite combinatorial computation on the arc end points (the greedy
+count described above); it is done in double precision, with $\gamma_0$ decreased by $10^{-12}$ and the condition for closing the circle
+relaxed by a further $10^{-12}$. Each point that it considers is the start of an arc plus $j\gamma_0$ for some $0\le j\le8$, so each of its
+comparisons is between $j\gamma_0$, $1\le j\le9$, and an integer multiple of the arc length $\pi/720$, and these always differ by more
+than $4\cdot10^{-5}$; every number compared arises from the start of the run, the arc length, $\gamma_0-10^{-12}$ and the previous
+point by a few floating-point operations on numbers of absolute value less than $14$, and lies within $10^{-14}$ of the exact quantity it
+stands for. Hence every comparison has the same outcome as with the exact $\gamma_0$ and the closed arcs, and the computed count is the
+exact one. The re-verification takes from the search programs the grids of arcs and of radial intervals, the floating-point value of
+$\gamma_0$, the floating-point test that proposes arcs to be discarded (each discard is then certified in Arb, so a rounding error there
+can only keep an arc), this final count and the bisection rule; the labels of the boxes therefore rest on this one implementation.
+A separate program checks that the accepted boxes leave no gap: it rebuilds the bisection tree from the initial boxes, accepting
+a node only if it coincides with a recorded box (each used exactly once) or contains no configuration with ordered angles, and
+confirms in exact rational arithmetic that the volumes of these boxes add up to that of the initial boxes (this checker reuses
+the bisection rule of the search, so it is not an independent implementation). The initial boxes and the radial range $[1,\Lambda]$ of the outer centres
+contain the parameter domain up to the arc $(\widetilde{2\pi},2\pi)$ just mentioned, since the floating-point values used for
+$\rho_1$, $\Lambda$ and $d+\frac{\sqrt2}2$ are upper bounds of the exact values (checked in high-precision arithmetic);
+in the re-verification the conditions themselves are evaluated with the exact constants, the floating-point values serving only
+as end points of the initial boxes.
+The programs, the lists of accepted boxes and the logs are part of the accompanying material, available at
+\url{https://github.com/squarepacker/k2-minus-c} and archived on Zenodo (\url{https://doi.org/10.5281/zenodo.23164301}, all versions); they were run with Python~3.12.10,
+\texttt{python-flint}~0.9.0, NumPy~2.5.3 and mpmath~1.4.1. That the accepted boxes leave no gap has also been confirmed by two further checks,
+written independently of the search programs and using different methods (exact rational volumes of the boxes intersected with the
+region of ordered angles, and a recursive covering of the domain); they were written by separate sessions of the same AI system that
+helped to write all the programs (see the section on the use of AI), and they share with the search the lists of boxes and the description
+of the domain. The verification of the individual boxes (the Arb re-verification) has not yet been reproduced by an independent
+implementation; the Squares Project reports a complete replay of it with these programs (from the release of version~1.0, whose programs
+and data for this lemma are identical), with the same results \cite{LevR}; this repeats the same implementation.
+\end{proof}
+
+\begin{remark}
+The proof bounds the number of \emph{all} pairs of squares (or of a square and one of two opposite sides) at distance less than $d$ whose
+rectangles contain $p$, without using the graph $G$, and for this number the bound $9$ is sharp: the configuration described in
+Remark~\ref{rem:const} below (two axis-parallel squares on both sides of a slit through $p$, each nearly touching two slightly
+tilted squares on either side) has $9$ such pairs at an uncovered point; we checked this in $80$-digit arithmetic for
+$d=10^{-6},10^{-5},10^{-4}$ (and beyond the range of the lemma for $10^{-3}$, $10^{-2}$), hence, by monotonicity in $d$,
+for every $d\in[10^{-6},10^{-4}]$ (the coordinates and the check are part of the accompanying material). We do not know whether $9$ edges of a single graph $G_h$ or $G_v$ can meet in this way.
+This remark is not used in the proofs.
+\end{remark}
+
+Apart from the definition of $R_e$, Lemma~\ref{lem:count}(b) is not used below; it bounds the multiplicity at all points,
+not only at uncovered ones.
+
+\begin{lemma}[slits]\label{lem:slit}
+Let $A,B$ be distinct squares, or let one of them be the left or the right side of $[0,k]^2$, and let $E_{AB}$ be the set
+of $y\in[0,k]$ such that on the line $y$ both $A$ and $B$ are met, $A$ lies to the left of $B$, and no square is met
+strictly between them. For $y\in E_{AB}$ let $g(y)$ be the length of the gap between them, and let $\theta:=\theta(A,B)$.
+\begin{enumerate}[label=(\alph*)]
+\item All $y\in E_{AB}$ with $g(y)<1$ lie in one component of $E_{AB}$.
+\item On every component $J$ of $E_{AB}$ the function $g$ is convex, and $\int_Ig\ge\theta(2-\theta)|I|^2/4$ for every interval
+$I\subset J$. In particular, for $\eta>0$ the set $\{y\in J:g(y)<\eta\}$ is an interval.
+\end{enumerate}
+The same holds with the roles of the axes exchanged (vertical lines, $A$ below $B$, the bottom and the top side).
+\end{lemma}
+
+\begin{proof}
+Let $U$ be the intersection of the vertical extents of $A$ and $B$ (for a side of the container, its vertical extent is
+$[0,k]$); it is an interval containing $E_{AB}$. Let $r_A(y)$ be the largest abscissa of $A$ on the line $y$ ($r_A\equiv0$ for the left
+side) and $l_B(y)$ the smallest abscissa of $B$ ($l_B\equiv k$ for the right side); by Lemma~\ref{lem:bd} (with $(s,t)=(x,y)$),
+$G:=l_B-r_A$ is convex on $U$, and $g=G$ on $E_{AB}$.
+If a square $Z$ lies strictly between $A$ and $B$ on one line
+$y\in U$, then it does so on every line meeting $A$, $B$ and $Z$: two disjoint compact convex sets are strictly
+separated by a line, and if that line is not horizontal their order on every horizontal line meeting both is the same (if
+it is horizontal they never share a line); when one of $A,B$ is a side of the container this is trivial, since every square
+lies to the right of the left side and to the left of the right side.
+
+(a) Let $y_1<y_2$ be points of $E_{AB}$ with $g(y_1),g(y_2)<1$; by convexity $G<1$ on $[y_1,y_2]$. Suppose that some
+$y\in(y_1,y_2)$ is not in $E_{AB}$. Then a square $Z$ is met strictly between $A$ and $B$ on the line $y$; it does not meet the
+lines $y_1$ and $y_2$, since it would lie between $A$ and $B$ there, so its vertical extent $V(Z)$ lies in $(y_1,y_2)\subset U$.
+The midpoint $y_Z$ of $V(Z)$ lies in the middle band $\mathcal M(Z)$, so the chord of $Z$ at height $y_Z$ has length
+$\sec a(Z)\ge1$ (Lemma~\ref{lem:geom}(b)), and it lies strictly between $A$ and $B$. Hence $G(y_Z)>1$, a contradiction. So
+$[y_1,y_2]\subset E_{AB}$.
+
+(b) On a component $J$ of $E_{AB}$, $g=G$ is convex. By Lemma~\ref{lem:bd}, it is piecewise linear with at most two break points,
+at each of which its slope increases by at least $2$, and off the break points $|g'|=|\tan\psi_B-\tan\psi_A|\ge|\psi_B-\psi_A|\ge\theta$,
+where $\psi_A,\psi_B$ are the angles between the vertical and the sides of $A$ and $B$ bounding the gap (for a side of the container
+the angle is $0$, and $\theta(A,S_0)$ is the inclination of the square). As $\theta\le\frac\pi4<1$, Lemma~\ref{lem:cg} applies
+on every interval $I\subset J$. Sublevel sets of a convex function on an interval are intervals.
+\end{proof}
+
+\begin{lemma}[cost of a large inclination on a line]\label{lem:Bh}
+Let $0<\bar\beta\le1.5\cdot10^{-6}$, and let $Y\subset[0,k]$ and $\beta:Y\to[0,\bar\beta]$ be such that for every $y\in Y$:
+$\omega(y)<\frac12$ and the line $y$ meets a square of inclination $\ge\beta(y)$. Then
+\[
+\int_Y2\beta(y)\,dy\ \le\ A\,W,\qquad A:=\frac{4\sqrt{K_w^*/Q_*}}{2-3\cdot10^{-6}}\ <\ 10.6067 .
+\]
+\end{lemma}
+
+\begin{proof}
+For $y\in Y$ let $X_1,\dots,X_m$ be the squares met by the line, in order, and $X_0,X_{m+1}$ the left and right sides of
+the container. Each gap is part of the line waste, so it is shorter than $\frac12$, and the triangle
+inequality from the left side to a square of inclination $\ge\beta(y)$ and on to the right side gives
+$\sum_{j=0}^m\theta(X_j,X_{j+1})\ge2\beta(y)$. Put $\theta_{\max}:=2\bar\beta$ and $\theta':=\min(\theta,\theta_{\max})$; then also
+$\sum_j\theta'(X_j,X_{j+1})\ge2\beta(y)$, since either some term equals $\theta_{\max}\ge2\beta(y)$, or no term is capped.
+
+For a pair $e=\{P,Q\}$ of members of $\mathcal V_h$, with $P$ the left one,
+let $Y_e$ be the set of $y\in Y$ on which $P$ and $Q$ are consecutive, and let $\mathcal E$ be the finite set of pairs with
+$|Y_e|>0$; they are edges of $G_h$. Write $\theta_e:=\theta(P,Q)$, $\theta_e':=\min(\theta_e,\theta_{\max})$, $E_e:=E_{PQ}\supset Y_e$, and
+$g_e$ for the gap function of Lemma~\ref{lem:slit}. Integrating over $Y$,
+\[
+\int_Y2\beta\ \le\ \sum_{e\in\mathcal E}\theta_e'\,|Y_e| .
+\]
+Put $d':=\theta_{\max}$ and split $Y_e=Y_e^c\cup Y_e^f$, where $Y_e^c:=\{y\in Y_e:g_e(y)<d'\}$. Let
+$s_e^f:=\int_{E_e\cap\{g_e\ge d'\}}g_e$. Since $\theta_e'\le\theta_{\max}=d'$,
+\[
+\theta_e'|Y_e^f|\ \le\ \frac{\theta_{\max}}{d'}\int_{Y_e^f}g_e\ \le\ s_e^f .
+\]
+Now let $|Y_e^c|>0$; then the members of $e$ are at distance $<d'\le3\cdot10^{-6}$. As $g_e<\frac12$ on $Y_e$, Lemma~\ref{lem:slit}
+shows that $Y_e$ lies in one component $J_e$ of $E_e$, and that $Y_e^c$ lies in the interval $I_e:=\{y\in J_e:g_e(y)<d'\}$, with
+\[
+s_e^c:=\int_{I_e}g_e\ \ge\ \frac{\theta_e(2-\theta_e)}4|I_e|^2\ \ge\ \frac{\theta_e'(2-\theta_{\max})}4|I_e|^2 ,
+\]
+because $x(2-x)$ is increasing on $[0,1]$. Let $f_e$ be the area of the waste in $R_e$ (notation of
+Lemma~\ref{lem:count}(b), with $d=d'$). We claim that $f_e\ge Q_*\theta_e'(2-\theta_{\max})/4$. If $\theta_e\le\theta_1:=10^{-5}$, this
+follows from Proposition~\ref{prop:FLpar}. Otherwise Lemma~\ref{lem:count}(a) gives
+$f_e\ge\theta_e(2-\theta_e)/(4q_0)\ge\theta_1(2-\theta_1)/40$, which exceeds $Q_*\theta_{\max}(2-\theta_{\max})/4\ge Q_*\theta_e'(2-\theta_{\max})/4$ as
+$\theta_{\max}\le3\cdot10^{-6}$. (For a square $X$ and a side, $R_e=R(X,S_0)$ may stand on another side of the container; this is
+harmless, as $\theta(X,S_0)=a(X)$.) Hence
+\[
+\theta_e'|Y_e^c|\ \le\ \theta_e'|I_e|\ =\ \big(\theta_e'|I_e|^2\cdot\theta_e'\big)^{1/2}\ \le\ \frac4{2-\theta_{\max}}\Big(\frac{s_e^c\,f_e}{Q_*}\Big)^{1/2}.
+\]
+The sets $\{(x,y):y\in E_e,\ x\text{ in the gap of }e\text{ on the line }y\}$ are disjoint parts of the waste for different
+$e$, and $I_e$ and $E_e\cap\{g_e\ge d'\}$ are disjoint, so $S^c+S^f\le W$ for $S^c:=\sum_es_e^c$ and $S^f:=\sum_es_e^f$. By
+Lemma~\ref{lem:Kw9} (with $d=d'$), every point of the waste lies in $R_e$ for at most $K_w^*$ of the pairs with $|Y_e^c|>0$, so
+$\sum f_e\le K_w^*W$, the sum over these pairs. By the Cauchy--Schwarz inequality,
+\[
+\sum_{e\in\mathcal E}\theta_e'|Y_e|\ \le\ \frac{4\sqrt{K_w^*/Q_*}}{2-\theta_{\max}}\sqrt{S^cW}+S^f\ \le\ A\sqrt{(W-S^f)W}+S^f\ \le\ AW,
+\]
+the last step because $x\mapsto A\sqrt{(W-x)W}+x$ is decreasing on $[0,W]$ when $A\ge2$. Finally $4\sqrt{9/0.32}/(2-3\cdot10^{-6})<10.6067$.
+\end{proof}
+
+\begin{lemma}[cost of a large inclination in a column]\label{lem:Bv}
+Let $0<\delta\le10^{-5}$ and $0<\bar\beta\le3\cdot10^{-6}$. Let $X,X'\subset[0,k]$. For $x\in X$ let $\bar y_x\in(0,\frac k2-1]$ and
+$\beta(x)\in[0,\bar\beta]$ be such that the segment $\sigma_x=\{x\}\times[0,\bar y_x]$ has vertical waste $<\delta$ and meets a square of
+inclination $\ge\beta(x)$; for $x\in X'$ let $\bar y'_x$, $\beta'(x)$ satisfy the same with the segment
+$\sigma_x'=\{x\}\times[k-\bar y'_x,k]$. Then
+\[
+\int_X\beta(x)\,dx+\int_{X'}\beta'(x)\,dx\ \le\ A\,W .
+\]
+\end{lemma}
+
+\begin{proof}
+For $x\in X$ list the squares met by $\sigma_x$ from the bottom up to the first one of inclination $\ge\beta(x)$, preceded by the
+bottom side of the container; for $x\in X'$ list those met by $\sigma'_x$ from the top down, preceded by the top side. All gaps
+are $<\delta$, so consecutive members are at distance $<\delta$, and the triangle inequality gives
+$\sum_j\theta(Y_j,Y_{j+1})\ge\beta(x)$ (resp.\ $\beta'(x)$), hence the same for $\theta':=\min(\theta,\bar\beta)$. Two members that are
+consecutive on $\sigma_x$ are consecutive on the whole vertical line through $x$ (a square between them would meet $\sigma_x$
+between them), so the pairs used for a set of $x$ of positive measure are edges of $G_v$ whose members are at distance $<\delta$.
+Both members of a pair used for some $x\in X$ meet $\R\times[0,\frac k2-1]$, and both members of a pair used for some $x\in X'$ meet
+$\R\times[\frac k2+1,k]$; as no square meets both strips, no pair is used in both ways. For a pair $e$ let $X_e$ be the set of
+$x$ in $X$, or in $X'$, at which it is used. Since the gaps are $<\delta<1$, the vertical version of Lemma~\ref{lem:slit} puts $X_e$
+in one component $J_e$ of $E_e$, and $s_e:=\int_{J_e}g_e\ge\theta_e'(2-\bar\beta)|J_e|^2/4$. As in the proof of Lemma~\ref{lem:Bh}, with
+$d=\delta$ and $\theta_{\max}$ replaced by $\bar\beta$, we have $f_e\ge Q_*\theta_e'(2-\bar\beta)/4$ (by Proposition~\ref{prop:FLpar} if
+$\theta_e\le\theta_1=10^{-5}$, and by Lemma~\ref{lem:count}(a) otherwise, since $\theta_1(2-\theta_1)/40\ge Q_*\bar\beta(2-\bar\beta)/4$). Hence
+$\theta_e'|X_e|\le\theta_e'|J_e|\le\frac4{2-\bar\beta}(s_ef_e/Q_*)^{1/2}$, $\sum_es_e\le W$ and $\sum_ef_e\le K_w^*W$ (Lemma~\ref{lem:Kw9} with $d=\delta$), so the
+left-hand side is at most $\sum_e\theta_e'|X_e|\le\frac{4\sqrt{K_w^*/Q_*}}{2-\bar\beta}W\le AW$ (as $\bar\beta\le3\cdot10^{-6}$).
+\end{proof}
+
+For $y\in(0,k)$ let $d(y):=\min(y,k-y)$ be the distance to the nearer of the bottom and the top side.
+
+\begin{lemma}[excess of long chords on a line]\label{lem:Eline}
+Let $0<\delta\le10^{-5}$ and $0<\alpha\le1.5\cdot10^{-6}$, let $y\in(0,k)$ with $d(y)\le\frac k2-1$, and suppose that every square
+meeting the line $y$ has inclination $<\alpha$. Then, with $E(y)$ as in Lemma~\ref{lem:E},
+\[
+E(y)\ \le\ 0.50001\,\alpha\Big(A+\frac\alpha\delta\Big)W .
+\]
+\end{lemma}
+
+\begin{proof}
+We use $\sec x-1\le0.50001\,x^2$ for $0\le x\le10^{-3}$ (the function $(\sec x-1)/x^2$ has a Taylor series with positive
+coefficients, so it is increasing on $(0,\frac\pi2)$, and its value at $10^{-3}$ is less than $0.50001$). Let $S$ be a square with
+$c_S(y)\ge1$, and $a:=a(S)<\alpha$. By Lemma~\ref{lem:geom}(b), $c_S(y)\le\sec a$, so
+\[
+c_S(y)-1\ \le\ 0.50001\,a^2\ \le\ 0.50001\,\alpha\,a\,c_S(y),
+\]
+as $a<\alpha$ and $c_S(y)\ge1$. The chords of these squares on the line $y$ are disjoint; let $U\subset[0,k]$ be the union of their
+projections on the $x$-axis and, for $x\in U$, let $S_x$ be the square whose chord contains $(x,y)$. Summing,
+\[
+E(y)\ \le\ 0.50001\,\alpha\sum_{S:\,c_S(y)\ge1}a(S)\,c_S(y)\ =\ 0.50001\,\alpha\int_Ua(S_x)\,dx .
+\]
+Let $y\le\frac k2$; then $0<y=d(y)\le\frac k2-1$. For $x\in U$ the segment $\sigma_x:=\{x\}\times[0,y]$ meets $S_x$, of inclination
+$a(S_x)<\alpha$. Let $U'$ be the set of $x\in U$ for which $\sigma_x$ has vertical waste $\ge\delta$; as the vertical waste of
+$\sigma_x$ is at most that of $\{x\}\times[0,k]$, whose integral over $x$ is $W$, we have $|U'|\le W/\delta$, and so
+$\int_{U'}a(S_x)\,dx\le\alpha W/\delta$. Lemma~\ref{lem:Bv}, applied to $X:=U\setminus U'$, $X':=\emptyset$, $\bar y_x:=y$, $\beta(x):=a(S_x)$
+and $\bar\beta:=\alpha$, gives $\int_{U\setminus U'}a(S_x)\,dx\le AW$. If $y>\frac k2$, the same argument with the segments
+$\{x\}\times[y,k]$ hanging from the top side (that is, $X:=\emptyset$, $X':=U\setminus U'$ and $\bar y'_x:=k-y=d(y)$) gives the same bound.
+Hence $\int_Ua(S_x)\,dx\le(A+\alpha/\delta)W$.
+\end{proof}
+
+\section{Quantization in columns}
+
+Fix $C:=2$ and $\delta:=10^{-5}$, and put $\alpha(s):=1/(Cs)$ for $s>0$.
+
+\begin{definition}
+Let $0<s\le\frac k2-3$. A point $x\in[0,k]$ is \emph{$s$-rigid from below} if the segment
+$\sigma^s_x:=\{x\}\times[0,s+2]$ has vertical waste $<\delta$ and meets no square of inclination $\ge\alpha(s)$, and
+\emph{$s$-rigid from above} if the segment $\tilde\sigma^s_x:=\{x\}\times[k-s-2,k]$ has these two properties.
+We write $\mathrm{NR}_s$ and $\widetilde{\mathrm{NR}}_s$ for the sets of $x$ that are not $s$-rigid from below, respectively
+from above.
+\end{definition}
+
+If $s<s'$, then $\sigma^s_x\subset\sigma^{s'}_x$ and $\alpha(s)>\alpha(s')$, so $\mathrm{NR}_s\subset\mathrm{NR}_{s'}$. Moreover, for fixed $x$
+the set of $s\in(0,\frac k2-3]$ with $x\in\mathrm{NR}_s$ is closed: it is the union of the set where the vertical waste of
+$\sigma^s_x$, a continuous function of $s$, is $\ge\delta$, and of the sets $\{s:\ s+2\ge b_X,\ Cs\,a(X)\ge1\}$ over the finitely many
+squares $X$ with $a(X)>0$ that meet the vertical line through $x$, where $b_X$ is the lower end point of the chord of $X$ on
+that line. The same holds for $\widetilde{\mathrm{NR}}_s$.
+
+For a square $Z$ and $x\in\mathcal M'(Z)$ let $\beta_Z(x)$ be the height of the lower endpoint of the vertical chord of
+$Z$ at $x$. A square $X\ne Z$ is \emph{below $Z$ at $x$} if $X$ meets $\{x\}\times[0,\beta_Z(x))$; its vertical chord at
+$x$ is then contained in $[0,\beta_Z(x))$, because it is an interval disjoint from the chord of $Z$.
+
+\begin{lemma}[quantization]\label{lem:Q}
+Let $s\ge2.36\cdot10^5$ with $s\le\frac k2-3$, let $Z$ be a square with $a(Z)<\alpha(s)$ whose lowest point has height
+$v_Z\le s$, and let $x\in\mathcal M'(Z)$ satisfy
+\begin{enumerate}[label=(\roman*)]
+\item $x\in\mathcal M'(X)$ for every square $X$ with $a(X)<\alpha(s)$ that is below $Z$ at $x$, and
+\item $x$ is $s$-rigid from below.
+\end{enumerate}
+Then every point of $\mathcal R(Z)$ is at distance less than $w_0:=1.265\cdot10^{-5}$ from an integer.
+\end{lemma}
+
+\begin{proof}
+Write $\beta=\beta_Z(x)$ and $\alpha=\alpha(s)\le2.119\cdot10^{-6}$; by Lemma~\ref{lem:geom}(c), $\beta\le v_Z+\sin a(Z)<s+\alpha$,
+so $\{x\}\times[0,\beta)\subset\sigma^s_x$. By (ii) every square below $Z$ at $x$ has inclination $<\alpha$, so by (i) and
+Lemma~\ref{lem:geom}(c) its vertical chord at $x$ has length in $[1,\sec\alpha]$. If $n$ is the number of these squares,
+their chords and the uncovered part fill $[0,\beta)$, whence $n\le\beta<n\sec\alpha+\delta$ and $n<s+\alpha$. We use
+$\sec x-1\le0.50001\,x^2$ for $0\le x\le10^{-3}$ (see the proof of Lemma~\ref{lem:Eline}). Now
+$n(\sec\alpha-1)\le(s+\alpha)\cdot0.50001\,\alpha^2=0.50001(1+\alpha/s)/(C^2s)<5.3\cdot10^{-7}$, so $\beta\in[n,\ n+1.053\cdot10^{-5})$. By
+Lemma~\ref{lem:geom}(c), and as $\sin a(Z)<2.119\cdot10^{-6}$, $v_Z\in[\beta-\sin a(Z),\beta]\subset(n-2.119\cdot10^{-6},\ n+1.053\cdot10^{-5})$.
+The lower ramp of $Z$ lies in $[v_Z,v_Z+\sin a(Z)]\subset(n-2.119\cdot10^{-6},\ n+1.2649\cdot10^{-5})$. The upper ramp is
+$[v_Z+\cos a(Z),\ v_Z+\cos a(Z)+\sin a(Z)]$; here $v_Z+\cos a(Z)\ge\beta-\sin a(Z)+\cos a(Z)\ge n+\cos\alpha-\sin\alpha
+>n+1-2.12\cdot10^{-6}$ and $v_Z+\cos a(Z)+\sin a(Z)\le\beta+1+\sin a(Z)<n+1+1.2649\cdot10^{-5}$.
+\end{proof}
+
+For a square $X$ with $a(X)>0$ and horizontal extent $[x_L,x_R]$, the vertical ramp set of $X$ (Lemma~\ref{lem:geom}(c))
+consists of two intervals of length $\sin a(X)$: the \emph{left end} $[x_L,x_L+\sin a(X)]$ and the \emph{right end}
+$[x_R-\sin a(X),x_R]$. They are the projections on the $x$-axis of the \emph{left side} and the \emph{right side} of $X$, the sides
+through the leftmost and the rightmost vertex that make the angle $a(X)$ with the vertical. If $a(X)=0$ we say that the left
+end of $X$ is the single point $x_L$ (the abscissa of its left side).
+
+\begin{lemma}[cracks]\label{lem:crack}
+Let $0<\alpha\le10^{-3}$ and $0<\delta\le10^{-3}$ \textup{(}in this lemma $\alpha$ and $\delta$ are arbitrary numbers in these ranges\textup{)}, and let $\sigma=\{x\}\times[0,b]$ be a vertical segment with vertical waste
+$<\delta$ such that every square meeting $\sigma$ has inclination $<\alpha$. Let $X$ be a square meeting $\sigma$ such that $x$ lies in
+the right end $[\xi_X,\xi_X+\sin a(X)]$ of $X$ \textup{(}so $0<a(X)<\alpha$\textup{)}, let $p=(x,h)$ be the point where the vertical
+line through $x$ meets the right side of $X$, and assume $h\le b-\delta$. Then either
+$x-\xi_X<\delta\tan\alpha\,(1+2.01\tan^2\alpha)$, or there is a square $X'\ne X$ that meets $\sigma$ at a point $q\ne p$ of the
+vertical segment of length $\delta$ that starts at $p$ and leaves $X$ there \textup{(}so $q\notin X$ and $|q-p|<\delta$\textup{)}, and satisfies
+\[
+\lambda'\ \le\ x\ \le\ \lambda''+2.01\,\delta\tan\alpha ,
+\]
+where $[\lambda',\lambda'']$ is the left end of $X'$.
+\end{lemma}
+
+\begin{proof}
+Write $a:=a(X)$, let $\varsigma$ be the right side of $X$, $P_1$ its end point at the rightmost vertex (abscissa $\xi_X+\sin a$), and $P$
+its other end point (abscissa $\xi_X$); let $P_y$ denote the height of $P$. Then $\varsigma$ runs from $P_1$ in the direction $(-\sin a,u\cos a)$ for some $u\in\{1,-1\}$, and
+for heights $y$ between those of $P_1$ and $P$ the right end point of the chord of $X$ at height $y$ is $r(y):=x-u(y-h)\tan a$.
+Suppose that $x-\xi_X\ge\delta\tan\alpha\,(1+2.01\tan^2\alpha)$. Then $|P_y-h|=(x-\xi_X)\cot a\ge\delta(1+2.01\tan^2\alpha)$, so the
+heights $h+ut$ with $0\le t\le\delta(1+2.01\tan^2\alpha)$ lie between those of $p$ and $P$. Moreover the segment
+$\{x\}\times\{h+ut:0<t<\delta\}$ lies in $\sigma$: for $u=1$ because $h\le b-\delta$, for $u=-1$ because $P_y\ge0$. As its uncovered
+part has length $<\delta$, it contains a point $q=(x,y_q)$, $y_q=h+ut$, $0<t<\delta$, of some square $X'$. Since
+$r(y_q)=x-t\tan a<x$, the point $q$ is not in $X$, so $X'\ne X$, and $a':=a(X')<\alpha$ because $X'$ meets $\sigma$.
+
+The disjoint convex sets $X$ and $X'$ both meet the horizontal line through $q$, so a line separating them is not horizontal, and
+on every horizontal line meeting both, $X$ lies to the left of $X'$. Let $l'(y)$ be the left end point of the chord of $X'$ at
+height $y$. Then (A) $l'(y)>r(y)$ for every height $y$ between those of $p$ and $P$ at which $X'$ is met, and (B)
+$x-t\tan a=r(y_q)<l'(y_q)\le x$. Let $\hat q:=(l'(y_q),y_q)$. If $a'=0$, then $\hat q$ lies on the vertical left side of $X'$, and (B)
+gives the claim with $\lambda'=\lambda''=l'(y_q)$. Let $a'>0$, and let $Q'$ be the leftmost vertex of $X'$, so that
+$\lambda'=Q'_x$. The left boundary $\{(l'(y),y)\}$ of $X'$ consists of the left side, which projects onto $[\lambda',\lambda'']$,
+and of the other side $F'$ of $X'$ at $Q'$, which runs from $Q'$ in the direction $(\cos a',v\sin a')$ for some $v\in\{1,-1\}$.
+
+\emph{Case 1: $\hat q$ lies on the left side.} Then $l'(y_q)\in[\lambda',\lambda'']$, and by (B) $\lambda'\le x<\lambda''+\delta\tan\alpha$.
+
+\emph{Case 2: $\hat q=Q'+\mu(\cos a',v\sin a')\in F'$ with $0<\mu\le1$, and $v=-u$.} For $0<w\le\mu$ the point
+$\hat q-w(\cos a',v\sin a')$ of $X'$ lies at height $y_q+uw\sin a'$. If this height lies between those of $p$ and $P$, then (A)
+gives $l'(y_q)-w\cos a'>r(y_q+uw\sin a')=x-(t+w\sin a')\tan a$, that is, $w(\cos a'-\sin a'\tan a)<l'(y_q)-x+t\tan a\le t\tan a$
+by (B). Put $w_*:=t\tan a/(\cos a'-\sin a'\tan a)$. If $\mu>w_*$, applying this to all $w\in(w_*,\mu]$ shows that $|P_y-y_q|\le
+w_*\sin a'$, hence $|P_y-h|\le t+w_*\sin a'<\delta(1+2.01\tan^2\alpha)$, contrary to the first paragraph. So $\mu\le w_*$, and by (B)
+$x-\lambda'=(x-l'(y_q))+\mu\cos a'<t\tan a+t\tan a/(1-\tan a\tan a')<2.01\,\delta\tan\alpha$, while $x\ge l'(y_q)\ge\lambda'$.
+
+\emph{Case 3: $\hat q=Q'+\mu(\cos a',v\sin a')\in F'$ with $0<\mu\le1$, and $v=u$.} Then the left side of $X'$ runs from $Q'$ in the
+direction $(\sin a',-u\cos a')$, and $Q'_y=y_q-u\mu\sin a'$, while $h=y_q-ut$. If $\mu\sin a'>t$, the height $h$ lies strictly between
+$Q'_y$ and $y_q$, so $l'(h)=l'(y_q)-t\cot a'$; by (A) and (B), $l'(h)>r(h)=x\ge l'(y_q)$, which is absurd. So $\mu\sin a'\le t$; then
+the height $h$ lies on the left side of $X'$, at distance $t-\mu\sin a'<\delta$ from $Q'_y$, so that $l'(h)\le\lambda'+\delta\tan\alpha$,
+and (A) gives $x=r(h)<l'(h)\le\lambda'+\delta\tan\alpha$; also $x\ge l'(y_q)\ge\lambda'$.
+
+In all cases $\lambda'\le x\le\lambda''+2.01\,\delta\tan\alpha$, and $q\in X'\cap\sigma$ is at distance $t<\delta$ from $p$.
+\end{proof}
+
+\begin{lemma}[room in a column]\label{lem:GZ}
+Under the assumptions of Lemma~\ref{lem:Q} on $s$ and $Z$, let $B_Z=B_Z^{(s)}$ be the set of points $x\in\mathcal M'(Z)$ that are
+$s$-rigid from below but violate~(i). Then $|B_Z|<0.500023$, so that $G_Z=G_Z^{(s)}:=\mathcal M'(Z)\setminus B_Z$ has measure greater than
+$g_0:=0.49997$.
+\end{lemma}
+
+\begin{proof}
+Write $\alpha=\alpha(s)\le2.119\cdot10^{-6}$, $\varrho:=\cos\alpha+\sin\alpha$ and $\mathcal M'(Z)=[m_0,m_1]$, so that
+$m_1-m_0=\cos a(Z)-\sin a(Z)\le1$; note that the left end of $Z$ ends at $m_0$ (if $a(Z)=0$ it is the point $m_0$; if $a(Z)>0$,
+then in the coordinates of the proof of Lemma~\ref{lem:geom} the horizontal extent of $Z$ is $[x_0-\sin a(Z),x_0+\cos a(Z)]$, its left end
+is $[x_0-\sin a(Z),x_0]$ and $\mathcal M'(Z)=[x_0,x_0+\cos a(Z)-\sin a(Z)]$, and likewise in the reflected position). Let $\mathcal X_{\mathrm L}$ be the set of squares $X$ with
+$a(X)<\alpha$ that are below $Z$ at some point of $\mathcal M'(Z)$ and whose left end is contained in $(m_0,m_1)$, and let
+$\mathcal X_{\mathrm R}$ be the set of squares $X$ with $0<a(X)<\alpha$ that are below $Z$ at some point of $\mathcal M'(Z)$ and whose right end
+is contained in $(m_0,m_1)$.
+
+\emph{Counting.} If $X\in\mathcal X_{\mathrm L}$ and $y\in\mathcal M(X)$ \textup{(}every $y$ in the vertical extent of $X$ if $a(X)=0$\textup{)}, the
+chord of $X$ at height $y$ has its left end point in the left end of $X$, hence in $(m_0,m_1)$, and length $\ge1\ge m_1-m_0$, so it
+contains $m_1$. Chords of distinct squares at the same height are disjoint, so the middle bands of the squares in $\mathcal X_{\mathrm L}$
+have pairwise disjoint interiors. A square $X$ below $Z$ at some $x\in\mathcal M'(Z)$ meets $\{x\}\times[0,\beta_Z(x))$, and
+$\beta_Z(x)\le v_Z+\sin a(Z)<s+\alpha$; so its middle band lies in $[0,s+\alpha+\varrho]$ and has length $\cos a(X)-\sin a(X)>
+\cos\alpha-\sin\alpha$. Hence $|\mathcal X_{\mathrm L}|\le n_*:=(s+\alpha+\varrho)/(\cos\alpha-\sin\alpha)$, and in the same way (with $m_0$ in
+place of $m_1$) $|\mathcal X_{\mathrm R}|\le n_*$.
+
+\emph{Covering.} Let $x\in B_Z$. As (i) fails, some square $X$ with $a(X)<\alpha$ is below $Z$ at $x$ and $x\notin\mathcal M'(X)$; then
+$a(X)>0$ and $x$ lies in the left or in the right end of $X$. If that end is not contained in $(m_0,m_1)$, it contains $m_0$ or
+$m_1$, and $x\in[m_0,m_0+\alpha)\cup(m_1-\alpha,m_1]$. If it is the left end and it is contained in $(m_0,m_1)$, then $X\in\mathcal X_{\mathrm L}$.
+If it is the right end and it is contained in $(m_0,m_1)$, then $X\in\mathcal X_{\mathrm R}$, and we apply Lemma~\ref{lem:crack} to
+$\sigma=\sigma^s_x$ (here $b=s+2$ and $h<\beta_Z(x)<s+\alpha\le b-\delta$; all squares meeting $\sigma^s_x$ have inclination $<\alpha$, as $x$ is
+rigid). Either $x\in[\xi_X,\xi_X+1.01\,\delta\tan\alpha]$, or there is a square $X'$ as in the lemma; let $q$ be the point of $X'\cap\sigma$
+found there. If $X'=Z$, then $x\le m_0+2.01\,\delta\tan\alpha$. Otherwise $q\notin Z$, and since $q$ lies within $\delta$ of $p$, which is below
+the chord $[\beta_Z(x),\beta_Z(x)+\sec a(Z)]$ of $Z$, the point $q$ lies below that chord; so $X'$ is below $Z$ at $x$, and
+$a(X')<\alpha$. If the left end of $X'$ is contained in $(m_0,m_1)$, then $X'\in\mathcal X_{\mathrm L}$ and $x\in[\lambda',\lambda''+2.01\,\delta\tan\alpha]$;
+otherwise $\lambda'\le m_0$ or $\lambda''\ge m_1$; in the first case $\lambda''<m_0+\alpha$ and $x<m_0+\alpha+2.01\,\delta\tan\alpha$, and in
+the second case $x\ge\lambda'>\lambda''-\alpha\ge m_1-\alpha$ (if $a(X')=0$, then $x\ge\lambda'=\lambda''\ge m_1$). Altogether,
+\[
+B_Z\ \subset\ [m_0,m_0+1.01\alpha]\cup[m_1-\alpha,m_1]\cup\bigcup_{X\in\mathcal X_{\mathrm L}}[\lambda'_X,\lambda''_X+2.01\,\delta\tan\alpha]\cup
+\bigcup_{X\in\mathcal X_{\mathrm R}}[\xi_X,\xi_X+1.01\,\delta\tan\alpha].
+\]
+As $\lambda''_X-\lambda'_X=\sin a(X)<\alpha$ and $\tan\alpha<1.000001\,\alpha$,
+\begin{align*}
+|B_Z|\ &\le\ 2.01\,\alpha+n_*\alpha\,(1+3.02\,\delta\cdot1.000001)\\
+&\le\ 2.01\,\alpha+\frac{(1+(\alpha+\varrho)/s)(1+3.04\cdot10^{-5})}{C(\cos\alpha-\sin\alpha)}\ <\ 0.500023,
+\end{align*}
+since $\alpha=1/(Cs)\le2.119\cdot10^{-6}$, $s\ge2.36\cdot10^5$, $\delta=10^{-5}$ and $C=2$ (the middle expression decreases as $s$ grows); and
+$|\mathcal M'(Z)|=\cos a(Z)-\sin a(Z)>1-2.12\cdot10^{-6}$.
+\end{proof}
+
+\noindent\emph{Columns from the top.} The reflection $(x,y)\mapsto(x,k-y)$ maps $[0,k]^2$ onto itself and closed packings to closed
+packings; since $k$ is an integer, it maps points at distance less than $w_0$ from an integer to such points. Applying
+Lemmas~\ref{lem:Q}--\ref{lem:GZ} to the reflected packing, we obtain the same statements with ``lowest point'' replaced by
+``highest point'', $v_Z\le s$ by $v_Z'\ge k-s$ for the height $v_Z'$ of the highest point of $Z$, ``below'' by ``above'' (with the upper end
+point of the vertical chord of $Z$), and ``rigid from below'' by ``rigid from above''; we denote the corresponding set by
+$\widetilde G_Z^{(s)}$.
+
+\section{Proof of Theorem~\ref{thm:main}}
+
+Put $\varepsilon:=2\cdot10^{-3}$, $\omega_0:=2\cdot10^{-4}$, $y_{\min}:=236000$, $w_0:=1.265\cdot10^{-5}$ and $h_0:=1-2w_0$, and
+\[
+F(k):=1.99954\,(\log k-13.06675)/30.418 .
+\]
+For $2\le k<10^{12}$ we have $\log k<27.632$, so $F(k)<0.958<1\le k^2-N$ by Corollary~\ref{cor:W1}. Let now
+$k\ge10^{12}$, and put $y_1:=\frac k2-3$; recall $C=2$, $\delta=10^{-5}$ and $\alpha(s)=1/(Cs)$ from Section~5, and put
+$C':=2\sqrt2$ and $\alpha'(y):=1/(C'y)$ (the threshold for lines). Recall that $d(y)=\min(y,k-y)$ is the distance to the
+nearer of the bottom and the top side, and for a measurable set $Y\subset\{y:d(y)\ge y_{\min}\}$ write $\ell(Y):=\int_Ydy/d(y)$. Let
+\[
+H:=\{y\in(0,k):\ y_{\min}\le d(y)\le(1-\varepsilon)y_1,\ \frc{y}\in[w_0,1-w_0]\},
+\]
+$H_b:=H\cap(0,\frac k2)$ and $H_t:=H\cap(\frac k2,k)$.
+Since $k$ is an integer, $y\mapsto k-y$ maps $H_b$ onto $H_t$ and preserves $d$, so $\ell(H)=2\ell(H_b)$. If
+$j_0:=y_{\min}\le m\le j_1-1$ with $j_1:=\lfloor(1-\varepsilon)y_1\rfloor$ (note $j_1>j_0$), then $[m+w_0,m+1-w_0]\subset H_b$ and
+$\int_{m+w_0}^{m+1-w_0}dy/y\ge h_0/(m+1)\ge h_0\int_{m+1}^{m+2}dy/y$, so
+\[
+\ell(H)\ \ge\ 2h_0\log\frac{j_1+1}{j_0+1}\ \ge\ 2h_0\log\frac{(1-\varepsilon)(k/2-3)}{y_{\min}+1}\ \ge\ 2h_0(\log k-13.06675),
+\]
+the last step because $(1-\varepsilon)(k/2-3)=\frac{1-\varepsilon}2k(1-6/k)$, $\log\frac2{1-\varepsilon}+\log(y_{\min}+1)<13.066741$ and, for
+$k\ge10^{12}$, $\log(1-6/k)>-10^{-11}$.
+
+For $y\in H$ we have $\alpha'(d(y))\le\alpha'(y_{\min})<1.4982\cdot10^{-6}$ and $d(y)\le(1-\varepsilon)y_1<\frac k2-1$.
+Every $y\in H$ is of exactly one of the following kinds: (i) $\omega(y)\ge\omega_0$; (ii) $\omega(y)<\omega_0$ and the line $y$ meets a
+square of inclination $\ge\alpha'(d(y))$; (iii) $\omega(y)<\omega_0$ and every square meeting the line $y$ has inclination
+$<\alpha'(d(y))$. Let $Y_i$, $Y_{ii}$, $Y_{iii}$ be the corresponding sets.
+
+\smallskip\noindent\emph{Kinds (i) and (ii).} Since $\omega\ge\omega_0$ on $Y_i$ and $d\ge y_{\min}$ on $H$,
+$W\ge\omega_0|Y_i|\ge\omega_0y_{\min}\,\ell(Y_i)$. Lemma~\ref{lem:Bh}, applied to $Y=Y_{ii}$ with $\beta(y)=\alpha'(d(y))\le\bar\beta:=1.4982\cdot10^{-6}$,
+gives $AW\ge\int_{Y_{ii}}2\alpha'(d(y))\,dy=\frac2{C'}\ell(Y_{ii})=\frac1{\sqrt2}\ell(Y_{ii})$.
+
+\smallskip\noindent\emph{Kind (iii): the excess of long chords.} For $y\in Y_{iii}$, Lemma~\ref{lem:Eline} with $\alpha=\alpha'(d(y))$ gives
+\[
+E(y)\ \le\ \gamma(y)\,W,\qquad \gamma(y):=0.50001\,\alpha'(d(y))\Big(A+\frac{\alpha'(d(y))}\delta\Big),
+\]
+and, bounding the parts of $H$ below and above $\frac k2$ separately (on both, $d(y)\ge y_{\min}$),
+\begin{align*}
+\Gamma:=\int_H\gamma(y)\,\frac{dy}{d(y)}\ &\le\ 2\cdot0.50001\int_{y_{\min}}^\infty\Big(\frac A{C'y^2}+\frac1{C'^2\delta y^3}\Big)dy\\
+&=\ 1.00002\Big(\frac A{C'y_{\min}}+\frac1{2C'^2\delta y_{\min}^2}\Big)\ <\ 1.61\cdot10^{-5}.
+\end{align*}
+
+\smallskip\noindent\emph{Kind (iii): many non-rigid columns.}
+Let $Y_b:=Y_{iii}\cap H_b$ and $Y_t:=Y_{iii}\cap H_t$. Let $s\in[y_{\min},y_1]$ and $\mathcal W_s:=[(1-\varepsilon)s,s]$, and let $\mathcal Z(s)$
+be the set of squares $Z$ with $\Phi(Z)\cap Y_b\cap\mathcal W_s\ne\emptyset$, where $\Phi(Z)=\{y:0<c_Z(y)<1\}$ is as in
+Lemma~\ref{lem:A}. For $y\in Y_b\cap\mathcal W_s$ we have $d(y)=y$, and Lemma~\ref{lem:E} gives
+$\sum_{Z:\,y\in\Phi(Z)}c_Z(y)\ge(1-\omega_0-E(y))_+$ (the sum is $\ge0$, and $\omega(y)<\omega_0$); every $Z$ in this sum belongs to $\mathcal Z(s)$, meets the line $y\le s$ (so that the height
+$v_Z$ of its lowest point satisfies $v_Z\le s$), and has $0<a(Z)<\alpha'(y)\le\alpha'((1-\varepsilon)s)$ (by Lemma~\ref{lem:A}, $\Phi(Z)=\emptyset$ if $a(Z)=0$). Integrating over $Y_b\cap\mathcal W_s$ and
+using $\int_{\Phi(Z)}c_Z=\sin a(Z)\cos a(Z)<\alpha'((1-\varepsilon)s)$ (Lemma~\ref{lem:A}), we get
+\[
+|\mathcal Z(s)|\ \ge\ C'(1-\varepsilon)s\int_{Y_b\cap\mathcal W_s}(1-\omega_0-E(y))_+\,dy .
+\]
+
+Let $Z\in\mathcal Z(s)$. As $C'(1-\varepsilon)>C$, we have $a(Z)<\alpha'((1-\varepsilon)s)<\alpha(s)$, so Lemmas~\ref{lem:Q} and~\ref{lem:GZ}
+apply to $s$ and $Z$. Every $x\in G_Z^{(s)}$ is either not $s$-rigid from below, or it is $s$-rigid from below and satisfies~(i);
+in the latter case Lemma~\ref{lem:Q} would put every ramp point of $Z$ within $w_0$ of an integer, which is impossible because
+$Z$ has a ramp point $y\in H$ (as $\Phi(Z)\subset\mathcal R(Z)$). Hence $G_Z^{(s)}\subset\mathcal M'(Z)\cap\mathrm{NR}_s$, and
+$|G_Z^{(s)}|>g_0$ by Lemma~\ref{lem:GZ}. Every $Z\in\mathcal Z(s)$ meets a line in $\mathcal W_s$ and has vertical extent
+$<1.0001$, and a vertical line through $x$ meets every $Z$ with $x\in G_Z^{(s)}\subset\mathcal M'(Z)$ in a chord of length $\ge1$; these
+chords are disjoint and lie in an interval of length $<\varepsilon s+2.01$, so at most $\varepsilon s+2.01$ of the sets $G_Z^{(s)}$ contain
+$x$. Hence
+\begin{equation}\label{eq:NR}
+\mathcal N(s):=|\mathrm{NR}_s|\ \ge\ \frac{g_0\,|\mathcal Z(s)|}{\varepsilon s+2.01}\ \ge\ \frac{g_0C'(1-\varepsilon)s}{\varepsilon s+2.01}
+\int_{Y_b\cap\mathcal W_s}(1-\omega_0-E(y))_+\,dy .
+\end{equation}
+By the reflection $y\mapsto k-y$ and the versions of Lemmas~\ref{lem:Q} and~\ref{lem:GZ} for columns from the top,
+$\widetilde{\mathcal N}(s):=|\widetilde{\mathrm{NR}}_s|$ satisfies \eqref{eq:NR} with $Y_b\cap\mathcal W_s$ replaced by $Y_t\cap(k-\mathcal W_s)$.
+
+\smallskip\noindent\emph{Kind (iii): the cost of non-rigid columns.}
+For $x\in[0,k]$ let $T^*(x)$ be the least $s\in[y_{\min},y_1]$ with $x\in\mathrm{NR}_s$ (it exists by closedness, if
+$x\in\mathrm{NR}_{y_1}$; otherwise $T^*(x)$ is undefined), and define $\widetilde T^*(x)$ in the same way with $\widetilde{\mathrm{NR}}_s$.
+By monotonicity, $\{x:T^*(x)\le s\}=\mathrm{NR}_s$ for $s\in[y_{\min},y_1]$; as these sets are finite unions of intervals, $T^*$ is a Borel
+function on the Borel set where it is defined, and $\{(x,s):T^*(x)\le s\}$ is a Borel set; likewise for $\widetilde T^*$.
+If $T^*(x)=\tau$, then either (W) $\sigma^\tau_x$ has vertical waste $\ge\delta$, or (I) it has vertical waste $<\delta$ and meets a
+square of inclination $\ge\alpha(\tau)$; similarly for $\widetilde T^*$ and $\tilde\sigma^\tau_x$. For each $x$ the segments
+$\sigma^{T^*(x)}_x\subset\{x\}\times[0,\frac k2-1]$ and $\tilde\sigma^{\widetilde T^*(x)}_x\subset\{x\}\times[\frac k2+1,k]$ are disjoint, so
+integrating the vertical waste over $x$ shows that the $x$ of type (W) for $T^*$ and those of type (W) for $\widetilde T^*$
+form two sets of total measure $\le W/\delta$; on them $\alpha(T^*),\alpha(\widetilde T^*)\le\alpha(y_{\min})$. Lemma~\ref{lem:Bv}, applied to the
+$x$ of type (I) with $\bar y_x=T^*(x)+2$, $\beta(x)=\alpha(T^*(x))$, $\bar y'_x=\widetilde T^*(x)+2$, $\beta'(x)=\alpha(\widetilde T^*(x))$ and
+$\bar\beta=\alpha(y_{\min})<2.119\cdot10^{-6}$, bounds the rest. Since $\alpha(\tau)\ge\int_\tau^{y_1}ds/(Cs^2)$, Tonelli's theorem gives
+\[
+\Big(A+\frac{\alpha(y_{\min})}\delta\Big)W\ \ge\ \int\alpha(T^*(x))\,dx+\int\alpha(\widetilde T^*(x))\,dx\ \ge\ \int_{y_{\min}}^{y_1}\frac{\mathcal N(s)+\widetilde{\mathcal N}(s)}{Cs^2}\,ds .
+\]
+For $y\in Y_b\subset[y_{\min},(1-\varepsilon)y_1]$ the interval $[y,y/(1-\varepsilon)]$ lies in $[y_{\min},y_1]$, and
+\[
+\int_y^{y/(1-\varepsilon)}\frac{ds}{s(\varepsilon s+2.01)}\ \ge\ \frac1{1+2.01/(\varepsilon y_{\min})}\int_y^{y/(1-\varepsilon)}\frac{ds}{\varepsilon s^2}
+\ =\ \frac1{(1+2.01/(\varepsilon y_{\min}))\,y} .
+\]
+By \eqref{eq:NR} and Tonelli's theorem again, writing $\int_{Y_b\cap\mathcal W_s}f=\int_{Y_b}f(y)\mathbf 1[y\le s\le y/(1-\varepsilon)]\,dy$, and in
+the same way for $\widetilde{\mathcal N}$ (where $d(y)=k-y$),
+\[
+\Big(A+\frac{\alpha(y_{\min})}\delta\Big)W\ \ge\ \frac{g_0C'(1-\varepsilon)}{C\,(1+2.01/(\varepsilon y_{\min}))}\int_{Y_{iii}}(1-\omega_0-E(y))_+\,\frac{dy}{d(y)} .
+\]
+
+\smallskip\noindent\emph{Conclusion.} On $Y_{iii}$ we have $1-\omega_0\le(1-\omega_0-E)_++E\le(1-\omega_0-E)_++\gamma W$, so
+$(1-\omega_0)\ell(Y_{iii})\le\int_{Y_{iii}}(1-\omega_0-E)_+\,dy/d(y)+\Gamma W$. Adding the bounds for the three kinds gives
+\begin{align*}
+(1-\omega_0)\,\ell(H)\ &\le\ \ell(Y_i)+\ell(Y_{ii})+\int_{Y_{iii}}(1-\omega_0-E)_+\frac{dy}{d(y)}+\Gamma W\\
+&\le\ \Big(\frac1{\omega_0y_{\min}}+\frac{C'}2A+\frac{C\,(1+2.01/(\varepsilon y_{\min}))}{C'g_0(1-\varepsilon)}\Big(A+\frac{\alpha(y_{\min})}\delta\Big)\\
+&\qquad+\Gamma\Big)W .
+\end{align*}
+With $y_{\min}=236000$ (so $1/(\omega_0y_{\min})<0.021187$, $2.01/(\varepsilon y_{\min})<4.2585\cdot10^{-3}$ and
+$\alpha(y_{\min})/\delta<0.21187$), $A<10.6067$, $g_0=0.49997$ and $\Gamma<1.61\cdot10^{-5}$, the bracket is less than
+\begin{align*}
+&0.021187+\sqrt2\cdot10.6067+\frac{1.0042585}{\sqrt2\cdot0.49997\cdot0.998}\,(10.6067+0.21187)+1.61\cdot10^{-5}\\
+&\qquad=\ 30.41797\ldots\ <\ 30.418,
+\end{align*}
+so, as $(1-\omega_0)h_0\ge0.99977$, $W\ge2\cdot0.99977(\log k-13.06675)/30.418=F(k)$. Thus $W\ge\max(1,F(k))$ for every $k\ge2$. If
+$0.0353\log k\le1$, then $W\ge0.0353\log k$ by Corollary~\ref{cor:W1}. Otherwise $\log k>28.32$, and as
+$1.99954/30.418-0.0353>0.03043$ and $1.99954\cdot13.06675/30.418<0.85895<0.03043\cdot28.32$, we get
+$F(k)-0.0353\log k>0.03043\log k-0.85895>0$. This proves Theorem~\ref{thm:main} with $\kappa=0.0353$. \qed
+
+\section{Remarks}
+
+\begin{remark}[where integrality and closedness enter]
+Closedness is used in Lemma~\ref{lem:G} (hence in Lemmas~\ref{lem:A} and~\ref{lem:E} and Corollary~\ref{cor:W1}), in
+Propositions~\ref{prop:FL} and~\ref{prop:FLpar} and Lemmas~\ref{lem:slit} and~\ref{lem:crack} (separation of disjoint squares by a line), in
+Lemma~\ref{lem:planar} (consecutive squares do not touch), and in
+Lemma~\ref{lem:red}, which ties closed packings of $[0,k]^2$ to $s(n)<k$; for squares with disjoint interiors in a
+square of side exactly $k$, the $k\times k$ grid shows that nothing can be said. The disjointness of the squares is also used, in the
+arguments as given, in Lemmas~\ref{lem:count}, \ref{lem:Kw} and~\ref{lem:Kw9} (centres of disjoint squares are at distance at least $1$;
+in Lemma~\ref{lem:count}(a) also the disjointness of $Q_Z$, $S_1$ and $S_2$), in Proposition~\ref{prop:FL}(b) (the regions swept by
+the uncovered parts are disjoint parts of the waste), in Lemma~\ref{lem:slit}(a) (the strict inequality $G(y_Z)>1$), in Lemmas~\ref{lem:Bh}
+and~\ref{lem:Bv} (the gap regions of different pairs are disjoint parts of the waste), in Lemmas~\ref{lem:Eline} and~\ref{lem:GZ} (chords
+of distinct squares at one height are disjoint; in the latter also $q\notin Z$), in Lemma~\ref{lem:Q} and the definition before it
+(vertical chords of distinct squares at one abscissa are disjoint), and in Section~6 (disjoint vertical chords bound the multiplicity of
+the sets $G_Z^{(s)}$). The integrality of the side enters through
+Lemma~\ref{lem:G} (the bound $k-1$ on long chords) and through the columns hanging from the top side: the reflection $y\mapsto k-y$
+preserves the heights close to integers only because $k$ is an integer. The quantization of Lemma~\ref{lem:Q} itself only uses one
+side, the unit size of the squares and their disjointness.
+\end{remark}
+
+\begin{remark}[large inclinations]
+The same line argument without the column analysis gives the following dichotomy. Let $k\ge3\cdot10^{10}$ and
+$\alpha:=1/(4\sqrt k)\le1.45\cdot10^{-6}$. The lines with $\omega(y)\ge\frac12$ have measure at most $2W$; by Lemma~\ref{lem:Bh} with $\beta\equiv\alpha$, the lines
+with $\omega(y)<\frac12$ that meet a square of inclination $\ge\alpha$ have measure at most $AW/(2\alpha)$; and on the remaining lines
+Lemma~\ref{lem:A} gives short chords of total length $>1-\omega(y)-0.0313$. Integrating,
+\[
+0.9687\,k\ \le\ (2.94+1.94\,A\sqrt k)\,W+\sum_{0<a(S)<\alpha}\sin a(S)\cos a(S).
+\]
+Thus a closed packing with $W=o(\sqrt k)$ must contain at least $(3.87-o(1))\,k^{3/2}$ squares of inclination in $(0,\alpha)$.
+This remark is not used in the proofs.
+\end{remark}
+
+\begin{remark}[the threshold and the constant as functions of $k$]\label{rem:k}
+Put $F(k):=1.99954\,(\log k-13.06675)/30.418$, so that every closed packing satisfies $W=k^2-N\ge\max(1,F(k))$ for every
+$k\ge2$ (Section~6), and let $\kappa(k_1):=\inf_{k\ge k_1}\max(1,F(k))/\log k$ be the largest constant that these bounds certify for
+all $k\ge k_1$. It is non-decreasing in $k_1$. As the additive constant is negative, $F(k)/\log k=\frac{1.99954}{30.418}(1-13.06675/\log k)$
+increases with $k$, towards its limit $1.99954/30.418=0.065735\ldots$, and $F(k)$ exceeds $1$ only for $\log k>28.2792\ldots$; below this
+point the certified ratio is $1/\log k$, and beyond it $F(k)/\log k$, which there exceeds $1/28.2793$. Hence
+$\kappa(k_1)=0.035361\ldots$ for $2\le k_1\le e^{28.279}$, and $\kappa(k_1)$ increases to $0.065735\ldots$ as $k_1\to\infty$. In contrast
+with versions~1.0 and~1.1 of this paper, the constant for all $k$ is thus limited not by the slope but by the point at which $F(k)$ exceeds
+$1$, that is, by the additive constant $13.06675\approx\log(2(y_{\min}+1)/(1-\varepsilon))$ coming from the smallest scale $y_{\min}$. A larger
+$y_{\min}$ slightly increases the slope but decreases the constant for all $k$ (with unrounded constants, $y_{\min}=3\cdot10^5$ and $10^6$
+give slopes $0.0659$ and $0.0663$ and constants $0.0351$ and $0.0338$ for all $k$, all rounded down), while with Lemma~\ref{lem:Bh} as stated $y_{\min}$
+cannot be smaller than $1/(C'\cdot1.5\cdot10^{-6})=235702.26\ldots$ (and Lemmas~\ref{lem:Q} and~\ref{lem:GZ} are stated for $s\ge2.36\cdot10^5$;
+at $s=235702.26$ the value $w_0=1.265\cdot10^{-5}$ would not suffice). The limit $1/(\sqrt2A_\infty)=\sqrt{Q_*/K_w^*}/(2\sqrt2)\approx0.066667$,
+where $A_\infty=2\sqrt{K_w^*/Q_*}$, is the most that this architecture can give for the slope with $K_w^*=9$ and $Q_*=0.32$. For
+comparison, versions~1.0 and~1.1 of this paper, which used only the lines with $d(y)\ge\sqrt k/4$, had the bound
+$F(k)=(0.99977\log k+0.3819)/30.147$ for $k\ge10^{13}$ and gave $\kappa=0.033$ (its ratio $F(k)/\log k$ decreased to the limit
+$0.033163\ldots$), the bound $F(k)=(0.99996\log k+0.386)/36.081$ of an
+earlier draft (with $K_w=13$ and the threshold $10^{16}$) gave $\kappa=0.027$, the bound $F(k)=(0.99996\log k+0.386)/37.442$ of an earlier draft
+(with $K_w=14$) gave $\kappa=0.026$, the bound
+$F(k)=(0.999996\log k+0.386)/51.963$ of an earlier draft (with the multiplicity $K=27$ in place of $K_w$) exceeded $1$ only for
+$\log k>51.58$ and gave $\kappa=0.019$, and the bound $F(k)=(0.9987(\log k-1.3884)-0.0313)/84.05$ of an earlier draft exceeded $1$ only
+for $\log k>85.58$, and the constant it gave for all $k\ge2$ was $1/85.58\approx0.0117$. Constant lower bounds for $W$ from other sources
+raise the constant for all $k$ without changing the slope: with the conditional bound $W\ge4$ for $k\ge6$ of Corollary~\ref{cor:evand}
+the infimum becomes
+$4/73.91674\ldots=0.054114\ldots$.
+\end{remark}
+
+\begin{remark}[the rate]
+The proof gives $c^*(k)\gg\log k$, while the upper bounds give $c^*(k)=O(k^{3/5})$. Several heuristics (balancing the
+cost of inclinations against the quantization near the walls, and numerical linear-programming bounds for
+periodic covering measures) suggest that the truth may be of order $\sqrt k$; we leave this open. The constants in
+Theorem~\ref{thm:main} are far from useful for concrete values: since $W$ is an integer, the second bound of the theorem yields
+$s(k^2-c)=k$ for every $c\ge1$ as soon as $\log k>15.22\,c+13.07$; for instance (with the exact threshold $13.06675+30.418c/1.99954$) it yields $s(k^2-4)=k$ for $\log k>73.92$ (compare the computer-assisted, unrefereed announcement of $s(k^2-4)=k$ for all
+$k\ge5$ in \cite{Dan}), and it says nothing
+about $s(12)$ or about any $k$ within computational reach.
+\end{remark}
+
+\begin{remark}[the constant]\label{rem:const}
+An earlier draft of this argument, which used the lemma of \cite{RV} with its stated constant
+$10^{-10}$ and coarser bookkeeping, obtained only $\kappa\approx6\cdot10^{-17}$, and previous drafts of this paper
+obtained $\kappa=3\cdot10^{-4}$, $1.9\cdot10^{-3}$, $0.011$, $0.019$, $0.026$, $0.027$ and (versions~1.0 and~1.1) $0.033$. The present constant comes from
+Proposition~\ref{prop:FL} (convex gaps, and cuts only where the set of squares met by the chords changes) and its refinement
+Proposition~\ref{prop:FLpar} for nearly parallel pairs, which replaces the factor $1/q_0=1/10$ by $Q_*=0.32$; from the angular argument
+of Lemma~\ref{lem:Kw} and its computer-assisted refinement Lemma~\ref{lem:Kw9}, which bound the multiplicity of the rectangles at
+uncovered points, the only ones that matter, by $K_w=13$ and $K_w^*=9$, the latter sharp for all pairs at distance $<d$ (the
+planarity argument of Lemma~\ref{lem:count}(b), with Fodor's theorem \cite{Fod} and Oler's inequality \cite{Ole,FG}, gives $K=27$ at every
+point and is no longer needed); from Lemma~\ref{lem:slit}(a), by which each pair is charged to a single slit;
+from capping the inclinations and splitting off the lines with a wide gap in Lemma~\ref{lem:Bh}; from Lemmas~\ref{lem:A} and~\ref{lem:E}, by which the
+short chords on a line with little waste add up to almost a full unit (this halves the cost of the columns); from
+Lemma~\ref{lem:Eline}, by which the excess of the long chords is paid for by the waste, so that the lines down to the constant
+distance $y_{\min}$ from the walls can be used (this doubles the logarithmic range of scales once more, and with it the slope); from
+Lemma~\ref{lem:crack}, by which a rigid column through the end of a square passes through a tight crack, so that the exceptional
+columns under a square have measure about $1/C$ rather than $2/C$; from measuring heights from both the bottom and the top side,
+which doubles the logarithmic range of scales; and from working with a continuum of scales instead of dyadic bands. With
+$g_0\approx1-\frac1C$ the bracket in the proof is about $(\frac{C'}2+\frac C{C'(1-1/C)})A$, which is minimal, equal to $2\sqrt2\,A$, at
+$C=2$, $C'=2\sqrt2$. The factor $\sqrt{K_w^*/Q_*}\approx5.3$ in $A$ comes from using Propositions~\ref{prop:FL}
+and~\ref{prop:FLpar} for pairs that are consecutive only on a short set of lines, typically at corners where several squares meet,
+whereas in simple configurations, such as a single slightly tilted square in a grid, the ratio of $\int_Y2\beta$ to $W$ in
+Lemma~\ref{lem:Bh} is of order $1$. A lemma charging such short-lived pairs to the slits of neighbouring long-lived pairs with a
+bounded constant would improve $\kappa$ further; we have not been able to prove one. In numerical experiments (randomized dense packings and targeted searches) the largest multiplicity of the rectangles
+$R_e$ found by the accompanying search programs was $5$ (against $27$; an earlier search, whose program was not preserved,
+reported $8$); and the largest number of pairs of squares at distance $<10^{-4}$ (whether or not they
+are edges of $G_h$ or $G_v$) whose rectangles $R(P,Q)$ contain a common uncovered point was $9$, equal to $K_w^*$, in a degenerate
+configuration: two axis-parallel squares on both sides of a slit of width about $10^{-20}$ through the point, each nearly touching
+two slightly tilted squares on either side (random searches found at most $6$). We also found no configuration with $\sum\lambda_r^2<\frac13$ in Proposition~\ref{prop:FLpar}
+(against $0.32$; the smallest value found was $0.333335$). The search programs and their results are part of the accompanying material. With $Q_*=\frac13$ the same proof (with Lemma~\ref{lem:Bh} stated for $\bar\beta\le1.4999\cdot10^{-6}$ and Lemma~\ref{lem:Bv} for
+$\bar\beta\le2.99\cdot10^{-6}$, which still cover their uses in Section~6) would give
+the slope $0.0670$ and the constant $0.0357$ for all $k$ (both rounded down).
+Only the numerical constants depend on the computer-assisted Lemma~\ref{lem:Kw9}: with the analytic bound $K_w=13$ of
+Lemma~\ref{lem:Kw} in place of $K_w^*$, the proof of Section~6 gives $A<12.7476$, a bracket less than $36.493$ (with
+$\Gamma<1.93\cdot10^{-5}$), the slope $1.99954/36.493>0.0547$ and $\kappa=0.0319$. Even with $A$ of order $1$, this
+architecture would limit the slope to roughly $\frac1{\sqrt2A}$, and, with the present $y_{\min}$, the constant for all $k$ to less than
+$1/13.06$, so that a bound useful for concrete $k$ would require a different rate rather than better constants.
+\end{remark}
+
+\subsection*{Changes from version 1.1}
+The lines near the walls are now used. Lemma~\ref{lem:E} (short chords against the excess $E(y)$ of the long chords) and
+Lemma~\ref{lem:Eline} (a bound of $E(y)$ by the waste on lines whose squares have small inclination) are new; in Section~6 the
+cutoff $d(y)\ge\sqrt k/4$ is replaced by the constant $d(y)\ge y_{\min}=236000$, the term $\eta(y)$ is replaced by $E(y)$, and the
+resulting integral $\Gamma$ enters the bracket; the second bound of the theorem now holds for every $k\ge2$ (for $k<10^{12}$ it follows
+from Corollary~\ref{cor:W1}), so the threshold $k_2=10^{13}$ is no longer needed. Lemma~\ref{lem:Bv} is stated for
+$\bar\beta\le3\cdot10^{-6}$ (its proof is unchanged), and Lemmas~\ref{lem:Q} and~\ref{lem:GZ} for $s\ge2.36\cdot10^5$, with
+$w_0=1.265\cdot10^{-5}$ and $g_0=0.49997$. The constant improves from $\kappa=0.033$ to $\kappa=0.0353$, and the asymptotic slope from
+$0.0331$ to $0.0657$; the numbers derived from them (the threshold for $s(k^2-4)=k$, the constant without Lemma~\ref{lem:Kw9}, and
+Remarks~\ref{rem:k} and~\ref{rem:const}) are updated accordingly. Corollary~\ref{cor:evand} is new: it records the constant
+$0.0541$ for all $k\ge2$ that follows if one also uses the unrefereed computer-assisted result $s(k^2-3)=k$ ($k\ge6$) of \cite{Dan};
+the references \cite{Lev,Wan} are new, and the entry \cite{Dan} lists the further files used. Following the findings of an AI review of
+version~1.1 by the Squares Project \cite{LevR}, the following passages were also revised, without changing the results: the standing
+assumption of Section~4 and the proof of Lemma~\ref{lem:Kw9} now agree that $k\ge4$ there, and Section~4 states that Sections~4 and~5 are
+used in the proof of Theorem~\ref{thm:main} only for $k\ge10^{12}$; the proof of Lemma~\ref{lem:Kw9} now explains why the extension of the
+angle intervals to $2\pi$ covers the arc $(\widetilde{2\pi},2\pi)$, shows that the floating-point count of points is exact, says which
+parts of the search programs the re-verification uses, describes the authorship of the two further coverage checks, and reports the
+replay of the computation by the Squares Project; the first remark of Section~7 lists further uses of disjointness; and the remark after
+Lemma~\ref{lem:Kw9} and the remark on large inclinations state that they are not used in the proofs. The new reference \cite{LevR} records
+that review. Nothing else in the mathematics has changed.
+
+\subsection*{Acknowledgements}
+I thank J.~Levy and the Squares Project for an AI review of version~1.1 of this paper and for replaying the computation of
+Lemma~\ref{lem:Kw9} \cite{LevR}; this version takes their findings into account.
+
+\subsection*{Use of AI}
+Claude (Anthropic) was used extensively in developing the arguments, writing the text and the programs (including the
+computation for Lemma~\ref{lem:Kw9}), and in checking them. It is not an author; the author takes full responsibility for the
+contents. The paper has not been refereed.
+
+\subsection*{Licence}
+This text is distributed under the Creative Commons Attribution 4.0 International licence (CC BY 4.0); the accompanying programs and data are
+distributed under the MIT licence.
+
+\begin{thebibliography}{99}
+\raggedright
+\bibitem{AB} M.~Z.~Arslanov, H.~D.~Bui, Note on ``Efficient packings of unit squares in a large square'',
+\emph{Discrete Comput.\ Geom.} \textbf{76} (2026), no.~2, 805--812 (published online 3 August 2025), doi:10.1007/s00454-025-00767-w.
+\bibitem{AMS} M.~Z.~Arslanov, S.~A.~Mustafin, Z.~K.~Shangitbayev, Improved packings of $n(n-1)$ unit squares in a square,
+\emph{Electron.\ J.\ Combin.} \textbf{28}(4) (2021), \#P4.22, doi:10.37236/8586.
+\bibitem{Ben10} W.~Bentz, Optimal packings of 13 and 46 unit squares in a square, \emph{Electron.\ J.\ Combin.} \textbf{17}
+(2010), \#R126, doi:10.37236/398.
+\bibitem{Ben16} W.~Bentz, Optimal packings of 22 and 33 unit squares in a square, arXiv:1606.03746 (2016).
+\bibitem{BuiGood} H.~D.~Bui, Square packing with asymptotically smallest waste only needs good squares,
+arXiv:2504.09489 (2025).
+\bibitem{Bui} H.~D.~Bui, Square packing with $O(x^{0.6})$ wasted area, arXiv:2508.04603v2 (2025, revised 2026).
+\bibitem{Che} chelokot, \emph{square-packing-archive}, GitHub repository,
+\url{https://github.com/chelokot/square-packing-archive}, files \texttt{docs/nagamochi-score-counterexample.md} and
+\texttt{docs/nagamochi-compensation-proof.md}, commit \texttt{753079e} (accessed 3 October 2026).
+\bibitem{CG09} F.~Chung, R.~Graham, Packing equal squares into a large square, \emph{J.\ Combin.\ Theory Ser.\ A}
+\textbf{116} (2009), no.~6, 1167--1175, doi:10.1016/j.jcta.2009.02.005.
+\bibitem{CG} F.~Chung, R.~Graham, Efficient packings of unit squares in a large square, \emph{Discrete Comput.\ Geom.}
+\textbf{64} (2020), no.~3, 690--699, doi:10.1007/s00454-019-00088-9.
+\bibitem{Dan} E.~Daniel, \emph{square-packing}, GitHub repository, \url{https://github.com/evand/square-packing},
+directories \texttt{s12/certificates/k2m3} and \texttt{s12/certificates/k2m4}, files \texttt{s12/search/FRIEDMAN.md},
+\texttt{s12/CREDITS.md} and \texttt{s12/docs/k2m3.html}, and Lean files \texttt{s12/lean/Sqpack/Bentz.lean} and
+\texttt{s12/lean/Sqpack/ValidSplit7.lean}, commit \texttt{7ff3b21} (accessed 5 October 2026; these files are unchanged at commit
+\texttt{13ee36e}, accessed 6 October 2026).
+\bibitem{EG} P.~Erd\H{o}s, R.~L.~Graham, On packing squares with equal squares, \emph{J.\ Combin.\ Theory Ser.\ A}
+\textbf{19} (1975), no.~1, 119--123, doi:10.1016/0097-3165(75)90099-0.
+\bibitem{FLINT} The FLINT team, \emph{FLINT: Fast Library for Number Theory}, version 3.6.0 (2026), \url{https://flintlib.org}.
+
+\bibitem{Fod} F.~Fodor, The densest packing of 12 congruent circles in a circle, \emph{Beitr\"age Algebra Geom.}
+\textbf{41} (2000), no.~2, 401--409.
+\bibitem{FG} J.~H.~Folkman, R.~L.~Graham, A packing inequality for compact convex subsets of the plane,
+\emph{Canad.\ Math.\ Bull.} \textbf{12} (1969), no.~6, 745--752, doi:10.4153/CMB-1969-096-7.
+\bibitem{Fri} E.~Friedman, Packing unit squares in squares: a survey and new results, \emph{Electron.\ J.\ Combin.},
+Dynamic Survey DS7 (1998, revised 2009), doi:10.37236/28.
+\bibitem{Arb} F.~Johansson, Arb: efficient arbitrary-precision midpoint-radius interval arithmetic, \emph{IEEE Trans.\ Comput.}
+\textbf{66} (2017), no.~8, 1281--1292, doi:10.1109/TC.2017.2690633.
+
+\bibitem{pyflint} F.~Johansson, O.~Benjamin, et al., \emph{python-flint}, version 0.9.0 (2026), \url{https://github.com/flintlib/python-flint}.
+
+\bibitem{Kar} H.~Karaku\c{s}, A counterexample to Nagamochi's scoring lemma and a new rectangle packing bound,
+arXiv:2609.37410 (2026).
+\bibitem{KS} M.~J.~Kearney, P.~Shiu, Efficient packing of unit squares in a square, \emph{Electron.\ J.\ Combin.} \textbf{9}
+(2002), \#R14, doi:10.37236/1631.
+\bibitem{Lev} J.~Levy, \emph{The Squares Project}, GitHub repository, \url{https://github.com/jlevy/squares}, files
+\texttt{packing/frontier/RESULTS.md}, \texttt{packing/frontier/results.yaml} (entry T-064) and \texttt{packing/frontier/evidence.yaml},
+commit \texttt{ebf2327} (accessed 6 October 2026).
+\bibitem{LevR} J.~Levy, \emph{The Squares Project}, GitHub repository, \url{https://github.com/jlevy/squares}: AI review of version~1.1 of
+this paper, file \texttt{docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md}, commit \texttt{6953107}, and issue~\#368
+(comments of 5 and 6 October 2026, UTC; accessed 7 October 2026).
+\bibitem{McC} R.~McClenagan, Optimally packing a large square by unit squares, arXiv:2602.01484 (2026).
+\bibitem{Nag} H.~Nagamochi, Packing unit squares in a rectangle, \emph{Electron.\ J.\ Combin.} \textbf{12} (2005), \#R37, doi:10.37236/1934.
+\bibitem{Ole} N.~Oler, An inequality in the geometry of numbers, \emph{Acta Math.} \textbf{105} (1961), 19--48,
+doi:10.1007/BF02559533.
+\bibitem{RV} K.~F.~Roth, R.~C.~Vaughan, Inefficiency in packing squares with unit squares, \emph{J.\ Combin.\ Theory Ser.\ A}
+\textbf{24} (1978), no.~2, 170--186, doi:10.1016/0097-3165(78)90005-5.
+\bibitem{Wan} wand125, \emph{valid7-independent-check}, GitHub repository,
+\url{https://github.com/wand125/valid7-independent-check}, commit \texttt{c561dbb}, with run records in release \texttt{records-v1}
+(accessed 6 October 2026).
+\end{thebibliography}
+
+\end{document}

@@ -1762,18 +1762,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-265.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/7eef24f7221b8c3371d6171dd664b52541bbd479/s12/search/exact/results/sw2/dc1_n266.cert at 7eef24f7221b8c3371d6171dd664b52541bbd479",
+      "kind": "packet-derived-facts",
+      "license_status": "MIT",
       "listed_n": [
         266
       ],
       "n": 266,
-      "raw_asset_retained": false,
-      "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "path": "resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificates and MIT licences retained unchanged.",
+      "retrieved": "2026-10-07",
       "source_n": 266,
-      "url": "https://kingbird.myphotos.cc/packing/square-266.svg"
+      "url": "https://github.com/evand/square-packing/blob/7eef24f7221b8c3371d6171dd664b52541bbd479/s12/search/exact/results/sw2/dc1_n266.cert"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1820,19 +1821,19 @@
       "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n269.txt"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/7eef24f7221b8c3371d6171dd664b52541bbd479/s12/search/exact/results/sw2/sw2_n270.cert at 7eef24f7221b8c3371d6171dd664b52541bbd479",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         270
       ],
       "n": 270,
-      "path": "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-270.yaml",
-      "raw_asset_retained": false,
-      "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-29",
+      "path": "resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificates and MIT licences retained unchanged.",
+      "retrieved": "2026-10-07",
       "source_n": 270,
-      "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n270.txt"
+      "url": "https://github.com/evand/square-packing/blob/7eef24f7221b8c3371d6171dd664b52541bbd479/s12/search/exact/results/sw2/sw2_n270.cert"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
@@ -1850,19 +1851,19 @@
       "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n271.txt"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at 6042c56b43b64c09fe5a32c64879e698f399beaf",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/7eef24f7221b8c3371d6171dd664b52541bbd479/s12/search/exact/results/sw2/rd1_n272.cert at 7eef24f7221b8c3371d6171dd664b52541bbd479",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         272
       ],
       "n": 272,
-      "path": "resources/web/franciscouzo-square-packing-2026-10-03/facts/n-272.yaml",
-      "raw_asset_retained": false,
-      "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-10-05",
+      "path": "resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificates and MIT licences retained unchanged.",
+      "retrieved": "2026-10-07",
       "source_n": 272,
-      "url": "https://github.com/franciscouzo/square-packing/blob/6042c56b43b64c09fe5a32c64879e698f399beaf/n272.txt"
+      "url": "https://github.com/evand/square-packing/blob/7eef24f7221b8c3371d6171dd664b52541bbd479/s12/search/exact/results/sw2/rd1_n272.cert"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",

@@ -1392,6 +1392,7 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     honest -- an index built by adding whatever happens to be on disk would also answer,
     and would put a reader's `attic/` scratch in it (PR 207).
     """
+    from devtools import evand_arrangement_houses as evand  # noqa: PLC0415
     from devtools import refinement_house_links as refinements  # noqa: PLC0415
     from devtools import squish_followup_packets as packet  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
@@ -1424,6 +1425,9 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     linked_proofs.update(
         path.relative_to(controls.REPO).as_posix()
         for path in refinements.snapshot_house_links()
+    )
+    linked_proofs.update(
+        path.relative_to(controls.REPO).as_posix() for path in evand.snapshot_house_links()
     )
     for relative in linked_proofs:
         assert (tree / relative).is_file()
