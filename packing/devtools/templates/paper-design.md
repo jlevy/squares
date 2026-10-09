@@ -1979,7 +1979,9 @@ Max age is a number of days, and empty is no limit. There is no date range.
   Every other result stays: one that still holds a bound, verified or reported, a result
   of a kind that is no bound, such as a rigidity, a simplification or the limit of a
   method, which no better bound supersedes, and one superseded only in part.
-  A result that holds one case of several is not superseded.
+  A result that holds one case of several is not superseded, and neither is a bound
+  better than its case holds that the case records have not taken in yet: it is pending
+  adoption, since nothing has replaced it.
   For a bound the word is derived from the case records
   (`render_recent_results.standing`), so the checkbox and the `superseded` chip cannot
   disagree, and `devtools.check_standing` holds it to the bounds each entry states.

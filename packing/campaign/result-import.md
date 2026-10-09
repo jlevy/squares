@@ -264,12 +264,18 @@ Triage decides what the import is before anything is retained, in an hour or les
 
 Record the claim as reported, by the frontier README’s rules: a reported evidence entry,
 a coverage entry that cites it, the reported lane of each case it improves, and a
-register entry with its ratings and `next_rung`. Three rules are the process’s own:
+register entry with its ratings and `next_rung`. Four rules are the process’s own:
 
 - **`attribution.published` is the claim’s date, not the pin’s:** the date the source
   gives for it, or the UTC date of the first commit that contains the certificate; for
   an entry over several certificates, the last of those dates.
 - **The entry’s `scope` is covered** by the scopes of the evidence it cites.
+- **The claim states each bound it reports**, as `s(n) <= v` with the value the source
+  certifies. Where the case lanes are left unchanged until the result is adopted, as
+  `T-128`’s were, those values are all that relate the entry to its cases: it is
+  *pending adoption* where one is better than its case’s bound, and *superseded* only
+  where the case holds one at least as good
+  ([epistemics.md](../../epistemics.md#status)).
 - **The `T-NNN` is taken last.** An id is its row’s position and cannot be reserved
   across branches, so take it in the commit that registers the result, merge that day,
   and quote it to no author until it is on `main`.
