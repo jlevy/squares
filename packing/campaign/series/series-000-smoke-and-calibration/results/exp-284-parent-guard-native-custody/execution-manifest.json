@@ -1,0 +1,15 @@
+{
+  "cwd": "packing",
+  "production": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.produce_n17_conditional_owned_hull","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/descriptor.json","--max-seconds","600","--output","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/production.json","--child-output","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/conditional-node.json.gz"],
+  "fresh_descriptor_derivation": {"base_descriptor":"campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/descriptor.json","producer_receipt":"campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/production.json","output":"campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/fresh-descriptor.json","rule":"Copy base descriptor unchanged and add child_object from the frozen production receipt. Normalize its path to repository-relative packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/conditional-node.json.gz; retain the exact canonical_sha256 and compressed_sha256. No scientific fields are changed. A missing child or incomplete/refused production stops the experiment without a closure verdict."},
+  "fresh_verification": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.verify_n17_conditional_owned_hull","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/fresh-descriptor.json","--max-seconds","300","--output","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/verification.json"],
+  "combined_supervision": {"wall_seconds":900,"term_at_seconds":900,"kill_at_seconds":910,"sampled_current_rss_mib":4096,"scope":"600s production and 300s fresh replay within one combined lease; no retries"},
+  "limits": {"parent_seed_compressed_and_decoded_mib":10,"parent_node_compressed_mib":512,"parent_node_decoded_mib":2048,"child_compressed_mib":64,"child_decoded_mib":512,"final_and_report_mib":64},
+  "schema": "n17-parent-guard-owned-hull-registration/v1",
+  "registered_at": "2026-10-07T14:17:15Z",
+  "lease_expires": "2026-10-07T14:37:15Z",
+  "lease_scope": "20min preparation/source-launch lease only; actual combined trial remains900s",
+  "target_unrun": true,
+  "source_freeze": "This registration commit; clean relevant source blobs required at actual launch."
+}
+

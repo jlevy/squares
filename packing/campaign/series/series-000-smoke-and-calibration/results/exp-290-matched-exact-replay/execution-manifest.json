@@ -1,0 +1,92 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "registered_at": "2026-10-07T18:53:03.571026+00:00",
+  "target_unrun": true,
+  "source_freeze": "registration commit resolved and recorded at launch",
+  "origin_cells_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-280-centered-endpoint-hull-capacity/descriptor.json",
+  "origin_cells_descriptor_sha256": "51c2a5bfaa550870aba4df8abc2ebb5aa23139dd7922e7c9bcf382b1a6989dfb",
+  "phases": [
+    {
+      "name": "uninstrumented_control",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.profile_n17_exact_replay",
+        "--directory",
+        "campaign/retained/session-184-n17-numeric-cap-readiness",
+        "--cells",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json",
+        "--cells-sha256",
+        "3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5",
+        "--centered-inner-cap",
+        "935106018721/200000000000",
+        "--max-seconds",
+        "180",
+        "--instrumentation",
+        "none",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/none.json"
+      ]
+    },
+    {
+      "name": "phase_observations",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.profile_n17_exact_replay",
+        "--directory",
+        "campaign/retained/session-184-n17-numeric-cap-readiness",
+        "--cells",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json",
+        "--cells-sha256",
+        "3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5",
+        "--centered-inner-cap",
+        "935106018721/200000000000",
+        "--max-seconds",
+        "180",
+        "--instrumentation",
+        "phases",
+        "--compare",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/none.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/phases.json"
+      ]
+    }
+  ],
+  "primary_criterion": "Both fresh same-object runs complete full exact centered replay with identical mathematical result identities and identical seed/node/cells byte digests. The PHASES receipt matches the NONE baseline and retains all16 step boundaries, memo-eviction observations and bounded RSS samples. Instrumentation never changes verification arithmetic, coverage or acceptance. This establishes a diagnostic control and observations, not speedup or a new geometric admission. Resource stops, changed inputs or semantic differences refuse equivalence.",
+  "budget": "NONE180s + PHASES180s scientific budgets; combined360s inside owned-group TERM370/KILL380 allowing10s setup/serialization. One worker, sampled4096MiB PER live process with owned cleanup. Instrumentation overhead is measured and cannot establish gain. Input/output ceilings and cooperative checks in the frozen profiler; partial diagnostics retained.",
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "370",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/phase-execution.json"
+  ]
+}

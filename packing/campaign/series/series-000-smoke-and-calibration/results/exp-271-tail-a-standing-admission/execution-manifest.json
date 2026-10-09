@@ -1,0 +1,13 @@
+{
+  "experiment": "exp-271",
+  "source_object_provenance": "65fc5dcbd7a025a50bc31ac7fb64ce65fe4aed37",
+  "certificate_directory": "campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311",
+  "seed_sha256": "6faea90c24b780eb86d46d6a001d39a8a6d945163950802800a8be3d67c65739",
+  "node_sha256": "ec6ac70d574eea5deddb12eddb76019a6bc4bccd06273235713da845ab0a1381",
+  "mode": "full",
+  "wall_seconds": 900,
+  "term_seconds": 900,
+  "kill_seconds": 910,
+  "sampled_current_rss_limit_mib": 4096,
+  "command": "From packing/ with externalTMPDIR/UV_CACHE_DIR/CARGO_TARGET_DIR: /usr/bin/time -p /opt/homebrew/bin/gtimeout -k10s900s /Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3 -m devtools.verify_n17_kernel_certificate campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311 --output campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311/verification.json --progress. No --sample or --cells override."
+}

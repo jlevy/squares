@@ -1,0 +1,16 @@
+"""Execute only the two frozen registered finite-proof command arrays."""
+import datetime,json,subprocess,sys,time
+from pathlib import Path
+from sqpack import retained_json
+root=Path('campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness')
+plan=json.loads((root/'execution-manifest.json').read_text())
+started=time.monotonic()
+record={'schema':'n17-registered-two-phase-execution/v1','started_at':datetime.datetime.now(datetime.UTC).isoformat(),'phase_runs':[]}
+for phase in ('construction','fresh_verification'):
+    before=time.monotonic()
+    run=subprocess.run(plan[phase],check=False)
+    record['phase_runs'].append({'phase':phase,'argv':plan[phase],'returncode':run.returncode,'wall_seconds':time.monotonic()-before})
+    record['wall_seconds']=time.monotonic()-started
+    (root/'phase-execution.json').write_text(retained_json.dumps(record)+'\n')
+    if run.returncode:
+        sys.exit(run.returncode)

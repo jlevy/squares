@@ -1,0 +1,74 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "registered_at": "2026-10-08T01:17:07.921550+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch afterpeercontrols",
+  "target_unrun": true,
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_one_round_owned_domain_propagation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_one_round_owned_domain_propagation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/replay.json"
+      ]
+    }
+  ],
+  "primary_criterion": "Bind exact acceptedexp297 three roles and full named immutable dependency chain; preserve SAME25primaryMISS and verified22-row secondary baseline11/32. Inherit complete regionalconditioning, freshly reconstruct all992 prior collective decisions exactlyonce; join every originalclosed typedrow and baselineunion, with full1056/inherited17parent premise. Apply proved oldexclusions, simultaneously recoverall16foreign ownedgroups at epsilon2^-20 with fixedowner0Q0, prechargebounded exactintersectionwork, then atmostone simultaneous self-owner-excluded full992 closed-domain union-coverage pass. Primarystrict additional exacthalf-angle parameter unionlengthloss foranyowner, or separatelychecked complete sharedstrictpoint/ownercover-empty contradiction. Old11/32 loss nevercountsagain; partial centre restrictions/newgroupvertexcounts alone are diagnostic. Fresh separate process must match complete payload/custody/quantifier scope. No feedback/childsplits/pointsubstitution/globalcapture/ordinaryU/census claim. Resource/refusal incomplete is not a negative verdict.",
+  "budget": "180s construction plus180s fresh underowned-groupTERM360/KILL370; one worker,sampled4GiB currentRSS perliveprocess;64MiBoutput/inputs,10MiBdescriptor,exactbitbound finite.BIT_LIMIT,owner0vertices guard.OWNER0_LIMIT/foreign guard.OWNED_LIMIT;512 transferquadratics NOT invoked in directmode. Newrecovery andprior/newcollective caps remain separate andunchanged; cumulative2Mintersectionproducts precharged,guard.INTERSECTION_LIMIT outputs; no internalhomogeneouseventcap claim.",
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "360",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/phase-execution.json"
+  ]
+}

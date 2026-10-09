@@ -1,0 +1,10 @@
+{
+  "source_revision": "68a924c657171a413fbe7c6a9cfefb40f860b8aa",
+  "outcome": "publication_error",
+  "exception": "FileNotFoundError",
+  "cause": "Declared output parent directory was not created before atomic_write_text",
+  "observed_before": "2026-10-07T07:27:56Z",
+  "measurement_retained": false,
+  "computation_seconds": null,
+  "recovery": "Create declared output directory; run unchanged command/source/criterion within original lease"
+}

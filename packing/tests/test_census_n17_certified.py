@@ -15,6 +15,7 @@ from typing import Any
 
 import pytest
 
+from devtools import census_n17_certified as census_tool
 from devtools.census_n17_certified import (
     BB_CERTIFIED,
     BB_SCHEMA,
@@ -36,7 +37,8 @@ from devtools.census_n17_certified import (
     main,
 )
 from devtools.select_n17_sub_patterns import SCHEMA as SELECTOR_SCHEMA
-from sqpack.hosted_data import CONTRACT, fetch_command
+from sqpack import retained_json
+from sqpack.hosted_data import CONTRACT, HostedDataMissingError, fetch_command
 from sqpack.yamlio import load_yaml
 
 W7 = ["corner-SW", "side-N0", "side-W0", "side-W1", "side-W2", "interior-SW", "interior-W"]
@@ -574,9 +576,13 @@ def test_the_cli_names_the_fetch_command_when_objects_are_absent(
     flags = {"schema": SELECTOR_SCHEMA, "design": DESIGN, "flagged": []}
     receipt = write_json(tmp_path, "f.json", flags)
     command = ["--root", str(tmp_path), "--selector-receipt", receipt]
-    assert main([*command, "--ledger", "ledger.yaml"]) == 0
+    output = tmp_path / "saved-census.json"
+    assert main([*command, "--ledger", "ledger.yaml", "--output", str(output)]) == 0
     captured = capsys.readouterr()
     assert json.loads(captured.out)["certified"]["admitted"] == 1
+    saved = output.read_text(encoding="utf-8")
+    assert saved == captured.out == retained_json.dumps(json.loads(saved), sort_keys=True)
+    assert not saved.endswith("\n\n")
     assert fetch_command(tmp_path / MANIFEST) in captured.err
     assert main([*command, "--ledger", "missing.yaml"]) == 2
     assert "does not exist" in json.loads(capsys.readouterr().out)["refused"]
@@ -620,27 +626,40 @@ def test_the_manifest_is_refused_unless_it_meets_the_hosted_data_contract(
 
 @pytest.fixture(scope="module")
 def committed_census_without_flags() -> dict[str, Any]:
-    """The bare committed census shared by its two read-only consumers."""
+    """The bare current committed census reused by the projection control."""
     return census(REPO / DEFAULT_LEDGER, selector_receipts=())
 
 
 def test_the_committed_ledger_counts_its_four_admitted_entries_without_the_dumps(
-    committed_census_without_flags: dict[str, Any],
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """W7, A, SW9 and N1 count from the committed receipts whether or not the hosted
     certificate objects are in place, to exp-250's census."""
-    record = committed_census_without_flags
+    ledger = exp250_ledger(tmp_path)
+    document = load_yaml(ledger.read_text(encoding="utf-8"))
+    directories = [entry["certificate"].rstrip("/") + "/" for entry in document["entries"]]
+    manifest = load_yaml((REPO / document["data_manifest"]).read_text(encoding="utf-8"))
+    objects = [
+        item
+        for item in manifest["objects"]
+        if any(item["path"].startswith(d) for d in directories)
+    ]
+
+    def absent(*_args: Any, **_kwargs: Any) -> Path:
+        raise HostedDataMissingError("fixture deliberately has no hosted certificate objects")
+
+    monkeypatch.setattr(census_tool, "require_from_manifest", absent)
+    record = census(ledger, selector_receipts=())
     admitted = {row["name"] for row in record["entries"] if row["status"] == "admitted"}
-    assert {"W7", "A", "SW9", "N1"} <= admitted
+    assert admitted == EXP250_ADMITTED
     assert record["certified"]["admitted"] == len(admitted)
     assert record["certified"]["endpoint_survives"]
     retained = json.loads(EXP250_CENSUS.read_text(encoding="utf-8"))
-    if admitted == {"W7", "A", "SW9", "N1"}:
-        assert record["certified"] == retained["certified"]
-    # Session 182 staged the seeds and nodes of its admitted certificates (exp-251,
-    # exp-252): 92 files and 112,285,110 bytes before them.
-    assert record["data"]["files"] == 200
-    assert record["data"]["bytes"] == 2_135_600_454
+    assert record["certified"] == retained["certified"]
+    assert record["data"]["files"] == len(objects) > 0
+    assert record["data"]["bytes"] == sum(item["size"] for item in objects) > 0
+    assert record["data"]["certificates_not_in_place"] == 4
+    assert {row["certificate_data"]["local"] for row in record["entries"]} == {"absent"}
 
 
 def exp250_ledger(tmp_path: Path) -> Path:

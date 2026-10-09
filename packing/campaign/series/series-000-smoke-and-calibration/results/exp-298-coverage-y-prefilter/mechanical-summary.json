@@ -1,0 +1,76 @@
+{
+  "schema": "n17-coverage-candidate-campaign-summary/v1",
+  "status": "INCOMPLETE",
+  "gain_accepted": false,
+  "complete_replay_receipts": 6,
+  "planned_replays": 8,
+  "complete_mathematical_input_and_full16_boundary_parity": true,
+  "mathematical_result_sha256": "da773cbe5162bbed168f386a70f3062fe712da41dd78be7f4cb03e459427feea",
+  "original_source_bytes_unchanged": true,
+  "source_commit": "2d6b35c8b995d3502c98d90545714df0cb956abb",
+  "primary_reason": "guard_unavailable",
+  "guard_failure": "Command '['/bin/ps', '-axo', 'pid=,pgid=,rss=,stat=']' timed out after 1 seconds",
+  "cleanup_complete": true,
+  "wall_seconds": 738.1659635830438,
+  "missing_receipts": [
+    "07-candidate.json",
+    "08-baseline.json"
+  ],
+  "phase_status_note": "Raw phase execution retains seventhphase running because its process died with the owned group; completedcanonical supervision proves groupcleanup, not ongoing execution.",
+  "complete_phases": [
+    {
+      "arm": "baseline",
+      "pid": 41374,
+      "wall_seconds": 100.69995524996193,
+      "cpu_seconds": 100.54272,
+      "sampled_current_rss_bytes": 428916736
+    },
+    {
+      "arm": "candidate",
+      "pid": 42956,
+      "wall_seconds": 91.54768887499813,
+      "cpu_seconds": 91.41868,
+      "sampled_current_rss_bytes": 431423488
+    },
+    {
+      "arm": "candidate",
+      "pid": 44402,
+      "wall_seconds": 90.92030291596893,
+      "cpu_seconds": 90.811277,
+      "sampled_current_rss_bytes": 440221696
+    },
+    {
+      "arm": "baseline",
+      "pid": 46195,
+      "wall_seconds": 140.50407170900144,
+      "cpu_seconds": 104.220004,
+      "sampled_current_rss_bytes": 402440192
+    },
+    {
+      "arm": "baseline",
+      "pid": 52965,
+      "wall_seconds": 153.11594937497284,
+      "cpu_seconds": 109.504384,
+      "sampled_current_rss_bytes": 435453952
+    },
+    {
+      "arm": "candidate",
+      "pid": 65748,
+      "wall_seconds": 129.09340349998092,
+      "cpu_seconds": 98.759112,
+      "sampled_current_rss_bytes": 434012160
+    }
+  ],
+  "scientific_admission_proved": false,
+  "automatic_retry": false,
+  "derived_reconciliation": {
+    "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/phase-execution-reconciled.json",
+    "sha256": "0e5dfb96cb52d85cff170c46e3ee9e2eef96430436798cf50ec06fd39965c677",
+    "status": "incomplete",
+    "six_completed_preserved": true,
+    "seventh": "interrupted_by_supervisor with unknown child returncode/time",
+    "eighth": "unstarted",
+    "raw_evidence_modified": false,
+    "scientific_verdict_inferred": false
+  }
+}

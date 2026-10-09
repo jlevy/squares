@@ -64,6 +64,8 @@ from sqpack.hull_kernel.rational import Q, Z
 from sqpack.hull_kernel.sequential import derived_closure, owner_extents
 
 GRID = 2**20
+# Try a point nearer the vertex before either policy's original coarse fallbacks.
+FINE_HULL_PULL = Q(1, 2**18)
 
 
 def content_sha256(value: Any) -> str:
@@ -204,7 +206,7 @@ def compress(original: Polygon) -> tuple[list[Point], list[dict[str, Any]]]:
     cy = sum((y for _, y in original), Q()) / n
     chosen: dict[Point, tuple[list[int], list[Q]]] = {}
     for x, y in original:
-        for pull in (Q(1, 2**12), Q(1, 2**8), Q(1, 2**4), Q(1, 4)):
+        for pull in (FINE_HULL_PULL, Q(1, 2**12), Q(1, 2**8), Q(1, 2**4), Q(1, 4)):
             point = (_grid(x + (cx - x) * pull), _grid(y + (cy - y) * pull))
             witness = _barycentric(original, point)
             if witness is not None:
@@ -702,7 +704,7 @@ def kernel_points(frame: Frame, planes: list[Halfplane]) -> list[Point]:
             Q(round((y + (cy - y) * pull) * GRID), GRID),
         )
         for x, y in region
-        for pull in (2.0**-12, 2.0**-6, 0.25, 0.5)
+        for pull in (float(FINE_HULL_PULL), 2.0**-12, 2.0**-6, 0.25, 0.5)
     )
     return [
         point
