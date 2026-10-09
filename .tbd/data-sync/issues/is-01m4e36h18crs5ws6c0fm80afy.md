@@ -5,7 +5,7 @@ title: Review and validate the atlas site cleanups
 kind: task
 status: in_progress
 priority: 2
-version: 17
+version: 18
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,11 +13,11 @@ parent_id: is-01m4e35s7r1e65r1qmpz250h0p
 hold: null
 hold_until: null
 created_at: 2026-10-08T15:48:04.263Z
-updated_at: 2026-10-09T03:35:56.636Z
+updated_at: 2026-10-09T04:44:15.321Z
 started_at: 2026-10-08T15:49:07.449Z
 ---
 Review source changes and exported atlas, run focused checks and the change-reachable gate, then commit/push a focused PR and confirm CI. Keep the site cleanup epic open for further requests.
 
 ## Notes
 
-Current approved integration and maintained pin are committed at 327aed41, with published main d43ea686d included and data pin 9c34421f. The complete current records gate passed all 48 selected steps in 62.25 seconds with zero skips or failures. Current source contracts pass 27 PDF tests and all 46 result-overview tests across two honest receipts; earlier 191 CLI and 19 budget/snapshot contracts also passed. Senior review covers 83 of 95 changed paths, with only 12 generated/deleted asset paths excluded, and found one P2 producer bug: update_selected writes the full figure before refusing a scoped refresh. Fix is tracked by think-59ta and must pass no-write-on-refusal regressions and independent confirmation. Current PDF assets passed actual full-page and cropped visual/text/ink checks but will be regenerated for the latest equal-font unlinked black footer and recent-first credits. The current website preview refresh is still in progress; old page HTML must not be called fresh. Finder has again revealed the dated 324 PDF. Automated browser navigation remains blocked; the original human-approved localhost:8799 server stays available for manual review. Full push gate, branch push, PR, exact-head hosted CI and full checkpoint remain pending. Original local-merge approval blocker is resolved. Keep the epic open for further requests; no GitHub merge authorized.
+Final clean HEAD818c4c372c9abc5878e7ed755e1ee79fa19f1a1f, base3213d651b880d7768bce8506efaf75c2089aeb4f, data9c34421f. All exact user typography requirements now source/actualPDF verified:15shared body lines, uniform face/size/weight/spacing, two black plain final lines, right ink alignment; retained cards unchanged. Producer preflight R1 fixed in a7; independent source review at818 reports no open material findings and covers84non-bulk paths of96,12generated/deleted artifacts separately visually verified. Four review body drafts pending publication/trust/CI. Maintained export56.76s/postflightgreen; integrated preview92.16s,5677file checks,9assets+2aliases byte-equal, newmethods payload intact. Final PDF reopened in defaultPreview from verified569KBfile. Current full required --push against3213 is running;63completed edit checks all passed so far, reachable whole suite underway. No PR/push/final hosted or checkpoint pass claimed yet. Keep epic open; no GitHub merge authorized.
