@@ -5,7 +5,7 @@ title: Reconcile resumed intake ledger and dated source follow-ups
 kind: task
 status: in_progress
 priority: 1
-version: 23
+version: 24
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -24,7 +24,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T20:32:09.852Z
-updated_at: 2026-10-09T03:45:04.318Z
+updated_at: 2026-10-09T04:05:19.280Z
 started_at: 2026-10-08T20:33:04.467Z
 ---
 Add missing425/438 mappings and445 engineering disposition; append all observed maintainer replies and dated375 source updates without changing older result scopes or claiming new replay. Preserve all prior rows and prefixes, give newly identified batch certificate custody an explicit child owner, and validate the enforced request contract on the current intake top.
@@ -78,3 +78,5 @@ Normal one-file composition published atomically4432bd8d96a9860657149a1e47ae5ce0
 Source20 Couzo final stagedtree0f97490b3a1b5db439e4c048d61eb806eb3bd9ff32paths in full Astra closure. Medium prevalidation outside schema read fixed before any I/O with retained RED/read-sentinel controls; observed numeric-f64 encoding qualified, no author-generation precision claim. Freshrecords49/107stepsPASS180.41/300UNARMED,53controlsPASS/RuffBPy0. VERIFIERS minimaldenominator467->468 only;24newscopedsoftschemaPASS, inheritedaliasdirectCLIrefusal retained. Actual selectedprivate cap200064130/201326592 excluding unchanged resources-pruned22 packetfiles1102850B explicitly; ordinary checkout retainsalltrackedderivedfacts, no newT/privateworker/geometry/native/assurance/horizon upgrade/rawsourceinGit. Sourcecommit awaits Astra finalacceptance; final corrected463parentmerge later.
 
 Main actual source replies3996073318623/4196073319280/4206073319527 posted,399closedcompleted02:56:58Z, lattertwo source-only/no proof replay. Three actual replyledgerappends includedsource20checkpoint; hh48 remainsliveuntilledgerlands. New fiveCouzo reports84/86/105/175/270 pinned2d32a6e from460comment6070798890 tracked88r0OPEN, not acquired or independently verified. All four available agent slots busy=root/twoSol/Astra. No newTrash/emptyTrash/uniqueproofdiscard, no competingforeign403435push, n17 source-cap/parentconflicts stillholdindependentstacks.
+
+2026-10-09 final handoff requested by owner: all ten formal430 source heads committed and pushed; independent docs PR467 at43aeccb9e, source20 PR466 at6acce39a, diagnostic PR468 atd0ea1330. Source20 and final diagnostic union Astra-accepted, normal hooks/pinchecks passed, no Linux experiment dispatched. Four resumed prefix merges434439440441 already landed; foreign458 subsequently landed main3213, not integrated into remaining intake branches. Existing443 full37878602026 PASS;442 fullFAILoverview12.08>12 plus oldbead snapshot,448 PagesFAILCLS0.209 and fullFAILoldbead;449450 automaticPASS/fullpending;459460 validateFAIL3surveyURLhistory registrations;463 suiteAFAILextraT129 expected-set;466 validate/suiteCFAIL4integrity baseline sites plusURLs, suiteA sameT129, PagesPASS. Source20 records49steps functionalPASS456.15>300UNARMED no budget/fullcredit. Five remaining PR bodies refreshed actualheads/reviewlinks/CI. Durable handoff docs/project/handoff-2026-10-09-intake-stabilization.md; external review-notes/handoff-ci-failures.json and intake-preparations preserve complete raw custody outside disposable scratch/Git. Newfive720poses+two375/378753poses acquired but unreplayed/unimported; five missingreplyURLs and unmappedrepositorychanges remain. No further fixes/measurements planned in this session. Keepmx4n/yij0/hh48/rxyl/hpif/1545/88r0 open for their true remaining scope; ownerhandsnewagentstabilization next.
