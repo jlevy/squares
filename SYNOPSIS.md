@@ -328,8 +328,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Agendas | 42 | 20 active; 16 completed; 5 paused; 1 superseded |
 | Commitments | 436 | 233 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
 | Sessions | 185 | 105 completed; 80 stopped; all terminal |
-| Explorations | 48 | 28 linked to proposed hypotheses; 20 uncodified |
-| Hypotheses | 258 | 73 confirmed; 48 refuted; 64 blocked; 24 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Explorations | 49 | 29 linked to proposed hypotheses; 20 uncodified |
+| Hypotheses | 274 | 73 confirmed; 48 refuted; 72 blocked; 24 unresolved; 15 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 245 | 93 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 130 | 130 registered, 100 by others |
 
@@ -5959,6 +5959,22 @@ round that names the hypothesis, control roles included.
 | [H-322](packing/campaign/hypotheses/H-322-incircle-disk-projection.md) | confirmed | Exact incircle-disk projection | 1 | Exact disk diagnostic detects 114 proper pair constraints and zero ordinary-impossible pairs |
 | [H-323](packing/campaign/hypotheses/H-323-shared-centre-endpoint-control.md) | unresolved | Exact rational endpoint calibration under the originally registered r3 action | 1 | exp315 refused wrong canonical mask before E/D/H; fresh unstarted; prospective f1 correction only |
 | [H-324](packing/campaign/hypotheses/H-324-shared-centre-explicit-f1-control.md) | confirmed | Exact endpoint relaxation calibration under separately registered explicit-f1 | 1 | exp316 fresh verification:17cells136pairs810rows34coordinates; no first8 or bound movement |
+| [H-325](packing/campaign/hypotheses/H-325-n17-endpoint-state-cap-scan.md) | open | The endpoint’s own occupancy state is excluded at a cap one hundredth below $S^\ast$ | 0 | — |
+| [H-326](packing/campaign/hypotheses/H-326-n17-cap-ladder-lower-bound.md) | blocked | $s(17) > S^\ast - 1/100$ by exclusion of every residue orbit at a centred cap | 0 | — |
+| [H-327](packing/campaign/hypotheses/H-327-n17-hard-tail-decomposability.md) | open | Most distance-2 residue orbits contain an infeasible sub-pattern of arity at most ten | 0 | — |
+| [H-328](packing/campaign/hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) | blocked | Centre-only relaxations exclude no distance-2 orbit; the first-eight LP’s eight survivors are known from the W2 review, pending registration | 0 | — |
+| [H-329](packing/campaign/hypotheses/H-329-n17-feature-forced-lp-terminal-certificate.md) | blocked | An exact dual-sheet patch certificate proves the widened projection theorem over the feature-forced angle box | 0 | — |
+| [H-330](packing/campaign/hypotheses/H-330-n17-no-mans-land-map.md) | blocked | The gap between exclusion reach and the terminal radius is confined to two directions | 0 | — |
+| [H-331](packing/campaign/hypotheses/H-331-n17-b2-branching-on-the-hard-tail.md) | blocked | Learned-weight angle splits bring branch and bound to the hard tail | 0 | — |
+| [H-332](packing/campaign/hypotheses/H-332-n17-contributor-admission-throughput.md) | open | The four fully reported contributor certificates replay and admit within bounded resources | 0 | — |
+| [H-333](packing/campaign/hypotheses/H-333-n17-lean-hand-lemmas.md) | open question | Which hand lemmas of the n17 proof formalise in Lean within a day each | 0 | — |
+| [H-334](packing/campaign/hypotheses/H-334-n17-composition-checker.md) | blocked | A composition checker derives the residue and the theorem from the receipts and refuses every mutant | 0 | — |
+| [H-335](packing/campaign/hypotheses/H-335-n17-two-verifier-parity.md) | open | The Rust and Python kernel verifiers agree on every admitted entry and refuse every mutant | 0 | — |
+| [H-336](packing/campaign/hypotheses/H-336-n17-fresh-clone-replay.md) | open | Every admitted certificate is hosted and one of each kind replays from a fresh clone | 0 | — |
+| [H-337](packing/campaign/hypotheses/H-337-n11-capture-positive-control.md) | blocked | The repaired n17 capture producer reproduces n11’s contraction from the cells | 0 | — |
+| [H-338](packing/campaign/hypotheses/H-338-n17-state-conditioned-charge.md) | open question | Does a charge specialised to one occupancy state exclude it below $S^\ast$ | 0 | — |
+| [H-339](packing/campaign/hypotheses/H-339-n17-feature-flip-atlas.md) | blocked | A small feature-flip atlas doubles the terminal region’s radius | 0 | — |
+| [H-340](packing/campaign/hypotheses/H-340-n17-per-coordinate-radius-composition.md) | open | The composed local theorem holds with every coordinate at least $1/1216$ | 0 | — |
 
 ### Confirmed
 
