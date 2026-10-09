@@ -5,7 +5,7 @@ title: Reorder the poster information and align the final project URL
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,11 +13,11 @@ parent_id: is-01m4e35s7r1e65r1qmpz250h0p
 hold: null
 hold_until: null
 created_at: 2026-10-09T02:11:17.535Z
-updated_at: 2026-10-09T02:55:14.811Z
+updated_at: 2026-10-09T03:35:52.620Z
 started_at: 2026-10-09T02:13:50.740Z
 ---
-Use the latest human wording for the poster closing: Diagram by Joshua Levy; October 8, 2026 · generated publication edition; blank separation; Citations and details in The Squares Project; github.com/jlevy/squares. The final two lines are black and right aligned, with a smaller regular URL. Put the exact two-line square-packing problem above the legend and the degree explanation in the final right-column item, shared with the website. Preserve triangle geometry and current scientific records, regenerate both families, inspect actual PDF text alignment, and finish the clean ready-to-merge PR. Root owns the human-approved local integration; no GitHub merge is authorized.
+Use the latest human wording for the poster closing: Diagram by Joshua Levy; October 8, 2026 · publication edition; blank separation; The Squares Project; github.com/jlevy/squares. The final two lines must use identical plain black typography and right alignment. The repository address is printable text, with no hyperlink or specialized URL styling. Keep the exact two-line problem above the legend and the degree explanation as its final right-column item, shared with the website. Preserve triangle geometry and scientific records; regenerate and inspect the actual PDFs before the ready-to-merge PR.
 
 ## Notes
 
-Workflow entry point: refine information on reviewed clean7900aafad, then approved local-main integration and final publication. Latest user wording supersedes prior Project-only closing reference. Exact closing sequence: Diagram by Joshua Levy; formatted date before publication version; blank separation; Citations and details in The Squares Project; github.com/jlevy/squares as the final line. URL stays black, uses smaller regular typography, and aligns its actual PDF ink edge with the other right-aligned content. Exact two-line problem definition moves above legend; degree explanation becomes fourth/last item in right legend column, with shared eight-item construction on web and324PDF. Senior diagnosis of actual priorPDF found a macOS Cairo/Helvetica slash advance mismatch losing13.30SVGunits across two slashes, despite the correct7281endanchor. ScopedArial-first URL typography addresses this; no fixedhorizontalfudge or scientificdata changes. PDF writer owns builder/tests, web writer owns shareddescriptor/web/docs, strong agent owns independent diagnosis/review; root owns Git/tbd and approvedmainintegration. Triangle geometry and uniform physical pitch remain unchanged. Final generation, actual PDF edge/visual checks and publication gates still pending.
+Latest user wording supersedes the earlier Citations and details wording and smaller URL font. Both final project lines now share family, size, weight and black color; remove the PDF hyperlink entirely and verify actual ink alignment and absence of link annotations. The definition above the legend and the shared final degree item are implemented. Prior 9c3442 exports passed actual Poppler text, geometry and right-edge checks; regenerate them after this new typography refinement. Publication data remains 9c34421f7e122512275e45dcbec114f970232431, October 8, 2026. Root owns Git and tbd; PDF agent owns builder, tests and exports; web agent owns the web legend; strong agent owns independent review. No GitHub merge is authorized.

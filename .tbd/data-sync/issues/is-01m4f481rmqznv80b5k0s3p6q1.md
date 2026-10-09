@@ -5,7 +5,7 @@ title: Integrate published record updates before the atlas cleanup PR
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,11 +13,11 @@ parent_id: is-01m4e35s7r1e65r1qmpz250h0p
 hold: null
 hold_until: null
 created_at: 2026-10-09T01:25:37.170Z
-updated_at: 2026-10-09T02:55:15.292Z
+updated_at: 2026-10-09T03:35:54.689Z
 started_at: 2026-10-09T01:52:34.240Z
 ---
-Integrate published scientific records coherently into the cleanup branch before publication. The human explicitly approved the local merge of main 24fe88bc44967970d72f7d1efc9bf2a325b74f17, which includes n68/n105/n292 refinements and archived asymptotic reports. All conflict contents are resolved; the derived composite figure and 896-row URL history check pass. Merge contract checks pass 191 CLI tests and 19 selected budget/snapshot tests. Preserve source/evidence amendment history, requested layout and n211 reflection, commit the merge and re-pin via the maintained producer before final exports. Main has since advanced to d43ea686d, adding selected n266/n270/n272 arrangements; a read-only overlap audit is in progress before any further integration action. Complete final gates, push, PR and exact-source/base hosted checkpoint. No GitHub PR merge is authorized.
+Published main d43ea686d555efe3d866e88b960f60c9d2e0a7d1 is now coherently integrated into the cleanup branch. The human approved the local main integration; automatic approval accepted its continuation when main advanced. Preserve complete n68/n105/n292 refinements and n266/n270/n272 source receipts, requested layout, n211 reflection and provenance. Data commit is 9c34421f7e122512275e45dcbec114f970232431 and source/pin checkpoint is 327aed41a5f27193747e111f1ac1cdcf755f99d0. Complete final publication gates and exact-head hosted checks. No GitHub PR merge is authorized.
 
 ## Notes
 
-Human explicitly approved the local merge of published main24fe88bc44967970d72f7d1efc9bf2a325b74f17 in this chat, replacing the older b810 request. This resolves the automatic-review confirmation block for that local integration; no GitHub PR merge is authorized. Root will save independently reviewed new information/footer/shared-legend edits from think-idan, then integrate that exact published source, including PR434 n68/n105/n292 refinements and PR439 archived asymptotic reports. Preserve requested layout, n211 horizontal reflection and source/evidence amendment history; rederive coherent current records, commit/re-pin data, regenerate both export families and the maintained preview, then finish full push and exact-head hosted gates plus PR. Current prior9695exports remain available and labeled by their own edition. Stack preflight reports branch is not locally tracked and GitHub confirms no PR currently exists.
+Both local merges are committed: 24a4cae0 integrates the explicitly approved 24fe88bc4 main; 9c34421f integrates the later published d43ea686d scientific packet under the same approved local-main workflow. Isolated pin commit 327aed41 stamps v0.5.0-9c3442. Current records pass the entire 48-step records selection in 62.25 seconds with zero skips or failures. Historical URL validation preserves 903 rows with zero failures. Source snapshot measures 201716680 bytes below the unchanged 209715200-byte ceiling. Current corpus has 292 exact, 32 numerical, 77 optimal and 22 known-rigid entries; n266/n270/n272 replacement arrangements carry no rigidity badge. Latest published main readback still equals d43ea686d. Final typography/credits refinements and a producer refusal-side-effect fix precede source freeze, full push, PR, CI and full checkpoint.
