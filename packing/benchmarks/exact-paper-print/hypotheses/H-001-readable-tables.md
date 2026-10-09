@@ -45,6 +45,16 @@ summary type. Split keyed tables are parked unless that candidate fails.
 The outcome metric is physical readability; viewport shrink is a mechanism diagnostic,
 not its substitute. This is not a timing or statistical performance claim.
 
+## Candidate Plan Clarification, Before CSS Edits
+
+At 2026-10-09T07:53:17.556514+00:00, the extended cell baseline identified an additional
+ordinary six-column table: 594.28-pixel table width within a 544-pixel wrapper.
+The same first candidate contains both ordinary-table causes, keeping explicit column
+allocation for the five-column exact forms and the 9-point summary target.
+The physical outcome, content guards, named-page measure and 1-pixel tolerance remain
+those registered above.
+No candidate CSS had been edited or measured when this clarification was recorded.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
