@@ -97,6 +97,7 @@ from devtools import ryxu_house_links as ryxu
 from devtools import squish_second_update_confirmation as second
 from devtools import squish_second_update_house_links as house
 from devtools import wand125_fn1_bindings as fn1
+from devtools.check_checkout_imports import environment_for
 from devtools.repo_scope import tracked_files
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
@@ -1864,6 +1865,10 @@ def clone_tree(dest: Path) -> None:
 
     for rel in LINK_BACK:
         source = ROOT / rel
+        # A worktree can use a frozen environment outside its source tree. Linking
+        # the harness environment prevents uv --no-sync creating an empty worker venv.
+        if rel == Path(".venv") and not source.exists() and sys.prefix != sys.base_prefix:
+            source = Path(sys.prefix)
         if not source.exists():
             continue
         link = work / rel
@@ -1898,8 +1903,7 @@ def control_environment(tree: Path, pycache: Path) -> dict[str, str]:
     One function for `run_one` and for the test that runs each command unmutated, so a
     baseline is taken in exactly the environment the mutation is.
     """
-    work = tree / HERE
-    env = os.environ.copy()
+    env = environment_for(tree, dict(os.environ))
     # Registry commands spell python/python3: use the interpreter running this
     # harness, including an external frozen environment, rather than the shell's.
     env["PATH"] = str(Path(sys.executable).parent) + os.pathsep + env.get("PATH", "")
@@ -1916,14 +1920,6 @@ def control_environment(tree: Path, pycache: Path) -> dict[str, str]:
     # editable project from a temporary snapshot, which disappears after this run
     # and leaves the developer environment broken. Snapshot imports must still win.
     env["UV_NO_SYNC"] = "1"
-    import_roots = (
-        str(work / "src"),
-        str(work),
-        str(tree / "packages/workbench/tools"),
-    )
-    env["PYTHONPATH"] = os.pathsep.join(
-        (*import_roots, env["PYTHONPATH"]) if env.get("PYTHONPATH") else import_roots
-    )
     # Two controls can make same-size edits to one module inside the same filesystem
     # timestamp tick. Python's normal timestamp-and-size bytecode cache would then
     # let the second command execute the first control's mutation. Give every
