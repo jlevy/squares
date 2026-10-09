@@ -5,7 +5,7 @@ title: "Website: compact homepage, consistent case layouts, and scroll-aware nav
 kind: epic
 status: in_progress
 priority: 1
-version: 31
+version: 32
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -30,7 +30,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:13:39.980Z
-updated_at: 2026-10-09T01:48:01.280Z
+updated_at: 2026-10-09T01:55:47.948Z
 started_at: 2026-10-08T23:22:05.552Z
 ---
 W9 website remediation tracked by eleven implementation beads and combined verification. Preserve original hero and exact problem introduction; centered About project card; compact original SVG Atlas preview with Expand/Explore; Recent Major Results S4+ cap12, sans scope text and centered medium-width LEGEND box; Learn More papers and separate PDF/Video groups; Other Square Packing Projects on homepage. PDFs also on Papers, video also on Visualize, neither on Atlas. Keep Squares Project Documentation and full project narrative on About, shared nav before GitHub. Shared uppercase buttons, gear baseline alignment, Headroom hide-down/show-up, compact consistent headings, n291 case/math/narrow-layout repair and unique loaded result title. Scientific PDF-description edit remains canceled for owner separate work. Build and serve a local draft before publication.
+
+## Notes
+
+Current draft served at127.0.0.1:8766. Twelve implementation beads plus combinedverification, including think-pvod fornativeSVG live light/dark themes. Final ownerlayout: originalhero/exactintro, sharedtitle styling onlyH1/H2, Atlas2SVGrows Expand/Explore, RecentS4+cap12,52remcenteredboxedLegend withcenteredcompactH2 andseparateS/V/Clines, LearnMore+separatePDF/Video, MoreResourcesH1overprojectcards. Removedlink-summaryblock,oldOtherProjectsheading/catalogueintro,shorterfilm/releaseparagraph. PDFs/Papers,Video/Visualize;doccardsAbout. Allchangestracked5c8r/pvodandepic. Astra latest productionreviewclean; finalbrowser/pipelinechecksrecordedin xio5, whichremainsopen.
