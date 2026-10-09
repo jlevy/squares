@@ -7,7 +7,7 @@ import re
 
 import pytest
 
-from devtools import render_overview, site_documents
+from devtools import render_overview, site_assets, site_documents
 from devtools.repo_links import RAW_URL, REPO_URL, RepositoryTree
 from devtools.site_documents import (
     INTRO,
@@ -258,7 +258,9 @@ def test_a_forwarder_stands_at_each_address_a_page_used_to_have() -> None:
     anyone neither reaches, and the canonical address of the place it stands for."""
     forwarders = {page.name: page.html for page in render_overview.forwarder_pages()}
     assert list(forwarders) == [old for old, _ in render_overview.MOVED_PAGES]
-    script = render_overview.FORWARD_SCRIPT.read_text(encoding="utf-8")
+    script = render_overview.FORWARD_SCRIPT.read_bytes()
+    asset = site_assets.shared().assets.script_file(render_overview.FORWARD_SCRIPT)
+    assert asset.output_path is not None
     for old, destination in render_overview.MOVED_PAGES:
         external = destination.startswith("https://")
         physical = (
@@ -278,7 +280,10 @@ def test_a_forwarder_stands_at_each_address_a_page_used_to_have() -> None:
         )
         assert f'<a href="{physical}">' in page, old
         assert f'<link rel="canonical" href="{canonical}">' in page, old
-        assert f"<script>{script}</script>" in page, old
+        assert site_assets.script_tag(asset, old) in page, old
+        assert render_overview.asset_files([render_overview.Page(old, page)]) == {
+            asset.output_path: script,
+        }
         assert "{{" not in page, old
         render_overview.assert_fetches_only_assets(old, page)
     assert not set(forwarders) & set(render_overview.PAGES)

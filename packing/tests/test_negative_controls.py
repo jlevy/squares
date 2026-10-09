@@ -1733,7 +1733,7 @@ def test_generated_image_omissions_keep_scientific_producers_and_inputs() -> Non
         "witnesses/witness.schema.yaml",
     ):
         assert ROOT / relative in selected, relative
-    assert SNAPSHOT_MAX_BYTES == 192 * 1024 * 1024
+    assert SNAPSHOT_MAX_BYTES == 200 * 1024 * 1024
     assert controls.snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 

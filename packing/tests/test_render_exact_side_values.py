@@ -18,7 +18,13 @@ from typing import Any
 import pytest
 
 from devtools import build_exact_values as exact
-from devtools import check_published_site
+from devtools import (
+    check_published_site,
+    check_site_scripts,
+    exact_catalogue,
+    site_assets,
+    site_urls,
+)
 from devtools import render_exact_side_values as paper
 from devtools.render_overview import SITE_URL
 
@@ -270,6 +276,29 @@ def test_every_register_section_is_derived_from_the_small_control(
     assert "think-history" in markdown
 
 
+def test_report_omits_superseded_sources_without_changing_the_register() -> None:
+    register = small_document()["register"]
+    superseded = deepcopy(register["historical_entries"][0])
+    superseded["kind"] = "superseded"
+    register["historical_entries"].append(superseded)
+    original = deepcopy(register)
+    _, markdown = paper.render(
+        paper.ARTICLE.read_text(encoding="utf-8"), register=register, revision=REVISION
+    )
+    assert markdown.count("### Current polynomial for") == 4
+    assert markdown.count("### Historical polynomial for") == 1
+    assert "Kind: `superseded`" not in markdown
+    assert "source-invalid" in markdown
+    assert register == original
+
+    del register["historical_entries"]
+    _, legacy_markdown = paper.render(
+        paper.ARTICLE.read_text(encoding="utf-8"), register=register, revision=REVISION
+    )
+    assert "### Superseded polynomial" not in legacy_markdown
+    assert "### Historical polynomial" not in legacy_markdown
+
+
 def test_an_explicit_empty_historical_collection_does_not_restore_legacy_notes() -> None:
     register = small_document()["register"]
     register["historical_entries"] = []
@@ -372,7 +401,29 @@ def test_the_retained_register_renders_every_current_and_historical_polynomial()
 
 
 def test_historical_source_statuses_attribution_and_invalid_geometry_are_visible() -> None:
-    register = paper.load_register()
+    retained = paper.load_register()
+    original = deepcopy(retained)
+    register = exact_catalogue.publication_register(retained)
+    reported = [row for row in retained["historical_entries"] if row.get("reported_source")]
+    assert [row["n"] for row in reported] == [102, 106, 152, 177]
+    superseded_102 = reported[0]
+    assert superseded_102["kind"] == "superseded"
+    assert superseded_102["assurance"] == {
+        "algebraic_identity": "independently-checked",
+        "confirmation": "C0",
+        "current_pose_identity": "not-established",
+        "geometry_replay": "not-attempted",
+        "global_optimality": "not-established",
+        "lean_replay": "not-attempted",
+        "verification": "V0",
+    }
+    current_102 = next(row for row in register["entries"] if row["n"] == 102)
+    assert current_102["state"] == "rational"
+    assert current_102["exact_form"] == "21211657393021211657393/2000000000000000000000"
+    assert current_102["side"]["value"] == superseded_102["current_side"]
+    assert [
+        row["n"] for row in register["historical_entries"] if row.get("reported_source")
+    ] == [106, 152, 177]
     historical = paper.historical_entries(register)
     summary = paper.historical_summary_markdown(register)
     catalogue = paper.historical_polynomials_markdown(register)
@@ -383,14 +434,27 @@ def test_historical_source_statuses_attribution_and_invalid_geometry_are_visible
     ]
     assert len(invalid_259) == 1
     assert invalid_259[0]["degree"] == 12
-    assert any(
-        entry["n"] == 259 and entry["degree"] == 8 and entry["kind"] != "source-invalid"
-        for entry in historical
-    )
+    valid_259 = [
+        entry
+        for entry in retained["historical_entries"]
+        if entry["n"] == 259 and entry["degree"] == 8
+    ]
+    assert valid_259
+    assert all(entry["kind"] == "superseded" for entry in valid_259)
+    assert not any(entry["n"] == 259 and entry["degree"] == 8 for entry in historical)
     assert "does not furnish a valid packing upper bound" in catalogue
-    for entry in historical:
-        assert entry["kind"] in summary
-        if entry.get("reported_source"):
+    assert (
+        f"### Historical polynomial for $n=102$ at side `{superseded_102['side']}`"
+        not in catalogue
+    )
+    assert retained == original
+    retained_summary = paper.historical_summary_markdown(retained)
+    retained_catalogue = paper.historical_polynomials_markdown(retained)
+    assert "KKT" not in retained_summary
+    assert "KKT" not in retained_catalogue
+    for entry in paper.historical_entries(retained):
+        assert entry["kind"] in retained_summary
+        if entry.get("reported_source") and entry["kind"] == "unreconciled-source":
             heading = (
                 f"### Historical polynomial for $n={entry['n']}$ at side `{entry['side']}`"
             )
@@ -399,19 +463,19 @@ def test_historical_source_statuses_attribution_and_invalid_geometry_are_visible
             level = f"{assurance['verification']}/{assurance['confirmation']}"
             assert level in section
         if entry.get("bead") is not None:
-            assert entry["bead"] in catalogue
+            assert entry["bead"] in retained_catalogue
         for status in entry["source_statuses"]:
-            assert escape(str(status), quote=False) in catalogue
+            assert escape(str(status), quote=False) in retained_catalogue
         for source in entry["sources"]:
             locator = source["locator"]
-            assert f"{source['path']}:{locator['line']}" in catalogue
+            assert f"{source['path']}:{locator['line']}" in retained_catalogue
             for flag in source.get("source_flags", []):
-                assert escape(str(flag), quote=False) in catalogue
+                assert escape(str(flag), quote=False) in retained_catalogue
         attribution = entry["attribution"]
         for date in attribution["date_mentions"]:
-            assert escape(str(date), quote=False) in catalogue
+            assert escape(str(date), quote=False) in retained_catalogue
         for text in attribution["source_text"]:
-            assert escape(str(text), quote=False).replace("\n", " ") in catalogue
+            assert escape(str(text), quote=False).replace("\n", " ") in retained_catalogue
 
 
 def test_retained_attribution_is_literal_source_text_not_paper_markdown() -> None:
@@ -435,29 +499,32 @@ def test_retained_attribution_is_literal_source_text_not_paper_markdown() -> Non
     assert r"\Nn{8.96028765944389}" in rendered
 
 
-def test_the_complete_archive_preserves_n258_source_expression_and_derived_origin() -> None:
+def test_superseded_n258_expression_is_archived_without_returning_to_the_report() -> None:
     source = exact.catalogue_entries()[258]
     current = exact.build_entry(258, exact.load_packing(258), source, exact.kkt_rows().get(258))
     historical = exact.source_closed_form_history(current, source)
     assert historical is not None
     register = small_document()["register"]
     register["historical_entries"] = [historical]
+    assert historical["kind"] == "superseded"
+    raw_markdown = paper.historical_polynomials_markdown(register)
+    assert "Retained source expression: <code>(19/2) + 5 sqrt(2)</code>." in raw_markdown
+    assert "Polynomial origin: <code>derived-from-source-closed-form</code>." in raw_markdown
+    assert "4s^{2}" in raw_markdown
+    assert "https://kingbird.myphotos.cc/packing/squares_in_squares.html" in raw_markdown
     html, markdown = paper.render(
         paper.ARTICLE.read_text(encoding="utf-8"), register=register, revision=REVISION
     )
     for output in (html, markdown):
-        assert "Retained source expression: <code>(19/2) + 5 sqrt(2)</code>." in output
-        assert "Polynomial origin: <code>derived-from-source-closed-form</code>." in output
-        assert "4s^{2}" in output
-        assert "https://kingbird.myphotos.cc/packing/squares_in_squares.html" in output
+        assert "(19/2) + 5 sqrt(2)" not in output
+        assert "Historical polynomial for" not in output
+        assert "Current polynomial for" in output
+    assert register["historical_entries"] == [historical]
     historical["exact_form"] = '<span id="source-expression-control">sqrt(2)</span>'
-    html, markdown = paper.render(
-        paper.ARTICLE.read_text(encoding="utf-8"), register=register, revision=REVISION
-    )
-    for output in (html, markdown):
-        assert '<span id="source-expression-control">' not in output
-        assert historical["exact_form"] in unescape(output)
-        assert "&lt;span" in output
+    raw_markdown = paper.historical_polynomials_markdown(register)
+    assert '<span id="source-expression-control">' not in raw_markdown
+    assert historical["exact_form"] in unescape(raw_markdown)
+    assert "&lt;span" in raw_markdown
 
 
 def test_browser_help_describes_the_certified_upward_display_check() -> None:
@@ -530,7 +597,16 @@ def test_output_names_follow_the_paper_slug(tmp_path: Path, rendered: tuple[str,
         tmp_path / "papers/exact-side-values-browser.js",
         tmp_path / "papers/exact-side-values-data/index.json",
     }.issubset(outputs)
-    assert outputs[tmp_path / "papers/exact-side-values-complete.html"] == html
+    published = outputs[tmp_path / "papers/exact-side-values-complete.html"]
+    assert isinstance(published, str)
+    assert '<script src="../assets/' in published
+    assert '<link rel="stylesheet" href="../assets/' in published
+    assert "data:font/woff2" not in published
+    assert (
+        published.partition("<article")[2].partition("</article>")[0]
+        == (html.partition("<article")[2].partition("</article>")[0])
+    )
+    assert next(iter(outputs)).is_relative_to(tmp_path / "assets")
     assert outputs[tmp_path / "papers/exact-side-values.md"] == markdown
     assert 'src="http' not in html
     assert 'href="http' in html
@@ -672,11 +748,27 @@ def test_published_register_source_is_the_declared_compressed_input(
 ) -> None:
     stored = paper.REGISTER.with_name(paper.REGISTER.name + ".gz")
     assert stored in paper.RENDER_INPUTS
+    assert Path(site_assets.__file__) in paper.RENDER_INPUTS
+    assert site_assets.FONT_PRELOAD_PROGRAM in paper.RENDER_INPUTS
     _html, markdown = rendered
-    assert (
-        f"https://github.com/jlevy/squares/blob/{REVISION}/packing/frontier/exact-values.json.gz"
-        in markdown
-    )
+    source = paper.ARTICLE.read_text(encoding="utf-8")
+    citations = {
+        (paper.ARTICLE.parent / match.group("url").partition("#")[0]).resolve()
+        for pattern in (paper.RELATIVE_LINK, paper.RELATIVE_REFERENCE, paper.RELATIVE_ANCHOR)
+        for match in pattern.finditer(source)
+    }
+    assert set(paper.CITATION_SOURCES) == citations
+    assert citations <= set(paper.RENDER_INPUTS)
+    for target in citations:
+        assert target.is_file()
+        relative = target.relative_to(paper.REPO).as_posix()
+        assert f"https://github.com/jlevy/squares/blob/{REVISION}/{relative}" in markdown
+    with pytest.raises(paper.ExactSideValuesPaperError, match="linked source does not exist"):
+        paper.expanded_markdown(
+            source + "\n[Missing](../../resources/web/missing-exact-report-source.md)\n",
+            register=small_document()["register"],
+            revision=REVISION,
+        )
 
 
 def test_browser_keeps_publication_version_and_pinned_source() -> None:
@@ -700,3 +792,76 @@ def test_browser_and_complete_archive_have_distinct_publication_identity(
     for path, page in pages.items():
         assert check_published_site.head_problems(page, SITE_URL + path) == []
     assert check_published_site.shared_descriptions(pages) == []
+
+
+@pytest.mark.parametrize("mutation", ["missing", "changed"])
+def test_publication_refuses_missing_or_changed_linked_assets(
+    mutation: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = tmp_path / "exact-values.json"
+    source.write_text(json.dumps(small_document()), encoding="utf-8")
+    monkeypatch.setattr(paper, "REGISTER", source)
+    site = tmp_path / "site"
+    arguments = ["--site", str(site), "--revision", REVISION]
+    assert paper.main(arguments) == 0
+    asset = next((site / "assets/js").glob("*.js"))
+    if mutation == "missing":
+        asset.unlink()
+    else:
+        asset.write_bytes(asset.read_bytes() + b"\n")
+    with pytest.raises(SystemExit, match="stale exact-side-values output"):
+        paper.main([*arguments, "--check"])
+    if mutation == "changed":
+        archive = site / paper.COMPLETE_PATH
+        original = archive.read_bytes()
+        with pytest.raises(ValueError, match="asset collision"):
+            paper.main(arguments)
+        assert archive.read_bytes() == original
+    else:
+        assert paper.main(arguments) == 0
+        assert paper.main([*arguments, "--check"]) == 0
+
+
+def test_complete_publication_preserves_the_article_under_the_physical_html_cap(
+    tmp_path: Path,
+) -> None:
+    register = paper.load_register()
+    html, markdown = paper.render(
+        paper.ARTICLE.read_text(encoding="utf-8"),
+        register=register,
+        revision=REVISION,
+    )
+    outputs = paper.output_files(tmp_path, html, markdown, register=register, revision=REVISION)
+    for path, content in outputs.items():
+        if path.suffix == ".html":
+            assert isinstance(content, str)
+            assert len(content.encode("utf-8")) <= site_urls.HARD_HTML_LIMIT
+    complete = outputs[tmp_path / paper.COMPLETE_PATH]
+    assert isinstance(complete, str)
+    assert (
+        complete.partition("<article")[2].partition("</article>")[0]
+        == (html.partition("<article")[2].partition("</article>")[0])
+    )
+    assert outputs[tmp_path / "papers/exact-side-values.md"] == markdown
+    assert not any(path.suffix == ".pdf" for path in outputs)
+
+
+def test_linked_publication_script_inventory_keeps_unknown_program_refusal(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = tmp_path / "exact-values.json"
+    source.write_text(json.dumps(small_document()), encoding="utf-8")
+    monkeypatch.setattr(paper, "REGISTER", source)
+    site = tmp_path / "site"
+    assert paper.main(["--site", str(site), "--revision", REVISION]) == 0
+    records, failures = check_site_scripts.inventory(site)
+    assert not failures
+    assert {"deferred-math", "catalogue-application"} <= {row.category for row in records}
+    assert all(row.bytes <= 4096 for row in records if "#script-" in row.source)
+    assert all(path.read_bytes() for path in (site / "assets/js").glob("*.js"))
+    (site / "assets/js/unknown.js").write_text("/* undeclared program */", encoding="utf-8")
+    _, failures = check_site_scripts.inventory(site)
+    assert failures == ["unclassified executable script: assets/js/unknown.js"]
