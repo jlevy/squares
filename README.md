@@ -109,14 +109,15 @@ Four additional reported roots retain V0/C0 assurance while geometry and Lean re
 await verification. The
 [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html) supports
 search, filters and per-entry coefficient downloads.
-Complete HTML, Markdown and PDF archives remain available beside it.
+The full HTML report and Markdown export retain every recorded equation and coefficient.
 The
 [mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
 states what was independently checked, and the
 [continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md) maps
 the three remaining numeric-only cases $n = 29,55,71$ to beads and separates their
 identification from ideal contact-system and exact-witness research.
-Pages builds the paper as HTML, Markdown and PDF.
+Pages builds this report for web reading, with the complete record available as HTML and
+Markdown.
 
 This repository also contains
 **[a set of tools and AI workflows for automated mathematical research](#autonomous-research-process)**:
