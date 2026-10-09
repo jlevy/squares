@@ -270,11 +270,17 @@ register entry with its ratings and `next_rung`. Four rules are the process’s 
   gives for it, or the UTC date of the first commit that contains the certificate; for
   an entry over several certificates, the last of those dates.
 - **The entry’s `scope` is covered** by the scopes of the evidence it cites.
-- **The claim states each bound it reports**, as `s(n) <= v` with the value the source
-  certifies. Where the case lanes are left unchanged until the result is adopted, as
-  `T-128`’s were, those values are all that relate the entry to its cases: it is
-  *pending adoption* where one is better than its case’s bound, and *superseded* only
-  where the case holds one at least as good
+- **The claim states each bound it reports**, in a form `devtools.check_standing` reads:
+  `s(n) <= v` for an upper bound, `s(n) >= v` for a lower bound and `s(n) = v` for an
+  exact value, with `v` the value the source certifies, written as a fraction or as
+  decimals that end. A value that is no such number, such as a root of a polynomial, is
+  written by its decimals cut where they are certain and ended with an ellipsis,
+  `s(106) <= 10.822908044132847555086207…`, which stands for every number that starts
+  so. A closed form written with `√` or `sqrt` may stand before them,
+  `s(11) >= 38100√(8100042893309449)/899996306539 = 3.8100257…`. Where the case lanes
+  are left unchanged until the result is adopted, as `T-128`’s were, those values are
+  all that relate the entry to its cases: it is *pending adoption* where one is better
+  than its case’s bound, and *superseded* only where the case holds one at least as good
   ([epistemics.md](../../epistemics.md#status)).
 - **The `T-NNN` is taken last.** An id is its row’s position and cannot be reserved
   across branches, so take it in the commit that registers the result, merge that day,
