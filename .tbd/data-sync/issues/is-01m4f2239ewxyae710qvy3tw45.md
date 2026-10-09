@@ -5,7 +5,7 @@ title: Expand the homepage Atlas in place with an Explore destination
 kind: feature
 status: in_progress
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -17,10 +17,10 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-09T00:47:24.965Z
-updated_at: 2026-10-09T03:38:29.362Z
+updated_at: 2026-10-09T03:54:38.538Z
 started_at: 2026-10-09T00:48:47.737Z
 ---
-Keep the homepage Atlas as an embedding of the existing SVG atlas graphic, initially filtered to fewer rows rather than eight curated HTML tiles. Preserve Expand and Explore controls, full graphic expansion and collapse, accessible state and working destinations. Remove the inline explanatory selection/tile prose; show the graphic with concise navigation to the dedicated Atlas page. Latest owner steering supersedes the eight-tile preview.
+Keep native SVG Atlas drawings, colors, bound labels and case popovers in a compact two-row homepage preview. Reuse the dedicated Atlas SiteAtlasView layout and animation engine. Prepare all remaining drawings during page initialization so Expand immediately animates all 324 cases into triangle view without a click-time request or delay. Collapse reverses the shared animation to the compact preview. Keep Explore, shared double chevrons, themes, keyboard state and no-JavaScript destinations. Preserve the existing two-megabyte homepage ceiling.
 
 ## Notes
 
