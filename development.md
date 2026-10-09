@@ -184,24 +184,24 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 47 of 105 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 63 of 105 | 240 s | 59.4 s |
+| `--records` | contributor, before touching a registry; also every pull request | 49 of 107 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | 65 of 107 | 240 s | 59.4 s |
 | `--push` | contributor, once before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
-| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 92 of 105 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 66 of 105 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
-| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 105 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 105 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 105 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
-| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 105 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
-| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 105 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
-| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 105 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
-| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 105 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 105 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
-| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 105 | 90 s | pending its first hosted cohort under `think-th8p`; the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks`; the verifier’s step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 105 of 105 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
+| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 94 of 107 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 68 of 107 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 107 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 107 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 107 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
+| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 107 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
+| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 107 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
+| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 107 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
+| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 107 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 107 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
+| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 107 | 90 s | pending its first hosted cohort under `think-th8p`; the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks`; the verifier’s step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 107 of 107 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
 
-Step counts describe the current 105-step registry, read from the validator’s canonical
-selection API on 2026-10-08. Its ten PR partitions cover all 92 fast steps.
+Step counts describe the current 107-step registry, read from the validator’s canonical
+selection API on 2026-10-09. Its ten PR partitions cover all 94 fast steps.
 Dated costs retain their measured source and resource shape; they are not fresh
 measurements of the new scheduling.
 
@@ -267,14 +267,21 @@ shard D walls (288.47 to 300.27 seconds) were over the twice-the-ceiling hang de
 and failed their jobs.
 Each pair of shards the partition plans alike shares a ceiling: the slowest reading
 either gave in that window plus at least 10%, rounded up to five seconds — 300.27
-seconds on shard D for A and D, 327.07 seconds on shard B for B and C. Each tier’s
+seconds on shard D for A and D, 327.07 seconds on shard B for B and C. The suite jobs
+run only on pull requests, where a ceiling breach has been advisory since 2026-10-05, so
+what the raise moves there is the fail bound, the hang detector at twice the ceiling:
+from 286 to 670 seconds for A and D and from 336 to 720 seconds for B and C. Each tier’s
 record was re-taken from that day’s readings, so every ceiling stays within the
-register’s 2x of its record.
-Before that the ceilings were 143 and 168 seconds, raised from 131 and 154 seconds on
-2026-10-05, with `frontend` (150 to 165 seconds) and `checks` (140 to 150 seconds), by
-the owner’s decision under `think-p684`: PR 347 adds 133.9 recorded test-seconds to the
-lane, about 10%, and 16 of 24 of its stack’s cohorts put a job over a ceiling against 2
-of 27 on `main`, every test green.
+register’s 2x of its record; the day’s spread, 2.62x to 3.18x, is wider than a band may
+span, so the records are points, and a few of the day’s own readings fall outside their
+0.6x–1.5x window (shard A’s 92.84-second low, for one), which prints a stale or drift
+warning on a pull request and would fail off one at the reference shape.
+`think-e5y4` folds the window sampling and the per-shard growth behind these records
+into `read_tier_walls` and `suite_files`. Before that the ceilings were 143 and 168
+seconds, raised from 131 and 154 seconds on 2026-10-05, with `frontend` (150 to 165
+seconds) and `checks` (140 to 150 seconds), by the owner’s decision under `think-p684`:
+PR 347 adds 133.9 recorded test-seconds to the lane, about 10%, and 16 of 24 of its
+stack’s cohorts put a job over a ceiling against 2 of 27 on `main`, every test green.
 The 12-second per-test wall, the 45-second per-test hang, and the planning capacities
 are unchanged.
 

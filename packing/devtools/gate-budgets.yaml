@@ -771,10 +771,12 @@ tiers:
   # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
   # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
   # assignment; changing them would move files between shards without a measurement),
-  # and every other tier's ceiling. The suite jobs run on pull requests only, so this
-  # ceiling is judged under `pull_request_ceiling`: advisory, failing above 2x. A shard
-  # ceiling this size is past OR-14's 180 s outer edge for the whole pull-request wall;
-  # that is the cost the owner selected for the moment, and why the raise is tracked.
+  # and every other tier's ceiling. The suite jobs run on pull requests only, where
+  # since 2026-10-05 a ceiling breach is advisory and the run fails only above twice the
+  # ceiling, so what this raise moves on a pull request is that fail bound, the 2x hang
+  # detector: from 286 s (2 x 143) to 670 s (2 x 335). A shard ceiling this size is past
+  # OR-14's 180 s outer edge for the whole pull-request wall; that is the cost the owner
+  # selected for the moment, and why the raise is tracked.
   ceiling_seconds: 335.0
   measured_seconds: 180.84
   measured_on: '2026-10-09'
@@ -795,7 +797,12 @@ tiers:
     pull request into main after d3860c97a). The two days before are measured and not
     averaged in, because the lane grew under them: geometric means of 124.8 s on
     2026-10-07 (29 readings) and 153.7 s on 2026-10-08 (128), and 163.70 s over all 317
-    readings from 2026-10-07T06:25Z.
+    readings from 2026-10-07T06:25Z. Of the day's own readings, one, the 92.84 s low, is
+    under the stale edge of 0.6 x the record (108.50 s). On a pull request a reading like
+    it prints a stale warning; off one, at the reference shape, it would fail.
+    think-e5y4 folds the window sampling and the per-shard growth below into
+    `read_tier_walls` and `suite_files`, so these readings can be re-derived from the jobs
+    API rather than from a retained list.
   attribution:
     cause: >-
       The lane grew 2.62x in recorded test-seconds between the record this supersedes and
@@ -946,7 +953,10 @@ tiers:
     history for history-reading tests but installs no Node toolchain; browser liveness
     belongs to `frontend`. `packing-required` preserves coverage by requiring all shard
     jobs, and the declared 335-second ceiling (131 s until 2026-10-05, 143 s until
-    2026-10-09, raised for the moment under think-2hm6) is the absolute bound. Since
+    2026-10-09, raised for the moment under think-2hm6) is the bound wherever the
+    ceiling is enforced: main, scheduled and deep runs, and --enforce-budget. On a pull
+    request, the only place this job runs, the ceiling is advisory and the bound is the
+    hang detector at twice it, 670 s. Since
     2026-10-01 the partition is four shards packed by capacity 131/154/154/131, so this shard and
     D carry the lane's two lighter shares; the plugin warns in the job's own log when
     more than a tenth of a shard's files have no recorded cost, which is the state that
@@ -1020,10 +1030,12 @@ tiers:
   # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
   # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
   # assignment; changing them would move files between shards without a measurement),
-  # and every other tier's ceiling. The suite jobs run on pull requests only, so this
-  # ceiling is judged under `pull_request_ceiling`: advisory, failing above 2x. A shard
-  # ceiling this size is past OR-14's 180 s outer edge for the whole pull-request wall;
-  # that is the cost the owner selected for the moment, and why the raise is tracked.
+  # and every other tier's ceiling. The suite jobs run on pull requests only, where
+  # since 2026-10-05 a ceiling breach is advisory and the run fails only above twice the
+  # ceiling, so what this raise moves on a pull request is that fail bound, the 2x hang
+  # detector: from 336 s (2 x 168) to 720 s (2 x 360). A shard ceiling this size is past
+  # OR-14's 180 s outer edge for the whole pull-request wall; that is the cost the owner
+  # selected for the moment, and why the raise is tracked.
   ceiling_seconds: 360.0
   measured_seconds: 215.82
   measured_on: '2026-10-09'
@@ -1044,7 +1056,13 @@ tiers:
     pull request into main after d3860c97a). The two days before are measured and not
     averaged in, because the lane grew under them: geometric means of 155.9 s on
     2026-10-07 (36 readings) and 194.1 s on 2026-10-08 (131), and 200.08 s over all 338
-    readings from 2026-10-07T06:25Z.
+    readings from 2026-10-07T06:25Z. Of the day's own readings, three, the 124.82 s low
+    among them, are under the stale edge of 0.6 x the record (129.49 s); one, the 327.07 s
+    high, is over the drift edge of 1.5 x (323.73 s). On a pull request a reading like
+    those prints a stale or drift warning; off one, at the reference shape, it would fail.
+    think-e5y4 folds the window sampling and the per-shard growth below into
+    `read_tier_walls` and `suite_files`, so these readings can be re-derived from the jobs
+    API rather than from a retained list.
   attribution:
     cause: >-
       The lane grew 2.62x in recorded test-seconds between the record this supersedes and
@@ -1248,10 +1266,12 @@ tiers:
   # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
   # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
   # assignment; changing them would move files between shards without a measurement),
-  # and every other tier's ceiling. The suite jobs run on pull requests only, so this
-  # ceiling is judged under `pull_request_ceiling`: advisory, failing above 2x. A shard
-  # ceiling this size is past OR-14's 180 s outer edge for the whole pull-request wall;
-  # that is the cost the owner selected for the moment, and why the raise is tracked.
+  # and every other tier's ceiling. The suite jobs run on pull requests only, where
+  # since 2026-10-05 a ceiling breach is advisory and the run fails only above twice the
+  # ceiling, so what this raise moves on a pull request is that fail bound, the 2x hang
+  # detector: from 336 s (2 x 168) to 720 s (2 x 360). A shard ceiling this size is past
+  # OR-14's 180 s outer edge for the whole pull-request wall; that is the cost the owner
+  # selected for the moment, and why the raise is tracked.
   ceiling_seconds: 360.0
   measured_seconds: 190.24
   measured_on: '2026-10-09'
@@ -1272,7 +1292,13 @@ tiers:
     37988339329, a pull request into main after d3860c97a). The two days before are
     measured and not averaged in, because the lane grew under them: geometric means of
     148.7 s on 2026-10-07 (33 readings) and 167.6 s on 2026-10-08 (136), and 176.30 s over
-    all 333 readings from 2026-10-07T06:25Z.
+    all 333 readings from 2026-10-07T06:25Z. Of the day's own readings, three, the 108.29
+    s low among them, are under the stale edge of 0.6 x the record (114.14 s); two, the
+    294.60 s high among them, are over the drift edge of 1.5 x (285.36 s). On a pull
+    request a reading like those prints a stale or drift warning; off one, at the
+    reference shape, it would fail. think-e5y4 folds the window sampling and the per-shard
+    growth below into `read_tier_walls` and `suite_files`, so these readings can be
+    re-derived from the jobs API rather than from a retained list.
   attribution:
     cause: >-
       The lane grew 2.62x in recorded test-seconds between the record this supersedes and
@@ -1430,10 +1456,12 @@ tiers:
   # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
   # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
   # assignment; changing them would move files between shards without a measurement),
-  # and every other tier's ceiling. The suite jobs run on pull requests only, so this
-  # ceiling is judged under `pull_request_ceiling`: advisory, failing above 2x. A shard
-  # ceiling this size is past OR-14's 180 s outer edge for the whole pull-request wall;
-  # that is the cost the owner selected for the moment, and why the raise is tracked.
+  # and every other tier's ceiling. The suite jobs run on pull requests only, where
+  # since 2026-10-05 a ceiling breach is advisory and the run fails only above twice the
+  # ceiling, so what this raise moves on a pull request is that fail bound, the 2x hang
+  # detector: from 286 s (2 x 143) to 670 s (2 x 335). A shard ceiling this size is past
+  # OR-14's 180 s outer edge for the whole pull-request wall; that is the cost the owner
+  # selected for the moment, and why the raise is tracked.
   ceiling_seconds: 335.0
   measured_seconds: 183.08
   measured_on: '2026-10-09'
@@ -1456,7 +1484,13 @@ tiers:
     600068983) and 189.99 s (run 37988339329, a pull request into main after d3860c97a).
     The two days before are measured and not averaged in, because the lane grew under
     them: geometric means of 121.9 s on 2026-10-07 (38 readings) and 146.3 s on 2026-10-08
-    (135), and 160.03 s over all 340 readings from 2026-10-07T06:25Z.
+    (135), and 160.03 s over all 340 readings from 2026-10-07T06:25Z. Of the day's own
+    readings, eight, the 90.60 s low among them, are under the stale edge of 0.6 x the
+    record (109.85 s); one, the 288.47 s high, is over the drift edge of 1.5 x (274.62 s).
+    On a pull request a reading like those prints a stale or drift warning; off one, at
+    the reference shape, it would fail. think-e5y4 folds the window sampling and the
+    per-shard growth below into `read_tier_walls` and `suite_files`, so these readings can
+    be re-derived from the jobs API rather than from a retained list.
   attribution:
     cause: >-
       The lane grew 2.62x in recorded test-seconds between the record this supersedes and

@@ -19,22 +19,23 @@
 #   relaxation_alone  the same records with the drift and stale rules advisory on a
 #                     pull request: the enforcement change by itself, before any record
 #                     moved. `advisory` is a run that passed with its finding printed.
-#   intended          the live register with the two records and that day's ceilings as
-#                     `retaken` below gives them, and the relaxation declared. The two walls
-#                     over the 154 s ceiling still fail: the ceiling is absolute (OR-17),
-#                     and both jobs also failed a test outright when the slow fleet pushed
-#                     it past its per-test backstop, which is why `step_failed` marks them
-#                     and the record does not count them (a failed step is not a reading,
-#                     `read_tier_walls` rule).
+#   intended          the live register with the two records as `retaken` below gives
+#                     them, that day's ceilings as `superseded` gives them, and the
+#                     relaxation declared. The two walls over the 154 s ceiling still
+#                     fail: the ceiling is absolute (OR-17), and both jobs also failed a
+#                     test outright when the slow fleet pushed it past its per-test backstop,
+#                     which is why `step_failed` marks them and the record does not count
+#                     them (a failed step is not a reading, `read_tier_walls` rule).
 #
 # `retaken` is the record as it was re-taken from these readings on 2026-10-01: the
 # geometric mean of each tier's counted readings and their range, which the test recomputes
-# from the rows below, beside the ceiling each tier had that day. It is here, and not read
-# from the live register, because a record is re-taken and a ceiling moved whenever later
-# readings replace these (suite_c's ceiling was raised to 168 s on 2026-10-05 and to 360 s
-# on 2026-10-09), and this day's verdicts should not move when they are. What the test asks
-# of the live register instead is that each `retaken` figure is still in it, as the tier's
-# current record or in its history.
+# from the rows below. It is here, and not read from the live register, because a record
+# is re-taken again whenever later readings replace these, and this day's verdicts should
+# not move when it is. For the same reason the `intended` column takes each tier's ceiling
+# from `superseded`, the ceiling that day, rather than from the live register (suite_c's
+# was raised to 168 s on 2026-10-05 and to 360 s on 2026-10-09). What the test asks of the
+# live register instead is that each `retaken` figure is still in it, as the tier's current
+# record or in its history.
 #
 # `pull_request` is the pull request whose head the run validated. `job` is the GitHub job
 # name; a job id is given where the latest-attempt view would otherwise hide the reading.
@@ -42,8 +43,8 @@ superseded:
   checks: {measured_seconds: 114.34, ceiling_seconds: 140.0}
   suite_c: {measured_seconds: 88.59, ceiling_seconds: 154.0}
 retaken:
-  checks: {measured_seconds: 103.70, measured_band: {low: 59.4, high: 137.1}, ceiling_seconds: 140.0}
-  suite_c: {measured_seconds: 102.94, measured_band: {low: 62.96, high: 143.87}, ceiling_seconds: 154.0}
+  checks: {measured_seconds: 103.70, measured_band: {low: 59.4, high: 137.1}}
+  suite_c: {measured_seconds: 102.94, measured_band: {low: 62.96, high: 143.87}}
 readings:
 - {tier: checks, run: 36739024277, job: validate, pull_request: 246, wall: 86.40, old_rule: passed, relaxation_alone: passed, intended: passed}
 - {tier: checks, run: 36740609969, job: validate, pull_request: 246, wall: 65.49, old_rule: failed, relaxation_alone: advisory, intended: passed}
