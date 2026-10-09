@@ -5,7 +5,7 @@ title: Tighten the homepage with visible atlas and results previews
 kind: feature
 status: in_progress
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -17,10 +17,10 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:20:43.908Z
-updated_at: 2026-10-09T01:52:59.968Z
+updated_at: 2026-10-09T02:13:01.097Z
 started_at: 2026-10-08T23:47:57.505Z
 ---
-Keep the homepage compact with original hero, exact owner problem description and centered project card linking About. Embed the original SVG Atlas initially showing two rows, with Expand/Explore; show Recent Major Results next with up to twelve current S4+ entries from180days and sans scope chrome. Center the boxed legend at medium width and give it a small-caps LEGEND heading. Learn More holds all papers; PDFs appear home+Papers, video home+Visualize in separate groups, eyebrows PDF/Video. Move Other Square Packing Projects onto homepage; retain Squares Project Documentation on About. Center solo cards; use shared uppercase action labels. Preserve full-page filters, resources and links. Inline SVG expansion tracked by think-hyd6.
+Keep the homepage compact with original hero, exact problem description and centered About card. Embed the original SVG Atlas initially showing two rows with Expand/Explore, followed by up to twelve recent S4+ results from 180 days. Omit the result count/scope sentence. Center the linked Legend card with a small-caps LEGEND heading and separate Significance, Verification and Confirmation lines; the entire card links to all-results.html#verification-ladders. Keep Learn More papers, separate PDF and Video cards, More Resources project cards, shared uppercase action labels and centered solo cards. Documentation stays on About; PDFs also on Papers and video also on Visualize. Main headings use shared title styling and only H1/H2. Preserve dedicated-page filters and original SVG geometry; inline expansion tracked by think-hyd6 and live themes by think-pvod.
 
 ## Notes
 
