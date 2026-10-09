@@ -953,6 +953,7 @@ def test_an_empty_slow_lane_passes_and_a_real_failure_does_not(
         validate._slow_tests(context)
 
 
+@pytest.mark.pool_heavy
 @pytest.mark.parametrize("worker_failure", [False, True], ids=["empty", "worker-failure"])
 def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, worker_failure: bool

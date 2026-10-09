@@ -71,6 +71,7 @@ def _candidate() -> RectangleDensityCandidate:
     return load_candidate(ANALYTIC, n=3, expected_side=Fraction(3, 2))
 
 
+@pytest.mark.pool_heavy
 @pytest.mark.parametrize(
     ("mode", "reason"),
     [
@@ -95,9 +96,12 @@ def test_invalid_resident_response_refuses(
             backend="rust",
             rust_binary=_fake_server(tmp_path, mode),
         )
-    assert str(refused.value) == f"Rust exact geometry refused: {reason}"
+    assert str(refused.value) == f"Rust exact geometry refused: {reason}", refused.getrepr(
+        style="long"
+    )
 
 
+@pytest.mark.pool_heavy
 def test_partial_line_timeout_retains_unresolved_event_census(tmp_path: Path) -> None:
     start = time.monotonic()
     report = verify_candidate(
@@ -116,6 +120,7 @@ def test_partial_line_timeout_retains_unresolved_event_census(tmp_path: Path) ->
     assert report.angles[0].stop_cause == "time_limit"
 
 
+@pytest.mark.pool_heavy
 def test_shutdown_timeout_cannot_promote_completed_angles(tmp_path: Path) -> None:
     report = verify_candidate(
         _candidate(),
@@ -131,6 +136,7 @@ def test_shutdown_timeout_cannot_promote_completed_angles(tmp_path: Path) -> Non
     assert report.angles[0].nodes > 0
 
 
+@pytest.mark.pool_heavy
 def test_a_rebuild_during_verification_keeps_the_bytes_that_ran(tmp_path: Path) -> None:
     """The child runs from a private snapshot, so the source path may change mid-run.
 

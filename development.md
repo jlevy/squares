@@ -814,11 +814,16 @@ slow lanes together, against `FAST_SUITE_BUDGET_SECONDS`. A large proper subset 
 dominate the run. When resource settings are implicit, the edit checks run with their
 normal concurrency, then the reachable tests use the available pytest workers after the
 edit pool has drained.
-Nested tool pools are capped at one during the parallel pytest phase.
-Tests marked `pool_heavy` run afterward in a separate serial pytest process with the
-reserved CPUs assigned to their internal pool.
-The whole-atlas composite test uses this allocation; its per-case builder and global
-assertions are unchanged.
+Nested tool pools that read `PACK_JOBS` are capped at one during the parallel pytest
+phase. Tests marked `pool_heavy` run afterward in a separate serial pytest process with
+`PACK_JOBS` set to the reserved CPU count.
+The marker covers real internal execution pools and short-deadline real subprocess
+controls. This includes the whole-atlas composite test’s per-case builder, the
+collection-refusal control’s two-worker xdist invocation, and the resident
+exact-geometry transport controls.
+The collection control keeps its fixed two workers and 30 s command deadline.
+Classification leaves each control’s transport, assertions and time bounds intact.
+Quick/slow membership remains unchanged.
 Both phases use the same selected files and complementary markers, so every selected
 non-exhaustive test belongs to exactly one phase.
 Other slow tests remain parallel.
