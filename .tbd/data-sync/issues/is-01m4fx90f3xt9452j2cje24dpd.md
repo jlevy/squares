@@ -5,7 +5,7 @@ title: Publish the exact-side collection as a web-only report
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 13
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex@spud10.local
 labels: []
@@ -14,10 +14,10 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T08:43:03.009Z
-updated_at: 2026-10-09T16:43:56.044Z
+updated_at: 2026-10-09T17:16:11.457Z
 started_at: 2026-10-09T08:43:05.688Z
 ---
-Publish the exact-side collection as a clean HTML report on the Papers page. The user explicitly retired PDF packaging for this large catalogue. Preserve all 324 current entries, 175 historical records, 321 current exact polynomials, 519 coefficient vectors and 6273 coefficient strings, including all 673 n83 coefficients and source/geometry/proof distinctions. Keep the responsive searchable catalogue and full HTML report plus Markdown and coefficient downloads. Remove exact-report PDF generation, links, producer/assembly/preview and publication checker requirements. Validate desktop/mobile light/dark readability, full content reconstruction and no-JavaScript full report. Sync formal stack447 to current upstream and capture actual-head evidence on PR403/435 and beads. Do not merge PRs or change mathematical admission. Retain dated PDF failures/costs as history; no new print experiments or PDF builds.
+Publish the exact-side collection as a clean HTML report on the Papers page. The user retired PDF packaging and excessive superseded rows from publication. Keep the canonical source complete: 324 current entries and175 historical records,519vectors/6273coefficientstrings. Publish all324current entries/321current exact polynomials plus14additional source records (7outside-frontier,3source-invalid,4unreconciled V0/C0),339vectors/2152strings. Omit161superseded historical rows and19redundant current notes only from HTML/Markdown and lazy payloads; preserve all673n83coefficients and scientific assurance. Keep the responsive searchable catalogue, complete HTML/Markdown and coefficient downloads without report PDF builds. Guard retirement of obsolete unpublished payload URLs, preserve published history, and independently verify every retained field/coefficient. Capture actual amended-head CI on PR435 and beads, preserving dated parent403/full-source qualification separately. No PR merge or mathematical admission. Remaining contact-system driver, numeric identities and geometry/Lean work stay tracked.
 
 ## Notes
 
@@ -136,3 +136,19 @@ Publication trim authorized — 2026-10-09T16:43:55.647452+00:00
 User requested: "Let's drop the excessive superseded ones then" and "Do amend commits so you don't create excessively large files as well". Work remains on PR435 / codex/exact-polynomial-coverage at d0d951a40aa8ae85800d9641c96680cdef0f53ad, with unchanged parent c1d3aab9eef04683ea262c9c79ef7d739af2dc50 and freshly fetched main6a0499ba4ed83e147488b2ee584af500207d9d1f. Existing top commit will be amended with normal hooks and leased official-stack publication; no new huge generated file in Git.
 
 Planned publication-only projection omits exactly 161 historical rows kind=superseded and 19 current superseded-catalogue-polynomial notes from HTML/Markdown and lazy index/metadata/coefficient outputs. Canonical source register remains byte-identical, retaining499source records/175history. All324current records/321exact polynomials and14other source rows (7outside,3invalid,4unreconciled V0C0) remain with coefficients, attribution and statuses. Independent reconstruction will verify the intentional subset without calling exporter selection. Prior d0qualification remains dated; actual new-head size, rendering and hosted gates are pending. Limits stay unchanged. Root owns Git/beads/integration; moderate owns projection/audit and scoped tests, strong readonly source-status review, fast PR/CI metadata. External volume1.3GiB: disk-heavy local fixtures paused, small report builds only.
+
+Amended superseded-publication checkpoint — 2026-10-09T17:16:10.399035+00:00
+
+User-authorized report-only trim is committed and published by amending d0 into child 10ce3575e09c3d05423d4ce4d615fa966b0c6b22 with normal Flowmark hooks, official per-branch force-with-lease push and gh-stack submit. Formal stack447, parent c1d3aab9eef04683ea262c9c79ef7d739af2dc50 and main6a0499ba4ed83e147488b2ee584af500207d9d1f are verified unchanged. Parent/child source worktrees are clean; PR403/435 remain open/unmerged. No generated HTML, report data file or PDF was added to Git; canonical compressed register and data pin515cd465e015c56b46b52d28e1d1164bc599f4a2 are unchanged.
+
+Publication now has338records: all324current, including321exact polynomials, and14additional source records (7outside-frontier,3source-invalid,4unreconciled V0/C0). It omits exactly161historical superseded rows and19current superseded-catalogue-polynomial notes, while canonical source retains499records/175history/519vectors/6273integerstrings. Every retained field and all339published vectors/2152integerstrings independently reconstruct from canonical source, including complete n83degree672/all673coefficients/source ordinal27/independent ordinalnull. No mathematical/geometry/optimality/Lean or V0/C0 status changes.
+
+Clean amended-head maintained render/check/independent measure and selected publication contract PASS5847/5847. Complete HTML3564533B, Markdown700763B; initial259926B =7.2920071%under unchanged10% scoped transfer ceiling; index190635/350000B, script21988/24000B. Full HTML is33.4707%smaller and initial transfer29.1660%smaller than prior d0 publication. 678payloadJSON files total1008321B; no exact-reportPDF. Canonical rawsource retains all superseded data. The original H-001 campaign still requires all canonical records/notes and refuses omission receipts; this trimmed metric is separately scoped.
+
+Guarded URL-registry migration retires344obsolete unpublished owned payload URLs (322historical,19notes,3shiftednotealiases), preserving every published baseline URL and every retained registration field. Rows1927→1586; three newURLs are only positions of retained n102/n106/n177 note-polynomial payloads. Real-YAML refusal controls demonstrate ordinary old-row rejection, published/still-produced refusal with neither output written, and narrow success.
+
+Local composed100testsPASS15.81s; five small migration/source controlsPASS4.34s; final historical campaign guards3PASS1.86s; all8compact/full phone/desktop light/dark viewsPASSzerooverflow/lostink/MathMLerrors; independent strong reviewCLEAR after scope/campaign/migration/doc fixes. Full maintained local editfloorPASS67/109steps352.2598s at10availableCPUs/2outer/1inner; exceeds240s reference wall but reported/advisory for non-reference allocation, not a calibrated cost or tightened/loosened gate. Full local --push selects225files; dynamic reachable-step --skip was correctly refused before execution. That broad disk-heavy local selection was paused under initial external-volume1.3GiB constraint, not represented as a pass. Fresh hosted qualification supplies remaining current-head coverage.
+
+Fresh actual10c automatic Packing37964721209 and Pages37964721057 are ACTIVE; mergeability37964716714SUCCESS. Deferred PR context37964721018SKIPPED. Exactly one current-head full dispatched after checking duplicates:37964872139QUEUED. Parent qualification and all d0 receipts remain dated baseline evidence; no old success is assigned to new10c. No retries, parent dispatch or merges. Final hosted receipts and PR body updates remain pending. Protected evidence includes publication-trim-web-measure-10ce3575e.json, source-review, URL-retirements, scoped-green.junit.xml and edit-floor journal.
+
+Mathematical follow-ups remain29/55/71, new-pose ideal contact work, four source-root geometry/field-to-side/Lean obligations, and eleven legacy claims. Selected next math entry remains OPEN/unclaimed W7think-s6np reusable active-contact exporter, independent contact-derived n11octic control, then one bounded n102W6think-ohhz. This publication trim runs no solver or new polynomial derivation. Keep feature beads open until their corresponding work merges.
