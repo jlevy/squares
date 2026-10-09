@@ -4,7 +4,8 @@
 
 **Author:** Joshua Levy, with Claude, GPT-5.6 Sol, GPT-6.1 Sol and GPT-6 Astra
 
-**Status:** Collection and publication implemented; identification lanes remain open.
+**Status:** Collection and publication implemented; CI stabilization and identification
+lanes remain open.
 
 ## Scope and Current Result
 
@@ -570,6 +571,175 @@ Each experiment enters W6 with its own hypothesis and acceptance rule; a relatio
 ideal side must not replace a different finite certificate merely because their printed
 decimals are close. The continuation epic stays open while these identification and
 witness obligations remain.
+
+## Stabilization Checkpoint, 2026-10-08
+
+The recovery uses formal stack **447**: parent
+[PR 403](https://github.com/jlevy/squares/pull/403), branch
+`claude/friendly-sagan-jk7qzy`, then child
+[PR 435](https://github.com/jlevy/squares/pull/435), branch
+`codex/exact-polynomial-coverage`. Both incorporate upstream `main` at
+`3213d651b880d7768bce8506efaf75c2089aeb4f`. The PR descriptions and recovery beads
+record the current pushed heads and subsequent CI disposition; every result below names
+the checkpoint it measured.
+Both PRs remain open.
+This recovery began at 2026-10-08 22:26:36.377 UTC; the elapsed cost checkpoints in
+their descriptions cover one shared interval and must not be added.
+No solver cost or identification result is claimed for this recovery.
+
+### Repairs and Preservation
+
+The parent repair checkpoint `910a7a4f2d46277e92515723aa40b4f3a73c9998` reconciles
+standalone arithmetic tests with their later source-note assembly, the superseded
+$n = 266$ case, retained compressed chunk readers and the declared negative-control use
+of the reported source-root field.
+Complete source-note equality remains checked separately.
+
+The child publication/context repair was first committed at
+`9763e6eefe2da7c1ec0d13dc641b7378b4c26a15`, then replayed onto that parent at
+`1c335bb54b4a53c8d6899f3dadb7d1b0fb8c67c0`. It uses the authoritative paper roster for
+all eight front-door cards, accepts a compressed Pages input only when both
+representations are explicitly declared and a recognized data sibling exists, and adds
+the retained reader to Pages push triggers.
+The maintained collector regenerated historical relationship context: eight scalars
+across seven rows changed after the finite-bound refresh; all source coefficients, 182
+exact-check certificates, occurrences, flags and attribution remain identical.
+
+The combined test retains all 15 selected counts and $n = 83$'s slow marker.
+Source occurrences and the four appended source notes are checked at complete-record
+assembly. Post-cascade verification passed **43 tests**, with the one slow $n = 83$
+standalone case deselected, in **8.74 s**. The four assembled source-note entries are
+compared in full and all 27 source-history controls passed.
+Python 3.14 AST, Ruff, scoped BasedPyright and diff checks also passed.
+No source or production adaptation was needed after conflict resolution.
+At documentation checkpoint `6fa5d0524`, the selected $n = 83$ slow parity and complete
+fresh-register equality tests both passed (27.36 s and 33.84 s; 65.30 s total).
+The maintained register checker then verified all 321 irreducibility certificates and
+321 isolated roots in 58.76 s. These mathematical controls ran under Python 3.14.7 and
+changed no source or data.
+
+The register remained byte-identical to both `9763e6eef` and `1666a7490`: 826,648 gzip
+bytes, retaining every $n = 83$ coefficient, current identity, source-only note and
+historical source payload.
+The source/storage fixes from `086f29fc` and `470c8712` remain incorporated.
+The primitive fractions and distinct display contracts at $n = 68,105,266,270,272,292$
+remain those of the admitted primary inputs.
+The four $n = 102,106,152,177$ roots remain **V0/C0**: geometry, Lean replay, packing
+upper bounds and global optimality have not been admitted by these checks.
+
+### Hosted Validation Disposition
+
+Before the cascade, maintained mathematical replay checked 320 parent and 321 child
+exact identities. Local repair controls passed 13 historical-collector tests, 30
+downstream preservation tests and 37 publication controls, together with the parent
+source-assembly and compressed-reader regressions.
+Those establish the repaired components; final-head PR, Pages and full gates remain
+required.
+
+| Hosted checkpoint | Observed result | Disposition |
+| --- | --- | --- |
+| Parent `90266f785`, [PR run 37888714814](https://github.com/jlevy/squares/actions/runs/37888714814) | Eight math/storage assertions failed across fast A/B | Repaired locally in `910a7a4f2`; replacement-head gate pending |
+| Child `1666a7490`, [PR run 37888715069](https://github.com/jlevy/squares/actions/runs/37888715069) | Inherited assertions plus paper roster and Pages input contracts failed | Captured repairs; replacement-head gate pending |
+| Parent `90266f785`, [full run 37888858320](https://github.com/jlevy/squares/actions/runs/37888858320) | Integration failed on the eight known assertions and native frontier `1280-dark` CLS `0.2085927463531494 > 0.1`; eleven other jobs passed | Math/storage repaired; layout-shift finding remains open |
+| Child `1666a7490`, [full run 37888861956](https://github.com/jlevy/squares/actions/runs/37888861956) | Integration failed on known contracts; slow lane refused stale historical context; ten other jobs passed | Context regenerated; replacement-head full gate pending |
+| Parent `90266f785`, [Pages run 37888714728](https://github.com/jlevy/squares/actions/runs/37888714728) | Sixteen startup-limit failures | Remains open; cause has not been established |
+| Child `1666a7490`, [Pages run 37888714875](https://github.com/jlevy/squares/actions/runs/37888714875) | Exact-paper, publish and `pages-required` jobs passed | Dated PDF inspected; small print type and final-head qualification remain open |
+
+Both old-head hosted physical negative-control lanes passed all **174 selected
+controls** in two private worker trees: parent snapshot 185.2 MiB, controls 289.68 s;
+child snapshot 187.2 MiB, controls 437.24 s. Their combined three-step subsets passed in
+491.79 s and 741.74 s respectively.
+This is scoped fixture evidence, not a full-gate pass.
+Failed behavioral shards made the PR wall summaries unmeasurable; the aggregate 312 s
+and 331 s cannot determine compliance with or regression against the PR wall budget.
+No assurance, startup, CLS, snapshot, JavaScript or tier ceiling was widened.
+
+### Publication Formats and Availability
+
+The machine-readable table is the compressed JSON register, with complete normalized
+integer coefficients, exact intervals, source references and verification status.
+The website reader is HTML with search, filters and per-entry coefficient downloads.
+The complete paper is generated in HTML, Markdown and PDF. On 2026-10-09 06:24 UTC, the
+intended public catalogue and PDF URLs both returned HTTP 404: these PRs have not
+merged. The successful child Pages checkpoint made the outputs available as Actions
+artifacts; the workflow deploys after integration into `main`. PDF generation remains
+part of the hosted build.
+
+At clean child `1666a7490`, the maintained HTML-only build measured **362,534 bytes** of
+initial transfer against **5,257,078 bytes** of complete HTML, a fraction
+**0.06896112250950052**, passing the explicit 0.10 acceptance check.
+The tool’s default 0.25 remains unchanged.
+Reconstruction retained **499 records**, **519 coefficient vectors** and **6,273 integer
+strings**, with 1,021 catalogue-owned outputs present.
+The local ownership audit deferred the PDF, recording one expected omission.
+The same-head hosted exact-paper artifact is `11597149165`, 5,194,737 bytes.
+The preserved same-head PDF is **2,810,786 bytes / 546 Letter pages**, comprising 455
+portrait and 91 landscape pages.
+Metadata and representative inspection passed for the title, $n = 17$ equations, the
+$n = 83$ heading and longest coefficient, and two dense summary tables; no clipping or
+overlap was observed in those inspected pages.
+Text extraction found **321 current polynomial headings and 175 historical headings**;
+the three numeric-only current cases have no polynomial heading.
+All **673 $n = 83$ coefficients** were reconstructed from PDF pages 400–492 and matched
+the retained same-head JSON exactly, including a 724-digit integer on page 485. This is
+a full $n = 83$ coefficient check, not an exhaustive PDF reconstruction of every other
+vector. The landscape summary body measures about **5.4-point effective type**, which
+remains a physical-print readability issue.
+The producer log exposes no supported print-fit count or overflow summary; older such
+measurements are not credited.
+Final-head PDF qualification remains required after further publication changes.
+
+### Storage and Evidence Custody
+
+At clean `1666a7490`, the read-only source inventory had **6,516 paths / 196,279,044
+bytes**, identical between live and Git-selected sources, under the unchanged
+**201,326,592-byte** cap with **5,047,548 bytes** of headroom.
+It executed no physical copy or local negative controls.
+Thirteen oversized original source PDFs are retained in the hosted
+[source release](https://github.com/jlevy/squares/releases/tag/data/source-pdfs-v1) with
+declared identities, byte sizes and checksums.
+
+The external volume earlier had only 32 MB free, causing ENOSPC during local fixture
+creation. On 2026-10-09 UTC it also became unmounted; macOS still detected the APFS
+volume, which was remounted and checked writable before the paused rebase resumed.
+It remained 99% used, with about 5.5 GiB free at that check.
+The cause of the unmount has not been established.
+Disk-heavy fixtures and PDF builds remain hosted; scratch has no internal-disk fallback.
+Source and unique evidence remain outside disposable scratch:
+
+- Child source: `/Volumes/spud-ext1/agent-source/polynomial-catalogue-01a118e4`.
+- Parent source: `/Volumes/spud-ext1/agent-source/polynomial-parent-01a118e4`.
+- Protected receipts:
+  `/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/recovery-2026-10-08/`.
+- Task environments: the corresponding directories under
+  `/Volumes/spud-ext1/agent-scratch/`, each with `env.sh`, Python 3.14, explicit
+  `TMPDIR`, `CARGO_TARGET_DIR`, `UV_CACHE_DIR` and separate Cargo targets.
+
+### Next Slices and Tracking
+
+Recovery remains open in `think-jygq`, coordination in `think-a0qb`, and latest-source
+reconciliation in `think-wuol`. The bounded acquired corpus is preserved; CI
+stabilization, PDF qualification and the identification obligations remain open.
+Capture each new result against its actual head in the PRs and beads before continuing.
+
+1. **W7 stabilization:** publish the combined repair checkpoint through stack 447,
+   verify release pins and artifact dates, and run final-head PR, Pages and full gates.
+   Diagnose startup and CLS findings separately and qualify the hosted paper’s content
+   and print layout.
+2. **W7 driver:** deliver `think-s6np` using the two acquired native inputs, then derive
+   the known $n = 11$ octic from active contacts as the exact control.
+   No reusable driver, solver, contact-derived control or target search has been
+   delivered in this recovery.
+3. **W6 identification:** preregister one bounded $n = 102$ slice in `think-ohhz` after
+   the driver and control pass.
+   Keep $n = 29,55,71$ and ideal contact obligations open.
+   Retain `think-yuqy`’s quarantine of unsupported degree, height and numerical-linkage
+   inferences.
+
+The adjacent import stabilization is recorded separately in
+[PR 467](https://github.com/jlevy/squares/pull/467). Accepted upstream results are
+incorporated; pending intake branches require qualification before import and have not
+been absorbed into this stack.
 
 ## Validation and Acceptance
 
