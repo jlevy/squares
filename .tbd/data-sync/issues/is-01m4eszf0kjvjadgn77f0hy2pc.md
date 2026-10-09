@@ -5,7 +5,7 @@ title: Resume polynomial catalogue recovery, upstream sync and database work map
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -24,7 +24,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T22:26:10.056Z
-updated_at: 2026-10-09T01:06:00.341Z
+updated_at: 2026-10-09T01:38:10.327Z
 started_at: 2026-10-08T22:26:36.377Z
 ---
 W7 continuation of interrupted PR435/stack447. Preserve unpublished local parent and child repairs, reconcile formal stack with latest origin/main, run current record and change-reachable gates, push every validated owning layer and update cost/results/validation in PR descriptions. Reconcile actual current and historical database partitions with every remaining identification/contact/witness bead. Coordinator owns Git, shared records, bead mutations, integration and PR; parallel Sol-medium CI/storage audit, Sol-xhigh coverage reconciliation and Astra-xhigh semantic mathematical review. Preserve unique source and validation evidence outside disposable external scratch. Slice1 recover provenance and assess gates/capacity; slice2 stack integration and local assurance; slice3 PR/CI closeout alongside selected W6 driver readiness work. No PR landing in scope.
@@ -42,3 +42,11 @@ Local parent edit64/64 (156.40s), builder52 passed/one slow deselected, proof-in
 Both PR descriptions now report all source/register/publication/storage/integration work, the four current representation gaps and separate ideal-contact/witness obligations. Current gaps:29/55/71/105, respectively think-je8y/think-phh8/think-1blg/think-gl59. All original ideal-research batches remain open. Selected entry is W7 think-s6np driver delivery/control before bounded W6 execution; unsupported legacy helper inference labels remain quarantined under think-yuqy. Eleven undelivered earlier claims remain unadmitted.
 
 Final-head hosted assurance is in progress: parent Packing37857516261/Pages37857516273/full-checkpoint37857595319; child Packing37857517142/Pages37857517267/full-checkpoint37857598694. These supersede neither prior failure receipts nor their unresolved performance causes until their own final verdicts. Full local fixture/PDF assurance is deferred to hosted runners because external scratch capacity is nearly exhausted; no unique source or completed fixture evidence has been deleted. No PR landing is authorized in this slice.
+
+Interim upstream-preservation checkpoint, 2026-10-09:
+
+Main b810432cccf7849920dda3aad76882f191464eb5 (PR434) admits verified finite refinements for n68/n105/n292. Expected rebuilt coverage is child321 exact and parent320 exact plus n83 degree-only, with three remaining representation gaps29/55/71; proved count77 is unchanged. These are expected counts: rebuilt current registers and final-head CI remain pending. The historical corpus retains170 identities; only n68/n292 current_side context will refresh. Finite n105 resolves representation only; ideal routes n68/think-056g, n105/think-gl59 and n292/think-w622 remain open.
+
+The default stack rebase exposed merge-only source-storage/benchmark fixes from f6/d451/eb4. Automatic approval review blocked further continuation until preservation is audited. Root, coverage and strong-review lanes are restoring those changes in a held tree; no subsequent rebase or push has occurred. The earlier eight hosted runs were intentionally cancelled because they used old main; no replacement runs exist yet. External ENOSPC caused local fixture failures only. Small source updates are writable now; full fixture/PDF assurance is assigned to GitHub and has not passed on replacement heads.
+
+Original parent epic and maintenance claim owners remain untouched. Prior source, receipt, failure and cost history above is retained. This is an interim preservation checkpoint, not final gate or publication assurance.
