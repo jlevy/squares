@@ -1241,7 +1241,8 @@ def glyph_problems(entry: dict[str, Any], *, katex: str | None = None) -> list[s
 
     A page: every formula typeset, by the KaTeX `katex` names when one is given; every
     shipped face inlined or a file of the site's shared assets (`site_assets`), and
-    loaded; optional local-only prose fallbacks may be absent. Nothing else fetched.
+    loaded; the optional local-only prose and sans fallbacks may be absent. Nothing else
+    fetched.
     A page of the publication layer: its
     platform flag set on macOS and nowhere else. A formula: KaTeX's HTML over MathML; at
     its text's own size and in its text's own colour; at the regular weight of the
