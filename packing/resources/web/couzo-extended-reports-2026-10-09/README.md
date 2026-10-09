@@ -53,10 +53,15 @@ The maintained checker reconstructs each current TXT blob identity and complete 
 length from its retained numerical tokens and fixed source layout.
 It refuses missing or extra inputs, altered roots or parents, malformed archives,
 changed poses, symlinks, raw assets and unsupported verification claims.
+Export writes the acquisition record in one fixed order whatever order the local
+preparation used, and the checker refuses a record that differs from those bytes.
 It validates the representation, not nonoverlap or containment.
 
-All 21,312 coordinate tokens round-trip through binary64 and `.17e` formatting exactly.
-The Witness/v2 numerical method describes that observed compatible representation; the
+Every side is the `.15f` rendering, and every coordinate token the `.17e` rendering, of a
+binary64 value.
+Export and the packet check both refuse any other encoding; all twenty sides and 21,312
+coordinate tokens pass.
+The Witness/v2 numerical method describes that checked compatible representation; the
 author’s computation precision is unverified.
 
 From `packing/`, the offline packet check is:

@@ -3,6 +3,9 @@
 The complete ordinary-source preparation stays local. This module checks its pinned
 Git custody without executing source programs, and exports numerical Witness/v2 facts
 and attributed metadata only. It neither verifies geometry nor changes any case.
+Export and the packet check both hold every side and coordinate token to the binary64
+rendering the facts' stated precision describes, and the acquisition record is written,
+and required, in one order defined here, so its bytes follow from custody content alone.
 
 Every digest comparison here crosses one boundary (OR-16): Francisco Couzo's repository,
 whose source bytes stay outside Git because redistribution is not established. The
@@ -26,7 +29,6 @@ import json
 import lzma
 import math
 import re
-from copy import deepcopy
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any
@@ -200,21 +202,31 @@ def tree_root(leaves: dict[str, Any]) -> str:
     return encode(root)
 
 
-def input_roster() -> set[tuple[str, str, str]]:
-    return (
-        {(sha, "README.md", "source-context") for sha in COMMITS}
-        | {
+def input_order() -> list[tuple[str, str, str]]:
+    """The complete role roster in its one retained order.
+
+    The three README contexts, then each current TXT/SVG pair by count, then the earlier
+    n378 pair, then each removed construction's pair.
+    """
+    pair = ("txt", "svg")
+    return [
+        *((sha, "README.md", "source-context") for sha in COMMITS),
+        *(
             (COMMITS[2], f"n{n}.{suffix}", "current-outside-horizon")
             for n in COUNTS
-            for suffix in ("txt", "svg")
-        }
-        | {(COMMITS[0], f"n378.{suffix}", "superseded-n378") for suffix in ("txt", "svg")}
-        | {
+            for suffix in pair
+        ),
+        *((COMMITS[0], f"n378.{suffix}", "superseded-n378") for suffix in pair),
+        *(
             (COMMITS[0], f"n{n}.{suffix}", "removed-source-history")
             for n in REMOVED
-            for suffix in ("txt", "svg")
-        }
-    )
+            for suffix in pair
+        ),
+    ]
+
+
+def input_roster() -> set[tuple[str, str, str]]:
+    return set(input_order())
 
 
 def check_structure(packet: dict[str, Any], *, acquired: bool = True) -> set[str]:
@@ -340,7 +352,22 @@ def parsed_pose(text: str, expected_n: int) -> tuple[str, list[tuple[str, str, s
         raise ValueError("nonfinite or unbounded decimal pose")
     if values[0] <= 0:
         raise ValueError("reported side must be positive")
+    binary64_rendering(side, rows)
     return side, rows
+
+
+def binary64_rendering(side: str, rows: list[tuple[str, str, str]]) -> None:
+    """Hold the precision `fact` states: every token renders one binary64 value.
+
+    The side must be the `.15f` rendering and each coordinate the `.17e` rendering of
+    the binary64 value nearest it, the fixed encoding of every pinned report.
+    Export and every packet check pass through here, so a report in any other encoding
+    refuses instead of being described as binary64-compatible.
+    """
+    if f"{float(side):.15f}" != side or any(
+        format(float(token), ".17e") != token for row in rows for token in row
+    ):
+        raise ValueError("pose tokens are not the source's binary64 renderings")
 
 
 def fact(n: int, side: str, rows: list[tuple[str, str, str]]) -> dict[str, Any]:
@@ -391,40 +418,51 @@ def fact(n: int, side: str, rows: list[tuple[str, str, str]]) -> dict[str, Any]:
     }
 
 
-def export_contents(packet: dict[str, Any]) -> dict[str, bytes]:
-    """Preflight complete custody and facts before producing any output bytes."""
-    check_ordinary(packet)
-    outputs = {}
-    cases = []
-    for n in COUNTS:
-        row = packet["trees"][COMMITS[2]][f"n{n}.txt"]
-        side, poses = parsed_pose(packet["blobs"][row["sha"]], n)
-        text = witness_document(
-            fact(n, side, poses), schema="../../../../witnesses/witness.schema.yaml"
-        )
-        validate_witness_document(
-            load_yaml(text),
-            path=PACKET / "facts" / f"n-{n:03d}.yaml",
-            fallback_schema=ROOT / "witnesses/witness.schema.yaml",
-        )
-        outputs[f"facts/n-{n:03d}.yaml"] = text.encode()
-        cases.append(
-            {
-                "n": n,
-                "side": side,
-                "file": f"n{n}.txt",
-                "derived_fact": f"facts/n-{n:03d}.yaml",
-                "source_blob": row["sha"],
-            }
-        )
-    custody = {
-        key: deepcopy(packet[key])
-        for key in ("repository", "standing_horizon", "counts", "trees", "inputs")
-    }
-    custody["commits"] = {
+def pinned_commits() -> dict[str, Any]:
+    return {
         sha: {"sha": sha, "tree": {"sha": root}, "parents": [{"sha": parent}]}
         for sha, (root, parent) in PINS.items()
     }
+
+
+def sorted_keys(row: dict[str, Any]) -> dict[str, Any]:
+    return {key: row[key] for key in sorted(row)}
+
+
+def canonical_custody(packet: dict[str, Any]) -> dict[str, Any]:
+    """Checked custody in the one order this module defines, whatever order it arrived in.
+
+    Trees go by commit id, leaves by path, inputs in `input_order`, and every row's keys
+    are sorted, so the retained metadata's bytes depend on custody content alone and not
+    on how the out-of-Git preparation was serialized. The caller has already held the
+    roster complete and duplicate-free with `check_structure`.
+    """
+    rows = {(row["commit"], row["path"], row["role"]): row for row in packet["inputs"]}
+    return {
+        "repository": packet["repository"],
+        "standing_horizon": packet["standing_horizon"],
+        "counts": list(packet["counts"]),
+        "trees": {
+            sha: {path: sorted_keys(leaves[path]) for path in sorted(leaves)}
+            for sha, leaves in sorted(packet["trees"].items())
+        },
+        "inputs": [sorted_keys(rows[triple]) for triple in input_order()],
+        "commits": pinned_commits(),
+    }
+
+
+def case_row(n: int, side: str, blob: str) -> dict[str, Any]:
+    return {
+        "n": n,
+        "side": side,
+        "file": f"n{n}.txt",
+        "derived_fact": f"facts/n-{n:03d}.yaml",
+        "source_blob": blob,
+    }
+
+
+def acquisition_bytes(cases: list[dict[str, Any]], custody: dict[str, Any]) -> bytes:
+    """The retained acquisition record, serialized the one way export writes it."""
     record = {
         "format": ACQUISITION_FORMAT,
         "sources": [
@@ -444,17 +482,44 @@ def export_contents(packet: dict[str, Any]) -> dict[str, bytes]:
             }
         ],
     }
-    outputs["acquisition/sources.json"] = (
-        json.dumps(record, indent=2, ensure_ascii=False, allow_nan=False) + "\n"
-    ).encode()
+    return (json.dumps(record, indent=2, ensure_ascii=False, allow_nan=False) + "\n").encode()
+
+
+def export_contents(packet: dict[str, Any]) -> dict[str, bytes]:
+    """Preflight complete custody and facts before producing any output bytes."""
+    check_ordinary(packet)
+    outputs = {}
+    cases = []
+    for n in COUNTS:
+        row = packet["trees"][COMMITS[2]][f"n{n}.txt"]
+        side, poses = parsed_pose(packet["blobs"][row["sha"]], n)
+        text = witness_document(
+            fact(n, side, poses), schema="../../../../witnesses/witness.schema.yaml"
+        )
+        validate_witness_document(
+            load_yaml(text),
+            path=PACKET / "facts" / f"n-{n:03d}.yaml",
+            fallback_schema=ROOT / "witnesses/witness.schema.yaml",
+        )
+        outputs[f"facts/n-{n:03d}.yaml"] = text.encode()
+        cases.append(case_row(n, side, row["sha"]))
+    outputs["acquisition/sources.json"] = acquisition_bytes(cases, canonical_custody(packet))
     return outputs
 
 
-def read_json(path: Path) -> dict[str, Any]:
+def bounded_metadata(path: Path) -> bytes:
     with path.open("rb") as stream:
         raw = stream.read(MAX_DECODED_BYTES + 1)
     if len(raw) > MAX_DECODED_BYTES:
         raise ValueError("derived metadata exceeds byte ceiling")
+    return raw
+
+
+def read_json(path: Path) -> dict[str, Any]:
+    return metadata_object(bounded_metadata(path))
+
+
+def metadata_object(raw: bytes) -> dict[str, Any]:
     value = json.loads(
         raw.decode("utf-8"),
         object_pairs_hook=unique_object,
@@ -482,7 +547,8 @@ def check_packet(destination: Path = PACKET) -> dict[int, str]:
         raise ValueError("derived packet must remain private")
     metadata = destination / "acquisition/sources.json"
     ordinary_packet_file(metadata, destination)
-    value = read_json(metadata)
+    raw_metadata = bounded_metadata(metadata)
+    value = metadata_object(raw_metadata)
     if set(value) != {"format", "sources"} or value["format"] != ACQUISITION_FORMAT:
         raise ValueError("derived acquisition format differs")
     entries = value["sources"]
@@ -506,11 +572,7 @@ def check_packet(destination: Path = PACKET) -> dict[int, str]:
     custody = source.get("custody")
     if type(custody) is not dict or set(custody) != CUSTODY_KEYS:
         raise ValueError("derived custody cannot retain raw source fields")
-    expected_commits = {
-        sha: {"sha": sha, "tree": {"sha": root}, "parents": [{"sha": parent}]}
-        for sha, (root, parent) in PINS.items()
-    }
-    if custody["commits"] != expected_commits:
+    if custody["commits"] != pinned_commits():
         raise ValueError("derived commit metadata differs")
     check_structure(custody, acquired=False)
     cases = source.get("cases")
@@ -531,7 +593,6 @@ def check_packet(destination: Path = PACKET) -> dict[int, str]:
     if files != expected_paths:
         raise ValueError("unexpected or missing derived packet file")
     ordinary_packet_file(destination / "README.md", destination)
-    claims = {}
     for n, row in zip(COUNTS, cases, strict=True):
         if (
             type(row) is not dict
@@ -542,6 +603,11 @@ def check_packet(destination: Path = PACKET) -> dict[int, str]:
             or row["derived_fact"] != f"facts/n-{n:03d}.yaml"
         ):
             raise ValueError("derived source descriptor differs")
+    canonical_cases = [case_row(row["n"], row["side"], row["source_blob"]) for row in cases]
+    if raw_metadata != acquisition_bytes(canonical_cases, canonical_custody(custody)):
+        raise ValueError("derived acquisition metadata differs from its canonical export bytes")
+    claims = {}
+    for n, row in zip(COUNTS, cases, strict=True):
         path = destination / row["derived_fact"]
         ordinary_packet_file(path, destination)
         with path.open("rb") as stream:
