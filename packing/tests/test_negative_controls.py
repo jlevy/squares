@@ -332,7 +332,6 @@ def test_native_profile_uses_private_child_runner_and_preserves_outcomes(
         calls.append(text)
         arguments = shlex.split(text)
         assert arguments[:2] == [sys.executable, "-c"]
-        assert inspect.getsource(controls._profile_child) in arguments[2]  # noqa: SLF001
         assert arguments[3:] == [str(script), str(output.with_suffix(".prof"))]
         assert kwargs["cwd"] == tree / "packing"
         assert kwargs["timeout_seconds"] == 60.0
@@ -343,9 +342,18 @@ def test_native_profile_uses_private_child_runner_and_preserves_outcomes(
             str(tree / "packing"),
         ]
         assert "PACKING_VALIDATION_ARTIFACT_DIR" not in environment
-        profile = cProfile.Profile()
-        profile.runcall(sum, [1, 2, 3])
-        profile.dump_stats(output.with_suffix(".prof"))
+        native = subprocess.run(
+            arguments,
+            cwd=kwargs["cwd"],
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=5,
+            check=False,
+        )
+        assert native.returncode == 0
+        assert native.stdout == "native child\n"
+        assert not native.stderr
         return controls.CommandOutcome(
             0 if status == "success" else 3,
             "child stdout\n",
