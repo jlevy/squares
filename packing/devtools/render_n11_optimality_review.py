@@ -24,6 +24,7 @@ import argparse
 import re
 import subprocess
 from collections.abc import Mapping, Sequence
+from datetime import date
 from html import escape
 from pathlib import Path
 
@@ -524,7 +525,13 @@ def output_files(site: Path, html: str, markdown: str) -> dict[Path, str]:
     }
 
 
-def _print_pdf(html_path: Path, pdf_path: Path) -> None:
+def _print_pdf(
+    html_path: Path,
+    pdf_path: Path,
+    *,
+    revised: date | None = None,
+    site_path: str = SITE_PATH,
+) -> None:
     """Print only after KPress math and its print fonts have settled.
 
     The document's two date fields are set to the day the article says the review was
@@ -539,7 +546,7 @@ def _print_pdf(html_path: Path, pdf_path: Path) -> None:
         try:
             page = browser.new_page()
             page.goto(html_path.as_uri(), wait_until="networkidle")
-            page.evaluate(ABSOLUTE_LINKS, SITE_URL + SITE_PATH)
+            page.evaluate(ABSOLUTE_LINKS, SITE_URL + site_path)
             page.emulate_media(media="print")
             hosts = page.locator(".kpress-math")
             if hosts.count() == 0:
@@ -557,7 +564,9 @@ def _print_pdf(html_path: Path, pdf_path: Path) -> None:
                 raise ValueError("the paper contains a math rendering error")
             _await_print_fonts(page)  # pyright: ignore[reportArgumentType]
             drawn = page.pdf(format="Letter", prefer_css_page_size=True, print_background=True)
-            write_bytes_atomic(pdf_path, dated(drawn, artifact_dates.optimality_revised()))
+            write_bytes_atomic(
+                pdf_path, dated(drawn, revised or artifact_dates.optimality_revised())
+            )
         finally:
             if page is not None:
                 page.close()

@@ -71,6 +71,7 @@ from sqpack.probes import probe
 from sqpack.release import (
     EXPLAINER_VERSION,
     OPTIMALITY_REVIEW_EDITION,
+    PACKING_METHODS_EDITION,
     PUBLICATION_EDITION,
     THRESHOLD_REVIEW_EDITION,
 )
@@ -119,6 +120,7 @@ PAPER_VERSIONS: dict[str, str] = {
     render_overview.N11_LOWER_BOUNDS_EXPLAINER: EXPLAINER_VERSION,
     render_overview.N11_THRESHOLD_BOUND_REVIEW: THRESHOLD_REVIEW_EDITION,
     render_overview.N11_OPTIMALITY_REVIEW: OPTIMALITY_REVIEW_EDITION,
+    render_overview.PACKING_METHODS: PACKING_METHODS_EDITION,
 }
 #: The reviews, every paper after the first, by the path each is served at, which is the
 #: one its Papers card links: each built and served as the optimality review is.

@@ -467,6 +467,7 @@
     "packing/tests/test_render_n11_lower_bounds_explainer_pdf.py": 0.705,
     "packing/tests/test_render_n11_optimality_review.py": 5.187,
     "packing/tests/test_render_n11_threshold_bound_review.py": 4.99,
+    "packing/tests/test_render_packing_methods.py": 0.959,
     "packing/tests/test_render_regularized_atlas.py": 0.082,
     "packing/tests/test_render_stack_results.py": 1.026,
     "packing/tests/test_render_wave_efficiency.py": 6.533,
@@ -638,5 +639,21 @@
     154.0,
     154.0,
     131.0
+  ],
+  "local_admissions": [
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_render_packing_methods.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/packing-methods-2026-10-08.json",
+          "provenance": {},
+          "tests": 10
+        }
+      ]
+    }
   ]
 }
