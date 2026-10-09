@@ -28,8 +28,10 @@ hypothesis:
       Confirm when the family's state closes at S* - V = 1/100 under either engine and
       the standing verifier passes the certificate in full. A closure only at wider
       margins records the measured reach V_max and refutes the stated cap. A stall at
-      every cap, including 1.5e-2, refutes the claim and says per-state exclusion does
-      not reach the hard tail at any cap at least S*.
+      every cap, including 1.5e-2, refutes the claim and would suggest that the
+      per-state engines need a side margin above 1.5e-2 to act. It would not show that
+      the hard tail cannot close at caps at least S*: a distance-2 state's margin there
+      is its own minimal side minus the cap, which is unmeasured.
     threshold: >-
       Closure at S* - V <= 1/100 with a full-mode verifier pass; the kernel recipe is
       64 bins, octagon core, adaptive rows with floor 1/512 and cap 2,304 rows, 48
@@ -81,16 +83,20 @@ distance-2 states, at $0.0115$ to $0.012$, stalled.
 under the 2,304-row recipe and $10^6$ nodes.
 
 **Expected information.** The exclusion-reach margin $V_{\max}$. Closure at $10^{-2}$
-makes the cap ladder worth a verified bound; a stall at $1.5\times10^{-2}$ says the hard
-tail will not close by per-state methods at $U'$ either, since every other residue state
-has at most the same structure and a smaller margin than this one at the same cap.
+makes the cap ladder worth a verified bound.
+A stall at $1.5\times10^{-2}$ would suggest that the per-state engines need a larger
+side margin than that to act.
+It would not show that the hard tail cannot close at $U'$, because a distance-2 state’s
+margin at $U'$ is its own minimal side minus $U'$, which nobody has measured and which
+may exceed $1.5\times10^{-2}$.
 
 **Limits.** One state.
 Reach on the family’s state bounds the reach on the distance-2 states from above only if
-their margins at a common cap are no larger, which the scan does not establish; H-326’s
-pilot draws them. The producer’s acceptance of a cap below the root box is a one-line
-condition to confirm before registration of the frozen caps; no run is launched by this
-record.
+their margins at a common cap are no larger, which the scan does not establish; a
+control on the tail states themselves, such as H-326’s stratified pilot, is needed
+before a stall here routes effort away from per-state methods.
+The producer’s acceptance of a cap below the root box is a one-line condition to confirm
+before registration of the frozen caps; no run is launched by this record.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

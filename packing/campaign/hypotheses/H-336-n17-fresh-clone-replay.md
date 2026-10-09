@@ -9,8 +9,9 @@ hypothesis:
   id: H-336
   kind: hypothesis
   claim: >-
-    All objects named by the n17 hosted-data manifests (the 200 objects of the
-    session-168 manifest, 2,135,600,454 bytes, and the session-184 manifests) are
+    All objects named by the n17 hosted-data manifests (the 204 objects of the
+    session-168 manifest, 2,167,361,631 bytes with Session 184's four tail objects
+    included, and the other session-184 manifests) are
     published as release assets whose digests match the manifests, and a fresh clone of
     the repository with no other state fetches them with the documented command and
     replays one kernel certificate (W7) and one branch-and-bound certificate (A) end to

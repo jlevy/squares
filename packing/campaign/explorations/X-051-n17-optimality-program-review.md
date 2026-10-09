@@ -9,7 +9,7 @@ exploration:
   id: X-051
   title: The n = 17 Optimality Program After Session 186
   date: '2026-10-09'
-  author: Claude Fable 5.1 at max reasoning, W3 insight-iteration lane for the owner; not yet reviewed by the coordinator
+  author: Claude Fable 5.1 at max reasoning, W3 insight-iteration lane for the owner; W2 review corrections applied by Claude Opus 5.5; not yet reviewed by the coordinator
   campaign: packing.squares
   brief: >-
     The owner asked for a comprehensive W3 review of everything done so far toward
@@ -66,6 +66,11 @@ exploration:
     - packing/campaign/resource-usage/codex-task-tree-session186-final-checkpoint.yaml
     - packing/hosted/n17-x048-session-168-certificates.yaml
     - packing/devtools/check_n17_capacity_one_cover.py
+    - packing/devtools/n17_shared_centre_lp.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-247-n17-unique-state-cover/run-001/receipt.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/descriptor.json
+    - packing/campaign/explorations/X051-centre-survivors/centre-survivors.json
+    - https://github.com/jlevy/squares/pull/473#pullrequestreview-5469083247
     - https://github.com/jlevy/squares/issues/405
     - https://github.com/jlevy/squares/issues/413
     - https://github.com/jlevy/squares/issues/358
@@ -86,30 +91,41 @@ bracket has not moved, the admitted census has moved by two orbits out of 4,685,
 capture step, the one part of the n = 11 architecture whose n = 17 analogue has no
 working engine, has not been run from the actual starting point.
 The conditional lemmas, relaxations and readiness controls of Sessions 184 to 186 are
-sound and exactly scoped, and fifteen of the nineteen mathematical recipes they tested
-missed their criteria.
+sound and exactly scoped, and fifteen of the mathematical rounds they ran (exp-285 to
+exp-312) missed their criteria.
 Meanwhile three things the final proof will need in any case have no owner at the
 mathematical level: a measurement of how far pure exclusion reaches toward the endpoint,
 a terminal theorem of radius larger than $1/5000$, and a composition checker that would
 turn the receipts into a theorem.
 
-Three cheap computations done here change two of the record’s current selections.
-Every relaxation that keeps only centre distances, which is what the shared-centre LP,
-the weighted-vertex screen and the proposed incircle SOS keep, admits twenty unit
-squares’ centres in the centre box at the cap (an exact rational witness is given
-below), and on the 24-cell cover every one of the 2,024 cell triples has a product
-vertex whose three pairwise squared distances are all at least $1.33$, so the
-weighted-vertex screen and the no-ball order-2 SOS recipe of PR 464 cannot exclude any
-triple of cells. The next mathematical slice should therefore not be the first-eight LP.
-It should be a scan of the endpoint’s own occupancy state at caps below $S^\ast$, which
-measures the one number the program has never measured: the side at which exclusion
-alone stops reaching.
+Computations on the committed cover, corrected and extended by the
+[W2 review](https://github.com/jlevy/squares/pull/473#pullrequestreview-5469083247),
+change two of the record’s current selections.
+The shared-centre LP, the weighted-vertex screen and the proposed incircle SOS keep two
+facts about the squares: each centre lies in its assigned cell, and centres are pairwise
+at distance at least one.
+For every one of the 95 distance-2 orbits, the frozen first eight included, there are
+exact rational centres inside the state’s own cells that are pairwise at distance at
+least one, and the repository’s own LP checker accepts them.
+So the first-eight LP’s outcome is already known (eight exact relaxation survivors, and
+no Farkas certificate can exist), and no centre-only method can exclude any distance-2
+orbit. On the 24-cell cover every one of the 2,024 cell triples has a product vertex
+whose three pairwise squared distances are all at least $1.33$. That vertex satisfies
+every constraint of the triple’s encoded system, so no weighted-vertex or SOS
+certificate of any order, with or without a ball generator, exists for any triple.
+The next mathematical slice should therefore not be the first-eight LP. It should be a
+scan of the endpoint’s own occupancy state at caps below $S^\ast$, which measures the
+one number the program has never measured: the side at which exclusion alone stops
+reaching.
 
 This is a W3 reading of the record.
 It certifies nothing, changes no bound, verdict or count, and spends no target budget.
-Its computations are three read-only scripts over the committed cover design and
-elementary arithmetic, reported with their arithmetic in
-[Evidence Status](#evidence-status).
+Its own computations are read-only scripts over the committed cover design and
+elementary arithmetic.
+The per-state centres come from the W2 review; they are retained with a replay recipe in
+[section 3.1](#31-centre-only-relaxations-exclude-no-distance-2-orbit), and no
+registered experiment has recorded them.
+[Evidence Status](#evidence-status) gives the evidential level of each.
 
 ## 1. Honest Status Map
 
@@ -120,14 +136,14 @@ $S^\ast=4.67553009360455\ldots$. The record on `main` at `533dd42` is:
 | --- | --- | --- |
 | Verified bracket | $4.66044275<s(17)\le4.6755300936045509516342148538535054$; gap $0.0150873436$ | [n-017](../../frontier/n-017.md), T-093 and T-065, both `V3/C3` |
 | Last lower-bound movement | T-093, 5 October, $+2.75\times10^{-6}$ over T-043; R070’s obstruction leaves R071’s charge $2.5\times10^{-8}$ of runway | [R071 review](../../../docs/project/reviews/review-2026-10-05-guzhou-r071.md) |
-| Cover | 24 closed capacity-one cells at $U=1169/250$; $\binom{24}{17}=346{,}104$ states, 43,593 $D_4$ orbits; the family in one state with margin $0.002112$ | exp-247, H-266 |
+| Cover | 24 closed capacity-one cells at $U=1169/250$; $\binom{24}{17}=346{,}104$ states, 43,593 $D_4$ orbits; the family in one state with margin at least $0.002111$ (the receipt’s lower bound; the record rounds it to $0.002112$) | exp-247, H-266 |
 | Admitted exclusions | 60 entries: 2 of arity 6, 10 of arity 7, 8 of arity 8, 1 of arity 9, 39 whole 17-cell states | [ledger](X048-session-168-pilots/certified-sub-patterns.yaml) |
 | Residue | 36,768 states in 4,683 orbits, the endpoint’s among them; 10.6 per cent of the states and 10.7 per cent of the orbits | exp-274 census |
 | Residue by Hamming distance from the endpoint’s state (58-entry partition) | distance 2: 95 orbits, 744 states; 4: 975, 7,664; 6: 1,942, 15,268; 8 and beyond: 1,672 orbits and the endpoint’s own, 13,108 states together | [exp-259 partition](../series/series-000-smoke-and-calibration/results/exp-259-current-admitted-residue/partition.json) |
-| Contributor certificates | 33 reported #413 rows and 2 #358 classes, all unadmitted; conditional union 2,234 orbits, 17,604 states; only row 23 touches the distance-2 tail (one orbit) | [reconciliation](../../../docs/project/reviews/review-2026-10-08-n17-issue-pattern-reconciliation.md) |
+| Contributor certificates | 33 reported #413 rows and 2 #358 classes, all unadmitted; the 33 #413 rows’ conditional union is 2,234 orbits, 17,604 states, and #358’s C1 and C2 add a separately counted 21 orbits, 148 states; only row 23 touches the distance-2 tail (one orbit) | [reconciliation](../../../docs/project/reviews/review-2026-10-08-n17-issue-pattern-reconciliation.md) |
 | Local theorem | capture-target theorem at $r=1/5000$ on $B_W'$; a per-coordinate vector with floor $1/1216$ composes but is held as a component | exp-244, exp-248, [local radius](../../../docs/project/reviews/review-2026-10-03-n17-local-radius.md) |
 | Capture | no engine has contracted anything from the cells; pilot 2 from a $1/1024$ box met its falsifier; R9’s discriminating runs unrun | [R9](../../../docs/project/reviews/review-2026-10-05-n17-capture-r9.md) |
-| Custody | 200 certificate objects, 2.14 GB, listed in a manifest, absent from every host; Session 184’s objects local only | [manifest](../../hosted/n17-x048-session-168-certificates.yaml), tracker |
+| Custody | 204 certificate objects, 2.17 GB, Session 184’s four included, all listed in a manifest and none hosted | [manifest](../../hosted/n17-x048-session-168-certificates.yaml), tracker |
 
 ### 1.1 Every obligation, with its status
 
@@ -156,13 +172,15 @@ here) and *open*.
 
 Counted from the records, not from narrative:
 
-- **Experiments.** exp-240 to exp-316 (77 rounds since 1 October): 44 accepted, 15
-  rejected, 10 unresolved, 7 blocked, 1 abandoned.
-  Of the 44 accepted, 17 are readiness, calibration or diagnostic rounds (exp-240, 241,
+- **Experiments.** exp-240 to exp-316 (77 rounds since 1 October): 42 accepted, 16
+  rejected, 11 unresolved, 7 blocked, 1 abandoned.
+  Of the 42 accepted, 17 are readiness, calibration or diagnostic rounds (exp-240, 241,
   259, 268, 272, 273, 276, 277, 280, 288, 290, 294, 309, 310, 313, 314, 316) that moved
   no proof obligation; they are correctly labelled in their own records.
-- **Hypotheses.** H-261 to H-324 hold 60 n17 claims: 33 confirmed, 16 refuted, 7
-  unresolved, 3 open questions, 1 blocked.
+- **Hypotheses.** H-261 to H-324 hold 60 claims of the n17 program: 33 confirmed, 16
+  refuted, 7 unresolved, 3 open questions, 1 blocked.
+  These counts include H-281, the n = 11 relaunch control; the 59 claims made at n = 17
+  itself have 32 confirmations.
   About fifteen of the confirmations are instrument readiness, not mathematics.
   A reader who counts confirmed hypotheses overstates progress by about two.
 - **Sessions 184 to 186 (7 to 8 October).** Receipts record 39.20, 14.34 and 21.42
@@ -177,12 +195,14 @@ Counted from the records, not from narrative:
   two overnight sessions on two workers, by arity-7 and arity-8 flags and about three
   dozen whole-state closures under the adaptive-row recipe.
 - **The ledger’s shape.** The 21 sub-pattern entries account for 99.9 per cent of the
-  309,336 excluded states; the 39 whole-state entries account for 312 states.
+  309,336 excluded states; the 39 whole-state entries account for 304 states (37 orbits
+  of eight states and two of four).
   Per-state closure is a tail method and cannot be the method for 4,683 orbits at
   measured costs of 547 to 4,522 CPU-seconds of production and 257 to 1,899 seconds of
-  verification per state: at one CPU-hour per orbit, 4,682 orbits are about 3,700
-  CPU-hours, and the stalls (three of seven per-state stalls on 5 October were
-  consistency-limited, two of them at distance 2) need a different grammar.
+  verification per state: at one CPU-hour per orbit, 4,682 orbits are about 4,700
+  CPU-hours (about 2,100 at the measured medians), and the stalls (three of seven
+  per-state stalls on 5 October were consistency-limited, two of them at distance 2)
+  need a different grammar.
 
 The verified bracket is where it was on 5 October.
 Nothing in the week was unsound; what was missing was a reason, stated in advance, why
@@ -305,19 +325,23 @@ H-325 and H-330 measure it.
 
 ### 2.5 Things in the record that are mistaken, stale or overstated
 
-- The explainer (dated 6 October) and X-048’s “Current Selection” still say 58 entries,
-  36,784 states and 4,685 orbits; the merged record says 60, 36,768 and 4,683. The
-  explainer’s own rule, “where this document and a record differ, the record is right”,
-  covers it; the numbers should be refreshed when the explainer is next touched.
-- The consolidation and the strategy review call the shared-centre LP “cheap
-  reconnaissance” and “the next mathematical entry”.
-  It is cheap, but [section 3.1](#31-centre-only-relaxations-are-globally-blind) shows
-  it can exclude an assignment only through cell geometry, and the PR 464 weighted
-  screen cannot exclude any cell triple at all.
-  The expected information is low and the record’s own exp-313 and exp-314 results
-  already pointed this way (every relevant pair has a difference of norm at least one).
-- Thirty-three confirmed n17 hypotheses is the ledger’s count; about half confirm that
-  an instrument runs, not that a packing property holds.
+- The explainer (its text is “as of 2026-10-06”; its frontmatter date is 2 October) and
+  X-048’s “Current Selection” still say 58 entries, 36,784 states and 4,685 orbits; the
+  merged record says 60, 36,768 and 4,683. The explainer’s own rule, “where this
+  document and a record differ, the record is right”, covers it; the numbers should be
+  refreshed when the explainer is next touched.
+- The strategy review says “The first-eight shared-centre LP remains the next entry” and
+  files exp-313 and exp-314 under “Cheap tests of weaker models”.
+  [Section 3.1](#31-centre-only-relaxations-exclude-no-distance-2-orbit) shows that the
+  LP’s outcome on the first eight is already known: each state has an exact feasible
+  primal, so the run would return eight survivors and no Farkas certificate.
+  [Section 3.2](#32-no-centre-only-certificate-exists-for-any-cell-triple) shows that no
+  weighted-vertex or SOS certificate exists for any cell triple.
+  The record’s own exp-313 and exp-314 results already pointed this way (no relevant
+  pair has its whole difference domain inside the open unit disk).
+- Thirty-three confirmed hypotheses of the n17 program is the ledger’s count (32 at n =
+  17 itself; H-281 is an n = 11 control); about half confirm that an instrument runs,
+  not that a packing property holds.
   The registry allows this and the experiment records are honest, but the synopsis
   roll-up reads as more progress than there is.
 - The stall-classification review’s plan rule classified four wall-crowd stalls as
@@ -335,62 +359,166 @@ H-325 and H-330 measure it.
   hypothetical. What the tracker does not say is that even full admission would leave the
   distance-2 tail at 94 of 95 orbits.
 
-## 3. Three Computations Done Here
+## 3. Three Computations
 
-All three are read-only scripts over the committed design
+All three are read-only computations over the committed design
 `ring-3-voronoi-8-tabbed-unique` in `check_n17_capacity_one_cover.py` and the constants
-of the record; they are planning evidence of X-046’s kind, not admitted results, and the
+of the record. They are planning evidence of X-046’s kind, not admitted results, and the
 arithmetic of each is stated.
+The per-state centres of section 3.1 and the exact replay of section 3.2 come from the
+W2 review of this report; the first version of section 3.1 drew its conclusion from a
+witness that could not support it, and [Corrections and Limits](#corrections-and-limits)
+lists what changed.
 
-### 3.1 Centre-only relaxations are globally blind
+### 3.1 Centre-only relaxations exclude no distance-2 orbit
 
 Every unit square contains the open disk of radius $1/2$ about its centre, so a
-packing’s centres are pairwise at distance at least one and lie in the centre box
-$[1/2,U-1/2]^2$ of side $3.676$. That is all the shared-centre LP, the octagon $P_8$
-clipping, the disk convexification, the weighted-vertex screen and the incircle SOS
-generators retain about the squares.
-Twenty points satisfy it: with $p=8661/10000>\sqrt3/2$, the points
+packing’s centres are pairwise at distance at least one.
+The shared-centre LP, the octagon $P_8$ clipping, the disk convexification, the
+weighted-vertex screen and the incircle SOS generators keep that fact and one more: each
+centre lies in its assigned cell $E_i$. In `packing/devtools/n17_shared_centre_lp.py`,
+`build_model` (lines 274–300) adds every facet of each assigned cell as a row
+(`centre_domain`, lines 223–235) and builds each pair’s domain from $E_j-E_i$
+(`pair_domain`, lines 238–256); PR 464’s face reduction is stated on “the original exact
+convex polygonal domain” $E_i$. Each pair’s LP domain is the convex hull of the cells’
+difference set clipped outside an octagon whose interior lies in the open unit disk, so
+it contains every difference of norm at least one, and any placement of centres in their
+cells pairwise at distance at least one satisfies every LP row.
+A relaxation of this kind can therefore exclude a state only when its seventeen named
+cells cannot host seventeen such centres.
+
+The W2 review showed that the distance-2 states can host them.
+For each of the eight frozen first-eight states (masks 849919, 850943, 851839, 851903,
+916351, 980927, 981887 and 1630207) it found exact rational centres inside the state’s
+own closed cells, pairwise squared distance at least 1 (exact minimum 1.0023 to 1.0051).
+The repository’s `build_model` and `check_primal` accept each 34-vector, with 755, 755,
+758, 758, 811, 811, 811 and 752 rows; the endpoint’s state, as a control, gives 810
+rows, the count exp-316 recorded.
+The review’s search found unit-separated centres in their own cells for all 95
+distance-2 orbit representatives of the exp-308 descriptor (exact minimum squared
+distance at least 1.00396), checking the other 87 against cell membership and distance
+only. For this correction the same search was rerun on those 87, and the vectors were
+rounded to rational grids and accepted only when `check_primal` and the exact distance
+check passed. All 87 were accepted.
+The 96 retained vectors sit on grids of 1/1000 (63 of them), 1/10000 (22), 1/100000 (8)
+and 1/1000000 (3); their exact minimum squared distances are 1.0020 to 1.0115, and their
+LPs have 750 to 864 rows.
+By the cover’s $D_4$ symmetry the result extends from each representative to its orbit.
+
+What follows, at its evidential level:
+
+- **The first-eight LP’s outcome is known.** Each of the eight states has an exact
+  feasible primal of the relaxation, so the readiness contract’s first outcome holds for
+  all eight, and a Farkas certificate cannot exist for any of them.
+- **No centre-only method excludes any distance-2 orbit.** The centres satisfy the
+  nonconvex incircle constraints, not only the LP rows, so no LP, weighted screen or SOS
+  certificate of any order, with or without a ball, over centres in their cells can
+  exclude these states.
+  Only generators that carry orientation, such as the separating-axis branches, can act.
+- **What the vectors are not.** An exact feasible primal of the relaxation, accepted by
+  the repository’s checker, is relaxation survival.
+  Squares at these centres may overlap; it is not a packing, not an exclusion and not an
+  admission.
+- **Who produced it.** These are computations of the W2 review and of this correction,
+  not a registered W6 experiment.
+  [H-328](../hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) records the
+  determination and reads as open until a round replays it.
+
+**Replay.** The 96 vectors (the endpoint control, the first eight and the other 87) are
+retained with their row counts and exact minimum squared distances in
+[`X051-centre-survivors/centre-survivors.json`](X051-centre-survivors/centre-survivors.json).
+The coordinates are $(x_0,y_0,\ldots,x_{16},y_{16})$ in the $U$ frame, one centre per
+occupied cell in increasing cell index, and the cells are those of the exp-247 receipt.
+From `packing/`, with the project interpreter:
+
+```bash
+.venv/bin/python3 -c '
+import itertools, json, time
+from fractions import Fraction as Q
+from devtools import n17_shared_centre_lp as lp
+E = json.load(open("campaign/explorations/X051-centre-survivors/centre-survivors.json"))
+R = json.load(open("../" + E["cells"]))
+P = [[(Q(x), Q(y)) for x, y in c["vertices"]] for c in R["cells"]]
+B = lambda: lp.Budget(time.monotonic() + 120, lp.OPERATION_LIMIT)
+for s in E["states"]:
+    m = lp.build_model(P, tuple(i for i in range(24) if s["mask"] >> i & 1), B())
+    x = lp.check_primal(m, s["point"], B())
+    d = min((x[2 * a] - x[2 * b]) ** 2 + (x[2 * a + 1] - x[2 * b + 1]) ** 2
+            for a, b in itertools.combinations(range(17), 2))
+    assert len(m.rows) == s["rows"] and d == Q(s["min_d2"]) and d >= 1, s["mask"]
+print(len(E["states"]), "accepted")
+'
+```
+
+`check_primal` raises on the first violated row; the assertion checks the row count and
+the exact minimum squared distance.
+Run on 9 October 2026 on this branch, it printed `96 accepted` in 38 seconds on one
+core.
+
+**The box alone, a secondary remark.** Without the cell assignment the centre box says
+nothing: with $p=8661/10000>\sqrt3/2$, the twenty points
 $x=\tfrac12+c+\tfrac12[r\text{ odd}]$, $y=\tfrac12+rp$ for $r=0,\ldots,4$ and
-$c=0,\ldots,3$ lie in the box ($\max y=9911/2500<522/125$) and have minimum squared
+$c=0,\ldots,3$ lie in $[1/2,U-1/2]^2$ ($\max y=9911/2500<522/125$) with minimum squared
 distance exactly $1$ (exact rational check, 190 pairs).
-At n = 11 the same construction places twelve points in a box of side $2.877$.
+So a relaxation that kept only the box and the centre distances could prove no bound on
+$s(17)$ near $U$. At n = 11 the same construction places twelve points in a box of side
+$2.877$. This says nothing about any per-state LP, which keeps the cells.
 
-Consequently no relaxation of this kind can prove any bound on $s(17)$ near $U$, and it
-can exclude a cell assignment only when the seventeen named cells themselves cannot host
-seventeen such points.
-The first-eight states are one square-move from the endpoint’s state, whose own centres
-satisfy the relaxation with room; the prediction is that all eight LPs return exact
-primal survivors. H-328 registers that prediction with its falsifier.
-
-### 3.2 The weighted-vertex screen cannot bite on any cell triple
+### 3.2 No centre-only certificate exists for any cell triple
 
 PR 464’s derivation reduces every no-ball order-2 Putinar certificate for a cell triple
 with the three incircle generators to a strict weighted-vertex inequality
 $\sum_k\alpha_k(q_k(v)-1)\le-\varepsilon$ at every product vertex $v$, and shows that a
 product vertex with $q_k(v)\ge1$ for all three pairs is a mixture obstruction that rules
 out every such certificate.
-On the 24-cell cover (cells already inside the centre box, so $E_i=C_i$), a float
-computation over all 2,024 triples finds, for every triple, a product vertex with all
-three pairwise squared distances at least $1.3299$; the smallest triple sum $M_{ijk}$ is
-$6.326$ against the threshold $3$, and the smallest pair maximum squared distance is
-$1.9269$. The margins ($0.33$ and $3.3$) are far larger than any float error on rational
-vertices of these sizes, and an exact replay is part of H-328. The equal-weight screen,
-the weighted screen and the no-ball order-2 SOS on original cells are therefore dead on
-arrival; only a ball-augmented or higher-order recipe, or generators that see
-orientation, could do anything, and those have not been priced.
+On the 24-cell cover (cells already inside the centre box, so $E_i=C_i$), every one of
+the 2,024 triples has a product vertex with all three pairwise squared distances at
+least $562823713/423200000\approx1.329924$; the smallest triple sum $M_{ijk}$ is
+$1581577/250000\approx6.326$ against the threshold $3$, and the smallest pair maximum
+squared distance is $4077323093/2116000000\approx1.9269$. This report first computed
+these in floats; the W2 review replayed them in exact rationals, and the minimum
+reproduces from `packing/` with
+
+```bash
+.venv/bin/python3 -c '
+import itertools as it, json
+from fractions import Fraction as Q
+R = json.load(open("campaign/series/series-000-smoke-and-calibration/results/exp-247-n17-unique-state-cover/run-001/receipt.json"))
+C = [[(Q(x), Q(y)) for x, y in c["vertices"]] for c in R["cells"]]
+d = lambda a, b: (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2
+print(min(max(min(d(a, b), d(a, c), d(b, c)) for a in C[i] for b in C[j] for c in C[k])
+          for i, j, k in it.combinations(range(24), 3)))
+'
+```
+
+which prints `562823713/423200000` in under two seconds.
+
+The vertex is more than a mixture obstruction: it is a feasible point of the triple’s
+encoded system. It lies in the product domain $P$, every incircle generator $g_k=q_k-1$
+is nonnegative there, and PR 464 requires a ball generator $B$ to be valid on all of
+$P$, so $B(v)\ge0$ as well.
+Evaluating any identity
+$-1=\sigma_0+\sum_f\sigma_f\ell_f+\sum_k\sigma_kg_k\,(+\,\sigma_BB)$ at $v$ gives
+$-1\ge0$. So no certificate exists for any triple at any order, with or without the
+ball: the equal-weight screen, the weighted screen, the no-ball order-2 SOS, the
+ball-augmented order-2 recipe and reduced order 3 on original cells are refuted, not
+unpriced. Only generators that carry information beyond centre distances, such as
+orientation or separating axes, can act.
 
 ### 3.3 Whole-state closure economics
 
 From H-275’s receipts the counted closures cost 547 to 4,522 CPU-seconds of production
 and 257 to 1,899 seconds of verification; call it one CPU-hour per orbit.
-The residue is 4,682 non-endpoint orbits: about 3,700 CPU-hours if every state closed,
-or roughly sixteen days on ten cores, before stalls.
-Sessions 182 and 183 closed about three dozen whole states in two overnight sessions on
-two workers. At that rate the tail is months of two workers; and a whole-state
-certificate removes eight states where an arity-7 flag removed up to 23,300. The
-arithmetic says the residue must fall by sub-pattern certificates of arity 8 to 12, by a
-grammar change, or by contributor admissions; per-state closure is for the last few
-hundred orbits.
+The residue is 4,682 non-endpoint orbits: about 4,700 CPU-hours if every state closed,
+or roughly 19.5 days on ten cores, before stalls; at the measured medians (1,112.5 s of
+production and 482.5 s of verification, about 0.44 hours) it is about 2,100 CPU-hours,
+or nine days.
+Sessions 182 and 183 closed about three dozen whole states in two overnight
+sessions on two workers.
+At that rate the tail is months of two workers; and a whole-state certificate removes at
+most eight states, where the arity-7 entry W7 alone removed 133,152. The arithmetic says
+the residue must fall by sub-pattern certificates of arity 8 to 12, by a grammar change,
+or by contributor admissions; per-state closure is for the last few hundred orbits.
 
 ## 4. Directions, Ranked
 
@@ -412,7 +540,7 @@ Costs are agent-hours and CPU-hours for the first decision, not forecasts of com
 | J. Composition checker (H-334) and custody (H-335, H-336) | a consumer that reads cover, ledger with per-entry caps, capture receipt and local receipt and derives the theorem or refuses; Rust and Python parity on all 60 entries; hosted objects and a fresh-clone replay | nothing new, but the proof becomes a proof | required for any foolproof outcome | mutation suite not refused | an owner decision on hosting | none mathematical | 20 to 40 agent-hours |
 | K. Lean for the hand lemmas (H-333) | formalise the depth-width wall lemma, the centred-container lemma and the separation lemma first | the thin hand layer of the trusted base becomes mechanised | high per lemma; the lemmas are short | a lemma that resists formalisation in a day | Mathlib; the n11 formalisation’s conventions | the local theorem’s lemmas 1 to 6 depend on exact receipts and are longer | 10 to 30 agent-hours for the first three |
 | L. Pairwise-kernel capture pilots from box seeds | more rows, more rounds | nothing unless reading A holds | low: four runs agree with reading B | already met its falsifier | — | — | 20 to 45 CPU-hours per stage |
-| M. Shared-centre LP and incircle SOS | relaxations of centre distances | exclusion of an assignment through cell geometry only | low (section 3) | all eight survivors | implemented adapter | none | 4 to 8 agent-hours |
+| M. Shared-centre LP and incircle SOS | relaxations that keep each centre’s cell and the pairwise centre distances | nothing on the distance-2 tail: every distance-2 orbit has exact unit-separated centres in its cells, and no triple certificate of any order exists (section 3) | none: the outcome is determined | already met: eight exact first-eight survivors (W2 review) | implemented adapter; the retained vectors | none | minutes, for a round that registers the known outcome |
 | N. Conditional propagation inside one guard | owned hulls, partner coupling, collective rows | restrictions conditional on a guard no global step delivers | low after fifteen misses | already reached fixed points | — | consumes sessions | — |
 | O. New global charge or structural inequality | wall budget, contact rank, four-corner capacity | a necessary condition; none has excluded a state | low until one bites | all 95 survived three filters | — | — | — |
 
@@ -424,10 +552,14 @@ If the family’s state closes at $S^\ast-V=5\times10^{-3}$, the cap ladder (B) 
 and worth a verified bound about $5\times10^{-3}$ above R071 within weeks; the
 no-man’s-land is then the difference between that margin and the terminal radius, and D
 says along which directions it is widest.
-If the family’s state does not close even at $1.5\times10^{-2}$, the hard tail will not
-close at $U'$ either, per-state methods are finished at the tail, and the program should
-move its exclusion effort to grammar changes and contributor admissions.
-Either way the answer costs days and uses only existing tools.
+If the family’s state does not close even at $1.5\times10^{-2}$, that would suggest the
+per-state engines need a side margin larger than that to act.
+It would not show that the hard tail cannot close at $U'$: a distance-2 state’s margin
+at $U'$ is its own minimal side minus $U'$, which nobody has measured and which may
+exceed $1.5\times10^{-2}$. The program would then weigh moving its exclusion effort to
+grammar changes and contributor admissions, with a control on the tail states themselves
+deciding, such as H-326’s stratified pilot, which runs distance-2 states at a cap below
+$S^\ast$. Either way the answer costs days and uses only existing tools.
 
 **Second: rebase capture on exact LP certificates over the feature-forced region (C,
 with I as the kill test for the kernel route).** The widened projection theorem is the
@@ -449,9 +581,11 @@ what the consistency-limited stalls ask for.
 **What to stop.** Stop running conditional propagation rounds inside the owner-0 guard
 (N): fifteen recipes missed in two days, and the accepted restrictions have no consumer
 until a global step delivers the guard.
-Stop presenting the shared-centre LP as the mathematical entry (M): run it once as the
-calibration it is, with H-328’s prediction frozen, and do not fund an incircle SOS pilot
-on original cells. Stop box-seeded kernel capture pilots (L) until I says otherwise.
+Stop presenting the shared-centre LP as the mathematical entry (M): its first-eight
+outcome is known, and a round on it can only register that outcome by replaying the
+retained vectors (H-328). Do not fund any incircle SOS pilot on original cells, at any
+order and with or without the ball: no certificate exists.
+Stop box-seeded kernel capture pilots (L) until I says otherwise.
 Stop writing a new reconciliation document for each merge gate; the explainer and the
 tracker are the two living documents, and OR-3 says CI runs beside the research, never
 ahead of it.
@@ -470,7 +604,7 @@ should hold. The right column says where the record stands.
 | Certificates as data | each exclusion a self-describing object naming its cells, cap, frame and the checker version that passed it | met for kernel and BB formats; caps are implicit ($U$) and must become explicit before a cap ladder or a $U'$ stage exists |
 | Two independent checkers per format | a second implementation sharing no code, with same-object parity on every admitted object and a mutation suite | partial: the Rust kernel verifier has parity on seven objects; the BB format has the contributor’s Rust checker, unreviewed; `think-t41a` open |
 | A composition checker | reads the cover receipt, the ledger, the capture receipt and the local receipt; refuses any uncovered orbit, any cap mismatch, any missing join | absent (H-334) |
-| Replay from a fresh clone | every object hosted with digests; one command replays one certificate of each kind within hours; the full collection replays in a documented CPU budget | absent: 200 objects unhosted (H-336) |
+| Replay from a fresh clone | every object hosted with digests; one command replays one certificate of each kind within hours; the full collection replays in a documented CPU budget | absent: 204 objects unhosted (H-336) |
 | Hand lemmas mechanised or doubly reviewed | the short lemmas in Lean; the longer ones with two adversarial reviews and an oversight record | none mechanised; one review each (H-333) |
 | Rung 4 records | two adversarial AI reviews by distinct reviewers and a human oversight record per load-bearing piece | none |
 | Portability | checkers in a pinned toolchain with no network; certificate formats documented outside the code | kernel and BB formats are documented in reviews; the standing checkers need the repository |
@@ -491,7 +625,8 @@ not timing fields.
   the hard tail, received diagnostics and contracts but no discriminating run.
   The W3 consolidation of 6 October selected R9’s stage 0 and stage 1; neither ran.
 - **Readiness controls are registered as hypotheses.** They pass, they are counted as
-  confirmations, and the synopsis roll-up shows 33 confirmed n17 claims.
+  confirmations, and the synopsis roll-up shows 33 confirmed claims of the n17 program
+  (32 at n = 17 itself).
   A separate kind, or a `role: readiness` field on the experiment, would keep the count
   honest without changing the workflow.
 - **Conditional rounds have no stop rule tied to a consumer.** The regional and
@@ -520,16 +655,17 @@ not timing fields.
 Each is a registry file under `hypotheses/` with `derived_from: [X-051]`; the summaries
 below give mechanism, falsifier, expected information and limits.
 H-325, H-327, H-332, H-335, H-336 and H-340 are runnable with existing tools and read as
-open in the ledger; H-328 waits on the unimplemented first-eight producer and H-337 on
-the unmerged pull repair; the rest name an instrument that does not exist and read as
-blocked until it does.
+open in the ledger. H-328 also reads as open, but its outcome is already known from the
+W2 review; it waits only for a round that registers it by replaying the retained
+vectors. H-337 waits on the unmerged pull repair; the rest name an instrument that does
+not exist and read as blocked until it does.
 
 | Id | Claim | Mechanism | Falsifier | Expected information | Limits |
 | --- | --- | --- | --- | --- | --- |
 | [H-325](../hypotheses/H-325-n17-endpoint-state-cap-scan.md) | The family’s own state is excluded by the whole-state kernel or the branch and bound in the centred container at cap $S^\ast-10^{-2}$ | below $S^\ast$ the family’s state is infeasible by a side margin the engines can see | a stall at $S^\ast-1.5\times10^{-2}$ under the 2,304-row recipe and $10^6$ nodes | the exclusion-reach margin, the first number of the no-man’s-land | reach on one state; other states may differ |
 | [H-326](../hypotheses/H-326-n17-cap-ladder-lower-bound.md) | $s(17)>V_1$ for $V_1=S^\ast-10^{-2}$ by exclusion of every residue orbit at the centred cap, the 60 admissions carried down | monotone embedding; the per-state engine at a cap with margin | a stratified 30-orbit pilot with fewer than 27 closures | a verified bound about $5\times10^{-3}$ above R071 | its certificates do not enter the optimality proof |
 | [H-327](../hypotheses/H-327-n17-hard-tail-decomposability.md) | At least 60 of the 95 distance-2 orbits contain an infeasible sub-pattern of arity at most 10 | the float survey’s minimal sub-pattern search | fewer than 60 | whether the tail is decomposable or jointly infeasible | float lower bound on arity |
-| [H-328](../hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) | The first-eight shared-centre LP returns eight exact primal survivors, and no cell triple admits a weighted-vertex certificate | twenty centres fit at $U$; every triple has a product vertex with all distances at least $1.33$ | two or more exact Farkas certificates among the eight | retires centre-only routes as proof engines | says nothing about orientation-aware generators |
+| [H-328](../hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) | A determination pending registration: every distance-2 orbit representative, the first eight included, has exact centres in its own cells pairwise at distance at least one, which the shared-centre LP checker accepts; no cell triple admits a weighted-vertex or SOS certificate of any order | the W2 review’s exact search and replay; each triple’s best product vertex is a feasible point of its encoded system | moot as a prediction, since no Farkas certificate can exist where an exact primal does; a replay that rejects a retained vector exposes a defect in the vectors or the checker | none beyond registration; the outcome is known | relaxation survival, not a packing; says nothing about orientation-aware generators |
 | [H-329](../hypotheses/H-329-n17-feature-forced-lp-terminal-certificate.md) | A patch certificate of exact dual sheets proves $S\ge S^\ast$ with equality only on the family over the feature-forced angle box of radius $5\times10^{-3}$ | at forced features the side at fixed angles is an LP; sheets are nearly linear | a negative sampled slope; Chao1 patch estimate above $10^5$ | a terminal theorem fifty times larger than $1/5000$ | the $u^\ast$ enclosure; square 6 coarse; outer capture still owed |
 | [H-330](../hypotheses/H-330-n17-no-mans-land-map.md) | Along at most two of the 90 signed directions does the kernel-closable margin fail to reach the terminal radius | exact fixed-feature LP side growth against H-325’s margin | more than two directions | which directions capture must bridge | the LP probe must be rebuilt |
 | [H-331](../hypotheses/H-331-n17-b2-branching-on-the-hard-tail.md) | With the B2 rule, branch and bound closes at least three of the ten smallest-margin sub-patterns of the distance-2 orbits within $10^6$ nodes each | learned Farkas weights aim angle splits at the squares the duals use | fewer than three | whether branch and bound reaches the tail | the rule is unmerged; verification cost per node |
@@ -547,18 +683,22 @@ blocked until it does.
 
 | Kind | Items |
 | --- | --- |
-| Computed here, exact rationals | the twenty-centre witness in section 3.1 (190 pairwise squared distances, minimum exactly 1; all points inside $[1/2,522/125]^2$) |
-| Computed here, floats over rational vertices | section 3.2: for all 2,024 cell triples of `ring-3-voronoi-8-tabbed-unique`, a product vertex with all three squared distances at least $1.3299$; smallest $M_{ijk}=6.326$; smallest pair maximum squared distance $1.9269$; no pair with maximum below 1 (agreeing with exp-314) |
+| Computed here, exact rationals | the twenty-centre box witness in section 3.1 (190 pairwise squared distances, minimum exactly 1; all points inside $[1/2,522/125]^2$) |
+| Computed by the W2 review, exact rationals, accepted by the repository’s checker | section 3.1: centres in their own cells, pairwise squared distance at least 1, for the eight first-eight states (`build_model` and `check_primal`, 752 to 811 rows) and the endpoint control (810 rows); unit-separated centres in their own cells for all 95 distance-2 representatives (minimum squared distance at least 1.00396). Relaxation survival only |
+| Computed in this correction, exact rationals, accepted by the repository’s checker | section 3.1: vectors for the 87 distance-2 representatives beyond the first eight, regenerated with the W2 search; the replay of all 96 retained vectors |
+| Computed here in floats, replayed exactly by the W2 review | section 3.2: for all 2,024 cell triples of `ring-3-voronoi-8-tabbed-unique`, a product vertex with all three squared distances at least $562823713/423200000$; smallest $M_{ijk}=1581577/250000$; smallest pair maximum squared distance $4077323093/2116000000$; no pair with maximum below 1 (agreeing with exp-314) |
+| Derived here, checked by the W2 review | section 3.2: the feasible vertex rules out every weighted-vertex and SOS certificate for every triple, at any order, with or without the ball |
 | Computed here from the records | experiment and hypothesis counts; the ledger’s arity composition; residue by distance from exp-259; agent-hours from the three session receipts; closure economics from H-275’s receipts |
 | Read from records | every count, cost and verdict cited to an experiment, review, hypothesis or issue |
 | Derived here, needing review | the no-man’s-land framing; the default to R9’s box-set reading; the cap-ladder route and its caveat; the ranking; the foolproof table |
-| Not done | any experiment; any verification of a certificate; any change to a record |
+| Not done | any registered experiment; any verification of a certificate; any change to a verdict, bound or census count |
 
 ## Corrections and Limits
 
-- The twenty-centre witness and the triple computation concern relaxations that keep
-  centre distances only; they say nothing against relaxations whose generators see
-  orientation, such as the full separating-axis branches.
+- The per-state survivors and the triple computation concern relaxations that keep each
+  centre’s cell and the pairwise centre distances.
+  They say nothing against relaxations whose generators see orientation, such as the
+  full separating-axis branches, and a survivor of such a relaxation is not a packing.
 - The cap-ladder route produces lower bounds, not the optimality proof: its certificates
   are at caps below $S^\ast$ and cannot replace the exclusions at $U'$ the final
   argument needs. Its value is a verified bound and a measurement.
@@ -567,6 +707,36 @@ blocked until it does.
 - Agent-hour figures are lower bounds from partial receipts, and the experiment
   classification into readiness and mathematics is this review’s reading of each record.
 - No bead, issue or frontier field is changed; the coordinator publishes.
+- **W2 review, 9 October.** The
+  [W2 factual review](https://github.com/jlevy/squares/pull/473#pullrequestreview-5469083247)
+  checked 38 claims against the committed artifacts and found one blocking error.
+  This revision applies it and the non-blocking findings:
+  - Section 3.1 and the summary said the centre-only relaxations keep only the centre
+    box and the pairwise distances.
+    They also keep each centre’s assigned cell, so the twenty-point box witness could
+    not decide any per-state LP. The section now rests on the review’s exact per-state
+    survivors and 87 vectors regenerated with its search, retained in
+    [`X051-centre-survivors/centre-survivors.json`](X051-centre-survivors/centre-survivors.json)
+    with a replay that accepts all 96, and the witness remains only as a remark about
+    the box. H-328 is re-scoped from a prediction to a determination pending
+    registration; its falsifier, under which exactly one Farkas certificate was neither
+    outcome, is moot.
+  - Section 3.2 called the ball-augmented and higher-order recipes unpriced.
+    The feasible product vertex refutes them for every triple; route M, the stop-list
+    and H-328 now say so.
+  - Counts: exp-240 to exp-316 are 42 accepted, 16 rejected and 11 unresolved, and 17 of
+    the 42 are readiness rounds; the 39 whole-state entries cover 304 states; closure at
+    one CPU-hour per orbit is about 4,700 CPU-hours (19.5 days on ten cores), or 2,100
+    at the measured medians; W7 alone removed 133,152 states, replacing an unsourced “up
+    to 23,300”; custody is 204 objects and 2.17 GB, here and in H-336; the 2,234-orbit
+    union is the #413 rows’ alone; the n17 hypothesis counts include H-281; the cover’s
+    margin is cited as the receipt’s lower bound; “fifteen of the nineteen recipes” is
+    now the fifteen missed rounds by number.
+  - Section 2.5 quoted two phrases that occur in neither the consolidation nor the
+    strategy review; it now quotes the strategy review’s own words.
+  - Section 4.1 and H-325 inferred from a stall on the family’s state that the hard tail
+    cannot close at $U'$. A distance-2 state’s margin at $U'$ is unmeasured, so both now
+    say only what such a stall would suggest.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

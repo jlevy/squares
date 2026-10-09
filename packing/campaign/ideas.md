@@ -914,10 +914,12 @@ these rows as BC-406 to BC-411.
 
 [X-051](explorations/X-051-n17-optimality-program-review.md) is the owner’s W3 review of
 the whole n17 record after Sessions 184 to 186. It maps every proof obligation with its
-evidential status, finds that the week’s effort went to the two parts of the proof that
-cannot finish it, and shows by two cheap computations that centre-only relaxations (the
-shared-centre LP, the weighted-vertex screen, the incircle SOS) cannot exclude any cell
-triple. Its selection: measure exclusion reach on the endpoint’s own state at caps below
+evidential status, and finds that the week’s effort went to the two parts of the proof
+that cannot finish it.
+With the W2 review’s exact per-state centres, it shows that centre-only relaxations (the
+shared-centre LP, the weighted-vertex screen, the incircle SOS at any order) exclude no
+distance-2 orbit and no cell triple, so the first-eight LP’s outcome is already known.
+Its selection: measure exclusion reach on the endpoint’s own state at caps below
 $S^\ast$ first, rebase capture on exact LP certificates over the feature-forced region,
 and raise throughput on the hard tail; stop conditional propagation inside one guard and
 box-seeded kernel capture pilots.
@@ -927,7 +929,7 @@ box-seeded kernel capture pilots.
 | 291 | The endpoint’s own occupancy state is excluded by the whole-state engines at a cap one hundredth below $S^\ast$ | registered | [H-325](hypotheses/H-325-n17-endpoint-state-cap-scan.md) | The one number never measured: the side margin at which exclusion alone reaches the family’s state; prices the cap ladder and the no-man’s-land |
 | 292 | A verified lower bound $s(17) > S^\ast - 1/100$ by exclusion of every residue orbit at a centred cap, the 60 admissions carried down | registered | [H-326](hypotheses/H-326-n17-cap-ladder-lower-bound.md) | A rung of the cap ladder is a T-item about $5\times10^{-3}$ above R071; its certificates do not enter the optimality proof |
 | 293 | Most distance-2 residue orbits contain an infeasible sub-pattern of arity at most ten | registered | [H-327](hypotheses/H-327-n17-hard-tail-decomposability.md) | Routes the tail to sub-pattern engines or to whole-state and coupled methods |
-| 294 | Centre-only relaxations exclude nothing at the cap: twenty centres fit, and every cell triple has a vertex with all three distances at least 1.33 | registered | [H-328](hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) | Predicts eight exact survivors for the first-eight LP; retires the weighted screen and the no-ball order-2 SOS on original cells |
+| 294 | Centre-only relaxations exclude no distance-2 orbit: each has exact unit-separated centres in its own cells, and every cell triple has a vertex with all three squared distances at least 1.33 | registered | [H-328](hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) | Outcome known from the W2 review, pending a registering replay: eight exact first-eight LP survivors, so no Farkas certificate can exist; no weighted-vertex or SOS certificate of any order exists for any triple |
 | 295 | An exact dual-sheet patch certificate proves the widened projection theorem over the feature-forced angle box | registered | [H-329](hypotheses/H-329-n17-feature-forced-lp-terminal-certificate.md) | A terminal theorem fifty times larger than $1/5000$, as a list of exact rational duals; patch count under dual degeneracy is the risk |
 | 296 | The gap between exclusion reach and the terminal radius is confined to the two softest directions | registered | [H-330](hypotheses/H-330-n17-no-mans-land-map.md) | Replaces the two competing capture readings by a measurement, direction by direction |
 | 297 | Learned-weight angle splits (B2) bring branch and bound to the hard tail | registered | [H-331](hypotheses/H-331-n17-b2-branching-on-the-hard-tail.md) | The only measured lever on tree size; certificate size per orbit is the routing figure |
