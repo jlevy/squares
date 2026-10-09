@@ -1,0 +1,54 @@
+{
+  "browser": "151.0.7922.34",
+  "display_count": 1428,
+  "findings": [
+    "paper document exceeds its print width: {\"pageOverflow\": 150, \"widest\": {\"path\": \"article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]\", \"over\": 149.75, \"text\": \"nnnn\\nRegister state\\nExact side of the recorded packing\\nDegre\"}}"
+  ],
+  "html": "/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/publication-final-site/papers/exact-side-values-complete.html",
+  "layout": {
+    "articleWidth": 576,
+    "inlineOverflow": [],
+    "inlineOverflowCount": 0,
+    "pageOverflow": 150,
+    "predictedScale": 0.7933884297520661,
+    "scrollWidth": 726,
+    "tables": [
+      {
+        "columns": 10,
+        "minCodeFontPx": 11.808,
+        "minDataFontPt": 6.8,
+        "minDataFontPx": 9.07,
+        "minHeaderFontPt": 6.8,
+        "page": "exact-values-wide",
+        "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[16] > table.kpress-table[0]",
+        "predictedDataFontPt": 5.4,
+        "rows": 321,
+        "width": 576,
+        "wrapperWidth": 576
+      },
+      {
+        "columns": 7,
+        "minCodeFontPx": 11.808,
+        "minDataFontPt": 6.8,
+        "minDataFontPx": 9.07,
+        "minHeaderFontPt": 6.8,
+        "page": "exact-values-wide",
+        "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[23] > table.kpress-table[0]",
+        "predictedDataFontPt": 5.4,
+        "rows": 175,
+        "width": 576,
+        "wrapperWidth": 576
+      }
+    ],
+    "viewport": 576,
+    "widest": {
+      "over": 149.75,
+      "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+      "text": "nnnn\nRegister state\nExact side of the recorded packing\nDegre"
+    }
+  },
+  "math": {
+    "checked": 1428,
+    "overflows": []
+  }
+}
