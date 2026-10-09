@@ -6,9 +6,8 @@ A feasible geometric realization establishes an upper bound on $s(n)$. Only an e
 lower bound establishes global optimality.
 The tables below keep those three levels separate.
 
-The source is the generated
-[`exact-values.json.gz`](../../frontier/exact-values.json.gz) register, stored as
-lossless gzip. The paper copies no mathematical value from another file.
+The [source register](../../frontier/exact-values.json.gz) contains the current values
+and the retained historical source records.
 
 ## Coverage
 
@@ -105,8 +104,8 @@ They do not compare it with a current packing’s KKT value.
 Each polynomial is primitive and is printed from its coefficient vector.
 Expanded forms are split across display lines.
 A high-degree polynomial is written as $P_n(s)=\sum_{k=0}^{d}a_ks^k=0$ followed by every
-coefficient $a_k$; this preserves the full integer values while allowing long entries to
-continue across pages.
+coefficient $a_k$; this preserves every integer value in a table whose digits wrap to
+the reading width.
 
 {{CURRENT_POLYNOMIALS}}
 

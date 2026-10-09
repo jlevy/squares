@@ -1,0 +1,347 @@
+{
+  "browser": "151.0.7922.34",
+  "cell_overflow_count": 3,
+  "checked_cells": 6012,
+  "display_count": 1428,
+  "findings": [
+    "paper content exceeds its 'auto' table cell: [{\"table\": \"article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]\", \"cell\": \"tbody[1] > tr[58] > td[2]\", \"run\": \"span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]\", \"over\": 94.94, \"clippedRight\": false, \"clippedLeft\": false, \"hidden\": false, \"text\": \"1000000000000000000000000000000000000000000000000000000000008798795237218283902576680967021394083521\"}, {\"table\": \"article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]\", \"cell\": \"tbody[1] > tr[273] > td[2]\", \"run\": \"span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]\", \"over\": 26.05, \"clippedRight\": false, \"clippedLeft\": false, \"hidden\": false, \"text\": \"100000000000000000000000000000000000000000000017597249391156465040471442005510391858592626557\\u200b\"}, {\"table\": \"article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]\", \"cell\": \"tbody[1] > tr[90] > td[2]\", \"run\": \"span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]\", \"over\": 15.45, \"clippedRight\": false, \"clippedLeft\": false, \"hidden\": false, \"text\": \"50000000000000000000000000000000000000000000540303893275985231628745267522385760199372637\\u200b\"}]"
+  ],
+  "html": "/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/publication-final-site/papers/exact-side-values-complete.html",
+  "html_bytes": 5258154,
+  "inline_overflow_count": 0,
+  "layout": {
+    "articleWidth": 576,
+    "cellOverflow": [
+      {
+        "cell": "tbody[1] > tr[58] > td[2]",
+        "clippedLeft": false,
+        "clippedRight": false,
+        "hidden": false,
+        "over": 94.94,
+        "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+        "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+        "text": "1000000000000000000000000000000000000000000000000000000000008798795237218283902576680967021394083521"
+      },
+      {
+        "cell": "tbody[1] > tr[273] > td[2]",
+        "clippedLeft": false,
+        "clippedRight": false,
+        "hidden": false,
+        "over": 26.05,
+        "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+        "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+        "text": "100000000000000000000000000000000000000000000017597249391156465040471442005510391858592626557\u200b"
+      },
+      {
+        "cell": "tbody[1] > tr[90] > td[2]",
+        "clippedLeft": false,
+        "clippedRight": false,
+        "hidden": false,
+        "over": 15.45,
+        "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+        "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+        "text": "50000000000000000000000000000000000000000000540303893275985231628745267522385760199372637\u200b"
+      }
+    ],
+    "cellOverflowCount": 3,
+    "cellsByPage": {
+      "auto": {
+        "checked": 1560,
+        "count": 3,
+        "overflows": [
+          {
+            "cell": "tbody[1] > tr[58] > td[2]",
+            "clippedLeft": false,
+            "clippedRight": false,
+            "hidden": false,
+            "over": 94.94,
+            "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+            "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+            "text": "1000000000000000000000000000000000000000000000000000000000008798795237218283902576680967021394083521"
+          },
+          {
+            "cell": "tbody[1] > tr[273] > td[2]",
+            "clippedLeft": false,
+            "clippedRight": false,
+            "hidden": false,
+            "over": 26.05,
+            "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+            "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+            "text": "100000000000000000000000000000000000000000000017597249391156465040471442005510391858592626557\u200b"
+          },
+          {
+            "cell": "tbody[1] > tr[90] > td[2]",
+            "clippedLeft": false,
+            "clippedRight": false,
+            "hidden": false,
+            "over": 15.45,
+            "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+            "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+            "text": "50000000000000000000000000000000000000000000540303893275985231628745267522385760199372637\u200b"
+          }
+        ]
+      },
+      "exact-values-wide": {
+        "checked": 4452,
+        "count": 0,
+        "overflows": []
+      }
+    },
+    "checkedCells": 6012,
+    "inlineByPage": {},
+    "inlineOverflow": [],
+    "inlineOverflowCount": 0,
+    "pageOverflow": 0,
+    "predictedScale": 1,
+    "scrollWidth": 576,
+    "tables": [
+      {
+        "columns": 5,
+        "minCodeFontPx": null,
+        "minDataFontPt": 11.4,
+        "minDataFontPx": 15.2,
+        "minHeaderFontPt": 10.8,
+        "page": "auto",
+        "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+        "predictedDataFontPt": 11.4,
+        "rows": 305,
+        "width": 576,
+        "wrapperWidth": 576
+      },
+      {
+        "columns": 10,
+        "minCodeFontPx": 12,
+        "minDataFontPt": 9,
+        "minDataFontPx": 12,
+        "minHeaderFontPt": 9,
+        "page": "exact-values-wide",
+        "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[16] > table.kpress-table[0]",
+        "predictedDataFontPt": 9,
+        "rows": 321,
+        "width": 576,
+        "wrapperWidth": 576
+      },
+      {
+        "columns": 6,
+        "minCodeFontPx": null,
+        "minDataFontPt": 11.4,
+        "minDataFontPx": 15.2,
+        "minHeaderFontPt": 10.8,
+        "page": "auto",
+        "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[19] > table.kpress-table[0]",
+        "predictedDataFontPt": 11.4,
+        "rows": 4,
+        "width": 544,
+        "wrapperWidth": 544
+      },
+      {
+        "columns": 7,
+        "minCodeFontPx": 12,
+        "minDataFontPt": 9,
+        "minDataFontPx": 12,
+        "minHeaderFontPt": 9,
+        "page": "exact-values-wide",
+        "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[23] > table.kpress-table[0]",
+        "predictedDataFontPt": 9,
+        "rows": 175,
+        "width": 576,
+        "wrapperWidth": 576
+      }
+    ],
+    "viewport": 576,
+    "widest": null
+  },
+  "math": {
+    "checked": 1428,
+    "overflows": []
+  },
+  "measurement_errors": [],
+  "named_pages": {
+    "exact-values-wide": {
+      "content_height_px": 720,
+      "content_width_px": 960,
+      "layout": {
+        "articleWidth": 720,
+        "cellOverflow": [],
+        "cellOverflowCount": 0,
+        "cellsByPage": {
+          "auto": {
+            "checked": 1560,
+            "count": 1,
+            "overflows": [
+              {
+                "cell": "tbody[1] > tr[58] > td[2]",
+                "clippedLeft": false,
+                "clippedRight": false,
+                "hidden": false,
+                "over": 50.14,
+                "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+                "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+                "text": "1000000000000000000000000000000000000000000000000000000000008798795237218283902576680967021394083521"
+              }
+            ]
+          },
+          "exact-values-wide": {
+            "checked": 4452,
+            "count": 0,
+            "overflows": []
+          }
+        },
+        "checkedCells": 4452,
+        "inlineByPage": {},
+        "inlineOverflow": [],
+        "inlineOverflowCount": 0,
+        "pageOverflow": 0,
+        "predictedScale": 1,
+        "scrollWidth": 960,
+        "tables": [
+          {
+            "columns": 10,
+            "minCodeFontPx": 12,
+            "minDataFontPt": 9,
+            "minDataFontPx": 12,
+            "minHeaderFontPt": 9,
+            "page": "exact-values-wide",
+            "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[16] > table.kpress-table[0]",
+            "predictedDataFontPt": 9,
+            "rows": 321,
+            "width": 720,
+            "wrapperWidth": 720
+          },
+          {
+            "columns": 7,
+            "minCodeFontPx": 12,
+            "minDataFontPt": 9,
+            "minDataFontPx": 12,
+            "minHeaderFontPt": 9,
+            "page": "exact-values-wide",
+            "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[23] > table.kpress-table[0]",
+            "predictedDataFontPt": 9,
+            "rows": 175,
+            "width": 720,
+            "wrapperWidth": 720
+          }
+        ],
+        "viewport": 960,
+        "widest": null
+      }
+    }
+  },
+  "ordinary_layout": {
+    "articleWidth": 576,
+    "cellOverflow": [
+      {
+        "cell": "tbody[1] > tr[58] > td[2]",
+        "clippedLeft": false,
+        "clippedRight": false,
+        "hidden": false,
+        "over": 94.94,
+        "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+        "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+        "text": "1000000000000000000000000000000000000000000000000000000000008798795237218283902576680967021394083521"
+      },
+      {
+        "cell": "tbody[1] > tr[273] > td[2]",
+        "clippedLeft": false,
+        "clippedRight": false,
+        "hidden": false,
+        "over": 26.05,
+        "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+        "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+        "text": "100000000000000000000000000000000000000000000017597249391156465040471442005510391858592626557\u200b"
+      },
+      {
+        "cell": "tbody[1] > tr[90] > td[2]",
+        "clippedLeft": false,
+        "clippedRight": false,
+        "hidden": false,
+        "over": 15.45,
+        "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+        "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+        "text": "50000000000000000000000000000000000000000000540303893275985231628745267522385760199372637\u200b"
+      }
+    ],
+    "cellOverflowCount": 3,
+    "cellsByPage": {
+      "auto": {
+        "checked": 1560,
+        "count": 3,
+        "overflows": [
+          {
+            "cell": "tbody[1] > tr[58] > td[2]",
+            "clippedLeft": false,
+            "clippedRight": false,
+            "hidden": false,
+            "over": 94.94,
+            "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+            "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+            "text": "1000000000000000000000000000000000000000000000000000000000008798795237218283902576680967021394083521"
+          },
+          {
+            "cell": "tbody[1] > tr[273] > td[2]",
+            "clippedLeft": false,
+            "clippedRight": false,
+            "hidden": false,
+            "over": 26.05,
+            "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+            "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+            "text": "100000000000000000000000000000000000000000000017597249391156465040471442005510391858592626557\u200b"
+          },
+          {
+            "cell": "tbody[1] > tr[90] > td[2]",
+            "clippedLeft": false,
+            "clippedRight": false,
+            "hidden": false,
+            "over": 15.45,
+            "run": "span.mord[1] > span.mfrac[1] > span.vlist-t.vlist-t2[0]",
+            "table": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+            "text": "50000000000000000000000000000000000000000000540303893275985231628745267522385760199372637\u200b"
+          }
+        ]
+      },
+      "exact-values-wide": {
+        "checked": 4452,
+        "count": 0,
+        "overflows": []
+      }
+    },
+    "checkedCells": 1560,
+    "inlineByPage": {},
+    "inlineOverflow": [],
+    "inlineOverflowCount": 0,
+    "pageOverflow": 0,
+    "predictedScale": 1,
+    "scrollWidth": 576,
+    "tables": [
+      {
+        "columns": 5,
+        "minCodeFontPx": null,
+        "minDataFontPt": 11.4,
+        "minDataFontPx": 15.2,
+        "minHeaderFontPt": 10.8,
+        "page": "auto",
+        "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[13] > table.kpress-table[0]",
+        "predictedDataFontPt": 11.4,
+        "rows": 305,
+        "width": 576,
+        "wrapperWidth": 576
+      },
+      {
+        "columns": 6,
+        "minCodeFontPx": null,
+        "minDataFontPt": 11.4,
+        "minDataFontPx": 15.2,
+        "minHeaderFontPt": 10.8,
+        "page": "auto",
+        "path": "article.kpress.kpress-doc.kpress-prose.cert-page.exact-side-values-paper[1] > div.kpress-table-wrap[19] > table.kpress-table[0]",
+        "predictedDataFontPt": 11.4,
+        "rows": 4,
+        "width": 544,
+        "wrapperWidth": 544
+      }
+    ],
+    "viewport": 576,
+    "widest": null
+  },
+  "phase": "measured"
+}

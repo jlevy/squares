@@ -210,6 +210,85 @@
     return span;
   };
 
+  /** A native equation describes the selected vector without loading a math runtime.
+   * @param {ExactSideEntry} row @param {string[] | null} vector
+   */
+  const renderEquation = (row, vector = null) => {
+    const host = element("entry-equation");
+    host.replaceChildren();
+    host.hidden = row.kind !== "polynomial" || row.degree === null;
+    if (host.hidden) {
+      return;
+    }
+    /** @param {string} tag @param {string} [text] */
+    const mathNode = (tag, text) => {
+      const node = document.createElementNS("http://www.w3.org/1998/Math/MathML", tag);
+      if (text !== undefined) {
+        node.textContent = text;
+      }
+      return node;
+    };
+    const math = mathNode("math");
+    math.setAttribute(
+      "aria-label",
+      `${row.section === "historical" ? "Historical" : "Current"} polynomial ${row.component}, degree ${row.degree}`,
+    );
+    const formula = mathNode("mrow");
+    const name = mathNode("msub");
+    name.append(
+      mathNode("mi", row.section === "historical" ? "H" : "P"),
+      mathNode(
+        "mn",
+        row.section === "historical" ? row.component.replace(/^H_/, "") : String(row.n),
+      ),
+    );
+    formula.append(
+      name,
+      mathNode("mo", "("),
+      mathNode("mi", "s"),
+      mathNode("mo", ")"),
+      mathNode("mo", "="),
+    );
+    if (vector && vector.length <= 9) {
+      let first = true;
+      vector.forEach((coefficient, index) => {
+        if (/^[+-]?0+$/.test(coefficient)) {
+          return;
+        }
+        const negative = coefficient.startsWith("-");
+        if (!first || negative) {
+          formula.append(mathNode("mo", negative ? "−" : "+"));
+        }
+        const magnitude = coefficient.replace(/^[+-]/, "");
+        const power = vector.length - index - 1;
+        if (magnitude !== "1" || power === 0) {
+          formula.append(mathNode("mn", magnitude));
+        }
+        if (power > 0) {
+          const factor = power === 1 ? mathNode("mi", "s") : mathNode("msup");
+          if (power > 1) {
+            factor.append(mathNode("mi", "s"), mathNode("mn", String(power)));
+          }
+          formula.append(factor);
+        }
+        first = false;
+      });
+    } else {
+      const sum = mathNode("munderover");
+      const lower = mathNode("mrow");
+      lower.append(mathNode("mi", "k"), mathNode("mo", "="), mathNode("mn", "0"));
+      sum.append(mathNode("mo", "∑"), lower, mathNode("mn", String(row.degree)));
+      const coefficient = mathNode("msub");
+      coefficient.append(mathNode("mi", "a"), mathNode("mi", "k"));
+      const power = mathNode("msup");
+      power.append(mathNode("mi", "s"), mathNode("mi", "k"));
+      formula.append(sum, coefficient, power);
+    }
+    formula.append(mathNode("mo", "="), mathNode("mn", "0"));
+    math.append(formula);
+    host.append(math);
+  };
+
   /** @param {ExactSideEntry} row @param {number} version */
   const loadMetadata = async (row, version) => {
     const abort = new AbortController();
@@ -231,6 +310,7 @@
         throw new Error("Metadata does not match the selected entry.");
       }
       element("entry-claim").textContent = value.claim;
+      renderEquation(row);
       element("metadata").replaceChildren(metadataNode(value.record, "record"));
       element("detail-content").hidden = false;
       element("coefficient-section").hidden = !row.coefficients_url;
@@ -252,6 +332,12 @@
     coefficients = null;
     coefficientPage = 0;
     element("detail-title").textContent = row.title;
+    element("entry-equation").hidden = true;
+    const report = /** @type {HTMLAnchorElement} */ (element("entry-report"));
+    report.hash =
+      row.section === "current"
+        ? row.id
+        : `historical-n${row.n}-occurrence${row.component.split(",").at(-1)}`;
     element("detail-content").hidden = true;
     element("metadata").replaceChildren();
     element("coefficient-content").hidden = true;
@@ -354,6 +440,7 @@
         );
       }
       coefficients = value;
+      renderEquation(row, value.coefficients);
       const download = /** @type {HTMLAnchorElement} */ (element("download-coefficients"));
       download.href = safeUrl(url);
       element("coefficient-actions").hidden = false;

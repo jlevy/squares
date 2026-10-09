@@ -17,9 +17,10 @@
 <main id="exact-browser" data-index-url="{{BROWSER_INDEX_URL}}">
 <header class="catalogue-intro">
 <h1>Exact side values</h1>
-<p>Version {{BROWSER_VERSION}} · <a href="{{REGISTER_SOURCE_URL}}">Source register</a></p>
-<p>Browse the algebraic certificates and recorded sides of square packings. Current entries and historical source records are separate; numeric entries remain in the current catalogue.</p>
-<p class="archive-links">Complete archives: <a href="{{COMPLETE_HTML_URL}}">HTML</a> · <a href="{{COMPLETE_MARKDOWN_URL}}">Markdown</a> · <a href="{{COMPLETE_PDF_URL}}">PDF</a></p>
+{{BROWSER_CREDITS}}
+<p>Exact expressions and polynomials identify the recorded sides of unit-square packings. A verified construction establishes a packing bound; only a matching lower bound proves an optimum.</p>
+<p class="coverage-overview">{{BROWSER_COVERAGE}}</p>
+<p class="archive-links"><a class="full-report-link" href="{{COMPLETE_HTML_URL}}">Read the full report</a> · <a href="{{COMPLETE_MARKDOWN_URL}}">Download Markdown</a> · <a href="{{REGISTER_SOURCE_URL}}">Source register</a></p>
 <noscript><p>This index needs JavaScript. <a href="{{COMPLETE_HTML_URL}}">Read the complete HTML catalogue</a>, including every entry and coefficient.</p></noscript>
 </header>
 <form id="catalogue-controls" class="catalogue-controls" role="search">
@@ -44,6 +45,8 @@
 <button type="button" id="retry-metadata" hidden>Retry entry</button>
 <div id="detail-content" hidden>
 <p id="entry-claim"></p>
+<div id="entry-equation" class="entry-equation" tabindex="0" role="region" aria-label="Polynomial equation" hidden></div>
+<p><a id="entry-report" href="{{COMPLETE_HTML_URL}}">Read this entry in the full report</a></p>
 <div class="claim-guide">
 <h3>Algebraic certificate</h3><p>A polynomial and an isolated root identify an algebraic value. They do not by themselves certify a packing.</p>
 <h3>Geometry</h3><p>A feasible construction establishes a packing bound. Source-invalid records are retained as source history and must not be used as packing bounds.</p>
@@ -54,14 +57,14 @@
 <div id="metadata"></div>
 <section id="coefficient-section" aria-labelledby="coefficient-title" hidden>
 <h3 id="coefficient-title">Polynomial coefficients</h3>
-<p>Integer strings, in descending power order, preserved in full. Only the displayed batch is placed in the table.</p>
+<p>Every integer coefficient is preserved in descending power order. Browse all batches below, or download the complete vector.</p>
 <button type="button" id="open-coefficients" aria-expanded="false" aria-controls="coefficient-content">Open coefficients</button>
 <div id="coefficient-content" hidden>
 <p id="coefficient-message" role="status" aria-live="polite"></p>
 <button type="button" id="retry-coefficients" hidden>Retry coefficients</button>
 <div id="coefficient-actions" hidden><a id="download-coefficients" download>Download complete coefficient JSON</a> <button type="button" id="copy-coefficients">Copy complete coefficient JSON</button></div>
 <label id="copy-fallback" hidden>Complete coefficient JSON: select and copy<textarea id="coefficient-copy" readonly rows="6"></textarea></label>
-<div class="coefficient-table-wrap"><table><caption>Complete values for this batch</caption><thead><tr><th scope="col">Power</th><th scope="col">Integer coefficient</th></tr></thead><tbody id="coefficient-body"></tbody></table></div>
+<div class="coefficient-table-wrap" tabindex="0" role="region" aria-label="Polynomial coefficients"><table><caption>Complete values for this batch</caption><thead><tr><th scope="col">Power</th><th scope="col">Integer coefficient</th></tr></thead><tbody id="coefficient-body"></tbody></table></div>
 <div class="pager" aria-label="Coefficient pages"><button type="button" id="previous-coefficients" disabled>Previous coefficients</button><span id="coefficient-page"></span><button type="button" id="next-coefficients" disabled>Next coefficients</button></div>
 </div>
 </section>

@@ -1,14 +1,21 @@
-# Exact Paper Print Readability
+# Exact Paper Print Readability — Retired
 
-| Idea | State | Record | Reason |
-| --- | --- | --- | --- |
-| Contain the five-column exact-form table; use 9-point summary type | registered | [H-001](hypotheses/H-001-readable-tables.md) | Remove whole-document shrink and improve physical table readability |
-| Split dense summaries into keyed tables | parked | — | Consider only if the bounded layout candidate fails |
+The user stopped PDF packaging for this large catalogue on 2026-10-09 UTC and selected
+complete web publication.
+This is a closed investigation record; it creates no print or PDF build requirement.
+`think-yon5` ended canceled and `think-ja78` owns the web report.
 
-The instrument is `devtools.render_exact_side_values --check-print`; PDF production uses
-the same preflight. The [report](report.md) is a generated view of checked observations.
-This print campaign preserves the frozen initial-byte criterion of the separate
-[web campaign](../exact-catalogue-web/ideas.md).
+| Observation | Outcome | Record |
+| --- | --- | --- |
+| Dated hosted PDF and portrait baseline | Approximately 5.40-point summary text; 150-pixel document overflow | [exp-001](experiments/exp-001-dated-baseline.md) |
+| First preregistered layout candidate | Refused: three exact-form cell spills; no candidate PDF generated | [exp-002](experiments/exp-002-refused-layout.md) |
+
+[H-001](hypotheses/H-001-readable-tables.md) retains the criterion registered before CSS
+changes. The proposed split-table follow-up was not run and is retired with this scope.
+The print-only instrument and pending implementation were removed from active source
+after preserving their receipts and patch in protected recovery evidence.
+The separate [web campaign](../exact-catalogue-web/ideas.md) keeps its frozen
+initial-byte criterion and complete-content guards.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
