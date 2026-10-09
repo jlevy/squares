@@ -5,7 +5,7 @@ title: Refresh polynomial catalogue for admitted finite bounds and source roots
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T01:06:00.341Z
-updated_at: 2026-10-09T10:56:01.381Z
+updated_at: 2026-10-09T11:23:44.060Z
 started_at: 2026-10-09T01:08:29.634Z
 ---
 Integrate upstream b810432cc PR434 on both layers of formal stack447. Preserve latest finite rational source/witness/replay custody for n68,n105,n292, rebuild compressed register and chunk census, retain all source and historical evidence, distinguish three remaining representation gaps from ideal-contact research, preserve snapshot roster/profiling interfaces and copy-once contract, update all documentation/PR/bead dispositions, complete replacement-head hosted validation.
@@ -122,3 +122,15 @@ The three publication-floor defects are repaired: direct maintained WEB_LAYOUT p
 Database status remains324 current rows,321 exact identities,175 historical rows and77 proved cases. Three numeric-only representations29/55/71 retain think-je8y/think-phh8/think-1blg; finite105 is represented while ideal105/68/292 contacts remain open. Source-only102 degree8,106 degree32,152 degree40 and177 degree32 remain unreconciled V0/C0 under think-8sm2/#419, with no new geometry/Lean evidence. The selected next mathematical entry remains W7 think-s6np reusable active-contact driver, contact-derived n11 octic control, then one preregistered bounded n102 W6 slice under think-ohhz. No solver or target identification search was run in stabilization.
 
 Fresh published-head Packing, Pages/mergeability and checkpoint assurance remain required. Dated parent910/child4789 full workflows passed; parent910 Pages CLS0.2085927463531494 exceeded unchanged0.1 and still has no causal production fix. The final source includes diagnostics for its natural Linux reproduction. PR403/435 remain open in formal stack447; no merge, handoff or live-web deployment is claimed.
+
+Validation disposition checkpoint, 2026-10-09T11:23:41.748001+00:00
+
+Final local c28de41ba web-only report qualification PASS: maintained renderer/check/check-web, eight inspected 390/1280 light/dark views, no overflow/lost ink/math errors, exact reconstruction of 499 records, 519 coefficient vectors, 6273 integer strings and all 673 n83 coefficients. Actual initial transfer 366951 bytes versus complete 5357841 bytes (6.848859%, below unchanged 10%); script 21988/24000 bytes. Complete local preview is available; no exact-report PDF was generated or required. Protected receipts: web-headc28de41ba/.
+
+Independent final parent 98367a748 register audit PASS: 320 irreducibles, 320 isolated roots and frontier agreement in 42.623 seconds. The 46240-byte compressed and 422701-byte decoded register is unchanged through the cascade. Child final gate independently passed 321 roots/irreducibles and historical polynomial audit. No new mathematical identity, bound or proof claim was adopted by publication stabilization.
+
+The required final child push gate at c28de41ba FAILED after 1184.65 seconds total: reachable behavioral tests selected 499 of 722 files and hit the unchanged 900-second command limit at 94% (901.06 seconds). All other selected steps passed. This is a failed run, not complete behavioral assurance; the pool-heavy complementary phase did not start. The actual 10-CPU/2-outer/1-inner resource shape is not the reference shape, so its timing is operational evidence, not a calibrated performance claim. Protected gate and worker journals: final-push-c28de41ba.log and final-push-c28de41ba/.
+
+Two assertion failures were recorded in flushed journals before termination. The squish complete worker-custody/private-controls test failed after 31.66 seconds in nine workers; the unchanged isolated reproduction PASSED (1 test, 48.69 seconds), including its unchanged 30-second baseline command and all custody checks. Contention/timeout remains an inference because the killed broad run preserved no traceback. No assertion, custody boundary or timeout was relaxed. The real-tree suite-file check reproduced FAIL with a complete traceback: 722 current files, 75 without measured costs, with shard shares exceeding the unchanged 10% guard. Strong-tier repair is using the maintained admit-local route and actual successful complete module measurements, split parent-first and child. No hosted weights, capacity, policy, selector or budget changes are authorized to conceal this failure.
+
+Both PRs still await the actual source push and fresh published-head qualification; old hosted successes are explicitly dated baselines. Parent's old Pages CLS failure remains open until its natural new-head Linux result has a causal disposition. No PR merge, handoff, live website deployment or solver/search run occurred. Remaining numeric identities 29/55/71, ideal contact obligations and source-only V0/C0 items retain their existing beads; the next research entry is W7 think-s6np driver, contact-derived n11 octic control, then bounded n102 think-ohhz.
