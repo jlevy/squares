@@ -5,7 +5,7 @@ title: Refresh polynomial catalogue for admitted finite bounds and source roots
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T01:06:00.341Z
-updated_at: 2026-10-09T07:02:44.221Z
+updated_at: 2026-10-09T08:02:58.942Z
 started_at: 2026-10-09T01:08:29.634Z
 ---
 Integrate upstream b810432cc PR434 on both layers of formal stack447. Preserve latest finite rational source/witness/replay custody for n68,n105,n292, rebuild compressed register and chunk census, retain all source and historical evidence, distinguish three remaining representation gaps from ideal-contact research, preserve snapshot roster/profiling interfaces and copy-once contract, update all documentation/PR/bead dispositions, complete replacement-head hosted validation.
@@ -58,3 +58,43 @@ Protected receipts: /Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a11
 Shared recovery cost checkpoint: 2026-10-08T22:26:36.377Z through 2026-10-09T06:34:02Z, 8h7m25.623s ongoing. Do not add it across the two PRs. PR descriptions and new-head full dispatch are assigned to the CI lane.
 
 Continue W7 stabilization: fresh gates, separate startup/CLS diagnosis, PDF readability and new-artifact qualification. Next research is W7 think-s6np: reusable complete active-contact driver, contact-derived n11 octic control, then one preregistered bounded n102 W6 slice in think-ohhz. Only n11/n102 inputs were retrieved and digest-checked from source 13ee36e5807727d12a5da36b9b90a96bdba272bf; the 320-input batch manifest is pinned. No driver, solver, contact-derived control or target search was delivered in this recovery. Numeric-gap lanes, ideal contact/seed obligations, four source-geometry gaps, unadmitted eleven legacy results, independent derivations/witnesses and think-yuqy's inference quarantine remain open under their original owners. Adjacent intake PR #467 records pending branches; accepted upstream results are incorporated. User requests stabilization/capture followed by continued work, with no handoff stop.
+
+Published-head validation and open publication work — 2026-10-09
+
+Main remains 3213d651b880d7768bce8506efaf75c2089aeb4f. Published parent
+910a7a4f2d46277e92515723aa40b4f3a73c9998 passed full run 37896687146: 94/107 integration
+steps, 2031.98s under 3600; aggregate job 113720336181 passed.
+Published child 4789e36aad4a28a1010da0952ea8be3bda387f6a passed full run 37896690041:
+96/109 integration steps, 1920.56s under 3600; aggregate job 113719881053 passed.
+Both runs used four CPUs, one job and two inner workers.
+Thirteen expensive steps were distributed; all twelve prerequisites and each aggregate
+passed, including all exhaustive shards, slow lanes and physical negative controls.
+These are published-head receipts, not reference-shape speed claims or qualification of
+later patches. Prior failures remain historical.
+
+Both PR Packing and mergeability checks passed.
+Child Pages passed; parent Pages 37894154719 still fails frontier.html at 1280px light
+CLS 0.209 > 0.1. Its old sixteen startup task/blocking failures did not recur in that
+run; the CLS cause remains open.
+Parent local diagnostic commit `522400c06` adds eleven passing controls and phased
+refusal evidence; it is unpublished and supplies no causal CSS fix.
+
+Canonical data is JSON.gz; the reader is an HTML catalogue with complete HTML, Markdown
+and PDF exports. Root’s latest public URL recheck still returned 404: public deployment
+awaits merge, and both PRs remain open.
+The dated 1666 PDF (546 Letter pages, 2,810,786 bytes, all 673 n83 coefficients checked)
+remains a baseline with 5.4pt summary-table text, not qualification of a new print
+candidate. think-yon5 requires physical text >= 8pt, targets 9pt and keeps 1px overflow
+tolerance, all source fields/content and all 499 records intact.
+
+Child H001 preregistration `5779eeef5` and plan clarification `add30089a` are local,
+unpublished preparation.
+The print-source candidate is in progress and unqualified.
+These changes introduce no mathematical-data, geometry, Lean or solver verdict.
+Fresh candidate/head checks and PDF qualification remain required.
+No bead or research obligation is closed by this checkpoint; continue stabilization and
+preserve the earlier cost record without inventing a finish.
+
+Source/database scope is unchanged: three representation gaps 29/55/71 and separate
+ideal-contact/source-geometry obligations remain open.
+Full gate success does not admit a new bound, proof or solver result.
