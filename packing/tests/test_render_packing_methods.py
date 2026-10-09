@@ -81,6 +81,10 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
     assert structure.h1 == ("How Record Square Packings Are Found",)
     assert structure.title == paper.TITLE
     assert structure.published == structure.modified == "2026-10-08"
+    assert next(line.text for line in structure.credits if line.kind == "dates") == (
+        "Published October 8, 2026"
+    )
+    assert "- Published October 8, 2026" in markdown
     assert structure.pdf == {}
     assert release.PUBLICATION_EDITION not in html
     assert release.PUBLICATION_EDITION not in markdown

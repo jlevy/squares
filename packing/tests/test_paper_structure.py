@@ -63,19 +63,15 @@ DATES = {
         f"Last revised {release.EXPLAINER_REVISED}"
     ),
     THRESHOLD: (
-        f"First published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.THRESHOLD_PROOF_PUBLISHED} · "
-        f"Last revised {release.THRESHOLD_REVIEW_REVISED}"
+        f"Published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published}"
     ),
     REVIEW: (
         f"First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
         f"Last revised {release.OPTIMALITY_REVIEW_REVISED}"
     ),
-    METHODS: (
-        f"First published {release.PACKING_METHODS_FIRST_PUBLISHED} · "
-        f"Last revised {release.PACKING_METHODS_REVISED}"
-    ),
+    METHODS: f"Published {release.PACKING_METHODS_FIRST_PUBLISHED}",
 }
 
 
@@ -140,7 +136,7 @@ def test_every_form_axis_is_the_same_on_every_paper(rows: list[dict[str, object]
         "title: h1",
         "credits: names bold",
         "credits: addresses plain",
-        "credits: dates end with",
+        "credits: dates finish with current date",
         "series: strip",
         "sections: h2 case",
         "sections: h3 case",
@@ -160,7 +156,7 @@ def test_the_shared_form_is_the_one_the_design_names(rows: list[dict[str, object
     assert found["title: h1"] == "1, Title Case"
     assert found["credits: names bold"] == "yes"
     assert found["credits: addresses plain"] == "yes"
-    assert found["credits: dates end with"] == paper_front.REVISED
+    assert found["credits: dates finish with current date"] == "yes"
     assert found["series: strip"] == (
         "Part N of M, then each other part by number and title, linked"
     )
@@ -402,6 +398,80 @@ def test_caption_form_names_what_departs_from_the_lead() -> None:
         "a caption without a `Figure N.` lead"
     )
     assert paper_structure.caption_form(()) == "no figures"
+
+
+@pytest.mark.parametrize(
+    ("dates", "expected"),
+    [
+        (
+            (("First published", "October 8, 2026"), ("Last revised", "October 8, 2026")),
+            "Published October 8, 2026",
+        ),
+        (
+            (("First published", "October 8, 2026"), ("Last revised", "October 08, 2026")),
+            "Published October 8, 2026",
+        ),
+        (
+            (("First published", "October 7, 2026"), ("Last revised", "October 8, 2026")),
+            "First published October 7, 2026 · Last revised October 8, 2026",
+        ),
+        (
+            (
+                ("First published", "October 8, 2026"),
+                ("Original proof", "October 8, 2026"),
+                ("Last revised", "October 8, 2026"),
+            ),
+            "Original proof October 8, 2026 · Published October 8, 2026",
+        ),
+        (
+            (("Original proof", "October 8, 2026"), ("Last revised", "October 8, 2026")),
+            "Original proof October 8, 2026 · Last revised October 8, 2026",
+        ),
+        (
+            (("Last revised", "October 8, 2026"),),
+            "Last revised October 8, 2026",
+        ),
+    ],
+)
+def test_publication_dates_share_one_display_rule_without_changing_the_record(
+    dates: tuple[tuple[str, str], ...], expected: str
+) -> None:
+    front = paper.FRONT._replace(dates=tuple(paper_front.Dated(*dated) for dated in dates))
+    html = paper_front.credits_html(front)
+    markdown = paper_front.credits_markdown(front)
+    assert f'<span class="publication-date">{expected}</span>' in html
+    assert f"- {expected}\n" in markdown + "\n"
+    assert tuple(front.dates) == dates
+    assert paper_front.revised(front) == dates[-1][1]
+
+
+def test_collapsed_date_audit_refuses_conflicting_metadata() -> None:
+    front = paper.FRONT._replace(
+        dates=(
+            paper_front.Dated("First published", "October 8, 2026"),
+            paper_front.Dated(paper_front.REVISED, "October 8, 2026"),
+        )
+    )
+    html = paper_front.credits_html(front)
+    structure = replace(
+        paper_structure.read(front.slug, html),
+        published="2026-10-08",
+        modified="2026-10-08",
+    )
+    axis = "credits: dates finish with current date"
+    assert paper_structure.axes(structure)[axis] == "yes"
+    assert paper_structure.axes(replace(structure, published="2026-10-07"))[axis] == "no"
+    assert paper_structure.axes(replace(structure, modified="2026-10-09"))[axis] == "no"
+    for malformed in (
+        "First published October 8, 2026 · Last revised October 8, 2026",
+        "Last revised October 8, 2026 · Published October 8, 2026",
+        "Published October 8, 2026 · Published October 8, 2026",
+    ):
+        date_credits = tuple(
+            line._replace(text=malformed) if line.kind == "dates" else line
+            for line in structure.credits
+        )
+        assert paper_structure.axes(replace(structure, credits=date_credits))[axis] == "no"
 
 
 def test_the_front_record_is_refused_where_it_departs_from_the_form() -> None:

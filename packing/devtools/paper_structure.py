@@ -378,6 +378,25 @@ def _dates(line: CreditLine | None) -> list[tuple[str, str]]:
     return found
 
 
+def _dates_follow_form(dates: list[tuple[str, str]], structure: Structure) -> bool:
+    """Check the visible rule independently of the renderer, including collapse."""
+    labels = [label for label, _ in dates]
+    if not dates or len(set(labels)) != len(labels):
+        return False
+    last_label, last_day = dates[-1]
+    if last_label == "Published":
+        return (
+            "First published" not in labels
+            and "Last revised" not in labels
+            and bool(_iso(last_day))
+            and _iso(last_day) == structure.published == structure.modified
+        )
+    if last_label != "Last revised" or "Published" in labels:
+        return False
+    publication = next((day for label, day in dates if label == "First published"), None)
+    return publication is None or _iso(publication) != _iso(last_day)
+
+
 def axes(structure: Structure) -> dict[str, str]:
     """Each axis of a paper's structure, as one line a reader can compare: a form the
     papers share, or the content that is this paper's own (`CONTENT_AXES`)."""
@@ -436,7 +455,9 @@ def axes(structure: Structure) -> dict[str, str]:
         ),
         "credits: version": version.text if version else "",
         "credits: dates grammar": " · ".join(f"{label} <day>" for label, _ in dates) or "none",
-        "credits: dates end with": dates[-1][0] if dates else "none",
+        "credits: dates finish with current date": "yes"
+        if _dates_follow_form(dates, structure)
+        else "no",
         "credits: dates": lines["dates"].text if "dates" in lines else "",
         "series: strip": _series_form(structure),
         "series: part": _series_part(structure),

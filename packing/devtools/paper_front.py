@@ -54,7 +54,7 @@ from devtools.repo_links import REPO_URL
 
 #: The placeholder an article carries where its front goes, exactly once.
 FRONT_MATTER = "FRONT_MATTER"
-#: The label of the date every paper ends its dates line with: when its own text last
+#: The revision date's label in the source record: when its own text last
 #: changed, which `devtools.artifact_dates` holds to the article's last commit.
 REVISED = "Last revised"
 #: The GitHub mark on the third chip, drawn in the chip's own colour.
@@ -272,6 +272,24 @@ def formats_row(front: PaperFront) -> str:
     return "\n".join(lines)
 
 
+def _display_dates(front: PaperFront) -> tuple[Dated, ...]:
+    """Collapse publication and revision on the same calendar day for display only.
+
+    Source dates describe other events and keep their labels. The combined date
+    stays at the end, where metadata and PDF audits read the paper's revision.
+    """
+    revision = front.dates[-1]
+    publication = next(
+        (dated for dated in front.dates if dated.label == "First published"), None
+    )
+    if publication is None or iso_date(publication.day) != iso_date(revision.day):
+        return front.dates
+    return (
+        *(dated for dated in front.dates[:-1] if dated.label != "First published"),
+        Dated("Published", publication.day),
+    )
+
+
 def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
     """Each line of the credits: its class, its HTML and its Markdown, in order."""
     lines: list[tuple[str, str, str]] = []
@@ -318,7 +336,7 @@ def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
         )
     else:
         lines.append(("edition", version, front.version))
-    dates = " · ".join(f"{dated.label} {dated.day}" for dated in front.dates)
+    dates = " · ".join(f"{dated.label} {dated.day}" for dated in _display_dates(front))
     lines.append(("publication-date", escape(dates), dates))
     if front.series is not None:
         lines.extend(_series_lines(front.series))
