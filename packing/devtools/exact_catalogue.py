@@ -12,6 +12,11 @@ DATA_DIRECTORY = "exact-side-values-data"
 INDEX_PATH = Path(DATA_DIRECTORY) / "index.json"
 SCHEMA_VERSION = 1
 INTEGER = re.compile(r"[+-]?[0-9]+")
+REPORTED_SOURCE_CLAIM = (
+    "The source polynomial and isolated root were independently checked. "
+    "Geometric feasibility and Lean replay await verification (V0/C0). "
+    "This source root establishes no packing upper bound or global optimum."
+)
 
 
 class ExactCatalogueError(ValueError):
@@ -24,6 +29,8 @@ def _json(value: object) -> str:
 
 def _claim(record: Mapping[str, Any], section: str) -> str:
     if section == "historical":
+        if record.get("kind") == "unreconciled-source" and record.get("reported_source"):
+            return REPORTED_SOURCE_CLAIM
         return {
             "source-invalid": (
                 "The algebraic checks do not furnish a valid packing upper bound: "
