@@ -913,6 +913,14 @@ Independent whole-net replay and controls remain pending.
   [separate wrapper correction](web/evand-batch-wrapper-2026-10-07/README.md) is pinned
   at cca7bf1; its reported rerun earns no replay credit here.
 
+- **[Couzo extended-range reports 2026-10-09]** — Francisco Couzo’s twenty complete
+  decimal poses beyond n324, retained as numerical facts and Git custody metadata.
+  [Source packet](web/couzo-extended-reports-2026-10-09/README.md).
+  All twenty remain author reports outside the standing-case corpus; no result row,
+  geometry replay, selected bound or verification from the separate issue451
+  certificates. Raw upstream text, SVGs, prose and programs remain outside Git under the
+  existing retention policy; no redistribution permission is asserted.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

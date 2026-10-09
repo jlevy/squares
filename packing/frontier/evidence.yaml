@@ -29097,3 +29097,44 @@ evidence:
       remain scoped to their original inputs. Author acceptance counters, numerical local-minimum, flat-motion
       and batch-completion claims remain source reports. No optimality, rigidity, independent-method
       count or standing-bound upgrade.
+  - id: E-couzo-extended-range-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 327
+      - 332
+      - 335
+      - 336
+      - 337
+      - 338
+      - 339
+      - 340
+      - 341
+      - 342
+      - 364
+      - 369
+      - 372
+      - 373
+      - 374
+      - 375
+      - 376
+      - 377
+      - 378
+      - 379
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo extended-range reports 2026-10-09]'
+    certificate: packing/resources/web/couzo-extended-reports-2026-10-09/acquisition/sources.json
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-09'
+    limitations: Author-reported decimal poses only, all outside the 324-case corpus. Complete numerical-token
+      custody and representation validation do not establish nonoverlap or containment. No checker or feasibility
+      tolerance is stated for these decimal poses. Comparison references in the expanded search are derived
+      border-row/grid constructions, not surveyed best records. No geometry replay, native execution, exact
+      certificate, independent method, optimality, standing-bound change or verification transferred from
+      the separate eight in-horizon issue451 certificates.

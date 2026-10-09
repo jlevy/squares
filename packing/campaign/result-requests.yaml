@@ -17,7 +17,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-08'
+last_reviewed: '2026-10-09'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -28,7 +28,7 @@ issues:
     triage: done
     summary: Pinned source metadata and Lean code imported as attributed reports, with source configurations
       and proof obligations kept explicit.
-    read_through: '2026-10-07T20:11:56Z'
+    read_through: '2026-10-09T02:57:01Z'
     results:
     - key: local-minima-178
       claim: 178 source configurations are reported non-strict local minima under matched-index perturbations.
@@ -38,7 +38,16 @@ issues:
     beads:
     - think-juuq
     answer_bead: think-juuq
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/420#issuecomment-6073319527
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: local-minima-178
+        id: T-124
+        verification: V0
+        confirmation: C0
     close_when: The reported import and its disposition are on main and the owner has posted the resulting
       state; unresolved proof replays remain explicitly owned.
   - number: 419
@@ -51,7 +60,7 @@ issues:
     triage: done
     summary: Pinned source metadata and Lean code imported as attributed reports, with source configurations
       and proof obligations kept explicit.
-    read_through: '2026-10-08T17:57:33Z'
+    read_through: '2026-10-09T02:57:00Z'
     results:
     - key: new-exact-forms
       claim: Four newly derived exact feasible-side forms at102,106,152,177; polynomial minimality remains
@@ -80,18 +89,41 @@ issues:
       reported:
       - result: new-exact-forms
       - result: remaining-catalogue
+    - url: https://github.com/jlevy/squares/issues/419#issuecomment-6073319280
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: new-exact-forms
+        id: T-120
+        verification: V0
+        confirmation: C0
+      - result: new-exact-forms
+        id: T-121
+        verification: V0
+        confirmation: C0
+      - result: new-exact-forms
+        id: T-122
+        verification: V0
+        confirmation: C0
+      - result: new-exact-forms
+        id: T-123
+        verification: V0
+        confirmation: C0
+      - result: remaining-catalogue
     close_when: The reported import and its disposition are on main and the owner has posted the resulting
       state; unresolved proof replays remain explicitly owned.
   - number: 399
     title: 'New packings: s(266) ≤ 16.82302875075648, s(270) ≤ 16.93780722844603, s(272) ≤ 16.96811014576960'
     author: evand
     opened: '2026-10-07'
-    state: open
+    state: closed
+    closed: '2026-10-09'
     kind: result-report
     triage: done
     summary: Three complete changed rational packings independently certified at V3/C3; source novelty,
       local minimality and optimality remain unestablished. Historical #375 sources retain their own poses.
-    read_through: '2026-10-07T02:10:44Z'
+    read_through: '2026-10-09T02:56:57Z'
     results:
     - key: three-new-feasible-packings
       claim: Exact feasible upper bounds at n266,270,272, with complete new poses and rational sides.
@@ -101,7 +133,16 @@ issues:
     beads:
     - think-hh48
     answer_bead: think-hh48
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/399#issuecomment-6073318623
+      date: '2026-10-09'
+      by: jlevy
+      kind: final
+      reported:
+      - result: three-new-feasible-packings
+        id: T-119
+        verification: V3
+        confirmation: C3
     close_when: The confirmed import is on main and the owner has posted its state; novelty and
       local/global optimality are outside this feasibility import.
   - number: 432
