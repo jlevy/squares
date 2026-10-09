@@ -331,8 +331,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-123",
     }
     # Couzo's later eight-case source report alone holds no current frontier lane.
-    if "T-128" in records.results:
-        expected.add("T-128")
+    expected.add("T-128")
     assert set(derived) == expected
     assert len(derived) == len(expected)
     assert {
