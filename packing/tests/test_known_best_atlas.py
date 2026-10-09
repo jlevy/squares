@@ -22,6 +22,8 @@ import yaml
 
 from devtools import build_bound_citations, build_composite_figure_data, render_composite_pdf
 from devtools import build_known_best_atlas as known_best_builder
+from devtools import refinement_house_links as refinement_houses
+from devtools import refinement_packets as refinement_sources
 from devtools.atlas_legend import AtlasLegendCounts, atlas_legend
 from devtools.result_status import RecentContributions, recent_contributions_by_case
 from sqpack.known_best import (
@@ -463,9 +465,17 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         assert entry["source"]["path"].endswith(
             (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
         )
-        assert witness["source"]["path"] == entry["source"]["path"]
+        source = refinement_houses.source(n) if n in refinement_houses.NUMBERS else None
+        if source is not None and entry["source"]["url"] == source.url(n):
+            # New source facts use repository-relative custody paths. Admit the whole
+            # imported house, not merely an accepted alternative path spelling.
+            assert witness["source"] == refinement_sources.to_witness(source, n)["source"]
+            assert witness["source"]["path"] == "packing/" + entry["source"]["path"]
+            refinement_houses.check_houses([n])
+        else:
+            assert witness["source"]["path"] == entry["source"]["path"]
+            assert "not a legal conclusion" in witness["claim"]["limitations"]
         assert witness["source"]["url"] == entry["source"]["url"]
-        assert "not a legal conclusion" in witness["claim"]["limitations"]
     elif entry["source"]["kind"] == "unitsquare-rendering":
         assert witness["source"]["revision"] == (
             f"upstream-declared parent-content SHA-256 {release_by_n[n]['record_sha256']}"
@@ -1474,8 +1484,8 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     assert information is not None
     credit_block = information.find("svg:g[@data-feature='packing-credits']", SVG)
     assert credit_block is not None
-    assert len(expected_names) == 19
-    assert len(expected_sources) == 7
+    assert len(expected_names) == 20
+    assert len(expected_sources) == 8
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -1669,6 +1679,25 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
         "2896",
         "0 0 2400 2896",
     )
+    entries = {entry["n"]: entry for entry in record["entries"]}
+    assert [
+        n for n in canvas.spec.numbers if entries[n]["exactness"]["state"] == "numeric-only"
+    ] == [29, 55, 71]
+    degrees = {
+        n: entries[n]["exactness"]["degree"]
+        for n in canvas.spec.numbers
+        if entries[n]["exactness"]["degree"] is not None
+        and entries[n]["exactness"]["degree"] >= 2
+    }
+    displayed_degrees = {
+        int(item.attrib["data-n"]): label.text
+        for item in root.findall("svg:g[@data-feature='packing-card']", SVG)
+        if (label := item.find("svg:text[@data-feature='algebraic-degree']", SVG)) is not None
+    }
+    assert len(degrees) == 30
+    assert displayed_degrees == {n: f"deg {degree}" for n, degree in degrees.items()}
+    assert entries[68]["exactness"]["degree"] == 1
+    assert 68 not in displayed_degrees
     card = root.find("svg:g[@data-n='11']", SVG)
     assert card is not None
     optimal = card.find("svg:rect[@data-evidence='proved optimal']", SVG)
@@ -1764,13 +1793,13 @@ def test_direct_card_helpers_do_not_resolve_canonical_contribution_flags(
 
 
 def test_shared_atlas_legend_has_the_same_eight_items_in_four_and_four_rows() -> None:
-    descriptor = atlas_legend(AtlasLegendCounts(77, 287, 37, 22, 297))
+    descriptor = atlas_legend(AtlasLegendCounts(77, 290, 34, 22, 297))
     assert [item.marker for item in descriptor.left] == ["O", "=", "≈", "R"]
     assert [item.marker for item in descriptor.right] == ["star", "angles", "shades", None]
     assert [item.text for item in descriptor.items] == [
         "proved optimal (77)",
-        "exact value known (287)",
-        "only known numerically (37)",
+        "exact value known (290)",
+        "only known numerically (34)",
         "rigid (22)",
         "recent result, since August, 2026 (297)",
         "colors indicate distinct tilt angles",
@@ -1798,8 +1827,8 @@ def test_poster_legend_columns_align_left_and_count_upper_only_recent_results(
                     "stem": canvas.spec.stem,
                     "totals": {
                         "proved_optimal": 77,
-                        "exact_value_known": 287,
-                        "only_known_numerically": 37,
+                        "exact_value_known": 290,
+                        "only_known_numerically": 34,
                         "rigidity_known": 22,
                         "lower_bound_recent_result": 0,
                     },
@@ -2303,8 +2332,8 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     ]
     assert labels == [
         "proved optimal (77)",
-        "exact value known (287)",
-        "only known numerically (37)",
+        "exact value known (290)",
+        "only known numerically (34)",
         "rigid (22)",
         "recent result, since August, 2026 (297)",
         "colors indicate distinct tilt angles",
@@ -2323,8 +2352,8 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
         if node.attrib.get("text-anchor") is None
     ][:5] == [
         "proved optimal (45)",
-        "exact value known (96)",
-        "only known numerically (4)",
+        "exact value known (97)",
+        "only known numerically (3)",
         "rigid (14)",
         "recent result, since August, 2026 (81)",
     ]
@@ -2822,3 +2851,13 @@ def test_a_catalogue_case_is_unaffected_by_the_unitsquare_selector() -> None:
 
     assert plan.kind == "kingbird-derived-facts"
     assert plan.url == "https://kingbird.myphotos.cc/packing/square-71.svg"
+
+
+@pytest.mark.parametrize("n", refinement_houses.NUMBERS)
+def test_each_refinement_atlas_source_binds_full_private_custody(n: int) -> None:
+    entry = next(
+        row
+        for row in json.loads(known_best_builder.MANIFEST.read_text())["atlas"]["entries"]
+        if row["n"] == n
+    )
+    _assert_witness_agrees_with_entry(entry, {})

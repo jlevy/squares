@@ -55,7 +55,7 @@ import re
 import struct
 import sys
 import xml.etree.ElementTree as ET
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Callable, Iterator, Mapping, Sequence
 from datetime import datetime
 from functools import cache
 from pathlib import Path
@@ -1332,7 +1332,7 @@ def render_all() -> list[Page]:
     return [*[build() for build in PAGES.values()], *chapter_pages()]
 
 
-def result_fragments() -> list[Page]:
+def iter_result_fragments() -> Iterator[Page]:
     """Every result as a complete page; row overlays extract its article on input."""
     from devtools import overview_data, overview_sections, site_urls  # noqa: PLC0415
 
@@ -1340,7 +1340,6 @@ def result_fragments() -> list[Page]:
     rows = site_urls.load_registry()
     amendments = {row.path: row.amendments for row in rows}
     registered_paths = {row.path for row in rows}
-    pages = []
     ordered = sorted(overview.results, key=lambda result: result.id)
     positions = {result.id: index for index, result in enumerate(ordered)}
     for result in overview.results:
@@ -1389,8 +1388,12 @@ def result_fragments() -> list[Page]:
             f"{overview_sections.tex_bounds(result.summary)}</h1>"
         )
         body = body.replace(">", ">" + heading, 1)
-        pages.append(static_content_page(body, meta=meta, current="results"))
-    return pages
+        yield static_content_page(body, meta=meta, current="results")
+
+
+def result_fragments() -> list[Page]:
+    """Materialize canonical result pages for complete site publication."""
+    return list(iter_result_fragments())
 
 
 def forwarded_metas() -> dict[str, PageMeta]:

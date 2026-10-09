@@ -1740,6 +1740,27 @@ def hero() -> str:
 #: every source repository in the source-coverage register.
 OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
+        "https://github.com/wand125/square-packing",
+        "wand125",
+        "Canonical certificate and checker repository; historical source pins remain valid.",
+    ),
+    (
+        "https://github.com/lollipoll/couzo-five-exact-certificates",
+        "Seth Rehwaldt",
+        (
+            "Rational refinements of Couzo's packings; complete finite certificates at "
+            "n = 105 and 292 are replayed here (T-117)."
+        ),
+    ),
+    (
+        "https://github.com/lollipoll/certified-square-packing-68",
+        "Seth Rehwaldt",
+        (
+            "An exact finite rational refinement of Couzo's n = 68 packing, replayed "
+            "here (T-118). Its analytic root and dual programs remain outside that replay."
+        ),
+    ),
+    (
         "https://github.com/evand/square-packing",
         "Evan Daniel",
         (

@@ -9,7 +9,8 @@ author: Claude (agent), for the repository owner
 
 **Author:** Claude (agent), for the repository owner
 
-**Status:** Implemented; validation and rollout are tracked in PR #395
+**Status:** Implemented; corrective validation and rollout are tracked in
+[PR #456](https://github.com/jlevy/squares/pull/456)
 
 **Workflow:** W7 pipeline improvement (the published site is the surface)
 
@@ -59,7 +60,10 @@ The rebuilt site has 484 HTML files within their budgets.
 Three-run browser measurements pass over twelve scenarios at both viewports and themes,
 with a separate no-JavaScript check: maximum median CLS 0.075, LCP 1,404 ms, longest
 task 228 ms and blocking time 178 ms.
-These are local unthrottled measurements, not field Core Web Vitals.
+These are local unthrottled measurements from the 2026-10-07 checkpoint, not field Core
+Web Vitals.
+Corrective changes in PR #456 still require the unchanged browser budgets and
+final hosted validation before rollout.
 Live case/result popover checks and the workbench’s positive and negative policy checks
 also pass.
 
@@ -81,6 +85,33 @@ Disposable mutation snapshots omit measured historical outputs while retaining
 scientific inputs and linked evidence under the unchanged 192 MiB limit; the read-only
 auditor refuses candidates that mandatory copy routes would restore.
 The final hosted run and independent dispositions remain recorded on PR #395.
+
+## Rollout Correction (2026-10-08)
+
+[PR #456](https://github.com/jlevy/squares/pull/456) completes the deployed result-table
+checker and corrects the frontier table’s startup layout.
+Only dense frontier table cells display their existing semantic MathML directly under
+`data-site-native-math="frontier"`; prose, paper captions, case records and result
+bounds retain prepared KaTeX. Native structures and operators use the platform’s math
+font; text tokens use the reader’s sans font on screen and in print.
+Painted radical controls require both the hook and overbar and reject the inherited-sans
+mutant that lost the hook.
+The ordinary rendering and historical URL budgets still apply.
+
+Seven prepared-page consumer jobs depend on successful preparation; nine matrix
+consumers retain exact run/attempt/artifact identity and their strict acceptance
+deadline. The waiter backs off on explicit rate-limit responses within that deadline.
+
+The efficiency block, `think-8dl5`, gives the Pages workflow an explicit publication
+test dependency closure for the local push cycle.
+Unknown workflows and suite configuration retain whole-suite fallback; all fast hosted
+partitions remain in place.
+The earlier 640-file local attempt reached its 1800-second ceiling, and its failed
+receipt remains recorded.
+Portable test contracts retain scientific admission and checker verdicts while handling
+unavailable Linux RSS measurements and fresh exact certificates on macOS. Final source
+reviews, local/hosted validation and exact-revision deployment evidence are recorded on
+PR #456 and rollout bead `think-7wlz`.
 
 ## Overview
 
@@ -304,8 +335,10 @@ is one more reason to move their fonts into cached shared files.
 
 A page is complete when, with JavaScript disabled, it shows all of its content in the
 site’s design at its final layout.
-The build renders everything a reader reads: text, tables, drawings, math (as KaTeX HTML
-plus MathML, as the explainer does), navigation and footers.
+The build renders everything a reader reads: text, tables, drawings, math, navigation
+and footers. Formulas ship as prepared visual KaTeX with one semantic MathML subtree;
+dense frontier table cells display their existing MathML directly, under the explicit
+`data-site-native-math="frontier"` marker.
 
 JavaScript on content pages is limited to three classes, and each script declares its
 class in its header comment:
@@ -517,6 +550,10 @@ Prepared visual math uses the pinned renderer’s actual metrics for each reader
 choice. Existing semantics remain in the HTML, once per formula.
 The lower paper’s four prepared choices are retained; generic pages share their visual
 structure and select metric differences before paint.
+The frontier table’s native MathML structures and operators use the platform’s math
+font; text tokens use the table’s sans reader font on screen and in print.
+The page’s prose remains prepared KaTeX. The no-JavaScript check requires visible,
+nonempty native MathML in those cells, under the same browser budgets.
 Images reserve their intrinsic proportions; mobile atlas wrapping is determined in CSS
 before its interaction program runs.
 

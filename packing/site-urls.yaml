@@ -3185,7 +3185,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-03'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/106.html
   canonical: cases/106.html
@@ -4841,7 +4841,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-03'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/293.html
   canonical: cases/293.html
@@ -5441,7 +5441,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/69.html
   canonical: cases/69.html
@@ -10795,151 +10795,195 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-06'
-  lastmod: '2026-10-07'
-  status: withdrawn
-  target: result/t-111.html
-  tombstone: This result registration was consolidated into T-111. The replacement retains the same
-    claim and source evidence.
+  lastmod: '2026-10-08'
+  status: live
   identity:
-    kind: lower-bound
+    kind: upper-bound
     scope:
       n_values:
-      - 41
+      - 105
+      - 292
     established: null
     attribution:
       source_keys:
-      - '[wand125 mixed bounds check2 2026-10-06]'
-      published: '2026-10-06'
+      - '[Rehwaldt Couzo refinements 2026-10-07]'
+      published: '2026-10-07'
     builds_on: null
     evidence:
-    - E-n041-wand125-mixed-6775-report
-    - E-n041-wand125-mixed-6775-sqverify-fast-replay
+    - E-rehwaldt-couzo-refinements-2026-10-07-report
+    - E-rehwaldt-couzo-refinements-2026-10-07-exact-replay
     artifacts:
-    - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/README.md
-    - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n41-L6775/audit.json
-    - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n41-L6775/bundle.json
-    - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n41-L6775/compare-census.json
-    - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n41-L6775/cpp-sample/nodes-0409-0415.json
-    - packing/devtools/audit_wand125_declared_net.py
-    - packing/sqverify_fast/SOUNDNESS.md
-    - packing/benchmarks/measure-verifier/census-mixed/census.json
-    - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-check2-2026-10-06/mixed_n41_L6775.jsonl.gz
-    - packing/devtools/sqverify_fast_census.py
-    - docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md
-    - docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md
+    - packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/README.md
+    - packing/devtools/refinement_packets.py
+    - packing/frontier/n-105.md
+    - packing/frontier/n-292.md
+  amendments:
+  - date: '2026-10-08'
+    reason: Register the finite rational n=105 and n=292 refinements under the reused result ID; retain
+      the former n=41 lower-bound binding at T-111.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 41
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 mixed bounds check2 2026-10-06]'
+        published: '2026-10-06'
+      builds_on: null
+      evidence:
+      - E-n041-wand125-mixed-6775-report
+      - E-n041-wand125-mixed-6775-sqverify-fast-replay
+      artifacts:
+      - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/README.md
+      - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n41-L6775/audit.json
+      - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n41-L6775/bundle.json
+      - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n41-L6775/compare-census.json
+      - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n41-L6775/cpp-sample/nodes-0409-0415.json
+      - packing/devtools/audit_wand125_declared_net.py
+      - packing/sqverify_fast/SOUNDNESS.md
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-check2-2026-10-06/mixed_n41_L6775.jsonl.gz
+      - packing/devtools/sqverify_fast_census.py
+      - docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md
+      - docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md
+    historical_target: result/t-111.html
+    historical_title: 'T-111: the former n=41 lower-bound result'
 - path: result/t-118.html
   canonical: result/t-118.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-06'
-  lastmod: '2026-10-07'
-  status: withdrawn
-  target: result/t-101.html
-  tombstone: This result registration was consolidated into T-101. The replacement retains the same
-    claim and source evidence.
+  lastmod: '2026-10-08'
+  status: live
   identity:
     kind: upper-bound
     scope:
       n_values:
-      - 28
-      - 37
-      - 39
-      - 41
-      - 50
-      - 51
-      - 53
-      - 54
-      - 55
-      - 69
-      - 70
-      - 71
-      - 83
-      - 87
-      - 88
-      - 101
-      - 104
-      - 107
-      - 108
-      - 109
-      - 122
-      - 124
-      - 125
-      - 127
-      - 128
-      - 129
-      - 145
-      - 146
-      - 147
-      - 148
-      - 149
-      - 150
-      - 151
-      - 153
-      - 170
-      - 171
-      - 173
-      - 174
-      - 175
-      - 176
-      - 178
-      - 179
-      - 197
-      - 198
-      - 200
-      - 201
-      - 202
-      - 203
-      - 204
-      - 205
-      - 226
-      - 227
-      - 229
-      - 230
-      - 231
-      - 232
-      - 233
-      - 234
-      - 235
-      - 257
-      - 258
-      - 260
-      - 261
-      - 262
-      - 264
-      - 265
-      - 266
-      - 267
-      - 290
-      - 291
-      - 293
-      - 294
-      - 295
-      - 296
-      - 298
-      - 299
-      - 300
+      - 68
     established: null
     attribution:
       source_keys:
-      - '[evand exact optima 2026-10-05]'
-      published: '2026-10-05'
+      - '[Rehwaldt n68 refinement 2026-10-07]'
+      published: '2026-10-07'
     builds_on: null
     evidence:
-    - E-evand-exact-ceilings-2026-10-05-report
-    - E-evand-exact-ceilings-2026-10-05-exact-replay
-    - E-evand-exact-ceilings-2026-10-05-source-replay
+    - E-rehwaldt-n68-refinement-2026-10-07-report
+    - E-rehwaldt-n68-refinement-2026-10-07-exact-replay
     artifacts:
-    - docs/project/reviews/review-2026-10-06-evand-exact-ceilings.md
-    - docs/project/reviews/review-2026-10-06-evand-exact-ceilings-fix-check.md
-    - packing/resources/web/evand-square-packing-2026-10-05/README.md
-    - packing/resources/web/evand-square-packing-2026-10-05/acquisition/sources.json
-    - packing/resources/web/evand-square-packing-2026-10-05/receipts/first-party-check.json
-    - packing/resources/web/evand-square-packing-2026-10-05/receipts/source-replay.json
-    - packing/resources/web/evand-square-packing-2026-10-05/receipts/ceiling-survey.json
-    - packing/devtools/evand_exact_certificates.py
-    - packing/devtools/apply_exact_ceilings.py
-    - packing/devtools/check_rational_witness_independent.py
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/README.md
+    - packing/devtools/refinement_packets.py
+    - packing/frontier/n-068.md
+  amendments:
+  - date: '2026-10-08'
+    reason: Register the finite rational n=68 refinement under the reused result ID; retain the former
+      Evan Daniel exact-ceiling binding at T-101.
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 28
+        - 37
+        - 39
+        - 41
+        - 50
+        - 51
+        - 53
+        - 54
+        - 55
+        - 69
+        - 70
+        - 71
+        - 83
+        - 87
+        - 88
+        - 101
+        - 104
+        - 107
+        - 108
+        - 109
+        - 122
+        - 124
+        - 125
+        - 127
+        - 128
+        - 129
+        - 145
+        - 146
+        - 147
+        - 148
+        - 149
+        - 150
+        - 151
+        - 153
+        - 170
+        - 171
+        - 173
+        - 174
+        - 175
+        - 176
+        - 178
+        - 179
+        - 197
+        - 198
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 226
+        - 227
+        - 229
+        - 230
+        - 231
+        - 232
+        - 233
+        - 234
+        - 235
+        - 257
+        - 258
+        - 260
+        - 261
+        - 262
+        - 264
+        - 265
+        - 266
+        - 267
+        - 290
+        - 291
+        - 293
+        - 294
+        - 295
+        - 296
+        - 298
+        - 299
+        - 300
+      established: null
+      attribution:
+        source_keys:
+        - '[evand exact optima 2026-10-05]'
+        published: '2026-10-05'
+      builds_on: null
+      evidence:
+      - E-evand-exact-ceilings-2026-10-05-report
+      - E-evand-exact-ceilings-2026-10-05-exact-replay
+      - E-evand-exact-ceilings-2026-10-05-source-replay
+      artifacts:
+      - docs/project/reviews/review-2026-10-06-evand-exact-ceilings.md
+      - docs/project/reviews/review-2026-10-06-evand-exact-ceilings-fix-check.md
+      - packing/resources/web/evand-square-packing-2026-10-05/README.md
+      - packing/resources/web/evand-square-packing-2026-10-05/acquisition/sources.json
+      - packing/resources/web/evand-square-packing-2026-10-05/receipts/first-party-check.json
+      - packing/resources/web/evand-square-packing-2026-10-05/receipts/source-replay.json
+      - packing/resources/web/evand-square-packing-2026-10-05/receipts/ceiling-survey.json
+      - packing/devtools/evand_exact_certificates.py
+      - packing/devtools/apply_exact_ceilings.py
+      - packing/devtools/check_rational_witness_independent.py
+    historical_target: result/t-101.html
+    historical_title: 'T-101: the former Evan Daniel exact-ceiling result'
 - path: results.html
   canonical: all-results.html
   kind: forwarder

@@ -2,23 +2,31 @@
 
 from __future__ import annotations
 
+import io
+import math
 import re
 from collections.abc import Iterator
 from pathlib import Path
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
 from urllib.parse import urlsplit
 
 import pytest
 from kpress.format.markdown import parse_markdown
+from PIL import Image
 
 from devtools import check_site_rendering, preview_site, render_overview, site_assets
 from sqpack.probes import applied, probe
-from tests import site_browser
+from tests import site_browser, site_renders
 
 if TYPE_CHECKING:
     from playwright.sync_api import Browser, Page, Route
 
 _SHIFT = applied(probe(Path(__file__).parent / "probes", "site_rendering/shift"))
+
+
+@pytest.fixture(scope="module")
+def frontier_math_counts() -> tuple[int, int]:
+    return site_renders.frontier_math_counts()
 
 
 @pytest.fixture(scope="module")
@@ -34,8 +42,9 @@ def test_early_shift_is_measured_and_missing_static_math_fails(
 ) -> None:
     page = tmp_path / "index.html"
     page.write_text(
-        '<!doctype html><html><body style="margin:0"><main><h1>Static content</h1>'
-        '<p style="font-size:40px">A readable paragraph whose movement is large enough '
+        '<!doctype html><html><body style="margin:0"><main>'
+        '<h1>Static content</h1><p style="font-size:40px">A readable paragraph whose '
+        "movement is large enough "
         "to fail the declared layout budget.</p></main></body></html>"
     )
     server = preview_site.serve(tmp_path, 0)
@@ -52,6 +61,14 @@ def test_early_shift_is_measured_and_missing_static_math_fails(
             shifted.wait_for_timeout(450)
             bad = check_site_rendering.read_report(shifted)
             assert bad["cls"] > check_site_rendering.CLS_LIMIT
+            sources = [source for shift in bad["layoutShifts"] for source in shift["sources"]]
+            moved = next(
+                (source for source in sources if source["node"] == "html > body"), None
+            )
+            assert moved is not None, sources
+            # Chromium attributes this inserted gap to the body's changed box.
+            assert moved["currentRect"]["height"] - moved["previousRect"]["height"] >= 500
+            assert moved["previousRect"]["width"] > 0
             assert any(
                 problem.startswith("cls ") for problem in check_site_rendering.problems(bad)
             )
@@ -365,6 +382,14 @@ def test_results_prose_font_arrival_retains_layout(
         assert report["shownMath"] > 0
         assert report["unreadableMath"] == 0
         assert report["supported"], report
+        font_events = report["fontEvents"]
+        started = [event["startTime"] for event in font_events if event["type"] == "loading"]
+        completed = [
+            event["startTime"] for event in font_events if event["type"] == "loadingdone"
+        ]
+        assert started, font_events
+        assert completed, font_events
+        assert completed[-1] >= started[-1] > 0, font_events
         assert report["lcpMs"] > 0, report
         # Holding a font, substituting CSS and inspecting fonts through CDP is
         # not the production load protocol. Keep readability and native CLS here;
@@ -418,3 +443,294 @@ def test_results_prose_fallback_preserves_reader_choices(
         assert check_site_rendering.read_report(page)["unreadableMath"] == 0
     finally:
         context.close()
+
+
+@pytest.mark.parametrize(
+    ("native", "expected"),
+    [
+        (
+            '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi><mo>+</mo><mn>1</mn></math>',
+            0,
+        ),
+        ("wrapper text without math", 1),
+        ('<math xmlns="http://www.w3.org/1998/Math/MathML"></math>', 1),
+        (
+            (
+                '<math xmlns="http://www.w3.org/1998/Math/MathML" '
+                'style="display:none"><mi>x</mi></math>'
+            ),
+            1,
+        ),
+        (
+            (
+                '<math xmlns="http://www.w3.org/1998/Math/MathML" '
+                'style="visibility:hidden"><mi>x</mi></math>'
+            ),
+            1,
+        ),
+        (
+            (
+                '<math xmlns="http://www.w3.org/1998/Math/MathML">'
+                '<mi style="visibility:hidden">x</mi></math>'
+            ),
+            1,
+        ),
+        ('<span class="katex-html">wrapper fallback</span>', 1),
+    ],
+    ids=[
+        "visible",
+        "missing",
+        "empty",
+        "display-none",
+        "hidden",
+        "hidden-content",
+        "katex-impostor",
+    ],
+)
+def test_native_frontier_readability_requires_visible_nonempty_math(
+    browser: Browser,
+    tmp_path: Path,
+    native: str,
+    expected: int,
+) -> None:
+    (tmp_path / "index.html").write_text(
+        "<main><h1>Native frontier math</h1><p>A complete readable paragraph "
+        "accompanies a frontier value with its own checked mathematical content.</p>"
+        '<table class="site-frontier"><tbody><tr><td>'
+        '<span class="kpress-math kpress-math-inline" data-site-native-math="frontier">'
+        f"{native}</span></td></tr></tbody></table></main>"
+    )
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        report = check_site_rendering.measure(
+            browser,
+            f"http://127.0.0.1:{server.server_port}/index.html",
+            width=390,
+            scheme="light",
+            javascript=False,
+        )
+        assert report["shownMath"] == 1
+        assert report["unreadableMath"] == expected
+        assert check_site_rendering.problems(report, javascript=False) == (
+            ["visual mathematics missing"] if expected else []
+        )
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+@pytest.fixture(scope="module")
+def frontier_native_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
+    root = tmp_path_factory.mktemp("frontier-native-layout")
+    site_renders.write(root, "frontier.html")
+    server = preview_site.serve(root, 0, as_pages=True)
+    try:
+        yield f"http://127.0.0.1:{server.server_port}/frontier.html"
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+@pytest.mark.parametrize(
+    ("width", "scheme"), [(390, "light"), (390, "dark"), (1280, "light"), (1280, "dark")]
+)
+def test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets(
+    browser: Browser,
+    frontier_math_counts: tuple[int, int],
+    frontier_native_site: str,
+    width: int,
+    scheme: Any,
+) -> None:
+    for javascript in (True, False):
+        report = check_site_rendering.measure(
+            browser,
+            frontier_native_site,
+            width=width,
+            scheme=scheme,
+            javascript=javascript,
+        )
+        assert report["shownMath"] == frontier_math_counts[1]
+        assert report["unreadableMath"] == 0
+        assert check_site_rendering.problems(report, javascript=javascript) == [], report
+
+
+@pytest.mark.parametrize(
+    ("prose", "fonts"),
+    [("serif", "custom"), ("sans", "custom"), ("serif", "system"), ("sans", "system")],
+)
+def test_frontier_native_math_keeps_actual_reader_and_print_fonts(
+    browser: Browser,
+    frontier_math_counts: tuple[int, int],
+    frontier_native_site: str,
+    prose: str,
+    fonts: str,
+) -> None:
+    parsed = urlsplit(frontier_native_site)
+    origin = f"{parsed.scheme}://{parsed.netloc}"
+    context = browser.new_context(
+        viewport={"width": 1280, "height": 900},
+        java_script_enabled=True,
+        storage_state={
+            "cookies": [],
+            "origins": [
+                {
+                    "origin": origin,
+                    "localStorage": [
+                        {"name": "kpress.proseFont", "value": prose},
+                        {"name": "kpress.fontSet", "value": fonts},
+                    ],
+                }
+            ],
+        },
+    )
+    try:
+        page = context.new_page()
+        page.goto(frontier_native_site, wait_until="load")
+        session = context.new_cdp_session(page)
+        try:
+            session.send("DOM.enable")
+            session.send("CSS.enable")
+            document = session.send("DOM.getDocument")
+            for media in ("screen", "print"):
+                page.emulate_media(media=media)
+                check_site_rendering.wait_for_fonts(page)
+                report = check_site_rendering.read_report(page)
+                assert report["shownMath"] == frontier_math_counts[1]
+                assert report["unreadableMath"] == 0
+                assert (
+                    page.locator('.site-frontier [data-site-native-math="frontier"]').count()
+                    == frontier_math_counts[0]
+                )
+                assert page.locator("#frontier-table tbody tr").count() == 324
+                nodes = [
+                    session.send(
+                        "DOM.querySelector",
+                        {
+                            "nodeId": document["root"]["nodeId"],
+                            "selector": selector,
+                        },
+                    )["nodeId"]
+                    for selector in (
+                        '.site-frontier [data-site-native-math="frontier"] math mn',
+                        '.site-frontier td:has([data-site-native-math="frontier"])',
+                        '.site-frontier [data-site-native-math="frontier"] > math',
+                    )
+                ]
+                styles = [
+                    session.send("CSS.getComputedStyleForNode", {"nodeId": node})[
+                        "computedStyle"
+                    ]
+                    for node in nodes
+                ]
+                families = [
+                    next(item["value"] for item in style if item["name"] == "font-family")
+                    for style in styles
+                ]
+                assert families[0] == families[1], (prose, fonts, media, families)
+                assert families[2] == "math", (prose, fonts, media, families)
+                used = session.send("CSS.getPlatformFontsForNode", {"nodeId": nodes[0]})[
+                    "fonts"
+                ]
+                assert used
+                if fonts == "system":
+                    assert all(not face["isCustomFont"] for face in used), (media, used)
+                else:
+                    assert any(face["isCustomFont"] for face in used), (media, used)
+        finally:
+            session.detach()
+    finally:
+        context.close()
+
+
+def native_radical_paint(page: Page, screenshot: Path) -> dict[str, int | bool]:
+    """Read actual radical hook and overbar ink with its radicand text suppressed.
+
+    Transparent text preserves the real formula's layout and faces, but prevents the
+    numeral from passing this painted-construction check. A bar without a hook fails.
+    """
+    radical = page.locator('#n-5 [data-site-native-math="frontier"] msqrt')
+    assert radical.count() == 1
+    radicand = radical.locator("mn")
+    assert radicand.count() == 1
+    box, text_box = radical.bounding_box(), radicand.bounding_box()
+    assert box is not None
+    assert text_box is not None
+    pixels = Image.open(
+        io.BytesIO(
+            radical.screenshot(
+                path=str(screenshot),
+                style=(
+                    '#n-5 [data-site-native-math="frontier"] msqrt {'
+                    "color: #000 !important; background: #fff !important; }"
+                    '#n-5 [data-site-native-math="frontier"] msqrt > * {'
+                    "color: transparent !important; }"
+                ),
+            )
+        )
+    ).convert("RGB")
+    scale = pixels.width / box["width"]
+    text_left = max(0, min(pixels.width, math.floor((text_box["x"] - box["x"]) * scale)))
+    dark = {
+        (x, y)
+        for y in range(pixels.height)
+        for x in range(pixels.width)
+        if max(cast("tuple[int, int, int]", pixels.getpixel((x, y)))) < 160
+    }
+    rows = [
+        sum((x, y) in dark for x in range(text_left, pixels.width))
+        for y in range(pixels.height)
+    ]
+    bar_y = max(range(pixels.height), key=rows.__getitem__)
+    bar = rows[bar_y] >= max(2, math.ceil((pixels.width - text_left) * 0.6))
+    hook = {
+        (x, y) for x, y in dark if x < text_left - 1 and y > bar_y + max(2, pixels.height // 8)
+    }
+    hook_height = max((y for _, y in hook), default=0) - min((y for _, y in hook), default=0)
+    return {
+        "hook": len(hook) >= 3 and hook_height >= pixels.height * 0.25,
+        "bar": bar,
+        "hook_pixels": len(hook),
+        "bar_pixels": rows[bar_y],
+        "hook_height": hook_height,
+        "text_left": text_left,
+        "width": pixels.width,
+        "height": pixels.height,
+    }
+
+
+@pytest.mark.parametrize("media", ["screen", "print"])
+def test_frontier_native_radical_paints_hook_and_bar_and_rejects_text_font(
+    browser: Browser, frontier_native_site: str, tmp_path: Path, media: Any
+) -> None:
+    for mutant in (False, True):
+        context = browser.new_context(
+            viewport={"width": 1280, "height": 900},
+            device_scale_factor=2,
+            java_script_enabled=False,
+        )
+        try:
+            if mutant:
+
+                def text_font(route: Route) -> None:
+                    response = route.fetch()
+                    damaged = response.text().replace(
+                        "</head>",
+                        '<style>.site-frontier [data-site-native-math="frontier"] > math {'
+                        "font-family: var(--kpress-font-sans) !important;}</style></head>",
+                        1,
+                    )
+                    route.fulfill(response=response, body=damaged)
+
+                context.route("**/frontier.html", text_font)
+            page = context.new_page()
+            page.emulate_media(media=media)
+            page.goto(frontier_native_site, wait_until="load")
+            check_site_rendering.wait_for_fonts(page)
+            painted = native_radical_paint(page, tmp_path / f"radical-{media}-{mutant}.png")
+            if mutant:
+                assert not (painted["hook"] and painted["bar"]), painted
+            else:
+                assert painted["hook"], painted
+                assert painted["bar"], painted
+        finally:
+            context.close()

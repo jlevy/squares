@@ -74,9 +74,9 @@ The triangle’s bound captions use five decimal places, one fewer than the figu
 leaving room for the algebraic degree; a longer degree label can shorten the adjacent
 side caption to four places.
 Upper bounds round upward and lower bounds downward; stored bounds retain their full
-precision. “Best packings due to” begins three balanced lines naming all nineteen
-recorded construction finders and improvers once, with complete canonical names kept
-intact. Full source references remain in the metadata and the separate bibliography.
+precision. “Best packings due to” begins three balanced lines naming all twenty recorded
+construction finders and improvers once, with complete canonical names kept intact.
+The eight construction source keys remain in the metadata and the separate bibliography.
 A section gap separates the credits from the diagram credit, followed by the data date,
 a middle dot and the generated edition stamp.
 A blank line precedes “Citations and details in The Squares Project” and the repository

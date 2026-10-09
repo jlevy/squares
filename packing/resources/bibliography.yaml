@@ -30,6 +30,28 @@ last_reviewed: '2026-10-06'
 # not in the README's Web Sources table, so its `note` says which retained bytes they
 # were read from.
 sources:
+  - key: '[squarepacker quarter-power 2026]'
+    authors: [Ryu]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    lineage: independent
+    note: >-
+      Sungjoon Ryu, quarter-power deficiency preprint v1.0, abbedcf4bba2e4053f0278e669d84966a89c8b73,
+      DOI 10.5281/zenodo.23211207. Primary paper and selected source retained in
+      web/squarepacker-k2-minus-c-quarter-2026-10-07/. The source states extensive
+      Claude (Anthropic) assistance and no human peer review. CC BY 4.0 paper, MIT code.
+  - key: '[squarepacker cube-root 2026]'
+    authors: [Ryu]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    lineage: independent
+    note: >-
+      Sungjoon Ryu, cube-root deficiency preprint v1.0, 15045f9c6b74bd52f60394b9be593ebe4fb3debc,
+      DOI 10.5281/zenodo.23212059. Primary paper and selected source retained in
+      web/squarepacker-k2-minus-c-cube-root-2026-10-07/. The source states extensive
+      Claude (Anthropic) assistance and no human peer review. CC BY 4.0 paper, MIT code.
   - key: '[Queuingtheorydotcom n11 optimality 2026]'
     authors: [Queuingtheorydotcom]
     year: 2026
@@ -1369,7 +1391,32 @@ sources:
 # `improved_by` carry. Listed rather than derived from the last word of the name, because
 # a credit can be an organization; a name missing here fails the build instead of being
 # guessed at.
+  - key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    authors:
+    - Rehwaldt
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Rehwaldt after Couzo and earlier contributors
+    lineage: independent
+    note: Seth Rehwaldt’s exact certificate refinement at bc389ddf7d65277cd19a9b08fb285d86346d6806,
+      issue 425, with OpenAI Codex assistance. No new arrangement or unrestricted optimality claim.
+      Normalized geometric facts and attributed source custody are retained; source notices assign no
+      blanket licence.
+  - key: '[Rehwaldt n68 refinement 2026-10-07]'
+    authors:
+    - Rehwaldt
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Rehwaldt after Couzo and earlier contributors
+    lineage: independent
+    note: Seth Rehwaldt’s exact certificate refinement at fded686668e29258dad2eb29d0482fa3fd51bd6b,
+      issue 428, with OpenAI Codex assistance. No new arrangement or unrestricted optimality claim.
+      Normalized geometric facts and attributed source custody are retained; source notices assign no
+      blanket licence.
 credited_names:
+  Seth Rehwaldt: Rehwaldt
   Nate Chaoweeraprasit: Chaoweeraprasit
   Allen Chang: Chang
   David Ellsworth: Ellsworth

@@ -464,8 +464,8 @@ this change.
 
 ## Math Loading
 
-Every page, the optimality paper included, loads its mathematics through the explainer’s
-pipeline, from the same code:
+Published pages carry complete mathematics in their initial HTML. Interactive
+mathematics uses the explainer’s shared runtime:
 
 - **Faces and styles.** KaTeX’s faces pruned to those a page can reach, inlined as data
   URIs for offline tools and linked from shared files in published pages, and switched
@@ -482,15 +482,22 @@ pipeline, from the same code:
 - **Batching.** `squaresMath.batch` submits sixteen formulas per task, so a formula that
   is ready shows while later ones are still being submitted.
 
-Published formulas are typeset before the page is served.
-The lower-bound paper also measures their geometry in four font contexts with pinned
-Chromium; its publication command always prepares them, and `--prepare-math` remains
-accepted for existing callers.
+The lower-bound paper also measures formula geometry in four font contexts with pinned
+Chromium; its publication command always prepares the formulas, and `--prepare-math`
+remains accepted for existing callers.
 Its client hydrates those boxes and puts interactive panels first in the queue.
 The other papers and ordinary content pages use `site_math.prepare` to render visual
 KaTeX beside semantic MathML without launching a browser.
 Their prose, captions and headings select the matching serif or sans math profile.
-Both paper editions remain readable with JavaScript disabled.
+The published papers and content pages remain readable with JavaScript disabled.
+Dense frontier table cells display exactly their existing semantic MathML, once per
+formula, under `data-site-native-math="frontier"`; they omit the visual KaTeX spans.
+The page’s prose still uses prepared KaTeX. Native MathML structures and operators use
+the platform’s math font.
+The text tokens (`mi`, `mn`, `mtext`, and `ms`) use the table’s sans reader font on
+screen and in print.
+The browser readability check requires a visible, nonempty MathML subtree in each marked
+cell, under the ordinary load and layout budgets.
 
 Interactive formulas use the shared runtime.
 A formula whose faces miss the runtime’s wait is retried twice after the page and its
@@ -499,18 +506,17 @@ their runtime for browser and print tools (`render_n11_optimality_review.math_sc
 A formula that asks for a face the page does not ship keeps its MathML, and the paper’s
 PDF refuses to print with a formula untypeset.
 
-Each client layout costs a style pass over the whole document, 6ms a formula on the
-synopsis against 0.9ms with KPress’s `:has(.kpress-toc)` layout rules removed: those
-selectors make every change inside the column re-match the page’s grid.
-The rules are KPress’s, so the fix belongs upstream (a class stamped by the renderer,
-which KPress already accepts as `.has-toc`, tracked as think-csiv); until then the
-synopsis’s 1,357 formulas cost about eight seconds of idle time in all.
+In the client-runtime measurements below, each client layout cost a style pass over the
+whole document, 6ms a formula on the synopsis against 0.9ms with KPress’s
+`:has(.kpress-toc)` layout rules removed: those selectors made every change inside the
+column re-match the page’s grid.
+Those measurements concern client typesetting; published prose uses prepared math.
 
 `devtools.measure_site_pages load` measures a built site in cold Chromium contexts
 (median of three loads, milliseconds from navigation start; “visible math” is the first
 frame at which every formula in the first viewport is typeset and showing, “blocking”
-the long tasks’ time over 50ms). Before is the site at `3e8274909`, after is this
-pipeline:
+the long tasks’ time over 50ms). The historical client-runtime comparison below uses
+`3e8274909` as its before-build and the shared runtime as its after-build:
 
 | Page | Width | DOMContentLoaded | Visible math | Load-time math done | Longest task | Blocking |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -542,9 +548,9 @@ That one page was slow before any math ran: it carried every case’s record in 
 document, and parsing and styling that took several seconds on its own (think-cy3a). The
 record page carries the index alone, 1.9MB, and fetches the one record a reader asks for
 (**Case records**, below).
-Publication-time preparation for the KPress pages, which would remove the client layout
-and the fallback-to-KaTeX reflow as it did for the explainer, is not done: it needs a
-browser in the pages’ build (think-89lw).
+Ordinary content pages now prepare their visual math at build time with
+`site_math.prepare`, without a browser; these historical timings do not measure that
+publication contract.
 
 ## Spacing
 

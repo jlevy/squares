@@ -94,7 +94,7 @@ To see where the figure knows more than the records do:
 uv run --frozen --all-extras --group dev python -m devtools.build_composite_figure_data --review
 ```
 
-Today that reports 287 degrees known over the corpus, 36 stored upstream and **251
+Today that reports 290 degrees known over the corpus, 43 stored upstream and **247
 derived here** — each one a fact the corpus could hold and does not.
 
 ## The rule that matters
@@ -126,8 +126,8 @@ markers and accents.
 | $s(n) \ge \ldots$ second line | `verified_lower_bound.value`, shown where `status` is `open` | 55 lines; cut off rather than rounded, so the printed bound stays true |
 | ★ recent result, since August, 2026 | The canonical contribution flags in `devtools/result_status.py`, using original construction or proof dates and the shared `RECENT_SINCE` cutoff | 81 cases in the figure and 297 in the poster; both accent upper numerals, lower numerals and optimality badges independently |
 | `=` exact value known | `exact_form`, else `minimal_polynomial` or `algebraic_degree` | Evaluate the form, compare against the witness side |
-| `≈` only known numerically | none of the three present | 4 cases: $n = 29, 55, 68, 71$ |
-| $\deg d$ | `algebraic_degree` | Present for 30 cases; absence is not a claim of low degree |
+| `≈` only known numerically | none of the three present | 3 cases: $n = 29, 55, 71$ |
+| $\deg d$ | `algebraic_degree` | Printed for 30 cases with degree at least 2; absence is not a claim of low degree |
 | `R` known rigid | `rigidity.known_rigid` from the canonical assessment, see below | 14 cases in the figure and 22 in the poster; the one dark badge preserves source assertions, proof status and dates in metadata |
 | Hue | angle class of the square | Right angles pinned to hue 0, 45° tilts to hue 1 |
 | Shade | full-side contact count, 4 down to 0 | `_contact_shade` in `src/sqpack/render/color.py` |
@@ -408,8 +408,8 @@ columns: four status rows and four recency, color and degree rows.
 The final right-column item is the unbadged text “deg is the algebraic degree of that
 side length.” The four row baselines are 780, 876, 972 and 1068. “Best packings due to”
 begins three balanced construction-credit lines at 1326, 1416 and 1506. Complete names
-stay intact and all nineteen recorded finders and improvers appear once.
-The visible list has no bracketed citations; all seven full source keys remain in the
+stay intact and all twenty recorded finders and improvers appear once.
+The visible list has no bracketed citations; all eight full source keys remain in the
 SVG metadata and the separate bibliography.
 A 180-unit section gap separates the credits from “Diagram by Joshua Levy” at 1686. The
 data date, a middle dot and the generated edition follow at 1791. An ordinary blank line
