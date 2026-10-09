@@ -5,7 +5,7 @@ title: Stabilize stack 430 on main 3213 and qualify every layer
 kind: task
 status: in_progress
 priority: 1
-version: 28
+version: 29
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -32,7 +32,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T04:14:49.601Z
-updated_at: 2026-10-09T07:50:19.017Z
+updated_at: 2026-10-09T07:53:56.137Z
 started_at: 2026-10-09T04:20:32.996Z
 ---
 Cloud continuation of think-yij0 handoff (PR467). Normal-merge origin/main 3213d651b into #442, propagate to #468, fix the recorded failures without weakening limits, obtain exact-head required CI and full checkpoints, bind reviews. Merge only with owner confirmation (github-merge confirm-session).
@@ -52,3 +52,5 @@ Final propagation (integrator) 2026-10-09: stack linear #442 04767870f -> #443 1
 Owner in session (2026-10-09): 'Follow up on everything, and I'd like you to autonomously make sure you merge everything once it's ready' -> autonomous merge of stack 430 once the merge gate passes (all layers green at final heads, reviews published with dispositions, descriptions updated, stack linear). Status at this point: all 11 PRs in stack 430 and ready-for-review; #442-#468 linear, #469 pending integrator round; #459 typography job failed a timing self-test control (check_math_startup 'delayed control did not record the known 300 ms delay', job 113716869137) in code the stack does not touch; job re-run returns 403 like dispatch. main unchanged at 3213d651b.
 
 Integrator rounds 2-3: stack linear main -> #442 38c3ca4f8 -> #443 16a7785fa -> #448 72ad8bd5f -> #449 9e66a1181 -> #450 ad679213d -> #459 e4579d7cc -> #460 73a594a36 -> #463 0ef92f124 -> #466 1e75d6e46 -> #468 3a2ab4ff0 -> #469 5b5df8db0. T-121..T-123 left the expected superseded set at #463+. deep-gate label added to #469 (top tree = whole stack) since full Packing dispatch is impossible from this session.
+
+Reviews published at final heads (formal COMMENT reviews pinned to head): #442 O r6 approve (+dispositions), #443 H, #448 L, #449 H, #450 H, #459 H (CI red), #460 H approve (+dispositions), #463 G, #466 A approve-with-nits (+disp), #468 A (+disp), #469 A with stack-level assessment (+disp). New Lows: #466 A5 and #468 A4 stale bodies, #469 A12 stale cost figure (fixed by description pass), #469 A11 #465 ledger entry layer (declined: avoids full propagation for a layer-independent record). Coverage gap: #466/#468 original content had no published review -> full-content reviews (senior+correctness+security) commissioned. Deep gate on #469 merge ref passed (run 37899478949, 12 jobs). #459 Pages red: check_math_startup self-test cold-start flake (think-ewad); re-run not possible from session (403).
