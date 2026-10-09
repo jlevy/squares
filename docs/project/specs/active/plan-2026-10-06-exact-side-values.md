@@ -341,8 +341,10 @@ A delivery-recovery worker checks earlier claimed output.
 | 9 | W7: upstream CI contract repair | Rational refresh, hosted citation identity, publication payloads, snapshot custody, measured suite admissions and startup delay controls repaired; independent Astra review passed |
 | 10 | W7: recovered stack, verified-bound identities and work map (`think-jygq`, `think-808n`) | Original 2026-10-08 A1 checkpoint: rebased both layers through the stacked-PR shortcut; 33 replay-backed rational identities projected without changing case bounds or proof status; four representation gaps then remained |
 | 11 | W7: final publication input repair (`think-x0j9`) | The fresh catalogue job exposed a missing retained KKT-results leaf in its sparse checkout; keep that exact input and exercise the real Git include/exclude contract |
-| 12 | W7: assembled publication contract (`think-wiu3`) | Register all 1,005 catalogue outputs by their exact exporter identities; reserve the 6 MB archive budget for its specific producer/path and bind approved scripts to retained source bytes |
-| 13 | W7: complete PDF layout (`think-vore`) | Hosted-PDF spot QA exposed clipped expanded equations; preserve every coefficient with shorter displays/tables and preflight every display at the actual Letter content width |
+| 12 | W7: assembled publication contract (`think-wiu3`) | Original 2026-10-08 checkpoint: register 1,005 catalogue outputs by their exact exporter identities; reserve the 6 MB archive budget for its specific producer/path and bind approved scripts to retained source bytes |
+| 13 | W7: complete PDF layout (`think-vore`) | Print-fit audit found expanded math outside the Letter content width; preserve every coefficient with shorter displays/tables and preflight every display at the actual Letter content width |
+| 14 | W7 **efficiency block**: bounded receipt controls (`think-3okf`) | Separate four custody corruptions into independently named tests; each replays the full packet scan and checks its specific refusal within the unchanged per-test wall |
+| 15 | W7: private snapshot copy contract (`think-3pyf`) | Copy each lexical source path once in both the worker and its live/Git inventories; omit only four unconsumed generated images and preserve their producers and dependency rescues under the unchanged 192 MiB cap |
 
 The two stack layers have separate registers.
 At the earlier 2026-10-08 CI-repair checkpoint, PR 403 had 286 exact current values, one
@@ -361,6 +363,13 @@ The integration repair beads are `think-3y4q`, `think-uy3e`, `think-9sgi`, `thin
 snapshot repair omitted 312 unused historical output files (3,670,529 bytes), retained
 declared evidence, source and replay inputs, and passed all 174 registered mutation
 controls with the existing 192 MiB cap.
+The expanded publication contract later exposed repeated copies of the same source path.
+The copier and both inventories now share lexical path identity: each selected file has
+one private writable copy, while distinct files with equal bytes remain distinct.
+Four exact generated image leaves (387,934 bytes) leave the snapshot; their source files
+and producers stay in Git, and a declared dependency rescues an image.
+All prior scientific input paths remain selected.
+The refreshed physical snapshot and full mutation run require final hosted checks.
 Its headroom is narrow; `think-t1lk` owns dependency-based selection.
 Local admissions retain the existing suite-cost observations and 10% unrecorded-share
 limit.

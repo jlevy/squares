@@ -262,6 +262,7 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_rendering.py",
     "tests/test_site_math_preferences.py",
     "tests/test_exact_side_values_browser.py",
+    "tests/test_exact_side_values_print.py",
 )
 #: The four HTTP load/no-JS cases measure browser timing without competing browser
 #: workers from the functional layout command. Their assertions and budgets stay shared
@@ -279,6 +280,7 @@ _SITE_INPUTS = (
     "packing/devtools/*",
     "packing/tests/test_site_*.py",
     "packing/tests/test_exact_side_values_browser.py",
+    "packing/tests/test_exact_side_values_print.py",
     "packing/tests/site_*.py",
     "packing/tests/probes/*",
     "packing/frontier/*",
