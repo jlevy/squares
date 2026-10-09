@@ -12,6 +12,34 @@ Sum-of-squares (SOS) is a credible new way to certify such nonlinear constraints
 It does not currently justify replacing that sequence with a global seventeen-square
 semidefinite program.
 
+## October 8 Source-Review Update
+
+The
+[source-review follow-up](https://github.com/jlevy/squares/blob/51368bec05b6fa30bebca7b31d0cf3dd0d810c09/docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md)
+refines the pilot sequence.
+The first-eight shared-centre LP remains the next entry.
+After an exactly certified LP survivor, freeze a triple of original cell domains and run
+the equal-weight vertex check, then the exact weighted-vertex screen.
+This replaces the unconditional no-ball order-2 SDP attempt in the original pilot
+sequence below.
+
+Exact nonnegative normalized weights with a strictly positive exclusion margin rule out
+the triple directly.
+Conversely, an exactly checked normalized mixture of product vertices with nonnegative
+expected incircle generators rules out every order-2 contradiction in the specified
+no-ball, no-equality ansatz for that triple.
+That mixture is not a feasible centre triple or a packing.
+Numerical failure remains inconclusive.
+
+After that exact mixture obstruction, consider separately preregistered successors: a
+ball-augmented order-2 recipe, with exact ball containment on the entire original
+product domain, or reduced order 3 subject to the actual facet count and the existing
+caps. The ball’s negative leading quadratic part invalidates the original face-reduction
+argument. Preserve the original cells and D4 joins in either successor.
+Eligibility does not imply that a certificate exists.
+The original derivation is retained below as historical context; the source review adds
+no target run, exclusion or bound improvement.
+
 ## What the Evidence Has Changed
 
 The [verified lower bound](../../../packing/frontier/results.yaml) remains
@@ -230,6 +258,11 @@ first eight canonical assignments, bounded exact reconstruction.
 Accept only a rational primal satisfying every row, or exact Farkas weights $y\ge0$,
 $A^Ty=0$, $b^Ty<0$ for the system $Ax\le b$. Eight feasible cases retain those eight;
 they do not retire all 95.
+
+**Historical pilot sequence:** The following initial recipe is superseded by the October
+8 source-review update above.
+The controls and resource ceilings below remain applicable to an eligible, separately
+frozen successor.
 
 For a new SOS pilot, take the first exactly certified LP survivor and freeze one triple
 of its original cells before SDP work.
