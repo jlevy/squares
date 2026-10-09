@@ -24,6 +24,7 @@ if TYPE_CHECKING:
     from playwright.sync_api import Browser, Page, Route
 
 _SHIFT = applied(probe(Path(__file__).parent / "probes", "site_rendering/shift"))
+_FONT_INITIATORS = probe(Path(__file__).parent / "probes", "site_rendering/font_initiators")
 
 
 @pytest.fixture(scope="module")
@@ -642,6 +643,129 @@ def test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets(
         assert report["shownMath"] == frontier_math_counts[1]
         assert report["unreadableMath"] == 0
         assert check_site_rendering.problems(report, javascript=javascript) == [], report
+
+
+def test_frontier_preloads_every_pt_serif_face_it_draws(
+    browser: Browser, frontier_native_site: str
+) -> None:
+    """Italic and bold are first-screen text: the opening paragraphs set both.
+
+    A face left to the layout that discovers it is requested only after that layout,
+    so it arrives after the first paint, and the visible paragraph around its
+    invisible run rewraps when it does. The hosted runner measured that as CLS 0.134
+    and 0.209 at 1280px (frontier.html), above the unchanged 0.1 limit."""
+    context = browser.new_context(viewport={"width": 1280, "height": 900})
+    try:
+        page = context.new_page()
+        page.goto(frontier_native_site, wait_until="load")
+        check_site_rendering.wait_for_fonts(page)
+        fetched = page.evaluate(_FONT_INITIATORS)
+    finally:
+        context.close()
+    serif = {
+        re.sub(r"\.[0-9a-f]{16}\.woff2$", ".woff2", row["file"]): row["initiator"]
+        for row in fetched
+        if row["file"].startswith("pt-serif-")
+    }
+    assert {
+        "pt-serif-latin-400-normal.woff2",
+        "pt-serif-latin-400-italic.woff2",
+        "pt-serif-latin-700-normal.woff2",
+    } <= set(serif), fetched
+    assert set(serif) <= set(site_assets.PRELOADED_FACES), fetched
+    assert set(serif.values()) == {"link"}, fetched
+
+
+def _navigation_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[str, Any]]]:
+    """The bar's link boxes and the faces Chromium actually draws their labels in."""
+    boxes = []
+    for link in page.locator(".site-nav-inner > a").all():
+        box = link.bounding_box()
+        assert box is not None
+        boxes.append(dict(box))
+    assert len(boxes) > 3
+    session = page.context.new_cdp_session(page)
+    try:
+        session.send("DOM.enable")
+        session.send("CSS.enable")
+        document = session.send("DOM.getDocument")
+        links = session.send(
+            "DOM.querySelectorAll",
+            {"nodeId": document["root"]["nodeId"], "selector": ".site-nav-inner > a"},
+        )
+        fonts = [
+            face
+            for node in links["nodeIds"]
+            for face in session.send("CSS.getPlatformFontsForNode", {"nodeId": node})["fonts"]
+        ]
+        return boxes, fonts
+    finally:
+        session.detach()
+
+
+def test_frontier_sans_arrival_keeps_the_navigation_in_place(
+    browser: Browser, frontier_native_site: str
+) -> None:
+    """Source Sans 3 arriving after the first layout moves nothing at 390px.
+
+    Its preload can lose that race, and the face it holds invisible is laid out in the
+    next family of the stack. The hosted runner's was DejaVu Sans, about a quarter
+    wider: a link wrapped to the bar's second line and the hero's summary took two more
+    lines, and the face's arrival measured CLS 0.251 (run 37875117402); this page
+    measured 0.232 the same way. The metric-adjusted Arial alias in `paper-type.css`
+    (Liberation Sans on Linux) is what stands in now, so every link stays on its line
+    and the published bar is unchanged once the face is in."""
+    reference = browser.new_context(viewport={"width": 390, "height": 900})
+    try:
+        view = reference.new_page()
+        view.goto(frontier_native_site, wait_until="load")
+        check_site_rendering.wait_for_fonts(view)
+        view.wait_for_timeout(check_site_rendering.SETTLE_MS)
+        expected, _ = _navigation_reading(view)
+    finally:
+        reference.close()
+
+    context = browser.new_context(viewport={"width": 390, "height": 900})
+    held: list[Route] = []
+    try:
+        check_site_rendering.install_observer(context)
+
+        def hold_font(route: Route) -> None:
+            held.append(route)
+
+        context.route("**/assets/fonts/source-sans-3-latin-wght-normal.*.woff2", hold_font)
+        page = context.new_page()
+        page.goto(frontier_native_site, wait_until="domcontentloaded")
+        page.wait_for_timeout(check_site_rendering.SETTLE_MS)
+        assert len(held) == 1
+        temporary, standing = _navigation_reading(page)
+        assert standing
+        assert all(
+            any(name in face["postScriptName"] for name in ("Arial", "LiberationSans"))
+            for face in standing
+        ), standing
+        for request in held:
+            request.continue_()
+        page.wait_for_load_state("load")
+        check_site_rendering.wait_for_fonts(page)
+        page.wait_for_timeout(check_site_rendering.SETTLE_MS)
+        actual, final = _navigation_reading(page)
+        assert all(
+            "SourceSans3" in face["postScriptName"] and face["isCustomFont"] for face in final
+        ), final
+        # The alias draws nothing once the face is in: the published bar is unchanged.
+        for before, after in zip(expected, actual, strict=True):
+            assert after == pytest.approx(before, abs=0.04)
+        # And every link stood on the line it ends on while the face was held.
+        assert [box["y"] for box in temporary] == pytest.approx(
+            [box["y"] for box in actual], abs=0.5
+        )
+        report = check_site_rendering.read_report(page)
+        assert report["supported"], report
+        assert report["unreadableMath"] == 0
+        assert report["cls"] <= check_site_rendering.CLS_LIMIT, report
+    finally:
+        context.close()
 
 
 @pytest.mark.parametrize(
