@@ -2604,7 +2604,6 @@ sources:
     credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance.
     No producer checker replay, optimality or rigidity claim is made.
 
-<<<<<<< HEAD
     The original supplement comment is no longer available. The identical n153 certificate remains
     accessible at https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n153/n153.cert.json;
     resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json binds its exact side
@@ -2687,11 +2686,13 @@ sources:
   - frontier/n-302.md
   evidence:
   - E-squish-second-update-2026-10-07-report
-  notes: Issue422 pins nine new rational geometries at e63e4e52b1728b6671b2f263c5e02a4aa79a39d3. All
-    nine are reported V0/C0 in this layer. Complete prior verified values, exact forms and evidence
-    remain retained; source finite prints are quotations, and current displays are safe sixteen-place
-    upward ceilings. Author-reported Ellsworth, Couzo and SQUISH lineage and human-directed Claude
-    Opus5.5 assistance remain attributed.
+  notes: Issue422 pins nine new rational geometries at e63e4e52b1728b6671b2f263c5e02a4aa79a39d3.
+    This original source-report atom retains all nine as reported V0/C0. Separate maintained
+    confirmation T-116 admits the frozen finite geometries at V3/C3; later selected geometries
+    and source-only reports require their own assurance. Complete prior verified values, exact forms and
+    evidence remain retained; source finite prints are quotations, and current displays are
+    safe sixteen-place upward ceilings. Author-reported Ellsworth, Couzo and SQUISH lineage
+    and human-directed Claude Opus5.5 assistance remain attributed.
 - id: rehwaldt-couzo-refinements-2026-10-07
   title: Rehwaldt finite rational refinements, issue 425
   role: source-repository
@@ -2712,8 +2713,11 @@ sources:
   evidence:
   - E-rehwaldt-couzo-refinements-2026-10-07-report
   claims_record: resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/claims.json
-  notes: Complete terminating displays preserve the full rational strict improvement. Only reported
-    assurance is admitted; historical counts excluded by the author do not replace smaller ceilings.
+  notes: Complete terminating displays preserve the full rational strict improvement. This original
+    source-report atom retains reported assurance. Separate maintained confirmation T-117 admits
+    these frozen finite witnesses at V3/C3; later selected geometries and source-only reports
+    require their own assurance. Historical counts excluded by the author do not replace smaller
+    ceilings.
 - id: rehwaldt-n68-refinement-2026-10-07
   title: Rehwaldt finite rational refinements, issue 428
   role: source-repository
@@ -2732,8 +2736,11 @@ sources:
   evidence:
   - E-rehwaldt-n68-refinement-2026-10-07-report
   claims_record: resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/claims.json
-  notes: Complete terminating displays preserve the full rational strict improvement. Only reported
-    assurance is admitted; historical counts excluded by the author do not replace smaller ceilings.
+  notes: Complete terminating displays preserve the full rational strict improvement. This original
+    source-report atom retains reported assurance. Separate maintained confirmation T-118 admits
+    this frozen finite witness at V3/C3; later selected geometries and source-only reports
+    require their own assurance. Historical counts excluded by the author do not replace smaller
+    ceilings.
 - id: ry-xu-new-packings-2026-10-08
   title: 'ry-xu new square constructions, issue #432'
   role: source-repository
@@ -2895,206 +2902,6 @@ sources:
   - E-gupta-438-rational-report
   notes: All seventeen originals and comparators retained; fourteen selected, three withdrawn after
     smaller ry-xu ceilings. Finite feasibility only.
-=======
-
-  - id: squish-second-update-2026-10-07
-    title: 'SQUISH second update: five additional and four tighter rational packings'
-    role: source-repository
-    url: https://github.com/itsnaka/squish-certs/tree/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b
-    local: resources/web/squish-422-second-update-2026-10-07/
-    source_key: '[SQUISH second update 2026-10-07]'
-    scope:
-      n_values:
-      - 88
-      - 108
-      - 179
-      - 180
-      - 199
-      - 207
-      - 236
-      - 263
-      - 302
-    reviewed: '2026-10-07'
-    source_date: '2026-10-07'
-    disposition: current-report
-    replay_disposition: case-specific
-    represented_by:
-    - frontier/n-088.md
-    - frontier/n-108.md
-    - frontier/n-179.md
-    - frontier/n-180.md
-    - frontier/n-199.md
-    - frontier/n-207.md
-    - frontier/n-236.md
-    - frontier/n-263.md
-    - frontier/n-302.md
-    evidence:
-    - E-squish-second-update-2026-10-07-report
-    notes: Issue422 pins nine new rational geometries at e63e4e52b1728b6671b2f263c5e02a4aa79a39d3.
-      This original source-report atom retains all nine as reported V0/C0. Separate maintained
-      confirmation T-116 admits the frozen finite geometries at V3/C3; later selected geometries
-      and source-only reports require their own assurance. Complete prior verified values, exact forms and
-      evidence remain retained; source finite prints are quotations, and current displays are
-      safe sixteen-place upward ceilings. Author-reported Ellsworth, Couzo and SQUISH lineage
-      and human-directed Claude Opus5.5 assistance remain attributed.
-  - id: rehwaldt-couzo-refinements-2026-10-07
-    title: Rehwaldt finite rational refinements, issue 425
-    role: source-repository
-    url: https://github.com/lollipoll/couzo-five-exact-certificates/tree/bc389ddf7d65277cd19a9b08fb285d86346d6806
-    local: resources/web/rehwaldt-couzo-refinements-2026-10-07/
-    source_key: '[Rehwaldt Couzo refinements 2026-10-07]'
-    scope:
-      n_values:
-      - 105
-      - 292
-    reviewed: '2026-10-08'
-    source_date: '2026-10-07'
-    disposition: current-report
-    replay_disposition: case-specific
-    represented_by:
-    - frontier/n-105.md
-    - frontier/n-292.md
-    evidence:
-    - E-rehwaldt-couzo-refinements-2026-10-07-report
-    claims_record: resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/claims.json
-    notes: Complete terminating displays preserve the full rational strict improvement. This original
-      source-report atom retains reported assurance. Separate maintained confirmation T-117 admits
-      these frozen finite witnesses at V3/C3; later selected geometries and source-only reports
-      require their own assurance. Historical counts excluded by the author do not replace smaller
-      ceilings.
-  - id: rehwaldt-n68-refinement-2026-10-07
-    title: Rehwaldt finite rational refinements, issue 428
-    role: source-repository
-    url: https://github.com/lollipoll/certified-square-packing-68/tree/fded686668e29258dad2eb29d0482fa3fd51bd6b
-    local: resources/web/rehwaldt-n68-refinement-2026-10-07/
-    source_key: '[Rehwaldt n68 refinement 2026-10-07]'
-    scope:
-      n_values:
-      - 68
-    reviewed: '2026-10-08'
-    source_date: '2026-10-07'
-    disposition: current-report
-    replay_disposition: case-specific
-    represented_by:
-    - frontier/n-068.md
-    evidence:
-    - E-rehwaldt-n68-refinement-2026-10-07-report
-    claims_record: resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/claims.json
-    notes: Complete terminating displays preserve the full rational strict improvement. This original
-      source-report atom retains reported assurance. Separate maintained confirmation T-118 admits
-      this frozen finite witness at V3/C3; later selected geometries and source-only reports
-      require their own assurance. Historical counts excluded by the author do not replace smaller
-      ceilings.
-  - id: ry-xu-new-packings-2026-10-08
-    title: 'ry-xu new square constructions, issue #432'
-    role: source-repository
-    url: https://github.com/ry-xu/square_packing/tree/8dc415296f697f5140caea27c7a0193d52deb4e6
-    local: resources/web/ry-xu-new-packings-2026-10-08/
-    source_key: '[ry-xu square packing 2026]'
-    scope:
-      n_values:
-      - 51
-      - 70
-      - 84
-      - 86
-      - 88
-      - 102
-      - 103
-      - 105
-      - 108
-      - 123
-      - 126
-      - 127
-      - 129
-      - 130
-      - 131
-      - 146
-      - 153
-      - 175
-      - 179
-      - 236
-      - 258
-      - 261
-      - 263
-      - 267
-      - 295
-    reviewed: '2026-10-08'
-    source_date: '2026-10-08'
-    disposition: current-report
-    replay_disposition: case-specific
-    represented_by:
-    - frontier/n-051.md
-    - frontier/n-070.md
-    - frontier/n-084.md
-    - frontier/n-086.md
-    - frontier/n-102.md
-    - frontier/n-103.md
-    - frontier/n-105.md
-    - frontier/n-108.md
-    - frontier/n-123.md
-    - frontier/n-126.md
-    - frontier/n-127.md
-    - frontier/n-129.md
-    - frontier/n-131.md
-    - frontier/n-146.md
-    - frontier/n-175.md
-    - frontier/n-261.md
-    - frontier/n-267.md
-    - frontier/n-295.md
-    evidence:
-    - E-ryxu-432-rational-report
-    - E-ryxu-432-radical-n51-report
-    - E-ryxu-432-rational-feasibility
-    claims_record: resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz
-    notes: All 25 full rational source geometries retained. The current atlas selects 17 rational certificates
-      plus the separate undilated radical n51 construction; eight rational certificates are non-selected.
-      No 191-contact assertion admitted.
-  - id: ry-xu-undilated-n51-2026
-    title: ry-xu undilated n51 exact construction
-    role: source-repository
-    url: https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json
-    local: resources/web/ry-xu-new-packings-2026-10-08/
-    source_key: '[ry-xu square packing 2026]'
-    scope:
-      n_values:
-      - 51
-    reviewed: '2026-10-08'
-    source_date: '2026-10-08'
-    disposition: current-report
-    replay_disposition: case-specific
-    represented_by:
-    - frontier/n-051.md
-    evidence:
-    - E-ryxu-432-radical-n51-report
-    - E-ryxu-432-radical-n51-feasibility
-    claims_record: resources/web/ry-xu-new-packings-2026-10-08/facts/n051-undilated-record.json.xz
-    notes: Separate undilated complete 51 poses over Q(sqrt2); no optimality or 191-contact claim.
-  - id: evand-new-arrangements-2026-10-07
-    title: Daniel's three new rational arrangements, issue399
-    role: source-repository
-    url: https://github.com/evand/square-packing/tree/7eef24f7221b8c3371d6171dd664b52541bbd479
-    local: resources/web/evand-new-arrangements-2026-10-07/
-    source_key: '[Daniel new arrangements 2026-10-07]'
-    scope:
-      n_values:
-      - 266
-      - 270
-      - 272
-    reviewed: '2026-10-08'
-    source_date: '2026-10-07'
-    disposition: current-report
-    replay_disposition: case-specific
-    represented_by:
-    - frontier/n-266.md
-    - frontier/n-270.md
-    - frontier/n-272.md
-    claims_record: resources/web/evand-new-arrangements-2026-10-07/acquisition/claims.json
-    evidence:
-    - E-evand-399-new-arrangements-report
-    - E-evand-399-exact-feasibility
-    notes: 'All three complete source poses and full rational sides are separately certified. Historical
-      #375 source13ee36e and T-098/T-101 receipts remain unchanged; novelty and optimality are not promoted.'
->>>>>>> codex/import-fn1-binding-supplement
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026
