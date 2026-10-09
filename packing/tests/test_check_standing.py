@@ -376,3 +376,29 @@ def test_a_bound_no_case_record_cites_states_what_it_bounds(records: view.Record
         and not check_standing.stated_bounds(record)
     ]
     assert unplaced == ["T-120", "T-121", "T-122", "T-123"]
+
+
+def test_a_closed_form_bound_is_a_display_a_unit_either_side(records: view.Records) -> None:
+    """n = 5's verified ceiling is `2 + (1/2)sqrt(2)`, printed rounded up in its 32nd
+    place. Read as an exact number, a statement of the optimum cut at that place lies
+    below it and would read as an improvement, pending adoption; read as the display it
+    is, a unit either side of its last place, the two tie, and the entry is superseded."""
+    bound = records.cases[5]["verified_upper_bound"]
+    assert bound["exact_form"] == "2 + (1/2)sqrt(2)"
+    floor, ceiling = view.span(bound)
+    assert ceiling - floor == Fraction(2, 10**32)
+    assert ((floor - 2) * 2) ** 2 < 2 < ((ceiling - 2) * 2) ** 2
+    cut = Stated(Fraction("2.70710678118654752440084436210484"), Fraction(1, 10**32))
+    assert check_standing.relation(cut, bound, UPPER) == EQUAL
+    printed = {"value": bound["value"], "exact_form": None}
+    assert view.span(printed) == (Fraction(bound["value"]),) * 2
+    assert check_standing.relation(cut, printed, UPPER) == EXCEEDS
+    stating = _entry(
+        records,
+        "T-128",
+        claim="Reported s(5) <= 2.70710678118654752440084436210484….",
+        scope={"n_values": [5]},
+        confirmation="C3",
+    )
+    assert check_standing.improvements(stating, records) == []
+    assert view.standing(stating, records) == view.SUPERSEDED

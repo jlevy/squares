@@ -46,8 +46,11 @@ where its entry declares a later result that implies it (`superseded_by`), which
 `devtools.check_results` holds to the register instead.
 
 A value written as cut decimals, `3.8100257…`, stands for every number that starts so,
-and equals a bound that does. Two lanes are never mixed: a verified bound is not beaten
-by a higher reported one, which is what `current best, reported` is for.
+and equals a bound that does. A case record's bound beside a closed form stands for every
+number within one unit of its printed value's last place (`render_recent_results.span`),
+since that value is a display, cut or rounded. Two lanes are never mixed: a verified
+bound is not beaten by a higher reported one, which is what `current best, reported` is
+for.
 
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.check_standing [--list]
@@ -193,17 +196,23 @@ def stated_bounds(record: Mapping[str, Any]) -> dict[tuple[int, str], Stated]:
 
 def relation(stated: Stated, bound: Mapping[str, Any] | None, direction: str) -> str | None:
     """How a stated bound stands against a case record's: beaten by it, equal to it at
-    the precision written, or more than it."""
+    the precision written, or more than it.
+
+    Both sides are sets of numbers, compared exactly: cut decimals are every number from
+    `low` up to, and not including, `high`, and the case record's bound is its `span`, a
+    single number where it is exact and a unit either side of a closed form's printed
+    value. Where the two sets meet, nothing tells them apart and they are equal; beaten
+    and more mean every number of one is better than every number of the other."""
     if not bound:
         return None
-    current = view.magnitude(bound)
+    floor, ceiling = view.span(bound)
     low, high = stated.value, stated.value + stated.slack
-    # Cut decimals are every number from `low` up to, and not including, `high`.
-    if current == low or low <= current < high:
+    meets = floor < high and ceiling >= low if stated.slack else floor <= low <= ceiling
+    if meets:
         return EQUAL
     if direction == LOWER:
-        return BEATEN if current > low else EXCEEDS
-    return BEATEN if current < low else EXCEEDS
+        return BEATEN if floor > low else EXCEEDS
+    return BEATEN if ceiling < low else EXCEEDS
 
 
 def findings(record: Mapping[str, Any], records: view.Records) -> list[Finding]:
@@ -232,8 +241,9 @@ def improvements(record: Mapping[str, Any], records: view.Records) -> list[Findi
     Each is a bound that nothing on record has replaced, so an entry that holds no case
     bound and states one is pending adoption (`render_recent_results.PENDING_ADOPTION`)
     and not superseded. A tie is no improvement: the case record holds that value under
-    another entry's citation. Compared exactly, as `relation` compares: cut decimals
-    improve on a bound only where every number they stand for does."""
+    another entry's citation. Compared as `relation` compares, by sets of numbers: cut
+    decimals improve on a bound only where every number they stand for is better than
+    every number the case record's bound may be."""
     report = str(record.get("confirmation")) in UNREPLAYED
     return [
         finding
