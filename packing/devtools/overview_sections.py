@@ -1941,6 +1941,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         "The supplemental rational certificate submitted with the SQUISH packings.",
     ),
     (
+        "https://github.com/jlevy/squares/issues/401#issuecomment-6043191866",
+        "SQUISH dated source follow-up",
+        "Nate Chaoweeraprasit",
+        (
+            "Dated SQUISH update, including a pinned copy of the original rational "
+            "n153 certificate."
+        ),
+    ),
+    (
         "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",
         "Proposing a Better Lower Bound for n = 17 Square Packing",
         "Sam Burns",
