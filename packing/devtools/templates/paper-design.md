@@ -1326,15 +1326,16 @@ it.
   the displayed drawing’s width.
   Otherwise the non-grid segment wraps at the left, followed by the whole grid segment
   on separate lines aligned to the right, including its short last line.
-  The vertical separator between these segments is also half a drawing; internal
-  continuations use ordinary pitch.
-  Rows 1 and 2 have no non-grid prefix and need no separator.
+  Every physical line has the same caption-aware height and ordinary vertical gap,
+  including continuations and the boundary between bound rows.
+  Wrapping adds no extra vertical separator or logical-row padding.
+  Rows 1 and 2 have no non-grid prefix and need no horizontal separator.
   The next bound row starts a new line.
-  Where any row wraps, the space over a new bound row is 0.4 of a tile rather than 0.12.
-  The first retained axis-aligned grid packing in each row carries a small “grid” prefix
-  beside its count. Its threshold comes from the manifest’s canonical
-  `source.kind = exact-grid` entries through `sqpack.known_best.grid_transitions`, which
-  checks that each row has an unbroken grid suffix and exposes both half-open segments.
+  The first retained axis-aligned grid packing in each row carries a two-line dimension
+  and `GRID` marker above its ordinary count.
+  Its threshold comes from the manifest’s canonical `source.kind = exact-grid` entries
+  through `sqpack.known_best.grid_transitions`, which checks that each row has an
+  unbroken grid suffix and exposes both half-open segments.
   This is separate from the derived drawing layer: row 8 starts at $n = 56$, and row 15
   at $n = 212$. The product legend describes the star without layout mechanics.
   `place(n, per, starts)` computes each tile’s local segment line and column, tested
@@ -1403,7 +1404,9 @@ it.
   truncated downward without changing recorded values or the number line’s positions.
   The shared key under the tabs has two left-aligned columns: optimal, exact, numerical
   and one dark rigid mark on the left; recent result since August, 2026, tilt-angle
-  colors and full-side contact shades on the right.
+  colors, full-side contact shades and the degree explanation on the right.
+  The final item reads “deg is the algebraic degree of that side length,” without a
+  badge; it wraps within the right column on a phone.
   The first two tilt swatches label their pinned angles as `90°` and `45°`. Counts cover
   all 324 displayed cases, with recent contributions counted once per case.
   The key uses the support colour at the note size (`atlas_legend`) and describes no
@@ -1415,7 +1418,7 @@ it.
   verifies them against the index.
   Each tile opens the same case record, whose drawing is the house rendering.
   `devtools.measure_atlas_views` checks count centering, star clearance, first-grid
-  horizontal and vertical separators, wrapping and both segment edges;
+  horizontal separation, uniform physical-line pitch, wrapping and both segment edges;
   `tests/test_site_atlas_views.py` checks the selected counts against the canonical
   manifest and verifies the initial CSS layout too.
 

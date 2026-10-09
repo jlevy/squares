@@ -22,7 +22,8 @@
       right: round(rect.right),
       bottom: round(rect.bottom),
       width: round(rect.width),
-      height: round(rect.height),
+      // Keep height exact: rounding it accumulates error across long triangles.
+      height: rect.height,
     };
   };
   const block = document.querySelector("[data-atlas-grid]");

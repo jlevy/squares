@@ -61,10 +61,11 @@ The poster draws 52,650 square polygons from the same witnesses.
 Its title, complete legend, explanation, construction credits and closing project
 details form one block in the upper-right whitespace, leaving the bottom for the final
 row of packings. Title and documentation are right-aligned; the legend has two
-left-aligned columns, four status rows beside three recency and color rows.
-The first two tilt-color swatches carry $90^\circ$ and $45^\circ$. The information ends
-at the right edge of the final drawing; at least 120 units of outside clearance keep the
-grid labels inside the page margins.
+left-aligned columns, four status rows beside four recency, color and degree rows.
+The last right-column item reads “deg is the algebraic degree of that side length,”
+without a badge. The first two tilt-color swatches carry $90^\circ$ and $45^\circ$. The
+information ends at the right edge of the final drawing; at least 120 units of outside
+clearance keep the grid labels inside the page margins.
 One dark $R$ means known rigid; its verification status, dates and sources remain in the
 structured metadata.
 The information uses three times the figure’s type size, with more room between lines
@@ -76,14 +77,15 @@ Upper bounds round upward and lower bounds downward; stored bounds retain their 
 precision. “Best packings due to” begins three balanced lines naming all nineteen
 recorded construction finders and improvers once, with complete canonical names kept
 intact. Full source references remain in the metadata and the separate bibliography.
-A section gap and an additional blank line separate the credits from four closing lines:
-“The Squares Project,” its repository URL, the diagram credit, and the generated edition
-stamp beside the data date.
-The project name and URL are black.
+A section gap separates the credits from the diagram credit, followed by the data date,
+a middle dot and the generated edition stamp.
+A blank line precedes “Citations and details in The Squares Project” and the repository
+URL, `github.com/jlevy/squares`. These closing lines are right-aligned and black; the
+URL uses smaller regular type and ends flush with the information block’s right edge.
 The poster has no subtitle.
-Its definition reads: “The square packing problem asks for the side $s(n)$ of the
-smallest square that can hold $n$ unit squares, where the squares are free to rotate but
-cannot overlap.” The degree definition follows on its own line.
+Its two-line definition appears above the legend: “The square packing problem asks for
+the side $s(n)$ of the smallest square that can hold $n$ unit squares, where the squares
+are free to rotate but cannot overlap.”
 Both composites apply the recent accent independently to a new upper bound, lower bound
 or optimality proof: a new proof of an older packing colors its optimality badge, not
 its upper bound.

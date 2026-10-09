@@ -2683,7 +2683,7 @@ def atlas_size_tabs() -> str:
 
 
 def atlas_legend() -> str:
-    """The shared seven-item legend, with counts over the complete displayed corpus."""
+    """The shared eight-item legend, with counts over the complete displayed corpus."""
     from devtools.atlas_legend import (  # noqa: PLC0415
         AtlasLegendCounts,
         LegendItem,
@@ -2720,6 +2720,8 @@ def atlas_legend() -> str:
     )
 
     def marker(item: LegendItem) -> str:
+        if item.marker is None:
+            return ""
         if item.marker == "star":
             return atlas_star()
         if item.marker in ("angles", "shades"):

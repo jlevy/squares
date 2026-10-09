@@ -621,10 +621,10 @@ def _assert_uniform_lines(
 ) -> None:
     """Every occupied line reserves the same height and gap, with no blank row space."""
     tops = sorted({tile["top"] for tile in tiles})
-    height = tiles[0]["bottom"] - tiles[0]["top"]
+    height = tiles[0]["height"]
     assert tops[0] == pytest.approx(top, abs=atlas.EDGE)
     for tile in tiles:
-        assert tile["bottom"] - tile["top"] == pytest.approx(height, abs=atlas.EDGE)
+        assert tile["height"] == pytest.approx(height, abs=atlas.EDGE)
     for earlier, later in pairwise(tops):
         assert later - earlier == pytest.approx(height + gap, abs=atlas.EDGE)
     assert bottom - top == pytest.approx(
@@ -788,12 +788,19 @@ def test_the_size_tabs_stand_beside_the_view_tabs_and_open_on_medium(seen: Readi
     assert "half a drawing" not in legend["text"]
     left, right = legend["columns"]
     assert [item["key"] for item in left["items"]] == ["optimal", "exact", "numerical", "rigid"]
-    assert [item["key"] for item in right["items"]] == ["recent", "angles", "contacts"]
+    assert [item["key"] for item in right["items"]] == [
+        "recent",
+        "angles",
+        "contacts",
+        "degree",
+    ]
+    assert right["items"][3]["text"] == "deg is the algebraic degree of that side length"
+    assert right["items"][3]["swatches"] == []
     for column in (left, right):
         for item in column["items"]:
             assert item["box"]["left"] == pytest.approx(column["box"]["left"], abs=atlas.EDGE)
     for item, values in zip(
-        right["items"][1:], (["0", "1", "2", "3"], ["4", "3", "2", "1", "0"]), strict=True
+        right["items"][1:3], (["0", "1", "2", "3"], ["4", "3", "2", "1", "0"]), strict=True
     ):
         assert [swatch["value"] for swatch in item["swatches"]] == values
         assert len({swatch["fill"] for swatch in item["swatches"]}) == len(values)
@@ -920,6 +927,11 @@ def test_a_linked_size_is_that_size_before_a_tile_is_drawn(seen: Readings) -> No
     under = sizes["small"]["box"]["top"] >= views["grid"]["box"]["bottom"]
     assert beside or under
     assert phone["legend"]["box"]["right"] <= phone["block"]["right"] + atlas.EDGE
+    right = phone["legend"]["columns"][1]
+    degree = right["items"][3]
+    assert degree["text"] == "deg is the algebraic degree of that side length"
+    assert degree["box"]["right"] <= right["box"]["right"] + atlas.EDGE
+    assert degree["box"]["bottom"] <= phone["cells"]["top"] + atlas.EDGE
 
 
 @pytest.mark.parametrize(

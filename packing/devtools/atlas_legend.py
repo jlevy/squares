@@ -25,7 +25,7 @@ class AtlasLegendCounts:
 @dataclass(frozen=True, slots=True)
 class LegendItem:
     key: str
-    marker: Literal["O", "=", "≈", "R", "star", "angles", "shades"]
+    marker: Literal["O", "=", "≈", "R", "star", "angles", "shades"] | None
     label: str
     count: int | None = None
     marker_values: tuple[int, ...] = ()
@@ -54,7 +54,7 @@ def recent_label(recent_since: date = RECENT_SINCE) -> str:
 def atlas_legend(
     counts: AtlasLegendCounts, *, recent_since: date = RECENT_SINCE
 ) -> AtlasLegend:
-    """The four status rows and three recency/color rows, in reading order."""
+    """Four status rows and four recency/color/degree rows, in reading order."""
     return AtlasLegend(
         left=(
             LegendItem("optimal", "O", "proved optimal", counts.proved_optimal),
@@ -84,5 +84,6 @@ def atlas_legend(
                 "shade indicates number of full-side contacts",
                 marker_values=(4, 3, 2, 1, 0),
             ),
+            LegendItem("degree", None, "deg is the algebraic degree of that side length"),
         ),
     )

@@ -919,7 +919,10 @@ def test_the_atlas_key_names_the_star_and_the_first_grid_marker() -> None:
         "recent",
         "angles",
         "contacts",
+        "degree",
     ]
+    degree = key.split('data-atlas-legend-key="degree">', 1)[1].split("</span></span>", 1)[0]
+    assert degree.strip() == "<span>deg is the algebraic degree of that side length"
     assert "recent result, since August, 2026" in key
     assert key.count(">R</span>") == 1
     assert 'data-style="solid" aria-hidden="true">R</span>' in key

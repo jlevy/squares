@@ -854,11 +854,11 @@ def test_the_poster_canvas_is_what_its_specification_computes() -> None:
     assert canvas.grid_bottom == 120 + 20 * 252 == 5160
     assert canvas.height == 120 + 19 * 252 + 242 + 120 == 5270
     assert (canvas.information_left, canvas.information_right) == (4681, 7281)
-    assert canvas.legend_baseline == 690
-    assert canvas.explainer_baseline == 1156
-    assert canvas.citations_baseline == 1951
-    assert canvas.credit_baseline == 2161
-    assert canvas.stamp_baseline == 2266
+    assert canvas.legend_baseline == 780
+    assert canvas.explainer_baseline == 480
+    assert canvas.citations_baseline == 2001
+    assert canvas.credit_baseline == 1686
+    assert canvas.stamp_baseline == 1791
     assert (composite.svg_name, composite.pdf_name) == (
         "known-best-1-324.svg",
         "square-packings-324-20261008.pdf",
@@ -1313,11 +1313,9 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
     )
     baseline_sizes = {
         "poster-title": 48,
-        "repository": 19,
         "legend-label": 19,
         "explainer": 19,
         "problem-explainer": 19,
-        "degree-explainer": 19,
         "citations": 19,
         "credit": 19,
         "release-stamp": 19,
@@ -1339,7 +1337,11 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
     for node in information_text:
         feature = node.attrib.get("data-feature", "")
         size = Decimal(node.attrib["font-size"])
-        if feature in baseline_sizes:
+        if feature == "repository":
+            assert size == 42
+            assert node.attrib["font-weight"] == "400"
+            assert node.attrib["font-family"].startswith("Arial")
+        elif feature in baseline_sizes:
             assert size == baseline_sizes[feature] * 3
             assert size >= baseline_sizes[feature] * 2
         else:
@@ -1367,7 +1369,7 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
             assert (badge.attrib["width"], badge.attrib["height"]) == ("19", "19")
 
 
-def test_poster_math_variables_are_italic_and_degree_has_its_own_line() -> None:
+def test_poster_math_variables_are_italic_above_its_legend_and_degree_ends_the_legend() -> None:
     root = ET.Element(f"{{{SVG['svg']}}}svg", {"width": "7435", "height": "5270"})
     append = known_best_builder._append_poster_information  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     append(
@@ -1379,9 +1381,11 @@ def test_poster_math_variables_are_italic_and_degree_has_its_own_line() -> None:
     block = root.find("svg:g[@data-feature='poster-information']", SVG)
     assert block is not None
     first = block.find("svg:text[@data-feature='explainer']", SVG)
-    second = block.find("svg:text[@data-feature='degree-explainer']", SVG)
     assert first is not None
-    assert second is not None
+    assert block.find("svg:text[@data-feature='degree-explainer']", SVG) is None
+    column = block.find("svg:g/svg:g[@data-column='right']", SVG)
+    assert column is not None
+    second = column.findall("svg:text[@data-feature='legend-label']", SVG)[-1]
     continuation = block.find("svg:text[@data-feature='problem-explainer']", SVG)
     assert continuation is not None
     assert " ".join("".join(line.itertext()) for line in (first, continuation)) == (
@@ -1406,24 +1410,29 @@ def test_poster_math_variables_are_italic_and_degree_has_its_own_line() -> None:
         if span.attrib.get("font-style") == "italic"
     )
     text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
-    for line in (first, continuation, second):
+    for line in (first, continuation):
         extent = text_width("".join(line.itertext()), line.attrib["font-size"])
         extent += sum((Decimal(span.attrib.get("dx", "0")) for span in line), Decimal(0))
         assert Decimal(line.attrib["x"]) + extent == 7281
         assert Decimal(line.attrib["x"]) >= 4681
+    assert second.attrib["text-anchor"] == "start"
+    assert second.attrib["font-size"] == "57"
+    assert Decimal(second.attrib["x"]) == Decimal(column.attrib["data-left"])
+    assert Decimal(second.attrib["y"]) == 1068
     features = (
         "explainer",
         "problem-explainer",
-        "degree-explainer",
-        "citations",
-        "repository",
         "credit",
         "release-stamp",
+        "citations",
+        "repository",
     )
     lines = [block.find(f"svg:text[@data-feature='{feature}']", SVG) for feature in features]
     assert all(line is not None for line in lines)
     baselines = [Decimal(line.attrib["y"]) for line in lines if line is not None]
-    assert baselines == [1156, 1246, 1336, 1951, 2056, 2161, 2266]
+    assert baselines == [480, 570, 1686, 1791, 2001, 2106]
+    assert Decimal(continuation.attrib["y"]) + Decimal("17.1") < 780 - 57
+    assert not any(node.attrib.get("data-evidence") == second.text for node in column)
     assert all(above + Decimal("17.1") <= below - 57 for above, below in pairwise(baselines))
     assert baselines[-1] + Decimal("17.1") <= 2311
     _assert_poster_text_clears_cards(block, known_best_builder.resolved_composites()[1])
@@ -1488,7 +1497,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     widths = [text_width(line.text or "", "57") for line in lines]
     assert min(widths) >= max(widths) * Decimal("0.9")
-    for node, baseline in zip(lines, (1486, 1576, 1666), strict=True):
+    for node, baseline in zip(lines, (1326, 1416, 1506), strict=True):
         assert node.attrib["font-size"] == "57"
         assert node.attrib["text-anchor"] == "end"
         assert Decimal(node.attrib["x"]) == 7281
@@ -1497,27 +1506,30 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         assert baseline + Decimal("17.1") <= 2311
     ending = list(information)[-4:]
     assert [line.attrib["data-feature"] for line in ending] == [
-        "citations",
-        "repository",
         "credit",
         "release-stamp",
+        "citations",
+        "repository",
     ]
     assert [line.text for line in ending] == [
-        "The Squares Project",
-        "github.com/jlevy/squares",
-        "Diagram by Joshua Levy with the help of a few billion tokens from Claude and Codex",
+        "Diagram by Joshua Levy",
         known_best_builder.retained_identity(_committed_poster_svg()).poster_stamp,
+        "Citations and details in The Squares Project",
+        "github.com/jlevy/squares",
     ]
     identity = known_best_builder.retained_identity(_committed_poster_svg())
-    stamp_text = ending[-1].text
+    stamp_text = ending[1].text
     assert isinstance(stamp_text, str)
-    assert stamp_text == f"{identity.stamp} · {identity.formatted_date}"
+    assert stamp_text == f"{identity.formatted_date} · {identity.stamp}"
     assert text_width(stamp_text, "57") <= 2600
-    assert [line.attrib["font-size"] for line in ending] == ["57"] * 4
-    assert [line.attrib["fill"] for line in ending[:2]] == ["#000000"] * 2
+    assert [line.attrib["font-size"] for line in ending] == ["57", "57", "57", "42"]
+    assert [line.attrib["fill"] for line in ending[2:]] == ["#000000"] * 2
+    assert ending[-1].attrib["font-weight"] == "400"
+    assert ending[-1].attrib["font-family"].startswith("Arial")
+    assert ending[-1].text == (ending[-1].text or "").strip()
     assert all(line.attrib["text-anchor"] == "end" for line in ending)
     assert all(Decimal(line.attrib["x"]) == 7281 for line in ending)
-    assert [Decimal(line.attrib["y"]) for line in ending] == [1951, 2056, 2161, 2266]
+    assert [Decimal(line.attrib["y"]) for line in ending] == [1686, 1791, 2001, 2106]
     assert (
         sum(
             node.text == "github.com/jlevy/squares"
@@ -1526,7 +1538,8 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         == 1
     )
     assert known_best_builder.SUMMARY_CITATIONS not in "".join(information.itertext())
-    assert Decimal(ending[0].attrib["y"]) - Decimal(lines[-1].attrib["y"]) == 180 + 105
+    assert Decimal(ending[0].attrib["y"]) - Decimal(lines[-1].attrib["y"]) == 180
+    assert Decimal(ending[2].attrib["y"]) - Decimal(ending[1].attrib["y"]) == 2 * 105
     # The closing block fits beside row nine and ends before row ten. Measure every
     # actual text line against every card, rather than treating empty block space as ink.
     canvas = known_best_builder.resolved_composites()[1]
@@ -1750,10 +1763,10 @@ def test_direct_card_helpers_do_not_resolve_canonical_contribution_flags(
     assert len(root) == 1
 
 
-def test_shared_atlas_legend_has_the_same_seven_items_in_four_and_three_rows() -> None:
+def test_shared_atlas_legend_has_the_same_eight_items_in_four_and_four_rows() -> None:
     descriptor = atlas_legend(AtlasLegendCounts(77, 287, 37, 22, 297))
     assert [item.marker for item in descriptor.left] == ["O", "=", "≈", "R"]
-    assert [item.marker for item in descriptor.right] == ["star", "angles", "shades"]
+    assert [item.marker for item in descriptor.right] == ["star", "angles", "shades", None]
     assert [item.text for item in descriptor.items] == [
         "proved optimal (77)",
         "exact value known (287)",
@@ -1762,7 +1775,10 @@ def test_shared_atlas_legend_has_the_same_seven_items_in_four_and_three_rows() -
         "recent result, since August, 2026 (297)",
         "colors indicate distinct tilt angles",
         "shade indicates number of full-side contacts",
+        "deg is the algebraic degree of that side length",
     ]
+    assert [item.key for item in descriptor.right] == ["recent", "angles", "contacts", "degree"]
+    assert descriptor.right[3].marker_values == ()
     assert descriptor.right[1].marker_values == (0, 1, 2, 3)
     assert descriptor.right[1].marker_labels == ("90°", "45°", "", "")
     assert descriptor.right[2].marker_values == (4, 3, 2, 1, 0)
@@ -1806,7 +1822,7 @@ def test_poster_legend_columns_align_left_and_count_upper_only_recent_results(
     labels = [
         column.findall("svg:text[@data-feature='legend-label']", SVG) for column in columns
     ]
-    assert [len(column) for column in labels] == [4, 3]
+    assert [len(column) for column in labels] == [4, 4]
     assert labels[1][0].text == "recent result, since August, 2026 (1)"
     description = known_best_builder.SUMMARY_PROSE[canvas.spec.stem][1]
     assert all(
@@ -1833,8 +1849,8 @@ def test_poster_legend_columns_align_left_and_count_upper_only_recent_results(
         )
     )
     assert "since August 2026" in primary_description
-    assert [Decimal(node.attrib["y"]) for node in labels[0]] == [690, 786, 882, 978]
-    assert [Decimal(node.attrib["y"]) for node in labels[1]] == [690, 786, 882]
+    assert [Decimal(node.attrib["y"]) for node in labels[0]] == [780, 876, 972, 1068]
+    assert [Decimal(node.attrib["y"]) for node in labels[1]] == [780, 876, 972, 1068]
     text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     for column, nodes in zip(columns, labels, strict=True):
         start = Decimal(column.attrib["data-left"])
@@ -1844,7 +1860,8 @@ def test_poster_legend_columns_align_left_and_count_upper_only_recent_results(
             assert node.attrib["text-anchor"] == "start"
             assert node.attrib["font-size"] == "57"
             x = Decimal(node.attrib["x"])
-            assert start < x
+            assert start <= x
+            assert (x == start) == (node is nodes[-1] and column is columns[1])
             assert x + text_width(node.text or "", "57") <= right
     assert (
         Decimal(columns[1].attrib["data-left"])
@@ -1889,8 +1906,30 @@ def test_both_pdf_legends_label_only_the_first_two_angle_swatches(index: int) ->
             }
             assert label.attrib["fill"] != swatch.attrib["fill"]
     assert len(root.findall(".//svg:rect[@data-feature='legend-swatch']", SVG)) == 9
+    degree_labels = [
+        node
+        for node in root.iter(f"{{{SVG['svg']}}}text")
+        if node.text == "deg is the algebraic degree of that side length"
+    ]
+    assert len(degree_labels) == 1
     if index == 0:
         assert (canvas.width, canvas.height, canvas.legend_baseline) == (2400, 2896, 2724)
+        explain = known_best_builder._append_summary_explainer  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+        explain(root, baseline=canvas.explainer_baseline, canvas_width=canvas.width)
+        paragraph = root.find("svg:text[@data-feature='explainer']", SVG)
+        assert paragraph is not None
+        assert "deg" not in "".join(paragraph.itertext())
+        assert "".join(paragraph.itertext()) == (
+            "s(n) is the side of the smallest square holding n unit squares"
+        )
+        for node in root.findall("svg:g/svg:text", SVG):
+            if "data-swatch-label" in node.attrib:
+                continue
+            left = Decimal(node.attrib["x"])
+            right = left + text_width(node.text or "", node.attrib["font-size"])
+            assert 60 <= left < right <= 2340
+        assert Decimal(degree_labels[0].attrib["y"]) == 2752
+        assert 2752 + Decimal("5.7") < canvas.explainer_baseline - 19
 
 
 def test_poster_documentation_refuses_overlapping_lines(
@@ -1910,8 +1949,8 @@ def test_poster_documentation_refuses_overlapping_lines(
 def test_poster_closing_block_refuses_a_long_line_overlapping_cards(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.setattr(known_best_builder, "POSTER_CLOSING_LINE_PITCH", Decimal(350))
-    monkeypatch.setattr(known_best_builder, "POSTER_INFORMATION_BOTTOM", Decimal(3400))
+    monkeypatch.setattr(known_best_builder, "POSTER_PACKING_CREDITS_SECTION_GAP", Decimal(2400))
+    monkeypatch.setattr(known_best_builder, "POSTER_INFORMATION_BOTTOM", Decimal(5000))
     append = known_best_builder._append_poster_information  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     with pytest.raises(ValueError, match="credit line overlaps a packing card"):
         append(
@@ -1951,7 +1990,6 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
         "legend-label",
         "explainer",
         "problem-explainer",
-        "degree-explainer",
         "citations",
         "credit",
         "release-stamp",
@@ -1960,7 +1998,7 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
     labels = [
         node for node in information_text if node.attrib.get("data-feature") == "legend-label"
     ]
-    assert len(labels) == 7
+    assert len(labels) == 8
     assert {
         "proved optimal",
         "exact value known",
@@ -1969,6 +2007,7 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
         known_best_builder.RECENT_LABEL,
         "colors indicate distinct tilt angles",
         "shade indicates number of full-side contacts",
+        "deg is the algebraic degree of that side length",
     } == {((node.text or "").rsplit(" (", 1)[0]) for node in labels}
     text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     for node in information_text:
@@ -1989,7 +2028,6 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
         if node.attrib.get("data-feature") in {
             "explainer",
             "problem-explainer",
-            "degree-explainer",
         }:
             assert text_right == right
         elif node.attrib.get("data-feature") == "legend-label":
@@ -2018,10 +2056,11 @@ def test_every_composite_footer_says_where_the_citations_are() -> None:
     """The cards print bounds and no sources, so the footer says where the sources are.
 
     The owner asked for it on 2026-09-28: "citations for all results are available in
-    the squares project". Both composites put the project reference and URL before
-    the diagram credit and version. The accessible description carries the same
-    information for a reader who never sees the drawing. Read both retained composites, since
-    the line is shared and a canvas that dropped it should fail by name.
+    the squares project". The poster closes with the diagram credit, dated version,
+    then the project reference and URL; the grid retains its original footer order.
+    The accessible description carries the same information for a reader who never
+    sees the drawing. Read both retained composites, since the line is shared and a
+    canvas that dropped it should fail by name.
     """
     citations = known_best_builder.SUMMARY_CITATIONS
     assert citations.endswith(known_best_builder.SUMMARY_REPOSITORY)
@@ -2031,11 +2070,10 @@ def test_every_composite_footer_says_where_the_citations_are() -> None:
             (
                 "explainer",
                 "problem-explainer",
-                "degree-explainer",
-                "citations",
-                "repository",
                 "credit",
                 "release-stamp",
+                "citations",
+                "repository",
             )
             if canvas.information_in_corner
             else ("explainer", "citations", "credit", "release-stamp")
@@ -2060,13 +2098,10 @@ def test_every_composite_footer_says_where_the_citations_are() -> None:
             baselines = [
                 float(canvas.explainer_baseline),
                 float(canvas.explainer_baseline + known_best_builder.POSTER_FOOTER_LINE_PITCH),
-                float(
-                    canvas.explainer_baseline + 2 * known_best_builder.POSTER_FOOTER_LINE_PITCH
-                ),
-                float(canvas.citations_baseline),
-                float(canvas.citations_baseline + known_best_builder.POSTER_CLOSING_LINE_PITCH),
                 float(canvas.credit_baseline),
                 float(canvas.stamp_baseline),
+                float(canvas.citations_baseline),
+                float(canvas.citations_baseline + known_best_builder.POSTER_CLOSING_LINE_PITCH),
             ]
         assert [float(footer[feature].attrib["y"]) for feature in order] == baselines, (
             canvas.spec.stem
@@ -2274,6 +2309,7 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
         "recent result, since August, 2026 (297)",
         "colors indicate distinct tilt angles",
         "shade indicates number of full-side contacts",
+        "deg is the algebraic degree of that side length",
     ]
     # The published figure keeps its original legend arrangement and counts its own
     # hundred cases.
@@ -2629,7 +2665,7 @@ def test_composite_identity_checks_each_modes_visible_date_and_edition(
     )
     identity = known_best_builder.CompositeIdentity("1" * 40, data_date)
     assert identity.formatted_date == formatted_date
-    assert identity.poster_stamp == f"{identity.stamp} · {formatted_date}"
+    assert identity.poster_stamp == f"{formatted_date} · {identity.stamp}"
     root = ET.Element(f"{{{SVG['svg']}}}svg")
     if not triangle:
         ET.SubElement(

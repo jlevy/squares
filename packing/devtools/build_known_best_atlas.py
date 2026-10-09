@@ -253,15 +253,15 @@ SUMMARY_FOOTER_LINE_PITCH = Decimal(27)
 #: under `sqpack.release.DATA_PATHS`, so a taller canvas would have been a data commit
 #: and moved the version every artifact prints.
 SUMMARY_BOTTOM_MARGIN = Decimal(25)
-#: The footer gloss, as runs of (text, italic). The variables are set in italic like the
-#: ones on the cards; `deg` is a function name and stays upright.
+#: The footer gloss, as runs of (text, italic). The variables are set in italic like
+#: the ones on the cards; the shared legend defines `deg` separately.
 SUMMARY_EXPLAINER_RUNS = (
     ("s", True),
     ("(", False),
     ("n", True),
     (") is the side of the smallest square holding ", False),
     ("n", True),
-    (" unit squares; deg is the algebraic degree of that side length", False),
+    (" unit squares", False),
 )
 SUMMARY_EXPLAINER = "".join(text for text, _italic in SUMMARY_EXPLAINER_RUNS)
 # Cap height as a fraction of font size, used to sit the badges flush with the
@@ -380,10 +380,8 @@ SUMMARY_REPOSITORY = "github.com/jlevy/squares"
 SUMMARY_CITATIONS = (
     f"Citations for all results are available in the Squares Project: {SUMMARY_REPOSITORY}"
 )
-POSTER_CITATIONS = "The Squares Project"
-POSTER_DIAGRAM_CREDIT = (
-    "Diagram by Joshua Levy with the help of a few billion tokens from Claude and Codex"
-)
+POSTER_CITATIONS = "Citations and details in The Squares Project"
+POSTER_DIAGRAM_CREDIT = "Diagram by Joshua Levy"
 # Set a step above the other small labels so the URL reads as part of the
 # heading block rather than as another footnote.
 #: One size for the two lines under the title: the release line and the repository.
@@ -399,17 +397,18 @@ SUMMARY_SUBTITLE_BASELINE = Decimal(148)
 POSTER_INFORMATION_TYPE_SCALE = Decimal(3)
 POSTER_TITLE_SIZE = "144"
 POSTER_FOOTER_SIZE = "57"
+POSTER_REPOSITORY_SIZE = "42"
 POSTER_INFORMATION_WIDTH = Decimal(2600)
 POSTER_INFORMATION_TOP = POSTER_OUTER_MARGIN
 POSTER_INFORMATION_BOTTOM = POSTER_INFORMATION_TOP + Decimal(2191)
 POSTER_TITLE_BASELINE = POSTER_INFORMATION_TOP + Decimal(144)
-POSTER_LEGEND_BASELINE = POSTER_INFORMATION_TOP + Decimal(570)
+POSTER_LEGEND_BASELINE = POSTER_INFORMATION_TOP + Decimal(660)
 POSTER_LEGEND_ROW_PITCH = Decimal(96)
 POSTER_LEGEND_COLUMN_GAP = Decimal(180)
-POSTER_EXPLAINER_BASELINE = POSTER_INFORMATION_TOP + Decimal(1036)
+POSTER_EXPLAINER_BASELINE = POSTER_INFORMATION_TOP + Decimal(360)
 POSTER_FOOTER_LINE_PITCH = Decimal(90)
 POSTER_CLOSING_LINE_PITCH = Decimal(105)
-POSTER_PACKING_CREDITS_BASELINE = POSTER_INFORMATION_TOP + Decimal(1366)
+POSTER_PACKING_CREDITS_BASELINE = POSTER_INFORMATION_TOP + Decimal(1206)
 POSTER_PACKING_CREDITS_LINE_COUNT = 3
 POSTER_PACKING_CREDITS_PREFIX = "Best packings due to"
 POSTER_PACKING_CREDITS_SECTION_GAP = Decimal(180)
@@ -430,7 +429,6 @@ POSTER_EXPLAINER_LINES = (
         ("n", True),
         (" unit squares, where the squares are free to rotate but cannot overlap.", False),
     ),
-    (("deg is the algebraic degree of that side length", False),),
 )
 #: Quartz selects upright Helvetica Bold even for italic SVG spans. Arial's italic
 #: face embeds correctly in Cairo's PDF and has compatible advances for these letters.
@@ -493,7 +491,7 @@ class CompositeIdentity:
     @property
     def poster_stamp(self) -> str:
         """The triangle's closing line, joining its edition and authoritative data date."""
-        return f"{self.stamp} · {self.formatted_date}"
+        return f"{self.formatted_date} · {self.stamp}"
 
     @property
     def current(self) -> bool:
@@ -841,18 +839,17 @@ class CompositeCanvas:
     @property
     def citations_baseline(self) -> Decimal:
         if self.information_in_corner:
-            return (
-                POSTER_PACKING_CREDITS_BASELINE
-                + POSTER_FOOTER_LINE_PITCH * (POSTER_PACKING_CREDITS_LINE_COUNT - 1)
-                + POSTER_PACKING_CREDITS_SECTION_GAP
-                + POSTER_CLOSING_LINE_PITCH
-            )
+            return self.stamp_baseline + 2 * POSTER_CLOSING_LINE_PITCH
         return self.explainer_baseline + SUMMARY_FOOTER_LINE_PITCH
 
     @property
     def credit_baseline(self) -> Decimal:
         if self.information_in_corner:
-            return self.citations_baseline + 2 * POSTER_CLOSING_LINE_PITCH
+            return (
+                POSTER_PACKING_CREDITS_BASELINE
+                + POSTER_FOOTER_LINE_PITCH * (POSTER_PACKING_CREDITS_LINE_COUNT - 1)
+                + POSTER_PACKING_CREDITS_SECTION_GAP
+            )
         return self.citations_baseline + SUMMARY_FOOTER_LINE_PITCH
 
     @property
@@ -2208,9 +2205,9 @@ def _legend_row(
 ) -> None:
     """Lay one legend row centered on the canvas or ending at a right edge.
 
-    Each entry is (mark, label), where mark is either a badge triple or a run of
-    swatches. Widths are estimated from the label length because the renderer
-    holds no font metrics, so widths come from the Helvetica advance table.
+    Each entry is (mark, label), where mark is a badge triple, a run of
+    swatches or None for an unbadged definition. Widths come from the Helvetica
+    advance table, because the renderer holds no font metrics.
     """
     badge_size = SUMMARY_BADGE_SIZE * type_scale
     footer_size = format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
@@ -2218,13 +2215,18 @@ def _legend_row(
     top = baseline - badge_size + Decimal(4) * type_scale
 
     def mark_width(mark: object) -> Decimal:
+        if mark is None:
+            return Decimal(0)
         if isinstance(mark, tuple):
             return badge_size
         return badge_size * Decimal(len(mark))  # pyright: ignore[reportArgumentType]
 
     gap = Decimal(34) * type_scale
     widths = [
-        mark_width(mark) + mark_gap + _text_width(label, footer_size) for mark, label in entries
+        mark_width(mark)
+        + (mark_gap if mark is not None else 0)
+        + _text_width(label, footer_size)
+        for mark, label in entries
     ]
     row_width = sum(widths, Decimal(0)) + gap * Decimal(len(entries) - 1)
     if (
@@ -2241,7 +2243,9 @@ def _legend_row(
         )
     )
     for (mark, label), width in zip(entries, widths, strict=True):
-        if isinstance(mark, tuple):
+        if mark is None:
+            run_end = cursor
+        elif isinstance(mark, tuple):
             glyph, style, name = mark
             _append_badge(legend, glyph, style, name, x=cursor, top=top, type_scale=type_scale)
             run_end = cursor + badge_size
@@ -2288,7 +2292,9 @@ def _legend_row(
             "text",
             {
                 "x": format_svg_number(
-                    run_end + mark_gap if right_edge is None else cursor + width
+                    run_end + (mark_gap if mark is not None else 0)
+                    if right_edge is None
+                    else cursor + width
                 ),
                 "y": format_svg_number(baseline),
                 **(
@@ -2314,7 +2320,7 @@ def _append_summary_legend(
     canvas: CompositeCanvas,
     contributions: Mapping[int, RecentContributions] | None = None,
 ) -> None:
-    """The shared seven meanings, with renderer-specific marks and positioning."""
+    """The shared eight meanings, with renderer-specific marks and positioning."""
     record = load_figure_record()
     totals = next(
         composite["totals"]
@@ -2344,7 +2350,9 @@ def _append_summary_legend(
 
     def entry(item: LegendItem) -> tuple[object, str]:
         mark: object
-        if item.marker == "angles":
+        if item.marker is None:
+            mark = None
+        elif item.marker == "angles":
             labels = item.marker_labels or ("",) * len(item.marker_values)
             mark = [
                 (palette[index][middle], label)
@@ -2369,6 +2377,8 @@ def _append_summary_legend(
         mark_gap = Decimal(8) * POSTER_INFORMATION_TYPE_SCALE
 
         def row_width(item: LegendItem) -> Decimal:
+            if item.marker is None:
+                return _text_width(item.text, POSTER_FOOTER_SIZE)
             return (
                 badge_size * (len(item.marker_values) if item.marker_values else 1)
                 + mark_gap
@@ -2697,12 +2707,17 @@ def _append_poster_information(
     repository_baseline = canvas.citations_baseline + POSTER_CLOSING_LINE_PITCH
     font_size = Decimal(POSTER_FOOTER_SIZE)
     document_lines = [
+        (POSTER_TITLE_BASELINE, Decimal(POSTER_TITLE_SIZE)),
         *((baseline, font_size) for baseline in explainer_baselines),
+        *(
+            (canvas.legend_baseline + POSTER_LEGEND_ROW_PITCH * index, font_size)
+            for index in range(4)
+        ),
         *((baseline, font_size) for baseline in credit_baselines),
-        (canvas.citations_baseline, font_size),
-        (repository_baseline, font_size),
         (canvas.credit_baseline, font_size),
         (canvas.stamp_baseline, font_size),
+        (canvas.citations_baseline, font_size),
+        (repository_baseline, Decimal(POSTER_REPOSITORY_SIZE)),
     ]
     if any(
         above + above_size * Decimal("0.3") > below - below_size
@@ -2769,9 +2784,11 @@ def _append_poster_information(
                 "x": format_svg_number(right),
                 "y": format_svg_number(baseline),
                 "text-anchor": "end",
-                "font-family": SUMMARY_FONT,
+                # Arial avoids Quartz's inconsistent slash advances when Cairo emits
+                # the repository URL to PDF; its end anchor then stays flush right.
+                "font-family": POSTER_ITALIC_FONT if feature == "repository" else SUMMARY_FONT,
                 "font-size": size,
-                "font-weight": "700",
+                "font-weight": "400" if feature == "repository" else "700",
                 "fill": "#000000"
                 if feature in {"citations", "repository"}
                 else PAPER_THEME.ink
@@ -2790,7 +2807,6 @@ def _append_poster_information(
         POSTER_TITLE_BASELINE,
         POSTER_TITLE_SIZE,
     )
-    _append_summary_legend(block, spec=spec, canvas=canvas, contributions=contributions)
     for index, runs in enumerate(POSTER_EXPLAINER_LINES):
         _append_summary_explainer(
             block,
@@ -2799,9 +2815,10 @@ def _append_poster_information(
             right_edge=right,
             type_scale=POSTER_INFORMATION_TYPE_SCALE,
             runs=runs,
-            feature=("explainer", "problem-explainer", "degree-explainer")[index],
+            feature=("explainer", "problem-explainer")[index],
             italic_font_family=POSTER_ITALIC_FONT,
         )
+    _append_summary_legend(block, spec=spec, canvas=canvas, contributions=contributions)
     credit_block = sub(
         block,
         "g",
@@ -2825,10 +2842,10 @@ def _append_poster_information(
     )
     for content, baseline in zip(credit_lines, credit_baselines, strict=True):
         text_line("packing-credit-line", content, baseline, parent=credit_block)
-    text_line("citations", POSTER_CITATIONS, canvas.citations_baseline)
-    text_line("repository", SUMMARY_REPOSITORY, repository_baseline)
     text_line("credit", POSTER_DIAGRAM_CREDIT, canvas.credit_baseline)
     text_line("release-stamp", identity.poster_stamp, canvas.stamp_baseline)
+    text_line("citations", POSTER_CITATIONS, canvas.citations_baseline)
+    text_line("repository", SUMMARY_REPOSITORY, repository_baseline, POSTER_REPOSITORY_SIZE)
 
 
 @emission_precision()

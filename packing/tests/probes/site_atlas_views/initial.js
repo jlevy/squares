@@ -36,6 +36,7 @@
           top: at.top - box.top,
           bottom: at.bottom - box.top,
           width: at.width,
+          height: at.height,
           drawing_width: tile.querySelector("img, svg")?.getBoundingClientRect().width,
           grid_from: tile.hasAttribute("data-atlas-grid-from"),
           grid_marker:

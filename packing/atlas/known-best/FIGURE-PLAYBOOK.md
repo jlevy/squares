@@ -30,7 +30,7 @@ change does not require it.
 Each composite records the data commit and date it was drawn from and may trail the data
 until the next version.
 The figure prints its edition in the footer and its date under the title; the poster
-joins the edition and date in its closing line:
+places the data date before a middle dot and the edition in its closing line:
 [Release assets](../../../development.md#release-assets-are-drawn-at-a-version-bump-or-on-demand)
 has the rule, and `--check-composites` lists the cards that trail.
 It refuses to draw while the pinned data revision is stale or the data has uncommitted
@@ -401,24 +401,25 @@ lines and text that intersects a card.
 The problem definition reads: “The square packing problem asks for the side $s(n)$ of
 the smallest square that can hold $n$ unit squares, where the squares are free to rotate
 but cannot overlap.”
-It spans two lines at baselines 1156 and 1246, setting $s$ and both $n$ tokens in italic
-with upright parentheses.
-The definition of `deg` has its own line at 1336. The legend uses the same seven
-semantic items as the website, in two left-aligned columns: four status rows, then three
-recency and color rows.
-At 57 units the columns measure 844.401 and 1515.804 units, with 180 between them; their
-left edges are 4740.795 and 5765.196. The four row baselines are 690, 786, 882 and 978.
-“Best packings due to” begins three balanced construction-credit lines at 1486, 1576 and
-1666\. At 57 units their measured widths are 1894.167, 1913.148 and 1954.359; complete
-names stay intact and all nineteen recorded finders and improvers appear once.
+It spans two lines above the legend at baselines 480 and 570, setting $s$ and both $n$
+tokens in italic with upright parentheses.
+The legend uses the same eight semantic items as the website, in two left-aligned
+columns: four status rows and four recency, color and degree rows.
+The final right-column item is the unbadged text “deg is the algebraic degree of that
+side length.” The four row baselines are 780, 876, 972 and 1068. “Best packings due to”
+begins three balanced construction-credit lines at 1326, 1416 and 1506. Complete names
+stay intact and all nineteen recorded finders and improvers appear once.
 The visible list has no bracketed citations; all seven full source keys remain in the
 SVG metadata and the separate bibliography.
-A 180-unit section gap and an additional 105-unit blank line separate the credits from
-four right-aligned closing lines: “The Squares Project” at 1951, the repository URL at
-2056, “Diagram by Joshua Levy with the help of a few billion tokens from Claude and
-Codex” at 2161, and the generated edition beside the data date at 2266. All four lines
-use 57-unit type and 105-unit leading; the project name and URL are black.
-The final line’s lower extent is 2283.1, inside the block’s 2311-unit bottom.
+A 180-unit section gap separates the credits from “Diagram by Joshua Levy” at 1686. The
+data date, a middle dot and the generated edition follow at 1791. An ordinary blank line
+separates that stamp from “Citations and details in The Squares Project” at 2001 and
+`github.com/jlevy/squares` at 2106. The diagram, stamp and citations lines use 57-unit
+type; the URL uses 42-unit regular type at weight 400. The closing has 105-unit leading;
+the citations line and URL are black.
+The URL uses Arial first so its measured slash advances match the embedded PDF font and
+its final glyph ends flush with the information block’s right edge.
+The final line’s lower extent stays inside the block’s 2311-unit bottom.
 The rectangle clears row ten’s rightmost card by 102 units and ends 77 units above that
 row.
 The poster has no publication subtitle; its closing date is the date of the recorded
