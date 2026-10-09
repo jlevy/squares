@@ -5,7 +5,7 @@ title: "Website: compact homepage, consistent case layouts, and scroll-aware nav
 kind: epic
 status: in_progress
 priority: 1
-version: 29
+version: 30
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -29,7 +29,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:13:39.980Z
-updated_at: 2026-10-09T01:04:42.121Z
+updated_at: 2026-10-09T01:41:27.752Z
 started_at: 2026-10-08T23:22:05.552Z
 ---
-W9 website remediation. Confirmed homepage order: short problem intro with centered project card to About; Atlas preview with Expand and Explore; Recent Major Results; Learn More with all papers, PDFs and videos; compact resources. Show eight initial Atlas cases and up to twelve current S4+ results from the last 180 days; count/scope text is sans-serif chrome. Center single-card groups, use uppercase buttons through shared design rules, and make popover headings compact and consistent. Move the full project narrative to About, immediately before GitHub in the shared navigation. Repair n=291 page/popover math and narrow layouts, remove duplicate loaded result titles, and add shared Headroom behavior (hide down, show immediately up). Ten implementation/verification issues track the wave. The owner canceled the PDF description change and will handle it separately. Build and serve a local draft before publishing.
+W9 website remediation tracked by eleven implementation beads and combined verification. Preserve original hero and exact problem introduction; centered About project card; compact original SVG Atlas preview with Expand/Explore; Recent Major Results S4+ cap12, sans scope text and centered medium-width LEGEND box; Learn More papers and separate PDF/Video groups; Other Square Packing Projects on homepage. PDFs also on Papers, video also on Visualize, neither on Atlas. Keep Squares Project Documentation and full project narrative on About, shared nav before GitHub. Shared uppercase buttons, gear baseline alignment, Headroom hide-down/show-up, compact consistent headings, n291 case/math/narrow-layout repair and unique loaded result title. Scientific PDF-description edit remains canceled for owner separate work. Build and serve a local draft before publication.
