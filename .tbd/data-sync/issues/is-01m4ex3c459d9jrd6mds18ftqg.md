@@ -5,7 +5,7 @@ title: Tighten the homepage with visible atlas and results previews
 kind: feature
 status: in_progress
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -17,7 +17,7 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:20:43.908Z
-updated_at: 2026-10-09T00:33:09.623Z
+updated_at: 2026-10-09T00:50:46.765Z
 started_at: 2026-10-08T23:47:57.505Z
 ---
-Keep the homepage short with tight introductions. Confirmed order: square packing problem intro containing a compact The Squares Project card to about.html below its text; Atlas preview immediately second; Learn More immediately below Atlas with all paper cards; recent Results preview; compact resources. Move the full project narrative to About while preserving all homepage paper links under Learn More. Keep both previews visible, with proposed limits of eight atlas tiles and six results. Add prominent Explore the atlas and View all results buttons to atlas.html and all-results.html, visible without expansion. Reuse registered result selection and canonical links. Keep visualization, documentation, related projects and contribution paths accessible; reconcile think-lt7k. Browser acceptance verifies section order, paper-card grouping, project-card target and primary buttons. Integrate after L4 Atlas and L8 About. See L3 in the spec.
+Keep the homepage short. Confirmed order: brief problem intro with a centered The Squares Project card to About; Atlas preview immediately second; Recent Major Results immediately after Atlas; Learn More with all papers plus visible PDF/video cards; compact resources. Initially show eight atlas cases and up to twelve S4-or-higher results from the last180days, excluding superseded entries; keep full results-page filters unchanged. Remove the obvious recent-progress introduction and render the count/scope paragraph in sans-serif chrome. Center every single-card group. Prominent uppercase Explore the atlas and View all results buttons lead to dedicated pages; think-hyd6 tracks inline Atlas expansion. Preserve every resource and canonical link, including moved project material on About. See L3 in the spec.
