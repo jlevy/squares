@@ -6,14 +6,16 @@ and attributed metadata only. It neither verifies geometry nor changes any case.
 
 Every digest comparison here crosses one boundary (OR-16): Francisco Couzo's repository,
 whose source bytes stay outside Git because redistribution is not established. The
-expected values are that repository's commit, tree and blob identities pinned at review
-in `PINS`, each tree rebuilt in full against its pin. `check_ordinary` holds the
-acquired commit records and complete blob bytes against them, which catches a
-substituted, altered or mislabelled source file. `check_packet` rebuilds each report's
-text from the retained facts and holds it against its pinned blob identity, the only
-retained witness of the unretained bytes, which catches an edited, rounded or dropped
-pose token. No comparison names a file this repository wrote, decides geometry or pins
-code; `devtools/integrity-ceremony.yaml` admits the module as a download.
+expected values are the three commit and tree ids pinned at review in `PINS`, and the
+blob ids those trees bind once each is rebuilt in full against its pinned root.
+`check_ordinary` holds the acquired commit records and complete blob bytes against them,
+which catches a substituted, altered or mislabelled source file. `check_packet` rebuilds
+the retained trees and each report's text from the retained facts, and holds the text
+against its tree-bound blob id, the only retained witness of the unretained bytes, which
+catches an edited, rounded or dropped pose token. The retained commit block was written
+from `PINS`, so it is compared whole rather than label by label. No comparison names a
+file this repository wrote, decides geometry or pins code;
+`devtools/integrity-ceremony.yaml` admits the module as a download.
 """
 
 from __future__ import annotations
@@ -215,7 +217,13 @@ def input_roster() -> set[tuple[str, str, str]]:
     )
 
 
-def check_structure(packet: dict[str, Any]) -> set[str]:
+def check_structure(packet: dict[str, Any], *, acquired: bool = True) -> set[str]:
+    """The pinned lineage, every tree rebuilt against its root, and the complete roster.
+
+    An acquired preparation's commit records are held against `PINS` here. The retained
+    packet's commit block was written from `PINS` by `export_contents`, so `check_packet`
+    compares it whole instead and passes `acquired=False`; its trees are still rebuilt.
+    """
     if (
         packet.get("repository") != REPOSITORY
         or type(packet.get("standing_horizon")) is not int
@@ -230,7 +238,7 @@ def check_structure(packet: dict[str, Any]) -> set[str]:
         raise ValueError("fixed source scope or lineage differs")
     for sha, (root, parent) in PINS.items():
         commit = packet["commits"][sha]
-        if (
+        if acquired and (
             type(commit) is not dict
             or commit.get("sha") != sha
             or type(commit.get("tree")) is not dict
@@ -238,8 +246,9 @@ def check_structure(packet: dict[str, Any]) -> set[str]:
             or type(commit.get("parents")) is not list
             or [item.get("sha") for item in commit["parents"] if type(item) is dict] != [parent]
             or len(commit["parents"]) != 1
-            or tree_root(packet["trees"][sha]) != root
         ):
+            raise ValueError("pinned Git root or parent differs")
+        if tree_root(packet["trees"][sha]) != root:
             raise ValueError("pinned Git root or parent differs")
     inputs = packet.get("inputs")
     if type(inputs) is not list:
@@ -497,13 +506,13 @@ def check_packet(destination: Path = PACKET) -> dict[int, str]:
     custody = source.get("custody")
     if type(custody) is not dict or set(custody) != CUSTODY_KEYS:
         raise ValueError("derived custody cannot retain raw source fields")
-    check_structure(custody)
     expected_commits = {
         sha: {"sha": sha, "tree": {"sha": root}, "parents": [{"sha": parent}]}
         for sha, (root, parent) in PINS.items()
     }
     if custody["commits"] != expected_commits:
         raise ValueError("derived commit metadata differs")
+    check_structure(custody, acquired=False)
     cases = source.get("cases")
     if type(cases) is not list or [row.get("n") for row in cases if type(row) is dict] != list(
         COUNTS
