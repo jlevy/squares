@@ -5,7 +5,7 @@ title: "n17: reconcile the current reported #413 patterns with admitted, tail an
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/reviews/review-2026-10-07-n17-issue-coordination.md
 delegate: claude-code@spud10.local
 labels: []
@@ -14,28 +14,11 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-08T08:26:18.000Z
-updated_at: 2026-10-08T16:23:48.854Z
+updated_at: 2026-10-09T07:55:24.669Z
 started_at: 2026-10-08T16:08:23.148Z
 ---
-Astra's intake of [#413's 07:47 update](https://github.com/jlevy/squares/issues/413#issuecomment-6055253328)
-counts 31 reported patterns: four reported standing-FULL passes, sixteen fast-only passes
-and eleven computed results. No new result is admitted.
+Current #413 reconciliation retains 33 reported rows: two unmodified standing FULL, two parallel standing-node checks plus fast, eighteen fast-only and eleven computed. Existing reviewed disposition: https://github.com/jlevy/squares/issues/413#issuecomment-6065911258 . Draft #454 preserves corrections 6064272233/6064443079. Against the frozen #404 60-entry baseline, the conditional union is 2,234 orbits / 17,604 states; only row 23 reaches the hard tail (one orbit / eight states), and none matches the first eight. All 35 contributor classes including #358 remain unadmitted. The metadata join is implemented/reviewed. Remaining work: complete certificate availability/custody; original cell, frame, cap, independent closed-angle and guard joins; standing FULL replay; canonical D4 marginal admission. Row 23 is Computed with availability unknown; rows 3/4 need standing replay; row 33's huge certificate remains an ungenerated estimate. Preserve the frozen pilot order. No new admission or bound.
 
-Build a retained metadata reconciliation preserving the exact catalogue, frame, cap,
-closed angle domain, boundary conventions, guards, names, certificate paths and evidence
-status. Compare D4 equality and declared containment against the 60 admitted classes,
-current 95-orbit roster and the frozen first-eight P8 pilot (`think-dvcs`). Names alone
-do not permit subtraction. The join establishes overlap of declared obligations and
-avoids duplicate producer work; it does not establish exclusions.
+## Notes
 
-Repackaged rows 1–4 and #358 require fresh manifest identities. Class `14355456` has a
-reported floating witness that warrants scheduling caution, pending exact validation.
-Preserve the first-eight selection: exclusion of actual square placements need not make
-the weaker shared-centre LP infeasible. Complete standing-FULL custody and ordinary
-admission remain separate. Neither the metadata join nor an LP was run during this intake.
-
-Follow the [immutable intake contract](https://github.com/jlevy/squares/blob/ecb0bf82c38958089c7a41aa3980ce62dcc848b8/docs/project/reviews/review-2026-10-07-n17-issue-coordination.md#L75).
-
-<!-- This document follows common-doc-guidelines.md.
-See github.com/jlevy/practical-prose and review guidelines before editing.
--->
+October 9 handoff reconciliation: the current Description supersedes stale source/CI/224MiB approval next-action wording in historical Notes. All actual execution receipts and historical failures remain retained. Main3213 is unchanged; no source edits, target computations, CI dispatches, merges or draft promotions occurred in this pass. Status and dependency map: https://github.com/jlevy/squares/issues/405 . Original complete source handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731 . Supporting issue updates: https://github.com/jlevy/squares/issues/400#issuecomment-6076664631 and https://github.com/jlevy/squares/issues/445#issuecomment-6076662312 .
