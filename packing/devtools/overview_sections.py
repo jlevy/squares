@@ -1739,6 +1739,11 @@ def hero() -> str:
 #: every source repository in the source-coverage register.
 OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
+        "https://github.com/wand125/square-packing",
+        "wand125",
+        "Canonical certificate and checker repository; historical source pins remain valid.",
+    ),
+    (
         "https://github.com/lollipoll/couzo-five-exact-certificates",
         "Seth Rehwaldt",
         (

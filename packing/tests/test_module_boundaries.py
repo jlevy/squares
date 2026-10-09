@@ -1329,11 +1329,6 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_refinement_custody.py": {
             "test_production_snapshot_copies_complete_refinement_custody",  # 19.36s
         },
-        # Same hosted job: full-roster batch plus nine fresh standalone complete-roster
-        # admissions and wrong-root refusal. No shared build or geometric decider runs.
-        "test_squish_second_update_confirmation.py": {
-            "test_linked_proof_batch_matches_all_fresh_standalone_checks",  # 15.24s
-        },
         # 3s of call time across 1, measured 2026-09-20: `git worktree add --detach` of
         # Session 148's opening commit -- a whole checkout of the tree -- and then
         # `git apply --check` of both retained partial diffs in it. The file's two other
