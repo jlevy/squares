@@ -7,8 +7,9 @@ import json
 import math
 import re
 from collections.abc import Callable, Iterator
+from contextlib import contextmanager
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, Any, Literal, cast
 from unittest.mock import Mock
 from urllib.parse import urlsplit
 
@@ -296,15 +297,22 @@ def results_font_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]
         server.server_close()
 
 
-def _prose_font_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[str, Any]]]:
+def _prose_font_reading(
+    page: Page, *, paragraph_count: int = 3
+) -> tuple[list[dict[str, float]], list[dict[str, Any]]]:
     """Actual opening-paragraph boxes and Chromium's font attribution, not CSS names."""
     paragraphs = page.locator(".site-page > p")
     boxes = []
-    for paragraph in paragraphs.all()[:3]:
+    for paragraph in paragraphs.all()[:paragraph_count]:
         box = paragraph.bounding_box()
         assert box is not None
         boxes.append(dict(box))
-    assert len(boxes) == 3
+    assert len(boxes) == paragraph_count
+    return boxes, _platform_fonts(page, ".site-page > p")
+
+
+def _platform_fonts(page: Page, selector: str) -> list[dict[str, Any]]:
+    """Read the actual glyph providers, including descendants, through Chromium."""
     session = page.context.new_cdp_session(page)
     try:
         session.send("DOM.enable")
@@ -312,101 +320,350 @@ def _prose_font_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[s
         document = session.send("DOM.getDocument")
         selected = session.send(
             "DOM.querySelector",
-            {"nodeId": document["root"]["nodeId"], "selector": ".site-page > p"},
+            {"nodeId": document["root"]["nodeId"], "selector": selector},
         )
+        assert selected["nodeId"]
         fonts = session.send("CSS.getPlatformFontsForNode", {"nodeId": selected["nodeId"]})
-        return boxes, fonts["fonts"]
+        return fonts["fonts"]
     finally:
         session.detach()
 
 
+def _font_inventory(fonts: list[dict[str, Any]]) -> list[tuple[Any, ...]]:
+    fields = ("familyName", "postScriptName", "isCustomFont", "glyphCount")
+    return sorted(tuple(face[key] for key in fields) for face in fonts)
+
+
+@contextmanager
+def _record_font_phases(
+    record_property: Callable[[str, object], None], protocol: dict[str, Any]
+) -> Iterator[dict[str, Any]]:
+    """Keep completed phases even when a later acquisition or assertion refuses."""
+    diagnostic: dict[str, Any] = {"protocol": protocol, "phase": "normal"}
+    try:
+        yield diagnostic
+    finally:
+        record_property("font_arrival", json.dumps(diagnostic, sort_keys=True))
+
+
+def _held_prose_font_arrival(
+    browser: Browser,
+    url: str,
+    fallback: str,
+    *,
+    width: int = 390,
+    scheme: Literal["light", "dark"] = "light",
+    paragraph_count: int = 3,
+    record_property: Callable[[str, object], None],
+) -> dict[str, Any]:
+    """Hold one real font response, retaining normal/held/released native evidence."""
+    protocol = {
+        "page": urlsplit(url).path,
+        "width": width,
+        "height": 900,
+        "scheme": scheme,
+        "cache": "fresh contexts",
+        "network": "local gzip; PT Serif normal response held until initial sample",
+        "fallback": fallback,
+        "paragraph_count": paragraph_count,
+        "cls_limit": check_site_rendering.CLS_LIMIT,
+        "performance_regime": "controlled font arrival; not the production load gate",
+    }
+    with _record_font_phases(record_property, protocol) as diagnostic:
+        # The reference is the same real page with its final font, so a fallback fix
+        # cannot quietly change the published paragraph geometry or typeface.
+        reference = browser.new_context(
+            viewport={"width": width, "height": 900}, color_scheme=scheme
+        )
+        try:
+            check_site_rendering.install_observer(reference)
+            view = reference.new_page()
+            view.goto(url, wait_until="load")
+            check_site_rendering.wait_for_fonts(view)
+            view.wait_for_timeout(check_site_rendering.SETTLE_MS)
+            expected, expected_fonts = _prose_font_reading(
+                view, paragraph_count=paragraph_count
+            )
+            normal_report = check_site_rendering.read_report(view)
+            diagnostic["normal"] = {
+                "boxes": expected,
+                "fonts": expected_fonts,
+                "report": normal_report,
+            }
+        finally:
+            reference.close()
+
+        diagnostic["phase"] = "held"
+        context = browser.new_context(
+            viewport={"width": width, "height": 900}, color_scheme=scheme
+        )
+        held: list[Route] = []
+        try:
+            check_site_rendering.install_observer(context)
+
+            def hold_font(route: Route) -> None:
+                held.append(route)
+
+            context.route("**/assets/fonts/pt-serif-latin-400-normal.*.woff2", hold_font)
+            if fallback != "platform":
+
+                def select_fallback(route: Route) -> None:
+                    response = route.fetch()
+                    css = re.sub(r'"Site Prose Georgia"\s*,\s*', "", response.text())
+                    if fallback == "unadjusted":
+                        css = re.sub(r'"Site Prose Times"\s*,\s*', "", css)
+                    route.fulfill(response=response, body=css)
+
+                context.route("**/assets/css/site.*.css", select_fallback)
+            page = context.new_page()
+            page.goto(url, wait_until="domcontentloaded")
+            page.wait_for_timeout(check_site_rendering.SETTLE_MS)
+            assert len(held) == 1
+            held_boxes, temporary = _prose_font_reading(page, paragraph_count=paragraph_count)
+            held_report = check_site_rendering.read_report(page)
+            diagnostic["held"] = {
+                "boxes": held_boxes,
+                "fonts": temporary,
+                "report": held_report,
+            }
+            assert any(
+                any(
+                    name in face["postScriptName"]
+                    for name in ("Georgia", "TimesNewRoman", "LiberationSerif")
+                )
+                for face in temporary
+            )
+            assert not any(face["postScriptName"] == "PTSerif-Regular" for face in temporary)
+            if fallback == "times":
+                assert all(face["familyName"] != "Georgia" for face in temporary)
+            diagnostic["phase"] = "released"
+            for request in held:
+                request.continue_()
+            page.wait_for_load_state("load")
+            check_site_rendering.wait_for_fonts(page)
+            page.wait_for_timeout(check_site_rendering.SETTLE_MS)
+            actual, final = _prose_font_reading(page, paragraph_count=paragraph_count)
+            report = check_site_rendering.read_report(page)
+            diagnostic["released"] = {"boxes": actual, "fonts": final, "report": report}
+            assert any(
+                face["postScriptName"] == "PTSerif-Regular" and face["isCustomFont"]
+                for face in final
+            )
+            assert _font_inventory(final) == _font_inventory(expected_fonts)
+            for before, after in zip(expected, actual, strict=True):
+                assert after == pytest.approx(before, abs=0.04)
+            assert report["shownMath"] > 0
+            assert report["unreadableMath"] == 0
+            assert report["supported"], report
+            font_events = report["fontEvents"]
+            started = [
+                event["startTime"] for event in font_events if event["type"] == "loading"
+            ]
+            completed = [
+                event["startTime"] for event in font_events if event["type"] == "loadingdone"
+            ]
+            assert started, font_events
+            assert completed, font_events
+            assert completed[-1] >= started[-1] > 0, font_events
+            assert report["lcpMs"] > 0, report
+            # Holding a font, substituting CSS and inspecting fonts through CDP is
+            # not the production load protocol. Keep readability and native CLS here;
+            # The production CLI enforces LCP, task and blocking budgets on normal loads.
+            assert not check_site_rendering.problems(report, javascript=False), report
+            diagnostic["phase"] = "complete"
+            return diagnostic
+        finally:
+            context.close()
+
+
 @pytest.mark.parametrize("fallback", ["platform", "times", "unadjusted"])
 def test_results_prose_font_arrival_retains_layout(
-    browser: Browser, results_font_site: str, fallback: str
+    browser: Browser,
+    results_font_site: str,
+    fallback: str,
+    record_property: Callable[[str, object], None],
 ) -> None:
-    # The reference is the same real page with its final font, so a fallback fix
-    # cannot quietly change the published paragraph geometry or typeface.
-    reference = browser.new_context(viewport={"width": 390, "height": 900})
-    try:
-        view = reference.new_page()
-        view.goto(results_font_site, wait_until="load")
-        check_site_rendering.wait_for_fonts(view)
-        view.wait_for_timeout(check_site_rendering.SETTLE_MS)
-        expected, _ = _prose_font_reading(view)
-    finally:
-        reference.close()
+    report = _held_prose_font_arrival(
+        browser, results_font_site, fallback, record_property=record_property
+    )["released"]["report"]
+    if fallback == "unadjusted":
+        # The original fallback remains a negative control for the unchanged guard.
+        assert report["cls"] > check_site_rendering.CLS_LIMIT, report
+    else:
+        assert report["cls"] <= check_site_rendering.CLS_LIMIT, report
 
-    context = browser.new_context(viewport={"width": 390, "height": 900})
-    held: list[Route] = []
-    try:
-        check_site_rendering.install_observer(context)
 
-        def hold_font(route: Route) -> None:
-            held.append(route)
+@pytest.mark.parametrize("scheme", ["light", "dark"])
+@pytest.mark.parametrize("fallback", ["platform", "times"])
+def test_frontier_prose_font_arrival_retains_layout(
+    browser: Browser,
+    frontier_native_site: str,
+    frontier_math_counts: tuple[int, int],
+    *,
+    fallback: str,
+    scheme: Literal["light", "dark"],
+    record_property: Callable[[str, object], None],
+) -> None:
+    diagnostic = _held_prose_font_arrival(
+        browser,
+        frontier_native_site,
+        fallback,
+        width=1280,
+        scheme=scheme,
+        paragraph_count=4,
+        record_property=record_property,
+    )
+    report = diagnostic["released"]["report"]
+    assert report["shownMath"] == frontier_math_counts[1]
+    assert report["cls"] <= check_site_rendering.CLS_LIMIT, diagnostic
 
-        context.route("**/assets/fonts/pt-serif-latin-400-normal.*.woff2", hold_font)
-        if fallback != "platform":
 
-            def select_fallback(route: Route) -> None:
-                response = route.fetch()
-                css = re.sub(r'"Site Prose Georgia"\s*,\s*', "", response.text())
-                if fallback == "unadjusted":
-                    css = re.sub(r'"Site Prose Times"\s*,\s*', "", css)
-                route.fulfill(response=response, body=css)
-
-            context.route("**/assets/css/site.*.css", select_fallback)
-        page = context.new_page()
-        page.goto(results_font_site, wait_until="domcontentloaded")
-        page.wait_for_timeout(check_site_rendering.SETTLE_MS)
-        assert len(held) == 1
-        _, temporary = _prose_font_reading(page)
-        assert any(
-            any(
-                name in face["postScriptName"]
-                for name in ("Georgia", "TimesNewRoman", "LiberationSerif")
-            )
-            for face in temporary
+@pytest.mark.parametrize("scheme", ["light", "dark"])
+def test_frontier_katex_font_arrival_retains_layout(
+    browser: Browser,
+    frontier_native_site: str,
+    frontier_math_counts: tuple[int, int],
+    scheme: Literal["light", "dark"],
+    record_property: Callable[[str, object], None],
+) -> None:
+    """Separate mathematical-face arrival from the prose-font intervention."""
+    protocol: dict[str, Any] = {
+        "page": urlsplit(frontier_native_site).path,
+        "width": 1280,
+        "height": 900,
+        "scheme": scheme,
+        "cache": "fresh contexts",
+        "network": "local gzip; KaTeX font responses held until initial sample",
+        "cls_limit": check_site_rendering.CLS_LIMIT,
+        "performance_regime": "controlled font arrival; not the production load gate",
+    }
+    with _record_font_phases(record_property, protocol) as diagnostic:
+        math_selector = ".site-page > p .katex-html .mrel"
+        reference = browser.new_context(
+            viewport={"width": 1280, "height": 900}, color_scheme=scheme
         )
-        assert not any(face["postScriptName"] == "PTSerif-Regular" for face in temporary)
-        if fallback == "times":
-            assert all(face["familyName"] != "Georgia" for face in temporary)
-        for request in held:
-            request.continue_()
-        page.wait_for_load_state("load")
-        check_site_rendering.wait_for_fonts(page)
-        page.wait_for_timeout(check_site_rendering.SETTLE_MS)
-        actual, final = _prose_font_reading(page)
-        assert any(
-            face["postScriptName"] == "PTSerif-Regular" and face["isCustomFont"]
-            for face in final
+        try:
+            check_site_rendering.install_observer(reference)
+            view = reference.new_page()
+            view.goto(frontier_native_site, wait_until="load")
+            check_site_rendering.wait_for_fonts(view)
+            view.wait_for_timeout(check_site_rendering.SETTLE_MS)
+            expected, expected_prose = _prose_font_reading(view, paragraph_count=4)
+            expected_math = _platform_fonts(view, math_selector)
+            normal_report = check_site_rendering.read_report(view)
+            diagnostic["normal"] = {
+                "boxes": expected,
+                "prose_fonts": expected_prose,
+                "math_fonts": expected_math,
+                "report": normal_report,
+            }
+        finally:
+            reference.close()
+        assert any("KaTeX" in face["postScriptName"] for face in expected_math), expected_math
+
+        diagnostic["phase"] = "held"
+        context = browser.new_context(
+            viewport={"width": 1280, "height": 900}, color_scheme=scheme
         )
-        for before, after in zip(expected, actual, strict=True):
-            assert after == pytest.approx(before, abs=0.04)
-        report = check_site_rendering.read_report(page)
-        assert report["shownMath"] > 0
-        assert report["unreadableMath"] == 0
-        assert report["supported"], report
-        font_events = report["fontEvents"]
-        started = [event["startTime"] for event in font_events if event["type"] == "loading"]
-        completed = [
-            event["startTime"] for event in font_events if event["type"] == "loadingdone"
-        ]
-        assert started, font_events
-        assert completed, font_events
-        assert completed[-1] >= started[-1] > 0, font_events
-        assert report["lcpMs"] > 0, report
-        # Holding a font, substituting CSS and inspecting fonts through CDP is
-        # not the production load protocol. Keep readability and native CLS here;
-        # The production CLI enforces LCP, task and blocking budgets on normal loads.
-        assert not check_site_rendering.problems(report, javascript=False), report
-        if fallback == "unadjusted":
-            # The original fallback is a real negative control: exposing a
-            # first paint before PT Serif arrives must still trip the .1 guard.
-            assert report["cls"] > check_site_rendering.CLS_LIMIT, report
-        else:
-            assert report["cls"] <= check_site_rendering.CLS_LIMIT, report
-    finally:
-        context.close()
+        held: list[Route] = []
+        released = False
+        try:
+            check_site_rendering.install_observer(context)
+
+            def hold_font(route: Route) -> None:
+                if released:
+                    route.continue_()
+                else:
+                    held.append(route)
+
+            context.route("**/assets/fonts/KaTeX_*.woff2", hold_font)
+            page = context.new_page()
+            page.goto(frontier_native_site, wait_until="domcontentloaded")
+            page.wait_for_timeout(check_site_rendering.SETTLE_MS)
+            assert held
+            held_boxes, held_prose = _prose_font_reading(page, paragraph_count=4)
+            held_math = _platform_fonts(page, math_selector)
+            held_report = check_site_rendering.read_report(page)
+            protocol["held_fonts"] = [urlsplit(request.request.url).path for request in held]
+            diagnostic["held"] = {
+                "boxes": held_boxes,
+                "prose_fonts": held_prose,
+                "math_fonts": held_math,
+                "report": held_report,
+            }
+            assert any(face["postScriptName"] == "PTSerif-Regular" for face in held_prose)
+            assert not any("KaTeX" in face["postScriptName"] for face in held_math), held_math
+            diagnostic["phase"] = "released"
+            released = True
+            for request in held:
+                request.continue_()
+            page.wait_for_load_state("load")
+            check_site_rendering.wait_for_fonts(page)
+            page.wait_for_timeout(check_site_rendering.SETTLE_MS)
+            actual, final_prose = _prose_font_reading(page, paragraph_count=4)
+            final_math = _platform_fonts(page, math_selector)
+            report = check_site_rendering.read_report(page)
+            diagnostic["released"] = {
+                "boxes": actual,
+                "prose_fonts": final_prose,
+                "math_fonts": final_math,
+                "report": report,
+            }
+            assert _font_inventory(final_prose) == _font_inventory(expected_prose), diagnostic
+            assert _font_inventory(final_math) == _font_inventory(expected_math), diagnostic
+            for before, after in zip(expected, actual, strict=True):
+                assert after == pytest.approx(before, abs=0.04), diagnostic
+            assert report["shownMath"] == frontier_math_counts[1], diagnostic
+            assert report["supported"], diagnostic
+            assert not check_site_rendering.problems(report, javascript=False), diagnostic
+            assert report["cls"] <= check_site_rendering.CLS_LIMIT, diagnostic
+            diagnostic["phase"] = "complete"
+        finally:
+            context.close()
+
+
+@pytest.mark.parametrize("refusal_phase", ["held", "released"])
+def test_font_refusal_retains_completed_phase_evidence(
+    browser: Browser,
+    frontier_native_site: str,
+    monkeypatch: pytest.MonkeyPatch,
+    refusal_phase: str,
+) -> None:
+    original = _platform_fonts
+    reads = 0
+    records: list[tuple[str, object]] = []
+
+    def refuse_font(page: Page, selector: str) -> list[dict[str, Any]]:
+        nonlocal reads
+        measured = original(page, selector)
+        reads += 1
+        target = 2 if refusal_phase == "held" else 3
+        return [] if reads == target else measured
+
+    monkeypatch.setitem(globals(), "_platform_fonts", refuse_font)
+    with pytest.raises(AssertionError):
+        _held_prose_font_arrival(
+            browser,
+            frontier_native_site,
+            "platform",
+            width=1280,
+            paragraph_count=4,
+            record_property=lambda name, value: records.append((name, value)),
+        )
+    assert len(records) == 1
+    name, serialized = records[0]
+    assert name == "font_arrival"
+    assert isinstance(serialized, str)
+    report = json.loads(serialized)
+    assert report["phase"] == refusal_phase
+    phases = ("normal", "held", "released")
+    completed = phases[: phases.index(refusal_phase) + 1]
+    assert tuple(phase for phase in phases if phase in report) == completed
+    for phase in completed:
+        assert len(report[phase]["boxes"]) == 4
+        assert report[phase]["report"]["supported"]
+        assert "layoutShifts" in report[phase]["report"]
+    assert report[refusal_phase]["fonts"] == []
 
 
 @pytest.mark.parametrize(
