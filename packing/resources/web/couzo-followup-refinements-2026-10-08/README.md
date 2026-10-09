@@ -54,7 +54,7 @@ their printed sides quoted.
 Only the five rational certificates enter geometry decisions.
 The same commit also changes the outside-horizon `n375.txt` and `n378.txt`; this packet
 records their identities and printed sides only, and their claims stay with the
-[outside-horizon packet](../couzo-extended-reports-2026-10-09/README.md).
+[outside-horizon packet](../couzo-extended-reports-2026-10-08/README.md).
 
 ## Exact Replay
 

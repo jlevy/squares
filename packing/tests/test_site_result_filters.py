@@ -597,7 +597,7 @@ def test_direct_retired_results_fragment_has_a_visible_static_notice_and_tombsto
             "link", name=f"{name.upper()} withdrawal explanation", exact=True
         )
         assert link.get_attribute("href") == row.path
-        with page.expect_navigation(wait_until="load"):
+        with page.expect_navigation(url=pages[row.path].as_uri(), wait_until="load"):
             link.click()
         assert_tombstone(page, row, "", "")
     finally:

@@ -3,10 +3,6 @@ name: Certificate page
 "on":
   workflow_dispatch:
     inputs:
-      font_diagnostic:
-        description: Observe held font delivery on the threshold paper without page gates
-        type: boolean
-        default: false
       trace_pdf:
         description: Retain math geometry and repeated PDF draws for diagnosis
         type: boolean
@@ -264,111 +260,6 @@ concurrency:
 # `site/papers/` on their own runner, where they are served, so every check reads the
 # page at its published path and `publish` renames nothing.
 jobs:
-
-  # Manual controlled font-delivery observation; excluded from qualification.
-  font-diagnostic:
-    if: github.event_name == 'workflow_dispatch' && inputs.font_diagnostic
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: read
-    defaults:
-      run:
-        working-directory: packing
-    steps:
-      - name: Check out the diagnostic branch and exact paper inputs
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          submodules: true
-          persist-credentials: false
-          fetch-depth: 2
-          filter: blob:none
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /*
-            !/packing/resources/*/
-            !/packing/campaign/*/
-            /packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/
-            /packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz
-            /packing/campaign/agent-sessions/session-153-native-full.rows.jsonl
-            /packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/full-replay/RESULT.json
-            /packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/independent-audit.json
-            /packing/resources/web/wand125-tools-2026-09-29/README.md
-            /packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full-summary.json
-            /packing/campaign/agent-sessions/session-153-native-full.json
-            /packing/campaign/agent-sessions/session-153-native-reconciliation.json
-      - name: Preserve the reviewed maintained diagnostic tool
-        run: |
-          mkdir -p "$RUNNER_TEMP/font-diagnostic/probes"
-          cp devtools/check_site_rendering.py "$RUNNER_TEMP/font-diagnostic/"
-          cp -R devtools/probes/check_site_rendering "$RUNNER_TEMP/font-diagnostic/probes/"
-          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/font-diagnostic/tool-source.txt"
-          git ls-files -s devtools/check_site_rendering.py devtools/probes/check_site_rendering >> "$RUNNER_TEMP/font-diagnostic/tool-source.txt"
-      - name: Check out the original immutable paper inputs
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: 4963448e33c39002a48593ef79999940b153f2c0
-          submodules: true
-          persist-credentials: false
-          fetch-depth: 2
-          filter: blob:none
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /*
-            !/packing/resources/*/
-            !/packing/campaign/*/
-            /packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/
-            /packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz
-            /packing/campaign/agent-sessions/session-153-native-full.rows.jsonl
-            /packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/full-replay/RESULT.json
-            /packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/independent-audit.json
-            /packing/resources/web/wand125-tools-2026-09-29/README.md
-            /packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full-summary.json
-            /packing/campaign/agent-sessions/session-153-native-full.json
-            /packing/campaign/agent-sessions/session-153-native-reconciliation.json
-      - name: Retain immutable paper inputs and protocol
-        run: |
-          mkdir -p diagnostics/tool
-          cp -R "$RUNNER_TEMP/font-diagnostic/." diagnostics/tool/
-          git rev-parse HEAD HEAD^{tree} > diagnostics/paper-source.txt
-          git ls-tree --full-tree HEAD vendor/kpress >> diagnostics/paper-source.txt
-          printf '%s\n' 'Controlled font hold; two CDP snapshots; no normal gate credit.' 'Hero aggregates prose/math; physical fonts are not joined to fetched URLs.' > diagnostics/protocol.txt
-      - name: Install uv and Python 3.14
-        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
-        with:
-          version: "0.12.8"
-          python-version: "3.14.7"
-          working-directory: packing
-          enable-cache: true
-          cache-dependency-glob: uv.lock
-      - name: Install Node 24 for KPress math
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
-        with:
-          node-version: "24.18.0"
-      - name: Synchronize locked development dependencies
-        run: uv sync --frozen --group dev
-      - name: Cache the pinned Chromium browser
-        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
-      - name: Install the same pinned Chromium headless shell
-        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
-      - name: Render only the exact threshold paper
-        run: timeout --kill-after=5s 60s uv run --frozen --group dev python -m devtools.render_n11_threshold_bound_review --site diagnostics/site --revision 4963448e33c39002a48593ef79999940b153f2c0 > diagnostics/render.stdout.log 2> diagnostics/render.stderr.log
-      - name: Observe controlled font delivery at 390px light
-        env:
-          PYTHONPATH: ${{ github.workspace }}/packing/src:${{ github.workspace }}/packing
-        run: timeout --kill-after=5s 60s uv run --frozen --group dev python diagnostics/tool/check_site_rendering.py diagnostics/site --page papers/n11-threshold-bound-review.html --font-diagnostic diagnostics/font-delivery.json --font-scenario 390-light > diagnostics/font.stdout.log 2> diagnostics/font.stderr.log
-      - name: Preserve raw diagnostic evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: threshold-font-diagnostic
-          path: packing/diagnostics
-          if-no-files-found: error
-          retention-days: 7
-
   # Which builds this change can affect: each paper, the workbench, and the site's own
   # pages (the overview at `/` and the pages beside it). A pull request that touches
   # none of their inputs does no browser work at
@@ -383,7 +274,6 @@ jobs:
   # The depth of two is what makes the merge commit's first parent -- the base as GitHub
   # merged it -- available to diff against.
   scope:
-    if: "!inputs.font_diagnostic"
     runs-on: ubuntu-latest
     outputs:
       n11_lower_bounds_explainer: ${{ steps.scope.outputs.n11_lower_bounds_explainer }}
@@ -2129,7 +2019,7 @@ jobs:
   # pending until the replacement run supplies it. A failed or cancelled prerequisite in a
   # run that goes on is not `cancelled()`, so this job still runs and still fails.
   pages-required:
-    if: "!cancelled() && !inputs.font_diagnostic"
+    if: "!cancelled()"
     needs:
       - scope
       - prepare

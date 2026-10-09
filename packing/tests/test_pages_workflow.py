@@ -33,14 +33,6 @@ REGISTER = REPO / "packing/devtools/gate-budgets.yaml"
 #: The jobs a pull request never runs: the deploy path, which only a push to `main`
 #: starts, and the dispatch-only timing experiment.
 DEPLOY_PATH = {"deploy", "verify-deployment"}
-#: The manual font-delivery observation: it starts only on a dispatch that sets
-#: `font_diagnostic`, which also skips `scope` and `pages-required`, so it never runs on a
-#: pull request, never deploys and never qualifies anything. It renders the threshold
-#: paper from the frozen #449 inputs, not the prepared page.
-#: `test_font_diagnostic_dispatch_keeps_normal_qualification_separate` pins the condition
-#: that keeps it out of every other mode.
-FONT_DIAGNOSTIC = "font-diagnostic"
-FONT_DIAGNOSTIC_CONDITION = "github.event_name == 'workflow_dispatch' && inputs.font_diagnostic"
 
 # Native dependencies keep these consumers off runners until prepare succeeds.
 # Their bounded artifact join still validates the exact run, attempt and artifact id.
@@ -138,7 +130,7 @@ def browser_check_jobs(jobs: Mapping[str, Mapping[str, Any]]) -> list[str]:
     return [
         name
         for name, job in jobs.items()
-        if name not in {"prepare", "overview", FONT_DIAGNOSTIC, *PAPER_JOBS, *DEPLOY_PATH}
+        if name not in {"prepare", "overview", *PAPER_JOBS, *DEPLOY_PATH}
         and any("playwright install" in step.get("run", "") for step in job.get("steps", []))
     ]
 
@@ -287,11 +279,10 @@ def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
         "workbench_tools.build_site",
     )
     builders = r"python -m (?:" + "|".join(map(re.escape, builder_modules)) + r")\b"
-    assert jobs[FONT_DIAGNOSTIC]["if"] == FONT_DIAGNOSTIC_CONDITION
     for name, job in jobs.items():
         commands = "\n".join(step.get("run", "") for step in job.get("steps", []))
         works = "playwright install" in commands or re.search(builders, commands)
-        if works and name not in {FONT_DIAGNOSTIC, *DEPLOY_PATH}:
+        if works and name not in DEPLOY_PATH:
             directly_scoped = job.get("if") in {
                 f"needs.scope.outputs.{half} == 'true'" for half in halves
             }
@@ -366,12 +357,8 @@ def test_the_required_aggregate_passes_a_justified_skip_and_nothing_else() -> No
     aggregate = jobs["pages-required"]
     # `!cancelled()`, not `always()`: a superseded run reports nothing here, as D-380 made
     # `packing-required` do; a failed or cancelled job in a run that goes on still fails it.
-    assert aggregate["if"] == "!cancelled() && !inputs.font_diagnostic"
-    assert set(needs_of(aggregate)) == set(jobs) - {
-        "pages-required",
-        "font-diagnostic",
-        *DEPLOY_PATH,
-    }
+    assert aggregate["if"] == "!cancelled()"
+    assert set(needs_of(aggregate)) == set(jobs) - {"pages-required", *DEPLOY_PATH}
     step = next(
         item
         for item in aggregate["steps"]
@@ -1344,19 +1331,13 @@ def pull_request_outcomes(
             job = jobs[name]
             needs = needs_of(job)
             condition = str(job.get("if", ""))
-            if condition in {
-                "always()",
-                "!cancelled()",
-                "!cancelled() && !inputs.font_diagnostic",
-            }:
+            if condition in {"always()", "!cancelled()"}:
                 runs = True
             elif condition == "github.event_name == 'workflow_dispatch'":
                 runs = False
             else:
                 gate = _SCOPE_GATE.fullmatch(condition)
-                assert gate or condition in {"", "!inputs.font_diagnostic"}, (
-                    f"{name}: unmodelled condition {condition!r}"
-                )
+                assert gate or not condition, f"{name}: unmodelled condition {condition!r}"
                 runs = all(results[need] == "success" for need in needs)
                 if gate:
                     half, operator = gate.groups()
@@ -1825,9 +1806,6 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
         ),
     }
     assert set(kept) == PAPER_JOBS
-    # The font diagnostic renders the threshold paper, so both of its checkouts keep
-    # exactly that paper's inputs.
-    kept[FONT_DIAGNOSTIC] = kept["n11-threshold-bound-review"]
 
     def keeps(job: str, declared: Path) -> bool:
         for pattern in kept.get(job, ()):
@@ -2266,126 +2244,3 @@ def test_prepare_failure_skips_consumers_and_fails_the_real_aggregate(
         check=False,
     )
     assert ran.returncode == (0 if producer_result == "scope-skipped" else 1), ran
-
-
-@pytest.mark.parametrize(
-    ("event", "requested"),
-    [
-        ("pull_request", False),
-        ("push", False),
-        ("workflow_dispatch", False),
-        ("workflow_dispatch", True),
-    ],
-)
-def test_font_diagnostic_dispatch_keeps_normal_qualification_separate(
-    event: str, *, requested: bool
-) -> None:
-    workflow = load()
-    option = workflow["on"]["workflow_dispatch"]["inputs"]["font_diagnostic"]
-    assert option["type"] == "boolean"
-    assert option["default"] is False
-    jobs = workflow["jobs"]
-    assert jobs["scope"]["if"] == "!inputs.font_diagnostic"
-    assert jobs["pages-required"]["if"] == "!cancelled() && !inputs.font_diagnostic"
-    assert jobs["font-diagnostic"]["if"] == (
-        "github.event_name == 'workflow_dispatch' && inputs.font_diagnostic"
-    )
-    clauses = {
-        "!cancelled()": True,
-        "!inputs.font_diagnostic": not requested,
-        "inputs.font_diagnostic": requested,
-        "github.event_name == 'workflow_dispatch'": event == "workflow_dispatch",
-    }
-    starts = {
-        name
-        for name in ("scope", "pages-required", "font-diagnostic")
-        if all(clauses[part] for part in jobs[name]["if"].split(" && "))
-    }
-    assert starts == ({"font-diagnostic"} if requested else {"scope", "pages-required"})
-    assert needs_of(jobs["font-diagnostic"]) == []
-    # Every ordinary producer descends from scope; diagnostic mode cannot start one.
-    remaining = set(jobs) - {"scope", "pages-required", "font-diagnostic", *DEPLOY_PATH}
-    linked = {"scope"}
-    while remaining:
-        reachable = {name for name in remaining if set(needs_of(jobs[name])) & linked}
-        assert reachable, remaining
-        linked.update(reachable)
-        remaining -= reachable
-    assert set(needs_of(jobs["pages-required"])) == set(jobs) - {
-        "pages-required",
-        "font-diagnostic",
-        *DEPLOY_PATH,
-    }
-
-
-def test_font_diagnostic_is_one_bounded_paper_only_observation() -> None:
-    jobs = load()["jobs"]
-    diagnostic = jobs["font-diagnostic"]
-    assert diagnostic["runs-on"] == jobs["n11-threshold-bound-review"]["runs-on"]
-    assert diagnostic["timeout-minutes"] == 5
-    assert diagnostic["permissions"] == {"contents": "read"}
-    steps = diagnostic["steps"]
-    production_steps = jobs["n11-threshold-bound-review"]["steps"]
-    checkout = next(step for step in steps if "checkout@" in step.get("uses", ""))
-    original_checkout = next(
-        step for step in production_steps if "checkout@" in step.get("uses", "")
-    )
-    assert checkout["uses"] == original_checkout["uses"]
-    assert checkout["with"]["sparse-checkout"] == original_checkout["with"]["sparse-checkout"]
-    assert checkout["with"]["submodules"] is True
-    assert checkout["with"]["persist-credentials"] is False
-    commands = [step["run"] for step in steps if "run" in step]
-    bounded = [command for command in commands if command.startswith("timeout ")]
-    assert len(bounded) == 2
-    assert all(command.startswith("timeout --kill-after=5s 60s ") for command in bounded)
-    assert "-m devtools.render_n11_threshold_bound_review --site diagnostics/site" in bounded[0]
-    assert "--pdf" not in bounded[0]
-    assert (
-        "--font-diagnostic diagnostics/font-delivery.json --font-scenario 390-light"
-        in bounded[1]
-    )
-    assert "--page papers/n11-threshold-bound-review.html" in bounded[1]
-    assert "python diagnostics/tool/check_site_rendering.py diagnostics/site" in bounded[1]
-    original_inputs = [step for step in steps if "checkout@" in step.get("uses", "")][1]
-    assert original_inputs["with"]["ref"] == "4963448e33c39002a48593ef79999940b153f2c0"
-    assert (
-        original_inputs["with"]["sparse-checkout"]
-        == original_checkout["with"]["sparse-checkout"]
-    )
-    assert original_inputs["with"]["submodules"] is True
-    probe_step = next(
-        step
-        for step in steps
-        if step.get("name") == "Observe controlled font delivery at 390px light"
-    )
-    assert probe_step["env"]["PYTHONPATH"] == (
-        "${{ github.workspace }}/packing/src:${{ github.workspace }}/packing"
-    )
-    upload = next(step for step in steps if "upload-artifact@" in step.get("uses", ""))
-    assert upload["if"] == "always()"
-    assert upload["with"]["path"] == "packing/diagnostics"
-    assert upload["with"]["if-no-files-found"] == "error"
-
-
-def test_transported_font_diagnostic_cli_keeps_its_declared_probe_root(tmp_path: Path) -> None:
-    source = REPO / "packing"
-    tool = tmp_path / "tool"
-    tool.mkdir()
-    shutil.copy2(source / "devtools/check_site_rendering.py", tool)
-    shutil.copytree(
-        source / "devtools/probes/check_site_rendering",
-        tool / "probes/check_site_rendering",
-    )
-    environment = dict(os.environ, PYTHONPATH=f"{source / 'src'}:{source}")
-    result = subprocess.run(
-        [sys.executable, str(tool / "check_site_rendering.py"), "--help"],
-        cwd=source,
-        env=environment,
-        capture_output=True,
-        text=True,
-        timeout=20,
-        check=False,
-    )
-    assert result.returncode == 0, result.stderr
-    assert "--font-diagnostic" in result.stdout
-    assert "--font-scenario" in result.stdout

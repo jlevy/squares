@@ -29127,8 +29127,8 @@ evidence:
     relationship_to_generator: not-applicable
     origin: external
     novelty: previously-published
-    source_key: '[Couzo extended-range reports 2026-10-09]'
-    certificate: packing/resources/web/couzo-extended-reports-2026-10-09/acquisition/sources.json
+    source_key: '[Couzo extended-range reports 2026-10-08]'
+    certificate: packing/resources/web/couzo-extended-reports-2026-10-08/acquisition/sources.json
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-10-09'

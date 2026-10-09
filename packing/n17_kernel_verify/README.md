@@ -64,6 +64,21 @@ tool into `cells/cover.json`, is embedded at build time and reported as
 `{"kind": "cover", "design": ...}`, as the Python verifier reports its default cells.
 The exit status is 0 only for PASS.
 
+Receipts are staged in a private temporary file beside the output and atomically replace
+it after the complete JSON has been written and the staged file closed.
+A failed write or replacement returns a nonzero exit without changing an existing
+receipt; handled failures remove staging files and report a cleanup failure if removal
+also fails. An abrupt process kill can leave a staging file, but cannot publish its
+partial contents.
+The update promises atomic visibility, without power-loss durability or
+preservation of destination metadata.
+On Unix the published receipt has mode `0600`; a destination symlink is replaced rather
+than followed. Windows can refuse replacement when another process holds the destination
+open; this is a publication failure.
+Current CI does not compile, lint or run the Windows-only control, so Windows behavior
+remains unqualified; [TESTING.md](TESTING.md) records the native Windows checks required
+for qualification.
+
 Building needs a C toolchain and `m4` for GMP (`build-essential` and `m4` on Ubuntu).
 
 ### Evidence and intake limits
