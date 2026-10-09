@@ -1,0 +1,1463 @@
+{
+  "schema": "external-release-acquisition-inventory/v1",
+  "repository": "wand125/n17-certificates",
+  "tag": "b2-classes-20261005",
+  "release_url": "https://github.com/wand125/n17-certificates/releases/tag/b2-classes-20261005",
+  "object_count": 161,
+  "compressed_bytes": 112191343,
+  "upstream_manifest_sha256": "e366686f30752f7173b0f01d66ef05cf8911521debd2e76b213ed41d99375b3e",
+  "release_metadata_sha256": "ee9db86b7e851c8e4db5d21302b7984809e700e0d05ae9ad2541ec728f2d43ba",
+  "HostedData_v1_conforming": false,
+  "downloaded": false,
+  "objects": [
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/004c4d14a13357e7fbaf3030590825e0adc39ff26f9c5f7e9016d61bf6249f33.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/004c4d14a13357e7fbaf3030590825e0adc39ff26f9c5f7e9016d61bf6249f33.json.gz",
+      "asset": "004c4d14a13357e7fbaf3030590825e0adc39ff26f9c5f7e9016d61bf6249f33.json.gz",
+      "size": 639323,
+      "sha256": "926978175226a00b940ed7a6593c6d9895fd0ce02bea9c211f5ee32493a65a58",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/004c4d14a13357e7fbaf3030590825e0adc39ff26f9c5f7e9016d61bf6249f33.json.gz",
+      "release_asset_id": 612467985
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/02750907f51b359528e8236652c71eacde38107c16d6d1377d9683698bf1f8a8.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/02750907f51b359528e8236652c71eacde38107c16d6d1377d9683698bf1f8a8.json.gz",
+      "asset": "02750907f51b359528e8236652c71eacde38107c16d6d1377d9683698bf1f8a8.json.gz",
+      "size": 491544,
+      "sha256": "e7313b3b1a929d4cec5ee02a560709315d2e1dd37404774ed3fbd63af3325bf4",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/02750907f51b359528e8236652c71eacde38107c16d6d1377d9683698bf1f8a8.json.gz",
+      "release_asset_id": 612468005
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/0793f0c32c14fe0abbf86fe247860c97a47ee1536696a4ea061bbcba3ccf1b07.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/0793f0c32c14fe0abbf86fe247860c97a47ee1536696a4ea061bbcba3ccf1b07.json.gz",
+      "asset": "0793f0c32c14fe0abbf86fe247860c97a47ee1536696a4ea061bbcba3ccf1b07.json.gz",
+      "size": 966679,
+      "sha256": "a734666753b9c992397cfa479fe58e74fdba83b20e5e4c5df2d4999ae1a1c7eb",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/0793f0c32c14fe0abbf86fe247860c97a47ee1536696a4ea061bbcba3ccf1b07.json.gz",
+      "release_asset_id": 612468011
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/07d7db190fc4ef049d5f2026f315e90a53dc3c7f2f4f1a1e4288e6e93ae9f894.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/07d7db190fc4ef049d5f2026f315e90a53dc3c7f2f4f1a1e4288e6e93ae9f894.json.gz",
+      "asset": "07d7db190fc4ef049d5f2026f315e90a53dc3c7f2f4f1a1e4288e6e93ae9f894.json.gz",
+      "size": 501385,
+      "sha256": "67890185ab1179e1bb9b8fa8cc7dcd5e0c4ae40bbc29e9afe461b2c3f680dfb4",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/07d7db190fc4ef049d5f2026f315e90a53dc3c7f2f4f1a1e4288e6e93ae9f894.json.gz",
+      "release_asset_id": 612468015
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/0a603aeecd5bcea24ea28b7e1fc3f74337b3e250555efc58d9ffcca2b19d6923.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/0a603aeecd5bcea24ea28b7e1fc3f74337b3e250555efc58d9ffcca2b19d6923.json.gz",
+      "asset": "0a603aeecd5bcea24ea28b7e1fc3f74337b3e250555efc58d9ffcca2b19d6923.json.gz",
+      "size": 769041,
+      "sha256": "210f0e01d85da812d3fde38065b4a1064c87f1c1ed6b9eeb4ca8bc0afa4b2256",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/0a603aeecd5bcea24ea28b7e1fc3f74337b3e250555efc58d9ffcca2b19d6923.json.gz",
+      "release_asset_id": 612468018
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/0bfd34a69bf9c9fe1e855010e3ec82ac08dc8ff834221f91bde4bf7c8fe511ca.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/0bfd34a69bf9c9fe1e855010e3ec82ac08dc8ff834221f91bde4bf7c8fe511ca.json.gz",
+      "asset": "0bfd34a69bf9c9fe1e855010e3ec82ac08dc8ff834221f91bde4bf7c8fe511ca.json.gz",
+      "size": 650860,
+      "sha256": "ee16c1c3c71e99ddff691ebb6719b1eacf94ab3d58db25f257be9140aace9dc8",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/0bfd34a69bf9c9fe1e855010e3ec82ac08dc8ff834221f91bde4bf7c8fe511ca.json.gz",
+      "release_asset_id": 612468031
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/0ceaae53919cce9bb99e9756ac0fa0e12ad70fd3f4061ec72513277746008e64.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/0ceaae53919cce9bb99e9756ac0fa0e12ad70fd3f4061ec72513277746008e64.json.gz",
+      "asset": "0ceaae53919cce9bb99e9756ac0fa0e12ad70fd3f4061ec72513277746008e64.json.gz",
+      "size": 568019,
+      "sha256": "048553dbe2b5029b0b0fca56b21e0050def676aaea83554719d1d3197a1d8154",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/0ceaae53919cce9bb99e9756ac0fa0e12ad70fd3f4061ec72513277746008e64.json.gz",
+      "release_asset_id": 612468052
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/0df284e804b1c2520ea6664e1c94d89eba3b5b21045b6083a1645ff0df4e3a5d.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/0df284e804b1c2520ea6664e1c94d89eba3b5b21045b6083a1645ff0df4e3a5d.json.gz",
+      "asset": "0df284e804b1c2520ea6664e1c94d89eba3b5b21045b6083a1645ff0df4e3a5d.json.gz",
+      "size": 499902,
+      "sha256": "34c23880dea0f0f526f3bfa6d0c76b9d8abd22903fd7f5d3f96ec1bc736be441",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/0df284e804b1c2520ea6664e1c94d89eba3b5b21045b6083a1645ff0df4e3a5d.json.gz",
+      "release_asset_id": 612468056
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/0e85b277f6a3ec93a3697f23722d3eeef25d51b6eb2343cca865bc1aa760165e.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/0e85b277f6a3ec93a3697f23722d3eeef25d51b6eb2343cca865bc1aa760165e.json.gz",
+      "asset": "0e85b277f6a3ec93a3697f23722d3eeef25d51b6eb2343cca865bc1aa760165e.json.gz",
+      "size": 958472,
+      "sha256": "db4881f364d2de722b73ce2cbc85cd9b170ead4c75d3720fdf9f377f5a08ea63",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/0e85b277f6a3ec93a3697f23722d3eeef25d51b6eb2343cca865bc1aa760165e.json.gz",
+      "release_asset_id": 612468062
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/108a4861aa649a33cff52bf3c388fd65033cc87ad35a845b581e5f826c2d0cf6.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/108a4861aa649a33cff52bf3c388fd65033cc87ad35a845b581e5f826c2d0cf6.json.gz",
+      "asset": "108a4861aa649a33cff52bf3c388fd65033cc87ad35a845b581e5f826c2d0cf6.json.gz",
+      "size": 773534,
+      "sha256": "54480c0d7551d2542a2b347e233e90fba8489f499897a060674326a1c2fb359b",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/108a4861aa649a33cff52bf3c388fd65033cc87ad35a845b581e5f826c2d0cf6.json.gz",
+      "release_asset_id": 612468140
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/13c786c273b14e55f2623a4737d2b4cefe8d1f6fadc9fbb2d055feb7639c3814.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/13c786c273b14e55f2623a4737d2b4cefe8d1f6fadc9fbb2d055feb7639c3814.json.gz",
+      "asset": "13c786c273b14e55f2623a4737d2b4cefe8d1f6fadc9fbb2d055feb7639c3814.json.gz",
+      "size": 756154,
+      "sha256": "00ead04ba1b4b8e42ffa255768109118949616d0cb47eb8e1601b3758e7187d7",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/13c786c273b14e55f2623a4737d2b4cefe8d1f6fadc9fbb2d055feb7639c3814.json.gz",
+      "release_asset_id": 612468139
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/167b988b9b913d1e3bfbd1c4f6f0f2bf22c559e8a0914efc637b9519331086c7.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/167b988b9b913d1e3bfbd1c4f6f0f2bf22c559e8a0914efc637b9519331086c7.json.gz",
+      "asset": "167b988b9b913d1e3bfbd1c4f6f0f2bf22c559e8a0914efc637b9519331086c7.json.gz",
+      "size": 717376,
+      "sha256": "6031924abdc98094ee96678f8724d32aacf2679726c26630005c37f0aa3c4ad1",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/167b988b9b913d1e3bfbd1c4f6f0f2bf22c559e8a0914efc637b9519331086c7.json.gz",
+      "release_asset_id": 612468144
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/19dba52942b3b78b03ecdf19a8f0bd754a8692d1a32637a8197dd1d46b39bebc.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/19dba52942b3b78b03ecdf19a8f0bd754a8692d1a32637a8197dd1d46b39bebc.json.gz",
+      "asset": "19dba52942b3b78b03ecdf19a8f0bd754a8692d1a32637a8197dd1d46b39bebc.json.gz",
+      "size": 660297,
+      "sha256": "e8db552928c187afabc2a1078d46d4c51b89ca3871dc4de6fc55ec6964a0af66",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/19dba52942b3b78b03ecdf19a8f0bd754a8692d1a32637a8197dd1d46b39bebc.json.gz",
+      "release_asset_id": 612468146
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/1a4ce44246214fe8e34ee52f52d61a744400912ef6556015e4f48f560db7592a.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/1a4ce44246214fe8e34ee52f52d61a744400912ef6556015e4f48f560db7592a.json.gz",
+      "asset": "1a4ce44246214fe8e34ee52f52d61a744400912ef6556015e4f48f560db7592a.json.gz",
+      "size": 626106,
+      "sha256": "b1ad979860adaaffb2bc0499a04c2ec553d88e85260ae990e902a6e530201ed8",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/1a4ce44246214fe8e34ee52f52d61a744400912ef6556015e4f48f560db7592a.json.gz",
+      "release_asset_id": 612468143
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/1bf6d6d5aed152817e00e306d0987090db6f3d1763526556d0d7198374019d2f.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/1bf6d6d5aed152817e00e306d0987090db6f3d1763526556d0d7198374019d2f.json.gz",
+      "asset": "1bf6d6d5aed152817e00e306d0987090db6f3d1763526556d0d7198374019d2f.json.gz",
+      "size": 715850,
+      "sha256": "408a094e35f133e9f9e925b4dd9398099ffa5b9253451d7fadf153e0e2ecbef1",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/1bf6d6d5aed152817e00e306d0987090db6f3d1763526556d0d7198374019d2f.json.gz",
+      "release_asset_id": 612468173
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/1db2e163a2df7fef9a8a90afb83241cb84c947603aaf83e0d6ccb86ed44526f6.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/1db2e163a2df7fef9a8a90afb83241cb84c947603aaf83e0d6ccb86ed44526f6.json.gz",
+      "asset": "1db2e163a2df7fef9a8a90afb83241cb84c947603aaf83e0d6ccb86ed44526f6.json.gz",
+      "size": 729776,
+      "sha256": "b1cf8ba0ce32025e155b465c66c8b0de87f659dfea2cb4920af6fb6c6a68f7f8",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/1db2e163a2df7fef9a8a90afb83241cb84c947603aaf83e0d6ccb86ed44526f6.json.gz",
+      "release_asset_id": 612468177
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/1e64d2daa05bb04e2f7c73d06cca09433db8d9ce51348f5b25f7e9bd6319a367.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/1e64d2daa05bb04e2f7c73d06cca09433db8d9ce51348f5b25f7e9bd6319a367.json.gz",
+      "asset": "1e64d2daa05bb04e2f7c73d06cca09433db8d9ce51348f5b25f7e9bd6319a367.json.gz",
+      "size": 499338,
+      "sha256": "a18680f0277b983b64282365188268f5ba1b1ba295e43aa9bcb413303b1901b6",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/1e64d2daa05bb04e2f7c73d06cca09433db8d9ce51348f5b25f7e9bd6319a367.json.gz",
+      "release_asset_id": 612468192
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/1f2e8edaf5b41fcffc8da514a8b40f15c10d57eec1c38f37287d2121240a0e50.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/1f2e8edaf5b41fcffc8da514a8b40f15c10d57eec1c38f37287d2121240a0e50.json.gz",
+      "asset": "1f2e8edaf5b41fcffc8da514a8b40f15c10d57eec1c38f37287d2121240a0e50.json.gz",
+      "size": 686293,
+      "sha256": "60f4d398130889e8d42e6e4b6448caab974a34d3efc206164b8585ed2bf4ffa6",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/1f2e8edaf5b41fcffc8da514a8b40f15c10d57eec1c38f37287d2121240a0e50.json.gz",
+      "release_asset_id": 612468207
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/1fd8737a52ce7a66ffdacce35e543031307041323a2bf28251cd80eef8e6822a.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/1fd8737a52ce7a66ffdacce35e543031307041323a2bf28251cd80eef8e6822a.json.gz",
+      "asset": "1fd8737a52ce7a66ffdacce35e543031307041323a2bf28251cd80eef8e6822a.json.gz",
+      "size": 652362,
+      "sha256": "a9d2d7323a3b3d4311c8f09c4a5ee5562978f656f621929792de66047c881537",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/1fd8737a52ce7a66ffdacce35e543031307041323a2bf28251cd80eef8e6822a.json.gz",
+      "release_asset_id": 612468210
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/1ffcc3ccf77df782f7e7e142f53b6ed350865e26a01f3d67b1c9d90c0f28c347.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/1ffcc3ccf77df782f7e7e142f53b6ed350865e26a01f3d67b1c9d90c0f28c347.json.gz",
+      "asset": "1ffcc3ccf77df782f7e7e142f53b6ed350865e26a01f3d67b1c9d90c0f28c347.json.gz",
+      "size": 668480,
+      "sha256": "6756b4ae36c5c43814110eb2a80ad00ea231346cf515210c860e6d0a5f55862b",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/1ffcc3ccf77df782f7e7e142f53b6ed350865e26a01f3d67b1c9d90c0f28c347.json.gz",
+      "release_asset_id": 612468215
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/20c2f9d968fdae84a5262664b0c577f2b602b805e43f1b0bcb78d4c8026b878b.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/20c2f9d968fdae84a5262664b0c577f2b602b805e43f1b0bcb78d4c8026b878b.json.gz",
+      "asset": "20c2f9d968fdae84a5262664b0c577f2b602b805e43f1b0bcb78d4c8026b878b.json.gz",
+      "size": 766147,
+      "sha256": "140978a8894399ad29216c0cfb0899c7517d29cb3bad6abd2e2d494c7c68ce55",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/20c2f9d968fdae84a5262664b0c577f2b602b805e43f1b0bcb78d4c8026b878b.json.gz",
+      "release_asset_id": 612468217
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/20f014a18941ac4b454a52bf4f3cb95c6dc0c202ea1c19a4e78f56e283f6c6e1.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/20f014a18941ac4b454a52bf4f3cb95c6dc0c202ea1c19a4e78f56e283f6c6e1.json.gz",
+      "asset": "20f014a18941ac4b454a52bf4f3cb95c6dc0c202ea1c19a4e78f56e283f6c6e1.json.gz",
+      "size": 825776,
+      "sha256": "51db73e1d5df6457510d6b19feaf81cb05937d576fab1b25bf47383051580309",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/20f014a18941ac4b454a52bf4f3cb95c6dc0c202ea1c19a4e78f56e283f6c6e1.json.gz",
+      "release_asset_id": 612468231
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/213f8f2ea26aac5acee8e6db538db9321573335380289f20538d35fe65bc3861.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/213f8f2ea26aac5acee8e6db538db9321573335380289f20538d35fe65bc3861.json.gz",
+      "asset": "213f8f2ea26aac5acee8e6db538db9321573335380289f20538d35fe65bc3861.json.gz",
+      "size": 633860,
+      "sha256": "ee5431a1af02a5411913bfb938c72a59f444c68dfdbee9de861cafc7e773b9ff",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/213f8f2ea26aac5acee8e6db538db9321573335380289f20538d35fe65bc3861.json.gz",
+      "release_asset_id": 612468239
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/22ee79c12f99fb5d04fad4c5256bc2abb3a39fc11fe7b18e33a68e2d51822e13.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/22ee79c12f99fb5d04fad4c5256bc2abb3a39fc11fe7b18e33a68e2d51822e13.json.gz",
+      "asset": "22ee79c12f99fb5d04fad4c5256bc2abb3a39fc11fe7b18e33a68e2d51822e13.json.gz",
+      "size": 678255,
+      "sha256": "a81bc21647a9768daf83763275a942015dec71f1558fa0ed728e6b290305d472",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/22ee79c12f99fb5d04fad4c5256bc2abb3a39fc11fe7b18e33a68e2d51822e13.json.gz",
+      "release_asset_id": 612468242
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/26eed3013dc9c0c67d5708ea960444d51ea6e652f4a85a41e86b9dc6dcc7eb7f.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/26eed3013dc9c0c67d5708ea960444d51ea6e652f4a85a41e86b9dc6dcc7eb7f.json.gz",
+      "asset": "26eed3013dc9c0c67d5708ea960444d51ea6e652f4a85a41e86b9dc6dcc7eb7f.json.gz",
+      "size": 945224,
+      "sha256": "5b0da0d32d356566b292a5321a913301eeeb072d136346450b8409d2c4529fc3",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/26eed3013dc9c0c67d5708ea960444d51ea6e652f4a85a41e86b9dc6dcc7eb7f.json.gz",
+      "release_asset_id": 612468247
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/275450ec2fed0e026e6e8b202808510201c30cf05cbccc68bc9afc017c4af0e5.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/275450ec2fed0e026e6e8b202808510201c30cf05cbccc68bc9afc017c4af0e5.json.gz",
+      "asset": "275450ec2fed0e026e6e8b202808510201c30cf05cbccc68bc9afc017c4af0e5.json.gz",
+      "size": 789972,
+      "sha256": "54e896ed55dab252add8fbfc90257f0af2e1bf31dc668b61833a6f4e21e03c25",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/275450ec2fed0e026e6e8b202808510201c30cf05cbccc68bc9afc017c4af0e5.json.gz",
+      "release_asset_id": 612468272
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/28c12aee783b8b20a4f06cf6c5a95a4a9269730faca1b767dbd7e58522de5d75.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/28c12aee783b8b20a4f06cf6c5a95a4a9269730faca1b767dbd7e58522de5d75.json.gz",
+      "asset": "28c12aee783b8b20a4f06cf6c5a95a4a9269730faca1b767dbd7e58522de5d75.json.gz",
+      "size": 548514,
+      "sha256": "7dcf231066ece9cdd1e328472e9b0f8ef2729cf2b361faf6591505cfed9df7fe",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/28c12aee783b8b20a4f06cf6c5a95a4a9269730faca1b767dbd7e58522de5d75.json.gz",
+      "release_asset_id": 612468276
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/28c341328e9553535ff68915c349c8e8bad9d1bbac6a6dc8f18c0ad1de7d974f.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/28c341328e9553535ff68915c349c8e8bad9d1bbac6a6dc8f18c0ad1de7d974f.json.gz",
+      "asset": "28c341328e9553535ff68915c349c8e8bad9d1bbac6a6dc8f18c0ad1de7d974f.json.gz",
+      "size": 741363,
+      "sha256": "b45c9c31c1f726c0e94a62daf66cf726fc9676e1c6b51c0011f8cd186f25f779",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/28c341328e9553535ff68915c349c8e8bad9d1bbac6a6dc8f18c0ad1de7d974f.json.gz",
+      "release_asset_id": 612468281
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/2a0496e054709e9791630d992ab23c0560f061c1308a685b383f3e6d2e3750ab.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/2a0496e054709e9791630d992ab23c0560f061c1308a685b383f3e6d2e3750ab.json.gz",
+      "asset": "2a0496e054709e9791630d992ab23c0560f061c1308a685b383f3e6d2e3750ab.json.gz",
+      "size": 544541,
+      "sha256": "292b465eedee550b0d1b6734dd04fd421bccbdcd5e2b8855fd3180162bc2a386",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/2a0496e054709e9791630d992ab23c0560f061c1308a685b383f3e6d2e3750ab.json.gz",
+      "release_asset_id": 612468285
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/2a702b41e560f1f9bebf140bda72fc44070c91f399f555cdf68075e33364fbae.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/2a702b41e560f1f9bebf140bda72fc44070c91f399f555cdf68075e33364fbae.json.gz",
+      "asset": "2a702b41e560f1f9bebf140bda72fc44070c91f399f555cdf68075e33364fbae.json.gz",
+      "size": 538349,
+      "sha256": "51456f41fe2f46f2e9b93dfde3c752d71a6c741213646a70d62e283dfab645e2",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/2a702b41e560f1f9bebf140bda72fc44070c91f399f555cdf68075e33364fbae.json.gz",
+      "release_asset_id": 612468295
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/2a82890fbb76eb50ea60dce294b4ac4179ff562ee62ae6f9a6bb3e996e9e80de.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/2a82890fbb76eb50ea60dce294b4ac4179ff562ee62ae6f9a6bb3e996e9e80de.json.gz",
+      "asset": "2a82890fbb76eb50ea60dce294b4ac4179ff562ee62ae6f9a6bb3e996e9e80de.json.gz",
+      "size": 799103,
+      "sha256": "bafbb5bbaa3697da109d88da5a0b9fc147021125b9d769102e89275228697f55",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/2a82890fbb76eb50ea60dce294b4ac4179ff562ee62ae6f9a6bb3e996e9e80de.json.gz",
+      "release_asset_id": 612468301
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/2ab03c4cad0302a62060846ccc07458d257fbe0463738ecb24c4b9042181587a.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/2ab03c4cad0302a62060846ccc07458d257fbe0463738ecb24c4b9042181587a.json.gz",
+      "asset": "2ab03c4cad0302a62060846ccc07458d257fbe0463738ecb24c4b9042181587a.json.gz",
+      "size": 672584,
+      "sha256": "866f366329daf95c01252da025c6c8c2f6be79b3f8bba418f44ab8ad315803d3",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/2ab03c4cad0302a62060846ccc07458d257fbe0463738ecb24c4b9042181587a.json.gz",
+      "release_asset_id": 612468302
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/2d669f18d8a8e3fabae7e9127a4bb9dc50e5e4397d638bbeedc938189db0e0cf.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/2d669f18d8a8e3fabae7e9127a4bb9dc50e5e4397d638bbeedc938189db0e0cf.json.gz",
+      "asset": "2d669f18d8a8e3fabae7e9127a4bb9dc50e5e4397d638bbeedc938189db0e0cf.json.gz",
+      "size": 744717,
+      "sha256": "4f9ae4d6718c30bc30990cb68183fe8d19eeb65ab51c53a09482ceb455fea205",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/2d669f18d8a8e3fabae7e9127a4bb9dc50e5e4397d638bbeedc938189db0e0cf.json.gz",
+      "release_asset_id": 612468306
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/2db359a41e9d2efa1037cee19c98104d5f234dbc192f21a577635c9e3ffeca7b.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/2db359a41e9d2efa1037cee19c98104d5f234dbc192f21a577635c9e3ffeca7b.json.gz",
+      "asset": "2db359a41e9d2efa1037cee19c98104d5f234dbc192f21a577635c9e3ffeca7b.json.gz",
+      "size": 719354,
+      "sha256": "cc3dd20696e16e11e90347c0797d48efd177e9722c94313f2e014414d766d911",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/2db359a41e9d2efa1037cee19c98104d5f234dbc192f21a577635c9e3ffeca7b.json.gz",
+      "release_asset_id": 612468312
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/2f4a0b8fc0801e1667d7bc4248da6c3b2eb2b49bef7e43523ecf1b705f328021.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/2f4a0b8fc0801e1667d7bc4248da6c3b2eb2b49bef7e43523ecf1b705f328021.json.gz",
+      "asset": "2f4a0b8fc0801e1667d7bc4248da6c3b2eb2b49bef7e43523ecf1b705f328021.json.gz",
+      "size": 486884,
+      "sha256": "d7cfcb757a655cf3bd69a4178806f6c11c5b3e4f4595cb0d115de56a31e24a31",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/2f4a0b8fc0801e1667d7bc4248da6c3b2eb2b49bef7e43523ecf1b705f328021.json.gz",
+      "release_asset_id": 612468363
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/2fa3440a5f223eaabcb41b7a66895988645e9c2f1ed42d818df381237658e3cf.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/2fa3440a5f223eaabcb41b7a66895988645e9c2f1ed42d818df381237658e3cf.json.gz",
+      "asset": "2fa3440a5f223eaabcb41b7a66895988645e9c2f1ed42d818df381237658e3cf.json.gz",
+      "size": 676874,
+      "sha256": "f5f46ea6cc42ce433c26c593284c58a67caf98fca78680122f62986fb108fc54",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/2fa3440a5f223eaabcb41b7a66895988645e9c2f1ed42d818df381237658e3cf.json.gz",
+      "release_asset_id": 612468367
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/33a7f4507fb0652abe4b6a502c171b9a70c64d83d7c522d262ca698b1839599a.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/33a7f4507fb0652abe4b6a502c171b9a70c64d83d7c522d262ca698b1839599a.json.gz",
+      "asset": "33a7f4507fb0652abe4b6a502c171b9a70c64d83d7c522d262ca698b1839599a.json.gz",
+      "size": 627806,
+      "sha256": "ccb6dc53902adb44c868559fdad66cf069e0a07fb0c2b46e0a5b1d3b8cf8833f",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/33a7f4507fb0652abe4b6a502c171b9a70c64d83d7c522d262ca698b1839599a.json.gz",
+      "release_asset_id": 612468356
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/35b9f7f179f329a252a352b02748ae2f28a225340ea1f221c3a8687c89394840.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/35b9f7f179f329a252a352b02748ae2f28a225340ea1f221c3a8687c89394840.json.gz",
+      "asset": "35b9f7f179f329a252a352b02748ae2f28a225340ea1f221c3a8687c89394840.json.gz",
+      "size": 592316,
+      "sha256": "4a2486ff89d6cbbbf8ff26e8494dc4ac3de09cce6a221947b89da994cf1d1e49",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/35b9f7f179f329a252a352b02748ae2f28a225340ea1f221c3a8687c89394840.json.gz",
+      "release_asset_id": 612468360
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/37478d5fd494b4647ed436b1273d1dcce12636503910b1be48829075fbc65c2b.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/37478d5fd494b4647ed436b1273d1dcce12636503910b1be48829075fbc65c2b.json.gz",
+      "asset": "37478d5fd494b4647ed436b1273d1dcce12636503910b1be48829075fbc65c2b.json.gz",
+      "size": 475076,
+      "sha256": "db55c8a85a1270ae64bca802ebc3605d7c1617d35aefa4ccf8bb5e14fe9eee90",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/37478d5fd494b4647ed436b1273d1dcce12636503910b1be48829075fbc65c2b.json.gz",
+      "release_asset_id": 612468388
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/376801e80e8777f1558a3e53e0346dce64192cb044d234923b0f6a36baacc7dc.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/376801e80e8777f1558a3e53e0346dce64192cb044d234923b0f6a36baacc7dc.json.gz",
+      "asset": "376801e80e8777f1558a3e53e0346dce64192cb044d234923b0f6a36baacc7dc.json.gz",
+      "size": 638919,
+      "sha256": "f7ee186e8c65fdb1afb073939d14ce9880adeaabdd4dd915690c6bad26f244ab",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/376801e80e8777f1558a3e53e0346dce64192cb044d234923b0f6a36baacc7dc.json.gz",
+      "release_asset_id": 612468389
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/3823b225fd751ceaaa3df36be374b438bab51658b45f26d8fdfcefe743c2f654.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/3823b225fd751ceaaa3df36be374b438bab51658b45f26d8fdfcefe743c2f654.json.gz",
+      "asset": "3823b225fd751ceaaa3df36be374b438bab51658b45f26d8fdfcefe743c2f654.json.gz",
+      "size": 992647,
+      "sha256": "0a928db12724e0afbb08915978ba988d96fb9dc941ace58ab7be3d6f325a4f78",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/3823b225fd751ceaaa3df36be374b438bab51658b45f26d8fdfcefe743c2f654.json.gz",
+      "release_asset_id": 612468400
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/386796641b416cfdf32c60245be8ae01294559ebaa5a4e8e0c8224d751554344.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/386796641b416cfdf32c60245be8ae01294559ebaa5a4e8e0c8224d751554344.json.gz",
+      "asset": "386796641b416cfdf32c60245be8ae01294559ebaa5a4e8e0c8224d751554344.json.gz",
+      "size": 624292,
+      "sha256": "16086b2c9489127bf70d19365f9c6a4e9667a9d5a7380b29ee920bfac8ebb7ed",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/386796641b416cfdf32c60245be8ae01294559ebaa5a4e8e0c8224d751554344.json.gz",
+      "release_asset_id": 612468414
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/38dd98a0a5efbb2721399d7d1414207e6846283b162186d99e0b6e7fc05cec56.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/38dd98a0a5efbb2721399d7d1414207e6846283b162186d99e0b6e7fc05cec56.json.gz",
+      "asset": "38dd98a0a5efbb2721399d7d1414207e6846283b162186d99e0b6e7fc05cec56.json.gz",
+      "size": 721020,
+      "sha256": "2f23a4294bf43a0622b4a4c0d786e69ab63b725dd13a6c45cf6798acb57a8882",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/38dd98a0a5efbb2721399d7d1414207e6846283b162186d99e0b6e7fc05cec56.json.gz",
+      "release_asset_id": 612468419
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/39630c84e168d02591572f71a44ac20107ae7964f35dc735bff1a2a373b8dc1a.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/39630c84e168d02591572f71a44ac20107ae7964f35dc735bff1a2a373b8dc1a.json.gz",
+      "asset": "39630c84e168d02591572f71a44ac20107ae7964f35dc735bff1a2a373b8dc1a.json.gz",
+      "size": 833507,
+      "sha256": "62bf6c2e61fc04bc59e66d3d344d3b58bfa358d2c63ae18c04e3e152e174a7e7",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/39630c84e168d02591572f71a44ac20107ae7964f35dc735bff1a2a373b8dc1a.json.gz",
+      "release_asset_id": 612468424
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/396cb08aaf68514f61301470728b143835a61592a2564428cf7e6b337ff5fec8.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/396cb08aaf68514f61301470728b143835a61592a2564428cf7e6b337ff5fec8.json.gz",
+      "asset": "396cb08aaf68514f61301470728b143835a61592a2564428cf7e6b337ff5fec8.json.gz",
+      "size": 689734,
+      "sha256": "1959ffd34e2deb5c5653dcad80d6182b649fcef6cff9a69441e7fda325bce1a2",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/396cb08aaf68514f61301470728b143835a61592a2564428cf7e6b337ff5fec8.json.gz",
+      "release_asset_id": 612468431
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/3bd92aa00fa4da556440d2d27610e2ef904627152e97712026724cc5c4cb1215.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/3bd92aa00fa4da556440d2d27610e2ef904627152e97712026724cc5c4cb1215.json.gz",
+      "asset": "3bd92aa00fa4da556440d2d27610e2ef904627152e97712026724cc5c4cb1215.json.gz",
+      "size": 968329,
+      "sha256": "1e1adc636f2bbd40442555047cc14427c3b6f7a3b64d131936262c712acfa72e",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/3bd92aa00fa4da556440d2d27610e2ef904627152e97712026724cc5c4cb1215.json.gz",
+      "release_asset_id": 612468445
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/3c2e1d07b780408df361fb01ee6ff0bfec659f1fedc369270b4b5b51c375842f.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/3c2e1d07b780408df361fb01ee6ff0bfec659f1fedc369270b4b5b51c375842f.json.gz",
+      "asset": "3c2e1d07b780408df361fb01ee6ff0bfec659f1fedc369270b4b5b51c375842f.json.gz",
+      "size": 798567,
+      "sha256": "b3a9a8d2541fc6ce18aa31cbafe490630e436bcd06b7e3c87a6a11dd423ff001",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/3c2e1d07b780408df361fb01ee6ff0bfec659f1fedc369270b4b5b51c375842f.json.gz",
+      "release_asset_id": 612468452
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/3d39c90e85e2053e332dee99f9b4a41f80847fbe909ad384358f66578716ba7f.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/3d39c90e85e2053e332dee99f9b4a41f80847fbe909ad384358f66578716ba7f.json.gz",
+      "asset": "3d39c90e85e2053e332dee99f9b4a41f80847fbe909ad384358f66578716ba7f.json.gz",
+      "size": 755783,
+      "sha256": "1c791f4619e0ac1c750c1b32dfa26fc53d7847a6fc5067c61c14ace9a38ec498",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/3d39c90e85e2053e332dee99f9b4a41f80847fbe909ad384358f66578716ba7f.json.gz",
+      "release_asset_id": 612468463
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/4296c2ef018c108193fb2fba25ae8c4407c76b49b7b47c94220524889dc96c80.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/4296c2ef018c108193fb2fba25ae8c4407c76b49b7b47c94220524889dc96c80.json.gz",
+      "asset": "4296c2ef018c108193fb2fba25ae8c4407c76b49b7b47c94220524889dc96c80.json.gz",
+      "size": 738738,
+      "sha256": "87314c9149191b394420df5fc5668bb4216ff28c7d6b1abeaea7d7db979b3187",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/4296c2ef018c108193fb2fba25ae8c4407c76b49b7b47c94220524889dc96c80.json.gz",
+      "release_asset_id": 612468468
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/4308b5208e9c0dc4712b7984fa9fa5ae5a2b9c1f93b6836df1e714000d34f433.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/4308b5208e9c0dc4712b7984fa9fa5ae5a2b9c1f93b6836df1e714000d34f433.json.gz",
+      "asset": "4308b5208e9c0dc4712b7984fa9fa5ae5a2b9c1f93b6836df1e714000d34f433.json.gz",
+      "size": 580325,
+      "sha256": "363752d0629a5ff10ed94318ab832308a7875632a222082a637bd6a90f5e810f",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/4308b5208e9c0dc4712b7984fa9fa5ae5a2b9c1f93b6836df1e714000d34f433.json.gz",
+      "release_asset_id": 612468527
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/447ce485df9439ade583f09d3a495c3885dc87ffa0730bcd4be9a00a1de4297d.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/447ce485df9439ade583f09d3a495c3885dc87ffa0730bcd4be9a00a1de4297d.json.gz",
+      "asset": "447ce485df9439ade583f09d3a495c3885dc87ffa0730bcd4be9a00a1de4297d.json.gz",
+      "size": 756393,
+      "sha256": "0ac2203a7af783a2df7ea987e3239b9c8f6dfbee80645f69eb3288afadfbc4f1",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/447ce485df9439ade583f09d3a495c3885dc87ffa0730bcd4be9a00a1de4297d.json.gz",
+      "release_asset_id": 612468524
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/450e970548ad43a423d00a7b25c9355501657f60e3aa526c3bee05ebf3be0bdb.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/450e970548ad43a423d00a7b25c9355501657f60e3aa526c3bee05ebf3be0bdb.json.gz",
+      "asset": "450e970548ad43a423d00a7b25c9355501657f60e3aa526c3bee05ebf3be0bdb.json.gz",
+      "size": 717779,
+      "sha256": "bc303fbeae559371d8a90a4448e607fddf04b9c698f5281667b38a881712fe19",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/450e970548ad43a423d00a7b25c9355501657f60e3aa526c3bee05ebf3be0bdb.json.gz",
+      "release_asset_id": 612468525
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/4b45dd83071361e5ed3ee54bf9c33e3fa32b3e9620c0fcfdf7b4b1d4648df659.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/4b45dd83071361e5ed3ee54bf9c33e3fa32b3e9620c0fcfdf7b4b1d4648df659.json.gz",
+      "asset": "4b45dd83071361e5ed3ee54bf9c33e3fa32b3e9620c0fcfdf7b4b1d4648df659.json.gz",
+      "size": 634199,
+      "sha256": "37af09c1b92d99115df9e27a2f15d21e50af0017b5b45f910577b289fe5af09b",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/4b45dd83071361e5ed3ee54bf9c33e3fa32b3e9620c0fcfdf7b4b1d4648df659.json.gz",
+      "release_asset_id": 612468529
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/4d132ff5b0071c3a5b4d366ee55a1159345003bdc2786557120f6b91d7f4142d.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/4d132ff5b0071c3a5b4d366ee55a1159345003bdc2786557120f6b91d7f4142d.json.gz",
+      "asset": "4d132ff5b0071c3a5b4d366ee55a1159345003bdc2786557120f6b91d7f4142d.json.gz",
+      "size": 512895,
+      "sha256": "cdeabeedaa4e6abbdeca9d4c649fd202320376ef1081a7100189dd94c2e67a2c",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/4d132ff5b0071c3a5b4d366ee55a1159345003bdc2786557120f6b91d7f4142d.json.gz",
+      "release_asset_id": 612468528
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/4d4513ee317b93eb2316fbea6fc0263e27bc9532638da83327b60cc73c07ef77.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/4d4513ee317b93eb2316fbea6fc0263e27bc9532638da83327b60cc73c07ef77.json.gz",
+      "asset": "4d4513ee317b93eb2316fbea6fc0263e27bc9532638da83327b60cc73c07ef77.json.gz",
+      "size": 656420,
+      "sha256": "41752c676ccc287d4edf9b9863f4aa9ba05f5e31d4a1f09a845208d25855b2ac",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/4d4513ee317b93eb2316fbea6fc0263e27bc9532638da83327b60cc73c07ef77.json.gz",
+      "release_asset_id": 612468560
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/4ed25dc9da6d9594b915cf189313e3f8487dc243fa86af93e8f3fe95e745445d.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/4ed25dc9da6d9594b915cf189313e3f8487dc243fa86af93e8f3fe95e745445d.json.gz",
+      "asset": "4ed25dc9da6d9594b915cf189313e3f8487dc243fa86af93e8f3fe95e745445d.json.gz",
+      "size": 721498,
+      "sha256": "5fd779e50f95e25e23da2926708de3b17a65a3467621ca283a7c1e64a92f025f",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/4ed25dc9da6d9594b915cf189313e3f8487dc243fa86af93e8f3fe95e745445d.json.gz",
+      "release_asset_id": 612468562
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/4f5407cc3c9314e89bb647f00b76709537932e9f2926545ef8697a3579b5857d.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/4f5407cc3c9314e89bb647f00b76709537932e9f2926545ef8697a3579b5857d.json.gz",
+      "asset": "4f5407cc3c9314e89bb647f00b76709537932e9f2926545ef8697a3579b5857d.json.gz",
+      "size": 1075935,
+      "sha256": "15573742100bade50252b6b8657c004a4fe72acca54fdfb1e9523410d5e92771",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/4f5407cc3c9314e89bb647f00b76709537932e9f2926545ef8697a3579b5857d.json.gz",
+      "release_asset_id": 612468565
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57.json.gz",
+      "asset": "505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57.json.gz",
+      "size": 7395,
+      "sha256": "d9260cd3b60570b506c7ace7e7130463f6880f07dddc28bdc63aba5da82b883d",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57.json.gz",
+      "release_asset_id": 612468567
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/518df8d94d2b254d8dfe8863e7dcf9ce7c0550626bfe38a81bbdd048cbf77703.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/518df8d94d2b254d8dfe8863e7dcf9ce7c0550626bfe38a81bbdd048cbf77703.json.gz",
+      "asset": "518df8d94d2b254d8dfe8863e7dcf9ce7c0550626bfe38a81bbdd048cbf77703.json.gz",
+      "size": 616375,
+      "sha256": "1d5c23c6182c66b78ecb771457108b2a8ffb1096b909237f97bc2366919a360f",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/518df8d94d2b254d8dfe8863e7dcf9ce7c0550626bfe38a81bbdd048cbf77703.json.gz",
+      "release_asset_id": 612468592
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/53f57e28e3bb862a6315ce9df436a43a1f0dac1abffb28ce6f199ddc444be539.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/53f57e28e3bb862a6315ce9df436a43a1f0dac1abffb28ce6f199ddc444be539.json.gz",
+      "asset": "53f57e28e3bb862a6315ce9df436a43a1f0dac1abffb28ce6f199ddc444be539.json.gz",
+      "size": 711582,
+      "sha256": "f2ceae951a9d3a6779a35ecbfe2f1a8c7ab861dc6391fad85906eb255427cb39",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/53f57e28e3bb862a6315ce9df436a43a1f0dac1abffb28ce6f199ddc444be539.json.gz",
+      "release_asset_id": 612468594
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/545c413ef8d31a7192411e3d057b476fa924093173b54369394c4a156ece8d65.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/545c413ef8d31a7192411e3d057b476fa924093173b54369394c4a156ece8d65.json.gz",
+      "asset": "545c413ef8d31a7192411e3d057b476fa924093173b54369394c4a156ece8d65.json.gz",
+      "size": 652751,
+      "sha256": "b81d3d4580bc754d23cf3f46f5eb350323536f65970072cf31f356080567a0b7",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/545c413ef8d31a7192411e3d057b476fa924093173b54369394c4a156ece8d65.json.gz",
+      "release_asset_id": 612468598
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/5487ed719d297ab91aad479f33d8692c657c9bd2ff14e2ee1367c6cdc86a1e0f.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/5487ed719d297ab91aad479f33d8692c657c9bd2ff14e2ee1367c6cdc86a1e0f.json.gz",
+      "asset": "5487ed719d297ab91aad479f33d8692c657c9bd2ff14e2ee1367c6cdc86a1e0f.json.gz",
+      "size": 803550,
+      "sha256": "8a6c8d4509c7d15cd87bb49e38498edfdf43ab02af47a9c15505725a884b2d22",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/5487ed719d297ab91aad479f33d8692c657c9bd2ff14e2ee1367c6cdc86a1e0f.json.gz",
+      "release_asset_id": 612468600
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/551e0d943ba616850a4fa7f5608ed372ea8e9a4e9598e07fd7aa20037b3150a4.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/551e0d943ba616850a4fa7f5608ed372ea8e9a4e9598e07fd7aa20037b3150a4.json.gz",
+      "asset": "551e0d943ba616850a4fa7f5608ed372ea8e9a4e9598e07fd7aa20037b3150a4.json.gz",
+      "size": 749637,
+      "sha256": "0d9e3aaee83c75809176223bb575fb690848277104ebfa5210aca0e734226f00",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/551e0d943ba616850a4fa7f5608ed372ea8e9a4e9598e07fd7aa20037b3150a4.json.gz",
+      "release_asset_id": 612468615
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/5668d9504f4bf699b009a9fdaf4b7d8377f937feb5ba15f095f93108f06a983d.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/5668d9504f4bf699b009a9fdaf4b7d8377f937feb5ba15f095f93108f06a983d.json.gz",
+      "asset": "5668d9504f4bf699b009a9fdaf4b7d8377f937feb5ba15f095f93108f06a983d.json.gz",
+      "size": 617671,
+      "sha256": "1d6d36346a2ac1671e3be8725cea6dc4edb8285f3d9946e777bf873851bf88ef",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/5668d9504f4bf699b009a9fdaf4b7d8377f937feb5ba15f095f93108f06a983d.json.gz",
+      "release_asset_id": 612468614
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/56a36cfdbd23ebeedb86afcc6c416597f20253ca80066149f2274819b1eb3839.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/56a36cfdbd23ebeedb86afcc6c416597f20253ca80066149f2274819b1eb3839.json.gz",
+      "asset": "56a36cfdbd23ebeedb86afcc6c416597f20253ca80066149f2274819b1eb3839.json.gz",
+      "size": 529368,
+      "sha256": "03c12620af6f73f8fa1d7bfdea3b46f382eac98a47923cae004d97059d9c7200",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/56a36cfdbd23ebeedb86afcc6c416597f20253ca80066149f2274819b1eb3839.json.gz",
+      "release_asset_id": 612468620
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/56be8f7c021a1b20b83dbd2ce26f9c301c659c134ede8a166dc5ac16c138a774.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/56be8f7c021a1b20b83dbd2ce26f9c301c659c134ede8a166dc5ac16c138a774.json.gz",
+      "asset": "56be8f7c021a1b20b83dbd2ce26f9c301c659c134ede8a166dc5ac16c138a774.json.gz",
+      "size": 681246,
+      "sha256": "7b8f60b79308ac5371b928f7243a7956b50e15ac671ff83e8dabcb7dc703c4ab",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/56be8f7c021a1b20b83dbd2ce26f9c301c659c134ede8a166dc5ac16c138a774.json.gz",
+      "release_asset_id": 612468623
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/5984856c5a8b9131684621b7b2c21f6b89813475817f9acd2aaee7675d79f452.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/5984856c5a8b9131684621b7b2c21f6b89813475817f9acd2aaee7675d79f452.json.gz",
+      "asset": "5984856c5a8b9131684621b7b2c21f6b89813475817f9acd2aaee7675d79f452.json.gz",
+      "size": 803450,
+      "sha256": "d37c807a9a8a5e0256c1f06114cf49dc398b615343a0127e05b8f2c94a72de3d",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/5984856c5a8b9131684621b7b2c21f6b89813475817f9acd2aaee7675d79f452.json.gz",
+      "release_asset_id": 612468630
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/5a78e1445fd317a6bc048992fad77120e6af2520417649d3c1a59df4e3661941.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/5a78e1445fd317a6bc048992fad77120e6af2520417649d3c1a59df4e3661941.json.gz",
+      "asset": "5a78e1445fd317a6bc048992fad77120e6af2520417649d3c1a59df4e3661941.json.gz",
+      "size": 1002161,
+      "sha256": "cd3171a4378d872d43805b01c3cad0d93f0cb843ab1e1a47865ce176a0404842",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/5a78e1445fd317a6bc048992fad77120e6af2520417649d3c1a59df4e3661941.json.gz",
+      "release_asset_id": 612468641
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/5c7cc12cb5b230fb8621c93fe5b8ddf8f5ac4f240abd59af5f2c854cd33d9453.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/5c7cc12cb5b230fb8621c93fe5b8ddf8f5ac4f240abd59af5f2c854cd33d9453.json.gz",
+      "asset": "5c7cc12cb5b230fb8621c93fe5b8ddf8f5ac4f240abd59af5f2c854cd33d9453.json.gz",
+      "size": 657068,
+      "sha256": "862c91488d563848e1192c33591769de6fae581ddb933cbb558d63a4cfc3801b",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/5c7cc12cb5b230fb8621c93fe5b8ddf8f5ac4f240abd59af5f2c854cd33d9453.json.gz",
+      "release_asset_id": 612468646
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/606df81b27112bcd4578422d8f52d110de92aad30b7d7ea0ac4b85fdbb45cfee.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/606df81b27112bcd4578422d8f52d110de92aad30b7d7ea0ac4b85fdbb45cfee.json.gz",
+      "asset": "606df81b27112bcd4578422d8f52d110de92aad30b7d7ea0ac4b85fdbb45cfee.json.gz",
+      "size": 918913,
+      "sha256": "926a4c507f292afbfbc09992b84a7967fb3c0c07e6a9f8601bf6b1e4f47c92f5",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/606df81b27112bcd4578422d8f52d110de92aad30b7d7ea0ac4b85fdbb45cfee.json.gz",
+      "release_asset_id": 612468659
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/6206634a68b78f4e71beb188c9b3222e0e0baaac143176418b6ba8fc11d606bc.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/6206634a68b78f4e71beb188c9b3222e0e0baaac143176418b6ba8fc11d606bc.json.gz",
+      "asset": "6206634a68b78f4e71beb188c9b3222e0e0baaac143176418b6ba8fc11d606bc.json.gz",
+      "size": 310799,
+      "sha256": "8d826585d7e1656a7bee5f7780041f5d5643aa89fe7a4d6e8b73d780083785cf",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/6206634a68b78f4e71beb188c9b3222e0e0baaac143176418b6ba8fc11d606bc.json.gz",
+      "release_asset_id": 612468662
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/62b42e812408e4e2a96315f2329b689fb7818afd51b83e6e4f942ca652add220.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/62b42e812408e4e2a96315f2329b689fb7818afd51b83e6e4f942ca652add220.json.gz",
+      "asset": "62b42e812408e4e2a96315f2329b689fb7818afd51b83e6e4f942ca652add220.json.gz",
+      "size": 679327,
+      "sha256": "aac3e590c37f9e2ac81a18f2301a99f5f17ded4e43eb65e1ef3612a6007ed715",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/62b42e812408e4e2a96315f2329b689fb7818afd51b83e6e4f942ca652add220.json.gz",
+      "release_asset_id": 612468671
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/62cc950389706c5ee17e71902ad5436d333ae5476a90faabfba70027a36cc82f.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/62cc950389706c5ee17e71902ad5436d333ae5476a90faabfba70027a36cc82f.json.gz",
+      "asset": "62cc950389706c5ee17e71902ad5436d333ae5476a90faabfba70027a36cc82f.json.gz",
+      "size": 570737,
+      "sha256": "5cb167affe21cb1064c1b41d073f68ecd7eaf9b65c32a7628938bd329d90bb16",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/62cc950389706c5ee17e71902ad5436d333ae5476a90faabfba70027a36cc82f.json.gz",
+      "release_asset_id": 612468684
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/63cb55f2241a02fea3b4a41f51c3f28abacf6a5e21fb1f7d7b2f62afc6d2fc19.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/63cb55f2241a02fea3b4a41f51c3f28abacf6a5e21fb1f7d7b2f62afc6d2fc19.json.gz",
+      "asset": "63cb55f2241a02fea3b4a41f51c3f28abacf6a5e21fb1f7d7b2f62afc6d2fc19.json.gz",
+      "size": 643452,
+      "sha256": "e5a7d156e9b825e19846b35dd7ba5f6d4ce8acfb5e4025db42141e6d90907cd6",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/63cb55f2241a02fea3b4a41f51c3f28abacf6a5e21fb1f7d7b2f62afc6d2fc19.json.gz",
+      "release_asset_id": 612468689
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/660524a4c07a271922ee7c64db5bd1951cf0520a7b75c857eea413679c3c4445.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/660524a4c07a271922ee7c64db5bd1951cf0520a7b75c857eea413679c3c4445.json.gz",
+      "asset": "660524a4c07a271922ee7c64db5bd1951cf0520a7b75c857eea413679c3c4445.json.gz",
+      "size": 558696,
+      "sha256": "7bb24a762601a45d6cd0ec5c697e0316f085d39f816ce67b669053034cb899e1",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/660524a4c07a271922ee7c64db5bd1951cf0520a7b75c857eea413679c3c4445.json.gz",
+      "release_asset_id": 612468690
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/67159ab7518920ffe2db22dc399208014cd820f2fd55d054ed5966c064b0b2d0.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/67159ab7518920ffe2db22dc399208014cd820f2fd55d054ed5966c064b0b2d0.json.gz",
+      "asset": "67159ab7518920ffe2db22dc399208014cd820f2fd55d054ed5966c064b0b2d0.json.gz",
+      "size": 679255,
+      "sha256": "a088cf77037b64cd27043db1bed586500a4d2dcf5be9961ea9582c27af105d6a",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/67159ab7518920ffe2db22dc399208014cd820f2fd55d054ed5966c064b0b2d0.json.gz",
+      "release_asset_id": 612468705
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/6751dfc2b45b1a0fd8c14d5583316e8e67e160aa4fce7cd6f699c5768cd47d81.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/6751dfc2b45b1a0fd8c14d5583316e8e67e160aa4fce7cd6f699c5768cd47d81.json.gz",
+      "asset": "6751dfc2b45b1a0fd8c14d5583316e8e67e160aa4fce7cd6f699c5768cd47d81.json.gz",
+      "size": 762504,
+      "sha256": "e1be6be889fec718f3c22473cf51c4fedea588c8db394f8fd75ee8f5b67cdb65",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/6751dfc2b45b1a0fd8c14d5583316e8e67e160aa4fce7cd6f699c5768cd47d81.json.gz",
+      "release_asset_id": 612468712
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/6c660e1dcd13fbb781915ab8fd78230a457dc06aac40cd6b31dd4a36e3880503.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/6c660e1dcd13fbb781915ab8fd78230a457dc06aac40cd6b31dd4a36e3880503.json.gz",
+      "asset": "6c660e1dcd13fbb781915ab8fd78230a457dc06aac40cd6b31dd4a36e3880503.json.gz",
+      "size": 669825,
+      "sha256": "54339c8e6e5705d046111b5c055d4d9741ee730fd800b611c2ef34bbd9814fd5",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/6c660e1dcd13fbb781915ab8fd78230a457dc06aac40cd6b31dd4a36e3880503.json.gz",
+      "release_asset_id": 612468720
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/709044338dd9ed9cedb5f132b85a8b8399db6dfc030a750b3bb175515846f90c.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/709044338dd9ed9cedb5f132b85a8b8399db6dfc030a750b3bb175515846f90c.json.gz",
+      "asset": "709044338dd9ed9cedb5f132b85a8b8399db6dfc030a750b3bb175515846f90c.json.gz",
+      "size": 759714,
+      "sha256": "509d25eaca9281a0dae41631eb66e29009f7d118119d0e42bf6bb70ea88a9da7",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/709044338dd9ed9cedb5f132b85a8b8399db6dfc030a750b3bb175515846f90c.json.gz",
+      "release_asset_id": 612468729
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/71c9238359d6e90f64f21db4df849b5c10f67172bf72a6bf07d43546736c7923.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/71c9238359d6e90f64f21db4df849b5c10f67172bf72a6bf07d43546736c7923.json.gz",
+      "asset": "71c9238359d6e90f64f21db4df849b5c10f67172bf72a6bf07d43546736c7923.json.gz",
+      "size": 643083,
+      "sha256": "e9b6bfed070a960f8a7d8d894c7e9c1df03a0e4c2175dd41838dc5c3ea5bf651",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/71c9238359d6e90f64f21db4df849b5c10f67172bf72a6bf07d43546736c7923.json.gz",
+      "release_asset_id": 612468732
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/72401456eb3288a595f1ce32690cbfc1705ef536cf64c742c24fcbe096bf9462.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/72401456eb3288a595f1ce32690cbfc1705ef536cf64c742c24fcbe096bf9462.json.gz",
+      "asset": "72401456eb3288a595f1ce32690cbfc1705ef536cf64c742c24fcbe096bf9462.json.gz",
+      "size": 738480,
+      "sha256": "683747ea680d332209b6a19173be5cb48702b3b53519e96ba00170bf0e413827",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/72401456eb3288a595f1ce32690cbfc1705ef536cf64c742c24fcbe096bf9462.json.gz",
+      "release_asset_id": 612468741
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/73d65e3b915c332e50324105543f1ab6a4c85063fb64a0af38183b5e5ce20afc.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/73d65e3b915c332e50324105543f1ab6a4c85063fb64a0af38183b5e5ce20afc.json.gz",
+      "asset": "73d65e3b915c332e50324105543f1ab6a4c85063fb64a0af38183b5e5ce20afc.json.gz",
+      "size": 564561,
+      "sha256": "4a7c3ccdd9e3716630e591d0c47d49f00e3fd8870d77f830244a8d69b5b23b2a",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/73d65e3b915c332e50324105543f1ab6a4c85063fb64a0af38183b5e5ce20afc.json.gz",
+      "release_asset_id": 612468747
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/73f000ccdf8c5d0f84f1ae889d78b5e15ede8ecd6e016339065fbf6f1702be9b.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/73f000ccdf8c5d0f84f1ae889d78b5e15ede8ecd6e016339065fbf6f1702be9b.json.gz",
+      "asset": "73f000ccdf8c5d0f84f1ae889d78b5e15ede8ecd6e016339065fbf6f1702be9b.json.gz",
+      "size": 831438,
+      "sha256": "ec242fec5f010926e04afb8ddad42aeafb52936304f6a1abedd2442bee9a8db5",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/73f000ccdf8c5d0f84f1ae889d78b5e15ede8ecd6e016339065fbf6f1702be9b.json.gz",
+      "release_asset_id": 612468750
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/7fa396ea8867075c2dec42e4f778389320cd62abfcd402c3d0018e77d1948fc4.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/7fa396ea8867075c2dec42e4f778389320cd62abfcd402c3d0018e77d1948fc4.json.gz",
+      "asset": "7fa396ea8867075c2dec42e4f778389320cd62abfcd402c3d0018e77d1948fc4.json.gz",
+      "size": 980201,
+      "sha256": "1eb19e7be09f7bb8338c1d0be572d7ff478acfa984264bf7a28d7967a669943d",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/7fa396ea8867075c2dec42e4f778389320cd62abfcd402c3d0018e77d1948fc4.json.gz",
+      "release_asset_id": 612468757
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/83c68fe873d09e5cb2c6867371489816cd8e496f8417133bfb43648889f00d13.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/83c68fe873d09e5cb2c6867371489816cd8e496f8417133bfb43648889f00d13.json.gz",
+      "asset": "83c68fe873d09e5cb2c6867371489816cd8e496f8417133bfb43648889f00d13.json.gz",
+      "size": 501898,
+      "sha256": "6c76bd4102851bc31297f9c49c2146cf277ca66b9109a4a95f8ec3600c0a3b42",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/83c68fe873d09e5cb2c6867371489816cd8e496f8417133bfb43648889f00d13.json.gz",
+      "release_asset_id": 612468759
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/840c8afbb512a2485125cc88a1e85768ad33cece499dfbbe52ff74912e458f00.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/840c8afbb512a2485125cc88a1e85768ad33cece499dfbbe52ff74912e458f00.json.gz",
+      "asset": "840c8afbb512a2485125cc88a1e85768ad33cece499dfbbe52ff74912e458f00.json.gz",
+      "size": 526471,
+      "sha256": "ae06e5e148c762c9f8b73b8bcefc51be7a5ec0f19957158f6089bf6a38f40040",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/840c8afbb512a2485125cc88a1e85768ad33cece499dfbbe52ff74912e458f00.json.gz",
+      "release_asset_id": 612468768
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/84837886c9917febe47dc797d01e2c50a7ca1aec5e0c4eee1ff9a948ceeb8669.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/84837886c9917febe47dc797d01e2c50a7ca1aec5e0c4eee1ff9a948ceeb8669.json.gz",
+      "asset": "84837886c9917febe47dc797d01e2c50a7ca1aec5e0c4eee1ff9a948ceeb8669.json.gz",
+      "size": 697177,
+      "sha256": "de2645b0a339933a93bffdbea3a3434649473d19d6d4e2e5bcab11f5c3e906d6",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/84837886c9917febe47dc797d01e2c50a7ca1aec5e0c4eee1ff9a948ceeb8669.json.gz",
+      "release_asset_id": 612468778
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/84925a82925622a0757cb30a98ed69c633015cb1a793448714a8d6595b293b85.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/84925a82925622a0757cb30a98ed69c633015cb1a793448714a8d6595b293b85.json.gz",
+      "asset": "84925a82925622a0757cb30a98ed69c633015cb1a793448714a8d6595b293b85.json.gz",
+      "size": 640650,
+      "sha256": "79f41ce8065053cf34bc3c5817bb41d3de9832a9aaafc491f8be792c2fe48cb2",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/84925a82925622a0757cb30a98ed69c633015cb1a793448714a8d6595b293b85.json.gz",
+      "release_asset_id": 612468779
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/86de33df974a1976e70156fd2197cba0eba37fb0b52ed62e4c9983be154317e8.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/86de33df974a1976e70156fd2197cba0eba37fb0b52ed62e4c9983be154317e8.json.gz",
+      "asset": "86de33df974a1976e70156fd2197cba0eba37fb0b52ed62e4c9983be154317e8.json.gz",
+      "size": 661477,
+      "sha256": "1bbf0ee4e15b330e355c2ec108d1a210560963301c853ea35354a12bfa48beed",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/86de33df974a1976e70156fd2197cba0eba37fb0b52ed62e4c9983be154317e8.json.gz",
+      "release_asset_id": 612468788
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/884d8bedfc2e511273b43deb1bf08876dc40dafe13385f419160a813459e4b4e.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/884d8bedfc2e511273b43deb1bf08876dc40dafe13385f419160a813459e4b4e.json.gz",
+      "asset": "884d8bedfc2e511273b43deb1bf08876dc40dafe13385f419160a813459e4b4e.json.gz",
+      "size": 650410,
+      "sha256": "dc4c2d2a7b4c9d616676d8c2ea06bad06fc1d8ff8e1d02db975999555e13f0a2",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/884d8bedfc2e511273b43deb1bf08876dc40dafe13385f419160a813459e4b4e.json.gz",
+      "release_asset_id": 612468853
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/886f22dd8989298ba539342726edf495d31e366a6b836da6a0fb521723b19dc7.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/886f22dd8989298ba539342726edf495d31e366a6b836da6a0fb521723b19dc7.json.gz",
+      "asset": "886f22dd8989298ba539342726edf495d31e366a6b836da6a0fb521723b19dc7.json.gz",
+      "size": 518647,
+      "sha256": "d7d19667fa8e34d91a43b77d5d6d98729497a3f8c5156d452191b22758b6c7ed",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/886f22dd8989298ba539342726edf495d31e366a6b836da6a0fb521723b19dc7.json.gz",
+      "release_asset_id": 612468857
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/88a28af9b6d595ed494bde8e5aa902382d860028a533f8024e662c8090738789.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/88a28af9b6d595ed494bde8e5aa902382d860028a533f8024e662c8090738789.json.gz",
+      "asset": "88a28af9b6d595ed494bde8e5aa902382d860028a533f8024e662c8090738789.json.gz",
+      "size": 635026,
+      "sha256": "bca36caf7e2fc9e1e7766f9a22e79b98be5a87cbc1b06770a3663e37f57126a0",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/88a28af9b6d595ed494bde8e5aa902382d860028a533f8024e662c8090738789.json.gz",
+      "release_asset_id": 612468850
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/8a11f25c02ec043f0ce915eb0f3a3d4bb9818873a456279fa5c8d91788b05b75.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/8a11f25c02ec043f0ce915eb0f3a3d4bb9818873a456279fa5c8d91788b05b75.json.gz",
+      "asset": "8a11f25c02ec043f0ce915eb0f3a3d4bb9818873a456279fa5c8d91788b05b75.json.gz",
+      "size": 715320,
+      "sha256": "79c4fbb3b6704b97db2a0b212fc4b920d467defe29fa827934724e406abb5a6e",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/8a11f25c02ec043f0ce915eb0f3a3d4bb9818873a456279fa5c8d91788b05b75.json.gz",
+      "release_asset_id": 612468855
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/8b884f4bb8e95eb0251e04735e4e785d359b2b2bf314b7ecad6357cc1de1bfd9.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/8b884f4bb8e95eb0251e04735e4e785d359b2b2bf314b7ecad6357cc1de1bfd9.json.gz",
+      "asset": "8b884f4bb8e95eb0251e04735e4e785d359b2b2bf314b7ecad6357cc1de1bfd9.json.gz",
+      "size": 705499,
+      "sha256": "42a7e2f696c59118ec08b4a81aac9ae18b67f0939765099b31c0777ac8c538f5",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/8b884f4bb8e95eb0251e04735e4e785d359b2b2bf314b7ecad6357cc1de1bfd9.json.gz",
+      "release_asset_id": 612468851
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/8bc714e6f15d3e0bdcdffe716bc6dbe003e1170bc446758a20058d8a2722b3d5.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/8bc714e6f15d3e0bdcdffe716bc6dbe003e1170bc446758a20058d8a2722b3d5.json.gz",
+      "asset": "8bc714e6f15d3e0bdcdffe716bc6dbe003e1170bc446758a20058d8a2722b3d5.json.gz",
+      "size": 550839,
+      "sha256": "657d46b269a56f82d6de6e3f9fd3946a8b3f3671502d95594fc681ccfc685eef",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/8bc714e6f15d3e0bdcdffe716bc6dbe003e1170bc446758a20058d8a2722b3d5.json.gz",
+      "release_asset_id": 612468882
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/8d49c0cdb842db828b5e0d91e7aadb08ea06aa2769f7c114e5566d08cc5fa93f.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/8d49c0cdb842db828b5e0d91e7aadb08ea06aa2769f7c114e5566d08cc5fa93f.json.gz",
+      "asset": "8d49c0cdb842db828b5e0d91e7aadb08ea06aa2769f7c114e5566d08cc5fa93f.json.gz",
+      "size": 844040,
+      "sha256": "218eb45e42a1692afec1a39b6f1cda02049e5f02a16a3fee32b6bc51c6193ef4",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/8d49c0cdb842db828b5e0d91e7aadb08ea06aa2769f7c114e5566d08cc5fa93f.json.gz",
+      "release_asset_id": 612468883
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/919764856e53bde5dd7045742fadb2b232501f93955187112dd7374657b245e4.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/919764856e53bde5dd7045742fadb2b232501f93955187112dd7374657b245e4.json.gz",
+      "asset": "919764856e53bde5dd7045742fadb2b232501f93955187112dd7374657b245e4.json.gz",
+      "size": 784392,
+      "sha256": "0f6decfa6c4a58f323afebaed59d52d01a85e0214d027f02fe42105989785ea7",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/919764856e53bde5dd7045742fadb2b232501f93955187112dd7374657b245e4.json.gz",
+      "release_asset_id": 612468885
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/94cab52b757e33520603b6c5c72c34ad5a9c1c292eb03e0025a7db0f6e0e194d.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/94cab52b757e33520603b6c5c72c34ad5a9c1c292eb03e0025a7db0f6e0e194d.json.gz",
+      "asset": "94cab52b757e33520603b6c5c72c34ad5a9c1c292eb03e0025a7db0f6e0e194d.json.gz",
+      "size": 619961,
+      "sha256": "64fbd682be8e392d86402e17e3e69129d14fb02f4cb5dc989a3ae99e99ac1d90",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/94cab52b757e33520603b6c5c72c34ad5a9c1c292eb03e0025a7db0f6e0e194d.json.gz",
+      "release_asset_id": 612468888
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/9889e19143b8dbbfceee10f0e3a4fe49c6e4f1d18537c14a6c42350177f81956.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/9889e19143b8dbbfceee10f0e3a4fe49c6e4f1d18537c14a6c42350177f81956.json.gz",
+      "asset": "9889e19143b8dbbfceee10f0e3a4fe49c6e4f1d18537c14a6c42350177f81956.json.gz",
+      "size": 1076538,
+      "sha256": "a17218cb17539087fc093029781816392d5a254c9849c715033a105cd22e0149",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/9889e19143b8dbbfceee10f0e3a4fe49c6e4f1d18537c14a6c42350177f81956.json.gz",
+      "release_asset_id": 612468889
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/989e6dbf96f8511b29ad4f98a5bf0685b71a850ae81b789b9399f8b6da586f46.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/989e6dbf96f8511b29ad4f98a5bf0685b71a850ae81b789b9399f8b6da586f46.json.gz",
+      "asset": "989e6dbf96f8511b29ad4f98a5bf0685b71a850ae81b789b9399f8b6da586f46.json.gz",
+      "size": 926651,
+      "sha256": "01415d3430286ba80987a9509be6b5e4278c1e4e2e20f10b90184c0263e1ca8f",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/989e6dbf96f8511b29ad4f98a5bf0685b71a850ae81b789b9399f8b6da586f46.json.gz",
+      "release_asset_id": 612468911
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/9c48724d0c97378ff46132a3b825b869a578e8567e2e828dd83bb9ed458c0a20.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/9c48724d0c97378ff46132a3b825b869a578e8567e2e828dd83bb9ed458c0a20.json.gz",
+      "asset": "9c48724d0c97378ff46132a3b825b869a578e8567e2e828dd83bb9ed458c0a20.json.gz",
+      "size": 724402,
+      "sha256": "ec31778550b031ff871fb429ce800997d77c063e3e6eb197365e09e734ba852b",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/9c48724d0c97378ff46132a3b825b869a578e8567e2e828dd83bb9ed458c0a20.json.gz",
+      "release_asset_id": 612468914
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/9eb73dd5d526352bc98ada381aab4a81a02b03025901276131ba20831b459159.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/9eb73dd5d526352bc98ada381aab4a81a02b03025901276131ba20831b459159.json.gz",
+      "asset": "9eb73dd5d526352bc98ada381aab4a81a02b03025901276131ba20831b459159.json.gz",
+      "size": 19218,
+      "sha256": "f184b177bb81fb46d8a0a9c93491533bad549df2c4cadc4f69f5a25368a08feb",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/9eb73dd5d526352bc98ada381aab4a81a02b03025901276131ba20831b459159.json.gz",
+      "release_asset_id": 612468915
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/9ff337aac5c57a803ea60a667f8ad55e115b8e35afcb05480be20eef14750286.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/9ff337aac5c57a803ea60a667f8ad55e115b8e35afcb05480be20eef14750286.json.gz",
+      "asset": "9ff337aac5c57a803ea60a667f8ad55e115b8e35afcb05480be20eef14750286.json.gz",
+      "size": 762647,
+      "sha256": "53df56bc3f5350ff667f460fba95f2f65026aa3c69e601b4a5d5a254129873ad",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/9ff337aac5c57a803ea60a667f8ad55e115b8e35afcb05480be20eef14750286.json.gz",
+      "release_asset_id": 612468917
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/a02da956ac68b8fa81f985ff01c915bad05f7b3d08789b16ab523a8341bb37a1.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/a02da956ac68b8fa81f985ff01c915bad05f7b3d08789b16ab523a8341bb37a1.json.gz",
+      "asset": "a02da956ac68b8fa81f985ff01c915bad05f7b3d08789b16ab523a8341bb37a1.json.gz",
+      "size": 655161,
+      "sha256": "0d9162fdd1c9517c5adb25dc282caa3dce438ccc15d23660e39d6743bab55c77",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/a02da956ac68b8fa81f985ff01c915bad05f7b3d08789b16ab523a8341bb37a1.json.gz",
+      "release_asset_id": 612468938
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/a21997843b8ff1618685b039451edab7fb97e5a48f7494cf0d575ed5bc993a0b.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/a21997843b8ff1618685b039451edab7fb97e5a48f7494cf0d575ed5bc993a0b.json.gz",
+      "asset": "a21997843b8ff1618685b039451edab7fb97e5a48f7494cf0d575ed5bc993a0b.json.gz",
+      "size": 668043,
+      "sha256": "203749b8dae520013d0578c5b787796dae62d67b370c7f1cbb71605d249125ff",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/a21997843b8ff1618685b039451edab7fb97e5a48f7494cf0d575ed5bc993a0b.json.gz",
+      "release_asset_id": 612468940
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/a6f7176a2ee5969374d8ecaa2a71140609439bc12a813ffa2546634b367f8055.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/a6f7176a2ee5969374d8ecaa2a71140609439bc12a813ffa2546634b367f8055.json.gz",
+      "asset": "a6f7176a2ee5969374d8ecaa2a71140609439bc12a813ffa2546634b367f8055.json.gz",
+      "size": 706188,
+      "sha256": "6b75c30d08032e0932de40fd93c4d965915aee4f92697ebf65dca7d7c9d8c9ba",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/a6f7176a2ee5969374d8ecaa2a71140609439bc12a813ffa2546634b367f8055.json.gz",
+      "release_asset_id": 612468939
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/ac3f6695b04e0e100552ca91439f64036d4f8b07339b8396a897a62bd804e4eb.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/ac3f6695b04e0e100552ca91439f64036d4f8b07339b8396a897a62bd804e4eb.json.gz",
+      "asset": "ac3f6695b04e0e100552ca91439f64036d4f8b07339b8396a897a62bd804e4eb.json.gz",
+      "size": 857265,
+      "sha256": "75b589610fea87c79edd537623d64542a8fb3a81f3cfc38ae3f778a1b64c2197",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/ac3f6695b04e0e100552ca91439f64036d4f8b07339b8396a897a62bd804e4eb.json.gz",
+      "release_asset_id": 612468942
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/ae6934cd9c4d5df9de0f2271696ede86d4073f23321804e84055dc84b0bf6ce7.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/ae6934cd9c4d5df9de0f2271696ede86d4073f23321804e84055dc84b0bf6ce7.json.gz",
+      "asset": "ae6934cd9c4d5df9de0f2271696ede86d4073f23321804e84055dc84b0bf6ce7.json.gz",
+      "size": 730010,
+      "sha256": "1d543a852bd104c86f8242b0fe63b04da96fc6f6b0d433299fb432dfee3b1ee1",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/ae6934cd9c4d5df9de0f2271696ede86d4073f23321804e84055dc84b0bf6ce7.json.gz",
+      "release_asset_id": 612468947
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/b4e4e1d5eca5266eda196d819eaa47c2d4067e3a4a4fb0bc9135a81447b033f8.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/b4e4e1d5eca5266eda196d819eaa47c2d4067e3a4a4fb0bc9135a81447b033f8.json.gz",
+      "asset": "b4e4e1d5eca5266eda196d819eaa47c2d4067e3a4a4fb0bc9135a81447b033f8.json.gz",
+      "size": 702063,
+      "sha256": "a596d168b53f2a66dc68d27b33a03baa9e24a0a34505f8cd66be5b85379af2c4",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/b4e4e1d5eca5266eda196d819eaa47c2d4067e3a4a4fb0bc9135a81447b033f8.json.gz",
+      "release_asset_id": 612468960
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/b7f4fa825f1cbfe95b869b149a8c691a6eebbba4ec804840f505b859904e1df2.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/b7f4fa825f1cbfe95b869b149a8c691a6eebbba4ec804840f505b859904e1df2.json.gz",
+      "asset": "b7f4fa825f1cbfe95b869b149a8c691a6eebbba4ec804840f505b859904e1df2.json.gz",
+      "size": 664237,
+      "sha256": "884ac97d1973bcafc7655ebe2155e3aca535516de0d7dd887c704e1355a5f7ec",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/b7f4fa825f1cbfe95b869b149a8c691a6eebbba4ec804840f505b859904e1df2.json.gz",
+      "release_asset_id": 612468967
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/ba34999721d37b1d182ff32b1e08a77bd49099cbc1d1b2c548c6637b92ff14b1.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/ba34999721d37b1d182ff32b1e08a77bd49099cbc1d1b2c548c6637b92ff14b1.json.gz",
+      "asset": "ba34999721d37b1d182ff32b1e08a77bd49099cbc1d1b2c548c6637b92ff14b1.json.gz",
+      "size": 591054,
+      "sha256": "07f386e5cb4d3499eb869f11f12bece567633155eb2b7834459484d5d977242b",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/ba34999721d37b1d182ff32b1e08a77bd49099cbc1d1b2c548c6637b92ff14b1.json.gz",
+      "release_asset_id": 612468972
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/bd64be1c8e03b0d35753072465960fc508a97e07faa95331d4519a344b617850.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/bd64be1c8e03b0d35753072465960fc508a97e07faa95331d4519a344b617850.json.gz",
+      "asset": "bd64be1c8e03b0d35753072465960fc508a97e07faa95331d4519a344b617850.json.gz",
+      "size": 605928,
+      "sha256": "87fc8ba6566b1708cabea3e018b640818f405990b80485e91aa98da991ea339e",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/bd64be1c8e03b0d35753072465960fc508a97e07faa95331d4519a344b617850.json.gz",
+      "release_asset_id": 612468973
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/bde559e30353d6835d52ecf24ff06293fbf5b4ef414d316d51e6fbada6278d8d.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/bde559e30353d6835d52ecf24ff06293fbf5b4ef414d316d51e6fbada6278d8d.json.gz",
+      "asset": "bde559e30353d6835d52ecf24ff06293fbf5b4ef414d316d51e6fbada6278d8d.json.gz",
+      "size": 681228,
+      "sha256": "26b67a7d69c2323cc49844fa86e685ad47b559d75274c80c1f5f1afa4bad5084",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/bde559e30353d6835d52ecf24ff06293fbf5b4ef414d316d51e6fbada6278d8d.json.gz",
+      "release_asset_id": 612468984
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/be72d630e5af823a6efc36d7ae9fb6069c83ca621c8f2011d996e4377cbcc2de.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/be72d630e5af823a6efc36d7ae9fb6069c83ca621c8f2011d996e4377cbcc2de.json.gz",
+      "asset": "be72d630e5af823a6efc36d7ae9fb6069c83ca621c8f2011d996e4377cbcc2de.json.gz",
+      "size": 836597,
+      "sha256": "f173443fa88591eddcc344968bb7c441ef626f575749d8540a5220f65369483d",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/be72d630e5af823a6efc36d7ae9fb6069c83ca621c8f2011d996e4377cbcc2de.json.gz",
+      "release_asset_id": 612468989
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/bee4a720f3664759344323ba9d1ce7c78db925a2d5ca539edd24e9df553af865.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/bee4a720f3664759344323ba9d1ce7c78db925a2d5ca539edd24e9df553af865.json.gz",
+      "asset": "bee4a720f3664759344323ba9d1ce7c78db925a2d5ca539edd24e9df553af865.json.gz",
+      "size": 686096,
+      "sha256": "15a2325108cb5ba8a777c0bbbbc9169e457ff5c77b1a5d7a32545e055bb14afb",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/bee4a720f3664759344323ba9d1ce7c78db925a2d5ca539edd24e9df553af865.json.gz",
+      "release_asset_id": 612468990
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/bfd184ec691f4c1cef4850bf5f6bef85aa4222b46f2f6288796bbf2fdc68a65c.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/bfd184ec691f4c1cef4850bf5f6bef85aa4222b46f2f6288796bbf2fdc68a65c.json.gz",
+      "asset": "bfd184ec691f4c1cef4850bf5f6bef85aa4222b46f2f6288796bbf2fdc68a65c.json.gz",
+      "size": 511511,
+      "sha256": "237e122e94f8af343b3ad392d3ff329e5498c7d2f4e27277ae4935bd8e6b9677",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/bfd184ec691f4c1cef4850bf5f6bef85aa4222b46f2f6288796bbf2fdc68a65c.json.gz",
+      "release_asset_id": 612469003
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/bfe6ebfb2be51ee23b0f712e1150cfb0e13ef08351289415e4a95352a6cd51e7.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/bfe6ebfb2be51ee23b0f712e1150cfb0e13ef08351289415e4a95352a6cd51e7.json.gz",
+      "asset": "bfe6ebfb2be51ee23b0f712e1150cfb0e13ef08351289415e4a95352a6cd51e7.json.gz",
+      "size": 911298,
+      "sha256": "d0947583a962e99fe5f6876a861c3e9ef46543ac8f57ef283108a112c86b8bb5",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/bfe6ebfb2be51ee23b0f712e1150cfb0e13ef08351289415e4a95352a6cd51e7.json.gz",
+      "release_asset_id": 612469002
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/c04de2d69db513bd1d0e893aaa79f846c2e8b9a6f4f7eb72b2a0410548d80d9a.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/c04de2d69db513bd1d0e893aaa79f846c2e8b9a6f4f7eb72b2a0410548d80d9a.json.gz",
+      "asset": "c04de2d69db513bd1d0e893aaa79f846c2e8b9a6f4f7eb72b2a0410548d80d9a.json.gz",
+      "size": 636742,
+      "sha256": "2d91a8e865289d7aa713307d3d3ff25badb6ebbfcf146e0edc731f7a6f04ca1a",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/c04de2d69db513bd1d0e893aaa79f846c2e8b9a6f4f7eb72b2a0410548d80d9a.json.gz",
+      "release_asset_id": 612469011
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/c130d3b53736831ac35b0975304152ec5ef7f64af02456fe31a943f6ef1af8c9.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/c130d3b53736831ac35b0975304152ec5ef7f64af02456fe31a943f6ef1af8c9.json.gz",
+      "asset": "c130d3b53736831ac35b0975304152ec5ef7f64af02456fe31a943f6ef1af8c9.json.gz",
+      "size": 504341,
+      "sha256": "68955b1b48d8dc767540ff402ae46177f3e21b2d2a6c181651b3ae7efc102e34",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/c130d3b53736831ac35b0975304152ec5ef7f64af02456fe31a943f6ef1af8c9.json.gz",
+      "release_asset_id": 612469016
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/c1ff5574c58a705f6e6d8895b6465869c646491c2ae42b6372c5a41cac2836d7.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/c1ff5574c58a705f6e6d8895b6465869c646491c2ae42b6372c5a41cac2836d7.json.gz",
+      "asset": "c1ff5574c58a705f6e6d8895b6465869c646491c2ae42b6372c5a41cac2836d7.json.gz",
+      "size": 494664,
+      "sha256": "31c56b9dcdc9adcb83c787cc13d6440e7236b27a1865e1c2c9c47bdf85228c04",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/c1ff5574c58a705f6e6d8895b6465869c646491c2ae42b6372c5a41cac2836d7.json.gz",
+      "release_asset_id": 612469020
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/c298f892fd0e8d4a30c960a143541fa45bfc74d77ae887b35ddb93912b8a489e.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/c298f892fd0e8d4a30c960a143541fa45bfc74d77ae887b35ddb93912b8a489e.json.gz",
+      "asset": "c298f892fd0e8d4a30c960a143541fa45bfc74d77ae887b35ddb93912b8a489e.json.gz",
+      "size": 846815,
+      "sha256": "acc2f51432821274f40dc9b24b51e520c0c344e92a57841fc0cc6db74d7f3db9",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/c298f892fd0e8d4a30c960a143541fa45bfc74d77ae887b35ddb93912b8a489e.json.gz",
+      "release_asset_id": 612469030
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/c44ed8cc570a68889d98a8dffae9da21a7101d4c28d6c74373fd12c7f8a068d9.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/c44ed8cc570a68889d98a8dffae9da21a7101d4c28d6c74373fd12c7f8a068d9.json.gz",
+      "asset": "c44ed8cc570a68889d98a8dffae9da21a7101d4c28d6c74373fd12c7f8a068d9.json.gz",
+      "size": 486758,
+      "sha256": "f21084a9989bfb788451bd7d4a5b4ad1ffc7c89b979d1420613ccd7d23740c4d",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/c44ed8cc570a68889d98a8dffae9da21a7101d4c28d6c74373fd12c7f8a068d9.json.gz",
+      "release_asset_id": 612469040
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/c5f9d97eda85be985065748bd44014375cfd0931c83778be8c268ad332282795.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/c5f9d97eda85be985065748bd44014375cfd0931c83778be8c268ad332282795.json.gz",
+      "asset": "c5f9d97eda85be985065748bd44014375cfd0931c83778be8c268ad332282795.json.gz",
+      "size": 683816,
+      "sha256": "0b505024e08b78b5395ce1b869248216f85a34faf7476789a882d381e113252e",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/c5f9d97eda85be985065748bd44014375cfd0931c83778be8c268ad332282795.json.gz",
+      "release_asset_id": 612469046
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/c6ba87a73f122bcf009c2d24d7670b3c8c2508f0f5dff2740c543357afb4564e.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/c6ba87a73f122bcf009c2d24d7670b3c8c2508f0f5dff2740c543357afb4564e.json.gz",
+      "asset": "c6ba87a73f122bcf009c2d24d7670b3c8c2508f0f5dff2740c543357afb4564e.json.gz",
+      "size": 875047,
+      "sha256": "df2d2c6f76e498e2d8a80a26325dd3bd4e19143ac294ac03dfb6758a2c1518e8",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/c6ba87a73f122bcf009c2d24d7670b3c8c2508f0f5dff2740c543357afb4564e.json.gz",
+      "release_asset_id": 612469047
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/c7e045b12e7ba97ef546f3ff483e3da3a6995116c799caeb0ddf037cc432064c.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/c7e045b12e7ba97ef546f3ff483e3da3a6995116c799caeb0ddf037cc432064c.json.gz",
+      "asset": "c7e045b12e7ba97ef546f3ff483e3da3a6995116c799caeb0ddf037cc432064c.json.gz",
+      "size": 1059912,
+      "sha256": "2582bcda300ce68d619b64b5b1b93a0d69a5b4a1b487161988340237cf57cbfb",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/c7e045b12e7ba97ef546f3ff483e3da3a6995116c799caeb0ddf037cc432064c.json.gz",
+      "release_asset_id": 612469052
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/c8dcfab0cdf808d0ee3cee5592900048f914c6e008c22e248ea494e489c24cd7.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/c8dcfab0cdf808d0ee3cee5592900048f914c6e008c22e248ea494e489c24cd7.json.gz",
+      "asset": "c8dcfab0cdf808d0ee3cee5592900048f914c6e008c22e248ea494e489c24cd7.json.gz",
+      "size": 698052,
+      "sha256": "55334f7832a4217cc98295d0a6ee90aa08959b615e921e1367eb28d489d82aba",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/c8dcfab0cdf808d0ee3cee5592900048f914c6e008c22e248ea494e489c24cd7.json.gz",
+      "release_asset_id": 612469062
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/ca8a147ce7376213f4ac81355ce060acff9059c0a9ef69b28215641217bf1477.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/ca8a147ce7376213f4ac81355ce060acff9059c0a9ef69b28215641217bf1477.json.gz",
+      "asset": "ca8a147ce7376213f4ac81355ce060acff9059c0a9ef69b28215641217bf1477.json.gz",
+      "size": 616784,
+      "sha256": "3b131b2a5ac1a5658db63cb26316da7ee2bcdc2360ccf17f560b3b39cef5abc1",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/ca8a147ce7376213f4ac81355ce060acff9059c0a9ef69b28215641217bf1477.json.gz",
+      "release_asset_id": 612469070
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/cce8355c502e0dd14bd1b7365293c72cfb192aad9b38ffe73db8d6a4e1276e8a.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/cce8355c502e0dd14bd1b7365293c72cfb192aad9b38ffe73db8d6a4e1276e8a.json.gz",
+      "asset": "cce8355c502e0dd14bd1b7365293c72cfb192aad9b38ffe73db8d6a4e1276e8a.json.gz",
+      "size": 405987,
+      "sha256": "593966553839641354c39f6a23e4598dde2384f5d016d85da4f68e4aba6d6c77",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/cce8355c502e0dd14bd1b7365293c72cfb192aad9b38ffe73db8d6a4e1276e8a.json.gz",
+      "release_asset_id": 612469086
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/d0476fa1eb01090f0e7826a3b56d8cd9809dd8652a5a75b1f8d0bbd5933570ae.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/d0476fa1eb01090f0e7826a3b56d8cd9809dd8652a5a75b1f8d0bbd5933570ae.json.gz",
+      "asset": "d0476fa1eb01090f0e7826a3b56d8cd9809dd8652a5a75b1f8d0bbd5933570ae.json.gz",
+      "size": 826987,
+      "sha256": "d43eda8b6e77e7a32f378fb1bfc919fbb5f3f98377dbaf5dc960b78f954111d5",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/d0476fa1eb01090f0e7826a3b56d8cd9809dd8652a5a75b1f8d0bbd5933570ae.json.gz",
+      "release_asset_id": 612469093
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/d122311e0388f292cce1b1a3981719b8082cc35eb72b352b69ed1634372f68bf.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/d122311e0388f292cce1b1a3981719b8082cc35eb72b352b69ed1634372f68bf.json.gz",
+      "asset": "d122311e0388f292cce1b1a3981719b8082cc35eb72b352b69ed1634372f68bf.json.gz",
+      "size": 686661,
+      "sha256": "c844d6dc73557c75be8fb3259a3eaea0f453431899de118c1e1c7c17da4ffabe",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/d122311e0388f292cce1b1a3981719b8082cc35eb72b352b69ed1634372f68bf.json.gz",
+      "release_asset_id": 612469147
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/d4dba052fa14b7ad11d041f4dad61c2d36545c507bb0beb451de076bfd7121f8.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/d4dba052fa14b7ad11d041f4dad61c2d36545c507bb0beb451de076bfd7121f8.json.gz",
+      "asset": "d4dba052fa14b7ad11d041f4dad61c2d36545c507bb0beb451de076bfd7121f8.json.gz",
+      "size": 846632,
+      "sha256": "a5f0de0d640f73a75a5995b63338d5c1e6645d2a3d7cd10892de3fb91298b72e",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/d4dba052fa14b7ad11d041f4dad61c2d36545c507bb0beb451de076bfd7121f8.json.gz",
+      "release_asset_id": 612469150
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/d55d8d03cb88643399a2bbf0016b0b9592b9e941dc0f0eb00af2972c7984b647.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/d55d8d03cb88643399a2bbf0016b0b9592b9e941dc0f0eb00af2972c7984b647.json.gz",
+      "asset": "d55d8d03cb88643399a2bbf0016b0b9592b9e941dc0f0eb00af2972c7984b647.json.gz",
+      "size": 577760,
+      "sha256": "9d965b313a5c54a6281d5c1523053c4fbde78a5c822e5bdf08d20e23ddde5694",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/d55d8d03cb88643399a2bbf0016b0b9592b9e941dc0f0eb00af2972c7984b647.json.gz",
+      "release_asset_id": 612469146
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/d66ac38e098a7ad7c1d7a1f0512cda3ba6db733b4e3ce3fd4b63e8b60fc1a7c3.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/d66ac38e098a7ad7c1d7a1f0512cda3ba6db733b4e3ce3fd4b63e8b60fc1a7c3.json.gz",
+      "asset": "d66ac38e098a7ad7c1d7a1f0512cda3ba6db733b4e3ce3fd4b63e8b60fc1a7c3.json.gz",
+      "size": 905446,
+      "sha256": "6c9ef30e0e428e7c3ae46bb277e70ec383013ac0bc146e890f91ecd5806e1306",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/d66ac38e098a7ad7c1d7a1f0512cda3ba6db733b4e3ce3fd4b63e8b60fc1a7c3.json.gz",
+      "release_asset_id": 612469148
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/d6dc807957f3f188f92f8e8fc2858f776b1d5d34be4659b8b302ae404a29d0a5.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/d6dc807957f3f188f92f8e8fc2858f776b1d5d34be4659b8b302ae404a29d0a5.json.gz",
+      "asset": "d6dc807957f3f188f92f8e8fc2858f776b1d5d34be4659b8b302ae404a29d0a5.json.gz",
+      "size": 654871,
+      "sha256": "c99559cd685ec85bec32c624539a99ff4b0bea9953f71965f4cec4ab9271a948",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/d6dc807957f3f188f92f8e8fc2858f776b1d5d34be4659b8b302ae404a29d0a5.json.gz",
+      "release_asset_id": 612469145
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/da08f598031f567d62a9bd8f20e393b6c9fa1c18563d339fd69fb1fae69b80a7.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/da08f598031f567d62a9bd8f20e393b6c9fa1c18563d339fd69fb1fae69b80a7.json.gz",
+      "asset": "da08f598031f567d62a9bd8f20e393b6c9fa1c18563d339fd69fb1fae69b80a7.json.gz",
+      "size": 1025368,
+      "sha256": "df0f99139dcd5f15b3f17b7c8fa1ced74de89d1d9f47a913a2dd9e1afb5ca140",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/da08f598031f567d62a9bd8f20e393b6c9fa1c18563d339fd69fb1fae69b80a7.json.gz",
+      "release_asset_id": 612469177
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/db014a79d48484dbd375287378b4991f129c2a843444bf3fa77c987367f8dcbe.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/db014a79d48484dbd375287378b4991f129c2a843444bf3fa77c987367f8dcbe.json.gz",
+      "asset": "db014a79d48484dbd375287378b4991f129c2a843444bf3fa77c987367f8dcbe.json.gz",
+      "size": 787938,
+      "sha256": "5e404c831bfb4d426442fe672b15603ee67b0dcd80b1e2500d2e2c45ababf2ac",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/db014a79d48484dbd375287378b4991f129c2a843444bf3fa77c987367f8dcbe.json.gz",
+      "release_asset_id": 612469187
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/db02a2348e4e61461e2a0870438a82b9ca7f64fe6b79dd622fc6074688e4868b.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/db02a2348e4e61461e2a0870438a82b9ca7f64fe6b79dd622fc6074688e4868b.json.gz",
+      "asset": "db02a2348e4e61461e2a0870438a82b9ca7f64fe6b79dd622fc6074688e4868b.json.gz",
+      "size": 532074,
+      "sha256": "a2aa190637d942046e4a4f3b380991722ffb4275882b6f3203587340c9b04341",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/db02a2348e4e61461e2a0870438a82b9ca7f64fe6b79dd622fc6074688e4868b.json.gz",
+      "release_asset_id": 612469190
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/dd2759235b1a09298dd528ed82d5ea0d7f66106266ff1a315e392be4264adc03.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/dd2759235b1a09298dd528ed82d5ea0d7f66106266ff1a315e392be4264adc03.json.gz",
+      "asset": "dd2759235b1a09298dd528ed82d5ea0d7f66106266ff1a315e392be4264adc03.json.gz",
+      "size": 917711,
+      "sha256": "f5be513810b78ba3170d93378cf71ce2e09964f5aed4399171e87c0869df8348",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/dd2759235b1a09298dd528ed82d5ea0d7f66106266ff1a315e392be4264adc03.json.gz",
+      "release_asset_id": 612469197
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/debd93db8b1e64336054536326f4c05f35c9dd34614c964a8a019de976974114.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/debd93db8b1e64336054536326f4c05f35c9dd34614c964a8a019de976974114.json.gz",
+      "asset": "debd93db8b1e64336054536326f4c05f35c9dd34614c964a8a019de976974114.json.gz",
+      "size": 844341,
+      "sha256": "7de4bf8f0940dfa043881703290ee87f1d6028f9613e7d35135a5b44dda51846",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/debd93db8b1e64336054536326f4c05f35c9dd34614c964a8a019de976974114.json.gz",
+      "release_asset_id": 612469213
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/dec59ed1b07dce97307c4def46d9674eb5040fe657639588a4c46dc163644047.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/dec59ed1b07dce97307c4def46d9674eb5040fe657639588a4c46dc163644047.json.gz",
+      "asset": "dec59ed1b07dce97307c4def46d9674eb5040fe657639588a4c46dc163644047.json.gz",
+      "size": 685231,
+      "sha256": "17d4151f019365c11e37900bb608c317fb340603bf407494f9626d59de7dec43",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/dec59ed1b07dce97307c4def46d9674eb5040fe657639588a4c46dc163644047.json.gz",
+      "release_asset_id": 612469219
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/dffcbec41e3e2b027d3a1f643aad25bdf0e49f53e057256cd15c5bd1ff9c230d.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/dffcbec41e3e2b027d3a1f643aad25bdf0e49f53e057256cd15c5bd1ff9c230d.json.gz",
+      "asset": "dffcbec41e3e2b027d3a1f643aad25bdf0e49f53e057256cd15c5bd1ff9c230d.json.gz",
+      "size": 665947,
+      "sha256": "bdedf4f3f97078bd171aef0747d3d6c9d13b3df6db1d74fd12546640840894df",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/dffcbec41e3e2b027d3a1f643aad25bdf0e49f53e057256cd15c5bd1ff9c230d.json.gz",
+      "release_asset_id": 612469224
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/e0d0cc6c95294113b22649b87dc8f9817e6c1e5b2f0feae4806fb91de3a1723b.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/e0d0cc6c95294113b22649b87dc8f9817e6c1e5b2f0feae4806fb91de3a1723b.json.gz",
+      "asset": "e0d0cc6c95294113b22649b87dc8f9817e6c1e5b2f0feae4806fb91de3a1723b.json.gz",
+      "size": 803494,
+      "sha256": "b716f04cdc5267c311c9c58132856834f224bd5bf80b5c69363638103ccc5cfd",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/e0d0cc6c95294113b22649b87dc8f9817e6c1e5b2f0feae4806fb91de3a1723b.json.gz",
+      "release_asset_id": 612469235
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/e158be8c419fd867550809b4dfbe8ec2efbac927008858724d4c3a5f2a962156.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/e158be8c419fd867550809b4dfbe8ec2efbac927008858724d4c3a5f2a962156.json.gz",
+      "asset": "e158be8c419fd867550809b4dfbe8ec2efbac927008858724d4c3a5f2a962156.json.gz",
+      "size": 1039495,
+      "sha256": "389abef0f9f2d7287ccc28ba2ad89e235cd9b711a4c5a1ce28dba452696eb408",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/e158be8c419fd867550809b4dfbe8ec2efbac927008858724d4c3a5f2a962156.json.gz",
+      "release_asset_id": 612469242
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/e20afadbd006c722fac218e91d7370d2ce68a447d8bddf5b5562d0e8c9779fe3.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/e20afadbd006c722fac218e91d7370d2ce68a447d8bddf5b5562d0e8c9779fe3.json.gz",
+      "asset": "e20afadbd006c722fac218e91d7370d2ce68a447d8bddf5b5562d0e8c9779fe3.json.gz",
+      "size": 608478,
+      "sha256": "d4550deba69cf3648aa33ea01b75af005bfcfbdffb03093e0105078ce28ff190",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/e20afadbd006c722fac218e91d7370d2ce68a447d8bddf5b5562d0e8c9779fe3.json.gz",
+      "release_asset_id": 612469257
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/e57390d439a0a6c716964a8d8918c23d498c928cfd2cdbeba67772ad46058eba.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/e57390d439a0a6c716964a8d8918c23d498c928cfd2cdbeba67772ad46058eba.json.gz",
+      "asset": "e57390d439a0a6c716964a8d8918c23d498c928cfd2cdbeba67772ad46058eba.json.gz",
+      "size": 854969,
+      "sha256": "33f779b07de76cd77db5117d119d84a21e5b6a0ed5f079385990ee63c19314a4",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/e57390d439a0a6c716964a8d8918c23d498c928cfd2cdbeba67772ad46058eba.json.gz",
+      "release_asset_id": 612469262
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/e785b15ff317cb7a0e6c9fc2fce49f6dc42d80a069e140c872dab20ca0c924fe.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/e785b15ff317cb7a0e6c9fc2fce49f6dc42d80a069e140c872dab20ca0c924fe.json.gz",
+      "asset": "e785b15ff317cb7a0e6c9fc2fce49f6dc42d80a069e140c872dab20ca0c924fe.json.gz",
+      "size": 676581,
+      "sha256": "374cfaeaf1f10f044a159b9c1e8ad900fd27340bd599797e81b29485ae0caa02",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/e785b15ff317cb7a0e6c9fc2fce49f6dc42d80a069e140c872dab20ca0c924fe.json.gz",
+      "release_asset_id": 612469263
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/ea762be8484753261d921ac9c457c7cdd7fe5e470b27737954591263e9076160.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/ea762be8484753261d921ac9c457c7cdd7fe5e470b27737954591263e9076160.json.gz",
+      "asset": "ea762be8484753261d921ac9c457c7cdd7fe5e470b27737954591263e9076160.json.gz",
+      "size": 566557,
+      "sha256": "efc939c76e376e83b05d5ad3fda7d5b0f058e20f6aeb39bedd4d1138e3129550",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/ea762be8484753261d921ac9c457c7cdd7fe5e470b27737954591263e9076160.json.gz",
+      "release_asset_id": 612469273
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/ed00431a064c34607f5b5222187e517e49b751aa0609355516b7d4cffcb50255.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/ed00431a064c34607f5b5222187e517e49b751aa0609355516b7d4cffcb50255.json.gz",
+      "asset": "ed00431a064c34607f5b5222187e517e49b751aa0609355516b7d4cffcb50255.json.gz",
+      "size": 714371,
+      "sha256": "587c751d2eb51c2dfe0cecd8ace7cfcebd0809e75a2c6dff3a32f14454b20460",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/ed00431a064c34607f5b5222187e517e49b751aa0609355516b7d4cffcb50255.json.gz",
+      "release_asset_id": 612469289
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/ed715136e7ff422a98770ee2c4f6e483adb98274c0f04d1a170b43277e92fbbf.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/ed715136e7ff422a98770ee2c4f6e483adb98274c0f04d1a170b43277e92fbbf.json.gz",
+      "asset": "ed715136e7ff422a98770ee2c4f6e483adb98274c0f04d1a170b43277e92fbbf.json.gz",
+      "size": 701194,
+      "sha256": "030f69339c8920bf257c3daf6b251c57cdff0644e3d45d992bdbbd6a896468c5",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/ed715136e7ff422a98770ee2c4f6e483adb98274c0f04d1a170b43277e92fbbf.json.gz",
+      "release_asset_id": 612469292
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/eda4f632f6465fe1a01931019a0f7b3528e5aaa5d19a308ab62b39d0f2eaf0e4.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/eda4f632f6465fe1a01931019a0f7b3528e5aaa5d19a308ab62b39d0f2eaf0e4.json.gz",
+      "asset": "eda4f632f6465fe1a01931019a0f7b3528e5aaa5d19a308ab62b39d0f2eaf0e4.json.gz",
+      "size": 728623,
+      "sha256": "2c92065037afa7af0016a7f5351a1f13b334a54db4f66b42d472d9e065ba3fbc",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/eda4f632f6465fe1a01931019a0f7b3528e5aaa5d19a308ab62b39d0f2eaf0e4.json.gz",
+      "release_asset_id": 612469296
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/f00972689472357bff0884ab410d70b8b162ff91a94dac63c0e912c457d0f56b.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/f00972689472357bff0884ab410d70b8b162ff91a94dac63c0e912c457d0f56b.json.gz",
+      "asset": "f00972689472357bff0884ab410d70b8b162ff91a94dac63c0e912c457d0f56b.json.gz",
+      "size": 580283,
+      "sha256": "cfaf81ad52823f8242dfb0b5e118a6f7e2d87ca717ce71e5d172bfbe9953a8b2",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/f00972689472357bff0884ab410d70b8b162ff91a94dac63c0e912c457d0f56b.json.gz",
+      "release_asset_id": 612469297
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/f2280f79e9578216a75767f537ab6d4c230049d7ca824e0b8534a4de3f4887d6.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/f2280f79e9578216a75767f537ab6d4c230049d7ca824e0b8534a4de3f4887d6.json.gz",
+      "asset": "f2280f79e9578216a75767f537ab6d4c230049d7ca824e0b8534a4de3f4887d6.json.gz",
+      "size": 574563,
+      "sha256": "ab55c1c3acdd633b2219266096830f63556e80e099196e0fb82a9a3420c7c78a",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/f2280f79e9578216a75767f537ab6d4c230049d7ca824e0b8534a4de3f4887d6.json.gz",
+      "release_asset_id": 612469307
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/f3f46cd15a0154fb40819387af40263a2c2bc0f974416ec4cdd495a29558ed0f.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/f3f46cd15a0154fb40819387af40263a2c2bc0f974416ec4cdd495a29558ed0f.json.gz",
+      "asset": "f3f46cd15a0154fb40819387af40263a2c2bc0f974416ec4cdd495a29558ed0f.json.gz",
+      "size": 610909,
+      "sha256": "8913d39a99dd54d5ca82111ec8e2ea2a7daae86b091fcfac201b8f44c2dc0a87",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/f3f46cd15a0154fb40819387af40263a2c2bc0f974416ec4cdd495a29558ed0f.json.gz",
+      "release_asset_id": 612469316
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/f422ecaad413d0602ce5f882461dae71f8af6c16734d23165992b942e7e213f9.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/f422ecaad413d0602ce5f882461dae71f8af6c16734d23165992b942e7e213f9.json.gz",
+      "asset": "f422ecaad413d0602ce5f882461dae71f8af6c16734d23165992b942e7e213f9.json.gz",
+      "size": 718360,
+      "sha256": "2f53f229c305d178630a195e72a83483dda68dea8908f30403a5c4943b6a7aa6",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/f422ecaad413d0602ce5f882461dae71f8af6c16734d23165992b942e7e213f9.json.gz",
+      "release_asset_id": 612469320
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/f45904bde03c19fb3d860e45c31fce6bde688ac7c02a0945e5366ef4979cd529.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/f45904bde03c19fb3d860e45c31fce6bde688ac7c02a0945e5366ef4979cd529.json.gz",
+      "asset": "f45904bde03c19fb3d860e45c31fce6bde688ac7c02a0945e5366ef4979cd529.json.gz",
+      "size": 916636,
+      "sha256": "c82c9a48276b1c2554d2ed378be42ae9c83ba2ccfbdbb6057ccae0e3f83b9b9d",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/f45904bde03c19fb3d860e45c31fce6bde688ac7c02a0945e5366ef4979cd529.json.gz",
+      "release_asset_id": 612469324
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/f7aa2179957afcff66273fd400257a5dc0cced9d175b470d1186d4ba069dc046.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/f7aa2179957afcff66273fd400257a5dc0cced9d175b470d1186d4ba069dc046.json.gz",
+      "asset": "f7aa2179957afcff66273fd400257a5dc0cced9d175b470d1186d4ba069dc046.json.gz",
+      "size": 686982,
+      "sha256": "5c44d569118414301dda7e10ef95cb7f609d4784acb5ef6e61a1538e3fce341d",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/f7aa2179957afcff66273fd400257a5dc0cced9d175b470d1186d4ba069dc046.json.gz",
+      "release_asset_id": 612469329
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/f7ae795faf25dcbbb451f59c61ad21379d1369b9e38bd1723f6735be2b63dc29.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/f7ae795faf25dcbbb451f59c61ad21379d1369b9e38bd1723f6735be2b63dc29.json.gz",
+      "asset": "f7ae795faf25dcbbb451f59c61ad21379d1369b9e38bd1723f6735be2b63dc29.json.gz",
+      "size": 844259,
+      "sha256": "272c1d4f6c3ee1d3bd37cff41efdeecc7658dc251ab4d94ce7546659f4d7d051",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/f7ae795faf25dcbbb451f59c61ad21379d1369b9e38bd1723f6735be2b63dc29.json.gz",
+      "release_asset_id": 612469340
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/f81015b68a913fc4951d7227d5b27fa4a713a8dc95f7f9f6a180f8eca24f5cab.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/f81015b68a913fc4951d7227d5b27fa4a713a8dc95f7f9f6a180f8eca24f5cab.json.gz",
+      "asset": "f81015b68a913fc4951d7227d5b27fa4a713a8dc95f7f9f6a180f8eca24f5cab.json.gz",
+      "size": 824397,
+      "sha256": "b12ffced9d7ebcc0879efaa70d41d41f1a265edbd656174c4687750b4626a5a8",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/f81015b68a913fc4951d7227d5b27fa4a713a8dc95f7f9f6a180f8eca24f5cab.json.gz",
+      "release_asset_id": 612469352
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/fb4a2bb98f1d5a2b30b1afe7d5ec331412ab9badca880d4bac8f4439cbdfcdfd.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/fb4a2bb98f1d5a2b30b1afe7d5ec331412ab9badca880d4bac8f4439cbdfcdfd.json.gz",
+      "asset": "fb4a2bb98f1d5a2b30b1afe7d5ec331412ab9badca880d4bac8f4439cbdfcdfd.json.gz",
+      "size": 938902,
+      "sha256": "f4b7046477cc6d9e22709451cf7025c707534a8a66abc8cba62fd0ff1b5dc944",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/fb4a2bb98f1d5a2b30b1afe7d5ec331412ab9badca880d4bac8f4439cbdfcdfd.json.gz",
+      "release_asset_id": 612469355
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/fc7e0ee8853faeb044dd63503a920fb9b36e893c121300456dd22a3427c3bad1.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/fc7e0ee8853faeb044dd63503a920fb9b36e893c121300456dd22a3427c3bad1.json.gz",
+      "asset": "fc7e0ee8853faeb044dd63503a920fb9b36e893c121300456dd22a3427c3bad1.json.gz",
+      "size": 646210,
+      "sha256": "754bcab9f002d83f03c558bb86ec2ffe7d2500ca22327b188aa00e3c9aab09a9",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/fc7e0ee8853faeb044dd63503a920fb9b36e893c121300456dd22a3427c3bad1.json.gz",
+      "release_asset_id": 612469357
+    },
+    {
+      "path": "packing/campaign/retained/session-186-n17-issue358-readiness/C2/fd7f4de9fe9575f9ed8fff4437c9db0a89f850640b0f3820ae74389a98920e0f.json.gz",
+      "upstream_path": "n17/certificates/b2/C2/fd7f4de9fe9575f9ed8fff4437c9db0a89f850640b0f3820ae74389a98920e0f.json.gz",
+      "asset": "fd7f4de9fe9575f9ed8fff4437c9db0a89f850640b0f3820ae74389a98920e0f.json.gz",
+      "size": 624528,
+      "sha256": "6224876190020c3c87243a93c2ca2474f1a81d83e6eb9d95a7c6c7959ffd62f1",
+      "url": "https://github.com/wand125/n17-certificates/releases/download/b2-classes-20261005/fd7f4de9fe9575f9ed8fff4437c9db0a89f850640b0f3820ae74389a98920e0f.json.gz",
+      "release_asset_id": 612469362
+    }
+  ]
+}
