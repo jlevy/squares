@@ -419,7 +419,7 @@ uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_va
 
 The builder admits only source-labelled exact facts and recomputes their polynomial and
 root checks. The renderer derives HTML and Markdown from that register and prints every
-coefficient; Pages draws the PDF from the same output.
+coefficient; Pages publishes the same complete content as a web report.
 The gate fails while the register trails its inputs, and the paper’s Pages half runs
 whenever the register, renderer, template, or focused controls change.
 

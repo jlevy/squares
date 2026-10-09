@@ -55,6 +55,9 @@ def test_no_derived_date_in_the_tree_is_other_than_its_rule_gives() -> None:
         "optimality paper, Original proof",
         "threshold-bound review, Original proof",
     } <= derived
+    assert not any(
+        row.artifact == "exact side values PDF CreationDate, ModDate" for row in found
+    )
     exact = next(row for row in found if row.artifact == "exact side values, Last revised")
     # A newly added article has no committed change date in the branch that introduces
     # it.  Once it is committed, the same row becomes derived and the general wrong-row
@@ -268,9 +271,11 @@ def test_a_built_pdf_is_held_to_its_papers_revised_date(
     assert artifact_dates.main(["--pdf", str(built), "--revised", "packing-methods"]) == 0
     built.write_bytes(CHROMIUM)
     assert artifact_dates.main(["--pdf", str(built), "--revised", "packing-methods"]) == 1
-    exact_day = artifact_dates.written_date(release.EXACT_SIDE_VALUES_REVISED)
-    built.write_bytes(dated(CHROMIUM, exact_day))
-    assert artifact_dates.main(["--pdf", str(built), "--revised", "exact-values"]) == 0
+    with pytest.raises(SystemExit) as refused:
+        artifact_dates.main(["--pdf", str(built), "--revised", "exact-values"])
+    assert refused.value.code == 2
+    with pytest.raises(ValueError, match="declares no PDF"):
+        artifact_dates.check_pdf(built, "exact-values")
     with pytest.raises(SystemExit):
         artifact_dates.main(["--pdf", str(built)])
 

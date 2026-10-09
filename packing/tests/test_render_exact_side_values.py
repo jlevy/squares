@@ -20,6 +20,7 @@ import pytest
 from devtools import build_exact_values as exact
 from devtools import check_published_site
 from devtools import render_exact_side_values as paper
+from devtools.render_overview import SITE_URL
 
 REVISION = "a" * 40
 
@@ -498,7 +499,11 @@ def test_the_retained_register_renders_every_expression_check_and_missing_route(
         (missing, missing_markdown),
     ):
         for entry in entries:
-            assert f"| {entry['n']} |" in markdown
+            assert (
+                f'id="current-n{entry["n"]}"' in markdown
+                if markdown == missing_markdown
+                else f"| {entry['n']} |" in markdown
+            )
     for entry in missing:
         for note in entry["notes"]:
             if note["kind"] not in {
@@ -584,17 +589,10 @@ def test_the_lazy_export_checks_every_payload_and_removes_stale_extras(
     assert paper.main([*arguments, "--check"]) == 0
 
 
-def test_pdf_uses_the_complete_archive(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    source = tmp_path / "exact-values.json"
-    source.write_text(json.dumps(small_document()), encoding="utf-8")
-    monkeypatch.setattr(paper, "REGISTER", source)
-    site = tmp_path / "site"
-    calls: list[tuple[Path, Path]] = []
-    monkeypatch.setattr(paper, "_print_pdf", lambda html, pdf: calls.append((html, pdf)))
-    assert paper.main(["--site", str(site), "--revision", REVISION, "--pdf"]) == 0
-    assert calls == [
-        (site / "papers/exact-side-values-complete.html", site / "papers/exact-side-values.pdf")
-    ]
+def test_web_only_export_refuses_a_pdf_build() -> None:
+    with pytest.raises(SystemExit) as error:
+        paper.main(["--pdf"])
+    assert error.value.code == 2
 
 
 def test_failed_publication_preserves_the_previous_complete_file(
@@ -700,5 +698,5 @@ def test_browser_and_complete_archive_have_distinct_publication_identity(
         paper.COMPLETE_PATH: archive,
     }
     for path, page in pages.items():
-        assert check_published_site.head_problems(page, paper.SITE_URL + path) == []
+        assert check_published_site.head_problems(page, SITE_URL + path) == []
     assert check_published_site.shared_descriptions(pages) == []

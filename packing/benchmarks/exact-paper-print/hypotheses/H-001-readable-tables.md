@@ -20,6 +20,12 @@ hypothesis:
 ---
 # Readable Complete-Paper Tables
 
+This print scope was retired by the user after the first candidate was refused.
+The report now publishes complete content on the web under `think-ja78`; no further
+print candidate or PDF qualification is required.
+The criterion and plan below are preserved as the dated preregistration, not current
+work instructions.
+
 Register this criterion before changing print CSS. The retained baseline was measured
 before registration and is observational evidence, not a retrospectively accepted trial.
 Use the maintained renderer’s settled print preflight as the layout instrument; physical

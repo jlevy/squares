@@ -3,8 +3,8 @@
 
 The owner asked on 2026-10-01 that the papers' "formats, formatting, and all structure
 should be similar". This reads each paper as a reader meets it, from the page, its
-Markdown edition and its PDF, and reports the papers side by side on every structural
-axis: the head and its dates, the formats row, the title, each line of the credits and
+Markdown edition and its PDF when declared, and reports the papers side by side on every
+structural axis: the head and its dates, the formats row, the title, each credit line,
 what is bold and what is linked in it, the version and dates lines, the series strip,
 the heading case, the figures and their captions, the tables, the footnotes, the
 closing and the colophon, and the Markdown edition's opening. An axis is one of two
@@ -597,6 +597,22 @@ CONTENT_AXES = frozenset(
 )
 
 
+def _declared_formats_match(structure: Structure, axis: str) -> bool:
+    """Keep exact chip grammar while honoring the paper's declared editions."""
+    slug = structure.paper
+    expected = [("MD", f"{slug}.md", "The Markdown this page is rendered from")]
+    if render_overview.paper_record(slug).has_pdf:
+        expected.append(("PDF", f"{slug}.pdf", "The typeset PDF of this page"))
+    expected.append(("GITHUB", "https://github.com/jlevy/squares", "The project on GitHub"))
+    if axis == "formats row: titles":
+        return tuple(chip.title for chip in structure.chips) == tuple(
+            item[2] for item in expected
+        )
+    return tuple((chip.label, chip.href) for chip in structure.chips) == tuple(
+        item[:2] for item in expected
+    )
+
+
 def compare(reference: Structure, *others: Structure) -> list[dict[str, Any]]:
     """Every axis, with each paper's value, the reference's first, and whether every
     paper's is the reference's, the form axes first."""
@@ -607,7 +623,11 @@ def compare(reference: Structure, *others: Structure) -> list[dict[str, Any]]:
             "axis": axis,
             "compared": "content" if axis in CONTENT_AXES else "form",
             **{paper: values[axis] for paper, values in found},
-            "same": _agree(
+            "same": all(
+                _declared_formats_match(structure, axis) for structure in (reference, *others)
+            )
+            if axis in {"formats row", "formats row: titles"}
+            else _agree(
                 axis,
                 [
                     values[axis]
@@ -664,14 +684,24 @@ def _fetch(site: str, path: str) -> bytes:
 
 
 def read_site(site: str, papers: Sequence[str] = PAPERS) -> list[Structure]:
-    """Each paper as a built site, or the published site, serves it."""
+    """Read complete reports; the exact-values catalogue has a separate full edition."""
     found = []
     for paper in papers:
-        html = _fetch(site, paper_path(paper)).decode("utf-8")
+        html_path = paper_path(paper)
+        if paper == render_overview.EXACT_SIDE_VALUES:
+            from devtools.render_exact_side_values import COMPLETE_PATH  # noqa: PLC0415
+
+            html_path = COMPLETE_PATH
+        html = _fetch(site, html_path).decode("utf-8")
         if not html:
-            raise SystemExit(f"{site} has no {paper_path(paper)}")
+            raise SystemExit(f"{site} has no {html_path}")
         markdown = _fetch(site, paper_path(paper, ".md")).decode("utf-8")
-        found.append(read(paper, html, markdown, _fetch(site, paper_path(paper, ".pdf"))))
+        pdf = (
+            _fetch(site, paper_path(paper, ".pdf"))
+            if render_overview.paper_record(paper).has_pdf
+            else b""
+        )
+        found.append(read(paper, html, markdown, pdf))
     return found
 
 

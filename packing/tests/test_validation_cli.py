@@ -793,7 +793,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "--ignore=tests/test_site_rendering.py",
         "--ignore=tests/test_site_math_preferences.py",
         "--ignore=tests/test_exact_side_values_browser.py",
-        "--ignore=tests/test_exact_side_values_print.py",
+        "--ignore=tests/test_exact_side_values_web.py",
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
@@ -4316,14 +4316,14 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
         "tests/test_site_rendering.py",
         "tests/test_site_math_preferences.py",
         "tests/test_exact_side_values_browser.py",
-        "tests/test_exact_side_values_print.py",
+        "tests/test_exact_side_values_web.py",
     }
     for path in validate.SITE_LAYOUT_TESTS:
         assert (validate.PROJECT_ROOT / path).is_file(), path
 
 
 def test_an_isolated_print_control_edit_selects_its_chromium_owner() -> None:
-    path = "packing/tests/test_exact_side_values_print.py"
+    path = "packing/tests/test_exact_side_values_web.py"
     for universe in (
         validate.STEPS,
         tuple(step for step in validate.STEPS if step.fast),

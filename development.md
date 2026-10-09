@@ -1321,21 +1321,23 @@ The survey posters are not redrawn for a result; they are
 [release assets](#release-assets-are-drawn-at-a-version-bump-or-on-demand).
 That sequence also applies when no explainer edition changes.
 
-**The site’s four papers are served under `papers/`, each by its slug**, and the slug is
+**The site’s five papers are served under `papers/`, each by its slug**, and the slug is
 the paper’s name in the source too (see
 [conventions.md → Naming](conventions.md#2-naming)). Three form the n = 11 series; the
-exact-values paper is independent and carries no series strip:
+methods survey and exact-values report are independent and carry no series strip:
 
 | Series part | Slug | Title | Renderer |
 | --- | --- | --- | --- |
 | I | `n11-lower-bounds-explainer` | New Lower Bounds for Square Packing for n = 11 | `render_n11_lower_bounds_explainer` |
 | II | `n11-threshold-bound-review` | A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares | `render_n11_threshold_bound_review` |
 | III | `n11-optimality-review` | A Review of the Optimality Proof of the Trump Packing of 11 Squares | `render_n11_optimality_review` |
+| Independent | `square-packing-methods-survey` | How Record Square Packings Are Found | `render_packing_methods` |
 | Independent | `exact-side-values` | Exact Side Values for Packing Unit Squares | `render_exact_side_values` |
 
-Each is `papers/<slug>.html` with `papers/<slug>.md` and `papers/<slug>.pdf` beside it.
+Each has `papers/<slug>.html` and `papers/<slug>.md`; a declared PDF edition is served
+beside them. The exact-values report publishes its complete content on the web.
 **The list of papers is written once**, as `render_overview.PAPERS` (slug, renderer
-module, card label, part and title, in reading order).
+module, card label, part, title and PDF availability, in reading order).
 `SITE_PAGES`, the Papers page and home cards, each paper’s series strip
 (`paper_front.series`), the slugs a link between papers may name (`paper_links`), the
 structure audit (`paper_structure`), the Pages scope (`pages_scope`), the preview build
@@ -1430,8 +1432,10 @@ The independent **exact side values paper** lives at `/papers/exact-side-values.
 [`exact-values.json.gz`](packing/frontier/exact-values.json.gz) as its only mathematical
 input and publishes a searchable browser with a compact index, individual metadata files
 and lazy coefficient payloads.
-Its complete HTML, Markdown and PDF archives print every recorded closed form and
-integer polynomial in full.
+The full HTML report and Markdown export retain every recorded closed form and integer
+polynomial in full.
+Large tabular reports are published for web reading; a PDF edition is
+optional and is reserved for short documents where it helps the reader.
 The register keeps the current $n=1\ldots324$ values and their totals separate from
 historical polynomial-side pairs transcribed from retained catalogues and exact-solution
 articles, including facts outside that horizon.
@@ -1449,14 +1453,15 @@ From `packing/`:
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --update
 uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --check
-uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values --pdf
+uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values
 uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values --check
 ```
 
 The renderer writes the browser to `site/papers/exact-side-values.html`, its classic
 script beside it, and index/metadata/coefficient JSON under `exact-side-values-data/`.
-The complete editions are `exact-side-values-complete.html`, `exact-side-values.md` and
-`exact-side-values.pdf`; `--pdf` prints the complete HTML archive.
+The complete editions are `exact-side-values-complete.html` and `exact-side-values.md`.
+This report does not generate a PDF. `render_overview.PAPERS` declares each paper’s
+formats so preview, publication and URL checks agree on which editions exist.
 `--check` rebuilds all text payloads and refuses missing, stale or extra generated
 files. The dedicated `exact-side-values` Pages job checks the renderer and lossless
 projection, builds the complete artifact and contributes it to `publish`. Required

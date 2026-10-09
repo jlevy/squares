@@ -1055,6 +1055,7 @@ def test_the_sample_cites_the_archive_and_the_campaign_whatever_the_checkout(
         ("papers/n11-threshold-bound-review.html", "Part II"),
         ("papers/n11-optimality-review.html", "Part III"),
         ("papers/square-packing-methods-survey.html", "Methods tutorial"),
+        ("papers/exact-side-values.html", "Exact values"),
     ],
 )
 def test_check_requires_each_review_where_its_papers_card_points(
@@ -1074,6 +1075,10 @@ def test_check_requires_each_review_where_its_papers_card_points(
     files = paper_files(review)
     requested: list[str] = []
     assert failures(monkeypatch, fake_site(site_pages(), requested=requested)) == []
+    record = render_overview.paper_record(Path(review).stem)
+    assert (review.removesuffix(".html") + ".pdf" in files) is record.has_pdf
+    if not record.has_pdf:
+        assert "https://example.org/" + review.removesuffix(".html") + ".pdf" not in requested
     for name in (review, *files):
         assert f"https://example.org/{name}" in requested, name
 

@@ -52,6 +52,7 @@ from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
 
+from devtools import render_overview
 from sqpack import release
 from sqpack.yamlio import safe_load
 
@@ -70,6 +71,14 @@ SYNOPSIS = REPO / "SYNOPSIS.md"
 THRESHOLD_RESULT = "T-037"
 OPTIMALITY_RESULT = "T-060"
 SYNOPSIS_DATE = re.compile(r"^\*\*Date:\*\* (\d{4}-\d{2}-\d{2})$", re.MULTILINE)
+
+PDF_PAPERS = {
+    "explainer": render_overview.N11_LOWER_BOUNDS_EXPLAINER,
+    "threshold": render_overview.N11_THRESHOLD_BOUND_REVIEW,
+    "optimality": render_overview.N11_OPTIMALITY_REVIEW,
+    "packing-methods": render_overview.PACKING_METHODS,
+    "exact-values": render_overview.EXACT_SIDE_VALUES,
+}
 
 
 def long_date(day: date | str) -> str:
@@ -218,12 +227,18 @@ def _paper_rows() -> list[Row]:
             None if exact_changed is None else long_date(exact_changed),
             unknown,
         ),
-        Row(
-            "exact side values PDF CreationDate, ModDate",
-            publication_date_text(written_date(release.EXACT_SIDE_VALUES_REVISED)),
-            "set by render_exact_side_values --pdf",
-            "Last revised, at noon UTC",
-            held_by="built at deploy; artifact_dates --pdf holds a built file",
+        *(
+            [
+                Row(
+                    "exact side values PDF CreationDate, ModDate",
+                    publication_date_text(written_date(release.EXACT_SIDE_VALUES_REVISED)),
+                    "set by render_exact_side_values --pdf",
+                    "Last revised, at noon UTC",
+                    held_by="built at deploy; artifact_dates --pdf holds a built file",
+                )
+            ]
+            if render_overview.paper_record(render_overview.EXACT_SIDE_VALUES).has_pdf
+            else []
         ),
         Row(
             "explainer, First published",
@@ -376,6 +391,8 @@ def check_pdf(pdf: Path, paper: str) -> int:
     """Hold one built PDF's dates to the revised date of the paper it is."""
     from devtools.render_n11_lower_bounds_explainer_pdf import date_problem  # noqa: PLC0415
 
+    if not render_overview.paper_record(PDF_PAPERS[paper]).has_pdf:
+        raise ValueError(f"{paper}: the paper declares no PDF edition")
     day = {
         "explainer": lambda: written_date(release.EXPLAINER_REVISED),
         "threshold": threshold_revised,
@@ -399,7 +416,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--pdf", type=Path, help="a built PDF whose dates to hold")
     parser.add_argument(
         "--revised",
-        choices=("explainer", "threshold", "optimality", "packing-methods", "exact-values"),
+        choices=tuple(
+            alias
+            for alias, slug in PDF_PAPERS.items()
+            if render_overview.paper_record(slug).has_pdf
+        ),
         help="with --pdf: the paper whose revised date the PDF's dates must be",
     )
     arguments = parser.parse_args(argv)

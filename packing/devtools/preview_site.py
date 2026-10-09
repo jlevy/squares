@@ -163,10 +163,12 @@ def build_workbench(output: Path) -> None:
 
 
 def build_paper(slug: str, output: Path) -> None:
-    """A paper other than the first as its Pages job leaves it: the page, its Markdown and
-    its PDF under `papers/`, from the renderer `render_overview.PAPERS` names for it. The
-    reviews are built alike (`n11-threshold-bound-review`, `n11-optimality-review`)."""
-    _run(render_overview.paper_record(slug).module, "--site", str(output), "--pdf")
+    """Build a paper's declared web and download editions as its Pages job does."""
+    paper = render_overview.paper_record(slug)
+    arguments = [paper.module, "--site", str(output)]
+    if paper.has_pdf:
+        arguments.append("--pdf")
+    _run(*arguments)
 
 
 def copy_moved_files(output: Path) -> list[str]:

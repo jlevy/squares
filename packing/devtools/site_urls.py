@@ -357,7 +357,7 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
         front = importlib.import_module(paper.module).FRONT
         first = paper_front.iso_date(front.dates[0].day)
         revised = paper_front.iso_date(paper_front.revised(front))
-        for extension in (".html", ".md", ".pdf"):
+        for extension in (".html", ".md", ".pdf") if paper.has_pdf else (".html", ".md"):
             rows.append(  # noqa: PERF401 -- each output has its own registration
                 _new_row(
                     render_overview.paper_path(paper.slug, extension),
@@ -1296,7 +1296,13 @@ def _seed_history(ref: str) -> list[SiteURL]:
             _static(kw.value, constants) for kw in paper.keywords if kw.arg == "module"
         )
         first, revised = _historical_paper_dates(ref, module)
-        for extension in (".html", ".md", ".pdf"):
+        has_pdf = next(
+            (_static(kw.value, constants) for kw in paper.keywords if kw.arg == "has_pdf"),
+            True,
+        )
+        if type(has_pdf) is not bool:
+            raise TypeError("historical paper PDF capability is not a boolean")
+        for extension in (".html", ".md", ".pdf") if has_pdf else (".html", ".md"):
             rows.append(  # noqa: PERF401 -- each output has its own registration
                 _new_row(
                     f"papers/{slug}{extension}",
@@ -1388,6 +1394,35 @@ def _seed_history(ref: str) -> list[SiteURL]:
     )
 
 
+def retire_unpublished(
+    previous: Sequence[SiteURL], historical: Sequence[SiteURL], paths: Sequence[str]
+) -> list[SiteURL]:
+    """Remove explicitly abandoned local PDF declarations, never published history."""
+    from devtools import render_overview  # noqa: PLC0415
+
+    retained = {row.path: row for row in previous}
+    published = {row.path for row in historical}
+    disabled = {
+        render_overview.paper_path(paper.slug, ".pdf"): "paper:" + paper.slug
+        for paper in render_overview.PAPERS
+        if not paper.has_pdf
+    }
+    if len(set(paths)) != len(paths):
+        raise ValueError("duplicate unpublished retirement")
+    for path in paths:
+        if path in published:
+            raise ValueError(f"cannot retire historical URL {path} as unpublished")
+        if path not in disabled:
+            raise ValueError(f"{path}: retirement requires a declared web-only paper")
+        row = retained.get(path)
+        if row is None:
+            raise ValueError(f"{path}: no local registration to retire")
+        if row.kind != "paper-file" or row.producer != disabled[path]:
+            raise ValueError(f"{path}: unpublished PDF owner differs from its paper")
+        del retained[path]
+    return list(retained.values())
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group()
@@ -1396,13 +1431,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--write", action="store_false", dest="check", help="write registry/document"
     )
     parser.add_argument("--history-ref", default="origin/main", help="retained URL baseline")
+    parser.add_argument(
+        "--retire-unpublished",
+        action="append",
+        default=[],
+        metavar="PATH",
+        help="retire an abandoned local PDF declaration only if absent from --history-ref",
+    )
     args = parser.parse_args(argv)
     try:
-        previous = (
-            load_registry() if REGISTRY.is_file() else historical_registry(args.history_ref)
-        )
+        historical = historical_registry(args.history_ref)
+        previous = load_registry() if REGISTRY.is_file() else historical
+        previous = retire_unpublished(previous, historical, args.retire_unpublished)
         rows = derive_registry(previous)
-        checks = check_history(rows, historical_registry(args.history_ref))
+        checks = check_history(rows, historical)
         for path, text in (
             (REGISTRY, render_registry(rows)),
             (DOCUMENT, render_document(rows)),

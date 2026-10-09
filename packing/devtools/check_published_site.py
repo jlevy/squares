@@ -133,11 +133,11 @@ REVIEW_PAPERS: tuple[str, ...] = tuple(
 )
 
 
-def paper_files(page: str) -> tuple[str, str]:
-    """What is served with a paper's page, by path under the site's root: its Markdown
-    and its PDF, beside it under its slug."""
+def paper_files(page: str) -> tuple[str, ...]:
+    """The paper's declared companion editions, by path under the site's root."""
     stem = page.removesuffix(".html")
-    return f"{stem}.md", f"{stem}.pdf"
+    record = render_overview.paper_record(Path(stem).name)
+    return (f"{stem}.md", f"{stem}.pdf") if record.has_pdf else (f"{stem}.md",)
 
 
 #: What is served with the optimality paper's page (`paper_files`).
@@ -1835,7 +1835,7 @@ def check(
             cites_commit(review, paper_text)
             paper_pages[review] = paper_text
         heads[review] = paper_text
-        review_markdown, _ = paper_files(review)
+        review_markdown = paper_files(review)[0]
         for name in paper_files(review):
             cited_here = name == review_markdown
             status, body = read(site + name, head=not cited_here, timeout=timeout)

@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Render the exact-side-values register as HTML, Markdown, and optionally PDF.
+"""Render the exact-side-values register as a web report and Markdown.
 
 The register is the paper's only mathematical source.  The article template supplies
 exposition; every count, expression, polynomial, check, route, and bead is generated
 from ``frontier/exact-values.json.gz``.  Given the site's root with ``--site``, this module
 writes a compact browser, lazy JSON payloads, a complete HTML archive, and Markdown.
-``--pdf`` prints the complete archive through the shared KPress publication layer;
 ``--check`` refuses missing, stale, or unexpected browser and archive outputs.
 """
 
@@ -16,17 +15,13 @@ import json
 import re
 import subprocess
 from collections.abc import Mapping, Sequence
-from datetime import datetime
 from html import escape
 from pathlib import Path
 from typing import Any
 
-from kpress.format.pdf import _await_print_fonts  # pyright: ignore[reportPrivateUsage]
-from kpress.output import write_bytes_atomic
 from strif import atomic_output_file
 
 from devtools import exact_catalogue, paper_front, render_n11_lower_bounds_explainer
-from devtools.render_n11_lower_bounds_explainer_pdf import dated
 from devtools.render_overview import (
     EMBED_SCRIPT,
     EXACT_SIDE_VALUES,
@@ -35,7 +30,6 @@ from devtools.render_overview import (
     PAPERS_ROOT,
     SITE_NAV,
     SITE_NAV_CSS,
-    SITE_URL,
     THEME_SCRIPT,
     PageMeta,
     colophon_lines,
@@ -43,6 +37,7 @@ from devtools.render_overview import (
     head_tags,
     nav_html,
     paper_path,
+    paper_record,
 )
 from devtools.retained_data import compressed_path, read_retained_text, retained_exists
 from sqpack.probes import probe
@@ -85,6 +80,7 @@ REVISED = EXACT_SIDE_VALUES_REVISED
 FRONT = paper_front.check(
     paper_front.PaperFront(
         slug=SLUG,
+        has_pdf=paper_record(SLUG).has_pdf,
         title=TITLE,
         oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
         agents=("GPT-5.6 Sol", "GPT-6 Astra"),
@@ -95,15 +91,6 @@ FRONT = paper_front.check(
         ),
     )
 )
-MATH_WAIT_MS = 15_000
-TYPESET_ALL = probe(
-    render_n11_lower_bounds_explainer.PROBES,
-    "render_n11_optimality_review/typeset_all",
-)
-ABSOLUTE_LINKS = probe(
-    render_n11_lower_bounds_explainer.PROBES,
-    "render_n11_lower_bounds_explainer_pdf/absolute_links",
-)
 LEFTOVER_SLOT = re.compile(r"\{\{[A-Z][A-Z_]*\}\}")
 RELATIVE_LINK = re.compile(r"(?P<start>\]\()(?P<url>\.\.?/[^\s)]+)(?P<end>\))")
 RELATIVE_REFERENCE = re.compile(r"(?m)^(?P<start>\[[^\]\n]+\]:[ \t]*)(?P<url>\.\.?/[^\s]+)")
@@ -113,12 +100,10 @@ POLYNOMIAL_STATES = frozenset(("integer", "rational", "closed-form", "minimal-po
 COEFFICIENT_TABLE_DEGREE = 64
 COEFFICIENT_TABLE_DIGITS = 48
 TERMS_PER_DISPLAY = 4
-# The complete archive prints at the shared 12pt face and Letter reading measure.
-# Long numeric terms need shorter displays; a wide single term uses its full table.
+# Long numeric terms use short displays; wide coefficients retain every digit in tables.
 DISPLAY_CHARACTER_BUDGET = 56
-PRINT_PROBES = PACKING / "devtools/probes"
-PRINT_CONTENT_WIDTH = probe(PRINT_PROBES, "render_exact_side_values/print_content_width")
-PRINT_MATH_FIT = probe(PRINT_PROBES, "render_exact_side_values/print_math_fit")
+WEB_PROBES = PACKING / "devtools/probes"
+WEB_LAYOUT = probe(WEB_PROBES, "render_exact_side_values/web_layout")
 
 RENDER_INPUTS = (
     Path(__file__),
@@ -129,8 +114,8 @@ RENDER_INPUTS = (
     BROWSER_STYLE,
     BROWSER_SCRIPT,
     Path(exact_catalogue.__file__),
-    PRINT_PROBES / "render_exact_side_values" / "print_content_width.js",
-    PRINT_PROBES / "render_exact_side_values" / "print_math_fit.js",
+    WEB_PROBES / "render_exact_side_values" / "web_layout.js",
+    PACKING / "devtools/preview_site.py",
     REGISTER,
     compressed_path(REGISTER),
     PACKING / "devtools/retained_data.py",
@@ -148,9 +133,6 @@ RENDER_INPUTS = (
     render_n11_lower_bounds_explainer.PROBES
     / "render_n11_lower_bounds_explainer"
     / "host_math_init.js",
-    render_n11_lower_bounds_explainer.PROBES
-    / "render_n11_optimality_review"
-    / "typeset_all.js",
     REPO / "vendor/kpress",
 )
 
@@ -277,7 +259,22 @@ def sources_markdown(register: Mapping[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def exact_forms_markdown(register: Mapping[str, Any]) -> str:
+def _exact_expression(value: object) -> str:
+    source = str(value)
+    rational = re.fullmatch(r"\\(?:t?frac)\{([+-]?\d+)\}\{(\d+)\}", source)
+    if rational is None or max(map(len, rational.groups())) <= 24:
+        return _math(value)
+    numerator, denominator = rational.groups()
+    return (
+        '<span class="exact-rational" role="math" '
+        f'aria-label="{numerator} divided by {denominator}" '
+        f'data-exact-source="{escape(source, quote=True)}">'
+        f'<span class="exact-numerator">{numerator}</span>'
+        f'<span class="exact-denominator">{denominator}</span></span>'
+    )
+
+
+def exact_forms_markdown(register: Mapping[str, Any], *, web: bool = False) -> str:
     lines = [
         "| $n$ | Register state | Exact side of the recorded packing | Degree | Claim |",
         "| ---: | --- | --- | ---: | --- |",
@@ -292,7 +289,7 @@ def exact_forms_markdown(register: Mapping[str, Any]) -> str:
                 (
                     str(entry["n"]),
                     _table_text(entry.get("state")),
-                    _math(exact),
+                    _exact_expression(exact) if web else _math(exact),
                     _table_text(entry.get("degree")),
                     _claim(entry),
                 )
@@ -491,7 +488,9 @@ def missing_values_markdown(register: Mapping[str, Any]) -> str:
                 "| "
                 + " | ".join(
                     (
-                        str(entry["n"]) if index == 0 else "",
+                        f'<span id="current-n{entry["n"]}">{entry["n"]}</span>'
+                        if index == 0
+                        else "",
                         _table_text(entry.get("state")) if index == 0 else "",
                         _table_text(side.get("value")) if index == 0 else "",
                         kkt_value if index == 0 else "",
@@ -747,6 +746,8 @@ def current_polynomials_markdown(register: Mapping[str, Any]) -> str:
         sections.append(
             "\n".join(
                 (
+                    f'<span id="current-n{n}"></span>',
+                    "",
                     f"### Current polynomial for $n={n}$",
                     "",
                     (
@@ -894,6 +895,8 @@ def historical_polynomials_markdown(register: Mapping[str, Any]) -> str:
         sections.append(
             "\n".join(
                 (
+                    f'<span id="historical-n{n}-occurrence{seen[n]}"></span>',
+                    "",
                     f"### Historical polynomial for $n={n}$ at side `{side}`",
                     "",
                     (
@@ -929,12 +932,12 @@ def historical_polynomials_markdown(register: Mapping[str, Any]) -> str:
     return "\n\n".join(sections) + "\n"
 
 
-def generated_sections(register: Mapping[str, Any]) -> dict[str, str]:
+def generated_sections(register: Mapping[str, Any], *, web: bool = False) -> dict[str, str]:
     return {
         "REGISTER_SUMMARY": summary_markdown(register),
         "REGISTER_SOURCES": sources_markdown(register),
         "CLOSED_FORM_FAMILIES": closed_form_families_markdown(register),
-        "EXACT_FORMS": exact_forms_markdown(register),
+        "EXACT_FORMS": exact_forms_markdown(register, web=web),
         "CHECK_SUMMARIES": checks_markdown(register),
         "MISSING_VALUES": missing_values_markdown(register),
         "HISTORICAL_SUMMARY": historical_summary_markdown(register),
@@ -1037,9 +1040,10 @@ def expanded_markdown(
     register: Mapping[str, Any],
     revision: str,
     article: Path = ARTICLE,
+    web: bool = False,
 ) -> str:
     source = paper_front.fill(source, FRONT)
-    source = _fill(source, generated_sections(register), source=article, strict=True)
+    source = _fill(source, generated_sections(register, web=web), source=article, strict=True)
     return _repository_links(source, source=article, revision=revision)
 
 
@@ -1085,7 +1089,10 @@ def render(
         raise ExactSideValuesPaperError("the exact-values paper has no figure or fact slots")
     register = register or load_register()
     expanded = expanded_markdown(source, register=register, revision=revision, article=article)
-    document = parse_markdown(expanded, title=TITLE, trust_mode="trusted", math="auto")
+    html_source = expanded_markdown(
+        source, register=register, revision=revision, article=article, web=True
+    )
+    document = parse_markdown(html_source, title=TITLE, trust_mode="trusted", math="auto")
     errors = [item.message for item in document.diagnostics if item.severity == "error"]
     if errors:
         raise ExactSideValuesPaperError(
@@ -1109,7 +1116,15 @@ def render(
         "SITE_EMBED": EMBED_SCRIPT.read_text(encoding="utf-8"),
         "SITE_THEME": THEME_SCRIPT.read_text(encoding="utf-8"),
         "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
-        "BODY_HTML": document.html,
+        "BODY_HTML": document.html.replace(
+            '<div class="kpress-table-wrap"',
+            '<div class="kpress-table-wrap" tabindex="0" role="region" '
+            'aria-label="Scrollable data table"',
+        ).replace(
+            '<div class="kpress-math kpress-math-display"',
+            '<div class="kpress-math kpress-math-display" tabindex="0" role="region" '
+            'aria-label="Polynomial equation"',
+        ),
         **(math_scripts(static) if document.has_math else {"KATEX_JS": "", "SITE_MATH": ""}),
         "DIAGRAM_LABEL_SCRIPT": "",
     }
@@ -1119,8 +1134,14 @@ def render(
     return page, paper_front.published(expanded, FRONT)
 
 
-def render_browser(*, revision: str | None = None) -> str:
-    """The browser shell ships no mathematical payload or embedded font distribution."""
+def render_browser(
+    *, revision: str | None = None, register: Mapping[str, Any] | None = None
+) -> str:
+    """The report overview loads record details and coefficients on demand."""
+    register = register or load_register()
+    rows = entries(register)
+    polynomial_count = sum(row.get("polynomial") is not None for row in rows)
+    proved_count = sum(row.get("status") == "proved" for row in rows)
     static = render_n11_lower_bounds_explainer.kpress_static()
     values = {
         "PAGE_HEAD": head_tags(page_meta()),
@@ -1130,7 +1151,13 @@ def render_browser(*, revision: str | None = None) -> str:
         "SITE_THEME": THEME_SCRIPT.read_text(encoding="utf-8"),
         "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
         "COLOPHON": colophon_lines(edition=""),
-        "BROWSER_VERSION": escape(FRONT.version),
+        "BROWSER_CREDITS": paper_front.credits_html(FRONT),
+        "BROWSER_COVERAGE": (
+            f"{len(rows)} current records, including {polynomial_count} exact polynomials "
+            f"and {len(rows) - polynomial_count} numeric values; "
+            f"{len(historical_entries(register))} historical source records. "
+            f"Global optimality is proved for {proved_count} current records."
+        ),
         "REGISTER_SOURCE_URL": (
             f"https://github.com/jlevy/squares/blob/{revision or link_revision()}/"
             "packing/frontier/exact-values.json.gz"
@@ -1140,7 +1167,6 @@ def render_browser(*, revision: str | None = None) -> str:
         "BROWSER_SCRIPT_URL": escape(BROWSER_SCRIPT_NAME, quote=True),
         "COMPLETE_HTML_URL": escape(Path(COMPLETE_PATH).name, quote=True),
         "COMPLETE_MARKDOWN_URL": escape(Path(paper_path(SLUG, ".md")).name, quote=True),
-        "COMPLETE_PDF_URL": escape(Path(paper_path(SLUG, ".pdf")).name, quote=True),
     }
     return _fill(
         BROWSER_SHELL.read_text(encoding="utf-8"), values, source=BROWSER_SHELL, strict=True
@@ -1163,7 +1189,7 @@ def output_files(
             encoding="utf-8"
         ),
         **exact_catalogue.output_files(register, papers=site / Path(SITE_PATH).parent),
-        site / SITE_PATH: render_browser(revision=revision),
+        site / SITE_PATH: render_browser(revision=revision, register=register),
     }
 
 
@@ -1192,53 +1218,145 @@ def _payload_files(site: Path) -> tuple[Path, ...]:
     return tuple(sorted(files))
 
 
-def _publication_day() -> datetime:
-    return datetime.strptime(paper_front.revised(FRONT), "%B %d, %Y")  # noqa: DTZ007
+def web_findings(layout: Mapping[str, Any]) -> list[str]:
+    """Refuse document overflow, broken math, or inaccessible overflowing tables."""
+    findings = []
+    if layout["pageOverflow"] > 1:
+        findings.append(f"document overflows by {layout['pageOverflow']}px")
+    if layout["mathErrors"]:
+        findings.append(f"{layout['mathErrors']} math rendering errors")
+    findings.extend(
+        "a wide table cannot be reached by keyboard scrolling"
+        for table in (*layout["tables"], *layout["mathScrollRegions"])
+        if table["contentWidth"] - table["width"] > 1
+        and (table["overflow"] not in {"auto", "scroll"} or not table["keyboardReachable"])
+    )
+    if layout["lostInkCount"]:
+        findings.append(f"{layout['lostInkCount']} hidden, clipped or overlapping source runs")
+    return findings
 
 
-def _print_pdf(html_path: Path, pdf_path: Path) -> None:
+def check_web(site: Path, *, shots: Path | None = None) -> dict[str, Any]:
+    """Check existing report views against their exported index, without rebuilding."""
+    from playwright.sync_api import Error as BrowserError  # noqa: PLC0415
     from playwright.sync_api import expect, sync_playwright  # noqa: PLC0415
 
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch()
-        page = None
-        try:
-            page = browser.new_page()
-            page.goto(html_path.as_uri(), wait_until="networkidle")
-            page.evaluate(ABSOLUTE_LINKS, SITE_URL + COMPLETE_PATH)
-            page.emulate_media(media="print")
-            content_width = page.evaluate(PRINT_CONTENT_WIDTH)
-            if not isinstance(content_width, int | float) or not 0 < content_width <= 816:
-                raise ExactSideValuesPaperError("invalid Letter print content width")
-            # A print-media viewport excludes @page margins, just as the physical page
-            # content box does. Preflight at that width before Chromium paginates.
-            page.set_viewport_size({"width": int(content_width), "height": 1056})
-            hosts = page.locator(".kpress-math")
-            if hosts.count() == 0:
-                raise ExactSideValuesPaperError("the paper has no typeset math")
-            page.evaluate(TYPESET_ALL)
+    from devtools import preview_site  # noqa: PLC0415
+
+    index = site / Path(SITE_PATH).parent / exact_catalogue.INDEX_PATH
+    try:
+        exported = _as_mapping(json.loads(index.read_text(encoding="utf-8")), "exported index")
+        rows = tuple(
+            _as_mapping(row, "index entry")
+            for row in _as_sequence(exported.get("entries"), "index entries")
+        )
+        polynomials = tuple(row for row in rows if row.get("kind") == "polynomial")
+        if not polynomials:
+            raise ExactSideValuesPaperError("the exported index contains no polynomials")
+        selected = next(
+            (
+                row
+                for row in polynomials
+                if row.get("n") == 83 and row.get("section") == "current"
+            ),
+            polynomials[0],
+        )
+        expected = {
+            section: sum(row.get("section") == section for row in polynomials)
+            for section in ("current", "historical")
+        }
+    except (OSError, ValueError) as error:
+        return {"phase": "inputs", "findings": [str(error)], "runs": []}
+    server = preview_site.serve(site, 0)
+    runs = []
+    try:
+        with sync_playwright() as driver:
+            browser = preview_site.launch_chromium(driver)
             try:
-                expect(page.locator(".kpress-math:not(:has(.katex))")).to_have_count(
-                    0, timeout=MATH_WAIT_MS
-                )
-            except AssertionError as error:
-                raise ExactSideValuesPaperError("the paper has unrendered math") from error
-            if page.locator(".katex-error, math merror").count():
-                raise ExactSideValuesPaperError("the paper contains a math rendering error")
-            _await_print_fonts(page)  # pyright: ignore[reportArgumentType]
-            fit = page.evaluate(PRINT_MATH_FIT)
-            if fit["checked"] != page.locator(".kpress-math-display").count():
-                raise ExactSideValuesPaperError("print math fit check missed a display")
-            if fit["overflows"]:
-                raise ExactSideValuesPaperError(
-                    "paper math exceeds its print column: " + json.dumps(fit["overflows"][:5])
-                )
-            drawn = page.pdf(format="Letter", prefer_css_page_size=True, print_background=True)
-            write_bytes_atomic(pdf_path, dated(drawn, _publication_day().date()))
-        finally:
-            if page is not None:
-                page.close()
-            browser.close()
+                for width in (390, 1280):
+                    for scheme in ("light", "dark"):
+                        for path in (SITE_PATH, COMPLETE_PATH):
+                            context = browser.new_context(
+                                viewport={"width": width, "height": 844}, color_scheme=scheme
+                            )
+                            run: dict[str, Any] = {
+                                "path": path,
+                                "width": width,
+                                "scheme": scheme,
+                                "phase": "load",
+                            }
+                            try:
+                                page = context.new_page()
+                                errors: list[str] = []
+                                page.on(
+                                    "pageerror",
+                                    lambda error, errors=errors: errors.append(str(error)),
+                                )
+                                url = f"http://127.0.0.1:{server.server_port}/{path}"
+                                if path == SITE_PATH:
+                                    url += "#" + str(selected["id"])
+                                response = page.goto(url, wait_until="networkidle")
+                                if response is None or not response.ok:
+                                    status = response.status if response else "no response"
+                                    message = f"report returned HTTP {status}"
+                                    run.update(error=message, findings=[message])
+                                    continue
+                                run["phase"] = "content"
+                                selector = (
+                                    "#exact-browser"
+                                    if path == SITE_PATH
+                                    else ".exact-side-values-paper"
+                                )
+                                if page.locator(selector).count() != 1:
+                                    message = "the expected report root is missing"
+                                    run.update(error=message, findings=[message])
+                                    continue
+                                if path == SITE_PATH:
+                                    expect(page.locator("#detail-content")).to_be_visible()
+                                    page.get_by_role("button", name="Open coefficients").click()
+                                    expect(page.locator("#coefficient-body tr")).to_have_count(
+                                        min(12, int(selected["degree"]) + 1)
+                                    )
+                                else:
+                                    page.wait_for_selector("html.math-ready", state="attached")
+                                run["phase"] = "measure"
+                                layout = page.evaluate(WEB_LAYOUT)
+                                findings = web_findings(layout)
+                                if path == COMPLETE_PATH and (
+                                    layout["currentPolynomials"] != expected["current"]
+                                    or layout["historicalPolynomials"] != expected["historical"]
+                                    or layout["mathHosts"] == 0
+                                ):
+                                    findings.append(
+                                        "archive census differs from exported index"
+                                    )
+                                findings.extend(errors)
+                                run.update(phase="measured", layout=layout, findings=findings)
+                                if shots:
+                                    shots.mkdir(parents=True, exist_ok=True)
+                                    image = shots / f"{Path(path).stem}-{width}-{scheme}.png"
+                                    page.screenshot(path=str(image))
+                                    run["screenshot"] = str(image)
+                            except (
+                                AssertionError,
+                                BrowserError,
+                                ExactSideValuesPaperError,
+                            ) as error:
+                                run.update(error=str(error), findings=[str(error)])
+                            finally:
+                                context.close()
+                                runs.append(run)
+                return {
+                    "browser": browser.version,
+                    "expected_polynomials": expected,
+                    "runs": runs,
+                    "findings": [finding for run in runs for finding in run["findings"]],
+                }
+            finally:
+                browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -1251,14 +1369,43 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--revision", default=None, help="full Git commit for source links")
     parser.add_argument(
-        "--pdf", action="store_true", help="also print the complete HTML archive with KPress"
-    )
-    parser.add_argument(
         "--check",
         action="store_true",
         help="compare browser, complete archive, and every lazy payload",
     )
+    parser.add_argument(
+        "--check-web",
+        action="store_true",
+        help="check existing web reports at phone and desktop widths in both themes",
+    )
+    parser.add_argument(
+        "--web-report", type=Path, help="save the settled web layout measurements"
+    )
+    parser.add_argument(
+        "--web-shots", type=Path, help="save phone and desktop report screenshots"
+    )
     args = parser.parse_args(argv)
+    if args.web_shots and not args.check_web:
+        parser.error("--web-shots requires --check-web")
+    if args.web_report and not args.check_web:
+        parser.error("--web-report requires --check-web")
+    if args.check_web:
+        if args.check or args.revision:
+            parser.error(
+                "--check-web reads existing outputs; it does not render or compare them"
+            )
+        site = args.site.resolve()
+        if args.web_report and args.web_report.resolve().is_relative_to(site):
+            parser.error("save web diagnostics outside the publication directory")
+        if args.web_shots and args.web_shots.resolve().is_relative_to(site):
+            parser.error("save web screenshots outside the publication directory")
+        report = check_web(site, shots=args.web_shots)
+        encoded = json.dumps(report, indent=2) + "\n"
+        if args.web_report:
+            args.web_report.parent.mkdir(parents=True, exist_ok=True)
+            args.web_report.write_text(encoded, encoding="utf-8")
+        print(encoded, end="")
+        return int(bool(report["findings"]))
     register = load_register()
     revision = args.revision or link_revision()
     html, markdown = render(
@@ -1268,8 +1415,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     outputs = output_files(site, html, markdown, register=register, revision=revision)
     extra = [path for path in _payload_files(site) if path not in outputs]
     if args.check:
-        if args.pdf:
-            parser.error("--check compares browser/archive outputs; use --pdf for a fresh PDF")
         stale = [
             path
             for path, content in outputs.items()
@@ -1290,8 +1435,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                 temporary.unlink(missing_ok=True)
     for path in extra:
         path.unlink()
-    if args.pdf:
-        _print_pdf(site / COMPLETE_PATH, site / paper_path(SLUG, ".pdf"))
     return 0
 
 

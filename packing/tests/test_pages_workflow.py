@@ -1087,7 +1087,6 @@ def _assembled(
     exact_files: tuple[str, ...] = (
         "exact-side-values.html",
         "exact-side-values.md",
-        "exact-side-values.pdf",
         "exact-side-values-complete.html",
         "exact-side-values-browser.js",
         "exact-side-values-data/index.json",
@@ -1283,7 +1282,6 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
         "papers/square-packing-methods-survey.pdf",
         "papers/exact-side-values.html",
         "papers/exact-side-values.md",
-        "papers/exact-side-values.pdf",
         "papers/exact-side-values-complete.html",
         "papers/exact-side-values-browser.js",
         "papers/exact-side-values-data/index.json",
@@ -1351,7 +1349,6 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
         exact_files=(
             "exact-side-values.html",
             "exact-side-values.md",
-            "exact-side-values.pdf",
             "exact-side-values-complete.html",
             "exact-side-values-data/index.json",
             "exact-side-values-browser.js",

@@ -233,6 +233,8 @@ class PaperRecord(NamedTuple):
     label: str
     part: int | None
     title: str
+    has_pdf: bool = True
+    """Whether this paper produces and advertises a PDF edition."""
 
 
 #: The site's papers, in reading order: the one list a new paper is entered in. They are
@@ -284,6 +286,7 @@ PAPERS: tuple[PaperRecord, ...] = (
         label="Exact values",
         part=None,
         title="Exact Side Values for Packing Unit Squares",
+        has_pdf=False,
     ),
 )
 

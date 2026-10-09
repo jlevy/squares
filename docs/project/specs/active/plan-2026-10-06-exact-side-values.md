@@ -299,8 +299,8 @@ exact linkage.
   Its 29.19 s replay fits the PR surface; it runs in the routine gates and at
   records/full checkpoints.
 
-- **Paper.** `devtools.render_exact_side_values` generates a searchable web browser and
-  complete HTML, Markdown and PDF archives from the register.
+- **Web report.** `devtools.render_exact_side_values` generates a searchable catalogue,
+  complete HTML report and Markdown export from the register.
   All expressions and coefficients are included, including large coefficient tables.
   The paper is independent of the three-part $n = 11$ series.
 
@@ -334,7 +334,7 @@ A delivery-recovery worker checks earlier claimed output.
 | 2 | W7: exact admission and historical projection | Initial 2026-10-07 collection: 270 current exact sides and 162 historical entries |
 | 3 | W2 review of W1/W7: independent source, irreducibility and real-root checks | Correctness findings fixed; review retained |
 | 4 | W7 **efficiency block**: exact interior-sign root comparisons | Full mathematical replay preserved; initial replay reduced to 31.67 s locally |
-| 5 | W7: generated paper, site wiring and import documentation | HTML/Markdown/PDF renderer and publication contracts implemented |
+| 5 | W7: generated paper, site wiring and import documentation | Initial HTML/Markdown/PDF contracts implemented; current scope retains the web report and Markdown |
 | 6 | W7 **efficiency block**: practical web reading (`think-mo36`) | Searchable index, lazy metadata and coefficient vectors; complete archives retained |
 | 7 | W7: final checks, PR, delivery audit and replanning | Final validation is reported in the PR; unavailable earlier outputs remain an explicit dependency |
 | 8 | W7: upstream integration and PDF storage maintenance (`think-okcb`) | Earlier 2026-10-08 checkpoint: 287 current exact values, 170 historical identities and 37 numeric routes; 13 original PDFs hosted outside Git and a universal 5 MiB tracked-PDF gate |
@@ -342,7 +342,7 @@ A delivery-recovery worker checks earlier claimed output.
 | 10 | W7: recovered stack, verified-bound identities and work map (`think-jygq`, `think-808n`) | Original 2026-10-08 A1 checkpoint: rebased both layers through the stacked-PR shortcut; 33 replay-backed rational identities projected without changing case bounds or proof status; four representation gaps then remained |
 | 11 | W7: final publication input repair (`think-x0j9`) | The fresh catalogue job exposed a missing retained KKT-results leaf in its sparse checkout; keep that exact input and exercise the real Git include/exclude contract |
 | 12 | W7: assembled publication contract (`think-wiu3`) | Original 2026-10-08 checkpoint: register 1,005 catalogue outputs by their exact exporter identities; reserve the 6 MB archive budget for its specific producer/path and bind approved scripts to retained source bytes |
-| 13 | W7: complete PDF layout (`think-vore`) | Print-fit audit found expanded math outside the Letter content width; preserve every coefficient with shorter displays/tables and preflight every display at the actual Letter content width |
+| 13 | W7: complete PDF layout (`think-vore`) | Dated print-fit audit retained; further PDF packaging retired by the user on 2026-10-09 |
 | 14 | W7 **efficiency block**: bounded receipt controls (`think-3okf`) | Separate four custody corruptions into independently named tests; each replays the full packet scan and checks its specific refusal within the unchanged per-test wall |
 | 15 | W7: private snapshot copy contract (`think-3pyf`) | Copy each lexical source path once in both the worker and its live/Git inventories; omit only four unconsumed generated images and preserve their producers and dependency rescues under the unchanged 192 MiB cap |
 | 16 | W7: concurrent source and storage reconciliation (`think-a0qb`) | Retain the independently reviewed parent extraction pin guard and lossless generated storage; preserve our later receipt controls and every decoded byte of the child’s larger register while updating all publication consumers |
@@ -413,22 +413,21 @@ files, one browser script and one complete HTML archive in addition to its canon
 reader, Markdown and PDF. The retained inventories counted 1,005 renderer-owned site
 registrations and 1,007 exporter-planned outputs.
 These are dated output counts.
-The latest registry contains 1,021 catalogue-owned outputs; final hosted PDF and
-physical snapshot validation remain pending.
-Site registrations come from the exporter plan; unexpected names or owners remain
-refused. The earlier live/Git snapshot inventory likewise recorded 6,467 paths and
-195,613,428 bytes under the unchanged 192 MiB cap; it is a dated receipt, not a fresh
-inventory. The complete HTML has a specific 6,000,000-byte budget, while ordinary HTML
-keeps its 2,000,000-byte cap.
-Executable payloads and large inline programs retain exact source identity, approved
-path and individual byte budgets.
+The dated registry contained 1,021 catalogue-owned outputs.
+Full hosted physical snapshot validation subsequently passed on both published recovery
+heads; exact-report PDF packaging was retired by the user on 2026-10-09. Site
+registrations come from the exporter plan; unexpected names or owners remain refused.
+The earlier live/Git snapshot inventory likewise recorded 6,467 paths and 195,613,428
+bytes under the unchanged 192 MiB cap; it is a dated receipt, not a fresh inventory.
+The complete HTML has a specific 6,000,000-byte budget, while ordinary HTML keeps its
+2,000,000-byte cap. Executable payloads and large inline programs retain exact source
+identity, approved path and individual byte budgets.
 
-The PDF preflight typesets all displays at Letter’s content width using the shared
-publication margin token.
-It refuses math that would cross its print column before writing a PDF. Wide individual
-terms use complete coefficient tables; shorter expanded displays retain every term.
-Hosted final-head checks and layout evidence are recorded in the PR, separately from
-local controls.
+The earlier PDF preflight typeset displays at Letter’s content width and refused math
+crossing its print column.
+Its print-only implementation and build obligations are now retired.
+The complete web report retains the equations and coefficient tables; current responsive
+checks and final-head evidence are recorded in the PR.
 
 The efficiency result precedes the expanded historical corpus; it is not the claimed
 wall for the larger final register.
@@ -654,16 +653,78 @@ Failed behavioral shards made the PR wall summaries unmeasurable; the aggregate 
 and 331 s cannot determine compliance with or regression against the PR wall budget.
 No assurance, startup, CLS, snapshot, JavaScript or tier ceiling was widened.
 
+### Published Recovery Gates, 2026-10-09
+
+The replacement published checkpoints are parent `910a7a4f2` and child `4789e36aa`. Both
+automatic Packing gates and both full dispatched workflows passed.
+These results qualify those source heads; later diagnostic or print changes need their
+own gates.
+
+| Published gate | Result | Scope |
+| --- | --- | --- |
+| Parent [Packing 37894154628](https://github.com/jlevy/squares/actions/runs/37894154628) | Passed | Replaces the eight repaired fast assertions |
+| Child [Packing 37894154039](https://github.com/jlevy/squares/actions/runs/37894154039) | Passed | Repaired math, source, roster and retained-input contracts |
+| Parent [full 37896687146](https://github.com/jlevy/squares/actions/runs/37896687146) | Passed; completed 07:38:05 UTC | 94 of 107 integration steps, 2,031.98 s under 3,600 s; 13 distributed steps and all prerequisite jobs passed |
+| Child [full 37896690041](https://github.com/jlevy/squares/actions/runs/37896690041) | Passed; completed 07:36:26 UTC | 96 of 109 integration steps, 1,920.56 s under 3,600 s; 13 distributed steps and all prerequisite jobs passed |
+| Child [Pages 37894154058](https://github.com/jlevy/squares/actions/runs/37894154058) | Passed | Fresh paper artifact 11599503887 generated; physical print readability still needs qualification |
+| Parent [Pages 37894154719](https://github.com/jlevy/squares/actions/runs/37894154719) | Failed | Native frontier 1280-light CLS 0.2085927463531494 exceeds unchanged 0.1 guard |
+
+The full workflows each passed all twelve prerequisite jobs and their aggregate.
+The child slow lane passed all 184 tests.
+Both new physical lanes passed all 174 selected negative controls in two private trees.
+Their three-step subsets remain scoped evidence; the distributed full workflows supply
+the full verdict. Integration used four CPUs, one outer job and two inner workers, so
+these wall observations are not reference-shape speed comparisons.
+
+The old dark-theme CLS failure did not recur in the new full runs, and the sixteen old
+startup-limit failures did not recur in the new parent Pages run.
+Neither observation establishes a causal repair.
+The current parent Pages light-theme CLS failure remains open.
+Controlled macOS prose-font and KaTeX-face delays did not reproduce it: PT Serif
+released CLS ranged from 0.032885 to 0.078662; KaTeX-face delay measured 0.000501 in
+both themes. Eleven maintained controls passed in 30.44 s, including two controls that
+verify phase evidence survives a font refusal.
+Production CSS and every existing budget remain unchanged; the same diagnostics need the
+Linux regime before a layout candidate can be justified.
+
+The dated
+[print investigation](../../../../packing/benchmarks/exact-paper-print/ideas.md)
+registered an 8-point physical readability criterion before CSS changes.
+Its first candidate was refused: all 6,012 cells and 1,428 displays were checked, but
+the exact fractions at $n = 68,292,105$ spilled 94.94, 26.05 and 15.45 pixels
+respectively. No candidate PDF was generated or qualified.
+The user then retired PDF packaging for this large catalogue and requested the same
+content as a clean report on the Papers page.
+`think-yon5` is canceled by that scope change; `think-ja78` owns complete web
+publication. Preserve the dated negative result and cost, then remove print-only
+implementation and build requirements.
+No follow-up print experiment or PDF qualification belongs to the active scope.
+
 ### Publication Formats and Availability
 
 The machine-readable table is the compressed JSON register, with complete normalized
 integer coefficients, exact intervals, source references and verification status.
 The website reader is HTML with search, filters and per-entry coefficient downloads.
-The complete paper is generated in HTML, Markdown and PDF. On 2026-10-09 06:24 UTC, the
-intended public catalogue and PDF URLs both returned HTTP 404: these PRs have not
-merged. The successful child Pages checkpoint made the outputs available as Actions
-artifacts; the workflow deploys after integration into `main`. PDF generation remains
-part of the hosted build.
+The report is published as a responsive HTML catalogue and a complete HTML report, with
+Markdown and complete coefficient downloads.
+The user explicitly removed PDF packaging from this report’s scope on 2026-10-09 UTC.
+Earlier public catalogue and PDF URL checks returned HTTP 404 because these PRs had not
+merged. The successful child Pages checkpoint supplied Actions artifacts; deployment
+still follows integration into `main`. The new web-only head must pass its own checks.
+
+The web-only candidate on dirty `add30089a`, checked 2026-10-09, passed all eight views:
+catalogue and complete report at 390/1280 pixels in both themes.
+Document overflow, lost ink and math errors were zero; each complete view exposed all
+321 current and 175 historical polynomial headings.
+Independent reconstruction retained all 499 records, 519 vectors and 6,273 coefficient
+strings.
+Initial transfer was 366,952 / 5,357,841 bytes (6.849%, passing the explicit 10%
+threshold); catalogue JavaScript was 21,988 / 24,000 bytes.
+The 53 focused web tests and scoped language floors passed.
+Protected receipts and eight screenshots preserve this candidate evidence; these checks
+do not qualify the later rebased commit or its October 9 dateline.
+No PDF was generated.
+Final source-head CI remains required.
 
 At clean child `1666a7490`, the maintained HTML-only build measured **362,534 bytes** of
 initial transfer against **5,257,078 bytes** of complete HTML, a fraction
@@ -687,7 +748,8 @@ vector. The landscape summary body measures about **5.4-point effective type**, 
 remains a physical-print readability issue.
 The producer log exposes no supported print-fit count or overflow summary; older such
 measurements are not credited.
-Final-head PDF qualification remains required after further publication changes.
+This dated PDF remains historical evidence; the active web-only report requires complete
+web-content and responsive-rendering checks.
 
 ### Storage and Evidence Custody
 
@@ -703,7 +765,9 @@ The external volume earlier had only 32 MB free, causing ENOSPC during local fix
 creation. On 2026-10-09 UTC it also became unmounted; macOS still detected the APFS
 volume, which was remounted and checked writable before the paused rebase resumed.
 It remained 99% used, with about 5.5 GiB free at that check.
-The cause of the unmount has not been established.
+Later readings at 07:26–07:30 UTC showed only 1.1–1.6 GiB free; the volume was mounted
+and writable. Small diagnostics continued while local PDF and physical-fixture builds
+stayed deferred. The cause of the unmount has not been established.
 Disk-heavy fixtures and PDF builds remain hosted; scratch has no internal-disk fallback.
 Source and unique evidence remain outside disposable scratch:
 
@@ -719,13 +783,17 @@ Source and unique evidence remain outside disposable scratch:
 
 Recovery remains open in `think-jygq`, coordination in `think-a0qb`, and latest-source
 reconciliation in `think-wuol`. The bounded acquired corpus is preserved; CI
-stabilization, PDF qualification and the identification obligations remain open.
+stabilization, web publication in `think-ja78` and the identification obligations remain
+open. The retired print task is not a successful readability outcome.
 Capture each new result against its actual head in the PRs and beads before continuing.
 
-1. **W7 stabilization:** publish the combined repair checkpoint through stack 447,
-   verify release pins and artifact dates, and run final-head PR, Pages and full gates.
-   Diagnose startup and CLS findings separately and qualify the hosted paper’s content
-   and print layout.
+1. **W7 stabilization:** preserve the published full-gate checkpoint through stack 447,
+   then qualify the maintained font diagnostics and complete web-only report.
+   Keep parent Pages CLS open until its own controls pass.
+   Preserve every equation, coefficient and source distinction at desktop/mobile widths
+   in both themes; remove exact-report PDF producer, preview, URL and format-link
+   requirements. Integrate latest upstream through the stack shortcut, refresh pins and
+   source-head gates, and capture actual-head evidence on both PRs and the beads.
 2. **W7 driver:** deliver `think-s6np` using the two acquired native inputs, then derive
    the known $n = 11$ octic from active contacts as the exact control.
    No reusable driver, solver, contact-derived control or target search has been
@@ -772,9 +840,12 @@ the PR.
 
 The paper checks completeness against the register, independent-series metadata, source
 quotation handling, page construction, artifact dates and Pages scope.
-The final PDF is rendered with the pinned browser and inspected for layout.
-Local and hosted outcomes, costs and final commit identity are recorded in the PR. Pages
-publishes on merge; the current request creates and reviews the continuation PR.
+The complete HTML report is checked with the pinned browser at desktop and mobile widths
+in both themes, including long equations and coefficients.
+All source data must reconstruct exactly.
+This report’s build does not generate a PDF. Local and hosted outcomes, costs and final
+commit identity are recorded in the PR. Pages publishes on merge; the current request
+creates and reviews the continuation PR.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

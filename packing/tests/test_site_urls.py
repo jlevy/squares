@@ -514,13 +514,21 @@ def test_t116_registry_retains_the_complete_historical_source_binding() -> None:
         ("October 7, 2026", "September 22, 2026", "October 7, 2026"),
     ],
 )
+@pytest.mark.parametrize("has_pdf", [None, False])
 def test_paper_history_seed_uses_publication_history_not_original_proof(
-    monkeypatch: pytest.MonkeyPatch, published: str, proof: str, revised: str
+    monkeypatch: pytest.MonkeyPatch,
+    published: str,
+    proof: str,
+    revised: str,
+    *,
+    has_pdf: bool | None,
 ) -> None:
     declarations = (
         'PAGES = {"index.html": None}\nDOCUMENT_PAGES = ()\n'
         "MOVED_PAGES = ()\nMOVED_FILES = ()\n"
-        'PAPERS = (PaperRecord(slug="example", module="devtools.example"),)\n'
+        'PAPERS = (PaperRecord(slug="example", module="devtools.example"'
+        + (", has_pdf=False" if has_pdf is False else "")
+        + "),)\n"
         'SOCIAL_CARD = "preview-card.png"\n'
     )
     release = (
@@ -561,7 +569,8 @@ def test_paper_history_seed_uses_publication_history_not_original_proof(
         ),
     )
     seeded = {entry.path: entry for entry in site_urls.historical_registry("trusted-history")}
-    for extension in (".html", ".md", ".pdf"):
+    assert ("papers/example.pdf" in seeded) is (has_pdf is not False)
+    for extension in (".html", ".md", ".pdf") if has_pdf is not False else (".html", ".md"):
         paper_row = seeded[f"papers/example{extension}"]
         assert paper_row.first_published == paper_front.iso_date(published)
         assert paper_row.first_published != paper_front.iso_date(proof)
@@ -808,3 +817,60 @@ def test_deployed_archive_uses_the_same_qualified_cap(
             "https://example.org/squares/", read, timeout=1, rows=[archive]
         )
     )
+
+
+def test_web_only_paper_has_no_pdf_output_contract() -> None:
+    rows = {entry.path: entry for entry in site_urls.derive_registry()}
+    for paper in render_overview.PAPERS:
+        assert render_overview.paper_path(paper.slug) in rows
+        assert render_overview.paper_path(paper.slug, ".md") in rows
+        assert (render_overview.paper_path(paper.slug, ".pdf") in rows) is paper.has_pdf
+
+
+def test_explicit_unpublished_retirement_preserves_all_true_history() -> None:
+    path = "papers/exact-side-values.pdf"
+    abandoned = replace(row(path), kind="paper-file", producer="paper:exact-side-values")
+    published = row("index.html")
+    previous = [published, abandoned]
+    retained = site_urls.retire_unpublished(previous, [published], [path])
+    assert retained == [published]
+    assert previous == [published, abandoned]
+    assert not failures(site_urls.check_history(retained, [published]))
+    assert site_urls.retire_unpublished(previous, [published], []) == previous
+    with pytest.raises(ValueError, match="historical URL"):
+        site_urls.retire_unpublished(previous, previous, [path])
+    with pytest.raises(ValueError, match="declared web-only"):
+        site_urls.retire_unpublished(previous, [], ["papers/n11-optimality-review.pdf"])
+    with pytest.raises(ValueError, match="no local registration"):
+        site_urls.retire_unpublished([published], [published], [path])
+    with pytest.raises(ValueError, match="owner differs"):
+        site_urls.retire_unpublished([replace(abandoned, producer="overview")], [], [path])
+    with pytest.raises(ValueError, match="duplicate"):
+        site_urls.retire_unpublished(previous, [published], [path, path])
+
+
+def test_unpublished_retirement_cli_checks_history_before_writing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    path = "papers/exact-side-values.pdf"
+    abandoned = replace(row(path), kind="paper-file", producer="paper:exact-side-values")
+    published = row("index.html")
+    previous = [published, abandoned]
+    writes: list[tuple[Path, str]] = []
+    monkeypatch.setattr(site_urls, "load_registry", lambda: previous)
+    monkeypatch.setattr(site_urls, "historical_registry", lambda _ref: [published])
+    monkeypatch.setattr(site_urls, "derive_registry", list)
+    monkeypatch.setattr(
+        site_urls, "_write", lambda destination, text: writes.append((destination, text))
+    )
+    command = ["--write", "--history-ref", "published-fixture", "--retire-unpublished", path]
+    assert site_urls.main(command) == 0
+    assert [destination for destination, _text in writes] == [
+        site_urls.REGISTRY,
+        site_urls.DOCUMENT,
+    ]
+    assert all(path not in text for _destination, text in writes)
+    writes.clear()
+    monkeypatch.setattr(site_urls, "historical_registry", lambda _ref: previous)
+    assert site_urls.main(command) == 1
+    assert not writes

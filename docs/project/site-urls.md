@@ -1777,7 +1777,6 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | papers/exact-side-values-data/metadata/historical-n88-s392e3930313737363531323534343038.json | papers/exact-side-values-data/metadata/historical-n88-s392e3930313737363531323534343038.json | asset-file | paper:exact-side-values | 2026-10-07 | 2026-10-08 | live |
 | papers/exact-side-values.html | papers/exact-side-values.html | paper-file | paper:exact-side-values | 2026-10-07 | 2026-10-08 | live |
 | papers/exact-side-values.md | papers/exact-side-values.md | paper-file | paper:exact-side-values | 2026-10-07 | 2026-10-08 | live |
-| papers/exact-side-values.pdf | papers/exact-side-values.pdf | paper-file | paper:exact-side-values | 2026-10-07 | 2026-10-08 | live |
 | papers/n11-lower-bounds-explainer.html | papers/n11-lower-bounds-explainer.html | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-05 | live |
 | papers/n11-lower-bounds-explainer.md | papers/n11-lower-bounds-explainer.md | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-05 | live |
 | papers/n11-lower-bounds-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-05 | live |

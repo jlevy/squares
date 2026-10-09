@@ -293,7 +293,7 @@ def test_exact_values_inputs_select_the_complete_paper_job(
         "packing/devtools/exact_catalogue.py",
     ):
         assert in_scope([changed], declared) == set(pages_scope.BUILDER_INPUTS)
-    assert in_scope(["packing/tests/test_exact_side_values_print.py"], declared) == {
+    assert in_scope(["packing/tests/test_exact_side_values_web.py"], declared) == {
         "exact_side_values"
     }
     assert in_scope(["packing/frontier/exact-values.json"], declared) == {
@@ -350,9 +350,16 @@ def test_each_paper_has_an_independent_required_build(slug: str) -> None:
     commands = "\n".join(str(step.get("run", "")) for step in job["steps"])
     assert f"pytest -q tests/test_{module}.py" in commands
     # Rendered where it is served: under `papers/` in the site, by the paper's slug.
-    assert f"{module} --site site --pdf" in commands
+    paper = render_overview.paper_record(slug)
+    assert f"{module} --site site" in commands
     assert f"{module} --site site --check" in commands
-    assert f"test -s site/papers/{slug}.pdf" in commands
+    if paper.has_pdf:
+        assert f"{module} --site site --pdf" in commands
+        assert f"test -s site/papers/{slug}.pdf" in commands
+    else:
+        assert f"{module} --site site --pdf" not in commands
+        assert f"test ! -e site/papers/{slug}.pdf" in commands
+        assert f"{module} --site site --check-web --web-report" in commands
     assert slug in jobs["publish"]["needs"]
     assert slug in jobs["pages-required"]["needs"]
     assert f"--partial --producer paper:{slug}" in commands

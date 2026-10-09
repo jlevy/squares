@@ -322,7 +322,14 @@ def test_the_tool_prints_the_audit_of_a_built_site(
     refuses a site that lacks a paper."""
     for slug, (page, document) in renders.items():
         (tmp_path / paper_path(slug)).parent.mkdir(parents=True, exist_ok=True)
-        (tmp_path / paper_path(slug)).write_text(page, encoding="utf-8")
+        if slug == EXACT:
+            module = renderer(EXACT)
+            browser = module.render_browser(revision="a" * 40)
+            (tmp_path / paper_path(slug)).write_text(browser, encoding="utf-8")
+            (tmp_path / module.COMPLETE_PATH).write_text(page, encoding="utf-8")
+            assert not paper_structure.read(slug, browser).chips
+        else:
+            (tmp_path / paper_path(slug)).write_text(page, encoding="utf-8")
         (tmp_path / paper_path(slug, ".md")).write_text(document, encoding="utf-8")
     assert paper_structure.main([str(tmp_path), "--markdown"]) == 0
     out = capsys.readouterr().out
@@ -366,10 +373,14 @@ def test_article_title_form_refuses_suffixes_mismatches_and_missing_names(
 ) -> None:
     good = paper_structure.read(
         EXPLAINER,
-        '<head><title>A paper</title><meta property="og:title" content="A paper"></head>',
+        '<head><title>A paper</title><meta property="og:title" content="A paper"></head>'
+        + paper_front.formats_row(renderer(EXPLAINER).FRONT),
     )
     assert paper_structure.axes(good)["head: title"] == "article name"
-    bad = replace(good, paper=EXACT, title=title, name=name)
+    exact_chips = paper_structure.read(
+        EXACT, paper_front.formats_row(renderer(EXACT).FRONT)
+    ).chips
+    bad = replace(good, paper=EXACT, title=title, name=name, chips=exact_chips)
     assert paper_structure.axes(bad)["head: title"] != "article name"
     assert [
         row["axis"] for row in paper_structure.differences(paper_structure.compare(good, bad))
@@ -579,6 +590,7 @@ def test_every_registered_renderer_writes_its_front_with_the_strip() -> None:
     for record in PAPERS:
         module = renderer(record.slug)
         assert record.title == module.TITLE, record.slug
+        assert module.FRONT.has_pdf is record.has_pdf, record.slug
         if record.part is None:
             assert module.FRONT.series is None, record.slug
             with pytest.raises(ValueError, match="standalone paper"):
@@ -613,3 +625,47 @@ def test_standalone_absence_does_not_relax_the_series_or_caption_grammar(
     assert all(
         row["same"] for row in paper_structure.compare(empty, empty) if row["axis"] in optional
     )
+
+
+def test_format_comparison_uses_declared_capability_without_ignoring_bad_chips() -> None:
+    reference = paper_structure.read(
+        EXPLAINER, paper_front.formats_row(renderer(EXPLAINER).FRONT)
+    )
+    exact = paper_structure.read(EXACT, paper_front.formats_row(renderer(EXACT).FRONT))
+    comparisons = paper_structure.compare(reference, exact)
+    assert all(row["same"] for row in comparisons if row["axis"].startswith("formats row"))
+    pdf = next(chip for chip in reference.chips if chip.label == "PDF")
+    bad = [
+        replace(exact, chips=(*exact.chips, pdf)),
+        replace(
+            reference, chips=tuple(chip for chip in reference.chips if chip.label != "PDF")
+        ),
+        replace(exact, chips=(exact.chips[0]._replace(href="wrong.md"), *exact.chips[1:])),
+        replace(exact, chips=(exact.chips[0]._replace(title="Wrong title"), *exact.chips[1:])),
+    ]
+    for candidate in bad:
+        assert any(
+            not row["same"]
+            for row in paper_structure.compare(candidate)
+            if row["axis"].startswith("formats row")
+        )
+
+
+def test_web_only_structure_read_never_requests_a_pdf(monkeypatch: pytest.MonkeyPatch) -> None:
+    requests = []
+
+    def fetch(_site: str, path: str) -> bytes:
+        requests.append(path)
+        return b"<h1>A web report</h1>"
+
+    monkeypatch.setattr(paper_structure, "_fetch", fetch)
+    structure = paper_structure.read_site("https://example.test", [EXACT])[0]
+    assert requests == [renderer(EXACT).COMPLETE_PATH, paper_path(EXACT, ".md")]
+    assert structure.pdf == {}
+    requests.clear()
+    paper_structure.read_site("https://example.test", [REVIEW])
+    assert requests == [
+        paper_path(REVIEW),
+        paper_path(REVIEW, ".md"),
+        paper_path(REVIEW, ".pdf"),
+    ]

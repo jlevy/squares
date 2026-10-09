@@ -161,6 +161,7 @@ name: Certificate page
       - packing/devtools/check_site_scripts.py
       - packing/tests/test_site_scripts.py
       - packing/devtools/check_site_rendering.py
+      - packing/devtools/preview_site.py
       - packing/devtools/probes/check_site_rendering/**
       - packing/tests/test_site_urls.py
       - packing/tests/test_site_math.py
@@ -495,27 +496,36 @@ jobs:
       - name: Install the pinned Chromium headless shell
         run: uv run --frozen --group dev python -m playwright install --only-shell chromium
 
-      - name: Check the exact-values renderer, lazy data projection and print refusal
+      - name: Check the exact-values web report and lossless data projection
         env:
           SQPACK_EXACT_SIDE_VALUES_BROWSER: "1"
           SQPACK_REQUIRE_CHROMIUM: "1"
-        run: uv run --frozen --all-extras --group dev pytest -q tests/test_render_exact_side_values.py tests/test_exact_catalogue.py tests/test_exact_side_values_print.py
+        run: uv run --frozen --all-extras --group dev pytest -q tests/test_render_exact_side_values.py tests/test_exact_catalogue.py tests/test_exact_side_values_web.py
 
-      # The canonical HTML is the compact browser. The complete HTML/Markdown/PDF
-      # archives and the index, script, metadata and coefficient payloads travel together.
+      # The canonical HTML is the compact report and catalogue. Complete HTML/Markdown
+      # and the index, script, metadata and coefficient payloads travel together.
       # Nothing else writes `site/papers` on this runner.
-      - name: Render and check the paper in HTML, Markdown, and PDF
+      - name: Render and check the web report and complete HTML content
         run: |
-          uv run --frozen --group dev python -m devtools.render_exact_side_values --site site --pdf
+          uv run --frozen --group dev python -m devtools.render_exact_side_values --site site
           uv run --frozen --group dev python -m devtools.render_exact_side_values --site site --check
-          test -s site/papers/exact-side-values.pdf
+          uv run --frozen --group dev python -m devtools.render_exact_side_values --site site --check-web --web-report "$RUNNER_TEMP/exact-side-values-web.json"
+          test ! -e site/papers/exact-side-values.pdf
           test -s site/papers/exact-side-values-complete.html
           test -s site/papers/exact-side-values-data/index.json
           test -s site/papers/exact-side-values-browser.js
-          uv run --frozen --group dev python -m devtools.artifact_dates --pdf site/papers/exact-side-values.pdf --revised exact-values
           uv run --frozen --group dev python -m devtools.social_card --output-dir site
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:exact-side-values
           uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/exact-side-values.html
+
+      - name: Retain the settled web rendering checks
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: exact-side-values-web-checks
+          path: ${{ runner.temp }}/exact-side-values-web.json
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Share the checked paper
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -2073,7 +2083,7 @@ jobs:
         run: |
           test -s "$STAGED/papers/exact-side-values.html"
           test -s "$STAGED/papers/exact-side-values.md"
-          test -s "$STAGED/papers/exact-side-values.pdf"
+          test ! -e "$STAGED/papers/exact-side-values.pdf"
           test -s "$STAGED/papers/exact-side-values-complete.html"
           test -s "$STAGED/papers/exact-side-values-data/index.json"
           test -s "$STAGED/papers/exact-side-values-browser.js"
