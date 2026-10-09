@@ -193,6 +193,11 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # run in the primary tree. Inline-linked and registered files below them still return
 # (exp-246, exp-249 and chelokot's receipt); exp-295 keeps its descriptor and metadata, as
 # exp-297--314 do. The trace and measurement are at `SNAPSHOT_MAX_BYTES`.
+# Later the same day, exp-317's admission outputs (the census, the partition, and the
+# replay, Rust and contributor receipts with their logs: 2,359,681 bytes) joined by the
+# test's rule, without a new trace: no control names them, and kept in the worker they
+# took the snapshot 1,593,819 bytes over the cap. The admitted receipts the census reads
+# live under the certificate directories, not here.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
@@ -202,6 +207,7 @@ UNREAD_WORKER_OUTPUTS = frozenset(
                 "exp-247-n17-unique-state-cover",
                 "exp-249-n17-first-certified-sub-patterns",
                 "exp-251-n17-overnight-flag-certification",
+                "exp-317-issue-472-kernel-admission",
                 "chelokot-lean-replay",
                 "exp-295-two-center-children/certificate.json",
                 "exp-295-two-center-children/replay.json",
