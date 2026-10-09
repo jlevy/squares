@@ -3,9 +3,9 @@ type: is
 id: is-01m4g2z6jk4eycyrwrvqe9vrer
 title: "Main red after stack 455: post-merge per-test 12 s wall ceiling"
 kind: bug
-status: in_progress
+status: closed
 priority: 0
-version: 5
+version: 7
 delegate: claude-code@vm
 labels:
   - n-17
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T10:22:33.041Z
-updated_at: 2026-10-09T11:51:07.386Z
+updated_at: 2026-10-09T12:08:55.199Z
 started_at: 2026-10-09T10:43:09.858Z
+closed_at: 2026-10-09T12:08:55.199Z
+close_reason: "Main green at 6a0499ba4 after #473 (post-merge run 37926227254)"
+resolution: null
+duplicate_of: null
 ---
 Post-merge Packing run 37910870148 on main 533dd42c6 failed fast shards A/B on the per-test 12 s wall ceiling (enforced post-merge, relaxed to warning on PRs): test_retained_json_layout::test_the_repository_as_it_stands_passes 32.5 s (was <6 s before the stack), two test_check_n17_two_child_collective_propagation nodes 18-19 s, four test_check_n17_one_round_owned_domain_propagation nodes 14-16 s, test_overview 12.1 s (noise). Fix: speed up or mark slow with measured registry entries; ride PR #473 (designated branch) and land promptly.
 
@@ -28,3 +32,7 @@ Post-merge Packing run 37910870148 on main 533dd42c6 failed fast shards A/B on t
 
 
 2026-10-09T11:51Z Fix landed with #473 at 6a0499ba4; awaiting main post-merge run to confirm green.
+
+
+
+2026-10-09T12:08Z Main green: post-merge Packing 37926227254 and Pages 37926227269 pass at 6a0499ba4 (validate, slow-lane and all deferred jobs success).
