@@ -1,0 +1,83 @@
+{
+  "schema": "registered-target-launch/v1",
+  "source_commit": "c285107d438aefa7f77924f82358963a4e071262",
+  "launched_at": "2026-10-08T03:21:35.400169+00:00",
+  "working_directory": "packing",
+  "imported_source_files": {
+    "packing/devtools/__init__.py": {
+      "sha256": "9ac88104b563973f3ce95fe9a202473bf04f596082b3d9f92fa3eaef7b52a958",
+      "bytes": 74
+    },
+    "packing/devtools/check_n17_n11_corner_cardinality.py": {
+      "sha256": "98e0bdeb12de3a309d448dcf44755c190340816d60c4235f68516e717c6f6f92",
+      "bytes": 19937
+    },
+    "packing/devtools/check_n17_n11_envelope_windows.py": {
+      "sha256": "23d12c0f1d73a501d57e25dccee64486eb50b05aee76febbb01c899525c812c2",
+      "bytes": 20933
+    },
+    "packing/devtools/probe_n17_conditional_owned_hull.py": {
+      "sha256": "df3028f369d87301e17781650772a1286380fd970f082944b5812714d4886b29",
+      "bytes": 30571
+    },
+    "packing/devtools/provenance.py": {
+      "sha256": "c80ab631f9282675df2a46fa981846747f18470a46536a576b3756021853b7ad",
+      "bytes": 3164
+    },
+    "packing/devtools/run_registered_phases.py": {
+      "sha256": "10aa4a5c47d9c7a83df3dfb9ac239b47ac21a80197d6ec8ea9e7253b7f7a2a25",
+      "bytes": 14425
+    },
+    "packing/devtools/supervise_posix.py": {
+      "sha256": "d541775dcb73e8e4ce779ae3577307467a929a30dc431e171b13a701f306e126",
+      "bytes": 9506
+    },
+    "packing/devtools/verify_n17_kernel_certificate.py": {
+      "sha256": "08f4de68db8b835bbcec3ff13cec00bf113421547641a107b695fe2d3b3f7eb7",
+      "bytes": 70206
+    },
+    "packing/src/sqpack/__init__.py": {
+      "sha256": "a1945b4bc45e6ece266d3f63cb328a3cd6f280e646d73b63c3cbe606e42fe19e",
+      "bytes": 367
+    },
+    "packing/src/sqpack/field.py": {
+      "sha256": "734a645d9b95bf43018b1d9662cf255fbf3b834b74ae5e1f10dcf2455a0e3de6",
+      "bytes": 25048
+    },
+    "packing/src/sqpack/retained_json.py": {
+      "sha256": "2a2578714e8d327737bb7e1ad95b93bc4cb00c3a9f8ef326084b5d7340d7bd18",
+      "bytes": 14967
+    },
+    "packing/src/sqpack/verify.py": {
+      "sha256": "56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337",
+      "bytes": 8678
+    }
+  },
+  "source_worktree_clean": true,
+  "manifest_sha256": "1f415797c4974e1d971fad4b713afedd4707d968c7a7989a36478a152febf150",
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "240",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/phase-execution.json"
+  ]
+}

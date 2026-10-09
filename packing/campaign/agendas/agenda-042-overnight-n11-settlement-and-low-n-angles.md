@@ -1542,6 +1542,14 @@ agenda:
     note: >-
       Selected next entry after Session 167. Read that session record, the capture,
       bulk-exclusion and local-theorem instrument reviews, and exp-244 and exp-246 first.
+      The 6 October W3 reconciliation is
+      docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md (think-gxls).
+      Sessions 182 and 183 leave 36,784 states in 4,685 orbits under 58 admitted entries.
+      The next planning checkpoint selects proof interfaces and portable replay,
+      controlled capture discrimination with cheap widened-projection reconnaissance,
+      and actual-residue tail stratification in parallel. H-266, H-268 and the H-267
+      low-arity milestone have been decided; accepted experiments keep their criteria,
+      and held closures remain outside the census pending the control ruling.
   - id: BC-419
     purpose: research
     owner_focus: correctness

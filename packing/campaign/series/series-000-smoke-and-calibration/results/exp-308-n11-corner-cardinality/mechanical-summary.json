@@ -1,0 +1,77 @@
+{
+  "schema": "n17-corner-cardinality-mechanical-summary/v1",
+  "status": "complete_method_miss",
+  "source_commit": "c285107d438aefa7f77924f82358963a4e071262",
+  "source_files": 12,
+  "all_source_bytes_match": true,
+  "full_payload_equal": true,
+  "fresh_verification_passed": true,
+  "outer_seconds": 89.48727479099762,
+  "cleanup_complete": true,
+  "classifications": 216,
+  "feasible_classes": 68,
+  "infeasible_classes": 148,
+  "surviving_states": 95,
+  "obstructed_masks": [],
+  "largest_guaranteed_count_distribution": {
+    "6": 49,
+    "7": 46
+  },
+  "endpoint_counts": [
+    6,
+    6,
+    6,
+    5
+  ],
+  "work": {
+    "dp_transitions": 1320689,
+    "inequality_evaluations": 129337,
+    "triple_attempts": 45638
+  },
+  "closed_aliases_may_undercount_memberships": true,
+  "survival_is_not_physical_packing": true,
+  "ordinary_census_admission": false,
+  "global_optimality": false,
+  "phases": [
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_n11_corner_cardinality",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/descriptor.json",
+        "--max-seconds",
+        "120",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/certificate.json"
+      ],
+      "ended_at": "2026-10-08T03:22:38.054779Z",
+      "name": "construction",
+      "returncode": 0,
+      "started_at": "2026-10-08T03:21:35.535465Z",
+      "status": "completed",
+      "wall_seconds": 62.51923350000288
+    },
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_n11_corner_cardinality",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/descriptor.json",
+        "--max-seconds",
+        "120",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/replay.json"
+      ],
+      "ended_at": "2026-10-08T03:23:04.793787Z",
+      "name": "fresh_verification",
+      "returncode": 0,
+      "started_at": "2026-10-08T03:22:38.056453Z",
+      "status": "completed",
+      "wall_seconds": 26.73723454104038
+    }
+  ]
+}
