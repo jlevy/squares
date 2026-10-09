@@ -18,6 +18,7 @@ import pytest
 import yaml
 
 from devtools import (
+    evand_arrangement_reports,
     evand_exact_certificates,
     squish_followup_packets,
     squish_second_update_packets,
@@ -592,6 +593,8 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # comparison, so that packet rides in the slice, named by the module that reads it; it
     # was missing on jlevy/squares#369's run 37403920231.
     assert f"/packing/resources/web/{evand_exact_certificates.PACKET.name}/" in sparse
+    # The three T-119 atlas sources require their complete retained fact and receipt.
+    assert f"/packing/resources/web/{evand_arrangement_reports.PACKET.name}/" in sparse
     # SQUISH's exact rational facts are a separate packet from the ordinary packet
     # registry; omitting it makes the atlas refuse all eleven newly reported cases.
     assert f"/packing/resources/web/{squish_upper_bound_packets.PACKET.name}/" in sparse
@@ -1324,15 +1327,16 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_translation_escape_screen.py": {
             "test_squish_n108_retains_its_replayed_tolerance_instability",
         },
+        # Hosted run37743601485/job113199788788, 2026-10-08: 25.04s for the
+        # actual complete clone, all three #399 houses/native custody and two private
+        # producer/native refusal transactions; 45/30/45s child deadlines unchanged.
+        "test_evand_arrangement_adoption.py": {
+            "test_production_clone_copies_every_scientific_input_and_admits_exact_links",
+        },
         # Hosted run37739373988/job113186283659: actual complete clone, independent
         # custody bytes and subprocess admission; no clone or assertion is removed.
         "test_refinement_custody.py": {
             "test_production_snapshot_copies_complete_refinement_custody",  # 19.36s
-        },
-        # Same hosted job: full-roster batch plus nine fresh standalone complete-roster
-        # admissions and wrong-root refusal. No shared build or geometric decider runs.
-        "test_squish_second_update_confirmation.py": {
-            "test_linked_proof_batch_matches_all_fresh_standalone_checks",  # 15.24s
         },
         # 3s of call time across 1, measured 2026-09-20: `git worktree add --detach` of
         # Session 148's opening commit -- a whole checkout of the tree -- and then
