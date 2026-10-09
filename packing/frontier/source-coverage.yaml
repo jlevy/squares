@@ -2042,7 +2042,9 @@ sources:
     evidence:
     - E-squish-second-update-2026-10-07-report
     notes: Issue422 pins nine new rational geometries at e63e4e52b1728b6671b2f263c5e02a4aa79a39d3.
-      All nine are reported V0/C0 in this layer. Complete prior verified values, exact forms and
+      This original source-report atom retains all nine as reported V0/C0. Separate maintained
+      confirmation T-116 admits the frozen finite geometries at V3/C3; later selected geometries
+      and source-only reports require their own assurance. Complete prior verified values, exact forms and
       evidence remain retained; source finite prints are quotations, and current displays are
       safe sixteen-place upward ceilings. Author-reported Ellsworth, Couzo and SQUISH lineage
       and human-directed Claude Opus5.5 assistance remain attributed.
@@ -2066,8 +2068,11 @@ sources:
     evidence:
     - E-rehwaldt-couzo-refinements-2026-10-07-report
     claims_record: resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/claims.json
-    notes: Complete terminating displays preserve the full rational strict improvement. Only reported
-      assurance is admitted; historical counts excluded by the author do not replace smaller ceilings.
+    notes: Complete terminating displays preserve the full rational strict improvement. This original
+      source-report atom retains reported assurance. Separate maintained confirmation T-117 admits
+      these frozen finite witnesses at V3/C3; later selected geometries and source-only reports
+      require their own assurance. Historical counts excluded by the author do not replace smaller
+      ceilings.
   - id: rehwaldt-n68-refinement-2026-10-07
     title: Rehwaldt finite rational refinements, issue 428
     role: source-repository
@@ -2086,8 +2091,11 @@ sources:
     evidence:
     - E-rehwaldt-n68-refinement-2026-10-07-report
     claims_record: resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/claims.json
-    notes: Complete terminating displays preserve the full rational strict improvement. Only reported
-      assurance is admitted; historical counts excluded by the author do not replace smaller ceilings.
+    notes: Complete terminating displays preserve the full rational strict improvement. This original
+      source-report atom retains reported assurance. Separate maintained confirmation T-118 admits
+      this frozen finite witness at V3/C3; later selected geometries and source-only reports
+      require their own assurance. Historical counts excluded by the author do not replace smaller
+      ceilings.
   - id: evand-new-arrangements-2026-10-07
     title: Daniel's three new rational arrangements, issue399
     role: source-repository
