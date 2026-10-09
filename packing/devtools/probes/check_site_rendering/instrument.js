@@ -1,5 +1,31 @@
 // Start before navigation. Observers record native timing without polling layout.
 () => {
+  /** @typedef {{x: number, y: number, width: number, height: number}} ShiftRect */
+  /** @typedef {{node: Node | null, previousRect: DOMRectReadOnly, currentRect: DOMRectReadOnly}} ShiftSource */
+  /** @param {Node | null} node */
+  const identify = (node) => {
+    if (!node) {
+      return null;
+    }
+    const sourceElement = node instanceof Element ? node : node.parentElement;
+    if (!sourceElement) {
+      return null;
+    }
+    const parts = node instanceof Element ? [] : [node.nodeName];
+    /** @type {Element | null} */
+    let element = sourceElement;
+    for (let depth = 0; element && depth < 3; depth += 1) {
+      const id = element.id.slice(0, 120);
+      const classes = (element.getAttribute("class") ?? "").trim().slice(0, 120);
+      parts.unshift(
+        `${element.localName}${id ? `#${id}` : ""}${classes ? `.${classes.split(/\s+/).slice(0, 3).join(".")}` : ""}`,
+      );
+      element = element.parentElement;
+    }
+    return parts.join(" > ").slice(-512);
+  };
+  /** @param {DOMRectReadOnly} rect @returns {ShiftRect} */
+  const rectangle = (rect) => ({ x: rect.x, y: rect.y, width: rect.width, height: rect.height });
   const supported = PerformanceObserver.supportedEntryTypes;
   const state = {
     supported: ["layout-shift", "largest-contentful-paint", "longtask"].every((type) =>
@@ -13,6 +39,10 @@
     longestTaskMs: 0,
     blockingMs: 0,
     shifts: 0,
+    /** @type {{startTime: number, value: number, sources: {node: string | null, previousRect: ShiftRect, currentRect: ShiftRect}[]}[]} */
+    layoutShifts: [],
+    /** @type {{startTime: number, type: string}[]} */
+    fontEvents: [],
     /** @type {{startTime: number, durationMs: number, name: string}[]} */
     longTasks: [],
     /** @type {{startTime: number, durationMs: number}[]} */
@@ -21,14 +51,24 @@
     animationFrames: [],
   };
   Object.assign(window, { siteRenderingMeasure: state });
+  // Native font events place face arrival on the same clock as layout shifts.
+  /** @param {Event} event */
+  const recordFontEvent = (event) => {
+    if (state.fontEvents.length < 100) {
+      state.fontEvents.push({ startTime: event.timeStamp, type: event.type });
+    }
+  };
+  document.fonts.addEventListener("loading", recordFontEvent);
+  document.fonts.addEventListener("loadingdone", recordFontEvent);
   if (!state.supported) {
     return;
   }
   new PerformanceObserver((list) => {
     for (const entry of list.getEntries()) {
-      const shift = /** @type {PerformanceEntry & {value: number, hadRecentInput: boolean}} */ (
-        entry
-      );
+      const shift =
+        /** @type {PerformanceEntry & {value: number, hadRecentInput: boolean, sources: ShiftSource[]}} */ (
+          entry
+        );
       if (shift.hadRecentInput) {
         continue;
       }
@@ -40,6 +80,19 @@
       state.cls = Math.max(state.cls, state.windowValue);
       state.lastShift = shift.startTime;
       state.shifts += 1;
+      // Bound diagnostics only. All shifts still contribute to the unchanged CLS guard.
+      // Rectangles come from the native entry, never from a fresh layout read.
+      if (state.layoutShifts.length < 100) {
+        state.layoutShifts.push({
+          startTime: shift.startTime,
+          value: shift.value,
+          sources: shift.sources.slice(0, 5).map((source) => ({
+            node: identify(source.node),
+            previousRect: rectangle(source.previousRect),
+            currentRect: rectangle(source.currentRect),
+          })),
+        });
+      }
     }
   }).observe({ type: "layout-shift", buffered: true });
   new PerformanceObserver((list) => {
