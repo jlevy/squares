@@ -67,3 +67,46 @@ def test_roster_is_rebuilt_after_new_input_declaration(
     assert controls.snapshot_source_bytes() == sum(
         p.stat().st_size for p in (first, alias, extra)
     )
+
+
+def test_historical_replay_inputs_survive_an_ancestor_prune(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The production custody roster rescues leaves even without inline links."""
+    repo = tmp_path / "source"
+    inputs = tuple(
+        repo / path.relative_to(controls.REPO)
+        for path in sorted(controls.HISTORICAL_REPLAY_INPUTS)
+    )
+    carried = tuple(
+        repo / path.relative_to(controls.REPO)
+        for path in controls.COPY_SEPARATELY
+        if path in controls.HISTORICAL_REPLAY_INPUTS
+    )
+    agenda = inputs[0].parent
+    agenda.mkdir(parents=True)
+    for source in inputs:
+        source.write_bytes(source.name.encode())
+    bulk = agenda / "unconsumed-profile.json"
+    bulk.write_bytes(b"unrelated generated output")
+    index_fixture_source(repo)
+    monkeypatch.setattr(controls, "REPO", repo)
+    monkeypatch.setattr(controls, "ROOT", repo / "packing")
+    monkeypatch.setattr(controls, "HERE", Path("packing"))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({agenda}))
+    monkeypatch.setattr(controls, "DESCEND", frozenset(agenda.parents))
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", carried)
+    monkeypatch.setattr(controls, "root_files", tuple)
+    monkeypatch.setattr(controls, "snapshot_pruned_targets", lambda: [inputs[0]])
+    monkeypatch.setattr(controls, "linked_pruned_directories", list)
+
+    paths = controls.snapshot_source_paths()
+    assert sorted(paths) == list(inputs)
+    assert controls.snapshot_source_bytes() == sum(p.stat().st_size for p in inputs)
+    destination = tmp_path / "worker"
+    controls.clone_tree(destination)
+    for source in inputs:
+        assert (destination / source.relative_to(repo)).read_bytes() == source.read_bytes()
+    assert not (destination / bulk.relative_to(repo)).exists()
