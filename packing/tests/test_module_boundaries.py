@@ -1050,6 +1050,27 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_check_n17_widened_positive_cone.py": {
             "test_exact_symbolic_root_joins_cubic_and_weighted_incidence",  # 82.51s
         },
+        # Hosted run37910870148/job113762412367, 2026-10-09, post-merge on 533dd42c6:
+        # the two complete exact two-case proofs, one generated and freshly checked in
+        # process and one as two clean child processes; 7.41s and 7.89s of call on a
+        # loaded four-cpu box. Each builds its own synthetic premise, so no shared build.
+        # The fast tier keeps the seven custody and typed-row tampers and the clip,
+        # union, intersection and ceiling controls.
+        "test_check_n17_two_child_collective_propagation.py": {
+            "test_generate_inherits_base_proof_and_freshly_reconstructs_new_geometry",  # 18.15s
+            "test_two_clean_processes_match_new_finite_payload",  # 19.02s
+        },
+        # Hosted run37910870148/job113762412367, 2026-10-09: four nodes that each run two
+        # complete exact one-round generations, in process or as two clean children,
+        # 5.69s to 6.53s of call locally. The fresh-geometry tamper left its parametrized
+        # custody test to be marked alone; its three custody cases, 3.2s to 3.3s locally,
+        # stay on the pull-request surface with the regional mode and the unit controls.
+        "test_check_n17_one_round_owned_domain_propagation.py": {
+            "test_prior_proof_reconstructed_once_and_transitive_bytes_retained",  # 14.45s
+            "test_fresh_payload_tamper_refuses",  # 14.59s as fresh_geometry
+            "test_direct_regional_replays_complete_component_without_reconditioning",  # 16.19s
+            "test_two_fresh_clean_processes_match_full_new_payload",  # 15.96s
+        },
         # Hosted run36864534354/job110376645051,2026-10-01:31.66s call time.
         # Exact symbolic reconstruction/normalizations; eight fast controls stay in PR CI.
         "test_n17_endpoint_feasibility.py": {
@@ -1381,6 +1402,16 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # commit, so it belongs in the lane that checks out with `fetch-depth: 0`.
         "test_retained_patches_apply.py": {
             "test_every_retained_patch_applies_to_its_declared_base",  # 3.3s
+        },
+        # Hosted run37910870148/job113762412367, 2026-10-09: 32.51s of call post-merge,
+        # 21.76s on the stack head's pull-request lane; 15.03s locally on a loaded
+        # four-cpu box. The sweep parses and re-lays all 32 held files, 333 MB, and the
+        # n17 stack (#404, #454, #461) added 21 of them, 314 MB; on e0b02b3ab, before
+        # it, the test was not in the 6s report. The gate step `retained JSON is one
+        # record per line` runs the same whole-tree sweep on the pull-request surface,
+        # and the planted failures in this file stay there too.
+        "test_retained_json_layout.py": {
+            "test_the_repository_as_it_stands_passes",  # 32.51s
         },
         # 16s of call time across 1.
         "test_promote_elimination.py": {
