@@ -190,6 +190,11 @@ DECLARED_CONSUMERS = {
         "builds two case records whose ceiling is the same and checks the rendered count of "
         "changed ceilings is zero; it asserts nothing about s(n)"
     ),
+    "packing/tests/test_check_standing.py": (
+        "collects the evidence ids every case bound cites, the ceiling's among them, to find "
+        "register entries no case record cites; it reads no value of the ceiling and "
+        "asserts nothing about s(n)"
+    ),
     "packing/tests/test_catalogue_upper_bounds.py": (
         "checks that n = 69, 83 and 87 carry the ceiling their exact certificates' receipts "
         "derive and that it still trails the printed side; it asserts nothing about s(n)"
