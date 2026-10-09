@@ -5,7 +5,7 @@ title: "n17 stack A1: qualify current heads with required CI and full checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -15,7 +15,7 @@ parent_id: is-01m4eq9mdaejkedd1b09qqn09p
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:52:29.377Z
-updated_at: 2026-10-09T04:51:12.011Z
+updated_at: 2026-10-09T04:55:14.573Z
 started_at: 2026-10-08T22:00:55.817Z
 ---
 Senior review A1 High: current461 only mergeability; current454 Packing/Pages absent;404 current-main conflicts; source snapshot192MiB overcap remains. Older Pages pass/focused controls are not current required CI/full-checkpoint PASS. Pending human192->224MiB decision after auto-review rejection, no cap raise/pruning/retry bypass. Owning-layer repair, formal stack propagation, current-head Packing/Pages and full checkpoint required. Review https://github.com/jlevy/squares/pull/461#pullrequestreview-5463219386.
@@ -41,9 +41,10 @@ October 8/9 final source-qualified consolidation status (supersedes the pending/
 - Formal remote stack455: #404 2a894a9a0288407ae7d934a9f1225227bdc22b79 → #454 1b1c0945c4ff8d1e8f17de9affd453dfad4af9b0 → #461 79ebfd5987d45617b8fd0feabddb7ad5dc8b7d63. Standalone #464 51368bec05b6fa30bebca7b31d0cf3dd0d810c09, #452 b70bc6663cea5727108aae8911ded8694c51c02a, #453 99728f5de5fbbcfc95583d398fe52e82717366dc. All contain pinned main3213d651b880d7768bce8506efaf75c2089aeb4f, are n-17 labelled, MERGEABLE, drafts and unmerged.
 - Current-main source integration and independent follow-up reviews are complete. #404 review F5465700232 covers the fixture-only final delta; #461 G5465686711 covers the new stack joins; #464 A/B5465603134/5465604337 covers all12 files and original cited source arguments. #452 E5465767242 and #453 E5465760515 qualify their current-main integration/parity scope. No new mathematical finding; inherited A1 resource/full-checkpoint hold remains open.
 - Final research CI is cap-only: #40437883439902 selected202658531B,3420passed34skipped; #45437883609996 selected202798011B,2995passed92skipped; #46137883620757 selected203153161B,3488passed76skipped; #46437881664173 selected202070418B,2769passed37skipped. Each suiteD fails exactly3 assertions against201326592B. Other required partitions and Pages pass. The three earlier fixture failures are fixed. A clean complete checkpoint remains unqualified; no repeated cap-refused run.
-- CORRECTION: supporting full runs37882533006/37882534927 passed stale mainf0 PR merge refs1467761/9d6cc2 and never qualified current main. Explicit current-main integrations are now published at the #452/#453 heads above. New direct-branch full runs37884639726/37884879202 are in progress, with completed resolve job logs113671777482/113672529876 verifying exactlyb70/997 and main3213 ancestry. #452 required Packing37884542873, Pages37884542883 and mergeability passed; #453 mergeability passed, Packing37884789984/Pages37884789931 pending at the last snapshot. No current full-pass claim. Bounded heartbeat finish-n17-consolidation-ci will record final results and pause once these runs finish.
+- CORRECTION: supporting full runs37882533006/37882534927 passed stale mainf0 PR merge refs1467761/9d6cc2 and never qualified current main. Explicit current-main integrations are now published at the #452/#453 heads above. New direct-branch full runs37884639726/37884879202 are in progress, with completed resolve job logs113671777482/113672529876 verifying exactlyb70/997 and main3213 ancestry. #452 required Packing37884542873, Pages37884542883 and mergeability passed; #453 required Packing37884789984, Pages37884789931 and mergeability now also pass. Both current full checkpoints remain in progress; no failure observed. No current full-pass claim. Bounded heartbeat finish-n17-consolidation-ci will record final results and pause once these runs finish.
 - The192MiB cap remains unchanged. Concrete224MiB cap/test patch is prepared but unapplied pending the direct human resource answer after earlier automatic approval review rejection. No waiver, prune-to-fit, proof/RSS/timeout/wall ceiling change. Larger dependency-aware selection remains think-t1lk.
 - #457 complete resolved tree equals incorporated main; PR closed as superseded, think-ms0w closed. #410 already merged. Peer402/408/409, catalogue403→435 and intake450 remain separate and are not credited as new n17 admission/bound movement.
 - Unique session code, docs and scientific evidence are committed on the appropriate source PRs. All604 branch campaign paths and owned exp315/316 bytes survive. Exp266 compressed spill expands to exact committed step content; ten recovery files match exp311. These redundant residues, source-custody refs and old held integration index/MERGE_HEAD remain preserved.
 - The updated mathematical route is first-eight exact shared-centre LP (unimplemented/unregistered/unrun), then exact weighted-vertex screen, then eligible separately registered ball/order3 SOS successors. No new ordinary admission, T item or bound movement; #362/T-093 October5 remains latest. Official bracket4.66044275<s17<=4.6755300936045509516342148538535054.
 - Full public status: https://github.com/jlevy/squares/issues/405#issuecomment-6074493493 . PR bodies carry final gates and stable background; no GitHub merge or draft promotion occurred.
+Final readback: all six published PR bodies match prepared text and pinned heads; tracker405 consolidation comment6074493493 matches. Source integration bead think-iz2b is completed; remaining A1 resource/full qualification stays open here and under think-foe5. Proposed landing order: qualified452/453, then404→454→461, then standalone464 with the authorized cap remedy/current-base qualification. No merges.
