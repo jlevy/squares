@@ -23,7 +23,7 @@ commit past the earlier packet’s pin (bead `think-ipbg`).
 | Licence | None published |
 | Retrieved | 2026-10-05, a full clone |
 | Retained here | Derived facts and metadata only: [`facts/`](facts/), one Witness/v2 witness for each of the seven changed counts with the source’s centres and angles carried verbatim, and [`acquisition/sources.json`](acquisition/sources.json), which pins all 99 upstream files at this revision by SHA-256 and records each of the seven counts’ commit history with every side it has printed |
-| Not retained | The packing files, their SVG renderings and the README, under the [known-best retention policy](../known-best-packings/README.md), as in the earlier packet (`raw_asset_retained: false`) |
+| Not retained | The packing files, their SVG renderings and the README, under the derived-only form of the [known-best retention policy](../known-best-packings/README.md), as in the earlier packet: no raw asset is kept (`raw_asset_retained: false`) |
 
 The acquisition record names the earlier packet under `supersedes`, and keeps facts only
 where the printed side changed since that pin; the 42 unchanged counts stay with the

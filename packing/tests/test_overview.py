@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import dataclasses
-import functools
 import html
 import html.parser
 import re
@@ -5377,32 +5376,41 @@ class _RowWiring(HTMLParser):
             self._site_table = False
 
 
-@functools.cache
-def _row_wiring(name: str) -> _RowWiring:
-    parser = _RowWiring()
-    parser.feed(site_renders.html(name))
-    return parser
+@pytest.fixture(scope="module")
+def row_wiring(rendered: Callable[[str], str]) -> Callable[[str], _RowWiring]:
+    """The row wiring of each page the row checks read, parsed during setup from the
+    module's `rendered` pages, so no check carries a render in its own call time."""
+    parsed = {}
+    for name in (*ROW_PAGES, "frontier.html"):
+        parser = _RowWiring()
+        parser.feed(rendered(name))
+        parsed[name] = parser
+    return parsed.__getitem__
 
 
 @pytest.mark.parametrize("name", ROW_PAGES)
-def test_no_table_cell_expands_on_its_own(name: str) -> None:
+def test_no_table_cell_expands_on_its_own(
+    name: str, row_wiring: Callable[[str], _RowWiring]
+) -> None:
     """No `<td>` or `<th>` on a page with a site table holds a `<details>`: a row's
     detail is its popover. The replay table's own disclosure wraps the whole table."""
-    wiring = _row_wiring(name)
+    wiring = row_wiring(name)
     assert wiring.rows, name
     assert wiring.cells > len(wiring.rows), name
     assert wiring.cell_details == 0, name
 
 
 @pytest.mark.parametrize("name", ROW_PAGES)
-def test_every_row_with_detail_is_wired_to_one_popover(name: str) -> None:
+def test_every_row_with_detail_is_wired_to_one_popover(
+    name: str, row_wiring: Callable[[str], _RowWiring]
+) -> None:
     """Every body row of every site table names one popover, has an accessible name, and
     carries exactly one native trigger for that popover, so it opens without scripts.
     The popover is on the page once, outside every table, a dialog labelled by its own
     headline, with a close cross of its own; no popover is left without a row.
     A row carries no `tabindex`: `row-popover.js` makes it focusable when it takes the
     trigger out of the tab order, so without scripts the trigger is the one stop."""
-    wiring = _row_wiring(name)
+    wiring = row_wiring(name)
     targets = []
     for attributes, triggers in wiring.rows:
         target = attributes.get("data-row-popover")
@@ -5425,18 +5433,18 @@ def test_every_row_with_detail_is_wired_to_one_popover(name: str) -> None:
 
 
 def test_the_tables_with_row_detail_are_the_ones_named(
-    overview: overview_data.Overview,
+    overview: overview_data.Overview, row_wiring: Callable[[str], _RowWiring]
 ) -> None:
     """The recent table on the overview and the results table on its page: each row's
     popover is its own, by its key. The frontier table's rows open their case's record
     in the one case popover instead (think-necq)."""
     recent = {f"pop-result-{r.id.lower()}" for r in _recent_entries(overview)}
     assert recent
-    assert set(_row_wiring("index.html").popovers) == recent
-    assert set(_row_wiring("all-results.html").popovers) == {
+    assert set(row_wiring("index.html").popovers) == recent
+    assert set(row_wiring("all-results.html").popovers) == {
         f"pop-result-{r.id.lower()}" for r in overview.results
     }
-    assert not _row_wiring("frontier.html").popovers
+    assert not row_wiring("frontier.html").popovers
 
 
 @pytest.mark.parametrize("name", ROW_PAGES)

@@ -413,7 +413,17 @@ fetched them again on every page, since a page’s own bytes were all it could c
   (`site_assets.PRELOADED_FACES`). Emphasis counts: the frontier’s opening paragraphs
   set italic and bold PT Serif, and while those two waited for the layout that
   discovered them, their arrival moved the paragraphs by a CLS of 0.134 or 0.209 on the
-  hosted runner. A small prepaint program activates these hints with anonymous CORS on
+  hosted runner. The two emphasis preloads add 64,484 bytes at high priority to every
+  page, 34,896 for the italic and 29,588 for the bold.
+  Only a reader’s first page pays: the files are shared and named by their content, so
+  later pages read them from cache.
+  Not every page draws them: measured in Chromium on 2026-10-09 across the twelve
+  top-level pages at 390 and 1280px, `visualize.html` draws neither, `index.html`,
+  `papers.html` and `cases/index.html` draw the italic but not the bold, and
+  `readme.html` and `epistemics.html` draw the bold only below the first screen.
+  A first visit that lands on one of those pages fetches a face early that it draws late
+  or never. A per-page preload list in `site_assets.preload_tags` would remove that cost
+  and is not built. A small prepaint program activates these hints with anonymous CORS on
   HTTP and HTTPS, and without CORS for local files; choosing the mode before requesting
   the fonts avoids WebKit’s file-origin cache failure while preserving shared HTTP font
   downloads. With JavaScript disabled, the same stylesheets load their faces normally.
@@ -430,6 +440,15 @@ fetched them again on every page, since a page’s own bytes were all it could c
   (Liberation Sans on Linux) behind Source Sans 3, regular for its 410 and bold for its
   550 and heavier, with Source Sans 3’s ascent and descent and only its unicode range,
   so it stands in for nothing the shipped face draws once loaded.
+  The fix is measured in Chromium only.
+  `test_frontier_sans_arrival_keeps_the_navigation_in_place` runs there and fails up
+  front, saying so, where neither Arial nor Liberation Sans is installed.
+  WebKit is not covered: on the hosted WebKit runner `load()` on these local-only faces
+  rejected (run 37888293870), so the explainer’s font probe skips them, and whether
+  WebKit lays text out in them was not measured.
+  Safari applies `size-adjust` from version 17, but by MDN’s compatibility data on
+  2026-10-09 ships `ascent-override`, `descent-override` and `line-gap-override` only in
+  Technology Preview, so there the alias would keep Arial’s own ascent and descent.
   The rest are fetched when a page first draws in them, and a face no page draws, a
   print instance, only when one prints.
 - **What a build writes.** `render_overview.write_site` writes exactly the files its
