@@ -329,6 +329,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-121",
         "T-122",
         "T-123",
+        "T-129",
     }
     # Couzo's later eight-case source report alone holds no current frontier lane.
     if "T-128" in records.results:
