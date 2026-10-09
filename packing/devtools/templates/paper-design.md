@@ -440,6 +440,15 @@ fetched them again on every page, since a page’s own bytes were all it could c
   (Liberation Sans on Linux) behind Source Sans 3, regular for its 410 and bold for its
   550 and heavier, with Source Sans 3’s ascent and descent and only its unicode range,
   so it stands in for nothing the shipped face draws once loaded.
+  The fix is measured in Chromium only.
+  `test_frontier_sans_arrival_keeps_the_navigation_in_place` runs there and fails up
+  front, saying so, where neither Arial nor Liberation Sans is installed.
+  WebKit is not covered: on the hosted WebKit runner `load()` on these local-only faces
+  rejected (run 37888293870), so the explainer’s font probe skips them, and whether
+  WebKit lays text out in them was not measured.
+  Safari applies `size-adjust` from version 17, but by MDN’s compatibility data on
+  2026-10-09 ships `ascent-override`, `descent-override` and `line-gap-override` only in
+  Technology Preview, so there the alias would keep Arial’s own ascent and descent.
   The rest are fetched when a page first draws in them, and a face no page draws, a
   print instance, only when one prints.
 - **What a build writes.** `render_overview.write_site` writes exactly the files its

@@ -25,6 +25,7 @@ if TYPE_CHECKING:
 
 _SHIFT = applied(probe(Path(__file__).parent / "probes", "site_rendering/shift"))
 _FONT_INITIATORS = probe(Path(__file__).parent / "probes", "site_rendering/font_initiators")
+_LOCAL_FACE = probe(Path(__file__).parent / "probes", "site_rendering/local_face")
 
 
 @pytest.fixture(scope="module")
@@ -703,6 +704,20 @@ def _navigation_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[s
         session.detach()
 
 
+def _unresolved_sans_alias_sources(browser: Browser) -> list[str]:
+    """Each `src` of `paper-type.css`'s "Site Sans Arial" faces that names no face the
+    browser can load from this machine."""
+    css = render_overview.PAPER_TYPE_CSS.read_text(encoding="utf-8")
+    sources = re.findall(r'font-family: "Site Sans Arial";\s*src: ([^;]+);', css)
+    assert len(sources) == 2, sources
+    context = browser.new_context()
+    try:
+        page = context.new_page()
+        return [source for source in sources if not page.evaluate(_LOCAL_FACE, source)]
+    finally:
+        context.close()
+
+
 def test_frontier_sans_arrival_keeps_the_navigation_in_place(
     browser: Browser, frontier_native_site: str
 ) -> None:
@@ -715,6 +730,12 @@ def test_frontier_sans_arrival_keeps_the_navigation_in_place(
     measured 0.232 the same way. The metric-adjusted Arial alias in `paper-type.css`
     (Liberation Sans on Linux) is what stands in now, so every link stays on its line
     and the published bar is unchanged once the face is in."""
+    unresolved = _unresolved_sans_alias_sources(browser)
+    assert not unresolved, (
+        "this machine has neither Arial nor Liberation Sans for the sans alias in "
+        f"paper-type.css, so there is no fallback to measure ({unresolved}); install "
+        "Liberation Sans (fonts-liberation on Debian and Ubuntu)"
+    )
     reference = browser.new_context(viewport={"width": 390, "height": 900})
     try:
         view = reference.new_page()
