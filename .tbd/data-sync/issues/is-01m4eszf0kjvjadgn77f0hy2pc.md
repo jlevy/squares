@@ -5,7 +5,7 @@ title: Resume polynomial catalogue recovery, upstream sync and database work map
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -20,10 +20,11 @@ child_order_hints:
   - is-01m4eyprw7dyyfqhbv1j9zrkk0
   - is-01m4ezjrwesqnjeb5gvvz1t8wf
   - is-01m4f0knhfvssc6s4dr4dzk4e6
+  - is-01m4f344gqbmhwc39p4301fex7
 hold: null
 hold_until: null
 created_at: 2026-10-08T22:26:10.056Z
-updated_at: 2026-10-09T00:22:03.566Z
+updated_at: 2026-10-09T01:06:00.341Z
 started_at: 2026-10-08T22:26:36.377Z
 ---
 W7 continuation of interrupted PR435/stack447. Preserve unpublished local parent and child repairs, reconcile formal stack with latest origin/main, run current record and change-reachable gates, push every validated owning layer and update cost/results/validation in PR descriptions. Reconcile actual current and historical database partitions with every remaining identification/contact/witness bead. Coordinator owns Git, shared records, bead mutations, integration and PR; parallel Sol-medium CI/storage audit, Sol-xhigh coverage reconciliation and Astra-xhigh semantic mathematical review. Preserve unique source and validation evidence outside disposable external scratch. Slice1 recover provenance and assess gates/capacity; slice2 stack integration and local assurance; slice3 PR/CI closeout alongside selected W6 driver readiness work. No PR landing in scope.
