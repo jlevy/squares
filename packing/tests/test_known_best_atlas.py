@@ -5,10 +5,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import lzma
 import re
 import subprocess
 from collections import Counter
 from pathlib import Path
+from typing import Any
 from xml.etree import ElementTree as ET
 
 import cairosvg
@@ -217,6 +219,89 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
         assert (
             hashlib.sha256(path.read_bytes()).hexdigest() == record["upstream_declared_sha256"]
         )
+
+
+def _packet_acquisition(packet: Path) -> tuple[str, dict[str, str]]:
+    """The revision a packet acquired its source at, and each upstream file's SHA-256 by
+    its path in the source tree, read from the packet's own acquisition record."""
+    acquisition = packet / "acquisition"
+    inputs = acquisition / "upstream-factual-inputs.json"
+    if inputs.is_file():
+        record = json.loads(inputs.read_text(encoding="utf-8"))
+        return record["revision"], {row["path"]: row["sha256"] for row in record["files"]}
+    (source,) = json.loads((acquisition / "sources.json").read_text(encoding="utf-8"))[
+        "sources"
+    ]
+    manifest = (acquisition / "upstream-subtree.sha256").read_text(encoding="utf-8")
+    digests = {}
+    for line in manifest.splitlines():
+        digest, name = line.split(maxsplit=1)
+        digests[name.removeprefix("./")] = digest
+    return source["source_commit"], digests
+
+
+def _retained_container(path: Path) -> dict[str, Any]:
+    assert path.name.endswith(".json.xz"), path
+    return json.loads(lzma.decompress(path.read_bytes()))
+
+
+def _assert_container_retains(
+    row: dict[str, Any], container: dict[str, Any], acquisition: tuple[str, dict[str, str]]
+) -> None:
+    """The container's one entry for the row's `url` is the upstream file's exact text."""
+    revision, digests = acquisition
+    assert container["revision"] == revision, row["url"]
+    entries = [
+        entry
+        for entry in container["cases"]
+        if f"{container['source']}/blob/{revision}/{entry['source_path']}" == row["url"]
+    ]
+    assert len(entries) == 1, row["url"]
+    (entry,) = entries
+    assert entry["n"] == row["source_n"], row["url"]
+    retained = hashlib.sha256(entry["source_certificate"].encode("utf-8")).hexdigest()
+    assert retained == digests[entry["source_path"]], row["url"]
+
+
+def test_every_retained_packet_source_holds_its_upstream_bytes() -> None:
+    """A packet row marked `raw_asset_retained` keeps the file its `url` names, byte for
+    byte: the builder marks a row so when its `path` is a complete-certificate container
+    (`build_known_best_atlas._source_index`), and the container's entry for that url
+    carries the SHA-256 the packet's acquisition record pinned upstream."""
+    source_index = json.loads((SOURCES / "sources.json").read_text(encoding="utf-8"))
+    rows = [
+        record
+        for record in source_index["sources"]
+        if record["kind"] == "packet-derived-facts" and record["raw_asset_retained"]
+    ]
+    assert rows
+    containers: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        path = ROOT / row["path"]
+        if row["path"] not in containers:
+            containers[row["path"]] = _retained_container(path)
+        _assert_container_retains(
+            row, containers[row["path"]], _packet_acquisition(path.parent.parent)
+        )
+
+
+@pytest.mark.parametrize("change", ["edited text", "other revision"])
+def test_a_retained_source_row_refuses_a_copy_that_is_not_upstream(change: str) -> None:
+    path = ryxu_reports.fact_path()
+    container = _retained_container(path)
+    acquisition = _packet_acquisition(path.parent.parent)
+    url = ryxu_houses.source_url(70)
+    row = {"path": path.relative_to(ROOT).as_posix(), "source_n": 70, "url": url}
+    _assert_container_retains(row, container, acquisition)
+    if change == "edited text":
+        entry = next(entry for entry in container["cases"] if entry["n"] == 70)
+        edited = entry["source_certificate"].replace("1", "2", 1)
+        assert edited != entry["source_certificate"]
+        entry["source_certificate"] = edited
+    else:
+        row["url"] = url.replace(ryxu_reports.REVISION, "0" * 40)
+    with pytest.raises(AssertionError):
+        _assert_container_retains(row, container, acquisition)
 
 
 @pytest.mark.usefixtures("isolated_atlas_build_cache")
