@@ -5,7 +5,7 @@ title: Tighten the homepage with visible atlas and results previews
 kind: feature
 status: in_progress
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -17,10 +17,10 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:20:43.908Z
-updated_at: 2026-10-09T01:28:44.380Z
+updated_at: 2026-10-09T01:39:52.038Z
 started_at: 2026-10-08T23:47:57.505Z
 ---
-Keep the homepage short. Confirmed order: brief problem intro with a centered The Squares Project card to About; Atlas preview immediately second; Recent Major Results immediately after Atlas; Learn More with all papers plus visible PDF/video cards; compact resources. Initially show eight atlas cases and up to twelve S4-or-higher results from the last180days, excluding superseded entries; keep full results-page filters unchanged. Remove the obvious recent-progress introduction and render the count/scope paragraph in sans-serif chrome. Center every single-card group. Prominent uppercase Explore the atlas and View all results buttons lead to dedicated pages; think-hyd6 tracks inline Atlas expansion. Preserve every resource and canonical link, including moved project material on About. See L3 in the spec.
+Keep the homepage compact with original hero, exact owner problem description and centered project card linking About. Embed the original SVG Atlas initially showing two rows, with Expand/Explore; show Recent Major Results next with up to twelve current S4+ entries from180days and sans scope chrome. Center the boxed legend at medium width and give it a small-caps LEGEND heading. Learn More holds all papers; PDFs appear home+Papers, video home+Visualize in separate groups, eyebrows PDF/Video. Move Other Square Packing Projects onto homepage; retain Squares Project Documentation on About. Center solo cards; use shared uppercase action labels. Preserve full-page filters, resources and links. Inline SVG expansion tracked by think-hyd6.
 
 ## Notes
 
