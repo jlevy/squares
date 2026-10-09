@@ -5,7 +5,7 @@ title: Make all open n-17 PRs source-qualified and merge-ready
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: claude-code@vm
 labels:
   - n-17
@@ -19,10 +19,11 @@ child_order_hints:
   - is-01m4fwn7nc77zr1hmg8mdv3x5w
   - is-01m4g2z6jk4eycyrwrvqe9vrer
   - is-01m4fzyhtapn4ssshxw54j0ndn
+  - is-01m4g7nsqn6jdnyg1kbc1nekhm
 hold: null
 hold_until: null
 created_at: 2026-10-09T05:25:23.889Z
-updated_at: 2026-10-09T12:09:54.820Z
+updated_at: 2026-10-09T12:10:08.929Z
 started_at: 2026-10-09T05:27:42.212Z
 ---
 Coordinate review, source qualification and landing readiness for the twelve open n-17 PRs. The user will hand completion to another agent. Conflict-free declared bases do not establish current-main integration. #404 at 1af586ef passes expected CI with the unchanged 192 MiB cap. Propagation to #454/#461 and scoped #464 repair, follow-up review and full checkpoints remain under think-0m0x. Supporting #452/#453 have current-main full passes. Peer review remains under think-49b6. Catalogue #403/#435 have new full passes, but #403 Pages and current-source review/disposition requirements remain under think-okxn and active owners. #450 current checks pass; inherited review/full qualification belong to think-zjlo. Mathematical next work is think-dvcs, then conditional think-geid. No blanket merge-ready or bound claim. Current status: https://github.com/jlevy/squares/issues/405 . Full handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
