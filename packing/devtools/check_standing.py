@@ -200,8 +200,8 @@ def stated_bounds(record: Mapping[str, Any]) -> dict[tuple[int, str], Stated]:
     states none. The claim is the fallback and not an addition, since a claim may quote
     a bound that is another entry's."""
     scope = sorted(scope_values(dict(record["scope"])))
-    headline = statements(str(record["headline"]), scope)
-    return headline or statements(" ".join(str(record["claim"]).split()), scope)
+    headline = statements(str(record.get("headline") or ""), scope)
+    return headline or statements(" ".join(str(record.get("claim") or "").split()), scope)
 
 
 def relation(stated: Stated, bound: Mapping[str, Any] | None, direction: str) -> str | None:

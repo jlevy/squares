@@ -508,6 +508,21 @@ def held(n: int, records: Records) -> Held:
     )
 
 
+def lane_holders(n: int, records: Records, direction: str, lanes: Iterable[str]) -> set[str]:
+    """The entries case `n`'s bounds in `direction` (`lower` or `upper`) rest on, in the
+    named `lanes` (`verified`, `reported`), read as `held` reads them."""
+    case = records.cases[n]
+    found: set[str] = set()
+    for lane in lanes:
+        bound = case.get(f"{lane}_{direction}_bound")
+        if direction == "upper":
+            found |= _upper_holders(n, bound, records)
+        elif bound:
+            label = "lower" if lane == "verified" else "reported lower"
+            found |= _lower_holders(n, bound, records, label)
+    return found
+
+
 def standing(record: Mapping[str, Any], records: Records) -> str:
     """Whether an entry holds a case bound now, and if not, why not. An entry whose
     evidence claims no bound has no standing, `NO_STANDING`.
@@ -579,13 +594,33 @@ def superseding(record: Mapping[str, Any], records: Records) -> tuple[str, ...]:
     a lower bound's and an exact value's are the lower bounds' holders, since a
     construction never supersedes a proof. An audit or a correction that cites a bound's
     evidence carries it and supersedes nothing. Empty where no register entry carries
-    those bounds."""
-    upper = str(record["kind"]) == "upper-bound"
+    those bounds.
+
+    Where the entry's words state its bound at a case (`check_standing.findings`), only
+    the lanes whose bound ties or beats it there are named. A lane whose bound is worse
+    than the entry's replaced nothing: a report beaten in the reported lane is not
+    superseded by the holder of a worse verified bound. Where the words state none, both
+    lanes are named, as `held` reads them."""
+    # `check_standing` reads this module, so its reader of stated bounds is imported here.
+    from devtools.check_standing import (  # noqa: PLC0415
+        BEATEN,
+        EQUAL,
+        LANES,
+        LOWER,
+        UPPER,
+        findings,
+    )
+
+    direction = UPPER if str(record["kind"]) == "upper-bound" else LOWER
+    replaced = {
+        finding.n: {lane for lane in LANES if getattr(finding, lane) in {BEATEN, EQUAL}}
+        for finding in findings(record, records)
+        if finding.direction == direction
+    }
     found: set[str] = set()
     for n in _scope(record):
         if n in records.cases:
-            case = held(n, records)
-            found |= case.upper_holders if upper else case.lower_holders
+            found |= lane_holders(n, records, direction, replaced.get(n, set(LANES)))
     found.discard(str(record["id"]))
     return tuple(
         sorted(entry for entry in found if records.results[entry]["kind"] in BOUND_KINDS)
