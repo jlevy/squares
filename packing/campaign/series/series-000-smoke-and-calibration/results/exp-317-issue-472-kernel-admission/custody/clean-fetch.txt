@@ -1,0 +1,5 @@
+# Separate download of three assets from data/n17-x048-session-168-certificates-v1 into an empty directory,
+# with gh release download --pattern, compared by size and SHA-256 with hosted/n17-issue-472-kernel-certificates.yaml.
+OK node-58b93b9eb33557ca930b3b4a612e8c1a7672f51aa7865eefc6d00a124cfcb4f8.json.gz 66129638 4351962501c68010cd948e6b79853de4d6f33dc44ac5cca81656f9e896118bc1
+OK seed-309c301a2a855148d17e657cb6ceab5b12759ef0c5b860f8d38a6a49e37baa69.json.gz 7935 79a8a50ef7b63b05817ee37c9214e1ff9caa8dd56bfe8b2974c0dd4b10b0ea04
+OK node-ee9837ad631ecc301899bf11a2b3f7bf34bb3fb8c9680e0f5936c610c715f23e.json.gz 27566045 f38d4134fa4f8c6209f98e0e761fabd272aade56b2a5dfa114e6f2f0bfdf018b

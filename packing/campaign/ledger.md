@@ -955,7 +955,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 245 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 246 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1221,7 +1221,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | H-324 | confirmed | proof | The accepted rational n17 packing supplies an exact feasible endpoint  |  | 1 |  | 5s wall |
 | H-325 | open | proof | In the centred container at cap V = S* - 1/100 (walls at (U - V)/2 and |  | 0 |  |  |
 | H-326 | blocked | proof | s(17) > V_1 with V_1 = S* - 1/100 rounded down to a rational below the |  | 0 |  |  |
-| H-327 | open | proof | At least 60 of the 95 distance-2 residue orbits of the 60-entry ledger |  | 0 |  |  |
+| H-327 | open | proof | At least 60 of the 95 distance-2 residue orbits of the exp-259 partiti |  | 0 |  |  |
 | H-328 | blocked | proof | At U = 1169/250 on the H-266 cover, relaxations that keep only each ce |  | 0 |  |  |
 | H-329 | blocked | proof | Every packing of 17 unit squares of side at most U' = 935106018721/200 |  | 0 |  |  |
 | H-330 | blocked | proof | Let m be the side margin at which the whole-state engines exclude the  |  | 0 |  |  |
@@ -1231,10 +1231,19 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | H-334 | blocked | proof | A composition checker that reads the cover receipt, the admitted ledge |  | 0 |  |  |
 | H-335 | open | proof | The Rust kernel-certificate verifier merged in PR 410 and the Python s |  | 0 |  |  |
 | H-336 | open | proof | All objects named by the n17 hosted-data manifests (the 204 objects of |  | 0 |  |  |
-| H-337 | blocked | proof | With the owned-hull compression pull reduced from 2^-12 to 2^-18 of th |  | 0 |  |  |
+| H-337 | open | proof | With the owned-hull compression pull reduced from 2^-12 to 2^-18 of th |  | 0 |  |  |
 | H-338 | open question | proof | For a residue state X of the H-266 cover and a cap V < S*, does a weig |  | 0 |  |  |
 | H-339 | blocked | proof | At most eight of the 135 unavailable owner-axis options of the retaine |  | 0 |  |  |
 | H-340 | open | proof | The capture-target theorem holds with the per-coordinate radius vector |  | 0 |  |  |
+| H-341 | confirmed | proof | Each of the twelve kernel certificates reported in issue 472 (masks 21 |  | 1 |  | 55.6m wall |
+| H-342 | open | proof | Of the issue-413 rows whose only reported evidence is a branch-and-bou |  | 0 |  |  |
+| H-343 | open | proof | At least 47 of the 94 distance-2 orbit representatives of the 60-entry |  | 0 |  |  |
+| H-344 | blocked | proof | With a branch predicate that halves one named side cell along its long |  | 0 |  |  |
+| H-345 | open | proof | A 20-round run of the n17 capture producer from the family's occupancy |  | 0 |  |  |
+| H-346 | blocked | proof | A branch and bound from the family's full occupancy cells at cap U', r |  | 0 |  |  |
+| H-347 | blocked | proof | For each of the 45 non-slider coordinates of the local family theorem, |  | 0 |  |  |
+| H-348 | blocked | proof | An independent checker of the local family theorem's fixed certificate |  | 0 |  |  |
+| H-349 | open | proof | Of the 69 flagged, uncertified selector classes that devtools/census_n |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1409,7 +1418,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | exp-283 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Original registered trial refused after8.43568754s supervised wall, rc1 and normal cleanup. Frozen producer reports centered same-object full stall premise differs before conditional initialization, initial intersection, updates, child creation or fresh replay. No mathematical criterion was evaluated. Preserve original receipts and repair the operational accepted-receipt schema join before a separately registered replication; all scientific parameters and budgets remain frozen. |
 | exp-284 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh full conditional replay hit its300s source deadline (conditional gate wall ceiling); fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss, exclusion or admission. Preserve native child and all receipts; do not retry the unchanged long replay or use its unaccepted geometry as a finite-case premise. |
 
-### accepted (93)
+### accepted (94)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1506,6 +1515,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | exp-313 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-321 | Complete exact diagnostic finds 102 proper pair convexification cuts among228 relevant pairs over95 frozen states/12920 pair incidences. Fresh full payload and all imported source bytes match at0db24daac5ea1be2dd416971b0c78b3dfc087388. Sole Astra mathematical review CLEAR; hand equivalence has no independent mathematical confirmation. This selects a future shared-centre model only. No LP solved, packing, ordinary exclusion, admission, capture or bound proved. |
 | exp-314 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-322 | Complete exact diagnostic finds 114 proper pair convexification cuts among228 relevant pairs over95 frozen states/12920 pair incidences. Fresh full payload and all imported source bytes match at0db24daac5ea1be2dd416971b0c78b3dfc087388. Sole Astra mathematical review CLEAR; hand equivalence has no independent mathematical confirmation. This selects a future shared-centre model only. No LP solved, packing, ordinary exclusion, admission, capture or bound proved. All1357 extreme squared norms accounted; zero ordinary impossible-pair candidates. Twelve more pairs are cut than by the fixed rational octagon. Independent pair impossibility cannot exclude a relevant pair. |
 | exp-316 | series-000 | 17 | Sol coordinator with sole Astra source and completed-result review; think-dvcs | H-324 | Complete exact construction and fresh verification retain the accepted physical endpoint under uniquely canonicalizingf1, with all810rows and136pair blocks; successful supervision/cleanup4.9302544590318576s. This accepts endpoint relaxation calibration only under inherited premises; no first8solve, exclusion, admission, lower-bound movement or optimality claim. |
+| exp-317 | series-000 | 17 | claude-opus-5.5, a coordinator with sub-agent replay lanes in detached worktrees | H-341 | All twelve pass the listed verifier in full from a clean worktree, agree with the Rust verifier outside provenance, directory and seconds, are served by the ledger's release at the manifest's digests, and once admitted leave exactly the projected 3,636 orbits and 28,528 states with the endpoint surviving and the distance-2 stratum at 94 orbits and 736 states. |
 
 ### baseline (12)
 
@@ -1573,7 +1583,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 
 ## Effort
 
-245 rounds, 2512.1 agent-minutes, 5827.5 wall-minutes.
+246 rounds, 2512.1 agent-minutes, 5883.1 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 
