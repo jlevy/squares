@@ -5,7 +5,7 @@ title: Make all open n-17 PRs source-qualified and merge-ready
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@spud10.local
 labels:
   - n-17
@@ -16,10 +16,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T05:25:23.889Z
-updated_at: 2026-10-09T06:28:34.719Z
+updated_at: 2026-10-09T07:54:46.337Z
 started_at: 2026-10-09T05:27:42.212Z
 ---
-User transfers finish and closeout of all twelve open n-17 PRs to another agent. All work from this pass is pushed or published in PR descriptions, independent reviews and linked handoff comments. Research repair #404 at 1af586ef passes current Packing, Pages and mergeability without changing the 192 MiB cap. Propagation to #454/#461 and standalone #464, final review and complete checkpoints remain open. Catalogue #403/#435 findings and active owner repairs, peer #409 review and #450 current inherited review coverage remain explicit. Supporting #452/#453 are fully qualified. Keep incomplete work open; no merges, promotion or bound movement. Complete handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
+Coordinate review, source qualification and landing readiness for the twelve open n-17 PRs. The user will hand completion to another agent. Conflict-free declared bases do not establish current-main integration. #404 at 1af586ef passes expected CI with the unchanged 192 MiB cap. Propagation to #454/#461 and scoped #464 repair, follow-up review and full checkpoints remain under think-0m0x. Supporting #452/#453 have current-main full passes. Peer review remains under think-49b6. Catalogue #403/#435 have new full passes, but #403 Pages and current-source review/disposition requirements remain under think-okxn and active owners. #450 current checks pass; inherited review/full qualification belong to think-zjlo. Mathematical next work is think-dvcs, then conditional think-geid. No blanket merge-ready or bound claim. Current status: https://github.com/jlevy/squares/issues/405 . Full handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
 
 ## Notes
 
@@ -35,3 +35,5 @@ The repair is not propagated to #454/#461 or applied to #464. Final pinned follo
 All subagents stopped; the old CI heartbeat remains paused. No merge, promotion, new proof result, admission, T item or bound movement. Preserve source custody and the held merge index. Durable local receipts: attic/n17-consolidation-20261008/snapshot-repair-receipts (381 files, 6,816,471 bytes copied byte-for-byte outside disposable scratch). Leave this bead open for the next agent to finish and close out.
 
 Final source correction: #450 moved to 8021291759d86eb53a146f3240046a84604fef3c during handoff. Its new Packing 37892077580, Pages 37892077553 and mergeability 37891957540 pass. Latest review G still binds older 4585b8d; fresh current inherited-layer coverage remains open. Public handoff/comment/tracker updated rather than crediting old-head CI.
+
+October 9 handoff reconciliation: the current Description supersedes stale source/CI/224MiB approval next-action wording in historical Notes. All actual execution receipts and historical failures remain retained. Main3213 is unchanged; no source edits, target computations, CI dispatches, merges or draft promotions occurred in this pass. Status and dependency map: https://github.com/jlevy/squares/issues/405 . Original complete source handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731 . Supporting issue updates: https://github.com/jlevy/squares/issues/400#issuecomment-6076664631 and https://github.com/jlevy/squares/issues/445#issuecomment-6076662312 .

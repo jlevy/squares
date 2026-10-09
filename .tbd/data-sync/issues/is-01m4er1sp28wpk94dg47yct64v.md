@@ -5,20 +5,22 @@ title: "n17 stack A1: qualify current heads with required CI and full checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 15
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
   - n-17
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m4fhz39j0nmrca9x38tyrnsg
 parent_id: is-01m4eq9mdaejkedd1b09qqn09p
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:52:29.377Z
-updated_at: 2026-10-09T06:28:36.955Z
+updated_at: 2026-10-09T07:56:17.096Z
 started_at: 2026-10-08T22:00:55.817Z
 ---
-A1 remains open for propagation of the published dependency-aware worker-copy repair through #454/#461 and standalone #464, final pinned follow-up review and clean complete research checkpoints. Root #404 at 1af586ef43446655dfe0401902a096042526dd0a now passes Packing37891105634, Pages37891105643 and mergeability37891099687. The unchanged192 MiB cap and scientific inputs are preserved; actual worker counts199926018 bytes. Broad local push remains failed/interrupted and unqualified, with scoped unchanged-deadline recovery recorded. Older224 MiB proposal is unapplied and not the selected remedy. User transfers finish/closeout to another agent. No new full run dispatched or bound claim. Supporting452/453 complete checkpoints remain qualified. Handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
+A1 remains open. Propagate #404 commit 1af586ef43446655dfe0401902a096042526dd0a through #454 at 1b1c0945 and #461 at 79ebfd59; apply the scoped equivalent to standalone #464 at 51368bec. Root Packing 37891105634, Pages 37891105643 and mergeability 37891099687 pass. A published follow-up covering the root repair and complete research checkpoints remain open. The other three latest Packing runs fail only the three source-copy assertions; do not rerun unchanged sources. Preserve the 192 MiB cap, scientific inputs and all proof/resource ceilings. Root worker selection is 199,926,018 bytes; broad local push remains failed/interrupted and unqualified. Qualify changed sources once, using direct-branch full dispatch and blank pull_request where exposed; verify checkout and main ancestry. Supporting #452/#453 need no repeat run at unchanged source/base. The older 224 MiB proposal is unapplied and is not the selected remedy. https://github.com/jlevy/squares/issues/405
 
 ## Notes
 
@@ -69,3 +71,5 @@ The repair is not propagated to #454/#461 or applied to #464. Final pinned follo
 All subagents stopped; the old CI heartbeat remains paused. No merge, promotion, new proof result, admission, T item or bound movement. Preserve source custody and the held merge index. Durable local receipts: attic/n17-consolidation-20261008/snapshot-repair-receipts (381 files, 6,816,471 bytes copied byte-for-byte outside disposable scratch). Leave this bead open for the next agent to finish and close out.
 
 Final source correction: #450 moved to 8021291759d86eb53a146f3240046a84604fef3c during handoff. Its new Packing 37892077580, Pages 37892077553 and mergeability 37891957540 pass. Latest review G still binds older 4585b8d; fresh current inherited-layer coverage remains open. Public handoff/comment/tracker updated rather than crediting old-head CI.
+
+October 9 handoff reconciliation: the current Description supersedes stale source/CI/224MiB approval next-action wording in historical Notes. All actual execution receipts and historical failures remain retained. Main3213 is unchanged; no source edits, target computations, CI dispatches, merges or draft promotions occurred in this pass. Status and dependency map: https://github.com/jlevy/squares/issues/405 . Original complete source handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731 . Supporting issue updates: https://github.com/jlevy/squares/issues/400#issuecomment-6076664631 and https://github.com/jlevy/squares/issues/445#issuecomment-6076662312 .

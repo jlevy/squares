@@ -5,19 +5,21 @@ title: Review green n17 peer PRs402/408/409 at their current heads
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
 delegate: claude-code@spud10.local
 labels:
   - n-17
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m4fhz39j0nmrca9x38tyrnsg
 parent_id: is-01m4fhz39j0nmrca9x38tyrnsg
 hold: null
 hold_until: null
 created_at: 2026-10-09T05:34:59.273Z
-updated_at: 2026-10-09T06:28:37.924Z
+updated_at: 2026-10-09T07:56:17.108Z
 started_at: 2026-10-09T05:35:39.532Z
 ---
-Astra senior A and dedicated correctness B round1 reviews are published and verified for both #4023745534eb and #408d7709c1c, with no findings. Focused controls pass and existing expected CI is green at those unchanged heads; newer-main integration and full target research were not rerun. #4097f7b4469 still needs fresh senior review and a dedicated correctness scope decision. User transfers finish/closeout to another agent; all review links, controls, source scope and drafts are captured in the PR handoff comments. No merge, draft promotion, proof admission or bound movement. Handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
+Peer #402 at 3745534eb and #408 at d7709c1c have Astra senior A and correctness B reviews with no findings and passing expected aggregates. Reviews: #402 5466112458/5466196489; #408 5466236830/5466252889. These exclude integration with newer main 3213; full H258 target replay is not claimed. #409 at 7f7b4469 still has no formal review. Complete senior review and decide dedicated correctness scope, then qualify any source/base changes. Avoid repeating unchanged green gates. Keep this open for the next agent's finish and closeout. No merge, promotion, admission or bound movement. https://github.com/jlevy/squares/issues/405
 
 ## Notes
 
@@ -33,3 +35,5 @@ The repair is not propagated to #454/#461 or applied to #464. Final pinned follo
 All subagents stopped; the old CI heartbeat remains paused. No merge, promotion, new proof result, admission, T item or bound movement. Preserve source custody and the held merge index. Durable local receipts: attic/n17-consolidation-20261008/snapshot-repair-receipts (381 files, 6,816,471 bytes copied byte-for-byte outside disposable scratch). Leave this bead open for the next agent to finish and close out.
 
 Final source correction: #450 moved to 8021291759d86eb53a146f3240046a84604fef3c during handoff. Its new Packing 37892077580, Pages 37892077553 and mergeability 37891957540 pass. Latest review G still binds older 4585b8d; fresh current inherited-layer coverage remains open. Public handoff/comment/tracker updated rather than crediting old-head CI.
+
+October 9 handoff reconciliation: the current Description supersedes stale source/CI/224MiB approval next-action wording in historical Notes. All actual execution receipts and historical failures remain retained. Main3213 is unchanged; no source edits, target computations, CI dispatches, merges or draft promotions occurred in this pass. Status and dependency map: https://github.com/jlevy/squares/issues/405 . Original complete source handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731 . Supporting issue updates: https://github.com/jlevy/squares/issues/400#issuecomment-6076664631 and https://github.com/jlevy/squares/issues/445#issuecomment-6076662312 .
