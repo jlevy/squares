@@ -1,0 +1,17 @@
+{"round": 1, "step": 0, "cell": "corner-SW", "rows": 64, "live_rows": 64, "splits": 32, "producer": 1.5, "checker": 2.1, "seconds": 4.0}
+{"round": 1, "step": 1, "cell": "corner-SE", "rows": 64, "live_rows": 64, "splits": 32, "producer": 2.0, "checker": 2.8, "seconds": 8.8}
+{"round": 1, "step": 2, "cell": "corner-NW", "rows": 64, "live_rows": 64, "splits": 32, "producer": 1.6, "checker": 2.1, "seconds": 12.5}
+{"round": 1, "step": 3, "cell": "corner-NE", "rows": 64, "live_rows": 64, "splits": 32, "producer": 1.3, "checker": 1.8, "seconds": 15.6}
+{"round": 1, "step": 4, "cell": "side-S0", "rows": 64, "live_rows": 64, "splits": 32, "producer": 3.7, "checker": 5.4, "seconds": 24.7}
+{"round": 1, "step": 5, "cell": "side-N0", "rows": 64, "live_rows": 64, "splits": 32, "producer": 4.1, "checker": 5.8, "seconds": 34.6}
+{"round": 1, "step": 6, "cell": "side-W0", "rows": 64, "live_rows": 64, "splits": 32, "producer": 4.0, "checker": 5.0, "seconds": 43.6}
+{"round": 1, "step": 7, "cell": "side-E0", "rows": 64, "live_rows": 64, "splits": 32, "producer": 5.0, "checker": 6.7, "seconds": 55.3}
+{"round": 1, "step": 8, "cell": "side-S1", "rows": 64, "live_rows": 64, "splits": 32, "producer": 4.6, "checker": 7.7, "seconds": 67.6}
+{"round": 1, "step": 9, "cell": "side-N1", "rows": 64, "live_rows": 64, "splits": 32, "producer": 4.5, "checker": 5.6, "seconds": 77.8}
+{"round": 1, "step": 10, "cell": "side-E1", "rows": 64, "live_rows": 64, "splits": 32, "producer": 5.5, "checker": 9.8, "seconds": 93.2}
+{"round": 1, "step": 11, "cell": "side-N2", "rows": 64, "live_rows": 64, "splits": 32, "producer": 5.5, "checker": 6.1, "seconds": 104.8}
+{"round": 1, "step": 12, "cell": "side-W2", "rows": 64, "live_rows": 64, "splits": 32, "producer": 4.4, "checker": 5.3, "seconds": 114.6}
+{"round": 1, "step": 13, "cell": "interior-W", "rows": 64, "live_rows": 64, "splits": 32, "producer": 5.7, "checker": 5.7, "seconds": 126.0}
+{"round": 1, "step": 14, "cell": "interior-N", "rows": 64, "live_rows": 64, "splits": 32, "producer": 9.8, "checker": 14.7, "seconds": 150.6}
+{"round": 1, "step": 15, "cell": "interior-E", "rows": 64, "live_rows": 64, "splits": 32, "producer": 8.9, "checker": 10.0, "seconds": 169.5}
+{"round": 1, "worst": 0.929765, "extent": "1.1217e+00", "min_g_extent": 0.8230033207418476, "row_to_extent": 0.0418, "binding": "interior-N", "fine": true, "flat": false, "volume": "3.6585e+00", "live": 1056, "splits": 512}

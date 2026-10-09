@@ -1,0 +1,14 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-08T20:14:09.198193Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-315-shared-centre-endpoint/execution-manifest.json",
+  "manifest_sha256": "2a65534de2a51140e39fbe51457c7350b4ba78ef2e1a4398a27ccdb1dd6b5c3d",
+  "phases": [{"argv":["/Users/levy/wrk/github/squares/packing/.venv/bin/python","-m","devtools.n17_shared_centre_lp","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-315-shared-centre-endpoint/descriptor.json","--witness","../packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/portable-witness.yaml","--witness-sha256","05b8041e44d0c5dc5977cf06caed292de45e57a9ddce507ff25152b66b3125a6","--max-seconds","120","--max-operations","2000000","--output","campaign/series/series-000-smoke-and-calibration/results/exp-315-shared-centre-endpoint/certificate.json"],"ended_at":"2026-10-08T20:14:09.197530Z","name":"construction","returncode":1,"started_at":"2026-10-08T20:14:07.030634Z","status":"failed","wall_seconds":2.16682399995625}],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T20:14:07.029996Z",
+  "status": "failed",
+  "unstarted_phase_names": ["fresh_verification"],
+  "wall_seconds": 2.167833791987505
+}
+

@@ -72,6 +72,18 @@ RETAINED_RECEIPT_ROOTS = frozenset(
 )
 
 
+def index_fixture_source(repository: Path) -> None:
+    """Give a synthetic source the same tracked-set boundary as the real checkout."""
+    environment = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    for arguments in (("init", "-q"), ("add", "--", ".")):
+        subprocess.run(
+            ("git", "-C", str(repository), *arguments),
+            check=True,
+            capture_output=True,
+            env=environment,
+        )
+
+
 @pytest.fixture(scope="module")
 def control_snapshot(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, set[Path]]:
     """Reuse one real worker snapshot; each mutation restores its target in `finally`."""
@@ -187,6 +199,14 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
     """The bounded C8 prune removes outputs while preserving real consumer inputs."""
     tree, copied_targets = control_snapshot
     assert controls.HISTORICAL_SNAPSHOT_OUTPUTS <= PRUNE
+    assert {
+        ROOT
+        / "campaign/explorations/X048-session-177-cached-collision/receipts"
+        / "J-fixed-tuple-certificate.json",
+        ROOT
+        / "campaign/explorations/X048-session-178-full-core-ablation/receipts"
+        / "B-ablation-packet.json",
+    } <= set(COPY_SEPARATELY)
     rescued = (
         "campaign/explorations/X049-families-data/regularized/run.txt",
         "campaign/explorations/X049-families-data/regularized/shades.txt",
@@ -641,6 +661,37 @@ def test_individually_rescued_paths_reach_the_worker(
         assert landed.read_bytes() == source.read_bytes()
 
 
+def test_pruned_historical_family_copyback_keeps_bytes_and_omits_bulk(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The exact historical consumer survives a pruned agenda without its bulk."""
+    source = controls.SESSION184_RESULTS / "agenda-040/exp-214-n13-399-100-family.json"
+    assert source in COPY_SEPARATELY
+    packing = tmp_path / "source/packing"
+    agenda = packing / "campaign/results/agenda-040"
+    agenda.mkdir(parents=True)
+    family = agenda / source.name
+    family.write_bytes(source.read_bytes())
+    bulk = agenda / "unneeded-inventory.json"
+    bulk.write_text("unneeded generated output\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "REPO", packing.parent)
+    monkeypatch.setattr(controls, "PRUNE", frozenset({agenda}))
+    monkeypatch.setattr(controls, "DESCEND", frozenset(agenda.parents))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (family,))
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "snapshot_pruned_targets", list)
+    monkeypatch.setattr(controls, "linked_pruned_directories", list)
+    monkeypatch.setattr(controls, "index_tree", lambda _tree: None)
+    tree = tmp_path / "worker"
+    controls.clone_tree(tree)
+    landed = tree / family.relative_to(packing.parent)
+    assert landed.read_bytes() == family.read_bytes() == source.read_bytes()
+    assert not (tree / bulk.relative_to(packing.parent)).exists()
+
+
 def test_agenda_041_bulk_output_is_pruned_but_linked_receipts_survive(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -826,6 +877,7 @@ def test_historical_diagnostics_leave_workers_but_declared_dependencies_return(
     register = source_root / "frontier/results.yaml"
     register.parent.mkdir()
     register.write_text("results: []\n")
+    index_fixture_source(source_repo)
 
     prunes = frozenset(rebase(path) for path in PRUNE)
     linked_roots = tuple(rebase(path) for path in controls.LINKED_PRUNE_ROOTS)
@@ -1020,6 +1072,26 @@ def test_math_startup_reports_are_pruned_but_record_sources_survive(
 ) -> None:
     tree, copied_targets = control_snapshot
     campaign = ROOT / "benchmarks/math-startup"
+    # The historical review is retained, but no registered worker link checker
+    # follows its outgoing links. These five primary observations stay in Git;
+    # their 2,739,207 bytes no longer undo the already-declared run-output prune.
+    historical_run = campaign / "runs/ci-34774787868"
+    for name in (
+        "index.html.gz",
+        "reference.pdf",
+        "replay.pdf",
+        "provenance.json",
+        "report.txt",
+    ):
+        source = historical_run / name
+        assert source.is_file()
+        relative = source.relative_to(controls.REPO)
+        assert relative not in copied_targets
+        assert not (tree / relative).exists()
+    review = (
+        controls.REPO / "docs/project/reviews/review-2026-09-13-explainer-pdf-comparison.md"
+    )
+    assert (tree / review.relative_to(controls.REPO)).read_bytes() == review.read_bytes()
     for directory in (campaign / "runs", campaign / "fixtures"):
         assert directory in PRUNE
         sources = [path for path in directory.rglob("*") if path.is_file()]
@@ -1200,6 +1272,7 @@ def snapshot_audit_fixture(
         "  file: source.py\n"
         "  run: python3 -m devtools.example old/linked.log\n"
     )
+    index_fixture_source(tmp_path)
     monkeypatch.setattr(controls, "ROOT", root)
     monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", ())
@@ -1378,6 +1451,358 @@ def test_workflow_evidence_selection_keeps_only_existing_referenced_files(
     assert controls.linked_pruned_targets() == [needed]
 
 
+@pytest.mark.parametrize(
+    "selection", ["session184", "baseline", "retained", "operational", "historical_census"]
+)
+def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, selection: str
+) -> None:
+    roots = (
+        controls.SESSION184_RESULT_ROOTS
+        if selection == "session184"
+        else frozenset(
+            {
+                *(
+                    ROOT / "campaign/explorations" / name
+                    for name in (
+                        "X048-session-169-pilots",
+                        "X048-session-170-compatibility",
+                        "X048-session-171-raw-row-support",
+                        "X048-session-172-capacity-support",
+                        "X048-session-174-core-refinement",
+                        "X048-session-175-enhanced-support",
+                        "X048-session-176-owner-priority",
+                        "X048-session-177-cached-collision",
+                        "X048-session-178-full-core-ablation",
+                        "X048-session-179-selective-halving",
+                    )
+                ),
+                *(
+                    controls.SESSION184_RESULTS / name
+                    for name in (
+                        "exp-242-n17-core-stress",
+                        "exp-243-n17-charge-floor-pilot",
+                        "exp-244-n17-local-minimum",
+                        "exp-248-n17-local-half-composition",
+                    )
+                ),
+            }
+        )
+    )
+    if selection == "retained":
+        roots = frozenset(
+            ROOT / "campaign/retained" / name
+            for name in (
+                "session-184-n11-readiness",
+                "session-184-tail-a-dependencies",
+                "session-184-n17-numeric-cap-readiness",
+            )
+        )
+    elif selection == "operational":
+        roots = frozenset(
+            {
+                ROOT / "benchmarks/validation-efficiency/runs",
+                ROOT / "campaign/agent-sessions/session-152-validation",
+            }
+        )
+    elif selection == "historical_census":
+        roots = frozenset(
+            controls.SESSION184_RESULTS / name / "census.json"
+            for name in (
+                "exp-253-n17-stalls-under-adaptive-rows",
+                "exp-254-n17-second-tranche-flags",
+                "exp-256-n17-third-tranche-flags",
+                "exp-257-n17-unsampled-strata",
+                "exp-258-n17-draw-31",
+            )
+        )
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    assert roots <= PRUNE
+    if selection == "session184":
+        assert {
+            controls.SESSION184_RESULTS / name
+            for name in (
+                "exp-278-centered-endpoint-standing",
+                "exp-279-centered-endpoint-diagnostics",
+                "exp-280-centered-endpoint-hull-capacity",
+                "exp-281-conditional-owned-hull-gate",
+                "exp-282-conditional-owned-hull-scoped-input",
+                "exp-283-parent-guard-owned-hull",
+                "exp-284-parent-guard-native-custody",
+                "exp-285-pooled-parent-center-cases",
+                "exp-286-pooled-forbidden-cover",
+                "exp-287-pooled-relaxation-witness",
+                "exp-288-pooled-feasible-center",
+                "exp-289-complete-partner-coupling",
+                "exp-290-matched-exact-replay",
+                "exp-291-complete-partner-coupling-amended",
+                "exp-292-full-square-partner-coupling",
+                "exp-293-guard-conditioned-ownership",
+                "exp-296-collective-row-coverage",
+            )
+        } <= roots
+    for control in specification["controls"]:
+        target = (ROOT / control["file"]).resolve()
+        assert not controls.in_pruned_roots(target, roots)
+        assert all(root.name not in control["run"] for root in roots)
+        if selection == "operational":
+            assert "validation_report" not in control["run"]
+
+    packing = tmp_path / "packing"
+    output = packing / "results/exp-268"
+    output.mkdir(parents=True)
+    needed = output / "required.json"
+    needed.write_text('{"retained":true}\n')
+    (output / "unreferenced-checkpoint.json").write_text("0" * 100_000)
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text("[required](packing/results/exp-268/required.json)\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "result_pruned_targets", list)
+    assert controls.snapshot_pruned_targets() == [needed]
+    assert controls.snapshot_source_bytes() == document.stat().st_size + needed.stat().st_size
+
+
+@pytest.mark.parametrize(
+    "name",
+    [
+        "exp-292-full-square-partner-coupling",
+        "exp-293-guard-conditioned-ownership",
+        "exp-296-collective-row-coverage",
+    ],
+)
+def test_session185_selected_output_prune_is_exact_and_keeps_declared_inputs(
+    name: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """An exact output prune keeps sibling evidence and linked proof inputs."""
+    assert controls.SESSION184_RESULTS / name in PRUNE
+    packing = tmp_path / "packing"
+    output = packing / "results" / name
+    output.mkdir(parents=True)
+    needed = output / "required.json"
+    needed.write_text('{"proof_input":true}\n')
+    (output / "unneeded.log").write_text("unused" * 100)
+    sibling = output.with_name(name + "-other")
+    sibling.mkdir()
+    sibling_evidence = sibling / "unique.json"
+    sibling_evidence.write_text('{"unique":true}\n')
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text(f"[required](packing/results/{name}/required.json)\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "result_pruned_targets", list)
+    assert controls.snapshot_pruned_targets() == [needed]
+    assert not controls.in_pruned_roots(sibling_evidence, frozenset({output}))
+    assert controls.snapshot_source_bytes() == (
+        document.stat().st_size + needed.stat().st_size + sibling_evidence.stat().st_size
+    )
+
+
+@pytest.mark.parametrize(
+    "name",
+    [
+        "agenda-037",
+        "agenda-040",
+        "bc-201-n11-tight-cell-census.json",
+        "bc-241-trump-local-theorem-review.json",
+        "exp-053-h-057-n17-parent-bound-parallel-speedup.raw",
+    ],
+)
+def test_session186_historical_prune_has_no_registered_control_consumer(name: str) -> None:
+    path = controls.SESSION184_RESULTS / name
+    assert path in PRUNE
+    assert path.exists()
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    relative = path.relative_to(ROOT).as_posix()
+    for control in specification["controls"]:
+        assert not controls.in_pruned_roots(
+            (ROOT / control["file"]).resolve(), frozenset({path})
+        )
+        assert relative not in control["run"]
+    # The selection is exact, including a file whose sibling shares its prefix.
+    assert not controls.in_pruned_roots(path.with_name(name + "-other"), frozenset({path}))
+
+
+@pytest.mark.parametrize(
+    "result_root",
+    [
+        "exp-297-regional-row-coverage",
+        "exp-300-one-round-direct-regional-propagation",
+        "exp-301-one-round-fixed-core-regional-propagation",
+        "exp-307-owned-core-guarded-clause",
+        "exp-308-n11-corner-cardinality",
+        "exp-309-subpattern-relevance",
+        "exp-312-saved-pose-incircles",
+        "exp-313-incircle-projection-redundancy",
+        "exp-314-incircle-disk-projection",
+    ],
+)
+@pytest.mark.parametrize("name", ["certificate.json", "replay.json"])
+def test_session186_regional_receipt_prune_is_exact_and_copyback_survives(
+    result_root: str, name: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source = controls.SESSION184_RESULTS / result_root / name
+    assert source in PRUNE
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for control in specification["controls"]:
+        assert (ROOT / control["file"]).resolve() != source
+        assert source.relative_to(ROOT).as_posix() not in control["run"]
+    packing = tmp_path / "packing"
+    output = packing / "results" / result_root
+    output.mkdir(parents=True)
+    receipt = output / name
+    receipt.write_text('{"exact":true}\n')
+    sibling = output / (name + ".other")
+    sibling.write_text("unique sibling evidence\n")
+    descriptor = output / "descriptor.json"
+    descriptor.write_text('{"premise":true}\n')
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text(f"[declared input](packing/results/{output.name}/{name})\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (receipt,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "result_pruned_targets", list)
+    assert controls.snapshot_pruned_targets() == [receipt]
+    assert not controls.in_pruned_roots(sibling, frozenset({receipt}))
+    assert controls.snapshot_source_bytes() == sum(
+        path.stat().st_size for path in (document, receipt, sibling, descriptor)
+    )
+
+
+@pytest.mark.parametrize(
+    "relative",
+    [
+        "campaign/series/series-000-smoke-and-calibration/results/exp-005-basin-entry.jsonl",
+        (
+            "campaign/series/series-000-smoke-and-calibration/results/"
+            "exp-126-h099-complete-graph-candidate/packet.json"
+        ),
+        "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89.json",
+        "campaign/agent-sessions/session-105-validation/push-0e766bfd.json",
+        *(
+            "campaign/series/series-000-smoke-and-calibration/results/agenda-032/"
+            f"exp-{number}-stdout.jsonl"
+            for number in (140, 142, 143, 144)
+        ),
+        *(
+            "campaign/series/series-000-smoke-and-calibration/results/"
+            "exp-204-basin-hopping/" + name
+            for name in (
+                "D-basin-hop.jsonl",
+                "D-multistart.jsonl",
+                "D-basin-hop.trace.jsonl",
+                "D-multistart.trace.jsonl",
+            )
+        ),
+    ],
+)
+def test_session186_diagnostic_output_prune_preserves_declared_copyback(
+    relative: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source = ROOT / relative
+    assert source in PRUNE
+    assert source.is_file()
+    if "agenda-032/" in relative:
+        number = source.name.split("-")[1]
+        suffix = (
+            "four-owner-endpoint-full-net-replay"
+            if number == "144"
+            else "four-owner-footprint-cover"
+            if number == "143"
+            else "owner-footprint-cover"
+        )
+        canonical = source.with_name(f"exp-{number}-{suffix}.json")
+        assert canonical not in PRUNE
+        assert canonical.read_bytes() == source.read_bytes()
+    if "session-105-validation" in relative:
+        identity = source.with_name(source.stem + "-source.json")
+        assert identity.is_file()
+        assert identity not in PRUNE
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for control in specification["controls"]:
+        assert (ROOT / control["file"]).resolve() != source
+        assert relative not in control["run"]
+    packing = tmp_path / "packing"
+    receipt = packing / relative
+    receipt.parent.mkdir(parents=True)
+    receipt.write_text('{"diagnostic":true}\n')
+    sibling = receipt.with_name(receipt.name + ".other")
+    sibling.write_text("retained sibling\n")
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text(f"[declared input](packing/{relative})\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (receipt,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "result_pruned_targets", list)
+    assert controls.snapshot_pruned_targets() == [receipt]
+    assert not controls.in_pruned_roots(sibling, frozenset({receipt}))
+    assert controls.snapshot_source_bytes() == sum(
+        path.stat().st_size for path in (document, receipt, sibling)
+    )
+
+
+def test_operational_run_prune_preserves_the_reviewed_instrument_copyback() -> None:
+    root = ROOT / "benchmarks/validation-efficiency/runs"
+    copied = [path for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)]
+    assert copied == [root / "instrument-v1.py.txt"]
+    # Primary CI's report-corpus test still reads the original receipts and JUnit;
+    # pruning is solely a worker-copy rule, not deletion or a test exclusion.
+    assert (root / "receipts.jsonl").is_file()
+    assert any(root.glob("*.junit.xml"))
+
+
+def test_checkpoint_archive_prune_preserves_all_declared_consumer_copyback() -> None:
+    root = ROOT / "benchmarks/validation-efficiency/checkpoints"
+    assert root in PRUNE
+    copied = [
+        path.name for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)
+    ]
+    assert copied == sorted(
+        [
+            "2026-09-06-integrated-fast.log",
+            "2026-09-06-integrated-fast.manifest.json",
+            "2026-09-06-integrated-fast.tar.gz",
+            "2026-09-06-pre-main-integration.manifest.json",
+            "2026-09-06-pre-main-integration.tar.gz",
+            "VE-004-full-ed595fb6.tar.gz",
+        ]
+    )
+    # Unused operational histories stay recoverable in the primary evidence tree.
+    assert (root / "VE-004-control-1.tar.gz").is_file()
+    assert (root / "VE-004-candidate-1.tar.gz").is_file()
+
+
+def test_session_152_operational_prune_preserves_linked_pdf_evidence() -> None:
+    root = ROOT / "campaign/agent-sessions/session-152-validation"
+    assert root in PRUNE
+    copied = {
+        path.name for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)
+    }
+    assert copied == {
+        "pdf-d490-run-35784981711-reference.pdf",
+        "pdf-d490-run-35784981711-replay.pdf",
+        "pdf-d490-run-35784981711-report.txt",
+        "pdf-d490-run-35784981711.md",
+    }
+    unused = root / "push-c26afc5-initial-artifacts.tar.gz"
+    assert unused.is_file()
+    assert unused.name not in copied
+
+
 def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -1462,6 +1887,103 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
         )
         for name in tracked
     )
+
+
+def test_snapshot_index_refuses_missing_source_index_before_git_mutation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(controls, "tracked_files", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(
+        controls.subprocess, "run", lambda *_args, **_kwargs: pytest.fail("worker Git write")
+    )
+    with pytest.raises(ValueError, match="without the source tracked set"):
+        controls.index_tree(Path("uncreated-worker"))
+
+
+def test_snapshot_index_keeps_source_tracking_and_snapshot_mutated_bytes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, tree = tmp_path / "source", tmp_path / "worker"
+    source.mkdir()
+    tree.mkdir()
+    environment = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    (source / "tracked source.py").write_text("original")
+    (source / "pruned.py").write_text("not copied")
+    for arguments in (("init", "-q"), ("add", "--", "tracked source.py", "pruned.py")):
+        subprocess.run(("git", "-C", str(source), *arguments), check=True, env=environment)
+    (tree / "tracked source.py").write_text("changed in snapshot")
+    (tree / "untracked-output.json").write_text("{}")
+    monkeypatch.setattr(controls, "REPO", source)
+    controls.index_tree(tree)
+    assert tracked_files(tree, ".") == [tree / "tracked source.py"]
+    indexed = subprocess.run(
+        ("git", "-C", str(tree), "show", ":tracked source.py"),
+        check=True,
+        capture_output=True,
+        env=environment,
+    )
+    assert indexed.stdout == b"changed in snapshot"
+
+
+@pytest.mark.parametrize("foreign_variable", ["GIT_INDEX_FILE", "GIT_DIR"])
+def test_snapshot_index_ignores_foreign_git_environment(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, foreign_variable: str
+) -> None:
+    source, foreign, tree = (tmp_path / name for name in ("source", "foreign", "worker"))
+    environment = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    for repository in (source, foreign):
+        repository.mkdir()
+        subprocess.run(
+            ("git", "-C", str(repository), "init", "-q"), check=True, env=environment
+        )
+    (source / "tracked source.py").write_text("original")
+    (source / "pruned.py").write_text("not copied")
+    (foreign / "untracked-output.json").write_text("{}")
+    for repository, names in (
+        (source, ("tracked source.py", "pruned.py")),
+        (foreign, ("untracked-output.json",)),
+    ):
+        subprocess.run(
+            ("git", "-C", str(repository), "add", "--", *names),
+            check=True,
+            env=environment,
+        )
+    source_index = (source / ".git/index").read_bytes()
+    foreign_index = (foreign / ".git/index").read_bytes()
+    tree.mkdir()
+    (tree / "tracked source.py").write_text("changed in snapshot")
+    (tree / "untracked-output.json").write_text("{}")
+    monkeypatch.setattr(controls, "REPO", source)
+    foreign_path = foreign / ".git"
+    if foreign_variable == "GIT_INDEX_FILE":
+        foreign_path /= "index"
+    monkeypatch.setenv(foreign_variable, str(foreign_path))
+    controls.index_tree(tree)
+    assert tracked_files(tree, ".", environment=environment) == [tree / "tracked source.py"]
+    indexed = subprocess.run(
+        ("git", "-C", str(tree), "show", ":tracked source.py"),
+        check=True,
+        capture_output=True,
+        env=environment,
+    )
+    assert indexed.stdout == b"changed in snapshot"
+    assert (source / ".git/index").read_bytes() == source_index
+    assert (foreign / ".git/index").read_bytes() == foreign_index
+    assert os.environ[foreign_variable] == str(foreign_path)
+
+
+def test_registry_python_uses_the_harness_interpreter(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("PATH", os.pathsep.join(("/usr/bin", "/bin")))
+    command = "python3 -c " + shlex.quote("import sys; print(sys.executable)")
+    outcome = run_control_command(
+        command,
+        cwd=tmp_path,
+        environment=controls.control_environment(tmp_path, tmp_path / "pycache"),
+    )
+    assert outcome.returncode == 0, outcome.stderr
+    assert Path(outcome.stdout.strip()).resolve() == Path(sys.executable).resolve()
 
 
 #: Control commands whose unmutated baseline is held green in a worker. A control is scored

@@ -1,0 +1,37 @@
+{
+  "schema": "n17-stages-replay-mechanical-audit/v1",
+  "review_scope": "completed receipts only; no replay or input geometry evaluated",
+  "criterion_met": true,
+  "checks": {"complete_full_stall":true,"full_mathematical_payload_equal_to_none":true,"recomputed_digest_equal":true,"same_three_input_byte_digests":true,"post_custody_recheck":true,"matched_baseline":true,"sixteen_step_rosters_equal_to_phases":true,"counter_deltas_equal_to_phases":true,"manifest_byte_digest_equal":true,"actual_argv_equal_to_manifest":true,"normal_complete_supervision":true,"no_stage_failures":true,"sixteen_step_calls":true,"exclusive_wall_plus_residual_accounts_for_replay":true,"exclusive_cpu_plus_residual_accounts_for_replay":true},
+  "source_revision": "0f7b96c7a7457c19445de7366d4c77224f7d917f",
+  "mathematical_result_sha256": "da773cbe5162bbed168f386a70f3062fe712da41dd78be7f4cb03e459427feea",
+  "input_byte_digests": {"campaign/retained/session-184-n17-numeric-cap-readiness/seed-375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d.json.gz":"d10a38b312375a21e7aec2ef77726eaa9ae3ea9d8381de9d3e979921877005f4","campaign/retained/session-184-n17-numeric-cap-readiness/node-687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82.json.gz":"f2a11e787dc62ae2652734d01c4fbe90fcfc3e85d66aa52b74fd8ff52a02e2f2","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json":"3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5"},
+  "replay_wall_seconds": 108.23745625000447,
+  "replay_cpu_seconds": 104.257205,
+  "stage_totals": {
+    "check_centered_final": {"calls":1,"failed_calls":0,"inclusive_wall_seconds":0.005802874977234751,"exclusive_wall_seconds":0.005802874977234751,"inclusive_cpu_seconds":0.005760000000009313,"exclusive_cpu_seconds":0.005760000000009313,"exclusive_wall_fraction_of_replay":5.361244783720156e-05},
+    "check_final": {"calls":1,"failed_calls":0,"inclusive_wall_seconds":10.255050874955487,"exclusive_wall_seconds":10.255050874955487,"inclusive_cpu_seconds":10.137627999999992,"exclusive_cpu_seconds":10.137627999999992,"exclusive_wall_fraction_of_replay":0.09474585998463043},
+    "check_seed": {"calls":1,"failed_calls":0,"inclusive_wall_seconds":0.3968519169720821,"exclusive_wall_seconds":0.3968519169720821,"inclusive_cpu_seconds":0.39520200000000005,"exclusive_cpu_seconds":0.39520200000000005,"exclusive_wall_fraction_of_replay":0.003666493381509654},
+    "load_object": {"calls":1,"failed_calls":0,"inclusive_wall_seconds":0.004002500034403056,"exclusive_wall_seconds":0.004002500034403056,"inclusive_cpu_seconds":0.003955,"exclusive_cpu_seconds":0.003955,"exclusive_wall_fraction_of_replay":3.697888118469978e-05},
+    "node_header_decode": {"calls":1,"failed_calls":0,"inclusive_wall_seconds":0.4501000829623081,"exclusive_wall_seconds":0.4501000829623081,"inclusive_cpu_seconds":0.448566,"exclusive_cpu_seconds":0.448566,"exclusive_wall_fraction_of_replay":0.004158450305065161},
+    "node_step_decode_or_eof": {"calls":17,"failed_calls":0,"inclusive_wall_seconds":0.5354212071397342,"exclusive_wall_seconds":0.5354212071397342,"inclusive_cpu_seconds":0.526990999999984,"exclusive_cpu_seconds":0.526990999999984,"exclusive_wall_fraction_of_replay":0.004946727553380691},
+    "check_collisions": {"calls":1024,"failed_calls":0,"inclusive_wall_seconds":10.218034152348991,"exclusive_wall_seconds":10.218034152348991,"inclusive_cpu_seconds":9.985962000000068,"exclusive_cpu_seconds":9.985962000000068,"exclusive_wall_fraction_of_replay":0.09440386448797913},
+    "check_cover": {"calls":1024,"failed_calls":0,"inclusive_wall_seconds":57.292714720009826,"exclusive_wall_seconds":57.292714720009826,"inclusive_cpu_seconds":54.915649000000016,"exclusive_cpu_seconds":54.915649000000016,"exclusive_wall_fraction_of_replay":0.529324290360967},
+    "check_partners": {"calls":16,"failed_calls":0,"inclusive_wall_seconds":4.84138904302381,"exclusive_wall_seconds":4.84138904302381,"inclusive_cpu_seconds":4.378377999999995,"exclusive_cpu_seconds":4.378377999999995,"exclusive_wall_fraction_of_replay":0.04472933133093295},
+    "check_step": {"calls":16,"failed_calls":0,"inclusive_wall_seconds":95.58466225315351,"exclusive_wall_seconds":23.232524337770883,"inclusive_cpu_seconds":91.74055600000001,"exclusive_cpu_seconds":22.460566999999926,"exclusive_wall_fraction_of_replay":0.21464403490884815},
+    "compress": {"calls":16,"failed_calls":0,"inclusive_wall_seconds":0.7680382510880008,"exclusive_wall_seconds":0.7680382510880008,"inclusive_cpu_seconds":0.7627669999999918,"exclusive_cpu_seconds":0.7627669999999918,"exclusive_wall_fraction_of_replay":0.0070958638321470075},
+    "derive_closure": {"calls":16,"failed_calls":0,"inclusive_wall_seconds":0.012978455168195069,"exclusive_wall_seconds":0.012978455168195069,"inclusive_cpu_seconds":0.012754999999986971,"exclusive_cpu_seconds":0.012754999999986971,"exclusive_wall_fraction_of_replay":0.00011990724484708623}
+  },
+  "stage_semantics": {"unattributed_replay_wall_seconds":0.22454783355351537,"unattributed_replay_cpu_seconds":0.22302500000003533,"semantics":"inclusive clocks overlap; exclusive clocks subtract directly nested observed calls; residual includes unobserved work and observer overhead","decode_semantics":"generator resumption includes JSON decode and canonical digest, plus terminal EOF/final-header work; not pure parsing","per_vertex_hooks":false,"global_trace":false,"cache_lookup_hits_observed":false},
+  "verification_counts": {"collision_facet_checks":25134984,"collision_regions":3008,"cover_checks":1024,"partner_rows":2208,"rows_full":1024,"seed_points":8,"seed_rows":544,"steps":16},
+  "memo_evictions": {"facet_pairs":0,"forbidden_pairs":192},
+  "supervision": {"status":"COMPLETED","returncode":0,"wall_seconds":108.62091454199981,"max_seconds":190.0,"cleanup_seconds":10,"max_memory_mib_per_process":4096.0,"sample_seconds":0.25,"samples":380,"maximum_sampled_current_rss_bytes_by_pid":{"691":28753920,"693":472891392},"rss_enforcement":"sampled per live process in owned group; not allocation-time hardcap","cleanup_complete":true},
+  "runtime": {"python":"3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]","platform":"macOS-26.5.2-arm64-arm-64bit-Mach-O","pid":693,"logical_cpus":10,"load_average":[7.92529296875,7.17333984375,6.7490234375],"single_worker":true},
+  "current_rss_start": {"current_rss_bytes":33325056,"current_rss_error":null},
+  "current_rss_end": {"current_rss_bytes":360873984,"current_rss_error":null},
+  "process_lifetime_peak_rss_bytes": 472907776,
+  "observations": ["check_cover is the largest measured exclusive stage; coverage primitive substages were not observed.","Collision support aggregation addresses only the observed collision share; no speedup forecast or explanation of exp284 timeout.","check_step exclusive residual contains unobserved row verification; final-state equality is another measured cost.","NONE has no step observations by design; boundary parity is checked against accepted PHASES.","One instrumented accepted control under nonzero host load establishes no optimization gain."],
+  "speedup_established": false,
+  "scientific_admission_proved": false
+}
+

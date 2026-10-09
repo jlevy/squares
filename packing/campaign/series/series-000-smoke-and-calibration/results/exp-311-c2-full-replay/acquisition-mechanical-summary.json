@@ -1,0 +1,15 @@
+{
+  "schema": "n17-c2-acquisition-mechanical-summary/v1",
+  "status": "acquired_not_full_verified",
+  "objects": 161,
+  "compressed_bytes": 112191343,
+  "inventory_sha256": "d0b59b13cdfcd82a34f7076eda4d00d88359d0b368bac492dbd6b9a894aae1b5",
+  "source_commit": "e72c7f3c6d59b25a002c54d6f04c8fb34e4d2aee",
+  "source_checkout": "/Users/levy/.codex/worktrees/n17-hosted-recovery/squares",
+  "output_checkout": "/Users/levy/wrk/github/squares",
+  "phase_seconds": 78.74571783398278,
+  "supervised_seconds": 78.94407154101646,
+  "cleanup_complete": true,
+  "full_verification_passed": false,
+  "ordinary_exclusion_admitted": false
+}
