@@ -5,7 +5,7 @@ title: Verify the website layouts, math, previews and Headroom interactions
 kind: task
 status: in_progress
 priority: 2
-version: 15
+version: 16
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -15,10 +15,10 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:20:48.607Z
-updated_at: 2026-10-09T03:43:30.496Z
+updated_at: 2026-10-09T04:10:43.415Z
 started_at: 2026-10-08T23:50:51.591Z
 ---
-Verify the combined website changes after its nine implementation issues. Cover final homepage order, S4+ results capped at12 with unchanged full-results defaults, sans count/scope chrome, paper/PDF/video cards under Learn More, centered solo-card groups, uppercase button styles, project card and About narrative/nav position, complete Atlas and Results, reversible fetched Atlas expansion with keyboard/busy/error/retry behavior and dynamic case popovers, canonical and legacy routes, n291/n324 narrow case geometry/math, and one visible accessible T115 result title after loading. Include Headroom across all four shells, desktop/mobile/320widths, themes, reduced motion and noJS. Retain reviewed screenshots and keep the local draft available. Browser/output builds currently encounter intermittent external scratch ENOSPC; an explicit internal-scratch override or stable external capacity is pending. PDF description editing is excluded.
+Verify the combined local website draft: final homepage order, S4+ results capped at12 with unchanged complete-results defaults, shared headings/buttons, linked centered legend, PDFs/Papers and inline video/Visualize, project/About placement and contribution structure, complete Atlas/Results, immediate native-SVG homepage expansion using shared SiteAtlasView into full triangle, reversible collapse, themes/reduced-motion/noJS, hero/case popovers and distinct Frontier-row/Atlas-tile destinations. About omits Reading and Research; Papers retains papers/tutorial/PDFs without Frontier or Workbench cards. Cover legacy/canonical routes, narrow case math/layout, unique accessible result titles and Headroom across shared shells. Keep reviewed evidence and local preview available. Scientific PDF description edit is excluded. Complete combined publication gates separately before publishing.
 
 ## Notes
 
