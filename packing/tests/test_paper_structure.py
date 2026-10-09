@@ -31,6 +31,7 @@ from devtools import (
 from devtools import render_n11_optimality_review as paper
 from devtools.render_overview import (
     N11_THRESHOLD_BOUND_REVIEW,
+    PACKING_METHODS,
     PAPERS,
     paper_path,
     paper_record,
@@ -40,6 +41,8 @@ from sqpack import release
 EXPLAINER = render_n11_lower_bounds_explainer.SLUG
 THRESHOLD = N11_THRESHOLD_BOUND_REVIEW
 REVIEW = paper.SLUG
+METHODS = PACKING_METHODS
+SERIES = tuple(record for record in PAPERS if record.part is not None)
 #: Every review, in reading order: the papers after the first.
 REVIEWS = tuple(record.slug for record in PAPERS[1:])
 #: Each review's source, as the first two lines of its credits name it.
@@ -52,6 +55,7 @@ VERSIONS = {
     EXPLAINER: release.EXPLAINER_VERSION,
     THRESHOLD: release.THRESHOLD_REVIEW_EDITION,
     REVIEW: release.OPTIMALITY_REVIEW_EDITION,
+    METHODS: release.PACKING_METHODS_EDITION,
 }
 DATES = {
     EXPLAINER: (
@@ -59,15 +63,15 @@ DATES = {
         f"Last revised {release.EXPLAINER_REVISED}"
     ),
     THRESHOLD: (
-        f"First published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.THRESHOLD_PROOF_PUBLISHED} · "
-        f"Last revised {release.THRESHOLD_REVIEW_REVISED}"
+        f"Published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published}"
     ),
     REVIEW: (
         f"First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
         f"Last revised {release.OPTIMALITY_REVIEW_REVISED}"
     ),
+    METHODS: f"Published {release.PACKING_METHODS_FIRST_PUBLISHED}",
 }
 
 
@@ -113,7 +117,7 @@ def rows(structures: dict[str, paper_structure.Structure]) -> list[dict[str, obj
 
 
 def test_the_audit_reads_every_paper_of_the_site_in_reading_order() -> None:
-    assert paper_structure.PAPERS == (EXPLAINER, THRESHOLD, REVIEW)
+    assert paper_structure.PAPERS == (EXPLAINER, THRESHOLD, REVIEW, METHODS)
     assert paper_structure.CREDIT_KINDS[-1] == "series"
 
 
@@ -132,12 +136,11 @@ def test_every_form_axis_is_the_same_on_every_paper(rows: list[dict[str, object]
         "title: h1",
         "credits: names bold",
         "credits: addresses plain",
-        "credits: dates end with",
+        "credits: dates finish with current date",
         "series: strip",
         "sections: h2 case",
         "sections: h3 case",
         "figures: captions",
-        "footnotes",
         "closing: colophon",
         "markdown: opening",
     } <= forms
@@ -153,7 +156,7 @@ def test_the_shared_form_is_the_one_the_design_names(rows: list[dict[str, object
     assert found["title: h1"] == "1, Title Case"
     assert found["credits: names bold"] == "yes"
     assert found["credits: addresses plain"] == "yes"
-    assert found["credits: dates end with"] == paper_front.REVISED
+    assert found["credits: dates finish with current date"] == "yes"
     assert found["series: strip"] == (
         "Part N of M, then each other part by number and title, linked"
     )
@@ -185,8 +188,9 @@ def test_each_papers_credits_follow_the_owners_form(
     plain, the dates, ending with when the paper was last revised, then the series
     strip, which part of three it is and the other two parts by title, each linking its
     paper's page."""
-    strip = len(PAPERS)
+    series_length = len(SERIES)
     for slug, structure in structures.items():
+        strip = series_length if paper_record(slug).part is not None else 0
         kinds = [line.kind for line in structure.credits]
         own = list(paper_structure.CREDIT_KINDS[2:-1]) + ["series"] * strip
         assert kinds == (
@@ -200,7 +204,8 @@ def test_each_papers_credits_follow_the_owners_form(
         assert shown.links == ((address.removeprefix("https://"), address),)
     for slug, structure in structures.items():
         lines = structure.credits
-        oversight, agents, version, dates = lines[-4 - strip : -strip]
+        strip = series_length if paper_record(slug).part is not None else 0
+        oversight, agents, version, dates = lines[-4 - strip : -strip or None]
         assert oversight.text == "Human oversight: Joshua Levy"
         assert oversight.bold == ("Joshua Levy",)
         assert oversight.links == (("Joshua Levy", "https://x.com/ojoshe"),)
@@ -222,23 +227,30 @@ def test_each_papers_credits_follow_the_owners_form(
         assert version.text.startswith(VERSIONS[slug]), slug
         # The series strip: which part, then each other part by its title, linked.
         part = paper_record(slug).part
+        if part is None:
+            assert all(line.kind != "series" for line in lines)
+            continue
         head, *others = lines[-strip:]
         assert head.text == f"Part {paper_front.numeral(part)} of {strip} in the n = 11 series"
         assert head.links == head.bold == ()
         assert [line.text for line in others] == [
             f"Part {paper_front.numeral(record.part)}: {record.title}"
-            for record in PAPERS
-            if record.slug != slug
+            for record in SERIES
+            if record.slug != slug and record.part is not None
         ]
         assert [line.links for line in others] == [
-            ((record.title, f"{record.slug}.html"),) for record in PAPERS if record.slug != slug
+            ((record.title, f"{record.slug}.html"),) for record in SERIES if record.slug != slug
         ]
+    strip = series_length
     explainer, review = structures[EXPLAINER].credits, structures[REVIEW].credits
     assert explainer[-1 - strip].text.startswith("First published")
     assert explainer[-2 - strip].text == f"{release.EXPLAINER_VERSION} (version history)"
     assert explainer[-2 - strip].links == (("version history", "#version-history"),)
     assert review[-2 - strip].text == f"{release.OPTIMALITY_REVIEW_EDITION} (version history)"
     assert review[-2 - strip].links == (("version history", "#version-history"),)
+    methods = structures[METHODS].credits
+    assert methods[-2].text == "v0.1.0 (version history)"
+    assert methods[-2].links == (("version history", "#version-history"),)
 
 
 def test_the_markdown_editions_open_as_the_pages_do(
@@ -283,7 +295,10 @@ def test_the_tool_prints_the_audit_of_a_built_site(
     assert paper_structure.main([str(tmp_path), "--markdown"]) == 0
     out = capsys.readouterr().out
     assert "| axis |" in out
-    assert "| head: title | form | article name | article name | article name | True |" in out
+    assert (
+        "| head: title | form | article name | article name | "
+        "article name | article name | True |" in out
+    )
     assert structures[REVIEW].pdf == {}
 
     # A paper whose credits set a name plain is a form difference, and the tool says so.
@@ -385,6 +400,80 @@ def test_caption_form_names_what_departs_from_the_lead() -> None:
     assert paper_structure.caption_form(()) == "no figures"
 
 
+@pytest.mark.parametrize(
+    ("dates", "expected"),
+    [
+        (
+            (("First published", "October 8, 2026"), ("Last revised", "October 8, 2026")),
+            "Published October 8, 2026",
+        ),
+        (
+            (("First published", "October 8, 2026"), ("Last revised", "October 08, 2026")),
+            "Published October 8, 2026",
+        ),
+        (
+            (("First published", "October 7, 2026"), ("Last revised", "October 8, 2026")),
+            "First published October 7, 2026 · Last revised October 8, 2026",
+        ),
+        (
+            (
+                ("First published", "October 8, 2026"),
+                ("Original proof", "October 8, 2026"),
+                ("Last revised", "October 8, 2026"),
+            ),
+            "Original proof October 8, 2026 · Published October 8, 2026",
+        ),
+        (
+            (("Original proof", "October 8, 2026"), ("Last revised", "October 8, 2026")),
+            "Original proof October 8, 2026 · Last revised October 8, 2026",
+        ),
+        (
+            (("Last revised", "October 8, 2026"),),
+            "Last revised October 8, 2026",
+        ),
+    ],
+)
+def test_publication_dates_share_one_display_rule_without_changing_the_record(
+    dates: tuple[tuple[str, str], ...], expected: str
+) -> None:
+    front = paper.FRONT._replace(dates=tuple(paper_front.Dated(*dated) for dated in dates))
+    html = paper_front.credits_html(front)
+    markdown = paper_front.credits_markdown(front)
+    assert f'<span class="publication-date">{expected}</span>' in html
+    assert f"- {expected}\n" in markdown + "\n"
+    assert tuple(front.dates) == dates
+    assert paper_front.revised(front) == dates[-1][1]
+
+
+def test_collapsed_date_audit_refuses_conflicting_metadata() -> None:
+    front = paper.FRONT._replace(
+        dates=(
+            paper_front.Dated("First published", "October 8, 2026"),
+            paper_front.Dated(paper_front.REVISED, "October 8, 2026"),
+        )
+    )
+    html = paper_front.credits_html(front)
+    structure = replace(
+        paper_structure.read(front.slug, html),
+        published="2026-10-08",
+        modified="2026-10-08",
+    )
+    axis = "credits: dates finish with current date"
+    assert paper_structure.axes(structure)[axis] == "yes"
+    assert paper_structure.axes(replace(structure, published="2026-10-07"))[axis] == "no"
+    assert paper_structure.axes(replace(structure, modified="2026-10-09"))[axis] == "no"
+    for malformed in (
+        "First published October 8, 2026 · Last revised October 8, 2026",
+        "Last revised October 8, 2026 · Published October 8, 2026",
+        "Published October 8, 2026 · Published October 8, 2026",
+    ):
+        date_credits = tuple(
+            line._replace(text=malformed) if line.kind == "dates" else line
+            for line in structure.credits
+        )
+        assert paper_structure.axes(replace(structure, credits=date_credits))[axis] == "no"
+
+
 def test_the_front_record_is_refused_where_it_departs_from_the_form() -> None:
     """`paper_front.check` refuses a record the owner's form has no line for."""
     front = paper.FRONT
@@ -432,12 +521,12 @@ def test_each_paper_takes_its_series_strip_from_the_one_registry() -> None:
     """The strip is written from the site's list of papers, so every paper names the
     others the same way: its parts are the registry's, in reading order, and its part is
     the paper's own. A paper the site does not list has no strip to take."""
-    for record in PAPERS:
+    for record in SERIES:
         series = paper_front.series(record.slug)
         assert series.name == paper_front.SERIES_NAME == "the n = 11 series"
         assert series.part == record.part
         assert [(part.number, part.slug, part.title) for part in series.parts] == [
-            (other.part, other.slug, other.title) for other in PAPERS
+            (other.part, other.slug, other.title) for other in SERIES
         ]
     for module in (render_n11_lower_bounds_explainer, paper):
         assert module.FRONT.series == paper_front.series(module.SLUG)
@@ -454,4 +543,37 @@ def test_every_registered_renderer_writes_its_front_with_the_strip() -> None:
     for record in PAPERS:
         module = renderer(record.slug)
         assert record.title == module.TITLE, record.slug
-        assert module.FRONT.series == paper_front.series(record.slug), record.slug
+        if record.part is None:
+            assert module.FRONT.series is None, record.slug
+            with pytest.raises(ValueError, match="standalone paper"):
+                paper_front.series(record.slug)
+        else:
+            assert module.FRONT.series == paper_front.series(record.slug), record.slug
+
+
+def test_standalone_absence_does_not_relax_the_series_or_caption_grammar(
+    structures: dict[str, paper_structure.Structure],
+) -> None:
+    reference = structures[EXPLAINER]
+    standalone = structures[METHODS]
+    assert paper_structure.axes(standalone)["series: strip"] == "none"
+    assert paper_structure.axes(standalone)["figures: captions"] == "no figures"
+    assert paper_structure.differences(paper_structure.compare(reference, standalone)) == []
+    missing = replace(
+        reference, credits=tuple(line for line in reference.credits if line.kind != "series")
+    )
+    assert "series: strip" in {
+        row["axis"]
+        for row in paper_structure.differences(paper_structure.compare(reference, missing))
+    }
+    broken = replace(standalone, captions=("Figure 2. A skipped first caption",))
+    assert "figures: captions" in {
+        row["axis"]
+        for row in paper_structure.differences(paper_structure.compare(reference, broken))
+    }
+    # No headings or strips in either input is a valid empty optional comparison.
+    empty = replace(standalone, h2=(), h3=())
+    optional = {"sections: h2 case", "sections: h3 case", "series: strip", "figures: captions"}
+    assert all(
+        row["same"] for row in paper_structure.compare(empty, empty) if row["axis"] in optional
+    )

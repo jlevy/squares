@@ -1535,6 +1535,20 @@ verifiers:
     note: This wrapper checks premises and receipt applicability; sqpack exact_verify and the independent
       rational-corner checker decide geometry. Their shared SAT theorem, Fraction, YAML and source-to-corner
       conversion are disclosed. Earlier packet constants, evidence and review scopes remain unchanged.
+  - id: V-evand-arrangement-receipts
+    program: devtools.evand_arrangement_reports
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    summary: Binds all three complete source certificates and all nine full deciding inputs/native results;
+      explicit replay repeats both project geometric deciders.
+    source:
+    - packing/devtools/evand_arrangement_reports.py
+
   - id: V-rehwaldt-n68-verify
     program: verify.py
     author: Seth Rehwaldt
@@ -1553,6 +1567,7 @@ verifiers:
     note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two
       programs use the same SAT theorem and arithmetic; their distinct code does not establish independence
       from the source producer. Analytic root and dual programs are outside this replay.
+
   - id: V-rehwaldt-n68-independent-support-check
     program: independent_support_check.py
     author: Seth Rehwaldt
@@ -1571,6 +1586,7 @@ verifiers:
     note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two
       programs use the same SAT theorem and arithmetic; their distinct code does not establish independence
       from the source producer. Analytic root and dual programs are outside this replay.
+
   - id: V-refinement-custody
     program: devtools.refinement_custody
     author: Squares Project (Levy)

@@ -43,6 +43,14 @@ allowlist:
   - path: packing/src/sqpack/research/unitsquare_precision.py
     kind: download
     boundary: A Kingbird SVG fetched by URL and held against its pinned digest (H2).
+  - path: packing/devtools/evand_arrangement_reports.py
+    kind: download
+    boundary: >-
+      Evan Daniel's three complete issue-399 source certificates at 7eef24f are
+      compared with the acquisition digests pinned at retention, both on import
+      and when reading their complete copied source bytes. Internal exact inputs
+      and all native verdict fields are compared structurally; these source
+      digests neither decide geometry nor bind results to internal code hashes.
   - path: packing/devtools/evand_exact_certificates.py
     kind: download
     boundary: Evan Daniel's exact certificates and checker sources at 13ee36e against the digests the packet pinned at retention, and the controls derived from them against their receipts' digests (#375).

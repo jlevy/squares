@@ -378,6 +378,25 @@ def _dates(line: CreditLine | None) -> list[tuple[str, str]]:
     return found
 
 
+def _dates_follow_form(dates: list[tuple[str, str]], structure: Structure) -> bool:
+    """Check the visible rule independently of the renderer, including collapse."""
+    labels = [label for label, _ in dates]
+    if not dates or len(set(labels)) != len(labels):
+        return False
+    last_label, last_day = dates[-1]
+    if last_label == "Published":
+        return (
+            "First published" not in labels
+            and "Last revised" not in labels
+            and bool(_iso(last_day))
+            and _iso(last_day) == structure.published == structure.modified
+        )
+    if last_label != "Last revised" or "Published" in labels:
+        return False
+    publication = next((day for label, day in dates if label == "First published"), None)
+    return publication is None or _iso(publication) != _iso(last_day)
+
+
 def axes(structure: Structure) -> dict[str, str]:
     """Each axis of a paper's structure, as one line a reader can compare: a form the
     papers share, or the content that is this paper's own (`CONTENT_AXES`)."""
@@ -436,7 +455,9 @@ def axes(structure: Structure) -> dict[str, str]:
         ),
         "credits: version": version.text if version else "",
         "credits: dates grammar": " · ".join(f"{label} <day>" for label, _ in dates) or "none",
-        "credits: dates end with": dates[-1][0] if dates else "none",
+        "credits: dates finish with current date": "yes"
+        if _dates_follow_form(dates, structure)
+        else "no",
         "credits: dates": lines["dates"].text if "dates" in lines else "",
         "series: strip": _series_form(structure),
         "series: part": _series_part(structure),
@@ -483,8 +504,13 @@ def _series_form(structure: Structure) -> str:
     """How the series strip is set: under the dates, which part of how many, then every
     other part by its number and its title, each plain and linking its paper."""
     strip = _series_lines(structure)
+    record = next(
+        (paper for paper in render_overview.PAPERS if paper.slug == structure.paper), None
+    )
     if not strip:
-        return "none"
+        return "missing required series" if record is not None and record.part else "none"
+    if record is not None and record.part is None:
+        return "a series strip on a standalone paper"
     kinds = [line.kind for line in structure.credits]
     head = _SERIES_HEAD.match(strip[0].text)
     problems = []
@@ -563,6 +589,7 @@ CONTENT_AXES = frozenset(
         "sections: count",
         "figures: count",
         "tables",
+        "footnotes",
         "footnotes: count",
         "closing: last section",
         "pdf: pages",
@@ -589,10 +616,16 @@ def compare(reference: Structure, *others: Structure) -> list[dict[str, Any]]:
 def _agree(axis: str, values: Sequence[Any]) -> bool:
     """Whether every paper sets `axis` as the first does. A heading-case axis is held
     only over the papers that have such headings: a paper with no subsections has no
-    case to disagree with (`heading_case` reports `none`)."""
+    case to disagree with (`heading_case` reports `none`). Likewise, a standalone paper
+    has no series strip and a paper without figures has no captions to compare; strips
+    and captions that are present still follow the shared grammar."""
     if axis.endswith(" case"):
         values = [value for value in values if value != "none"]
-    return all(value == values[0] for value in values)
+    if axis == "series: strip":
+        values = [value for value in values if value != "none"]
+    if axis == "figures: captions":
+        values = [value for value in values if value != "no figures"]
+    return not values or all(value == values[0] for value in values)
 
 
 def differences(rows: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:

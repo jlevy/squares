@@ -740,7 +740,12 @@ class _Scanner:
             if self.policy.script_code.search(body.replace(HOLE, " ")):
                 return "script body"
         if self.policy.any_signature.search(text):
-            return "JavaScript string"
+            # A combined match can consume a second signature inside a Lean arrow's
+            # parameter span. Check each signature independently after the fast precheck.
+            for signature in self.policy.signatures:
+                for match in signature.finditer(text):
+                    if not _lean_arrow(text, match):
+                        return "JavaScript string"
         return None
 
     def _site(self, node: ast.AST, rule: Rule, text: str) -> Site:
@@ -750,6 +755,31 @@ class _Scanner:
         first = next((row for row in rows if row.strip("{.}; ")), "")
         excerpt = first if len(first) <= 72 else first[:69] + "..."
         return Site(path=self.path, line=getattr(node, "lineno", 0), rule=rule, excerpt=excerpt)
+
+
+def _lean_arrow(text: str, match: re.Match[str]) -> bool:
+    """Recognize local Lean lambda/Option-arm syntax, without exempting its string.
+
+    Lean's ``fun x`` lambda and ``match x with | none`` / ``| some (...)`` arms
+    share the arrow spelling with JavaScript. Other signatures, arrows in their
+    bodies, and every built browser-script argument still fail independently.
+    """
+    matched = match.group()
+    if not matched.endswith("=>"):
+        return False
+    parameter = matched[:-2].strip()
+    identifier = r"[A-Za-z_][A-Za-z0-9_]*"
+    prefix = text[: match.start()]
+    if re.fullmatch(identifier, parameter) and re.search(r"\bfun[ \t]+$", prefix):
+        return True
+    line = prefix.rsplit("\n", 1)[-1]
+    if not re.search(r"\bmatch\s+[A-Za-z_][A-Za-z0-9_]*\s+with\b", line):
+        return False
+    tuple_pattern = rf"\(\s*{identifier}(?:\s*,\s*{identifier})*\s*\)"
+    return bool(
+        (parameter == "none" and re.search(r"\|\s*$", line))
+        or (re.fullmatch(tuple_pattern, parameter) and re.search(r"\|\s*some\s*$", line))
+    )
 
 
 def _constant_text(value: object) -> str | None:

@@ -18,12 +18,14 @@ adds the front door and the pages around it, as the plan in
   is a forwarder to it;
 - `papers.html`, the Papers section's page: one large card per paper, from the one list
   `overview_sections.PAPERS`. The three parts of the n = 11 series, in reading order
-  (`PAPERS`): the lower-bounds explainer (`papers/n11-lower-bounds-explainer.html`,
+  (`PAPERS`, entries with a part number): the lower-bounds explainer
+  (`papers/n11-lower-bounds-explainer.html`,
   `render_n11_lower_bounds_explainer`), the threshold-bound review
   (`papers/n11-threshold-bound-review.html`, `render_n11_threshold_bound_review`) and the
   optimality review (`papers/n11-optimality-review.html`, `render_n11_optimality_review`),
-  then the tutorial, are the section's papers, and the bar's Papers entry is current on
-  all five;
+  then the standalone methods tutorial (`papers/square-packing-methods-survey.html`,
+  `render_packing_methods`) and the first-principles tutorial (`tutorial.html`). The
+  bar's Papers entry is current throughout the section;
 - a forwarder at each address a page used to have (`MOVED_PAGES`), the papers' old
   addresses among them, so an old link still arrives, query and fragment kept
   (`forwarder_pages`);
@@ -150,8 +152,8 @@ RESULTS_DESCRIPTION = (
     "and others': its claim, credit, date and ratings, with its records."
 )
 PAPERS_DESCRIPTION = (
-    "The project's papers on packing unit squares in the smallest square: a series of "
-    "three on n = 11, read in order, with proofs written out in full."
+    "Square packing from first principles, how record packings are found and verified, "
+    "and a three-part n = 11 series on lower bounds and optimality."
 )
 VISUALIZE_DESCRIPTION = (
     "The best packings known of n unit squares, n = 1 to 324, built one square at a "
@@ -203,15 +205,17 @@ DOCUMENT_PAGES: tuple[str, ...] = (
 )
 #: The directory the site's papers are served from, under its root.
 PAPERS_DIR = "papers"
-#: The papers' slugs, each naming its case, its subject and its kind of paper. A paper is
+#: The papers' slugs, naming their subject and, for case-specific papers, their case. A paper is
 #: `papers/<slug>.html`, with its Markdown and its PDF beside it under the same slug
 #: (`paper_path`), and its renderer, templates and tests carry the slug in their names:
 #: `render_n11_lower_bounds_explainer`, `render_n11_threshold_bound_review`,
-#: `render_n11_optimality_review`. Every renderer imports this module, so the slugs are
+#: `render_n11_optimality_review`, `render_packing_methods`. Every renderer imports
+#: this module, so the slugs are
 #: written once, here.
 N11_LOWER_BOUNDS_EXPLAINER = "n11-lower-bounds-explainer"
 N11_THRESHOLD_BOUND_REVIEW = "n11-threshold-bound-review"
 N11_OPTIMALITY_REVIEW = "n11-optimality-review"
+PACKING_METHODS = "square-packing-methods-survey"
 #: From a paper's page back up to the site's root, which is where the bar's links, the
 #: other pages and the atlas's files are.
 PAPERS_ROOT = "../"
@@ -220,20 +224,24 @@ PAPERS_ROOT = "../"
 class PaperRecord(NamedTuple):
     """One of the site's papers, as every tool that has to know the papers reads it: its
     slug, the renderer module that writes it, the label its cards carry, its part in the
-    series, and its title as its page sets it, in title case and plain text."""
+    n = 11 series (None for a standalone paper), and its title as its page sets it, in
+    title case and plain text."""
 
     slug: str
     module: str
     label: str
-    part: int
+    part: int | None
     title: str
 
 
 #: The site's papers, in reading order: the one list a new paper is entered in. They are
-#: one series on n = 11, read I, II, III (the plan of 2026-10-05,
+#: the n = 11 series, read I, II, III, followed by standalone papers. Only records
+#: with a part number belong to that series (the plan of 2026-10-05,
 #: `docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md`): the project's
 #: own lower bounds, the review of Kleddamag's s(11) > 31/8, and the review of the
-#: optimality proof. `SITE_PAGES`, the cards (`overview_sections.PAPERS`), each paper's
+#: optimality proof. The standalone methods tutorial follows the series and explains
+#: how record configurations are found and verified. `SITE_PAGES`, the cards
+#: (`overview_sections.PAPERS`), each paper's
 #: series strip (`paper_front.series`), the structure audit (`paper_structure`), the
 #: Pages scope (`pages_scope`), the preview build (`preview_site`) and the deployed-site
 #: check (`check_published_site`) read it, so a new paper is one entry here and its
@@ -261,6 +269,13 @@ PAPERS: tuple[PaperRecord, ...] = (
         label="Part III",
         part=3,
         title="A Review of the Optimality Proof of the Trump Packing of 11 Squares",
+    ),
+    PaperRecord(
+        slug=PACKING_METHODS,
+        module="devtools.render_packing_methods",
+        label="Methods tutorial",
+        part=None,
+        title="How Record Square Packings Are Found",
     ),
 )
 
@@ -1327,8 +1342,11 @@ def render_all() -> list[Page]:
     return [*[build() for build in PAGES.values()], *chapter_pages()]
 
 
-def iter_result_fragments() -> Iterator[Page]:
-    """Every result as a complete page; row overlays extract its article on input."""
+def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterator[Page]:
+    """Complete result pages, optionally selecting ids without narrowing their context.
+
+    Chains, amendments and neighbors always use the complete register; row overlays
+    extract each page's article on input."""
     from devtools import overview_data, overview_sections, site_urls  # noqa: PLC0415
 
     overview = overview_data.load()
@@ -1338,6 +1356,8 @@ def iter_result_fragments() -> Iterator[Page]:
     ordered = sorted(overview.results, key=lambda result: result.id)
     positions = {result.id: index for index, result in enumerate(ordered)}
     for result in overview.results:
+        if result_ids is not None and result.id not in result_ids:
+            continue
         index = positions[result.id]
         path = overview_sections.result_fragment(result.id)
         summary = overview_sections.plain_text(result.summary)

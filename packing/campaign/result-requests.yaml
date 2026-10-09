@@ -19,6 +19,84 @@ repository: jlevy/squares
 owner: jlevy
 last_reviewed: '2026-10-08'
 issues:
+  - number: 420
+    title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
+    author: evand
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Pinned source metadata and Lean code imported as attributed reports, with source configurations
+      and proof obligations kept explicit.
+    read_through: '2026-10-07T20:11:56Z'
+    results:
+    - key: local-minima-178
+      claim: 178 source configurations are reported non-strict local minima under matched-index perturbations.
+      source: body
+      register:
+      - T-124
+    beads:
+    - think-juuq
+    answer_bead: think-juuq
+    replies: []
+    close_when: The reported import and its disposition are on main and the owner has posted the resulting
+      state; unresolved proof replays remain explicitly owned.
+  - number: 419
+    title: 'Mechanized exact forms for 269 best-known packings, n ≤ 324 (minimal polynomial, isolating
+      interval, exact configuration), checked independently and in Lean: registration request'
+    author: evand
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Pinned source metadata and Lean code imported as attributed reports, with source configurations
+      and proof obligations kept explicit.
+    read_through: '2026-10-07T20:11:50Z'
+    results:
+    - key: new-exact-forms
+      claim: Four newly derived exact feasible-side forms at102,106,152,177; polynomial minimality
+        remains source-asserted.
+      source: body
+      register:
+      - T-120
+      - T-121
+      - T-122
+      - T-123
+    - key: remaining-catalogue
+      claim: 269 exact forms and258 source Lean feasibility flags over the complete1..324 catalogue.
+      source: body
+      not_registered: The remaining forms are evidence about existing source configurations, not new
+        bounds. The complete reported catalogue is retained; PR403 owns canonical exact-form integration
+        and the source flags are not local verifier outcomes.
+      queued: false
+    beads:
+    - think-8sm2
+    answer_bead: think-8sm2
+    replies: []
+    close_when: The reported import and its disposition are on main and the owner has posted the resulting
+      state; unresolved proof replays remain explicitly owned.
+  - number: 399
+    title: 'New packings: s(266) ≤ 16.82302875075648, s(270) ≤ 16.93780722844603, s(272) ≤ 16.96811014576960'
+    author: evand
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Three complete changed rational packings independently certified at V3/C3; source novelty,
+      local minimality and optimality remain unestablished. Historical #375 sources retain their own poses.
+    read_through: '2026-10-07T02:10:44Z'
+    results:
+    - key: three-new-feasible-packings
+      claim: Exact feasible upper bounds at n266,270,272, with complete new poses and rational sides.
+      source: body
+      register:
+      - T-119
+    beads:
+    - think-hh48
+    answer_bead: think-hh48
+    replies: []
+    close_when: The confirmed import is on main and the owner has posted its state; novelty and
+      local/global optimality are outside this feasibility import.
   - number: 432
     title: '18 (originally 25) new packings below record for n = 51–295: registration request'
     author: ry-xu
@@ -216,8 +294,9 @@ issues:
       closed-set disjoint packings at astronomical integer sides. Both v1.0 texts,
       licences, attribution and checking sources are retained at immutable release
       revisions. The constants using computer-assisted Lemma 4.10 depend on
-      k2-minus-c v1.2; each also states an analytic-Lemma-4.9 variant. No project
-      proof review or checking execution is claimed for the new releases.
+      k2-minus-c v1.2; each also states an analytic-Lemma-4.9 variant. A scoped independent proof-chain review and maintained conditional interval
+      arithmetic now cover both releases; no source program execution or new project
+      confirmation is claimed. Independent per-box labelling remains open.
     read_through: '2026-10-07T12:35:34Z'
     results:
       - key: quarter-power-deficiency
@@ -246,8 +325,12 @@ issues:
         state: queued
         bead: think-6ptr
         note: >-
-          The v1.2 dependencies and new geometric arguments need a scoped review;
-          predecessor producer replays and author-supplied AI reviews do not supply it.
+          The full geometric chains and v1.2 dependency have a retained scoped review.
+          The maintained checker independently decides 108 numerical predicates across
+          both quarter-power routes, eight cube-root ranges, geometric ceilings and
+          four asymptotic floors. The consequences remain conditional on the reviewed
+          geometric premises and the independently tracked per-box obligation.
+          Final integration and merge-readiness gates remain pending.
     beads: [think-6ptr]
     answer_bead: think-u1kq
     replies: []
@@ -299,6 +382,8 @@ issues:
       bounds, with nothing asked. Two exact checkers of his accept every certificate; that
       the points are KKT local minima is his numerical evidence. The source states AI
       assistance (Claude).
+      Issue399 separately supplies changed arrangements at 266, 270 and 272, now
+      certified in T-119; this request retains its original source13ee36e poses and scope.
     read_through: '2026-10-06T02:41:09Z'
     results:
       - key: exact-optima-48
@@ -463,9 +548,15 @@ issues:
           0.0541.
         source: https://github.com/jlevy/squares/issues/368#issuecomment-6022000514
         not_registered: >-
-          Later v1.2 source claim, queued for its own retention and review under think-gcft. The author
-          reports RF2/RF3/RF5 fixes, but RF1 independent per-box labelling remains open; the earlier
-          v1.1 V3/C1 record does not certify these constants.
+          Version 1.2 is retained at immutable tag e16a5cfa7eed489ea8d84b500e590bf6855a5f2f:
+          all 78 source files are bound, with ten changed files retained and 68 byte-identical
+          version 1.1 copies referenced explicitly. Independent interval arithmetic checks
+          34 nine-overlap and 30 thirteen-overlap consequences, with falsifiable source-bound
+          and invalid-domain controls. The scoped geometric review and maintained 25,929-comparison floating-gap
+          checker complete the review slice under think-gcft, subject to final integration gates;
+          RF1 independent per-box labelling remains think-k3tk. The earlier v1.1 whole-source
+          manifest does not certify this revision; only thirteen unchanged deciding leaf lists
+          and their unchanged checking programs can reuse the earlier Lemma 4.10 replay.
         queued: true
         bead: think-gcft
     beads: [think-8nv9, think-gcft]
