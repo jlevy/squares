@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest
 
 from devtools import run_negative_controls as controls
+from tests.test_negative_controls import index_fixture_source
 
 
 @pytest.fixture
@@ -16,6 +17,7 @@ def source_roster(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path
     first, alias = archive / "first.json", archive / "alias.json"
     first.write_bytes(b'{"exact":1}')
     alias.write_bytes(first.read_bytes())
+    index_fixture_source(repo)
     monkeypatch.setattr(controls, "REPO", repo)
     monkeypatch.setattr(controls, "ROOT", root)
     monkeypatch.setattr(controls, "HERE", Path("packing"))

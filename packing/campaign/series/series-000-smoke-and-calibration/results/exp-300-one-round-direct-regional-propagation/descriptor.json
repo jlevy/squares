@@ -1,0 +1,10 @@
+{
+  "schema": "n17-one-round-owned-domain-propagation-context/v1",
+  "mode": "direct_regional",
+  "regional_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/descriptor.json",
+  "regional_descriptor_sha256": "4f630f7934a975b8e608d916117a3dcd3bc35c650d1559fbfd9ff4ab84a7ecfd",
+  "regional_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/certificate.json",
+  "regional_certificate_sha256": "81e4042776e57922b94d979ed12e99345b157ff1b6663de5c7e021baae6167c0",
+  "regional_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/replay.json",
+  "regional_replay_sha256": "1a45f986488aa343297dc1a0d0c5dbb1a5aeecedd94d280170f54ab6634295ec"
+}

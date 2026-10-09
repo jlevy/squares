@@ -1,0 +1,17 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-08T20:42:11.079843Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/execution-manifest.json",
+  "manifest_sha256": "74410a8e44e6c06e6e94c0085e140ffbe5cd95179da994a8c01c615309c2a683",
+  "phases": [
+    {"argv":["/Users/levy/wrk/github/squares/packing/.venv/bin/python","-m","devtools.n17_shared_centre_lp","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/descriptor.json","--witness","../packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/portable-witness.yaml","--witness-sha256","05b8041e44d0c5dc5977cf06caed292de45e57a9ddce507ff25152b66b3125a6","--frame-action","f1","--max-seconds","120","--max-operations","2000000","--output","campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/certificate.json"],"ended_at":"2026-10-08T20:42:08.903966Z","name":"construction","returncode":0,"started_at":"2026-10-08T20:42:06.587765Z","status":"completed","wall_seconds":2.315961041022092},
+    {"argv":["/Users/levy/wrk/github/squares/packing/.venv/bin/python","-m","devtools.n17_shared_centre_lp","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/descriptor.json","--witness","../packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/portable-witness.yaml","--witness-sha256","05b8041e44d0c5dc5977cf06caed292de45e57a9ddce507ff25152b66b3125a6","--frame-action","f1","--max-seconds","120","--max-operations","2000000","--check","campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/replay.json"],"ended_at":"2026-10-08T20:42:11.079251Z","name":"fresh_verification","returncode":0,"started_at":"2026-10-08T20:42:08.904700Z","status":"completed","wall_seconds":2.174438292044215}
+  ],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T20:42:06.587269Z",
+  "status": "completed",
+  "unstarted_phase_names": [],
+  "wall_seconds": 4.492260625003837
+}
+

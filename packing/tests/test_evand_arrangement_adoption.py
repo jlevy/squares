@@ -22,6 +22,7 @@ from devtools import register_evand_arrangements as adoption
 from devtools import run_negative_controls as controls
 from sqpack.witness import witness_document
 from sqpack.yamlio import safe_load
+from tests.test_negative_controls import index_fixture_source
 
 SOURCE = reports.REPO
 
@@ -192,6 +193,7 @@ def test_actual_snapshot_preserves_separate_alias_destinations(
     first, alias = packing / "first", packing / "alias"
     first.write_bytes(b"complete source bytes")
     alias.symlink_to(first)
+    index_fixture_source(source)
     monkeypatch.setattr(controls, "REPO", source)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())

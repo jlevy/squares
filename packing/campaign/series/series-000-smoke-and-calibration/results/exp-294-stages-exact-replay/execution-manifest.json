@@ -1,0 +1,68 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "registered_at": "2026-10-07T20:16:44.390366+00:00",
+  "source_freeze": "registrationcommitresolved/recordedatlaunch",
+  "target_unrun": true,
+  "phases": [
+    {
+      "name": "stage_observations",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.profile_n17_exact_replay",
+        "--directory",
+        "campaign/retained/session-184-n17-numeric-cap-readiness",
+        "--cells",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json",
+        "--cells-sha256",
+        "3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5",
+        "--centered-inner-cap",
+        "935106018721/200000000000",
+        "--max-seconds",
+        "180",
+        "--instrumentation",
+        "stages",
+        "--compare",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/attempt2/none.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/stages.json"
+      ]
+    }
+  ],
+  "primary_criterion": "One fresh STAGES run completes fullPASS_STALL, matches accepted exp290attempt2 NONE mathematicalresult and identical seed/node/cells bytes, and retains all16stepboundaries with explicitly nestedinclusive/exclusive wall/CPU/call attribution and an explicitlyunattributed residual. Temporaryhooks restore aftersuccess/failure, no pervertex/globaltrace or verificationarithmeticchange. Runtimeoverhead is diagnostic, not speedup or geometricadmission. Limits/custody/semanticmismatch are incomplete/refused.",
+  "budget": "One worker; STAGES180s cooperative replaybudget,owned-group TERM190/KILL200 allowing10s setup/serialization;4096MiB sampled currentRSS PERliveprocess. Same originalnative/cells/input/output/sourcecaps asacceptedNONE/PHASES; fullsame-objectexactresult required. Timing underoverlaphostactivity neverestablishesgain.",
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "190",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/phase-execution.json"
+  ]
+}
