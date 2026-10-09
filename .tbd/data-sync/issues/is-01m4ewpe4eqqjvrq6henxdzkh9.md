@@ -5,7 +5,7 @@ title: "Website: compact homepage, consistent case layouts, and scroll-aware nav
 kind: epic
 status: in_progress
 priority: 1
-version: 34
+version: 35
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -32,10 +32,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:13:39.980Z
-updated_at: 2026-10-09T03:14:17.527Z
+updated_at: 2026-10-09T03:43:30.875Z
 started_at: 2026-10-08T23:22:05.552Z
 ---
-W9 website remediation tracked by eleven implementation beads and combined verification. Preserve original hero and exact problem introduction; centered About project card; compact original SVG Atlas preview with Expand/Explore; Recent Major Results S4+ cap12, sans scope text and centered medium-width LEGEND box; Learn More papers and separate PDF/Video groups; Other Square Packing Projects on homepage. PDFs also on Papers, video also on Visualize, neither on Atlas. Keep Squares Project Documentation and full project narrative on About, shared nav before GitHub. Shared uppercase buttons, gear baseline alignment, Headroom hide-down/show-up, compact consistent headings, n291 case/math/narrow-layout repair and unique loaded result title. Scientific PDF-description edit remains canceled for owner separate work. Build and serve a local draft before publication.
+Website layout and navigation remediation with an editable local draft. Preserve originalhero and exact problem introduction; nativeSVG Atlas preview Expand/Explore with live themes; recent S4+cap12 results and linkedLegend card; shared main heading styles/spacing and uppercase controls; separate PDFs and inline click-to-play video; About/doc cards and MoreResources; Headroom hide-down/show-up and gear alignment; consistent case/popover math/layout and unique resulttitle. Hero opens its case popover with record/Frontier-row/Atlas-tile actions. Atlas tile navigation fully expands then highlights/scrolls to the case; fullFrontierSurvey sits after Atlas graphics with distinct row/tile targets and legacyforwarding. Track each change in childbeads; verify localdraft beforepublication. ScientificPDF-description edit remains canceled for owner separatework.
 
 ## Notes
 
