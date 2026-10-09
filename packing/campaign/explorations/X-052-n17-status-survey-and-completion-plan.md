@@ -83,15 +83,17 @@ exploration:
     - https://github.com/jlevy/squares/pull/461
     - https://github.com/jlevy/squares/pull/452
     - https://github.com/jlevy/squares/pull/410
+    - https://github.com/jlevy/squares/pull/475#pullrequestreview-5473799813
   proposes: [H-341, H-342, H-343, H-344, H-345, H-346, H-347, H-348, H-349]
 ---
 # X-052: The n = 17 Optimality Program on Every Front, and the Path to a Proof
 
 **The proof of $s(17)=S^\ast$ has two real gaps, both measured now, and neither moved
-this week: exclusion of the hard tail of the residue, where the engines in hand have
-been run on four of 95 states, and capture of the family’s own state from its cells,
-where the only engine in hand has been run for one round.** Everything else is in place
-or priced. The bracket is verified at both ends.
+this week: exclusion of the hard tail of the residue, where per-state runs have reached
+three of its 95 distance-2 orbits and none has closed, and capture of the family’s own
+state from its cells, where the only engine in hand has been run for one round.**
+Everything else is in place or priced.
+The bracket is verified at both ends.
 The cover, the census and the transfer rules reproduce from independent code.
 Sixty exclusions are admitted and leave 36,768 states in 4,683 orbits; 58 of the 60 rest
 on one verifier implementation whose objects nobody can fetch.
@@ -131,17 +133,19 @@ not replayed here), *open*.
 | Admitted exclusions | 60 entries: 2 of arity 6, 10 of arity 7, 8 of arity 8, 1 of arity 9, 39 whole states | admitted; W7 and A re-proved by second implementations, 58 single-impl |
 | Residue | 36,768 states, 4,683 orbits, the family’s state among them | verified (census tool; recomputed *(review)* from the receipt and ledger) |
 | Residue by $D_4$-Hamming distance from the family’s state, orbits / states | 0: 1 / 8 · 2: 95 / 744 · 4: 975 / 7,664 · 6: 1,942 / 15,268 · 8: 1,284 / 10,124 · 10: 385 / 2,956 · 12: 1 / 4 | verified *(review)*, agrees with exp-259 at 58 entries except the two distance-8 orbits Tail A and B removed |
-| Hard tail, measured | per-state runs on 4 of the 95 distance-2 orbits: 1 closed, 1 incomplete at 7,000 s, 2 fixed points at 32 uniform bins | open; undersampled |
+| Hard tail, measured | per-state runs on 4 distance-2 orbits: u8 closed and so left the residue; of the surviving 95, u1 incomplete at 7,001 s, m1964767 and m851903 fixed points under 32 uniform bins; none of the 95 has ever closed per state | open; undersampled |
 | Local family theorem | capture-target theorem at $r = 1/5000$ on $B_W'$, worst ratio $0.925931$; per-coordinate vector with floor $1/1216$, worst ratio $0.999368$, unregistered | proved with one review; replayed from `main` *(review)* in 10 s each |
-| Capture | from the cells: one round (exp-276, 277, 280), nothing contracted; from a $1/1024$ box: pilot 2 met its falsifier; cells are 90 to 4,800 times the terminal radius away in every coordinate | open; no engine has a verdict from the real start point |
+| Capture | from the cells: one round (exp-276, 277, 280), nothing contracted; from a $1/1024$ box: pilot 2 met its falsifier; the cells’ half-widths are 35 to 3,900 times the terminal radii in every coordinate ([2.8](#28-capture)) | open; no engine has a verdict from the real start point |
 | Contributor certificates, unadmitted | #472: 12 kernel certificates, standing verifier full pass reported; #413: 38 rows; #358: 2 BB classes | reported; admission of #472 would leave 3,636 orbits / 28,528 states *(review)* |
 | Custody | 204 admitted objects, 2,167,361,631 bytes, listed by digest; the release has 0 assets; three Session-184 release tags do not exist | the admitted census is not replayable from a fresh clone today |
 | Composition | no checker reads cover, ledger, capture and local receipts together; caps are implicit ($U$) on every entry | absent |
 
 **The two real gaps.** (1) The 4,682 non-endpoint residue orbits need certificates at a
-cap at least $S^\ast$; the 95 distance-2 orbits are the hard core, and on the two
-diagnosed ones the infeasibility is joint across at least 15 squares and invisible to
-every pairwise or centre-only method.
+cap at least $S^\ast$; the 95 distance-2 orbits are the hard core.
+On the two diagnosed ones, exact witnesses rule out the centre-only relaxations; float
+evidence puts the infeasibility across many squares jointly (m851903’s inclusion-minimal
+infeasible sub-pattern has arity 15); and support sampled from 100 float poses is strong
+reason to expect pairwise propagation not to see it.
 (2) Every packing of side at most $U'$ in the family’s state must be shown to lie within
 the terminal radii of the family in the exact root’s frame; no engine has contracted
 anything from the cells, and the terminal region is $10^{-3}$ to $10^{-4}$ per
@@ -213,21 +217,25 @@ transfer by containment and $D_4$ as a one-line proof.
 | --- | ---: | --- | --- | --- |
 | Cover checker | 1,437 | one tool | five review scripts, the lemma review, the review’s own script | low |
 | Census consumer | — | one tool | two review `transfer_count` scripts, the review’s containment code, the contributor’s own counts | low |
-| Kernel verifier `verify_n17_kernel_certificate.py` | 1,751 | the standing verifier; W7 also by lane R3’s separate verifier | 34-case mutation suite refused by the Python and the Rust verifier; Rust port (PR 410) with receipt parity on 7 certificates; three closed-cover defects found and fixed on 3 October | **58 of 60 admissions rest on one implementation**, and its early versions had unsound branches |
+| Kernel verifier `verify_n17_kernel_certificate.py` | 1,751 | the standing verifier; W7 also by lane R3’s separate verifier | 34-case mutation suite refused by the Python and the Rust verifier; Rust port (PR 410) with receipt parity on 7 certificates, *reported* by the contributor and not replayed; three closed-cover defects found and fixed on 3 October | **58 of 60 admissions rest on one implementation**, and its early versions had unsound branches |
 | BB verifier `verify_n17_bb_certificate.py` | 1,321 | the standing verifier; A also by lane R4’s separate verifier | 16 mutants, 9 doctored certificates | one admitted object; `think-t41a` (source-cell enclosure) open for external intake |
 | Hand lemmas | — | — | wall lemma reviewed and attacked numerically; transfer and monotone embedding are one-line | low |
 | Custody | — | — | 204 objects / 2.17 GB listed by SHA-256; release `data/n17-x048-session-168-certificates-v1` has 0 assets; tags `…conditional-owned-hull-v1`, `…numeric-cap-readiness-v1`, `…tail-a-dependencies-v1` return 404 | **every admission is a receipt, not a replayable object** |
 
 Verifier versions, read from the ledger and `git ls-tree` on this worktree: the ledger
-lists seven verifier revisions; every kernel admission since exp-251, Tail A and B
-included, was passed by `kernel-streamed` (commit `601bbf110`, blob `1ad706c21`),
-`dirty: false`. `main`’s kernel verifier is blob `be8135f6e`, three commits later
-(`836e919e0`, `90d6e4c94`, `90cd2528e`: centred-cap support with a 48-vertex hull
-allowance and a sound Y-range prefilter whose measurement round exp-298 ended invalid),
-and **no ledger listing names it**; under the ledger’s own rule, no receipt from current
-`main` can admit an entry until a listing with a review pointer exists.
-The BB verifier moved the same way: listed `651c2615c`, `main` blob `e6e400e7f` after PR
-452, and every contributor BB receipt names `9dcc05bc…`, an unlisted intermediate.
+has eight verifier listings across seven commits; every kernel admission since exp-251,
+Tail A and B included, was passed by `kernel-streamed` (commit `601bbf110`, blob
+`1ad706c21`), `dirty: false`. `main`’s kernel verifier is blob `be8135f6e`, three
+commits later (`836e919e0`, `90d6e4c94`, `90cd2528e`: centred-cap support with a
+48-vertex hull allowance and a sound Y-range prefilter whose measurement round exp-298
+ended invalid), and **no ledger listing names it**; under the ledger’s review rule, no
+receipt from current `main` should admit an entry until a listing with a review pointer
+exists. That bar is the review rule, not a mechanical refusal: the census checks a
+receipt’s verifier path and uncommitted flag and does not resolve its version.
+The BB verifier moved the same way: the ledger lists blobs `4224262c7` (`bb-review-r4`)
+and `f1e2268d6` (`bb-enclosure-retry`); `main`’s blob is `e6e400e7f` after PR 452
+(SHA-256 `10db91c2…`); and every contributor BB receipt names the SHA-256 `9dcc05bc…`,
+which is blob `c69f1ec08`, `main`’s BB verifier from 4 to 8 October and unlisted.
 
 Remaining obligation: a verifier listing for `be8135f6e` (a review of three commits);
 custody of the 204 objects (H-336); Rust parity on all 60 (H-335); the BB header
@@ -236,41 +244,48 @@ enclosure guard for every external BB intake (`think-t41a`).
 ### 2.5 The hard tail: what was actually tried
 
 The 95 distance-2 orbits (744 states) are the one-square moves of the family’s state
-that survive the ledger; 22 of the 117 moves are excluded by admitted sub-patterns.
-The exhaustive record of attempts on them:
+that survive the ledger.
+The other 22 of the 117 move orbits are excluded: 21 by admitted sub-patterns (11 by W7,
+10 by `s182-bc425-t1`) and one, u8, by its own whole-state certificate
+(`s182-bc428-u8`). The exhaustive record of attempts at distance 2:
 
 | Attempt | Instrument | Result |
 | --- | --- | --- |
 | H-273 float survey, all 95 | `survey_n17_residue --distance 2` | no placement at $U$ in 95 searches; sampled best penetration $9.1\times10^{-3}$; unresolved by design |
-| u8 = mask 3078077 | 17-owner kernel, SW9 adaptive recipe, 7,000 s | **closed** in 572 s, verified in 277 s, admitted ([exp-257](../series/series-000-smoke-and-calibration/experiments/exp-257-h275-n17-unsampled-strata.md)) |
+| u8 = mask 3078077 | 17-owner kernel, SW9 adaptive recipe, 7,000 s | **closed** in 572 s, verified in 277 s, admitted as `s182-bc428-u8` ([exp-257](../series/series-000-smoke-and-calibration/experiments/exp-257-h275-n17-unsampled-strata.md)); so not one of the 95 |
 | u1 = mask 1900509 | same | incomplete at 7,001 s, not a fixed point |
 | m1964767 | 17-owner kernel, N1 recipe, 32 uniform bins | fixed point after 8 rounds; consistency-limited |
 | m851903 | same | fixed point after 2 rounds (88 s); consistency-limited |
 | exp-303 contact rank, exp-304 envelope windows, exp-308 four-corner cardinality, exp-312 saved-pose incircles, exp-313/314 projections | necessary-condition filters | all 95 survive each |
 | centre-only relaxations (W2 review, X-051 §3.1; replayed and extended *(review)*) | exact rational centres in each state’s own cells | all 95 survive with exact witnesses; see [2.6](#26-relaxations) |
 
-Everything else in Sessions 184 to 186 (the fifteen `criterion_missed` rounds exp-285,
-286, 287, 291, 292, 293, 295, 297, 300, 301, 303, 304, 305, 308, 312 and the five
-accepted conditional rounds exp-288, 296, 299, 302, 307) worked on the family’s own
-state at the numeric cap under a guard on owner 0 at $\tau = 53/128$: capture work that
-never touched a tail state.
+Of the fifteen `criterion_missed` rounds of Sessions 184 to 186, four (exp-303, 304, 308
+and 312) are the necessary-condition filters in the table above and ran on all 95. The
+other eleven (exp-285, 286, 287, 291, 292, 293, 295, 297, 300, 301 and 305) and the five
+accepted conditional rounds (exp-288, 296, 299, 302 and 307) worked on the family’s own
+state at the numeric cap under a guard on owner 0 at $\tau = 53/128$: capture-side work.
 
 **Finding.** X-051 §2.2(3) says the 95 “resist the pairwise kernel at every row width”.
-The evidence is two fixed points at 32 uniform bins, one incomplete adaptive run and one
-closure. The adaptive recipe that closed 26 of 29 counted H-275 draws has run on two of
-the 95, never at the 2,304-row cap or past a 7,000 s ceiling.
+The evidence on the surviving 95 is two fixed points at 32 uniform bins and one
+incomplete adaptive run; the one per-state closure at distance 2, u8, took its orbit out
+of the 95. No surviving distance-2 orbit has ever closed per state.
+The adaptive recipe that closed 26 of 29 counted H-275 draws has run on one of the 95
+(u1), at SW9’s 1,152-row cap and a 7,000 s ceiling, never with the cap raised.
 **The hard tail is undersampled, not measured.** The consistency-limited diagnosis
 (every owner at least 63 per cent supported on 100 float-sampled poses) is a strong
 reason to expect m1964767 and m851903 to resist pairwise propagation, and says nothing
-about the other 91.
+about the other 93.
 
 **Why the two diagnosed states resist.** Their structure is three full walls, five
 squares on a wall of length $3.676$, whose neighbours fail to clear each other by
 $0.011$ to $0.018$; the family resolves the same crowding by tilting one square per full
 wall (square 13 at $39.8^\circ$, square 16 at $-36.6^\circ$), and a one-square move
 breaks the pattern that makes the tilts consistent.
-The float survey places a 14-cell sub-pattern of m1964767 and finds m851903’s minimal
-infeasible sub-pattern at arity 15: whatever excludes them needs at least 15 squares
+The float survey places a 14-cell sub-pattern of m1964767 and finds an inclusion-minimal
+infeasible sub-pattern of m851903 at arity 15. That is float evidence, and
+inclusion-minimal is not minimum: placing one 14-cell subset does not bound the size of
+other infeasible subsets.
+It suggests, without settling, that whatever excludes these states needs many squares
 jointly.
 A pairwise cut removes a pose only when every partner pose collides with it, and
 an ownership induction has no owned points for most side cells from the seed.
@@ -282,8 +297,8 @@ resolution floors ($10^{-3}$ at $1/512$ rows; the BB chord error $gx^2/2$) are b
 these margins. What is missing is reach, joint facts about orientation-dependent extents
 along full walls, not resolution.
 
-Remaining obligation: 95 distance-2 orbits (94 after #472), with per-state verdicts on
-four; the engines’ stall fraction on the *current* residue is unmeasured.
+Remaining obligation: 95 distance-2 orbits (94 after #472), with per-state runs on three
+and no closure; the engines’ stall fraction on the *current* residue is unmeasured.
 
 ### 2.6 Relaxations
 
@@ -291,7 +306,7 @@ four; the engines’ stall fraction on the *current* residue is unmeasured.
 | --- | --- | --- | --- |
 | Every distance-2 representative, the first eight included, has exact rational centres in its own cells pairwise at distance $\ge 1$, accepted by `build_model` and `check_primal`; minimum squared distance over all 96 retained vectors $501001/500000$ | determined (W2 review; replayed *(review)* in 40 s with an independent point-in-cell test) | X-051 §3.1, [`centre-survivors.json`](X051-centre-survivors/centre-survivors.json) | registration only (H-328, blocked on an OR-1 tool) |
 | No weighted-vertex or SOS certificate of any order, with or without a ball, exists for any of the 2,024 cell triples: each has a product vertex with all three squared distances $\ge 562823713/423200000$, a feasible point of its encoded system | determined (exact) | X-051 §3.2, PR 464 | none |
-| **The centre-only relaxation is loose by a factor of at least three, not tight.** Maximising the minimum pairwise centre distance over centres in their own cells, then rounding to a $10^{-6}$ grid pulled inward and certifying in exact rationals: every distance-2 state admits exact centres pairwise at least $1.0305$ apart (worst, mask 3062655; median slack $0.0835$; the family’s own state $1.102$), against a true infeasibility margin of about $0.01$ of a side | determined *(review)*, exact witnesses for all 95 and the endpoint control | `centre_relaxation_slack.py`, `exact_slack_witnesses.py` | a strengthening that keeps only centre information cannot come within that factor; the information that excludes these states is the orientation-dependent extent of a square ($1/2$ on edge normals, $\sqrt2/2$ on diagonals) |
+| **The centre-only relaxation is loose, not tight.** Maximising the minimum pairwise centre distance over centres in their own cells, then rounding to a $10^{-6}$ grid pulled inward and certifying in exact rationals: every distance-2 state admits exact centres pairwise at least $1.0305$ apart (exact worst, mask 3079037, slack $0.03049$; exact median slack $0.0821$; the family’s own state $1.102$), against float penetrations of about $0.01$ of a side, a ratio of about three | the slack witnesses exact *(review)* for all 95 and the endpoint control; the ratio of about three is a heuristic comparison of an exact centre slack with a float penetration, not determined | `centre_relaxation_slack.py`, `exact_slack_witnesses.py`; the float max-min worst, mask 3062655 ($0.0302$), has an exact witness at $0.0453$ | a strengthening that keeps only centre information has an exact slack of at least $0.0305$ to close; the information that excludes these states is the orientation-dependent extent of a square ($1/2$ on edge normals, $\sqrt2/2$ on diagonals) |
 | Pairwise orientation coupling at the relaxation optimum is weak: at centre distance $1+\delta$ with $\delta \approx 0.03$ to $0.12$ the relative orientation is confined to $4^\circ$ to $17^\circ$ mod $\pi/2$ and the separating normal to within $14^\circ$ to $27^\circ$ of the connecting direction | derived *(review)* | same | a per-pair orientation argument is not the mechanism either |
 
 What can still bite: joint branching on orientations with wall coupling (the BB;
@@ -299,17 +314,20 @@ B2-aimed splits reached closing depths 12 to 14 on arity-7 crowds; its tree size
 to 17 squares is unmeasured); ownership induction with closed half-cell branch
 predicates (C5), the one grammar change aimed at the diagnosed mechanism, never built; a
 state-conditioned charge (H-338), unbuilt.
-What cannot: any centre-only relaxation; any pairwise consistency pass at any row width
-on the two diagnosed states; a per-pair orientation argument at the relaxation’s
-optimum.
+What cannot, on exact or derived evidence: any centre-only relaxation; a per-pair
+orientation argument at the relaxation’s optimum.
+Expected not to bite, though not determined: a pairwise consistency pass at any row
+width on the two diagnosed states.
+That expectation rests on support sampled from 100 float poses at 32 uniform bins, the
+§2.5 diagnosis.
 
 ### 2.7 Contributor and external work
 
 | Source | What exists | Status here | Projected residue if admitted *(review)* |
 | --- | --- | --- | --- |
-| **wand125, [#472](https://github.com/jlevy/squares/issues/472)** (9 Oct, unlabelled, no maintainer reply) | 12 arity-8/9 kernel certificates made with `check_n17_subpattern` mode A, each passed by `verify_n17_kernel_certificate` in full (blob `1ad706c21`, the listed `kernel-streamed`); 411,682,476 bytes; producer 139–1,065 s and verifier 147–1,618 s each, 6,794 s summed; hosted on the contributor’s releases with HostedData/v1 manifests; receipts carry `dirty: true`, a wrapper revision and one hand-edited `directory` field each | reported; not in #405, `result-requests.yaml` or `intake-watch.yaml` | **3,636 orbits / 28,528 states** ($-1{,}047$ / $-8{,}240$); distance partition after: 2: 94/736 · 4: 940/7,384 · 6: 1,639/12,880 · 8: 799/6,296 · 10: 162/1,220; row 23 (m935012) removes the distance-2 orbit 1965787; row 34 is contained in admitted `s182-m7844815`, which it subsumes; the contributor’s 58-ledger figures 3,638 / 28,544 reproduce exactly |
-| **wand125, [#413](https://github.com/jlevy/squares/issues/413)** (38 rows) | 2 BB standing-FULL (rows 1, 2, at unlisted `9dcc05bc…`); 2 parallel-node (3, 4); 20 fast-verifier only; 11 kernel FULL (= #472); 3 computed (15, 27, 33; row 33 about 480 GB as BB, now being retried with the kernel producer) | reported; the maintained `reconcile_n17_issue_patterns` hard-codes 33 rows and refuses the roster | all 38: 2,345 / 18,360; rows 1–2 alone: 4,641 / 36,452 |
-| **wand125, [#358](https://github.com/jlevy/squares/issues/358)** | C1, C2 (arity 7, BB/v1, 552 objects / 400 MB), contributor FULL at `9dcc05bc…`; maintained C2 replay INCOMPLETE at 480 s on the RSS-monitor timeout (exp-311, H-319), not on memory; `think-b0ef` holds the repair | reported | 21 orbits / 148 states alone; nothing beyond the 38 rows’ union |
+| **wand125, [#472](https://github.com/jlevy/squares/issues/472)** (9 Oct; labelled `n-17` at 17:12 UTC, no maintainer reply at 18:00 UTC) | 12 arity-8/9 kernel certificates made with `check_n17_subpattern` mode A, each passed by `verify_n17_kernel_certificate` in full (blob `1ad706c21`, the listed `kernel-streamed`); 411,682,476 bytes; producer 139–1,065 s and verifier 147–1,618 s each, 6,794 s summed; hosted on the contributor’s releases with HostedData/v1 manifests; receipts carry `dirty: true`, a wrapper revision and one hand-edited `directory` field each | reported; not in #405, `result-requests.yaml` or `intake-watch.yaml` | **3,636 orbits / 28,528 states** ($-1{,}047$ / $-8{,}240$); distance partition after: 2: 94/736 · 4: 940/7,384 · 6: 1,639/12,880 · 8: 799/6,296 · 10: 162/1,220; row 23 (m935012) removes the distance-2 orbit 1965787; row 34 is contained in admitted `s182-m7844815`, which it subsumes; the contributor’s 58-ledger figures 3,638 / 28,544 reproduce exactly |
+| **wand125, [#413](https://github.com/jlevy/squares/issues/413)** (38 rows) | as edited at 17:04 UTC: 2 BB standing-FULL (rows 1, 2, at `9dcc05bc…`, the SHA-256 of unlisted blob `c69f1ec08`); 2 parallel-node (3, 4); 21 fast-verifier only (row 27 moved here in that edit); 11 kernel FULL (= #472); 2 computed (15, 33; row 33 about 480 GB as BB, now being retried with the kernel producer) | reported; the maintained `reconcile_n17_issue_patterns` hard-codes 33 rows and refuses the roster | all 38: 2,345 / 18,360; rows 1–2 alone: 4,641 / 36,452 |
+| **wand125, [#358](https://github.com/jlevy/squares/issues/358)** | C1, C2 (arity 7, BB/v1, 552 objects / 400 MB), contributor FULL at `9dcc05bc…` (blob `c69f1ec08`); maintained C2 replay INCOMPLETE at 480 s on the RSS-monitor timeout (exp-311, H-319), not on memory; `think-b0ef` holds the repair | reported | 21 orbits / 148 states alone; nothing beyond the 38 rows’ union |
 | **wand125, [#367](https://github.com/jlevy/squares/issues/367), [#400](https://github.com/jlevy/squares/issues/400), [#445](https://github.com/jlevy/squares/issues/445)** | B2/B2d branching (trees 11× and 14× smaller on C1/C2, 30,822 against 41,958 nodes on A); parallel standing driver and an independent Rust BB checker; node-lifetime defect, fixed by PR 452 | B2 unadopted (`think-x4v4`); driver and Rust BB checker unreviewed; #445 closed | — |
 | Everything reported (38 rows + C1/C2 + m6177056) |  |  | **2,343 / 18,344**; by distance 2: 94/736 · 4: 835/6,556 · 6: 990/7,768 · 8: 361/2,824 · 10: 61/448 · 12: 1/4; the first eight untouched |
 | **Guzhou0806 / N17 project** | R071 → T-093; PR 408/409 merged 9 Oct; PR 402 superseded, its hull-pull repair on `main` as `917163641`; external executor on `think-juy9` | current verified lower bound | — |
@@ -349,26 +367,33 @@ of $F(w)$ in the exact root’s frame (angles as H254 lifts) and square 6 in `si
 | n11 positive control through the n17 producer (H-337) | exp-268: first round only | 11 owner updates, readiness | 15-round contraction control **not run**; runnable now |
 | R9 stage 1 (angle ranges at 2× and 4× rows from the box) | not run | — | open |
 
-**Quantified gap** *(review, from the record’s slopes and the pilots’ receipts)*:
+**Quantified gap** *(review, from the record’s slopes and the pilots’ receipts)*. Every
+factor from the cells is a half-width over a radius: an angle ranges $\pi/4$ either
+side, a position half its cell’s extent ($0.35$ to $0.485$; the cells are $0.7$ to
+$0.97$ across). The first version of this table divided full cell extents by the radii,
+which doubled every position factor.
 
 | Start → target | Angle factor (bisections) | Position factor (halvings) |
 | --- | --- | --- |
-| cells ($\pi/4$; cells $0.7$–$0.97$) → $r = 1/5000$ | 3,900 (11.9) | 3,500–4,800 (≈12) |
-| cells → $1/1216$ vector (angles $8.2\times10^{-4}$, $\omega_{11}$ $4.4\times10^{-3}$) | 960 (9.9); $\omega_{11}$: 180 | 1,000 (10) |
-| cells → widened LP region (angles $5\times10^{-3}$, centres $10^{-2}$) | 157 (7.3) | 70–97 (6.5) |
+| cells (angles $\pi/4$; position half-widths $0.35$–$0.485$) → $r = 1/5000$ | 3,900 (11.9) | 1,750–2,425 (10.8–11.2) |
+| cells → $1/1216$ vector (angles $8.2\times10^{-4}$, $\omega_{11}$ $4.4\times10^{-3}$) | 960 (9.9); $\omega_{11}$: 180 | 430–590 (≈9) |
+| cells → widened LP region (angles $5\times10^{-3}$, centres $10^{-2}$) | 157 (7.3) | 35–49 (5.1–5.6) |
 | pilot-2 end → $1/1216$ vector | 2–33 | 1.2–3 |
 | pilot-2 end → widened region | 0.4–5.6 (axis squares inside; 9, 10, 16 not) | inside |
 
-Even the widened terminal theorem leaves seven bisections in every angle and six
-halvings in every position from the cells.
+Even the widened terminal theorem leaves about seven bisections in every angle and five
+to six halvings in every position from the cells.
 The no-man’s-land, direction by direction, with $\kappa_j$ the fixed-feature LP slope
 and $d_j = m/\kappa_j$ the displacement at which a margin $m$ above $U'$ becomes
 visible: $-\omega_{16}$ ($\kappa = 0.0155$) needs $d = 0.65$ at $m = 10^{-2}$ and
 $0.065$ at $m = 10^{-3}$; $-\omega_{11}$ ($0.0876$) $0.114$ and $0.011$; $+\omega_{13}$
 ($0.102$) $0.098$ and $0.0098$; the stiffest, $-\omega_{12}$ ($0.71$), $0.014$ and
 $0.0014$. So at $m = 10^{-2}$ every angle direction has
-$d_j \ge 0.014 > 5\times10^{-3}$, outside the widened box; only at $m \lesssim 10^{-3}$,
-the kernel’s measured loss floor at $1/512$ rows, do the stiff directions fall inside.
+$d_j \ge 0.014 > 5\times10^{-3}$, outside the widened box.
+At $m = 10^{-3}$, the kernel’s measured loss floor at $1/512$ rows, the stiff directions
+fall inside, but six still exceed $5\times10^{-3}$ ($-\omega_{16}$, $-\omega_{11}$,
+$+\omega_{13}$, $-\omega_9$, $+\omega_{10}$, $-\omega_{13}$); at most two exceptions
+needs $m \le 0.102 \times 5\times10^{-3} \approx 5\times10^{-4}$, below that floor.
 The soft block directions ($-\omega_{16}$, $-\omega_{11}$, $+\omega_{13}$) need a
 non-margin argument between $5\times10^{-3}$ and $0.01$ to $0.07$ rad under any
 plausible $m$: the feature-flip atlas (H-339) or a bigger terminal theorem along those
@@ -446,19 +471,20 @@ orders of magnitude longer than n11’s.
 Briefly, since the inventory holds the detail.
 
 - **Explainer drift.** `docs/project/n17-optimality-explainer.md` (last edited 6 Oct)
-  says 58 / 36,784 / 4,685 at lines 251 and 382; X-048’s current selection and
+  says 58 / 36,784 / 4,685 at lines 59, 251, 382 and 441; X-048’s current selection and
   `SYNOPSIS.md`’s Session-184 narrative say the same.
   `main` has carried 60 / 36,768 / 4,683 since `533dd42c6` (9 Oct, 09:22 UTC).
 - **Register wording.** T-065’s claim in `results.yaml` and `RESULTS.md` still says “No
   identity with the catalogue’s degree-18 polynomial is proved”; exp-245 proved it on 2
   October; `think-yjgk` (open since 5 Oct, “close when PR 347 merges”) never landed the
   text.
-- **Tracker.** #405’s latest comment says the landing added no census admission; Tail A
-  and B reached `main` with it.
-  #405 does not mention #472, the BC-423/426 held closures (`think-yg80`, two closures
-  that passed standing FULL and await an owner ruling), Kleddamag’s research checkpoint,
-  or the missing verifier listing; it still says #403 and #442 conflict with `main`
-  (both are MERGEABLE/CLEAN) and lists #413 at 33 rows.
+- **Tracker.** #405’s latest comment said the landing added no census admission, though
+  Tail A and B reached `main` with it, and that #403 and #442 conflict with `main` (both
+  are MERGEABLE/CLEAN); an edit at 17:12 UTC added correction notes on both points (C8
+  and C12, applied). #405 does not mention #472, the BC-423/426 held closures
+  (`think-yg80`, two closures that passed standing FULL and await an owner ruling),
+  Kleddamag’s research checkpoint, or the missing verifier listing, and lists #413 at 33
+  rows.
 - **Intake records.** `result-requests.yaml` titles #413 “27 sub-pattern exclusions” and
   has no #472 entry; `intake-watch.yaml` does not watch `wand125/square-packing` or
   `wand125/square-packing-tools`, where the objects live (PR 466 adds them, unmerged);
@@ -485,16 +511,16 @@ the coordinator can apply it.
 | --- | --- | --- | --- | --- | --- |
 | C1 | H-337 and the hull-pull repair | X-051 §2.5, §7 and H-337: “the compression pull repair has an external executor but no merged repair”; H-337 blocked on it | `FINE_HULL_PULL = 1/2^{18}` is in `packing/src/sqpack/hull_kernel/producer.py`; commit `917163641` (7 Oct) is an ancestor of `6a0499ba4` (`git merge-base --is-ancestor`); exp-276 already calls the producer repaired | `git`, `producer.py` line 68 | H-337 `instrument_ready` → true with a dated note (done here); `think-juy9` is discharged on `main` |
 | C2 | H-261’s “counterexample” | the composition review and the explainer present the family with squares 5 and 6 exchanged as a packing meeting every premise outside $B_W'$ | for $a = 1$ and $a = 1.07$ the exchanged configuration is, as a set of 17 squares (exact rational corners), the family member $w = (0,0,0)$ with square 6 on the bottom wall at $x = x_5^\ast - a$, inside square 6’s box; the claim is not refuted; what fails is that the certified box does not cover the labelled slider domain, which is disconnected ($a \in [0, 0.115] \cup [1, 1.074]$ at $z = 0$) | `family_sat.py` *(review)*; X-048’s 5 October note already says “the same family relabelled” | H-261 dated note (done here); the explainer’s H-261 paragraph |
-| C3 | H-330’s falsifier | “at most two directions with $d_j$ above the terminal radius” at the margin H-325 reports | at $m = 10^{-2}$ every angle direction has $d_j \ge 0.014 > 5\times10^{-3}$; the claim can hold only if $m \lesssim 10^{-3}$, the kernel’s loss floor at $1/512$ rows, exactly where the engines stop seeing anything; the map is worth making with $m$ as the variable | the scope review’s slopes; [2.8](#28-capture) | H-330 dated note (done here); re-scope before any round |
-| C4 | The tail “resists at every row width” | X-051 §2.2(3) | four per-state runs exist: one closure, one incomplete, two fixed points at 32 uniform bins; the adaptive recipe has run on two of the 95 and never at the 2,304-row cap | exp-257, stall classification | read as “undersampled”; H-343 measures it |
+| C3 | H-330’s falsifier | “at most two directions with $d_j$ above the terminal radius” at the margin H-325 reports | at $m = 10^{-2}$ every angle direction has $d_j \ge 0.014 > 5\times10^{-3}$; at $m = 10^{-3}$, the kernel’s loss floor at $1/512$ rows, six directions still exceed $5\times10^{-3}$; the claim can hold only if $m \lesssim 5\times10^{-4}$, below that floor, where the engines see nothing; the map is worth making with $m$ as the variable | the scope review’s slopes; [2.8](#28-capture) | H-330 dated note (done here); re-scope before any round |
+| C4 | The tail “resists at every row width” | X-051 §2.2(3) | per-state runs exist on four distance-2 orbits: u8 closed and so left the residue; of the surviving 95, u1 is incomplete at 7,001 s and m1964767 and m851903 are fixed points under 32 uniform bins; no surviving distance-2 orbit has ever closed per state, and the adaptive recipe has run on one of the 95 (u1), at SW9’s 1,152-row cap | exp-257, stall classification | read as “undersampled”; H-343 measures it |
 | C5 | The “exact floor” near $1/4391$ | local-radius review, X-051: “an exact floor, and no finer curvature lemma buys more than a factor of two” | exact relative to the recipe’s C7 constants; a finer lemma was modelled at $\le 2\times$ in floating point | `scan` replay *(review)* | wording, no consequence |
 | C6 | T-065’s register wording | `results.yaml` line 5830, `RESULTS.md`: “No identity with the catalogue’s degree-18 polynomial is proved” | exp-245 proved the identity on 2 October; n-017’s prose says so | exp-245 | the T-065 claim text, under the result-import procedure (`think-yjgk`) |
-| C7 | Stale counts | explainer lines 251 and 382, X-048 line 127, SYNOPSIS Session-184 narrative: 58 / 36,784 / 4,685 | 60 / 36,768 / 4,683 on `main` since `533dd42c6` | census tool on this worktree | the explainer when next touched; X-048’s current selection |
-| C8 | Tracker census claim | #405 latest comment: “No exclusion, census admission, T item or optimality claim was added” | Tail A (`s184-tail-a-m3096311`) and Tail B (`s184-tail-b-m3096315`) reached `main` with the landing: 58 → 60 entries | `git show 3213d651b:…certified-sub-patterns.yaml` (58) vs `533dd42c6` (60) | #405 |
-| C9 | #413 and #472 in the tracker | 33 rows, “eighteen fast-only and eleven computed”, union 2,234 / 17,604; row 23 computed | 38 rows (2 + 2 + 20 + 11 + 3); union 2,338 / 18,408; row 23 kernel FULL-reported; #472 absent | #413 body, #472 | #405, `result-requests.yaml`, the `n-17` label on #472 |
+| C7 | Stale counts | explainer lines 59, 251, 382 and 441, X-048 line 127, SYNOPSIS Session-184 narrative: 58 / 36,784 / 4,685 | 60 / 36,768 / 4,683 on `main` since `533dd42c6` | census tool on this worktree | the explainer when next touched; X-048’s current selection |
+| C8 | Tracker census claim | #405 latest comment: “No exclusion, census admission, T item or optimality claim was added” | Tail A (`s184-tail-a-m3096311`) and Tail B (`s184-tail-b-m3096315`) reached `main` with the landing: 58 → 60 entries | `git show 3213d651b:…certified-sub-patterns.yaml` (58) vs `533dd42c6` (60) | #405: applied, a correction note added to the latest comment at 17:12 UTC |
+| C9 | #413 and #472 in the tracker | 33 rows, “eighteen fast-only and eleven computed”, union 2,234 / 17,604; row 23 computed | 38 rows: 2 + 2 + 21 + 11 + 2 since #413’s edit at 17:04 UTC made row 27 fast-verified (2 + 2 + 20 + 11 + 3 before it); union 2,338 / 18,408; row 23 kernel FULL-reported; #472 absent | #413 body and edit history, #472 | #405, `result-requests.yaml`; the `n-17` label was added to #472 at 17:12 UTC |
 | C10 | “The dual-sheet instrument has never been built” | X-051 §2.2, explainer | true of the direction-patch certifier and the patch counter; the interval machinery for box patches and cones exists (exp-263, 267, 269) and is the base to build on | exp-263/267/269 | H-329 notes |
 | C11 | Explainer’s “first-order feasible radius about $2\times10^{-10}$ at $U'$” |  | $7.9\times10^{-11}$ with the actual cap | `root_and_caps.py` *(review)* | immaterial |
-| C12 | PR state in the tracker | #403 “fails CLS and conflicts with main”; #442 “conflicts with main” | #403 `c1d3aab9` MERGEABLE/CLEAN, 31 checks pass; #442 and the intake stack CLEAN (#469 UNSTABLE) | `ghx pr view`, 9 Oct 16:40 UTC | #405 |
+| C12 | PR state in the tracker | #403 “fails CLS and conflicts with main”; #442 “conflicts with main” | #403 `c1d3aab9` MERGEABLE/CLEAN, 31 checks pass; #442 and the intake stack CLEAN (#469 UNSTABLE) | `ghx pr view`, 9 Oct 16:40 UTC | #405: applied, update notes added to the latest comment at 17:12 UTC |
 
 No soundness defect was found in the endpoint, the local theorem, its composition, the
 cap join, the cover, the census, the transfer rules or the kernel grammar.
@@ -508,14 +534,25 @@ remain:
 1. **Exclusion of every non-endpoint residue orbit at a cap at least $S^\ast$.** 4,682
    orbits (36,760 states) today; 3,635 after #472; about 2,340 after everything
    reported. Any cap in $[S^\ast, U]$ serves; $U$ is what every engine uses; a state
-   feasible at $U$ but not below $S^\ast$ needs its certificate at $U'$. The family’s
-   own state cannot be excluded at any cap $\ge S^\ast$ and is item 2. Square 6’s full
-   freedom is discharged by the distance-2 exclusions inside this item.
+   feasible at $U$ needs its certificate at $U'$. That presumes **every non-family
+   state’s infimum side exceeds $U'$**, which nothing yet shows: a non-family state
+   whose infimum lies in $[S^\ast, U']$ cannot be excluded at any usable cap and would
+   need its own capture and local argument, outside this list; exp-247’s one-state check
+   (margin $0.002111$, square 6 in `side-S2` only) is the evidence that the family
+   itself realises no second state.
+   A certificate issued at the centred cap $U'$ also needs a verifier listing that
+   supports centred caps, and today only `main`’s unlisted kernel blob `be8135f6e` does.
+   The family’s own state cannot be excluded at any cap $\ge S^\ast$ and is item 2.
+   Square 6’s full freedom is discharged by the distance-2 exclusions inside this item,
+   which is sound only if square 6 cannot reach another cell at side $\le U'$.
 2. **Capture of the family’s state.** Every packing of side $\le U'$ in that state, read
-   in the centred placement with the group element carried, has its 45 non-slider
-   coordinates within $r_j - E_j$ of the family in the exact root’s frame, and square 6
-   in `side-S2`; equivalently a terminal theorem large enough that an engine reaches it
-   from the cells, plus the engine.
+   in the centred placement with the group element carried and its squares labelled by
+   the state-induced convention (each square takes the label of the cell the state
+   assigns it, so C2’s exchanged configuration is the family relabelled; under fixed
+   labels the slider domain is disconnected), has its 45 non-slider coordinates within
+   $r_j - E_j$ of the family in the exact root’s frame, and square 6 in `side-S2`;
+   equivalently a terminal theorem large enough that an engine reaches it from the
+   cells, plus the engine.
 3. **The conversion allowances $E_j$** (frame, basis, angle chart, $u^\ast$ enclosure),
    computed exactly, so that items 1 and 2 compose with the local theorem.
 
@@ -534,23 +571,32 @@ Costs are for the first decision each direction yields, in CPU-hours and agent-h
 
 | # | Direction | Mechanism | Establishes | Falsifier / early kill | Prerequisite | Cost | Information |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | **Admit #472 and convert the BB-only #413 wall rows to kernel certificates** (H-341, H-342) | clean-worktree full replay of the twelve under a listed verifier, Rust parity, hosting under a repository manifest, an admission round; then `check_n17_subpattern` mode A on every BB-only row with a wall cell, including row 33 | residue 4,683 → 3,636 → about 2,400 orbits; distance-2 tail 95 → 94 | a full-mode refusal or a parity disagreement; a kernel stall on most BB rows | a verifier listing for `be8135f6e` (or a replay at `1ad706c21`); an OR-18 hosting decision | #472: ~2 CPU-h, ~4 agent-h; conversions: ~10 CPU-h, ~6 agent-h | the largest exclusion movement available; the kernel-versus-BB routing rule confirmed or refuted on 20 more patterns |
-| 2 | **Measure the hard tail** (H-343) | the SW9 adaptive recipe (64 bins, floor $1/512$, 2,304-row cap, 2-hour ceiling) on all 94 remaining distance-2 representatives and a uniform 60-orbit sample of the rest; every stall classified with the support/domains diagnostics | the real size of the hard tail and the per-state stall fraction on the current residue | fewer than half of the 94 close: the tail is a grammar problem; more than half: a throughput problem | none; zero build | ≤ 300 CPU-h, ~6 agent-h | replaces an inference from four runs by a measurement of 154 |
+| 1 | **Admit #472 and convert the BB-only #413 wall rows to kernel certificates** (H-341, H-342) | clean-worktree full replay of the twelve under a listed verifier, Rust parity, hosting under a repository manifest, an admission round; then `check_n17_subpattern` mode A on every BB-only row with a wall cell, including row 33 | residue 4,683 → 3,636 → about 2,400 orbits; distance-2 tail 95 → 94 | a full-mode refusal or a parity disagreement; a kernel stall on most BB rows | a verifier listing for `be8135f6e` (or a replay at `1ad706c21`); an OR-18 hosting decision | #472: ~2 CPU-h, ~4 agent-h; conversions: ~10 CPU-h, ~6 agent-h | the largest exclusion movement available; the kernel-versus-BB routing rule confirmed or refuted on 24 more patterns |
+| 2 | **Measure the hard tail** (H-343) | SW9’s adaptive recipe (64 bins, floor $1/512$) with its row cap raised from 1,152 to 2,304, under a 2-hour production ceiling, on all 94 remaining distance-2 representatives and a uniform 60-orbit sample of the rest; every stall classified with the support/domains diagnostics | the real size of the hard tail and the per-state stall fraction on the current residue | fewer than half of the 94 close: the tail is a grammar problem; more than half: a throughput problem | H-341’s partition; zero build | ≤ 308 CPU-h of production plus verification at 2,304 rows, unmeasured (the one 2,304-row run in the record ended INCOMPLETE at 12,000 s); ~6 agent-h | replaces an inference from three runs on the 95 by a measurement of 154 |
 | 3 | **Decide the capture engine from the real start point** (H-337 then H-345) | the n11 positive control through the repaired producer (15 rounds), then 20 rounds of the n17 producer from the family’s cells at $U'$ | whether the n11 engine is dead at n17 or merely never started | n11: worst extent above $0.9$ of round 0 at round 15 kills the producer; n17: no turn range or wall-fed bound moves by 10 % in 20 rounds confirms reading B from the cells | none (the repair is merged) | 2–4 + 5–20 CPU-h, ~4 agent-h | ends a question that consumed three sessions of box-seeded argument |
 | 4 | **Terminal theorem by exact dual sheets** (H-340 first, then H-329’s patch counter and sphere slope minimum, then the exact build; H-339 after) | register the $1/1216$ vector; count optimal bases over 2,000 sampled directions at four radii; find the least directional slope on $S^{15}$ by random directions; then the patch certifier with Krawczyk duals and interval Hessians | a terminal region 25–50× larger in angle as a list of exact rational duals, the foolproof form | a negative sampled slope; Chao1 above $10^5$ with unsaturated singletons; random-direction slope minimum below $5\times10^{-3}$ per rad | exp-244’s kernel and duals; H-278 extended to the box; the exact zero-turn LP equality (hand, needs review) | 15 s (H-340); counter: one slice, minutes of LPs, ~12 agent-h; exact build: one slice plus review, ≤ 1 CPU-day, ~30 agent-h | fixes the inner edge of the bridge; the only lever that enlarges the target rather than the engine |
 | 5 | **Price the outer bridge: Knuth estimate of an angle branch and bound with Taylor-at-centre LP bounds** (H-346) | branch on angles and feature choices; bound each box by the fixed-feature LP at the centre plus an interval second-order remainder ($\approx 0.3\rho^2$ sampled); close above $U'$; leaf = the widened region or the $1/1216$ vector | whether the cells-to-feature-forced bridge is a computation of $10^6$, $10^8$ or $10^{12}$ nodes | estimate above $10^8$ at the widened leaf | 4 (for the leaf), or the $1/5000$ leaf as a pessimistic stand-in | days of build (~25 agent-h), minutes to estimate | the only priced candidate for the outer bridge; decides whether capture is engineering or mathematics |
 | 6 | **The foolproof package** (H-336, H-335, H-334, H-347, H-348, H-333; the verifier listing; T-065 wording) | host the 204 objects; Rust parity on every kernel admission; a composition checker reading cover, ledger with per-entry caps, capture and local receipts; exact $E_j$; a second local-theorem checker; Lean for the three short lemmas | the proof becomes a checkable object; the trusted base is listed in one place | an accepted mutant; a failed fetch; $E_j \ge r_j/10$ | an owner decision on hosting | custody ~20 CPU-h + decision; parity a day of two workers; checker 20–40 agent-h; $E_j$ 10–20 agent-h; local checker 20–30 agent-h; Lean 10–30 agent-h | nothing mathematical moves; without it every admission is a receipt |
 | 7 | **Closed half-cell branch predicates (C5)** (H-344) | halve a side cell along its long axis into closed children, each with a seed core; a consumer rule that admitted children cover the parent, seams included; test on m1964767, m851903, m1949551 | an engine for consistency-limited states | both children of each state stall as the parent did | the verifier accepts n11’s predicate grammar; the n17 node and consumer do not | one build slice plus review (1–2 weeks); runs 2–4× a parent | the only grammar change aimed at the diagnosed mechanism |
 | 8 | **Cap scan read as margin versus direction** (H-325; H-330 with $m$ as the variable) | whole-state kernel and BB on the family’s state at $S^\ast - \{2, 5, 10, 15\}\times10^{-3}$; the fixed-feature LP slopes against the margin found | the margin the engines see on the hardest state; prices the cap ladder and the bridge | a stall at $1.5\times10^{-2}$ | the producer accepts a cap below the root box (one-line check) | 4–8 CPU-h, ~4 agent-h | one number nobody has; mostly informs capture |
-| 9 | **Kernel closure of the 69 flagged, uncertified classes** (H-349) | `check_n17_subpattern` mode A with adaptive rows on every selector flag the census tool projects (2,163 orbits / 16,900 states if all closed, overlapping the reported set) | more residue removed by the engine that works | fewer than 80 % close in 30 minutes each | none | tens of CPU-h | the stall fraction of the kernel on the current flags |
+| 9 | **Kernel closure of the 34 flagged, uncertified classes on no contributor roster** (H-349) | `check_n17_subpattern` mode A with adaptive rows on the 34 of the census tool’s 69 selector flags that are $D_4$-identical to no contributor pattern | at most about 200 orbits more: 198 if all 34 close after everything reported (2,343 → 2,145) | fewer than 28 of 34 close in 30 minutes each | none | ≤ 17 CPU-h of production plus verification | the kernel’s stall fraction on flags no contributor has run |
 | 10 | B2 on interior crowds and the ten smallest-margin tail sub-patterns (H-331); decomposability survey (H-327); state-conditioned charge (H-338) | as registered | reach of the BB and of counting on the tail | as registered | H-327 first | 20–60 CPU-h; 5–15 CPU-h; 20 agent-h | medium; cheap |
 | 11 | Cap ladder (H-326) | exclude every residue orbit at $V_1 = S^\ast - 10^{-2}$ | $s(17) > V_1$, $+5.1\times10^{-3}$ over R071 | a 30-orbit pilot with fewer than 27 closures | 8 and most of 1–2 | 100–4,000 CPU-h | a verified bound; its certificates do not enter the proof; worth the measurement, not the campaign, until 1–2 have shrunk the residue |
+
+**Directions 1 and 9 are not additive** *(review)*. Of the census tool’s 69 flagged
+classes, 30 are direction 1’s own targets (7 #472 masks and 23 H-342-eligible #413
+rows), 4 are rows 1–2 or C1/C2 (H-332) and 1 is row 5. After #472 and every
+H-342-eligible row the residue is 2,353 orbits, and all 69 flagged classes take it only
+to 2,145, a net of 208; the 1,491 orbits they would remove after H-341 alone (3,636 →
+2,145) are mostly H-342’s patterns.
+The two directions’ combined ceiling after H-341 is 2,145 orbits, which is why H-349 is
+scoped to the 34 classes on no roster.
 
 ### 5.2 Parallel lanes with disjoint deliverables
 
 | Lane | Hypotheses | Deliverable | Owner skill | First week |
 | --- | --- | --- | --- | --- |
-| A. Admission and census | H-341, H-342, H-349; H-332 re-scoped to the kernel route for C1/C2 and rows 1–2 | regenerated ledger, census and partition receipts; a verifier listing for `be8135f6e`; the reconciliation tool reading 38 rows | engineering, admission review | #472 replay and parity; label and answer #472; rows with wall cells queued |
+| A. Admission and census | H-341, H-342, H-349; H-332 re-scoped to the kernel route for C1/C2 and rows 1–2 | regenerated ledger, census and partition receipts; a verifier listing for `be8135f6e`; the reconciliation tool reading 38 rows | engineering, admission review | #472 replay and parity; answer #472; rows with wall cells queued |
 | B. Hard tail | H-343, H-327, H-331, H-344, H-338 | per-state verdicts and a stall classification of the current residue; the C5 grammar build | kernel producer, BB, diagnostics | all 94 distance-2 representatives launched under the adaptive recipe |
 | C. Capture engine | H-337, H-345, H-325, H-330 (re-read), H-346 | an engine decision from the real start point; the margin-versus-direction map; a priced outer bridge | capture producer, LP | H-337 and H-345 launched; H-346 build started |
 | D. Terminal theorem | H-340, H-329, H-339, H-347 | registered terminal radii; patch count and slope minimum; the exact patch certificate; exact $E_j$ | exact LP, intervals, review | H-340 registered; patch counter written and run |
@@ -575,20 +621,21 @@ weeks 6+  E: composition checker reads everything; the statement is emitted or a
 What is priced: lane A to about 2,400 orbits (two weeks); lane B’s measurement (two
 weeks of CPU); lane D’s patch counter and H-340 (one week); lane E except the hosting
 decision. What is not priced, and is the honest uncertainty: the hard core of the tail
-after lane B (if the two diagnosed states are typical, 15-square joint infeasibility
-with no engine beyond C5 and the BB, both unmeasured at that arity), and the outer
-bridge of capture (H-346 is the pricing step; if its estimate is above $10^8$ nodes at
-the widened leaf, capture needs a new idea, most likely a terminal theorem along the
-three soft directions that no current instrument produces).
-Order of magnitude for existing engines: about $10^3$ CPU-hours reduce the residue to a
-few hundred orbits; those few hundred, and capture, are the mathematical problem.
+after lane B (if the two diagnosed states are typical, joint infeasibility across about
+fifteen squares by float evidence, with no engine beyond C5 and the BB, both unmeasured
+at that arity), and the outer bridge of capture (H-346 is the pricing step; if its
+estimate is above $10^8$ nodes at the widened leaf, capture needs a new idea, most
+likely a terminal theorem along the three soft directions that no current instrument
+produces). Order of magnitude for existing engines: about $10^3$ CPU-hours reduce the
+residue to a few hundred orbits; those few hundred, and capture, are the mathematical
+problem.
 
 ### 5.4 What to stop
 
 - Centre-only relaxations of any kind, at any order, with or without a ball: determined
   (X-051 §3, [2.6](#26-relaxations)); retire `think-dvcs` with its known outcome and
   `think-geid` as refuted.
-- Conditional propagation inside one owner-0 guard as a route to the tail (fifteen
+- Conditional propagation inside one owner-0 guard as a route to the tail (eleven
   misses, no consumer; `think-98mg`, `think-lyh9`).
 - Box-seeded kernel capture pilots (R9 stages 1–2) before H-337 and H-345 have run.
 - BB certificate replays, and 480 GB acquisitions, for patterns the kernel closes; BB
@@ -607,20 +654,20 @@ experiment.
 | Id | Claim | Mechanism | Falsifier | Expected information | Limits |
 | --- | --- | --- | --- | --- | --- |
 | [H-341](../hypotheses/H-341-n17-issue-472-kernel-admission.md) | #472’s twelve kernel certificates pass a clean-worktree full replay under a listed verifier and Rust parity, bind to the exp-247 cover at $U$, and their admission reproduces 3,636 orbits / 28,528 states with the distance-2 tail at 94 | same format and frame as 59 admitted entries; the verifier derives closure itself | a full-mode refusal, a parity disagreement, or a census mismatch | $-1{,}047$ orbits; the admission path exercised on external objects | custody and a verifier listing are prerequisites, not mathematics |
-| [H-342](../hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md) | at least two thirds of the BB-only and computed #413 rows that contain a wall cell close under `check_n17_subpattern` mode A with adaptive rows within 30 minutes each, with certificates under 100 MB | wall-anchored crowds give the ownership induction owned points from the seed | fewer than two thirds close | about 1,000 orbits more; the kernel-versus-BB routing rule | interior crowds stay with the BB |
-| [H-343](../hypotheses/H-343-n17-hard-tail-adaptive-measurement.md) | at least half of the 94 distance-2 representatives not covered by #472 close under the 17-owner kernel with the SW9 adaptive recipe within 2 hours each, verified in full | the recipe closed 26 of 29 counted draws on a different frame | fewer than 47 of 94 | the size of the hard tail and the stall fraction on the current residue | per-state closure is a tail method; a uniform 60-orbit sample of the rest is the control |
+| [H-342](../hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md) | at least two thirds of the BB-only and computed #413 rows that contain a wall cell close under `check_n17_subpattern` mode A with adaptive rows within 30 minutes each, with certificates under 100 MB | wall-anchored crowds give the ownership induction owned points from the seed | fewer than two thirds close | up to about 1,300 orbits more (3,636 → 2,353 if all 24 eligible rows close); the kernel-versus-BB routing rule | interior crowds stay with the BB |
+| [H-343](../hypotheses/H-343-n17-hard-tail-adaptive-measurement.md) | at least half of the 94 distance-2 representatives not covered by #472 close under the 17-owner kernel with SW9’s adaptive recipe and its row cap raised to 2,304, within 2 hours each, verified in full, and a 60-orbit draw from the rest closes at a rate within 2× of theirs | the recipe closed 26 of 29 counted draws on a different frame | fewer than 47 of 94 | the size of the hard tail and the stall fraction on the current residue | per-state closure is a tail method; a uniform 60-orbit sample of the rest is the control |
 | [H-344](../hypotheses/H-344-n17-half-cell-branch-predicates.md) | with closed half-cell branch predicates and a consumer rule that admitted children cover the parent, the kernel closes both children of at least two of m1964767, m851903 and m1949551 within 4× the parent’s time | halving a side cell gives every child a seed core, which the consistency-limited stalls lack | both children of each state stall | an engine for consistency-limited states | unbuilt; seams must be in both children |
 | [H-345](../hypotheses/H-345-n17-cell-seeded-twenty-round-capture.md) | 20 rounds of the repaired producer from the family’s cells at $U'$ reduce at least one owner’s turn range or wall-fed position extent by 10 % of its round-1 value | the n11 root node contracted from its cells in 14 rounds | nothing moves by 10 % in 20 rounds | whether the kernel route is dead at n17 or never started | says nothing about reaching the terminal region |
 | [H-346](../hypotheses/H-346-n17-angle-bb-knuth-estimate.md) | an angle-and-feature branch and bound with Taylor-at-centre fixed-feature LP bounds on the family’s state at $U'$ has a Knuth estimate below $10^8$ nodes to the widened leaf | second-order-convergent bounds remove the cluster problem near the family | estimate above $10^8$ | a price for the outer bridge | an estimate, not a run; the leaf depends on H-329 |
 | [H-347](../hypotheses/H-347-n17-exact-conversion-allowances.md) | the conversion allowances $E_j$ for all 45 coordinates compute exactly and are below one tenth of the $1/1216$ vector’s $r_j$ | the allowances are linear in the root-box width and the frame offset | any $E_j \ge r_j/10$ | the terminal target the capture receipt must actually deliver | part of the composition’s receipt format |
 | [H-348](../hypotheses/H-348-n17-second-local-theorem-checker.md) | an independent checker of the local theorem’s certificate data, rational linear algebra only, reproduces the four worst ratios and refuses 20 doctored certificates | the certificate is a few hundred kilobytes of dyadics and rows; the check is the ratio inequality | a disagreement or an accepted mutant | the local half rests on two implementations | the hand lemmas stay hand lemmas |
-| [H-349](../hypotheses/H-349-n17-flagged-class-kernel-closure.md) | at least 80 % of the 69 flagged, uncertified selector classes close under `check_n17_subpattern` mode A with adaptive rows within 30 minutes each | the engine that closed every arity-8/9 flag it was given this week | fewer than 56 of 69 | the kernel’s stall fraction on the current flags and about 1,500 orbits | overlap with the reported set is counted, not assumed |
+| [H-349](../hypotheses/H-349-n17-flagged-class-kernel-closure.md) | at least 80 % of the 34 flagged, uncertified selector classes on no contributor roster close under `check_n17_subpattern` mode A with adaptive rows within 30 minutes each | the engine that closed every arity-8/9 flag it was given this week | fewer than 28 of 34 | the kernel’s stall fraction on flags no contributor has run, and at most about 200 orbits net of everything reported | the other 35 of the 69 are H-341’s, H-342’s or H-332’s targets, or row 5; the net is counted at each admission, not assumed |
 
 Corrections applied to existing files: H-337 reads as open (the instrument exists;
 `instrument_ready` was false on a stale premise); H-330 carries a note that its
-threshold is predicted refuted by its own slopes unless $m \lesssim 10^{-3}$ and should
-be re-scoped with $m$ as the variable before any round; H-261 carries a note that the
-exchanged witness is a relabelled family member and the claim is not refuted.
+threshold is predicted refuted by its own slopes unless $m \lesssim 5\times10^{-4}$ and
+should be re-scoped with $m$ as the variable before any round; H-261 carries a note that
+the exchanged witness is a relabelled family member and the claim is not refuted.
 
 ## Evidence Status and Limits
 
@@ -640,16 +687,59 @@ verdict.
 | Numeric, in the reviews | the wall-lemma attack (600 Nelder–Mead starts per cell); the max-min centre-distance optima before exact rounding; the orientation-coupling bounds |
 | Derived by hand in the reviews | the curvature bound, the ratio argument, Lemma 1/2 logic, the Kantorovich remark, the no-man’s-land table from the record’s slopes, the gap factors, the characterisation of the diagnosed stalls |
 | Computed in this report | the census tool on this worktree (60 / 36,768 / 4,683, 6.3 s; 69 classes with `in_ledger: null`); `git merge-base --is-ancestor 917163641 HEAD`; the verifier blobs by `git ls-tree`; the commit list since `f0ec5b6` |
-| Read from the record and GitHub | every other count, verdict, cost, PR and issue state (16:30–17:20 UTC, 9 October) |
+| Read from the record and GitHub | every other count, verdict, cost, PR and issue state (16:30–17:20 UTC, 9 October; the later GitHub facts dated in the text come from the W2 review’s reads, 17:30–18:15 UTC) |
 | Derived here, needing review | the two-gap framing; the minimum-set statement; the ranking, the lanes and the critical path; the stop list |
 | Not done | any registered experiment; any certificate verification (no admitted object is in place); any network sweep of external repositories (`make intake` was not run); any change to the explainer, the register or a bead |
 
 Limits. The #472 projections are containment projections of masks the contributor named;
 they become census facts only after the admission round.
-The tail characterisation rests on two diagnosed states; the other 91 are unmeasured.
+The tail characterisation rests on two diagnosed states; of the other 93 surviving
+distance-2 orbits, u1 has one incomplete run and 92 have none.
 Agent-hour costs are estimates from this week’s receipts, which are lower bounds.
 The lanes assume the hosting decision is taken; without it lane E cannot start and every
 admission in lanes A and B remains a receipt.
+
+**W2 review.**
+[Factual review A](https://github.com/jlevy/squares/pull/475#pullrequestreview-5473799813)
+(9 October, reads from 17:30 to 18:15 UTC against this report’s first version and `main`
+at `6a0499ba4`) confirmed the numbers above except the following, which this version
+corrects:
+
+- **Hard tail** (the lead, §1, §2.5, C4, H-343, ideas.md): u8 closed and was admitted as
+  `s182-bc428-u8`, so it is not one of the 95. Per-state runs reach three of the 95 (u1
+  incomplete; m1964767 and m851903 at fixed points), none has closed, and the adaptive
+  recipe has run on one of them.
+  The 22 excluded distance-2 orbits are 11 by W7, 10 by `s182-bc425-t1` and 1 by u8’s
+  own certificate.
+- **H-349** is re-scoped to the 34 flagged classes on no contributor roster, at most
+  about 200 net orbits; 35 of the 69 are H-341, H-342 or H-332 targets or row 5, so
+  directions 1 and 9 are not additive ([5.1](#51-ranked)). H-342’s eligible set is 24
+  rows, listed once each, worth up to 1,283 orbits rather than about 1,000.
+- **Capture distance** (§1, §2.8) is restated on half-widths, 35 to 3,900; “90 to 4,800”
+  divided full cell widths by radii and missed the table’s own 70.
+- **H-330** (§2.8, C3, H-330’s notes): at most two exceptions needs
+  $m \lesssim 5\times10^{-4}$, not $10^{-3}$.
+- **Row cap** (§2.5, direction 2, H-343): SW9’s recipe caps rows at 1,152; 2,304 is a
+  raised cap whose one run ended INCOMPLETE at 12,000 s. H-343’s worst case is 308
+  CPU-hours plus verification, its confirm rule now carries the draw conjunct, and its
+  prerequisites include H-341.
+- **Verifier blobs** (§2.4, §2.7): the BB listings are `4224262c7` and `f1e2268d6`;
+  `651c2615c` is a kernel blob; `9dcc05bc…` is the SHA-256 of blob `c69f1ec08`. The
+  ledger has eight listings across seven commits, and the bar on `main`’s unlisted
+  verifier is the review rule, not a census refusal.
+- **Sessions 184 to 186** (§2.5, §5.4): exp-303, 304, 308 and 312 ran on all 95; the
+  owner-0-guard misses are eleven, not fifteen.
+- **Centre relaxation** (§2.6): the exact worst is mask 3079037; 3062655 is the float
+  worst.
+- **Evidence labels** lowered: the fifteen-square joint infeasibility (float,
+  inclusion-minimal), the pairwise claim on the diagnosed states (sampled support), the
+  factor of three (a heuristic ratio), and PR 410’s seven-certificate parity (reported).
+- **Dated GitHub facts**: C8 and C12 were applied to #405 at 17:12 UTC; #472 was
+  labelled `n-17` at 17:12 UTC; #413 was edited at 17:04 UTC (2 + 2 + 21 + 11 + 2); the
+  explainer’s stale counts are also at lines 59 and 441.
+- **§4** now states the premise that every non-family state’s infimum exceeds $U'$, the
+  state-induced labelling convention, and that only the unlisted `be8135f6e` supports
+  centred-cap certificates.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

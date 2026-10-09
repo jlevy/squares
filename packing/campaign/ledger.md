@@ -1243,7 +1243,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | H-346 | blocked | proof | A branch and bound over the sixteen non-free angles and the feature ch |  | 0 |  |  |
 | H-347 | blocked | proof | For each of the 45 non-slider coordinates of the local family theorem, |  | 0 |  |  |
 | H-348 | blocked | proof | An independent checker of the local family theorem's certificate data  |  | 0 |  |  |
-| H-349 | open | proof | At least 56 of the 69 flagged, uncertified selector classes that devto |  | 0 |  |  |
+| H-349 | open | proof | Of the 69 flagged, uncertified selector classes that devtools/census_n |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 

@@ -11,11 +11,12 @@ hypothesis:
   claim: >-
     Of the issue-413 rows whose only reported evidence is a branch-and-bound
     certificate checked by the contributor's fast verifier, a parallel node check, or a
-    computation without a certificate (rows 3 to 22, 26 to 28, 32, 15, 27 and 33 at the
-    38-row roster), those with at least one wall cell among their named cells close under
-    devtools/check_n17_subpattern in mode A (64 or 128 bins, SW9's adaptive rows) within
-    30 minutes of production each in at least two thirds of cases, with a certificate
-    under 100 MB that the standing kernel verifier passes in full.
+    computation without a certificate (rows 3 to 22, 26 to 28, 32 and 33 at the 38-row
+    roster, 25 rows), those with at least one wall cell among their named cells (24 rows:
+    all but row 5) close under devtools/check_n17_subpattern in mode A (64 or 128 bins,
+    SW9's adaptive rows) within 30 minutes of production each in at least two thirds of
+    cases, with a certificate under 100 MB that the standing kernel verifier passes in
+    full.
   lane: proof
   derived_from: [X-052]
   criterion:
@@ -67,8 +68,9 @@ Every arity-8 and 9 flag with a wall cell that the contributor ran closed in min
 
 **Falsifier.** Fewer than two thirds of the eligible rows close within the ceilings.
 
-**Expected information.** About a thousand more orbits of residue removed by the engine
-that works, and a measured routing rule between the two provers.
+**Expected information.** Up to about 1,300 more orbits of residue removed by the engine
+that works (3,636 to 2,353 if all 24 eligible rows close after H-341), and a measured
+routing rule between the two provers.
 
 **Limits.** Interior crowds (pattern A’s kind, issue 358’s two classes with five
 interior cells) are out of scope and stay with the branch and bound; a closure is an

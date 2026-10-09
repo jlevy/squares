@@ -5974,7 +5974,7 @@ round that names the hypothesis, control roles included.
 | [H-346](packing/campaign/hypotheses/H-346-n17-angle-bb-knuth-estimate.md) | blocked | An angle branch and bound with Taylor-at-centre LP bounds prices the outer capture bridge | 0 | — |
 | [H-347](packing/campaign/hypotheses/H-347-n17-exact-conversion-allowances.md) | blocked | The capture-to-local conversion allowances are exact and small | 0 | — |
 | [H-348](packing/campaign/hypotheses/H-348-n17-second-local-theorem-checker.md) | blocked | A second, LP-free checker reproduces the local theorem’s certificates and refuses mutants | 0 | — |
-| [H-349](packing/campaign/hypotheses/H-349-n17-flagged-class-kernel-closure.md) | open | The kernel closes most of the standing flagged, uncertified selector classes | 0 | — |
+| [H-349](packing/campaign/hypotheses/H-349-n17-flagged-class-kernel-closure.md) | open | The kernel closes most of the flagged selector classes on no contributor roster | 0 | — |
 
 ### Confirmed
 

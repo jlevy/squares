@@ -50,13 +50,16 @@ hypothesis:
     margin meets the terminal theorem's radius, direction by direction. The two softest
     directions have slopes 0.0155 and 0.088 side per radian; at m = 1e-2 the LP side
     along -omega16 reaches S* + m only at about 0.65 radians, outside every box, which
-    is why the claim exempts them. Note of 2026-10-09 (X-052): the local-side review
-    found the threshold inconsistent with the slopes it cites unless m is at most about
-    1e-3. At m = 1e-2 every angle direction has d_j = m / kappa_j at least 0.014, above
-    the 5e-3 terminal radius (the stiffest, -omega12 at 0.71 side per radian, gives
-    0.014; the wall-square angles at 0.21 to 0.55 give 0.018 to 0.048). The claim can
-    hold only when m is at or below the kernel's measured loss floor at 1/512 rows,
-    which is where the engines stop seeing anything. The criterion is left as
+    is why the claim exempts them. Note of 2026-10-09 (X-052, as corrected by its W2
+    review): the local-side review found the threshold inconsistent with the slopes it
+    cites, and the bound is m at most about 5e-4. At m = 1e-2 every angle direction has
+    d_j = m / kappa_j at least 0.014, above the 5e-3 terminal radius (the stiffest,
+    -omega12 at 0.71 side per radian, gives 0.014; the wall-square angles at 0.21 to 0.55
+    give 0.018 to 0.048). At m = 1e-3,
+    the kernel's measured loss floor at 1/512 rows, six directions still exceed 5e-3
+    (-omega16, -omega11, +omega13, -omega9, +omega10, -omega13). At most two exceptions
+    needs m at most the third-softest slope times the radius, 0.102 x 5e-3, about 5e-4:
+    below that loss floor, where the engines see nothing. The criterion is left as
     registered because no round has run; before one does, the claim should be re-scoped
     with m as the variable and the map read as d_j(m) per direction, which is the
     measurement that has value either way.
@@ -82,14 +85,18 @@ side is larger, so the map is conservative there.
 The margin $m$ is one engine’s on one state; H-325 supplies it or the scan’s four caps
 stand in for it.
 
-**Note of 2026-10-09 (X-052).** The falsifier is miscalibrated against the slopes in the
-mechanism paragraph: at $m = 10^{-2}$ the stiffest direction, $-\omega_{12}$ at $0.71$
-side per radian, is first visible at $d = 0.014$, already above the $5\times10^{-3}$
-terminal radius, and the wall-square angles ($0.21$ to $0.55$) at $0.018$ to $0.048$; so
-at that margin every angle direction is an exception, not two.
-The claim can hold only for $m \lesssim 10^{-3}$, the kernel’s measured loss floor at
-$1/512$ rows. The criterion stands as registered since no round has run; the
-recommendation in
+**Note of 2026-10-09 (X-052, as corrected by its W2 review).** The falsifier is
+miscalibrated against the slopes in the mechanism paragraph: at $m = 10^{-2}$ the
+stiffest direction, $-\omega_{12}$ at $0.71$ side per radian, is first visible at
+$d = 0.014$, already above the $5\times10^{-3}$ terminal radius, and the wall-square
+angles ($0.21$ to $0.55$) at $0.018$ to $0.048$; so at that margin every angle direction
+is an exception, not two.
+At $m = 10^{-3}$, the kernel’s measured loss floor at $1/512$ rows, six directions still
+exceed $5\times10^{-3}$ ($-\omega_{16}$, $-\omega_{11}$, $+\omega_{13}$, $-\omega_9$,
+$+\omega_{10}$, $-\omega_{13}$). At most two exceptions needs
+$m \le 0.102 \times 5\times10^{-3} \approx 5\times10^{-4}$, the third-softest slope
+times the radius, which is below that floor.
+The criterion stands as registered since no round has run; the recommendation in
 [X-052](../explorations/X-052-n17-status-survey-and-completion-plan.md) is to re-scope
 it before a round with $m$ as the variable, so the map reports $d_j(m)$ per direction.
 
