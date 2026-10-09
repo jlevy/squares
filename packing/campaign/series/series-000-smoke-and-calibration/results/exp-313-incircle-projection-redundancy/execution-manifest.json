@@ -1,0 +1,85 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_incircle_projection_redundancy",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_incircle_projection_redundancy",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": 60,
+    "fresh_seconds": 60,
+    "combined_term_seconds": 120,
+    "combined_kill_seconds": 130,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "output_bytes": 1048576
+  },
+  "criterion": "Complete exact unconditioned E_i=originalC_i intersect[1/2,U-1/2]^2 for all24 original cells, and D_ij=conv(E_j-E_i) for EVERY pair occurring in the accepted95 roster. Fixed rational inscribed octagonP with eight integer face rows(\u00b17,\u00b13)/(\u00b13,\u00b17) dot delta<=7. Primary ANY extreme D vertex strictly inside ALL eight P faces, proving a proper future convex pair constraint; ALL-vertices-outside/boundary proves H_ij=D_ij. All-pair redundancy plus nonemptyE supplies ALL95 shared-convexified-relaxation witnesses and retires THIS fixedP8 LP and a lone-pair disjunction retry. Complete all vertex-differences/hulls/eightfaces and12920 statepair accounting, original accepted308 three roles/heldcustody, fullfresh payload/source match. Positive cuts select a separately registered shared-centre LP, NEVER state exclusion/packing/admission/bound. EmptyE/refusal/resource unresolved. Prospective secondary all vertices strictinsideP selects a distinct ordinary two-cell consumer, not admission here. Exactdisk-norm checks are a separately registered future target, not a313 verdict.",
+  "registered_at": "2026-10-08T05:07:47.691018+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch"
+}

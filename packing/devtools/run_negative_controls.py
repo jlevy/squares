@@ -33,7 +33,7 @@ On APFS a snapshot uses copy-on-write cloning. Elsewhere it falls back to a plai
 of a bounded source surface: the packing tree without the literature archive or build
 products, plus the root formatter and git ignore files. The finished tree is then a git
 checkout of itself, so a check that asks git what this repository tracks is answered
-here instead of refusing; see `_index_tree`. One snapshot per worker is reused across
+here instead of refusing; see `index_tree`. One snapshot per worker is reused across
 controls; `.venv` and the cargo target are symlinked back so nothing is rebuilt.
 
 The gate can now run this step concurrently with every other step, and a control can no
@@ -109,6 +109,54 @@ ROOT = Path(__file__).resolve().parent.parent
 # corresponding subdirectory.
 REPO = ROOT.parent
 HERE = ROOT.relative_to(REPO)
+SESSION184_RESULTS = ROOT / "campaign/series/series-000-smoke-and-calibration/results"
+SESSION184_RESULT_ROOTS = frozenset(
+    SESSION184_RESULTS / name
+    for name in (
+        "exp-259-current-admitted-residue",
+        "exp-260-widened-lp-reconnaissance",
+        "exp-261-widened-feature-forcing",
+        "exp-262-widened-apex",
+        "exp-263-one-annulus-patch",
+        "exp-264-widened-apex-replay-repair",
+        "exp-265-n11-first-round-control",
+        "exp-266-current-tail-a",
+        "exp-267-continuous-soft-direction-cone",
+        "exp-268-n11-first-round-control",
+        "exp-269-positive-continuous-cone",
+        "exp-270-coarse-slider-floor",
+        "exp-271-tail-a-standing-admission",
+        "exp-272-saved-prefix-capture-adapter",
+        "exp-273-tail-a-dependency-inventory",
+        "exp-274-current-tail-b-replication",
+        "exp-275-capture-cap-root-join",
+        "exp-276-n17-numeric-cap-first-round",
+        "exp-277-numeric-checkpoint-capture",
+        "exp-278-centered-endpoint-standing",
+        "exp-279-centered-endpoint-diagnostics",
+        "exp-280-centered-endpoint-hull-capacity",
+        "exp-281-conditional-owned-hull-gate",
+        "exp-282-conditional-owned-hull-scoped-input",
+        "exp-283-parent-guard-owned-hull",
+        # Registered native-custody replication; no mutation control consumes its output.
+        "exp-284-parent-guard-native-custody",
+        "exp-285-pooled-parent-center-cases",
+        "exp-286-pooled-forbidden-cover",
+        "exp-287-pooled-relaxation-witness",
+        "exp-288-pooled-feasible-center",
+        # Registered Session185 diagnostics; synthetic controls consume no target outputs.
+        "exp-289-complete-partner-coupling",
+        "exp-290-matched-exact-replay",
+        "exp-291-complete-partner-coupling-amended",
+        # Exact selected output destinations only; source/synthetic controls use no
+        # native target outputs. Declared inline/frontier inputs still copy back.
+        "exp-292-full-square-partner-coupling",
+        "exp-293-guard-conditioned-ownership",
+        # Registered collective-coverage output, not an input to mutation controls.
+        # Its full primary receipts stay intact; inline/frontier dependencies copy back.
+        "exp-296-collective-row-coverage",
+    )
+)
 
 # Controls need the packing source, not the literature archive, the rest of the
 # repository, or build products. `resources/README.md` is copied separately because the
@@ -157,6 +205,95 @@ PRUNE = frozenset(
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
         ROOT / ".gate-running",
         ROOT / ".venv",
+        # Session186 regional receipts are generated finite outputs, absent from
+        # registered mutation commands/targets and synthetic test inputs. Keep
+        # descriptors and sibling metadata; declared inline/frontier consumers
+        # still copy these exact files back. Primary receipts remain untouched.
+        SESSION184_RESULTS / "exp-297-regional-row-coverage/certificate.json",
+        SESSION184_RESULTS / "exp-297-regional-row-coverage/replay.json",
+        # Exp300's complete one-round receipts have no registered mutation/test
+        # consumer. Preserve descriptors and primary evidence; future declared
+        # inline/frontier consumers still rescue either exact file below.
+        SESSION184_RESULTS / "exp-300-one-round-direct-regional-propagation/certificate.json",
+        SESSION184_RESULTS / "exp-300-one-round-direct-regional-propagation/replay.json",
+        # The same consumer audit applies to the completed fixed-core variant.
+        # Exact files only; its descriptor, metadata and future input copyback stay.
+        SESSION184_RESULTS
+        / "exp-301-one-round-fixed-core-regional-propagation/certificate.json",
+        SESSION184_RESULTS / "exp-301-one-round-fixed-core-regional-propagation/replay.json",
+        # Exp302's two case receipts are inputs to the primary scientific exp305
+        # launch, but no registered mutation command or synthetic test consumes
+        # their native bytes. Omit only these worker files; keep all primary
+        # evidence, descriptors and sibling metadata. Inline/frontier-declared
+        # consumers remain authoritative through exact dependency copyback.
+        SESSION184_RESULTS / "exp-302-two-child-collective-propagation/certificate.json",
+        SESSION184_RESULTS / "exp-302-two-child-collective-propagation/replay.json",
+        # Exp304's completed envelope receipts likewise have no registered CI
+        # mutation or synthetic-test consumer. Preserve primary bytes and all
+        # sibling inputs; real inline/frontier declarations still copy back.
+        # Exp305 is primary scientific evidence, with no registered mutation or
+        # actual worker-test consumer. Declared inline/frontier inputs still
+        # copy back; its descriptor and compact siblings remain selected.
+        SESSION184_RESULTS / "exp-305-case-preserving-owned-propagation/certificate.json",
+        SESSION184_RESULTS / "exp-305-case-preserving-owned-propagation/replay.json",
+        # Exp307's measured 59,412-byte receipt pair has no registered mutation
+        # or native worker-test consumer. Preserve primary proof bytes and all
+        # sibling metadata; exact inline/frontier declarations still copy back.
+        SESSION184_RESULTS / "exp-307-owned-core-guarded-clause/certificate.json",
+        SESSION184_RESULTS / "exp-307-owned-core-guarded-clause/replay.json",
+        # Exp308's completed classification outputs have no registered worker
+        # consumer. Keep primary bytes and declared dependency copy-back intact.
+        SESSION184_RESULTS / "exp-308-n11-corner-cardinality/certificate.json",
+        SESSION184_RESULTS / "exp-308-n11-corner-cardinality/replay.json",
+        # Exp309/312 generated outputs are not inputs of the new projection checks:
+        # those tools read accepted308 through their declared descriptor roles.
+        # Primary bytes and exact declared worker copyback remain authoritative.
+        SESSION184_RESULTS / "exp-309-subpattern-relevance/certificate.json",
+        SESSION184_RESULTS / "exp-309-subpattern-relevance/replay.json",
+        SESSION184_RESULTS / "exp-312-saved-pose-incircles/certificate.json",
+        SESSION184_RESULTS / "exp-312-saved-pose-incircles/replay.json",
+        # Both projection descriptors read accepted308, not these generated outputs.
+        # Keep primary receipts and declared dependency rescue unchanged.
+        SESSION184_RESULTS / "exp-313-incircle-projection-redundancy/certificate.json",
+        SESSION184_RESULTS / "exp-313-incircle-projection-redundancy/replay.json",
+        SESSION184_RESULTS / "exp-314-incircle-disk-projection/certificate.json",
+        SESSION184_RESULTS / "exp-314-incircle-disk-projection/replay.json",
+        # Historical scored-quench/trace outputs have no registered worker reader.
+        # Keep their primary evidence, metadata, log and dependency rescue unchanged.
+        SESSION184_RESULTS / "exp-204-basin-hopping/D-basin-hop.jsonl",
+        SESSION184_RESULTS / "exp-204-basin-hopping/D-multistart.jsonl",
+        SESSION184_RESULTS / "exp-204-basin-hopping/D-basin-hop.trace.jsonl",
+        SESSION184_RESULTS / "exp-204-basin-hopping/D-multistart.trace.jsonl",
+        # These historical scored-quench/incomplete-graph outputs have no worker
+        # reader. Keep all primary bytes and declared dependency rescue intact.
+        SESSION184_RESULTS / "exp-005-basin-entry.jsonl",
+        SESSION184_RESULTS / "exp-126-h099-complete-graph-candidate/packet.json",
+        SESSION184_RESULTS / "exp-304-n11-envelope-windows/certificate.json",
+        SESSION184_RESULTS / "exp-304-n11-envelope-windows/replay.json",
+        # Exp303's complete rank classification is retained as primary evidence;
+        # source tests use synthetic graphs, not these actual 95-pattern outputs.
+        SESSION184_RESULTS / "exp-303-normalized-contact-rank-filter/certificate.json",
+        SESSION184_RESULTS / "exp-303-normalized-contact-rank-filter/replay.json",
+        # The six complete exp298 replay outputs are retained diagnostic evidence,
+        # not mutation/test inputs; no gain verdict was accepted. Its README links
+        # compact journals/summary, not these files. Exact declared inputs still
+        # copy back; primary replay receipts and all operational metadata remain.
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/01-baseline.json",
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/02-candidate.json",
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/03-candidate.json",
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/04-baseline.json",
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/05-baseline.json",
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/06-candidate.json",
+        # Session186 main-refresh measurement: these five historical output roots
+        # are absent from registered control targets/commands and test consumers.
+        # Keep every inline/frontier-declared input through the existing copyback;
+        # the full original logs, journals and receipts remain in the primary tree.
+        # This is worker selection only; the portable 192 MiB cap is unchanged.
+        SESSION184_RESULTS / "agenda-037",
+        SESSION184_RESULTS / "agenda-040",
+        SESSION184_RESULTS / "bc-201-n11-tight-cell-census.json",
+        SESSION184_RESULTS / "bc-241-trump-local-theorem-review.json",
+        SESSION184_RESULTS / "exp-053-h-057-n17-parent-bound-parallel-speedup.raw",
         # These five historical stdout copies have identical Git blobs to the
         # retained scientific receipts beside them (284,187 bytes in total).
         # No registered control reads them; omit only the duplicate output, keeping
@@ -325,6 +462,16 @@ PRUNE = frozenset(
         # Keep the records, schemas and probe sources. Inline-linked or registered
         # dependencies below these roots still return through snapshot_pruned_targets.
         ROOT / "benchmarks/math-startup/runs",
+        # Historical timing receipts/JUnit remain inputs to the primary report
+        # corpus test, which no registered mutation command runs in a worker.
+        # The linked original instrument is rescued by exact target copyback.
+        ROOT / "benchmarks/validation-efficiency/runs",
+        # Historical operational checkpoint archives are not mutation-control inputs.
+        # Existing inline/register copyback retains the six referenced log/manifest/
+        # archive consumers, including both exact checkpoint-manifest fixtures. The
+        # originals remain in the primary tree. Measured worker saving: 422,654 bytes;
+        # the 192MiB cap is unchanged.
+        ROOT / "benchmarks/validation-efficiency/checkpoints",
         ROOT / "benchmarks/math-startup/fixtures",
         # Three more benchmark receipt roots join them on 2026-10-06 (PR #382), whole, so
         # the next dated census run is pruned without an edit here. The two census
@@ -389,6 +536,26 @@ PRUNE = frozenset(
         # precedence if a checked document later links either file.
         ROOT / "campaign/agent-sessions/session-106-validation" / "fast-3deb90fc.tar.gz",
         ROOT / "campaign/agent-sessions/session-152-validation" / "full-initial-diagnostic.log",
+        # The remaining Session 152 validation byproducts have no registered
+        # mutation consumer. Preserve its inline-linked PDF incident document,
+        # both PDFs and diagnostic through the authoritative dependency copy-back;
+        # the exact root saves 474,961 bytes without removing primary evidence.
+        ROOT / "campaign/agent-sessions/session-152-validation",
+        # Five historical census outputs are generated observations, not inputs to
+        # any control command or code/test reader. Their records and original JSON
+        # remain intact; future inline/frontier uses still win via copy-back.
+        # Omitting only these exact files saves 720,643 bytes. Do not prune the
+        # sibling receipts, source, or current admitted-ledger census.
+        *(
+            SESSION184_RESULTS / name / "census.json"
+            for name in (
+                "exp-253-n17-stalls-under-adaptive-rows",
+                "exp-254-n17-second-tranche-flags",
+                "exp-256-n17-third-tranche-flags",
+                "exp-257-n17-unsampled-strata",
+                "exp-258-n17-draw-31",
+            )
+        ),
         # The n=21 orbit inventory and Session 105 full-gate JSON are older generated
         # byproducts, named only in historical prose/output fields. Neither is a
         # registered result dependency, inline link, control target, or control input.
@@ -406,6 +573,11 @@ PRUNE = frozenset(
         # 117,584 bytes without omitting any SQUISH proof input or changing the cap.
         ROOT / "campaign/agent-sessions/session-105-validation/fast-cpu4-bdc28e89.json",
         ROOT / "campaign/agent-sessions/session-105-validation/fast-native-bdc28e89.json",
+        # The later Session 105 fast/push receipts are likewise historical telemetry,
+        # with no worker command reader or registered dependency. Preserve their
+        # source-identity companions and primary bytes; declared copy-back still wins.
+        ROOT / "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89.json",
+        ROOT / "campaign/agent-sessions/session-105-validation/push-0e766bfd.json",
         # Agenda 024's commissioning outputs and its two manager roots are retained
         # research evidence, not mutation-control inputs. Long numerical logs and warm
         # states can grow while the gate is running; copying them into every private
@@ -426,11 +598,74 @@ PRUNE = frozenset(
         # whole; linked Markdown still returns through `linked_pruned_targets`.
         ROOT / "campaign/explorations/X048-session-167-pilots",
         ROOT / "campaign/explorations/X048-session-168-pilots",
+        # Restore PR 360's reviewed Session 169--179 output selection (93a6839ca).
+        # These research folders are not mutation targets or registered commands;
+        # inline-linked documents and frontier dependencies still return unchanged.
+        # The current selector saves about 2.12 MB after dependency copy-back.
+        *(
+            ROOT / "campaign/explorations" / name
+            for name in (
+                "X048-session-169-pilots",
+                "X048-session-170-compatibility",
+                "X048-session-171-raw-row-support",
+                "X048-session-172-capacity-support",
+                "X048-session-174-core-refinement",
+                "X048-session-175-enhanced-support",
+                "X048-session-176-owner-priority",
+                "X048-session-177-cached-collision",
+                "X048-session-178-full-core-ablation",
+                "X048-session-179-selective-halving",
+            )
+        ),
+        # Historical charge-floor output is not a mutation target or command input.
+        # Preserve its 171,885 bytes in the primary tree; existing exact dependency
+        # copy-back remains authoritative if a reader later names it. This restores
+        # snapshot headroom after the final Session184 source, without raising192MiB.
+        SESSION184_RESULTS / "exp-243-n17-charge-floor-pilot",
+        # These earlier exact n17 outputs are consumed by their scientific checkers,
+        # not by the commands or targets in controls.yaml. Retain every primary object
+        # in the repository; omit only unreferenced output from private workers.
+        # Existing inline/frontier copy-back retains declared dependencies and saves
+        # about 1.10 MB net across these three roots. Together with the Session 184
+        # selection below, the measured payload is 200,734,132 bytes, 592,460 below
+        # the unchanged 192 MiB cap. Seven focused selector/mutation-harness controls
+        # pass; this measurement does not claim a full runtime trace or all controls.
+        SESSION184_RESULTS / "exp-242-n17-core-stress",
+        SESSION184_RESULTS / "exp-244-n17-local-minimum",
+        SESSION184_RESULTS / "exp-248-n17-local-half-composition",
         # Session 182's receipts (6.76 MB of kernel, census and ledger JSON) took the
         # snapshot to 202,054,385 bytes against the cap on 2026-10-06. Same reason as the
         # two above: research outputs no control names, read only by the census over a
         # ledger that is itself pruned; linked Markdown and directories still return.
         ROOT / "campaign/explorations/X048-session-182-overnight",
+        # Session 184's new result roots are not mutation-control targets or command
+        # inputs. The whole-suite control deliberately refuses missing testpaths before
+        # collection; the retained-JSON control checks only t007-consumer-audit.json,
+        # whose explicit-path mode skips exemption staleness. Thus exp-262's frozen
+        # failed-encoding object remains unchanged in Git without being needed in that
+        # worker. No fresh proof or producer target runs inside a mutation worker.
+        #
+        # On 2026-10-07 the live source snapshot reached 299,613,601 bytes; exp-268's
+        # saved objects and checkpoint alone contribute most of its 71,955,873 bytes.
+        # Omit these output roots, including known in-flight destinations, while keeping
+        # every inline-linked or frontier-registered dependency through the existing
+        # copy-back. The exp-259 complete roster returns. This removes fresh numerical
+        # and exact objects from private workers, not from the repository, and leaves
+        # the 192 MiB ceiling unchanged; the baseline selection restores measured
+        # headroom for think-t1lk.
+        *SESSION184_RESULT_ROOTS,
+        # The n11 readiness objects moved to this canonical retained home after the
+        # result-root prune. Its three objects total 48,571,561 bytes and no dependency
+        # currently returns from it. Omit only this exact root from private snapshots;
+        # primary objects, manifest indexes and declared-dependency copy-back stay intact.
+        ROOT / "campaign/retained/session-184-n11-readiness",
+        # Hosted dependency DAGs are not mutation inputs. Inline README and
+        # manifest links still use the existing exact target copyback contract.
+        ROOT / "campaign/retained/session-184-tail-a-dependencies",
+        # Numeric-cap readiness objects are checked only by registered scientific
+        # intake, not synthetic mutation workers. Preserve primary hosted evidence
+        # and the existing README/manifest-linked exact dependency copyback.
+        ROOT / "campaign/retained/session-184-n17-numeric-cap-readiness",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-024",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-025",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-026",
@@ -697,6 +932,18 @@ LINK_BACK = (
 # closeout naming `.github/PULL_REQUEST_TEMPLATE.md`, which only a link could bring
 # into a worker. Both checkers were red before any mutation was applied.
 COPY_SEPARATELY = (
+    # The retained n13 family is an exact worker consumer asserted by the n32
+    # inventory contract; agenda-040's unrelated generated bulk stays pruned.
+    SESSION184_RESULTS / "agenda-040/exp-214-n13-399-100-family.json",
+    # Preserve the scientific inputs promised by the historical snapshot contract
+    # even when their records mention them in commands rather than inline links.
+    # Their generated profile/endpoint outputs remain under the existing prunes.
+    ROOT
+    / "campaign/explorations/X048-session-177-cached-collision/receipts"
+    / "J-fixed-tuple-certificate.json",
+    ROOT
+    / "campaign/explorations/X048-session-178-full-core-ablation/receipts"
+    / "B-ablation-packet.json",
     *second.private_input_paths(),
     *refinements.private_input_paths(),
     *ryxu.private_input_paths(),
@@ -1077,6 +1324,23 @@ def _linked_documents() -> list[Path]:
     return documents
 
 
+def _link_needs_private_target(document: Path, target: Path) -> bool:
+    """Rescue historical browser outputs only for a link a worker actually checks.
+
+    The math-startup run root is already pruned: its reporter and Pages jobs read
+    these observations, but no registered mutation command does. A root review's
+    links copied its two PDFs and frozen HTML back into every worker anyway. The
+    registered link checks read README/SYNOPSIS and campaign Markdown; a link to a
+    review checks its existence or heading, without following that review's links.
+    Keep other rescue surfaces, explicit custody and result registration unchanged.
+    """
+    return (
+        not target.is_relative_to(ROOT / "benchmarks/math-startup/runs")
+        or document in {REPO / "README.md", REPO / "SYNOPSIS.md"}
+        or document.is_relative_to(ROOT / "campaign")
+    )
+
+
 def linked_pruned_directories() -> list[Path]:
     """Pruned directories the checked documents link to inline, resolved and existing.
 
@@ -1092,7 +1356,11 @@ def linked_pruned_directories() -> list[Path]:
     for document in _linked_documents():
         for raw in INLINE_LINK.findall(document.read_text(errors="ignore")):
             resolved = (document.parent / raw).resolve()
-            if resolved.is_dir() and in_pruned_roots(resolved, roots):
+            if (
+                resolved.is_dir()
+                and in_pruned_roots(resolved, roots)
+                and _link_needs_private_target(document, resolved)
+            ):
                 directories.add(resolved)
     return sorted(directories)
 
@@ -1118,7 +1386,11 @@ def linked_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
     for document in _linked_documents():
         for raw in INLINE_LINK.findall(document.read_text(errors="ignore")):
             resolved = (document.parent / raw).resolve()
-            if resolved.is_file() and in_pruned_roots(resolved, selected_roots):
+            if (
+                resolved.is_file()
+                and in_pruned_roots(resolved, selected_roots)
+                and _link_needs_private_target(document, resolved)
+            ):
                 targets.add(resolved)
     return sorted(targets)
 
@@ -1366,7 +1638,11 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
     for document in documents:
         for raw in INLINE_LINK.findall(texts[document]):
             path = (document.parent / raw).resolve()
-            if path in inventory and in_pruned_roots(path, roots):
+            if (
+                path in inventory
+                and in_pruned_roots(path, roots)
+                and _link_needs_private_target(document, path)
+            ):
                 rescued.add(path)
     register_value = safe_load(texts[register])
     for record in register_value["results"]:
@@ -1409,7 +1685,7 @@ def snapshot_git_source_bytes(revision: str = "HEAD") -> int:
     return sum(snapshot_git_source_inventory(revision).values())
 
 
-def _index_tree(root: Path) -> None:
+def index_tree(root: Path) -> None:
     """Make the finished snapshot a git checkout of itself, so it has an index to ask.
 
     Several checks answer "what does this repository hold?" with
@@ -1426,8 +1702,9 @@ def _index_tree(root: Path) -> None:
     is why the refusal is what was seen and the fallback half was still latent. Adopting
     that question in a fourth check should not have to come with reading this file.
 
-    `git init` and `git add -A` over the finished tree, which is what
-    `tests/test_check_archive_annotations.py` already does for the same reason. No
+    `git init` and add only the source repository's tracked paths that survived the
+    copy. Untracked research outputs and scratch must not become tracked merely
+    because they exist on disk. No
     commit: `git ls-files --cached` reads the index, and writing a tree object would
     cost time and buy nothing. Called after the build-cache sweep and before the
     symlinks, so neither a cache nor the linked-back `.venv` is indexed as this
@@ -1445,9 +1722,32 @@ def _index_tree(root: Path) -> None:
     environment = {
         name: value for name, value in os.environ.items() if not name.startswith("GIT_")
     }
-    for arguments in (("init", "-q"), ("add", "-A")):
+    source_paths = tracked_files(REPO, ".", environment=environment)
+    if source_paths is None:
+        raise ValueError("cannot index worker snapshot without the source tracked set")
+    names = [
+        path.relative_to(REPO).as_posix()
+        for path in source_paths
+        if (root / path.relative_to(REPO)).is_file()
+    ]
+    subprocess.run(
+        ("git", "-C", str(root), "init", "-q"),
+        check=True,
+        capture_output=True,
+        env=environment,
+    )
+    if names:
         subprocess.run(
-            ("git", "-C", str(root), *arguments),
+            (
+                "git",
+                "-C",
+                str(root),
+                "add",
+                "-f",
+                "--pathspec-from-file=-",
+                "--pathspec-file-nul",
+            ),
+            input=b"".join(os.fsencode(name) + b"\0" for name in names),
             check=True,
             capture_output=True,
             env=environment,
@@ -1481,7 +1781,7 @@ def clone_tree(dest: Path) -> None:
     # none of the real checkout: `.venv` alone holds 147 `__pycache__` directories that
     # are not this clone's to delete.
     _strip_build_caches(dest)
-    _index_tree(dest)
+    index_tree(dest)
 
     for rel in LINK_BACK:
         source = ROOT / rel
@@ -1521,6 +1821,9 @@ def control_environment(tree: Path, pycache: Path) -> dict[str, str]:
     """
     work = tree / HERE
     env = os.environ.copy()
+    # Registry commands spell python/python3: use the interpreter running this
+    # harness, including an external frozen environment, rather than the shell's.
+    env["PATH"] = str(Path(sys.executable).parent) + os.pathsep + env.get("PATH", "")
     # The parent owns the control journal, and a nested gate must not start a
     # second artifact capture inside a snapshot.
     env.pop("PACKING_VALIDATION_ARTIFACT_DIR", None)

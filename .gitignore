@@ -27,6 +27,7 @@ packing/.gate-running
 
 # Sub-agent worktrees, created by the harness inside the repo.
 .claude/worktrees/
+.worktrees/
 
 # Rendered by devtools/render_certificate_page.py and deployed by the pages workflow.
 /packing/site/
@@ -51,4 +52,25 @@ packing/atlas/known-best/video/spikes/**/frames/
 # The README files and verification receipts in the same directories are tracked.
 /packing/campaign/explorations/X048-session-168-pilots/certificates/*/*.json.gz
 
+# Session184 native proof/control objects, retained as manifest-checked release assets.
+/packing/campaign/retained/session-184-n11-readiness/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-266-current-tail-a/tail-a-objects/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-268-n11-first-round-control/checkpoints/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-268-n11-first-round-control/*-objects/*.json.gz
+
+# Complete exp273 dependency DAG reports are retained verbatim and hosted compressed.
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/inventory.json
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/fresh-inventory.json
+/packing/campaign/retained/session-184-tail-a-dependencies/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/tail-b-objects/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/endpoint-prefix-objects/.accepted-prefix-steps.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-276-n17-numeric-cap-first-round/checkpoints/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-276-n17-numeric-cap-first-round/production-objects/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-276-n17-numeric-cap-first-round/replay-objects/*.json.gz
+/packing/campaign/retained/session-184-n17-numeric-cap-readiness/*.json.gz
+
+# H293 conditional proof child: native object, preserved outside Git; custody below.
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-283-parent-guard-owned-hull/conditional-node.json.gz
+
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/conditional-node.json.gz
 packages/workbench/node_modules

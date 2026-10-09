@@ -1,0 +1,18 @@
+{
+  "draft": false,
+  "registration_owner": "root",
+  "hypothesis": "H-284",
+  "experiment": "exp-269",
+  "cwd": "/Users/levy/wrk/github/squares/packing",
+  "commands": {"generation":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3","-m","devtools.check_n17_widened_positive_cone","--features","campaign/series/series-000-smoke-and-calibration/results/exp-261-widened-feature-forcing/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-269-positive-continuous-cone/certificate.json"],"fresh_replay":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3","-m","devtools.check_n17_widened_positive_cone","--features","campaign/series/series-000-smoke-and-calibration/results/exp-261-widened-feature-forcing/certificate.json","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-269-positive-continuous-cone/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-269-positive-continuous-cone/replay.json"]},
+  "scientific_combined_wall_seconds": 180,
+  "no_target_run": true,
+  "supervisor_freeze": "One owned gtimeout process encloses generation followed by a fresh Python replay, TERM180seconds/KILL190seconds; generation/replay share this deadline. Required external scratch variables and logs frozen; no scientific threshold or retry change.",
+  "premises": {"accepted_root":"packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json","accepted_features":"packing/campaign/series/series-000-smoke-and-calibration/results/exp-261-widened-feature-forcing/certificate.json","fresh_recheck":true,"H279_required":false,"H283_negative_cone_required":false,"container":"[0,S*]^2","slider_box":[["0","1/4"],["-1/2500","1/12"],["-1/8","1/16"]],"position_radius":"1/100","root_domain":"entire checked accepted inclusion R"},
+  "domain": {"radial_closed_checked":["0","1/200"],"excluded":"0<r<=1/200","q16":"+r","small_labels":[1,2,3,8,11,12,13,14,17],"small_bound":"r/128","free_labels":[4,5,7,9,10,15],"free_interval":["-1/200","1/200"],"endpoint_excluded":false},
+  "criteria": {"weighted_rows":17,"walls":7,"pairs":10,"full_pairs":19,"options":27,"raw_branches":256,"H_upper":"-1/2","M_upper":"50","margin_gamma":"11197999975/102405120064","F2_F3_exact_root_join":true,"cubic_degree":3,"interval_division_by_r":false,"strict_signs":["c","s","d_r","e_r","alpha_r","gamma_r","F2_denominator","F3_denominator"],"nonnegative_multipliers":17,"wall_mass":"sum7walls","ordinary_pair_mass":"c*e_r*alpha_r/s+s+3*e_r*alpha_r/s+2","M+":"W+(24/5)*P+19/5+gamma_r+alpha_r","special_pair_owners":{"8/16":[16,"q",-1],"12/16":[12,"u",1],"16/17":[16,"p",1]}},
+  "acceptance": "Both generated checker and NEW fresh replay must cone_certified=true; verification_passed alone does not accept honest inconclusive bounds. Reconstructed input/domain/recipe/interval/margin joins must agree.",
+  "assurance": "Astra hand derivation; not independently mathematically reviewed or machine-checked. Finite symbolic/interval checks are separate from this implication.",
+  "scope": "One conditional positive punctured cone times six free angle coordinates; r=0 retained; no global/fullannulus/capture/tree/ledger admission.",
+  "environment": {"TMPDIR":"/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/tmp","UV_CACHE_DIR":"/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/uv-cache","CARGO_TARGET_DIR":"/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/cargo","UV_PROJECT_ENVIRONMENT":"/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv","PYTHONDONTWRITEBYTECODE":"1"}
+}

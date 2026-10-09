@@ -1,0 +1,9 @@
+{
+  "schema": "n17-n11-envelope-representation-context/v1",
+  "prior_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/descriptor.json",
+  "prior_descriptor_sha256": "16f313a95d31484dacec6107dd6ad2c4334aaf4dd456a1e3a31ce51ee8b4bfc5",
+  "prior_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/certificate.json",
+  "prior_certificate_sha256": "4cc1ccc5847864583552b0845f2e5dda3bae57f2994588b0855822c1bf41e96d",
+  "prior_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/replay.json",
+  "prior_replay_sha256": "c94cc761dbbdc5af72ccb92542c885c976d3c9150357fbcb64d5507f6d4f9a6a"
+}

@@ -1045,6 +1045,11 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_actual_worker_keeps_full_scientific_inputs_and_refuses_producers",
             "test_confirmation_preserves_complete_scope_history_and_lower_lanes",
         },
+        # Hosted run 37639254949, 2026-10-07: 82.51s uncached call. The fast
+        # controls use the retained symbolic packet; this node rebuilds its identities.
+        "test_check_n17_widened_positive_cone.py": {
+            "test_exact_symbolic_root_joins_cubic_and_weighted_incidence",  # 82.51s
+        },
         # Hosted run36864534354/job110376645051,2026-10-01:31.66s call time.
         # Exact symbolic reconstruction/normalizations; eight fast controls stay in PR CI.
         "test_n17_endpoint_feasibility.py": {

@@ -1,0 +1,92 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.inspect_n17_subpattern_relevance",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/descriptor.json",
+        "--max-seconds",
+        "30",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.inspect_n17_subpattern_relevance",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/descriptor.json",
+        "--max-seconds",
+        "30",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "60",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": 30,
+    "fresh_seconds": 30,
+    "combined_term_seconds": 60,
+    "combined_kill_seconds": 70,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "output_bytes": 67108864
+  },
+  "criterion": "Complete exact named-D4 subset projection for BOTH C1/C2 against accepted4683 currentorbits/36768states, with separate95distance-two accounting, orbit-size weighting and deduplicatedunion/overlap. Fresh completepayload/custody mustmatch. Primary anypositive candidate coverage in the currentordinary residue selects a joint FULL-BB replay candidate; allzero retires these packages for this residue. Coverage is metadata potential only, NEVER an exclusion, source-domain theorem, fulltree verification or ledgeradmission. Explicitmissing scope joins remain unverified; missing B/frame headerfields can be discharged by a later proper standingverifier source convention. No SciPy/censusregeneration and no upstreamtimingforecast.",
+  "registered_at": "2026-10-08T03:37:22.570304+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch",
+  "finite_caps": {
+    "candidates": 16,
+    "subset_comparisons": 1000000,
+    "compressed_manifest_bytes": 1048576,
+    "decoded_manifest_bytes": 10485760,
+    "output_bytes": 67108864
+  }
+}

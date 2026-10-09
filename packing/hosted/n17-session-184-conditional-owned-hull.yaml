@@ -1,0 +1,16 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+repository: jlevy/squares
+tag: data/n17-session-184-conditional-owned-hull-v1
+objects:
+- path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/conditional-node.json.gz
+  asset: conditional-node-556009919973a061def98fb9408a9eee6b696f560876ba7d3b91f4b197774591.json.gz
+  size: 23781150
+  sha256: 6d30dd75d3db88f85768d726f9c1f79db5614c8df41944c7905e11c66a0f649a
+description: 'Native H293 exp284 complete16-owner conditional producer candidate. Fresh
+  independent replay stopped at its300-second ceiling; the child is not accepted.
+  Retained for reproduction of the resource failure, with no conditional exclusion,
+  census admission or global optimality claim. Publication and clean recovery remain
+  unverified.'
