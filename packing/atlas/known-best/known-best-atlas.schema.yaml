@@ -70,9 +70,9 @@ properties:
                 width: {const: 2400}
                 height: {const: 1256}
       # The poster: square-bound rows start at (k-1)**2 + 1 in the leftmost column. Eighteen
-      # logical rows contain up to thirty-five cards. Splitting the final four grid
-      # suffixes creates twenty-two physical lines in a twenty-seven-column envelope,
-      # with 79 units of extra separation between non-grid and grid segments. One
+      # logical rows contain up to thirty-five cards. Splitting the final two grid
+      # suffixes creates twenty physical lines in a thirty-one-column envelope, at a
+      # uniform 252-unit pitch. Inline groups have 79 units of extra horizontal air. One
       # raster and no link-preview crop, which is why only `png_preview` is pinned
       # here; a second raster would be a change to the specification and to this
       # clause, never a file that quietly appeared.
@@ -89,15 +89,15 @@ properties:
               type: object
               required: [width, height]
               properties:
-                width: {const: 6523}
-                height: {const: 6090}
+                width: {const: 7435}
+                height: {const: 5270}
             png_preview:
               type: object
               required: [scale, width, height]
               properties:
                 scale: {const: 1}
-                width: {const: 6523}
-                height: {const: 6090}
+                width: {const: 7435}
+                height: {const: 5270}
   entries:
     type: array
     minItems: 1

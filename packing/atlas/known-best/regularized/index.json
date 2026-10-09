@@ -697,7 +697,7 @@
     {
       "n": 211,
       "status": "regularized",
-      "source": {"witness":"packing/witnesses/known-best/n-211.yaml","id":"W-known-best-n211","scalar_kind":"decimal","sha256":"c7d3d7cba1825732e03c575430b0d48fd241eeb32a4f146f9d3f4575b7666612"},
+      "source": {"witness":"packing/witnesses/known-best/n-211.yaml","id":"W-known-best-n211","scalar_kind":"decimal","sha256":"d3113fa992465496951ffe1062dbb1c0ffe832f81bbcd8a5e8f6934f26d44174"},
       "exact_frame": {
         "derivation": "the 36-digit rational pose at centre dilation 1, the first candidate promote_rational tries and the procedure upper_bound_packets certify uses, verified exactly in process; isometry-derived atlas orientation",
         "retained_certificate": "packing/witnesses/de-winter-2026/n-211-rational.yaml.gz",
@@ -705,10 +705,10 @@
         "ancestor_matches_retained_certificate": true,
         "geometry_transform": {
           "kind": "container-isometry",
-          "operation": "reflect-x-axis",
-          "map": {"x":"x","y":"side - y","angle":"-angle"},
+          "operation": "reflect-y-axis",
+          "map": {"x":"side - x","y":"y","angle":"-angle"},
           "orientation": "negated principal angle; signed zero normalized; CCW corners",
-          "reference_n": 182,
+          "reference_n": 241,
           "recorded_at": "2026-10-08",
           "parent": {"path":"packing/resources/web/de-winter-square-packing-211-2026-09-16/facts/n-211.yaml","id":"W-de-winter-n211","atlas_receipt_before_transform":{"operation":"check","id":"W-known-best-n211","coordinate_provenance":"numerically-checked","method":"numerical-multiprecision","precision":{"decimal_digits":120,"rounding":"nearest"},"tolerance":"1e-12","check_passed":true,"n":211,"pairs_tested":22155,"minimum_containment_clearance":"1.468054023042309978822924367438807665347e-14","minimum_best_pair_gap":"2.28523417867124831761407972430042491365e-14","failures":[],"limitations":"Finite-precision evidence only. A small tolerance, including 1e-100, does not establish exact feasibility or optimality."}},
           "claim": "An isometry of the retained arrangement, preserving all packing bounds and scientific assurance."
@@ -719,7 +719,7 @@
       "non_regression": {"rounds":1,"held_slides":0,"held_pose":0,"residual_regressions":{"house":0,"stage":0}},
       "side": {"reported":"14.99796070496771500150","view_minus_reported":"-2.100e-14","fits_reported_side":true},
       "changed_squares": 137,
-      "view": {"path":"packing/atlas/known-best/regularized/n-211-regularized.yaml.gz","sha256":"295f6f7fab5a1358d11d584bbc43ae454aa9421bfb0c2e84cde0bf4ea31ab42a"},
+      "view": {"path":"packing/atlas/known-best/regularized/n-211-regularized.yaml.gz","sha256":"7cc0a7d0d243352e878f59e0b10beffd3ec45f8ee30e858d64fac35df06a10d5"},
       "shades": {"house":{"green_before":137,"light_before":45,"green_after":137,"light_after":35},"stage":{"green_before":138,"light_before":36,"green_after":138,"light_after":36}},
       "exact_verification": {"repository_verifier":true,"independent_checker":true,"pairs_tested_independently":22155,"passed":true}
     },
