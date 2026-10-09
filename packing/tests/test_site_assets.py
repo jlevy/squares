@@ -222,6 +222,7 @@ def test_linked_publication_preloads_only_its_front_faces_once_before_styles(
         site_assets.preload_tags(bundle.assets, page_path),
     )
     assert len(expected) == len(site_assets.PRELOADED_FACES)
+    assert len(expected) == len(set(expected))
     # Prose variables need the italic face before first layout, just as surrounding
     # prose and navigation need their upright faces.
     for face_name in (

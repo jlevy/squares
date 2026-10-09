@@ -54,7 +54,6 @@ PRELOADED_FACES = (
     "pt-serif-latin-400-normal.woff2",
     "pt-serif-latin-400-italic.woff2",
     "source-sans-3-latin-wght-normal.woff2",
-    "pt-serif-latin-400-italic.woff2",
     "pt-serif-latin-700-normal.woff2",
 )
 
