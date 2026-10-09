@@ -12421,11 +12421,13 @@ results:
     kind: upper-bound
     registered: '2026-10-07'
     headline: Reported `s(102) ≤ alpha_102` with a degree-8 exact side form
-    claim: Evan Daniel reports s(102) <= alpha_102, where alpha_102 is the feasible side of the source
-      configuration and the selected root of the degree-8 integer polynomial in reported-catalogue.json,
-      new_form_claims.102, with its retained rational root interval. The same source asserts that this
-      polynomial is minimal; that additional algebraic assertion has not been independently established
-      here.
+    claim: >-
+      Evan Daniel reports s(102) <= alpha_102, where alpha_102 is the feasible side of the source
+      configuration and the selected root of the degree-8 integer polynomial in
+      reported-catalogue.json, new_form_claims.102, with its retained rational root interval,
+      whose ends agree to 24 places, so s(102) <= 10.607174680176051125342523… The same source asserts that
+      this polynomial is minimal; that additional algebraic assertion has not been
+      independently established here.
     scope:
       n_values:
       - 102
@@ -12459,11 +12461,13 @@ results:
     kind: upper-bound
     registered: '2026-10-07'
     headline: Reported `s(106) ≤ alpha_106` with a degree-32 exact side form
-    claim: Evan Daniel reports s(106) <= alpha_106, where alpha_106 is the feasible side of the source
-      configuration and the selected root of the degree-32 integer polynomial in reported-catalogue.json,
-      new_form_claims.106, with its retained rational root interval. The same source asserts that this
-      polynomial is minimal; that additional algebraic assertion has not been independently established
-      here.
+    claim: >-
+      Evan Daniel reports s(106) <= alpha_106, where alpha_106 is the feasible side of the source
+      configuration and the selected root of the degree-32 integer polynomial in
+      reported-catalogue.json, new_form_claims.106, with its retained rational root interval,
+      whose ends agree to 24 places, so s(106) <= 10.822908044132847555086207… The same source asserts that
+      this polynomial is minimal; that additional algebraic assertion has not been
+      independently established here.
     scope:
       n_values:
       - 106
@@ -12497,11 +12501,13 @@ results:
     kind: upper-bound
     registered: '2026-10-07'
     headline: Reported `s(152) ≤ alpha_152` with a degree-40 exact side form
-    claim: Evan Daniel reports s(152) <= alpha_152, where alpha_152 is the feasible side of the source
-      configuration and the selected root of the degree-40 integer polynomial in reported-catalogue.json,
-      new_form_claims.152, with its retained rational root interval. The same source asserts that this
-      polynomial is minimal; that additional algebraic assertion has not been independently established
-      here.
+    claim: >-
+      Evan Daniel reports s(152) <= alpha_152, where alpha_152 is the feasible side of the source
+      configuration and the selected root of the degree-40 integer polynomial in
+      reported-catalogue.json, new_form_claims.152, with its retained rational root interval,
+      whose ends agree to 24 places, so s(152) <= 12.830718800976609954865516… The same source asserts that
+      this polynomial is minimal; that additional algebraic assertion has not been
+      independently established here.
     scope:
       n_values:
       - 152
@@ -12535,11 +12541,13 @@ results:
     kind: upper-bound
     registered: '2026-10-07'
     headline: Reported `s(177) ≤ alpha_177` with a degree-32 exact side form
-    claim: Evan Daniel reports s(177) <= alpha_177, where alpha_177 is the feasible side of the source
-      configuration and the selected root of the degree-32 integer polynomial in reported-catalogue.json,
-      new_form_claims.177, with its retained rational root interval. The same source asserts that this
-      polynomial is minimal; that additional algebraic assertion has not been independently established
-      here.
+    claim: >-
+      Evan Daniel reports s(177) <= alpha_177, where alpha_177 is the feasible side of the source
+      configuration and the selected root of the degree-32 integer polynomial in
+      reported-catalogue.json, new_form_claims.177, with its retained rational root interval,
+      whose ends agree to 23 places, so s(177) <= 13.82297973416944860009365… The same source asserts that
+      this polynomial is minimal; that additional algebraic assertion has not been
+      independently established here.
     scope:
       n_values:
       - 177
