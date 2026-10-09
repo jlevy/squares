@@ -182,8 +182,7 @@
   max-inline-size: 100%;
   overflow-x: auto;
 }
-.site-result-bounds > [role="row"],
-.site-result-cases > [role="row"] {
+.site-result-bounds > [role="row"] {
   display: contents;
 }
 .site-result-bounds > [role="row"] > * {
@@ -202,46 +201,48 @@
 }
 
 /* ---------- A broad result's cases ----------
-   One compact row per case in a box that scrolls, the two bounds in the film's colours:
-   a grid with table roles, its headings held at the top of the box. */
+   Native row spans share identical consecutive bounds and badges while preserving all
+   six cells of every case. The headings stay at the top of the scrolling box. */
 .site-result-case-list {
   border: 1px solid var(--kpress-doc-border);
   max-block-size: 19rem;
   overflow: auto;
 }
-.site-result-cases {
-  display: grid;
+.kpress .site-result-cases {
+  background: var(--kpress-doc-bg);
+  border-collapse: collapse;
+  font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
   font-variant-numeric: tabular-nums;
-  grid-template-columns: repeat(5, max-content) minmax(max-content, 1fr);
+  font-weight: var(--site-font-weight-sans-light);
+  margin: 0;
+  text-transform: none;
 }
-.site-result-cases > [role="row"] > * {
+.kpress .site-result-cases :is(th, td) {
   border-block-end: 1px solid var(--kpress-doc-border);
   padding: 0.25rem 0.8rem;
+  text-align: end;
+  vertical-align: top;
   white-space: nowrap;
 }
-.site-result-cases > [role="row"] > .num {
-  text-align: end;
-}
-.site-result-cases [role="columnheader"] {
+.kpress .site-result-cases th {
   background: var(--kpress-doc-bg);
   color: var(--site-support-color);
   font-weight: var(--site-font-weight-sans-medium);
   inset-block-start: 0;
   position: sticky;
 }
-.site-result-cases .is-lower {
+.kpress .site-result-cases :is(th:nth-child(n + 5), td:has(> .site-chip), .records) {
+  text-align: start;
+}
+.site-result-cases .lower {
   color: var(--site-bound-lower);
 }
-.site-result-cases .is-upper {
+.site-result-cases .upper {
   color: var(--site-bound-upper);
 }
 .site-result-cases .site-star {
   margin-inline-start: 0.25rem;
-}
-.site-result-case-records {
-  display: flex;
-  gap: 0.7rem;
 }
 
 /* ---------- The chain ----------
@@ -296,8 +297,12 @@
   display: block;
 }
 
+.site-result-cases .records a + a {
+  margin-inline-start: 0.7rem;
+}
+
 @media (max-width: 40rem) {
-  .site-result-cases > [role="row"] > * {
+  .kpress .site-result-cases :is(th, td) {
     padding-inline: 0.45rem;
   }
 }

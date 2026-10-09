@@ -9,6 +9,8 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-07-refinement-custody-closure.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-refinement-host-rebind.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/site-urls.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: docs/project/reviews/review-2026-10-07-fibonacci-torus-algebra.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-fibonacci-torus-geometry.md, role: review, authority: record, lifecycle: retained}
@@ -28,6 +30,8 @@ documents:
   - {path: docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-n11-threshold-bound-review.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-karakus-proposition-5-1-machine-check.md, role: review, authority: record, lifecycle: retained}
@@ -1145,6 +1149,10 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md, role: research-report, authority: record, lifecycle: retained}
+  - path: docs/project/reviews/review-2026-10-08-evand-new-arrangements.md
+    role: review
+    authority: record
+    lifecycle: retained
 collections:
   - pattern: packing/benchmarks/math-startup/experiments/*.md
     role: experiment-record
@@ -1229,6 +1237,6 @@ exclusions:
       GitHub math probe `devtools.check_github_math --probe` fetches: not documents.
   - pattern: packing/devtools/templates/*.md
     reason: >-
-      Templates for devtools.render_n11_lower_bounds_explainer and devtools.render_verifiable_claim:
-      Markdown with placeholders and stamping markers, not documents. The rendered page
-      and the generated claim documents are the documents.
+      Manuscripts and templates for the paper, site and claim renderers:
+      Markdown with placeholders and stamping markers. The rendered papers and pages
+      and the generated claim documents are the published documents.

@@ -1,0 +1,96 @@
+[
+  {
+    "n": 105,
+    "reported": {
+      "algebraic_degree": null,
+      "analytically_optimized": null,
+      "catalogue_pictured": true,
+      "catalogue_rigid": "not-stated",
+      "construction_method": "unknown",
+      "evidence": [
+        "E-franciscouzo-2026-09-27-report"
+      ],
+      "exact_form": null,
+      "found_by": [
+        "Francisco Couzo"
+      ],
+      "found_year": 2026,
+      "improved_by": [],
+      "minimal_polynomial": null,
+      "retrieved_date": "2026-09-29",
+      "source_date": "2026-09-26",
+      "source_key": "[franciscouzo square-packing 2026-09-27]",
+      "tilt_angles_deg": null,
+      "value": "10.806077865540567",
+      "witnesses": [
+        "W-known-best-n105"
+      ]
+    },
+    "rigidity": {
+      "assurance": "numerically-checked",
+      "certificate": "atlas/known-best/translation-escape-screen.json",
+      "evidence": [
+        "E-translation-escape-not-rigid"
+      ],
+      "method": "numerical-multiprecision",
+      "property": "not-rigid",
+      "replay": "uv run --frozen --all-extras --group dev python -m devtools.screen_translation_escape --check",
+      "scope": "Square 3 of the retained witness (witness id 4) translates 0.171495 along (-1, 0) with the packing still valid, so the configuration admits a non-trivial feasible motion; 24 of its 105 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former."
+    },
+    "verified": {
+      "evidence": [
+        "E-franciscouzo-2026-09-27-exact-replay",
+        "E-franciscouzo-2026-09-27-interval-replay"
+      ],
+      "exact_form": "1350759733192571/125000000000000",
+      "value": "10.806077865540568"
+    }
+  },
+  {
+    "n": 292,
+    "reported": {
+      "algebraic_degree": null,
+      "analytically_optimized": null,
+      "catalogue_pictured": true,
+      "catalogue_rigid": "not-stated",
+      "construction_method": "unknown",
+      "evidence": [
+        "E-franciscouzo-2026-09-27-report"
+      ],
+      "exact_form": null,
+      "found_by": [
+        "Francisco Couzo"
+      ],
+      "found_year": 2026,
+      "improved_by": [],
+      "minimal_polynomial": null,
+      "retrieved_date": "2026-09-29",
+      "source_date": "2026-09-27",
+      "source_key": "[franciscouzo square-packing 2026-09-27]",
+      "tilt_angles_deg": null,
+      "value": "17.597249391199519",
+      "witnesses": [
+        "W-known-best-n292"
+      ]
+    },
+    "rigidity": {
+      "assurance": "numerically-checked",
+      "certificate": "atlas/known-best/translation-escape-screen.json",
+      "evidence": [
+        "E-translation-escape-not-rigid"
+      ],
+      "method": "numerical-multiprecision",
+      "property": "not-rigid",
+      "replay": "uv run --frozen --all-extras --group dev python -m devtools.screen_translation_escape --check",
+      "scope": "Square 0 of the retained witness (witness id 1) translates 0.000003 along (0.00001, 1) with the packing still valid, so the configuration admits a non-trivial feasible motion; 92 of its 292 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former."
+    },
+    "verified": {
+      "evidence": [
+        "E-franciscouzo-2026-09-27-exact-replay",
+        "E-franciscouzo-2026-09-27-interval-replay"
+      ],
+      "exact_form": "17597249391199519/1000000000000000",
+      "value": "17.597249391199519"
+    }
+  }
+]

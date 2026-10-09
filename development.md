@@ -242,8 +242,11 @@ Each file belongs to exactly one shard and each runner imports only its own file
 The shard jobs retain full Git history for history-reading tests, but none installs Node
 or a browser.
 Browser-floor liveness runs under `--frontend`, on the runner that owns the
-pinned Node toolchain, and so does `site table layout in Chromium`, the two test files
-that pin the tables’ pixels, on the runner that installs the pinned Chromium.
+pinned Node toolchain.
+`site table layout in Chromium` runs eight test files on the runner that installs the
+pinned Chromium: functional pixel/layout checks run in parallel, then the four
+native-frontier load-budget cases run serially, each with HTTP JavaScript and
+no-JavaScript contexts under the same assertions and budgets.
 They launch it with `--font-render-hinting=none`: the headless shell hints text at
 `HINTING_FULL` by default, which on Linux rounds every glyph’s advance to a whole pixel,
 and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). Where no
@@ -795,12 +798,19 @@ defensible. Each of 2026-08-30’s three red pushes broke a test reachable this 
 the changed paths ([D-381, D-393](defects.md)), and the floor would have caught all
 three.
 
-**Large implicit push selections receive a separate pytest phase.** A changed workflow
-file or suite configuration expands the selector to everything: the quick and slow lanes
-together, against `FAST_SUITE_BUDGET_SECONDS`. A large proper subset can also dominate
-the run. When resource settings are implicit, the edit checks run with their normal
-concurrency, then the reachable tests use the available pytest workers after the edit
-pool has drained. Nested tool pools are capped at one during the parallel pytest phase.
+The Pages workflow has an explicit publication invocation contract.
+Its first-party commands, named test files, explicit builder files and workflow/scope
+contracts seed the same import, text and walker closure.
+A scheduling edit does not mark every module in an unchanged library directory as
+changed. Unreadable or unknown first-party entrypoints select the whole suite.
+
+**Large implicit push selections receive a separate pytest phase.** Other changed
+workflow files or suite configuration expand the selector to everything: the quick and
+slow lanes together, against `FAST_SUITE_BUDGET_SECONDS`. A large proper subset can also
+dominate the run. When resource settings are implicit, the edit checks run with their
+normal concurrency, then the reachable tests use the available pytest workers after the
+edit pool has drained.
+Nested tool pools are capped at one during the parallel pytest phase.
 Tests marked `pool_heavy` run afterward in a separate serial pytest process with the
 reserved CPUs assigned to their internal pool.
 The whole-atlas composite test uses this allocation; its per-case builder and global
@@ -1223,6 +1233,8 @@ No reader input is generated.
 CLS uses native session windows, excluding shifts after recent input.
 A separate context with JavaScript disabled requires visible primary headings/prose,
 rendered mathematics and reserved image dimensions.
+Marked frontier table cells require one visible, nonempty semantic MathML subtree; other
+formulas require visible prepared KaTeX.
 
 Limits are CLS 0.1, LCP 4,000 ms, longest task 300 ms and cumulative blocking beyond 50
 ms of 600 ms.
@@ -1370,12 +1382,16 @@ not need a browser. The canonical
 lives in KPress, alongside the shared runtime’s public API documentation.
 
 The prepare job renders the page twice at once, requires the two renders to agree, and
-shares one page artifact with the Chromium PDF, print, typography, screen and geometry
-jobs and the Firefox/WebKit loading and geometry jobs, which run in parallel.
-Deployment waits for all of them.
-The workbench job selects Node 24.18.0, installs the root lockfile with scripts
-disabled, and builds the typed workbench package into the self-contained `/workbench/`
-page, beside `prepare` rather than after it.
+shares one page artifact with seven consumer jobs: `pdf`, `print-layout`, `typography`,
+`screen`, `geometry`, `font-loading` and `browser-geometry`. Each consumer depends on
+`scope` and `prepare`; the consumers run in parallel after preparation, retaining their
+scope conditions. Their artifact guard accepts an artifact only before its 600-second
+deadline, from the exact current run and attempt, and requires a nonempty artifact ID
+before download. Deployment waits for all of them.
+The overview, other papers and workbench build beside `prepare`. The workbench job
+selects Node 24.18.0, installs the root lockfile with scripts disabled, and builds the
+typed workbench package into the self-contained `/workbench/` page, beside `prepare`
+rather than after it.
 The publish job puts the three papers, the checked PDF, the site’s own pages and the
 workbench back into one tree and holds every page’s head in it to the site’s contract,
 and every shared asset a page names to being there whole (`check_published_site
@@ -1407,9 +1423,14 @@ parameter startup and neighboring text movement are measured by
 `devtools.check_math_startup`; its controlled fixtures run in CI, while timing
 comparisons are retained in the
 [math startup campaign](packing/benchmarks/math-startup/README.md).
-The site’s other pages load math through the same pipeline, typeset in the client;
+The other papers and ordinary content pages prepare their math at build time with
+`site_math.prepare`, retaining one semantic MathML subtree per formula.
+Dense frontier table cells display their existing MathML directly under
+`data-site-native-math="frontier"`; the page’s prose remains prepared KaTeX. Native
+structures and operators use the platform’s math font; text tokens use the table’s sans
+reader font on screen and in print.
 [paper-design.md → Math Loading](packing/devtools/templates/paper-design.md#math-loading)
-describes it and records its load timings, which `devtools.measure_site_pages` measures.
+describes these contracts and the historical client-runtime load measurements.
 
 **Merging is the whole publish.** Every repository link on the site names `main`, the
 branch the site deploys from, through one helper

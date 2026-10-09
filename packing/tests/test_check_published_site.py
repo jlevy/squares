@@ -10,7 +10,13 @@ from pathlib import Path
 
 import pytest
 
-from devtools import check_published_site, render_case_pages, render_overview
+from devtools import (
+    check_published_site,
+    overview_data,
+    overview_sections,
+    render_case_pages,
+    render_overview,
+)
 from devtools import render_n11_lower_bounds_explainer_pdf as pdf
 from devtools.check_published_site import (
     LINK_CHECKED_PAGES,
@@ -203,6 +209,43 @@ def result_row(row: str, *, here: bool, records: bool = True) -> str:
         f'<dl class="site-detail"><dt>Records</dt><dd><div class="site-records">{link}</div>'
         "</dd></dl></div>"
     )
+
+
+def lazy_result_row(row: str, *, here: bool) -> str:
+    """The deployed row: its bound popover fetches the complete result page, with
+    static links to that same page in the row and the popover's fallback."""
+    address = result_fragment(row)
+    target = f"pop-result-{row}"
+    return (
+        f'<tr {"id" if here else "data-result"}="{row}" data-s="3" '
+        f'data-row-popover="{target}"><td><a class="site-row-open" href="{address}">'
+        f"{row}</a></td><td>A result</td></tr>"
+        f'<div class="site-popover site-row-pop" id="{target}" popover role="dialog" '
+        f'aria-labelledby="{target}-title"><div class="site-row-pop-body" '
+        f'data-row-pop-src="{address}"><p><a href="{address}">'
+        "Read the complete result record</a></p></div>"
+        f'<p class="site-popover-actions"><a class="site-popover-action" '
+        f'href="{address}">Open Result Record</a></p></div>'
+    )
+
+
+def lazy_site_pages() -> dict[str, bytes]:
+    """The deployed lazy shape on both tables, with each complete result page served."""
+    pages = site_pages()
+    for name in RECORD_LINK_PAGES:
+        here = name == render_overview.RESULTS_PAGE
+        for row in EXPECTED_RECORDS.rows:
+            pages[name] = pages[name].replace(
+                result_row(row, here=here).encode(), lazy_result_row(row, here=here).encode()
+            )
+        for address in OVERVIEWS:
+            pages[name] = pages[name].replace(
+                f'<div class="site-row-pop-body" data-row-pop-src="{address}"></div>'.encode(),
+                b"",
+            )
+    for address in OVERVIEWS:
+        pages[address] = head(address).encode() + pages[address]
+    return pages
 
 
 def results_table(*, here: bool) -> bytes:
@@ -614,6 +657,305 @@ def test_absent_links_names_what_a_deploy_dropped_and_rows_are_read_one_by_one()
     assert row_records(result_row("t-007", here=False)) == {
         "t-007": f'<a href="{RECORD}">register</a>'
     }
+    # Even a malformed outer popover cannot borrow a nested neighbor's records.
+    nested = (
+        '<div class="site-popover site-row-pop" id="pop-result-t-001">'
+        + result_row("t-002", here=True)
+        + "</div>"
+    )
+    assert row_records(nested) == {"t-002": f'<a href="{RECORD}">register</a>'}
+
+
+def test_check_accepts_the_deployed_lazy_record_links_without_refetching(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    requested: list[str] = []
+    assert failures(monkeypatch, fake_site(lazy_site_pages(), requested=requested)) == []
+    for address in OVERVIEWS:
+        assert requested.count(f"https://example.org/{address}") == 1
+    requested.clear()
+
+    def registry_prefetch(site: str, read: Fetch, *, timeout: float) -> list[tuple[bool, str]]:
+        for address in OVERVIEWS:
+            read(f"{site.rstrip('/')}/{address}", timeout=timeout)
+        return []
+
+    monkeypatch.setattr(check_published_site, "deployed_registry_checks", registry_prefetch)
+    assert all(
+        passed
+        for passed, _ in check_published_site.check(
+            "https://example.org", COMMIT, timeout=1, browser=False
+        )
+    )
+    for address in OVERVIEWS:
+        assert requested.count(f"https://example.org/{address}") == 1
+
+
+@pytest.mark.parametrize(
+    "separator",
+    ["\n", "\r", "\v", "\u2028", "\u2029"],
+    ids=["LF", "CR", "vertical-tab", "line-separator", "paragraph-separator"],
+)
+def test_record_markup_counts_only_literal_lf_as_a_source_line(
+    monkeypatch: pytest.MonkeyPatch, separator: str
+) -> None:
+    content = f'<a href="{RECORD}">Register</a>'
+    article = (
+        '<article class="site-result" data-result-overview="t-001">' + content + "</article>"
+    )
+    served = "<p>Before" + separator + "ordinary text " * 20 + "</p>\n" + article
+    compared: list[str] = []
+
+    def compare_exact_article(rendered: str, published: str) -> list[str]:
+        compared.append(published)
+        return absent_links(rendered, published)
+
+    monkeypatch.setattr(check_published_site, "absent_links", compare_exact_article)
+    expected = RecordLinks(rows={"t-001": RECORD}, overviews={})
+    checks = record_link_checks(
+        expected,
+        {"index.html": lazy_result_row("t-001", here=False)},
+        {OVERVIEWS[0]: served},
+    )
+    assert compared == [content]
+    assert all(passed for passed, _ in checks), checks
+
+
+@pytest.fixture
+def filtered_record_tables() -> tuple[
+    RecordLinks, dict[str, str], dict[str, str], tuple[str, ...]
+]:
+    """Register-backed lightweight tables: the renderer's recent homepage selection
+    and its complete results page, with every result article's actual record links."""
+    overview = overview_data.load()
+    reference = overview_sections.reference_date(overview)
+    home_rows = tuple(
+        result.id.lower()
+        for result in overview_sections.recent_results(overview)
+        if overview_sections.shown_by_default(
+            result, overview_sections.RECENT_DEFAULTS, reference
+        )
+    )
+    expected = rendered_record_links()
+    assert 0 < len(home_rows) < len(expected.rows)
+    pages = {
+        name: "<table><tbody>"
+        + "".join(
+            lazy_result_row(row, here=name == render_overview.RESULTS_PAGE)
+            for row in (home_rows if name == "index.html" else expected.rows)
+        )
+        + "</tbody></table>"
+        for name in RECORD_LINK_PAGES
+    }
+    overviews = {
+        result_fragment(row): (
+            f'<article class="site-result" data-result-overview="{row}">'
+            + "".join(f'<a href="{record}">Record</a>' for record in records.splitlines())
+            + "</article>"
+        )
+        for row, records in expected.rows.items()
+    }
+    overviews.update(expected.overviews)
+    return expected, pages, overviews, home_rows
+
+
+def test_record_links_accept_the_filtered_homepage_and_complete_results_table(
+    filtered_record_tables: tuple[RecordLinks, dict[str, str], dict[str, str], tuple[str, ...]],
+) -> None:
+    expected, pages, overviews, home_rows = filtered_record_tables
+    checks = record_link_checks(expected, pages, overviews)
+    assert all(passed for passed, _ in checks), checks
+    assert checks[0][1].startswith(f"index.html: each of {len(home_rows)} result rows")
+    assert checks[1][1].startswith(
+        f"{render_overview.RESULTS_PAGE}: each of {len(expected.rows)} result rows"
+    )
+
+
+@pytest.mark.parametrize("name", RECORD_LINK_PAGES)
+def test_record_links_reject_a_deleted_required_row_on_each_table(
+    filtered_record_tables: tuple[RecordLinks, dict[str, str], dict[str, str], tuple[str, ...]],
+    name: str,
+) -> None:
+    expected, pages, overviews, home_rows = filtered_record_tables
+    # Complete-table coverage includes a result the homepage intentionally omits.
+    row = (
+        home_rows[0]
+        if name == "index.html"
+        else next(row for row in expected.rows if row not in home_rows)
+    )
+    required = len(home_rows) if name == "index.html" else len(expected.rows)
+    full = lazy_result_row(row, here=name == render_overview.RESULTS_PAGE)
+    assert pages[name].count(full) == 1
+    pages[name] = pages[name].replace(full, "")
+    failed = [
+        line for passed, line in record_link_checks(expected, pages, overviews) if not passed
+    ]
+    assert len(failed) == 1, failed
+    assert failed[0].startswith(f"{name}: 1 of {required} result rows"), failed
+    assert f"{row}: requires one row and its own popover" in failed[0]
+
+
+@pytest.mark.parametrize("name", RECORD_LINK_PAGES)
+@pytest.mark.parametrize(
+    "shadow",
+    [
+        '<div id="pop-result-t-001">Unrelated element</div>',
+        '<div id="pop-result-t-001">Unclosed unrelated element',
+        '<input id="pop-result-t-001">',
+    ],
+    ids=["completed", "unclosed", "void"],
+)
+def test_check_rejects_global_popover_id_shadows(
+    monkeypatch: pytest.MonkeyPatch, name: str, shadow: str
+) -> None:
+    pages = lazy_site_pages()
+    pages[name] = shadow.encode() + pages[name]
+    failed = failures(monkeypatch, fake_site(pages))
+    assert len(failed) == 1
+    assert failed[0].startswith(f"{name}: 1 of 2 result rows lack record links")
+    assert "t-001" in failed[0]
+    assert "invalid bindings" in failed[0]
+
+
+@pytest.mark.parametrize("name", RECORD_LINK_PAGES)
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "missing row",
+        "missing popover",
+        "wrong binding",
+        "missing binding",
+        "wrong source",
+        "missing source",
+        "external source",
+        "traversal source",
+        "root source",
+        "duplicate source",
+        "wrong row link",
+        "missing row link",
+        "wrong fallback",
+        "missing fallback",
+        "wrong action",
+        "missing action",
+        "duplicate row",
+        "duplicate source attribute",
+    ],
+)
+def test_check_rejects_lazy_row_binding_mutants(
+    monkeypatch: pytest.MonkeyPatch, name: str, mutation: str
+) -> None:
+    pages = lazy_site_pages()
+    full = lazy_result_row("t-002", here=name == render_overview.RESULTS_PAGE)
+    row, popover = full.split("</tr>", 1)
+    row += "</tr>"
+    source = 'data-row-pop-src="result/t-002.html"'
+    row_link = '<a class="site-row-open" href="result/t-002.html">t-002</a>'
+    fallback = '<p><a href="result/t-002.html">Read the complete result record</a></p>'
+    action = (
+        '<p class="site-popover-actions"><a class="site-popover-action" '
+        'href="result/t-002.html">Open Result Record</a></p>'
+    )
+    mutations = {
+        "missing row": popover,
+        "missing popover": row,
+        "wrong binding": full.replace(
+            'data-row-popover="pop-result-t-002"', 'data-row-popover="pop-result-t-001"'
+        ),
+        "missing binding": full.replace('data-row-popover="pop-result-t-002"', ""),
+        "wrong source": full.replace(source, 'data-row-pop-src="result/t-001.html"'),
+        "missing source": full.replace(source, ""),
+        "external source": full.replace(
+            source, 'data-row-pop-src="https://other.example/result/t-002.html"'
+        ),
+        "traversal source": full.replace(
+            source, 'data-row-pop-src="result/../result/t-002.html"'
+        ),
+        "root source": full.replace(source, 'data-row-pop-src="/result/t-002.html"'),
+        "duplicate source": full.replace(
+            source, source + '></div><div class="site-row-pop-body" ' + source
+        ),
+        "wrong row link": full.replace(row_link, row_link.replace("t-002.html", "t-001.html")),
+        "missing row link": full.replace(row_link, "t-002"),
+        "wrong fallback": full.replace(fallback, fallback.replace("t-002.html", "t-001.html")),
+        "missing fallback": full.replace(fallback, ""),
+        "wrong action": full.replace(action, action.replace("t-002.html", "t-001.html")),
+        "missing action": full.replace(action, ""),
+        "duplicate row": full + full,
+        "duplicate source attribute": full.replace(
+            source, 'data-row-pop-src="result/t-001.html" ' + source
+        ),
+    }
+    pages[name] = pages[name].replace(full.encode(), mutations[mutation].encode())
+    requested: list[str] = []
+    failed = failures(monkeypatch, fake_site(pages, requested=requested))
+    row_failures = [line for line in failed if line.startswith(f"{name}: 1 of 2 result rows")]
+    assert len(row_failures) == 1, (mutation, failed)
+    assert "t-002" in row_failures[0]
+    assert "invalid bindings" in row_failures[0]
+    assert all(url.startswith(("https://example.org/", REPO_URL)) for url in requested)
+    assert not any("../" in url for url in requested)
+
+
+@pytest.mark.parametrize("mutation", ["missing", "non-200", "wrong result", "dropped record"])
+def test_check_requires_each_lazy_rows_served_record_page(
+    monkeypatch: pytest.MonkeyPatch, mutation: str
+) -> None:
+    pages = lazy_site_pages()
+    # Outside the separately sampled overview, with the same link as its neighbor.
+    address = OVERVIEWS[1]
+    if mutation == "wrong result":
+        pages[address] = pages[address].replace(
+            b'data-result-overview="t-002"', b'data-result-overview="t-001"'
+        )
+    elif mutation == "dropped record":
+        # A matching link outside this result's article cannot replace a dropped record.
+        pages[address] = pages[address].replace(
+            RECORD.encode(), f"{REPO_URL}/blob/main/packing/index.html.md".encode()
+        )
+        pages[address] += f'<nav><a href="{RECORD}">Another link</a></nav>'.encode()
+    base = fake_site(pages, lost=(address,) if mutation == "missing" else ())
+
+    def served(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        status, body = base(url, head=head, timeout=timeout)
+        return (
+            (503, body) if mutation == "non-200" and url.endswith(address) else (status, body)
+        )
+
+    failed = failures(monkeypatch, served)
+    for name in RECORD_LINK_PAGES:
+        assert any(
+            line.startswith(f"{name}: 1 of 2 result rows lack record links") and "t-002" in line
+            for line in failed
+        ), failed
+
+
+def test_check_requires_every_record_of_each_lazy_row(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    additional = f"{REPO_URL}/blob/main/packing/index.html.md"
+    expected = RecordLinks(
+        rows={**EXPECTED_RECORDS.rows, "t-002": f"{RECORD}\n{additional}"},
+        overviews=EXPECTED_RECORDS.overviews,
+    )
+    monkeypatch.setattr(check_published_site, "rendered_record_links", lambda: expected)
+    pages = lazy_site_pages()
+    pages[OVERVIEWS[1]] = pages[OVERVIEWS[1]].replace(
+        b"</article>", f'<a href="{additional}">Evidence</a></article>'.encode()
+    )
+    assert failures(monkeypatch, fake_site(pages)) == []
+    pages[OVERVIEWS[1]] = pages[OVERVIEWS[1]].replace(
+        additional.encode(), f"{REPO_URL}/blob/main/README.md".encode()
+    )
+    failed = failures(monkeypatch, fake_site(pages))
+    assert len(failed) == 2
+    assert all("t-002 lacks ['blob/packing/index.html.md']" in line for line in failed)
+
+
+def test_a_record_free_expected_row_still_requires_its_binding() -> None:
+    expected = RecordLinks(rows={"t-002": ""}, overviews={})
+    ((passed, line),) = record_link_checks(expected, {"index.html": ""}, {})
+    assert not passed
+    assert "t-002: requires one row and its own popover" in line
 
 
 def test_check_requires_every_record_link_the_renderer_writes(
@@ -712,6 +1054,7 @@ def test_the_sample_cites_the_archive_and_the_campaign_whatever_the_checkout(
     [
         ("papers/n11-threshold-bound-review.html", "Part II"),
         ("papers/n11-optimality-review.html", "Part III"),
+        ("papers/square-packing-methods-survey.html", "Methods tutorial"),
     ],
 )
 def test_check_requires_each_review_where_its_papers_card_points(
@@ -775,7 +1118,7 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
     serves and, with an anchor, a heading of that paper, on the page and in the Markdown
     edition alike. A link to a paper not in the build is reported and not failed; one to
     a paper the site does not serve, or to a heading the paper does not have, fails."""
-    explainer, threshold, optimality = (
+    explainer, threshold, optimality, methods = (
         render_overview.paper_path(paper.slug) for paper in render_overview.PAPERS
     )
     site = render_overview.SITE_URL + "papers/"
@@ -793,6 +1136,10 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
             ),
         ),
     }
+    pages[methods] = _paper_page(
+        "from-a-seed-to-a-certified-bound",
+        links='<a href="n11-lower-bounds-explainer.html">Lower bounds</a>',
+    )
     markdowns = {
         paper_files(optimality)[0]: (
             f"[I]({site}n11-lower-bounds-explainer.html#the-result-and-proof-roadmap) "
@@ -801,12 +1148,12 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
     }
     assert heading_ids(pages[threshold]) == {"the-result", "what-is-new"}
     found = cross_paper_link_checks(pages, markdowns)
-    assert [passed for passed, _ in found] == [True, True, True]
+    assert [passed for passed, _ in found] == [True] * 4
     assert found[0][1] == (
         f"{explainer}: 2 links to other papers, "
         "each to a paper served here and a heading it has"
     )
-    assert paper_files(optimality)[0] in found[2][1]
+    assert paper_files(optimality)[0] in found[-1][1]
 
     broken = {
         **pages,
@@ -1203,6 +1550,7 @@ def test_check_holds_every_page_to_its_head_and_the_site_to_its_card(
     assert REVIEW_PAPERS == (
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
+        "papers/square-packing-methods-survey.html",
     )
     # The record files the check samples are pages a reader shares too.
     records = [

@@ -433,26 +433,36 @@ def repository_file_problem(path: str) -> str | None:
     try:
         target.relative_to(REPO.resolve())
     except ValueError:
-        from devtools.squish_followup_packets import linked_certificate_problem  # noqa: PLC0415
-        from devtools.squish_second_update_packets import NUMBERS  # noqa: PLC0415
-
-        proofs = {
-            f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
-            for n in NUMBERS
-        }
-        houses = {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in NUMBERS if n != 263}
-        if path in proofs:
-            from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
-
-            return second.linked_certificate_problem(path, repository=REPO)
-        if path in houses:
-            from devtools import squish_second_update_house_links as house  # noqa: PLC0415
-
-            return house.linked_house_problem(path, repository=REPO)
-        return linked_certificate_problem(path, repository=REPO)
+        return linked_repository_file_problem(path)
     if not target.is_file():
         return "does not name a file"
     return None
+
+
+def linked_repository_file_problem(path: str) -> str | None:
+    """Only separately admitted exact proof and atlas leaves may link outside."""
+    from devtools import evand_arrangement_houses as evand  # noqa: PLC0415
+    from devtools import refinement_house_links as refinements  # noqa: PLC0415
+    from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+    from devtools import squish_second_update_house_links as house  # noqa: PLC0415
+    from devtools.squish_followup_packets import linked_certificate_problem  # noqa: PLC0415
+
+    # Route by lexical repository names. Each owner then checks its repository and
+    # custody; unrelated private fixtures must not inherit another owner's live root.
+    proofs = {
+        f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in second.NUMBERS
+    }
+    houses = {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in house.LINK_NUMBERS}
+    if path in proofs:
+        return second.linked_certificate_problem(path, repository=REPO)
+    if path in houses:
+        return house.linked_house_problem(path, repository=REPO)
+    if path in {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in refinements.NUMBERS}:
+        return refinements.linked_house_problem(path, repository=REPO)
+    if path in {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in evand.NUMBERS}:
+        return evand.linked_house_problem(path, repository=REPO)
+    return linked_certificate_problem(path, repository=REPO)
 
 
 def repository_file_problems(paths: Iterable[str]) -> dict[str, str | None]:

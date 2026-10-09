@@ -45,12 +45,15 @@ import ast
 import gc
 import os
 import re
+import shlex
 import subprocess
 import sys
 from collections.abc import Sequence
 from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
+
+from yaml import YAMLError
 
 from sqpack.cli.validate import BEHAVIORAL_TEST_ROOTS, changed_paths
 from sqpack.release import DATA_PATHS as RELEASE_DATA_PATHS
@@ -88,6 +91,8 @@ SUITE_WIDE = (
     "tests/conftest.py",
     ".python-version",
 )
+
+PAGES_WORKFLOW = ".github/workflows/pages.yml"
 
 WALKER_MARKERS = ("rglob(", "iterdir(", ".glob(", "listdir(", "importlib", "__import__")
 
@@ -250,18 +255,99 @@ def _walker_evidence(path: Path) -> bool:
     return _walker_markers_in(source, tree)
 
 
-def select_tests(changed: list[str]) -> TestSelection:
-    """The test files a change to `changed` (repo-relative paths) can reach."""
+def _pages_workflow_inputs() -> set[Path]:
+    """Publication invocation inputs, without pretending unchanged libraries were edited.
+
+    Reuse the site's live declarations and command resolver. Every literal pytest
+    target is included: the scope resolver recognizes only the first per command line.
+    Directory declarations retain their builder/tool contracts rather than marking
+    every descendant as changed. Actual changed Python/config paths are checked first.
+    """
+    from devtools import pages_scope  # noqa: PLC0415
+
+    workflow = pages_scope.load_workflow()
+    jobs = tuple(workflow["jobs"].values())
+    files = pages_scope.import_closure(pages_scope.commands_run(jobs))
+    for builder in pages_scope.BUILDER_INPUTS.values():
+        for path in builder():
+            if not path.exists():
+                raise FileNotFoundError(f"declared Pages input is missing: {path}")
+            if path.is_file():
+                files.add(path.resolve())
+    for job in jobs:
+        for step in job.get("steps", []):
+            command = str(step.get("run", ""))
+            for module in re.findall(r"\bpython\s+-m\s+(\S+)", command):
+                if module in {"playwright", "pytest"}:
+                    continue
+                if re.fullmatch(r"(?:devtools|workbench_tools)(?:\.\w+)+", module) is None:
+                    raise ValueError(f"unknown Pages Python entrypoint: {module}")
+            targets = re.findall(r"\btests/[\w/.-]+\.py\b", command)
+            for line in command.replace("\\\n", " ").splitlines():
+                if re.search(r"\bpytest\b", line) is None:
+                    continue
+                words = shlex.split(line, comments=True)
+                if "pytest" not in words:
+                    continue
+                arguments = words[words.index("pytest") + 1 :]
+                if not arguments or not any(word != "-q" for word in arguments):
+                    raise ValueError("Pages pytest invocation has no explicit test files")
+                if any(
+                    word != "-q" and re.fullmatch(r"tests/[\w/.-]+\.py(?:::.+)?", word) is None
+                    for word in arguments
+                ):
+                    raise ValueError("Pages pytest invocation contains an unknown selection")
+            for target in targets:
+                path = (ROOT / target).resolve()
+                if not path.is_file():
+                    raise FileNotFoundError(f"Pages test target is missing: {target}")
+                files.add(path)
+    files.update(
+        ROOT / "tests" / name for name in ("test_pages_workflow.py", "test_pages_scope.py")
+    )
+    files.add(Path(pages_scope.__file__).resolve())
+    if any(not path.is_relative_to(REPO) for path in files):
+        raise ValueError("a Pages input is outside the repository")
+    return files
+
+
+def _suite_configuration_reason(changed: list[str]) -> str | None:
     if not changed:
-        return TestSelection(everything=True, reason="no changed paths were determined")
+        return "no changed paths were determined"
 
     for path in changed:
-        if path in SUITE_WIDE or path.startswith(".github/"):
-            return TestSelection(everything=True, reason=f"{path} configures the suite")
+        if path in SUITE_WIDE or (path.startswith(".github/") and path != PAGES_WORKFLOW):
+            return f"{path} configures the suite"
         resolved = (REPO / path).resolve()
         if path.endswith(".py") and _module_name(resolved) is None:
+            return f"{path} is Python outside the mapped roots"
+
+    return None
+
+
+def select_tests(changed: list[str]) -> TestSelection:
+    """The test files a change to `changed` (repo-relative paths) can reach."""
+    configuration = _suite_configuration_reason(changed)
+    if configuration is not None:
+        return TestSelection(everything=True, reason=configuration)
+
+    publication_inputs: set[Path] = set()
+    if PAGES_WORKFLOW in changed:
+        try:
+            publication_inputs = _pages_workflow_inputs()
+        except (
+            OSError,
+            ValueError,
+            SyntaxError,
+            ImportError,
+            TypeError,
+            KeyError,
+            AttributeError,
+            SystemExit,
+            YAMLError,
+        ) as exc:
             return TestSelection(
-                everything=True, reason=f"{path} is Python outside the mapped roots"
+                everything=True, reason=f"Pages invocation inputs could not be resolved: {exc}"
             )
 
     modules = _mapped_files()
@@ -291,6 +377,18 @@ def select_tests(changed: list[str]) -> TestSelection:
             changed_dotted.add(name)
         else:
             changed_basenames.add(Path(path).name)
+
+    for path in publication_inputs:
+        # Workflow discovery includes these to resolve imports, but the workflow
+        # has not edited package initializers or changed the pytest environment.
+        if path.name in {"__init__.py", "conftest.py"}:
+            continue
+        name = _module_name(path) if path.suffix == ".py" else None
+        if name is not None:
+            changed_modules.add(name)
+            changed_dotted.add(name)
+        else:
+            changed_basenames.add(path.name)
 
     # `release.data_revision` reads these Git paths rather than their file contents.
     # Give that declared non-Python input the same import-closure treatment as an edit
@@ -357,7 +455,7 @@ def pytest_command(
     all, so the pre-push tier's behavioural step ran in one process at every `--jobs`
     value, including the `--jobs 1` that `_xdist_distribution` documents as the way to
     get four workers on a four-cpu box. The whole-suite fallback is the expensive case:
-    any change to a workflow file or to suite configuration selects everything, which is
+    other workflow changes or suite configuration select everything, which is
     the quick lane and the slow lane together in a single process.
     """
     distribution = ("-n", str(workers)) if workers > 1 else ()

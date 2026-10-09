@@ -23,6 +23,7 @@ from functools import cache
 from pathlib import Path
 from typing import Any
 
+import mpmath as mp
 import pytest
 
 from devtools.census_atlas_contact_shades import (
@@ -42,6 +43,7 @@ from devtools.census_atlas_contact_shades import (
     make_square,
     manifest_entries,
     packings_from_witness,
+    project_sin_cos,
     square_kind,
     sweep_into,
     totals,
@@ -304,3 +306,30 @@ def test_a_stale_census_names_the_paths_that_moved() -> None:
     assert list(json_differences({"rules": {"x": [0.1]}}, {"rules": {"x": [0.2]}})) == [
         "$.rules.x[0]: retained 0.1, fresh 0.2"
     ]
+
+
+def test_projection_ignores_platform_libm_and_ambient_precision(monkeypatch) -> None:
+    """Both source representations retain their full census geometry across hosts."""
+    source = witness(10, [(2, 3, 4 / 13), (6, 6, 5 / 17)])
+    corner_source = {
+        "side": "10",
+        "representation": "corners",
+        "coordinates": {"angle_unit": "not-applicable"},
+        "squares": [
+            {
+                "id": 1,
+                "corners": [["2", "2"], ["13/5", "14/5"], ["9/5", "17/5"], ["6/5", "13/5"]],
+            }
+        ],
+    }
+    baseline = [packings_from_witness(row) for row in (source, corner_source)]
+
+    def wrong_libm(*_args):
+        raise AssertionError("platform trig entered the retained diagnostic projection")
+
+    for name in ("cos", "sin", "atan2"):
+        monkeypatch.setattr(math, name, wrong_libm)
+    project_sin_cos.cache_clear()
+    with mp.workdps(5):
+        actual = [packings_from_witness(row) for row in (source, corner_source)]
+    assert actual == baseline

@@ -16,6 +16,212 @@ case_corpus:
   n_max: 324
   reader_view: frontier/STATUS.md
 sources:
+  - id: evand-exact-and-local-reports-2026
+    title: Exact side forms and non-strict local minima of named source configurations
+    role: source-repository
+    url: https://github.com/evand/square-packing/tree/f58a01774a733b232a88576470332185d8d11641
+    local: resources/web/evand-exact-and-local-reports-2026-10-07/
+    source_key: '[Daniel exact and local reports 2026]'
+    scope:
+      n_values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 6
+      - 7
+      - 8
+      - 9
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 28
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 35
+      - 36
+      - 42
+      - 43
+      - 44
+      - 45
+      - 46
+      - 47
+      - 48
+      - 49
+      - 56
+      - 57
+      - 58
+      - 59
+      - 60
+      - 61
+      - 62
+      - 63
+      - 64
+      - 72
+      - 73
+      - 74
+      - 75
+      - 76
+      - 77
+      - 78
+      - 79
+      - 80
+      - 81
+      - 90
+      - 91
+      - 92
+      - 93
+      - 94
+      - 95
+      - 96
+      - 97
+      - 98
+      - 99
+      - 100
+      - 102
+      - 106
+      - 111
+      - 112
+      - 113
+      - 114
+      - 115
+      - 116
+      - 117
+      - 118
+      - 119
+      - 120
+      - 121
+      - 133
+      - 134
+      - 135
+      - 136
+      - 137
+      - 138
+      - 139
+      - 140
+      - 141
+      - 142
+      - 143
+      - 144
+      - 152
+      - 157
+      - 158
+      - 159
+      - 160
+      - 161
+      - 162
+      - 163
+      - 164
+      - 165
+      - 166
+      - 167
+      - 168
+      - 169
+      - 177
+      - 183
+      - 184
+      - 185
+      - 186
+      - 187
+      - 188
+      - 189
+      - 190
+      - 191
+      - 192
+      - 193
+      - 194
+      - 195
+      - 196
+      - 212
+      - 213
+      - 214
+      - 215
+      - 216
+      - 217
+      - 218
+      - 219
+      - 220
+      - 221
+      - 222
+      - 223
+      - 224
+      - 225
+      - 242
+      - 243
+      - 244
+      - 245
+      - 246
+      - 247
+      - 248
+      - 249
+      - 250
+      - 251
+      - 252
+      - 253
+      - 254
+      - 255
+      - 256
+      - 274
+      - 275
+      - 276
+      - 277
+      - 278
+      - 279
+      - 280
+      - 281
+      - 282
+      - 283
+      - 284
+      - 285
+      - 286
+      - 287
+      - 288
+      - 289
+      - 308
+      - 309
+      - 310
+      - 311
+      - 312
+      - 313
+      - 314
+      - 315
+      - 316
+      - 317
+      - 318
+      - 319
+      - 320
+      - 321
+      - 322
+      - 323
+      - 324
+    reviewed: '2026-10-07'
+    source_date: '2026-10-07'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+    - frontier/results.yaml
+    evidence:
+    - E-evand-exact-form-n102-report
+    - E-evand-exact-form-n106-report
+    - E-evand-exact-form-n152-report
+    - E-evand-exact-form-n177-report
+    - E-evand-local-minima-178-report
+    notes: T120–T123 retain the four new exact-form feasible-side claims as V0/C0; T124 retains the
+      actual178 non-strict local-minimum roster as V0/C0. Catalogue metadata accounts for all269 exact
+      and258 Lean flags as source assertions. Canonical algebraic registry integration belongs to PR403;
+      no source geometry, minimality or full Lean replay was admitted here.
   - id: queuingtheory-n11-optimality-2026
     title: Proposed global optimality proof for eleven squares
     role: source-repository
@@ -1836,17 +2042,92 @@ sources:
     evidence:
     - E-squish-second-update-2026-10-07-report
     notes: Issue422 pins nine new rational geometries at e63e4e52b1728b6671b2f263c5e02a4aa79a39d3.
-      All nine are reported V0/C0 in this layer. Complete prior verified values, exact forms and
+      This original source-report atom retains all nine as reported V0/C0. Separate maintained
+      confirmation T-116 admits the frozen finite geometries at V3/C3; later selected geometries
+      and source-only reports require their own assurance. Complete prior verified values, exact forms and
       evidence remain retained; source finite prints are quotations, and current displays are
       safe sixteen-place upward ceilings. Author-reported Ellsworth, Couzo and SQUISH lineage
       and human-directed Claude Opus5.5 assistance remain attributed.
+  - id: rehwaldt-couzo-refinements-2026-10-07
+    title: Rehwaldt finite rational refinements, issue 425
+    role: source-repository
+    url: https://github.com/lollipoll/couzo-five-exact-certificates/tree/bc389ddf7d65277cd19a9b08fb285d86346d6806
+    local: resources/web/rehwaldt-couzo-refinements-2026-10-07/
+    source_key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    scope:
+      n_values:
+      - 105
+      - 292
+    reviewed: '2026-10-08'
+    source_date: '2026-10-07'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+    - frontier/n-105.md
+    - frontier/n-292.md
+    evidence:
+    - E-rehwaldt-couzo-refinements-2026-10-07-report
+    claims_record: resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/claims.json
+    notes: Complete terminating displays preserve the full rational strict improvement. This original
+      source-report atom retains reported assurance. Separate maintained confirmation T-117 admits
+      these frozen finite witnesses at V3/C3; later selected geometries and source-only reports
+      require their own assurance. Historical counts excluded by the author do not replace smaller
+      ceilings.
+  - id: rehwaldt-n68-refinement-2026-10-07
+    title: Rehwaldt finite rational refinements, issue 428
+    role: source-repository
+    url: https://github.com/lollipoll/certified-square-packing-68/tree/fded686668e29258dad2eb29d0482fa3fd51bd6b
+    local: resources/web/rehwaldt-n68-refinement-2026-10-07/
+    source_key: '[Rehwaldt n68 refinement 2026-10-07]'
+    scope:
+      n_values:
+      - 68
+    reviewed: '2026-10-08'
+    source_date: '2026-10-07'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+    - frontier/n-068.md
+    evidence:
+    - E-rehwaldt-n68-refinement-2026-10-07-report
+    claims_record: resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/claims.json
+    notes: Complete terminating displays preserve the full rational strict improvement. This original
+      source-report atom retains reported assurance. Separate maintained confirmation T-118 admits
+      this frozen finite witness at V3/C3; later selected geometries and source-only reports
+      require their own assurance. Historical counts excluded by the author do not replace smaller
+      ceilings.
+  - id: evand-new-arrangements-2026-10-07
+    title: Daniel's three new rational arrangements, issue399
+    role: source-repository
+    url: https://github.com/evand/square-packing/tree/7eef24f7221b8c3371d6171dd664b52541bbd479
+    local: resources/web/evand-new-arrangements-2026-10-07/
+    source_key: '[Daniel new arrangements 2026-10-07]'
+    scope:
+      n_values:
+      - 266
+      - 270
+      - 272
+    reviewed: '2026-10-08'
+    source_date: '2026-10-07'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+    - frontier/n-266.md
+    - frontier/n-270.md
+    - frontier/n-272.md
+    claims_record: resources/web/evand-new-arrangements-2026-10-07/acquisition/claims.json
+    evidence:
+    - E-evand-399-new-arrangements-report
+    - E-evand-399-exact-feasibility
+    notes: 'All three complete source poses and full rational sides are separately certified. Historical
+      #375 source13ee36e and T-098/T-101 receipts remain unchanged; novelty and optimality are not promoted.'
 selected_overrides:
   - n: 68
-    source_id: evand-square-packing-2026-10-05
-    value: '8.798795237218283902664668919394'
-    evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-      side (T-056).
+    source_id: rehwaldt-n68-refinement-2026-10-07
+    value: '8.79879523721828390257668096702139408352101903022787926324037'
+    evidence: E-rehwaldt-n68-refinement-2026-10-07-report
+    reason: Smaller exact finite rational source ceiling, retained as reported pending replay admission
+      and review.
   - n: 102
     source_id: evand-square-packing-2026-10-05
     value: '10.607174680176051125448595024891'
@@ -1860,11 +2141,11 @@ selected_overrides:
     reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
       side (T-056).
   - n: 105
-    source_id: franciscouzo-square-packing-2026
-    value: '10.806077865540567'
-    evidence: E-franciscouzo-2026-09-27-report
-    reason: Newer reported upper bound, certified here (T-056), below the UnitSquare release and the
-      Kingbird baseline.
+    source_id: rehwaldt-couzo-refinements-2026-10-07
+    value: '10.80607786551970463257490535044771520398745274'
+    evidence: E-rehwaldt-couzo-refinements-2026-10-07-report
+    reason: Smaller exact finite rational source ceiling, retained as reported pending replay admission
+      and review.
   - n: 106
     source_id: evand-square-packing-2026-10-05
     value: '10.822908044132847555194436943331'
@@ -1997,24 +2278,12 @@ selected_overrides:
     evidence: E-evand-exact-optima-2026-10-05-report
     reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
       side (T-056).
-  - n: 270
-    source_id: evand-square-packing-2026-10-05
-    value: '16.937810329340954110200218669924'
-    evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-      side (T-056).
   - n: 271
     source_id: evand-square-packing-2026-10-05
     value: '16.950820792624958786450490084388'
     evidence: E-evand-exact-optima-2026-10-05-report
     reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
       side (T-056).
-  - n: 272
-    source_id: evand-square-packing-2026-10-05
-    value: '16.968165867852158332894136646166'
-    evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-      side (T-092).
   - n: 273
     source_id: evand-square-packing-2026-10-05
     value: '16.983925962650404316108837346991'
@@ -2022,10 +2291,11 @@ selected_overrides:
     reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
       side (T-056).
   - n: 292
-    source_id: franciscouzo-square-packing-2026
-    value: '17.597249391199519'
-    evidence: E-franciscouzo-2026-09-27-report
-    reason: Newer reported upper bound, certified here (T-056), below the Kingbird baseline.
+    source_id: rehwaldt-couzo-refinements-2026-10-07
+    value: '17.597249391156465040471442005510391858592626557'
+    evidence: E-rehwaldt-couzo-refinements-2026-10-07-report
+    reason: Smaller exact finite rational source ceiling, retained as reported pending replay admission
+      and review.
   - n: 297
     source_id: evand-square-packing-2026-10-05
     value: '17.74041728754380185115320576776'
@@ -2183,6 +2453,24 @@ selected_overrides:
     evidence: E-squish-second-update-2026-10-07-report
     reason: Reported newer exact rational geometry; safe upward display, earlier verified lane
       and source history preserved.
+  - n: 266
+    source_id: evand-new-arrangements-2026-10-07
+    value: '16.823028750756475970708783711254'
+    evidence: E-evand-399-new-arrangements-report
+    reason: Complete changed source poses establish a smaller exact rational ceiling; both independent
+      project routes and full-roster controls pass.
+  - n: 270
+    source_id: evand-new-arrangements-2026-10-07
+    value: '16.937807228446029110709567408515'
+    evidence: E-evand-399-new-arrangements-report
+    reason: Complete changed source poses establish a smaller exact rational ceiling; both independent
+      project routes and full-roster controls pass.
+  - n: 272
+    source_id: evand-new-arrangements-2026-10-07
+    value: '16.968110145769600505005359235592'
+    evidence: E-evand-399-new-arrangements-report
+    reason: Complete changed source poses establish a smaller exact rational ceiling; both independent
+      project routes and full-roster controls pass.
 superseded_reports:
   - n: 123
     source_id: evand-square-packing-2026-10-05
@@ -2311,13 +2599,13 @@ superseded_reports:
   - n: 68
     source_id: franciscouzo-square-packing-2026
     value: '8.798795237222592'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: rehwaldt-n68-refinement-2026-10-07
     reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified
       here (T-098).
   - n: 68
     source_id: unitsquare-release1
     value: '8.803383074716108386903836683375989697670063329'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: rehwaldt-n68-refinement-2026-10-07
     reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side; since 2026-10-05
       the selected report is Evan Daniel's exact optimum of that packing (T-098).
   - n: 69
@@ -2410,13 +2698,13 @@ superseded_reports:
   - n: 105
     source_id: casson-square-packing-2026
     value: '10.80758853319602153'
-    superseded_by: franciscouzo-square-packing-2026
+    superseded_by: rehwaldt-couzo-refinements-2026-10-07
     reason: Larger than Francisco Couzo's side at this count; the case record states both sources'
       dates and values.
   - n: 105
     source_id: unitsquare-release1
     value: '10.807847913867976'
-    superseded_by: franciscouzo-square-packing-2026
+    superseded_by: rehwaldt-couzo-refinements-2026-10-07
     reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side.
   - n: 106
     source_id: casson-square-packing-2026
@@ -3122,10 +3410,10 @@ superseded_reports:
   - n: 266
     source_id: evand-square-packing-2026-10-05
     value: '16.823062082837804646360244631729'
-    superseded_by: kingbird-current
-    reason: Certifies the catalogue's packing at a side 4.6e-15 above the one it prints, which
-      stays the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed
-      precision (T-101).
+    superseded_by: evand-new-arrangements-2026-10-07
+    reason: 'Certifies the catalogue''s packing at a side 4.6e-15 above the one it prints, which stays
+      the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
+      (T-101). The separately certified #399 arrangement is now strictly smaller.'
   - n: 267
     source_id: evand-square-packing-2026-10-05
     value: '16.846667192843489783111781262887'
@@ -3162,16 +3450,16 @@ superseded_reports:
   - n: 270
     source_id: casson-square-packing-2026
     value: '16.94057158197226087'
-    superseded_by: evand-square-packing-2026-10-05
-    reason: Larger than Francisco Couzo's side at this count; the case record states both sources'
-      dates and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of
-      that packing (T-098).
+    superseded_by: evand-new-arrangements-2026-10-07
+    reason: 'Larger than Francisco Couzo''s side at this count; the case record states both sources''
+      dates and values; since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that
+      packing (T-098). The separately certified #399 arrangement is now strictly smaller.'
   - n: 270
     source_id: franciscouzo-square-packing-2026
     value: '16.937810329390629'
-    superseded_by: evand-square-packing-2026-10-05
-    reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified
-      here (T-098).
+    superseded_by: evand-new-arrangements-2026-10-07
+    reason: 'Superseded on 2026-10-05 by Evan Daniel''s exact optimum of the same packing, certified
+      here (T-098). The separately certified #399 arrangement is now strictly smaller.'
   - n: 271
     source_id: casson-square-packing-2026
     value: '16.95479445810086716'
@@ -3188,23 +3476,23 @@ superseded_reports:
   - n: 272
     source_id: casson-square-packing-2026
     value: '16.96944950195848989'
-    superseded_by: evand-square-packing-2026-10-05
-    reason: Larger than Francisco Couzo's side at this count; the case record states both sources'
-      dates and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of
-      that packing (T-098).
+    superseded_by: evand-new-arrangements-2026-10-07
+    reason: 'Larger than Francisco Couzo''s side at this count; the case record states both sources''
+      dates and values; since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that
+      packing (T-098). The separately certified #399 arrangement is now strictly smaller.'
   - n: 272
     source_id: franciscouzo-square-packing-2026
     value: '16.968279785326896'
-    superseded_by: evand-square-packing-2026-10-05
-    reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side
-      (T-092); since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
-      (T-098).
+    superseded_by: evand-new-arrangements-2026-10-07
+    reason: 'Superseded on 2026-10-05 by Francisco Couzo''s own later and smaller certified side (T-092);
+      since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that packing (T-098).
+      The separately certified #399 arrangement is now strictly smaller.'
   - n: 272
     source_id: franciscouzo-square-packing-2026-10-03
     value: '16.968165867864400'
-    superseded_by: evand-square-packing-2026-10-05
-    reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified
-      here (T-098).
+    superseded_by: evand-new-arrangements-2026-10-07
+    reason: 'Superseded on 2026-10-05 by Evan Daniel''s exact optimum of the same packing, certified
+      here (T-098). The separately certified #399 arrangement is now strictly smaller.'
   - n: 273
     source_id: casson-square-packing-2026
     value: '16.98811467146214582'
@@ -3235,7 +3523,7 @@ superseded_reports:
   - n: 292
     source_id: casson-square-packing-2026
     value: '17.60256849240573729'
-    superseded_by: franciscouzo-square-packing-2026
+    superseded_by: rehwaldt-couzo-refinements-2026-10-07
     reason: Larger than Francisco Couzo's side at this count; the case record states both sources'
       dates and values.
   - n: 293
@@ -3496,5 +3784,32 @@ superseded_reports:
     superseded_by: squish-second-update-2026-10-07
     reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
       finder credits and accepted evidence remain retained for their own bounds.
+  - n: 105
+    source_id: franciscouzo-square-packing-2026
+    value: '10.806077865540567'
+    superseded_by: rehwaldt-couzo-refinements-2026-10-07
+    reason: Retained historical ceiling; the selected exact rational report is smaller.
+  - n: 292
+    source_id: franciscouzo-square-packing-2026
+    value: '17.597249391199519'
+    superseded_by: rehwaldt-couzo-refinements-2026-10-07
+    reason: Retained historical ceiling; the selected exact rational report is smaller.
+  - n: 68
+    source_id: evand-square-packing-2026-10-05
+    value: '8.798795237218283902664668919394'
+    superseded_by: rehwaldt-n68-refinement-2026-10-07
+    reason: Retained historical ceiling; the selected exact rational report is smaller.
+  - n: 270
+    source_id: evand-square-packing-2026-10-05
+    value: '16.937810329340954110200218669924'
+    superseded_by: evand-new-arrangements-2026-10-07
+    reason: 'The complete #399 construction has a strictly smaller side; the earlier report and its
+      full certificates remain historical.'
+  - n: 272
+    source_id: evand-square-packing-2026-10-05
+    value: '16.968165867852158332894136646166'
+    superseded_by: evand-new-arrangements-2026-10-07
+    reason: 'The complete #399 construction has a strictly smaller side; the earlier report and its
+      full certificates remain historical.'
 beyond_horizon_claims: []
 pending_catalogue_intake: []
