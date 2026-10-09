@@ -199,9 +199,8 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     )
     assert lines[5] == (
         '<span class="publication-date">'
-        f"First published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.THRESHOLD_PROOF_PUBLISHED} · "
-        f"Last revised {release.THRESHOLD_REVIEW_REVISED}</span>"
+        f"Published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published}</span>"
     )
     assert html.index('<div class="doc-links screen-only">') < html.index('<div class="hero">')
     # The title's formula is typeset on the page, never printed as TeX.

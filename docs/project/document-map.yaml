@@ -1238,6 +1238,6 @@ exclusions:
       GitHub math probe `devtools.check_github_math --probe` fetches: not documents.
   - pattern: packing/devtools/templates/*.md
     reason: >-
-      Templates for devtools.render_n11_lower_bounds_explainer and devtools.render_verifiable_claim:
-      Markdown with placeholders and stamping markers, not documents. The rendered page
-      and the generated claim documents are the documents.
+      Manuscripts and templates for the paper, site and claim renderers:
+      Markdown with placeholders and stamping markers. The rendered papers and pages
+      and the generated claim documents are the published documents.

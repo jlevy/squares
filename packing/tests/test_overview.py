@@ -405,7 +405,7 @@ def _page_card_parts(page: str, href: str) -> tuple[str, str]:
 
 
 def test_each_page_card_is_a_plain_link_to_its_page(page: str) -> None:
-    """The overview's six page cards lead to full pages the site serves, so each card
+    """The overview's seven page cards lead to full pages the site serves, so each card
     is the link itself and goes there in the same tab: an `<a href>` with the page icon
     (`data-go="page"`), no popover, no framed preview and no new tab. Each keeps its
     label, headline, note and size. The three parts of the n = 11 series stand together
@@ -423,6 +423,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(page: str) -> None:
         "papers/n11-lower-bounds-explainer.html",
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
+        "papers/square-packing-methods-survey.html",
         "tutorial.html",
         "workbench/",
     ]
@@ -1264,19 +1265,20 @@ def test_every_card_grid_sits_in_a_frame_it_can_measure(page: str) -> None:
     assert "site-cards-dimensions" not in page, "the rating ladders are no card grid"
 
 
-def test_the_page_cards_stand_one_two_and_two_at_one_column_width(
+def test_the_page_cards_keep_the_series_together_at_one_column_width(
     page: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """The six page cards stand in three lines: the Frontier page alone at the top, then
+    """The seven page cards stand in three lines: the Frontier page alone at the top, then
     the three parts of the n = 11 series in reading order, one card per paper, then the
-    tutorial and the workbench (the series plan, 2026-10-05; one, two and two while the
+    methods tutorial, first-principles tutorial and workbench (the series plan,
+    2026-10-05; one, two and two while the
     site had two papers, the owner, 2026-10-02, `think-ns3d`). A section set in lines of
     its own (`SECTION_CARD_LINES`) is one frame holding a grid per line, a gap apart,
     each marked with its longest line's count, which the stylesheet caps a line of its
     size at, so the lines share one column width and each centres in it. Lines that do
     not count the section's cards are refused."""
-    assert overview_sections.SECTION_CARD_LINES == {"pages": (1, 3, 2)}
-    assert len(overview_sections.PAGES) == 6
+    assert overview_sections.SECTION_CARD_LINES == {"pages": (1, 3, 3)}
+    assert len(overview_sections.PAGES) == 7
     frame = page.split('<div class="site-cards-frame site-wide">', 1)[1]
     rows = re.findall(r'<div class="site-cards" data-cards-most="3">(.*?)</div>', frame)
     assert [
@@ -1288,7 +1290,7 @@ def test_the_page_cards_stand_one_two_and_two_at_one_column_width(
             "papers/n11-threshold-bound-review.html",
             "papers/n11-optimality-review.html",
         ],
-        ["tutorial.html", "workbench/"],
+        ["papers/square-packing-methods-survey.html", "tutorial.html", "workbench/"],
     ]
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     gap = css[css.index(".site-cards + .site-cards {") :]
@@ -1302,7 +1304,7 @@ def test_the_page_cards_stand_one_two_and_two_at_one_column_width(
             in rule[: rule.index("}")]
         ), section
     monkeypatch.setitem(overview_sections.SECTION_CARD_LINES, "pages", (2, 2))
-    with pytest.raises(SystemExit, match="pages: 6 cards in lines of"):
+    with pytest.raises(SystemExit, match="pages: 7 cards in lines of"):
         overview_sections.page_cards()
 
 
@@ -4035,10 +4037,17 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         "papers/n11-lower-bounds-explainer.html",
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
+        "papers/square-packing-methods-survey.html",
         "tutorial.html",
     ]
-    assert [paper.label for paper in papers] == ["Part I", "Part II", "Part III", "Tutorial"]
-    assert [paper.href for paper in papers[:3]] == [
+    assert [paper.label for paper in papers] == [
+        "Part I",
+        "Part II",
+        "Part III",
+        "Methods tutorial",
+        "Tutorial",
+    ]
+    assert [paper.href for paper in papers[:-1]] == [
         render_overview.paper_path(record.slug) for record in render_overview.PAPERS
     ]
     assert {paper.size for paper in papers} == {"large"}
@@ -4086,6 +4095,8 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
         ("all-results.html#t-037", "T-037"),
         (overview_sections.OPTIMALITY_PAPER, "Part III"),
         ("all-results.html#t-060", "T-060"),
+        ("tutorial.html", "square-packing tutorial"),
+        ("papers/square-packing-methods-survey.html", "How Record Square Packings Are Found"),
     ]
     for body in re.findall(r"<a\b[^>]*>(.*?)</a>", cards, re.DOTALL):
         assert "<a" not in body
@@ -6115,9 +6126,9 @@ def _old_addresses() -> set[str]:
 
 def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
     """`conventions.md`: a paper has one name, its slug, which says the case, the subject
-    and the kind of paper. The site serves it at `papers/<slug>.html`, and the renderer,
-    its templates, its test and its half of the Pages workflow carry the slug, so a
-    reader of the repository finds a paper by the name the site gives it."""
+    and the kind of paper. The site serves it at `papers/<slug>.html`; the registry
+    connects that address to its renderer, templates, tests and Pages scope. The methods
+    survey retains its private packing_methods module and packing-methods templates."""
     import importlib  # noqa: PLC0415
 
     from devtools.pages_scope import BUILDER_INPUTS, load_workflow  # noqa: PLC0415
@@ -6127,6 +6138,7 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
         "n11-lower-bounds-explainer",
         "n11-threshold-bound-review",
         "n11-optimality-review",
+        "square-packing-methods-survey",
     )
     packing = overview_data.REPO / "packing"
     jobs = load_workflow()["jobs"]
@@ -6137,19 +6149,21 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
     )
     for slug in slugs:
         name = slug.replace("-", "_")
-        assert render_overview.paper_record(slug).module == f"devtools.render_{name}"
-        renderer = importlib.import_module(f"devtools.render_{name}")
+        private_name = "packing_methods" if slug == render_overview.PACKING_METHODS else name
+        assert render_overview.paper_record(slug).module == f"devtools.render_{private_name}"
+        renderer = importlib.import_module(render_overview.paper_record(slug).module)
         assert render_overview.paper_record(slug).title == renderer.TITLE
         assert slug == renderer.SLUG
         assert renderer.SITE_PATH == render_overview.paper_path(slug) == f"papers/{slug}.html"
         assert renderer.SITE_PATH in render_overview.SITE_PAGES
         assert renderer.SITE_ROOT == render_overview.PAPERS_ROOT == "../"
         assert renderer.SITE_PATH in {paper.href for paper in overview_sections.PAPERS}
-        for template in (f"{slug}-article.md", f"{slug}-shell.html"):
+        template_name = private_name.replace("_", "-")
+        for template in (f"{template_name}-article.md", f"{template_name}-shell.html"):
             assert (render_overview.TEMPLATES / template).is_file(), template
         tests = packing / "tests"
-        assert (tests / f"test_render_{name}.py").is_file() or (
-            tests / f"test_{name}.py"
+        assert (tests / f"test_render_{private_name}.py").is_file() or (
+            tests / f"test_{private_name}.py"
         ).is_file(), slug
         assert name in BUILDER_INPUTS, slug
         assert name in {line.split(" ", 1)[0] for line in skip_notices.splitlines()}, slug
