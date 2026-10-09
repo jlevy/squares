@@ -1,0 +1,9 @@
+{
+  "schema": "n17-parent-guard-owned-hull-context/v1",
+  "finite_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/descriptor.json",
+  "finite_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/certificate.json",
+  "finite_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/replay.json",
+  "centered_parent_receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-280-centered-endpoint-hull-capacity/receipt.json",
+  "centered_parent_receipt_sha256": "5e861eb8049f6893259922550b721e1c1f4769161c99d15ac6ee6eca305150a5"
+}
+

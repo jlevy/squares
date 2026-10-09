@@ -48,6 +48,115 @@ allowlist:
       outcomes are also identified across the private-worker artifact-custody boundary.
       This retains actual runtime evidence, without pinning this repository's source
       or commits or replacing source reconstruction and fresh exact replay.
+  - path: packing/devtools/n17_shared_centre_lp.py
+    kind: generated-artifact
+    boundary: >-
+      The generated exp235 physical positive-control witness bytes are held against
+      the identity frozen in the registered endpoint execution manifest across
+      construction and fresh verification processes; this refuses substituted runtime
+      input, not Git source or commit changes.
+  - path: packing/devtools/check_n17_saved_pose_incircles.py
+    kind: generated-artifact
+    boundary: Accepted corner descriptor and full certificate/replay bytes are held by exact artifact identities before used saved-pose validation and after fresh fixed-pose incircle reconstruction; no source or commit pins.
+  - path: packing/devtools/fetch_external_release_inventory.py
+    kind: download
+    boundary: An external release acquisition inventory is byte-bound before and after inbound asset fetching; published asset sizes and SHA values are verified by the existing generic atomic downloader, with no source or commit pins.
+  - path: packing/devtools/check_n17_bb_header.py
+    kind: generated-artifact
+    boundary: The retained compact BB manifest is bound to its stated compressed bytes and canonical object identity before standing header checks; no source or commit digest controls acceptance.
+  - path: packing/devtools/inspect_n17_subpattern_relevance.py
+    kind: generated-artifact
+    boundary: Generated accepted residue descriptor and compact candidate manifest bytes bind the metadata-only named D4 projection before and after reconstruction; no source or commit checksum decides acceptance.
+  - path: packing/devtools/check_n17_n11_envelope_representation.py
+    kind: generated-artifact
+    boundary: Three generated prior-window receipts bind the finite representation comparison; no Git source checksum determines acceptance.
+  - path: packing/devtools/check_n17_owned_core_guarded_clause.py
+    kind: generated-artifact
+    boundary: Generated accepted two-case and H290 receipts bind the fixed owned core and endpoint premise; these are runtime artifact joins, without source checksum acceptance.
+  - path: packing/devtools/check_n17_case_preserving_owned_propagation.py
+    kind: generated-artifact
+    boundary: The three accepted generated two-case receipts bind the exact regional cases and baseline before fresh propagation; source and commit checksums do not decide acceptance.
+  - path: packing/devtools/check_n17_n11_envelope_windows.py
+    kind: generated-artifact
+    boundary: Generated cover, partition and small n11 replay receipts bind finite window premises; the curated theorem registry is identified by its Git revision and path rather than a source checksum.
+  - path: packing/devtools/check_n17_two_child_collective_propagation.py
+    kind: generated-artifact
+    boundary: The accepted generated regional propagation and child-selection receipts bind inherited finite premises; no Git source checksum decides acceptance.
+  - path: packing/devtools/check_n17_normalized_contact_rank_filter.py
+    kind: generated-artifact
+    boundary: The generated capacity cover and complete finite partition receipts bind the reconstructed incidence roster; curated source and proof premises are identified by Git rather than source checksums.
+  - path: packing/devtools/run_registered_phases.py
+    kind: generated-artifact
+    boundary: The generated phase journal is joined to its runtime execution manifest bytes before deriving a new supervision reconciliation receipt; no Git source or commit digest decides acceptance.
+  - path: packing/devtools/check_n17_global_contact_budget.py
+    kind: generated-artifact
+    boundary: The saved generated scalar certificate binds its descriptor bytes during fresh exact arithmetic reconstruction; this runtime artifact custody comparison does not pin Git source or commits.
+  - path: packing/devtools/check_n17_one_round_owned_domain_propagation.py
+    kind: generated-artifact
+    boundary: Accepted generated collective, regional and uniform-transfer receipts and native parent bytes bind inherited finite premises before and after one-round reconstruction; no Git source checksum decides acceptance.
+  - path: packing/devtools/check_n17_strict_core_regional_transfer.py
+    kind: generated-artifact
+    boundary: Accepted generated collective descriptor, certificate and replay bytes remain fixed across fresh finite uniform-core transfer; these runtime proof artifacts are not Git source integrity pins.
+  - path: packing/devtools/profile_n17_coverage_candidate.py
+    kind: generated-artifact
+    boundary: Generated accepted-control receipt bytes, replay mathematical payload identities and native input hashes establish matched runtime measurement custody and equivalence, without binding verification to source or commit digests.
+  - path: packing/devtools/check_n17_regional_row_coverage.py
+    kind: generated-artifact
+    boundary: Accepted generated collective certificate/replay and guard descriptor bytes bind runtime regional premises before and after complete fresh reconstruction; these three custody comparisons do not pin Git source or commits.
+  - path: packing/devtools/check_n17_collective_row_coverage.py
+    kind: generated-artifact
+    boundary: Accepted generated exp293 finite point geometry and exp295 route-selection receipts are byte-bound runtime premises; the new checker independently reconstructs the complete collective row payload, without source checksum acceptance.
+  - path: packing/devtools/check_n17_two_center_children.py
+    kind: generated-artifact
+    boundary: Runtime byte-bound accepted guard descriptor, finite point-context certificate and fresh receipt bind inherited geometric premises; the new checker reconstructs every selected child and rejoins original generated parent custody, rather than checking Git source integrity.
+  - path: packing/devtools/check_n17_guard_conditioned_ownership.py
+    kind: generated-artifact
+    boundary: Runtime-generated accepted parent/witness and native input identities are rejoined after fresh guarded reconstruction; these generated finite artifacts are not identified by Git source revisions.
+  - path: packing/devtools/report_n17_parent_geometry.py
+    kind: generated-artifact
+    boundary: Generated native parent and accepted witness receipt bytes remain fixed throughout structural intake characterization; source identity is recorded by Git, without source checksum acceptance.
+  - path: packing/devtools/check_n17_partner_pose_coupling.py
+    kind: generated-artifact
+    boundary: Runtime accepted native parent objects and generated finite witness/replay receipts remain byte-bound across full-row coupling reconstruction; source identity is recorded by Git and never decides acceptance.
+  - path: packing/devtools/check_n17_full_square_partner_coupling.py
+    kind: generated-artifact
+    boundary: Generated accepted parent and witness input bytes remain unchanged through fresh full-square reconstruction; no source or commit checksum pins verification.
+  - path: packing/devtools/profile_n17_exact_replay.py
+    kind: generated-artifact
+    boundary: Generated native replay input bytes and mathematical receipt identities determine whether instrumented and uninstrumented runtime results match; these are data equivalence checks, not source integrity pins.
+  - path: packing/devtools/probe_n17_pooled_feasible_center.py
+    kind: generated-artifact
+    boundary: Frozen runtime accepted union and witness descriptor/receipt bytes bind the finite premise across fresh construction; no source or Git identity determines acceptance.
+  - path: packing/devtools/probe_n17_pooled_relaxation_witness.py
+    kind: generated-artifact
+    boundary: Frozen runtime union receipts and descriptor bytes plus their canonical parent/pool identities cross the accepted finite-premise boundary; no Git source identity determines witness acceptance.
+  - path: packing/devtools/probe_n17_pooled_forbidden_cover.py
+    kind: generated-artifact
+    boundary: Runtime accepted-parent object and descriptor bytes remain unchanged across finite reconstruction; no Git source identity determines acceptance.
+  - path: packing/devtools/probe_n17_conditional_center_cases.py
+    kind: generated-artifact
+    boundary: Accepted runtime parent/pool objects and finite premise receipts are held by content and byte identities through fresh reconstruction; no Git source identities decide proof acceptance.
+  - path: packing/devtools/verify_n17_conditional_owned_hull.py
+    kind: generated-artifact
+    boundary: Canonical runtime parent and conditional child objects, compressed original bytes and accepted centered/H290/finite proof receipts bind exact ancestry to fresh full conditional replay; these generated proof identities do not pin source or commits.
+  - path: packing/devtools/probe_n17_conditional_owned_hull.py
+    kind: generated-artifact
+    boundary: Canonical runtime seed/node identities, compressed saved-object bytes and the accepted H290 receipt bind complete streamed domains to fresh finite hull reconstruction; these generated proof artifacts are not source or commit integrity pins.
+  - path: packing/devtools/check_n17_centered_cap_standing.py
+    kind: generated-artifact
+    boundary: Runtime-generated saved seed/node, compressed-object bytes, serialized world and accepted root/cap/endpoint receipts join a centered descriptor to independent standing replay; these custody identities are not source or commit integrity pins.
+  - path: packing/devtools/check_n17_capture_checkpoint.py
+    kind: generated-artifact
+    boundary: Runtime-generated canonical numeric-Frame seed/node identities and compressed-byte custody join the descriptor to production and fresh replay receipts; these generated objects are not source or commit integrity pins.
+  - path: packing/devtools/check_n17_capture_leaf.py
+    kind: generated-artifact
+    boundary: Canonical runtime seed/node identities join the descriptor, producer receipt and fresh independent full saved replay; these generated objects are hosted data, not repository-integrity checks.
+  - path: packing/devtools/check_n17_endpoint_prefix.py
+    kind: generated-artifact
+    boundary: Runtime producer seed and streamed prefix-node identities bind endpoint-preservation observations to independently admitted complete saved evidence and a fresh replay process.
+  - path: packing/devtools/audit_n17_certificate_dependencies.py
+    kind: generated-artifact
+    boundary: Runtime-generated canonical seed/node objects and their full-standing verification receipt bind streamed saved evidence and independently generated dependency inventories; raw objects and fresh inventories have no Git revision names.
   - path: packages/workbench/tools/workbench_tools/capture_video.py
     kind: generated-artifact
     boundary: Cache correctness for the generated published workbench corpus; its payload must match the immutable data/corpus.<hash>.json URL before a video receipt names that corpus edition. No repository source is hashed by this predicate.
