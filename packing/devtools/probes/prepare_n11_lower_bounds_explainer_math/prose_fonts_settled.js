@@ -1,8 +1,9 @@
 // Load every face that is not a math face, then wait two frames. Reading fonts can change
 // ordinary prose widths too; those settle here, without waiting for the math requests the
 // geometry probe deliberately holds. A face declared only from local() sources is a
-// metric-adjusted stand-in for a shipped face while that one loads (`paper-type.css`): it
-// draws nothing once the shipped face is in, and WebKit refuses to load one on demand.
+// metric-adjusted stand-in for a shipped face while that one loads (`paper-type.css`): once
+// the shipped face is in it draws nothing that face covers, and WebKit refuses to load one
+// on demand.
 async () => {
   /** @param {string} family */
   const unquoted = (family) => family.replace(/^["']|["']$/g, "");
