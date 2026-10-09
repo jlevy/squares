@@ -50,6 +50,10 @@ def test_lazy_payloads_round_trip_every_record_and_original_coefficient(tmp_path
     assert len({row["id"] for row in rows}) == len(rows)
     for row, original in zip(rows, originals, strict=True):
         metadata = json.loads(files[tmp_path / row["metadata_url"]])
+        if row["section"] == "historical" and original.get("reported_source"):
+            assurance = original["assurance"]
+            level = f"{assurance['verification']}/{assurance['confirmation']}"
+            assert level in metadata["claim"]
         assert _restore(metadata["record"], files, tmp_path) == (
             _without_polynomial_representations(original)
         )

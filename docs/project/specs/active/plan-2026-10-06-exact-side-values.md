@@ -123,7 +123,7 @@ controls remain retained.
 Earlier child counts and qualification receipts cover their stated heads, not this
 refreshed stack.
 
-**Expected child partition, pending regeneration:**
+**Verified child partition:**
 
 - **One register, generated:** `packing/frontier/exact-values.json.gz` holds one row per
   $n = 1 \dots 324$, built from the frontier records, the retained Kingbird catalogue
@@ -219,8 +219,8 @@ full picture is assembled, and it does not hold the facts itself:
 | Integer | 176 | None |
 | Rational | 64 | Includes the finite refinements and new arrangements at $n = 68,105,266,270,272,292$ |
 | Radical closed form | 65 | Earlier displaced source forms remain historical |
-| Minimal polynomial | 16 | Full degree-672 polynomial recovered at $n = 83$; replay pending |
-| Degree only | 0 | Expected after the $n = 83$ replay passes |
+| Minimal polynomial | 16 | Full degree-672 polynomial recovered and checked at $n = 83$ |
+| Degree only | 0 | Resolved by the checked $n = 83$ polynomial |
 | Numeric only | 3 | $n = 29,55,71$, each with a named continuation lane |
 
 **Original extraction checkpoint, 2026-10-07:** the historical collector decoded 201
@@ -230,8 +230,9 @@ Twenty-one triples matched the original 270-current-exact register entries.
 The other 161, plus one additional main-catalogue entry, gave 162 historical register
 entries: 152 superseded, three marked invalid by their source, and seven outside the
 current frontier. Subsequent delivered child work expanded that record to 170 historical
-entries; the latest-source projection remains pending. Every entry retains its polynomial in
-full, exact arithmetic checks, source locator, attribution and source flags.
+entries; the latest-source rebuild expands it to 175 while preserving the earlier
+corpus. Every entry retains its polynomial in full, exact arithmetic checks, source
+locator, attribution and source flags.
 
 At the earlier upstream-integration checkpoint, the delivered child retained 170
 historical identities: 160 superseded, three source-invalid and seven outside the
@@ -304,7 +305,7 @@ exact linkage.
 
 - **Publication and imports.** Pages has a dedicated paper job with an explicit wall
   ceiling. The overview, artifact dates, release metadata, published-site contract and
-  import runbook include this fourth paper.
+  import runbook include this standalone paper.
 
 - **Source PDF custody.** The 13 hosted originals retain their source bytes.
   The [manifest](../../../../packing/hosted/source-pdfs.yaml) records original archive
@@ -382,8 +383,9 @@ identities, and 170 historical entries.
 Its 2,629,925 JSON bytes became 808,628 gzip bytes, with byte-for-byte decoded parity;
 coefficients, attribution and proof status were preserved.
 These are dated migration receipts.
-The freshly regenerated child stores 2,632,347 complete JSON bytes in 808,715 gzip
-bytes; refreshed publication measurements remain pending.
+The next recovery checkpoint stored 2,632,347 complete JSON bytes in 808,715 gzip bytes.
+Those measurements are historical; the latest source rebuild stores 2,703,616 JSON bytes
+in 826,648 gzip bytes, with current publication measurements above.
 Bounded readers, the generated-JSON layout floor, schemas, census tools and publication
 consumers all follow the maintained storage contract.
 Published source links name the actual gzip file; logical JSON identities remain
@@ -409,7 +411,9 @@ At the original 2026-10-08 publication checkpoint, the lazy catalogue had 1,003 
 files, one browser script and one complete HTML archive in addition to its canonical
 reader, Markdown and PDF. The retained inventories counted 1,005 renderer-owned site
 registrations and 1,007 exporter-planned outputs.
-These are dated output counts; refreshed metrics remain pending.
+These are dated output counts.
+The latest registry contains 1,021 catalogue-owned outputs; final hosted PDF and
+physical snapshot validation remain pending.
 Site registrations come from the exporter plan; unexpected names or owners remain
 refused. The earlier live/Git snapshot inventory likewise recorded 6,467 paths and
 195,613,428 bytes under the unchanged 192 MiB cap; it is a dated receipt, not a fresh

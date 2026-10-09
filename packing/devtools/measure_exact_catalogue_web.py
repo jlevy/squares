@@ -180,8 +180,24 @@ def check_projection(register: dict[str, Any], index_path: Path, site: Path) -> 
     return {**counts, "coefficient_vectors": vectors, "integer_coefficients": coefficients}
 
 
-def measure(baseline: Path, site: Path, page: Path, register: Path) -> dict[str, Any]:
+def _maximum_fraction(value: str | float) -> float:
+    """Accept only a finite, positive share of the complete archive."""
+    fraction = float(value)
+    if not 0 < fraction <= 1:
+        raise ValueError("maximum fraction must be finite and greater than zero through one")
+    return fraction
+
+
+def measure(
+    baseline: Path,
+    site: Path,
+    page: Path,
+    register: Path,
+    *,
+    maximum_fraction: float = 0.25,
+) -> dict[str, Any]:
     """Refuse invalid projections before judging the predeclared byte threshold."""
+    threshold = _maximum_fraction(maximum_fraction)
     assets, index = initial_assets(page.resolve(), site.resolve())
     document = json.loads(read_retained_text(register))
     envelope = document.get("softschema", {}).get("envelope")
@@ -196,9 +212,9 @@ def measure(baseline: Path, site: Path, page: Path, register: Path) -> dict[str,
         "regime": "default unselected route; local uncompressed automatic assets and index",
         "control_bytes": control,
         "candidate_bytes": candidate,
-        "maximum_fraction": 0.25,
+        "maximum_fraction": threshold,
         "candidate_fraction": candidate / control,
-        "passes_acceptance": candidate <= control * 0.25,
+        "passes_acceptance": candidate <= control * threshold,
         "assets": assets,
         "coverage": coverage,
         "validity": "all original metadata and coefficient strings compare exactly",
@@ -221,8 +237,20 @@ def main() -> None:
     parser.add_argument("--page", default="papers/exact-side-values.html")
     parser.add_argument("--register", type=Path, default=Path("frontier/exact-values.json"))
     parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--maximum-fraction",
+        type=_maximum_fraction,
+        default=0.25,
+        help="predeclared maximum initial-byte share of the complete archive (default: 0.25)",
+    )
     args = parser.parse_args()
-    result = measure(args.baseline, args.site, args.site / args.page, args.register)
+    result = measure(
+        args.baseline,
+        args.site,
+        args.site / args.page,
+        args.register,
+        maximum_fraction=args.maximum_fraction,
+    )
     repo = Path(__file__).resolve().parents[2]
     revision = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=repo, text=True
@@ -243,7 +271,7 @@ def main() -> None:
         args.output.write_text(text, encoding="utf-8")
     print(text, end="")
     if not result["passes_acceptance"]:
-        raise SystemExit("initial raw bytes exceed the predeclared quarter-size threshold")
+        raise SystemExit("initial raw bytes exceed the predeclared maximum fraction")
 
 
 if __name__ == "__main__":
