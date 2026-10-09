@@ -5,7 +5,7 @@ title: Stabilize stack 430 on main 3213 and qualify every layer
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 19
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -23,10 +23,12 @@ child_order_hints:
   - is-01m4fhtfpzk93c99z2fj4pkb8y
   - is-01m4fhtg9da0y5514xbzg58cr6
   - is-01m4fk142s062w9aj65ptbas2d
+  - is-01m4fkxpt2eacwcrz1sc25s00b
+  - is-01m4fkxqcgp6xcf3e98azvvqj7
 hold: null
 hold_until: null
 created_at: 2026-10-09T04:14:49.601Z
-updated_at: 2026-10-09T05:43:58.809Z
+updated_at: 2026-10-09T05:59:36.080Z
 started_at: 2026-10-09T04:20:32.996Z
 ---
 Cloud continuation of think-yij0 handoff (PR467). Normal-merge origin/main 3213d651b into #442, propagate to #468, fix the recorded failures without weakening limits, obtain exact-head required CI and full checkpoints, bind reviews. Merge only with owner confirmation (github-merge confirm-session).
