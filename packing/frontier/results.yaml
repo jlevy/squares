@@ -13051,9 +13051,12 @@ results:
     kind: upper-bound
     registered: '2026-10-08'
     headline: Three dated Daniel certificate reports with historical source custody
-    claim: Complete author certificate reports at 105, 130 and 292 are retained with matching inputs and separate
-      immutable pins. All three exact sides are superseded by smaller currently verified bounds; selected
-      cases and original T-098/T-101 assurance are unchanged.
+    claim: >-
+      Complete author certificate reports at 105, 130 and 292 are retained with matching inputs and
+      separate immutable pins, at the exact sides they state: s(105) <=
+      10.806077865519704632682966129102, s(130) <= 11.911187706535762355657987890878 and s(292) <=
+      17.597249391156465040647414499422. All three exact sides are superseded by smaller currently
+      verified bounds; selected cases and original T-098/T-101 assurance are unchanged.
     scope:
       n_values:
       - 105
