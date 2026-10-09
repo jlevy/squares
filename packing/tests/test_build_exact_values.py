@@ -25,8 +25,10 @@ import pytest
 import sympy as sp
 from jsonschema_rs import Draft202012Validator
 
+from devtools import backfill_algebraic_facts as algebraic_backfill
 from devtools import build_exact_values as exact
-from devtools import refinement_custody, refinement_packets
+from devtools import evand_arrangement_reports as arrangement_reports
+from devtools import refinement_custody, refinement_packets, validate_schemas
 from devtools.retained_data import compressed_path, read_retained_text, write_retained_text
 from sqpack.exact_values import algebraic_fields, format_polynomial
 from sqpack.kingbird_catalogue import normalized_polynomial
@@ -56,6 +58,13 @@ def _build(n: int, packing: dict[str, Any] | None = None, budget: int = 200) -> 
     )
 
 
+def _unprojected_rational_packing(n: int) -> dict[str, Any]:
+    """Exercise the explicit source fraction before maintained algebraic backfill."""
+    packing = copy.deepcopy(exact.load_packing(n))
+    packing["reported_upper_bound"].update(minimal_polynomial=None, algebraic_source=None)
+    return packing
+
+
 def _historical_refinement_packing(n: int) -> dict[str, Any]:
     """Exercise earlier bound custody from the retained pre-refinement source record."""
     source = next(
@@ -66,6 +75,19 @@ def _historical_refinement_packing(n: int) -> dict[str, Any]:
     packing = copy.deepcopy(exact.load_packing(n))
     packing["reported_upper_bound"] = previous["reported"]
     packing["verified_upper_bound"] = previous["verified"]
+    return packing
+
+
+def _historical_arrangement_packing(n: int) -> dict[str, Any]:
+    """Retain the previous finite bound independently of the replacement #399 pose."""
+    prior = arrangement_reports.read_xz(
+        arrangement_reports.PACKET / "acquisition/prior-state.json.xz"
+    )
+    row = next(row for row in prior if row["n"] == n)
+    previous = load_yaml(row["complete_case"].split("---\n", 2)[1])["packing"]
+    packing = copy.deepcopy(exact.load_packing(n))
+    packing["reported_upper_bound"] = previous["reported_upper_bound"]
+    packing["verified_upper_bound"] = previous["verified_upper_bound"]
     return packing
 
 
@@ -391,7 +413,7 @@ ORIGINAL_VERIFIED_FALLBACK_COUNTS = (
 
 
 VERIFIED_FALLBACK_COUNTS = tuple(
-    n for n in ORIGINAL_VERIFIED_FALLBACK_COUNTS if n not in (68, 292)
+    n for n in ORIGINAL_VERIFIED_FALLBACK_COUNTS if n not in (68, 270, 272, 292)
 )
 
 
@@ -399,7 +421,7 @@ def test_all_verified_rationals_keep_ideal_routes_and_share_one_packet_scan(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     assert len(ORIGINAL_VERIFIED_FALLBACK_COUNTS) == 33
-    assert len(VERIFIED_FALLBACK_COUNTS) == 31
+    assert len(VERIFIED_FALLBACK_COUNTS) == 29
     scans = []
     scan = exact.evand.receipt_problems
 
@@ -409,8 +431,10 @@ def test_all_verified_rationals_keep_ideal_routes_and_share_one_packet_scan(
 
     monkeypatch.setattr(exact.evand, "receipt_problems", counted_scan)
     inputs = exact.VerifiedRationalInputs()
-    for n in VERIFIED_FALLBACK_COUNTS:
-        packing = exact.load_packing(n)
+    for n in (*VERIFIED_FALLBACK_COUNTS, 270, 272):
+        packing = (
+            _historical_arrangement_packing(n) if n in (270, 272) else exact.load_packing(n)
+        )
         entry = exact.build_entry(
             n,
             packing,
@@ -621,9 +645,276 @@ def test_a_packet_ceiling_refuses_missing_replays_and_changed_certificates(
             )
 
 
+@pytest.mark.parametrize("n", [68, 105, 266, 270, 272, 292])
+def test_finite_rational_records_have_maintained_algebraic_fields(n: int) -> None:
+    path = exact.FRONTIER / f"n-{n:03d}.md"
+    text = path.read_text(encoding="utf-8")
+    assert algebraic_backfill.backfilled(text, n) == text
+    assert validate_schemas.check(path) == []
+    packing = exact.load_packing(n)
+    reported = packing["reported_upper_bound"]
+    side = Fraction(reported["exact_form"])
+    assert reported["algebraic_source"] == "derived-from-exact-form"
+    assert normalized_polynomial(reported["minimal_polynomial"]) == (
+        side.denominator,
+        -side.numerator,
+    )
+    # Materializing the already projected identity changes no generated bound or note.
+    assert _build(n, packing) == _entries()[n]
+
+
+@pytest.mark.parametrize("n", [266, 270, 272])
+def test_a_new_daniel_arrangement_identifies_its_native_side_not_the_display(n: int) -> None:
+    packing = copy.deepcopy(exact.load_packing(n))
+    before = copy.deepcopy(packing)
+    side = arrangement_reports.read_fact(n).side
+    assert Fraction(packing["reported_upper_bound"]["exact_form"]) == side
+    assert Fraction(packing["verified_upper_bound"]["value"]) > side
+    entry = _build(n, packing)
+    assert entry["state"] == "rational"
+    assert Fraction(entry["exact_form"]) == side
+    assert entry["polynomial"]["coefficients"] == [str(side.denominator), str(-side.numerator)]
+    assert entry["checks"]["root"]["interval"] == [str(side), str(side)]
+    assert entry["checks"]["irreducible"]["method"] == "linear"
+    assert entry["checks"]["catalogue"] == "derived-here"
+    assert entry["algebraic_source"] == "derived-from-exact-form"
+    assert entry["side"] == {
+        "value": before["reported_upper_bound"]["value"],
+        "relation": "upper-bound",
+    }
+    assert entry["status"] == before["status"] == "open"
+    assert entry["lower"]["value"] == before["verified_lower_bound"]["value"]
+    (provenance,) = [note for note in entry["notes"] if note["kind"] == "verified-witness-side"]
+    assert arrangement_reports.SOURCE_KEY in provenance["text"]
+    assert (
+        arrangement_reports.receipt_path().relative_to(exact.ROOT.parent).as_posix()
+        in provenance["text"]
+    )
+    ideal = [
+        note
+        for note in entry["notes"]
+        if note["kind"] == "route" and "new #399 witness" in note["text"]
+    ]
+    assert len(ideal) == 1
+    assert "active contact system and a stable seed" in ideal[0]["text"]
+    assert "No KKT" in ideal[0]["text"]
+    assert not any("batch holds a KKT local minimum" in note["text"] for note in entry["notes"])
+    assert packing == before
+
+
+def _arrangement_packing(n: int = 270, *, supplied: bool = False) -> dict[str, Any]:
+    packing = _unprojected_rational_packing(n)
+    if supplied:
+        side = Fraction(packing["reported_upper_bound"]["exact_form"])
+        packing["reported_upper_bound"].update(
+            minimal_polynomial=format_polynomial((side.denominator, -side.numerator)),
+            algebraic_source="derived-from-exact-form",
+        )
+    return packing
+
+
+@pytest.mark.parametrize("n", [266, 270, 272])
+def test_a_supplied_daniel_linear_identity_keeps_new_pose_custody(n: int) -> None:
+    packing = _arrangement_packing(n, supplied=True)
+    before = copy.deepcopy(packing)
+    entry = _build(n, packing)
+    assert entry["polynomial"]["text"] == packing["reported_upper_bound"]["minimal_polynomial"]
+    assert any(note["kind"] == "verified-witness-side" for note in entry["notes"])
+    assert any("new #399 witness" in note["text"] for note in entry["notes"])
+    assert packing == before
+
+
+@pytest.mark.parametrize("supplied", [False, True], ids=["derive", "supplied"])
+@pytest.mark.parametrize(
+    "control",
+    [
+        "reported-form",
+        "verified-form",
+        "reported-value",
+        "floor",
+        "over-ceiling",
+        "display-places",
+        "count",
+        "roster",
+        "replay",
+        "proved",
+        "degree",
+        "bool-degree",
+        "origin",
+        "missing-form",
+    ],
+)
+def test_a_daniel_identity_requires_exact_current_native_metadata(
+    control: str, *, supplied: bool
+) -> None:
+    packing = _arrangement_packing(supplied=supplied)
+    reported, verified = packing["reported_upper_bound"], packing["verified_upper_bound"]
+    n = 270
+    if control == "reported-form":
+        reported["exact_form"] = "1/2"
+    elif control == "verified-form":
+        verified["exact_form"] = "1/2"
+    elif control == "reported-value":
+        reported["value"] += "1"
+    elif control == "floor":
+        verified["value"] = reported["value"][:19]
+    elif control == "over-ceiling":
+        verified["value"] = str(Fraction(verified["value"]) + Fraction(1, 10**16))
+    elif control == "display-places":
+        verified["value"] += "0"
+    elif control == "count":
+        packing["n"] = 272
+    elif control == "roster":
+        n = packing["n"] = 269
+    elif control == "replay":
+        verified["evidence"] = []
+    elif control == "proved":
+        packing["status"] = "proved"
+    elif control == "degree":
+        reported["algebraic_degree"] = 2
+    elif control == "bool-degree":
+        reported["algebraic_degree"] = True
+    elif control == "origin":
+        reported["algebraic_source"] = "catalogue"
+    else:
+        reported["exact_form"] = None
+    _refused(lambda: _build(n, packing), "arrangement rational bound refused")
+
+
+@pytest.mark.parametrize("n", [266, 270, 272])
+def test_a_nearby_daniel_polynomial_cannot_replace_the_native_side(n: int) -> None:
+    packing = _arrangement_packing(n, supplied=True)
+    side = Fraction(packing["reported_upper_bound"]["exact_form"])
+    assert Fraction(1, side.denominator) < Fraction(1, 10**26)
+    packing["reported_upper_bound"]["minimal_polynomial"] = format_polynomial(
+        (side.denominator, -side.numerator + 1)
+    )
+    _refused(lambda: _build(n, packing), "is not the minimal polynomial of")
+
+
+def test_a_daniel_display_cannot_replace_its_full_native_fraction() -> None:
+    packing = _arrangement_packing()
+    ceiling = packing["verified_upper_bound"]["value"]
+    packing["reported_upper_bound"]["value"] = ceiling
+    for field in ("reported_upper_bound", "verified_upper_bound"):
+        packing[field]["exact_form"] = str(Fraction(ceiling))
+    _refused(lambda: _build(270, packing), "differs from the complete #399 side")
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("claim", "lower-bound"),
+        ("source_key", "[Kingbird]"),
+        ("scope", {"n_values": [269]}),
+        ("assurance", "numerically-checked"),
+        ("method", "numerical-f64"),
+        ("replay_status", "not-attempted"),
+        ("certificate", "packing/resources/web/evand-new-arrangements-2026-10-07/receipts"),
+        ("replay", None),
+    ],
+)
+def test_a_daniel_identity_requires_exact_evidence_and_its_receipt_file(
+    field: str, value: object
+) -> None:
+    inputs = exact.VerifiedRationalInputs()
+    row = copy.deepcopy(
+        inputs.evidence_row(
+            270, arrangement_reports.EXACT_EVIDENCE, arrangement_reports.SOURCE_KEY
+        )
+    )
+    row[field] = value
+    inputs.evidence = {arrangement_reports.EXACT_EVIDENCE: row}
+    _refused(
+        lambda: exact.build_entry(
+            270,
+            exact.load_packing(270),
+            exact.catalogue_entries().get(270),
+            exact.kkt_rows().get(270),
+            verified_inputs=inputs,
+        ),
+        "arrangement rational bound refused",
+    )
+
+
+@pytest.mark.parametrize("mutation", ["missing-job", "positive-verdict", "control-verdict"])
+def test_a_daniel_identity_requires_all_nine_complete_native_jobs(
+    monkeypatch: pytest.MonkeyPatch, mutation: str
+) -> None:
+    receipt = arrangement_reports.receipt_path()
+    read = arrangement_reports.read_xz
+    record = copy.deepcopy(read(receipt))
+    if mutation == "missing-job":
+        record["cases"].pop()
+    elif mutation == "positive-verdict":
+        record["cases"][0]["exact_verify"]["verification_passed"] = False
+    else:
+        record["cases"][1]["independent"]["verification_passed"] = True
+    monkeypatch.setattr(
+        arrangement_reports, "read_xz", lambda path: record if path == receipt else read(path)
+    )
+    _refused(lambda: _build(270), "arrangement rational bound refused")
+
+
+@pytest.mark.parametrize("missing", ["receipt", "facts"])
+def test_a_daniel_identity_refuses_missing_private_inputs(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, missing: str
+) -> None:
+    name = "receipt_path" if missing == "receipt" else "fact_path"
+    monkeypatch.setattr(arrangement_reports, name, lambda: tmp_path / "missing.json.xz")
+    _refused(lambda: _build(270), "arrangement rational bound refused")
+
+
+def test_a_daniel_identity_refuses_changed_complete_source_bytes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    path = arrangement_reports.fact_path()
+    read = arrangement_reports.read_xz
+    facts = copy.deepcopy(read(path))
+    facts["cases"][0]["source_certificate"] += "\n"
+    monkeypatch.setattr(
+        arrangement_reports,
+        "read_xz",
+        lambda selected: facts if selected == path else read(selected),
+    )
+    _refused(lambda: _build(270), "arrangement rational bound refused")
+
+
+def test_daniel_custody_is_reused_only_inside_one_build(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls = []
+    original = arrangement_reports.check_certification
+
+    def counted():
+        calls.append(True)
+        return original()
+
+    monkeypatch.setattr(arrangement_reports, "check_certification", counted)
+    inputs = exact.VerifiedRationalInputs()
+    for n in arrangement_reports.NUMBERS:
+        assert (
+            exact.build_entry(
+                n,
+                exact.load_packing(n),
+                exact.catalogue_entries().get(n),
+                exact.kkt_rows().get(n),
+                verified_inputs=inputs,
+            )["state"]
+            == "rational"
+        )
+    assert len(calls) == 1
+
+    def changed():
+        raise arrangement_reports.ReportError("changed nine-job receipt")
+
+    monkeypatch.setattr(arrangement_reports, "check_certification", changed)
+    _refused(lambda: _build(270), "changed nine-job receipt")
+
+
 @pytest.mark.parametrize("n", [68, 105, 292])
 def test_an_explicit_refinement_rational_derives_only_the_finite_identity(n: int) -> None:
-    packing = copy.deepcopy(exact.load_packing(n))
+    packing = _unprojected_rational_packing(n)
     before = copy.deepcopy(packing)
     assert packing["reported_upper_bound"]["minimal_polynomial"] is None
     assert packing["reported_upper_bound"].get("algebraic_source") is None
@@ -672,7 +963,7 @@ def test_an_explicit_refinement_rational_derives_only_the_finite_identity(n: int
     ],
 )
 def test_explicit_refinement_requires_exact_current_bound_metadata(control: str) -> None:
-    packing = copy.deepcopy(exact.load_packing(105))
+    packing = _unprojected_rational_packing(105)
     reported, verified = packing["reported_upper_bound"], packing["verified_upper_bound"]
     if control == "reported-form":
         reported["exact_form"] = "1/2"
@@ -1037,6 +1328,154 @@ def test_closed_form_latex_round_trips() -> None:
     # The control: a LaTeX form one digit off reads back as a different number.
     wrong = exact.parse_form(exact.latex_to_form(r"7 + \tfrac{1}{3}\sqrt{2}"))
     assert sp.simplify(wrong - exact.parse_form("7 + (1/2)sqrt(2)")) != 0
+
+
+@pytest.fixture(scope="module")
+def reported_source_candidates() -> list[dict[str, Any]]:
+    """Admit the actual four source roots once for these note-consumer controls."""
+    return exact.reported_roots.collect()
+
+
+def test_reported_source_roots_are_notes_not_current_bound_identities(
+    monkeypatch: pytest.MonkeyPatch, reported_source_candidates: list[dict[str, Any]]
+) -> None:
+    entries = [_build(n) for n in (102, 106, 152, 177)]
+    before = copy.deepcopy(entries)
+    calls = []
+
+    def counted():
+        rows = copy.deepcopy(reported_source_candidates)
+        calls.append(rows)
+        return rows
+
+    monkeypatch.setattr(exact.reported_roots, "collect", counted)
+    exact.append_reported_source_notes(entries)
+    assert len(calls) == 1
+    sources = {row["n"]: row for row in calls[0]}
+    for entry, old in zip(entries, before, strict=True):
+        assert {key: value for key, value in entry.items() if key != "notes"} == {
+            key: value for key, value in old.items() if key != "notes"
+        }
+        assert entry["notes"][:-1] == old["notes"]
+        note = entry["notes"][-1]
+        source = sources[entry["n"]]
+        assert note["kind"] == "unreconciled-source-polynomial"
+        assert note["bead"] == "think-8sm2"
+        for field in (
+            "degree",
+            "side",
+            "polynomial",
+            "checks",
+            "reported_source",
+            "assurance",
+            "sources",
+            "source_statuses",
+            "attribution",
+        ):
+            assert note[field] == source[field], field
+        assert note["polynomial"]["coefficients"] != entry["polynomial"]["coefficients"]
+        assert "source-only" in note["text"]
+        assert "V0/C0" in note["text"]
+        assert "geometry and Lean replay are not attempted" in note["text"]
+        assert note["assurance"]["geometry_replay"] == "not-attempted"
+        assert note["assurance"]["lean_replay"] == "not-attempted"
+
+
+def test_reported_root_notes_cannot_claim_to_be_below_a_better_current_bound(
+    monkeypatch: pytest.MonkeyPatch, reported_source_candidates: list[dict[str, Any]]
+) -> None:
+    candidate = reported_source_candidates[0]
+    monkeypatch.setattr(exact.reported_roots, "collect", lambda: [candidate])
+    entry = {
+        "n": candidate["n"],
+        "side": {"value": candidate["checks"]["root"]["interval"][0]},
+        "notes": [],
+    }
+    _refused(
+        lambda: exact.append_reported_source_notes([entry]),
+        "not strictly below",
+    )
+    assert entry["notes"] == []
+
+
+def test_source_notes_are_collected_after_all_current_entries_once(
+    monkeypatch: pytest.MonkeyPatch, reported_source_candidates: list[dict[str, Any]]
+) -> None:
+    built = []
+    calls = []
+
+    def entry(n, *_args, **_kwargs):
+        built.append(n)
+        return {
+            "n": n,
+            "state": "numeric-only",
+            "status": "open",
+            "side": {"value": "100"},
+            "polynomial": None,
+            "checks": {"irreducible": None, "root": None},
+            "notes": [],
+        }
+
+    def collect():
+        assert built == list(exact.KNOWN_BEST_CORPUS.numbers)
+        calls.append(True)
+        return copy.deepcopy(reported_source_candidates)
+
+    monkeypatch.setattr(exact, "catalogue_entries", dict)
+    monkeypatch.setattr(exact, "kkt_rows", dict)
+    monkeypatch.setattr(exact, "load_packing", lambda _n: {})
+    monkeypatch.setattr(exact, "build_entry", entry)
+    monkeypatch.setattr(exact.reported_roots, "collect", collect)
+    record = exact.build_record()["register"]
+    assert len(calls) == 1
+    assert {row["n"] for row in record["entries"] if row["notes"]} == {102, 106, 152, 177}
+    assert all(row["polynomial"] is None for row in record["entries"])
+    assert record["totals"]["numeric-only"] == len(built)
+
+
+def test_source_custody_refusal_prevents_any_register_write(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    writes = []
+
+    def refused():
+        raise ValueError("changed reported-source acquisition")
+
+    monkeypatch.setattr(exact, "catalogue_entries", dict)
+    monkeypatch.setattr(exact, "kkt_rows", dict)
+    monkeypatch.setattr(exact, "load_packing", lambda _n: {})
+    monkeypatch.setattr(exact, "build_entry", lambda n, *_args, **_kwargs: {"n": n})
+    monkeypatch.setattr(exact.reported_roots, "collect", refused)
+    monkeypatch.setattr(exact, "write_retained_text", lambda *args: writes.append(args))
+    with pytest.raises(ValueError, match="changed reported-source acquisition"):
+        exact.update()
+    assert writes == []
+
+
+@pytest.mark.parametrize(
+    "control", ["custody", "V1", "unknown-custody", "degree", "root", "irreducible", "decimal"]
+)
+def test_source_note_schema_refuses_lost_custody_and_unchecked_claims(
+    control: str, reported_source_candidates: list[dict[str, Any]]
+) -> None:
+    candidate = reported_source_candidates[0]
+    note = {key: copy.deepcopy(value) for key, value in candidate.items() if key != "n"}
+    note.update(kind="unreconciled-source-polynomial", text="Source-only V0/C0; no bound.")
+    schema = load_yaml((exact.FRONTIER / exact.SCHEMA).read_text(encoding="utf-8"))
+    validator = Draft202012Validator({"$ref": "#/$defs/note", "$defs": schema["$defs"]})
+    assert not list(validator.iter_errors(note))
+    match control:
+        case "custody":
+            del note["reported_source"]
+        case "V1":
+            note["assurance"]["verification"] = "V1"
+        case "unknown-custody":
+            note["reported_source"]["unowned"] = True
+        case "degree":
+            note["degree"] = None
+        case _:
+            note["checks"][control] = None
+    assert list(validator.iter_errors(note)), control
 
 
 # --- the register -----------------------------------------------------------------------

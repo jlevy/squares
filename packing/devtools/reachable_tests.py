@@ -112,6 +112,29 @@ REFINEMENT_REGISTER_INPUTS = frozenset(
     }
 )
 
+#: Latest native arrangements and source-only root candidates use the same closure.
+LATEST_EXACT_SOURCE_INPUTS = frozenset(
+    {
+        "packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/prior-state.json.xz",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/declaration.json",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/sources.json",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/upstream-subtree.sha256",
+        "packing/witnesses/known-best/n-266.yaml",
+        "packing/witnesses/known-best/n-270.yaml",
+        "packing/witnesses/known-best/n-272.yaml",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/exact_forms.json.gz",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/declaration.json",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/sources.json",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/upstream-subtree.sha256",
+    }
+)
+
+#: This collector checks README and the packet-wide closed gzip inventory.
+REPORTED_ROOT_PACKET = "packing/resources/web/evand-exact-and-local-reports-2026-10-07/"
+
 WALKER_MARKERS = ("rglob(", "iterdir(", ".glob(", "listdir(", "importlib", "__import__")
 
 
@@ -420,7 +443,11 @@ def select_tests(changed: list[str]) -> TestSelection:
         changed_modules.add("sqpack.release")
         changed_dotted.add("sqpack.release")
 
-    if any(path in REFINEMENT_REGISTER_INPUTS for path in changed):
+    if any(
+        path in REFINEMENT_REGISTER_INPUTS | LATEST_EXACT_SOURCE_INPUTS
+        or path.startswith(REPORTED_ROOT_PACKET)
+        for path in changed
+    ):
         changed_modules.add("devtools.build_exact_values")
         changed_dotted.add("devtools.build_exact_values")
 

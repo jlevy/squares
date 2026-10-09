@@ -65,6 +65,9 @@ from sympy.polys.domains import ZZ
 from sympy.polys.galoistools import gf_ddf_zassenhaus, gf_from_int_poly, gf_monic, gf_sqf_p
 from sympy.polys.numberfields.galoisgroups import galois_group
 
+from devtools import collect_reported_exact_roots as reported_roots
+from devtools import evand_arrangement_houses as arrangement_houses
+from devtools import evand_arrangement_reports as arrangement_reports
 from devtools import evand_exact_certificates as evand
 from devtools import (
     refinement_custody,
@@ -978,6 +981,7 @@ class VerifiedRationalInputs:
         self.source_rows: dict[int, dict] = {}
         self.packet_validated = False
         self.refinements_validated = False
+        self.arrangements: arrangement_houses.VerifiedInputs | None = None
 
     def evidence_row(self, n: int, identifier: str, source_key: str) -> dict:
         if self.evidence is None:
@@ -1081,6 +1085,31 @@ class VerifiedRationalInputs:
             f"certificate {certificate.relative_to(ROOT.parent)}, replay {replay}, receipt "
             f"{refinement_custody.INDEX.relative_to(ROOT.parent)}. "
             "Its degree-one identity establishes neither stationarity nor global optimality.",
+            degree=1,
+        )
+
+    def arrangement_provenance(self, n: int, rational: Fraction) -> dict:
+        evidence = self.evidence_row(
+            n, arrangement_reports.EXACT_EVIDENCE, arrangement_reports.SOURCE_KEY
+        )
+        receipt = arrangement_reports.receipt_path()
+        if evidence["certificate"] != receipt.relative_to(ROOT.parent).as_posix():
+            raise ValueError("the evidence names a different #399 receipt file")
+        if self.arrangements is None:
+            self.arrangements = arrangement_houses.VerifiedInputs()
+        certificate = self.arrangements.facts[n]
+        if certificate.side != rational:
+            raise ValueError("the registered fraction differs from the complete #399 side")
+        arrangement_houses.check_houses([n], verified_inputs=self.arrangements)
+        return _note(
+            "verified-witness-side",
+            f"This is the complete finite rational #399 witness side, from "
+            f"{arrangement_reports.SOURCE_KEY}; source facts "
+            f"{arrangement_reports.fact_path().relative_to(ROOT.parent)}, passing replay "
+            f"{arrangement_reports.EXACT_EVIDENCE}, receipt "
+            f"{receipt.relative_to(ROOT.parent)}. The verified display is its least upward "
+            "sixteen-place ceiling; the linear identity names the native side. "
+            "It establishes neither stationarity nor global optimality.",
             degree=1,
         )
 
@@ -1212,6 +1241,63 @@ def _explicit_refinement_rational(
     return rational, note
 
 
+def _explicit_arrangement_rational(
+    n: int, packing: dict, inputs: VerifiedRationalInputs
+) -> tuple[Fraction, dict] | None:
+    """Bind #399's native side separately from its upward verified display."""
+    reported = packing["reported_upper_bound"]
+    if reported.get("source_key") != arrangement_reports.SOURCE_KEY:
+        return None
+    verified = packing.get("verified_upper_bound", {})
+    supplied = reported.get("minimal_polynomial") is not None
+    if (
+        n not in arrangement_reports.NUMBERS
+        or packing.get("n") != n
+        or packing.get("status") != "open"
+        or type(reported.get("algebraic_degree")) is not int
+        or reported["algebraic_degree"] != 1
+        or reported.get("algebraic_source") != (DERIVED_FROM_EXACT_FORM if supplied else None)
+        or arrangement_reports.EXACT_EVIDENCE not in verified.get("evidence", [])
+    ):
+        raise ExactValuesError(
+            f"n = {n}: arrangement rational bound refused: matching current finite "
+            "metadata and supported derived polynomial origin required"
+        )
+
+    def native_fraction() -> Fraction:
+        rational = refinement_packets.rational(reported.get("exact_form"))
+        if (
+            rational != refinement_packets.rational(verified.get("exact_form"))
+            or rational != Fraction(str(reported["value"]))
+            or verified.get("value") != evand.ceiling_decimal(rational, 16)
+        ):
+            raise ValueError("native fraction or least upward sixteen-place display differs")
+        return rational
+
+    try:
+        rational = native_fraction()
+        note = inputs.arrangement_provenance(n, rational)
+    except (OSError, ValueError, KeyError, TypeError, ZeroDivisionError) as error:
+        raise ExactValuesError(
+            f"n = {n}: arrangement rational bound refused: {error}"
+        ) from error
+    return rational, note
+
+
+def _arrangement_notes(n: int) -> list[dict]:
+    bead = ROUTES.get(n, (SWEEP_BEAD, ""))[0]
+    return [
+        _note(
+            "route",
+            "The finite rational bound leaves ideal contact research open. Establish the "
+            "new #399 witness's active contact system and a stable seed before ideal-side "
+            "identification. No KKT or local-minimum result from the earlier 13ee36e5 pose "
+            "transfers to this geometry.",
+            bead=bead,
+        )
+    ]
+
+
 def _certified_rational_ceiling(packing: dict, coefficients: tuple[int, ...]) -> bool:
     """Only a replay-backed rational upper bound may use an upward display ceiling."""
     reported = packing["reported_upper_bound"]
@@ -1248,7 +1334,10 @@ def build_entry(
     inputs = verified_inputs or VerifiedRationalInputs()
     fallback = _verified_rational_fallback(n, packing, inputs)
     refinement = _explicit_refinement_rational(n, packing, inputs)
-    admitted = fallback if fallback is not None else refinement
+    arrangement = _explicit_arrangement_rational(n, packing, inputs)
+    admitted = next(
+        (item for item in (fallback, refinement, arrangement) if item is not None), None
+    )
     projection = admitted if reported.get("minimal_polynomial") is None else None
     if projection is not None:
         rational, _provenance = projection
@@ -1352,8 +1441,13 @@ def build_entry(
     if superseded is not None:
         notes.append(superseded)
     if state == "numeric-only" or admitted is not None:
-        for note in _numeric_only_notes(n, kkt_row):
-            if admitted is not None:
+        routes = (
+            _arrangement_notes(n)
+            if arrangement is not None
+            else _numeric_only_notes(n, kkt_row)
+        )
+        for note in routes:
+            if admitted is not None and arrangement is None:
                 note["text"] = (
                     "The finite rational bound leaves ideal contact research open. "
                     + note["text"]
@@ -1428,6 +1522,32 @@ def _totals(entries: list[dict]) -> dict:
     return totals
 
 
+def append_reported_source_notes(entries: list[dict]) -> None:
+    """Retain checked source roots without assigning them a current bound or geometry."""
+    indexed = {entry["n"]: entry for entry in entries}
+    for candidate in reported_roots.collect():
+        current = indexed[candidate["n"]]
+        upper = Fraction(candidate["checks"]["root"]["interval"][1])
+        if upper >= Fraction(current["side"]["value"]):
+            raise ExactValuesError(
+                f"n = {candidate['n']}: unreconciled source root is not strictly below "
+                "the current recorded bound"
+            )
+        current["notes"].append(
+            {
+                **{key: value for key, value in candidate.items() if key != "n"},
+                "kind": "unreconciled-source-polynomial",
+                "text": (
+                    "This independently checked source-only polynomial root lies below "
+                    "the current recorded bound. Source-reported feasibility remains "
+                    "V0/C0; binding to a complete new geometry and Lean replay are not "
+                    "attempted. It is not admitted as this current packing's side or "
+                    "as an upper bound."
+                ),
+            }
+        )
+
+
 def build_record() -> dict:
     catalogue = catalogue_entries()
     kkt = kkt_rows()
@@ -1438,6 +1558,7 @@ def build_record() -> dict:
         )
         for n in KNOWN_BEST_CORPUS.numbers
     ]
+    append_reported_source_notes(entries)
     return {
         "softschema": {
             "contract": CONTRACT,

@@ -217,6 +217,14 @@ allowlist:
   - path: packing/src/sqpack/research/unitsquare_precision.py
     kind: download
     boundary: A Kingbird SVG fetched by URL and held against its pinned digest (H2).
+  - path: packing/devtools/collect_reported_exact_roots.py
+    kind: download
+    boundary: >-
+      Evan Daniel's complete downloaded exact_forms.json catalogue at f58a0177
+      is compared after decompression with the independently acquired source
+      manifest's digest, before its rows are consumed. This refuses substituted
+      or damaged external catalogue bytes; derived records are compared
+      structurally and algebraic claims are checked independently.
   - path: packing/devtools/evand_arrangement_reports.py
     kind: download
     boundary: >-

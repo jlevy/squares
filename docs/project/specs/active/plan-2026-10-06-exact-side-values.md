@@ -23,28 +23,48 @@ The identification lanes in Phase 2 enter **W6** under their own hypotheses.
 
 ## Current Register and Continuation
 
-The regenerated parent register covers 324 cases: 176 integer, 63 rational, 65
-closed-form, 16 minimal-polynomial, one degree-only and three numeric-only values.
-It certifies 320 exact polynomial roots and retains 18 superseded catalogue identities
-as notes.
-The degree-only row is $n = 83$; the numeric-only cases are $n = 29,55,71$. All
-77 proved cases keep their existing status.
-Only the entries at $n = 68,105,292$ changed from the earlier parent checkpoint.
+The regenerated parent register covers 324 cases: 176 integer, 64 rational, 65
+closed-form, 15 minimal-polynomial, one degree-only and three numeric-only values.
+It certifies 320 exact polynomial roots and retains 19 superseded catalogue identities
+and four separately checked source-only roots as notes.
+The degree-only row is $n = 83$; the numeric-only cases are $n = 29,55,71$. All 77
+proved cases keep their existing status.
+The current identities at $n = 68,105,266,270,272,292$ reflect the latest retained
+finite refinements and arrangements.
 
 The finite rational refinements admitted by upstream
-[PR 434](https://github.com/jlevy/squares/pull/434) now have checked linear identities.
+[PR 434](https://github.com/jlevy/squares/pull/434) have checked linear identities.
 Their reported and verified fractions and complete terminating displays agree exactly;
 current source, count, formal evidence, pinned complete facts, replay custody and house
 geometry are checked before admission.
-The register derives a missing primitive linear polynomial without rewriting the
-upstream source records.
-A supplied polynomial is preserved only with the supported `derived-from-exact-form`
-origin and matching custody; exact coefficient checks refuse nearby substitutions.
-There are 31 current native-certificate fallback projections and three explicit finite
-refinements. These witness-side identities retain their upper-bound meaning and proof
-status. Ideal contact and stationarity work remains open, including $n = 68$
-(`think-056g`), $n = 105$ (`think-gl59`) and $n = 292$ (`think-w622`). The finite
-representation gap at $n = 105$ is resolved.
+Daniel’s new arrangements at $n = 266,270,272$, imported by
+[PR 441](https://github.com/jlevy/squares/pull/441), preserve a different display
+contract: the reported full decimal is the native fraction, while the verified 16-place
+decimal is its least upward ceiling.
+The primitive linear polynomial $q s-p$ describes the native fraction, and the display
+ceiling remains explicit.
+The six frontier records now carry that derived polynomial and its
+`derived-from-exact-form` origin through the maintained backfill producer.
+The register also admits a source-omitted polynomial only after these scoped custody
+checks; nearby substitutions and unsupported polynomial origins are refused.
+
+There are 35 current finite witness-side projections: 29 original native T-098 sides,
+three Rehwaldt refinements and three Daniel arrangements.
+They retain their upper-bound meaning and proof status.
+Ideal contact and stationarity work remains open, including $n = 68$ (`think-056g`),
+$n = 105$ (`think-gl59`) and $n = 292$ (`think-w622`). The finite representation gap at
+$n = 105$ is resolved.
+Each new Daniel pose needs its own active contact system and stable KKT seed; an older
+pose’s KKT data supplies no linkage.
+
+Four additional reported polynomials at $n = 102,106,152,177$ have degrees 8, 32, 40 and
+32\. Their primitive coefficients, irreducibility and unique roots in the source
+intervals are independently checked against the acquired source bytes.
+The complete source rows, flags, intervals and acquisition identity remain in notes.
+These roots lie below the current finite bounds, but have no admitted geometry or Lean
+replay: assurance remains V0/C0. The missing native geometry and field-to-side binding
+are tracked in `think-8sm2` and
+[issue 419](https://github.com/jlevy/squares/issues/419).
 
 **Earlier recovery checkpoint, 2026-10-08:** the parent certified 319 exact identities,
 including the original 33 A1 projections: 32 native T-098 certificate sides and the
@@ -52,16 +72,18 @@ certified outward decimal ceiling at $n = 292$. The unequal reported and verifie
 $n = 105$ bounds were refused.
 Those controls remain tied to the retained pre-refinement records and their original
 certificate receipts.
-The two superseded projections at $n = 68,292$ remain part of that delivered history; 31
-remain current after PR 434. The earlier source-refresh adapters preserved the primitive
-linear identities of 23 upstream certified rational witnesses.
+The two superseded projections at $n = 68,292$ remain part of that delivered history.
+The intermediate PR 434 checkpoint retained 31 original native projections; after the
+new Daniel arrangements, 29 remain current.
+The earlier source-refresh adapters preserved the primitive linear identities of 23
+upstream certified rational witnesses.
 
 The child [PR 435](https://github.com/jlevy/squares/pull/435) contains the full
-degree-672 polynomial at $n = 83$, 170 historical entries, the web reader and complete
-archives, and the continuation map.
-Replaying its $n = 83$ polynomial is expected to raise the child census to 321 exact
-identities, with the same three numeric-only cases; that refreshed child register has
-not yet been generated or verified at this checkpoint.
+degree-672 polynomial at $n = 83$, the web reader and complete archives, and the
+continuation map. Its earlier recovery build verified 321 exact identities and 170
+historical entries. The latest parent additions still require a child rebuild and
+projection of the four source-only roots into the separate source history.
+The final child census and publication measurements remain pending at this checkpoint.
 The selected next entry is W7 driver delivery in `think-s6np`, then the known $n = 11$
 contact-derived octic control, then one preregistered bounded $n = 102$ W6 slice in
 `think-ohhz`. This recovery has executed no solver, contact-derived control or bounded
@@ -86,15 +108,16 @@ limit on tracked PDFs.
 
 - **Every polynomial checked, not just transcribed:** for each recorded minimal
   polynomial, the register records an irreducibility certificate over $\mathbb{Q}$, a
-  rational isolating interval with exactly one real root, agreement of that root with
-  the recorded side, and its agreement in digits with Daniel’s independent 39-digit KKT
-  value.
+  rational isolating interval with exactly one real root and agreement of that root with
+  the recorded side. Agreement in digits with Daniel’s independent 39-digit KKT value is
+  a separate numerical diagnostic when available.
 
 - **Exact facts complete:** the original backfill populates derivable frontier facts,
   with `algebraic_source` distinguishing source transcription from local derivation
-  (closes think-kj6n, think-26at). The current finite-refinement records preserve their
-  source’s omitted polynomial fields; the checked register supplies their linear
-  identities through the retained-custody adapter.
+  (closes think-kj6n, think-26at). The six latest finite records now carry primitive
+  linear identities derived from their native fractions by the maintained backfill
+  producer. The register also checks source-omitted linear identities through the
+  retained-custody adapter.
 
 - **A paper:** `papers/exact-side-values.html`, `.md` and `.pdf`, rendered from the
   register alone, with every closed form and polynomial in full.
@@ -194,8 +217,10 @@ The paper is a view of the register, and no fact on it is typed into a template.
    - `contact-system`: computed here from an exact contact system, citing evidence.
 
    The original backfill records it with derived or transcribed polynomial facts.
-   Current finite-refinement source rows may omit the polynomial and its origin; the
-   register completes those identities only after the scoped custody checks.
+   Current finite-refinement source rows carry the primitive linear polynomial and its
+   derived origin after backfill.
+   The register accepts either that supported form or an omitted polynomial only after
+   the scoped custody checks.
    `devtools.generate_frontier_case` writes it for new catalogue intakes.
 
 2. **Backfill** (`devtools.backfill_algebraic_facts`, one-shot with `--check`).

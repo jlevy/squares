@@ -153,10 +153,25 @@ The ones that carry the most weight:
   so every closed form here carries a derived pair.
   All four are null where nothing exact is known.
   [`exact-values.json.gz`](exact-values.json.gz) collects them for every case and checks
-  each polynomial: irreducibility, a unique root in a rational interval, and agreement
-  with the record and with Evan Daniel’s independent KKT values.
+  each polynomial for irreducibility, a unique root in a rational interval and agreement
+  with the recorded side.
+  Independent KKT values remain separate numerical diagnostics.
   Its storage is documented in [Generated Data Storage](#generated-data-storage).
-  The later publication layer supplies the exact side values paper.
+  Native certificate sides and certified outward ceilings carry distinct provenance.
+  Rehwaldt’s finite refinements require exact equality between the reported decimal,
+  verified decimal, exact fraction and retained witness side, with complete source,
+  certificate, replay and house custody.
+  Daniel’s new arrangements at $n=266,270,272$ instead retain the native exact fraction
+  and full reported decimal together with their least upward 16-place verified display.
+  The linear polynomial describes that native fraction; its ceiling is recorded
+  separately. Each new pose needs its own contact system and stable KKT seed for
+  ideal-value research.
+  Four source-only notes at $n=102,106,152,177$ retain separately checked polynomial
+  roots below the current finite bounds, complete source rows and their original checker
+  flags. Their geometry remains V0/C0: neither feasibility, current-pose identity nor
+  Lean replay follows from the algebraic checks.
+  The missing native geometry files remain an intake dependency under `think-8sm2`. The
+  later publication layer supplies the exact side values paper.
 - `evidence` points into [`evidence.yaml`](evidence.yaml), where assurance, method,
   performer, independence, origin, actual precision, tolerance, certificate, replay,
   proof scope, and limitations remain separate fields.

@@ -7,15 +7,19 @@ description: >-
   `python -m devtools.build_exact_values` from the frontier records, the retained Kingbird
   catalogue, Evan Daniel's KKT batch and retained upper-bound certificate/replay packets;
   the paper on exact side values renders from it and from nothing else. An open record
-  without a reported algebraic identity may supply a verified rational bound only when it
-  equals both current decimals exactly and its packet certifies the current source/count.
+  without a reported algebraic identity may supply a rational bound through exact
+  source/count/certificate/replay custody. Rehwaldt projections require equality with
+  both current decimals; Daniel's new arrangements retain the native fraction and its
+  independently checked least upward 16-place verified display. Source-only polynomial
+  notes retain their V0/C0 geometry status and never become current bounds.
 
   The records are the system of record and this file is a view of them: `--check`
   rebuilds it and compares bytes, so an entry cannot drift from its record. Every check
   here is exact -- a certificate of irreducibility over Q, a rational interval holding
   exactly one real root, and that root's agreement with the recorded decimal -- and a
-  polynomial that fails one fails the build rather than reaching this file. Source paths
-  are relative to packing/, as in the atlas registers.
+  polynomial that fails one fails the build rather than reaching this file. The
+  register.sources paths are packing-relative; source occurrences and acquisition or
+  manifest paths inside reported_source are repository-relative.
 type: object
 additionalProperties: false
 required: [generated_by, range, sources, totals, entries]
@@ -78,6 +82,93 @@ properties:
     minItems: 1
     items: {$ref: '#/$defs/entry'}
 $defs:
+  source_occurrence:
+    type: object
+    additionalProperties: false
+    required: [path, url, kind, locator, source_flags]
+    properties:
+      path: {type: string, minLength: 1}
+      url: {type: string, minLength: 1}
+      kind: {type: string, minLength: 1}
+      source_flags: {type: array, items: {type: string}}
+      locator:
+        type: object
+        additionalProperties: false
+        required: [line, section]
+        properties:
+          line: {type: integer, minimum: 1}
+          line_end: {type: integer, minimum: 1}
+          section: {type: string}
+  source_attribution:
+    type: object
+    additionalProperties: false
+    required: [date_mentions, source_text]
+    properties:
+      date_mentions: {type: array, items: {type: string}}
+      source_text: {type: array, items: {type: string}}
+  reported_source:
+    type: object
+    additionalProperties: false
+    required: [revision, sha256, acquisition, manifest, row, interval_root_count, isolated_root_contained]
+    properties:
+      revision: {type: string, pattern: '^[0-9a-f]{40}$'}
+      sha256: {type: string, pattern: '^[0-9a-f]{64}$'}
+      acquisition: {type: string, minLength: 1}
+      manifest: {type: string, minLength: 1}
+      interval_root_count: {const: 1}
+      isolated_root_contained: {const: true}
+      row:
+        type: object
+        additionalProperties: false
+        required: [n, status, S, S_poly_ascending, S_interval, S_degree, height_digits, field_poly_ascending, field_degree, verify_exact, lean_packs, lean_local_min, crosscheck, new, data]
+        properties:
+          n: {enum: [102, 106, 152, 177]}
+          status: {const: exact}
+          S: {$ref: '#/$defs/decimal'}
+          S_poly_ascending: {$ref: '#/$defs/reported_coefficients'}
+          S_interval:
+            type: array
+            minItems: 2
+            maxItems: 2
+            items: {$ref: '#/$defs/rational'}
+          S_degree: {enum: [8, 32, 40]}
+          height_digits: {type: integer, minimum: 1}
+          field_poly_ascending: {$ref: '#/$defs/reported_coefficients'}
+          field_degree: {type: integer, minimum: 1}
+          verify_exact: {type: boolean}
+          lean_packs: {type: boolean}
+          lean_local_min: {type: string}
+          crosscheck: {type: string}
+          new: {const: true}
+          data: {type: string, minLength: 1}
+  reported_coefficients:
+    type: array
+    minItems: 2
+    items: {type: string, pattern: '^-?[0-9]+$'}
+  source_root_checks:
+    type: object
+    additionalProperties: false
+    required: [irreducible, root, decimal, kkt_agreement_digits, recorded_agreement_digits, catalogue, galois]
+    properties:
+      irreducible: {$ref: '#/$defs/checks/properties/irreducible/oneOf/1'}
+      root: {$ref: '#/$defs/checks/properties/root/oneOf/1'}
+      decimal: {$ref: '#/$defs/decimal'}
+      kkt_agreement_digits: {type: 'null'}
+      recorded_agreement_digits: {$ref: '#/$defs/checks/properties/recorded_agreement_digits'}
+      catalogue: {const: not-in-catalogue}
+      galois: {type: 'null'}
+  source_assurance:
+    type: object
+    additionalProperties: false
+    required: [verification, confirmation, algebraic_identity, geometry_replay, lean_replay, current_pose_identity, global_optimality]
+    properties:
+      verification: {const: V0}
+      confirmation: {const: C0}
+      algebraic_identity: {const: independently-checked}
+      geometry_replay: {const: not-attempted}
+      lean_replay: {const: not-attempted}
+      current_pose_identity: {const: not-established}
+      global_optimality: {const: not-established}
   rational:
     type: string
     pattern: '^-?[0-9]+/[0-9]+$'
@@ -88,10 +179,30 @@ $defs:
     type: object
     additionalProperties: false
     required: [kind, text, bead, degree]
+    allOf:
+      - if:
+          properties:
+            kind: {const: unreconciled-source-polynomial}
+        then:
+          required: [side, polynomial, checks, sources, source_statuses, attribution, reported_source, assurance]
+          properties:
+            degree: {enum: [8, 32, 40]}
+            checks: {$ref: '#/$defs/source_root_checks'}
     properties:
+      side:
+        description: The reported source root, which establishes no current packing bound.
+        $ref: '#/$defs/decimal'
+      polynomial: {$ref: '#/$defs/polynomial'}
+      checks: {$ref: '#/$defs/checks'}
+      sources: {type: array, minItems: 1, items: {$ref: '#/$defs/source_occurrence'}}
+      source_statuses: {type: array, items: {type: string}}
+      attribution: {$ref: '#/$defs/source_attribution'}
+      reported_source: {$ref: '#/$defs/reported_source'}
+      assurance: {$ref: '#/$defs/source_assurance'}
       kind:
         enum:
           - superseded-catalogue-polynomial
+          - unreconciled-source-polynomial
           - missing-polynomial-text
           - route
           - no-radical-form
