@@ -12,6 +12,7 @@ from typing import Any
 from devtools import evand_arrangement_reports as reports
 from devtools import register_refinement_reports as registry
 from devtools.check_case_prose import sentence_spans
+from sqpack.exact_values import algebraic_fields
 from sqpack.yamlio import safe_load
 
 REPO = reports.REPO
@@ -123,8 +124,7 @@ def adopt_case(n: int, existing: str, generated: str | None = None) -> str:
     case["reported_upper_bound"].update(
         value=reports.legacy.terminating_decimal(certificate.side),
         exact_form=reports.legacy.literal(certificate.side),
-        algebraic_degree=1,
-        minimal_polynomial=None,
+        **algebraic_fields(reports.legacy.literal(certificate.side), 1, None),
         analytically_optimized=None,
         catalogue_rigid="not-stated",
         construction_method="unknown",
