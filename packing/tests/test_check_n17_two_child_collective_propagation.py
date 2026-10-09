@@ -244,6 +244,7 @@ def fixture(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
     return doc
 
 
+@pytest.mark.slow
 def test_generate_inherits_base_proof_and_freshly_reconstructs_new_geometry(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -306,6 +307,7 @@ def test_accepted_custody_and_typed_rows_refuse_tamper(
         tool.generate(doc, deadline=deadline())
 
 
+@pytest.mark.slow
 def test_two_clean_processes_match_new_finite_payload(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
