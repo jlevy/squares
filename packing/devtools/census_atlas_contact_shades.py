@@ -76,6 +76,7 @@ import mpmath as mp
 from strif import atomic_output_file
 
 from sqpack import retained_json
+from sqpack.witness import materialize_exact_witness
 from sqpack.yamlio import load_yaml
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -660,13 +661,25 @@ def packings_from_witness(
     """
     representation = witness["representation"]
     unit = witness["coordinates"]["angle_unit"]
-    side = _number(witness["side"])
+    exact_geometry = None
+    if witness.get("scalar", {}).get("kind") in {"rational", "algebraic-number-field"}:
+        exact_geometry, exact_side = materialize_exact_witness(witness)
+        side = float(exact_side)
+    else:
+        side = _number(witness["side"])
     exact: list[Square] = []
     framed: list[Square] = []
     degrees: list[float] = []
-    for row in witness["squares"]:
+    for index, row in enumerate(witness["squares"]):
         ident = str(row["id"])
-        if representation == "center-angle":
+        if exact_geometry is not None:
+            corners = exact_geometry[index]
+            x = float(sum(cx for cx, _ in corners) / 4)
+            y = float(sum(cy for _, cy in corners) / 4)
+            (x0, y0), (x1, y1) = corners[0], corners[1]
+            angle = _atan2(float(y1 - y0), float(x1 - x0))
+            frame_angle = math.degrees(angle) % 90.0
+        elif representation == "center-angle":
             x, y = (_number(value) for value in row["center"])
             angle = _radians(row["angle"], unit)
             frame_angle = _frame_degrees(row["angle"], unit) % 90.0

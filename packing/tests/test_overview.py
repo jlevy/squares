@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import dataclasses
-import functools
 import html
 import html.parser
 import math
@@ -63,6 +62,16 @@ def page() -> str:
 @pytest.fixture(scope="module")
 def results() -> str:
     return site_renders.html(render_overview.RESULTS_PAGE)
+
+
+@pytest.fixture(scope="module")
+def result_bodies() -> dict[str, str]:
+    """Render complete result bodies during setup, before per-test monkeypatches.
+
+    Each preview still renders afresh; its complete context comes from the same
+    shared overview. Rendering all bodies in call time took 12.92 s on run 37785086481.
+    """
+    return site_renders.result_bodies()
 
 
 @pytest.fixture(scope="module")
@@ -129,18 +138,30 @@ def test_counts_are_the_declared_rungs(register: list[dict]) -> None:
     assert stats.cases_1_100_proved + stats.cases_1_100_open == 100
 
 
+@pytest.fixture
+def shared_html(request: pytest.FixtureRequest) -> str:
+    """Resolve the shared page during setup, before its independent fresh render.
+
+    Resolving it in the assertion rendered a cold overview twice in call time
+    (12.49 s on run 37777128452, 9.19 s on run 37877186650). The fresh render remains
+    uncached.
+    """
+    return cast(str, request.getfixturevalue(request.param))
+
+
 @pytest.mark.parametrize(
-    ("render", "shared"),
+    ("render", "shared_html"),
     [(render_overview.overview_page, "page"), (render_overview.results_page, "results")],
     ids=["overview", "results"],
+    indirect=["shared_html"],
 )
 def test_the_render_is_deterministic(
-    render: Callable[[], render_overview.Page], shared: str, request: pytest.FixtureRequest
+    render: Callable[[], render_overview.Page], shared_html: str
 ) -> None:
     """A fresh render of each page is the shared one, byte for byte, which is what lets
     every other check read the shared render. One page per node: the two fresh renders
     together held one node past the per-test ceiling (12.25 s on run 37372707772)."""
-    assert render().html == request.getfixturevalue(shared)
+    assert render().html == shared_html
 
 
 def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
@@ -864,11 +885,45 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         assert 'width="400" height="400"' in drawing
         assert frontier.drawing_path(n, regularized=is_regularized) in frontier.drawing_paths()
 
+    identical_thumbnails: set[int] = set()
+    for n in regularized:
+        assert (frontier.REGULARIZED_RENDERINGS / f"n-{n:03d}.svg").read_bytes() != (
+            frontier.RENDERINGS / f"n-{n:03d}.svg"
+        ).read_bytes(), n
+        if frontier.packing_svg(
+            n, units=overview_sections.ATLAS_UNITS, root=frontier.REGULARIZED_RENDERINGS
+        ) == frontier.packing_svg(n, units=overview_sections.ATLAS_UNITS):
+            identical_thumbnails.add(n)
+    # The exact #432 houses and n155's 337 sub-picometre snaps have unchanged
+    # tile-scale shades; 400-unit rounding hides moves visible in the full SVG.
+    assert identical_thumbnails == {
+        129,
+        131,
+        261,
+        70,
+        103,
+        295,
+        105,
+        267,
+        108,
+        155,
+        146,
+        84,
+        86,
+        123,
+        126,
+        127,
+    }
     assert "data-atlas-layer" not in tiles
 
 
-def test_a_case_star_marks_any_recent_displayed_contribution() -> None:
-    """Tile stars and accessible names follow upper, lower and optimality recency."""
+def test_a_case_star_marks_any_recent_displayed_contribution(
+    rendered: Callable[[str], str],
+) -> None:
+    """Atlas stars follow upper, lower and optimality recency; frontier rows follow
+    their displayed lower bound. Both retain the shared accessible star vocabulary."""
+    from devtools import render_frontier_page as frontier  # noqa: PLC0415
+
     recent = {
         n: flags.any for n, flags in overview_sections.recent_contributions_by_case().items()
     }
@@ -882,12 +937,20 @@ def test_a_case_star_marks_any_recent_displayed_contribution() -> None:
         tiles,
     )
     assert [int(n) for n, _, _ in found] == list(range(1, 325))
+    lower_recent = frontier.recent_lower_bounds()
+    frontier_page = rendered("frontier.html")
+    rows = dict(re.findall(r'<tr id="n-(\d+)"[^>]*data-recent="(true|false)"', frontier_page))
+    assert sorted(int(n) for n in rows) == list(range(1, 325))
     for n, name, number in found:
         starred = recent[int(n)]
+        assert lower_recent[int(n)] == (rows[n] == "true"), n
+        assert not lower_recent[int(n)] or starred, n
         assert number.endswith(star) == starred, n
         assert number.count(star) == starred, n
         assert name.endswith(f", {overview_sections.NEW_RESULT}") == starred, n
     assert sum(recent.values()) == sum(name.endswith("new result") for _, name, _ in found)
+    assert not lower_recent[1]
+    assert not lower_recent[25]
 
 
 def test_an_upper_only_recent_contribution_stars_the_tile_and_case_summary(
@@ -3054,16 +3117,6 @@ def test_the_prose_links_repository_files_on_main(page: str) -> None:
 
 
 @pytest.fixture(scope="module")
-def result_bodies() -> dict[str, str]:
-    """Render complete result bodies during setup, before per-test monkeypatches.
-
-    Each preview still renders afresh; its complete context comes from the same
-    shared overview. Rendering all bodies in call time took 12.92 s on run 37785086481.
-    """
-    return site_renders.result_bodies()
-
-
-@pytest.fixture(scope="module")
 def overview() -> overview_data.Overview:
     return site_renders.overview()
 
@@ -3110,8 +3163,10 @@ def test_every_result_shows_its_status_and_its_place_on_the_frontier(
 ) -> None:
     """A row's status line is derived, never restated. Its first chip is the status,
     which every row draws (`result_status.status`) and carries as an attribute, for the
-    filter. After it comes `superseded`, on a bound that no case bound rests on now
-    (`render_recent_results.superseded`), and that is all a row shows of a standing.
+    filter. After it comes `superseded`, on a bound that no case bound rests on now and
+    whose cases hold a bound at least as good as each it states
+    (`render_recent_results.superseded`), and that is all a row shows of a standing: a
+    better bound the case records have not taken in yet, pending adoption, has no chip.
     That a bound is only reported is the status `recorded` and no chip of its own; a
     second proof of a held value says so by its kind; and a result that is no bound is
     marked only where its entry declares a later result that implies it
@@ -4436,7 +4491,7 @@ def test_both_tables_of_results_end_with_the_same_id_column(
     # On a phone the id opens the card, in both tables, and the date, the row's first
     # cell, still follows the credit there.
     assert "  .site-results .site-col-id {\n    font-weight: 650;\n    grid-area: 1 / 1;" in css
-    assert "    grid-column: 3;\n    order: 2;\n    text-align: end;" in css
+    assert "    grid-column: 1 / -1;\n    order: 2;\n    text-align: end;" in css
 
 
 def test_a_date_cell_leads_with_the_date_and_then_says_what_it_dates(
@@ -4635,7 +4690,10 @@ def test_grouping_agrees_with_readmes_relation(
 def test_each_row_detail_names_its_novelty_label(
     results: str, overview: overview_data.Overview, result_bodies: dict[str, str]
 ) -> None:
-    """The complete result page carries the novelty; the table's panel links to it."""
+    """The complete result page carries the novelty; the table's panel links to it.
+
+    The bodies are the module's `result_bodies`, rendered in setup: rendering them in
+    this call, as the first test of the module to ask, took 12.08 s on run 37877186650."""
     for result in overview.results:
         body = result_bodies[result.id]
         assert f'data-novelty="{result.novelty}"' in body
@@ -5427,32 +5485,41 @@ class _RowWiring(HTMLParser):
             self._site_table = False
 
 
-@functools.cache
-def _row_wiring(name: str) -> _RowWiring:
-    parser = _RowWiring()
-    parser.feed(site_renders.html(name))
-    return parser
+@pytest.fixture(scope="module")
+def row_wiring(rendered: Callable[[str], str]) -> Callable[[str], _RowWiring]:
+    """The row wiring of each page the row checks read, parsed during setup from the
+    module's `rendered` pages, so no check carries a render in its own call time."""
+    parsed = {}
+    for name in (*ROW_PAGES, "frontier.html"):
+        parser = _RowWiring()
+        parser.feed(rendered(name))
+        parsed[name] = parser
+    return parsed.__getitem__
 
 
 @pytest.mark.parametrize("name", ROW_PAGES)
-def test_no_table_cell_expands_on_its_own(name: str) -> None:
+def test_no_table_cell_expands_on_its_own(
+    name: str, row_wiring: Callable[[str], _RowWiring]
+) -> None:
     """No `<td>` or `<th>` on a page with a site table holds a `<details>`: a row's
     detail is its popover. The replay table's own disclosure wraps the whole table."""
-    wiring = _row_wiring(name)
+    wiring = row_wiring(name)
     assert wiring.rows, name
     assert wiring.cells > len(wiring.rows), name
     assert wiring.cell_details == 0, name
 
 
 @pytest.mark.parametrize("name", ROW_PAGES)
-def test_every_row_with_detail_is_wired_to_one_popover(name: str) -> None:
+def test_every_row_with_detail_is_wired_to_one_popover(
+    name: str, row_wiring: Callable[[str], _RowWiring]
+) -> None:
     """Every body row of every site table names one popover, has an accessible name, and
     carries exactly one native trigger for that popover, so it opens without scripts.
     The popover is on the page once, outside every table, a dialog labelled by its own
     headline, with a close cross of its own; no popover is left without a row.
     A row carries no `tabindex`: `row-popover.js` makes it focusable when it takes the
     trigger out of the tab order, so without scripts the trigger is the one stop."""
-    wiring = _row_wiring(name)
+    wiring = row_wiring(name)
     targets = []
     for attributes, triggers in wiring.rows:
         target = attributes.get("data-row-popover")
@@ -5475,18 +5542,18 @@ def test_every_row_with_detail_is_wired_to_one_popover(name: str) -> None:
 
 
 def test_the_tables_with_row_detail_are_the_ones_named(
-    overview: overview_data.Overview,
+    overview: overview_data.Overview, row_wiring: Callable[[str], _RowWiring]
 ) -> None:
     """The recent table on the overview and the results table on its page: each row's
     popover is its own, by its key. The frontier table's rows open their case's record
     in the one case popover instead (think-necq)."""
     recent = {f"pop-result-{r.id.lower()}" for r in _recent_entries(overview)}
     assert recent
-    assert set(_row_wiring("index.html").popovers) == recent
-    assert set(_row_wiring("all-results.html").popovers) == {
+    assert set(row_wiring("index.html").popovers) == recent
+    assert set(row_wiring("all-results.html").popovers) == {
         f"pop-result-{r.id.lower()}" for r in overview.results
     }
-    assert not _row_wiring("frontier.html").popovers
+    assert not row_wiring("frontier.html").popovers
 
 
 @pytest.mark.parametrize("name", ROW_PAGES)

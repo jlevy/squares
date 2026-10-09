@@ -1,0 +1,763 @@
+{
+  "source_revision": "495238e3d5a542008ff2f01a1dbbb78527cbe732",
+  "external_archive": {
+    "url": "https://github.com/lollipoll/certified-square-packing-68/releases/download/v1.2.0/n68-root-feasibility-publication-reviewed-20261007.tar.gz",
+    "bytes": 2273829,
+    "sha256": "72879b885d8d66028fce8987fd314c6ede923ee97469d19227739490d62862b9"
+  },
+  "decoded_files": 125,
+  "decoded_bytes": 11021278,
+  "custody": "All 125 safe ordinary archive members match immutable upstream Git blobs and original retained bytes; all 124 publication, 77 review and 70 proof manifest entries matched. This establishes custody only.",
+  "entries": [
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/COMPARISON.md",
+      "bytes": 4197,
+      "sha256": "d4d123abec9c18a30a29959d181ae68f7bf23f9a7ae03fcced288836f9393058",
+      "upstream_git_blob": "dcdfbb8773ddcbda9130a41b35387f5ebe05acbf"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/PUBLICATION_MANIFEST.json",
+      "bytes": 15393,
+      "sha256": "ca78b3d979a145c89725e6d5fad6353837e15e45af86f95412b665b04dceaf72",
+      "upstream_git_blob": "27a1f3d0ca2c2b46f3350b018b03281c2dd5488e"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/README.md",
+      "bytes": 10149,
+      "sha256": "b673a8e59531de45e9d99c728df40f09d36249b9083969f4f51b968b5f85c5b1",
+      "upstream_git_blob": "4f1c051b473777b1fe5b17e6f5eee1cde12c3700"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/receipts/fresh-replay.json",
+      "bytes": 52241,
+      "sha256": "4947db835be21ce01b40615a6d2fcaa4206c96aad2566cd3be5aff825b415f05",
+      "upstream_git_blob": "66d21a8a183d5e42d376add07d285d6a0bfe9749"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/receipts/fresh-replay.log",
+      "bytes": 431,
+      "sha256": "a92f6b54e7a38e1f46b4c2a093f3139269a2e7f4695a944428051d8b6c5df3d6",
+      "upstream_git_blob": "84536d1b76c4fd9c2396d62cd9b4312ca5daca94"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/receipts/fresh-support-audit.json",
+      "bytes": 1295497,
+      "sha256": "4023623595eca1939d97e6425b2d62440180d552dd20d3c88797b24e3025ba88",
+      "upstream_git_blob": "2cee294ee67ee7346c1a3d0498231a989acff083"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/receipts/fresh-support.log",
+      "bytes": 585,
+      "sha256": "938c44da78ece965a5b3549f96be0fccec6614efd7984282b5472533b8a2cc00",
+      "upstream_git_blob": "8dae1e068dfa187fa893896851f1edaac7c4abce"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/receipts/input-binding.json",
+      "bytes": 5750,
+      "sha256": "a8ce38d6e9b6ce1f71dc80eca23d5311fa99973516a906b6b663b7596db9ea7d",
+      "upstream_git_blob": "7d175a458ff80295a59076cf8b45bc6b3d5b0095"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/receipts/preservation-before-publication.json",
+      "bytes": 1641,
+      "sha256": "d552915293e8caf02ab1bcf976b8d62da29faa95d0f05e46a6447caa708f1a8e",
+      "upstream_git_blob": "7063a4792263071237dbd337cfc0bc8769e2241b"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/receipts/publication-binding.json",
+      "bytes": 3209,
+      "sha256": "a8ce2ffec32d771ba6b7388ad007ad8b51cffad6782fc7dbbd883acc4166eccf",
+      "upstream_git_blob": "98c90eccbfd5f3b7f79e254ad871542288ef9ec7"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/receipts/publication-replay.json",
+      "bytes": 52246,
+      "sha256": "26b2e61fb7a7e2089346596fe876c790744ab4b9caf1816b21ea83ddf29a582e",
+      "upstream_git_blob": "deabf0323171a4c156af84de5673b53dc2ae54f7"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/receipts/publication-support-audit.json",
+      "bytes": 1295496,
+      "sha256": "77576ab219b839c301952afabfcc928bd4c8c70aabede517bbd0ffeea2fd0769",
+      "upstream_git_blob": "481634eb9e3019d3f473018cc51b561ac25bfd15"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reproduce.py",
+      "bytes": 5029,
+      "sha256": "4397dad5ceb07d3144769b848b5d3800246b19d32818d2866b0397fb8bf808b6",
+      "upstream_git_blob": "2a7686dc4ec3d421b57ebd36b550a8efb35e8831"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/HANDOFF.txt",
+      "bytes": 4824,
+      "sha256": "93e843d5e3a8523fcb1a03125ead010d34d8c2f63ced2106842ec7bb4e43bb8f",
+      "upstream_git_blob": "349a0775b691ec05f2a278dc30c470ec6bac1833"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/MANIFEST.json",
+      "bytes": 7302,
+      "sha256": "f3fbaaba9266a8bb4cdc0a1cf744b0bc55c262054377208c2406e4ad9f0f4897",
+      "upstream_git_blob": "8f724d7c3e0fafcae95d1fd0c3f23a194730d2a7"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/PROOF.txt",
+      "bytes": 7923,
+      "sha256": "0115338784fe172142108efdeb192c58e7e442d2cb740a2f949cae3f66e3d149",
+      "upstream_git_blob": "c5cc99d2334e4ebbcdf3474b189806872da3ab8b"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/PUBLICATION_DRAFT.txt",
+      "bytes": 2298,
+      "sha256": "15031afc1c5853d08ad356240c90c2a2390eff8c6f180067490b9983fb78f444",
+      "upstream_git_blob": "ad434ab74c41cf4d95e345280f9785da76d2909c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/census.json",
+      "bytes": 912744,
+      "sha256": "37c3664f083e1a3ac1e951ba9e0765cc64c9c9bc3ea6dbd1eafac0be2c2f8dbb",
+      "upstream_git_blob": "a7a215e1c6dea3ed388ac731b4aaf5fb4f59f169"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/census.log",
+      "bytes": 183,
+      "sha256": "a9e31b523906008b1db8211d2b99ac1e5e6800d7def62c36db49a5ae74025878",
+      "upstream_git_blob": "45c22a7b53c9c13ea2a8ce1b8713fc288d792fe2"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/census.py",
+      "bytes": 3061,
+      "sha256": "b9d35fd698edb7dfe6b280347ce3ddfc36eb4b57594ac131adee0748575ce976",
+      "upstream_git_blob": "46a86292a9b9f0c000665cbd4276b67531e9f1c9"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/certificate.json",
+      "bytes": 1295560,
+      "sha256": "07ed68c1b557ad947447f5165dcb3c9bd1366828e99cd7a9f14814b55a3a2917",
+      "upstream_git_blob": "8ab2e4ca89d1fe66becff39d4f10c43a125faf95"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/construction.json",
+      "bytes": 41338,
+      "sha256": "83b9679f99fcd333415aca3e8ffa32e90fca55e9a36795318a5465ade4e476a9",
+      "upstream_git_blob": "8be5e386a88d51dad50de3719ed11ccc662351eb"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/controls-verification.json",
+      "bytes": 2020,
+      "sha256": "7cf9313cd4fb644b13992cacc0121a628bbf45c0f4a5c72032825ec0d6051aff",
+      "upstream_git_blob": "b489f3ed14f47e46aac1cf1425d23293742a19f2"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/controls.py",
+      "bytes": 3079,
+      "sha256": "b1a00147b01e50f051cbc7a3a01cb3a1f6a7083a2e5f6cf009a72202a1dcb936",
+      "upstream_git_blob": "b178b0cbd2f455b00917d69abb0a45c1ea30ef9e"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/coverage.tsv",
+      "bytes": 1203585,
+      "sha256": "9cb8c662f9e82d2a8ddd05fe2256469e8e40f110c65d9acc6cd747cce4ede1c2",
+      "upstream_git_blob": "d3df6146a3a9a4fc3c2563395976dbf86bcc6782"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/geometry.py",
+      "bytes": 4719,
+      "sha256": "e91be12bde277c5ba370d5ecc1595a0ed5eef4eb8441b2c6c1686c5db95bc0a7",
+      "upstream_git_blob": "c63237b2463f2ee10d8f8cae470a846bed2f60da"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/make_certificate.py",
+      "bytes": 2553,
+      "sha256": "8f0362dbf313ab338edd3062407fd68f73555869c5e9bc6e38e59825ce7fd4b8",
+      "upstream_git_blob": "eb6149c57b26af21199c00f02a955178dda1d958"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/primary-verification.json",
+      "bytes": 1070,
+      "sha256": "dffd596fc7f9828f1aee5af3b502cec8a251481fc150ffb2a971f3474f3ba2a5",
+      "upstream_git_blob": "ef4bafa3d28d6489cbf4e6b83879f414cc36e318"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/receipts/final-replay.json",
+      "bytes": 52242,
+      "sha256": "058d23b155bd5e0d260da2aa336a3d6d6bf05003cf2697325a5932a3797b34ee",
+      "upstream_git_blob": "009bee583f12b9d6cfed461d539e33ecd5bb945a"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/receipts/preservation.json",
+      "bytes": 4217,
+      "sha256": "297333243c3f09058e27c6ac22fdafe2363bf162272e00db76b53ad5e24532ac",
+      "upstream_git_blob": "970d79056d94312c2ac28ff875bc7fdd04b2ec7a"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/ANALYTIC_DERIVATION.txt",
+      "bytes": 8319,
+      "sha256": "86000732c2ae4972001eb80f7a92ed23459f3e2b677fa3e4c4f2f4e9b48a0391",
+      "upstream_git_blob": "061efc361664487351ac1058c11de58c6340d8fd"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/README.md",
+      "bytes": 4611,
+      "sha256": "9e07e3b16db746061924dc1b6bbd000b3b3d433cc862ae5a3aa224707bf088a8",
+      "upstream_git_blob": "84071423af2dfb95c4590454bba71bce7f3e690a"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/REVIEW.md",
+      "bytes": 4443,
+      "sha256": "08c16daee6d51d5e60a155cff7fd9ec6ac679a9f965b903315660489e7911902",
+      "upstream_git_blob": "e4b8030fd33d850941adf8fefd1ecc9f9c75b07b"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/SHA256SUMS.txt",
+      "bytes": 3467,
+      "sha256": "d812c55cb4308d08b91ef9aa5e9545097e4ea50388cee1929b7f7d4797f84978",
+      "upstream_git_blob": "3b1a0bdd86c676d38c57830f02bf87978d67e3fc"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/results/best_exact.json",
+      "bytes": 49162,
+      "sha256": "6d4f72debae83b5825e91f7b090e0cee08851ad7b85400343c0dee52f468dff9",
+      "upstream_git_blob": "f84e16af52ace7679f6288052202d5894912f60c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/results/fixed_angle/witness.json",
+      "bytes": 164435,
+      "sha256": "fdf914c61b30051fe92d08254bc46ae26f5c778ffa2d0027652581657d859a60",
+      "upstream_git_blob": "cd81a8dd59af2cf16dc6492f6156504f8b92a675"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/results/reduced/elimination_witness.json",
+      "bytes": 404532,
+      "sha256": "512b6a0c06b28478482b4b03c519b70f1f716dfe249bcbd5beff10df7112e807",
+      "upstream_git_blob": "0521814471367c54bae47998fb031f8b4f492e3c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/results/reduced/root_witness.json",
+      "bytes": 645703,
+      "sha256": "fa234967c8496538ee67614a7d8b68c58022f34bcc698b48eda00eb7282fe824",
+      "upstream_git_blob": "62c926ae5c086ab9c32a54a22bff84e056400617"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/results/reduced/system.json",
+      "bytes": 280828,
+      "sha256": "0bc2c2deea9f63d4ed1a3473ed50f71327ce33676bfd7ee1f43c371d13e481de",
+      "upstream_git_blob": "cf836b872ad1930f52c9bea44cef96dcbea0b31b"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/src/independent_verify.py",
+      "bytes": 11056,
+      "sha256": "c237cc5bf85cd26b3745a6118a127e2165d94bf0833d922a9c1f3b8ebcfc105c",
+      "upstream_git_blob": "e6dc0cf1398aafe4bf558a5a18cf89336889d4e5"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/src/published_verify.py",
+      "bytes": 3178,
+      "sha256": "911b9822334636ffc49472e4df32e38cb162efbfad9a4684879f006b1c90e7f9",
+      "upstream_git_blob": "5aad4f755d49943ec2fb8b03a9e4ec4b5effc812"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/src/test_verifiers.py",
+      "bytes": 3325,
+      "sha256": "9c57903b389d369bc3ce6960dddc8221dfaf01f4b65cfc1b60d029470df28543",
+      "upstream_git_blob": "ea6c51fe8bf37ef3e224048a93361ad231ea35c9"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/src/verify_elimination.py",
+      "bytes": 1646,
+      "sha256": "2cce125f93b11248ee4e7fd469598ed1ea06f860653281d0bb0fcda8c7f32edc",
+      "upstream_git_blob": "5dfc79ef6f06978f820ac1c672c831e832e6d5aa"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/src/verify_family_minimum.py",
+      "bytes": 2916,
+      "sha256": "96c0dd1373dc957113ae2a7ec58bbcacfaf54b1ade80a9aee6ad14a0449b6aed",
+      "upstream_git_blob": "aa86d63af38adfa44d8923209825b418fc436f06"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/src/verify_fixed_angle.py",
+      "bytes": 2592,
+      "sha256": "01746890d8484bc142dac565664fb17bf4b4e2d1c54dc643f09ed303716a7f1b",
+      "upstream_git_blob": "ec6ba6dbfb4f05c7b09418d6fc4c6f02746a992c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/src/verify_root.py",
+      "bytes": 2630,
+      "sha256": "bf9fd07c0e31d566ed3f3b3a6b50bf22818a7c032d56c805b46d25d789a8e457",
+      "upstream_git_blob": "fe51566b1eae6bdab3ff5db9704656e2fe54f588"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/check_hashes.py",
+      "bytes": 696,
+      "sha256": "2d63a6e6fd52239721c7dcb02843b867608b8d3962f9531ee5da9316796ac73b",
+      "upstream_git_blob": "6a21adb81d3dfc52c5d9fe6081641c344d23cd79"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/check_polynomial_binding.py",
+      "bytes": 4444,
+      "sha256": "1e6ae0ac44c2165346722e7a189658daa9948ee90b817c003bf2a9358f5c56d8",
+      "upstream_git_blob": "3b407d63b5b45468cf5dd7fe2e58c34840993d7e"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/independent_support_check.py",
+      "bytes": 3181,
+      "sha256": "48e1ae336855ba5cc05c3fd161bf51ef71cab24ebc33ae590be040f78a932423",
+      "upstream_git_blob": "c54f52e06414b515e205bef4f29a88a02d5347e9"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/load_bearing.svg",
+      "bytes": 30065,
+      "sha256": "0dff3f1a861d8dad92f0b2d8c80edc301aa1f8603cffa05b14d7ed15b4bd45dd",
+      "upstream_git_blob": "8d6f4e01c9bfd85a9c95a79950a36ec888fc0127"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/n68.json",
+      "bytes": 49162,
+      "sha256": "6d4f72debae83b5825e91f7b090e0cee08851ad7b85400343c0dee52f468dff9",
+      "upstream_git_blob": "f84e16af52ace7679f6288052202d5894912f60c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/n68.png",
+      "bytes": 207031,
+      "sha256": "2e3447948d446dda720cd3ec9ce78399a6621a1926d324119f225a90cd0d47d4",
+      "upstream_git_blob": "7e0befba0cd54d9ef2ffc510e510deafa277b392"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/n68.svg",
+      "bytes": 61898,
+      "sha256": "f5c5ea99e03bac546296df2fce56c9704307967c3bbf216546e9e4db46c32b2a",
+      "upstream_git_blob": "dec4db527d6b49f3a385e6f77cb56f1dd6c86775"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/review-evidence/binding_review.json",
+      "bytes": 1004,
+      "sha256": "7b8b67e0934ec94d82a942416011560b4bf92fab004ce8b8203f4a291c3d0441",
+      "upstream_git_blob": "238eee164042af50f4261e2f706554fee3f939d5"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/review-evidence/elimination_verification.json",
+      "bytes": 909,
+      "sha256": "a36baf51bc7dd96bb259feffb6f22798b42893d4615899d6f3a3ab6656ebf996",
+      "upstream_git_blob": "edc794f5086b4f98b81e056fa644089542d2d687"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/review-evidence/family_minimum_verification.json",
+      "bytes": 36945,
+      "sha256": "bded613027185b778ac1b19cc9cc08cfed848b4bb7947257a68c86019c45afcd",
+      "upstream_git_blob": "74ab26ab2c052911fa055544181040bf98a3ead5"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/review-evidence/fixed_angle_verification.json",
+      "bytes": 5550,
+      "sha256": "068b17acf137279fa7b6dd24fdb66c836b587cbd2c7748c1c1a82e6e427aba3c",
+      "upstream_git_blob": "7f0e2462fb05ccad5e13225bfe9a6ef3b149aec6"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/review-evidence/geometry_independent_check.json",
+      "bytes": 1658,
+      "sha256": "8c689ca6b99c8ce77c105949667134161b5e350e32a15a4cef9cf7c3aac84c7f",
+      "upstream_git_blob": "119ef1dd44d2b0ea235e370f93f3aec739e3b207"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/review-evidence/geometry_polygon_check.json",
+      "bytes": 1603,
+      "sha256": "657efd13ecbcca1cac1e5afa94fc174376519e5b4066cfed50252a5426fd018b",
+      "upstream_git_blob": "5305bd51c4fd41a4cf16a0fb9a0be5450a689454"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/review-evidence/geometry_support_check.json",
+      "bytes": 1636,
+      "sha256": "d01e5d732c84c1c0415c9156fc041826576375f339e70bdef30d1c95ba2263e6",
+      "upstream_git_blob": "d7242ce619b37c917da7649c5ed3bdeb2912240d"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/review-evidence/proof_replay.json",
+      "bytes": 1489,
+      "sha256": "ac7c8618a4a9f570cafa93cff907f7e91cda7ca97d6fcdc69b676a4e540c8ca4",
+      "upstream_git_blob": "01ef5c08028585ff0934aed220dfaf7df554791a"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/review-evidence/root_verification.json",
+      "bytes": 2604,
+      "sha256": "8e67ee314114f56b36b9d8a6feffb7f1083a82761edc16c0d78c8862db23290c",
+      "upstream_git_blob": "f64a231876157e80de0f974d78bc0332caa91514"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/sources/franciscouzo-n68.txt",
+      "bytes": 4982,
+      "sha256": "425ec02ce3b608649223d21b2e5e80cd1a53e9e7cfd48c3e4b1640b2e2d0b770",
+      "upstream_git_blob": "7280eb3ea21b4ef7ca5d7a939921a2ac42da2059"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/sources/n68-v1.0.0.json",
+      "bytes": 9763,
+      "sha256": "00e402139c76663a4bac8dbaed8705d1b8a04ccfd32f2945065f70ade5d6eb19",
+      "upstream_git_blob": "4f097a895b67737220e6f4d70c082d0f6922daae"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/sources/provenance.json",
+      "bytes": 1075,
+      "sha256": "1447fb75dc75a83902fd5ec86180d0ccc7cc2ef24ff2aa0356199db708fd4582",
+      "upstream_git_blob": "302c6e367c841c94bb7430bb9b4cf91400f21a04"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/verify.py",
+      "bytes": 3178,
+      "sha256": "911b9822334636ffc49472e4df32e38cb162efbfad9a4684879f006b1c90e7f9",
+      "upstream_git_blob": "5aad4f755d49943ec2fb8b03a9e4ec4b5effc812"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/verify_analytic.py",
+      "bytes": 934,
+      "sha256": "6f017f7d67668f4b6f1e6161e90835d3c2691e678aeebee5738e5d37f6632a7e",
+      "upstream_git_blob": "6b8e95877b529fd900947eb7d00759f3a0bc56f2"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/reproduce.py",
+      "bytes": 3220,
+      "sha256": "cd6ca4603a389ab3df899852a3936ebf05161b997e82dd6a8ce68d2ef0dda747",
+      "upstream_git_blob": "961919fd3283af8ec21279502f8f3bbf07341865"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/secondary-verification.json",
+      "bytes": 478,
+      "sha256": "471b73dbef80ff3c0852477c3483f282e9e61c71b5f57f766f27bce833959159",
+      "upstream_git_blob": "a1e321c992ffa79c1a2d8398e72aa88875f6b7dc"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/side-comparison.json",
+      "bytes": 957,
+      "sha256": "5a2189fa89babfe5fbd070e8a4af8672f50d31927209ecedd5b1b0df49f9e703",
+      "upstream_git_blob": "5252944b6cb532a508632e2130bb8404b5c9fb37"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/REFRESH.txt",
+      "bytes": 2868,
+      "sha256": "9fdb24b4745a38013b316e6dd7f00e7a456c3228cc56f6f81aafef4bf4c53368",
+      "upstream_git_blob": "54ec20f861bd28bd91e3a80e3660c2e4c50ecfca"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/campaign-provenance.json",
+      "bytes": 4720,
+      "sha256": "0bc46dce74f39275c9c318dc5d50203e3d0bf2bc5aed5da9c98bb891595bffd6",
+      "upstream_git_blob": "489e190997de4c9afc5e94353812c4a3855a8e33"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/evand-head-attempt.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "upstream_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/kingbird-n68.svg",
+      "bytes": 15632,
+      "sha256": "8387ef9c17e77c13c00bb3a62b01784a57e567a7a42fc13c1028e2690c0ef6ce",
+      "upstream_git_blob": "0a4343f42a73241522fa9e3a9d31ddf60d35ecfb"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/n68-tag-readback.json",
+      "bytes": 231,
+      "sha256": "26f9250a08d6e1378dd8c48101b739046274f3e44b8aa718101549c732074ec9",
+      "upstream_git_blob": "c124de16ddf8c1848329bf4871945b3afb0908de"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/previous-HANDOFF.txt",
+      "bytes": 6530,
+      "sha256": "fc726a0d0a087db35a63f014ce18cf518756c05de2200e6a3c75ea05c781a4fc",
+      "upstream_git_blob": "50fbe59a491eaf57ddfd4f2b0cd587d583b3a356"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/release-n68-before.json",
+      "bytes": 9907,
+      "sha256": "8aefaacb0b248617dc633772d462ac17130b7d55203478982acea327cc7e6c08",
+      "upstream_git_blob": "97d79a4dffa59904b77e37d7b7524330b120b54f"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/retained-EXACT_FORMS.md",
+      "bytes": 26291,
+      "sha256": "bb07621b47e16229d74d9b3087d9a2a4d49876843f426929fac0ce5cfa5b04b7",
+      "upstream_git_blob": "46873670807d0242df0bbcba9170bb4ccf085345"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/retained-issue-419-comments.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "upstream_git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/retained-issue-419.json",
+      "bytes": 8364,
+      "sha256": "aa77a1fd5c2b1bc702e0be98d9c36ea2d0457ecbe8dfeb35f388fb490508bc5c",
+      "upstream_git_blob": "a24d243755a4e3759e203b264b25f4679d7a6a58"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/retained-issue-428.json",
+      "bytes": 7585,
+      "sha256": "964c0eb3736b1d58a97c83433d65aba12085607742a8813fd79102e756c623a4",
+      "upstream_git_blob": "495441b3108cb46740c2e8de62aeab30edc211b3"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/sources/retained-table-pin.json",
+      "bytes": 479,
+      "sha256": "1ed35fb7a923d6a3fd7f01953c484744c25193ac3364697f41c3e761109ff2f3",
+      "upstream_git_blob": "24a6c5434edd17da819c5ec6dd55ce49589b7916"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/verify_certificate.py",
+      "bytes": 5178,
+      "sha256": "1ba7b6eb441206376132e482ab5218a5f8ba38b7a8d6882e0730a9c53335dba0",
+      "upstream_git_blob": "aea1e9fdac1cabd7add254b5de3464367f0e60bd"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/verify_secondary.py",
+      "bytes": 7418,
+      "sha256": "f56d488c010fee474f17daa47a3ef732c1478a3b8612cbab93e66df1c0c80467",
+      "upstream_git_blob": "80ce8071e2c69319d96ee1094d545e6bc6c564ca"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/PUBLICATION_PROMPT.txt",
+      "bytes": 7054,
+      "sha256": "ba84c4f37c881e4561697c3c4cc264335d31f9412141c78008d87a3c59f71d95",
+      "upstream_git_blob": "60dc9258d655bcb28690fc72f8f0cb34cc61589b"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/REVIEW.txt",
+      "bytes": 8340,
+      "sha256": "dbe24191815c1a731a5aa2582665ecbd0cff145e5ab9ec940f288c90954351c0",
+      "upstream_git_blob": "425b18463dcf60105eca72b36ba35fbac7934b57"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/REVIEW_MANIFEST.json",
+      "bytes": 9943,
+      "sha256": "af43ca2148df97a6a2f1dfe9207dad5ee125f2e378db5e6a9a0c6c6a4dd5d315",
+      "upstream_git_blob": "0bb9e3e31b7ced9d3a6dcd86b6a1dd7688b2faa7"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/review-replay.json",
+      "bytes": 52248,
+      "sha256": "56af67dcb72720ac5c328a5ad6b1fc439c9ec52533be2218e519ff135cfebcc4",
+      "upstream_git_blob": "3a56d30e14e1144489718f086e2447f7533ed713"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/root-feasibility-proof-20261007.tar.gz",
+      "bytes": 767243,
+      "sha256": "c124d77e50a5dcd2b8b4e26c34bc0ae258d15dcb87cef84111eb26ea8ad8910c",
+      "upstream_git_blob": "966f1840253ab7eff91273641df4271b544c4044"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/support-audit.json",
+      "bytes": 1295496,
+      "sha256": "9517138a1fbca356f8c2f50783807e51500e1d142cbf0288a8ecd8d65a4e75b6",
+      "upstream_git_blob": "35afc09e85344fb14f0ad08788469cfc706557b6"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/support_audit.py",
+      "bytes": 5860,
+      "sha256": "91338efa18ce6fba62b5c78ac7c36e211e5787583832ac07b65d8d3d8762be00",
+      "upstream_git_blob": "ce6d78235b7082d39522c84775e04a839d588328"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/SOURCE_MANIFEST.json",
+      "bytes": 10248,
+      "sha256": "a04d1b51b4e1d75fe977c7c82f2e90b9dd954733b90071314b16b6b502faee50",
+      "upstream_git_blob": "98adcc0d162ee0002dd47e17539fe77132d0fd75"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/daniel-EXACT_FORMS.md",
+      "bytes": 26291,
+      "sha256": "bb07621b47e16229d74d9b3087d9a2a4d49876843f426929fac0ce5cfa5b04b7",
+      "upstream_git_blob": "46873670807d0242df0bbcba9170bb4ccf085345"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/daniel-EXACT_FORMS.md.api.json",
+      "bytes": 37373,
+      "sha256": "7c98744006c10d8cf7de4f3e350c4e85faa24395dc08ae5ac893056988aede82",
+      "upstream_git_blob": "0c4dee288807262d5a5d327660594ff8ae21f6b3"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/daniel-LICENSE.txt",
+      "bytes": 1068,
+      "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+      "upstream_git_blob": "52cf89d2125f517a425c9a57c998dd85d83d7741"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/daniel-head.json",
+      "bytes": 4796,
+      "sha256": "c38bfed29d725c1c18ea565d86a82c1c877516174e60699187e30318b366efc1",
+      "upstream_git_blob": "dbac08ca6654cd22d083b7f04701c0604bc98ca8"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/daniel-n68.cert",
+      "bytes": 12112,
+      "sha256": "871fb854b07417fa2178c14e933f5c1ccf8f35d8280b93394b2109aebc8b2c68",
+      "upstream_git_blob": "e8c74fc1eea703364ff7d2f168a22e880568d888"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/daniel-n68.cert.api.json",
+      "bytes": 17876,
+      "sha256": "2d72586d0c8fe8656d186aac2eed4b1357642c3368e19348daaa90483e30fc16",
+      "upstream_git_blob": "bed07c7499bd2e1e9ef2ad5468408b0db184b081"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/daniel-readme.md",
+      "bytes": 13296,
+      "sha256": "20acd7d6befa9a3c8f65b88c5d4087f8b996dde940f35b0e982087dac8ec73ef",
+      "upstream_git_blob": "a93a9d30dec147d0058d31960dac1635b92d59ce"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/daniel-readme.md.api.json",
+      "bytes": 19432,
+      "sha256": "bdda337aa75707a52c3912f871743daf886dd247acec07bfed15a3fe2f98a0a5",
+      "upstream_git_blob": "423aaab6c5c810c93360a82282c6ef0e27cbb210"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/davide-2-comments.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "upstream_git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/davide-2.json",
+      "bytes": 3066,
+      "sha256": "82d340da9c5fa30f6d6a7918e4639ea46b8418d095f8b647d6d456e1c46c76b3",
+      "upstream_git_blob": "70458e60370c9c5a13c90047b7ef3af595dc85ec"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/davide-4-comments.json",
+      "bytes": 4284,
+      "sha256": "d17f12d3f822a3066c49d10d5fc37b68c63f4a9c42c46c21717b0b1eb3426766",
+      "upstream_git_blob": "b293cbf5d4c3a47a1ac5f9eb3456896329fd5d6c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/davide-4.json",
+      "bytes": 6136,
+      "sha256": "18c8d1aaf8edc03114b70239e2ea62289509aebca1b8986e14b8a31cfe57384f",
+      "upstream_git_blob": "f7bccfa13f512f8edc4945e6b347fe8125ad405f"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/final-successful-retrievals.json",
+      "bytes": 6004,
+      "sha256": "31a645a62d0d37fed72f4da4b11159ffc348dcda290d0d873b0a2154d5bb3fa3",
+      "upstream_git_blob": "4d483fae6a7c4b1b14407e5bf6593735812e1665"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-375-comments.json",
+      "bytes": 23954,
+      "sha256": "57b97ec313dc41bb09375012b0462f5f614dcfa9204fad0e78a5fb70fa9681a6",
+      "upstream_git_blob": "eb5063069523d546b5eb2ccc3502452335edf111"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-375.json",
+      "bytes": 7368,
+      "sha256": "5bbc465387a0527096eecad0bb14cff9b9e9fd899dcb7967bb48c6c8fc20af9e",
+      "upstream_git_blob": "ace478414553f419897f2ed632c5556c48e31b38"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-399-comments.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "upstream_git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-399.json",
+      "bytes": 5854,
+      "sha256": "b4b9bf8026925499dae8232a901a937752e3faa1d98f22311042fea5769e70df",
+      "upstream_git_blob": "dcc055ab33175301152abca85833799ad727d8a8"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-419-comments.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "upstream_git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-419.json",
+      "bytes": 8721,
+      "sha256": "82269fa67d3259b98a35d3eb2b7bd1de5902d3c83672787eb39b56a6d88af0d0",
+      "upstream_git_blob": "0fa5660dc5231ab40e3fb238f26855843724723a"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-420-comments.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "upstream_git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-420.json",
+      "bytes": 5233,
+      "sha256": "3af0aa6b65d70b17914edaa53bd7dc4be0452147369ca2a1376e41ccd794e283",
+      "upstream_git_blob": "b0ea72fe88bca20d42d818ff3febc85dda064002"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-422-comments.json",
+      "bytes": 11734,
+      "sha256": "2c204bf16c04e59b5620099e2f2229e710732a03ef5b9cfbc06d4785d0d982f5",
+      "upstream_git_blob": "9a259d62166581660b66e217602b8019ea85f689"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-422.json",
+      "bytes": 12275,
+      "sha256": "39d0b8b6c698d7dc074c9779a7bec11ed195269a24b456a16e7adb6b2080fbb0",
+      "upstream_git_blob": "049ed8904e3e086033def9c06a134acd27f04fb4"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-428-comments.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "upstream_git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/jlevy-428.json",
+      "bytes": 9989,
+      "sha256": "b49a82340f9ee911bb3b1887384b31872569e79c75332f98b868c5a2291c23c0",
+      "upstream_git_blob": "a3550fd6eeafe809181e9b28ed53495ccb020218"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/pending-n68.json",
+      "bytes": 30990,
+      "sha256": "79c1d9be07e1d4281945b60549ecf5f6cadca886ccf19779e08d373137bea02c",
+      "upstream_git_blob": "2c7cbf0f33bda215e8ec6a0711f6de8bd78c3e6b"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/public-main-before.json",
+      "bytes": 107486,
+      "sha256": "4c0eda390b389029434c35e28c981f821dcf494d9ad5463eaad3821dd0e6419e",
+      "upstream_git_blob": "075e874d2b51bf3d0d2c3e77bae0f602d742a27f"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/register-head.json",
+      "bytes": 16979,
+      "sha256": "f6660b63e29e5162f71b023c88d1c7068ad3b18e1d15c74c4744ffe64c517556",
+      "upstream_git_blob": "95a6ad95ab28096349a04b597162ea81615930fb"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/register-n068.md",
+      "bytes": 16191,
+      "sha256": "730f594d22fd0211666b106c5ad5ecd4a33a97e9b137f6d326067bf69a4148f0",
+      "upstream_git_blob": "7b3c30203300d11980bfd6207f80edf2c14c6d5b"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/register-n068.md.api.json",
+      "bytes": 23388,
+      "sha256": "5f83faf328d4e53fe560dc996c430e758dd0aba64d785ce36a04b50fdd3e8a90",
+      "upstream_git_blob": "e3c3ef39424b3b8e476376c864000ae3e71637e6"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/releases-before.json",
+      "bytes": 18377,
+      "sha256": "0ced5cebcabd29c4cc661d052737b3ba8d70f69c0627d64d6a69bf4d9ae596cb",
+      "upstream_git_blob": "2c4d78adbdc5be42fa3964e4e12c0b38ae6a2d90"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/tags-before.json",
+      "bytes": 1051,
+      "sha256": "874cbf89f5c64854e40e429fe3e945b7c00621c7d55ba6abbf1be999b137e305",
+      "upstream_git_blob": "13e59b17b9c52b5aa956c4cd2904f940941db57e"
+    },
+    {
+      "upstream_path": "proofs/2026-10-07-root-feasibility/sources/v1.1.0-tag.json",
+      "bytes": 414,
+      "sha256": "5991c75a48c0f4733a5999f04563ec77b3346b97100ed580d2e0e70956ca9384",
+      "upstream_git_blob": "ee5cd0f1f68b406b4a8c50af75495f119f62ae19"
+    }
+  ]
+}

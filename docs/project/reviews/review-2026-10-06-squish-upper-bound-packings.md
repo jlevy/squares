@@ -258,7 +258,7 @@ not a proof of global novelty.
 ## Replay, Controls and Disposition
 
 The retained
-[certification receipt](../../../packing/resources/web/squish-401-2026-10-07/receipts/certification.json)
+[certification receipt](../../../packing/resources/web/squish-401-2026-10-07/receipts/certification.json.gz)
 records acceptance of all eleven certificates by both exact routes, with the complete
 pair counts in the table above.
 Both routes report zero minimum container clearance for every certificate.

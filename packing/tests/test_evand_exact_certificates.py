@@ -15,7 +15,12 @@ from pathlib import Path
 
 import pytest
 
-from devtools import apply_exact_ceilings, apply_exact_optima, apply_upper_bound_packets
+from devtools import (
+    apply_exact_ceilings,
+    apply_exact_optima,
+    apply_upper_bound_packets,
+    source_supersession,
+)
 from devtools import check_rational_witness_independent as independent
 from devtools import evand_exact_certificates as certificates
 from devtools.check_source_coverage import load_claims
@@ -190,6 +195,84 @@ def test_the_records_are_the_layer_applied_to_themselves(n: int) -> None:
 def test_the_coverage_record_is_the_layer_applied_to_itself() -> None:
     text = apply_exact_optima.COVERAGE.read_text(encoding="utf-8")
     assert apply_exact_optima.coverage_text(text) == text
+
+
+def test_coverage_list_replacement_reads_yaml_boundaries_and_preserves_comments() -> None:
+    for indent in ("", "  "):
+        block = (
+            "selected_overrides:\n"
+            "# retained list note\n"
+            f"{indent}- n: 1\n"
+            f"{indent}  source_id: old\n"
+            f"{indent}  reason: |\n"
+            f"{indent}    --- is scalar text\n"
+            f"{indent}    # this is scalar text too\n"
+        )
+        prefix = "sources: []\n# retained section note\n"
+        for suffix in ("", "\n# retained separator\nsuperseded_reports: []\n# footer\n"):
+            original = prefix + block + suffix
+            replacement = block.replace("source_id: old", "source_id: new")
+            changed = source_supersession.replace_coverage_list(
+                original, "selected_overrides", replacement
+            )
+            assert changed == prefix + replacement + suffix
+            assert safe_load(changed)["selected_overrides"][0]["source_id"] == "new"
+        original = prefix + block.rstrip("\n")
+        assert (
+            source_supersession.replace_coverage_list(
+                original, "selected_overrides", block.rstrip("\n")
+            )
+            == original
+        )
+
+
+def test_retained_source_replacement_preserves_other_rows_and_coverage_sections(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from devtools import confirm_ryxu_records as confirmation  # noqa: PLC0415
+
+    def publish(path: Path, text: str) -> None:
+        assert path.parent == tmp_path
+        path.write_text(text)
+
+    monkeypatch.setattr(confirmation.register, "FRONTIER", tmp_path)
+    monkeypatch.setattr(confirmation, "publish", publish)
+    path = tmp_path / "source-coverage.yaml"
+    row = {"id": "retained-ry-xu", "scope": {"n_values": [51, 70, 110]}, "notes": "old"}
+    updated = {**row, "notes": "new"}
+    for indent in ("", "  "):
+        original_row = "".join(
+            indent + line for line in confirmation.dump([row]).splitlines(keepends=True)
+        )
+        updated_row = "".join(
+            indent + line for line in confirmation.dump([updated]).splitlines(keepends=True)
+        )
+        prefix = (
+            "sources:\n# retained source notes\n"
+            f"{indent}- id: first\n{indent}  notes: unchanged\n"
+        )
+        for following in ("", f"{indent}- id: last\n{indent}  notes: also unchanged\n"):
+            suffix = (
+                "# retained next-row note\n"
+                + following
+                + "# retained coverage notes\nselected_overrides: []\n"
+                "superseded_reports: []\nbeyond_horizon_claims: []\n"
+            )
+            original = prefix + original_row + suffix
+            path.write_text(original)
+            confirmation.replace_coverage_source(updated)
+            actual = path.read_text()
+            assert actual == prefix + updated_row + suffix
+            before, after = safe_load(original), safe_load(actual)
+            assert set(after) == set(before)
+            assert after["sources"] == [
+                updated if source["id"] == row["id"] else source for source in before["sources"]
+            ]
+            assert after["selected_overrides"] == before["selected_overrides"]
+            assert after["superseded_reports"] == before["superseded_reports"]
+            with pytest.raises(ValueError, match="expected retained ry-xu coverage source"):
+                confirmation.replace_coverage_source({"id": "missing"})
+            assert path.read_text() == actual
 
 
 def _conjecture_findings(conjecture: str) -> list[str]:

@@ -45,11 +45,17 @@ ASSETS_DIR = "assets"
 
 #: The faces a page draws its first screen of text in, preloaded so the browser asks for
 #: them with the stylesheet rather than after laying the text out. Every face is declared
-#: `font-display: block`, so a face that arrives late holds the text it draws invisible.
+#: `font-display: block`, so a face that arrives late holds the text it draws invisible,
+#: laid out in the fallback's advances, and the text around it moves when it arrives.
+#: Emphasis is first-screen text: italic and bold PT Serif in the frontier's opening
+#: paragraphs, left to the first layout to discover, arrived after it and moved them by
+#: CLS 0.134 and 0.209 on the hosted runner (paper-design.md, Shared Assets).
 PRELOADED_FACES = (
     "pt-serif-latin-400-normal.woff2",
     "pt-serif-latin-400-italic.woff2",
     "source-sans-3-latin-wght-normal.woff2",
+    "pt-serif-latin-400-italic.woff2",
+    "pt-serif-latin-700-normal.woff2",
 )
 
 _MEDIA_TYPES = {".woff2": "font/woff2", ".css": "text/css", ".js": "text/javascript"}

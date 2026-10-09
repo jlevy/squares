@@ -1,14 +1,18 @@
 """Each result's derived standing agrees with the bounds its own words state.
 
-`render_recent_results.standing` derives a standing from evidence ids and never compares
-a number. `devtools.check_standing` reads the bounds an entry states and holds them
-against the case records, so an entry that is no longer the best is superseded and one
-that still stands is not (think-nr0y). These hold the register to that, the reader to
-the headlines it must read, and the check to refusing each kind of mismatch.
+`render_recent_results.standing` derives whether an entry holds a bound from evidence ids
+and compares no number for it. `devtools.check_standing` reads the bounds an entry states
+and holds them against the case records, so an entry that is no longer the best is
+superseded and one that still stands is not (think-nr0y); for an entry that holds no
+bound, `standing` asks it whether a bound the entry states is better than its case
+record's, and calls that entry pending adoption rather than superseded (think-h0d1).
+These hold the register to that, the reader to the headlines it must read, and the check
+to refusing each kind of mismatch.
 """
 
 from __future__ import annotations
 
+import dataclasses
 from collections.abc import Mapping
 from fractions import Fraction
 from typing import Any
@@ -327,3 +331,114 @@ def test_the_command_fails_on_a_mismatch(
     assert "FAIL  T-093 is superseded, yet at n = 17" in printed.err
     assert "n = 17 lower 18641771/4000000: verified equal, reported equal" in printed.out
     assert "n = 17 lower 116511/25000: verified beaten, reported beaten" in printed.out
+
+
+def test_a_bound_better_than_its_case_record_is_pending_adoption(
+    records: view.Records,
+) -> None:
+    """T-128 states eight sides, each below the reported and the verified ceiling its case
+    holds, and no case bound rests on it. Marked superseded, it is refused at every count,
+    as a report held to the reported lane; pending adoption, it passes, and the summary
+    names where it is better. An entry beaten everywhere is refused the word (think-h0d1)."""
+    record = records.results["T-128"]
+    assert view.standing(record, records) == view.PENDING_ADOPTION
+    assert check_standing.problems(record, view.PENDING_ADOPTION, records) == []
+    cases = "n = 105, 108, 127, 131, 155, 180, 228, 306"
+    (superseded,) = check_standing.problems(record, view.SUPERSEDED, records)
+    assert f"T-128 is superseded, yet at {cases} its stated bound" in superseded
+    assert "no worse than the reported one" in superseded
+    line = check_standing.summary(record, view.PENDING_ADOPTION, records)
+    assert f"better than the case record at {cases}" in line
+    (beaten,) = check_standing.problems(
+        records.results["T-001"], view.PENDING_ADOPTION, records
+    )
+    assert "T-001 is pending adoption, yet no bound it states is better" in beaten
+
+
+def test_a_bound_no_case_record_cites_states_what_it_bounds(records: view.Records) -> None:
+    """A source-only report, one whose evidence no case record cites, is related to the
+    case records by nothing but the bounds its words state, so a bound of that kind states
+    its sides, as T-128's claim does, and `standing` can tell a better report the case
+    records have not taken in from one they have beaten (think-h0d1). The four exact-form
+    reports of 7 October (T-120..T-123), sides that are roots of polynomials, state them
+    cut where their root intervals' ends agree."""
+    lanes = ("verified_lower_bound", "reported_lower_bound")
+    lanes += ("verified_upper_bound", "reported_upper_bound")
+    cited = set()
+    for case in records.cases.values():
+        cited.update(str(item) for item in case.get("evidence") or [])
+        for lane in lanes:
+            cited.update(str(item) for item in (case.get(lane) or {}).get("evidence") or [])
+    unplaced = [
+        str(record["id"])
+        for record in records.register.results
+        if record["kind"] in BOUND_KINDS
+        and not {str(item) for item in record["evidence"]} & cited
+        and not check_standing.stated_bounds(record)
+    ]
+    assert unplaced == []
+
+
+def test_a_closed_form_bound_is_a_display_a_unit_either_side(records: view.Records) -> None:
+    """n = 5's verified ceiling is `2 + (1/2)sqrt(2)`, printed rounded up in its 32nd
+    place. Read as an exact number, a statement of the optimum cut at that place lies
+    below it and would read as an improvement, pending adoption; read as the display it
+    is, a unit either side of its last place, the two tie, and the entry is superseded."""
+    bound = records.cases[5]["verified_upper_bound"]
+    assert bound["exact_form"] == "2 + (1/2)sqrt(2)"
+    floor, ceiling = view.span(bound)
+    assert ceiling - floor == Fraction(2, 10**32)
+    assert ((floor - 2) * 2) ** 2 < 2 < ((ceiling - 2) * 2) ** 2
+    cut = Stated(Fraction("2.70710678118654752440084436210484"), Fraction(1, 10**32))
+    assert check_standing.relation(cut, bound, UPPER) == EQUAL
+    printed = {"value": bound["value"], "exact_form": None}
+    assert view.span(printed) == (Fraction(bound["value"]),) * 2
+    assert check_standing.relation(cut, printed, UPPER) == EXCEEDS
+    stating = _entry(
+        records,
+        "T-128",
+        claim="Reported s(5) <= 2.70710678118654752440084436210484….",
+        scope={"n_values": [5]},
+        confirmation="C3",
+    )
+    assert check_standing.improvements(stating, records) == []
+    assert view.standing(stating, records) == view.SUPERSEDED
+
+
+def test_an_entry_improves_only_in_the_directions_its_kind_bounds(
+    records: view.Records,
+) -> None:
+    """A lower bound's words may quote a ceiling, and an upper bound's a floor; neither is
+    its claim. T-128's sides read as a lower bound's words improve on nothing, and the
+    entry is superseded; read as an optimality's, both directions count."""
+    record = records.results["T-128"]
+    assert [finding.direction for finding in check_standing.improvements(record, records)] == [
+        UPPER
+    ] * 8
+    floor = _entry(records, "T-128", kind="lower-bound")
+    assert check_standing.improvements(floor, records) == []
+    assert view.standing(floor, records) == view.SUPERSEDED
+    exact = _entry(records, "T-128", kind="optimality")
+    assert len(check_standing.improvements(exact, records)) == 8
+    other = _entry(records, "T-128", kind="method-limit")
+    assert check_standing.improvements(other, records) == []
+
+
+def test_an_entry_pending_adoption_is_cited_by_no_case_bound(records: view.Records) -> None:
+    """Pending adoption is derived from the numbers, so the check also reads the case
+    records apart from the holders `standing` credits: a case bound that cites the entry's
+    own evidence has taken it in. Were n = 105's reported ceiling to cite T-128's report
+    beside Ryan Xu's, T-128 would be refused the word there."""
+    record = records.results["T-128"]
+    assert check_standing.citing(record, records) == []
+    case = records.cases[105]
+    lane = case["reported_upper_bound"]
+    cited = {**lane, "evidence": [*lane["evidence"], "E-couzo-451-rational-report"]}
+    adopted = dataclasses.replace(
+        records, cases={**records.cases, 105: {**case, "reported_upper_bound": cited}}
+    )
+    assert check_standing.citing(record, adopted) == [105]
+    (problem,) = check_standing.problems(record, view.PENDING_ADOPTION, adopted)
+    assert (
+        "T-128 is pending adoption, yet a case bound at n = 105 cites its evidence" in problem
+    )

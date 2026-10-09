@@ -44,6 +44,11 @@ def records() -> dict[str, str]:
 
 
 @pytest.fixture(scope="module")
+def result_bodies() -> dict[str, str]:
+    return site_renders.result_bodies()
+
+
+@pytest.fixture(scope="module")
 def frontier() -> str:
     return site_renders.html("frontier.html")
 

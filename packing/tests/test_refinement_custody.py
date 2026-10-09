@@ -18,6 +18,7 @@ from devtools import refinement_custody as custody
 from devtools import refinement_house_links as houses
 from devtools import refinement_packets as packets
 from devtools import run_negative_controls as controls
+from sqpack.witness import witness_document
 
 SOURCE = packets.REPO
 
@@ -28,16 +29,28 @@ def private(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     for source in packets.SOURCES.values():
         relative = source.packet.relative_to(SOURCE)
         shutil.copytree(source.packet, repo / relative)
-    witness_root = repo / "packing/witnesses/known-best"
-    witness_root.mkdir(parents=True)
-    for n in houses.NUMBERS:
-        (witness_root / f"n-{n:03d}.yaml").symlink_to(houses.house_path(n))
     monkeypatch.setattr(packets, "REPO", repo)
     monkeypatch.setattr(houses, "REPO", repo)
     monkeypatch.setattr(custody, "REPO", repo)
     monkeypatch.setattr(houses.house.confirmation, "REPO", repo)
     monkeypatch.setattr(houses, "METADATA", repo / houses.METADATA.relative_to(SOURCE))
     monkeypatch.setattr(custody, "INDEX", repo / custody.INDEX.relative_to(SOURCE))
+    witness_root = repo / "packing/witnesses/known-best"
+    witness_root.mkdir(parents=True)
+    retained = tmp_path / "historical-houses"
+    retained.mkdir()
+    rows = houses.house.shared.roster(
+        houses.house.shared.read_xz_receipt(houses.METADATA), houses.NUMBERS
+    )
+    for n in houses.NUMBERS:
+        # Admission remains scoped to this packet even when a later source owns the
+        # current atlas leaf. Reconstruct the entire earlier house from its private
+        # source geometry and reviewed metadata, without reading the newer pose.
+        witness = packets.to_witness(houses.source(n), n)
+        witness.update(copy.deepcopy(rows[n]["metadata"]))
+        path = retained / f"n-{n:03d}.yaml"
+        path.write_text(witness_document(witness, schema="../witness.schema.yaml"))
+        (witness_root / path.name).symlink_to(path)
     return repo
 
 
@@ -165,7 +178,15 @@ def test_production_snapshot_copies_complete_refinement_custody(tmp_path: Path) 
         [
             sys.executable,
             "-c",
-            "from devtools.refinement_house_links import check_houses; check_houses()",
+            (
+                "from devtools import refinement_house_links as h, refinement_custody as c; "
+                "from sqpack.yamlio import safe_load; "
+                "c.check_index(c.read_index()); "
+                "ns=[n for n in h.NUMBERS if safe_load((h.REPO/'packing/frontier'/"
+                "f'n-{n:03d}.md').read_text().split('---'+chr(10),2)[1])['packing']"
+                "['reported_upper_bound']['source_key']==h.source(n).key]; "
+                "h.check_houses(ns)"
+            ),
         ],
         cwd=tree / controls.HERE,
         env=controls.control_environment(tree, tmp_path / "pycache"),

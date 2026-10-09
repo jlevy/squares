@@ -438,6 +438,13 @@ def test_a_perturbed_record_is_refused(
 ) -> None:
     """Each control breaks one transcribed field; the first is the miss that started this."""
     cases = _frontier_cases()
+    if n == 51:
+        # Exercise the displaced catalogue transcription, whose full original is retained.
+        from devtools.register_ryxu_reports import read_history  # noqa: PLC0415
+
+        original = next(row["frontier"] for row in read_history() if row["n"] == n)
+        cases[n] = safe_load(original.split("---\n", 2)[1])["packing"]
+
     cases[n]["reported_upper_bound"] = {**cases[n]["reported_upper_bound"], field: replacement}
 
     errors, _, _ = catalogue_transcription_errors(

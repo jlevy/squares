@@ -107,12 +107,13 @@ def standing_key(standing: str) -> str:
 
 def is_superseded(result: Result) -> bool:
     """Whether a result is no longer the best (`render_recent_results.superseded`): it
-    is a bound, and no case bound rests on it now, which is derived from the case
-    records and held to the numbers by `devtools.check_standing`; or it is a result of
-    another kind whose register entry declares a later result that implies the whole of
-    it (`superseded_by`). A result that still holds a bound, a second proof of a value
-    another result holds, a result that is no bound, and one superseded only in part
-    are all current. A row says so as `data-current`, which the bar's "Hide superseded"
+    is a bound, no case bound rests on it now and its cases hold one at least as good,
+    which is derived from the case records and held to the numbers by
+    `devtools.check_standing`; or it is a result of another kind whose register entry
+    declares a later result that implies the whole of it (`superseded_by`). A result that
+    still holds a bound, a better bound pending adoption, a second proof of a value
+    another result holds, a result that is no bound, and one superseded only in part are
+    all current. A row says so as `data-current`, which the bar's "Hide superseded"
     reads (`result_filters`), and draws the `superseded` chip (`supersession_marks`)."""
     return superseded(result.record, result.standing)
 
@@ -1751,6 +1752,29 @@ def hero() -> str:
 #: every source repository in the source-coverage register.
 OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
+        "https://github.com/SidG2k1/square-packing-refinements",
+        "Siddharth Gupta",
+        (
+            "Seventeen rational refinements of Nate Chaoweeraprasit's SQUISH packings, "
+            "using Evan Daniel's optimizer; fourteen finite upper-bound improvements selected "
+            "here (T-127) and three withdrawn. Exact feasibility is confirmed with "
+            "independently re-implemented code; optimality is not established."
+        ),
+    ),
+    (
+        "https://github.com/ry-xu/square_packing",
+        "Ryan Xu",
+        (
+            "Complete rational packings and an undilated radical n = 51 construction; "
+            "finite feasibility is confirmed here (T-125, T-126)."
+        ),
+    ),
+    (
+        "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json",
+        "Ryan Xu",
+        "The complete source report retained for the rational packing comparisons.",
+    ),
+    (
         "https://github.com/wand125/square-packing",
         "wand125",
         "Canonical certificate and checker repository; historical source pins remain valid.",
@@ -1805,7 +1829,12 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/franciscouzo/square-packing",
         "Francisco Couzo",
-        "Improved packings for 49 counts from n = 68 to 307.",
+        (
+            "Improved packings for 49 counts from n = 68 to 307. "
+            "Eight complete rational refinements in issue451 (T-128) and five follow-up "
+            "certificates at 84, 86, 105, 175 and 270 (T-130) have retained "
+            "finite-feasibility results; selected-case integration remains pending."
+        ),
     ),
     (
         "https://github.com/itsnaka/squish-certs",
@@ -1925,6 +1954,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         "SQUISH packing of 153 squares",
         "Nate Chaoweeraprasit",
         "The supplemental rational certificate submitted with the SQUISH packings.",
+    ),
+    (
+        "https://github.com/jlevy/squares/issues/401#issuecomment-6043191866",
+        "SQUISH dated source follow-up",
+        "Nate Chaoweeraprasit",
+        (
+            "Dated SQUISH update, including a pinned copy of the original rational "
+            "n153 certificate."
+        ),
     ),
     (
         "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",

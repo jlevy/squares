@@ -61,13 +61,18 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import cProfile
 import hashlib
+import inspect
 import json
 import math
 import os
 import platform
+import pstats
 import queue
 import re
+import runpy
+import shlex
 import shutil
 import signal
 import subprocess
@@ -81,12 +86,17 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from threading import Lock
+from typing import Protocol, cast
 from uuid import uuid4
 
+from devtools import couzo_refinement_reports as couzo
 from devtools import evand_arrangement_houses as evand_houses
+from devtools import gupta_house_links as gupta
 from devtools import refinement_house_links as refinements
+from devtools import ryxu_house_links as ryxu
 from devtools import squish_second_update_confirmation as second
 from devtools import squish_second_update_house_links as house
+from devtools import wand125_fn1_bindings as fn1
 from devtools.repo_scope import tracked_files
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
@@ -158,6 +168,8 @@ HOUSE_LINK_LEAVES = frozenset(
     for path in (
         *house.snapshot_house_links(),
         *refinements.snapshot_house_links(),
+        *ryxu.snapshot_house_links(),
+        *gupta.snapshot_house_links(),
         *evand_houses.snapshot_house_links(),
     )
 )
@@ -958,6 +970,7 @@ LINK_BACK = (
 # closeout naming `.github/PULL_REQUEST_TEMPLATE.md`, which only a link could bring
 # into a worker. Both checkers were red before any mutation was applied.
 COPY_SEPARATELY = (
+    *couzo.private_input_paths(),
     # The retained n13 family is an exact worker consumer asserted by the n32
     # inventory contract; agenda-040's unrelated generated bulk stays pruned.
     SESSION184_RESULTS / "agenda-040/exp-214-n13-399-100-family.json",
@@ -972,10 +985,21 @@ COPY_SEPARATELY = (
     / "B-ablation-packet.json",
     *second.private_input_paths(),
     *refinements.private_input_paths(),
+    *ryxu.private_input_paths(),
+    *gupta.private_input_paths(),
     *evand_houses.private_input_paths(),
+    *fn1.private_input_paths(),
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
     ROOT / "resources/bibliography.schema.yaml",
+    # The reported-only n68 packet is complete factual metadata, not author code.
+    ROOT / "resources/web/rehwaldt-n68-exact-root-2026-10-08/README.md",
+    ROOT / "resources/web/rehwaldt-n68-exact-root-2026-10-08/reported-catalogue.json",
+    ROOT / "resources/web/rehwaldt-n68-exact-root-2026-10-08/source-manifest.json",
+    ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md",
+    ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-catalogue.json",
+    ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/source-manifest.json",
+    ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-n27-followup.json",
     REPO / ".flowmarkignore",
     REPO / ".gitignore",
     REPO / ".github/PULL_REQUEST_TEMPLATE.md",
@@ -1969,6 +1993,142 @@ def run_one(c: dict, tree: Path) -> tuple[bool, str]:
         target.write_bytes(original)
 
 
+PROFILE_TIMEOUT_SECONDS = 60.0
+
+
+class _ProfileStatistics(Protocol):
+    """The cProfile statistics preserve full location keys and unrounded times."""
+
+    total_tt: float
+    stats: dict[tuple[str, int, str], tuple[int, int, float, float, object]]
+
+
+def profile_native_script(script: Path, tree: Path, output: Path) -> int:
+    """Profile a native child in a supplied private tree; never qualify a gate."""
+    if not script.is_file():
+        raise ValueError("--profile-native-script must name a regular file")
+    if not (tree.is_dir() and (tree / HERE / "src").is_dir()):
+        raise ValueError("--profile-tree must contain a packing source tree")
+    index = tree / ".git/index"
+    if not index.is_file() or index.is_symlink():
+        raise ValueError("--profile-tree must own a private Git index")
+    raw = output.with_suffix(".prof")
+    if output == raw:
+        raise ValueError("--profile-output must differ from its .prof destination")
+    for destination in (output, raw):
+        if destination.exists() or destination.is_symlink():
+            raise ValueError(f"profile destination already exists: {destination}")
+    script = script.resolve()
+    tree = tree.resolve()
+    # Transport only the maintained stdlib child helper. Executing this harness file
+    # directly would bind ROOT to the parent checkout while its imported adapters
+    # correctly discover the private tree.
+    child = (
+        "import cProfile, runpy, sys\nfrom pathlib import Path\n"
+        + inspect.getsource(_profile_child)
+        + "\nraise SystemExit(_profile_child(Path(sys.argv[1]), Path(sys.argv[2])))\n"
+    )
+    command = shlex.join([sys.executable, "-c", child, str(script), str(raw)])
+    # Reserve both outputs before launch. A conflicting second reservation must not
+    # leave an empty JSON file or execute the child.
+    with output.open("x", encoding="utf-8") as report_file:
+        try:
+            raw.touch(exist_ok=False)
+        except OSError:
+            output.unlink()
+            raise
+        report: dict[str, object] = {
+            "diagnostic_only": True,
+            "gate_credit": False,
+            "script": {
+                "path": str(script),
+                "bytes": script.stat().st_size,
+                "sha256": hashlib.sha256(script.read_bytes()).hexdigest(),
+            },
+            "tree": {
+                "path": str(tree),
+                "private_index_bytes": index.stat().st_size,
+                "private_index_sha256": hashlib.sha256(index.read_bytes()).hexdigest(),
+            },
+            "tool_provenance": timing_provenance(),
+            "command": command,
+            "interpreter": sys.executable,
+            "cwd": str(tree / HERE),
+            "raw_profile": str(raw),
+            "timeout_seconds": PROFILE_TIMEOUT_SECONDS,
+            "started_at": datetime.now(UTC).isoformat(),
+        }
+        started = time.perf_counter()
+        with tempfile.TemporaryDirectory(prefix="native-profile-", dir=tree) as temporary:
+            environment = control_environment(tree, Path(temporary))
+            environment["PYTHONDONTWRITEBYTECODE"] = "1"
+            try:
+                outcome = run_control_command(
+                    command,
+                    cwd=tree / HERE,
+                    environment=environment,
+                    timeout_seconds=PROFILE_TIMEOUT_SECONDS,
+                )
+            except OSError as error:
+                outcome = CommandOutcome(1, "", str(error))
+        report.update(
+            duration_seconds=time.perf_counter() - started,
+            returncode=outcome.returncode,
+            timed_out=outcome.timed_out,
+            stdout=outcome.stdout,
+            stderr=outcome.stderr,
+            finished_at=datetime.now(UTC).isoformat(),
+        )
+        complete = False
+        try:
+            stats = cast(_ProfileStatistics, pstats.Stats(str(raw)))
+            report["profile_total_seconds"] = stats.total_tt
+            report["top_cumulative"] = [
+                {
+                    "file": key[0],
+                    "line": key[1],
+                    "function": key[2],
+                    "primitive_calls": value[0],
+                    "calls": value[1],
+                    "self_seconds": value[2],
+                    "cumulative_seconds": value[3],
+                }
+                for key, value in sorted(
+                    stats.stats.items(), key=lambda item: item[1][3], reverse=True
+                )[:40]
+            ]
+            complete = outcome.returncode == 0 and not outcome.timed_out
+        except (EOFError, OSError, TypeError, ValueError) as error:
+            report["profile_error"] = str(error)
+        report["complete"] = complete
+        json.dump(report, report_file, indent=2)
+        report_file.write("\n")
+    print(f"native-child diagnostic profile: {output}")
+    if outcome.stdout:
+        print(outcome.stdout, end="")
+    if outcome.stderr:
+        print(outcome.stderr, end="", file=sys.stderr)
+    return 0 if complete else 1
+
+
+def _profile_child(script: Path, raw: Path) -> int:
+    """Dump native statistics while preserving the script's exceptions and exit code."""
+    if not script.is_file():
+        raise ValueError("native profile child script must be a regular file")
+    if not raw.is_file() or raw.is_symlink() or raw.stat().st_size:
+        raise ValueError("native profile child requires an empty reserved raw destination")
+    profile = cProfile.Profile()
+    arguments, import_root = sys.argv, sys.path[0]
+    sys.argv = [str(script)]
+    sys.path[0] = str(Path.cwd())
+    try:
+        profile.runcall(runpy.run_path, str(script), run_name="__main__")
+    finally:
+        sys.argv, sys.path[0] = arguments, import_root
+        profile.dump_stats(raw)
+    return 0
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -2001,6 +2161,19 @@ def _parser() -> argparse.ArgumentParser:
         type=Path,
         default=[],
         help="audit a proposed repository-relative prune, retaining inline/result dependencies",
+    )
+    parser.add_argument(
+        "--profile-native-script",
+        type=Path,
+        help="profile this native child script in an existing private diagnostic tree",
+    )
+    parser.add_argument(
+        "--profile-tree", type=Path, help="private diagnostic tree used by the native child"
+    )
+    parser.add_argument(
+        "--profile-output",
+        type=Path,
+        help="create diagnostic JSON and sibling .prof evidence; never overwrite",
     )
     return parser
 
@@ -2065,7 +2238,28 @@ def timing_provenance() -> dict[str, object]:
 
 def main(argv: Sequence[str] | None = None) -> int:
     """Run selected controls in isolated source snapshots."""
-    options = _parser().parse_args(argv)
+    parser = _parser()
+    options = parser.parse_args(argv)
+    profiling = (options.profile_native_script, options.profile_tree, options.profile_output)
+    if any(value is not None for value in profiling):
+        if not all(value is not None for value in profiling):
+            parser.error(
+                "native profiling requires --profile-native-script, "
+                "--profile-tree and --profile-output"
+            )
+        try:
+            return profile_native_script(
+                options.profile_native_script,
+                options.profile_tree,
+                options.profile_output.absolute(),
+            )
+        except (OSError, ValueError) as error:
+            parser.error(str(error))
+    return _run_selected_controls(options, argv)
+
+
+def _run_selected_controls(options: argparse.Namespace, argv: Sequence[str] | None) -> int:
+    """Run the unchanged ordinary control-selection path."""
     if options.source_bytes:
         actual = snapshot_source_bytes()
         print(

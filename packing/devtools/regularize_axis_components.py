@@ -128,6 +128,7 @@ from sqpack.witness import (
     _promoted_candidate,  # pyright: ignore[reportPrivateUsage]
     exact_verify,
     load_witness,
+    materialize_exact_witness,
     witness_document,
 )
 from sqpack.workers import worker_count
@@ -673,39 +674,43 @@ def _decimal_frame(
 def exact_frame(witness: dict[str, Any], *, smallest_dilation: bool = False) -> ExactFrame:
     """The exact rational pose this witness is regularized from, and where it came from."""
     kind = witness["scalar"]["kind"]
-    reported_side = Fraction(str(witness["side"]))
-    before = _witness_poses(witness)
-    if kind == "rational":
-        if witness["representation"] != "corners":
-            raise RegularizeError(
-                "unsupported-representation",
-                "a rational witness is regularized from its corners; this one has "
-                f"{witness['representation']!r}",
-            )
-        shift = (
-            reported_side / 2 if witness["coordinates"]["origin"] == "container-center" else 0
-        )
-        pieces = [
-            Piece(
-                str(square["id"]),
-                [(Fraction(x) + shift, Fraction(y) + shift) for x, y in square["corners"]],
-                angle_gap(pose[2]),
-            )
-            for square, pose in zip(witness["squares"], before, strict=True)
-        ]
-        provenance = {
-            "kind": "rational",
-            "derivation": "the witness's own rational corners",
-            "certified_side": literal(reported_side),
-            "center_dilation": "1",
-        }
-        return ExactFrame(pieces, reported_side, reported_side, before, provenance)
-    if kind != "decimal":
+    if kind not in {"rational", "decimal"}:
         raise RegularizeError(
             "unsupported-scalar-kind",
             f"{kind!r} geometry has no exact rational frame here: an enclosure proves no "
             "equality and an algebraic field needs field arithmetic this tool lacks",
         )
+    reported_side = Fraction(str(witness["side"]))
+    before = _witness_poses(witness)
+    if kind == "rational":
+        expanded, side = materialize_exact_witness(witness)
+        if not isinstance(side, Fraction):
+            raise TypeError("rational regularization requires a rational side")
+        corners: list[Corners] = []
+        for square in expanded:
+            parsed: Corners = []
+            for x, y in square:
+                if not isinstance(x, Fraction) or not isinstance(y, Fraction):
+                    raise TypeError("rational regularization requires rational corners")
+                parsed.append((x, y))
+            corners.append(parsed)
+        pieces = [
+            Piece(str(square["id"]), expanded_corners, angle_gap(pose[2]))
+            for square, expanded_corners, pose in zip(
+                witness["squares"], corners, before, strict=True
+            )
+        ]
+        provenance = {
+            "kind": "rational",
+            "derivation": (
+                "the witness's own rational corners"
+                if witness["representation"] == "corners"
+                else "the witness's exact rational pose expansion"
+            ),
+            "certified_side": literal(reported_side),
+            "center_dilation": "1",
+        }
+        return ExactFrame(pieces, side, reported_side, before, provenance)
     corners, side, dilation = _decimal_frame(witness, smallest_dilation=smallest_dilation)
     pieces = [
         Piece(str(square["id"]), square_corners, angle_gap(pose[2]))

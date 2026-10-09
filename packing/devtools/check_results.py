@@ -442,26 +442,51 @@ def repository_file_problem(path: str) -> str | None:
 def linked_repository_file_problem(path: str) -> str | None:
     """Only separately admitted exact proof and atlas leaves may link outside."""
     from devtools import evand_arrangement_houses as evand  # noqa: PLC0415
+    from devtools import gupta_house_links as gupta  # noqa: PLC0415
     from devtools import refinement_house_links as refinements  # noqa: PLC0415
+    from devtools import ryxu_house_links as ryxu  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
     from devtools import squish_second_update_house_links as house  # noqa: PLC0415
     from devtools.squish_followup_packets import linked_certificate_problem  # noqa: PLC0415
 
-    # Route by lexical repository names. Each owner then checks its repository and
-    # custody; unrelated private fixtures must not inherit another owner's live root.
+    # Proof paths name their fixed source; atlas paths additionally require the
+    # private current selection. A linked witness cannot choose its own validator.
     proofs = {
         f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
         for n in second.NUMBERS
     }
-    houses = {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in house.LINK_NUMBERS}
     if path in proofs:
         return second.linked_certificate_problem(path, repository=REPO)
-    if path in houses:
-        return house.linked_house_problem(path, repository=REPO)
-    if path in {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in refinements.NUMBERS}:
-        return refinements.linked_house_problem(path, repository=REPO)
-    if path in {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in evand.NUMBERS}:
-        return evand.linked_house_problem(path, repository=REPO)
+    owners = (
+        (gupta, gupta.NUMBERS, gupta.reports.SOURCE_KEY),
+        (ryxu, ryxu.NUMBERS, ryxu.SOURCE_KEY),
+        (house, house.LINK_NUMBERS, house.confirmation.reported.SOURCE_KEY),
+        (refinements, refinements.packets.COUZO.numbers, refinements.packets.COUZO.key),
+        (refinements, refinements.packets.N68.numbers, refinements.packets.N68.key),
+        (evand, evand.NUMBERS, evand.reports.SOURCE_KEY),
+    )
+    declared = {
+        f"packing/witnesses/known-best/n-{n:03d}.yaml": n
+        for _owner, numbers, _key in owners
+        for n in numbers
+    }
+    if path in declared:
+        n = declared[path]
+        frontier = REPO / "packing/frontier" / f"n-{n:03d}.md"
+        if frontier.is_symlink() or not frontier.resolve().is_relative_to(REPO.resolve()):
+            return "selected frontier escapes the private checkout"
+        try:
+            selected = _frontmatter(frontier)["packing"]
+            selected_n = selected["n"]
+            source_key = selected["reported_upper_bound"]["source_key"]
+        except ValueError, KeyError, TypeError, OSError:
+            return "linked house requires its complete private selected frontier"
+        for owner, numbers, expected_key in owners:
+            if n not in numbers:
+                continue
+            if selected_n == n and source_key == expected_key:
+                return owner.linked_house_problem(path, repository=REPO)
+        return "selected source has no admitted linked-house owner"
     return linked_certificate_problem(path, repository=REPO)
 
 

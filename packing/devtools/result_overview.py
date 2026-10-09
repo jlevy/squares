@@ -903,8 +903,9 @@ def step(other: Result, current: Result, cases: Sequence[int]) -> str:
     chip_line = f'<p class="site-result-step-chips">{chips}</p>'
     cites = [_esc(other.credit), *citations(other)]
     # A step is set back where its result is superseded here as its row would be
-    # (`render_recent_results.superseded`): a bound no case bound here rests on, or a
-    # result its entry declares superseded as a whole, whatever its standing. A result
+    # (`render_recent_results.superseded`): a bound no case bound here rests on and the
+    # cases here match or beat, or a result its entry declares superseded as a whole,
+    # whatever its standing. A better bound pending adoption is not set back. A result
     # of another kind that derives `superseded` from the bound it cites (T-003, a
     # method's limit) is current, and its step is not set back.
     if any(mark.mark == SUPERSEDED for mark in marks):

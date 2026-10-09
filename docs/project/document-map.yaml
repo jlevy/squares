@@ -9,6 +9,8 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-08-n17-merge-readiness.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-315-shared-centre-endpoint/README.md, role: session-record, authority: record, lifecycle: retained}
@@ -1218,6 +1220,10 @@ documents:
   - {path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md, role: review, authority: record, lifecycle: retained}
 
   - path: docs/project/reviews/review-2026-10-08-evand-new-arrangements.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-10-08-fn1-original-input-bindings.md
     role: review
     authority: record
     lifecycle: retained
