@@ -11,6 +11,7 @@ import pytest
 from playwright.sync_api import Page, sync_playwright
 
 from devtools import render_exact_side_values as paper
+from devtools.render_exact_side_values import WEB_LAYOUT
 from tests import site_browser
 from tests.test_render_exact_side_values import REVISION, small_document
 
@@ -48,7 +49,7 @@ def test_complete_web_report_preserves_long_fractions_and_coefficients(
     page.set_viewport_size({"width": width, "height": 844})
     page.emulate_media(color_scheme=scheme)
     page.set_content(complete_report, wait_until="networkidle")
-    layout = page.evaluate(paper.WEB_LAYOUT)
+    layout = page.evaluate(WEB_LAYOUT)
     assert layout["pageOverflow"] == 0
     assert layout["theme"] == scheme
     assert not paper.web_findings(layout), layout["lostInk"]
@@ -74,7 +75,7 @@ def test_complete_report_remains_readable_without_javascript(
     try:
         fallback = context.new_page()
         fallback.set_content(complete_report, wait_until="networkidle")
-        layout = fallback.evaluate(paper.WEB_LAYOUT, {"settle": False})
+        layout = fallback.evaluate(WEB_LAYOUT, {"settle": False})
         assert not paper.web_findings(layout), layout["lostInk"]
         assert layout["nativeMath"] > 0
         assert layout["coefficients"] == 3
@@ -96,7 +97,7 @@ def test_web_check_requires_keyboard_access_to_full_wide_table_content(
         f'<div class="kpress-table-wrap"{keyboard}>'
         "<table><tbody><tr><td>Preserved full source content</td></tr></tbody></table></div>"
     )
-    layout = page.evaluate(paper.WEB_LAYOUT)
+    layout = page.evaluate(WEB_LAYOUT)
     assert layout["pageOverflow"] == 0
     assert bool(paper.web_findings(layout)) is not accessible
 
@@ -158,7 +159,7 @@ def test_web_check_refuses_lost_exact_digits_and_clipped_math(page: Page, defect
         '<div class="kpress-math-display"><span class="kpress-math-semantic">'
         "<math><mfrac><mn>12345</mn><mn>67890</mn></mfrac></math></span></div>"
     )
-    layout = page.evaluate(paper.WEB_LAYOUT)
+    layout = page.evaluate(WEB_LAYOUT)
     assert layout["pageOverflow"] == 0
     assert layout["lostInkCount"] > 0
     if defect in {"clip", "math-clip"}:
