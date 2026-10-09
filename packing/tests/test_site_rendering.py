@@ -934,10 +934,48 @@ def native_frontier_failure(
             "longTasks": timings("longTasks", ("startTime", "durationMs", "name"), 5),
             "readabilitySamples": timings("readabilitySamples", ("startTime", "durationMs"), 3),
             "animationFrames": frames,
+            "layoutShifts": (report.get("layoutShifts") or [])[:100],
+            "fontEvents": (report.get("fontEvents") or [])[:100],
         },
         indent=2,
         sort_keys=True,
     )
+
+
+def test_native_frontier_failure_keeps_shift_and_font_arrival_evidence() -> None:
+    shifts = [
+        {
+            "startTime": 630.2,
+            "value": 0.20859,
+            "sources": [
+                {
+                    "node": "main > .kpress-prose > p > #text",
+                    "previousRect": {"x": 239, "y": 591.359, "width": 801},
+                    "currentRect": {"x": 240, "y": 564.359, "width": 800},
+                }
+            ],
+        }
+    ]
+    fonts = [
+        {"startTime": 342.4, "type": "loading"},
+        {"startTime": 645.9, "type": "loadingdone"},
+    ]
+    result = json.loads(
+        native_frontier_failure(
+            {"cls": 0.20859, "layoutShifts": shifts, "fontEvents": fonts},
+            width=1280,
+            scheme="light",
+            javascript=True,
+        )
+    )
+    assert result["layoutShifts"] == shifts
+    assert result["fontEvents"] == fonts
+    assert result["metrics"]["cls"] == 0.20859
+    assert result["scenario"] == {
+        "width": 1280,
+        "scheme": "light",
+        "javascript": True,
+    }
 
 
 @pytest.mark.parametrize(

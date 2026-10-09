@@ -382,9 +382,8 @@ PRUNE = frozenset(
         SESSION184_RESULTS / "exp-298-coverage-y-prefilter/04-baseline.json",
         SESSION184_RESULTS / "exp-298-coverage-y-prefilter/05-baseline.json",
         SESSION184_RESULTS / "exp-298-coverage-y-prefilter/06-candidate.json",
-        # Session186 main-refresh measurement: these five historical output roots
-        # are absent from registered control targets/commands and test consumers.
-        # Keep every inline/frontier-declared input through the existing copyback;
+        # Session186 main-refresh measurement: keep these historical roots pruned.
+        # Exact replay inputs and inline/frontier declarations return by copyback;
         # the full original logs, journals and receipts remain in the primary tree.
         # This is worker selection only; the portable 192 MiB cap is unchanged.
         SESSION184_RESULTS / "agenda-037",
@@ -1031,9 +1030,9 @@ LINK_BACK = (
 # into a worker. Both checkers were red before any mutation was applied.
 COPY_SEPARATELY = (
     *couzo.private_input_paths(),
-    # The retained n13 family is an exact worker consumer asserted by the n32
-    # inventory contract; agenda-040's unrelated generated bulk stays pruned.
-    SESSION184_RESULTS / "agenda-040/exp-214-n13-399-100-family.json",
+    # Replay consumers need these leaves even when agenda-040's ancestor is pruned.
+    # Its unrelated generated bulk stays behind that prune.
+    *sorted(HISTORICAL_REPLAY_INPUTS),
     # Preserve the scientific inputs promised by the historical snapshot contract
     # even when their records mention them in commands rather than inline links.
     # Their generated profile/endpoint outputs remain under the existing prunes.
