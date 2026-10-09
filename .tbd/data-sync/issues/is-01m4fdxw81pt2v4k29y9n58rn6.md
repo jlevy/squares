@@ -5,7 +5,7 @@ title: Stabilize stack 430 on main 3213 and qualify every layer
 kind: task
 status: in_progress
 priority: 1
-version: 30
+version: 33
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -31,10 +31,11 @@ child_order_hints:
   - is-01m4fm99hgjjjdmp9w2hpzscga
   - is-01m4fp0v4fwzdjbggyqyypn1vy
   - is-01m4ft8em9j53hvhatwe8g80zm
+  - is-01m4fz21rdxxq44ndvasav3xbf
 hold: null
 hold_until: null
 created_at: 2026-10-09T04:14:49.601Z
-updated_at: 2026-10-09T08:01:07.030Z
+updated_at: 2026-10-09T09:14:14.354Z
 started_at: 2026-10-09T04:20:32.996Z
 ---
 Cloud continuation of think-yij0 handoff (PR467). Normal-merge origin/main 3213d651b into #442, propagate to #468, fix the recorded failures without weakening limits, obtain exact-head required CI and full checkpoints, bind reviews. Merge only with owner confirmation (github-merge confirm-session).
@@ -56,3 +57,7 @@ Owner in session (2026-10-09): 'Follow up on everything, and I'd like you to aut
 Integrator rounds 2-3: stack linear main -> #442 38c3ca4f8 -> #443 16a7785fa -> #448 72ad8bd5f -> #449 9e66a1181 -> #450 ad679213d -> #459 e4579d7cc -> #460 73a594a36 -> #463 0ef92f124 -> #466 1e75d6e46 -> #468 3a2ab4ff0 -> #469 5b5df8db0. T-121..T-123 left the expected superseded set at #463+. deep-gate label added to #469 (top tree = whole stack) since full Packing dispatch is impossible from this session.
 
 Reviews published at final heads (formal COMMENT reviews pinned to head): #442 O r6 approve (+dispositions), #443 H, #448 L, #449 H, #450 H, #459 H (CI red), #460 H approve (+dispositions), #463 G, #466 A approve-with-nits (+disp), #468 A (+disp), #469 A with stack-level assessment (+disp). New Lows: #466 A5 and #468 A4 stale bodies, #469 A12 stale cost figure (fixed by description pass), #469 A11 #465 ledger entry layer (declined: avoids full propagation for a layer-independent record). Coverage gap: #466/#468 original content had no published review -> full-content reviews (senior+correctness+security) commissioned. Deep gate on #469 merge ref passed (run 37899478949, 12 jobs). #459 Pages red: check_math_startup self-test cold-start flake (think-ewad); re-run not possible from session (403).
+
+main moved to e0b02b3ab (#452, #453 n17 fixes; no DATA_PATHS change). Integrated into #442 (bfbc53d86, validate.py auto-merged; 173 targeted tests pass) and carried to #463 with the flake fix (#443 d6680a77f ... #463 9944aac1f); test_site_result_filters auto-merged at #460, 88 tests pass. #466/#468/#469 to follow after #466 review-B fixes.
+
+Final round: #466 6fb0f2e29 (review B: B1 4c07376b5, B2 8d1ab3d9f+44d6b1883, B3/B4 92b03f431, B6 rename ca85b22ae, re-pin 6fb0f2e29; B5 -> think-5y83) merged with #463 -> 0fefda864; #468 374e63b92 (review B fixes) + #466 -> 9a18b9d75; #469 + #468 -> 32d6bed98 (pin conflict kept child; link to renamed packet fixed) + re-pin 9e3304043. Stack linear from main e0b02b3ab to #469. Final heads: #442 bfbc53d86, #443 d6680a77f, #448 0878f9e18, #449 2068a658e, #450 20897456c, #459 a3f4df49f, #460 67180d3d8, #463 9944aac1f, #466 0fefda864, #468 9a18b9d75, #469 9e3304043.
