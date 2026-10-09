@@ -24,7 +24,9 @@ from devtools.render_n11_lower_bounds_explainer_pdf import date_problem
 from sqpack import release
 
 REVISION = "a" * 40
-FIGURES: dict[str, str] = dict.fromkeys(paper.FIGURE_KEYS, '<svg xmlns="http://www.w3.org/2000/svg"></svg>')
+FIGURES: dict[str, str] = dict.fromkeys(
+    paper.FIGURE_KEYS, '<svg xmlns="http://www.w3.org/2000/svg"></svg>'
+)
 SOURCE = r"""{{FRONT_MATTER}}
 
 ## From a Candidate to an Upper Bound
