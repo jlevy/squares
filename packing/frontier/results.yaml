@@ -9870,6 +9870,12 @@ results:
       findings were handled after it, except that each record's reported lane still lists
       the finder's pose under S' (EX-9, think-5n3o).
 
+
+      On 7 October 2026, T-119 separately certified three changed arrangements at
+      n = 266, 270 and 272 with strictly smaller feasible sides. This entry keeps its
+      original source13ee36e certificates, poses, scope, credits and reviews; its
+      historical decisions are not proofs of the newly adopted arrangements.
+
   - id: T-099
     kind: lower-bound
     registered: '2026-10-06'
@@ -10297,6 +10303,12 @@ results:
       2026, the next id after the register's T-100, in every record, view, test and tool
       that names it. The two reviews are stored as their reviewers wrote them and are not
       edited: "T-118" in either review, its title included, is this entry, T-101.
+
+
+      On 7 October 2026, T-119 separately certified three changed arrangements at
+      n = 266, 270 and 272 with strictly smaller feasible sides. This entry keeps its
+      original source13ee36e certificates, poses, scope, credits and reviews; its
+      historical decisions are not proofs of the newly adopted arrangements.
 
   - id: T-102
     kind: lower-bound
@@ -12346,3 +12358,433 @@ results:
       verdict: accepted
       covers:
       - T-118
+  - id: T-119
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: Three exact feasible upper bounds at n=266,270,272 from new source arrangements
+    claim: Complete rational packings establish s(266)<=16.8230287507564760, s(270)<=16.9378072284460292
+      and s(272)<=16.9681101457696006. All displays are upward ceilings of exact rational sides; arrangement
+      novelty remains author-reported.
+    scope:
+      n_values:
+      - 266
+      - 270
+      - 272
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: Three strictly smaller exact feasible ceilings with complete changed poses; no solved
+        case or optimality claim.
+      scored: '2026-10-07'
+      by: 'think-hh48 #399 import'
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel new arrangements 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-evand-399-new-arrangements-report
+    - E-evand-399-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-new-arrangements-2026-10-07/README.md
+    - packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz
+    - packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz
+    - packing/devtools/evand_arrangement_reports.py
+    - packing/frontier/n-266.md
+    - packing/frontier/n-270.md
+    - packing/frontier/n-272.md
+    reviews:
+    - path: docs/project/reviews/review-2026-10-08-evand-new-arrangements.md
+      kind: adversarial
+      reviewer: GPT-6 Astra mathematical reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-08'
+      scope: All three complete sources, exact half-angle conversion and full nine-job/18-result replay;650496
+        pair decisions.
+      verdict: accepted
+      covers:
+      - T-119
+    controls:
+    - packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz
+    - packing/tests/test_evand_arrangement_reports.py
+    composition: Full-roster source admission precedes exact rational conversion; both independent routes
+      inspect every wall and pair. Every complete input and native verdict is retained. Private worker
+      inputs bind only three explicitly guarded atlas read links.
+    notes: 'Historical #375 source13ee36e, T-098/T-101 certificates, credits and original poses remain
+      unchanged. Source new-arrangement and KKT/local-minimum assertions are not promoted by feasibility.'
+    next_rung: V4/C4 requires accountable human review. V5/C5 requires proof-assistant verification;
+      this replay establishes neither.
+
+  - id: T-120
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: Reported `s(102) ≤ alpha_102` with a degree-8 exact side form
+    claim: Evan Daniel reports s(102) <= alpha_102, where alpha_102 is the feasible side of the source
+      configuration and the selected root of the degree-8 integer polynomial in reported-catalogue.json,
+      new_form_claims.102, with its retained rational root interval. The same source asserts that this
+      polynomial is minimal; that additional algebraic assertion has not been independently established
+      here.
+    scope:
+      n_values:
+      - 102
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: A reported exact algebraic form for an existing source configuration, without a new
+        verified bound.
+      scored: '2026-10-07'
+      by: think-8sm2 reported source intake
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel exact and local reports 2026]'
+      published: '2026-10-07'
+    evidence:
+    - E-evand-exact-form-n102-report
+    artifacts:
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/README.md
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/EXACT_FORMS.md
+    - packing/devtools/evand_report_catalogue.py
+    next_rung: Acquire and bind the exact source geometry, check root identity and full feasibility
+      independently, and review any minimality claim separately. PR403 owns canonical exact-value integration.
+    notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
+      flags are not local verdicts. Polynomial irreducibility, minimality, published-expression equality
+      and exact geometry remain unverified. No global optimality or rigidity established. Source packings
+      are configuration-specific; later bounds at the same count receive no transferred proof.
+  - id: T-121
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: Reported `s(106) ≤ alpha_106` with a degree-32 exact side form
+    claim: Evan Daniel reports s(106) <= alpha_106, where alpha_106 is the feasible side of the source
+      configuration and the selected root of the degree-32 integer polynomial in reported-catalogue.json,
+      new_form_claims.106, with its retained rational root interval. The same source asserts that this
+      polynomial is minimal; that additional algebraic assertion has not been independently established
+      here.
+    scope:
+      n_values:
+      - 106
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: A reported exact algebraic form for an existing source configuration, without a new
+        verified bound.
+      scored: '2026-10-07'
+      by: think-8sm2 reported source intake
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel exact and local reports 2026]'
+      published: '2026-10-07'
+    evidence:
+    - E-evand-exact-form-n106-report
+    artifacts:
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/README.md
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/EXACT_FORMS.md
+    - packing/devtools/evand_report_catalogue.py
+    next_rung: Acquire and bind the exact source geometry, check root identity and full feasibility
+      independently, and review any minimality claim separately. PR403 owns canonical exact-value integration.
+    notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
+      flags are not local verdicts. Polynomial irreducibility, minimality, published-expression equality
+      and exact geometry remain unverified. No global optimality or rigidity established. Source packings
+      are configuration-specific; later bounds at the same count receive no transferred proof.
+  - id: T-122
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: Reported `s(152) ≤ alpha_152` with a degree-40 exact side form
+    claim: Evan Daniel reports s(152) <= alpha_152, where alpha_152 is the feasible side of the source
+      configuration and the selected root of the degree-40 integer polynomial in reported-catalogue.json,
+      new_form_claims.152, with its retained rational root interval. The same source asserts that this
+      polynomial is minimal; that additional algebraic assertion has not been independently established
+      here.
+    scope:
+      n_values:
+      - 152
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: A reported exact algebraic form for an existing source configuration, without a new
+        verified bound.
+      scored: '2026-10-07'
+      by: think-8sm2 reported source intake
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel exact and local reports 2026]'
+      published: '2026-10-07'
+    evidence:
+    - E-evand-exact-form-n152-report
+    artifacts:
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/README.md
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/EXACT_FORMS.md
+    - packing/devtools/evand_report_catalogue.py
+    next_rung: Acquire and bind the exact source geometry, check root identity and full feasibility
+      independently, and review any minimality claim separately. PR403 owns canonical exact-value integration.
+    notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
+      flags are not local verdicts. Polynomial irreducibility, minimality, published-expression equality
+      and exact geometry remain unverified. No global optimality or rigidity established. Source packings
+      are configuration-specific; later bounds at the same count receive no transferred proof.
+  - id: T-123
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: Reported `s(177) ≤ alpha_177` with a degree-32 exact side form
+    claim: Evan Daniel reports s(177) <= alpha_177, where alpha_177 is the feasible side of the source
+      configuration and the selected root of the degree-32 integer polynomial in reported-catalogue.json,
+      new_form_claims.177, with its retained rational root interval. The same source asserts that this
+      polynomial is minimal; that additional algebraic assertion has not been independently established
+      here.
+    scope:
+      n_values:
+      - 177
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: A reported exact algebraic form for an existing source configuration, without a new
+        verified bound.
+      scored: '2026-10-07'
+      by: think-8sm2 reported source intake
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel exact and local reports 2026]'
+      published: '2026-10-07'
+    evidence:
+    - E-evand-exact-form-n177-report
+    artifacts:
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/README.md
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/EXACT_FORMS.md
+    - packing/devtools/evand_report_catalogue.py
+    next_rung: Acquire and bind the exact source geometry, check root identity and full feasibility
+      independently, and review any minimality claim separately. PR403 owns canonical exact-value integration.
+    notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
+      flags are not local verdicts. Polynomial irreducibility, minimality, published-expression equality
+      and exact geometry remain unverified. No global optimality or rigidity established. Source packings
+      are configuration-specific; later bounds at the same count receive no transferred proof.
+  - id: T-124
+    kind: restricted-optimality
+    registered: '2026-10-07'
+    headline: Reported non-strict local minima for 178 source configurations
+    claim: Evan Daniel reports that 178 configurations are non-strict local minima under the source
+      matched-index perturbation convention. The retained catalogue names 176 integer-band cases and
+      the separate n11 and n28 cases, with angles taken modulo 90 degrees and plateaux allowed. This
+      assertion is restricted to those source configurations and their local neighborhoods; no global
+      bound or rigidity is claimed here.
+    scope:
+      n_values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 6
+      - 7
+      - 8
+      - 9
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 28
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 35
+      - 36
+      - 42
+      - 43
+      - 44
+      - 45
+      - 46
+      - 47
+      - 48
+      - 49
+      - 56
+      - 57
+      - 58
+      - 59
+      - 60
+      - 61
+      - 62
+      - 63
+      - 64
+      - 72
+      - 73
+      - 74
+      - 75
+      - 76
+      - 77
+      - 78
+      - 79
+      - 80
+      - 81
+      - 90
+      - 91
+      - 92
+      - 93
+      - 94
+      - 95
+      - 96
+      - 97
+      - 98
+      - 99
+      - 100
+      - 111
+      - 112
+      - 113
+      - 114
+      - 115
+      - 116
+      - 117
+      - 118
+      - 119
+      - 120
+      - 121
+      - 133
+      - 134
+      - 135
+      - 136
+      - 137
+      - 138
+      - 139
+      - 140
+      - 141
+      - 142
+      - 143
+      - 144
+      - 157
+      - 158
+      - 159
+      - 160
+      - 161
+      - 162
+      - 163
+      - 164
+      - 165
+      - 166
+      - 167
+      - 168
+      - 169
+      - 183
+      - 184
+      - 185
+      - 186
+      - 187
+      - 188
+      - 189
+      - 190
+      - 191
+      - 192
+      - 193
+      - 194
+      - 195
+      - 196
+      - 212
+      - 213
+      - 214
+      - 215
+      - 216
+      - 217
+      - 218
+      - 219
+      - 220
+      - 221
+      - 222
+      - 223
+      - 224
+      - 225
+      - 242
+      - 243
+      - 244
+      - 245
+      - 246
+      - 247
+      - 248
+      - 249
+      - 250
+      - 251
+      - 252
+      - 253
+      - 254
+      - 255
+      - 256
+      - 274
+      - 275
+      - 276
+      - 277
+      - 278
+      - 279
+      - 280
+      - 281
+      - 282
+      - 283
+      - 284
+      - 285
+      - 286
+      - 287
+      - 288
+      - 289
+      - 308
+      - 309
+      - 310
+      - 311
+      - 312
+      - 313
+      - 314
+      - 315
+      - 316
+      - 317
+      - 318
+      - 319
+      - 320
+      - 321
+      - 322
+      - 323
+      - 324
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: Reported local structure for a named configuration roster; no global optimum or new
+        feasible bound.
+      scored: '2026-10-07'
+      by: think-juuq reported source intake
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel exact and local reports 2026]'
+      published: '2026-10-07'
+    evidence:
+    - E-evand-local-minima-178-report
+    artifacts:
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/README.md
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/localmin_lean.py
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/tasks/exact-minpoly/chain-lemma.md
+    next_rung: Audit the retained theorem, embedded configuration and perturbation-definition bindings and pinned
+      dependencies, acquire any inputs that audit finds missing, and independently build the pinned Lean
+      proof before raising either rung.
+    notes: Reported non-strict local minima under the source matched-index perturbation convention,
+      with angles modulo 90 degrees and plateaux permitted. The actual roster has176 integer-band configurations
+      plus n11 and n28; it is not every count in the shorthand bands. Full source Lean code is retained;
+      the 176 band localMin statements and N11L/N28L theorems with embedded configurations are retained,
+      but their bindings and full pinned builds have not been independently audited or replayed.
+      No rigidity, isolated strict minimum or global lower bound follows. Same-count replacement poses
+      receive no transferred theorem.

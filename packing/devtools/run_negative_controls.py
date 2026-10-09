@@ -83,6 +83,7 @@ from pathlib import Path
 from threading import Lock
 from uuid import uuid4
 
+from devtools import evand_arrangement_houses as evand_houses
 from devtools import refinement_house_links as refinements
 from devtools import squish_second_update_confirmation as second
 from devtools import squish_second_update_house_links as house
@@ -106,7 +107,11 @@ HERE = ROOT.relative_to(REPO)
 # symlinked back so nothing is rebuilt or resolved again.
 HOUSE_LINK_LEAVES = frozenset(
     path.relative_to(ROOT)
-    for path in (*house.snapshot_house_links(), *refinements.snapshot_house_links())
+    for path in (
+        *house.snapshot_house_links(),
+        *refinements.snapshot_house_links(),
+        *evand_houses.snapshot_house_links(),
+    )
 )
 # C8 / think-rara: exact historical outputs, not their scientific input packets or
 # current producers. The read-only --audit-snapshot --prune-candidate report measured
@@ -687,6 +692,7 @@ LINK_BACK = (
 COPY_SEPARATELY = (
     *second.private_input_paths(),
     *refinements.private_input_paths(),
+    *evand_houses.private_input_paths(),
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
     ROOT / "resources/bibliography.schema.yaml",
@@ -1587,6 +1593,11 @@ def run_one(c: dict, tree: Path) -> tuple[bool, str]:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--source-bytes",
+        action="store_true",
+        help="report private source bytes and the unchanged cap without running controls",
+    )
+    parser.add_argument(
         "spec",
         nargs="?",
         type=Path,
@@ -1676,6 +1687,19 @@ def timing_provenance() -> dict[str, object]:
 def main(argv: Sequence[str] | None = None) -> int:
     """Run selected controls in isolated source snapshots."""
     options = _parser().parse_args(argv)
+    if options.source_bytes:
+        actual = snapshot_source_bytes()
+        print(
+            json.dumps(
+                {
+                    "source_bytes": actual,
+                    "cap_bytes": SNAPSHOT_MAX_BYTES,
+                    "headroom_bytes": SNAPSHOT_MAX_BYTES - actual,
+                    "duplicate_named_copy_bytes_avoided": snapshot_duplicate_copy_bytes(),
+                }
+            )
+        )
+        return int(actual > SNAPSHOT_MAX_BYTES)
     spec_path = options.spec if options.spec.is_absolute() else ROOT / options.spec
     if options.audit_snapshot:
         try:

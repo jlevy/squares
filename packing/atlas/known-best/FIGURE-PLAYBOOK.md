@@ -94,7 +94,7 @@ To see where the figure knows more than the records do:
 uv run --frozen --all-extras --group dev python -m devtools.build_composite_figure_data --review
 ```
 
-Today that reports 290 degrees known over the corpus, 43 stored upstream and **247
+Today that reports 292 degrees known over the corpus, 45 stored upstream and **247
 derived here** — each one a fact the corpus could hold and does not.
 
 ## The rule that matters
@@ -409,8 +409,8 @@ The final right-column item is the unbadged text “deg is the algebraic degree 
 side length.” The four row baselines are 780, 876, 972 and 1068. “Best packings due to”
 begins three balanced construction-credit lines at 1326, 1416 and 1506. Complete names
 stay intact and all twenty recorded finders and improvers appear once.
-The visible list has no bracketed citations; all eight full source keys remain in the
-SVG metadata and the separate bibliography.
+The visible list has no bracketed citations; all nine full source keys remain in the SVG
+metadata and the separate bibliography.
 A 180-unit section gap separates the credits from “Diagram by Joshua Levy” at 1686. The
 data date, a middle dot and the generated edition follow at 1791. An ordinary blank line
 separates that stamp from “Citations and details in The Squares Project” at 2001 and

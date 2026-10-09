@@ -54,6 +54,15 @@ def overview() -> str:
 
 
 @pytest.fixture(scope="module")
+def n11_result_page() -> str:
+    """The complete selected result; the records fixture covers every case."""
+    pages = list(render_overview.iter_result_fragments(result_ids=frozenset({"T-060"})))
+    assert len(pages) == 1
+    assert pages[0].name == "result/t-060.html"
+    return pages[0].html
+
+
+@pytest.fixture(scope="module")
 def served() -> dict[str, str]:
     """The three pages above as a reader's browser assembles them, with every shared
     asset they link put back in them (`tests.site_renders.served`), by name."""
@@ -337,8 +346,8 @@ def test_every_record_opens_with_its_visual_summary(
         assert "data-kpress-math" in record, n
 
 
-def test_a_result_about_one_case_shows_the_same_visual_summary() -> None:
-    body = site_renders.result_bodies()["T-060"]
+def test_a_result_about_one_case_shows_the_same_visual_summary(n11_result_page: str) -> None:
+    body = n11_result_page
     assert '<section class="site-case-summary' in body
     assert body.index('<figure class="site-case-figure') < body.index(
         '<div class="site-atlas-gap"'

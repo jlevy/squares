@@ -22,6 +22,8 @@ import yaml
 
 from devtools import build_bound_citations, build_composite_figure_data, render_composite_pdf
 from devtools import build_known_best_atlas as known_best_builder
+from devtools import evand_arrangement_houses as evand_houses
+from devtools import evand_arrangement_reports as evand_reports
 from devtools import refinement_house_links as refinement_houses
 from devtools import refinement_packets as refinement_sources
 from devtools.atlas_legend import AtlasLegendCounts, atlas_legend
@@ -52,8 +54,9 @@ from sqpack.workers import worker_count
 
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
 #: The first SQUISH update moved n = 179 and 258 onto packet-derived facts;
-#: the second also moved n = 88. These inventory counts follow the current corpus.
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 26, "n=1..324": 57}
+#: the second also moved n = 88, and #399 moves n = 266 onto its complete exact
+#: source packet. These inventory counts follow the current corpus.
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 26, "n=1..324": 56}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -76,8 +79,8 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     },
     "n=1..324": {
         "exact-grid": 176,
-        "kingbird-derived-facts": 91,
-        "packet-derived-facts": 57,
+        "kingbird-derived-facts": 90,
+        "packet-derived-facts": 58,
     },
 }
 
@@ -462,17 +465,36 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         assert "not a legal conclusion" in witness["claim"]["limitations"]
     elif entry["source"]["kind"] == "packet-derived-facts":
         assert entry["source"]["path"].startswith("resources/web/")
-        assert entry["source"]["path"].endswith(
-            (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
+        evand_url = (
+            f"{evand_reports.SOURCE}/blob/{evand_reports.REVISION}/{evand_reports.source_path(n)}"
+            if n in evand_houses.NUMBERS
+            else None
         )
         source = refinement_houses.source(n) if n in refinement_houses.NUMBERS else None
-        if source is not None and entry["source"]["url"] == source.url(n):
+        if entry["source"]["url"] == evand_url:
+            assert (
+                entry["witness"]["path"]
+                == evand_houses.house_path(n).relative_to(ROOT).as_posix()
+            )
+            assert (
+                entry["source"]["path"]
+                == evand_reports.fact_path().relative_to(ROOT).as_posix()
+            )
+            assert witness["source"]["path"] == "packing/" + entry["source"]["path"]
+            evand_houses.check_houses([n])
+        elif source is not None and entry["source"]["url"] == source.url(n):
+            assert entry["source"]["path"].endswith(
+                (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
+            )
             # New source facts use repository-relative custody paths. Admit the whole
             # imported house, not merely an accepted alternative path spelling.
             assert witness["source"] == refinement_sources.to_witness(source, n)["source"]
             assert witness["source"]["path"] == "packing/" + entry["source"]["path"]
             refinement_houses.check_houses([n])
         else:
+            assert entry["source"]["path"].endswith(
+                (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
+            )
             assert witness["source"]["path"] == entry["source"]["path"]
             assert "not a legal conclusion" in witness["claim"]["limitations"]
         assert witness["source"]["url"] == entry["source"]["url"]
@@ -1485,7 +1507,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     credit_block = information.find("svg:g[@data-feature='packing-credits']", SVG)
     assert credit_block is not None
     assert len(expected_names) == 20
-    assert len(expected_sources) == 8
+    assert len(expected_sources) == 9
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -1793,13 +1815,13 @@ def test_direct_card_helpers_do_not_resolve_canonical_contribution_flags(
 
 
 def test_shared_atlas_legend_has_the_same_eight_items_in_four_and_four_rows() -> None:
-    descriptor = atlas_legend(AtlasLegendCounts(77, 290, 34, 22, 297))
+    descriptor = atlas_legend(AtlasLegendCounts(77, 292, 32, 22, 297))
     assert [item.marker for item in descriptor.left] == ["O", "=", "≈", "R"]
     assert [item.marker for item in descriptor.right] == ["star", "angles", "shades", None]
     assert [item.text for item in descriptor.items] == [
         "proved optimal (77)",
-        "exact value known (290)",
-        "only known numerically (34)",
+        "exact value known (292)",
+        "only known numerically (32)",
         "rigid (22)",
         "recent result, since August, 2026 (297)",
         "colors indicate distinct tilt angles",
@@ -1827,8 +1849,8 @@ def test_poster_legend_columns_align_left_and_count_upper_only_recent_results(
                     "stem": canvas.spec.stem,
                     "totals": {
                         "proved_optimal": 77,
-                        "exact_value_known": 290,
-                        "only_known_numerically": 34,
+                        "exact_value_known": 292,
+                        "only_known_numerically": 32,
                         "rigidity_known": 22,
                         "lower_bound_recent_result": 0,
                     },
@@ -2332,8 +2354,8 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     ]
     assert labels == [
         "proved optimal (77)",
-        "exact value known (290)",
-        "only known numerically (34)",
+        "exact value known (292)",
+        "only known numerically (32)",
         "rigid (22)",
         "recent result, since August, 2026 (297)",
         "colors indicate distinct tilt angles",

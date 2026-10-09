@@ -551,14 +551,13 @@ def _dl(rows: list[tuple[str, str]]) -> str:
 
 
 def _detail(result: Result) -> str:
-    """A result's claim, composition, next rung, why it matters, novelty label and
-    records: the short form of what its row opens to, which the page itself carries
-    (`result_row`), and what a reader without scripts or off the network sees."""
+    """The claim, significance, novelty and record links carried by a result's row.
+
+    This preview remains available without scripts or a network connection. The full
+    result fragment retains composition and next-rung details (`result_overview.head`).
+    """
     record = result.record
     rows = [("Claim", prose_html(record["claim"]))]
-    for key, label in (("composition", "Composition"), ("next_rung", "Next rung")):
-        if record.get(key):
-            rows.append((label, prose_html(record[key])))
     rows.append(("Significance", prose_html(record["significance"]["rationale"])))
     meaning = novelty_labels().get(result.novelty, "")
     rows.append(
