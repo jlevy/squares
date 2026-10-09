@@ -116,7 +116,8 @@ def test_a_dispatch_shares_no_concurrency_group_with_any_other_workflow() -> Non
     for path in sorted(WORKFLOWS.glob("*.yml")):
         if path == DIAGNOSTIC:
             continue
-        document = workflow(path)
+        # Every workflow, read as plain YAML: this asks only for its concurrency groups.
+        document = safe_load(path.read_text(encoding="utf-8"))
         groups = [document.get("concurrency")] + [
             job.get("concurrency") for job in document["jobs"].values()
         ]
