@@ -8,6 +8,9 @@ from fractions import Fraction
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+import pytest
+import yaml
+
 from cases.schadt29.import_witness import parse_source
 from devtools.check_rational_witness_independent import check as independent_check
 from sqpack.witness import (
@@ -18,7 +21,11 @@ from sqpack.witness import (
     load_witness,
     numerical_check,
     promote_rational,
+    validate_witness_document,
+    witness_document,
+    witness_envelope,
 )
+from sqpack.yamlio import load_yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 WITNESSES = ROOT / "witnesses"
@@ -179,3 +186,96 @@ def test_witness_contract() -> None:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+@pytest.mark.parametrize(
+    "name", ["grid-n004.yaml", "rotated-n001-sqrt2.yaml", "schadt-n029-2025-decimal.yaml"]
+)
+def test_parsed_document_preserves_typed_file_admission(tmp_path: Path, name: str) -> None:
+    retained = load_witness(WITNESSES / name)
+    retained.setdefault("certificate", {})["typed_payload"] = {
+        "boolean": True,
+        "integer": 4,
+        "float": 4.25,
+        "null": None,
+        "sequence": ["1/2", False, 0],
+    }
+    schema = (WITNESSES / "witness.schema.yaml").as_posix()
+    document = witness_envelope(retained, schema=schema)
+    path = tmp_path / name
+    path.write_text(witness_document(retained, schema=schema))
+    serialized = load_yaml(path.read_text())
+    assert serialized == document
+    assert validate_witness_document(document, path=path) == load_witness(path) == retained
+    document["witness"]["certificate"]["typed_payload"]["sequence"].append("changed")
+    assert retained["certificate"]["typed_payload"]["sequence"] == ["1/2", False, 0]
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "document-type",
+        "witness-type",
+        "contract",
+        "boolean-n",
+        "string-n",
+        "numeric-side",
+        "numeric-coordinate",
+        "retired-claim",
+        "duplicate-id",
+        "wrong-count",
+        "angle-unit",
+        "unsupported-field",
+    ],
+)
+def test_parsed_document_rejects_the_same_invalid_file(tmp_path: Path, mutation: str) -> None:
+    schema = (WITNESSES / "witness.schema.yaml").as_posix()
+    document = witness_envelope(load_witness(WITNESSES / "grid-n004.yaml"), schema=schema)
+    witness = document["witness"]
+    if mutation == "document-type":
+        document = None
+    elif mutation == "witness-type":
+        document["witness"] = []
+    elif mutation == "contract":
+        document["softschema"]["contract"] = "retired-contract"
+    elif mutation == "boolean-n":
+        witness["n"] = True
+    elif mutation == "string-n":
+        witness["n"] = "4"
+    elif mutation == "numeric-side":
+        witness["side"] = 2.0
+    elif mutation == "numeric-coordinate":
+        witness["squares"][0]["corners"][0][0] = 0.0
+    elif mutation == "retired-claim":
+        witness["claim"]["assurance"] = witness["claim"].pop("coordinate_provenance")
+    elif mutation == "duplicate-id":
+        witness["squares"][1]["id"] = witness["squares"][0]["id"]
+    elif mutation == "wrong-count":
+        witness["n"] = 3
+    elif mutation == "angle-unit":
+        witness["coordinates"]["angle_unit"] = "radians"
+    else:
+        witness["unexpected"] = "not part of Witness/v2"
+    path = tmp_path / "invalid.yaml"
+    path.write_text(yaml.safe_dump(document, sort_keys=False))
+    with pytest.raises(WitnessError) as direct:
+        validate_witness_document(document, path=path)
+    with pytest.raises(WitnessError) as loaded:
+        load_witness(path)
+    assert (direct.value.kind, str(direct.value)) == (loaded.value.kind, str(loaded.value))
+
+
+def test_parsed_document_keeps_schema_fallback_and_strict_file_duplicates(
+    tmp_path: Path,
+) -> None:
+    schema = WITNESSES / "witness.schema.yaml"
+    witness = load_witness(WITNESSES / "grid-n004.yaml")
+    document = witness_envelope(witness, schema="absent.schema.yaml")
+    path = tmp_path / "fallback.yaml"
+    path.write_text(witness_document(witness, schema="absent.schema.yaml"))
+    assert validate_witness_document(document, path=path, fallback_schema=schema) == witness
+    assert load_witness(path, fallback_schema=schema) == witness
+    path.write_text(path.read_text().replace("  n: 4\n", "  n: 4\n  n: 5\n", 1))
+    with pytest.raises(WitnessError, match="duplicate key 'n'") as failure:
+        load_witness(path, fallback_schema=schema)
+    assert failure.value.kind == "malformed-input"

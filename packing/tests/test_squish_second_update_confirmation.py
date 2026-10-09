@@ -626,3 +626,29 @@ def test_confirmed_case_cannot_relabel_an_unreviewed_bound(private: Path) -> Non
         confirmation.original.PacketError, match="differs from admitted evidence"
     ):
         confirmation.adopt_verified(88, forged)
+
+
+def test_bounded_house_validates_without_serializing_parsed_geometry(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from sqpack import witness as interchange  # noqa: PLC0415
+
+    schema = SOURCE / "packing/witnesses/witness.schema.yaml"
+    document = confirmation.safe_load((SOURCE / "packing/witnesses/grid-n004.yaml").read_text())
+    witness = document["witness"]
+    witness["certificate"]["typed_payload"] = {
+        "boolean": True,
+        "integer": 4,
+        "float": 4.25,
+        "null": None,
+        "sequence": ["1/2", False, 0],
+    }
+    path = tmp_path / "house.yaml"
+    path.write_text(interchange.witness_document(witness, schema="../witness.schema.yaml"))
+    monkeypatch.setattr(confirmation, "SCHEMA", schema)
+
+    def forbidden(*_args, **_kwargs):
+        pytest.fail("parsed house geometry was serialized again")
+
+    monkeypatch.setattr(interchange.yaml, "safe_dump", forbidden)
+    assert house.bounded_house(path) == witness
