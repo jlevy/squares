@@ -5,7 +5,7 @@ title: "Website: compact homepage, consistent case layouts, and scroll-aware nav
 kind: epic
 status: in_progress
 priority: 1
-version: 22
+version: 23
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -24,7 +24,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:13:39.980Z
-updated_at: 2026-10-09T00:24:46.354Z
+updated_at: 2026-10-09T00:25:13.473Z
 started_at: 2026-10-08T23:22:05.552Z
 ---
-W9 remediation of the published Square Packing site. Confirmed homepage order: a brief problem intro with a compact The Squares Project card to about.html below its text, Atlas preview second, Learn More with all paper cards, Results preview, then compact resources. Atlas and Results previews remain visible with prominent dedicated-page buttons. Move the full project section to About and place About in the shared top nav immediately to the left of GitHub. Other fixes are consistent case/page popover layouts including n=291 math, and usual Headroom behavior: hide scrolling down, immediately reappear scrolling up on desktop and mobile. The plan lists eight open implementation and verification issues, including the exact PDF problem-definition wording in think-9tcy; its PDF target is pending clarification. Keep this epic open until the fixes and verification are complete.
+W9 remediation of the published Square Packing site. Confirmed homepage order: brief problem intro with a compact The Squares Project card to about.html below its text, Atlas preview second, Learn More with all paper cards, Results preview, then compact resources. Atlas and Results previews stay visible with prominent dedicated-page buttons. Move the full project section to About and place About immediately to the left of GitHub in the shared top nav. Repair case/page popover layouts including n=291 math. Add usual Headroom behavior: hide scrolling down and immediately reappear scrolling up on desktop and mobile. Seven implementation and verification issues track this wave. The owner canceled the PDF change and will handle it separately. Build and serve a local draft for review before publishing the site.

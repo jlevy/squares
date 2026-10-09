@@ -5,7 +5,7 @@ title: Verify the website layouts, math, previews and Headroom interactions
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -15,7 +15,7 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:20:48.607Z
-updated_at: 2026-10-09T00:24:46.367Z
+updated_at: 2026-10-09T00:25:13.810Z
 started_at: 2026-10-08T23:50:51.591Z
 ---
-Complete the combined browser review after the six website implementation issues. Check the homepage section order, all paper cards under Learn More, the project card's about.html target, About immediately before GitHub in the shared top nav, retained About content and links, visible bounded Atlas/Results previews and their prominent buttons, all 324 atlas cases and old links, n=291 math on its page and popover, containment and close/focus behavior, and hide-down/show-up navigation across all shells. Exercise desktop, mobile, narrow widths, themes, reduced motion and static content without JavaScript. Extend existing probes and fast CI coverage and retain before/after screenshots. L7 PDF copy has its own rendering check. See L6 and Testing Strategy in the spec.
+Verify the combined changes after the six website implementation issues. Check homepage order, all paper cards under Learn More, the project card linking to About, About immediately before GitHub in shared navigation, retained About narrative and links, bounded Atlas/Results previews and prominent buttons, complete dedicated Atlas and Results, legacy links, n=291 page/popover math, popover containment and focus, and Headroom across all shell families. Use desktop/mobile/narrow widths, light/dark themes, reduced motion and no JavaScript. Retain reviewed screenshots and keep the local draft server running for owner review. No PDF change is in scope.
