@@ -24,6 +24,7 @@ import argparse
 import re
 import subprocess
 from collections.abc import Mapping, Sequence
+from datetime import date
 from html import escape
 from pathlib import Path
 
@@ -94,6 +95,7 @@ FRONT = paper_front.check(
         agents=("GPT-6 Astra", "GPT-6 Sol"),
         version=OPTIMALITY_REVIEW_EDITION,
         dates=(
+            paper_front.Dated("First published", OPTIMALITY_REVIEW_HISTORY[-1].first_published),
             paper_front.Dated("Original proof", OPTIMALITY_PROOF_PUBLISHED),
             paper_front.Dated(paper_front.REVISED, OPTIMALITY_REVIEW_REVISED),
         ),
@@ -143,6 +145,11 @@ ARCHIVED_CITATION_SOURCES = (
 )
 RENDER_INPUTS = (
     Path(__file__),
+    PACKING / "devtools/site_assets.py",
+    PACKING / "devtools/probes/site_assets/preload_fonts.js",
+    PACKING / "devtools/site_math.py",
+    PACKING / "devtools/node/render-site-math.mjs",
+    PACKING / "devtools/templates/site-math.css",
     ARTICLE,
     SHELL,
     STYLE,
@@ -426,16 +433,20 @@ def math_scripts(static: Path) -> dict[str, str]:
 
 
 def page_meta() -> PageMeta:
-    """What the page says of itself in its head (`render_overview.head_tags`): its title,
-    its sentence, the address it is served at, and the day its front says it was last
-    revised. It states no first publication: the review has one version, and the day
-    it first went live is not recorded (think-2cqu lists the question)."""
+    """Use the paper's credits and edition history for publication metadata."""
     return PageMeta(
         name=TITLE,
         description=DESCRIPTION,
         path=SITE_PATH,
         kind="article",
+        published=paper_front.iso_date(OPTIMALITY_REVIEW_HISTORY[-1].first_published),
         modified=paper_front.iso_date(paper_front.revised(FRONT)),
+        **render_n11_lower_bounds_explainer.scholarly_metadata(
+            FRONT,
+            TITLE,
+            paper_front.iso_date(OPTIMALITY_REVIEW_HISTORY[-1].first_published),
+            paper_front.iso_date(paper_front.revised(FRONT)),
+        ),
     )
 
 
@@ -485,7 +496,7 @@ def render(
         "PAPER_TYPE_CSS": PAPER_TYPE_CSS.read_text(encoding="utf-8"),
         **render_n11_lower_bounds_explainer.publication_layer(),
         "PAPER_CSS": STYLE.read_text(encoding="utf-8"),
-        "SITE_FAVICON": favicon_html(),
+        "SITE_FAVICON": favicon_html(inline=True),
         "SITE_NAV_CSS": SITE_NAV_CSS.read_text(encoding="utf-8"),
         "SITE_NAV": nav_html("papers", root=SITE_ROOT),
         # A paper's closing credit carries no version: its own is in its credits, and
@@ -514,7 +525,13 @@ def output_files(site: Path, html: str, markdown: str) -> dict[Path, str]:
     }
 
 
-def _print_pdf(html_path: Path, pdf_path: Path) -> None:
+def _print_pdf(
+    html_path: Path,
+    pdf_path: Path,
+    *,
+    revised: date | None = None,
+    site_path: str = SITE_PATH,
+) -> None:
     """Print only after KPress math and its print fonts have settled.
 
     The document's two date fields are set to the day the article says the review was
@@ -529,7 +546,7 @@ def _print_pdf(html_path: Path, pdf_path: Path) -> None:
         try:
             page = browser.new_page()
             page.goto(html_path.as_uri(), wait_until="networkidle")
-            page.evaluate(ABSOLUTE_LINKS, SITE_URL + SITE_PATH)
+            page.evaluate(ABSOLUTE_LINKS, SITE_URL + site_path)
             page.emulate_media(media="print")
             hosts = page.locator(".kpress-math")
             if hosts.count() == 0:
@@ -547,7 +564,9 @@ def _print_pdf(html_path: Path, pdf_path: Path) -> None:
                 raise ValueError("the paper contains a math rendering error")
             _await_print_fonts(page)  # pyright: ignore[reportArgumentType]
             drawn = page.pdf(format="Letter", prefer_css_page_size=True, print_background=True)
-            write_bytes_atomic(pdf_path, dated(drawn, artifact_dates.optimality_revised()))
+            write_bytes_atomic(
+                pdf_path, dated(drawn, revised or artifact_dates.optimality_revised())
+            )
         finally:
             if page is not None:
                 page.close()
@@ -572,12 +591,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         facts=render_all_facts(),
         revision=args.revision or link_revision(),
     )
+    from devtools import site_assets, site_math  # noqa: PLC0415
+
     site = args.site.resolve()
+    html = site_math.prepare(html, page_path=SITE_PATH)
+    html = html.replace(favicon_html(inline=True), favicon_html(root="../"))
+    html, assets = site_assets.link_inline_assets(html, SITE_PATH)
     outputs = output_files(site, html, markdown)
     if args.check:
         if args.pdf:
             parser.error("--check compares HTML and Markdown; use --pdf for a fresh PDF")
-        stale = [
+        stale = [site / path for path in site_assets.stale_assets(site, assets)] + [
             path
             for path, content in outputs.items()
             if not path.is_file() or path.read_text(encoding="utf-8") != content
@@ -589,6 +613,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         path.parent.mkdir(parents=True, exist_ok=True)
         with atomic_output_file(path) as temporary:
             temporary.write_text(content, encoding="utf-8")
+    site_assets.write_assets(site, assets)
     if args.pdf:
         _print_pdf(site / SITE_PATH, site / paper_path(SLUG, ".pdf"))
     return 0

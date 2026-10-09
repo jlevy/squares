@@ -1,0 +1,130 @@
+{
+  "cases": [
+    {
+      "exact_side": "6147784441267127/562949953421312",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-108.json.gz",
+      "n": 108,
+      "raw_asset_retained": false,
+      "side": "10.9206589394033085",
+      "source_bytes": 15366,
+      "source_file": "n108.cert.json",
+      "source_sha256": "cae1a66d4872230c2de38ee12b646a644c8c87b5c9eb0e7b774517214ffaf818",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n108/n108.cert.json"
+    },
+    {
+      "exact_side": "4828972106460286237253237344483/410153066106902321950462312448",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-126.json.gz",
+      "n": 126,
+      "raw_asset_retained": false,
+      "side": "11.7735852916961079",
+      "source_bytes": 18601,
+      "source_file": "n126.cert.json",
+      "source_sha256": "b9b59c0250f2bd5168b34af026eb235382ab619588803dbd9ecfa5720e15402e",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n126/n126.cert.json"
+    },
+    {
+      "exact_side": "834853717316974191611773864459/70268596478725557239871963136",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-129.json.gz",
+      "n": 129,
+      "raw_asset_retained": false,
+      "side": "11.8808935876459927",
+      "source_bytes": 20146,
+      "source_file": "n129.cert.json",
+      "source_sha256": "08d48ac3036212732ace237cea5f1ec10cb761759cb7b7d78d5df39a354fba33",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n129/n129.cert.json"
+    },
+    {
+      "exact_side": "6701628168660175/562949953421312",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-130.json.gz",
+      "n": 130,
+      "raw_asset_retained": false,
+      "side": "11.9044830325168771",
+      "source_bytes": 15457,
+      "source_file": "n130.cert.json",
+      "source_sha256": "080129fca3dadcb2c6a924b6e629e54d5405988a349008776c5e1a642ef116dc",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n130/n130.cert.json"
+    },
+    {
+      "exact_side": "7250614903299225/562949953421312",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-153.json.gz",
+      "n": 153,
+      "raw_asset_retained": false,
+      "side": "12.8796793733329640",
+      "source_bytes": 21133,
+      "source_file": "n153.cert.json",
+      "source_sha256": "4035079327be66751ccf03a69b27be2a5c267624cbd5a005da9aba7209eb87a9",
+      "source_url": "https://github.com/user-attachments/files/33140088/n153.cert.json"
+    },
+    {
+      "exact_side": "7277982312406737/562949953421312",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-154.json.gz",
+      "n": 154,
+      "raw_asset_retained": false,
+      "side": "12.9282936576777576",
+      "source_bytes": 18274,
+      "source_file": "n154.cert.json",
+      "source_sha256": "e1bfb53d7205def08f9752678f88b478f103086f6e7da5562996fc657b4fd8ef",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n154/n154.cert.json"
+    },
+    {
+      "exact_side": "1672234187663680786096364585719/129093397859976830657337753600",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-155.json.gz",
+      "n": 155,
+      "raw_asset_retained": false,
+      "side": "12.9536770693532741",
+      "source_bytes": 21259,
+      "source_file": "n155.cert.json",
+      "source_sha256": "1ab2ae1f4bcfc52dc1526169eebb02cab79739226bf59ea5cecb0b9cc4f5cb2f",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n155/n155.cert.json"
+    },
+    {
+      "exact_side": "3068446722737763377509947691807/220376842814439473250054438912",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-180.json.gz",
+      "n": 180,
+      "raw_asset_retained": false,
+      "side": "13.9236350042524233",
+      "source_bytes": 24555,
+      "source_file": "n180.cert.json",
+      "source_sha256": "8c47a815ce8cb05a180921e20ea31a805624ba1c2bca8c1ccac46cad0b1cd408",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n180/n180.cert.json"
+    },
+    {
+      "exact_side": "4785398243001234645794991233471/320101708170839058852217880576",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-209.json.gz",
+      "n": 209,
+      "raw_asset_retained": false,
+      "side": "14.9496179522017929",
+      "source_bytes": 33342,
+      "source_file": "n209.cert.json",
+      "source_sha256": "13937d0ca56b0dae8da4d3c9471e1d9581f9239aa6d30d54071f7bd1f05aaef4",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n209/n209.cert.json"
+    },
+    {
+      "exact_side": "8967460069924095/562949953421312",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-238.json.gz",
+      "n": 238,
+      "raw_asset_retained": false,
+      "side": "15.9294090272583144",
+      "source_bytes": 26232,
+      "source_file": "n238.cert.json",
+      "source_sha256": "66c6932a8945f9e93d2cdedac357eade15d356d051e4f22ccf6fb2765266e2f8",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n238/n238.cert.json"
+    },
+    {
+      "exact_side": "1261029876953859/70368744177664",
+      "facts": "packing/resources/web/squish-401-2026-10-07/facts/n-303.json.gz",
+      "n": 303,
+      "raw_asset_retained": false,
+      "side": "17.9203123729203497",
+      "source_bytes": 32407,
+      "source_file": "n303.cert.json",
+      "source_sha256": "0befc3f24f7dd6d3665ff2674586ebb6d965ba66e175c76134538d17c6629606",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n303/n303.cert.json"
+    }
+  ],
+  "format": "external-source-acquisition-v1",
+  "producer_checker_replayed": false,
+  "raw_asset_retained": false,
+  "retrieved": "2026-10-07",
+  "source_commit": "07fe6dde1e5b67405a3076719b90e58e2882b677"
+}

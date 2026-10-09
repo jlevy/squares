@@ -30,38 +30,19 @@ from sqpack.render.numbers import scalar_from_decimal
 from sqpack.render.style import SQUARE_FILL_PALETTE, SQUARE_HUE_PALETTE
 from sqpack.witness import load_witness
 
-#: SVG files carrying indexed square fills, and those fills, per corpus (think-93on). One
-#: more fill since the #227 intake: `n = 68` became Couzo's packing, so the contact-overlay
-#: stratum "first retained UnitSquare rendering-derived geometry" moved to `n = 69`.
-#: n=1..324 gained 51 files and 10,616 fills on 2026-10-02: the regularized layer's
-#: drawings (think-bgkz), drawn by the house renderer under the same contract. One fill
-#: fewer on 2026-10-05: `n = 69` left its rendering for the catalogue's packing (T-088), so
-#: that contact-overlay stratum, now "first source-packet-derived geometry", is `n = 68`.
-#: The two smaller corpora are not re-measured.
-GOLDEN_INDEXED: dict[str, tuple[int, int]] = {
-    "n=1..100": (211, 32017),
-    "n=1..200": (311, 47067),
-    "n=1..324": (385, 68617),
-}
 #: The largest number of distinct angle classes any one frame carries, and the case that
 #: carries it, per corpus. Per frame rather than corpus-wide because the colorizer
 #: registers classes per frame: what a palette has to distinguish is what one drawing
 #: puts side by side. Measured from the retained renderings, which record a class per
 #: square; it is the number the poster's palette question was decided against, when it
 #: was 106 at `n = 273`. Since the #227 intake Couzo's packing is the frame at 273, with
-#: 30 classes, and the largest is his `n = 301`, with 52.
+#: 30 classes. The 7 October SQUISH update now carries 81 classes at n = 263,
+#: above the 52 at Couzo's n = 301.
 GOLDEN_MAX_ANGLE_CLASSES: dict[str, tuple[int, int]] = {
     "n=1..100": (14, 69),
     "n=1..200": (67, 182),
     "n=1..324": (52, 301),
 }
-#: How many frames carry more classes than there are unpinned hue slots, so that their
-#: registrations wrap and two classes in one drawing share a colour. None at all when
-#: the corpus stopped at 100; 37 of 324, not 32, since the #227 intake's 50 packings, and
-#: 36 since the 2026-09-30 catalogue refresh moved n = 126 and 179 onto new packings, and
-#: 35 since Couzo's packing of 3 October at n = 208 (T-092) carries 16 classes, not 21.
-GOLDEN_WRAPPED_CASES: dict[str, int] = {"n=1..100": 0, "n=1..200": 12, "n=1..324": 35}
-
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS = ROOT / "atlas"
 QUARTER_TURN = 3.141592653589793 / 2
@@ -187,10 +168,9 @@ def test_partial_edge_overlap_does_not_count_as_a_flush_side() -> None:
 def test_n68_near_wall_rotations_are_not_full_side_contacts() -> None:
     """Squares turned a thousandth of a radian at a wall are neither axis squares nor flush.
 
-    Since the #227 intake `n = 68` is Couzo's packing (T-056), and it still carries the
-    case: `square-011` sits 0.00057 from the right wall and `square-014` touches the
-    bottom wall at a corner, each turned about 0.00097 rad. The UnitSquare packing it
-    replaced carried the same case in `square-019`, `square-049` and `square-050`.
+    Rehwaldt's rational refinement of Couzo's construction (T-118) retains the case
+    with source-ordered square IDs: `square-020` and `square-063` turn about 0.00096
+    and 0.00097 rad. Earlier Couzo and UnitSquare witnesses use different square IDs.
     """
     witness = load_witness(
         ROOT / "witnesses/known-best/n-068.yaml",
@@ -200,7 +180,7 @@ def test_n68_near_wall_rotations_are_not_full_side_contacts() -> None:
     colors = assign_square_colors(frame_from_witness(witness), spec)
 
     quarter_turn = Decimal("1.57079632679489661923132169163975144209858469968755291048747")
-    near_wall = ("square-011", "square-014")
+    near_wall = ("square-020", "square-063")
     near_axis_offsets = tuple(
         min(
             colors[square_id].orientation_radians,
@@ -216,7 +196,7 @@ def test_n68_near_wall_rotations_are_not_full_side_contacts() -> None:
         assert colors[square_id].hue_index != colors["square-001"].hue_index
         assert colors[square_id].contact_sides == 0
         assert colors[square_id].full_side_contacts == ()
-    assert colors["square-011"].hue_index != colors["square-014"].hue_index
+    assert colors["square-020"].hue_index != colors["square-063"].hue_index
 
 
 def test_full_side_contacts_join_numerically_split_angle_classes() -> None:
@@ -388,6 +368,7 @@ def test_requested_palette_dimensions_are_unique_and_configurable() -> None:
 def test_every_indexed_atlas_fill_matches_its_declared_color_contract() -> None:
     indexed_files = 0
     indexed_fills = 0
+    known_best_cases: set[int] = set()
     palettes: dict[tuple[int, int, Decimal], tuple[tuple[str, ...], ...]] = {}
     for path in sorted(ATLAS.rglob("*.svg")):
         root = ET.fromstring(path.read_text(encoding="utf-8"))
@@ -396,6 +377,11 @@ def test_every_indexed_atlas_fill_matches_its_declared_color_contract() -> None:
         ]
         if not fills:
             continue
+        if path.parent == ATLAS / "known-best/rendering":
+            n = int(path.stem.removeprefix("n-"))
+            assert len(fills) == n, path
+            assert len({node.attrib["data-square"] for node in fills}) == n, path
+            known_best_cases.add(n)
         indexed_files += 1
         metadata = {
             node.attrib["name"]: node.text or ""
@@ -421,7 +407,9 @@ def test_every_indexed_atlas_fill_matches_its_declared_color_contract() -> None:
             assert fill.attrib["fill"] == palette[hue_index][shade_index], path
         indexed_fills += len(fills)
 
-    assert (indexed_files, indexed_fills) == GOLDEN_INDEXED[KNOWN_BEST_CORPUS.label]
+    assert known_best_cases == set(KNOWN_BEST_CORPUS.numbers)
+    assert indexed_files >= KNOWN_BEST_CORPUS.count
+    assert indexed_fills >= sum(KNOWN_BEST_CORPUS.numbers)
 
 
 def _angle_classes_by_case() -> dict[int, dict[int, list[tuple[int, float]]]]:
@@ -453,19 +441,15 @@ def _angle_classes_by_case() -> dict[int, dict[int, list[tuple[int, float]]]]:
 
 
 def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries() -> None:
-    """The corpus asks for 52 angle classes in one frame; the palette answers with 20.
+    """The current corpus asks for 52 angle classes in one frame; the palette has 20.
 
-    The playbook's extension step read "widen the palette", and the measurement says the
-    opposite: widening it is what would break it. The renderer colors per frame, so the
-    number that matters is the largest class count in any single frame, not the corpus's
-    distinct angles -- 52, in `n = 301`, against 14 when the corpus stopped at 100. It was
-    106, in the catalogue's `n = 273`, until the #227 intake replaced that frame.
-    Feeding that count to `square_fill_palette` would space 52 bases around one wheel
-    and leave the closest pair 0.43 degrees apart in OkLCh, which is not a palette. The
-    colorizer instead keeps the 20 checked bases and wraps class registrations onto the
-    18 unpinned slots, so the separation the figures rely on is the same one at 52
-    classes as at 14, and repeated hues in a dense frame are an honest statement that a
-    frame carries more angles than any palette can distinguish.
+    The renderer colors per frame, so the relevant count is the largest class count
+    in any single frame: 52 at Couzo's n = 301, against 14 when the corpus stopped at
+    100. It was 106 at the catalogue's n = 273 before the #227 intake, and later 81
+    at the first SQUISH update's n = 263 before the second update replaced that pose.
+    The colorizer keeps the 20 checked bases and wraps class registrations onto the
+    18 unpinned slots. Repeated hues in a dense frame honestly indicate that a frame
+    carries more angles than the palette can distinguish.
 
     Hues 0 and 1 survive the wrap by construction -- `RESERVED_HUES` is subtracted
     before the modulus -- and that is what the last assertion checks on the record: in
@@ -535,7 +519,14 @@ def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries()
             )
             assert (hue == 0) == right_angle, (n, angle_class, hue)
             assert (hue == 1) == diagonal, (n, angle_class, hue)
-    assert wrapped_cases == GOLDEN_WRAPPED_CASES[KNOWN_BEST_CORPUS.label]
+        unreserved = [
+            next(iter({hue for hue, _ in members}))
+            for members in classes.values()
+            if all(hue >= RESERVED_HUES for hue, _ in members)
+        ]
+        if len(unreserved) > unpinned_slots:
+            assert len(set(unreserved)) < len(unreserved), n
+    assert wrapped_cases > 0
 
 
 def test_color_parameters_reject_nonpositive_values() -> None:

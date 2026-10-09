@@ -49,6 +49,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import TYPE_CHECKING, TextIO, cast
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.probes import probe
 from workbench_tools.trial_records import (
     AttemptFailure,
@@ -298,7 +299,7 @@ def run_trials(run: Run) -> RunResult:
             )
             page_errors: list[str] = []
             page.on("pageerror", lambda error: page_errors.append(str(error)))
-            page.goto(PAGE.as_uri())
+            open_page(page, PAGE)
             page.wait_for_function(probe(BENCHMARK_PROBES["ready"]), timeout=60_000)
             page.add_script_tag(path=str(benchmark_bundle))
             guard: object = page.evaluate(probe(BENCHMARK_PROBES["guard"]))

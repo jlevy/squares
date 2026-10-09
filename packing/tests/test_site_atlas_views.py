@@ -47,7 +47,8 @@ INTERRUPTED = probe(PROBES, "site_atlas_views/interrupted")
 WATCH = probe(PROBES, "site_atlas_views/watch")
 SEEN = probe(PROBES, "site_atlas_views/seen")
 ACTIONS = probe(PROBES, "site_atlas_views/actions")
-DRAWING = probe(PROBES, "site_drawing_hover/drawing")
+DRAWING = probe(PROBES, "site_atlas_views/drawing")
+INITIAL = probe(PROBES, "site_atlas_views/initial")
 
 GRID, TRIANGLE = atlas.tab("grid"), atlas.tab("triangle")
 SMALL, MEDIUM, LARGE = (atlas.size_tab(size) for size in atlas.SIZES)
@@ -298,6 +299,20 @@ def seen(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
     sync_api = pytest.importorskip("playwright.sync_api")
     root = Path(tmp_path_factory.mktemp("site"))
     path = site_renders.write(root, "index.html")["index.html"]
+    from devtools import render_overview, site_assets  # noqa: PLC0415
+
+    for name, data in render_overview.support_files().items():
+        target = root / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+    static = path.read_text(encoding="utf-8")
+    for script in (render_overview.ATLAS_VIEW_SCRIPT, render_overview.ATLAS_GRID_SCRIPT):
+        tag = site_assets.script_tag(
+            site_assets.shared().assets.script_file(script), "index.html"
+        )
+        static = static.replace(tag, "")
+    initial = root / "initial.html"
+    initial.write_text(static, encoding="utf-8")
     address = path.as_uri()
     with sync_api.sync_playwright() as driver:
         try:
@@ -307,6 +322,11 @@ def seen(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
         found: Readings = {}
         for session in (_desktop, _phone, _reduced, _linked, _sizes, _phone_sizes):
             found.update(session(browser, address))
+        for size in ("medium", "large"):
+            page = browser.new_page(viewport=PHONE)
+            page.goto(initial.as_uri() + atlas.query_for("triangle", size), wait_until="load")
+            found[f"initial CSS, {size}"] = page.evaluate(INITIAL)
+            page.close()
         browser.close()
         yield found
 
@@ -572,8 +592,10 @@ def test_a_triangle_tile_keeps_its_ink_under_the_pointer(seen: Readings) -> None
     assert not rest["hover"]
     assert hovered["hover"]
     assert hovered["background"] != rest["background"]
-    assert hovered["frame_stroke"] == rest["frame_stroke"] == rest["color"]
-    assert hovered["outline_stroke"] == rest["outline_stroke"]
+    assert hovered["source"] == rest["source"]
+    assert hovered["filter"] == rest["filter"] == "none"
+    assert hovered["opacity"] == rest["opacity"] == "1"
+    assert hovered["natural_width"] == rest["natural_width"] > 0
 
 
 @pytest.mark.parametrize("name", ["actions", "phone actions"])
@@ -798,3 +820,22 @@ def test_a_tile_carries_the_star_of_a_new_result_and_the_badge_of_its_regularize
     assert shown & new
     if len(tiles) == 324:
         assert shown & regularized == regularized
+
+
+@pytest.mark.parametrize(("size", "columns"), [("medium", 8), ("large", 5)])
+def test_direct_mobile_triangle_queries_fit_before_atlas_programs_run(
+    seen: Readings, size: str, columns: int
+) -> None:
+    """Responsive container geometry works without initialization or a resize event."""
+    report = seen[f"initial CSS, {size}"]
+    assert report is not None
+    assert all(report["supported"].values())
+    assert (report["view"], report["size"], report["columns"]) == ("triangle", size, columns)
+    assert report["overflow"] == 0
+    assert [tile["n"] for tile in report["tiles"]] == list(range(1, 101))
+    for tile in report["tiles"]:
+        assert tile["left"] >= -0.5, tile["n"]
+        assert tile["right"] <= report["width"] + 0.5, tile["n"]
+    for tile in report["tiles"]:
+        if int(tile["n"] ** 0.5) ** 2 == tile["n"]:
+            assert tile["right"] == pytest.approx(report["width"], abs=0.5)

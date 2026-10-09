@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packages/workbench/tools/workbench_tools/capture_video.py
+    kind: generated-artifact
+    boundary: Cache correctness for the generated published workbench corpus; its payload must match the immutable data/corpus.<hash>.json URL before a video receipt names that corpus edition. No repository source is hashed by this predicate.
   - path: packing/devtools/probe_n17_raw_row_support.py
     kind: generated-artifact
     boundary: Cold saved-check receipts and witness packets identify generated seed/node objects and their derived raw atoms; these runtime artifacts are not named by Git revisions.
@@ -40,6 +43,14 @@ allowlist:
   - path: packing/src/sqpack/research/unitsquare_precision.py
     kind: download
     boundary: A Kingbird SVG fetched by URL and held against its pinned digest (H2).
+  - path: packing/devtools/evand_arrangement_reports.py
+    kind: download
+    boundary: >-
+      Evan Daniel's three complete issue-399 source certificates at 7eef24f are
+      compared with the acquisition digests pinned at retention, both on import
+      and when reading their complete copied source bytes. Internal exact inputs
+      and all native verdict fields are compared structurally; these source
+      digests neither decide geometry nor bind results to internal code hashes.
   - path: packing/devtools/evand_exact_certificates.py
     kind: download
     boundary: Evan Daniel's exact certificates and checker sources at 13ee36e against the digests the packet pinned at retention, and the controls derived from them against their receipts' digests (#375).
@@ -82,6 +93,36 @@ allowlist:
   - path: packing/cases/n54_source_contract/verify.py
     kind: download
     boundary: The retained n54 source and its clean-room copy, BC-141's contract (H8).
+  - path: packing/devtools/squish_followup_packets.py
+    kind: external-checkout
+    boundary: SQUISH's pinned 7 October update source bytes, admitted from an external checkout and compared with their acquisition digests when --source is supplied; derived internal facts are compared structurally.
+  - path: packing/devtools/squish_second_update_packets.py
+    kind: external-checkout
+    boundary: >-
+      SQUISH's pinned e63e4e52 second-update source bytes, admitted from an external
+      checkout and compared with their acquisition digests only when --source is
+      supplied. Internal facts and historical lanes are compared structurally;
+      this boundary does not certify geometry or bind verdicts to an internal hash.
+  - path: packing/devtools/squish_second_update_confirmation.py
+    kind: external-checkout
+    boundary: >-
+      The independently retained issue-422 replay's source custody pins are matched
+      to the acquired e63e4e52 source and its raw external-checkout bytes at retention.
+      Complete internal witnesses, receipts and verdicts are compared structurally;
+      source digests do not certify geometry or replace either exact checker.
+  - path: packing/devtools/refinement_packets.py
+    kind: external-checkout
+    boundary: >-
+      The pinned issue-425/428 raw external certificates and two n68 source checker
+      programs. Complete normalized facts are admitted against independently checked
+      source conversions; those identities neither decide geometry nor assign assurance.
+  - path: packing/devtools/refinement_custody.py
+    kind: download
+    boundary: >-
+      The public refinement-evidence release archive and its complete original-file
+      manifest, actual external replay receipts, and compact admission projection. All
+      thirteen complete inputs and actual result fields are compared on recovery; pins
+      preserve external custody and never replace the reviewed mathematical replay.
   - path: packing/devtools/build_known_best_atlas.py
     kind: download
     boundary: Upstream's declared digest of a known-best packing it publishes (H9).

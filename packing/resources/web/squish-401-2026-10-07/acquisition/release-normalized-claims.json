@@ -1,0 +1,67 @@
+{
+  "basis": "Safe decimal displays of the source exact rational bounds, rounded upward at the source display precision by the complete replay receipt. Original source finite displays remain in the acquisition and original claims records.",
+  "certificate_receipt": "packing/resources/web/squish-401-2026-10-07/receipts/certification.json",
+  "original_claims_record": "packing/resources/web/squish-401-2026-10-07/acquisition/release-claims.json",
+  "results": [
+    {
+      "exact_side": "6147784441267127/562949953421312",
+      "n": 108,
+      "offered_side": "10.9206589394033085",
+      "source_display": "10.9206589394033085"
+    },
+    {
+      "exact_side": "4828972106460286237253237344483/410153066106902321950462312448",
+      "n": 126,
+      "offered_side": "11.7735852916961071",
+      "source_display": "11.7735852916961079"
+    },
+    {
+      "exact_side": "834853717316974191611773864459/70268596478725557239871963136",
+      "n": 129,
+      "offered_side": "11.8808935876459918",
+      "source_display": "11.8808935876459927"
+    },
+    {
+      "exact_side": "6701628168660175/562949953421312",
+      "n": 130,
+      "offered_side": "11.9044830325168772",
+      "source_display": "11.9044830325168771"
+    },
+    {
+      "exact_side": "7277982312406737/562949953421312",
+      "n": 154,
+      "offered_side": "12.9282936576777577",
+      "source_display": "12.9282936576777576"
+    },
+    {
+      "exact_side": "1672234187663680786096364585719/129093397859976830657337753600",
+      "n": 155,
+      "offered_side": "12.9536770693532733",
+      "source_display": "12.9536770693532741"
+    },
+    {
+      "exact_side": "3068446722737763377509947691807/220376842814439473250054438912",
+      "n": 180,
+      "offered_side": "13.9236350042524224",
+      "source_display": "13.9236350042524233"
+    },
+    {
+      "exact_side": "4785398243001234645794991233471/320101708170839058852217880576",
+      "n": 209,
+      "offered_side": "14.9496179522017921",
+      "source_display": "14.9496179522017929"
+    },
+    {
+      "exact_side": "8967460069924095/562949953421312",
+      "n": 238,
+      "offered_side": "15.9294090272583145",
+      "source_display": "15.9294090272583144"
+    },
+    {
+      "exact_side": "1261029876953859/70368744177664",
+      "n": 303,
+      "offered_side": "17.9203123729203498",
+      "source_display": "17.9203123729203497"
+    }
+  ]
+}

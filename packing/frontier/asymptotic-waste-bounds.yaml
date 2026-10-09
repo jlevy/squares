@@ -16,7 +16,10 @@ open_problem: >
   The precise asymptotic growth rate is unknown, even for half-integer side
   lengths. Upper bounds stand at O(x^{3/5}); the only lower bound at worst-case x is
   Omega(sqrt(x)). Just below an integer side k, where that bound vanishes, a 2026
-  preprint, unrefereed, reports a lower bound of order log k.
+  preprint, unrefereed, reports a lower bound of order log k; two October 2026
+  preprints report quarter-power and cube-root deficiency bounds for closed-set
+  disjoint packings in their stated integer-side ranges. Those reports remain
+  unconfirmed here.
 
 upper_bounds:
   - bound: O(x^{7/11})
@@ -221,6 +224,115 @@ lower_bounds:
       c = 4 case; T-081 says nothing about c >= 5, and this preprint says nothing about
       any count the record holds. Neither implies the other; they share only the
       reduction of Lemma 2.1.
+
+  - bound: >-
+      REPORTED: k^2 - M(k) >= 0.1 k^{1/4} for integer k >= 4.62*10^12,
+      and liminf (k^2 - M(k))/k^{1/4} >= 0.1696.
+    side_condition: Integer sides and unit squares pairwise disjoint as closed sets in [0,k]^2.
+    authors: [Sungjoon Ryu]
+    year: 2026
+    source_key: '[squarepacker quarter-power 2026]'
+    local: web/squarepacker-k2-minus-c-quarter-2026-10-07/source/paper/paper
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: k^{1/4}, at integer sides approached from below
+    constant: >-
+      Theorem A uses computer-assisted Lemma 4.10 of k2-minus-c v1.2. Theorem A13
+      instead uses analytic Lemma 4.9 and reports coefficient 0.1 from
+      k >= 2.17*10^13, with liminf coefficient 0.1411.
+    corollary: >-
+      REPORTED: s(k^2-c) = k for integer c >= 0 and integer
+      k >= max(4.62*10^12, 10^4 c^4 + 1). The analytic variant replaces the
+      first threshold by 2.17*10^13.
+    note: >-
+      W1 reported intake of issue #414, v1.0 at abbedcf4bba2e4053f0278e669d84966a89c8b73,
+      DOI 10.5281/zenodo.23211207. Statements were checked against the retained primary
+      TeX; confidence describes statement fidelity. The complete geometric flow chain and
+      v1.2 dependency received a scoped independent review, retained in
+      docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md. The maintained
+      cases/asymptotic/quarter_cube_constants.py checks the two threshold margins,
+      derivative conditions and asymptotic floors in interval arithmetic. These
+      numerical consequences remain conditional on the reviewed geometric premises;
+      independent per-box labelling remains think-k3tk. No source checker ran here
+      and no new project confirmation is claimed. The author reports AI reviews,
+      analogue tests, extensive Claude assistance and no human peer review. The theorem settles no count n <= 324, so no
+      result-register entry or small-n lane changes.
+  - bound: >-
+      REPORTED: k^2 - M(k) > 10^-4 sqrt(k) for integer k in [10^8, 2.5*10^15],
+      > 7*10^-5 sqrt(k) on [2.5*10^15, 3.5*10^17], and > 0.06 k^{1/3}
+      for integer k >= 3.5*10^17; from 10^21 the coefficient is 0.0625.
+      The liminf cube-root coefficient is at least 0.06285.
+    side_condition: Integer sides in the stated ranges and unit squares pairwise disjoint as closed sets in [0,k]^2.
+    authors: [Sungjoon Ryu]
+    year: 2026
+    source_key: '[squarepacker cube-root 2026]'
+    local: web/squarepacker-k2-minus-c-cube-root-2026-10-07/source/paper/paper
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: k^{1/3}, at integer sides approached from below
+    constant: >-
+      Theorem 1.1 uses quarter-power Sections 3-8 and k2-minus-c v1.2, including
+      computer-assisted Lemma 4.10. Theorem 1.2 replaces it with analytic Lemma 4.9:
+      8.5*10^-5 sqrt(k) on [10^8, 2.4*10^15], 6*10^-5 sqrt(k) on
+      [2.4*10^15, 3.39*10^17], 0.05 k^{1/3} from 3.39*10^17,
+      0.052 k^{1/3} from 10^21, and liminf coefficient 0.05229.
+    corollary: >-
+      REPORTED: s(k^2-c) = k for integer c between zero and each strict deficiency
+      bound in its stated range. The reported Theorem 1.1 bounds exceed the
+      quarter-power coefficient 0.1 for every k >= 4.62*10^12.
+    note: >-
+      W1 reported intake of issue #414, v1.0 at 15045f9c6b74bd52f60394b9be593ebe4fb3debc,
+      DOI 10.5281/zenodo.23212059. Statements were checked against the retained primary
+      TeX; confidence describes statement fidelity. The path-inclination argument, inherited
+      dependencies, endpoint branches and closed-packing reduction received the
+      scoped review recorded in docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md.
+      The maintained quarter_cube_constants.py checks all eight published ranges,
+      outward table bounds and both asymptotic floors. Its numerical consequences
+      remain conditional on the reviewed geometric premises; independent per-box
+      labelling remains think-k3tk. No source checker ran here and no new project
+      confirmation is claimed. The source reports extensive Claude assistance and AI
+      reviews, not human peer review. No small-n bound changes.
+
+  - bound: >-
+      REPORTED: k^2 - M(k) >= 0.0353 log k for every integer k >= 2;
+      k^2 - M(k) >= 1.99954 (log k - 13.06675)/30.418.
+    side_condition: Integer sides and unit squares pairwise disjoint as closed sets in [0,k]^2; natural logarithms.
+    authors: [Sungjoon Ryu]
+    year: 2026
+    source_key: '[squarepacker k2-minus-c v1.2 2026]'
+    local: web/squarepacker-k2-minus-c-v12-2026-10-06/source/paper/paper
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: log k, at integer sides approached from below
+    constant: >-
+      REPORTED: all-k coefficient 0.0353 and asymptotic coefficient 0.0657.
+      The analytic variant without computer-assisted Lemma 4.10 reports 0.0319.
+      Corollary 1.3 reports 0.0541 for all k >= 2 conditional on Daniel's
+      s(k^2-3) = k for integer k >= 6.
+    corollary: >-
+      REPORTED: c*(k) >= 0.0353 log k - 1, hence s(k^2-c) = k for every fixed c
+      and all sufficiently large k. The explicit formula gives the strict threshold
+      log k > 13.06675 + 30.418c/1.99954 for its fixed-c conclusion.
+    complementary_case: >-
+      This revision settles no count n <= 324 and changes no current small-count bound.
+    note: >-
+      Retained from primary version 1.2 at immutable tag commit
+      e16a5cfa7eed489ea8d84b500e590bf6855a5f2f, committed 2026-10-06 UTC, DOI
+      10.5281/zenodo.23194031; issue #368 comment 6022000514. The full 78-file
+      composition is bound by the acquisition manifest: ten changed files retained
+      and 68 byte-identical files bound to retained version 1.1 copies. Ryu reports
+      extensive Claude assistance and no peer review. This row records reported
+      statements with independently checked numerical consequences: 34 interval rows
+      on the nine-overlap route and 30 on the analytic thirteen-overlap route.
+      The arithmetic remains conditional on the geometric lemmas and coverage.
+      The revised argument adds Lemmas 3.5 and 4.15 and the cutoff 236000. The scoped review and maintained floating-count checker
+      cover all 25,929 finite angular comparisons under explicit binary64 premises.
+      They certify current-host constants, not an unobserved historical libm output;
+      independent per-box labelling remains think-k3tk. All thirteen deciding leaf lists and their checking programs are byte-identical
+      to the earlier replay; that subclaim can reuse its recorded runtime and
+      outcomes, while the changed whole-source manifest is not reused.
+      The earlier version's V3/C1 record and replay remain unchanged. No upstream
+      program was executed for this acquisition.
 
 related_results:
   - result: >

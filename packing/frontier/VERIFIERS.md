@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **93** programs: **35** external and **58** first-party; **71** decide claims and **22** check premises.
-- **408** of **435** evidence entries name the programs that verified them: 226 reproduced with the producer’s code, 155 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
+- **100** programs: **37** external and **63** first-party; **73** decide claims and **27** check premises.
+- **415** of **454** evidence entries name the programs that verified them: 227 reproduced with the producer’s code, 161 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -69,8 +69,8 @@ second implementation agrees.
 | [`V-anabologyco-n17-checker`](#v-anabologyco-n17-checker) | scripts/check_certificate.py and its event pipeline | anabologyco-maker | external | decides | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 14 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 14 | 4 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 10 | 8 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 20 | 10 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 16 | 14 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -125,6 +125,13 @@ second implementation agrees.
 | [`V-audit-valid7-independent`](#v-audit-valid7-independent) | devtools.audit_valid7_independent | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-validtilt9-independent`](#v-audit-validtilt9-independent) | devtools.audit_validtilt9_independent | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-probe-valid7-fixes`](#v-probe-valid7-fixes) | devtools.probe_valid7_fixes | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
+| [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
+| [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
+| [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
 
 ## By Program
 
@@ -915,6 +922,12 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-n029-interval-certified-upper` | replayed here | independent | T-009 |
 | `E-evand-exact-optima-2026-10-05-exact-replay` | replayed here | independent | T-098 |
 | `E-evand-exact-ceilings-2026-10-05-exact-replay` | replayed here | independent | T-101 |
+| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
+| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
+| `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
+| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independent | T-116 |
+| `E-evand-399-exact-feasibility` | audited here | independent | T-119 |
+| `E-rehwaldt-couzo-refinements-2026-10-07-exact-replay` | replayed here | independent | T-117 |
 
 ### `V-check-rational-witness-independent`
 
@@ -939,6 +952,12 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-n087-chang-2026-09-exact-replay` | replayed here | independent | T-089 |
 | `E-evand-exact-optima-2026-10-05-exact-replay` | replayed here | independent | T-098 |
 | `E-evand-exact-ceilings-2026-10-05-exact-replay` | replayed here | independent | T-101 |
+| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
+| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
+| `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
+| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independent | T-116 |
+| `E-evand-399-exact-feasibility` | audited here | independent | T-119 |
+| `E-rehwaldt-couzo-refinements-2026-10-07-exact-replay` | replayed here | independent | T-117 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -1866,6 +1885,108 @@ Runs the 2 October review's demonstrations of D-1, D-2 and D-3 against each reta
 | evidence | run | code | results |
 | --- | --- | --- | --- |
 | `E-k2m3-wand125-valid7-independent` | replayed here | independent | T-064 |
+
+### `V-squish-upper-bound-packets`
+
+**devtools.squish_upper_bound_packets** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Admits the bounded complete SQUISH source roster, converts rational half-angle facts to exact rational-corner witnesses without changing the side, drives both exact deciders, and checks source/fact/witness/receipt bindings, full pair counts, upward display ceilings and the two geometric controls.
+
+- Source: [`packing/devtools/squish_upper_bound_packets.py`](../../packing/devtools/squish_upper_bound_packets.py), [`packing/devtools/import_half_angle_witness.py`](../../packing/devtools/import_half_angle_witness.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md`](../../docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md)
+- Note: Written from the published rational certificate format and the geometry. No SQUISH producer executable is retained or run. The native exact_verify and independent rational-corner checker decide feasibility; the wrapper checks their inputs, recorded results and provenance. The two first-party routes share the converted witness, YAML and Python rational arithmetic, not geometry code.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
+| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
+
+### `V-squish-followup-packets`
+
+**devtools.squish_followup_packets** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Admits the pinned update source and complete reviewed replay, binds revision-specific fact/witness/receipt inputs, full pair and control coverage, typed replay provenance and upward display ceilings; explicitly reruns both deciding routes only with --replay.
+
+- Source: [`packing/devtools/squish_followup_packets.py`](../../packing/devtools/squish_followup_packets.py), [`packing/devtools/squish_upper_bound_packets.py`](../../packing/devtools/squish_upper_bound_packets.py), [`packing/devtools/import_half_angle_witness.py`](../../packing/devtools/import_half_angle_witness.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md`](../../docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md)
+- Note: The wrapper shares strict admission and rational half-angle conversion with the original packet while keeping a distinct revision namespace. No SQUISH producer executable is run. The native exact_verify and independently written rational-corner checker decide geometry; both share input corners and Python rational arithmetic. Bounded XZ decoding and witness metadata checks are premises, not additional geometric deciders.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
+
+### `V-squish-second-update-confirmation`
+
+**devtools.squish_second_update_confirmation** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Admits the complete immutable second-update roster, all historical full replay inputs and outcomes, accepted complete review records and the explicit canonical metadata transformation. Checks bounded decoding, full coverage, safe ceilings and exact house witness custody; fresh dual decisions require explicit --replay.
+
+- Source: [`packing/devtools/squish_second_update_confirmation.py`](../../packing/devtools/squish_second_update_confirmation.py), [`packing/devtools/squish_second_update_house_links.py`](../../packing/devtools/squish_second_update_house_links.py), [`packing/devtools/squish_second_update_packets.py`](../../packing/devtools/squish_second_update_packets.py), [`packing/devtools/squish_upper_bound_packets.py`](../../packing/devtools/squish_upper_bound_packets.py), [`packing/devtools/import_half_angle_witness.py`](../../packing/devtools/import_half_angle_witness.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md`](../../docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md)
+- Note: This wrapper checks premises and receipt applicability; sqpack exact_verify and the independent rational-corner checker decide geometry. Their shared SAT theorem, Fraction, YAML and source-to-corner conversion are disclosed. Earlier packet constants, evidence and review scopes remain unchanged.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independent | T-116 |
+
+### `V-evand-arrangement-receipts`
+
+**devtools.evand_arrangement_reports** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Binds all three complete source certificates and all nine full deciding inputs/native results; explicit replay repeats both project geometric deciders.
+
+- Source: [`packing/devtools/evand_arrangement_reports.py`](../../packing/devtools/evand_arrangement_reports.py)
+- Versions run: this repository's commits, which Git holds
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-evand-399-exact-feasibility` | audited here | independent | T-119 |
+
+### `V-rehwaldt-n68-verify`
+
+**verify.py** · Seth Rehwaldt · external · decides · Python · exact-algebraic
+
+Decides all 68 rational unit squares, containment and 2278 unordered pairs.
+
+- Source: [`packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/verify.py.txt`](../../packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/verify.py.txt)
+- Versions run: SHA-256 `911b98223346…` (fded686668e29258dad2eb29d0482fa3fd51bd6b)
+- Note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two programs use the same SAT theorem and arithmetic; their distinct code does not establish independence from the source producer. Analytic root and dual programs are outside this replay.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-rehwaldt-n68-refinement-2026-10-07-exact-replay` | replayed here | producer’s code | T-118 |
+
+### `V-rehwaldt-n68-independent-support-check`
+
+**independent_support_check.py** · Seth Rehwaldt · external · decides · Python · exact-algebraic
+
+Decides all 68 rational unit squares, containment and 2278 unordered pairs.
+
+- Source: [`packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/independent_support_check.py.txt`](../../packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/independent_support_check.py.txt)
+- Versions run: SHA-256 `48e1ae336855…` (fded686668e29258dad2eb29d0482fa3fd51bd6b)
+- Note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two programs use the same SAT theorem and arithmetic; their distinct code does not establish independence from the source producer. Analytic root and dual programs are outside this replay.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-rehwaldt-n68-refinement-2026-10-07-exact-replay` | replayed here | producer’s code | T-118 |
+
+### `V-refinement-custody`
+
+**devtools.refinement_custody** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Admits all 13 complete actual input/result jobs, immutable source conversion, process outcomes, full control coverage and three complete house witnesses.
+
+- Source: [`packing/devtools/refinement_custody.py`](../../packing/devtools/refinement_custody.py), [`packing/devtools/refinement_packets.py`](../../packing/devtools/refinement_packets.py), [`packing/devtools/refinement_house_links.py`](../../packing/devtools/refinement_house_links.py)
+- Versions run: this repository's commits, which Git holds
+- Note: Offline admission reconciles retained executions and runs no geometric predicate.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-rehwaldt-couzo-refinements-2026-10-07-exact-replay` | replayed here | independent | T-117 |
+| `E-rehwaldt-n68-refinement-2026-10-07-exact-replay` | replayed here | producer’s code | T-118 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

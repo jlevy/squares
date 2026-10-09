@@ -38,7 +38,8 @@ WHAT A RESULT MEANS, AND WHAT IT DOES NOT
 
 - A HIT is a sound certificate of play, modulo the contact tolerance.  The direction and
   the slide distance are recorded, and this module replays each one: it translates the
-  square by that distance in that direction and re-runs `sqpack.verify.verify_packing`
+  square by that distance in that direction and runs the complete prepared verifier
+  `sqpack.prepared_verify.prepared_verify_packing`
   on the moved configuration.  A certificate that does not replay is not reported.
 - A MISS proves only that THAT ONE SQUARE cannot be TRANSLATED, at that tolerance.  It
   is not rigidity and must never be read as rigidity.  Rotating the square, and moving
@@ -66,6 +67,7 @@ are tracked as think-ecqk.
 
 Usage:
     uv run --frozen python -m devtools.screen_translation_escape --update
+    uv run --frozen python -m devtools.screen_translation_escape --update --n 108 130 --jobs 2
     uv run --frozen python -m devtools.screen_translation_escape --check
     uv run --frozen python -m devtools.screen_translation_escape --check --jobs 4
     uv run --frozen python -m devtools.screen_translation_escape --check --sample
@@ -75,7 +77,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections.abc import Sequence
+from collections.abc import Collection, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 from typing import Any
@@ -90,7 +92,8 @@ from sqpack.known_best import (
     SCREEN_SAMPLE_STRIDE,
     sampled_numbers,
 )
-from sqpack.verify import Square, edge_axes, float_sign, project, verify_packing
+from sqpack.prepared_verify import prepared_verify_packing
+from sqpack.verify import Square, edge_axes, float_sign, project
 from sqpack.witness import load_witness, materialize_witness
 from sqpack.workers import worker_count
 from sqpack.yamlio import load_yaml
@@ -512,13 +515,13 @@ def certify_square(
 def _replay(geometry: RecordGeometry, certificate: dict[str, Any], tolerance: Scalar) -> bool:
     """Re-verify the packing with the square actually moved where the certificate says.
 
-    The certificate is a claim about geometry, so it is checked by the same validity
-    oracle the rest of the project uses rather than by the code that produced it.
+    The certificate is checked by the complete prepared execution of the project's
+    validity oracle, independently of the direction search and slide calculation.
     """
     direction = (mp.mpf(certificate["direction"]["x"]), mp.mpf(certificate["direction"]["y"]))
     distance = mp.mpf(certificate["slide_distance"])
     moved = translated(geometry.squares, certificate["square_index"], direction, distance)
-    report = verify_packing(
+    report = prepared_verify_packing(
         moved,
         geometry.side,
         sign=float_sign(tolerance),
@@ -722,6 +725,8 @@ def _screen_entry(entry: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
 
 def screen_corpus(
     workers: int | None = None,
+    *,
+    only: Collection[int] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Screen the whole known-best corpus; returns (cases, exclusions).
 
@@ -758,6 +763,13 @@ def screen_corpus(
     """
     mp.mp.dps = DIGITS
     entries = manifest_entries()
+    if only is not None:
+        missing = set(only) - {entry["n"] for entry in entries}
+        if not only or missing:
+            raise ValueError(
+                f"selected screen counts are empty or absent from manifest: {sorted(missing)}"
+            )
+        entries = [entry for entry in entries if entry["n"] in only]
     requested = worker_count(len(entries)) if workers is None else workers
     count = max(1, min(requested, len(entries)))
     if count == 1:
@@ -851,8 +863,11 @@ def _document(cases: list[dict[str, Any]], excluded: list[dict[str, Any]]) -> di
             ),
             "certificate_replay": (
                 "every hit is replayed at build time by translating the square by the "
-                "recorded distance and re-running sqpack.verify.verify_packing; a "
-                "failure stops the build, so no unreplayed certificate reaches this file"
+                "recorded distance and checking the complete moved packing; a failure "
+                "stops the build, so no unreplayed certificate reaches this file. "
+                "Retained cases may have been replayed by sqpack.verify.verify_packing; "
+                "the current generator uses sqpack.prepared_verify.prepared_verify_packing "
+                "with the same complete validity contract"
             ),
             "direction_search": (
                 "one interior direction per arc between critical directions, plus "
@@ -901,8 +916,67 @@ def _summary(document: dict[str, Any]) -> str:
     )
 
 
-def update(workers: int | None = None) -> None:
-    document = expected_document(workers)
+def update(workers: int | None = None, *, only: Collection[int] | None = None) -> None:
+    """Re-screen all records, or replace selected results in a complete current screen.
+
+    A partial refresh preserves every unselected result and rebuilds the full aggregate.
+    It cannot adopt changed method constants or leave an unselected reported side stale.
+    Same-side witness retranscriptions remain the full geometry replay's responsibility.
+    """
+    if only is None:
+        document = expected_document(workers)
+    else:
+        if not OUTPUT.is_file():
+            raise ValueError("targeted update requires a retained screen; run --update first")
+        retained_document = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        if retained_document.get("softschema", {}).get("contract") != CONTRACT:
+            raise ValueError(
+                "targeted update requires the current screen contract; run --update"
+            )
+        retained = retained_document["screen"]
+        entries = {entry["n"]: entry for entry in manifest_entries()}
+        old_cases, old_excluded = retained["cases"], retained["excluded"]
+        covered = [record["n"] for record in [*old_cases, *old_excluded]]
+        if sorted(covered) != sorted(entries):
+            raise ValueError("targeted update requires complete retained corpus coverage")
+        rebuilt = _document(old_cases, old_excluded)
+        if retained["inputs"] != rebuilt["screen"]["inputs"]:
+            raise ValueError("targeted update requires the current screen inputs; run --update")
+        parameters = (
+            "materialization_digits",
+            "primary_tolerance",
+            "shape_residual_limit",
+            "tolerances",
+        )
+        if any(
+            retained["method"].get(key) != rebuilt["screen"]["method"][key]
+            for key in parameters
+        ):
+            raise ValueError("targeted update requires the current screen method; run --update")
+        unselected = {
+            kind: [record for record in retained[kind] if record["n"] not in only]
+            for kind in ("cases", "excluded")
+        }
+        problems = identity_errors(unselected, entries)
+        if problems:
+            raise ValueError(
+                "targeted screen update leaves stale records: " + "; ".join(problems)
+            )
+        cases, excluded = screen_corpus(workers, only=only)
+        cases = sorted(
+            [*(record for record in old_cases if record["n"] not in only), *cases],
+            key=lambda record: record["n"],
+        )
+        excluded = sorted(
+            [*(record for record in old_excluded if record["n"] not in only), *excluded],
+            key=lambda record: record["n"],
+        )
+        document = _document(cases, excluded)
+        problems = identity_errors(document["screen"], entries)
+        if problems:
+            raise ValueError(
+                "targeted screen update leaves stale records: " + "; ".join(problems)
+            )
     with atomic_output_file(OUTPUT) as temporary:
         temporary.write_text(_json_text(document), encoding="utf-8")
     print(f"translation escape screen updated: {_summary(document)}")
@@ -1029,6 +1103,12 @@ def main() -> int:
         ),
     )
     parser.add_argument(
+        "--n",
+        type=int,
+        nargs="+",
+        help="with --update, re-screen only these records and rebuild the full aggregate",
+    )
+    parser.add_argument(
         "--jobs",
         type=int,
         metavar="N",
@@ -1041,9 +1121,13 @@ def main() -> int:
     args = parser.parse_args()
     if args.sample and not args.check:
         raise SystemExit("--sample narrows --check")
+    if args.n is not None and not args.update:
+        raise SystemExit("--n narrows --update")
+    if args.jobs is not None and args.jobs < 1:
+        raise SystemExit("--jobs must be positive")
     workers: int | None = args.jobs
     if args.update:
-        update(workers)
+        update(workers, only=args.n)
     else:
         check_sample(workers=workers) if args.sample else check(workers)
     return 0

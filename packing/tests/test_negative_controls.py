@@ -19,6 +19,7 @@ import pytest
 from devtools import run_negative_controls as controls
 from devtools.check_readme import NO_INDEX
 from devtools.repo_scope import tracked_files
+from devtools.retained_data import read_retained_bytes
 from devtools.run_negative_controls import (
     BUILD_CACHES,
     COPY_SEPARATELY,
@@ -38,6 +39,21 @@ MOTION_LAB_GOLDEN = ROOT / "tests/golden/motion-lab-pages.json"
 COMPOSITE_VECTORS = frozenset(
     ROOT / "atlas/known-best" / name
     for name in ("known-best-1-100.svg", "known-best-1-324.svg")
+)
+SESSION163_PUSH_LOGS = frozenset(
+    ROOT / "campaign/agent-sessions" / name
+    for name in (
+        "session-163-push-recovery.log",
+        "session-163-push-refinement.log",
+        "session-163-push-final.log",
+    )
+)
+HISTORICAL_DIAGNOSTIC_OUTPUTS = frozenset(
+    ROOT / relative
+    for relative in (
+        "campaign/explorations/X048-session-177-cached-collision/receipts/profile-packet.json",
+        "campaign/series/series-000-smoke-and-calibration/results/bc-201-n11-tight-cell-census.json",
+    )
 )
 #: The 2026-10-06 breach's answer (PR #382): receipt roots traced as no control's input.
 RETAINED_RECEIPT_ROOTS = frozenset(
@@ -71,6 +87,149 @@ def control_snapshot(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, se
         clone_tree(tree)
     copied_targets = {path.relative_to(controls.REPO) for path in retained}
     return tree, copied_targets
+
+
+def test_historical_validation_prunes_preserve_replay_inputs(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Telemetry can leave a worker; linked evidence and ordinary fixtures cannot."""
+    tree, copied_targets = control_snapshot
+    roots = (
+        ROOT / "benchmarks/validation-efficiency/runs",
+        ROOT / "benchmarks/validation-efficiency/checkpoints",
+        ROOT / "campaign/agent-sessions/session-152-validation",
+    )
+    assert set(roots) <= PRUNE
+    rescued = (
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.log",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.manifest.json",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.tar.gz",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.manifest.json",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.tar.gz",
+        "benchmarks/validation-efficiency/checkpoints/VE-004-full-ed595fb6.tar.gz",
+        "benchmarks/validation-efficiency/runs/instrument-v1.py.txt",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-reference.pdf",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-replay.pdf",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-report.txt",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711.md",
+    )
+    for relative in rescued:
+        source = ROOT / relative
+        assert source.relative_to(controls.REPO) in copied_targets, relative
+        assert (tree / HERE / relative).read_bytes() == source.read_bytes(), relative
+    # The normal legacy-manifest fixture test still has both its code and the two
+    # manifest/archive pairs it reads. The schema checker and current witness remain
+    # on the source surface too; the telemetry exclusion cannot hide their controls.
+    for relative in (
+        "devtools/checkpoint_manifest.py",
+        "tests/test_checkpoint_manifest.py",
+        "devtools/validate_schemas.py",
+        "witnesses/known-best/n-123.yaml",
+    ):
+        assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
+    # One unconsumed generated artifact from each root must actually leave the
+    # finished worker. Merely listing the roots while copying everything back would
+    # preserve the cap breach and satisfy only the structural assertion above.
+    for relative in (
+        "benchmarks/validation-efficiency/runs/e865612fe81c4d96a7b3713b28191045.stdout.log",
+        "benchmarks/validation-efficiency/checkpoints/VE-004-control-1.tar.gz",
+        "campaign/agent-sessions/session-152-validation/validation-timings-exhaustive-1.zip",
+    ):
+        assert (ROOT / relative).is_file(), relative
+        assert not (tree / HERE / relative).exists(), relative
+
+
+def test_historical_push_logs_leave_workers_but_keep_scientific_consumers(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Exclude only unconsumed telemetry; the finished indexed worker retains inputs."""
+    tree, copied_targets = control_snapshot
+    logs = (
+        "session-164-push-initial.log",
+        "session-153-integrated-push.log",
+        "session-163-push-recovery.log",
+        "session-163-push-refinement.log",
+        "session-163-push-final.log",
+    )
+    for name in logs:
+        source = ROOT / "campaign/agent-sessions" / name
+        assert source in PRUNE
+        assert source.is_file()
+        assert source.relative_to(controls.REPO) not in copied_targets
+        assert not (tree / HERE / "campaign/agent-sessions" / name).exists()
+    for relative in (
+        "campaign/agent-sessions/session-164-efficiency-push.log.gz",
+        "campaign/agent-sessions/session-164-push-final.log.gz",
+        "campaign/agent-sessions/session-153-native-full.json",
+        "campaign/agent-sessions/session-153-native-full.rows.jsonl",
+        "frontier/results.yaml",
+        "frontier/evidence.yaml",
+        "witnesses/known-best/n-263.yaml",
+        "devtools/check_results.py",
+        "devtools/squish_second_update_packets.py",
+    ):
+        source = ROOT / relative
+        assert (tree / HERE / relative).read_bytes() == source.read_bytes(), relative
+        assert tree / HERE / relative in (tracked_files(tree, "packing") or []), relative
+        if relative.endswith(".log.gz"):
+            assert read_retained_bytes(tree / HERE / relative) == read_retained_bytes(source)
+            assert not (tree / HERE / relative.removesuffix(".gz")).exists()
+    assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
+def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The bounded C8 prune removes outputs while preserving real consumer inputs."""
+    tree, copied_targets = control_snapshot
+    assert controls.HISTORICAL_SNAPSHOT_OUTPUTS <= PRUNE
+    rescued = (
+        "campaign/explorations/X049-families-data/regularized/run.txt",
+        "campaign/explorations/X049-families-data/regularized/shades.txt",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/full-ef8a2e72.txt",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/fast-cbe9fd76.txt",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/slow-cbe9fd76.txt",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/negative-cbe9fd76.txt",
+    )
+    for relative in rescued:
+        source = ROOT / relative
+        assert source.relative_to(controls.REPO) in copied_targets
+        assert (tree / HERE / relative).read_bytes() == source.read_bytes()
+    omitted = (
+        "benchmarks/results/reachable-walker-2026-09-30/comparison.json",
+        "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89.json",
+        "campaign/agent-sessions/session-105-validation/push-0e766bfd.json",
+        "campaign/explorations/X048-session-177-cached-collision/receipts/profile-packet.json",
+        "campaign/explorations/X048-session-178-full-core-ablation/receipts/endpoint-packet.json",
+        "campaign/explorations/X049-families-data/regularized/n-268-regularized.yaml.gz",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/slow-cbe9fd76/step-21ffbec363bd41dfa16a9e479105c249.json",
+    )
+    spec = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for relative in omitted:
+        source = ROOT / relative
+        assert source.is_file(), "evidence must remain in the source checkout"
+        assert source.relative_to(controls.REPO) not in copied_targets
+        assert not (tree / HERE / relative).exists()
+        for control in spec["controls"]:
+            assert (ROOT / control["file"]).resolve() != source
+            assert relative not in control["run"]
+    for relative in (
+        "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89-source.json",
+        "campaign/agent-sessions/session-105-validation/push-0e766bfd-source.json",
+        "campaign/explorations/X048-session-177-cached-collision/receipts/J-fixed-tuple-certificate.json",
+        "campaign/explorations/X048-session-178-full-core-ablation/receipts/B-ablation-packet.json",
+        "campaign/explorations/X049-families-data/family-census.json",
+        "campaign/explorations/X049-families-data/contact-shade-census.json",
+        "atlas/known-best/regularized/index.json",
+        "witnesses/known-best/n-268.yaml",
+        "devtools/probe_n17_cached_collision.py",
+        "devtools/probe_n17_full_core_ablation.py",
+        "devtools/regularize_axis_components.py",
+    ):
+        assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
+    assert SNAPSHOT_MAX_BYTES == 192 * 1024 * 1024
+    assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
 def test_oversized_snapshot_is_refused_before_cloning(
@@ -328,6 +487,16 @@ def test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots() ->
     assert output_roots <= PRUNE
     assert CORNER_DUAL_SALVAGE_RECEIPT in PRUNE
     assert RETAINED_RECEIPT_ROOTS <= PRUNE
+    assert controls.REGULARIZED_WITNESSES <= PRUNE
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    assert all(
+        (ROOT / control["file"]).resolve() not in controls.REGULARIZED_WITNESSES
+        for control in specification["controls"]
+    )
+    assert all(
+        "atlas/known-best/regularized/n-" not in control["run"]
+        for control in specification["controls"]
+    )
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
@@ -620,6 +789,135 @@ def test_historical_byproducts_are_kept_in_git_but_not_workers(
         assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
 
 
+def test_historical_diagnostics_have_no_declared_worker_consumer() -> None:
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for source in HISTORICAL_DIAGNOSTIC_OUTPUTS:
+        assert source.is_file()
+        assert all(
+            (ROOT / control["file"]).resolve() != source and source.name not in control["run"]
+            for control in specification["controls"]
+        )
+    assert not HISTORICAL_DIAGNOSTIC_OUTPUTS.intersection(controls.snapshot_pruned_targets())
+
+
+def test_historical_diagnostics_leave_workers_but_declared_dependencies_return(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Exercise the real copier, counter and private index on a small source fixture."""
+    source_repo = tmp_path / "source"
+    source_root = source_repo / HERE
+
+    def rebase(path: Path) -> Path:
+        return source_repo / path.relative_to(controls.REPO)
+
+    omitted = {rebase(path): path.read_bytes() for path in HISTORICAL_DIAGNOSTIC_OUTPUTS}
+    for path, payload in omitted.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+    reader = source_root / "devtools/check_results.py"
+    reader.parent.mkdir(parents=True)
+    reader.write_bytes((ROOT / "devtools/check_results.py").read_bytes())
+    record = source_root / "campaign/README.md"
+    record.write_text("Retained diagnostic record.\n")
+    register = source_root / "frontier/results.yaml"
+    register.parent.mkdir()
+    register.write_text("results: []\n")
+
+    prunes = frozenset(rebase(path) for path in PRUNE)
+    linked_roots = tuple(rebase(path) for path in controls.LINKED_PRUNE_ROOTS)
+    descend = frozenset(
+        ancestor
+        for path in prunes
+        for ancestor in path.parents
+        if source_root in (ancestor, *ancestor.parents)
+    )
+    monkeypatch.setattr(controls, "REPO", source_repo)
+    monkeypatch.setattr(controls, "ROOT", source_root)
+    monkeypatch.setattr(controls, "PRUNE", prunes)
+    monkeypatch.setattr(controls, "DESCEND", descend)
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", linked_roots)
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+
+    for route in ("omitted", "linked", "registered"):
+        if route == "linked":
+            record.write_text(
+                "\n".join(
+                    f"[diagnostic]({os.path.relpath(path, record.parent)})" for path in omitted
+                )
+            )
+            assert set(controls.linked_pruned_targets()) == set(omitted)
+        elif route == "registered":
+            record.write_text("Retained diagnostic record.\n")
+            register.write_text(
+                "results:\n- artifacts:\n"
+                + "".join(
+                    f"  - {path.relative_to(source_repo).as_posix()}\n" for path in omitted
+                )
+            )
+            assert set(result_pruned_targets()) == set(omitted)
+        tree = tmp_path / route
+        clone_tree(tree)
+        assert (tree / reader.relative_to(source_repo)).read_bytes() == reader.read_bytes()
+        assert (tree / record.relative_to(source_repo)).read_bytes() == record.read_bytes()
+        indexed = tracked_files(tree, ".")
+        assert indexed is not None
+        assert tree / reader.relative_to(source_repo) in indexed
+        expected_bytes = reader.stat().st_size + record.stat().st_size + register.stat().st_size
+        for path, payload in omitted.items():
+            target = tree / path.relative_to(source_repo)
+            assert path.read_bytes() == payload
+            if route == "omitted":
+                assert not target.exists()
+                assert target not in indexed
+            else:
+                assert target.read_bytes() == payload
+                assert not target.is_symlink()
+                assert target in indexed
+                expected_bytes += len(payload)
+        assert snapshot_source_bytes() == expected_bytes
+
+
+def test_session163_push_logs_are_not_control_inputs() -> None:
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    assert SESSION163_PUSH_LOGS <= PRUNE
+    for source in SESSION163_PUSH_LOGS:
+        assert source.is_file()
+        assert source.stat().st_size > 0
+        assert all(
+            (ROOT / control["file"]).resolve() != source and source.name not in control["run"]
+            for control in specification["controls"]
+        )
+
+
+def test_session163_push_logs_leave_workers_while_the_record_survives(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    tree, copied_targets = control_snapshot
+    for source in SESSION163_PUSH_LOGS:
+        relative = source.relative_to(controls.REPO)
+        assert source.is_file()
+        assert relative not in copied_targets
+        assert not (tree / relative).exists()
+    session = ROOT / "campaign/agent-sessions/session-163-native-bounds-and-census.md"
+    assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
+
+
+def test_session163_push_logs_return_when_a_checked_document_links_them(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    document = tmp_path / "linked-logs.md"
+    document.write_text(
+        "\n".join(
+            f"[log]({os.path.relpath(source, tmp_path)})"
+            for source in sorted(SESSION163_PUSH_LOGS)
+        )
+    )
+    monkeypatch.setattr(controls, "_linked_documents", lambda: [document])
+    assert set(controls.linked_pruned_targets()) >= SESSION163_PUSH_LOGS
+
+
 def test_old_validation_archive_is_pruned_while_current_records_survive(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -838,6 +1136,220 @@ def test_results_register_dependencies_survive_snapshot_pruning() -> None:
     assert "resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.pdf" in retained
 
 
+def test_snapshot_inventory_preserves_copy_count_and_cache_exclusions(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "packing"
+    root.mkdir()
+    ordinary = root / "source.py"
+    ordinary.write_bytes(b"source")
+    omitted = root / "old.log"
+    omitted.write_bytes(b"historical output")
+    (root / "source-link.py").symlink_to(ordinary)
+    cache = root / "nested/__pycache__"
+    cache.mkdir(parents=True)
+    (cache / "ignored.pyc").write_bytes(b"not source")
+    docs = tmp_path / "docs"
+    docs.mkdir()
+    document = docs / "notes.md"
+    document.write_bytes(b"notes")
+    (docs / "__pycache__").mkdir()
+    (docs / "__pycache__/ignored.pyc").write_bytes(b"not source")
+    monkeypatch.setattr(controls, "ROOT", root)
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (omitted,))
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "snapshot_pruned_targets", lambda: [omitted])
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (docs,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset((omitted,)))
+    assert controls.snapshot_source_paths() == [omitted, document, ordinary]
+    assert controls.snapshot_source_bytes() == omitted.stat().st_size + 11
+    assert controls.snapshot_duplicate_copy_bytes() == omitted.stat().st_size
+
+
+@pytest.fixture
+def snapshot_audit_fixture(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> tuple[Path, Path]:
+    root = tmp_path / "packing"
+    old = root / "old"
+    old.mkdir(parents=True)
+    generated = old / "generated.bin"
+    generated.write_bytes(b"g" * 10)
+    linked = old / "linked.log"
+    linked.write_bytes(b"l" * 14)
+    registered = old / "result.bin"
+    registered.write_bytes(b"r" * 20)
+    core = root / "source.py"
+    core.write_bytes(b"s" * 7)
+    document = tmp_path / "notes.md"
+    document.write_text("[evidence](packing/old/linked.log)\n")
+    register = root / "frontier/results.yaml"
+    register.parent.mkdir()
+    register.write_text("results:\n- artifacts: [packing/old/result.bin]\n")
+    spec = root / "controls.yaml"
+    spec.write_text(
+        "controls:\n"
+        "- name: an exact target consumer\n"
+        "  file: old/generated.bin\n"
+        "  run: python3 -m devtools.example\n"
+        "- name: an exact command consumer\n"
+        "  file: source.py\n"
+        "  run: python3 -m devtools.example old/linked.log\n"
+    )
+    monkeypatch.setattr(controls, "ROOT", root)
+    monkeypatch.setattr(controls, "REPO", tmp_path)
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", ())
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "_linked_documents", lambda: [document])
+    monkeypatch.setattr(
+        controls, "snapshot_source_paths", lambda: [generated, linked, registered, core]
+    )
+    return old, spec
+
+
+def test_snapshot_audit_counts_rescue_and_overlapping_candidates_once(
+    snapshot_audit_fixture: tuple[Path, Path],
+) -> None:
+    old, spec = snapshot_audit_fixture
+    report = controls.snapshot_audit([old, old / "generated.bin"], spec_path=spec)
+    assert report["source_bytes"] == 51
+    assert report["copy_operations"] == 4
+    assert report["candidate_net_saved_bytes"] == 10
+    assert report["candidate_source_bytes"] == 41
+    candidates = report["candidates"]
+    assert isinstance(candidates, list)
+    candidate = candidates[0]
+    assert candidate["currently_copied_bytes"] == 44
+    assert candidate["net_saved_bytes"] == 10
+    assert candidate["inline_rescue"] == [{"path": "packing/old/linked.log", "bytes": 14}]
+    assert candidate["result_rescue"] == [{"path": "packing/old/result.bin", "bytes": 20}]
+    assert [row["name"] for row in candidate["registered_mentions"]] == [
+        "an exact target consumer",
+        "an exact command consumer",
+    ]
+
+
+def test_snapshot_audit_rejects_missing_and_escaping_candidates(
+    snapshot_audit_fixture: tuple[Path, Path],
+    tmp_path: Path,
+) -> None:
+    old, spec = snapshot_audit_fixture
+    for candidate in (old / "absent.bin", tmp_path.parent):
+        with pytest.raises(ValueError, match="must exist inside the repository"):
+            controls.snapshot_audit([candidate], spec_path=spec)
+
+
+@pytest.mark.parametrize(
+    ("route", "selection"),
+    [
+        ("root_files", "file"),
+        ("root_files", "parent"),
+        ("COPY_SEPARATELY", "file"),
+        ("COPY_SEPARATELY", "parent"),
+        ("ROOT_DOCUMENTS", "file"),
+        ("ROOT_DOCUMENTS", "parent"),
+        ("ROOT_DOCUMENTS", "directory"),
+        ("ROOT_DOCUMENTS", "descendant"),
+    ],
+)
+def test_snapshot_audit_refuses_unconditional_copy_candidates(
+    snapshot_audit_fixture: tuple[Path, Path],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    *,
+    route: str,
+    selection: str,
+) -> None:
+    _old, spec = snapshot_audit_fixture
+    directory = tmp_path / "always-copied"
+    directory.mkdir()
+    copied = directory / "source.txt"
+    copied.write_bytes(b"unconditional source")
+    target = directory if selection in ("directory", "descendant") else copied
+    candidate = directory if selection in ("directory", "parent") else copied
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    if route == "root_files":
+        monkeypatch.setattr(controls, "root_files", lambda: (target,))
+    else:
+        monkeypatch.setattr(controls, route, (target,))
+    # The actual roster contains one unique unconditional destination.
+    monkeypatch.setattr(controls, "snapshot_source_paths", lambda: [copied])
+    monkeypatch.setattr(
+        controls, "clone_tree", lambda _tree: pytest.fail("audit copied source")
+    )
+    monkeypatch.setattr(
+        controls, "run_control_command", lambda *_args: pytest.fail("audit ran a control")
+    )
+    with pytest.raises(ValueError, match="copies regardless of PRUNE") as error:
+        controls.snapshot_audit([candidate], spec_path=spec)
+    assert route in str(error.value)
+    assert candidate.relative_to(tmp_path).as_posix() in str(error.value)
+    assert target.relative_to(tmp_path).as_posix() in str(error.value)
+    with pytest.raises(SystemExit, match="2"):
+        controls.main([str(spec), "--audit-snapshot", "--prune-candidate", str(candidate)])
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert "copies regardless of PRUNE" in output.err
+    assert route in output.err
+
+
+def test_snapshot_audit_cli_never_clones_or_runs_a_control(
+    snapshot_audit_fixture: tuple[Path, Path],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    old, spec = snapshot_audit_fixture
+    monkeypatch.setattr(
+        controls, "clone_tree", lambda _tree: pytest.fail("audit copied source")
+    )
+    monkeypatch.setattr(
+        controls, "run_control_command", lambda *_args: pytest.fail("audit ran a control")
+    )
+    assert controls.main([str(spec), "--audit-snapshot", "--prune-candidate", str(old)]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["source_bytes"] == 51
+    assert report["candidate_source_bytes"] == 41
+    with pytest.raises(SystemExit, match="2"):
+        controls.main([str(spec), "--prune-candidate", str(old)])
+
+
+def test_tiny_snapshot_prune_rescues_linked_and_registered_files_as_private_copies(
+    snapshot_audit_fixture: tuple[Path, Path],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    old, _spec = snapshot_audit_fixture
+    monkeypatch.setattr(controls, "HERE", Path("packing"))
+    monkeypatch.setattr(controls, "PRUNE", frozenset((old,)))
+    monkeypatch.setattr(controls, "DESCEND", frozenset(old.parents))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (old,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (tmp_path / "notes.md",))
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    destination = tmp_path / "worker"
+    controls.clone_tree(destination)
+    retained = tracked_files(destination, "*")
+    assert retained is not None
+    for name in ("linked.log", "result.bin"):
+        landing = destination / "packing/old" / name
+        assert landing.read_bytes() == (old / name).read_bytes()
+        assert not landing.is_symlink()
+        assert landing in retained
+    assert not (destination / "packing/old/generated.bin").exists()
+    assert (old / "generated.bin").read_bytes() == b"g" * 10
+    (destination / "packing/old/result.bin").write_bytes(b"mutated")
+    assert (old / "result.bin").read_bytes() == b"r" * 20
+    # A future inline citation brings an omitted output back without changing PRUNE.
+    (tmp_path / "notes.md").write_text("[new evidence](packing/old/generated.bin)\n")
+    assert old / "generated.bin" in controls.snapshot_pruned_targets()
+
+
 def test_workflow_evidence_selection_keeps_only_existing_referenced_files(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -880,6 +1392,12 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     honest -- an index built by adding whatever happens to be on disk would also answer,
     and would put a reader's `attic/` scratch in it (PR 207).
     """
+    from devtools import evand_arrangement_houses as evand  # noqa: PLC0415
+    from devtools import refinement_house_links as refinements  # noqa: PLC0415
+    from devtools import squish_followup_packets as packet  # noqa: PLC0415
+    from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+    from devtools import squish_second_update_house_links as house  # noqa: PLC0415
+
     tree, _copied = control_snapshot
     listed = tracked_files(tree, ".")
     assert listed is not None, "the worker snapshot has no index to ask"
@@ -892,8 +1410,35 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
         check=True,
         capture_output=True,
     ).stdout.split(b"\0")
-    repository = {name.decode() for name in names if name and (tree / name.decode()).is_file()}
+    linked_root = tree / "packing/witnesses/squish-401-update-2026"
+    assert linked_root.is_symlink()
+    linked_proofs = {
+        packet.certificate_path(n).relative_to(controls.REPO).as_posix()
+        for n in packet.RESULT_NUMBERS
+    }
+    linked_proofs.update(
+        second.certificate_path(n).relative_to(controls.REPO).as_posix() for n in second.NUMBERS
+    )
+    linked_proofs.update(
+        house.house_path(n).relative_to(controls.REPO).as_posix() for n in house.LINK_NUMBERS
+    )
+    linked_proofs.update(
+        path.relative_to(controls.REPO).as_posix()
+        for path in refinements.snapshot_house_links()
+    )
+    linked_proofs.update(
+        path.relative_to(controls.REPO).as_posix() for path in evand.snapshot_house_links()
+    )
+    for relative in linked_proofs:
+        assert (tree / relative).is_file()
+        assert (tree / relative).resolve() == (controls.REPO / relative).resolve()
+    repository = {
+        name.decode()
+        for name in names
+        if name and (tree / name.decode()).is_file() and name.decode() not in linked_proofs
+    }
     assert tracked == repository
+    assert not tracked & linked_proofs
 
     # The linked-back environment and cargo target are the real checkout's, not this
     # snapshot's content, which is why the index is built before they are symlinked in.
@@ -963,6 +1508,7 @@ def test_the_root_files_reach_every_worker(control_snapshot: tuple[Path, set[Pat
         assert (tree / relative).read_bytes() == path.read_bytes(), relative
 
 
+@pytest.mark.slow
 def test_unmutated_results_checker_is_green_inside_a_worker(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -1131,3 +1677,392 @@ def test_new_operating_rule_control_reaches_summary_drift_after_future_rules(
     assert f"mirrors all {rule_count} rules" in baseline.stdout
     assert controls.run_one(control, tmp_path) == (True, "")
     assert source.read_text() == original
+
+
+@pytest.mark.slow
+def test_squish_complete_replay_survives_worker_custody_and_private_controls(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Complete replay reads linked proofs and retains private admission records."""
+    from devtools import squish_followup_packets as packet  # noqa: PLC0415
+
+    tree, copied = control_snapshot
+    work = tree / HERE
+    root = work / "witnesses/squish-401-update-2026"
+    assert root.is_symlink()
+    for n in packet.RESULT_NUMBERS:
+        source = packet.certificate_path(n)
+        relative = source.relative_to(ROOT).as_posix()
+        assert (work / relative).read_bytes() == source.read_bytes()
+        with pytest.raises(ValueError, match="escapes private snapshot"):
+            resolve_control_target(relative, tree=tree, work=work)
+    for name in (
+        "certification.json.xz",
+        "negative-controls.json.xz",
+        "replay-summary.json",
+        "reviewed-semantic-binding.json.xz",
+    ):
+        source = packet.PACKET / "receipts" / name
+        relative = source.relative_to(controls.REPO)
+        assert relative in copied
+        assert not (tree / relative).is_symlink()
+        assert (tree / relative).read_bytes() == source.read_bytes()
+    with tempfile.TemporaryDirectory(prefix="squish-baseline-pycache-", dir=tree) as pycache:
+        env = controls.control_environment(tree, Path(pycache))
+        baseline = subprocess.run(
+            [sys.executable, "-m", "devtools.squish_followup_packets", "check-certification"],
+            cwd=work,
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=30,
+        )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+    for name in ("fast-cpu4-bdc28e89", "fast-native-bdc28e89"):
+        source = ROOT / f"campaign/agent-sessions/session-105-validation/{name}.json"
+        assert source in PRUNE
+        assert source.relative_to(controls.REPO) not in copied
+        assert not (tree / source.relative_to(controls.REPO)).exists()
+        identity = source.with_name(f"{name}-source.json")
+        assert (
+            tree / identity.relative_to(controls.REPO)
+        ).read_bytes() == identity.read_bytes()
+    session = ROOT / "campaign/agent-sessions/session-105-stromquist-n26-verification.md"
+    assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
+
+
+def _run_second_squish_native_program(tree: Path, program: str) -> None:
+    baseline_program = (
+        """
+from devtools import squish_second_update_confirmation as packet
+def forbidden(*args, **kwargs):
+    raise AssertionError('native admission must not execute a geometric decider')
+packet.decide = packet.original.decide = forbidden
+packet.original.exact_verify = packet.original.independent.check = forbidden
+"""
+        + program
+    )
+    with tempfile.TemporaryDirectory(
+        prefix="second-squish-baseline-pycache-", dir=tree
+    ) as pycache:
+        environment = controls.control_environment(tree, Path(pycache))
+        baseline = subprocess.run(
+            [sys.executable, "-c", baseline_program],
+            cwd=tree / HERE,
+            env=environment,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=60,
+        )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+
+
+@pytest.mark.slow
+def test_second_squish_complete_replay_survives_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Exercise the production copy, real index, native readers and both live mutants."""
+    from devtools import squish_second_update_confirmation as packet  # noqa: PLC0415
+    from devtools import squish_second_update_house_links as house  # noqa: PLC0415
+
+    tree, _copied = control_snapshot
+    work = tree / HERE
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+    assert (tree / packet.WITNESSES.relative_to(controls.REPO)).is_symlink()
+    listed = tracked_files(tree, ".")
+    assert listed is not None, "the actual worker has no private index"
+    tracked = {path.relative_to(tree) for path in listed}
+    private_n263 = house.house_path(263).relative_to(controls.REPO)
+    assert private_n263 in tracked
+    assert not (tree / private_n263).is_symlink()
+    for n in house.LINK_NUMBERS:
+        relative = house.house_path(n).relative_to(controls.REPO)
+        assert (tree / relative).is_symlink()
+        assert relative not in tracked
+        with pytest.raises(ValueError, match="escapes private snapshot"):
+            resolve_control_target(relative.relative_to(HERE).as_posix(), tree=tree, work=work)
+    for source in packet.private_input_paths():
+        target = tree / source.relative_to(controls.REPO)
+        assert not target.is_symlink()
+        assert target.read_bytes() == source.read_bytes()
+    baseline_program = """
+from devtools import build_known_best_atlas as atlas
+from devtools import check_results
+from devtools import squish_second_update_confirmation as packet
+from devtools import squish_second_update_house_links as house
+def forbidden(*args, **kwargs):
+    raise AssertionError('native admission must not execute a geometric decider')
+packet.decide = packet.original.decide = forbidden
+packet.original.exact_verify = packet.original.independent.check = forbidden
+assert tuple(packet.check_certification()) == packet.NUMBERS
+assert tuple(house.check_houses()) == packet.NUMBERS
+for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
+    relative = path.relative_to(packet.REPO).as_posix()
+    assert check_results.repository_file_problem(relative) is None
+assert check_results.repository_file_problem('packing/witnesses/known-best/unrelated.yaml')
+for producer in (atlas.update, lambda: atlas.update_selected([88])):
+    try:
+        producer()
+    except packet.original.PacketError as error:
+        assert 'output escapes' in str(error)
+    else:
+        raise AssertionError('producer accepted a linked output')
+print('all 27 complete inputs admitted; nine house reads and both output guards passed')
+"""
+    environment = controls.control_environment(tree, tree / "second-squish-baseline-pycache")
+    baseline = subprocess.run(
+        [sys.executable, "-c", baseline_program],
+        cwd=work,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=60,
+    )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    selected = [
+        control
+        for control in specification["controls"]
+        if control["name"].startswith("SQUISH second update -")
+    ]
+    assert len(selected) == 2
+    for control in selected:
+        source = ROOT / control["file"]
+        original = source.read_bytes()
+        passed, detail = controls.run_one(control, tree)
+        assert passed, detail
+        assert source.read_bytes() == original
+
+
+@pytest.mark.parametrize(
+    "program",
+    [
+        pytest.param(
+            """
+from devtools import squish_second_update_house_links as house
+assert tuple(house.check_houses()) == packet.NUMBERS
+print('nine house reads passed')
+""",
+            id="house-reads",
+        ),
+        pytest.param(
+            """
+from devtools import check_results
+from devtools import squish_second_update_house_links as house
+for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
+    relative = path.relative_to(packet.REPO).as_posix()
+    assert check_results.repository_file_problem(relative) is None
+assert check_results.repository_file_problem('packing/witnesses/known-best/unrelated.yaml')
+print('registry acceptance and refusal passed')
+""",
+            id="registry-routes",
+        ),
+        pytest.param(
+            """
+from devtools import build_known_best_atlas as atlas
+for producer in (atlas.update, lambda: atlas.update_selected([88])):
+    try:
+        producer()
+    except packet.original.PacketError as error:
+        assert 'output escapes' in str(error)
+    else:
+        raise AssertionError('producer accepted a linked output')
+print('both producer output guards passed')
+""",
+            id="producer-guards",
+        ),
+    ],
+)
+def test_second_squish_consumers_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]], program: str
+) -> None:
+    """Keep each consumer contract in its own fresh native worker."""
+    tree, _copied = control_snapshot
+    _run_second_squish_native_program(tree, program)
+
+
+@pytest.mark.parametrize(
+    ("prefix", "name"),
+    [
+        pytest.param(
+            "SQUISH update -",
+            "SQUISH update - a different source revision cannot inherit the reviewed replay",
+            id="first-source-revision",
+        ),
+        pytest.param(
+            "SQUISH update -",
+            "SQUISH update - an unsafe published decimal cannot inherit the exact bound",
+            id="first-unsafe-decimal",
+        ),
+        pytest.param(
+            "SQUISH second update -",
+            "SQUISH second update - a different revision cannot inherit the complete replay",
+            id="second-source-revision",
+        ),
+        pytest.param(
+            "SQUISH second update -",
+            (
+                "SQUISH second update - unchanged geometry with a wrong canonical "
+                "witness ID is refused"
+            ),
+            id="second-canonical-id",
+        ),
+    ],
+)
+def test_squish_private_mutation_is_detected_and_restored_in_native_worker(
+    control_snapshot: tuple[Path, set[Path]], prefix: str, name: str
+) -> None:
+    """Each registered fault runs in a fresh native process and restores its private target."""
+    tree, _copied = control_snapshot
+    work = tree / HERE
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    selected = [c for c in specification["controls"] if c["name"].startswith(prefix)]
+    assert len(selected) == 2
+    matches = [control for control in selected if control["name"] == name]
+    assert len(matches) == 1
+    control = matches[0]
+    target = resolve_control_target(control["file"], tree=tree, work=work)
+    before = target.read_bytes()
+    source = ROOT / control["file"]
+    source_before = source.read_bytes()
+    passed, detail = controls.run_one(control, tree)
+    assert passed, detail
+    assert target.read_bytes() == before
+    assert source.read_bytes() == source_before
+
+
+@pytest.mark.parametrize(
+    ("number", "canonical"),
+    [
+        (136, "paired-cover"),
+        (140, "owner-footprint-cover"),
+        (142, "owner-footprint-cover"),
+        (143, "four-owner-footprint-cover"),
+        (144, "four-owner-endpoint-full-net-replay"),
+    ],
+)
+def test_duplicate_stdout_prune_preserves_canonical_and_declared_input(
+    number: int, canonical: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Historical duplicate output may leave a worker, never its required input."""
+    relative = "campaign/series/series-000-smoke-and-calibration/results/agenda-032"
+    extension = "json" if number == 136 else "jsonl"
+    output = ROOT / relative / f"exp-{number}-stdout.{extension}"
+    retained = output.with_name(f"exp-{number}-{canonical}.json")
+    assert output in PRUNE
+    assert not controls.in_pruned_roots(retained, PRUNE)
+    source_names = [path.relative_to(controls.REPO).as_posix() for path in (output, retained)]
+    blobs = [
+        subprocess.run(
+            ["git", "rev-parse", f"HEAD:{name}"],
+            cwd=controls.REPO,
+            capture_output=True,
+            check=True,
+            timeout=10,
+        ).stdout
+        for name in source_names
+    ]
+    assert blobs[0] == blobs[1]
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for control in specification["controls"]:
+        assert (ROOT / control["file"]).resolve() != output
+        assert output.name not in control["run"]
+    packing = tmp_path / "packing"
+    receipt = packing / relative / output.name
+    receipt.parent.mkdir(parents=True)
+    receipt.write_text('{"duplicate":true}\n')
+    scientific = receipt.with_name(retained.name)
+    scientific.write_bytes(receipt.read_bytes())
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text(f"[declared input](packing/{relative}/{receipt.name})\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (receipt,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "result_pruned_targets", list)
+    assert controls.snapshot_pruned_targets() == [receipt]
+    assert controls.snapshot_source_bytes() == sum(
+        path.stat().st_size for path in (document, receipt, scientific)
+    )
+
+
+@pytest.mark.parametrize("declaration", ["inline", "frontier", "none"])
+@pytest.mark.parametrize("explicit", [False, True])
+def test_git_projection_preserves_sparse_declared_inputs(
+    declaration: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, explicit: bool
+) -> None:
+    """Absent sparse files still count; genuine declarations rescue exact outputs."""
+    packing = tmp_path / "packing"
+    output = packing / "results/duplicate.json"
+    output.parent.mkdir(parents=True)
+    output.write_bytes(b"diagnostic output")
+    canonical = output.with_name("canonical.json")
+    canonical.write_bytes(output.read_bytes())
+    regularized = packing / "atlas/known-best/regularized/n-011-regularized.yaml.gz"
+    regularized.parent.mkdir(parents=True)
+    regularized.write_bytes(b"generated witness")
+    index = regularized.with_name("index.json")
+    index.write_text('{"source":true}\n')
+    source = packing / "source.py"
+    source.write_text("source = True\n")
+    document = tmp_path / "README.md"
+    document.write_text(
+        "[input](packing/results/duplicate.json)\n" if declaration == "inline" else "Reader\n"
+    )
+    register = packing / "frontier/results.yaml"
+    register.parent.mkdir()
+    register.write_text(
+        "results:\n- artifacts: [packing/results/duplicate.json]\n"
+        if declaration == "frontier"
+        else "results: []\n"
+    )
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True, timeout=10)
+    subprocess.run(["git", "-C", str(tmp_path), "add", "."], check=True, timeout=10)
+    tree = (
+        subprocess.run(
+            ["git", "-C", str(tmp_path), "write-tree"],
+            check=True,
+            capture_output=True,
+            timeout=10,
+        )
+        .stdout.decode()
+        .strip()
+    )
+    expected = sum(
+        path.stat().st_size for path in (canonical, source, document, register, index)
+    )
+    if explicit or declaration != "none":
+        expected += output.stat().st_size
+    output.unlink()
+    canonical.unlink()
+    document.unlink()
+    regularized.unlink()
+    index.unlink()
+    monkeypatch.setattr(controls, "REPO", tmp_path)
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (output,) if explicit else ())
+    assert controls.snapshot_git_source_bytes(tree) == expected
+
+
+def test_snapshot_prunes_leave_native_crate_fixtures_selected() -> None:
+    """The cap repair cannot drop PR410's native source, tests or data fixtures."""
+    listed = subprocess.run(
+        ["git", "ls-tree", "-r", "--name-only", "HEAD", "packing/n17_kernel_verify"],
+        cwd=controls.REPO,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    ).stdout.splitlines()
+    assert listed
+    for relative in listed:
+        path = controls.REPO / relative
+        assert not controls.in_pruned_roots(path, PRUNE)

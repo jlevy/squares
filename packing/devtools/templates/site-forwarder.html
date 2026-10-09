@@ -1,19 +1,20 @@
 <!doctype html>
-<html lang="en" data-moved-to="{{TARGET}}">
+<html lang="en" data-moved-to="{{TARGET}}" data-file-moved-to="{{FILE_TARGET}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- This address is where a page used to be. The script sends a reader on with the query
      and the fragment they arrived with (overview/forward.js reads `data-moved-to`); a
-     reader without scripts is sent on by the refresh, and the link is there for anyone
-     neither reaches. The canonical link names the page's address now, and a forwarder
+     reader without scripts is sent to the physical file by the refresh, and the link is there for anyone
+     neither reaches. File navigation uses `data-file-moved-to`, so directory indexes open
+     their HTML file rather than a directory listing. The canonical link names the page's address now, and a forwarder
      to a page of the site previews that page, so a shared old link shows where it leads
      (`render_overview.forwarder_head`). -->
 {{HEAD}}
 <script>{{FORWARD_SCRIPT}}</script>
-<noscript><meta http-equiv="refresh" content="0; url={{TARGET}}"></noscript>
+<noscript><meta http-equiv="refresh" content="0; url={{FILE_TARGET}}"></noscript>
 </head>
 <body>
-<p>This page has moved: <a href="{{TARGET}}">{{TITLE}}</a>.</p>
+<p>This page has moved: <a href="{{FILE_TARGET}}">{{TITLE}}</a>.</p>
 </body>
 </html>

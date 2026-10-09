@@ -68,9 +68,11 @@ from collections import Counter, defaultdict
 from collections.abc import Iterable, Iterator, Sequence
 from dataclasses import dataclass, field
 from fractions import Fraction
+from functools import cache
 from pathlib import Path
 from typing import Any, Literal
 
+import mpmath as mp
 from strif import atomic_output_file
 
 from sqpack import retained_json
@@ -168,13 +170,32 @@ class Square:
         return "+y" if across > 0 else "-y"
 
 
+@cache
+def project_sin_cos(angle: float) -> tuple[float, float]:
+    """Deterministic binary64 projections at the unchanged census thresholds.
+
+    Platform libm differs by an ulp in some rotations. Cancellation near contact
+    magnifies it into different sub-picometre diagnostic spectrum bins. Evaluate the
+    exact binary64 argument at a fixed precision before its sole float rounding.
+    """
+    with mp.workdps(80):
+        value = mp.mpf(angle)
+        return float(mp.cos(value)), float(mp.sin(value))
+
+
+def _atan2(y: float, x: float) -> float:
+    """The same fixed-precision boundary for exact-corner orientation displays."""
+    with mp.workdps(80):
+        return float(mp.atan2(mp.mpf(y), mp.mpf(x)))
+
+
 def make_square(ident: str, x: float, y: float, angle: float) -> Square:
     tilt = math.fmod(angle, QUARTER)
     if tilt < 0:
         tilt += QUARTER
     if tilt >= QUARTER / 2:
         tilt -= QUARTER
-    cosine, sine = math.cos(tilt), math.sin(tilt)
+    cosine, sine = project_sin_cos(tilt)
     corners = tuple(
         (x + cosine * a - sine * b, y + sine * a + cosine * b)
         for a, b in ((-0.5, -0.5), (0.5, -0.5), (0.5, 0.5), (-0.5, 0.5))
@@ -513,7 +534,7 @@ def centre_rule_contacts(
             continue
         if _js_angle_gap(_js_fold(first.angle), _js_fold(second.angle)) > rule.angle_tolerance:
             continue
-        cosine, sine = math.cos(first.angle), math.sin(first.angle)
+        cosine, sine = project_sin_cos(first.angle)
         along = dx * cosine + dy * sine
         across = -dx * sine + dy * cosine
         if abs(abs(along) - 1) <= rule.gap and abs(across) <= rule.gap:
@@ -654,7 +675,7 @@ def packings_from_witness(
             x = float(sum(cx for cx, _ in corners) / 4)
             y = float(sum(cy for _, cy in corners) / 4)
             (x0, y0), (x1, y1) = corners[0], corners[1]
-            angle = math.atan2(float(y1 - y0), float(x1 - x0))
+            angle = _atan2(float(y1 - y0), float(x1 - x0))
             frame_angle = math.degrees(angle) % 90.0
         exact.append(make_square(ident, x, y, angle))
         rounded = round(frame_angle, 4)

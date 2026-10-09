@@ -203,7 +203,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "ce733914a34ccdd6dd2985fa0feeda0db9b17167"
+DATA_REVISION = "a70739be5738a49fb5bd4b202e594ec4fb25d6b0"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -358,6 +358,17 @@ EXPLAINER_REVISED = "October 5, 2026"
 #: (think-2cqu).
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.7",
+        first_published="October 7, 2026",
+        result_scope=(
+            "The exposition review corrects the shorter symmetry proof's intermediate "
+            "counts and states both propagation rules, distinguishes cases from masks "
+            "and contact from a zero projection gap, limits the contact deformation "
+            "to its root neighborhood, puts figure symbols after their definitions, "
+            "and clarifies shared geometric code and the reported Lean formalization."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.6",
         first_published="October 6, 2026",
         result_scope=(
@@ -452,7 +463,7 @@ OPTIMALITY_REVIEW_EDITION = " ".join(
 #: prints, by the rule `EXPLAINER_REVISED` follows -- the author date of the last commit
 #: that changed its article, `n11-optimality-review-article.md`, held to git by
 #: `devtools.artifact_dates`. Change it in the commit that changes the article.
-OPTIMALITY_REVIEW_REVISED = "October 6, 2026"
+OPTIMALITY_REVIEW_REVISED = "October 7, 2026"
 
 #: The day the proof the review explains was published by its source, which the review's
 #: "Original proof" date prints. A fact about someone else's work, so it is typed, and
@@ -488,6 +499,24 @@ THRESHOLD_REVIEW_REVISED = "October 5, 2026"
 #: The day Kleddamag published the proof Part II reviews (v1.0.2 of
 #: 11-squares-certified-bound), which its "Original proof" date prints.
 THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
+
+#: The standalone tutorial on finding and verifying record packings. Its version and
+#: dates belong to the paper, independently of the site and n = 11 series.
+PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.0",
+        first_published="October 8, 2026",
+        result_scope=(
+            "First publication: a systematic tutorial on modelling, searching, refining, "
+            "reconstructing and verifying record square packings, with sourced method "
+            "and seed lineage tables."
+        ),
+    ),
+)
+PACKING_METHODS_VERSION = PACKING_METHODS_HISTORY[0].version
+PACKING_METHODS_EDITION = PACKING_METHODS_VERSION
+PACKING_METHODS_FIRST_PUBLISHED = PACKING_METHODS_HISTORY[-1].first_published
+PACKING_METHODS_REVISED = "October 8, 2026"
 
 #: The commit the committed claim documents link to
 #: (`render_n11_lower_bounds_explainer.edition_file`), at this repository's short length. It is

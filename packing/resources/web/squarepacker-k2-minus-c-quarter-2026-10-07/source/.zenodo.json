@@ -1,0 +1,32 @@
+{
+"title": "Packing k^2-c unit squares: a lower bound of order k^{1/4} for the deficiency (preprint)",
+"upload_type": "software",
+"description": "Licences in this single record: the preprint (paper/paper.pdf, paper/paper.tex) is licensed under CC BY 4.0; the programs (code/) under the MIT License, which is the licence shown for the record. Preprint with programs. Every packing of N unit squares in [0,k]^2 that are pairwise disjoint as closed sets has k^2 - N >= 0.1 k^{1/4} for every integer k >= 4.62*10^12, and liminf (k^2 - M(k))/k^{1/4} >= 0.1696; consequently s(k^2-c) = k for every integer k >= max(4.62*10^12, 10^4 c^4 + 1), where s(n) is the side of the smallest square containing n non-overlapping unit squares. The constants 0.1, 4.62*10^12 and 0.1696 rely on the computer-assisted Lemma 4.10 of the cited paper (Packing k^2-c unit squares: s(k^2-c)=k for all large k, version 1.2), whose box computations have not yet been reproduced by an independent implementation; without it, using the analytic Lemma 4.9 of that paper, the same argument gives k^2 - N >= 0.1 k^{1/4} for every integer k >= 2.17*10^13 and the constant 0.1411. The threshold 4.62*10^12 has a small margin: with the parameters of the proof the argument works exactly from about 4.6167*10^12 on. Includes a script that recomputes every displayed constant and the programs and results of numerical tests on scaled analogues (tests, not part of the proof). Status: checked only by AI-based reviews (including a blank-slate review of this text: no critical or major issue, 18 minor ones, all addressed) and numerical tests; not peer reviewed. Use of AI: developed with extensive assistance from Claude (Anthropic), including the proofs, the text and the programs; the author takes full responsibility.",
+"notes": "Licences: paper/paper.tex and paper/paper.pdf under CC BY 4.0 (see paper/LICENSE); programs in code/ under the MIT License (see LICENSE). The licence field of this record refers to the software (MIT). Cited paper, version 1.2: https://doi.org/10.5281/zenodo.23194104; its programs: https://doi.org/10.5281/zenodo.23194031 and https://github.com/squarepacker/k2-minus-c (release v1.2).",
+"creators": [
+{
+"name": "Ryu, Sungjoon"
+}
+],
+"license": "MIT",
+"keywords": [
+"square packing",
+"unit squares",
+"wasted area",
+"c*(k)",
+"Roth-Vaughan"
+],
+"related_identifiers": [
+{
+"identifier": "10.5281/zenodo.23194104",
+"relation": "references",
+"resource_type": "publication-preprint"
+},
+{
+"identifier": "10.5281/zenodo.23194031",
+"relation": "references",
+"resource_type": "software"
+}
+],
+"version": "1.0"
+}
