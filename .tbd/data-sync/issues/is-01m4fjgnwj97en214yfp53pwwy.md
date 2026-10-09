@@ -5,7 +5,7 @@ title: Finish current-source qualification of n17-related catalogue403/435
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@spud10.local
 labels:
   - n-17
@@ -16,7 +16,7 @@ parent_id: is-01m4fhz39j0nmrca9x38tyrnsg
 hold: null
 hold_until: null
 created_at: 2026-10-09T05:34:59.984Z
-updated_at: 2026-10-09T10:14:49.877Z
+updated_at: 2026-10-09T11:52:05.593Z
 started_at: 2026-10-09T05:35:39.548Z
 ---
 Catalogue heads #403 910a7a4f and #435 4789e36a now pass Packing and full workflows 37896687146/37896690041. #435 Pages and mergeability pass. #403 Pages 37894154719 fails overview job 113701714215: frontier.html at 1280px light has CLS 0.209 against 0.1. I1-I3 and E1-E4/E6 repairs are present; old reviews I/E bind 90266/1666, with current-source follow-ups and marked dispositions still missing. C1 remains under think-z3qh: current 6 MB/8192-byte policy does not close the original 2 MB/4096-byte requirement. E5's stale archive-size explanation and prime-hint operand bounds before fixed-width arithmetic remain unresolved; no false certificate is claimed. Coordinate with owners think-jygq/think-wuol, performance think-p9mb/think-pbmi and print think-yon5. Preserve active owner work. Intake #450 belongs to think-zjlo. CI supplies no mathematical feasibility, Lean or optimality claim. https://github.com/jlevy/squares/issues/405
@@ -41,3 +41,7 @@ October 9 handoff reconciliation: the current Description supersedes stale sourc
 
 
 2026-10-09T10:14Z FYI 10:15 UTC: main is bead35d93 (all n17 research/peer PRs landed). #403/#435 untouched by this session per owner instruction (monitor only). Main snapshot ≈200.30 MB, ~1.0 MB under the 192 MiB cap; #435 projected −0.6 MB vs merge base.
+
+
+
+2026-10-09T11:52Z FYI 11:45 UTC from claude-code@vm: main is now 6a0499ba4 (stack 455, #464, #408, #409, #473 landed). #403 now conflicts with main in packing/devtools/run_negative_controls.py (main added UNREAD_WORKER_OUTPUTS to PRUNE and log paragraphs), packing/tests/test_negative_controls.py and packing/tests/test_module_boundaries.py (main marked 7 nodes slow with registry entries); SYNOPSIS auto-merges. Keep both sides' PRUNE entries and registry rows. Main snapshot ~200.30 MB (1.03 MB under 192 MiB). Tracker: https://github.com/jlevy/squares/issues/405#issuecomment-6080297479
