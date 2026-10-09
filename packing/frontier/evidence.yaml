@@ -28214,3 +28214,119 @@ evidence:
         controls. Their acceptance concerns the completed scientific replay, not a future integration
         pull request.
     source_reviewed: '2026-10-07'
+  - id: E-rehwaldt-couzo-refinements-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 292
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    certificate: packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Source-reported finite rational witnesses for existing constructions. Center-expansion
+      metadata describes repair already applied; no additional expansion is performed. Source checker
+      reports are external claims. No unrestricted lower-bound, optimality, rigidity or human-oversight
+      assurance is admitted.
+    source_reviewed: '2026-10-08'
+  - id: E-rehwaldt-n68-refinement-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 68
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Rehwaldt n68 refinement 2026-10-07]'
+    certificate: packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Source-reported finite rational witnesses for existing constructions. Center-expansion
+      metadata describes repair already applied; no additional expansion is performed. Source checker
+      reports are external claims. No unrestricted lower-bound, optimality, rigidity or human-oversight
+      assurance is admitted.
+    source_reviewed: '2026-10-08'
+  - id: E-rehwaldt-couzo-refinements-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 292
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    certificate: packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/
+    replay: Recover the complete public evidence with python -m devtools.refinement_custody recover
+      --destination /Volumes/spud-ext1/agent-scratch/refinement-recovery. The retained unchanged couzo_replay.py
+      replay-batch --root host-v3 --reviews coordinator-accepted-reviews.json --execute-reviewed-replay
+      completed all ten jobs after the explicitly reviewed host relocation. A different host requires
+      a separately reviewed runtime relocation.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-refinement-custody
+    independence_record: docs/project/reviews/review-2026-10-07-refinement-custody-closure.md
+    limitations: Ten full jobs cover 397 positive squares and 239730 pairs per route across positives
+      and four controls per case, 479460 total. Both routes share Fraction, SAT, schema/YAML and serialized
+      corner inputs; reviewed independent matrix derivation addresses the common conversion. All children
+      exit 0 without timeout; full batch wall 453.85665345803136s. Complete source/runtime/review/actual
+      receipt custody was publicly recovered byte-identically and independently reviewed. Canonical
+      admission executes no new decider. No analytic contact limit, lower bound, optimality, rigidity,
+      novel arrangement, formal proof or human oversight is established.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra separately prompted refinement custody review
+      note: The retained closure review accepts complete finite-feasibility replay and public custody
+        only.
+    source_reviewed: '2026-10-07'
+  - id: E-rehwaldt-n68-refinement-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 68
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Rehwaldt n68 refinement 2026-10-07]'
+    certificate: packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/
+    replay: Recover the complete public evidence with python -m devtools.refinement_custody recover
+      --destination /Volumes/spud-ext1/agent-scratch/refinement-recovery. The completed command was
+      python -m devtools.refinement_packets replay-n68 --source-root n68-upstream --output source-geometry.json.gz;
+      all three complete jobs ran both pinned source programs.
+    replay_status: passed
+    verifiers:
+    - V-rehwaldt-n68-verify
+    - V-rehwaldt-n68-independent-support-check
+    - V-refinement-custody
+    independence_record: docs/project/reviews/review-2026-10-07-refinement-custody-closure.md
+    limitations: Three full jobs cover 68 squares and 2278 pairs per job/route, 13668 total across both
+      source programs. Both accept the positive and reject duplicate and outside controls; wall 7.843s.
+      This reproduces producer implementations and does not claim independence from them. Complete source/runtime/review/actual
+      receipt custody was publicly recovered byte-identically and independently reviewed. Canonical
+      admission executes no new decider. No analytic contact limit, lower bound, optimality, rigidity,
+      novel arrangement, formal proof or human oversight is established.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra separately prompted refinement custody review
+      note: The retained closure review accepts complete finite-feasibility replay and public custody
+        only.
+    source_reviewed: '2026-10-07'

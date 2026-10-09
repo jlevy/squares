@@ -1,0 +1,51 @@
+[
+  {
+    "n": 68,
+    "reported": {
+      "algebraic_degree": null,
+      "analytically_optimized": null,
+      "catalogue_pictured": true,
+      "catalogue_rigid": "not-stated",
+      "construction_method": "unknown",
+      "evidence": [
+        "E-evand-exact-optima-2026-10-05-report"
+      ],
+      "exact_form": null,
+      "found_by": [
+        "Francisco Couzo"
+      ],
+      "found_year": 2026,
+      "improved_by": [
+        "Evan Daniel"
+      ],
+      "minimal_polynomial": null,
+      "retrieved_date": "2026-10-05",
+      "source_date": "2026-10-05",
+      "source_key": "[evand exact optima 2026-10-05]",
+      "tilt_angles_deg": null,
+      "value": "8.798795237218283902664668919394",
+      "witnesses": [
+        "W-known-best-n068"
+      ]
+    },
+    "rigidity": {
+      "assurance": "numerically-checked",
+      "certificate": "atlas/known-best/translation-escape-screen.json",
+      "evidence": [
+        "E-translation-escape-not-rigid"
+      ],
+      "method": "numerical-multiprecision",
+      "property": "not-rigid",
+      "replay": "uv run --frozen --all-extras --group dev python -m devtools.screen_translation_escape --check",
+      "scope": "Square 0 of the retained witness (witness id 1) translates 0.367698 along (1, 0) with the packing still valid, so the configuration admits a non-trivial feasible motion; 22 of its 68 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former."
+    },
+    "verified": {
+      "evidence": [
+        "E-evand-exact-optima-2026-10-05-exact-replay",
+        "E-evand-exact-optima-2026-10-05-source-replay"
+      ],
+      "exact_form": "4399397618609141951332334459697/500000000000000000000000000000",
+      "value": "8.798795237218283902664668919394"
+    }
+  }
+]

@@ -1836,17 +1836,67 @@ sources:
     evidence:
     - E-squish-second-update-2026-10-07-report
     notes: Issue422 pins nine new rational geometries at e63e4e52b1728b6671b2f263c5e02a4aa79a39d3.
-      All nine are reported V0/C0 in this layer. Complete prior verified values, exact forms and
+      This original source-report atom retains all nine as reported V0/C0. Separate maintained
+      confirmation T-116 admits the frozen finite geometries at V3/C3; later selected geometries
+      and source-only reports require their own assurance. Complete prior verified values, exact forms and
       evidence remain retained; source finite prints are quotations, and current displays are
       safe sixteen-place upward ceilings. Author-reported Ellsworth, Couzo and SQUISH lineage
       and human-directed Claude Opus5.5 assistance remain attributed.
+  - id: rehwaldt-couzo-refinements-2026-10-07
+    title: Rehwaldt finite rational refinements, issue 425
+    role: source-repository
+    url: https://github.com/lollipoll/couzo-five-exact-certificates/tree/bc389ddf7d65277cd19a9b08fb285d86346d6806
+    local: resources/web/rehwaldt-couzo-refinements-2026-10-07/
+    source_key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    scope:
+      n_values:
+      - 105
+      - 292
+    reviewed: '2026-10-08'
+    source_date: '2026-10-07'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+    - frontier/n-105.md
+    - frontier/n-292.md
+    evidence:
+    - E-rehwaldt-couzo-refinements-2026-10-07-report
+    claims_record: resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/claims.json
+    notes: Complete terminating displays preserve the full rational strict improvement. This original
+      source-report atom retains reported assurance. Separate maintained confirmation T-117 admits
+      these frozen finite witnesses at V3/C3; later selected geometries and source-only reports
+      require their own assurance. Historical counts excluded by the author do not replace smaller
+      ceilings.
+  - id: rehwaldt-n68-refinement-2026-10-07
+    title: Rehwaldt finite rational refinements, issue 428
+    role: source-repository
+    url: https://github.com/lollipoll/certified-square-packing-68/tree/fded686668e29258dad2eb29d0482fa3fd51bd6b
+    local: resources/web/rehwaldt-n68-refinement-2026-10-07/
+    source_key: '[Rehwaldt n68 refinement 2026-10-07]'
+    scope:
+      n_values:
+      - 68
+    reviewed: '2026-10-08'
+    source_date: '2026-10-07'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+    - frontier/n-068.md
+    evidence:
+    - E-rehwaldt-n68-refinement-2026-10-07-report
+    claims_record: resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/claims.json
+    notes: Complete terminating displays preserve the full rational strict improvement. This original
+      source-report atom retains reported assurance. Separate maintained confirmation T-118 admits
+      this frozen finite witness at V3/C3; later selected geometries and source-only reports
+      require their own assurance. Historical counts excluded by the author do not replace smaller
+      ceilings.
 selected_overrides:
   - n: 68
-    source_id: evand-square-packing-2026-10-05
-    value: '8.798795237218283902664668919394'
-    evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-      side (T-056).
+    source_id: rehwaldt-n68-refinement-2026-10-07
+    value: '8.79879523721828390257668096702139408352101903022787926324037'
+    evidence: E-rehwaldt-n68-refinement-2026-10-07-report
+    reason: Smaller exact finite rational source ceiling, retained as reported pending replay admission
+      and review.
   - n: 102
     source_id: evand-square-packing-2026-10-05
     value: '10.607174680176051125448595024891'
@@ -1860,11 +1910,11 @@ selected_overrides:
     reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
       side (T-056).
   - n: 105
-    source_id: franciscouzo-square-packing-2026
-    value: '10.806077865540567'
-    evidence: E-franciscouzo-2026-09-27-report
-    reason: Newer reported upper bound, certified here (T-056), below the UnitSquare release and the
-      Kingbird baseline.
+    source_id: rehwaldt-couzo-refinements-2026-10-07
+    value: '10.80607786551970463257490535044771520398745274'
+    evidence: E-rehwaldt-couzo-refinements-2026-10-07-report
+    reason: Smaller exact finite rational source ceiling, retained as reported pending replay admission
+      and review.
   - n: 106
     source_id: evand-square-packing-2026-10-05
     value: '10.822908044132847555194436943331'
@@ -2022,10 +2072,11 @@ selected_overrides:
     reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
       side (T-056).
   - n: 292
-    source_id: franciscouzo-square-packing-2026
-    value: '17.597249391199519'
-    evidence: E-franciscouzo-2026-09-27-report
-    reason: Newer reported upper bound, certified here (T-056), below the Kingbird baseline.
+    source_id: rehwaldt-couzo-refinements-2026-10-07
+    value: '17.597249391156465040471442005510391858592626557'
+    evidence: E-rehwaldt-couzo-refinements-2026-10-07-report
+    reason: Smaller exact finite rational source ceiling, retained as reported pending replay admission
+      and review.
   - n: 297
     source_id: evand-square-packing-2026-10-05
     value: '17.74041728754380185115320576776'
@@ -2311,13 +2362,13 @@ superseded_reports:
   - n: 68
     source_id: franciscouzo-square-packing-2026
     value: '8.798795237222592'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: rehwaldt-n68-refinement-2026-10-07
     reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified
       here (T-098).
   - n: 68
     source_id: unitsquare-release1
     value: '8.803383074716108386903836683375989697670063329'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: rehwaldt-n68-refinement-2026-10-07
     reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side; since 2026-10-05
       the selected report is Evan Daniel's exact optimum of that packing (T-098).
   - n: 69
@@ -2410,13 +2461,13 @@ superseded_reports:
   - n: 105
     source_id: casson-square-packing-2026
     value: '10.80758853319602153'
-    superseded_by: franciscouzo-square-packing-2026
+    superseded_by: rehwaldt-couzo-refinements-2026-10-07
     reason: Larger than Francisco Couzo's side at this count; the case record states both sources'
       dates and values.
   - n: 105
     source_id: unitsquare-release1
     value: '10.807847913867976'
-    superseded_by: franciscouzo-square-packing-2026
+    superseded_by: rehwaldt-couzo-refinements-2026-10-07
     reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side.
   - n: 106
     source_id: casson-square-packing-2026
@@ -3235,7 +3286,7 @@ superseded_reports:
   - n: 292
     source_id: casson-square-packing-2026
     value: '17.60256849240573729'
-    superseded_by: franciscouzo-square-packing-2026
+    superseded_by: rehwaldt-couzo-refinements-2026-10-07
     reason: Larger than Francisco Couzo's side at this count; the case record states both sources'
       dates and values.
   - n: 293
@@ -3496,5 +3547,20 @@ superseded_reports:
     superseded_by: squish-second-update-2026-10-07
     reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
       finder credits and accepted evidence remain retained for their own bounds.
+  - n: 105
+    source_id: franciscouzo-square-packing-2026
+    value: '10.806077865540567'
+    superseded_by: rehwaldt-couzo-refinements-2026-10-07
+    reason: Retained historical ceiling; the selected exact rational report is smaller.
+  - n: 292
+    source_id: franciscouzo-square-packing-2026
+    value: '17.597249391199519'
+    superseded_by: rehwaldt-couzo-refinements-2026-10-07
+    reason: Retained historical ceiling; the selected exact rational report is smaller.
+  - n: 68
+    source_id: evand-square-packing-2026-10-05
+    value: '8.798795237218283902664668919394'
+    superseded_by: rehwaldt-n68-refinement-2026-10-07
+    reason: Retained historical ceiling; the selected exact rational report is smaller.
 beyond_horizon_claims: []
 pending_catalogue_intake: []

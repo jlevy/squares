@@ -48,6 +48,8 @@ from strif import atomic_output_file
 
 from devtools import build_composite_figure_data, render_composite_pdf
 from devtools import evand_exact_certificates as evand_certificates
+from devtools import refinement_house_links as refinement_houses
+from devtools import refinement_packets as refinements
 from devtools import squish_followup_packets as squish_followup
 from devtools import squish_second_update_house_links as squish_house
 from devtools import squish_second_update_packets as squish_second
@@ -785,14 +787,9 @@ def _source_plan(
             upstream_digest,
         )
     pictured = pictured_source_key(case)
-    for update in (squish_second, squish_followup):
-        if pictured == update.SOURCE_KEY:
-            if case.n not in update.NUMBERS or (update is squish_followup and case.n == 153):
-                raise ValueError(f"n={case.n}: {pictured} retains no new packing for this case")
-            path = update.fact_path(case.n)
-            if not path.is_file():
-                raise ValueError(f"n={case.n}: {pictured} retains no facts for this case")
-            return SourcePlan(PACKET_KIND, path, update.source_url(case.n), case.n, (case.n,))
+    modern = _modern_packet_plan(case, pictured)
+    if modern is not None:
+        return modern
     if pictured in SQUISH_SOURCE_KEYS:
         path = squish_packets.fact_path(case.n)
         if (
@@ -818,6 +815,30 @@ def _source_plan(
             case.n,
             (case.n,),
         )
+    return _catalogue_source_plan(case, catalogue)
+
+
+def _modern_packet_plan(case: FrontierCase, pictured: str) -> SourcePlan | None:
+    for source in refinements.SOURCES.values():
+        if pictured == source.key:
+            path = refinements.fact_path(source, case.n)
+            if not path.is_file():
+                raise ValueError(f"n={case.n}: refinement source facts are missing")
+            return SourcePlan(PACKET_KIND, path, source.url(case.n), case.n, (case.n,))
+    for update in (squish_second, squish_followup):
+        if pictured == update.SOURCE_KEY:
+            if case.n not in update.NUMBERS or (update is squish_followup and case.n == 153):
+                raise ValueError(f"n={case.n}: {pictured} retains no new packing for this case")
+            path = update.fact_path(case.n)
+            if not path.is_file():
+                raise ValueError(f"n={case.n}: {pictured} retains no facts for this case")
+            return SourcePlan(PACKET_KIND, path, update.source_url(case.n), case.n, (case.n,))
+    return None
+
+
+def _catalogue_source_plan(
+    case: FrontierCase, catalogue: dict[int, tuple[str, int, tuple[int, ...]]]
+) -> SourcePlan:
     if case.n not in catalogue:
         raise ValueError(f"n={case.n}: non-grid frontier value has no catalogue geometry")
     filename, source_n, listed_n = catalogue[case.n]
@@ -944,8 +965,14 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
             )
             continue
         if plan.kind == PACKET_KIND:
+            refinement = _refinement_source(n, plan.path)
             layer = _squish_layer(n, plan.path)
-            if layer is not None:
+            if refinement is not None:
+                attribution = (
+                    f"Seth Rehwaldt after Francisco Couzo, {plan.url} at {refinement.revision}"
+                )
+                retrieved = "2026-10-08"
+            elif layer is not None:
                 author = squish_packets.AUTHOR
                 revision = (
                     "issuecomment-6031977107"
@@ -1044,6 +1071,13 @@ def _squish_layer(n: int, path: Path) -> Any | None:
     return None
 
 
+def _refinement_source(n: int, path: Path) -> refinements.Source | None:
+    for source in refinements.SOURCES.values():
+        if n in source.numbers and path == refinements.fact_path(source, n):
+            return source
+    return None
+
+
 def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
     frontier_path = _relative(case.path)
     if plan.kind == "exact-grid":
@@ -1066,6 +1100,9 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
                 revision_sha256=_retained_revision(retained, "revision_sha256"),
             )
         if plan.kind == PACKET_KIND:
+            refinement = _refinement_source(case.n, plan.path)
+            if refinement is not None:
+                return _refinement_derived_witness(case, refinement)
             if _squish_layer(case.n, plan.path) is not None:
                 return _squish_derived_witness(case, plan)
             retained = load_witness(plan.path, fallback_schema=WITNESS_SCHEMA)
@@ -1090,6 +1127,32 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
         )
     except (ValueError, TypeError) as error:
         raise ValueError(f"n={case.n} from {_relative(plan.path)}: {error}") from error
+
+
+def _refinement_derived_witness(case: FrontierCase, source: refinements.Source) -> dict:
+    facts = refinements.read_fact(source, case.n)
+    if Fraction(case.side) != Fraction(facts["side"]):
+        raise ValueError("refinement exact side differs from its current case")
+    witness = refinements.to_witness(source, case.n)
+    witness["id"] = f"W-known-best-n{case.n:03d}"
+    result, report = exact_verify(witness)
+    if not report.valid or result["verification_passed"] is not True:
+        raise ValueError("refinement drawing failed complete exact feasibility")
+    witness["claim"]["coordinate_provenance"] = "verified"
+    witness["claim"]["limitations"] = (
+        "Exact rational corners from the retained centered source, checked "
+        "with exact predicates at the full rational side. Drawing feasibility "
+        "does not assign the imported result's confirmation rung. No optimality, "
+        "rigidity or human oversight claim."
+    )
+    witness["certificate"] = {
+        "kind": "exact-rational-sat",
+        "replay": (
+            f"uv run --frozen packing-witness verify witnesses/known-best/n-{case.n:03d}.yaml"
+        ),
+        "result": result,
+    }
+    return witness
 
 
 def _squish_derived_witness(case: FrontierCase, plan: SourcePlan) -> dict:
@@ -2272,6 +2335,7 @@ def _manifest_entry(built: BuiltCase) -> dict:
             "exact rational half-angle conversion of retained source facts, checked "
             "with exact predicates"
             if _squish_layer(n, plan.path) is not None
+            or _refinement_source(n, plan.path) is not None
             else "deterministic reuse of a source packet's retained Witness/v2 facts"
         )
     elif n == plan.source_n:
@@ -2515,6 +2579,7 @@ def update(workers: int = 1) -> None:
     that rewrote them was eight binaries and several megabytes a commit.
     """
     squish_house.guard_house_outputs(list(CORPUS.numbers))
+    refinement_houses.guard_house_outputs(list(CORPUS.numbers))
     # The figure record decides every claim a drawing states, so refresh it first and
     # drop the memo, or the comparison below would read a stale one.
     build_composite_figure_data.update()
@@ -2544,6 +2609,7 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
     producer; all other manifest entries and geometry files are preserved.
     """
     squish_house.guard_house_outputs(list(numbers))
+    refinement_houses.guard_house_outputs(list(numbers))
     selected = set(numbers)
     if not selected or len(selected) != len(numbers) or not selected <= set(CORPUS.numbers):
         raise ValueError("selected atlas refresh requires unique corpus counts")
@@ -2760,6 +2826,7 @@ def _retained_problems() -> tuple[list[str], list[dict] | None]:
     as whatever the next reader of it raises.
     """
     squish_house.check_houses()
+    refinement_houses.check_houses()
     if not MANIFEST.is_file():
         return [f"missing {_relative(MANIFEST)}"], None
     retained = MANIFEST.read_text(encoding="utf-8")

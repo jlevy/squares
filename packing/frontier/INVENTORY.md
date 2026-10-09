@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **443** evidence records. **285** are formal; **278** of those were established here.
-- **150** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **447** evidence records. **287** are formal; **280** of those were established here.
+- **152** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **41** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -291,9 +291,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-n011-trump-local-theorem-first-clause` | 0 | derived-structure | verified | whatever its theorem states | here | - | *not assessed* | independent | `V-review-trump-local-theorem` |
 | `E-n011-trump-isolation-radius` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* | producer’s code | `V-trump11-isolation-radius` |
 | `E-wand125-n068-derived-lower` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | *not assessed* | producer’s code | `V-wand125-check-with-sqpack`, `V-sqpack-fractional-exact` |
-| `E-franciscouzo-2026-09-27-report` | 2 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
-| `E-franciscouzo-2026-09-27-exact-replay` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-upper-bound-promotion`, `V-check-rational-witness-independent` |
-| `E-franciscouzo-2026-09-27-interval-replay` | 2 | upper-bound | verified | strict inequalities only | here | - | previously-published | independent | `V-upper-bound-intervals` |
+| `E-franciscouzo-2026-09-27-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
+| `E-franciscouzo-2026-09-27-exact-replay` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-upper-bound-promotion`, `V-check-rational-witness-independent` |
+| `E-franciscouzo-2026-09-27-interval-replay` | 0 | upper-bound | verified | strict inequalities only | here | - | previously-published | independent | `V-upper-bound-intervals` |
 | `E-franciscouzo-2026-10-03-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
 | `E-franciscouzo-2026-10-03-exact-replay` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-upper-bound-promotion`, `V-check-rational-witness-independent` |
 | `E-franciscouzo-2026-10-03-interval-replay` | 0 | upper-bound | verified | strict inequalities only | here | - | previously-published | independent | `V-upper-bound-intervals` |
@@ -427,9 +427,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-n094-wand125-mixed-992-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | `V-sqverify-fast` |
 | `E-n095-wand125-mixed-996-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | `V-sqverify-fast` |
 | `E-n096-wand125-mixed-997-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | `V-sqverify-fast` |
-| `E-evand-exact-optima-2026-10-05-report` | 32 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py` |
-| `E-evand-exact-optima-2026-10-05-exact-replay` | 32 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-exact-certificates` |
-| `E-evand-exact-optima-2026-10-05-source-replay` | 32 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py`, `V-evand-exact-certificates` |
+| `E-evand-exact-optima-2026-10-05-report` | 31 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py` |
+| `E-evand-exact-optima-2026-10-05-exact-replay` | 31 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-exact-certificates` |
+| `E-evand-exact-optima-2026-10-05-source-replay` | 31 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py`, `V-evand-exact-certificates` |
 | `E-evand-exact-ceilings-2026-10-05-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py` |
 | `E-evand-exact-ceilings-2026-10-05-exact-replay` | 71 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-exact-certificates` |
 | `E-evand-exact-ceilings-2026-10-05-source-replay` | 71 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py`, `V-evand-exact-certificates` |
@@ -466,13 +466,17 @@ results, it is a statement about what this repository has itself examined.
 | `E-squish-update-2026-10-07-exact-replay` | 10 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-squish-followup-packets` |
 | `E-squish-second-update-2026-10-07-report` | 9 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 | `E-squish-second-update-2026-10-07-exact-replay` | 9 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-squish-second-update-confirmation` |
+| `E-rehwaldt-couzo-refinements-2026-10-07-report` | 2 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
+| `E-rehwaldt-n68-refinement-2026-10-07-report` | 1 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
+| `E-rehwaldt-couzo-refinements-2026-10-07-exact-replay` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-refinement-custody` |
+| `E-rehwaldt-n68-refinement-2026-10-07-exact-replay` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | producer’s code | `V-rehwaldt-n68-verify`, `V-rehwaldt-n68-independent-support-check`, `V-refinement-custody` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 154, verified 285
-- **method**: exact-algebraic 107, interval-certified 162, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 154
-- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 384
-- **relationship to the producer's code**: generator 5, independent-implementation 159, not-applicable 20, same-implementation 236, shared-components 17, unknown-historical 6
+- **assurance**: numerically-checked 4, reported 156, verified 287
+- **method**: exact-algebraic 109, interval-certified 162, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 156
+- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 388
+- **relationship to the producer's code**: generator 5, independent-implementation 160, not-applicable 20, same-implementation 239, shared-components 17, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

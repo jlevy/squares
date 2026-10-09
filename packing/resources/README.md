@@ -811,6 +811,19 @@ technical report and PMC item are publicly posted.
 Retained for private research use.
 Consult the original publisher before redistributing.
 
+## Rational certificate refinements, 7 October 2026
+
+- **[Rehwaldt Couzo refinements 2026-10-07]**: Seth Rehwaldt after Couzo and earlier
+  contributors, with OpenAI Codex assistance.
+  Finite rational ceilings from issue 425, pinned at
+  `bc389ddf7d65277cd19a9b08fb285d86346d6806`;
+  [packet](web/rehwaldt-couzo-refinements-2026-10-07/README.md).
+- **[Rehwaldt n68 refinement 2026-10-07]**: Seth Rehwaldt after Couzo and earlier
+  contributors, with OpenAI Codex assistance.
+  Finite rational ceilings from issue 428, pinned at
+  `fded686668e29258dad2eb29d0482fa3fd51bd6b`;
+  [packet](web/rehwaldt-n68-refinement-2026-10-07/README.md).
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

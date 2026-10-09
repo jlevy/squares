@@ -1397,6 +1397,8 @@ jobs:
             /packing/resources/web/squish-401-2026-10-07/
             /packing/resources/web/squish-401-update-2026-10-07/
             /packing/resources/web/squish-422-second-update-2026-10-07/
+            /packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/
+            /packing/resources/web/rehwaldt-n68-refinement-2026-10-07/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg
