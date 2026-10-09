@@ -5,7 +5,7 @@ title: Publish the exact-side collection as a web-only report
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex@spud10.local
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T08:43:03.009Z
-updated_at: 2026-10-09T14:38:39.169Z
+updated_at: 2026-10-09T16:43:56.044Z
 started_at: 2026-10-09T08:43:05.688Z
 ---
 Publish the exact-side collection as a clean HTML report on the Papers page. The user explicitly retired PDF packaging for this large catalogue. Preserve all 324 current entries, 175 historical records, 321 current exact polynomials, 519 coefficient vectors and 6273 coefficient strings, including all 673 n83 coefficients and source/geometry/proof distinctions. Keep the responsive searchable catalogue and full HTML report plus Markdown and coefficient downloads. Remove exact-report PDF generation, links, producer/assembly/preview and publication checker requirements. Validate desktop/mobile light/dark readability, full content reconstruction and no-JavaScript full report. Sync formal stack447 to current upstream and capture actual-head evidence on PR403/435 and beads. Do not merge PRs or change mathematical admission. Retain dated PDF failures/costs as history; no new print experiments or PDF builds.
@@ -130,3 +130,9 @@ Parent automatic run 37939031866 attempt 1 genuinely failed released CLS 0.13427
 Exactly one purposeful failed-job recurrence check at unchanged parent c1d3 was requested after same-head full and original local font controls passed. Run 37939031866 attempt 2 completed SUCCESS; direct gh run watch --exit-status returned 0. No repeated rerun, source change or additional full dispatch occurred. The earlier attempt 1 failure remains valid historical evidence, and the complete startup excess remains unattributed. Current parent/child automatic Packing, Pages and mergeability checks and both full workflows passed; canceled duplicate child runs retain their canceled status. Final actual recurrence job/phase receipts and exact published PR body readbacks are retained under the existing recovery evidence directory.
 
 Mathematical inventory remains 324 current cases / 321 exact identities / numeric n=29,55,71 and 175 historical records; 77 proved cases unchanged. Source-root geometry/field-to-side/Lean obligations (#419 / think-8sm2), new-pose ideal-contact work and quarantined legacy claims remain open. W7 think-s6np remains OPEN/unclaimed: two native inputs are retained; the contact-system exporter and its roundtrip/refusal controls are planned, then the independent contact-derived n11 octic control, then one bounded n102 attempt. No new solver/search, polynomial, geometry, Lean or bound result is claimed by this stabilization. Keep these feature beads in progress until the corresponding work merges.
+
+Publication trim authorized — 2026-10-09T16:43:55.647452+00:00
+
+User requested: "Let's drop the excessive superseded ones then" and "Do amend commits so you don't create excessively large files as well". Work remains on PR435 / codex/exact-polynomial-coverage at d0d951a40aa8ae85800d9641c96680cdef0f53ad, with unchanged parent c1d3aab9eef04683ea262c9c79ef7d739af2dc50 and freshly fetched main6a0499ba4ed83e147488b2ee584af500207d9d1f. Existing top commit will be amended with normal hooks and leased official-stack publication; no new huge generated file in Git.
+
+Planned publication-only projection omits exactly 161 historical rows kind=superseded and 19 current superseded-catalogue-polynomial notes from HTML/Markdown and lazy index/metadata/coefficient outputs. Canonical source register remains byte-identical, retaining499source records/175history. All324current records/321exact polynomials and14other source rows (7outside,3invalid,4unreconciled V0C0) remain with coefficients, attribution and statuses. Independent reconstruction will verify the intentional subset without calling exporter selection. Prior d0qualification remains dated; actual new-head size, rendering and hosted gates are pending. Limits stay unchanged. Root owns Git/beads/integration; moderate owns projection/audit and scoped tests, strong readonly source-status review, fast PR/CI metadata. External volume1.3GiB: disk-heavy local fixtures paused, small report builds only.
