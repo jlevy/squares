@@ -5,7 +5,7 @@ title: Integrate current main imports and requalify atlas cleanup PR 474
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -18,11 +18,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T19:28:29.900Z
-updated_at: 2026-10-09T21:44:37.234Z
+updated_at: 2026-10-09T22:24:07.271Z
 started_at: 2026-10-09T19:28:49.355Z
 ---
 Origin/main advanced from 6a0499ba4 to d3860c97a with imported scientific records and producer changes; PR474 is conflicting. Preserve all current main scientific imports while retaining reviewed cleanup behavior, refresh curated credit source snapshots against merged records, regenerate release exports and site, run appropriate gates, update PR context and independent review. No GitHub merge authorized. Root owns commits, local merge, canonical generation, PR mutation.
 
 ## Notes
 
-Resumed source: fb425 approved main d386 integration;6365 dedicated repren Ahmed attribution migration;eec8 centered web controls and exact algebraic scale projection;dadf font preload dedup;b2e357 measured print wrapping, geometry and cold-cache fixtures;d8f4 release pin;ca01 eight canonical exports;b4b127c54 final web-only colors/contact legend and homepage591478/600000. Both PDFs regenerated, visually inspected, opened in Preview and revealed in Finder; canonical composite check passed. Manual localhost8799 preview stays running; automated browser navigation remains blocked. Senior source review finds no Blocker/High/Medium; E1/E2 fixed; Low E3 Playwright fixture lifetime repair under think-o3n2. Broader ca01 push attempt exited120 without recoverable verdict, retained honestly as failure. Instrumented b4 push sinceca01 is running:62edit checks passed,3consistency failures under think-u1pe (Ruff punctuation, generated URL register, T007 audit); reachable tests in flight. Final bounded repair, clean push, same-head fast/deferred immutable-tree CI, formal current reviews and PR publication remain pending. Protected follow-ups stay open. No GitHub merge authorized.
+Resumed at51e8d39d1: currentmain d386 integration preserved, dedicated6365 repren Ahmed credit migration, measured balanced print layouts/all8canonicalexports pinnedb2e357, black printable annotations and current date. Website centeredSmallTriangle default with Fixed/Row/Global, grayRow grid reference, compactcomplete rightalignedrows; latestlegend onlyangles+contacts; preview591478/600000 and PDFs unchanged. CanonicalPDFchecks/renderinspection/openPreview/Finder complete; manual8799server running, automatedbrowsernavigation blocked. SeniorE sourcecoverage162paths complete, E1/E2/E3 fixed; formalpublication pending. Final51e8 edit65pass; reachablephase901.6s timeout after4227pass32skip11fail no completeverdict. Three moderate agents isolate actual failures in privateclones underu1pe; rootsolecommitter. Priorca01 exit120,b4 3consistencyfails+timeout,575 cancellation afterformatfailure retainedhonestly. Stillpending supportedtestrepairs/requiredpush,currenthead formalreviews,fast+actualdeferred immutabletreeCI,PRpublication and closeout. Protectedfollowups stayopen. NoGitHubmergeauthorized.
