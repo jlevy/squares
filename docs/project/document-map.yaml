@@ -10,6 +10,7 @@ scope: >
   current project documentation rules.
 documents:
   - {path: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-08-n17-merge-readiness.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-315-shared-centre-endpoint/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/README.md, role: session-record, authority: record, lifecycle: retained}
