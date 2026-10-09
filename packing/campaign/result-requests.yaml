@@ -3222,3 +3222,23 @@ issues:
     close_when: The existing owner decides closure after the maintained lifetime repair is published
       and the dated bounded resource scope remains explicit.
     read_through: '2026-10-08T17:34:07Z'
+  - number: 465
+    title: 'New packings: s(132) ≤ 11.98709933224506, s(155) ≤ 12.95249894401401'
+    author: evand
+    opened: '2026-10-09'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: Evan Daniel reports rational certificates at n=132 and n=155 below the register's current
+      bounds, in evand/square-packing at e008180 (search/packer/candidates/hunt1_n132.cert and hunt1_n155.cert).
+      The author's verify_cert.py and verify_cert2.py passes and numerical local-optimality evidence
+      have not been replayed here; no optimality is claimed.
+    read_through: '2026-10-09T03:38:22Z'
+    results: []
+    beads:
+    - think-iyij
+    answer_bead: think-iyij
+    replies: []
+    close_when: The intake owner acquires immutable source custody at e008180, compares both claims
+      with the current records, records native import and supported verdicts, and posts the resulting
+      disposition from main.
