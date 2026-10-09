@@ -5,7 +5,7 @@ title: "n17 stack A1: qualify current heads with required CI and full checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -15,10 +15,10 @@ parent_id: is-01m4eq9mdaejkedd1b09qqn09p
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:52:29.377Z
-updated_at: 2026-10-09T05:49:25.946Z
+updated_at: 2026-10-09T06:28:36.955Z
 started_at: 2026-10-08T22:00:55.817Z
 ---
-A1 remains open until the research PRs #404/#454/#461/#464 have fresh current-source required CI and complete checkpoints. A bounded dependency-aware worker-copy repair has passed independent Astra static review and sixteen actual-worker controls: omit five operational explainer-comparison payloads that no registered worker consumer reads, preserve scientific inputs and all ceilings, and retain the 192 MiB cap. The broader push gate is still being diagnosed before commit/publication; propagation and new hosted qualification remain pending. The older 224 MiB proposal remains unapplied and is not the selected remedy. Supporting #452/#453 already pass required and source-qualified full checkpoints. Preserve historical evidence in the notes; no unchanged cap-refused reruns or bound claim.
+A1 remains open for propagation of the published dependency-aware worker-copy repair through #454/#461 and standalone #464, final pinned follow-up review and clean complete research checkpoints. Root #404 at 1af586ef43446655dfe0401902a096042526dd0a now passes Packing37891105634, Pages37891105643 and mergeability37891099687. The unchanged192 MiB cap and scientific inputs are preserved; actual worker counts199926018 bytes. Broad local push remains failed/interrupted and unqualified, with scoped unchanged-deadline recovery recorded. Older224 MiB proposal is unapplied and not the selected remedy. User transfers finish/closeout to another agent. No new full run dispatched or bound claim. Supporting452/453 complete checkpoints remain qualified. Handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
 
 ## Notes
 
@@ -56,3 +56,16 @@ October 9, 05:07-05:11 UTC: supporting full-checkpoint qualification is complete
 - Independent Sol final audit checked raw resolve-tree and aggregate logs: immutable checkout heads are exactly the PR heads, gate identities use blank PR input, and both merge parents contain main3213d651b880d7768bce8506efaf75c2089aeb4f. Current remote main remains3213. Earlier stale f0 runs receive no current credit. Advisory timing notes do not change qualification or ceilings; existing Windows/adoption/large-certificate limitations remain.
 - Supporting PR descriptions and tracker405 comment6074493493 now record the full passes. No CI rerun, build, source edit, draft promotion or merge occurred. The bounded watcher will pause after verified final publication and this sync.
 - Research PRs #404/#454/#461/#464 remain held on the known192MiB source-copy assertions and fresh complete checkpoint. The prepared224MiB patch is still unapplied pending the direct human resource decision. A1, think-0m0x and think-foe5 remain open. Scientific results and the bound are unchanged.
+
+October 9 final handoff: the human requests all work captured in PRs, then transfers completion to another agent.
+
+Complete durable handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
+Final tracker update: https://github.com/jlevy/squares/issues/405#issuecomment-6075579576
+
+Repair #404 is pushed at 1af586ef43446655dfe0401902a096042526dd0a. Automatic Packing 37891105634, Pages 37891105643 and mergeability 37891099687 pass at the unchanged head. Exactly three files change; the 192 MiB cap and scientific records remain. Four boundary checks and sixteen actual-worker controls pass; the actual copy counts 199,926,018 bytes. The broad local push remains failed/interrupted and unqualified: 923.68 seconds, 64 edit/type checks passed, 2,812 tests passed, 32 skipped and six deadline failures under I/O contention. Serial progress controls (seven passed in 2.07 seconds), cache-copy recovery (47.16 seconds) and earlier native positives are scoped receipts, not a composed full push pass.
+
+The repair is not propagated to #454/#461 or applied to #464. Final pinned follow-up review and clean complete research checkpoints remain open. No new full run was dispatched. Supporting #452/#453 remain fully qualified against current main. Peer #402 A/B and #408 A/B are published and verified with no findings; #409 review and #450 current inherited review coverage remain open. Catalogue #403 I and #435 E (including E6) are published and verified at 90266/1666. C1 High, integration findings, loading-budget qualification and prime-hint mathematical assessment remain. Owner parent 910a7a4f is unpublished; do not overwrite active owner work.
+
+All subagents stopped; the old CI heartbeat remains paused. No merge, promotion, new proof result, admission, T item or bound movement. Preserve source custody and the held merge index. Durable local receipts: attic/n17-consolidation-20261008/snapshot-repair-receipts (381 files, 6,816,471 bytes copied byte-for-byte outside disposable scratch). Leave this bead open for the next agent to finish and close out.
+
+Final source correction: #450 moved to 8021291759d86eb53a146f3240046a84604fef3c during handoff. Its new Packing 37892077580, Pages 37892077553 and mergeability 37891957540 pass. Latest review G still binds older 4585b8d; fresh current inherited-layer coverage remains open. Public handoff/comment/tracker updated rather than crediting old-head CI.
