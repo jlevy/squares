@@ -1,0 +1,99 @@
+entity_id: is-01m4fdxw81pt2v4k29y9n58rn6
+timestamp: 2026-10-09T10:51:42.718Z
+field: notes
+lost_value: "\"2026-10-09 cloud coordinator: main 3213 integrated through #466 and
+  pushed. Lanes running: think-x47r timing #442, think-cmjh CLS + #468 merge, think-xv8j
+  T-129/survey URLs #459-#463, think-qtdo #466 integrity/records wall, think-88r0 five
+  Couzo follow-ups on new branch codex/import-couzo-followup-five-2d32a6e. Owner asked
+  (in session) for everything fully reviewed, clean and ready to merge, and PR
+  descriptions organized as a gh stack with a titled clean top-of-stack description.
+  gh-stack binary could not be installed (release API blocked, running downloaded binary
+  denied); stack membership managed via REST POST /repos/jlevy/squares/stacks/430/add.
+  Merge requires owner confirmation (confirm-session).\\n\\nOwner asked (in session) to
+  make all stack PRs ready to merge, fix CI and take them out of draft: all ten
+  (#442-#468) marked ready via ccr/ready_for_review. Propagated #442 timing fix to every
+  layer (#449 conflict in test_overview.py resolved keeping #449's indirect shared_html
+  fixture; 4 affected tests pass, ruff clean): #443 191f2f3ba, #448 ee593f5dc, #449
+  73569a6e6, #450 ad11c35b0, #459 834b17090, #460 e017f455a, #463 8b8b6804d, #466
+  b5d689653, #468 c6bab8b25. Full checkpoint dispatch is impossible from this session:
+  POST .../packing-validation.yml/dispatches returns 403 Resource not accessible by
+  integration (gh and GitHub MCP). Full Packing validation runs only on
+  workflow_dispatch, schedule and push to main; the deep-gate label runs the deferred
+  surface on PRs.\\n\\nOwner in session: 'Once everything is clean and ready to merge,
+  you can merge the whole stack.' (github-merge confirm-session confirmation for stack
+  430, all layers). Owner asked to use proper gh stack methods and read GitHub's
+  PR-stack instructions: read gh-stack v0.1.0 skills/gh-stack/SKILL.md and docs
+  (stacked-prs guide, overview merging, merge-api, rest-api, FAQ). gh stack v0.1.0
+  installed (sha256 358552dd… verified) but its PR lookups and merge config use GraphQL,
+  which this session blocks (gh stack link 430 468 -> 403 GraphQL). Using the documented
+  REST equivalents it wraps: POST /stacks/430/add (link), GET /stacks?pull_request=N
+  (membership), PUT /pulls/{top}/merge-async + poll (merge; merge_method merge, sha
+  pinned). Stack must be linear (each branch contains parent head) before merge; new PRs
+  append only on top of #468's head ref. Propagation stays normal merges per owner's
+  first instruction (no rebase/force-push).\\n\\n2026-10-09: tbd update --notes replaces
+  notes; notes of think-zjlo, think-88r0, think-1545 and think-ili1 overwritten earlier
+  this session were restored from the tbd-sync history (all versions concatenated).
+  Appends now go through scratchpad/addnote.sh.\\n\\nFinal propagation (integrator)
+  2026-10-09: stack linear #442 04767870f -> #443 15a26c096 -> #448 ffed5ac8c
+  (build_known_best_atlas retention dict kept evand+ryxu+gupta) -> #449 1a2781e4f
+  (test_overview took #448's) -> #450 802129175 -> #459 8c75da0a1 -> #460 746010014 ->
+  #463 7126067d1 (merge, T-129 states sides b9431a8e0, re-pin) -> #466 2062dee0f (merge,
+  re-pin) -> #468 6c4e177a4. All mergeable; PR runs created on every head after
+  linearity (unknown mergeability earlier coincided with non-linear stack). Local
+  Playwright expects chromium_headless_shell-1234, absent here; browser tests skip
+  locally.\\n\\nOwner in session (2026-10-09): 'Follow up on everything, and I'd like
+  you to autonomously make sure you merge everything once it's ready' -> autonomous
+  merge of stack 430 once the merge gate passes (all layers green at final heads,
+  reviews published with dispositions, descriptions updated, stack linear). Status at
+  this point: all 11 PRs in stack 430 and ready-for-review; #442-#468 linear, #469
+  pending integrator round; #459 typography job failed a timing self-test control
+  (check_math_startup 'delayed control did not record the known 300 ms delay', job
+  113716869137) in code the stack does not touch; job re-run returns 403 like dispatch.
+  main unchanged at 3213d651b.\\n\\nIntegrator rounds 2-3: stack linear main -> #442
+  38c3ca4f8 -> #443 16a7785fa -> #448 72ad8bd5f -> #449 9e66a1181 -> #450 ad679213d ->
+  #459 e4579d7cc -> #460 73a594a36 -> #463 0ef92f124 -> #466 1e75d6e46 -> #468 3a2ab4ff0
+  -> #469 5b5df8db0. T-121..T-123 left the expected superseded set at #463+. deep-gate
+  label added to #469 (top tree = whole stack) since full Packing dispatch is impossible
+  from this session.\\n\\nReviews published at final heads (formal COMMENT reviews
+  pinned to head): #442 O r6 approve (+dispositions), #443 H, #448 L, #449 H, #450 H,
+  #459 H (CI red), #460 H approve (+dispositions), #463 G, #466 A approve-with-nits
+  (+disp), #468 A (+disp), #469 A with stack-level assessment (+disp). New Lows: #466 A5
+  and #468 A4 stale bodies, #469 A12 stale cost figure (fixed by description pass), #469
+  A11 #465 ledger entry layer (declined: avoids full propagation for a layer-independent
+  record). Coverage gap: #466/#468 original content had no published review ->
+  full-content reviews (senior+correctness+security) commissioned. Deep gate on #469
+  merge ref passed (run 37899478949, 12 jobs). #459 Pages red: check_math_startup
+  self-test cold-start flake (think-ewad); re-run not possible from session
+  (403).\\n\\nmain moved to e0b02b3ab (#452, #453 n17 fixes; no DATA_PATHS change).
+  Integrated into #442 (bfbc53d86, validate.py auto-merged; 173 targeted tests pass) and
+  carried to #463 with the flake fix (#443 d6680a77f ... #463 9944aac1f);
+  test_site_result_filters auto-merged at #460, 88 tests pass. #466/#468/#469 to follow
+  after #466 review-B fixes.\\n\\nFinal round: #466 6fb0f2e29 (review B: B1 4c07376b5,
+  B2 8d1ab3d9f+44d6b1883, B3/B4 92b03f431, B6 rename ca85b22ae, re-pin 6fb0f2e29; B5 ->
+  think-5y83) merged with #463 -> 0fefda864; #468 374e63b92 (review B fixes) + #466 ->
+  9a18b9d75; #469 + #468 -> 32d6bed98 (pin conflict kept child; link to renamed packet
+  fixed) + re-pin 9e3304043. Stack linear from main e0b02b3ab to #469. Final heads: #442
+  bfbc53d86, #443 d6680a77f, #448 0878f9e18, #449 2068a658e, #450 20897456c, #459
+  a3f4df49f, #460 67180d3d8, #463 9944aac1f, #466 0fefda864, #468 9a18b9d75, #469
+  9e3304043.\\n\\n#469 77f1595a4: suite_files admit-local of 21 new quick modules (raw
+  reports devtools/suite-file-cost-admissions/intake-stack-430-2026-10-09-run1..3.json);
+  check 43 -> 22 unrecorded (9 lane-ignored site tests, 9 all-slow, 4 mixed quick/slow
+  left for a hosted record rebuild). main moved again to 533dd42c6 (n17 stack
+  #404/#454/#461; 914 files, no DATA_PATHS change); #442 trial conflicts SYNOPSIS.md,
+  document-map.yaml, integrity-ceremony.yaml, test_module_boundaries.py; integrator
+  round started with snapshot-cap check at the top. #469 PR runs did not start at
+  77f1595a4 (mergeable unknown).\\n\\n\\n\\n2026-10-09T10:14Z FYI from claude-code@vm
+  n17 consolidation (not taking over): main moved 10:13 UTC to bead35d93 (#452, #453,
+  stack 455 #404/#454/#461, #464, #409, #408). #442 now conflicts with main only in
+  SYNOPSIS.md and docs/project/document-map.yaml (prepend-ordered registry rows);
+  run_negative_controls.py and test_negative_controls.py auto-merge, but #464 added
+  UNREAD_WORKER_OUTPUTS to PRUNE and main's snapshot is ~200.30 MB (≈1.0 MB under the
+  192 MiB cap) — re-measure after integrating. Your stack's heads were measured smaller
+  than their merge base, so no cap breach expected.\""
+winner_source: local
+loser_source: remote
+context:
+  local_version: 36
+  remote_version: 36
+  local_updated_at: 2026-10-09T10:51:38.742Z
+  remote_updated_at: 2026-10-09T10:14:48.018Z
