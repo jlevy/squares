@@ -384,7 +384,7 @@ body {
   }
   /* A section set in lines of its own (`SECTION_CARD_LINES`) sets no more cards to a
      line than its longest line holds, so its lines share one column width: the page
-     cards stand one, three and two, at the width of three to a line, the three papers
+     cards stand one, three and three, at the width of three to a line, the three papers
      of the n = 11 series on the line of three. */
   .site-cards[data-cards-most="3"] > .site-card {
     --site-cards-line: min(var(--site-cards-medium), 3);
