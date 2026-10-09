@@ -49,7 +49,7 @@
     },
     {
       "match": "search/packer/PACKER.md",
-      "reason": "The packer's working log (93 KB); the README quotes its hunt1 entries for 132 and 155."
+      "reason": "The packer's working log (93 KB), which holds the hunt1 entries for 132 and 155; pinned for provenance."
     }
   ]
 }

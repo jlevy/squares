@@ -31,9 +31,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import subprocess
-import sys
-from concurrent.futures import ThreadPoolExecutor
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
@@ -47,6 +44,7 @@ from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools import squish_followup_packets as squish
 
+MODULE = "devtools.evand_hunt_reports"
 ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parent
 PACKET = ROOT / "resources/web/evand-record-hunt-2026-10-09"
@@ -95,16 +93,6 @@ MAX_SOURCE_BYTES = 1_000_000
 
 class ReportError(kernel.ReportError):
     """Refuse incomplete custody, a changed claim or an incomplete receipt."""
-
-
-def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    """A JSON object with no repeated key."""
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise ReportError("duplicate JSON key")
-        result[key] = value
-    return result
 
 
 def ensure_private(path: Path) -> None:
@@ -172,6 +160,29 @@ def pose_comparison(first: legacy.Certificate, second: legacy.Certificate) -> di
     }
 
 
+def zero_mode_squares(n: int) -> list[int]:
+    """The squares the source's report for ``n`` lists as free or as moving on a flat motion.
+
+    Read from the retained ``hunt1_n<n>.json``: ``free_squares`` and
+    ``second_order.flat_squares``, both zero-based indices into the certificate.
+    """
+    path = PACKET / "source" / certificate_path(n).replace(".cert", ".json")
+    ensure_private(path)
+    with path.open("rb") as stream:
+        raw = stream.read(MAX_SOURCE_BYTES + 1)
+    if len(raw) > MAX_SOURCE_BYTES:
+        raise ReportError(f"n={n}: solver report exceeds its byte ceiling")
+    report = json.loads(raw, object_pairs_hook=kernel.unique_object)
+    second = report.get("second_order") if type(report) is dict else None
+    squares = [report.get("free_squares"), second.get("flat_squares")] if second else []
+    if len(squares) != 2 or any(
+        type(group) is not list or any(type(i) is not int or not 0 <= i < n for i in group)
+        for group in squares
+    ):
+        raise ReportError(f"n={n}: solver report lacks its free and flat squares")
+    return sorted({i for group in squares for i in group})
+
+
 def compare(certificates: dict[int, legacy.Certificate] | None = None) -> dict[str, Any]:
     """The frozen claim record, rebuilt from the certificates and the retained houses."""
     certificates = read_facts() if certificates is None else certificates
@@ -198,10 +209,14 @@ def compare(certificates: dict[int, legacy.Certificate] | None = None) -> dict[s
             other = couzo451.read_facts()[n]
             if other.side != side:
                 raise ReportError(f"n={n}: T-128's side no longer equals this certificate's")
+            poses = pose_comparison(certificates[n], other)
+            zero_modes = zero_mode_squares(n)
             row["equal_side"] = {
                 **EQUAL_SIDE[n],
                 "exact_side": legacy.literal(other.side),
-                **pose_comparison(certificates[n], other),
+                **poses,
+                "source_zero_mode_squares": zero_modes,
+                "differing_are_zero_modes": poses["differing_here"] == zero_modes,
             }
         rows.append(row)
     return {
@@ -228,7 +243,7 @@ def write_claims() -> None:
 def check_claims(certificates: dict[int, legacy.Certificate] | None = None) -> dict[str, Any]:
     ensure_private(claims_path())
     stored = json.loads(
-        claims_path().read_text(encoding="utf-8"), object_pairs_hook=unique_object
+        claims_path().read_text(encoding="utf-8"), object_pairs_hook=kernel.unique_object
     )
     rebuilt = compare(certificates)
     if stored != rebuilt:
@@ -236,34 +251,8 @@ def check_claims(certificates: dict[int, legacy.Certificate] | None = None) -> d
     return rebuilt
 
 
-def validate_certification(value: Any, facts: dict[int, legacy.Certificate]) -> dict[int, Any]:
-    if (
-        type(value) is not dict
-        or set(value) != {"format", "routes", "cases"}
-        or value["format"] != RECEIPT_FORMAT
-        or value["routes"] != list(ROUTES)
-        or type(value["cases"]) is not list
-        or len(value["cases"]) != len(NUMBERS) * len(JOBS)
-        or list(facts) != list(NUMBERS)
-    ):
-        raise ReportError("incomplete six-job exact receipt envelope")
-    positives = {}
-    jobs = ((n, control) for n in NUMBERS for control in JOBS)
-    for (n, control), row in zip(jobs, value["cases"], strict=True):
-        kernel.validate_job(
-            row,
-            facts[n],
-            control,
-            witness_prefix=WITNESS_PREFIX,
-            claim_limitations=CLAIM_LIMITATIONS,
-        )
-        if control == "positive":
-            positives[n] = row
-    return positives
-
-
-def _stable(row: dict[str, Any]) -> dict[str, Any]:
-    return {k: v for k, v in row.items() if k not in {"cpu_seconds", "wall_seconds"}}
+#: The kernel profile this import's jobs and receipt are held to.
+PROFILE = {"witness_prefix": WITNESS_PREFIX, "claim_limitations": CLAIM_LIMITATIONS}
 
 
 def check_certification(
@@ -281,68 +270,14 @@ def check_certification(
     facts = read_facts()
     ensure_private(receipt_path())
     record = kernel.read_xz(receipt_path())
-    positives = validate_certification(record, facts)
+    positives = kernel.validate_receipt(record, facts, receipt_format=RECEIPT_FORMAT, **PROFILE)
     if replay:
-        jobs = ((n, control) for n in NUMBERS for control in JOBS)
-        for (n, control), row in zip(jobs, record["cases"], strict=True):
-            if n not in selected:
-                continue
-            fresh = kernel.run_case(
-                facts[n],
-                control,
-                witness_prefix=WITNESS_PREFIX,
-                claim_limitations=CLAIM_LIMITATIONS,
-            )
-            if _stable(fresh) != _stable(row):
-                raise ReportError(f"n={n} {control}: fresh replay differs from the receipt")
+        kernel.replay_receipt(record, facts, selected, **PROFILE)
     return positives
 
 
-def run_child(job: tuple[int, str], directory: Path, timeout: int) -> dict[str, Any]:
-    n, control = job
-    if type(n) is not int or n not in NUMBERS or control not in JOBS:
-        raise ReportError("job outside the complete certificate/control roster")
-    if type(timeout) is not int or not 1 <= timeout <= JOB_TIMEOUT:
-        raise ReportError("invalid bounded deadline")
-    path = directory / f"n{n}-{control}.json"
-    if path.exists():
-        raise ReportError("refusing to overwrite a deciding job")
-    command = [
-        sys.executable,
-        "-m",
-        "devtools.evand_hunt_reports",
-        "decide-job",
-        "--n",
-        str(n),
-        "--control",
-        control,
-        "--output",
-        str(path),
-    ]
-    try:
-        completed = subprocess.run(command, capture_output=True, timeout=timeout, check=False)
-    except subprocess.TimeoutExpired as error:
-        path.with_suffix(".stdout.log").write_bytes(error.stdout or b"")
-        path.with_suffix(".stderr.log").write_bytes(error.stderr or b"")
-        raise ReportError(f"native job {n}/{control} exceeded {timeout}s") from error
-    path.with_suffix(".stdout.log").write_bytes(completed.stdout)
-    path.with_suffix(".stderr.log").write_bytes(completed.stderr)
-    if completed.returncode:
-        raise ReportError(f"native job {n}/{control} exited {completed.returncode}")
-    with path.open("rb") as stream:
-        raw = stream.read(kernel.MAX_BYTES + 1)
-    if len(raw) > kernel.MAX_BYTES:
-        raise ReportError("native job exceeds the existing receipt ceiling")
-    try:
-        value = json.loads(raw, object_pairs_hook=unique_object)
-    except ValueError as error:
-        raise ReportError(f"native job {n}/{control} is not strict JSON") from error
-    if type(value) is not dict:
-        raise ReportError("complete native job object required")
-    return value
-
-
 def certify(directory: Path, *, workers: int = 2, timeout: int = JOB_TIMEOUT) -> None:
+    """Run all six jobs through the kernel's shared driver in a fresh directory."""
     if (
         type(workers) is not int
         or not 1 <= workers <= 2
@@ -355,16 +290,16 @@ def certify(directory: Path, *, workers: int = 2, timeout: int = JOB_TIMEOUT) ->
     if directory.exists():
         raise ReportError("native job directory must be a fresh attempt")
     directory.mkdir(parents=True)
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        cases = list(
-            pool.map(
-                lambda job: run_child(job, directory, timeout),
-                ((n, control) for n in NUMBERS for control in JOBS),
-            )
-        )
-    value = {"format": RECEIPT_FORMAT, "routes": list(ROUTES), "cases": cases}
-    validate_certification(value, facts)
-    kernel.save_xz(receipt_path(), value)
+    kernel.certify_receipt(
+        MODULE,
+        facts,
+        directory,
+        receipt_path(),
+        workers=workers,
+        timeout=timeout,
+        receipt_format=RECEIPT_FORMAT,
+        **PROFILE,
+    )
 
 
 def margins(positives: dict[int, Any]) -> dict[int, dict[str, str]]:
@@ -407,24 +342,7 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(margins(positives), indent=2))
         print(f"both certificates and all {len(NUMBERS) * len(JOBS)} full jobs admitted")
     else:
-        certificate = read_facts()[args.n]
-        row = kernel.run_case(
-            certificate,
-            args.control,
-            witness_prefix=WITNESS_PREFIX,
-            claim_limitations=CLAIM_LIMITATIONS,
-        )
-        kernel.validate_job(
-            row,
-            certificate,
-            args.control,
-            witness_prefix=WITNESS_PREFIX,
-            claim_limitations=CLAIM_LIMITATIONS,
-        )
-        if args.output.exists():
-            raise ReportError("refusing to overwrite an actual deciding job")
-        with atomic_output_file(args.output) as temporary:
-            temporary.write_text(json.dumps(row, separators=(",", ":"), allow_nan=False) + "\n")
+        kernel.decide_job(read_facts()[args.n], args.control, args.output, **PROFILE)
     return 0
 
 

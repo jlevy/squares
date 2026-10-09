@@ -52,7 +52,7 @@
           "path": "search/packer/PACKER.md",
           "bytes": 93441,
           "sha256": "077c9eb06a851e6fb088ae22a0b6dfb59ab43dbfc443e7e79fe26f97aaee34a7",
-          "reason": "The packer's working log (93 KB); the README quotes its hunt1 entries for 132 and 155."
+          "reason": "The packer's working log (93 KB), which holds the hunt1 entries for 132 and 155; pinned for provenance."
         }
       ],
       "license": "MIT, copyright 2026 Evan Daniel (LICENSE); attribution retained in CREDITS.md. The source discloses Claude assistance under Evan Daniel's direction.",

@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import shutil
+import subprocess
+from collections.abc import Callable
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -60,13 +62,25 @@ def test_claims_record_rebuilds_from_the_retained_houses() -> None:
     assert "equal_side" not in rows[132]
 
 
-def test_n155_side_is_t128s_and_three_poses_differ() -> None:
+def test_n155_is_t128s_minimum_modulo_its_zero_modes() -> None:
     row = {r["n"]: r for r in reports.check_claims()["results"]}[155]
     equal = row["equal_side"]
     assert equal["result"] == "T-128"
     assert equal["exact_side"] == row["exact_side"]
     assert equal["identical_poses"] == 152
     assert len(equal["differing_here"]) == len(equal["differing_there"]) == 3
+    # The free square and the two flat-motion squares of the source's report, exactly.
+    assert equal["differing_here"] == equal["source_zero_mode_squares"] == [83, 134, 138]
+    assert equal["differing_are_zero_modes"] is True
+
+
+def test_zero_mode_squares_refuse_a_report_without_them(private_packet: Path) -> None:
+    path = private_packet / "source" / reports.certificate_path(155).replace(".cert", ".json")
+    report = json.loads(path.read_text())
+    report["second_order"]["flat_squares"] = [155]
+    path.write_text(json.dumps(report))
+    with pytest.raises(reports.ReportError, match="free and flat squares"):
+        reports.zero_mode_squares(155)
 
 
 def test_receipt_admits_all_six_jobs_with_both_routes() -> None:
@@ -161,3 +175,62 @@ def test_certify_refuses_an_invalid_allocation_or_a_reused_directory(tmp_path: P
         reports.certify(tmp_path / "jobs", workers=3)
     with pytest.raises(reports.ReportError, match="fresh attempt"):
         reports.certify(tmp_path)
+
+
+def _fake_runner(
+    monkeypatch: pytest.MonkeyPatch, outcome: Callable[[list[str]], bytes | None]
+) -> list[list[str]]:
+    """Replace the kernel's child process; ``outcome`` writes the output or times out."""
+    commands: list[list[str]] = []
+
+    def run(command: list[str], **options: Any) -> subprocess.CompletedProcess[bytes]:
+        commands.append(command)
+        assert options["capture_output"] is True
+        payload = outcome(command)
+        if payload is None:
+            raise subprocess.TimeoutExpired(
+                command, options["timeout"], output=b"partial out", stderr=b"partial err"
+            )
+        Path(command[-1]).write_bytes(payload)
+        return subprocess.CompletedProcess(command, 0, b"native stdout", b"native stderr")
+
+    monkeypatch.setattr(kernel.subprocess, "run", run)
+    return commands
+
+
+@pytest.mark.usefixtures("private_packet")
+def test_driver_runs_this_module_and_keeps_a_timeout_failure_record(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    commands = _fake_runner(monkeypatch, lambda _command: None)
+    before = reports.receipt_path().read_bytes()
+    with pytest.raises(kernel.ReportError, match="exceeded 45s"):
+        reports.certify(tmp_path / "jobs", workers=1, timeout=45)
+    command = commands[0]
+    assert command[2] == reports.MODULE
+    assert command[command.index("--n") + 1] == "132"
+    assert command[command.index("--control") + 1] == "positive"
+    stem = tmp_path / "jobs" / "n132-positive"
+    assert stem.with_suffix(".stdout.log").read_bytes() == b"partial out"
+    assert stem.with_suffix(".stderr.log").read_bytes() == b"partial err"
+    failure = json.loads(stem.with_suffix(".failure.json").read_text())
+    assert failure == {
+        "n": 132,
+        "control": "positive",
+        "status": "timeout",
+        "timeout_seconds": 45,
+    }
+    assert reports.receipt_path().read_bytes() == before
+
+
+@pytest.mark.usefixtures("private_packet")
+@pytest.mark.parametrize("payload", [b'{"n":132,"n":155}', b"[]", b'{"n": 132}'])
+def test_driver_refuses_duplicate_keys_and_incomplete_rows(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, payload: bytes
+) -> None:
+    _fake_runner(monkeypatch, lambda _command: payload)
+    before = reports.receipt_path().read_bytes()
+    with pytest.raises(kernel.ReportError):
+        reports.certify(tmp_path / "jobs", workers=1, timeout=45)
+    assert (tmp_path / "jobs" / "n132-positive.stdout.log").read_bytes() == b"native stdout"
+    assert reports.receipt_path().read_bytes() == before

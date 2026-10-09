@@ -20,6 +20,7 @@ import re
 import subprocess
 import sys
 import time
+from collections.abc import Collection
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from fractions import Fraction
@@ -110,7 +111,8 @@ def receipt_path() -> Path:
     return PACKET / "receipts/exact-certification.json.xz"
 
 
-def _unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """A JSON object with no repeated key."""
     result: dict[str, Any] = {}
     for key, value in pairs:
         if key in result:
@@ -138,7 +140,7 @@ def read_xz(path: Path) -> Any:
         raise ReportError("invalid or memory-exceeding XZ evidence") from error
     if len(data) > MAX_BYTES or not decoder.eof or decoder.unused_data:
         raise ReportError("oversized, truncated or trailing XZ evidence")
-    return json.loads(data, object_pairs_hook=_unique)
+    return json.loads(data, object_pairs_hook=unique_object)
 
 
 def save_xz(path: Path, value: Any) -> None:
@@ -384,10 +386,71 @@ def validate_job(
             raise ReportError("wrong independent route field or limitations")
 
 
-def _stable(row: dict[str, Any]) -> dict[str, Any]:
+def stable_row(row: dict[str, Any]) -> dict[str, Any]:
+    """A job row without its measured times, which a replay cannot reproduce."""
     return {
         key: value for key, value in row.items() if key not in {"cpu_seconds", "wall_seconds"}
     }
+
+
+def validate_receipt(
+    record: Any,
+    facts: dict[int, legacy.Certificate],
+    *,
+    receipt_format: str = RECEIPT_FORMAT,
+    witness_prefix: str = WITNESS_PREFIX,
+    claim_limitations: str = CLAIM_LIMITATIONS,
+) -> dict[int, Any]:
+    """Admit a complete receipt: every job of every count in ``facts``, in order.
+
+    Shared by every import that drives this kernel, so a receipt is held to one rule
+    whichever packet it belongs to. Returns the positive job of each count.
+    """
+    if (
+        type(record) is not dict
+        or set(record) != {"format", "routes", "cases"}
+        or record["format"] != receipt_format
+        or record["routes"] != list(ROUTES)
+        or type(record["cases"]) is not list
+        or len(record["cases"]) != len(facts) * len(JOBS)
+    ):
+        raise ReportError("incomplete exact certification envelope")
+    result: dict[int, Any] = {}
+    expected = [(n, control) for n in facts for control in JOBS]
+    for (n, control), row in zip(expected, record["cases"], strict=True):
+        validate_job(
+            row,
+            facts[n],
+            control,
+            witness_prefix=witness_prefix,
+            claim_limitations=claim_limitations,
+        )
+        if control == "positive":
+            result[n] = row
+    return result
+
+
+def replay_receipt(
+    record: dict[str, Any],
+    facts: dict[int, legacy.Certificate],
+    selected: Collection[int],
+    *,
+    witness_prefix: str = WITNESS_PREFIX,
+    claim_limitations: str = CLAIM_LIMITATIONS,
+) -> None:
+    """Decide the selected counts' jobs again and hold them to an admitted receipt."""
+    expected = [(n, control) for n in facts for control in JOBS]
+    for (n, control), row in zip(expected, record["cases"], strict=True):
+        if n not in selected:
+            continue
+        fresh = run_case(
+            facts[n],
+            control,
+            witness_prefix=witness_prefix,
+            claim_limitations=claim_limitations,
+        )
+        if stable_row(fresh) != stable_row(row):
+            raise ReportError("fresh native replay differs from retained actual result")
 
 
 def check_certification(
@@ -402,23 +465,9 @@ def check_certification(
     if not receipt_path().resolve().is_relative_to(REPO.resolve()):
         raise ReportError("actual receipt must remain private to this repository")
     record = read_xz(receipt_path())
-    if (
-        type(record) is not dict
-        or set(record) != {"format", "routes", "cases"}
-        or record["format"] != RECEIPT_FORMAT
-        or record["routes"] != list(ROUTES)
-        or type(record["cases"]) is not list
-        or len(record["cases"]) != len(NUMBERS) * len(JOBS)
-    ):
-        raise ReportError("incomplete nine-job exact certification envelope")
-    result: dict[int, Any] = {}
-    expected = [(n, control) for n in NUMBERS for control in JOBS]
-    for (n, control), row in zip(expected, record["cases"], strict=True):
-        validate_job(row, facts[n], control)
-        if replay and n in selected and _stable(run_case(facts[n], control)) != _stable(row):
-            raise ReportError("fresh native replay differs from retained actual result")
-        if control == "positive":
-            result[n] = row
+    result = validate_receipt(record, facts)
+    if replay:
+        replay_receipt(record, facts, selected)
     return result
 
 
@@ -431,13 +480,18 @@ def confirmed_bound(n: int) -> dict[str, Any]:
     }
 
 
-def run_child(job: tuple[int, str], directory: Path, timeout: int) -> dict[str, Any]:
+def run_job(module: str, job: tuple[int, str], directory: Path, timeout: int) -> dict[str, Any]:
+    """Run one job as ``python -m MODULE decide-job`` in its own child process.
+
+    Shared by every import that drives this kernel. The child's stdout and stderr are
+    kept beside its output whatever happens, and a timeout leaves a failure record.
+    """
     n, control = job
     path = directory / f"n{n}-{control}.json"
     command = [
         sys.executable,
         "-m",
-        "devtools.evand_arrangement_reports",
+        module,
         "decide-job",
         "--n",
         str(n),
@@ -471,7 +525,56 @@ def run_child(job: tuple[int, str], directory: Path, timeout: int) -> dict[str, 
         data = stream.read(MAX_BYTES + 1)
     if len(data) > MAX_BYTES:
         raise ReportError("native child receipt exceeds existing ceiling")
-    return json.loads(data, object_pairs_hook=_unique)
+    return json.loads(data, object_pairs_hook=unique_object)
+
+
+def run_child(job: tuple[int, str], directory: Path, timeout: int) -> dict[str, Any]:
+    return run_job("devtools.evand_arrangement_reports", job, directory, timeout)
+
+
+def certify_receipt(
+    module: str,
+    facts: dict[int, legacy.Certificate],
+    directory: Path,
+    receipt: Path,
+    *,
+    workers: int,
+    timeout: int,
+    receipt_format: str = RECEIPT_FORMAT,
+    witness_prefix: str = WITNESS_PREFIX,
+    claim_limitations: str = CLAIM_LIMITATIONS,
+) -> dict[int, Any]:
+    """Run every job of every count in ``facts`` and write the receipt once all pass."""
+    jobs = [(n, control) for n in facts for control in JOBS]
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = [pool.submit(run_job, module, job, directory, timeout) for job in jobs]
+        rows = [future.result() for future in futures]
+    record = {"format": receipt_format, "routes": list(ROUTES), "cases": rows}
+    positives = validate_receipt(
+        record,
+        facts,
+        receipt_format=receipt_format,
+        witness_prefix=witness_prefix,
+        claim_limitations=claim_limitations,
+    )
+    save_xz(receipt, record)
+    return positives
+
+
+def decide_job(
+    certificate: legacy.Certificate,
+    control: str,
+    output: Path,
+    *,
+    witness_prefix: str = WITNESS_PREFIX,
+    claim_limitations: str = CLAIM_LIMITATIONS,
+) -> None:
+    """The child's side of `run_job`: decide one job and write its validated row."""
+    profile = {"witness_prefix": witness_prefix, "claim_limitations": claim_limitations}
+    row = run_case(certificate, control, **profile)
+    validate_job(row, certificate, control, **profile)
+    with atomic_output_file(output) as temporary:
+        temporary.write_bytes(_json_bytes(row))
 
 
 def certify(directory: Path, *, workers: int = 2, timeout: int = JOB_TIMEOUT) -> None:
@@ -479,14 +582,14 @@ def certify(directory: Path, *, workers: int = 2, timeout: int = JOB_TIMEOUT) ->
         raise ReportError("invalid bounded replay allocation")
     read_facts()
     directory.mkdir(parents=True, exist_ok=True)
-    jobs = [(n, control) for n in NUMBERS for control in JOBS]
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = [pool.submit(run_child, job, directory, timeout) for job in jobs]
-        rows = [future.result() for future in futures]
-    facts = read_facts()
-    for (n, control), row in zip(jobs, rows, strict=True):
-        validate_job(row, facts[n], control)
-    save_xz(receipt_path(), {"format": RECEIPT_FORMAT, "routes": list(ROUTES), "cases": rows})
+    certify_receipt(
+        "devtools.evand_arrangement_reports",
+        read_facts(),
+        directory,
+        receipt_path(),
+        workers=workers,
+        timeout=timeout,
+    )
     check_certification()
 
 
@@ -514,10 +617,7 @@ def main() -> int:
         check_certification(args.n, replay=args.replay)
         print("#399: three complete positive packings and six full-roster controls admitted")
     else:
-        row = run_case(read_fact(args.n), args.control)
-        validate_job(row, read_fact(args.n), args.control)
-        with atomic_output_file(args.output) as temporary:
-            temporary.write_bytes(_json_bytes(row))
+        decide_job(read_fact(args.n), args.control, args.output)
     return 0
 
 
