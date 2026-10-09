@@ -1,0 +1,13 @@
+{
+  "schema": "n17-parent-guard-owned-hull-context/v1",
+  "finite_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/descriptor.json",
+  "finite_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/certificate.json",
+  "finite_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/replay.json",
+  "centered_parent_receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-280-centered-endpoint-hull-capacity/receipt.json",
+  "centered_parent_receipt_sha256": "5e861eb8049f6893259922550b721e1c1f4769161c99d15ac6ee6eca305150a5",
+  "child_object": {
+    "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/conditional-node.json.gz",
+    "canonical_sha256": "556009919973a061def98fb9408a9eee6b696f560876ba7d3b91f4b197774591",
+    "compressed_sha256": "6d30dd75d3db88f85768d726f9c1f79db5614c8df41944c7905e11c66a0f649a"
+  }
+}

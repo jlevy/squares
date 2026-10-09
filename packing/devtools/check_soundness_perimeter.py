@@ -22,6 +22,7 @@ Usage: uv run --frozen python -m devtools.check_soundness_perimeter
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import random
@@ -75,10 +76,10 @@ def enclosing_side(x, y, theta) -> float:
     )
 
 
-def anneal(n: int, seed: int) -> dict:
+def anneal(n: int, seed: int, binary: Path | None = None) -> dict:
     out = subprocess.run(
         [
-            str(BIN),
+            str(BIN if binary is None else binary),
             "--n",
             str(n),
             "--seed",
@@ -135,7 +136,15 @@ def _quench_unit(
     return failures, 1
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--binary", type=Path, help="sqsearch artifact (default: local release)"
+    )
+    args = parser.parse_args(argv)
+    binary = BIN if args.binary is None else args.binary
+    if args.binary is not None and not binary.is_file():
+        parser.error(f"explicit sqsearch binary is absent or not a file: {binary}")
     failures: list[str] = []
     checked = 0
     seed_cfg = json.loads(
@@ -156,9 +165,9 @@ def main() -> int:
     checked += 1
 
     # 2. sqsearch: the packing it reports, not merely its pair energy.
-    if BIN.exists():
+    if binary.exists():
         for n in (5, 10, 11):
-            best = anneal(n, 1)
+            best = anneal(n, 1, binary)
             failures += oracle(
                 best["x"],
                 best["y"],

@@ -904,6 +904,11 @@ these rows as BC-406 to BC-411.
 | 283 | Every one-cell move from the n17 endpoint that the arity-8 flags leave is infeasible at the cap | registered | [H-273](hypotheses/H-273-n17-distance-two-infeasible-at-cap.md) | Session 182’s lane E: the float survey of all 95 distance-2 orbits refutes the claim with one placement and cannot confirm it; a placement makes the near-endpoint stage non-empty. |
 | 284 | n17 residue states that stall at 32 uniform bins close under adaptive rows | registered | [H-274](hypotheses/H-274-n17-per-state-closure-under-adaptive-rows.md) | Lane D found the distance-4 per-state stalls share a north-wall knot whose margins sit between the uniform rows’ losses and a 1/512 collision cut. |
 | 285 | The per-state exclusion price of n17 residue states in the strata H-264’s draw never reached | registered | [H-275](hypotheses/H-275-n17-unsampled-strata-per-state-price.md) | exp-252 left 21 strata (827 orbits) unsampled and unpriced; H-274 closed all four counted stalls under SW9’s adaptive-row recipe, so the tail can be drawn and priced under it. |
+| 286 | Partition the actual admitted n17 residue into complete D4 and composition/distance strata | registered | [H-276](hypotheses/H-276-n17-admitted-residue-partition.md) | BC-432 needs a ledger-backed queue; historical hypothetical arity-eight populations do not define the current tail. |
+| 287 | Challenge the conditional widened n17 LP with frozen mixed-angle directions | registered | [H-277](hypotheses/H-277-n17-widened-lp-mixed-angle-reconnaissance.md) | Astra specifies complete branch execution, numerical-only margins and matched relaxed controls before more expensive capture work. |
+| 288 | Force the selected n17 feature roster uniformly inside the widened tube | registered | [H-278](hypotheses/H-278-n17-widened-omitted-feature-forcing.md) | Exact fixed-corner and distance bounds support Astra’s separately scoped convexity and Lipschitz argument; capture and slider coverage remain open. |
+| 289 | Bound the n17 apex from retained signed-position duals | registered | [H-279](hypotheses/H-279-n17-widened-apex-position-duals.md) | Exact residual and Lipschitz-mass checks supply a conditional inner cube, with the physical-packing implication hand-reviewed separately. |
+| 290 | Certify one widened n17 angle patch for all owner branches | registered | [H-280](hypotheses/H-280-n17-one-all-branch-annulus-patch.md) | A frozen retained dual, all-owner hulls and exact bounded-residual margins test certificate readiness without new LP solves or a claim of complete annulus coverage. |
 
 ## Dead ends
 
@@ -955,6 +960,304 @@ This section is why the campaign does not rediscover its own mistakes.
 The [closed-cell symmetry follow-up](hypotheses/H-260-n17-closed-cell-symmetry.md) is
 preregistered; its geometric coverage uses existential assignments without lex-priority
 seam exclusions.
+
+The current known-case readiness control is
+[H-281](hypotheses/H-281-n11-first-round-producer-readiness.md): one complete
+repaired-producer n11 round, preserving the exact endpoint, followed by fresh replay.
+It supplies measured cost and custody without a first-round contraction threshold.
+
+[H-282](hypotheses/H-282-n17-current-source-tail-a.md) selects one actual admitted-tail
+orbit after a newly checked full17 endpoint prefix.
+[H-283](hypotheses/H-283-n17-continuous-soft-direction-cone.md) tests a continuous
+negative16 cone with six free angular coordinates, exact root cancellation and fresh
+replay. Neither claim is a complete capture or angular-cover theorem.
+
+[H-284](hypotheses/H-284-n17-positive-continuous-cone.md) registers the independently
+derived positive16 cone, with exact F2/F3 joins and cubic radial numerator.
+Its first target remains unrun at registration.
+
+[H-285](hypotheses/H-285-n17-coarse-slider-floor.md) tests the root guard for the
+noncircular square9/11 coarse-slider lemma; any actual leaf must independently establish
+its thin projection and angular bounds.
+
+[H-286](hypotheses/H-286-n17-saved-prefix-capture-adapter.md) tests bounded intake of
+the actual retained endpoint prefix and exact root-relative leaf bounds.
+Geometric unresolved is a valid readiness result; no exclusion or global capture is
+claimed.
+
+[H-287](hypotheses/H-287-n17-controlled-tail-replication.md) repeats the unchanged
+recipe on the next deliberately selected current tail orbit, with renewed endpoint
+readiness when source bytes change.
+Closure needs complete fresh saved replay and full standing verification before any
+admission.
+
+[H-288](hypotheses/H-288-n17-capture-cap-root-join.md) checks the fixed numeric cap
+against the full accepted root and the unchanged outward consumer side enclosure.
+Its upper excess uses the lower endpoint of each side interval; no old saved object is
+relabelled with the tighter cap.
+
+[H-289](hypotheses/H-289-n17-numeric-cap-first-round-readiness.md) registers the first
+new numeric-cap full17 seed and16-owner round, then fresh zero-production replay.
+The distinct input control first binds the accepted root, pilot geometry and numeric
+frame. First-round readiness does not establish capture, contraction or an exclusion.
+
+[H-290](hypotheses/H-290-n17-numeric-checkpoint-capture-readiness.md) tests independent
+numeric-frame saved replay and49 exact root-relative bounds from H289. A valid
+unresolved geometric result establishes consumer readiness; it does not establish
+capture or an exclusion.
+
+[H-291](hypotheses/H-291-n17-centered-endpoint-standing-control.md) tests fresh
+independent standing replay of the accepted numeric endpoint under exact centered V
+walls; known-endpoint STALL is required, with no exclusion or census admission.
+
+[H-292](hypotheses/H-292-n17-conditional-owned-hull-gate.md) tests finite exact
+owned-point gains for three fixed guards within the accepted H290 parent, with fresh
+reconstruction and no propagation or admission.
+
+[H-293](hypotheses/H-293-n17-parent-guard-owned-hull-continuation.md) registers one
+explicit parent-aware conditional round on the closed owner0 guard.
+The accepted finite points augment only that conditional parent; complete fresh replay
+is required for an initial owned-hull, ordinary post-step or full closed-guard-cover
+contradiction. A complete nonclosed round misses this recipe and leaves conditional
+feasibility unresolved.
+No full-mask exclusion, ordinary census admission or global proof is implied.
+
+[H-294](hypotheses/H-294-n17-pooled-parent-center-cases.md) tests an exact unsplit or
+four-case conditional contradiction from freshly reconstructed accepted initialization
+and original-parent kernel pools.
+All unconditional pooled owners must remain disjoint as an endpoint calibration before
+adding the five conditional owner0 points.
+No incomplete exp284 child geometry is used; a complete fresh finite proof is required.
+
+[H-295](hypotheses/H-295-n17-pooled-forbidden-cover.md) tests exact union coverage by
+pooled foreign-owned forbidden regions on every closed residual piece meeting the owner0
+guard. Matched ordinary-final foreign hulls share the same centres and strict cores.
+A complete uncovered piece misses this finite recipe; it is not a packing witness.
+The accepted original parent supplies custody; no incomplete exp284 geometry is used.
+
+[H-296](hypotheses/H-296-n17-pooled-relaxation-witness.md) tests one deterministic exact
+square on the first pooled-uncovered closed-guard piece, using the accepted exp286
+finite criterion-miss as premise.
+The candidate must retain all conditional owner0 owned points and avoid every foreign
+pooled open-square obstacle.
+It is only an owned-point relaxation witness, with no17-square packing or exclusion
+claim.
+
+[H-297](hypotheses/H-297-n17-pooled-feasible-center.md) tests exact fixed-angle centers
+after applying numeric walls and strict conditional owned-point strips.
+The first uncovered retained piece supplies one candidate, with no alternate after
+calibration failure.
+A witness is one-square relaxation consistency; a miss proves no exclusion or
+fixed-angle infeasibility.
+
+[H-298](hypotheses/H-298-n17-complete-partner-pose-region.md) tests complete
+partner-pose constraints on all 992 foreign rows of the accepted parent.
+The primary criterion requires a freshly verified nonzero closed neighbourhood around
+the exp288 relaxation witness.
+Fixed-point removal alone is secondary evidence; a completed fixed-point miss skips the
+frozen regional ladder by the stated monotonic obstruction.
+The accepted parent remains a conditional premise.
+
+[H-299](hypotheses/H-299-n17-matched-exact-replay-observations.md) tests whether
+boundary-level profiling preserves two fresh full exact replay results on the accepted
+exp280 object.
+The diagnostic retains step costs, memo evictions and memory observations;
+equal results establish instrumentation equivalence, not an optimization gain or a new
+geometric admission.
+
+[H-300](hypotheses/H-300-n17-full-square-partner-region.md) testsfull-squareSAT
+ontheacceptedparent; exp292completedfreshmethodmiss,
+with15/16wall-validindependentescapealternatives.
+
+[H-301](hypotheses/H-301-n17-paired-guard-conditioned-ownership.md)
+testsjointguardconditioning witha point-firstmonotonicstop
+andtheunchangednonzeroregionPRIMARY.
+
+[H-302](hypotheses/H-302-n17-stages-replay-observations.md) attributesexactreplaystages
+whilematchingacceptedinputbytes/mathreceipt, withnospeedupclaim.
+
+[H-303](hypotheses/H-303-n17-two-center-children.md) tests a deterministic complete
+two-child centre cover using accepted exp293 owned-set premises and a separately rebuilt
+regional context.
+
+[H-304](hypotheses/H-304-n17-collective-row-coverage.md) tests one simultaneous
+collective-coverage pass over all 992 foreign rows using the original accepted exp293
+owned sets. Its primary criterion is positive exact loss of a closed angle union; exp295
+selects the route but contributes no child geometry.
+No regional or global exclusion follows from this narrower criterion.
+
+[H-305](hypotheses/H-305-regional-row-coverage.md) tests the SAME25 row exclusions
+throughout one fixed positive-width guard by complete fresh regional reconstruction.
+
+[H-306](hypotheses/H-306-coverage-y-prefilter.md) compares an exact closed-Y event
+prefilter with the standing verifier in two full-replay ABBA blocks.
+
+[H-307](hypotheses/H-307-strict-core-regional-transfer.md) tests transfer of the
+accepted fixed core and foreign row restrictions through a fresh uniform-ownership
+certificate at the separately declared smaller radius.
+
+- H-308: one-round direct regionalowned-domain propagation from the verified22-row
+  h1/512 rule; full992+16-recovery/one-pass, primaryadditionalunionloss or complete
+  scopedclosure, think-lyh9.
+- [H-309](hypotheses/H-309-one-round-fixed-core-regional-propagation.md): separately
+  registered tiny-guard sensitivity after the wider operator’s complete miss; preserve
+  the old25/64 baseline and require additional loss or a checked scoped contradiction.
+
+[H-310](hypotheses/H-310-two-child-collective-propagation.md) tests exactlytwo closed
+wider centre cases; additional progress is measured from the union of surviving cases.
+
+- **H-311 — normalized contact rank filter.** Exact graphic/laminar rejection
+  certificates for all95 distance2 representatives; normalization is a hand premise and
+  ordinary census admission remains separate.
+
+- **H-312 — n11 whole-square envelope windows.** Complete conservative containment
+  windows transfer the settled n11 lower bound to occupied n17 cells; positives need
+  review before ordinary census integration.
+
+- **H-313 — case-preserving owned propagation.** Retain both accepted302 case
+  correlations, recover all16 foreign groups once in each, and measure gain only after
+  union against the existing15/32 and11/32 baselines.
+
+- **H-314 — Independent Envelope Representation Discriminator.** All95 states have
+  complete576 upper and576 optimistic lower window counts (109440 total) with
+  sandwich/monotonic checks; endpointupper576 calibration muststay<=10. Primary either
+  checked11-square UPPER window obstruction or COMPLETE all95 optimisticLOWER no11
+  architecturekill: no independent whole-cell axis-aligned envelope enclosing every
+  cell/wall-compatible square can succeed atH31/8. Lower positives only show potential
+  and NEVERexclude an assignment.
+  Fresh reconstruction compares fullpayload.
+  Existing304negativecounts inherited andchecked; no ordinarycensus
+  admission/globalbound claim.
+  Partial/resource/refusal unresolved.
+  AftercompletearchitecturekillSTOPindependentenvelopes.
+
+- **H-315 — Same-Core Guarded Clause Transport.** Bind completeaccepted302 three roles
+  and fixedSAMEQ0 foreign proofchain, excluding obsolete owner0 targetrow diagnostics.
+  Emitexactcleared-denominator16signed vertex inequalities (jointtotaldegree3
+  incentre+halfangle).
+  Finiteprimary alloldh1/512 guard corners/univariatequadraticminima<=0
+  withreserve2^-21, positiveareaQ0, andNEWfullaxisalignedendpoint disjointness
+  fromQ0xoryspan>1; freshcompletepayload/roles/postcustody match.
+  The same-Q0 transport implication is an explicit source-audited handpremise,
+  independentlyverifiedflagfalse.
+  No guardvolume/strictwidening/complementcover/globalcapture/ordinaryadmission claim;
+  failedfiniteprimary ismiss, resource/refusalunresolved.
+
+- **H-316 — Correlated Four-Corner n11 Cardinality.** Complete exact 216 cell/class
+  feasibility tests on original convex cells with physical wall constraints, shared
+  x/y/h and exact 2*h*h<=1 vertex test; all95 named distance-two assignments then
+  receive complete four-count DP with each count<=10. Endpoint assignment must survive
+  calibration. Primary at least one fresh-verified ordinary n11 corner-cardinality
+  obstruction with complete95 accounting; all95 survivors retire this exact four-corner
+  relaxation. Negative certificates retain all18 reachable-frontier bitmaps; positives
+  retain17 independently checked pattern witnesses.
+  All input/domain/theorem joins and full fresh payload must match.
+  No global optimality, capture or automatic census admission; refusal/resource stop
+  unresolved. No denser window search on unchanged miss.
+
+- **H-317 — SciPy-free Joint-Certificate Candidate Relevance.** Complete exact named-D4
+  subset projection for BOTH C1/C2 against accepted4683 currentorbits/36768states, with
+  separate95distance-two accounting, orbit-size weighting and deduplicatedunion/overlap.
+  Fresh completepayload/custody mustmatch.
+  Primary anypositive candidate coverage in the currentordinary residue selects a joint
+  FULL-BB replay candidate; allzero retires these packages for this residue.
+  Coverage is metadata potential only, NEVER an exclusion, source-domain theorem,
+  fulltree verification or ledgeradmission.
+  Explicitmissing scope joins remain unverified; missing B/frame headerfields can be
+  discharged by a later proper standingverifier source convention.
+  No SciPy/censusregeneration and no upstreamtimingforecast.
+
+- **H-318 — Original-Cell Joint-Certificate Header Preflight.** Primary BOTH exact
+  retained C1/C2 manifests complete HEADER_ONLY_PASS with complete original-cell
+  halfplane enclosure, all21 pair roster, complete shifted closed-angle chart and exact
+  input custody. This is header-only computational scope, NEVER FULL/tree/trig
+  verification or ordinary admission.
+  Prospectively C2 is evaluated first: its individual HEADER_ONLY_PASS selects ONE
+  bounded FULL C2 replay even if separate C1 subsequently refuses; C2 refusal/resource
+  exhaustion stops C2 acquisition/replay without unchanged retry.
+  No actual header has yet been evaluated.
+
+- **H-319 — Unsampled C2 Joint-Certificate Replay.** ONE complete unsampled FULL C2
+  standing-verifier PASS, modefull, zero failures, all indexed nodes and trigonometric
+  objects verified, closed complete tree, exact canonical
+  manifest505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57 and original
+  default UNIQUE_24cells. Compose ONLY with accepted310 C2HEADER_ONLYPASS and complete
+  original-cell halfplane enclosure on identical compressed
+  manifestd9260cd3b60570b506c7ace7e7130463f6880f07dddc28bdc63aba5da82b883d. Published
+  input acquisition must validate ALL161 roster objects112191343compressedB before
+  replay. FULLPASS permits subsequent separately reviewed ordinary clause admission and
+  fresh census; neither acquisition/header/sample/partial nor metadata148union can admit
+  anything. C2 potential13orbits84states/ZERO95tail; no endpointcapture/globaloptimality
+  claim. Stop unchanged on refusal/resource/failure.
+
+- **H-320 — Saved-Pose Incircle Discriminator.** Bind the complete accepted308
+  criterion_missed/full216/95 certificate and identical freshPASS receipt.
+  Validate every USED saved original-cell/class pose with all reconstructed linear
+  walls/polygon/class rows, h>=1/2 and2h*h<=1. Check EVERY95*136=12920 exact
+  centre-distance pairs in lex catalogue order: distance squared<1 rejects ONLY those
+  fixed centres for every square orientation; equality1 is compatible.
+  Primary at least one incircle-compatible saved assignment, complete95/12920 accounting
+  and full fresh payload/custody equality.
+  All95 rejected is complete criterion_missed and stops orientation-stage work.
+  Survivors are orientation_realization_candidates only, never physical packing,
+  ordinary cell exclusion, census admission or global bound.
+  No alternate poses/choices, no old corner classification/DP replay, no endpoint
+  scientific-pose distance test.
+
+- **H-321 — Whole-Cell Incircle Projection Redundancy.** Complete exact unconditioned
+  E_i=originalC_i intersect[1/2,U-1/2]^2 for all24 original cells, and
+  D_ij=conv(E_j-E_i) for EVERY pair occurring in the accepted95 roster.
+  Fixed rational inscribed octagonP with eight integer face rows(±7,±3)/(±3,±7) dot
+  delta<=7. Primary ANY extreme D vertex strictly inside ALL eight P faces, proving a
+  proper future convex pair constraint; ALL-vertices-outside/boundary proves H_ij=D_ij.
+  All-pair redundancy plus nonemptyE supplies ALL95 shared-convexified-relaxation
+  witnesses and retires THIS fixedP8 LP and a lone-pair disjunction retry.
+  Complete all vertex-differences/hulls/eightfaces and12920 statepair accounting,
+  original accepted308 three roles/heldcustody, fullfresh payload/source match.
+  Positive cuts select a separately registered shared-centre LP, NEVER state
+  exclusion/packing/admission/bound.
+  EmptyE/refusal/resource unresolved.
+  Prospective secondary all vertices strictinsideP selects a distinct ordinary two-cell
+  consumer, not admission here.
+  Exactdisk-norm checks are a separately registered future target, not a313 verdict.
+
+- **H-322 — Exact Disk Convexification Discriminator.** Reconstruct original all24
+  wall-clipped E_i and EVERY relevant D_ij from same accepted308 three byte-bound roles,
+  using313.construct and ONE intake.
+  Primary ANY EXTREME D vertex exactnormsquared<1: disk convexification is proper and a
+  stronger model may gain a necessary constraint.
+  EVERY extreme norm>=1 proves ALL pairwise incircle convexifications redundant,
+  including every inscribedpolygon, and retires convex pair LPs plus forest-only
+  disjunctions. Equality1 retained.
+  Secondary ALL Dextremes norm<1 identifies a whole original-cell pair-exclusion
+  candidate; no ordinary flag/admission/census here.
+  Complete every extreme/every pair/all12920 statepair accounting, ALL transitive
+  heldbytes rechecked AFTER norm stage, fullfresh payload/source match.
+  Per-state/per-pair octagon flags explicitly labelled, disk-relaxation witness only
+  when globaldiskredundancy holds.
+  Partial/resource/refusal unresolved.
+  No arbitrary newpolygon/LP/forest test/physical packing/globalbound.
+
+- **H-323 — Exact Shared-Centre Endpoint Control.** Use the accepted exp-235 rational
+  packing at lambda=1 and U=1169/250, with exact centre means, concentric translation
+  and r3 rotation into endpoint mask1900015. Fresh original-cell membership must pass;
+  source row labels and inherited candidate cells alone are insufficient.
+  Construct all seventeen centre domains and all136 pair domains, retain every closed
+  row, and require the exact34-coordinate primal to satisfy the complete system.
+  A separate process reconstructs the full geometry and point, compares mathematical
+  payloads and rechecks held generated inputs.
+  Complete successful bounded supervision is required.
+  The registered cooperative120s phase limits, combined240s TERM/250s KILL, sampled4GiB
+  per-process RSS, scalar and output limits are allocation rather than performance
+  claims. Resource stops and unavailable sampling are scientifically incomplete; invalid
+  input/membership remains refused and unresolved.
+  No first-eight LP result, ordinary exclusion, census admission or bound movement.
+
+- **H-324 — Explicit-f1 Shared-Centre Endpoint Control.** Separately register the unique
+  catalogue action f1=(U-y,U-x), preserving H323’s refusedr3 attempt and every other
+  input/resource limit.
+  Finalsource/Astrareview and43 synthetic controls passed; actual endpoint is unrun at
+  registration. No first8, exclusion, admission or bound movement.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

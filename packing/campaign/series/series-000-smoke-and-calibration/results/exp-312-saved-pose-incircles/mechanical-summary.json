@@ -1,0 +1,65 @@
+{
+  "schema": "n17-saved-pose-incircle-mechanical-summary/v1",
+  "status": "complete_method_miss",
+  "source_commit": "a4f3ff7070536a158dc375a4df47106cbb568604",
+  "imported_source_files": 13,
+  "all_source_bytes_match": true,
+  "complete_payload_match": true,
+  "states_accounted": 95,
+  "pairs_checked_per_phase": 12920,
+  "used_pose_validations": 22,
+  "one_square_rows": 280,
+  "incircle_compatible_masks": [],
+  "failing_pairs_range": [
+    14,
+    20
+  ],
+  "first_failure_cell_pair_counts": [
+    {
+      "cells": [
+        0,
+        4
+      ],
+      "states": 76
+    },
+    {
+      "cells": [
+        0,
+        6
+      ],
+      "states": 11
+    },
+    {
+      "cells": [
+        0,
+        16
+      ],
+      "states": 1
+    },
+    {
+      "cells": [
+        1,
+        7
+      ],
+      "states": 6
+    },
+    {
+      "cells": [
+        1,
+        12
+      ],
+      "states": 1
+    }
+  ],
+  "phase_seconds": [
+    1.0186044169822708,
+    0.8872312500025146
+  ],
+  "outer_seconds": 2.0575756250182167,
+  "cleanup_complete": true,
+  "orientation_stage_selected": false,
+  "ordinary_cell_exclusion_proved": false,
+  "census_admission": false,
+  "global_bound_proved": false,
+  "mathematical_review": "sole Astra actual source/receipt review CLEAR; incircle rejects only fixed centres, not cell states/classes"
+}

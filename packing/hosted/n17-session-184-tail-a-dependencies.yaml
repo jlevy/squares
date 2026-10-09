@@ -1,0 +1,19 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+repository: jlevy/squares
+tag: data/n17-session-184-tail-a-dependencies-v1
+objects:
+- path: packing/campaign/retained/session-184-tail-a-dependencies/fresh-inventory.json.gz
+  asset: fresh-inventory.json.gz
+  size: 393103
+  sha256: 7aafd1f991222b356c359c35f2dcea9963531b90e85a170376709df6dab5bcbf
+- path: packing/campaign/retained/session-184-tail-a-dependencies/inventory.json.gz
+  asset: inventory.json.gz
+  size: 393099
+  sha256: fbf83ad11502fa78e001690c88cc638238d3347aa52a2705ee90f8708757a5d7
+description: Complete exp273 TailA dependency DAG reports, original and fresh, compressed verbatim
+  with deterministic gzip. Conservative geometric and validation channels both retain all17 owners;
+  no smaller admission or necessity/minimality proof. Original raw reports remain retained and ignored
+  beside summary.json.

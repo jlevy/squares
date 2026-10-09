@@ -1,0 +1,17 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-08T02:25:43.422210Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/execution-manifest.json",
+  "manifest_sha256": "00e41677f4865947f5e3d65517ba92b9895e390ab721d81604a7387b8b2b773a",
+  "phases": [
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_normalized_contact_rank_filter","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/descriptor.json","--max-seconds","120","--output","campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/certificate.json"],"ended_at":"2026-10-08T02:25:42.854509Z","name":"construction","returncode":0,"started_at":"2026-10-08T02:25:24.417836Z","status":"completed","wall_seconds":18.436204666038975},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_normalized_contact_rank_filter","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/descriptor.json","--max-seconds","60","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/replay.json"],"ended_at":"2026-10-08T02:25:43.421691Z","name":"fresh_verification","returncode":0,"started_at":"2026-10-08T02:25:42.855041Z","status":"completed","wall_seconds":0.566546667017974}
+  ],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T02:25:24.416627Z",
+  "status": "completed",
+  "unstarted_phase_names": [],
+  "wall_seconds": 19.004244291980285
+}
+
