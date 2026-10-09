@@ -3,13 +3,17 @@ type: is
 id: is-01m4fdxysyxrsz86wnrpzt6sr4
 title: Resolve survey URL history registrations and T-129 superseded expected set
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
+delegate: claude-code@vm
 labels: []
 dependencies: []
 parent_id: is-01m4fdxw81pt2v4k29y9n58rn6
+hold: null
+hold_until: null
 created_at: 2026-10-09T04:14:52.222Z
-updated_at: 2026-10-09T04:14:52.222Z
+updated_at: 2026-10-09T04:20:34.722Z
+started_at: 2026-10-09T04:20:34.722Z
 ---
 #459/#460/#466 validate refuse three missing historical registrations for papers/square-packing-methods-survey.{html,md,pdf}; #463/#466 suite A test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared excludes T-129. Audit semantically and fix at the owning layer.
