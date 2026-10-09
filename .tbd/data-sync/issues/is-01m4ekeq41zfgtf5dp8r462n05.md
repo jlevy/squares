@@ -5,7 +5,7 @@ title: Reconcile resumed intake ledger and dated source follow-ups
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T20:32:09.852Z
-updated_at: 2026-10-09T00:09:43.263Z
+updated_at: 2026-10-09T00:47:46.381Z
 started_at: 2026-10-08T20:33:04.467Z
 ---
 Add missing425/438 mappings and445 engineering disposition; append all observed maintainer replies and dated375 source updates without changing older result scopes or claiming new replay. Preserve all prior rows and prefixes, give newly identified batch certificate custody an explicit child owner, and validate the enforced request contract on the current intake top.
@@ -41,3 +41,5 @@ Visible user authorization2026-10-08: "can you delegate to subagents to resolve 
 Externalspud-ext1filled32MiB (writesENOSPC), later51MiB restoredtinywrites only. Allheavybuilds/clones/tests/hooks/cascadepaused; useraskedtofreeexternalTrashspaceorprovidemountedexternalvolume. Trashnotemptied; itsonlystagingdoesnotfreephysicalblocks.439releaseconflict fullfile/stageblobs preserved, ownpinrestored/staged, mergeuncommitted.459oneCSScontracttestcorrection/460singlemissing6043191866sourcecard pendingearliestlayers. Old448fulljob113569389039 failedactual12s per-callguard14.01s house-reads; explicitP1think-utky, exactcloneprofilependinghealthyexternalstorage. Allremainingoldfullfailures441442443449450 timingonly;459overviewcontract; nofailuresrelabeledpasses.
 
 Catalogue403independentproposal finalstagedtree566978fa85162ed58665ff8e40899969feb23a96 includesexactpinwriteguard/linearroot/fullcentre/supportingtestedfixes andbyte-identicalgeneratedgzip storage. Completeprotectedinputbridge7996paths; live=Git197766060/201326592,3560532headroom; sourcepatchnotcommitted/pushed, fullrecordsFAILSQUISHENOSPC50.46s/300UNARMED/allotherchecksPASS. Unique127192Blogsmovedoutofdisposablescratch. Currentforeign4036a9/435760 selectorsnumericallyPASSafter312historicalomissions; contraryearlierconservativewording, noselectorfreezeuserrequirement or concretelostdecidinginputfound. Completeinputgzip remainsstrongerpreservationscope.435currentownPagesC1high:1011publicationcontractfailures (1005unregisteredoutputs,completeHTML5016486>2000000,4startupinline>4096,unclassifiedJS); Astra/Guptaread-onlydesigninflight. Foreignownerrefs/claimsuntouched. Source375a3fcd48cleancommittedsource-onlyV0C0S1 acceptedfourroles; final460bridge/createformalstackPR/CIpending. Allunadmittedbatches/ownerholdsexplicitremainopen.
+
+2026-10-09 00:53 UTC continuation: first-five ordinary conflict/budget merges439ba3242f6/4409425a469/44190b7d22a/4425ced86fb/443219630c9 independently accepted by Sol with exact9path/AST/source-row/ancestry/pin bridge; allother scientific/private-worker Gitbytes identical. Published all5atomically ordinaryFF and readbackPASS. Exact-head Sol followup formalreviews5464510564/0861/1170/1446/1709 explicitly bridge historicalfour-roleAstra +common434M–Pcoverage; no inventedfreshAstramathematicalaudit. Fullruns dispatchedonce43937866264735/44037866268669/44137866273122/44237866277193/44337866281642, actualrequired/Pagespending; all5nowGitHubMERGEABLE, draftsremain.434abb actualrequired+PagesSUCCESS; full37864151667 tenjobsSUCCESS,validate/exhaustive3pending atlatestcheck. NOcontinuationmergesyet.448native diagnostic complete14prior+9originalhousesPASS15.693sprofiled, no12sgatecredit; witness serialization4.3sidentified, source/metadata/symlinkcustodyunchanged, minimalsharedstrict-admissionoptimizationassignedSol.460datedsourcecard6043191866 independentSolPASS,4ownerfocusedtestsPASS, normalcommits/cascadepending.403own470normalunionpreservesstorage/sourcefixes; Polynomialtableownerindependentlyconsolidatingfinal403435heads, rootnotracingpushes.403actual470n11Pagesfailure390darklongestTask384>300, no mathematicalfailure.404/454actualCfourtestsFAILsource202715130/202852792>201326592; no caprelaxation/no mergecredit.375source-onlypacketcompleteLOCALunpublished;20Couzobeyond324sourcecustodypreparedUNADMITTED. TwoactiveSolworkers+root; extraagentdispatchrejectedhardthreadlimit; Astra capacityerrored. Externaldisk stillscarce; noheavyinternalfallback/noTrashempty/nofalsefreedspaceclaim. Gates and findings stay openuntilactualcurrentheadqualification/merge.
