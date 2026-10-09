@@ -5,7 +5,7 @@ title: Publish the exact-side collection as a web-only report
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex@spud10.local
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T08:43:03.009Z
-updated_at: 2026-10-09T13:18:27.766Z
+updated_at: 2026-10-09T14:08:50.986Z
 started_at: 2026-10-09T08:43:05.688Z
 ---
 Publish the exact-side collection as a clean HTML report on the Papers page. The user explicitly retired PDF packaging for this large catalogue. Preserve all 324 current entries, 175 historical records, 321 current exact polynomials, 519 coefficient vectors and 6273 coefficient strings, including all 673 n83 coefficients and source/geometry/proof distinctions. Keep the responsive searchable catalogue and full HTML report plus Markdown and coefficient downloads. Remove exact-report PDF generation, links, producer/assembly/preview and publication checker requirements. Validate desktop/mobile light/dark readability, full content reconstruction and no-JavaScript full report. Sync formal stack447 to current upstream and capture actual-head evidence on PR403/435 and beads. Do not merge PRs or change mathematical admission. Retain dated PDF failures/costs as history; no new print experiments or PDF builds.
@@ -97,3 +97,22 @@ Parent repair committed c1d3aab9eef04683ea262c9c79ef7d739af2dc50. Official gh-st
 The user's scope is a clean complete web report on the Papers page, with no report PDF build. Current lossless evidence preserves all 499 records, 519 coefficient vectors, and 6273 integer strings; originals remain preserved. CI artifacts and local previews are qualified separately from live publication, which follows merge and default-branch deployment. No new polynomial, solver/search, geometry, Lean, or bound result is claimed by this stabilization. Existing remaining-work ownership and planned W7 -> independent contact-derived n11 control -> bounded n102 attempt remain unchanged. Both PRs remain open and unmerged; keep these feature beads open until their corresponding work merges.
 
 Evidence: child-e0d6b8759-bc303-{original-reproduce,original-git-perf,sparse-reproduce,sparse-git-perf,sparse-module,sparse-floor}.log and frozen sparse-custody-fixture.patch; parent-full-37929500754 and child-full-37929504835 metadata; protected PR body drafts, final local Git heads and maintained release-pin checks. All retained under the existing recovery evidence directory.
+
+
+Published web-only stack checkpoint — 2026-10-09T14:08:49Z
+
+Official gh-stack sync fetched latest main 6a0499ba4ed83e147488b2ee584af500207d9d1f and reported its non-force push failure; that failure is retained. Official gh stack push with per-branch explicit force-with-lease then succeeded, followed by gh stack submit --auto. Git remote tips, both PR API heads/bases and formal stack447 were read back: parent c1d3aab9eef04683ea262c9c79ef7d739af2dc50 / PR403 base main, child d0d951a40aa8ae85800d9641c96680cdef0f53ad / PR435 base claude/friendly-sagan-jk7qzy. Both OPEN, non-draft and unmerged. Release pins checked: parent b03a97ae0921bfb75472c4147c59a31d9708d542, child 515cd465e015c56b46b52d28e1d1164bc599f4a2.
+
+Both current partial pre-push tiers PASSED at the actual 4 CPU / 4 outer / 1 inner non-reference shape. Parent: 66/107 selected steps, 4045 tests passed, 35 skipped, 4 warnings in 371.15 s; reachable step 403.47 s; total 526.10 s/1800; repaired refusal target 2.70 s call. Child pin scope selected 216 files: 68/109 steps, normal 7023 passed/48 skipped/1 xfailed/4 warnings in 656.80 s, pool phase 1 passed/7089 deselected in 185.84 s; reachable step 852.81 s; total 975.18 s/1800. These are partial tiers, not full qualification. Preserve both earlier broad local timeout receipts separately.
+
+Final clean-head custody audits PASSED before publication: parent 197346711 source bytes, 3979881 headroom, 6899 copied rows; child 199632135 bytes, 1694457 headroom, 6947 rows. Cap unchanged at 201326592 bytes. Both retain exactly 8/8 required replay leaves totaling 301894 bytes. Normalized copied-path rosters and every other copied path size match prior a151/e0d6 inventories; sole delta +1155 bytes is the reviewed test. Native Git child comparison matches published e0d6 except that test and the maintained pin, with 15 direct catalogue/register/renderer/math comparisons passed. Full audit receipt custody-final-c1d3aab9e-d0d951a40-audit-receipt.json is protected.
+
+Fresh current child Packing37939031609 and Pages37939031693 SUCCESS; parent Pages37939031452 SUCCESS; both mergeability checks SUCCESS. Current child Pages job113848597297 artifact11621780074 exact-side-values-web-checks was independently downloaded/audited: 10404-byte ZIP, sole369168-byte JSON, all 8 phone/desktop/light/dark compact/full layouts have no findings, overflow, MathML errors or lost ink; native MathML and contained keyboard-accessible wide regions passed. Producer50 tests passed in29.31 s, render/--check/--check-web succeeded, and the actual job's explicit no-PDF check passed. Current shard-A11621200719 reports repaired refusal target PASS with total testcase0.600 s; that is JUnit total, not a call-only duration or a full-gate verdict. Canceled same-head child duplicates remain canceled, not passed.
+
+Fresh parent Packing37939031866 FAILED frontend job113848352429 at frontier1280x900/light: test_frontier_katex_font_arrival_retains_layout released cumulative CLS0.13427443275451661 > unchanged0.1. Held phase already recorded0.1337854648590088 at690.1 ms; release adds0.0004889678955078125. Final font inventory, outer paragraph geometry and all359 math items passed. Do not call this proven KaTeX-arrival metric failure: startup reflow predates release, and causal face/style attribution remains open. Unchanged local reproduction passed1 test in8.66 s (call2.16 s), with held0.00001188/released0.00050085. Independent review rejects resetting/subtracting held CLS. Worker has bounded maintained diagnostic probes under review; no production CSS fix or changed limit is claimed. Hosted failure/JUnit/font-arrival JSON and local reproduction evidence remain protected.
+
+Exactly one new full workflow per actual published head was dispatched after checking for duplicates: parent37939481227 at13:48:22Z and child37939486545 at13:48:24Z. Both remain ACTIVE at this checkpoint with no additional observed failure; current automatic failure is not erased by partial successes. Core/slow/exhaustive qualification remains pending. Dated a151 full success and e0d6 full timing failure remain separate.
+
+Current-head partial Papers/report preview built using maintained producers and checked7552/7552, three served pages HTTP200, correct d0 source links, no exact-side-values.pdf. Current complete report: http://127.0.0.1:60649/papers/exact-side-values-complete.html and Papers index /papers.html. This is a partial local preview; live publication follows merge and default-branch deployment. All499 records/519 vectors/6273 integer strings remain preserved. No new mathematical result or report PDF.
+
+Next-slice readiness is now also recorded on think-s6np (OPEN/unclaimed, version12): retained n-11.txt476 bytes/n-102.txt5305 bytes/acquisition receipt; exactsolve return object omits later contacts/active-weak partition and rounds summaries; maintained exporter/module/CLI/test deliverables remain planned, including exact frozen values, independent equations, full precision and denominator/chart/pivot exclusions with roundtrip/refusal controls. Independent contact-derived n11 octic still precedes the single bounded n102 attempt. Numerical29/55/71, Daniel new-pose owners266/270/272, legacy quarantines and geometry/Lean obligations remain as documented. Keep these feature beads open until their corresponding work merges.
