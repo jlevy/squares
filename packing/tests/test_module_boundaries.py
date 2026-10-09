@@ -1071,7 +1071,9 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # by digest, then replayed undoctored as the control for the partner-row test,
         # measured 2026-10-03 (Session 168, BC-418) on a quiet four-cpu box. The fast tier
         # keeps the doctored refusal itself, which reads the committed fixture; the build
-        # had held the quick lane for 13.70s on the hosted runner (run 37087123885).
+        # had held the quick lane for 13.70s on the hosted runner (run 37087123885). Since
+        # PR 402 it first builds and verifies the current producer's W7 node, then rebuilds
+        # the fixture under its original hull-pull schedule: 4.36s, 2026-10-09, four cpus.
         "test_verify_n17_certificates.py": {
             "test_the_w7_fixture_is_what_the_producer_writes",  # 5.26s
         },

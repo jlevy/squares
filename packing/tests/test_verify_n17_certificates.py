@@ -28,6 +28,7 @@ from devtools import verify_n17_bb_certificate as bb_verifier
 from devtools import verify_n17_kernel_certificate as kernel_verifier
 from devtools.check_n17_subpattern import canonical_bytes, load_certificate, save_certificate
 from sqpack.hull_kernel import Budget, producer
+from sqpack.hull_kernel import rational as hull_rational
 from sqpack.hull_kernel.frame import make_frame
 
 PACKING = Path(__file__).resolve().parents[1]
@@ -239,19 +240,40 @@ def w7_stall_objects() -> tuple[dict[str, Any], dict[str, Any]]:
     The objects are the committed fixture, read rather than produced: the production is
     the test's whole cost, and the verifier's obligation is what a valid certificate holds,
     not what a fresh one holds. `test_the_w7_fixture_is_what_the_producer_writes` keeps
-    the two equal."""
+    the two equal under the hull-pull schedule the fixture was written with."""
     seed, node, _, _ = load_certificate(W7_BINS8)
     return seed, node
 
 
 @pytest.mark.slow
-def test_the_w7_fixture_is_what_the_producer_writes() -> None:
+def test_the_w7_fixture_is_what_the_producer_writes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The fixture is the Session 168 audit's record, and its digests are cited by that
+    audit's logs, by the Session 169 receipts and by the native verifier's oracle results,
+    so a producer change does not regenerate it. The producer as it stands writes its
+    own W7 node, which the standing verifier must accept with the fixture's verdict, a
+    stall; with the first inward hull pull restored to 2^-12, which was the schedule
+    that wrote the fixture, the producer must still write the fixture byte for byte."""
     frame = mask0_tool.n17_unique_frame()
     mask = sorted(frame.cell_names.index(cell) for cell in W7)
-    budget = Budget(time.monotonic() + 600, 5_000_000)
-    production = producer.produce(
-        frame, mask, bins=8, max_rounds=6, budget=budget, node_id="n17-W7-audit-fixture"
+
+    def produce() -> producer.Production:
+        budget = Budget(time.monotonic() + 600, 5_000_000)
+        return producer.produce(
+            frame, mask, bins=8, max_rounds=6, budget=budget, node_id="n17-W7-audit-fixture"
+        )
+
+    current = produce()
+    save_certificate(tmp_path, current.seed, current.node)
+    assert (
+        kernel_verifier.verify_objects(tmp_path, kernel_verifier.cover_cells())["closed"]
+        is False
     )
+    # Restoring the old first pull leaves 2^-12 tried twice, which changes nothing:
+    # compression keeps the first valid pull and kernel candidates are deduplicated.
+    monkeypatch.setattr(producer, "FINE_HULL_PULL", hull_rational.Q(1, 2**12))
+    production = produce()
     seed, node = w7_stall_objects()
     assert canonical_bytes(production.seed) == canonical_bytes(seed)
     assert canonical_bytes(production.node) == canonical_bytes(node)
