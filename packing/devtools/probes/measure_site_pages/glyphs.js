@@ -318,10 +318,14 @@
   const shared = new Map();
   /** @type {Map<string, boolean>} */
   const optionalLocal = new Map();
+  // Each metric-adjusted local alias (site.css, paper-type.css) by family, weight and
+  // style, with the exact local sources it may name.
   /** @type {Map<string, string[]>} */
   const fallbackSources = new Map([
-    ["Site Prose Georgia", ["Georgia"]],
-    ["Site Prose Times", ["Times New Roman", "Liberation Serif"]],
+    ["Site Prose Georgia|400|normal", ["Georgia"]],
+    ["Site Prose Times|400|normal", ["Times New Roman", "Liberation Serif"]],
+    ["Site Sans Arial|400|normal", ["Arial", "Liberation Sans"]],
+    ["Site Sans Arial|700|normal", ["Arial Bold", "Liberation Sans Bold"]],
   ]);
   for (const sheet of document.styleSheets) {
     for (const rule of sheet.cssRules) {
@@ -337,10 +341,10 @@
         const locals = [...src.matchAll(localSource)].map((match) =>
           (match[1] ?? match[2] ?? match[3] ?? "").trim(),
         );
-        const expected = fallbackSources.get(family);
+        const expected = fallbackSources.get(
+          `${family}|${weight === "normal" ? "400" : weight}|${slant}`,
+        );
         const optional =
-          (weight === "400" || weight === "normal") &&
-          slant === "normal" &&
           expected !== undefined &&
           locals.length === expected.length &&
           locals.every((name, index) => name === expected[index]) &&
