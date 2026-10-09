@@ -5,7 +5,7 @@ title: Consolidate session n17 work into reviewed merge-ready PRs
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@spud10.local
 labels:
   - n-17
@@ -13,10 +13,10 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-09T03:45:26.746Z
-updated_at: 2026-10-09T05:11:27.768Z
+updated_at: 2026-10-09T06:28:35.964Z
 started_at: 2026-10-09T03:45:50.993Z
 ---
-Assess all session-owned n17 PRs (#404, #452, #453, #454, #457, #461, #464), preserve separate deliverables and formal stack dependencies, resolve documentation/context gaps and current CI/review blockers, and publish a clear consolidation/merge order. User requests merge-ready PRs, not immediate merges. Mathematical review uses Astra; engineering/CI and tracking use GPT-6.1 Sol. No bound movement asserted without admitted evidence.
+Source, mathematical strategy, extraction review and six original PR descriptions are consolidated and captured. User now hands completion to another agent. The published three-file repair #404 at 1af586ef passes current required Packing, Pages and mergeability under the unchanged 192 MiB cap; its broad local push receipt remains failed/interrupted and unqualified. Repair propagation to formal stack455 and standalone464, final pinned follow-up review and clean complete research checkpoints remain open. Supporting452/453 full current-main checkpoints pass. Preserve all original evidence, raw315/316 and held merge state. No merge, draft promotion or new bound. Durable handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
 
 ## Notes
 
@@ -42,3 +42,16 @@ October 9, 05:07-05:11 UTC: supporting full-checkpoint qualification is complete
 - Independent Sol final audit checked raw resolve-tree and aggregate logs: immutable checkout heads are exactly the PR heads, gate identities use blank PR input, and both merge parents contain main3213d651b880d7768bce8506efaf75c2089aeb4f. Current remote main remains3213. Earlier stale f0 runs receive no current credit. Advisory timing notes do not change qualification or ceilings; existing Windows/adoption/large-certificate limitations remain.
 - Supporting PR descriptions and tracker405 comment6074493493 now record the full passes. No CI rerun, build, source edit, draft promotion or merge occurred. The bounded watcher will pause after verified final publication and this sync.
 - Research PRs #404/#454/#461/#464 remain held on the known192MiB source-copy assertions and fresh complete checkpoint. The prepared224MiB patch is still unapplied pending the direct human resource decision. A1, think-0m0x and think-foe5 remain open. Scientific results and the bound are unchanged.
+
+October 9 final handoff: the human requests all work captured in PRs, then transfers completion to another agent.
+
+Complete durable handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
+Final tracker update: https://github.com/jlevy/squares/issues/405#issuecomment-6075579576
+
+Repair #404 is pushed at 1af586ef43446655dfe0401902a096042526dd0a. Automatic Packing 37891105634, Pages 37891105643 and mergeability 37891099687 pass at the unchanged head. Exactly three files change; the 192 MiB cap and scientific records remain. Four boundary checks and sixteen actual-worker controls pass; the actual copy counts 199,926,018 bytes. The broad local push remains failed/interrupted and unqualified: 923.68 seconds, 64 edit/type checks passed, 2,812 tests passed, 32 skipped and six deadline failures under I/O contention. Serial progress controls (seven passed in 2.07 seconds), cache-copy recovery (47.16 seconds) and earlier native positives are scoped receipts, not a composed full push pass.
+
+The repair is not propagated to #454/#461 or applied to #464. Final pinned follow-up review and clean complete research checkpoints remain open. No new full run was dispatched. Supporting #452/#453 remain fully qualified against current main. Peer #402 A/B and #408 A/B are published and verified with no findings; #409 review and #450 current inherited review coverage remain open. Catalogue #403 I and #435 E (including E6) are published and verified at 90266/1666. C1 High, integration findings, loading-budget qualification and prime-hint mathematical assessment remain. Owner parent 910a7a4f is unpublished; do not overwrite active owner work.
+
+All subagents stopped; the old CI heartbeat remains paused. No merge, promotion, new proof result, admission, T item or bound movement. Preserve source custody and the held merge index. Durable local receipts: attic/n17-consolidation-20261008/snapshot-repair-receipts (381 files, 6,816,471 bytes copied byte-for-byte outside disposable scratch). Leave this bead open for the next agent to finish and close out.
+
+Final source correction: #450 moved to 8021291759d86eb53a146f3240046a84604fef3c during handoff. Its new Packing 37892077580, Pages 37892077553 and mergeability 37891957540 pass. Latest review G still binds older 4585b8d; fresh current inherited-layer coverage remains open. Public handoff/comment/tracker updated rather than crediting old-head CI.
