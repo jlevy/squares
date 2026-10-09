@@ -1,7 +1,8 @@
 {{FRONT_MATTER}}
 
-*Evidence cutoff: 8 October 2026. The survey includes retained releases through 7
-October 2026.*
+*Evidence cutoff: 9 October 2026. The selected-bound tables include the confirmed 8
+October intake; newer replayed certificates awaiting adoption are identified
+separately.*
 
 A record square packing can begin as a geometric sketch, a random configuration, or
 pieces borrowed from an earlier record.
@@ -239,9 +240,9 @@ decisions, or the optimizer behind nearby search and squeeze.
 Francisco Couzo supplied many of the seeds: his September release contains 49 improved
 packings, and his October 3 update improves seven of them.
 He credited Claude assistance for the first $n=102$ and $103$ results, but the retained
-publications specify no discovery algorithm.
-Published coordinates and subsequent reuse establish available seeds; they do not reveal
-how those seeds were found
+September and October 3 publications specify no discovery algorithm.
+Those publications and subsequent reuse establish available seeds; they do not reveal
+how the original seeds were found
 ([September packet](../../resources/web/franciscouzo-square-packing-2026-09-27/README.md);
 [October update](../../resources/web/franciscouzo-square-packing-2026-10-03/README.md)).
 
@@ -366,6 +367,18 @@ Its published evidence does not disclose the objective, local optimizer,
 square-selection rule, or hop schedule
 ([Casson README](../../resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md);
 [original SQUISH submission](https://github.com/jlevy/squares/issues/401)).
+
+Couzo’s 8 October follow-up discloses a more specific workflow.
+He starts from Ryan Xu’s packings at $n=84,86,105,175$ and Daniel’s at $n=270$. Couzo
+reports basin hopping at four counts; at $n=175$, Ellsworth’s `refine_packing` followed
+by Daniel’s `fq` supplied the refinement.
+Daniel’s exact contact solver wrote the rational certificates.
+These disclosures identify tools and stages, while leaving the perturbation
+distribution, acceptance rule, and stopping criteria unspecified.
+The complete certificates have passing native feasibility replays here; their adoption
+as standing bounds remains pending at this survey’s cutoff
+([eight refinements](../../resources/web/couzo-exact-refinements-2026-10-08/README.md);
+[five follow-up refinements](../../resources/web/couzo-followup-refinements-2026-10-08/README.md)).
 
 Joost de Winter describes the 16 September 2026 $n=211$ result as full-packing adaptive
 search, grouped-angle local refinement, and interval-verified decimal export.
@@ -492,6 +505,14 @@ Even a rigorous result for one smooth contact branch would leave other corner-co
 branches and better arrangements elsewhere to be addressed
 ([producer method and limitations](../../resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/README.md)).
 
+Contact selection can change during the numerical solve.
+Daniel’s updated implementation reselects its independent contact subset when Newton’s
+Jacobian becomes nearly singular near convergence, as reported for $n=130$. For $n=105$,
+it selects one corner-contact separating branch for the KKT and second-order solve.
+Those conclusions concern the selected branch; other admissible branches need separate
+checks
+([updated solver limitations](../../resources/web/evand-batch-wrapper-2026-10-07/source/s12/search/exact/README.md#limitations)).
+
 ## Turning Coordinates Into a Bound
 
 A **witness** supplies the container side and every square’s pose.
@@ -546,6 +567,28 @@ side. The safe sixteen-place ceiling is $16.7404196795387766$. The exact certifi
 remains valid; the inward-rounded display does not itself follow as an upper bound
 ([retained exact side and displays](../../resources/web/squish-422-second-update-2026-10-07/README.md#exact-sides-and-displays)).
 
+Rational rounding is one route to a certificate.
+Ryan Xu’s separate **undilated algebraic witness** at $n=51$ uses axis-aligned and
+$45^\circ$ squares in side
+
+$$
+S=\frac{16+5\sqrt2}{3},\qquad s(51)\le S.
+$$
+
+The exact $45^\circ$ directions have coefficients $\sqrt2/2$. They belong to the number
+field $\mathbb Q(\sqrt2)$, whose elements have the form $a+b\sqrt2$ with rational $a,b$.
+A checker can represent an element by the pair $(a,b)$ and decide its sign with exact
+rational comparisons.
+This preserves the exact square shapes and contacts while checking the same containment
+and separating-axis conditions.
+The native number-field route and a separate coefficient-pair and corner implementation
+checked all 51 squares; both accepted the witness and rejected duplicate-square and
+outside-container controls.
+This undilated witness is checked separately from the dilated rational certificate of
+the same arrangement.
+It proves feasibility at $S$, without establishing that $S$ is the minimum
+([complete geometry and replay scope](../../resources/web/ry-xu-new-packings-2026-10-08/README.md#separate-undilated-n51-construction)).
+
 Three conclusions require different evidence:
 
 | Conclusion | What must be established |
@@ -562,7 +605,7 @@ the other two.
 
 ### Methods and record examples
 
-The eight categories below place each method at its stage in the workflow.
+The categories below place each method at its stage in the workflow.
 Examples retain their finder and source credit, including historical records that have
 since been improved.
 A source’s description of discovery or refinement and an independent feasibility check
@@ -575,9 +618,11 @@ answer different questions.
 | GPU simulated annealing | Exploration: run many stochastic chains in parallel from random or selected seeds; refine promising outputs separately. | Thomas Schadt found the $n=29$, $51$, and $55$ structures with his annealer. David Ellsworth used its modified GPU version to refind and refine the latter two, then analytically optimized the packings. The energy, proposal distribution, and full cooling schedule remain unpublished ([record histories](../../resources/web/kingbird-squares-in-squares-compared-2026-08-22.md)). |
 | Sequential linear programming (SLP) | Local refinement: repeatedly linearize angle-dependent separation constraints and optimize centres, angles, and side; restart from perturbed poses when useful. | Griffin Casson’s September 2026 release reports two new arrangements, at $n=106,123$, from GPU annealing followed by SLP, and 37 numerical improvements from SLP directly on catalogue packings ([first-party method and results](../../resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md)). |
 | Surgery followed by basin hopping | Seed construction, exploration, then refinement: delete, add, graft, or carve; perturb and locally optimize the transformed seed, then polish. | Nate Chaoweeraprasit’s SQUISH releases report neighboring-count seeds and explicit component lineages. The resulting rational packings have independent exact checks here; detailed hop mechanics remain undisclosed ([original packet](../../resources/web/squish-401-2026-10-07/README.md); [update lineages](../../resources/web/squish-422-second-update-2026-10-07/README.md)). |
-| Contact-equation and stationarity refinement | Local refinement: identify geometric contacts and solve their equations together with stationarity conditions, removing numerical slack near an existing arrangement. | Ellsworth’s analytic optimization is an antecedent of Evan Daniel’s contact/KKT solver. Daniel’s 5 October 2026 batch supplied 48 smaller certified sides, principally for existing arrangements; exact rational certification follows the numerical solve ([analytic method](../../resources/web/kingbird-squares-in-squares-analytic-minimization.md); [batch report](../../resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/README.md)). |
+| Contact-equation and stationarity refinement | Local refinement: identify geometric contacts and solve their equations together with stationarity conditions, removing numerical slack near an existing arrangement. | Ellsworth’s analytic optimization is an antecedent of Evan Daniel’s contact/KKT solver. Daniel’s 5 October 2026 batch supplied 48 smaller certified sides, principally for existing arrangements. Gupta’s later SQUISH refinements use Daniel’s optimizer; exact rational certification follows the numerical solve ([analytic method](../../resources/web/kingbird-squares-in-squares-analytic-minimization.md); [batch report](../../resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/README.md); [Gupta refinements](../../resources/web/gupta-square-packing-refinements-2026-10-08/README.md)). |
 | Adaptive search with grouped-angle refinement | Exploration and local refinement, as reported: search the full packing, then refine groups sharing an angle. The adaptive algorithm and grouping rule are unspecified. | Joost de Winter’s $n=211$ release names those stages and interval-verified export. Its checker and interval boxes are unpublished; separate exact and interval checks here establish feasibility of the supplied pose ([disclosure and independent checks](../../resources/web/de-winter-square-packing-211-2026-09-16/README.md)). |
-| Discovery method undisclosed | Discovery remains unknown; exported coordinates supply a witness for separate feasibility checks. They do not identify the search algorithm. | Francisco Couzo’s September 2026 release supplies 49 improved packings, with subsequent revisions. The source names no search method or checker; exact and interval checks here establish safe bounds independently ([provenance and certification](../../resources/web/franciscouzo-square-packing-2026-09-27/README.md)). |
+| Discovery method undisclosed | Discovery remains unknown; exported coordinates supply a witness for separate feasibility checks. They do not identify the search algorithm. | Francisco Couzo’s September 2026 release supplies 49 improved packings, with subsequent revisions. That release names no search method or checker; exact and interval checks here establish safe bounds independently ([provenance and certification](../../resources/web/franciscouzo-square-packing-2026-09-27/README.md)). |
+| Basin hopping with named refiners | Exploration and local refinement: perturb and optimize an inherited packing, then solve contacts and export a rational certificate. The detailed hopping rules remain unpublished. | Couzo’s 8 October follow-up names basin hopping, Ellsworth’s `refine_packing`, and Daniel’s `fq` and contact solver. Passing feasibility replay and standing-bound adoption are separate stages ([workflow and status](../../resources/web/couzo-followup-refinements-2026-10-08/README.md)). |
+| LLM-assisted workflow, search algorithm unspecified | Assistance describes how work was conducted; it does not identify an energy, proposal rule, or optimizer. Complete poses and certificates permit separate feasibility checks. | Ryan Xu’s $n=51$ radical construction and 25 rational certificates have independent finite feasibility checks. The retained disclosure does not justify assigning a finer exploration algorithm ([source and verification](../../resources/web/ry-xu-new-packings-2026-10-08/README.md)). |
 
 ### Discovery gains and numerical gains
 
@@ -592,6 +637,8 @@ records.
 | 23–27 September and 3 October 2026 | [Francisco Couzo](../../resources/web/franciscouzo-square-packing-2026-10-03/README.md): published configurations and revisions; discovery algorithm unspecified | 49 counts, then seven updated; October $n=208$ lowers the verified ceiling from $14.937018796984568$ to $14.926534459703512$ |
 | 5 October 2026 | [Evan Daniel](../../resources/web/evand-square-packing-2026-10-05/README.md): contact/KKT refinement and rational certification; some inputs received an unpublished SLP squeeze first | 48 certified improvements of about $3.5\times10^{-13}$ to $5.0\times10^{-11}$, principally numerical slack removed from existing arrangements |
 | 7 October 2026 | [Nate Chaoweeraprasit, SQUISH](../../resources/web/squish-422-second-update-2026-10-07/README.md): author-reported neighbor-count seeds, basin hopping, grafting, carving, and polishing; exact certificates | 23 distinct counts across the original release, supplement, and two updates; second-update $n=108$ has verified ceiling $10.9099400734448775$ |
+| 8 October 2026 | [Ryan Xu](../../resources/web/ry-xu-new-packings-2026-10-08/README.md): LLM-assisted workflow, with exploration algorithm unspecified | 25 rational certificates and a separate undilated radical $n=51$ witness; 17 rational witnesses and the radical witness supply selected bounds |
+| 8 October 2026 | [Siddharth Gupta](../../resources/web/gupta-square-packing-refinements-2026-10-08/README.md): precision refinement of Chaoweeraprasit’s SQUISH constructions with Daniel’s optimizer | 17 verified rational certificates; 14 selected improvements and three withdrawn offers retained as historical inputs |
 
 Casson’s 37 direct-refinement improvements have all since been superseded in this
 repository’s frontier ([source coverage](../../frontier/source-coverage.yaml)). That
@@ -606,6 +653,101 @@ Both $n=108$ configurations have confirmed feasibility; the producer supplies th
 account of how the new seed reached the improved result
 ([original certificate](../../resources/web/squish-401-2026-10-07/README.md);
 [second update](../../resources/web/squish-422-second-update-2026-10-07/README.md)).
+
+### Selected bounds after the October 8 intake
+
+The integrated register on 9 October contains 32 smaller selected upper bounds than at
+this survey’s first publication: 18 from Ryan Xu and 14 precision refinements by
+Siddharth Gupta.
+The table gives safe sixteen-place decimal ceilings for the previous and
+selected witnesses. Each count links to its case and exact form; the finite feasibility
+results are recorded as T-125, T-126, and T-127
+([results register](../../frontier/results.yaml)). For $n=51$, the selected exact side
+is $(16+5\sqrt2)/3$. These are construction upper bounds, with no new local- or
+global-optimality conclusion.
+
+| $n$ | Previous ceiling | Selected ceiling | Credit |
+| ---: | ---: | ---: | --- |
+| [51](../../frontier/n-051.md) | 7.7007992354170200 | 7.6903559372884918 | Xu |
+| [70](../../frontier/n-070.md) | 8.8816667570090100 | 8.8809603717088810 | Xu |
+| [84](../../frontier/n-084.md) | 9.7071067811865476 | 9.6980520605096981 | Xu |
+| [86](../../frontier/n-086.md) | 9.8228756555322953 | 9.8205657300098206 | Xu |
+| [88](../../frontier/n-088.md) | 9.8824510304821347 | 9.8824510304812469 | Gupta |
+| [102](../../frontier/n-102.md) | 10.6071746801760512 | 10.6058286965106059 | Xu |
+| [103](../../frontier/n-103.md) | 10.7035167555725421 | 10.6792320475106793 | Xu |
+| [105](../../frontier/n-105.md) | 10.8060778655197047 | 10.7906765754107907 | Xu |
+| [108](../../frontier/n-108.md) | 10.9099400734448775 | 10.9048247851109049 | Xu |
+| [123](../../frontier/n-123.md) | 11.6009077785163406 | 11.5913781457115914 | Xu |
+| [126](../../frontier/n-126.md) | 11.7733036066072403 | 11.7426406872117427 | Xu |
+| [127](../../frontier/n-127.md) | 11.8228756555323000 | 11.8109366475118110 | Xu |
+| [129](../../frontier/n-129.md) | 11.8793752067111287 | 11.8720298492118721 | Xu |
+| [130](../../frontier/n-130.md) | 11.9044830325168772 | 11.9044830325157865 | Gupta |
+| [131](../../frontier/n-131.md) | 11.9549168302161245 | 11.9511500449119512 | Xu |
+| [146](../../frontier/n-146.md) | 12.6009077785130200 | 12.5837822775125838 | Xu |
+| [153](../../frontier/n-153.md) | 12.8796793733329640 | 12.8796793733293146 | Gupta |
+| [154](../../frontier/n-154.md) | 12.9265622458535390 | 12.9265622458523470 | Gupta |
+| [175](../../frontier/n-175.md) | 13.7781745930520300 | 13.7688992766137689 | Xu |
+| [179](../../frontier/n-179.md) | 13.8837954905121866 | 13.8837954905108985 | Gupta |
+| [180](../../frontier/n-180.md) | 13.9176534174514757 | 13.9176534174501843 | Gupta |
+| [199](../../frontier/n-199.md) | 14.6175721735980400 | 14.6175721735928069 | Gupta |
+| [207](../../frontier/n-207.md) | 14.8879922583077482 | 14.8879922583026574 | Gupta |
+| [208](../../frontier/n-208.md) | 14.9245187720328190 | 14.9245187720293559 | Gupta |
+| [209](../../frontier/n-209.md) | 14.9496179522017921 | 14.9496179522003981 | Gupta |
+| [236](../../frontier/n-236.md) | 15.8678008394255397 | 15.8678008394199166 | Gupta |
+| [237](../../frontier/n-237.md) | 15.9036762351906287 | 15.9036762351891381 | Gupta |
+| [238](../../frontier/n-238.md) | 15.9261468570124710 | 15.9261468570109784 | Gupta |
+| [239](../../frontier/n-239.md) | 15.9493131697291908 | 15.9493131697276962 | Gupta |
+| [261](../../frontier/n-261.md) | 16.6829268292683000 | 16.6787798754166788 | Xu |
+| [267](../../frontier/n-267.md) | 16.8466671928434900 | 16.8388319611168389 | Xu |
+| [295](../../frontier/n-295.md) | 17.7071067811865500 | 17.7042327915177043 | Xu |
+
+**Xu** identifies the contributor of the complete configurations.
+The source reports LLM assistance but leaves the exploration algorithm unspecified.
+All 25 rational certificates have complete passing feasibility replays; 17 supply
+selected bounds, and the separate radical $n=51$ witness supplies the eighteenth.
+The other eight rational inputs remain verified historical witnesses
+([Xu packet](../../resources/web/ry-xu-new-packings-2026-10-08/README.md)).
+
+**Gupta** identifies the precision refiner.
+Construction credit remains with Nate Chaoweeraprasit’s SQUISH, and the source credits
+Evan Daniel’s optimizer.
+All 17 certificates, including the three withdrawn offers at $n=108,123,129$, have
+complete passing replays.
+Fourteen supply selected bounds; withdrawal affects selection, not their established
+feasibility
+([Gupta packet](../../resources/web/gupta-square-packing-refinements-2026-10-08/README.md)).
+The gains in Gupta’s displayed ceilings are roughly $10^{-12}$ to $10^{-11}$, whereas
+Xu’s changes in the table range from about $10^{-3}$ to $3\times10^{-2}$. This contrast
+separates precision refinement from the larger gains in the submitted configurations; it
+does not independently establish novelty or reconstruct discovery.
+
+The rational packets use two deciding geometry implementations with shared certificate
+parsing, half-angle conversion, rational arithmetic, and separating-axis methodology.
+Their agreement and full-roster duplicate-square and outside-container controls support
+the stated finite feasibility checks.
+They are not two independent mathematical methods, nor a replay of the authors’
+optimizers.
+
+### Replayed certificates and pending adoption
+
+A successful geometry replay and a change to the standing register are separate events.
+Couzo’s eight exact refinements and five follow-up refinements have complete passing
+positive and negative-control replays, while T-128 and T-130 remain reported entries
+pending confirming integration and preservation of displaced source houses.
+The follow-up refines Xu’s $n=84,86,105,175$ witnesses and Daniel’s $n=270$ witness; its
+safe $n=105$ ceiling is $10.7893037837481589$, below the selected value in the table.
+That smaller certificate is useful evidence about refinement even before standing
+adoption
+([eight-case packet](../../resources/web/couzo-exact-refinements-2026-10-08/README.md);
+[five-case packet](../../resources/web/couzo-followup-refinements-2026-10-08/README.md)).
+
+Pending source claims need their own scope.
+Daniel’s newer $n=132,155$ submission awaits intake; the retained $n=105,130,292$
+supplement, T-129, is an unreplayed historical source report.
+Exact-form, KKT, or local-minimum claims attached to a previous configuration do not
+transfer to a newly adopted packing at the same count
+([intake requests](../../campaign/result-requests.yaml);
+[results register](../../frontier/results.yaml)).
 
 ### Rare hits and scoped failures
 
@@ -640,6 +782,17 @@ These runs used the previous-count record, the target side, and rigid blocks mat
 from both records. The quoted result followed harness repair and checking; the report
 does not retain the final poses as an independent certificate
 ([measured physics results](../../campaign/explorations/X-034-the-workbench-physics-as-a-search.md#4-what-a-repaired-run-is-worth)).
+
+A useful control is to ask whether the local refiner recovers an unperturbed record
+before interpreting kicked trials.
+Daniel’s reported $n=292$ calibration found that loosening the container by 2% before a
+soft squeeze lost the endpoint even with no kick; the subsequent SLP hit its time limit
+above the starting side.
+Removing the loosening step recovered that endpoint, after which perturbed trials could
+be compared with it.
+These are author-reported calibration runs, not independently reproduced experiments or
+a local-optimality proof
+([calibration table](../../resources/web/evand-batch-292-2026-10-07/source/s12/search/packer/s292.md#3-samplers)).
 
 At the $n=11$ contact kink, the tested Powell and Nelder–Mead angle searches performed
 worse than finite-difference descent.

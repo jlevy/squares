@@ -3,10 +3,24 @@
   max-width: min(100%, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
 }
 
-/* The long methods table flows across pages; KPress still keeps each row intact. */
+/* Survey tables flow across pages; KPress still keeps each row intact. */
 @media print {
-  .cert-page.methods-paper #methods-and-record-examples + p + .kpress-table-wrap .kpress-table {
+  .cert-page.methods-paper .kpress-table-wrap .kpress-table {
     break-inside: auto;
     page-break-inside: auto;
   }
+}
+
+/* A side length must remain readable as one number in the record comparison. */
+.cert-page.methods-paper
+  #selected-bounds-after-the-october-8-intake
+  + p
+  + .kpress-table-wrap
+  td:nth-child(2),
+.cert-page.methods-paper
+  #selected-bounds-after-the-october-8-intake
+  + p
+  + .kpress-table-wrap
+  td:nth-child(3) {
+  white-space: nowrap;
 }

@@ -504,6 +504,15 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 #: dates belong to the paper, independently of the site and n = 11 series.
 PACKING_METHODS_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.2.0",
+        first_published="October 9, 2026",
+        result_scope=(
+            "Add the confirmed October 8 intake: 32 selected upper-bound improvements, "
+            "Couzo’s disclosed refinement workflow, Xu’s radical certificate, and "
+            "refiner calibration and branch-selection examples."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.0",
         first_published="October 8, 2026",
         result_scope=(
@@ -516,7 +525,7 @@ PACKING_METHODS_HISTORY = (
 PACKING_METHODS_VERSION = PACKING_METHODS_HISTORY[0].version
 PACKING_METHODS_EDITION = PACKING_METHODS_VERSION
 PACKING_METHODS_FIRST_PUBLISHED = PACKING_METHODS_HISTORY[-1].first_published
-PACKING_METHODS_REVISED = "October 8, 2026"
+PACKING_METHODS_REVISED = "October 9, 2026"
 
 #: The commit the committed claim documents link to
 #: (`render_n11_lower_bounds_explainer.edition_file`), at this repository's short length. It is

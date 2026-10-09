@@ -58,7 +58,7 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
         "packing-methods.css",
     )
     assert paper.FRONT.history == "version-history"
-    assert paper.FRONT.version == release.PACKING_METHODS_EDITION == "v0.1.0"
+    assert paper.FRONT.version == release.PACKING_METHODS_EDITION == "v0.2.0"
     assert paper_front.revised(paper.FRONT) == release.PACKING_METHODS_REVISED
     assert "Part IV" not in html
     assert "the n = 11 series" not in markdown
@@ -75,16 +75,17 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
         "https://github.com/jlevy/squares",
     ]
     version = next(line for line in structure.credits if line.kind == "version")
-    assert version.text == "v0.1.0 (version history)"
+    assert version.text == "v0.2.0 (version history)"
     assert version.links == (("version history", "#version-history"),)
     assert version.bold == ()
     assert structure.h1 == ("How Record Square Packings Are Found",)
     assert structure.title == paper.TITLE
-    assert structure.published == structure.modified == "2026-10-08"
+    assert structure.published == "2026-10-08"
+    assert structure.modified == "2026-10-09"
     assert next(line.text for line in structure.credits if line.kind == "dates") == (
-        "Published October 8, 2026"
+        "First published October 8, 2026 · Last revised October 9, 2026"
     )
-    assert "- Published October 8, 2026" in markdown
+    assert "- First published October 8, 2026 · Last revised October 9, 2026" in markdown
     assert structure.pdf == {}
     assert release.PUBLICATION_EDITION not in html
     assert release.PUBLICATION_EDITION not in markdown
@@ -140,7 +141,7 @@ def test_the_canonical_manuscript_renders_through_the_registered_interface() -> 
     assert 'id="version-history"' in html
     history = markdown.partition("## Version History\n")[2]
     assert history
-    assert release.PACKING_METHODS_HISTORY[0].version == "v0.1.0"
+    assert release.PACKING_METHODS_HISTORY[0].version == "v0.2.0"
     for entry in release.PACKING_METHODS_HISTORY:
         assert (
             f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}" in history
@@ -185,7 +186,7 @@ def test_printed_paper_has_its_own_title_dates_and_absolute_links(
     page.parent.mkdir(parents=True, exist_ok=True)
     page.write_text(html, encoding="utf-8")
     pdf = page.with_suffix(".pdf")
-    revised = date(2026, 10, 8)
+    revised = date(2026, 10, 9)
     paper.print_pdf(page, pdf, revised=revised, site_path=paper.SITE_PATH)
     data = pdf.read_bytes()
     assert date_problem(data, revised) is None
