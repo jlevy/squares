@@ -5,7 +5,7 @@ title: "PR #449: identify and fix cold font layout shifts"
 kind: bug
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4ekeq41zfgtf5dp8r462n05
 hold: null
 hold_until: null
 created_at: 2026-10-09T03:14:11.939Z
-updated_at: 2026-10-09T08:41:45.335Z
+updated_at: 2026-10-09T19:14:04.125Z
 started_at: 2026-10-09T03:14:25.888Z
 ---
 Exact current #449 head4963448e33c39002a48593ef79999940b153f2c0 Pages run37875117402/job113642170191 fails papers/n11-threshold-bound-review.html at390px light: CLS0.2512375662788857 exceeds the unchanged0.1 limit. The dominant native shift491.2ms reflows nav links/doc-links and hero during font loading422.1–584.2ms; all401 math nodes remain readable and task236ms passes300ms. Trace actual platform face identity and font-delivery cause with the maintained optional diagnostic, then fix production scope only after evidence and independent review. Preserve every budget, default measurement path, scientific record and source input. This is a newly observed current-head recurrence; historical think-9gu8 is closed against PR3959700cef with its own passing gates, and those receipts do not qualify this head. ROOT approves two diagnostic paths check_site_rendering.py/test_site_rendering.py and one bounded exact449 paper-only render without PDF/fullsite. Broad frontend tracker think-5jr5 remains independently open. Moderate intake_remaining_fixes owns this lane; ROOT owns publication/merges.
@@ -31,3 +31,5 @@ Round-2 Lows addressed on #442 (head 38c3ca4f8; hosted Packing 37896427037 + Pag
 #468 review B (security+correctness, needs changes): B3 Medium diagnostic attribution misses text >2 levels deep yet reports complete; B2 Low diagnostic dispatch shares certificate-page concurrency group with push runs on main and blocks rerun_starved re-runs (A2's no-branch-protection reason does not cover these); B1 Low second checkout persist-credentials untested; B4 Low job comment. Security otherwise clean (contents: read, no secrets, no input interpolation, fixed SHA checkout, pinned actions). Fix agent dispatched; preferred: move diagnostic to its own workflow file.
 
 #468 review B addressed (head 374e63b92): d181c92c9 diagnostic moved to .github/workflows/font-diagnostic.yml (workflow_dispatch only, contents: read, own concurrency group; pages.yml + test_pages_workflow.py + test_rerun_starved.py byte-identical to #466) -> fixes B2 and A2; f67a7b010 B3 per-text-node font attribution, rows with rendered text and no face fail, regression fixture with the paper's real nesting; 2b6e6bd2a B1/B5/B6 (credentials and expression pins, literal pinned input list, helper copy compare at dispatch); c57ae5dbe B4 comments; 374e63b92 test. Diagnostic dispatchable only once the file is on main; it renders the pre-fix 4963448e page by design. Keep open for one dispatch after merge.
+
+font-diagnostic.yml is on main since d3860c97a, so it is now dispatchable; this session cannot dispatch (403). Dispatch once from main to record the pre-fix Linux faces.
