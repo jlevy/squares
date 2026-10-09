@@ -5,7 +5,7 @@ title: Stabilize stack 430 on main 3213 and qualify every layer
 kind: task
 status: in_progress
 priority: 1
-version: 38
+version: 39
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -37,7 +37,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T04:14:49.601Z
-updated_at: 2026-10-09T11:54:24.264Z
+updated_at: 2026-10-09T11:54:26.796Z
 started_at: 2026-10-09T04:20:32.996Z
 ---
 Cloud continuation of think-yij0 handoff (PR467). Normal-merge origin/main 3213d651b into #442, propagate to #468, fix the recorded failures without weakening limits, obtain exact-head required CI and full checkpoints, bind reviews. Merge only with owner confirmation (github-merge confirm-session).
@@ -69,3 +69,7 @@ Final round: #466 6fb0f2e29 (review B: B1 4c07376b5, B2 8d1ab3d9f+44d6b1883, B3/
 Round 4 (main 533dd42c6 n17 stack): heads #442 8da78ef7b ... #469 4e93dac1b; conflicts resolved via renderers/unions (integrity baseline unchanged 887/144; COPY_SEPARATELY union); snapshot at #469 200,186,194 B (headroom 1,140,398; tightest #442 200,495,134). Blockers: suite_files check fails #442-#468 (main's + layer modules exceed 10% unrecorded per shard; hosted run 37915272962 suite-b); main moved to bead35d93 (#408/#409/#464) making #442 dirty and stalling PR runs above. Round 5 ordered: merge bead35d93, per-layer admit-local of each layer's own new quick modules, #469 keeps only its own admissions.
 
 Round 5 done: main bead35d93 in #442; per-layer suite admissions (#442 5 modules, #443 2, #448 2, #460 3, #466 1, #468 1, #469 2); final heads #442 812dc2f26, #443 75bacb5ee, #448 8258475c1, #449 1a28656cd, #450 a014480ca, #459 73b7bc2e5, #460 cd3781e2e, #463 65c30bbee, #466 21a835609, #468 5ae05cc4f, #469 3fde0883b; snapshot 199,931,070 B at #469. CI green on 9 layers; #443 Pages run 37921107096 failed n11-threshold-bound-review 1280 light longestTaskMs 385 > 300 (single hosted sample; re-run needs owner, 403 here); #469 running.
+
+
+
+2026-10-09T11:52Z FYI 11:45 UTC: main is 6a0499ba4 (adds #473: slow markers in test_module_boundaries.py, test_retained_json_layout.py, n17 propagation tests; controls comment/test edits). Re-check #442's integration against it.
