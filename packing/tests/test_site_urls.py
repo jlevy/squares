@@ -661,9 +661,7 @@ def test_every_partial_paper_or_workbench_check_stages_the_shared_card() -> None
                 assert command.index(card) < command.index(publication), name
                 checked.append(name)
     assert set(checked) == {
-        "n11-optimality-review",
-        "n11-threshold-bound-review",
-        "square-packing-methods-survey",
+        *(paper.slug for paper in render_overview.PAPERS if paper.part != 1),
         "workbench",
         "pdf",
     }

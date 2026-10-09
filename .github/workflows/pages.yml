@@ -170,6 +170,7 @@ name: Certificate page
       - packing/tests/test_assemble_site.py
       - packing/devtools/pages_scope.py
       - packing/devtools/render_exact_side_values.py
+      - packing/devtools/retained_data.py
       - packing/devtools/exact_catalogue.py
       - packing/devtools/build_exact_values.py
       - packing/devtools/extract_kingbird_svg_exact.py

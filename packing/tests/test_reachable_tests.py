@@ -9,6 +9,7 @@ change nobody can attribute must select everything.
 
 from __future__ import annotations
 
+import gzip
 import os
 import re
 import subprocess
@@ -307,6 +308,50 @@ def test_pages_workflow_selects_every_declared_publication_test() -> None:
                 for target in re.findall(r"\btests/[\w/.-]+\.py\b", str(step.get("run", "")))
             )
     assert expected <= set(selection.tests)
+
+
+@pytest.fixture
+def pages_input_root(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    packing = tmp_path / "packing"
+    packing.mkdir()
+    monkeypatch.setattr(reachable_tests, "REPO", tmp_path)
+    monkeypatch.setattr(reachable_tests, "ROOT", packing)
+    monkeypatch.setattr(pages_scope, "__file__", str(packing / "devtools/pages_scope.py"))
+    monkeypatch.setattr(pages_scope, "load_workflow", lambda: {"jobs": {}})
+    return packing
+
+
+@pytest.mark.parametrize("storage", ["plain", "gzip", "both", "missing"])
+def test_pages_inputs_resolve_only_present_declared_register_copies(
+    storage: str, pages_input_root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    logical = pages_input_root / "exact-values.json"
+    packed = logical.with_name(logical.name + ".gz")
+    if storage in {"plain", "both"}:
+        logical.write_bytes(b"{}")
+    if storage in {"gzip", "both"}:
+        packed.write_bytes(gzip.compress(b"{}", mtime=0))
+    monkeypatch.setattr(pages_scope, "BUILDER_INPUTS", {"paper": lambda: (logical, packed)})
+    if storage == "missing":
+        with pytest.raises(FileNotFoundError, match="declared Pages input is missing"):
+            reachable_tests._pages_workflow_inputs()
+        return
+    inputs = reachable_tests._pages_workflow_inputs()
+    assert (logical in inputs) is (storage in {"plain", "both"})
+    assert (packed in inputs) is (storage in {"gzip", "both"})
+
+
+@pytest.mark.parametrize("suffix", [".json", ".py"])
+def test_pages_inputs_refuse_undeclared_or_nondata_compressed_substitutes(
+    suffix: str, pages_input_root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    logical = pages_input_root / f"input{suffix}"
+    packed = logical.with_name(logical.name + ".gz")
+    packed.write_bytes(gzip.compress(b"{}", mtime=0))
+    declared = (logical,) if suffix == ".json" else (logical, packed)
+    monkeypatch.setattr(pages_scope, "BUILDER_INPUTS", {"paper": lambda: declared})
+    with pytest.raises(FileNotFoundError, match="declared Pages input is missing"):
+        reachable_tests._pages_workflow_inputs()
 
 
 def test_pages_selection_keeps_real_unmapped_python_fallback() -> None:

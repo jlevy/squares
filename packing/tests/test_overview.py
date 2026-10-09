@@ -427,7 +427,7 @@ def _page_card_parts(page: str, href: str) -> tuple[str, str]:
 
 
 def test_each_page_card_is_a_plain_link_to_its_page(page: str) -> None:
-    """The overview's seven page cards lead to full pages the site serves, so each card
+    """The overview's eight page cards lead to full pages the site serves, so each card
     is the link itself and goes there in the same tab: an `<a href>` with the page icon
     (`data-go="page"`), no popover, no framed preview and no new tab. Each keeps its
     label, headline, note and size. The three parts of the n = 11 series stand together
@@ -446,6 +446,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(page: str) -> None:
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
         "papers/square-packing-methods-survey.html",
+        "papers/exact-side-values.html",
         "tutorial.html",
         "workbench/",
     ]
@@ -1292,17 +1293,17 @@ def test_every_card_grid_sits_in_a_frame_it_can_measure(page: str) -> None:
 def test_the_page_cards_keep_the_series_together_at_one_column_width(
     page: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """The seven page cards stand in three lines: the Frontier page alone at the top, then
+    """The eight page cards stand in four lines: the Frontier page alone at the top, then
     the three parts of the n = 11 series in reading order, one card per paper, then the
-    methods tutorial, first-principles tutorial and workbench (the series plan,
+    methods and exact-values papers, then the tutorial and workbench (the series plan,
     2026-10-05; one, two and two while the
     site had two papers, the owner, 2026-10-02, `think-ns3d`). A section set in lines of
     its own (`SECTION_CARD_LINES`) is one frame holding a grid per line, a gap apart,
     each marked with its longest line's count, which the stylesheet caps a line of its
     size at, so the lines share one column width and each centres in it. Lines that do
     not count the section's cards are refused."""
-    assert overview_sections.SECTION_CARD_LINES == {"pages": (1, 3, 3)}
-    assert len(overview_sections.PAGES) == 7
+    assert overview_sections.SECTION_CARD_LINES == {"pages": (1, 3, 2, 2)}
+    assert len(overview_sections.PAGES) == 8
     frame = page.split('<div class="site-cards-frame site-wide">', 1)[1]
     rows = re.findall(r'<div class="site-cards" data-cards-most="3">(.*?)</div>', frame)
     assert [
@@ -1314,7 +1315,8 @@ def test_the_page_cards_keep_the_series_together_at_one_column_width(
             "papers/n11-threshold-bound-review.html",
             "papers/n11-optimality-review.html",
         ],
-        ["papers/square-packing-methods-survey.html", "tutorial.html", "workbench/"],
+        ["papers/square-packing-methods-survey.html", "papers/exact-side-values.html"],
+        ["tutorial.html", "workbench/"],
     ]
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     gap = css[css.index(".site-cards + .site-cards {") :]
@@ -1328,7 +1330,7 @@ def test_the_page_cards_keep_the_series_together_at_one_column_width(
             in rule[: rule.index("}")]
         ), section
     monkeypatch.setitem(overview_sections.SECTION_CARD_LINES, "pages", (2, 2))
-    with pytest.raises(SystemExit, match="pages: 7 cards in lines of"):
+    with pytest.raises(SystemExit, match="pages: 8 cards in lines of"):
         overview_sections.page_cards()
 
 
