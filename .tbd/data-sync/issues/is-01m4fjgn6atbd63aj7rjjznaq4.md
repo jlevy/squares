@@ -5,8 +5,8 @@ title: Review green n17 peer PRs402/408/409 at their current heads
 kind: task
 status: in_progress
 priority: 1
-version: 5
-delegate: claude-code@spud10.local
+version: 6
+delegate: claude-code@vm
 labels:
   - n-17
 dependencies:
@@ -16,7 +16,7 @@ parent_id: is-01m4fhz39j0nmrca9x38tyrnsg
 hold: null
 hold_until: null
 created_at: 2026-10-09T05:34:59.273Z
-updated_at: 2026-10-09T07:56:17.108Z
+updated_at: 2026-10-09T08:32:28.201Z
 started_at: 2026-10-09T05:35:39.532Z
 ---
 Peer #402 at 3745534eb and #408 at d7709c1c have Astra senior A and correctness B reviews with no findings and passing expected aggregates. Reviews: #402 5466112458/5466196489; #408 5466236830/5466252889. These exclude integration with newer main 3213; full H258 target replay is not claimed. #409 at 7f7b4469 still has no formal review. Complete senior review and decide dedicated correctness scope, then qualify any source/base changes. Avoid repeating unchanged green gates. Keep this open for the next agent's finish and closeout. No merge, promotion, admission or bound movement. https://github.com/jlevy/squares/issues/405
