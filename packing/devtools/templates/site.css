@@ -2048,14 +2048,14 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   --site-atlas-scale: 1.5;
 }
 /* Layout, Size and Scale use the section tabs' strip (site-nav.css), on
-   the bar's line, so each is as tall here as under the bar. One row aligned left over the
-   tiles, the key to a tile's marks on a line of its own under it; on a narrow block the
-   controls wrap beneath one another. */
+   the bar's line, so each is as tall here as under the bar. Each chooser line is
+   centered over the tiles, with the compact two-column key centered beneath it;
+   on a narrow block the controls wrap beneath one another. */
 .site-atlas-grid .site-atlas-controls {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem 1.6rem;
-  justify-content: start;
+  justify-content: center;
   margin-block-end: var(--site-atlas-toggle-space);
 }
 .site-atlas-grid .site-atlas-views,
@@ -2080,8 +2080,8 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
   font-weight: var(--site-font-weight-sans-light);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  justify-content: start;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  justify-content: center;
   margin: 0;
   text-align: start;
 }

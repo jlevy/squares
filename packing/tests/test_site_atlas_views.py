@@ -40,6 +40,7 @@ from urllib.parse import unquote, urlsplit
 
 import pytest
 
+from devtools import check_site_rendering
 from devtools import measure_atlas_views as atlas
 from devtools.measure_atlas_views import LAYOUT
 from sqpack.known_best import grid_transitions
@@ -64,6 +65,7 @@ SUBSET = probe(PROBES, "site_atlas_views/subset")
 REFERENCE = probe(PROBES, "site_atlas_views/reference")
 CONTRIBUTIONS = probe(PROBES, "site_atlas_views/contributions")
 PREPARE_SHOT = probe(PROBES, "site_atlas_views/prepare-shot")
+CONTROLS = probe(PROBES, "site_atlas_views/controls")
 
 GRID, TRIANGLE = atlas.tab("grid"), atlas.tab("triangle")
 SMALL, MEDIUM, LARGE = (atlas.size_tab(size) for size in atlas.SIZES)
@@ -514,6 +516,64 @@ def seen(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
         browser.close()
         (root / "all-readings.json").write_text(json.dumps(found, indent=2))
         yield found
+
+
+@pytest.fixture(scope="module")
+def control_readings(tmp_path_factory: pytest.TempPathFactory) -> Readings:
+    """Read the actual homepage across chooser wrap points, with and without scripts."""
+    root = Path(tmp_path_factory.mktemp("atlas-controls"))
+    address = site_renders.write(root, "index.html")["index.html"].as_uri()
+    found: Readings = {}
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        for javascript in (False, True):
+            context = browser.new_context(java_script_enabled=javascript)
+            page = context.new_page()
+            page.goto(address, wait_until="load")
+            check_site_rendering.wait_for_fonts(page)
+            for width in (320, 390, 640, 820, 1280, 3200):
+                page.set_viewport_size({"width": width, "height": 900})
+                name = f"{width}px, scripts {javascript}"
+                found[name] = page.evaluate(CONTROLS)
+                if javascript and width in (390, 1280):
+                    page.locator("[data-atlas-controls]").screenshot(
+                        path=root / f"controls-{width}.png", animations="disabled"
+                    )
+            context.close()
+        browser.close()
+    (root / "controls.json").write_text(json.dumps(found, indent=2), encoding="utf-8")
+    return found
+
+
+def test_choosers_and_the_complete_legend_share_the_content_center(
+    control_readings: Readings,
+) -> None:
+    for name, reading in control_readings.items():
+        content = reading["controls"]
+        center = (content["left"] + content["right"]) / 2
+        lines: dict[float, list[dict[str, float]]] = {}
+        assert len(reading["choosers"]) == 3, name
+        for chooser in reading["choosers"]:
+            lines.setdefault(round(chooser["top"], 1), []).append(chooser)
+        for line in lines.values():
+            left = min(box["left"] for box in line)
+            right = max(box["right"] for box in line)
+            assert (left + right) / 2 == pytest.approx(center, abs=1), name
+            assert left >= content["left"] - 1, name
+            assert right <= content["right"] + 1, name
+        columns = reading["columns"]
+        assert len(columns) == 2, name
+        assert [len(column["items"]) for column in columns] == [4, 4], name
+        items = [item for column in columns for item in column["items"]]
+        left = min(item["box"]["left"] for item in items)
+        right = max(item["box"]["right"] for item in items)
+        assert (left + right) / 2 == pytest.approx(center, abs=1), name
+        assert left >= content["left"] - 1, name
+        assert right <= content["right"] + 1, name
+        for column in columns:
+            for item in column["items"]:
+                assert item["box"]["left"] == pytest.approx(column["box"]["left"], abs=1), name
+                assert item["textAlign"] in ("start", "left"), name
 
 
 def test_a_plain_address_opens_small_triangle_under_its_two_tabs(seen: Readings) -> None:

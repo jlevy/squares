@@ -19,7 +19,6 @@ import re
 import textwrap
 from collections.abc import Collection, Iterable, Mapping, Sequence
 from datetime import date, timedelta
-from fractions import Fraction
 from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
@@ -2665,12 +2664,14 @@ def atlas_enclosing_sides() -> dict[int, float]:
     House drawings use their canonical witness; a regularized drawing uses its retained
     derived witness, whose certified side the renderer draws. Project the same scalar
     sources as the renderer to browser precision without changing the witnesses.
+    The shared frame reader preserves algebraic coefficient vectors and their root
+    declarations as one exact side.
     """
+    from devtools.build_known_best_atlas import frame_from_witness  # noqa: PLC0415
     from devtools.render_regularized_atlas import (  # noqa: PLC0415
         regularized_entries,
         view_witness,
     )
-    from sqpack.render.numbers import scalar_from_decimal, scalar_from_fraction  # noqa: PLC0415
     from sqpack.yamlio import load_yaml  # noqa: PLC0415
 
     manifest = json.loads((REPO / "packing/atlas/known-best/manifest.json").read_text())
@@ -2683,15 +2684,9 @@ def atlas_enclosing_sides() -> dict[int, float]:
             if n in views
             else load_yaml((REPO / "packing" / entry["witness"]["path"]).read_text())["witness"]
         )
-        raw = str(witness["side"])
-        scalar = (
-            scalar_from_fraction(Fraction(raw))
-            if witness["scalar"]["kind"] == "rational"
-            else scalar_from_decimal(raw)
-        )
-        side = float(scalar.projected)
+        side = float(frame_from_witness(witness).container_side.projected)
         if witness["n"] != n or not math.isfinite(side) or side <= 0:
-            raise ValueError(f"n={n}: invalid atlas enclosing side {raw!r}")
+            raise ValueError(f"n={n}: invalid atlas enclosing side {witness['side']!r}")
         sides[n] = side
     return sides
 
@@ -2730,7 +2725,8 @@ def _atlas_cell(
 
     The first retained grid packing in a square-bound row identifies its grid
     suffix for layout and accessibility. Derived drawing provenance stays in the atlas
-    index. A new verified lower bound carries the same star as the frontier table.
+    index. A recent displayed upper, lower or optimality contribution carries the
+    shared star and accessible name.
     """
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.render_case_pages import case_url  # noqa: PLC0415

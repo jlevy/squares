@@ -1026,8 +1026,8 @@ def test_the_atlas_key_names_the_star_and_counts_over_the_complete_corpus() -> N
         "color: var(--site-support-color);",
         "font-size: var(--site-font-size-note);",
         "flex-basis: 100%;",
-        "grid-template-columns: repeat(2, minmax(0, 1fr));",
-        "justify-content: start;",
+        "grid-template-columns: repeat(2, minmax(0, max-content));",
+        "justify-content: center;",
         "text-align: start;",
     ):
         assert declaration in legend, declaration
@@ -1161,23 +1161,27 @@ def test_the_view_tabs_are_the_section_tabs_strip() -> None:
         assert declaration in button
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     placed = _rule(
-        css, ".site-atlas-grid .site-atlas-views,\n.site-atlas-grid .site-atlas-sizes"
+        css,
+        ".site-atlas-grid .site-atlas-views,\n"
+        ".site-atlas-grid .site-atlas-sizes,\n"
+        ".site-atlas-grid .site-atlas-scales",
     )
     assert "line-height: var(--site-nav-line);" in placed
     assert "margin: 0;" in placed
     hidden = (
         ".site-atlas-grid .site-atlas-views[hidden],\n"
         ".site-atlas-grid .site-atlas-sizes[hidden],\n"
+        ".site-atlas-grid .site-atlas-scales[hidden],\n"
         ".site-atlas-grid .site-atlas-legend[hidden]"
     )
     assert "display: none;" in _rule(css, hidden)
     assert "font-size" not in placed
-    # The two strips start at the tile block's left edge and wrap on a narrow block.
+    # The chooser strips share the tile block's center and wrap on a narrow block.
     row = _rule(css, ".site-atlas-grid .site-atlas-controls")
     for declaration in (
         "display: flex;",
         "flex-wrap: wrap;",
-        "justify-content: start;",
+        "justify-content: center;",
         "margin-block-end: var(--site-atlas-toggle-space);",
     ):
         assert declaration in row, declaration
@@ -6569,3 +6573,43 @@ def test_row_reference_flags_compare_actual_sides_and_reuse_renderer_frame_bound
     assert " data-atlas-row-smaller" in cell(5, "open", side=math.nextafter(3, 0))
     assert " data-atlas-row-smaller" not in cell(5, "open", side=3)
     assert " data-atlas-row-smaller" not in cell(5, "open", side=math.nextafter(3, 4))
+
+
+def test_atlas_scale_projects_algebraic_coefficients_as_one_exact_side() -> None:
+    """n=51's two coefficients name a square side in Q(sqrt(2)), not two dimensions."""
+    from devtools.build_known_best_atlas import frame_from_witness  # noqa: PLC0415
+    from sqpack.yamlio import load_yaml  # noqa: PLC0415
+
+    witness = load_yaml(
+        (overview_data.REPO / "packing/witnesses/known-best/n-051.yaml").read_text()
+    )["witness"]
+    assert witness["side"] == ["16/3", "5/3"]
+    side = overview_sections.atlas_enclosing_sides()[51]
+    assert side == float(frame_from_witness(witness).container_side.projected)
+    assert side == pytest.approx((16 + 5 * math.sqrt(2)) / 3, abs=1e-15)
+    assert side != 16 / 3
+
+
+def test_atlas_scale_refuses_an_invalid_exact_root_declaration(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """An invalid algebraic root cannot become plausible scale data for a real tile."""
+    from sqpack import yamlio  # noqa: PLC0415
+
+    load_yaml = yamlio.load_yaml
+
+    def invalid_root(text: str):
+        document = load_yaml(text)
+        witness = document["witness"]
+        if witness["n"] == 51:
+            witness["scalar"]["isolating_interval"] = ["1", "1"]
+        return document
+
+    overview_sections.atlas_enclosing_sides.cache_clear()
+    try:
+        with monkeypatch.context() as patch:
+            patch.setattr(yamlio, "load_yaml", invalid_root)
+            with pytest.raises(ValueError, match="isolating interval must be nonempty"):
+                overview_sections.atlas_enclosing_sides()
+    finally:
+        overview_sections.atlas_enclosing_sides.cache_clear()
