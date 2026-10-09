@@ -5,15 +5,15 @@ title: Consolidate session n17 work into reviewed merge-ready PRs
 kind: task
 status: in_progress
 priority: 1
-version: 8
-delegate: claude-code@spud10.local
+version: 9
+delegate: claude-code@vm
 labels:
   - n-17
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-09T03:45:26.746Z
-updated_at: 2026-10-09T07:54:51.356Z
+updated_at: 2026-10-09T08:32:28.204Z
 started_at: 2026-10-09T03:45:50.993Z
 ---
 The research source, mathematical strategy, paper extraction/review and PR documentation are consolidated. Keep this bead open for the next agent's finish and closeout. #404 at 1af586ef passes expected CI after a three-file worker-copy repair preserving the 192 MiB cap. Its broad local push remains failed/interrupted and unqualified. Propagation through formal stack 455 and scoped standalone #464 repair, current-source reviews and complete checkpoints remain under think-0m0x. Supporting #452/#453 have current-main full passes. The older 224 MiB proposal is unapplied and is not the selected remedy. Preserve all 604 campaign blobs, 645 cost keys, original exp-315/316 bytes, source custody and held merge state. Overall PR coordination: think-70h9. Next mathematics: think-dvcs/think-geid. https://github.com/jlevy/squares/issues/405
