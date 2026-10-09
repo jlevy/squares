@@ -74,12 +74,16 @@ PUT_METHODS_PAPER = (
 #: The archived copy of Kleddamag's proof, which both reviews cite.
 KLEDDAMAG = "packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11"
 KLEDDAMAG_README_PATTERN = f"/{KLEDDAMAG}/README.md"
-#: Every citation the methods renderer requires inside the two omitted source trees.
-METHODS_CITATION_PATTERNS = tuple(
-    "/" + path.relative_to(REPO).as_posix()
-    for path in methods_paper.CITATION_SOURCES
-    if path.is_relative_to(REPO / "packing/resources")
-    or path.is_relative_to(REPO / "packing/campaign")
+#: Every methods render input inside the two omitted source trees, including geometry.
+METHODS_ARCHIVED_RENDER_PATTERNS = tuple(
+    sorted(
+        {
+            "/" + path.relative_to(REPO).as_posix()
+            for path in methods_paper.RENDER_INPUTS
+            if path.is_relative_to(REPO / "packing/resources")
+            or path.is_relative_to(REPO / "packing/campaign")
+        }
+    )
 )
 
 #: The step right before every download by artifact id, reading the same id expression.
@@ -1792,7 +1796,7 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
             "/packing/resources/papers/kingbird-square-11-provenance.svg",
             KLEDDAMAG_README_PATTERN,
         ),
-        "square-packing-methods-survey": METHODS_CITATION_PATTERNS,
+        "square-packing-methods-survey": METHODS_ARCHIVED_RENDER_PATTERNS,
         "n11-threshold-bound-review": (
             "/packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/",
             "/packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz",
@@ -1890,7 +1894,7 @@ def test_optimality_archive_links_are_all_in_its_sparse_checkout() -> None:
 #: files beside them it must not.
 REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
     "square-packing-methods-survey": (
-        tuple(pattern.removeprefix("/") for pattern in METHODS_CITATION_PATTERNS),
+        tuple(pattern.removeprefix("/") for pattern in METHODS_ARCHIVED_RENDER_PATTERNS),
         (
             "packing/resources/web/unrelated/README.md",
             "packing/resources/papers/unrelated.pdf",

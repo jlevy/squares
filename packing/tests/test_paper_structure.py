@@ -560,7 +560,10 @@ def test_standalone_absence_does_not_relax_the_series_or_caption_grammar(
     reference = structures[EXPLAINER]
     standalone = structures[METHODS]
     assert paper_structure.axes(standalone)["series: strip"] == "none"
-    assert paper_structure.axes(standalone)["figures: captions"] == "no figures"
+    assert (
+        paper_structure.axes(standalone)["figures: captions"]
+        == "Figure N. lead, numbered from 1"
+    )
     assert paper_structure.differences(paper_structure.compare(reference, standalone)) == []
     missing = replace(
         reference, credits=tuple(line for line in reference.credits if line.kind != "series")

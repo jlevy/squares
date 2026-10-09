@@ -3,7 +3,7 @@
 The canonical manuscript is templates/packing-methods-article.md. It uses the site's
 shared paper front, typography, scholarly metadata, math preparation and PDF printer,
 with its own version and dates. This tutorial belongs to no numbered series and
-has no certificate or generated figure inputs.
+illustrates methods with retained source geometry, without running searches or checkers.
 
 Run with --site SITE to write papers/square-packing-methods-survey.html and .md, and
 add --pdf for its PDF. Use --check to compare prepared HTML and Markdown with a build.
@@ -14,11 +14,18 @@ from __future__ import annotations
 import argparse
 from collections.abc import Mapping, Sequence
 from pathlib import Path
+from xml.etree import ElementTree as ET
 
 from strif import atomic_output_file
 
-from devtools import paper_front, paper_links, render_n11_lower_bounds_explainer
+from devtools import (
+    packing_methods_figures,
+    paper_front,
+    paper_links,
+    render_n11_lower_bounds_explainer,
+)
 from devtools.render_n11_optimality_review import (
+    FIGURE_SLOT,
     RELATIVE_ANCHOR,
     RELATIVE_LINK,
     RELATIVE_REFERENCE,
@@ -58,6 +65,7 @@ from sqpack.release import (
     PACKING_METHODS_HISTORY,
     PACKING_METHODS_REVISED,
 )
+from sqpack.render.svg import validate_safe_tree
 
 PACKING = Path(__file__).resolve().parents[1]
 REPO = PACKING.parent
@@ -108,12 +116,14 @@ def citation_sources(article: Path = ARTICLE) -> tuple[Path, ...]:
 
 
 CITATION_SOURCES = citation_sources()
+FIGURE_KEYS = packing_methods_figures.FIGURE_KEYS
 
 #: Input discovery for Pages scope and local previews, without certificate hydration.
 RENDER_INPUTS = (
     Path(__file__),
     ARTICLE,
     *CITATION_SOURCES,
+    *packing_methods_figures.FIGURE_INPUTS,
     SHELL,
     STYLE,
     PAPER_TYPE_CSS,
@@ -148,8 +158,8 @@ RENDER_INPUTS = (
 
 
 def render_all_figures() -> dict[str, str]:
-    """The publication interface's figure set; this tutorial has no generated figures."""
-    return {}
+    """Project the five attributed examples from retained source geometry."""
+    return packing_methods_figures.render_figures()
 
 
 def render_all_facts() -> dict[str, str]:
@@ -169,14 +179,30 @@ def expanded_markdown(
     source: str,
     *,
     revision: str,
+    figures: Mapping[str, str],
     article: Path = ARTICLE,
     edition: paper_links.Edition = "page",
 ) -> str:
     """Fill the shared front and sibling-paper links, and pin source citations."""
+    if set(figures) != set(FIGURE_KEYS):
+        raise ValueError("figures must provide exactly the declared SVG slots")
+    if set(FIGURE_SLOT.findall(source)) != set(FIGURE_KEYS):
+        raise ValueError("article must use every declared figure slot exactly by name")
+    if any(source.count("{{" + key + "}}") != 1 for key in FIGURE_KEYS):
+        raise ValueError("article must use each figure slot exactly once")
+    for key, svg in figures.items():
+        try:
+            tree = ET.fromstring(svg)
+        except ET.ParseError as error:
+            raise ValueError(f"{key} is not a complete SVG: {error}") from error
+        try:
+            validate_safe_tree(tree)
+        except ValueError as error:
+            raise ValueError(f"{key} contains active or remote SVG content: {error}") from error
     filled = paper_front.fill(source, FRONT)
     filled = paper_links.fill_paper_links(filled, edition=edition)
     filled = fill_template(
-        filled, {"VERSION_HISTORY": version_history_markdown()}, source=article
+        filled, {**figures, "VERSION_HISTORY": version_history_markdown()}, source=article
     )
     return repository_links(filled, source=article, revision=revision)
 
@@ -209,10 +235,14 @@ def render(
     """Return the self-contained paper page and the same paper's Markdown edition."""
     from kpress.format.markdown import parse_markdown  # noqa: PLC0415
 
-    if figures or facts:
-        raise ValueError("the methods tutorial declares no figure or fact substitutions")
-    page_markdown = expanded_markdown(source, revision=revision, article=article)
-    markdown = expanded_markdown(source, revision=revision, article=article, edition="markdown")
+    if facts:
+        raise ValueError("the methods tutorial declares no fact substitutions")
+    page_markdown = expanded_markdown(
+        source, figures=figures, revision=revision, article=article
+    )
+    markdown = expanded_markdown(
+        source, figures=figures, revision=revision, article=article, edition="markdown"
+    )
     document = parse_markdown(
         caption_math(page_markdown), title=TITLE, trust_mode="trusted", math="auto"
     )

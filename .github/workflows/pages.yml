@@ -38,6 +38,10 @@ name: Certificate page
       - packing/devtools/render_n11_lower_bounds_explainer.py
       - packing/devtools/paper_front.py
       - packing/devtools/render_packing_methods.py
+      - packing/devtools/packing_methods_figures.py
+      - packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/results/packings/n106.txt
+      - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/sources.json
+      - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz
       - packing/devtools/artifact_dates.py
       - packing/devtools/templates/packing-methods-article.md
       - packing/devtools/templates/packing-methods-shell.html
@@ -552,6 +556,7 @@ jobs:
             /packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md
             /packing/resources/papers/gensane-ryckelynck-2005-improved-dense-packings.raw.md
             /packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md
+            /packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/results/packings/n106.txt
             /packing/resources/web/couzo-exact-refinements-2026-10-08/README.md
             /packing/resources/web/couzo-followup-refinements-2026-10-08/README.md
             /packing/resources/web/de-winter-square-packing-211-2026-09-16/README.md
@@ -572,6 +577,8 @@ jobs:
             /packing/resources/web/squish-401-2026-10-07/README.md
             /packing/resources/web/squish-401-update-2026-10-07/README.md
             /packing/resources/web/squish-422-second-update-2026-10-07/README.md
+            /packing/resources/web/squish-422-second-update-2026-10-07/acquisition/sources.json
+            /packing/resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0

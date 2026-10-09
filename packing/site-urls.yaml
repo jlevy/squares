@@ -6055,7 +6055,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/square-packing-methods-survey.md
   canonical: papers/square-packing-methods-survey.md
@@ -6063,7 +6063,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/square-packing-methods-survey.pdf
   canonical: papers/square-packing-methods-survey.pdf
@@ -6071,7 +6071,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
 - path: readme.html
   canonical: readme.html

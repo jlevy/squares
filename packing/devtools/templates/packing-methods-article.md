@@ -43,6 +43,15 @@ upper bound; proving that no other arrangement improves it is a separate problem
 ([historical survey](../../resources/web/friedman-ds7-survey-2009-html.md);
 [tutorial](../../../TUTORIAL.md#1-the-problem)).
 
+<figure>
+{{HAND_CONSTRUCTION_SVG}}
+<figcaption><strong>Figure 1.</strong> Walter Trump’s 1979 packing of eleven squares:
+six axis-aligned squares surround five tilted at a common angle. This hand construction
+shows how a small number of geometric parameters can describe a useful arrangement.
+Redrawn from <a href="../../atlas/rendering/trump11-overview.svg">the retained reconstruction
+from David Ellsworth’s geometry</a>; its side is approximately $3.87708359$.</figcaption>
+</figure>
+
 A square’s **pose** consists of its centre $(x_i,y_i)$ and orientation $\theta_i$. A
 quarter turn gives the same square, so angles can be represented modulo $\pi/2$.
 Together with the side $S$, a configuration has $3n+1$ continuous variables.
@@ -232,6 +241,18 @@ It improved $n=263$ by about $4\times10^{-10}$; at the other eight counts in the
 update, it found no improvement above $10^{-11}$
 ([reported protocol](https://github.com/jlevy/squares/issues/422)).
 
+<figure>
+{{SURGERY_SVG}}
+<figcaption><strong>Figure 2.</strong> A historical SQUISH packing of 108 squares,
+reported by Nate Chaoweeraprasit (itsnaka) on 7 October 2026. The reported seed was an
+$n=110$ packing with two squares removed, followed by nearby search and polishing.
+The drawing shows the resulting certified pose; the source does not identify the two
+removed squares, and the search has not been reproduced here. Its safe side ceiling
+$10.9099400734448775$ has since been superseded by Xu’s $n=108$ witness.
+Redrawn from <a href="../../resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz">retained exact coordinates</a>
+(<a href="https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n108/n108.cert.json">source certificate</a>).</figcaption>
+</figure>
+
 These are author-reported lineages.
 Independent exact replay confirms feasibility of the resulting poses; it does not
 reconstruct the surgeries or reproduce the searches.
@@ -338,6 +359,17 @@ It does not publish the energy, proposal distribution, or cooling schedule, so t
 schematic acceptance rule above should not be read as a reconstruction of that program
 ([Schadt packet](../../resources/web/schadt-s29-2025/README.md)).
 
+<figure>
+{{ANNEALING_SVG}}
+<figcaption><strong>Figure 3.</strong> The 29-square arrangement found by Thomas
+Schadt’s simulated annealing in December 2025 and subsequently improved analytically
+by David Ellsworth. The mixture of tilted and axis-aligned pieces illustrates an
+arrangement reached through stochastic search. This drawing uses the
+<a href="../../atlas/known-best/rendering/n-029.svg">retained numerical reconstruction</a>, rather than the original floating-point
+search output. The separate <a href="../../frontier/n-029.md">interval certificate</a>
+supplies the safe side ceiling $5.9338334626769292$.</figcaption>
+</figure>
+
 Ellsworth modified Schadt’s annealer, ran parallel GPU searches, and then performed
 analytic minimization.
 The $n=51$ record was refound from randomness.
@@ -354,6 +386,17 @@ Annealing supplied candidates; sequential linear programming refined them.
 It found new arrangements at $n=106$ and $123$. Direct local refinement of published
 records supplied another 37 reported numerical improvements
 ([first-party README](../../resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md)).
+
+<figure>
+{{ANNEALING_SLP_SVG}}
+<figcaption><strong>Figure 4.</strong> Griffin Casson’s September 2026 packing of 106
+squares, one of the two arrangements reported from GPU simulated annealing followed
+by sequential linear programming. Redrawn from the
+<a href="../../resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/results/packings/n106.txt">dated source coordinates</a>
+(<a href="https://github.com/griffcass/square-packing/blob/82661bc8777beeecf458312e8aca9179a969da4f/results/packings/n106.txt">pinned original</a>, CC BY 4.0).
+This source pose is an illustration of the reported workflow; it has not undergone an
+independent local feasibility replay here.</figcaption>
+</figure>
 
 **Basin hopping** inserts local refinement into the exploration loop: perturb a locally
 optimized pose, refine the perturbed pose, and apply an acceptance rule to the refined
@@ -588,6 +631,16 @@ This undilated witness is checked separately from the dilated rational certifica
 the same arrangement.
 It proves feasibility at $S$, without establishing that $S$ is the minimum
 ([complete geometry and replay scope](../../resources/web/ry-xu-new-packings-2026-10-08/README.md#separate-undilated-n51-construction)).
+
+<figure>
+{{ALGEBRAIC_WITNESS_SVG}}
+<figcaption><strong>Figure 5.</strong> Ryan Xu’s October 2026 packing of 51 squares,
+using only axis-aligned and $45^\circ$ pieces. The arrangement’s structure permits an
+exact certificate over $\mathbb Q(\sqrt2)$ at side $(16+5\sqrt2)/3$.
+Redrawn from the <a href="../../atlas/known-best/rendering/n-051.svg">retained algebraic witness drawing</a>.
+The certificate verifies feasibility; the reported LLM-assisted workflow leaves the
+exploration algorithm unspecified, and the picture supplies no optimality proof.</figcaption>
+</figure>
 
 Three conclusions require different evidence:
 

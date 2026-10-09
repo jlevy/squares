@@ -3,9 +3,14 @@
   max-width: min(100%, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
 }
 
-/* Survey tables flow across pages; KPress still keeps each row intact. */
+/* Long survey tables flow across pages; KPress keeps each row intact. */
 @media print {
-  .cert-page.methods-paper .kpress-table-wrap .kpress-table {
+  .cert-page.methods-paper #methods-and-record-examples + p + .kpress-table-wrap .kpress-table,
+  .cert-page.methods-paper
+    #selected-bounds-after-the-october-8-intake
+    + p
+    + .kpress-table-wrap
+    .kpress-table {
     break-inside: auto;
     page-break-inside: auto;
   }
@@ -23,4 +28,19 @@
   + .kpress-table-wrap
   td:nth-child(3) {
   white-space: nowrap;
+}
+
+/* Keep native geometry legible on phones and compact in the printed tutorial. */
+.cert-page.methods-paper .methods-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 24rem;
+  margin-inline: auto;
+  background: white;
+}
+
+.cert-page.methods-paper figure {
+  break-inside: avoid;
+  page-break-inside: avoid;
 }

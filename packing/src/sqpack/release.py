@@ -508,8 +508,9 @@ PACKING_METHODS_HISTORY = (
         first_published="October 9, 2026",
         result_scope=(
             "Add the confirmed October 8 intake: 32 selected upper-bound improvements, "
-            "Couzo’s disclosed refinement workflow, Xu’s radical certificate, and "
-            "refiner calibration and branch-selection examples."
+            "Couzo's disclosed refinement workflow, Xu's radical certificate, and "
+            "refiner calibration and branch-selection examples, with five attributed "
+            "packing illustrations."
         ),
     ),
     PublicationHistoryEntry(
