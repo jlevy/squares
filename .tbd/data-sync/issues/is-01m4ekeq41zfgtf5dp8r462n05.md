@@ -5,7 +5,7 @@ title: Reconcile resumed intake ledger and dated source follow-ups
 kind: task
 status: in_progress
 priority: 1
-version: 18
+version: 19
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -21,7 +21,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T20:32:09.852Z
-updated_at: 2026-10-09T02:43:18.682Z
+updated_at: 2026-10-09T02:46:31.361Z
 started_at: 2026-10-08T20:33:04.467Z
 ---
 Add missing425/438 mappings and445 engineering disposition; append all observed maintainer replies and dated375 source updates without changing older result scopes or claiming new replay. Preserve all prior rows and prefixes, give newly identified batch certificate custody an explicit child owner, and validate the enforced request contract on the current intake top.
@@ -55,3 +55,11 @@ Dated #375 source custody is now draft PR463, formally appended to stack430, bra
 Three agent workers plus root use every available concurrency slot: Sol remaining fixes/cascade, Sol browser consumers and Astra independent reviews. Foreign Polynomial table owner is consolidating403/435; root does not race its pushes or override final scientific source. N17 actual source-cap failures404/454/461 remain open under the192MiB cap. No unresolved failure is relabeled as a pass. Retroactive intake labels now also include confirmed historical290/311/353. External disk has severalGiB free but kernel-I/O stalls recur; unique research evidence is preserved, no new unqualified large cleanup or Trash emptying was performed.
 
 2026-10-09 01:54 UTC: #439 merged through formal430 at24fe88bc44967970d72f7d1efc9bf2a325b74f17 after actual exact-ba3242 Packing37866240811, Pages37866240775 and full37866264735 SUCCESS. Fetched main has byte-identical qualified tree3950c5c5. #434 remains mergedb810. All6 upper type-control fixes published ordinary FF at448c474/449d448/450bd56/459c0e9/460f004/4637079;448 current PackingSUCCESS, Pages queued; final full dispatch held until known lower fixes compose. Dated source-only463 current four-role A–D published5464829736/9988/5464830346/0556, no geometry admission. #440 mmof pure bounded population cache accepted by Astra at tree00f5: all21controlsPASS, unchanged10 CLI/95 orbit output parity, actual local cold call12.08 original versus2.454 candidate; baseline guard unarmed, no hosted or totalCPU credit. Sol exclusive normal-hook/main24fe integration and441cascade in progress, holding442 for disjoint reviewed3path CSS correction. Shared MathML containment candidate preserves401 complete AX subtrees plusDOM/text/boxes; production print/noJS/copy guards still in progress. #403 exact main conflicts7files discovered read-only; foreign owner source untouched. #435 updated public finite14path C1handoff6072590277 is source accepted, still pending owner integration/data regeneration/current physical gates. No cap/threshold changes, no duplicate current full dispatches or fresh Trash emptying. All4 available agent slots occupied.
+
+2026-10-09 02:50 UTC continuation checkpoint: actual PR440+441 formal stack430 prefix merged atomically at02:40:29/31 as d43ea686d555efe3d866e88b960f60c9d2e0a7d1; fetched main treeadc82a47c21a0603315d610bd7f900850949cda8 equals qualified441 exactly. Actual440Packing37872654665/Pages37872654651/full37872664518 and441Packing37873113816/Pages37873113847/full37873164369 allSUCCESS; fresh91checkentries completed each and current Astra440J–M/441J published. Closed think-mmof; independent k3tk obligation remains open.
+
+All remaining8 heads normalmerged with six accepted CSS/cache files; true448testcache conflict RED1wronghits and GREEN21tests13.234/cold3.133 accepted Astra. Published4423b334/443c0a51/448ca939/4494963/4503a65/459ebac/460dd50/463ad61 with exact scientific/private/input/pin bytes otherwise preserved. Current formal Astra bridge reviews443F5465099536,448J5465099762,449F5465134223,450F5465134505,459F5465134757,460F5465135026,463E5465135252 all actual published/literalbodycommit verified. New fulls once44937875389545/45037875392025/45937875473498/46037875475630/46337875477744. Actual six-head source Git caps448199606557,449199660921,450199762501,459199805997,460200011529,463200029089 under unchanged201326592.
+
+Actual current442Pages37873984191SUCCESS, but Packingfrontend113638192725 failed functional site-table command timeout900s after202tests/6skips; nativephase neverstarted,958.02wall consequence.443samefrontendfailure current; Sol+Astradiagnose exact controls/timewait without ceiling relax.449Pages390lightCLS0.251>0.1 genuine failure, complete401math preserved; separate root cause. Later450/460/463 mass rollupfailure-looking entries are actual queued-concurrency CANCELLED runner0/steps0 annotations, not source test failures; latest applicable successors required. No failed/cancelled evidence relabeledgreen.
+
+Source20 Couzo derived-only producer73roles/72blobs fixed immutable roots, raw custodyPASS; derived twentyfacts1,095,147B/21files prepared, scopednegativecontrols in flight, noT/horizon/geometry/native/C3/rawarchiveinGit. Root created think-88r0 for newly observed460externalcomment6070798890 pinned2d32a6e five84/86/105/175/270 reports, sevenoldreportedlybyteidentical; previous105stillvalid, newclaims separateunverified intake. Fourplatformslots fullyoccupied:root,twoSol,Astra. Foreign403eb4DIRTY7conflicts/4356fUNSTABLE owner active; publicC1/staticselector/sourceguard proposals preserved; no competingpush. No newtrash/emptyTrash or uniqueproofdiscard.
