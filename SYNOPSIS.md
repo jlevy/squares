@@ -322,8 +322,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Agendas | 42 | 20 active; 16 completed; 5 paused; 1 superseded |
 | Commitments | 436 | 233 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
 | Sessions | 185 | 105 completed; 80 stopped; all terminal |
-| Explorations | 49 | 29 linked to proposed hypotheses; 20 uncodified |
-| Hypotheses | 274 | 73 confirmed; 48 refuted; 72 blocked; 24 unresolved; 15 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
+| Hypotheses | 283 | 73 confirmed; 48 refuted; 75 blocked; 24 unresolved; 21 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 245 | 93 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 124 | 124 registered, 94 by others |
 
@@ -5962,10 +5962,19 @@ round that names the hypothesis, control roles included.
 | [H-334](packing/campaign/hypotheses/H-334-n17-composition-checker.md) | blocked | A composition checker derives the residue and the theorem from the receipts and refuses every mutant | 0 | — |
 | [H-335](packing/campaign/hypotheses/H-335-n17-two-verifier-parity.md) | open | The Rust and Python kernel verifiers agree on every admitted entry and refuse every mutant | 0 | — |
 | [H-336](packing/campaign/hypotheses/H-336-n17-fresh-clone-replay.md) | open | Every admitted certificate is hosted and one of each kind replays from a fresh clone | 0 | — |
-| [H-337](packing/campaign/hypotheses/H-337-n11-capture-positive-control.md) | blocked | The repaired n17 capture producer reproduces n11’s contraction from the cells | 0 | — |
+| [H-337](packing/campaign/hypotheses/H-337-n11-capture-positive-control.md) | open | The repaired n17 capture producer reproduces n11’s contraction from the cells | 0 | — |
 | [H-338](packing/campaign/hypotheses/H-338-n17-state-conditioned-charge.md) | open question | Does a charge specialised to one occupancy state exclude it below $S^\ast$ | 0 | — |
 | [H-339](packing/campaign/hypotheses/H-339-n17-feature-flip-atlas.md) | blocked | A small feature-flip atlas doubles the terminal region’s radius | 0 | — |
 | [H-340](packing/campaign/hypotheses/H-340-n17-per-coordinate-radius-composition.md) | open | The composed local theorem holds with every coordinate at least $1/1216$ | 0 | — |
+| [H-341](packing/campaign/hypotheses/H-341-n17-issue-472-kernel-admission.md) | open | Issue 472’s twelve kernel certificates replay in full under a listed verifier with Rust parity and admit | 0 | — |
+| [H-342](packing/campaign/hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md) | open | The kernel producer closes most wall-anchored issue-413 rows that only branch and bound has reached | 0 | — |
+| [H-343](packing/campaign/hypotheses/H-343-n17-hard-tail-adaptive-measurement.md) | open | At least half of the distance-2 residue orbits close under the adaptive-row kernel | 0 | — |
+| [H-344](packing/campaign/hypotheses/H-344-n17-half-cell-branch-predicates.md) | blocked | Closed half-cell branch predicates close the consistency-limited stalls | 0 | — |
+| [H-345](packing/campaign/hypotheses/H-345-n17-cell-seeded-twenty-round-capture.md) | open | Twenty rounds of the repaired capture producer from the family’s cells move something | 0 | — |
+| [H-346](packing/campaign/hypotheses/H-346-n17-angle-bb-knuth-estimate.md) | blocked | An angle branch and bound with Taylor-at-centre LP bounds prices the outer capture bridge | 0 | — |
+| [H-347](packing/campaign/hypotheses/H-347-n17-exact-conversion-allowances.md) | blocked | The capture-to-local conversion allowances are exact and small | 0 | — |
+| [H-348](packing/campaign/hypotheses/H-348-n17-second-local-theorem-checker.md) | blocked | A second, LP-free checker reproduces the local theorem’s certificates and refuses mutants | 0 | — |
+| [H-349](packing/campaign/hypotheses/H-349-n17-flagged-class-kernel-closure.md) | open | The kernel closes most of the standing flagged, uncertified selector classes | 0 | — |
 
 ### Confirmed
 

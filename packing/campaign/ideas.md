@@ -943,6 +943,34 @@ box-seeded kernel capture pilots.
 | 305 | A small feature-flip atlas doubles the terminal region’s radius | registered | [H-339](hypotheses/H-339-n17-feature-flip-atlas.md) | Only a handful of options can flip within $2\times10^{-2}$; each flip is one more LP |
 | 306 | The composed local theorem holds with every coordinate at least $1/1216$ | registered | [H-340](hypotheses/H-340-n17-per-coordinate-radius-composition.md) | The 3 October vector, registered as a round because H-329 and H-330 make it load-bearing |
 
+## The n17 Program on Every Front — X-052
+
+[X-052](explorations/X-052-n17-status-survey-and-completion-plan.md) is the owner’s W3
+status survey of the whole n17 program after the 9 October landing, synthesizing two
+Fable max mathematical reviews and an inventory of the record, issues, PRs and beads.
+It supersedes X-051’s status sections: the bracket is verified at both ends, the cover,
+census and transfer rules reproduce from independent code, the endpoint algebra and the
+local family theorem re-derive without a defect, and the two real gaps are the hard tail
+of the residue (four per-state runs on 95 orbits) and capture from the cells (one round
+ever run). Its selection: admit issue 472’s twelve kernel certificates and convert the
+wall-anchored issue-413 rows to kernel certificates; measure the tail under the adaptive
+recipe; decide the capture engine from the real start point; enlarge the terminal
+theorem by exact dual sheets; price the outer bridge; and build the foolproof package.
+It corrects H-337 (the hull-pull repair is merged), H-330 (its threshold is inconsistent
+with its slopes) and H-261 (the exchanged witness is a relabelled family member).
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 307 | Issue 472’s twelve kernel certificates replay in full under a listed verifier with Rust parity and admit | registered | [H-341](hypotheses/H-341-n17-issue-472-kernel-admission.md) | $-1{,}047$ orbits for about two CPU-hours; the same format and frame as 59 admitted entries; custody and a verifier listing are the prerequisites |
+| 308 | The kernel producer closes most wall-anchored issue-413 rows that only branch and bound has reached | registered | [H-342](hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md) | Twelve of twelve wall-anchored arity-8 and 9 flags closed in minutes this week; branch and bound stays for interior crowds |
+| 309 | At least half of the distance-2 residue orbits close under the adaptive-row kernel | registered | [H-343](hypotheses/H-343-n17-hard-tail-adaptive-measurement.md) | The tail is undersampled, not measured: the recipe that closed 26 of 29 draws has run on two of the 95 |
+| 310 | Closed half-cell branch predicates close the consistency-limited stalls | registered | [H-344](hypotheses/H-344-n17-half-cell-branch-predicates.md) | The one grammar change aimed at the diagnosed mechanism; build only if H-343 makes the tail a grammar problem |
+| 311 | Twenty rounds of the repaired capture producer from the family’s cells move something | registered | [H-345](hypotheses/H-345-n17-cell-seeded-twenty-round-capture.md) | The n17 analogue of the n11 root node, never run to a verdict; pairs with H-337 |
+| 312 | An angle branch and bound with Taylor-at-centre LP bounds prices the outer capture bridge | registered | [H-346](hypotheses/H-346-n17-angle-bb-knuth-estimate.md) | The only candidate with a soundness story for the cells-to-feature-forced bridge; a Knuth estimate before any run |
+| 313 | The capture-to-local conversion allowances are exact and small | registered | [H-347](hypotheses/H-347-n17-exact-conversion-allowances.md) | The one unwritten number between a capture receipt and the local theorem |
+| 314 | A second, LP-free checker reproduces the local theorem’s certificates and refuses mutants | registered | [H-348](hypotheses/H-348-n17-second-local-theorem-checker.md) | The local half of two-verifier parity; the certificate is a few hundred kilobytes of rationals |
+| 315 | The kernel closes most of the standing flagged, uncertified selector classes | registered | [H-349](hypotheses/H-349-n17-flagged-class-kernel-closure.md) | 69 flags project to 2,163 orbits if all closed; the stall list is the information either way |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

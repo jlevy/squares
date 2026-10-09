@@ -1231,10 +1231,19 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | H-334 | blocked | proof | A composition checker that reads the cover receipt, the admitted ledge |  | 0 |  |  |
 | H-335 | open | proof | The Rust kernel-certificate verifier merged in PR 410 and the Python s |  | 0 |  |  |
 | H-336 | open | proof | All objects named by the n17 hosted-data manifests (the 204 objects of |  | 0 |  |  |
-| H-337 | blocked | proof | With the owned-hull compression pull reduced from 2^-12 to 2^-18 of th |  | 0 |  |  |
+| H-337 | open | proof | With the owned-hull compression pull reduced from 2^-12 to 2^-18 of th |  | 0 |  |  |
 | H-338 | open question | proof | For a residue state X of the H-266 cover and a cap V < S*, does a weig |  | 0 |  |  |
 | H-339 | blocked | proof | At most eight of the 135 unavailable owner-axis options of the retaine |  | 0 |  |  |
 | H-340 | open | proof | The capture-target theorem holds with the per-coordinate radius vector |  | 0 |  |  |
+| H-341 | open | proof | Each of the twelve kernel certificates reported in issue 472 (masks 21 |  | 0 |  |  |
+| H-342 | open | proof | Of the issue-413 rows whose only reported evidence is a branch-and-bou |  | 0 |  |  |
+| H-343 | open | proof | At least 47 of the 94 distance-2 orbit representatives of the 60-entry |  | 0 |  |  |
+| H-344 | blocked | proof | With a branch predicate that halves one named side cell along its long |  | 0 |  |  |
+| H-345 | open | proof | A 20-round run of the n17 capture producer from the family's occupancy |  | 0 |  |  |
+| H-346 | blocked | proof | A branch and bound over the sixteen non-free angles and the feature ch |  | 0 |  |  |
+| H-347 | blocked | proof | For each of the 45 non-slider coordinates of the local family theorem, |  | 0 |  |  |
+| H-348 | blocked | proof | An independent checker of the local family theorem's certificate data  |  | 0 |  |  |
+| H-349 | open | proof | At least 56 of the 69 flagged, uncertified selector classes that devto |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
