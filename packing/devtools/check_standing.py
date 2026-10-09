@@ -69,10 +69,13 @@ from fractions import Fraction
 from typing import Any, NamedTuple
 
 from devtools import render_recent_results as view
+from devtools.build_bound_citations import own_evidence
 from devtools.check_results import kind_label, scope_values
 
 LOWER = "lower"
 UPPER = "upper"
+#: The two lanes of a case record, each with a bound in each direction.
+LANES = ("verified", "reported")
 #: What each relation bounds: `=` states both.
 DIRECTIONS: Mapping[str, tuple[str, ...]] = {
     "≥": (LOWER,),
@@ -263,6 +266,24 @@ def improvements(record: Mapping[str, Any], records: view.Records) -> list[Findi
     ]
 
 
+def citing(record: Mapping[str, Any], records: view.Records) -> list[int]:
+    """The cases in an entry's scope whose bounds, in either lane and direction, cite
+    evidence of its own (not the grid's or the area bound's). Read from the evidence ids
+    alone, apart from the holders `standing` credits: a case that cites an entry pending
+    adoption has taken it in, and the credit has gone to another entry."""
+    own = set(own_evidence(record["evidence"], records.register))
+    found = []
+    for n in sorted(scope_values(dict(record["scope"]))):
+        case = records.cases.get(n) or {}
+        bounds = [case.get(f"{lane}_{way}_bound") for lane in LANES for way in (LOWER, UPPER)]
+        if any(
+            own & {str(item) for item in (bound or {}).get("evidence") or []}
+            for bound in bounds
+        ):
+            found.append(n)
+    return found
+
+
 def _at(found: Sequence[Finding]) -> str:
     return "n = " + compress(sorted({finding.n for finding in found}))
 
@@ -305,10 +326,18 @@ def problems(record: Mapping[str, Any], standing: str, records: view.Records) ->
                     f"{compress(alone)} no other entry holds a verified bound"
                 )
     elif standing == view.PENDING_ADOPTION:
+        # `standing` derives this word from `improvements`, so the first test only holds a
+        # standing given from elsewhere to the numbers; the second reads the case records
+        # apart from the derivation's holders.
         if not improvements(record, records):
             wrong.append(
                 f"{entry} is pending adoption, yet no bound it states is better than the "
                 "bound its case record holds"
+            )
+        if cases := citing(record, records):
+            wrong.append(
+                f"{entry} is pending adoption, yet a case bound at n = {compress(cases)} "
+                "cites its evidence: the record has taken it in"
             )
     elif standing in {view.SECOND_CERTIFICATE, view.SECOND_CERTIFICATE_REPORTED}:
         off = [f for f in found if f.verified != EQUAL]

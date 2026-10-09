@@ -12,6 +12,7 @@ to refusing each kind of mismatch.
 
 from __future__ import annotations
 
+import dataclasses
 from collections.abc import Mapping
 from fractions import Fraction
 from typing import Any
@@ -421,3 +422,23 @@ def test_an_entry_improves_only_in_the_directions_its_kind_bounds(
     assert len(check_standing.improvements(exact, records)) == 8
     other = _entry(records, "T-128", kind="method-limit")
     assert check_standing.improvements(other, records) == []
+
+
+def test_an_entry_pending_adoption_is_cited_by_no_case_bound(records: view.Records) -> None:
+    """Pending adoption is derived from the numbers, so the check also reads the case
+    records apart from the holders `standing` credits: a case bound that cites the entry's
+    own evidence has taken it in. Were n = 105's reported ceiling to cite T-128's report
+    beside Ryan Xu's, T-128 would be refused the word there."""
+    record = records.results["T-128"]
+    assert check_standing.citing(record, records) == []
+    case = records.cases[105]
+    lane = case["reported_upper_bound"]
+    cited = {**lane, "evidence": [*lane["evidence"], "E-couzo-451-rational-report"]}
+    adopted = dataclasses.replace(
+        records, cases={**records.cases, 105: {**case, "reported_upper_bound": cited}}
+    )
+    assert check_standing.citing(record, adopted) == [105]
+    (problem,) = check_standing.problems(record, view.PENDING_ADOPTION, adopted)
+    assert (
+        "T-128 is pending adoption, yet a case bound at n = 105 cites its evidence" in problem
+    )
