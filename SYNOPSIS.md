@@ -579,6 +579,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [n17 Paper Review: Global Optimization and Sum-of-Squares Certificates](docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md) | dated review record | record | retained | — |
 | [Refinement Replay Custody and Worker Admission Review](docs/project/reviews/review-2026-10-07-refinement-custody-closure.md) | dated review record | record | retained | — |
 | [Refinement Host Relocation and Rational Feasibility Review](docs/project/reviews/review-2026-10-07-refinement-host-rebind.md) | dated review record | record | retained | — |
 | [Published Site URLs](docs/project/site-urls.md) | generated status view | generated | generated | — |

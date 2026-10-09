@@ -12,6 +12,12 @@ source gaps. The
 [X-050 audit](../campaign/explorations/X-050-fibonacci-torus-and-boundary-information.md)
 contains the dispositions; no full manuscript or geometric torus inverse was supplied.
 
+**[Berthold et al. 2026b]** — the already retained arXiv:2605.04850v1 PDF and raw
+extraction were rechecked against a fresh download on October 8, 2026. The
+[n17 paper review](../../docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md)
+assesses its Farkas formulation and relevance to exact sum-of-squares certificates.
+It adds no packing bound or optimality result.
+
 ## Layout
 
 ```
