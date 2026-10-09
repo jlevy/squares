@@ -5,7 +5,7 @@ title: Triage Couzo extended-range construction updates beyond the eight-case in
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: claude-code@spud10.local
 labels:
   - result-import
@@ -16,7 +16,7 @@ parent_id: is-01m44qz0rxvkakmyqaj7qdgagv
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:17:46.179Z
-updated_at: 2026-10-09T21:39:19.052Z
+updated_at: 2026-10-09T21:45:31.253Z
 started_at: 2026-10-09T00:19:50.892Z
 ---
 Read complete franciscouzo/square-packing changes74f7e8b andb10ad36 beyond already retained451 eight exact certificates: n378 update and20 added n>324 decimal pose/diagram pairs327332335-342364369372-379, plus remaining n<=324 context. Preserve explicit324-case standing horizon, source-only versus verified claims and all superseded histories. Acquire complete immutable ordinary inputs and licensing/lineage before any registry/adoption/replay; no credit transfer from accepted eight-case native jobs. Record a dated watched-source read with this open owner until a complete scoped packet disposes the new claims.
@@ -46,3 +46,5 @@ Review B on #466 (B2): #466 packet README, source-coverage notes and the two bey
 #466 review B: B2 dated note on n375/n378 landed (8d1ab3d9f); packet renamed to couzo-extended-reports-2026-10-08 / couzo-extended-range-reports-2026-10-08 (ca85b22ae, B6).
 
 2026-10-09 cloud (post-430): schema change + n375/n378 import in progress on branch claude/couzo-beyond-horizon-updates (from main d3860c97a).
+
+2026-10-09 review of PR #479 (C6, design note): with (n, source_id) succession requiring a strictly better, no-earlier-dated successor and at most one current row per n, a later-dated worse report, an equal re-report, or an earlier-dated better report found afterwards cannot be registered at a count that already has a current row (deferred-conflict counts as current). In-horizon superseded_reports has no date rule. Revisit if such a report arrives.
