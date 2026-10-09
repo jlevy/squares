@@ -119,13 +119,9 @@ DECLARED_CONSUMERS = {
         "registers rational source reports while preserving earlier verified ceilings; "
         "the reported geometry and a historical ceiling never establish s(n)"
     ),
-    "packing/devtools/couzo_followup_reports.py": (
-        "freezes the selected and verified finite ceilings a reported certificate is "
-        "compared with, exactly; a smaller side establishes neither s(n) nor adoption"
-    ),
-    "packing/tests/test_register_couzo_followup_report.py": (
-        "checks a source-only report leaves the verified finite ceilings unchanged and "
-        "lies below them; no value is read as s(n) or optimality"
+    "packing/tests/test_couzo_followup_reports.py": (
+        "holds each frozen comparison to the live verified finite ceiling while the report "
+        "is unadopted; a smaller side establishes neither s(n) nor adoption"
     ),
     "packing/devtools/confirm_refinement_records.py": (
         "publishes accepted complete replay as a finite feasible upper ceiling; "
