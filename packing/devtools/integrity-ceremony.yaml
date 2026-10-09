@@ -57,6 +57,16 @@ allowlist:
       outcomes are also identified across the private-worker artifact-custody boundary.
       This retains actual runtime evidence, without pinning this repository's source
       or commits or replacing source reconstruction and fresh exact replay.
+  - path: packing/devtools/couzo_followup_reports.py
+    kind: download
+    boundary: >-
+      Couzo's five 2d32a6e rational certificates stay outside Git, so each one
+      rebuilt from its retained exact facts is held against its blob identity
+      under the pinned tree, whose root is rebuilt from every recorded leaf. The
+      same identities hold the decimal-pose, prose and outside-horizon roles and
+      the seven certificates the author calls unchanged against the issue-451
+      acquisition roster. Geometry is decided from the complete exact inputs;
+      no digest decides geometry or pins this repository's code.
   - path: packages/workbench/tools/workbench_tools/capture_video.py
     kind: generated-artifact
     boundary: Cache correctness for the generated published workbench corpus; its payload must match the immutable data/corpus.<hash>.json URL before a video receipt names that corpus edition. No repository source is hashed by this predicate.
