@@ -360,8 +360,8 @@ def test_a_bound_no_case_record_cites_states_what_it_bounds(records: view.Record
     case records by nothing but the bounds its words state, so a bound of that kind states
     its sides, as T-128's claim does, and `standing` can tell a better report the case
     records have not taken in from one they have beaten (think-h0d1). The four exact-form
-    reports of 7 October (T-120..T-123) state roots of polynomials, which this does not
-    read, and keep the structural rule; a new one states its sides."""
+    reports of 7 October (T-120..T-123), sides that are roots of polynomials, state them
+    cut where their root intervals' ends agree."""
     lanes = ("verified_lower_bound", "reported_lower_bound")
     lanes += ("verified_upper_bound", "reported_upper_bound")
     cited = set()
@@ -376,7 +376,7 @@ def test_a_bound_no_case_record_cites_states_what_it_bounds(records: view.Record
         and not {str(item) for item in record["evidence"]} & cited
         and not check_standing.stated_bounds(record)
     ]
-    assert unplaced == ["T-120", "T-121", "T-122", "T-123"]
+    assert unplaced == []
 
 
 def test_a_closed_form_bound_is_a_display_a_unit_either_side(records: view.Records) -> None:

@@ -276,8 +276,18 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # took the last count T-070 held; fifty when T-117's exact rational refinements
     # took n = 105 and 292, the last verified ceilings T-056 held.
     # T-120..T-123 report exact side forms for historical source configurations; no
-    # current frontier lane relies on these unverified catalogue assertions.
-    assert {"T-120", "T-121", "T-122", "T-123"} <= set(derived)
+    # current frontier lane relies on these unverified catalogue assertions. Each claim
+    # states its side cut where its root interval's ends agree. T-120's lies above the
+    # ceiling T-125 holds at n = 102, so it is superseded; T-121..T-123's lie below the
+    # outward-rounded rationals of the same configurations that T-098 holds, by about
+    # 1e-19, so they are pending adoption and not superseded (think-h0d1).
+    assert "T-120" in derived
+    for entry in ("T-121", "T-122", "T-123"):
+        assert entry not in marked
+        assert view.standing(records.results[entry], records) == view.PENDING_ADOPTION
+    assert view.position_marks(records.results["T-120"], view.SUPERSEDED, records) == [
+        "superseded by T-125"
+    ]
     # Gupta's confirmed fourteen-case refinement supersedes T-114's final ceiling.
     expected = {
         "T-001",
@@ -332,9 +342,6 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-100",
         "T-114",
         "T-120",
-        "T-121",
-        "T-122",
-        "T-123",
     }
     # Couzo's eight-case source report of 8 October (T-128) holds no case lane either,
     # but every side it states is below the ceiling its case holds: nothing has replaced
