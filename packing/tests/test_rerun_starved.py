@@ -299,7 +299,11 @@ def test_both_aggregators_name_a_starved_prerequisite_after_their_verdict() -> N
     assert workflow("packing-validation.yml")["jobs"]["packing-required"]["if"] == (
         "!cancelled() && github.event_name == 'pull_request'"
     )
-    assert workflow("pages.yml")["jobs"]["pages-required"]["if"] == "!cancelled()"
+    # A dispatch that asks only for the font diagnostic qualifies nothing, so it skips
+    # the aggregate too (`test_pages_workflow`'s font-diagnostic tests).
+    assert workflow("pages.yml")["jobs"]["pages-required"]["if"] == (
+        "!cancelled() && !inputs.font_diagnostic"
+    )
 
 
 @pytest.mark.skipif(shutil.which("jq") is None, reason="the aggregator's jq is not installed")

@@ -3,6 +3,17 @@
 The complete ordinary-source preparation stays local. This module checks its pinned
 Git custody without executing source programs, and exports numerical Witness/v2 facts
 and attributed metadata only. It neither verifies geometry nor changes any case.
+
+Every digest comparison here crosses one boundary (OR-16): Francisco Couzo's repository,
+whose source bytes stay outside Git because redistribution is not established. The
+expected values are that repository's commit, tree and blob identities pinned at review
+in `PINS`, each tree rebuilt in full against its pin. `check_ordinary` holds the
+acquired commit records and complete blob bytes against them, which catches a
+substituted, altered or mislabelled source file. `check_packet` rebuilds each report's
+text from the retained facts and holds it against its pinned blob identity, the only
+retained witness of the unretained bytes, which catches an edited, rounded or dropped
+pose token. No comparison names a file this repository wrote, decides geometry or pins
+code; `devtools/integrity-ceremony.yaml` admits the module as a download.
 """
 
 from __future__ import annotations
