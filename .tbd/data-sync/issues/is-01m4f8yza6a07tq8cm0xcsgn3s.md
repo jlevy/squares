@@ -5,7 +5,7 @@ title: Fix no-JavaScript CSS test hang in current intake frontend
 kind: bug
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4ekeq41zfgtf5dp8r462n05
 hold: null
 hold_until: null
 created_at: 2026-10-09T02:48:02.617Z
-updated_at: 2026-10-09T03:00:43.754Z
+updated_at: 2026-10-09T04:04:25.423Z
 started_at: 2026-10-09T02:48:46.858Z
 ---
 Exact442 frontend run37873984207/job113638192725 timed out its unchanged900s site-table command with205collected,202reported(196PASS6skip),3remaining and noJUnit; frontendwall958s exceeds165 as consequence. Independent Astra pinnedPlaywright source identifies new noJS page.add_style_tag awaiting JavaScript style.onload/onerror promise with no timeout, which noJS context cannot execute. Sol bounded4parameter diagnostic underway; minimally replace only test stylesheet toggle with CDP CSS.createStyleSheet/setStyleSheetText/reset, retain noJS/print/completeMathML/AX/copy/visual assertions and all productioncontent/limits. Actual scopedcontrols, normal main integration, Astra review, exactcurrenthostedgates and owning442merge required.
@@ -25,3 +25,5 @@ The disabled-script stylesheet test repair is committed on its owning PR #442 as
 The bounded original diagnostic passed 390px with JavaScript, then hung on 390px without JavaScript until the maintained runner terminated the group at 60 seconds. Pinned Playwright waits for disabled page-script style-load callbacks; source and real-child evidence are preserved. The corrected four Chromium parameters all passed, zero failures/errors/skips, JUnit 12.168 seconds; configured type checking and Ruff/format have zero findings. The preformat green source was reconstructed from formatter-only hunks and retained as exact Git blob 8eb7fd8779dbe2d396373d5f1bfcccdf2351dc3e; this is owner-verified evidence, not an independently reproduced Astra formatting bridge.
 
 Maintained release pin update/check passes unchanged at e42d9d6da02b560842318c44fc127d68104f6d70; no empty pin commit. Git-selected source projection is 200904044 bytes under the unchanged 201326592 cap. Final immutable qualification is Git receipt f754eebd51437ba3c373519fc686ee45af6450b7, also review-notes/pr442-hpif-final-source-main-composition.json. ROOT owns publication, fresh exact-head hosted gates, upper cascade and merge. This bead stays open pending those current gates and the owning PR landing; local scoped results do not qualify a full or hosted gate.
+
+2026-10-09 user-requested handoff: accepted572 no-JS inspector stylesheet repair is normally cascaded through4432bd8/44811bef/4490cae/4504585/45975a4/460324f/463c20e and final source20/diagnostic union. Complete one-path scientific/private/pin preservation bridges independently accepted; all source committed. Owning442830 remains unmerged. Its latest full37877186650 has separate bead-tree historical closure and overview novelty-label12.08s versus unchanged12s findings; no functional assertion failure in the repaired four cases, but no full-gate credit transferred. Keep this bead open until current owning-head qualification/landing. No new experiment or stabilization after the user requested handoff.
