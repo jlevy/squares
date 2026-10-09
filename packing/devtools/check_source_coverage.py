@@ -713,7 +713,7 @@ def beyond_horizon_errors(
     )
     for entry in rows.values():
         if entry.get("disposition") == SUPERSEDED and entry.get("superseded_by"):
-            errors.extend(_succession_errors(entry, rows, sources, claims))
+            errors.extend(_succession_errors(entry, rows, sources))
     errors.extend(_succession_cycles(rows))
     return errors, inventory
 
@@ -722,7 +722,6 @@ def _succession_errors(
     entry: Mapping,
     rows: Mapping[tuple[int, str], Mapping],
     sources: Mapping[str, Mapping],
-    claims: Mapping[str, Mapping[int, str]],
 ) -> list[str]:
     """What a superseded row's named successor fails to be."""
     n, source_id, successor_id = entry["n"], entry["source_id"], entry["superseded_by"]
@@ -738,7 +737,7 @@ def _succession_errors(
         f"{where}: {owner} retains no claims record, and a supersession compares two "
         "reparsed reports"
         for owner in (source_id, successor_id)
-        if owner in sources and owner not in claims
+        if owner in sources and not sources[owner].get("claims_record")
     ]
     if successor["claim"] != entry["claim"]:
         errors.append(

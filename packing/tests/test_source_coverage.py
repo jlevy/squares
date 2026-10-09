@@ -277,6 +277,7 @@ def _dated_source(identifier: str, day: str | None, values: list[int]) -> dict[s
         "scope": {"n_values": values},
         "evidence": [f"E-{identifier}-report"],
         "source_date": day,
+        "claims_record": f"resources/web/{identifier}/acquisition/sources.json",
     }
 
 
@@ -482,7 +483,10 @@ def test_a_dated_row_keeps_its_sources_facts_byte_for_byte() -> None:
 
 def test_a_supersession_compares_two_reparsed_reports() -> None:
     coverage, claims = _beyond()
+    # A caller may pass only the claims it loaded; what decides is the source's record.
     del claims["late"]
+    assert _beyond_errors(coverage, claims) == []
+    del coverage["sources"][-1]["claims_record"]
     assert _beyond_errors(coverage, claims) == [
         (
             "beyond-horizon n=401 from first: late retains no claims record, and a "
