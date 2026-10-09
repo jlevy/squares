@@ -1962,6 +1962,7 @@ jobs:
     # name it, and the wall check treats it as `not_gating`, so a skip changes no verdict.
     if: "github.event_name != 'pull_request' || github.base_ref == 'main'"
     runs-on: macos-latest
+    timeout-minutes: 5
     defaults:
       run:
         working-directory: packing
@@ -1991,6 +1992,18 @@ jobs:
           uv run --frozen --all-extras --group dev python -c "import sqpack, sqpack.field, sqpack.verify,
           sqpack.witness, sqpack.promote.refine, sqpack.promote.contacts;
           print('sqpack imports on', __import__('platform').machine())"
+
+      - name: Native Darwin current memory and system SDK layout
+        timeout-minutes: 1
+        run: |
+          mkdir -p logs
+          uv run --frozen --all-extras --group dev python -m pytest -q -s \
+            tests/test_process_memory.py::test_live_memory_sample_is_positive \
+            tests/test_process_memory.py::test_released_allocation_does_not_leave_current_memory_above_guard \
+            tests/test_process_memory.py::test_darwin_sdk_layout_and_independent_rss \
+            --junitxml=logs/darwin-current-memory.xml
+          uv run --frozen --all-extras --group dev python -c \
+            'import xml.etree.ElementTree as E; s=list(E.parse("logs/darwin-current-memory.xml").iter("testsuite")); assert sum(int(x.get("tests", "0")) for x in s)==3; assert all(int(x.get(k, "0"))==0 for x in s for k in ("failures", "errors", "skipped"))'
 
       - name: Results a second architecture could disagree about
         # Exact predicates, the small-n exact models, and the golden basin maps

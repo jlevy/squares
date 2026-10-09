@@ -53,6 +53,22 @@ Direct renderer commands do not pass through the validator; export
 `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` before running them when Homebrew’s
 library is otherwise outside the loader’s path.
 
+### Current memory in bounded diagnostics
+
+`devtools.process_memory.current_memory_bytes()` reads the current process's resident
+bytes on Linux, Windows and macOS. Lifetime peak reporting is separate: releasing a
+mapping must lower a current-memory guard even when its historical peak stays high.
+On Darwin it uses the self-only Mach `task_info` interface and the packed layout in
+[Apple's task_info.h](https://github.com/apple-oss-distributions/xnu/blob/main/osfmk/mach/task_info.h).
+Missing APIs or a failed query raise `OSError`; they never return zero or substitute a
+peak. This does not supply a process-tree supervisor or a system-available-memory guard.
+
+The existing `macos-portability` job includes three native memory controls under a
+one-minute step and a five-minute job ceiling. They compare the declaration with the
+system SDK, cross-read RSS with `ps`, and touch/release a 96 MiB mapping. Windows tests
+and mocked failures do not certify Darwin, and the job retains its existing non-gating
+policy and stacked-PR selection.
+
 ### Windows worker supervision
 
 Windows is not a supported development host, and `packing-validate` refuses to run on
