@@ -32,7 +32,6 @@ frontend gate sets `SQPACK_REQUIRE_CHROMIUM`.
 from __future__ import annotations
 
 import json
-from collections.abc import Iterator
 from itertools import pairwise
 from pathlib import Path
 from typing import Any, TypedDict
@@ -407,7 +406,7 @@ def _scales(browser: Any, address: str) -> Readings:
 
 
 @pytest.fixture(scope="module")
-def seen(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
+def seen(tmp_path_factory: pytest.TempPathFactory) -> Readings:
     """Everything the sessions read, by name."""
     sync_api = site_browser.api()
     root = Path(tmp_path_factory.mktemp("site"))
@@ -515,7 +514,7 @@ def seen(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
         context.close()
         browser.close()
         (root / "all-readings.json").write_text(json.dumps(found, indent=2))
-        yield found
+    return found
 
 
 @pytest.fixture(scope="module")

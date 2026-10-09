@@ -863,7 +863,7 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
         ("Göbel 1979, Squares in Squares", "external", "verified"),
         ("Stromquist 2003, Electron. J. Combin. 10, #R8", "external", "verified"),
     ),
-    # T-060 confirms the exact Trump lower bound; Ahmed’s name leaves room for the
+    # T-060 confirms the exact Trump lower bound; Ahmed's name leaves room for the
     # whole lineage and venue on the stage.
     11: (
         ("Trump 1979, Squares in Squares (confirmed T-011)", "external", "verified"),
@@ -987,8 +987,8 @@ def test_promoted_external_bounds_keep_the_sources_credit(
     Since 2026-09-29 the register holds others' results (epistemics.md, Results by
     Others), so a promoted external bound has an entry of its own that carries the
     replay: the credit stays the source's, the result id stays empty because the bound
-    is not this project's, and the entry is named as what confirms it. Ahmed’s whole
-    credit fits beside its confirmation. The other credits need the source’s
+    is not this project's, and the entry is named as what confirms it. Ahmed's whole
+    credit fits beside its confirmation. The other credits need the source's
     `short_credit` on the stage; every other renderer prints the whole credit.
     """
     lower = _entry(n)["lower"]
