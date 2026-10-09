@@ -13121,7 +13121,9 @@ results:
     notes: 'All five complete certificates are kept as derived exact facts that rebuild each pinned
       blob; no upstream byte is retained. A separate complete repository replay is retained: five positives
       and ten duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 384846 pair decisions in 79.55 seconds wall with two workers and unchanged kernel limits.
+      routes, 384846 pair decisions with two workers and unchanged kernel limits. Summed over the fifteen
+      jobs, the receipt records 131.84 route CPU seconds and 132.22 job wall seconds; the longest job
+      took 22.42 seconds.
 
 
       The earlier issue451 n105 certificate (T-128) stays retained with its own replay outcomes; the

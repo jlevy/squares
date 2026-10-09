@@ -15,8 +15,8 @@ The commit names Claude as a co-author, disclosing AI assistance.
 These are source attributions, not independent priority findings.
 
 The author reports that all five pass Evan Daniel’s `verify_cert.py` and a copy of this
-repository’s `sqpack` verifier, lie within about $10^{-19}$ of a KKT point and admit no
-first-order descent.
+repository’s `sqpack` verifier, lie within about $10^{-19}$ of a KKT point and that
+“there is no first-order descent in any corner–corner branch”.
 Those statements are author claims here; no author program runs.
 
 ## Source Custody and Retention
@@ -68,8 +68,10 @@ the `sqpack` rational witness verifier and the independent rational corner check
 All five positives pass both routes; all ten controls fail both, on the overlap or the
 wall they were built to break.
 The positives clear every wall by at least $1/200000000000000000000$ and every pair by
-about $10^{-20}$. The run made 384,846 pair decisions in 79.55 seconds wall with two
-workers, 141.06 CPU seconds, under the kernel’s unchanged 600-second child deadline.
+about $10^{-20}$. The run made 384,846 pair decisions with two workers under the
+kernel’s unchanged 600-second child deadline.
+The receipt records 131.84 route CPU seconds and 132.22 seconds of job wall time, each
+summed over the fifteen jobs; the longest job took 22.42 seconds.
 A fresh serial `check --replay` reproduced all fifteen results apart from timing in
 130.93 seconds.
 
@@ -82,7 +84,8 @@ A fresh serial `check --replay` reproduced all fifteen results apart from timing
 | 270 | 16.9367230228761835 | 16.9378072284460292, Evan Daniel (T-119) | $1.08 \times 10^{-3}$ |
 
 Each comparison is exact: the acquisition record freezes the selected and verified
-rational sides it was made against.
+rational sides it was made against, and `check-packet` holds each to its house’s
+retained certificate.
 At $n=105$ the new side is also $1.31 \times 10^{-3}$ below Couzo’s earlier issue #451
 certificate (T-128).
 

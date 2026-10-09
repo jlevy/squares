@@ -127,6 +127,23 @@ def test_each_side_is_below_its_frozen_ceiling(n: int) -> None:
     assert certificate.side < Fraction(prior["selected_exact"])
 
 
+def test_quoted_replay_figures_are_the_receipts() -> None:
+    reports = register.reports
+    cases = reports.kernel.read_xz(reports.receipt_path())["cases"]
+    figures = (
+        f"{sum(sum(row['cpu_seconds'].values()) for row in cases):.2f} route CPU seconds",
+        f"{sum(row['wall_seconds'] for row in cases):.2f} ",
+        f"{max(row['wall_seconds'] for row in cases):.2f} seconds",
+    )
+    pairs = sum(row[route]["pairs_tested"] for row in cases for route in reports.ROUTES)
+    readme = " ".join((reports.PACKET / "README.md").read_text().split())
+    assert f"{pairs} pair decisions" in register.REPLAY
+    assert f"{pairs:,} pair decisions" in readme
+    for figure in figures:
+        assert figure in register.REPLAY
+        assert figure in readme
+
+
 def test_request_edit_adds_one_result_and_the_import_bead_only() -> None:
     _, _, _, request = register.rows()
     updated = register.request_text(REQUESTS, request)

@@ -925,10 +925,11 @@ Independent whole-net replay and controls remain pending.
   rational certificates at 84, 86, 105, 175 and 270, pinned at 2d32a6e and kept as
   derived exact facts with the complete pinned tree; no upstream byte is retained.
   [Derived packet](web/couzo-followup-refinements-2026-10-08/README.md).
-  T-130 remains V0/C0: all five positives and ten controls passed both maintained exact
-  routes, while independent review, historical source-house integration and confirmation
-  remain pending. Ryan Xu, Evan Daniel and David Ellsworth receive the source’s seed and
-  refinement credits; no optimality is asserted.
+  T-130 remains V0/C0: all five positives passed both maintained exact routes and both
+  routes refused all ten controls, while independent review, historical source-house
+  integration and confirmation remain pending.
+  Ryan Xu, Evan Daniel and David Ellsworth receive the source’s seed and refinement
+  credits; no optimality is asserted.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

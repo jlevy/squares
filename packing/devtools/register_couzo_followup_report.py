@@ -43,8 +43,9 @@ DISCLOSURE = (
 REPLAY = (
     "A separate complete repository replay is retained: five positives and ten "
     "duplicate-square and outside-container controls passed their required outcomes on "
-    "both routes, 384846 pair decisions in 79.55 seconds wall with two workers and "
-    "unchanged kernel limits."
+    "both routes, 384846 pair decisions with two workers and unchanged kernel limits. "
+    "Summed over the fifteen jobs, the receipt records 131.84 route CPU seconds and "
+    "132.22 job wall seconds; the longest job took 22.42 seconds."
 )
 CLAIM = (
     "Five complete rational source certificates report finite upper-bound improvements "
@@ -322,10 +323,10 @@ def resources_text(text: str) -> str:
         "at 84, 86, 105, 175 and 270, pinned at 2d32a6e and kept as derived exact facts "
         "with the complete pinned tree; no upstream byte is retained. [Derived packet]"
         "(web/couzo-followup-refinements-2026-10-08/README.md). T-130 remains V0/C0: all "
-        "five positives and ten controls passed both maintained exact routes, while "
-        "independent review, historical source-house integration and confirmation remain "
-        "pending. Ryan Xu, Evan Daniel and David Ellsworth receive the source's seed and "
-        "refinement credits; no optimality is asserted.\n\n"
+        "five positives passed both maintained exact routes and both routes refused all "
+        "ten controls, while independent review, historical source-house integration and "
+        "confirmation remain pending. Ryan Xu, Evan Daniel and David Ellsworth receive the "
+        "source's seed and refinement credits; no optimality is asserted.\n\n"
     )
     return text.replace(FOOTER, entry + FOOTER)
 
