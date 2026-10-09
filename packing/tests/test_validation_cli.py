@@ -4059,18 +4059,16 @@ def test_a_frontend_job_without_chromium_is_detected() -> None:
     assert _installs_chromium(document["jobs"]["validate"], pull_request=False)
 
 
-def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
+def _captured_site_layout_commands(
     monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """The step fails rather than skips when no Chromium launches: it sets the name
-    `tests.site_browser` reads, for its command alone, and runs exactly the files the
-    quick lane ignores, one to a worker as the quick lane runs its own."""
-    observed: dict[str, Any] = {}
+) -> tuple[list[tuple[str, ...]], list[object], str]:
+    commands: list[tuple[str, ...]] = []
+    environments: list[object] = []
 
     def capture(_context: validate.Context, command: Sequence[str], **options: Any) -> str:
-        observed["command"] = tuple(command)
-        observed["environment"] = options.get("extra_environment")
-        return ""
+        commands.append(tuple(command))
+        environments.append(options.get("extra_environment"))
+        return f"command {len(commands)} passed"
 
     monkeypatch.setattr(validate, "_run", capture)
     monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
@@ -4081,21 +4079,172 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
         inner_jobs=1,
         environment=os.environ.copy(),
     )
-    validate._site_layout_tests(context)
-    assert observed["command"] == (
-        sys.executable,
-        "-m",
-        "pytest",
-        "-q",
-        "-p",
-        "no:cacheprovider",
-        "-n",
-        "2",
-        "--dist=loadfile",
-        *validate.SITE_LAYOUT_TESTS,
-    )
-    assert observed["environment"] == {validate.REQUIRE_CHROMIUM: "1"}
+    output = validate._site_layout_tests(context)
+    return commands, environments, output
+
+
+def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Keep functional layout parallel and the four load-budget cases serial."""
+    commands, environments, output = _captured_site_layout_commands(monkeypatch)
+    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    assert commands == [
+        (
+            *common,
+            "-n",
+            "2",
+            "--dist=loadfile",
+            *validate.SITE_LAYOUT_TESTS,
+            "-k",
+            "not test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets",
+        ),
+        (
+            *common,
+            "-n",
+            "0",
+            validate.SITE_LOAD_BUDGET_TEST,
+        ),
+    ]
+    assert environments == [{validate.REQUIRE_CHROMIUM: "1"}] * 2
+    assert output == "command 1 passed\ncommand 2 passed"
     assert validate.REQUIRE_CHROMIUM == site_browser.REQUIRED
+
+
+def test_site_layout_commands_partition_the_original_collection(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Neither phase may drop, repeat, or widen the existing four timing cases."""
+    commands, _environments, _output = _captured_site_layout_commands(monkeypatch)
+    assert len(commands) == 2
+
+    def collect(command: Sequence[str]) -> set[str]:
+        # Collection needs no xdist worker: preserve selection, remove allocation.
+        serial = [
+            argument
+            for index, argument in enumerate(command)
+            if argument != "-n"
+            and not argument.startswith("--dist=")
+            and (index == 0 or command[index - 1] != "-n")
+        ]
+        completed = subprocess.run(
+            (*serial, "-n", "0", "--collect-only"),
+            cwd=validate.PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=30,
+        )
+        return {line for line in completed.stdout.splitlines() if line.startswith("tests/")}
+
+    original = collect(
+        (
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            "-p",
+            "no:cacheprovider",
+            *validate.SITE_LAYOUT_TESTS,
+        )
+    )
+    parallel, serial = (collect(command) for command in commands)
+    assert serial == {
+        f"tests/test_site_rendering.py::"
+        f"test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets[{case}]"
+        for case in ("390-light", "390-dark", "1280-light", "1280-dark")
+    }
+    assert original == parallel | serial
+    assert not parallel & serial
+
+
+@pytest.mark.parametrize("failure_index", [0, 1])
+@pytest.mark.parametrize("error_type", [validate.StepFailureError, validate.StepTimeoutError])
+def test_site_layout_command_failure_keeps_prior_output_and_stops(
+    monkeypatch: pytest.MonkeyPatch,
+    failure_index: int,
+    error_type: type[validate.StepFailureError],
+) -> None:
+    """A failed layout or timing command cannot become a passing combined step."""
+    calls = 0
+
+    def fail(_context: validate.Context, _command: Sequence[str], **_options: Any) -> str:
+        nonlocal calls
+        index = calls
+        calls += 1
+        if index == failure_index:
+            raise error_type("browser command failed")
+        return "functional layout passed"
+
+    monkeypatch.setattr(validate, "_run", fail)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+    with pytest.raises(error_type, match="browser command failed") as failed:
+        validate._site_layout_tests(context)
+    assert calls == failure_index + 1
+    if failure_index:
+        assert "functional layout passed" in str(failed.value)
+
+
+@pytest.mark.parametrize("timeout_seconds", [7.0, 900.0])
+def test_site_layout_commands_share_the_original_total_timeout(
+    monkeypatch: pytest.MonkeyPatch, timeout_seconds: float
+) -> None:
+    """Splitting the step must not give its second command a fresh hang budget."""
+    clock = iter((100.0, 100.0, 103.0))
+    monkeypatch.setattr(validate.time, "monotonic", lambda: next(clock))
+    timeouts: list[object] = []
+
+    def capture(_context: validate.Context, _command: Sequence[str], **options: Any) -> str:
+        timeouts.append(options.get("timeout_seconds"))
+        return "passed"
+
+    monkeypatch.setattr(validate, "_run", capture)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        timeout_seconds=timeout_seconds,
+        environment=os.environ.copy(),
+    )
+    validate._site_layout_tests(context)
+    assert timeouts == [timeout_seconds, timeout_seconds - 3.0]
+
+
+@pytest.mark.parametrize("completed_commands", [0, 1])
+def test_site_layout_exhausted_budget_cannot_start_another_command(
+    monkeypatch: pytest.MonkeyPatch, completed_commands: int
+) -> None:
+    """At the deadline, refuse launching and retain any completed phase's output."""
+    clock = iter((100.0, *((100.0,) * completed_commands), 107.0))
+    monkeypatch.setattr(validate.time, "monotonic", lambda: next(clock))
+    calls = 0
+
+    def capture(_context: validate.Context, _command: Sequence[str], **_options: Any) -> str:
+        nonlocal calls
+        calls += 1
+        return "functional layout passed"
+
+    monkeypatch.setattr(validate, "_run", capture)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        timeout_seconds=7.0,
+        environment=os.environ.copy(),
+    )
+    with pytest.raises(validate.StepTimeoutError, match="subprocess budget") as failed:
+        validate._site_layout_tests(context)
+    assert calls == completed_commands
+    if completed_commands:
+        assert "functional layout passed" in str(failed.value)
 
 
 def test_a_commands_extra_environment_reaches_only_that_command(
