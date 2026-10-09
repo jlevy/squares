@@ -21,7 +21,7 @@ from sqpack.probes import applied, probe
 from tests import site_browser, site_renders
 
 if TYPE_CHECKING:
-    from playwright.sync_api import Browser, Page, Route
+    from playwright.sync_api import Browser, CDPSession, Page, Route
 
 _SHIFT = applied(probe(Path(__file__).parent / "probes", "site_rendering/shift"))
 _FONT_INITIATORS = probe(Path(__file__).parent / "probes", "site_rendering/font_initiators")
@@ -1126,57 +1126,225 @@ def test_clipped_semantic_math_keeps_print_nojs_accessibility_and_copy(
         context.close()
 
 
-def test_font_diagnostic_observes_physical_fallback_then_pinned_face(
-    browser: Browser, tmp_path: Path
-) -> None:
+#: The paper's own nesting of the diagnostic's declared targets (review B3 on #468): a
+#: home link whose words are hidden at 390 px beside its logo, a flex `.doc-links` row of
+#: `a.chip` links, and a `.hero` whose title carries nested math and whose credit lines
+#: are spans in a `.credits` block. `CSS.getPlatformFontsForNode` asked about those
+#: containers found no face for the chips and only the title's words in the hero.
+PAPER_NESTING = (
+    "<style>@font-face{font-family:PinnedSans;src:url(font.woff2);font-display:swap}"
+    "body{font-family:serif;font-size:24px} .doc-links{display:flex}"
+    " .chip{display:inline-flex} .site-name-text{display:none}"
+    " .site-nav-inner a,.chip,.credits,.katex{font-family:PinnedSans,sans-serif}</style>"
+    '<nav class="site-nav-inner"><a class="site-name" href="/" aria-label="Home">'
+    '<svg width="20" height="20"></svg><span class="site-name-text">Home</span></a>'
+    '<a href="/">Nav link</a></nav>'
+    '<div class="doc-links"><a class="chip" href="a.md">MD</a>'
+    '<a class="chip" href="a.pdf">PDF</a></div>'
+    '<div class="hero"><h1>Title <span class="kpress-math"><span class="katex">'
+    '<span class="katex-html"><span class="base"><span class="mord">x</span></span>'
+    '</span></span></span></h1><div class="credits"><span>From the original proof by '
+    "<strong>Someone</strong></span><span>Agents and a long credit line</span></div></div>"
+)
+
+
+def diagnose_font_fixture(browser: Browser, site: Path, body: str) -> dict[str, Any]:
+    """Serve `body` with the pinned Source Sans face beside it, and diagnose it."""
     font = (
         Path(__file__).parents[2]
         / "vendor/kpress/src/kpress/format/static/fonts"
         / "source-sans-3-latin-wght-normal.woff2"
     )
-    (tmp_path / "font.woff2").write_bytes(font.read_bytes())
-    (tmp_path / "index.html").write_text(
-        '<!doctype html><link rel="preload" href="font.woff2" as="font" crossorigin>'
-        "<style>@font-face{font-family:PinnedSans;src:url(font.woff2);font-display:swap}"
-        "body{font-family:PinnedSans,serif;font-size:24px}</style>"
-        '<nav class="site-nav-inner"><a href="/">A readable navigation link</a></nav>'
-        '<div class="doc-links">The document formats</div>'
-        '<main class="hero"><h1>Pinned font identity</h1><p>A complete readable '
-        "paragraph lets the native diagnostic identify the physical face.</p></main>"
-    )
-    destination = tmp_path / "font-diagnostic.json"
-    server = preview_site.serve(tmp_path, 0)
+    (site / "font.woff2").write_bytes(font.read_bytes())
+    (site / "index.html").write_text(f'<!doctype html><meta charset="utf-8">{body}')
+    server = preview_site.serve(site, 0)
     try:
-        result = check_site_rendering.diagnose_font_delivery(
+        return check_site_rendering.diagnose_font_delivery(
             browser,
             f"http://127.0.0.1:{server.server_port}/index.html",
-            destination,
+            site / "font-diagnostic.json",
             width=390,
             scheme="light",
         )
     finally:
         server.shutdown()
         server.server_close()
-    assert result == json.loads(destination.read_text())
+
+
+def test_font_diagnostic_observes_physical_fallback_then_pinned_face(
+    browser: Browser, tmp_path: Path
+) -> None:
+    result = diagnose_font_fixture(browser, tmp_path, PAPER_NESTING)
+    assert result == json.loads((tmp_path / "font-diagnostic.json").read_text())
     assert result["complete"] is True
     assert result["gate_credit"] is False
     assert result["failed_fonts"] == []
     assert len(result["held_fonts"]) == 1
     assert [row["phase"] for row in result["snapshots"]] == ["fonts-held", "fonts-settled"]
     before, after = (row["nodes"] for row in result["snapshots"])
-    assert len(before) == len(after) == 3
+    # What the container reads missed: any face at all for the chips, and the pinned face
+    # of the hero's credit lines (their 61 characters) rather than only the title's.
+    assert before[2]["fonts"]
+    assert after[2]["fonts"]
+    assert sum(face["glyphCount"] for face in after[3]["fonts"] if face["isCustomFont"]) > 61
+    assert all(row["problems"] == [] for row in result["snapshots"])
+    assert [row["selector"] for row in after] == [
+        ".site-nav-inner > a",
+        ".site-nav-inner > a",
+        ".doc-links",
+        ".hero",
+    ]
     for fallback, custom in zip(before, after, strict=True):
         assert fallback["backendNodeId"] == custom["backendNodeId"]
         assert fallback["html"] == custom["html"]
-        assert fallback["typography"]["font-family"] == custom["typography"]["font-family"]
-        assert fallback["fonts"]
-        assert not any(face["isCustomFont"] for face in fallback["fonts"])
-        assert any(
-            face["isCustomFont"] and face["familyName"].startswith("Source Sans")
-            for face in custom["fonts"]
-        )
+        assert fallback["complete"] is custom["complete"] is True
         assert fallback["box"]["width"] > 0
         assert custom["box"]["width"] > 0
+        assert [text["backendNodeId"] for text in fallback["text"]] == [
+            text["backendNodeId"] for text in custom["text"]
+        ]
+        for row in (fallback, custom):
+            assert sum(face["glyphCount"] for face in row["fonts"]) == sum(
+                face["glyphCount"] for text in row["text"] for face in text["fonts"]
+            )
+        for held, settled in zip(fallback["text"], custom["text"], strict=True):
+            assert held["typography"] == settled["typography"]
+            assert held["fonts"]
+            assert settled["fonts"]
+            assert not any(face["isCustomFont"] for face in held["fonts"])
+            pinned = any(
+                face["isCustomFont"] and face["familyName"].startswith("Source Sans")
+                for face in settled["fonts"]
+            )
+            assert pinned is held["typography"]["font-family"].startswith("PinnedSans")
+    home, link, documents, hero = after
+    # The home link renders only its logo at this width; its words are kept, unrendered.
+    assert home["text"] == []
+    assert [(text["element"], text["text"]) for text in home["unrendered_text"]] == [
+        ("span.site-name-text", "Home")
+    ]
+    assert [text["text"] for text in link["text"]] == ["Nav link"]
+    # The chips' own text, face and family: not the container's serif, and not nothing.
+    assert [(text["element"], text["text"]) for text in documents["text"]] == [
+        ("a.chip", "MD"),
+        ("a.chip", "PDF"),
+    ]
+    assert documents["typographies"][0]["font-family"] == "PinnedSans, sans-serif"
+    assert [
+        face["glyphCount"]
+        for face in documents["fonts"]
+        if face["isCustomFont"] and face["familyName"].startswith("Source Sans")
+    ] == [5]
+    # The hero's title, its nested math and every credit line.
+    assert [(text["element"], text["text"]) for text in hero["text"]] == [
+        ("h1", "Title "),
+        ("span.mord", "x"),
+        ("span", "From the original proof by "),
+        ("strong", "Someone"),
+        ("span", "Agents and a long credit line"),
+    ]
+    assert [text["typography"]["font-family"] for text in hero["text"]] == [
+        "serif",
+        *["PinnedSans, sans-serif"] * 4,
+    ]
+    # The title, its math at the title's size, the credit lines, and the bold name.
+    assert len(hero["typographies"]) == 4
+
+
+def test_font_diagnostic_fails_a_declared_target_that_renders_no_text(
+    browser: Browser, tmp_path: Path
+) -> None:
+    body = PAPER_NESTING.replace('<a class="chip" href="a.pdf">PDF</a>', "").replace(
+        '<a class="chip" href="a.md">', '<a class="chip" href="a.md" style="display:none">'
+    )
+    with pytest.raises(
+        ValueError, match=r"rows are incomplete: .*\.doc-links: renders no text"
+    ):
+        diagnose_font_fixture(browser, tmp_path, body)
+    result = json.loads((tmp_path / "font-diagnostic.json").read_text())
+    assert result["complete"] is False
+    assert [snapshot["problems"] for snapshot in result["snapshots"]] == [
+        [".doc-links: renders no text"],
+        [".doc-links: renders no text"],
+    ]
+    documents = next(
+        row for row in result["snapshots"][1]["nodes"] if row["selector"] == ".doc-links"
+    )
+    assert documents["text"] == []
+    assert [text["text"] for text in documents["unrendered_text"]] == ["MD"]
+
+
+class FacelessSession:
+    """A CDP session over a page whose `.doc-links` text shapes with no face."""
+
+    def __init__(self) -> None:
+        def element(node: int, name: str, children: list[dict[str, Any]]) -> dict[str, Any]:
+            return {
+                "nodeId": node,
+                "backendNodeId": node,
+                "nodeType": 1,
+                "nodeName": name.upper(),
+                "localName": name,
+                "attributes": [],
+                "children": children,
+            }
+
+        def text(node: int, value: str) -> dict[str, Any]:
+            return {"nodeId": node, "backendNodeId": node, "nodeType": 3, "nodeValue": value}
+
+        self.selectors = {".site-nav-inner > a": [3], ".doc-links": [5], ".hero": [7]}
+        self.root = element(
+            1,
+            "body",
+            [
+                element(2, "nav", [element(3, "a", [text(4, "Nav")])]),
+                element(5, "div", [element(10, "span", [text(6, "Formats")])]),
+                element(7, "div", [text(8, "Title"), text(9, "\n  ")]),
+            ],
+        )
+
+    def send(self, method: str, parameters: dict[str, Any] | None = None) -> dict[str, Any]:
+        node = (parameters or {}).get("nodeId")
+        face = {"familyName": "Sans", "postScriptName": "Sans", "isCustomFont": False}
+        replies: dict[str, Callable[[], dict[str, Any]]] = {
+            "DOM.getDocument": lambda: {"root": self.root},
+            "DOM.querySelectorAll": lambda: {
+                "nodeIds": self.selectors[(parameters or {})["selector"]]
+            },
+            "DOM.getContentQuads": lambda: {"quads": [[0, 0, 1, 0, 1, 1, 0, 1]]},
+            "CSS.getComputedStyleForNode": lambda: {
+                "computedStyle": [{"name": "font-family", "value": "Sans"}]
+            },
+            "CSS.getPlatformFontsForNode": lambda: {
+                "fonts": [] if node == 6 else [{**face, "glyphCount": 3}]
+            },
+            "DOM.getOuterHTML": lambda: {"outerHTML": "<div></div>"},
+            "DOM.getBoxModel": lambda: {"model": {"width": 1, "height": 1}},
+        }
+        return replies[method]()
+
+
+def test_a_rendered_text_without_a_physical_face_marks_its_row_incomplete() -> None:
+    rows = check_site_rendering.physical_font_snapshot(cast("CDPSession", FacelessSession()))
+    assert [(row["selector"], row["complete"]) for row in rows] == [
+        (".site-nav-inner > a", True),
+        (".doc-links", False),
+        (".hero", True),
+    ]
+    documents = rows[1]
+    assert [(text["element"], text["text"]) for text in documents["text"]] == [
+        ("span", "Formats")
+    ]
+    assert documents["fonts"] == []
+    assert documents["problems"] == [
+        ".doc-links: span text 'Formats' resolved no physical face"
+    ]
+    # Collapsible whitespace is not text; the title's face is summed once.
+    assert [text["text"] for text in rows[2]["text"]] == ["Title"]
+    assert rows[2]["fonts"] == [
+        {"familyName": "Sans", "postScriptName": "Sans", "isCustomFont": False, "glyphCount": 3}
+    ]
+    assert check_site_rendering.snapshot_problems(rows) == documents["problems"]
 
 
 @pytest.mark.parametrize("failure", ["no-font", "missing-node", "failed-font"])

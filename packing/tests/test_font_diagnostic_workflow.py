@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from devtools import rerun_starved
+from devtools import check_site_rendering, rerun_starved
 from sqpack.yamlio import safe_load
 
 REPO = Path(__file__).resolve().parents[2]
@@ -140,6 +140,12 @@ def test_the_diagnostic_is_one_bounded_paper_only_observation() -> None:
     )
     assert "--page papers/n11-threshold-bound-review.html" in bounded[1]
     assert "python diagnostics/tool/check_site_rendering.py diagnostics/site" in bounded[1]
+    # The retained protocol says what each row is: every rendered text node below the
+    # declared node, as the tool records it (review B3), not a container's own read.
+    protocol = next(step["run"] for step in steps if "protocol.txt" in step.get("run", ""))
+    assert "every rendered text node below it" in protocol
+    assert "every rendered text node below it" in check_site_rendering.FONT_DIAGNOSTIC_PROTOCOL
+    assert "Hero aggregates" not in protocol
     probe_step = next(
         step
         for step in steps

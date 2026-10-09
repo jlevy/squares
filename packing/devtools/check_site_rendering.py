@@ -14,7 +14,7 @@ import json
 import re
 import statistics
 import time
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Iterator, Sequence
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal, cast
 from urllib.parse import unquote, urlsplit
@@ -216,49 +216,160 @@ def measure(
 
 
 FONT_DIAGNOSTIC_SELECTORS = (".site-nav-inner > a", ".doc-links", ".hero")
+FONT_DIAGNOSTIC_PROTOCOL = (
+    "fresh context; all network font responses held once; two CDP snapshots; each "
+    "declared node records every rendered text node below it with that text's own "
+    "platform fonts, computed typography and content quads, and sums their fonts"
+)
 _FONT_URL = re.compile(r"\.(?:woff2?|ttf|otf)(?:[?#].*)?$")
+_TYPOGRAPHY = frozenset(
+    {
+        "font-family",
+        "font-size",
+        "font-weight",
+        "font-style",
+        "font-stretch",
+        "line-height",
+        "letter-spacing",
+    }
+)
+#: HTML's collapsible whitespace. A no-break or zero-width space is shaped like any
+#: other character, so it counts as text here.
+_HTML_WHITESPACE = " \t\n\f\r"
+
+
+def _dom_nodes(
+    root: dict[str, Any],
+) -> Iterator[tuple[dict[str, Any], dict[str, Any] | None]]:
+    """`root` and every node below it with its parent, in document order."""
+    pending: list[tuple[dict[str, Any], dict[str, Any] | None]] = [(root, None)]
+    while pending:
+        node, parent = pending.pop()
+        yield node, parent
+        pending.extend((child, node) for child in reversed(node.get("children") or ()))
+
+
+def _element_name(node: dict[str, Any]) -> str:
+    """`tag#id.class`, enough to find the element again in the retained HTML."""
+    raw: list[str] = [str(value) for value in node.get("attributes") or ()]
+    attributes = dict(zip(raw[::2], raw[1::2], strict=True))
+    name = str(node.get("localName") or node["nodeName"]).lower()
+    if attributes.get("id"):
+        name += f"#{attributes['id']}"
+    return name + "".join(f".{part}" for part in attributes.get("class", "").split())
+
+
+def _faces(texts: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
+    """The physical faces of `texts`, one row per face, glyph counts summed."""
+    faces: dict[tuple[Any, ...], dict[str, Any]] = {}
+    for text in texts:
+        for face in text["fonts"]:
+            key = (face["familyName"], face.get("postScriptName"), face["isCustomFont"])
+            if key in faces:
+                faces[key]["glyphCount"] += face["glyphCount"]
+            else:
+                faces[key] = dict(face)
+    return list(faces.values())
+
+
+def _rendered_text(
+    session: CDPSession, root: dict[str, Any]
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Every non-whitespace text node below `root`, as (rendered, unrendered)."""
+    rendered: list[dict[str, Any]] = []
+    unrendered: list[dict[str, Any]] = []
+    for text, parent in _dom_nodes(root):
+        if parent is None or text["nodeType"] != 3:
+            continue
+        if not text["nodeValue"].strip(_HTML_WHITESPACE):
+            continue
+        target = {"nodeId": text["nodeId"]}
+        entry: dict[str, Any] = {
+            "backendNodeId": text["backendNodeId"],
+            "element": _element_name(parent),
+            "text": text["nodeValue"],
+        }
+        quads = session.send("DOM.getContentQuads", target)["quads"]
+        if not quads:
+            unrendered.append(entry)
+            continue
+        computed = session.send("CSS.getComputedStyleForNode", target)["computedStyle"]
+        entry["fonts"] = session.send("CSS.getPlatformFontsForNode", target)["fonts"]
+        entry["typography"] = {
+            row["name"]: row["value"] for row in computed if row["name"] in _TYPOGRAPHY
+        }
+        entry["quads"] = quads
+        rendered.append(entry)
+    return rendered, unrendered
 
 
 def physical_font_snapshot(session: CDPSession) -> list[dict[str, Any]]:
-    """Two diagnostic reads use the same declared nodes and actual shaped fonts."""
-    root = session.send("DOM.getDocument")["root"]["nodeId"]
+    """One row per declared node: the physical faces of the text it actually renders.
+
+    `CSS.getPlatformFontsForNode` reads text only about two layout levels below the node
+    it is asked about, and a container's computed style is not its text's. Asked about
+    the paper's `.doc-links`, it found no face for the chips' text, which flex layout
+    wraps in anonymous blocks; asked about `.hero`, it found the title's own words but
+    neither its math nor the credit lines (review B3 on #468). So each row asks every
+    text node below its declared node, one at a time, for that text's faces, computed
+    typography and content quads, and sums the faces. A text node with no content quads
+    has no layout -- a script, `display: none`, a MathML annotation, a skipped
+    `content-visibility` subtree -- and is listed under `unrendered_text` instead.
+    """
+    document = session.send("DOM.getDocument", {"depth": -1})["root"]
+    tree = {node["nodeId"]: node for node, _ in _dom_nodes(document)}
     rows: list[dict[str, Any]] = []
     for selector in FONT_DIAGNOSTIC_SELECTORS:
-        nodes = session.send("DOM.querySelectorAll", {"nodeId": root, "selector": selector})[
-            "nodeIds"
-        ]
+        nodes = session.send(
+            "DOM.querySelectorAll", {"nodeId": document["nodeId"], "selector": selector}
+        )["nodeIds"]
         if not nodes:
             raise ValueError(f"font diagnostic selector is absent: {selector}")
         for node in nodes:
+            if node not in tree:
+                raise ValueError(f"font diagnostic node is outside the document: {selector}")
             parameters = {"nodeId": node}
-            computed = session.send("CSS.getComputedStyleForNode", parameters)["computedStyle"]
+            texts, unrendered = _rendered_text(session, tree[node])
+            typographies: list[dict[str, str]] = []
+            for entry in texts:
+                if entry["typography"] not in typographies:
+                    typographies.append(entry["typography"])
+            faceless = [entry for entry in texts if not entry["fonts"]]
             rows.append(
                 {
                     "selector": selector,
                     "nodeId": node,
-                    "backendNodeId": session.send("DOM.describeNode", parameters)["node"][
-                        "backendNodeId"
-                    ],
+                    "backendNodeId": tree[node]["backendNodeId"],
                     "html": session.send("DOM.getOuterHTML", parameters)["outerHTML"],
-                    "fonts": session.send("CSS.getPlatformFontsForNode", parameters)["fonts"],
                     "box": session.send("DOM.getBoxModel", parameters)["model"],
-                    "typography": {
-                        row["name"]: row["value"]
-                        for row in computed
-                        if row["name"]
-                        in {
-                            "font-family",
-                            "font-size",
-                            "font-weight",
-                            "font-style",
-                            "font-stretch",
-                            "line-height",
-                            "letter-spacing",
-                        }
-                    },
+                    "complete": not faceless,
+                    "fonts": _faces(texts),
+                    "typographies": typographies,
+                    "text": texts,
+                    "unrendered_text": unrendered,
+                    "problems": [
+                        f"{selector}: {entry['element']} text {entry['text']!r} "
+                        "resolved no physical face"
+                        for entry in faceless
+                    ],
                 }
             )
     return rows
+
+
+def snapshot_problems(rows: Sequence[dict[str, Any]]) -> list[str]:
+    """Why a snapshot does not hold the faces of every declared target's text.
+
+    One declared node may render no text of its own at a width -- the paper's home link
+    is only its logo at 390 px -- but each declared selector must render some, and every
+    text node it renders must resolve a physical face.
+    """
+    silent = [
+        f"{selector}: renders no text"
+        for selector in FONT_DIAGNOSTIC_SELECTORS
+        if not any(row["text"] for row in rows if row["selector"] == selector)
+    ]
+    return [problem for row in rows for problem in row["problems"]] + silent
 
 
 def diagnose_font_delivery(
@@ -280,8 +391,8 @@ def diagnose_font_delivery(
         "url": url,
         "width": width,
         "scheme": scheme,
-        "protocol": "fresh context; all network font responses held once; two CDP snapshots",
-        "overhead": "routing disables cache; synchronous font/style/box observation",
+        "protocol": FONT_DIAGNOSTIC_PROTOCOL,
+        "overhead": "routing disables cache; synchronous per-text font/style/quad reads",
         "held_fonts": [],
         "failed_fonts": [],
         "snapshots": [],
@@ -299,6 +410,13 @@ def diagnose_font_delivery(
                 result["held_fonts"].append(route.request.url)
             else:
                 route.continue_()
+
+        def record_snapshot(phase: str) -> None:
+            assert session is not None
+            rows = physical_font_snapshot(session)
+            result["snapshots"].append(
+                {"phase": phase, "nodes": rows, "problems": snapshot_problems(rows)}
+            )
 
         def release() -> None:
             nonlocal holding
@@ -348,19 +466,24 @@ def diagnose_font_delivery(
                 page.wait_for_timeout(SETTLE_MS)
                 if not held:
                     raise ValueError("font diagnostic observed no held font requests")
-                result["snapshots"].append(
-                    {"phase": "fonts-held", "nodes": physical_font_snapshot(session)}
-                )
+                record_snapshot("fonts-held")
                 release()
                 page.wait_for_load_state("load", timeout=30_000)
                 wait_for_fonts(page)
                 page.wait_for_timeout(SETTLE_MS)
-                result["snapshots"].append(
-                    {"phase": "fonts-settled", "nodes": physical_font_snapshot(session)}
-                )
+                record_snapshot("fonts-settled")
                 result["native_report"] = read_report(page)
                 if result["failed_fonts"]:
                     raise ValueError("font diagnostic observed failed font loads")
+                incomplete = [
+                    f"{snapshot['phase']} {problem}"
+                    for snapshot in result["snapshots"]
+                    for problem in snapshot["problems"]
+                ]
+                if incomplete:
+                    raise ValueError(
+                        "font diagnostic rows are incomplete: " + "; ".join(incomplete)
+                    )
                 result["complete"] = True
             finally:
                 try:
