@@ -413,7 +413,17 @@ fetched them again on every page, since a page’s own bytes were all it could c
   (`site_assets.PRELOADED_FACES`). Emphasis counts: the frontier’s opening paragraphs
   set italic and bold PT Serif, and while those two waited for the layout that
   discovered them, their arrival moved the paragraphs by a CLS of 0.134 or 0.209 on the
-  hosted runner. A small prepaint program activates these hints with anonymous CORS on
+  hosted runner. The two emphasis preloads add 64,484 bytes at high priority to every
+  page, 34,896 for the italic and 29,588 for the bold.
+  Only a reader’s first page pays: the files are shared and named by their content, so
+  later pages read them from cache.
+  Not every page draws them: measured in Chromium on 2026-10-09 across the twelve
+  top-level pages at 390 and 1280px, `visualize.html` draws neither, `index.html`,
+  `papers.html` and `cases/index.html` draw the italic but not the bold, and
+  `readme.html` and `epistemics.html` draw the bold only below the first screen.
+  A first visit that lands on one of those pages fetches a face early that it draws late
+  or never. A per-page preload list in `site_assets.preload_tags` would remove that cost
+  and is not built. A small prepaint program activates these hints with anonymous CORS on
   HTTP and HTTPS, and without CORS for local files; choosing the mode before requesting
   the fonts avoids WebKit’s file-origin cache failure while preserving shared HTTP font
   downloads. With JavaScript disabled, the same stylesheets load their faces normally.
