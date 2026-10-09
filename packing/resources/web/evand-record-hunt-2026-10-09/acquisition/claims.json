@@ -1,0 +1,56 @@
+{
+  "format": "evand-465-record-hunt-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/465",
+  "source": "https://github.com/evand/square-packing",
+  "revision": "e0081804736a4613c2cf44c693ef1afe92518927",
+  "read_on": "2026-10-09",
+  "read_at_main": "d3860c97a7037203701bcf262990ea0dee3a92dc",
+  "results": [
+    {
+      "n": 132,
+      "certificate": "search/packer/candidates/hunt1_n132.cert",
+      "offered_side": "11.987099332245063227179742877435",
+      "exact_side": "2397419866449012645435948575487/200000000000000000000000000000",
+      "ceiling": "11.9870993322450633",
+      "house": {
+        "source_key": "[evand exact optima 2026-10-05]",
+        "evidence": "E-evand-exact-optima-2026-10-05-exact-replay",
+        "result": "T-098",
+        "exact_side": "2398265577538300282337568426317/200000000000000000000000000000",
+        "ceiling": "11.9913278876915015",
+        "below_by": "84571108928763690161985083/20000000000000000000000000000"
+      }
+    },
+    {
+      "n": 155,
+      "certificate": "search/packer/candidates/hunt1_n155.cert",
+      "offered_side": "12.952498944014007381965850566940",
+      "exact_side": "647624947200700369098292528347/50000000000000000000000000000",
+      "ceiling": "12.9524989440140074",
+      "house": {
+        "source_key": "[SQUISH update 2026-10-07]",
+        "evidence": "E-squish-update-2026-10-07-exact-replay",
+        "result": "T-115",
+        "exact_side": "7291611074595605/562949953421312",
+        "ceiling": "12.9525032026045129",
+        "below_by": "446545579783223614450101797881/104857600000000000000000000000000000"
+      },
+      "equal_side": {
+        "result": "T-128",
+        "source_key": "[Couzo exact refinements 2026-10-08]",
+        "exact_side": "647624947200700369098292528347/50000000000000000000000000000",
+        "identical_poses": 152,
+        "differing_here": [
+          83,
+          134,
+          138
+        ],
+        "differing_there": [
+          138,
+          143,
+          152
+        ]
+      }
+    }
+  ]
+}

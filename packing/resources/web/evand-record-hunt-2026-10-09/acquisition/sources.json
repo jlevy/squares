@@ -1,0 +1,65 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-09T20:51Z",
+  "git_scope": "Sparse blobless checkout of the named files at the pinned commit for issue #465. The two hunt1 certificates, their 80-digit KKT points, binary64 inputs and per-count reports are retained with the licence, credits and certificate-format README; the two source checkers are pinned by digest against the identical copies the issue-399 packet retains, and the packer log by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-record-hunt-2026-10-09",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "e0081804736a4613c2cf44c693ef1afe92518927",
+      "source_commit": "e0081804736a4613c2cf44c693ef1afe92518927",
+      "committed_utc": "2026-10-09T03:34:37Z",
+      "git_tree": "c8ca38bb5205c649f778b7edd6486a84f6bce91b",
+      "archived_path": "packing/resources/web/evand-record-hunt-2026-10-09/source",
+      "subtree_manifest": "packing/resources/web/evand-record-hunt-2026-10-09/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/PACKER.md",
+        "search/packer/candidates/hunt1_n132.cert",
+        "search/packer/candidates/hunt1_n132.exact.txt",
+        "search/packer/candidates/hunt1_n132.input.txt",
+        "search/packer/candidates/hunt1_n132.json",
+        "search/packer/candidates/hunt1_n155.cert",
+        "search/packer/candidates/hunt1_n155.exact.txt",
+        "search/packer/candidates/hunt1_n155.input.txt",
+        "search/packer/candidates/hunt1_n155.json"
+      ],
+      "subtree_file_count": 14,
+      "subtree_total_bytes": 250885,
+      "retained_file_count": 11,
+      "retained_total_bytes": 150942,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two exact checkers, byte-identical to the copies the issue-399 packet retains; never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two exact checkers, byte-identical to the copies the issue-399 packet retains; never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert2.py"
+        },
+        {
+          "path": "search/packer/PACKER.md",
+          "bytes": 93441,
+          "sha256": "077c9eb06a851e6fb088ae22a0b6dfb59ab43dbfc443e7e79fe26f97aaee34a7",
+          "reason": "The packer's working log (93 KB); the README quotes its hunt1 entries for 132 and 155."
+        }
+      ],
+      "license": "MIT, copyright 2026 Evan Daniel (LICENSE); attribution retained in CREDITS.md. The source discloses Claude assistance under Evan Daniel's direction.",
+      "claims": [
+        "Issue #465 reports exact rational certificates s(132) <= 2397419866449012645435948575487/200000000000000000000000000000 = 11.987099332245063227179742877435 and s(155) <= 647624947200700369098292528347/50000000000000000000000000000 = 12.952498944014007381965850566940, each from the record hunt hunt1.",
+        "KKT multipliers, reduced-Hessian and corner-to-corner jamming statements are numerical evidence at 80 digits, as the source says, not proofs; no optimality is claimed."
+      ]
+    }
+  ]
+}
