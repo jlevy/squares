@@ -129,21 +129,30 @@ def test_counts_are_the_declared_rungs(register: list[dict]) -> None:
     assert stats.cases_1_100_proved + stats.cases_1_100_open == 100
 
 
+@pytest.fixture
+def shared_html(request: pytest.FixtureRequest) -> str:
+    """Resolve the shared page during setup, before its independent fresh render.
+
+    Resolving it in the assertion rendered a cold overview twice in call time
+    (12.49 s on run 37777128452, 9.19 s on run 37877186650). The fresh render remains
+    uncached.
+    """
+    return cast(str, request.getfixturevalue(request.param))
+
+
 @pytest.mark.parametrize(
-    ("render", "shared"),
+    ("render", "shared_html"),
     [(render_overview.overview_page, "page"), (render_overview.results_page, "results")],
     ids=["overview", "results"],
+    indirect=["shared_html"],
 )
 def test_the_render_is_deterministic(
-    render: Callable[[], render_overview.Page], shared: str, page: str, results: str
+    render: Callable[[], render_overview.Page], shared_html: str
 ) -> None:
     """A fresh render of each page is the shared one, byte for byte, which is what lets
     every other check read the shared render. One page per node: the two fresh renders
-    together held one node past the per-test ceiling (12.25 s on run 37372707772). The
-    shared renders are fixtures, set up before the call, so a node's call holds its fresh
-    render alone; asked for in the call, the shared homepage, which no earlier test had
-    set up, held the `overview` node at 9.19 s on run 37877186650."""
-    assert render().html == {"page": page, "results": results}[shared]
+    together held one node past the per-test ceiling (12.25 s on run 37372707772)."""
+    assert render().html == shared_html
 
 
 def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
@@ -843,7 +852,9 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     assert "data-atlas-layer" not in tiles
 
 
-def test_a_case_with_a_new_result_carries_the_star_by_the_frontier_tables_rule() -> None:
+def test_a_case_with_a_new_result_carries_the_star_by_the_frontier_tables_rule(
+    rendered: Callable[[str], str],
+) -> None:
     """A case's tile carries the star after its number exactly where the frontier
     table's Recent column stars its row (`render_frontier_page.recent_lower_bounds`, its
     verified lower bound a recent result), and its name ends "new result", as a starred
@@ -863,7 +874,7 @@ def test_a_case_with_a_new_result_carries_the_star_by_the_frontier_tables_rule()
     )
     assert [int(n) for n, _, _ in found] == list(range(1, 325))
     recent = frontier.recent_lower_bounds()
-    frontier_page = site_renders.html("frontier.html")
+    frontier_page = rendered("frontier.html")
     rows = dict(re.findall(r'<tr id="n-(\d+)"[^>]*data-recent="(true|false)"', frontier_page))
     assert sorted(int(n) for n in rows) == list(range(1, 325))
     for n, name, number in found:
