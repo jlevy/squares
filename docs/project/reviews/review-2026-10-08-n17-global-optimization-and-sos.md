@@ -5,15 +5,37 @@ analytical reductions derived; no solver experiment run.
 **Review:** GPT-6 Astra at xhigh for mathematics; GPT-6.1 Sol at medium for archive and
 research-record audits.
 
+The square-packing problem asks for $s(17)$, the minimum side length of a square
+containing 17 unit squares.
+Each unit square may rotate independently; their interiors must be disjoint, and
+touching is allowed.
+A verified construction gives an upper bound on $s(17)$; an exclusion proof gives a
+lower bound by ruling out every packing below a specified side length.
+
+The accepted construction has an exact algebraic side length $S^*$, the certified root
+of the catalogue’s degree-18 polynomial.
+The displayed upper bound is a rational outward ceiling on $S^*$, not its exact value.
+Optimality, $s(17)=S^*$, remains open.
+The [verified bracket](../../../packing/frontier/n-017.md) is unchanged:
+$4.66044275<s(17)\le4.6755300936045509516342148538535054$.
+
+The current exclusion strategy uses a finite cover: finitely many closed centre domains
+that together contain every candidate placement in a specified case.
+A cell is one domain in that cover; a residual cell case is one the earlier exact tests
+have not excluded. Proving such a case impossible removes it from the residue.
+A global exclusion also needs complete coverage and the joins between cases, including
+square symmetries (the rotations and reflections denoted D4).
+
 **Keep the first-eight shared-centre LP as the next entry, then use an exact
-weighted-vertex screen before a small SOS pilot.** The packing paper supplies a
-polynomial non-overlap model; the Blekherman–Parrilo–Thomas book supplies positivity and
-optimization theory; Laplagne addresses singular SOS recovery.
+weighted-vertex screen before a small SOS pilot.** An LP is a linear program: it tests
+linear constraints or optimizes a linear objective.
+The packing paper supplies a polynomial non-overlap model; the Blekherman–Parrilo–Thomas
+book supplies positivity and optimization theory; Laplagne addresses singular
+sum-of-squares (SOS) recovery.
 Astra’s new derivation shows that the weighted screen subsumes every possible exclusion
 from the specified order-2 SOS recipe without a quadratic ball.
 This is an analytical result, with no target run, exclusion, admission or bound
-improvement. The [verified bracket](../../../packing/frontier/n-017.md) remains
-$4.66044275<s(17)\le4.6755300936045509516342148538535054$.
+improvement.
 
 ## Source and Archive
 
@@ -126,6 +148,14 @@ presolve. Lifting reduces degree by adding variables; it does not establish conv
 Complete separation coverage is required whether using existential Farkas multipliers or
 explicit branch alternatives.
 
+An SOS polynomial is a sum of squares of polynomials, so it is nonnegative at every real
+point. One searches for it through a Gram representation $\sigma(z)=m(z)^TQm(z)$, where
+$m$ lists monomials and $Q$ is a symmetric positive semidefinite (PSD) matrix:
+$w^TQw\ge0$ for every real vector $w$. Coefficient matching imposes linear equations on
+$Q$; optimizing subject to those equations and PSD constraints is a semidefinite program
+(SDP). Relaxation order $r$ caps the total degree of each term in the certificate at
+$2r$, limiting the monomial basis and the search size.
+
 An SOS emptiness certificate for $g_i(z)\ge0$ and $h_j(z)=0$ can have the form
 
 $$
@@ -220,9 +250,19 @@ $x\ge0$ has multiplier 1 and derivative 1 at its zero.
 
 ## An Exact Face Reduction for the Cell Pilot
 
+For the selected three-centre case, let $E_i$ be the original exact convex polygonal
+domain allowed for centre $p_i$, retaining any point or segment domain.
+Its defining inequalities give a nonempty product domain $P=E_1\times E_2\times E_3$.
+Every unit square contains a disk of radius $1/2$ centred at its own centre.
+Disjoint square interiors therefore require disjoint disk interiors: $\|p_i-p_j\|\ge1$,
+hence $g_k=q_k-1\ge0$, with $q_k=\|p_i-p_j\|^2$, for each of the three pairs.
+These incircle constraints are necessary; satisfying them need not keep the squares from
+overlapping. Refuting this relaxation excludes the square case, while a feasible centre
+triple alone does not establish a packing.
+
 **The following is Astra’s new mathematical derivation, not a packing exclusion or a
 result claimed by either source.** Let $z=(p_1,p_2,p_3)\in\mathbb R^6$, with $F$ affine
-cell facets $\ell_f\ge0$ and three generators $g_k=q_k-1$, where $q_k=\|p_i-p_j\|^2$.
+cell inequalities $\ell_f\ge0$ defining $P$ and the three incircle generators $g_k$.
 Assume distinct centre indices, no equality multipliers and no additional nonlinear
 generator.
 
@@ -262,9 +302,11 @@ These are size calculations, not runtimes or target results.
 ## An Exact Weighted-Vertex Screen Before SOS
 
 At order 2 the incircle multipliers are constants $\alpha_k\ge0$. Any contradiction
-therefore implies $\sum_k\alpha_k g_k\le-1$ throughout the nonempty product polytope
-$P=E_1\times E_2\times E_3$. Normalize the positive sum of weights to 1. For every
-product vertex $v$, define $G_{vk}=q_k(v)-1$ and seek
+therefore implies $\sum_k\alpha_k g_k\le-1$ throughout $P$. Write $A=\sum_k\alpha_k$.
+Since $P$ is nonempty, $A=0$ cannot satisfy that inequality, so $A>0$. Dividing by $A$
+gives normalized weights $\bar\alpha_k=\alpha_k/A$ and margin $\varepsilon=1/A>0$. For
+every product vertex $v$, define $G_{vk}=q_k(v)-1$ and seek normalized weights, written
+again as $\alpha$:
 
 $$
 \alpha\ge0,\qquad \mathbf1^T\alpha=1,\qquad
