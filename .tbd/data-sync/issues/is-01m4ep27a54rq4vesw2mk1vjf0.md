@@ -5,7 +5,7 @@ title: Triage Couzo extended-range construction updates beyond the eight-case in
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@spud10.local
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m44qz0rxvkakmyqaj7qdgagv
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:17:46.179Z
-updated_at: 2026-10-09T06:05:18.067Z
+updated_at: 2026-10-09T08:10:40.085Z
 started_at: 2026-10-09T00:19:50.892Z
 ---
 Read complete franciscouzo/square-packing changes74f7e8b andb10ad36 beyond already retained451 eight exact certificates: n378 update and20 added n>324 decimal pose/diagram pairs327332335-342364369372-379, plus remaining n<=324 context. Preserve explicit324-case standing horizon, source-only versus verified claims and all superseded histories. Acquire complete immutable ordinary inputs and licensing/lineage before any registry/adoption/replay; no credit transfer from accepted eight-case native jobs. Record a dated watched-source read with this open owner until a complete scoped packet disposes the new claims.
@@ -38,3 +38,5 @@ Three actual published issue replies399/419/420 are appended;399closed02:56:58Z,
 Follow-up pin2d32a6e96f55c5dc1a2dd0e3581098e7c0105252/tree1e98bf6ddb40deac1874eabc0c109b30edb6e2ad has two changed outside-horizon TXT inputs now retained only outsideGit: n37519.907024692022954 strictly below historical19.907052698737502, n37819.946861170999796 strictly below historical19.947426312032292. Full753poses/54556B, exact Git blob/size/SHA256 and original READMEcontext in intake-preparations/couzo-followup-five-2d32a6e/outside-horizon-two-custody-receipt.json. NoSVG/newsource archiveGit, geometry or authorcode executed; old20factbytes/historicalpin unchanged. Source follow-up pending; user requested HANDOFF rather than further implementation.
 
 2026-10-09 cloud: n375 19.907024692022954 (was 19.907052698737502) and n378 19.946861170999796 (was 19.947426312032292) at Couzo 2d32a6e (753 poses, 54,556 B) identities recorded in #469's packet; a dated update is blocked because source-coverage beyond_horizon_claims allows one entry per n and has no superseded_by: needs schema + check_source_coverage keyed on (n, source_id) with successor naming, then a derived packet in #466's format.
+
+Review B on #466 (B2): #466 packet README, source-coverage notes and the two beyond-horizon rows do not yet note Couzo 2d32a6e's smaller n=375 (19.907024692022954) and n=378 (19.946861170999796); check_source_coverage allows one beyond-horizon row per n, so importing them needs a supersession design.
