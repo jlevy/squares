@@ -5,7 +5,7 @@ title: Stabilize stack 430 on main 3213 and qualify every layer
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -19,7 +19,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T04:14:49.601Z
-updated_at: 2026-10-09T04:20:32.996Z
+updated_at: 2026-10-09T04:24:18.364Z
 started_at: 2026-10-09T04:20:32.996Z
 ---
 Cloud continuation of think-yij0 handoff (PR467). Normal-merge origin/main 3213d651b into #442, propagate to #468, fix the recorded failures without weakening limits, obtain exact-head required CI and full checkpoints, bind reviews. Merge only with owner confirmation (github-merge confirm-session).
+
+## Notes
+
+2026-10-09 cloud coordinator: main 3213 integrated through #466 and pushed. Lanes running: think-x47r timing #442, think-cmjh CLS + #468 merge, think-xv8j T-129/survey URLs #459-#463, think-qtdo #466 integrity/records wall, think-88r0 five Couzo follow-ups on new branch codex/import-couzo-followup-five-2d32a6e. Owner asked (in session) for everything fully reviewed, clean and ready to merge, and PR descriptions organized as a gh stack with a titled clean top-of-stack description. gh-stack binary could not be installed (release API blocked, running downloaded binary denied); stack membership managed via REST POST /repos/jlevy/squares/stacks/430/add. Merge requires owner confirmation (confirm-session).
