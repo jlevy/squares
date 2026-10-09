@@ -19,6 +19,7 @@ from devtools.profile_known_best_chunks import (
     profile_errors,
     schema_errors,
 )
+from devtools.retained_data import read_retained_text
 
 
 def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
@@ -111,7 +112,7 @@ def test_known_best_chunk_evidence_profile_preserves_outliers_and_sensitivity() 
 def test_every_profile_row_reconstructs_from_the_three_source_artifacts() -> None:
     profile = json.loads(OUTPUT.read_text(encoding="utf-8"))["profile"]
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]["entries"]
-    components = json.loads(COMPONENTS.read_text(encoding="utf-8"))["contact_sweeps"]
+    components = json.loads(read_retained_text(COMPONENTS))["contact_sweeps"]
     partitions = json.loads(PARTITIONS.read_text(encoding="utf-8"))["atlas"]["bands"]
     source_kind = {entry["n"]: entry["source"]["kind"] for entry in manifest}
     primary = {

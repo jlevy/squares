@@ -1281,9 +1281,24 @@ def test_the_known_superseded_counts_are_exactly_the_noted_ones() -> None:
         206,
         228,
         259,
+        266,
         269,
         292,
         302,
+    ]
+    entry = _entries()[266]
+    (note,) = [
+        note for note in entry["notes"] if note["kind"] == "superseded-catalogue-polynomial"
+    ]
+    source = exact.catalogue_entries()[266]
+    assert source.minimal_polynomial is not None
+    coefficients = normalized_polynomial(source.minimal_polynomial)
+    assert len(coefficients) - 1 == note["degree"] == 32
+    assert source.side_decimal in note["text"]
+    assert arrangement_reports.SOURCE_KEY in note["text"]
+    assert Fraction(source.side_decimal) > Fraction(entry["side"]["value"])
+    assert [str(coefficient) for coefficient in coefficients] != entry["polynomial"][
+        "coefficients"
     ]
 
 
@@ -1353,6 +1368,7 @@ def test_reported_source_roots_are_notes_not_current_bound_identities(
     assert len(calls) == 1
     sources = {row["n"]: row for row in calls[0]}
     for entry, old in zip(entries, before, strict=True):
+        assert entry == _entries()[entry["n"]]
         assert {key: value for key, value in entry.items() if key != "notes"} == {
             key: value for key, value in old.items() if key != "notes"
         }
@@ -1521,9 +1537,14 @@ def test_every_numeric_only_count_names_its_route_and_bead() -> None:
     assert _entries()[83]["notes"][0]["kind"] == "missing-polynomial-text"
 
 
-@pytest.mark.parametrize("n", [1, 5, 11, 17, 28, 29, 54, 83, 102, 177, 230, 292])
+@pytest.mark.parametrize("n", [1, 5, 11, 17, 28, 29, 54, 83, 102, 106, 152, 177, 230, 266, 292])
 def test_the_committed_entries_equal_a_fresh_build(n: int) -> None:
-    assert _build(n) == _entries()[n]
+    # Source notes are appended once after every current entry is built; the four-row
+    # assembly control above compares their complete payloads against the register.
+    expected = copy.deepcopy(_entries()[n])
+    if n in (102, 106, 152, 177):
+        assert expected["notes"].pop()["kind"] == "unreconciled-source-polynomial"
+    assert _build(n) == expected
 
 
 @pytest.mark.slow
