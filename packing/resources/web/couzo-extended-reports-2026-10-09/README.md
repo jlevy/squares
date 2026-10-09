@@ -16,6 +16,18 @@ The eight in-horizon rational certificates in the
 [separate issue451 packet](../couzo-exact-refinements-2026-10-08/README.md) have their
 own inputs and receipts; none of their verification transfers to these twenty reports.
 
+## Later Reports at n = 375 and 378
+
+Read on 2026-10-09: the author’s next revision,
+[2d32a6e](https://github.com/franciscouzo/square-packing/tree/2d32a6e96f55c5dc1a2dd0e3581098e7c0105252)
+of 2026-10-08T22:12Z, reports smaller sides at $n=375$ (19.907024692022954, against
+19.907052698737502 here) and $n=378$ (19.946861170999796, against 19.947426312032292
+here). This packet is pinned at ffd900d and does not retain those two reports, so its
+$n=375$ and $n=378$ facts are dated ffd900d reports rather than the author’s latest.
+They remain valid dated reports.
+`think-1545` owns the later two; the source register allows one beyond-horizon row per
+count, so importing them needs a supersession design.
+
 ## Source Custody and Retention
 
 Three revisions are pinned: b10ad360f80ee82580e75330417e0171d1a9fb81,
