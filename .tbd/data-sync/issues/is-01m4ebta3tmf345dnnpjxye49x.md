@@ -3,9 +3,9 @@ type: is
 id: is-01m4ebta3tmf345dnnpjxye49x
 title: "n17 PR404: finish reviewed main integration after snapshot-budget decision"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 9
+version: 11
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -17,8 +17,12 @@ parent_id: is-01m4e47f19w8w1d7tyka9raahk
 hold: null
 hold_until: null
 created_at: 2026-10-08T18:18:41.130Z
-updated_at: 2026-10-09T04:27:29.076Z
+updated_at: 2026-10-09T04:51:41.378Z
 started_at: 2026-10-08T18:18:55.250Z
+closed_at: 2026-10-09T04:51:41.376Z
+close_reason: Current-main source integration and independent follow-up are complete at PR404 2a894a9a0, propagated through formal stack455. Scientific evidence and the old held index remain preserved. Required CI resource/full-checkpoint qualification remains open under think-0m0x; this closure does not assert merge readiness.
+resolution: null
+duplicate_of: null
 ---
 Bounded mechanical review of live PR404 head against freshly read main. Identify actual conflicting paths and safe ownership, without changing primary checkout or scientific premises. User previously authorized resolving404 conflicts; substantive mathematical conflict resolutions require Astra review. Preserve research evidence and source.
 
@@ -43,3 +47,15 @@ Newer actual checkout/tree evidence supersedes prior absent/cancelled observatio
 Formal stack455 source publication verified:404c3dc6027a66fe396f22953a1d29945420198bdda→main91ca9b824;45481890a9e93dde012df24917ac6e93672149bc7bb→404;461d96a2c383a98458a02566d472c011a2a68300ad2→454. All3 drafts remaintrue. All3strictcostguardPASS on694/695/696 trackedmodules and630/631/632 recordedcosts, max9.524% unknown under unchanged10%;615baseweights+15rootadmissions+2childadmissions preserved.9/31childownedblobs,22rootnoncostblobs,17raw315/316objects and5adsourcecustody unchanged. Sourcequota metadata202715130/202852792/203207942 bytes remainsabove201326592192MiB;224proposalunapplied. Normalhooks retained, source branches clean, originalprimaryuntrackeduniqueevidencepreserved. CurrentautomaticCIqualification awaitsreadback; no rerun/dispatch/merge/draftflip. FocusedAstrafollowupreviewchoice requested asynchronously per conflict-resolvingbaseupdate signal; no answer/extraformalround inferred. RequiredPacking/fullcheckpoint pending, numericalbracketunchanged. Publication proof final-ci-stack-publication-proof.json.
 
 October 8/9 current-main consolidation: #404 final 2a894a9a0288407ae7d934a9f1225227bdc22b79 integrates main3213d651b880d7768bce8506efaf75c2089aeb4f, preserves604 campaign blobs and645 cost keys/all20 earlier-only module costs plus both admission lists. Current-main CI709 found3 fixture integration failures plus3 source-cap assertions; fixture-only repair retains all assertions/production semantics, passes58 selected controls/1known-cap deselected102.89s, lint/format/types and1949doccheck. Required new404 CI37883439902 pending; no full gate claim. Final published formal455 remains main→4042a894→4541b1c0945c4ff8d1e8f17de9affd453dfad4af9b0→46179ebfd5987d45617b8fd0feabddb7ad5dc8b7d63, all drafts/mergeable, owned scientific/raw315/316 bytes preserved. Astra-approved454 strategy explicitly replaces unconditionalno-ballorder2SDP with exactweightedvertexscreen afterfirst-eightLP; all newtarget routes unrun. Astra461G currenthead https://github.com/jlevy/squares/pull/461#pullrequestreview-5465686711 no newfindings/A1open. Standalone46451368bec05b6fa30bebca7b31d0cf3dd0d810c09 currentmain content/mathA/Bpass; requiredPacking37881664173FAIL3capassertions202070418>201326592, 2769pass37skip. 192MiBcapunchanged; explicit224proposal/humananswerpending after earlier automaticapproval rejection. Boundedselectionaudit foundno sufficient safeprune; dependency-awareselectionthink-t1lk remains separate. #457 verifiedresolvedtree equalsmainfa6c26ca andfullyincorporatede0792f40; comment6073937302/PRclosed, think-ms0wclosed. #410alreadymergee74a82190. Supporting452/453requiredgreen, freshcurrentmain fullcheckpoint37882533006/37882534927 inprogress (historicalfullpassesqualifyf0treesonly). No newn17bound/admission/Tmovement:362T093unchanged. Peer402408409,exact-side403→435,intake450 keptseparate withscope/statuscaveats. Source/docs consolidated; merge readiness remains blocked by resource decision and final source-qualified gates. Primaryuniqueevidence/olderheldindex preserved; no merges. Parentthink-foe5 remainsopen.
+
+October 8/9 final source-qualified consolidation status (supersedes the pending/stale-run observations immediately above):
+
+- Formal remote stack455: #404 2a894a9a0288407ae7d934a9f1225227bdc22b79 → #454 1b1c0945c4ff8d1e8f17de9affd453dfad4af9b0 → #461 79ebfd5987d45617b8fd0feabddb7ad5dc8b7d63. Standalone #464 51368bec05b6fa30bebca7b31d0cf3dd0d810c09, #452 b70bc6663cea5727108aae8911ded8694c51c02a, #453 99728f5de5fbbcfc95583d398fe52e82717366dc. All contain pinned main3213d651b880d7768bce8506efaf75c2089aeb4f, are n-17 labelled, MERGEABLE, drafts and unmerged.
+- Current-main source integration and independent follow-up reviews are complete. #404 review F5465700232 covers the fixture-only final delta; #461 G5465686711 covers the new stack joins; #464 A/B5465603134/5465604337 covers all12 files and original cited source arguments. #452 E5465767242 and #453 E5465760515 qualify their current-main integration/parity scope. No new mathematical finding; inherited A1 resource/full-checkpoint hold remains open.
+- Final research CI is cap-only: #40437883439902 selected202658531B,3420passed34skipped; #45437883609996 selected202798011B,2995passed92skipped; #46137883620757 selected203153161B,3488passed76skipped; #46437881664173 selected202070418B,2769passed37skipped. Each suiteD fails exactly3 assertions against201326592B. Other required partitions and Pages pass. The three earlier fixture failures are fixed. A clean complete checkpoint remains unqualified; no repeated cap-refused run.
+- CORRECTION: supporting full runs37882533006/37882534927 passed stale mainf0 PR merge refs1467761/9d6cc2 and never qualified current main. Explicit current-main integrations are now published at the #452/#453 heads above. New direct-branch full runs37884639726/37884879202 are in progress, with completed resolve job logs113671777482/113672529876 verifying exactlyb70/997 and main3213 ancestry. #452 required Packing37884542873, Pages37884542883 and mergeability passed; #453 mergeability passed, Packing37884789984/Pages37884789931 pending at the last snapshot. No current full-pass claim. Bounded heartbeat finish-n17-consolidation-ci will record final results and pause once these runs finish.
+- The192MiB cap remains unchanged. Concrete224MiB cap/test patch is prepared but unapplied pending the direct human resource answer after earlier automatic approval review rejection. No waiver, prune-to-fit, proof/RSS/timeout/wall ceiling change. Larger dependency-aware selection remains think-t1lk.
+- #457 complete resolved tree equals incorporated main; PR closed as superseded, think-ms0w closed. #410 already merged. Peer402/408/409, catalogue403→435 and intake450 remain separate and are not credited as new n17 admission/bound movement.
+- Unique session code, docs and scientific evidence are committed on the appropriate source PRs. All604 branch campaign paths and owned exp315/316 bytes survive. Exp266 compressed spill expands to exact committed step content; ten recovery files match exp311. These redundant residues, source-custody refs and old held integration index/MERGE_HEAD remain preserved.
+- The updated mathematical route is first-eight exact shared-centre LP (unimplemented/unregistered/unrun), then exact weighted-vertex screen, then eligible separately registered ball/order3 SOS successors. No new ordinary admission, T item or bound movement; #362/T-093 October5 remains latest. Official bracket4.66044275<s17<=4.6755300936045509516342148538535054.
+- Full public status: https://github.com/jlevy/squares/issues/405#issuecomment-6074493493 . PR bodies carry final gates and stable background; no GitHub merge or draft promotion occurred.
