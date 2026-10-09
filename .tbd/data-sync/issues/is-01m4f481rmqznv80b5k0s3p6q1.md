@@ -5,7 +5,7 @@ title: Integrate published record updates before the atlas cleanup PR
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,10 +13,10 @@ parent_id: is-01m4e35s7r1e65r1qmpz250h0p
 hold: null
 hold_until: null
 created_at: 2026-10-09T01:25:37.170Z
-updated_at: 2026-10-09T02:20:29.009Z
+updated_at: 2026-10-09T02:55:15.292Z
 started_at: 2026-10-09T01:52:34.240Z
 ---
-Current origin/main b810432cccf7849920dda3aad76882f191464eb5 includes published PR434, which reuses T-117/T-118 as live Rehwaldt/Couzo results and preserves the withdrawn identities through dated amendments. The cleanup branch retains the older identities and fails the unchanged historical URL check. Independent review proved that transplanting only two URL rows is unsafe: live producers, evidence and selected n68/n105/n292 witnesses also changed. Preserve the current reviewed source, v0.5.0-9695fb exports and preview evidence, integrate the published source in the isolated cleanup branch, resolve conflicts without losing requested layout/legend/orientation changes, then rederive affected records/URL registry/docs, commit and re-pin data, regenerate both export families and the preview, and complete the full push/hosted gates. An earlier automatic approval review refused a local merge because the project's confirm-session merge grant lacked explicit human confirmation. A precise approval request for this local branch integration is pending; do not bypass through record transplantation, rebase or another indirect route. No GitHub PR merge is requested. Keep the older standalone preview clearly labeled by its own recorded data while working.
+Integrate published scientific records coherently into the cleanup branch before publication. The human explicitly approved the local merge of main 24fe88bc44967970d72f7d1efc9bf2a325b74f17, which includes n68/n105/n292 refinements and archived asymptotic reports. All conflict contents are resolved; the derived composite figure and 896-row URL history check pass. Merge contract checks pass 191 CLI tests and 19 selected budget/snapshot tests. Preserve source/evidence amendment history, requested layout and n211 reflection, commit the merge and re-pin via the maintained producer before final exports. Main has since advanced to d43ea686d, adding selected n266/n270/n272 arrangements; a read-only overlap audit is in progress before any further integration action. Complete final gates, push, PR and exact-source/base hosted checkpoint. No GitHub PR merge is authorized.
 
 ## Notes
 
