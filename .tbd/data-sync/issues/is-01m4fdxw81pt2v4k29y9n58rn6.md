@@ -5,7 +5,7 @@ title: Stabilize stack 430 on main 3213 and qualify every layer
 kind: task
 status: in_progress
 priority: 1
-version: 39
+version: 40
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -37,7 +37,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T04:14:49.601Z
-updated_at: 2026-10-09T11:54:26.796Z
+updated_at: 2026-10-09T12:14:08.257Z
 started_at: 2026-10-09T04:20:32.996Z
 ---
 Cloud continuation of think-yij0 handoff (PR467). Normal-merge origin/main 3213d651b into #442, propagate to #468, fix the recorded failures without weakening limits, obtain exact-head required CI and full checkpoints, bind reviews. Merge only with owner confirmation (github-merge confirm-session).
@@ -73,3 +73,5 @@ Round 5 done: main bead35d93 in #442; per-layer suite admissions (#442 5 modules
 
 
 2026-10-09T11:52Z FYI 11:45 UTC: main is 6a0499ba4 (adds #473: slow markers in test_module_boundaries.py, test_retained_json_layout.py, n17 propagation tests; controls comment/test edits). Re-check #442's integration against it.
+
+Descriptions refreshed to round-5 heads (all 11 PATCHed 12:12Z). Follow-up reviews published at round-5 heads (#442 Q, #443 J, #448 N, #449 J, #450 J, #459 J, #460 J, #463 I, #466 D, #468 D, #469 B with stack assessment); dispositions for #466 B, #468 A/B posted. main moved to 6a0499ba4 (#473) -> #442 dirty; round 6 started. #469 Pages webkit job 113801659733 stuck installing browser since 11:38Z; #443 Pages run 37921107096 failed one longestTask sample (385 vs 300; others 128-136, other layers 135-214); both superseded by round-6 pushes.
