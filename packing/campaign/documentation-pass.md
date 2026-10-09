@@ -123,19 +123,19 @@ For each result, complete this sequence before declaring the change ready to lan
 
 4. When a result changes what is known exactly about a best known side (a new best known
    packing, a closed form, a minimal polynomial, a degree, or an identification from a
-   contact system), regenerate the exact side values register and its paper:
+   contact system), regenerate the exact side values register:
 
    ```shell
    uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --update
-   uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values --pdf
    ```
 
    The register re-checks every polynomial (irreducibility, a unique root in a rational
    interval, agreement with the record and with the independent KKT values), so a new
-   fact that fails one of those checks stops here rather than reaching the paper.
+   fact that fails one of those checks stops here rather than reaching publication.
    The gate’s `build_exact_values --check` fails while the register trails the records,
-   so this step cannot be skipped silently, and the Pages workflow rebuilds the paper
-   whenever the register changes.
+   so this step cannot be skipped silently.
+   A later publication layer supplies the exact side values paper and its renderer; this
+   foundation does not require it.
 
 5. Reconcile the README prose around its generated tables (the introduction’s summaries,
    the $s(11)$ thread under New Results, the machine audits, Earlier in 2026 and the
