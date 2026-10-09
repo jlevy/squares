@@ -3,9 +3,9 @@ type: is
 id: is-01m4fr5rgtmrjm5mvqbe6j90cn
 title: Refine case popover math, status order, and navigation arrows
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-09T07:13:53.665Z
-updated_at: 2026-10-09T07:58:26.308Z
+updated_at: 2026-10-09T07:59:40.307Z
 started_at: 2026-10-09T07:14:10.664Z
+closed_at: 2026-10-09T07:59:40.306Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 Center the small Case Record label above prominent prepared mathematical n=count notation. Order icons first, star and notes next, then textual status tags. Use matching right arrows on three destination actions; remove All cases and make Atlas the directory with compatible legacy redirects. Stack the centered diagram above the number line at all widths, and use equal sticky-footer padding above/below action buttons. Preserve canonical records and navigation; verify desktop/mobile layout, stepping, and close/focus behavior.
 
