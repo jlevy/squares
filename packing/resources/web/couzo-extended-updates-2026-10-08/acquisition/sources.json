@@ -1,0 +1,1159 @@
+{
+  "format": "external-source-acquisition-v1",
+  "sources": [
+    {
+      "id": "couzo-extended-range-updates-2026-10-08",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_commit": "2d32a6e96f55c5dc1a2dd0e3581098e7c0105252",
+      "committed_utc": "2026-10-08T22:12:27Z",
+      "source_key": "[Couzo extended-range updates 2026-10-08]",
+      "author": "Francisco Couzo",
+      "licence": null,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "raw_asset_retained": false,
+      "licensing_review": "The pinned tree has no licence file and its README states no reuse terms. No redistribution permission or licence determination is asserted.",
+      "cases": [
+        {
+          "n": 375,
+          "file": "n375.txt",
+          "side": "19.907024692022954",
+          "derived_fact": "facts/n-375.yaml",
+          "source_blob": "96f21d6cc851d453a1f8da202667f33f29304cb6",
+          "size": 27240,
+          "sha256": "cdcb176cec3fff245aa05705322c9cee3fefaac71ddf1072d6ec6d9374f9d103",
+          "supersedes": {
+            "source_id": "couzo-extended-range-reports-2026-10-08",
+            "source_commit": "ffd900dfff6d2674ad995359208c2f0714915c82",
+            "side": "19.907052698737502",
+            "source_blob": "4b61546d24a171339cf93ec384d0781a8f78cb75"
+          }
+        },
+        {
+          "n": 378,
+          "file": "n378.txt",
+          "side": "19.946861170999796",
+          "derived_fact": "facts/n-378.yaml",
+          "source_blob": "4179d7d494138075487af04722df01a57a8ee6c0",
+          "size": 27316,
+          "sha256": "dbd3cc98ab671dc96be094c3e99e3d3ac0388973be1a45a4bf40cf8eb18339bc",
+          "supersedes": {
+            "source_id": "couzo-extended-range-reports-2026-10-08",
+            "source_commit": "ffd900dfff6d2674ad995359208c2f0714915c82",
+            "side": "19.947426312032292",
+            "source_blob": "5d028b671055374ab76810ad751a37466ae3dd95"
+          }
+        }
+      ],
+      "custody": {
+        "repository": "franciscouzo/square-packing",
+        "standing_horizon": 324,
+        "counts": [
+          375,
+          378
+        ],
+        "commit": {
+          "sha": "2d32a6e96f55c5dc1a2dd0e3581098e7c0105252",
+          "tree": {
+            "sha": "1e98bf6ddb40deac1874eabc0c109b30edb6e2ad"
+          },
+          "parents": [
+            {
+              "sha": "ffd900dfff6d2674ad995359208c2f0714915c82"
+            }
+          ]
+        },
+        "tree": {
+          "README.md": {
+            "path": "README.md",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "7aaa4ffb79a7c7788401d7465a76b1b7b4d18f00",
+            "size": 8982,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/7aaa4ffb79a7c7788401d7465a76b1b7b4d18f00"
+          },
+          "certificates/README.md": {
+            "path": "certificates/README.md",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "a81b8c777d889038659ca98ec6b068e95698a10b",
+            "size": 2669,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/a81b8c777d889038659ca98ec6b068e95698a10b"
+          },
+          "certificates/n105.cert": {
+            "path": "certificates/n105.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "0718192a8c4968a1657e46a500a7e431ea1c2d0b",
+            "size": 17147,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/0718192a8c4968a1657e46a500a7e431ea1c2d0b"
+          },
+          "certificates/n108.cert": {
+            "path": "certificates/n108.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b7bc8379c1180e20be6c06e410ed9ff0b2c4d7ed",
+            "size": 16101,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/b7bc8379c1180e20be6c06e410ed9ff0b2c4d7ed"
+          },
+          "certificates/n127.cert": {
+            "path": "certificates/n127.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "9a0f17cd25525ee8c90d98743275cc9bd6c2da61",
+            "size": 21205,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/9a0f17cd25525ee8c90d98743275cc9bd6c2da61"
+          },
+          "certificates/n131.cert": {
+            "path": "certificates/n131.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "00253359b72a422af851a7142ead7dcffbd9d708",
+            "size": 21209,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/00253359b72a422af851a7142ead7dcffbd9d708"
+          },
+          "certificates/n155.cert": {
+            "path": "certificates/n155.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "22e0d557802f0df172ae6fd7d4304435d9b57c49",
+            "size": 25405,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/22e0d557802f0df172ae6fd7d4304435d9b57c49"
+          },
+          "certificates/n175.cert": {
+            "path": "certificates/n175.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "025773495b91cb03f291a3d0194ffc598301467a",
+            "size": 28561,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/025773495b91cb03f291a3d0194ffc598301467a"
+          },
+          "certificates/n180.cert": {
+            "path": "certificates/n180.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "54efb6b67c0fbe217e1472ebd210684e8ccb7928",
+            "size": 27871,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/54efb6b67c0fbe217e1472ebd210684e8ccb7928"
+          },
+          "certificates/n228.cert": {
+            "path": "certificates/n228.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "c3351d524d41eec2221cccaf285a9b87e6bd6cef",
+            "size": 33426,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/c3351d524d41eec2221cccaf285a9b87e6bd6cef"
+          },
+          "certificates/n270.cert": {
+            "path": "certificates/n270.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "fcfcb3cf680c827526b68f48172f6bd06baa485f",
+            "size": 42974,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/fcfcb3cf680c827526b68f48172f6bd06baa485f"
+          },
+          "certificates/n306.cert": {
+            "path": "certificates/n306.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "601038fdfae10fbac4395da6bd6ca3d4bfa11541",
+            "size": 49716,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/601038fdfae10fbac4395da6bd6ca3d4bfa11541"
+          },
+          "certificates/n84.cert": {
+            "path": "certificates/n84.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "03206480a804387c6c1d762ebfc3bdbaa9f8b94d",
+            "size": 14721,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/03206480a804387c6c1d762ebfc3bdbaa9f8b94d"
+          },
+          "certificates/n86.cert": {
+            "path": "certificates/n86.cert",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b6f5e7e290ee25c1bc71a029657554c6b3c3c30b",
+            "size": 15646,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/b6f5e7e290ee25c1bc71a029657554c6b3c3c30b"
+          },
+          "n102.svg": {
+            "path": "n102.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "92737dd8b4bb5b41be31d09ade507067a2bac442",
+            "size": 13584,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/92737dd8b4bb5b41be31d09ade507067a2bac442"
+          },
+          "n102.txt": {
+            "path": "n102.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "4d93173c70380dc23d3bbd91fbe614f7256f4c8b",
+            "size": 7438,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/4d93173c70380dc23d3bbd91fbe614f7256f4c8b"
+          },
+          "n103.svg": {
+            "path": "n103.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "01c9f197b57683d4e1be145c4518bc9442fb3ed1",
+            "size": 13722,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/01c9f197b57683d4e1be145c4518bc9442fb3ed1"
+          },
+          "n103.txt": {
+            "path": "n103.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "aebc622ca76539b59e25a431af6b936d95207afb",
+            "size": 7529,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/aebc622ca76539b59e25a431af6b936d95207afb"
+          },
+          "n105.svg": {
+            "path": "n105.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "3dfeebd16b62a284dbe675c47d27eb47eed028a6",
+            "size": 13982,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/3dfeebd16b62a284dbe675c47d27eb47eed028a6"
+          },
+          "n105.txt": {
+            "path": "n105.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "be7222290ee5da20b87dca144e6940968a47c929",
+            "size": 7612,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/be7222290ee5da20b87dca144e6940968a47c929"
+          },
+          "n106.svg": {
+            "path": "n106.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "fec7613f31d22729e4bd29158f76db8bcf37f961",
+            "size": 14115,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/fec7613f31d22729e4bd29158f76db8bcf37f961"
+          },
+          "n106.txt": {
+            "path": "n106.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "ae51ad54aca59200106fc4e678ae58c08dcea46d",
+            "size": 7721,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/ae51ad54aca59200106fc4e678ae58c08dcea46d"
+          },
+          "n108.svg": {
+            "path": "n108.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "dc4b2fa653de3234aab59791644a3f0ca4684ae4",
+            "size": 14371,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/dc4b2fa653de3234aab59791644a3f0ca4684ae4"
+          },
+          "n108.txt": {
+            "path": "n108.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "05d614e217868d25a9983be658d85b2752e8b1b4",
+            "size": 7845,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/05d614e217868d25a9983be658d85b2752e8b1b4"
+          },
+          "n110.svg": {
+            "path": "n110.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "56822186770640c99a47007d5efd16ad86cfcbbf",
+            "size": 14639,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/56822186770640c99a47007d5efd16ad86cfcbbf"
+          },
+          "n110.txt": {
+            "path": "n110.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "0774d19792b6249c591143336ab3b23d16a7d4ed",
+            "size": 8016,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/0774d19792b6249c591143336ab3b23d16a7d4ed"
+          },
+          "n127.svg": {
+            "path": "n127.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "e7d1539043aaf887c625dc54fea0540c221f49ac",
+            "size": 16858,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/e7d1539043aaf887c625dc54fea0540c221f49ac"
+          },
+          "n127.txt": {
+            "path": "n127.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "98c9e2602dfe78758380da53001d47517c89a683",
+            "size": 9237,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/98c9e2602dfe78758380da53001d47517c89a683"
+          },
+          "n131.svg": {
+            "path": "n131.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "4653fcf3a4a2c99da8c5cc06b462f34aeb0cc04d",
+            "size": 17385,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/4653fcf3a4a2c99da8c5cc06b462f34aeb0cc04d"
+          },
+          "n131.txt": {
+            "path": "n131.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "8a047ed58bbd9960d5704962eb141ea07bbfbc2f",
+            "size": 9543,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/8a047ed58bbd9960d5704962eb141ea07bbfbc2f"
+          },
+          "n132.svg": {
+            "path": "n132.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "874fa464f3d46d8a628f922e91061386ec6735eb",
+            "size": 17522,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/874fa464f3d46d8a628f922e91061386ec6735eb"
+          },
+          "n132.txt": {
+            "path": "n132.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "713b522601600b514bd4af771e5b3c856d0141e5",
+            "size": 9637,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/713b522601600b514bd4af771e5b3c856d0141e5"
+          },
+          "n152.svg": {
+            "path": "n152.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "71884fb00048e54b5bf5e139c8acf4ebcc955743",
+            "size": 20078,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/71884fb00048e54b5bf5e139c8acf4ebcc955743"
+          },
+          "n152.txt": {
+            "path": "n152.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "ffd6e71e2a22a73249a9b87a299003f27ed28529",
+            "size": 11055,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/ffd6e71e2a22a73249a9b87a299003f27ed28529"
+          },
+          "n155.svg": {
+            "path": "n155.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "fd6f97e155edb777ab7645a7a6ab36755fa53fe1",
+            "size": 20479,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/fd6f97e155edb777ab7645a7a6ab36755fa53fe1"
+          },
+          "n155.txt": {
+            "path": "n155.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "f6ba1c3e5aef6d27a83976ba3aa8ee84ddf1e13b",
+            "size": 11293,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/f6ba1c3e5aef6d27a83976ba3aa8ee84ddf1e13b"
+          },
+          "n156.svg": {
+            "path": "n156.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "fae287311f6a9b145da548bf2e6c8765e38205b5",
+            "size": 20611,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/fae287311f6a9b145da548bf2e6c8765e38205b5"
+          },
+          "n156.txt": {
+            "path": "n156.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "8138af58b6c41ed266f52ccd6c2527e01012000a",
+            "size": 11418,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/8138af58b6c41ed266f52ccd6c2527e01012000a"
+          },
+          "n172.svg": {
+            "path": "n172.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "57391ada22d79192aa5fb16283008023d112d5c2",
+            "size": 22707,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/57391ada22d79192aa5fb16283008023d112d5c2"
+          },
+          "n172.txt": {
+            "path": "n172.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "31bf0732aecdeae7a156a254b5b4d6190d267cea",
+            "size": 12518,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/31bf0732aecdeae7a156a254b5b4d6190d267cea"
+          },
+          "n175.svg": {
+            "path": "n175.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b5b780fae3fd292129089642a52f444d450e5570",
+            "size": 23094,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/b5b780fae3fd292129089642a52f444d450e5570"
+          },
+          "n175.txt": {
+            "path": "n175.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "3ca70bc49c7f56a25aa9c382cee56a10d5b72e25",
+            "size": 12652,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/3ca70bc49c7f56a25aa9c382cee56a10d5b72e25"
+          },
+          "n177.svg": {
+            "path": "n177.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "e726d641972ca3f265183ff2bb6f2dea9c3b5dd3",
+            "size": 23346,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/e726d641972ca3f265183ff2bb6f2dea9c3b5dd3"
+          },
+          "n177.txt": {
+            "path": "n177.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "4237840218533cbc813d1ad8366b681d3b9da706",
+            "size": 12869,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/4237840218533cbc813d1ad8366b681d3b9da706"
+          },
+          "n180.svg": {
+            "path": "n180.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "de2a12a19621424013824c2c2ba355fc8c2418c0",
+            "size": 23744,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/de2a12a19621424013824c2c2ba355fc8c2418c0"
+          },
+          "n180.txt": {
+            "path": "n180.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "431aca33894de053400c9dfaaf5ef7cb65ce648b",
+            "size": 13115,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/431aca33894de053400c9dfaaf5ef7cb65ce648b"
+          },
+          "n181.svg": {
+            "path": "n181.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "f394e6a8f15f1b7f2313dc85e937d605da7a6f7e",
+            "size": 23880,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/f394e6a8f15f1b7f2313dc85e937d605da7a6f7e"
+          },
+          "n181.txt": {
+            "path": "n181.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "c8c5e7570e5bc1b7a734c25a0f8dbff5d8920915",
+            "size": 13184,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/c8c5e7570e5bc1b7a734c25a0f8dbff5d8920915"
+          },
+          "n182.svg": {
+            "path": "n182.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "ea80ad6fcfc310919a360cd0b63450478e8fe4fb",
+            "size": 24004,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/ea80ad6fcfc310919a360cd0b63450478e8fe4fb"
+          },
+          "n182.txt": {
+            "path": "n182.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "4df7c057b9266cbf4dbbcac41c2e0d5a3936c1e9",
+            "size": 13211,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/4df7c057b9266cbf4dbbcac41c2e0d5a3936c1e9"
+          },
+          "n206.svg": {
+            "path": "n206.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b6f9364f5799d9f1935e53affe9b8a3af594ddca",
+            "size": 27148,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/b6f9364f5799d9f1935e53affe9b8a3af594ddca"
+          },
+          "n206.txt": {
+            "path": "n206.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "193f50f2d8fb7f797df8f9ef6eb8bcc94171409a",
+            "size": 15025,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/193f50f2d8fb7f797df8f9ef6eb8bcc94171409a"
+          },
+          "n208.svg": {
+            "path": "n208.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "1493b18b60e44d5218f39efdfc9470d405346812",
+            "size": 27421,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/1493b18b60e44d5218f39efdfc9470d405346812"
+          },
+          "n208.txt": {
+            "path": "n208.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "5bb8af84745f90c4311eef8e6fa64e3cacc73c0b",
+            "size": 15141,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/5bb8af84745f90c4311eef8e6fa64e3cacc73c0b"
+          },
+          "n210.svg": {
+            "path": "n210.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "5029a9c3f7171715a675eca4102ec083c7412e10",
+            "size": 27674,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/5029a9c3f7171715a675eca4102ec083c7412e10"
+          },
+          "n210.txt": {
+            "path": "n210.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "df95dbe21b9b862f28930bccabf5733a5303b784",
+            "size": 15273,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/df95dbe21b9b862f28930bccabf5733a5303b784"
+          },
+          "n228.svg": {
+            "path": "n228.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "7b627c0c6052be6b1746c2f71bbae3411eae04f0",
+            "size": 30024,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/7b627c0c6052be6b1746c2f71bbae3411eae04f0"
+          },
+          "n228.txt": {
+            "path": "n228.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "bf97337668c13514cdacda5ffefc71e88146a358",
+            "size": 16468,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/bf97337668c13514cdacda5ffefc71e88146a358"
+          },
+          "n240.svg": {
+            "path": "n240.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "1f8a8b793d03a9ba2af858f25b9a1f6516684692",
+            "size": 31606,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/1f8a8b793d03a9ba2af858f25b9a1f6516684692"
+          },
+          "n240.txt": {
+            "path": "n240.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "1139670eed4e2db6b7a7921de72a456d02f3f1d9",
+            "size": 17486,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/1139670eed4e2db6b7a7921de72a456d02f3f1d9"
+          },
+          "n241.svg": {
+            "path": "n241.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "87be6c175d49ccbcd1968ac03cd629355e214e2c",
+            "size": 31745,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/87be6c175d49ccbcd1968ac03cd629355e214e2c"
+          },
+          "n241.txt": {
+            "path": "n241.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b99425a2ca49ffea60abd1a956865950ba7bc5f1",
+            "size": 17527,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/b99425a2ca49ffea60abd1a956865950ba7bc5f1"
+          },
+          "n259.svg": {
+            "path": "n259.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "35eb56793ef057e4cdd42a851fbe82c0c13e3438",
+            "size": 34088,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/35eb56793ef057e4cdd42a851fbe82c0c13e3438"
+          },
+          "n259.txt": {
+            "path": "n259.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "19676c39e3bfc1cfbee0094dbbc39743e88d8271",
+            "size": 18813,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/19676c39e3bfc1cfbee0094dbbc39743e88d8271"
+          },
+          "n268.svg": {
+            "path": "n268.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "dff3d8f7581d3995b5ec8d18ff09eead95dd647a",
+            "size": 35269,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/dff3d8f7581d3995b5ec8d18ff09eead95dd647a"
+          },
+          "n268.txt": {
+            "path": "n268.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "a14e12621a356a53c35331fbb88974c8cfcd22ae",
+            "size": 19515,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/a14e12621a356a53c35331fbb88974c8cfcd22ae"
+          },
+          "n269.svg": {
+            "path": "n269.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "f321ddbb6120bd6c2610ed53c63f8a7f93b6c10b",
+            "size": 35412,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/f321ddbb6120bd6c2610ed53c63f8a7f93b6c10b"
+          },
+          "n269.txt": {
+            "path": "n269.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "db15eae5e3224995b7da110d1bb740311b8f3e62",
+            "size": 19548,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/db15eae5e3224995b7da110d1bb740311b8f3e62"
+          },
+          "n270.svg": {
+            "path": "n270.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "e51266a6d5ecfa742bcb6c4192ebf839139f4964",
+            "size": 35532,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/e51266a6d5ecfa742bcb6c4192ebf839139f4964"
+          },
+          "n270.txt": {
+            "path": "n270.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "e5e835ec8add95fe9c5fa1248f96bb30c35d6cd5",
+            "size": 19647,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/e5e835ec8add95fe9c5fa1248f96bb30c35d6cd5"
+          },
+          "n271.svg": {
+            "path": "n271.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "96fdfcd84f89e5053503aa707a12a5cadcf95480",
+            "size": 35676,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/96fdfcd84f89e5053503aa707a12a5cadcf95480"
+          },
+          "n271.txt": {
+            "path": "n271.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "389807618262cbbada688979107616036c60b11b",
+            "size": 19720,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/389807618262cbbada688979107616036c60b11b"
+          },
+          "n272.svg": {
+            "path": "n272.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "8a75cbe96e6a85da07f4cfeaf18ababe2ef4a7d0",
+            "size": 35800,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/8a75cbe96e6a85da07f4cfeaf18ababe2ef4a7d0"
+          },
+          "n272.txt": {
+            "path": "n272.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "0677190ea04a8e11260ef19f9b762aa7b7b71705",
+            "size": 19757,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/0677190ea04a8e11260ef19f9b762aa7b7b71705"
+          },
+          "n273.svg": {
+            "path": "n273.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "e9562481763ffcc779191004539b58c0d99a2408",
+            "size": 35927,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/e9562481763ffcc779191004539b58c0d99a2408"
+          },
+          "n273.txt": {
+            "path": "n273.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "76f7c39f175e3b1a26a3441dcf6627a99ba993b1",
+            "size": 19843,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/76f7c39f175e3b1a26a3441dcf6627a99ba993b1"
+          },
+          "n292.svg": {
+            "path": "n292.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "12f580424ad2bd60d7872509e363d93e6d76d6f9",
+            "size": 38410,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/12f580424ad2bd60d7872509e363d93e6d76d6f9"
+          },
+          "n292.txt": {
+            "path": "n292.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "edc93c0ef22c211db96ea257ec26982a9af1e9f2",
+            "size": 21193,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/edc93c0ef22c211db96ea257ec26982a9af1e9f2"
+          },
+          "n297.svg": {
+            "path": "n297.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "bfb7e5120925a6f285dea4b414446d77d0e95ffd",
+            "size": 39064,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/bfb7e5120925a6f285dea4b414446d77d0e95ffd"
+          },
+          "n297.txt": {
+            "path": "n297.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "d512e99ee03ee8fa904c6ab843137e9e5d63630a",
+            "size": 21607,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/d512e99ee03ee8fa904c6ab843137e9e5d63630a"
+          },
+          "n301.svg": {
+            "path": "n301.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "36f6995f14272ba3ea20da339ca9b1fb0b9dcd25",
+            "size": 39606,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/36f6995f14272ba3ea20da339ca9b1fb0b9dcd25"
+          },
+          "n301.txt": {
+            "path": "n301.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "1cf4942fe4b21ff58de80af4cd8aca3e878830cc",
+            "size": 21968,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/1cf4942fe4b21ff58de80af4cd8aca3e878830cc"
+          },
+          "n304.svg": {
+            "path": "n304.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "c4b98fa870631ada5b68f75593abf7913f6b66bf",
+            "size": 39986,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/c4b98fa870631ada5b68f75593abf7913f6b66bf"
+          },
+          "n304.txt": {
+            "path": "n304.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b9a0bba081971012a15b024db0776c1630d31539",
+            "size": 22079,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/b9a0bba081971012a15b024db0776c1630d31539"
+          },
+          "n305.svg": {
+            "path": "n305.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "22b53f00321297a4ef6ba383ec6299413820d3a1",
+            "size": 40111,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/22b53f00321297a4ef6ba383ec6299413820d3a1"
+          },
+          "n305.txt": {
+            "path": "n305.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "de2ad9a3b581da9e2f7004de9337cbd5253e4156",
+            "size": 22161,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/de2ad9a3b581da9e2f7004de9337cbd5253e4156"
+          },
+          "n306.svg": {
+            "path": "n306.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "7ac17e976b92d7d8e8e042372115c3377ee62c03",
+            "size": 40246,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/7ac17e976b92d7d8e8e042372115c3377ee62c03"
+          },
+          "n306.txt": {
+            "path": "n306.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "0cdfc9f02c6eb7e25e50e9ef00758ed39968ed0e",
+            "size": 22233,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/0cdfc9f02c6eb7e25e50e9ef00758ed39968ed0e"
+          },
+          "n307.svg": {
+            "path": "n307.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "dec64b2a986485de8657ac5be0cc2a84d6f9ee47",
+            "size": 40379,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/dec64b2a986485de8657ac5be0cc2a84d6f9ee47"
+          },
+          "n307.txt": {
+            "path": "n307.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "97a3ea8c857f19141a5b4b0d2a81809ff436e307",
+            "size": 22282,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/97a3ea8c857f19141a5b4b0d2a81809ff436e307"
+          },
+          "n327.svg": {
+            "path": "n327.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "0ee9de7bff51d9711bf367684f14e16ce1b1a350",
+            "size": 42895,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/0ee9de7bff51d9711bf367684f14e16ce1b1a350"
+          },
+          "n327.txt": {
+            "path": "n327.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "14cd2e9de0f29b58495464dad74c02c061b13f93",
+            "size": 23713,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/14cd2e9de0f29b58495464dad74c02c061b13f93"
+          },
+          "n332.svg": {
+            "path": "n332.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "2b7dec461371d199fefed9a695fcbefca8140ba2",
+            "size": 43557,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/2b7dec461371d199fefed9a695fcbefca8140ba2"
+          },
+          "n332.txt": {
+            "path": "n332.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "0badb94c213c3636f13d2b723c5f504f6e9c7459",
+            "size": 24142,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/0badb94c213c3636f13d2b723c5f504f6e9c7459"
+          },
+          "n335.svg": {
+            "path": "n335.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "67ba8cb7e39c5928ae36a30a60c467442bd9f3d6",
+            "size": 43948,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/67ba8cb7e39c5928ae36a30a60c467442bd9f3d6"
+          },
+          "n335.txt": {
+            "path": "n335.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "d31c44983401f43a587fecf16e9f0eae0736fa6b",
+            "size": 24314,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/d31c44983401f43a587fecf16e9f0eae0736fa6b"
+          },
+          "n336.svg": {
+            "path": "n336.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "c31624fb8675c3ae588f71f1fb1f708013c9cbcd",
+            "size": 44081,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/c31624fb8675c3ae588f71f1fb1f708013c9cbcd"
+          },
+          "n336.txt": {
+            "path": "n336.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "53fafa45b9555c753ce27adc4fa940c6fda5ca26",
+            "size": 24410,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/53fafa45b9555c753ce27adc4fa940c6fda5ca26"
+          },
+          "n337.svg": {
+            "path": "n337.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "e4bcb3d75bd5b69b47754b5d1e46b50ef9725c9e",
+            "size": 44204,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/e4bcb3d75bd5b69b47754b5d1e46b50ef9725c9e"
+          },
+          "n337.txt": {
+            "path": "n337.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "0fbca5eff8886174acb43d6f69ad9df4458d404b",
+            "size": 24521,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/0fbca5eff8886174acb43d6f69ad9df4458d404b"
+          },
+          "n338.svg": {
+            "path": "n338.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "6f8017a49d30e86a72e5321c281239a697f33bd4",
+            "size": 44346,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/6f8017a49d30e86a72e5321c281239a697f33bd4"
+          },
+          "n338.txt": {
+            "path": "n338.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "6e8a09bbfe574e3979965952be8235d4fac65935",
+            "size": 24545,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/6e8a09bbfe574e3979965952be8235d4fac65935"
+          },
+          "n339.svg": {
+            "path": "n339.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "1ed8fdab03dd5c8609e05fa7cd143cd2e17b1f67",
+            "size": 44477,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/1ed8fdab03dd5c8609e05fa7cd143cd2e17b1f67"
+          },
+          "n339.txt": {
+            "path": "n339.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "71239ef2c926d20d1efc852049cb7820e72c0de8",
+            "size": 24511,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/71239ef2c926d20d1efc852049cb7820e72c0de8"
+          },
+          "n340.svg": {
+            "path": "n340.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "92bc60b61018137259720970616c6427eab3493a",
+            "size": 44609,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/92bc60b61018137259720970616c6427eab3493a"
+          },
+          "n340.txt": {
+            "path": "n340.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "993ae49470bcdc13f9ecc1067b6ad6954dc4adce",
+            "size": 24744,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/993ae49470bcdc13f9ecc1067b6ad6954dc4adce"
+          },
+          "n341.svg": {
+            "path": "n341.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "4658ad9ac9cd7f7d31f95a22d37a1b63a043da27",
+            "size": 44737,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/4658ad9ac9cd7f7d31f95a22d37a1b63a043da27"
+          },
+          "n341.txt": {
+            "path": "n341.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "67ad5a3d308f54f24de40f80e26d7162556c5d2d",
+            "size": 24785,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/67ad5a3d308f54f24de40f80e26d7162556c5d2d"
+          },
+          "n342.svg": {
+            "path": "n342.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "237249d7a4606cc44bc799588d63c468b2cf26a7",
+            "size": 44865,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/237249d7a4606cc44bc799588d63c468b2cf26a7"
+          },
+          "n342.txt": {
+            "path": "n342.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "453a96a63da2d81fa21122d394b01005f935e6fc",
+            "size": 24850,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/453a96a63da2d81fa21122d394b01005f935e6fc"
+          },
+          "n364.svg": {
+            "path": "n364.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "63068b316a87234b269e68846622ce7990e8eb70",
+            "size": 47743,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/63068b316a87234b269e68846622ce7990e8eb70"
+          },
+          "n364.txt": {
+            "path": "n364.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "78e0e608c45f44d6ee7b2531a727cbab566ae9a0",
+            "size": 26377,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/78e0e608c45f44d6ee7b2531a727cbab566ae9a0"
+          },
+          "n369.svg": {
+            "path": "n369.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "6b7190245405568ce695c97f55ab7757bee0bbe8",
+            "size": 48406,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/6b7190245405568ce695c97f55ab7757bee0bbe8"
+          },
+          "n369.txt": {
+            "path": "n369.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "79a1ba18aa54a5681e05439fbd6b8ac7d6e37229",
+            "size": 26791,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/79a1ba18aa54a5681e05439fbd6b8ac7d6e37229"
+          },
+          "n372.svg": {
+            "path": "n372.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "547b95e3a74c70b5cc495c75349bb713644f45ef",
+            "size": 48795,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/547b95e3a74c70b5cc495c75349bb713644f45ef"
+          },
+          "n372.txt": {
+            "path": "n372.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "e9dde59e9408eebffbc794311847c7c9fecf3669",
+            "size": 27016,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/e9dde59e9408eebffbc794311847c7c9fecf3669"
+          },
+          "n373.svg": {
+            "path": "n373.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "047b82a8c9ba292698b7dc783416b8e11032d866",
+            "size": 48929,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/047b82a8c9ba292698b7dc783416b8e11032d866"
+          },
+          "n373.txt": {
+            "path": "n373.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b4d35e5be4e745e24df5727e501c7d10aaf59f76",
+            "size": 27227,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/b4d35e5be4e745e24df5727e501c7d10aaf59f76"
+          },
+          "n374.svg": {
+            "path": "n374.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "800954837db6578aaea30cfb9a93addc46a8178e",
+            "size": 49057,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/800954837db6578aaea30cfb9a93addc46a8178e"
+          },
+          "n374.txt": {
+            "path": "n374.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "bff2b1a4550b02a29d68aed4b501add63d51cc67",
+            "size": 27246,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/bff2b1a4550b02a29d68aed4b501add63d51cc67"
+          },
+          "n375.svg": {
+            "path": "n375.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "b25fe87968a37ea0167d9ebeef7a71b48020e750",
+            "size": 49185,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/b25fe87968a37ea0167d9ebeef7a71b48020e750"
+          },
+          "n375.txt": {
+            "path": "n375.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "96f21d6cc851d453a1f8da202667f33f29304cb6",
+            "size": 27240,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/96f21d6cc851d453a1f8da202667f33f29304cb6"
+          },
+          "n376.svg": {
+            "path": "n376.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "0ed894e76c720369f7142497a8907af0e9954adb",
+            "size": 49324,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/0ed894e76c720369f7142497a8907af0e9954adb"
+          },
+          "n376.txt": {
+            "path": "n376.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "383a41ca4ebf6892ed225d44677e3ebc56e787d5",
+            "size": 27436,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/383a41ca4ebf6892ed225d44677e3ebc56e787d5"
+          },
+          "n377.svg": {
+            "path": "n377.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "5d5d6c8344030ba10d4c006f3d46b39689535438",
+            "size": 49453,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/5d5d6c8344030ba10d4c006f3d46b39689535438"
+          },
+          "n377.txt": {
+            "path": "n377.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "4870879d7fea8725e2275914cdb55231bc387182",
+            "size": 27400,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/4870879d7fea8725e2275914cdb55231bc387182"
+          },
+          "n378.svg": {
+            "path": "n378.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "fdc5213bedc03ffcc03fafc7e984b4c88fe88735",
+            "size": 49577,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/fdc5213bedc03ffcc03fafc7e984b4c88fe88735"
+          },
+          "n378.txt": {
+            "path": "n378.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "4179d7d494138075487af04722df01a57a8ee6c0",
+            "size": 27316,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/4179d7d494138075487af04722df01a57a8ee6c0"
+          },
+          "n379.svg": {
+            "path": "n379.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "0f1ccbdf267d6afa57ee5e7f6693f51287fd1888",
+            "size": 49711,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/0f1ccbdf267d6afa57ee5e7f6693f51287fd1888"
+          },
+          "n379.txt": {
+            "path": "n379.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "d8e24f4d187e8bae33c5a5c48e12fde0e2fcf4ab",
+            "size": 27540,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/d8e24f4d187e8bae33c5a5c48e12fde0e2fcf4ab"
+          },
+          "n68.svg": {
+            "path": "n68.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "d01ac3966f0672a741c240dc1920aeff210df0a3",
+            "size": 9133,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/d01ac3966f0672a741c240dc1920aeff210df0a3"
+          },
+          "n68.txt": {
+            "path": "n68.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "7280eb3ea21b4ef7ca5d7a939921a2ac42da2059",
+            "size": 4982,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/7280eb3ea21b4ef7ca5d7a939921a2ac42da2059"
+          },
+          "n84.svg": {
+            "path": "n84.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "8aeea070854026bcd65801efd9f9fb5f661ffe20",
+            "size": 11232,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/8aeea070854026bcd65801efd9f9fb5f661ffe20"
+          },
+          "n84.txt": {
+            "path": "n84.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "1920a09c7af648d80fa2265da276cf7955567bc4",
+            "size": 6120,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/1920a09c7af648d80fa2265da276cf7955567bc4"
+          },
+          "n86.svg": {
+            "path": "n86.svg",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "3cd26802cb00ee0928faa3790387e278b5af4b55",
+            "size": 11490,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/3cd26802cb00ee0928faa3790387e278b5af4b55"
+          },
+          "n86.txt": {
+            "path": "n86.txt",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "9ff0a58faf53037bacc117a2ea3542c8a6ce8d82",
+            "size": 6242,
+            "url": "https://api.github.com/repos/franciscouzo/square-packing/git/blobs/9ff0a58faf53037bacc117a2ea3542c8a6ce8d82"
+          }
+        }
+      },
+      "qualification": "Two author-reported decimal poses at n=375 and n=378, outside the 324-case corpus, each with a smaller side than the same count's ffd900d report, which stays a dated historical row. The retained facts rebuild each source TXT blob identity, length and SHA-256; no raw upstream byte is retained. No geometry, native replay, confirmation or optimality credit."
+    }
+  ]
+}
