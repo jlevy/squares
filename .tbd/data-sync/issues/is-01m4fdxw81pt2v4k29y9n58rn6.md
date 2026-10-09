@@ -3,9 +3,9 @@ type: is
 id: is-01m4fdxw81pt2v4k29y9n58rn6
 title: Stabilize stack 430 on main 3213 and qualify every layer
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 43
+version: 45
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -38,8 +38,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T04:14:49.601Z
-updated_at: 2026-10-09T19:13:58.421Z
+updated_at: 2026-10-09T20:17:52.768Z
 started_at: 2026-10-09T04:20:32.996Z
+closed_at: 2026-10-09T20:17:52.768Z
+close_reason: Stack 430 stabilized, reviewed, merged (main d3860c97a); post-merge full Packing validation and Pages green
+resolution: null
+duplicate_of: null
 ---
 Cloud continuation of think-yij0 handoff (PR467). Normal-merge origin/main 3213d651b into #442, propagate to #468, fix the recorded failures without weakening limits, obtain exact-head required CI and full checkpoints, bind reviews. Merge only with owner confirmation (github-merge confirm-session).
 
@@ -80,3 +84,5 @@ Descriptions refreshed to round-5 heads (all 11 PATCHed 12:12Z). Follow-up revie
 Round 6: main 6a0499ba4 (#473) merged; one conflict test_overview.py docstring at #442 (kept #442's); final heads #442 45b1946b3, #443 995082f8c, #448 99c6ba9f0, #449 20213f5e3, #450 0eb43f47a, #459 9ed7f3e3b, #460 e2f776e12, #463 6dea14f20, #466 f8c3f2272, #468 884e64a41, #469 53900e4ea; snapshot 200,129,181 B at #469; #442-#468 clean and green; #469 CI running. All review findings have complete disposition replies (incl. #442 P/Q, #466 C, #468 C posted 2026-10-09).
 
 MERGED 2026-10-09T19:12Z: stack 430 (#442 #443 #448 #449 #450 #459 #460 #463 #466 #468 #469) via PUT /pulls/469/merge-async merge_method=merge sha=600068983 -> main d3860c97a; stack closed. Gate at merge: all 11 open/non-draft/clean/linear on main 6a0499ba4, Packing+Certificate page green at every head, deep gate green at #469 (37975867810), reviews with dispositions, no AGENTS.md policy change, owner confirmation in session. Post-merge main runs: Packing validation 37978722120 (full, push), Certificate page 37978722223.
+
+Post-merge on main d3860c97a: Packing validation 37978722120 (full, push) SUCCESS; Certificate page 37978722223 SUCCESS (deploy). Stack 430 landed and qualified on main.
