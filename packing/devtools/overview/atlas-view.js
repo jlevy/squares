@@ -5,18 +5,16 @@
 // a square of side k is known to hold. Each row ends at its perfect square, whose
 // packing is the k by k grid itself.
 //
-// Each row retains its non-grid and grid segments. When the row fits, the grid segment
-// follows the non-grid segment with half a drawing of extra space. Otherwise the
-// non-grid segment wraps at the left, then the whole grid segment starts separately,
-// with every grid line aligned right. Every physical line has the same height and
-// ordinary vertical gap, including the next bound row. The first retained grid count
-// comes from each row's markup, independent of derived drawing variants. Enough
-// width draws each row on one line.
+// Each row retains its non-grid and grid segments on one complete line, with half a
+// drawing of extra space between them. All perfect-square endpoints share the right
+// edge. A narrow screen pans the triangle without shrinking or breaking its rows.
+// Every row reserves the same height and vertical gap. The first retained grid count
+// comes from each row's markup, independent of derived drawing variants.
 //
 // One set of tiles serves both views. The view is an attribute of the atlas block,
 // `data-atlas-view`, and the layout is the stylesheet's: in the triangle each tile
-// takes its local segment line and column from custom properties this script writes,
-// `place`'s answer for the tiles a line holds. Capacity follows from the block's width,
+// takes its local segment column from custom properties this script writes.
+// Viewport capacity follows from the block's width,
 // the least cell the stylesheet allows (`--site-atlas-cell-min`) and the gaps. The
 // stylesheet places and separates the segment containers. Placement properties change
 // only when the answer changes, so changing the view is one attribute. Nothing here
@@ -39,8 +37,8 @@
 // tabs beside the view tabs, in either view (think-ht8t). The size is an attribute of the
 // block too, `data-atlas-size`, and the stylesheet scales a tile by it
 // (`--site-atlas-scale`): both views use the same least cell and the same gaps. Small
-// fits more tiles to a line and Large fewer (`perLineAt`); a long triangle row wraps
-// rather than shrinking its drawings. A change of size is a change of layout like a
+// fits more tiles to a Grid line and Large fewer (`perLineAt`); Triangle keeps its
+// complete rows at the same drawing size. A change of size is a change of layout like a
 // change of view, moved the same way, and it is in the address as `?size=small` or
 // `?size=large`; Medium, the default, has no parameter.
 //
@@ -96,7 +94,7 @@
 
   /**
    * How many cells fit at `scale` times Medium's minimum width. Both views budget the
-   * same width and gap, so a triangle wraps its long rows at the grid's readable size.
+   * same width and gap, so Triangle pans its complete rows at Grid's readable size.
    * @param {number} width
    * @param {number} least
    * @param {number} most
@@ -109,13 +107,10 @@
   }
 
   /**
-   * Where case `n` stands in the triangle when a line holds `per` tiles: its row k, its
-   * line counted from the top of the triangle, its column counted from the left, and
-   * whether its line opens a row after the first. Every physical line has equal pitch.
-   *
-   * A complete mixed row stays inline only when both segments and half a drawing fit.
-   * Otherwise its non-grid segment wraps left, then its grid segment wraps right on
-   * separate lines. Missing metadata retains ordinary wrapping for synthetic callers.
+   * Where case `n` stands in a complete Triangle row, right aligned in `per`
+   * canvas columns. Viewport capacity controls drawing scale separately. A smaller
+   * canvas request still holds the entire row. Segments keep their local columns,
+   * and mixed rows retain the extra horizontal separator before the grid suffix.
    * @param {number} n
    * @param {number} per
    * @param {AtlasGridStarts} starts first retained grid count by one-based row k
@@ -123,40 +118,19 @@
    */
   function place(n, per, starts = {}) {
     const k = row(n);
-    const columns = Math.max(1, Math.floor(per));
-    /** @param {number} r */
-    const segments = (r) => {
-      const count = 2 * r - 1;
-      const prefix = starts[r] === undefined ? count : starts[r] - (r - 1) ** 2 - 1;
-      const grid = count - prefix;
-      const inline = count + (prefix > 0 && grid > 0 ? 1 : 0) <= columns;
-      return {
-        prefix,
-        grid,
-        inline,
-        lines: inline ? 1 : Math.ceil(prefix / columns) + Math.ceil(grid / columns),
-      };
-    };
-    let above = 0;
-    for (let earlier = 1; earlier < k; earlier += 1) {
-      above += segments(earlier).lines;
-    }
-    const { prefix, grid, inline } = segments(k);
+    const count = 2 * k - 1;
+    const columns = Math.max(count, Math.floor(per));
+    const prefix = starts[k] === undefined ? count : starts[k] - (k - 1) ** 2 - 1;
     const at = n - (k - 1) ** 2;
     const inGrid = at > prefix;
-    const index = inGrid ? at - prefix : at;
-    const segmentLine = Math.ceil(index / columns);
-    const within = ((index - 1) % columns) + 1;
-    const lineSize = Math.min(columns, (inGrid ? grid : prefix) - (segmentLine - 1) * columns);
-    const line = inline ? 1 : segmentLine + (inGrid ? Math.ceil(prefix / columns) : 0);
     return {
       row: k,
-      line: above + line,
-      column: inline ? at : inGrid ? columns - lineSize + within : within,
-      opens: k > 1 && line === 1,
-      gap: inline && inGrid && prefix > 0,
-      segmentLine,
-      segmentColumn: !inline && inGrid ? Math.min(grid, columns) - lineSize + within : within,
+      line: k,
+      column: columns - count + at,
+      opens: k > 1,
+      gap: inGrid && prefix > 0,
+      segmentLine: 1,
+      segmentColumn: inGrid ? at - prefix : at,
     };
   }
 
@@ -410,7 +384,7 @@
       arranged = key;
       cells.style.setProperty("--site-atlas-per-line", String(per));
       for (const tile of tiles) {
-        const at = place(Number(tile.dataset.atlasN), per, starts);
+        const at = place(Number(tile.dataset.atlasN), widest(last), starts);
         tile.style.cssText = `--site-atlas-line: ${at.segmentLine}; --site-atlas-column: ${at.segmentColumn};`;
       }
     };

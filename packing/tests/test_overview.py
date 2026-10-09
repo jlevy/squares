@@ -946,7 +946,10 @@ def test_the_atlas_key_names_the_star_and_the_first_grid_marker() -> None:
         ("0", "0"),
     ]
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
-    assert "color: #000;" in _rule(css, ".site-atlas-swatch[data-angle-label]")
+    assert "color: var(--site-atlas-angle-label-ink);" in _rule(
+        css, ".site-atlas-swatch[data-angle-label]"
+    )
+    assert "--site-atlas-angle-label-ink: #000;" in css
     legend = _rule(css, ".kpress .site-atlas-grid .site-atlas-legend")
     for declaration in (
         "color: var(--site-support-color);",
@@ -1150,9 +1153,10 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     segment = _rule(css, f"{triangle} .site-atlas-segment")
     boundary = _rule(css, f'{triangle} .site-atlas-row:where(:not([data-atlas-row="1"]))')
     assert "grid-auto-rows: var(--site-atlas-line-height);" in segment
-    for line in (row, segment):
-        assert "row-gap: var(--site-atlas-cell-gap);" in line
-    assert "margin-block-start: var(--site-atlas-cell-gap);" in boundary
+    assert "flex-wrap: nowrap;" in row
+    assert "justify-content: end;" in row
+    assert "--site-atlas-segment-columns: max(1, var(--site-atlas-segment-count));" in segment
+    assert "margin-block-start: var(--site-atlas-row-gap);" in boundary
     assert "--site-atlas-row-space" not in css
     assert "data-atlas-wrapped" not in css
     assert "transform-origin: 0 0;" in _rule(css, ".kpress .site-atlas-cell")
@@ -1163,6 +1167,9 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     )
     assert "--site-atlas-tile:" not in cells
     assert "display: block;" in cells
+    assert "overflow-x: auto;" in cells
+    assert "direction: rtl;" in cells
+    assert "--site-atlas-row-gap: calc(var(--site-atlas-tile) * 0.35);" in cells
     assert ".site-atlas-row" in css
     assert ".site-atlas-segment" in css
     tile = _rule(

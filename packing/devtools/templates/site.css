@@ -65,6 +65,8 @@ body {
    dark mode turns the lightness over (below). `devtools.rung_scale` measures every fill
    these make and its text contrast (paper-design.md, Color). */
 :root {
+  --site-atlas-angle-label-ink: #000;
+  --site-atlas-swatch: transparent;
   --site-rung-base: 95%;
   --site-rung-step: -5.5%;
   --site-rung-chroma-base: 0.015;
@@ -2011,7 +2013,7 @@ body {
   --site-wide: var(--site-bleed-max);
   --site-atlas-toggle-space: 1.2rem;
   /* Both views share the grid's readable cell minimum and gap. The script reads
-     these tokens in rem or px; long triangle rows wrap at that cell width. The size's
+     these tokens in rem or px; complete Triangle rows pan at that cell width. The size's
      scale makes Small two thirds as wide and Large half as wide again. */
   --site-atlas-cell-min: 6.4rem;
   --site-atlas-cell-gap: 0.5rem;
@@ -2042,7 +2044,7 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   --site-atlas-scale: 1.5;
 }
 /* The view tabs and the size tabs: two of the section tabs' strip (site-nav.css), on
-   the bar's line, so each is as tall here as under the bar. One row centred over the
+   the bar's line, so each is as tall here as under the bar. One row aligned left over the
    tiles, the key to a tile's marks on a line of its own under it; on a narrow block the
    size tabs wrap under the view tabs. Each is hidden until the script has tiles to
    arrange. */
@@ -2050,7 +2052,7 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem 1.6rem;
-  justify-content: center;
+  justify-content: start;
   margin-block-end: var(--site-atlas-toggle-space);
 }
 .site-atlas-grid .site-atlas-views,
@@ -2112,7 +2114,7 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
 /* The first two angle swatches name their degrees; contact swatches keep their
    compact single-number width. */
 .site-atlas-swatch[data-angle-label] {
-  color: #000;
+  color: var(--site-atlas-angle-label-ink);
   inline-size: 1rem;
 }
 /* The triangle's column count and tile width live in the shared rule so changing
@@ -2214,32 +2216,52 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
 .site-atlas-segment {
   display: contents;
 }
-/* Triangle retains each bound row's two segments. Flex wraps the whole grid segment,
-   whose own grid then right-aligns every continuation, without changing drawing scale. */
+/* Triangle keeps complete rows at Grid's readable drawing scale. Its own scroll
+   frame contains wide rows, and opens at their common right endpoint before scripts.
+   Rows restore left-to-right reading order inside that right-origin scroll frame. */
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-view="triangle"])
   .site-atlas-cells,
 html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
+  --site-atlas-widest: 19;
+  --site-atlas-extra: var(--site-atlas-first-extra);
+  --site-atlas-row-gap: calc(var(--site-atlas-tile) * 0.35);
+  direction: rtl;
   display: block;
+  overflow-x: auto;
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-view="triangle"])
+  .site-atlas-cells:has(.site-atlas-rest:not([hidden])),
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid
+  .site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
+  --site-atlas-widest: 35;
+  --site-atlas-extra: var(--site-atlas-last-extra);
 }
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-view="triangle"])
   .site-atlas-row,
 html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-row {
-  --site-atlas-split: clamp(
-    0,
-    var(--site-atlas-row-count) +
-    clamp(0, var(--site-atlas-prefix-count), 1) -
-    var(--site-atlas-per-line),
-    1
-  );
+  direction: ltr;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  justify-content: end;
   column-gap: calc(
     (var(--site-atlas-grid-space) + var(--site-atlas-cell-gap)) *
     clamp(0, var(--site-atlas-prefix-count), 1)
   );
-  row-gap: var(--site-atlas-cell-gap);
+  min-inline-size: max(
+    100%,
+    calc(
+      var(--site-atlas-widest) *
+      var(--site-atlas-tile) +
+      (var(--site-atlas-widest) - 1) *
+      var(--site-atlas-cell-gap) +
+      var(--site-atlas-extra) *
+      var(--site-atlas-grid-space)
+    )
+  );
 }
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-view="triangle"])
@@ -2247,16 +2269,13 @@ html:not([data-site-atlas-view="grid"])
 html[data-site-atlas-view="triangle"]
   .site-atlas-grid
   .site-atlas-row:where(:not([data-atlas-row="1"])) {
-  margin-block-start: var(--site-atlas-cell-gap);
+  margin-block-start: var(--site-atlas-row-gap);
 }
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-view="triangle"])
   .site-atlas-segment,
 html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-segment {
-  --site-atlas-segment-columns: min(
-    var(--site-atlas-per-line),
-    max(1, var(--site-atlas-segment-count))
-  );
+  --site-atlas-segment-columns: max(1, var(--site-atlas-segment-count));
   --site-atlas-segment-width: calc(
     var(--site-atlas-segment-columns) *
     var(--site-atlas-tile) +
@@ -2266,16 +2285,9 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-segment {
   display: grid;
   flex: none;
   column-gap: var(--site-atlas-cell-gap);
-  row-gap: var(--site-atlas-cell-gap);
   grid-auto-rows: var(--site-atlas-line-height);
   grid-template-columns: repeat(var(--site-atlas-segment-columns), var(--site-atlas-tile));
   inline-size: var(--site-atlas-segment-width);
-}
-html:not([data-site-atlas-view="grid"])
-  .site-atlas-grid:where([data-atlas-view="triangle"])
-  :where([data-atlas-segment="grid"]),
-html[data-site-atlas-view="triangle"] .site-atlas-grid :where([data-atlas-segment="grid"]) {
-  margin-inline-start: calc(var(--site-atlas-split) * (100% - var(--site-atlas-segment-width)));
 }
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-view="triangle"])
@@ -2288,32 +2300,11 @@ html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-view="triangle"])
   .site-atlas-cell,
 html[data-site-atlas-view="triangle"] .kpress .site-atlas-grid .site-atlas-cell {
-  --site-atlas-initial-line: round(up, var(--i, 1) / var(--site-atlas-segment-columns), 1);
-  --site-atlas-initial-column: calc(mod(var(--i, 1) - 1, var(--site-atlas-segment-columns)) + 1);
+  --site-atlas-initial-line: 1;
+  --site-atlas-initial-column: var(--i, 1);
   grid-area:
     var(--site-atlas-line, var(--site-atlas-initial-line)) /
     var(--site-atlas-column, var(--site-atlas-initial-column));
-}
-html:not([data-site-atlas-view="grid"])
-  .site-atlas-grid:where([data-atlas-view="triangle"])
-  [data-atlas-segment="grid"]
-  .site-atlas-cell,
-html[data-site-atlas-view="triangle"]
-  .site-atlas-grid
-  [data-atlas-segment="grid"]
-  .site-atlas-cell {
-  --site-atlas-line-count: min(
-    var(--site-atlas-segment-columns),
-    var(--site-atlas-segment-count) -
-    (var(--site-atlas-initial-line) - 1) *
-    var(--site-atlas-segment-columns)
-  );
-  --site-atlas-initial-column: calc(
-    var(--site-atlas-segment-columns) -
-    var(--site-atlas-line-count) +
-    mod(var(--i, 1) - 1, var(--site-atlas-segment-columns)) +
-    1
-  );
 }
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-view="triangle"])

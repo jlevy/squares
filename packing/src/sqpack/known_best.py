@@ -353,7 +353,7 @@ class CompositeSpec:
         return -(-self.count // self.columns)
 
     def card_position(self, n: int) -> tuple[int, int]:
-        """Zero-based cell for a case; triangle rows start at (k-1)**2 + 1 on the left."""
+        """Zero-based logical cell; triangle rows start at (k-1)**2 + 1 in column zero."""
         if n not in self.numbers:
             raise ValueError(f"n={n} is outside {self.cases.label}")
         if self.placement == CompositePlacement.square_bound_triangle:
@@ -365,7 +365,7 @@ class CompositeSpec:
     def layout(self) -> str:
         """The arrangement, columns first, as recorded beside every export."""
         arrangement = (
-            "left-aligned square-bound triangle"
+            "right-aligned square-bound triangle"
             if self.placement == CompositePlacement.square_bound_triangle
             else "row-major"
         )
@@ -591,9 +591,9 @@ KNOWN_BEST_COMPOSITES = (
         columns=35,
         stem="known-best-1-324",
         placement=CompositePlacement.square_bound_triangle,
-        # At the figure's card scale, row k holds (k-1)**2+1 through k**2. Starting the
-        # rows on the left keeps the upper-right corner free for the information
-        # block, and the final row sets the canvas width without shrinking any card.
+        # At the figure's card scale, row k holds (k-1)**2+1 through k**2. Aligning each
+        # complete row on the right leaves the upper-left corner for the information
+        # block; the final row sets the canvas width without shrinking any card.
         #
         # One raster: the original rectangular poster's 2x export cost 5,055,264 bytes
         # at 83 megapixels. The triangle widens the canvas further, while the PDF keeps
@@ -616,7 +616,7 @@ KNOWN_BEST_COMPOSITES = (
 )
 """Every composite figure published from the known-best corpus.
 
-Two: the published 10-by-10 figure of the first hundred cases, and the left-aligned
+Two: the published 10-by-10 figure of the first hundred cases, and the right-aligned
 square-bound triangle poster of the whole corpus. A third is a third entry here, not a
 third copy of the builder: the geometry, the export set, the manifest record and the
 drift report all read the specification.

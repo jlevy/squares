@@ -7,7 +7,40 @@
   }
   const box = cells.getBoundingClientRect();
   const style = getComputedStyle(cells);
+  const rows = [...cells.querySelectorAll(".site-atlas-row")].filter(
+    (row) => row.getClientRects().length > 0,
+  );
+  const first = rows[0]?.getBoundingClientRect();
+  const last = rows.at(-1)?.getBoundingClientRect();
+  const triangle = document.documentElement.dataset.siteAtlasView === "triangle";
+  const canvas =
+    triangle && first && last
+      ? {
+          left: first.left - box.left,
+          right: first.right - box.left,
+          top: first.top - box.top,
+          bottom: last.bottom - box.top,
+          width: first.width,
+          height: last.bottom - first.top,
+        }
+      : {
+          left: 0,
+          right: box.width,
+          top: 0,
+          bottom: box.height,
+          width: box.width,
+          height: box.height,
+        };
   return {
+    canvas,
+    frame: {
+      top: cells.clientTop,
+      bottom: cells.clientTop + cells.clientHeight,
+      client_top: cells.clientTop,
+      client_height: cells.clientHeight,
+    },
+    line_gap_px: rows[1] ? Number.parseFloat(getComputedStyle(rows[1]).marginBlockStart) : 0,
+    page_overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
     supported: {
       division: CSS.supports("width", "calc(1px / 1px * 1px)"),
       round: CSS.supports("opacity", "round(down, 1.5, 1)"),

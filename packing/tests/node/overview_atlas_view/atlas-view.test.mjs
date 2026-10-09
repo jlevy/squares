@@ -141,244 +141,123 @@ void test("each size fits as many scaled cells as the shared grid minimum allows
   }
 });
 
-void test("where every row fits, row k is line k and starts at the first column", () => {
-  for (const [last, per] of /** @type {[number, number][]} */ ([
+void test("every complete row ends at the same rightmost canvas column", () => {
+  for (const [last, columns] of /** @type {[number, number][]} */ ([
     [100, 19],
     [324, 35],
+    [324, 40],
   ])) {
     for (let n = 1; n <= last; n += 1) {
       const k = atlas.row(n);
       assert.deepEqual(
-        place(n, per),
-        { row: k, line: k, column: n - (k - 1) * (k - 1), opens: k > 1 },
-        `n = ${n}`,
+        place(n, columns),
+        { row: k, line: k, column: columns - (2 * k - 1) + n - (k - 1) ** 2, opens: k > 1 },
+        String(n),
       );
     }
   }
 });
 
-void test("nineteen tiles at eight a line are lines of 8, 8 and 3, ending at the square", () => {
-  assert.deepEqual(rowLines(10, 8), [8, 8, 3]);
-  const row = lines(100, 8).filter((line) => line[0]?.row === 10);
-  // The row reads from its first case at the left edge, two full lines.
-  assert.deepEqual(row[0]?.[0], { n: 82, column: 1, row: 10, opens: true });
+void test("nineteen cases stay on one line even when the viewport holds eight", () => {
+  assert.deepEqual(rowLines(10, 8), [19]);
+  const found = lines(100, 19).filter((line) => line[0]?.row === 10);
+  assert.equal(found.length, 1);
   assert.deepEqual(
-    row[0]?.map(({ column }) => column),
-    [1, 2, 3, 4, 5, 6, 7, 8],
+    found[0]?.map(({ n, column }) => [n, column]),
+    Array.from({ length: 19 }, (_, i) => [82 + i, i + 1]),
   );
-  assert.deepEqual(
-    row[1]?.map(({ n, column }) => [n, column]),
-    [
-      [90, 1],
-      [91, 2],
-      [92, 3],
-      [93, 4],
-      [94, 5],
-      [95, 6],
-      [96, 7],
-      [97, 8],
-    ],
-  );
-  // The short last line also starts at the left edge.
-  assert.deepEqual(
-    row[2]?.map(({ n, column }) => [n, column]),
-    [
-      [98, 1],
-      [99, 2],
-      [100, 3],
-    ],
-  );
-  assert.deepEqual(row[2]?.at(-1), { n: 100, column: 3, row: 10, opens: false });
 });
 
-void test("a row that fits is one line, set from the left", () => {
-  // At eight a line rows 1 to 4 fit: 1, 3, 5 and 7 tiles.
-  for (let k = 1; k <= 4; k += 1) {
-    assert.deepEqual(rowLines(k, 8), [2 * k - 1]);
-  }
+void test("short rows use consecutive columns ending at the right edge", () => {
   assert.deepEqual(
     lines(16, 8)[2]?.map(({ n, column }) => [n, column]),
     [
-      [5, 1],
-      [6, 2],
-      [7, 3],
-      [8, 4],
-      [9, 5],
+      [5, 4],
+      [6, 5],
+      [7, 6],
+      [8, 7],
+      [9, 8],
     ],
   );
-  // A row exactly as long as a line is that line, full.
   assert.deepEqual(rowLines(4, 7), [7]);
   assert.equal(atlas.place(10, 7).column, 1);
 });
 
-void test("a row that is a whole number of lines has no short line", () => {
-  // Row 5 has nine tiles: three lines of three, under the seven lines of rows 1 to 4.
-  assert.deepEqual(rowLines(5, 3), [3, 3, 3]);
-  assert.deepEqual(place(17, 3), { row: 5, line: 8, column: 1, opens: true });
-  assert.deepEqual(place(25, 3), { row: 5, line: 10, column: 3, opens: false });
+void test("a canvas narrower than a row keeps the row complete", () => {
+  assert.deepEqual(rowLines(5, 3), [9]);
+  assert.deepEqual(place(17, 3), { row: 5, line: 5, column: 1, opens: true });
+  assert.deepEqual(place(25, 3), { row: 5, line: 5, column: 9, opens: true });
 });
 
-void test("every perfect square ends its row in the last occupied column, at any width", () => {
-  for (let per = 1; per <= 40; per += 1) {
+void test("perfect squares occupy the common final column without wrapped lines", () => {
+  for (let columns = 35; columns <= 40; columns += 1) {
     for (let k = 1; k <= 18; k += 1) {
-      assert.equal(
-        atlas.place(k * k, per).column,
-        ((2 * k - 2) % per) + 1,
-        `${k} squared at ${per} a line`,
-      );
+      const square = atlas.place(k * k, columns);
+      assert.equal(square.column, columns);
+      assert.equal(square.line, k);
     }
   }
 });
 
-void test("whole grid segments stay inline when they fit, otherwise wrap on the right", () => {
+void test("retained grid suffixes stay beside their non-grid prefix with a separator", () => {
   const starts = Object.fromEntries(
     [1, 2, 6, 12, 20, 30, 42, 56, 72, 90, 111, 133, 157, 183, 212, 242, 274, 308].map((n) => [
       atlas.row(n),
       n,
     ]),
   );
-  // Independent segment pixel layout: 100px tiles, 10px gutters, 80px drawings.
-  for (let per = 1; per <= 40; per += 1) {
-    let firstLine = 1;
-    const occupiedLines = new Set();
-    const width = per * 100 + (per - 1) * 10;
+  for (const columns of [35, 40]) {
     for (let k = 1; k <= 18; k += 1) {
       const first = (k - 1) ** 2 + 1;
       const boundary = starts[k];
-      assert.ok(boundary !== undefined, "every row has a retained grid threshold");
-      const prefix = boundary - first;
-      const count = 2 * k - 1;
-      const inline = count * 100 + (count - 1) * 10 + (prefix > 0 ? 40 : 0) <= width;
-      const groups = [
-        Array.from({ length: prefix }, (_, i) => first + i),
-        Array.from({ length: k * k - boundary + 1 }, (_, i) => boundary + i),
-      ];
-      let segmentFirstLine = firstLine;
-      for (const [index, group] of groups.entries()) {
-        const localColumns = Math.min(per, group.length);
-        for (let offset = 0; offset < group.length; offset += per) {
-          const line = group.slice(offset, offset + per);
-          for (const [within, n] of line.entries()) {
-            const globalLine = inline ? firstLine : segmentFirstLine + offset / per;
-            occupiedLines.add(atlas.place(n, per, starts).line);
-            const column = inline
-              ? n - first + 1
-              : index === 1
-                ? per - line.length + within + 1
-                : within + 1;
-            assert.deepEqual(
-              { ...atlas.place(n, per, starts) },
-              {
-                row: k,
-                line: globalLine,
-                column,
-                opens: k > 1 && globalLine === firstLine,
-                gap: inline && index === 1 && prefix > 0,
-                segmentLine: offset / per + 1,
-                segmentColumn:
-                  index === 1 && !inline ? localColumns - line.length + within + 1 : within + 1,
-              },
-              `n=${n}, per=${per}`,
-            );
-          }
-        }
-        if (!inline) {
-          segmentFirstLine += Math.ceil(group.length / per);
-        }
+      assert.ok(boundary !== undefined);
+      for (let n = first; n <= k * k; n += 1) {
+        const at = atlas.place(n, columns, starts);
+        assert.equal(at.line, k);
+        assert.equal(at.segmentLine, 1);
+        assert.equal(at.segmentColumn, n - (n >= boundary ? boundary : first) + 1);
+        assert.equal(at.gap, boundary > first && n >= boundary);
       }
-      firstLine = inline ? firstLine + 1 : segmentFirstLine;
-      if (k < 18) {
-        assert.equal(
-          atlas.place(k * k + 1, per, starts).line,
-          atlas.place(k * k, per, starts).line + 1,
-          `row ${k + 1} follows the prior physical line without spacer lines`,
-        );
-      }
+      assert.equal(atlas.place(k * k, columns, starts).column, columns);
     }
-    assert.deepEqual(
-      [...occupiedLines],
-      Array.from({ length: firstLine - 1 }, (_, index) => index + 1),
-      `every physical line is occupied at ${per} columns`,
-    );
   }
-  // Row 8 has six non-grid cases and nine grid cases. No grid case may share
-  // its final non-grid line at four columns; the grid occupies two full right rows.
-  assert.equal(atlas.place(56, 4, starts).column, 1);
-  assert.equal(atlas.place(56, 4, starts).line, atlas.place(55, 4, starts).line + 1);
-  assert.equal(atlas.place(100, 4, starts).column, 4);
-  assert.equal(atlas.place(56, 16, starts).gap, true);
+  // Row 8's six non-grid and nine grid cases share one physical line.
+  assert.equal(atlas.place(56, 35, starts).line, atlas.place(55, 35, starts).line);
+  assert.equal(atlas.place(56, 35, starts).segmentColumn, 1);
+  assert.equal(atlas.place(56, 35, starts).gap, true);
+  assert.equal(atlas.place(2, 35, starts).gap, false);
 });
 
-void test("the cases read in order, left to right and top to bottom, one to a place", () => {
+void test("cases read left to right and top to bottom, with one row per line", () => {
   for (const last of [100, 324]) {
-    for (let per = 1; per <= 40; per += 1) {
-      const found = lines(last, per);
-      const reading = found.flatMap((line) => {
-        const columns = line.map(({ column }) => column);
-        // Left to right along the line, no column taken twice or past the last.
-        assert.deepEqual(
-          columns,
-          [...columns].sort((a, b) => a - b),
-        );
-        assert.equal(new Set(columns).size, columns.length);
-        assert.ok(columns.every((column) => column >= 1 && column <= per));
-        return line.map(({ n }) => n);
-      });
-      assert.deepEqual(
-        reading,
-        Array.from({ length: last }, (_, index) => index + 1),
-        `${last} cases at ${per} a line`,
-      );
-      // No line is empty, and none holds two rows.
-      assert.ok(found.every((line) => new Set(line.map(({ row }) => row)).size === 1));
+    const columns = atlas.widest(last);
+    const found = lines(last, columns);
+    assert.equal(found.length, atlas.row(last));
+    assert.deepEqual(
+      found.flatMap((line) => line.map(({ n }) => n)),
+      Array.from({ length: last }, (_, i) => i + 1),
+    );
+    for (const line of found) {
+      assert.equal(new Set(line.map(({ row }) => row)).size, 1);
+      assert.equal(new Set(line.map(({ column }) => column)).size, line.length);
+      assert.equal(line.at(-1)?.column, columns);
     }
   }
 });
 
-void test("every line starts at the left, including a wrapped row's short last line", () => {
-  for (let per = 1; per <= 40; per += 1) {
+void test("complete row counts are independent of viewport capacity", () => {
+  for (let capacity = 1; capacity <= 40; capacity += 1) {
     for (let k = 1; k <= 18; k += 1) {
-      const sizes = rowLines(k, per);
-      const tiles = 2 * k - 1;
-      assert.equal(
-        sizes.reduce((sum, size) => sum + size, 0),
-        tiles,
-      );
-      assert.equal(sizes.length, Math.ceil(tiles / per));
-      assert.ok(
-        sizes.slice(0, -1).every((size) => size === per),
-        `row ${k} at ${per}`,
-      );
-      assert.ok((sizes.at(-1) ?? 0) >= 1 && (sizes.at(-1) ?? 0) <= per);
-    }
-    // Every line fills consecutive columns from the first, including short lines.
-    /** @type {Map<number, ReturnType<typeof lines>>} */
-    const rows = new Map();
-    for (const line of lines(324, per)) {
-      const k = line[0]?.row ?? 0;
-      rows.set(k, [...(rows.get(k) ?? []), line]);
-    }
-    for (const [k, found] of rows) {
-      for (const line of found) {
-        assert.equal(line[0]?.column, 1, `row ${k} at ${per}`);
-        assert.equal(line.at(-1)?.column, line.length, `row ${k} at ${per}`);
-      }
+      assert.deepEqual(rowLines(k, capacity), [2 * k - 1]);
     }
   }
 });
 
-void test("the first line of each row after the first opens it, and no other line does", () => {
-  for (const per of [8, 19, 26]) {
-    for (const line of lines(324, per)) {
-      const first = line[0];
-      assert.ok(first !== undefined);
-      const k = first.row;
-      const opens = k > 1 && first.n === (k - 1) * (k - 1) + 1;
-      assert.ok(
-        line.every((tile) => tile.opens === opens),
-        `the line of n = ${first.n}`,
-      );
-    }
+void test("every row after the first opens one ordinary physical line", () => {
+  for (const line of lines(324, 35)) {
+    const first = line[0];
+    assert.ok(first !== undefined);
+    assert.ok(line.every((tile) => tile.opens === first.row > 1));
   }
 });
 

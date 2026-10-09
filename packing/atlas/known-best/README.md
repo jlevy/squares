@@ -44,28 +44,25 @@ where the 2x export is 1,294,216 for 27.8.
 [![The complete known-best atlas from n equals one through three hundred twenty-four.](known-best-1-324.png)](known-best-1-324.svg)
 
 Every case the register holds, at the figure’s card scale, arranged in a triangle: row
-$k$ holds $n = (k-1)^2 + 1$ through $k^2$, beginning in the leftmost column.
-The eighteen logical rows end at 324; the final row has thirty-five cards.
-The first sixteen rows keep both segments inline.
-In the last two rows, beginning at $n = 257$, each complete grid suffix moves onto a
-second right-aligned line while the non-grid prefix stays left-aligned.
-The twenty physical lines fit the width of the row beginning at $n = 226$, with
-unchanged packing drawings and card scale.
+$k$ holds $n = (k-1)^2 + 1$ through $k^2$. All eighteen rows are complete and
+right-aligned; the final row has thirty-five cards.
+The packing drawings and card scale remain unchanged.
 A $k×k$ grid label marks each row’s first retained regular axis-aligned grid packing;
 the two-line label gives its dimensions above `GRID`, and the card retains its ordinary
 count. Where irregular packings precede it, an extra gap of half a drawing width (79
-units) separates the groups horizontally when inline.
-Every physical line uses the same 252-unit pitch, including wrapped grid suffixes; rows
-that are all grid receive no added gap.
+units) separates the groups horizontally.
+Every row uses the same 360-unit pitch, with more space between rows for a taller
+overall shape; rows that are all grid receive no added horizontal gap.
 The poster draws 52,650 square polygons from the same witnesses.
 Its title, complete legend, explanation, construction credits and closing project
-details form one block in the upper-right whitespace, leaving the bottom for the final
-row of packings. Title and documentation are right-aligned; the legend has two
+details form one block in the upper-left whitespace, leaving the bottom for the final
+row of packings. Title and documentation are left-aligned; the legend has two
 left-aligned columns, four status rows beside four recency, color and degree rows.
 The last right-column item reads “deg is the algebraic degree of that side length,”
 without a badge. The first two tilt-color swatches carry black $90^\circ$ and $45^\circ$
-labels. The information ends at the right edge of the final drawing; at least 120 units
-of outside clearance keep the grid labels inside the page margins.
+labels.
+The information starts at the left edge of the first drawing in the final row; at
+least 120 units of outside clearance keep the grid labels inside the page margins.
 One dark $R$ means known rigid; its verification status, dates and sources remain in the
 structured metadata.
 The two-line definition uses 57-unit type; the following legend, credits and closing use
@@ -87,8 +84,8 @@ A section gap separates the credits from the diagram credit, followed by the dat
 a middle dot and the generated edition stamp.
 A blank line precedes exactly “The Squares Project” and “github.com/jlevy/squares”.
 Both lines use the same 48-unit body font, weight and leading as the legend and credits.
-They are plain black text without a hyperlink or PDF annotation, and end flush with the
-information block’s right edge.
+They are plain black text without a hyperlink or PDF annotation, and start flush with
+the information block’s left edge.
 The poster has no subtitle.
 Its two-line definition appears above the legend: “The square packing problem asks for
 the side $s(n)$ of the smallest square that can hold $n$ unit squares, where the squares
@@ -97,13 +94,13 @@ Both composites apply the recent accent independently to a new upper bound, lowe
 or optimality proof: a new proof of an older packing colors its optimality badge, not
 its upper bound.
 The image above is the raster; the vector it was drawn from is one click
-away, and the PDF is a 77.45-by-54.90-inch page.
+away, and the PDF is a 86.95-by-68.77-inch page.
 
 | File | Size | For |
 | --- | --- | --- |
-| [`known-best-1-324.svg`](known-best-1-324.svg) | 7435 × 5270 units | the source; scales to anything |
-| [`known-best-1-324.png`](known-best-1-324.png) | 7435 × 5270 px | the raster embedded above |
-| [`square-packings-324-20261008.pdf`](square-packings-324-20261008.pdf) | 77.45 × 54.90 in | printing; vector, so text stays selectable |
+| [`known-best-1-324.svg`](known-best-1-324.svg) | 8347 × 6602 units | the source; scales to anything |
+| [`known-best-1-324.png`](known-best-1-324.png) | 8347 × 6602 px | the raster embedded above |
+| [`square-packings-324-20261008.pdf`](square-packings-324-20261008.pdf) | 86.95 × 68.77 in | printing; vector, so text stays selectable |
 
 The poster publishes one raster and a vector PDF. The rectangular poster’s 2x raster
 measured 5,055,264 bytes for 83 megapixels; the poster publishes a single preview, while

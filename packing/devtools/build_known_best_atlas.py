@@ -202,8 +202,8 @@ SUMMARY_CARD_HEIGHT = Decimal(242)
 SUMMARY_PACKING_SIZE = Decimal(158)
 #: Additional horizontal separation before an inline regular-grid suffix, in drawing units.
 POSTER_GRID_GAP = SUMMARY_PACKING_SIZE / 2
-#: Later logical rows put the complete grid suffix on a second physical line.
-POSTER_INLINE_ROWS = 16
+#: Complete triangle rows have more vertical air while preserving their drawing scale.
+POSTER_ROW_PITCH = Decimal(360)
 #: Outside air surrounds the cards and the all-grid labels, without scaling either.
 POSTER_OUTER_MARGIN = Decimal(120)
 POSTER_GRID_LEFT = POSTER_OUTER_MARGIN + SUMMARY_SIDE_MARGIN
@@ -649,7 +649,7 @@ class CompositeCanvas:
 
     The row-major figure reserves a title band and a bottom legend and footer. The
     triangle poster keeps the same card scale and puts that information in its upper
-    right, so its height follows the cards and margins alone. The 1-100 figure's 2400
+    left, so its height follows the cards and margins alone. The 1-100 figure's 2400
     by 2896 canvas, its legend at 2724 and its footer at 2790/2817/2844/2871 are what
     these formulas return
     for ten columns of ten.
@@ -674,18 +674,12 @@ class CompositeCanvas:
 
     @property
     def physical_columns(self) -> int:
-        """The inline envelope; later grid suffixes share its right edge."""
-        if not self.information_in_corner or not self.transitions:
-            return self.spec.columns
-        envelope = min(self.spec.columns, 2 * POSTER_INLINE_ROWS - 1)
-        return max(
-            envelope,
-            *(
-                segment.count
-                for transition in self.transitions
-                for segment in self._selected_segments(transition)
-            ),
-        )
+        """Every logical row fits within the complete triangle envelope."""
+        return self.spec.columns
+
+    @property
+    def row_pitch(self) -> Decimal:
+        return POSTER_ROW_PITCH if self.information_in_corner else SUMMARY_ROW_PITCH
 
     def _transition(self, row: int) -> GridTransition | None:
         return next(
@@ -700,57 +694,42 @@ class CompositeCanvas:
         boundary = min(max(transition.grid.first_n, first), stop)
         return PackingSegment(first, boundary), PackingSegment(boundary, stop)
 
-    def split_row(self, row: int, transition: GridTransition | None = None) -> bool:
-        if not self.information_in_corner or row <= POSTER_INLINE_ROWS:
-            return False
-        transition = transition or self._transition(row)
-        if transition is None:
-            # Direct synthetic geometry has no canonical context and retains its
-            # ordinary placement. Production binds all selected row thresholds.
-            return False
-        non_grid, grid = self._selected_segments(transition)
-        return not non_grid.empty and not grid.empty
-
     def _row_origin(self, row: int) -> tuple[int, Decimal]:
-        split_rows = sum(self.split_row(previous) for previous in range(1, row))
-        physical_row = row - 1 + split_rows
-        return physical_row, self.grid_top + SUMMARY_ROW_PITCH * physical_row
+        physical_row = row - 1
+        return physical_row, self.grid_top + self.row_pitch * physical_row
 
     @property
     def physical_rows(self) -> int:
-        return self.spec.rows + sum(self.split_row(row) for row in range(1, self.spec.rows + 1))
+        return self.spec.rows
 
     def segment_lines(self, transition: GridTransition) -> tuple[CompositeSegmentLine, ...]:
-        """Place selected non-grid and grid segments without changing their logical row."""
+        """Keep both selected segments inline, with a common right edge for every row."""
         if not self.information_in_corner:
             raise ValueError("square-bound segments require a triangle composite")
         non_grid, grid = self._selected_segments(transition)
+        count = non_grid.count + grid.count
+        if not count:
+            return ()
         physical_row, top = self._row_origin(transition.row)
-        split = self.split_row(transition.row, transition)
+        gap = POSTER_GRID_GAP if not non_grid.empty and not grid.empty else Decimal(0)
+        left = (
+            Decimal(self.width)
+            - POSTER_OUTER_MARGIN
+            - SUMMARY_CARD_WIDTH
+            - SUMMARY_COLUMN_PITCH * (count - 1)
+            - gap
+        )
         lines = []
         if not non_grid.empty:
-            lines.append(
-                CompositeSegmentLine(non_grid, "non-grid", physical_row, self.grid_left, top)
-            )
+            lines.append(CompositeSegmentLine(non_grid, "non-grid", physical_row, left, top))
         if not grid.empty:
-            if split or (transition.row > POSTER_INLINE_ROWS and non_grid.empty):
-                left = (
-                    Decimal(self.width)
-                    - POSTER_OUTER_MARGIN
-                    - SUMMARY_CARD_WIDTH
-                    - SUMMARY_COLUMN_PITCH * (grid.count - 1)
-                )
-            else:
-                left = self.grid_left + SUMMARY_COLUMN_PITCH * non_grid.count
-                if not non_grid.empty:
-                    left += POSTER_GRID_GAP
             lines.append(
                 CompositeSegmentLine(
                     grid,
                     "grid",
-                    physical_row + int(split),
-                    left,
-                    top + (SUMMARY_ROW_PITCH if split else Decimal(0)),
+                    physical_row,
+                    left + SUMMARY_COLUMN_PITCH * non_grid.count + gap,
+                    top,
                 )
             )
         return tuple(lines)
@@ -775,12 +754,23 @@ class CompositeCanvas:
                 line.top,
                 line.kind,
             )
+        left = self.grid_left
+        if self.information_in_corner:
+            # Synthetic/direct helpers remain file-free. Without retained transitions
+            # the selected logical row is right aligned, with no inferred separator.
+            row_count = min((row + 1) ** 2, self.spec.last_n) - row**2
+            left = (
+                Decimal(self.width)
+                - POSTER_OUTER_MARGIN
+                - SUMMARY_CARD_WIDTH
+                - SUMMARY_COLUMN_PITCH * (row_count - 1)
+            )
         return CompositeCardPosition(
             row,
             column,
             row,
-            self.grid_left + SUMMARY_COLUMN_PITCH * column,
-            self.grid_top + SUMMARY_ROW_PITCH * row,
+            left + SUMMARY_COLUMN_PITCH * column,
+            self.grid_top + self.row_pitch * row,
             "unsegmented",
         )
 
@@ -816,22 +806,21 @@ class CompositeCanvas:
 
     @property
     def information_right(self) -> Decimal:
-        """End poster text at the final drawing's edge, inside the card's caption air."""
         if self.information_in_corner:
-            trailing_card_air = (
-                SUMMARY_CARD_WIDTH - SUMMARY_PACKING_INSET_X - SUMMARY_PACKING_SIZE
-            )
-            return Decimal(self.width) - POSTER_OUTER_MARGIN - trailing_card_air
+            return self.information_left + POSTER_INFORMATION_WIDTH
         return Decimal(self.width) - SUMMARY_SIDE_MARGIN
 
     @property
     def information_left(self) -> Decimal:
+        """Align the corner text with the first drawing of the final, complete row."""
+        if self.information_in_corner:
+            return self.grid_left + SUMMARY_PACKING_INSET_X
         return self.information_right - POSTER_INFORMATION_WIDTH
 
     @property
     def grid_bottom(self) -> Decimal:
         """One row pitch below the last row's top."""
-        return self.grid_top + SUMMARY_ROW_PITCH * self.physical_rows
+        return self.grid_top + self.row_pitch * self.physical_rows
 
     @property
     def legend_baseline(self) -> Decimal:
@@ -873,7 +862,7 @@ class CompositeCanvas:
     def height(self) -> int:
         bottom = (
             self.grid_top
-            + SUMMARY_ROW_PITCH * (self.physical_rows - 1)
+            + self.row_pitch * (self.physical_rows - 1)
             + SUMMARY_CARD_HEIGHT
             + POSTER_OUTER_MARGIN
             if self.information_in_corner
@@ -947,19 +936,17 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
     "known-best-1-324": (
         "Best known packings of one through three hundred twenty-four unit squares",
         (
-            "A left-aligned triangular poster of the retained best known unit-square "
+            "A right-aligned triangular poster of the retained best known unit-square "
             "packings for n equals 1 through 324, the whole audited corpus. Row k holds "
-            "n equals (k minus 1) squared plus 1 through k squared, starting in the "
-            "leftmost column. Eighteen logical rows end at 324. The last two rows put "
-            "their complete grid suffixes on separate right-aligned lines, giving "
-            "twenty physical lines within a thirty-one-column envelope. "
+            "n equals (k minus 1) squared plus 1 through k squared, ending at the "
+            "common right edge. Eighteen complete logical rows end at 324, occupying "
+            "eighteen physical lines within a thirty-five-column envelope. "
             "A k by k grid label marks the first retained regular grid packing "
             "in each row; an extra half-drawing width separates an irregular prefix "
-            "from its grid suffix horizontally when inline. Wrapped segments use the "
-            "same vertical pitch as every other physical line. "
+            "from its grid suffix horizontally. All rows retain the same vertical pitch. "
             f"{POSTER_PROBLEM} "
-            "A right-aligned information block in the "
-            "upper-right corner "
+            "A left-aligned information block in the "
+            "upper-left corner "
             "contains the title, complete legend and publication details. Each tile is "
             "normalized to its own container and labeled with n, the best known upper "
             "bound on the container side and, where the value is not yet settled, the "
@@ -1738,7 +1725,7 @@ def _append_grid_transition_marker(
     center = (
         canvas.card_left(transition.grid.first_n, transition) - POSTER_GRID_GAP / 2
         if transition.has_irregular_prefix
-        else (POSTER_OUTER_MARGIN + canvas.grid_left) / 2
+        else canvas.card_left(transition.grid.first_n, transition) - SUMMARY_SIDE_MARGIN / 2
     )
     grid_position = canvas.card_position(transition.grid.first_n, transition)
     lines = canvas.segment_lines(transition)
@@ -1750,11 +1737,7 @@ def _append_grid_transition_marker(
     row_top = grid_position.top
     dimensions = f"{transition.row}\u00d7{transition.row}"
     labels = (dimensions, "GRID")
-    room = (
-        POSTER_GRID_GAP
-        if transition.has_irregular_prefix
-        else canvas.grid_left - POSTER_OUTER_MARGIN
-    )
+    room = POSTER_GRID_GAP if transition.has_irregular_prefix else SUMMARY_SIDE_MARGIN
     if any(_text_width(label, POSTER_GRID_MARKER_SIZE) > room for label in labels):
         raise ValueError("a grid transition marker exceeds its separator space")
     marker = sub(
@@ -2506,7 +2489,7 @@ def _append_summary_legend(
         span = sum(widths, Decimal(0)) + POSTER_LEGEND_COLUMN_GAP
         if span > POSTER_INFORMATION_WIDTH:
             raise ValueError("the poster legend columns exceed their information block")
-        cursor = canvas.information_right - span
+        cursor = canvas.information_left
         for name, items, width in zip(
             ("left", "right"), (descriptor.left, descriptor.right), widths, strict=True
         ):
@@ -2555,6 +2538,7 @@ def _append_summary_explainer(
     baseline: Decimal,
     canvas_width: int,
     right_edge: Decimal | None = None,
+    left_edge: Decimal | None = None,
     type_scale: Decimal = Decimal(1),
     runs: Sequence[tuple[str, bool]] = SUMMARY_EXPLAINER_RUNS,
     feature: str = "explainer",
@@ -2573,7 +2557,11 @@ def _append_summary_explainer(
             if index and not italic and runs[index - 1][1]
         )
     )
-    if right_edge is not None and line_width > POSTER_INFORMATION_WIDTH:
+    if left_edge is not None and right_edge is not None:
+        raise ValueError("an explainer has one horizontal alignment")
+    if (
+        left_edge is not None or right_edge is not None
+    ) and line_width > POSTER_INFORMATION_WIDTH:
         raise ValueError("the poster explainer exceeds its information block")
     explainer = sub(
         root,
@@ -2584,9 +2572,11 @@ def _append_summary_explainer(
             # tspans is not laid out as one chunk by every renderer, and the parts stack
             # on the same centre. Measuring the line and starting it is unambiguous.
             "x": format_svg_number(
-                (Decimal(canvas_width) - line_width) / 2
-                if right_edge is None
+                left_edge
+                if left_edge is not None
                 else right_edge - line_width
+                if right_edge is not None
+                else (Decimal(canvas_width) - line_width) / 2
             ),
             "y": format_svg_number(baseline),
             "font-family": SUMMARY_FONT,
@@ -2858,6 +2848,7 @@ def _append_poster_information(
     identity: CompositeIdentity,
     contributions: Mapping[int, RecentContributions] | None = None,
 ) -> None:
+    left = canvas.information_left
     right = canvas.information_right
     packing_credits = _poster_packing_credits(canvas.spec.first_n, canvas.spec.last_n)
     credit_lines = _poster_credit_lines(packing_credits)
@@ -2930,12 +2921,13 @@ def _append_poster_information(
             or baseline + Decimal(size) * Decimal("0.3") > POSTER_INFORMATION_BOTTOM
         ):
             raise ValueError(f"the poster {feature} line lies outside its information block")
-        text_left = right - extent
+        text_left = left
+        text_right = left + extent
         text_top = baseline - Decimal(size)
         text_bottom = baseline + Decimal(size) * Decimal("0.3")
         if any(
             text_left < position.left + SUMMARY_CARD_WIDTH
-            and right > position.left
+            and text_right > position.left
             and text_top < position.top + SUMMARY_CARD_HEIGHT
             and text_bottom > position.top
             for position in card_positions
@@ -2946,9 +2938,9 @@ def _append_poster_information(
             "text",
             {
                 "data-feature": feature,
-                "x": format_svg_number(right),
+                "x": format_svg_number(left),
                 "y": format_svg_number(baseline),
-                "text-anchor": "end",
+                "text-anchor": "start",
                 "font-family": SUMMARY_FONT if feature == "poster-title" else POSTER_BODY_FONT,
                 "font-size": size,
                 "font-weight": SUMMARY_FOOTER_WEIGHT
@@ -2977,7 +2969,7 @@ def _append_poster_information(
             block,
             baseline=explainer_baselines[index],
             canvas_width=canvas.width,
-            right_edge=right,
+            left_edge=left,
             type_scale=POSTER_INFORMATION_TYPE_SCALE,
             runs=runs,
             feature=("explainer", "problem-explainer")[index],
@@ -3075,8 +3067,8 @@ def render_known_best_summary_svg(
                     "regular-grid-extra-gap": format_svg_number(POSTER_GRID_GAP),
                     "physical-columns": str(canvas.physical_columns),
                     "physical-rows": str(canvas.physical_rows),
-                    "physical-row-pitch": format_svg_number(SUMMARY_ROW_PITCH),
-                    "grid-suffix-second-line-from-row": str(POSTER_INLINE_ROWS + 1),
+                    "physical-row-pitch": format_svg_number(canvas.row_pitch),
+                    "grid-suffix-layout": "inline",
                 }
                 if composite.placement == CompositePlacement.square_bound_triangle
                 else {}

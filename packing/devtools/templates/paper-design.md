@@ -1323,20 +1323,18 @@ it.
   other parameter and the fragment.
   The head bootstrap selects the view before the body is painted, and its Grid selection
   overrides the static Triangle markup.
-  **Wrapping, by one rule at every width.** Both views use the same scaled cell minimum,
-  `--site-atlas-cell-min` (6.4rem, 4.6rem under 40rem), and the same gaps,
-  `--site-atlas-cell-gap` (0.5rem, 0.35rem under 40rem). A line holds as many cells and
-  intervening gaps as the block allows, matching Grid’s capacity even when that is wider
-  than any bound row. Each bound row retains explicit non-grid and grid segments.
-  A complete row stays inline when both segments fit, with an extra separator of half
-  the displayed drawing’s width.
-  Otherwise the non-grid segment wraps at the left, followed by the whole grid segment
-  on separate lines aligned to the right, including its short last line.
-  Every physical line has the same caption-aware height and ordinary vertical gap,
-  including continuations and the boundary between bound rows.
-  Wrapping adds no extra vertical separator or logical-row padding.
+  **Complete rows at a readable scale.** Both views use the same scaled cell minimum,
+  `--site-atlas-cell-min` (6.4rem, 4.6rem under 40rem), and the same horizontal gaps,
+  `--site-atlas-cell-gap` (0.5rem, 0.35rem under 40rem). Grid’s viewport capacity sets
+  the drawing width in both views, even when it exceeds the longest bound row.
+  Triangle keeps every bound row complete, with its non-grid and grid segments side by
+  side and an extra separator of half the displayed drawing’s width.
+  Every perfect-square endpoint aligns to the canvas’s right edge.
+  Narrow screens pan the canvas inside the atlas without shrinking or breaking rows; the
+  initial scroll position shows the right edge before scripts run.
+  Each row reserves the same caption-aware height and vertical gap, 0.35 of a tile’s
+  width, with no blank logical-row padding.
   Rows 1 and 2 have no non-grid prefix and need no horizontal separator.
-  The next bound row starts a new line.
   The first retained axis-aligned grid packing in each row carries a two-line dimension
   and `GRID` marker above its ordinary count.
   Its threshold comes from the manifest’s canonical `source.kind = exact-grid` entries
@@ -1344,16 +1342,17 @@ it.
   unbroken grid suffix and exposes both half-open segments.
   This is separate from the derived drawing layer: row 8 starts at $n = 56$, and row 15
   at $n = 212$. The product legend describes the star without layout mechanics.
-  `place(n, per, starts)` computes each tile’s local segment line and column, tested
-  against an independent layout in Node (`tests/node/overview_atlas_view`). The script
-  writes custom properties; the stylesheet places the tiles within the two segment
-  containers, whose static metadata matches placement before atlas scripts run.
+  `place(n, per, starts)` computes each tile’s complete row and local segment column,
+  tested against an independent layout in Node (`tests/node/overview_atlas_view`). The
+  script writes custom properties; the stylesheet places the tiles within the two
+  segment containers, whose static metadata matches placement before atlas scripts run.
   Resize and the expander repeat the placement.
   Grid flattens the segment containers into its ordinary layout and hides grid prefixes.
   A tile shares the block’s width after reserving the gaps, and uses Grid’s drawing
   inset, so switching layouts preserves the drawing size.
-  At Medium the first hundred cases wrap at ten tiles to a line at 1280 pixels and four
-  on a 390-pixel phone; showing all 324 extends the rows at that same width.
+  At Medium, Grid holds ten tiles at 1280 pixels and four on a 390-pixel phone.
+  Triangle keeps that drawing width across ten complete rows, or eighteen when all 324
+  cases show. The controls and legend align left above the scroll frame.
   **The move.** A change of view, and the expander’s change in either view, moves every
   tile from where it was to where it is: one read of every tile’s box and of each
   element after the tiles, the change of layout, one read more, then one Web Animation a
@@ -1385,8 +1384,8 @@ it.
   It scales the shared cell minimum, `--site-atlas-cell-min`, so both views fit more
   tiles at Small and fewer at Large (`perLineAt`, tested in Node).
   At 1280 pixels a line holds 15 tiles at Small, 10 at Medium and 7 at Large, and on a
-  390-pixel phone 6, 4 and 3. Triangle wraps the non-grid segments at the left and
-  separated grid segments at the right, preserving the same drawing width.
+  390-pixel phone 6, 4 and 3. Triangle preserves that drawing width on complete,
+  right-aligned rows, with horizontal panning when needed.
   A change of size is a change of layout and moves every tile as a change of view does
   (**Atlas views**, above).
   The size is in the address as `?size=small` or `?size=large` (Medium has none),
@@ -1424,9 +1423,9 @@ it.
   verifies them against the index.
   Each tile opens the same case record, whose drawing is the house rendering.
   `devtools.measure_atlas_views` checks count centering, star clearance, first-grid
-  horizontal separation, uniform physical-line pitch, wrapping and both segment edges;
+  horizontal separation, uniform row pitch, complete rows and their right endpoints;
   `tests/test_site_atlas_views.py` checks the selected counts against the canonical
-  manifest and verifies the initial CSS layout too.
+  manifest and verifies the initial CSS layout and actual scroll-frame extent too.
 
 - **Action under a table or grid.** Where one control follows a table or a grid, it is
   the site’s one action button, `.site-action`, in a centred `.site-action-row`: the
@@ -1464,8 +1463,9 @@ it.
   expanded or not, since a step loads the neighbouring record in place and closing
   returns focus to the cell pressed.
   Without scripting the button’s row stays `hidden`, since it would do nothing.
-  In Triangle, expanding adds bound rows through row 18, whose 35 tiles wrap under the
-  same cell minimum and gap rule.
+  In Triangle, expanding adds complete bound rows through row 18, whose 35 tiles retain
+  the same drawing size and horizontal separator.
+  The canvas widens inside its frame.
   The new cases fade in, and any tiles whose positions change move as they do on a
   change of view (**Atlas views**, above).
 

@@ -49,7 +49,7 @@ type AtlasView = "grid" | "triangle";
 type AtlasSize = "small" | "medium" | "large";
 
 /**
- * Where a case stands in the triangle for the tiles a line holds: its row k, its line
+ * Where a case stands in the complete right-aligned triangle: its row k, its line
  * from the top of the triangle, its column from the left, and whether its line opens a
  * row after the first.
  */

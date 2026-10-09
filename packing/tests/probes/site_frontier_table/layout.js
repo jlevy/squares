@@ -29,6 +29,12 @@ async (/** @type {{rows: string[]}} */ { rows }) => {
       throw new Error(`invalid drawing dimensions for ${id}`);
     }
   }
+  // Decoded drawings can reveal new font runs after a resize. Measure the final
+  // font metrics and table layout rather than the fallback frame.
+  table.getBoundingClientRect();
+  await document.fonts.ready;
+  await new Promise((resolve) => requestAnimationFrame(resolve));
+  await new Promise((resolve) => requestAnimationFrame(resolve));
   /** What scrolls the table sideways: its nearest ancestor that clips or scrolls. */
 
   const frame = (() => {

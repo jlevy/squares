@@ -21,6 +21,7 @@ import pytest
 import tinycss2
 
 from devtools import (
+    build_known_best_atlas,
     check_published_site,
     paper_links,
     render_n11_lower_bounds_explainer,
@@ -1187,8 +1188,19 @@ def test_the_atlas_figure_carries_the_shared_version_at_its_own_data_commit() ->
         assert footer is not None, composite.name
         drawn_from = re.search(r'name="data-revision">([0-9a-f]{40})</sqpack:value>', text)
         assert drawn_from is not None, composite.name
-        assert footer.group(1) == edition_at(drawn_from.group(1)), composite.name
-        assert footer.group(1).rsplit("-", 1)[0] == PUBLICATION_EDITION.rsplit("-", 1)[0]
+        identity = build_known_best_atlas.retained_identity(text)
+        assert identity.data_revision == drawn_from.group(1)
+        assert identity.stamp == edition_at(drawn_from.group(1)), composite.name
+        canvas = next(
+            canvas
+            for canvas in build_known_best_atlas.COMPOSITES
+            if canvas.spec.svg_name == composite.name
+        )
+        expected_footer = (
+            identity.poster_stamp if canvas.information_in_corner else identity.stamp
+        )
+        assert footer.group(1) == expected_footer, composite.name
+        assert identity.stamp.rsplit("-", 1)[0] == PUBLICATION_EDITION.rsplit("-", 1)[0]
 
 
 def test_the_credits_print_the_papers_own_version_and_not_the_sites(

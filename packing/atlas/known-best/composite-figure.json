@@ -2,7 +2,7 @@
   "figure": {
     "composites": [
       {"columns":10,"layout":"10 by 10, row-major n=1..100","range":{"count":100,"first_n":1,"last_n":100},"rows":10,"square_count":5050,"stem":"known-best-1-100","totals":{"degree_derived_here":84,"degree_known":97,"degree_recorded_upstream":13,"exact_value_known":97,"lower_bound_correction":16,"lower_bound_first_proved_here":0,"lower_bound_recent_result":81,"only_known_numerically":3,"proved_optimal":45,"rigidity_catalogue_annotated":2,"rigidity_established":12,"rigidity_known":14}},
-      {"columns":35,"layout":"35 by 18, left-aligned square-bound triangle n=1..324","range":{"count":324,"first_n":1,"last_n":324},"rows":18,"square_count":52650,"stem":"known-best-1-324","totals":{"degree_derived_here":247,"degree_known":292,"degree_recorded_upstream":45,"exact_value_known":292,"lower_bound_correction":219,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":32,"proved_optimal":77,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}}
+      {"columns":35,"layout":"35 by 18, right-aligned square-bound triangle n=1..324","range":{"count":324,"first_n":1,"last_n":324},"rows":18,"square_count":52650,"stem":"known-best-1-324","totals":{"degree_derived_here":247,"degree_known":292,"degree_recorded_upstream":45,"exact_value_known":292,"lower_bound_correction":219,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":32,"proved_optimal":77,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}}
     ],
     "entries": [
       {

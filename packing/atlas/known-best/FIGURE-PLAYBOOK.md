@@ -347,20 +347,18 @@ center, in opposite directions.
 The corpus publishes two figures of itself: the 10-by-10 **figure** of `n = 1..100`, and
 the triangular **poster** of the whole corpus, `n = 1..324`. They share a builder, a
 record, a palette and a card design.
-The poster’s row $k$ holds $n = (k-1)^2 + 1$ through $k^2$, starting in the leftmost
-column. The increasing rows leave the upper-right corner free for a right-aligned
-information block. Eighteen logical rows cover the catalogue’s complete range, with
-thirty-five cards in the final row.
-The first sixteen keep their segments inline; the last two place complete grid suffixes
-on second right-aligned lines.
+The poster’s row $k$ holds $n = (k-1)^2 + 1$ through $k^2$. Each whole row is
+right-aligned, leaving the upper-left corner free for a left-aligned information block.
+Eighteen complete rows cover the catalogue’s range, with thirty-five cards in the final
+row; no grid suffix moves onto a second line.
 A $k×k$ grid label in the separator marks each row’s first retained regular axis-aligned
 grid packing; the count stays in the ordinary card caption.
 The threshold comes from the canonical atlas manifest, not a count formula or the
 derived regularized view.
 Where an irregular prefix precedes the grid suffix, half a drawing width separates the
-segments by 79 units horizontally when inline.
-Wrapped segments use the ordinary 252-unit physical row pitch.
-All-grid rows keep their positions and place the marker in the left margin.
+segments by 79 units horizontally.
+All-grid rows receive no added gap and place their marker before the first card.
+The poster uses a 360-unit row pitch; the figure retains its 252-unit pitch.
 The figure keeps its 10-by-10 geometry, card scale and square encoding.
 Triangle bound captions use five decimal places rather than the figure’s six, with upper
 bounds rounded upward, lower bounds downward and exact equalities to nearest.
@@ -379,21 +377,20 @@ First $n$, last $n$, columns, filename stem and placement say what a figure draw
 The remaining geometry follows: rows, the canvas, the legend and footer baselines, the
 layout string, the manifest record and the figure record’s own legend totals.
 The triangle keeps the figure’s card and label sizes.
-Its first sixteen logical rows fit a thirty-one-column envelope; two later grid suffixes
-add second physical lines.
-Its cards start at $x = 180$, $y = 120$; a 60-unit strip before all-grid rows keeps
-their two-line dimension/`GRID` markers inside the 120-unit outside clearance.
-Its height follows twenty physical lines at a uniform 252-unit pitch and a 120-unit
-bottom margin. Wrapping adds a line at the same pitch.
-All informational text occupies the upper-right block at $x = 4681..7281$,
+Its eighteen complete logical rows fit a thirty-five-column envelope.
+The longest row’s cards start at $x = 180$; its first drawing starts at $x = 204$. Rows
+begin at $y = 120$ and share a 360-unit pitch, giving more vertical space without
+changing drawing or caption scale.
+The canvas includes 120-unit outside clearance for markers and top/bottom margins.
+All informational text occupies the upper-left block at $x = 204..2804$,
 $y = 120..2311$: title, all badge meanings and counts, hue and shade keys, explanation,
 construction credits and closing project details.
 The 2600-unit block uses 144-unit title type, 57-unit type for the two-line definition,
 and 48-unit type for every subsequent legend, credit and closing line, all in the same
 Arial-first body font at weight 700. The first two tilt swatches contain black 90° and
 45° labels, shared with the website and the grid figure.
-The information ends at $x = 7281$, exactly the right edge of the last drawing; card
-boundaries include additional caption room.
+The information starts at $x = 204$, exactly the left edge of the first drawing in the
+final row; card boundaries include additional caption room.
 The definition and every body line use normalized leading 1.50. All 48-unit lines have a
 72-unit baseline pitch, with clear gaps between sections.
 Rendering refuses lines wider than the block, overlapping documentation lines and text
@@ -422,40 +419,37 @@ data date, a middle dot and the generated edition follow at 1722. An ordinary bl
 separates that stamp from exactly “The Squares Project” at 1866 and
 “github.com/jlevy/squares” at 1938. Both final lines use the same 48-unit body font,
 weight 700 and 72-unit pitch as the legend and credits.
-They are plain black text without a hyperlink or PDF annotation; the address’s final
-glyph ends flush with the information block’s right edge.
+They are plain black text without a hyperlink or PDF annotation; both lines start at the
+information block’s left edge.
 The final line’s lower extent stays inside the block’s 2311-unit bottom.
-The rectangle clears row ten’s rightmost card by 102 units and ends 77 units above that
-row.
+The renderer checks the information rectangle against every card; all text stays inside
+the upper-left whitespace.
 The poster has no publication subtitle; its closing date is the date of the recorded
 data commit. The recent-result accent follows the upper construction, certified lower
 bound and optimality proof independently.
 A recent proof can color an optimality badge while its older construction’s upper-bound
 caption stays neutral.
-The shared row model declares separate non-grid and grid segments.
-In logical rows 17 and 18, the non-grid prefixes begin at $y = 4152, 4656$; the grid
-suffixes begin at $y = 4404, 4908$. All four physical lines use the ordinary 252-unit
-pitch. Suffixes begin at $x = 3679, 3451$ and share the final drawing’s right edge at
-$x = 7281$. The card envelope ends at $x = 7315$, $y = 5150$, leaving 120 units on the
-right and bottom of the $7435 × 5270$ canvas.
-Cards retain their logical row and column identities alongside their physical line
-indices.
-SVG metadata records 31 physical columns and 20 physical lines; the manifest and
-figure record keep their logical 35-column, 18-row description.
-The same pure segment plan supplies cards, markers, canvas dimensions and export
-receipts. Partial crops allocate only surviving segments, and generic row-major geometry
-needs no canonical preflight.
-The 120-unit outside clearance makes room for the marker text and top/bottom margins.
-The row pitch, packing drawings and card captions retain their original scale.
+The shared row model declares separate non-grid and grid segments, kept together on one
+line. Logical rows 17 and 18 begin at $y = 5880, 6240$. All rows share the final
+drawing’s right edge at $x = 8193$. The card envelope ends at $x = 8227$, $y = 6482$,
+leaving 120 units on the right and bottom of the $8347 × 6602$ canvas.
+Cards retain their logical row and column identities; physical and logical row counts
+both equal eighteen.
+SVG metadata records 35 physical columns and 18 physical lines, matching the manifest
+and figure record. The same pure segment plan supplies cards, markers, canvas dimensions
+and export receipts.
+Partial crops allocate only surviving segments, and generic row-major geometry needs no
+canonical preflight.
+The packing drawings and card captions retain their original scale.
 
 |  | figure | poster |
 | --- | --- | --- |
 | Cases | `n = 1..100` | `n = 1..324` |
-| Arrangement | 10 by 10, row-major | 18 logical rows on 20 physical lines, grid suffixes split in the last two |
-| Canvas | 2400 × 2896 units | 7435 × 5270 units |
+| Arrangement | 10 by 10, row-major | 18 complete right-aligned rows |
+| Canvas | 2400 × 2896 units | 8347 × 6602 units |
 | Squares drawn | 5,050 | 52,650 |
 | Rasters | 1x, 2x, link-preview card | 1x |
-| PDF page | 25 × 30.17 in | 77.45 × 54.90 in |
+| PDF page | 25 × 30.17 in | 86.95 × 68.77 in |
 
 The remaining fields are the decisions a figure of another size has to make: which
 rasters it publishes, whether it publishes a link-preview crop, and what it may leave

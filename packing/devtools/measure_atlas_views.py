@@ -5,12 +5,11 @@ layouts.
 The atlas is one set of tiles, a drawing of the best packing known for each case, that
 the reader sets as a grid or as a triangle (`templates/paper-design.md`, Atlas views),
 at a size of tile, Small, Medium or Large (`overview/atlas-view.js`). A tile carries the
-new-result star after its number where the case has a new result, and the regularized
-layer's badge before it where it is drawn from that view.
-The triangle's row k holds the 2k - 1 cases a square of side k is known to hold, starting
-at the left edge and ending at k squared. A row too long for the page wraps in reading
-order: every line starts at the left, every line but its last is full, and its last
-holds what is left over. This opens a built overview in Chromium and reports what the
+new-result star after its number where the case has a new result. Selected derived
+drawings are shown directly, without layer labels.
+The triangle keeps each complete row of 2k - 1 cases, ending at k squared, aligned to
+a common right edge. Its scroll frame pans wide rows at the same drawing scale as Grid.
+This opens a built overview in Chromium and reports what the
 browser made of that:
 
 - `layout` reports each view at each width, with the first hundred cases and with all of
@@ -19,7 +18,7 @@ browser made of that:
   the rows that wrap. With them it reports what a layout may not do (`layout_problems`):
   run past the window, set a tile outside the block or over another, break the order of
   the cases, cut a row into lines other than `row_lines` gives, or start any Triangle
-  line away from the block's left edge. Each layout is read at each size (`SIZES`), and
+  row away from the canvas's right edge. Each layout is read at each size (`SIZES`), and
   a tile's marks have their own faults (`mark_problems`): a star that runs over its
   number or leaves its tile, a
   badge that does either, and a number not centred in its tile.
@@ -171,27 +170,11 @@ def is_square(n: int) -> bool:
     return n >= 1 and math.isqrt(n) ** 2 == n
 
 
-def row_lines(k: int, per: int, first_grid: int | None = None) -> tuple[int, ...]:
-    """Tile counts in a bound row, allowing half a drawing before its grid suffix.
-
-    Keep a complete mixed row inline only when its two segments and extra gap fit.
-    Otherwise wrap the non-grid segment first, then the grid segment on separate
-    right-aligned lines. Without a threshold, use ordinary full lines.
-    """
+def row_lines(k: int, per: int, _first_grid: int | None = None) -> tuple[int, ...]:
+    """One complete bound row, independent of viewport capacity and grid threshold."""
     if k < 1 or per < 1:
         raise ValueError(f"no row {k} at {per} a line")
-    tiles = 2 * k - 1
-    prefix = tiles if first_grid is None else first_grid - (k - 1) ** 2 - 1
-    grid = tiles - prefix
-    if tiles + int(prefix > 0 and grid > 0) <= per:
-        return (tiles,)
-    lines: list[int] = []
-    for count in (prefix, grid):
-        remaining = count
-        while remaining:
-            lines.append(min(per, remaining))
-            remaining -= lines[-1]
-    return tuple(lines)
+    return (2 * k - 1,)
 
 
 def _lines(tiles: Sequence[dict[str, Any]]) -> list[list[dict[str, Any]]]:
@@ -207,8 +190,8 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
     """What is wrong with a settled layout, in either view: the page runs past the
     window, a tile stands outside the block or over another, or the cases are out of
     order reading left to right and top to bottom. In the triangle also: a row cut into
-    lines other than `row_lines` gives, non-grid lines off the left edge, separate grid
-    lines off the right edge, or a segment separator unlike half a drawing."""
+    lines other than `row_lines` gives, a row off the right edge of the pannable canvas,
+    or a segment separator unlike half a drawing."""
     problems: list[str] = []
     tiles: list[dict[str, Any]] = report["tiles"]
     if not tiles:
@@ -217,7 +200,11 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
         problems.append(f"{report['moving']} tiles are still in a move")
     if report["overflow"] > 0:
         problems.append(f"the page runs {report['overflow']}px past the window")
-    cells = report["cells"]
+    cells = (
+        report.get("canvas", report["cells"])
+        if report["view"] == "triangle"
+        else report["cells"]
+    )
     outside = [
         tile["n"]
         for tile in tiles
@@ -250,18 +237,8 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
         by_row.setdefault(k, []).append([tile["n"] for tile in line])
         if len({row_of(tile["n"]) for tile in line}) > 1:
             problems.append(f"the line of n = {line[0]['n']} holds two rows")
-        separated = 2 * k - 1 + int(starts.get(k, k * k + 1) > (k - 1) ** 2 + 1) > per
-        grid_line = separated and line[0]["n"] >= starts.get(k, k * k + 1)
-        edge = line[-1]["right"] if grid_line else line[0]["left"]
-        expected_edge = cells["right"] if grid_line else cells["left"]
-        if abs(edge - expected_edge) > EDGE:
-            side = "right" if grid_line else "left"
-            if grid_line:
-                problems.append(f"row {k}'s line of n = {line[0]['n']} misses the {side} edge")
-            else:
-                problems.append(
-                    f"row {k}'s line of n = {line[0]['n']} starts {edge - expected_edge}px in"
-                )
+        if abs(line[-1]["right"] - cells["right"]) > EDGE:
+            problems.append(f"row {k}'s line of n = {line[0]['n']} misses the right edge")
     for k, found in sorted(by_row.items()):
         if k * k > last:
             continue
@@ -270,19 +247,6 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
         if sizes != expected:
             problems.append(f"row {k} is set {sizes}, not {expected}")
     if "gap_px" in report:
-        by_n = {tile["n"]: tile for tile in tiles}
-        for k, n in starts.items():
-            first, previous = by_n[n], by_n.get(n - 1)
-            if previous is None or row_of(n - 1) != k:
-                continue
-            if abs(first["top"] - previous["top"]) <= EDGE:
-                continue
-            gap = first["top"] - previous["bottom"]
-            expected_gap = report["gap_px"]
-            if abs(gap - expected_gap) > EDGE:
-                problems.append(
-                    f"the vertical gap before n = {n} is {gap}px, not {expected_gap}px"
-                )
         for line in lines:
             for left, right in itertools.pairwise(line):
                 expected_gap = report["gap_px"]

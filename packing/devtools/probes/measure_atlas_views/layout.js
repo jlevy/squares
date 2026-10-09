@@ -10,7 +10,7 @@
 // marks under them, and for each tile its number's box and the boxes of the marks it
 // carries, the new-result star and any obsolete layer badge, each `null` where
 // the tile has none.
-() => {
+(/** @type {{pan?: 'start' | 'end'} | undefined} */ options) => {
   /** @param {number} value */
   const round = (value) => Math.round(value * 100) / 100;
   /** @param {Element} element */
@@ -31,9 +31,21 @@
   if (!(block instanceof HTMLElement) || !(cells instanceof HTMLElement)) {
     return null;
   }
+  if (options?.pan) {
+    cells.scrollLeft = options.pan === "start" ? -cells.scrollWidth : 0;
+  }
   const tiles = [...cells.querySelectorAll(".site-atlas-cell")].filter(
     (tile) => tile instanceof HTMLElement && tile.getClientRects().length > 0,
   );
+  const rows = [...cells.querySelectorAll(".site-atlas-row")].filter(
+    (row) => row.getClientRects().length > 0,
+  );
+  const first = rows[0];
+  const last = rows.at(-1);
+  const canvas =
+    block.dataset.atlasView === "triangle" && first && last
+      ? { ...box(first), bottom: box(last).bottom, height: box(last).bottom - box(first).top }
+      : box(cells);
   const moving = document
     .getAnimations()
     .filter(
@@ -61,8 +73,10 @@
     font_px: round(Number.parseFloat(getComputedStyle(tab).fontSize)),
   });
   const legend = block.querySelector("[data-atlas-legend]");
+  const viewStrip = block.querySelector("[data-atlas-views]");
   return {
     view: block.dataset.atlasView ?? null,
+    view_strip: viewStrip ? box(viewStrip) : null,
     size: block.dataset.atlasSize ?? null,
     per_line: Math.round(
       (cells.getBoundingClientRect().width + Number.parseFloat(getComputedStyle(cells).columnGap)) /
@@ -70,6 +84,15 @@
           Number.parseFloat(getComputedStyle(cells).columnGap)),
     ),
     cells: box(cells),
+    canvas,
+    frame: {
+      top: cells.getBoundingClientRect().top + cells.clientTop,
+      bottom: cells.getBoundingClientRect().top + cells.clientTop + cells.clientHeight,
+      client_top: cells.clientTop,
+      client_height: cells.clientHeight,
+    },
+    pan: { left: cells.scrollLeft, width: cells.scrollWidth, viewport: cells.clientWidth },
+    line_gap_px: rows[1] ? Number.parseFloat(getComputedStyle(rows[1]).marginBlockStart) : 0,
     gap_px: round(Number.parseFloat(getComputedStyle(cells).columnGap)),
     block: box(block),
     panel: {
@@ -106,6 +129,7 @@
                   value: swatch.getAttribute("data-value"),
                   label: swatch.textContent?.trim() ?? "",
                   fill: getComputedStyle(swatch).backgroundColor,
+                  ink: getComputedStyle(swatch).color,
                   ...box(swatch),
                 })),
               })),
