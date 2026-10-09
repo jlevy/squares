@@ -41,10 +41,10 @@ from sqpack.yamlio import load_yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parent
-PACKET = ROOT / "resources/web/couzo-extended-reports-2026-10-09"
+PACKET = ROOT / "resources/web/couzo-extended-reports-2026-10-08"
 REPOSITORY = "franciscouzo/square-packing"
-SOURCE_ID = "couzo-extended-range-reports-2026-10-09"
-SOURCE_KEY = "[Couzo extended-range reports 2026-10-09]"
+SOURCE_ID = "couzo-extended-range-reports-2026-10-08"
+SOURCE_KEY = "[Couzo extended-range reports 2026-10-08]"
 EVIDENCE = "E-couzo-extended-range-report"
 REVIEWED = "2026-10-09"
 LICENSING_REVIEW = "No redistribution permission or licence determination is asserted."

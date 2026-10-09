@@ -3053,12 +3053,12 @@ sources:
   notes: All named certificates and matching approximate inputs are retained under this exact revision.
     Source-only historical scope; source wrapper correction is separately pinned, with no acceptance
     or geometry replay transferred.
-- id: couzo-extended-range-reports-2026-10-09
+- id: couzo-extended-range-reports-2026-10-08
   title: Francisco Couzo's twenty decimal reports beyond the case corpus
   role: source-repository
   url: https://github.com/franciscouzo/square-packing/tree/ffd900dfff6d2674ad995359208c2f0714915c82
-  local: resources/web/couzo-extended-reports-2026-10-09
-  source_key: '[Couzo extended-range reports 2026-10-09]'
+  local: resources/web/couzo-extended-reports-2026-10-08
+  source_key: '[Couzo extended-range reports 2026-10-08]'
   scope:
     n_values:
     - 327
@@ -3086,9 +3086,9 @@ sources:
   disposition: current-report
   replay_disposition: case-specific
   represented_by:
-  - resources/web/couzo-extended-reports-2026-10-09/README.md
-  - resources/web/couzo-extended-reports-2026-10-09/acquisition/sources.json
-  claims_record: resources/web/couzo-extended-reports-2026-10-09/acquisition/sources.json
+  - resources/web/couzo-extended-reports-2026-10-08/README.md
+  - resources/web/couzo-extended-reports-2026-10-08/acquisition/sources.json
+  claims_record: resources/web/couzo-extended-reports-2026-10-08/acquisition/sources.json
   evidence:
   - E-couzo-extended-range-report
   notes: The source date is attributed GitHub commit metadata, not authenticated by the Git tree alone. All twenty complete decimal poses and their source identities are retained as derived facts.
@@ -5008,140 +5008,140 @@ superseded_reports:
     packet's geometry verification.
 beyond_horizon_claims:
 - n: 327
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '18.597249391205040'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 332
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '18.740417287559392'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 335
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '18.822875655543559'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 336
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '18.825571499868651'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 337
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '18.858391767640679'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 338
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '18.908632939046573'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 339
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '18.930103647693699'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 340
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '18.939879629586962'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 341
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '18.951882408731986'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 342
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '18.964706723440020'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 364
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.597249391207239'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 369
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.740417287556077'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 372
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.822875655616990'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 373
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.823062082850335'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 374
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.832356217038534'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 375
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.907052698737502'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 376
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.920279652318701'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 377
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.925720814343350'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 378
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.947426312032292'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 379
-  source_id: couzo-extended-range-reports-2026-10-09
+  source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.957538882118669'
   assurance: reported

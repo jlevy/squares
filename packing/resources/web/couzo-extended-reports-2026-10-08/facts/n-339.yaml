@@ -1725,8 +1725,8 @@ witness:
       geometry, certificate or optimality claim. Outside the retained 1..324 case corpus; no geometry
       replay.
   source:
-    key: '[Couzo extended-range reports 2026-10-09]'
-    path: packing/resources/web/couzo-extended-reports-2026-10-09/acquisition/sources.json
+    key: '[Couzo extended-range reports 2026-10-08]'
+    path: packing/resources/web/couzo-extended-reports-2026-10-08/acquisition/sources.json
     url: https://github.com/franciscouzo/square-packing/blob/ffd900dfff6d2674ad995359208c2f0714915c82/n339.txt
     retrieved: '2026-10-09'
     revision: ffd900dfff6d2674ad995359208c2f0714915c82
