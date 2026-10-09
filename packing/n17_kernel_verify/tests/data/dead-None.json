@@ -1,0 +1,26 @@
+{
+ "certificate": {
+  "seed_sha256": "402c05fec9681fbbf361bdfb898c6ea53f0a5157dc6f59fa8933bc2b4d7e9285",
+  "node_sha256": "d6338ce1776b90ac083200325e339046a64fd969e616a64a35b57d4d011a3dd6"
+ },
+ "mask": [
+  0,
+  1
+ ],
+ "cells": [
+  "a",
+  "b"
+ ],
+ "bins": 3,
+ "closure": {
+  "kind": "all_parent_poses_forbidden",
+  "owner": 0,
+  "step": 0
+ },
+ "closed": true,
+ "counts": {
+  "seed_points": 0,
+  "seed_rows": 6,
+  "steps": 1
+ }
+}

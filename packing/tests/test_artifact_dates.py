@@ -84,6 +84,11 @@ def test_a_papers_revised_date_is_the_day_its_article_last_changed() -> None:
             release.THRESHOLD_REVIEW_REVISED,
             "THRESHOLD_REVIEW_REVISED",
         ),
+        (
+            artifact_dates.PACKING_METHODS_ARTICLE,
+            release.PACKING_METHODS_REVISED,
+            "PACKING_METHODS_REVISED",
+        ),
     ):
         changed = artifact_dates.last_change(article)
         if changed is None:
@@ -120,6 +125,8 @@ def test_the_articles_named_here_are_the_ones_the_renderers_read() -> None:
     assert artifact_dates.OPTIMALITY_ARTICLE == render_n11_optimality_review.ARTICLE
     threshold = importlib.import_module("devtools.render_n11_threshold_bound_review")
     assert artifact_dates.THRESHOLD_ARTICLE == threshold.ARTICLE
+    methods = importlib.import_module("devtools.render_packing_methods")
+    assert artifact_dates.PACKING_METHODS_ARTICLE == methods.ARTICLE
 
 
 def test_a_stale_revised_date_is_reported_and_fails_the_check(
@@ -138,13 +145,16 @@ def test_a_stale_revised_date_is_reported_and_fails_the_check(
     assert artifact_dates.main([]) == 0
 
 
-def test_the_optimality_papers_front_prints_the_two_dates_the_rules_hold() -> None:
-    """The dates the tool holds are the ones the paper's front prints, in one line, the
-    proof's day first and the review's last; the paper reads both from the release
-    module, so neither can be typed into the article and stand still under it."""
+def test_the_optimality_papers_front_prints_publication_proof_and_revision_dates() -> None:
+    """The review's first publication leads its front's dates line, followed by the
+    source proof's day and the review's last revision. Each reads from its release
+    record, preserving the distinction between the review and the proof it explains."""
     front = render_n11_optimality_review.FRONT
+    published = release.OPTIMALITY_REVIEW_HISTORY[-1].first_published
+    assert published == "September 30, 2026"
     proof, review = artifact_dates.optimality_dates()
     assert [(dated.label, dated.day) for dated in front.dates] == [
+        ("First published", published),
         ("Original proof", proof),
         ("Last revised", review),
     ]
@@ -223,6 +233,12 @@ def test_a_built_pdf_is_held_to_its_papers_revised_date(
     )
     built.write_bytes(dated(CHROMIUM, artifact_dates.threshold_revised()))
     assert artifact_dates.main(["--pdf", str(built), "--revised", "threshold"]) == 0
+    built.write_bytes(
+        dated(CHROMIUM, artifact_dates.written_date(release.PACKING_METHODS_REVISED))
+    )
+    assert artifact_dates.main(["--pdf", str(built), "--revised", "packing-methods"]) == 0
+    built.write_bytes(CHROMIUM)
+    assert artifact_dates.main(["--pdf", str(built), "--revised", "packing-methods"]) == 1
     with pytest.raises(SystemExit):
         artifact_dates.main(["--pdf", str(built)])
 

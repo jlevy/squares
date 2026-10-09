@@ -271,8 +271,8 @@ def test_the_handover_is_sampled_where_the_section_changes_in_each_way() -> None
     wainwright = ("Wainwright 1979, Squares in Squares", None, None)
     assert cited_lines(entries["19"]) == {"upper": wainwright}
     assert cited_lines(entries["1"]) == {}
-    # The one bound that is both reported and confirmed says both in its one note, which is
-    # why the note exists: it used to be drawn as two marks in two styles (`think-qzmf`).
+    # The historical fixture keeps both notes; the renderer must preserve its admitted
+    # vocabulary. Current-data confirmation is qualified by the citation producer.
     assert cited_lines(entries["29"])["upper"] == (
         "Schadt & Ellsworth, Squares in Squares",
         None,
@@ -280,6 +280,26 @@ def test_the_handover_is_sampled_where_the_section_changes_in_each_way() -> None
     )
     # 4 is the first n cited at all; 5 gains an upper line, and 18 changes a reference.
     assert citation_steps(entries, N_MAX) == (4, 5, 18)
+
+
+@pytest.mark.parametrize(("n", "earlier_result"), [(29, "T-009"), (123, "T-098")])
+def test_the_current_handover_does_not_label_an_earlier_ceiling_as_confirmation(
+    n: int,
+    earlier_result: str,
+) -> None:
+    document = json.loads(CITATIONS.read_text(encoding="utf-8"))
+    entry = next(row for row in document["citations"]["entries"] if row["n"] == n)
+    assert earlier_result not in entry["upper"]["confirmed_by"]
+    if n == 123:
+        assert entry["upper"]["results"] == ["T-115"]
+        assert entry["upper"]["assurance"] == "verified"
+        assert entry["upper"]["confirmed_by"] == ["T-115"]
+        assert cited_lines(entry)["upper"][2] == "(confirmed T-115)"
+    else:
+        assert earlier_result in entry["upper"]["results"]
+        assert entry["upper"]["assurance"] == "reported"
+        assert entry["upper"]["confirmed_by"] == []
+        assert cited_lines(entry)["upper"][2] == "(reported)"
 
 
 def test_a_lower_bound_names_the_published_work_it_corrects(tmp_path: Path) -> None:

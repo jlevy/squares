@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-07'
 verifiers:
   # --- External programs -------------------------------------------------------------
   - id: V-tokoharu-verify-cpp
@@ -1467,3 +1467,139 @@ verifiers:
       each finding is present at the first commit and gone at the fix. Decides nothing
       about Valid7.
     source: [packing/devtools/probe_valid7_fixes.py]
+
+  - id: V-squish-upper-bound-packets
+    program: devtools.squish_upper_bound_packets
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the bounded complete SQUISH source roster, converts rational half-angle facts to exact
+      rational-corner witnesses without changing the side, drives both exact deciders, and checks source/fact/witness/receipt
+      bindings, full pair counts, upward display ceilings and the two geometric controls.
+    independence_record: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    note: Written from the published rational certificate format and the geometry. No SQUISH producer
+      executable is retained or run. The native exact_verify and independent rational-corner checker decide
+      feasibility; the wrapper checks their inputs, recorded results and provenance. The two first-party
+      routes share the converted witness, YAML and Python rational arithmetic, not geometry code.
+
+  - id: V-squish-followup-packets
+    program: devtools.squish_followup_packets
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_followup_packets.py
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the pinned update source and complete reviewed replay, binds revision-specific
+      fact/witness/receipt inputs, full pair and control coverage, typed replay provenance and upward
+      display ceilings; explicitly reruns both deciding routes only with --replay.
+    independence_record: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+    note: The wrapper shares strict admission and rational half-angle conversion with the original
+      packet while keeping a distinct revision namespace. No SQUISH producer executable is run. The
+      native exact_verify and independently written rational-corner checker decide geometry; both
+      share input corners and Python rational arithmetic. Bounded XZ decoding and witness metadata
+      checks are premises, not additional geometric deciders.
+
+  - id: V-squish-second-update-confirmation
+    program: devtools.squish_second_update_confirmation
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_second_update_confirmation.py
+    - packing/devtools/squish_second_update_house_links.py
+    - packing/devtools/squish_second_update_packets.py
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the complete immutable second-update roster, all historical full replay inputs and
+      outcomes, accepted complete review records and the explicit canonical metadata transformation. Checks
+      bounded decoding, full coverage, safe ceilings and exact house witness custody; fresh dual decisions
+      require explicit --replay.
+    independence_record: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+    note: This wrapper checks premises and receipt applicability; sqpack exact_verify and the independent
+      rational-corner checker decide geometry. Their shared SAT theorem, Fraction, YAML and source-to-corner
+      conversion are disclosed. Earlier packet constants, evidence and review scopes remain unchanged.
+  - id: V-evand-arrangement-receipts
+    program: devtools.evand_arrangement_reports
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    summary: Binds all three complete source certificates and all nine full deciding inputs/native results;
+      explicit replay repeats both project geometric deciders.
+    source:
+    - packing/devtools/evand_arrangement_reports.py
+
+  - id: V-rehwaldt-n68-verify
+    program: verify.py
+    author: Seth Rehwaldt
+    provenance: external
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/verify.py.txt
+    versions:
+    - sha256: 911b9822334636ffc49472e4df32e38cb162efbfad9a4684879f006b1c90e7f9
+      note: fded686668e29258dad2eb29d0482fa3fd51bd6b
+    summary: Decides all 68 rational unit squares, containment and 2278 unordered pairs.
+    note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two
+      programs use the same SAT theorem and arithmetic; their distinct code does not establish independence
+      from the source producer. Analytic root and dual programs are outside this replay.
+
+  - id: V-rehwaldt-n68-independent-support-check
+    program: independent_support_check.py
+    author: Seth Rehwaldt
+    provenance: external
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/independent_support_check.py.txt
+    versions:
+    - sha256: 48e1ae336855ba5cc05c3fd161bf51ef71cab24ebc33ae590be040f78a932423
+      note: fded686668e29258dad2eb29d0482fa3fd51bd6b
+    summary: Decides all 68 rational unit squares, containment and 2278 unordered pairs.
+    note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two
+      programs use the same SAT theorem and arithmetic; their distinct code does not establish independence
+      from the source producer. Analytic root and dual programs are outside this replay.
+
+  - id: V-refinement-custody
+    program: devtools.refinement_custody
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/refinement_custody.py
+    - packing/devtools/refinement_packets.py
+    - packing/devtools/refinement_house_links.py
+    summary: Admits all 13 complete actual input/result jobs, immutable source conversion, process outcomes,
+      full control coverage and three complete house witnesses.
+    note: Offline admission reconciles retained executions and runs no geometric predicate.

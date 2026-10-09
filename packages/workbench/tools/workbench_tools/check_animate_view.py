@@ -37,6 +37,7 @@ from PIL import Image
 from playwright.sync_api import Page, sync_playwright
 
 from workbench_tools import animate_view_contract
+from workbench_tools.browser_page import open_page
 from workbench_tools.build_candidate import CITATIONS, stage_spelling
 from workbench_tools.build_site import build
 from workbench_tools.probes import probe
@@ -1086,7 +1087,7 @@ def check(page_path: Path, citations: Path = CITATIONS) -> str:
                 else None
             ),
         )
-        page.goto(page_path.resolve().as_uri())
+        open_page(page, page_path)
         page.wait_for_timeout(500)
         done = []
         for section in SECTIONS:

@@ -17,7 +17,10 @@ parameters Sections 5 and 6 fix. A step whose quantities are rational is decided
 exact ``Fraction`` arithmetic; a step with a root, a logarithm or a trigonometric
 function is decided on ``mpmath`` intervals at 60 significant digits, and holds only when
 the intervals decide it. It checks the arithmetic of the chain, not the lemmas that
-supply its inputs.
+supply its inputs. Version 1.1 remains the default; explicit ``--version v1.2``
+selects a separate audit of the new cutoff, quantization and excess bounds, full
+Section 6 bracket and all-k constants. The new geometric lemmas, scale coverage,
+measurability and Daniel-dependent hypothesis need a separate proof review.
 
 Run from ``packing/``::
 
@@ -348,6 +351,255 @@ def check_constants(
     return tuple(checks)
 
 
+STATED_V12: dict[int, tuple[str, str, str, str]] = {
+    9: ("10.6067", "30.418", "0.0353", "1.61e-5"),
+    13: ("12.7476", "36.493", "0.0319", "1.93e-5"),
+}
+
+
+def check_constants_v12(
+    overlap: int = 9,
+    *,
+    q_star: str = "0.32",
+    a_bound: str | None = None,
+    bracket_bound: str | None = None,
+    kappa: str | None = None,
+    cutoff: str = "236000",
+    gamma_bound: str | None = None,
+    shift_bound: str = "13.06675",
+    lead_bound: str = "1.99954",
+    room_bound: str = "0.49997",
+    conditional_kappa: str = "0.0541",
+) -> tuple[Check, ...]:
+    """Version 1.2 arithmetic from the primary text, conditional on its lemmas.
+
+    The two overlap routes are separate. The Daniel-dependent coefficient is checked
+    only on the nine-overlap route and remains conditional on the stated theorem.
+    Parameter overrides expose independently decidable negative controls. None of these
+    arithmetic verdicts proves the geometric lemmas, domain coverage or measurability.
+    """
+    iv.dps = DIGITS
+    a_text, bracket_text, kappa_text, gamma_text = STATED_V12.get(overlap, STATED_V12[9])
+    a = F(a_bound or a_text)
+    bracket = F(bracket_bound or bracket_text)
+    coefficient = F(kappa or kappa_text)
+    gamma_cap = F(gamma_bound or gamma_text)
+    scale, shift, lead, room = map(F, (cutoff, shift_bound, lead_bound, room_bound))
+    positive_parameters = (
+        a,
+        bracket,
+        coefficient,
+        gamma_cap,
+        scale,
+        shift,
+        lead,
+        room,
+        F(q_star),
+        F(conditional_kappa),
+    )
+    if overlap <= 0 or any(value <= 0 for value in positive_parameters):
+        raise ValueError("overlap and all arithmetic bounds must be positive")
+    if scale.denominator != 1:
+        raise ValueError("the scale cutoff must be an integer")
+    delta, epsilon, omega, ramp = map(F, ("1e-5", "0.002", "0.0002", "1.265e-5"))
+    sqrt2 = iv.sqrt(_i(2))
+    c_line = 2 * sqrt2
+    alpha = 1 / (2 * scale)
+    alpha_cap = F("2.119e-6")
+    gap_cap = F("2.12e-6")
+    checks: list[Check] = []
+
+    def record(name: str, pinpoint: str, value, *, holds: bool) -> None:
+        checks.append(Check(name, "v1.2 " + pinpoint, holds, _show(value)))
+
+    a_value = 4 * iv.sqrt(_i(F(overlap) / F(q_star))) / _i(2 - F("3e-6"))
+    record("overlap-derived A < stated A", "Lemma 4.13", a_value, holds=_below(a_value, a))
+    record("A >= 2", "Lemma 4.13", a_value, holds=_at_most(F(2), a_value))
+    margin = F("1e-5") * (2 - F("1e-5")) / 40 - F(q_star) * F("3e-6") * (2 - F("3e-6")) / 4
+    record("three-micro-radian Bv margin", "Lemma Bv", margin, holds=margin >= 0)
+    record("column inclination <= 2.119e-6", "Lemma Q", alpha, holds=alpha <= alpha_cap)
+    record("column inclination < Bv cap 3e-6", "Lemmas Q/Bv", alpha, holds=alpha < F("3e-6"))
+    x = _i("0.001")
+    sec_ratio = (1 / iv.cos(x) - 1) / (x * x)
+    record(
+        "secant excess <= 0.50001 at 0.001",
+        "Lemma Eline",
+        sec_ratio,
+        holds=_at_most(sec_ratio, F("0.50001")),
+    )
+    drift = F("0.50001") * (1 + alpha / scale) / (4 * scale)
+    record("quantization drift < 5.3e-7", "Lemma Q", drift, holds=drift < F("5.3e-7"))
+    record(
+        "lower endpoint drift <= 1.053e-5",
+        "Lemma Q",
+        delta + F("5.3e-7"),
+        holds=delta + F("5.3e-7") <= F("1.053e-5"),
+    )
+    ramp_upper = F("1.053e-5") + alpha_cap
+    record(
+        "ramp endpoint < w0 = 1.265e-5",
+        "Lemma Q",
+        ramp_upper,
+        holds=ramp_upper <= F("1.2649e-5") < ramp,
+    )
+    gap = iv.cos(_i(alpha_cap)) - iv.sin(_i(alpha_cap))
+    record("middle band > 1 - 2.12e-6", "Lemmas Q/GZ", gap, holds=_below(1 - gap_cap, gap))
+    tan_ratio = iv.tan(_i(alpha_cap)) / _i(alpha_cap)
+    record(
+        "tan alpha < 1.000001 alpha",
+        "Lemma GZ",
+        tan_ratio,
+        holds=_below(tan_ratio, F("1.000001")),
+    )
+    widen = F("3.02") * delta * F("1.000001")
+    record("ramp widening <= 3.04e-5", "Lemma GZ", widen, holds=widen <= F("3.04e-5"))
+    rho = iv.cos(_i(alpha_cap)) + iv.sin(_i(alpha_cap))
+    bad_room = _i("2.01") * _i(alpha_cap) + (1 + (_i(alpha_cap) + rho) / _i(scale)) * _i(
+        1 + F("3.04e-5")
+    ) / (2 * gap)
+    record(
+        "exceptional columns < 0.500023",
+        "Lemma GZ",
+        bad_room,
+        holds=_below(bad_room, F("0.500023")),
+    )
+    room_lower = 1 - gap_cap - F("0.500023")
+    record("remaining room > g0", "Lemma GZ", room_lower, holds=room < room_lower)
+
+    k_min = F(10) ** 12
+    upper_scale = (1 - epsilon) * (k_min / 2 - 3)
+    record(
+        "integer scale interval nonempty",
+        "Section 6",
+        upper_scale - 1,
+        holds=upper_scale - 1 > scale,
+    )
+    record(
+        "height domain below k/2 - 1",
+        "Section 6",
+        upper_scale,
+        holds=upper_scale < k_min / 2 - 1,
+    )
+    log_shift = iv.log(_i(2 / (1 - epsilon))) + iv.log(_i(scale + 1))
+    record(
+        "height logarithmic shift < 13.066741",
+        "Section 6",
+        log_shift,
+        holds=_below(log_shift, F("13.066741")),
+    )
+    k_tail = iv.log(_i(1 - 6 / k_min))
+    record("log(1 - 6/k) > -1e-11", "Section 6", k_tail, holds=_below(F("-1e-11"), k_tail))
+    record(
+        "full height shift < stated shift",
+        "Section 6",
+        log_shift - k_tail,
+        holds=_below(log_shift - k_tail, shift),
+    )
+    line_alpha = 1 / (c_line * _i(scale))
+    record(
+        "line inclination < 1.4982e-6",
+        "Section 6/Bh",
+        line_alpha,
+        holds=_below(line_alpha, F("1.4982e-6")),
+    )
+    record(
+        "line/column threshold ordering",
+        "Section 6",
+        c_line * _i(1 - epsilon),
+        holds=_below(F(2), c_line * _i(1 - epsilon)),
+    )
+    gamma = _i("1.00002") * (
+        _i(a) / (c_line * _i(scale)) + 1 / (2 * c_line * c_line * _i(delta * scale * scale))
+    )
+    record(
+        "integrated excess Gamma < stated cap",
+        "Section 6",
+        gamma,
+        holds=_below(gamma, gamma_cap),
+    )
+    tiny = 1 / (omega * scale)
+    scale_error = F("2.01") / (epsilon * scale)
+    alpha_error = alpha / delta
+    record("waste-scale reciprocal < 0.021187", "Section 6", tiny, holds=tiny < F("0.021187"))
+    record(
+        "column-scale correction < 0.0042585",
+        "Section 6",
+        scale_error,
+        holds=scale_error < F("0.0042585"),
+    )
+    record(
+        "inclination/delta < 0.21187",
+        "Section 6",
+        alpha_error,
+        holds=alpha_error < F("0.21187"),
+    )
+    bracket_value = (
+        _i("0.021187")
+        + sqrt2 * _i(a)
+        + _i("1.0042585") * _i(a + F("0.21187")) / (sqrt2 * _i(room * (1 - epsilon)))
+        + _i(gamma_cap)
+    )
+    record(
+        "full bracket < stated bracket",
+        "Section 6",
+        bracket_value,
+        holds=_below(bracket_value, bracket),
+    )
+    factor = 2 * (1 - omega) * (1 - 2 * ramp)
+    record("twice (1 - omega0) h0 >= stated lead", "Section 6", factor, holds=lead <= factor)
+    low_k_formula = _i(lead / bracket) * (iv.log(_i(k_min)) - _i(shift))
+    record(
+        "explicit formula < 1 below 10^12",
+        "Section 6",
+        low_k_formula,
+        holds=_below(low_k_formula, F(1)),
+    )
+    minimum_coefficient = lead / (bracket + lead * shift)
+    record(
+        "max(1,F)/log k supports all-k coefficient",
+        "Section 6/Remark 7.3",
+        minimum_coefficient,
+        holds=coefficient < minimum_coefficient,
+    )
+    limit = lead / bracket
+    slope_cap = F("0.0657") if overlap == 9 else F("0.0547")
+    record(
+        "asymptotic slope > rounded statement",
+        "Theorem 1.1/Remark 7.5",
+        limit,
+        holds=slope_cap < limit,
+    )
+    threshold_four = shift + 4 * bracket / lead
+    if overlap == 9:
+        record(
+            "fixed-c threshold slope < 15.22",
+            "Remark 7.4",
+            bracket / lead,
+            holds=bracket / lead < F("15.22"),
+        )
+        conditional = F(conditional_kappa)
+        record(
+            "conditional low-k bound at k = 5",
+            "Corollary 1.3",
+            _i(conditional) * iv.log(_i(5)),
+            holds=_below(_i(conditional) * iv.log(_i(5)), F(1)),
+        )
+        conditional_minimum = 4 / threshold_four
+        record(
+            "conditional max(4,F)/log k supports 0.0541",
+            "Corollary 1.3",
+            conditional_minimum,
+            holds=conditional < conditional_minimum,
+        )
+        record(
+            "four-unit transition < 73.92",
+            "Corollary 1.3/Remark 7.4",
+            threshold_four,
+            holds=threshold_four < F("73.92"),
+        )
+    return tuple(checks)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     parser.add_argument(
@@ -357,9 +609,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         default=9,
         help="the overlap bound: 9 (Lemma 4.10) or 13 (Lemma 4.9)",
     )
+    parser.add_argument("--version", choices=("v1.1", "v1.2"), default="v1.1")
     parser.add_argument("--json", type=Path, default=None, help="write the checks here")
     args = parser.parse_args(argv)
-    checks = check_constants(args.overlap)
+    checks = (
+        check_constants(args.overlap)
+        if args.version == "v1.1"
+        else check_constants_v12(args.overlap)
+    )
     for check in checks:
         verdict = "OK  " if check.holds else "FAIL"
         print(f"{verdict} [{check.pinpoint}] {check.name} ({check.value})")
@@ -374,6 +631,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "passed": passed,
             "checks": [asdict(check) for check in checks],
         }
+        if args.version == "v1.2":
+            payload["version"] = args.version
         args.json.write_text(json.dumps(payload, indent=1) + "\n", encoding="utf-8")
     return 0 if passed else 1
 

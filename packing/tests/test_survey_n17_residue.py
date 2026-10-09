@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import itertools
 import json
+from dataclasses import replace
 from functools import cache
 from pathlib import Path
 
 import numpy as np
 import pytest
+from numpy.typing import NDArray
 
 from devtools import select_n17_sub_patterns as selector
 from devtools import survey_n17_residue as survey
@@ -268,6 +270,7 @@ def test_shards_partition_the_draw_in_mask_order() -> None:
 def test_ten_shards_cover_the_distance_two_frame_once(tmp_path: Path) -> None:
     """H-273's 95-orbit frame in ten shards: each places the control first, and the shards
     are disjoint and together hold all 95 orbits."""
+    survey.clear_population_cache()
     seen: list[int] = []
     for k in range(10):
         output = tmp_path / f"shard-{k}.json"
@@ -280,3 +283,130 @@ def test_ten_shards_cover_the_distance_two_frame_once(tmp_path: Path) -> None:
         assert header["population"]["frame"]["drawn"] == len(drawn) - 1 in (9, 10)
         seen.extend(row["mask"] for row in drawn[1:])
     assert len(seen) == len(set(seen)) == 95
+
+
+def ring_geometry() -> selector.Geometry:
+    return selector.make_geometry(
+        [box(float(k), float(k) + 0.2, 0.0, 0.2) for k in range(8)],
+        [f"corner-{k}" for k in range(8)],
+        group=list(ring_group()),
+    )
+
+
+def assert_populations_equal(first: survey.Population, second: survey.Population) -> None:
+    assert first.flags == second.flags
+    np.testing.assert_array_equal(first.alive, second.alive)
+    assert first.representatives == second.representatives
+    assert first.features == second.features
+    assert first.strata == second.strata
+
+
+@pytest.mark.parametrize(("size", "flags"), [(4, []), (4, [0b11]), (5, [0b10100])])
+def test_population_cache_matches_the_complete_ring_oracle(size: int, flags: list[int]) -> None:
+    survey.clear_population_cache()
+    geometry = ring_geometry()
+    result = survey.population(geometry, flags, size, None)
+    forbidden = {
+        selector.image_mask(flag, permutation)
+        for flag in flags
+        for permutation in geometry.group
+    }
+    alive = [
+        selector.mask_of(cells)
+        for cells in itertools.combinations(range(8), size)
+        if not any(flag & selector.mask_of(cells) == flag for flag in forbidden)
+    ]
+    representatives = sorted(
+        {
+            min(selector.image_mask(mask, permutation) for permutation in geometry.group)
+            for mask in alive
+        }
+    )
+    assert sorted(int(mask) for mask in result.alive) == sorted(alive)
+    assert result.representatives == representatives
+    assert sorted(mask for masks in result.strata.values() for mask in masks) == representatives
+    assert set(result.features) == set(representatives)
+    assert result.flags == flags
+
+
+@pytest.mark.parametrize("changed", ["names", "group", "flags", "size", "endpoint"])
+def test_population_cache_rechecks_every_combinatorial_input(
+    monkeypatch: pytest.MonkeyPatch, changed: str
+) -> None:
+    survey.clear_population_cache()
+    geometry, flags, size, endpoint = ring_geometry(), [], 4, 0b1111
+    uncached = survey.surviving_orbits
+    calls = 0
+
+    def counted(
+        cells: int, group: tuple[tuple[int, ...], ...], flags: list[int], size: int
+    ) -> tuple[NDArray[np.int64], list[int]]:
+        nonlocal calls
+        calls += 1
+        return uncached(cells, group, flags, size)
+
+    monkeypatch.setattr(survey, "surviving_orbits", counted)
+    survey.population(geometry, flags, size, endpoint)
+    if changed == "names":
+        geometry = replace(geometry, names=("interior-0", *geometry.names[1:]))
+    elif changed == "group":
+        geometry = replace(geometry, group=(tuple(range(8)),))
+    elif changed == "flags":
+        flags = [0b11]
+    elif changed == "size":
+        size = 5
+    else:
+        endpoint = 0b10101010
+    result = survey.population(geometry, flags, size, endpoint)
+    repeated = survey.population(geometry, flags, size, endpoint)
+    assert calls == 2
+    assert_populations_equal(result, repeated)
+    survey.clear_population_cache()
+    fresh = survey.population(geometry, flags, size, endpoint)
+    assert calls == 3
+    assert_populations_equal(result, fresh)
+
+
+def test_population_cache_detaches_every_mutable_payload() -> None:
+    survey.clear_population_cache()
+    geometry, flags = ring_geometry(), []
+    first = survey.population(geometry, flags, 4, 0b1111)
+    expected = survey.population(geometry, flags, 4, 0b1111)
+    first.flags.append(-1)
+    first.alive[:] = -1
+    first.representatives.append(-1)
+    mask = next(iter(first.features))
+    first.features[mask]["composition"]["corner"] = -1
+    first.features[mask]["distance"] = -1
+    next(iter(first.strata.values())).append(-1)
+    assert flags == []
+    assert_populations_equal(survey.population(geometry, flags, 4, 0b1111), expected)
+
+
+def test_population_cache_normalizes_flags_without_changing_the_public_roster(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    survey.clear_population_cache()
+    geometry = ring_geometry()
+    uncached = survey.surviving_orbits
+    calls = 0
+
+    def counted(
+        cells: int, group: tuple[tuple[int, ...], ...], flags: list[int], size: int
+    ) -> tuple[NDArray[np.int64], list[int]]:
+        nonlocal calls
+        calls += 1
+        return uncached(cells, group, flags, size)
+
+    monkeypatch.setattr(survey, "surviving_orbits", counted)
+    first_flags = [0b10100, 0b11, 0b10100]
+    second_flags = [0b11, 0b10100]
+    first = survey.population(geometry, first_flags, 4, None)
+    second = survey.population(geometry, second_flags, 4, None)
+    assert calls == 1
+    assert first.flags == first_flags
+    assert second.flags == second_flags
+    np.testing.assert_array_equal(first.alive, second.alive)
+    assert first.representatives == second.representatives
+    assert first.features == second.features
+    assert first.strata == second.strata

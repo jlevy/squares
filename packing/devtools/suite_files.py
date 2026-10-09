@@ -46,6 +46,12 @@ assignment:
     uv run --frozen --all-extras --group dev python -m devtools.suite_files show
     uv run --frozen --all-extras --group dev python -m devtools.suite_files check
 
+For newly added modules, `admit-local REPORT.json ... --files PATH ...` adds only
+their measured costs to the existing record. Reports must come from successful,
+unsharded, unfiltered runs of exactly those whole modules. Keep the raw reports beside
+the record's admission provenance. This local subset is recorded separately from the
+historical hosted cohorts; their weights, sources and planning capacities are preserved.
+
 A file the record does not name carries no weight in the packing, so when many land the
 partition is unbalanced and nothing says so. A sharded run therefore warns when more than
 `UNRECORDED_SHARE_WARNING` of the test files its shard is assigned are unrecorded. It
@@ -67,13 +73,15 @@ import sys
 import zlib
 from collections import defaultdict
 from collections.abc import Mapping
+from copy import deepcopy
 from dataclasses import dataclass
 from fnmatch import fnmatch
 from functools import cache
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import TYPE_CHECKING, Any, Final
 
 import pytest
+from strif import atomic_write_text
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Sequence
@@ -95,6 +103,28 @@ REPORT_SCHEMA: Final = "packing.squares:TestFileCosts/2"
 UNRECORDED_SHARE_WARNING: Final = 0.10
 #: What a test file is called where no pytest configuration says otherwise.
 _PYTHON_FILES: Final = ("test_*.py",)
+#: The behavioural lane's configured file pattern and pytest's class/function defaults.
+#: Alternate rules can hide tests before pytest emits any deselection event.
+_LOCAL_COLLECTION_PATTERNS: Final = {
+    "python_files": ["test_*.py"],
+    "python_classes": ["Test"],
+    "python_functions": ["test"],
+}
+_LOCAL_COLLECTION_CONTROLS: Final = {
+    "ignore": [],
+    "ignore_glob": [],
+    "deselect": [],
+    "confcutdir": None,
+    "noconftest": False,
+    "pyargs": False,
+    "keepduplicates": False,
+    "lf": False,
+    "stepwise": False,
+    "stepwise_skip": False,
+    "setuponly": False,
+    "setupplan": False,
+    "collectonly": False,
+}
 #: The GitHub environment a report carries, so a record can name the runs it came from.
 _PROVENANCE_ENVIRONMENT: Final = (
     "PACKING_VALIDATED_SHA",
@@ -429,9 +459,38 @@ class FileCostReport:
         self.seconds: defaultdict[str, float] = defaultdict(float)
         self.tests: defaultdict[str, set[str]] = defaultdict(set)
         self.rootpath = Path.cwd()
+        self.module_scope: dict[str, Any] = {}
+        self.collected: defaultdict[str, int] = defaultdict(int)
+        self.deselected = 0
 
     def pytest_sessionstart(self, session: pytest.Session) -> None:
         self.rootpath = session.config.rootpath
+        config = session.config
+        invocation = config.invocation_params.dir
+        self.module_scope = {
+            "requested_files": [repository_path(invocation / name) for name in config.args],
+            "keyword": config.getoption("keyword"),
+            "markexpr": config.getoption("markexpr"),
+            "collection_patterns": {
+                name: config.getini(name) for name in _LOCAL_COLLECTION_PATTERNS
+            },
+            "collection_overrides": [
+                value
+                for value in config.getoption("override_ini", default=[]) or []
+                if value.split("=", 1)[0].strip() in _LOCAL_COLLECTION_PATTERNS
+            ],
+            "collection_controls": {
+                name: config.getoption(name, default=default) or default
+                for name, default in _LOCAL_COLLECTION_CONTROLS.items()
+            },
+        }
+
+    def pytest_collection_finish(self, session: pytest.Session) -> None:
+        for item in session.items:
+            self.collected[repository_path(item.path)] += 1
+
+    def pytest_deselected(self, items: list[pytest.Item]) -> None:
+        self.deselected += len(items)
 
     def pytest_runtest_logreport(self, report: pytest.TestReport) -> None:
         if report.when not in {"setup", "call", "teardown"}:
@@ -450,6 +509,11 @@ class FileCostReport:
             environment=os.environ,
             exit_status=int(exitstatus),
         )
+        document["module_scope"] = {
+            **self.module_scope,
+            "collected_tests": dict(sorted(self.collected.items())),
+            "deselected_tests": self.deselected,
+        }
         self.target.parent.mkdir(parents=True, exist_ok=True)
         self.target.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
 
@@ -707,6 +771,159 @@ def record(
     return document
 
 
+def _local_module_names(names: Sequence[str]) -> set[str]:
+    """An explicit, unique roster of whole test modules under the behavioural roots."""
+    roots = tuple(repository_path(root) + "/" for root in DEFAULT_ROOTS)
+    result: set[str] = set()
+    for name in names:
+        path = PurePosixPath(name)
+        if (
+            not name.startswith(roots)
+            or path.as_posix() != name
+            or any(part in {".", ".."} for part in path.parts)
+            or "::" in name
+            or path.suffix != ".py"
+            or not path.name.startswith("test_")
+        ):
+            raise SuiteFilesError(
+                f"local admission needs whole behavioural test modules: {name!r}"
+            )
+        if name in result:
+            raise SuiteFilesError(f"local admission repeats module {name!r}")
+        result.add(name)
+    if not result:
+        raise SuiteFilesError("local admission needs an explicit non-empty module roster")
+    return result
+
+
+def admit_local(
+    existing: Mapping[str, Any],
+    reports: Sequence[Mapping[str, Any]],
+    *,
+    files: Sequence[str],
+    report_sources: Sequence[str],
+) -> dict[str, Any]:
+    """Append measured new modules, preserving every historical record field and weight.
+
+    Collection metadata is required on this route: an exit code alone cannot distinguish
+    a whole-module run from a successful filtered selection. Hosted and sharded reports
+    belong to `record`, never to an incremental local admission.
+    """
+    names = _local_module_names(files)
+    if existing.get("schema") != COSTS_SCHEMA or not isinstance(existing.get("files"), dict):
+        raise SuiteFilesError("local admission needs an existing cost record")
+    overlap = names & set(existing["files"])
+    if overlap:
+        raise SuiteFilesError(
+            f"local admission cannot replace recorded modules: {sorted(overlap)}"
+        )
+    if not reports or len(reports) != len(report_sources):
+        raise SuiteFilesError("local admission needs a source path for every report")
+    if len(set(report_sources)) != len(report_sources):
+        raise SuiteFilesError("local admission repeats a report source")
+    observations: defaultdict[str, list[float]] = defaultdict(list)
+    sources: list[dict[str, Any]] = []
+    for position, (report, source) in enumerate(zip(reports, report_sources, strict=True), 1):
+        observed = _validated_files(report, position=position)
+        if "shard" not in report or report["shard"] is not None:
+            raise SuiteFilesError("local admission requires explicitly unsharded reports")
+        if any(key.startswith("GITHUB_") for key in report["provenance"]):
+            raise SuiteFilesError("local admission refuses hosted provenance")
+        if set(observed) != names:
+            raise SuiteFilesError(
+                "local admission report does not cover exactly the explicit module roster"
+            )
+        scope = report.get("module_scope")
+        if not isinstance(scope, Mapping):
+            raise SuiteFilesError(
+                "local admission report has no whole-module collection metadata"
+            )
+        requested = scope.get("requested_files")
+        if (
+            not isinstance(requested, list)
+            or any(not isinstance(name, str) for name in requested)
+            or _local_module_names(requested) != names
+        ):
+            raise SuiteFilesError(
+                "local admission requested files do not match its module roster"
+            )
+        if scope.get("keyword") != "" or scope.get("markexpr") != "":
+            raise SuiteFilesError("local admission refuses keyword or marker filtering")
+        controls = scope.get("collection_controls")
+        if (
+            scope.get("collection_patterns") != _LOCAL_COLLECTION_PATTERNS
+            or scope.get("collection_overrides") != []
+            or not isinstance(controls, Mapping)
+            or set(controls) != set(_LOCAL_COLLECTION_CONTROLS)
+            or any(
+                type(controls[name]) is not type(default) or controls[name] != default
+                for name, default in _LOCAL_COLLECTION_CONTROLS.items()
+            )
+        ):
+            raise SuiteFilesError(
+                "local admission refuses missing or nonstandard collection rules"
+            )
+        deselected = scope.get("deselected_tests")
+        if type(deselected) is not int or deselected != 0:
+            raise SuiteFilesError("local admission refuses missing or deselected tests")
+        collected = scope.get("collected_tests")
+        expected_counts = {row["file"]: row["tests"] for row in report["files"]}
+        if (
+            not isinstance(collected, Mapping)
+            or any(type(count) is not int or count < 1 for count in collected.values())
+            or dict(collected) != expected_counts
+        ):
+            raise SuiteFilesError(
+                "local admission reported tests do not match whole-module collection"
+            )
+        for name, seconds in observed.items():
+            observations[name].append(seconds)
+        sources.append(
+            {
+                "report": source,
+                "provenance": dict(report["provenance"]),
+                "tests": report["tests"],
+            }
+        )
+    additions = {
+        name: round(math.exp(sum(math.log(value) for value in values) / len(values)), 3)
+        if all(value > 0 for value in values)
+        else 0.0
+        for name, values in sorted(observations.items())
+    }
+    document = deepcopy(dict(existing))
+    document["files"].update(additions)
+    document["files"] = dict(sorted(document["files"].items()))
+    admissions = document.setdefault("local_admissions", [])
+    if not isinstance(admissions, list):
+        raise SuiteFilesError("existing local_admissions is not a list")
+    admissions.append(
+        {
+            "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+            "aggregation": "per-file-geometric-mean",
+            "files": sorted(names),
+            "reports": sources,
+        }
+    )
+    return document
+
+
+def read_local_admission(
+    costs_path: Path, report_paths: Sequence[Path], module_paths: Sequence[Path]
+) -> dict[str, Any]:
+    """Read validated inputs before an admission command may replace its output."""
+    _ = load_costs(costs_path)
+    missing = [str(path) for path in module_paths if not path.is_file()]
+    if missing:
+        raise SuiteFilesError(f"local admission module paths do not exist: {missing}")
+    return admit_local(
+        json.loads(costs_path.read_text(encoding="utf-8")),
+        [read_report(path) for path in report_paths],
+        files=[repository_path(path) for path in module_paths],
+        report_sources=[repository_path(path) for path in report_paths],
+    )
+
+
 def _check(costs: RecordedCosts, roots: Iterable[Path], threshold: float) -> int:
     """Print every shard's unrecorded share and files; 1 when any is over `threshold`."""
     files = lane_files(roots)
@@ -760,6 +977,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             "the current record's"
         ),
     )
+    admitting = commands.add_parser(
+        "admit-local", help="append measured new modules without replacing hosted costs"
+    )
+    _ = admitting.add_argument("reports", nargs="+", type=Path)
+    _ = admitting.add_argument("--files", nargs="+", type=Path, required=True)
+    _ = admitting.add_argument("--costs", type=Path, default=COSTS)
+    _ = admitting.add_argument("--output", type=Path, default=None)
     _ = recording.add_argument("--output", type=Path, default=COSTS)
     _ = recording.add_argument(
         "--target-ceilings",
@@ -797,7 +1021,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 arguments.root or DEFAULT_ROOTS,
                 _share_threshold(arguments.max_unrecorded_share),
             )
-        if arguments.command == "record":
+        if arguments.command == "admit-local":
+            document = read_local_admission(arguments.costs, arguments.reports, arguments.files)
+            output = arguments.output or arguments.costs
+            atomic_write_text(output, json.dumps(document, indent=2) + "\n", encoding="utf-8")
+            costs = load_costs(output)
+        elif arguments.command == "record":
             shards = int(arguments.shards or load_costs().shards)
             try:
                 targets = (

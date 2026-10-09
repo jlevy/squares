@@ -13,15 +13,16 @@ from __future__ import annotations
 import base64
 import html
 import itertools
+import json
 import math
 import re
 import textwrap
-from collections.abc import Collection, Iterable, Sequence
+from collections.abc import Collection, Iterable, Mapping, Sequence
 from datetime import date, timedelta
 from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import Literal, NamedTuple, get_args
+from typing import Any, Literal, NamedTuple, get_args
 from urllib.parse import urlsplit
 
 from devtools import repo_links
@@ -43,11 +44,13 @@ from devtools.render_overview import (
     N11_LOWER_BOUNDS_EXPLAINER,
     N11_OPTIMALITY_REVIEW,
     N11_THRESHOLD_BOUND_REVIEW,
+    PACKING_METHODS,
     RESULTS_PAGE,
     SITE_PAGES,
     paper_path,
+    paper_record,
 )
-from devtools.render_overview import PAPERS as SERIES
+from devtools.render_overview import PAPERS as PAPER_RECORDS
 from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, superseded
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES
@@ -201,11 +204,19 @@ def card_hero(src: str) -> str:
     picture covers from its top edge. It is decorative (`alt=""`), since the card's own
     label and value say what it shows, and loads lazily. `src` is a file served beside
     the page, never an address off the site."""
+    from devtools.render_n11_lower_bounds_explainer import COMPOSITE_ASSETS  # noqa: PLC0415
+    from devtools.render_overview import image_dimensions  # noqa: PLC0415
+
     if "://" in src or src.startswith("//"):
         raise SystemExit(f"{src}: a card's hero is served beside the page, never fetched")
+    source = next((path for path in COMPOSITE_ASSETS if path.name == src), None)
+    if source is None:
+        raise SystemExit(f"{src}: a card's hero must be a published atlas image")
+    width, height = image_dimensions(source)
     return (
         '<span class="site-card-hero">'
-        f'<img src="{_esc(src)}" alt="" loading="lazy" decoding="async"></span>'
+        f'<img src="{_esc(src)}" alt="" width="{width}" height="{height}" '
+        'loading="lazy" decoding="async"></span>'
     )
 
 
@@ -233,16 +244,17 @@ SECTION_CARD_SIZES: dict[str, CardSize] = {
 }
 
 #: A section set in lines of its own, as counts of its cards in order, where one
-#: wrapping row would not set them as they are meant to read: the six page cards stand
-#: one, three and two, the Frontier page alone at the top, then the three parts of the
+#: wrapping row would not set them as they are meant to read: the seven page cards stand
+#: one, three and three, the Frontier page alone at the top, then the three parts of the
 #: n = 11 series on one line, one card per paper in reading order (the series plan,
-#: 2026-10-05), then the tutorial and the workbench. They stood one, two and two while
+#: 2026-10-05), then the methods tutorial, the first-principles tutorial and the workbench.
+#: They stood one, two and two while
 #: the site had two papers (the owner, 2026-10-02, `think-ns3d`; two over three from
 #: `think-ec5k` the same day, the Frontier page's card last). Each line is a row of its
 #: own, and none sets more cards to a line than the longest line holds, so the lines
 #: share one column width, a third of the frame's. The stylesheet holds each longest
 #: line here to a rule.
-SECTION_CARD_LINES: dict[str, tuple[int, ...]] = {"pages": (1, 3, 2)}
+SECTION_CARD_LINES: dict[str, tuple[int, ...]] = {"pages": (1, 3, 3)}
 
 
 #: Elements with no end tag, which open nothing a parser must later close.
@@ -541,14 +553,13 @@ def _dl(rows: list[tuple[str, str]]) -> str:
 
 
 def _detail(result: Result) -> str:
-    """A result's claim, composition, next rung, why it matters, novelty label and
-    records: the short form of what its row opens to, which the page itself carries
-    (`result_row`), and what a reader without scripts or off the network sees."""
+    """The claim, significance, novelty and record links carried by a result's row.
+
+    This preview remains available without scripts or a network connection. The full
+    result fragment retains composition and next-rung details (`result_overview.head`).
+    """
     record = result.record
     rows = [("Claim", prose_html(record["claim"]))]
-    for key, label in (("composition", "Composition"), ("next_rung", "Next rung")):
-        if record.get(key):
-            rows.append((label, prose_html(record[key])))
     rows.append(("Significance", prose_html(record["significance"]["rationale"])))
     meaning = novelty_labels().get(result.novelty, "")
     rows.append(
@@ -579,7 +590,13 @@ def _records(result: Result) -> str:
     )
 
 
-def result_row_popover_body(result: Result, overview: Overview) -> str:
+def result_row_popover_body(
+    result: Result,
+    overview: Overview,
+    *,
+    amendments: Sequence[Mapping[str, Any]] = (),
+    registered_paths: Collection[str] = (),
+) -> str:
     """The body of a result row's popover, the one source of it for every table that
     lists results: the recent table on the overview and the results page's table. It is
     the result's whole overview (`result_overview.result_popover_html`): its case drawn,
@@ -593,11 +610,14 @@ def result_row_popover_body(result: Result, overview: Overview) -> str:
     # `result_overview` reads this module for the chips and the film's facts.
     from devtools import result_overview  # noqa: PLC0415
 
-    return result_overview.result_popover_html(result, overview)
+    return result_overview.result_popover_html(
+        result, overview, amendments=amendments, registered_paths=registered_paths
+    )
 
 
-#: Where the result overviews are served, under the site's root: a directory of
-#: fragments, one a result, which are not pages. Not `results/`: `results.html` is still
+#: Where complete result pages are served under the site's root. The historic
+#: constant name remains for callers that also use their articles in popovers.
+#: Not `results/`: `results.html` is still
 #: served, as the forwarder where `RESULTS.md` was a page, and a host may serve either
 #: at `/results`.
 RESULT_FRAGMENTS = "result"
@@ -671,14 +691,22 @@ def result_row(result: Result, *, trigger: str, starred: bool = False) -> RowDet
     leads nowhere new. A `starred` row's name ends ", new result", what its star says
     (`new_result_star`)."""
     name = f"{result.id}: {plain_text(result.summary)}"
-    return row_detail(
+    detail = row_detail(
         f"pop-result-{result.id.lower()}",
         name=f"{name}, {NEW_RESULT}" if starred else name,
         trigger=trigger,
         label=result.id,
         title=tex_bounds(result.summary),
-        body=_detail(result),
+        body=(
+            f'<p><a href="{result_fragment(result.id)}">Read the complete result record</a></p>'
+        ),
         source=result_fragment(result.id),
+        action=(result_fragment(result.id), "Open Result Record"),
+    )
+    return RowDetail(
+        detail.attributes,
+        f'<a class="site-row-open" href="{result_fragment(result.id)}">{trigger}</a>',
+        detail.popover,
     )
 
 
@@ -952,7 +980,7 @@ def result_text(result: Result) -> str:
     """A result's summary as its Result cell sets it, in both tables of results: the
     register's headline, its math typeset. It links nowhere: the row is the result's
     own in either table, and opens its popover."""
-    return tex_bounds(result.summary)
+    return f'<a href="{result_fragment(result.id)}">{tex_bounds(result.summary)}</a>'
 
 
 def credit_cell(credit: str) -> str:
@@ -1022,24 +1050,50 @@ def result_table_row(
     return row, detail.popover
 
 
+def retired_result_aliases() -> dict[str, str]:
+    """Exact withdrawn result addresses retained by the published URL register."""
+    from devtools.site_urls import load_registry  # noqa: PLC0415
+
+    return {
+        Path(row.path).stem: row.path
+        for row in load_registry()
+        if row.status == "withdrawn"
+        and row.kind == "result"
+        and not row.pattern
+        and re.fullmatch(r"result/t-\d+\.html", row.path)
+    }
+
+
 def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool) -> str:
-    """A table of results as a page carries it: the tools bar (`result_filters`), every
-    result as one flat table under `result_head`, newest first (`recent_results`),
-    sortable and filterable (`overview/table.js`), and the rows' popovers after it.
+    """The complete results table or the overview's static recent selection.
 
-    Both pages' tables are this one, and they are two filters of it. They differ in
-    `defaults`, where the bar starts, with a row outside them `hidden` in the HTML, so
-    the first paint is already filtered; and in `here`, which is the results page, where
-    each row is the result's own address (`result_table_row`). Every row opens its
-    popover, which carries its records, in both, and a row links to the results page only
-    where its status names the results that supersede it (`supersession_marks`).
+    The complete page keeps every result and its filtering tools, with rows outside
+    the defaults hidden at first paint. The overview emits only rows selected by its
+    published reference date and RECENT_DEFAULTS, followed by an ordinary link to the
+    complete table. Supported query state travels through that link.
 
-    No heading divides the rows. Whose a result is, and what it builds on, is read from
-    its credit (`credit_cell`), and the Source filter narrows the table to this
-    project's results or to others'.
+    Both use the same cells and record popovers. Complete-table rows own their
+    canonical fragment IDs; overview rows name the same result with data-result.
     """
+
     results = recent_results(overview)
     reference = reference_date(overview)
+    if not here:
+        results = [
+            result for result in results if shown_by_default(result, defaults, reference)
+        ]
+    aliases = retired_result_aliases()
+    retired = json.dumps(aliases, separators=(",", ":")) if not here else ""
+    notices = (
+        "".join(
+            f'<p class="site-withdrawn-result" id="{_esc(name)}">'
+            f'{_esc(name.upper())} was withdrawn. <a href="{_esc(path)}">'
+            f"{_esc(name.upper())} withdrawal explanation</a>.</p>"
+            for name, path in aliases.items()
+        )
+        if here
+        else ""
+    )
     body = []
     popovers = []
     for result in results:
@@ -1049,12 +1103,24 @@ def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool
         body.append(row)
         popovers.append(popover)
     return (
-        f'<div class="site-wide">{result_filters(overview, results, defaults)}'
-        '<div class="site-table-wrap">'
+        '<div class="site-wide">'
+        + (
+            result_filters(overview, results, defaults)
+            if here
+            else f'<p class="site-recent-scope">{len(results)} recent results of significance '
+            "S3 or higher, "
+            "from the last 180 days, excluding superseded results. "
+            '<a href="all-results.html" data-all-results '
+            f'data-result-ids="{_esc(" ".join(r.id.lower() for r in overview.results))}" '
+            f'data-retired-results="{_esc(retired)}">'
+            "Browse and filter every "
+            "result</a>.</p>"
+        )
+        + '<div class="site-table-wrap">'
         '<table class="kpress-table site-table site-results" data-site-table>'
         f"{result_head()}"
         f"<tbody>{''.join(body)}</tbody></table></div>"
-        f"{rung_legend(here=here)}{''.join(popovers)}</div>"
+        f"{rung_legend(here=here)}{notices}{''.join(popovers)}</div>"
     )
 
 
@@ -1304,10 +1370,11 @@ def _ladder_grid(heads: dict[str, str], label: str, frame: str) -> str:
 
 
 def recent_results(overview: Overview) -> list[Result]:
-    """Every result, newest first: by the date the table shows, then by id. It is the
-    order of both tables of results. What makes the overview's table recent is its
-    bar's defaults (`RECENT_DEFAULTS`), which a reader can change, and never a cut the
-    page makes for them."""
+    """Every result ordered by displayed date, then ID, newest first.
+
+    The complete table uses this whole list. The overview selects its static recent
+    subset from it with RECENT_DEFAULTS and the publication's reference date.
+    """
     return sorted(overview.results, key=lambda r: (first_day(r.dated[1]), r.id), reverse=True)
 
 
@@ -1542,7 +1609,8 @@ OPTIMALITY_PAPER = paper_path(N11_OPTIMALITY_REVIEW)
 #: The site's papers, in the order the Papers page shows them, one large card each
 #: (`paper_cards`): the three parts of the n = 11 series in reading order, I, II, III,
 #: each labelled by its part (`render_overview.PAPERS`, the one registry a new paper is
-#: entered in), then the tutorial, the background to all three, whose description is
+#: entered in), then the standalone methods tutorial and the first-principles tutorial,
+#: the background to the series, whose description is
 #: `TUTORIAL.md`'s own opening, its audience and what it owns.
 PAPERS: tuple[Paper, ...] = (
     *(
@@ -1552,7 +1620,16 @@ PAPERS: tuple[Paper, ...] = (
             title=SERIES_CARDS[record.slug][0],
             description=SERIES_CARDS[record.slug][1],
         )
-        for record in SERIES
+        for record in PAPER_RECORDS
+        if record.part is not None
+    ),
+    Paper(
+        href=paper_path(PACKING_METHODS),
+        label=paper_record(PACKING_METHODS).label,
+        title="How record square packings are found",
+        description=(
+            "How seeds, search, local refinement and exact checks produce record upper bounds."
+        ),
     ),
     Paper(
         href="tutorial.html",
@@ -1611,10 +1688,7 @@ PAGES: tuple[tuple[str, str, str, str], ...] = (
         "Every case from n = 1 to 324",
         "Reported and verified bounds side by side, with their sources.",
     ),
-    *(
-        (paper.href, paper.label, paper.title, paper.description)
-        for paper in (EXPLAINER, THRESHOLD_REVIEW, OPTIMALITY)
-    ),
+    *((paper.href, paper.label, paper.title, paper.description) for paper in PAPERS[:-1]),
     (
         "tutorial.html",
         "Tutorial",
@@ -1674,6 +1748,27 @@ def hero() -> str:
 #: every source repository in the source-coverage register.
 OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
+        "https://github.com/wand125/square-packing",
+        "wand125",
+        "Canonical certificate and checker repository; historical source pins remain valid.",
+    ),
+    (
+        "https://github.com/lollipoll/couzo-five-exact-certificates",
+        "Seth Rehwaldt",
+        (
+            "Rational refinements of Couzo's packings; complete finite certificates at "
+            "n = 105 and 292 are replayed here (T-117)."
+        ),
+    ),
+    (
+        "https://github.com/lollipoll/certified-square-packing-68",
+        "Seth Rehwaldt",
+        (
+            "An exact finite rational refinement of Couzo's n = 68 packing, replayed "
+            "here (T-118). Its analytic root and dual programs remain outside that replay."
+        ),
+    ),
+    (
         "https://github.com/evand/square-packing",
         "Evan Daniel",
         (
@@ -1708,6 +1803,11 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/franciscouzo/square-packing",
         "Francisco Couzo",
         "Improved packings for 49 counts from n = 68 to 307.",
+    ),
+    (
+        "https://github.com/itsnaka/squish-certs",
+        "Nate Chaoweeraprasit",
+        "Exact rational certificates for SQUISH upper-bound packings.",
     ),
     (
         "https://github.com/griffcass/square-packing",
@@ -1807,7 +1907,7 @@ CATALOGUE_SITES: tuple[tuple[str, str, str, str], ...] = (
     ),
 )
 
-#: The other places off GitHub that the record cites results from, ranked with the
+#: Other cited result pages, including first-party GitHub issue reports, ranked with the
 #: projects on GitHub: each one's address, its name (a post's is its title, as the post
 #: gives it), its author as the record credits them, and what it holds. They are the
 #: source-coverage register's two sources off GitHub that are not a catalogue,
@@ -1817,6 +1917,12 @@ CATALOGUE_SITES: tuple[tuple[str, str, str, str], ...] = (
 #: reviews to a card, here or in `OTHER_PROJECTS`, and every address here and in
 #: `CATALOGUE_SITES` to one the record cites.
 OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
+    (
+        "https://github.com/jlevy/squares/issues/401#issuecomment-6031977107",
+        "SQUISH packing of 153 squares",
+        "Nate Chaoweeraprasit",
+        "The supplemental rational certificate submitted with the SQUISH packings.",
+    ),
     (
         "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",
         "Proposing a Better Lower Bound for n = 17 Square Packing",
@@ -2521,9 +2627,12 @@ def _atlas_cell(n: int, status: str, *, regularized: bool = False, new: bool = F
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.render_case_pages import case_url  # noqa: PLC0415
 
-    square = " data-atlas-square" if math.isqrt(n) ** 2 == n else ""
-    root = frontier.REGULARIZED_RENDERINGS if regularized else frontier.RENDERINGS
-    drawing = frontier.packing_svg(n, units=ATLAS_UNITS, root=root)
+    row = math.isqrt(n - 1) + 1
+    square = " data-atlas-square" if row * row == n else ""
+    position = (
+        f' style="--r:{row};--c:{row * row - n};--o:{int(row > 1 and n == (row - 1) ** 2 + 1)}"'
+    )
+    drawing = frontier.drawing_img(n, regularized=regularized, size=ATLAS_UNITS)
     view = f", {ATLAS_REGULARIZED} view" if regularized else ""
     name = f"n = {n}{view}, {_esc(status)}{f', {NEW_RESULT}' if new else ''}"
     badge = atlas_layer_mark() if regularized else ""
@@ -2531,7 +2640,7 @@ def _atlas_cell(n: int, status: str, *, regularized: bool = False, new: bool = F
     return (
         f'<a class="site-atlas-cell" href="{case_url(n)}" data-case="{n}" '
         f'data-atlas-n="{n}"{square} '
-        f'data-status="{_esc(status)}" aria-label="{name}">'
+        f'data-status="{_esc(status)}" aria-label="{name}"{position}>'
         f'{drawing}<span class="site-atlas-n">{badge}{n}{star}</span></a>'
     )
 
@@ -2547,9 +2656,7 @@ def _atlas_tablist(
     extra: str = "",
 ) -> str:
     """One strip of the atlas's tabs: a tablist of buttons, `default` selected and the
-    strip's one stop in the tab order, each controlling the box of tiles. It ships
-    `hidden`, as the expander's row does: without the script it would do nothing, and
-    the script shows it once the tiles are placed."""
+    strip's one stop in the tab order, each controlling the static box of tiles."""
     tabs = "".join(
         f'<button type="button" role="tab" id="{ids}-{key}" {data}="{key}" '
         f'aria-selected="{"true" if key == default else "false"}" '
@@ -2559,7 +2666,7 @@ def _atlas_tablist(
     )
     return (
         f'<div class="site-tabs {classes}" role="tablist" aria-label="{_esc(name)}" '
-        f"{extra}hidden>{tabs}</div>"
+        f"{extra.rstrip()}>{tabs}</div>"
     )
 
 
@@ -2569,8 +2676,8 @@ def atlas_view_tabs() -> str:
     one set of tiles in place, where the Visualize section's are links to two pages.
 
     The first view is selected and is the only tab in the page's tab order; the arrow
-    keys move between the two (`overview/atlas-view.js`). The strip ships `hidden`
-    (`_atlas_tablist`).
+    keys move between the two (`overview/atlas-view.js`). The strip is present in the
+    first response.
     """
     return _atlas_tablist(
         ATLAS_VIEWS,
@@ -2588,7 +2695,7 @@ def atlas_size_tabs() -> str:
     or Large (think-ht8t): the view tabs' strip, a tablist of three buttons that resize
     the one set of tiles in place, in either view. Medium is selected and is the strip's
     one stop in the tab order; the arrow keys move between the three
-    (`overview/atlas-view.js`), and the strip ships `hidden`, as the view tabs do."""
+    (`overview/atlas-view.js`). The strip is present in the first response."""
     return _atlas_tablist(
         ATLAS_SIZES,
         default=ATLAS_SIZE,
@@ -2608,8 +2715,8 @@ def atlas_legend(*, regularized: bool) -> str:
     regularized drawing is only ever shown labelled as one (the atlas README); the
     Regularized tab keyed the badge until the owner dropped the choice of drawing on
     2026-10-04 (think-k8x9). Each mark's words are a span of their own, as in the
-    tables' legend (`rung_legend`): no shipped face carries the star. It ships `hidden`
-    with the tabs, since it keys tiles only the script places."""
+    tables' legend (`rung_legend`): no shipped face carries the star. The key arrives
+    with the static tiles and their controls."""
     star = (
         f'<span class="site-atlas-legend-item">{atlas_star()} <span>{NEW_RESULT}</span></span>'
     )
@@ -2622,7 +2729,7 @@ def atlas_legend(*, regularized: bool) -> str:
     )
     return (
         '<p class="site-atlas-legend" role="note" '
-        f'aria-label="What a tile{APOSTROPHE}s marks mean" data-atlas-legend hidden>'
+        f'aria-label="What a tile{APOSTROPHE}s marks mean" data-atlas-legend>'
         f"{star}{view}</p>"
     )
 
@@ -2636,23 +2743,23 @@ def atlas_grid() -> str:
 
     The block is rendered in the grid view (`data-atlas-view`), under tabs that switch
     it to the triangle (`atlas_view_tabs`). Both views are one set of tiles: the triangle
-    places each by properties the script writes, so a tile's markup is the same in both.
+    uses positions supplied by the static markup and stylesheet, so a tile's markup is
+    the same in both.
     A perfect square's tile is marked `data-atlas-square`: it ends its row of the
     triangle, on the right edge, and the triangle numbers it in the text's colour. The
     block is rendered at the medium size (`data-atlas-size`), under tabs beside the view
     tabs that make every tile smaller or larger (`atlas_size_tabs`), in either view.
 
-    The cells, about a megabyte of SVG, sit in two `<template>`s, which the browser
-    parses but does not render. The script places the first `ATLAS_FIRST` when the grid
-    nears the viewport, so the page opens as fast as it did without them, and the rest
-    only when the reader presses the button under the grid, "Show More" with the double
-    chevron down. The button then reads
-    "Show Less" with the chevron up and collapses the grid again; its name for assistive
+    The first `ATLAS_FIRST` cells arrive as static markup with reserved, lazy-loaded
+    SVG images; the rest are already present in a hidden container. The script shows
+    them only when the reader presses the button under the grid, "Show More" with the
+    double chevron down. The button then reads "Show Less" with the chevron up and
+    collapses the grid again; its name for assistive
     technology says what each does and how many cases that is (`data-name-more`,
     `data-name-less`), it controls the box of tiles (`ATLAS_PANEL`), and it is the site's
-    one action under a table or grid (`.site-action`, with "See all results"). Its row
-    ships `hidden`, since without the script it would do nothing. The atlas popover,
-    filled by the script from a JSON of the film's facts, stood after the block until
+    one action under a table or grid (`.site-action`, with "See all results"). Ordinary
+    links give readers without scripting all case records and the frontier survey. The atlas
+    popover, filled by the script from a JSON of the film's facts, stood after the block until
     2026-10-03; the case popover took its place.
 
     A case with a regularized view (`atlas_regularized`) is drawn from it, badged, and
@@ -2693,14 +2800,19 @@ def atlas_grid() -> str:
         '<div class="site-atlas-controls" data-atlas-controls>'
         f"{atlas_view_tabs()}{atlas_size_tabs()}"
         f"{atlas_legend(regularized=bool(regularized))}</div>"
-        f"<template data-atlas-first>{''.join(cells[:ATLAS_FIRST])}</template>"
-        f"<template data-atlas-rest>{''.join(cells[ATLAS_FIRST:])}</template>"
+        f'<div class="site-atlas-cells" id="{ATLAS_PANEL}">'
+        f"{''.join(cells[:ATLAS_FIRST])}"
+        '<div class="site-atlas-rest" data-atlas-rest hidden>'
+        f"{''.join(cells[ATLAS_FIRST:])}</div></div>"
+        '<noscript><p><a href="cases/">All case records</a> · '
+        '<a href="frontier.html">Every packing and bound in the frontier '
+        "survey</a></p></noscript>"
         # The triangle's one-line key ("Each row ends at a perfect square…") stood here
         # and the line under the expander ("Every case from n = 1 to 324 is also in the
         # frontier survey, and each has a case record.") after it, until 2026-10-02 (the
         # owner, think-l38m): each tile opens its case record, and the Frontier page is a
         # page card. The expander's row ends the block.
-        '<p class="site-action-row site-atlas-toggle-row" hidden>'
+        '<p class="site-action-row site-atlas-toggle-row">'
         '<button type="button" class="site-action site-atlas-toggle" '
         f'data-atlas-toggle aria-expanded="false" aria-controls="{ATLAS_PANEL}" '
         f'aria-label="{name_more}" data-label-more="{more}" data-label-less="{less}" '

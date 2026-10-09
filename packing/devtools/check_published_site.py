@@ -1,90 +1,25 @@
 #!/usr/bin/env python3
-"""Check the site as GitHub Pages serves it, against the commit it should be built from.
+"""Check a complete GitHub Pages tree and the deployed site's retained URL contract.
 
-`pages.yml` renders the overview and the pages beside it, the three papers of the n = 11
-series under `papers/` with their Markdown and PDF (`render_overview.PAPERS`), and the
-workbench from `main`, and deploys them. Nothing is
-checked in, so nothing in the repository says whether a deploy landed or what the pages
-it served link to; this asks the live site. From `packing/`:
+From packing/:
 
     uv run --frozen --group dev python -m devtools.check_published_site --commit <sha>
 
-With no `--commit` the checkout's `origin/main` is the expectation, which is the commit
-the last deploy built from once `git fetch` has run. `--site` may also name a site served
-on this machine (`http://127.0.0.1:8765/`, as `devtools.preview_site --serve` serves
-one), which is how the same checks are run on a build before it is deployed; give
-`--commit` the commit that build was made from. One line per check, `ok` or `FAIL`, and
-the exit status is 0 only when every check passes:
+With no --commit, origin/main supplies the expected deployed revision. --site can name
+an HTTP preview built from the same revision. Every registered non-asset address is
+fetched: all content pages, cases, results, paper editions, historical forwarders,
+file copies, tombstones, sitemap and 404. Page budgets and share-preview metadata are
+checked alongside repository links, paper versions, PDF source receipts, record-link
+coverage and workbench startup. Forwarder destinations agree in canonical metadata,
+refresh, script and visible link; pinned-browser arrival preserves query and fragment.
 
-- every page `render_overview.PAGES` owns is served at its URL (the overview at the
-  root), and the lower-bounds explainer at `papers/n11-lower-bounds-explainer.html`;
-  each carries the canonical URL its renderer wrote, a site page the edition stamp
-  `sqpack.release` names, and a paper its own version and not the site's stamp;
-- no page and not the Markdown edition links a repository file at a commit hash: every
-  repository link names `main` (`repo_links`), because a permalink to the commit a page
-  was built from 404s once a squash merge leaves that commit on no branch. Every path a
-  page links on `main` exists in the expected commit's tree, which is `main` when the
-  deploy runs, and each link on the explainer, its Markdown edition, the overview and
-  the frontier atlas is also asked of GitHub;
-- no link written before a page moved or was withdrawn breaks
-  (`render_overview.MOVED_PAGES`, `MOVED_FILES`): each address a page used to have, the
-  papers' among them, still serves a forwarder that names where a visit is sent now in
-  the four places it says it, and they agree: its canonical URL, the address its script
-  reads, the refresh for a reader without scripts, and its link. In the pinned browser
-  a visit to each with a query string and a fragment arrives there with both. Each
-  address a paper's Markdown or PDF used to have serves the same bytes as the new one;
-- every result overview the results table's rows name (`data-row-pop-src`) is served
-  beside the pages and is that result's, and the overviews' repository links pass the
-  same two checks against the tree;
-- the record links are all there. The checks above ask only whether a link that was
-  written resolves, so a deploy that wrote fewer links passed them: on 2026-10-01 every
-  link into `packing/resources` and `packing/campaign` was missing from the live site,
-  with 783 of 783 checks green (D-512). So the renderer is asked what it writes from the
-  register in this checkout, which the deploy job checks out at the deployed commit:
-  each result row of the overview's and the results page's tables carries every record
-  link the renderer gives that result, and the overviews of `RECORD_LINK_SAMPLE` carry
-  every repository link the renderer writes for them. It fetches nothing more;
-- the Markdown edition and the PDF are served beside the page under its slug and the
-  composite assets at the site's root, and the PDF is a PDF with the expected page count
-  and a source receipt matching the exact HTML bytes the site serves;
-- each review, every paper after the first (the threshold-bound review,
-  `papers/n11-threshold-bound-review.html`, and the optimality review,
-  `papers/n11-optimality-review.html`), is served where its Papers card points, with its
-  Markdown and PDF beside it, carries its own version and not the site's, and each
-  paper's bar marks Papers as the current section, from a level below the root. Its own
-  Pages job builds and checks its content. The reviews are the pages whose repository
-  links are held to a commit and not to `main`: a review cites the evidence as it stood
-  when the paper was typeset, so each citation on the page and in its Markdown names the
-  expected commit, the one the deploy built from, which `main` keeps, and every path it
-  cites is in that commit's tree. A citation that names `main`, or any other commit,
-  fails;
-- every link from one paper to another (`devtools.paper_links`), on a page and in a
-  Markdown edition, names a paper the site serves and a heading that paper has, which
-  only a site holding every paper can answer;
-- the workbench names the expected source commit, starts its public API in the pinned
-  browser, and links back to this project's root rather than the account site's root;
-- every page's head carries the site's identity and link-preview tags, exactly one of
-  each (`render_overview.head_tags`): a title that ends in the project's formal name, a
-  description of its own that fits a preview, a canonical link and an `og:url` that are
-  the one address the page is served at, the site's name, the card image with its size
-  and its alt text, and the site's icon. The sampled case records are held as pages
-  are. No two pages share a description. The card every page names is served at the
-  site's root and is a PNG of the size the pages declare. A forwarder to a page of the
-  site previews that page, at that page's address, by the name, kind and description
-  that page's own head gives; the one that leads off the site carries a canonical link
-  to it, in full, and no card.
+--local DIR checks the closed-world registry, required physical outputs, HTML budgets,
+heads and links between papers without fetching the network. --partial requires one
+or more --producer names and checks every output of those producers; missing files
+never select partial mode. --local DIR --inventory reports heads without validation.
 
-`--local DIR` asks only that last group and the links between papers, of a site built into
-a directory
-(`devtools.preview_site`, which also runs it on every build, and the Pages workflow's
-`overview` and `publish` jobs, on the overview's build and on the assembled site), and
-fetches nothing; it holds every HTML file there that is a document, every case record
-and any page this module does not name among them, and each forwarder against the page
-it leads to wherever that page is there too. `--local DIR --inventory` prints what
-every file's head carries and checks nothing.
-
-This checks a live deployment, so it is not a step of the source gate;
-`tests/test_check_published_site.py` covers its parsing and failure controls on fixtures.
+The live deployment check is separate from the required source registry/history gate.
+Tests cover the parsing and failure controls with fixtures.
 """
 
 from __future__ import annotations
@@ -102,17 +37,19 @@ import urllib.request
 from collections.abc import Callable, Mapping, Sequence
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import NamedTuple
-from urllib.parse import urljoin
+from typing import NamedTuple, override
+from urllib.parse import urljoin, urlsplit
 
 from playwright.sync_api import Browser, BrowserContext, sync_playwright
 from playwright.sync_api import Error as PlaywrightError
 
 from devtools import (
     overview_data,
+    overview_sections,
     render_case_pages,
     render_overview,
     result_overview,
+    site_urls,
     social_card,
 )
 from devtools.overview_sections import LOWER_BOUNDS_PAPER, OPTIMALITY_PAPER, result_fragment
@@ -134,6 +71,7 @@ from sqpack.probes import probe
 from sqpack.release import (
     EXPLAINER_VERSION,
     OPTIMALITY_REVIEW_EDITION,
+    PACKING_METHODS_EDITION,
     PUBLICATION_EDITION,
     THRESHOLD_REVIEW_EDITION,
 )
@@ -147,8 +85,9 @@ REPOSITORY_LINK = re.compile(re.escape(REPO_URL) + r"/(blob|tree)/([^/\s\"<>)]+)
 CANONICAL = re.compile(r'<link\s+rel="canonical"\s+href="([^"]*)"')
 #: The fuller body a row's popover fetches, as its address beside the page, and how a
 #: result's overview opens: the one block it is, naming its result.
-ROW_SOURCE = re.compile(r'data-row-pop-src="([^"]+)"')
-RESULT_OVERVIEW = re.compile(r'\A<div class="site-result" data-result-overview="(t-\d{3})">')
+RESULT_OVERVIEW = re.compile(
+    r'<(?:article|div) class="site-result" data-result-overview="(t-\d{3})">'
+)
 #: The record page's index, each case's link to its record file beside it, and the
 #: record a record file holds (`render_case_pages`).
 CASE_INDEX_LINK = re.compile(r'href="(\d+)\.html" data-case="(\d+)"')
@@ -181,6 +120,7 @@ PAPER_VERSIONS: dict[str, str] = {
     render_overview.N11_LOWER_BOUNDS_EXPLAINER: EXPLAINER_VERSION,
     render_overview.N11_THRESHOLD_BOUND_REVIEW: THRESHOLD_REVIEW_EDITION,
     render_overview.N11_OPTIMALITY_REVIEW: OPTIMALITY_REVIEW_EDITION,
+    render_overview.PACKING_METHODS: PACKING_METHODS_EDITION,
 }
 #: The reviews, every paper after the first, by the path each is served at, which is the
 #: one its Papers card links: each built and served as the optimality review is.
@@ -215,6 +155,7 @@ SERVED = (
 #: What a forwarder says about where its page is now: the address the script reads, the
 #: refresh a reader without scripts follows, and the link.
 MOVED_TO = re.compile(r'<html\b[^>]*\sdata-moved-to="([^"]*)"')
+FILE_MOVED_TO = re.compile(r'<html\b[^>]*\sdata-file-moved-to="([^"]*)"')
 REFRESH = re.compile(r'<meta\s+http-equiv="refresh"\s+content="0;\s*url=([^"]*)"')
 MOVED_LINK = re.compile(r'<p>[^<]*<a\s+href="([^"]*)"')
 #: The query string and fragment a forwarder is visited with in the browser: the review
@@ -244,11 +185,27 @@ OMITTED_TREES = ("packing/resources/", "packing/campaign/")
 #: The pages with a table of results, whose rows' popovers each carry their result's
 #: record links.
 RECORD_LINK_PAGES = ("index.html", render_overview.RESULTS_PAGE)
-#: A result row's popover from its opening tag on, named by its result
-#: (`overview_sections.result_row`), and the line of record links its short form ends
-#: with (`overview_sections._detail`).
-_RESULT_POPOVER = re.compile(r'site-row-pop" id="pop-result-(t-\d{3})"')
-_ROW_RECORDS = re.compile(r'<div class="site-records">(.*?)</div>', re.DOTALL)
+#: Result sources are exact root-relative addresses; never fetch an arbitrary source
+#: found in a served page before validating it.
+_RESULT_SOURCE = re.compile(r"result/t-\d{3}\.html")
+_HTML_VOID = frozenset(
+    {
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr",
+    }
+)
 
 
 #: Every `<meta>` a page's head carries exactly once, by its `name` or `property`: the
@@ -277,7 +234,7 @@ REQUIRED_META = (
 ARTICLE_META = ("article:published_time", "article:modified_time")
 _ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 #: How much of a page is handed to the parser at a time. A head ends within the first
-#: megabytes of a page of nine, and the reader stops there.
+#: response; the reader stops as soon as that head closes.
 _HEAD_CHUNK = 1 << 16
 
 
@@ -301,12 +258,17 @@ class PageHead(NamedTuple):
         return [href for name, href in self.links if name == rel]
 
 
+class _HeadCompleteError(Exception):
+    """Stop the parser as soon as its requested document boundary is known."""
+
+
 class _HeadReader(HTMLParser):
     """Reads the head and stops at its end. A real parser, since a head's inline scripts
     and styles are megabytes that may spell a tag in a comment or a string."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, document_only: bool = False) -> None:
         super().__init__(convert_charrefs=True)
+        self._document_only = document_only
         self.lang: str | None = None
         self.titles: list[str] = []
         self.metas: list[tuple[str, str]] = []
@@ -316,16 +278,30 @@ class _HeadReader(HTMLParser):
         self.document = False
         self._title: list[str] | None = None
 
+    def feed(self, data: str) -> None:
+        """Stop within a chunk, before tokenizing any prepared mathematics in the body."""
+        if self.done:
+            return
+        try:
+            super().feed(data)
+        except _HeadCompleteError:
+            self.done = True
+
+    def _found_document(self) -> None:
+        self.document = True
+        if self._document_only:
+            raise _HeadCompleteError
+
     def handle_decl(self, decl: str) -> None:
         if decl.lower().startswith("doctype"):
-            self.document = True
+            self._found_document()
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         if self.done:
             return
         values = dict(attrs)
         if tag in ("html", "head"):
-            self.document = True
+            self._found_document()
         if tag == "html":
             self.lang = values.get("lang")
         elif tag == "title":
@@ -337,14 +313,14 @@ class _HeadReader(HTMLParser):
         elif tag == "link":
             self.links.append((values.get("rel") or "", values.get("href") or ""))
         elif tag == "body":
-            self.done = True
+            raise _HeadCompleteError
 
     def handle_endtag(self, tag: str) -> None:
         if tag == "title" and self._title is not None:
             self.titles.append("".join(self._title))
             self._title = None
         elif tag == "head":
-            self.done = True
+            raise _HeadCompleteError
 
     def handle_data(self, data: str) -> None:
         if self._title is not None:
@@ -356,7 +332,7 @@ def is_document(text: str) -> bool:
     `<head>`, whatever its head then carries. A result's overview, a block fetched into a
     popover, has none of them. What a head says is no test, since a page with no `lang`,
     no title and no named `<meta>` says nothing and is a page all the same."""
-    reader = _HeadReader()
+    reader = _HeadReader(document_only=True)
     for start in range(0, len(text), _HEAD_CHUNK):
         reader.feed(text[start : start + _HEAD_CHUNK])
         if reader.document or reader.done:
@@ -375,7 +351,13 @@ def read_head(text: str) -> PageHead:
     return PageHead(reader.lang, tuple(reader.titles), tuple(reader.metas), tuple(reader.links))
 
 
-def head_problems(text: str, canonical: str) -> list[str]:
+def head_problems(
+    text: str,
+    canonical: str,
+    *,
+    allow_inline_favicon: bool = False,
+    page_url: str | None = None,
+) -> list[str]:
     """What is wrong with a page's head as the site writes one, for the page served at
     `canonical`; empty when it is clean.
 
@@ -416,10 +398,12 @@ def head_problems(text: str, canonical: str) -> list[str]:
     project = render_overview.PROJECT_NAME
     suffix = render_overview.TITLE_SEPARATOR + project
     if title is not None:
-        if title != project and not (title.endswith(suffix) and title != suffix):
-            problems.append(f"the title {title!r} does not end in {suffix!r}")
-        else:
+        if title.endswith(suffix) and title != suffix:
             require("og:title", tags["og:title"], title.removesuffix(suffix))
+        elif title == project:
+            require("og:title", tags["og:title"], project)
+        elif title != tags["og:title"]:
+            problems.append(f"the title {title!r} does not end in {suffix!r} or match og:title")
     require("twitter:title", tags["twitter:title"], tags["og:title"] or "")
     require("og:site_name", tags["og:site_name"], project)
     require("og:locale", tags["og:locale"], render_overview.SITE_LOCALE)
@@ -458,11 +442,27 @@ def head_problems(text: str, canonical: str) -> list[str]:
         problems.append("og:image:alt is empty")
     require("twitter:image:alt", tags["twitter:image:alt"], alt or "")
     require("twitter:card", tags["twitter:card"], "summary_large_image")
-    # The tab's icon and the one some previews set beside the site's name: the site's
-    # own, once. It is a data URI of a kilobyte, so a mismatch is named, not printed.
-    icon = single(head.link("icon"), "icon links")
-    if icon is not None and icon != render_overview.favicon_url():
-        problems.append("the icon is not the site's (`render_overview.favicon_url`)")
+    # Stable SVG/PNG icons are resolved from each page's address. The standalone
+    # workbench artifact keeps its approved inline SVG under its isolated CSP.
+    icons = head.link("icon")
+    expected_icons = {
+        render_overview.SITE_URL + "favicon.svg",
+        render_overview.SITE_URL + "favicon-48.png",
+    }
+    resolved = [urljoin(page_url or canonical, icon) for icon in icons]
+    inline_workbench = (
+        (allow_inline_favicon or canonical == render_overview.canonical_url(WORKBENCH_PAGE))
+        and len(icons) == 1
+        and icons[0] == render_overview.favicon_url()
+    )
+    if not inline_workbench:
+        if len(icons) != 2:
+            problems.append(f"{len(icons)} icon links, expected the SVG/PNG pair")
+        elif set(resolved) != expected_icons:
+            problems.append("the icon is not the site's SVG/PNG pair")
+        apple = [urljoin(page_url or canonical, icon) for icon in head.link("apple-touch-icon")]
+        if apple != [render_overview.SITE_URL + "apple-touch-icon.png"]:
+            problems.append("the apple-touch icon is missing or not the site's")
     return problems
 
 
@@ -472,7 +472,14 @@ def head_problems(text: str, canonical: str) -> list[str]:
 PREVIEWED = ("og:title", "og:type", "og:description")
 
 
-def forwarder_problems(text: str, canonical: str, destination: str | None = None) -> list[str]:
+def forwarder_problems(
+    text: str,
+    canonical: str,
+    destination: str | None = None,
+    *,
+    allow_inline_favicon: bool = False,
+    page_url: str | None = None,
+) -> list[str]:
     """What is wrong with the head of a page that only sends a reader on to `canonical`,
     by the rule `render_overview.forwarder_head` writes it to.
 
@@ -485,7 +492,9 @@ def forwarder_problems(text: str, canonical: str, destination: str | None = None
     since the site does not write the page it would describe.
     """
     if canonical.startswith(render_overview.SITE_URL):
-        problems = head_problems(text, canonical)
+        problems = head_problems(
+            text, canonical, allow_inline_favicon=allow_inline_favicon, page_url=page_url
+        )
         if destination is not None:
             # A tag the page does not give once is the page's own failure, named there.
             head, page = read_head(text), read_head(destination)
@@ -585,7 +594,9 @@ def head_checks(
     by_address = {render_overview.canonical_url(name): text for name, text in pages.items()}
     for name, (text, canonical) in forwarders.items():
         destination = by_address.get(canonical)
-        problems = forwarder_problems(text, canonical, destination)
+        problems = forwarder_problems(
+            text, canonical, destination, page_url=render_overview.SITE_URL + name
+        )
         within = canonical.startswith(render_overview.SITE_URL)
         line = (
             f"forwarder {name}: head: {'; '.join(problems)}"
@@ -765,7 +776,12 @@ def local_head_checks(directory: Path) -> list[tuple[bool, str]]:
         path = directory / name
         return path.read_text(encoding="utf-8") if path.is_file() else None
 
-    pages = {name: text(name) for name in shared_pages()}
+    withdrawn = (
+        {row.path for row in site_urls.load_registry() if row.status == "withdrawn"}
+        if site_urls.REGISTRY.is_file()
+        else set()
+    )
+    pages = {name: text(name) for name in shared_pages() if name not in withdrawn}
     forwarders = {
         name: (text(name), canonical) for name, canonical in forwarder_canonicals().items()
     }
@@ -774,6 +790,8 @@ def local_head_checks(directory: Path) -> list[tuple[bool, str]]:
     records: dict[str, str] = {}
     for path in sorted(directory.rglob("*.html")):
         name = path.relative_to(directory).as_posix()
+        if name == "404.html" or name in withdrawn:
+            continue
         if name in pages or name in forwarders:
             continue
         found = path.read_text(encoding="utf-8")
@@ -805,6 +823,10 @@ def local_head_checks(directory: Path) -> list[tuple[bool, str]]:
         found = directory / path
         return found.read_bytes() if found.is_file() else None
 
+    if missing_page := text("404.html"):
+        built["404.html"] = missing_page.replace(
+            urlsplit(render_overview.SITE_URL).path + "assets/", "assets/"
+        )
     return results + asset_checks(built, served)
 
 
@@ -846,6 +868,9 @@ class RecordLinks(NamedTuple):
     overviews: dict[str, str]
     """The rendered overview of each result of `RECORD_LINK_SAMPLE`, by its address
     beside the pages (`result/t-060.html`)."""
+    page_rows: dict[str, tuple[str, ...]] | None = None
+    """The required row IDs per page, selected from the register by the renderer's
+    predicates. `None` holds complete synthetic tables to every row in `rows`."""
 
 
 def rendered_record_links() -> RecordLinks:
@@ -880,7 +905,19 @@ def rendered_record_links() -> RecordLinks:
         result.id.lower(): "\n".join(link.url for link in result.records)
         for result in overview.results
     }
-    return RecordLinks(rows, overviews)
+    ordered = overview_sections.recent_results(overview)
+    reference = overview_sections.reference_date(overview)
+    page_rows = {
+        "index.html": tuple(
+            result.id.lower()
+            for result in ordered
+            if overview_sections.shown_by_default(
+                result, overview_sections.RECENT_DEFAULTS, reference
+            )
+        ),
+        render_overview.RESULTS_PAGE: tuple(result.id.lower() for result in ordered),
+    }
+    return RecordLinks(rows, overviews, page_rows)
 
 
 def absent_links(rendered: str, published: str) -> list[str]:
@@ -891,18 +928,174 @@ def absent_links(rendered: str, published: str) -> list[str]:
     )
 
 
+class _RecordElement(NamedTuple):
+    tag: str
+    attrs: dict[str, str | None]
+    start: int
+    end: int
+    content: str
+
+
+class _RecordMarkup(HTMLParser):
+    """Completed elements with exact source boundaries: a missing block cannot borrow
+    links from a neighboring row, popover or result article."""
+
+    def __init__(self, text: str) -> None:
+        super().__init__(convert_charrefs=False)
+        self.text = text
+        self.elements: list[_RecordElement] = []
+        self.ids: dict[str, int] = {}
+        self._stack: list[tuple[str, dict[str, str | None], int, int]] = []
+        self._lines = [0]
+        # HTMLParser advances its source line only on literal LF.
+        self._lines.extend(match.end() for match in re.finditer("\n", text))
+        self.feed(text)
+        self.close()
+
+    def _offset(self) -> int:
+        line, column = self.getpos()
+        return self._lines[line - 1] + column
+
+    @override
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        start = self._offset()
+        end = start + len(self.get_starttag_text() or "")
+        # Browser ID lookup includes unclosed and void elements and takes the first
+        # attribute value, even when this checker rejects duplicate attributes below.
+        identifier = next((value for key, value in attrs if key == "id"), None)
+        if identifier:
+            self.ids[identifier] = self.ids.get(identifier, 0) + 1
+        # HTML chooses the first duplicate attribute; treating ambiguity as absent
+        # prevents a later good value from masking a bad source or binding.
+        values: dict[str, str | None] = {}
+        for key, value in attrs:
+            values[key] = None if key in values else value
+        if tag in _HTML_VOID:
+            self.elements.append(_RecordElement(tag, values, start, end, ""))
+        else:
+            self._stack.append((tag, values, start, end))
+
+    @override
+    def handle_endtag(self, tag: str) -> None:
+        matching = next(
+            (i for i in range(len(self._stack) - 1, -1, -1) if self._stack[i][0] == tag),
+            None,
+        )
+        if matching is None:
+            return
+        _, values, start, content_start = self._stack[matching]
+        del self._stack[matching:]
+        content_end = self._offset()
+        end = self.text.find(">", content_end) + 1
+        self.elements.append(
+            _RecordElement(tag, values, start, end, self.text[content_start:content_end])
+        )
+
+    @override
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.handle_starttag(tag, attrs)
+        if tag not in _HTML_VOID:
+            _, values, start, end = self._stack.pop()
+            self.elements.append(_RecordElement(tag, values, start, end, ""))
+
+    def find(
+        self, *, tag: str = "", class_name: str = "", within: _RecordElement | None = None
+    ) -> list[_RecordElement]:
+        return [
+            element
+            for element in self.elements
+            if (not tag or element.tag == tag)
+            and (not class_name or class_name in (element.attrs.get("class") or "").split())
+            and (within is None or within.start < element.start < element.end <= within.end)
+        ]
+
+
 def row_records(page: str) -> dict[str, str]:
-    """The line of record links each result row of a page's table of results opens to,
-    in the short form of the row's popover, by the result's name. A popover is read from
-    its own opening tag to the next popover's, so one that lost its line is not given
-    its neighbour's. The rows carried the line in a Details cell until 2026-10-04."""
+    """The inline legacy record line, bounded by its own completed result popover.
+    Current rows fetch their records from a complete result page instead."""
+    markup = _RecordMarkup(page)
     found: dict[str, str] = {}
-    for popover in page.split('<div class="site-popover ')[1:]:
-        named = _RESULT_POPOVER.match(popover)
-        records = _ROW_RECORDS.search(popover)
-        if named is not None and records is not None:
-            found[named.group(1)] = records.group(1)
+    for popover in markup.find(class_name="site-row-pop"):
+        target = popover.attrs.get("id") or ""
+        if not re.fullmatch(r"pop-result-t-\d{3}", target):
+            continue
+        records = markup.find(class_name="site-records", within=popover)
+        if len(records) == 1 and not markup.find(class_name="site-row-pop", within=popover):
+            found[target.removeprefix("pop-result-")] = records[0].content
     return found
+
+
+def _bound_row_records(
+    markup: _RecordMarkup, row: str, articles: Mapping[str, Sequence[_RecordElement]]
+) -> tuple[str, str]:
+    """The records reached by this row, and any broken row-to-record binding."""
+    rows = [
+        element
+        for element in markup.find(tag="tr")
+        if row in (element.attrs.get("id"), element.attrs.get("data-result"))
+    ]
+    target = f"pop-result-{row}"
+    popovers = [
+        element
+        for element in markup.find(class_name="site-row-pop")
+        if element.attrs.get("id") == target
+    ]
+    if len(rows) != 1 or len(popovers) != 1 or markup.ids.get(target, 0) != 1:
+        return "", "requires one row and its own popover"
+    table_row, popover = rows[0], popovers[0]
+    identities = {
+        table_row.attrs[key] for key in ("id", "data-result") if key in table_row.attrs
+    }
+    if (
+        identities != {row}
+        or table_row.attrs.get("data-row-popover", target) != target
+        or markup.find(class_name="site-row-pop", within=popover)
+    ):
+        return "", "row opens the wrong popover"
+    sources = [
+        element
+        for element in markup.find(within=popover)
+        if "data-row-pop-src" in element.attrs
+    ]
+    if not sources:
+        records = markup.find(class_name="site-records", within=popover)
+        return (records[0].content, "") if len(records) == 1 else ("", "missing record body")
+    if table_row.attrs.get("data-row-popover") != target:
+        return "", "missing row-to-popover binding"
+    return _lazy_row_records(markup, row, table_row, popover, articles)
+
+
+def _lazy_row_records(
+    markup: _RecordMarkup,
+    row: str,
+    table_row: _RecordElement,
+    popover: _RecordElement,
+    articles: Mapping[str, Sequence[_RecordElement]],
+) -> tuple[str, str]:
+    address = result_fragment(row)
+    sources = [
+        element
+        for element in markup.find(within=popover)
+        if "data-row-pop-src" in element.attrs
+    ]
+    bodies = markup.find(class_name="site-row-pop-body", within=popover)
+    if len(sources) != 1 or len(bodies) != 1 or sources[0] != bodies[0]:
+        return "", "requires one lazy record body"
+    body = bodies[0]
+    if body.attrs.get("data-row-pop-src") != address:
+        return "", f"record source must be {address}"
+    row_links = markup.find(tag="a", class_name="site-row-open", within=table_row)
+    fallback = markup.find(tag="a", within=body)
+    actions = markup.find(tag="a", class_name="site-popover-action", within=popover)
+    for links in (row_links, fallback, actions):
+        if not links or any(link.attrs.get("href") != address for link in links):
+            return "", f"static record link must be {address}"
+    if address not in articles:
+        return "", f"record page {address} not served"
+    found = articles[address]
+    if len(found) != 1 or found[0].attrs.get("data-result-overview") != row:
+        return "", f"record page {address} holds the wrong result"
+    return found[0].content, ""
 
 
 def checkout_commit() -> str | None:
@@ -926,28 +1119,52 @@ def record_link_checks(
     line where the expectation was not rendered at the deployed commit, since a failure
     may then be the checkout's and not the deploy's."""
     results: list[tuple[bool, str]] = []
+    # Each full result is parsed once and shared by both table checks; no new fetches.
+    articles = (
+        {
+            address: _RecordMarkup(text).find(class_name="site-result")
+            for address, text in overviews.items()
+        }
+        if pages
+        else {}
+    )
     for name, text in pages.items():
-        served = row_records(text)
+        rows = (
+            expected.rows
+            if expected.page_rows is None
+            else {row: expected.rows[row] for row in expected.page_rows[name]}
+        )
+        markup = _RecordMarkup(text)
+        served = {row: _bound_row_records(markup, row, articles) for row in rows}
+        invalid = {row: problem for row, (_, problem) in served.items() if problem}
         lacking = {
             row: absent
-            for row, records in expected.rows.items()
-            if (absent := absent_links(records, served.get(row, "")))
+            for row, records in rows.items()
+            if (absent := absent_links(records, served[row][0]))
         }
-        total = sum(len(branch_paths(records)) for records in expected.rows.values())
+        total = sum(len(branch_paths(records)) for records in rows.values())
         if lacking:
             shown = "; ".join(
                 f"{row} lacks {absent[:3]}" for row, absent in list(lacking.items())[:3]
             )
             line = (
-                f"{name}: {len(lacking)} of {len(expected.rows)} result rows lack record "
+                f"{name}: {len(lacking)} of {len(rows)} result rows lack record "
                 f"links the renderer writes: {shown}{rendered_at}"
+            )
+        elif invalid:
+            line = (
+                f"{name}: {len(invalid)} of {len(rows)} result rows "
+                "have invalid record bindings"
             )
         else:
             line = (
-                f"{name}: each of {len(expected.rows)} result rows carries its record "
+                f"{name}: each of {len(rows)} result rows carries its record "
                 f"links, {total} in all"
             )
-        results.append((not lacking, line))
+        if invalid:
+            shown = "; ".join(f"{row}: {problem}" for row, problem in list(invalid.items())[:3])
+            line += f"; invalid bindings: {shown}{rendered_at}"
+        results.append((not lacking and not invalid, line))
     for address, rendered in expected.overviews.items():
         count = len(branch_paths(rendered))
         if address not in overviews:
@@ -1101,11 +1318,12 @@ def workbench_startup(url: str, project_root: str, *, timeout: float) -> tuple[b
 
 
 def forwarder_says(text: str) -> dict[str, str | None]:
-    """Where a forwarder says its page is now, in each of the four places it says it:
-    its canonical URL, the address its script reads, its refresh, and its link."""
+    """Where a forwarder names its canonical target and physical fallback:
+    its canonical URL, the published and file script targets, its refresh, and its link."""
     places = (
         ("canonical", CANONICAL),
         ("script", MOVED_TO),
+        ("file", FILE_MOVED_TO),
         ("refresh", REFRESH),
         ("link", MOVED_LINK),
     )
@@ -1117,15 +1335,21 @@ def forwarder_says(text: str) -> dict[str, str | None]:
 
 def forwarder_expected(old: str, new: str) -> dict[str, str | None]:
     """What `forwarder_says` has to answer for the page that moved from `old` to `new`:
-    the new address in full as the canonical URL, and relative to the old one elsewhere.
-    An address off the site, as the defect log's on GitHub is, is whole in all four."""
+    the canonical address for publication and the physical output for file navigation
+    and the no-script refresh/link. Each is relative to the old address where local.
+    An address off the site, as the defect log's on GitHub is, is whole in every place."""
     external = new.startswith("https://")
+    file_target = new if external else posixpath.relpath(new, posixpath.dirname(old))
+    new = site_urls.canonical_path(new)
     target = new if external else posixpath.relpath(new, posixpath.dirname(old))
+    if not external and new.endswith("/"):
+        target += "/"
     return {
         "canonical": new if external else render_overview.canonical_url(new),
         "script": target,
-        "refresh": target,
-        "link": target,
+        "file": file_target,
+        "refresh": file_target,
+        "link": file_target,
     }
 
 
@@ -1146,7 +1370,9 @@ def forwarder_arrivals(
     results: list[tuple[bool, str]] = []
     for old, new in render_overview.MOVED_PAGES:
         start = site + visited_address(old) + FORWARDED_SUFFIX
-        arrival = (new if new.startswith("https://") else site + new) + FORWARDED_SUFFIX
+        arrival = (
+            new if new.startswith("https://") else site + site_urls.canonical_path(new)
+        ) + FORWARDED_SUFFIX
         page = browser.new_page()
         try:
             page.goto(start, wait_until="load", timeout=timeout * 1000)
@@ -1177,6 +1403,111 @@ def forwarders_followed(site: str, *, timeout: float) -> list[tuple[bool, str]]:
         return [(False, f"the forwarders could not be visited: {error}")]
 
 
+def deployed_registry_checks(
+    site: str,
+    read: Callable[..., tuple[int, bytes]],
+    *,
+    timeout: float,
+    rows: Sequence[site_urls.SiteURL] | None = None,
+) -> list[tuple[bool, str]]:
+    """Fetch every retained non-asset URL, including all cases and result pages.
+
+    The registry owns the complete walk. The specialized paper/citation checks below
+    share its response cache and retain their stronger content assurance.
+    """
+    rows = list(rows) if rows is not None else site_urls.load_registry()
+    results = site_urls.validate_registry(rows)
+    site = site.rstrip("/") + "/"
+    pages: dict[str, str] = {}
+    forwarded: dict[str, tuple[str, str]] = {}
+    records: dict[str, str] = {}
+    for row in rows:
+        if row.pattern or row.kind == "asset-file":
+            continue
+        status, body = read(site + row.path, timeout=timeout)
+        results.append(
+            (status == 200, f"registered {row.path}: HTTP {status}, {len(body)} bytes")
+        )
+        if status != 200:
+            continue
+        if row.kind == "copy":
+            target_status, target_body = read(site + row.target, timeout=timeout)
+            results.append(
+                (
+                    target_status == 200 and body == target_body,
+                    f"registered copy {row.path}: same bytes as {row.target}",
+                )
+            )
+        if not row.path.endswith(".html"):
+            continue
+        budget = site_urls.page_budget(row)
+        results.append(
+            (
+                len(body) <= min(budget, site_urls.HARD_HTML_LIMIT),
+                f"registered HTML {row.path}: {len(body)} bytes, budget {budget}",
+            )
+        )
+        text = body.decode("utf-8", errors="replace")
+        if row.status == "withdrawn" or row.path == "404.html":
+            results.append(
+                (
+                    bool(read_head(text).meta("robots"))
+                    and "noindex" in read_head(text).meta("robots")[0]
+                    and "<main>" in text
+                    and "<h1>" in text,
+                    f"registered {row.path}: complete noindex disposition page",
+                )
+            )
+            continue
+        canonical = (
+            row.canonical
+            if row.canonical.startswith("https://")
+            else render_overview.SITE_URL + row.canonical
+        )
+        if row.status == "forwarded":
+            forwarded[row.path] = (text, canonical)
+            declared = forwarder_says(text)
+            expected = forwarder_expected(row.path, row.target)
+            results.append(
+                (
+                    declared == expected,
+                    f"registered forwarder {row.path}: all redirect targets agree",
+                )
+            )
+            if not row.target.startswith("https://"):
+                target_status, _ = read(site + row.target, timeout=timeout)
+                results.append(
+                    (
+                        target_status == 200,
+                        f"registered forwarder {row.path}: target served HTTP {target_status}",
+                    )
+                )
+        elif row.kind == "record":
+            records[row.path] = text
+        else:
+            pages[row.path] = text
+    card_status, card = read(site + render_overview.SOCIAL_CARD, timeout=timeout)
+    results += head_checks(pages, forwarded, card if card_status == 200 else None, records)
+    return results
+
+
+def local_site_checks(
+    directory: Path, *, partial: bool = False, producers: Sequence[str] = ()
+) -> list[tuple[bool, str]]:
+    """Explicit producer contract, then every present page's head and linked assets."""
+    from devtools.check_site_scripts import inventory  # noqa: PLC0415
+
+    scripts, script_failures = inventory(directory)
+    script_checks = [(False, error) for error in script_failures] or [
+        (True, f"script inventory: {len(scripts)} reviewed declarations")
+    ]
+    return (
+        site_urls.check_site(directory, partial=partial, producers=producers)
+        + local_head_checks(directory)
+        + script_checks
+    )
+
+
 def check(
     site: str,
     commit: str,
@@ -1185,7 +1516,17 @@ def check(
     browser: bool = True,
 ) -> list[tuple[bool, str]]:
     """Every check as (passed, line), in the order they are printed."""
-    results: list[tuple[bool, str]] = []
+    cache: dict[tuple[str, bool], tuple[int, bytes]] = {}
+
+    def read(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        key = (url, head)
+        if head and (url, False) in cache:
+            return cache[(url, False)]
+        if key not in cache:
+            cache[key] = fetch(url, head=head, timeout=timeout)
+        return cache[key]
+
+    results = deployed_registry_checks(site, read, timeout=timeout)
     site = site.rstrip("/") + "/"
 
     def served_page(
@@ -1197,7 +1538,7 @@ def check(
         paper's own version on a paper, which must then not carry the site's edition
         (the owner, 2026-10-01: papers are individually versioned).
         """
-        status, body = fetch(url, timeout=timeout)
+        status, body = read(url, timeout=timeout)
         text = body.decode("utf-8", errors="replace")
         results.append((status == 200, f"page {url}: HTTP {status}, {len(body)} bytes"))
         # The shared version (think-qsuu), pinned in release.py: a site page names the
@@ -1257,7 +1598,6 @@ def check(
         )
 
     checked_links: set[tuple[str, str, str]] = set()
-    overviews: list[str] = []
     tables: dict[str, str] = {}
     # Every page that can be shared and every forwarder, as served, for the head checks
     # at the end: they are read from the text fetched here and cost no request.
@@ -1275,10 +1615,20 @@ def check(
             checked_links |= repository_links(text)
         if name in RECORD_LINK_PAGES:
             tables[name] = text
-        if name == render_overview.RESULTS_PAGE:
-            overviews = sorted(set(ROW_SOURCE.findall(text)))
         if name == render_case_pages.CASES_PAGE:
             indexed = [int(n) for n, case in CASE_INDEX_LINK.findall(text) if n == case]
+
+    overviews = sorted(
+        {
+            element.attrs["data-row-pop-src"] or ""
+            for text in tables.values()
+            for element in _RecordMarkup(text).find(class_name="site-row-pop-body")
+            if "data-row-pop-src" in element.attrs
+        }
+    )
+    unsafe = [address for address in overviews if not _RESULT_SOURCE.fullmatch(address)]
+    results.extend((False, f"invalid result overview source {address!r}") for address in unsafe)
+    overviews = [address for address in overviews if _RESULT_SOURCE.fullmatch(address)]
 
     # The result overviews are files beside the pages, fetched when a row is opened: a
     # deploy that lost one would show only as a popover that keeps its short detail.
@@ -1289,10 +1639,11 @@ def check(
         )
     )
     bodies = []
+    served_overviews: dict[str, str] = {}
     for address in overviews:
-        status, body = fetch(site + address, timeout=timeout)
+        status, body = read(site + address, timeout=timeout)
         fragment = body.decode("utf-8", errors="replace")
-        found = RESULT_OVERVIEW.match(fragment)
+        found = RESULT_OVERVIEW.search(fragment)
         holds = None if found is None else result_fragment(found.group(1))
         results.append(
             (
@@ -1302,6 +1653,8 @@ def check(
             )
         )
         bodies.append(fragment)
+        if status == 200 and holds == address:
+            served_overviews[address] = fragment
     if bodies:
         links_main("the result overviews", "\n".join(bodies))
 
@@ -1319,7 +1672,7 @@ def check(
     records: list[str] = []
     for n in sample:
         address = render_case_pages.case_url(n)
-        status, body = fetch(site + address, timeout=timeout)
+        status, body = read(site + address, timeout=timeout)
         record = body.decode("utf-8", errors="replace")
         found = CASE_RECORD.search(record)
         holds = None if found is None else int(found.group(1))
@@ -1356,7 +1709,7 @@ def check(
             record_link_checks(
                 expected,
                 tables,
-                dict(zip(overviews, bodies, strict=True)),
+                served_overviews,
                 rendered_at=rendered_at,
             )
         )
@@ -1370,7 +1723,7 @@ def check(
     results.append((current, f"{LOWER_BOUNDS_PAPER}: {marked}, linked from a level below"))
     heads[LOWER_BOUNDS_PAPER] = text
 
-    status, markdown = fetch(site + LOWER_BOUNDS_MARKDOWN, timeout=timeout)
+    status, markdown = read(site + LOWER_BOUNDS_MARKDOWN, timeout=timeout)
     results.append(
         (
             status == 200,
@@ -1391,14 +1744,14 @@ def check(
     # request.
     for kind, ref, path in sorted(checked_links):
         url = f"{REPO_URL}/{kind}/{ref}/{path}"
-        status, _ = fetch(url, head=True, timeout=timeout)
+        status, _ = read(url, head=True, timeout=timeout)
         results.append((status == 200, f"link HTTP {status}: {url}"))
 
     for name in SERVED:
         if name == LOWER_BOUNDS_MARKDOWN:
             continue
         head_only = name != LOWER_BOUNDS_PDF
-        status, body = fetch(site + name, head=head_only, timeout=timeout)
+        status, body = read(site + name, head=head_only, timeout=timeout)
         line = f"served {name}: HTTP {status}"
         ok = status == 200
         if name == LOWER_BOUNDS_PDF:
@@ -1448,7 +1801,7 @@ def check(
             review.removeprefix("papers/").removesuffix(".html")
         )
         version = PAPER_VERSIONS[record.slug]
-        status, paper = fetch(site + review, timeout=timeout)
+        status, paper = read(site + review, timeout=timeout)
         paper_text = paper.decode("utf-8", errors="replace")
         current = PAPERS_CURRENT in paper_text
         marked = f"Papers is {'' if current else 'not '}the bar's current entry"
@@ -1477,7 +1830,7 @@ def check(
         review_markdown, _ = paper_files(review)
         for name in paper_files(review):
             cited_here = name == review_markdown
-            status, body = fetch(site + name, head=not cited_here, timeout=timeout)
+            status, body = read(site + name, head=not cited_here, timeout=timeout)
             results.append((status == 200, f"served {name}: HTTP {status}"))
             if cited_here and status == 200:
                 found = body.decode("utf-8", errors="replace")
@@ -1489,7 +1842,7 @@ def check(
     # forwards, and a file's old address serves the same bytes. A deploy that dropped a
     # forwarder would 404 every link written before the change.
     for old, new in render_overview.MOVED_PAGES:
-        status, body = fetch(site + old, timeout=timeout)
+        status, body = read(site + old, timeout=timeout)
         moved_text = body.decode("utf-8", errors="replace")
         # Its head is read with the other pages' below, by the forwarders' rule.
         forwarded[old] = (moved_text, canonicals[old])
@@ -1504,8 +1857,8 @@ def check(
             )
         )
     for old, new in render_overview.MOVED_FILES:
-        old_status, old_body = fetch(site + old, timeout=timeout)
-        new_status, new_body = fetch(site + new, timeout=timeout)
+        old_status, old_body = read(site + old, timeout=timeout)
+        new_status, new_body = read(site + new, timeout=timeout)
         same = old_status == 200 and new_status == 200 and old_body == new_body
         verdict = "the same bytes as" if same else "not the bytes of"
         line = (
@@ -1517,7 +1870,7 @@ def check(
         results.extend(forwarders_followed(site, timeout=timeout))
 
     workbench_url = site + WORKBENCH_PATH
-    status, workbench = fetch(workbench_url, timeout=timeout)
+    status, workbench = read(workbench_url, timeout=timeout)
     workbench_text = workbench.decode("utf-8", errors="replace")
     results.append(
         (
@@ -1548,11 +1901,11 @@ def check(
     # What every page says of itself to a tab, a search engine and a link preview, and
     # the one image they all name, which is served at the root of the site under test.
     heads[WORKBENCH_PAGE] = workbench_text
-    status, card = fetch(site + render_overview.SOCIAL_CARD, timeout=timeout)
+    status, card = read(site + render_overview.SOCIAL_CARD, timeout=timeout)
     results.extend(head_checks(heads, forwarded, card if status == 200 else None, record_heads))
 
     def served(path: str) -> bytes | None:
-        status, body = fetch(site + path, timeout=timeout)
+        status, body = read(site + path, timeout=timeout)
         return body if status == 200 else None
 
     return results + asset_checks(heads, served)
@@ -1578,18 +1931,34 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="check only the heads and the card of a site built into DIR; fetches nothing",
     )
     parser.add_argument(
+        "--partial", action="store_true", help="with --local: selected producers only"
+    )
+    parser.add_argument(
+        "--producer",
+        action="append",
+        default=[],
+        help="selected producer (overview, workbench, paper:slug); requires --partial",
+    )
+    parser.add_argument(
         "--inventory",
         action="store_true",
         help="with --local: print what every file's head carries, and check nothing",
     )
     args = parser.parse_args(argv)
+    if (args.partial or args.producer) and args.local is None:
+        parser.error("--partial/--producer require --local")
     if args.inventory:
         if args.local is None:
             parser.error("--inventory reads a built site: give --local DIR")
         print("\n".join(head_inventory(args.local.resolve())))
         return 0
     if args.local is not None:
-        results = local_head_checks(args.local.resolve())
+        try:
+            results = local_site_checks(
+                args.local.resolve(), partial=args.partial, producers=args.producer
+            )
+        except ValueError as error:
+            parser.error(str(error))
     else:
         commit = args.commit or expected_commit()
         results = check(args.site, commit, timeout=args.timeout, browser=not args.no_browser)

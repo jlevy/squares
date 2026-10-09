@@ -19,9 +19,11 @@ from devtools import apply_exact_ceilings, apply_exact_optima, apply_upper_bound
 from devtools import check_rational_witness_independent as independent
 from devtools import evand_exact_certificates as certificates
 from devtools.check_source_coverage import load_claims
+from devtools.source_supersession import superseded_counts
 from devtools.upper_bound_packets import verified_value
 from sqpack.assurance import bounds_agree_at_declared_precision, check_case_semantics
 from sqpack.witness import exact_verify
+from sqpack.yamlio import safe_load
 
 #: Two axis-parallel unit squares side by side, 1e-20 apart, in a box 1e-20 wider than
 #: they need, and a third rotated by t = 1/3 well clear of both.
@@ -286,6 +288,16 @@ def test_each_ceiling_is_the_certified_side_rounded_up_at_the_printed_precision(
     prints no closed form."""
     for n, row in apply_exact_ceilings.committed().items():
         case = certificates.case_record(n)
+        later = superseded_counts(
+            safe_load(apply_exact_ceilings.COVERAGE.read_text()),
+            {apply_exact_ceilings.COVERAGE_ID},
+        )
+        if n in later:
+            # The frozen certificate still proves its own upper bound. A later
+            # packing may now own either lane; that never changes the audited side.
+            assert Fraction(row["verified_value"]) >= Fraction(row["certified_side"]), n
+            assert apply_exact_ceilings.EXACT_REPLAY in case["evidence"], n
+            continue
         verified = case["verified_upper_bound"]
         side = Fraction(row["certified_side"])
         assert verified["value"] == verified_value(row["printed_side"], side), n

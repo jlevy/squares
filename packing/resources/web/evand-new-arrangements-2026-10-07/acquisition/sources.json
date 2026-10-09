@@ -1,0 +1,39 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-08T00:46Z",
+  "git_scope": "Selected immutable source files for issue #399; certificate aliases under packer/candidates are not duplicated. The remainder of the upstream tree is pinned, not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-new-arrangements",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "7eef24f7221b8c3371d6171dd664b52541bbd479",
+      "source_commit": "7eef24f7221b8c3371d6171dd664b52541bbd479",
+      "committed_utc": "2026-10-07T02:09:30Z",
+      "git_tree": "ffbec52ae1ccffd6f7e2ed3178faceebc0138fdf",
+      "archived_path": "packing/resources/web/evand-new-arrangements-2026-10-07/source",
+      "subtree_manifest": "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "s12/LICENSE",
+        "s12/CREDITS.md",
+        "s12/search/exact/README.md",
+        "s12/search/exact/verify_cert.py",
+        "s12/search/exact/verify_cert2.py",
+        "s12/search/exact/results/sw2/dc1_n266.cert",
+        "s12/search/exact/results/sw2/sw2_n270.cert",
+        "s12/search/exact/results/sw2/rd1_n272.cert"
+      ],
+      "subtree_file_count": 9,
+      "subtree_total_bytes": 153621,
+      "retained_file_count": 9,
+      "retained_total_bytes": 153621,
+      "compressed": [],
+      "pinned_only": [],
+      "license": "MIT, Evan Daniel (LICENSE and s12/LICENSE); attribution retained in s12/CREDITS.md",
+      "claims": [
+        "Issue #399 reports three new arrangements with exact rational feasibility certificates for n=266,270,272. Exact side fractions in the certificates govern any later comparison.",
+        "Arrangement novelty, numerical stationarity, Hessian and local-minimum statements remain source reports; no global optimality follows."
+      ]
+    }
+  ]
+}

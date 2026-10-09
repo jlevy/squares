@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import html
 import re
+import xml.etree.ElementTree as ET
 from collections.abc import Callable, Iterable, Mapping
 from decimal import Decimal
 from functools import cache
@@ -105,18 +106,41 @@ GAP_DIGITS = 8
 VALUE_SHOWN = 56
 
 
-def math_html(tex: str) -> str:
-    """Inline math in kpress's own markup, which the page's KaTeX scripts enhance.
+def math_html(tex: str, *, native: bool = False) -> str:
+    """Prepared KaTeX math, or the frontier table's explicit native semantic tree.
 
-    kpress turns `$…$` into math only in Markdown text, and a table here is an HTML
-    block, so the cell asks kpress's renderer for the same span it would have written:
-    the TeX for KaTeX and server MathML as the no-script fallback.
+    Shared paper, case and result callers retain kpress's default output. Only table
+    cells opt into byte-exact semantic MathML; invalid native output fails the build.
     """
     from kpress.format.markdown import (  # noqa: PLC0415
         _render_math,  # pyright: ignore[reportPrivateUsage]
     )
 
-    return _render_math(tex, display="inline", math="auto", env={})
+    rendered = _render_math(tex, display="inline", math="auto", env={})
+    if not native:
+        return rendered
+    roots = re.findall(r"<math\b[^>]*>.*?</math>", rendered, re.DOTALL)
+    if 'data-kpress-math-error="true"' in rendered or len(roots) != 1:
+        raise ValueError("frontier table mathematics has missing, ambiguous or errored MathML")
+    try:
+        semantic = ET.fromstring(roots[0])
+    except ET.ParseError as error:
+        raise ValueError("frontier table mathematics has malformed MathML") from error
+    namespace = "{http://www.w3.org/1998/Math/MathML}"
+    tokens = {namespace + name for name in ("mi", "mn", "mo", "mtext", "ms")}
+    if (
+        semantic.tag != namespace + "math"
+        or any(node.tag == namespace + "merror" for node in semantic.iter())
+        or not any(
+            node.tag in tokens and "".join(node.itertext()).strip() for node in semantic.iter()
+        )
+    ):
+        raise ValueError("frontier table mathematics has invalid or empty semantic MathML")
+    return (
+        '<span class="kpress-math kpress-math-inline" data-site-native-math="frontier">'
+        + roots[0]
+        + "</span>"
+    )
 
 
 def decimal_text(value: object) -> str:
@@ -185,7 +209,7 @@ def approx_html(value: Any) -> str:
     return f'<span class="site-approx">{"=" if whole else "≈"} {text}</span>'
 
 
-def value_html(bound: dict[str, Any]) -> str:
+def value_html(bound: dict[str, Any], *, native: bool = False) -> str:
     """A bound as a reader should see it: integers plain, closed forms as math."""
     exact = bound.get("exact_form")
     if isinstance(exact, str) and exact and not tables.ROOT_FORM.fullmatch(exact):
@@ -193,7 +217,7 @@ def value_html(bound: dict[str, Any]) -> str:
             return html.escape(exact)
         tex = tables.latex(exact)
         if len(tex) <= VALUE_SHOWN:
-            return math_html(cell_tex(tex))
+            return math_html(cell_tex(tex), native=native)
     return f'<span class="site-decimal">{html.escape(decimal_text(bound["value"]))}</span>'
 
 
@@ -240,7 +264,7 @@ def exact_value(form: str) -> Any:
     )
 
 
-def gap(case: dict[str, Any]) -> tuple[str, str]:
+def gap(case: dict[str, Any], *, native: bool = False) -> tuple[str, str]:
     """Verified upper minus verified lower: `(cell HTML, decimal for sorting)`.
 
     Exact where both bounds are closed forms and the difference is short enough to read
@@ -267,7 +291,7 @@ def gap(case: dict[str, Any]) -> tuple[str, str]:
             len(str(abs(part))) > GAP_DIGITS for part in (difference.p, difference.q)
         )
         if len(tex) <= GAP_SHOWN and not long_rational:
-            return math_html(cell_tex(tex)) + approx_html(difference), sort_value
+            return math_html(cell_tex(tex), native=native) + approx_html(difference), sort_value
         return f'<span class="site-decimal">{decimal_text(numeric)}</span>', sort_value
     numeric = Decimal(str(upper["value"])) - Decimal(str(lower["value"]))
     return (
@@ -313,15 +337,13 @@ def evidence_links(refs: Iterable[str]) -> str:
 
 
 def thumbnail_svg(n: int) -> str:
-    """The atlas drawing of case `n`, reduced to its squares for a table cell.
+    """The case's cached 1000-unit SVG, in a reserved 50-pixel square image.
 
-    The full drawing carries exact coordinates to 28 digits and a metadata block, about
-    51 MB over the corpus; a cell 50 pixels across needs the outline of each square at
-    whole units of a 100-unit frame, half a pixel at
-    that size, one path per fill colour, and nothing else. The cell that holds it is
-    the `.site-thumb` and sizes it, so the drawing has no wrapper of its own.
+    The drawing lives at its declared atlas address and can be cached across pages.
+    The table cell sizes the image without embedding another copy of its geometry.
     """
-    return packing_svg(n)
+
+    return drawing_img(n, size=50)
 
 
 def packing_svg(
@@ -396,6 +418,45 @@ def packing_svg(
         f'stroke="{ink}" stroke-width="{frame_width:f}"{crisp}/><g stroke="{ink}" '
         f'stroke-width="{line_width:f}" stroke-linejoin="round">{body}</g></svg>'
     )
+
+
+def drawing_path(n: int, *, regularized: bool = False) -> str:
+    """Stable address of a compact standalone atlas drawing."""
+    return f"atlas/{'regularized' if regularized else 'house'}/n-{n}.svg"
+
+
+def drawing_img(n: int, *, regularized: bool = False, size: int = 100) -> str:
+    """A drawing with a reserved square box; tiles use a deliberate white canvas."""
+    return (
+        f'<img src="{drawing_path(n, regularized=regularized)}" width="{size}" '
+        f'height="{size}" loading="lazy" decoding="async" alt="Packing of {n} unit squares">'
+    )
+
+
+def drawing_paths() -> tuple[str, ...]:
+    """Published drawing declarations without rendering their contents."""
+    return tuple(
+        drawing_path(int(path.stem.split("-")[1]), regularized=regularized)
+        for regularized, root in ((False, RENDERINGS), (True, REGULARIZED_RENDERINGS))
+        for path in sorted(root.glob("n-*.svg"))
+    )
+
+
+@cache
+def drawing_files() -> dict[str, bytes]:
+    """Compact standalone SVG files, usable by images and directly by a browser."""
+    files = {}
+    for regularized, root in ((False, RENDERINGS), (True, REGULARIZED_RENDERINGS)):
+        for path in sorted(root.glob("n-*.svg")):
+            n = int(path.stem.split("-")[1])
+            svg = packing_svg(n, units=1000, root=root, ink="#17202a", paper="#ffffff")
+            svg = svg.replace(
+                "<svg ",
+                '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" ',
+                1,
+            )
+            files[drawing_path(n, regularized=regularized)] = svg.encode("utf-8")
+    return files
 
 
 def _square_path(corners: list[tuple[int, int]]) -> str:
@@ -520,7 +581,7 @@ def _note(text: str) -> str:
 
 
 def _bound_cell(bound: dict[str, Any], note: str = "", *, flag: str = "") -> str:
-    parts = [value_html(bound), bound_approx_html(bound)]
+    parts = [value_html(bound, native=True), bound_approx_html(bound)]
     parts.extend(_note(text) for text in (note, flag) if text)
     return _cell("".join(parts), value=str(bound["value"]), classes="num")
 
@@ -543,7 +604,7 @@ def _verified_cell(verified: dict[str, Any], reported: dict[str, Any]) -> str:
             classes="num",
         )
     return _cell(
-        value_html(verified) + bound_approx_html(verified) + note,
+        value_html(verified, native=True) + bound_approx_html(verified) + note,
         value=str(verified["value"]),
         classes="num",
     )
@@ -578,7 +639,7 @@ def case_row(
     shown_status = case_status_chip(status)
     if case["reported_status"] != status:
         shown_status += f" (reported {html.escape(case['reported_status'])})"
-    gap_html, gap_value = gap(case)
+    gap_html, gap_value = gap(case, native=True)
     # The star carries no tooltip of its own: its column's heading names it, once
     # (`HEADER_TITLES`), where the phrase on each of 297 stars was 8 KB of a page held
     # under a byte ceiling, the room the correction tags beside them now take.

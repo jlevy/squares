@@ -132,11 +132,18 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: catalogue's September 2026 packings (T-088, T-089), when n = 69 was screened for the first
 #: time, and again that day after Couzo's 3 October packings at n = 208, 209, 228, 263, 272,
 #: 303 and 306 (T-092), which their import left unscreened; the two smaller corpora are not
-#: re-measured.
+#: re-measured. The complete 324-record replay on 2026-10-07 after SQUISH's eleven
+#: imported poses (T-113, T-114) took 364.07s. The twelve T-115 update poses were
+#: re-screened serially in 107.952s; unselected records remain unchanged. All three
+#: corpus tripwires below are the sums over the current retained square motions.
+#: The three T-117/T-118 rational refinements replace the motions at 68, 105 and 292;
+#: these are the corresponding sums from their refreshed retained numerical screen.
+#: The T-119 poses at 266, 270 and 272 were re-screened against their current complete
+#: houses; their motions change only the full-corpus sums.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (26, 87, 85, 518),
-    "n=1..200": (65, 606, 181, 1883),
-    "n=1..324": (120, 1867, 302, 4511),
+    "n=1..100": (27, 94, 86, 570),
+    "n=1..200": (66, 539, 182, 2047),
+    "n=1..324": (120, 1500, 302, 4799),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -154,6 +161,7 @@ WORKBENCH_ROOT = REPOSITORY_ROOT / "packages/workbench"
 ENGINE = PROJECT_ROOT / "sqsearch/target/release/sqsearch"
 EXACT_GEOMETRY_CRATE = PROJECT_ROOT / "sqverify_exact"
 MEASURE_VERIFIER_CRATE = PROJECT_ROOT / "sqverify_fast"
+N17_KERNEL_CRATE = PROJECT_ROOT / "n17_kernel_verify"
 RESULTS = Path("campaign/series/series-000-smoke-and-calibration/results")
 ACTIVITY_MARKER = PROJECT_ROOT / ".gate-running"
 DEFAULT_CPU_COUNT = 4
@@ -238,8 +246,21 @@ BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 #: quick lane ignores them: in a shard, with no browser, they could only skip, which is
 #: what they did on every pull request until that run.
 SITE_LAYOUT_TESTS = (
+    "tests/test_site_case_records.py",
+    "tests/test_site_math_faces.py",
+    "tests/test_site_column_measurement.py",
+    "tests/test_site_result_filters.py",
     "tests/test_site_result_columns.py",
     "tests/test_site_frontier_table.py",
+    "tests/test_site_rendering.py",
+    "tests/test_site_math_preferences.py",
+)
+#: The four HTTP load/no-JS cases measure browser timing without competing browser
+#: workers from the functional layout command. Their assertions and budgets stay shared
+#: with the production checker; this changes allocation, not the measured contract.
+SITE_LOAD_BUDGET_TEST = (
+    "tests/test_site_rendering.py::"
+    "test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets"
 )
 #: Set for the step that owns them, and read by `tests.site_browser`: a Chromium that does
 #: not launch fails the test rather than skipping it.
@@ -1923,31 +1944,59 @@ def _browser_floor_liveness(context: Context) -> str:
     )
 
 
-def _site_layout_tests(context: Context) -> str:
-    """Measure the site's tables in the Chromium the frontend runner installs.
+def _site_url_registry(context: Context) -> str:
+    """Keep published addresses and semantic record identities append-only."""
+    return _run(
+        context,
+        (sys.executable, "-m", "devtools.site_urls", "--check", "--history-ref", "origin/main"),
+    )
 
-    `SITE_LAYOUT_TESTS` pin pixel widths, which no behavioural shard can measure, so they
-    run here, one file to an xdist worker as the quick lane runs its files, and they fail
-    rather than skip when no Chromium launches: `REQUIRE_CHROMIUM` is set for this command
-    alone, and `tests.site_browser` reads it.
+
+def _site_layout_tests(context: Context) -> str:
+    """Run functional pixel/layout checks in parallel, then load budgets serially.
+
+    The four native-frontier timing cases use one browser command after the functional
+    workers exit. Both commands require Chromium and retain the existing assertions;
+    serial allocation removes browser competition within this step, without promising
+    an otherwise idle host. Both phases share the original total subprocess timeout.
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()
-    return _run(
-        context,
+    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    commands = (
         (
-            sys.executable,
-            "-m",
-            "pytest",
-            "-q",
-            "-p",
-            "no:cacheprovider",
+            *common,
             *distribution,
             *loadfile,
             *SITE_LAYOUT_TESTS,
+            "-k",
+            f"not {SITE_LOAD_BUDGET_TEST.rpartition('::')[-1]}",
         ),
-        extra_environment={REQUIRE_CHROMIUM: "1"},
+        (*common, "-n", "0", SITE_LOAD_BUDGET_TEST),
     )
+    outputs: list[str] = []
+    deadline = time.monotonic() + context.timeout_seconds
+    for command in commands:
+        try:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise StepTimeoutError(
+                    "site table layout in Chromium exhausted its "
+                    f"{context.timeout_seconds:g}s subprocess budget"
+                )
+            outputs.append(
+                _run(
+                    context,
+                    command,
+                    timeout_seconds=remaining,
+                    extra_environment={REQUIRE_CHROMIUM: "1"},
+                )
+            )
+        except StepFailureError as error:
+            if outputs:
+                raise type(error)("\n".join((*outputs, str(error)))) from error
+            raise
+    return "\n".join(output for output in outputs if output)
 
 
 def _browser_code_in_files(context: Context) -> str:
@@ -2427,10 +2476,8 @@ def _frontier_rigidity(context: Context) -> str:
 def _translation_escape_screen(context: Context) -> str:
     """The single-square translation screen, rebuilt from the witnesses every run.
 
-    The counts are pinned here because they are the finding: 25 records hold a square
-    that can be pushed clear of everything it touches, and the two records whose witness
-    geometry is too coarse to read contacts from are excluded rather than reported on.
-    A miss is not rigidity, so nothing here may be restated as one.
+    The current corpus findings and exclusion list are pinned below and must agree
+    with the replay. A miss is not rigidity, so nothing here may be restated as one.
     """
     output = _module(context, "devtools.screen_translation_escape", "--check")
     _require_text(output, f"translation escape screen check passed: {_screen_findings()}")
@@ -2441,9 +2488,9 @@ def _screen_findings() -> str:
     """The screen's corpus findings, as the tool prints them.
 
     The screened count is a corpus fact and scales: the whole of KNOWN_BEST_CORPUS less
-    the records the shape-residual limit throws out. The four findings after it are not
-    counts of anything and stay pinned as tripwires -- think-93on re-argues them, and the
-    exclusion list with them, when the corpus grows. Shared by the whole screen and its
+    the records the shape-residual limit throws out. The four pose measurements after
+    it stay pinned as tripwires -- think-93on re-argues them, and the exclusion list
+    with them, when the corpus grows or its poses change. Shared by the whole screen and its
     sampled stand-in, because the findings are read out of the retained document either
     way and a second copy of this string is a second thing to forget to update.
     """
@@ -2652,6 +2699,81 @@ def _rust_n17_bb_native(context: Context) -> str:
     if "skipped" in tests or not re.search(r"\b[1-9]\d* passed\b", tests):
         raise StepFailureError("n17 native gate requires passing, unskipped replay tests")
     return f"{output}\n{tests}"
+
+
+def _rust_n17_kernel_verifier(context: Context) -> str:
+    """Require the ordinary-U kernel's complete native controls and Rust floor."""
+    cargo = shutil.which("cargo", path=context.environment.get("PATH"))
+    if cargo is None:
+        raise StepFailureError("n17 kernel verifier gate requires cargo")
+    environment = dict(context.environment)
+    environment["RUSTDOCFLAGS"] = f"{environment.get('RUSTDOCFLAGS', '')} -D warnings".strip()
+    # This is a prospective warm per-command ceiling, not a measured runtime claim.
+    # Hosted CI prepares cold dependencies separately under an explicit 600s ceiling.
+    child = replace(
+        context, environment=environment, timeout_seconds=min(context.timeout_seconds, 120)
+    )
+    output = _commands(
+        child,
+        (
+            (cargo, "fmt", "--all", "--check"),
+            (
+                cargo,
+                "clippy",
+                "--locked",
+                "--release",
+                "--all-targets",
+                "--quiet",
+                "--",
+                "-D",
+                "warnings",
+            ),
+            (cargo, "doc", "--locked", "--release", "--no-deps", "--quiet"),
+            (
+                sys.executable,
+                str(PROJECT_ROOT / "devtools/check_rust_floor.py"),
+                "--crate",
+                str(N17_KERNEL_CRATE),
+            ),
+        ),
+        cwd=N17_KERNEL_CRATE,
+    )
+    tests = _run(
+        child,
+        (
+            cargo,
+            "test",
+            "--locked",
+            "--release",
+            "--all-targets",
+            "--quiet",
+            "--",
+            "--format",
+            "pretty",
+        ),
+        cwd=N17_KERNEL_CRATE,
+    )
+    # Count cargo test itself, not other commands' output. Required receipt tests
+    # must actually pass; the final integration target binds the compiled world.
+    for name in (
+        "receipt_publication_replaces_complete_json_and_cleans_staging",
+        "receipt_publication_write_failure_preserves_old_file",
+        "receipt_publication_rename_failure_preserves_old_file",
+        "receipt_publication_refuses_directory_collision",
+    ):
+        if re.search(rf"^test tests::{name} \.\.\. ok$", tests, re.MULTILINE) is None:
+            raise StepFailureError(f"n17 kernel verifier gate requires passing {name}")
+    counts = [int(count) for count in re.findall(r"test result: ok\. (\d+) passed", tests)]
+    if len(counts) < 2 or counts[0] < 22 or counts[-1] < 1:
+        raise StepFailureError(
+            "n17 kernel verifier gate requires 22 unit controls and world control"
+        )
+    if re.search(r"\b[1-9]\d* (?:ignored|filtered out)\b", tests):
+        raise StepFailureError("n17 kernel verifier gate refuses omitted native controls")
+    return (
+        f"{output}\n{tests}\n  ordinary-U native controls and Rust floor passed; "
+        "no centered-mode or census adoption claim"
+    ).strip()
 
 
 def _rust_measure_verifier(context: Context) -> str:
@@ -3540,6 +3662,24 @@ def _results_register(context: Context) -> str:
     return f"{first}\n{second}"
 
 
+def _squish_update_certification(context: Context) -> str:
+    # Bounded offline input/provenance admission. Full dual geometric replay is an
+    # explicit --replay operation, with the original completed run retained separately.
+    return _module(context, "devtools.squish_followup_packets", "check-certification")
+
+
+def _squish_second_update_certification(context: Context) -> str:
+    # Reuse the completed full scientific replay; admit all complete deciding inputs
+    # and canonical metadata without repeating either exact feasibility decision.
+    return _module(context, "devtools.squish_second_update_confirmation", "check-certification")
+
+
+def _refinement_custody(context: Context) -> str:
+    # Admit the complete retained input/result bindings from the reviewed replay;
+    # publication and this offline check do not repeat a scientific decision.
+    return _module(context, "devtools.refinement_custody", "check")
+
+
 def _results_headline(context: Context) -> str:
     # Sub-second: one register, one document, one rubric. Records tier because it checks
     # presentation of the record -- that every registered result reaches the section a
@@ -3849,6 +3989,9 @@ _WORKBENCH_INPUTS = (
     "packing/devtools/render_n11_lower_bounds_explainer.py",
     # The site's navigation bar the published page carries, from the shared partial.
     "packing/devtools/render_overview.py",
+    # The published workbench bundles share the site's asset builder.
+    "packing/devtools/site_assets.py",
+    "packing/devtools/probes/site_assets/*",
     "packing/devtools/templates/site-nav.html",
     "packing/devtools/templates/site-nav.css",
     "packing/devtools/templates/paper-type.css",
@@ -4085,6 +4228,13 @@ STEPS: tuple[Step, ...] = (
     # tests, 30s of it rendering three pages once each; 24.16s hosted, 74 passed, in a
     # frontend wall of 93.16s (run 36967092452). Not in the quick lane, whose shards
     # install no browser.
+    Step(
+        "published URL registry and historical compatibility",
+        _site_url_registry,
+        fast=True,
+        records=True,
+        touches=(*_SITE_INPUTS, "packing/site-urls.yaml", "docs/project/site-urls.md"),
+    ),
     Step(
         "site table layout in Chromium",
         _site_layout_tests,
@@ -4578,6 +4728,23 @@ STEPS: tuple[Step, ...] = (
             "packing/tests/test_n17_bb_native_edges.py",
             "packing/tests/test_build_n17_bb_native.py",
             "packing/devtools/check_rust_floor.py",
+            "packing/tests/test_rust_floor_contract.py",
+        ),
+    ),
+    Step(
+        "n17 kernel verifier (Rust)",
+        _rust_n17_kernel_verifier,
+        fast=True,
+        broad=True,
+        measure_verifier=True,
+        touches=(
+            *_CORE,
+            "packing/n17_kernel_verify/*",
+            "packing/devtools/verify_n17_kernel_certificate.py",
+            "packing/devtools/check_n17_capacity_one_cover.py",
+            "packing/campaign/explorations/X048-session-168-pilots/audit-verifier-rewrites/fixture-w7-bins8/*",
+            "packing/devtools/check_rust_floor.py",
+            "packing/tests/test_n17_kernel_gate.py",
             "packing/tests/test_rust_floor_contract.py",
         ),
     ),
@@ -5245,6 +5412,56 @@ STEPS: tuple[Step, ...] = (
             "packing/frontier/evidence.yaml",
             "packing/frontier/n-*.md",
             "packing/resources/bibliography.yaml",
+        ),
+    ),
+    Step(
+        "SQUISH update certification binds complete reviewed inputs",
+        _squish_update_certification,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/squish_followup_packets.py",
+            "packing/devtools/squish_upper_bound_packets.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/resources/web/squish-401-update-2026-10-07/**",
+            "packing/witnesses/squish-401-update-2026/**",
+        ),
+    ),
+    Step(
+        "SQUISH second update certification binds complete reviewed inputs",
+        _squish_second_update_certification,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/squish_second_update_confirmation.py",
+            "packing/devtools/squish_second_update_house_links.py",
+            "packing/devtools/squish_second_update_packets.py",
+            "packing/devtools/squish_followup_packets.py",
+            "packing/devtools/squish_upper_bound_packets.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/devtools/check_rational_witness_independent.py",
+            "packing/src/sqpack/witness.py",
+            "packing/witnesses/witness.schema.yaml",
+            "packing/resources/web/squish-422-second-update-2026-10-07/**",
+            "packing/witnesses/squish-422-second-update-2026/**",
+        ),
+    ),
+    Step(
+        "rational refinement custody binds complete replay inputs",
+        _refinement_custody,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/refinement_*.py",
+            "packing/hosted/refinement-evidence-425-428-v1.yaml",
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/**",
+            "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/**",
+            "packing/witnesses/known-best/n-068.yaml",
+            "packing/witnesses/known-best/n-105.yaml",
+            "packing/witnesses/known-best/n-292.yaml",
         ),
     ),
     Step(
