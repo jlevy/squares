@@ -5,7 +5,7 @@ title: "Website: compact homepage, consistent case layouts, and scroll-aware nav
 kind: epic
 status: in_progress
 priority: 1
-version: 33
+version: 34
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -28,10 +28,11 @@ child_order_hints:
   - is-01m4f31r4a3ngh0jcqmkcn0e9r
   - is-01m4f5h2c1vbdzh5k0amxnn5c0
   - is-01m4facph0038y9rzhakyby315
+  - is-01m4faf19r6n8bz35rfvv5xs8t
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:13:39.980Z
-updated_at: 2026-10-09T03:13:00.958Z
+updated_at: 2026-10-09T03:14:17.527Z
 started_at: 2026-10-08T23:22:05.552Z
 ---
 W9 website remediation tracked by eleven implementation beads and combined verification. Preserve original hero and exact problem introduction; centered About project card; compact original SVG Atlas preview with Expand/Explore; Recent Major Results S4+ cap12, sans scope text and centered medium-width LEGEND box; Learn More papers and separate PDF/Video groups; Other Square Packing Projects on homepage. PDFs also on Papers, video also on Visualize, neither on Atlas. Keep Squares Project Documentation and full project narrative on About, shared nav before GitHub. Shared uppercase buttons, gear baseline alignment, Headroom hide-down/show-up, compact consistent headings, n291 case/math/narrow-layout repair and unique loaded result title. Scientific PDF-description edit remains canceled for owner separate work. Build and serve a local draft before publication.
