@@ -5,7 +5,7 @@ title: "n17 PR404: finish reviewed main integration after snapshot-budget decisi
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -17,7 +17,7 @@ parent_id: is-01m4e47f19w8w1d7tyka9raahk
 hold: null
 hold_until: null
 created_at: 2026-10-08T18:18:41.130Z
-updated_at: 2026-10-08T23:43:06.449Z
+updated_at: 2026-10-09T00:16:49.653Z
 started_at: 2026-10-08T18:18:55.250Z
 ---
 Bounded mechanical review of live PR404 head against freshly read main. Identify actual conflicting paths and safe ownership, without changing primary checkout or scientific premises. User previously authorized resolving404 conflicts; substantive mathematical conflict resolutions require Astra review. Preserve research evidence and source.
@@ -36,3 +36,6 @@ October 8 published current-main consolidation:
 Supersedes prior held-source-integration status: root18e3a6f4f20f534e80074131d4947c633cca5ef3 now joins main91ca9b824 after nine conflict resolutions, preserving 0a8b46e13 review repairs and previous source history. Normal hooks pass; upstack heads4545dc4d13bc and4617421e2daf published through gh stack; exact owned blob/raw result parity confirmed. Memory controls8PASS1.06s, actual local-minimum replay1PASS14.03s, source-index controls3PASS3.36s, resolved test static checks clean. Composed edit qualification62/63 plus focused browser/liveness recovery; no full push/checkpoint. Old ecb/f0 held merge/index/MERGE_HEAD remains intact separately and sourcecustody5ad preserved. Current source is mergeable, but complete integration qualification remains open with think-0m0x: required Packing/Pages absent or cancelled,224MiB proposal unapplied and external scratch ENOSPC. No new math result/record and no merge.
 Review: https://github.com/jlevy/squares/blob/18e3a6f4f20f534e80074131d4947c633cca5ef3/docs/project/reviews/review-2026-10-08-n17-merge-readiness.md
 Progress: https://github.com/jlevy/squares/issues/405#issuecomment-6071221013
+
+October8 source-qualified CI correction and bounded repair:
+Newer actual checkout/tree evidence supersedes prior absent/cancelled observations: 404Pages37860039643PASS/Packing37860039766FAIL;454Pages37860039795PASS/Packing37860039856FAIL;461Pages37860039410PASS/Packing37860039390FAIL, qualifying18e/5dc/742 source trees. GitHub bodies and existing A1/405 comments corrected/read back. New owning-layer sourcec3dc6027a66fe396f22953a1d29945420198bdda commits isolated CLI controls, scientific dependency/index restoration, bounded frontend diagnostics, measured suite costs and consolidation report. All54 combined producer/refusal/index controlsPASS3.89s;67suite-file controlsPASS3.11s;15successful wholemodule reports413PASS,25.762phase seconds,615historicalweights/ceilings preserved. Unknown shares9.5/9.0/9.5/8.8%. Failed guard module2ENOSPC controls excluded from admission. All47recordsPASS23.54s. Actual historical suiteD101.34s fromgreen37613399745 admitted; current190.63s/different105shape not pooled and current143s compliance remains open. Root committed selectedsource202715130B/1388538over192MiB, including+558148B scientific inputs;224MiB proposalunapplied. Fullworker/browser/push/fullcheckpoint not qualified. Formalupstackpropagation in progress; a clean-worktree occupancy refusal restored originalchildrefs before bounded recovery. No merge/draft promotion/proof result; numericbracket/latest362T093 unchanged. OverallrequiredCI/fullcheckpoint capdecision & followupreviewdecision remain open.

@@ -5,7 +5,7 @@ title: "n17 merge readiness: consolidate PR461 and its supporting stack, review 
 kind: task
 status: in_progress
 priority: 1
-version: 19
+version: 20
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -31,7 +31,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:39:17.545Z
-updated_at: 2026-10-08T23:56:24.940Z
+updated_at: 2026-10-09T00:16:49.018Z
 started_at: 2026-10-08T21:42:09.481Z
 ---
 User requests review and make sure everything is consolidated, cleanly documented, passing CI and ready to merge. Scope formal stack455 (404,454,461), plus supporting452,453,457. Pin trusted heads; publish scoped senior/mathematical/resource reviews; fix findings in owning layers; reconcile records and tracker; verify actual current-head required CI. No merge authorization in this request. Preserve original315/316 science, current bounds, source snapshot cap and primary unique evidence. Pending192->224MiB human decision remains separate; no cap raise or ref manipulation to bypass it.
@@ -44,3 +44,6 @@ October 8 published current-main consolidation:
 Source consolidation and bounded review repairs now published in formal stack455: 404=18e3a6f4f20f534e80074131d4947c633cca5ef3, 454=5dc4d13bcbde36c8de3409e06b17e8a73f55e107, 461=7421e2daf63b945d9f0403d71ceb9d3e9ff23ec7. Root integrates current main91ca9b824 after nine conflict resolutions; all layers are mergeable. Coordinated round1 covers 140 code/configuration paths, 180 Markdown structure/footer checks, bounded repairs and explicit bulk-data limits. B1/B2 affected suites pass 366 controls zero deselections; root edit qualification is composed 62/63 in179.75s plus2step browser/liveness PASS30.97s after existing dependency link recovery. Final document map1952, hypotheses258, rounds245 and commands403 pass. Exact comparisons preserve all child-owned blobs, raw exp315/316 and root repairs; old held merge and source-custody branch preserved. Six validated descriptions and A/B/D dispositions published and exact-readback verified. Supporting452/453/457 required checks/full checkpoints remain green at recorded f0 joins. Stack current required Packing/Pages absent404 or cancelled454/461; no full current integrated checkpoint.192MiB cap unchanged,224MiB proposal pending explicit human decision; external ENOSPC pauses bulk local work. Additional conflict/fix follow-up review round decision remains to be asked per workflow. Overall merge-ready request remains in progress. No merge or draft promotion; numerical bracket and latest362T093 unchanged; first-eight producer unimplemented/unregistered/unrun.
 Review: https://github.com/jlevy/squares/blob/18e3a6f4f20f534e80074131d4947c633cca5ef3/docs/project/reviews/review-2026-10-08-n17-merge-readiness.md
 Progress: https://github.com/jlevy/squares/issues/405#issuecomment-6071221013
+
+October8 source-qualified CI correction and bounded repair:
+Newer actual checkout/tree evidence supersedes prior absent/cancelled observations: 404Pages37860039643PASS/Packing37860039766FAIL;454Pages37860039795PASS/Packing37860039856FAIL;461Pages37860039410PASS/Packing37860039390FAIL, qualifying18e/5dc/742 source trees. GitHub bodies and existing A1/405 comments corrected/read back. New owning-layer sourcec3dc6027a66fe396f22953a1d29945420198bdda commits isolated CLI controls, scientific dependency/index restoration, bounded frontend diagnostics, measured suite costs and consolidation report. All54 combined producer/refusal/index controlsPASS3.89s;67suite-file controlsPASS3.11s;15successful wholemodule reports413PASS,25.762phase seconds,615historicalweights/ceilings preserved. Unknown shares9.5/9.0/9.5/8.8%. Failed guard module2ENOSPC controls excluded from admission. All47recordsPASS23.54s. Actual historical suiteD101.34s fromgreen37613399745 admitted; current190.63s/different105shape not pooled and current143s compliance remains open. Root committed selectedsource202715130B/1388538over192MiB, including+558148B scientific inputs;224MiB proposalunapplied. Fullworker/browser/push/fullcheckpoint not qualified. Formalupstackpropagation in progress; a clean-worktree occupancy refusal restored originalchildrefs before bounded recovery. No merge/draft promotion/proof result; numericbracket/latest362T093 unchanged. OverallrequiredCI/fullcheckpoint capdecision & followupreviewdecision remain open.
