@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-kpress-viewport data-kpress-theme="system"
+      data-kpress-resolved-theme="light" data-kpress-palette="neutral"
+      data-kpress-prose-font="serif" data-kpress-math-text="prose"
+      data-kpress-mono-font="planetaire">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="generator" content="kpress">
+<!-- The page's identity and what a shared link shows, from the one definition every
+     page of the site writes its head from (`render_overview.head_tags`). -->
+{{PAGE_HEAD}}
+{{SITE_FAVICON}}
+<style>{{KPRESS_CSS}}</style>
+<style>{{KATEX_CSS}}</style>
+<style>{{RELATION_CSS}}</style>
+<!-- The text tokens every page of the site shares: type base, reading measure, heading
+     scale, the paper's roles, and the site's own faces. See templates/paper-type.css. -->
+<style>{{PAPER_TYPE_CSS}}</style>
+<!-- The site's navigation bar, shared with every other page of the site and hidden in
+     print, so the PDF does not move. See templates/site-nav.css. -->
+<style>{{SITE_NAV_CSS}}</style>
+<!-- The publication layer this paper shares with the first one: its stylesheet and the
+     head script that stylesheet's math rule reads the platform from, which go together
+     (`render_n11_lower_bounds_explainer.publication_layer`). See
+     templates/paper-publication.css. -->
+<script>{{NATIVE_MATH_METRICS}}</script>
+<style>{{PUBLICATION_CSS}}</style>
+<style>{{PAPER_CSS}}</style>
+<script>{{THEME_BOOTSTRAP}}</script>
+<script>{{SITE_EMBED}}</script>
+</head>
+<body>
+<main class="kpress-page-main kpress-viewport">
+{{SITE_NAV}}
+<article class="kpress kpress-doc kpress-prose cert-page methods-paper">
+<!-- The body opens with the paper's front, the formats row, the title and the credits,
+     which the article takes from the papers' shared component
+     (`devtools.paper_front`) and KPress renders as it renders the first paper's. -->
+{{BODY_HTML}}
+<p class="col colophon centred">{{COLOPHON}}</p>
+</article>
+</main>
+<script>{{SITE_THEME}}</script>
+<!-- The math pipeline every page of the site shares, and the site pages' driver for
+     it. See `render_n11_optimality_review.math_scripts`. -->
+<script>{{KATEX_JS}}</script>
+<script>{{SITE_MATH}}</script>
+<script>{{DIAGRAM_LABEL_SCRIPT}}</script>
+</body>
+</html>

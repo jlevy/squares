@@ -37,6 +37,33 @@ name: Certificate page
       - packing/cases/n11_threshold_certificate/**
       - packing/devtools/render_n11_lower_bounds_explainer.py
       - packing/devtools/paper_front.py
+      - packing/devtools/render_packing_methods.py
+      - packing/devtools/artifact_dates.py
+      - packing/devtools/templates/packing-methods-article.md
+      - packing/devtools/templates/packing-methods-shell.html
+      - packing/devtools/templates/packing-methods.css
+      - packing/tests/test_render_packing_methods.py
+      - docs/project/research/research-2026-09-08-annealing-for-square-packing.md
+      - docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md
+      - packing/campaign/explorations/X-034-the-workbench-physics-as-a-search.md
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md
+      - packing/resources/papers/gensane-ryckelynck-2005-improved-dense-packings.raw.md
+      - packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md
+      - packing/resources/web/de-winter-square-packing-211-2026-09-16/README.md
+      - packing/resources/web/evand-square-packing-2026-10-05/README.md
+      - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/README.md
+      - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/README.md
+      - packing/resources/web/franciscouzo-square-packing-2026-09-27/README.md
+      - packing/resources/web/franciscouzo-square-packing-2026-10-03/README.md
+      - packing/resources/web/friedman-ds7-survey-2009-html.md
+      - packing/resources/web/kingbird-run-statistics-2026/README.md
+      - packing/resources/web/kingbird-squares-in-squares-analytic-minimization.md
+      - packing/resources/web/kingbird-squares-in-squares-compared-2026-08-22.md
+      - packing/resources/web/schadt-s29-2025/README.md
+      - packing/resources/web/squish-401-2026-10-07/README.md
+      - packing/resources/web/squish-401-update-2026-10-07/README.md
+      - packing/resources/web/squish-422-second-update-2026-10-07/README.md
       - packing/devtools/prepare_n11_lower_bounds_explainer_math.py
       - packing/devtools/measure_net_coarsening.py
       - packing/devtools/build_composite_figure_data.py
@@ -200,6 +227,7 @@ concurrency:
 #
 #   scope ─┬─ n11-threshold-bound-review ──────────────┤
 #          ├─ n11-optimality-review ───────────────────┤
+#          ├─ square-packing-methods-survey ──────────┤
 #          ├─ workbench ───────────────────────────────┐
 #          ├─ overview ────────────────────────────────┤
 #          ├─ prepare ─┬─ pdf ─────────────────────────┼─ publish ─┐
@@ -226,16 +254,15 @@ concurrency:
 # their bounded artifact join. Independent page producers remain parallel. Every check
 # still reads the same prepared artifact; nothing moved off the pull request (`OR-13`).
 #
-# The three papers of the n = 11 series are served under `papers/`, each by its slug
-# (`render_overview.PAPERS`), and a job, an output or an artifact that is one paper's
-# carries that slug: `n11-lower-bounds-explainer` (built by `prepare`, checked by the jobs
-# after it), `n11-threshold-bound-review` and `n11-optimality-review`. Each is rendered
-# into `site/papers/` on its own runner, where it is served, so every check reads the
+# The papers are served under `papers/`, each by its slug (`render_overview.PAPERS`),
+# and a job, an output or an artifact that is one paper's carries that slug. The three
+# n = 11 papers and the standalone `square-packing-methods-survey` each render into
+# `site/papers/` on their own runner, where they are served, so every check reads the
 # page at its published path and `publish` renames nothing.
 jobs:
-  # Which of the five builds this change can affect: the lower-bounds explainer, the
-  # workbench, the site's own pages (the overview at `/` and the pages beside it), the
-  # threshold-bound review and the optimality review. A pull request that touches none of their inputs does no browser work at
+  # Which builds this change can affect: each paper, the workbench, and the site's own
+  # pages (the overview at `/` and the pages beside it). A pull request that touches
+  # none of their inputs does no browser work at
   # all, and a workbench-only change no longer pays for the explainer's checks (#178
   # did: ten workbench probe files, about 330 s of explainer Chromium).
   # `devtools.pages_scope` derives each half's inputs from the builder's own declaration
@@ -259,6 +286,8 @@ jobs:
       n11_threshold_bound_review_reason: ${{ steps.scope.outputs.n11_threshold_bound_review_reason }}
       n11_optimality_review: ${{ steps.scope.outputs.n11_optimality_review }}
       n11_optimality_review_reason: ${{ steps.scope.outputs.n11_optimality_review_reason }}
+      square_packing_methods_survey: ${{ steps.scope.outputs.square_packing_methods_survey }}
+      square_packing_methods_survey_reason: ${{ steps.scope.outputs.square_packing_methods_survey_reason }}
     defaults:
       run:
         working-directory: packing
@@ -266,7 +295,7 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          # The declared inputs are read by importing the five builders, and kpress is
+          # The declared inputs are read by importing the builders, and kpress is
           # installed from the submodule.
           submodules: true
           persist-credentials: false
@@ -324,6 +353,7 @@ jobs:
           overview overview and the site's own pages
           n11_threshold_bound_review threshold-bound review
           n11_optimality_review optimality review
+          square_packing_methods_survey square packing methods survey
           PAGES
 
   n11-optimality-review:
@@ -482,6 +512,95 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: n11-threshold-bound-review-page
+          path: packing/site
+          if-no-files-found: error
+          retention-days: 7
+
+  # The standalone methods survey uses the same paper publication path as the
+  # reviews: its renderer contract, served HTML and Markdown, printed PDF, and checked
+  # producer artifact. It reads no retained certificate packet.
+  square-packing-methods-survey:
+    needs: scope
+    if: needs.scope.outputs.square_packing_methods_survey == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
+            /packing/campaign/explorations/X-034-the-workbench-physics-as-a-search.md
+            /packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+            /packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md
+            /packing/resources/papers/gensane-ryckelynck-2005-improved-dense-packings.raw.md
+            /packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md
+            /packing/resources/web/de-winter-square-packing-211-2026-09-16/README.md
+            /packing/resources/web/evand-square-packing-2026-10-05/README.md
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/README.md
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/README.md
+            /packing/resources/web/franciscouzo-square-packing-2026-09-27/README.md
+            /packing/resources/web/franciscouzo-square-packing-2026-10-03/README.md
+            /packing/resources/web/friedman-ds7-survey-2009-html.md
+            /packing/resources/web/kingbird-run-statistics-2026/README.md
+            /packing/resources/web/kingbird-squares-in-squares-analytic-minimization.md
+            /packing/resources/web/kingbird-squares-in-squares-compared-2026-08-22.md
+            /packing/resources/web/schadt-s29-2025/README.md
+            /packing/resources/web/squish-401-2026-10-07/README.md
+            /packing/resources/web/squish-401-update-2026-10-07/README.md
+            /packing/resources/web/squish-422-second-update-2026-10-07/README.md
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Install Node 24 for KPress math
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+
+      - name: Cache the pinned Chromium browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned Chromium headless shell
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+
+      - name: Check the paper's renderer
+        env:
+          SQPACK_PACKING_METHODS_BROWSER: "1"
+        run: uv run --frozen --all-extras --group dev pytest -q tests/test_render_packing_methods.py tests/test_paper_publication.py
+
+      - name: Render and check the paper in HTML, Markdown, and PDF
+        run: |
+          uv run --frozen --group dev python -m devtools.render_packing_methods --site site --pdf
+          uv run --frozen --group dev python -m devtools.render_packing_methods --site site --check
+          test -s site/papers/square-packing-methods-survey.pdf
+          uv run --frozen --group dev python -m devtools.artifact_dates --pdf site/papers/square-packing-methods-survey.pdf --revised packing-methods
+          uv run --frozen --group dev python -m devtools.social_card --output-dir site
+          uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:square-packing-methods-survey
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/square-packing-methods-survey.html
+
+      - name: Share the checked paper
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: square-packing-methods-survey-page
           path: packing/site
           if-no-files-found: error
           retention-days: 7
@@ -1699,13 +1818,15 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  # What the deployment publishes, assembled from the six jobs that produce it: the
+  # What the deployment publishes, assembled from the seven jobs that produce it: the
   # lower-bounds explainer and its Markdown under `/papers/`, with the atlas's files at
   # the root (`prepare`), its checked PDF beside it (`pdf`), the site's own pages at the
   # root with the forwarders at the papers' old addresses (`overview`), the workbench at
   # `/workbench/` (`workbench`), and the threshold-bound review and the optimality review,
   # each with its Markdown and PDF, under `/papers/` (`n11-threshold-bound-review`,
-  # `n11-optimality-review`). It runs on pull requests too -- a missing artifact fails
+  # `n11-optimality-review`), and the standalone methods survey
+  # (`square-packing-methods-survey`).
+  # It runs on pull requests too -- a missing artifact fails
   # review rather than the next deploy -- lists every file with its size and digest so
   # the tree can be compared across runs, and holds every page's head in it to the site's
   # contract (`check_published_site --local`); only a push to `main` uploads it for Pages.
@@ -1716,10 +1837,10 @@ jobs:
   # skips it with that producer, as one that skipped the workbench always has; each
   # producer's own job has already built and checked what it would contribute, and the
   # assembly itself is exercised on every push to `main` and on every pull request that
-  # touches an input all five builds share (the workflow, the scope tool, kpress, the
+  # touches an input all builds share (the workflow, the scope tool, kpress, the
   # lockfile). A partial tree is never a publication, so there is nothing to assemble.
   publish:
-    needs: [prepare, pdf, overview, workbench, n11-threshold-bound-review, n11-optimality-review]
+    needs: [prepare, pdf, overview, workbench, n11-threshold-bound-review, n11-optimality-review, square-packing-methods-survey]
     runs-on: ubuntu-latest
     steps:
       # The assembled site is held to the head contract once it is whole, with the
@@ -1831,6 +1952,20 @@ jobs:
           test -s "$STAGED/papers/n11-optimality-review.html"
           uv run --frozen --group dev python -m devtools.assemble_site --destination site "$STAGED"
 
+      - name: Use the checked methods survey
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: square-packing-methods-survey-page
+          path: ${{ runner.temp }}/square-packing-methods-survey-page
+
+      - name: Put the methods survey beside the other papers, refusing any name already there
+        env:
+          STAGED: ${{ runner.temp }}/square-packing-methods-survey-page
+        working-directory: packing
+        run: |
+          test -s "$STAGED/papers/square-packing-methods-survey.html"
+          uv run --frozen --group dev python -m devtools.assemble_site --destination site "$STAGED"
+
       # The papers moved to `papers/<slug>` on 2026-10-01. A page that moved is forwarded
       # by a page of the overview's build; a Markdown file or a PDF cannot forward, so
       # each is served at its old address too, as a copy of the checked file. The list is
@@ -1874,7 +2009,7 @@ jobs:
   # passed, and when a job was skipped because its page was out of scope; it fails on any
   # failure or cancellation, and on a skip whose cause was an upstream failure -- that
   # upstream job is also needed here, so its own failure is what fails the aggregate. The
-  # scope's five outputs must be exactly `true` or `false`, so a scope that wrote nothing
+  # scope's outputs must be exactly `true` or `false`, so a scope that wrote nothing
   # cannot pass as a decision to skip everything.
   #
   # `!cancelled()` rather than `always()`, as `packing-required` has had since D-380. With
@@ -1892,6 +2027,7 @@ jobs:
       - overview
       - n11-threshold-bound-review
       - n11-optimality-review
+      - square-packing-methods-survey
       - pdf
       - print-layout
       - typography
@@ -1913,9 +2049,10 @@ jobs:
           jq -r 'to_entries[] | "\(.value.result)\t\(.key)"' <<< "$NEEDS"
           jq -e '
             .scope.result == "success"
-            and ([.scope.outputs.n11_lower_bounds_explainer, .scope.outputs.workbench, .scope.outputs.overview, .scope.outputs.n11_threshold_bound_review, .scope.outputs.n11_optimality_review] | all(. == "true" or . == "false"))
+            and ([.scope.outputs.n11_lower_bounds_explainer, .scope.outputs.workbench, .scope.outputs.overview, .scope.outputs.n11_threshold_bound_review, .scope.outputs.n11_optimality_review, .scope.outputs.square_packing_methods_survey] | all(. == "true" or . == "false"))
             and (.scope.outputs.n11_threshold_bound_review != "true" or .["n11-threshold-bound-review"].result == "success")
             and (.scope.outputs.n11_optimality_review != "true" or .["n11-optimality-review"].result == "success")
+            and (.scope.outputs.square_packing_methods_survey != "true" or .["square-packing-methods-survey"].result == "success")
             and ([.[].result] | all(. == "success" or . == "skipped"))
           ' <<< "$NEEDS" > /dev/null
 
