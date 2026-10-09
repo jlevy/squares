@@ -5,7 +5,7 @@ title: Make all open n-17 PRs source-qualified and merge-ready
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@spud10.local
 labels:
   - n-17
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T05:25:23.889Z
-updated_at: 2026-10-09T05:34:59.984Z
+updated_at: 2026-10-09T05:49:27.047Z
 started_at: 2026-10-09T05:27:42.212Z
 ---
-Latest user requests diagnosing and fixing every open n-17 PR. Scope: known research snapshot-cap failures on404/454/461/464; conflicting/cancelled catalogue stack403/435; review and current-check qualification of402/408/409/450/452/453. Use GPT-6.1 Sol for engineering and Astra for mathematical/deeper correctness review. No merges or draft promotions. Preserve science, source custody and all resource/proof ceilings; proposed224MiB cap remains unapplied without direct human approval. Dependencies and separate author work must be preserved.
+Diagnose and make all twelve open n-17 PRs merge-ready: research #404/#454/#461/#464, catalogue #403/#435, peers #402/#408/#409, intake #450 and supporting #452/#453. Use Sol 6.1 for engineering and Astra for mathematical correctness. Research worker-copy selection repair preserves the 192 MiB cap and scientific source custody; broader push validation and publication are pending. Catalogue owners have published conflict-free main integrations but current CI exposes reproducible compressed-data and Pages integration failures; owners are actively repairing them while our independent reviews remain read-only. Peer #402 senior A and dedicated correctness B pass at its unchanged head; #408 review is underway. Supporting #452/#453 remain fully qualified. Preserve dependencies and other sessions; no merge, draft promotion, new proof result or bound movement.

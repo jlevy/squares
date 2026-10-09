@@ -5,7 +5,7 @@ title: "n17 stack A1: qualify current heads with required CI and full checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -15,10 +15,10 @@ parent_id: is-01m4eq9mdaejkedd1b09qqn09p
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:52:29.377Z
-updated_at: 2026-10-09T05:11:30.813Z
+updated_at: 2026-10-09T05:49:25.946Z
 started_at: 2026-10-08T22:00:55.817Z
 ---
-Senior review A1 High remains open for source-copy resource qualification and a fresh complete checkpoint on the research PRs #404/#454/#461/#464. Current-main conflicts and bounded fixture/consumer integration repairs are completed, independently reviewed and published. Each latest required research run fails only three assertions against the unchanged 192 MiB selected-source cap; other required partitions and Pages pass. The proposed 224 MiB cap/test patch awaits direct human authorization after earlier automatic approval rejection. Do not prune scientific inputs or repeat unchanged cap-refused gates. Supporting PRs #452/#453 now pass their required and source-qualified full checkpoints; that does not qualify the research stack. Source integration think-iz2b is completed. Preserve the original A1 review and historical qualifications in notes.
+A1 remains open until the research PRs #404/#454/#461/#464 have fresh current-source required CI and complete checkpoints. A bounded dependency-aware worker-copy repair has passed independent Astra static review and sixteen actual-worker controls: omit five operational explainer-comparison payloads that no registered worker consumer reads, preserve scientific inputs and all ceilings, and retain the 192 MiB cap. The broader push gate is still being diagnosed before commit/publication; propagation and new hosted qualification remain pending. The older 224 MiB proposal remains unapplied and is not the selected remedy. Supporting #452/#453 already pass required and source-qualified full checkpoints. Preserve historical evidence in the notes; no unchanged cap-refused reruns or bound claim.
 
 ## Notes
 
