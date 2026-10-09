@@ -42,6 +42,7 @@ from devtools.overview_data import (
 )
 from devtools.render_overview import (
     DOCUMENT_PAGES,
+    EXACT_SIDE_VALUES,
     N11_LOWER_BOUNDS_EXPLAINER,
     N11_OPTIMALITY_REVIEW,
     N11_THRESHOLD_BOUND_REVIEW,
@@ -253,17 +254,18 @@ SECTION_CARD_SIZES: dict[str, CardSize] = {
 }
 
 #: A section set in lines of its own, as counts of its cards in order, where one
-#: wrapping row would not set them as they are meant to read: the seven page cards stand
-#: one, three and three, the Frontier page alone at the top, then the three parts of the
+#: wrapping row would not set them as they are meant to read: the eight page cards stand
+#: one, three, two and two, the Frontier page alone at the top, then the three parts of the
 #: n = 11 series on one line, one card per paper in reading order (the series plan,
-#: 2026-10-05), then the methods tutorial, the first-principles tutorial and the workbench.
+#: 2026-10-05), then the methods and exact-values papers, followed by the
+#: first-principles tutorial and the workbench.
 #: They stood one, two and two while
 #: the site had two papers (the owner, 2026-10-02, `think-ns3d`; two over three from
 #: `think-ec5k` the same day, the Frontier page's card last). Each line is a row of its
 #: own, and none sets more cards to a line than the longest line holds, so the lines
 #: share one column width, a third of the frame's. The stylesheet holds each longest
 #: line here to a rule.
-SECTION_CARD_LINES: dict[str, tuple[int, ...]] = {"pages": (1, 3, 3)}
+SECTION_CARD_LINES: dict[str, tuple[int, ...]] = {"pages": (1, 3, 2, 2)}
 
 
 #: Elements with no end tag, which open nothing a parser must later close.
@@ -1638,13 +1640,9 @@ PAPER_DESCRIPTIONS: dict[str, str] = {
     PACKING_METHODS: (
         "How seeds, search, local refinement and exact checks produce record upper bounds."
     ),
-    "exact-side-values": (
-        "Exact side values for packing unit squares",
-        (
-            "All retained current and superseded side polynomials through n = 324, "
-            "with exact root and irreducibility checks, closed forms, and routes for "
-            "the remaining numerical values."
-        ),
+    EXACT_SIDE_VALUES: (
+        "Recorded exact sides, complete polynomial coefficients and root checks, "
+        "with historical source records and open derivation routes."
     ),
 }
 
@@ -1661,8 +1659,8 @@ OPTIMALITY_PAPER = paper_path(N11_OPTIMALITY_REVIEW)
 #: The site's papers, in the order the Papers page shows them, one large card each
 #: (`paper_cards`): the three parts of the n = 11 series in reading order, I, II, III,
 #: each labelled by its part (`render_overview.PAPERS`, the one registry a new paper is
-#: entered in), then the standalone methods tutorial and the first-principles tutorial,
-#: the background to the series, whose description is
+#: entered in), then the standalone methods and exact-values papers and the
+#: first-principles tutorial, the background to the series, whose description is
 #: `TUTORIAL.md`'s own opening, its audience and what it owns.
 PAPERS: tuple[Paper, ...] = (
     *(
