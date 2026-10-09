@@ -910,6 +910,37 @@ these rows as BC-406 to BC-411.
 | 289 | Bound the n17 apex from retained signed-position duals | registered | [H-279](hypotheses/H-279-n17-widened-apex-position-duals.md) | Exact residual and Lipschitz-mass checks supply a conditional inner cube, with the physical-packing implication hand-reviewed separately. |
 | 290 | Certify one widened n17 angle patch for all owner branches | registered | [H-280](hypotheses/H-280-n17-one-all-branch-annulus-patch.md) | A frozen retained dual, all-owner hulls and exact bounded-residual margins test certificate readiness without new LP solves or a claim of complete annulus coverage. |
 
+## The n17 Program After Session 186 — X-051
+
+[X-051](explorations/X-051-n17-optimality-program-review.md) is the owner’s W3 review of
+the whole n17 record after Sessions 184 to 186. It maps every proof obligation with its
+evidential status, finds that the week’s effort went to the two parts of the proof that
+cannot finish it, and shows by two cheap computations that centre-only relaxations (the
+shared-centre LP, the weighted-vertex screen, the incircle SOS) cannot exclude any cell
+triple. Its selection: measure exclusion reach on the endpoint’s own state at caps below
+$S^\ast$ first, rebase capture on exact LP certificates over the feature-forced region,
+and raise throughput on the hard tail; stop conditional propagation inside one guard and
+box-seeded kernel capture pilots.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 291 | The endpoint’s own occupancy state is excluded by the whole-state engines at a cap one hundredth below $S^\ast$ | registered | [H-325](hypotheses/H-325-n17-endpoint-state-cap-scan.md) | The one number never measured: the side margin at which exclusion alone reaches the family’s state; prices the cap ladder and the no-man’s-land |
+| 292 | A verified lower bound $s(17) > S^\ast - 1/100$ by exclusion of every residue orbit at a centred cap, the 60 admissions carried down | registered | [H-326](hypotheses/H-326-n17-cap-ladder-lower-bound.md) | A rung of the cap ladder is a T-item about $5\times10^{-3}$ above R071; its certificates do not enter the optimality proof |
+| 293 | Most distance-2 residue orbits contain an infeasible sub-pattern of arity at most ten | registered | [H-327](hypotheses/H-327-n17-hard-tail-decomposability.md) | Routes the tail to sub-pattern engines or to whole-state and coupled methods |
+| 294 | Centre-only relaxations exclude nothing at the cap: twenty centres fit, and every cell triple has a vertex with all three distances at least 1.33 | registered | [H-328](hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) | Predicts eight exact survivors for the first-eight LP; retires the weighted screen and the no-ball order-2 SOS on original cells |
+| 295 | An exact dual-sheet patch certificate proves the widened projection theorem over the feature-forced angle box | registered | [H-329](hypotheses/H-329-n17-feature-forced-lp-terminal-certificate.md) | A terminal theorem fifty times larger than $1/5000$, as a list of exact rational duals; patch count under dual degeneracy is the risk |
+| 296 | The gap between exclusion reach and the terminal radius is confined to the two softest directions | registered | [H-330](hypotheses/H-330-n17-no-mans-land-map.md) | Replaces the two competing capture readings by a measurement, direction by direction |
+| 297 | Learned-weight angle splits (B2) bring branch and bound to the hard tail | registered | [H-331](hypotheses/H-331-n17-b2-branching-on-the-hard-tail.md) | The only measured lever on tree size; certificate size per orbit is the routing figure |
+| 298 | The four contributor certificates with reported FULL receipts replay and admit within bounded resources | registered | [H-332](hypotheses/H-332-n17-contributor-admission-throughput.md) | First census movement from contributor work; the RSS monitor that stopped the C2 replay is repaired first |
+| 299 | Which hand lemmas of the n17 proof formalise in Lean within a day each | open question | [H-333](hypotheses/H-333-n17-lean-hand-lemmas.md) | The wall lemma and the centred-container lemma first; the hand layer is what a reader takes on one review |
+| 300 | A composition checker derives the residue and the theorem from the receipts and refuses every mutant | registered | [H-334](hypotheses/H-334-n17-composition-checker.md) | Per-entry caps are needed before any cap below $U$ exists; the n11 composer is the pattern |
+| 301 | The Rust and Python kernel verifiers agree on every admitted entry and refuse every mutant | registered | [H-335](hypotheses/H-335-n17-two-verifier-parity.md) | Same-object parity on the whole ledger makes the second checker load-bearing |
+| 302 | Every admitted certificate is hosted and one of each kind replays from a fresh clone | registered | [H-336](hypotheses/H-336-n17-fresh-clone-replay.md) | Today no admitted n17 certificate can be verified from a fresh clone |
+| 303 | The repaired n17 capture producer reproduces n11’s contraction from the cells | registered | [H-337](hypotheses/H-337-n11-capture-positive-control.md) | R9’s stage 0, selected on 6 October and never run; a pass reinstates the kernel route, a fail closes it |
+| 304 | Does a charge specialised to one occupancy state exclude it below $S^\ast$ | open question | [H-338](hypotheses/H-338-n17-state-conditioned-charge.md) | The only non-pairwise engine candidate for consistency-limited states |
+| 305 | A small feature-flip atlas doubles the terminal region’s radius | registered | [H-339](hypotheses/H-339-n17-feature-flip-atlas.md) | Only a handful of options can flip within $2\times10^{-2}$; each flip is one more LP |
+| 306 | The composed local theorem holds with every coordinate at least $1/1216$ | registered | [H-340](hypotheses/H-340-n17-per-coordinate-radius-composition.md) | The 3 October vector, registered as a round because H-329 and H-330 make it load-bearing |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.
