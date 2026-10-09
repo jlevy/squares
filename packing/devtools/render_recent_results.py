@@ -31,8 +31,10 @@ records hold a bound at least as good as every bound it states, and *pending ado
 a lane it can hold (`check_standing.improvements`): a report the case records have not
 taken in yet, such as `T-128`'s eight rational certificates, which nothing on record has
 replaced. Superseded means replaced, so it is decided by the numbers the entry's words
-state, compared exactly; an entry whose words state no bound the check reads is held to
-the structure alone, and is superseded wherever no case bound rests on it.
+state, compared exactly where the case record's bound is exact and, beside a closed form,
+within one unit of its printed value's last place (`span`), where a tie is all that can
+be said; an entry whose words state no bound the check reads is held to the structure
+alone, and is superseded wherever no case bound rests on it.
 
 **Standing is about bounds, so an entry whose evidence claims none has no standing**
 (`NO_STANDING`): no later bound supersedes a rigidity or a case exclusion. The views show
@@ -67,6 +69,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, field
+from decimal import Decimal
 from fractions import Fraction
 from typing import Any, NamedTuple
 
@@ -264,6 +267,25 @@ def magnitude(bound: Mapping[str, Any]) -> Fraction:
     """A bound's value: its exact form where that is a number, else its recorded value."""
     rational = _rational(bound.get("exact_form"))
     return rational if rational is not None else Fraction(str(bound["value"]))
+
+
+def span(bound: Mapping[str, Any]) -> tuple[Fraction, Fraction]:
+    """The numbers a case record's bound may be, as a closed interval, for comparing a
+    stated bound with it exactly. Its exact form where that is a number, and the value it
+    prints where it gives no exact form. Beside a closed form, such as a root or `sqrt`,
+    the printed value is a display that may be cut or rounded either way, so it stands for
+    every number within one unit of its last printed place, as
+    `bounds_agree_at_declared_precision` reads a display: n = 5's verified ceiling prints
+    `2 + (1/2)sqrt(2)` rounded up in its 32nd place."""
+    rational = _rational(bound.get("exact_form"))
+    if rational is not None:
+        return rational, rational
+    value = Fraction(str(bound["value"]))
+    exponent = Decimal(str(bound["value"])).as_tuple().exponent
+    if not bound.get("exact_form") or not isinstance(exponent, int):
+        return value, value
+    unit = Fraction(10) ** exponent
+    return value - unit, value + unit
 
 
 def shown(bound: Mapping[str, Any]) -> str:
@@ -486,6 +508,21 @@ def held(n: int, records: Records) -> Held:
     )
 
 
+def lane_holders(n: int, records: Records, direction: str, lanes: Iterable[str]) -> set[str]:
+    """The entries case `n`'s bounds in `direction` (`lower` or `upper`) rest on, in the
+    named `lanes` (`verified`, `reported`), read as `held` reads them."""
+    case = records.cases[n]
+    found: set[str] = set()
+    for lane in lanes:
+        bound = case.get(f"{lane}_{direction}_bound")
+        if direction == "upper":
+            found |= _upper_holders(n, bound, records)
+        elif bound:
+            label = "lower" if lane == "verified" else "reported lower"
+            found |= _lower_holders(n, bound, records, label)
+    return found
+
+
 def standing(record: Mapping[str, Any], records: Records) -> str:
     """Whether an entry holds a case bound now, and if not, why not. An entry whose
     evidence claims no bound has no standing, `NO_STANDING`.
@@ -557,13 +594,33 @@ def superseding(record: Mapping[str, Any], records: Records) -> tuple[str, ...]:
     a lower bound's and an exact value's are the lower bounds' holders, since a
     construction never supersedes a proof. An audit or a correction that cites a bound's
     evidence carries it and supersedes nothing. Empty where no register entry carries
-    those bounds."""
-    upper = str(record["kind"]) == "upper-bound"
+    those bounds.
+
+    Where the entry's words state its bound at a case (`check_standing.findings`), only
+    the lanes whose bound ties or beats it there are named. A lane whose bound is worse
+    than the entry's replaced nothing: a report beaten in the reported lane is not
+    superseded by the holder of a worse verified bound. Where the words state none, both
+    lanes are named, as `held` reads them."""
+    # `check_standing` reads this module, so its reader of stated bounds is imported here.
+    from devtools.check_standing import (  # noqa: PLC0415
+        BEATEN,
+        EQUAL,
+        LANES,
+        LOWER,
+        UPPER,
+        findings,
+    )
+
+    direction = UPPER if str(record["kind"]) == "upper-bound" else LOWER
+    replaced = {
+        finding.n: {lane for lane in LANES if getattr(finding, lane) in {BEATEN, EQUAL}}
+        for finding in findings(record, records)
+        if finding.direction == direction
+    }
     found: set[str] = set()
     for n in _scope(record):
         if n in records.cases:
-            case = held(n, records)
-            found |= case.upper_holders if upper else case.lower_holders
+            found |= lane_holders(n, records, direction, replaced.get(n, set(LANES)))
     found.discard(str(record["id"]))
     return tuple(
         sorted(entry for entry in found if records.results[entry]["kind"] in BOUND_KINDS)

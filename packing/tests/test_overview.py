@@ -3055,8 +3055,10 @@ def test_every_result_shows_its_status_and_its_place_on_the_frontier(
 ) -> None:
     """A row's status line is derived, never restated. Its first chip is the status,
     which every row draws (`result_status.status`) and carries as an attribute, for the
-    filter. After it comes `superseded`, on a bound that no case bound rests on now
-    (`render_recent_results.superseded`), and that is all a row shows of a standing.
+    filter. After it comes `superseded`, on a bound that no case bound rests on now and
+    whose cases hold a bound at least as good as each it states
+    (`render_recent_results.superseded`), and that is all a row shows of a standing: a
+    better bound the case records have not taken in yet, pending adoption, has no chip.
     That a bound is only reported is the status `recorded` and no chip of its own; a
     second proof of a held value says so by its kind; and a result that is no bound is
     marked only where its entry declares a later result that implies it
