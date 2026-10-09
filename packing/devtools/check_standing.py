@@ -107,6 +107,13 @@ UNREPLAYED = frozenset({"C0", "C1"})
 EN_DASH = "\u2013"
 EQUAL = "equal"
 EXCEEDS = "exceeds"
+#: The directions each bound kind bounds, the only ones in which it can improve on its
+#: case record: a lower bound's words may quote a ceiling, and that is no claim of its.
+KIND_DIRECTIONS: Mapping[str, tuple[str, ...]] = {
+    "lower-bound": (LOWER,),
+    "upper-bound": (UPPER,),
+    "optimality": (LOWER, UPPER),
+}
 
 
 class Stated(NamedTuple):
@@ -237,6 +244,8 @@ def improvements(record: Mapping[str, Any], records: view.Records) -> list[Findi
     """The bounds an entry states that are strictly better than its case record's bound of
     the same direction in a lane the entry can hold: the reported lane for a report
     (`UNREPLAYED`), either lane for a replayed result, since two lanes are never mixed.
+    Only a direction its kind bounds counts (`KIND_DIRECTIONS`), and a kind that is no
+    bound improves on nothing.
 
     Each is a bound that nothing on record has replaced, so an entry that holds no case
     bound and states one is pending adoption (`render_recent_results.PENDING_ADOPTION`)
@@ -245,10 +254,12 @@ def improvements(record: Mapping[str, Any], records: view.Records) -> list[Findi
     decimals improve on a bound only where every number they stand for is better than
     every number the case record's bound may be."""
     report = str(record.get("confirmation")) in UNREPLAYED
+    directions = KIND_DIRECTIONS.get(str(record.get("kind")), ())
     return [
         finding
         for finding in findings(record, records)
-        if finding.reported == EXCEEDS or (not report and finding.verified == EXCEEDS)
+        if finding.direction in directions
+        and (finding.reported == EXCEEDS or (not report and finding.verified == EXCEEDS))
     ]
 
 

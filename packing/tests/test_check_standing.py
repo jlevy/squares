@@ -402,3 +402,22 @@ def test_a_closed_form_bound_is_a_display_a_unit_either_side(records: view.Recor
     )
     assert check_standing.improvements(stating, records) == []
     assert view.standing(stating, records) == view.SUPERSEDED
+
+
+def test_an_entry_improves_only_in_the_directions_its_kind_bounds(
+    records: view.Records,
+) -> None:
+    """A lower bound's words may quote a ceiling, and an upper bound's a floor; neither is
+    its claim. T-128's sides read as a lower bound's words improve on nothing, and the
+    entry is superseded; read as an optimality's, both directions count."""
+    record = records.results["T-128"]
+    assert [finding.direction for finding in check_standing.improvements(record, records)] == [
+        UPPER
+    ] * 8
+    floor = _entry(records, "T-128", kind="lower-bound")
+    assert check_standing.improvements(floor, records) == []
+    assert view.standing(floor, records) == view.SUPERSEDED
+    exact = _entry(records, "T-128", kind="optimality")
+    assert len(check_standing.improvements(exact, records)) == 8
+    other = _entry(records, "T-128", kind="method-limit")
+    assert check_standing.improvements(other, records) == []
