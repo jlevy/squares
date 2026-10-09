@@ -665,7 +665,7 @@ evidence:
     relationship_to_generator: not-applicable
     origin: external
     novelty: previously-published
-    source_key: '[Queuingtheorydotcom n11 optimality 2026]'
+    source_key: '[Ahmed n11 optimality 2026]'
     replay_status: not-attempted
     verifiers: [V-queuingtheory-n11-verify]
     external_review:
@@ -703,7 +703,7 @@ evidence:
     shared_components: ["this repository's exact arithmetic and construction primitives (clipping, closed-cover and collision kernels), which the published source bundles"]
     origin: audited-here
     novelty: previously-published
-    source_key: '[Queuingtheorydotcom n11 optimality 2026]'
+    source_key: '[Ahmed n11 optimality 2026]'
     certificate: packing/resources/web/n11-optimality-2026-09-29/receipts/final-composition.json
     replay: >-
       Replay the geometric components with the frozen commands in
@@ -764,7 +764,7 @@ evidence:
     relationship_to_generator: same-implementation
     origin: external
     novelty: previously-published
-    source_key: '[Queuingtheorydotcom 11SquaresFormalized 2026]'
+    source_key: '[Ahmed 11SquaresFormalized 2026]'
     certificate: resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ElevenSquare/Optimality.lean
     replay_status: not-attempted
     verifiers: [V-queuingtheory-n11-lean, V-audit-n11-lean]
@@ -832,7 +832,7 @@ evidence:
     relationship_to_generator: same-implementation
     origin: replayed-here
     novelty: previously-published
-    source_key: '[Queuingtheorydotcom 11SquaresFormalized 2026]'
+    source_key: '[Ahmed 11SquaresFormalized 2026]'
     certificate: resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ElevenSquare/Construction.lean
     replay: >-
       From packing/, with elan: .venv/bin/python3 -m devtools.audit_n11_lean stage --out W,
@@ -887,7 +887,7 @@ evidence:
     relationship_to_generator: shared-components
     shared_components: ["this repository's exact arithmetic and construction primitives (clipping, closed-cover and collision kernels), which the published source bundles, as in E-n011-global-optimality-independent"]
     origin: audited-here
-    source_key: '[Queuingtheorydotcom n11 optimality 2026]'
+    source_key: '[Ahmed n11 optimality 2026]'
     source_reviewed: '2026-10-06'
     certificate: packing/resources/web/n11-optimality-2026-09-29/receipts/final-composition.json
     replay: >-

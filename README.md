@@ -31,7 +31,7 @@ $s(11) = T = 3.877083590022814\ldots$, the exact side of Walter Trump’s 1979 p
 [T-060](packing/frontier/RESULTS.md) records the global lower bound from the
 Astra-assisted
 [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal) proof by
-Queuingtheorydotcom, building on this project and Kleddamag.
+Mannaseh Ahmed, building on this project and Kleddamag.
 This repository independently replayed the proof’s exact inputs and audited their
 mathematical composition (`V3/C3/S5`: machine-checked, review record pending);
 [T-011](packing/frontier/RESULTS.md) verifies Trump’s matching witness.
@@ -46,7 +46,7 @@ the confirmation depends on and the reproducibility defects found in the source.
 On 6 October 2026 the proof was announced as formalized in Lean 4 “thanks to Astra and
 Claude”, in
 [11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) by
-Queuingtheorydotcom and contributors.
+Mannaseh Ahmed and contributors.
 This project’s statement audit reads its theorem as exactly $s(11) = T$, and its source
 reports that its full verification run, resumed from earlier validated receipts, passed,
 trusting Lean’s compiler for its numerical certificates.
@@ -86,9 +86,9 @@ Three of them form one series on $n = 11$, read in order:
    ([PDF](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.pdf),
    [source](packing/devtools/templates/n11-threshold-bound-review-article.md)).
 3. [**A Review of the Optimality Proof of the Trump Packing of 11 Squares**](https://jlevy.github.io/squares/papers/n11-optimality-review.html):
-   explains Queuingtheorydotcom’s proof that Trump’s packing is optimal,
-   $s(11) = 3.8770835\ldots$ (T-060): construction, case exclusions, capture and local
-   isolation, with figures drawn from or checked against the retained proof data
+   explains Ahmed’s proof that Trump’s packing is optimal, $s(11) = 3.8770835\ldots$
+   (T-060): construction, case exclusions, capture and local isolation, with figures
+   drawn from or checked against the retained proof data
    ([PDF](https://jlevy.github.io/squares/papers/n11-optimality-review.pdf),
    [source](packing/devtools/templates/n11-optimality-review-article.md)).
 

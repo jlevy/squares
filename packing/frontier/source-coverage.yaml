@@ -226,7 +226,7 @@ sources:
   role: source-repository
   url: https://github.com/Queuingtheorydotcom/11SquaresOptimal
   local: resources/web/n11-optimality-2026-09-29/
-  source_key: '[Queuingtheorydotcom n11 optimality 2026]'
+  source_key: '[Ahmed n11 optimality 2026]'
   scope:
     n_values:
     - 11
@@ -248,7 +248,7 @@ sources:
   role: source-repository
   url: https://github.com/Queuingtheorydotcom/11SquaresFormalized/tree/cdc746ed907d258057c283aeb6d077cb2c27e349
   local: resources/web/queuingtheorydotcom-n11-lean-2026-10-06/
-  source_key: '[Queuingtheorydotcom 11SquaresFormalized 2026]'
+  source_key: '[Ahmed 11SquaresFormalized 2026]'
   scope:
     n_values:
     - 11

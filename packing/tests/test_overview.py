@@ -465,9 +465,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(page: str) -> None:
     assert [card[1] for card in pages[1:4]] == ["Part I", "Part II", "Part III"]
     assert overview_sections.OPTIMALITY is overview_sections.PAPERS[2]
     note = pages[3][3]
-    assert note.startswith(
-        "Explains Queuingtheorydotcom\u2019s proof that Trump\u2019s packing"
-    )
+    assert note.startswith("Explains Ahmed\u2019s proof that Trump\u2019s packing")
     assert "(T-060)" in note
     assert "formal" not in note.lower()
     served = {*render_overview.SITE_PAGES, "workbench/"}
@@ -1297,7 +1295,7 @@ def test_a_cases_visual_summary_carries_what_the_film_shows() -> None:
     assert eleven["open"] == []
     assert eleven["record"] == "n-011"
     assert eleven["cite"]["lower"] == {
-        "text": "Queuingtheorydotcom after Levy et al. 2026, Web",
+        "text": "Ahmed after Levy, Kleddamag 2026, GitHub",
         "corrects": None,
         "note": "(confirmed T-060)",
     }
@@ -3895,12 +3893,12 @@ def test_recent_results_names_the_headline_results_at_their_rows(
 
 
 #: The site's own statement, the owner's words of 2026-10-03 (`think-a7oa`), with the
-#: name the owner left blank filled from the register (T-060 is Queuingtheorydotcom's),
+#: name the owner left blank filled from the register (T-060 is Ahmed's),
 #: the project's start put as the record has it (its explorations obtained the lower
 #: bounds, from 2026-08-31, after it began on 2026-08-22), and one phrase narrowed to
 #: what the register holds: the project tabulates every known new result and verifies
 #: the proofs behind them, without claiming every one is checked, since some registered
-#: results are recorded and not yet replayed here. The sentence after Queuingtheorydotcom's
+#: results are recorded and not yet replayed here. The sentence after Ahmed's
 #: is the owner's of the same day (`think-nlyc`): the top-line results by others, Evan
 #: Daniel's family T-064 and his exact values T-052, T-051 and T-053, in a sentence of
 #: their own because the bibliography files them as independent of this project, and
@@ -3913,7 +3911,7 @@ SITE_STATEMENT = (
         "$n = 11, 17, 18, 19, 20$ and other low values. Now several others have obtained "
         "results building on this work, including Kleddamag"
         "\N{RIGHT SINGLE QUOTATION MARK}s certified lower bound of 31/8 and a landmark "
-        "new proof by Queuingtheorydotcom of the optimality of the famous case of 11 "
+        "new proof by Ahmed of the optimality of the famous case of 11 "
         "squares. "
         "Separately, Evan Daniel has proved the optimality of a whole infinite family, "
         "$s(k^2 - 3) = k$ for every $k \\ge 6$, along with exact values at 21, 32 and 45 "
@@ -3942,7 +3940,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(
     his exact values at the case records of 21, 32 and 45, and the ladders that show how
     far each result is checked, and does not claim every proof is; the second opens a
     new issue on the repository and links the founder's account on X. Each result the
-    first names is the register's, with the credit it gives: T-060 Queuingtheorydotcom's
+    first names is the register's, with the credit it gives: T-060 Ahmed's
     and building on this project, T-064, T-052, T-051 and T-053 Daniel's and independent
     of it, which is why his results stand in a sentence of their own; each is an
     optimality result at V3/C3 or above, so "proved" holds. No significance score is
@@ -3978,7 +3976,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(
     # The register's own facts, as the sentences state them.
     by_id = {r.id: r for r in overview_data.load().results}
     groups = dict(OTHERS)
-    assert by_id["T-060"].credit.startswith("Queuingtheorydotcom after Levy")
+    assert by_id["T-060"].credit.startswith("Ahmed after Levy")
     assert by_id["T-060"].group == groups["builds-on-project"]
     assert by_id["T-037"].credit.startswith("Kleddamag")
     assert by_id["T-037"].group == groups["builds-on-project"]
@@ -4276,9 +4274,7 @@ def test_the_optimality_papers_card_says_what_t060s_rungs_allow(
     value, note = _page_card_parts(papers, paper.href)
     assert card_text(value) == paper.title
     text = card_text(note)
-    assert text.startswith(
-        "Explains Queuingtheorydotcom\u2019s proof that Trump\u2019s packing"
-    )
+    assert text.startswith("Explains Ahmed\u2019s proof that Trump\u2019s packing")
     assert "(T-060)" in text
     assert "is optimal" in text
     assert "s(11) = 3.8770835" in text

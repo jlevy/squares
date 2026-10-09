@@ -61,8 +61,8 @@ second implementation agrees.
 | [`V-massaccesi-n17-verify-py`](#v-massaccesi-n17-verify-py) | verify-n17-lower-bound-4_5058.py | Massaccesi | external | decides | 1 | 2 |
 | [`V-mira-17squares-point-checker`](#v-mira-17squares-point-checker) | verify_certificate.py | Mira | external | decides | 1 | 0 |
 | [`V-stanislavfort-17squares-point-checker`](#v-stanislavfort-17squares-point-checker) | verify_certificate.py | Stanislav Fort | external | decides | 1 | 0 |
-| [`V-queuingtheory-n11-verify`](#v-queuingtheory-n11-verify) | VERIFY.py | Queuingtheorydotcom | external | decides | 1 | 1 |
-| [`V-queuingtheory-n11-lean`](#v-queuingtheory-n11-lean) | The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack) | Queuingtheorydotcom, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis | external | decides | 2 | 1 |
+| [`V-queuingtheory-n11-verify`](#v-queuingtheory-n11-verify) | VERIFY.py | Ahmed | external | decides | 1 | 1 |
+| [`V-queuingtheory-n11-lean`](#v-queuingtheory-n11-lean) | The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack) | Ahmed, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis | external | decides | 2 | 1 |
 | [`V-wand125-tools`](#v-wand125-tools) | The wand125 tools repository's transfer/l_cap.py and general_pose_tree | wand125 | external | decides | 3 | 2 |
 | [`V-squarepacker-indep-check-cpp`](#v-squarepacker-indep-check-cpp) | indep_check.cpp | squarepacker | external | decides | 4 | 2 |
 | [`V-schadt-n29-check-py`](#v-schadt-n29-check-py) | check.py | Schadt | external | decides | 1 | 0 |
@@ -788,7 +788,7 @@ Fort's pure-Python integer checker of a point-only pose-space subdivision certif
 
 ### `V-queuingtheory-n11-verify`
 
-**VERIFY.py, the publisher's n = 11 optimality driver and its component checkers** · Queuingtheorydotcom · external · decides · Python · exact-algebraic
+**VERIFY.py, the publisher's n = 11 optimality driver and its component checkers** · Ahmed · external · decides · Python · exact-algebraic
 
 The publisher's advertised replay of its n = 11 optimality proof, binding every component's final state by digest; four stale final-state digests keep it from passing as published.
 
@@ -801,7 +801,7 @@ The publisher's advertised replay of its n = 11 optimality proof, binding every 
 
 ### `V-queuingtheory-n11-lean`
 
-**The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake at its pinned toolchain, with scripts/run_verification.sh and the finalizer scripts/finalize_verification.py driving the build and the axiom audit** · Queuingtheorydotcom, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis · external · decides · Lean 4, Python, Bash · proof-assistant-checked
+**The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake at its pinned toolchain, with scripts/run_verification.sh and the finalizer scripts/finalize_verification.py driving the build and the axiom audit** · Ahmed, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis · external · decides · Lean 4, Python, Bash · proof-assistant-checked
 
 Proves ElevenSquare.optimality, s(11) = T, in Lean 4.34.1 with Mathlib d13f23b7: the geometry, checker soundness and assembly kernel-checked, and 10,464 numerical certificate declarations decided by native_decide; the finalizer accepts the run only when every module's receipt, source hash and axiom report agree and no admission or unapproved axiom remains.
 

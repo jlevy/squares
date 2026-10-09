@@ -375,7 +375,7 @@ def test_figure_three_marks_the_verified_lower_bound_beside_the_packing(
     assert recorded["exact_form"] == packing["verified_upper_bound"]["exact_form"]
     assert render_n11_lower_bounds_explainer.n11_solved(verified)
     assert verified.display == "3.8770835…"
-    assert verified.credit == "Queuingtheorydotcom after Levy et al. 2026"
+    assert verified.credit == "Ahmed after Levy et al. 2026"
 
     best_x = round(
         render_n11_lower_bounds_explainer.line_x(
@@ -392,7 +392,7 @@ def test_figure_three_marks_the_verified_lower_bound_beside_the_packing(
 
     caption = " ".join(document.split())
     assert (
-        "T-060, by Queuingtheorydotcom after Levy et al. 2026, closes the remaining gap"
+        "T-060, by Ahmed after Levy et al. 2026, closes the remaining gap"
         in caption
     )
     assert "the exact algebraic side $T$" in caption

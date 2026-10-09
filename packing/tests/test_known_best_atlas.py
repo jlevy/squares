@@ -3977,8 +3977,8 @@ def test_shared_print_attributions_preserve_full_roles_sources_and_corpus_scope(
         "Vlasenko",
         "Guzhou0806",
         "Hosono",
+        "Ahmed",
         "Karakuş",
-        "Queuingtheorydotcom",
         "Ryu",
     ]
     expected_optimal = [
@@ -3993,7 +3993,7 @@ def test_shared_print_attributions_preserve_full_roles_sources_and_corpus_scope(
         "Levy",
         "Daniel",
         "Hosono",
-        "Queuingtheorydotcom",
+        "Ahmed",
         "Karakuş",
     ]
     attributions = known_best_builder._print_attributions()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001

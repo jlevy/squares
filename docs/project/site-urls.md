@@ -826,7 +826,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-057.html | result/t-057.html | result | overview | 2026-09-29 | 2026-09-29 | live |
 | result/t-058.html | result/t-058.html | result | overview | 2026-09-29 | 2026-09-29 | live |
 | result/t-059.html | result/t-059.html | result | overview | 2026-09-29 | 2026-09-29 | live |
-| result/t-060.html | result/t-060.html | result | overview | 2026-09-29 | 2026-09-29 | live |
+| result/t-060.html | result/t-060.html | result | overview | 2026-09-29 | 2026-10-09 | live |
 | result/t-061.html | result/t-061.html | result | overview | 2026-09-30 | 2026-09-30 | live |
 | result/t-062.html | result/t-062.html | result | overview | 2026-10-01 | 2026-10-01 | live |
 | result/t-063.html | result/t-063.html | result | overview | 2026-10-01 | 2026-10-01 | live |
@@ -878,7 +878,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-109.html | result/t-109.html | result | overview | 2026-10-06 | 2026-10-06 | live |
 | result/t-110.html | result/t-110.html | result | overview | 2026-10-06 | 2026-10-06 | live |
 | result/t-111.html | result/t-111.html | result | overview | 2026-10-06 | 2026-10-06 | live |
-| result/t-112.html | result/t-112.html | result | overview | 2026-10-06 | 2026-10-06 | live |
+| result/t-112.html | result/t-112.html | result | overview | 2026-10-06 | 2026-10-09 | live |
 | result/t-113.html | result/t-113.html | result | overview | 2026-10-06 | 2026-10-08 | live |
 | result/t-114.html | result/t-114.html | result | overview | 2026-10-06 | 2026-10-08 | live |
 | result/t-115.html | result/t-115.html | result | overview | 2026-10-06 | 2026-10-07 | live |
