@@ -102,3 +102,52 @@
   --kpress-host-font-table: initial !important;
 }
 /* biome-ignore-end lint/complexity/noImportantStyles: the pin must outrank an injected hook */
+
+/* Source Sans 3 can arrive after the first layout even with its preload, and the text it
+   holds invisible is laid out in the next face of the stack. On the Linux runner that is
+   DejaVu Sans, about a quarter wider: at 390px a navigation link wrapped to the bar's
+   second line and the hero's summary took two more lines, and their return when the face
+   arrived was a CLS of 0.251 (paper-design.md, Shared Assets). Arial, which Linux answers
+   with its metric twin Liberation Sans, scaled to Source Sans 3's advances and given its
+   ascent and descent, holds both in place instead: regular for the 410 text, bold for
+   550 and heavier. The aliases transfer no bytes and take only Source Sans 3's range, so
+   once it loads they draw nothing. Screen only: print keeps KPress's print sans. */
+@font-face {
+  font-family: "Site Sans Arial";
+  src: local("Arial"), local("Liberation Sans");
+  font-style: normal;
+  font-weight: 400;
+  size-adjust: 93%;
+  ascent-override: 110.1%;
+  descent-override: 43%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Site Sans Arial";
+  src: local("Arial Bold"), local("Liberation Sans Bold");
+  font-style: normal;
+  font-weight: 700;
+  size-adjust: 89.5%;
+  ascent-override: 114.4%;
+  descent-override: 44.7%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@media screen {
+  :root,
+  .kpress,
+  .kpress-page-main,
+  .kpress-tooltip {
+    --kpress-font-body:
+      "Source Sans 3 Variable", "Site Sans Arial", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    --kpress-font-sans:
+      "Source Sans 3 Variable", "Site Sans Arial", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+  }
+}

@@ -634,6 +634,7 @@ def test_the_probe_only_marks_exact_local_prose_fallback_sources_optional(
 ) -> None:
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
+    sans_alias = 'local("Arial"), local("Liberation Sans")'
     cases = [
         ("Site Prose Georgia", 'local("Georgia")', "400", "normal", "", True),
         (
@@ -653,6 +654,18 @@ def test_the_probe_only_marks_exact_local_prose_fallback_sources_optional(
             False,
         ),
         ("Site Prose Times", 'local("Georgia")', "400", "normal", "", False),
+        ("Site Sans Arial", sans_alias, "400", "normal", "", True),
+        (
+            "Site Sans Arial",
+            'local("Arial Bold"), local("Liberation Sans Bold")',
+            "700",
+            "normal",
+            "",
+            True,
+        ),
+        ("Site Sans Arial", sans_alias, "700", "normal", "", False),
+        ("Site Sans Arial", sans_alias, "400", "italic", "", False),
+        ("Site Sans Arial", 'local("Arial")', "400", "normal", "", False),
         ("PT Serif", 'local("Georgia")', "400", "normal", "", False),
         ("Site Prose Georgia, malformed", 'local("Georgia")', "400", "normal", "", False),
         ("Site Prose Georgia", 'local("Georgia")', "700", "normal", "", False),

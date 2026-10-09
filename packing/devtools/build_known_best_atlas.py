@@ -1048,16 +1048,28 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
                     "listed_n": list(plan.listed_n),
                     "n": n,
                     "path": _relative(plan.path),
+                    # True where the row's `path` holds the upstream file named by `url`
+                    # byte for byte, as ry-xu's complete certificate texts are; ry-xu's
+                    # n = 51 record is a canonical extraction, so it stays derived.
                     "raw_asset_retained": plan.path
-                    in (evand_reports.fact_path(), gupta_houses.reports.fact_path()),
+                    in (
+                        evand_reports.fact_path(),
+                        ryxu_houses.reports.fact_path(),
+                        gupta_houses.reports.fact_path(),
+                    ),
                     "retention_policy": (
                         "Complete source certificates and MIT licences retained unchanged."
                         if plan.path == evand_reports.fact_path()
                         else (
-                            "Complete factual certificates/comparators retained losslessly; "
-                            "unlicensed programs/prose are hash-pinned."
-                            if plan.path == gupta_houses.reports.fact_path()
-                            else KINGBIRD_RETENTION_POLICY
+                            "Complete factual certificate text retained losslessly; "
+                            "no upstream program or prose is copied."
+                            if plan.path == ryxu_houses.reports.fact_path()
+                            else (
+                                "Complete factual certificates/comparators retained "
+                                "losslessly; unlicensed programs/prose are hash-pinned."
+                                if plan.path == gupta_houses.reports.fact_path()
+                                else KINGBIRD_RETENTION_POLICY
+                            )
                         )
                     ),
                     "retrieved": retrieved,
