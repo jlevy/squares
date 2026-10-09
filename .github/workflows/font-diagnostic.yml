@@ -5,6 +5,12 @@ name: Font delivery diagnostic
 # nothing: it is no gate, reports no required check, deploys nothing, and runs only when
 # someone dispatches it.
 #
+# What it can observe. It renders the paper from the immutable #449 inputs at
+# `4963448e3`, which predate #442's fix for this shift, `29a79cd10` ("hold first-screen
+# text in place while web faces arrive"). Whatever branch it is dispatched from, it
+# observes the page as it was before that fix and cannot observe the fix: its evidence
+# is about the original failure on Linux, never about the current page.
+#
 # It is its own workflow rather than a mode of `pages.yml` so that a dispatch is never a
 # Certificate page run. Inside that workflow a dispatch joined the
 # `certificate-page-<ref>` concurrency group, where it could replace a pending push run
@@ -33,6 +39,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Renders the pre-fix page at 4963448e3; it cannot observe #442's fix (29a79cd10).
   font-diagnostic:
     runs-on: ubuntu-latest
     timeout-minutes: 5
