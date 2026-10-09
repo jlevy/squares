@@ -5,7 +5,7 @@ title: Make all open n-17 PRs source-qualified and merge-ready
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@spud10.local
 labels:
   - n-17
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T05:25:23.889Z
-updated_at: 2026-10-09T07:54:46.337Z
+updated_at: 2026-10-09T08:01:07.991Z
 started_at: 2026-10-09T05:27:42.212Z
 ---
 Coordinate review, source qualification and landing readiness for the twelve open n-17 PRs. The user will hand completion to another agent. Conflict-free declared bases do not establish current-main integration. #404 at 1af586ef passes expected CI with the unchanged 192 MiB cap. Propagation to #454/#461 and scoped #464 repair, follow-up review and full checkpoints remain under think-0m0x. Supporting #452/#453 have current-main full passes. Peer review remains under think-49b6. Catalogue #403/#435 have new full passes, but #403 Pages and current-source review/disposition requirements remain under think-okxn and active owners. #450 current checks pass; inherited review/full qualification belong to think-zjlo. Mathematical next work is think-dvcs, then conditional think-geid. No blanket merge-ready or bound claim. Current status: https://github.com/jlevy/squares/issues/405 . Full handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
@@ -37,3 +37,5 @@ All subagents stopped; the old CI heartbeat remains paused. No merge, promotion,
 Final source correction: #450 moved to 8021291759d86eb53a146f3240046a84604fef3c during handoff. Its new Packing 37892077580, Pages 37892077553 and mergeability 37891957540 pass. Latest review G still binds older 4585b8d; fresh current inherited-layer coverage remains open. Public handoff/comment/tracker updated rather than crediting old-head CI.
 
 October 9 handoff reconciliation: the current Description supersedes stale source/CI/224MiB approval next-action wording in historical Notes. All actual execution receipts and historical failures remain retained. Main3213 is unchanged; no source edits, target computations, CI dispatches, merges or draft promotions occurred in this pass. Status and dependency map: https://github.com/jlevy/squares/issues/405 . Original complete source handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731 . Supporting issue updates: https://github.com/jlevy/squares/issues/400#issuecomment-6076664631 and https://github.com/jlevy/squares/issues/445#issuecomment-6076662312 .
+
+Verified publication checkpoint: tracker405 https://github.com/jlevy/squares/issues/405#issuecomment-6076879250 and durable body work map; moving-source PR handoffs4036076903029,4356076904388,4506076905888; source issue4196076907176; issue4006076664631 and4456076662312. All seven comments and tracker body match prepared text exactly. Thirteen existing bead descriptions are reconciled; four bounded implementation beads are closed. think-70h9 depends on existing research qualification think-0m0x, peer review think-49b6, catalogue qualification think-okxn and intake-owner qualification think-zjlo. No source modifications, CI dispatch, target run, merge or draft promotion. Durable local receipt: attic/n17-handoff-reconciliation-20261009/.
