@@ -5,7 +5,7 @@ title: Refresh polynomial catalogue for admitted finite bounds and source roots
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T01:06:00.341Z
-updated_at: 2026-10-09T14:08:50.667Z
+updated_at: 2026-10-09T14:38:38.317Z
 started_at: 2026-10-09T01:08:29.634Z
 ---
 Integrate upstream b810432cc PR434 on both layers of formal stack447. Preserve latest finite rational source/witness/replay custody for n68,n105,n292, rebuild compressed register and chunk census, retain all source and historical evidence, distinguish three remaining representation gaps from ideal-contact research, preserve snapshot roster/profiling interfaces and copy-once contract, update all documentation/PR/bead dispositions, complete replacement-head hosted validation.
@@ -194,3 +194,17 @@ Exactly one new full workflow per actual published head was dispatched after che
 Current-head partial Papers/report preview built using maintained producers and checked7552/7552, three served pages HTTP200, correct d0 source links, no exact-side-values.pdf. Current complete report: http://127.0.0.1:60649/papers/exact-side-values-complete.html and Papers index /papers.html. This is a partial local preview; live publication follows merge and default-branch deployment. All499 records/519 vectors/6273 integer strings remain preserved. No new mathematical result or report PDF.
 
 Next-slice readiness is now also recorded on think-s6np (OPEN/unclaimed, version12): retained n-11.txt476 bytes/n-102.txt5305 bytes/acquisition receipt; exactsolve return object omits later contacts/active-weak partition and rounds summaries; maintained exporter/module/CLI/test deliverables remain planned, including exact frozen values, independent equations, full precision and denominator/chart/pivot exclusions with roundtrip/refusal controls. Independent contact-derived n11 octic still precedes the single bounded n102 attempt. Numerical29/55/71, Daniel new-pose owners266/270/272, legacy quarantines and geometry/Lean obligations remain as documented. Keep these feature beads open until their corresponding work merges.
+
+Final web-only stabilization checkpoint — 2026-10-09T14:37:04.201355+00:00
+
+Published heads remain parent c1d3aab9eef04683ea262c9c79ef7d739af2dc50 (PR #403) and child d0d951a40aa8ae85800d9641c96680cdef0f53ad (PR #435), formal stack 447 on main 6a0499ba4ed83e147488b2ee584af500207d9d1f. Both source worktrees are clean; data pins remain b03a97ae0921bfb75472c4147c59a31d9708d542 and 515cd465e015c56b46b52d28e1d1164bc599f4a2. PRs remain open and unmerged.
+
+Current full qualifications both SUCCESS: parent run 37939481227, 94/107 core steps in 1679.83 s, aggregate 113862596281; child run 37939486545, 96/109 in 1510.68 s, aggregate 113861289394. All twelve prerequisites passed on each actual head at 4 CPU / 1 outer / 2 inner (non-reference, timing advisory); direct full watches exited 0. Original font-arrival controls passed on both fulls. Production refinement-copy custody, SQUISH private replay and slow/exhaustive controls passed. Old local timeouts and the old child refusal-guard failure remain separate historical receipts.
+
+Fresh child Pages run 37939031693 and actual artifact 11621780074 qualify eight compact/full phone/desktop light/dark layouts: native MathML, no overflow, MathML errors or lost ink, keyboard-accessible wide regions. Producer 50 tests passed in 29.31 s, render/check/check-web passed, and the hosted explicit PDF absence check passed. The complete Papers report preserves all 499 records, 519 coefficient vectors and 6273 integer strings. Preview: http://127.0.0.1:60649/papers/exact-side-values-complete.html; partial local preview check 7552/7552 passed. Live publication follows merge/default-branch deployment.
+
+Parent automatic run 37939031866 attempt 1 genuinely failed released CLS 0.13427443275451661 > unchanged 0.1, with held startup CLS already 0.1337854648590088. Independent review accepted diagnostic-only evidence; five scoped nodes passed in 16.93 s. PT Serif italic arrival reproduced matching 27px-up/801-to-800 text fragments, contributing native CLS 0.06015241241455078 and final 0.06065247107611762, below 0.1. This does not explain the complete hosted startup excess or establish a production fix. No threshold, observer history or product CSS was changed. Matching patches, logs, JUnit and all four diagnostic source files are preserved outside scratch; only those temporary edits were restored. Receipt: parent-c1-font-diagnostic-archive-disposition.json. Remaining startup attribution is recorded here, with existing broader trackers think-5jr5 and think-rxyl retaining their owners and other-head qualification scopes.
+
+Exactly one purposeful failed-job recurrence check at unchanged parent c1d3 was requested after same-head full and original local font controls passed. Run 37939031866 attempt 2 completed SUCCESS; direct gh run watch --exit-status returned 0. No repeated rerun, source change or additional full dispatch occurred. The earlier attempt 1 failure remains valid historical evidence, and the complete startup excess remains unattributed. Current parent/child automatic Packing, Pages and mergeability checks and both full workflows passed; canceled duplicate child runs retain their canceled status. Final actual recurrence job/phase receipts and exact published PR body readbacks are retained under the existing recovery evidence directory.
+
+Mathematical inventory remains 324 current cases / 321 exact identities / numeric n=29,55,71 and 175 historical records; 77 proved cases unchanged. Source-root geometry/field-to-side/Lean obligations (#419 / think-8sm2), new-pose ideal-contact work and quarantined legacy claims remain open. W7 think-s6np remains OPEN/unclaimed: two native inputs are retained; the contact-system exporter and its roundtrip/refusal controls are planned, then the independent contact-derived n11 octic control, then one bounded n102 attempt. No new solver/search, polynomial, geometry, Lean or bound result is claimed by this stabilization. Keep these feature beads in progress until the corresponding work merges.
