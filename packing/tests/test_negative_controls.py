@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import cProfile
 import hashlib
 import inspect
 import json
@@ -234,6 +235,228 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
         assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
     assert SNAPSHOT_MAX_BYTES == 192 * 1024 * 1024
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
+def _native_profile_inputs(tmp_path: Path) -> tuple[Path, Path, Path]:
+    tree = tmp_path / "private tree"
+    (tree / "packing/src").mkdir(parents=True)
+    (tree / ".git").mkdir()
+    (tree / ".git/index").write_bytes(b"private index")
+    script = tmp_path / "native child.py"
+    script.write_text("print('native child')\n")
+    return script, tree, tmp_path / "diagnostic.json"
+
+
+def _native_profile_arguments(script: Path, tree: Path, output: Path) -> list[str]:
+    return [
+        "--profile-native-script",
+        str(script),
+        "--profile-tree",
+        str(tree),
+        "--profile-output",
+        str(output),
+    ]
+
+
+@pytest.mark.parametrize("mask", range(1, 7))
+def test_native_profile_rejects_partial_flags_before_execution(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mask: int
+) -> None:
+    inputs = _native_profile_inputs(tmp_path)
+    flags = _native_profile_arguments(*inputs)
+    selected = [
+        value
+        for index in range(3)
+        if mask & (1 << index)
+        for value in flags[index * 2 : index * 2 + 2]
+    ]
+    monkeypatch.setattr(
+        controls, "run_control_command", lambda *_args, **_kwargs: pytest.fail("child ran")
+    )
+    with pytest.raises(SystemExit) as error:
+        controls.main(selected)
+    assert error.value.code == 2
+    assert not inputs[2].exists()
+
+
+@pytest.mark.parametrize("existing", ["json", "raw"])
+def test_native_profile_refuses_existing_evidence_without_launch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, existing: str
+) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    destination = output if existing == "json" else output.with_suffix(".prof")
+    destination.write_bytes(b"prior evidence")
+    monkeypatch.setattr(
+        controls, "run_control_command", lambda *_args, **_kwargs: pytest.fail("child ran")
+    )
+    with pytest.raises(SystemExit) as error:
+        controls.main(_native_profile_arguments(script, tree, output))
+    assert error.value.code == 2
+    assert destination.read_bytes() == b"prior evidence"
+    assert not (output.with_suffix(".prof") if existing == "json" else output).exists()
+
+
+@pytest.mark.parametrize("invalid", ["script", "tree", "index"])
+def test_native_profile_rejects_invalid_inputs_before_launch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, invalid: str
+) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    if invalid == "script":
+        script.unlink()
+    elif invalid == "tree":
+        tree = tmp_path / "missing tree"
+    else:
+        (tree / ".git/index").unlink()
+    monkeypatch.setattr(
+        controls, "run_control_command", lambda *_args, **_kwargs: pytest.fail("child ran")
+    )
+    with pytest.raises(SystemExit) as error:
+        controls.main(_native_profile_arguments(script, tree, output))
+    assert error.value.code == 2
+    assert not output.exists()
+
+
+@pytest.mark.parametrize("status", ["success", "failure", "timeout"])
+def test_native_profile_uses_private_child_runner_and_preserves_outcomes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    status: str,
+) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    monkeypatch.setattr(controls, "timing_provenance", lambda: {"source_revision": "fixture"})
+    monkeypatch.setenv("PACKING_VALIDATION_ARTIFACT_DIR", str(tmp_path / "parent artifacts"))
+    calls = []
+
+    def command(text: str, **kwargs: Any) -> controls.CommandOutcome:
+        calls.append(text)
+        arguments = shlex.split(text)
+        assert arguments[:2] == [sys.executable, "-c"]
+        assert inspect.getsource(controls._profile_child) in arguments[2]  # noqa: SLF001
+        assert arguments[3:] == [str(script), str(output.with_suffix(".prof"))]
+        assert kwargs["cwd"] == tree / "packing"
+        assert kwargs["timeout_seconds"] == 60.0
+        environment = kwargs["environment"]
+        assert environment["PYTHONDONTWRITEBYTECODE"] == "1"
+        assert environment["PYTHONPATH"].split(os.pathsep)[:2] == [
+            str(tree / "packing/src"),
+            str(tree / "packing"),
+        ]
+        assert "PACKING_VALIDATION_ARTIFACT_DIR" not in environment
+        profile = cProfile.Profile()
+        profile.runcall(sum, [1, 2, 3])
+        profile.dump_stats(output.with_suffix(".prof"))
+        return controls.CommandOutcome(
+            0 if status == "success" else 3,
+            "child stdout\n",
+            "child stderr\n",
+            timed_out=status == "timeout",
+        )
+
+    monkeypatch.setattr(controls, "run_control_command", command)
+    assert controls.main(_native_profile_arguments(script, tree, output)) == (
+        0 if status == "success" else 1
+    )
+    assert len(calls) == 1
+    report = json.loads(output.read_text())
+    assert report["complete"] == (status == "success")
+    assert report["timed_out"] == (status == "timeout")
+    assert report["returncode"] == (0 if status == "success" else 3)
+    assert report["diagnostic_only"] is True
+    assert report["gate_credit"] is False
+    assert report["duration_seconds"] >= 0
+    assert report["top_cumulative"]
+    assert report["stdout"] == "child stdout\n"
+    assert report["stderr"] == "child stderr\n"
+    assert report["script"]["sha256"] == hashlib.sha256(script.read_bytes()).hexdigest()
+    assert (
+        report["tree"]["private_index_sha256"]
+        == hashlib.sha256((tree / ".git/index").read_bytes()).hexdigest()
+    )
+    captured = capsys.readouterr()
+    assert "child stdout" in captured.out
+    assert "child stderr" in captured.err
+
+
+def test_native_profile_imports_only_the_intended_private_tree(tmp_path: Path) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    assert tree / "packing" != controls.ROOT
+    package = tree / "packing/devtools"
+    package.mkdir()
+    (package / "__init__.py").write_text("")
+    (package / "view_marker.py").write_text(
+        "from pathlib import Path\nROOT = Path(__file__).resolve().parents[1]\n"
+    )
+    script.write_text(
+        "from pathlib import Path\nfrom devtools.view_marker import ROOT\n"
+        "assert ROOT == Path.cwd()\nprint('intended private tree')\n"
+    )
+    assert controls.main(_native_profile_arguments(script, tree, output)) == 0
+    report = json.loads(output.read_text())
+    assert report["complete"] is True
+    assert report["returncode"] == 0
+    assert "intended private tree" in report["stdout"]
+    assert report["top_cumulative"]
+
+
+def test_native_profile_retains_same_named_functions_at_distinct_locations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    monkeypatch.setattr(controls, "timing_provenance", dict)
+
+    def command(_text: str, **_kwargs: object) -> controls.CommandOutcome:
+        cheap: dict[str, Any] = {}
+        costly: dict[str, Any] = {}
+        body = "def repeated():\n    return sum(range({count}))\n"
+        exec(compile(body.format(count=100), "cheap.py", "exec"), cheap)
+        exec(compile(body.format(count=100000), "costly.py", "exec"), costly)
+        profile = cProfile.Profile()
+        profile.runcall(cheap["repeated"])
+        profile.runcall(costly["repeated"])
+        profile.dump_stats(output.with_suffix(".prof"))
+        return controls.CommandOutcome(0, "", "")
+
+    monkeypatch.setattr(controls, "run_control_command", command)
+    assert controls.main(_native_profile_arguments(script, tree, output)) == 0
+    report = json.loads(output.read_text())
+    rows = [row for row in report["top_cumulative"] if row["function"] == "repeated"]
+    assert [(row["file"], row["line"]) for row in rows] == [("costly.py", 1), ("cheap.py", 1)]
+    assert rows[0]["cumulative_seconds"] > rows[1]["cumulative_seconds"]
+    assert all(row["calls"] == row["primitive_calls"] == 1 for row in rows)
+    assert all(isinstance(row["self_seconds"], float) for row in rows)
+
+
+@pytest.mark.parametrize(
+    ("exception", "returncode"),
+    [
+        ("SystemExit(3)", 3),
+        ("ValueError('native value failure')", 1),
+        ("OSError('native OS failure')", 1),
+    ],
+)
+def test_native_profile_real_child_failure_retains_profile_and_output(
+    tmp_path: Path, exception: str, returncode: int
+) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    script.write_text(
+        "import sys\nfrom pathlib import Path\n"
+        "assert sys.argv == [__file__]\nassert sys.path[0] == str(Path.cwd())\n"
+        "print('before failure')\nprint('native error', file=sys.stderr)\n"
+        f"raise {exception}\n"
+    )
+    assert controls.main(_native_profile_arguments(script, tree, output)) == 1
+    report = json.loads(output.read_text())
+    assert report["returncode"] == returncode
+    assert report["complete"] is False
+    assert "before failure" in report["stdout"]
+    assert "native error" in report["stderr"]
+    if returncode == 1:
+        assert "Traceback" in report["stderr"]
+        assert exception.split("(", maxsplit=1)[0] in report["stderr"]
+        assert "usage:" not in report["stderr"]
+    assert report["top_cumulative"]
+    assert output.with_suffix(".prof").stat().st_size > 0
 
 
 def test_oversized_snapshot_is_refused_before_cloning(
