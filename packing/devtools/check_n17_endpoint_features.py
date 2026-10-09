@@ -11,7 +11,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import subprocess
 import time
 from fractions import Fraction as Q
 from functools import lru_cache
@@ -23,7 +22,6 @@ import sympy as sp
 from devtools.check_n17_contact_chart import ANCHORS, CONTACTS, SOURCE
 from devtools.check_n17_endpoint_feasibility import (
     FROZEN_ROOT_REF,
-    REPO,
     Box,
     _dot,
     _encode_receipt,
@@ -399,22 +397,6 @@ def interval_inventory(midpoint: tuple[Q, Q], radii: tuple[Q, Q]) -> dict[str, A
         "feature_passed": not failures,
         "failures": failures,
     }
-
-
-def _frozen_bytes(ref: str, raw: bytes) -> None:
-    """Compare bytes with a historical Git blob: ceremony this module no longer uses.
-
-    Kept only because `check_n17_core_stress` (slice 2 of the 2026-10-03 integrity
-    audit, another lane's file) still imports it; remove it with that caller. New code
-    names a retained file with `require_retained_path` (OR-16).
-    """
-    if not ref:
-        raise ValueError("frozen H-256 endpoint receipt Git ref is unset")
-    result = subprocess.run(
-        ["git", "show", ref], cwd=REPO, capture_output=True, check=False, timeout=10
-    )
-    if result.returncode != 0 or result.stdout != raw:
-        raise ValueError("receipt differs from frozen Git blob")
 
 
 def _require_endpoint_accepted(
