@@ -8,8 +8,8 @@
 # admits an entry is its `verification`.
 schema: n17-certified-sub-patterns/v3
 design: ring-3-voronoi-8-tabbed-unique
-# The certificate objects (about 112 MB of gzip) are hosted outside Git (OR-18) on the
-# release data/n17-x048-session-168-certificates-v1, listed with their assets, sizes and
+# The certificate objects (228 of them, about 2.6 GB of gzip) are hosted outside Git (OR-18)
+# on the release data/n17-x048-session-168-certificates-v1, listed with their assets, sizes and
 # SHA-256 in this hosted-data manifest; each certificate directory keeps its small files.
 # The count needs only the committed receipts; `python -m devtools.hosted_data fetch
 # --manifest hosted/n17-x048-session-168-certificates.yaml`, run from packing/, puts the
@@ -907,4 +907,184 @@ entries:
     evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-274-h287-current-tail-replication.md
     verification:
       receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-b-m3096315/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m214101
+    cells: [corner-SW, corner-NW, side-S0, side-W0, side-W1, side-W2, interior-SW, interior-NW]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 25: closed by wand125 with check_n17_subpattern mode A (64
+    # bins, adaptive rows to 1/512, 20 rounds; producer 173 s), its tool blobs those of
+    # main's f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with
+    # dirty: true. Admitted in exp-317 by the standing verifier's full pass from the clean
+    # worktree at 3213d651b (179 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m214101/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m214101
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m214101/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m14353473
+    cells: [corner-SW, side-W0, side-W1, interior-SW, interior-NW, interior-S, interior-N, interior-SE, interior-NE]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 36: closed by wand125 with check_n17_subpattern mode A (64
+    # bins, adaptive rows to 1/512, 22 rounds; producer 246 s), its tool blobs those of
+    # main's f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with
+    # dirty: true. Admitted in exp-317 by the standing verifier's full pass from the clean
+    # worktree at 3213d651b (232 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m14353473/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m14353473
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m14353473/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m983396
+    cells: [corner-NW, side-N0, side-W0, side-S1, interior-SW, interior-NW, interior-W, interior-S]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 31: closed by wand125 with check_n17_subpattern mode A (64
+    # bins, adaptive rows to 1/512, 48 rounds; producer 554 s), its tool blobs those of
+    # main's f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with
+    # dirty: true. Admitted in exp-317 by the standing verifier's full pass from the clean
+    # worktree at 3213d651b (1,026 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m983396/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m983396
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m983396/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m3869440
+    cells: [side-S1, side-N1, side-E1, interior-SW, interior-NW, interior-S, interior-N, interior-E]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 35: closed by wand125 with check_n17_subpattern mode A
+    # (128 bins, uniform rows, 3 rounds; producer 477 s), its tool blobs those of main's
+    # f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with dirty:
+    # true. Admitted in exp-317 by the standing verifier's full pass from the clean worktree
+    # at 3213d651b (1,196 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m3869440/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m3869440
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m3869440/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m5707072
+    cells: [side-W0, side-S1, side-W1, side-S2, interior-SW, interior-NW, interior-W, interior-N, interior-SE]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 37: closed by wand125 with check_n17_subpattern mode A
+    # (128 bins, uniform rows, 5 rounds; producer 698 s), its tool blobs those of main's
+    # f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with dirty:
+    # true. Admitted in exp-317 by the standing verifier's full pass from the clean worktree
+    # at 3213d651b (1,384 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5707072/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5707072
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5707072/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m6177056
+    cells: [side-N0, side-S1, side-W2, interior-NW, interior-W, interior-S, interior-N, interior-SE]
+    certifier: kernel
+    # Issue 472 (H-341), not a #413 row: closed by wand125 with check_n17_subpattern mode A
+    # (64 bins, adaptive rows to 1/512, 32 rounds; producer 1065 s), its tool blobs those of
+    # main's f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with
+    # dirty: true. Admitted in exp-317 by the standing verifier's full pass from the clean
+    # worktree at 3213d651b (1,276 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m6177056/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m6177056
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m6177056/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m7815200
+    cells: [side-N0, side-W2, interior-SW, interior-NW, interior-W, interior-N, interior-E, interior-SE]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 29: closed by wand125 with check_n17_subpattern mode A (64
+    # bins, adaptive rows to 1/512, 24 rounds; producer 172 s), its tool blobs those of
+    # main's f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with
+    # dirty: true. Admitted in exp-317 by the standing verifier's full pass from the clean
+    # worktree at 3213d651b (180 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7815200/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7815200
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7815200/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m1000708
+    cells: [corner-NW, side-S1, side-W1, side-W2, interior-SW, interior-NW, interior-W, interior-S]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 30: closed by wand125 with check_n17_subpattern mode A (64
+    # bins, uniform rows, 6 rounds; producer 159 s), its tool blobs those of main's
+    # f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with dirty:
+    # true. Admitted in exp-317 by the standing verifier's full pass from the clean worktree
+    # at 3213d651b (108 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m1000708/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m1000708
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m1000708/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m935012
+    cells: [corner-NW, side-N0, side-W0, side-W1, side-W2, interior-NW, interior-W, interior-S]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 23: closed by wand125 with check_n17_subpattern mode A (64
+    # bins, uniform rows, 4 rounds; producer 139 s), its tool blobs those of main's
+    # f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with dirty:
+    # true. Admitted in exp-317 by the standing verifier's full pass from the clean worktree
+    # at 3213d651b (125 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m935012/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m935012
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m935012/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m7799616
+    cells: [side-W0, side-S1, side-N1, interior-SW, interior-NW, interior-W, interior-N, interior-E, interior-SE]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 34: closed by wand125 with check_n17_subpattern mode A (64
+    # bins, uniform rows, 8 rounds; producer 223 s), its tool blobs those of main's
+    # f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with dirty:
+    # true. Admitted in exp-317 by the standing verifier's full pass from the clean worktree
+    # at 3213d651b (227 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7799616/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7799616
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7799616/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m5116178
+    cells: [corner-SE, side-S0, side-S1, side-S2, interior-NW, interior-W, interior-S, interior-SE]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 24: closed by wand125 with check_n17_subpattern mode A (64
+    # bins, adaptive rows to 1/512, 34 rounds; producer 248 s), its tool blobs those of
+    # main's f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with
+    # dirty: true. Admitted in exp-317 by the standing verifier's full pass from the clean
+    # worktree at 3213d651b (310 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5116178/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5116178
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5116178/verification.json
+      verifier: kernel-streamed
+  - name: w125-k-m4657489
+    cells: [corner-SW, side-S0, side-W0, side-S1, side-S2, interior-SW, interior-NW, interior-W, interior-SE]
+    certifier: kernel
+    # Issue 472 (H-341), #413 row 38: closed by wand125 with check_n17_subpattern mode A (64
+    # bins, adaptive rows to 1/512, 30 rounds; producer 202 s), its tool blobs those of
+    # main's f0ec5b663; the receipt names the contributor's wrapper revision 14c25146 with
+    # dirty: true. Admitted in exp-317 by the standing verifier's full pass from the clean
+    # worktree at 3213d651b (218 s), with Rust parity.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m4657489/producer-receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m4657489
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m4657489/verification.json
       verifier: kernel-streamed

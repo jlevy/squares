@@ -26,9 +26,11 @@ hypothesis:
       and the slide-coverage receipt at R = 9/2048 with its thresholds, both produced
       from a clean worktree at the registration commit.
     direction: >-
-      Confirm when both receipts pass with every control refused. A failed item refutes
-      the vector as frozen; no retune after the result.
-    threshold: worst ratio below 1 on every cell; every control refused; the certified slider box contains the composed box.
+      Confirm when both receipts pass with every control refused, max_j r_j <= R, and
+      B_slide(R) is contained in B_local = B_c. Here B_slide(R) is the certified output
+      of slide coverage, and B_local is the box on which the local ratio theorem is
+      checked. A failed item refutes the vector as frozen; no retune after the result.
+    threshold: worst ratio below 1 on every cell; every control refused; max_j r_j <= R; B_slide(R) subseteq B_local = B_c.
   instrument: >-
     devtools/check_n17_local_radius.py ratio and shape modes at the frozen vector, and
     devtools/check_n17_slider_coverage.py run at R = 9/2048 with thresholds a <= 2/5,
@@ -45,8 +47,13 @@ hypothesis:
   replication: false
   registered: '2026-10-09'
   notes: >-
-    X-051's route C, prerequisite. The local radius review computed these receipts on 3
-    October (worst ratios 0.999317 and 0.999368) and held the vector as a component
+    X-051's route C, prerequisite. Corrections of 9 October following review C9 and
+    C16: the composition requires B_slide(R) subseteq B_local = B_c and max_j r_j <= R.
+    The frozen uniform-floor receipt has 109 cells and worst ratio 0.999316555505;
+    the separate capture-form receipt has 117 cells and worst ratio 0.999368209930,
+    with minimum radius 11/32768 rather than 1/1216. The latter is not evidence for
+    this registration's vector. The local radius review computed the receipts on 3
+    October and held this vector as a component
     because nothing downstream used it and because it was found against the same
     instrument. H-329 and H-330 use it, so it becomes load-bearing; registering it as
     a round, as exp-248 was, is the honest way to carry it. The frozen vector is the
@@ -56,8 +63,19 @@ hypothesis:
 
 **Mechanism.** The softest direction $-\omega_{11}$ draws its dual mass from rows that
 do not touch square 11, so widening $\omega_{11}$ alone divides its ratio; the local
-theorem then passes with every coordinate four to five times wider than $1/5000$, and
+theorem then passes with every coordinate at least four times wider than $1/5000$, and
 the slide coverage composes on a wider slider box.
+In this composition $R=9/2048$ must satisfy
+
+$$
+\max_j r_j = 85/19456 \le R,\qquad
+B_{\rm slide}(R)\subseteq B_{\rm local}=B_c.
+$$
+
+$B_{\rm slide}(R)$ is the certified slide-coverage output; $B_c$ is the local theorem’s
+domain.
+Its exact enclosure must contain that output; the displayed decimal slider limits
+are summaries of the receipt.
 
 **Falsifier.** Any recipe item or control failing at the frozen vector from a clean
 worktree.

@@ -328,9 +328,9 @@ hypothesis status and summarizes experiment verdicts, and the
 | Agendas | 42 | 20 active; 16 completed; 5 paused; 1 superseded |
 | Commitments | 436 | 233 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
 | Sessions | 185 | 105 completed; 80 stopped; all terminal |
-| Explorations | 49 | 29 linked to proposed hypotheses; 20 uncodified |
-| Hypotheses | 274 | 73 confirmed; 48 refuted; 72 blocked; 24 unresolved; 15 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 245 | 93 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
+| Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
+| Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 130 | 130 registered, 100 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -1427,6 +1427,7 @@ case or experiment separately.
 | [From One Excluded Branch to a Stronger Eleven-Square Bound](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md) | research synthesis | record | retained | — |
 | [n17 W3 Consolidation and Strategy Selection](docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md) | dated review record | record | retained | — |
 | [Evan Daniel’s New Arrangements: Independent Replay Review](docs/project/reviews/review-2026-10-08-evand-new-arrangements.md) | dated review record | record | retained | — |
+| [Restricted N17 Family Cell Audit](docs/project/research/research-2026-10-09-n17-family-cell-audit.md) | research synthesis | supporting | retained | — |
 | [Review of FN-1 Original Compressed Input Custody](docs/project/reviews/review-2026-10-08-fn1-original-input-bindings.md) | dated review record | record | retained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
 | `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
@@ -1676,8 +1677,11 @@ that cutoff. The
 preserves failed predecessor/push runs and scoped reconciliations.
 CI runs beside the research.
 
-The current census remains36,784states/4,685orbits under58admissions, with the endpoint
-preserved. exp-259 confirmed its complete partition.
+The current census is 28,528 states in 3,636 orbits under 72 admissions, with the
+endpoint preserved and the distance-2 stratum at 94 orbits (736 states), since
+[exp-317](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md)
+admitted issue 472’s twelve kernel certificates.
+exp-259 confirmed the complete partition of the 58-admission census.
 exp-260 completed56numerical evaluations but remains inconclusive.
 exp-261 accepted conditional feature forcing; exp-264 accepted the conditional apex
 after a serialization-only repair, preserving blocked exp-262. exp-263 accepted one
@@ -5971,10 +5975,19 @@ round that names the hypothesis, control roles included.
 | [H-334](packing/campaign/hypotheses/H-334-n17-composition-checker.md) | blocked | A composition checker derives the residue and the theorem from the receipts and refuses every mutant | 0 | — |
 | [H-335](packing/campaign/hypotheses/H-335-n17-two-verifier-parity.md) | open | The Rust and Python kernel verifiers agree on every admitted entry and refuse every mutant | 0 | — |
 | [H-336](packing/campaign/hypotheses/H-336-n17-fresh-clone-replay.md) | open | Every admitted certificate is hosted and one of each kind replays from a fresh clone | 0 | — |
-| [H-337](packing/campaign/hypotheses/H-337-n11-capture-positive-control.md) | blocked | The repaired n17 capture producer reproduces n11’s contraction from the cells | 0 | — |
+| [H-337](packing/campaign/hypotheses/H-337-n11-capture-positive-control.md) | open | The repaired n17 capture producer reproduces n11’s contraction from the cells | 0 | — |
 | [H-338](packing/campaign/hypotheses/H-338-n17-state-conditioned-charge.md) | open question | Does a charge specialised to one occupancy state exclude it below $S^\ast$ | 0 | — |
 | [H-339](packing/campaign/hypotheses/H-339-n17-feature-flip-atlas.md) | blocked | A small feature-flip atlas doubles the terminal region’s radius | 0 | — |
 | [H-340](packing/campaign/hypotheses/H-340-n17-per-coordinate-radius-composition.md) | open | The composed local theorem holds with every coordinate at least $1/1216$ | 0 | — |
+| [H-341](packing/campaign/hypotheses/H-341-n17-issue-472-kernel-admission.md) | confirmed | Issue 472’s twelve kernel certificates replay in full under a listed verifier with Rust parity and admit | 1 | exp-317 accepted: 12 of 12 full PASS at `3213d651b` with Rust parity, hosted on the ledger’s release; 72 admissions leave 3,636 orbits / 28,528 states, distance-2 at 94 / 736 |
+| [H-342](packing/campaign/hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md) | open | The kernel producer closes most issue-413 rows with wall cells that only branch and bound has reached | 0 | — |
+| [H-343](packing/campaign/hypotheses/H-343-n17-hard-tail-adaptive-measurement.md) | open | At least half of the distance-2 residue orbits close under the adaptive-row kernel | 0 | — |
+| [H-344](packing/campaign/hypotheses/H-344-n17-half-cell-branch-predicates.md) | blocked | Closed half-cell branch predicates close the consistency-limited stalls | 0 | — |
+| [H-345](packing/campaign/hypotheses/H-345-n17-cell-seeded-twenty-round-capture.md) | open | Twenty rounds of the repaired capture producer from the family’s cells move something | 0 | — |
+| [H-346](packing/campaign/hypotheses/H-346-n17-angle-bb-knuth-estimate.md) | blocked | An angle branch and bound with retained affine LP models prices the outer capture bridge | 0 | — |
+| [H-347](packing/campaign/hypotheses/H-347-n17-exact-conversion-allowances.md) | blocked | The capture-to-local conversion allowances are exact and small | 0 | — |
+| [H-348](packing/campaign/hypotheses/H-348-n17-second-local-theorem-checker.md) | blocked | A second, LP-free checker reproduces the local theorem’s certificates and refuses mutants | 0 | — |
+| [H-349](packing/campaign/hypotheses/H-349-n17-flagged-class-kernel-closure.md) | open | The kernel closes most of the flagged selector classes on no contributor roster | 0 | — |
 
 ### Confirmed
 
@@ -6322,9 +6335,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 245 rounds registered in `series-000`.
+There are 246 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5827.5 wall-minutes.
+They record 2512.1 agent-minutes and 5883.1 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6611,6 +6624,7 @@ archive beside it.
 | [exp-314](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-314-h-322-incircle-disk-projection.md) | 17 | target | H-322 | Exact whole-cell disk projection diagnostic | 114 proper pair constraints; zero ordinary-impossible pairs; fresh payload agreement | accepted |
 | [exp-315](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-315-h-323-shared-centre-endpoint-refusal.md) | 17 | calibration | H-323 | Registered r3 endpoint frame control | Wrong canonical-mask guard refused; E/D/H and fresh unstarted; no mathematical contradiction | unresolved |
 | [exp-316](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-316-h-324-shared-centre-explicit-f1.md) | 17 | calibration | H-324 | Fresh exact explicit-f1 endpoint control | All810rows/136pairs verified in both processes; endpoint calibration only | accepted |
+| [exp-317](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md) | 17 | target | H-341 | Issue 472’s twelve kernel certificates: clean listed replay, Rust parity, custody and admission | 12 of 12 admitted; 3,636 orbits / 28,528 states; distance-2 stratum 94 / 736 | accepted |
 
 ### Cost and provenance
 
@@ -6861,10 +6875,11 @@ archive beside it.
 | exp-314 | Exact whole-cell disk projection diagnostic | 1.752 s | — | criterion | 114 proper pair constraints; diagnostic only |
 | exp-315 | Construction120s/fresh120s; outerTERM240/KILL250; sampled4GiB per live process | 2.479017708043102 s | — | guard | `a056038e4`; original r3 frame refused, fresh unstarted |
 | exp-316 | Construction120s/fresh120s; outerTERM240/KILL250; sampled4GiB per live process | 4.9302544590318576 s | — | criterion | `0f97f908d`; fresh endpoint calibration, no first8/exclusion/admission |
+| exp-317 | One full verification per certificate under each verifier, about 1.9 CPU-hours per Python pass; 5,400 s per verification | 3,337 s | — | criterion | clean `3213d651b`; Rust and forward replay at `6a0499ba4` |
 
-### What the 245 rounds jointly establish
+### What the 246 rounds jointly establish
 
-The 245 rounds use 2512.1 agent-minutes and 5827.5 wall-minutes under the campaign’s
+The 246 rounds use 2512.1 agent-minutes and 5883.1 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
