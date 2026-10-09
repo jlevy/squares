@@ -3,9 +3,9 @@ type: is
 id: is-01m4fc82q2brfyzjy5v6hkfzsq
 title: Consolidate session n17 work into reviewed merge-ready PRs
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 11
 delegate: claude-code@vm
 labels:
   - n-17
@@ -13,8 +13,12 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-09T03:45:26.746Z
-updated_at: 2026-10-09T08:32:28.204Z
+updated_at: 2026-10-09T10:13:40.986Z
 started_at: 2026-10-09T03:45:50.993Z
+closed_at: 2026-10-09T10:13:40.985Z
+close_reason: All consolidated n17 session PRs merged to main
+resolution: null
+duplicate_of: null
 ---
 The research source, mathematical strategy, paper extraction/review and PR documentation are consolidated. Keep this bead open for the next agent's finish and closeout. #404 at 1af586ef passes expected CI after a three-file worker-copy repair preserving the 192 MiB cap. Its broad local push remains failed/interrupted and unqualified. Propagation through formal stack 455 and scoped standalone #464 repair, current-source reviews and complete checkpoints remain under think-0m0x. Supporting #452/#453 have current-main full passes. The older 224 MiB proposal is unapplied and is not the selected remedy. Preserve all 604 campaign blobs, 645 cost keys, original exp-315/316 bytes, source custody and held merge state. Overall PR coordination: think-70h9. Next mathematics: think-dvcs/think-geid. https://github.com/jlevy/squares/issues/405
 
@@ -57,3 +61,6 @@ All subagents stopped; the old CI heartbeat remains paused. No merge, promotion,
 Final source correction: #450 moved to 8021291759d86eb53a146f3240046a84604fef3c during handoff. Its new Packing 37892077580, Pages 37892077553 and mergeability 37891957540 pass. Latest review G still binds older 4585b8d; fresh current inherited-layer coverage remains open. Public handoff/comment/tracker updated rather than crediting old-head CI.
 
 October 9 handoff reconciliation: the current Description supersedes stale source/CI/224MiB approval next-action wording in historical Notes. All actual execution receipts and historical failures remain retained. Main3213 is unchanged; no source edits, target computations, CI dispatches, merges or draft promotions occurred in this pass. Status and dependency map: https://github.com/jlevy/squares/issues/405 . Original complete source handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731 . Supporting issue updates: https://github.com/jlevy/squares/issues/400#issuecomment-6076664631 and https://github.com/jlevy/squares/issues/445#issuecomment-6076662312 .
+
+
+2026-10-09T10:13Z All session PRs landed: #452 c3ad5593c, #453 e0b02b3ab, stack 455 (#404/#454/#461) 533dd42, #464 b96a82c63. Consolidation complete.

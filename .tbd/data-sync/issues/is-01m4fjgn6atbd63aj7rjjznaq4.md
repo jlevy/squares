@@ -3,9 +3,9 @@ type: is
 id: is-01m4fjgn6atbd63aj7rjjznaq4
 title: Review green n17 peer PRs402/408/409 at their current heads
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 11
 delegate: claude-code@vm
 labels:
   - n-17
@@ -18,8 +18,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T05:34:59.273Z
-updated_at: 2026-10-09T09:29:46.058Z
+updated_at: 2026-10-09T10:13:38.879Z
 started_at: 2026-10-09T05:35:39.532Z
+closed_at: 2026-10-09T10:13:38.879Z
+close_reason: "#408 and #409 merged; #402 superseded by its own commit landed via #404"
+resolution: null
+duplicate_of: null
 ---
 Peer #402 at 3745534eb and #408 at d7709c1c have Astra senior A and correctness B reviews with no findings and passing expected aggregates. Reviews: #402 5466112458/5466196489; #408 5466236830/5466252889. These exclude integration with newer main 3213; full H258 target replay is not claimed. #409 at 7f7b4469 still has no formal review. Complete senior review and decide dedicated correctness scope, then qualify any source/base changes. Avoid repeating unchanged green gates. Keep this open for the next agent's finish and closeout. No merge, promotion, admission or bound movement. https://github.com/jlevy/squares/issues/405
 
@@ -47,3 +51,7 @@ October 9 handoff reconciliation: the current Description supersedes stale sourc
 
 
 2026-10-09T09:18Z #402: pushed 0ea1d2d9d (main merge) + 060d4c664 (test-only fix: W7 audit fixture kept frozen; test verifies current producer's W7 node as a stall, then requires fixture byte-for-byte with FINE_HULL_PULL restored to 2^-12). Comment https://github.com/jlevy/squares/pull/402#issuecomment-6078041810. Deep gates dispatched: #402 37910269391, #408 37910288320, #409 37910291086.
+
+
+
+2026-10-09T10:13Z LANDED #409 at 0abf9b607 and #408 at bead35d93 (deep gates 37910291086/37910288320 green; combo with 533dd42 tested locally 129+283 pass). #402 closed as superseded: its commit 917163641 (Guzhou0806) is on main via #404; close comment on PR.
