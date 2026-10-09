@@ -196,3 +196,110 @@ repositories:
       source roles. Raw upstream TXT/SVG/prose remain outside Git under the existing
       retention policy; no transferred verification or all-path source retention is
       asserted.
+
+  # The 9 October stabilization pass on PR466 (think-6fkj) read these heads, and the
+  # commits a pin contains whose changed paths no packet retains, at the PR466 head.
+  - url: https://github.com/itsnaka/squish-certs
+    read_through: e63e4e52b1728b6671b2f263c5e02a4aa79a39d3
+    read_on: '2026-10-09'
+    note: >-
+      Covers d8c8db8, 5e32bbd and e63e4e5 of 7 October, whose changed paths the packets
+      pinned at 5e32bbd and e63e4e5 retain only in part. d8c8db8 staged the first update
+      as "2026-10-07 2/" with an issue draft, a README and summary.csv; 5e32bbd renamed
+      every staged packing file unchanged into squish-submission-2026-10-07/, deleted the
+      three drafts and rewrote README.md as an index of current, new and replaced
+      packings. e63e4e5 added squish-submission-2026-10-07b/, whose nine cert.json files
+      the squish-422-second-update packet retains, with their 40- and 50-digit text, SVG,
+      PNG and checker-log companions, and updated the index. The index and companions
+      are prose, drawings and logs this record keeps outside Git under the retention
+      policy, since the source publishes no licence, and they name only the 23 counts
+      already registered. Nothing to import.
+  - url: https://github.com/wand125/square-packing-bounds
+    read_through: 069f3276f3a37b3cb0ceb9f88dd09fca456d779d
+    read_on: '2026-10-09'
+    note: >-
+      The six fine-net certificate commits of 6 and 7 October past the 2fad66e read
+      (ec799b7 n = 31, 953bfa4 n = 19, 80c7ab6 n = 28, f8e0178 n = 29, 7f9cd1d n = 27 and
+      678aa1d n = 26), each with its README section, and 069f327, which adds MOVED.json
+      and a README notice: the repository moved to wand125/square-packing and is
+      archived. Each candidate.json is byte-identical to the sealed candidate the
+      issue-446 packet wand125-fine-net-lower-bounds-2026-10-08 records from the
+      certificate's new home at 61e37d5; replay and adoption stay with think-ndvg. b73473f
+      is the FN1 bindings packet's pin. Nothing else to import.
+  - url: https://github.com/wand125/square-packing-density-bounds
+    read_through: 144387bdc5a33947f7c3124a6738ab76c56cf63a
+    read_on: '2026-10-09'
+    note: >-
+      One commit past the 096294a pin, of 7 October: MOVED.json and a README notice that
+      the repository moved to wand125/square-packing under
+      problems/square-lower-bounds/history/density-bounds/ and is archived. No
+      certificate or claim changes. Nothing to import.
+  - url: https://github.com/wand125/valid7-independent-check
+    read_through: d7007942713a795b9546480abd112a6339de0263
+    read_on: '2026-10-09'
+    note: >-
+      One commit past the c561dbb pin, of 7 October: MOVED.json and a README notice that
+      the repository moved to wand125/square-packing under checks/valid7/ and is archived.
+      No check, record or claim changes. Nothing to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: 89676bc9618e5724bed6a945d9711cba9ce90c6e
+    read_on: '2026-10-09'
+    bead: think-bmwd
+    note: >-
+      89676bc of 9 October adds problems/n17/reconcile-413-20261009/: the author's
+      reconciliation script, row table and output joining the jlevy/squares#413 roster
+      with the upstream admitted ledger and the distance-two tail. #413's entry records
+      it as subpatterns-33-reconciliation-2026-10-08, queued under think-bmwd; no
+      exclusion, orbit removal or coverage credit follows, and no author code was run.
+  - url: https://github.com/wand125/square-packing
+    read_through: dd6a7cc55a8d239a4462ee0d1991f7dc010df53c
+    read_on: '2026-10-09'
+    bead: think-ndvg
+    note: >-
+      Through dd6a7cc of 9 October. bf85d6b's INDEX.json and
+      problems/square-lower-bounds/README.md entries index the n = 27 follow-up its
+      packet retains. 82580ed adds problems/right-isosceles/: optimal packings of 2, 3, 4,
+      6 and 10 unit squares in a right isosceles triangle, a container outside this
+      record's scope, with nothing to import. dd6a7cc adds the finer-net check2
+      certificate mixed_n29_L58175, reporting s(29) >= 2327/400 = 5.8175 above the
+      issue-446 report of 1163/200, with its index entries. No issue reports it yet;
+      think-ndvg owns its intake with the other fine-net certificates.
+  - url: https://github.com/lollipoll/couzo-five-exact-certificates
+    read_through: 29bc1ea2e433a9186dd053d24fb421d63e09b15c
+    read_on: '2026-10-09'
+    note: >-
+      Three commits of 7 and 8 October (UTC) past the bc389dd pin. 3b18ebc records the
+      v1.0.0 release, registration URLs and verification receipts; 1c12d44 refreshes the
+      third-party source copies and replays and withdraws n = 130, 263 and 272 from the
+      ceiling request after the smaller SQUISH and Daniel certificates; 29bc1ea marks
+      n = 105 historical after Ryan Xu's smaller #432 construction, with an exact
+      comparison and replay. #425's entry already records both corrections: T-117 keeps
+      the n = 105 and 292 witnesses, and T-125 covers Ryan Xu's n = 105. Nothing new to
+      import.
+  - url: https://github.com/Queuingtheorydotcom/11SquaresOptimal
+    read_through: 4262f07c7723428c1725bb757ed06d0c4d28be1a
+    read_on: '2026-10-09'
+    bead: think-3i74
+    note: >-
+      Three commits of 8 October past the f9e0de7 read add paper/: a revised geometric
+      manuscript of the n = 11 proof (marker-based reduction, support chains, angle
+      penalties and a 103-node dependency graph), a geometric-foundations companion and a
+      self-contained verification supplement; 4262f07 simplifies the ownership-case 0, 3
+      and 5 exclusions. The author reports component replays passing and the portable
+      full replay not yet run end to end. This is new evidence for the claim T-060 cites,
+      owned by think-3i74's independent validation; no rating changes.
+  - url: https://github.com/evand/square-packing
+    read_through: cca7bf1f53c038907a819815c5e441df9783e93d
+    read_on: '2026-10-09'
+    note: >-
+      Covers the 38 commits of 6 and 7 October from d9b563a to cca7bf1, whose changed
+      paths the packets pinned at 7eef24f, f58a017 and cca7bf1 retain only in part. They
+      are the working history of registered imports: 7eef24f squashes the packing search
+      behind #399's s(266), s(270) and s(272) (T-119); the exact-minpoly, localmin and
+      Lean-batch commits build the exact forms and Lean local minima of #419 and #420
+      (T-120 to T-124), whose minpoly payloads the f58a017 packet leaves out; f1548ff's
+      candidates are the n = 292 certificate the f58a017 batch packet retains; cca7bf1
+      changes verify scripts and indexes. The rest are TODO, task and draft notes,
+      including s(12) wall-strip notes that claim no bound. Nothing else to import. The
+      61 later commits from dbcb4c4, which hold #465's s(132) and s(155), are not read
+      here.

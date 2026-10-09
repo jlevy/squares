@@ -49,9 +49,12 @@ REPLAY = (
 )
 CLAIM = (
     "Five complete rational source certificates report finite upper-bound improvements "
-    "at 84,86,105,175,270. Complete native feasibility outcomes are retained separately; "
-    "selected standing cases are unchanged pending independent review, historical "
-    "source-house integration and record review."
+    "at the exact sides they state: s(84) <= 9.697934799014921307163820128651, s(86) <= "
+    "9.820535407496742209971278280039, s(105) <= 10.789303783748158831034729697921, "
+    "s(175) <= 13.767155163542549110085664417048 and s(270) <= "
+    "16.9367230228761834072968722597. Complete native feasibility outcomes are retained "
+    "separately; selected standing cases are unchanged pending independent review, "
+    "historical source-house integration and record review."
 )
 
 

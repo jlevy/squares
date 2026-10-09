@@ -39,13 +39,14 @@ allowlist:
     boundary: >-
       Couzo's 73 source roles (72 blobs) for the twenty outside-horizon reports,
       acquired from franciscouzo/square-packing and kept outside Git because
-      redistribution is not established. Expected values are the three upstream
-      commit, tree and blob identities pinned at review, each tree rebuilt in full
-      against its pin. Acquired commit records and complete blob bytes are held
-      against them, catching a substituted or altered source; the retained facts
-      are rebuilt into each report's text and held against its pinned blob, the only
-      retained witness of unretained bytes, catching an edited or rounded pose token.
-      No digest names a file this repository wrote, decides geometry or pins code.
+      redistribution is not established. Expected values are the three commit and
+      tree ids in PINS, and the blob ids those trees bind once rebuilt in full against
+      their pinned roots. The acquired commit records and complete blob bytes are held
+      against them, catching a substituted or altered source. The retained facts are
+      rebuilt into each report's text and held against its tree-bound blob id, the only
+      retained witness of unretained bytes, catching an edited or rounded pose token;
+      the retained commit block, written from PINS, is compared whole, not label by
+      label. No digest names a file this repository wrote, decides geometry or pins code.
   - path: packing/devtools/gupta_refinement_reports.py
     kind: download
     boundary: >-

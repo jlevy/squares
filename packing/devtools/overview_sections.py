@@ -104,12 +104,13 @@ def standing_key(standing: str) -> str:
 
 def is_superseded(result: Result) -> bool:
     """Whether a result is no longer the best (`render_recent_results.superseded`): it
-    is a bound, and no case bound rests on it now, which is derived from the case
-    records and held to the numbers by `devtools.check_standing`; or it is a result of
-    another kind whose register entry declares a later result that implies the whole of
-    it (`superseded_by`). A result that still holds a bound, a second proof of a value
-    another result holds, a result that is no bound, and one superseded only in part
-    are all current. A row says so as `data-current`, which the bar's "Hide superseded"
+    is a bound, no case bound rests on it now and its cases hold one at least as good,
+    which is derived from the case records and held to the numbers by
+    `devtools.check_standing`; or it is a result of another kind whose register entry
+    declares a later result that implies the whole of it (`superseded_by`). A result that
+    still holds a bound, a better bound pending adoption, a second proof of a value
+    another result holds, a result that is no bound, and one superseded only in part are
+    all current. A row says so as `data-current`, which the bar's "Hide superseded"
     reads (`result_filters`), and draws the `superseded` chip (`supersession_marks`)."""
     return superseded(result.record, result.standing)
 

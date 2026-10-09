@@ -3,8 +3,10 @@
 
 Standing is derived and never stored: `render_recent_results.standing` reads it from the
 case records, by following evidence ids. An entry holds a case bound where a case
-record's bound cites the evidence the entry carries, and it is *superseded* where it
-claims a bound and no case bound rests on it. That derivation never compares a number,
+record's bound cites the evidence the entry carries. Where it claims a bound and no case
+bound rests on it, it is *superseded*, unless a bound it states is strictly better than
+the case record's (`improvements`): then nothing has replaced it, and it is *pending
+adoption*. That second step reads this module's numbers; the first never compares one,
 so it is only as good as the citations: a case record that cites the wrong entry, or an
 entry whose value is still the best on record while another entry is cited for it, would
 be labelled wrongly and nothing would say so.
@@ -22,6 +24,10 @@ same direction, in both lanes:
   above others that no replay holds yet. One whose words state no bound this can read is
   held to the weaker structural rule that another entry holds a verified bound at every
   case in its scope;
+- an entry **pending adoption** states, at some case, a bound strictly better than the
+  case record's in a lane it can hold, and no case bound rests on it: `T-128`'s eight
+  rational certificates, below the ceilings `T-125` and others hold, before the case
+  records take them in;
 - an entry that is the **current best** states, at some case, exactly the verified bound
   (the reported one, where it is the current best as reported), and never more than the
   record carries;
@@ -218,6 +224,24 @@ def findings(record: Mapping[str, Any], records: view.Records) -> list[Finding]:
     return found
 
 
+def improvements(record: Mapping[str, Any], records: view.Records) -> list[Finding]:
+    """The bounds an entry states that are strictly better than its case record's bound of
+    the same direction in a lane the entry can hold: the reported lane for a report
+    (`UNREPLAYED`), either lane for a replayed result, since two lanes are never mixed.
+
+    Each is a bound that nothing on record has replaced, so an entry that holds no case
+    bound and states one is pending adoption (`render_recent_results.PENDING_ADOPTION`)
+    and not superseded. A tie is no improvement: the case record holds that value under
+    another entry's citation. Compared exactly, as `relation` compares: cut decimals
+    improve on a bound only where every number they stand for does."""
+    report = str(record.get("confirmation")) in UNREPLAYED
+    return [
+        finding
+        for finding in findings(record, records)
+        if finding.reported == EXCEEDS or (not report and finding.verified == EXCEEDS)
+    ]
+
+
 def _at(found: Sequence[Finding]) -> str:
     return "n = " + compress(sorted({finding.n for finding in found}))
 
@@ -259,6 +283,12 @@ def problems(record: Mapping[str, Any], standing: str, records: view.Records) ->
                     f"{entry} is superseded and states no bound this reads, and at n = "
                     f"{compress(alone)} no other entry holds a verified bound"
                 )
+    elif standing == view.PENDING_ADOPTION:
+        if not improvements(record, records):
+            wrong.append(
+                f"{entry} is pending adoption, yet no bound it states is better than the "
+                "bound its case record holds"
+            )
     elif standing in {view.SECOND_CERTIFICATE, view.SECOND_CERTIFICATE_REPORTED}:
         off = [f for f in found if f.verified != EQUAL]
         if off:
@@ -288,11 +318,14 @@ def summary(record: Mapping[str, Any], standing: str, records: view.Records) -> 
     found = findings(record, records)
     lane = "reported" if standing == view.HOLDS_REPORTED else "verified"
     holds = [f for f in found if (f.reported if lane == "reported" else f.verified) == EQUAL]
+    better = improvements(record, records) if standing == view.PENDING_ADOPTION else []
     beaten = [f for f in found if f.verified == BEATEN and f not in holds]
     name = standing or f"({kind_label(str(record['kind']))})"
     parts = [f"{record['id']}  {name:<28s}"]
     if not found:
         parts.append("states no bound this reads")
+    if better:
+        parts.append(f"better than the case record at {_at(better)}")
     if holds:
         parts.append(f"equals the {lane} bound at {_at(holds)}")
     if beaten:
