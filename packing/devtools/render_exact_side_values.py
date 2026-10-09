@@ -3,7 +3,7 @@
 
 The register is the paper's only mathematical source.  The article template supplies
 exposition; every count, expression, polynomial, check, route, and bead is generated
-from ``frontier/exact-values.json``.  Given the site's root with ``--site``, this module
+from ``frontier/exact-values.json.gz``.  Given the site's root with ``--site``, this module
 writes a compact browser, lazy JSON payloads, a complete HTML archive, and Markdown.
 ``--pdf`` prints the complete archive through the shared KPress publication layer;
 ``--check`` refuses missing, stale, or unexpected browser and archive outputs.
@@ -44,6 +44,7 @@ from devtools.render_overview import (
     nav_html,
     paper_path,
 )
+from devtools.retained_data import compressed_path, read_retained_text, retained_exists
 from sqpack.probes import probe
 from sqpack.release import (
     EXACT_SIDE_VALUES_EDITION,
@@ -131,6 +132,8 @@ RENDER_INPUTS = (
     PRINT_PROBES / "render_exact_side_values" / "print_content_width.js",
     PRINT_PROBES / "render_exact_side_values" / "print_math_fit.js",
     REGISTER,
+    compressed_path(REGISTER),
+    PACKING / "devtools/retained_data.py",
     PACKING / "devtools/paper_front.py",
     PACKING / "devtools/render_overview.py",
     PACKING / "src/sqpack/release.py",
@@ -172,8 +175,8 @@ def load_register(path: Path | None = None) -> Mapping[str, Any]:
     """Load and structurally check the exact-values register used by the paper."""
     source = path or REGISTER
     try:
-        document = json.loads(source.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as error:
+        document = json.loads(read_retained_text(source))
+    except (OSError, ValueError) as error:
         raise ExactSideValuesPaperError(f"cannot read {source}: {error}") from error
     root = _as_mapping(document, source.name)
     softschema = _as_mapping(root.get("softschema"), "softschema")
@@ -981,6 +984,8 @@ def _repository_links(markdown: str, *, source: Path, revision: str) -> str:
     def pin(url: str) -> str:
         path_text, mark, fragment = url.partition("#")
         target = (source.parent / path_text).resolve()
+        if not target.is_file() and retained_exists(target):
+            target = compressed_path(target).resolve()
         if not target.is_relative_to(REPO):
             raise ExactSideValuesPaperError(
                 f"{source.name}: link escapes repository: {path_text}"
@@ -1126,7 +1131,7 @@ def render_browser(*, revision: str | None = None) -> str:
         "BROWSER_VERSION": escape(FRONT.version),
         "REGISTER_SOURCE_URL": (
             f"https://github.com/jlevy/squares/blob/{revision or link_revision()}/"
-            "packing/frontier/exact-values.json"
+            "packing/frontier/exact-values.json.gz"
         ),
         "BROWSER_STYLE": BROWSER_STYLE.read_text(encoding="utf-8"),
         "BROWSER_INDEX_URL": escape(exact_catalogue.INDEX_PATH.as_posix(), quote=True),

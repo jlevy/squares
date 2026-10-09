@@ -22,10 +22,9 @@ the import process regenerates the register and the paper whenever a result chan
 
 The [register](../../../../packing/frontier/exact-values.json.gz) covers all current
 cases $n = 1\ldots324$ and retains source polynomials for larger counts separately.
-The freshly verified parent checkpoint has 320 exact identities, one degree-only row and
-three numeric-only cases: $n = 29,55,71$. The child is expected to reach 321 exact
-identities after its $n = 83$ polynomial is replayed; its refreshed register has not yet
-been generated or verified.
+The verified parent checkpoint has 320 exact identities and one degree-only row.
+The regenerated child has 321 exact identities, including the full $n = 83$ polynomial,
+and three numeric-only cases: $n = 29,55,71$; all 77 proved cases keep their status.
 Each remaining numeric-only case has a specific route and bead.
 Ideal contact-system research remains open separately from the identity of a finite
 certified bound. The source corpus is bounded by the retained comparison catalogues,
@@ -231,9 +230,8 @@ Twenty-one triples matched the original 270-current-exact register entries.
 The other 161, plus one additional main-catalogue entry, gave 162 historical register
 entries: 152 superseded, three marked invalid by their source, and seven outside the
 current frontier. Subsequent delivered child work expanded that record to 170 historical
-entries; the refreshed child projection remains pending.
-Every entry retains its polynomial in full, exact arithmetic checks, source locator,
-attribution and source flags.
+entries; the latest-source projection remains pending. Every entry retains its polynomial in
+full, exact arithmetic checks, source locator, attribution and source flags.
 
 At the earlier upstream-integration checkpoint, the delivered child retained 170
 historical identities: 160 superseded, three source-invalid and seven outside the
@@ -345,13 +343,15 @@ A delivery-recovery worker checks earlier claimed output.
 | 13 | W7: complete PDF layout (`think-vore`) | Print-fit audit found expanded math outside the Letter content width; preserve every coefficient with shorter displays/tables and preflight every display at the actual Letter content width |
 | 14 | W7 **efficiency block**: bounded receipt controls (`think-3okf`) | Separate four custody corruptions into independently named tests; each replays the full packet scan and checks its specific refusal within the unchanged per-test wall |
 | 15 | W7: private snapshot copy contract (`think-3pyf`) | Copy each lexical source path once in both the worker and its live/Git inventories; omit only four unconsumed generated images and preserve their producers and dependency rescues under the unchanged 192 MiB cap |
+| 16 | W7: concurrent source and storage reconciliation (`think-a0qb`) | Retain the independently reviewed parent extraction pin guard and lossless generated storage; preserve our later receipt controls and every decoded byte of the child’s larger register while updating all publication consumers |
+| 17 | W7: hosted cost record (`think-a0qb`, `think-4kd6`) | Retain all three audited 106-step parent readings, including both over-ceiling observations, with geometric mean 135.17 s and spread 1.84×; keep the historical 88-step and child 108-step selections separate and all limits unchanged |
 
 The two stack layers have separate registers.
 At the earlier 2026-10-08 CI-repair checkpoint, PR 403 had 286 exact current values, one
 degree-only value at $n = 83$, 37 numeric-only values and 18 legacy historical notes.
 PR 435 supplied the $n = 83$ polynomial and full 170-entry historical collection.
 Both retained 77 proved cases.
-The refreshed parent and pending child partitions are recorded above.
+The verified refreshed parent and child partitions are recorded above.
 
 At the later original A1 checkpoint on 2026-10-08, the parent had 319 exact identities,
 one degree-only row and four numeric-only cases; the child had 320 exact identities and
@@ -373,16 +373,50 @@ The refreshed physical snapshot and full mutation run require final hosted check
 Its headroom is narrow; `think-t1lk` owns dependency-based selection.
 Local admissions retain the existing suite-cost observations and 10% unrecorded-share
 limit.
-The startup self-test checks the measured readiness-call wait for its injected 300
-ms delay, independently of navigation overhead.
+
+The concurrent parent source update is retained in the stack’s ancestry.
+At the original 2026-10-08 storage checkpoint, compression of the parent’s generated
+exact-side register and chunk census preserved every decoded byte of those records.
+The child’s `4dcddb7c` register contained all 324 current entries, then 320 exact
+identities, and 170 historical entries.
+Its 2,629,925 JSON bytes became 808,628 gzip bytes, with byte-for-byte decoded parity;
+coefficients, attribution and proof status were preserved.
+These are dated migration receipts.
+The freshly regenerated child stores 2,632,347 complete JSON bytes in 808,715 gzip
+bytes; refreshed publication measurements remain pending.
+Bounded readers, the generated-JSON layout floor, schemas, census tools and publication
+consumers all follow the maintained storage contract.
+Published source links name the actual gzip file; logical JSON identities remain
+available to the readers and plain test fixtures.
+The matching-SVG-pin guard refuses an unpinned or mismatched source before record
+writes.
+
+The first D-shard record used two compatible 106-step parent observations, 166.59 s and
+90.60 s, with geometric mean 122.85 s. That two-run record is historical.
+The current audited reference-shape cohort includes all three readings: 163.63 s, 166.59
+s and 90.60 s, with geometric mean 135.17 s and spread 1.84×. Both slower observations
+exceeded the unchanged 143 s ceiling and remain explicit evidence.
+The historical 104.95 s reading selected 88 steps; the child’s 96.25 s reading selected
+108 steps. Neither enters the 106-step cohort’s mean.
+The pending fields that expired at midnight UTC are removed; neither ceilings nor
+enforcement policy change.
+Fresh final-head CI remains pending and must establish the reconciled source and storage
+together. The startup self-test checks the measured readiness-call wait for its injected
+300 ms delay, independently of navigation overhead.
 Final validation and publication identities are reported in the PRs.
 
-The lazy catalogue has 1,003 JSON files, one browser script and one complete HTML
-archive in addition to its canonical reader, Markdown and PDF. Their site registrations
-come from the exporter plan; unexpected names or owners remain refused.
-The complete HTML has a specific 6,000,000-byte budget, while ordinary HTML keeps its
-2,000,000-byte cap. Executable payloads and large inline programs retain exact source
-identity, approved path and individual byte budgets.
+At the original 2026-10-08 publication checkpoint, the lazy catalogue had 1,003 JSON
+files, one browser script and one complete HTML archive in addition to its canonical
+reader, Markdown and PDF. The retained inventories counted 1,005 renderer-owned site
+registrations and 1,007 exporter-planned outputs.
+These are dated output counts; refreshed metrics remain pending.
+Site registrations come from the exporter plan; unexpected names or owners remain
+refused. The earlier live/Git snapshot inventory likewise recorded 6,467 paths and
+195,613,428 bytes under the unchanged 192 MiB cap; it is a dated receipt, not a fresh
+inventory. The complete HTML has a specific 6,000,000-byte budget, while ordinary HTML
+keeps its 2,000,000-byte cap.
+Executable payloads and large inline programs retain exact source identity, approved
+path and individual byte budgets.
 
 The PDF preflight typesets all displays at Letter’s content width using the shared
 publication margin token.
