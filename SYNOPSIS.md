@@ -323,8 +323,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 436 | 233 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
 | Sessions | 185 | 105 completed; 80 stopped; all terminal |
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
-| Hypotheses | 283 | 73 confirmed; 48 refuted; 75 blocked; 24 unresolved; 21 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 245 | 93 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 283 | 73 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
+| Experiments | 246 | 93 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 124 | 124 registered, 94 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -5966,7 +5966,7 @@ round that names the hypothesis, control roles included.
 | [H-338](packing/campaign/hypotheses/H-338-n17-state-conditioned-charge.md) | open question | Does a charge specialised to one occupancy state exclude it below $S^\ast$ | 0 | — |
 | [H-339](packing/campaign/hypotheses/H-339-n17-feature-flip-atlas.md) | blocked | A small feature-flip atlas doubles the terminal region’s radius | 0 | — |
 | [H-340](packing/campaign/hypotheses/H-340-n17-per-coordinate-radius-composition.md) | open | The composed local theorem holds with every coordinate at least $1/1216$ | 0 | — |
-| [H-341](packing/campaign/hypotheses/H-341-n17-issue-472-kernel-admission.md) | open | Issue 472’s twelve kernel certificates replay in full under a listed verifier with Rust parity and admit | 0 | — |
+| [H-341](packing/campaign/hypotheses/H-341-n17-issue-472-kernel-admission.md) | running | Issue 472’s twelve kernel certificates replay in full under a listed verifier with Rust parity and admit | 1 | exp-317 in progress: the clean listed replay at `3213d651b`, Rust parity, hosting and the admission round |
 | [H-342](packing/campaign/hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md) | open | The kernel producer closes most wall-anchored issue-413 rows that only branch and bound has reached | 0 | — |
 | [H-343](packing/campaign/hypotheses/H-343-n17-hard-tail-adaptive-measurement.md) | open | At least half of the distance-2 residue orbits close under the adaptive-row kernel | 0 | — |
 | [H-344](packing/campaign/hypotheses/H-344-n17-half-cell-branch-predicates.md) | blocked | Closed half-cell branch predicates close the consistency-limited stalls | 0 | — |
@@ -6322,7 +6322,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 245 rounds registered in `series-000`.
+There are 246 rounds registered in `series-000`.
 
 They record 2512.1 agent-minutes and 5827.5 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
@@ -6611,6 +6611,7 @@ archive beside it.
 | [exp-314](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-314-h-322-incircle-disk-projection.md) | 17 | target | H-322 | Exact whole-cell disk projection diagnostic | 114 proper pair constraints; zero ordinary-impossible pairs; fresh payload agreement | accepted |
 | [exp-315](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-315-h-323-shared-centre-endpoint-refusal.md) | 17 | calibration | H-323 | Registered r3 endpoint frame control | Wrong canonical-mask guard refused; E/D/H and fresh unstarted; no mathematical contradiction | unresolved |
 | [exp-316](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-316-h-324-shared-centre-explicit-f1.md) | 17 | calibration | H-324 | Fresh exact explicit-f1 endpoint control | All810rows/136pairs verified in both processes; endpoint calibration only | accepted |
+| [exp-317](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md) | 17 | target | H-341 | Issue 472’s twelve kernel certificates: clean listed replay, Rust parity, custody and admission | projected 3,636 orbits / 28,528 states; distance-2 stratum 94 | in-progress |
 
 ### Cost and provenance
 
@@ -6861,10 +6862,11 @@ archive beside it.
 | exp-314 | Exact whole-cell disk projection diagnostic | 1.752 s | — | criterion | 114 proper pair constraints; diagnostic only |
 | exp-315 | Construction120s/fresh120s; outerTERM240/KILL250; sampled4GiB per live process | 2.479017708043102 s | — | guard | `a056038e4`; original r3 frame refused, fresh unstarted |
 | exp-316 | Construction120s/fresh120s; outerTERM240/KILL250; sampled4GiB per live process | 4.9302544590318576 s | — | criterion | `0f97f908d`; fresh endpoint calibration, no first8/exclusion/admission |
+| exp-317 | One full verification per certificate under each verifier, about 1.9 CPU-hours per Python pass; 5,400 s per verification | — | — | — | in progress at `3213d651b` |
 
-### What the 245 rounds jointly establish
+### What the 246 rounds jointly establish
 
-The 245 rounds use 2512.1 agent-minutes and 5827.5 wall-minutes under the campaign’s
+The 246 rounds use 2512.1 agent-minutes and 5827.5 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

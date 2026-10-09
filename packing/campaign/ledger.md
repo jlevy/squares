@@ -955,7 +955,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 245 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 246 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1235,7 +1235,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | H-338 | open question | proof | For a residue state X of the H-266 cover and a cap V < S*, does a weig |  | 0 |  |  |
 | H-339 | blocked | proof | At most eight of the 135 unavailable owner-axis options of the retaine |  | 0 |  |  |
 | H-340 | open | proof | The capture-target theorem holds with the per-coordinate radius vector |  | 0 |  |  |
-| H-341 | open | proof | Each of the twelve kernel certificates reported in issue 472 (masks 21 |  | 0 |  |  |
+| H-341 | running | proof | Each of the twelve kernel certificates reported in issue 472 (masks 21 |  | 1 |  |  |
 | H-342 | open | proof | Of the issue-413 rows whose only reported evidence is a branch-and-bou |  | 0 |  |  |
 | H-343 | open | proof | At least 47 of the 94 distance-2 orbit representatives of the 60-entry |  | 0 |  |  |
 | H-344 | blocked | proof | With a branch predicate that halves one named side cell along its long |  | 0 |  |  |
@@ -1533,6 +1533,12 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-317 | series-000 | 17 | claude-opus-5.5, a coordinator with sub-agent replay lanes in detached worktrees | H-341 | Registered before any replay result is recorded here; the criteria are H-341's, registered at 2ed894325 (17:51 UTC) before the listed replay launched at 18:57 UTC. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -1582,7 +1588,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 
 ## Effort
 
-245 rounds, 2512.1 agent-minutes, 5827.5 wall-minutes.
+246 rounds, 2512.1 agent-minutes, 5827.5 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 
