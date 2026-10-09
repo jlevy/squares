@@ -75,7 +75,8 @@ Original prose and programs, other than a licence notice, are never copied into 
 packet: the source’s READMEs, papers, credits and code are at most pinned by digest, and
 no author program is executed.
 [Ryan Xu’s packet](../ry-xu-new-packings-2026-10-08/README.md) retains the text of the
-source’s 25 certificates this way.
+source’s 25 certificates this way, and [`sources.json`](sources.json) marks the counts
+those certificates serve with `raw_asset_retained: true`.
 
 Retaining a file grants no licence and relicenses nothing, and, like the policy above,
 it is not a legal conclusion.
