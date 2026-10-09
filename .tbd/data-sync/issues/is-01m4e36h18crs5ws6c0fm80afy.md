@@ -5,7 +5,7 @@ title: Review and validate the atlas site cleanups
 kind: task
 status: in_progress
 priority: 2
-version: 27
+version: 28
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -18,11 +18,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T15:48:04.263Z
-updated_at: 2026-10-09T09:10:43.863Z
+updated_at: 2026-10-09T09:41:33.890Z
 started_at: 2026-10-08T15:49:07.449Z
 ---
 Review source changes and exported atlas, run focused checks and the change-reachable gate, then commit/push a focused PR and confirm CI. Keep the site cleanup epic open for further requests.
 
 ## Notes
 
-Frozen reviewed branch df590029 has clean Git status; data/layout87b546, export source/pind832ce8 and unchanged eight asset blobs002a8911. Actual PDFs/preview/website focused and48-step records checks pass; current PDF was opened in Preview and revealed in Finder. Four source-clear formal drafts cover101changed/89reviewed/12bulk-excluded paths, bound mergebase3213d651b. Current target main e0b02b3ab has11upstream paths; only validate.py overlaps in disjoint hunks and no atlas data/export movement, so no regeneration indicated. Complete local df gate failed one serial empty-xdist control after all64prechecks/full normal tests passed; full detailed receipt and child diagnosis under think-z0vv/sk6o. Hosted fast/deferred checks must bind the actual combined tree after publication; current full pass/PR/reviews/CI remain pending. No GitHub merge authorized. Epic remains open for further requests.
+Current clean frozenhead98ccc9ad29; science/layout87b546,pind832ce8,eight exports002a8911 unchanged. Four source-clear formal drafts bind mergebase3213 and101changed/89reviewed/12bulk-excluded; focused custody fix12passed/staticgreen/independentAST and lifecycle acceptance. Full new local gate64prechecks+normal phase pass; serial/overall stillactive. Latest target main533dd42c6 audit and actual ORT compatibility tree747efe57 are clear without local integration: four overlapping source/tests merge their intended changes,106total/93fast/13deferred unchanged, no atlas producer/data/export movement. Hosted receipts must verify actual current combined tree; PR/CI/formal publication/readiness remain pending. Current PDFs/preview/records checks pass and PDF is revealed/opened. Epic remains open; no GitHub merge authorized.

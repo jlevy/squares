@@ -3,9 +3,9 @@ type: is
 id: is-01m4eq9mdaejkedd1b09qqn09p
 title: "n17 merge readiness: consolidate PR461 and its supporting stack, review documentation and qualify CI"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 23
+version: 24
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels:
@@ -31,8 +31,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:39:17.545Z
-updated_at: 2026-10-09T08:32:28.207Z
+updated_at: 2026-10-09T09:29:45.364Z
 started_at: 2026-10-08T21:42:09.481Z
+closed_at: 2026-10-09T09:29:45.364Z
+close_reason: "Superseded by think-rdd5: stack 455 landed at 533dd42 with 192 MiB cap and full checkpoint 37907206428"
+resolution: null
+duplicate_of: null
 ---
 Original consolidation scope is formal stack 455 (#404/#454/#461), supporting #452/#453 and incorporated, closed #457. Source and documentation are captured within their declared review scopes; standalone #464 review remains separate. The user hands final qualification/closeout to another agent. Root #404 at 1af586ef passes expected CI with the unchanged 192 MiB cap. Continue exact repair propagation, pinned follow-up reviews and full checkpoints under think-0m0x; the older 224 MiB answer is not the selected next gate. Supporting #452 b70bc/#453 99728 contain main 3213 and pass complete runs 37884639726/37884879202. Preserve original exp-315/316 evidence, custody, held merge index and all ceilings. Overall coordination: think-70h9. Mathematical next work: think-dvcs, then conditional think-geid. No merge, promotion or proof result. https://github.com/jlevy/squares/issues/405
 
