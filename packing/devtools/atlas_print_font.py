@@ -21,6 +21,7 @@ from dataclasses import dataclass
 from decimal import Decimal
 from functools import cache
 from pathlib import Path
+from textwrap import dedent
 
 from fontTools.ttLib import TTFont
 
@@ -167,10 +168,33 @@ def _register_fontconfig() -> None:
     if library is None:
         raise RuntimeError("native atlas print export requires Fontconfig")
     config = ctypes.CDLL(library)
+    config.FcConfigGetCurrent.argtypes = []
+    config.FcConfigGetCurrent.restype = ctypes.c_void_p
+    current = config.FcConfigGetCurrent()
+    if not current:
+        raise RuntimeError("cannot initialize process-local atlas print Fontconfig")
+    # Quartz requires the PostScript face name. Fontconfig matches family names,
+    # so give that exact request the retained family before native fallback rules.
+    alias = dedent(f"""
+        <fontconfig>
+          <alias binding="strong">
+            <family>{ITALIC_FAMILY}</family>
+            <prefer><family>{FAMILY}</family></prefer>
+          </alias>
+        </fontconfig>
+        """).encode("utf-8")
+    config.FcConfigParseAndLoadFromMemory.argtypes = [
+        ctypes.c_void_p,
+        ctypes.c_char_p,
+        ctypes.c_int,
+    ]
+    config.FcConfigParseAndLoadFromMemory.restype = ctypes.c_int
+    if not config.FcConfigParseAndLoadFromMemory(current, alias, 1):
+        raise RuntimeError("cannot configure process-local atlas print italic family")
     config.FcConfigAppFontAddFile.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
     config.FcConfigAppFontAddFile.restype = ctypes.c_int
     for path in FONT_PATHS:
-        if not config.FcConfigAppFontAddFile(None, os.fsencode(path)):
+        if not config.FcConfigAppFontAddFile(current, os.fsencode(path)):
             raise RuntimeError(f"cannot register process-local atlas print font: {path}")
 
 

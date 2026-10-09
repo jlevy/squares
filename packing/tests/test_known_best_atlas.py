@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import base64
 import copy
+import ctypes
+import ctypes.util
 import hashlib
 import io
 import json
@@ -3939,6 +3941,63 @@ def test_native_print_font_refuses_fallback_and_provisions_a_fresh_process() -> 
         "Cairo resolved retained Squares Atlas Print 2.1.5 bold and bold italic"
         in provisioned.stdout
     )
+
+
+def test_fontconfig_resolves_the_quartz_italic_name_as_the_retained_family() -> None:
+    # Cairo is already imported above. Fontconfig must recognize the Quartz face
+    # name as a family before generic native-font preferences can win its match.
+    library = ctypes.util.find_library("fontconfig")
+    assert library is not None
+    config = ctypes.CDLL(library)
+    config.FcNameParse.argtypes = [ctypes.c_char_p]
+    config.FcNameParse.restype = ctypes.c_void_p
+    config.FcConfigSubstitute.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int]
+    config.FcConfigSubstitute.restype = ctypes.c_int
+    config.FcDefaultSubstitute.argtypes = [ctypes.c_void_p]
+    config.FcDefaultSubstitute.restype = None
+    config.FcFontMatch.argtypes = [
+        ctypes.c_void_p,
+        ctypes.c_void_p,
+        ctypes.POINTER(ctypes.c_int),
+    ]
+    config.FcFontMatch.restype = ctypes.c_void_p
+    config.FcPatternGetString.argtypes = [
+        ctypes.c_void_p,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.POINTER(ctypes.c_char_p),
+    ]
+    config.FcPatternGetString.restype = ctypes.c_int
+    config.FcPatternDestroy.argtypes = [ctypes.c_void_p]
+    config.FcPatternDestroy.restype = None
+    atlas_print_font._register_fontconfig()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    for italic, family in (
+        (False, atlas_print_font.FAMILY),
+        (True, atlas_print_font.ITALIC_FAMILY),
+    ):
+        escaped_family = family.replace("-", r"\-")
+        request = f"{escaped_family}:slant={100 if italic else 0}:weight=200"
+        pattern = config.FcNameParse(request.encode())
+        assert pattern
+        matched = None
+        try:
+            assert config.FcConfigSubstitute(None, pattern, 0)
+            value = ctypes.c_char_p()
+            assert config.FcPatternGetString(pattern, b"family", 0, ctypes.byref(value)) == 0
+            assert value.value == atlas_print_font.FAMILY.encode()
+            config.FcDefaultSubstitute(pattern)
+            matched = config.FcFontMatch(None, pattern, ctypes.byref(ctypes.c_int()))
+            assert matched
+            assert config.FcPatternGetString(matched, b"file", 0, ctypes.byref(value)) == 0
+            assert value.value is not None
+            assert (
+                Path(value.value.decode()).resolve()
+                == atlas_print_font.FONT_PATHS[int(italic)].resolve()
+            )
+        finally:
+            if matched:
+                config.FcPatternDestroy(matched)
+            config.FcPatternDestroy(pattern)
 
 
 def test_print_font_css_requires_an_explicit_safe_serializer_path() -> None:

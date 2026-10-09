@@ -18,8 +18,10 @@ from typing import Any, Literal
 import pytest
 from playwright.sync_api import Browser, Error, Page, sync_playwright
 
+from devtools import atlas_print_font
 from devtools import render_n11_lower_bounds_explainer_pdf as pdf
 from devtools.check_math_loading import MATH_LIBRARY
+from devtools.check_published_site import pdf_pages
 from devtools.render_n11_lower_bounds_explainer_pdf import (
     _MATH_RENDERED,  # pyright: ignore[reportPrivateUsage]
     _PRINT_DRAWS,  # pyright: ignore[reportPrivateUsage]
@@ -107,7 +109,45 @@ def test_production_pdf_accepts_typeset_math() -> None:
     assert document.startswith(b"%PDF-")
     digest = hashlib.sha256(pdf.PAGE.read_bytes()).hexdigest()
     assert document.endswith(f"\n%sqpack-source-html-sha256: {digest}\n".encode())
+    atlas_faces = {path.stem for path in atlas_print_font.FONT_PATHS}
+    embedded = {pdf.family_of(name) for name in pdf.embedded_fonts(document)}
+    assert atlas_faces <= embedded
+    assert not atlas_faces.intersection(pdf.outline_fonts(document))
     assert pdf.font_findings(document) == []
+    pages = pdf_pages(document)
+    assert pages == pdf.EXPECTED_PAGE_COUNT
+
+
+def test_the_complete_atlas_and_caption_fit_one_letter_page() -> None:
+    """A tall Figure 2 must preserve its full drawing rather than spill or crop."""
+    assert pdf.PAGE.is_file(), "Pages must provide its prepared publication page"
+    with sync_playwright() as driver:
+        browser = driver.chromium.launch(executable_path=os.environ.get(pdf.BROWSER_OVERRIDE))
+        try:
+            # Letter's 8.5in width less the two 1.25in reading margins.
+            page = browser.new_page(viewport={"width": 576, "height": 912})
+            page.emulate_media(media="print", reduced_motion="reduce")
+            page.goto(pdf.PAGE.as_uri(), wait_until="load")
+            page.wait_for_selector(pdf.READY, timeout=60_000)
+            page.evaluate(SETTLED)
+            geometry = page.evaluate(probe(PROBES, "pdf_math_browser/atlas_print_geometry"))
+            assert geometry["image_loaded"], geometry
+            assert geometry["image_visible"], geometry
+            assert geometry["natural_width"] == 2260, geometry
+            assert geometry["natural_height"] == 4023, geometry
+            assert geometry["image_width"] / geometry["image_height"] == pytest.approx(
+                2260 / 4023, rel=0.001
+            ), geometry
+            assert geometry["figure_outer_height"] <= 9.5 * 96, geometry
+            assert geometry["caption_visible"], geometry
+            assert geometry["caption_height"] > 0, geometry
+            assert geometry["caption_below_image"], geometry
+            assert geometry["caption_inside_figure"], geometry
+            assert geometry["object_fit"] != "cover", geometry
+            assert geometry["figure_overflow"] == "visible", geometry
+            assert geometry["link"].endswith("square-packings-100-20261008.pdf"), geometry
+        finally:
+            browser.close()
 
 
 @pytest.mark.parametrize("mode", ["error", "timeout"])

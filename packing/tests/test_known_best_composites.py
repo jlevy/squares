@@ -17,6 +17,7 @@ from __future__ import annotations
 import hashlib
 import struct
 import subprocess
+from collections.abc import Iterator
 from datetime import date
 from pathlib import Path
 from xml.etree import ElementTree as ET
@@ -95,7 +96,7 @@ class Family:
         *,
         lower: str = LOWER,
         stamp: str | None = None,
-        dateline: str | None = None,
+        printed_date: str | None = None,
         exports_of: str | None = None,
     ) -> str:
         """Write the SVG and exports that carry its receipt; returns the SVG text.
@@ -120,8 +121,8 @@ class Family:
             '  <metadata>\n    <sqpack:profile version="8">\n'
             f"{record}"
             "    </sqpack:profile>\n  </metadata>\n"
-            f'  <text data-feature="release">{dateline or shown.dateline}</text>\n'
-            f'  <text data-feature="release-stamp">{stamp or shown.stamp}</text>\n'
+            '  <text data-feature="release-stamp">'
+            f"{stamp or f'{printed_date or shown.formatted_date} · {shown.stamp}'}</text>\n"
             '  <g data-feature="packing-card" data-n="18">\n'
             '    <text data-feature="packing-label">18</text>\n'
             f'    <text data-feature="side-bound">{SIDE}</text>\n'
@@ -152,7 +153,7 @@ class Family:
 
 
 @pytest.fixture
-def family(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Family:
+def family(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Family]:
     """A synthetic composite family the builder reads in place of the retained two.
 
     The figure record states one case, and git is not asked about the synthetic data
@@ -160,6 +161,11 @@ def family(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Family:
     """
     packing = tmp_path / "packing"
     atlas_root = packing / "atlas/known-best"
+    atlas_root.mkdir(parents=True)
+    credit_name = "credit-attributions.json"
+    (atlas_root / credit_name).write_bytes((atlas.ATLAS_ROOT / credit_name).read_bytes())
+    attributions = atlas._print_attributions  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    attributions.cache_clear()
     monkeypatch.setattr(atlas, "ROOT", packing)
     monkeypatch.setattr(atlas, "ATLAS_ROOT", atlas_root)
     monkeypatch.setattr(render_composite_pdf, "ATLAS_ROOT", atlas_root)
@@ -171,7 +177,10 @@ def family(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Family:
     monkeypatch.setattr(atlas, "_identity_git_problems", lambda _path, _identity: [])
     made = Family(tmp_path)
     monkeypatch.setattr(atlas, "COMPOSITES", (made.canvas,))
-    return made
+    try:
+        yield made
+    finally:
+        attributions.cache_clear()
 
 
 def current() -> atlas.CompositeIdentity:
@@ -285,7 +294,7 @@ def test_a_stamp_that_is_not_the_composites_own_record_fails(
     assert atlas.composite_findings().problems == (
         (
             "atlas/known-best/synthetic.svg release-stamp is ('v0.0.0-000000',); "
-            f"expected ({identity.stamp!r},)"
+            f"expected ({identity.poster_stamp!r},)"
         ),
         (
             "atlas/known-best/synthetic.svg was drawn for another version than "
@@ -309,7 +318,7 @@ def test_a_version_bump_fails_every_composite_until_it_is_redrawn(
     monkeypatch.setattr(atlas, "PUBLICATION_VERSION", "v9.9.9")
     problems = atlas.composite_findings().problems
     assert len(problems) == 2
-    assert "expected ('v9.9.9-111111',)" in problems[0]
+    assert "expected ('September 28, 2026 · v9.9.9-111111',)" in problems[0]
     assert problems[1] == (
         "atlas/known-best/synthetic.svg was drawn for another version than v9.9.9; "
         "redraw it with --update-composites"
@@ -323,13 +332,13 @@ def test_a_dateline_that_is_not_the_date_of_the_composites_data_fails(family: Fa
     the posters were redrawn with the results of the 29th and 30th.
     """
     identity = current()
-    family.write(identity, dateline="Including new results (September 28, 2026)")
+    family.write(identity, printed_date="September 28, 2026")
     assert identity.dateline == "Including new results (October 1, 2026)"
     assert atlas.composite_findings().problems == (
         (
-            "atlas/known-best/synthetic.svg release is "
-            "('Including new results (September 28, 2026)',); "
-            "expected ('Including new results (October 1, 2026)',)"
+            "atlas/known-best/synthetic.svg release-stamp is "
+            f"('September 28, 2026 · {identity.stamp}',); "
+            f"expected ({identity.poster_stamp!r},)"
         ),
     )
 
@@ -360,7 +369,7 @@ def test_a_composite_with_no_record_of_its_data_fails(family: Family) -> None:
 def test_a_malformed_record_fails(
     family: Family, identity: atlas.CompositeIdentity, problem: str
 ) -> None:
-    family.write(identity, stamp="v0.4.2-afd831", dateline="Including new results")
+    family.write(identity, stamp="v0.4.2-afd831")
     assert atlas.composite_findings().problems == (f"atlas/known-best/synthetic.svg {problem}",)
 
 
@@ -589,8 +598,6 @@ def test_the_retained_composites_agree_with_their_own_records() -> None:
             if node.attrib.get("data-feature") in {"release", "release-stamp"}
         }
         expected = {"release-stamp": identity.poster_stamp}
-        if not canvas.information_in_corner:
-            expected = {"release": identity.dateline, "release-stamp": identity.stamp}
         assert texts == expected
         assert identity.stamp.startswith(release.PUBLICATION_VERSION + "-")
 
