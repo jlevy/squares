@@ -5,7 +5,7 @@ title: Build and present the left-aligned atlas preview
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,11 +13,11 @@ parent_id: is-01m4e35s7r1e65r1qmpz250h0p
 hold: blocked
 hold_until: null
 created_at: 2026-10-08T16:06:58.392Z
-updated_at: 2026-10-09T03:35:57.928Z
+updated_at: 2026-10-09T04:28:31.386Z
 started_at: 2026-10-08T16:07:22.283Z
 ---
 Build and verify the maintained fresh website and poster exports, then present them through user-authorized UI actions. Latest request asks Finder to show the latest PDF folder and the website in the default external browser. Respect the explicit local-website browser restriction and any app permission refusals; do not retry through another browser, port, wrapper or automation route.
 
 ## Notes
 
-Finder is raised with square-packings-324-20261008.pdf selected in the isolated atlas-cleanups known-best folder. Its same path now holds the regenerated v0.5.0-9c3442 PDF; further latest footer/credit typography refinement is in progress. The original human-approved localhost:8799 manual preview server remains running as PID 97538 / PTY 64736. Default external-browser opening and automated local website navigation remain tool-rejected; do not retry through another browser, route, wrapper or port. Manual URL is http://127.0.0.1:8799/#the-atlas. Current maintained preview refresh has fresh asset bytes but predecessor index HTML until the page generator finishes; do not claim the new page is open or current. Published main integration is complete, so the old local-merge approval blocker no longer applies.
+Finder selected the dated324PDF in the atlas-cleanups worktree, and default Mac Preview is verified open with that exact PDF URL, one-page document,9c3442version and finalcredit/footertext. This is confirmed presentation of the a7accd24 actual export; newest uniform15-linebody styling is committed7b734f8bd and will regenerate the same path after currentmain3213integration. Latestpreview HTML/assets had passed201.24s maintained build+5656file checks at a7; those are predecessor receipts now. Existing user-approved manual loopback8799serverPID97538/PTY64736 remains untouched. Automated website navigation/default-external-browser opening stays tool-rejected; do not retry throughanotherbrowser/route/wrapper/port. Manual URL http://127.0.0.1:8799/#the-atlas. Refresh website following final integration/export, then present the actual updated PDF again. Localmergeapproval blocker remainsresolved.
