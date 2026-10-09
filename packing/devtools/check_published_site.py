@@ -1295,10 +1295,15 @@ def expected_commit() -> str:
 
 
 def workbench_startup(url: str, project_root: str, *, timeout: float) -> tuple[bool, str]:
-    """Start the deployed page and require its public API and project-root navigation."""
+    """Start the deployed page and require its public API and project-root navigation.
+
+    `SQPACK_CHROMIUM` names a browser the environment supplies, as it does for the
+    forwarders."""
     try:
         with sync_playwright() as playwright:
-            browser = playwright.chromium.launch()
+            browser = playwright.chromium.launch(
+                executable_path=os.environ.get(BROWSER_OVERRIDE)
+            )
             try:
                 page = browser.new_page()
                 page.goto(url, wait_until="load", timeout=timeout * 1000)
