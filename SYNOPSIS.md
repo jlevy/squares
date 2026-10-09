@@ -282,6 +282,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-093](packing/frontier/RESULTS.md) | 17 | `V3` | `C3` | `S2` | `previously-published` | s(17) > 18641771/4000000 = 4.66044275, by Guzhou0806 / N17 project’s R071 release of 30 September 2026, on the charge of R068 (T-043). |
 | [T-098](packing/frontier/RESULTS.md) | 68, 102, 103, 106, 110, 123, 126, 131, 132, 152, 154, 155, 156, 172, 177, 180, 181, 182, 199, 206, 207, 208, 209, 210, 211, 228, 236, 237, 238, 239, 240, 241, 259, 263, 268, 269, 270, 271, 272, 273, 297, 301, 302, 303, 304, 305, 306, 307 | `V3` | `C3` | `S2` | `previously-published` | For each of 48 counts n from 68 to 307, s(n) <= S', where S’ is the side of an exact rational packing Evan Daniel published on 5 October 2026: this register’s own known-best packing at that count, solved to its exact optimum. |
 | [T-101](packing/frontier/RESULTS.md) | 28, 37, 39, 41, 50, 51, 53, 54, 55, 69, 70, 71, 83, 87, 88, 101, 104, 107, 108, 109, 122, 124, 125, 127, 128, 129, 145, 146, 147, 148, 149, 150, 151, 153, 170, 171, 173, 174, 175, 176, 178, 179, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 232, 233, 234, 235, 257, 258, 260, 261, 262, 264, 265, 266, 267, 290, 291, 293, 294, 295, 296, 298, 299, 300 | `V3` | `C3` | `S2` | `previously-published` | For each of 77 counts n from 28 to 300, s(n) <= S', where S’ is the side of an exact rational packing Evan Daniel published on 5 October 2026: this register’s own known-best packing at that count, the one the Kingbird catalogue prints, solved to a nearby exact point of minimizing the side. |
+| [T-117](packing/frontier/RESULTS.md) | 105, 292 | `V3` | `C3` | `S2` | `previously-published` | Complete exact replay confirms the finite rational upper-bound refinement at n = 105, 292. |
+| [T-118](packing/frontier/RESULTS.md) | 68 | `V3` | `C3` | `S2` | `previously-published` | Complete exact replay confirms the finite rational upper-bound refinement at n = 68. |
 | [T-063](packing/frontier/RESULTS.md) | 61 | `V3` | `C3` | `S1` | `previously-published` | s(61) = 8, as a corollary of s(60) = 8 (T-062), which Evan Daniel published with it on 28 September 2026. |
 
 | Significance | What [`epistemics.md`](epistemics.md#significance-and-novelty) anchors it to |
@@ -317,7 +319,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 48 | 28 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 209 | 45 confirmed; 33 refuted; 63 blocked; 19 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 187 | 63 accepted; 38 rejected; 58 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 116 | 116 registered, 86 by others |
+| Frontier results | 118 | 118 registered, 88 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -577,6 +579,8 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Refinement Replay Custody and Worker Admission Review](docs/project/reviews/review-2026-10-07-refinement-custody-closure.md) | dated review record | record | retained | — |
+| [Refinement Host Relocation and Rational Feasibility Review](docs/project/reviews/review-2026-10-07-refinement-host-rebind.md) | dated review record | record | retained | — |
 | [Published Site URLs](docs/project/site-urls.md) | generated status view | generated | generated | — |
 | [Fibonacci Torus: Independent Algebra Audit](docs/project/reviews/review-2026-10-07-fibonacci-torus-algebra.md) | dated review record | record | retained | — |
 | [Review: The Fibonacci-Torus Contact Geometry](docs/project/reviews/review-2026-10-07-fibonacci-torus-geometry.md) | dated review record | record | retained | — |

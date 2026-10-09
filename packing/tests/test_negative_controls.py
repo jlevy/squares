@@ -19,6 +19,7 @@ import pytest
 from devtools import run_negative_controls as controls
 from devtools.check_readme import NO_INDEX
 from devtools.repo_scope import tracked_files
+from devtools.retained_data import read_retained_bytes
 from devtools.run_negative_controls import (
     BUILD_CACHES,
     COPY_SEPARATELY,
@@ -157,8 +158,8 @@ def test_historical_push_logs_leave_workers_but_keep_scientific_consumers(
         assert source.relative_to(controls.REPO) not in copied_targets
         assert not (tree / HERE / "campaign/agent-sessions" / name).exists()
     for relative in (
-        "campaign/agent-sessions/session-164-efficiency-push.log",
-        "campaign/agent-sessions/session-164-push-final.log",
+        "campaign/agent-sessions/session-164-efficiency-push.log.gz",
+        "campaign/agent-sessions/session-164-push-final.log.gz",
         "campaign/agent-sessions/session-153-native-full.json",
         "campaign/agent-sessions/session-153-native-full.rows.jsonl",
         "frontier/results.yaml",
@@ -170,6 +171,9 @@ def test_historical_push_logs_leave_workers_but_keep_scientific_consumers(
         source = ROOT / relative
         assert (tree / HERE / relative).read_bytes() == source.read_bytes(), relative
         assert tree / HERE / relative in (tracked_files(tree, "packing") or []), relative
+        if relative.endswith(".log.gz"):
+            assert read_retained_bytes(tree / HERE / relative) == read_retained_bytes(source)
+            assert not (tree / HERE / relative.removesuffix(".gz")).exists()
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
@@ -1157,8 +1161,9 @@ def test_snapshot_inventory_preserves_copy_count_and_cache_exclusions(
     monkeypatch.setattr(controls, "snapshot_pruned_targets", lambda: [omitted])
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (docs,))
     monkeypatch.setattr(controls, "PRUNE", frozenset((omitted,)))
-    assert controls.snapshot_source_paths() == [omitted, omitted, document, ordinary]
-    assert controls.snapshot_source_bytes() == 2 * omitted.stat().st_size + 11
+    assert controls.snapshot_source_paths() == [omitted, document, ordinary]
+    assert controls.snapshot_source_bytes() == omitted.stat().st_size + 11
+    assert controls.snapshot_duplicate_copy_bytes() == omitted.stat().st_size
 
 
 @pytest.fixture
@@ -1199,7 +1204,7 @@ def snapshot_audit_fixture(
     monkeypatch.setattr(controls, "root_files", lambda: ())
     monkeypatch.setattr(controls, "_linked_documents", lambda: [document])
     monkeypatch.setattr(
-        controls, "snapshot_source_paths", lambda: [generated, linked, registered, core, core]
+        controls, "snapshot_source_paths", lambda: [generated, linked, registered, core]
     )
     return old, spec
 
@@ -1209,10 +1214,10 @@ def test_snapshot_audit_counts_rescue_and_overlapping_candidates_once(
 ) -> None:
     old, spec = snapshot_audit_fixture
     report = controls.snapshot_audit([old, old / "generated.bin"], spec_path=spec)
-    assert report["source_bytes"] == 58
-    assert report["copy_operations"] == 5
+    assert report["source_bytes"] == 51
+    assert report["copy_operations"] == 4
     assert report["candidate_net_saved_bytes"] == 10
-    assert report["candidate_source_bytes"] == 48
+    assert report["candidate_source_bytes"] == 41
     candidates = report["candidates"]
     assert isinstance(candidates, list)
     candidate = candidates[0]
@@ -1272,8 +1277,8 @@ def test_snapshot_audit_refuses_unconditional_copy_candidates(
         monkeypatch.setattr(controls, "root_files", lambda: (target,))
     else:
         monkeypatch.setattr(controls, route, (target,))
-    # Count the repeated operation conservatively; neither copy is suppressible.
-    monkeypatch.setattr(controls, "snapshot_source_paths", lambda: [copied, copied])
+    # The actual roster contains one unique unconditional destination.
+    monkeypatch.setattr(controls, "snapshot_source_paths", lambda: [copied])
     monkeypatch.setattr(
         controls, "clone_tree", lambda _tree: pytest.fail("audit copied source")
     )
@@ -1307,8 +1312,8 @@ def test_snapshot_audit_cli_never_clones_or_runs_a_control(
     )
     assert controls.main([str(spec), "--audit-snapshot", "--prune-candidate", str(old)]) == 0
     report = json.loads(capsys.readouterr().out)
-    assert report["source_bytes"] == 58
-    assert report["candidate_source_bytes"] == 48
+    assert report["source_bytes"] == 51
+    assert report["candidate_source_bytes"] == 41
     with pytest.raises(SystemExit, match="2"):
         controls.main([str(spec), "--prune-candidate", str(old)])
 
@@ -1387,6 +1392,7 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     honest -- an index built by adding whatever happens to be on disk would also answer,
     and would put a reader's `attic/` scratch in it (PR 207).
     """
+    from devtools import refinement_house_links as refinements  # noqa: PLC0415
     from devtools import squish_followup_packets as packet  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
     from devtools import squish_second_update_house_links as house  # noqa: PLC0415
@@ -1414,6 +1420,10 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     )
     linked_proofs.update(
         house.house_path(n).relative_to(controls.REPO).as_posix() for n in house.LINK_NUMBERS
+    )
+    linked_proofs.update(
+        path.relative_to(controls.REPO).as_posix()
+        for path in refinements.snapshot_house_links()
     )
     for relative in linked_proofs:
         assert (tree / relative).is_file()
@@ -1494,6 +1504,7 @@ def test_the_root_files_reach_every_worker(control_snapshot: tuple[Path, set[Pat
         assert (tree / relative).read_bytes() == path.read_bytes(), relative
 
 
+@pytest.mark.slow
 def test_unmutated_results_checker_is_green_inside_a_worker(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -1664,6 +1675,7 @@ def test_new_operating_rule_control_reaches_summary_drift_after_future_rules(
     assert source.read_text() == original
 
 
+@pytest.mark.slow
 def test_squish_complete_replay_survives_worker_custody_and_private_controls(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -1743,10 +1755,11 @@ packet.original.exact_verify = packet.original.independent.check = forbidden
     assert baseline.returncode == 0, baseline.stdout + baseline.stderr
 
 
+@pytest.mark.slow
 def test_second_squish_complete_replay_survives_native_worker_boundaries(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
-    """Exercise the production copy, real index and every complete proof leaf."""
+    """Exercise the production copy, real index, native readers and both live mutants."""
     from devtools import squish_second_update_confirmation as packet  # noqa: PLC0415
     from devtools import squish_second_update_house_links as house  # noqa: PLC0415
 
@@ -1770,13 +1783,54 @@ def test_second_squish_complete_replay_survives_native_worker_boundaries(
         target = tree / source.relative_to(controls.REPO)
         assert not target.is_symlink()
         assert target.read_bytes() == source.read_bytes()
-    _run_second_squish_native_program(
-        tree,
-        """
+    baseline_program = """
+from devtools import build_known_best_atlas as atlas
+from devtools import check_results
+from devtools import squish_second_update_confirmation as packet
+from devtools import squish_second_update_house_links as house
+def forbidden(*args, **kwargs):
+    raise AssertionError('native admission must not execute a geometric decider')
+packet.decide = packet.original.decide = forbidden
+packet.original.exact_verify = packet.original.independent.check = forbidden
 assert tuple(packet.check_certification()) == packet.NUMBERS
-print('all 27 complete inputs and nine proof leaves admitted')
-""",
+assert tuple(house.check_houses()) == packet.NUMBERS
+for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
+    relative = path.relative_to(packet.REPO).as_posix()
+    assert check_results.repository_file_problem(relative) is None
+assert check_results.repository_file_problem('packing/witnesses/known-best/unrelated.yaml')
+for producer in (atlas.update, lambda: atlas.update_selected([88])):
+    try:
+        producer()
+    except packet.original.PacketError as error:
+        assert 'output escapes' in str(error)
+    else:
+        raise AssertionError('producer accepted a linked output')
+print('all 27 complete inputs admitted; nine house reads and both output guards passed')
+"""
+    environment = controls.control_environment(tree, tree / "second-squish-baseline-pycache")
+    baseline = subprocess.run(
+        [sys.executable, "-c", baseline_program],
+        cwd=work,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=60,
     )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    selected = [
+        control
+        for control in specification["controls"]
+        if control["name"].startswith("SQUISH second update -")
+    ]
+    assert len(selected) == 2
+    for control in selected:
+        source = ROOT / control["file"]
+        original = source.read_bytes()
+        passed, detail = controls.run_one(control, tree)
+        assert passed, detail
+        assert source.read_bytes() == original
 
 
 @pytest.mark.parametrize(
@@ -1934,8 +1988,9 @@ def test_duplicate_stdout_prune_preserves_canonical_and_declared_input(
 
 
 @pytest.mark.parametrize("declaration", ["inline", "frontier", "none"])
+@pytest.mark.parametrize("explicit", [False, True])
 def test_git_projection_preserves_sparse_declared_inputs(
-    declaration: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    declaration: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, explicit: bool
 ) -> None:
     """Absent sparse files still count; genuine declarations rescue exact outputs."""
     packing = tmp_path / "packing"
@@ -1977,7 +2032,7 @@ def test_git_projection_preserves_sparse_declared_inputs(
     expected = sum(
         path.stat().st_size for path in (canonical, source, document, register, index)
     )
-    if declaration != "none":
+    if explicit or declaration != "none":
         expected += output.stat().st_size
     output.unlink()
     canonical.unlink()
@@ -1989,7 +2044,7 @@ def test_git_projection_preserves_sparse_declared_inputs(
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
     monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
-    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (output,) if explicit else ())
     assert controls.snapshot_git_source_bytes(tree) == expected
 
 

@@ -893,7 +893,7 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # 1 October replayed as T-074, which took the case on 2026-10-02 from its 28 September
     # certificate (T-070), itself raised that day from the point bound of T-044.
     68: (
-        ("Couzo & Daniel, GitHub (confirmed T-098)", "external", "verified"),
+        ("Couzo & Rehwaldt, GitHub (confirmed T-118)", "external", "verified"),
         (
             "wand125 after Tokoharu, Levy et al. 2026, GitHub (confirmed T-074)",
             "external",

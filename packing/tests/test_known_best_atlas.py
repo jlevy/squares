@@ -17,6 +17,8 @@ import pytest
 import yaml
 
 from devtools import build_known_best_atlas as known_best_builder
+from devtools import refinement_house_links as refinement_houses
+from devtools import refinement_packets as refinement_sources
 from devtools import render_composite_pdf
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
@@ -433,9 +435,17 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         assert entry["source"]["path"].endswith(
             (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
         )
-        assert witness["source"]["path"] == entry["source"]["path"]
+        source = refinement_houses.source(n) if n in refinement_houses.NUMBERS else None
+        if source is not None and entry["source"]["url"] == source.url(n):
+            # New source facts use repository-relative custody paths. Admit the whole
+            # imported house, not merely an accepted alternative path spelling.
+            assert witness["source"] == refinement_sources.to_witness(source, n)["source"]
+            assert witness["source"]["path"] == "packing/" + entry["source"]["path"]
+            refinement_houses.check_houses([n])
+        else:
+            assert witness["source"]["path"] == entry["source"]["path"]
+            assert "not a legal conclusion" in witness["claim"]["limitations"]
         assert witness["source"]["url"] == entry["source"]["url"]
-        assert "not a legal conclusion" in witness["claim"]["limitations"]
     elif entry["source"]["kind"] == "unitsquare-rendering":
         assert witness["source"]["revision"] == (
             f"upstream-declared parent-content SHA-256 {release_by_n[n]['record_sha256']}"
@@ -1454,3 +1464,13 @@ def test_a_catalogue_case_is_unaffected_by_the_unitsquare_selector() -> None:
 
     assert plan.kind == "kingbird-derived-facts"
     assert plan.url == "https://kingbird.myphotos.cc/packing/square-71.svg"
+
+
+@pytest.mark.parametrize("n", refinement_houses.NUMBERS)
+def test_each_refinement_atlas_source_binds_full_private_custody(n: int) -> None:
+    entry = next(
+        row
+        for row in json.loads(known_best_builder.MANIFEST.read_text())["atlas"]["entries"]
+        if row["n"] == n
+    )
+    _assert_witness_agrees_with_entry(entry, {})
