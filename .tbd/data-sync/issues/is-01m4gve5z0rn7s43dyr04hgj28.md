@@ -3,9 +3,9 @@ type: is
 id: is-01m4gve5z0rn7s43dyr04hgj28
 title: "Admit #472's 12 native kernel certificates (wand125) after clean replay and custody"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: codex@spud10.local
 labels:
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T17:30:09.760Z
-updated_at: 2026-10-09T23:28:01.218Z
+updated_at: 2026-10-09T23:28:28.129Z
 started_at: 2026-10-09T18:52:23.854Z
+closed_at: 2026-10-09T23:28:28.129Z
+close_reason: "PR #475 merged as 0f16c033a87464cfab127ba54748ca5e2536babd after final independent review D and exact-head complete checkpoint. Both sessions consolidated at https://github.com/jlevy/squares/pull/475#issuecomment-6090970439; tracker #405 and roster #413 updated, #472 closed. Comparator think-n53s remains open under think-tmz6; other scoped follow-ups remain open."
+resolution: null
+duplicate_of: null
 ---
 Issue #472: 12 sub-pattern certificates from this repo's own producer (check_n17_subpattern mode A), standing kernel verifier FULL PASS at blob 1ad706c21 (main f0ec5b6), receipts dirty:true from a wrapper checkout with one hand-edited directory field each; hosted in wand125/square-packing releases (HostedData/v1). Exact projection vs main's 60-entry ledger: -1,047 orbits / -8,240 states -> 3,636 / 28,528; distance-2 tail 95 -> 94 (row 23). Needs: clean-worktree FULL replay under a ledger-listed verifier (main's verifier is now be8135f6, unlisted), Rust parity, custody under a census-readable manifest, admission round. Est. ~2 CPU-h, ~4 agent-h. Owner decision to start.
 

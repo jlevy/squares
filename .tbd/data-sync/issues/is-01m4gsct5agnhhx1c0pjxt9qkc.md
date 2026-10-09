@@ -3,9 +3,9 @@ type: is
 id: is-01m4gsct5agnhhx1c0pjxt9qkc
 title: "X-052: full W3 survey of n=17 status on all fronts and completion directions"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: codex@spud10.local
 labels:
@@ -15,8 +15,12 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-09T16:54:27.747Z
-updated_at: 2026-10-09T23:28:01.205Z
+updated_at: 2026-10-09T23:28:28.118Z
 started_at: 2026-10-09T17:30:07.725Z
+closed_at: 2026-10-09T23:28:28.116Z
+close_reason: "PR #475 merged as 0f16c033a87464cfab127ba54748ca5e2536babd after final independent review D and exact-head complete checkpoint. Both sessions consolidated at https://github.com/jlevy/squares/pull/475#issuecomment-6090970439; tracker #405 and roster #413 updated, #472 closed. Comparator think-n53s remains open under think-tmz6; other scoped follow-ups remain open."
+resolution: null
+duplicate_of: null
 ---
 User request 2026-10-09 ~17:00 UTC: full W3 and an X-* exploration summary end to end — broad, detailed, concise technical survey of the current status of n=17 work on all fronts (ours and others'), then the most promising directions to complete it efficiently; land it and add it to #405. Lanes: Opus inventory/tracker-gap audit; Fable max global-side and local-side mathematical reviews; Fable max X-052 synthesis; Opus repo integration, PR and #405 update. Reserved: X-052, H-341..H-360.
 
