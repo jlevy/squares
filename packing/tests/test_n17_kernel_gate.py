@@ -16,6 +16,13 @@ from sqpack.yamlio import safe_load
 
 REPO = Path(__file__).resolve().parents[2]
 CRATE = REPO / "packing/n17_kernel_verify"
+RECEIPT_CONTROLS = (
+    "receipt_publication_replaces_complete_json_and_cleans_staging",
+    "receipt_publication_write_failure_preserves_old_file",
+    "receipt_publication_rename_failure_preserves_old_file",
+    "receipt_publication_refuses_directory_collision",
+)
+RECEIPT_RESULTS = "\n".join(f"test tests::{name} ... ok" for name in RECEIPT_CONTROLS) + "\n"
 
 
 def context(**environment: str) -> validate.Context:
@@ -52,8 +59,8 @@ def test_native_gate_runs_full_floor_without_mutating_environment(
         assert cwd == CRATE
         assert child.timeout_seconds == 120
         observed.append(argv)
-        return (
-            "test result: ok. 22 passed; 0 failed; 0 ignored; 0 filtered out\n"
+        return RECEIPT_RESULTS + (
+            "test result: ok. 26 passed; 0 failed; 0 ignored; 0 filtered out\n"
             "test result: ok. 0 passed; 0 failed; 0 ignored; 0 filtered out\n"
             "test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out"
         )
@@ -77,7 +84,17 @@ def test_native_gate_runs_full_floor_without_mutating_environment(
         "-D",
         "warnings",
     ) in observed
-    assert ("/cargo", "test", "--locked", "--release", "--all-targets", "--quiet") in observed
+    assert (
+        "/cargo",
+        "test",
+        "--locked",
+        "--release",
+        "--all-targets",
+        "--quiet",
+        "--",
+        "--format",
+        "pretty",
+    ) in observed
     assert ("/cargo", "doc", "--locked", "--release", "--no-deps", "--quiet") in observed
     assert any(argv[-2:] == ("--crate", str(CRATE)) for argv in observed)
     assert not any("--no-run" in argv for argv in observed)
@@ -104,8 +121,23 @@ def test_native_gate_refuses_missing_or_omitted_controls(
     monkeypatch.setattr(
         validate, "_commands", lambda *_args, **_kwargs: "test result: ok. 99 passed"
     )
-    monkeypatch.setattr(validate, "_run", lambda *_args, **_kwargs: output)
+    monkeypatch.setattr(validate, "_run", lambda *_args, **_kwargs: RECEIPT_RESULTS + output)
     with pytest.raises(validate.StepFailureError):
+        validate._rust_n17_kernel_verifier(context())
+
+
+@pytest.mark.parametrize("missing", RECEIPT_CONTROLS)
+def test_native_gate_refuses_missing_receipt_control(
+    monkeypatch: pytest.MonkeyPatch, missing: str
+) -> None:
+    monkeypatch.setattr(validate.shutil, "which", lambda *_args, **_kwargs: "/cargo")
+    monkeypatch.setattr(validate, "_commands", lambda *_args, **_kwargs: "floor probes passed")
+    output = RECEIPT_RESULTS.replace(f"test tests::{missing} ... ok\n", "") + (
+        "test result: ok. 99 passed; 0 failed; 0 ignored; 0 filtered out\n"
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 filtered out"
+    )
+    monkeypatch.setattr(validate, "_run", lambda *_args, **_kwargs: output)
+    with pytest.raises(validate.StepFailureError, match=missing):
         validate._rust_n17_kernel_verifier(context())
 
 
