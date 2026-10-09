@@ -5,7 +5,7 @@ title: "Admit #472's 12 native kernel certificates (wand125) after clean replay 
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels:
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T17:30:09.760Z
-updated_at: 2026-10-09T20:59:10.037Z
+updated_at: 2026-10-09T21:28:40.973Z
 started_at: 2026-10-09T18:52:23.854Z
 ---
 Issue #472: 12 sub-pattern certificates from this repo's own producer (check_n17_subpattern mode A), standing kernel verifier FULL PASS at blob 1ad706c21 (main f0ec5b6), receipts dirty:true from a wrapper checkout with one hand-edited directory field each; hosted in wand125/square-packing releases (HostedData/v1). Exact projection vs main's 60-entry ledger: -1,047 orbits / -8,240 states -> 3,636 / 28,528; distance-2 tail 95 -> 94 (row 23). Needs: clean-worktree FULL replay under a ledger-listed verifier (main's verifier is now be8135f6, unlisted), Rust parity, custody under a census-readable manifest, admission round. Est. ~2 CPU-h, ~4 agent-h. Owner decision to start.
@@ -37,3 +37,7 @@ Issue #472: 12 sub-pattern certificates from this repo's own producer (check_n17
 
 
 2026-10-09T20:59Z Admission complete on branch: exp-317 accepted, H-341 confirmed (d9217eccf, ecd1b3871). Custody: 24 assets (411,682,476 B) on data/n17-x048-session-168-certificates-v1, clean fetch SHA OK. Census 72 admitted -> 3,636 orbits / 28,528 states, endpoint survives, d2 94/736. Forward replay under be8135f6e 12/12 PASS. Merged owner's concurrent commits on #475 (f957a7d80, 1ace022dd, 27d5d24b9) and main (#469 intake stack); pushed f21e0b345. Fable max admission review + CI/deep gate 37990527717 pending; merge needs user confirmation.
+
+
+
+2026-10-09T21:28Z User 21:35 UTC: do NOT merge #475; leave it open, an Astra agent is also working on it. This session stops pushing to claude/modest-pascal-z3nisd. State at df5978cbe: exp-317 accepted, H-341 confirmed, custody uploaded (24 assets on data/n17-x048-session-168-certificates-v1), admission review B1 fixed (retained-json exemption + custody paths); Packing/Pages/mergeability green; deep gate 37992944295 running. Post-merge drafts for #405/#472/#413 saved in scratchpad/post/ (replace MERGE_SHA). #472 stays open until merge.
