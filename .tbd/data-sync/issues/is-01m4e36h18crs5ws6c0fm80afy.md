@@ -5,7 +5,7 @@ title: Review and validate the atlas site cleanups
 kind: task
 status: in_progress
 priority: 2
-version: 21
+version: 22
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -17,11 +17,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T15:48:04.263Z
-updated_at: 2026-10-09T04:56:45.118Z
+updated_at: 2026-10-09T05:10:47.931Z
 started_at: 2026-10-08T15:49:07.449Z
 ---
 Review source changes and exported atlas, run focused checks and the change-reachable gate, then commit/push a focused PR and confirm CI. Keep the site cleanup epic open for further requests.
 
 ## Notes
 
-Final clean HEAD818c4c372c9abc5878e7ed755e1ee79fa19f1a1f, base3213d651b880d7768bce8506efaf75c2089aeb4f, data9c34421f. All exact user typography requirements now source/actualPDF verified:15shared body lines, uniform face/size/weight/spacing, two black plain final lines, right ink alignment; retained cards unchanged. Producer preflight R1 fixed in a7; independent source review at818 reports no open material findings and covers84non-bulk paths of96,12generated/deleted artifacts separately visually verified. Four review body drafts pending publication/trust/CI. Maintained export56.76s/postflightgreen; integrated preview92.16s,5677file checks,9assets+2aliases byte-equal, newmethods payload intact. Final PDF reopened in defaultPreview from verified569KBfile. Current full required --push against3213 is running;63completed edit checks all passed so far, reachable whole suite underway. No PR/push/final hosted or checkpoint pass claimed yet. Keep epic open; no GitHub merge authorized.
+Continuation after new user layout revision: 818c4c372 is predecessor evidence, not final. Its full required --push against base3213 completed naturally in1350.65s: all64 pre-test steps passed; normal reachable suite14,079passed,17failed,54skipped,1xfail in1124.17s; no pool-heavy/final pass claimed. Failures tracked as think-221w(date/stamp),think-mk5k(web tokens/frontier),think-4emj(consumer declarations plus harness diagnosis). Ten strong-lane failures now pass under NORMAL temp retention with unchanged deadlines; only two explicit consumer declarations changed. Removed our nondefault retention-failed override from future runs; no custody/timeout guards relaxed. Latest user features are think-t6n5(PDF18complete right-aligned rows,360pitch,upper-left/left text) and think-avy3(web complete right-aligned rows/readable pan/more vertical space), claimed/synced and implemented in disjoint lanes. Shared known_best descriptor and inherited EXPLAINER_REVISED date corrected by root; docs updated. Keep all uniform body typography, grid half-width gap and markings, geometry/data pin9c and100Grid. Pending focused checks, maintained exports/actualPDF/preview, current full --push, PR/hosted/full checkpoint, updated review publication. No PR or merge-ready verdict yet; no GitHub merge authorized; epic stays open.
