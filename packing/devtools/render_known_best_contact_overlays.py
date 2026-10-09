@@ -16,6 +16,7 @@ from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
 from devtools.build_known_best_atlas import frame_from_witness
+from devtools.retained_data import read_retained_text
 from sqpack.known_best import (
     calibration_entries,
     declared_calibration_label,
@@ -202,7 +203,7 @@ def expected_outputs() -> tuple[dict[str, Any], dict[Path, str]]:
     entries = corpus_entries()
     source_kinds = {entry["n"]: entry["source"]["kind"] for entry in entries}
     witness_paths = {entry["n"]: ROOT / entry["witness"]["path"] for entry in entries}
-    census = json.loads(CENSUS.read_text(encoding="utf-8"))
+    census = json.loads(read_retained_text(CENSUS))
     # The gallery's own schema pins its inputs by name rather than by range, so this is
     # where a widened census would otherwise arrive unannounced: the five strata are
     # selected from the census, and a census over more cases would pick from more of them.

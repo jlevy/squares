@@ -3629,6 +3629,40 @@ def test_verified_bound_inputs_select_the_exact_register_replay(path: str) -> No
     assert selection.steps == (step,)
 
 
+@pytest.mark.parametrize(
+    "path",
+    [
+        "packing/devtools/refinement_packets.py",
+        "packing/devtools/refinement_custody.py",
+        "packing/devtools/refinement_house_links.py",
+        "packing/devtools/import_half_angle_witness.py",
+        "packing/devtools/squish_upper_bound_packets.py",
+        "packing/devtools/squish_followup_packets.py",
+        "packing/devtools/squish_second_update_confirmation.py",
+        "packing/devtools/squish_second_update_house_links.py",
+        "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/sources.json",
+        "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/n-068.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/sources.json",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-105.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-292.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/admission.json.xz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/house-metadata.json.xz",
+        "packing/witnesses/known-best/n-068.yaml",
+        "packing/witnesses/known-best/n-105.yaml",
+        "packing/witnesses/known-best/n-292.yaml",
+    ],
+)
+def test_refinement_inputs_select_the_exact_register_in_each_owning_tier(path: str) -> None:
+    """Finite identities must be rechecked when any admitted source input changes."""
+    sentinel = validate.Step("unrelated check", lambda _context: "", touches=("other/*",))
+    for fast, records in ((False, False), (True, False), (False, True)):
+        universe = validate._select_steps(only=[], fast=fast, records=records)
+        step = next(step for step in universe if step.name == "exact side values register")
+        selection = validate.select_for_paths([path], (step, sentinel))
+        assert not selection.unattributed_paths
+        assert selection.steps == (step,)
+
+
 def test_every_step_is_reachable_from_some_tier() -> None:
     """A step in no tier is a check nobody runs, which is worse than not having it.
 
@@ -5403,3 +5437,24 @@ def test_push_prerequisites_keep_scientific_policy_and_browser_coverage() -> Non
         assert all(step in selected.steps for step in prerequisites if not step.touches)
     mixed = validate.select_for_paths(list(inputs), prerequisites)
     assert set(inputs.values()) <= {step.name for step in mixed.steps}
+
+def test_compressed_generated_inputs_select_the_same_required_checks() -> None:
+    names = {step.name: step for step in validate.STEPS}
+    for name in (
+        "assembly coverage agrees with the contract",
+        "chunk taxonomy agrees with the corpus",
+    ):
+        assert names[name].reachable_from("packing/atlas/known-best/chunk-components.json.gz")
+        assert names[name].reachable_from("packing/devtools/retained_data.py")
+    assert names["exact side values register"].reachable_from(
+        "packing/frontier/exact-values.json.gz"
+    )
+    assert names["exact side values register"].reachable_from(
+        "packing/devtools/retained_data.py"
+    )
+    assert names["retained JSON is one record per line"].reachable_from(
+        "packing/frontier/exact-values.json.gz"
+    )
+    assert names["retained JSON is one record per line"].reachable_from(
+        "packing/atlas/known-best/chunk-components.json.gz"
+    )

@@ -11,6 +11,7 @@ from pathlib import Path
 import pytest
 
 from devtools import audit_tokoharu_density as tokoharu
+from devtools import retained_data
 from devtools.retained_data import (
     candidates,
     check_packet,
@@ -18,7 +19,9 @@ from devtools.retained_data import (
     git_blob,
     is_deterministic_gzip,
     read_retained_bytes,
+    read_retained_text,
     read_table,
+    write_retained_text,
 )
 
 WEB = Path(__file__).resolve().parents[1] / "resources" / "web"
@@ -107,3 +110,51 @@ def test_tokoharu_packet_on_main_still_reads_plain_files() -> None:
     assert tokoharu.load_json(case) == json.loads(
         case.read_text(), parse_float=Fraction, object_pairs_hook=dict
     )
+
+
+def test_generated_gzip_writer_is_lossless_deterministic_and_bounded(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    text = '{"integer":1,"float":1.0,"text":"Bašić","coefficients":["12345678901234567890"]}\n'
+    logical = tmp_path / "generated.json"
+    stored = compressed_path(logical)
+    write_retained_text(stored, text)
+    first = stored.read_bytes()
+    assert is_deterministic_gzip(first)
+    assert read_retained_text(logical) == text
+    assert gzip.decompress(first) == text.encode()
+    write_retained_text(stored, text)
+    assert stored.read_bytes() == first
+    monkeypatch.setattr(retained_data, "MAX_DECOMPRESSED", 3)
+    with pytest.raises(ValueError, match="decompressed"):
+        write_retained_text(stored, text)
+    assert stored.read_bytes() == first
+    monkeypatch.setattr(retained_data, "MAX_DECOMPRESSED", len(text.encode()) + 1)
+    monkeypatch.setattr(retained_data, "MAX_COMPRESSED", 8)
+    with pytest.raises(ValueError, match="compressed bytes"):
+        write_retained_text(stored, text)
+    assert stored.read_bytes() == first
+
+
+def test_corrupt_gzip_is_refused(tmp_path: Path) -> None:
+    stored = tmp_path / "broken.json.gz"
+    stored.write_bytes(b"not a gzip stream")
+    with pytest.raises(gzip.BadGzipFile, match="Not a gzipped file"):
+        read_retained_bytes(stored)
+
+
+def test_generated_writer_refuses_ambiguous_updates_before_writing(tmp_path: Path) -> None:
+    logical = tmp_path / "generated.json"
+    stored = compressed_path(logical)
+    text = '{"n":1}\n'
+    logical.write_text(text)
+    write_retained_text(stored, text)
+    original = stored.read_bytes()
+    with pytest.raises(ValueError, match="both storage copies"):
+        write_retained_text(stored, '{"n":2}\n')
+    assert logical.read_text() == text
+    assert stored.read_bytes() == original
+    logical.write_text(text + "\n")
+    with pytest.raises(ValueError, match="differs"):
+        write_retained_text(stored, text)
+    assert stored.read_bytes() == original
