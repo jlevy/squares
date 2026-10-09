@@ -1,0 +1,18 @@
+{
+  "acquire_source_contract": "PASS",
+  "author_code_run": false,
+  "bounded_decode_refusals": 17,
+  "checked_at_utc": "2026-10-08T05:33:17Z",
+  "complete_certificate_reparses": 17,
+  "complete_comparator_rosters": 17,
+  "format": "gupta-438-second-pass-custody-check-v1",
+  "geometry_deciders_run": false,
+  "missing_square_refusals": 17,
+  "pinned_only_absence_checks": 7,
+  "retained_data_contract": "PASS",
+  "retained_original_and_compressed_hash_pairs": 42,
+  "retained_release_asset_hash_matches": 6,
+  "review_scope": "Second local decoding and custody pass using maintained readers. Separate writer admission and native geometry decisions remain required.",
+  "source_comparator_exact_inequalities": 17,
+  "source_manifest_files": 49
+}

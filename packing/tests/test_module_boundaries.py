@@ -595,6 +595,9 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert f"/packing/resources/web/{evand_exact_certificates.PACKET.name}/" in sparse
     # The three T-119 atlas sources require their complete retained fact and receipt.
     assert f"/packing/resources/web/{evand_arrangement_reports.PACKET.name}/" in sparse
+    from devtools import gupta_refinement_reports  # noqa: PLC0415
+
+    assert f"/packing/resources/web/{gupta_refinement_reports.PACKET.name}/" in sparse
     # SQUISH's exact rational facts are a separate packet from the ordinary packet
     # registry; omitting it makes the atlas refuse all eleven newly reported cases.
     assert f"/packing/resources/web/{squish_upper_bound_packets.PACKET.name}/" in sparse
@@ -1035,6 +1038,13 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
       signal to move the read, not a signal to move the test.
     """
     expected: dict[str, set[str]] = {
+        # Full private snapshot/admission measured406.23s under IO contention;
+        # complete confirmation/idempotence measured24.04s and16.06s per call.
+        # The fast12s and child45s ceilings remain unchanged.
+        "test_ryxu_house_links.py": {
+            "test_actual_worker_keeps_full_scientific_inputs_and_refuses_producers",
+            "test_confirmation_preserves_complete_scope_history_and_lower_lanes",
+        },
         # Hosted run 37639254949, 2026-10-07: 82.51s uncached call. The fast
         # controls use the retained symbolic packet; this node rebuilds its identities.
         "test_check_n17_widened_positive_cone.py": {
@@ -1333,6 +1343,23 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_n5_local_rigidity.py": {
             "test_every_control_rejects",  # 8.0s
         },
+        # 2026-10-08, final merged parent ef9ef806: 92.43s call, 95.60s pytest wall.
+        # One actual full private copy, complete FN1/SQUISH admission, three receipt/input
+        # mutants and restorations; no shared fixture/build or geometric replay.
+        # Durable receipt: review-notes/fn1-final-evidence/fn1-actual-worker.log and JUnit
+        # outside disposable scratch. Every bounded source/receipt control stays fast.
+        # 2026-10-08 actual private metadata transactions: full fourteen-case
+        # confirmation/repeat/re-registration 18.62s; interrupted writes and
+        # fresh complete-admission retries 21.23s. Scientific inputs stay complete,
+        # geometry is forbidden and no whole-worker clone/shared build is involved.
+        # Receipt: issue438-driver-prep/confirmation-metadata-v2.log outside scratch.
+        "test_confirm_gupta_records.py": {
+            "test_complete_proposal_preserves_all_lower_history_withdrawals_and_unowned_rows",
+            "test_interrupted_atomic_write_resumes_from_the_unchanged_complete_history",
+        },
+        "test_fn1_input_bindings.py": {
+            "test_actual_worker_carries_every_input_and_refuses_a_receipt_mutant",  # 92.43s
+        },
         # 8s of call time across 1; 8.15s on the hosted PR runner. This directly copies
         # the source tree into a worker and has no shared builder whose cost can move to
         # a neighbouring test, so the slow marker is the measured classification.
@@ -1347,6 +1374,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             # nine-house admission and two live mutants; module-scoped clone is setup,
             # while these uncached complete-reader transactions are measured call time.
             "test_second_squish_complete_replay_survives_native_worker_boundaries",  # 16.87s
+            # Hosted run37773892849/job113299852249, 2026-10-08: 15.224s call,
+            # 14.99s CPU lower bound for complete Gupta admission, four mutations and
+            # restorations. The shared clone remains setup and child45s is unchanged.
+            "test_gupta_complete_sources_survive_native_worker_boundaries",  # 15.224s
         },
         # Hosted run37739373988/job113186283659: 14.52s; 68 full geometry replays
         # cover 85,204 pair decisions across the n108 translation/tolerance surface.

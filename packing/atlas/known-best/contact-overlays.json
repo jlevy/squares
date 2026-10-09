@@ -52,18 +52,17 @@
         "wall_seating_edge_count": 24
       },
       {
-        "component_count": 16,
-        "contact_edge_count": 85,
-        "free_square_count": 9,
-        "internal_slide_dof": 33,
-        "n": 68,
-        "rendering": "contact-overlays/n-068.svg",
+        "component_count": 5,
+        "contact_edge_count": 70,
+        "free_square_count": 0,
+        "internal_slide_dof": 22,
+        "n": 51,
+        "rendering": "contact-overlays/n-051.svg",
         "selection_rule": "first source-packet-derived geometry, a parallel project's packing",
         "source_kind": "packet-derived-facts",
         "topology_counts": {
           "contact-chain": 2,
-          "contact-patch": 5,
-          "singleton": 9
+          "contact-patch": 3
         },
         "wall_seating_edge_count": 26
       },

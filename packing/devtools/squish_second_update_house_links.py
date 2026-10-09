@@ -9,12 +9,11 @@ from __future__ import annotations
 import copy
 import lzma
 import os
-import tempfile
 from pathlib import Path, PurePosixPath
 from typing import Any
 
 from devtools import squish_second_update_confirmation as confirmation
-from sqpack.witness import load_witness, witness_document
+from sqpack.witness import validate_witness_document, witness_envelope
 from sqpack.yamlio import safe_load
 
 shared = confirmation.shared
@@ -46,15 +45,16 @@ def bounded_house(path: Path) -> dict[str, Any]:
     if len(data) > original.MAX_RECEIPT_BYTES:
         raise original.PacketError("house witness exceeds existing witness ceiling")
     document = safe_load(data.decode())
-    softschema = safe_load(witness_document({}, schema="../witness.schema.yaml"))["softschema"]
+    softschema = witness_envelope({}, schema="../witness.schema.yaml")["softschema"]
     if document.get("softschema") != softschema:
         raise original.PacketError("house schema contract differs from canonical envelope")
-    with tempfile.TemporaryDirectory() as directory:
-        temporary = Path(directory) / "witness.yaml"
-        temporary.write_text(
-            witness_document(document["witness"], schema=confirmation.SCHEMA.as_posix())
+    return dict(
+        validate_witness_document(
+            witness_envelope(document["witness"], schema=confirmation.SCHEMA.as_posix()),
+            path=path,
+            fallback_schema=confirmation.SCHEMA,
         )
-        return dict(load_witness(temporary, fallback_schema=confirmation.SCHEMA))
+    )
 
 
 def validate_metadata(n: int, value: Any, positive: dict[str, Any]) -> None:

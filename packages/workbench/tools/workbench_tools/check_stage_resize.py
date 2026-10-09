@@ -7,6 +7,7 @@ frontend job no browser launch or page load of its own.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import tempfile
 from pathlib import Path
@@ -132,9 +133,41 @@ def check(page_path: Path) -> str:
         page.locator("#mode-animate").click()
         shifted = stage_height(page)
 
+        def reload_observation(phase: str) -> dict[str, Any]:
+            observed = layout(page)
+            print(
+                "stage separator reload: "
+                + json.dumps(
+                    {
+                        "phase": phase,
+                        "layout": observed,
+                        "viewport": page.viewport_size,
+                        "page_errors": list(errors),
+                    },
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
+            return observed
+
+        before_reload = reload_observation("before-reload")
+        require(
+            before_reload["stored"] is not None,
+            f"the chosen stage share was not stored before reload: {before_reload}",
+        )
         page.reload()
+        reload_observation("after-load")
+        # Loading the document does not imply that its workbench API and font layout
+        # are ready. Use the same readiness boundaries as the retained layout checker.
         page.wait_for_function(probe("policy/api-ready"))
-        restored = stage_height(page)
+        page.evaluate(probe("capture/fonts-ready"))
+        after_ready = reload_observation("after-ready")
+        require(
+            after_ready["stored"] is not None
+            and after_ready["stored"] == before_reload["stored"],
+            f"reload changed the chosen stage share: {before_reload} then {after_ready}",
+        )
+        restored = float(after_ready["stageHeight"])
         require(
             abs(restored - shifted) <= 2,
             f"a reload did not keep the stage at {shifted}, it came back at {restored}",

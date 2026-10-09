@@ -583,7 +583,17 @@ def test_an_earlier_certificate_confirms_only_the_displayed_upper_value(
 
 def _first_update_case(n: int) -> dict[str, Any]:
     """Retain the first update's actual lanes when a later report supersedes it."""
-    case = citations.load_case(n)
+    from devtools import register_gupta_reports as gupta  # noqa: PLC0415
+    from devtools.register_ryxu_reports import read_history  # noqa: PLC0415
+
+    history = {row["n"]: row["frontier"] for row in gupta.read_history()}
+    # RY selection follows the first update; its complete older boundary wins.
+    history.update({row["n"]: row["frontier"] for row in read_history()})
+    case = (
+        safe_load(history[n].split("---\n", 2)[1])["packing"]
+        if n in history
+        else citations.load_case(n)
+    )
     if n in (179, 263):
         prior = second_update.prior_lanes()[n]
         case["reported_upper_bound"] = prior["prior_reported"]

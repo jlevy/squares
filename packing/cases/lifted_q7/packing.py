@@ -11,8 +11,10 @@ into `Q(sqrt 7)` at small height, and the tilt's exact cosine and sine,
 The lift is a candidate generator and `verify_packing` under `exact_sign` is the proof,
 provenance-free (`D-398`); this is the operation `D-402` does not foreclose, because the
 field is known from the published exact sides `(7 + sqrt(7))/2` and `(17 + sqrt(7))/2`.
-The lift re-runs from the witness file at every verification and the side lift is pinned
-to the published form, exactly as in `cases/lifted_q2`.
+The lift re-runs from the complete source witness at every verification and the side
+lift is pinned to the published form, exactly as in `cases/lifted_q2`. The n86 input
+is the original Kingbird witness preserved before the #432 atlas replacement; the
+current ry-xu construction has different exact geometry and is certified separately.
 
 Nothing here claims optimality.
 """
@@ -22,6 +24,8 @@ from __future__ import annotations
 from decimal import Decimal, localcontext
 from fractions import Fraction
 from pathlib import Path
+from tempfile import TemporaryDirectory
+from typing import Any
 
 from cases.gobel40.packing import corners
 from sqpack.field import FieldElement, NumberField
@@ -63,6 +67,27 @@ def lift(value: Decimal) -> tuple[int, int, int] | None:
     return None
 
 
+def source_witness(n: int) -> dict[str, Any]:
+    """Select the complete original Friedman86 document, with ordinary schema checks."""
+    if n != 86:
+        return load_witness(WITNESSES / f"n-{n:03d}.yaml", fallback_schema=WITNESS_SCHEMA)
+    from devtools.register_ryxu_reports import read_history  # noqa: PLC0415
+
+    original = next(row for row in read_history() if row["n"] == 86)
+    with TemporaryDirectory(prefix="lifted-q7-original-86-") as directory:
+        path = Path(directory) / "n-086.yaml"
+        path.write_text(original["house"], encoding="utf-8")
+        witness = load_witness(path, fallback_schema=WITNESS_SCHEMA)
+    if (
+        witness["n"] != 86
+        or witness["id"] != "W-known-best-n086"
+        or witness["source"]["key"] != "Kingbird derived numerical facts"
+        or witness["source"]["url"] != "https://kingbird.myphotos.cc/packing/square-86.svg"
+    ):
+        raise ValueError("the lift requires the complete original Friedman n86 source")
+    return witness
+
+
 def build(
     n: int,
 ) -> tuple[list[list[tuple[FieldElement, FieldElement]]], FieldElement, NumberField]:
@@ -82,7 +107,7 @@ def build(
         p, coefficient, d = triple
         return q(Fraction(p, d)) + q(Fraction(coefficient, d)) * root
 
-    witness = load_witness(WITNESSES / f"n-{n:03d}.yaml", fallback_schema=WITNESS_SCHEMA)
+    witness = source_witness(n)
     side_triple = lift(Decimal(str(witness["side"])))
     assert side_triple == SIDES[n], (
         f"n={n}: witness side lifts to {side_triple}, expected {SIDES[n]}"

@@ -2706,6 +2706,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-07'
   status: live
+- path: atlas/regularized/n-127.svg
+  canonical: atlas/regularized/n-127.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
 - path: atlas/regularized/n-129.svg
   canonical: atlas/regularized/n-129.svg
   kind: asset-file
@@ -2732,6 +2740,14 @@ urls:
   status: live
 - path: atlas/regularized/n-132.svg
   canonical: atlas/regularized/n-132.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
+- path: atlas/regularized/n-146.svg
+  canonical: atlas/regularized/n-146.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -2780,6 +2796,14 @@ urls:
   status: live
 - path: atlas/regularized/n-172.svg
   canonical: atlas/regularized/n-172.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
+- path: atlas/regularized/n-175.svg
+  canonical: atlas/regularized/n-175.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -2962,6 +2986,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-07'
   status: live
+- path: atlas/regularized/n-261.svg
+  canonical: atlas/regularized/n-261.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
 - path: atlas/regularized/n-263.svg
   canonical: atlas/regularized/n-263.svg
   kind: asset-file
@@ -2972,6 +3004,14 @@ urls:
   status: live
 - path: atlas/regularized/n-266.svg
   canonical: atlas/regularized/n-266.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
+- path: atlas/regularized/n-267.svg
+  canonical: atlas/regularized/n-267.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -3028,6 +3068,14 @@ urls:
   status: live
 - path: atlas/regularized/n-292.svg
   canonical: atlas/regularized/n-292.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
+- path: atlas/regularized/n-295.svg
+  canonical: atlas/regularized/n-295.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -3106,6 +3154,30 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-07'
   status: live
+- path: atlas/regularized/n-70.svg
+  canonical: atlas/regularized/n-70.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
+- path: atlas/regularized/n-84.svg
+  canonical: atlas/regularized/n-84.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
+- path: atlas/regularized/n-86.svg
+  canonical: atlas/regularized/n-86.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
 - path: atlas/regularized/n-88.svg
   canonical: atlas/regularized/n-88.svg
   kind: asset-file
@@ -3169,7 +3241,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/103.html
   canonical: cases/103.html
@@ -3177,7 +3249,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/104.html
   canonical: cases/104.html
@@ -3193,7 +3265,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/106.html
   canonical: cases/106.html
@@ -3217,7 +3289,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/109.html
   canonical: cases/109.html
@@ -3353,7 +3425,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/124.html
   canonical: cases/124.html
@@ -3377,7 +3449,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/127.html
   canonical: cases/127.html
@@ -3385,7 +3457,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/128.html
   canonical: cases/128.html
@@ -3401,7 +3473,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/13.html
   canonical: cases/13.html
@@ -3417,7 +3489,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/131.html
   canonical: cases/131.html
@@ -3425,7 +3497,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/132.html
   canonical: cases/132.html
@@ -3553,7 +3625,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/147.html
   canonical: cases/147.html
@@ -3617,7 +3689,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/154.html
   canonical: cases/154.html
@@ -3625,7 +3697,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/155.html
   canonical: cases/155.html
@@ -3633,7 +3705,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/156.html
   canonical: cases/156.html
@@ -3809,7 +3881,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/176.html
   canonical: cases/176.html
@@ -3841,7 +3913,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/18.html
   canonical: cases/18.html
@@ -3857,7 +3929,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/181.html
   canonical: cases/181.html
@@ -4017,7 +4089,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/2.html
   canonical: cases/2.html
@@ -4097,7 +4169,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/208.html
   canonical: cases/208.html
@@ -4105,7 +4177,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/209.html
   canonical: cases/209.html
@@ -4113,7 +4185,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/21.html
   canonical: cases/21.html
@@ -4281,7 +4353,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/229.html
   canonical: cases/229.html
@@ -4353,7 +4425,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/237.html
   canonical: cases/237.html
@@ -4361,7 +4433,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/238.html
   canonical: cases/238.html
@@ -4369,7 +4441,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/239.html
   canonical: cases/239.html
@@ -4377,7 +4449,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/24.html
   canonical: cases/24.html
@@ -4545,7 +4617,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/259.html
   canonical: cases/259.html
@@ -4577,7 +4649,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/262.html
   canonical: cases/262.html
@@ -4593,7 +4665,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/264.html
   canonical: cases/264.html
@@ -4625,7 +4697,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/268.html
   canonical: cases/268.html
@@ -4657,7 +4729,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/271.html
   canonical: cases/271.html
@@ -4873,7 +4945,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/296.html
   canonical: cases/296.html
@@ -4977,7 +5049,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/307.html
   canonical: cases/307.html
@@ -5305,7 +5377,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/52.html
   canonical: cases/52.html
@@ -5473,7 +5545,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/71.html
   canonical: cases/71.html
@@ -5593,7 +5665,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/85.html
   canonical: cases/85.html
@@ -5609,7 +5681,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/87.html
   canonical: cases/87.html
@@ -5625,7 +5697,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
 - path: cases/89.html
   canonical: cases/89.html
@@ -10542,7 +10614,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-06'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
   identity:
     kind: upper-bound
@@ -10591,18 +10663,74 @@ urls:
     - packing/witnesses/squish-401-2026/n-209-rational.yaml.gz
     - packing/witnesses/squish-401-2026/n-238-rational.yaml.gz
     - packing/witnesses/squish-401-2026/n-303-rational.yaml.gz
-    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json.gz
     - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
     - packing/devtools/squish_upper_bound_packets.py
     - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
     - docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+  amendments:
+  - date: '2026-10-08'
+    reason: Retain the complete SQUISH certification receipt losslessly as gzip; its decoded inputs,
+      native outcomes, bound scope and source attribution are unchanged.
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 108
+        - 126
+        - 129
+        - 130
+        - 154
+        - 155
+        - 180
+        - 209
+        - 238
+        - 303
+      established: null
+      attribution:
+        source_keys:
+        - '[SQUISH ten packings 2026-10-07]'
+        published: '2026-10-07'
+      builds_on: null
+      evidence:
+      - E-squish-ten-packings-2026-10-07-report
+      - E-squish-ten-packings-2026-10-07-exact-replay
+      artifacts:
+      - packing/resources/web/squish-401-2026-10-07/README.md
+      - packing/resources/web/squish-401-2026-10-07/facts/n-108.json.gz
+      - packing/resources/web/squish-401-2026-10-07/facts/n-126.json.gz
+      - packing/resources/web/squish-401-2026-10-07/facts/n-129.json.gz
+      - packing/resources/web/squish-401-2026-10-07/facts/n-130.json.gz
+      - packing/resources/web/squish-401-2026-10-07/facts/n-154.json.gz
+      - packing/resources/web/squish-401-2026-10-07/facts/n-155.json.gz
+      - packing/resources/web/squish-401-2026-10-07/facts/n-180.json.gz
+      - packing/resources/web/squish-401-2026-10-07/facts/n-209.json.gz
+      - packing/resources/web/squish-401-2026-10-07/facts/n-238.json.gz
+      - packing/resources/web/squish-401-2026-10-07/facts/n-303.json.gz
+      - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
+      - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
+      - packing/witnesses/squish-401-2026/n-108-rational.yaml.gz
+      - packing/witnesses/squish-401-2026/n-126-rational.yaml.gz
+      - packing/witnesses/squish-401-2026/n-129-rational.yaml.gz
+      - packing/witnesses/squish-401-2026/n-130-rational.yaml.gz
+      - packing/witnesses/squish-401-2026/n-154-rational.yaml.gz
+      - packing/witnesses/squish-401-2026/n-155-rational.yaml.gz
+      - packing/witnesses/squish-401-2026/n-180-rational.yaml.gz
+      - packing/witnesses/squish-401-2026/n-209-rational.yaml.gz
+      - packing/witnesses/squish-401-2026/n-238-rational.yaml.gz
+      - packing/witnesses/squish-401-2026/n-303-rational.yaml.gz
+      - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+      - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+      - packing/devtools/squish_upper_bound_packets.py
+      - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+      - docs/project/reviews/review-2026-10-06-squish-import-correctness.md
 - path: result/t-114.html
   canonical: result/t-114.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-06'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-08'
   status: live
   identity:
     kind: upper-bound
@@ -10626,11 +10754,42 @@ urls:
     - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
     - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
     - packing/witnesses/squish-401-2026/n-153-rational.yaml.gz
-    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json.gz
     - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
     - packing/devtools/squish_upper_bound_packets.py
     - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
     - docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+  amendments:
+  - date: '2026-10-08'
+    reason: Retain the complete SQUISH certification receipt losslessly as gzip; its decoded inputs,
+      native outcomes, bound scope and source attribution are unchanged.
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 153
+      established: null
+      attribution:
+        source_keys:
+        - '[SQUISH n153 2026-10-07]'
+        published: '2026-10-07'
+      builds_on: null
+      evidence:
+      - E-squish-n153-2026-10-07-report
+      - E-squish-n153-2026-10-07-exact-replay
+      artifacts:
+      - packing/resources/web/squish-401-2026-10-07/README.md
+      - packing/resources/web/squish-401-2026-10-07/facts/n-153.json.gz
+      - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
+      - packing/resources/web/squish-401-update-2026-10-07/facts/n-153.json.gz
+      - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
+      - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
+      - packing/witnesses/squish-401-2026/n-153-rational.yaml.gz
+      - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+      - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+      - packing/devtools/squish_upper_bound_packets.py
+      - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+      - docs/project/reviews/review-2026-10-06-squish-import-correctness.md
 - path: result/t-115.html
   canonical: result/t-115.html
   kind: result
@@ -11353,6 +11512,263 @@ urls:
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/localmin_lean.py
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/tasks/exact-minpoly/chain-lemma.md
+- path: result/t-125.html
+  canonical: result/t-125.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 51
+      - 70
+      - 84
+      - 86
+      - 88
+      - 102
+      - 103
+      - 105
+      - 108
+      - 123
+      - 126
+      - 127
+      - 129
+      - 130
+      - 131
+      - 146
+      - 153
+      - 175
+      - 179
+      - 236
+      - 258
+      - 261
+      - 263
+      - 267
+      - 295
+    established: null
+    attribution:
+      source_keys:
+      - '[ry-xu square packing 2026]'
+      published: '2026-10-08'
+    builds_on: null
+    evidence:
+    - E-ryxu-432-rational-report
+    - E-ryxu-432-rational-feasibility
+    artifacts:
+    - packing/resources/web/ry-xu-new-packings-2026-10-08/README.md
+    - packing/devtools/ryxu_arrangement_reports.py
+- path: result/t-126.html
+  canonical: result/t-126.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 51
+    established: null
+    attribution:
+      source_keys:
+      - '[ry-xu square packing 2026]'
+      published: '2026-10-08'
+    builds_on: null
+    evidence:
+    - E-ryxu-432-radical-n51-report
+    - E-ryxu-432-radical-n51-feasibility
+    artifacts:
+    - packing/resources/web/ry-xu-new-packings-2026-10-08/README.md
+    - packing/devtools/ryxu_radical_n51.py
+- path: result/t-127.html
+  canonical: result/t-127.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 123
+      - 129
+      - 130
+      - 153
+      - 154
+      - 179
+      - 180
+      - 199
+      - 207
+      - 208
+      - 209
+      - 236
+      - 237
+      - 238
+      - 239
+    established: null
+    attribution:
+      source_keys:
+      - '[Gupta rational refinements 2026-10-08]'
+      published: '2026-10-08'
+    builds_on: null
+    evidence:
+    - E-gupta-438-rational-report
+    - E-gupta-438-exact-feasibility
+    artifacts:
+    - packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md
+    - packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/complete-certificates-and-comparators.json.xz
+    - packing/devtools/gupta_refinement_reports.py
+    - packing/resources/web/gupta-square-packing-refinements-2026-10-08/receipts/exact-certification.json.xz
+  amendments:
+  - date: '2026-10-08'
+    reason: Add exact-feasibility evidence for fourteen selected finite upper bounds, backed by the
+      complete retained certificate roster, original 51 native jobs and actual private-worker custody;
+      preserve source attribution, withdrawn reports and bound scope, and disclose the shared verifier
+      lineage.
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 88
+        - 108
+        - 123
+        - 129
+        - 130
+        - 153
+        - 154
+        - 179
+        - 180
+        - 199
+        - 207
+        - 208
+        - 209
+        - 236
+        - 237
+        - 238
+        - 239
+      established: null
+      attribution:
+        source_keys:
+        - '[Gupta rational refinements 2026-10-08]'
+        published: '2026-10-08'
+      builds_on: null
+      evidence:
+      - E-gupta-438-rational-report
+      artifacts:
+      - packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md
+      - packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/complete-certificates-and-comparators.json.xz
+      - packing/devtools/gupta_refinement_reports.py
+- path: result/t-128.html
+  canonical: result/t-128.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 108
+      - 127
+      - 131
+      - 155
+      - 180
+      - 228
+      - 306
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo exact refinements 2026-10-08]'
+      published: '2026-10-08'
+    builds_on: null
+    evidence:
+    - E-couzo-451-rational-report
+    artifacts:
+    - packing/resources/web/couzo-exact-refinements-2026-10-08/README.md
+    - packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/case-inputs.json
+    - packing/resources/web/couzo-exact-refinements-2026-10-08/facts/complete-certificates-and-decimal-poses.json.xz
+    - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/exact-replay-incomplete-62268899-v1.json.xz
+    - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/execution-attempts.json
+    - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/private-custody-668cc1a-v1.json
+    - packing/devtools/couzo_refinement_reports.py
+- path: result/t-129.html
+  canonical: result/t-129.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 130
+      - 292
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel dated certificates 105 and 130 2026-10-07]'
+      - '[Daniel dated certificate 292 2026-10-07]'
+      published: '2026-10-07'
+    builds_on: null
+    evidence:
+    - E-daniel-375-dated-105-130-report
+    - E-daniel-375-dated-292-report
+    artifacts:
+    - packing/resources/web/evand-batch-105-130-2026-10-07/README.md
+    - packing/resources/web/evand-batch-292-2026-10-07/README.md
+    - packing/resources/web/evand-batch-wrapper-2026-10-07/README.md
+- path: result/t-130.html
+  canonical: result/t-130.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-09'
+  lastmod: '2026-10-09'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 84
+      - 86
+      - 105
+      - 175
+      - 270
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo follow-up refinements 2026-10-08]'
+      published: '2026-10-08'
+    builds_on: null
+    evidence:
+    - E-couzo-460-followup-rational-report
+    artifacts:
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/README.md
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/acquisition/sources.json
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-084.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-086.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-105.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-175.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-270.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/receipts/exact-certification.json.xz
+    - packing/devtools/couzo_followup_reports.py
 - path: results.html
   canonical: all-results.html
   kind: forwarder

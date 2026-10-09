@@ -52,6 +52,7 @@ none, and deliberately does not read the "Optimized by" sentence the hand pass r
 from __future__ import annotations
 
 import argparse
+import functools
 import math
 import re
 import shutil
@@ -206,6 +207,49 @@ def _parsed_facts(n: int) -> CatalogueFacts:
     return facts_from_catalogue_entry(
         catalogue.parse_catalogue(drafting_capture(n, source))[n], n=n
     )
+
+
+@functools.cache
+def _pre_ryxu_records() -> dict[int, dict[str, Any]]:
+    """Complete retained originals for tests of sources displaced by later imports."""
+    from devtools import register_gupta_reports as gupta  # noqa: PLC0415
+    from devtools.register_ryxu_reports import read_history  # noqa: PLC0415
+
+    rows = {row["n"]: row for row in read_history()}
+    if gupta.HISTORY.exists():
+        for row in gupta.read_history():
+            rows.setdefault(row["n"], row)
+    return rows
+
+
+def _before_ryxu(n: int, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> str:
+    history = _pre_ryxu_records()
+    if n not in history:
+        return record_path(FRONTIER, n).read_text()
+    original = history[n]["frontier"]
+    key = safe_load(original.split("---\n", 2)[1])["packing"]["reported_upper_bound"][
+        "source_key"
+    ]
+    coverage = safe_load(source_supersession.COVERAGE.read_text())
+    source = next(row for row in coverage["sources"] if row["source_key"] == key)
+    selected = next(row for row in coverage["selected_overrides"] if row["n"] == n)
+    selected["source_id"] = source["id"]
+    historical_coverage = tmp_path / "historical-source-selection.yaml"
+    historical_coverage.write_text(yaml.safe_dump(coverage, sort_keys=False))
+    monkeypatch.setattr(source_supersession, "COVERAGE", historical_coverage)
+    if n == 105:
+        from devtools import refinement_house_links as houses  # noqa: PLC0415
+
+        custody = tmp_path / "historical-refinement"
+        custody.mkdir()
+        house_path = custody / "n-105.yaml"
+        house_path.write_text(history[n]["house"])
+        metadata = custody / houses.METADATA.name
+        metadata.write_bytes(houses.METADATA.read_bytes())
+        monkeypatch.setattr(houses, "REPO", tmp_path)
+        monkeypatch.setattr(houses, "METADATA", metadata)
+        monkeypatch.setattr(houses, "house_path", lambda _n: house_path)
+    return original
 
 
 def _committed(n: int) -> tuple[dict[str, Any], str]:
@@ -484,8 +528,10 @@ def test_regenerates_a_hand_written_record_field_by_field(n: int) -> None:
 
 
 @pytest.mark.parametrize("n", [68, 105, 292])
-def test_refinement_redraft_repairs_both_ceilings_from_complete_admitted_inputs(n: int) -> None:
-    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+def test_refinement_redraft_repairs_both_ceilings_from_complete_admitted_inputs(
+    n: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    existing = _before_ryxu(n, monkeypatch, tmp_path)
     _, front, body = existing.split("---\n", 2)
     document = safe_load(front)
     expected = document["packing"]
@@ -511,8 +557,10 @@ def test_refinement_redraft_repairs_both_ceilings_from_complete_admitted_inputs(
 
 
 @pytest.mark.parametrize("n", [68, 105, 292])
-def test_refinement_redraft_refuses_unmapped_confirmation(n: int) -> None:
-    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+def test_refinement_redraft_refuses_unmapped_confirmation(
+    n: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    existing = _before_ryxu(n, monkeypatch, tmp_path)
     _, front, body = existing.split("---\n", 2)
     document = safe_load(front)
     document["packing"]["verified_upper_bound"]["evidence"] = ["E-unreviewed-promotion"]
@@ -866,8 +914,8 @@ def test_the_improvement_rule_reproduces_the_hand_transcription() -> None:
     """Measured over every catalogue-sourced pictured record below the register.
 
     The rule reads a sentence-initial, dated "Improved by <names> in <month> <year>", or
-    "Improved and optimized by", and nothing else. It reproduces 43 of the 46 records;
-    n = 88 now has a later selected source. One
+    "Improved and optimized by", and nothing else. It reproduces 39 of the 42 currently
+    selected catalogue records; the other pictured records have later selected sources. One
     miss is `n = 29`, where the hand pass read an "Optimized by" sentence as an
     improvement and five sibling records read the same sentence as nothing; the other two
     are `n = 69` and `83`, whose records were transcribed on 2026-10-05 from drafts, which
@@ -888,7 +936,7 @@ def test_the_improvement_rule_reproduces_the_hand_transcription() -> None:
         if list(facts.improved_by) != list(reported["improved_by"]):
             disagreed[n] = (list(reported["improved_by"]), list(facts.improved_by))
     print(f"compared {compared} record(s); the rule disagrees at {sorted(disagreed)}")
-    assert compared == 46
+    assert compared == 42
     assert set(disagreed) == {29, 69, 83}
     for n in (69, 83):
         assert disagreed[n][0] == [*disagreed[n][1], *catalogue[n].uncredited_optimizers], n
@@ -1008,7 +1056,7 @@ def test_the_credit_rules_reproduce_the_hand_transcription_below_the_register() 
 
     The comparison runs over the pictured entries at `n <= 100` that a person transcribed
     from the catalogue, and `n = 69`, transcribed from a draft since its 2026-10-05 intake
-    (T-088). Where a rule fires it must agree with what they wrote -- 23 cases, and no
+    (T-088). Where a rule fires it must agree with what they wrote -- 20 cases, and no
     disagreement anywhere. Where none fires the case stays `unknown`, and those are
     reported rather than checked: a rule that fired there would be an invention, and the
     count is what a reviewer inherits.
@@ -1030,7 +1078,7 @@ def test_the_credit_rules_reproduce_the_hand_transcription_below_the_register() 
     print(f"rules fired at {len(fired)} case(s), silent at {len(silent)}: {sorted(silent)}")
     print(f"what the hand transcription called the silent ones: {sorted(set(silent.values()))}")
     assert disagreed == {}
-    assert len(fired) == 23
+    assert len(fired) == 20
     assert all(catalogue[n].analytically_optimized is True for n in fired)
     # Every case no rule reaches is one a person called `hand-construction`, `trivial-grid`
     # or `unknown` -- never one of the four methods the rules are for, which is what makes
@@ -1130,11 +1178,13 @@ def test_the_register_agrees_with_its_drafts_where_the_capture_moved() -> None:
     assert check_records(cases, args, availability, catalogue) == 0
 
 
-def test_a_refresh_keeps_the_assessment_and_rewrites_only_what_moved(tmp_path: Path) -> None:
+def test_a_refresh_keeps_the_assessment_and_rewrites_only_what_moved(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """The draft's `rigidity: null` would drop an assessed record out of the assessed set."""
     availability = load_availability()
     catalogue = load_drafting_catalogue([179], availability)
-    committed = (FRONTIER / "n-179.md").read_text(encoding="utf-8")
+    committed = _before_ryxu(179, monkeypatch, tmp_path)
     report = safe_load(committed.split("---\n", 2)[1])["packing"]["reported_upper_bound"]
     stale = committed.replace(f"value: '{report['value']}'", "value: '99.0'", 1)
     assert stale != committed
@@ -1168,11 +1218,11 @@ def test_a_refresh_keeps_the_assessment_and_rewrites_only_what_moved(tmp_path: P
 
 @pytest.mark.parametrize("n", [108, 126, 130, 153, 155])
 def test_selected_squish_report_refreshes_geometry_and_lower_lanes_without_losing_review(
-    n: int, tmp_path: Path
+    n: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     availability = load_availability()
     catalogue = load_drafting_catalogue([n], availability)
-    committed = record_path(FRONTIER, n).read_text()
+    committed = _before_ryxu(n, monkeypatch, tmp_path)
     args = argparse.Namespace(
         out=tmp_path, review_date="2026-10-07", retrieved_date="2026-10-07", force=False
     )
@@ -1193,12 +1243,12 @@ def test_selected_squish_report_refreshes_geometry_and_lower_lanes_without_losin
 
 @pytest.mark.parametrize("n", [108, 126, 130, 153, 155])
 def test_selected_squish_report_restores_stale_geometry_and_lower_lanes(
-    n: int, tmp_path: Path
+    n: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Refuse, repair and freshly admit each independently corrupted current record."""
+    """Refuse, repair and freshly admit each independently corrupted source record."""
     availability = load_availability()
     catalogue = load_drafting_catalogue([n], availability)
-    committed = record_path(FRONTIER, n).read_text()
+    committed = _before_ryxu(n, monkeypatch, tmp_path)
     payload = safe_load(committed.split("---\n", 2)[1])["packing"]
     args = argparse.Namespace(
         out=tmp_path, review_date="2026-10-07", retrieved_date="2026-10-07", force=False
@@ -1219,7 +1269,9 @@ def test_selected_squish_report_restores_stale_geometry_and_lower_lanes(
     assert check_records([n], args, availability, catalogue) == 0
 
 
-def test_confirmed_squish_draft_rebuilds_and_requires_both_displays() -> None:
+def test_confirmed_squish_draft_rebuilds_and_requires_both_displays(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
     """The confirmation phase has a ceiling and a separate original source quotation."""
     from fractions import Fraction  # noqa: PLC0415
 
@@ -1228,7 +1280,7 @@ def test_confirmed_squish_draft_rebuilds_and_requires_both_displays() -> None:
     from devtools import source_supersession, squish_upper_bound_packets  # noqa: PLC0415
 
     n = 130
-    existing = record_path(FRONTIER, n).read_text()
+    existing = _before_ryxu(n, monkeypatch, tmp_path)
     _, front, body = existing.split("---\n", 2)
     document = safe_load(front)
     case = document["packing"]
@@ -1284,11 +1336,12 @@ def test_confirmed_squish_draft_rebuilds_and_requires_both_displays() -> None:
 
 def test_selected_squish_publication_admits_integer_rational_sides(
     monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
 ) -> None:
     from devtools import source_supersession, squish_upper_bound_packets  # noqa: PLC0415
 
     n = 130
-    existing = record_path(FRONTIER, n).read_text()
+    existing = _before_ryxu(n, monkeypatch, tmp_path)
     availability = load_availability()
     historical = adopt_upper_bound_packet(
         n,
@@ -1526,8 +1579,10 @@ def test_a_pictured_integer_side_case_is_recorded_as_the_trivial_grid() -> None:
 @pytest.mark.parametrize(
     "n", [n for n in update.NUMBERS if n != 153 and n not in second.NUMBERS]
 )
-def test_selected_update_repairs_both_lanes_without_rewriting_history(n: int) -> None:
-    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+def test_selected_update_repairs_both_lanes_without_rewriting_history(
+    n: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    existing = _before_ryxu(n, monkeypatch, tmp_path)
     _, front, body = existing.split("---\n", 2)
     document = safe_load(front)
     case = document["packing"]
@@ -1575,9 +1630,11 @@ def test_selected_update_repairs_both_lanes_without_rewriting_history(n: int) ->
 
 
 @pytest.mark.parametrize("declaration", ["with exact side", "source print", "S_n = "])
-def test_selected_update_refuses_missing_geometry_declarations(declaration: str) -> None:
+def test_selected_update_refuses_missing_geometry_declarations(
+    declaration: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     n = 126
-    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+    existing = _before_ryxu(n, monkeypatch, tmp_path)
     assert existing.count(declaration) == 1
     stale = existing.replace(declaration, "Missing declaration ", 1)
     availability = load_availability()
@@ -1593,9 +1650,11 @@ def test_selected_update_refuses_missing_geometry_declarations(declaration: str)
 
 
 @pytest.mark.parametrize("mutation", ["missing", "duplicate"])
-def test_confirmed_update_refuses_missing_or_duplicate_assurance(mutation: str) -> None:
+def test_confirmed_update_refuses_missing_or_duplicate_assurance(
+    mutation: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     n = 126
-    existing = record_path(FRONTIER, n).read_text()
+    existing = _before_ryxu(n, monkeypatch, tmp_path)
     declaration = re.search(
         r"This update is\s+confirmed at V3/C3.*?been established\.",
         existing,
@@ -1618,8 +1677,10 @@ def test_confirmed_update_refuses_missing_or_duplicate_assurance(mutation: str) 
 
 
 @pytest.mark.parametrize("n", [126, 179])
-def test_update_refresh_refuses_unmapped_confirmation_evidence(n: int) -> None:
-    existing = record_path(FRONTIER, n).read_text()
+def test_update_refresh_refuses_unmapped_confirmation_evidence(
+    n: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    existing = _before_ryxu(n, monkeypatch, tmp_path)
     _, front, body = existing.split("---\n", 2)
     document = safe_load(front)
     case = document["packing"]
@@ -1646,9 +1707,11 @@ def test_update_refresh_refuses_unmapped_confirmation_evidence(n: int) -> None:
 @pytest.mark.parametrize("n", second.NUMBERS)
 def test_second_update_rebuilds_current_and_historical_geometry_from_their_own_packets(
     n: int,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Each selected pose and its earlier certificate survive real historical drafting."""
-    committed = record_path(FRONTIER, n).read_text()
+    committed = _before_ryxu(n, monkeypatch, tmp_path)
     _, front, body = committed.split("---\n", 2)
     document = safe_load(front)
     case = document["packing"]

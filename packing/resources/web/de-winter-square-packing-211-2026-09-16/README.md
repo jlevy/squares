@@ -23,7 +23,7 @@ It is a different source from the same author’s ResearchGate report of August 
 | Licence | None published |
 | Retrieved | 2026-09-29, a full clone |
 | Retained here | Derived facts and metadata only: [`facts/n-211.yaml`](facts/n-211.yaml), the 211 centres and angles carried verbatim as a Witness/v2 witness, and [`acquisition/sources.json`](acquisition/sources.json), which pins the three upstream files by SHA-256 |
-| Not retained | `n211__record.json`, `n211__record.svg` and `README.md`, the upstream bytes, under the [known-best retention policy](../known-best-packings/README.md): with no licence, no raw asset is kept (`raw_asset_retained: false`) |
+| Not retained | `n211__record.json`, `n211__record.svg` and `README.md`, the upstream bytes, under the derived-only form of the [known-best retention policy](../known-best-packings/README.md): no raw asset is kept (`raw_asset_retained: false`) |
 
 ## The Claim
 

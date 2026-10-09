@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import cProfile
 import hashlib
+import inspect
 import json
 import os
 import shlex
@@ -11,8 +13,11 @@ import subprocess
 import sys
 import tempfile
 import time
+from collections.abc import Callable
 from datetime import datetime, timedelta
 from pathlib import Path
+from types import ModuleType
+from typing import Any
 
 import pytest
 
@@ -250,6 +255,236 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
         assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
     assert SNAPSHOT_MAX_BYTES == 192 * 1024 * 1024
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
+def _native_profile_inputs(tmp_path: Path) -> tuple[Path, Path, Path]:
+    tree = tmp_path / "private tree"
+    (tree / "packing/src").mkdir(parents=True)
+    (tree / ".git").mkdir()
+    (tree / ".git/index").write_bytes(b"private index")
+    script = tmp_path / "native child.py"
+    script.write_text("print('native child')\n")
+    return script, tree, tmp_path / "diagnostic.json"
+
+
+def _native_profile_arguments(script: Path, tree: Path, output: Path) -> list[str]:
+    return [
+        "--profile-native-script",
+        str(script),
+        "--profile-tree",
+        str(tree),
+        "--profile-output",
+        str(output),
+    ]
+
+
+@pytest.mark.parametrize("mask", range(1, 7))
+def test_native_profile_rejects_partial_flags_before_execution(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mask: int
+) -> None:
+    inputs = _native_profile_inputs(tmp_path)
+    flags = _native_profile_arguments(*inputs)
+    selected = [
+        value
+        for index in range(3)
+        if mask & (1 << index)
+        for value in flags[index * 2 : index * 2 + 2]
+    ]
+    monkeypatch.setattr(
+        controls, "run_control_command", lambda *_args, **_kwargs: pytest.fail("child ran")
+    )
+    with pytest.raises(SystemExit) as error:
+        controls.main(selected)
+    assert error.value.code == 2
+    assert not inputs[2].exists()
+
+
+@pytest.mark.parametrize("existing", ["json", "raw"])
+def test_native_profile_refuses_existing_evidence_without_launch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, existing: str
+) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    destination = output if existing == "json" else output.with_suffix(".prof")
+    destination.write_bytes(b"prior evidence")
+    monkeypatch.setattr(
+        controls, "run_control_command", lambda *_args, **_kwargs: pytest.fail("child ran")
+    )
+    with pytest.raises(SystemExit) as error:
+        controls.main(_native_profile_arguments(script, tree, output))
+    assert error.value.code == 2
+    assert destination.read_bytes() == b"prior evidence"
+    assert not (output.with_suffix(".prof") if existing == "json" else output).exists()
+
+
+@pytest.mark.parametrize("invalid", ["script", "tree", "index"])
+def test_native_profile_rejects_invalid_inputs_before_launch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, invalid: str
+) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    if invalid == "script":
+        script.unlink()
+    elif invalid == "tree":
+        tree = tmp_path / "missing tree"
+    else:
+        (tree / ".git/index").unlink()
+    monkeypatch.setattr(
+        controls, "run_control_command", lambda *_args, **_kwargs: pytest.fail("child ran")
+    )
+    with pytest.raises(SystemExit) as error:
+        controls.main(_native_profile_arguments(script, tree, output))
+    assert error.value.code == 2
+    assert not output.exists()
+
+
+@pytest.mark.parametrize("status", ["success", "failure", "timeout"])
+def test_native_profile_uses_private_child_runner_and_preserves_outcomes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    status: str,
+) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    monkeypatch.setattr(controls, "timing_provenance", lambda: {"source_revision": "fixture"})
+    monkeypatch.setenv("PACKING_VALIDATION_ARTIFACT_DIR", str(tmp_path / "parent artifacts"))
+    calls = []
+
+    def command(text: str, **kwargs: Any) -> controls.CommandOutcome:
+        calls.append(text)
+        arguments = shlex.split(text)
+        assert arguments[:2] == [sys.executable, "-c"]
+        assert arguments[3:] == [str(script), str(output.with_suffix(".prof"))]
+        assert kwargs["cwd"] == tree / "packing"
+        assert kwargs["timeout_seconds"] == 60.0
+        environment = kwargs["environment"]
+        assert environment["PYTHONDONTWRITEBYTECODE"] == "1"
+        assert environment["PYTHONPATH"].split(os.pathsep)[:2] == [
+            str(tree / "packing/src"),
+            str(tree / "packing"),
+        ]
+        assert "PACKING_VALIDATION_ARTIFACT_DIR" not in environment
+        native = subprocess.run(
+            arguments,
+            cwd=kwargs["cwd"],
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=5,
+            check=False,
+        )
+        assert native.returncode == 0
+        assert native.stdout == "native child\n"
+        assert not native.stderr
+        return controls.CommandOutcome(
+            0 if status == "success" else 3,
+            "child stdout\n",
+            "child stderr\n",
+            timed_out=status == "timeout",
+        )
+
+    monkeypatch.setattr(controls, "run_control_command", command)
+    assert controls.main(_native_profile_arguments(script, tree, output)) == (
+        0 if status == "success" else 1
+    )
+    assert len(calls) == 1
+    report = json.loads(output.read_text())
+    assert report["complete"] == (status == "success")
+    assert report["timed_out"] == (status == "timeout")
+    assert report["returncode"] == (0 if status == "success" else 3)
+    assert report["diagnostic_only"] is True
+    assert report["gate_credit"] is False
+    assert report["duration_seconds"] >= 0
+    assert report["top_cumulative"]
+    assert report["stdout"] == "child stdout\n"
+    assert report["stderr"] == "child stderr\n"
+    assert report["script"]["sha256"] == hashlib.sha256(script.read_bytes()).hexdigest()
+    assert (
+        report["tree"]["private_index_sha256"]
+        == hashlib.sha256((tree / ".git/index").read_bytes()).hexdigest()
+    )
+    captured = capsys.readouterr()
+    assert "child stdout" in captured.out
+    assert "child stderr" in captured.err
+
+
+def test_native_profile_imports_only_the_intended_private_tree(tmp_path: Path) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    assert tree / "packing" != controls.ROOT
+    package = tree / "packing/devtools"
+    package.mkdir()
+    (package / "__init__.py").write_text("")
+    (package / "view_marker.py").write_text(
+        "from pathlib import Path\nROOT = Path(__file__).resolve().parents[1]\n"
+    )
+    script.write_text(
+        "from pathlib import Path\nfrom devtools.view_marker import ROOT\n"
+        "assert ROOT == Path.cwd()\nprint('intended private tree')\n"
+    )
+    assert controls.main(_native_profile_arguments(script, tree, output)) == 0
+    report = json.loads(output.read_text())
+    assert report["complete"] is True
+    assert report["returncode"] == 0
+    assert "intended private tree" in report["stdout"]
+    assert report["top_cumulative"]
+
+
+def test_native_profile_retains_same_named_functions_at_distinct_locations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    monkeypatch.setattr(controls, "timing_provenance", dict)
+
+    def command(_text: str, **_kwargs: object) -> controls.CommandOutcome:
+        cheap: dict[str, Any] = {}
+        costly: dict[str, Any] = {}
+        body = "def repeated():\n    return sum(range({count}))\n"
+        exec(compile(body.format(count=100), "cheap.py", "exec"), cheap)
+        exec(compile(body.format(count=100000), "costly.py", "exec"), costly)
+        profile = cProfile.Profile()
+        profile.runcall(cheap["repeated"])
+        profile.runcall(costly["repeated"])
+        profile.dump_stats(output.with_suffix(".prof"))
+        return controls.CommandOutcome(0, "", "")
+
+    monkeypatch.setattr(controls, "run_control_command", command)
+    assert controls.main(_native_profile_arguments(script, tree, output)) == 0
+    report = json.loads(output.read_text())
+    rows = [row for row in report["top_cumulative"] if row["function"] == "repeated"]
+    assert [(row["file"], row["line"]) for row in rows] == [("costly.py", 1), ("cheap.py", 1)]
+    assert rows[0]["cumulative_seconds"] > rows[1]["cumulative_seconds"]
+    assert all(row["calls"] == row["primitive_calls"] == 1 for row in rows)
+    assert all(isinstance(row["self_seconds"], float) for row in rows)
+
+
+@pytest.mark.parametrize(
+    ("exception", "returncode"),
+    [
+        ("SystemExit(3)", 3),
+        ("ValueError('native value failure')", 1),
+        ("OSError('native OS failure')", 1),
+    ],
+)
+def test_native_profile_real_child_failure_retains_profile_and_output(
+    tmp_path: Path, exception: str, returncode: int
+) -> None:
+    script, tree, output = _native_profile_inputs(tmp_path)
+    script.write_text(
+        "import sys\nfrom pathlib import Path\n"
+        "assert sys.argv == [__file__]\nassert sys.path[0] == str(Path.cwd())\n"
+        "print('before failure')\nprint('native error', file=sys.stderr)\n"
+        f"raise {exception}\n"
+    )
+    assert controls.main(_native_profile_arguments(script, tree, output)) == 1
+    report = json.loads(output.read_text())
+    assert report["returncode"] == returncode
+    assert report["complete"] is False
+    assert "before failure" in report["stdout"]
+    assert "native error" in report["stderr"]
+    if returncode == 1:
+        assert "Traceback" in report["stderr"]
+        assert exception.split("(", maxsplit=1)[0] in report["stderr"]
+        assert "usage:" not in report["stderr"]
+    assert report["top_cumulative"]
+    assert output.with_suffix(".prof").stat().st_size > 0
 
 
 def test_oversized_snapshot_is_refused_before_cloning(
@@ -1410,7 +1645,7 @@ def test_snapshot_audit_refuses_unconditional_copy_candidates(
         monkeypatch.setattr(controls, "root_files", lambda: (target,))
     else:
         monkeypatch.setattr(controls, route, (target,))
-    # The actual roster contains one unique unconditional destination.
+    # An unconditional copied destination cannot be suppressed by a tree-walk prune.
     monkeypatch.setattr(controls, "snapshot_source_paths", lambda: [copied])
     monkeypatch.setattr(
         controls, "clone_tree", lambda _tree: pytest.fail("audit copied source")
@@ -1878,7 +2113,9 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     and would put a reader's `attic/` scratch in it (PR 207).
     """
     from devtools import evand_arrangement_houses as evand  # noqa: PLC0415
+    from devtools import gupta_house_links as gupta  # noqa: PLC0415
     from devtools import refinement_house_links as refinements  # noqa: PLC0415
+    from devtools import ryxu_house_links as ryxu  # noqa: PLC0415
     from devtools import squish_followup_packets as packet  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
     from devtools import squish_second_update_house_links as house  # noqa: PLC0415
@@ -1913,6 +2150,12 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     )
     linked_proofs.update(
         path.relative_to(controls.REPO).as_posix() for path in evand.snapshot_house_links()
+    )
+    linked_proofs.update(
+        path.relative_to(controls.REPO).as_posix() for path in ryxu.snapshot_house_links()
+    )
+    linked_proofs.update(
+        path.relative_to(controls.REPO).as_posix() for path in gupta.snapshot_house_links()
     )
     for relative in linked_proofs:
         assert (tree / relative).is_file()
@@ -2379,7 +2622,37 @@ def forbidden(*args, **kwargs):
 packet.decide = packet.original.decide = forbidden
 packet.original.exact_verify = packet.original.independent.check = forbidden
 assert tuple(packet.check_certification()) == packet.NUMBERS
+# The current n108 house is #432 geometry and must not satisfy the old #422 receipt.
+try:
+    house.check_houses([108])
+except packet.original.PacketError as error:
+    assert 'full geometry or private metadata custody mismatch' in str(error)
+else:
+    raise AssertionError('new n108 geometry was accepted against historical #422 inputs')
+from devtools.register_ryxu_reports import read_history
+from devtools import register_gupta_reports as gupta
+historical = {row['n']: row['house'] for row in read_history()}
+if gupta.HISTORY.exists():
+    for row in gupta.read_history():
+        historical.setdefault(row['n'], row['house'])
+    try:
+        house.check_houses([88])
+    except packet.original.PacketError as error:
+        assert 'full geometry or private metadata custody mismatch' in str(error)
+    else:
+        raise AssertionError('new Gupta geometry was accepted against historical #422 inputs')
+historical_paths = {}
+for n in packet.NUMBERS:
+    if n in historical:
+        path = packet.PACKET / 'receipts' / f'worker-historical-n{n:03d}.yaml'
+        path.write_text(historical[n])
+        historical_paths[n] = path
+current_house_path = house.house_path
+house.house_path = lambda n: historical_paths.get(n, current_house_path(n))
 assert tuple(house.check_houses()) == packet.NUMBERS
+for path in historical_paths.values():
+    path.unlink()
+house.house_path = current_house_path
 for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
     relative = path.relative_to(packet.REPO).as_posix()
     assert check_results.repository_file_problem(relative) is None
@@ -2391,7 +2664,8 @@ for producer in (atlas.update, lambda: atlas.update_selected([88])):
         assert 'output escapes' in str(error)
     else:
         raise AssertionError('producer accepted a linked output')
-print('all 27 complete inputs admitted; nine house reads and both output guards passed')
+print('all 27 complete inputs admitted; all nine original houses admitted from '
+      'current or full retained history; current selected owner reads and output guards passed')
 """
     environment = controls.control_environment(tree, tree / "second-squish-baseline-pycache")
     baseline = subprocess.run(
@@ -2419,14 +2693,265 @@ print('all 27 complete inputs admitted; nine house reads and both output guards 
         assert source.read_bytes() == original
 
 
+def _guarded_second_squish_admission(packet: ModuleType) -> Callable[[], dict[int, Any]]:
+    """Reuse one actual admission in one child while every admission premise is fixed."""
+    from copy import deepcopy  # noqa: PLC0415
+    from pathlib import Path  # noqa: PLC0415
+
+    repository = packet.REPO
+    resolved_repository = repository.resolve()
+    modules = (packet, packet.original, packet.reported, packet.shared)
+    admit = packet.admit_certification
+
+    def frozen(value: Any) -> tuple[type, Any]:
+        kind = type(value)
+        if isinstance(value, dict):
+            return kind, tuple((frozen(key), frozen(item)) for key, item in value.items())
+        if isinstance(value, (list, tuple)):
+            return kind, tuple(frozen(item) for item in value)
+        if isinstance(value, (set, frozenset)):
+            return kind, frozenset(frozen(item) for item in value)
+        if callable(value) or isinstance(value, ModuleType):
+            return kind, id(value)
+        return kind, value
+
+    def namespace(module: ModuleType) -> dict[str, Any]:
+        return {
+            name: frozen(value)
+            for name, value in vars(module).items()
+            if name != "__builtins__"
+            and not (module is packet and name == "admit_certification")
+        }
+
+    namespaces = tuple(namespace(module) for module in modules)
+    paths = (*packet.private_input_paths(), Path(packet.original.__file__))
+    assert len(paths) == len(set(paths)), "admission fixture has duplicate inputs"
+    resolved = tuple(path.resolve(strict=True) for path in paths)
+    ceiling = max(
+        packet.original.MAX_SOURCE_BYTES,
+        packet.original.MAX_RECEIPT_BYTES,
+        packet.MAX_REVIEW_ROSTER_BYTES,
+    )
+
+    def read(path: Path, expected_size: int | None = None) -> bytes:
+        assert path.is_relative_to(repository), "admission fixture path changed"
+        assert not path.is_symlink(), "admission fixture file custody changed"
+        assert path.is_file(), "admission fixture file custody changed"
+        assert path.resolve(strict=True).is_relative_to(resolved_repository), (
+            "admission fixture input escaped"
+        )
+        for parent in path.parents:
+            assert not parent.is_symlink(), "admission fixture parent custody changed"
+            if parent == repository:
+                break
+        size = path.stat().st_size
+        limit = ceiling if expected_size is None else expected_size
+        assert size <= limit, "admission fixture input size changed"
+        assert expected_size is None or size == expected_size, (
+            "admission fixture input size changed"
+        )
+        with path.open("rb") as stream:
+            data = stream.read(limit + 1)
+        assert len(data) == size, "admission fixture input changed during read"
+        return data
+
+    captured = tuple(read(path) for path in paths)
+
+    def unchanged() -> None:
+        assert repository == packet.REPO, "admission fixture repository changed"
+        assert packet.REPO.resolve() == resolved_repository, (
+            "admission fixture repository changed"
+        )
+        assert packet.admit_certification is admit or packet.admit_certification is guarded, (
+            "admission fixture callback changed"
+        )
+        assert tuple(namespace(module) for module in modules) == namespaces, (
+            "admission fixture loaded functions or constants changed"
+        )
+        assert (*packet.private_input_paths(), Path(packet.original.__file__)) == paths, (
+            "admission fixture input roster changed"
+        )
+        for path, target, raw in zip(paths, resolved, captured, strict=True):
+            assert path.resolve(strict=True) == target, "admission fixture input path changed"
+            assert read(path, len(raw)) == raw, "admission fixture input bytes changed"
+
+    def guarded() -> dict[int, Any]:
+        unchanged()
+        return deepcopy(rows)
+
+    unchanged()
+    rows = admit()
+    unchanged()
+    assert tuple(rows) == packet.NUMBERS, "admission fixture lost complete nine-case scope"
+    return guarded
+
+
+@pytest.fixture
+def guarded_admission_packet(tmp_path: Path) -> Any:
+    """Tiny ordinary inputs exercise the guard without creating a worker snapshot."""
+    packet: Any = ModuleType("guarded_packet")
+    packet.REPO = tmp_path / "repo"
+    packet.REPO.mkdir()
+    packet.NUMBERS = (88, 92, 108, 113, 125, 131, 263, 269, 281)
+    packet.MAX_REVIEW_ROSTER_BYTES = 128
+    packet.REVISION = "retained-source"
+    original: Any = ModuleType("guarded_original")
+    original.MAX_SOURCE_BYTES = original.MAX_RECEIPT_BYTES = 128
+    packet.original = original
+    packet.reported = ModuleType("guarded_reported")
+    packet.shared = ModuleType("guarded_shared")
+    paths = []
+    for n in packet.NUMBERS:
+        path = packet.REPO / str(n) / "input"
+        path.parent.mkdir()
+        path.write_bytes(f"complete-input-{n}".encode())
+        paths.append(path)
+    trusted = packet.REPO / "trusted-adapter.py"
+    trusted.write_bytes(b"trusted-adapter")
+    packet.original.__file__ = str(trusted)
+    packet.private_input_paths = lambda: tuple(paths)
+    packet.read_fact = lambda n: {"n": n}
+    packet.admit_certification = lambda: {
+        n: {"case": {"n": n, "premise": ["retained"]}} for n in packet.NUMBERS
+    }
+    return packet
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "late-bytes",
+        "larger-input",
+        "trusted-adapter",
+        "linked-file",
+        "linked-parent",
+        "input-roster",
+        "loaded-function",
+        "loaded-constant",
+        "equal-valued-type",
+    ],
+)
+def test_guarded_admission_refuses_changed_premises_and_accepts_restoration(
+    guarded_admission_packet: Any, tmp_path: Path, mutation: str
+) -> None:
+    packet = guarded_admission_packet
+    guarded = _guarded_second_squish_admission(packet)
+    packet.admit_certification = guarded
+    original = guarded()
+    path = packet.private_input_paths()[-1]
+    if mutation == "trusted-adapter":
+        path = Path(packet.original.__file__)
+    raw = path.read_bytes()
+    outside = tmp_path / "outside"
+    previous_paths = packet.private_input_paths
+    previous_fact = packet.read_fact
+    revision = packet.REVISION
+    source_ceiling = packet.original.MAX_SOURCE_BYTES
+    if mutation in {"late-bytes", "trusted-adapter"}:
+        path.write_bytes(b"!" + raw[1:])
+    elif mutation == "larger-input":
+        path.write_bytes(raw + b"!")
+    elif mutation == "linked-file":
+        outside.write_bytes(raw)
+        path.unlink()
+        path.symlink_to(outside)
+    elif mutation == "linked-parent":
+        path.parent.rename(outside)
+        path.parent.symlink_to(outside, target_is_directory=True)
+    elif mutation == "input-roster":
+        packet.private_input_paths = lambda: previous_paths()[:-1]
+    elif mutation == "loaded-function":
+        packet.read_fact = lambda n: {"changed": n}
+    elif mutation == "equal-valued-type":
+        packet.original.MAX_SOURCE_BYTES = float(source_ceiling)
+    else:
+        packet.REVISION = "changed-source"
+    try:
+        with pytest.raises(AssertionError, match="admission fixture"):
+            guarded()
+    finally:
+        if mutation == "linked-file":
+            path.unlink()
+            path.write_bytes(raw)
+        elif mutation == "linked-parent":
+            path.parent.unlink()
+            outside.rename(path.parent)
+        elif mutation in {"late-bytes", "larger-input", "trusted-adapter"}:
+            path.write_bytes(raw)
+        packet.private_input_paths = previous_paths
+        packet.read_fact = previous_fact
+        packet.REVISION = revision
+        packet.original.MAX_SOURCE_BYTES = source_ceiling
+    restored = guarded()
+    assert restored == original
+    assert restored is not original
+    restored[packet.NUMBERS[-1]]["case"]["premise"].append("changed-return")
+    assert guarded() == original
+
+
+def test_guarded_admission_refuses_an_input_changed_during_real_admission(
+    guarded_admission_packet: Any,
+) -> None:
+    packet = guarded_admission_packet
+    path = packet.private_input_paths()[-1]
+    raw = path.read_bytes()
+    actual = packet.admit_certification
+
+    def changed() -> dict[int, Any]:
+        rows = actual()
+        path.write_bytes(b"!" + raw[1:])
+        return rows
+
+    packet.admit_certification = changed
+    try:
+        with pytest.raises(AssertionError, match="admission fixture input bytes changed"):
+            _guarded_second_squish_admission(packet)
+    finally:
+        path.write_bytes(raw)
+        packet.admit_certification = actual
+    guarded = _guarded_second_squish_admission(packet)
+    assert tuple(guarded()) == packet.NUMBERS
+
+
 @pytest.mark.parametrize(
     "program",
     [
         pytest.param(
             """
 from devtools import squish_second_update_house_links as house
+packet.admit_certification = _guarded_second_squish_admission(packet)
+# The current n108 house is #432 geometry and must not satisfy the old #422 receipt.
+try:
+    house.check_houses([108])
+except packet.original.PacketError as error:
+    assert 'full geometry or private metadata custody mismatch' in str(error)
+else:
+    raise AssertionError('new n108 geometry was accepted against historical #422 inputs')
+from devtools.register_ryxu_reports import read_history
+from devtools import register_gupta_reports as gupta
+historical = {row['n']: row['house'] for row in read_history()}
+if gupta.HISTORY.exists():
+    for row in gupta.read_history():
+        historical.setdefault(row['n'], row['house'])
+    try:
+        house.check_houses([88])
+    except packet.original.PacketError as error:
+        assert 'full geometry or private metadata custody mismatch' in str(error)
+    else:
+        raise AssertionError('new Gupta geometry was accepted against historical #422 inputs')
+historical_paths = {}
+for n in packet.NUMBERS:
+    if n in historical:
+        path = packet.PACKET / 'receipts' / f'worker-historical-n{n:03d}.yaml'
+        path.write_text(historical[n])
+        historical_paths[n] = path
+current_house_path = house.house_path
+house.house_path = lambda n: historical_paths.get(n, current_house_path(n))
 assert tuple(house.check_houses()) == packet.NUMBERS
-print('nine house reads passed')
+for path in historical_paths.values():
+    path.unlink()
+house.house_path = current_house_path
+print('all nine original houses admitted from current or full retained history')
 """,
             id="house-reads",
         ),
@@ -2463,6 +2988,19 @@ def test_second_squish_consumers_survive_native_worker_boundaries(
 ) -> None:
     """Keep each consumer contract in its own fresh native worker."""
     tree, _copied = control_snapshot
+    gupta_module = "packing/devtools/register_gupta_reports.py"
+    expected_gupta_module = (controls.REPO / gupta_module).is_file()
+    program = (
+        f"assert (packet.REPO / {gupta_module!r}).is_file() is {expected_gupta_module!r}\n"
+        + program
+    )
+    program = (
+        "from collections.abc import Callable\n"
+        "from types import ModuleType\nfrom typing import Any\n"
+        + inspect.getsource(_guarded_second_squish_admission)
+        + "\n"
+        + program
+    )
     _run_second_squish_native_program(tree, program)
 
 
@@ -2514,6 +3052,117 @@ def test_squish_private_mutation_is_detected_and_restored_in_native_worker(
     assert passed, detail
     assert target.read_bytes() == before
     assert source.read_bytes() == source_before
+
+
+def _gupta_worker_program() -> str:
+    """The actual custody child; literal escapes must survive serialization."""
+    return r"""
+import copy
+from fractions import Fraction
+from devtools import build_known_best_atlas as atlas
+from devtools import check_results
+from devtools import gupta_house_links as house
+from devtools import register_gupta_reports as register
+reports = house.reports
+def forbidden(*args, **kwargs):
+    raise AssertionError('custody admission must not call a geometric decider')
+reports.kernel.run_case = reports.run_child = forbidden
+reports.legacy.exact_verify = reports.legacy.independent.check_squares = forbidden
+assert tuple(reports.check_certification()) == reports.NUMBERS
+assert sum(len(c.poses) for c in reports.read_facts().values()) == 3017
+assert len(register.read_history()) == 14
+house.check_houses()
+for relative in (house.house_path(88), house.house_path(239)):
+    name = relative.relative_to(house.REPO).as_posix()
+    assert check_results.repository_file_problem(name) is None
+for kind in ('native-verdict', 'complete-input', 'original', 'comparator'):
+    deciding = kind in ('native-verdict', 'complete-input')
+    target = reports.receipt_path() if deciding else reports.fact_path()
+    original = target.read_bytes()
+    value = copy.deepcopy(reports.kernel.read_xz(target))
+    row = value['cases'][-1]
+    if kind == 'native-verdict':
+        assert row['exact_verify']['verification_passed'] is False
+        row['exact_verify']['verification_passed'] = True
+    elif kind == 'complete-input':
+        x = row['checker_input']['poses'][-1][0]
+        row['checker_input']['poses'][-1][0] = str(Fraction(x) + 1)
+    elif kind == 'original':
+        row['source_certificate'] += '\n'
+    else:
+        row['source_comparator'] += '\n'
+    try:
+        reports.save_xz(target, value)
+        try:
+            house.check_houses()
+        except reports.kernel.ReportError:
+            pass
+        else:
+            raise AssertionError('private deciding input mutant was admitted: ' + kind)
+    finally:
+        target.write_bytes(original)
+    house.check_houses()
+    assert target.read_bytes() == original
+producers = (atlas.update, lambda: atlas.update_selected([88]),
+             lambda: atlas.update_selected([239]))
+for producer in producers:
+    try:
+        producer()
+    except ValueError as error:
+        assert 'output escapes' in str(error)
+    else:
+        raise AssertionError('producer accepted a linked Gupta output')
+print('all 17 sources/3017 poses/51 jobs/four private inputs/14 houses admitted; '
+      'native verdict, complete input, original and comparator mutants refused/restored; '
+      'all producer guards passed without deciders')
+"""
+
+
+def test_gupta_worker_program_compiles() -> None:
+    compile(_gupta_worker_program(), "gupta-custody-child", "exec")
+
+
+@pytest.mark.slow
+def test_gupta_complete_sources_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Use the actual shared copier, all four private inputs and live refusal/restores."""
+    from devtools import gupta_house_links as house  # noqa: PLC0415
+
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+    tree, _copied = control_snapshot
+    inputs = house.private_input_paths()
+    assert len(inputs) == 4
+    original_inputs = {path: path.read_bytes() for path in inputs}
+    for source, original in original_inputs.items():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_file()
+        assert not target.is_symlink()
+        assert target.read_bytes() == original
+    for source in house.snapshot_house_links():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_symlink()
+        assert target.resolve() == source.resolve()
+        with pytest.raises(ValueError, match="escapes private snapshot"):
+            resolve_control_target(
+                source.relative_to(ROOT).as_posix(), tree=tree, work=tree / HERE
+            )
+    program = _gupta_worker_program()
+    completed = subprocess.run(
+        [sys.executable, "-c", program],
+        cwd=tree / HERE,
+        env=controls.control_environment(tree, tree / "gupta-custody-pycache"),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=45,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert "all 17 sources/3017 poses/51 jobs/four private inputs/14 houses" in completed.stdout
+    for source, original in original_inputs.items():
+        assert source.read_bytes() == original
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == original
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
 
 
 @pytest.mark.parametrize(
@@ -2648,3 +3297,118 @@ def test_snapshot_prunes_leave_native_crate_fixtures_selected() -> None:
     for relative in listed:
         path = controls.REPO / relative
         assert not controls.in_pruned_roots(path, PRUNE)
+
+
+def _couzo_worker_program() -> str:
+    """All source/native mutations happen in the actual private snapshot, without decisions."""
+    return r"""
+import copy
+from fractions import Fraction
+from pathlib import Path
+from devtools import couzo_refinement_reports as reports
+def forbidden(*args, **kwargs):
+    raise AssertionError('custody must not run a native geometric decision')
+reports.kernel.run_case = reports.run_child = forbidden
+reports.legacy.exact_verify = reports.legacy.independent.check_squares = forbidden
+assert tuple(reports.check_certification()) == reports.NUMBERS
+assert sum(len(c.poses) for c in reports.read_facts().values()) == 1340
+assert len(reports.kernel.read_xz(reports.receipt_path())['cases']) == 24
+for kind in ('native-verdict', 'native-limitations', 'complete-input',
+             'original', 'decimal', 'map'):
+    deciding = kind in ('native-verdict', 'native-limitations', 'complete-input')
+    target = reports.receipt_path() if deciding else reports.fact_path()
+    if kind == 'map':
+        target = reports.PACKET / 'acquisition/case-inputs.json'
+    original = target.read_bytes()
+    try:
+        if kind == 'map':
+            target.write_bytes(original + b'\n')
+        else:
+            value = copy.deepcopy(reports.kernel.read_xz(target))
+            row = value['cases'][-1]
+            if kind == 'native-verdict':
+                assert row['exact_verify']['verification_passed'] is False
+                row['exact_verify']['verification_passed'] = True
+            elif kind == 'native-limitations':
+                row['independent']['limitations'] = 'Global optimality is proved.'
+            elif kind == 'complete-input':
+                x = row['checker_input']['poses'][-1][0]
+                row['checker_input']['poses'][-1][0] = str(Fraction(x) + 1)
+            elif kind == 'original':
+                row['source_certificate'] += '\n'
+            else:
+                row['decimal_pose'] += '\n'
+            reports.kernel.save_xz(target, value)
+        try:
+            reports.check_certification()
+        except reports.kernel.ReportError:
+            pass
+        else:
+            raise AssertionError('private deciding mutant was admitted: ' + kind)
+    finally:
+        target.write_bytes(original)
+    assert tuple(reports.check_certification()) == reports.NUMBERS
+    assert target.read_bytes() == original
+outside = reports.REPO.parent / 'couzo-custody-output-target'
+for target, producer in ((reports.fact_path(), reports.import_facts),
+                        (reports.receipt_path(), lambda: reports.certify(Path('unused-jobs')))):
+    original = target.read_bytes()
+    outside.write_bytes(original)
+    target.unlink()
+    target.symlink_to(outside)
+    try:
+        try:
+            producer()
+        except reports.kernel.ReportError as error:
+            assert 'must remain private' in str(error)
+        else:
+            raise AssertionError('producer accepted output outside private snapshot')
+        assert outside.read_bytes() == original
+    finally:
+        target.unlink()
+        target.write_bytes(original)
+        outside.unlink()
+assert tuple(reports.check_certification()) == reports.NUMBERS
+print('all8 sources/1340poses/24jobs/three private inputs admitted; '
+      'six late mutants refused/restored and both producer escapes refused without deciders')
+"""
+
+
+def test_couzo_worker_program_compiles() -> None:
+    compile(_couzo_worker_program(), "couzo-custody-child", "exec")
+
+
+def test_couzo_complete_sources_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The production copier must carry all full deciding inputs as ordinary private files."""
+    from devtools import couzo_refinement_reports as reports  # noqa: PLC0415
+
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+    tree, _copied = control_snapshot
+    inputs = reports.private_input_paths()
+    assert len(inputs) == 3
+    assert set(inputs) <= set(controls.COPY_SEPARATELY)
+    originals = {path: path.read_bytes() for path in inputs}
+    for source, original in originals.items():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_file()
+        assert not target.is_symlink()
+        assert target.read_bytes() == original
+    program = _couzo_worker_program()
+    compile(program, "couzo-custody-child", "exec")
+    completed = subprocess.run(
+        [sys.executable, "-c", program],
+        cwd=tree / HERE,
+        env=controls.control_environment(tree, tree / "couzo-custody-pycache"),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=45,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert "all8 sources/1340poses/24jobs/three private inputs admitted" in completed.stdout
+    for source, original in originals.items():
+        assert source.read_bytes() == original
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == original
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES

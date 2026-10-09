@@ -1,0 +1,631 @@
+{
+  "format": "couzo-451-execution-attempts-v1",
+  "attempts": [
+    {
+      "format": "issue451-native-attempt/v1",
+      "checkpoint": "6226889908b28ede4afb6dfea9e59c6d45862707",
+      "status": "incomplete",
+      "exit": 1,
+      "real_seconds": 181.19,
+      "user_seconds": 97.14,
+      "system_seconds": 2.9,
+      "wall_minutes": 3.019833333333333,
+      "cpu_minutes": 1.6673333333333333,
+      "raw_jobs": "/Volumes/spud-ext1/source-worktrees/squares-import-resume/issue451-native-jobs-62268899-v1",
+      "log": "/Volumes/spud-ext1/source-worktrees/squares-import-resume/review-notes/issue451-native-batch-62268899-v1.log",
+      "retained_partial_receipt": "packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/exact-replay-incomplete-62268899-v1.json.xz",
+      "partial_receipt_bytes": 15220,
+      "completed_full_objects": 14,
+      "pair_decisions_in_complete_objects": 214264,
+      "roster": [
+        {
+          "control": "positive",
+          "n": 105,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "duplicate-square-overlap",
+          "n": 105,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "square-translated-outside-container",
+          "n": 105,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "positive",
+          "n": 108,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "duplicate-square-overlap",
+          "n": 108,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "square-translated-outside-container",
+          "n": 108,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "positive",
+          "n": 127,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "duplicate-square-overlap",
+          "n": 127,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "square-translated-outside-container",
+          "n": 127,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "positive",
+          "n": 131,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "duplicate-square-overlap",
+          "n": 131,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "square-translated-outside-container",
+          "n": 131,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "positive",
+          "n": 155,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "duplicate-square-overlap",
+          "n": 155,
+          "state": "complete-native-result-individually-admitted"
+        },
+        {
+          "control": "square-translated-outside-container",
+          "n": 155,
+          "state": "started-with-partial-logs-no-native-result"
+        },
+        {
+          "control": "positive",
+          "n": 180,
+          "state": "started-with-partial-logs-no-native-result"
+        },
+        {
+          "control": "duplicate-square-overlap",
+          "n": 180,
+          "state": "started-with-partial-logs-no-native-result"
+        },
+        {
+          "control": "square-translated-outside-container",
+          "n": 180,
+          "state": "not-executed"
+        },
+        {
+          "control": "positive",
+          "n": 228,
+          "state": "not-executed"
+        },
+        {
+          "control": "duplicate-square-overlap",
+          "n": 228,
+          "state": "not-executed"
+        },
+        {
+          "control": "square-translated-outside-container",
+          "n": 228,
+          "state": "not-executed"
+        },
+        {
+          "control": "positive",
+          "n": 306,
+          "state": "not-executed"
+        },
+        {
+          "control": "duplicate-square-overlap",
+          "n": 306,
+          "state": "not-executed"
+        },
+        {
+          "control": "square-translated-outside-container",
+          "n": 306,
+          "state": "not-executed"
+        }
+      ],
+      "scope": "14 individual complete results re-admitted against pinned full sources; no full24 receipt or assurance/house/standing promotion.",
+      "receipt_script_disposition": "All14 fullobjects individually validated and partialreceipt saved before metadata-only pairs_checked KeyError. Corrected to actual pairs_tested field from retained partialreceipt; no geometry or repeated admission.",
+      "command": "python -m devtools.couzo_refinement_reports certify --jobs-dir /Volumes/spud-ext1/source-worktrees/squares-import-resume/issue451-native-jobs-62268899-v1 --workers 2 --timeout 45"
+    },
+    {
+      "format": "issue451-native-attempt/v2",
+      "checkpoint": "6226889908b28ede4afb6dfea9e59c6d45862707",
+      "status": "complete",
+      "exit": 0,
+      "real_seconds": 398.4,
+      "user_seconds": 239.87,
+      "system_seconds": 6.28,
+      "wall_minutes": 6.64,
+      "cpu_minutes": 4.1025,
+      "workers": 1,
+      "child_timeout_seconds": 45,
+      "source": "https://github.com/franciscouzo/square-packing",
+      "source_revision": "ffd900dfff6d2674ad995359208c2f0714915c82",
+      "counts": [
+        105,
+        108,
+        127,
+        131,
+        155,
+        180,
+        228,
+        306
+      ],
+      "poses": 1340,
+      "full_jobs": 24,
+      "route_decisions": 48,
+      "pairs_by_route": {
+        "exact_verify": 385026,
+        "independent": 385026
+      },
+      "pair_decisions": 770052,
+      "max_job_wall_seconds": 40.892193167004734,
+      "measured_native_cpu_seconds": 231.809951,
+      "receipt": "packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/exact-certification.json.xz",
+      "receipt_bytes": 26808,
+      "receipt_sha256": "469435b6ad4cd224eecbb225c0da36caed33665ae30c69e4061bd7de52ff69cd",
+      "receipt_decoded_bytes": 703465,
+      "raw_jobs": "/Volumes/spud-ext1/source-worktrees/squares-import-resume/issue451-native-jobs-62268899-v2-serial",
+      "log": "/Volumes/spud-ext1/source-worktrees/squares-import-resume/review-notes/issue451-native-batch-62268899-v2-serial.log",
+      "stored_admission": {
+        "command": "python -m devtools.couzo_refinement_reports check",
+        "exit": 0,
+        "real_seconds": 1.45,
+        "new_geometry": false
+      },
+      "all_raw_jobs_equal_aggregate": true,
+      "roster": [
+        {
+          "n": 105,
+          "control": "positive",
+          "wall_seconds": 10.576957541983575,
+          "cpu_seconds": {
+            "exact_verify": 2.814639,
+            "independent": 1.5160940000000003
+          },
+          "route_verdicts": {
+            "exact_verify": true,
+            "independent": true
+          },
+          "pairs_by_route": {
+            "exact_verify": 5460,
+            "independent": 5460
+          },
+          "job_sha256": "ab799ee9da85d3c2bccaae26f18db00ae6eda41098edd5753999068986eb4a41"
+        },
+        {
+          "n": 105,
+          "control": "duplicate-square-overlap",
+          "wall_seconds": 9.795136708999053,
+          "cpu_seconds": {
+            "exact_verify": 2.7655519999999996,
+            "independent": 1.4903109999999997
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 5460,
+            "independent": 5460
+          },
+          "job_sha256": "658ef4bc9aceda543d0f24d88bc2be4c7e52ab6d3871b7bbdce96dd8afa5d362"
+        },
+        {
+          "n": 105,
+          "control": "square-translated-outside-container",
+          "wall_seconds": 8.185762874956708,
+          "cpu_seconds": {
+            "exact_verify": 2.6738269999999997,
+            "independent": 1.5632040000000003
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 5460,
+            "independent": 5460
+          },
+          "job_sha256": "0b30225eeba3e5bb6e40f7a317657d2ff463b306a9860fca1114376e46ea5d13"
+        },
+        {
+          "n": 108,
+          "control": "positive",
+          "wall_seconds": 5.4064762920024805,
+          "cpu_seconds": {
+            "exact_verify": 2.24063,
+            "independent": 1.1642010000000003
+          },
+          "route_verdicts": {
+            "exact_verify": true,
+            "independent": true
+          },
+          "pairs_by_route": {
+            "exact_verify": 5778,
+            "independent": 5778
+          },
+          "job_sha256": "0bc04cdde3feaf546e5e4b83a525dd5b9359de26cbd0b5e8a2fbb275571904a7"
+        },
+        {
+          "n": 108,
+          "control": "duplicate-square-overlap",
+          "wall_seconds": 7.546006458986085,
+          "cpu_seconds": {
+            "exact_verify": 2.2861819999999997,
+            "independent": 1.2043650000000001
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 5778,
+            "independent": 5778
+          },
+          "job_sha256": "9b5e1c1224416aa3876461368b24681ec3bd80320516f9af18ed72af19e3f888"
+        },
+        {
+          "n": 108,
+          "control": "square-translated-outside-container",
+          "wall_seconds": 4.864942707994487,
+          "cpu_seconds": {
+            "exact_verify": 2.193687,
+            "independent": 1.1460880000000002
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 5778,
+            "independent": 5778
+          },
+          "job_sha256": "4f64277d25679c06fec0abdf11cc894f48c4f8c164a8063f387f5ee41093dc83"
+        },
+        {
+          "n": 127,
+          "control": "positive",
+          "wall_seconds": 13.138892040995415,
+          "cpu_seconds": {
+            "exact_verify": 3.890389,
+            "independent": 2.1892110000000002
+          },
+          "route_verdicts": {
+            "exact_verify": true,
+            "independent": true
+          },
+          "pairs_by_route": {
+            "exact_verify": 8001,
+            "independent": 8001
+          },
+          "job_sha256": "ef7baf54ac671f823958852f18014a760da140d3f01d8701cef5671eeb4b4efe"
+        },
+        {
+          "n": 127,
+          "control": "duplicate-square-overlap",
+          "wall_seconds": 21.14388341701124,
+          "cpu_seconds": {
+            "exact_verify": 3.9870620000000003,
+            "independent": 2.1830679999999996
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 8001,
+            "independent": 8001
+          },
+          "job_sha256": "81fd47a1eb450374af8faa99bd67efedb5cef81cc0a18fa065184d4c6422753b"
+        },
+        {
+          "n": 127,
+          "control": "square-translated-outside-container",
+          "wall_seconds": 20.105794041010085,
+          "cpu_seconds": {
+            "exact_verify": 3.9885969999999995,
+            "independent": 2.2286649999999995
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 8001,
+            "independent": 8001
+          },
+          "job_sha256": "df0be1f3214cd2045af44dd7848951744430b47ab3ef122389d4dd7cdb798b16"
+        },
+        {
+          "n": 131,
+          "control": "positive",
+          "wall_seconds": 7.3141586250276305,
+          "cpu_seconds": {
+            "exact_verify": 3.413817,
+            "independent": 1.8132729999999997
+          },
+          "route_verdicts": {
+            "exact_verify": true,
+            "independent": true
+          },
+          "pairs_by_route": {
+            "exact_verify": 8515,
+            "independent": 8515
+          },
+          "job_sha256": "edf86f3226abcf46ea6fed5d3de0cf07cd67367a14c9fa211bad3974d73b39da"
+        },
+        {
+          "n": 131,
+          "control": "duplicate-square-overlap",
+          "wall_seconds": 8.041935667046346,
+          "cpu_seconds": {
+            "exact_verify": 3.403541,
+            "independent": 1.8290759999999997
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 8515,
+            "independent": 8515
+          },
+          "job_sha256": "80aabd279ba6324bab6a3b836dd5377496dc29ff8b6d17d184a6b80f2da83410"
+        },
+        {
+          "n": 131,
+          "control": "square-translated-outside-container",
+          "wall_seconds": 9.229073958005756,
+          "cpu_seconds": {
+            "exact_verify": 3.4478750000000002,
+            "independent": 1.8907160000000003
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 8515,
+            "independent": 8515
+          },
+          "job_sha256": "8c3f35a3394a4a9e7ce10599f2d822c2007f6fb1961a4a0bbd29bdcca34b42fc"
+        },
+        {
+          "n": 155,
+          "control": "positive",
+          "wall_seconds": 10.479915958014317,
+          "cpu_seconds": {
+            "exact_verify": 4.81704,
+            "independent": 2.555955
+          },
+          "route_verdicts": {
+            "exact_verify": true,
+            "independent": true
+          },
+          "pairs_by_route": {
+            "exact_verify": 11935,
+            "independent": 11935
+          },
+          "job_sha256": "f5f8a334c3a41ea65ad12b0dfd7aa849aa858b1805e59fb6d7aeecc4e88cf7d1"
+        },
+        {
+          "n": 155,
+          "control": "duplicate-square-overlap",
+          "wall_seconds": 11.060364792007022,
+          "cpu_seconds": {
+            "exact_verify": 4.794575,
+            "independent": 2.583807
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 11935,
+            "independent": 11935
+          },
+          "job_sha256": "9365812cb105c4443d8f9588ccca5aba7bc3f54734495be19b871fa6462494e1"
+        },
+        {
+          "n": 155,
+          "control": "square-translated-outside-container",
+          "wall_seconds": 12.736171624972485,
+          "cpu_seconds": {
+            "exact_verify": 4.73583,
+            "independent": 2.62993
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 11935,
+            "independent": 11935
+          },
+          "job_sha256": "8e20e7cc3861a77d0783e2c7feef0d31a2d0caf75f6949edf5003a14b4bd9fb9"
+        },
+        {
+          "n": 180,
+          "control": "positive",
+          "wall_seconds": 16.971657084010076,
+          "cpu_seconds": {
+            "exact_verify": 5.99094,
+            "independent": 3.106141000000001
+          },
+          "route_verdicts": {
+            "exact_verify": true,
+            "independent": true
+          },
+          "pairs_by_route": {
+            "exact_verify": 16110,
+            "independent": 16110
+          },
+          "job_sha256": "97c7a8b6672ef2dc4b35a41440ee07e73da1aa621e00c88dc288412d47a69c04"
+        },
+        {
+          "n": 180,
+          "control": "duplicate-square-overlap",
+          "wall_seconds": 11.478702541964594,
+          "cpu_seconds": {
+            "exact_verify": 5.7188289999999995,
+            "independent": 3.0549810000000006
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 16110,
+            "independent": 16110
+          },
+          "job_sha256": "f5be89746f97fe090b33fce5f07c6807eb58854687c2657763c09581be488b2f"
+        },
+        {
+          "n": 180,
+          "control": "square-translated-outside-container",
+          "wall_seconds": 11.659198125009425,
+          "cpu_seconds": {
+            "exact_verify": 5.775793,
+            "independent": 2.931630000000001
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 16110,
+            "independent": 16110
+          },
+          "job_sha256": "f9bbf732d382b375a1a7ca00c535737d4db5e03e9bb7cc022d59517f1cee9713"
+        },
+        {
+          "n": 228,
+          "control": "positive",
+          "wall_seconds": 21.0383935419959,
+          "cpu_seconds": {
+            "exact_verify": 9.062045000000001,
+            "independent": 4.915312
+          },
+          "route_verdicts": {
+            "exact_verify": true,
+            "independent": true
+          },
+          "pairs_by_route": {
+            "exact_verify": 25878,
+            "independent": 25878
+          },
+          "job_sha256": "5259be90b6c4a320fbc7ce9cb2b1888bae986818cb156ee6f31c8c581236841e"
+        },
+        {
+          "n": 228,
+          "control": "duplicate-square-overlap",
+          "wall_seconds": 25.148815708002076,
+          "cpu_seconds": {
+            "exact_verify": 9.519241000000001,
+            "independent": 5.034955
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 25878,
+            "independent": 25878
+          },
+          "job_sha256": "8b6a7766c6eb883ebba11c9498a65a228373f6c42a16befecd6c1adab21b06ea"
+        },
+        {
+          "n": 228,
+          "control": "square-translated-outside-container",
+          "wall_seconds": 20.802763500018045,
+          "cpu_seconds": {
+            "exact_verify": 9.232675,
+            "independent": 4.788528000000001
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 25878,
+            "independent": 25878
+          },
+          "job_sha256": "5bff8b464657eeaac04c6015c8472be8bb923051ac0941157bcac949f7ce4ef4"
+        },
+        {
+          "n": 306,
+          "control": "positive",
+          "wall_seconds": 40.892193167004734,
+          "cpu_seconds": {
+            "exact_verify": 18.27298,
+            "independent": 10.079534000000002
+          },
+          "route_verdicts": {
+            "exact_verify": true,
+            "independent": true
+          },
+          "pairs_by_route": {
+            "exact_verify": 46665,
+            "independent": 46665
+          },
+          "job_sha256": "d14109e2402f71e117328a770cd595d6696e8b33ef271a15473e69421ac940e2"
+        },
+        {
+          "n": 306,
+          "control": "duplicate-square-overlap",
+          "wall_seconds": 35.37413908401504,
+          "cpu_seconds": {
+            "exact_verify": 17.993272,
+            "independent": 9.728221999999999
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 46665,
+            "independent": 46665
+          },
+          "job_sha256": "60f9dc355585190b1411ff508dc2f5483b85bbde8adc3c89ad6cb70d38f6c438"
+        },
+        {
+          "n": 306,
+          "control": "square-translated-outside-container",
+          "wall_seconds": 31.033267999999225,
+          "cpu_seconds": {
+            "exact_verify": 17.599809,
+            "independent": 9.563856999999999
+          },
+          "route_verdicts": {
+            "exact_verify": false,
+            "independent": false
+          },
+          "pairs_by_route": {
+            "exact_verify": 46665,
+            "independent": 46665
+          },
+          "job_sha256": "fe273ced119728e3839fed39494d60d6d5643ce16ce78efcfcfa9dcfa7082fa1"
+        }
+      ],
+      "scope": "Complete eight rational witnesses: both finite-feasibility routes true for all8 positives and false for all16 complete duplicate/outside controls. Retained source decimal poses remain separate context. No optimizer, KKT, local/global optimality, house/standing or assurance promotion.",
+      "command": "python -m devtools.couzo_refinement_reports certify --jobs-dir /Volumes/spud-ext1/source-worktrees/squares-import-resume/issue451-native-jobs-62268899-v2-serial --workers 1 --timeout 45"
+    }
+  ]
+}
