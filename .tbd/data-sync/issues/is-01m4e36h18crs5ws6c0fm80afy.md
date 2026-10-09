@@ -5,19 +5,19 @@ title: Review and validate the atlas site cleanups
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m4e35s7r1e65r1qmpz250h0p
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-10-08T15:48:04.263Z
-updated_at: 2026-10-09T01:02:00.870Z
+updated_at: 2026-10-09T01:53:45.105Z
 started_at: 2026-10-08T15:49:07.449Z
 ---
 Review source changes and exported atlas, run focused checks and the change-reachable gate, then commit/push a focused PR and confirm CI. Keep the site cleanup epic open for further requests.
 
 ## Notes
 
-Current source is frozen after parallel implementation and strong review. The website has 82/82 mandatory Chromium checks passing (26.99 s), plus 17 focused layout/containment checks; the final PDF builder has 20 focused tests passing. The wider 7435×5270 Triangle poster wraps only logical rows 17–18, keeps every physical line at a uniform 252-unit pitch, uses the explicit problem statement without subtitle, and places October 8, 2026 beside the version below separated black project credits. n=211 is now a horizontal reflection of the immutable original and matches n=241; 26 focused orientation checks, exact verifiers and retained replay passed. Figure data, manifest and schema dimensions are now refreshed and enforced-schema checks pass. Documentation has been reconciled, including current 100-grid field counts. Existing PDF/SVG/PNG exports and release pin still refer to older d32 data and must be regenerated after the isolated data and pin commits. The data-only commit hook previously failed because the external UV-cache could not be created (ENOSPC); no hook was bypassed. External headroom has now returned to about 3 GiB and a real write probe succeeded. Current records tier passed 45/47 checks: Ruff is installed but missing from the direct runner PATH; suite_d has an expired pending measurement, now under independent evidence review. The current full-context PR body is retained in the unique external evidence directory. No final --push pass, final source/export commit, push, PR, fresh preview opening, or merge exists yet. Root handles records/exports/Git/beads; separate agents handle independent data/budget review, website/PR context and actual-PDF verification. Next: reviewed isolated data/pin commits; serial exports and actual visual checks; fresh lawful default-browser/PDF openings; current records and full change-reachable push gate; clean PR and exact-head CI.
+Reviewed source and freshly regenerated composite exports are committed at clean checkpoint 7900aafad on codex/atlas-triangle-default in the isolated atlas-cleanups worktree. Data commit 9695fbdd4b6f4f2216c82b3d79aedc60f118a9d2 and isolated pin commit 0a79d624 stamp both export families v0.5.0-9695fb with October 8, 2026 data. Current website passes 82 mandatory Chromium checks with zero skips and 17 focused containment checks; PDF builder passes 20 tests; n211 horizontal reflection passes 26 focused checks, exact verification and replay. All 324 frontmatter and 811 enforced datasets pass schema validation. Actual dated PDFs were independently rendered and inspected, with no clipping or collisions; retained composite and PDF byte checks are green. Fresh maintained preview has all nine canonical assets and both legacy PDF aliases byte-equal, Medium Triangle default, Grid option and current n211 motion facts. Finder is raised with the latest 324 PDF selected. Human approved the original local preview server; it is running on localhost:8799 and root HTTP headers return200, but automated browser navigation remains tool-rejected. Full current edit took524.71s with all source floors green and one failure: historical URL preservation against advanced main b810432cc, whose PR434 changes complete source/evidence for n68/n105/n292. Edit timing also exceeds its reported240s ceiling at an off-reference allocation. Records-current passed45/47 in62.54s; invalid Ruff boolean environment is now corrected, and upstream history mismatch remains. Suite-D declaration repair is independently reviewed and committed under think-pvtr; later measured performance debt stays think-t7k5. think-mcca owns complete upstream integration, awaiting explicit local-merge approval after automatic review rejected the merge under confirm-session policy. No rebase or partial-record workaround. Full push gate, push, PR and exact-head hosted CI remain pending. Full-context PR draft and unique current evidence are retained externally. Epic remains open.

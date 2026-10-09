@@ -5,7 +5,7 @@ title: Admit the verified suite-D baseline for atlas publication checks
 kind: chore
 status: in_progress
 priority: 2
-version: 2
+version: 3
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,7 +13,11 @@ parent_id: is-01m4e35s7r1e65r1qmpz250h0p
 hold: null
 hold_until: null
 created_at: 2026-10-09T01:06:21.235Z
-updated_at: 2026-10-09T01:06:39.584Z
+updated_at: 2026-10-09T01:53:46.146Z
 started_at: 2026-10-09T01:06:39.583Z
 ---
 Resolve the independent expired suite_d pending measurement that blocks current atlas records validation. Admit only the verified historical 101.34-second observation from complete green run 37613399745, attempt 1, job 112765857172 (October 7, 2026, actual checkout 33e96ced9ddf5025e47ecad8420865cf519102b8/tree 23782412f1a268956cd2bb4e323fba72cc9311b1, reference four CPUs/jobs1/inner1, one of101 steps). Keep the143-second ceiling, reference shape and policy unchanged. Both later190.63s and168.55s readings breached that ceiling despite green tests; preserve them as current performance debt under the existing owning tracker think-t7k5, and do not claim this declaration repair qualifies current performance. Strong independent evidence review accepted the narrow substitution. No unrelated n17 code, shard costs or other budget fields are imported. Run the maintained budget contract checks and include exact provenance and limits in the PR.
+
+## Notes
+
+Narrow historical suite-D observation repair is committed in7900aafad after strong independent provenance and final-diff review. Only suite_d changed: verified101.34s from complete green run37613399745/job112765857172 at actual checkout33e96ced9ddf5025e47ecad8420865cf519102b8 replaces expired pending fields;143s ceiling, four-CPU/jobs1/inner1 reference and policy remain unchanged. Maintained budget contract checks pass;91 meaningful tests pass in230.70s. Later190.63s and168.55s observations are real ceiling breaches retained under think-t7k5, which remains open; this declaration repair does not qualify current performance. Current edit gate has no budget-contract failure, but the overall run exceeds its own reported wall ceiling. Publication and exact-head hosted gates are still pending behind the separate approved-main integration task; do not claim a full green gate.

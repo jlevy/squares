@@ -5,19 +5,19 @@ title: Build and present the left-aligned atlas preview
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m4e35s7r1e65r1qmpz250h0p
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-10-08T16:06:58.392Z
-updated_at: 2026-10-09T00:10:15.453Z
+updated_at: 2026-10-09T01:53:45.462Z
 started_at: 2026-10-08T16:07:22.283Z
 ---
-Build and inspect the updated site and poster previews. Latest human request is to open the poster as a standalone web rendering in the default browser. Prepare a local HTML poster wrapper linked to the fresh retained SVG after uniform row spacing, footer and n211 corrections are rendered; determine the actual default browser before opening it. The prior CUA URL refusal applies to http://127.0.0.1:8799/papers/exact-side-values.html and must not be bypassed through another browser, port or automation surface. The newly requested standalone poster file is a distinct artifact; do not retry that website URL. Verify any actual open result, and record a permission rejection if this new artifact is refused.
+Build and verify the maintained fresh website and poster exports, then present them through user-authorized UI actions. Latest request asks Finder to show the latest PDF folder and the website in the default external browser. Respect the explicit local-website browser restriction and any app permission refusals; do not retry through another browser, port, wrapper or automation route.
 
 ## Notes
 
-Latest source refinements are active under think-hdk3, think-h0xi and think-7l3m. Previous generated site/assets and67Chromium receipts precede newrowspacing and are not claimed current. Maintainedexport external-temporaryaudit is active before fresh artifacts. DefaultHTTP andHTTPS handlers were read without UI/navigation and agree: company.thebrowser.browser (Arc). No browser was opened during lookup. NewstandaloneHTML requires the freshcanonicalposter; do not expose stale artifacts as final. Root removed only its inactive11MiB UVcache; actual externalmkdir allocation then succeeded, with df224MiB. Small checks/recordrefresh resume under realwritablepreflight; full--push still needs≥1GiB. Automaticopening of the old websiteURL remainsguard-refused.
+Current 9695fb SVG/PNG/PDF export families and maintained scratch/site overview are freshly generated and byte-verified. Finder successfully raised the known-best artifact directory in the isolated atlas-cleanups worktree and selected square-packings-324-20261008.pdf. PDF viewer opening is unconfirmed. Default HTTP/HTTPS browser lookup reports Arc, but CUA refused app access; local website navigation and an IAB file-SVG attempt were also explicitly refused. Automatic approval initially rejected the preview server because it would facilitate retrying the denied browser action. The human subsequently explicitly approved starting the exact original localhost:8799 server for manual review, and that server now runs as PTY64736. Root headers return200; the fresh overview index defaults to Medium Triangle and has the Grid option. Manual review URL is http://127.0.0.1:8799/#the-atlas. The obsolete ambient papers/exact-side-values.html is absent in this maintained build. No automated browser navigation or default external browser opening has succeeded. The separate upstream local-merge approval remains pending; current previews accurately retain their own v0.5.0-9695fb edition until source integration and refresh.
