@@ -96,6 +96,7 @@ async (/** @type {{rows: string[]}} */ { rows }) => {
         ? null
         : round(box.bottom - Number.parseFloat(style.paddingBottom) - content.bottom),
       approx: [...cell.querySelectorAll(".site-approx")].map(words),
+      notes: [...cell.querySelectorAll(".site-frontier-note")].map(words),
       broken: broken(cell),
     };
   };
