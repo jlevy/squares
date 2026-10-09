@@ -1215,13 +1215,16 @@ def root_files() -> tuple[Path, ...]:
 # `validate_schemas`' missing-archive cross-checks, the operating-rules append script
 # and `test_change_scoped_selection`.
 #
-# What option (b) cannot do is restore a margin. Of the 109.9 MB the packing walk
-# copies, 34.4 MB is neither inline-linked nor registered, and almost all of that is
-# code, tests, witnesses and the frontier; this selection is most of the rest. The other
-# lever is rescue scope: 16.6 MB is copied back only because `docs/` reviews and
-# research link it, 12 MB of it from the archive. Two readers hide there, and both are
-# why `tests/test_snapshot_link_consumers.py` keeps archive custody: `check_gate_budgets`
-# opens the two workflows `defects.md` links, and `ledger check` stats the original n11
+# What option (b) cannot do is restore a margin. Measured before this selection, of the
+# 109.9 MB the packing walk copied, 34.4 MB was neither inline-linked nor registered, and
+# almost all of that is code, tests, witnesses and the frontier; this selection is most
+# of the rest. The other lever is rescue scope: 16.6 MB is copied back only because root
+# documents, `docs/` reviews and research link it, 12 MB of it from the archive. Two
+# readers hide there, and both are why `tests/test_snapshot_link_consumers.py` keeps
+# archive custody: `check_gate_budgets` opens `.github/workflows/pages.yml` and
+# `.github/workflows/packing-validation.yml`, the two workflows its wall register names,
+# which reach workers only through the 2026-09-12 workbench stack architecture review's
+# link and `defects.md`'s links respectively; and `ledger check` stats the original n11
 # review, which campaign Markdown reaches only through `#fragment` links that
 # `INLINE_LINK` does not match. Narrowing that rule needs those fixed first.
 #
