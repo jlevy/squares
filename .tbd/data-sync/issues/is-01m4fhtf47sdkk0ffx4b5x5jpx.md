@@ -3,9 +3,9 @@ type: is
 id: is-01m4fhtf47sdkk0ffx4b5x5jpx
 title: Unadopted better results render as superseded (T-128, T-130)
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -13,10 +13,10 @@ parent_id: is-01m4fdxw81pt2v4k29y9n58rn6
 hold: null
 hold_until: null
 created_at: 2026-10-09T05:22:52.167Z
-updated_at: 2026-10-09T07:00:06.923Z
+updated_at: 2026-10-09T19:13:59.858Z
 started_at: 2026-10-09T05:23:17.911Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-09T19:13:59.858Z
+close_reason: Fixed and merged in stack 430 (main d3860c97a)
 resolution: null
 duplicate_of: null
 ---
