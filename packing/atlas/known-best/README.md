@@ -69,10 +69,11 @@ of outside clearance keep the grid labels inside the page margins.
 One dark $R$ means known rigid; its verification status, dates and sources remain in the
 structured metadata.
 The two-line definition uses 57-unit type; the following legend, credits and closing use
-48-unit type. Normalized leading is 1.50 for the definition and credits, 1.60 for the
-legend and 1.75 for the closing.
-Section gaps remain clear; the packing drawings and card captions keep their original
-scale. The triangle’s bound captions use five decimal places, one fewer than the figure,
+48-unit type in one shared Arial-first body font at weight 700. The definition and all
+body lines use normalized leading 1.50, giving the 48-unit lines a uniform 72-unit
+baseline pitch. Section gaps remain clear; the packing drawings and card captions keep
+their original scale.
+The triangle’s bound captions use five decimal places, one fewer than the figure,
 leaving room for the algebraic degree; a longer degree label can shorten the adjacent
 side caption to four places.
 Upper bounds round upward and lower bounds downward; stored bounds retain their full
@@ -85,8 +86,9 @@ The nine construction source keys remain in the metadata and the separate biblio
 A section gap separates the credits from the diagram credit, followed by the data date,
 a middle dot and the generated edition stamp.
 A blank line precedes exactly “The Squares Project” and “github.com/jlevy/squares”.
-Both lines use identical 48-unit regular Arial-first black text, without a hyperlink or
-PDF annotation, and end flush with the information block’s right edge.
+Both lines use the same 48-unit body font, weight and leading as the legend and credits.
+They are plain black text without a hyperlink or PDF annotation, and end flush with the
+information block’s right edge.
 The poster has no subtitle.
 Its two-line definition appears above the legend: “The square packing problem asks for
 the side $s(n)$ of the smallest square that can hold $n$ unit squares, where the squares

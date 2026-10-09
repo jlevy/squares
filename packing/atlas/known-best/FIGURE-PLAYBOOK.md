@@ -389,13 +389,13 @@ All informational text occupies the upper-right block at $x = 4681..7281$,
 $y = 120..2311$: title, all badge meanings and counts, hue and shade keys, explanation,
 construction credits and closing project details.
 The 2600-unit block uses 144-unit title type, 57-unit type for the two-line definition,
-and 48-unit type for every subsequent legend, credit and closing line.
-The first two tilt swatches contain black 90° and 45° labels, shared with the website
-and the grid figure.
+and 48-unit type for every subsequent legend, credit and closing line, all in the same
+Arial-first body font at weight 700. The first two tilt swatches contain black 90° and
+45° labels, shared with the website and the grid figure.
 The information ends at $x = 7281$, exactly the right edge of the last drawing; card
 boundaries include additional caption room.
-Normalized leading is 1.50 for the definition and credits, 1.60 for the legend and 1.75
-for the closing, with clear gaps between sections.
+The definition and every body line use normalized leading 1.50. All 48-unit lines have a
+72-unit baseline pitch, with clear gaps between sections.
 Rendering refuses lines wider than the block, overlapping documentation lines and text
 that intersects a card.
 The problem definition reads: “The square packing problem asks for the side $s(n)$ of
@@ -407,21 +407,23 @@ The legend uses the same eight semantic items as the website, in two left-aligne
 columns: four status rows and four recency, color and degree rows.
 The final right-column item is the unbadged text “deg is the algebraic degree of that
 side length.”
-Its four row baselines are 780, 856.8, 933.6 and 1010.4. “Best packings due
-to” begins three balanced construction-credit lines at 1326, 1398 and 1470. Complete
-canonical names stay intact and all twenty recorded finders and improvers appear once,
-newest first by each author’s latest attributed found or source date.
+Its four row baselines are 780, 852, 924 and 996, at the same 72-unit pitch
+as the other body text.
+“Best packings due to” begins three balanced construction-credit lines at 1326, 1398 and
+1470\. Complete canonical names stay intact and all twenty recorded finders and
+improvers appear once, newest first by each author’s latest attributed found or source
+date.
 Balancing preserves this order; a later improver’s source does not redate inherited
 authors.
 The visible list has no bracketed citations; all nine full source keys remain in
 the SVG metadata and the separate bibliography.
 A 180-unit section gap separates the credits from “Diagram by Joshua Levy” at 1650. The
-data date, a middle dot and the generated edition follow at 1734. An ordinary blank line
-separates that stamp from exactly “The Squares Project” at 1902 and
-“github.com/jlevy/squares” at 1986. Both final lines use the same 48-unit regular
-Arial-first black text through one plain-text rendering path, without a hyperlink or PDF
-annotation. Arial’s measured slash advances match the embedded PDF font; the address’s
-final glyph ends flush with the information block’s right edge.
+data date, a middle dot and the generated edition follow at 1722. An ordinary blank line
+separates that stamp from exactly “The Squares Project” at 1866 and
+“github.com/jlevy/squares” at 1938. Both final lines use the same 48-unit body font,
+weight 700 and 72-unit pitch as the legend and credits.
+They are plain black text without a hyperlink or PDF annotation; the address’s final
+glyph ends flush with the information block’s right edge.
 The final line’s lower extent stays inside the block’s 2311-unit bottom.
 The rectangle clears row ten’s rightmost card by 102 units and ends 77 units above that
 row.

@@ -400,27 +400,24 @@ SUMMARY_SUBTITLE_BASELINE = Decimal(148)
 #: uses one smaller type step, preserving card scale and the spacious baselines.
 POSTER_INFORMATION_TYPE_SCALE = Decimal(3)
 POSTER_TITLE_SIZE = "144"
-POSTER_FOOTER_SIZE = "48"
+POSTER_BODY_FONT = "Arial, Helvetica, sans-serif"
+POSTER_BODY_SIZE = "48"
+POSTER_BODY_WEIGHT = "700"
+POSTER_BODY_LINE_HEIGHT_RATIO = Decimal("1.50")
+POSTER_BODY_LINE_PITCH = Decimal(POSTER_BODY_SIZE) * POSTER_BODY_LINE_HEIGHT_RATIO
 # Finite scale keeps the two column edges and their explicit gap exact in Decimal.
-POSTER_LEGEND_TYPE_SCALE = (
-    Decimal(POSTER_FOOTER_SIZE) / Decimal(SUMMARY_FOOTER_SIZE)
-).quantize(Decimal("0.000001"), rounding=ROUND_HALF_EVEN)
+POSTER_LEGEND_TYPE_SCALE = (Decimal(POSTER_BODY_SIZE) / Decimal(SUMMARY_FOOTER_SIZE)).quantize(
+    Decimal("0.000001"), rounding=ROUND_HALF_EVEN
+)
 POSTER_PROBLEM_SIZE = "57"
-POSTER_PROBLEM_LINE_HEIGHT_RATIO = Decimal("1.50")
-POSTER_DOCUMENTATION_LINE_HEIGHT_RATIO = Decimal("1.50")
-POSTER_LEGEND_LINE_HEIGHT_RATIO = Decimal("1.60")
-POSTER_CLOSING_LINE_HEIGHT_RATIO = Decimal("1.75")
-POSTER_PROBLEM_LINE_PITCH = Decimal(POSTER_PROBLEM_SIZE) * POSTER_PROBLEM_LINE_HEIGHT_RATIO
+POSTER_PROBLEM_LINE_PITCH = Decimal(POSTER_PROBLEM_SIZE) * POSTER_BODY_LINE_HEIGHT_RATIO
 POSTER_INFORMATION_WIDTH = Decimal(2600)
 POSTER_INFORMATION_TOP = POSTER_OUTER_MARGIN
 POSTER_INFORMATION_BOTTOM = POSTER_INFORMATION_TOP + Decimal(2191)
 POSTER_TITLE_BASELINE = POSTER_INFORMATION_TOP + Decimal(144)
 POSTER_LEGEND_BASELINE = POSTER_INFORMATION_TOP + Decimal(660)
-POSTER_LEGEND_ROW_PITCH = Decimal(POSTER_FOOTER_SIZE) * POSTER_LEGEND_LINE_HEIGHT_RATIO
 POSTER_LEGEND_COLUMN_GAP = Decimal(180)
 POSTER_EXPLAINER_BASELINE = POSTER_INFORMATION_TOP + Decimal(360)
-POSTER_FOOTER_LINE_PITCH = Decimal(POSTER_FOOTER_SIZE) * POSTER_DOCUMENTATION_LINE_HEIGHT_RATIO
-POSTER_CLOSING_LINE_PITCH = Decimal(POSTER_FOOTER_SIZE) * POSTER_CLOSING_LINE_HEIGHT_RATIO
 POSTER_PACKING_CREDITS_BASELINE = POSTER_INFORMATION_TOP + Decimal(1206)
 POSTER_PACKING_CREDITS_LINE_COUNT = 3
 POSTER_PACKING_CREDITS_PREFIX = "Best packings due to"
@@ -852,7 +849,7 @@ class CompositeCanvas:
     @property
     def citations_baseline(self) -> Decimal:
         if self.information_in_corner:
-            return self.stamp_baseline + 2 * POSTER_CLOSING_LINE_PITCH
+            return self.stamp_baseline + 2 * POSTER_BODY_LINE_PITCH
         return self.explainer_baseline + SUMMARY_FOOTER_LINE_PITCH
 
     @property
@@ -860,7 +857,7 @@ class CompositeCanvas:
         if self.information_in_corner:
             return (
                 POSTER_PACKING_CREDITS_BASELINE
-                + POSTER_FOOTER_LINE_PITCH * (POSTER_PACKING_CREDITS_LINE_COUNT - 1)
+                + POSTER_BODY_LINE_PITCH * (POSTER_PACKING_CREDITS_LINE_COUNT - 1)
                 + POSTER_PACKING_CREDITS_SECTION_GAP
             )
         return self.citations_baseline + SUMMARY_FOOTER_LINE_PITCH
@@ -868,9 +865,7 @@ class CompositeCanvas:
     @property
     def stamp_baseline(self) -> Decimal:
         pitch = (
-            POSTER_CLOSING_LINE_PITCH
-            if self.information_in_corner
-            else SUMMARY_FOOTER_LINE_PITCH
+            POSTER_BODY_LINE_PITCH if self.information_in_corner else SUMMARY_FOOTER_LINE_PITCH
         )
         return self.credit_baseline + pitch
 
@@ -2232,6 +2227,8 @@ def _append_badge(
     x: Decimal,
     top: Decimal,
     type_scale: Decimal = Decimal(1),
+    font_family: str = SUMMARY_FONT,
+    font_weight: str = "650",
     accent: str | None = None,
 ) -> None:
     """Draw one badge at an explicit box top.
@@ -2286,9 +2283,9 @@ def _append_badge(
             "x": format_svg_number(x + size / 2),
             "y": format_svg_number(top + _badge_baseline(glyph) * type_scale),
             "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
+            "font-family": font_family,
             "font-size": format_svg_number(SUMMARY_BADGE_FONT_SIZE * type_scale),
-            "font-weight": "650",
+            "font-weight": font_weight,
             "fill": glyph_fill,
         },
     ).text = glyph
@@ -2304,6 +2301,9 @@ def _legend_row(
     left_edge: Decimal | None = None,
     type_scale: Decimal = Decimal(1),
     label_size: str | None = None,
+    font_family: str = SUMMARY_FONT,
+    font_weight: str = SUMMARY_FOOTER_WEIGHT,
+    mark_font_weight: str = "650",
 ) -> None:
     """Lay one legend row centered on the canvas or ending at a right edge.
 
@@ -2349,7 +2349,17 @@ def _legend_row(
             run_end = cursor
         elif isinstance(mark, tuple):
             glyph, style, name = mark
-            _append_badge(legend, glyph, style, name, x=cursor, top=top, type_scale=type_scale)
+            _append_badge(
+                legend,
+                glyph,
+                style,
+                name,
+                x=cursor,
+                top=top,
+                type_scale=type_scale,
+                font_family=font_family,
+                font_weight=mark_font_weight,
+            )
             run_end = cursor + badge_size
         else:
             run_end = cursor
@@ -2380,9 +2390,9 @@ def _legend_row(
                             "x": format_svg_number(run_end + badge_size / 2),
                             "y": format_svg_number(top + Decimal("13.4") * type_scale),
                             "text-anchor": "middle",
-                            "font-family": SUMMARY_FONT,
+                            "font-family": font_family,
                             "font-size": numeral_size,
-                            "font-weight": "650",
+                            "font-weight": mark_font_weight,
                             "fill": "#000000"
                             if numeral in {"90°", "45°"}
                             else PAPER_THEME.background
@@ -2408,9 +2418,9 @@ def _legend_row(
                     if right_edge is not None
                     else {}
                 ),
-                "font-family": SUMMARY_FONT,
+                "font-family": font_family,
                 "font-size": footer_size,
-                "font-weight": SUMMARY_FOOTER_WEIGHT,
+                "font-weight": font_weight,
                 "fill": SUMMARY_SMALL_FILL,
             },
         ).text = label
@@ -2482,11 +2492,11 @@ def _append_summary_legend(
 
         def row_width(item: LegendItem) -> Decimal:
             if item.marker is None:
-                return _text_width(item.text, POSTER_FOOTER_SIZE)
+                return _text_width(item.text, POSTER_BODY_SIZE)
             return (
                 badge_size * (len(item.marker_values) if item.marker_values else 1)
                 + mark_gap
-                + _text_width(item.text, POSTER_FOOTER_SIZE)
+                + _text_width(item.text, POSTER_BODY_SIZE)
             )
 
         widths = [
@@ -2514,11 +2524,14 @@ def _append_summary_legend(
                 _legend_row(
                     column,
                     [entry(item)],
-                    baseline=canvas.legend_baseline + POSTER_LEGEND_ROW_PITCH * index,
+                    baseline=canvas.legend_baseline + POSTER_BODY_LINE_PITCH * index,
                     canvas_width=canvas.width,
                     left_edge=cursor,
                     type_scale=POSTER_LEGEND_TYPE_SCALE,
-                    label_size=POSTER_FOOTER_SIZE,
+                    label_size=POSTER_BODY_SIZE,
+                    font_family=POSTER_BODY_FONT,
+                    font_weight=POSTER_BODY_WEIGHT,
+                    mark_font_weight=POSTER_BODY_WEIGHT,
                 )
             cursor += width + POSTER_LEGEND_COLUMN_GAP
     else:
@@ -2816,7 +2829,7 @@ def _poster_credit_lines(packing_credits: Sequence[PackingCredit]) -> tuple[str,
             + ("." if index == line_count - 1 else ",")
             for index, group in enumerate(groups)
         )
-        widths = tuple(_text_width(line, POSTER_FOOTER_SIZE) for line in lines)
+        widths = tuple(_text_width(line, POSTER_BODY_SIZE) for line in lines)
         mean = sum(widths, Decimal(0)) / line_count
         score = sum(((width - mean) ** 2 for width in widths), Decimal(0))
         return lines, widths, score
@@ -2849,20 +2862,20 @@ def _append_poster_information(
     packing_credits = _poster_packing_credits(canvas.spec.first_n, canvas.spec.last_n)
     credit_lines = _poster_credit_lines(packing_credits)
     credit_baselines = [
-        POSTER_PACKING_CREDITS_BASELINE + POSTER_FOOTER_LINE_PITCH * index
+        POSTER_PACKING_CREDITS_BASELINE + POSTER_BODY_LINE_PITCH * index
         for index in range(len(credit_lines))
     ]
     explainer_baselines = [
         canvas.explainer_baseline + POSTER_PROBLEM_LINE_PITCH * index
         for index in range(len(POSTER_EXPLAINER_LINES))
     ]
-    repository_baseline = canvas.citations_baseline + POSTER_CLOSING_LINE_PITCH
-    font_size = Decimal(POSTER_FOOTER_SIZE)
+    repository_baseline = canvas.citations_baseline + POSTER_BODY_LINE_PITCH
+    font_size = Decimal(POSTER_BODY_SIZE)
     document_lines = [
         (POSTER_TITLE_BASELINE, Decimal(POSTER_TITLE_SIZE)),
         *((baseline, Decimal(POSTER_PROBLEM_SIZE)) for baseline in explainer_baselines),
         *(
-            (canvas.legend_baseline + POSTER_LEGEND_ROW_PITCH * index, font_size)
+            (canvas.legend_baseline + POSTER_BODY_LINE_PITCH * index, font_size)
             for index in range(4)
         ),
         *((baseline, font_size) for baseline in credit_baselines),
@@ -2900,7 +2913,7 @@ def _append_poster_information(
         feature: str,
         content: str,
         baseline: Decimal,
-        size: str = POSTER_FOOTER_SIZE,
+        size: str = POSTER_BODY_SIZE,
         *,
         parent: ET.Element | None = None,
     ) -> ET.Element:
@@ -2936,13 +2949,11 @@ def _append_poster_information(
                 "x": format_svg_number(right),
                 "y": format_svg_number(baseline),
                 "text-anchor": "end",
-                # The two project-reference lines share one plain style. Arial also
-                # keeps Quartz's slash advances consistent in the printed address.
-                "font-family": POSTER_ITALIC_FONT
-                if feature in {"citations", "repository"}
-                else SUMMARY_FONT,
+                "font-family": SUMMARY_FONT if feature == "poster-title" else POSTER_BODY_FONT,
                 "font-size": size,
-                "font-weight": "400" if feature in {"citations", "repository"} else "700",
+                "font-weight": SUMMARY_FOOTER_WEIGHT
+                if feature == "poster-title"
+                else POSTER_BODY_WEIGHT,
                 "fill": "#000000"
                 if feature in {"citations", "repository"}
                 else PAPER_THEME.ink
