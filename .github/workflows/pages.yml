@@ -494,10 +494,11 @@ jobs:
       - name: Install the pinned Chromium headless shell
         run: uv run --frozen --group dev python -m playwright install --only-shell chromium
 
-      - name: Check the exact-values renderer and complete lazy data projection
+      - name: Check the exact-values renderer, lazy data projection and print refusal
         env:
           SQPACK_EXACT_SIDE_VALUES_BROWSER: "1"
-        run: uv run --frozen --all-extras --group dev pytest -q tests/test_render_exact_side_values.py tests/test_exact_catalogue.py
+          SQPACK_REQUIRE_CHROMIUM: "1"
+        run: uv run --frozen --all-extras --group dev pytest -q tests/test_render_exact_side_values.py tests/test_exact_catalogue.py tests/test_exact_side_values_print.py
 
       # The canonical HTML is the compact browser. The complete HTML/Markdown/PDF
       # archives and the index, script, metadata and coefficient payloads travel together.

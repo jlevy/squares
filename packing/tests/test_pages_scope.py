@@ -277,8 +277,6 @@ def test_exact_values_inputs_select_the_complete_paper_job(
     declared: dict[str, tuple[Path, ...]],
 ) -> None:
     for changed in (
-        "packing/devtools/render_exact_side_values.py",
-        "packing/devtools/exact_catalogue.py",
         "packing/devtools/templates/exact-side-values-article.md",
         "packing/devtools/templates/exact-side-values-shell.html",
         "packing/devtools/templates/exact-side-values.css",
@@ -288,6 +286,16 @@ def test_exact_values_inputs_select_the_complete_paper_job(
         "packing/tests/test_render_exact_side_values.py",
     ):
         assert in_scope([changed], declared) == {"exact_side_values"}, changed
+    # The shared URL and script inventories read the catalogue source contract.
+    # Every page whose publication checks consume it must run when those producers change.
+    for changed in (
+        "packing/devtools/render_exact_side_values.py",
+        "packing/devtools/exact_catalogue.py",
+    ):
+        assert in_scope([changed], declared) == set(pages_scope.BUILDER_INPUTS)
+    assert in_scope(["packing/tests/test_exact_side_values_print.py"], declared) == {
+        "exact_side_values"
+    }
     assert in_scope(["packing/frontier/exact-values.json"], declared) == {
         "exact_side_values",
         "overview",
