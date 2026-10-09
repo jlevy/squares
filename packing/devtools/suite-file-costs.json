@@ -159,6 +159,8 @@
     "packing/tests/test_corner_ownership_audit.py": 0.409,
     "packing/tests/test_count_cell_occupancies.py": 0.017,
     "packing/tests/test_count_grid_symmetry.py": 0.023,
+    "packing/tests/test_couzo_custody.py": 1.236,
+    "packing/tests/test_couzo_refinement_reports.py": 0.214,
     "packing/tests/test_cover.py": 0.006,
     "packing/tests/test_covering_queue.py": 0.134,
     "packing/tests/test_cpu_durations.py": 2.85,
@@ -478,6 +480,7 @@
     "packing/tests/test_rectangle_verifier_parity.py": 0.019,
     "packing/tests/test_refinement_custody.py": 4.273,
     "packing/tests/test_regenerate_sites1_checkpoint.py": 0.06,
+    "packing/tests/test_register_couzo_refinement_report.py": 1.823,
     "packing/tests/test_register_prose.py": 1.617,
     "packing/tests/test_regression_diagnostics.py": 0.02,
     "packing/tests/test_regularize_axis_components.py": 0.116,
@@ -1059,6 +1062,32 @@
           "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr448-2026-10-09-run3.json",
           "provenance": {},
           "tests": 45
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_couzo_custody.py",
+        "packing/tests/test_couzo_refinement_reports.py",
+        "packing/tests/test_register_couzo_refinement_report.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr460-2026-10-09-run1.json",
+          "provenance": {},
+          "tests": 27
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr460-2026-10-09-run2.json",
+          "provenance": {},
+          "tests": 27
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr460-2026-10-09-run3.json",
+          "provenance": {},
+          "tests": 27
         }
       ]
     }
