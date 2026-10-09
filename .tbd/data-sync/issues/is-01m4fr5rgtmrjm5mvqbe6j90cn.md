@@ -5,7 +5,7 @@ title: Refine case popover math, status order, and navigation arrows
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-09T07:13:53.665Z
-updated_at: 2026-10-09T07:14:10.682Z
+updated_at: 2026-10-09T07:15:26.050Z
 started_at: 2026-10-09T07:14:10.664Z
 ---
-Render the case count n as prominent mathematical notation; order status icons first, star and notes next, and textual tags last; use consistent right arrows on all case popover destination buttons. Preserve case/frontier/atlas destinations and keyboard behavior. Verify the local draft at desktop and mobile widths.
+Center the small Case Record label above a larger properly typeset n=count formula. Place case icons first, followed by the star and notes, then textual status tags such as proved. Give all bottom destination actions the same right-arrow design. Remove All cases from case navigation; make Atlas the case directory and forward old directory URLs while retaining individual canonical case records. Verify local desktop/mobile rendering, keyboard stepping, and compatibility destinations.
