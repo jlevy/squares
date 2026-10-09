@@ -3,9 +3,9 @@ type: is
 id: is-01m4e36h18crs5ws6c0fm80afy
 title: Review and validate the atlas site cleanups
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 40
+version: 42
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -25,11 +25,15 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T15:48:04.263Z
-updated_at: 2026-10-09T13:44:09.924Z
+updated_at: 2026-10-09T13:47:16.884Z
 started_at: 2026-10-08T15:49:07.449Z
+closed_at: 2026-10-09T13:47:16.883Z
+close_reason: Implemented, independently reviewed and qualified for PR474 source 6ccbbf000f0c9b48f2985c07c9893f98fe73ba92 against main 6a0499ba4; combined tree c65da41410e89a8dedffe93d3c1e153adb05096d. Local named push 65/65 and hosted 93 fast + 13 actual deferred (106) plus Pages passed; final readiness receipts recorded. Acceptance parent closed last; protected epic/followups remain open. PR474 is now ready for review and immediately reads MERGEABLE/CLEAN; source and current main remain the qualified revisions. The GitHub PR is not merged.
+resolution: null
+duplicate_of: null
 ---
 Review source changes and exported atlas, run focused checks and the change-reachable gate, then commit/push a focused PR and confirm CI. Keep the site cleanup epic open for further requests.
 
 ## Notes
 
-Final source 6ccbbf000f0c9b48f2985c07c9893f98fe73ba92 is qualified against current main 6a0499ba4, with tree c65da41410e89a8dedffe93d3c1e153adb05096d. The final incremental push tier passed all 65 selected steps in 636.30 seconds (6,562 normal tests and three selected pool tests); the broader parent push receipt remains separately attributed. Hosted Fast 37934097685 passed 93 canonical steps, actual deferred dispatch 37934242931 passed 13 unique steps, and Pages 37934097749 passed, all on immutable combined checkout 1df1783aaba9acbe6f8f6299b0748a7ba32f864c with the final tree. The hosted frontier dark desktop CLS is 0.0000352 under the unchanged 0.1 guard. Independent senior, security, correctness and performance source reviews accept the bounded final changes; formal review records and A1 disposition are on PR474. Final readiness audit found no unresolved findings or unexpected check providers. The existing manual preview is rebuilt and verified without browser automation. Source, PDF edition and scientific claims are unchanged by this final font repair. Earlier failed and interrupted receipts remain retained; the slow-worker reporting-band overage (1,294 versus 1,250 seconds) remains under think-haam. Implemented and superseded children are closing; the epic, alternative intake and blocked automation follow-ups remain open. No GitHub merge is part of this task. PR: https://github.com/jlevy/squares/pull/474. Final publication status is recorded in the close reason.
+Final source 6ccbbf000f0c9b48f2985c07c9893f98fe73ba92 is qualified against current main 6a0499ba4, with tree c65da41410e89a8dedffe93d3c1e153adb05096d. The final incremental push tier passed all 65 selected steps in 636.30 seconds (6,562 normal tests and three selected pool tests); the broader parent push receipt remains separately attributed. Hosted Fast 37934097685 passed 93 canonical steps, actual deferred dispatch 37934242931 passed 13 unique steps, and Pages 37934097749 passed, all on immutable combined checkout 1df1783aaba9acbe6f8f6299b0748a7ba32f864c with the final tree. The hosted frontier dark desktop CLS is 0.0000352 under the unchanged 0.1 guard. Independent senior, security, correctness and performance source reviews accept the bounded final changes; formal review records and A1 disposition are on PR474. Final readiness audit found no unresolved findings or unexpected check providers. The existing manual preview is rebuilt and verified without browser automation. Source, PDF edition and scientific claims are unchanged by this final font repair. Earlier failed and interrupted receipts remain retained; the slow-worker reporting-band overage (1,294 versus 1,250 seconds) remains under think-haam. All 42 completed child beads and six superseded experiments are closed; the epic, alternative intake and blocked automation follow-ups remain open. No GitHub merge is part of this task. PR: https://github.com/jlevy/squares/pull/474. PR474 is now ready for review, with unchanged source and target, MERGEABLE/CLEAN immediate publication readback and the exact final description published. The acceptance parent closes after its children; the final independent post-ready readback is retained separately.
