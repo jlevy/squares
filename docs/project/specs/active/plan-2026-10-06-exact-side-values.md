@@ -1,6 +1,6 @@
 # Exact Side Values: Collection, Publication and Remaining Identification
 
-**Date:** 2026-10-06 (last updated 2026-10-09)
+**Date:** 2026-10-06 (last updated 2026-10-10)
 
 **Author:** Joshua Levy, with Claude, GPT-5.6 Sol, GPT-6.1 Sol and GPT-6 Astra
 
@@ -10,8 +10,8 @@ lanes remain open.
 ## Scope and Current Result
 
 The formal stack is `main` → PR 403 (`claude/friendly-sagan-jk7qzy`) → PR 435
-(`codex/exact-polynomial-coverage`). Workflow entry is W1 `research-survey` for
-source collection and W7 `pipeline-improvement` for record and publication maintenance.
+(`codex/exact-polynomial-coverage`). Workflow entry is W1 `research-survey` for source
+collection and W7 `pipeline-improvement` for record and publication maintenance.
 Future identification experiments enter W6 with their own preregistered acceptance rule.
 
 Every exact fact the repository holds about the side $s$ of a best known packing
@@ -19,7 +19,8 @@ Every exact fact the repository holds about the side $s$ of a best known packing
 generated register. The register checks each fact mathematically and is published as a
 web report with typeset mathematics and tables.
 The frontier records are backfilled until no derivable fact is missing from them, and
-the import process regenerates the register and the paper whenever a result changes one.
+the import process regenerates the register and web report whenever a result changes
+one.
 
 The [register](../../../../packing/frontier/exact-values.json.gz) covers all current
 cases $n = 1\ldots324$ and retains source polynomials for larger counts separately.
@@ -35,7 +36,7 @@ of that corpus, not a claim that every polynomial ever published has been found.
 ## Current Register and Continuation
 
 The parent refresh integrates `origin/main` at
-`0f16c033a87464cfab127ba54748ca5e2536babd`. Its regenerated register covers 324 cases:
+`657cc486130e9020608ff244d8a86d1d04153634`. Its regenerated register covers 324 cases:
 176 integer, 72 rational, 60 closed-form, 12 minimal-polynomial, one degree-only and
 three numeric-only values.
 It certifies 320 exact polynomial roots.
@@ -68,8 +69,8 @@ They have no admitted geometry or Lean replay and remain V0/C0, under `think-8sm
 $n = 102$ is now superseded by the current RyXu finite bound; its original coefficients,
 root cell, source flags and V0/C0 envelope remain historical evidence.
 
-The parent retains 28 additional identities: that superseded Daniel root and 27
-nonselected finite certificates.
+The parent retains 30 additional source occurrences: that superseded Daniel root and 29
+nonselected finite certificates representing 28 distinct rational sides.
 Eight RyXu, three Gupta and three Daniel T-129 certificates are superseded.
 Eight Couzo T-128 and five Couzo T-130 offers improve current finite sides and remain
 pending adoption, with native replay retained and V0/C0 geometry-adoption status.
@@ -77,10 +78,19 @@ Both distinct offers at $n = 105$ are preserved.
 `think-lhtz` owns independent replay review and the V3/C3 adoption/atlas slice for T-128
 and T-130; `think-0mlq` owns T-128 historical source-house custody.
 T-130 import `think-88r0` is closed after PR 469 merged; adoption remains open.
-The 58 finite rational source identities partition into 31 selected current, 14
-superseded and 13 pending certificates; the separate current $n = 51$ radical brings the
-adopted-current backfill to 32. The certificate envelope keeps its source pin, facts,
-original certificate, receipt, assurance, replay and adoption status.
+The 60 finite rational certificate occurrences partition into 31 selected current, 14
+superseded and 15 pending certificates representing 14 distinct pending bounds.
+PR 478 adds Daniel’s source-only $n = 132$ certificate as T-131 and a separate $n = 155$
+certificate as evidence for T-128. The latter has the same exact side as Couzo’s
+retained offer, with distinct source and replay custody; equal sides establish no
+local-minimum or motion equivalence.
+Both remain V0/C0 pending adoption.
+The existing `think-kkj2` owns independent review and adoption of T-131 at $n = 132$,
+preserving T-098 as historical evidence; `think-iyij` retains the import/reply work.
+The original Couzo adoption and historical-house owners remain `think-lhtz` and
+`think-0mlq`. The separate current $n = 51$ radical brings the adopted-current backfill
+to 32. The certificate envelope keeps its source pin, facts, original certificate,
+receipt, assurance, replay and adoption status.
 Source retention is not frontier promotion.
 
 The merged Rehwaldt $n = 68$ v1.2 packet contains a multivariate rational polynomial
@@ -91,15 +101,35 @@ not packing-side identities.
 Whole-net native replay, review and adoption remain separate (`think-ndvg` at 27).
 Couzo’s retained extended-range decimal poses are outside this register’s $1..324$ range
 and do not create inferred exact linear identities.
-The later reports at $n = 375,378$ from revision `2d32a6e` are not retained in the
-pinned `ffd900d` packet; `think-1545` owns their intake and supersession design.
+PR 479 retains the later reports at $n = 375,378$ from revision `2d32a6e` as derived
+decimal facts and current beyond-horizon rows.
+They supersede the dated `ffd900d` reports, which remain historical; `think-1545` owns
+the outside-corpus reader work.
+These source reports supply neither geometry replay nor exact side identities, and they
+change none of the 324 selected cases.
 
 The child [PR 435](https://github.com/jlevy/squares/pull/435) contains the complete
 degree-672 polynomial at $n = 83$, the web report and retained source history.
-Its final current and historical census must be regenerated after this parent refresh.
+The independently audited child census is 324 current rows and 214 historical rows: 186
+superseded, 18 unreconciled source, seven outside the frontier and three source-invalid.
+Its current partition is 176 integer, 72 rational, 60 closed-form, 13
+minimal-polynomial, zero degree-only and three numeric-only values.
+All 175 earlier historical identities survive; 29 nonselected certificate occurrences
+and ten newly displaced catalogue identities add 39 historical rows.
+The full register retains 538 records, 560 coefficient vectors and 6,378 integer
+coefficient strings in 2,821,903 decoded bytes / 843,684 gzip bytes.
+At $n = 83$, all 673 coefficients remain intact, including the 724-digit integer.
+Source ordinal 27 remains explicitly uncounted independently (`think-chsu`).
+
 Publication is a web report on Papers with full mathematics and lazy source details; no
 report PDF is generated.
-Superseded rows remain in the canonical register and are omitted from the public table.
+The public subset has 352 records: all 324 current rows and 28 relevant source rows,
+with 352 coefficient vectors and 2,128 integer strings.
+It omits the 186 superseded rows and 22 redundant current superseded notes while the
+canonical register retains them in full.
+Pending adoption remains visibly V0/C0; retained replay is not global optimality.
+Final web reconstruction and responsive qualification must use the clean published child
+head.
 
 The selected next entry is W7 driver delivery in `think-s6np`, then an independent
 contact-derived $n = 11$ octic control, then one preregistered bounded current RyXu
@@ -154,19 +184,68 @@ refreshed stack.
   regenerates the register and the paper at Stage 5. The fast gate fails if the register
   drifts from the records.
 
-- **Gaps mapped:** every numeric-only $n$, and $n = 83$, has a named route to an exact
-  value and an open bead that owns it.
+- **Gaps mapped:** each numeric-only $n = 29,55,71$ has a named route to an exact value
+  and an open bead that owns it.
+  The $n = 83$ identity is complete; independent source-index counting remains optional
+  under `think-chsu`.
+
+## Resumed Upstream Checkpoint, 2026-10-10
+
+The resumed integration uses fixed main `657cc486130e9020608ff244d8a86d1d04153634`,
+including PR 478’s record-hunt evidence and PR 482’s n=17 completion plan.
+The previous fixed checkpoint was `1871b14dc`; its source and validation receipts remain
+dated. The source-only n=132 and second n=155 certificate occurrences do not replace
+current sides or alter any case status, lower bound or global proof claim.
+
+The external volume disconnected twice during qualification.
+Parent hosted checks and its full checkpoint passed at f378; its local reachable-test
+timeout remains a negative receipt.
+The amended child at 4819 completed web reconstruction, while its one local push attempt
+ended with exit 138 during the second disconnect before an edit-tier verdict.
+Source heads survived both interruptions; no internal scratch fallback was used.
+Qualification of this resumed stack requires fresh final-head local checks, automatic PR
+checks and the full hosted checkpoint.
+
+The resumed parent inventory retained all eight replay leaves: 197,970,624 bytes under
+the unchanged 201,326,592-byte cap, with 3,355,968 bytes of headroom.
+Its one broad push attempt passed 65 edit checks, including exact-register verification,
+but the type floor timed out at its maintained 900-second command ceiling with no
+emitted diagnostic; reachable tests were skipped.
+This is a local negative receipt, not an edit-tier pass.
+The selected type-only follow-up passed at the same parent head in 428.620 seconds, with
+zero errors, warnings or notes and unchanged timeout and worker flags.
+That focused result does not replace the broad negative or supply a reachable verdict.
+The child source collector check and 158 focused builder, custody, catalogue, renderer
+and Pages tests passed; affected-file Ruff and BasedPyright were clear.
+All 324 current and 212 previous historical objects survived the actual child rebuild,
+with only the two new certificate occurrences added.
+
+The child push attempt at `71a2249082` exposed generated URL-registry drift after 65
+checks passed. It was stopped with normal SIGINT (exit 130) so the actual omission could
+be repaired; three active commands were cancelled and reachable tests have no verdict.
+The maintained URL generator added four coefficient and metadata payload URLs for
+Daniel’s n=132 and separate n=155 occurrences.
+Its historical-compatibility check then passed all 1,629 rows with zero failures and no
+removed URLs. The register mathematics and reconstruction had already passed.
+Current-head push, responsive web and hosted qualification remain required after this
+repair; the interrupted gate remains a dated negative receipt.
 
 ## Upstream Refresh Checkpoint, 2026-10-09
 
 The W7 record-refresh slice began at 2026-10-09 20:16:15.292030 UTC and integrates
-`origin/main` at `0f16c033a87464cfab127ba54748ca5e2536babd` through the formal stack.
+`origin/main` at `1871b14dc630f802084695b7bd6007bac53b3714` through the formal stack.
 Independent review verified all 58 finite source certificates, all 32 backfilled case
 envelopes and all 324 unchanged case statuses and lower bounds.
 The maintained records checkpoint passed all 50 selected steps in 529.81 s. PR 475 adds
 regional $n = 17$ kernel exclusions and validation repairs, with no change to these side
 identities or any global-optimality claim.
 Its retained custody disclosure still identifies 204 older objects that are not hosted.
+The previous upstream snapshot was `0f16c033`; the final snapshot also includes PR 479’s
+later Couzo reports and PR 480’s owner-authorized temporary quick-lane budgets.
+The current suite ceilings are 335/360/360/335 seconds; `think-2hm6` owns reducing that
+cost. The older 106-step cohort below remains dated evidence under its original
+143-second limit. The parent preparation at `1675e5f8` was interrupted to incorporate
+these newly merged records; its cancellation is not a source-test verdict.
 
 The earlier local push at `81db1641` passed 66 of 67 selected steps.
 Its 507-file reachable-test subprocess reported 4,318 passes, one skip and ten failures
@@ -191,13 +270,33 @@ Ruff and BasedPyright are clean for these repairs.
 All eight historical replay inputs remain selected; the 192 MiB cap is unchanged and the
 final clean-head inventory must satisfy it.
 
-The child also regenerates historical `relationship_to_current` labels after the adopted
-bounds changed. This updates comparisons without changing original source identities,
-coefficients or exact checks.
+At child `b024d100`, the local push passed 68 of 69 selected steps.
+Its 518-file reachable-test subprocess recorded 7,200 passes, 33 skips and five failures
+before the unchanged 900 s ceiling.
+Four failures were the inherited math-startup fixtures; the fifth was the saved
+historical corpus carrying comparisons against older current bounds.
+This completed broad-run audit remains negative evidence.
+
+The final child refresh rebuilt the historical corpus with the maintained collector’s
+full default exact verification.
+Exactly 57 `relationship_to_current` fields changed across 22 counts; all 182 original
+source identities, complete coefficient arrays and exact-check objects are unchanged and
+verified. The maintained full `--check` passed, and the existing saved-corpus regression
+passed in 14.25 s without changing its source conservation or 182-verified assertions.
 PR descriptions and beads retain the actual branch heads, remaining owners and dated
 local and hosted receipts.
 Qualification requires checks on the final pushed heads; earlier successes do not
 qualify the refreshed stack.
+
+The earlier child records checkpoint passed 51 of 52 steps in 284.54 s; its sole failure
+was the stale URL manifest for three obsolete $n = 102$ payloads.
+The maintained retirement command confirmed those addresses were never published on
+`origin/main`; the refreshed 1,624-row URL manifest and compatibility check passed.
+The corrected $n = 102$ prerequisite changes one text field and preserves every other
+register field. The regenerated checker certified all 321 polynomials and roots.
+All seven stale child expectations and the current-pose route control passed in the
+54-test affected suite.
+These are dated repair receipts; final-head qualification remains required.
 
 ## Non-Goals
 
@@ -212,15 +311,16 @@ qualify the refreshed stack.
 
 ## Background
 
-At 2026-10-06 the atlas (`atlas/known-best/composite-figure.json`) is the only place the
-full picture is assembled, and it does not hold the facts itself:
+The atlas (`atlas/known-best/composite-figure.json`) consumes the frontier facts and
+generated register rather than holding an independent derivation.
+The verified child partition after the 2026-10-09 upstream refresh is:
 
 | State | Count | Where the fact lives |
 | --- | ---: | --- |
 | Integer | 176 | None |
-| Rational | 64 | Includes the finite refinements and new arrangements at $n = 68,105,266,270,272,292$ |
-| Radical closed form | 65 | Earlier displaced source forms remain historical |
-| Minimal polynomial | 16 | Full degree-672 polynomial recovered and checked at $n = 83$ |
+| Rational | 72 | Includes the adopted finite source certificates and their native side identities |
+| Radical closed form | 60 | Earlier displaced source forms remain historical |
+| Minimal polynomial | 13 | Full degree-672 polynomial recovered and checked at $n = 83$ |
 | Degree only | 0 | Resolved by the checked $n = 83$ polynomial |
 | Numeric only | 3 | $n = 29,55,71$, each with a named continuation lane |
 
@@ -231,9 +331,11 @@ Twenty-one triples matched the original 270-current-exact register entries.
 The other 161, plus one additional main-catalogue entry, gave 162 historical register
 entries: 152 superseded, three marked invalid by their source, and seven outside the
 current frontier. Subsequent delivered child work expanded that record to 170 historical
-entries; the latest-source rebuild expands it to 175 while preserving the earlier
-corpus. Every entry retains its polynomial in full, exact arithmetic checks, source
-locator, attribution and source flags.
+entries; the pre-refresh checkpoint expanded it to 175 while preserving the earlier
+corpus. The 2026-10-09 refresh retains those 175 and adds 37 rows, reaching 212; the
+2026-10-10 source refresh adds the two Daniel certificate occurrences, reaching 214.
+Every entry retains its polynomial in full, exact arithmetic checks, source locator,
+attribution and source flags.
 
 At the earlier upstream-integration checkpoint, the delivered child retained 170
 historical identities: 160 superseded, three source-invalid and seven outside the
@@ -273,8 +375,8 @@ verification rung.
   Source cells delimit invalid/fixed flags and credit; neighboring rows cannot supply
   either.
 
-The child’s retained degree-672 polynomial is expected to complete the parent’s $n = 83$
-degree-only row once the child rebuild passes.
+The child’s checked degree-672 polynomial completes the parent’s $n = 83$ degree-only
+row. Its source ordinal remains independently uncounted.
 Ideal KKT/contact research at other counts remains separate from the exact identity of a
 finite rational certificate side.
 The selected delivery slice is W7 `think-s6np`, before W6 experiments: deliver the
@@ -346,7 +448,7 @@ A delivery-recovery worker checks earlier claimed output.
 | 14 | W7 **efficiency block**: bounded receipt controls (`think-3okf`) | Separate four custody corruptions into independently named tests; each replays the full packet scan and checks its specific refusal within the unchanged per-test wall |
 | 15 | W7: private snapshot copy contract (`think-3pyf`) | Copy each lexical source path once in both the worker and its live/Git inventories; omit only four unconsumed generated images and preserve their producers and dependency rescues under the unchanged 192 MiB cap |
 | 16 | W7: concurrent source and storage reconciliation (`think-a0qb`) | Retain the independently reviewed parent extraction pin guard and lossless generated storage; preserve our later receipt controls and every decoded byte of the child’s larger register while updating all publication consumers |
-| 17 | W7: hosted cost record (`think-a0qb`, `think-4kd6`) | Retain all three audited 106-step parent readings, including both over-ceiling observations, with geometric mean 135.17 s and spread 1.84×; keep the historical 88-step and child 108-step selections separate and all limits unchanged |
+| 17 | W7: hosted cost record (`think-a0qb`, `think-4kd6`) | Retain all three audited 106-step parent readings, including both over-ceiling observations, with geometric mean 135.17 s and spread 1.84×; keep the historical 88-step and child 108-step selections separate; PR 480 supplies the current temporary budgets under `think-2hm6` |
 
 The two stack layers have separate registers.
 At the earlier 2026-10-08 CI-repair checkpoint, PR 403 had 286 exact current values, one
@@ -385,8 +487,8 @@ Its 2,629,925 JSON bytes became 808,628 gzip bytes, with byte-for-byte decoded p
 coefficients, attribution and proof status were preserved.
 These are dated migration receipts.
 The next recovery checkpoint stored 2,632,347 complete JSON bytes in 808,715 gzip bytes.
-Those measurements are historical; the latest source rebuild stores 2,703,616 JSON bytes
-in 826,648 gzip bytes, with current publication measurements above.
+The pre-refresh source checkpoint stored 2,703,616 JSON bytes in 826,648 gzip bytes.
+These are dated receipts; the refreshed register census is recorded above.
 Bounded readers, the generated-JSON layout floor, schemas, census tools and publication
 consumers all follow the maintained storage contract.
 Published source links name the actual gzip file; logical JSON identities remain
@@ -396,16 +498,20 @@ writes.
 
 The first D-shard record used two compatible 106-step parent observations, 166.59 s and
 90.60 s, with geometric mean 122.85 s. That two-run record is historical.
-The current audited reference-shape cohort includes all three readings: 163.63 s, 166.59
-s and 90.60 s, with geometric mean 135.17 s and spread 1.84×. Both slower observations
-exceeded the unchanged 143 s ceiling and remain explicit evidence.
+The retained audited 106-step reference-shape cohort includes all three readings: 163.63
+s, 166.59 s and 90.60 s, with geometric mean 135.17 s and spread 1.84×. Both slower
+observations exceeded the unchanged 143 s ceiling and remain explicit evidence.
 The historical 104.95 s reading selected 88 steps; the child’s 96.25 s reading selected
 108 steps. Neither enters the 106-step cohort’s mean.
-The pending fields that expired at midnight UTC are removed; neither ceilings nor
-enforcement policy change.
+That historical calibration removed the pending fields that expired at midnight UTC and
+kept its original enforcement policy.
+PR 480 now supplies the current temporary 335-second D-shard ceiling and the 2026-10-09
+cost record, as noted above.
 Fresh final-head CI remains pending and must establish the reconciled source and storage
-together. The startup self-test checks the measured readiness-call wait for its injected
-300 ms delay, independently of navigation overhead.
+together.
+The startup self-test verifies the injected 300 ms delay by requiring readiness
+to trail both the delayed fixture’s math-runtime arrival and the fastest undelayed
+control by at least 150 ms.
 Final validation and publication identities are reported in the PRs.
 
 At the original 2026-10-08 publication checkpoint, the lazy catalogue had 1,003 JSON
@@ -475,7 +581,7 @@ relation alone is insufficient.
 | Bead | Counts | Next work and dependency |
 | --- | --- | --- |
 | `think-1atr` | 126 | Recover the current witness/KKT contact system; the retained SVG has a different side and the three historical polynomials do not identify the current record |
-| `think-ohhz` | 102, 106, 152, 172, 177, 199, 206, 207, 268, 297, 301 | Recover or reproduce all eleven claimed ideal-side identifications through `think-s6np`; establish a confirmed KKT seed at 177; treat 199 and 207 as displaced branches |
+| `think-ohhz` | 102, 106, 152, 172, 177, 199, 206, 207, 268, 297, 301 | Recover or reproduce all eleven claimed ideal-side identifications through `think-s6np`; the old 102 root is superseded and its current-pose route requires RyXu inputs; establish a confirmed KKT seed at 177; treat 199 and 207 as displaced branches |
 | `think-056g` | 68, 103, 110, 123, 131, 132, 154, 155, 156 | Low-count ideal-side precision/degree sweep after the reusable driver is delivered by `think-s6np` |
 | `think-d2kj` | 180, 181, 182, 208, 209, 210, 228, 236, 237, 238, 239, 240, 241 | Middle-count ideal-side sweep, same dependency; preserve current and displaced-side distinctions |
 | `think-gg4k` | 259, 269, 270, 271, 273, 302, 303, 304, 305, 306, 307 | High-count ideal-side sweep, same dependency; preserve historical and source-invalid distinctions |
@@ -536,6 +642,17 @@ Additional work:
   After delivery, prove the known $n = 11$ octic from contacts as its control, then
   preregister one bounded $n = 102$ W6 slice in `think-ohhz`. This recovery has executed
   no solver, contact-derived control or bounded search.
+  These two acquired inputs remain fixtures for the driver recovery.
+  The retained $n = 102$ input describes Daniel’s older packing, whose claimed ideal
+  root is now superseded.
+  The current finite bound is RyXu’s arrangement at
+  `8dc415296f697f5140caea27c7a0193d52deb4e6`, already retained in the
+  [RyXu packet](../../../../packing/resources/web/ry-xu-new-packings-2026-10-08/README.md).
+  Before a current-pose $n = 102$ slice, convert that complete certificate into the
+  driver’s input, establish its active, weak and forced contacts, frozen variables and
+  confirmed seed, and then preregister the bounded run.
+  The historical Daniel input cannot satisfy that current-pose prerequisite; geometry or
+  Lean work on its T-120 root is optional source-history work.
 
 - **Independent contact derivations (`think-o0az`).** After delivery recovery,
   independently rederive the small-degree catalogue cases (28, 39, 37, 70, 153, 11)
@@ -791,18 +908,26 @@ Capture each new result against its actual head in the PRs and beads before cont
    then qualify the maintained font diagnostics and complete web-only report.
    Keep parent Pages CLS open until its own controls pass.
    Preserve every equation, coefficient and source distinction at desktop/mobile widths
-   in both themes; remove exact-report PDF producer, preview, URL and format-link
-   requirements. Integrate latest upstream through the stack shortcut, refresh pins and
-   source-head gates, and capture actual-head evidence on both PRs and the beads.
-2. **W7 driver:** deliver `think-s6np` using the two acquired native inputs, then derive
-   the known $n = 11$ octic from active contacts as the exact control.
+   in both themes. Exact-report PDF producer, preview, URL and format-link requirements
+   are retired. Refresh pins and source-head gates after the upstream stack integration,
+   and capture actual-head evidence on both PRs and the beads.
+2. **W7 driver:** deliver `think-s6np` using the acquired $n = 11$ control and the
+   historical Daniel $n = 102$ fixture, then derive the known $n = 11$ octic from active
+   contacts as the exact control.
    No reusable driver, solver, contact-derived control or target search has been
    delivered in this recovery.
-3. **W6 identification:** preregister one bounded $n = 102$ slice in `think-ohhz` after
-   the driver and control pass.
-   Keep $n = 29,55,71$ and ideal contact obligations open.
+3. **W6 identification:** after the driver and $n = 11$ control pass, bind and convert
+   the retained current RyXu $n = 102$ certificate, establish its contact system and
+   confirmed seed, then preregister one bounded slice in `think-ohhz`. Keep
+   $n = 29,55,71$ and ideal contact obligations open.
    Retain `think-yuqy`’s quarantine of unsupported degree, height and numerical-linkage
    inferences.
+
+Pending finite-bound adoption remains in `think-lhtz`; T-128 source-house custody
+remains in `think-0mlq`. The Rehwaldt $n = 68$ multivariate binding review remains in
+`think-nv5o`; PR 479 completed the later extended-range source import, while
+`think-1545` retains the outside-corpus reader work.
+The optional $n = 83$ source-index count remains in `think-chsu`.
 
 The adjacent import stabilization is recorded separately in
 [PR 467](https://github.com/jlevy/squares/pull/467). Accepted upstream results are
@@ -825,8 +950,9 @@ The retained pre-refinement $n = 292$ control keeps outward-ceiling provenance d
 from its native certificate side.
 
 The canonical web page adds search, section/kind/status filters and pagination.
-Individual records and exact coefficient strings load only when opened; numeric rows and
-historical source-invalid or superseded rows keep their separate meanings.
+Individual records and exact coefficient strings load only when opened; numeric,
+pending, source-invalid and outside-frontier rows keep their separate meanings.
+Superseded rows remain in the raw register and are omitted from the visible web subset.
 `think-r4rt` owns the export, `think-uunz` the browser and `think-3t5y` the independent
 Astra review under `think-mo36`. The
 [bounded measurement](../../../../packing/benchmarks/exact-catalogue-web/report.md)

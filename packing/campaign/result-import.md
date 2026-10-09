@@ -311,8 +311,9 @@ register entry with its ratings and `next_rung`. Four rules are the process’s 
   source identity, attribution and status.
   It does not change a case’s best known side and does not inherit the current packing’s
   KKT comparison. For a superseded value inside the frontier, the case entry may also
-  carry the route or historical note that explains the relationship; the paper renders
-  the register-level polynomial once.
+  carry the route or historical note that explains the relationship.
+  The public report omits superseded rows and redundant current superseded notes; the
+  canonical register retains their complete original identities and custody.
 - **Every unresolved exact value keeps an owner.** Numeric-only current rows and
   retained sources whose polynomial or exact side text is incomplete name the route and
   open bead that can resolve them.

@@ -63,14 +63,25 @@ def test_generated_source_histories_preserve_complete_notes_and_source_rows(
         notes = [
             note for note in entry["notes"] if note["kind"] == "unreconciled-source-polynomial"
         ]
-        assert len(notes) == 1
-        assert row == {
-            **notes[0],
-            "n": n,
-            "kind": "unreconciled-source",
-            "algebraic_source": "reported-source-polynomial",
-            "current_side": entry["side"]["value"],
-        }
+        if n == 102:
+            assert notes == []
+            assert row["kind"] == "superseded"
+            assert row["current_side"] == entry["side"]["value"]
+            assert Fraction(row["checks"]["root"]["interval"][0]) > Fraction(
+                entry["checks"]["root"]["interval"][1]
+            )
+        else:
+            assert len(notes) == 1
+            assert row == {
+                **notes[0],
+                "n": n,
+                "kind": "unreconciled-source",
+                "algebraic_source": "reported-source-polynomial",
+                "current_side": entry["side"]["value"],
+            }
+            assert Fraction(row["checks"]["root"]["interval"][1]) < Fraction(
+                entry["checks"]["root"]["interval"][0]
+            )
         source = copy.deepcopy(sources[n])
         for key in ("S_poly_ascending", "field_poly_ascending"):
             source[key] = [str(coefficient) for coefficient in source[key]]
@@ -91,7 +102,6 @@ def test_generated_source_histories_preserve_complete_notes_and_source_rows(
             "global_optimality": "not-established",
         }
         assert row["checks"]["catalogue"] == "not-in-catalogue"
-        assert Fraction(row["checks"]["root"]["interval"][1]) < Fraction(entry["side"]["value"])
         assert row["polynomial"]["coefficients"] != entry["polynomial"]["coefficients"]
 
 
@@ -102,7 +112,7 @@ def test_generated_source_histories_preserve_complete_notes_and_source_rows(
         "missing-assurance",
         "missing-text",
         "wrong-origin",
-        "superseded-packing",
+        "outside-current-frontier",
         "null-root",
         "null-irreducibility",
         "null-decimal",
@@ -137,8 +147,8 @@ def test_source_history_schema_refuses_lost_custody_and_promoted_evidence(
             del row["text"]
         case "wrong-origin":
             row["algebraic_source"] = "catalogue"
-        case "superseded-packing":
-            row["kind"] = "superseded"
+        case "outside-current-frontier":
+            row["kind"] = "outside-frontier"
         case "null-root" | "null-irreducibility" | "null-decimal":
             key = {
                 "null-root": "root",
@@ -188,10 +198,12 @@ def test_derived_history_checks_remain_closed_and_identify_their_expression(
             row
             for row in register["historical_entries"]
             if row["algebraic_source"] == "derived-from-source-closed-form"
+            and "source_certificate" not in row
         )
     )
     validator = _validator(schema, "historical_entry")
     validator.validate(row)
+    assert row["checks"]["catalogue"] == "derived-here"
     if control == "catalogue":
         row["checks"]["catalogue"] = "matches"
     elif control == "unknown-check":

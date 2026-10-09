@@ -71,8 +71,8 @@ DESCRIPTION = (
     "packings, with historical source polynomials and open exact-value routes."
 )
 ARCHIVE_DESCRIPTION = (
-    "Complete exact-side archive with every polynomial coefficient, current and historical "
-    "source records, certificates and open derivation routes."
+    "Complete report of current recorded sides, additional source polynomials, "
+    "every published coefficient, certificates and open derivation routes."
 )
 EDITION = EXACT_SIDE_VALUES_EDITION
 FIRST_PUBLISHED = EXACT_SIDE_VALUES_FIRST_PUBLISHED
@@ -105,9 +105,30 @@ DISPLAY_CHARACTER_BUDGET = 56
 WEB_PROBES = PACKING / "devtools/probes"
 WEB_LAYOUT = probe(WEB_PROBES, "render_exact_side_values/web_layout")
 
+
+class ExactSideValuesPaperError(ValueError):
+    """The register cannot support a complete and accurate paper."""
+
+
+def citation_sources(article: Path = ARTICLE) -> tuple[Path, ...]:
+    """Local citations required by the renderer, without hydrating source packets."""
+    source = article.read_text(encoding="utf-8")
+    targets = {
+        (article.parent / match.group("url").partition("#")[0]).resolve()
+        for pattern in (RELATIVE_LINK, RELATIVE_REFERENCE, RELATIVE_ANCHOR)
+        for match in pattern.finditer(source)
+    }
+    if any(not target.is_relative_to(REPO) for target in targets):
+        raise ExactSideValuesPaperError(f"{article.name}: citation escapes repository")
+    return tuple(sorted(targets))
+
+
+CITATION_SOURCES = citation_sources()
+
 RENDER_INPUTS = (
     Path(__file__),
     ARTICLE,
+    *CITATION_SOURCES,
     STYLE,
     SHELL,
     BROWSER_SHELL,
@@ -135,10 +156,6 @@ RENDER_INPUTS = (
     / "host_math_init.js",
     REPO / "vendor/kpress",
 )
-
-
-class ExactSideValuesPaperError(ValueError):
-    """The register cannot support a complete and accurate paper."""
 
 
 def _as_mapping(value: object, context: str) -> Mapping[str, Any]:
@@ -808,12 +825,41 @@ def _historical_kind_claim(entry: Mapping[str, Any]) -> str:
             "furnish a valid packing upper bound."
         )
     if kind == "unreconciled-source":
+        certificate = entry.get("source_certificate")
+        if isinstance(certificate, dict):
+            return exact_catalogue.source_certificate_claim(certificate)
         if entry.get("reported_source"):
             return exact_catalogue.REPORTED_SOURCE_CLAIM
         return (
             "The source fact is retained, but its relationship to the frontier is unresolved."
         )
     raise ExactSideValuesPaperError(f"unknown historical kind: {kind!r}")
+
+
+def source_certificate_markdown(entry: Mapping[str, Any]) -> str:
+    raw = entry.get("source_certificate")
+    if raw is None:
+        return ""
+    certificate = _as_mapping(raw, "source certificate")
+    lines = ["Source-certificate custody and assurance:", ""]
+    for key, label in (
+        ("result", "Result"),
+        ("source_key", "Source"),
+        ("revision", "Upstream revision"),
+        ("facts", "Retained facts"),
+        ("original_certificate", "Original certificate"),
+        ("receipt", "Native replay receipt"),
+        ("verification", "Verification"),
+        ("confirmation", "Confirmation"),
+        ("algebraic_identity", "Algebraic identity"),
+        ("geometry_replay", "Geometry replay"),
+        ("adoption", "Packing adoption"),
+        ("global_optimality", "Global optimality"),
+    ):
+        value = certificate.get(key)
+        literal = "none" if value is None else escape(str(value), quote=False)
+        lines.append(f"- {label}: <code>{literal}</code>.")
+    return "\n".join(lines)
 
 
 def historical_attribution_markdown(entry: Mapping[str, Any], *, n: int) -> str:
@@ -912,6 +958,8 @@ def historical_polynomials_markdown(register: Mapping[str, Any]) -> str:
                     "",
                     *identity_lines,
                     "",
+                    source_certificate_markdown(entry),
+                    "",
                     f"Exact checks: {_historical_checks(entry)}.",
                     "",
                     "Retained source occurrences:",
@@ -933,6 +981,7 @@ def historical_polynomials_markdown(register: Mapping[str, Any]) -> str:
 
 
 def generated_sections(register: Mapping[str, Any], *, web: bool = False) -> dict[str, str]:
+    register = exact_catalogue.publication_register(register)
     return {
         "REGISTER_SUMMARY": summary_markdown(register),
         "REGISTER_SOURCES": sources_markdown(register),
@@ -1138,7 +1187,7 @@ def render_browser(
     *, revision: str | None = None, register: Mapping[str, Any] | None = None
 ) -> str:
     """The report overview loads record details and coefficients on demand."""
-    register = register or load_register()
+    register = exact_catalogue.publication_register(register or load_register())
     rows = entries(register)
     polynomial_count = sum(row.get("polynomial") is not None for row in rows)
     proved_count = sum(row.get("status") == "proved" for row in rows)
@@ -1155,7 +1204,7 @@ def render_browser(
         "BROWSER_COVERAGE": (
             f"{len(rows)} current records, including {polynomial_count} exact polynomials "
             f"and {len(rows) - polynomial_count} numeric values; "
-            f"{len(historical_entries(register))} historical source records. "
+            f"{len(historical_entries(register))} additional source records. "
             f"Global optimality is proved for {proved_count} current records."
         ),
         "REGISTER_SOURCE_URL": (

@@ -156,16 +156,6 @@ GALOIS_DEGREES = range(2, 7)
 
 #: Every current numeric-only count has a named lane and an owning bead.
 ROUTES: dict[int, tuple[str, str]] = {
-    102: (
-        "think-eu89",
-        (
-            "Bind and convert the already retained current ry-xu certificate at "
-            "8dc415296f697f5140caea27c7a0193d52deb4e6 before deriving current-pose "
-            "contacts, a stable seed or any KKT/W6 result. The earlier evand "
-            "13ee36e5 input remains a historical fixture; its contact system and "
-            "local-minimum claims do not transfer to this new geometry."
-        ),
-    ),
     29: (
         "think-je8y",
         (
@@ -233,6 +223,17 @@ ROUTE_GROUPS = (
 for _counts, _bead, _route in ROUTE_GROUPS:
     for _n in _counts:
         ROUTES[_n] = (_bead, _route)
+# This current-pose prerequisite must survive the group assignment above.
+ROUTES[102] = (
+    ROUTES[102][0],
+    ROUTES[102][1]
+    + " Before resuming this ideal-contact lane, bind and convert the already retained "
+    "current ry-xu certificate at 8dc415296f697f5140caea27c7a0193d52deb4e6. Derive its "
+    "active, weak and forced contacts and frozen variables, confirm the current-pose "
+    "seed, and pass the W7 driver and n11 control before a preregistered bounded W6 "
+    "run. The earlier evand 13ee36e5 input remains a historical fixture; its contact "
+    "system and local-minimum claims do not transfer to this new geometry.",
+)
 for _n, _bead in (
     (105, "think-gl59"),
     (211, "think-uc8i"),

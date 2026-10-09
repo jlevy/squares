@@ -102,6 +102,8 @@ def test_projection_keeps_zero_and_large_integer_strings(tmp_path: Path) -> None
         "historical": 0,
         "coefficient_vectors": 1,
         "integer_coefficients": 3,
+        "omitted_superseded_historical": 0,
+        "omitted_superseded_notes": 0,
     }
     payload["coefficients"][1] = "1"
     (data / "coefficients.json").write_text(json.dumps(payload), encoding="utf-8")
@@ -123,6 +125,14 @@ def test_measure_reads_retained_register_and_checks_all_current_and_historical_c
                 "side": {"value": "9.25", "relation": "upper-bound"},
                 "degree": 2,
                 "polynomial": {"coefficients": vector},
+                "notes": [
+                    {
+                        "kind": "superseded-catalogue-polynomial",
+                        "degree": 2,
+                        "polynomial": {"coefficients": vector},
+                    },
+                    {"kind": "retained-source", "text": "retain this metadata"},
+                ],
             }
         ],
         "historical_entries": [
@@ -132,7 +142,14 @@ def test_measure_reads_retained_register_and_checks_all_current_and_historical_c
                 "side": "9.5",
                 "degree": 2,
                 "polynomial": {"coefficients": vector},
-            }
+            },
+            {
+                "n": 83,
+                "kind": "superseded",
+                "side": "9.6",
+                "degree": 2,
+                "polynomial": {"coefficients": vector},
+            },
         ],
     }
     source = tmp_path / "exact-values.json"
@@ -164,6 +181,8 @@ def test_measure_reads_retained_register_and_checks_all_current_and_historical_c
         "historical": 1,
         "coefficient_vectors": 2,
         "integer_coefficients": 6,
+        "omitted_superseded_historical": 1,
+        "omitted_superseded_notes": 1,
     }
     baseline.write_bytes(b"x" * (result["candidate_bytes"] * 5))
     assert measure(baseline, tmp_path, page, loaded)["passes_acceptance"]
@@ -207,6 +226,59 @@ def test_measure_reads_retained_register_and_checks_all_current_and_historical_c
         measure(baseline, tmp_path, page, loaded)
 
 
+def test_projection_derives_the_subset_independently_and_refuses_retained_note_loss(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    register = {
+        "entries": [
+            {
+                "n": 83,
+                "notes": [
+                    {"kind": "superseded-catalogue-polynomial", "text": "omit"},
+                    {"kind": "retained-source", "text": "keep"},
+                ],
+            }
+        ],
+        "historical_entries": [
+            {"n": 83, "side": "9.5", "kind": "superseded"},
+            {"n": 1, "side": "1", "kind": "source-invalid"},
+        ],
+    }
+    papers = tmp_path / "papers"
+    for path, content in exact_catalogue.output_files(register, papers=papers).items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+
+    def refuse_exporter_dependency(*_arguments: object) -> None:
+        raise AssertionError("independent checker must not call the publication helper")
+
+    monkeypatch.setattr(exact_catalogue, "publication_register", refuse_exporter_dependency)
+    index = papers / exact_catalogue.INDEX_PATH
+    coverage = check_projection(register, index, tmp_path)
+    assert coverage == {
+        "current": 1,
+        "historical": 1,
+        "coefficient_vectors": 0,
+        "integer_coefficients": 0,
+        "omitted_superseded_historical": 1,
+        "omitted_superseded_notes": 1,
+    }
+    rows = json.loads(index.read_text(encoding="utf-8"))["entries"]
+    metadata = papers / rows[0]["metadata_url"]
+    payload = json.loads(metadata.read_text(encoding="utf-8"))
+    payload["record"]["notes"] = []
+    metadata.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ValueError, match="record array"):
+        check_projection(register, index, tmp_path)
+    payload["record"]["notes"] = [{"kind": "retained-source", "text": "keep"}]
+    metadata.write_text(json.dumps(payload), encoding="utf-8")
+    document = json.loads(index.read_text(encoding="utf-8"))
+    document["entries"].pop()
+    index.write_text(json.dumps(document), encoding="utf-8")
+    with pytest.raises(ValueError, match="historical record count"):
+        check_projection(register, index, tmp_path)
+
+
 @pytest.mark.parametrize(
     "threshold", [0.0, -0.1, 1.01, float("nan"), float("inf"), -float("inf")]
 )
@@ -238,6 +310,20 @@ def test_measure_refuses_invalid_thresholds_before_reading_inputs(
 
 def test_recorded_report_is_current() -> None:
     assert report() == (CAMPAIGN / "report.md").read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize(
+    "omission", ["omitted_superseded_historical", "omitted_superseded_notes"]
+)
+def test_report_refuses_publication_omissions(tmp_path: Path, omission: str) -> None:
+    copied = tmp_path / "record"
+    shutil.copytree(CAMPAIGN, copied)
+    for receipt in copied.glob("exp-*-bytes.json"):
+        measured = json.loads(receipt.read_text(encoding="utf-8"))
+        measured["coverage"][omission] = 1
+        receipt.write_text(json.dumps(measured), encoding="utf-8")
+    with pytest.raises(ValueError, match="H-001 requires every canonical record and note"):
+        report(copied)
 
 
 def test_report_refuses_forged_acceptance(tmp_path: Path) -> None:

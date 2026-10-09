@@ -176,6 +176,10 @@ name: Certificate page
       - packing/devtools/build_exact_values.py
       - packing/devtools/extract_kingbird_svg_exact.py
       - packing/devtools/templates/exact-side-values-article.md
+      - packing/resources/web/couzo-extended-reports-2026-10-08/README.md
+      - packing/resources/web/evand-record-hunt-2026-10-09/README.md
+      - packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
       - packing/devtools/templates/exact-side-values-shell.html
       - packing/devtools/templates/exact-side-values.css
       - packing/devtools/templates/exact-side-values-browser-shell.html
@@ -472,6 +476,10 @@ jobs:
             !/packing/campaign/*/
             /packing/resources/web/kingbird-squares-in-squares.md
             /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz
+            /packing/resources/web/couzo-extended-reports-2026-10-08/README.md
+            /packing/resources/web/evand-record-hunt-2026-10-09/README.md
+            /packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/README.md
+            /packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0

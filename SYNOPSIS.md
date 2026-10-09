@@ -580,23 +580,36 @@ The argument for it, and the measurement registered to kill it if it is wrong, a
 slice, experiment, round, and run—and the mathematical terms used narrowly here.
 Those definitions apply in the campaign artifacts and the beads too, not only here.
 
-### Exact-Side Collection, October 8
+### Exact-Side Collection, October 10
 
 The [exact-values register](packing/frontier/exact-values.json.gz) assembles 321 exact
-current sides for $n = 1\ldots324$: 176 integer, 64 rational, 65 radical closed forms
-and 16 minimal-polynomial sides.
+current sides for $n = 1\ldots324$: 176 integer, 72 rational, 60 radical closed forms
+and 13 minimal-polynomial sides.
 The degree-672 polynomial at $n = 83$ is retained in full and independently checked; its
 source root index 27 remains stated and uncounted.
 All 77 proved cases retain their status.
+The full scientific archives and current verified lower bounds remain preserved.
 
 The original retained-source extraction on October 7 decoded 182 polynomial/side pairs
 from 201 occurrences, reaching $n = 2135$, with no undecoded rows.
-The refreshed register retains 175 noncurrent source entries: 161 superseded, seven
-outside the frontier, three source-invalid and four unreconciled source-only roots.
-The four additional roots at $n = 102,106,152,177$ have independently checked
-polynomials and isolating intervals, but geometry and Lean replay await verification
-(V0/C0). Their complete source rows, native coefficient strings, flags and acquisition
-identity remain in the register; they do not update current bounds.
+The refreshed register retains 214 noncurrent source entries: 186 superseded, 18
+unreconciled, seven outside the frontier and three source-invalid.
+Only Daniel’s three improving reported roots at $n = 106,152,177$ remain unreconciled
+polynomial notes, with independently checked polynomials and isolating intervals but
+geometry and Lean replay not attempted (V0/C0). Daniel’s retained root at $n = 102$ is
+superseded and remains historical.
+The merged finite packets supply 60 rational certificate occurrences covering 59
+distinct bounds: 31 selected current, 14 superseded and 15 pending occurrences.
+The pending roster covers 14 distinct bounds, including two Couzo offers at $n = 105$,
+Daniel’s $n = 132$ T-131 offer, and separate Couzo and Daniel certificates for the same
+exact $n = 155$ side.
+Each keeps its own custody and remains V0/C0 pending adoption.
+`think-kkj2` owns T-131 adoption; `think-lhtz` and `think-0mlq` retain the original
+Couzo adoption and historical-house work.
+Equal sides confer no motion or local-minimum equivalence.
+The current RyXu $n = 51$ radical is a separate quadratic identity.
+Complete source rows, native coefficient strings, flags and acquisition identities
+remain in the register; source-only rows do not update current bounds.
 The
 [independent mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
 and [generated paper](packing/devtools/templates/exact-side-values-article.md) keep
@@ -604,27 +617,39 @@ source attribution, algebraic checks, geometric realization and optimality separ
 
 The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html) has a
 searchable index and loads individual records and coefficient vectors when opened.
-Complete archives preserve the full printed catalogue; the dated
-[payload measurement](packing/benchmarks/exact-catalogue-web/report.md) records the
-initial raw-byte reduction without making a latency claim.
-The latest source refresh independently reconstructs 519 normalized coefficient vectors
-and 6,273 integer strings, preserving all metadata.
-Its initial automatic payload is 362,534 bytes against a 5,257,078-byte complete HTML
-archive (6.90%, below the declared 10% checkpoint threshold).
+The complete HTML and Markdown report publishes all 324 current records and 28
+additional source records: seven outside the frontier, three source-invalid and 18
+unreconciled source occurrences, for 352 records overall.
+The report omits 186 superseded rows and 22 redundant current notes; these remain in the
+source register. The trimmed web projection independently reconstructs 352 coefficient
+vectors and 2,128 integer strings, preserving the metadata of the published records.
+The unchanged checkpoint limits the initial automatic payload to 10% of the complete
+HTML report. Payload measurements are dated local receipts and make no latency claim.
+The retained
+[full-catalogue measurement](packing/benchmarks/exact-catalogue-web/report.md) records
+the preceding publication scope.
+The complete source register retains 560 coefficient vectors and 6,378 integer strings.
 
 The three numeric-only current cases are $n = 29,55,71$, each with a bead in the
 [continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md#remaining-work-and-beads).
-There are 35 current finite witness-side projections: 29 original native certificate
-sides, three Rehwaldt refinements at $n = 68,105,292$ and three Daniel arrangements at
-$n = 266,270,272$. Rehwaldt admission requires exact equality among the reported and
-verified decimals, fraction and witness side.
-Daniel admission retains the native fraction and reported decimal while checking that
-the verified 16-place display is its least upward ceiling.
+There are 63 current native witness-side projections: 26 original native certificate
+sides, two Rehwaldt refinements at $n = 68,292$, three Daniel arrangements at
+$n = 266,270,272$, 18 RyXu sides and 14 Gupta sides.
+Rehwaldt admission requires exact equality among the reported and verified decimals,
+fraction and witness side.
+Daniel admission retains the native fraction and full reported decimal while checking
+that the verified 16-place display is its least upward ceiling.
+RyXu and Gupta rational admissions independently bind the native `exact_form`; both
+reported and verified 16-place displays are its least upward ceilings.
+The RyXu $n = 51$ native radical and quadratic polynomial are separately bound to its
+reported and verified upward displays.
 The original 33 A1 projections, including the old $n = 292$ ceiling, remain dated
 evidence. The finite $n = 105$ representation gap is resolved; its ideal contact-system
 and KKT seed work stays open.
 The retained systems at $n = 29,55,71$ support elimination and real-branch selection.
 Each new Daniel pose needs its own active contacts and KKT seed.
+The current RyXu $n = 102$ contacts and seed must bind its retained certificate; the
+earlier evand input remains historical.
 Ideal contact-system research continues under `think-s6np` and the batch lanes even when
 the finite certificate side is rational.
 Exact geometric witnesses and independent contact rederivations remain open.

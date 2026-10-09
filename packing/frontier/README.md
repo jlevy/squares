@@ -191,10 +191,10 @@ The ones that carry the most weight:
   or proves local-minimum equivalence.
   Daniel’s superseded $n=102$ polynomial remains historical with its complete original
   root cell, source flags and V0/C0 envelope.
-  The missing native geometry files remain an intake dependency under `think-8sm2`.
-  The child catalogue projects the three improving notes into its separate noncurrent
-  source collection and retains the superseded $n=102$ record in the raw archive,
-  preserving the complete metadata and V0/C0 assurance.
+  The missing native geometry files remain an intake dependency under `think-8sm2`. The
+  child catalogue projects the three improving notes into its separate noncurrent source
+  collection and retains the superseded $n=102$ record in the raw archive, preserving
+  the complete metadata and V0/C0 assurance.
   Historical entries preserve printed integer polynomial-side pairs from compared
   retained primary catalogues and exact-solution articles, including superseded packings
   and facts beyond the frontier horizon.
@@ -217,7 +217,9 @@ The ones that carry the most weight:
   Geometric feasibility, local optimality and global optimality retain their separate
   evidence and rungs. The
   [exact side values paper](https://jlevy.github.io/squares/papers/exact-side-values.html)
-  renders this register alone and prints every coefficient.
+  derives its publication subset from this register and prints every published
+  coefficient. Superseded rows and their redundant current notes remain in the canonical
+  register; the report omits them.
   Numeric-only rows and incomplete source facts retain the route and open bead assigned
   to identify them.
 

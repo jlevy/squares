@@ -53,6 +53,14 @@ def report(root: Path = CAMPAIGN) -> str:
         if any(reference not in hypotheses for reference in references):
             raise ValueError("unknown experiment hypothesis")
         measured = json.loads((root / payload["measurement"]).read_text(encoding="utf-8"))
+        coverage = measured["coverage"]
+        if any(
+            coverage.get(key, 0) != 0
+            for key in ("omitted_superseded_historical", "omitted_superseded_notes")
+        ):
+            raise ValueError(
+                "H-001 requires every canonical record and note; publication omissions refused"
+            )
         control, candidate = measured["control_bytes"], measured["candidate_bytes"]
         if control <= 0 or candidate <= 0 or candidate != sum(measured["assets"].values()):
             raise ValueError("invalid byte-count observation")
@@ -66,7 +74,6 @@ def report(root: Path = CAMPAIGN) -> str:
             f"| [{identity}]({path.relative_to(root).as_posix()}) | {control:,} B | "
             f"{candidate:,} B | {fraction:.2%} | {verdict} |"
         )
-        coverage = measured["coverage"]
         detail_lines.extend(
             [
                 "",

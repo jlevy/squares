@@ -113,8 +113,10 @@ def initial_assets(page: Path, site: Path) -> tuple[dict[str, int], Path]:
 def check_projection(register: dict[str, Any], index_path: Path, site: Path) -> dict[str, int]:
     """Compare records recursively against the register without using exporter code.
 
-    Only redundant polynomial text/LaTeX are omitted; complete archives retain them.
-    Every original metadata field and every integer coefficient must compare exactly.
+    Independently derive the intended subset: exclude superseded historical rows and
+    superseded-catalogue-polynomial current notes. Every retained metadata field and
+    integer coefficient must compare exactly; redundant polynomial text/LaTeX remain
+    in the canonical archive.
     """
     index = json.loads(index_path.read_text(encoding="utf-8"))
     entries = index["entries"]
@@ -158,10 +160,35 @@ def check_projection(register: dict[str, Any], index_path: Path, site: Path) -> 
         elif type(original) is not type(exported) or original != exported:
             raise ValueError("record value differs from register")
 
-    counts: dict[str, int] = {}
+    counts: dict[str, int] = {
+        "omitted_superseded_historical": 0,
+        "omitted_superseded_notes": 0,
+    }
     for section, key in (("current", "entries"), ("historical", "historical_entries")):
         projected = [entry for entry in entries if entry["section"] == section]
         originals = register.get(key, [])
+        if section == "historical":
+            counts["omitted_superseded_historical"] = sum(
+                original.get("kind") == "superseded" for original in originals
+            )
+            originals = [
+                original for original in originals if original.get("kind") != "superseded"
+            ]
+        else:
+            retained = []
+            for original in originals:
+                publication_record = original
+                if isinstance(original.get("notes"), list):
+                    notes = [
+                        note
+                        for note in original["notes"]
+                        if not isinstance(note, dict)
+                        or note.get("kind") != "superseded-catalogue-polynomial"
+                    ]
+                    counts["omitted_superseded_notes"] += len(original["notes"]) - len(notes)
+                    publication_record = {**original, "notes": notes}
+                retained.append(publication_record)
+            originals = retained
         if len(projected) != len(originals):
             raise ValueError(f"{section} record count differs from register")
         counts[section] = len(originals)
@@ -173,7 +200,7 @@ def check_projection(register: dict[str, Any], index_path: Path, site: Path) -> 
             if payload["id"] != entry["id"] or payload["section"] != section:
                 raise ValueError("metadata belongs to another record")
             compare(original, payload["record"])
-    if len(entries) != sum(counts.values()):
+    if len(entries) != counts["current"] + counts["historical"]:
         raise ValueError("unclassified browser entries")
     for key in set(register) - {"entries", "historical_entries"}:
         compare(register[key], index[key])
@@ -217,7 +244,10 @@ def measure(
         "passes_acceptance": candidate <= control * threshold,
         "assets": assets,
         "coverage": coverage,
-        "validity": "all original metadata and coefficient strings compare exactly",
+        "validity": (
+            "all retained publication metadata and coefficient strings compare exactly; "
+            "superseded historical rows and current notes intentionally omitted"
+        ),
         "exclusions": "clicked metadata/coefficient files and archives; no latency claim",
     }
 

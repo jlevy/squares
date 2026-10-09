@@ -282,6 +282,10 @@ def test_exact_values_inputs_select_the_complete_paper_job(
         "packing/devtools/templates/exact-side-values.css",
         "packing/devtools/templates/exact-side-values-browser-shell.html",
         "packing/devtools/templates/exact-side-values-browser.css",
+        "packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/README.md",
+        "packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md",
+        "packing/resources/web/couzo-extended-reports-2026-10-08/README.md",
+        "packing/resources/web/evand-record-hunt-2026-10-09/README.md",
         "packing/tests/test_exact_catalogue.py",
         "packing/tests/test_render_exact_side_values.py",
     ):

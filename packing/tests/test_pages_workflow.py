@@ -16,6 +16,7 @@ from typing import Any
 
 import pytest
 
+from devtools import render_exact_side_values as exact_paper
 from devtools import render_n11_optimality_review as optimality_paper
 from devtools import render_overview
 from devtools import render_packing_methods as methods_paper
@@ -86,6 +87,14 @@ KLEDDAMAG_README_PATTERN = f"/{KLEDDAMAG}/README.md"
 METHODS_CITATION_PATTERNS = tuple(
     "/" + path.relative_to(REPO).as_posix()
     for path in methods_paper.CITATION_SOURCES
+    if path.is_relative_to(REPO / "packing/resources")
+    or path.is_relative_to(REPO / "packing/campaign")
+)
+
+#: Exact-report citations inside the omitted archive, each retained as one file.
+EXACT_CITATION_PATTERNS = tuple(
+    "/" + path.relative_to(REPO).as_posix()
+    for path in exact_paper.CITATION_SOURCES
     if path.is_relative_to(REPO / "packing/resources")
     or path.is_relative_to(REPO / "packing/campaign")
 )
@@ -1855,6 +1864,7 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
         "exact-side-values": (
             "/packing/resources/web/kingbird-squares-in-squares.md",
             "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
+            *EXACT_CITATION_PATTERNS,
         ),
         "n11-optimality-review": (
             "/packing/resources/web/n11-optimality-2026-09-29/",
@@ -1971,10 +1981,15 @@ REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
             "packing/resources/README.md",
             "packing/resources/web/kingbird-squares-in-squares.md",
             "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
+            *(pattern.removeprefix("/") for pattern in EXACT_CITATION_PATTERNS),
         ),
         (
             "packing/resources/web/unrelated/README.md",
             "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/inputs/n-102.txt",
+            "packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/source-manifest.json",
+            "packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/source-manifest.json",
+            "packing/resources/web/couzo-extended-reports-2026-10-08/source-manifest.json",
+            "packing/resources/web/evand-record-hunt-2026-10-09/acquisition/sources.json",
             "packing/campaign/old/README.md",
         ),
     ),

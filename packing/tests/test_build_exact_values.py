@@ -1653,19 +1653,30 @@ def test_reported_source_history_preserves_complete_source_only_notes(
     monkeypatch.setattr(
         exact.reported_roots, "collect", lambda: copy.deepcopy(reported_source_candidates)
     )
-    exact.append_reported_source_notes(entries)
+    superseded = exact.append_reported_source_notes(entries)
     before = copy.deepcopy(entries)
-    rows = exact.reported_source_historical_entries(entries)
+    rows = [*superseded, *exact.reported_source_historical_entries(entries)]
+    rows.sort(key=lambda row: row["n"])
     assert {row["n"] for row in rows} == {102, 106, 152, 177}
-    for row, entry in zip(rows, entries, strict=True):
-        note = entry["notes"][-1]
-        assert row == {
-            **note,
-            "n": entry["n"],
-            "kind": "unreconciled-source",
-            "current_side": entry["side"]["value"],
-            "algebraic_source": "reported-source-polynomial",
-        }
+    for row, entry, source in zip(rows, entries, reported_source_candidates, strict=True):
+        assert {key: row[key] for key in source} == source
+        if entry["n"] == 102:
+            assert row["kind"] == "superseded"
+            assert row["current_side"] == entry["side"]["value"]
+            assert row["algebraic_source"] == "reported-source-polynomial"
+            assert "superseded" in row["text"]
+            assert not any(
+                note["kind"] == "unreconciled-source-polynomial" for note in entry["notes"]
+            )
+        else:
+            note = entry["notes"][-1]
+            assert row == {
+                **note,
+                "n": entry["n"],
+                "kind": "unreconciled-source",
+                "current_side": entry["side"]["value"],
+                "algebraic_source": "reported-source-polynomial",
+            }
         assert row["assurance"]["verification"] == "V0"
         assert row["assurance"]["confirmation"] == "C0"
         assert row["assurance"]["current_pose_identity"] == "not-established"
@@ -1678,10 +1689,9 @@ def test_reported_source_history_preserves_complete_source_only_notes(
 def test_source_history_refuses_a_stale_below_current_pointer(
     monkeypatch: pytest.MonkeyPatch, reported_source_candidates: list[dict[str, Any]]
 ) -> None:
-    entries = [_build(102)]
-    monkeypatch.setattr(
-        exact.reported_roots, "collect", lambda: [copy.deepcopy(reported_source_candidates[0])]
-    )
+    entries = [_build(106)]
+    candidate = next(row for row in reported_source_candidates if row["n"] == 106)
+    monkeypatch.setattr(exact.reported_roots, "collect", lambda: [copy.deepcopy(candidate)])
     exact.append_reported_source_notes(entries)
     entries[0]["side"]["value"] = entries[0]["notes"][-1]["checks"]["root"]["interval"][0]
     before = copy.deepcopy(entries)
@@ -1762,7 +1772,11 @@ def test_superseded_polynomial_is_complete_and_checked_against_its_own_side() ->
     assert entry["checks"]["irreducible"]["method"] == "linear"
     assert entry["checks"]["root"]["interval"] == [str(side), str(side)]
     assert entry["checks"]["root"]["contains_recorded_side"]
-    assert side == Fraction(entry["side"]["value"])
+    display = Fraction(entry["side"]["value"])
+    assert 0 < display - side < Fraction(1, 10**16)
+    (native,) = [note for note in entry["notes"] if note["kind"] == "verified-witness-side"]
+    assert "least upward sixteen-place ceiling" in native["text"]
+    assert "[ry-xu square packing 2026]" in native["text"]
 
 
 def test_the_register_validates_against_its_schema() -> None:
@@ -1790,7 +1804,7 @@ def test_the_totals_partition_the_range() -> None:
     entries = list(_entries().values())
     totals = register["totals"]
     assert sum(totals[state] for state in exact.STATES) == len(entries) == 324
-    assert [totals[state] for state in exact.STATES] == [176, 64, 65, 16, 0, 3]
+    assert [totals[state] for state in exact.STATES] == [176, 72, 60, 13, 0, 3]
     assert totals["proved"] == 77
     with_polynomial = sum(1 for entry in entries if entry["polynomial"] is not None)
     assert totals["irreducible-certified"] == totals["root-isolated"] == with_polynomial == 321
@@ -1974,13 +1988,15 @@ def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
     entries = _entries()
     numeric = {n for n, entry in entries.items() if entry["state"] == "numeric-only"}
     native = set(VERIFIED_FALLBACK_COUNTS)
-    refinements = {68, 105, 292}
+    refinements = {68, 292}
     arrangements = {266, 270, 272}
-    finite = native | refinements | arrangements
+    imported = {102, 103, 105, 131}
+    finite = native | refinements | arrangements | imported
     assert len(ORIGINAL_VERIFIED_FALLBACK_COUNTS) == 33
-    assert len(native) == 29
-    assert native.isdisjoint(refinements | arrangements)
-    assert refinements.isdisjoint(arrangements)
+    assert len(native) == 26
+    assert native.isdisjoint(refinements | arrangements | imported)
+    assert refinements.isdisjoint(arrangements | imported)
+    assert arrangements.isdisjoint(imported)
     assert numeric == {29, 55, 71}
     assert len(finite) == 35
     assert len(exact.ROUTES) == 37
@@ -2022,7 +2038,13 @@ def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
             ]
             assert provenance["kind"] == "verified-witness-side", n
             side = Fraction(entry["exact_form"])
-            assert side == Fraction(entry["side"]["value"]), n
+            if n in imported:
+                display = Fraction(entry["side"]["value"])
+                assert 0 < display - side < Fraction(1, 10**16), n
+                assert "least upward sixteen-place ceiling" in provenance["text"], n
+                assert "[ry-xu square packing 2026]" in provenance["text"], n
+            else:
+                assert side == Fraction(entry["side"]["value"]), n
             assert entry["checks"]["root"]["interval"] == [str(side), str(side)], n
         if n in arrangements:
             assert "new #399 witness" in route["text"], n
@@ -2161,9 +2183,11 @@ def test_the_eight_displaced_current_exact_sides_remain_in_history() -> None:
         (258, ["4", "-76", "161"]),
         (263, ["4", "-100", "553"]),
     ):
-        row = next(row for row in rows if row["n"] == n)
+        source_form = exact.catalogue_entries()[n].exact_form
+        (row,) = [row for row in rows if row["n"] == n and row.get("exact_form") == source_form]
         assert row["algebraic_source"] == "derived-from-source-closed-form"
-        assert row["exact_form"] == exact.catalogue_entries()[n].exact_form
+        assert "source_certificate" not in row
+        assert row["exact_form"] == source_form
         assert row["polynomial"]["coefficients"] == coefficients
         assert {source["kind"] for source in row["sources"]} == {
             "derived-from-source-closed-form"
@@ -2172,20 +2196,36 @@ def test_the_eight_displaced_current_exact_sides_remain_in_history() -> None:
 
 def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier() -> None:
     rows = _register()["register"]["historical_entries"]
-    assert len(rows) == 175
-    assert sum(row["kind"] == "superseded" for row in rows) == 161
+    assert len(rows) == 214
+    assert sum(row["kind"] == "superseded" for row in rows) == 186
     unreconciled = [row for row in rows if row["kind"] == "unreconciled-source"]
-    assert {row["n"] for row in unreconciled} == {102, 106, 152, 177}
-    assert len(unreconciled) == 4
+    assert len(unreconciled) == 18
+    reported = [row for row in unreconciled if "reported_source" in row]
+    assert {row["n"] for row in reported} == {106, 152, 177}
+    native = [row for row in unreconciled if "source_certificate" in row]
+    assert len(native) == 15
+    assert len(reported) + len(native) == len(unreconciled)
+    assert {(row["source_certificate"]["result"], row["n"]) for row in native} == {
+        *(("T-128", n) for n in (105, 108, 127, 131, 155, 180, 228, 306)),
+        *(("T-130", n) for n in (84, 86, 105, 175, 270)),
+        ("T-131", 132),
+    }
     for row in unreconciled:
         current = _entries()[row["n"]]
-        assert row["algebraic_source"] == "reported-source-polynomial"
-        assert row["assurance"]["verification"] == "V0"
-        assert row["assurance"]["confirmation"] == "C0"
-        assert row["assurance"]["geometry_replay"] == "not-attempted"
-        assert row["assurance"]["lean_replay"] == "not-attempted"
+        if "reported_source" in row:
+            assert row["algebraic_source"] == "reported-source-polynomial"
+            assert row["assurance"]["verification"] == "V0"
+            assert row["assurance"]["confirmation"] == "C0"
+            assert row["assurance"]["geometry_replay"] == "not-attempted"
+            assert row["assurance"]["lean_replay"] == "not-attempted"
+        else:
+            assert row["algebraic_source"] == "derived-from-source-closed-form"
+            assert row["source_certificate"]["verification"] == "V0"
+            assert row["source_certificate"]["confirmation"] == "C0"
+            assert row["source_certificate"]["geometry_replay"] == "native-replay-retained"
+            assert row["source_certificate"]["adoption"] == "pending"
         assert Fraction(row["checks"]["root"]["interval"][1]) < Fraction(
-            current["side"]["value"]
+            current["checks"]["root"]["interval"][0]
         )
         assert current["state"] == "rational"
         assert current["side"]["relation"] == "upper-bound"
