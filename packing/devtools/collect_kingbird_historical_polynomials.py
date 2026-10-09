@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from devtools.build_exact_values import ExactValuesError, polynomial_checks
+from devtools.retained_data import read_retained_text
 from sqpack import retained_json
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -440,7 +441,7 @@ def _parse_supplemental(locator: SupplementalLocator) -> dict[str, Any]:
 
 
 def _current_entries(path: Path = REGISTER) -> dict[int, dict[str, Any]]:
-    document = json.loads(path.read_text(encoding="utf-8"))
+    document = json.loads(read_retained_text(path))
     return {int(entry["n"]): entry for entry in document["register"]["entries"]}
 
 
@@ -641,7 +642,7 @@ def main(argv: list[str] | None = None) -> int:
     validate(document, None if args.verify_degree_max < 0 else args.verify_degree_max)
     rendered = retained_json.dumps(document, ensure_ascii=False)
     if args.check:
-        return 0 if args.out.read_text(encoding="utf-8") == rendered else 1
+        return 0 if read_retained_text(args.out) == rendered else 1
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(rendered, encoding="utf-8")
     print(

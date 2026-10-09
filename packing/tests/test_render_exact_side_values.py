@@ -8,6 +8,7 @@ global optimum.
 
 from __future__ import annotations
 
+import gzip
 import json
 from copy import deepcopy
 from html import escape, unescape
@@ -634,11 +635,49 @@ def test_generated_payload_traversal_refuses_symlinks(
     assert retained.read_text(encoding="utf-8") == "source evidence"
 
 
+@pytest.mark.parametrize("storage", ["plain", "gzip", "both", "gzip-path"])
+def test_load_register_keeps_every_record_and_coefficient_from_retained_storage(
+    storage: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    document = small_document()
+    source = tmp_path / "exact-values.json"
+    raw = json.dumps(document, ensure_ascii=False).encode()
+    if storage in {"plain", "both"}:
+        source.write_bytes(raw)
+    packed = source.with_name(source.name + ".gz")
+    if storage in {"gzip", "both", "gzip-path"}:
+        packed.write_bytes(gzip.compress(raw, mtime=0))
+    monkeypatch.setattr(paper, "REGISTER", packed if storage == "gzip-path" else source)
+    assert paper.load_register() == document["register"]
+
+
+def test_load_register_refuses_disagreeing_plain_and_compressed_copies(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "exact-values.json"
+    source.write_text(json.dumps(small_document()), encoding="utf-8")
+    source.with_name(source.name + ".gz").write_bytes(gzip.compress(b"{}", mtime=0))
+    with pytest.raises(paper.ExactSideValuesPaperError, match="differs from its compressed"):
+        paper.load_register(source)
+
+
+def test_published_register_source_is_the_declared_compressed_input(
+    rendered: tuple[str, str],
+) -> None:
+    stored = paper.REGISTER.with_name(paper.REGISTER.name + ".gz")
+    assert stored in paper.RENDER_INPUTS
+    _html, markdown = rendered
+    assert (
+        f"https://github.com/jlevy/squares/blob/{REVISION}/packing/frontier/exact-values.json.gz"
+        in markdown
+    )
+
+
 def test_browser_keeps_publication_version_and_pinned_source() -> None:
     page = paper.render_browser(revision=REVISION)
     assert paper.FRONT.version in page
     assert (
-        f"https://github.com/jlevy/squares/blob/{REVISION}/packing/frontier/exact-values.json"
+        f"https://github.com/jlevy/squares/blob/{REVISION}/packing/frontier/exact-values.json.gz"
         in page
     )
     assert "exact-side-values-complete.html" in page

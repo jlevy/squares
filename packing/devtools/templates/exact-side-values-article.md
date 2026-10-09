@@ -6,8 +6,9 @@ A feasible geometric realization establishes an upper bound on $s(n)$. Only an e
 lower bound establishes global optimality.
 The tables below keep those three levels separate.
 
-The source is the generated [`exact-values.json`](../../frontier/exact-values.json)
-register. The paper copies no mathematical value from another file.
+The source is the generated
+[`exact-values.json.gz`](../../frontier/exact-values.json.gz) register, stored as
+lossless gzip. The paper copies no mathematical value from another file.
 
 ## Coverage
 

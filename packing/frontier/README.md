@@ -157,11 +157,12 @@ The ones that carry the most weight:
   The catalogue prints either a closed form or a degree with its polynomial, never both,
   so every closed form here carries a derived pair.
   All four are null where nothing exact is known.
-  [`exact-values.json.gz`](exact-values.json.gz) collects them for every case and checks
-  each polynomial for irreducibility, a unique root in a rational interval and agreement
+  [`exact-values.json.gz`](exact-values.json.gz) collects them for every current case, keeps
+  its $n=1\ldots324$ entries and totals separate from the historical collection, and
+  checks each polynomial for irreducibility, a unique root in a rational interval and agreement
   with the recorded side.
   Independent KKT values remain separate numerical diagnostics.
-  Its storage is documented in [Generated Data Storage](#generated-data-storage).
+  Its lossless storage is documented in [Generated Data Storage](#generated-data-storage).
   Native certificate sides and certified outward ceilings carry distinct provenance.
   Rehwaldt’s finite refinements require exact equality between the reported decimal,
   verified decimal, exact fraction and retained witness side, with complete source,

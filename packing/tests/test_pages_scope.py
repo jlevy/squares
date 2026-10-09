@@ -314,6 +314,17 @@ def test_methods_manuscript_selects_only_its_own_page(
     }
 
 
+@pytest.mark.parametrize("suffix", [".json", ".json.gz"])
+def test_both_retained_register_paths_select_the_catalogue_and_overview(
+    suffix: str,
+    declared: dict[str, tuple[Path, ...]],
+) -> None:
+    assert in_scope([f"packing/frontier/exact-values{suffix}"], declared) == {
+        "exact_side_values",
+        "overview",
+    }
+
+
 @pytest.mark.parametrize(
     "slug",
     [
