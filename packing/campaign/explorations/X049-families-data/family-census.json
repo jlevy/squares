@@ -6094,7 +6094,7 @@
       "n": 210,
       "r": 14,
       "same_tilt_signature_as_next": false,
-      "shared_with_next": {"anchor":"upper-left","embeds":false,"fraction_of_n":0.314286,"matched":66,"matched_tilted":0,"max_tilted_matched":0,"tilted_in_n":75,"transform":"flip-x"},
+      "shared_with_next": {"anchor":"upper-right","embeds":false,"fraction_of_n":0.314286,"matched":66,"matched_tilted":0,"max_tilted_matched":0,"tilted_in_n":75,"transform":"identity"},
       "side": "14.973001116587625741983018050468",
       "side_equals_next": false,
       "side_equals_previous": false,
@@ -6107,8 +6107,8 @@
       "tilted_loose": 75
     },
     {
-      "angles": {"axis_aligned":{"loose":138,"tight":137},"class_count":{"loose":11,"tight":21},"classes_loose":[{"angle_degrees":0.0,"count":138},{"angle_degrees":3.0071,"count":3},{"angle_degrees":3.5508,"count":1},{"angle_degrees":18.525,"count":40},{"angle_degrees":20.0589,"count":5},{"angle_degrees":21.6794,"count":1},{"angle_degrees":23.7877,"count":3},{"angle_degrees":25.2927,"count":3},{"angle_degrees":25.9408,"count":4},{"angle_degrees":27.7987,"count":10},{"angle_degrees":28.753,"count":3}],"forty_five":{"loose":0,"tight":0},"other":{"loose":73,"tight":74}},
-      "axis_grid": {"axis_aligned":137,"component_count":8,"corner_lattice":{"any":128,"best":98,"lower-left":2,"lower-right":25,"upper-left":98,"upper-right":3},"largest_component":{"columns":12,"filled_rectangle":false,"rows":12,"size":98}},
+      "angles": {"axis_aligned":{"loose":138,"tight":137},"class_count":{"loose":11,"tight":21},"classes_loose":[{"angle_degrees":0.0,"count":138},{"angle_degrees":61.247,"count":3},{"angle_degrees":62.2013,"count":10},{"angle_degrees":64.0592,"count":4},{"angle_degrees":64.7073,"count":3},{"angle_degrees":66.2123,"count":3},{"angle_degrees":68.3206,"count":1},{"angle_degrees":69.9411,"count":5},{"angle_degrees":71.475,"count":40},{"angle_degrees":86.4492,"count":1},{"angle_degrees":86.9929,"count":3}],"forty_five":{"loose":0,"tight":0},"other":{"loose":73,"tight":74}},
+      "axis_grid": {"axis_aligned":137,"component_count":8,"corner_lattice":{"any":128,"best":98,"lower-left":25,"lower-right":2,"upper-left":3,"upper-right":98},"largest_component":{"columns":12,"filled_rectangle":false,"rows":12,"size":98}},
       "ceil_sqrt": 15,
       "closed_form": null,
       "d": -14,
@@ -6123,7 +6123,7 @@
       "n": 211,
       "r": 15,
       "same_tilt_signature_as_next": false,
-      "shared_with_next": {"anchor":"lower-left","embeds":false,"fraction_of_n":0.464455,"matched":98,"matched_tilted":0,"max_tilted_matched":0,"tilted_in_n":73,"transform":"rot90"},
+      "shared_with_next": {"anchor":"lower-left","embeds":false,"fraction_of_n":0.464455,"matched":98,"matched_tilted":0,"max_tilted_matched":0,"tilted_in_n":73,"transform":"rot180"},
       "side": "14.997960704967361565181004478378",
       "side_equals_next": false,
       "side_equals_previous": false,
@@ -6132,7 +6132,7 @@
       "source": {"coordinate_provenance":"numerically-checked","kind":"packet-derived-facts","method":"numerical-multiprecision"},
       "symmetry": {"near":{"elements":["identity"],"group":"trivial"},"tight":{"elements":["identity"],"group":"trivial"}},
       "tilted": 74,
-      "tilted_layout": {"count":73,"elongation":2.843,"principal_direction_degrees":43.79},
+      "tilted_layout": {"count":73,"elongation":2.843,"principal_direction_degrees":136.21},
       "tilted_loose": 73
     },
     {

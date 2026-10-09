@@ -1406,6 +1406,13 @@ jobs:
             /packing/campaign/explorations/
             !/packing/campaign/explorations/*
             /packing/campaign/explorations/X049-families-data/
+            /packing/campaign/agent-sessions/session-006-h026-exact-tangent.md
+            /packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md
+            /packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md
+            /packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md
+            /packing/resources/papers/trump-2023-packing-11-unit-squares.raw.md
+            /packing/resources/web/kingbird-squares-in-squares-rigid.md
+            /packing/resources/web/kingbird-squares-in-squares.md
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
