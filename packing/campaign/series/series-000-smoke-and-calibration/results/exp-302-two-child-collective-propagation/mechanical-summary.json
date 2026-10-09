@@ -1,0 +1,103 @@
+{
+  "schema": "n17-two-child-mechanical-summary/v1",
+  "scientific_rerun": false,
+  "full_payload_equal": true,
+  "fresh_verification_passed": true,
+  "roles": {
+    "propagation_descriptor": true,
+    "propagation_certificate": true,
+    "propagation_replay": true,
+    "selection_certificate": true,
+    "selection_replay": true
+  },
+  "source_files_count": 24,
+  "all_source_bytes_match": true,
+  "manifest_byte_join": true,
+  "children": [
+    {
+      "side": -1,
+      "closed": false,
+      "rows": 992,
+      "owners": 16,
+      "unchanged_other_groups": true,
+      "frozen_pass": true,
+      "halfplane": {
+        "axis": 0,
+        "midpoint": "471/250",
+        "relation": "<="
+      }
+    },
+    {
+      "side": 1,
+      "closed": false,
+      "rows": 992,
+      "owners": 16,
+      "unchanged_other_groups": true,
+      "frozen_pass": true,
+      "halfplane": {
+        "axis": 0,
+        "midpoint": "471/250",
+        "relation": ">="
+      }
+    }
+  ],
+  "combined_owner6": {
+    "additional_lost_length": "15/32",
+    "baseline_closed_interval_union": [
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "combined_surviving_closed_interval_union": [
+      [
+        "1/16",
+        "19/32"
+      ]
+    ],
+    "owner": 6
+  },
+  "owner6_label": 3,
+  "status": "additional_angle_union_restricted",
+  "criterion_met": true,
+  "base_foreign_rows": 992,
+  "original_rows": 1056,
+  "global_optimality": false,
+  "census_admission": false,
+  "guard_exclusion": false,
+  "supervision_status": "COMPLETED",
+  "cleanup_complete": true,
+  "returncode": 0,
+  "outer_seconds": 81.92460320901591,
+  "phase_seconds": [
+    42.41870258405106,
+    39.30618954100646
+  ],
+  "max_sampled_per_live_rss": 626884608,
+  "certificate_sha256": "f44d6730accf37edb62b5face0094468be1c3652d24c21ba6058f6414bfb81d5",
+  "replay_sha256": "40ab2ec6a24daf642d411629a0d16ce03016b53e92100c0cba5aa87e7839d023",
+  "source_commit": "2c131573bd8f0ebdba4a5fb100d80fde913665f8",
+  "mathematical_result_review": "Sole Astra actual scoped result CLEAR",
+  "files": {
+    "certificate.json": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/certificate.json",
+      "bytes": 17049235
+    },
+    "replay.json": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/replay.json",
+      "bytes": 17049394
+    },
+    "launch.json": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/launch.json",
+      "bytes": 4277
+    },
+    "phase-execution.json": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/phase-execution.json",
+      "bytes": 1931
+    },
+    "supervision.json": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/supervision.json",
+      "bytes": 1539
+    }
+  }
+}

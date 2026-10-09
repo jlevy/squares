@@ -57,7 +57,7 @@ EXPLAINER, PAPER = "n11-lower-bounds-explainer.html", "n11-optimality-review.htm
 THRESHOLD = "n11-threshold-bound-review.html"
 #: Every paper of the site, in reading order, as written here.
 PAPERS = (EXPLAINER, THRESHOLD, PAPER)
-#: The figures each review draws (Part II's twelve, the series plan's §6.2).
+#: Both retained review templates draw 12 captioned figures.
 REVIEW_FIGURES = {PAPER: 12, THRESHOLD: 12}
 #: The site's own pages measured here: a long report, whose headings, tables and block
 #: quotes hold formulas, and the homepage, whose cards, chips and tables do.

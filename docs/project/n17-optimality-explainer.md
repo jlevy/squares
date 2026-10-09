@@ -10,13 +10,15 @@ particular
 [§9, How an Optimality Proof Is Built](../../TUTORIAL.md#9-how-an-optimality-proof-is-built),
 and wants the $n = 17$ case itself: its numbers, its records and its status.
 
-**Owns:** the account of the proof in progress, as of 2026-10-05. Every number below is
+**Owns:** the account of the proof in progress, as of 2026-10-06. Every number below is
 taken from a linked record, and each claim is labelled by its evidential status:
-*proved* (an exact argument, machine-checked and reviewed), *verified* (an exact or
-outward-interval computation with a replay and a review), *projected* (an exact
-consequence of something not yet admitted), *heuristic* (a search result that certifies
-nothing), or *modelled* (an estimate).
+*proved* (an exact argument with its machine-checking and review scope stated),
+*verified* (an exact or outward-interval computation with a replay and a review),
+*projected* (an exact consequence of something not yet admitted), *heuristic* (a search
+result that certifies nothing), or *modelled* (an estimate).
 Where this document and a record differ, the record is right.
+The [October 6 consolidation](reviews/review-2026-10-06-n17-w3-consolidation.md) sets
+the next research decisions; the dated experiments preserve their original verdicts.
 
 **Does not own:** the case’s bounds, which [`n-017.md`](../../packing/frontier/n-017.md)
 and the [results register](../../packing/frontier/RESULTS.md) hold, or the general
@@ -37,6 +39,11 @@ two. It is not rigid.
 Square 6 is free in its hole, and squares 5, 11 and 13 slide without changing the side,
 so the object to be proved optimal is a **family**, not a pose.
 
+The R071 charge cannot prove a target at or above $186417711/40000000 = 4.660442775$ by
+per-parent counting: a legal obstruction parent has charge below the required budget per
+square. Further material progress on this lower-bound route needs a new charge,
+reweighting, or an argument across parents
+([R071 proof review, RF-7](reviews/review-2026-10-05-guzhou-r071.md#rf-7--note-r071-is-at-the-end-of-this-charge)).
 The frontier page and T-065 were brought in line with exp-245 on 2026-10-05.
 
 ## The Three Parts
@@ -46,11 +53,11 @@ The proof follows the shape that settled $n = 11$
 [Three parts](../../TUTORIAL.md#three-parts) says why a counting certificate cannot do
 it.
 
-| Part | What it must show for $n = 17$ | Status on 2026-10-05 |
+| Part | What it must show for $n = 17$ | Status on 2026-10-06 |
 | --- | --- | --- |
 | Local half | Every packing of side at most $S^{\ast}$ in the known occupancy state, with its 45 non-slider coordinates within $1/5000$ of the family’s, lies on the family and has side $S^{\ast}$ | **proved, with one review**: the capture-target theorem below composes machine-certified parts with hand lemmas 1–6 of the [recipe review](reviews/review-2026-10-02-n17-local-theorem-recipe.md); it is not machine-checked end to end |
-| Global half | Every packing of side at most $S^{\ast}$ lies in one of 346,104 occupancy states, and every state but the known one is impossible at side at most $S^{\ast}$. A state near the endpoint may be feasible at the census cap $U$, so it must be excluded at a cap in $[S^{\ast}, U]$ ([residue process review](reviews/review-2026-10-02-n17-residue-process.md#4-states-that-may-be-feasible-at-the-cap)) | the census is **verified**; four exclusions are **verified and admitted**, W7 and A ([exp-249](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-249-h267-n17-first-certified-sub-patterns.md)) and SW9 and the whole state N1 ([exp-250](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-250-h267-n17-standing-verifier-admissions.md)), leaving 15,953 orbits; the rest is open |
-| Capture | Every packing in the known state at the capture cap lies within $1/5000$ of the family | pilot 2 met the after-pilot falsifier: in rounds 15 to 17 every widest row was under $1/20$ of its extent and no position contracted. Lane R9’s reading of it is not yet written, so the route is undecided |
+| Global half | Every packing of side at most $S^{\ast}$ lies in one of 346,104 occupancy states, and every state but the known one is impossible at side at most $S^{\ast}$. A state near the endpoint may be feasible at the census cap $U$, so it must be excluded at a cap in $[S^{\ast}, U]$ ([residue process review](reviews/review-2026-10-02-n17-residue-process.md#4-states-that-may-be-feasible-at-the-cap)) | the cover census is **verified**; 58 admitted entries leave **36,784 states in 4,685 orbits**, with the family surviving ([Session 183](../../packing/campaign/agent-sessions/session-183-n17-draw-31.md)); the remaining states are open |
+| Capture | Every packing in the known state at the capture cap lies within $1/5000$ of the family | pilot 2 met the after-pilot falsifier: in rounds 15 to 17 every widest row was under $1/20$ of its extent and no two-sided position extent fell by 10 percent. The [R9 review](reviews/review-2026-10-05-n17-capture-r9.md) leaves a producer limit and an architectural limit as competing readings; the route is undecided |
 
 ## The Cap
 
@@ -240,7 +247,10 @@ With both admitted, the certified census is 139,976 states and 17,690 orbits.
 [exp-250](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-250-h267-n17-standing-verifier-admissions.md)
 then admitted two more kernel certificates on the standing verifier’s full pass: flag 3,
 an arity-9 class named SW9, and N1, a whole 17-cell residue state.
-The certified census is now 126,168 states and 15,953 orbits.
+At that October 2 checkpoint, the certified census was 126,168 states and 15,953 orbits.
+Sessions 182 and 183 brought it to 36,784 states in 4,685 orbits under 58 admitted
+entries, with the endpoint surviving
+([exp-258](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-258-h275-n17-draw-31.md)).
 The family’s state contains no image of any admitted pattern.
 
 ## Capture and Its Pilot
@@ -336,18 +346,23 @@ that is not optional.
 | A certification, branch and bound | 569 s for 41,598 nodes, about 14 ms a node | the node count, which multiplies as a pattern’s margin shrinks; W7, whose best found placement violates by $9 \times 10^{-3}$, had 0.4% of its tree closed after 30 min |
 | The selector to arity 7 | 2,028 s on two workers | penalty descent over 43,086 classes |
 
-Each flagged class is an independent job, so the 44 run in parallel without
-coordination. A compiled evaluator for the branch and bound’s per-node bounds is the
-obvious speed-up; it is unbuilt and its gain unmeasured.
+Each flagged class is an independent job, subject to compute and memory limits.
+The optional native branch-and-bound evaluator landed in
+[PR 350](https://github.com/jlevy/squares/pull/350), with about tenfold per-process
+speedup on an identical search tree.
+Session 182’s routing queue nevertheless stopped when calibration underpredicted A’s
+tree by 3.07-fold, outside its factor-three band.
+Throughput alone does not establish affordable full certification.
 
 ## What Remains
 
 Stated without a forecast, because none is on record.
 
-1. **Certify or refute the remaining flags.** W7, A and SW9 are admitted.
-   Of the selector’s other flags, the finish-stage recheck
-   (`selector-recheck-90-seed1.json`) placed one arity-8 class, so 87 stand without a
-   certificate. Uniform rows stalled on several.
+1. **Certify or refute the remaining flags.** Sessions 182 and 183 added many admissions
+   beyond W7, A and SW9; remaining targets must be selected against the current ledger.
+   The finish-stage recheck (`selector-recheck-90-seed1.json`) placed one arity-8 class,
+   and its historical 87 standing flags are candidate inputs, not a current count of
+   uncertified flags. Uniform rows stalled on several.
    Adaptive rows closed flag 3 (SW9) but stalled on flag 2 at their cap of 1,152 rows:
    the cap was spent by round 4, the live rows fell from 1,152 to 794 by round 18 and
    then stopped, and three of the nine owners never lost a row.
@@ -357,21 +372,41 @@ Stated without a forecast, because none is on record.
    The obstruction is on the west wall, where the per-row losses are as large as the
    margins an exact cut would need.
    Interior-SE and side-S1 took 36% of the rows and cannot lose one until the west wall
-   shrinks, so the next run aims its splits at side-W0, W1, S0 and interior-W. A flag
-   the prover cannot close is either a false flag, in which case the search resumes, or
-   a stall of the engine on a true pattern, which needs finer rows, splitting or the
-   other prover.
-2. **A method for the residue.** 15,953 certified orbits remain, and at most 5,084 if
-   every flag of arity seven proves; each is a state that no small pattern excludes and
-   that must be excluded on its own, as $n = 11$ excluded 276 cases at about 636
-   CPU-seconds each. The kernel has excluded one such state, N1, in 3,723 s, but the
-   $n = 17$ per-state method and its price are not established; the
-   [residue process review](reviews/review-2026-10-02-n17-residue-process.md) plans one.
-3. **Capture.** The review’s falsifier is met: with every owner’s rows under a twentieth
-   of its extent for three rounds, no position contracted.
-   Unless the independent review finds another producer limit, the $n = 11$ capture
-   architecture is set aside for $n = 17$ and the widened projection theorem, scoped in
-   Session 167, becomes the route.
+   shrinks. Later extended-row retries closed lane K’s target 2 and two BC-426 flags, but
+   their admissions remain held on BC-423’s control disposition.
+   Aimed splits on side-W0, W1, S0 and interior-W are a candidate for genuinely
+   remaining loss-limited stalls, not a reason to repeat completed retries.
+   A flag the prover cannot close is either a false flag, in which case the search
+   resumes, or a stall of the engine on a true pattern, which needs finer rows,
+   splitting or the other prover.
+2. **A method for the residue.** 4,685 certified orbits remain.
+   The per-state kernel has measured evidence on frozen draws:
+   [H-264 / exp-252](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-252-h264-n17-overnight-per-state-price.md)
+   met its criterion with five of ten counted draws closed; the other five reached
+   producer fixed points.
+   [H-274 / exp-253](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-253-h274-n17-stalls-under-adaptive-rows.md)
+   accepted the adaptive-row repair on its first two states, and all four frozen stalls
+   subsequently closed and were verified and admitted.
+   The fifth H-264 stall was outside that registered repair draw.
+   [H-275 / exp-257](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-257-h275-n17-unsampled-strata.md)
+   and
+   [draw 31 / exp-258](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-258-h275-n17-draw-31.md)
+   yielded 26 closures of 29 counted draws, all verified and admitted; two reached
+   producer fixed points and one ended incomplete at the 7,000-second ceiling.
+   The two distance-2 draws are reported separately: one closed and one ended
+   incomplete. Counted closures cost 547 to 4,522 seconds of process CPU and 257 to 1,899
+   seconds of verification.
+   H-275 remains an open question: these are results for the draws, not a frame-wide
+   closure rate or a price for the hard tail.
+   The next residue decision needs the current strata and the stalled cases, rather than
+   an extrapolation from the closure fraction alone.
+3. **Capture.** Pilot 2 met the review’s falsifier: with every owner’s rows under a
+   twentieth of its extent for three rounds, no two-sided position extent fell by 10
+   percent. The [R9 review](reviews/review-2026-10-05-n17-capture-r9.md) supplies staged
+   diagnostics to distinguish a producer limit from an architectural limit.
+   A widened projection theorem is a scoped fallback, with an unbuilt patch-count
+   instrument; it still needs an outer engine that reaches its feature-forcing region
+   from the cells. No capture route is selected by the pilot’s failure alone.
 4. **Independent review of everything.** Each piece so far carries one review.
    The composition of the census, the certificates, the consumer and the capture into
    one argument has not been written down, let alone reviewed, and T-060’s rungs show
@@ -403,11 +438,11 @@ $n = 17$ lower-bound results and holds the bracket’s lower end.
 | --- | --- |
 | Proved | The depth-width wall lemma; the identity of the certified side with the catalogue polynomial; the stress; with one review and not machine-checked end to end, the capture-target theorem as the composition of exp-244, exp-248 and exp-247 with hand lemmas 1–6 of the [recipe review](reviews/review-2026-10-02-n17-local-theorem-recipe.md) |
 | Verified | The rational ceiling on the side; the R071 lower bound at `V3/C3` (T-093), and R068’s before it (T-043); the cover’s coverage, capacities, $D_4$ invariance, Burnside count and unique family state; the local minimum over $B_W'$ at $r = 1/5000$; the slide bounds |
-| Admitted | The W7 and A certificates, each re-proved in full by an independent verifier ([exp-249](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-249-h267-n17-first-certified-sub-patterns.md)); the SW9 and N1 kernel certificates, each re-proved in full by the standing verifier, and again by the verifier fixed for the closed-cover defect class, which the defects had not reached on either ([verifier-rewrites review, §6.5](reviews/review-2026-10-03-n17-verifier-rewrites.md#65-re-verification-with-the-fixed-verifier)); and the certified census of 15,953 orbits ([exp-250](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-250-h267-n17-standing-verifier-admissions.md)) |
+| Admitted | The W7 and A certificates, each re-proved in full by an independent verifier ([exp-249](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-249-h267-n17-first-certified-sub-patterns.md)); the SW9 and N1 kernel certificates, each re-proved in full by the standing verifier, and again by the verifier fixed for the closed-cover defect class, which the defects had not reached on either ([verifier-rewrites review, §6.5](reviews/review-2026-10-03-n17-verifier-rewrites.md#65-re-verification-with-the-fixed-verifier)); and the current certified census of 36,784 states in 4,685 orbits under 58 admitted entries ([exp-258](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-258-h275-n17-draw-31.md)) |
 | Projected | Nothing at present beyond the heuristic lines below |
 | Heuristic | Every selector flag, every best-penetration figure, and every orbit count conditional on flags proving |
 | Modelled | The feasible-set radii at the two caps; the capture cost table and its falsifier thresholds |
-| Not decided | The capture route after pilot 2 (R9’s review); a per-state method for the residue; the composed proof and its review |
+| Not decided | The capture route after pilot 2 (R9’s review); a method and price for the hard residue tail despite the measured draws; the composed proof and its review |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
