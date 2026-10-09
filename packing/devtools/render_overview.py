@@ -1674,7 +1674,10 @@ def forwarder_pages() -> list[Page]:
     """
     import posixpath  # noqa: PLC0415
 
+    from devtools import site_assets  # noqa: PLC0415
+
     metas = forwarded_metas()
+    forward_script = site_assets.shared().assets.script_file(FORWARD_SCRIPT)
     template = FORWARDER.read_text(encoding="utf-8")
     pages = []
     for old, new in MOVED_PAGES:
@@ -1689,7 +1692,7 @@ def forwarder_pages() -> list[Page]:
             "FILE_TARGET": html.escape(file_target, quote=True),
             "TITLE": html.escape(OFF_SITE_TITLES[new] if meta is None else meta.name),
             "HEAD": forwarder_head(new, meta, old=old),
-            "FORWARD_SCRIPT": _script_text(FORWARD_SCRIPT),
+            "FORWARD_SCRIPT": site_assets.script_tag(forward_script, old),
         }
         page = fill(template, values, where=FORWARDER.name)
         if old in {"cases.html", "cases/index.html"}:
@@ -1760,6 +1763,7 @@ def write_site(output: Path, files: Sequence[Page]) -> None:
     from devtools.render_case_pages import CASES_DIR  # noqa: PLC0415
 
     output.mkdir(parents=True, exist_ok=True)
+    site_assets.write_assets(output, asset_files(files))
     kept = {output / file.name for file in files}
     for directory in (RESULT_FRAGMENTS, CASES_DIR):
         for stale in sorted((output / directory).glob("*.html")):
@@ -1769,7 +1773,6 @@ def write_site(output: Path, files: Sequence[Page]) -> None:
         target = output / file.name
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(file.html, encoding="utf-8")
-    site_assets.write_assets(output, asset_files(files))
     for name, data in support_files().items():
         target = output / name
         target.parent.mkdir(parents=True, exist_ok=True)

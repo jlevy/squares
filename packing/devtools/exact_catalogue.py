@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 from collections.abc import Mapping
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -23,29 +24,79 @@ class ExactCatalogueError(ValueError):
     """A register record cannot be exported without losing its exact identity."""
 
 
+def publication_register(register: Mapping[str, Any]) -> dict[str, Any]:
+    """Copy the register, omitting superseded history and its redundant current notes.
+
+    The canonical register keeps these source facts. Publication retains every other
+    record and field, including the assurance of unreconciled source roots.
+    """
+    published = deepcopy(dict(register))
+    for key in ("entries", "historical_entries"):
+        records = published.get(key, [])
+        if not isinstance(records, list):
+            raise ExactCatalogueError(f"register.{key} must be an array")
+        for record in records:
+            if not isinstance(record, dict):
+                raise ExactCatalogueError(f"register.{key} records must be objects")
+            if key == "entries" and isinstance(record.get("notes"), list):
+                record["notes"] = [
+                    note
+                    for note in record["notes"]
+                    if not isinstance(note, dict)
+                    or note.get("kind") != "superseded-catalogue-polynomial"
+                ]
+        if key == "historical_entries" and key in published:
+            published[key] = [
+                record for record in records if record.get("kind") != "superseded"
+            ]
+    return published
+
+
 def _json(value: object) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
 
 
+def source_certificate_claim(certificate: Mapping[str, Any]) -> str:
+    level = f"{certificate['verification']}/{certificate['confirmation']}"
+    adoption = "pending" if certificate["adoption"] == "pending" else "not selected"
+    replay = (
+        "Native geometry replay is retained."
+        if certificate["geometry_replay"] == "native-replay-retained"
+        else "Geometry has not been replayed for this source packet."
+    )
+    return (
+        "Independently checked exact rational side. "
+        f"Packing adoption is {adoption} ({level}). {replay} "
+        "Global optimality remains open."
+    )
+
+
 def _claim(record: Mapping[str, Any], section: str) -> str:
     if section == "historical":
-        if record.get("kind") == "unreconciled-source" and record.get("reported_source"):
-            return REPORTED_SOURCE_CLAIM
-        return {
-            "source-invalid": (
-                "The algebraic checks do not furnish a valid packing upper bound: "
-                "the source marks this historical row invalid."
-            ),
-            "superseded": (
-                "This historical source side is superseded by the current recorded side."
-            ),
-            "outside-frontier": (
-                "This historical source side lies outside the current frontier."
-            ),
-            "unreconciled-source": (
-                "The relationship of this historical source to the frontier is unresolved."
-            ),
-        }.get(str(record.get("kind")), "Historical source fact; no current bound is claimed.")
+        certificate = record.get("source_certificate")
+        if isinstance(certificate, dict):
+            claim = source_certificate_claim(certificate)
+        elif record.get("kind") == "unreconciled-source" and record.get("reported_source"):
+            claim = REPORTED_SOURCE_CLAIM
+        else:
+            claim = {
+                "source-invalid": (
+                    "The algebraic checks do not furnish a valid packing upper bound: "
+                    "the source marks this historical row invalid."
+                ),
+                "superseded": (
+                    "This historical source side is superseded by the current recorded side."
+                ),
+                "outside-frontier": (
+                    "This historical source side lies outside the current frontier."
+                ),
+                "unreconciled-source": (
+                    "The relationship of this historical source to the frontier is unresolved."
+                ),
+            }.get(
+                str(record.get("kind")), "Historical source fact; no current bound is claimed."
+            )
+        return claim
     side = record.get("side", {})
     relation = side.get("relation") if isinstance(side, dict) else None
     if relation == "equality" and record.get("status") == "proved":
@@ -99,10 +150,12 @@ def _coefficient_strings(
 def output_files(register: Mapping[str, Any], *, papers: Path) -> dict[Path, str]:
     """Plan every output before publication; coefficient strings occur only in payloads.
 
-    All record fields survive except the redundant polynomial text and LaTeX, whose
-    complete representations remain in the archive. Nested note polynomials also get
+    The publication subset omits superseded historical rows and current notes. Its
+    fields survive except redundant polynomial text and LaTeX, whose complete
+    representations remain in the archive. Retained nested note polynomials also get
     their own coefficient payload, so metadata never silently expands a large vector.
     """
+    register = publication_register(register)
     files: dict[Path, str] = {}
     rows: list[dict[str, Any]] = []
     historical_counts: dict[int, int] = {}
@@ -118,10 +171,14 @@ def output_files(register: Mapping[str, Any], *, papers: Path) -> dict[Path, str
             ordinal = historical_counts[n]
             side_identity = str(record.get("side")).encode("utf-8").hex()
             identity = f"historical-n{n}-s{side_identity}"
-            if identity in identities:
+            repeated_side = identity in identities
+            if repeated_side:
                 identity += f"-occurrence{ordinal}"
             component = f"H_{n},{ordinal}"
             title = f"Historical side for n = {n}: {record.get('side')}"
+            certificate = record.get("source_certificate")
+            if repeated_side and isinstance(certificate, Mapping):
+                title += f" ({certificate['source_key']})"
         else:
             identity = f"current-n{n}"
             component = f"P_{n}" if record.get("polynomial") is not None else "recorded-side"

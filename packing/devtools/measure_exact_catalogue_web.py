@@ -81,14 +81,16 @@ def local_path(url: str, *, base: Path, site: Path) -> Path | None:
     return candidate
 
 
-def initial_assets(page: Path, site: Path) -> tuple[dict[str, int], Path]:
+def automatic_assets(page: Path, site: Path) -> tuple[dict[str, int], Path | None]:
     """Count each local automatic resource once, including CSS resource references."""
     parser = InitialAssets()
     parser.feed(page.read_text(encoding="utf-8"))
-    if parser.index_url is None:
-        raise ValueError("browser has no data-index-url")
-    index = local_path(parser.index_url, base=page.parent, site=site)
-    if index is None:
+    index = (
+        local_path(parser.index_url, base=page.parent, site=site)
+        if parser.index_url is not None
+        else None
+    )
+    if parser.index_url is not None and index is None:
         raise ValueError("index must be a local JSON file")
     pending = [(page, False)]
     for url in [*parser.urls, *_CSS_URL.findall("\n".join(parser.styles))]:
@@ -110,11 +112,21 @@ def initial_assets(page: Path, site: Path) -> tuple[dict[str, int], Path]:
     return dict(sorted(assets.items())), index
 
 
+def initial_assets(page: Path, site: Path) -> tuple[dict[str, int], Path]:
+    """The browser's complete automatic resource roster, including its lazy index."""
+    assets, index = automatic_assets(page, site)
+    if index is None:
+        raise ValueError("browser has no data-index-url")
+    return assets, index
+
+
 def check_projection(register: dict[str, Any], index_path: Path, site: Path) -> dict[str, int]:
     """Compare records recursively against the register without using exporter code.
 
-    Only redundant polynomial text/LaTeX are omitted; complete archives retain them.
-    Every original metadata field and every integer coefficient must compare exactly.
+    Independently derive the intended subset: exclude superseded historical rows and
+    superseded-catalogue-polynomial current notes. Every retained metadata field and
+    integer coefficient must compare exactly; redundant polynomial text/LaTeX remain
+    in the canonical archive.
     """
     index = json.loads(index_path.read_text(encoding="utf-8"))
     entries = index["entries"]
@@ -158,10 +170,35 @@ def check_projection(register: dict[str, Any], index_path: Path, site: Path) -> 
         elif type(original) is not type(exported) or original != exported:
             raise ValueError("record value differs from register")
 
-    counts: dict[str, int] = {}
+    counts: dict[str, int] = {
+        "omitted_superseded_historical": 0,
+        "omitted_superseded_notes": 0,
+    }
     for section, key in (("current", "entries"), ("historical", "historical_entries")):
         projected = [entry for entry in entries if entry["section"] == section]
         originals = register.get(key, [])
+        if section == "historical":
+            counts["omitted_superseded_historical"] = sum(
+                original.get("kind") == "superseded" for original in originals
+            )
+            originals = [
+                original for original in originals if original.get("kind") != "superseded"
+            ]
+        else:
+            retained = []
+            for original in originals:
+                publication_record = original
+                if isinstance(original.get("notes"), list):
+                    notes = [
+                        note
+                        for note in original["notes"]
+                        if not isinstance(note, dict)
+                        or note.get("kind") != "superseded-catalogue-polynomial"
+                    ]
+                    counts["omitted_superseded_notes"] += len(original["notes"]) - len(notes)
+                    publication_record = {**original, "notes": notes}
+                retained.append(publication_record)
+            originals = retained
         if len(projected) != len(originals):
             raise ValueError(f"{section} record count differs from register")
         counts[section] = len(originals)
@@ -173,7 +210,7 @@ def check_projection(register: dict[str, Any], index_path: Path, site: Path) -> 
             if payload["id"] != entry["id"] or payload["section"] != section:
                 raise ValueError("metadata belongs to another record")
             compare(original, payload["record"])
-    if len(entries) != sum(counts.values()):
+    if len(entries) != counts["current"] + counts["historical"]:
         raise ValueError("unclassified browser entries")
     for key in set(register) - {"entries", "historical_entries"}:
         compare(register[key], index[key])
@@ -195,6 +232,7 @@ def measure(
     register: Path,
     *,
     maximum_fraction: float = 0.25,
+    baseline_site: Path | None = None,
 ) -> dict[str, Any]:
     """Refuse invalid projections before judging the predeclared byte threshold."""
     threshold = _maximum_fraction(maximum_fraction)
@@ -203,21 +241,33 @@ def measure(
     envelope = document.get("softschema", {}).get("envelope")
     original = document[envelope] if envelope else document
     coverage = check_projection(original, index, site)
-    control = baseline.stat().st_size
-    if control <= 0:
+    baseline = baseline.resolve()
+    control_root = baseline_site or (
+        site.resolve() if baseline.is_relative_to(site.resolve()) else baseline.parent
+    )
+    control_assets, _ = automatic_assets(baseline, control_root.resolve())
+    control = sum(control_assets.values())
+    if baseline.stat().st_size <= 0:
         raise ValueError("empty complete-HTML control")
     candidate = sum(assets.values())
     return {
         "metric": "initial_raw_bytes",
-        "regime": "default unselected route; local uncompressed automatic assets and index",
+        "regime": (
+            "HTML plus unique local uncompressed automatic resources; "
+            "browser includes its index"
+        ),
         "control_bytes": control,
+        "control_assets": control_assets,
         "candidate_bytes": candidate,
         "maximum_fraction": threshold,
         "candidate_fraction": candidate / control,
         "passes_acceptance": candidate <= control * threshold,
         "assets": assets,
         "coverage": coverage,
-        "validity": "all original metadata and coefficient strings compare exactly",
+        "validity": (
+            "all retained publication metadata and coefficient strings compare exactly; "
+            "superseded historical rows and current notes intentionally omitted"
+        ),
         "exclusions": "clicked metadata/coefficient files and archives; no latency claim",
     }
 
@@ -234,6 +284,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--baseline", type=Path, required=True)
     parser.add_argument("--site", type=Path, required=True)
+    parser.add_argument("--baseline-site", type=Path, help="root serving the complete control")
     parser.add_argument("--page", default="papers/exact-side-values.html")
     parser.add_argument("--register", type=Path, default=Path("frontier/exact-values.json"))
     parser.add_argument("--output", type=Path)
@@ -250,6 +301,7 @@ def main() -> None:
         args.site / args.page,
         args.register,
         maximum_fraction=args.maximum_fraction,
+        baseline_site=args.baseline_site,
     )
     repo = Path(__file__).resolve().parents[2]
     revision = subprocess.check_output(
@@ -264,6 +316,7 @@ def main() -> None:
         "python": platform.python_version(),
         "command": sys.argv,
         "control": str(args.baseline.resolve()),
+        "control_site": str(args.baseline_site.resolve()) if args.baseline_site else None,
         "candidate": str((args.site / args.page).resolve()),
     }
     text = json.dumps(result, indent=2, sort_keys=True) + "\n"

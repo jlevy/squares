@@ -156,16 +156,6 @@ GALOIS_DEGREES = range(2, 7)
 
 #: Every current numeric-only count has a named lane and an owning bead.
 ROUTES: dict[int, tuple[str, str]] = {
-    102: (
-        "think-eu89",
-        (
-            "Bind and convert the already retained current ry-xu certificate at "
-            "8dc415296f697f5140caea27c7a0193d52deb4e6 before deriving current-pose "
-            "contacts, a stable seed or any KKT/W6 result. The earlier evand "
-            "13ee36e5 input remains a historical fixture; its contact system and "
-            "local-minimum claims do not transfer to this new geometry."
-        ),
-    ),
     29: (
         "think-je8y",
         (
@@ -233,6 +223,17 @@ ROUTE_GROUPS = (
 for _counts, _bead, _route in ROUTE_GROUPS:
     for _n in _counts:
         ROUTES[_n] = (_bead, _route)
+# This current-pose prerequisite must survive the group assignment above.
+ROUTES[102] = (
+    ROUTES[102][0],
+    ROUTES[102][1]
+    + " Before resuming this ideal-contact lane, bind and convert the already retained "
+    "current ry-xu certificate at 8dc415296f697f5140caea27c7a0193d52deb4e6. Derive its "
+    "active, weak and forced contacts and frozen variables, confirm the current-pose "
+    "seed, and pass the W7 driver and n11 control before a preregistered bounded W6 "
+    "run. The earlier evand 13ee36e5 input remains a historical fixture; its contact "
+    "system and local-minimum claims do not transfer to this new geometry.",
+)
 for _n, _bead in (
     (105, "think-gl59"),
     (211, "think-uc8i"),
@@ -579,7 +580,18 @@ def reference_factor_degrees_mod(coefficients: Sequence[int], prime: int) -> lis
     return degrees
 
 
+#: Nonnegative modular products must remain representable by NumPy signed int64.
+INT64_MAX = int(np.iinfo(np.int64).max)
+
+
 type _Vector = npt.NDArray[np.int64]
+
+
+def _validate_modular_prime(degree: int, prime: int) -> None:
+    if type(prime) is not int:
+        raise ExactValuesError("modular arithmetic requires an integer prime")
+    if prime < 2 or degree * (prime - 1) ** 2 > INT64_MAX:
+        raise ExactValuesError("modular arithmetic would exceed the exact int64 bound")
 
 
 def _trim_mod(vector: _Vector) -> _Vector:
@@ -632,8 +644,7 @@ def factor_degrees_mod(coefficients: Sequence[int], prime: int) -> list[int] | N
     are `gcd(f, x^(p^i) - x)` once the lower degrees are divided out. NumPy carries the
     arithmetic, all of it exact in int64.
     """
-    if prime < 2 or (len(coefficients) - 1) * (prime - 1) ** 2 >= 2**63:
-        raise ExactValuesError("modular arithmetic would exceed the exact int64 bound")
+    _validate_modular_prime(len(coefficients) - 1, prime)
     if coefficients[0] % prime == 0:
         return None
     modulus = np.array([c % prime for c in coefficients], dtype=np.int64)
@@ -1092,6 +1103,9 @@ def polynomial_checks(
     else:
         if not certificate_primes or len(certificate_primes) > budget:
             raise ExactValuesError(f"n = {n}: empty or over-budget SVG prime hints")
+        # Bound untrusted hints before primality work and fixed-width arithmetic.
+        for prime in certificate_primes:
+            _validate_modular_prime(len(coefficients) - 1, prime)
         if not all(sp.isprime(prime) for prime in certificate_primes):
             raise ExactValuesError(f"n = {n}: SVG prime hints include a composite")
         if not verify_modular_certificate(coefficients, certificate_primes):

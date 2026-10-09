@@ -102,14 +102,17 @@ refinement, and upper-bound certification
 The independent
 [Exact Side Values for Packing Unit Squares](packing/devtools/templates/exact-side-values-article.md)
 is generated from the [exact-values register](packing/frontier/exact-values.json.gz).
-It assembles 321 exact current sides across $n = 1\ldots324$ and 175 noncurrent source
-polynomial entries, with every coefficient, source locator and algebraic certificate.
+It assembles 321 exact current sides across $n = 1\ldots324$ and 26 additional source
+records, with every published coefficient, source locator and algebraic certificate.
+The source register retains superseded entries separately.
 Historical examples reach $n = 2135$; source-invalid proposals retain their flags.
-Four additional reported roots retain V0/C0 assurance while geometry and Lean replay
-await verification. The
-[web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html) supports
-search, filters and per-entry coefficient downloads.
-The full HTML report and Markdown export retain every recorded equation and coefficient.
+Three improving reported roots retain V0/C0 assurance while geometry and Lean replay
+await verification. Thirteen Couzo finite-certificate offers remain pending adoption,
+with their original source pins, certificates and replay custody.
+The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html)
+supports search, filters and per-entry coefficient downloads.
+The full HTML report and Markdown export retain every equation and coefficient in the
+published collection.
 The
 [mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
 states what was independently checked, and the

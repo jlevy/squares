@@ -191,11 +191,19 @@ name: Certificate page
       - packing/tests/test_assemble_site.py
       - packing/devtools/pages_scope.py
       - packing/devtools/render_exact_side_values.py
+      - packing/devtools/probes/site_assets/**
+      - packing/devtools/measure_exact_catalogue_web.py
+      - packing/devtools/report_exact_catalogue_web.py
+      - packing/tests/test_measure_exact_catalogue_web.py
       - packing/devtools/retained_data.py
       - packing/devtools/exact_catalogue.py
       - packing/devtools/build_exact_values.py
       - packing/devtools/extract_kingbird_svg_exact.py
       - packing/devtools/templates/exact-side-values-article.md
+      - packing/resources/web/couzo-extended-reports-2026-10-08/README.md
+      - packing/resources/web/evand-record-hunt-2026-10-09/README.md
+      - packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
       - packing/devtools/templates/exact-side-values-shell.html
       - packing/devtools/templates/exact-side-values.css
       - packing/devtools/templates/exact-side-values-browser-shell.html
@@ -504,6 +512,10 @@ jobs:
             !/packing/campaign/*/
             /packing/resources/web/kingbird-squares-in-squares.md
             /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz
+            /packing/resources/web/couzo-extended-reports-2026-10-08/README.md
+            /packing/resources/web/evand-record-hunt-2026-10-09/README.md
+            /packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/README.md
+            /packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -532,7 +544,7 @@ jobs:
         env:
           SQPACK_EXACT_SIDE_VALUES_BROWSER: "1"
           SQPACK_REQUIRE_CHROMIUM: "1"
-        run: uv run --frozen --all-extras --group dev pytest -q tests/test_render_exact_side_values.py tests/test_exact_catalogue.py tests/test_exact_side_values_web.py
+        run: uv run --frozen --all-extras --group dev pytest -q tests/test_render_exact_side_values.py tests/test_exact_catalogue.py tests/test_exact_side_values_web.py tests/test_site_scripts.py tests/test_measure_exact_catalogue_web.py
 
       # The canonical HTML is the compact report and catalogue. Complete HTML/Markdown
       # and the index, script, metadata and coefficient payloads travel together.
@@ -541,6 +553,7 @@ jobs:
         run: |
           uv run --frozen --group dev python -m devtools.render_exact_side_values --site site
           uv run --frozen --group dev python -m devtools.render_exact_side_values --site site --check
+          uv run --frozen --group dev python -m devtools.check_site_scripts site
           uv run --frozen --group dev python -m devtools.render_exact_side_values --site site --check-web --web-report "$RUNNER_TEMP/exact-side-values-web.json"
           test ! -e site/papers/exact-side-values.pdf
           test -s site/papers/exact-side-values-complete.html

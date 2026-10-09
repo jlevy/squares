@@ -93,8 +93,8 @@ PAPER_PROGRAMS = (
     ),
     (
         "Typesets a kpress page's formulas",
-        "non-layout",
-        "Readiness wiring skips already prepared primary mathematics.",
+        "deferred-math",
+        "Typeset unprepared formulas near the viewport and during idle time.",
     ),
     ("The reader's colour theme:", "input-response", "Reader theme controls."),
     (
@@ -157,7 +157,7 @@ class SourceProgram:
     text: str
     category: str
     reason: str
-    limit: int
+    limit: int | None
     paths: frozenset[str]
     inline: bool
 
@@ -165,54 +165,52 @@ class SourceProgram:
 def publication_programs() -> tuple[SourceProgram, ...]:
     """Read current approved template inputs once per inventory, including copied aliases."""
     from devtools import render_exact_side_values as paper  # noqa: PLC0415
-    from devtools import site_urls  # noqa: PLC0415
+    from devtools import (  # noqa: PLC0415
+        site_assets,
+        site_urls,
+    )
 
-    rows = site_urls.load_registry()
-    pages = {
-        row.path
-        for row in rows
-        if row.path.endswith(".html") and row.producer.startswith("paper:")
-    } | {paper.SITE_PATH, paper.COMPLETE_PATH}
-    pages |= {row.path for row in rows if row.kind == "copy" and row.target in pages}
-    paths = frozenset(pages)
     static = paper.render_n11_lower_bounds_explainer.kpress_static()
-    return (
+    programs = [
         SourceProgram(
             paper.BROWSER_SCRIPT.read_text(encoding="utf-8"),
             "catalogue-application",
-            (
-                "A small index loads at startup; metadata and coefficients follow input. "
-                "Complete archives remain linked."
-            ),
+            "A small index loads at startup; metadata and coefficients follow input.",
             24_000,
             frozenset({site_urls.CATALOGUE_BROWSER_PATH}),
             inline=False,
-        ),
-        SourceProgram(
+        )
+    ]
+    assets = site_assets.SiteAssets()
+    for text, category, reason in (
+        (
             paper.THEME_SCRIPT.read_text(encoding="utf-8"),
             "input-response",
-            "Retained shared publication footer theme controls (measured 6,013 bytes).",
-            8_192,
-            paths,
-            inline=True,
+            "Shared publication footer theme controls.",
         ),
-        SourceProgram(
+        (
             paper.MATH_SCRIPT.read_text(encoding="utf-8"),
-            "non-layout",
-            "Retained math wiring skips prepared primary formulas (measured 6,094 bytes).",
-            8_192,
-            paths,
-            inline=True,
+            "deferred-math",
+            "Typeset unprepared formulas near the viewport and during idle time.",
         ),
-        SourceProgram(
+        (
             paper.render_n11_lower_bounds_explainer.katex_js(static),
-            "input-response",
-            "Pinned KPress math runtime for paper controls (measured 393,760 bytes).",
-            450_000,
-            paths,
-            inline=True,
+            "deferred-math",
+            "Pinned math runtime for queued complete-article formulas and reader controls.",
         ),
-    )
+    ):
+        reference = assets.script("page.js", text)
+        programs.append(
+            SourceProgram(
+                text,
+                category,
+                reason,
+                None,
+                frozenset({f"{site_assets.ASSETS_DIR}/{reference.output_path}"}),
+                inline=False,
+            )
+        )
+    return tuple(programs)
 
 
 def classify(
@@ -224,6 +222,8 @@ def classify(
 ) -> Script:
     """Classify a reviewed program; fail closed when a new family is shipped."""
     size = len(text.encode())
+    if inline and size > 4096:
+        raise ValueError(f"inline startup script exceeds 4096 bytes: {source}")
     path = source.partition("#script-")[0] if inline else source
     owned = programs if programs is not None else publication_programs()
     candidates = [
@@ -231,7 +231,7 @@ def classify(
     ]
     for program in candidates:
         if text == program.text:
-            if size > program.limit:
+            if program.limit is not None and size > program.limit:
                 raise ValueError(
                     f"retained publication program exceeds {program.limit} bytes: {source}"
                 )
@@ -275,7 +275,7 @@ def _family_script(source: str, text: str, *, inline: bool) -> Script:
             return Script(
                 source,
                 "input-response",
-                "Pinned KaTeX and kpress metrics for interactive paper controls.",
+                "Pinned KaTeX and kpress metrics for queued formulas and interactive controls.",
                 len(text.encode()),
             )
     raise ValueError(f"unclassified executable script: {source}")

@@ -15,6 +15,7 @@ import pytest
 
 from devtools import exact_catalogue
 from devtools.measure_exact_catalogue_web import (
+    automatic_assets,
     check_projection,
     initial_assets,
     local_path,
@@ -102,6 +103,8 @@ def test_projection_keeps_zero_and_large_integer_strings(tmp_path: Path) -> None
         "historical": 0,
         "coefficient_vectors": 1,
         "integer_coefficients": 3,
+        "omitted_superseded_historical": 0,
+        "omitted_superseded_notes": 0,
     }
     payload["coefficients"][1] = "1"
     (data / "coefficients.json").write_text(json.dumps(payload), encoding="utf-8")
@@ -123,6 +126,14 @@ def test_measure_reads_retained_register_and_checks_all_current_and_historical_c
                 "side": {"value": "9.25", "relation": "upper-bound"},
                 "degree": 2,
                 "polynomial": {"coefficients": vector},
+                "notes": [
+                    {
+                        "kind": "superseded-catalogue-polynomial",
+                        "degree": 2,
+                        "polynomial": {"coefficients": vector},
+                    },
+                    {"kind": "retained-source", "text": "retain this metadata"},
+                ],
             }
         ],
         "historical_entries": [
@@ -132,7 +143,14 @@ def test_measure_reads_retained_register_and_checks_all_current_and_historical_c
                 "side": "9.5",
                 "degree": 2,
                 "polynomial": {"coefficients": vector},
-            }
+            },
+            {
+                "n": 83,
+                "kind": "superseded",
+                "side": "9.6",
+                "degree": 2,
+                "polynomial": {"coefficients": vector},
+            },
         ],
     }
     source = tmp_path / "exact-values.json"
@@ -164,6 +182,8 @@ def test_measure_reads_retained_register_and_checks_all_current_and_historical_c
         "historical": 1,
         "coefficient_vectors": 2,
         "integer_coefficients": 6,
+        "omitted_superseded_historical": 1,
+        "omitted_superseded_notes": 1,
     }
     baseline.write_bytes(b"x" * (result["candidate_bytes"] * 5))
     assert measure(baseline, tmp_path, page, loaded)["passes_acceptance"]
@@ -207,6 +227,59 @@ def test_measure_reads_retained_register_and_checks_all_current_and_historical_c
         measure(baseline, tmp_path, page, loaded)
 
 
+def test_projection_derives_the_subset_independently_and_refuses_retained_note_loss(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    register = {
+        "entries": [
+            {
+                "n": 83,
+                "notes": [
+                    {"kind": "superseded-catalogue-polynomial", "text": "omit"},
+                    {"kind": "retained-source", "text": "keep"},
+                ],
+            }
+        ],
+        "historical_entries": [
+            {"n": 83, "side": "9.5", "kind": "superseded"},
+            {"n": 1, "side": "1", "kind": "source-invalid"},
+        ],
+    }
+    papers = tmp_path / "papers"
+    for path, content in exact_catalogue.output_files(register, papers=papers).items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+
+    def refuse_exporter_dependency(*_arguments: object) -> None:
+        raise AssertionError("independent checker must not call the publication helper")
+
+    monkeypatch.setattr(exact_catalogue, "publication_register", refuse_exporter_dependency)
+    index = papers / exact_catalogue.INDEX_PATH
+    coverage = check_projection(register, index, tmp_path)
+    assert coverage == {
+        "current": 1,
+        "historical": 1,
+        "coefficient_vectors": 0,
+        "integer_coefficients": 0,
+        "omitted_superseded_historical": 1,
+        "omitted_superseded_notes": 1,
+    }
+    rows = json.loads(index.read_text(encoding="utf-8"))["entries"]
+    metadata = papers / rows[0]["metadata_url"]
+    payload = json.loads(metadata.read_text(encoding="utf-8"))
+    payload["record"]["notes"] = []
+    metadata.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ValueError, match="record array"):
+        check_projection(register, index, tmp_path)
+    payload["record"]["notes"] = [{"kind": "retained-source", "text": "keep"}]
+    metadata.write_text(json.dumps(payload), encoding="utf-8")
+    document = json.loads(index.read_text(encoding="utf-8"))
+    document["entries"].pop()
+    index.write_text(json.dumps(document), encoding="utf-8")
+    with pytest.raises(ValueError, match="historical record count"):
+        check_projection(register, index, tmp_path)
+
+
 @pytest.mark.parametrize(
     "threshold", [0.0, -0.1, 1.01, float("nan"), float("inf"), -float("inf")]
 )
@@ -238,6 +311,20 @@ def test_measure_refuses_invalid_thresholds_before_reading_inputs(
 
 def test_recorded_report_is_current() -> None:
     assert report() == (CAMPAIGN / "report.md").read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize(
+    "omission", ["omitted_superseded_historical", "omitted_superseded_notes"]
+)
+def test_report_refuses_publication_omissions(tmp_path: Path, omission: str) -> None:
+    copied = tmp_path / "record"
+    shutil.copytree(CAMPAIGN, copied)
+    for receipt in copied.glob("exp-*-bytes.json"):
+        measured = json.loads(receipt.read_text(encoding="utf-8"))
+        measured["coverage"][omission] = 1
+        receipt.write_text(json.dumps(measured), encoding="utf-8")
+    with pytest.raises(ValueError, match="H-001 requires every canonical record and note"):
+        report(copied)
 
 
 def test_report_refuses_forged_acceptance(tmp_path: Path) -> None:
@@ -289,3 +376,52 @@ def test_provenance_includes_staged_and_untracked_inputs(
     assert working_tree_dirty(tmp_path)
     git("add", "source.txt")
     assert working_tree_dirty(tmp_path)
+
+
+def test_complete_control_counts_unique_linked_resources_and_keeps_the_ratio(
+    tmp_path: Path,
+) -> None:
+    register = {"entries": [], "historical_entries": []}
+    source = tmp_path / "register.json"
+    source.write_text(json.dumps(register), encoding="utf-8")
+    papers = tmp_path / "papers"
+    for path, content in exact_catalogue.output_files(register, papers=papers).items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+    (papers / "shared.css").write_text('@font-face {src:url("face.woff2")}', encoding="utf-8")
+    (papers / "face.woff2").write_bytes(b"font")
+    (papers / "shared.js").write_text("void 0;", encoding="utf-8")
+    resources = '<link rel="stylesheet" href="shared.css"><script src="shared.js"></script>'
+    page = papers / "browser.html"
+    page.write_text(resources + f'<main data-index-url="{exact_catalogue.INDEX_PATH}"></main>')
+    baseline = papers / "complete.html"
+    baseline.write_text(resources + '<script src="shared.js"></script>' + "complete" * 1000)
+    result = measure(baseline, tmp_path, page, source, maximum_fraction=0.10)
+    control, index = automatic_assets(baseline, tmp_path)
+    assert index is None
+    assert result["control_assets"] == control
+    assert set(control) == {
+        "papers/complete.html",
+        "papers/shared.css",
+        "papers/shared.js",
+        "papers/face.woff2",
+    }
+    assert result["control_bytes"] == sum(control.values())
+    assert result["candidate_bytes"] == sum(result["assets"].values())
+    assert result["candidate_fraction"] == result["candidate_bytes"] / result["control_bytes"]
+    assert result["maximum_fraction"] == 0.10
+    assert result["passes_acceptance"]
+    (papers / "face.woff2").unlink()
+    with pytest.raises(ValueError, match="missing asset"):
+        measure(baseline, tmp_path, page, source, maximum_fraction=0.10)
+
+
+def test_report_refuses_uncounted_complete_control_resources(tmp_path: Path) -> None:
+    copied = tmp_path / "record"
+    shutil.copytree(CAMPAIGN, copied)
+    receipt = copied / "exp-001-bytes.json"
+    measured = json.loads(receipt.read_text(encoding="utf-8"))
+    measured["control_assets"] = {"complete.html": measured["control_bytes"] - 1}
+    receipt.write_text(json.dumps(measured), encoding="utf-8")
+    with pytest.raises(ValueError, match="complete-control byte-count"):
+        report(copied)
