@@ -138,12 +138,15 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: corpus tripwires below are the sums over the current retained square motions.
 #: The three T-117/T-118 rational refinements replace the motions at 68, 105 and 292;
 #: these are the corresponding sums from their refreshed retained numerical screen.
-#: The T-119 poses at 266, 270 and 272 were re-screened against their current complete
-#: houses; their motions change only the full-corpus sums.
+#: T-119 replaces the houses at 266, 270 and 272. T-125/T-126 replace eighteen
+#: more houses. Their selected-case numerical refresh preserves every other screen
+#: row and produces these measured current aggregate tripwires.
+#: T-127 refreshes fourteen Gupta rows; all three corpus tripwires below sum their
+#: current complete retained motions, with the other 310 screen rows unchanged.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (27, 94, 86, 570),
-    "n=1..200": (66, 539, 182, 2047),
-    "n=1..324": (120, 1500, 302, 4799),
+    "n=1..100": (28, 159, 86, 631),
+    "n=1..200": (67, 558, 182, 2030),
+    "n=1..324": (121, 1593, 302, 5022),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -3724,6 +3727,11 @@ def _class_record_claims(context: Context) -> str:
     return _module(context, "devtools.check_class_record_claims")
 
 
+def _fn1_original_bindings(context: Context) -> str:
+    """Complete original-input custody, without geometric replay (#366 FN-1)."""
+    return _module(context, "devtools.wand125_fn1_bindings")
+
+
 def _retained_json_layout(context: Context) -> str:
     # About 1.5s: a line count of every tracked JSON larger than the threshold, then a
     # parse and re-layout of the few over it that no exemption names. Records tier for the
@@ -4656,6 +4664,19 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step("soft-schema validation", _schemas, fast=True, records=True),
+    Step(
+        "FN1 original-input bindings",
+        _fn1_original_bindings,
+        fast=True,
+        records=True,
+        touches=(
+            "packing/devtools/wand125_fn1_bindings.py",
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/retained_data.py",
+            "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/*",
+            "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/*",
+        ),
+    ),
     Step(
         "class records do not claim the unconditional bound",
         _class_record_claims,

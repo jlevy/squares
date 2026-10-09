@@ -544,9 +544,9 @@ for `n = 68…307`, which issue #227 asked this project to register,
 [Joost de Winter’s `s(211) < 15`](web/de-winter-square-packing-211-2026-09-16/README.md),
 and [Griffin Casson’s 39 packings](web/casson-square-packing-2026-09-23/README.md) for
 `n = 103…307`, each of which Couzo’s beats.
-The first two publish no licence, so their packets keep derived facts and metadata only,
-on the [known-best retention policy](web/known-best-packings/README.md); Casson’s
-packings are CC BY 4.0 and retained byte for byte.
+The first two publish no licence, and their packets take the derived-only form of the
+[known-best retention policy](web/known-best-packings/README.md), keeping derived facts
+and metadata only; Casson’s packings are CC BY 4.0 and retained byte for byte.
 Every Couzo and de Winter packing is certified here by an exact rational replay whose
 certificates are under `packing/witnesses/`. A fourth, of 5 October,
 [retains the seven packings Couzo lowered on 3 October](web/franciscouzo-square-packing-2026-10-03/README.md),
@@ -858,6 +858,97 @@ The source credits Ellsworth, Couzo, Cleemann, Arslanov, Mustafin, Shangitbayev 
 Stead, with register data from the Squares Project (Joshua Levy) under CC BY 4.0 and
 Claude assistance under Daniel’s direction.
 Source MIT licences and the earlier #375 namespace remain unchanged.
+
+## Ryan Xu’s rational and radical packings
+
+- **[ry-xu square packing 2026]** — Ryan Xu’s complete packing reports, pinned at
+  `8dc415296f697f5140caea27c7a0193d52deb4e6`;
+  [packet](web/ry-xu-new-packings-2026-10-08/README.md).
+  All 25 rational certificates have complete exact finite-feasibility replay (T-125).
+  The separate undilated n = 51 construction in $Q(\sqrt 2)$ is confirmed by T-126. The
+  atlas selects 17 rational packings and that radical construction; eight rational
+  certificates remain as nonselected evidence.
+  Native exact checks find 119 touching pairs at n = 51; the source’s count of 191
+  remains unconfirmed.
+  These results establish finite upper bounds, without local or global optimality.
+  The packet preserves factual inputs and credits Xu’s direction and LLM assistance; it
+  does not treat the unlicensed source programs as a licensed software bundle.
+
+- **[Gupta rational refinements 2026-10-08]** — Siddharth Gupta’s seventeen complete
+  rational source cases at `9643cb5a78c1d4dcfc867c80a6920c3a6219d05a`; fourteen selected
+  finite upper-bound improvements and three withdrawals, T-127 at V3/C3.
+  [Factual packet](web/gupta-square-packing-refinements-2026-10-08/README.md).
+  Independently re-implemented deciding code verified every complete source certificate
+  and full-roster control; actual private custody admitted the complete retained
+  inputs/results without repeating geometry.
+  These results establish finite feasibility, not optimality or human oversight.
+  SQUISH credit remains with Nate Chaoweeraprasit, and Evan Daniel’s optimizer is
+  credited. Unlicensed programs/prose remain hash-pinned; the solver MIT notice is not
+  treated as a bundle licence.
+
+## Exact-Root Report for n68, v1.2
+
+**[Rehwaldt n68 exact-root report v1.2]**: Seth Rehwaldt after Couzo and earlier
+contributors, with OpenAI Codex assistance.
+The [authored packet](web/rehwaldt-n68-exact-root-2026-10-08/README.md) records
+exact-root feasibility and restricted-family attainment at pinned revision
+`495238e3d5a542008ff2f01a1dbbb78527cbe732`. Both claims remain unconfirmed here; the
+earlier finite rational T-118 result remains unchanged.
+Complete original custody is preserved outside live Git; public files contain attributed
+factual metadata and external-byte identities only.
+
+## Reported Fine-Net Lower Bounds
+
+**[wand125 fine-net lower bounds 2026-10-08]**: wand125, using the project’s maintained
+geometric kernel, reports seven finer-net measure certificates for n19, n20, n26, n27,
+n28, n29 and n31. The
+[authored factual packet](web/wand125-fine-net-lower-bounds-2026-10-08/README.md)
+records the reported bounds and complete source references.
+Independent whole-net replay and controls remain pending.
+
+- **[Couzo exact refinements 2026-10-08]** — Francisco Couzo’s eight complete rational
+  certificates and separate decimal context poses; T-128 remains V0/C0 pending
+  historical source-house integration and confirmation.
+  All 24 native jobs completed their finite-feasibility and control outcomes in 6.64
+  wall minutes; actual private-worker custody passed complete stored-input and
+  mutation-restoration checks.
+  [Factual packet](web/couzo-exact-refinements-2026-10-08/README.md).
+  Ryan Xu, Nate Chaoweeraprasit, Siddharth Gupta, David Ellsworth and Evan Daniel
+  receive the source’s construction/refinement credits; no optimality is asserted.
+
+- **[Daniel dated certificates 105 and 130 2026-10-07]** — Evan Daniel’s complete dated
+  certificate reports and matching inputs for Francisco Couzo constructions at 105 and
+  130, pinned at 7eef24f.
+  [Historical source packet](web/evand-batch-105-130-2026-10-07/README.md).
+  T-129 records V0/C0/S1; both sides are superseded by smaller currently verified
+  bounds. Code is MIT; batch data credits Joshua Levy and this project under CC BY 4.0.
+  No geometry replay or selected-case change.
+
+- **[Daniel dated certificate 292 2026-10-07]** — Evan Daniel’s complete dated
+  certificate report and matching input for Francisco Couzo’s 292 construction, pinned
+  at f58a017. [Historical source packet](web/evand-batch-292-2026-10-07/README.md).
+  T-129 records V0/C0/S1; its side is superseded by the current verified bound.
+  Code is MIT; batch data credits Joshua Levy and this project under CC BY 4.0. The
+  [separate wrapper correction](web/evand-batch-wrapper-2026-10-07/README.md) is pinned
+  at cca7bf1; its reported rerun earns no replay credit here.
+
+- **[Couzo extended-range reports 2026-10-08]** — Francisco Couzo’s twenty complete
+  decimal poses beyond n324, retained as numerical facts and Git custody metadata.
+  [Source packet](web/couzo-extended-reports-2026-10-08/README.md).
+  All twenty remain author reports outside the standing-case corpus; no result row,
+  geometry replay, selected bound or verification from the separate issue451
+  certificates. Raw upstream text, SVGs, prose and programs remain outside Git under the
+  existing retention policy; no redistribution permission is asserted.
+
+- **[Couzo follow-up refinements 2026-10-08]** — Francisco Couzo’s five follow-up exact
+  rational certificates at 84, 86, 105, 175 and 270, pinned at 2d32a6e and kept as
+  derived exact facts with the complete pinned tree; no upstream byte is retained.
+  [Derived packet](web/couzo-followup-refinements-2026-10-08/README.md).
+  T-130 remains V0/C0: all five positives passed both maintained exact routes and both
+  routes refused all ten controls, while independent review, historical source-house
+  integration and confirmation remain pending.
+  Ryan Xu, Evan Daniel and David Ellsworth receive the source’s seed and refinement
+  credits; no optimality is asserted.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

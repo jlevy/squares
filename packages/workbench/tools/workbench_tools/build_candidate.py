@@ -51,6 +51,7 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import connected_components
 
 from sqpack.release import PUBLICATION_EDITION
+from sqpack.witness import materialize_exact_witness
 from workbench_tools.self_contained import assert_self_contained_html
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
@@ -303,11 +304,35 @@ def load_witness(n: int) -> dict:
     data = yaml.load((WITNESSES / f"n-{n:03d}.yaml").read_text(), Loader=Loader)["witness"]
     representation = data["representation"]
     angle_unit = data["coordinates"]["angle_unit"]
-    side = float(Fraction(data["side"]))
+    exact_geometry = None
+    scalar_kind = data.get("scalar", {}).get("kind")
+    if scalar_kind == "algebraic-number-field" or (
+        scalar_kind == "rational" and representation != "corners"
+    ):
+        exact_geometry, exact_side = materialize_exact_witness(data)
+        side = float(exact_side)
+    else:
+        side = float(Fraction(data["side"]))
     squares = []
     keys = []
-    for square in data["squares"]:
-        if representation == "center-angle":
+    for index, square in enumerate(data["squares"]):
+        if exact_geometry is not None:
+            corners = exact_geometry[index]
+            cx = float(sum(x for x, _ in corners) / 4)
+            cy = float(sum(y for _, y in corners) / 4)
+            (x0, y0), (x1, y1) = corners[0], corners[1]
+            angle = math.degrees(math.atan2(float(y1 - y0), float(x1 - x0))) % 90.0
+            # Animation uses floats; its picture-sharing key keeps the full exact
+            # field/root and pose identity rather than the rounded projection.
+            identity = {
+                "scalar": data["scalar"],
+                "coordinates": data["coordinates"],
+                "representation": representation,
+                "side": data["side"],
+                "square": {key: value for key, value in square.items() if key != "id"},
+            }
+            keys.append(("exact", json.dumps(identity, sort_keys=True, separators=(",", ":"))))
+        elif representation == "center-angle":
             cx, cy = (float(Fraction(value)) for value in square["center"])
             angle = _angle_degrees(square["angle"], angle_unit) % 90.0
             keys.append(("ca", square["center"][0], square["center"][1], square["angle"]))
@@ -704,19 +729,39 @@ def static_match(kind: str, n: int, mapping: list[int], new: int, rule: str, **e
     }
 
 
+def recorded_shared_picture(previous: dict, following: dict) -> bool:
+    """A catalogue relation applies only while both selected houses use that picture.
+
+    The next source's listed counts describe its retained upstream catalogue; a newly
+    selected source at the previous count does not inherit that historical relation.
+    """
+    n = previous["n"]
+    a, b = previous.get("source", {}), following.get("source", {})
+    return bool(
+        b.get("source_n") == n + 1
+        and a.get("source_n") == b.get("source_n")
+        and a.get("kind") == b.get("kind")
+        and a.get("url")
+        and a.get("url") == b.get("url")
+        and {n, n + 1}.issubset(a.get("listed_n", []))
+        and {n, n + 1}.issubset(b.get("listed_n", []))
+    )
+
+
 def match_pair(
     prev: dict,
     nxt: dict,
     prev_render: list[dict],
     nxt_render: list[dict],
     manifest_entry_next: dict,
+    *,
+    manifest_entry_previous: dict,
 ) -> dict:
     n = prev["n"]
     a_keys, b_keys = prev["keys"], nxt["keys"]
     if b_keys[:n] == a_keys:
         return static_match("prefix", n, list(range(n)), n, "prefix: square n+1 is appended")
-    source = manifest_entry_next.get("source", {})
-    recorded = source.get("source_n") == n + 1 and n in source.get("listed_n", [])
+    recorded = recorded_shared_picture(manifest_entry_previous, manifest_entry_next)
     removed = shared_picture_removal(prev, nxt)
     if recorded and removed is None:
         raise ValueError(
@@ -2071,6 +2116,7 @@ def main(argv: list[str] | None = None) -> int:
                 renderings[n],
                 renderings[n + 1],
                 manifest_by_n[n + 1],
+                manifest_entry_previous=manifest_by_n[n],
             )
         matches[n] = match
         with clock.stage("measure the pairs"):

@@ -1,0 +1,134 @@
+{
+  "format": "external-source-acquisition-v1",
+  "git_scope": "All 49 files of the pinned Git tree acquired via the GitHub Git API and immutable release ZIP. All 47 ZIP files match pinned blobs; README.md and CITATION.cff were read from Git blobs. No checkout was created and no source program was executed.",
+  "retrieved_at_utc": "2026-10-08T05:29:29Z",
+  "sources": [
+    {
+      "archived_path": "packing/resources/web/gupta-square-packing-refinements-2026-10-08/source",
+      "claims": [
+        "Fourteen source-reported precision refinements of published SQUISH constructions at n=88,130,153,154,179,180,199,207,208,209,236,237,238,239.",
+        "The source withdraws n=108,123,129 because smaller #432 constructions exist.",
+        "Source feasibility logs remain unconfirmed external reports until native replay. Acquisition establishes no global optimality, rigidity, structural novelty or priority."
+      ],
+      "committed_utc": "2026-10-08T03:05:35Z",
+      "compressed": [
+        "source/LICENSES/Evan-Daniel-MIT.txt.gz",
+        "source/SHA256SUMS.gz",
+        "source/audit/frontier-correction.json.gz",
+        "source/audit/public-comparisons.json.gz",
+        "source/comparators/public-088.cert.json.gz",
+        "source/comparators/public-108.cert.json.gz",
+        "source/comparators/public-123.cert.json.gz",
+        "source/comparators/public-129.cert.json.gz",
+        "source/comparators/public-130.cert.json.gz",
+        "source/comparators/public-153.cert.json.gz",
+        "source/comparators/public-154.cert.json.gz",
+        "source/comparators/public-179.cert.json.gz",
+        "source/comparators/public-180.cert.json.gz",
+        "source/comparators/public-199.cert.json.gz",
+        "source/comparators/public-207.cert.json.gz",
+        "source/comparators/public-208.cert.json.gz",
+        "source/comparators/public-209.cert.json.gz",
+        "source/comparators/public-236.cert.json.gz",
+        "source/comparators/public-237.cert.json.gz",
+        "source/comparators/public-238.cert.json.gz",
+        "source/comparators/public-239.cert.json.gz",
+        "source/findings.json.gz",
+        "source/integrity.json.gz",
+        "source/negative-controls.txt.gz",
+        "source/superseded/packing-108.cert.gz",
+        "source/superseded/packing-123.cert.gz",
+        "source/superseded/packing-129.cert.gz",
+        "source/verification-results.txt.gz",
+        "source/witnesses/packing-088.cert.gz",
+        "source/witnesses/packing-130.cert.gz",
+        "source/witnesses/packing-153.cert.gz",
+        "source/witnesses/packing-154.cert.gz",
+        "source/witnesses/packing-179.cert.gz",
+        "source/witnesses/packing-180.cert.gz",
+        "source/witnesses/packing-199.cert.gz",
+        "source/witnesses/packing-207.cert.gz",
+        "source/witnesses/packing-208.cert.gz",
+        "source/witnesses/packing-209.cert.gz",
+        "source/witnesses/packing-236.cert.gz",
+        "source/witnesses/packing-237.cert.gz",
+        "source/witnesses/packing-238.cert.gz",
+        "source/witnesses/packing-239.cert.gz"
+      ],
+      "git_tree": "2b44e5a97ea8249aa6b9744a172067efe5c4c895",
+      "id": "gupta-square-packing-refinements",
+      "license": "No bundle-wide licence stated. The retained Evan Daniel MIT notice covers the cited optimizer only. Factual certificates, comparators, manifests, findings and audit outputs are retained; original programs and prose are pinned only.",
+      "pinned_only": [
+        {
+          "bytes": 422,
+          "path": "CITATION.cff",
+          "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle.",
+          "sha256": "956bb561d489d0ade9e3ab7ab384c3685e411b725a191485bd42253aacc68aa0"
+        },
+        {
+          "bytes": 1069,
+          "path": "CREDITS.txt",
+          "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle.",
+          "sha256": "7a9ad806d73f4837342786e6c5f5ebe2ecea3a5fe64aaf592742bface62e6ebf"
+        },
+        {
+          "bytes": 1721,
+          "path": "README.md",
+          "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle.",
+          "sha256": "f63d592480cf0596c78bad6c1e3989e78c323fb07da0621a1a1120dc94b2936b"
+        },
+        {
+          "bytes": 1689,
+          "path": "README.txt",
+          "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle.",
+          "sha256": "2e47b43e44584adb1179df7d08f28325d8d96847fef1854bb490b2fa563915b8"
+        },
+        {
+          "bytes": 5732,
+          "path": "certify.py",
+          "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle.",
+          "sha256": "6ed25f8cad036500c401a1b835ad528c441243cba84d0db58f91a4cf3980db61"
+        },
+        {
+          "bytes": 3696,
+          "path": "independent_sat.py",
+          "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle.",
+          "sha256": "f39b760400208502b94b1a4c51d5d6c070ddfa9149da259b2c060d650fd313d9"
+        },
+        {
+          "bytes": 2769,
+          "path": "verify.py",
+          "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle.",
+          "sha256": "b187523865ad1a29765f63c0ab1899d07a2938c01a8a9f38ea33617f812cd802"
+        }
+      ],
+      "retained_file_count": 42,
+      "retained_total_bytes": 943824,
+      "source_commit": "9643cb5a78c1d4dcfc867c80a6920c3a6219d05a",
+      "source_ref": "v1.0.0",
+      "source_url": "https://github.com/SidG2k1/square-packing-refinements",
+      "subtree_file_count": 49,
+      "subtree_manifest": "packing/resources/web/gupta-square-packing-refinements-2026-10-08/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "CITATION.cff",
+        "CREDITS.txt",
+        "LICENSES",
+        "README.md",
+        "README.txt",
+        "SHA256SUMS",
+        "audit",
+        "certify.py",
+        "comparators",
+        "findings.json",
+        "independent_sat.py",
+        "integrity.json",
+        "negative-controls.txt",
+        "superseded",
+        "verification-results.txt",
+        "verify.py",
+        "witnesses"
+      ],
+      "subtree_total_bytes": 960922
+    }
+  ]
+}

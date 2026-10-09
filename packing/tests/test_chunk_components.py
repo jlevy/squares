@@ -95,8 +95,9 @@ def test_retained_census_reports_source_stratified_coverage() -> None:
     # squares than the rendering it replaced and fits six chunks with at most three free;
     # the new packings at n = 83 and 87 (T-089) leave both counts where they were.
     # The second SQUISH update replaces n = 88's 86 structured squares with 72.
-    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1778, 1860)
-    assert non_grid["within_six_chunks_and_three_free"] == 26
+    # The selected RY houses at n70/84/86 retain 23 fewer structured squares.
+    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1755, 1860)
+    assert non_grid["within_six_chunks_and_three_free"] == 25
 
     # The relaxed sweep still structures more of n = 68 and merges its angle classes; the
     # counts are Couzo's packing's, where the UnitSquare one gave 57 and 60, 13 and 7.
@@ -118,13 +119,15 @@ def test_retained_census_reports_source_stratified_coverage() -> None:
     assert partitioned_non_grid["records"] == 36
     assert partitioned_non_grid["established"] == 3
     assert partitioned_non_grid["outside_registered_budget"] == 2
-    assert partitioned_non_grid["not_established"] == 23
-    assert partitioned_non_grid["search_limit"] == 8
+    # The selected n84 house has a retained not-established outcome; its earlier
+    # search-limit outcome describes the old source geometry.
+    assert partitioned_non_grid["not_established"] == 24
+    assert partitioned_non_grid["search_limit"] == 7
     assert [
         entry["n"]
         for entry in near_partitions["entries"]
         if entry["status"] == "not-established-search-limit"
-    ] == [52, 65, 66, 67, 82, 84, 85, 89]
+    ] == [52, 65, 66, 67, 82, 85, 89]
     assert [
         entry["n"]
         for entry in near_partitions["entries"]

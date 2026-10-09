@@ -1,0 +1,594 @@
+"""Register Gupta's complete source scope with history-first selected-case adoption.
+
+This stage remains reported. Confirming result integration follows the separately
+reviewed full native execution and actual production custody transaction.
+"""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+import re
+import tempfile
+from decimal import Decimal, localcontext
+from fractions import Fraction
+from pathlib import Path
+from typing import Any
+
+from devtools import gupta_house_links as houses
+from devtools import register_ryxu_reports as previous
+from devtools import render_case_verifiers
+from devtools.confirm_refinement_records import replace_row
+from devtools.register_refinement_reports import FOOTER, append_rows, dump, save
+from sqpack.yamlio import safe_load
+
+REPO = houses.REPO
+FRONTIER = REPO / "packing/frontier"
+DAY = "2026-10-08"
+REPORT = "E-gupta-438-rational-report"
+RESULT = "T-127"
+SOURCE_ID = "gupta-square-packing-refinements-2026-10-08"
+HISTORY = houses.HISTORY
+HISTORY_FORMAT = "gupta-438-prior-frontier-and-house-v1"
+SECTION = "## The Gupta precision refinement"
+REVIEW = "docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md"
+PACKET_PATH = "packing/resources/web/gupta-square-packing-refinements-2026-10-08"
+
+
+def reported_bound(n: int) -> dict[str, Any]:
+    certificate = houses.reports.read_fact(n)
+    return {
+        "value": houses.reports.legacy.ceiling_decimal(certificate.side, 16),
+        "exact_form": str(certificate.side),
+        "algebraic_degree": 1,
+        "minimal_polynomial": None,
+        "analytically_optimized": None,
+        "catalogue_rigid": "not-stated",
+        "construction_method": "unknown",
+        "tilt_angles_deg": None,
+        "found_by": ["Nate Chaoweeraprasit (itsnaka)"],
+        "found_year": 2026,
+        "improved_by": ["Siddharth Gupta"],
+        "catalogue_pictured": False,
+        "source_key": houses.reports.SOURCE_KEY,
+        "source_date": DAY,
+        "retrieved_date": DAY,
+        "witnesses": [f"W-known-best-n{n:03d}"],
+        "evidence": [REPORT],
+    }
+
+
+def section(n: int, *, confirmed: bool) -> str:
+    bound = reported_bound(n)
+    assurance = (
+        "Complete dual-route native replay, full-roster controls and separately prompted "
+        "source and production review confirm finite feasibility at V3/C3 using independently "
+        "re-implemented deciding code. The repository routes share parsing, half-angle "
+        "conversion, Fraction arithmetic and SAT methodology; the recorded code relation "
+        "is to the source producer's verification, not to each other."
+        if confirmed
+        else "The registered source claim remains V0/C0 pending independent production "
+        "custody review and confirming record integration. Drawing admission is separate."
+    )
+    return (
+        f"\n{SECTION}\n\n"
+        f"Siddharth Gupta refines the earlier SQUISH construction at exact rational side "
+        f"${bound['exact_form']}$, displayed upward as ${bound['value']}$ ({RESULT}). "
+        "The [complete factual packet]"
+        "(../resources/web/gupta-square-packing-refinements-2026-10-08/README.md) "
+        "retains every original certificate, complete comparator and actual deciding "
+        "outcome for all seventeen source cases, including three withdrawals.\n\n"
+        f"{assurance} The full source poses are converted without dilation or rounding. "
+        "The source credits Nate Chaoweeraprasit for SQUISH and Evan Daniel for the "
+        "optimizer. No author program is executed here. Feasibility establishes no "
+        "optimizer, local-minimum, rigidity, novelty, priority, global-optimality, formal "
+        "proof or human-oversight assurance.\n"
+    )
+
+
+def preserve_prose_rendering(expected: str, existing: str) -> str:
+    """Keep owner layout only when the complete text differs by typographic formatting."""
+    punctuation = str.maketrans({"\u2019": "'", "\u2018": "'", "\u201c": '"', "\u201d": '"'})
+
+    def normalized(text: str) -> str:
+        return " ".join(text.translate(punctuation).split())
+
+    return existing if normalized(existing) == normalized(expected) else expected
+
+
+def ceiling_prose(n: int, case: dict[str, Any], body: str) -> str:
+    """Expose a retained older ceiling without assigning it to the reported pose."""
+    heading = "## The verified upper bound is a ceiling"
+    pattern = rf"\n{heading}\n.*?(?=\n## |\n<!-- This document follows)"
+    retained = re.search(pattern, body, flags=re.DOTALL)
+    body = re.sub(pattern, "", body, flags=re.DOTALL)
+    verified = case["verified_upper_bound"]["value"]
+    reported = case["reported_upper_bound"]["value"]
+    if Fraction(case["verified_upper_bound"]["exact_form"]) == Fraction(
+        case["reported_upper_bound"]["exact_form"]
+    ):
+        return body
+    with localcontext() as context:
+        context.prec = 28
+        gap = Decimal(verified) - Decimal(reported)
+    section = (
+        f"\n{heading}\n\n"
+        f"`verified_upper_bound` retains the earlier construction's certified ceiling "
+        f"${verified}$. The selected `reported_upper_bound` is ${reported}$, smaller "
+        f"by ${gap}$. The verified ceiling is not the value of $s({n})$ and does not "
+        "certify the selected Gupta geometry. Complete native results for that geometry "
+        "are retained; actual private-worker admission and confirming record review "
+        "remain pending.\n"
+    )
+    if retained is not None:
+        section = preserve_prose_rendering(section, retained.group())
+    marker = "\n## The lower bound"
+    if body.count(marker) != 1:
+        raise ValueError("one lower-bound section required for the ceiling comparison")
+    return body.replace(marker, section + marker, 1)
+
+
+def historical_prose(n: int, body: str) -> str:
+    """Scope old ceiling and picture comparisons while preserving source names."""
+    historical, separator, current = body.partition(SECTION)
+    historical = previous.historical_upper_prose(n, historical)
+    historical = historical.replace(
+        "Previously, nate Chaoweeraprasit", "Previously, Nate Chaoweeraprasit"
+    ).replace("the atlas pictures", "the atlas pictured at that intake")
+    return historical + separator + current
+
+
+def validate_prior_house(row: dict[str, Any], case: dict[str, Any]) -> None:
+    """Schema-load every original pose, then bind its source and side to the old case."""
+    shared = houses.shared
+    source_key = case["reported_upper_bound"]["source_key"]
+    n = row["n"]
+    if source_key == shared.confirmation.reported.SOURCE_KEY:
+        source_url = shared.confirmation.reported.source_url(n)
+    elif source_key == shared.shared.SOURCE_KEY:
+        source_url = shared.shared.source_url(n)
+    elif source_key == shared.original.source_key(n):
+        source_url = shared.original.source_url(n)
+    else:
+        raise ValueError("history requires an admitted original SQUISH source")
+    if len(row["house"].encode()) > shared.original.MAX_RECEIPT_BYTES:
+        raise ValueError("history prior house exceeds the existing witness ceiling")
+    try:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "original-house.yaml"
+            path.write_text(row["house"])
+            witness = shared.bounded_house(path)
+        identity_matches = (
+            witness["n"] == n
+            and witness["id"] == f"W-known-best-n{n:03d}"
+            and witness["source"]["key"] == source_key
+            and witness["source"]["url"] == source_url
+            and Fraction(witness["side"])
+            == Fraction(case["reported_upper_bound"]["exact_form"])
+        )
+    except (ValueError, KeyError, TypeError, AttributeError) as error:
+        raise ValueError("complete original prior house witness required") from error
+    if not identity_matches:
+        raise ValueError("complete original prior house identity/source/side required")
+
+
+def validate_history(value: Any) -> list[dict[str, Any]]:
+    """Validate the same complete original boundary before its first save or a retry."""
+    if (
+        type(value) is not dict
+        or set(value) != {"format", "cases"}
+        or value["format"] != HISTORY_FORMAT
+        or type(value["cases"]) is not list
+        or any(
+            type(row) is not dict
+            or set(row) != {"n", "frontier", "house"}
+            or type(row["n"]) is not int
+            or type(row["frontier"]) is not str
+            or type(row["house"]) is not str
+            for row in value["cases"]
+        )
+        or [row["n"] for row in value["cases"]] != list(houses.NUMBERS)
+    ):
+        raise ValueError("complete immutable previous Gupta frontier/house roster required")
+    for row in value["cases"]:
+        case = safe_load(row["frontier"].split("---\n", 2)[1])["packing"]
+        if (
+            case["n"] != row["n"]
+            or case["reported_upper_bound"]["source_key"] == houses.reports.SOURCE_KEY
+        ):
+            raise ValueError("history requires every original pre-adoption source")
+        validate_prior_house(row, case)
+    return value["cases"]
+
+
+def read_history() -> list[dict[str, Any]]:
+    houses.reports.ensure_private(HISTORY)
+    return validate_history(houses.reports.kernel.read_xz(HISTORY))
+
+
+def pending_blockers(case: dict[str, Any]) -> list[dict[str, Any]]:
+    """Retain earlier blockers and name the unclosed production boundary explicitly."""
+    blockers = copy.deepcopy(case["blockers"])
+    confirmed = houses.reports.EXACT_EVIDENCE in case["verified_upper_bound"]["evidence"]
+    if not confirmed and not any(REPORT in row.get("evidence", []) for row in blockers):
+        blockers.append(
+            {
+                "kind": "source-evidence",
+                "detail": "All 51 complete dual-route native jobs passed; actual "
+                "private-worker "
+                "input/result mutation admission and final production review remain pending.",
+                "evidence": [REPORT],
+            }
+        )
+    return blockers
+
+
+def render_selected_case(n: int, document: dict[str, Any], body: str, existing: str) -> str:
+    """Preserve the equal source-bound assessment in its maintained owner rendering."""
+    rendered = "---\n" + dump(document) + "---\n" + body
+    if isinstance(document["packing"].get("rigidity"), dict):
+        from devtools.assess_frontier_rigidity import preserve_block_rendering  # noqa: PLC0415
+
+        rendered = preserve_block_rendering(existing, rendered, n)
+    return rendered
+
+
+def record_cases() -> None:
+    """Preflight all fourteen cases, atomically retain originals, then write any case.
+
+    An interrupted run resumes from this complete original frontier/house roster;
+    a subset or changed original cannot replace its immutable history.
+    """
+    houses.reports.check_certification()
+    retained = read_history() if HISTORY.exists() else None
+    originals = {} if retained is None else {row["n"]: row for row in retained}
+    prior = []
+    plan = []
+    for n in houses.NUMBERS:
+        path = FRONTIER / f"n-{n:03d}.md"
+        houses.reports.ensure_private(path)
+        current = path.read_text()
+        _, front, body = current.split("---\n", 2)
+        document = safe_load(front)
+        case = document["packing"]
+        if case["n"] != n:
+            raise ValueError("case count differs from selected source scope")
+        if case["reported_upper_bound"]["source_key"] == houses.reports.SOURCE_KEY:
+            if retained is None or case["reported_upper_bound"] != reported_bound(n):
+                raise ValueError("selected case lacks its complete original custody boundary")
+            if houses.reports.EXACT_EVIDENCE not in case["verified_upper_bound"]["evidence"]:
+                blockers = pending_blockers(case)
+                case["blockers"] = blockers
+            corrected = ceiling_prose(n, case, body)
+            desired = render_selected_case(n, document, corrected, current)
+            if desired != current:
+                plan.append((path, desired))
+            continue
+        original = current if retained is None else originals[n]["frontier"]
+        if current != original:
+            raise ValueError("refuse changed historical source before any case write")
+        certificate = houses.reports.read_fact(n)
+        for lane in ("reported_upper_bound", "verified_upper_bound"):
+            if certificate.side >= Fraction(case[lane]["exact_form"]):
+                raise ValueError(f"n={n}: offered exact side is not smaller than both lanes")
+        if case["conjectured_optimum"] is not None:
+            raise ValueError("existing optimum conjecture requires an explicit disposition")
+        prior.append(
+            originals[n]
+            if retained is not None
+            else {"n": n, "frontier": current, "house": houses.house_path(n).read_text()}
+        )
+        old = copy.deepcopy(case["reported_upper_bound"])
+        case["reported_upper_bound"] = reported_bound(n)
+        case["rigidity"] = None
+        case["blockers"] = pending_blockers(case)
+        case["source_reviewed"] = DAY
+        if REPORT not in case["evidence"]:
+            case["evidence"].append(REPORT)
+        case["resources"].insert(
+            0,
+            {
+                "key": houses.reports.SOURCE_KEY,
+                "role": "upper-bound-report",
+                "local": "web/gupta-square-packing-refinements-2026-10-08",
+                "url": f"{houses.reports.SOURCE}/tree/{houses.reports.REVISION}",
+                "retrieved": True,
+            },
+        )
+        case["priority_notes"].append(
+            {
+                "claim": f"Earlier source ceiling {old['value']} from {old['source_key']}; "
+                "the complete original frontier and house remain retained in the packet.",
+                "claimed_by": old["found_by"],
+                "published": old["source_date"],
+                "year": old["found_year"],
+            }
+        )
+        body = historical_prose(n, body).replace(
+            FOOTER, section(n, confirmed=False) + "\n" + FOOTER
+        )
+        body = ceiling_prose(n, case, body)
+        plan.append((path, "---\n" + dump(document) + "---\n" + body))
+    if not plan:
+        return
+    if retained is None:
+        boundary = {"format": HISTORY_FORMAT, "cases": prior}
+        validate_history(boundary)
+        houses.reports.save_xz(HISTORY, boundary)
+    for path, text in plan:
+        save(path, text)
+
+
+def adopt_case(n: int, existing: str, generated: str) -> str:
+    """Retain the selected source upper lane while ordinary lower lanes regenerate."""
+    if n not in houses.NUMBERS:
+        return generated
+    _, front, body = existing.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    if case["reported_upper_bound"]["source_key"] != houses.reports.SOURCE_KEY:
+        return generated
+    houses.check_houses([n])
+    old = next(row for row in read_history() if row["n"] == n)
+    confirmed = houses.reports.EXACT_EVIDENCE in case["verified_upper_bound"]["evidence"]
+    case["reported_upper_bound"] = reported_bound(n)
+    case["verified_upper_bound"] = (
+        houses.reports.confirmed_bound(n)
+        if confirmed
+        else safe_load(old["frontier"].split("---\n", 2)[1])["packing"]["verified_upper_bound"]
+    )
+    if not confirmed:
+        case["blockers"] = pending_blockers(case)
+    draft = safe_load(generated.split("---\n", 2)[1])["packing"]
+    for field in ("reported_lower_bound", "verified_lower_bound", "reported_status", "status"):
+        case[field] = draft[field]
+    lower_pattern = r"\n## The lower bound\n.*?(?=\n<!-- BEGIN verification code)"
+    lower = re.search(lower_pattern, generated.split("---\n", 2)[2], re.DOTALL)
+    if lower is None:
+        raise ValueError("generated lower-bound section missing")
+    body, count = re.subn(lower_pattern, lambda _m: lower.group(), body, flags=re.DOTALL)
+    if count != 1:
+        raise ValueError("one retained lower-bound section required")
+    pattern = rf"\n{SECTION}\n.*?(?=\n## |\n<!-- This document follows)"
+    body, count = re.subn(
+        pattern,
+        lambda match: preserve_prose_rendering(section(n, confirmed=confirmed), match.group()),
+        body,
+        flags=re.DOTALL,
+    )
+    if count != 1:
+        raise ValueError("one Gupta source construction section required")
+    body = ceiling_prose(n, case, body)
+    return render_case_verifiers.refresh(render_selected_case(n, document, body, existing))
+
+
+def register() -> None:
+    record_cases()
+    append_rows(
+        FRONTIER / "evidence.yaml",
+        "evidence",
+        [
+            {
+                "id": REPORT,
+                "claim": "upper-bound",
+                "scope": {"n_values": list(houses.reports.NUMBERS)},
+                "assurance": "reported",
+                "reported_method": "exact-algebraic",
+                "performed_by": "source-author",
+                "relationship_to_generator": "same-implementation",
+                "origin": "external",
+                "novelty": "previously-published",
+                "source_key": houses.reports.SOURCE_KEY,
+                "certificate": PACKET_PATH
+                + "/facts/complete-certificates-and-comparators.json.xz",
+                "replay_status": "not-attempted",
+                "verifiers": [],
+                "source_reviewed": DAY,
+                "limitations": "Seventeen complete originals; fourteen improve both "
+                "current exact upper lanes, three withdrawn certificates remain retained. "
+                "No optimizer, optimality, rigidity, priority or novelty is established.",
+            }
+        ],
+        "id",
+    )
+    append_rows(
+        FRONTIER / "results.yaml",
+        "results",
+        [
+            {
+                "id": RESULT,
+                "kind": "upper-bound",
+                "registered": DAY,
+                "headline": "Fourteen rational refinements, seventeen complete source cases",
+                "claim": "Seventeen complete rational source certificates are retained, "
+                "three withdrawals; fourteen offer strictly smaller exact construction sides "
+                "than both prior upper lanes. No lower bound or optimum is established.",
+                "scope": {"n_values": list(houses.reports.NUMBERS)},
+                "verification": "V0",
+                "confirmation": "C0",
+                "significance": {
+                    "score": 3,
+                    "rationale": "Fourteen strict finite upper-bound improvements; "
+                    "no solved case or lower-bound theorem.",
+                    "scored": DAY,
+                    "by": "think-q3pd Gupta refinement import",
+                },
+                "novelty": "previously-published",
+                "attribution": {"source_keys": [houses.reports.SOURCE_KEY], "published": DAY},
+                "evidence": [REPORT],
+                "artifacts": [
+                    PACKET_PATH + "/README.md",
+                    PACKET_PATH + "/facts/complete-certificates-and-comparators.json.xz",
+                    "packing/devtools/gupta_refinement_reports.py",
+                ],
+                "next_rung": "Native outcomes, source/house binding, independent review and "
+                "actual private-worker custody are required before confirmation.",
+                "notes": "SQUISH credit remains with Nate Chaoweeraprasit; source credits "
+                "Evan Daniel's optimizer and Siddharth Gupta's precision refinements. "
+                "Only factual inputs are copied; unlicensed programs/prose are hash-pinned.",
+            }
+        ],
+        "id",
+    )
+    result_path = FRONTIER / "results.yaml"
+    result = next(
+        row for row in safe_load(result_path.read_text())["results"] if row["id"] == RESULT
+    )
+    concrete = PACKET_PATH + "/facts/complete-certificates-and-comparators.json.xz"
+    artifacts = []
+    for artifact in result["artifacts"]:
+        if artifact == PACKET_PATH + "/facts/":
+            if concrete not in result["artifacts"] and concrete not in artifacts:
+                artifacts.append(concrete)
+        else:
+            artifacts.append(artifact)
+    if result["artifacts"] != artifacts:
+        replace_row(result_path, "results", {**result, "artifacts": artifacts})
+    append_rows(
+        REPO / "packing/resources/bibliography.yaml",
+        "sources",
+        [
+            {
+                "key": houses.reports.SOURCE_KEY,
+                "authors": ["Gupta"],
+                "year": 2026,
+                "venue": "GitHub",
+                "dated": DAY,
+                "lineage": "independent",
+                "credit": "Gupta after Chaoweeraprasit, Daniel",
+                "short_credit": "Gupta after Chaoweeraprasit et al.",
+                "note": "Siddharth Gupta's seventeen rational precision certificates at "
+                + houses.reports.REVISION
+                + " refine SQUISH constructions and credit Nate "
+                "Chaoweeraprasit and Evan Daniel. Fourteen offers are selected; three are "
+                "withdrawn. Complete factual inputs are retained; unlicensed programs/prose "
+                "are hash-pinned, and the solver MIT notice is not a bundle licence.",
+            }
+        ],
+        "key",
+    )
+    bibliography = REPO / "packing/resources/bibliography.yaml"
+    for person, name in (
+        ("Siddharth Gupta", "Gupta"),
+        ("Nate Chaoweeraprasit (itsnaka)", "Chaoweeraprasit"),
+    ):
+        entry = f"  {person}: {name}\n"
+        if entry not in bibliography.read_text():
+            save(
+                bibliography,
+                bibliography.read_text().replace(
+                    "credited_names:\n", "credited_names:\n" + entry
+                ),
+            )
+    index = REPO / "packing/resources/README.md"
+    if "**" + houses.reports.SOURCE_KEY + "**" not in index.read_text():
+        entry = (
+            f"- **{houses.reports.SOURCE_KEY}** — Siddharth Gupta's seventeen complete "
+            f"rational source cases at `{houses.reports.REVISION}`; fourteen selected "
+            "reported improvements and three withdrawals, T-127 at V0/C0. "
+            "[Factual packet](web/gupta-square-packing-refinements-2026-10-08/README.md). "
+            "SQUISH credit remains with Nate Chaoweeraprasit, and Evan Daniel's optimizer "
+            "is credited. Full native outcomes exist; private-worker custody and final "
+            "production review remain pending. Unlicensed programs/prose are hash-pinned; "
+            "the solver MIT notice is not treated as a bundle licence.\n\n"
+        )
+        save(index, index.read_text().replace(FOOTER, entry + FOOTER))
+    claims = {
+        "results": [
+            {
+                "n": n,
+                "offered_side": reported_bound(n)["value"],
+                "exact_side": reported_bound(n)["exact_form"],
+            }
+            for n in houses.reports.NUMBERS
+        ]
+    }
+    save(houses.reports.PACKET / "acquisition/claims.json", json.dumps(claims, indent=2) + "\n")
+    append_rows(
+        FRONTIER / "source-coverage.yaml",
+        "sources",
+        [
+            {
+                "id": SOURCE_ID,
+                "title": "Gupta rational precision refinements, issue438",
+                "role": "source-repository",
+                "url": f"{houses.reports.SOURCE}/tree/{houses.reports.REVISION}",
+                "local": "resources/web/gupta-square-packing-refinements-2026-10-08/",
+                "source_key": houses.reports.SOURCE_KEY,
+                "scope": {"n_values": list(houses.reports.NUMBERS)},
+                "reviewed": DAY,
+                "source_date": DAY,
+                "disposition": "current-report",
+                "replay_disposition": "case-specific",
+                "represented_by": [f"frontier/n-{n:03d}.md" for n in houses.reports.NUMBERS],
+                "claims_record": "resources/web/gupta-square-packing-refinements-2026-10-08/"
+                "acquisition/claims.json",
+                "evidence": [REPORT],
+                "notes": "All seventeen originals and comparators retained; "
+                "fourteen selected, three withdrawn after smaller ry-xu ceilings. "
+                "Finite feasibility only.",
+            }
+        ],
+        "id",
+    )
+    path = FRONTIER / "source-coverage.yaml"
+    coverage = safe_load(path.read_text())
+    for row in list(coverage["selected_overrides"]):
+        if row["n"] not in houses.NUMBERS or row["source_id"] == SOURCE_ID:
+            continue
+        coverage["superseded_reports"].append(
+            {
+                "n": row["n"],
+                "source_id": row["source_id"],
+                "value": row["value"],
+                "superseded_by": SOURCE_ID,
+                "reason": "Complete Gupta source certificate is strictly smaller.",
+            }
+        )
+        coverage["selected_overrides"].remove(row)
+    for row in coverage["superseded_reports"]:
+        if row["n"] in houses.NUMBERS:
+            row["superseded_by"] = SOURCE_ID
+    for n in houses.NUMBERS:
+        if not any(row["n"] == n for row in coverage["selected_overrides"]):
+            coverage["selected_overrides"].append(
+                {
+                    "n": n,
+                    "source_id": SOURCE_ID,
+                    "value": reported_bound(n)["value"],
+                    "evidence": REPORT,
+                    "reason": "The complete rational precision refinement is strictly "
+                    "smaller than both previous exact upper lanes.",
+                }
+            )
+    selected = {row["n"]: row for row in coverage["selected_overrides"]}
+    for n in houses.reports.NUMBERS:
+        if n in houses.NUMBERS or any(
+            row["n"] == n and row["source_id"] == SOURCE_ID
+            for row in coverage["superseded_reports"]
+        ):
+            continue
+        coverage["superseded_reports"].append(
+            {
+                "n": n,
+                "source_id": SOURCE_ID,
+                "value": reported_bound(n)["value"],
+                "superseded_by": selected[n]["source_id"],
+                "reason": "The withdrawn Gupta rational certificate is larger than "
+                "the selected ry-xu construction; its complete source and replay "
+                "remain retained.",
+            }
+        )
+    coverage["selected_overrides"].sort(key=lambda row: row["n"])
+    save(path, dump(coverage))
+
+
+def main() -> int:
+    argparse.ArgumentParser(description=__doc__).parse_args()
+    register()
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

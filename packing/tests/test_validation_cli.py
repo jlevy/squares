@@ -3872,6 +3872,7 @@ def test_a_verified_merge_repeats_everything_not_positively_tree_reusable() -> N
         # The new native crate is not yet classified as tree-reusable.
         "n17 kernel verifier (Rust)",
         # New custody checks repeat until their tree reuse is explicitly classified.
+        "FN1 original-input bindings",
         "SQUISH update certification binds complete reviewed inputs",
         "SQUISH second update certification binds complete reviewed inputs",
         "rational refinement custody binds complete replay inputs",

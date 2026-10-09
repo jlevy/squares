@@ -645,6 +645,24 @@ def test_exact_forms_render_as_latex(form: str, tex: str) -> None:
     assert tables.latex(form) == tex
 
 
+def test_long_rational_bounds_fit_without_losing_the_exact_form() -> None:
+    form = "85052083333333333333333/10000000000000000000000"
+    bound = {"value": "8.5052083333333333333333", "exact_form": form}
+    original = dict(bound)
+    assert len(tables.latex(form)) <= frontier.VALUE_SHOWN
+    shown = frontier.value_html(bound)
+    assert 'class="site-decimal"' in shown
+    assert "kpress-math" not in shown
+    assert f'title="{form}"' in shown
+    assert "8.50520833…" in shown
+    assert frontier.bound_approx_html(bound) == ""
+    assert bound == original
+    for short in ("643/41", "(16+5sqrt(2))/3"):
+        item = {"value": "1", "exact_form": short}
+        assert "kpress-math" in frontier.value_html(item)
+        assert frontier.bound_approx_html(item)
+
+
 def test_a_polynomial_root_has_no_closed_form() -> None:
     with pytest.raises(ValueError, match="polynomial root"):
         tables.latex("root(P_trump11, 3.877)")

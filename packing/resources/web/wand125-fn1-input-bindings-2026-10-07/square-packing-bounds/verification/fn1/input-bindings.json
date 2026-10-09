@@ -1,0 +1,79 @@
+{
+  "schema": "recorded-gzip-input-binding-v1",
+  "retained_revision": "2fad66e02f54a492835dc41ac37a9184e1e7a662",
+  "scope": "Exact gzip input bytes from the original check2 runs. Decompression is byte-identical to each published candidate.json. No verifier rerun or change to mathematical data.",
+  "entries": [
+    {
+      "certificate": "mixed_n19_L4825",
+      "input_file": "certificates/mixed_n19_L4825/check2/recorded-input.json.gz",
+      "published_candidate": "certificates/mixed_n19_L4825/candidate.json",
+      "compressed_sha256": "9132b84eceb4c9913bcf3065be58828665c5b12469c585f1700c1408c7f43cb7",
+      "decompressed_sha256": "f6b0c354e66563005b0fad7663a6c77172af549dd9feaa3284115c12e43ff063",
+      "candidate_digest": "0527d8a7e465c6d1eb2f5bebd873aac364d4f49de9a3f625c97bcbdc09abb57d",
+      "size_bytes": 19660
+    },
+    {
+      "certificate": "mixed_n20_L4905",
+      "input_file": "certificates/mixed_n20_L4905/check2/recorded-input.json.gz",
+      "published_candidate": "certificates/mixed_n20_L4905/candidate.json",
+      "compressed_sha256": "c446837b499de48ede56a5b3a660abf81615b6332a36314012bca642306cd07f",
+      "decompressed_sha256": "45a17658c3881fb18c6e2f60fa4979bb54a7099ff5f3812de95f2f1140f7fbf0",
+      "candidate_digest": "687ce2fbac0922881d6c3819c1a2ce17a16f87b517e3e0f9a2e488b8eb29b2d6",
+      "size_bytes": 18568
+    },
+    {
+      "certificate": "mixed_n26_L5545",
+      "input_file": "certificates/mixed_n26_L5545/check2/recorded-input.json.gz",
+      "published_candidate": "certificates/mixed_n26_L5545/candidate.json",
+      "compressed_sha256": "6ea9cce160259694f48b9bb5f1ba3222332b7d8051284278f11a4413c6933c95",
+      "decompressed_sha256": "842bee847fcb1f6aa67fb58dbbe865e1b111028af71a64684b879ce1832fc119",
+      "candidate_digest": "cb94c1fd84f304bf2b53674d4efcfaac1282753d5b579d5e509e8451c0bf884d",
+      "size_bytes": 26613
+    },
+    {
+      "certificate": "mixed_n27_L56435",
+      "input_file": "certificates/mixed_n27_L56435/check2/recorded-input.json.gz",
+      "published_candidate": "certificates/mixed_n27_L56435/candidate.json",
+      "compressed_sha256": "e6561fe4d114945a99f81aee05ef3028fb95ee60cf139990e8cd1deffc312dbf",
+      "decompressed_sha256": "210af2260ecd6945dc2490d30418990a1fd174f322be59a6c6a2b03902a61a71",
+      "candidate_digest": "537a411f75516dff40bf9f893e7dc2e96dcdc3e2345a59113585164d84c2ff54",
+      "size_bytes": 24444
+    },
+    {
+      "certificate": "mixed_n28_L5735",
+      "input_file": "certificates/mixed_n28_L5735/check2/recorded-input.json.gz",
+      "published_candidate": "certificates/mixed_n28_L5735/candidate.json",
+      "compressed_sha256": "c0218bf04ce2fe50a714cde1a4fe124ec1c90aebc50e5b5d65259cd094522bfd",
+      "decompressed_sha256": "8438a806e1864cd11ae89d9505069e8bffaae8a4d5f9a3705e46268ee827e1de",
+      "candidate_digest": "0e7c5d71425390a69012a462ae27e09349c887e2f1f40a26ac11082fa7c2e2ba",
+      "size_bytes": 28866
+    },
+    {
+      "certificate": "mixed_n30_L58835",
+      "input_file": "certificates/mixed_n30_L58835/check2/recorded-input.json.gz",
+      "published_candidate": "certificates/mixed_n30_L58835/candidate.json",
+      "compressed_sha256": "6b3d9075e5faa99015409f531c8d3cdc3af69356d9a933e987da5f505ec9d766",
+      "decompressed_sha256": "32f2e77d7871e2ef41e026077816544a9c69de3bd5be12fa742f21986e74cba2",
+      "candidate_digest": "8836a300570e321de3b7a171924dad8850548c130675eb371df07e083ee3b93e",
+      "size_bytes": 21967
+    },
+    {
+      "certificate": "mixed_n39_L665",
+      "input_file": "certificates/mixed_n39_L665/check2/recorded-input.json.gz",
+      "published_candidate": "certificates/mixed_n39_L665/candidate.json",
+      "compressed_sha256": "012755340a2a7dd214891d3e123ddc29e8dfd6f03c07dccedaf563c02da931ca",
+      "decompressed_sha256": "c05781e733ad0b83769d7944ca0ed8b214f9a6c49bf5a46db7fa19c2c325746a",
+      "candidate_digest": "25b812fe22e7298a5e27f5eac4bc7b8ce6db6d288c8578534d92cde08c1ceb54",
+      "size_bytes": 32378
+    },
+    {
+      "certificate": "mixed_n41_L6775",
+      "input_file": "certificates/mixed_n41_L6775/check2/recorded-input.json.gz",
+      "published_candidate": "certificates/mixed_n41_L6775/candidate.json",
+      "compressed_sha256": "cbc04bd94c0f7041178419115990eb193ba52a79bc67efa2a2b7d00f8d9588b2",
+      "decompressed_sha256": "854e8b34748919ef55dcff67ded76b51be6b2860bc874e3adb5c572d1897382e",
+      "candidate_digest": "65a7a107e8e4906c56c4a3adfa365336fbd53d44bec453d1e1e04c5cab52f691",
+      "size_bytes": 21220
+    }
+  ]
+}

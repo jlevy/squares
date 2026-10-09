@@ -50,8 +50,10 @@ from devtools import build_composite_figure_data, render_composite_pdf
 from devtools import evand_arrangement_houses as evand_houses
 from devtools import evand_arrangement_reports as evand_reports
 from devtools import evand_exact_certificates as evand_certificates
+from devtools import gupta_house_links as gupta_houses
 from devtools import refinement_house_links as refinement_houses
 from devtools import refinement_packets as refinements
+from devtools import ryxu_house_links as ryxu_houses
 from devtools import squish_followup_packets as squish_followup
 from devtools import squish_second_update_house_links as squish_house
 from devtools import squish_second_update_packets as squish_second
@@ -60,6 +62,7 @@ from devtools import upper_bound_packets as packets
 from devtools.build_bound_citations import RECENT_SINCE
 from devtools.build_composite_figure_data import load_record as load_figure_record
 from sqpack import retained_json
+from sqpack.field import FieldElement
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
     KINGBIRD_ATTRIBUTION,
@@ -111,6 +114,7 @@ from sqpack.render.numbers import (
     emission_precision,
     format_svg_number,
     scalar_from_decimal,
+    scalar_from_exact,
     scalar_from_fraction,
 )
 from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR, LABEL_MUTED_COLOR, PAPER_THEME
@@ -126,6 +130,7 @@ from sqpack.witness import (
     check_witness_semantics,
     exact_verify,
     load_witness,
+    materialize_exact_witness,
     materialize_witness,
     witness_document,
 )
@@ -821,6 +826,27 @@ def _source_plan(
 
 
 def _modern_packet_plan(case: FrontierCase, pictured: str) -> SourcePlan | None:
+    if pictured == gupta_houses.reports.SOURCE_KEY:
+        if case.n not in gupta_houses.NUMBERS:
+            raise ValueError("Gupta source selected outside its improving roster")
+        gupta_houses.reports.read_fact(case.n)
+        source = gupta_houses.reports.source_pins()[case.n]["certificate"]
+        return SourcePlan(
+            PACKET_KIND,
+            gupta_houses.reports.fact_path(),
+            f"{gupta_houses.reports.SOURCE}/blob/{gupta_houses.reports.REVISION}/{source}",
+            case.n,
+            (case.n,),
+        )
+    if pictured == ryxu_houses.SOURCE_KEY:
+        if case.n not in ryxu_houses.NUMBERS:
+            raise ValueError("ry-xu source selected outside its improving roster")
+        path = (
+            ryxu_houses.radical.fact_path() if case.n == 51 else ryxu_houses.reports.fact_path()
+        )
+        if not path.is_file():
+            raise ValueError("selected ry-xu source facts are absent")
+        return SourcePlan(PACKET_KIND, path, ryxu_houses.source_url(case.n), case.n, (case.n,))
     if pictured == evand_reports.SOURCE_KEY:
         evand_reports.read_fact(case.n)
         return SourcePlan(
@@ -978,7 +1004,16 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
         if plan.kind == PACKET_KIND:
             refinement = _refinement_source(n, plan.path)
             layer = _squish_layer(n, plan.path)
-            if plan.path == evand_reports.fact_path() and n in evand_reports.NUMBERS:
+            if plan.path == gupta_houses.reports.fact_path():
+                attribution = (
+                    f"Siddharth Gupta after Nate Chaoweeraprasit and Evan Daniel, "
+                    f"{plan.url} at {gupta_houses.reports.REVISION}"
+                )
+                retrieved = "2026-10-08"
+            elif n in ryxu_houses.NUMBERS and plan.url == ryxu_houses.source_url(n):
+                attribution = f"ry-xu, {plan.url} at {ryxu_houses.reports.REVISION}"
+                retrieved = ryxu_houses.RETRIEVED
+            elif plan.path == evand_reports.fact_path() and n in evand_reports.NUMBERS:
                 attribution = f"Evan Daniel, {plan.url} at {evand_reports.REVISION}"
                 retrieved = "2026-10-07"
             elif refinement is not None:
@@ -1013,11 +1048,29 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
                     "listed_n": list(plan.listed_n),
                     "n": n,
                     "path": _relative(plan.path),
-                    "raw_asset_retained": plan.path == evand_reports.fact_path(),
+                    # True where the row's `path` holds the upstream file named by `url`
+                    # byte for byte, as ry-xu's complete certificate texts are; ry-xu's
+                    # n = 51 record is a canonical extraction, so it stays derived.
+                    "raw_asset_retained": plan.path
+                    in (
+                        evand_reports.fact_path(),
+                        ryxu_houses.reports.fact_path(),
+                        gupta_houses.reports.fact_path(),
+                    ),
                     "retention_policy": (
                         "Complete source certificates and MIT licences retained unchanged."
                         if plan.path == evand_reports.fact_path()
-                        else KINGBIRD_RETENTION_POLICY
+                        else (
+                            "Complete factual certificate text retained losslessly; "
+                            "no upstream program or prose is copied."
+                            if plan.path == ryxu_houses.reports.fact_path()
+                            else (
+                                "Complete factual certificates/comparators retained "
+                                "losslessly; unlicensed programs/prose are hash-pinned."
+                                if plan.path == gupta_houses.reports.fact_path()
+                                else KINGBIRD_RETENTION_POLICY
+                            )
+                        )
                     ),
                     "retrieved": retrieved,
                     "source_n": plan.source_n,
@@ -1123,7 +1176,11 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
             )
         if plan.kind == PACKET_KIND:
             refinement = _refinement_source(case.n, plan.path)
-            if plan.path == evand_reports.fact_path() and case.n in evand_reports.NUMBERS:
+            if pictured_source_key(case) == gupta_houses.reports.SOURCE_KEY:
+                witness = _gupta_derived_witness(case)
+            elif pictured_source_key(case) == ryxu_houses.SOURCE_KEY:
+                witness = _ryxu_derived_witness(case)
+            elif plan.path == evand_reports.fact_path() and case.n in evand_reports.NUMBERS:
                 witness = evand_houses.build_witness(case.n)
                 _assert_side_matches(case, str(witness["side"]))
             elif refinement is not None:
@@ -1156,6 +1213,19 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
         )
     except (ValueError, TypeError) as error:
         raise ValueError(f"n={case.n} from {_relative(plan.path)}: {error}") from error
+
+
+def _gupta_derived_witness(case: FrontierCase) -> dict:
+    certificate = gupta_houses.reports.read_fact(case.n)
+    if case.side != gupta_houses.reports.legacy.ceiling_decimal(certificate.side, 16):
+        raise ValueError("current Gupta side differs from complete source bound")
+    return gupta_houses.build_witness(case.n)
+
+
+def _ryxu_derived_witness(case: FrontierCase) -> dict:
+    if case.side != ryxu_houses.bound(case.n)["value"]:
+        raise ValueError("current ry-xu side differs from complete source bound")
+    return ryxu_houses.expected_witness(case.n)
 
 
 def _refinement_derived_witness(case: FrontierCase, source: refinements.Source) -> dict:
@@ -1261,27 +1331,55 @@ def _scalar(value: str, *, rational: bool):
     return scalar_from_fraction(Fraction(value)) if rational else scalar_from_decimal(value)
 
 
+def _exact_frame_geometry(witness: dict):
+    corners, side = materialize_exact_witness(witness)
+
+    def scalar(value):
+        if isinstance(value, Fraction):
+            return scalar_from_fraction(value)
+        if not isinstance(value, FieldElement):
+            raise TypeError("exact presentation requires a rational or field scalar")
+        source = json.dumps(
+            {"field": witness["scalar"], "coefficients": [str(c) for c in value.coeffs]},
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        # This decimal is a drawing projection. The source identity retains the entire
+        # field/root declaration and reduced exact coefficients, including the side.
+        return scalar_from_exact(source, value.field.decimal(value, 40))
+
+    return scalar(side), [[(scalar(x), scalar(y)) for x, y in square] for square in corners]
+
+
 def frame_from_witness(witness: dict) -> PackingFrame:
-    rational = witness["scalar"]["kind"] == "rational"
-    side = _scalar(str(witness["side"]), rational=rational)
-    if witness["representation"] == "corners":
-        source_squares = [
-            [(str(x), str(y)) for x, y in square["corners"]] for square in witness["squares"]
-        ]
+    if witness["scalar"]["kind"] in {"rational", "algebraic-number-field"}:
+        side, source_squares = _exact_frame_geometry(witness)
     else:
-        projected, _projected_side = materialize_witness(witness, digits=80)
-        source_squares = [
-            [(_projection_text(x), _projection_text(y)) for x, y in square]
-            for square in projected
-        ]
-        rational = False
+        side = scalar_from_decimal(str(witness["side"]))
+        if witness["representation"] == "corners":
+            source_squares = [
+                [
+                    (scalar_from_decimal(str(x)), scalar_from_decimal(str(y)))
+                    for x, y in square["corners"]
+                ]
+                for square in witness["squares"]
+            ]
+        else:
+            projected, _projected_side = materialize_witness(witness, digits=80)
+            source_squares = [
+                [
+                    (
+                        scalar_from_decimal(_projection_text(x)),
+                        scalar_from_decimal(_projection_text(y)),
+                    )
+                    for x, y in square
+                ]
+                for square in projected
+            ]
     squares = tuple(
         SquareGeometry(
             square_id=f"square-{index:03d}",
-            corners=tuple(
-                Point2(_scalar(x, rational=rational), _scalar(y, rational=rational))
-                for x, y in corners
-            ),
+            corners=tuple(Point2(x, y) for x, y in corners),
             label=str(index),
         )
         for index, corners in enumerate(source_squares, start=1)
@@ -2340,7 +2438,11 @@ def _frontier_with_witness(case: FrontierCase, witness_id: str) -> str:
     if start is None:
         raise ValueError(f"{case.path.name}: reported upper bound has no witnesses field")
     end = start + 1
-    while end < len(lines) and not lines[end].startswith("    evidence:"):
+    while end < len(lines):
+        line = lines[end]
+        indent = len(line) - len(line.lstrip())
+        if line.strip() and indent <= 4 and not line.startswith("    - "):
+            break
         end += 1
     existing = safe_load("\n".join(lines[start:end]))["witnesses"] or []
     if not isinstance(existing, list) or not all(isinstance(item, str) for item in existing):
@@ -2360,14 +2462,25 @@ def _manifest_entry(built: BuiltCase) -> dict:
     elif plan.kind == "kingbird-derived-facts":
         derivation = "deterministic reuse of retained Witness/v2 numerical center/angle facts"
     elif plan.kind == PACKET_KIND:
-        derivation = (
-            "exact rational half-angle conversion of retained source facts, checked "
-            "with exact predicates"
-            if plan.path == evand_reports.fact_path()
-            or _squish_layer(n, plan.path) is not None
-            or _refinement_source(n, plan.path) is not None
-            else "deterministic reuse of a source packet's retained Witness/v2 facts"
-        )
+        if pictured_source_key(built.frontier) == gupta_houses.reports.SOURCE_KEY:
+            derivation = (
+                "complete exact rational source geometry and retained dual native results"
+            )
+        elif pictured_source_key(built.frontier) == ryxu_houses.SOURCE_KEY:
+            derivation = (
+                "complete undilated Q(sqrt2) geometry and retained dual exact results"
+                if n == 51
+                else "exact rational half-angle geometry and retained dual exact results"
+            )
+        else:
+            derivation = (
+                "exact rational half-angle conversion of retained source facts, checked "
+                "with exact predicates"
+                if plan.path == evand_reports.fact_path()
+                or _squish_layer(n, plan.path) is not None
+                or _refinement_source(n, plan.path) is not None
+                else "deterministic reuse of a source packet's retained Witness/v2 facts"
+            )
     elif n == plan.source_n:
         derivation = "direct normalization of complete source geometry"
     else:
@@ -2582,10 +2695,36 @@ def retained_cases(numbers: Sequence[int]) -> list[BuiltCase]:
     from these are byte for byte what the whole rebuild draws, which
     `test_known_best_composite_contains_every_case_and_square` holds.
     """
-    scoped = [n for n in numbers if n in squish_second.NUMBERS]
+    scoped = [
+        n
+        for n in numbers
+        if n in squish_second.NUMBERS
+        and pictured_source_key(_frontier_case(n)) == squish_second.SOURCE_KEY
+    ]
     if scoped:
         squish_house.check_houses(scoped)
-    evand_scoped = [n for n in numbers if n in evand_reports.NUMBERS]
+    ryxu = [
+        n
+        for n in numbers
+        if n in ryxu_houses.NUMBERS
+        and pictured_source_key(_frontier_case(n)) == ryxu_houses.SOURCE_KEY
+    ]
+    if ryxu:
+        ryxu_houses.check_houses(ryxu)
+    gupta = [
+        n
+        for n in numbers
+        if n in gupta_houses.NUMBERS
+        and pictured_source_key(_frontier_case(n)) == gupta_houses.reports.SOURCE_KEY
+    ]
+    if gupta:
+        gupta_houses.check_houses(gupta)
+    evand_scoped = [
+        n
+        for n in numbers
+        if n in evand_reports.NUMBERS
+        and pictured_source_key(_frontier_case(n)) == evand_reports.SOURCE_KEY
+    ]
     if evand_scoped:
         evand_houses.check_houses(evand_scoped)
     plans = source_plans()
@@ -2613,6 +2752,8 @@ def update(workers: int = 1) -> None:
     """
     squish_house.guard_house_outputs(list(CORPUS.numbers))
     refinement_houses.guard_house_outputs(list(CORPUS.numbers))
+    ryxu_houses.guard_house_outputs(list(CORPUS.numbers))
+    gupta_houses.guard_house_outputs(list(CORPUS.numbers))
     evand_houses.guard_house_outputs(list(CORPUS.numbers))
     # The figure record decides every claim a drawing states, so refresh it first and
     # drop the memo, or the comparison below would read a stale one.
@@ -2644,6 +2785,8 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
     """
     squish_house.guard_house_outputs(list(numbers))
     refinement_houses.guard_house_outputs(list(numbers))
+    ryxu_houses.guard_house_outputs(list(numbers))
+    gupta_houses.guard_house_outputs(list(numbers))
     evand_houses.guard_house_outputs(list(numbers))
     selected = set(numbers)
     if not selected or len(selected) != len(numbers) or not selected <= set(CORPUS.numbers):
@@ -2860,8 +3003,34 @@ def _retained_problems() -> tuple[list[str], list[dict] | None]:
     must not run: a missing manifest should be reported as a missing manifest rather than
     as whatever the next reader of it raises.
     """
-    squish_house.check_houses()
-    refinement_houses.check_houses()
+    scoped = [
+        n
+        for n in squish_second.NUMBERS
+        if pictured_source_key(_frontier_case(n)) == squish_second.SOURCE_KEY
+    ]
+    if scoped:
+        squish_house.check_houses(scoped)
+    scoped = [
+        n
+        for n in refinement_houses.NUMBERS
+        if pictured_source_key(_frontier_case(n)) == refinement_houses.source(n).key
+    ]
+    if scoped:
+        refinement_houses.check_houses(scoped)
+    scoped = [
+        n
+        for n in ryxu_houses.NUMBERS
+        if pictured_source_key(_frontier_case(n)) == ryxu_houses.SOURCE_KEY
+    ]
+    if scoped:
+        ryxu_houses.check_houses(scoped)
+    gupta_scoped = [
+        n
+        for n in gupta_houses.NUMBERS
+        if pictured_source_key(_frontier_case(n)) == gupta_houses.reports.SOURCE_KEY
+    ]
+    if gupta_scoped:
+        gupta_houses.check_houses(gupta_scoped)
     if not MANIFEST.is_file():
         return [f"missing {_relative(MANIFEST)}"], None
     retained = MANIFEST.read_text(encoding="utf-8")
