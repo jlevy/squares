@@ -5,7 +5,7 @@ title: Expand the homepage Atlas in place with an Explore destination
 kind: feature
 status: in_progress
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -17,10 +17,10 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-09T00:47:24.965Z
-updated_at: 2026-10-09T04:13:06.016Z
+updated_at: 2026-10-09T05:28:52.417Z
 started_at: 2026-10-09T00:48:47.737Z
 ---
-Keep native SVG Atlas drawings, colors, bound labels and case popovers in a compact two-row homepage preview. Reuse the dedicated Atlas SiteAtlasView layout and animation engine. Prepare all remaining drawings during page initialization so Expand immediately animates all 324 cases into triangle view without a click-time request or delay. Collapse reverses the shared animation to the compact preview. Keep Explore, shared double chevrons, themes, keyboard state and no-JavaScript destinations. Preserve the existing two-megabyte homepage ceiling.
+Homepage native SVG Atlas starts in Triangle with first5mathematicalrows through25. FirstExpand immediately reveals100, secondExpand reveals324; thenCollapse restores25. Reuse sharedSiteAtlasView layout/FLIP throughout, persistentnativeSVGlinks/colors/boundlabels andcasepopovers. Prepareallartworkatstartupfrominertcompressedpayload; no click-timefetch/delay. KeepExplore,doubledownchevronsuntilfull,doubleupatCollapse, stage-awareaccessiblelabels, live themes,reducedmotion,keyboard andnoJSinitial25Triangle fallback. DedicatedAtlasdefault/responsivecollapsedrows unchanged. Preserve2MBhomepageceiling; previous36caseGridpreview superseded.
 
 ## Notes
 
