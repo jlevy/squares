@@ -5,7 +5,7 @@ title: Refresh generated credit inventories and fix final validation consistency
 kind: bug
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -15,10 +15,11 @@ child_order_hints:
   - is-01m4hdhajg6838p3qzbme41s30
   - is-01m4he3z4mvvt28t2xgba2b9hw
   - is-01m4he92d9st7bh1jq6723qhzb
+  - is-01m4hedjnhkdhqq5mz203011gv
 hold: null
 hold_until: null
 created_at: 2026-10-09T21:40:48.440Z
-updated_at: 2026-10-09T23:01:33.554Z
+updated_at: 2026-10-09T23:01:52.939Z
 started_at: 2026-10-09T21:40:56.042Z
 ---
 Final b4b127c54 push validation found Ruff smart apostrophes in test_bound_citations.py, stale site URL register/docs, and stale T-007 consumer audit after the dedicated Ahmed attribution rename and upstream integration. Reproduce at frozen source, make narrow corrections using maintained generators, preserve handles and source custody, verify lint and both generated-record checks, then requalify PR474. Track any independently confirmed fixture-lifetime failure in the same final-validation repair slice.
