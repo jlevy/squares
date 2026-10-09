@@ -1067,6 +1067,58 @@ def test_retained_receipts_leave_workers_but_registered_and_linked_ones_return(
         assert not any(landed.iterdir())
 
 
+def test_unread_worker_outputs_leave_workers_while_declared_files_return(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The 2026-10-09 selection: traced non-inputs leave; linked dependencies return."""
+    tree, copied_targets = control_snapshot
+    assert controls.UNREAD_WORKER_OUTPUTS <= PRUNE
+    spec = safe_load((ROOT / "devtools/controls.yaml").read_text(encoding="utf-8"))
+    for source in controls.UNREAD_WORKER_OUTPUTS:
+        assert source.exists(), "evidence must remain in the source checkout"
+        packing_relative = source.relative_to(ROOT).as_posix()
+        for control in spec["controls"]:
+            target = (ROOT / control["file"]).resolve()
+            assert not controls.in_pruned_roots(target, frozenset({source}))
+            assert packing_relative not in control["run"]
+    results = ROOT / "campaign/series/series-000-smoke-and-calibration/results"
+    for relative in (
+        "exp-249-n17-first-certified-sub-patterns/census.json",
+        "exp-246-n17-capacity-one-cover/audit/wall_lemma.py.txt",
+        "chelokot-lean-replay/receipt.json",
+    ):
+        source = results / relative
+        assert source.relative_to(controls.REPO) in copied_targets
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == source.read_bytes()
+    # exp-295 keeps its descriptor and metadata, as exp-297--314 do.
+    for name in ("README.md", "descriptor.json", "mechanical-summary.json"):
+        source = results / "exp-295-two-center-children" / name
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == source.read_bytes()
+    for relative in (
+        "exp-249-n17-first-certified-sub-patterns/audit-A",
+        "exp-249-n17-first-certified-sub-patterns/audit-W7",
+        "exp-247-n17-unique-state-cover/audit",
+    ):
+        assert (tree / (results / relative).relative_to(controls.REPO)).is_dir()
+    for source in (
+        results / "exp-295-two-center-children/certificate.json",
+        results / "exp-251-n17-overnight-flag-certification/census.json",
+        results / "chelokot-lean-replay/build.log",
+        ROOT
+        / "campaign/retained/session-186-n17-issue358-readiness"
+        / "C2-external-release-inventory.json",
+        ROOT / "campaign/results/annealing/summaries.json",
+        ROOT / "atlas/rendering/free-quench-n1-trace.json",
+    ):
+        assert source.is_file()
+        assert source.relative_to(controls.REPO) not in copied_targets
+        assert not (tree / source.relative_to(controls.REPO)).exists()
+    # The annealing record itself stays; only its bulk summary leaves.
+    record = ROOT / "campaign/results/annealing/README.md"
+    assert (tree / record.relative_to(controls.REPO)).read_bytes() == record.read_bytes()
+    assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
 def test_math_startup_reports_are_pruned_but_record_sources_survive(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:

@@ -188,6 +188,39 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
         "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint",
     )
 )
+# 2026-10-09, #464 on the landed n17 stack: output roots and files that no registered
+# control opens. All 174 controls ran mutated under `strace -f -e trace=%file` in worker
+# trees that still held them, and all 174 fired; the only reader of any of these bytes was
+# `check_readme`'s retired-identifier sweep over the worker's own index, which a pruned
+# file leaves. Their readers are scientific checkers, generators and ordinary tests that
+# run in the primary tree. Inline-linked and registered files below them still return
+# (exp-246, exp-249 and chelokot's receipt); exp-295 keeps its descriptor and metadata, as
+# exp-297--314 do. The trace and measurement are at `SNAPSHOT_MAX_BYTES`.
+UNREAD_WORKER_OUTPUTS = frozenset(
+    {
+        *(
+            SESSION184_RESULTS / name
+            for name in (
+                "exp-246-n17-capacity-one-cover",
+                "exp-247-n17-unique-state-cover",
+                "exp-249-n17-first-certified-sub-patterns",
+                "exp-251-n17-overnight-flag-certification",
+                "chelokot-lean-replay",
+                "exp-295-two-center-children/certificate.json",
+                "exp-295-two-center-children/replay.json",
+                "bc-200-family-77-20.json",
+                "bc-206-n12-ladder-register.txt",
+                "exp-212-h214-preset-signatures.json",
+            )
+        ),
+        ROOT / "campaign/retained/session-186-n17-issue358-readiness",
+        ROOT / "campaign/agent-sessions/session-106-validation",
+        ROOT / "campaign/results/annealing/summaries.json",
+        ROOT / "benchmarks/measure-verifier/results",
+        ROOT / "atlas/prospective/source-coverage-101-324.svg",
+        ROOT / "atlas/rendering/free-quench-n1-trace.json",
+    }
+)
 PRUNE = frozenset(
     {
         second.WITNESSES,
@@ -848,7 +881,7 @@ REGULARIZED_WITNESS_PATTERN = "n-*-regularized.yaml*"
 REGULARIZED_WITNESSES = frozenset(
     (ROOT / "atlas/known-best/regularized").glob(REGULARIZED_WITNESS_PATTERN)
 )
-PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS
+PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS | UNREAD_WORKER_OUTPUTS
 # Build caches: excluded from the counted surface and from every worker tree, by
 # NAME at any depth. Not a prune, and the distinction is the point. Every entry in
 # `PRUNE` is a committed path that a worker does not need; these are generated
@@ -1140,6 +1173,43 @@ def root_files() -> tuple[Path, ...]:
 #
 # With this change's own comments and test counted, the branch measures 196,433,238
 # bytes and its merge with main 196,616,698, 4.67 MiB and 4.49 MiB under an unchanged cap.
+#
+# 2026-10-08, #404 (1af586ef4): no entry was written for this one, so it is recorded
+# here. `_link_needs_private_target` stopped copying back five historical browser
+# observations under `benchmarks/math-startup/runs/ci-34774787868`, 2,739,207 bytes
+# linked only from the 2026-09-13 explainer PDF comparison review. No registered control
+# reads them or follows that review's links; `check_documentation` does, and no control
+# runs it. On the #404 -> #454 -> #461 stack merged with main e0b02b3ab (projected over
+# its Git tree), that rule takes the snapshot from 203,181,930 to 200,442,723 bytes.
+#
+# 2026-10-09, #464 (the n17 SOS paper review) merged onto that tree: 201,534,311 bytes,
+# 207,719 over 192 MiB. Of its 1,091,588 bytes, 1,059,055 are one archived paper (PDF
+# and raw extraction) that the review links and `linked_pruned_targets` copies back.
+# Answered by option (b) again, under an unchanged cap: `UNREAD_WORKER_OUTPUTS` above.
+#
+# Traced as on 2026-10-06, at the integrated tree: all 174 controls ran mutated under
+# `strace -f -e trace=%file` in worker trees that still held the candidates, and all
+# 174 fired. Every file that leaves was opened by no control except `check_readme`,
+# whose retired-identifier sweep reads what the worker's index tracks; `ledger check`
+# stats the four linked audit directories, which `linked_pruned_directories` recreates.
+# With them pruned, all 174 controls fire, and each of the 50 distinct commands, run
+# unmutated in a worker with them and in one without them, prints the same output, wall
+# times aside. Four were already red unmutated and are red identically: the full suite,
+# `validate_schemas`' missing-archive cross-checks, the operating-rules append script
+# and `test_change_scoped_selection`.
+#
+# What option (b) cannot do is restore a margin. Of the 109.9 MB the packing walk
+# copies, 34.4 MB is neither inline-linked nor registered, and almost all of that is
+# code, tests, witnesses and the frontier; this selection is most of the rest. The other
+# lever is rescue scope: 16.6 MB is copied back only because `docs/` reviews and
+# research link it, 12 MB of it from the archive. Two readers hide there, and both are
+# why `tests/test_snapshot_link_consumers.py` keeps archive custody: `check_gate_budgets`
+# opens the two workflows `defects.md` links, and `ledger check` stats the original n11
+# review, which campaign Markdown reaches only through `#fragment` links that
+# `INLINE_LINK` does not match. Narrowing that rule needs those fixed first.
+#
+# With this change's comments and tests counted, the snapshot measures 200,145,032
+# bytes, 1,181,560 under the unchanged cap.
 SNAPSHOT_MAX_BYTES = 192 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
