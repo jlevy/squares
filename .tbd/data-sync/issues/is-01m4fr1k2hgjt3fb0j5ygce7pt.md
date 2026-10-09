@@ -3,9 +3,9 @@ type: is
 id: is-01m4fr1k2hgjt3fb0j5ygce7pt
 title: Qualify exact-paper print readability and overflow preflight
 kind: bug
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 5
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T07:11:37.026Z
-updated_at: 2026-10-09T08:03:00.345Z
+updated_at: 2026-10-09T08:43:35.311Z
 started_at: 2026-10-09T07:16:55.726Z
+closed_at: 2026-10-09T08:43:35.309Z
+close_reason: User retired PDF packaging for this large report; retain negative evidence and continue complete web publication in think-ja78.
+resolution: canceled
+duplicate_of: null
 ---
 W7 stabilization after published child4789 checkpoint. Dated hosted PDF1666 has 546 pages and lossless n83 coefficients, but landscape summary body measures5.40pt. Implement maintained settled print diagnostics using existing1px document-overflow/culprit probe and math refusals; identify actual scaling cause before CSS changes; enforce physical table text at least8pt with9pt target while preserving all source fields, 499 records and 673 n83 coefficients. Add meaningful negative controls and qualify a fresh hosted PDF. Keep original assurance, byte, layout and CI budgets unchanged; use external env only and no local disk-heavy PDF/fixture rebuilds.
 
@@ -61,3 +65,7 @@ Readability acceptance remains unmet by the dated 5.4pt baseline.
 Qualify the maintained physical-size/overflow diagnostics and a fresh candidate PDF
 against >= 8pt (target 9pt), 1px tolerance and complete-content preservation before
 declaring success.
+
+Web-only scope change — 2026-10-09T08:43:02.225113+00:00
+
+The user explicitly stopped PDF packaging and requested the same content as a clean web report on Papers. The first H001 candidate was refused: all 6012 cells/1428 displays were measured, but n68/n292/n105 fraction cells spilled 94.94/26.05/15.45px. No candidate PDF was generated or qualified. No second print trial will run. Preserved diagnostic receipt: w7-print-candidate-H001-final-diagnostics.json; source WIP patch and five unique files: stopped-print-work-20261009/. This bead ends canceled by user scope change, not by a successful physical-font outcome. Web preservation/publication is now owned by think-ja78. All dated physical results and scientific obligations remain intact.
