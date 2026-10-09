@@ -648,7 +648,7 @@ def test_the_committed_ledger_counts_its_four_admitted_entries_without_the_dumps
     def absent(*_args: Any, **_kwargs: Any) -> Path:
         raise HostedDataMissingError("fixture deliberately has no hosted certificate objects")
 
-    monkeypatch.setattr(census_tool, "require", absent)
+    monkeypatch.setattr(census_tool, "require_from_manifest", absent)
     record = census(ledger, selector_receipts=())
     admitted = {row["name"] for row in record["entries"] if row["status"] == "admitted"}
     assert admitted == EXP250_ADMITTED

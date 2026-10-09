@@ -269,6 +269,34 @@ checkout remain preserved.
 `think-foe5` tracks this consolidation; existing qualification owners remain open until
 their exact integrated source passes the required gates.
 
+## Current-Main Fixture Recovery
+
+The
+[current-main Packing run](https://github.com/jlevy/squares/actions/runs/37882100437)
+finds three fixture-integration failures beside three source-copy budget assertions.
+Two synthetic alias repositories lack the tracked-source index now required by the
+standing worker; the census missing-object control patches an interface main replaced.
+The repair uses the existing sanitized fixture-index helper and the current
+`require_from_manifest` dependency seam.
+Every original assertion is preserved; production behavior, mathematical source and the
+192 MiB cap are unchanged.
+
+The three affected modules pass 58 controls in 102.89 seconds, with one known-cap
+production-clone test deselected.
+Ruff, formatting, BasedPyright and the owned diff check pass.
+This is a selected fixture qualification, not a complete suite or gate.
+Fresh required CI must qualify the published repair; the source-copy resource decision
+and complete research checkpoint remain open.
+
+The standalone source review now has exact-head
+[A — senior](https://github.com/jlevy/squares/pull/464#pullrequestreview-5465603134) and
+[B — correctness](https://github.com/jlevy/squares/pull/464#pullrequestreview-5465604337)
+passes for content and mathematics, with A1 retaining its failed required-CI and full
+qualification hold.
+The same Astra reviewer performs two distinct passes independently of
+the author. Its scoped weighted-screen result updates #454’s earlier unconditional
+no-ball order-2 pilot, with that earlier sequence preserved as history.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
