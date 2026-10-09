@@ -62,6 +62,13 @@ def backfilled(text: str, n: int) -> str:
     # it, or where no source is recorded yet (a record from before the field existed). A
     # derived pair is recomputed from the closed form, so a second run changes nothing.
     printed = reported.get("algebraic_source") in {CATALOGUE, None}
+    # These owner writers derive identities from complete finite source certificates.
+    # Their legacy n51 polynomial omitted provenance; it was never a Kingbird claim.
+    if reported.get("source_key") in {
+        "[ry-xu square packing 2026]",
+        "[Gupta rational refinements 2026-10-08]",
+    }:
+        printed = False
     fields = algebraic_fields(
         reported.get("exact_form"),
         reported.get("algebraic_degree") if printed else None,

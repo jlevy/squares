@@ -820,9 +820,23 @@ def test_cli_nested_submitted_payload_publishes_refusal(
     descriptor.write_text("{}", encoding="utf-8")
     submitted.write_text(
         '{"schema":"n17-shared-centre-endpoint/v1","status":"constructed",'
-        '"frame_action":"r3","mathematical":{"point":' + "[" * 1200 + "0" + "]" * 1200 + "}}",
+        '"frame_action":"r3","mathematical":{"point":[]}}',
         encoding="utf-8",
     )
+    read_json = tool.projection.finite.read_json
+
+    def nested_payload(path: Path, ceiling: int) -> tuple[bytes, dict[str, Any]]:
+        raw, document = read_json(path, ceiling)
+        if path == submitted:
+            # Earlier controls may raise the process recursion limit. Exercise the
+            # encoder independently of the separate decoder-depth controls below.
+            point: object = 0
+            for _ in range(sys.getrecursionlimit() + 1):
+                point = [point]
+            document["mathematical"]["point"] = point
+        return raw, document
+
+    monkeypatch.setattr(tool.projection.finite, "read_json", nested_payload)
     monkeypatch.setattr(tool, "endpoint_packet", lambda *_args, **_kwargs: {"point": []})
     output = tmp_path / "refused.json"
     assert (

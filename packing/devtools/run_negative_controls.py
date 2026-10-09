@@ -1557,45 +1557,54 @@ def snapshot_pruned_targets() -> list[Path]:
     return sorted({*linked_pruned_targets(), *result_pruned_targets()})
 
 
-def snapshot_copy_targets() -> tuple[Path, ...]:
-    """Copy each declared private path once, preserving distinct path aliases.
+def _claim_source_copy(source: Path, copied: set[Path]) -> bool:
+    """Claim one lexical path, preserving distinct files with identical bytes.
 
-    A full scientific input can be explicitly carried and separately rescued by its
-    result registration. Both names identify the same destination; copying it twice
-    repeats I/O and counts bytes that are overwritten, rather than additional source.
-    This roster is rebuilt on every invocation and admits no source validity cache.
+    Normalize dot segments without resolving symlinks or merging equal-content
+    paths. The copier, live inventory and committed projection share this rule.
     """
-    return tuple(dict.fromkeys((*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())))
+    key = Path(os.path.abspath(source))  # noqa: PTH100 — resolve() merges symlink paths
+    if key in copied:
+        return False
+    copied.add(key)
+    return True
 
 
-def snapshot_duplicate_copy_bytes() -> int:
-    """Bytes of repeated writes to identical named destinations at this invocation."""
-    paths = (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())
-    return sum(path.stat().st_size for path in paths) - sum(
-        path.stat().st_size for path in dict.fromkeys(paths)
+def _unique_source_paths(paths: Sequence[Path]) -> list[Path]:
+    copied: set[Path] = set()
+    for path in paths:
+        _claim_source_copy(path, copied)
+    return sorted(copied)
+
+
+def snapshot_copy_targets() -> tuple[Path, ...]:
+    """Copy each declared private path once, preserving first spelling and order.
+
+    Repeated declarations share the copier's lexical path identity; distinct
+    aliases and equal-content files remain separate. The roster is rebuilt on
+    every invocation and admits no source validity cache.
+    """
+    copied: set[Path] = set()
+    return tuple(
+        path
+        for path in (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())
+        if _claim_source_copy(path, copied)
     )
 
 
-def snapshot_source_paths() -> list[Path]:
-    """Actual copied source destinations, excluding build products and caches.
+def snapshot_duplicate_copy_bytes() -> int:
+    """Bytes of repeated declarations of the same lexical path at this invocation."""
+    copied: set[Path] = set()
+    return sum(
+        path.stat().st_size
+        for path in (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())
+        if not _claim_source_copy(path, copied)
+    )
 
-    Explicit and dependency-rescued paths share the copier's unique named roster;
-    repeated declarations do not add another physical file to the worker.
-    """
-    paths = list(snapshot_copy_targets())
-    for document in ROOT_DOCUMENTS:
-        if document.is_dir():
-            # `.agents` carries a Python file (`skills/experiment-loop/assets/ledger.py`),
-            # so this glob can reach a `__pycache__` the moment anything runs it. It holds
-            # none today; the exclusion is here so the count does not start drifting on
-            # the day something does.
-            paths.extend(
-                path
-                for path in document.rglob("*")
-                if path.is_file() and not _inside_build_cache(path, below=document)
-            )
-        elif document.is_file():
-            paths.append(document)
+
+def _packing_source_paths() -> list[Path]:
+    """Files carried by the initial packing bulk clone, after cache removal."""
+    paths = []
     for directory, names, files in os.walk(ROOT):
         parent = Path(directory)
         names[:] = [
@@ -1607,6 +1616,28 @@ def snapshot_source_paths() -> list[Path]:
                 continue
             paths.append(path)
     return paths
+
+
+def snapshot_source_paths() -> list[Path]:
+    """One copy per lexical source path, excluding build products and caches.
+
+    Explicit inputs, dependency rescue and root documents can select the same
+    path. The copier skips those later writes too; the count describes actual
+    operations rather than discounting bytes that are still copied repeatedly.
+    """
+    paths = list(snapshot_copy_targets())
+    for document in ROOT_DOCUMENTS:
+        if document.is_dir():
+            # `.agents` carries Python source, so exclude bytecode at any depth.
+            paths.extend(
+                path
+                for path in document.rglob("*")
+                if path.is_file() and not _inside_build_cache(path, below=document)
+            )
+        elif document.is_file():
+            paths.append(document)
+    paths.extend(_packing_source_paths())
+    return _unique_source_paths(paths)
 
 
 def snapshot_source_bytes() -> int:
@@ -1817,10 +1848,7 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
             and not in_pruned_roots(path, effective_prune)
         )
     )
-    projected: dict[Path, int] = {}
-    for path in selected:
-        projected[path] = projected.get(path, 0) + inventory[path][1]
-    return projected
+    return {path: inventory[path][1] for path in _unique_source_paths(selected)}
 
 
 def snapshot_git_source_bytes(revision: str = "HEAD") -> int:
@@ -1900,12 +1928,18 @@ def index_tree(root: Path) -> None:
 def clone_tree(dest: Path) -> None:
     """A private, writable source snapshot for one worker to corrupt."""
     work = dest / HERE
+    copied = set(_unique_source_paths(_packing_source_paths()))
     _clone_into(ROOT, work)
+
+    def copy_once(source: str, landing: str) -> str:
+        if _claim_source_copy(Path(source), copied):
+            shutil.copy2(source, landing)
+        return landing
 
     for target in snapshot_copy_targets():
         landing = dest / target.relative_to(REPO)
         landing.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(target, landing)
+        copy_once(str(target), str(landing))
     for directory in linked_pruned_directories():
         (dest / directory.relative_to(REPO)).mkdir(parents=True, exist_ok=True)
 
@@ -1916,9 +1950,10 @@ def clone_tree(dest: Path) -> None:
                 dest / document.name,
                 dirs_exist_ok=True,
                 ignore=shutil.ignore_patterns(*BUILD_CACHES),
+                copy_function=copy_once,
             )
         elif document.is_file():
-            shutil.copy2(document, dest / document.name)
+            copy_once(str(document), str(dest / document.name))
 
     # After every copier and before the symlinks, so the sweep sees the whole tree and
     # none of the real checkout: `.venv` alone holds 147 `__pycache__` directories that

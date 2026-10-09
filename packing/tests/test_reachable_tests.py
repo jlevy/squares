@@ -172,6 +172,25 @@ def test_changed_release_data_selects_the_release_contract() -> None:
             True,
         ),
         ("packing/resources/web/another-packet/archive/extra.json.gz", False),
+        (
+            "packing/resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/gupta-square-packing-refinements-2026-10-08/receipts/exact-certification.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/case-inputs.json",
+            True,
+        ),
+        ("packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-105.yaml", True),
+        (
+            "packing/resources/web/couzo-followup-refinements-2026-10-08-old/facts/n-105.yaml",
+            False,
+        ),
+        ("packing/resources/web/evand-batch-105-130-2026-10-07/acquisition/sources.json", True),
+        ("packing/resources/web/evand-batch-292-2026-10-07/acquisition/sources.json", True),
     ],
 )
 def test_refinement_data_reaches_builder_tests_without_widening_the_suite(

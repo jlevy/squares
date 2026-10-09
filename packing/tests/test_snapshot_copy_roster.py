@@ -1,5 +1,8 @@
 """Count and copy the full private roster without repeated destination writes."""
 
+import os
+import shutil
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -110,3 +113,77 @@ def test_historical_replay_inputs_survive_an_ancestor_prune(
     for source in inputs:
         assert (destination / source.relative_to(repo)).read_bytes() == source.read_bytes()
     assert not (destination / bulk.relative_to(repo)).exists()
+
+
+def test_schema_overlap_aligns_copier_live_and_git_rosters(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Named, rescued and bulk selections share one path; equal-byte aliases remain."""
+    for name in tuple(os.environ):
+        if name.startswith("GIT_"):
+            monkeypatch.delenv(name)
+
+    repo = tmp_path / "source"
+    packing = repo / "packing"
+    schema = packing / "witnesses/witness.schema.yaml"
+    schema.parent.mkdir(parents=True)
+    schema.write_bytes(b"type: object\n")
+    alias = schema.with_name("independent.schema.yaml")
+    alias.write_bytes(schema.read_bytes())
+    document = repo / "README.md"
+    document.write_text("[schema](packing/witnesses/witness.schema.yaml)\n")
+    register = packing / "frontier/results.yaml"
+    register.parent.mkdir()
+    register.write_text("results:\n- artifacts: [packing/witnesses/witness.schema.yaml]\n")
+    index_fixture_source(repo)
+    tree = subprocess.run(
+        ["git", "-C", str(repo), "write-tree"],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    ).stdout.strip()
+    monkeypatch.setattr(controls, "REPO", repo)
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "HERE", Path("packing"))
+    monkeypatch.setattr(controls, "PRUNE", frozenset())
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (schema.parent,))
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (schema, alias, schema))
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+    monkeypatch.setattr(controls, "root_files", tuple)
+    monkeypatch.setattr(controls, "_linked_documents", lambda: [document])
+    monkeypatch.setattr(controls, "index_tree", lambda _tree: None)
+    assert controls.snapshot_pruned_targets() == [schema]
+    selected = {schema, alias, document, register}
+    live_paths = controls.snapshot_source_paths()
+    assert live_paths == sorted(selected)
+    inventory = controls.snapshot_git_source_inventory(tree)
+    assert inventory == {path: path.stat().st_size for path in selected}
+    assert inventory[schema] == inventory[alias] == len(b"type: object\n")
+    assert controls.snapshot_source_bytes() == sum(inventory.values())
+    assert controls.snapshot_git_source_bytes(tree) == sum(inventory.values())
+    copied: list[Path] = []
+    copy = shutil.copy2
+
+    def counted_copy(source_path: str | Path, landing: str | Path) -> str | Path:
+        copied.append(Path(source_path))
+        return copy(source_path, landing)
+
+    monkeypatch.setattr(shutil, "copy2", counted_copy)
+    destination = tmp_path / "worker"
+    controls.clone_tree(destination)
+    # The bulk clone already carried both schemas; named/rescued routes add no write.
+    assert schema not in copied
+    assert alias not in copied
+    actual = {
+        path.relative_to(destination): path.stat().st_size
+        for path in destination.rglob("*")
+        if path.is_file()
+    }
+    assert actual == {path.relative_to(repo): size for path, size in inventory.items()}
+    private = destination / schema.relative_to(repo)
+    assert not private.is_symlink()
+    private.write_bytes(b"invalid schema")
+    assert schema.read_bytes() == alias.read_bytes() == b"type: object\n"
+    assert (destination / alias.relative_to(repo)).read_bytes() == alias.read_bytes()

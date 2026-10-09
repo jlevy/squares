@@ -135,6 +135,16 @@ LATEST_EXACT_SOURCE_INPUTS = frozenset(
 #: This collector checks README and the packet-wide closed gzip inventory.
 REPORTED_ROOT_PACKET = "packing/resources/web/evand-exact-and-local-reports-2026-10-07/"
 
+#: Newly retained finite certificate identities and their complete source custody.
+CERTIFICATE_REGISTER_PACKETS = (
+    "packing/resources/web/ry-xu-new-packings-2026-10-08/",
+    "packing/resources/web/gupta-square-packing-refinements-2026-10-08/",
+    "packing/resources/web/couzo-exact-refinements-2026-10-08/",
+    "packing/resources/web/couzo-followup-refinements-2026-10-08/",
+    "packing/resources/web/evand-batch-105-130-2026-10-07/",
+    "packing/resources/web/evand-batch-292-2026-10-07/",
+)
+
 WALKER_MARKERS = ("rglob(", "iterdir(", ".glob(", "listdir(", "importlib", "__import__")
 
 
@@ -445,7 +455,7 @@ def select_tests(changed: list[str]) -> TestSelection:
 
     if any(
         path in REFINEMENT_REGISTER_INPUTS | LATEST_EXACT_SOURCE_INPUTS
-        or path.startswith(REPORTED_ROOT_PACKET)
+        or path.startswith((REPORTED_ROOT_PACKET, *CERTIFICATE_REGISTER_PACKETS))
         for path in changed
     ):
         changed_modules.add("devtools.build_exact_values")

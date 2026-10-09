@@ -253,7 +253,42 @@ def _before_ryxu(n: int, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> str
         monkeypatch.setattr(houses, "REPO", tmp_path)
         monkeypatch.setattr(houses, "METADATA", metadata)
         monkeypatch.setattr(houses, "house_path", lambda _n: house_path)
-    return original
+    # These immutable snapshots predate the maintained algebraic projection. Derive
+    # only those fields in memory; the old side, source, geometry and evidence stay pinned.
+    return backfilled(original, n)
+
+
+@pytest.mark.parametrize("n", [105, 108, 126, 130, 153, 179])
+def test_historical_source_fixture_keeps_bound_and_custody_pins(
+    n: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    original = _pre_ryxu_records()[n]["frontier"]
+    projected = _before_ryxu(n, monkeypatch, tmp_path)
+    _, old_front, old_body = original.split("---\n", 2)
+    _, new_front, new_body = projected.split("---\n", 2)
+    old_case = safe_load(old_front)["packing"]
+    new_case = safe_load(new_front)["packing"]
+    assert old_body == new_body
+    assert {key: value for key, value in old_case.items() if key != "reported_upper_bound"} == {
+        key: value for key, value in new_case.items() if key != "reported_upper_bound"
+    }
+    old_report = old_case["reported_upper_bound"]
+    new_report = new_case["reported_upper_bound"]
+    derived_fields = {"algebraic_degree", "minimal_polynomial", "algebraic_source"}
+    assert {key: value for key, value in old_report.items() if key not in derived_fields} == {
+        key: value for key, value in new_report.items() if key not in derived_fields
+    }
+    rational = Fraction(old_report["exact_form"])
+    assert new_report["algebraic_degree"] == 1
+    assert new_report["minimal_polynomial"] == format_polynomial(
+        (rational.denominator, -rational.numerator)
+    )
+    assert new_report["algebraic_source"] == DERIVED_FROM_EXACT_FORM
+    assert (
+        new_report["source_key"]
+        != _committed(n)[0]["packing"]["reported_upper_bound"]["source_key"]
+    )
+    assert backfilled(projected, n) == projected
 
 
 def _committed(n: int) -> tuple[dict[str, Any], str]:

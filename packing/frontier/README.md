@@ -166,10 +166,24 @@ The ones that carry the most weight:
   The linear polynomial describes that native fraction; its ceiling is recorded
   separately. Each new pose needs its own contact system and stable KKT seed for
   ideal-value research.
-  Four source-only notes at $n=102,106,152,177$ retain separately checked polynomial
-  roots below the current finite bounds, complete source rows and their original checker
-  flags. Their geometry remains V0/C0: neither feasibility, current-pose identity nor
-  Lean replay follows from the algebraic checks.
+  Three improving source-only notes at $n=106,152,177$ retain separately checked
+  polynomial roots below the current finite bounds, complete source rows and their
+  original checker flags.
+  Their geometry remains V0/C0: neither feasibility, current-pose identity nor Lean
+  replay follows from the algebraic checks.
+  Adopted RyXu and Gupta bounds retain their native exact sides, complete finite
+  certificates and independent upward decimal displays.
+  Thirteen improving Couzo offers remain pending adoption with their original
+  certificates and replay receipts; `think-lhtz` owns independent review and the V3/C3
+  adoption/atlas slice.
+  The
+  [Daniel record-hunt packet](../resources/web/evand-record-hunt-2026-10-09/README.md)
+  adds a pending $n=132$ offer (T-131) and a separate certificate for the same exact
+  $n=155$ side as Couzo’s T-128 offer.
+  Their distinct source and replay custody remain V0/C0; neither changes a current case
+  or proves local-minimum equivalence.
+  Daniel’s superseded $n=102$ polynomial remains historical with its complete original
+  root cell, source flags and V0/C0 envelope.
   The missing native geometry files remain an intake dependency under `think-8sm2`. The
   later publication layer supplies the exact side values paper.
 - `evidence` points into [`evidence.yaml`](evidence.yaml), where assurance, method,

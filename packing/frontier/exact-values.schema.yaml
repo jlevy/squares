@@ -81,7 +81,248 @@ properties:
     type: array
     minItems: 1
     items: {$ref: '#/$defs/entry'}
+  historical_entries:
+    type: array
+    items: {$ref: '#/$defs/historical_entry'}
 $defs:
+  source_certificate:
+    type: object
+    additionalProperties: false
+    required:
+    - result
+    - source_key
+    - revision
+    - facts
+    - original_certificate
+    - receipt
+    - verification
+    - confirmation
+    - algebraic_identity
+    - geometry_replay
+    - adoption
+    - global_optimality
+    properties:
+      result:
+        enum:
+        - T-125
+        - T-127
+        - T-128
+        - T-129
+        - T-130
+        - T-131
+      source_key:
+        type: string
+        minLength: 1
+      revision:
+        type: string
+        pattern: ^[0-9a-f]{40}$
+      facts:
+        type: string
+        pattern: ^packing/
+      original_certificate:
+        type: string
+        minLength: 1
+      receipt:
+        oneOf:
+        - type: 'null'
+        - type: string
+          pattern: ^packing/
+      verification:
+        enum:
+        - V0
+        - V3
+      confirmation:
+        enum:
+        - C0
+        - C3
+      algebraic_identity:
+        const: independently-checked
+      geometry_replay:
+        enum:
+        - native-replay-retained
+        - not-replayed
+      adoption:
+        enum:
+        - pending
+        - not-selected
+      global_optimality:
+        const: not-established
+    allOf:
+    - if:
+        properties:
+          result:
+            enum:
+            - T-125
+            - T-127
+      then:
+        properties:
+          verification:
+            const: V3
+          confirmation:
+            const: C3
+          geometry_replay:
+            const: native-replay-retained
+          receipt:
+            type: string
+            minLength: 1
+          adoption:
+            const: not-selected
+    - if:
+        properties:
+          result:
+            enum:
+            - T-128
+            - T-130
+            - T-131
+      then:
+        properties:
+          verification:
+            const: V0
+          confirmation:
+            const: C0
+          geometry_replay:
+            const: native-replay-retained
+          receipt:
+            type: string
+            minLength: 1
+    - if:
+        properties:
+          result:
+            enum:
+            - T-129
+      then:
+        properties:
+          verification:
+            const: V0
+          confirmation:
+            const: C0
+          geometry_replay:
+            const: not-replayed
+          receipt:
+            type: 'null'
+          adoption:
+            const: not-selected
+  historical_entry:
+    type: object
+    additionalProperties: false
+    required:
+    - n
+    - kind
+    - algebraic_source
+    - current_side
+    - side
+    - degree
+    - polynomial
+    - checks
+    - sources
+    - source_statuses
+    - attribution
+    - bead
+    - text
+    properties:
+      n:
+        type: integer
+        minimum: 1
+      kind:
+        enum:
+        - superseded
+        - unreconciled-source
+      algebraic_source:
+        enum:
+        - derived-from-source-closed-form
+        - reported-source-polynomial
+      current_side:
+        $ref: '#/$defs/decimal'
+      side:
+        $ref: '#/$defs/decimal'
+      exact_form:
+        $ref: '#/$defs/rational'
+      degree:
+        type: integer
+        minimum: 1
+      polynomial:
+        $ref: '#/$defs/polynomial'
+      checks:
+        $ref: '#/$defs/source_root_checks'
+      sources:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/source_occurrence'
+      source_statuses:
+        type: array
+        items:
+          type: string
+      attribution:
+        $ref: '#/$defs/source_attribution'
+      bead:
+        oneOf:
+        - type: 'null'
+        - type: string
+          pattern: ^think-[0-9a-z]+$
+      text:
+        type: string
+        minLength: 1
+      reported_source:
+        $ref: '#/$defs/reported_source'
+      assurance:
+        $ref: '#/$defs/source_assurance'
+      source_certificate:
+        $ref: '#/$defs/source_certificate'
+    allOf:
+    - if:
+        required:
+        - source_certificate
+        properties:
+          kind:
+            const: unreconciled-source
+      then:
+        properties:
+          source_certificate:
+            properties:
+              adoption:
+                const: pending
+    - if:
+        required:
+        - source_certificate
+        properties:
+          kind:
+            const: superseded
+      then:
+        properties:
+          source_certificate:
+            properties:
+              adoption:
+                const: not-selected
+    oneOf:
+    - required:
+      - reported_source
+      - assurance
+      properties:
+        algebraic_source:
+          const: reported-source-polynomial
+        degree:
+          enum:
+          - 8
+          - 32
+          - 40
+      not:
+        required:
+        - source_certificate
+    - required:
+      - source_certificate
+      - exact_form
+      properties:
+        algebraic_source:
+          const: derived-from-source-closed-form
+        degree:
+          const: 1
+      not:
+        anyOf:
+        - required:
+          - reported_source
+        - required:
+          - assurance
   source_occurrence:
     type: object
     additionalProperties: false

@@ -19,7 +19,8 @@ from collections.abc import Callable
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
-from typing import Any
+from tokenize import TokenError
+from typing import Any, cast
 
 import pytest
 import sympy as sp
@@ -29,9 +30,12 @@ from devtools import backfill_algebraic_facts as algebraic_backfill
 from devtools import build_exact_values as exact
 from devtools import evand_arrangement_reports as arrangement_reports
 from devtools import refinement_custody, refinement_packets, validate_schemas
+from devtools import register_gupta_reports as gupta_imports
+from devtools import register_ryxu_reports as ryxu_imports
 from devtools.retained_data import compressed_path, read_retained_text, write_retained_text
 from sqpack.exact_values import algebraic_fields, format_polynomial
 from sqpack.kingbird_catalogue import normalized_polynomial
+from sqpack.witness import witness_document
 from sqpack.yamlio import load_yaml
 
 #: 2 + sqrt(2)/2, the side at n = 5, and Daniel's 39-digit value for it.
@@ -49,18 +53,74 @@ def _entries() -> dict[int, dict[str, Any]]:
 
 
 def _build(n: int, packing: dict[str, Any] | None = None, budget: int = 200) -> dict:
+    if packing is None:
+        text = (exact.FRONTIER / f"n-{n:03d}.md").read_text()
+        packing = cast(
+            "dict[str, Any]",
+            load_yaml(algebraic_backfill.backfilled(text, n).split("---", 2)[1])["packing"],
+        )
     return exact.build_entry(
         n,
-        exact.load_packing(n) if packing is None else packing,
+        packing,
         exact.catalogue_entries().get(n),
         exact.kkt_rows().get(n),
         budget,
     )
 
 
-def _unprojected_rational_packing(n: int) -> dict[str, Any]:
+@cache
+def _prior_import_cases() -> dict[int, dict[str, Any]]:
+    """Complete frozen frontier records retained before Ry-Xu/Gupta adoption."""
+    rows = [*ryxu_imports.read_history(), *gupta_imports.read_history()]
+    assert len({row["n"] for row in rows}) == len(rows)
+    return {
+        row["n"]: load_yaml(row["frontier"].split("---\n", 2)[1])["packing"] for row in rows
+    }
+
+
+def _pre_import_packing(n: int) -> dict[str, Any]:
+    """Keep historical bound/source/evidence pins together, never borrow current lanes."""
+    prior = _prior_import_cases().get(n)
+    return copy.deepcopy(exact.load_packing(n) if prior is None else prior)
+
+
+def _refinement_packing(n: int) -> dict[str, Any]:
+    packing = _pre_import_packing(n)
+    source = next(
+        source for source in refinement_packets.SOURCES.values() if n in source.numbers
+    )
+    assert packing["reported_upper_bound"]["source_key"] == source.key
+    return packing
+
+
+@pytest.fixture
+def historical_refinement_houses(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Keep the complete earlier house custody active after a new source adopts n105."""
+    houses = exact.refinement_house_links
+    private = tmp_path / "historical-refinement-houses"
+    metadata = private / "receipts/house-metadata.json.xz"
+    metadata.parent.mkdir(parents=True)
+    metadata.write_bytes(houses.METADATA.read_bytes())
+    rows = houses.house.shared.roster(
+        houses.house.shared.read_xz_receipt(metadata), houses.NUMBERS
+    )
+    leaf_root = private / "packing/witnesses/known-best"
+    leaf_root.mkdir(parents=True)
+    for n in houses.NUMBERS:
+        witness = refinement_packets.to_witness(houses.source(n), n)
+        witness.update(copy.deepcopy(rows[n]["metadata"]))
+        (leaf_root / f"n-{n:03d}.yaml").write_text(
+            witness_document(witness, schema="../witness.schema.yaml")
+        )
+    monkeypatch.setattr(houses, "REPO", private)
+    monkeypatch.setattr(houses, "METADATA", metadata)
+
+
+def _unprojected_rational_packing(
+    n: int, packing: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """Exercise the explicit source fraction before maintained algebraic backfill."""
-    packing = copy.deepcopy(exact.load_packing(n))
+    packing = copy.deepcopy(exact.load_packing(n) if packing is None else packing)
     packing["reported_upper_bound"].update(minimal_polynomial=None, algebraic_source=None)
     return packing
 
@@ -225,7 +285,7 @@ def test_a_recorded_degree_one_gets_its_missing_polynomial_from_the_fraction() -
         algebraic_fields("sqrt(2)", 1, None)
 
 
-SQUISH_RATIONAL_COUNTS = (
+ORIGINAL_SQUISH_RATIONAL_COUNTS = (
     88,
     108,
     123,
@@ -253,7 +313,8 @@ SQUISH_RATIONAL_COUNTS = (
 
 
 def _rational_packing(n: int) -> dict[str, Any]:
-    packing = copy.deepcopy(exact.load_packing(n))
+    packing = _pre_import_packing(n)
+    assert packing["reported_upper_bound"]["source_key"] in exact.CERTIFIED_CEILING_SOURCES
     reported = packing["reported_upper_bound"]
     reported.update(algebraic_fields(reported["exact_form"], 1, None))
     return packing
@@ -261,7 +322,7 @@ def _rational_packing(n: int) -> dict[str, Any]:
 
 def test_certified_squish_rationals_keep_the_exact_side_and_its_upward_display() -> None:
     above_half_unit = 0
-    for n in SQUISH_RATIONAL_COUNTS:
+    for n in ORIGINAL_SQUISH_RATIONAL_COUNTS:
         packing = _rational_packing(n)
         entry = _build(n, packing)
         rational = Fraction(entry["exact_form"])
@@ -413,7 +474,7 @@ ORIGINAL_VERIFIED_FALLBACK_COUNTS = (
 
 
 VERIFIED_FALLBACK_COUNTS = tuple(
-    n for n in ORIGINAL_VERIFIED_FALLBACK_COUNTS if n not in (68, 270, 272, 292)
+    n for n in ORIGINAL_VERIFIED_FALLBACK_COUNTS if n not in (68, 102, 103, 131, 270, 272, 292)
 )
 
 
@@ -421,7 +482,7 @@ def test_all_verified_rationals_keep_ideal_routes_and_share_one_packet_scan(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     assert len(ORIGINAL_VERIFIED_FALLBACK_COUNTS) == 33
-    assert len(VERIFIED_FALLBACK_COUNTS) == 29
+    assert len(VERIFIED_FALLBACK_COUNTS) == 26
     scans = []
     scan = exact.evand.receipt_problems
 
@@ -913,8 +974,9 @@ def test_daniel_custody_is_reused_only_inside_one_build(
 
 
 @pytest.mark.parametrize("n", [68, 105, 292])
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_an_explicit_refinement_rational_derives_only_the_finite_identity(n: int) -> None:
-    packing = _unprojected_rational_packing(n)
+    packing = _unprojected_rational_packing(n, _refinement_packing(n))
     before = copy.deepcopy(packing)
     assert packing["reported_upper_bound"]["minimal_polynomial"] is None
     assert packing["reported_upper_bound"].get("algebraic_source") is None
@@ -962,8 +1024,9 @@ def test_an_explicit_refinement_rational_derives_only_the_finite_identity(n: int
         "unsupported",
     ],
 )
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_explicit_refinement_requires_exact_current_bound_metadata(control: str) -> None:
-    packing = _unprojected_rational_packing(105)
+    packing = _unprojected_rational_packing(105, _refinement_packing(105))
     reported, verified = packing["reported_upper_bound"], packing["verified_upper_bound"]
     if control == "reported-form":
         reported["exact_form"] = "1/2"
@@ -991,14 +1054,16 @@ def test_explicit_refinement_requires_exact_current_bound_metadata(control: str)
 
 
 @pytest.mark.parametrize("n", [68, 105, 292])
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_matching_refinement_displays_cannot_replace_the_admitted_side(n: int) -> None:
-    packing = copy.deepcopy(exact.load_packing(n))
+    packing = copy.deepcopy(_refinement_packing(n))
     value = packing["reported_upper_bound"]["value"] + "1"
     for bound in ("reported_upper_bound", "verified_upper_bound"):
         packing[bound].update(value=value, exact_form=str(Fraction(value)))
     _refused(lambda: _build(n, packing), "refinement rational bound refused")
 
 
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_explicit_refinements_share_custody_only_within_one_build(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -1014,7 +1079,7 @@ def test_explicit_refinements_share_custody_only_within_one_build(
     for n in (68, 105, 292):
         entry = exact.build_entry(
             n,
-            exact.load_packing(n),
+            _refinement_packing(n),
             exact.catalogue_entries().get(n),
             exact.kkt_rows().get(n),
             verified_inputs=inputs,
@@ -1027,7 +1092,7 @@ def test_explicit_refinements_share_custody_only_within_one_build(
         raise ValueError("changed complete replay admission")
 
     monkeypatch.setattr(refinement_custody, "check_index", refused)
-    _refused(lambda: _build(105), "changed complete replay admission")
+    _refused(lambda: _build(105, _refinement_packing(105)), "changed complete replay admission")
     assert len(checks) == 2
 
 
@@ -1044,6 +1109,7 @@ def test_explicit_refinements_share_custody_only_within_one_build(
         ("replay", ""),
     ],
 )
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_explicit_refinement_requires_current_formal_evidence(
     field: str, value: object
 ) -> None:
@@ -1057,7 +1123,7 @@ def test_explicit_refinement_requires_current_formal_evidence(
     _refused(
         lambda: exact.build_entry(
             n,
-            exact.load_packing(n),
+            _refinement_packing(n),
             exact.catalogue_entries().get(n),
             exact.kkt_rows().get(n),
             verified_inputs=inputs,
@@ -1067,6 +1133,7 @@ def test_explicit_refinement_requires_current_formal_evidence(
 
 
 @pytest.mark.parametrize("mutation", ["input", "positive", "process", "program"])
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_explicit_refinement_requires_the_complete_retained_replay(
     monkeypatch: pytest.MonkeyPatch, mutation: str
 ) -> None:
@@ -1082,15 +1149,18 @@ def test_explicit_refinement_requires_the_complete_retained_replay(
     else:
         value["n68_jobs"][0]["routes"][0]["source_sha256"] = "0" * 64
     monkeypatch.setattr(refinement_custody, "read_index", lambda: value)
-    _refused(lambda: _build(105), "refinement rational bound refused")
+    _refused(lambda: _build(105, _refinement_packing(105)), "refinement rational bound refused")
 
 
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_explicit_refinement_requires_private_receipt_and_source_fact_bytes(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     with monkeypatch.context() as control:
         control.setattr(refinement_custody, "INDEX", tmp_path / "missing-admission.json.xz")
-        _refused(lambda: _build(105), "refinement rational bound refused")
+        _refused(
+            lambda: _build(105, _refinement_packing(105)), "refinement rational bound refused"
+        )
     fact = refinement_packets.read_fact(refinement_packets.COUZO, 105)
     fact["squares"][0]["x"] = str(Fraction(fact["squares"][0]["x"]) + 1)
     raw = refinement_packets.json_bytes(fact)
@@ -1103,12 +1173,16 @@ def test_explicit_refinement_requires_private_receipt_and_source_fact_bytes(
             io.BytesIO(raw) if path == certificate else original(path, *args, **kwargs)
         ),
     )
-    _refused(lambda: _build(105), "independently pinned complete source conversion")
+    _refused(
+        lambda: _build(105, _refinement_packing(105)),
+        "independently pinned complete source conversion",
+    )
 
 
 @pytest.mark.parametrize("n", [68, 105, 292])
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_supplied_refinement_polynomial_keeps_custody_and_ideal_route(n: int) -> None:
-    packing = copy.deepcopy(exact.load_packing(n))
+    packing = copy.deepcopy(_refinement_packing(n))
     rational = Fraction(packing["reported_upper_bound"]["exact_form"])
     polynomial = format_polynomial((rational.denominator, -rational.numerator))
     packing["reported_upper_bound"].update(
@@ -1143,8 +1217,9 @@ def test_supplied_refinement_polynomial_keeps_custody_and_ideal_route(n: int) ->
         "proved",
     ],
 )
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_supplied_refinement_polynomial_cannot_bypass_custody_metadata(control: str) -> None:
-    packing = copy.deepcopy(exact.load_packing(105))
+    packing = copy.deepcopy(_refinement_packing(105))
     rational = Fraction(packing["reported_upper_bound"]["exact_form"])
     reported = packing["reported_upper_bound"]
     reported.update(
@@ -1176,10 +1251,11 @@ def test_supplied_refinement_polynomial_cannot_bypass_custody_metadata(control: 
 @pytest.mark.parametrize(
     ("n", "source"), [(106, refinement_packets.COUZO), (105, refinement_packets.N68)]
 )
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_known_refinement_source_cannot_supply_an_unadmitted_count(
     n: int, source: refinement_packets.Source
 ) -> None:
-    packing = copy.deepcopy(exact.load_packing(105))
+    packing = copy.deepcopy(_refinement_packing(105))
     rational = Fraction(packing["reported_upper_bound"]["exact_form"])
     packing["n"] = n
     packing["reported_upper_bound"].update(
@@ -1194,8 +1270,9 @@ def test_known_refinement_source_cannot_supply_an_unadmitted_count(
 
 
 @pytest.mark.parametrize("n", [68, 105, 292])
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_nearby_supplied_refinement_polynomial_is_refused_exactly(n: int) -> None:
-    packing = copy.deepcopy(exact.load_packing(n))
+    packing = copy.deepcopy(_refinement_packing(n))
     rational = Fraction(packing["reported_upper_bound"]["exact_form"])
     assert Fraction(1, rational.denominator) < Fraction(1, 10**26)
     packing["reported_upper_bound"].update(
@@ -1206,8 +1283,9 @@ def test_nearby_supplied_refinement_polynomial_is_refused_exactly(n: int) -> Non
 
 
 @pytest.mark.parametrize("n", [68, 105, 292])
+@pytest.mark.usefixtures("historical_refinement_houses")
 def test_explicit_refinement_does_not_overwrite_a_polynomial(n: int) -> None:
-    packing = copy.deepcopy(exact.load_packing(n))
+    packing = copy.deepcopy(_refinement_packing(n))
     packing["reported_upper_bound"].update(
         minimal_polynomial="2s - 1 = 0", algebraic_source="derived-from-exact-form"
     )
@@ -1266,6 +1344,8 @@ def test_the_known_superseded_counts_are_exactly_the_noted_ones() -> None:
         if any(note["kind"] == "superseded-catalogue-polynomial" for note in entry["notes"])
     )
     assert noted == [
+        51,
+        70,
         88,
         102,
         106,
@@ -1273,6 +1353,7 @@ def test_the_known_superseded_counts_are_exactly_the_noted_ones() -> None:
         123,
         129,
         130,
+        146,
         153,
         172,
         177,
@@ -1329,6 +1410,15 @@ def test_polynomial_formats_round_trip() -> None:
     assert normalized_polynomial("2s^2 - 28s + 98 = 0") != (2, -28, 97)
 
 
+@pytest.mark.parametrize("command", ["frac", "tfrac"])
+def test_native_radical_latex_fraction_commands_round_trip(command: str) -> None:
+    latex = rf"\{command}{{5 \sqrt{{2}}}}{{3}} + \{command}{{16}}{{3}}"
+    native = exact.parse_form("(16+5*sqrt(2))/3")
+    assert sp.simplify(exact.parse_form(exact.latex_to_form(latex)) - native) == 0
+    with pytest.raises((SyntaxError, TokenError)):
+        exact.parse_form(exact.latex_to_form(rf"\{command}{{5 \sqrt{{2}}}}{{3"))
+
+
 def test_closed_form_latex_round_trips() -> None:
     assert exact.exact_form_latex("7 + (1/2)sqrt(2)") == r"7 + \tfrac{1}{2}\sqrt{2}"
     assert (
@@ -1354,12 +1444,12 @@ def reported_source_candidates() -> list[dict[str, Any]]:
 def test_reported_source_roots_are_notes_not_current_bound_identities(
     monkeypatch: pytest.MonkeyPatch, reported_source_candidates: list[dict[str, Any]]
 ) -> None:
-    entries = [_build(n) for n in (102, 106, 152, 177)]
+    entries = [_build(n) for n in (106, 152, 177)]
     before = copy.deepcopy(entries)
     calls = []
 
     def counted():
-        rows = copy.deepcopy(reported_source_candidates)
+        rows = [copy.deepcopy(row) for row in reported_source_candidates if row["n"] != 102]
         calls.append(rows)
         return rows
 
@@ -1397,7 +1487,7 @@ def test_reported_source_roots_are_notes_not_current_bound_identities(
         assert note["assurance"]["lean_replay"] == "not-attempted"
 
 
-def test_reported_root_notes_cannot_claim_to_be_below_a_better_current_bound(
+def test_overlapping_source_root_cells_require_reconciliation(
     monkeypatch: pytest.MonkeyPatch, reported_source_candidates: list[dict[str, Any]]
 ) -> None:
     candidate = reported_source_candidates[0]
@@ -1409,7 +1499,7 @@ def test_reported_root_notes_cannot_claim_to_be_below_a_better_current_bound(
     }
     _refused(
         lambda: exact.append_reported_source_notes([entry]),
-        "not strictly below",
+        "root cells overlap",
     )
     assert entry["notes"] == []
 
@@ -1442,6 +1532,7 @@ def test_source_notes_are_collected_after_all_current_entries_once(
     monkeypatch.setattr(exact, "load_packing", lambda _n: {})
     monkeypatch.setattr(exact, "build_entry", entry)
     monkeypatch.setattr(exact.reported_roots, "collect", collect)
+    monkeypatch.setattr(exact, "source_certificate_history", lambda *_args, **_kwargs: [])
     record = exact.build_record()["register"]
     assert len(calls) == 1
     assert {row["n"] for row in record["entries"] if row["notes"]} == {102, 106, 152, 177}
@@ -1517,6 +1608,40 @@ def test_the_totals_partition_the_range() -> None:
     assert totals["irreducible-certified"] == totals["root-isolated"] == with_polynomial
 
 
+def test_record_hunt_is_noncurrent_and_preserves_current_case_identity() -> None:
+    register = _register()["register"]
+    history = register["historical_entries"]
+    finite = [row for row in history if "source_certificate" in row]
+    assert len(finite) == 29
+    assert sum(row["kind"] == "unreconciled-source" for row in finite) == 15
+    (source102,) = [
+        row
+        for row in history
+        if row["n"] == 102 and row["algebraic_source"] == "reported-source-polynomial"
+    ]
+    assert source102["kind"] == "superseded"
+    assert source102["assurance"]["verification"] == "V0"
+    assert source102["assurance"]["confirmation"] == "C0"
+    new = [
+        row
+        for row in history
+        if row.get("source_certificate", {}).get("source_key") == exact.hunt_reports.SOURCE_KEY
+    ]
+    assert [(row["n"], row["source_certificate"]["result"]) for row in new] == [
+        (132, "T-131"),
+        (155, "T-128"),
+    ]
+    for row in new:
+        current = _entries()[row["n"]]
+        assert current == _build(row["n"])
+        assert current["side"]["relation"] == "upper-bound"
+        assert current["polynomial"]["coefficients"] != row["polynomial"]["coefficients"]
+        assert Fraction(row["exact_form"]) < Fraction(current["checks"]["root"]["interval"][0])
+        assert row["source_certificate"]["verification"] == "V0"
+        assert row["source_certificate"]["confirmation"] == "C0"
+        assert row["source_certificate"]["adoption"] == "pending"
+
+
 def test_every_numeric_only_count_names_its_route_and_bead() -> None:
     without_kkt_point = []
     for n, entry in _entries().items():
@@ -1542,7 +1667,7 @@ def test_the_committed_entries_equal_a_fresh_build(n: int) -> None:
     # Source notes are appended once after every current entry is built; the four-row
     # assembly control above compares their complete payloads against the register.
     expected = copy.deepcopy(_entries()[n])
-    if n in (102, 106, 152, 177):
+    if n in (106, 152, 177):
         assert expected["notes"].pop()["kind"] == "unreconciled-source-polynomial"
     assert _build(n) == expected
 

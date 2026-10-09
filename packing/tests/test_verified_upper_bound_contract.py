@@ -137,6 +137,11 @@ DECLARED_CONSUMERS = {
         "fractions, and refuse altered ceiling data or proved status; no display window "
         "establishes s(n)"
     ),
+    "packing/tests/test_build_exact_values_upstream.py": (
+        "checks finite native-side imports refuse altered ceiling forms, evidence and "
+        "display values while preserving upper-bound status; neither replay ceilings "
+        "nor imported side identities establish optimality"
+    ),
     "packing/tests/test_reported_exact_roots.py": (
         "names the field only to assert that source-only root rows carry no certified "
         "ceiling; it reads no bound value and infers no geometry or optimality"

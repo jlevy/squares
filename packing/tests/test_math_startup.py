@@ -328,9 +328,9 @@ def test_cli_requires_complete_pairs_and_positive_run_counts() -> None:
         assert error.value.code == 2
 
 
-@pytest.mark.parametrize("wait", [300, 0, None, math.nan])
-def test_known_delay_uses_its_readiness_wait_even_after_a_slow_navigation(
-    monkeypatch: pytest.MonkeyPatch, wait: float | None
+@pytest.mark.parametrize("runtime_lag", [300, 0, None, math.nan])
+def test_known_delay_requires_runtime_evidence_after_slow_first_launches(
+    monkeypatch: pytest.MonkeyPatch, runtime_lag: float | None
 ) -> None:
     required_findings = {
         "missing-math": "incorrect parameter math",
@@ -341,11 +341,17 @@ def test_known_delay_uses_its_readiness_wait_even_after_a_slow_navigation(
 
     def measure(path: Path, **_options: object) -> JsonRecord:
         control = path.stem
+        ready = 15.9 if control == "variants" else 200.9
+        runtime = ready - 10
+        if control == "delayed":
+            ready = 325.9
+            runtime = None if runtime_lag is None else ready - runtime_lag
         return {
             "metrics": {
                 "finish_validation_ms": 1,
-                "parameters_ready_ms": 325.9 if control == "delayed" else 200.9,
-                "initial_ready_wait_ms": wait if control == "delayed" else 0,
+                "parameters_ready_ms": ready,
+                "runtime_available_ms": runtime,
+                "initial_ready_wait_ms": 300 if control == "delayed" else 0,
             },
             "counters": {
                 "ready_calls": 0 if control == "no-warmup" else 1,
@@ -356,7 +362,11 @@ def test_known_delay_uses_its_readiness_wait_even_after_a_slow_navigation(
 
     monkeypatch.setattr(check_math_startup, "measure_startup", measure)
     report = check_math_startup.self_test(mode="parameters")
-    expected = (
-        [] if wait == 300 else ["the delayed control did not record the known 300 ms delay"]
-    )
+    stem = "the delayed control did not record the known 300 ms delay"
+    if runtime_lag == 300:
+        expected = []
+    elif runtime_lag == 0:
+        expected = [f"{stem}: ready 0 ms after its math runtime arrived"]
+    else:
+        expected = [f"{stem}: a readiness or runtime milestone is missing"]
     assert report["findings"] == expected
