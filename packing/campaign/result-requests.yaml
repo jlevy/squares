@@ -3077,6 +3077,13 @@ issues:
       source: body
       register:
       - T-128
+    - key: five-follow-up-refinements-2d32a6e
+      claim: Five complete rational source certificates report finite upper-bound improvements at 84,86,105,175,270.
+        Complete native feasibility outcomes are retained separately; selected standing cases are unchanged
+        pending independent review, historical source-house integration and record review.
+      source: https://github.com/jlevy/squares/pull/460#issuecomment-6070798890
+      register:
+      - T-130
     asks:
     - what: Credit the constructions and refinement tools identified by the source.
       state: done
@@ -3084,6 +3091,7 @@ issues:
         selected construction credits remain unchanged.
     beads:
     - think-edo8
+    - think-88r0
     answer_bead: think-edo8
     replies: []
     close_when: The supported import and disposition are on main and the owner posts the resulting state;

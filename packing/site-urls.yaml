@@ -3265,7 +3265,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/106.html
   canonical: cases/106.html
@@ -3881,7 +3881,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/176.html
   canonical: cases/176.html
@@ -4729,7 +4729,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/271.html
   canonical: cases/271.html
@@ -5665,7 +5665,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/85.html
   canonical: cases/85.html
@@ -5681,7 +5681,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/87.html
   canonical: cases/87.html
@@ -11734,6 +11734,41 @@ urls:
     - packing/resources/web/evand-batch-105-130-2026-10-07/README.md
     - packing/resources/web/evand-batch-292-2026-10-07/README.md
     - packing/resources/web/evand-batch-wrapper-2026-10-07/README.md
+- path: result/t-130.html
+  canonical: result/t-130.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-09'
+  lastmod: '2026-10-09'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 84
+      - 86
+      - 105
+      - 175
+      - 270
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo follow-up refinements 2026-10-08]'
+      published: '2026-10-08'
+    builds_on: null
+    evidence:
+    - E-couzo-460-followup-rational-report
+    artifacts:
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/README.md
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/acquisition/sources.json
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-084.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-086.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-105.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-175.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-270.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/receipts/exact-certification.json.xz
+    - packing/devtools/couzo_followup_reports.py
 - path: results.html
   canonical: all-results.html
   kind: forwarder

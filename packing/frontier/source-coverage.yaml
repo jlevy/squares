@@ -3093,6 +3093,33 @@ sources:
     text, diagrams, prose and programs stay outside Git under the existing retention policy. Every claim
     is tracked outside the 1..324 case corpus; no geometry, native replay, selected case, result row or
     transferred issue451 verification.
+- id: couzo-followup-refinements-2026-10-08
+  title: Francisco Couzo's five follow-up rational refinements at 2d32a6e
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/2d32a6e96f55c5dc1a2dd0e3581098e7c0105252
+  local: resources/web/couzo-followup-refinements-2026-10-08
+  source_key: '[Couzo follow-up refinements 2026-10-08]'
+  scope:
+    n_values:
+    - 84
+    - 86
+    - 105
+    - 175
+    - 270
+  reviewed: '2026-10-09'
+  source_date: '2026-10-08'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-followup-refinements-2026-10-08/acquisition/sources.json
+  evidence:
+  - E-couzo-460-followup-rational-report
+  notes: All five complete claims and their exact sides are kept as derived exact facts with the complete
+    pinned tree; no upstream byte is retained. T-130 records the aggregate source report. All fifteen
+    native jobs have full outcomes. No selected override or superseded claim is created at this source-only
+    stage; current cases and earlier source ownership remain unchanged. The seven other certificates
+    at this commit are byte-identical to the issue451 originals.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

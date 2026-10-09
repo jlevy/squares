@@ -29138,3 +29138,34 @@ evidence:
       border-row/grid constructions, not surveyed best records. No geometry replay, native execution, exact
       certificate, independent method, optimality, standing-bound change or verification transferred from
       the separate eight in-horizon issue451 certificates.
+  - id: E-couzo-460-followup-rational-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 84
+      - 86
+      - 105
+      - 175
+      - 270
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo follow-up refinements 2026-10-08]'
+    certificate: packing/resources/web/couzo-followup-refinements-2026-10-08/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-09'
+    limitations: 'This atom records the source author''s report of five exact rational certificates
+      at 2d32a6e. The packet keeps derived exact facts that rebuild each pinned certificate blob, not
+      the source bytes. A separate complete repository replay is retained: five positives and ten duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 384846 pair decisions
+      in 79.55 seconds wall with two workers and unchanged kernel limits. Independent review, historical
+      source-house integration and confirmation remain pending. Author KKT and no-descent statements
+      are not checked. The source author reports passes from Evan Daniel''s verify_cert.py and a copy
+      of this repository''s sqpack verifier, so the exact_verify route overlaps that source checker.
+      The second maintained rational-geometry route is a separate deciding implementation; both routes
+      share certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method. No two independent methods, human oversight or optimality is claimed.'

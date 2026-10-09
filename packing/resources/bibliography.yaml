@@ -1559,6 +1559,20 @@ sources:
       includes copied Squares Project verification code and register comparisons for separate in-horizon
       reports; that project lineage does not establish a checker or verification for these twenty poses.
       Expanded comparison bounds are derived references rather than surveyed best records.
+  - key: '[Couzo follow-up refinements 2026-10-08]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    lineage: builds-on-project
+    credit: Couzo after Xu, Daniel, Ellsworth, Levy
+    short_credit: Couzo after Xu et al.
+    note: 'Five complete exact certificates at 2d32a6e96f55c5dc1a2dd0e3581098e7c0105252, refined from
+      Xu''s #432 and Daniel''s #399 packings with Ellsworth''s refine_packing and Daniel''s fq, and
+      written by Daniel''s exact contact solver. The source checks with Squares Project (Levy) verification
+      code; this project lineage is not independent. Derived exact facts only; no upstream byte is retained.
+      No optimizer/local/global claims.'
 credited_names:
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta

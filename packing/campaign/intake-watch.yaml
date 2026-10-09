@@ -175,18 +175,24 @@ repositories:
       Both commits after the retained v1.0 pin change only README software and paper DOI links. The retained paper, certificate inputs and verifier programs are unchanged. No new result to import.
 
   - url: https://github.com/franciscouzo/square-packing
-    read_through: ffd900dfff6d2674ad995359208c2f0714915c82
+    read_through: 2d32a6e96f55c5dc1a2dd0e3581098e7c0105252
     read_on: '2026-10-09'
     bead: think-1545
     note: >-
-      Complete changed-path manifests and README context for b10ad36, 74f7e8b and
-      ffd900df are covered by the strict seventy-three-role custody check. Twenty
-      outside-horizon reports, including the n378 update, now retain complete derived
-      decimal facts and Git metadata; raw upstream TXT/SVG/prose remain outside Git
-      under the existing retention policy. All twenty claims are tracked beyond the
-      1..324 corpus without a result row or geometry credit. The fourteen removed
-      constructions remain historical source roles. The separate eight in-horizon
-      issue451 certificates and native/custody receipts retain their own scope;
-      historical current-house adoption and confirmation remain pending. Outside-corpus
-      reader work remains with think-1545; no transferred verification or all-path
-      source retention is asserted.
+      Read 2d32a6e (parent ffd900d) on 2026-10-09. Its five changed in-horizon
+      certificates at n84/86/105/175/270 are kept as derived exact facts by the
+      couzo-followup-refinements packet (T-130), whose fifteen-job native replay is
+      retained; the seven other certificates and their decimal poses are byte-identical
+      to the issue451 originals. README, decimal-pose and SVG changes are context held
+      by identity only. The n375 and n378 TXT/SVG updates are outside the 1..324
+      corpus, recorded by identity and printed side only, and stay with think-1545,
+      which also keeps the outside-corpus reader work. The eight issue451 certificates
+      and their native and custody receipts keep their own scope; their historical
+      current-house adoption and confirmation remain pending.
+      Earlier reads: complete changed-path manifests and README context for b10ad36,
+      74f7e8b and ffd900df are covered by the strict seventy-three-role custody check;
+      twenty outside-horizon reports retain derived decimal facts without a result row
+      or geometry credit, and the fourteen removed constructions remain historical
+      source roles. Raw upstream TXT/SVG/prose remain outside Git under the existing
+      retention policy; no transferred verification or all-path source retention is
+      asserted.

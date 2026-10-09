@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-08'
+last_reviewed: '2026-10-09'
 results:
   - id: T-001
     kind: lower-bound
@@ -13078,3 +13078,66 @@ results:
       or verification transfer. n17 remains with its existing owner.
     next_rung: Optional scoped historical geometry replay requires dedicated complete deciding inputs
       and controls; it would not replace any current selected bound.
+  - id: T-130
+    kind: upper-bound
+    registered: '2026-10-09'
+    headline: Five follow-up rational refinements from Francisco Couzo
+    claim: Five complete rational source certificates report finite upper-bound improvements at 84,86,105,175,270.
+      Complete native feasibility outcomes are retained separately; selected standing cases are unchanged
+      pending independent review, historical source-house integration and record review.
+    scope:
+      n_values:
+      - 84
+      - 86
+      - 105
+      - 175
+      - 270
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: Five smaller finite construction sides; no lower bound or optimum.
+      scored: '2026-10-09'
+      by: think-88r0 Couzo follow-up import
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Couzo follow-up refinements 2026-10-08]'
+      published: '2026-10-08'
+    evidence:
+    - E-couzo-460-followup-rational-report
+    artifacts:
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/README.md
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/acquisition/sources.json
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-084.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-086.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-105.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-175.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-270.yaml
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/receipts/exact-certification.json.xz
+    - packing/devtools/couzo_followup_reports.py
+    controls:
+    - packing/tests/test_couzo_followup_reports.py
+    notes: 'All five complete certificates are kept as derived exact facts that rebuild each pinned
+      blob; no upstream byte is retained. A separate complete repository replay is retained: five positives
+      and ten duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 384846 pair decisions in 79.55 seconds wall with two workers and unchanged kernel limits.
+
+
+      The earlier issue451 n105 certificate (T-128) stays retained with its own replay outcomes; the
+      new n105 side is smaller by exactly 262896871797134956129927589/200000000000000000000000000000.
+      Ryan Xu''s T-125 certificates at 84, 86, 105 and 175 and Evan Daniel''s T-119 certificate at 270
+      remain the selected and verified ceilings. The source seeds 84, 86, 105 and 175 from Ryan Xu''s
+      #432 packings and 270 from Evan Daniel''s #399 packing, refined by Couzo''s basin hopping and,
+      at 175, David Ellsworth''s refine_packing and Evan Daniel''s fq; Daniel''s exact contact solver
+      wrote the certificates.
+
+
+      The source author reports passes from Evan Daniel''s verify_cert.py and a copy of this repository''s
+      sqpack verifier, so the exact_verify route overlaps that source checker. The second maintained
+      rational-geometry route is a separate deciding implementation; both routes share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two independent
+      methods, human oversight or optimality is claimed.'
+    next_rung: Independently review the retained replay, preserve each complete historical source house
+      (Ryan Xu at 84, 86, 105 and 175; Evan Daniel at 270) before any selected-house replacement, then
+      record source-specific adoption and confirming evidence. Final exact-head CI remains required.
