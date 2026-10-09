@@ -915,6 +915,15 @@ COPY_SEPARATELY = (
     # The retained n13 family is an exact worker consumer asserted by the n32
     # inventory contract; agenda-040's unrelated generated bulk stays pruned.
     SESSION184_RESULTS / "agenda-040/exp-214-n13-399-100-family.json",
+    # Preserve the scientific inputs promised by the historical snapshot contract
+    # even when their records mention them in commands rather than inline links.
+    # Their generated profile/endpoint outputs remain under the existing prunes.
+    ROOT
+    / "campaign/explorations/X048-session-177-cached-collision/receipts"
+    / "J-fixed-tuple-certificate.json",
+    ROOT
+    / "campaign/explorations/X048-session-178-full-core-ablation/receipts"
+    / "B-ablation-packet.json",
     *second.private_input_paths(),
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",

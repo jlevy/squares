@@ -520,25 +520,53 @@ def test_child_nested_duplicate_and_float_refused(tmp_path: Path, raw: bytes) ->
 
 @pytest.mark.parametrize("read_bytes", [64, 1 << 20])
 def test_gzip_trailer_eof_retains_cli_refusal_at_initial_or_final_read(
-    read_bytes: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    read_bytes: int, tmp_path: Path
 ) -> None:
     path = tmp_path / "truncated.json.gz"
     raw = b'{"a":1,"steps":[],"z":"' + b"x" * 256 + b'"}'
     path.write_bytes(gzip.compress(raw)[:-8])
     descriptor, output = tmp_path / "descriptor.json", tmp_path / "receipt.json"
     descriptor.write_text("{}")
-    monkeypatch.setattr(control.standing, "READ_BYTES", read_bytes)
+    # Keep the production import-purity guard: another test may import the producer
+    # into the shared pytest worker before this decoder refusal control runs.
+    code = """
+import sys
+from pathlib import Path
+from devtools import verify_n17_conditional_owned_hull as control
 
-    def consume(_document: Any, *, deadline: float) -> Any:
-        stream = control.ChildStream(path, deadline)
-        list(stream.steps())
-        pytest.fail("truncated child accepted")
+control.standing.READ_BYTES = int(sys.argv[1])
+path = Path(sys.argv[2])
 
-    monkeypatch.setattr(control, "consume", consume)
-    assert control.main(["--descriptor", str(descriptor), "--output", str(output)]) == 1
+def consume(_document, *, deadline):
+    stream = control.ChildStream(path, deadline)
+    list(stream.steps())
+    raise AssertionError("truncated child accepted")
+
+control.consume = consume
+raise SystemExit(control.main(sys.argv[3:]))
+"""
+    process = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            code,
+            str(read_bytes),
+            str(path),
+            "--descriptor",
+            str(descriptor),
+            "--output",
+            str(output),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=20,
+        check=False,
+    )
+    assert process.returncode == 1, process.stderr
     report = json.loads(output.read_bytes())
     assert report["status"] == "REFUSED"
     assert "gzip stream is truncated" in report["error"]
+    assert "producer/kernel/root import" not in report["error"]
     assert not report["conditional_exclusion_proved"]
 
 

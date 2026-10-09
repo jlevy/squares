@@ -122,6 +122,78 @@ Its exact merge source matches the recorded provenance; all 615 weights are fini
 nonnegative, no historical module key was dropped, and shard ceilings are unchanged.
 Timing admission is neither proof admission nor current-head CI.
 
+The newer automatic runs qualify the actual merge checkout trees, which match the
+published heads. Pages passes on all three layers; Packing fails on each:
+
+| PR and source head | Pages | Packing | Actual checkout |
+| --- | --- | --- | --- |
+| #404, `18e3a6f4f` | [PASS 37860039643](https://github.com/jlevy/squares/actions/runs/37860039643) | [FAIL 37860039766](https://github.com/jlevy/squares/actions/runs/37860039766) | `62a361c8ca69ad672ad01a1600a9c719ada00328` |
+| #454, `5dc4d13bc` | [PASS 37860039795](https://github.com/jlevy/squares/actions/runs/37860039795) | [FAIL 37860039856](https://github.com/jlevy/squares/actions/runs/37860039856) | `914241ad61b588cdebb6fb277061d591751fd2ee` |
+| #461, `7421e2daf` | [PASS 37860039410](https://github.com/jlevy/squares/actions/runs/37860039410) | [FAIL 37860039390](https://github.com/jlevy/squares/actions/runs/37860039390) | `d1fbbaf15201cc134361cc3b2d99cf42e98f5039` |
+
+The checkout logs and Git tree identities establish source qualification; dynamically
+updated run metadata alone does not.
+These completed runs supersede earlier observations of absent or cancelled current
+checks.
+
+Packing exposes twelve combined-process control failures: ten nested path/hash controls
+and two gzip EOF controls reach the process-wide purity refusal before their intended
+input boundary.
+The earlier 366 controls passed in separate modules; that result does not
+establish combined-shard isolation.
+The follow-up runs these CLI controls in clean subprocesses, preserving the production
+purity checks and child-local failure sentinels.
+
+Three worker failures need source dependencies or tracked-source indexes.
+Two tiny fixtures now initialize sanitized local indexes, and a missing-index sentinel
+refuses before worker Git mutation.
+Explicit copyback restores the retained J-fixed certificate and B-ablation input, adding
+558,148 selected bytes.
+These inputs were unintentionally omitted by the historical whole-session prune; no
+scientific evidence is removed to fit the cap.
+Scoped Ruff, format and type checks pass, as does the no-disk missing-index control.
+An initial external scratch directory preflight fails ENOSPC before launch.
+After the measurement lane releases its temporary fixtures, an actual write preflight
+permits a bounded combined run: all twelve repaired CLI controls, both indexed cloning
+controls and the missing-index sentinel pass beside all 39 producer-module controls, 54
+controls in 3.89 seconds.
+This shared-process run exercises the previously contaminated import context.
+No full worker snapshot is copied or qualified.
+
+The suite-cost guard also failed with 79 unmeasured files.
+Fifteen fresh, successful, unsharded and unfiltered whole-module runs pass 413 controls,
+with 25.762 seconds of summed setup/call/teardown time.
+Their retained reports append fifteen costs, preserving all 615 historical weights,
+provenance, shard capacities and the 10% guard.
+The current root partition has 64 unmeasured files; its four shares are 9.5%, 9.0%, 9.5%
+and 8.8%. An attempted guard-ownership module passed 47 controls and failed two after
+exhausting external space while writing CLI receipts; that failed report is retained
+separately and is excluded from admission.
+
+Root #404’s frontier rendering test also exceeds its unchanged 300ms longest-task limit
+at 390px: 316ms in light mode and 303ms in dark mode.
+The renderer, input assets, probes, launch configuration and locks are identical across
+these three heads, but hosted artifact byte equality and identical physical scheduling
+are not established.
+Pages checks the frontier sequentially; the failing pytest lane uses three workers.
+Failure output now exposes bounded existing long-task, readability and animation-frame
+attribution. This diagnostic change preserves every assertion; no performance cause or
+fix is claimed.
+
+All 67 suite-file regression controls pass in 3.11 seconds.
+Before cost admission, the records tier passes 45 of 47 steps in 25.25 seconds: the lint
+tool directory is missing from PATH, and the suite-D pending measurement has expired.
+The environment is corrected for subsequent checks, and the actual successful historical
+suite-D reading is admitted: 101.34 seconds at four CPUs, one outer and one inner job,
+one of 101 steps, from job 112765857172 in the complete green cohort 37613399745. Its
+exact checkout is `33e96ced9ddf5025e47ecad8420865cf519102b8`. The later independently
+passing suite-D job 113593324236 reads 190.63 seconds at one of 105 steps.
+It is not pooled with the earlier shape and does not establish compliance with the
+unchanged 143-second ceiling.
+Current performance qualification remains open under `think-t7k5`. After these repairs
+and the tool-path correction, all 47 selected records steps pass in 23.54 seconds.
+The complete checkpoint and current hosted Packing qualification remain outstanding.
+
 The worker source-copy ceiling remains 192 MiB. The one-line proposal to allow 224 MiB
 is unapplied pending the human decision after automatic approval review rejected the
 persistent quota increase under disk pressure.

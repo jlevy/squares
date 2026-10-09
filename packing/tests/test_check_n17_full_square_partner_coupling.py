@@ -306,9 +306,7 @@ def test_cli_scoped_incomplete_or_refused(
 @pytest.mark.parametrize(
     "field", [k for role in tool.parent.INPUTS for k in (role, role + "_sha256")]
 )
-def test_nested_path_or_digest_refuses_before_parent_intake(
-    field: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_nested_path_or_digest_refuses_before_parent_intake(field: str, tmp_path: Path) -> None:
     fields = {k: "unused" for role in tool.parent.INPUTS for k in (role, role + "_sha256")}
     document = fields | {"schema": tool.DESCRIPTOR_SCHEMA}
     document[field] = "deep-marker"
@@ -316,11 +314,30 @@ def test_nested_path_or_digest_refuses_before_parent_intake(
     descriptor.write_text(
         json.dumps(document).replace('"deep-marker"', "[" * 1200 + "0" + "]" * 1200)
     )
-    monkeypatch.setattr(tool.parent, "intake", lambda *_: pytest.fail("parent input read"))
-    assert tool.main(["--descriptor", str(descriptor), "--output", str(output)]) == 1
+    # Producer tests share a pytest worker; the CLI's purity guard requires a fresh
+    # process so this control reaches descriptor intake instead of import refusal.
+    code = """
+import sys
+from devtools import check_n17_full_square_partner_coupling as tool
+
+def unexpected_intake(*_args):
+    raise AssertionError("parent input read")
+
+tool.parent.intake = unexpected_intake
+raise SystemExit(tool.main(sys.argv[1:]))
+"""
+    process = subprocess.run(
+        [sys.executable, "-c", code, "--descriptor", str(descriptor), "--output", str(output)],
+        capture_output=True,
+        text=True,
+        timeout=20,
+        check=False,
+    )
+    assert process.returncode == 1, process.stderr
     result = json.loads(output.read_bytes())
     assert result["status"] == "refused"
     assert "paths and digests" in result["error"]
+    assert "producer/kernel/root import" not in result["error"]
     assert not result["criterion_met"]
     assert all(result[k] is False for k in tool.parent.scope())
 

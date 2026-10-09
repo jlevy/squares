@@ -67,6 +67,18 @@ RETAINED_RECEIPT_ROOTS = frozenset(
 )
 
 
+def index_fixture_source(repository: Path) -> None:
+    """Give a synthetic source the same tracked-set boundary as the real checkout."""
+    environment = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    for arguments in (("init", "-q"), ("add", "--", ".")):
+        subprocess.run(
+            ("git", "-C", str(repository), *arguments),
+            check=True,
+            capture_output=True,
+            env=environment,
+        )
+
+
 @pytest.fixture(scope="module")
 def control_snapshot(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, set[Path]]:
     """Reuse one real worker snapshot; each mutation restores its target in `finally`."""
@@ -179,6 +191,14 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
     """The bounded C8 prune removes outputs while preserving real consumer inputs."""
     tree, copied_targets = control_snapshot
     assert controls.HISTORICAL_SNAPSHOT_OUTPUTS <= PRUNE
+    assert {
+        ROOT
+        / "campaign/explorations/X048-session-177-cached-collision/receipts"
+        / "J-fixed-tuple-certificate.json",
+        ROOT
+        / "campaign/explorations/X048-session-178-full-core-ablation/receipts"
+        / "B-ablation-packet.json",
+    } <= set(COPY_SEPARATELY)
     rescued = (
         "campaign/explorations/X049-families-data/regularized/run.txt",
         "campaign/explorations/X049-families-data/regularized/shades.txt",
@@ -849,6 +869,7 @@ def test_historical_diagnostics_leave_workers_but_declared_dependencies_return(
     register = source_root / "frontier/results.yaml"
     register.parent.mkdir()
     register.write_text("results: []\n")
+    index_fixture_source(source_repo)
 
     prunes = frozenset(rebase(path) for path in PRUNE)
     linked_roots = tuple(rebase(path) for path in controls.LINKED_PRUNE_ROOTS)
@@ -1222,6 +1243,7 @@ def snapshot_audit_fixture(
         "  file: source.py\n"
         "  run: python3 -m devtools.example old/linked.log\n"
     )
+    index_fixture_source(tmp_path)
     monkeypatch.setattr(controls, "ROOT", root)
     monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", ())
@@ -1823,6 +1845,17 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
         )
         for name in tracked
     )
+
+
+def test_snapshot_index_refuses_missing_source_index_before_git_mutation(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(controls, "tracked_files", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(
+        controls.subprocess, "run", lambda *_args, **_kwargs: pytest.fail("worker Git write")
+    )
+    with pytest.raises(ValueError, match="without the source tracked set"):
+        controls.index_tree(Path("uncreated-worker"))
 
 
 def test_snapshot_index_keeps_source_tracking_and_snapshot_mutated_bytes(
