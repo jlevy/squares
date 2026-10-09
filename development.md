@@ -86,10 +86,14 @@ Developer infrastructure has its own explicit locations:
 
 - `devtools/` contains repository checks, renderers, schema validation, and negative
   controls. It is not an application API.
+
 - `benchmarks/` contains performance probes whose purpose is measurement, not pass/fail
   correctness.
+
 - `tests/` contains fast behavior, architecture, and CLI contracts.
+
 - `sqsearch/` contains the Rust screening engine.
+
 - `campaign/`, `frontier/`, `atlas/`, and `golden/` contain research state and retained
   evidence, not importable implementation code.
 
@@ -144,11 +148,16 @@ Use these verbs consistently:
 
 - `check` reads and compares without changing durable state; for a packing witness it
   reports numerical assurance and the actual arithmetic, precision, and tolerance;
+
 - `verify` is reserved for a formal decision from exact arithmetic, a rigorous
   certificate, or a complete proof;
+
 - `replay` validates retained output without rerunning the producer;
+
 - `render` regenerates a derived view atomically;
+
 - `run` performs the declared experiment or workflow;
+
 - `update` replaces a reviewed golden or source-of-truth artifact.
 
 CLI modules adapt typed operations; they do not carry a second implementation of the
@@ -337,7 +346,9 @@ Splitting the partitions did not end the overruns.
 After `main` merged into the stack, #160 read 200.68 s and 199.74 s at `72629c03`.
 `think-lrs0` records three causes:
 - runner speed, which moved every step of one branch by about 1.3x together;
+
 - the branch cost rollup’s render step, at 45 to 61 s, which `main` fixed at `65a5c001`;
+
 - type-floor time from the Python #160 adds.
   With `main`’s fix merged, #125 read 146.04 s of 195 s at `bca21da0` (run 34923097435).
   #160 has not been re-read since, and `think-lrs0` stays open until it is.
@@ -492,8 +503,10 @@ Three things answer it:
   required check does not go green on work that never ran, and then print
   `FAILURE CLASS: infrastructure` with one `Infrastructure` error annotation per
   prerequisite that never acquired a runner.
+
 - `pages-required` runs under `!cancelled()`, as `packing-required` has since `D-380`,
   so a superseded run no longer queues an aggregator against its cancelled jobs.
+
 - [`rerun-starved.yml`](.github/workflows/rerun-starved.yml) re-runs the failed jobs of
   a starved run once. [`rerun_starved.py`](packing/devtools/rerun_starved.py) decides
   from the API’s JSON and writes every condition to the step summary.
@@ -651,10 +664,12 @@ A duration does not establish that the work is irreducible.
 - The label starts it, and every subsequent push re-runs it, because a label that
   attested to an older commit would be the same stale evidence as the daily backstop.
   **Label last**, when the branch is otherwise ready.
+
 - Without the label every job skips in seconds, so the workflow adds nothing to an
   ordinary pull request.
   It reports one context, `deep-gate-required`, for the reason `packing-required` is one
   context: `D-380` records what a fan-out of separately required checks cost here.
+
 - To run it without touching the author’s labels, dispatch **Deferred checkpoint** with
   `pull_request: <number>`; it checks out that pull request’s merge ref.
   Select the PR head branch as the dispatch ref when the PR changes the workflow: GitHub
@@ -671,11 +686,15 @@ Pay particular attention when the branch:
 
 - moves a certificate, a retained witness, a rung, or anything under `packing/cases/` —
   the exhaustive tier is what decides those, and it is what `6bd136b0` broke;
+
 - edits `devtools/controls.yaml` or a mutation the negative controls declare (`D-403`:
   stale controls accumulate unseen because they do not run on a pull request);
+
 - touches `devtools/assess_n40_rigidity.py` or `devtools/assess_n5_rigidity.py`, the
   n=40 bracket’s declared inputs;
+
 - adds, removes or could slow a test marked `slow`;
+
 - or changes mathematics rather than prose, which is the blunt version of all four.
 
 **These runs provide advisory evidence.** A reviewer can request and inspect the deep
@@ -1408,9 +1427,9 @@ rerun the geometric proof.
 
 The independent **exact side values paper** lives at `/papers/exact-side-values.html`.
 [`render_exact_side_values.py`](packing/devtools/render_exact_side_values.py) reads
-[`exact-values.json`](packing/frontier/exact-values.json) as its only mathematical input
-and publishes a searchable browser with a compact index, individual metadata files and
-lazy coefficient payloads.
+[`exact-values.json.gz`](packing/frontier/exact-values.json.gz) as its only mathematical
+input and publishes a searchable browser with a compact index, individual metadata files
+and lazy coefficient payloads.
 Its complete HTML, Markdown and PDF archives print every recorded closed form and
 integer polynomial in full.
 The register keeps the current $n=1\ldots324$ values and their totals separate from
@@ -1716,15 +1735,19 @@ its source and whether it is what the rule gives:
 
 - A date derived from a commit is the commit’s author date, on the author’s own
   calendar.
+
 - A paper’s “revised” date is the date of the last commit that changed its article.
   The explainer’s is `EXPLAINER_REVISED`, the threshold-bound review’s
   `THRESHOLD_REVIEW_REVISED`, the optimality paper’s `OPTIMALITY_REVIEW_REVISED`, and
   the exact-values paper’s `EXACT_SIDE_VALUES_REVISED`, all in `release.py`, where each
   paper’s front reads it (`devtools.paper_front`). Change it in the commit that changes
   the article; `tests/test_artifact_dates.py` fails when it stands still.
+
 - A poster’s dateline is the date of the data commit it was drawn from.
+
 - A PDF’s `CreationDate` and `ModDate` are the date on its face, at noon UTC, and never
   the build clock.
+
 - A date a person asserts stays typed: an edition’s first publication, the day a source
   published its proof, the day the register was reviewed.
 
@@ -1747,9 +1770,12 @@ It does these, and `--dry-run` lists them without doing any:
    UTC by default; correct it if the deployment lands on another day), and sets
    `PUBLICATION_REVISION`, the commit the claim documents link to, to `HEAD`.
    `DATA_REVISION` follows the data, not the edition.
+
 2. Redraws both posters and their exports (`build_known_best_atlas --update-composites`;
    see the cairo note under Supported Environment).
+
 3. Regenerates the claim documents (`render_verifiable_claim`).
+
 4. Runs `--check-composites` and
    `pytest tests/test_release.py tests/test_n11_lower_bounds_explainer.py tests/test_verify_claim.py tests/test_known_best_composites.py tests/test_artifact_dates.py`.
 
@@ -1779,12 +1805,15 @@ It is one edit, in the commit that makes the change, with no command:
    `October 2, 2026`, and one sentence on what changed in the paper.
    The number is the paper’s own and is not the site’s; a number already published is
    never changed.
+
 2. Set `EXPLAINER_REVISED` (or `THRESHOLD_REVIEW_REVISED`, `OPTIMALITY_REVIEW_REVISED`,
    or `EXACT_SIDE_VALUES_REVISED`) to the commit’s date, as any change to the article
    requires; `python -m devtools.artifact_dates --check` and
    `tests/test_artifact_dates.py` hold it to git.
+
 3. Where the entry points name the paper’s version, update them: TUTORIAL.md names the
    explainer’s (`test_reader_facing_version_references_follow_release_metadata`).
+
 4. Run
    `pytest tests/test_release.py tests/test_n11_lower_bounds_explainer.py tests/test_paper_structure.py tests/test_artifact_dates.py`.
    The explainer’s Version History is written from the list, so a longer history can
@@ -1973,11 +2002,13 @@ A Python tool that drives a page uses a **probe**:
    object, in `probes/<tool>/<name>.js` beside the tool: `packing/devtools/probes/`,
    `packing/tests/probes/`, or a spike’s own `probes/`. Declare any page global it reads
    in a `.d.ts` in the same tree.
+
 2. Load it with `probe(PROBES, "<tool>/<name>")` from `sqpack.probes`, where `PROBES` is
    that `probes` directory, and pass values as Playwright’s one argument:
    `page.evaluate(probe(PROBES, "check_layout/slots"), {"n": 26})`. Never format a value
    into the text. `add_init_script` takes no argument, so give it
    `applied(probe(...), argument)`, which serialises the argument as JSON.
+
 3. Write the name out whole.
    `devtools.check_probes` reads names from string literals, and a probe no literal
    names fails as unused.
@@ -2017,6 +2048,7 @@ Two checks hold the rule, and both run in `--edit` and on every pull request as 
   Its signatures and enforced empty allowlist are in
   `packing/devtools/embedded-javascript.yaml`. Any detected site fails the check;
   `--inventory` prints every site.
+
 - `devtools.check_probes` fails on a probe that does not evaluate to a function, one no
   Python file beside its tree names, and a name no file answers.
 
@@ -2030,13 +2062,19 @@ Use red-green-refactor for a behavior change and characterize intended behavior 
 structural move:
 
 1. Identify the public behavior, persisted record, or scientific claim at risk.
+
 2. Run its focused check and capture the clean baseline.
+
 3. Add a failing test for corrected behavior, or a characterization test for correct
    behavior that is not yet protected.
+
 4. Make one bounded change and keep structural movement separate from semantic change.
+
 5. Run focused tests, Ruff, formatting, types, and the relevant exact, property, replay,
    or differential check.
+
 6. Run full validation at the integration checkpoint.
+
 7. Review a golden diff as a behavior change.
    Never regenerate a golden merely to make validation green.
 
@@ -2097,6 +2135,7 @@ is the rule; this is how to follow it.
   `git cat-file --batch-check` for the whole branch.
   A binary or dump over a few megabytes, or data totalling tens of megabytes, is hosted
   outside the repository, for example as a release asset on `jlevy/squares`.
+
 - **Manifest.** The repository keeps a small committed manifest with the name, size,
   location, and SHA-256 of each hosted object.
   A tool that needs the bytes downloads them on request and checks them against the
@@ -2104,15 +2143,18 @@ is the rule; this is how to follow it.
   That comparison is a trust-boundary check under `OR-16`. Without the bytes, the tool
   still reports from the committed receipts and says that a full re-check needs the
   fetch. Tests use a small fixture, never the hosted object.
+
 - **Paths, not revisions.** A tool reads its inputs by repository-relative path or
   through a manifest. It never reads them from a recorded commit (`git show REV:path`),
   and never refuses because a file’s blob id or commit differs from a recorded one.
   Record a commit or blob id as provenance if it helps a reader.
   Where a verdict must be tied to the input it was computed from, give the input a
   semantic identity (a design name and version) and compare that, or recompute.
+
 - **No self-pins.** Do not pin the SHA-256 of a file this repository writes and commits.
   Git already holds it, and the pin makes regenerating the file identically, or moving
   it, a failure.
+
 - **Removing data later.** Data that is already in a branch’s history cannot be removed
   by a deleting commit.
   The branch has to be rebuilt from main without the blobs.
@@ -2288,8 +2330,10 @@ Some files keep the bytes they have:
   A large third-party file there is stored as deterministic gzip by
   `devtools.retained_data` instead, which keeps its bytes and gives up the readable diff
   an archive does not need;
+
 - a file whose bytes a record, test, verifier or archive names by SHA-256 or Git blob,
   which includes the certificates under `packing/cases/*_certificate/`; and
+
 - frozen historical output, and a file whose layout waits on an owner’s decision.
 
 `packing/devtools/retained-json.yaml` lists each with its reason and what binds it.
@@ -2472,8 +2516,10 @@ rule and none of them is about `touches`:
 
 - **13 of 70 deep runs ran against a tree that had not moved** since the run before
   them. Every one of those repeated the whole gate.
+
 - **53 of 55 merges to `main` carried a tree byte-identical to the pull-request head**
   merged, so the pull-request surface had already run against exactly those bytes.
+
 - **8 of the 66 steps then declared no `touches` at all**, deliberately, and they are
   the expensive ones — so `touches` cannot prune the deep surface by cost.
   The escape hatch that protects a mis-declared pattern is reachable by 17 of 1,933
@@ -2570,10 +2616,15 @@ copies are local working state and are not durable link targets.
 The applicable names are:
 
 - `general-eng-agent-principles` and `general-coding-rules`;
+
 - `general-tdd-guidelines` and `general-testing-rules`;
+
 - `python-rules`, `python-modern-guidelines`, and `python-cli-patterns`;
+
 - `error-handling-rules` and `backward-compatibility-rules`;
+
 - `golden-testing-guidelines`; and
+
 - `common-doc-guidelines`.
 
 <!-- This document follows common-doc-guidelines.md.
