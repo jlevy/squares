@@ -6358,7 +6358,6 @@ def _validation_progress(total: int) -> Iterator[_StepProgress]:
         while not stopped.wait(PROGRESS_INTERVAL_SECONDS):
             progress.report()
 
-    print(f"== validation started: {total} selected steps ==", file=sys.stderr, flush=True)
     thread = Thread(target=heartbeat, name="validation-progress", daemon=True)
     thread.start()
     try:
