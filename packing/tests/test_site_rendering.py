@@ -753,7 +753,8 @@ def test_frontier_sans_arrival_keeps_the_navigation_in_place(
         assert all(
             "SourceSans3" in face["postScriptName"] and face["isCustomFont"] for face in final
         ), final
-        # The alias draws nothing once the face is in: the published bar is unchanged.
+        # Once the face is in, the alias draws nothing it covers: the published bar is
+        # unchanged.
         for before, after in zip(expected, actual, strict=True):
             assert after == pytest.approx(before, abs=0.04)
         # And every link stood on the line it ends on while the face was held.
