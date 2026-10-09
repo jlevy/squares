@@ -406,18 +406,30 @@ fetched them again on every page, since a page’s own bytes were all it could c
   other source, a CSS import, and a `url()` in the page’s own text that is not a data
   URI or a fragment.
 - **Faces.** Every face keeps `font-display: block`, so a face that arrives late holds
-  the text it draws invisible.
-  The faces a page draws its first screen in, PT Serif’s regular and Source Sans 3’s
-  upright, are declared beside the stylesheets (`site_assets.PRELOADED_FACES`). A small
-  prepaint program activates these hints with anonymous CORS on HTTP and HTTPS, and
-  without CORS for local files; choosing the mode before requesting the fonts avoids
-  WebKit’s file-origin cache failure while preserving shared HTTP font downloads.
-  With JavaScript disabled, the same stylesheets load their faces normally.
+  the text it draws invisible, laid out in its fallback’s advances; the visible text
+  around it moves when it arrives.
+  The faces a page draws its first screen in, PT Serif’s regular, italic and bold and
+  Source Sans 3’s upright, are declared beside the stylesheets
+  (`site_assets.PRELOADED_FACES`). Emphasis counts: the frontier’s opening paragraphs
+  set italic and bold PT Serif, and while those two waited for the layout that
+  discovered them, their arrival moved the paragraphs by a CLS of 0.134 or 0.209 on the
+  hosted runner. A small prepaint program activates these hints with anonymous CORS on
+  HTTP and HTTPS, and without CORS for local files; choosing the mode before requesting
+  the fonts avoids WebKit’s file-origin cache failure while preserving shared HTTP font
+  downloads. With JavaScript disabled, the same stylesheets load their faces normally.
   While regular PT Serif loads, the default prose stack uses metric-adjusted local
   Georgia or Times New Roman/Liberation Serif aliases to keep opening paragraphs stable.
   The delayed-face regression checks both fallback families, final PT Serif attribution,
   paragraph geometry and the existing layout-shift limit; saved sans and system choices
   retain their more specific stacks.
+  A preload can still lose the race to the first layout.
+  Source Sans 3 did on the runner, where its fallback is DejaVu Sans, about a quarter
+  wider: at 390px a navigation link wrapped to the bar’s second line and the hero’s
+  summary took two more lines, and their return was a CLS of 0.251. So on screen
+  `paper-type.css`, which every page carries, puts a metric-adjusted local Arial
+  (Liberation Sans on Linux) behind Source Sans 3, regular for its 410 and bold for its
+  550 and heavier, with Source Sans 3’s ascent and descent and only its unicode range,
+  so it stands in for nothing the shipped face draws once loaded.
   The rest are fetched when a page first draws in them, and a face no page draws, a
   print instance, only when one prints.
 - **What a build writes.** `render_overview.write_site` writes exactly the files its
