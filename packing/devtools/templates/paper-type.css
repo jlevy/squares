@@ -108,10 +108,17 @@
    DejaVu Sans, about a quarter wider: at 390px a navigation link wrapped to the bar's
    second line and the hero's summary took two more lines, and their return when the face
    arrived was a CLS of 0.251 (paper-design.md, Shared Assets). Arial, which Linux answers
-   with its metric twin Liberation Sans, scaled to Source Sans 3's advances and given its
-   ascent and descent, holds both in place instead: regular for the 410 text, bold for
-   550 and heavier. The aliases transfer no bytes and take only Source Sans 3's range, so
-   once it loads they draw nothing. Screen only: print keeps KPress's print sans. */
+   with its metric twin Liberation Sans, scaled toward Source Sans 3's advances and given
+   its ascent and descent, holds both in place instead: regular for the 410 text, bold for
+   550 and heavier. One factor per face makes the widths approximate. Rendered in Chromium
+   on 2026-10-09 against Source Sans 3, the alias set prose 1.5% wider at 410, 1.4% wider
+   at 550 and 1.3% narrower at 680, the navigation 2.7% wider at 550, and the uppercase
+   site name 5.6% wider at 680, with line heights equal; the navigation test holds every
+   link on its line at 390px within that. The aliases transfer no bytes and take only
+   Source Sans 3's declared range, so once it loads they draw nothing the shipped face
+   covers. Its latin subset lacks 96 printable code points of that range, mostly spaces
+   and general punctuation, and the alias still draws those Liberation Sans has.
+   Screen only: print keeps KPress's print sans. */
 @font-face {
   font-family: "Site Sans Arial";
   src: local("Arial"), local("Liberation Sans");
