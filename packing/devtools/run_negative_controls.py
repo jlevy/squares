@@ -1306,6 +1306,23 @@ def _linked_documents() -> list[Path]:
     return documents
 
 
+def _link_needs_private_target(document: Path, target: Path) -> bool:
+    """Rescue historical browser outputs only for a link a worker actually checks.
+
+    The math-startup run root is already pruned: its reporter and Pages jobs read
+    these observations, but no registered mutation command does. A root review's
+    links copied its two PDFs and frozen HTML back into every worker anyway. The
+    registered link checks read README/SYNOPSIS and campaign Markdown; a link to a
+    review checks its existence or heading, without following that review's links.
+    Keep other rescue surfaces, explicit custody and result registration unchanged.
+    """
+    return (
+        not target.is_relative_to(ROOT / "benchmarks/math-startup/runs")
+        or document in {REPO / "README.md", REPO / "SYNOPSIS.md"}
+        or document.is_relative_to(ROOT / "campaign")
+    )
+
+
 def linked_pruned_directories() -> list[Path]:
     """Pruned directories the checked documents link to inline, resolved and existing.
 
@@ -1321,7 +1338,11 @@ def linked_pruned_directories() -> list[Path]:
     for document in _linked_documents():
         for raw in INLINE_LINK.findall(document.read_text(errors="ignore")):
             resolved = (document.parent / raw).resolve()
-            if resolved.is_dir() and in_pruned_roots(resolved, roots):
+            if (
+                resolved.is_dir()
+                and in_pruned_roots(resolved, roots)
+                and _link_needs_private_target(document, resolved)
+            ):
                 directories.add(resolved)
     return sorted(directories)
 
@@ -1347,7 +1368,11 @@ def linked_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
     for document in _linked_documents():
         for raw in INLINE_LINK.findall(document.read_text(errors="ignore")):
             resolved = (document.parent / raw).resolve()
-            if resolved.is_file() and in_pruned_roots(resolved, selected_roots):
+            if (
+                resolved.is_file()
+                and in_pruned_roots(resolved, selected_roots)
+                and _link_needs_private_target(document, resolved)
+            ):
                 targets.add(resolved)
     return sorted(targets)
 
@@ -1595,7 +1620,11 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
     for document in documents:
         for raw in INLINE_LINK.findall(texts[document]):
             path = (document.parent / raw).resolve()
-            if path in inventory and in_pruned_roots(path, roots):
+            if (
+                path in inventory
+                and in_pruned_roots(path, roots)
+                and _link_needs_private_target(document, path)
+            ):
                 rescued.add(path)
     register_value = safe_load(texts[register])
     for record in register_value["results"]:

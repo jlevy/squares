@@ -1068,6 +1068,26 @@ def test_math_startup_reports_are_pruned_but_record_sources_survive(
 ) -> None:
     tree, copied_targets = control_snapshot
     campaign = ROOT / "benchmarks/math-startup"
+    # The historical review is retained, but no registered worker link checker
+    # follows its outgoing links. These five primary observations stay in Git;
+    # their 2,739,207 bytes no longer undo the already-declared run-output prune.
+    historical_run = campaign / "runs/ci-34774787868"
+    for name in (
+        "index.html.gz",
+        "reference.pdf",
+        "replay.pdf",
+        "provenance.json",
+        "report.txt",
+    ):
+        source = historical_run / name
+        assert source.is_file()
+        relative = source.relative_to(controls.REPO)
+        assert relative not in copied_targets
+        assert not (tree / relative).exists()
+    review = (
+        controls.REPO / "docs/project/reviews/review-2026-09-13-explainer-pdf-comparison.md"
+    )
+    assert (tree / review.relative_to(controls.REPO)).read_bytes() == review.read_bytes()
     for directory in (campaign / "runs", campaign / "fixtures"):
         assert directory in PRUNE
         sources = [path for path in directory.rglob("*") if path.is_file()]
