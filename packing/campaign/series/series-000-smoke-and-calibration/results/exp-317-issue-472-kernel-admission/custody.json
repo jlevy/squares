@@ -54,7 +54,7 @@
    "certificate_bytes": 10642193,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m1000708/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m1000708/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m1000708/verification.json",
      "sha256": "d78e3dd2f8f5424f31883103ff8b2ea33de233661512714329c1e69a26456a63"
     },
@@ -288,7 +288,7 @@
    "certificate_bytes": 27575496,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m14353473/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m14353473/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m14353473/verification.json",
      "sha256": "a6bad7814b232c5afc74388656f1db71570d8266add9e6abe4cc6a1434ba0fd8"
     },
@@ -528,7 +528,7 @@
    "certificate_bytes": 22434681,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m214101/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m214101/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m214101/verification.json",
      "sha256": "198f12b68664adceeb73028c2b656cd6c58e0f8da0079da81febec8b85eb5da2"
     },
@@ -768,7 +768,7 @@
    "certificate_bytes": 49664803,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m3869440/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m3869440/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m3869440/verification.json",
      "sha256": "29dd281b556c3bd55f38f6b7591829c1cce5de498574e7251b5e63abc909fc9e"
     },
@@ -1002,7 +1002,7 @@
    "certificate_bytes": 25512335,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m4657489/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m4657489/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m4657489/verification.json",
      "sha256": "5d7fdb011dc59cad9b44238798901b90edb16ff2679a67c873c720929044291e"
     },
@@ -1242,7 +1242,7 @@
    "certificate_bytes": 33019748,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5116178/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m5116178/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5116178/verification.json",
      "sha256": "26f1d688d4b4385b86946be5545842ba49d40e9cfe33687b29037931a01a3340"
     },
@@ -1484,7 +1484,7 @@
    "certificate_bytes": 60359932,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5707072/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m5707072/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5707072/verification.json",
      "sha256": "9346e576efd4dd0be64de5a1ed272eb9d25ba997aafdae9e6febe0a26a9a01e7"
     },
@@ -1716,7 +1716,7 @@
    "certificate_bytes": 62279368,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m6177056/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m6177056/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m6177056/verification.json",
      "sha256": "02f55645176db191a11fd166647067f0f61ae1c8c6e7c98750f6bcf35c858202"
     },
@@ -1958,7 +1958,7 @@
    "certificate_bytes": 21068185,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7799616/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m7799616/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7799616/verification.json",
      "sha256": "b023dd492e8da64d5a5f2aa7380531b818fe9214062a193c9d6df32c7ab6bb9c"
     },
@@ -2190,7 +2190,7 @@
    "certificate_bytes": 19721406,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7815200/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m7815200/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7815200/verification.json",
      "sha256": "ee8da547d6b7df603f8cd1d2603d4150f036d1ad774aad7c837fdf706001a11a"
     },
@@ -2430,7 +2430,7 @@
    "certificate_bytes": 13265259,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m935012/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m935012/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m935012/verification.json",
      "sha256": "9063e1232c466a8eab6ca23d9d1995bae801bfbf9b55185b5a83d53f11f0def2"
     },
@@ -2662,7 +2662,7 @@
    "certificate_bytes": 66139070,
    "receipts": {
     "verification": {
-     "repository_path": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m983396/verification.json",
+     "repository_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-317-issue-472-kernel-admission/contributor/w125-k-m983396/verification.json",
      "staged": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m983396/verification.json",
      "sha256": "0468186131a3ddad76359c334cabddb077367f0b61d2ecc6e477fd536caa83dd"
     },
