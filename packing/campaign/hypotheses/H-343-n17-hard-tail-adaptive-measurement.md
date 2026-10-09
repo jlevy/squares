@@ -21,19 +21,23 @@ hypothesis:
   criterion:
     shape: determination
     metric: >-
-      Per orbit: the producer outcome (closed, fixed point, time cap), rounds, finest
+      Per orbit: the outcome (closed with full verification, verified fixed point,
+      timeout, unresolved), rounds, finest
       live row, live rows at the end, production CPU, the full-mode verifier verdict
       and time; for every stall, the support and domains diagnostics of the stall
-      classification review (per-owner support fraction, minimal float-placeable
-      sub-pattern arity); the closure rate on the 94 and on the 60-orbit draw.
+      classification review (per-owner support fraction, float deletion candidates and
+      placement diagnostics); the orbit closure rate on the 94 and the sampled orbit
+      rate on the distance-at-least-four draw. Any residue-wide estimate weights the
+      distance strata; any literal state-weighted rate also weights orbit sizes.
     direction: >-
       Confirm when at least 47 of the 94 close with full-mode passes and the 60-orbit
-      draw closes at a rate within a factor of two of the 94's. Fewer than 47 refutes the
-      claim and makes the tail a grammar problem (H-344, H-331, H-338); 47 or more makes
-      it a throughput problem for the engines in hand, and a draw rate outside the factor
-      of two then refutes only the draw conjunct, saying the tail and the rest of the
-      residue differ in kind. The draw's rate is recorded either way as the per-state
-      stall fraction of the current residue.
+      draw closes at a rate within a factor of two of the 94's. Fewer than 47 refutes
+      the tested configuration's closure-budget conjunct and triggers comparison with
+      H-344, H-331 or H-338; 47 or more supports that operational budget. A draw rate
+      outside the factor of two refutes only the sampled-rate conjunct. Neither
+      outcome classifies the entire tail as grammar-limited or throughput-limited.
+      Timeouts and unresolved cases are censored observations; a structural fixed-point
+      claim requires an exact invariant or fixed-point check with its scope stated.
     threshold: 47 of 94 closures; 2 hours each; full-mode pass; 60-orbit draw within 2x.
   instrument: >-
     devtools/check_n17_subpattern.py on all 17 cells (the per-state path of exp-257)
@@ -64,13 +68,15 @@ hypothesis:
     runs on four distance-2 orbits. One, u8 (mask 3078077, exp-257), closed and was
     admitted as s182-bc428-u8, so it left the residue and is not one of the 95. Three
     are among the surviving 95: u1 (mask 1900509), incomplete at the 7,001 s ceiling,
-    and m1964767 and m851903, fixed points under 32 uniform bins, both diagnosed
+    and m1964767 and m851903, reported fixed points under 32 uniform bins, both diagnosed
     consistency-limited. No surviving distance-2 orbit has ever closed per state, and
     the adaptive recipe that closed 26 of 29 counted H-275 draws has run on one of the
     95 (u1), at SW9's 1,152-row cap. The 22 distance-2 orbits outside the residue are
     excluded 11 by W7, 10 by s182-bc425-t1 and 1 by u8's own whole-state certificate.
-    This measures the tail instead of inferring it; the threshold is the point at which
-    the record would call the tail a grammar problem rather than a throughput problem.
+    Correction of 9 October following review C4: the 47-closure threshold is an
+    operational budget decision for this recipe, not a structural diagnosis of a proof
+    method. The 60-orbit draw samples only the distance-at-least-four stratum; it is
+    neither a residue-wide rate nor a literal state-weighted rate without weighting.
 ---
 # H-343: Measure the Tail
 
@@ -81,17 +87,23 @@ did not finish.
 The float penetrations at $U$ of distance-2 states ($0.009$ to $0.012$ of
 a side) are the margins W7 and A closed at, and above the engine’s loss floor; what is
 unknown is how many of the 94 are like the two diagnosed states, where float evidence
-puts the infeasibility across many squares jointly (an inclusion-minimal infeasible
-sub-pattern of arity 15, which does not bound the size of other infeasible subsets).
+suggests joint difficulty across many squares (deletion candidates of arity 15, whose
+infeasibility and minimum arity are not established by float search).
 
-**Falsifier.** Fewer than 47 of the 94 close within the ceilings.
+**Falsifier.** Fewer than 47 of the 94 close within the ceilings, or the sampled closure
+rate lies outside the factor-of-two band.
+These reject the corresponding registered budget or sampled-rate conjunct.
 
-**Expected information.** The real size of the hard tail and the per-state stall
-fraction on the current residue, neither of which exists in the record, and a stall
-classification for every state that resists.
+**Expected information.** The measured closure rate of this configuration on the
+distance-2 stratum, a sampled orbit rate at distance at least four, and scoped
+diagnostics for every unclosed run.
+Estimating a residue-wide rate requires stratum weighting; a state-weighted rate also
+requires orbit-size weighting.
 
 **Limits.** Per-state closure removes at most eight states per certificate and is a tail
-method; the 60-orbit draw prices the rest of the residue, it does not close it.
+method. The 60-orbit draw prices its sampled stratum.
+A timeout does not prove a fixed point, and even a verified fixed point applies to its
+stated domains and recipe.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

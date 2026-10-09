@@ -22,14 +22,17 @@ hypothesis:
     metric: >-
       The scorer's per-round orientation range and one-sided and two-sided position
       extents for every owner, relative to round 1; the endpoint-retention check after
-      every update; wall time per round and live rows.
+      every update; wall time per round and live rows; separate outcomes for the
+      contraction threshold, a verified fixed point, a timeout and unresolved progress.
     direction: >-
       Confirm when some owner's orientation range or wall-fed position extent falls by
       at least 10 per cent by round 20 with every endpoint pose retained. No such
-      movement in 20 rounds refutes the claim and confirms R9's box-set reading from the
-      actual starting point, which closes the pairwise kernel as the capture engine at
-      n17 unless H-337 shows the producer itself defective. A lost endpoint pose is a
-      refuted control, not a result.
+      movement after 20 completed, replayed rounds refutes this contraction-budget
+      claim for the specified configuration. It neither proves a fixed point nor rules
+      out the kernel architecture: slower continuing contraction can miss the threshold.
+      A timeout before round 20 is censored and unresolved. Require an exact invariant
+      or fixed-point proof before making a structural claim. A lost endpoint pose
+      invalidates the control and prevents a contraction verdict.
     threshold: at least one owner, at least 10 per cent, by round 20; 17 of 17 endpoint poses retained.
   instrument: >-
     devtools/pilot_n17_capture.py with --max-rounds 20 on the exp-276 configuration
@@ -57,24 +60,30 @@ hypothesis:
     assume the hard part. R9's box-set reading rests on corner-to-edge facts
     homogeneous in the box radius from a symmetric seed; from the cells the seed is
     asymmetric (eleven squares on walls) and the question is empirical and costs hours.
+    Correction of 9 October following review C4: the twenty-round threshold is a
+    bounded operational trial. It cannot confirm R9's fixed-point interpretation or
+    establish architectural failure without an additional exact invariant or
+    fixed-point proof.
 ---
 # H-345: Run the Engine From Where the Proof Starts
 
 **Mechanism.** The pairwise ownership induction is the capture engine of the n = 11
 proof, and at n = 17 it has been run from the actual starting point for one round.
 Whether it contracts from an asymmetric cell seed with eleven squares on walls is a
-question about the dynamics, not about the box-seeded fixpoint R9 analysed, and twenty
-rounds answer it.
+question about the dynamics of that starting domain.
+Twenty rounds measure the registered contraction threshold; they do not decide eventual
+contraction.
 
 **Falsifier.** No owner’s orientation range or wall-fed position extent moves by ten per
 cent in twenty rounds.
 
-**Expected information.** Whether the kernel route to capture is dead at n17 or merely
-never started; paired with H-337, whether a stall is about the architecture or the code.
+**Expected information.** Whether this configuration contracts by the declared amount in
+twenty rounds, and its per-round progress and cost.
+H-337 supplies a separate check of the producer implementation.
 
-**Limits.** A pass says the engine moves from the cells, not that it reaches the
-terminal region, which is seven to twelve bisections away in every coordinate; the row
-budget for that is a separate measurement.
+**Limits.** A pass measures contraction from the cells; reaching the terminal region,
+seven to twelve bisections away in every coordinate, remains a separate obligation.
+A failed threshold does not rule out slower contraction or another kernel configuration.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1,5 +1,5 @@
 ---
-title: H-327 — most distance-2 residue orbits contain an infeasible sub-pattern of arity at most ten
+title: H-327 — most distance-2 residue orbits yield candidate infeasible sub-patterns of arity at most ten
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
@@ -9,29 +9,36 @@ hypothesis:
   id: H-327
   kind: hypothesis
   claim: >-
-    At least 60 of the 95 distance-2 residue orbits of the 60-entry ledger contain a
+    At least 60 of the 95 distance-2 residue orbits of the exp-259 partition yield a
     sub-pattern of at most ten of their seventeen cells that the retained float
-    selector cannot place at U = 1169/250 with best penetration at least 5e-3, so the
-    hard tail is mostly decomposable into sub-pattern exclusions rather than jointly
-    infeasible.
+    selector fails to place at U = 1169/250, with best penetration at least 5e-3 under
+    each of three seeds. These are candidates for sub-pattern exclusion, whose
+    infeasibility must be certified before drawing mathematical arity conclusions.
   lane: proof
   derived_from: [X-051]
   criterion:
     shape: determination
     metric: >-
-      For each of the 95 orbits, the minimal-arity sub-pattern the survey's
-      minimal-sub-pattern search fails to place, with its best penetration, from
-      devtools.survey_n17_residue on the current partition with the default rounds and
-      three seeds.
+      For each of the 95 orbits, the candidate subset returned by the survey's deletion
+      search, its arity and best penetration under each seed, and the deletion path;
+      numerical placements and failures distinguished from exact feasibility or
+      exclusion certificates. Record any later exact exclusion and its subset size
+      separately from the numerical screening result.
     direction: >-
-      Confirm when at least 60 orbits report a minimal infeasible sub-pattern of arity at
-      most ten with penetration at least 5e-3 under every seed. Fewer than 60 refutes the
-      claim and says the tail needs whole-state or coupled methods.
-    threshold: 60 of 95; arity at most 10; penetration at least 5e-3; three seeds.
+      Confirm the screening claim when at least 60 orbits yield candidates of arity at
+      most ten with penetration at least 5e-3 under every seed. Fewer than 60 refutes
+      only this screening claim for the specified search. Failed numerical search
+      establishes no infeasibility or lower bound on minimum infeasible arity. A
+      certified infeasible k-cell subset gives an upper bound of k on that minimum;
+      neither a deletion path nor one placed subset proves that every smaller subset
+      is feasible.
+    threshold: 60 of 95 candidate subsets; arity at most 10; penetration at least 5e-3; three seeds.
   instrument: >-
     devtools.survey_n17_residue --distance 2 --sample 0 with its minimal-sub-pattern
     stage, run from a clean worktree on the exp-259 partition, with a receipt per orbit;
-    the endpoint's own state as the positive control, which must place.
+    the endpoint's own state as the positive control, which must place. Exact
+    infeasibility validation is a subsequent exclusion-verifier obligation, outside
+    this float screening run.
   instrument_ready: true
   regime: >-
     n = 17; the H-266 cover at U; the 95 distance-2 orbits of the exp-259 partition;
@@ -43,32 +50,37 @@ hypothesis:
   replication: false
   registered: '2026-10-09'
   notes: >-
-    X-051's route F. The stall classification of 5 October found a 14-cell sub-pattern
-    of the distance-2 state m1964767 placeable, so that state needs at least fifteen
-    cells jointly, and m851903's minimal sub-pattern had arity 15. If that is typical,
-    sub-pattern branch and bound (H-331) cannot reach the tail and the tail is a
-    whole-state problem; if it is not, the tail is a sub-pattern problem with a known
-    engine. Either answer routes the next exclusion slice.
+    X-051's route F. Correction of 9 October following review C7: the original
+    registration treated float deletion outputs as lower bounds on certificate arity.
+    They are candidate subsets only. The stall classification of 5 October placed one
+    14-cell subset of m1964767 and returned arity-15 deletion candidates for the two
+    diagnosed states; this neither proves those candidates infeasible nor rules out
+    smaller infeasible subsets elsewhere. Even a certified inclusion-minimal
+    infeasible subset need not have minimum cardinality among all infeasible subsets.
+    The frozen 95-orbit exp-259 population is retained for this screening registration;
+    a run on a later partition must report its changed population and denominator.
 ---
 # H-327: Does the Hard Tail Decompose?
 
 **Mechanism.** A state is excluded by containment when any of its sub-patterns is
-infeasible, and small sub-patterns have the small trees and small certificates.
-The two distance-2 stalls diagnosed on 5 October needed fifteen or more cells jointly,
-which is the worst case for every per-pattern engine.
-The survey’s minimal-sub-pattern search gives, per orbit, a float lower bound on the
-arity any certificate must have.
+rigorously infeasible.
+The float deletion search supplies candidate subsets for an exact exclusion engine;
+smaller candidates may cost less to certify.
+A placed fourteen-cell subset certifies neither the feasibility of other fourteen-cell
+subsets nor the absence of smaller infeasible ones.
 
-**Falsifier.** Fewer than 60 of the 95 orbits with a minimal infeasible sub-pattern of
-arity at most ten.
+**Falsifier.** Fewer than 60 of the 95 orbits yield candidates of arity at most ten
+under the registered numerical criteria.
 
-**Expected information.** Whether the tail is a sub-pattern problem (route the branch
-and bound and the contributors’ rules at it) or a joint one (route grammar changes, the
-state-conditioned charge of H-338, or the cap ladder’s pricing at it).
+**Expected information.** A numerical candidate roster for sub-pattern exclusion and its
+measured search cost.
+Exact exclusions of small candidates would justify routing those states to sub-pattern
+methods.
 
-**Limits.** Float search gives a lower bound on the arity, never an upper one, and a
-placeable sub-pattern says nothing about the whole state.
-The penetration threshold is the selector’s own scale; it does not predict closure.
+**Limits.** The float run establishes no mathematical arity bound.
+A certified infeasible subset of size $k$ gives an upper bound on minimum infeasible
+arity; a lower bound requires feasibility of every smaller subset.
+The penetration threshold is the selector’s own scale and does not predict closure.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

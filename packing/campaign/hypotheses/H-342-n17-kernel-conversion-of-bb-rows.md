@@ -1,5 +1,5 @@
 ---
-title: H-342 — the kernel producer closes most wall-anchored issue-413 rows that only branch and bound has reached
+title: H-342 — the kernel producer closes most issue-413 rows with wall cells that only branch and bound has reached
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
@@ -24,12 +24,15 @@ hypothesis:
     metric: >-
       For each eligible row: the producer outcome (closed, stalled, time cap), production
       wall time, certificate size, the full-mode verifier verdict and time; the count of
-      eligible rows fixed before the first launch from the roster's named cells.
+      eligible rows fixed before the first launch from the roster's named cells; each
+      owner's cell type (corner, side or interior), actual seed ownership, and subsequent
+      ownership propagation and domain contraction.
     direction: >-
       Confirm when at least two thirds of the eligible rows close within 30 minutes with a
       certificate under 100 MB and a full-mode pass. Fewer than two thirds refutes the
-      claim and says which crowds the kernel cannot reach, routing them to the branch
-      and bound or to H-344.
+      registered budget claim for these configurations. Unclosed rows remain unresolved
+      and can be priced against the branch and bound or H-344; a timed stall does not
+      establish that the kernel cannot reach them.
     threshold: at least 2/3 of eligible rows; 30 minutes each; under 100 MB; full-mode pass.
   instrument: >-
     devtools/check_n17_subpattern.py mode A with --bins 64 or 128 and the adaptive-row
@@ -51,20 +54,28 @@ hypothesis:
   replication: false
   registered: '2026-10-09'
   notes: >-
-    X-052's direction 1, second half. Issue 472 showed twelve of twelve arity-8 and 9
+    X-052's direction 1, second half. Correction of 9 October following review C10:
+    wall-cell presence is an empirical routing predictor, not a guarantee of seed
+    ownership. The stall-classification review found owned seeds in 0.620 by 0.620
+    interior cells and none in unsplit side cells; corner cells can own a sliver
+    because two walls constrain their poses. Measure those distinctions and the
+    propagation that follows. Issue 472 showed twelve of twelve arity-8 and 9
     selector flags with wall cells closing under the kernel in minutes with certificates
     of tens of megabytes, where the same patterns as branch-and-bound certificates run
     to tens or hundreds of gigabytes (row 33's estimate: 116 million nodes, 480 GB). The
-    contributor is already retrying row 33 with the kernel producer. If the rule holds,
-    branch-and-bound custody and verification cost matter only for genuinely interior
-    crowds, where B2 (H-331) matters.
+    contributor is already retrying row 33 with the kernel producer. The batch tests
+    whether that observed closure rate extends to the frozen eligible rows; it makes
+    no universal routing claim for wall or interior crowds.
 ---
 # H-342: Route Wall Crowds to the Kernel
 
-**Mechanism.** A wall cell gives the ownership induction owned points from the seed: the
-half-extent of a square in a closed wall row is bounded by the proved quadratic, so the
-wall-side cells carry cores the interior cells lack.
-Every arity-8 and 9 flag with a wall cell that the contributor ran closed in minutes.
+**Mechanism.** Every arity-8 and 9 flag with a wall cell that the contributor ran closed
+in minutes.
+That observation motivates testing wall-cell presence as a routing predictor.
+It does not identify the cause: unsplit side cells can lack seed ownership while
+interior cells have it, and corner cells can anchor an owned sliver through two walls.
+The batch records actual seed ownership and propagation to test which geometry predicts
+closure.
 
 **Falsifier.** Fewer than two thirds of the eligible rows close within the ceilings.
 
@@ -72,9 +83,10 @@ Every arity-8 and 9 flag with a wall cell that the contributor ran closed in min
 that works (3,636 to 2,353 if all 24 eligible rows close after H-341), and a measured
 routing rule between the two provers.
 
-**Limits.** Interior crowds (pattern A’s kind, issue 358’s two classes with five
-interior cells) are out of scope and stay with the branch and bound; a closure is an
-admission only after the standing verifier’s full pass.
+**Limits.** Interior-only crowds (pattern A’s kind, issue 358’s two classes with five
+interior cells) are outside this batch.
+Their omission establishes no causal conclusion about seed ownership or kernel reach.
+A closure is an admission only after the standing verifier’s full pass.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

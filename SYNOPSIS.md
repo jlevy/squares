@@ -1419,6 +1419,7 @@ case or experiment separately.
 | [From One Excluded Branch to a Stronger Eleven-Square Bound](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md) | research synthesis | record | retained | — |
 | [n17 W3 Consolidation and Strategy Selection](docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md) | dated review record | record | retained | — |
 | [Evan Daniel’s New Arrangements: Independent Replay Review](docs/project/reviews/review-2026-10-08-evand-new-arrangements.md) | dated review record | record | retained | — |
+| [Restricted N17 Family Cell Audit](docs/project/research/research-2026-10-09-n17-family-cell-audit.md) | research synthesis | supporting | retained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
 | `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
 | `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
@@ -5967,11 +5968,11 @@ round that names the hypothesis, control roles included.
 | [H-339](packing/campaign/hypotheses/H-339-n17-feature-flip-atlas.md) | blocked | A small feature-flip atlas doubles the terminal region’s radius | 0 | — |
 | [H-340](packing/campaign/hypotheses/H-340-n17-per-coordinate-radius-composition.md) | open | The composed local theorem holds with every coordinate at least $1/1216$ | 0 | — |
 | [H-341](packing/campaign/hypotheses/H-341-n17-issue-472-kernel-admission.md) | open | Issue 472’s twelve kernel certificates replay in full under a listed verifier with Rust parity and admit | 0 | — |
-| [H-342](packing/campaign/hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md) | open | The kernel producer closes most wall-anchored issue-413 rows that only branch and bound has reached | 0 | — |
+| [H-342](packing/campaign/hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md) | open | The kernel producer closes most issue-413 rows with wall cells that only branch and bound has reached | 0 | — |
 | [H-343](packing/campaign/hypotheses/H-343-n17-hard-tail-adaptive-measurement.md) | open | At least half of the distance-2 residue orbits close under the adaptive-row kernel | 0 | — |
 | [H-344](packing/campaign/hypotheses/H-344-n17-half-cell-branch-predicates.md) | blocked | Closed half-cell branch predicates close the consistency-limited stalls | 0 | — |
 | [H-345](packing/campaign/hypotheses/H-345-n17-cell-seeded-twenty-round-capture.md) | open | Twenty rounds of the repaired capture producer from the family’s cells move something | 0 | — |
-| [H-346](packing/campaign/hypotheses/H-346-n17-angle-bb-knuth-estimate.md) | blocked | An angle branch and bound with Taylor-at-centre LP bounds prices the outer capture bridge | 0 | — |
+| [H-346](packing/campaign/hypotheses/H-346-n17-angle-bb-knuth-estimate.md) | blocked | An angle branch and bound with retained affine LP models prices the outer capture bridge | 0 | — |
 | [H-347](packing/campaign/hypotheses/H-347-n17-exact-conversion-allowances.md) | blocked | The capture-to-local conversion allowances are exact and small | 0 | — |
 | [H-348](packing/campaign/hypotheses/H-348-n17-second-local-theorem-checker.md) | blocked | A second, LP-free checker reproduces the local theorem’s certificates and refuses mutants | 0 | — |
 | [H-349](packing/campaign/hypotheses/H-349-n17-flagged-class-kernel-closure.md) | open | The kernel closes most of the flagged selector classes on no contributor roster | 0 | — |

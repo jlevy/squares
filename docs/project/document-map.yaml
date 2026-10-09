@@ -1221,6 +1221,7 @@ documents:
     role: review
     authority: record
     lifecycle: retained
+  - {path: docs/project/research/research-2026-10-09-n17-family-cell-audit.md, role: research-report, authority: supporting, lifecycle: retained}
 collections:
   - pattern: packing/benchmarks/math-startup/experiments/*.md
     role: experiment-record

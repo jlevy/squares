@@ -29,8 +29,10 @@ hypothesis:
     direction: >-
       Confirm when at least two of the three states have both children closed within 4x
       the parent's time and the consumer admits the parent and refuses the three
-      mutants. Both children stalling as the parent did on two or more states refutes
-      the claim for this predicate and says the mechanism is not the missing seed core.
+      mutants. Fewer than two states with both children verified closed within each
+      child's ceiling refutes the registered closure-budget claim for this predicate
+      and configuration. A failed consumer control rejects the instrument. Either result
+      alone does not disprove a seed-core mechanism or every refinement of the kernel.
     threshold: 2 of 3 states; both children each; 4x parent time; full-mode pass; 3 of 3 consumer mutants refused.
   instrument: >-
     Unbuilt: the n17 node grammar and devtools/census_n17_certified.py extended with a
@@ -53,12 +55,14 @@ hypothesis:
   registered: '2026-10-09'
   notes: >-
     X-052's direction 7, the record's candidate C5 made a registered claim. The
-    consistency-limited stalls are exactly the states where owners own nothing from the
-    seed (half-diagonal above 1/2 on the side cells) and every partner has a clearing
+    diagnosed consistency-limited stalls have side-cell owners with no owned seed
+    (half-diagonal above 1/2 on their unsplit cells), while every partner has a clearing
     pose for every owner pose individually; halving the side cell is the one grammar
     change aimed at that mechanism, and the verifier already accepts n11's predicate
     grammar while the n17 node and consumer do not. It is registered blocked and should
-    be built only if H-343 finds the tail to be a grammar problem.
+    be built only if H-343 misses the declared closure budget or its scoped diagnostics
+    otherwise justify this comparison; that trigger is an operational choice, not a
+    proof that the tail has a grammar obstruction.
 ---
 # H-344: Give the Owners Something to Own
 
@@ -66,18 +70,24 @@ hypothesis:
 with it; on the diagnosed stalls every owner is at least 63 per cent supported and
 nothing is ever cut.
 A closed half-cell child confines one square to half its cell, which gives that square
-an owned core from the seed and gives its partners a region they cannot all clear.
+an owned core from the seed and gives its partners an additional region to avoid.
+The run measures whether this removes poses.
 Two children covering the parent, seam included in both, is the complete-cover rule the
 record asked for.
 
-**Falsifier.** Both children stall as the parent did on two or more of the three states.
+**Falsifier.** Fewer than two of the three states have both children verified closed
+within the per-child ceiling.
+A child timing out misses this budget without proving a fixed point; a failed consumer
+control rejects the instrument rather than the geometry.
 
-**Expected information.** Whether the diagnosed mechanism is the missing seed core or
-the joint structure of the wall crowds; an engine for consistency-limited states if the
-former.
+**Expected information.** Whether adding the registered seed cores improves closure
+within this budget, and whether it supplies verified exclusions for the diagnosed
+states.
 
-**Limits.** Unbuilt; a split multiplies the per-state cost; the consumer rule, not the
-producer, is what makes a split sound.
+**Limits.** Unbuilt; a split multiplies the per-state cost.
+The complete-cover consumer rule makes the split sound.
+Timed stalls provide comparative evidence for this predicate and configuration, without
+establishing a structural impossibility.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
