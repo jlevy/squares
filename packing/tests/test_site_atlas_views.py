@@ -41,6 +41,7 @@ from urllib.parse import unquote, urlsplit
 import pytest
 
 from devtools import measure_atlas_views as atlas
+from devtools.measure_atlas_views import LAYOUT
 from sqpack.known_best import grid_transitions
 from sqpack.probes import applied, probe
 from tests import site_browser, site_renders
@@ -236,8 +237,8 @@ def _phone(browser: Any, address: str) -> Readings:
     )
     seen["phone, first placed"] = page.evaluate(SEEN)
     seen["phone"] = atlas.layout(page)
-    seen["phone, panned start"] = page.evaluate(atlas.LAYOUT, {"pan": "start"})
-    seen["phone, panned end"] = page.evaluate(atlas.LAYOUT, {"pan": "end"})
+    seen["phone, panned start"] = page.evaluate(LAYOUT, {"pan": "start"})
+    seen["phone, panned end"] = page.evaluate(LAYOUT, {"pan": "end"})
     seen["phone actions"] = page.evaluate(ACTIONS)
     atlas.expand(page)
     seen["phone, every case"] = atlas.layout(page)
