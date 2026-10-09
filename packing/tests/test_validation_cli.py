@@ -978,11 +978,16 @@ def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
         + "def test_selected():\n    pass\n"
     )
     commands: list[tuple[str, ...]] = []
+    # Confine nested pytest cleanup to a distinct child tree for each invocation.
+    child_temps = tmp_path / "child-pytest"
+    child_temps.mkdir()
     run = validate._run
 
     def run_here(context: validate.Context, command: tuple[str, ...]) -> str:
-        commands.append(command)
-        return run(context, command, cwd=tmp_path)
+        basetemp = child_temps / f"run-{len(commands)}"
+        executed = (*command, "--basetemp", str(basetemp))
+        commands.append(executed)
+        return run(context, executed, cwd=tmp_path)
 
     monkeypatch.setattr(validate, "_run", run_here)
     monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
