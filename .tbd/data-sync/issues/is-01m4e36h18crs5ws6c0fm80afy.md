@@ -5,19 +5,19 @@ title: Review and validate the atlas site cleanups
 kind: task
 status: in_progress
 priority: 2
-version: 13
+version: 14
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m4e35s7r1e65r1qmpz250h0p
-hold: blocked
+hold: null
 hold_until: null
 created_at: 2026-10-08T15:48:04.263Z
-updated_at: 2026-10-08T23:51:42.973Z
+updated_at: 2026-10-09T01:02:00.870Z
 started_at: 2026-10-08T15:49:07.449Z
 ---
 Review source changes and exported atlas, run focused checks and the change-reachable gate, then commit/push a focused PR and confirm CI. Keep the site cleanup epic open for further requests.
 
 ## Notes
 
-The n=211 record reflection and narrowed 6523×6090 poster data are committed at d32a825de4cea6967f1c8e754e91eebbd20293d2, with isolated release pin 92f82467d and edition v0.5.0-d32a82. All 47 records-tier steps, full pre-late static floors and 67 mandatory Chromium tests pass. The late 100-PDF contribution fix has six passing focused tests and clean scoped lint/format/types; canonical 100 exports still need regeneration. Strong source/record/original PDF reviews are clear. A subsequent four-node 324 footer edit awaits the pending user order choice under think-h0xi; prior final footer receipts are superseded. Current source/tests/324 assets agree, with docs pending reconciliation. Deployment sparse-checkout audit is clear. Preview pages are verified; changed assets and aliases need recopy. The full-context PR body at /Volumes/spud-ext1/agent-evidence/squares-atlas-cleanups-01a11c30/final/pr-body.md is corrected and validated by pinned Flowmark 0.4.0 and the OR-9 description checker. A fresh complete fdu metadata audit finds the entire own task scratch totals 138801152 allocated bytes (about 132 MiB), mostly the retained preview; cleaning it cannot restore the at-least-1-GiB headroom needed for broad validation. No unrelated task scratch was touched. External free space is about 49 MiB after safe inactive-cache cleanup, and earlier mkdir refused ENOSPC. No final passing --push result, final source/export commit, push or PR exists. Three delegated lanes completed the export-safety audit, concurrent-footer comparison and PR-context correction. Next: user footer choice and restored external headroom; reconcile footer docs/source/tests; regenerate both families and visually verify actual current PDFs; refresh preview assets/aliases; finish complete change-reachable --push; commit/push codex/atlas-triangle-default; create and attach PR; confirm required CI and complete hosted checkpoint at exact head. No merge requested or performed. Unique evidence remains under /Volumes/spud-ext1/agent-evidence/squares-atlas-cleanups-01a11c30/final.
+Current source is frozen after parallel implementation and strong review. The website has 82/82 mandatory Chromium checks passing (26.99 s), plus 17 focused layout/containment checks; the final PDF builder has 20 focused tests passing. The wider 7435×5270 Triangle poster wraps only logical rows 17–18, keeps every physical line at a uniform 252-unit pitch, uses the explicit problem statement without subtitle, and places October 8, 2026 beside the version below separated black project credits. n=211 is now a horizontal reflection of the immutable original and matches n=241; 26 focused orientation checks, exact verifiers and retained replay passed. Figure data, manifest and schema dimensions are now refreshed and enforced-schema checks pass. Documentation has been reconciled, including current 100-grid field counts. Existing PDF/SVG/PNG exports and release pin still refer to older d32 data and must be regenerated after the isolated data and pin commits. The data-only commit hook previously failed because the external UV-cache could not be created (ENOSPC); no hook was bypassed. External headroom has now returned to about 3 GiB and a real write probe succeeded. Current records tier passed 45/47 checks: Ruff is installed but missing from the direct runner PATH; suite_d has an expired pending measurement, now under independent evidence review. The current full-context PR body is retained in the unique external evidence directory. No final --push pass, final source/export commit, push, PR, fresh preview opening, or merge exists yet. Root handles records/exports/Git/beads; separate agents handle independent data/budget review, website/PR context and actual-PDF verification. Next: reviewed isolated data/pin commits; serial exports and actual visual checks; fresh lawful default-browser/PDF openings; current records and full change-reachable push gate; clean PR and exact-head CI.
