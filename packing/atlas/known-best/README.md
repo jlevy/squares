@@ -30,30 +30,30 @@ footer.
 
 Both composites share the same two-line problem description, two-column legend and
 construction credits.
-Each counted legend item shows a count over the number of cases in that composite, such
-as “proved optimal (45 of 100)” or “proved optimal (77 of 324)”. Titles, problem
+Each counted legend item names the count and number of cases in that composite, such as
+“proved optimal (45 of 100)” or “proved optimal (77 of 324)”. Titles, problem
 descriptions and all ordinary text use black; case numbers remain gray.
 Recent-result marks and the angle/contact swatches keep their semantic colors.
 A bundled bold sans-serif face supplies the print text and its layout measurements.
 The gap between information blocks is three body-text ems, measured between their ink
-bounds; the lines within a block share 1.50 leading and weight 700.
+bounds; the lines within a block share 1.50 leading and weight 700. All three credit
+paragraphs use the width of the balanced three-line construction paragraph, with
+complete names and role clauses kept together.
 
 The composite ships in four forms, all drawn from that one SVG in one build:
 
 | File | Size | For |
 | --- | --- | --- |
-| [`known-best-1-100.svg`](known-best-1-100.svg) | 2260 × 3995 units | the source; scales to anything |
-| [`known-best-1-100.png`](known-best-1-100.png) | 2260 × 3995 px | the GitHub-facing raster preview |
-| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4520 × 7990 px | attaching, or downscaling for social media |
-| [`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) | 23.54 × 41.61 in | printing; vector, so text stays selectable |
+| [`known-best-1-100.svg`](known-best-1-100.svg) | 2260 × 4023 units | the source; scales to anything |
+| [`known-best-1-100.png`](known-best-1-100.png) | 2260 × 4023 px | the GitHub-facing raster preview |
+| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4520 × 8046 px | attaching, or downscaling for social media |
+| [`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) | 23.54 × 41.91 in | printing; vector, so text stays selectable |
 
 Each export carries the SHA-256 of its source SVG, so `--check` rejects any one of them
 that has fallen behind the drawing.
 The 2x raster is scaled by a whole number rather than to a round pixel width: a
 fractional scale lands every edge on a fractional pixel boundary, and the antialiasing
 shades the rasteriser then invents cost more bytes than the extra pixels do.
-Rendered from this SVG, a 4096-pixel-wide export is 1,440,555 bytes for 20.2 megapixels
-where the 2x export is 1,294,216 for 27.8.
 
 ## The poster, `n = 1..324`
 
@@ -98,7 +98,7 @@ Each uses complete canonical names once, ordered from oldest to newest by the ea
 supported result or contribution date.
 Year-only dates retain their precision; ties follow alphabetical order.
 Acquisition and snapshot dates do not establish priority.
-The construction paragraph names all twenty recorded finders and improvers.
+The construction paragraph names all recorded finders and improvers.
 The lower-bound paragraph names current bound-source authors; its metadata also retains
 method, prerequisite and historical contributions.
 The proof paragraph separately identifies formalization and verification contributions

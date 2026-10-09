@@ -439,6 +439,8 @@ dates at their original precision.
 A later improver’s source does not redate inherited authors, and a retrieval or snapshot
 date does not establish publication priority.
 Line balancing preserves that order and omits final periods and bracketed citations.
+The widest of the three balanced construction-credit lines sets the common width for all
+three credit paragraphs; complete names and role prefixes remain indivisible.
 
 Both diagrams use the same full-corpus $n = 1..324$ acknowledgments.
 SVG metadata states that credit scope separately from the depicted range and retains the
@@ -463,9 +465,8 @@ bound and optimality proof independently.
 A recent proof can color an optimality badge while its older construction’s upper-bound
 caption stays neutral.
 The shared row model declares separate non-grid and grid segments, kept together on one
-line. Logical rows 17 and 18 begin at $y = 5880, 6240$. All rows share the final
-drawing’s right edge at $x = 8193$. The card envelope ends at $x = 8227$, $y = 6482$,
-leaving 120 units on the right and bottom of the $7871 × 5701$ canvas.
+line. All rows share the final drawing’s right edge, with 120 units of clearance outside
+the card envelope on the right and bottom.
 Cards retain their logical row and column identities; physical and logical row counts
 both equal eighteen.
 SVG metadata records 35 physical columns and 18 physical lines, matching the manifest
@@ -479,10 +480,10 @@ The packing drawings and card captions retain their original scale.
 | --- | --- | --- |
 | Cases | `n = 1..100` | `n = 1..324` |
 | Arrangement | 10 by 10, row-major | 18 complete right-aligned rows |
-| Canvas | 2260 × 3995 units | 7871 × 5701 units |
+| Canvas | 2260 × 4023 units | 7871 × 5701 units |
 | Squares drawn | 5,050 | 52,650 |
 | Rasters | 1x, 2x, link-preview card | 1x |
-| PDF page | 23.54 × 41.61 in | 81.99 × 59.39 in |
+| PDF page | 23.54 × 41.91 in | 81.99 × 59.39 in |
 
 The remaining fields are the decisions a figure of another size has to make: which
 rasters it publishes, whether it publishes a link-preview crop, and what it may leave

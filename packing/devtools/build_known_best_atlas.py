@@ -2728,12 +2728,29 @@ def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, .
 
 
 def _balanced_credit_lines(
-    paragraph: atlas_credit_attributions.CreditParagraph, *, line_count: int | None = None
+    paragraph: atlas_credit_attributions.CreditParagraph,
+    *,
+    line_count: int | None = None,
+    measure: Decimal = POSTER_INFORMATION_WIDTH,
 ) -> tuple[str, ...]:
-    """Balance consecutive whole-name runs without rearranging dates or role clauses."""
+    """Balance consecutive whole-name runs within one measured paragraph width."""
     atoms = paragraph.atoms
     if not atoms:
         return (paragraph.clauses[0].prefix,)
+    failure = (
+        "poster packing credits exceed their three-line information block"
+        if line_count is not None
+        else "poster attribution credits exceed their information block"
+    )
+    # The retained face measures unkerned advances, so span widths are exactly additive.
+    # Measure each indivisible role-prefix/name atom once, even in a four-line search.
+    atom_widths = tuple(_text_width(atom, POSTER_BODY_SIZE) for atom in atoms)
+    if max(atom_widths) > measure:
+        raise ValueError(failure)
+    space = _text_width(" ", POSTER_BODY_SIZE)
+    prefix_widths = [Decimal(0)]
+    for width in atom_widths:
+        prefix_widths.append(prefix_widths[-1] + width)
     counts = (
         (min(line_count, len(atoms)),) if line_count is not None else range(1, len(atoms) + 1)
     )
@@ -2742,21 +2759,22 @@ def _balanced_credit_lines(
         best_score: Decimal | None = None
         for breaks in combinations(range(1, len(atoms)), count - 1):
             boundaries = (0, *breaks, len(atoms))
-            lines = tuple(" ".join(atoms[first:last]) for first, last in pairwise(boundaries))
-            widths = tuple(_text_width(line, POSTER_BODY_SIZE) for line in lines)
-            if max(widths) > POSTER_INFORMATION_WIDTH:
+            widths = tuple(
+                prefix_widths[last] - prefix_widths[first] + space * (last - first - 1)
+                for first, last in pairwise(boundaries)
+            )
+            if max(widths) > measure:
                 continue
             mean = sum(widths, Decimal(0)) / count
             score = sum(((width - mean) ** 2 for width in widths), Decimal(0))
             if best_score is None or score < best_score:
-                best_lines, best_score = lines, score
+                best_lines = tuple(
+                    " ".join(atoms[first:last]) for first, last in pairwise(boundaries)
+                )
+                best_score = score
         if best_score is not None:
             return best_lines
-    raise ValueError(
-        "poster packing credits exceed their three-line information block"
-        if line_count is not None
-        else "poster attribution credits exceed their information block"
-    )
+    raise ValueError(failure)
 
 
 @cache
@@ -2817,8 +2835,12 @@ def _print_credit_lines() -> tuple[str, ...]:
 
 @cache
 def _print_attribution_lines() -> tuple[tuple[str, ...], ...]:
+    # Construction credits retain three balanced lines. Their widest line sets the
+    # shared measure for the following paragraphs without widening the print block.
+    measure = max(_text_width(line, POSTER_BODY_SIZE) for line in _print_credit_lines())
     return tuple(
-        _balanced_credit_lines(paragraph) for paragraph in _print_attributions().paragraphs
+        _balanced_credit_lines(paragraph, measure=measure)
+        for paragraph in _print_attributions().paragraphs
     )
 
 

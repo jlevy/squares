@@ -470,7 +470,7 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
             "layout": "10 by 10, row-major n=1..100",
             "png_high_resolution": {
                 "derived_from": "atlas/known-best/known-best-1-100.svg",
-                "height": 7990,
+                "height": 8046,
                 "path": "atlas/known-best/known-best-1-100@2x.png",
                 "scale": 2,
                 "width": 4520,
@@ -485,7 +485,7 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
             },
             "png_preview": {
                 "derived_from": "atlas/known-best/known-best-1-100.svg",
-                "height": 3995,
+                "height": 4023,
                 "path": "atlas/known-best/known-best-1-100.png",
                 "scale": 1,
                 "width": 2260,
@@ -496,7 +496,7 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
             "square_count": 5050,
             "stem": "known-best-1-100",
             "svg": {
-                "height": 3995,
+                "height": 4023,
                 "path": "atlas/known-best/known-best-1-100.svg",
                 "width": 2260,
             },
@@ -869,7 +869,7 @@ def test_known_best_composite_png_is_derived_from_current_svg() -> None:
 
     assert known_best_builder.png_summary_receipt(png) == (
         2260,
-        3995,
+        4023,
         hashlib.sha256(svg_text.encode("utf-8")).hexdigest(),
     )
 
@@ -880,7 +880,7 @@ def test_known_best_composite_high_resolution_png_is_derived_from_current_svg() 
     It exists so the atlas can be attached or downscaled without going back to the
     vector, which means it is the copy most likely to be handed to someone who cannot
     check it. Pinning the exact pixel count matters as much as pinning the receipt:
-    4520 by 7990 is twice 2260 by 3995, and the whole-number scale is what keeps the
+    4520 by 8046 is twice 2260 by 4023, and the whole-number scale is what keeps the
     file small. A fractional scale puts every edge on a fractional pixel boundary, and
     the antialiasing shades the rasteriser then invents cost more bytes than the extra
     pixels do -- a 4096-wide export of this drawing is 11% larger than this one while
@@ -891,7 +891,7 @@ def test_known_best_composite_high_resolution_png_is_derived_from_current_svg() 
 
     assert known_best_builder.png_summary_receipt(png) == (
         4520,
-        7990,
+        8046,
         hashlib.sha256(svg_text.encode("utf-8")).hexdigest(),
     )
 
@@ -959,7 +959,7 @@ def test_the_1_100_canvas_is_what_its_specification_computes() -> None:
     """Pin content-derived footer geometry without moving the ten-by-ten drawing grid.
 
     The black definition is 26.125 units; body text is 19 units. The three shared
-    credit paragraphs use ink-measured section gaps and give a 3995-unit page height.
+    credit paragraphs use ink-measured section gaps and give a 4023-unit page height.
     Literal baselines hold the maintained derivation to the published drawing.
     """
     canvas = known_best_builder.PRIMARY_COMPOSITE
@@ -969,13 +969,13 @@ def test_the_1_100_canvas_is_what_its_specification_computes() -> None:
     assert (composite.count, composite.rows, composite.square_count) == (100, 10, 5050)
     assert composite.layout == "10 by 10, row-major n=1..100"
     assert composite.card_units == 1256
-    assert (canvas.width, canvas.height) == (2260, 3995)
+    assert (canvas.width, canvas.height) == (2260, 4023)
     assert canvas.grid_bottom == 3244
     assert float(canvas.legend_baseline) == pytest.approx(3409.53936767578125)
     assert float(canvas.explainer_baseline) == pytest.approx(3292.930419921875)
     assert canvas.citations_baseline == 114
-    assert float(canvas.credit_baseline) == pytest.approx(3936.71514892578125)
-    assert float(canvas.stamp_baseline) == pytest.approx(3965.21514892578125)
+    assert float(canvas.credit_baseline) == pytest.approx(3965.13165283203125)
+    assert float(canvas.stamp_baseline) == pytest.approx(3993.63165283203125)
     assert (composite.svg_name, composite.pdf_name) == (
         "known-best-1-100.svg",
         "square-packings-100-20261008.pdf",
@@ -1218,7 +1218,7 @@ def test_poster_complete_rows_share_a_right_edge_and_leave_room_for_left_informa
     assert canvas.grid_top == 120
     assert known_best_builder.POSTER_INFORMATION_TOP == 120
     primary = known_best_builder.PRIMARY_COMPOSITE
-    assert (primary.width, primary.height, primary.row_pitch) == (2260, 3995, 307)
+    assert (primary.width, primary.height, primary.row_pitch) == (2260, 4023, 307)
     assert primary.card_left(1) == 60
     assert primary.grid_top == 174
     assert Decimal("1.38") <= Decimal(canvas.width) / canvas.height <= Decimal("1.39")
@@ -1539,7 +1539,7 @@ def test_triangle_crop_resolves_complete_records_and_row_major_skips_grid_prefli
     assert (
         known_best_builder.PRIMARY_COMPOSITE.width,
         known_best_builder.PRIMARY_COMPOSITE.height,
-    ) == (2260, 3995)
+    ) == (2260, 4023)
 
 
 def test_poster_enlarges_information_type_without_changing_card_geometry() -> None:
@@ -1823,8 +1823,8 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     assert information is not None
     credit_block = information.find("svg:g[@data-feature='packing-credits']", SVG)
     assert credit_block is not None
-    assert len(expected_names) == 20
-    assert len(expected_sources) == 9
+    assert len(expected_names) == 22
+    assert len(expected_sources) == 10
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -1846,7 +1846,6 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Bidwell",
         "Cantrell",
         "Morandi",
-        "DeVincentis",
         "Ellsworth",
         "Hajba",
         "Schadt",
@@ -1855,7 +1854,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Daniel",
         "de Winter",
         "Rehwaldt",
+        "Gupta",
+        "ry-xu",
         "Chang",
+        "DeVincentis",
         "hmbelvedere",
     ]
     assert all(body.count(name) == 1 for name in expected_names)
@@ -2059,8 +2061,8 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
     assert lookups == [True]
     assert (root.attrib["width"], root.attrib["height"], root.attrib["viewBox"]) == (
         "2260",
-        "3995",
-        "0 0 2260 3995",
+        "4023",
+        "0 0 2260 4023",
     )
     entries = {entry["n"]: entry for entry in record["entries"]}
     assert [
@@ -2249,7 +2251,7 @@ def test_poster_legend_columns_align_left_and_count_upper_only_recent_results(
         column.findall("svg:text[@data-feature='legend-label']", SVG) for column in columns
     ]
     assert [len(column) for column in labels] == [4, 4]
-    assert labels[1][0].text == "recent result, since August, 2026 (1/324)"
+    assert labels[1][0].text == "recent result, since August, 2026 (1 of 324)"
     description = known_best_builder.SUMMARY_PROSE[canvas.spec.stem][1]
     assert all(
         role in description
@@ -2710,8 +2712,8 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     ]
     assert labels == [
         "proved optimal (77 of 324)",
-        "exact value known (292 of 324)",
-        "only known numerically (32 of 324)",
+        "exact value known (295 of 324)",
+        "only known numerically (29 of 324)",
         "rigid (22 of 324)",
         "recent result, since August, 2026 (297 of 324)",
         "colors indicate distinct tilt angles",
@@ -3793,7 +3795,7 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
     assert credit_text[0] == credit_text[1]
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 20
+        == 22
     )
 
 
@@ -4167,3 +4169,58 @@ def test_curated_print_credits_match_current_case_and_citation_associations() ->
         for source in proof_sources
         for key in source["result_ids"]
     )
+
+
+def test_print_attribution_paragraphs_share_the_balanced_packing_measure() -> None:
+    """Three complete credit paragraphs use one visual measure in both print layouts."""
+    packing = known_best_builder._print_credit_lines()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    paragraphs = known_best_builder._print_attributions().paragraphs  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    attributed = known_best_builder._print_attribution_lines()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    measure = max(width(line, known_best_builder.POSTER_BODY_SIZE) for line in packing)
+    assert len(packing) == 3
+    assert [len(lines) for lines in attributed] == [2, 4]
+    for paragraph, lines in zip(paragraphs, attributed, strict=True):
+        assert " ".join(lines) == " ".join(paragraph.atoms)
+        assert (
+            max(width(line, known_best_builder.POSTER_BODY_SIZE) for line in lines) <= measure
+        )
+        assert all(any(atom in line for line in lines) for atom in paragraph.atoms)
+    for canvas in known_best_builder.resolved_composites():
+        root = ET.Element("svg")
+        known_best_builder._append_composite_information(  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+            root,
+            spec=RenderSpec(overlays=frozenset()),
+            canvas=canvas,
+            identity=known_best_builder.retained_identity(canvas.svg_path.read_text()),
+        )
+        block = root.find("svg:g[@data-feature='poster-information']", SVG)
+        assert block is not None
+        for key, expected in zip(
+            ("packing", "lower-bound", "optimality"), (packing, *attributed), strict=True
+        ):
+            actual = tuple(
+                node.text or ""
+                for node in block.findall(
+                    f"svg:g/svg:text[@data-feature='{key}-credit-line']", SVG
+                )
+            )
+            assert actual == expected
+        if canvas.information_in_corner:
+            _assert_poster_text_clears_cards(block, canvas)
+
+
+def test_print_attribution_wrap_refuses_an_atom_wider_than_the_shared_measure() -> None:
+    """A long indivisible credited name cannot silently expand the shared paragraph width."""
+    paragraph = known_best_builder.atlas_credit_attributions.CreditParagraph(
+        "lower-bound",
+        (
+            known_best_builder.atlas_credit_attributions.CreditClause(
+                "Lower bounds due to", ("W" * 100,)
+            ),
+        ),
+    )
+    with pytest.raises(ValueError, match="information block"):
+        known_best_builder._balanced_credit_lines(  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+            paragraph, measure=Decimal(1000)
+        )

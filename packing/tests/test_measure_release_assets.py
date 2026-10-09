@@ -180,6 +180,10 @@ def test_raster_timing_uses_resolved_production_dimensions_without_rendering(
 ) -> None:
     custom = atlas.CompositeCanvas(CompositeSpec(1, 4, 2, "synthetic", raster_scales=(1,)))
     monkeypatch.setattr(atlas, "COMPOSITES", (*atlas.COMPOSITES, custom))
+    # Cold production geometry reads the retained credit paragraphs from ATLAS_ROOT.
+    (tmp_path / "credit-attributions.json").write_bytes(
+        (atlas.ATLAS_ROOT / "credit-attributions.json").read_bytes()
+    )
     monkeypatch.setattr(atlas, "ATLAS_ROOT", tmp_path)
     for canvas in atlas.COMPOSITES:
         canvas.svg_path.write_text(f"source for {canvas.spec.stem}", encoding="utf-8")
@@ -193,11 +197,11 @@ def test_raster_timing_uses_resolved_production_dimensions_without_rendering(
     monkeypatch.setattr(atlas, "png_export_bytes", capture)
     measure._atlas_rasters()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     assert requested == [
-        ("known-best-1-100.png", 2260, 3995),
-        ("known-best-1-100@2x.png", 4520, 7990),
+        ("known-best-1-100.png", 2260, 4023),
+        ("known-best-1-100@2x.png", 4520, 8046),
         ("known-best-1-100-card.png", 2260, 1256),
         ("known-best-1-324.png", 7871, 5701),
-        ("synthetic.png", 576, 880),
+        ("synthetic.png", 548, 1567),
     ]
     assert capsys.readouterr().out.count(": 3 bytes,") == len(requested)
 
