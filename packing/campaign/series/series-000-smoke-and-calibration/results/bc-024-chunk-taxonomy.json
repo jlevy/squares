@@ -2,10 +2,10 @@
   "residue": {
     "by_source": {
       "exact-grid": 44,
-      "kingbird-derived-facts": 65,
-      "packet-derived-facts": 3
+      "kingbird-derived-facts": 57,
+      "packet-derived-facts": 14
     },
-    "components": 112,
+    "components": 115,
     "detail": [
       {
         "is_the_whole_record": true,
@@ -339,17 +339,33 @@
         "is_the_whole_record": false,
         "n": 51,
         "size": 10,
-        "source": "kingbird-derived-facts",
+        "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
       },
       {
         "is_the_whole_record": false,
         "n": 51,
-        "size": 12,
-        "source": "kingbird-derived-facts",
+        "size": 18,
+        "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 51,
+        "size": 5,
+        "source": "packet-derived-facts",
+        "tilted": true,
+        "walls_touched": 0
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 51,
+        "size": 5,
+        "source": "packet-derived-facts",
+        "tilted": true,
+        "walls_touched": 0
       },
       {
         "is_the_whole_record": false,
@@ -562,16 +578,16 @@
       {
         "is_the_whole_record": false,
         "n": 70,
-        "size": 21,
-        "source": "kingbird-derived-facts",
+        "size": 18,
+        "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
       },
       {
         "is_the_whole_record": false,
         "n": 70,
-        "size": 21,
-        "source": "kingbird-derived-facts",
+        "size": 30,
+        "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
       },
@@ -706,64 +722,72 @@
       {
         "is_the_whole_record": false,
         "n": 84,
-        "size": 36,
-        "source": "kingbird-derived-facts",
+        "size": 25,
+        "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
       },
       {
         "is_the_whole_record": false,
         "n": 84,
+        "size": 15,
+        "source": "packet-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 84,
+        "size": 6,
+        "source": "packet-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 85,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 85,
+        "size": 14,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 85,
+        "size": 10,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 85,
+        "size": 14,
+        "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 86,
+        "size": 22,
+        "source": "packet-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 86,
         "size": 36,
-        "source": "kingbird-derived-facts",
-        "tilted": false,
-        "walls_touched": 2
-      },
-      {
-        "is_the_whole_record": false,
-        "n": 85,
-        "size": 10,
-        "source": "kingbird-derived-facts",
-        "tilted": false,
-        "walls_touched": 2
-      },
-      {
-        "is_the_whole_record": false,
-        "n": 85,
-        "size": 14,
-        "source": "kingbird-derived-facts",
-        "tilted": false,
-        "walls_touched": 2
-      },
-      {
-        "is_the_whole_record": false,
-        "n": 85,
-        "size": 10,
-        "source": "kingbird-derived-facts",
-        "tilted": false,
-        "walls_touched": 2
-      },
-      {
-        "is_the_whole_record": false,
-        "n": 85,
-        "size": 14,
-        "source": "kingbird-derived-facts",
-        "tilted": false,
-        "walls_touched": 2
-      },
-      {
-        "is_the_whole_record": false,
-        "n": 86,
-        "size": 28,
-        "source": "kingbird-derived-facts",
-        "tilted": false,
-        "walls_touched": 2
-      },
-      {
-        "is_the_whole_record": false,
-        "n": 86,
-        "size": 35,
-        "source": "kingbird-derived-facts",
+        "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
       },
@@ -907,36 +931,37 @@
     "sizes": {
       "10": 15,
       "11": 4,
-      "12": 2,
+      "12": 1,
       "13": 1,
       "14": 5,
-      "15": 5,
+      "15": 6,
       "16": 2,
-      "18": 2,
+      "18": 4,
       "19": 2,
-      "21": 9,
-      "22": 1,
+      "21": 7,
+      "22": 2,
       "23": 1,
       "24": 1,
-      "25": 1,
-      "28": 6,
+      "25": 2,
+      "28": 5,
+      "30": 1,
       "31": 1,
       "32": 2,
       "33": 1,
       "34": 1,
-      "35": 2,
-      "36": 3,
+      "35": 1,
+      "36": 2,
       "43": 1,
       "44": 1,
       "45": 1,
       "46": 1,
       "47": 1,
       "48": 1,
-      "5": 4,
+      "5": 6,
       "57": 1,
       "58": 1,
       "59": 1,
-      "6": 8,
+      "6": 9,
       "60": 1,
       "61": 1,
       "62": 1,
@@ -961,10 +986,11 @@
       "98": 1,
       "99": 1
     },
-    "tilted": 0,
+    "tilted": 2,
     "walls_touched": {
+      "0": 2,
       "1": 1,
-      "2": 67,
+      "2": 68,
       "4": 44
     },
     "whole_record": 44
@@ -973,52 +999,53 @@
   "sizes_by_shape": {
     "L": {
       "3": 23,
-      "4": 8,
+      "4": 7,
       "5": 2
     },
     "bar": {
-      "10": 1,
-      "2": 78,
+      "2": 71,
       "3": 11,
       "4": 1,
       "5": 1,
       "6": 1,
+      "7": 1,
       "8": 1,
       "9": 1
     },
     "other-polyomino": {
       "10": 15,
       "11": 4,
-      "12": 2,
+      "12": 1,
       "13": 1,
       "14": 5,
-      "15": 5,
+      "15": 6,
       "16": 2,
-      "18": 2,
+      "18": 4,
       "19": 2,
-      "21": 9,
-      "22": 1,
+      "21": 7,
+      "22": 2,
       "23": 1,
       "24": 1,
-      "25": 1,
-      "28": 6,
+      "25": 2,
+      "28": 5,
+      "30": 1,
       "31": 1,
       "32": 2,
       "33": 1,
       "34": 1,
-      "35": 2,
-      "36": 3,
+      "35": 1,
+      "36": 2,
       "43": 1,
       "44": 1,
       "45": 1,
       "46": 1,
       "47": 1,
       "48": 1,
-      "5": 4,
+      "5": 6,
       "57": 1,
       "58": 1,
       "59": 1,
-      "6": 8,
+      "6": 9,
       "60": 1,
       "61": 1,
       "62": 1,
@@ -1052,7 +1079,7 @@
       "25": 3,
       "30": 1,
       "36": 2,
-      "4": 6,
+      "4": 2,
       "42": 1,
       "49": 2,
       "56": 1,
@@ -1064,7 +1091,7 @@
       "90": 1
     },
     "singleton": {
-      "1": 269
+      "1": 315
     }
   },
   "strata": {
@@ -1081,27 +1108,27 @@
       "tilted_components": 0
     },
     "kingbird-derived-facts": {
-      "components": 380,
-      "records": 34,
+      "components": 324,
+      "records": 30,
       "shapes": {
-        "L": 31,
-        "bar": 85,
-        "other-polyomino": 65,
-        "rectangle": 12,
-        "singleton": 187
+        "L": 27,
+        "bar": 71,
+        "other-polyomino": 57,
+        "rectangle": 8,
+        "singleton": 161
       },
-      "tilted_components": 230
+      "tilted_components": 190
     },
     "packet-derived-facts": {
-      "components": 94,
-      "records": 2,
+      "components": 187,
+      "records": 6,
       "shapes": {
-        "L": 1,
-        "bar": 9,
-        "other-polyomino": 3,
-        "singleton": 81
+        "L": 4,
+        "bar": 16,
+        "other-polyomino": 14,
+        "singleton": 153
       },
-      "tilted_components": 55
+      "tilted_components": 133
     }
   },
   "subject": {
@@ -1150,31 +1177,31 @@
   ],
   "wall_seating_by_shape": {
     "L": {
-      "0": 6,
+      "0": 4,
       "1": 1,
-      "2": 25,
+      "2": 26,
       "4": 1
     },
     "bar": {
-      "0": 81,
+      "0": 76,
       "1": 5,
-      "2": 8,
+      "2": 6,
       "3": 1
     },
     "other-polyomino": {
+      "0": 2,
       "1": 1,
-      "2": 67,
+      "2": 68,
       "4": 44
     },
     "rectangle": {
-      "0": 11,
-      "2": 1,
+      "0": 8,
       "3": 8,
       "4": 9
     },
     "singleton": {
-      "0": 181,
-      "1": 49,
+      "0": 230,
+      "1": 46,
       "2": 38,
       "4": 1
     }

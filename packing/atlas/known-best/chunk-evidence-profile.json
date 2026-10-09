@@ -2,62 +2,68 @@
   "profile": {
     "aggregate": {
       "case_count": 36,
-      "contact_component_count": 162,
+      "contact_component_count": 165,
       "coverage_threshold_cases": {
         "at_least_50_percent": 35,
         "at_least_75_percent": 33,
-        "at_least_90_percent": 27
+        "at_least_90_percent": 26
       },
-      "fully_structured_cases": 10,
-      "internal_slide_dof": 871,
+      "fully_structured_cases": 9,
+      "internal_slide_dof": 860,
       "narrow_partition_status_counts": {
         "established": 3,
-        "not-established": 23,
-        "not-established-search-limit": 8,
+        "not-established": 24,
+        "not-established-search-limit": 7,
         "outside-registered-budget": 2
       },
       "sensitivity_comparison": {
-        "changed_case_count": 3,
+        "changed_case_count": 5,
         "changed_ns": [
           68,
+          70,
           71,
+          84,
           88
         ],
-        "primary_structured_square_count": 1778,
-        "sensitivity_structured_square_count": 1787,
-        "within_budget_flip_ns": []
+        "primary_structured_square_count": 1755,
+        "sensitivity_structured_square_count": 1775,
+        "within_budget_flip_ns": [
+          70
+        ]
       },
       "source_strata": [
         {
-          "case_count": 34,
-          "fully_structured_cases": 10,
+          "case_count": 30,
+          "fully_structured_cases": 8,
           "sensitivity_changed_ns": [
             71
           ],
           "source_kind": "kingbird-derived-facts",
-          "square_count": 1704,
-          "structured_fraction": "0.966549295775",
-          "structured_square_count": 1647,
-          "within_six_components_and_three_free_cases": 26
+          "square_count": 1413,
+          "structured_fraction": "0.96178343949",
+          "structured_square_count": 1359,
+          "within_six_components_and_three_free_cases": 23
         },
         {
-          "case_count": 2,
-          "fully_structured_cases": 0,
+          "case_count": 6,
+          "fully_structured_cases": 1,
           "sensitivity_changed_ns": [
             68,
+            70,
+            84,
             88
           ],
           "source_kind": "packet-derived-facts",
-          "square_count": 156,
-          "structured_fraction": "0.839743589744",
-          "structured_square_count": 131,
-          "within_six_components_and_three_free_cases": 0
+          "square_count": 447,
+          "structured_fraction": "0.885906040268",
+          "structured_square_count": 396,
+          "within_six_components_and_three_free_cases": 2
         }
       ],
       "square_count": 1860,
-      "structured_fraction": "0.955913978495",
-      "structured_square_count": 1778,
-      "within_six_components_and_three_free_cases": 26
+      "structured_fraction": "0.943548387097",
+      "structured_square_count": 1755,
+      "within_six_components_and_three_free_cases": 25
     },
     "cases": [
       {
@@ -533,16 +539,16 @@
           "status": "not-established"
         },
         "primary": {
-          "angle_class_count": 4,
-          "contact_component_count": 7,
-          "contact_edge_count": 65,
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 70,
           "free_square_count": 0,
-          "internal_slide_dof": 25,
-          "largest_component_size": 14,
+          "internal_slide_dof": 22,
+          "largest_component_size": 18,
           "structured_fraction": "1",
           "structured_square_count": 51,
-          "wall_seated_square_count": 24,
-          "within_six_components_and_three_free": false
+          "wall_seated_square_count": 22,
+          "within_six_components_and_three_free": true
         },
         "sensitivity_delta": {
           "contact_component_count": 0,
@@ -550,7 +556,7 @@
           "structured_square_count": 0,
           "within_budget_changed": false
         },
-        "source_kind": "kingbird-derived-facts",
+        "source_kind": "packet-derived-facts",
         "square_count": 51
       },
       {
@@ -823,24 +829,24 @@
           "status": "not-established"
         },
         "primary": {
-          "angle_class_count": 2,
-          "contact_component_count": 5,
+          "angle_class_count": 6,
+          "contact_component_count": 4,
           "contact_edge_count": 94,
-          "free_square_count": 0,
-          "internal_slide_dof": 36,
-          "largest_component_size": 24,
-          "structured_fraction": "1",
-          "structured_square_count": 70,
-          "wall_seated_square_count": 28,
-          "within_six_components_and_three_free": true
+          "free_square_count": 4,
+          "internal_slide_dof": 32,
+          "largest_component_size": 30,
+          "structured_fraction": "0.942857142857",
+          "structured_square_count": 66,
+          "wall_seated_square_count": 27,
+          "within_six_components_and_three_free": false
         },
         "sensitivity_delta": {
           "contact_component_count": 0,
-          "free_square_count": 0,
-          "structured_square_count": 0,
-          "within_budget_changed": false
+          "free_square_count": -1,
+          "structured_square_count": 1,
+          "within_budget_changed": true
         },
-        "source_kind": "kingbird-derived-facts",
+        "source_kind": "packet-derived-facts",
         "square_count": 70
       },
       {
@@ -936,27 +942,27 @@
           "selected_chunk_count": null,
           "selected_free_square_count": null,
           "selected_partition_minimality": "not-applicable",
-          "status": "not-established-search-limit"
+          "status": "not-established"
         },
         "primary": {
-          "angle_class_count": 2,
-          "contact_component_count": 3,
-          "contact_edge_count": 121,
-          "free_square_count": 2,
-          "internal_slide_dof": 37,
-          "largest_component_size": 36,
-          "structured_fraction": "0.97619047619",
-          "structured_square_count": 82,
-          "wall_seated_square_count": 32,
-          "within_six_components_and_three_free": true
+          "angle_class_count": 23,
+          "contact_component_count": 7,
+          "contact_edge_count": 82,
+          "free_square_count": 20,
+          "internal_slide_dof": 32,
+          "largest_component_size": 25,
+          "structured_fraction": "0.761904761905",
+          "structured_square_count": 64,
+          "wall_seated_square_count": 29,
+          "within_six_components_and_three_free": false
         },
         "sensitivity_delta": {
-          "contact_component_count": 0,
-          "free_square_count": 0,
-          "structured_square_count": 0,
+          "contact_component_count": 2,
+          "free_square_count": -12,
+          "structured_square_count": 12,
           "within_budget_changed": false
         },
-        "source_kind": "kingbird-derived-facts",
+        "source_kind": "packet-derived-facts",
         "square_count": 84
       },
       {
@@ -997,14 +1003,14 @@
           "status": "not-established"
         },
         "primary": {
-          "angle_class_count": 2,
-          "contact_component_count": 4,
-          "contact_edge_count": 132,
-          "free_square_count": 1,
-          "internal_slide_dof": 35,
-          "largest_component_size": 35,
-          "structured_fraction": "0.988372093023",
-          "structured_square_count": 85,
+          "angle_class_count": 4,
+          "contact_component_count": 6,
+          "contact_edge_count": 122,
+          "free_square_count": 2,
+          "internal_slide_dof": 36,
+          "largest_component_size": 38,
+          "structured_fraction": "0.976744186047",
+          "structured_square_count": 84,
           "wall_seated_square_count": 31,
           "within_six_components_and_three_free": true
         },
@@ -1014,7 +1020,7 @@
           "structured_square_count": 0,
           "within_budget_changed": false
         },
-        "source_kind": "kingbird-derived-facts",
+        "source_kind": "packet-derived-facts",
         "square_count": 86
       },
       {
@@ -1055,7 +1061,7 @@
           "status": "not-established"
         },
         "primary": {
-          "angle_class_count": 17,
+          "angle_class_count": 18,
           "contact_component_count": 5,
           "contact_edge_count": 98,
           "free_square_count": 16,
@@ -1068,8 +1074,8 @@
         },
         "sensitivity_delta": {
           "contact_component_count": -1,
-          "free_square_count": -4,
-          "structured_square_count": 4,
+          "free_square_count": -2,
+          "structured_square_count": 2,
           "within_budget_changed": false
         },
         "source_kind": "packet-derived-facts",

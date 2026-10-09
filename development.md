@@ -843,6 +843,20 @@ The CLI reports which allocation it selected, and command receipts record the ef
 worker settings. Selections containing a broad or full-tier step still take the marker
 and still refuse a second gate.
 
+The exclusive pytest phase starts only after its edit prerequisites pass; failed checks,
+or skipped checks under strict mode, leave it explicitly skipped in the final report.
+Validation reports active step names and elapsed time to stderr every 30 seconds and
+reports failures as they occur.
+Captured output remains in declared order at the end.
+
+A global `PYTEST_ADDOPTS` override of `cache_dir` breaks nested probes that disable
+pytest’s cache plugin, so validation rejects it before selecting checks.
+Remove that override from `PYTEST_ADDOPTS`; set `cache_dir` on a direct pytest
+invocation or use `--basetemp` to place temporary test directories.
+The progress-receipt and slow-lane subprocess probes use a separate `--basetemp` for
+each invocation to avoid cleanup of unrelated numbered directories under a shared
+`PYTEST_DEBUG_TEMPROOT`.
+
 When command artifacts are enabled, the reachable-test wrapper records separate JUnit
 and duration reports for each child phase.
 Flushed per-worker JSONL progress identifies the source commit, run, test node and

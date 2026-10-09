@@ -916,8 +916,8 @@ these rows as BC-406 to BC-411.
 the whole n17 record after Sessions 184 to 186. It maps every proof obligation with its
 evidential status, and finds that the week’s effort went to the two parts of the proof
 that cannot finish it.
-With the W2 review’s exact per-state centres, it shows that centre-only relaxations (the
-shared-centre LP, the weighted-vertex screen, the incircle SOS at any order) exclude no
+With the W2 review’s exact per-state centres, it shows that the encoded distance models
+(shared-centre LP, weighted-vertex screen, incircle SOS at any order) exclude no
 distance-2 orbit and no cell triple, so the first-eight LP’s outcome is already known.
 Its selection: measure exclusion reach on the endpoint’s own state at caps below
 $S^\ast$ first, rebase capture on exact LP certificates over the feature-forced region,
@@ -928,8 +928,8 @@ box-seeded kernel capture pilots.
 | --- | --- | --- | --- | --- |
 | 291 | The endpoint’s own occupancy state is excluded by the whole-state engines at a cap one hundredth below $S^\ast$ | registered | [H-325](hypotheses/H-325-n17-endpoint-state-cap-scan.md) | The one number never measured: the side margin at which exclusion alone reaches the family’s state; prices the cap ladder and the no-man’s-land |
 | 292 | A verified lower bound $s(17) > S^\ast - 1/100$ by exclusion of every residue orbit at a centred cap, the 60 admissions carried down | registered | [H-326](hypotheses/H-326-n17-cap-ladder-lower-bound.md) | A rung of the cap ladder is a T-item about $5\times10^{-3}$ above R071; its certificates do not enter the optimality proof |
-| 293 | Most distance-2 residue orbits contain an infeasible sub-pattern of arity at most ten | registered | [H-327](hypotheses/H-327-n17-hard-tail-decomposability.md) | Routes the tail to sub-pattern engines or to whole-state and coupled methods |
-| 294 | Centre-only relaxations exclude no distance-2 orbit: each has exact unit-separated centres in its own cells, and every cell triple has a vertex with all three squared distances at least 1.33 | registered | [H-328](hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) | Outcome known from the W2 review, pending a registering replay: eight exact first-eight LP survivors, so no Farkas certificate can exist; no weighted-vertex or SOS certificate of any order exists for any triple |
+| 293 | Most distance-2 residue orbits yield candidate infeasible sub-patterns of arity at most ten | registered | [H-327](hypotheses/H-327-n17-hard-tail-decomposability.md) | Numerical screening routes candidates; certify infeasibility before assigning minimum-arity conclusions |
+| 294 | The encoded centre-distance relaxations exclude no distance-2 orbit: each has exact unit-separated centres in its own cells, and every cell triple has a vertex with all three squared distances at least 1.33 | registered | [H-328](hypotheses/H-328-n17-centre-only-relaxations-are-blind.md) | Outcome known from the W2 review, pending a registering replay: eight exact first-eight LP survivors, so no Farkas certificate can exist; no weighted-vertex or SOS certificate of any order exists for any triple |
 | 295 | An exact dual-sheet patch certificate proves the widened projection theorem over the feature-forced angle box | registered | [H-329](hypotheses/H-329-n17-feature-forced-lp-terminal-certificate.md) | A terminal theorem fifty times larger than $1/5000$, as a list of exact rational duals; patch count under dual degeneracy is the risk |
 | 296 | The gap between exclusion reach and the terminal radius is confined to the two softest directions | registered | [H-330](hypotheses/H-330-n17-no-mans-land-map.md) | Replaces the two competing capture readings by a measurement, direction by direction |
 | 297 | Learned-weight angle splits (B2) bring branch and bound to the hard tail | registered | [H-331](hypotheses/H-331-n17-b2-branching-on-the-hard-tail.md) | The only measured lever on tree size; certificate size per orbit is the routing figure |
@@ -938,10 +938,10 @@ box-seeded kernel capture pilots.
 | 300 | A composition checker derives the residue and the theorem from the receipts and refuses every mutant | registered | [H-334](hypotheses/H-334-n17-composition-checker.md) | Per-entry caps are needed before any cap below $U$ exists; the n11 composer is the pattern |
 | 301 | The Rust and Python kernel verifiers agree on every admitted entry and refuse every mutant | registered | [H-335](hypotheses/H-335-n17-two-verifier-parity.md) | Same-object parity on the whole ledger makes the second checker load-bearing |
 | 302 | Every admitted certificate is hosted and one of each kind replays from a fresh clone | registered | [H-336](hypotheses/H-336-n17-fresh-clone-replay.md) | Today no admitted n17 certificate can be verified from a fresh clone |
-| 303 | The repaired n17 capture producer reproduces n11’s contraction from the cells | registered | [H-337](hypotheses/H-337-n11-capture-positive-control.md) | R9’s stage 0, selected on 6 October and never run; a pass reinstates the kernel route, a fail closes it |
+| 303 | The repaired n17 capture producer reproduces n11’s contraction from the cells | registered | [H-337](hypotheses/H-337-n11-capture-positive-control.md) | R9’s stage 0, selected on 6 October and never run; a bounded test of this repaired configuration, without an architectural impossibility conclusion |
 | 304 | Does a charge specialised to one occupancy state exclude it below $S^\ast$ | open question | [H-338](hypotheses/H-338-n17-state-conditioned-charge.md) | The only non-pairwise engine candidate for consistency-limited states |
 | 305 | A small feature-flip atlas doubles the terminal region’s radius | registered | [H-339](hypotheses/H-339-n17-feature-flip-atlas.md) | Only a handful of options can flip within $2\times10^{-2}$; each flip is one more LP |
-| 306 | The composed local theorem holds with every coordinate at least $1/1216$ | registered | [H-340](hypotheses/H-340-n17-per-coordinate-radius-composition.md) | The 3 October vector, registered as a round because H-329 and H-330 make it load-bearing |
+| 306 | The composed local theorem holds with every coordinate at least $1/1216$ | registered | [H-340](hypotheses/H-340-n17-per-coordinate-radius-composition.md) | Freeze the cube-form vector separately from the capture-form vector; require max radius ≤ slide radius and slide-coverage box contained in the local box |
 
 ## The n17 Program on Every Front — X-052
 
@@ -953,23 +953,26 @@ census and transfer rules reproduce from independent code, the endpoint algebra 
 local family theorem re-derive without a defect, and the two real gaps are the hard tail
 of the residue (per-state runs on three of its 95 distance-2 orbits, none closed) and
 capture from the cells (one round ever run).
-Its selection: admit issue 472’s twelve kernel certificates and convert the
-wall-anchored issue-413 rows to kernel certificates; measure the tail under the adaptive
-recipe; decide the capture engine from the real start point; enlarge the terminal
-theorem by exact dual sheets; price the outer bridge; and build the foolproof package.
+Its selection: admit issue 472’s twelve kernel certificates and test conversion of
+issue-413 rows with wall cells; measure the adaptive recipe on the tail; test capture
+from the cells; certify dual-sheet patches; price the corrected outer bridge; and build
+the foolproof package.
+Capped trials supply configuration-specific evidence.
+The mathematical review also gives smaller above-root caps and shared-pose or mixed-mode
+pilots as conditional candidates, without a new global exclusion or capture claim.
 It corrects H-337 (the hull-pull repair is merged), H-330 (its threshold is inconsistent
 with its slopes) and H-261 (the exchanged witness is a relabelled family member).
 
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
 | 307 | Issue 472’s twelve kernel certificates replay in full under a listed verifier with Rust parity and admit | registered | [H-341](hypotheses/H-341-n17-issue-472-kernel-admission.md) | $-1{,}047$ orbits for about two CPU-hours; the same format and frame as 59 admitted entries; custody and a verifier listing are the prerequisites |
-| 308 | The kernel producer closes most wall-anchored issue-413 rows that only branch and bound has reached | registered | [H-342](hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md) | Twelve of twelve wall-anchored arity-8 and 9 flags closed in minutes this week; branch and bound stays for interior crowds |
+| 308 | The kernel producer closes most issue-413 rows with wall cells that only branch and bound has reached | registered | [H-342](hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md) | Twelve of twelve flags with wall cells closed in minutes; wall-cell presence is a routing predictor to test, with actual seed ownership and propagation recorded |
 | 309 | At least half of the distance-2 residue orbits close under the adaptive-row kernel | registered | [H-343](hypotheses/H-343-n17-hard-tail-adaptive-measurement.md) | The tail is undersampled, not measured: no surviving distance-2 orbit has ever closed per state, and the recipe that closed 26 of 29 draws has run on one of the 95 (u1) |
-| 310 | Closed half-cell branch predicates close the consistency-limited stalls | registered | [H-344](hypotheses/H-344-n17-half-cell-branch-predicates.md) | The one grammar change aimed at the diagnosed mechanism; build only if H-343 makes the tail a grammar problem |
+| 310 | Closed half-cell branch predicates close the consistency-limited stalls | registered | [H-344](hypotheses/H-344-n17-half-cell-branch-predicates.md) | Closed children supply seed cores; prioritize from H-343’s bounded diagnostics, which cannot alone prove a grammar limitation |
 | 311 | Twenty rounds of the repaired capture producer from the family’s cells move something | registered | [H-345](hypotheses/H-345-n17-cell-seeded-twenty-round-capture.md) | The n17 analogue of the n11 root node, never run to a verdict; pairs with H-337 |
-| 312 | An angle branch and bound with Taylor-at-centre LP bounds prices the outer capture bridge | registered | [H-346](hypotheses/H-346-n17-angle-bb-knuth-estimate.md) | The only candidate with a soundness story for the cells-to-feature-forced bridge; a Knuth estimate before any run |
+| 312 | An angle branch and bound with retained affine LP models prices the outer capture bridge | registered | [H-346](hypotheses/H-346-n17-angle-bb-knuth-estimate.md) | Retain affine variation and prove all terminal premises for target packings normalized in $C(S^\ast)$, inside the outer cap search; price both leaf thresholds, with incomplete probes marked as truncated |
 | 313 | The capture-to-local conversion allowances are exact and small | registered | [H-347](hypotheses/H-347-n17-exact-conversion-allowances.md) | The one unwritten number between a capture receipt and the local theorem |
-| 314 | A second, LP-free checker reproduces the local theorem’s certificates and refuses mutants | registered | [H-348](hypotheses/H-348-n17-second-local-theorem-checker.md) | The local half of two-verifier parity; the certificate is a few hundred kilobytes of rationals |
+| 314 | A second, LP-free checker reproduces the local theorem’s certificates and refuses mutants | registered | [H-348](hypotheses/H-348-n17-second-local-theorem-checker.md) | Replay fixed data for both uniform-radius cases and the distinct cube/capture vectors; preserve whole-cell quadratic residual bounds |
 | 315 | The kernel closes most of the flagged selector classes on no contributor roster | registered | [H-349](hypotheses/H-349-n17-flagged-class-kernel-closure.md) | 34 of the 69 standing flags are on no contributor roster and remove at most about 200 orbits after everything reported; the other 35 are H-341, H-342 or H-332 targets or issue 413’s row 5; the stall list is the information either way |
 
 ## Dead ends

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import functools
 import gzip
 import hashlib
 import json
@@ -334,9 +335,21 @@ def test_acquisition_binds_all_nine_before_writing(
     assert acquisition["cases"][-2]["reported_metadata"]["squeezed"] is True
 
 
+@functools.cache
+def previous_source_case(n: int) -> str:
+    """Retain the complete SQUISH source state displaced by the Gupta intake."""
+    from devtools import register_gupta_reports as gupta  # noqa: PLC0415
+
+    if gupta.HISTORY.exists():
+        for row in gupta.read_history():
+            if row["n"] == n:
+                return row["frontier"]
+    return (second.REPO / f"packing/frontier/n-{n:03d}.md").read_text()
+
+
 def historical_second_report(n: int) -> str:
     """Project the historical source report and earlier ceiling without publishing it."""
-    current = (second.REPO / f"packing/frontier/n-{n:03d}.md").read_text()
+    current = previous_source_case(n)
     _, front, body = current.split("---\n", 2)
     document = safe_load(front)
     case = document["packing"]
@@ -395,7 +408,7 @@ def test_second_update_reconstructs_report_without_replacing_prior_verified_lane
 def test_second_update_refuses_unknown_confirmation_and_output_escape(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    text = (second.REPO / "packing/frontier/n-179.md").read_text()
+    text = previous_source_case(179)
     _, front, body = text.split("---\n", 2)
     document = safe_load(front)
     document["packing"]["verified_upper_bound"]["evidence"] = [

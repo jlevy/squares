@@ -25,6 +25,61 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/couzo_refinement_reports.py
+    kind: download
+    boundary: >-
+      Couzo's eight complete issue-451 rational certificates and decimal poses
+      are compared with their independently acquired external Git-blob and
+      original-byte roster before parsing. The acquisition map itself is
+      admitted against its frozen external-custody digest. Geometry decisions
+      use complete structural inputs and outcome fields, never source digests
+      or code pins.
+  - path: packing/devtools/couzo_extended_reports.py
+    kind: download
+    boundary: >-
+      Couzo's 73 source roles (72 blobs) for the twenty outside-horizon reports,
+      acquired from franciscouzo/square-packing and kept outside Git because
+      redistribution is not established. Expected values are the three commit and
+      tree ids in PINS, and the blob ids those trees bind once rebuilt in full against
+      their pinned roots. The acquired commit records and complete blob bytes are held
+      against them, catching a substituted or altered source. The retained facts are
+      rebuilt into each report's text and held against its tree-bound blob id, the only
+      retained witness of unretained bytes, catching an edited or rounded pose token;
+      the retained commit block, written from PINS, is compared whole, not label by
+      label. No digest names a file this repository wrote, decides geometry or pins code.
+  - path: packing/devtools/gupta_refinement_reports.py
+    kind: download
+    boundary: >-
+      Gupta's complete seventeen original issue-438 certificates and comparators
+      are compared with the independently reviewed external acquisition roster
+      before rational parsing. The roster itself is admitted against its frozen
+      external-custody digest. Native deciding inputs and complete outcome fields
+      are separately compared structurally; no checksum decides geometry or pins code.
+  - path: packing/devtools/ryxu_arrangement_reports.py
+    kind: external-checkout
+    boundary: >-
+      All 25 immutable external ry-xu certificate strings are held against the
+      acquisition pins when acquired and when recovered from copied private facts.
+      These digests bind external source bytes; complete geometry and actual deciding
+      outcomes are separately reconstructed and admitted, never inferred from a hash.
+  - path: packing/devtools/ryxu_radical_n51.py
+    kind: external-checkout
+    boundary: >-
+      The acquired external source root and its full selected n51 record are matched
+      to their reviewed acquisition pins. Complete generated native input/result
+      outcomes are also identified across the private-worker artifact-custody boundary.
+      This retains actual runtime evidence, without pinning this repository's source
+      or commits or replacing source reconstruction and fresh exact replay.
+  - path: packing/devtools/couzo_followup_reports.py
+    kind: download
+    boundary: >-
+      Couzo's five 2d32a6e rational certificates stay outside Git, so each one
+      rebuilt from its retained exact facts is held against its blob identity
+      under the pinned tree, whose root is rebuilt from every recorded leaf. The
+      same identities hold the decimal-pose, prose and outside-horizon roles and
+      the seven certificates the author calls unchanged against the issue-451
+      acquisition roster. Geometry is decided from the complete exact inputs;
+      no digest decides geometry or pins this repository's code.
   - path: packing/devtools/n17_shared_centre_lp.py
     kind: generated-artifact
     boundary: >-
@@ -166,6 +221,14 @@ allowlist:
   - path: packing/devtools/audit_s12_v11_certificate.py
     kind: download
     boundary: squarepacker's v1.1 certificate and Daniel's points against the digests the source and the 2 October packet pinned (#363).
+  - path: packing/devtools/wand125_fn1_bindings.py
+    kind: download
+    boundary: >-
+      Eight original FN-1 compressed inputs and the pinned external binding manifest
+      are compared with the raw byte hashes in the previously retained check2 receipts,
+      the byte-identical published candidates and their mathematical digests. These
+      comparisons close original external-input custody without geometric replay,
+      new bounds, assurance promotion or internal code/verdict hashes.
   - path: packing/devtools/audit_wand125_declared_net.py
     kind: download
     boundary: wand125's finer-net bundle, its candidate, axis tables and checker files against the digests its manifest and the n50 packet's upstream copy pin (#366).

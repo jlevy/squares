@@ -14,14 +14,14 @@
   </metadata>
   <rect width="1500" height="1120" fill="#ffffff" />
   <text x="40" y="44" fill="#17202a" font-size="27" font-weight="700" text-anchor="start">Non-grid contact-assembly profile · n = 1…100 calibration</text>
-  <text x="40" y="73" fill="#5c6673" font-size="16" font-weight="400" text-anchor="start">1,778/1,860 squares in 162 same-angle contact components · 26/36 cases within C≤6, F≤3</text>
+  <text x="40" y="73" fill="#5c6673" font-size="16" font-weight="400" text-anchor="start">1,755/1,860 squares in 165 same-angle contact components · 25/36 cases within C≤6, F≤3</text>
   <text x="1460" y="44" fill="#d95f02" font-size="14" font-weight="700" text-anchor="end">DESCRIPTIVE · NO VERDICT</text>
   <rect x="40" y="92" width="700" height="66" rx="12" fill="#f7f8fa" stroke="#1faa8e" stroke-width="2" />
   <text x="56" y="118" fill="#1faa8e" font-size="16" font-weight="700" text-anchor="start">Broad contact assembly</text>
-  <text x="56" y="143" fill="#17202a" font-size="14" font-weight="400" text-anchor="start">10 fully covered · 27 at least 90% · 33 at least 75% · 35 at least 50%</text>
+  <text x="56" y="143" fill="#17202a" font-size="14" font-weight="400" text-anchor="start">9 fully covered · 26 at least 90% · 33 at least 75% · 35 at least 50%</text>
   <rect x="760" y="92" width="700" height="66" rx="12" fill="#f7f8fa" stroke="#d95f02" stroke-width="2" />
   <text x="776" y="118" fill="#d95f02" font-size="16" font-weight="700" text-anchor="start">Narrow bars / Ls / rectangles</text>
-  <text x="776" y="143" fill="#17202a" font-size="14" font-weight="400" text-anchor="start">3 inside budget · 2 outside · 23 absent · 8 search-capped</text>
+  <text x="776" y="143" fill="#17202a" font-size="14" font-weight="400" text-anchor="start">3 inside budget · 2 outside · 24 absent · 7 search-capped</text>
   <text x="52" y="183" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">n · src</text>
   <text x="144" y="183" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">contact-covered squares</text>
   <text x="432" y="183" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">C</text>
@@ -238,18 +238,18 @@
   <text x="622" y="908" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">none</text>
   <text x="706" y="908" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
   <rect x="40" y="929" width="700" height="40" rx="7" fill="#f7f8fa" stroke="#e1e5ea" stroke-width="1" />
-  <circle cx="116" cy="949" r="5" fill="#1faa8e" />
+  <circle cx="116" cy="949" r="5" fill="#c3c45f" />
   <text x="52" y="954" fill="#17202a" font-size="14" font-weight="700" text-anchor="start">51</text>
-  <text x="124" y="953" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">K</text>
+  <text x="124" y="953" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">P</text>
   <rect x="144" y="941" width="198" height="15" rx="7.5" fill="#e5e9ee" />
-  <rect x="144" y="941" width="198.000" height="15" rx="7.5" fill="#1faa8e" />
+  <rect x="144" y="941" width="198.000" height="15" rx="7.5" fill="#c3c45f" />
   <text x="350" y="954" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">51/51</text>
-  <text x="432" y="954" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">7</text>
+  <text x="432" y="954" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">5</text>
   <text x="478" y="954" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">0</text>
-  <text x="520" y="954" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">14</text>
-  <text x="570" y="954" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">25</text>
+  <text x="520" y="954" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">18</text>
+  <text x="570" y="954" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">22</text>
   <text x="622" y="954" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">none</text>
-  <text x="706" y="954" fill="#d95f02" font-size="11" font-weight="700" text-anchor="start">no</text>
+  <text x="706" y="954" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
   <rect x="40" y="975" width="700" height="40" rx="7" fill="#ffffff" stroke="#e1e5ea" stroke-width="1" />
   <circle cx="116" cy="995" r="5" fill="#1faa8e" />
   <text x="52" y="1000" fill="#17202a" font-size="14" font-weight="700" text-anchor="start">52</text>
@@ -375,19 +375,19 @@
   <text x="1290" y="540" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">32</text>
   <text x="1342" y="540" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">none</text>
   <text x="1426" y="540" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
-  <rect x="760" y="561" width="700" height="40" rx="7" fill="#f7f8fa" stroke="#e1e5ea" stroke-width="1" />
-  <circle cx="836" cy="581" r="5" fill="#1faa8e" />
+  <rect x="760" y="561" width="700" height="40" rx="7" fill="#f7f8fa" stroke="#d95f02" stroke-width="1.5" />
+  <circle cx="836" cy="581" r="5" fill="#c3c45f" />
   <text x="772" y="586" fill="#17202a" font-size="14" font-weight="700" text-anchor="start">70</text>
-  <text x="844" y="585" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">K</text>
+  <text x="844" y="585" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">P</text>
   <rect x="864" y="573" width="198" height="15" rx="7.5" fill="#e5e9ee" />
-  <rect x="864" y="573" width="198.000" height="15" rx="7.5" fill="#1faa8e" />
-  <text x="1070" y="586" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">70/70</text>
-  <text x="1152" y="586" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">5</text>
-  <text x="1198" y="586" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">0</text>
-  <text x="1240" y="586" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">24</text>
-  <text x="1290" y="586" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">36</text>
+  <rect x="864" y="573" width="186.686" height="15" rx="7.5" fill="#c3c45f" />
+  <text x="1070" y="586" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">66/70</text>
+  <text x="1152" y="586" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">4</text>
+  <text x="1198" y="586" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">4</text>
+  <text x="1240" y="586" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">30</text>
+  <text x="1290" y="586" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">32</text>
   <text x="1342" y="586" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">none</text>
-  <text x="1426" y="586" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
+  <text x="1426" y="586" fill="#d95f02" font-size="11" font-weight="700" text-anchor="start">no</text>
   <rect x="760" y="607" width="700" height="40" rx="7" fill="#ffffff" stroke="#d95f02" stroke-width="1.5" />
   <circle cx="836" cy="627" r="5" fill="#1faa8e" />
   <text x="772" y="632" fill="#17202a" font-size="14" font-weight="700" text-anchor="start">71</text>
@@ -427,19 +427,19 @@
   <text x="1290" y="724" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">39</text>
   <text x="1342" y="724" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">none</text>
   <text x="1426" y="724" fill="#d95f02" font-size="11" font-weight="700" text-anchor="start">no</text>
-  <rect x="760" y="745" width="700" height="40" rx="7" fill="#f7f8fa" stroke="#e1e5ea" stroke-width="1" />
-  <circle cx="836" cy="765" r="5" fill="#1faa8e" />
+  <rect x="760" y="745" width="700" height="40" rx="7" fill="#f7f8fa" stroke="#d95f02" stroke-width="1.5" />
+  <circle cx="836" cy="765" r="5" fill="#c3c45f" />
   <text x="772" y="770" fill="#17202a" font-size="14" font-weight="700" text-anchor="start">84</text>
-  <text x="844" y="769" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">K</text>
+  <text x="844" y="769" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">P</text>
   <rect x="864" y="757" width="198" height="15" rx="7.5" fill="#e5e9ee" />
-  <rect x="864" y="757" width="193.286" height="15" rx="7.5" fill="#1faa8e" />
-  <text x="1070" y="770" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">82/84</text>
-  <text x="1152" y="770" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">3</text>
-  <text x="1198" y="770" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">2</text>
-  <text x="1240" y="770" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">36</text>
-  <text x="1290" y="770" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">37</text>
-  <text x="1342" y="770" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">search cap</text>
-  <text x="1426" y="770" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
+  <rect x="864" y="757" width="150.857" height="15" rx="7.5" fill="#c3c45f" />
+  <text x="1070" y="770" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">64/84</text>
+  <text x="1152" y="770" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">7</text>
+  <text x="1198" y="770" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">20</text>
+  <text x="1240" y="770" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">25</text>
+  <text x="1290" y="770" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">32</text>
+  <text x="1342" y="770" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">none</text>
+  <text x="1426" y="770" fill="#d95f02" font-size="11" font-weight="700" text-anchor="start">no</text>
   <rect x="760" y="791" width="700" height="40" rx="7" fill="#ffffff" stroke="#e1e5ea" stroke-width="1" />
   <circle cx="836" cy="811" r="5" fill="#1faa8e" />
   <text x="772" y="816" fill="#17202a" font-size="14" font-weight="700" text-anchor="start">85</text>
@@ -454,16 +454,16 @@
   <text x="1342" y="816" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">search cap</text>
   <text x="1426" y="816" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
   <rect x="760" y="837" width="700" height="40" rx="7" fill="#f7f8fa" stroke="#e1e5ea" stroke-width="1" />
-  <circle cx="836" cy="857" r="5" fill="#1faa8e" />
+  <circle cx="836" cy="857" r="5" fill="#c3c45f" />
   <text x="772" y="862" fill="#17202a" font-size="14" font-weight="700" text-anchor="start">86</text>
-  <text x="844" y="861" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">K</text>
+  <text x="844" y="861" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">P</text>
   <rect x="864" y="849" width="198" height="15" rx="7.5" fill="#e5e9ee" />
-  <rect x="864" y="849" width="195.698" height="15" rx="7.5" fill="#1faa8e" />
-  <text x="1070" y="862" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">85/86</text>
-  <text x="1152" y="862" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">4</text>
-  <text x="1198" y="862" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">1</text>
-  <text x="1240" y="862" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">35</text>
-  <text x="1290" y="862" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">35</text>
+  <rect x="864" y="849" width="193.395" height="15" rx="7.5" fill="#c3c45f" />
+  <text x="1070" y="862" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">84/86</text>
+  <text x="1152" y="862" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">6</text>
+  <text x="1198" y="862" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">2</text>
+  <text x="1240" y="862" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">38</text>
+  <text x="1290" y="862" fill="#17202a" font-size="12" font-weight="400" text-anchor="start">36</text>
   <text x="1342" y="862" fill="#d95f02" font-size="11" font-weight="400" text-anchor="start">none</text>
   <text x="1426" y="862" fill="#1faa8e" font-size="11" font-weight="700" text-anchor="start">yes</text>
   <rect x="760" y="883" width="700" height="40" rx="7" fill="#ffffff" stroke="#e1e5ea" stroke-width="1" />

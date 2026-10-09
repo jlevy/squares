@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import subprocess
+from html.parser import HTMLParser
 from unittest.mock import patch
 
 import pytest
@@ -11,12 +12,43 @@ from kpress.format.markdown import parse_markdown
 from devtools import site_math
 
 
+def rendered_math_elements(source: str) -> int:
+    """Count rendered elements, excluding selector text and other raw text."""
+
+    class RenderedMathCounter(HTMLParser):
+        def __init__(self) -> None:
+            super().__init__()
+            self.count = 0
+
+        def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+            if tag and ("data-kpress-math-rendered", "true") in attrs:
+                self.count += 1
+
+    parser = RenderedMathCounter()
+    parser.feed(source)
+    parser.close()
+    return parser.count
+
+
+def test_rendered_math_count_ignores_stylesheet_script_and_comment_text() -> None:
+    source = (
+        '<style>.kpress-math[data-kpress-math-rendered="true"] { contain: strict; }</style>'
+        '<script type="application/json">'
+        r'{"selector":"[data-kpress-math-rendered=\"true\"]"}'
+        "</script>"
+        '<!-- <span data-kpress-math-rendered="true"></span> -->'
+        '<span data-kpress-math-rendered="true"></span>'
+        '<span data-kpress-math-rendered="true"></span>'
+    )
+    assert rendered_math_elements(source) == 2
+
+
 def test_static_math_keeps_semantics_and_uses_the_text_context() -> None:
     fragment = parse_markdown(
         "Inline $x^2 + \\alpha$.\n\n$$\\frac{1}{2}$$", title="Mathematics"
     ).html
     page = site_math.prepare(f'<main>{fragment}<div class="sans-text">{fragment}</div></main>')
-    assert page.count('data-kpress-math-rendered="true"') == 4
+    assert rendered_math_elements(page) == 4
     assert page.count('class="katex-html"') == 4
     assert page.count("<math") == 4
     assert page.count('data-kpress-math-face="prose"') == 2

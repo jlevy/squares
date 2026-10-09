@@ -15,6 +15,9 @@ Each packet that stores files this way lists them in a README section headed
 ``## Compressed Files``: every row names the stored ``.gz`` path relative to the packet,
 the origin of the bytes (``upstream`` or ``receipt``), and the Git blob and SHA-256 of
 the decompressed bytes. ``check`` re-derives every row from the stored files.
+An explicitly retained upstream gzip belongs instead to ``## Original Gzip Files``:
+its Git blob and SHA-256 name the original compressed bytes, including its header.
+Readers still decompress gzip normally; only that separate custody table binds raw bytes.
 
 Usage (from ``packing/``)::
 
@@ -33,6 +36,7 @@ import io
 import os
 import subprocess
 import sys
+import zlib
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -43,6 +47,7 @@ MAX_DECOMPRESSED = 64 * 1024 * 1024
 DATA_SUFFIXES = frozenset({".json", ".jsonl", ".txt", ".log"})
 LINE_THRESHOLD = 1000
 HEADING = "## Compressed Files"
+ORIGINAL_GZIP_HEADING = "## Original Gzip Files"
 ORIGINS = frozenset({"upstream", "receipt"})
 #: A gzip member header with no optional fields (no name, comment or extra) and mtime 0.
 _DETERMINISTIC_HEADER = b"\x1f\x8b\x08\x00\x00\x00\x00\x00"
@@ -145,13 +150,13 @@ def describe(packet: Path, stored: Path, origin: str) -> Row:
     )
 
 
-def read_table(readme: Path) -> list[Row]:
+def read_table(readme: Path, *, heading: str = HEADING) -> list[Row]:
     """The rows of the README's ``Compressed Files`` table, in order."""
     lines = readme.read_text(encoding="utf-8").splitlines()
-    if HEADING not in lines:
+    if heading not in lines:
         return []
     rows: list[Row] = []
-    for line in lines[lines.index(HEADING) + 1 :]:
+    for line in lines[lines.index(heading) + 1 :]:
         if line.startswith("## "):
             break
         if not line.startswith("| `"):
@@ -163,14 +168,34 @@ def read_table(readme: Path) -> list[Row]:
     return rows
 
 
+def read_original_gzip_bytes(path: Path) -> bytes:
+    """Read bounded original compressed bytes, without archive recompression."""
+    return _bounded_read(path, MAX_COMPRESSED)
+
+
+def describe_original_gzip(packet: Path, stored: Path, origin: str = "upstream") -> Row:
+    """Bind an explicitly retained upstream gzip file's original compressed bytes."""
+    if origin != "upstream":
+        raise ValueError("original gzip files must be upstream bytes")
+    data = read_original_gzip_bytes(stored)
+    gunzip_bytes(data, name=str(stored))
+    return Row(
+        str(stored.relative_to(packet)),
+        origin,
+        git_blob(data),
+        hashlib.sha256(data).hexdigest(),
+    )
+
+
 def check_packet(packet: Path) -> list[str]:
     """Every problem with the packet's compressed files against its README table."""
     problems: list[str] = []
     rows = read_table(packet / "README.md")
-    listed = {row.stored for row in rows}
+    originals = read_table(packet / "README.md", heading=ORIGINAL_GZIP_HEADING)
+    listed = {row.stored for row in (*rows, *originals)}
     stored = {str(path.relative_to(packet)) for path in packet.rglob(f"*{GZIP_SUFFIX}")}
     problems.extend(f"{packet.name}: {name} is not in the table" for name in stored - listed)
-    if len(listed) != len(rows):
+    if len(listed) != len(rows) + len(originals):
         problems.append(f"{packet.name}: the table lists a file twice")
     for row in rows:
         path = packet / row.stored
@@ -181,6 +206,19 @@ def check_packet(packet: Path) -> list[str]:
             problems.append(f"{packet.name}: {row.stored} carries a name or timestamp")
         if describe(packet, path, row.origin) != row:
             problems.append(f"{packet.name}: {row.stored} differs from its table row")
+    for row in originals:
+        if row.stored not in stored:
+            problems.append(f"{packet.name}: {row.stored} is listed but absent")
+            continue
+        try:
+            found = describe_original_gzip(packet, packet / row.stored, row.origin)
+        except OSError, ValueError, EOFError, zlib.error:
+            problems.append(f"{packet.name}: {row.stored} is not a valid original gzip")
+            continue
+        if found != row:
+            problems.append(
+                f"{packet.name}: {row.stored} differs from its original-gzip table row"
+            )
     return problems
 
 

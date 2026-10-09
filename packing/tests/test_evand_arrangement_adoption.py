@@ -181,7 +181,7 @@ def test_unrelated_private_root_rejects_lexical_house_paths(
             f"packing/witnesses/known-best/n-{n:03d}.yaml"
         )
         assert problem is not None
-        assert "escapes" in problem
+        assert problem == "linked house requires its complete private selected frontier"
 
 
 def test_actual_snapshot_preserves_separate_alias_destinations(

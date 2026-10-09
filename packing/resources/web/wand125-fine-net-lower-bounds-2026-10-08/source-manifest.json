@@ -1,0 +1,1351 @@
+{
+  "source_revision": "61e37d583ad690266da2188ad027ef3f697bf162",
+  "source_repository": "wand125/square-packing",
+  "source_documents": [
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n19_L48275/ASSET.json",
+      "bytes": 1803,
+      "git_blob": "24730672bc8a46b709092541e075b6336427131f",
+      "sha256": "373afc7627c0949f9d2d83ffc7fd472df079efa2d11869a97fbccae633fcddf0",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n19_L48275/ASSET.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n19_L48275/README.md",
+      "bytes": 4257,
+      "git_blob": "243bdfa260b7813df6ff914feb7dbc817a35a816",
+      "sha256": "7bf2940e51906bb4dbba1c0b2a24c26febf6c815b47e1088487f59d86abc2c6f",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n19_L48275/README.md"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n19_L48275/bundle.json",
+      "bytes": 2348,
+      "git_blob": "e718096df758a17884dfef909d5c4bf01ba45f45",
+      "sha256": "c2d323d4441d5395b42d9b6ddb7ee0d8662ff2f7e515c6532281b61a3ba2a1a0",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n19_L48275/bundle.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n19_L48275/files-sha256.json",
+      "bytes": 1436,
+      "git_blob": "86f49d599695aedaed479c646ef5cf1feae1cbb3",
+      "sha256": "e7b98d026036e729a5c086a4dfb5d013d8f3fb49ad60f434912b7a9ab097194d",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n19_L48275/files-sha256.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n20_L49125/ASSET.json",
+      "bytes": 1850,
+      "git_blob": "149dc491097233e89d24b40bb0baed1167aed7e6",
+      "sha256": "f7cb9c570ed4d788c05b2ad8188e41f384c042692bcc1f50430fea522a1d8c0d",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n20_L49125/ASSET.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n20_L49125/README.md",
+      "bytes": 4253,
+      "git_blob": "abae3e2545c34583c81fb2836c702c460464a77b",
+      "sha256": "f7d5c080f39c5f98c4e5ce550ec837074c05b0fdcc9589aa9c6fcf72e5625501",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n20_L49125/README.md"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n20_L49125/bundle.json",
+      "bytes": 2345,
+      "git_blob": "264578f9a6ce9791e7a1f315ab7e68cb4f4d4e99",
+      "sha256": "d39ad1260cbc02cc50630793d4dcb24ebbf13f149e6031b99469bce3a9aa2319",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n20_L49125/bundle.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n20_L49125/files-sha256.json",
+      "bytes": 1436,
+      "git_blob": "62184ef6a2236246ec021fd4730c8469eff405fb",
+      "sha256": "07c804cc7e9910d6964161d1ea1e02a275c2b6d6d2d51de311d6ce5a923e0d01",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n20_L49125/files-sha256.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n26_L5555/ASSET.json",
+      "bytes": 1791,
+      "git_blob": "81b5748ca874cd277d533f0d562b8015b96b25cc",
+      "sha256": "4e458cac9343c10f6cc97a8482fd41d986c42b410f0a793ff4a835be515ed03f",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n26_L5555/ASSET.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n26_L5555/README.md",
+      "bytes": 4255,
+      "git_blob": "52e5b218e727e533e2436bc03587665669f20bcb",
+      "sha256": "ee4a8ab61fb5718b188d9e5b14819aaebdd87802c3d2e46690ef3267b9366702",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n26_L5555/README.md"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n26_L5555/bundle.json",
+      "bytes": 2348,
+      "git_blob": "a9aa606f6601db02025e1cc3dbb8cbca0c0bab74",
+      "sha256": "c113cd9f8906f604425748a123c80d8568caf29ea1267369945f6dac691354b2",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n26_L5555/bundle.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n26_L5555/files-sha256.json",
+      "bytes": 1436,
+      "git_blob": "ec55da3aa9f8f1924ccb1e6d8ce3e4ff70433da1",
+      "sha256": "127485e6566fe54783eb5f37094c7c707590272d9fe937d78b369e229e04a870",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n26_L5555/files-sha256.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n27_L56525/ASSET.json",
+      "bytes": 1803,
+      "git_blob": "fd35b2cbff1d534c74efff88e56965657bed1e1f",
+      "sha256": "73a7db2a68f62a6d1dfa9401a3cb7f08d81b910b161b8efa8bd07638db91d338",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n27_L56525/ASSET.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n27_L56525/README.md",
+      "bytes": 4259,
+      "git_blob": "ec5c278f869b6f58eeb2dae685f3ef0c0f9bd03e",
+      "sha256": "3d4aead98cd1296e327863d735bb00415aa6bc721f74183132900a4d6533d842",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n27_L56525/README.md"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n27_L56525/bundle.json",
+      "bytes": 2355,
+      "git_blob": "1059c7469a97a990e97a497b4bf68321a48d07d0",
+      "sha256": "12b92385bdbdb5eede3db3879899b054e215a5ca377a8437d25c7296f4c59b30",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n27_L56525/bundle.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n27_L56525/files-sha256.json",
+      "bytes": 1436,
+      "git_blob": "00770906c79351a727fdb624524b35b976b3451f",
+      "sha256": "504a4144bac89ea7a95c937e55a6bacfa3b372f21cf75bf063a00c16d7746eb7",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n27_L56525/files-sha256.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n28_L574/ASSET.json",
+      "bytes": 1777,
+      "git_blob": "2c1db67cd6fa9538efe6972572d3794798d6f16d",
+      "sha256": "fb7367347bbdb62f9c9ceaabdbeb52b8deb006ab9dc3c078dbf8221f9d49c5af",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n28_L574/ASSET.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n28_L574/README.md",
+      "bytes": 4243,
+      "git_blob": "9adb00afd8fcf045c1fd16d4edae2656b89d0308",
+      "sha256": "a83acc76bd78566028055bd50b91937b54a6a15f371f31efe9abe54d86c505ce",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n28_L574/README.md"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n28_L574/bundle.json",
+      "bytes": 2334,
+      "git_blob": "2d09c21d6a0ffd02cb487a9a430f5230935b1f14",
+      "sha256": "556aef0ea11a1efadf7aeaf3116f594ed46d9b7f4771501aebe37752c323d2ee",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n28_L574/bundle.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n28_L574/files-sha256.json",
+      "bytes": 1436,
+      "git_blob": "6cb30b263cc6facec9ed163c31756fd6ce3c4cbb",
+      "sha256": "cde16040e51dc1a6c33ec40ab0fdba908eddca24e6e49d24f93c2f29c7495b4f",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n28_L574/files-sha256.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n29_L5815/ASSET.json",
+      "bytes": 1791,
+      "git_blob": "0b8a5f169180e7a7f955d27effd3b6d218ae41c1",
+      "sha256": "c034406c19c771d79bce1f253f14dbd2cc0794f3c6138e413df3377d7e422027",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n29_L5815/ASSET.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n29_L5815/README.md",
+      "bytes": 4247,
+      "git_blob": "e25376f231a61c3f575f6ef6e4cb49d28ece6fa8",
+      "sha256": "83816b683a18a9070d89434a5386c0695d14f83071383966c280b093db80e008",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n29_L5815/README.md"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n29_L5815/bundle.json",
+      "bytes": 2337,
+      "git_blob": "98280ed28fc994f518e77a3d53fcd0dbeb41ab48",
+      "sha256": "0fcedbc1113e5d206f2ae4f755102d663934b0c8b447acb837f1f19aa787e14c",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n29_L5815/bundle.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n29_L5815/files-sha256.json",
+      "bytes": 1436,
+      "git_blob": "c81b73c91194dbca9f20693af782198ef850eddc",
+      "sha256": "c44f81e1e0cbd36395477a28e6985fc2d556acaada74d7da1186d099cebc0bb6",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n29_L5815/files-sha256.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n31_L597/ASSET.json",
+      "bytes": 1778,
+      "git_blob": "bc0a25de272cef8918263693565b96ca25d9ed2f",
+      "sha256": "47ee634617ed2db60207930d7d97a9e2348f8a47448e8d888c047884f04e4ed2",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n31_L597/ASSET.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n31_L597/README.md",
+      "bytes": 4155,
+      "git_blob": "539672b0deb137d3e63ec79f98c32699e80a3835",
+      "sha256": "75670019f47e653cf3599e4e886cf0f703c05b774d2214f4d78548fdde301cae",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n31_L597/README.md"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n31_L597/bundle.json",
+      "bytes": 2337,
+      "git_blob": "385491240cf762b6f92ececd7c3ae53fc9ba4584",
+      "sha256": "ad639881a88b5f305ef60780ee29aa9fb3ca0bd6648b6ce9eb278f62c2ef41a6",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n31_L597/bundle.json"
+    },
+    {
+      "path": "problems/square-lower-bounds/certificates/mixed_n31_L597/files-sha256.json",
+      "bytes": 1436,
+      "git_blob": "ea5627f3353887fec86ad3f47b6abdf41c3e4073",
+      "sha256": "d5e4e35eaa0cc876fa42a04344176d9f9f2d77e893d418f73df9f39eef55a8e9",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n31_L597/files-sha256.json"
+    },
+    {
+      "path": "LICENSE.md",
+      "bytes": 603,
+      "git_blob": "68202e27c08e82db2ee09b0ff5dee11fa1bb7c8d",
+      "sha256": "5dbc1f8b773b0a66c3d8b4ebf034a8cd795df418652ce8bf2020cb21b1597960",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/LICENSE.md"
+    },
+    {
+      "path": "problems/square-lower-bounds/LICENSE",
+      "bytes": 1064,
+      "git_blob": "bbfbff131ef8ccbba5ed8b8b395f2c457eb8922c",
+      "sha256": "c0dd43e7892932c81335f74a2fdbf1a98f5977bab14c0c4c30e3abcc97c34904",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/LICENSE"
+    }
+  ],
+  "source_document_files": 30,
+  "source_document_bytes": 70385,
+  "original_archives": [
+    {
+      "url": "https://github.com/wand125/square-packing/releases/download/square-lower-bounds-v1/certificates__mixed_n19_L48275.tar.gz",
+      "asset": "certificates__mixed_n19_L48275.tar.gz",
+      "bytes": 597835,
+      "sha256": "9d1aea51ce0c1cb91aa0bf1e6c69398296ca201e087e76e2f75f720577598ccb"
+    },
+    {
+      "url": "https://github.com/wand125/square-packing/releases/download/square-lower-bounds-v1/certificates__mixed_n20_L49125.tar.gz",
+      "asset": "certificates__mixed_n20_L49125.tar.gz",
+      "bytes": 614741,
+      "sha256": "0ccc62a01c26f62d833f6b1551d8acfacffdbc2434274d45f9636a0174ccfb76"
+    },
+    {
+      "url": "https://github.com/wand125/square-packing/releases/download/square-lower-bounds-v1/certificates__mixed_n26_L5555.tar.gz",
+      "asset": "certificates__mixed_n26_L5555.tar.gz",
+      "bytes": 635440,
+      "sha256": "ae4dc5e8054207b1c01a3f2cd1cdb818af313b8fd97adfabddc8862279ab1074"
+    },
+    {
+      "url": "https://github.com/wand125/square-packing/releases/download/square-lower-bounds-v1/certificates__mixed_n27_L56525.tar.gz",
+      "asset": "certificates__mixed_n27_L56525.tar.gz",
+      "bytes": 613535,
+      "sha256": "577c3fb7fcc2e322f04174d658a32b659b91fbb4270922302d77fab0a4d64a8e"
+    },
+    {
+      "url": "https://github.com/wand125/square-packing/releases/download/square-lower-bounds-v1/certificates__mixed_n28_L574.tar.gz",
+      "asset": "certificates__mixed_n28_L574.tar.gz",
+      "bytes": 417077,
+      "sha256": "c12828fbe4c4436f84fede820caf815f58ee22cfff269ca08c8df1d02d8aff46"
+    },
+    {
+      "url": "https://github.com/wand125/square-packing/releases/download/square-lower-bounds-v1/certificates__mixed_n29_L5815.tar.gz",
+      "asset": "certificates__mixed_n29_L5815.tar.gz",
+      "bytes": 430893,
+      "sha256": "ad0f699937141e6e988bb249fe909496b26532de85b063307d2ed352b165ee00"
+    },
+    {
+      "url": "https://github.com/wand125/square-packing/releases/download/square-lower-bounds-v1/certificates__mixed_n31_L597.tar.gz",
+      "asset": "certificates__mixed_n31_L597.tar.gz",
+      "bytes": 408510,
+      "sha256": "184276c1e559b8683da3692acde97ebdbb548df1fcb2761e8c424bfe99d6bd4e"
+    }
+  ],
+  "total_original_archive_bytes": 3718031,
+  "custody": "All seven complete original release assets match declared sizes/digests. Outer and nested safe unique ordinary-member inventories and every sealed bundle manifest entry were independently checked. This establishes source-byte custody, not native proof outcomes.",
+  "bounded_nested_inventory": {
+    "decoded_bound_per_archive": 67108864,
+    "max_observed_bytes_once_per_distinct_subarchive": 2532104,
+    "measurement_scope": "Outer plus one decoding of each repeated byte-identical inner/source/log object percase; not fully materialized duplicate expansion.",
+    "cases": [
+      {
+        "certificate": "mixed_n19_L48275",
+        "outer_member_inventory": [
+          {
+            "path": "certificates/mixed_n19_L48275/candidate.json",
+            "bytes": 97586,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n19_L48275/check2/control-197_200.jsonl.gz",
+            "bytes": 15696,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n19_L48275/check2/control.json",
+            "bytes": 353,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n19_L48275/check2/receipt.json",
+            "bytes": 3002,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n19_L48275/check2/run.jsonl.gz",
+            "bytes": 174176,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n19_L48275/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "bytes": 69540,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n19_L48275/n19-L4.8275-check2-bundle.tar.gz",
+            "bytes": 313813,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n19_L48275/verification/prepublication-receipt.json",
+            "bytes": 894,
+            "type": "file"
+          }
+        ],
+        "outer_safe_unique_ordinary": true,
+        "sealed_inner_manifest_entries": [
+          {
+            "path": "README.md",
+            "sha256": "a5764f0092b8ead25b2b521b01e5729790467db9c33abc644fd00c04d473cb4f"
+          },
+          {
+            "path": "bundle.json",
+            "sha256": "c2d323d4441d5395b42d9b6ddb7ee0d8662ff2f7e515c6532281b61a3ba2a1a0"
+          },
+          {
+            "path": "candidate.json",
+            "sha256": "20dcda3541e139f79a9aec6e3bd469bb5dc8ccbb2c837aa18d49a0e708e5fe90"
+          },
+          {
+            "path": "check2/control-197_200.jsonl.gz",
+            "sha256": "8671cc5101ce11bd71bb4b2a2b3a4f99e5f3b715b6c8d7448dba845c1232b118"
+          },
+          {
+            "path": "check2/control.json",
+            "sha256": "f2f74fd9194e6e0831c9e4737bfca8adf35855ffbb138f047f739a52176a33be"
+          },
+          {
+            "path": "check2/receipt.json",
+            "sha256": "c455338ebbad44d1104c4727fa1f3af383b52c9c57ae47e3628935cd7346e8a7"
+          },
+          {
+            "path": "check2/run.jsonl.gz",
+            "sha256": "d497fe7b8d667ff318afb9c871cdcc0c3942fa218bc09754944201914c597b7d"
+          },
+          {
+            "path": "check2/src/INDEPENDENCE.md",
+            "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6"
+          },
+          {
+            "path": "check2/src/REPRODUCE.md",
+            "sha256": "c810bad48155011257dcc4a7a0459bcefebbbccac3fb4495f9df870aefdcb533"
+          },
+          {
+            "path": "check2/src/SOUNDNESS.md",
+            "sha256": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86"
+          },
+          {
+            "path": "check2/src/SPEC.md",
+            "sha256": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1"
+          },
+          {
+            "path": "check2/src/UPSTREAM_COMMIT",
+            "sha256": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3"
+          },
+          {
+            "path": "check2/src/fine_net_check.sh",
+            "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36"
+          },
+          {
+            "path": "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81"
+          },
+          {
+            "path": "provenance/search-notes.md",
+            "sha256": "21813bbbb3fd2c432d14ede624429865343d6a4863d5c012052433e0f421ec5f"
+          }
+        ],
+        "inner_members": 20,
+        "sealed_manifest_entries_checked": 15,
+        "six_common_outer_inner_payloads_byte_equal": [
+          "candidate.json",
+          "check2/control-197_200.jsonl.gz",
+          "check2/control.json",
+          "check2/receipt.json",
+          "check2/run.jsonl.gz",
+          "check2/src/sqverify-proof-net-fe12e036c.tar.gz"
+        ],
+        "decoded_log_identities": {
+          "check2/run.jsonl.gz": {
+            "bytes": 888564,
+            "sha256": "098733898c2f8855314e49ba2fe16821ac463f46de458a8dc98503a83e05a02a",
+            "lines": 2074
+          },
+          "check2/control-197_200.jsonl.gz": {
+            "bytes": 41525,
+            "sha256": "8bb4246d25076ec927a620056187d8803a30360fd5fb493964f3222eba4556a2",
+            "lines": 33
+          }
+        },
+        "pinned_readme_equals_sealed_readme": false,
+        "pinned_bundle_and_files_manifest_equal_sealed": true,
+        "sealed_readme_hash_scope": "README entry names sealed inner edition; current pinned source README is separately identified in source_documents.",
+        "cumulative_decoded_bytes_once_per_distinct_subarchive": 2343209
+      },
+      {
+        "certificate": "mixed_n20_L49125",
+        "outer_member_inventory": [
+          {
+            "path": "certificates/mixed_n20_L49125/candidate.json",
+            "bytes": 134063,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n20_L49125/check2/control-197_200.jsonl.gz",
+            "bytes": 19186,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n20_L49125/check2/control.json",
+            "bytes": 353,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n20_L49125/check2/receipt.json",
+            "bytes": 2999,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n20_L49125/check2/run.jsonl.gz",
+            "bytes": 173421,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n20_L49125/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "bytes": 69540,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n20_L49125/n20-L4.9125-check2-bundle.tar.gz",
+            "bytes": 321737,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n20_L49125/verification/prepublication-receipt.json",
+            "bytes": 894,
+            "type": "file"
+          }
+        ],
+        "outer_safe_unique_ordinary": true,
+        "sealed_inner_manifest_entries": [
+          {
+            "path": "README.md",
+            "sha256": "98625c26f06fa2e3757d6cf07a5c73e24f12dee7358bb025f3effa936f712dca"
+          },
+          {
+            "path": "bundle.json",
+            "sha256": "d39ad1260cbc02cc50630793d4dcb24ebbf13f149e6031b99469bce3a9aa2319"
+          },
+          {
+            "path": "candidate.json",
+            "sha256": "dc6321dd0478625ef0a164749754657331c73ecfdf7212523edb3d0f2dfd7187"
+          },
+          {
+            "path": "check2/control-197_200.jsonl.gz",
+            "sha256": "52331a5cf510cda5ba6f0730322593d8e0084cfd1b239a66f28b0ac27a0a83e4"
+          },
+          {
+            "path": "check2/control.json",
+            "sha256": "b837a58eaedea75d9812898bfc250c38941cbdda21686f6cbf25c3a74117d74d"
+          },
+          {
+            "path": "check2/receipt.json",
+            "sha256": "e4d5b39f526a4c29485eded71125c184a65345d9c01e8a0a15243df043dd415e"
+          },
+          {
+            "path": "check2/run.jsonl.gz",
+            "sha256": "0fcf0bec91ef550fe489b179ab621e0cb135f24c55be80729aa182973cf03fe1"
+          },
+          {
+            "path": "check2/src/INDEPENDENCE.md",
+            "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6"
+          },
+          {
+            "path": "check2/src/REPRODUCE.md",
+            "sha256": "c810bad48155011257dcc4a7a0459bcefebbbccac3fb4495f9df870aefdcb533"
+          },
+          {
+            "path": "check2/src/SOUNDNESS.md",
+            "sha256": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86"
+          },
+          {
+            "path": "check2/src/SPEC.md",
+            "sha256": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1"
+          },
+          {
+            "path": "check2/src/UPSTREAM_COMMIT",
+            "sha256": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3"
+          },
+          {
+            "path": "check2/src/fine_net_check.sh",
+            "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36"
+          },
+          {
+            "path": "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81"
+          },
+          {
+            "path": "provenance/search-notes.md",
+            "sha256": "21813bbbb3fd2c432d14ede624429865343d6a4863d5c012052433e0f421ec5f"
+          }
+        ],
+        "inner_members": 20,
+        "sealed_manifest_entries_checked": 15,
+        "six_common_outer_inner_payloads_byte_equal": [
+          "candidate.json",
+          "check2/control-197_200.jsonl.gz",
+          "check2/control.json",
+          "check2/receipt.json",
+          "check2/run.jsonl.gz",
+          "check2/src/sqverify-proof-net-fe12e036c.tar.gz"
+        ],
+        "decoded_log_identities": {
+          "check2/run.jsonl.gz": {
+            "bytes": 886144,
+            "sha256": "4feea648b82e36dcc935488142870f05df83846552801049427843f93b3adb91",
+            "lines": 2074
+          },
+          "check2/control-197_200.jsonl.gz": {
+            "bytes": 48654,
+            "sha256": "1c4abbdc8f1a4816ba1c0388f2e97835ed38a252a08c5155ad8a1b906dddb596",
+            "lines": 33
+          }
+        },
+        "pinned_readme_equals_sealed_readme": false,
+        "pinned_bundle_and_files_manifest_equal_sealed": true,
+        "sealed_readme_hash_scope": "README entry names sealed inner edition; current pinned source README is separately identified in source_documents.",
+        "cumulative_decoded_bytes_once_per_distinct_subarchive": 2429838
+      },
+      {
+        "certificate": "mixed_n26_L5555",
+        "outer_member_inventory": [
+          {
+            "path": "certificates/mixed_n26_L5555/candidate.json",
+            "bytes": 175432,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n26_L5555/check2/control-197_200.jsonl.gz",
+            "bytes": 18775,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n26_L5555/check2/control.json",
+            "bytes": 353,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n26_L5555/check2/receipt.json",
+            "bytes": 3000,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n26_L5555/check2/run.jsonl.gz",
+            "bytes": 175224,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n26_L5555/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "bytes": 69540,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n26_L5555/n26-L5.555-check2-bundle.tar.gz",
+            "bytes": 332597,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n26_L5555/verification/prepublication-receipt.json",
+            "bytes": 893,
+            "type": "file"
+          }
+        ],
+        "outer_safe_unique_ordinary": true,
+        "sealed_inner_manifest_entries": [
+          {
+            "path": "README.md",
+            "sha256": "35a30966d0583453149cc445fc23d2c6cb0d902a51c6dfc575c2a26d1e056913"
+          },
+          {
+            "path": "bundle.json",
+            "sha256": "c113cd9f8906f604425748a123c80d8568caf29ea1267369945f6dac691354b2"
+          },
+          {
+            "path": "candidate.json",
+            "sha256": "a3a3d93b81e201a4fdc8c454a929ad3d20eb10875eab46611302a796256ea9a3"
+          },
+          {
+            "path": "check2/control-197_200.jsonl.gz",
+            "sha256": "1c743f78bdfcce3fbd734b8acced662dcd82312bb2f83e7a57d2099e2993834f"
+          },
+          {
+            "path": "check2/control.json",
+            "sha256": "b837a58eaedea75d9812898bfc250c38941cbdda21686f6cbf25c3a74117d74d"
+          },
+          {
+            "path": "check2/receipt.json",
+            "sha256": "10666d9e969ac5b24349f57959be50b2beaa8964dbb82419f1d7589d8903ffa1"
+          },
+          {
+            "path": "check2/run.jsonl.gz",
+            "sha256": "43f9be3f55ed5eabfb225e0ea7eaeb9d62aef44ddc9b5ebee483b477301bfb1d"
+          },
+          {
+            "path": "check2/src/INDEPENDENCE.md",
+            "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6"
+          },
+          {
+            "path": "check2/src/REPRODUCE.md",
+            "sha256": "c810bad48155011257dcc4a7a0459bcefebbbccac3fb4495f9df870aefdcb533"
+          },
+          {
+            "path": "check2/src/SOUNDNESS.md",
+            "sha256": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86"
+          },
+          {
+            "path": "check2/src/SPEC.md",
+            "sha256": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1"
+          },
+          {
+            "path": "check2/src/UPSTREAM_COMMIT",
+            "sha256": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3"
+          },
+          {
+            "path": "check2/src/fine_net_check.sh",
+            "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36"
+          },
+          {
+            "path": "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81"
+          },
+          {
+            "path": "provenance/search-notes.md",
+            "sha256": "21813bbbb3fd2c432d14ede624429865343d6a4863d5c012052433e0f421ec5f"
+          }
+        ],
+        "inner_members": 20,
+        "sealed_manifest_entries_checked": 15,
+        "six_common_outer_inner_payloads_byte_equal": [
+          "candidate.json",
+          "check2/control-197_200.jsonl.gz",
+          "check2/control.json",
+          "check2/receipt.json",
+          "check2/run.jsonl.gz",
+          "check2/src/sqverify-proof-net-fe12e036c.tar.gz"
+        ],
+        "decoded_log_identities": {
+          "check2/run.jsonl.gz": {
+            "bytes": 886906,
+            "sha256": "815c85f04aa8ed0e840c5fa00442234385c5c9cb423289a59ad05c7722cb9009",
+            "lines": 2074
+          },
+          "check2/control-197_200.jsonl.gz": {
+            "bytes": 47758,
+            "sha256": "932a1d71f674ded9951bcfbe65246340ed7a58e16e1014562766b3bd53c37756",
+            "lines": 33
+          }
+        },
+        "pinned_readme_equals_sealed_readme": false,
+        "pinned_bundle_and_files_manifest_equal_sealed": true,
+        "sealed_readme_hash_scope": "README entry names sealed inner edition; current pinned source README is separately identified in source_documents.",
+        "cumulative_decoded_bytes_once_per_distinct_subarchive": 2532104
+      },
+      {
+        "certificate": "mixed_n27_L56525",
+        "outer_member_inventory": [
+          {
+            "path": "certificates/mixed_n27_L56525/candidate.json",
+            "bytes": 144685,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n27_L56525/check2/control-197_200.jsonl.gz",
+            "bytes": 15901,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n27_L56525/check2/control.json",
+            "bytes": 353,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n27_L56525/check2/receipt.json",
+            "bytes": 3001,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n27_L56525/check2/run.jsonl.gz",
+            "bytes": 174859,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n27_L56525/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "bytes": 69540,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n27_L56525/n27-L5.6525-check2-bundle.tar.gz",
+            "bytes": 321664,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n27_L56525/verification/prepublication-receipt.json",
+            "bytes": 894,
+            "type": "file"
+          }
+        ],
+        "outer_safe_unique_ordinary": true,
+        "sealed_inner_manifest_entries": [
+          {
+            "path": "README.md",
+            "sha256": "4d0c7ffef9f1bed30c8edee96b548daff64a71d5006c285e9df70d8196b08328"
+          },
+          {
+            "path": "bundle.json",
+            "sha256": "12b92385bdbdb5eede3db3879899b054e215a5ca377a8437d25c7296f4c59b30"
+          },
+          {
+            "path": "candidate.json",
+            "sha256": "31a9b8df237b56c8b709e6f88d59f6c3cf9282a5445040fadd3d7184d26d16d0"
+          },
+          {
+            "path": "check2/control-197_200.jsonl.gz",
+            "sha256": "a2918e830080585434e9403902fc32e3f61086f4ec8c7c6cbb6aba4eccb819b8"
+          },
+          {
+            "path": "check2/control.json",
+            "sha256": "ea68c08a330da9a96abd0cf68a1ffb018757bd64fa43a21553f7cd935e854959"
+          },
+          {
+            "path": "check2/receipt.json",
+            "sha256": "b4e95613a67ba8d5b6b55d81b82853de5dbb67d797375c1b4408dbe61f3625c3"
+          },
+          {
+            "path": "check2/run.jsonl.gz",
+            "sha256": "de9d0e0c59e5d42124c7ea41823eabfe100a94525f6289ac552573b3bd8cc46a"
+          },
+          {
+            "path": "check2/src/INDEPENDENCE.md",
+            "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6"
+          },
+          {
+            "path": "check2/src/REPRODUCE.md",
+            "sha256": "c810bad48155011257dcc4a7a0459bcefebbbccac3fb4495f9df870aefdcb533"
+          },
+          {
+            "path": "check2/src/SOUNDNESS.md",
+            "sha256": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86"
+          },
+          {
+            "path": "check2/src/SPEC.md",
+            "sha256": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1"
+          },
+          {
+            "path": "check2/src/UPSTREAM_COMMIT",
+            "sha256": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3"
+          },
+          {
+            "path": "check2/src/fine_net_check.sh",
+            "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36"
+          },
+          {
+            "path": "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81"
+          },
+          {
+            "path": "provenance/search-notes.md",
+            "sha256": "21813bbbb3fd2c432d14ede624429865343d6a4863d5c012052433e0f421ec5f"
+          }
+        ],
+        "inner_members": 20,
+        "sealed_manifest_entries_checked": 15,
+        "six_common_outer_inner_payloads_byte_equal": [
+          "candidate.json",
+          "check2/control-197_200.jsonl.gz",
+          "check2/control.json",
+          "check2/receipt.json",
+          "check2/run.jsonl.gz",
+          "check2/src/sqverify-proof-net-fe12e036c.tar.gz"
+        ],
+        "decoded_log_identities": {
+          "check2/run.jsonl.gz": {
+            "bytes": 885326,
+            "sha256": "fe636e254fb544b833249de56e76cc08fe0c0cb59959c1b4bfd738fa736ef0d8",
+            "lines": 2074
+          },
+          "check2/control-197_200.jsonl.gz": {
+            "bytes": 42147,
+            "sha256": "83abf6b92991f6a5e75f10d7086052d73309beef347d0ed93bb24ced7bf9469d",
+            "lines": 33
+          }
+        },
+        "pinned_readme_equals_sealed_readme": false,
+        "pinned_bundle_and_files_manifest_equal_sealed": true,
+        "sealed_readme_hash_scope": "README entry names sealed inner edition; current pinned source README is separately identified in source_documents.",
+        "cumulative_decoded_bytes_once_per_distinct_subarchive": 2442993
+      },
+      {
+        "certificate": "mixed_n28_L574",
+        "outer_member_inventory": [
+          {
+            "path": "certificates/mixed_n28_L574/candidate.json",
+            "bytes": 151920,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n28_L574/check2/control-197_200.jsonl.gz",
+            "bytes": 17397,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n28_L574/check2/control.json",
+            "bytes": 353,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n28_L574/check2/receipt.json",
+            "bytes": 2991,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n28_L574/check2/run.jsonl.gz",
+            "bytes": 72635,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n28_L574/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "bytes": 69540,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n28_L574/n28-L5.74-check2-bundle.tar.gz",
+            "bytes": 223990,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n28_L574/verification/prepublication-receipt.json",
+            "bytes": 888,
+            "type": "file"
+          }
+        ],
+        "outer_safe_unique_ordinary": true,
+        "sealed_inner_manifest_entries": [
+          {
+            "path": "README.md",
+            "sha256": "cb85894925ba4dbcf8159ed0ec83728a24bf5a042de3d2d2abd6ac6ae348c52a"
+          },
+          {
+            "path": "bundle.json",
+            "sha256": "556aef0ea11a1efadf7aeaf3116f594ed46d9b7f4771501aebe37752c323d2ee"
+          },
+          {
+            "path": "candidate.json",
+            "sha256": "71ee7b8736de67a2cf8257b4504cb9ac497cd5a214ea0813e05fd0d8bae69f17"
+          },
+          {
+            "path": "check2/control-197_200.jsonl.gz",
+            "sha256": "8718f29afa123c2b8cf0d34447431f0b2eebfb42c23e4c989da4853a865a7718"
+          },
+          {
+            "path": "check2/control.json",
+            "sha256": "5c0cb143d208865e75b533e85bf2a28314879e2571d183b5a4f024849625c85c"
+          },
+          {
+            "path": "check2/receipt.json",
+            "sha256": "9f9568f5f2dbb7745c498af7c21ac8acc7ad6a4a7ac26a7a6799df3dc0080963"
+          },
+          {
+            "path": "check2/run.jsonl.gz",
+            "sha256": "faea30d907a9e74bdc9e843ffe82d0b4809a743f3a36ab19a5b661ac7eb055ab"
+          },
+          {
+            "path": "check2/src/INDEPENDENCE.md",
+            "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6"
+          },
+          {
+            "path": "check2/src/REPRODUCE.md",
+            "sha256": "c810bad48155011257dcc4a7a0459bcefebbbccac3fb4495f9df870aefdcb533"
+          },
+          {
+            "path": "check2/src/SOUNDNESS.md",
+            "sha256": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86"
+          },
+          {
+            "path": "check2/src/SPEC.md",
+            "sha256": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1"
+          },
+          {
+            "path": "check2/src/UPSTREAM_COMMIT",
+            "sha256": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3"
+          },
+          {
+            "path": "check2/src/fine_net_check.sh",
+            "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36"
+          },
+          {
+            "path": "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81"
+          },
+          {
+            "path": "provenance/search-notes.md",
+            "sha256": "21813bbbb3fd2c432d14ede624429865343d6a4863d5c012052433e0f421ec5f"
+          }
+        ],
+        "inner_members": 20,
+        "sealed_manifest_entries_checked": 15,
+        "six_common_outer_inner_payloads_byte_equal": [
+          "candidate.json",
+          "check2/control-197_200.jsonl.gz",
+          "check2/control.json",
+          "check2/receipt.json",
+          "check2/run.jsonl.gz",
+          "check2/src/sqverify-proof-net-fe12e036c.tar.gz"
+        ],
+        "decoded_log_identities": {
+          "check2/run.jsonl.gz": {
+            "bytes": 355453,
+            "sha256": "e07767c53ef4cdf4bbfe56290561a33895c35388b88135ac0afca899f60d747d",
+            "lines": 833
+          },
+          "check2/control-197_200.jsonl.gz": {
+            "bytes": 45192,
+            "sha256": "7171e0a95a00692af1a09389a67b14b9cab02cad6a76e6a490c228cffa2a301c",
+            "lines": 33
+          }
+        },
+        "pinned_readme_equals_sealed_readme": false,
+        "pinned_bundle_and_files_manifest_equal_sealed": true,
+        "sealed_readme_hash_scope": "README entry names sealed inner edition; current pinned source README is separately identified in source_documents.",
+        "cumulative_decoded_bytes_once_per_distinct_subarchive": 1629445
+      },
+      {
+        "certificate": "mixed_n29_L5815",
+        "outer_member_inventory": [
+          {
+            "path": "certificates/mixed_n29_L5815/candidate.json",
+            "bytes": 148098,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n29_L5815/check2/control-197_200.jsonl.gz",
+            "bytes": 25818,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n29_L5815/check2/control.json",
+            "bytes": 353,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n29_L5815/check2/receipt.json",
+            "bytes": 2995,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n29_L5815/check2/run.jsonl.gz",
+            "bytes": 72244,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n29_L5815/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "bytes": 69540,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n29_L5815/n29-L5.815-check2-bundle.tar.gz",
+            "bytes": 230647,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n29_L5815/verification/prepublication-receipt.json",
+            "bytes": 889,
+            "type": "file"
+          }
+        ],
+        "outer_safe_unique_ordinary": true,
+        "sealed_inner_manifest_entries": [
+          {
+            "path": "README.md",
+            "sha256": "b12a632d5dbe835450b15bb41320f97796dc2a487731a733704f1c42235e4037"
+          },
+          {
+            "path": "bundle.json",
+            "sha256": "0fcedbc1113e5d206f2ae4f755102d663934b0c8b447acb837f1f19aa787e14c"
+          },
+          {
+            "path": "candidate.json",
+            "sha256": "8d398fefc97c4d4a52d4818bb727645e435de922dd4e72b2c46e83f3a9160c28"
+          },
+          {
+            "path": "check2/control-197_200.jsonl.gz",
+            "sha256": "e49eb830472cd26f18392caface7eaeca8c9f926e836f54d3ec6f367a2c0c090"
+          },
+          {
+            "path": "check2/control.json",
+            "sha256": "cc0aff9cf36bae0d17b46903331787a8ce51be152c05de0913366e637999f81c"
+          },
+          {
+            "path": "check2/receipt.json",
+            "sha256": "32c98a978148c361e557356737ca98ffeefa9594b4fcadbb4a85f9b897e412d8"
+          },
+          {
+            "path": "check2/run.jsonl.gz",
+            "sha256": "e344cd6cc605ef206b39f21430170c5977fb9fecc62b76db5286775277018fc1"
+          },
+          {
+            "path": "check2/src/INDEPENDENCE.md",
+            "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6"
+          },
+          {
+            "path": "check2/src/REPRODUCE.md",
+            "sha256": "c810bad48155011257dcc4a7a0459bcefebbbccac3fb4495f9df870aefdcb533"
+          },
+          {
+            "path": "check2/src/SOUNDNESS.md",
+            "sha256": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86"
+          },
+          {
+            "path": "check2/src/SPEC.md",
+            "sha256": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1"
+          },
+          {
+            "path": "check2/src/UPSTREAM_COMMIT",
+            "sha256": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3"
+          },
+          {
+            "path": "check2/src/fine_net_check.sh",
+            "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36"
+          },
+          {
+            "path": "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81"
+          },
+          {
+            "path": "provenance/search-notes.md",
+            "sha256": "21813bbbb3fd2c432d14ede624429865343d6a4863d5c012052433e0f421ec5f"
+          }
+        ],
+        "inner_members": 20,
+        "sealed_manifest_entries_checked": 15,
+        "six_common_outer_inner_payloads_byte_equal": [
+          "candidate.json",
+          "check2/control-197_200.jsonl.gz",
+          "check2/control.json",
+          "check2/receipt.json",
+          "check2/run.jsonl.gz",
+          "check2/src/sqverify-proof-net-fe12e036c.tar.gz"
+        ],
+        "decoded_log_identities": {
+          "check2/run.jsonl.gz": {
+            "bytes": 355101,
+            "sha256": "fcd9ec0810e6a77c004be04d16b992dd209aea31b1a94ffafd3f7af461694616",
+            "lines": 833
+          },
+          "check2/control-197_200.jsonl.gz": {
+            "bytes": 62248,
+            "sha256": "841c242af454bc233848e362a642651baec80fb425ad1cb3473bc6dc7b1767e8",
+            "lines": 33
+          }
+        },
+        "pinned_readme_equals_sealed_readme": false,
+        "pinned_bundle_and_files_manifest_equal_sealed": true,
+        "sealed_readme_hash_scope": "README entry names sealed inner edition; current pinned source README is separately identified in source_documents.",
+        "cumulative_decoded_bytes_once_per_distinct_subarchive": 1666629
+      },
+      {
+        "certificate": "mixed_n31_L597",
+        "outer_member_inventory": [
+          {
+            "path": "certificates/mixed_n31_L597/candidate.json",
+            "bytes": 113106,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n31_L597/check2/control-197_200.jsonl.gz",
+            "bytes": 20883,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n31_L597/check2/control.json",
+            "bytes": 353,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n31_L597/check2/receipt.json",
+            "bytes": 2909,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n31_L597/check2/run.jsonl.gz",
+            "bytes": 72339,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n31_L597/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "bytes": 69540,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n31_L597/n31-L5.97-check2-bundle.tar.gz",
+            "bytes": 218911,
+            "type": "file"
+          },
+          {
+            "path": "certificates/mixed_n31_L597/verification/prepublication-receipt.json",
+            "bytes": 888,
+            "type": "file"
+          }
+        ],
+        "outer_safe_unique_ordinary": true,
+        "sealed_inner_manifest_entries": [
+          {
+            "path": "README.md",
+            "sha256": "aaa5a33a0b5542bb37c800ea90112a8b814768fe83de445707a8405eb2f4f5c3"
+          },
+          {
+            "path": "bundle.json",
+            "sha256": "ad639881a88b5f305ef60780ee29aa9fb3ca0bd6648b6ce9eb278f62c2ef41a6"
+          },
+          {
+            "path": "candidate.json",
+            "sha256": "f0da15363a5b794c173322a3c4b95e9723c4aae26e89d50ee4a15699a4a2fe9a"
+          },
+          {
+            "path": "check2/control-197_200.jsonl.gz",
+            "sha256": "6faf707274a2a5f7b44cc2deac47de7c0fefc050877d46bd8ed0bbb8faa209e4"
+          },
+          {
+            "path": "check2/control.json",
+            "sha256": "b837a58eaedea75d9812898bfc250c38941cbdda21686f6cbf25c3a74117d74d"
+          },
+          {
+            "path": "check2/receipt.json",
+            "sha256": "e7537d809f6c04dbd64dd195e9b321e64a7d7c01624e2c80e68b975da780fb8b"
+          },
+          {
+            "path": "check2/run.jsonl.gz",
+            "sha256": "1f66cae92bdefe4ba1b0966f2e6e2903ad91392f8f886ef9ceaefda07fdbf88b"
+          },
+          {
+            "path": "check2/src/INDEPENDENCE.md",
+            "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6"
+          },
+          {
+            "path": "check2/src/REPRODUCE.md",
+            "sha256": "8753eb72145eeac43f61353a3737b6afc9120a11d84c82cc9afabb685ae25481"
+          },
+          {
+            "path": "check2/src/SOUNDNESS.md",
+            "sha256": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86"
+          },
+          {
+            "path": "check2/src/SPEC.md",
+            "sha256": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1"
+          },
+          {
+            "path": "check2/src/UPSTREAM_COMMIT",
+            "sha256": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3"
+          },
+          {
+            "path": "check2/src/fine_net_check.sh",
+            "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36"
+          },
+          {
+            "path": "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+            "sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81"
+          },
+          {
+            "path": "provenance/search-notes.md",
+            "sha256": "21813bbbb3fd2c432d14ede624429865343d6a4863d5c012052433e0f421ec5f"
+          }
+        ],
+        "inner_members": 20,
+        "sealed_manifest_entries_checked": 15,
+        "six_common_outer_inner_payloads_byte_equal": [
+          "candidate.json",
+          "check2/control-197_200.jsonl.gz",
+          "check2/control.json",
+          "check2/receipt.json",
+          "check2/run.jsonl.gz",
+          "check2/src/sqverify-proof-net-fe12e036c.tar.gz"
+        ],
+        "decoded_log_identities": {
+          "check2/run.jsonl.gz": {
+            "bytes": 355055,
+            "sha256": "cc67cbe45d65cfcb42a5fd1ab02c3658899a24d8d35978af9d036cbc8f8b1d35",
+            "lines": 833
+          },
+          "check2/control-197_200.jsonl.gz": {
+            "bytes": 52156,
+            "sha256": "a22c200f70f0b74c58d897cd6f57c7070a2bf801fe0d2fd727cb68983883821d",
+            "lines": 33
+          }
+        },
+        "pinned_readme_equals_sealed_readme": false,
+        "pinned_bundle_and_files_manifest_equal_sealed": true,
+        "sealed_readme_hash_scope": "README entry names sealed inner edition; current pinned source README is separately identified in source_documents.",
+        "cumulative_decoded_bytes_once_per_distinct_subarchive": 1564331
+      }
+    ]
+  },
+  "common_verifier_source": {
+    "archive_path": "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+    "sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81",
+    "ordinary_members": 23,
+    "regular_files": 20,
+    "regular_bytes": 234071,
+    "decoded_tar_bytes": 256000,
+    "files": [
+      {
+        "path": "sqverify_fast/.gitignore",
+        "bytes": 8,
+        "sha256": "b53ee26e6ff1da219b0563333a76d2c9ec19eec713d6ee54e11a1edacb0e9f3d"
+      },
+      {
+        "path": "sqverify_fast/Cargo.lock",
+        "bytes": 6976,
+        "sha256": "5c3206fa1eeabb23d52e93d76eec0d2c16820e6065ce02e8e13a7fa47693785c"
+      },
+      {
+        "path": "sqverify_fast/Cargo.toml",
+        "bytes": 1508,
+        "sha256": "df5e6c24699f934dcabe1119273621ac332dfcd9c75dd0650acacfc827466665"
+      },
+      {
+        "path": "sqverify_fast/INDEPENDENCE.md",
+        "bytes": 12283,
+        "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6"
+      },
+      {
+        "path": "sqverify_fast/README.md",
+        "bytes": 5096,
+        "sha256": "bb10f6e771ded24cc998749e6f63165d991d45dc0b488f07e92c788e4b67513e"
+      },
+      {
+        "path": "sqverify_fast/SOUNDNESS.md",
+        "bytes": 34095,
+        "sha256": "8e7a6180c6623496e5097b343183daa86bfa514fb8a876ea9ca5e8ef5cf05b59"
+      },
+      {
+        "path": "sqverify_fast/build.rs",
+        "bytes": 1712,
+        "sha256": "1e238378117bc7716e50cdd4e3d0d3862e756e1ff863794b9b559ffe4b2743e6"
+      },
+      {
+        "path": "sqverify_fast/clippy.toml",
+        "bytes": 58,
+        "sha256": "741d8b6cbd57d7b01ff8918083bbf313e281cce0dbdcb1ed669dc8cb84f44578"
+      },
+      {
+        "path": "sqverify_fast/independence-record.yaml",
+        "bytes": 8144,
+        "sha256": "2c3dd9edb7066cbb87fef26d3bac48039cf5ad64f738fd2a5271b2d735b04882"
+      },
+      {
+        "path": "sqverify_fast/rust-toolchain.toml",
+        "bytes": 86,
+        "sha256": "495c69d1db93f25f53e3d0d2d40d812313366cc368de317871c2ace6c6ffafa4"
+      },
+      {
+        "path": "sqverify_fast/src/axis.rs",
+        "bytes": 7198,
+        "sha256": "bf18bd9a0a82806bac6a3aa82df73349944eaa56a22ae5a9b67a67ab3d237e97"
+      },
+      {
+        "path": "sqverify_fast/src/certificate.rs",
+        "bytes": 31964,
+        "sha256": "934df119402c84c05eefe7b2fd933044d1da3127c72873af143961f3ec301d25"
+      },
+      {
+        "path": "sqverify_fast/src/exact.rs",
+        "bytes": 8350,
+        "sha256": "b9d627b740c8a0c7ed069c1faac2563b9db72c03c10c9f88fb3c0234054f481a"
+      },
+      {
+        "path": "sqverify_fast/src/interval.rs",
+        "bytes": 8484,
+        "sha256": "287da6570dfc1278e3ba6b4c09bfaca6409d16fba0713329bf0c4a5dcbfe5e56"
+      },
+      {
+        "path": "sqverify_fast/src/lib.rs",
+        "bytes": 7777,
+        "sha256": "2b44e7d227574971cb000231274f9ce783bf70cdaf19debc7a83e9468fbdc53f"
+      },
+      {
+        "path": "sqverify_fast/src/main.rs",
+        "bytes": 11446,
+        "sha256": "e4a65d9570a5f91f41474a20c3c90e8804da568c11d32ca632da59605f5f84e8"
+      },
+      {
+        "path": "sqverify_fast/src/oracle.rs",
+        "bytes": 5788,
+        "sha256": "3c993d66c6edb3a235a3e089a586bb4b42de02fb331fc519836b22cadb99c151"
+      },
+      {
+        "path": "sqverify_fast/src/rotated.rs",
+        "bytes": 42225,
+        "sha256": "4bf878c4d0e8acaedcccedbfb52d8885e1ba2657876bad2048fe30e5f3c7ded3"
+      },
+      {
+        "path": "sqverify_fast/src/rotated_tests.rs",
+        "bytes": 13209,
+        "sha256": "0e9861a4a8fa2242ebde3e39bc109fe2bb0745e874595c10e777b1f652c7b7b6"
+      },
+      {
+        "path": "sqverify_fast/tests/adversarial.rs",
+        "bytes": 27664,
+        "sha256": "6261babe3bb834ab170a933ea65af4faebfeb8aede76aba675891db97c3e485b"
+      }
+    ],
+    "declared_repository": "jlevy/squares",
+    "declared_branch": "wand125/sqverify-proof-net",
+    "declared_commit": "fe12e036c",
+    "declared_commit_api": "unavailable; attribution remains source assertion, not absence of archived source",
+    "inner_bundle_upstream_commit": {
+      "path": "check2/src/UPSTREAM_COMMIT",
+      "text": "42534d959d668c5e03839dc87f9e628fa4fc2d83",
+      "scope": "Inside the inner check2 bundle, not the20file verifier-source tar"
+    },
+    "observed_archived_build_digest": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+    "alternative_source": {
+      "repository": "wand125/square-packing-tools",
+      "commit": "5fba675",
+      "path": "fine_net_verifier",
+      "acquired": false
+    }
+  },
+  "license": {
+    "repository": "mixed licenses; nearest enclosing LICENSE applies",
+    "project": "MIT; Copyright (c) 2026 wand125",
+    "project_notice": {
+      "path": "problems/square-lower-bounds/LICENSE",
+      "bytes": 1064,
+      "git_blob": "bbfbff131ef8ccbba5ed8b8b395f2c457eb8922c",
+      "sha256": "c0dd43e7892932c81335f74a2fdbf1a98f5977bab14c0c4c30e3abcc97c34904",
+      "url": "https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/LICENSE"
+    },
+    "third_party_archive_licenses": "Complete nested source retained and member/body notice search performed; no separate notice found. Upstream/third-party redistribution rights remain unresolved."
+  },
+  "license_disposition": "Enclosing project MIT notice retained, but common nested verifier has no separate notice. Its actual upstream provenance/license and any third-party components must be independently reviewed before raw source redistribution; no blanket MIT assumption for nested source.",
+  "public_raw_source_redistributed": false,
+  "author_code_executed": false,
+  "scientific_deciders": 0
+}

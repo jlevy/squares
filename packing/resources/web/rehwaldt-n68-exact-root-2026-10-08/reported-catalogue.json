@@ -1,0 +1,66 @@
+{
+  "source_revision": "495238e3d5a542008ff2f01a1dbbb78527cbe732",
+  "release": "v1.2.0",
+  "issue": "https://github.com/jlevy/squares/issues/428#issuecomment-6050646954",
+  "source_url": "https://github.com/lollipoll/certified-square-packing-68/tree/495238e3d5a542008ff2f01a1dbbb78527cbe732",
+  "source_author": "Seth Rehwaldt",
+  "disclosed_assistance": "OpenAI Codex",
+  "intake_bead": "think-nv5o",
+  "claims": [
+    {
+      "id": "exact-root-feasibility",
+      "n": 68,
+      "definition": "L*=z*[136] (zero-based), where z* is the unique zero of 153 ordered rational polynomials in the retained closed infinity box of radius 10^-100.",
+      "assurance": "reported",
+      "project_replay": "not-attempted",
+      "geometry_inventory": {
+        "unit_frames": 68,
+        "unit_frame_identities": 204,
+        "unordered_pairs": 2278,
+        "pair_vertex_predicates": 9112,
+        "corner_wall_predicates": 1088,
+        "total_geometry_predicates": 10200,
+        "source_exact_zero_predicates": 255,
+        "source_strictly_positive_predicates": 9945
+      },
+      "defining_inputs": [
+        {
+          "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/results/reduced/system.json",
+          "url": "https://github.com/lollipoll/certified-square-packing-68/blob/495238e3d5a542008ff2f01a1dbbb78527cbe732/proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/results/reduced/system.json"
+        },
+        {
+          "upstream_path": "proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/results/reduced/root_witness.json",
+          "url": "https://github.com/lollipoll/certified-square-packing-68/blob/495238e3d5a542008ff2f01a1dbbb78527cbe732/proofs/2026-10-07-root-feasibility/reviewed/2026-10-07-root-feasibility/released/campaign/results/reduced/root_witness.json"
+        }
+      ]
+    },
+    {
+      "id": "restricted-same-root-attainment",
+      "n": 68,
+      "definition": "F0..F144 held equalities and eight signed F145..F152 inequalities with signs [1,1,1,1,1,-1,1,1], eight shared-angle groups, 35 fixed half-angle poses and 22 coordinate gauges in radius 10^-11 around the same rational center.",
+      "assurance": "reported",
+      "project_replay": "not-attempted",
+      "excluded_inferences": [
+        "unrestricted local optimality",
+        "global optimality",
+        "unrestricted lower bound",
+        "univariate minimal polynomial"
+      ]
+    }
+  ],
+  "source_replay": {
+    "attribution": "author-provided receipts only",
+    "reported_seconds": 16.098,
+    "project_execution": false
+  },
+  "retention": {
+    "public_packet": "authored factual metadata and complete external-byte hash manifest only",
+    "original_publication": "preserved outside live Git",
+    "whole_publication_license": "not-observed",
+    "daniel_comparison_notice": "limited to comparison material; no blanket grant inferred"
+  },
+  "existing_result": "T-118 finite rational V3/C3 result and all standing bounds remain unchanged",
+  "selection": "No numeric frontier selection is made by this attributed inventory.",
+  "source_release_published_utc": "2026-10-08T02:01:23Z",
+  "source_release_local_date": "2026-10-07 America/Chicago"
+}
