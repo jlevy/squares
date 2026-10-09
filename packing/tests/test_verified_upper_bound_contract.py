@@ -137,6 +137,10 @@ DECLARED_CONSUMERS = {
         "fractions, and refuse altered ceiling data or proved status; no display window "
         "establishes s(n)"
     ),
+    "packing/tests/test_reported_exact_roots.py": (
+        "names the field only to assert that source-only root rows carry no certified "
+        "ceiling; it reads no bound value and infers no geometry or optimality"
+    ),
     "packing/devtools/squish_second_update_confirmation.py": (
         "publishes the admitted complete exact replay as a feasible upper ceiling, "
         "retaining earlier ceilings and refusing optimality claims"
