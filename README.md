@@ -101,7 +101,7 @@ refinement, and upper-bound certification
 
 The independent
 [Exact Side Values for Packing Unit Squares](packing/devtools/templates/exact-side-values-article.md)
-is generated from the [exact-values register](packing/frontier/exact-values.json).
+is generated from the [exact-values register](packing/frontier/exact-values.json.gz).
 It assembles 320 exact current sides across $n = 1\ldots324$ and 170 historical
 polynomial entries, with every coefficient, source locator and algebraic certificate.
 Historical examples reach $n = 2135$; source-invalid proposals retain their flags.
@@ -138,7 +138,7 @@ The rest of this README is about that work.
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for $n = 1\ldots324$, with reported and verified bounds kept separate |
-| [**Exact side values**](packing/frontier/exact-values.json) | Certified current side expressions and polynomials, historical source polynomials, and remaining exact-value routes |
+| [**Exact side values**](packing/frontier/exact-values.json.gz) | Certified current side expressions and polynomials, historical source polynomials, and remaining exact-value routes |
 | [**Atlas**](packing/atlas/README.md) | Known-best and prospective packings, contact-scaffold enumeration, and deterministic renderings |
 | [**Literature**](packing/resources/README.md) | Retained primary sources, cleaned transcriptions, raw extractions, and the [maintained index of upstream repositories](packing/resources/README.md#recent-external-github-repositories) we integrate from |
 | [**Reports**](#reports) | Research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |

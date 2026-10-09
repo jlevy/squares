@@ -1681,7 +1681,7 @@ def test_generated_image_omissions_keep_scientific_producers_and_inputs() -> Non
         "atlas/enumerated/contact-scaffolds-size5.json",
         "atlas/rendering/manifest.json",
         "atlas/rendering/metrics.json",
-        "frontier/exact-values.json",
+        "frontier/exact-values.json.gz",
         "frontier/exact-values.schema.yaml",
         "frontier/results.yaml",
         "frontier/evidence.yaml",

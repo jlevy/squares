@@ -582,7 +582,7 @@ Those definitions apply in the campaign artifacts and the beads too, not only he
 
 ### Exact-Side Collection, October 8
 
-The [exact-values register](packing/frontier/exact-values.json) assembles 320 exact
+The [exact-values register](packing/frontier/exact-values.json.gz) assembles 320 exact
 current sides for $n = 1\ldots324$: 176 integer, 62 rational, 65 radical closed forms
 and 17 minimal-polynomial sides.
 The degree-672 polynomial at $n = 83$ is retained in full and independently checked; its

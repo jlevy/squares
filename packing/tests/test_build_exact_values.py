@@ -1790,10 +1790,10 @@ def test_the_totals_partition_the_range() -> None:
     entries = list(_entries().values())
     totals = register["totals"]
     assert sum(totals[state] for state in exact.STATES) == len(entries) == 324
-    assert [totals[state] for state in exact.STATES] == [176, 62, 65, 17, 0, 4]
+    assert [totals[state] for state in exact.STATES] == [176, 63, 65, 17, 0, 3]
     assert totals["proved"] == 77
     with_polynomial = sum(1 for entry in entries if entry["polynomial"] is not None)
-    assert totals["irreducible-certified"] == totals["root-isolated"] == with_polynomial
+    assert totals["irreducible-certified"] == totals["root-isolated"] == with_polynomial == 321
 
 
 def test_record_hunt_is_noncurrent_and_preserves_current_case_identity() -> None:
@@ -1831,8 +1831,11 @@ def test_record_hunt_is_noncurrent_and_preserves_current_case_identity() -> None
 
 
 def test_every_numeric_only_count_names_its_route_and_bead() -> None:
+    entries = _entries()
+    numeric = {n for n, entry in entries.items() if entry["state"] == "numeric-only"}
+    assert numeric == {29, 55, 71}
     without_kkt_point = []
-    for n, entry in _entries().items():
+    for n, entry in entries.items():
         if entry["state"] != "numeric-only":
             continue
         routes = [note for note in entry["notes"] if note["kind"] == "route"]
@@ -1842,16 +1845,25 @@ def test_every_numeric_only_count_names_its_route_and_bead() -> None:
             assert "No confirmed KKT local minimum" in routes[0]["text"]
             without_kkt_point.append(n)
     assert without_kkt_point == []
-    assert any(
-        "No exact KKT point" in note["text"] and "ideal contact research open" in note["text"]
-        for note in _entries()[105]["notes"]
-        if note["kind"] == "route"
-    )
-    assert _entries()[29]["notes"][0]["bead"] == "think-je8y"
-    assert _entries()[83]["state"] == "minimal-polynomial"
-    assert _entries()[83]["degree"] == 672
-    assert _entries()[83]["checks"]["catalogue"] == "matches-svg"
-    assert _entries()[83]["checks"]["root"]["source_index"] == {"stated": 27, "counted": None}
+    # The current finite n105 identity resolves representation, not ideal geometry.
+    finite = entries[105]
+    assert finite["state"] == "rational"
+    assert finite["status"] == "open"
+    assert finite["side"]["relation"] == "upper-bound"
+    assert finite["kkt"] is None
+    (ideal,) = [
+        note
+        for note in finite["notes"]
+        if note["kind"] == "route" and note["bead"] == "think-gl59"
+    ]
+    assert "No confirmed KKT local minimum is retained" in ideal["text"]
+    assert "ideal contact research open" in ideal["text"]
+    assert any(note["kind"] == "verified-witness-side" for note in finite["notes"])
+    assert entries[29]["notes"][0]["bead"] == "think-je8y"
+    assert entries[83]["state"] == "minimal-polynomial"
+    assert entries[83]["degree"] == 672
+    assert entries[83]["checks"]["catalogue"] == "matches-svg"
+    assert entries[83]["checks"]["root"]["source_index"] == {"stated": 27, "counted": None}
 
 
 # A complete degree-672 replay is measured at 31.67s: kept in the slow lane.
@@ -1961,9 +1973,15 @@ def test_stale_plain_register_update_preserves_transitional_storage(
 def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
     entries = _entries()
     numeric = {n for n, entry in entries.items() if entry["state"] == "numeric-only"}
-    finite = set(VERIFIED_FALLBACK_COUNTS)
-    assert numeric == {29, 55, 71, 105}
-    assert len(finite) == 33
+    native = set(VERIFIED_FALLBACK_COUNTS)
+    refinements = {68, 105, 292}
+    finite = native | refinements
+    assert len(ORIGINAL_VERIFIED_FALLBACK_COUNTS) == 33
+    assert len(native) == 31
+    assert native.isdisjoint(refinements)
+    assert numeric == {29, 55, 71}
+    assert len(finite) == 34
+    assert len(exact.ROUTES) == 37
     assert numeric.isdisjoint(finite)
     assert numeric | finite == set(exact.ROUTES)
     for n in numeric | finite:
@@ -1993,9 +2011,12 @@ def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
                 for note in entries[n]["notes"]
                 if note["kind"] in {"verified-witness-side", "verified-bound-ceiling"}
             ]
-            assert provenance["kind"] == (
-                "verified-bound-ceiling" if n == 292 else "verified-witness-side"
-            ), n
+            # The old n292 ceiling is tested against its retained prior-state record.
+            # Every current finite case is a native or explicit witness-side identity.
+            assert provenance["kind"] == "verified-witness-side", n
+            side = Fraction(entry["exact_form"])
+            assert side == Fraction(entry["side"]["value"]), n
+            assert entry["checks"]["root"]["interval"] == [str(side), str(side)], n
     assert exact.ROUTES[55][0] != exact.ROUTES[71][0]
     assert entries[126]["state"] == "rational"
     assert 126 not in exact.ROUTES

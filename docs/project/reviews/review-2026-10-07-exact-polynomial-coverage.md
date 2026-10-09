@@ -17,9 +17,10 @@ The new
 [source packet](../../../packing/resources/web/kingbird-exact-side-facts-2026-10-07/README.md)
 retains pinned SVG facts at $n = 55,71,83,126$ and a complete bounded extraction of
 printed integer polynomials from retained Kingbird comparison articles and explicit
-thematic locators. The [generated register](../../../packing/frontier/exact-values.json)
-recorded 270 exact current sides and 162 historical entries at the initial 2026-10-07
-collection; 54 current sides then remained numeric.
+thematic locators. The
+[generated register](../../../packing/frontier/exact-values.json.gz) recorded 270 exact
+current sides and 162 historical entries at the initial 2026-10-07 collection; 54
+current sides then remained numeric.
 
 The historical corpus contains 201 source occurrences and 182 distinct triples of count,
 historical printed side and coefficient array, with no unparsed rows.

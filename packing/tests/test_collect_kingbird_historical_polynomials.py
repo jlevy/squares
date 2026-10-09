@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import gzip
 import json
 from pathlib import Path
 
@@ -11,11 +12,42 @@ import pytest
 from devtools.collect_kingbird_historical_polynomials import (
     DEFAULT_OUTPUT,
     HistoricalPolynomialError,
+    _current_entries,  # pyright: ignore[reportPrivateUsage]
     collect_source,
     read_latex_integer_polynomial,
     validate,
     verify_source_identity,
 )
+
+
+@pytest.mark.parametrize("storage", ["plain", "gzip", "both", "gzip-path"])
+def test_current_relationships_read_lossless_plain_or_compressed_register(
+    storage: str,
+    tmp_path: Path,
+) -> None:
+    entries = [
+        {
+            "n": 83,
+            "side": {"value": "9.25"},
+            "polynomial": {"coefficients": ["1", "0", "-" + "9" * 724]},
+        }
+    ]
+    raw = json.dumps({"register": {"entries": entries}}).encode()
+    source = tmp_path / "exact-values.json"
+    packed = source.with_name(source.name + ".gz")
+    if storage in {"plain", "both"}:
+        source.write_bytes(raw)
+    if storage in {"gzip", "both", "gzip-path"}:
+        packed.write_bytes(gzip.compress(raw, mtime=0))
+    assert _current_entries(packed if storage == "gzip-path" else source) == {83: entries[0]}
+
+
+def test_current_relationships_refuse_conflicting_retained_copies(tmp_path: Path) -> None:
+    source = tmp_path / "exact-values.json"
+    source.write_text('{"register": {"entries": []}}', encoding="utf-8")
+    source.with_name(source.name + ".gz").write_bytes(gzip.compress(b"{}", mtime=0))
+    with pytest.raises(ValueError, match="differs from its compressed"):
+        _current_entries(source)
 
 
 def test_reads_a_printed_integer_polynomial_without_accepting_an_extension() -> None:

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import gzip
 import json
 import os
 import shutil
@@ -11,10 +12,12 @@ from typing import Any
 
 import pytest
 
+from devtools import exact_catalogue
 from devtools.measure_exact_catalogue_web import (
     check_projection,
     initial_assets,
     local_path,
+    measure,
     working_tree_dirty,
 )
 from devtools.report_exact_catalogue_web import CAMPAIGN, report
@@ -103,6 +106,68 @@ def test_projection_keeps_zero_and_large_integer_strings(tmp_path: Path) -> None
     (data / "coefficients.json").write_text(json.dumps(payload), encoding="utf-8")
     with pytest.raises(ValueError, match="coefficient strings"):
         check_projection(register, data / "index.json", tmp_path)
+
+
+@pytest.mark.parametrize("storage", ["plain", "gzip", "both", "gzip-path"])
+def test_measure_reads_retained_register_and_checks_all_current_and_historical_coefficients(
+    storage: str,
+    tmp_path: Path,
+) -> None:
+    vector = ["1", "0", "-" + "9" * 724]
+    register = {
+        "entries": [
+            {
+                "n": 83,
+                "status": "open",
+                "side": {"value": "9.25", "relation": "upper-bound"},
+                "degree": 2,
+                "polynomial": {"coefficients": vector},
+            }
+        ],
+        "historical_entries": [
+            {
+                "n": 83,
+                "kind": "source-invalid",
+                "side": "9.5",
+                "degree": 2,
+                "polynomial": {"coefficients": vector},
+            }
+        ],
+    }
+    source = tmp_path / "exact-values.json"
+    raw = json.dumps({"softschema": {"envelope": "register"}, "register": register}).encode()
+    packed = source.with_name(source.name + ".gz")
+    if storage in {"plain", "both"}:
+        source.write_bytes(raw)
+    if storage in {"gzip", "both", "gzip-path"}:
+        packed.write_bytes(gzip.compress(raw, mtime=0))
+    papers = tmp_path / "papers"
+    for path, content in exact_catalogue.output_files(register, papers=papers).items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+    page = papers / "browser.html"
+    page.write_text(
+        f'<main data-index-url="{exact_catalogue.INDEX_PATH.as_posix()}"></main>',
+        encoding="utf-8",
+    )
+    baseline = papers / "complete.html"
+    baseline.write_text("archive" * 4096, encoding="utf-8")
+    loaded = packed if storage == "gzip-path" else source
+    result = measure(baseline, tmp_path, page, loaded)
+    assert result["coverage"] == {
+        "current": 1,
+        "historical": 1,
+        "coefficient_vectors": 2,
+        "integer_coefficients": 6,
+    }
+    coefficient = next(
+        (papers / exact_catalogue.DATA_DIRECTORY / "coefficients").glob("*.json")
+    )
+    payload = json.loads(coefficient.read_text(encoding="utf-8"))
+    payload["coefficients"][1] = "1"
+    coefficient.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ValueError, match="coefficient strings"):
+        measure(baseline, tmp_path, page, loaded)
 
 
 def test_recorded_report_is_current() -> None:
