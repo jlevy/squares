@@ -165,7 +165,7 @@ computer-assisted certificates.
 The proof presented here is of this kind.
 
 <figure>
-  <div class="stage"><a href="{{SITE_ROOT}}square-packings-100-20261008.pdf"><img src="{{SITE_ROOT}}known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2400" height="2896"></a></div>
+  <div class="stage"><a href="{{SITE_ROOT}}square-packings-100-20261008.pdf"><img src="{{SITE_ROOT}}known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2260" height="3995"></a></div>
 
   <div class="stage screen-only">
 

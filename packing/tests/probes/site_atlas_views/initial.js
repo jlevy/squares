@@ -12,7 +12,7 @@
   );
   const first = rows[0]?.getBoundingClientRect();
   const last = rows.at(-1)?.getBoundingClientRect();
-  const triangle = document.documentElement.dataset.siteAtlasView === "triangle";
+  const triangle = document.documentElement.dataset.siteAtlasView !== "grid";
   const canvas =
     triangle && first && last
       ? {
@@ -46,8 +46,10 @@
       round: CSS.supports("opacity", "round(down, 1.5, 1)"),
       mod: CSS.supports("opacity", "mod(3, 2)"),
     },
-    view: document.documentElement.dataset.siteAtlasView,
-    size: document.documentElement.dataset.siteAtlasSize ?? "medium",
+    view: document.documentElement.dataset.siteAtlasView ?? "triangle",
+    size: document.documentElement.dataset.siteAtlasSize ?? "small",
+    scale: document.documentElement.dataset.siteAtlasScale ?? "fixed",
+    largest_side: Number.parseFloat(style.getPropertyValue("--site-atlas-global-side")),
     columns: Math.round(
       (box.width + Number.parseFloat(style.columnGap)) /
         ((cells.querySelector(".site-atlas-cell")?.getBoundingClientRect().width ?? 1) +
@@ -61,6 +63,7 @@
       .filter((tile) => tile.getClientRects().length > 0)
       .map((tile) => {
         const at = tile.getBoundingClientRect();
+        const drawing = tile.querySelector("img, svg");
         const gridMarker = tile.querySelector(".site-atlas-grid-start");
         return {
           n: Number(tile.getAttribute("data-atlas-n")),
@@ -70,6 +73,8 @@
           bottom: at.bottom - box.top,
           width: at.width,
           height: at.height,
+          side: Number(tile.getAttribute("data-atlas-side")),
+          drawing_slot_width: drawing ? Number.parseFloat(getComputedStyle(drawing).width) : null,
           drawing_width: tile.querySelector("img, svg")?.getBoundingClientRect().width,
           grid_from: tile.hasAttribute("data-atlas-grid-from"),
           grid_marker:

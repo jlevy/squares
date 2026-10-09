@@ -20,6 +20,7 @@ class AtlasLegendCounts:
     only_known_numerically: int
     known_rigid: int
     recent_results: int
+    depicted_total: int
 
 
 @dataclass(frozen=True, slots=True)
@@ -28,13 +29,21 @@ class LegendItem:
     marker: Literal["O", "=", "≈", "R", "star", "angles", "shades"] | None
     label: str
     count: int | None = None
+    depicted_total: int | None = None
     marker_values: tuple[int, ...] = ()
     # Optional visible labels align with marker_values; empty labels leave a swatch plain.
     marker_labels: tuple[str, ...] = ()
 
     @property
     def text(self) -> str:
-        return self.label if self.count is None else f"{self.label} ({self.count})"
+        return self.formatted_text()
+
+    def formatted_text(self, *, count_style: Literal["fraction", "words"] = "fraction") -> str:
+        """Use words for print counts while the website keeps compact fractions."""
+        if self.count is None:
+            return self.label
+        separator = " of " if count_style == "words" else "/"
+        return f"{self.label} ({self.count}{separator}{self.depicted_total})"
 
 
 @dataclass(frozen=True, slots=True)
@@ -57,12 +66,24 @@ def atlas_legend(
     """Four status rows and four recency/color/degree rows, in reading order."""
     return AtlasLegend(
         left=(
-            LegendItem("optimal", "O", "proved optimal", counts.proved_optimal),
-            LegendItem("exact", "=", "exact value known", counts.exact_value_known),
             LegendItem(
-                "numerical", "≈", "only known numerically", counts.only_known_numerically
+                "optimal", "O", "proved optimal", counts.proved_optimal, counts.depicted_total
             ),
-            LegendItem("rigid", "R", "rigid", counts.known_rigid),
+            LegendItem(
+                "exact",
+                "=",
+                "exact value known",
+                counts.exact_value_known,
+                counts.depicted_total,
+            ),
+            LegendItem(
+                "numerical",
+                "≈",
+                "only known numerically",
+                counts.only_known_numerically,
+                counts.depicted_total,
+            ),
+            LegendItem("rigid", "R", "rigid", counts.known_rigid, counts.depicted_total),
         ),
         right=(
             LegendItem(
@@ -70,6 +91,7 @@ def atlas_legend(
                 "star",
                 recent_label(recent_since),
                 counts.recent_results,
+                counts.depicted_total,
             ),
             LegendItem(
                 "angles",

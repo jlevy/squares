@@ -385,8 +385,8 @@ COMPOSITE_ASSETS = (
 #: deploy for resolution nothing displays.
 COMPOSITE_PNG = COMPOSITE_STEM.with_suffix(".png")
 #: The landscape crop of the composite the atlas builder writes: the top of the same
-#: drawing at 2400x1256, 1.91:1 to the nearest whole pixel. It was this page's link
-#: preview until 2026-10-01, when every page of the site took the one card
+#: drawing with its current canvas width and a retained 1256-unit height. It was this
+#: page's link preview until 2026-10-01, when every page of the site took the one card
 #: (`render_overview.SOCIAL_CARD`); the overview's atlas card still shows it, so it is
 #: still published beside the page.
 COMPOSITE_CARD = COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png")

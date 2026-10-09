@@ -16,7 +16,7 @@ smaller or larger in either view (think-ht8t): the fixture reads that a change o
 moves the tiles as a change of view does, sets the sizes in order, follows the keyboard
 and the address, and holds every layout to the same rules. A tile carries the
 new-result star after its number where its case has a new result (think-wwtt), and
-a Triangle-only grid marker at the retained first grid count in each row. Selected
+accessible first-grid wording at the retained grid boundary in each row. Selected
 derived drawings are shown directly, without layer labels or badges.
 
 One fixture drives the page through all of it and keeps what it read, so no test waits
@@ -60,11 +60,14 @@ SEEN = probe(PROBES, "site_atlas_views/seen")
 ACTIONS = probe(PROBES, "site_atlas_views/actions")
 DRAWING = probe(PROBES, "site_atlas_views/drawing")
 INITIAL = probe(PROBES, "site_atlas_views/initial")
+SUBSET = probe(PROBES, "site_atlas_views/subset")
+REFERENCE = probe(PROBES, "site_atlas_views/reference")
 CONTRIBUTIONS = probe(PROBES, "site_atlas_views/contributions")
 PREPARE_SHOT = probe(PROBES, "site_atlas_views/prepare-shot")
 
 GRID, TRIANGLE = atlas.tab("grid"), atlas.tab("triangle")
 SMALL, MEDIUM, LARGE = (atlas.size_tab(size) for size in atlas.SIZES)
+FIXED, ROW, GLOBAL = (f'[data-atlas-scale-tab="{scale}"]' for scale in atlas.SCALES)
 #: The case whose tile is hovered and pressed.
 CELL = '.site-atlas-cell[data-atlas-n="11"]'
 
@@ -86,6 +89,7 @@ SETTLE_MS = 400
 #: The settled layouts the fixture reads, each in the view named.
 LAYOUTS = {
     "default": "triangle",
+    "medium": "triangle",
     "grid": "grid",
     "triangle": "triangle",
     "grid again": "grid",
@@ -164,9 +168,14 @@ def _desktop(browser: Any, address: str) -> Readings:
     """A desktop reader's session: to the triangle and back, a change of mind mid-move,
     the keyboard, a tile hovered and pressed, the expander, and a window made narrow."""
     seen: Readings = {}
-    page = atlas.open_atlas(browser, address, **DESKTOP)
+    page = atlas.open_atlas(browser, address, init_script=applied(WATCH), **DESKTOP)
     atlas.top(page)
     seen["default"] = atlas.layout(page)
+    seen["default, first placed"] = page.evaluate(SEEN)
+    _save_artifact(page, address, "desktop-small-default")
+    page.locator(MEDIUM).click()
+    atlas.settle(page)
+    seen["medium"] = atlas.layout(page)
     page.locator(GRID).click()
     atlas.settle(page)
     atlas.top(page)
@@ -190,7 +199,7 @@ def _desktop(browser: Any, address: str) -> Readings:
         atlas.settle(page)
         seen.setdefault("keys", []).append((key, atlas.layout(page)))
     order = []
-    for _ in range(4):
+    for _ in range(5):
         page.keyboard.press("Tab")
         order.append(atlas.layout(page)["focus"])
     seen["tab order"] = order
@@ -233,7 +242,7 @@ def _phone(browser: Any, address: str) -> Readings:
     """A phone opened on the triangle's own address, then every case, then the grid."""
     seen: Readings = {}
     page = atlas.open_atlas(
-        browser, address, view="triangle", init_script=applied(WATCH), **PHONE
+        browser, address, view="triangle", size="medium", init_script=applied(WATCH), **PHONE
     )
     seen["phone, first placed"] = page.evaluate(SEEN)
     seen["phone"] = atlas.layout(page)
@@ -252,7 +261,9 @@ def _phone(browser: Any, address: str) -> Readings:
 def _reduced(browser: Any, address: str) -> Readings:
     """A reader who asks for reduced motion presses Triangle."""
     seen: Readings = {}
-    page = atlas.open_atlas(browser, address, view="grid", reduced_motion="reduce", **DESKTOP)
+    page = atlas.open_atlas(
+        browser, address, view="grid", size="medium", reduced_motion="reduce", **DESKTOP
+    )
     seen["reduced press"] = page.evaluate(PRESSED, {"press": TRIANGLE})
     seen["reduced motion"] = atlas.layout(page)
     page.close()
@@ -282,7 +293,7 @@ def _sizes(browser: Any, address: str) -> Readings:
     triangle at Small, to Large there, every case shown, by the keyboard, and back to
     Medium."""
     seen: Readings = {}
-    page = atlas.open_atlas(browser, address, **DESKTOP)
+    page = atlas.open_atlas(browser, address, size="medium", **DESKTOP)
     page.locator(GRID).click()
     atlas.settle(page)
     atlas.top(page)
@@ -339,6 +350,60 @@ def _phone_sizes(browser: Any, address: str) -> Readings:
     return seen
 
 
+def _scales(browser: Any, address: str) -> Readings:
+    """Scale changes, shown-set references, keyboard control and a real smaller instance."""
+    found: Readings = {}
+    page = atlas.open_atlas(browser, address, **DESKTOP)
+    found["scale, triangle, fixed"] = atlas.layout(page)
+    found["reference, triangle, fixed"] = page.evaluate(REFERENCE)
+    for mode, selector in (("row", ROW), ("global", GLOBAL)):
+        page.locator(selector).click()
+        atlas.settle(page)
+        found[f"scale, triangle, {mode}"] = atlas.layout(page)
+        found[f"reference, triangle, {mode}"] = page.evaluate(REFERENCE)
+        _save_artifact(page, address, f"desktop-small-scale-{mode}")
+    atlas.expand(page)
+    found["scale, global, expanded"] = atlas.layout(page)
+    _save_artifact(page, address, "desktop-small-scale-global-all324")
+    atlas.expand(page)
+    found["scale, global, collapsed"] = atlas.layout(page)
+    page.locator(GRID).click()
+    atlas.settle(page)
+    found["scale, grid, global"] = atlas.layout(page)
+    found["reference, grid, global"] = page.evaluate(REFERENCE)
+    page.locator(ROW).click()
+    atlas.settle(page)
+    found["scale, grid, row"] = atlas.layout(page)
+    found["reference, grid, row"] = page.evaluate(REFERENCE)
+    page.locator(FIXED).click()
+    atlas.settle(page)
+    found["scale, grid, fixed"] = atlas.layout(page)
+    found["reference, grid, fixed"] = page.evaluate(REFERENCE)
+    page.locator(FIXED).focus()
+    for key in ("ArrowRight", "ArrowRight", "Home", "End", "ArrowRight", "ArrowLeft"):
+        page.keyboard.press(key)
+        atlas.settle(page)
+        found.setdefault("scale keys", []).append((key, atlas.layout(page)))
+    page.locator(MEDIUM).click()
+    atlas.settle(page)
+    found["scale, size changed"] = atlas.layout(page)
+    page.locator(TRIANGLE).click()
+    atlas.settle(page)
+    found["scale, layout changed"] = atlas.layout(page)
+    page.close()
+    page = atlas.open_atlas(browser, address, scale="global", **PHONE)
+    page.evaluate(SUBSET, {"keep": [1, 5, 11]})
+    page.locator(LARGE).click()
+    atlas.settle(page)
+    found["scale, actual subset"] = atlas.layout(page)
+    page.close()
+    page = atlas.open_atlas(browser, address, scale="row", scheme="dark", **DESKTOP)
+    found["reference, dark"] = page.evaluate(REFERENCE)
+    _save_artifact(page, address, "desktop-small-row-reference-dark")
+    page.close()
+    return found
+
+
 @pytest.fixture(scope="module")
 def seen(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
     """Everything the sessions read, by name."""
@@ -359,11 +424,16 @@ def seen(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
         static = static.replace(tag, "")
     initial = root / "initial.html"
     initial.write_text(static, encoding="utf-8")
+    fallback = root / "fallback.html"
+    bootstrap = render_overview.EMBED_SCRIPT.read_text(encoding="utf-8")
+    rendered = path.read_text(encoding="utf-8")
+    assert bootstrap in rendered
+    fallback.write_text(rendered.replace(bootstrap, ""), encoding="utf-8")
     address = path.as_uri()
     with sync_api.sync_playwright() as driver:
         browser = site_browser.launch(driver)
         found: Readings = {}
-        for session in (_desktop, _phone, _reduced, _linked, _sizes, _phone_sizes):
+        for session in (_desktop, _phone, _reduced, _linked, _sizes, _phone_sizes, _scales):
             found.update(session(browser, address))
         page = atlas.open_atlas(browser, address, size="small", width=3200, height=1200)
         found["wide, small"] = atlas.layout(page)
@@ -394,22 +464,65 @@ def seen(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
         )
         page.close()
         for view in atlas.VIEWS:
-            for size in ("medium", "large"):
+            for size in atlas.SIZES:
                 page = browser.new_page(viewport=PHONE)
                 page.goto(initial.as_uri() + atlas.query_for(view, size), wait_until="load")
                 found[f"initial CSS, {view}, {size}"] = page.evaluate(INITIAL)
+                if size == "small":
+                    found[f"initial reference, {view}, fixed"] = page.evaluate(REFERENCE)
                 page.close()
+        for size in atlas.SIZES:
+            page = atlas.open_atlas(browser, fallback.as_uri(), size=size, **PHONE)
+            found[f"without bootstrap, {size}"] = atlas.layout(page)
+            page.close()
+        for view, scale in (
+            ("triangle", "row"),
+            ("triangle", "global"),
+            ("grid", "row"),
+            ("grid", "global"),
+        ):
+            page = browser.new_page(viewport=PHONE)
+            page.goto(
+                initial.as_uri() + atlas.query_for(view, "small", scale), wait_until="load"
+            )
+            found[f"initial scale, {view}, {scale}"] = page.evaluate(INITIAL)
+            found[f"initial reference, {view}, {scale}"] = page.evaluate(REFERENCE)
+            page.close()
+            page = atlas.open_atlas(browser, address, view=view, scale=scale, **PHONE)
+            found[f"mounted scale, {view}, {scale}"] = atlas.layout(page)
+            found[f"mounted reference, {view}, {scale}"] = page.evaluate(REFERENCE)
+            if view == "triangle":
+                _save_artifact(page, address, f"phone-small-scale-{scale}")
+            page.close()
+        for scale in ("row", "global", "invalid"):
+            page = atlas.open_atlas(
+                browser, fallback.as_uri(), query=f"?scale={scale}", **PHONE
+            )
+            found[f"scale without bootstrap, {scale}"] = atlas.layout(page)
+            found[f"reference without bootstrap, {scale}"] = page.evaluate(REFERENCE)
+            page.close()
+        context = browser.new_context(java_script_enabled=False, viewport=PHONE)
+        page = context.new_page()
+        page.goto(address, wait_until="load")
+        found["no JavaScript"] = page.evaluate(INITIAL)
+        found["reference, no JavaScript"] = page.evaluate(REFERENCE)
+        page.locator(atlas.BLOCK).screenshot(path=root / "phone-small-no-javascript.png")
+        (root / "phone-small-no-javascript.json").write_text(
+            json.dumps(found["no JavaScript"], indent=2)
+        )
+        context.close()
         browser.close()
+        (root / "all-readings.json").write_text(json.dumps(found, indent=2))
         yield found
 
 
-def test_a_plain_address_opens_medium_triangle_under_its_two_tabs(seen: Readings) -> None:
-    """With no parameter the atlas is Medium Triangle: its tab is selected and is the
+def test_a_plain_address_opens_small_triangle_under_its_two_tabs(seen: Readings) -> None:
+    """With no parameter the atlas is Small Triangle: its tab is selected and is the
     one stop in the tab order, both tabs show, in the section tabs' type, side by side, and the
     box of tiles is the panel they control, named by the selected tab."""
     triangle = seen["default"]
     assert triangle["view"] == "triangle"
-    assert (triangle["size"], triangle["search"]) == ("medium", "")
+    assert (triangle["size"], triangle["search"]) == ("small", "")
     tabs = _tabs(triangle)
     assert list(tabs) == ["grid", "triangle"]
     assert [tab["label"] for tab in tabs.values()] == ["Grid", "Triangle"]
@@ -452,7 +565,7 @@ def test_the_triangle_sets_complete_rows_at_a_common_right_edge(
     triangle = seen["triangle"]
     assert triangle["view"] == "triangle"
     assert triangle["per_line"] == 10
-    assert _same_places(triangle, seen["default"])
+    assert _same_places(triangle, seen["medium"])
     assert _drawing_width(triangle) == pytest.approx(_drawing_width(seen["grid"]), abs=0.5)
     tiles = {tile["n"]: tile for tile in triangle["tiles"]}
     assert sorted(tiles) == list(range(1, 101))
@@ -495,7 +608,7 @@ def test_a_second_press_mid_move_starts_from_where_the_tiles_are(seen: Readings)
     assert after["view"] == "grid"
     assert after["moving"] == 0
     assert _same_places(after, seen["grid"])
-    assert after["search"] == "?atlas=grid"
+    assert after["search"] == "?size=medium&atlas=grid"
     assert _tabs(after)["grid"]["focused"]
 
 
@@ -531,16 +644,16 @@ def test_the_arrow_keys_move_between_the_tabs_and_select_the_one_focused(
 
 def test_the_tiles_follow_the_tabs_in_the_tab_order_in_case_order(seen: Readings) -> None:
     """From the view tabs, in the triangle, Tab goes to the size tabs' one stop, Medium,
-    then to the key's link, and then to n = 1 and n = 2: the tiles keep the order of the
+    then to n = 1, n = 2 and n = 3: the tiles keep the order of the
     cases whichever way they are set."""
-    assert seen["tab order"] == ["atlas-size-medium", "1", "2", "3"]
+    assert seen["tab order"] == ["atlas-size-medium", "atlas-scale-fixed", "1", "2", "3"]
 
 
 def test_the_address_names_grid_and_keeps_what_else_it_holds(seen: Readings) -> None:
     """Grid is `?atlas=grid` and the default Triangle has no parameter; a press writes it
     without a new history entry's worth of change to anything else in the address."""
-    assert seen["triangle"]["search"] == ""
-    assert seen["grid again"]["search"] == "?atlas=grid"
+    assert seen["triangle"]["search"] == "?size=medium"
+    assert seen["grid again"]["search"] == "?size=medium&atlas=grid"
     linked = seen["linked"]
     assert (linked["view"], linked["search"], linked["hash"]) == (
         "triangle",
@@ -567,8 +680,25 @@ def test_a_linked_triangle_is_the_triangle_before_a_tile_is_drawn(seen: Readings
     """Opened on the triangle's address, the block is in the triangle, with every tile
     arranged and nothing in a move, at the moment its tiles are first put in the page:
     the grid is never shown first."""
+    assert seen["default, first placed"] == [
+        {
+            "view": "triangle",
+            "size": "small",
+            "scale": "fixed",
+            "per_line": "15",
+            "tiles": 100,
+            "moving": 0,
+        }
+    ]
     assert seen["phone, first placed"] == [
-        {"view": "triangle", "size": "medium", "per_line": "4", "tiles": 100, "moving": 0}
+        {
+            "view": "triangle",
+            "size": "medium",
+            "scale": "fixed",
+            "per_line": "4",
+            "tiles": 100,
+            "moving": 0,
+        }
     ]
 
 
@@ -659,6 +789,18 @@ def test_every_triangle_line_has_uniform_height_and_vertical_pitch(
 ) -> None:
     """Every complete logical row reserves identical height and vertical spacing."""
     report = seen[name]
+    assert report["line_gap_px"] == pytest.approx(report["gap_px"], abs=atlas.EDGE)
+    for tile in report["tiles"]:
+        drawing = tile["drawing"]
+        padding = (tile["width"] - drawing["width"]) / 2
+        assert drawing["top"] - tile["top"] == pytest.approx(padding, abs=atlas.EDGE)
+        assert tile["height"] == pytest.approx(
+            drawing["height"]
+            + 2 * padding
+            + tile["number_box"]["height"]
+            + tile["width"] * 0.04,
+            abs=atlas.EDGE,
+        )
     _assert_uniform_lines(
         report["tiles"],
         report["line_gap_px"],
@@ -785,26 +927,26 @@ def _drawing_width(report: dict[str, Any]) -> float:
     return widths[len(widths) // 2]
 
 
-def test_the_size_tabs_stand_beside_the_view_tabs_and_open_on_medium(seen: Readings) -> None:
-    """A plain address is at Medium, under a second strip on the view tabs' line, in
-    their type and at their height: Small, Medium and Large, Medium selected and the
+def test_the_size_tabs_stand_beside_the_view_tabs_and_open_on_small(seen: Readings) -> None:
+    """A plain address is at Small, under a second strip on the view tabs' line, in
+    their type and at their height: Small, Medium and Large, Small selected and the
     strip's one stop in the tab order, each controlling the box of tiles. The key to a
     tile's marks stands under both strips and over the tiles."""
-    medium = seen["default"]
-    assert (medium["size"], medium["search"]) == ("medium", "")
-    sizes = _size_tabs(medium)
+    small = seen["default"]
+    assert (small["size"], small["search"]) == ("small", "")
+    sizes = _size_tabs(small)
     assert list(sizes) == ["small", "medium", "large"]
     assert [tab["label"] for tab in sizes.values()] == ["Small", "Medium", "Large"]
-    assert (sizes["medium"]["selected"], sizes["medium"]["tabindex"]) == ("true", 0)
-    for key in ("small", "large"):
+    assert (sizes["small"]["selected"], sizes["small"]["tabindex"]) == ("true", 0)
+    for key in ("medium", "large"):
         assert (sizes[key]["selected"], sizes[key]["tabindex"]) == ("false", -1), key
     assert all(tab["shown"] and tab["controls"] == "atlas-cells" for tab in sizes.values())
-    views = _tabs(medium)
+    views = _tabs(small)
     assert {tab["font_px"] for tab in sizes.values()} == {views["grid"]["font_px"]}
     assert sizes["small"]["box"]["top"] == views["grid"]["box"]["top"]
     assert sizes["small"]["box"]["height"] == views["grid"]["box"]["height"]
     assert sizes["small"]["box"]["left"] > views["triangle"]["box"]["right"]
-    legend = medium["legend"]
+    legend = small["legend"]
     assert legend["shown"]
     assert "proved optimal (" in legend["text"]
     assert "recent result, since August, 2026" in legend["text"]
@@ -812,6 +954,7 @@ def test_the_size_tabs_stand_beside_the_view_tabs_and_open_on_medium(seen: Readi
     assert "shade indicates number of full-side contacts" in legend["text"]
     assert "half a drawing" not in legend["text"]
     left, right = legend["columns"]
+    assert all(item["text"].endswith("/324)") for item in [*left["items"], right["items"][0]])
     assert [item["key"] for item in left["items"]] == ["optimal", "exact", "numerical", "rigid"]
     assert [item["key"] for item in right["items"]] == [
         "recent",
@@ -849,12 +992,10 @@ def test_the_size_tabs_stand_beside_the_view_tabs_and_open_on_medium(seen: Readi
     # The note step, as the tables' legend is set, which is the tabs' step too.
     assert legend["font_px"] == 17.48
     assert legend["box"]["top"] >= views["grid"]["box"]["bottom"]
-    assert legend["box"]["bottom"] <= medium["cells"]["top"]
-    assert medium["view_strip"]["left"] == pytest.approx(
-        medium["cells"]["left"], abs=atlas.EDGE
-    )
-    assert legend["box"]["left"] == pytest.approx(medium["cells"]["left"], abs=atlas.EDGE)
-    assert _same_places(medium, seen["triangle"])
+    assert legend["box"]["bottom"] <= small["cells"]["top"]
+    assert small["view_strip"]["left"] == pytest.approx(small["cells"]["left"], abs=atlas.EDGE)
+    assert legend["box"]["left"] == pytest.approx(small["cells"]["left"], abs=atlas.EDGE)
+    assert _same_places(small, seen["triangle, small"])
 
 
 def test_a_change_of_size_moves_the_tiles_as_a_change_of_view_does(seen: Readings) -> None:
@@ -879,20 +1020,20 @@ def test_the_grid_holds_more_and_smaller_tiles_at_small_and_fewer_and_larger_at_
 ) -> None:
     """At 1280 pixels the grid holds fifteen tiles to a line at Small, ten at Medium and
     seven at Large, each size's tiles larger than the last; on a phone, six at Small and
-    four at Medium. The address names the size, and Medium has no parameter."""
+    four at Medium. The address names Medium and Large; Small has no parameter."""
     names = ("grid, small", "sizes, medium", "grid, large")
     assert [atlas.summary(seen[name])["per_line"] for name in names] == [15, 10, 7]
     widths = [_width(seen[name]) for name in names]
     assert widths == sorted(widths)
     assert len(set(widths)) == 3
     assert [seen[name]["search"] for name in names] == [
-        "?atlas=grid&size=small",
         "?atlas=grid",
-        "?atlas=grid&size=large",
+        "?size=medium&atlas=grid",
+        "?size=large&atlas=grid",
     ]
     assert atlas.summary(seen["phone, grid"])["per_line"] == 4
     small = seen["phone, small grid"]
-    assert (small["size"], small["search"]) == ("small", "?size=small&atlas=grid")
+    assert (small["size"], small["search"]) == ("small", "?atlas=grid")
     assert atlas.summary(small)["per_line"] == 6
 
 
@@ -906,13 +1047,13 @@ def test_the_triangle_matches_grid_sizes_and_keeps_complete_rows(seen: Readings)
         assert _drawing_width(triangle) == pytest.approx(_drawing_width(grid), abs=0.5)
     assert atlas.summary(small)["wrapped"] == []
     assert atlas.summary(large)["wrapped"] == []
-    assert small["search"] == "?size=small"
+    assert small["search"] == ""
     assert large["search"] == "?size=large"
     every = seen["triangle, large, every case"]
     assert (every["per_line"], len(every["tiles"])) == (7, 324)
     assert _width(every) == pytest.approx(_width(large), abs=0.5)
     back = seen["triangle, medium, every case"]
-    assert (back["size"], back["search"], back["per_line"]) == ("medium", "", 10)
+    assert (back["size"], back["search"], back["per_line"]) == ("medium", "?size=medium", 10)
     assert _same_places(back, seen["triangle, every case"])
 
 
@@ -949,7 +1090,14 @@ def test_a_linked_size_is_that_size_before_a_tile_is_drawn(seen: Readings) -> No
     page; the phone's layout is larger than at Medium and runs past nothing, with the size
     tabs beside the view tabs or under them."""
     assert seen["phone, large, first placed"] == [
-        {"view": "triangle", "size": "large", "per_line": "3", "tiles": 100, "moving": 0}
+        {
+            "view": "triangle",
+            "size": "large",
+            "scale": "fixed",
+            "per_line": "3",
+            "tiles": 100,
+            "moving": 0,
+        }
     ]
     phone = seen["phone, large"]
     assert phone["overflow"] == 0
@@ -991,15 +1139,18 @@ def test_tiles_keep_new_result_stars_without_layer_indicators(
         assert tile["mark"] is None, n
         assert "regularized" not in tile["name"], n
         assert tile["grid_from"] == (n == FIRST_GRIDS[atlas.row_of(n)]), n
-        assert tile["grid_marker"] == tile["grid_from"], n
+        assert not tile["grid_marker"], n
+        assert tile["grid_label"] is None, n
     assert {tile["n"] for tile in tiles} & new
 
 
 @pytest.mark.parametrize(
     ("view", "size", "columns"),
     [
+        ("triangle", "small", 6),
         ("triangle", "medium", 4),
         ("triangle", "large", 3),
+        ("grid", "small", 6),
         ("grid", "medium", 4),
         ("grid", "large", 3),
     ],
@@ -1041,7 +1192,7 @@ def test_direct_mobile_queries_fit_before_atlas_programs_run(
         "phone, small, every case",
     ],
 )
-def test_grid_markers_and_extra_gaps_follow_the_retained_suffix(
+def test_extra_gaps_follow_the_retained_suffix_without_web_captions(
     seen: Readings, name: str
 ) -> None:
     """Inline segments keep the horizontal half-drawing gap; split lines use ordinary pitch."""
@@ -1052,18 +1203,9 @@ def test_grid_markers_and_extra_gaps_follow_the_retained_suffix(
         if n not in found:
             continue
         tile = found[n]
-        assert tile["grid_marker"]
-        k = atlas.row_of(n)
-        assert tile["grid_label"] == f"{k}\N{MULTIPLICATION SIGN}{k} GRID"
-        dimension, word = tile["grid_marker_lines"]
-        assert [dimension["text"], word["text"]] == [f"{k}\N{MULTIPLICATION SIGN}{k}", "GRID"]
-        assert dimension["bottom"] <= word["top"] + atlas.EDGE
-        assert f"({k}\N{MULTIPLICATION SIGN}{k} grid)" in tile["name"]
-        marker = tile["grid_marker_box"]
-        assert marker["left"] >= tile["left"] - atlas.EDGE
-        assert marker["right"] <= tile["right"] + atlas.EDGE
-        assert marker["top"] >= tile["drawing"]["bottom"] - atlas.EDGE
-        assert marker["bottom"] <= tile["number_box"]["top"] + atlas.EDGE
+        assert not tile["grid_marker"]
+        assert tile["grid_label"] is None
+        assert tile["grid_marker_lines"] == []
         assert "first grid packing" in tile["name"]
         previous = found.get(n - 1)
         if (
@@ -1096,8 +1238,8 @@ def test_grid_markers_and_extra_gaps_follow_the_retained_suffix(
         assert not tile["grid_marker"]
 
 
-@pytest.mark.parametrize(("size", "columns"), [("medium", 4), ("large", 3)])
-def test_first_grid_spacing_and_markers_are_present_before_atlas_scripts(
+@pytest.mark.parametrize(("size", "columns"), [("small", 6), ("medium", 4), ("large", 3)])
+def test_first_grid_spacing_is_present_without_captions_before_atlas_scripts(
     seen: Readings, size: str, columns: int
 ) -> None:
     report = seen[f"initial CSS, triangle, {size}"]
@@ -1116,11 +1258,9 @@ def test_first_grid_spacing_and_markers_are_present_before_atlas_scripts(
             sum(tile["top"] == top for tile in row) for top in tops
         ) == atlas.row_lines(k, columns, FIRST_GRIDS[k])
         first = tiles[FIRST_GRIDS[k]]
-        assert first["grid_marker"]
-        assert first["grid_label"] == f"{k}\N{MULTIPLICATION SIGN}{k} GRID"
-        dimension, word = first["grid_marker_lines"]
-        assert [dimension["text"], word["text"]] == [f"{k}\N{MULTIPLICATION SIGN}{k}", "GRID"]
-        assert dimension["top"] < word["top"]
+        assert not first["grid_marker"]
+        assert first["grid_label"] is None
+        assert first["grid_marker_lines"] == []
         previous = tiles.get(first["n"] - 1)
         if previous and atlas.row_of(previous["n"]) == k and previous["top"] == first["top"]:
             assert first["left"] - previous["right"] == pytest.approx(
@@ -1136,6 +1276,31 @@ def test_first_grid_spacing_and_markers_are_present_before_atlas_scripts(
                     report["gap_px"], abs=atlas.EDGE
                 )
     assert all(not tile["grid_marker"] for tile in seen[f"initial CSS, grid, {size}"]["tiles"])
+
+
+def test_small_triangle_survives_disabled_javascript_and_mounting_without_bootstrap(
+    seen: Readings,
+) -> None:
+    static = seen["no JavaScript"]
+    assert (static["view"], static["size"], static["columns"]) == ("triangle", "small", 6)
+    assert static["page_overflow"] == 0
+    assert all(not tile["grid_marker"] for tile in static["tiles"])
+    _assert_uniform_lines(
+        static["tiles"],
+        static["line_gap_px"],
+        static["canvas"]["top"],
+        static["canvas"]["bottom"],
+    )
+    _assert_frame_extent(static)
+    for size, columns in (("small", 6), ("medium", 4), ("large", 3)):
+        mounted = seen[f"without bootstrap, {size}"]
+        assert (mounted["view"], mounted["size"], mounted["per_line"]) == (
+            "triangle",
+            size,
+            columns,
+        )
+        assert _size_tabs(mounted)[size]["selected"] == "true"
+        assert atlas.layout_problems(mounted) == []
 
 
 def test_wide_triangle_uses_grid_capacity_without_a_row_length_cap(seen: Readings) -> None:
@@ -1184,3 +1349,215 @@ def test_contribution_accents_paint_independently_and_rigidity_stays_dark(
         for badge in old_optimal["badges"]
         if badge["glyph"] in ("O", "R")
     )
+
+
+@pytest.mark.parametrize("view", ["triangle", "grid"])
+@pytest.mark.parametrize("scale", ["row", "global"])
+def test_scale_changes_real_drawings_without_moving_slots_or_resizing_numbers(
+    seen: Readings,
+    view: str,
+    scale: str,
+) -> None:
+    fixed = seen[f"scale, {view}, fixed"]
+    report = seen[f"scale, {view}, {scale}"]
+    assert report["scale"] == scale
+    assert _same_places(fixed, report)
+    original = {tile["n"]: tile for tile in fixed["tiles"]}
+    for tile in report["tiles"]:
+        baseline = original[tile["n"]]
+        reference = (
+            atlas.row_of(tile["n"])
+            if scale == "row"
+            else max(t["side"] for t in report["tiles"])
+        )
+        assert tile["drawing"]["width"] == pytest.approx(
+            baseline["drawing"]["width"] * tile["side"] / reference, abs=0.02
+        )
+        assert tile["drawing_slot_width"] == baseline["drawing_slot_width"]
+        assert tile["number_px"] == baseline["number_px"]
+        assert tile["number_box"]["height"] == baseline["number_box"]["height"]
+        assert tile["number_box"]["top"] - tile["top"] == pytest.approx(
+            baseline["number_box"]["top"] - baseline["top"], abs=0.02
+        )
+    assert atlas.layout_problems(report) == []
+    assert atlas.mark_problems(report) == []
+    row_tiles = {tile["n"]: tile for tile in report["tiles"]}
+    assert row_tiles[5]["side"] == pytest.approx(2 + 2**-0.5)
+    if scale == "row":
+        assert row_tiles[25]["drawing"]["width"] == row_tiles[36]["drawing"]["width"]
+        assert row_tiles[5]["drawing"]["width"] < row_tiles[9]["drawing"]["width"]
+    else:
+        assert row_tiles[25]["drawing"]["width"] / row_tiles[36]["drawing"][
+            "width"
+        ] == pytest.approx(5 / 6, abs=0.002)
+
+
+def test_global_reference_follows_expansion_collapse_and_an_actual_case_subset(
+    seen: Readings,
+) -> None:
+    expanded, collapsed = seen["scale, global, expanded"], seen["scale, global, collapsed"]
+    assert (len(expanded["tiles"]), expanded["largest_side"]) == (324, 18)
+    assert (len(collapsed["tiles"]), collapsed["largest_side"]) == (100, 10)
+    for report in (expanded, collapsed, seen["scale, actual subset"]):
+        largest = max(tile["side"] for tile in report["tiles"])
+        assert report["largest_side"] == largest
+        for tile in report["tiles"]:
+            assert tile["drawing"]["width"] == pytest.approx(
+                tile["drawing_slot_width"] * tile["side"] / largest, abs=0.02
+            )
+    subset = seen["scale, actual subset"]
+    assert [tile["n"] for tile in subset["tiles"]] == [1, 5, 11]
+    assert subset["largest_side"] == pytest.approx(3.877083590022814)
+    assert _same_places(collapsed, seen["scale, triangle, fixed"])
+    assert atlas.layout_problems(expanded) == []
+
+
+def test_scale_tabs_have_one_tab_stop_descriptions_and_keyboard_url_state(
+    seen: Readings,
+) -> None:
+    report = seen["default"]
+    tabs = {tab["key"]: tab for tab in report["scales"]}
+    assert list(tabs) == ["fixed", "row", "global"]
+    assert report["scale"] == "fixed"
+    assert [(tab["selected"], tab["tabindex"]) for tab in tabs.values()] == [
+        ("true", 0),
+        ("false", -1),
+        ("false", -1),
+    ]
+    assert all(tab["description"] and tab["controls"] == "atlas-cells" for tab in tabs.values())
+    expected = ["row", "global", "fixed", "global", "fixed", "global"]
+    for (_, reading), mode in zip(seen["scale keys"], expected, strict=True):
+        selected = next(tab for tab in reading["scales"] if tab["selected"] == "true")
+        assert selected["key"] == mode
+        assert selected["focused"]
+        assert selected["tabindex"] == 0
+        assert reading["scale"] == mode
+        assert reading["search"] == f"?atlas=grid{'' if mode == 'fixed' else f'&scale={mode}'}"
+    assert seen["scale, size changed"]["search"] == "?atlas=grid&scale=global&size=medium"
+    assert seen["scale, layout changed"]["search"] == "?scale=global&size=medium"
+
+
+@pytest.mark.parametrize("view", ["triangle", "grid"])
+@pytest.mark.parametrize("scale", ["row", "global"])
+def test_scale_query_has_correct_actual_ratios_before_mount_without_layout_shift(
+    seen: Readings,
+    view: str,
+    scale: str,
+) -> None:
+    initial = seen[f"initial scale, {view}, {scale}"]
+    mounted = seen[f"mounted scale, {view}, {scale}"]
+    assert initial["scale"] == mounted["scale"] == scale
+    assert initial["height"] == pytest.approx(mounted["cells"]["height"], abs=0.02)
+    assert initial["width"] == mounted["cells"]["width"]
+    for before, after in zip(initial["tiles"], mounted["tiles"], strict=True):
+        assert before["n"] == after["n"]
+        reference = (
+            atlas.row_of(before["n"])
+            if scale == "row"
+            else max(tile["side"] for tile in initial["tiles"])
+        )
+        assert before["drawing_width"] == pytest.approx(
+            before["drawing_slot_width"] * before["side"] / reference, abs=0.02
+        )
+        assert before["drawing_width"] == pytest.approx(after["drawing"]["width"], abs=0.02)
+        assert before["width"] == pytest.approx(after["width"], abs=0.02)
+        assert before["height"] == after["height"]
+
+
+@pytest.mark.parametrize("scale", ["row", "global", "invalid"])
+def test_scale_defaults_survive_missing_bootstrap_and_disabled_javascript(
+    seen: Readings, scale: str
+) -> None:
+    assert seen["scale without bootstrap, " + scale]["scale"] == (
+        scale if scale != "invalid" else "fixed"
+    )
+    assert seen["no JavaScript"]["scale"] == "fixed"
+
+
+def _reference_frame() -> tuple[float, float]:
+    """Independent expected bounds from the actual normalized enclosing SVG frame."""
+    from xml.etree import ElementTree as ET  # noqa: PLC0415
+
+    from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
+
+    svg = ET.fromstring(packing_svg(5, units=1000))
+    left, _, extent, _ = map(float, svg.attrib["viewBox"].split())
+    frame = svg.find("rect")
+    assert frame is not None
+    return (float(frame.attrib["x"]) - left) / extent, float(frame.attrib["width"]) / extent
+
+
+def _assert_row_reference(report: Readings) -> None:
+    inset, span = _reference_frame()
+    assert report["frame"] == {"inset": inset, "span": span}
+    tiles = {tile["n"]: tile for tile in report["tiles"]}
+    for n in (5, 11, 18):
+        tile = tiles[n]
+        reference = tile["reference"]
+        assert tile["smaller"]
+        assert reference is not None
+        assert reference["width"] == pytest.approx(tile["slot_width"] * span, abs=0.03)
+        assert reference["height"] == reference["width"]
+        assert reference["left"] - tile["tile"]["left"] == pytest.approx(
+            tile["padding"] + tile["slot_width"] * inset, abs=0.03
+        )
+        assert reference["top"] - tile["tile"]["top"] == pytest.approx(
+            tile["padding"] + tile["slot_width"] * inset, abs=0.03
+        )
+        drawing = tile["drawing"]
+        assert drawing["left"] + drawing["width"] / 2 == pytest.approx(
+            reference["left"] + reference["width"] / 2, abs=0.03
+        )
+        assert drawing["top"] + drawing["height"] / 2 == pytest.approx(
+            reference["top"] + reference["height"] / 2, abs=0.03
+        )
+        assert drawing["width"] * span < reference["width"]
+        assert reference["pointer_events"] == "none"
+        assert reference["fill"] == "rgba(0, 0, 0, 0)"
+        assert reference["box_sizing"] == "border-box"
+        assert reference["border_style"] == "solid"
+        assert 0 < reference["border_width"] <= 1
+    for n in (1, 2, 3, 4, 6, 9, 12, 16, 25, 36, 100):
+        assert not tiles[n]["smaller"]
+        assert tiles[n]["reference"] is None
+
+
+@pytest.mark.parametrize("view", ["triangle", "grid"])
+def test_row_reference_outlines_smaller_containers_at_the_fixed_frame(
+    seen: Readings, view: str
+) -> None:
+    _assert_row_reference(seen[f"reference, {view}, row"])
+    for scale in ("fixed", "global"):
+        assert all(
+            tile["reference"] is None for tile in seen[f"reference, {view}, {scale}"]["tiles"]
+        )
+
+
+@pytest.mark.parametrize("view", ["triangle", "grid"])
+def test_row_reference_prepaints_on_a_phone_and_keeps_script_fallbacks(
+    seen: Readings, view: str
+) -> None:
+    for state in ("initial", "mounted"):
+        _assert_row_reference(seen[f"{state} reference, {view}, row"])
+    for scale in ("fixed", "global"):
+        assert all(
+            tile["reference"] is None
+            for tile in seen[f"initial reference, {view}, {scale}"]["tiles"]
+        )
+    _assert_row_reference(seen["reference without bootstrap, row"])
+    for mode in ("global", "invalid"):
+        assert all(
+            tile["reference"] is None
+            for tile in seen[f"reference without bootstrap, {mode}"]["tiles"]
+        )
+    assert all(tile["reference"] is None for tile in seen["reference, no JavaScript"]["tiles"])
+
+
+def test_row_reference_uses_neutral_theme_ink_and_has_no_hit_target(seen: Readings) -> None:
+    _assert_row_reference(seen["reference, dark"])
+    light = seen["reference, triangle, row"]["tiles"]
+    dark = seen["reference, dark"]["tiles"]
+    light_ink = {tile["reference"]["ink"] for tile in light if tile["reference"]}
+    dark_ink = {tile["reference"]["ink"] for tile in dark if tile["reference"]}
+    assert len(light_ink) == len(dark_ink) == 1
+    assert light_ink != dark_ink

@@ -39,7 +39,7 @@ from collections.abc import Callable, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, replace
 from datetime import date
-from decimal import ROUND_HALF_EVEN, Decimal
+from decimal import ROUND_CEILING, ROUND_HALF_EVEN, Decimal
 from fractions import Fraction
 from functools import cache
 from itertools import combinations, pairwise
@@ -51,7 +51,13 @@ from xml.etree import ElementTree as ET
 import mpmath as mp
 from strif import atomic_output_file
 
-from devtools import build_bound_citations, build_composite_figure_data, render_composite_pdf
+from devtools import (
+    atlas_credit_attributions,
+    atlas_print_font,
+    build_bound_citations,
+    build_composite_figure_data,
+    render_composite_pdf,
+)
 from devtools import evand_arrangement_houses as evand_houses
 from devtools import evand_arrangement_reports as evand_reports
 from devtools import evand_exact_certificates as evand_certificates
@@ -128,6 +134,7 @@ from sqpack.render.numbers import (
 )
 from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR, LABEL_MUTED_COLOR, PAPER_THEME
 from sqpack.render.svg import (
+    PRINT_FONT_MARKER,
     append_metadata,
     append_title_desc,
     element,
@@ -193,24 +200,28 @@ COMPOSITE_SPECS: tuple[CompositeSpec, ...] = KNOWN_BEST_COMPOSITES
 
 SUMMARY_GRID_LEFT = Decimal(60)
 SUMMARY_GRID_TOP = Decimal(174)
-SUMMARY_COLUMN_PITCH = Decimal(228)
-SUMMARY_ROW_PITCH = Decimal(252)
+#: Retained whole-unit pitches. The outline gap falls from 68.85 to 54.85 units;
+#: the deepest caption-to-next-outline gap falls from 131.5197 to 78.5197 units.
+#: Both arrangements share these physical clearances and preserve drawing scale.
+SUMMARY_COLUMN_PITCH = Decimal(214)
+SUMMARY_ROW_PITCH = Decimal(307)
 #: The margin either side of the grid. One column pitch is a card plus its gutter, so
 #: the trailing gutter falls into the right margin and the two read the same.
 SUMMARY_SIDE_MARGIN = SUMMARY_GRID_LEFT
 SUMMARY_CARD_WIDTH = Decimal(216)
 SUMMARY_CARD_HEIGHT = Decimal(242)
 SUMMARY_PACKING_SIZE = Decimal(158)
+#: Outline strokes contribute half their width on either side of a box edge.
+SUMMARY_CONTAINER_STROKE = Decimal("1.15")
+SUMMARY_OUTLINE_GAP = SUMMARY_COLUMN_PITCH - SUMMARY_PACKING_SIZE - SUMMARY_CONTAINER_STROKE
 #: Additional horizontal separation before an inline regular-grid suffix, in drawing units.
 POSTER_GRID_GAP = SUMMARY_PACKING_SIZE / 2
-#: Complete triangle rows have more vertical air while preserving their drawing scale.
-POSTER_ROW_PITCH = Decimal(360)
 #: Outside air surrounds the cards and the all-grid labels, without scaling either.
 POSTER_OUTER_MARGIN = Decimal(120)
 POSTER_GRID_LEFT = POSTER_OUTER_MARGIN + SUMMARY_SIDE_MARGIN
 POSTER_GRID_MARKER_SIZE = "15"
-POSTER_GRID_MARKER_BASELINE = Decimal(87)
-POSTER_GRID_MARKER_LINE_PITCH = Decimal(18)
+#: Marker ink sits slightly nearer its box than two neighboring box outlines.
+POSTER_GRID_MARKER_CLEARANCE_RATIO = Decimal("0.90")
 #: One fewer decimal digit in triangle captions, leaving space beside the degree.
 POSTER_BOUND_DECIMAL_PLACES = 5
 POSTER_BOUND_DEGREE_GAP = Decimal(5)
@@ -279,85 +290,25 @@ SUMMARY_SMALL_SIZE = "14"
 # than beside a packing, so it sits larger than the card labels and takes bold.
 # Helvetica has no semibold, so bold is the only heavier face available.
 SUMMARY_FOOTER_SIZE = "19"
-# Helvetica-Bold advance widths in units of 1/1000 em, for the characters the
-# figure actually sets. A uniform per-character estimate cannot center a mixed
-# string: it put the two legend rows 107px and 189px off center, in opposite
-# amounts, because their character mixes differ.
-_HELVETICA_BOLD_WIDTHS = {
-    " ": 278,
-    "(": 333,
-    ")": 333,
-    ",": 278,
-    "-": 333,
-    ".": 278,
-    "/": 278,
-    ":": 333,
-    "=": 584,
-    "\u2264": 584,
-    "\u2265": 584,
-    "\u2248": 584,
-    "\u00b0": 400,
-    "\u00d7": 584,
-    "a": 556,
-    "b": 611,
-    "c": 556,
-    "d": 611,
-    "e": 556,
-    "f": 333,
-    "g": 611,
-    "h": 611,
-    "i": 278,
-    "j": 278,
-    "k": 556,
-    "l": 278,
-    "m": 889,
-    "n": 611,
-    "o": 611,
-    "p": 611,
-    "q": 611,
-    "r": 389,
-    "s": 556,
-    "t": 333,
-    "u": 611,
-    "v": 556,
-    "w": 778,
-    "x": 556,
-    "y": 556,
-    "z": 500,
-    "A": 722,
-    "B": 722,
-    "C": 722,
-    "D": 722,
-    "E": 667,
-    "F": 611,
-    "G": 778,
-    "H": 722,
-    "I": 278,
-    "J": 556,
-    "K": 722,
-    "L": 611,
-    "M": 833,
-    "N": 722,
-    "O": 778,
-    "P": 667,
-    "Q": 778,
-    "R": 722,
-    "S": 667,
-    "T": 611,
-    "U": 722,
-    "V": 667,
-    "W": 944,
-    "X": 667,
-    "Y": 667,
-    "Z": 611,
-}
-_DEFAULT_ADVANCE = 556
 
 
 def _text_width(text: str, size: str) -> Decimal:
-    """Advance width of a string set in Helvetica Bold at this size."""
-    units = sum(_HELVETICA_BOLD_WIDTHS.get(ch, _DEFAULT_ADVANCE) for ch in text)
-    return Decimal(units) * Decimal(size) / Decimal(1000)
+    """Advance width in the retained Arial-compatible bold print face."""
+    return atlas_print_font.text_width(text, Decimal(size))
+
+
+def _print_ink_bounds(content: str, size: str) -> tuple[Decimal, Decimal]:
+    _left, top, _right, bottom = atlas_print_font.ink_bounds(content, Decimal(size))
+    return top, bottom
+
+
+def _information_text_style(size: str) -> dict[str, str]:
+    return {
+        "font-family": POSTER_BODY_FONT,
+        "font-size": size,
+        "font-weight": POSTER_BODY_WEIGHT,
+        "fill": "#000000",
+    }
 
 
 SUMMARY_FOOTER_WEIGHT = "700"
@@ -366,7 +317,7 @@ SUMMARY_LEGEND_ROW_PITCH = Decimal(28)
 # to ask for: the card labels take bold, the only heavier face available, over a
 # darker grey. The footer block stays regular so the two do not compete.
 SUMMARY_SMALL_WEIGHT = "700"
-SUMMARY_SMALL_FILL = LABEL_MUTED_COLOR
+SUMMARY_SMALL_FILL = "#000000"
 # Letters sit on their cap height, math symbols on the math axis, so a single
 # baseline cannot center both inside the badge box. Offsets are from the box top.
 SUMMARY_BADGE_FONT_SIZE = Decimal(15)
@@ -401,7 +352,7 @@ SUMMARY_SUBTITLE_BASELINE = Decimal(148)
 #: uses one smaller type step, preserving card scale and the spacious baselines.
 POSTER_INFORMATION_TYPE_SCALE = Decimal(3)
 POSTER_TITLE_SIZE = "144"
-POSTER_BODY_FONT = "Arial, Helvetica, sans-serif"
+POSTER_BODY_FONT = atlas_print_font.FAMILY
 POSTER_BODY_SIZE = "48"
 POSTER_BODY_WEIGHT = "700"
 POSTER_BODY_LINE_HEIGHT_RATIO = Decimal("1.50")
@@ -410,11 +361,10 @@ POSTER_BODY_LINE_PITCH = Decimal(POSTER_BODY_SIZE) * POSTER_BODY_LINE_HEIGHT_RAT
 POSTER_LEGEND_TYPE_SCALE = (Decimal(POSTER_BODY_SIZE) / Decimal(SUMMARY_FOOTER_SIZE)).quantize(
     Decimal("0.000001"), rounding=ROUND_HALF_EVEN
 )
-POSTER_PROBLEM_SIZE = "57"
+POSTER_PROBLEM_SIZE = "66"
 POSTER_PROBLEM_LINE_PITCH = Decimal(POSTER_PROBLEM_SIZE) * POSTER_BODY_LINE_HEIGHT_RATIO
 POSTER_INFORMATION_WIDTH = Decimal(2600)
 POSTER_INFORMATION_TOP = POSTER_OUTER_MARGIN
-POSTER_INFORMATION_BOTTOM = POSTER_INFORMATION_TOP + Decimal(2191)
 POSTER_TITLE_BASELINE = POSTER_INFORMATION_TOP + Decimal(144)
 POSTER_LEGEND_BASELINE = POSTER_INFORMATION_TOP + Decimal(660)
 POSTER_LEGEND_COLUMN_GAP = Decimal(180)
@@ -425,7 +375,7 @@ POSTER_PACKING_CREDITS_PREFIX = "Best packings due to"
 POSTER_PACKING_CREDITS_SECTION_GAP = Decimal(180)
 POSTER_PROBLEM = (
     "The square packing problem asks for the side s(n) of the smallest square that can "
-    "hold n unit squares, where the squares are free to rotate but cannot overlap."
+    "hold n unit squares, where the squares are free to rotate but cannot overlap"
 )
 POSTER_EXPLAINER_LINES = (
     (
@@ -433,21 +383,19 @@ POSTER_EXPLAINER_LINES = (
         ("s", True),
         ("(", False),
         ("n", True),
-        (") of the smallest square", False),
+        (") of the smallest square that can", False),
     ),
     (
-        ("that can hold ", False),
+        ("hold ", False),
         ("n", True),
-        (" unit squares, where the squares are free to rotate but cannot overlap.", False),
+        (" unit squares, where the squares are free to rotate but cannot overlap", False),
     ),
 )
-#: Quartz selects upright Helvetica Bold even for italic SVG spans. Arial's italic
-#: face embeds correctly in Cairo's PDF and has compatible advances for these letters.
-POSTER_ITALIC_FONT = "Arial, Helvetica, sans-serif"
-# Helvetica, with Arial as the metric-compatible stand-in where Helvetica is
-# absent. No webfont is referenced, so nothing is fetched at render time and the
-# figure is the same family everywhere it is opened.
-SUMMARY_FONT = "Helvetica, Arial, sans-serif"
+#: The retained italic companion is named explicitly for Quartz's face lookup.
+POSTER_ITALIC_FONT = atlas_print_font.ITALIC_FAMILY
+# All composite annotations use the retained family. Its bytes are embedded in
+# standalone SVGs and provisioned in-process for native PDF/PNG exports.
+SUMMARY_FONT = atlas_print_font.FAMILY
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 # The one failure this catches: the committed PNG was exported from an older SVG.
 # --check rebuilds the SVG and compares it in full, but nothing otherwise ties the
@@ -646,14 +594,11 @@ class CompositeCardPosition:
 
 @dataclass(frozen=True)
 class CompositeCanvas:
-    """Where every part of one composite sits, computed from its specification.
+    """Place the retained card scale and the common annotation blocks.
 
-    The row-major figure reserves a title band and a bottom legend and footer. The
-    triangle poster keeps the same card scale and puts that information in its upper
-    left, so its height follows the cards and margins alone. The 1-100 figure's 2400
-    by 2896 canvas, its legend at 2724 and its footer at 2790/2817/2844/2871 are what
-    these formulas return
-    for ten columns of ten.
+    The row-major figure reserves a title band and a bottom information block. The
+    triangle places the same annotations in its upper-left whitespace, so only the
+    grid's page height includes the information block's content-aware extent.
     """
 
     spec: CompositeSpec
@@ -680,7 +625,7 @@ class CompositeCanvas:
 
     @property
     def row_pitch(self) -> Decimal:
-        return POSTER_ROW_PITCH if self.information_in_corner else SUMMARY_ROW_PITCH
+        return SUMMARY_ROW_PITCH
 
     def _transition(self, row: int) -> GridTransition | None:
         return next(
@@ -825,39 +770,23 @@ class CompositeCanvas:
 
     @property
     def legend_baseline(self) -> Decimal:
-        """The first legend line, in the corner block or below the row-major grid."""
-        if self.information_in_corner:
-            return POSTER_LEGEND_BASELINE
-        return self.grid_bottom + SUMMARY_LEGEND_GAP
+        return _information_layout(self).legend_baseline
 
     @property
     def explainer_baseline(self) -> Decimal:
-        if self.information_in_corner:
-            return POSTER_EXPLAINER_BASELINE
-        return self.legend_baseline + SUMMARY_LEGEND_ROW_PITCH + SUMMARY_FOOTER_GAP
+        return _information_layout(self).problem_baselines[0]
 
     @property
     def citations_baseline(self) -> Decimal:
-        if self.information_in_corner:
-            return self.stamp_baseline + 2 * POSTER_BODY_LINE_PITCH
-        return self.explainer_baseline + SUMMARY_FOOTER_LINE_PITCH
+        return _information_layout(self).project_baseline
 
     @property
     def credit_baseline(self) -> Decimal:
-        if self.information_in_corner:
-            return (
-                POSTER_PACKING_CREDITS_BASELINE
-                + POSTER_BODY_LINE_PITCH * (POSTER_PACKING_CREDITS_LINE_COUNT - 1)
-                + POSTER_PACKING_CREDITS_SECTION_GAP
-            )
-        return self.citations_baseline + SUMMARY_FOOTER_LINE_PITCH
+        return _information_layout(self).diagram_baseline
 
     @property
     def stamp_baseline(self) -> Decimal:
-        pitch = (
-            POSTER_BODY_LINE_PITCH if self.information_in_corner else SUMMARY_FOOTER_LINE_PITCH
-        )
-        return self.credit_baseline + pitch
+        return _information_layout(self).stamp_baseline
 
     @property
     def height(self) -> int:
@@ -867,9 +796,9 @@ class CompositeCanvas:
             + SUMMARY_CARD_HEIGHT
             + POSTER_OUTER_MARGIN
             if self.information_in_corner
-            else self.stamp_baseline + SUMMARY_BOTTOM_MARGIN
+            else _information_layout(self).bottom + SUMMARY_BOTTOM_MARGIN
         )
-        return _whole_units(bottom, f"{self.spec.stem} height")
+        return int(bottom.to_integral_value(rounding=ROUND_CEILING))
 
     @property
     def svg_path(self) -> Path:
@@ -931,7 +860,13 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "lower bound or an optimality proof since August 2026. Badges mark "
             "which side lengths are proved optimal, and whether a side length is pinned "
             "exactly by a radical or a minimal polynomial rather than only by a decimal. "
-            f"{SUMMARY_CITATIONS}."
+            "The black title and inline project reference sit above the grid. "
+            "The black two-line definition, shared eight-item legend and unique "
+            "corpus-wide construction, lower-bound and optimality credits sit below it, "
+            "followed by the diagram credit and "
+            "dated edition. Every counted legend item includes the depicted total. "
+            "Case counts are gray and ordinary bounds and annotations are black. "
+            f"{POSTER_CITATIONS}: {SUMMARY_REPOSITORY}."
         ),
     ),
     "known-best-1-324": (
@@ -942,7 +877,8 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "n equals (k minus 1) squared plus 1 through k squared, ending at the "
             "common right edge. Eighteen complete logical rows end at 324, occupying "
             "eighteen physical lines within a thirty-five-column envelope. "
-            "A k by k grid label marks the first retained regular grid packing "
+            "A single-line bottom-to-top k by k GRID label sits nearly one ordinary box gap "
+            "left of the first retained regular grid packing "
             "in each row; an extra half-drawing width separates an irregular prefix "
             "from its grid suffix horizontally. All rows retain the same vertical pitch. "
             f"{POSTER_PROBLEM} "
@@ -956,6 +892,14 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "optimality proof since August 2026. Badges mark which side lengths are proved "
             "optimal, and whether a side length is pinned exactly by a radical or a "
             f"minimal polynomial rather than only by a decimal. "
+            "Case counts are gray; the title, two-line definition, other explanatory "
+            "text and ordinary bound captions are black. Every counted legend item "
+            "includes the depicted total. The same corpus-wide construction, lower-bound "
+            "and optimality credit paragraphs name contributors oldest first, "
+            "with formalization and verification roles explicitly qualified. "
+            "Full source and per-case attribution is retained in the SVG metadata. "
+            "The diagram credit and dated edition follow. "
+            "A blank line precedes the plain project reference and address. "
             f"{POSTER_CITATIONS}: {SUMMARY_REPOSITORY}."
         ),
     ),
@@ -1722,12 +1666,7 @@ def resolved_composites(
 def _append_grid_transition_marker(
     root: ET.Element, transition: GridTransition, *, canvas: CompositeCanvas
 ) -> None:
-    """Mark the retained grid dimensions inside the separator or all-grid margin."""
-    center = (
-        canvas.card_left(transition.grid.first_n, transition) - POSTER_GRID_GAP / 2
-        if transition.has_irregular_prefix
-        else canvas.card_left(transition.grid.first_n, transition) - SUMMARY_SIDE_MARGIN / 2
-    )
+    """Place bottom-to-top grid dimensions beside the first grid drawing's ink."""
     grid_position = canvas.card_position(transition.grid.first_n, transition)
     lines = canvas.segment_lines(transition)
     extra_gap = (
@@ -1735,12 +1674,33 @@ def _append_grid_transition_marker(
         if len(lines) == 2 and lines[0].physical_row == lines[1].physical_row
         else Decimal(0)
     )
-    row_top = grid_position.top
     dimensions = f"{transition.row}\u00d7{transition.row}"
-    labels = (dimensions, "GRID")
-    room = POSTER_GRID_GAP if transition.has_irregular_prefix else SUMMARY_SIDE_MARGIN
-    if any(_text_width(label, POSTER_GRID_MARKER_SIZE) > room for label in labels):
-        raise ValueError("a grid transition marker exceeds its separator space")
+    label = f"{dimensions} GRID"
+    size = Decimal(POSTER_GRID_MARKER_SIZE)
+    x = -_text_width(label, POSTER_GRID_MARKER_SIZE) / 2
+    left, ink_top, right, ink_bottom = atlas_print_font.ink_bounds(label, size)
+    ink_left, ink_right = x + left, x + right
+    drawing_left = grid_position.left + SUMMARY_PACKING_INSET_X
+    drawing_top = grid_position.top + SUMMARY_PACKING_INSET_Y
+    clearance = SUMMARY_OUTLINE_GAP * POSTER_GRID_MARKER_CLEARANCE_RATIO
+    # A -90-degree rotation maps local (x, y) to (y, -x). Center the single
+    # line's ink vertically and measure its clearance from the stroked outline.
+    center_x = drawing_left - SUMMARY_CONTAINER_STROKE / 2 - clearance - ink_bottom
+    center_y = drawing_top + SUMMARY_PACKING_SIZE / 2 + (ink_left + ink_right) / 2
+    bounds = (
+        center_x + ink_top,
+        center_y - ink_right,
+        center_x + ink_bottom,
+        center_y - ink_left,
+    )
+    available_left = grid_position.left - (
+        POSTER_GRID_GAP if transition.has_irregular_prefix else SUMMARY_SIDE_MARGIN
+    )
+    if not (
+        max(POSTER_OUTER_MARGIN, available_left) <= bounds[0] < bounds[2] < drawing_left
+        and drawing_top <= bounds[1] < bounds[3] <= drawing_top + SUMMARY_PACKING_SIZE
+    ):
+        raise ValueError("a rotated grid transition marker exceeds its separator space")
     marker = sub(
         root,
         "g",
@@ -1752,28 +1712,33 @@ def _append_grid_transition_marker(
             "data-first-grid-n": str(transition.first_grid_n),
             "data-grid-side": str(transition.row),
             "data-extra-gap": format_svg_number(extra_gap),
+            "data-rotation": "-90",
+            "data-left": format_svg_number(bounds[0]),
+            "data-top": format_svg_number(bounds[1]),
+            "data-right": format_svg_number(bounds[2]),
+            "data-bottom": format_svg_number(bounds[3]),
+            "data-drawing-clearance": format_svg_number(clearance),
+            "transform": (
+                f"translate({format_svg_number(center_x)} {format_svg_number(center_y)}) "
+                "rotate(-90)"
+            ),
             "aria-label": f"{dimensions} grid packings begin at n={transition.first_grid_n}",
         },
     )
-    for index, label in enumerate(labels):
-        sub(
-            marker,
-            "text",
-            {
-                "data-feature": "grid-transition-label",
-                "x": format_svg_number(center),
-                "y": format_svg_number(
-                    row_top
-                    + POSTER_GRID_MARKER_BASELINE
-                    + POSTER_GRID_MARKER_LINE_PITCH * index
-                ),
-                "text-anchor": "middle",
-                "font-family": SUMMARY_FONT,
-                "font-size": POSTER_GRID_MARKER_SIZE,
-                "font-weight": "700",
-                "fill": SUMMARY_SMALL_FILL,
-            },
-        ).text = label
+    sub(
+        marker,
+        "text",
+        {
+            "data-feature": "grid-transition-label",
+            "x": format_svg_number(x),
+            "y": "0",
+            "text-anchor": "start",
+            "font-family": SUMMARY_FONT,
+            "font-size": POSTER_GRID_MARKER_SIZE,
+            "font-weight": "700",
+            "fill": SUMMARY_SMALL_FILL,
+        },
+    ).text = label
 
 
 def _composite_bound_display(
@@ -1880,7 +1845,7 @@ def _append_summary_card(
             # the same file rendered standalone. One artifact, two line weights, depending on
             # who drew it.
             "stroke": PAPER_THEME.container,
-            "stroke-width": "1.15",
+            "stroke-width": format_svg_number(SUMMARY_CONTAINER_STROKE),
         },
     )
     encoding = canvas.spec
@@ -1942,7 +1907,7 @@ def _append_summary_card(
             "font-size": "29",
             "font-weight": "700",
             "letter-spacing": "-0.5",
-            "fill": PAPER_THEME.ink,
+            "fill": LABEL_MUTED_COLOR,
         },
     ).text = str(n)
 
@@ -2137,7 +2102,11 @@ def _append_function_text(
     value at the same x to within a hundredth of a unit and sets the same total width,
     so neither trims the space at the seam.
     """
-    sub(parent, "tspan", {"font-style": "italic"}).text = display[0]
+    sub(
+        parent,
+        "tspan",
+        {"font-style": "italic", "font-family": atlas_print_font.ITALIC_FAMILY},
+    ).text = display[0]
     kern = {"dx": format_svg_number(Decimal(size) * SUMMARY_ITALIC_KERN)}
     rest = display[1:]
     head, separator, value = rest.rpartition(" ")
@@ -2189,17 +2158,8 @@ def _append_star(
 
 
 def _badge_baseline(glyph: str) -> Decimal:
-    """Where a badge's glyph sits, so every badge centres its mark the same way.
-
-    A letter is centred on its cap height: the box is `SUMMARY_BADGE_SIZE` tall and the
-    caps are `SUMMARY_LABEL_CAP_RATIO` of the font, so the baseline sits half a cap
-    below the box's middle. Deriving it rather than tabulating it is what keeps `R`
-    level with `O`; `R` used to fall through to the math baseline and rode high.
-    """
-    if not glyph.isalpha():
-        return SUMMARY_MATH_GLYPH_BASELINE
-    cap = SUMMARY_BADGE_FONT_SIZE * SUMMARY_LABEL_CAP_RATIO
-    return (SUMMARY_BADGE_SIZE + cap) / 2
+    top, bottom = _print_ink_bounds(glyph, str(SUMMARY_BADGE_FONT_SIZE))
+    return SUMMARY_BADGE_SIZE / 2 - (top + bottom) / 2
 
 
 def _append_badge(
@@ -2211,7 +2171,7 @@ def _append_badge(
     x: Decimal,
     top: Decimal,
     type_scale: Decimal = Decimal(1),
-    font_family: str = SUMMARY_FONT,
+    font_family: str = POSTER_BODY_FONT,
     font_weight: str = "650",
     accent: str | None = None,
 ) -> None:
@@ -2234,6 +2194,9 @@ def _append_badge(
             scale=size * SUMMARY_BADGE_STAR_SPAN / (SUMMARY_STAR_INSET * 2),
         )
         return
+    glyph_left, _glyph_top, glyph_right, _glyph_bottom = atlas_print_font.ink_bounds(
+        glyph, SUMMARY_BADGE_FONT_SIZE * type_scale
+    )
     fill, stroke, glyph_fill = {
         "solid": (PAPER_THEME.muted, "none", PAPER_THEME.background),
         "ink": ("none", PAPER_THEME.muted, PAPER_THEME.muted),
@@ -2264,9 +2227,9 @@ def _append_badge(
         parent,
         "text",
         {
-            "x": format_svg_number(x + size / 2),
+            "x": format_svg_number(x + size / 2 - (glyph_left + glyph_right) / 2),
             "y": format_svg_number(top + _badge_baseline(glyph) * type_scale),
-            "text-anchor": "middle",
+            "text-anchor": "start",
             "font-family": font_family,
             "font-size": format_svg_number(SUMMARY_BADGE_FONT_SIZE * type_scale),
             "font-weight": font_weight,
@@ -2437,6 +2400,7 @@ def _append_summary_legend(
             only_known_numerically=totals["only_known_numerically"],
             known_rigid=totals["rigidity_known"],
             recent_results=recent_count,
+            depicted_total=canvas.spec.count,
         )
     )
     palette = square_fill_palette(
@@ -2467,70 +2431,59 @@ def _append_summary_legend(
                 "star" if item.marker == "star" else "muted" if item.marker == "≈" else "solid",
                 item.label,
             )
-        return mark, item.text
+        return mark, item.formatted_text(count_style="words")
 
+    layout = _information_layout(canvas)
+    body_size = POSTER_BODY_SIZE if canvas.information_in_corner else SUMMARY_FOOTER_SIZE
+    scale = POSTER_LEGEND_TYPE_SCALE if canvas.information_in_corner else Decimal(1)
+    badge_size = SUMMARY_BADGE_SIZE * scale
+    mark_gap = Decimal(8) * scale
+
+    def row_width(item: LegendItem) -> Decimal:
+        if item.marker is None:
+            return _text_width(item.formatted_text(count_style="words"), body_size)
+        return (
+            badge_size * (len(item.marker_values) if item.marker_values else 1)
+            + mark_gap
+            + _text_width(item.formatted_text(count_style="words"), body_size)
+        )
+
+    widths = [
+        max(row_width(item) for item in column)
+        for column in (descriptor.left, descriptor.right)
+    ]
+    gap = POSTER_LEGEND_COLUMN_GAP * layout.scale
+    if sum(widths, Decimal(0)) + gap > layout.right - layout.left:
+        raise ValueError("the poster legend columns exceed their information block")
     legend = sub(root, "g", {"data-feature": "evidence-legend"})
-    if canvas.information_in_corner:
-        badge_size = SUMMARY_BADGE_SIZE * POSTER_LEGEND_TYPE_SCALE
-        mark_gap = Decimal(8) * POSTER_LEGEND_TYPE_SCALE
-
-        def row_width(item: LegendItem) -> Decimal:
-            if item.marker is None:
-                return _text_width(item.text, POSTER_BODY_SIZE)
-            return (
-                badge_size * (len(item.marker_values) if item.marker_values else 1)
-                + mark_gap
-                + _text_width(item.text, POSTER_BODY_SIZE)
-            )
-
-        widths = [
-            max(row_width(item) for item in column)
-            for column in (descriptor.left, descriptor.right)
-        ]
-        span = sum(widths, Decimal(0)) + POSTER_LEGEND_COLUMN_GAP
-        if span > POSTER_INFORMATION_WIDTH:
-            raise ValueError("the poster legend columns exceed their information block")
-        cursor = canvas.information_left
-        for name, items, width in zip(
-            ("left", "right"), (descriptor.left, descriptor.right), widths, strict=True
-        ):
-            column = sub(
-                legend,
-                "g",
-                {
-                    "data-feature": "legend-column",
-                    "data-column": name,
-                    "data-left": format_svg_number(cursor),
-                    "data-width": format_svg_number(width),
-                },
-            )
-            for index, item in enumerate(items):
-                _legend_row(
-                    column,
-                    [entry(item)],
-                    baseline=canvas.legend_baseline + POSTER_BODY_LINE_PITCH * index,
-                    canvas_width=canvas.width,
-                    left_edge=cursor,
-                    type_scale=POSTER_LEGEND_TYPE_SCALE,
-                    label_size=POSTER_BODY_SIZE,
-                    font_family=POSTER_BODY_FONT,
-                    font_weight=POSTER_BODY_WEIGHT,
-                    mark_font_weight=POSTER_BODY_WEIGHT,
-                )
-            cursor += width + POSTER_LEGEND_COLUMN_GAP
-    else:
-        _legend_row(
+    cursor = layout.left
+    for name, items, width in zip(
+        ("left", "right"), (descriptor.left, descriptor.right), widths, strict=True
+    ):
+        column = sub(
             legend,
-            [entry(item) for item in (*descriptor.left, descriptor.right[0])],
-            baseline=canvas.legend_baseline,
-            canvas_width=canvas.width,
+            "g",
+            {
+                "data-feature": "legend-column",
+                "data-column": name,
+                "data-left": format_svg_number(cursor),
+                "data-width": format_svg_number(width),
+            },
         )
-        _legend_row(
-            legend,
-            [entry(item) for item in descriptor.right[1:]],
-            baseline=canvas.legend_baseline + SUMMARY_LEGEND_ROW_PITCH,
-            canvas_width=canvas.width,
-        )
+        for index, item in enumerate(items):
+            _legend_row(
+                column,
+                [entry(item)],
+                baseline=layout.legend_baseline + layout.line_pitch * index,
+                canvas_width=canvas.width,
+                left_edge=cursor,
+                type_scale=scale,
+                label_size=body_size,
+                font_family=POSTER_BODY_FONT,
+                font_weight=POSTER_BODY_WEIGHT,
+                mark_font_weight=POSTER_BODY_WEIGHT,
+            )
+        cursor += width + gap
 
 
 def _append_summary_explainer(
@@ -2544,8 +2497,9 @@ def _append_summary_explainer(
     runs: Sequence[tuple[str, bool]] = SUMMARY_EXPLAINER_RUNS,
     feature: str = "explainer",
     italic_font_family: str | None = None,
+    font_size: str | None = None,
 ) -> None:
-    font_size = format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
+    font_size = font_size or format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
     kern_width = Decimal(font_size) * SUMMARY_ITALIC_KERN
     kern = format_svg_number(kern_width)
     line_width = sum(
@@ -2580,10 +2534,7 @@ def _append_summary_explainer(
                 else (Decimal(canvas_width) - line_width) / 2
             ),
             "y": format_svg_number(baseline),
-            "font-family": SUMMARY_FONT,
-            "font-size": font_size,
-            "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": SUMMARY_SMALL_FILL,
+            **_information_text_style(font_size),
         },
     )
     previous_italic = False
@@ -2596,117 +2547,6 @@ def _append_summary_explainer(
             attributes["dx"] = kern
         sub(explainer, "tspan", attributes).text = text
         previous_italic = italic
-
-
-def _append_summary_information(
-    root: ET.Element,
-    *,
-    spec: RenderSpec,
-    canvas: CompositeCanvas,
-    identity: CompositeIdentity,
-    contributions: Mapping[int, RecentContributions] | None = None,
-) -> None:
-    width = canvas.width
-    composite = canvas.spec
-    heading_x = str(width // 2)
-    sub(
-        root,
-        "text",
-        {
-            "x": heading_x,
-            "y": "76",
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": "48",
-            "font-weight": "700",
-            "letter-spacing": "1.5",
-            "fill": PAPER_THEME.ink,
-        },
-    ).text = f"{composite.count} BEST KNOWN SQUARE PACKINGS"
-    release_width = _text_width(identity.dateline, SUMMARY_RELEASE_SIZE)
-    release_scale = _star_scale(SUMMARY_RELEASE_SIZE)
-    star_span = SUMMARY_STAR_INSET * 2 * release_scale
-    group_width = star_span + SUMMARY_RELEASE_GAP + release_width
-    group_left = (Decimal(width) - group_width) / 2
-    _append_star(
-        root,
-        center_x=group_left + star_span / 2,
-        center_y=_star_center_y(SUMMARY_RELEASE_BASELINE, SUMMARY_RELEASE_SIZE),
-        feature="release-star",
-        scale=release_scale,
-    )
-    sub(
-        root,
-        "text",
-        {
-            "data-feature": "release",
-            "x": format_svg_number(group_left + star_span + SUMMARY_RELEASE_GAP),
-            "y": format_svg_number(SUMMARY_RELEASE_BASELINE),
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_RELEASE_SIZE,
-            "font-weight": "700",
-            "fill": PAPER_THEME.ink,
-        },
-    ).text = identity.dateline
-    sub(
-        root,
-        "text",
-        {
-            "data-feature": "repository",
-            "x": heading_x,
-            "y": format_svg_number(SUMMARY_SUBTITLE_BASELINE),
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_REPOSITORY_SIZE,
-            "font-weight": "700",
-            # Where the figure came from reads as part of the title, not as a caption.
-            "fill": PAPER_THEME.ink,
-        },
-    ).text = SUMMARY_REPOSITORY
-    _append_summary_legend(root, spec=spec, canvas=canvas, contributions=contributions)
-    _append_summary_explainer(root, baseline=canvas.explainer_baseline, canvas_width=width)
-    sub(
-        root,
-        "text",
-        {
-            "data-feature": "citations",
-            "x": heading_x,
-            "y": format_svg_number(canvas.citations_baseline),
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_FOOTER_SIZE,
-            "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": SUMMARY_SMALL_FILL,
-        },
-    ).text = SUMMARY_CITATIONS
-    sub(
-        root,
-        "text",
-        {
-            "data-feature": "credit",
-            "x": heading_x,
-            "y": format_svg_number(canvas.credit_baseline),
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_FOOTER_SIZE,
-            "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": SUMMARY_SMALL_FILL,
-        },
-    ).text = SUMMARY_CREDIT
-    sub(
-        root,
-        "text",
-        {
-            "data-feature": "release-stamp",
-            "x": heading_x,
-            "y": format_svg_number(canvas.stamp_baseline),
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_FOOTER_SIZE,
-            "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": SUMMARY_SMALL_FILL,
-        },
-    ).text = identity.stamp
 
 
 @dataclass(frozen=True, slots=True)
@@ -2779,7 +2619,9 @@ def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, .
                     (name, source_date) for name in names if name in source.authors
                 )
         for name, supported in dated_names:
-            if _credit_date_key(supported) > _credit_date_key(group_dates.get(name)):
+            if name not in group_dates or _credit_date_key(supported) < _credit_date_key(
+                group_dates[name]
+            ):
                 group_dates[name] = supported
     return tuple(
         PackingCredit(tuple(names), tuple(keys), reference, tuple(dates.items()))
@@ -2787,61 +2629,230 @@ def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, .
     )
 
 
-def _poster_credit_lines(packing_credits: Sequence[PackingCredit]) -> tuple[str, ...]:
-    """Balance complete names across three print lines, each author appearing once.
-
-    Authors are newest first by their latest supported attribution date, with
-    year-only precision retained and undated authors last. Only consecutive breaks
-    are considered, so balancing cannot rearrange chronology. Source keys remain in
-    the SVG metadata.
-    """
-    names = list(dict.fromkeys(name for credit in packing_credits for name in credit.names))
-    latest: dict[str, date | int] = {}
-    for credit in packing_credits:
-        for name, supported in credit.dates:
-            if _credit_date_key(supported) > _credit_date_key(latest.get(name)):
-                latest[name] = supported
-    names.sort(
-        key=lambda name: (
-            *(-part for part in _credit_date_key(latest.get(name))),
-            name.casefold(),
-        )
+def _balanced_credit_lines(
+    paragraph: atlas_credit_attributions.CreditParagraph, *, line_count: int | None = None
+) -> tuple[str, ...]:
+    """Balance consecutive whole-name runs without rearranging dates or role clauses."""
+    atoms = paragraph.atoms
+    if not atoms:
+        return (paragraph.clauses[0].prefix,)
+    counts = (
+        (min(line_count, len(atoms)),) if line_count is not None else range(1, len(atoms) + 1)
     )
-    if not names:
-        return (POSTER_PACKING_CREDITS_PREFIX,)
-    line_count = min(POSTER_PACKING_CREDITS_LINE_COUNT, len(names))
-
-    def measure(
-        groups: tuple[tuple[int, ...], ...],
-    ) -> tuple[tuple[str, ...], tuple[Decimal, ...], Decimal]:
-        lines = tuple(
-            (f"{POSTER_PACKING_CREDITS_PREFIX} " if index == 0 else "")
-            + ", ".join(names[number] for number in group)
-            + ("." if index == line_count - 1 else ",")
-            for index, group in enumerate(groups)
-        )
-        widths = tuple(_text_width(line, POSTER_BODY_SIZE) for line in lines)
-        mean = sum(widths, Decimal(0)) / line_count
-        score = sum(((width - mean) ** 2 for width in widths), Decimal(0))
-        return lines, widths, score
-
-    best_groups: tuple[tuple[int, ...], ...] | None = None
-    best_lines: tuple[str, ...] = ()
-    best_score: Decimal | None = None
-    for breaks in combinations(range(1, len(names)), line_count - 1):
-        boundaries = (0, *breaks, len(names))
-        groups = tuple(tuple(range(first, last)) for first, last in pairwise(boundaries))
-        lines, widths, score = measure(groups)
-        if max(widths) > POSTER_INFORMATION_WIDTH:
-            continue
-        if best_score is None or score < best_score:
-            best_groups, best_lines, best_score = groups, lines, score
-    if best_groups is None or best_score is None:
-        raise ValueError("poster packing credits exceed their three-line information block")
-    return best_lines
+    for count in counts:
+        best_lines: tuple[str, ...] = ()
+        best_score: Decimal | None = None
+        for breaks in combinations(range(1, len(atoms)), count - 1):
+            boundaries = (0, *breaks, len(atoms))
+            lines = tuple(" ".join(atoms[first:last]) for first, last in pairwise(boundaries))
+            widths = tuple(_text_width(line, POSTER_BODY_SIZE) for line in lines)
+            if max(widths) > POSTER_INFORMATION_WIDTH:
+                continue
+            mean = sum(widths, Decimal(0)) / count
+            score = sum(((width - mean) ** 2 for width in widths), Decimal(0))
+            if best_score is None or score < best_score:
+                best_lines, best_score = lines, score
+        if best_score is not None:
+            return best_lines
+    raise ValueError(
+        "poster packing credits exceed their three-line information block"
+        if line_count is not None
+        else "poster attribution credits exceed their information block"
+    )
 
 
-def _append_poster_information(
+@cache
+def _print_attributions() -> atlas_credit_attributions.CreditAttributions:
+    return atlas_credit_attributions.parse(
+        json.loads((ATLAS_ROOT / "credit-attributions.json").read_text())
+    )
+
+
+def _poster_credit_lines(packing_credits: Sequence[PackingCredit]) -> tuple[str, ...]:
+    """Unique normalized names, oldest first by their earliest supported attribution.
+
+    Year-only dates preserve their precision; unknown intra-year priority uses
+    alphabetical ties. Full original names and sources remain in the SVG metadata.
+    """
+    normalize = _print_attributions().normalize_name
+    earliest: dict[str, date | int | None] = {
+        normalize(name): None for credit in packing_credits for name in credit.names
+    }
+    for credit in packing_credits:
+        for original_name, supported in credit.dates:
+            name = normalize(original_name)
+            previous = earliest[name]
+            if previous is None or _credit_date_key(supported) < _credit_date_key(previous):
+                earliest[name] = supported
+    names = atlas_credit_attributions.chronological_names(earliest)
+    return _balanced_credit_lines(
+        atlas_credit_attributions.CreditParagraph(
+            "packing",
+            (atlas_credit_attributions.CreditClause(POSTER_PACKING_CREDITS_PREFIX, names),),
+        ),
+        line_count=POSTER_PACKING_CREDITS_LINE_COUNT,
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class InformationLayout:
+    scale: Decimal
+    left: Decimal
+    right: Decimal
+    line_pitch: Decimal
+    title_baseline: Decimal
+    problem_baselines: tuple[Decimal, ...]
+    legend_baseline: Decimal
+    credit_baselines: tuple[Decimal, ...]
+    attribution_baselines: tuple[tuple[Decimal, ...], ...]
+    diagram_baseline: Decimal
+    stamp_baseline: Decimal
+    project_baseline: Decimal
+    repository_baseline: Decimal
+    bottom: Decimal
+
+
+@cache
+def _print_credit_lines() -> tuple[str, ...]:
+    return _poster_credit_lines(_poster_packing_credits(CORPUS.first_n, CORPUS.last_n))
+
+
+@cache
+def _print_attribution_lines() -> tuple[tuple[str, ...], ...]:
+    return tuple(
+        _balanced_credit_lines(paragraph) for paragraph in _print_attributions().paragraphs
+    )
+
+
+@cache
+def _print_credit_metadata() -> str:
+    document = json.loads(_print_attributions().metadata)
+    packing_credits = _poster_packing_credits(CORPUS.first_n, CORPUS.last_n)
+    keys = {key for credit in packing_credits for key in credit.source_keys}
+    document["construction"] = {
+        "credit_scope": [CORPUS.first_n, CORPUS.last_n],
+        "source_groups": [
+            {
+                "names": credit.names,
+                "source_keys": credit.source_keys,
+                "citation": credit.citation,
+                "earliest_dates": {
+                    name: supported.isoformat() if isinstance(supported, date) else supported
+                    for name, supported in credit.dates
+                },
+            }
+            for credit in packing_credits
+        ],
+        "sources": [
+            entry
+            for entry in safe_load(build_bound_citations.BIBLIOGRAPHY.read_text())["sources"]
+            if entry["key"] in keys
+        ],
+        "cases": [
+            {
+                "n": n,
+                **{
+                    key: value
+                    for key, value in build_bound_citations.load_case(n)[
+                        "reported_upper_bound"
+                    ].items()
+                    if key in {"found_by", "found_year", "improved_by", "source_key"}
+                },
+            }
+            for n in CORPUS.numbers
+        ],
+    }
+    return json.dumps(document, ensure_ascii=False, separators=(",", ":"), default=str)
+
+
+def _information_layout(
+    canvas: CompositeCanvas, identity: CompositeIdentity | None = None
+) -> InformationLayout:
+    corner = canvas.information_in_corner
+    scale = Decimal(1) if corner else Decimal(SUMMARY_FOOTER_SIZE) / Decimal(POSTER_BODY_SIZE)
+    body_size = POSTER_BODY_SIZE if corner else SUMMARY_FOOTER_SIZE
+    problem_size = format_svg_number(Decimal(POSTER_PROBLEM_SIZE) * scale)
+    pitch = POSTER_BODY_LINE_PITCH * scale
+    gap = Decimal(body_size) * 3
+    width = POSTER_INFORMATION_WIDTH * scale
+    left = canvas.information_left if corner else (Decimal(canvas.width) - width) / 2
+    title_baseline = POSTER_TITLE_BASELINE if corner else Decimal(76)
+    first_problem = "".join(text for text, _italic in POSTER_EXPLAINER_LINES[0])
+    top, _bottom = _print_ink_bounds(first_problem, problem_size)
+    title_bottom = (
+        title_baseline + _print_ink_bounds("BEST KNOWN SQUARE PACKINGS", POSTER_TITLE_SIZE)[1]
+    )
+    first_baseline = (
+        title_bottom + gap if corner else canvas.grid_bottom + SUMMARY_LEGEND_GAP
+    ) - top
+    problem_baselines = tuple(
+        first_baseline + POSTER_PROBLEM_LINE_PITCH * scale * index
+        for index in range(len(POSTER_EXPLAINER_LINES))
+    )
+    last_problem = "".join(text for text, _italic in POSTER_EXPLAINER_LINES[-1])
+    problem_bottom = problem_baselines[-1] + _print_ink_bounds(last_problem, problem_size)[1]
+    legend_scale = POSTER_LEGEND_TYPE_SCALE if corner else Decimal(1)
+    legend_top = -Decimal(15) * legend_scale
+    legend_bottom = max(Decimal(4) * legend_scale, _print_ink_bounds("gjpqy", body_size)[1])
+    legend_baseline = problem_bottom + gap - legend_top
+    credit_lines = _print_credit_lines()
+    credit_first = (
+        legend_baseline
+        + pitch * 3
+        + legend_bottom
+        + gap
+        - _print_ink_bounds(credit_lines[0], body_size)[0]
+    )
+    credit_baselines = tuple(credit_first + pitch * index for index in range(len(credit_lines)))
+    credit_bottom = credit_baselines[-1] + _print_ink_bounds(credit_lines[-1], body_size)[1]
+    attribution_baselines = []
+    for lines in _print_attribution_lines():
+        first = credit_bottom + gap - _print_ink_bounds(lines[0], body_size)[0]
+        baselines = tuple(first + pitch * index for index in range(len(lines)))
+        attribution_baselines.append(baselines)
+        credit_bottom = baselines[-1] + _print_ink_bounds(lines[-1], body_size)[1]
+    diagram_baseline = (
+        credit_bottom + gap - _print_ink_bounds(POSTER_DIAGRAM_CREDIT, body_size)[0]
+    )
+    stamp_baseline = diagram_baseline + pitch
+    # Page geometry reserves the deepest possible date descender. A drawn edition
+    # supplies its actual text so the project's visible gap is exact for every month.
+    stamp_descent = (
+        _print_ink_bounds(identity.poster_stamp, body_size)[1]
+        if identity is not None
+        else _print_ink_bounds("gjpqy", body_size)[1]
+    )
+    stamp_bottom = stamp_baseline + stamp_descent
+    project_baseline = (
+        stamp_bottom + gap - _print_ink_bounds(POSTER_CITATIONS, body_size)[0]
+        if corner
+        else Decimal(114)
+    )
+    repository_baseline = project_baseline + pitch
+    bottom = (
+        repository_baseline + _print_ink_bounds(SUMMARY_REPOSITORY, body_size)[1]
+        if corner
+        else stamp_bottom
+    )
+    return InformationLayout(
+        scale,
+        left,
+        left + width,
+        pitch,
+        title_baseline,
+        problem_baselines,
+        legend_baseline,
+        credit_baselines,
+        tuple(attribution_baselines),
+        diagram_baseline,
+        stamp_baseline,
+        project_baseline,
+        repository_baseline,
+        bottom,
+    )
+
+
+def _append_composite_information(
     root: ET.Element,
     *,
     spec: RenderSpec,
@@ -2849,109 +2860,69 @@ def _append_poster_information(
     identity: CompositeIdentity,
     contributions: Mapping[int, RecentContributions] | None = None,
 ) -> None:
-    left = canvas.information_left
-    right = canvas.information_right
-    packing_credits = _poster_packing_credits(canvas.spec.first_n, canvas.spec.last_n)
-    credit_lines = _poster_credit_lines(packing_credits)
-    credit_baselines = [
-        POSTER_PACKING_CREDITS_BASELINE + POSTER_BODY_LINE_PITCH * index
-        for index in range(len(credit_lines))
-    ]
-    explainer_baselines = [
-        canvas.explainer_baseline + POSTER_PROBLEM_LINE_PITCH * index
-        for index in range(len(POSTER_EXPLAINER_LINES))
-    ]
-    repository_baseline = canvas.citations_baseline + POSTER_BODY_LINE_PITCH
-    font_size = Decimal(POSTER_BODY_SIZE)
-    document_lines = [
-        (POSTER_TITLE_BASELINE, Decimal(POSTER_TITLE_SIZE)),
-        *((baseline, Decimal(POSTER_PROBLEM_SIZE)) for baseline in explainer_baselines),
-        *(
-            (canvas.legend_baseline + POSTER_BODY_LINE_PITCH * index, font_size)
-            for index in range(4)
-        ),
-        *((baseline, font_size) for baseline in credit_baselines),
-        (canvas.credit_baseline, font_size),
-        (canvas.stamp_baseline, font_size),
-        (canvas.citations_baseline, font_size),
-        (repository_baseline, font_size),
-    ]
-    if any(
-        above + above_size * Decimal("0.3") > below - below_size
-        for (above, above_size), (below, below_size) in pairwise(document_lines)
-    ):
-        raise ValueError("poster documentation lines overlap")
-    if any(
-        baseline - size < POSTER_INFORMATION_TOP
-        or baseline + size * Decimal("0.3") > POSTER_INFORMATION_BOTTOM
-        for baseline, size in document_lines
-    ):
-        raise ValueError("poster documentation lies outside its information block")
+    layout = _information_layout(canvas, identity)
+    corner = canvas.information_in_corner
+    size = POSTER_BODY_SIZE if corner else SUMMARY_FOOTER_SIZE
     block = sub(
         root,
         "g",
         {
             "data-feature": "poster-information",
-            "data-left": format_svg_number(canvas.information_left),
-            "data-right": format_svg_number(right),
-            "data-top": format_svg_number(POSTER_INFORMATION_TOP),
-            "data-bottom": format_svg_number(POSTER_INFORMATION_BOTTOM),
+            "data-placement": "corner" if corner else "footer",
+            "data-credit-scope": CORPUS.label,
+            "data-depicted-range": canvas.spec.cases.label,
+            "data-left": format_svg_number(layout.left),
+            "data-right": format_svg_number(layout.right),
+            "data-top": format_svg_number(
+                POSTER_INFORMATION_TOP if corner else canvas.grid_bottom + SUMMARY_LEGEND_GAP
+            ),
+            "data-bottom": format_svg_number(layout.bottom),
         },
     )
-
-    card_positions = tuple(canvas.card_position(n) for n in canvas.spec.numbers)
+    positions = tuple(canvas.card_position(n) for n in canvas.spec.numbers)
 
     def text_line(
         feature: str,
         content: str,
         baseline: Decimal,
-        size: str = POSTER_BODY_SIZE,
+        font_size: str = size,
         *,
         parent: ET.Element | None = None,
+        centered: bool = False,
     ) -> ET.Element:
-        spacing = (
-            Decimal("1.5") * POSTER_INFORMATION_TYPE_SCALE
-            if feature == "poster-title"
-            else Decimal(0)
+        spacing = Decimal("4.5") if feature == "poster-title" and corner else Decimal(0)
+        extent = _text_width(content, font_size) + spacing * max(len(content) - 1, 0)
+        room = (
+            POSTER_INFORMATION_WIDTH
+            if corner
+            else Decimal(canvas.width) - SUMMARY_SIDE_MARGIN * 2
         )
-        extent = _text_width(content, size) + spacing * max(len(content) - 1, 0)
-        if extent > POSTER_INFORMATION_WIDTH:
+        if extent > room:
             raise ValueError(f"the poster {feature} line exceeds its information block")
-        if (
-            baseline - Decimal(size) < POSTER_INFORMATION_TOP
-            or baseline + Decimal(size) * Decimal("0.3") > POSTER_INFORMATION_BOTTOM
-        ):
-            raise ValueError(f"the poster {feature} line lies outside its information block")
-        text_left = left
-        text_right = left + extent
-        text_top = baseline - Decimal(size)
-        text_bottom = baseline + Decimal(size) * Decimal("0.3")
+        top, bottom = _print_ink_bounds(content, font_size)
+        text_left = (Decimal(canvas.width) - extent) / 2 if centered else layout.left
+        text_right = text_left + extent
         if any(
             text_left < position.left + SUMMARY_CARD_WIDTH
             and text_right > position.left
-            and text_top < position.top + SUMMARY_CARD_HEIGHT
-            and text_bottom > position.top
-            for position in card_positions
+            and baseline + top < position.top + SUMMARY_CARD_HEIGHT
+            and baseline + bottom > position.top
+            for position in positions
         ):
             raise ValueError(f"the poster {feature} line overlaps a packing card")
+        if corner and (
+            baseline + top < POSTER_INFORMATION_TOP or baseline + bottom > layout.bottom
+        ):
+            raise ValueError(f"the poster {feature} line lies outside its information block")
         node = sub(
             block if parent is None else parent,
             "text",
             {
                 "data-feature": feature,
-                "x": format_svg_number(left),
+                "x": format_svg_number(Decimal(canvas.width) / 2 if centered else layout.left),
                 "y": format_svg_number(baseline),
-                "text-anchor": "start",
-                "font-family": SUMMARY_FONT if feature == "poster-title" else POSTER_BODY_FONT,
-                "font-size": size,
-                "font-weight": SUMMARY_FOOTER_WEIGHT
-                if feature == "poster-title"
-                else POSTER_BODY_WEIGHT,
-                "fill": "#000000"
-                if feature in {"citations", "repository"}
-                else PAPER_THEME.ink
-                if feature in {"poster-title", "release"}
-                else SUMMARY_SMALL_FILL,
+                "text-anchor": "middle" if centered else "start",
+                **_information_text_style(font_size),
             },
         )
         if spacing:
@@ -2959,29 +2930,46 @@ def _append_poster_information(
         node.text = content
         return node
 
+    heading = (
+        "BEST KNOWN SQUARE PACKINGS"
+        if corner
+        else f"{canvas.spec.count} BEST KNOWN SQUARE PACKINGS"
+    )
     text_line(
         "poster-title",
-        "BEST KNOWN SQUARE PACKINGS",
-        POSTER_TITLE_BASELINE,
-        POSTER_TITLE_SIZE,
+        heading,
+        layout.title_baseline,
+        POSTER_TITLE_SIZE if corner else "48",
+        parent=block if corner else root,
+        centered=not corner,
     )
+    if not corner:
+        text_line(
+            "project-reference",
+            f"{POSTER_CITATIONS} · {SUMMARY_REPOSITORY}",
+            layout.project_baseline,
+            parent=root,
+            centered=True,
+        )
     for index, runs in enumerate(POSTER_EXPLAINER_LINES):
         _append_summary_explainer(
             block,
-            baseline=explainer_baselines[index],
+            baseline=layout.problem_baselines[index],
             canvas_width=canvas.width,
-            left_edge=left,
-            type_scale=POSTER_INFORMATION_TYPE_SCALE,
+            left_edge=layout.left,
+            font_size=format_svg_number(Decimal(POSTER_PROBLEM_SIZE) * layout.scale),
             runs=runs,
             feature=("explainer", "problem-explainer")[index],
             italic_font_family=POSTER_ITALIC_FONT,
         )
     _append_summary_legend(block, spec=spec, canvas=canvas, contributions=contributions)
+    packing_credits = _poster_packing_credits(CORPUS.first_n, CORPUS.last_n)
     credit_block = sub(
         block,
         "g",
         {
             "data-feature": "packing-credits",
+            "data-credit-scope": CORPUS.label,
             "data-credited-names": json.dumps(
                 list(
                     dict.fromkeys(name for credit in packing_credits for name in credit.names)
@@ -2998,12 +2986,74 @@ def _append_poster_information(
             ),
         },
     )
-    for content, baseline in zip(credit_lines, credit_baselines, strict=True):
+    for content, baseline in zip(_print_credit_lines(), layout.credit_baselines, strict=True):
         text_line("packing-credit-line", content, baseline, parent=credit_block)
-    text_line("credit", POSTER_DIAGRAM_CREDIT, canvas.credit_baseline)
-    text_line("release-stamp", identity.poster_stamp, canvas.stamp_baseline)
-    text_line("citations", POSTER_CITATIONS, canvas.citations_baseline)
-    text_line("repository", SUMMARY_REPOSITORY, repository_baseline)
+    attribution_blocks = []
+    attributions = _print_attributions()
+    sub(
+        block, "metadata", {"data-feature": "credit-attributions"}
+    ).text = _print_credit_metadata()
+    for paragraph, lines, baselines in zip(
+        attributions.paragraphs,
+        _print_attribution_lines(),
+        layout.attribution_baselines,
+        strict=True,
+    ):
+        attribution_block = sub(
+            block,
+            "g",
+            {
+                "data-feature": f"{paragraph.key}-credits",
+                "data-credit-scope": CORPUS.label,
+                "data-credited-names": json.dumps(paragraph.names, ensure_ascii=False),
+            },
+        )
+        attribution_blocks.append(attribution_block)
+        for content, baseline in zip(lines, baselines, strict=True):
+            text_line(
+                f"{paragraph.key}-credit-line", content, baseline, parent=attribution_block
+            )
+    text_line("credit", POSTER_DIAGRAM_CREDIT, layout.diagram_baseline)
+    text_line("release-stamp", identity.poster_stamp, layout.stamp_baseline)
+    if corner:
+        text_line("citations", POSTER_CITATIONS, layout.project_baseline)
+        text_line("repository", SUMMARY_REPOSITORY, layout.repository_baseline)
+
+    groups = [
+        [
+            block.find(
+                f"svg:text[@data-feature='{feature}']", {"svg": "http://www.w3.org/2000/svg"}
+            )
+            for feature in ("explainer", "problem-explainer")
+        ],
+        *[
+            [
+                node
+                for node in column.findall(svg_tag("text"))
+                if node.attrib.get("data-feature") == "legend-label"
+            ]
+            for column in block.iter(svg_tag("g"))
+            if column.attrib.get("data-feature") == "legend-column"
+        ],
+        list(credit_block.findall(svg_tag("text"))),
+        *(list(paragraph.findall(svg_tag("text"))) for paragraph in attribution_blocks),
+        [
+            node
+            for node in block.findall(svg_tag("text"))
+            if node.attrib.get("data-feature") in {"credit", "release-stamp"}
+        ],
+    ]
+    for lines in groups:
+        bounds = [
+            (Decimal(node.attrib["y"]) + top, Decimal(node.attrib["y"]) + bottom)
+            for node in lines
+            if node is not None
+            for top, bottom in [
+                _print_ink_bounds("".join(node.itertext()), node.attrib["font-size"])
+            ]
+        ]
+        if any(above[1] > below[0] for above, below in pairwise(bounds)):
+            raise ValueError("poster documentation lines overlap")
 
 
 @emission_precision()
@@ -3043,6 +3093,11 @@ def render_known_best_summary_svg(
         },
     )
     append_title_desc(root, accessible_title, accessible_description)
+    sub(
+        root,
+        "style",
+        {"data-feature": "retained-print-fonts", "data-sqpack-style": PRINT_FONT_MARKER},
+    ).text = atlas_print_font.embedded_css()
     append_metadata(
         root,
         {
@@ -3061,6 +3116,8 @@ def render_known_best_summary_svg(
             "generated-by": GENERATOR,
             "last-n": str(composite.last_n),
             "rows": str(composite.rows),
+            "physical-column-pitch": format_svg_number(SUMMARY_COLUMN_PITCH),
+            "physical-row-pitch": format_svg_number(canvas.row_pitch),
             "square-count": str(composite.square_count),
             **(
                 {
@@ -3068,8 +3125,14 @@ def render_known_best_summary_svg(
                     "regular-grid-extra-gap": format_svg_number(POSTER_GRID_GAP),
                     "physical-columns": str(canvas.physical_columns),
                     "physical-rows": str(canvas.physical_rows),
-                    "physical-row-pitch": format_svg_number(canvas.row_pitch),
                     "grid-suffix-layout": "inline",
+                    "grid-transition-label-layout": "single-line",
+                    "grid-transition-marker-clearance-ratio": format_svg_number(
+                        POSTER_GRID_MARKER_CLEARANCE_RATIO
+                    ),
+                    "grid-transition-marker-outline-gap": format_svg_number(
+                        SUMMARY_OUTLINE_GAP * POSTER_GRID_MARKER_CLEARANCE_RATIO
+                    ),
                 }
                 if composite.placement == CompositePlacement.square_bound_triangle
                 else {}
@@ -3087,14 +3150,9 @@ def render_known_best_summary_svg(
         },
     )
     contributions = recent_contributions_by_case()
-    if canvas.information_in_corner:
-        _append_poster_information(
-            root, spec=spec, canvas=canvas, identity=identity, contributions=contributions
-        )
-    else:
-        _append_summary_information(
-            root, spec=spec, canvas=canvas, identity=identity, contributions=contributions
-        )
+    _append_composite_information(
+        root, spec=spec, canvas=canvas, identity=identity, contributions=contributions
+    )
     by_row = {transition.row: transition for transition in transitions}
     for item in built:
         row, _column = composite.card_position(item.frontier.n)
@@ -3109,7 +3167,9 @@ def render_known_best_summary_svg(
     for transition in transitions:
         if transition.grid.first_n in composite.numbers:
             _append_grid_transition_marker(root, transition, canvas=canvas)
-    return serialize_svg(root)
+    return serialize_svg(
+        root, embedded_print_fonts=atlas_print_font.embedded_css(), compact=True
+    )
 
 
 def _png_chunks(content: bytes) -> list[tuple[bytes, bytes]]:
@@ -3243,6 +3303,7 @@ def png_export_bytes(export: RasterExport, svg_text: str) -> bytes:
     # SVG construction and receipt checks do not need the native Cairo library.
     import cairosvg  # noqa: PLC0415
 
+    atlas_print_font.register_print_fonts()
     content = cairosvg.svg2png(
         bytestring=_cropped_svg(svg_text, export).encode("utf-8"),
         output_width=export.width,
@@ -4277,11 +4338,7 @@ def _composite_edition_problems(
     """
     path = _relative(canvas.svg_path)
     problems: list[str] = []
-    expected_lines = (
-        (("release", ()), ("release-stamp", (identity.poster_stamp,)))
-        if canvas.information_in_corner
-        else (("release", (identity.dateline,)), ("release-stamp", (identity.stamp,)))
-    )
+    expected_lines = (("release", ()), ("release-stamp", (identity.poster_stamp,)))
     for feature, expected in expected_lines:
         actual = tuple(
             "".join(node.itertext())

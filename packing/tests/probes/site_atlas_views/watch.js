@@ -12,7 +12,8 @@
       const root = document.documentElement;
       globalThis.atlasViewsSeen?.push({
         view: root.dataset.siteAtlasView === "triangle" ? "triangle" : "grid",
-        size: root.dataset.siteAtlasSize ?? "medium",
+        size: root.dataset.siteAtlasSize ?? "small",
+        scale: root.dataset.siteAtlasScale ?? "fixed",
         per_line: String(
           Math.round(
             (cells.getBoundingClientRect().width +

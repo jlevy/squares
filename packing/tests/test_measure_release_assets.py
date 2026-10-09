@@ -193,10 +193,10 @@ def test_raster_timing_uses_resolved_production_dimensions_without_rendering(
     monkeypatch.setattr(atlas, "png_export_bytes", capture)
     measure._atlas_rasters()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     assert requested == [
-        ("known-best-1-100.png", 2400, 2896),
-        ("known-best-1-100@2x.png", 4800, 5792),
-        ("known-best-1-100-card.png", 2400, 1256),
-        ("known-best-1-324.png", 8347, 6602),
+        ("known-best-1-100.png", 2260, 3995),
+        ("known-best-1-100@2x.png", 4520, 7990),
+        ("known-best-1-100-card.png", 2260, 1256),
+        ("known-best-1-324.png", 7871, 5701),
         ("synthetic.png", 576, 880),
     ]
     assert capsys.readouterr().out.count(": 3 bytes,") == len(requested)

@@ -2,8 +2,8 @@
 """Export a known-best composite to a print-ready vector PDF.
 
 The page keeps the artwork's intrinsic size rather than being scaled into a
-stock paper box: the 1-100 composite is 2400 by 2896 CSS pixels, which at the
-SVG spec's 96 pixels per inch is 25.00 by 30.17 inches, so the PDF page is
+stock paper box: the 1-100 composite is 2260 by 3995 CSS pixels, which at the
+SVG spec's 96 pixels per inch is 23.54 by 41.61 inches, so the PDF page is
 exactly that and the diagram meets its edges with no silent margin or
 letterboxing. A composite of another size gets its own size the same way. Print
 scaling is then the print dialog's business, not something baked in here.
@@ -42,6 +42,7 @@ from pathlib import Path
 
 from strif import atomic_output_file
 
+from devtools import atlas_print_font
 from sqpack.known_best import KNOWN_BEST_COMPOSITES, composite_pdf_name
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -149,6 +150,7 @@ def render_pdf_bytes(stem: str = DEFAULT_STEM) -> bytes:
     import cairocffi  # noqa: PLC0415
     from cairosvg.surface import PDFSurface  # noqa: PLC0415
 
+    atlas_print_font.register_print_fonts()
     stated = f"{data_date(stem).isoformat()}T{PDF_TIME}"
 
     class DatedSurface(PDFSurface):

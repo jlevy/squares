@@ -39,8 +39,13 @@
 // (`--site-atlas-scale`): both views use the same least cell and the same gaps. Small
 // fits more tiles to a Grid line and Large fewer (`perLineAt`); Triangle keeps its
 // complete rows at the same drawing size. A change of size is a change of layout like a
-// change of view, moved the same way, and it is in the address as `?size=small` or
-// `?size=large`; Medium, the default, has no parameter.
+// change of view, moved the same way, and it is in the address as `?size=medium` or
+// `?size=large`; Small, the default, has no parameter.
+//
+// Scale, Fixed by default, changes only a drawing within its reserved tile. Row uses
+// its actual enclosing side relative to the logical row's grid side k. Global uses
+// the largest actual side among currently shown cases, updated by the expander. The
+// address names either choice as `?scale=row` or `?scale=global`.
 //
 // The pure functions are published on `globalThis.SiteAtlasView` for the Node tests and
 // for `atlas-grid.js`, which places the tiles and calls `mount`.
@@ -50,6 +55,8 @@
   const PARAM = "atlas";
   /** The query parameter that names the size. */
   const SIZE_PARAM = "size";
+  /** The query parameter that names drawing scale within each tile. */
+  const SCALE_PARAM = "scale";
 
   /**
    * The triangle's row for case `n`: the k with (k - 1)^2 < n <= k^2.
@@ -155,16 +162,16 @@
   }
 
   /**
-   * The size a word names: small or large, else medium.
+   * The size a word names: medium or large, else small.
    * @param {string | null | undefined} word
    * @returns {AtlasSize}
    */
   function asSize(word) {
-    return word === "small" || word === "large" ? word : "medium";
+    return word === "medium" || word === "large" ? word : "small";
   }
 
   /**
-   * The size a query string asks for: small or large when it says so, else medium.
+   * The size a query string asks for: medium or large when it says so, else small.
    * @param {string} search
    * @returns {AtlasSize}
    */
@@ -173,14 +180,47 @@
   }
 
   /**
-   * `search` with the size written into it: the parameter for small and large, none for
-   * medium, and every other parameter kept in its place.
+   * `search` with the size written into it: the parameter for medium and large, none for
+   * small, and every other parameter kept in its place.
    * @param {string} search
    * @param {AtlasSize} size
    * @returns {string}
    */
   function searchForSize(search, size) {
-    return searchWith(search, SIZE_PARAM, size === "medium" ? null : size);
+    return searchWith(search, SIZE_PARAM, size === "small" ? null : size);
+  }
+
+  /**
+   * A drawing scale name: Row or Global when named, otherwise Fixed.
+   * @param {string | null | undefined} word
+   * @returns {AtlasScale}
+   */
+  function asScale(word) {
+    return word === "row" || word === "global" ? word : "fixed";
+  }
+
+  /** @param {string} search @returns {AtlasScale} */
+  function scaleOf(search) {
+    return asScale(new URLSearchParams(search).get(SCALE_PARAM));
+  }
+
+  /** @param {string} search @param {AtlasScale} scale @returns {string} */
+  function searchForScale(search, scale) {
+    return searchWith(search, SCALE_PARAM, scale === "fixed" ? null : scale);
+  }
+
+  /**
+   * Actual enclosing side relative to its logical row's k-by-k grid side, in either
+   * layout. Responsive Grid lines do not change the mathematical row.
+   * @param {number} n @param {number} side @returns {number}
+   */
+  function rowRatio(n, side) {
+    return side / row(n);
+  }
+
+  /** @param {readonly number[]} sides @returns {number} */
+  function largestSide(sides) {
+    return Math.max(0, ...sides);
   }
 
   /**
@@ -330,9 +370,10 @@
    * @param {SiteAtlasParts} parts
    * @returns {SiteAtlasViews}
    */
-  function mount({ block, cells, tabs, sizes }) {
+  function mount({ block, cells, tabs, sizes, scales }) {
     const buttons = tabsOf(tabs);
     const sizeButtons = sizes === null ? [] : tabsOf(sizes);
+    const scaleButtons = scales === null ? [] : tabsOf(scales);
     /** @type {Record<number, number>} */
     const starts = {};
     for (const tile of cells.querySelectorAll("[data-atlas-grid-from]")) {
@@ -348,6 +389,8 @@
     const view = () => (block.dataset.atlasView === "triangle" ? "triangle" : "grid");
     /** @returns {AtlasSize} */
     const size = () => asSize(block.dataset.atlasSize);
+    /** @returns {AtlasScale} */
+    const drawingScale = () => asScale(block.dataset.atlasScale);
 
     /** The tiles that show: the first hundred, and the rest once the grid is expanded. */
     const shown = () =>
@@ -377,15 +420,18 @@
       const width = cells.getBoundingClientRect().width;
       const capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
       const per = Number.isFinite(capacity) ? capacity : widest(last) + 1;
-      const key = `${per}:${last}`;
+      const largest = largestSide(tiles.map((tile) => Number(tile.dataset.atlasSide)));
+      const key = `${per}:${tiles.map((tile) => tile.dataset.atlasN).join(":")}:${largest}`;
       if (key === arranged) {
         return;
       }
       arranged = key;
       cells.style.setProperty("--site-atlas-per-line", String(per));
+      cells.style.setProperty("--site-atlas-global-side", String(largest));
       for (const tile of tiles) {
         const at = place(Number(tile.dataset.atlasN), widest(last), starts);
-        tile.style.cssText = `--site-atlas-line: ${at.segmentLine}; --site-atlas-column: ${at.segmentColumn};`;
+        tile.style.setProperty("--site-atlas-line", String(at.segmentLine));
+        tile.style.setProperty("--site-atlas-column", String(at.segmentColumn));
       }
     };
 
@@ -419,14 +465,32 @@
      * tiles, as laid out and transformed now.
      */
     const measure = () => {
-      /** @type {Map<HTMLElement, { tile: DOMRect, drawing: DOMRect }>} */
+      /** @type {Map<HTMLElement, { tile: DOMRect, drawing: AtlasBox }>} */
       const tiles = new Map();
-      for (const tile of shown()) {
+      const visible = shown();
+      const largest = largestSide(visible.map((tile) => Number(tile.dataset.atlasSide)));
+      const mode = drawingScale();
+      for (const tile of visible) {
         const drawing = tile.firstElementChild;
         if (drawing !== null) {
+          const drawn = drawing.getBoundingClientRect();
+          const side = Number(tile.dataset.atlasSide);
+          const ratio =
+            mode === "row"
+              ? rowRatio(Number(tile.dataset.atlasN), side)
+              : mode === "global"
+                ? side / largest
+                : 1;
+          const width = drawn.width / ratio;
+          // FLIP moves the reserved slot, not the scaled square inside it. A scale
+          // choice therefore never scales the tile's number or changes its position.
           tiles.set(tile, {
             tile: tile.getBoundingClientRect(),
-            drawing: drawing.getBoundingClientRect(),
+            drawing: {
+              left: drawn.left - (width - drawn.width) / 2,
+              top: drawn.top - (width - drawn.width) / 2,
+              width,
+            },
           });
         }
       }
@@ -564,6 +628,17 @@
       }
     };
 
+    /** @param {AtlasScale} current */
+    const markScale = (current) => {
+      block.dataset.atlasScale = current;
+      document.documentElement.dataset.siteAtlasScale = current;
+      for (const tab of scaleButtons) {
+        const on = tab.dataset.atlasScaleTab === current;
+        tab.setAttribute("aria-selected", String(on));
+        tab.tabIndex = on ? 0 : -1;
+      }
+    };
+
     /** @param {string} search */
     const readdress = (search) => {
       history.replaceState(history.state, "", `${location.pathname}${search}${location.hash}`);
@@ -587,14 +662,28 @@
       readdress(searchForSize(location.search, next));
     };
 
+    /** @param {AtlasScale} next */
+    const selectScale = (next) => {
+      if (next === drawingScale()) {
+        return;
+      }
+      change(() => markScale(next));
+      readdress(searchForScale(location.search, next));
+    };
+
     cells.id = tabs.dataset.atlasPanel ?? "";
     cells.setAttribute("role", "tabpanel");
     mark(viewOf(location.search));
-    markSize(asSize(document.documentElement.dataset.siteAtlasSize));
+    markSize(sizeOf(location.search));
+    markScale(scaleOf(location.search));
 
     wire(tabs, (tab) => select(tab.dataset.atlasTab === "triangle" ? "triangle" : "grid"));
     if (sizes !== null) {
       wire(sizes, (tab) => selectSize(asSize(tab.dataset.atlasSizeTab)));
+    }
+
+    if (scales !== null) {
+      wire(scales, (tab) => selectScale(asScale(tab.dataset.atlasScaleTab)));
     }
 
     // The tiles a line holds follow the block's width. A resize is settled on the next
@@ -632,6 +721,10 @@
     searchFor,
     sizeOf,
     searchForSize,
+    scaleOf,
+    searchForScale,
+    rowRatio,
+    largestSide,
     stepTo,
     lengthPx,
     milliseconds,

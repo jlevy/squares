@@ -289,18 +289,37 @@ void test("layout queries establish only whitelisted root attributes before pain
   assert.deepEqual(bootstrapped("?atlas=triangle&size=large&view=embed"), {
     "data-site-atlas-view": "triangle",
     "data-site-atlas-size": "large",
+    "data-site-atlas-scale": "fixed",
     "data-site-view": "embed",
   });
   assert.deepEqual(bootstrapped("?atlas=grid&size=small&view=embed"), {
     "data-site-atlas-view": "grid",
     "data-site-atlas-size": "small",
+    "data-site-atlas-scale": "fixed",
     "data-site-view": "embed",
   });
   assert.deepEqual(bootstrapped("?atlas=unknown&size=invalid&view=unknown"), {
     "data-site-atlas-view": "triangle",
+    "data-site-atlas-size": "small",
+    "data-site-atlas-scale": "fixed",
   });
+  assert.deepEqual(bootstrapped("?size=medium"), {
+    "data-site-atlas-view": "triangle",
+    "data-site-atlas-size": "medium",
+    "data-site-atlas-scale": "fixed",
+  });
+  for (const scale of ["row", "global"]) {
+    assert.deepEqual(bootstrapped(`?atlas=grid&size=large&scale=${scale}`), {
+      "data-site-atlas-view": "grid",
+      "data-site-atlas-size": "large",
+      "data-site-atlas-scale": scale,
+    });
+  }
+  assert.equal(bootstrapped("?scale=invalid")["data-site-atlas-scale"], "fixed");
   assert.deepEqual(bootstrapped(""), {
     "data-site-atlas-view": "triangle",
+    "data-site-atlas-size": "small",
+    "data-site-atlas-scale": "fixed",
   });
 });
 

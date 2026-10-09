@@ -2018,7 +2018,7 @@ body {
   --site-atlas-cell-min: 6.4rem;
   --site-atlas-cell-gap: 0.5rem;
   --site-atlas-cell-padding: 0.3rem;
-  --site-atlas-scale: 1;
+  --site-atlas-scale: 0.667;
   /* The move between the views: one duration and one easing for every tile, read by
      the script. Reduced motion makes the switch instant, as it does every hover. */
   --site-atlas-move-duration: 360ms;
@@ -2033,21 +2033,24 @@ body {
     --site-atlas-move-duration: 0ms;
   }
 }
-/* The three sizes of tile (think-ht8t): Medium is the scale of 1 above, the size the
-   atlas had before it offered a choice. */
+/* Small is the default; Medium restores the original scale of 1. Root attributes
+   select explicit URL sizes before the atlas programs run. */
 .site-page .site-atlas-grid[data-atlas-size="small"],
 html[data-site-atlas-size="small"] .site-page .site-atlas-grid {
   --site-atlas-scale: 0.667;
+}
+.site-page .site-atlas-grid[data-atlas-size="medium"],
+html[data-site-atlas-size="medium"] .site-page .site-atlas-grid {
+  --site-atlas-scale: 1;
 }
 .site-page .site-atlas-grid[data-atlas-size="large"],
 html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   --site-atlas-scale: 1.5;
 }
-/* The view tabs and the size tabs: two of the section tabs' strip (site-nav.css), on
+/* Layout, Size and Scale use the section tabs' strip (site-nav.css), on
    the bar's line, so each is as tall here as under the bar. One row aligned left over the
    tiles, the key to a tile's marks on a line of its own under it; on a narrow block the
-   size tabs wrap under the view tabs. Each is hidden until the script has tiles to
-   arrange. */
+   controls wrap beneath one another. */
 .site-atlas-grid .site-atlas-controls {
   display: flex;
   flex-wrap: wrap;
@@ -2056,12 +2059,14 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   margin-block-end: var(--site-atlas-toggle-space);
 }
 .site-atlas-grid .site-atlas-views,
-.site-atlas-grid .site-atlas-sizes {
+.site-atlas-grid .site-atlas-sizes,
+.site-atlas-grid .site-atlas-scales {
   line-height: var(--site-nav-line);
   margin: 0;
 }
 .site-atlas-grid .site-atlas-views[hidden],
 .site-atlas-grid .site-atlas-sizes[hidden],
+.site-atlas-grid .site-atlas-scales[hidden],
 .site-atlas-grid .site-atlas-legend[hidden] {
   display: none;
 }
@@ -2122,6 +2127,7 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
    scaled cell minimum and gaps as Grid, and the tile fills one column after the gaps
    are reserved. Container arithmetic also places the static Triangle before scripts. */
 .site-atlas-cells {
+  --site-atlas-global-side: var(--site-atlas-first-side);
   --site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));
   --site-atlas-per-line: max(
     1,
@@ -2138,13 +2144,11 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   );
   --site-atlas-grid-space: calc((var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) / 2);
   --site-atlas-number-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.25), 0.8rem);
-  /* Every physical Triangle line reserves one drawing, its inherited 2rem block
-     margins, its caption margin and the ordinary number's leading, including
-     first-grid captions with smaller text. */
+  /* Every Triangle line reserves its drawing and padding, the count margin and
+     count leading. Atlas drawings have no document image margins. */
   --site-atlas-line-height: calc(
     var(--site-atlas-tile) *
     1.04 +
-    2rem +
     var(--site-atlas-number-size) *
     1.15
   );
@@ -2162,6 +2166,8 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
    script measures from (overview/atlas-view.js). It has no transform at rest, so the
    origin changes nothing then. */
 .kpress .site-atlas-cell {
+  --site-atlas-drawing-ratio: 1;
+  position: relative;
   color: var(--kpress-doc-text);
   display: block;
   padding: var(--site-atlas-cell-padding);
@@ -2178,11 +2184,55 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
    the link, it went to the lighter accent KPress gives a hovered link's text (`.kpress
    a:hover`, which outranks the cell's own colour), and the outlines all but vanished
    against the squares. */
+/* Scale changes only the drawn enclosing square. Its layout box and the count stay
+   fixed, so every row keeps its pitch and all captions retain their alignment. The
+   head bootstrap selects the same ratio before the atlas programs mount. */
+.site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
+  --site-atlas-global-side: var(--site-atlas-last-side);
+}
+html:not([data-site-atlas-scale]) .site-atlas-grid:where([data-atlas-scale="row"]) .site-atlas-cell,
+html[data-site-atlas-scale="row"] .site-atlas-grid .site-atlas-cell {
+  --site-atlas-drawing-ratio: var(--site-atlas-row-ratio);
+}
+html:not([data-site-atlas-scale])
+  .site-atlas-grid:where([data-atlas-scale="global"])
+  .site-atlas-cell,
+html[data-site-atlas-scale="global"] .site-atlas-grid .site-atlas-cell {
+  --site-atlas-drawing-ratio: calc(var(--site-atlas-side) / var(--site-atlas-global-side));
+}
+/* A smaller Row drawing sits inside its logical grid-sized enclosing frame. The
+   inset and span come from packing_svg's actual viewBox/frame bounds, including the
+   margin around the normalized SVG. The reference has no fill or hit target. */
+html:not([data-site-atlas-scale])
+  .site-atlas-grid:where([data-atlas-scale="row"])
+  .site-atlas-cell[data-atlas-row-smaller]::before,
+html[data-site-atlas-scale="row"]
+  .site-atlas-grid
+  .site-atlas-cell[data-atlas-row-smaller]::before {
+  --site-atlas-reference-margin: calc(
+    (var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) *
+    var(--site-atlas-frame-inset)
+  );
+  aspect-ratio: 1;
+  border: 0.5px solid var(--kpress-doc-border);
+  box-sizing: border-box;
+  content: "";
+  inline-size: calc(
+    (var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) *
+    var(--site-atlas-frame-span)
+  );
+  inset-block-start: calc(var(--site-atlas-cell-padding) + var(--site-atlas-reference-margin));
+  inset-inline-start: calc(var(--site-atlas-cell-padding) + var(--site-atlas-reference-margin));
+  pointer-events: none;
+  position: absolute;
+}
 .site-atlas-cell :is(svg, img) {
+  transform: scale(var(--site-atlas-drawing-ratio));
   aspect-ratio: 1;
   color: var(--kpress-doc-text);
   display: block;
   height: auto;
+  margin-block: 0;
   width: 100%;
 }
 /* The number's box is shrunk to the number and centred, so the marks it carries can
@@ -2225,7 +2275,7 @@ html:not([data-site-atlas-view="grid"])
 html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
   --site-atlas-widest: 19;
   --site-atlas-extra: var(--site-atlas-first-extra);
-  --site-atlas-row-gap: calc(var(--site-atlas-tile) * 0.35);
+  --site-atlas-row-gap: var(--site-atlas-cell-gap);
   direction: rtl;
   display: block;
   overflow-x: auto;
@@ -2314,15 +2364,6 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-n {
   line-height: 1.15;
   margin-block-start: calc(var(--site-atlas-tile) * 0.04);
 }
-/* Keep the existing first-grid count metrics while its dimension marker occupies
-   the caption space above it. Drawing and row geometry remain unchanged. */
-html:not([data-site-atlas-view="grid"])
-  .site-atlas-grid:where([data-atlas-view="triangle"])
-  [data-atlas-grid-from]
-  .site-atlas-n,
-html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-grid-from] .site-atlas-n {
-  font-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.18), 0.8rem);
-}
 /* The perfect squares that end each row are numbered in the text's own colour and
    the medium weight. */
 html:not([data-site-atlas-view="grid"])
@@ -2348,30 +2389,6 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
 }
 .site-atlas-grid .site-atlas-toggle-row[hidden] {
   display: none;
-}
-/* Grid dimensions sit between the drawing and its ordinary count, within the
-   existing caption space. The marker adds no row height or segment spacing. */
-.site-atlas-grid-start {
-  display: none;
-}
-html:not([data-site-atlas-view="grid"])
-  .site-atlas-grid:where([data-atlas-view="triangle"])
-  .site-atlas-grid-start,
-html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-grid-start {
-  display: block;
-  font-size: 0.5rem;
-  font-weight: var(--site-font-weight-sans-medium);
-  inset-block-end: calc(100% + 0.08rem);
-  inset-inline-start: 50%;
-  line-height: 0.9;
-  position: absolute;
-  translate: -50% 0;
-}
-.site-atlas-grid-start > span {
-  display: block;
-}
-.site-atlas-cell[data-atlas-grid-from] .site-atlas-n {
-  white-space: nowrap;
 }
 /* A new result's star (overview_sections.atlas_star), the site's one star in its warm
    ink (`.site-star`), hung past the number's end, out of the flow, a little smaller

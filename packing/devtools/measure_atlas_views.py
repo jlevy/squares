@@ -40,7 +40,7 @@ browser made of that:
   counters then show what a reader's browser does.
 - `shots` writes pictures to `--out`: the atlas block in each view at each width, in the
   light theme and the dark, with a hundred cases and with all, at each size (the
-  pictures at Small and Large end `-small` and `-large`); the two actions under a
+  pictures at Medium and Large end `-medium` and `-large`); the two actions under a
   table and under the grid, "See all results" and the expander collapsed and expanded,
   at each width in both themes; and the window at five points of the move from the grid
   to the triangle (0, 25, 50, 75 and 100 percent).
@@ -90,7 +90,9 @@ VIEWS = ("grid", "triangle")
 #: (think-k8x9).
 SIZES = ("small", "medium", "large")
 #: The size a plain address opens at, which `?size=` does not name.
-MEDIUM = "medium"
+DEFAULT_SIZE = "small"
+SCALES = ("fixed", "row", "global")
+DEFAULT_SCALE = "fixed"
 WIDTHS = (1280, 1024, 768, 390)
 SCHEMES = ("light", "dark")
 #: The points of a move a picture is taken at, as shares of its duration.
@@ -145,7 +147,7 @@ CHANGES: tuple[tuple[str | None, int, str], ...] = (
     ("triangle to grid", 100, tab("grid")),
     ("grid, medium to large", 100, size_tab("large")),
     ("grid, large to small", 100, size_tab("small")),
-    (None, 100, size_tab(MEDIUM)),
+    (None, 100, size_tab("medium")),
     (None, 324, EXPANDER),
     ("grid to triangle", 324, tab("triangle")),
     ("triangle to grid", 324, tab("grid")),
@@ -154,7 +156,7 @@ CHANGES: tuple[tuple[str | None, int, str], ...] = (
     ("triangle, 100 to 324", 324, EXPANDER),
     ("triangle, medium to large", 324, size_tab("large")),
     ("triangle, large to small", 324, size_tab("small")),
-    (None, 324, size_tab(MEDIUM)),
+    (None, 324, size_tab("medium")),
 )
 
 
@@ -251,7 +253,9 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
             for left, right in itertools.pairwise(line):
                 expected_gap = report["gap_px"]
                 if right.get("grid_from"):
-                    expected_gap += right["drawing"]["width"] / 2
+                    expected_gap += (
+                        right.get("drawing_slot_width", right["drawing"]["width"]) / 2
+                    )
                 gap = right["left"] - left["right"]
                 if abs(gap - expected_gap) > EDGE:
                     problems.append(
@@ -318,6 +322,7 @@ def summary(report: dict[str, Any]) -> dict[str, Any]:
     return {
         "view": report["view"],
         "size": report.get("size"),
+        "scale": report.get("scale", DEFAULT_SCALE),
         "shown": len(tiles),
         "starred": sum(tile.get("star") is not None for tile in tiles),
         "badged": sum(tile.get("mark") is not None for tile in tiles),
@@ -342,16 +347,19 @@ def settle(page: Any) -> None:
     page.wait_for_function(SETTLED)
 
 
-def query_for(view: str, size: str = MEDIUM) -> str:
-    """The query string that asks for `view` and `size`: nothing for Triangle at Medium,
+def query_for(view: str, size: str = DEFAULT_SIZE, scale: str = DEFAULT_SCALE) -> str:
+    """The query string that asks for `view` and `size`: nothing for Triangle at Small,
     the defaults."""
     if view not in VIEWS:
         raise ValueError(f"the atlas has no view {view!r}")
     if size not in SIZES:
         raise ValueError(f"the atlas has no size {size!r}")
+    if scale not in SCALES:
+        raise ValueError(f"the atlas has no scale {scale!r}")
     params = [
         *(["atlas=grid"] if view == "grid" else []),
-        *([f"size={size}"] if size != MEDIUM else []),
+        *([f"size={size}"] if size != DEFAULT_SIZE else []),
+        *([f"scale={scale}"] if scale != DEFAULT_SCALE else []),
     ]
     return f"?{'&'.join(params)}" if params else ""
 
@@ -362,7 +370,8 @@ def open_atlas(
     *,
     width: int,
     view: str = "triangle",
-    size: str = MEDIUM,
+    size: str = DEFAULT_SIZE,
+    scale: str = DEFAULT_SCALE,
     query: str | None = None,
     scheme: str = "light",
     height: int = 900,
@@ -380,7 +389,9 @@ def open_atlas(
     )
     if init_script is not None:
         page.add_init_script(init_script)
-    page.goto(address + (query_for(view, size) if query is None else query), wait_until="load")
+    page.goto(
+        address + (query_for(view, size, scale) if query is None else query), wait_until="load"
+    )
     page.locator(BLOCK).scroll_into_view_if_needed()
     settle(page)
     return page
@@ -464,7 +475,7 @@ def measure_move(
         browser = launch(driver)
         for width in widths:
             for run in range(runs):
-                page = open_atlas(browser, address, width=width, view="grid")
+                page = open_atlas(browser, address, width=width, view="grid", size="medium")
                 top(page)
                 client = page.context.new_cdp_session(page)
                 client.send("Performance.enable", {"timeDomain": "threadTicks"})
@@ -533,7 +544,7 @@ def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
         for scheme in SCHEMES:
             for width in widths:
                 for view in VIEWS:
-                    for size in (size for size in SIZES if size != MEDIUM):
+                    for size in (size for size in SIZES if size != DEFAULT_SIZE):
                         page = open_atlas(
                             browser, address, width=width, view=view, size=size, scheme=scheme
                         )

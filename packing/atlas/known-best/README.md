@@ -9,7 +9,10 @@ Two composites are drawn from it: the published figure of the first hundred, wit
 10-by-10 layout, and a poster of the whole corpus beside it.
 The calibration annotations further down stay pinned to the first hundred by design.
 
-Everything in this directory is generated.
+The geometry records, drawings and exports in this directory are generated.
+[`credit-attributions.json`](credit-attributions.json) is the curated input for
+lower-bound and optimality-proof acknowledgments; it retains names, roles, source
+references and evidenced dates without changing any scientific result.
 [FIGURE-PLAYBOOK.md](FIGURE-PLAYBOOK.md) is the playbook for both: how to rebuild them,
 where each fact on them comes from, what a third would take, and how the poster’s byte
 budget was measured.
@@ -20,16 +23,29 @@ budget was measured.
 
 The composite is a native 10-by-10 SVG, not a screenshot montage.
 Its 5,050 square polygons come from the same normalized witnesses as the individual
-figures under [`rendering/`](rendering/).
+figures under [`rendering/`](rendering/). The title and plain black “The Squares Project
+· github.com/jlevy/squares” line sit above the grid; its problem description, legend,
+construction, lower-bound and optimality-proof credits and dated diagram credit occupy a
+footer.
+
+Both composites share the same two-line problem description, two-column legend and
+construction credits.
+Each counted legend item shows a count over the number of cases in that composite, such
+as “proved optimal (45 of 100)” or “proved optimal (77 of 324)”. Titles, problem
+descriptions and all ordinary text use black; case numbers remain gray.
+Recent-result marks and the angle/contact swatches keep their semantic colors.
+A bundled bold sans-serif face supplies the print text and its layout measurements.
+The gap between information blocks is three body-text ems, measured between their ink
+bounds; the lines within a block share 1.50 leading and weight 700.
 
 The composite ships in four forms, all drawn from that one SVG in one build:
 
 | File | Size | For |
 | --- | --- | --- |
-| [`known-best-1-100.svg`](known-best-1-100.svg) | 2400 × 2896 units | the source; scales to anything |
-| [`known-best-1-100.png`](known-best-1-100.png) | 2400 × 2896 px | the GitHub-facing raster preview |
-| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4800 × 5792 px | attaching, or downscaling for social media |
-| [`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) | 25 × 30.17 in | printing; vector, so text stays selectable |
+| [`known-best-1-100.svg`](known-best-1-100.svg) | 2260 × 3995 units | the source; scales to anything |
+| [`known-best-1-100.png`](known-best-1-100.png) | 2260 × 3995 px | the GitHub-facing raster preview |
+| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4520 × 7990 px | attaching, or downscaling for social media |
+| [`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) | 23.54 × 41.61 in | printing; vector, so text stays selectable |
 
 Each export carries the SHA-256 of its source SVG, so `--check` rejects any one of them
 that has fallen behind the drawing.
@@ -48,11 +64,15 @@ $k$ holds $n = (k-1)^2 + 1$ through $k^2$. All eighteen rows are complete and
 right-aligned; the final row has thirty-five cards.
 The packing drawings and card scale remain unchanged.
 A $k×k$ grid label marks each row’s first retained regular axis-aligned grid packing;
-the two-line label gives its dimensions above `GRID`, and the card retains its ordinary
-count. Where irregular packings precede it, an extra gap of half a drawing width (79
+the dimensions and `GRID` form one line rotated 90 degrees beside the grid segment, and
+the card retains its ordinary count.
+Its distance from the first grid outline matches the ordinary horizontal gap between
+boxes. Where irregular packings precede it, an extra gap of half a drawing width (79
 units) separates the groups horizontally.
-Every row uses the same 360-unit pitch, with more space between rows for a taller
-overall shape; rows that are all grid receive no added horizontal gap.
+Both PDFs use the same 307-unit row pitch and 214-unit column pitch.
+The visible horizontal box gaps are about 20% tighter, and the annotation-to-next-row
+clearance is about 40% tighter than the earlier poster.
+Rows that are all grid receive no added horizontal gap.
 The poster draws 52,650 square polygons from the same witnesses.
 Its title, complete legend, explanation, construction credits and closing project
 details form one block in the upper-left whitespace, leaving the bottom for the final
@@ -65,42 +85,51 @@ The information starts at the left edge of the first drawing in the final row; a
 least 120 units of outside clearance keep the grid labels inside the page margins.
 One dark $R$ means known rigid; its verification status, dates and sources remain in the
 structured metadata.
-The two-line definition uses 57-unit type; the following legend, credits and closing use
-48-unit type in one shared Arial-first body font at weight 700. The definition and all
-body lines use normalized leading 1.50, giving the 48-unit lines a uniform 72-unit
-baseline pitch. Section gaps remain clear; the packing drawings and card captions keep
-their original scale.
+The two-line definition uses 66-unit type; the following legend, credits and closing use
+48-unit type in the shared bundled body font at weight 700. The definition and all body
+lines use normalized leading 1.50, giving the 48-unit lines a uniform 72-unit baseline
+pitch. The packing drawings and card captions keep their original scale.
 The triangle’s bound captions use five decimal places, one fewer than the figure,
 leaving room for the algebraic degree; a longer degree label can shorten the adjacent
 side caption to four places.
 Upper bounds round upward and lower bounds downward; stored bounds retain their full
-precision. “Best packings due to” begins three balanced lines naming all twenty recorded
-construction finders and improvers once.
-Complete canonical names stay intact, newest first by each author’s latest attributed
-found or source date; balancing preserves that order.
-A later improver’s source does not redate inherited authors.
-The nine construction source keys remain in the metadata and the separate bibliography.
+precision. Three paragraphs credit best packings, lower bounds and optimality proofs.
+Each uses complete canonical names once, ordered from oldest to newest by the earliest
+supported result or contribution date.
+Year-only dates retain their precision; ties follow alphabetical order.
+Acquisition and snapshot dates do not establish priority.
+The construction paragraph names all twenty recorded finders and improvers.
+The lower-bound paragraph names current bound-source authors; its metadata also retains
+method, prerequisite and historical contributions.
+The proof paragraph separately identifies formalization and verification contributions
+alongside mathematical proof authors.
+Both PDFs use the same acknowledgments for the full $n = 1..324$ corpus; their diagram
+counts and depicted ranges remain specific to each figure.
+Names wrap intact into balanced lines without bracketed citations or final periods.
+Complete source citations, roles and case associations remain in the SVG metadata and
+curated credit input.
 A section gap separates the credits from the diagram credit, followed by the data date,
 a middle dot and the generated edition stamp.
 A blank line precedes exactly “The Squares Project” and “github.com/jlevy/squares”.
 Both lines use the same 48-unit body font, weight and leading as the legend and credits.
 They are plain black text without a hyperlink or PDF annotation, and start flush with
 the information block’s left edge.
-The poster has no subtitle.
-Its two-line definition appears above the legend: “The square packing problem asks for
-the side $s(n)$ of the smallest square that can hold $n$ unit squares, where the squares
-are free to rotate but cannot overlap.”
+The black two-line definition appears above the legend: “The square packing problem asks
+for the side $s(n)$ of the smallest square that can hold $n$ unit squares, where the
+squares are free to rotate but cannot overlap”.
+The first line ends after “can”.
+The definition and credit paragraphs omit a final period.
 Both composites apply the recent accent independently to a new upper bound, lower bound
 or optimality proof: a new proof of an older packing colors its optimality badge, not
 its upper bound.
 The image above is the raster; the vector it was drawn from is one click
-away, and the PDF is a 86.95-by-68.77-inch page.
+away, and the PDF is an 81.99-by-59.39-inch page.
 
 | File | Size | For |
 | --- | --- | --- |
-| [`known-best-1-324.svg`](known-best-1-324.svg) | 8347 × 6602 units | the source; scales to anything |
-| [`known-best-1-324.png`](known-best-1-324.png) | 8347 × 6602 px | the raster embedded above |
-| [`square-packings-324-20261008.pdf`](square-packings-324-20261008.pdf) | 86.95 × 68.77 in | printing; vector, so text stays selectable |
+| [`known-best-1-324.svg`](known-best-1-324.svg) | 7871 × 5701 units | the source; scales to anything |
+| [`known-best-1-324.png`](known-best-1-324.png) | 7871 × 5701 px | the raster embedded above |
+| [`square-packings-324-20261008.pdf`](square-packings-324-20261008.pdf) | 81.99 × 59.39 in | printing; vector, so text stays selectable |
 
 The poster publishes one raster and a vector PDF. The rectangular poster’s 2x raster
 measured 5,055,264 bytes for 83 megapixels; the poster publishes a single preview, while

@@ -19,11 +19,13 @@ import re
 import textwrap
 from collections.abc import Collection, Iterable, Mapping, Sequence
 from datetime import date, timedelta
+from fractions import Fraction
 from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Literal, NamedTuple, get_args
 from urllib.parse import urlsplit
+from xml.etree import ElementTree as ET
 
 from devtools import repo_links
 from devtools.check_results import KINDS, kind_label
@@ -2539,7 +2541,7 @@ ATLAS_VIEW = "triangle"
 
 #: The atlas's three sizes of tile, in tab order: the key the block's `data-atlas-size`
 #: and the address's `?size=` take, and the tab's label. Medium is the size the atlas had
-#: before it offered a choice, the default and the one the page is rendered in; site.css
+#: before it offered a choice; Small is now the rendered default. site.css
 #: scales a tile by each (`--site-atlas-scale`), and `overview/atlas-view.js` rearranges
 #: the tiles for it (think-ht8t).
 ATLAS_SIZES: tuple[tuple[str, str], ...] = (
@@ -2549,9 +2551,27 @@ ATLAS_SIZES: tuple[tuple[str, str], ...] = (
 )
 
 #: The size the page is rendered in.
-ATLAS_SIZE = "medium"
+ATLAS_SIZE = "small"
 
-#: The id the script gives the box of tiles, which each view and size tab controls.
+#: Drawing scale within each fixed tile slot, independent of layout and tile size.
+ATLAS_SCALES: tuple[tuple[str, str], ...] = (
+    ("fixed", "Fixed"),
+    ("row", "Row"),
+    ("global", "Global"),
+)
+ATLAS_SCALE = "fixed"
+ATLAS_SCALE_DESCRIPTIONS = {
+    "fixed": "Every enclosing square has the same display size.",
+    "row": (
+        "Actual enclosing side relative to its logical row's grid side, in either layout. "
+        "Gray outlines show that grid-sized reference square for smaller containers."
+    ),
+    "global": (
+        "Actual enclosing side relative to the largest side among the cases currently shown."
+    ),
+}
+
+#: The id the script gives the box of tiles, which each view, size and scale tab controls.
 ATLAS_PANEL = "atlas-cells"
 
 #: The retained derived-layer index label, used to validate the selected drawings.
@@ -2600,53 +2620,105 @@ def atlas_regularized() -> tuple[int, ...]:
     return listed
 
 
+@cache
+def atlas_enclosing_sides() -> dict[int, float]:
+    """Actual enclosing sides of the selected drawings, independent of frontier bounds.
+
+    House drawings use their canonical witness; a regularized drawing uses its retained
+    derived witness, whose certified side the renderer draws. Project the same scalar
+    sources as the renderer to browser precision without changing the witnesses.
+    """
+    from devtools.render_regularized_atlas import (  # noqa: PLC0415
+        regularized_entries,
+        view_witness,
+    )
+    from sqpack.render.numbers import scalar_from_decimal, scalar_from_fraction  # noqa: PLC0415
+    from sqpack.yamlio import load_yaml  # noqa: PLC0415
+
+    manifest = json.loads((REPO / "packing/atlas/known-best/manifest.json").read_text())
+    views = {entry["n"]: entry for entry in regularized_entries()}
+    sides: dict[int, float] = {}
+    for entry in manifest["atlas"]["entries"]:
+        n = entry["n"]
+        witness = (
+            view_witness(views[n])
+            if n in views
+            else load_yaml((REPO / "packing" / entry["witness"]["path"]).read_text())["witness"]
+        )
+        raw = str(witness["side"])
+        scalar = (
+            scalar_from_fraction(Fraction(raw))
+            if witness["scalar"]["kind"] == "rational"
+            else scalar_from_decimal(raw)
+        )
+        side = float(scalar.projected)
+        if witness["n"] != n or not math.isfinite(side) or side <= 0:
+            raise ValueError(f"n={n}: invalid atlas enclosing side {raw!r}")
+        sides[n] = side
+    return sides
+
+
+@cache
+def atlas_frame_fractions() -> tuple[float, float]:
+    """The compact renderer's actual frame inset and span within its SVG viewport.
+
+    Read the shared renderer's bounds so a Row reference coincides with a Fixed
+    enclosing frame, including its viewBox margin, at any tile size.
+    """
+    from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
+
+    svg = ET.fromstring(packing_svg(1, units=ATLAS_UNITS))
+    left, top, width, height = map(float, svg.attrib["viewBox"].split())
+    frame = svg.find("rect")
+    if frame is None:
+        raise ValueError("the compact atlas drawing has no enclosing frame")
+    x, y, side, vertical = (float(frame.attrib[key]) for key in ("x", "y", "width", "height"))
+    if width <= 0 or side <= 0 or width != height or side != vertical or x - left != y - top:
+        raise ValueError("the compact atlas enclosing frame is not a centered square")
+    return (x - left) / width, side / width
+
+
 def _atlas_cell(
     n: int,
     status: str,
     *,
     regularized: bool = False,
+    side: float | None = None,
     new: bool = False,
     grid_from: int | None = None,
-    grid_side: int | None = None,
     segment: PackingSegment | None = None,
 ) -> str:
     """A selected drawing and count, linking to its case record.
 
-    The first retained grid packing in a square-bound row carries a Triangle-only
-    marker. Derived drawing provenance stays in the atlas index. A new verified lower
-    bound carries the same star as the frontier table.
+    The first retained grid packing in a square-bound row identifies its grid
+    suffix for layout and accessibility. Derived drawing provenance stays in the atlas
+    index. A new verified lower bound carries the same star as the frontier table.
     """
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.render_case_pages import case_url  # noqa: PLC0415
 
     row = math.isqrt(n - 1) + 1
     square = " data-atlas-square" if row * row == n else ""
+    side = atlas_enclosing_sides()[n] if side is None else side
+    reference = " data-atlas-row-smaller" if side < row else ""
     first_grid = n == grid_from
     grid = " data-atlas-grid-from" if first_grid else ""
     relative_grid = (grid_from or (row - 1) ** 2 + 1) - (row - 1) ** 2
     position = (
         f' style="--r:{row};--c:{row * row - n};--g:{relative_grid};'
         f"--i:{n - (segment.first_n if segment else (row - 1) ** 2 + 1) + 1};"
-        f'--o:{int(row > 1 and n == (row - 1) ** 2 + 1)}"'
+        f"--o:{int(row > 1 and n == (row - 1) ** 2 + 1)};"
+        f'--site-atlas-side:{side};--site-atlas-row-ratio:{side / row}"'
     )
     drawing = frontier.drawing_img(n, regularized=regularized, size=ATLAS_UNITS)
-    side = grid_side or row
-    dimension = f"{side}\N{MULTIPLICATION SIGN}{side} grid"
-    meaning = f", first grid packing in row {row} ({dimension})" if first_grid else ""
+    meaning = f", first grid packing in row {row}" if first_grid else ""
     name = f"n = {n}, {_esc(status)}{meaning}{f', {NEW_RESULT}' if new else ''}"
-    marker = (
-        '<span class="site-atlas-grid-start" aria-hidden="true">'
-        f'<span class="site-atlas-grid-dimension">{side}\N{MULTIPLICATION SIGN}{side}</span>'
-        '<span class="site-atlas-grid-word">GRID</span></span>'
-        if first_grid
-        else ""
-    )
     star = atlas_star() if new else ""
     return (
         f'<a class="site-atlas-cell" href="{case_url(n)}" data-case="{n}" '
-        f'data-atlas-n="{n}"{square}{grid} '
+        f'data-atlas-n="{n}" data-atlas-side="{side}"{square}{grid}{reference} '
         f'data-status="{_esc(status)}" aria-label="{name}"{position}>'
-        f'{drawing}<span class="site-atlas-n">{marker}{n}{star}</span></a>'
+        f'{drawing}<span class="site-atlas-n">{n}{star}</span></a>'
     )
 
 
@@ -2659,13 +2731,23 @@ def _atlas_tablist(
     classes: str,
     name: str,
     extra: str = "",
+    descriptions: Mapping[str, str] | None = None,
 ) -> str:
     """One strip of the atlas's tabs: a tablist of buttons, `default` selected and the
     strip's one stop in the tab order, each controlling the static box of tiles."""
+
+    def description(key: str) -> str:
+        return (
+            f' aria-description="{_esc(descriptions[key])}" title="{_esc(descriptions[key])}"'
+            if descriptions is not None
+            else ""
+        )
+
     tabs = "".join(
         f'<button type="button" role="tab" id="{ids}-{key}" {data}="{key}" '
         f'aria-selected="{"true" if key == default else "false"}" '
-        f'aria-controls="{ATLAS_PANEL}"{"" if key == default else ' tabindex="-1"'}>'
+        f'aria-controls="{ATLAS_PANEL}"{description(key)}'
+        f"{'' if key == default else ' tabindex="-1"'}>"
         f"{_esc(label)}</button>"
         for key, label in choices
     )
@@ -2698,7 +2780,7 @@ def atlas_view_tabs() -> str:
 def atlas_size_tabs() -> str:
     """The tabs beside the view tabs that choose the size of the tiles, Small, Medium
     or Large (think-ht8t): the view tabs' strip, a tablist of three buttons that resize
-    the one set of tiles in place, in either view. Medium is selected and is the strip's
+    the one set of tiles in place, in either view. Small is selected and is the strip's
     one stop in the tab order; the arrow keys move between the three
     (`overview/atlas-view.js`). The strip is present in the first response."""
     return _atlas_tablist(
@@ -2709,6 +2791,20 @@ def atlas_size_tabs() -> str:
         classes="site-atlas-sizes",
         name="Atlas tile size",
         extra="data-atlas-sizes ",
+    )
+
+
+def atlas_scale_tabs() -> str:
+    """Accessible drawing scale choices, with the reference side described per tab."""
+    return _atlas_tablist(
+        ATLAS_SCALES,
+        default=ATLAS_SCALE,
+        ids="atlas-scale",
+        data="data-atlas-scale-tab",
+        classes="site-atlas-scales",
+        name="Atlas drawing scale",
+        extra="data-atlas-scales ",
+        descriptions=ATLAS_SCALE_DESCRIPTIONS,
     )
 
 
@@ -2740,6 +2836,7 @@ def atlas_legend() -> str:
             any(glyph == "R" for glyph, _, _ in fact["badges"]) for fact in facts.values()
         ),
         recent_results=sum(recent[n].any for n in facts),
+        depicted_total=len(facts),
     )
     legend = describe_legend(counts)
     spec = RenderSpec(overlays=frozenset())
@@ -2813,8 +2910,11 @@ def atlas_grid() -> str:
     the same in both.
     A perfect square's tile is marked `data-atlas-square`: it ends its row of the
     triangle, and the triangle numbers it in the text's colour. The
-    block is rendered at the medium size (`data-atlas-size`), under tabs beside the view
+    block is rendered at the small size (`data-atlas-size`), under tabs beside the view
     tabs that make every tile smaller or larger (`atlas_size_tabs`), in either view.
+    Scale changes the drawing within each tile: Fixed (the default), its actual side
+    relative to its logical row's grid side, or relative to the largest currently shown
+    actual enclosing side. Slots, number type and the grid separator stay fixed.
 
     The first `ATLAS_FIRST` cells arrive as static markup with reserved, lazy-loaded
     SVG images; the rest are already present in a hidden container. The script shows
@@ -2834,8 +2934,8 @@ def atlas_grid() -> str:
     regularized case, which House and Regularized tabs swapped in place; the owner
     dropped the choice for the regularized drawings alone (think-k8x9), and with it the
     second set. A case with any recent displayed upper, lower or optimality
-    contribution carries the star. Both strips and the key (`atlas_legend`) share the
-    controls box (`.site-atlas-controls`) above the tiles.
+    contribution carries the star. Layout, Size and Scale strips and the key
+    (`atlas_legend`) share the controls box (`.site-atlas-controls`) above the tiles.
     """
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.render_case_pages import case_popover  # noqa: PLC0415
@@ -2848,6 +2948,7 @@ def atlas_grid() -> str:
         raise SystemExit(f"regularized views of untracked cases: {untracked}")
     manifest = json.loads((REPO / "packing/atlas/known-best/manifest.json").read_text())
     transitions = grid_transitions(manifest["atlas"]["entries"])
+    sides = atlas_enclosing_sides()
     by_n = {case["n"]: case for case in cases}
     new = {n: flags.any for n, flags in recent_contributions_by_case().items()}
     rows: list[str] = []
@@ -2859,9 +2960,9 @@ def atlas_grid() -> str:
                     n,
                     by_n[n]["status"],
                     regularized=n in regularized,
+                    side=sides[n],
                     new=new.get(n, False),
                     grid_from=transition.grid.first_n,
-                    grid_side=transition.row,
                     segment=segment,
                 )
                 for n in segment.numbers
@@ -2878,19 +2979,23 @@ def atlas_grid() -> str:
             f'--site-atlas-row-count:{transition.non_grid.count + transition.grid.count}">'
             f"{''.join(groups)}</div>"
         )
+    frame_inset, frame_span = atlas_frame_fractions()
     first_rows = math.isqrt(ATLAS_FIRST)
     positions = (
         f"--site-atlas-first-extra:{int(transitions[first_rows - 1].has_irregular_prefix)};"
-        f"--site-atlas-last-extra:{int(transitions[-1].has_irregular_prefix)}"
+        f"--site-atlas-last-extra:{int(transitions[-1].has_irregular_prefix)};"
+        f"--site-atlas-first-side:{max(sides[n] for n in tracked if n <= ATLAS_FIRST)};"
+        f"--site-atlas-last-side:{max(sides[n] for n in tracked)};"
+        f"--site-atlas-frame-inset:{frame_inset};--site-atlas-frame-span:{frame_span}"
     )
     more, less = "Show More", "Show Less"
     name_more = f"Show more: all {len(cases)} cases"
     name_less = f"Show less: the first {ATLAS_FIRST}"
     return (
         f'<div class="site-wide site-atlas-grid" data-atlas-view="{ATLAS_VIEW}" '
-        f'data-atlas-size="{ATLAS_SIZE}" data-atlas-grid>'
+        f'data-atlas-size="{ATLAS_SIZE}" data-atlas-scale="{ATLAS_SCALE}" data-atlas-grid>'
         '<div class="site-atlas-controls" data-atlas-controls>'
-        f"{atlas_view_tabs()}{atlas_size_tabs()}"
+        f"{atlas_view_tabs()}{atlas_size_tabs()}{atlas_scale_tabs()}"
         f"{atlas_legend()}</div>"
         f'<div class="site-atlas-cells" id="{ATLAS_PANEL}" style="{positions}">'
         f"{''.join(rows[:first_rows])}"

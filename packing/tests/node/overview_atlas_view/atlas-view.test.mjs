@@ -286,18 +286,18 @@ void test("writing the view keeps every other parameter, and round-trips", () =>
   }
 });
 
-void test("the address names Small and Large and says nothing for Medium", () => {
-  assert.equal(atlas.sizeOf(""), "medium");
+void test("the address names Medium and Large and says nothing for Small", () => {
+  assert.equal(atlas.sizeOf(""), "small");
   assert.equal(atlas.sizeOf("?size=small"), "small");
   assert.equal(atlas.sizeOf("?size=large"), "large");
   assert.equal(atlas.sizeOf("?size=medium"), "medium");
-  assert.equal(atlas.sizeOf("?size=Large"), "medium");
-  assert.equal(atlas.sizeOf("?size=huge"), "medium");
+  assert.equal(atlas.sizeOf("?size=Large"), "small");
+  assert.equal(atlas.sizeOf("?size=huge"), "small");
   assert.equal(atlas.sizeOf("?atlas=triangle&size=large&age=180"), "large");
   assert.equal(atlas.searchForSize("", "large"), "?size=large");
-  assert.equal(atlas.searchForSize("?size=large", "medium"), "");
-  assert.equal(atlas.searchForSize("?size=large", "small"), "?size=small");
-  assert.equal(atlas.searchForSize("", "medium"), "");
+  assert.equal(atlas.searchForSize("?size=large", "medium"), "?size=medium");
+  assert.equal(atlas.searchForSize("?size=large", "small"), "");
+  assert.equal(atlas.searchForSize("", "medium"), "?size=medium");
   for (const search of ["", "?age=180", "?size=small", "?x=1&size=medium"]) {
     for (const size of /** @type {AtlasSize[]} */ (["small", "medium", "large"])) {
       assert.equal(atlas.sizeOf(atlas.searchForSize(search, size)), size);
@@ -316,7 +316,7 @@ void test("the view and the size are two parameters that never overwrite each ot
   assert.equal(search, "?age=180&size=large");
   assert.equal(atlas.sizeOf(search), "large");
   search = atlas.searchForSize(search, "medium");
-  assert.equal(search, "?age=180");
+  assert.equal(search, "?age=180&size=medium");
   assert.equal(atlas.viewOf(search), "triangle");
 });
 
@@ -379,4 +379,40 @@ void test("a move sets the drawing back on its old box, scaled about the tile's 
     width: move.scale * last.width,
   };
   assert.deepEqual(drawn, first);
+});
+
+void test("drawing scale URLs default to Fixed, validate values, and retain layout and size", () => {
+  for (const search of ["", "?scale=fixed", "?scale=unknown", "?scale=ROW"]) {
+    assert.equal(atlas.scaleOf(search), "fixed");
+  }
+  assert.equal(atlas.scaleOf("?atlas=grid&scale=row&size=large"), "row");
+  assert.equal(atlas.scaleOf("?scale=global"), "global");
+  assert.equal(
+    atlas.searchForScale("?x=1&atlas=grid&size=large", "row"),
+    "?x=1&atlas=grid&size=large&scale=row",
+  );
+  assert.equal(atlas.searchForScale("?x=1&scale=global&size=medium", "fixed"), "?x=1&size=medium");
+  assert.equal(
+    atlas.searchForSize("?scale=row&atlas=grid", "large"),
+    "?scale=row&atlas=grid&size=large",
+  );
+  assert.equal(atlas.searchFor("?scale=global&size=large", "triangle"), "?scale=global&size=large");
+});
+
+void test("Row ratios use the actual enclosing side and the logical square-bound row", () => {
+  // These are enclosing sides, not sqrt(n), lower bounds, or responsive grid lines.
+  const five = 2 + Math.SQRT1_2;
+  assert.equal(atlas.rowRatio(5, five), five / 3);
+  assert.notEqual(atlas.rowRatio(5, five), Math.sqrt(5) / 3);
+  assert.equal(atlas.rowRatio(25, 5), 1);
+  assert.equal(atlas.rowRatio(36, 6), 1);
+  assert.equal(atlas.rowRatio(18, 4 + Math.SQRT1_2), (4 + Math.SQRT1_2) / 5);
+});
+
+void test("Global reference is the largest actual side among this instance's shown cases", () => {
+  // A subset can end between perfect squares; neither its count nor last n is a side.
+  assert.equal(atlas.largestSide([2, 2.7071067811865475, 3.8]), 3.8);
+  assert.equal(atlas.largestSide([6.1, 5.95, 6]), 6.1);
+  assert.equal(atlas.largestSide([1, 10]), 10);
+  assert.equal(atlas.largestSide([1, 10, 18]), 18);
 });

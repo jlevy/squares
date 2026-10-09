@@ -4,6 +4,7 @@
 interface AtlasViewSeen {
   view: string | null;
   size: string | null;
+  scale: string | null;
   per_line: string;
   tiles: number;
   moving: number;

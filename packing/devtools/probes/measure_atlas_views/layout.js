@@ -66,6 +66,7 @@
     label: (tab.textContent ?? "").trim(),
     selected: tab.getAttribute("aria-selected"),
     controls: tab.getAttribute("aria-controls"),
+    description: tab.getAttribute("aria-description"),
     tabindex: tab instanceof HTMLElement ? tab.tabIndex : null,
     focused: tab === document.activeElement,
     shown: tab.getClientRects().length > 0,
@@ -78,6 +79,10 @@
     view: block.dataset.atlasView ?? null,
     view_strip: viewStrip ? box(viewStrip) : null,
     size: block.dataset.atlasSize ?? null,
+    scale: block.dataset.atlasScale ?? "fixed",
+    largest_side: Number.parseFloat(
+      getComputedStyle(cells).getPropertyValue("--site-atlas-global-side"),
+    ),
     per_line: Math.round(
       (cells.getBoundingClientRect().width + Number.parseFloat(getComputedStyle(cells).columnGap)) /
         ((tiles[0]?.getBoundingClientRect().width ?? 1) +
@@ -105,6 +110,9 @@
     ),
     sizes: [...block.querySelectorAll("[data-atlas-size-tab]")].map((tab) =>
       tabReport(tab, tab instanceof HTMLElement ? (tab.dataset.atlasSizeTab ?? null) : null),
+    ),
+    scales: [...block.querySelectorAll("[data-atlas-scale-tab]")].map((tab) =>
+      tabReport(tab, tab instanceof HTMLElement ? (tab.dataset.atlasScaleTab ?? null) : null),
     ),
     legend:
       legend === null
@@ -156,6 +164,8 @@
       const gridMarker = tile.querySelector(".site-atlas-grid-start");
       return {
         n: Number(tile instanceof HTMLElement ? tile.dataset.atlasN : Number.NaN),
+        side: Number(tile.getAttribute("data-atlas-side")),
+        drawing_slot_width: drawing ? Number.parseFloat(getComputedStyle(drawing).width) : null,
         grid_from: tile.hasAttribute("data-atlas-grid-from"),
         grid_marker: (gridMarker?.getClientRects().length ?? 0) > 0,
         grid_label: gridMarker

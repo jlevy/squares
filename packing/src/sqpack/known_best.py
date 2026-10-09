@@ -579,10 +579,9 @@ KNOWN_BEST_COMPOSITES = (
         # and centre-crops what it is given, so the portrait composite would lose its
         # title and keep a band from the middle of the grid -- the part that says least
         # about what the picture is. Cropping it here means the crop is chosen rather
-        # than inherited: this is the title block plus four whole rows, and the sliver of
-        # the fifth that completes the ratio reads as a continuation rather than a cut.
-        # 2400x1256 is 1.911:1, which is 1.91:1 to the nearest whole pixel, so a platform
-        # expecting that ratio crops nothing at all.
+        # than inherited. The retained 1256-unit crop keeps the title and upper rows.
+        # Its width follows the current canvas; the site uses a separate social card
+        # for page unfurls, so this crop does not declare a fixed social aspect ratio.
         card_units=1256,
     ),
     CompositeSpec(

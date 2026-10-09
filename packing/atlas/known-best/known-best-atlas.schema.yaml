@@ -47,27 +47,27 @@ properties:
               type: object
               required: [width, height]
               properties:
-                width: {const: 2400}
-                height: {const: 2896}
+                width: {const: 2260}
+                height: {const: 3995}
             png_preview:
               type: object
               required: [width, height]
               properties:
-                width: {const: 2400}
-                height: {const: 2896}
+                width: {const: 2260}
+                height: {const: 3995}
             png_high_resolution:
               type: object
               required: [scale, width, height]
               properties:
                 scale: {const: 2}
-                width: {const: 4800}
-                height: {const: 5792}
+                width: {const: 4520}
+                height: {const: 7990}
             png_link_preview_card:
               type: object
               required: [top_crop, width, height]
               properties:
                 top_crop: {const: true}
-                width: {const: 2400}
+                width: {const: 2260}
                 height: {const: 1256}
       # The poster: eighteen complete square-bound rows share a right edge, holding
       # up to thirty-five cards at a uniform 360-unit pitch. Grid suffixes stay inline,
@@ -88,15 +88,15 @@ properties:
               type: object
               required: [width, height]
               properties:
-                width: {const: 8347}
-                height: {const: 6602}
+                width: {const: 7871}
+                height: {const: 5701}
             png_preview:
               type: object
               required: [scale, width, height]
               properties:
                 scale: {const: 1}
-                width: {const: 8347}
-                height: {const: 6602}
+                width: {const: 7871}
+                height: {const: 5701}
   entries:
     type: array
     minItems: 1

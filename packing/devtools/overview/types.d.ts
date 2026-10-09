@@ -45,8 +45,11 @@ declare function enhanceMath(): Promise<void> | undefined;
 /** The atlas's two views (`atlas-view.js`): the grid, and the triangle of rows by k. */
 type AtlasView = "grid" | "triangle";
 
-/** The atlas's three sizes of tile (`atlas-view.js`), Medium the default. */
+/** The atlas's three sizes of tile (`atlas-view.js`), Small the default. */
 type AtlasSize = "small" | "medium" | "large";
+
+/** Drawing scale within a reserved tile, Fixed the default. */
+type AtlasScale = "fixed" | "row" | "global";
 
 /**
  * Where a case stands in the complete right-aligned triangle: its row k, its line
@@ -90,6 +93,10 @@ interface SiteAtlasViewApi {
   searchFor(search: string, view: AtlasView): string;
   sizeOf(search: string): AtlasSize;
   searchForSize(search: string, size: AtlasSize): string;
+  scaleOf(search: string): AtlasScale;
+  searchForScale(search: string, scale: AtlasScale): string;
+  rowRatio(n: number, side: number): number;
+  largestSide(sides: readonly number[]): number;
   stepTo(key: string, from: number, count: number): number;
   lengthPx(text: string, rootPx: number): number;
   milliseconds(text: string): number;

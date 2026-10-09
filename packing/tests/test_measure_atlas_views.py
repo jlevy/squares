@@ -189,12 +189,16 @@ def test_the_views_and_their_controls_are_named_one_way() -> None:
     assert atlas.query_for("grid") == "?atlas=grid"
     assert atlas.query_for("triangle") == ""
     assert atlas.query_for("grid", "large") == "?atlas=grid&size=large"
-    assert atlas.query_for("triangle", "small") == "?size=small"
-    assert atlas.query_for("triangle", "medium") == ""
+    assert atlas.query_for("triangle", "small") == ""
+    assert atlas.query_for("triangle", "medium") == "?size=medium"
+    assert atlas.query_for("triangle", "small", "row") == "?scale=row"
+    assert atlas.query_for("grid", "large", "global") == "?atlas=grid&size=large&scale=global"
+    with pytest.raises(ValueError, match="no scale"):
+        atlas.query_for("grid", "small", "invalid")
     assert atlas.tab("triangle") == '[data-atlas-tab="triangle"]'
     assert atlas.size_tab("large") == '[data-atlas-size-tab="large"]'
     assert atlas.SIZES == ("small", "medium", "large")
-    assert atlas.MEDIUM in atlas.SIZES
+    assert atlas.DEFAULT_SIZE in atlas.SIZES
     assert not hasattr(atlas, "LAYERS")
     for name in (atlas.query_for, atlas.tab):
         with pytest.raises(ValueError, match="no view"):
@@ -360,6 +364,11 @@ def test_complete_transition_rows_keep_the_half_drawing_gap() -> None:
     report = _report("triangle", 6, tiles)
     report["gap_px"] = 0
     tiles[1]["grid_from"] = True
+    assert atlas.layout_problems(report) == []
+    # Scaling the drawing must not shrink the separator's reserved Fixed width.
+    for tile in tiles:
+        tile["drawing_slot_width"] = tile["drawing"]["width"]
+        tile["drawing"]["width"] /= 3
     assert atlas.layout_problems(report) == []
     faults = atlas.layout_problems(_moved(report, 6, by=-10))
     assert any("gap before n = 6" in problem for problem in faults)

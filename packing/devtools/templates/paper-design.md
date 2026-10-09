@@ -1296,7 +1296,7 @@ it.
   remaining cells are already present in a hidden container.
   Images use native lazy loading, and `overview/atlas-grid.js` changes visibility after
   reader input. Each drawing has a 1000-unit frame, fine enough to show large.
-  Triangle at Medium is the atlas’s default; Grid remains available under the view tabs
+  Triangle at Small is the atlas’s default; Grid remains available under the view tabs
   (**Atlas views**, below).
 
 - **Atlas views.** The atlas is one set of tiles under two views, **Grid** and
@@ -1334,11 +1334,12 @@ it.
   Every perfect-square endpoint aligns to the canvas’s right edge.
   Narrow screens pan the canvas inside the atlas without shrinking or breaking rows; the
   initial scroll position shows the right edge before scripts run.
-  Each row reserves the same caption-aware height and vertical gap, 0.35 of a tile’s
-  width, with no blank logical-row padding.
+  Each row reserves its drawing and count-caption height, without prose-image margins,
+  and the shared cell gap, 0.5rem on desktop and 0.35rem on a phone.
+  There is no blank logical-row padding.
   Rows 1 and 2 have no non-grid prefix and need no horizontal separator.
-  The first retained axis-aligned grid packing in each row carries a two-line dimension
-  and `GRID` marker above its ordinary count.
+  The first retained axis-aligned grid packing in each row begins its grid segment
+  without an additional caption.
   Its threshold comes from the manifest’s canonical `source.kind = exact-grid` entries
   through `sqpack.known_best.grid_transitions`, which checks that each row has an
   unbroken grid suffix and exposes both half-open segments.
@@ -1349,7 +1350,7 @@ it.
   script writes custom properties; the stylesheet places the tiles within the two
   segment containers, whose static metadata matches placement before atlas scripts run.
   Resize and the expander repeat the placement.
-  Grid flattens the segment containers into its ordinary layout and hides grid prefixes.
+  Grid flattens the segment containers into its ordinary layout.
   A tile shares the block’s width after reserving the gaps, and uses Grid’s drawing
   inset, so switching layouts preserves the drawing size.
   At Medium, Grid holds ten tiles at 1280 pixels and four on a 390-pixel phone.
@@ -1378,9 +1379,9 @@ it.
 
 - **Atlas sizes.** Beside the view tabs, in one row over the tiles that wraps under them
   on a phone, a second strip of the same tabs chooses the size of the tiles
-  (`atlas_size_tabs`, think-ht8t): **Small**, **Medium** and **Large**, Medium selected
+  (`atlas_size_tabs`, think-ht8t): **Small**, **Medium** and **Large**, Small selected
   by default and the strip’s one stop in the page’s tab order, with the keys of the view
-  tabs. The page is rendered at Medium.
+  tabs. The page is rendered at Small.
   The size is one token, `--site-atlas-scale` on the block (1, Small 0.667, Large 1.5),
   set by its `data-atlas-size`, and applies in either view.
   It scales the shared cell minimum, `--site-atlas-cell-min`, so both views fit more
@@ -1390,11 +1391,35 @@ it.
   right-aligned rows, with horizontal panning when needed.
   A change of size is a change of layout and moves every tile as a change of view does
   (**Atlas views**, above).
-  The size is in the address as `?size=small` or `?size=large` (Medium has none),
+  The size is in the address as `?size=medium` or `?size=large` (Small has none),
   written and read as the view is, before any tile is placed.
   `tests/test_site_atlas_views.py` reads each size in Chromium, and
   `devtools.measure_atlas_views` measures every layout at every size (`layout`), times
   the changes of size in each view (`move`) and pictures them (`shots`).
+
+- **Atlas scale.** A third strip chooses **Fixed**, **Row** or **Global** on the website
+  only. Fixed is selected by default and retains equal displayed enclosing-container
+  sizes. Row scales each drawing by its selected witness’s enclosing side divided by the
+  logical row’s grid side, $k = \lceil\sqrt{n}\rceil$; grid reference containers retain
+  the same displayed size across rows.
+  Where the actual container is smaller, Row shows a thin gray outline of the grid-sized
+  reference container.
+  The outline follows the normalized SVG container frame inside its image margin,
+  appears in both layouts, and disappears in Fixed and Global.
+  Global scales each drawing against the largest enclosing side among the cases
+  currently shown, recalculating when the atlas expands or collapses.
+  Row uses those logical groups in either view, independent of responsive wrapping.
+  Size still controls tile slots; scale changes only drawing size, preserving count
+  positions, complete rows and the regular-grid separator.
+  The drawing side comes from the canonical selected witness, including the regularized
+  view where it is the published drawing, rather than from a lower bound or an area
+  estimate. The address uses `?scale=row` or `?scale=global`; Fixed omits the parameter.
+  Control changes preserve size, view, unrelated parameters and the fragment.
+  Invalid values select Fixed.
+  Static ratios and the head bootstrap reserve the selected drawing scale before scripts
+  mount. The controls share the tabs’ keyboard behavior and give an accessible
+  explanation of each choice.
+  PDF drawing scales stay fixed.
 
 - **Atlas marks.** The new-result star hangs after the centered count, outside its flow.
   It is the site’s one star in warm ink (`atlas_star`, `.site-star`), on every case with
@@ -1402,11 +1427,12 @@ it.
   `result_status.recent_contributions_by_case().any`. Result-register row stars keep
   their separate lower-proof contract.
   It is hidden from assistive technology; the tile’s name ends “new result” instead.
-  Triangle’s first-grid marker stacks the dimension, such as “9×9,” above `GRID`. Both
-  lines sit above the ordinary count within the existing caption space, adding no row
-  height. Its accessible name says “first grid packing in row” and names the dimension.
-  The count and star keep their existing size at Small’s phone width; drawing sizes
-  remain the same in both views.
+  Triangle’s grid segment starts with the ordinary count and its accessible name says
+  “first grid packing in row”.
+  Dimension and `GRID` captions belong to the print diagrams.
+  Counts use one size, including at the start of a grid segment; the star retains its
+  size at Small’s phone width.
+  Drawing sizes follow the same selected scale in both views.
   Lower-bound statements show five decimal places, and their number-line labels two,
   truncated downward without changing recorded values or the number line’s positions.
   The shared key under the tabs has two left-aligned columns: optimal, exact, numerical
@@ -1414,8 +1440,9 @@ it.
   colors, full-side contact shades and the degree explanation on the right.
   The final item reads “deg is the algebraic degree of that side length,” without a
   badge; it wraps within the right column on a phone.
-  The first two tilt swatches label their pinned angles as `90°` and `45°`. Counts cover
-  all 324 displayed cases, with recent contributions counted once per case.
+  The first two tilt swatches label their pinned angles as `90°` and `45°`. Each counted
+  item uses count/total, such as “proved optimal (77/324)”. Counts cover all 324
+  displayed cases, with recent contributions counted once per case.
   The key uses the support colour at the note size (`atlas_legend`) and describes no
   layout mechanics. A case with a retained derived view in
   `atlas/known-best/regularized/` (X-049) uses that selected drawing directly, without a

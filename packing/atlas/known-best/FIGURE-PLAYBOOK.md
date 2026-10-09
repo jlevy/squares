@@ -3,10 +3,12 @@
 How [`known-best-1-100.svg`](known-best-1-100.svg) and
 [`known-best-1-324.svg`](known-best-1-324.svg) are built, where every fact on them comes
 from, and what to do when the data or the renderer changes.
-Everything on both is decided the same way; where they differ is the encoding, and
-[“The two composites”](#the-two-composites) is where that is measured.
-Everything under `atlas/known-best/` is generated; nothing here is edited by hand, the
-figures and their exports included.
+Both use one annotation renderer; their layouts and geometry encodings differ, as
+[“The two composites”](#the-two-composites) records.
+The geometry records, figures and exports under `atlas/known-best/` are generated.
+The curated `credit-attributions.json` supplies lower-bound and optimality
+acknowledgments with their roles, citations and evidenced chronology.
+This playbook and the README document their construction.
 
 ## Rebuild it
 
@@ -29,8 +31,8 @@ Run it at a version bump, or when you want the figures to show the current data;
 change does not require it.
 Each composite records the data commit and date it was drawn from and may trail the data
 until the next version.
-The figure prints its edition in the footer and its date under the title; the poster
-places the data date before a middle dot and the edition in its closing line:
+Both put the data date before a middle dot and the edition in their diagram-credit
+block: the figure uses a footer and the poster its upper-left information block.
 [Release assets](../../../development.md#release-assets-are-drawn-at-a-version-bump-or-on-demand)
 has the rule, and `--check-composites` lists the cards that trail.
 It refuses to draw while the pinned data revision is stale or the data has uncommitted
@@ -114,10 +116,10 @@ Facts about the mathematics live in `frontier/n-NNN.md`.
 ## Field by field
 
 Unless noted otherwise, counts in the third column describe the figure’s hundred, which
-is also what its legend prints.
-The poster counts its own 324 cases.
-Both composites use the contribution flags described below for their recent result
-markers and accents.
+is also what its legend counts.
+Each counted legend item includes the depicted total after a slash: 100 for the figure,
+324 for the poster. Both composites use the contribution flags described below for their
+recent result markers and accents.
 
 | Shown | Source | Verify by |
 | --- | --- | --- |
@@ -331,16 +333,22 @@ and 1 across the whole atlas, and unpinned classes are ordered by descending cla
 
 ## Fonts
 
-The figure sets Helvetica with Arial as the metric-compatible fallback.
-No webfont is referenced and nothing is fetched at render time.
-Helvetica offers regular and bold and nothing between: any weight from 560 up resolves
-to bold, so asking for a semibold silently yields bold.
-Small card labels stay regular and earn legibility from a darker gray instead.
+Both composites use the retained bold and bold italic faces in
+`devtools/fonts/atlas-print/`, derived from Liberation Sans 2.1.5 under its OFL license
+and renamed SquaresAtlasPrint.
+The license and reproduction notes accompany the fonts.
+Layout reads advances and ink bounds from those files.
+SVGs embed the faces; native PDF and PNG exporters register them for their process and
+refuse a substituted face.
+Nothing is fetched at render time, and no font is installed system-wide.
+Math variables select the explicit italic face; parentheses use the upright face.
 
-Legend rows are centered with the Helvetica advance-width table in the builder, not a
-per-character estimate.
-A uniform estimate cannot center mixed strings; it put the two rows 107px and 189px off
-center, in opposite directions.
+Both information blocks use the same renderer and normalized leading of 1.50. Each block
+gap is three body-font ems, measured between visible ink rather than baselines, so
+capitals, ascenders and descenders do not change the apparent gap.
+The title, problem description and all ordinary text are black.
+Case numbers remain gray, with red reserved for recent results and colored swatches
+retained for tilt and contact keys.
 
 ## The two composites
 
@@ -353,12 +361,19 @@ Eighteen complete rows cover the catalogue’s range, with thirty-five cards in 
 row; no grid suffix moves onto a second line.
 A $k×k$ grid label in the separator marks each row’s first retained regular axis-aligned
 grid packing; the count stays in the ordinary card caption.
+Dimensions and `GRID` form one line rotated 90 degrees counterclockwise, centered on the
+drawing’s height. The renderer measures its retained-font ink and leaves the normal
+horizontal inter-box clearance before the first grid outline, refusing a label that
+exceeds the separator.
+Web views keep the separator and omit these print-only labels.
 The threshold comes from the canonical atlas manifest, not a count formula or the
 derived regularized view.
 Where an irregular prefix precedes the grid suffix, half a drawing width separates the
 segments by 79 units horizontally.
 All-grid rows receive no added gap and place their marker before the first card.
-The poster uses a 360-unit row pitch; the figure retains its 252-unit pitch.
+Both layouts use a 307-unit row pitch and 214-unit column pitch.
+Compared with the earlier poster, visible horizontal box gaps decrease by about 20% and
+the clearance from final annotation ink to the next row outline decreases by about 40%.
 The figure keeps its 10-by-10 geometry, card scale and square encoding.
 Triangle bound captions use five decimal places rather than the figure’s six, with upper
 bounds rounded upward, lower bounds downward and exact equalities to nearest.
@@ -379,49 +394,67 @@ layout string, the manifest record and the figure record’s own legend totals.
 The triangle keeps the figure’s card and label sizes.
 Its eighteen complete logical rows fit a thirty-five-column envelope.
 The longest row’s cards start at $x = 180$; its first drawing starts at $x = 204$. Rows
-begin at $y = 120$ and share a 360-unit pitch, giving more vertical space without
-changing drawing or caption scale.
+begin at $y = 120$ and share the figure’s 307-unit pitch, preserving drawing and caption
+scale while keeping the annotation clearance consistent.
 The canvas includes 120-unit outside clearance for markers and top/bottom margins.
-All informational text occupies the upper-left block at $x = 204..2804$,
-$y = 120..2311$: title, all badge meanings and counts, hue and shade keys, explanation,
-construction credits and closing project details.
-The 2600-unit block uses 144-unit title type, 57-unit type for the two-line definition,
+All informational text occupies the upper-left block at $x = 204..2804$, starting at
+$y = 120$: title, all badge meanings and counts, hue and shade keys, explanation,
+construction, lower-bound and optimality-proof credits and closing project details.
+The renderer derives the block’s bottom from the final line’s retained-font ink extent.
+The 2600-unit block uses 144-unit title type, 66-unit type for the two-line definition,
 and 48-unit type for every subsequent legend, credit and closing line, all in the same
-Arial-first body font at weight 700. The first two tilt swatches contain black 90° and
-45° labels, shared with the website and the grid figure.
+retained body font at weight 700. The first two tilt swatches contain black 90° and 45°
+labels, shared with the website and the grid figure.
 The information starts at $x = 204$, exactly the left edge of the first drawing in the
 final row; card boundaries include additional caption room.
 The definition and every body line use normalized leading 1.50. All 48-unit lines have a
 72-unit baseline pitch, with clear gaps between sections.
 Rendering refuses lines wider than the block, overlapping documentation lines and text
 that intersects a card.
-The problem definition reads: “The square packing problem asks for the side $s(n)$ of
-the smallest square that can hold $n$ unit squares, where the squares are free to rotate
-but cannot overlap.”
-It spans two lines above the legend at baselines 480 and 565.5, setting $s$ and both $n$
-tokens in italic with upright parentheses.
+The problem definition spans two lines above the legend, breaking after “can”: “The
+square packing problem asks for the side $s(n)$ of the smallest square that can hold $n$
+unit squares, where the squares are free to rotate but cannot overlap”.
+The printed text has no final period.
+It sets $s$ and both $n$ tokens in italic with upright parentheses.
 The legend uses the same eight semantic items as the website, in two left-aligned
 columns: four status rows and four recency, color and degree rows.
 The final right-column item is the unbadged text “deg is the algebraic degree of that
-side length.”
-Its four row baselines are 780, 852, 924 and 996, at the same 72-unit pitch
-as the other body text.
-“Best packings due to” begins three balanced construction-credit lines at 1326, 1398 and
-1470\. Complete canonical names stay intact and all twenty recorded finders and
-improvers appear once, newest first by each author’s latest attributed found or source
-date.
-Balancing preserves this order; a later improver’s source does not redate inherited
-authors.
-The visible list has no bracketed citations; all nine full source keys remain in
-the SVG metadata and the separate bibliography.
-A 180-unit section gap separates the credits from “Diagram by Joshua Levy” at 1650. The
-data date, a middle dot and the generated edition follow at 1722. An ordinary blank line
-separates that stamp from exactly “The Squares Project” at 1866 and
-“github.com/jlevy/squares” at 1938. Both final lines use the same 48-unit body font,
-weight 700 and 72-unit pitch as the legend and credits.
-They are plain black text without a hyperlink or PDF annotation; both lines start at the
-information block’s left edge.
-The final line’s lower extent stays inside the block’s 2311-unit bottom.
+side length”.
+Each counted item includes the number of depicted cases as its denominator.
+The four rows share the body’s 72-unit baseline pitch.
+
+Three separate paragraphs begin “Best packings due to”, “Lower bounds due to” and
+“Optimality proofs due to”.
+Complete canonical names remain intact and appear once within each paragraph.
+All twenty recorded construction finders and improvers appear; current lower-bound
+source authors receive the second paragraph.
+The third paragraph credits mathematical proof authors and explicitly distinguishes
+formalization and verification contributions.
+Method, prerequisite and historical lower-bound credits remain in the structured
+metadata.
+
+Names run from older to newer evidenced result or contribution dates.
+Non-overlapping date intervals establish precedence; alphabetical ties leave partial
+dates at their original precision.
+A later improver’s source does not redate inherited authors, and a retrieval or snapshot
+date does not establish publication priority.
+Line balancing preserves that order and omits final periods and bracketed citations.
+
+Both diagrams use the same full-corpus $n = 1..324$ acknowledgments.
+SVG metadata states that credit scope separately from the depicted range and retains the
+complete source citations, original statuses, contribution roles and case associations.
+The curated input is `credit-attributions.json`; `devtools.atlas_credit_attributions`
+validates its roles and chronology without deciding proof acceptance or modifying
+scientific facts.
+
+The shared block gap separates the credits from “Diagram by Joshua Levy”.
+The data date, a middle dot and the generated edition follow on the next line.
+Another block gap precedes exactly “The Squares Project” and “github.com/jlevy/squares”.
+Both final lines use the same 48-unit body font, weight 700 and 72-unit pitch as the
+legend and credits.
+They are plain black text without a hyperlink or PDF annotation; both
+start at the information block’s left edge.
+The final line’s lower extent determines the block’s bottom; it is not a fixed estimate.
 The renderer checks the information rectangle against every card; all text stays inside
 the upper-left whitespace.
 The poster has no publication subtitle; its closing date is the date of the recorded
@@ -432,7 +465,7 @@ caption stays neutral.
 The shared row model declares separate non-grid and grid segments, kept together on one
 line. Logical rows 17 and 18 begin at $y = 5880, 6240$. All rows share the final
 drawing’s right edge at $x = 8193$. The card envelope ends at $x = 8227$, $y = 6482$,
-leaving 120 units on the right and bottom of the $8347 × 6602$ canvas.
+leaving 120 units on the right and bottom of the $7871 × 5701$ canvas.
 Cards retain their logical row and column identities; physical and logical row counts
 both equal eighteen.
 SVG metadata records 35 physical columns and 18 physical lines, matching the manifest
@@ -446,10 +479,10 @@ The packing drawings and card captions retain their original scale.
 | --- | --- | --- |
 | Cases | `n = 1..100` | `n = 1..324` |
 | Arrangement | 10 by 10, row-major | 18 complete right-aligned rows |
-| Canvas | 2400 × 2896 units | 8347 × 6602 units |
+| Canvas | 2260 × 3995 units | 7871 × 5701 units |
 | Squares drawn | 5,050 | 52,650 |
 | Rasters | 1x, 2x, link-preview card | 1x |
-| PDF page | 25 × 30.17 in | 86.95 × 68.77 in |
+| PDF page | 23.54 × 41.61 in | 81.99 × 59.39 in |
 
 The remaining fields are the decisions a figure of another size has to make: which
 rasters it publishes, whether it publishes a link-preview crop, and what it may leave
