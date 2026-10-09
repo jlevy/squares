@@ -5,7 +5,7 @@ title: Resume polynomial catalogue recovery, upstream sync and database work map
 kind: task
 status: in_progress
 priority: 1
-version: 23
+version: 24
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -26,7 +26,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T22:26:10.056Z
-updated_at: 2026-10-09T12:43:59.195Z
+updated_at: 2026-10-09T13:18:26.749Z
 started_at: 2026-10-08T22:26:36.377Z
 ---
 W7 continuation of interrupted PR435/stack447. Preserve unpublished local parent and child repairs, reconcile formal stack with latest origin/main, run current record and change-reachable gates, push every validated owning layer and update cost/results/validation in PR descriptions. Reconcile actual current and historical database partitions with every remaining identification/contact/witness bead. Coordinator owns Git, shared records, bead mutations, integration and PR; parallel Sol-medium CI/storage audit, Sol-xhigh coverage reconciliation and Astra-xhigh semantic mathematical review. Preserve unique source and validation evidence outside disposable external scratch. Slice1 recover provenance and assess gates/capacity; slice2 stack integration and local assurance; slice3 PR/CI closeout alongside selected W6 driver readiness work. No PR landing in scope.
@@ -186,3 +186,16 @@ Canceled same-head duplicate Pages run 37928939930 is preserved: check-run APIs 
 Both PR descriptions have been updated and read back with current heads, costs, source audits, local negative evidence, actual hosted web qualification, and exact remaining-work owners. The final independent semantic review confirms all corpus partitions and V0/C0/proof distinctions. Additional new-pose prerequisites are now explicit: Daniel #399 witnesses n266/think-eu89, n270/think-gg4k and n272/think-olv8 need their own active contact systems and stable seeds; earlier 13ee36e5 KKT/local-minimum results do not transfer. The parent has 59 route notes; the child has 87 route notes and a focused ROUTES dictionary with 38 entries. The W7 driver and independent contact-derived n11 octic remain planned before a bounded n102 attempt; no solver/search result is claimed.
 
 Evidence: pages-37928940305-exact-side-values-web-checks-audit-receipt.json, adjacent report, child-e0d6b8759-current-partial-preview-summary.json, current CI metadata, checked/read-back PR bodies and failed local push receipts under the protected recovery evidence directory. Both PRs remain OPEN and unmerged; final full-checkpoint qualification and its bead/PR disposition remain pending.
+
+
+Reviewed replay fixture checkpoint — 2026-10-09T13:18:26Z
+
+The prior published heads now have terminal full results: parent a1516180ec8cd428c8756d56ccb4e3a1490446ad full run 37929500754 SUCCESS (94/107 core steps, 2206.59 s/3600; all separate prerequisites and aggregate passed). Child e0d6b8759d8adf431191d70069ffd680a07a8e02 full run 37929504835 FAILURE solely because test_cross_checkout_and_dirty_executing_reader_are_refused took 19.23 s against the unchanged 12 s call ceiling. Its assertions passed, and all 11 separate prerequisites passed. Do not combine these dated outcomes into replacement-head qualification.
+
+Measured unchanged local reproduction passed assertions at 67.70 s; native Git Trace2 recorded 57.75 s materializing 17,263 unrelated checkout entries. The reviewed test-only repair uses real Git with a non-cone sparse roster of all 18 authenticated sources, the reader, and its package initializer. It asserts exactly those 20 files at both current and genuine SOURCE_REVISION checkouts. All byte/HEAD/proposal scans, three refusal cases, diagnostics, return code 2, empty stdout, absent output file, production code and 12 s guard are unchanged. Candidate target passed in 4.09 s; all 11 witness tests passed in 30.75 s (target 3.65 s, maximum other call 9.21 s); Ruff, formatting, BasedPyright and whitespace checks passed. Independent strong review is clear.
+
+Parent repair committed c1d3aab9eef04683ea262c9c79ef7d739af2dc50. Official gh-stack rebase --no-trunk --preserve-dates --remote origin cascaded the child. Final LOCAL child is d0d951a40aa8ae85800d9641c96680cdef0f53ad after isolated maintained release-pin update; data pin 515cd465e015c56b46b52d28e1d1164bc599f4a2, parent data pin b03a97ae0921bfb75472c4147c59a31d9708d542. Repair-scoped pre-push checks, new-head source audits, official stack publication, and replacement-head full qualification remain pending at this checkpoint.
+
+The user's scope is a clean complete web report on the Papers page, with no report PDF build. Current lossless evidence preserves all 499 records, 519 coefficient vectors, and 6273 integer strings; originals remain preserved. CI artifacts and local previews are qualified separately from live publication, which follows merge and default-branch deployment. No new polynomial, solver/search, geometry, Lean, or bound result is claimed by this stabilization. Existing remaining-work ownership and planned W7 -> independent contact-derived n11 control -> bounded n102 attempt remain unchanged. Both PRs remain open and unmerged; keep these feature beads open until their corresponding work merges.
+
+Evidence: child-e0d6b8759-bc303-{original-reproduce,original-git-perf,sparse-reproduce,sparse-git-perf,sparse-module,sparse-floor}.log and frozen sparse-custody-fixture.patch; parent-full-37929500754 and child-full-37929504835 metadata; protected PR body drafts, final local Git heads and maintained release-pin checks. All retained under the existing recovery evidence directory.
