@@ -108,6 +108,70 @@ def test_changed_release_data_selects_the_release_contract() -> None:
         ),
         ("packing/witnesses/known-best/n-106.yaml", False),
         ("packing/hosted/refinement-evidence-425-428-v1.yaml", False),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/prior-state.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/declaration.json",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/sources.json",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/upstream-subtree.sha256",
+            True,
+        ),
+        ("packing/witnesses/known-best/n-266.yaml", True),
+        ("packing/witnesses/known-best/n-270.yaml", True),
+        ("packing/witnesses/known-best/n-272.yaml", True),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/exact_forms.json.gz",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/declaration.json",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/sources.json",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/upstream-subtree.sha256",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz.backup",
+            False,
+        ),
+        ("packing/witnesses/known-best/n-267.yaml", False),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/other_forms.json.gz",
+            True,
+        ),
+        ("packing/resources/web/other-packet/acquisition/sources.json", False),
+        ("packing/resources/web/evand-exact-and-local-reports-2026-10-07/README.md", True),
+        ("packing/resources/web/evand-exact-and-local-reports-2026-10-07/extra.json.gz", True),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/archive/extra.json.gz",
+            True,
+        ),
+        ("packing/resources/web/another-packet/archive/extra.json.gz", False),
     ],
 )
 def test_refinement_data_reaches_builder_tests_without_widening_the_suite(

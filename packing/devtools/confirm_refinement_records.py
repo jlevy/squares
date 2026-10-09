@@ -23,6 +23,7 @@ from devtools.register_refinement_reports import (
     report_id,
     save,
 )
+from sqpack.exact_values import algebraic_fields
 from sqpack.yamlio import safe_load
 
 REVIEW = "docs/project/reviews/review-2026-10-07-refinement-custody-closure.md"
@@ -55,8 +56,7 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
     case["reported_upper_bound"].update(
         value=value,
         exact_form=fact["side"],
-        algebraic_degree=1,
-        minimal_polynomial=None,
+        **algebraic_fields(fact["side"], 1, None),
         analytically_optimized=None,
         catalogue_rigid="not-stated",
         construction_method="unknown",
