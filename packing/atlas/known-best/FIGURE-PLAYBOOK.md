@@ -388,37 +388,40 @@ bottom margin. Wrapping adds a line at the same pitch.
 All informational text occupies the upper-right block at $x = 4681..7281$,
 $y = 120..2311$: title, all badge meanings and counts, hue and shade keys, explanation,
 construction credits and closing project details.
-The 2600-unit block uses three times the figure’s type sizes: 144 for the title and 57
-for the legend and documentation.
-Badge glyphs and swatch labels also grow threefold, to 45 and 34.5. The first two tilt
-swatches contain 90° and 45°, shared with the website and the grid figure.
+The 2600-unit block uses 144-unit title type, 57-unit type for the two-line definition,
+and 48-unit type for every subsequent legend, credit and closing line.
+The first two tilt swatches contain black 90° and 45° labels, shared with the website
+and the grid figure.
 The information ends at $x = 7281$, exactly the right edge of the last drawing; card
 boundaries include additional caption room.
-The information has 96-unit legend leading and 90-unit documentation leading, with space
-between sections.
-Rendering refuses lines wider than the block, overlapping documentation
-lines and text that intersects a card.
+Normalized leading is 1.50 for the definition and credits, 1.60 for the legend and 1.75
+for the closing, with clear gaps between sections.
+Rendering refuses lines wider than the block, overlapping documentation lines and text
+that intersects a card.
 The problem definition reads: “The square packing problem asks for the side $s(n)$ of
 the smallest square that can hold $n$ unit squares, where the squares are free to rotate
 but cannot overlap.”
-It spans two lines above the legend at baselines 480 and 570, setting $s$ and both $n$
+It spans two lines above the legend at baselines 480 and 565.5, setting $s$ and both $n$
 tokens in italic with upright parentheses.
 The legend uses the same eight semantic items as the website, in two left-aligned
 columns: four status rows and four recency, color and degree rows.
 The final right-column item is the unbadged text “deg is the algebraic degree of that
-side length.” The four row baselines are 780, 876, 972 and 1068. “Best packings due to”
-begins three balanced construction-credit lines at 1326, 1416 and 1506. Complete names
-stay intact and all twenty recorded finders and improvers appear once.
-The visible list has no bracketed citations; all nine full source keys remain in the SVG
-metadata and the separate bibliography.
-A 180-unit section gap separates the credits from “Diagram by Joshua Levy” at 1686. The
-data date, a middle dot and the generated edition follow at 1791. An ordinary blank line
-separates that stamp from “Citations and details in The Squares Project” at 2001 and
-`github.com/jlevy/squares` at 2106. The diagram, stamp and citations lines use 57-unit
-type; the URL uses 42-unit regular type at weight 400. The closing has 105-unit leading;
-the citations line and URL are black.
-The URL uses Arial first so its measured slash advances match the embedded PDF font and
-its final glyph ends flush with the information block’s right edge.
+side length.”
+Its four row baselines are 780, 856.8, 933.6 and 1010.4. “Best packings due
+to” begins three balanced construction-credit lines at 1326, 1398 and 1470. Complete
+canonical names stay intact and all twenty recorded finders and improvers appear once,
+newest first by each author’s latest attributed found or source date.
+Balancing preserves this order; a later improver’s source does not redate inherited
+authors.
+The visible list has no bracketed citations; all nine full source keys remain in
+the SVG metadata and the separate bibliography.
+A 180-unit section gap separates the credits from “Diagram by Joshua Levy” at 1650. The
+data date, a middle dot and the generated edition follow at 1734. An ordinary blank line
+separates that stamp from exactly “The Squares Project” at 1902 and
+“github.com/jlevy/squares” at 1986. Both final lines use the same 48-unit regular
+Arial-first black text through one plain-text rendering path, without a hyperlink or PDF
+annotation. Arial’s measured slash advances match the embedded PDF font; the address’s
+final glyph ends flush with the information block’s right edge.
 The final line’s lower extent stays inside the block’s 2311-unit bottom.
 The rectangle clears row ten’s rightmost card by 102 units and ends 77 units above that
 row.

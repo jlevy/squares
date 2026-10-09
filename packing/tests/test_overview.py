@@ -945,6 +945,7 @@ def test_the_atlas_key_names_the_star_and_the_first_grid_marker() -> None:
         ("0", "0"),
     ]
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
+    assert "color: #000;" in _rule(css, ".site-atlas-swatch[data-angle-label]")
     legend = _rule(css, ".kpress .site-atlas-grid .site-atlas-legend")
     for declaration in (
         "color: var(--site-support-color);",

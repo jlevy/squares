@@ -10,6 +10,8 @@ import re
 import subprocess
 import zlib
 from collections import Counter
+from collections.abc import Sequence
+from datetime import date
 from decimal import Decimal
 from itertools import pairwise
 from pathlib import Path
@@ -32,6 +34,7 @@ from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
     COMPOSITE_PDF_EDITION_DATE,
     CompositeSpec,
+    CorpusRange,
     SourceGeometryError,
     catalogue_source_map,
     composite_pdf_name,
@@ -888,9 +891,9 @@ def test_the_poster_canvas_is_what_its_specification_computes() -> None:
     assert (canvas.information_left, canvas.information_right) == (4681, 7281)
     assert canvas.legend_baseline == 780
     assert canvas.explainer_baseline == 480
-    assert canvas.citations_baseline == 2001
-    assert canvas.credit_baseline == 1686
-    assert canvas.stamp_baseline == 1791
+    assert canvas.citations_baseline == 1902
+    assert canvas.credit_baseline == 1650
+    assert canvas.stamp_baseline == 1734
     assert (composite.svg_name, composite.pdf_name) == (
         "known-best-1-324.svg",
         "square-packings-324-20261008.pdf",
@@ -1348,7 +1351,6 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
         "legend-label": 19,
         "explainer": 19,
         "problem-explainer": 19,
-        "citations": 19,
         "credit": 19,
         "release-stamp": 19,
         "packing-credit-line": 19,
@@ -1369,15 +1371,46 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
     for node in information_text:
         feature = node.attrib.get("data-feature", "")
         size = Decimal(node.attrib["font-size"])
-        if feature == "repository":
-            assert size == 42
+        if feature in {"citations", "repository"}:
+            assert size == 48
             assert node.attrib["font-weight"] == "400"
             assert node.attrib["font-family"].startswith("Arial")
-        elif feature in baseline_sizes:
+        elif feature in {"poster-title", "explainer", "problem-explainer"}:
             assert size == baseline_sizes[feature] * 3
+        elif feature in baseline_sizes:
+            assert size == 48
             assert size >= baseline_sizes[feature] * 2
         else:
-            assert size in {Decimal(45), Decimal("34.5")}
+            assert Decimal(29) < size < Decimal(38)
+    problem = [
+        block.find(f"svg:text[@data-feature='{feature}']", SVG)
+        for feature in ("explainer", "problem-explainer")
+    ]
+    assert all(node is not None for node in problem)
+    problem_baselines = [Decimal(node.attrib["y"]) for node in problem if node is not None]
+    assert (problem_baselines[1] - problem_baselines[0]) / 57 == Decimal("1.50")
+    columns = block.findall("svg:g/svg:g[@data-feature='legend-column']", SVG)
+    for column in columns:
+        nodes = column.findall("svg:text[@data-feature='legend-label']", SVG)
+        assert len(nodes) == 4
+        assert all(
+            (Decimal(b.attrib["y"]) - Decimal(a.attrib["y"])) / 48 == Decimal("1.60")
+            for a, b in pairwise(nodes)
+        )
+    credit_nodes = block.findall("svg:g/svg:text[@data-feature='packing-credit-line']", SVG)
+    assert len(credit_nodes) == 3
+    assert all(
+        (Decimal(b.attrib["y"]) - Decimal(a.attrib["y"])) / 48 == Decimal("1.50")
+        for a, b in pairwise(credit_nodes)
+    )
+    closing = list(block)[-4:]
+    assert (Decimal(closing[1].attrib["y"]) - Decimal(closing[0].attrib["y"])) / 48 == Decimal(
+        "1.75"
+    )
+    assert (Decimal(closing[3].attrib["y"]) - Decimal(closing[2].attrib["y"])) / 48 == Decimal(
+        "1.75"
+    )
+    assert Decimal(closing[2].attrib["y"]) - Decimal(closing[1].attrib["y"]) == 2 * 84
     assert (canvas.width, canvas.height) == (7435, 5270)
     assert (canvas.grid_top, canvas.grid_bottom) == (120, 5160)
     for case in known_best_builder.retained_cases((11, 12)):
@@ -1448,9 +1481,9 @@ def test_poster_math_variables_are_italic_above_its_legend_and_degree_ends_the_l
         assert Decimal(line.attrib["x"]) + extent == 7281
         assert Decimal(line.attrib["x"]) >= 4681
     assert second.attrib["text-anchor"] == "start"
-    assert second.attrib["font-size"] == "57"
+    assert second.attrib["font-size"] == "48"
     assert Decimal(second.attrib["x"]) == Decimal(column.attrib["data-left"])
-    assert Decimal(second.attrib["y"]) == 1068
+    assert Decimal(second.attrib["y"]) == Decimal("1010.4")
     features = (
         "explainer",
         "problem-explainer",
@@ -1462,7 +1495,7 @@ def test_poster_math_variables_are_italic_above_its_legend_and_degree_ends_the_l
     lines = [block.find(f"svg:text[@data-feature='{feature}']", SVG) for feature in features]
     assert all(line is not None for line in lines)
     baselines = [Decimal(line.attrib["y"]) for line in lines if line is not None]
-    assert baselines == [480, 570, 1686, 1791, 2001, 2106]
+    assert baselines == [480, Decimal("565.5"), 1650, 1734, 1902, 1986]
     assert Decimal(continuation.attrib["y"]) + Decimal("17.1") < 780 - 57
     assert not any(node.attrib.get("data-evidence") == second.text for node in column)
     assert all(above + Decimal("17.1") <= below - 57 for above, below in pairwise(baselines))
@@ -1514,11 +1547,33 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     lines = credit_block.findall("svg:text[@data-feature='packing-credit-line']", SVG)
     assert len(lines) == 3
     body = " ".join(line.text or "" for line in lines)
-    assert body.startswith("Best packings due to Göbel,")
+    assert body.startswith("Best packings due to Chaoweeraprasit, Daniel, Rehwaldt,")
     assert all(any(name in (line.text or "") for line in lines) for name in expected_names)
     printed_names = body.removeprefix("Best packings due to ").removesuffix(".").split(", ")
     assert len(printed_names) == len(expected_names)
     assert set(printed_names) == expected_names
+    assert printed_names == [
+        "Chaoweeraprasit",
+        "Daniel",
+        "Rehwaldt",
+        "Couzo",
+        "de Winter",
+        "Schadt",
+        "Cantrell",
+        "Ellsworth",
+        "Hajba",
+        "DeVincentis",
+        "Morandi",
+        "Bidwell",
+        "Friedman",
+        "Hämäläinen",
+        "Stenlund",
+        "Göbel",
+        "Trump",
+        "Wainwright",
+        "Chang",
+        "hmbelvedere",
+    ]
     assert all(body.count(name) == 1 for name in expected_names)
     assert "et al." not in body
     assert "…" not in body
@@ -1527,14 +1582,14 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     assert "[" not in body
     assert "]" not in body
     text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
-    widths = [text_width(line.text or "", "57") for line in lines]
+    widths = [text_width(line.text or "", "48") for line in lines]
     assert min(widths) >= max(widths) * Decimal("0.9")
-    for node, baseline in zip(lines, (1326, 1416, 1506), strict=True):
-        assert node.attrib["font-size"] == "57"
+    for node, baseline in zip(lines, (1326, 1398, 1470), strict=True):
+        assert node.attrib["font-size"] == "48"
         assert node.attrib["text-anchor"] == "end"
         assert Decimal(node.attrib["x"]) == 7281
         assert Decimal(node.attrib["y"]) == baseline
-        assert Decimal(7281) - text_width(node.text or "", "57") >= 4681
+        assert Decimal(7281) - text_width(node.text or "", "48") >= 4681
         assert baseline + Decimal("17.1") <= 2311
     ending = list(information)[-4:]
     assert [line.attrib["data-feature"] for line in ending] == [
@@ -1546,22 +1601,26 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     assert [line.text for line in ending] == [
         "Diagram by Joshua Levy",
         known_best_builder.retained_identity(_committed_poster_svg()).poster_stamp,
-        "Citations and details in The Squares Project",
+        "The Squares Project",
         "github.com/jlevy/squares",
     ]
     identity = known_best_builder.retained_identity(_committed_poster_svg())
     stamp_text = ending[1].text
     assert isinstance(stamp_text, str)
     assert stamp_text == f"{identity.formatted_date} · {identity.stamp}"
-    assert text_width(stamp_text, "57") <= 2600
-    assert [line.attrib["font-size"] for line in ending] == ["57", "57", "57", "42"]
+    assert text_width(stamp_text, "48") <= 2600
+    assert [line.attrib["font-size"] for line in ending] == ["48"] * 4
     assert [line.attrib["fill"] for line in ending[2:]] == ["#000000"] * 2
+    for attribute in ("font-family", "font-size", "font-weight", "fill"):
+        assert ending[-2].attrib[attribute] == ending[-1].attrib[attribute]
     assert ending[-1].attrib["font-weight"] == "400"
     assert ending[-1].attrib["font-family"].startswith("Arial")
+    assert information.find(".//svg:a", SVG) is None
+    assert all(not key.endswith("href") for node in information.iter() for key in node.attrib)
     assert ending[-1].text == (ending[-1].text or "").strip()
     assert all(line.attrib["text-anchor"] == "end" for line in ending)
     assert all(Decimal(line.attrib["x"]) == 7281 for line in ending)
-    assert [Decimal(line.attrib["y"]) for line in ending] == [1686, 1791, 2001, 2106]
+    assert [Decimal(line.attrib["y"]) for line in ending] == [1650, 1734, 1902, 1986]
     assert (
         sum(
             node.text == "github.com/jlevy/squares"
@@ -1571,7 +1630,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     )
     assert known_best_builder.SUMMARY_CITATIONS not in "".join(information.itertext())
     assert Decimal(ending[0].attrib["y"]) - Decimal(lines[-1].attrib["y"]) == 180
-    assert Decimal(ending[2].attrib["y"]) - Decimal(ending[1].attrib["y"]) == 2 * 105
+    assert Decimal(ending[2].attrib["y"]) - Decimal(ending[1].attrib["y"]) == 2 * 84
     # The closing block fits beside row nine and ends before row ten. Measure every
     # actual text line against every card, rather than treating empty block space as ink.
     canvas = known_best_builder.resolved_composites()[1]
@@ -1900,8 +1959,18 @@ def test_poster_legend_columns_align_left_and_count_upper_only_recent_results(
         )
     )
     assert "since August 2026" in primary_description
-    assert [Decimal(node.attrib["y"]) for node in labels[0]] == [780, 876, 972, 1068]
-    assert [Decimal(node.attrib["y"]) for node in labels[1]] == [780, 876, 972, 1068]
+    assert [Decimal(node.attrib["y"]) for node in labels[0]] == [
+        780,
+        Decimal("856.8"),
+        Decimal("933.6"),
+        Decimal("1010.4"),
+    ]
+    assert [Decimal(node.attrib["y"]) for node in labels[1]] == [
+        780,
+        Decimal("856.8"),
+        Decimal("933.6"),
+        Decimal("1010.4"),
+    ]
     text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     for column, nodes in zip(columns, labels, strict=True):
         start = Decimal(column.attrib["data-left"])
@@ -1909,11 +1978,11 @@ def test_poster_legend_columns_align_left_and_count_upper_only_recent_results(
         assert 4681 <= start < right <= 7281
         for node in nodes:
             assert node.attrib["text-anchor"] == "start"
-            assert node.attrib["font-size"] == "57"
+            assert node.attrib["font-size"] == "48"
             x = Decimal(node.attrib["x"])
             assert start <= x
             assert (x == start) == (node is nodes[-1] and column is columns[1])
-            assert x + text_width(node.text or "", "57") <= right
+            assert x + text_width(node.text or "", "48") <= right
     assert (
         Decimal(columns[1].attrib["data-left"])
         - Decimal(columns[0].attrib["data-left"])
@@ -1935,7 +2004,13 @@ def test_both_pdf_legends_label_only_the_first_two_angle_swatches(index: int) ->
     labels = root.findall(".//svg:text[@data-swatch-label]", SVG)
     assert [node.text for node in labels] == ["90°", "45°", "4", "3", "2", "1", "0"]
     text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
-    expected_size = "11.5" if index == 0 else "34.5"
+    expected_size = (
+        "11.5"
+        if index == 0
+        else known_best_builder.format_svg_number(
+            Decimal("11.5") * known_best_builder.POSTER_LEGEND_TYPE_SCALE
+        )
+    )
     for parent in root.iter():
         children = list(parent)
         for position, label in enumerate(children):
@@ -1951,10 +2026,13 @@ def test_both_pdf_legends_label_only_the_first_two_angle_swatches(index: int) ->
             extent = text_width(label.text or "", expected_size)
             assert center == left + width / 2
             assert left < center - extent / 2 < center + extent / 2 < left + width
-            assert label.attrib["fill"] in {
-                known_best_builder.PAPER_THEME.background,
-                known_best_builder.PAPER_THEME.ink,
-            }
+            if label.text in {"90°", "45°"}:
+                assert label.attrib["fill"] == "#000000"
+            else:
+                assert label.attrib["fill"] in {
+                    known_best_builder.PAPER_THEME.background,
+                    known_best_builder.PAPER_THEME.ink,
+                }
             assert label.attrib["fill"] != swatch.attrib["fill"]
     assert len(root.findall(".//svg:rect[@data-feature='legend-swatch']", SVG)) == 9
     degree_labels = [
@@ -2883,3 +2961,232 @@ def test_each_refinement_atlas_source_binds_full_private_custody(n: int) -> None
         if row["n"] == n
     )
     _assert_witness_agrees_with_entry(entry, {})
+
+
+@pytest.mark.parametrize(
+    "scenario",
+    [
+        "unselected-source",
+        "unselected-figure",
+        "missing-figure-entry",
+        "duplicate-figure-entry",
+        "selected-build",
+        "serialization",
+        "success",
+    ],
+)
+def test_selected_refresh_publishes_only_after_all_preflight_checks(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, scenario: str
+) -> None:
+    packing = tmp_path / "packing"
+    witness_root = packing / "witnesses/known-best"
+    render_root = packing / "atlas/known-best/rendering"
+    manifest_path = packing / "atlas/known-best/manifest.json"
+    source_path = packing / "atlas/known-best/sources.json"
+    figure_path = packing / "atlas/known-best/composite-figure.json"
+    plans = {
+        n: known_best_builder.SourcePlan("exact-grid", packing / "grids", "", n, (n,))
+        for n in range(1, 5)
+    }
+    cases: dict[int, known_best_builder.BuiltCase] = {}
+    manifest_entries = []
+    for case in known_best_builder.retained_cases(range(1, 5)):
+        n = case.frontier.n
+        frontier = known_best_builder.FrontierCase(
+            n, case.frontier.side, packing / f"frontier/n-{n:03d}.md", case.frontier.text, ""
+        )
+        cases[n] = known_best_builder.BuiltCase(
+            frontier, plans[n], case.witness, case.witness_text, case.rendering_text
+        )
+        manifest_entries.append(
+            {
+                "n": n,
+                "reported_side": frontier.side,
+                "source": {"kind": "exact-grid", "path": "grids"},
+            }
+        )
+        for path, text in (
+            (frontier.path, frontier.text),
+            (witness_root / f"n-{n:03d}.yaml", case.witness_text),
+            (render_root / f"n-{n:03d}.svg", case.rendering_text),
+        ):
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text)
+    figure = {
+        "figure": {
+            "generated_by": "retained",
+            "entries": [
+                {"n": n, "side": {"display": cases[n].frontier.side}} for n in range(1, 5)
+            ],
+        }
+    }
+    manifest_path.write_text(json.dumps({"atlas": {"entries": manifest_entries}}))
+    source_path.write_text('{"sources": "retained"}')
+    figure_path.write_text(json.dumps(figure))
+    before = {path: path.read_bytes() for path in packing.rglob("*") if path.is_file()}
+    prospective = copy.deepcopy(figure)
+    prospective["figure"]["generated_by"] = "refreshed-global-header"
+    prospective["figure"]["entries"][0]["selected_update"] = True
+    if scenario == "unselected-source":
+        plans[2] = known_best_builder.SourcePlan(
+            "packet-derived-facts", packing / "grids", "", 2, (2,)
+        )
+    if scenario == "unselected-figure":
+        prospective["figure"]["entries"][1]["side"]["display"] = "1.999"
+    if scenario == "missing-figure-entry":
+        prospective["figure"]["entries"].pop()
+    if scenario == "duplicate-figure-entry":
+        prospective["figure"]["entries"][-1]["n"] = 3
+    monkeypatch.setattr(known_best_builder, "CORPUS", CorpusRange(1, 4))
+    monkeypatch.setattr(known_best_builder, "ROOT", packing)
+    monkeypatch.setattr(known_best_builder, "REPOSITORY_ROOT", tmp_path)
+    monkeypatch.setattr(known_best_builder, "MANIFEST", manifest_path)
+    monkeypatch.setattr(known_best_builder, "SOURCE_MANIFEST", source_path)
+    monkeypatch.setattr(known_best_builder, "WITNESS_ROOT", witness_root)
+    monkeypatch.setattr(known_best_builder, "RENDER_ROOT", render_root)
+    monkeypatch.setattr(known_best_builder, "clear_build_caches", lambda: None)
+    monkeypatch.setattr(known_best_builder, "source_plans", lambda: plans)
+    monkeypatch.setattr(known_best_builder, "_frontier_case", lambda n: cases[n].frontier)
+    monkeypatch.setattr(known_best_builder, "resolved_composites", lambda _entries: ())
+    monkeypatch.setattr(
+        known_best_builder, "_source_index", lambda _plans: {"sources": "updated"}
+    )
+    monkeypatch.setattr(build_composite_figure_data, "RECORD", figure_path)
+    monkeypatch.setattr(build_composite_figure_data, "build_record", lambda: prospective)
+
+    def selected_build(
+        numbers: Sequence[int], workers: int
+    ) -> list[known_best_builder.BuiltCase]:
+        assert list(numbers) == [1]
+        assert workers == 1
+        if scenario == "selected-build":
+            raise ValueError("selected witness is invalid")
+        original = cases[1]
+        witness = copy.deepcopy(original.witness)
+        witness["id"] = "selected-rebuilt"
+        return [
+            known_best_builder.BuiltCase(
+                original.frontier,
+                original.source,
+                witness,
+                original.witness_text + "\n# refreshed selected witness\n",
+                original.rendering_text + "\n<!-- refreshed selected rendering -->\n",
+            )
+        ]
+
+    monkeypatch.setattr(known_best_builder, "built_cases", selected_build)
+    if scenario == "serialization":
+
+        def reject_frontier(case: known_best_builder.FrontierCase, witness_id: str) -> str:
+            assert case.n == 1
+            assert witness_id == "selected-rebuilt"
+            raise ValueError("selected frontier serialization failed")
+
+        monkeypatch.setattr(known_best_builder, "_frontier_with_witness", reject_frontier)
+    if scenario != "success":
+        messages = {
+            "unselected-source": "unselected n=2 changed",
+            "unselected-figure": "unselected figure n=2 changed",
+            "missing-figure-entry": "requires a complete derived figure corpus",
+            "duplicate-figure-entry": "requires a complete derived figure corpus",
+            "selected-build": "selected witness is invalid",
+            "serialization": "selected frontier serialization failed",
+        }
+        with pytest.raises(ValueError, match=messages[scenario]):
+            known_best_builder.update_selected([1])
+        after = {path: path.read_bytes() for path in packing.rglob("*") if path.is_file()}
+        assert after == before
+    else:
+        known_best_builder.update_selected([1])
+        after = {path: path.read_bytes() for path in packing.rglob("*") if path.is_file()}
+        changed = {path for path in after if after[path] != before[path]}
+        assert changed == {
+            figure_path,
+            manifest_path,
+            source_path,
+            cases[1].frontier.path,
+            witness_root / "n-001.yaml",
+            render_root / "n-001.svg",
+        }
+        assert json.loads(figure_path.read_text()) == prospective
+        entries = json.loads(manifest_path.read_text())["atlas"]["entries"]
+        assert entries[1:] == manifest_entries[1:]
+        assert entries[0]["witness"]["id"] == "selected-rebuilt"
+
+
+def test_poster_credits_order_supported_author_dates_without_redating_inherited_finders(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    sources = {
+        "recent": build_bound_citations.Source(
+            "recent", ("Recent",), 2026, "GitHub", dated=date(2026, 10, 7)
+        ),
+        "day": build_bound_citations.Source(
+            "day", ("Day",), 2026, "GitHub", dated=date(2026, 1, 2)
+        ),
+        "year": build_bound_citations.Source("year", ("Year",), 2026, "Catalogue"),
+        "other": build_bound_citations.Source(
+            "other", ("Unrelated",), 2026, "GitHub", dated=date(2026, 10, 8)
+        ),
+        "fallback": build_bound_citations.Source(
+            "fallback", ("Fallback",), 1995, "GitHub", dated=date(1995, 3, 1)
+        ),
+    }
+    cases = {
+        1: {
+            "found_by": ["Old"],
+            "found_year": 1979,
+            "improved_by": ["Recent"],
+            "source_key": "recent",
+        },
+        2: {"found_by": ["Day"], "found_year": 2026, "source_key": "day"},
+        3: {"found_by": ["Year"], "found_year": 2026, "source_key": "year"},
+        4: {"found_by": ["Unknown"], "source_key": "other"},
+        5: {"source_key": "fallback"},
+        6: {
+            "found_by": ["Old"],
+            "found_year": 1980,
+            "source_key": "other",
+            "retrieved": "2099-12-31",
+        },
+    }
+    register = build_bound_citations.Register(
+        evidence={},
+        results=[],
+        sources=sources,
+        names={name: name for name in ("Old", "Recent", "Day", "Year", "Unknown")},
+    )
+    monkeypatch.setattr(build_bound_citations, "load_register", lambda: register)
+    monkeypatch.setattr(
+        build_bound_citations, "load_case", lambda n: {"reported_upper_bound": cases[n]}
+    )
+    monkeypatch.setattr(
+        build_bound_citations,
+        "upper_citation",
+        lambda n, _case, _register: {
+            "source_key": cases[n]["source_key"],
+            "text": "retained citation",
+        },
+    )
+    read_credits = known_best_builder._poster_packing_credits  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    wrap = known_best_builder._poster_credit_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    read_credits.cache_clear()
+    try:
+        packing_credits = read_credits(1, 6)
+        dates = {
+            name: supported for credit in packing_credits for name, supported in credit.dates
+        }
+        assert dates["Old"] == 1980
+        assert dates["Recent"] == date(2026, 10, 7)
+        assert dates["Day"] == date(2026, 1, 2)
+        assert dates["Year"] == 2026
+        assert dates["Fallback"] == date(1995, 3, 1)
+        assert "Unknown" not in dates
+        printed = (
+            " ".join(wrap(packing_credits))
+            .removeprefix("Best packings due to ")
+            .removesuffix(".")
+        )
+        assert printed.split(", ") == ["Recent", "Day", "Year", "Fallback", "Old", "Unknown"]
+    finally:
+        read_credits.cache_clear()

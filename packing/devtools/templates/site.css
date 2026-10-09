@@ -2112,6 +2112,7 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
 /* The first two angle swatches name their degrees; contact swatches keep their
    compact single-number width. */
 .site-atlas-swatch[data-angle-label] {
+  color: #000;
   inline-size: 1rem;
 }
 /* The triangle's column count and tile width live in the shared rule so changing

@@ -63,25 +63,30 @@ details form one block in the upper-right whitespace, leaving the bottom for the
 row of packings. Title and documentation are right-aligned; the legend has two
 left-aligned columns, four status rows beside four recency, color and degree rows.
 The last right-column item reads “deg is the algebraic degree of that side length,”
-without a badge. The first two tilt-color swatches carry $90^\circ$ and $45^\circ$. The
-information ends at the right edge of the final drawing; at least 120 units of outside
-clearance keep the grid labels inside the page margins.
+without a badge. The first two tilt-color swatches carry black $90^\circ$ and $45^\circ$
+labels. The information ends at the right edge of the final drawing; at least 120 units
+of outside clearance keep the grid labels inside the page margins.
 One dark $R$ means known rigid; its verification status, dates and sources remain in the
 structured metadata.
-The information uses three times the figure’s type size, with more room between lines
-and sections; the packing drawings and card captions keep their original scale.
-The triangle’s bound captions use five decimal places, one fewer than the figure,
+The two-line definition uses 57-unit type; the following legend, credits and closing use
+48-unit type. Normalized leading is 1.50 for the definition and credits, 1.60 for the
+legend and 1.75 for the closing.
+Section gaps remain clear; the packing drawings and card captions keep their original
+scale. The triangle’s bound captions use five decimal places, one fewer than the figure,
 leaving room for the algebraic degree; a longer degree label can shorten the adjacent
 side caption to four places.
 Upper bounds round upward and lower bounds downward; stored bounds retain their full
 precision. “Best packings due to” begins three balanced lines naming all twenty recorded
-construction finders and improvers once, with complete canonical names kept intact.
+construction finders and improvers once.
+Complete canonical names stay intact, newest first by each author’s latest attributed
+found or source date; balancing preserves that order.
+A later improver’s source does not redate inherited authors.
 The nine construction source keys remain in the metadata and the separate bibliography.
 A section gap separates the credits from the diagram credit, followed by the data date,
 a middle dot and the generated edition stamp.
-A blank line precedes “Citations and details in The Squares Project” and the repository
-URL, `github.com/jlevy/squares`. These closing lines are right-aligned and black; the
-URL uses smaller regular type and ends flush with the information block’s right edge.
+A blank line precedes exactly “The Squares Project” and “github.com/jlevy/squares”.
+Both lines use identical 48-unit regular Arial-first black text, without a hyperlink or
+PDF annotation, and end flush with the information block’s right edge.
 The poster has no subtitle.
 Its two-line definition appears above the legend: “The square packing problem asks for
 the side $s(n)$ of the smallest square that can hold $n$ unit squares, where the squares

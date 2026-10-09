@@ -384,7 +384,7 @@ SUMMARY_REPOSITORY = "github.com/jlevy/squares"
 SUMMARY_CITATIONS = (
     f"Citations for all results are available in the Squares Project: {SUMMARY_REPOSITORY}"
 )
-POSTER_CITATIONS = "Citations and details in The Squares Project"
+POSTER_CITATIONS = "The Squares Project"
 POSTER_DIAGRAM_CREDIT = "Diagram by Joshua Levy"
 # Set a step above the other small labels so the URL reads as part of the
 # heading block rather than as another footnote.
@@ -396,22 +396,31 @@ SUMMARY_RELEASE_SIZE = SUMMARY_SUBTITLE_SIZE
 SUMMARY_RELEASE_GAP = Decimal(11)
 SUMMARY_SUBTITLE_BASELINE = Decimal(148)
 
-#: The information uses the triangle's upper-right whitespace at three times the
-#: figure's type size. Card scale and relative positions survive added outside air.
+#: The title and problem keep their enlarged type. Documentation below the problem
+#: uses one smaller type step, preserving card scale and the spacious baselines.
 POSTER_INFORMATION_TYPE_SCALE = Decimal(3)
 POSTER_TITLE_SIZE = "144"
-POSTER_FOOTER_SIZE = "57"
-POSTER_REPOSITORY_SIZE = "42"
+POSTER_FOOTER_SIZE = "48"
+# Finite scale keeps the two column edges and their explicit gap exact in Decimal.
+POSTER_LEGEND_TYPE_SCALE = (
+    Decimal(POSTER_FOOTER_SIZE) / Decimal(SUMMARY_FOOTER_SIZE)
+).quantize(Decimal("0.000001"), rounding=ROUND_HALF_EVEN)
+POSTER_PROBLEM_SIZE = "57"
+POSTER_PROBLEM_LINE_HEIGHT_RATIO = Decimal("1.50")
+POSTER_DOCUMENTATION_LINE_HEIGHT_RATIO = Decimal("1.50")
+POSTER_LEGEND_LINE_HEIGHT_RATIO = Decimal("1.60")
+POSTER_CLOSING_LINE_HEIGHT_RATIO = Decimal("1.75")
+POSTER_PROBLEM_LINE_PITCH = Decimal(POSTER_PROBLEM_SIZE) * POSTER_PROBLEM_LINE_HEIGHT_RATIO
 POSTER_INFORMATION_WIDTH = Decimal(2600)
 POSTER_INFORMATION_TOP = POSTER_OUTER_MARGIN
 POSTER_INFORMATION_BOTTOM = POSTER_INFORMATION_TOP + Decimal(2191)
 POSTER_TITLE_BASELINE = POSTER_INFORMATION_TOP + Decimal(144)
 POSTER_LEGEND_BASELINE = POSTER_INFORMATION_TOP + Decimal(660)
-POSTER_LEGEND_ROW_PITCH = Decimal(96)
+POSTER_LEGEND_ROW_PITCH = Decimal(POSTER_FOOTER_SIZE) * POSTER_LEGEND_LINE_HEIGHT_RATIO
 POSTER_LEGEND_COLUMN_GAP = Decimal(180)
 POSTER_EXPLAINER_BASELINE = POSTER_INFORMATION_TOP + Decimal(360)
-POSTER_FOOTER_LINE_PITCH = Decimal(90)
-POSTER_CLOSING_LINE_PITCH = Decimal(105)
+POSTER_FOOTER_LINE_PITCH = Decimal(POSTER_FOOTER_SIZE) * POSTER_DOCUMENTATION_LINE_HEIGHT_RATIO
+POSTER_CLOSING_LINE_PITCH = Decimal(POSTER_FOOTER_SIZE) * POSTER_CLOSING_LINE_HEIGHT_RATIO
 POSTER_PACKING_CREDITS_BASELINE = POSTER_INFORMATION_TOP + Decimal(1206)
 POSTER_PACKING_CREDITS_LINE_COUNT = 3
 POSTER_PACKING_CREDITS_PREFIX = "Best packings due to"
@@ -2294,6 +2303,7 @@ def _legend_row(
     right_edge: Decimal | None = None,
     left_edge: Decimal | None = None,
     type_scale: Decimal = Decimal(1),
+    label_size: str | None = None,
 ) -> None:
     """Lay one legend row centered on the canvas or ending at a right edge.
 
@@ -2302,7 +2312,7 @@ def _legend_row(
     advance table, because the renderer holds no font metrics.
     """
     badge_size = SUMMARY_BADGE_SIZE * type_scale
-    footer_size = format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
+    footer_size = label_size or format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
     mark_gap = Decimal(8) * type_scale
     top = baseline - badge_size + Decimal(4) * type_scale
 
@@ -2373,7 +2383,9 @@ def _legend_row(
                             "font-family": SUMMARY_FONT,
                             "font-size": numeral_size,
                             "font-weight": "650",
-                            "fill": PAPER_THEME.background
+                            "fill": "#000000"
+                            if numeral in {"90°", "45°"}
+                            else PAPER_THEME.background
                             if hex_oklch(fill)[0] < 0.62
                             else PAPER_THEME.ink,
                         },
@@ -2465,8 +2477,8 @@ def _append_summary_legend(
 
     legend = sub(root, "g", {"data-feature": "evidence-legend"})
     if canvas.information_in_corner:
-        badge_size = SUMMARY_BADGE_SIZE * POSTER_INFORMATION_TYPE_SCALE
-        mark_gap = Decimal(8) * POSTER_INFORMATION_TYPE_SCALE
+        badge_size = SUMMARY_BADGE_SIZE * POSTER_LEGEND_TYPE_SCALE
+        mark_gap = Decimal(8) * POSTER_LEGEND_TYPE_SCALE
 
         def row_width(item: LegendItem) -> Decimal:
             if item.marker is None:
@@ -2505,7 +2517,8 @@ def _append_summary_legend(
                     baseline=canvas.legend_baseline + POSTER_LEGEND_ROW_PITCH * index,
                     canvas_width=canvas.width,
                     left_edge=cursor,
-                    type_scale=POSTER_INFORMATION_TYPE_SCALE,
+                    type_scale=POSTER_LEGEND_TYPE_SCALE,
+                    label_size=POSTER_FOOTER_SIZE,
                 )
             cursor += width + POSTER_LEGEND_COLUMN_GAP
     else:
@@ -2699,6 +2712,14 @@ class PackingCredit:
     names: tuple[str, ...]
     source_keys: tuple[str, ...]
     citation: str
+    #: Supported author-attribution dates; an integer retains year-only precision.
+    dates: tuple[tuple[str, date | int], ...] = ()
+
+
+def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
+    if isinstance(value, date):
+        return value.year, 1, value.month, value.day
+    return (value, 0, 0, 0) if value is not None else (0, 0, 0, 0)
 
 
 @cache
@@ -2710,7 +2731,7 @@ def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, .
     source key retained in the SVG.
     """
     register = build_bound_citations.load_register()
-    groups: dict[str, tuple[list[str], list[str]]] = {}
+    groups: dict[str, tuple[list[str], list[str], dict[str, date | int]]] = {}
     for n in range(first_n, last_n + 1):
         case = build_bound_citations.load_case(n)
         citation = build_bound_citations.upper_citation(n, case, register)
@@ -2720,6 +2741,7 @@ def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, .
         credited = [*(reported.get("found_by") or []), *(reported.get("improved_by") or [])]
         names = [register.names[name] for name in dict.fromkeys(credited)]
         source_key = citation["source_key"]
+        source: build_bound_citations.Source | None = None
         if source_key is None:
             reference = citation["text"]
             names = names or [build_bound_citations.PROJECT_NAME]
@@ -2736,24 +2758,51 @@ def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, .
             reference = f"[{family}{f' {source.year}' if source.year is not None else ''}]"
             names = names or list(source.authors)
             source_keys = [source.key]
-        group_names, group_sources = groups.setdefault(reference, ([], []))
+        group_names, group_sources, group_dates = groups.setdefault(reference, ([], [], {}))
         group_names.extend(name for name in names if name not in group_names)
         group_sources.extend(key for key in source_keys if key not in group_sources)
+        found_year = reported.get("found_year")
+        dated_names: list[tuple[str, date | int]] = (
+            [(register.names[name], found_year) for name in (reported.get("found_by") or [])]
+            if isinstance(found_year, int)
+            else []
+        )
+        if source is not None:
+            source_date = source.dated or source.year
+            if source_date is not None:
+                # An improver's publication does not redate inherited finders.
+                dated_names.extend(
+                    (name, source_date) for name in names if name in source.authors
+                )
+        for name, supported in dated_names:
+            if _credit_date_key(supported) > _credit_date_key(group_dates.get(name)):
+                group_dates[name] = supported
     return tuple(
-        PackingCredit(tuple(names), tuple(keys), reference)
-        for reference, (names, keys) in groups.items()
+        PackingCredit(tuple(names), tuple(keys), reference, tuple(dates.items()))
+        for reference, (names, keys, dates) in groups.items()
     )
 
 
 def _poster_credit_lines(packing_credits: Sequence[PackingCredit]) -> tuple[str, ...]:
     """Balance complete names across three print lines, each author appearing once.
 
-    First choose fitting breaks in source order. If those leave a short line, move
-    complete names between lines to reduce measured width variance, preserving their
-    order within each line and keeping the first author beside the introduction.
-    Source keys remain in the SVG metadata.
+    Authors are newest first by their latest supported attribution date, with
+    year-only precision retained and undated authors last. Only consecutive breaks
+    are considered, so balancing cannot rearrange chronology. Source keys remain in
+    the SVG metadata.
     """
     names = list(dict.fromkeys(name for credit in packing_credits for name in credit.names))
+    latest: dict[str, date | int] = {}
+    for credit in packing_credits:
+        for name, supported in credit.dates:
+            if _credit_date_key(supported) > _credit_date_key(latest.get(name)):
+                latest[name] = supported
+    names.sort(
+        key=lambda name: (
+            *(-part for part in _credit_date_key(latest.get(name))),
+            name.casefold(),
+        )
+    )
     if not names:
         return (POSTER_PACKING_CREDITS_PREFIX,)
     line_count = min(POSTER_PACKING_CREDITS_LINE_COUNT, len(names))
@@ -2774,7 +2823,6 @@ def _poster_credit_lines(packing_credits: Sequence[PackingCredit]) -> tuple[str,
 
     best_groups: tuple[tuple[int, ...], ...] | None = None
     best_lines: tuple[str, ...] = ()
-    best_widths: tuple[Decimal, ...] = ()
     best_score: Decimal | None = None
     for breaks in combinations(range(1, len(names)), line_count - 1):
         boundaries = (0, *breaks, len(names))
@@ -2783,36 +2831,9 @@ def _poster_credit_lines(packing_credits: Sequence[PackingCredit]) -> tuple[str,
         if max(widths) > POSTER_INFORMATION_WIDTH:
             continue
         if best_score is None or score < best_score:
-            best_groups, best_lines, best_widths, best_score = groups, lines, widths, score
+            best_groups, best_lines, best_score = groups, lines, score
     if best_groups is None or best_score is None:
         raise ValueError("poster packing credits exceed their three-line information block")
-    while min(best_widths) < max(best_widths) * Decimal("0.9"):
-        improved = False
-        current_groups = best_groups
-        for source, group in enumerate(current_groups):
-            if len(group) <= 1:
-                continue
-            for number in group:
-                if number == 0:
-                    continue
-                for target in range(line_count):
-                    if target == source:
-                        continue
-                    moved = list(current_groups)
-                    moved[source] = tuple(n for n in group if n != number)
-                    moved[target] = tuple(sorted((*current_groups[target], number)))
-                    groups = tuple(moved)
-                    lines, widths, score = measure(groups)
-                    if max(widths) <= POSTER_INFORMATION_WIDTH and score < best_score:
-                        best_groups, best_lines, best_widths, best_score = (
-                            groups,
-                            lines,
-                            widths,
-                            score,
-                        )
-                        improved = True
-        if not improved:
-            break
     return best_lines
 
 
@@ -2832,14 +2853,14 @@ def _append_poster_information(
         for index in range(len(credit_lines))
     ]
     explainer_baselines = [
-        canvas.explainer_baseline + POSTER_FOOTER_LINE_PITCH * index
+        canvas.explainer_baseline + POSTER_PROBLEM_LINE_PITCH * index
         for index in range(len(POSTER_EXPLAINER_LINES))
     ]
     repository_baseline = canvas.citations_baseline + POSTER_CLOSING_LINE_PITCH
     font_size = Decimal(POSTER_FOOTER_SIZE)
     document_lines = [
         (POSTER_TITLE_BASELINE, Decimal(POSTER_TITLE_SIZE)),
-        *((baseline, font_size) for baseline in explainer_baselines),
+        *((baseline, Decimal(POSTER_PROBLEM_SIZE)) for baseline in explainer_baselines),
         *(
             (canvas.legend_baseline + POSTER_LEGEND_ROW_PITCH * index, font_size)
             for index in range(4)
@@ -2848,7 +2869,7 @@ def _append_poster_information(
         (canvas.credit_baseline, font_size),
         (canvas.stamp_baseline, font_size),
         (canvas.citations_baseline, font_size),
-        (repository_baseline, Decimal(POSTER_REPOSITORY_SIZE)),
+        (repository_baseline, font_size),
     ]
     if any(
         above + above_size * Decimal("0.3") > below - below_size
@@ -2915,11 +2936,13 @@ def _append_poster_information(
                 "x": format_svg_number(right),
                 "y": format_svg_number(baseline),
                 "text-anchor": "end",
-                # Arial avoids Quartz's inconsistent slash advances when Cairo emits
-                # the repository URL to PDF; its end anchor then stays flush right.
-                "font-family": POSTER_ITALIC_FONT if feature == "repository" else SUMMARY_FONT,
+                # The two project-reference lines share one plain style. Arial also
+                # keeps Quartz's slash advances consistent in the printed address.
+                "font-family": POSTER_ITALIC_FONT
+                if feature in {"citations", "repository"}
+                else SUMMARY_FONT,
                 "font-size": size,
-                "font-weight": "400" if feature == "repository" else "700",
+                "font-weight": "400" if feature in {"citations", "repository"} else "700",
                 "fill": "#000000"
                 if feature in {"citations", "repository"}
                 else PAPER_THEME.ink
@@ -2976,7 +2999,7 @@ def _append_poster_information(
     text_line("credit", POSTER_DIAGRAM_CREDIT, canvas.credit_baseline)
     text_line("release-stamp", identity.poster_stamp, canvas.stamp_baseline)
     text_line("citations", POSTER_CITATIONS, canvas.citations_baseline)
-    text_line("repository", SUMMARY_REPOSITORY, repository_baseline, POSTER_REPOSITORY_SIZE)
+    text_line("repository", SUMMARY_REPOSITORY, repository_baseline)
 
 
 @emission_precision()
@@ -3628,7 +3651,9 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
 
     Source selection and displayed side must agree with the old manifest outside the
     requested scope. Each selected witness is rebuilt through the ordinary strict
-    producer; all other manifest entries and geometry files are preserved.
+    producer; all other manifest and figure entries and geometry files are preserved.
+    Derivation and serialization finish before publishing any file, so a refused scope
+    or failed selected build leaves every retained output unchanged.
     """
     squish_house.guard_house_outputs(list(numbers))
     refinement_houses.guard_house_outputs(list(numbers))
@@ -3636,8 +3661,6 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
     selected = set(numbers)
     if not selected or len(selected) != len(numbers) or not selected <= set(CORPUS.numbers):
         raise ValueError("selected atlas refresh requires unique corpus counts")
-    build_composite_figure_data.update()
-    _figure_entries.cache_clear()
     clear_build_caches()
     retained: list[dict] = json.loads(MANIFEST.read_text())["atlas"]["entries"]
     if [row["n"] for row in retained] != list(CORPUS.numbers):
@@ -3658,12 +3681,31 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
         ):
             raise ValueError(f"unselected n={n} changed; use the complete atlas producer")
     built = built_cases(numbers, workers)
+    prospective_figure = build_composite_figure_data.build_record()
+    retained_figure = load_figure_record()
+    figure_entries = {}
+    for name, figure in (
+        ("retained", retained_figure),
+        ("derived", prospective_figure["figure"]),
+    ):
+        rows = figure["entries"]
+        if [row["n"] for row in rows] != list(CORPUS.numbers):
+            raise ValueError(f"selected atlas refresh requires a complete {name} figure corpus")
+        figure_entries[name] = {row["n"]: row for row in rows}
+    for n in CORPUS.numbers:
+        if n not in selected and figure_entries["retained"][n] != figure_entries["derived"][n]:
+            raise ValueError(
+                f"unselected figure n={n} changed; use the complete atlas producer"
+            )
     replacement: dict[int, dict] = {item.frontier.n: _manifest_entry(item) for item in built}
     entries = [replacement.get(row["n"], row) for row in retained]
     manifest = _manifest_document(
         entries, [_composite_record(canvas) for canvas in resolved_composites(entries)]
     )
     outputs = {
+        build_composite_figure_data.RECORD: retained_json.dumps(
+            prospective_figure, sort_keys=True, ensure_ascii=False
+        ),
         MANIFEST: _manifest_text(manifest),
         SOURCE_MANIFEST: _json_text(_source_index(plans)),
     }
@@ -3675,9 +3717,11 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
             item.frontier, str(item.witness["id"])
         )
     for path, text in outputs.items():
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with atomic_output_file(path) as temporary:
+        if path.is_file() and path.read_text(encoding="utf-8") == text:
+            continue
+        with atomic_output_file(path, make_parents=True) as temporary:
             temporary.write_text(text, encoding="utf-8")
+    _figure_entries.cache_clear()
     print(
         f"Selected atlas refreshed: {len(selected)} geometries; "
         f"{CORPUS.count - len(selected)} entries preserved"
