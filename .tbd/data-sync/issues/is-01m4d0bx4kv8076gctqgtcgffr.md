@@ -5,17 +5,19 @@ title: "n17: implement and preregister the first eight-state shared-centre exact
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md
 delegate: claude-code@spud10.local
 labels:
   - n-17
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m4f83jp2jw7m4pbb1ecn963z
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-08T05:39:20.323Z
-updated_at: 2026-10-08T21:19:58.951Z
+updated_at: 2026-10-09T02:33:04.961Z
 started_at: 2026-10-08T19:15:43.156Z
 ---
 Implement and prospectively register the frozen first-eight shared-centre exact LP pilot, following docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md on PR461. The guarded endpoint adapter and its separately registered exact positive control are implemented and verified; the numerical producer, bounded exact candidate reconstruction, first-eight pilot and fresh target replay remain open. Preserve original closed cells, all136pairs, free34centrevariables, exact row identities, frozen resource guards and canonical first8 order. Accept exact primal relaxation survival or exact Farkas contradiction only after independent fresh checking; ordinary exclusion admission/composition remains separate. Historical source/result and current qualification are in Notes.
