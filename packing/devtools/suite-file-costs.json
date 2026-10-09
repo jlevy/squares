@@ -161,6 +161,7 @@
     "packing/tests/test_count_grid_symmetry.py": 0.023,
     "packing/tests/test_couzo_custody.py": 1.236,
     "packing/tests/test_couzo_extended_reports.py": 15.938,
+    "packing/tests/test_couzo_followup_reports.py": 11.62,
     "packing/tests/test_couzo_refinement_reports.py": 0.214,
     "packing/tests/test_cover.py": 0.006,
     "packing/tests/test_covering_queue.py": 0.134,
@@ -482,6 +483,7 @@
     "packing/tests/test_rectangle_verifier_parity.py": 0.019,
     "packing/tests/test_refinement_custody.py": 4.273,
     "packing/tests/test_regenerate_sites1_checkpoint.py": 0.06,
+    "packing/tests/test_register_couzo_followup_report.py": 4.137,
     "packing/tests/test_register_couzo_refinement_report.py": 1.823,
     "packing/tests/test_register_prose.py": 1.617,
     "packing/tests/test_regression_diagnostics.py": 0.02,
@@ -1138,6 +1140,31 @@
           "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr468-2026-10-09-run3.json",
           "provenance": {},
           "tests": 8
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_couzo_followup_reports.py",
+        "packing/tests/test_register_couzo_followup_report.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr469-2026-10-09-run1.json",
+          "provenance": {},
+          "tests": 55
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr469-2026-10-09-run2.json",
+          "provenance": {},
+          "tests": 55
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr469-2026-10-09-run3.json",
+          "provenance": {},
+          "tests": 55
         }
       ]
     }
