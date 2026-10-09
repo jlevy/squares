@@ -404,8 +404,7 @@ Combinatorial Geometry Problems Revisited in the Era of LLMs*
 ([arXiv:2601.05943](https://arxiv.org/abs/2601.05943), submitted 9 January 2026,
 retained at
 `packing/resources/papers/berthold-kamp-mexi-pokutta-polik-2026-global-optimization-combinatorial-geometry.pdf`),
-ran FICO Xpress 9.8 and SCIP 10.0 on packing benchmarks with a 10,000 second limit
-preceded by a 5,000 second multistart, on a 48-core Xeon Gold.
+ran FICO Xpress and SCIP on packing benchmarks.
 Restricted to squares in a square, the
 [2026-08-22 report](research-2026-08-22-square-packing-algorithms-and-tooling.md#general-purpose-global-optimization)
 tabulates the outcome: they match the record at $n = 5, 10, 11$, miss the *trivial* grid
@@ -423,12 +422,19 @@ optimality gaps run from `9.9%` to `15.2%`, so the dual bounds are far from clos
 anything.
 
 **Inference.** This is the calibration point for the whole question.
-State-of-the-art general-purpose global optimisation, given hours per instance on 48
-cores, reproduces the records to about $n = 16$ and then degrades, and when the same
-team went looking for new incumbents under free rotation a year later, this particular
-family was one they did not move.
+The January square-packing comparisons reproduce the records to about $n = 16$ and then
+degrade. The May follow-up, four months later, reported no new incumbent in this
+particular family. The May study’s setup (§§3.2 and 3.4) typically used a 5,000-second
+multistart followed by a 10,000-second global solve, single-threaded and non-exclusively
+on a 48-core Xeon Gold host.
+Formulation comparisons used shorter 500-second and 1,000-second limits.
 Any claim that a general method “should” reach $n = 100$ has to explain why it beats
 this result by a factor it has never been shown to beat.
+
+The
+[October 8 n17 paper review](../reviews/review-2026-10-08-n17-global-optimization-and-sos.md)
+examines the separate proof question: polynomial encoding, exact SOS certificates, and
+why a small joint-owner pilot follows the shared-centre LP test.
 
 ## 3. The Wider Family, and a Correction
 
