@@ -36,6 +36,7 @@
     "packages/workbench/tests/test_site_nav.py": 0.032,
     "packages/workbench/tests/test_summarize_annealing.py": 0.028,
     "packages/workbench/tests/test_transitions.py": 0.006,
+    "packing/tests/test_acquire_original_gzip.py": 1.183,
     "packing/tests/test_acquire_source.py": 1.729,
     "packing/tests/test_admit_fixed_support_dual.py": 2.8,
     "packing/tests/test_admit_threshold_atom_orbits.py": 0.039,
@@ -578,6 +579,7 @@
     "packing/tests/test_source_coverage.py": 2.011,
     "packing/tests/test_source_supersession.py": 0.007,
     "packing/tests/test_squish_receipt_binding.py": 0.329,
+    "packing/tests/test_squish_receipt_retention.py": 4.214,
     "packing/tests/test_squish_second_update_confirmation.py": 82.606,
     "packing/tests/test_squish_update_certification.py": 39.017,
     "packing/tests/test_squish_upper_bound_packets.py": 6.036,
@@ -1005,6 +1007,31 @@
           "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr442-2026-10-09-run3.json",
           "provenance": {},
           "tests": 101
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_acquire_original_gzip.py",
+        "packing/tests/test_squish_receipt_retention.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr443-2026-10-09-run1.json",
+          "provenance": {},
+          "tests": 23
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr443-2026-10-09-run2.json",
+          "provenance": {},
+          "tests": 23
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr443-2026-10-09-run3.json",
+          "provenance": {},
+          "tests": 23
         }
       ]
     }
