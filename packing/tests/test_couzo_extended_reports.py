@@ -16,8 +16,14 @@ from devtools import check_source_coverage
 from devtools import couzo_extended_reports as reports
 from sqpack.yamlio import load_yaml
 
+#: The source's binary64 renderings: a side as `.15f`, a coordinate as `.17e`.
+SIDE = f"{20.0:.15f}"
+ZERO = format(0.0, ".17e")
 
-def synthetic_source() -> tuple[dict[str, Any], dict[str, tuple[str, str]]]:
+
+def synthetic_source(
+    side: str = SIDE, token: str = ZERO
+) -> tuple[dict[str, Any], dict[str, tuple[str, str]]]:
     """All twenty counts, historical roles and nested tree structure, no geometry."""
     trees: dict[str, dict[str, Any]] = {sha: {} for sha in reports.COMMITS}
     blobs: dict[str, str] = {}
@@ -25,7 +31,7 @@ def synthetic_source() -> tuple[dict[str, Any], dict[str, tuple[str, str]]]:
     for commit, path, role in sorted(reports.input_roster()):
         if role == "current-outside-horizon" and path.endswith(".txt"):
             n = int(path.removeprefix("n").removesuffix(".txt"))
-            text = reports.canonical_pose(n, "20.0", [("0.0", "0.0", "0.0")] * n)
+            text = reports.canonical_pose(n, side, [(token, token, token)] * n)
         else:
             text = f"ordinary fixture {commit} {path}\n"
         raw = text.encode()
@@ -268,6 +274,120 @@ def test_decimal_report_literals_are_finite_bounded_and_positive(
         reports.parsed_pose(reports.canonical_pose(1, side, [row]), 1)
 
 
+@pytest.mark.parametrize(
+    ("side", "token"),
+    [
+        ("20.0", ZERO),
+        ("20.00000000000000", ZERO),
+        (SIDE, "0.0"),
+        (SIDE, "0.0000000000000000e+00"),
+        (SIDE, "0.00000000000000000E+00"),
+        (SIDE, "1.00000000000000000e-01"),
+        (SIDE, "1_0.00000000000000000e+00"),
+    ],
+)
+def test_pose_tokens_must_be_the_binary64_renderings_the_claim_states(
+    side: str,
+    token: str,
+) -> None:
+    """`fact` writes a binary64-compatible encoding, so a token that is not one refuses."""
+    with pytest.raises(ValueError, match=r"binary64"):
+        reports.parsed_pose(reports.canonical_pose(1, side, [(token, ZERO, ZERO)]), 1)
+    tenth = format(0.1, ".17e")
+    assert reports.parsed_pose(reports.canonical_pose(1, SIDE, [(tenth, ZERO, ZERO)]), 1) == (
+        SIDE,
+        [(tenth, ZERO, ZERO)],
+    )
+
+
+def test_packet_check_refuses_a_self_consistent_packet_without_binary64_encoding(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Custody alone accepts these short tokens; only the encoding check refuses them."""
+    packet, pins = synthetic_source(side="20.0", token="0.0")
+    monkeypatch.setattr(reports, "PINS", pins)
+    with pytest.raises(ValueError, match=r"binary64"):
+        reports.export_contents(packet)
+    with pytest.MonkeyPatch.context() as unchecked:
+        unchecked.setattr(reports, "binary64_rendering", lambda _side, _rows: None)
+        destination = write_derived(tmp_path, monkeypatch, reports.export_contents(packet))
+        assert reports.check_packet(destination) == dict.fromkeys(reports.COUNTS, "20.0")
+    with pytest.raises(ValueError, match=r"binary64"):
+        reports.check_packet(destination)
+
+
+def reordered(packet: Mapping[str, Any]) -> dict[str, Any]:
+    """The same custody content, serialized in reversed key and list order."""
+    shuffled = dict(reversed(list(deepcopy(packet).items())))
+    shuffled["trees"] = {
+        sha: {
+            path: dict(reversed(list(leaf.items())))
+            for path, leaf in reversed(list(leaves.items()))
+        }
+        for sha, leaves in reversed(list(packet["trees"].items()))
+    }
+    shuffled["inputs"] = [
+        dict(reversed(list(row.items()))) for row in reversed(packet["inputs"])
+    ]
+    return shuffled
+
+
+def test_export_bytes_depend_on_custody_content_not_preparation_order(
+    ordinary_source: dict[str, Any],
+    derived_outputs: Mapping[str, bytes],
+) -> None:
+    shuffled = reordered(ordinary_source)
+
+    def identity(row: Mapping[str, Any]) -> tuple[str, str, str]:
+        return row["commit"], row["path"], row["role"]
+
+    assert {**shuffled, "inputs": []} == {**ordinary_source, "inputs": []}
+    assert sorted(shuffled["inputs"], key=identity) == sorted(
+        ordinary_source["inputs"], key=identity
+    )
+    assert list(shuffled["inputs"][0]) != list(ordinary_source["inputs"][0])
+    assert reports.export_contents(shuffled) == dict(derived_outputs)
+    custody = json.loads(derived_outputs["acquisition/sources.json"])["sources"][0]["custody"]
+    assert [(row["commit"], row["path"], row["role"]) for row in custody["inputs"]] == (
+        reports.input_order()
+    )
+    assert list(custody["trees"]) == sorted(reports.COMMITS)
+    for leaves in custody["trees"].values():
+        assert list(leaves) == sorted(leaves)
+        assert all(list(leaf) == sorted(leaf) for leaf in leaves.values())
+
+
+@pytest.mark.usefixtures("ordinary_source")
+@pytest.mark.parametrize("mutation", ["input-order", "leaf-order", "key-order", "layout"])
+def test_retained_metadata_must_be_the_canonical_export_bytes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    derived_outputs: Mapping[str, bytes],
+    mutation: str,
+) -> None:
+    """Reordered or re-laid-out metadata with the same content refuses; the original passes."""
+    destination = write_derived(tmp_path, monkeypatch, derived_outputs)
+    path = destination / "acquisition/sources.json"
+    original = path.read_bytes()
+    value = reports.read_json(path)
+    assert (json.dumps(value, indent=2, ensure_ascii=False) + "\n").encode() == original
+    custody = value["sources"][0]["custody"]
+    if mutation == "input-order":
+        custody["inputs"].reverse()
+    elif mutation == "leaf-order":
+        leaves = custody["trees"][reports.COMMITS[2]]
+        custody["trees"][reports.COMMITS[2]] = dict(reversed(list(leaves.items())))
+    elif mutation == "key-order":
+        custody["inputs"] = [dict(reversed(list(row.items()))) for row in custody["inputs"]]
+    indent = 1 if mutation == "layout" else 2
+    path.write_text(json.dumps(value, indent=indent, ensure_ascii=False) + "\n")
+    with pytest.raises(ValueError, match=r"canonical export"):
+        reports.check_packet(destination)
+    path.write_bytes(original)
+    assert len(reports.check_packet(destination)) == 20
+
+
 def write_derived(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -291,7 +411,7 @@ def test_derived_export_preserves_complete_pose_tokens_without_raw_assets(
 ) -> None:
     destination = write_derived(tmp_path, monkeypatch, derived_outputs)
     claims = reports.check_packet(destination)
-    assert claims == dict.fromkeys(reports.COUNTS, "20.0")
+    assert claims == dict.fromkeys(reports.COUNTS, SIDE)
     record = reports.read_json(destination / "acquisition/sources.json")
     source = record["sources"][0]
     assert set(source) == reports.SOURCE_KEYS
@@ -413,7 +533,8 @@ def test_last_derived_pose_mutation_refuses_and_restoration_passes(
     destination = write_derived(tmp_path, monkeypatch, derived_outputs)
     path = destination / "facts/n-379.yaml"
     original = path.read_bytes()
-    path.write_bytes(original.replace(b"angle: '0.0'", b"angle: '0.1'", 1))
+    edited = format(0.1, ".17e").encode()
+    path.write_bytes(original.replace(b"angle: '" + ZERO.encode(), b"angle: '" + edited, 1))
     with pytest.raises(ValueError, match=r"complete pinned source"):
         reports.check_packet(destination)
     path.write_bytes(original.replace(reports.SOURCE_KEY.encode(), b"[unbound attribution]"))

@@ -925,3 +925,170 @@ fn owned_hulls_intersect_fixtures_all_thread_counts() {
         }
     }
 }
+
+#[test]
+fn receipt_publication_replaces_complete_json_and_cleans_staging() {
+    let directory = tempfile::tempdir().unwrap();
+    let output = directory.path().join("nested/receipt-λ.json");
+    std::fs::create_dir_all(output.parent().unwrap()).unwrap();
+    std::fs::write(&output, b"old receipt\n").unwrap();
+    let receipt = json!({"status": "PASS", "failure": null, "mode": "full"});
+    write_receipt(&output, &receipt).unwrap();
+    assert_eq!(
+        std::fs::read_to_string(&output).unwrap(),
+        pyjson::pretty(&receipt).unwrap()
+    );
+    assert_eq!(
+        std::fs::read_dir(output.parent().unwrap()).unwrap().count(),
+        1
+    );
+    let new_output = directory.path().join("new/receipt.json");
+    write_receipt(&new_output, &receipt).unwrap();
+    assert_eq!(
+        std::fs::read(&new_output).unwrap(),
+        std::fs::read(&output).unwrap()
+    );
+}
+
+#[test]
+fn receipt_publication_write_failure_preserves_old_file() {
+    use std::io::Write;
+    let directory = tempfile::tempdir().unwrap();
+    let output = directory.path().join("receipt.json");
+    std::fs::write(&output, b"old receipt\n").unwrap();
+    let receipt = json!({"status": "PASS"});
+    let result = write_receipt_with(
+        &output,
+        &receipt,
+        |file, bytes| {
+            file.write_all(&bytes[..5])?;
+            assert_eq!(std::fs::read(&output)?, b"old receipt\n");
+            Err(std::io::Error::other("injected partial receipt write"))
+        },
+        |_, _| panic!("a partial write must never reach publication"),
+    );
+    assert!(
+        result
+            .unwrap_err()
+            .to_string()
+            .contains("injected partial receipt write")
+    );
+    assert_eq!(std::fs::read(&output).unwrap(), b"old receipt\n");
+    assert_eq!(std::fs::read_dir(directory.path()).unwrap().count(), 1);
+}
+
+#[test]
+fn receipt_publication_rename_failure_preserves_old_file() {
+    let directory = tempfile::tempdir().unwrap();
+    let output = directory.path().join("receipt.json");
+    std::fs::write(&output, b"old receipt\n").unwrap();
+    let receipt = json!({"status": "PASS"});
+    let expected = pyjson::pretty(&receipt).unwrap();
+    let result = write_receipt_with(
+        &output,
+        &receipt,
+        std::io::Write::write_all,
+        |staged, destination| {
+            assert_eq!(staged.parent(), destination.parent());
+            assert_eq!(std::fs::read_to_string(&staged).unwrap(), expected);
+            assert_eq!(std::fs::read(destination).unwrap(), b"old receipt\n");
+            Err(tempfile::PathPersistError {
+                error: std::io::Error::other("injected receipt rename"),
+                path: staged,
+            })
+        },
+    );
+    assert!(
+        result
+            .unwrap_err()
+            .to_string()
+            .contains("injected receipt rename")
+    );
+    assert_eq!(std::fs::read(&output).unwrap(), b"old receipt\n");
+    assert_eq!(std::fs::read_dir(directory.path()).unwrap().count(), 1);
+}
+
+#[test]
+fn receipt_publication_refuses_directory_collision() {
+    let directory = tempfile::tempdir().unwrap();
+    let output = directory.path().join("receipt.json");
+    std::fs::create_dir(&output).unwrap();
+    std::fs::write(output.join("keep"), b"untouched").unwrap();
+    assert!(write_receipt(&output, &json!({"status": "PASS"})).is_err());
+    assert_eq!(std::fs::read(output.join("keep")).unwrap(), b"untouched");
+    assert_eq!(std::fs::read_dir(directory.path()).unwrap().count(), 1);
+}
+
+#[cfg(unix)]
+#[test]
+fn receipt_publication_replaces_symlink_and_uses_private_permissions() {
+    use std::os::unix::fs::{PermissionsExt, symlink};
+    let directory = tempfile::tempdir().unwrap();
+    let target = directory.path().join("original.json");
+    let output = directory.path().join("receipt.json");
+    std::fs::write(&target, b"old receipt\n").unwrap();
+    symlink(&target, &output).unwrap();
+    let receipt = json!({"status": "PASS"});
+    write_receipt(&output, &receipt).unwrap();
+    assert!(
+        !std::fs::symlink_metadata(&output)
+            .unwrap()
+            .file_type()
+            .is_symlink()
+    );
+    assert_eq!(
+        std::fs::read_to_string(&output).unwrap(),
+        pyjson::pretty(&receipt).unwrap()
+    );
+    assert_eq!(std::fs::read(&target).unwrap(), b"old receipt\n");
+    assert_eq!(
+        std::fs::metadata(&output).unwrap().permissions().mode() & 0o777,
+        0o600
+    );
+    assert_eq!(std::fs::read_dir(directory.path()).unwrap().count(), 2);
+}
+
+#[test]
+fn receipt_publication_reports_cleanup_failure_with_original_error() {
+    let directory = tempfile::tempdir().unwrap();
+    let output = directory.path().join("receipt.json");
+    std::fs::write(&output, b"old receipt\n").unwrap();
+    let mut stranded = None;
+    let result = write_receipt_with(
+        &output,
+        &json!({"status": "PASS"}),
+        std::io::Write::write_all,
+        |staged, _| {
+            std::fs::remove_file(&staged).unwrap();
+            std::fs::create_dir(&staged).unwrap();
+            stranded = Some(staged.to_path_buf());
+            Err(tempfile::PathPersistError {
+                error: std::io::Error::other("injected receipt rename"),
+                path: staged,
+            })
+        },
+    );
+    let error = result.unwrap_err().to_string();
+    assert!(error.contains("injected receipt rename"));
+    assert!(error.contains("staging cleanup failed"));
+    assert_eq!(std::fs::read(&output).unwrap(), b"old receipt\n");
+    std::fs::remove_dir(stranded.unwrap()).unwrap();
+}
+
+#[cfg(windows)]
+#[test]
+fn receipt_publication_open_destination_refusal_preserves_old_file() {
+    use std::os::windows::fs::OpenOptionsExt;
+    let directory = tempfile::tempdir().unwrap();
+    let output = directory.path().join("receipt.json");
+    std::fs::write(&output, b"old receipt\n").unwrap();
+    let held = std::fs::OpenOptions::new()
+        .read(true)
+        .share_mode(0)
+        .open(&output)
+        .unwrap();
+    assert!(write_receipt(&output, &json!({"status": "PASS"})).is_err());
+    assert_eq!(std::fs::read_dir(directory.path()).unwrap().count(), 1);
+    drop(held);
+    assert_eq!(std::fs::read(&output).unwrap(), b"old receipt\n");
+}

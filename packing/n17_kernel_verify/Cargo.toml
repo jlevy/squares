@@ -11,6 +11,7 @@ serde_json = { version = "1", features = ["arbitrary_precision", "preserve_order
 flate2 = "1"
 sha2 = "0.10"
 rayon = "1"
+tempfile = { version = "=3.27.0", default-features = false }
 
 [profile.release]
 opt-level = 3

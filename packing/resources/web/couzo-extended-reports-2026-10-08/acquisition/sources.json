@@ -2,10 +2,10 @@
   "format": "external-source-acquisition-v1",
   "sources": [
     {
-      "id": "couzo-extended-range-reports-2026-10-09",
+      "id": "couzo-extended-range-reports-2026-10-08",
       "source_url": "https://github.com/franciscouzo/square-packing",
       "source_commit": "ffd900dfff6d2674ad995359208c2f0714915c82",
-      "source_key": "[Couzo extended-range reports 2026-10-09]",
+      "source_key": "[Couzo extended-range reports 2026-10-08]",
       "author": "Francisco Couzo",
       "licence": null,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
