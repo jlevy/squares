@@ -5,7 +5,7 @@ title: Open the hero case popover and navigate to expanded Atlas cases
 kind: feature
 status: in_progress
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -17,10 +17,10 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-09T03:13:00.958Z
-updated_at: 2026-10-09T04:22:39.739Z
+updated_at: 2026-10-09T04:29:08.735Z
 started_at: 2026-10-09T03:14:19.707Z
 ---
-Homepage hero contains three native packing SVG examples in order11,26,53 (latest counts supersede17). Side by side and centered, capped width on wide screens; narrow screens fill text width with a small margin. One caption names best packings known for11,26,and53 squares. Each opens its own existing case popover and retains a canonical ordinary case-record link for noJS. Keep social preview case53 unchanged. Shared popover actions for Case Record, Frontier row and Atlas tile follow current case; Atlas target fully expands before reveal. Preserve relative URLs, noJS and history. Verify hero11/26/53 plus existing291/324 navigation; shared expansion tracked by think-hyd6.
+Homepage hero contains native SVG packings11,26,53 side by side and centered, capped on wide screens and filling text width with a small margin on narrow screens. Exact shared caption: The best packings known for 11, 26, and 53 identical unit squares. Colors indicate angle. Darker colors mean more common shared faces. Each example opens its own shared case popover and retains canonical noJS link. Keep social card case53. Popover record/Frontier-row/Atlas-tile actions follow current case; Atlas fully expands before reveal. Preserve relative URLs, keyboard, noJS and history. Latest caption verified exactly and index.html refreshed8766; prior responsive/popover checks retained.
 
 ## Notes
 
