@@ -201,6 +201,7 @@
     "packing/tests/test_fixed_core_packet_calibration.py": 22.21,
     "packing/tests/test_fixed_site_completion.py": 0.095,
     "packing/tests/test_fold_ceiling_family.py": 0.114,
+    "packing/tests/test_font_diagnostic_workflow.py": 0.887,
     "packing/tests/test_font_provenance.py": 0.011,
     "packing/tests/test_fractional_adaptive.py": 0.278,
     "packing/tests/test_fractional_adaptive_io.py": 1.002,
@@ -1113,6 +1114,30 @@
           "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr466-2026-10-09-run3.json",
           "provenance": {},
           "tests": 69
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_font_diagnostic_workflow.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr468-2026-10-09-run1.json",
+          "provenance": {},
+          "tests": 8
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr468-2026-10-09-run2.json",
+          "provenance": {},
+          "tests": 8
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr468-2026-10-09-run3.json",
+          "provenance": {},
+          "tests": 8
         }
       ]
     }
