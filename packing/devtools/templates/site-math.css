@@ -69,6 +69,12 @@
   > [data-site-math-profile~="katex"] {
   display: inline;
 }
+/* The prepared visual tree owns geometry. Isolate its already clipped semantic
+   sibling while retaining accessible MathML and the native unrendered fallback. */
+.kpress-math[data-kpress-math-rendered="true"] > .kpress-math-semantic {
+  contain: strict;
+}
+
 /* Standalone paper wrappers have no native KPress semantic sibling. Keep their one
    generated MathML subtree accessible without painting it beside the visual math. */
 [data-site-math] > .katex-mathml {
