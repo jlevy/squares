@@ -5,7 +5,7 @@ title: Consolidate session n17 work into reviewed merge-ready PRs
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@spud10.local
 labels:
   - n-17
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-09T03:45:26.746Z
-updated_at: 2026-10-09T04:55:16.078Z
+updated_at: 2026-10-09T05:11:27.768Z
 started_at: 2026-10-09T03:45:50.993Z
 ---
 Assess all session-owned n17 PRs (#404, #452, #453, #454, #457, #461, #464), preserve separate deliverables and formal stack dependencies, resolve documentation/context gaps and current CI/review blockers, and publish a clear consolidation/merge order. User requests merge-ready PRs, not immediate merges. Mathematical review uses Astra; engineering/CI and tracking use GPT-6.1 Sol. No bound movement asserted without admitted evidence.
@@ -34,3 +34,11 @@ October 8/9 final source-qualified consolidation status (supersedes the pending/
 - The updated mathematical route is first-eight exact shared-centre LP (unimplemented/unregistered/unrun), then exact weighted-vertex screen, then eligible separately registered ball/order3 SOS successors. No new ordinary admission, T item or bound movement; #362/T-093 October5 remains latest. Official bracket4.66044275<s17<=4.6755300936045509516342148538535054.
 - Full public status: https://github.com/jlevy/squares/issues/405#issuecomment-6074493493 . PR bodies carry final gates and stable background; no GitHub merge or draft promotion occurred.
 Final readback: all six published PR bodies match prepared text and pinned heads; tracker405 consolidation comment6074493493 matches. Source integration bead think-iz2b is completed; remaining A1 resource/full qualification stays open here and under think-foe5. Proposed landing order: qualified452/453, then404→454→461, then standalone464 with the authorized cap remedy/current-base qualification. No merges.
+
+October 9, 05:07-05:11 UTC: supporting full-checkpoint qualification is complete.
+
+- PR #452 remains at b70bc6663cea5727108aae8911ded8694c51c02a. Full run 37884639726 passes all twelve jobs, including aggregate 113677275124. Required Packing 37884542873, Pages 37884542883 and mergeability pass.
+- PR #453 remains at 99728f5de5fbbcfc95583d398fe52e82717366dc. Full run 37884879202 passes all twelve jobs, including aggregate 113679336225. Required Packing 37884789984, Pages 37884789931 and mergeability pass.
+- Independent Sol final audit checked raw resolve-tree and aggregate logs: immutable checkout heads are exactly the PR heads, gate identities use blank PR input, and both merge parents contain main3213d651b880d7768bce8506efaf75c2089aeb4f. Current remote main remains3213. Earlier stale f0 runs receive no current credit. Advisory timing notes do not change qualification or ceilings; existing Windows/adoption/large-certificate limitations remain.
+- Supporting PR descriptions and tracker405 comment6074493493 now record the full passes. No CI rerun, build, source edit, draft promotion or merge occurred. The bounded watcher will pause after verified final publication and this sync.
+- Research PRs #404/#454/#461/#464 remain held on the known192MiB source-copy assertions and fresh complete checkpoint. The prepared224MiB patch is still unapplied pending the direct human resource decision. A1, think-0m0x and think-foe5 remain open. Scientific results and the bound are unchanged.
