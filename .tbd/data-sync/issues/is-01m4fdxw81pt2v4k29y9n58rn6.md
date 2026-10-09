@@ -5,7 +5,7 @@ title: Stabilize stack 430 on main 3213 and qualify every layer
 kind: task
 status: in_progress
 priority: 1
-version: 35
+version: 36
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -36,7 +36,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T04:14:49.601Z
-updated_at: 2026-10-09T09:59:03.598Z
+updated_at: 2026-10-09T10:14:48.018Z
 started_at: 2026-10-09T04:20:32.996Z
 ---
 Cloud continuation of think-yij0 handoff (PR467). Normal-merge origin/main 3213d651b into #442, propagate to #468, fix the recorded failures without weakening limits, obtain exact-head required CI and full checkpoints, bind reviews. Merge only with owner confirmation (github-merge confirm-session).
@@ -64,3 +64,7 @@ main moved to e0b02b3ab (#452, #453 n17 fixes; no DATA_PATHS change). Integrated
 Final round: #466 6fb0f2e29 (review B: B1 4c07376b5, B2 8d1ab3d9f+44d6b1883, B3/B4 92b03f431, B6 rename ca85b22ae, re-pin 6fb0f2e29; B5 -> think-5y83) merged with #463 -> 0fefda864; #468 374e63b92 (review B fixes) + #466 -> 9a18b9d75; #469 + #468 -> 32d6bed98 (pin conflict kept child; link to renamed packet fixed) + re-pin 9e3304043. Stack linear from main e0b02b3ab to #469. Final heads: #442 bfbc53d86, #443 d6680a77f, #448 0878f9e18, #449 2068a658e, #450 20897456c, #459 a3f4df49f, #460 67180d3d8, #463 9944aac1f, #466 0fefda864, #468 9a18b9d75, #469 9e3304043.
 
 #469 77f1595a4: suite_files admit-local of 21 new quick modules (raw reports devtools/suite-file-cost-admissions/intake-stack-430-2026-10-09-run1..3.json); check 43 -> 22 unrecorded (9 lane-ignored site tests, 9 all-slow, 4 mixed quick/slow left for a hosted record rebuild). main moved again to 533dd42c6 (n17 stack #404/#454/#461; 914 files, no DATA_PATHS change); #442 trial conflicts SYNOPSIS.md, document-map.yaml, integrity-ceremony.yaml, test_module_boundaries.py; integrator round started with snapshot-cap check at the top. #469 PR runs did not start at 77f1595a4 (mergeable unknown).
+
+
+
+2026-10-09T10:14Z FYI from claude-code@vm n17 consolidation (not taking over): main moved 10:13 UTC to bead35d93 (#452, #453, stack 455 #404/#454/#461, #464, #409, #408). #442 now conflicts with main only in SYNOPSIS.md and docs/project/document-map.yaml (prepend-ordered registry rows); run_negative_controls.py and test_negative_controls.py auto-merge, but #464 added UNREAD_WORKER_OUTPUTS to PRUNE and main's snapshot is ~200.30 MB (≈1.0 MB under the 192 MiB cap) — re-measure after integrating. Your stack's heads were measured smaller than their merge base, so no cap breach expected.
