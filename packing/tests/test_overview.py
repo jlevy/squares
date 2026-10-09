@@ -135,12 +135,15 @@ def test_counts_are_the_declared_rungs(register: list[dict]) -> None:
     ids=["overview", "results"],
 )
 def test_the_render_is_deterministic(
-    render: Callable[[], render_overview.Page], shared: str, request: pytest.FixtureRequest
+    render: Callable[[], render_overview.Page], shared: str, page: str, results: str
 ) -> None:
     """A fresh render of each page is the shared one, byte for byte, which is what lets
     every other check read the shared render. One page per node: the two fresh renders
-    together held one node past the per-test ceiling (12.25 s on run 37372707772)."""
-    assert render().html == request.getfixturevalue(shared)
+    together held one node past the per-test ceiling (12.25 s on run 37372707772). The
+    shared renders are fixtures, set up before the call, so a node's call holds its fresh
+    render alone; asked for in the call, the shared homepage, which no earlier test had
+    set up, held the `overview` node at 9.19 s on run 37877186650."""
+    assert render().html == {"page": page, "results": results}[shared]
 
 
 def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
@@ -4564,12 +4567,14 @@ def test_grouping_agrees_with_readmes_relation(
 
 
 def test_each_row_detail_names_its_novelty_label(
-    results: str, overview: overview_data.Overview
+    results: str, overview: overview_data.Overview, result_bodies: dict[str, str]
 ) -> None:
-    """The complete result page carries the novelty; the table's panel links to it."""
-    bodies = site_renders.result_bodies()
+    """The complete result page carries the novelty; the table's panel links to it.
+
+    The bodies are the module's `result_bodies`, rendered in setup: rendering them in
+    this call, as the first test of the module to ask, took 12.08 s on run 37877186650."""
     for result in overview.results:
-        body = bodies[result.id]
+        body = result_bodies[result.id]
         assert f'data-novelty="{result.novelty}"' in body
         panel = _row_popover(results, f"pop-result-{result.id.lower()}")
         assert f'href="result/{result.id.lower()}.html"' in panel
@@ -6247,7 +6252,7 @@ def test_each_file_that_moved_is_a_papers_markdown_or_pdf_under_its_slug() -> No
 
 
 def test_no_page_links_an_address_a_paper_used_to_have(
-    rendered: Callable[[str], str],
+    rendered: Callable[[str], str], result_bodies: dict[str, str]
 ) -> None:
     """Every link on the site goes to a paper where it is served, never through a
     forwarder: the bar, the cards, the Papers introduction, a result's overview, and
@@ -6260,10 +6265,7 @@ def test_no_page_links_an_address_a_paper_used_to_have(
     assert "n11-optimality/" in old
     assert "https://jlevy.github.io/squares/n11-optimality/t-060-explainer.pdf" in old
     bodies = {name: rendered(name) for name in render_overview.PAGES}
-    bodies |= {
-        f"the overview of {result}": body
-        for result, body in site_renders.result_bodies().items()
-    }
+    bodies |= {f"the overview of {result}": body for result, body in result_bodies.items()}
     for name, body in bodies.items():
         links = {
             html.unescape(link).partition("#")[0].partition("?")[0]
