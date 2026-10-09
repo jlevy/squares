@@ -5,7 +5,7 @@ title: Resume polynomial catalogue recovery, upstream sync and database work map
 kind: task
 status: in_progress
 priority: 1
-version: 28
+version: 29
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -26,7 +26,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T22:26:10.056Z
-updated_at: 2026-10-09T17:48:07.398Z
+updated_at: 2026-10-09T20:19:01.556Z
 started_at: 2026-10-08T22:26:36.377Z
 ---
 W7 continuation of interrupted PR435/stack447. Preserve unpublished local parent and child repairs, reconcile formal stack with latest origin/main, run current record and change-reachable gates, push every validated owning layer and update cost/results/validation in PR descriptions. Reconcile actual current and historical database partitions with every remaining identification/contact/witness bead. Coordinator owns Git, shared records, bead mutations, integration and PR; parallel Sol-medium CI/storage audit, Sol-xhigh coverage reconciliation and Astra-xhigh semantic mathematical review. Preserve unique source and validation evidence outside disposable external scratch. Slice1 recover provenance and assess gates/capacity; slice2 stack integration and local assurance; slice3 PR/CI closeout alongside selected W6 driver readiness work. No PR landing in scope.
@@ -250,3 +250,7 @@ The amended child 10ce3575e09c3d05423d4ce4d615fa966b0c6b22 now passes automatic 
 Publication bead think-ja78 carries the complete current checkpoint: 338 published records (324 current and 14 additional), 161 superseded rows and 19 redundant notes omitted only from publication, canonical 499/175/519/6,273 preserved, 33.47% smaller complete HTML, no report PDF or new generated files in Git, actual 10c source footprint 199,425,515 bytes under the unchanged cap, all replay inputs retained. Earlier c1/d0 results and negative receipts remain dated rather than transferred to 10c. CI endpoint 17:39:59Z closes the separate 1 h 0 m 19 s report slice.
 
 Remaining database/math work and startup attribution are unchanged. Continue through W7 think-s6np exporter, independent contact-derived n=11 octic control, then one bounded preregistered n=102 W6 under think-ohhz; preserve three current identity gaps, geometry/Lean prerequisites and unadmitted legacy claims. No new solver or mathematical adoption occurred in this trim. Protected receipts include publication-trim-10c-final-ci-receipt.json and both pr*-final-trim-readback.json files under the existing unique evidence root. Keep recovery and publication beads open while the PRs remain unmerged.
+
+Upstream record refresh started — 2026-10-09T20:16:15.292030+00:00
+
+User requested fetching origin/main and updating records after recent merges. Fresh origin/main is d3860c97a7037203701bcf262990ea0dee3a92dc, up from 6a0499ba4ed83e147488b2ee584af500207d9d1f, with 549 changed files including source imports, witness/frontier records and browser/validation contracts. Existing formal stack 447 remains open: PR403 c1d3aab9e parent and PR435 10ce3575e child. Use the official merge-upstream stack sync, reconcile all newly merged source data through maintained producers, retain the web superseded filters and PDF retirement, and qualify actual resulting heads. Root owns integration/records/gates/PR and bead writes; three pinned-ref lanes cover semantic review, producer planning/repairs and CI administration. Earlier head-specific passes and failures remain dated. No PR landing or new solver research is requested. Evidence and the slice plan are protected under upstream-2026-10-09 outside disposable scratch.
