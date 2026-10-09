@@ -135,12 +135,15 @@ def test_counts_are_the_declared_rungs(register: list[dict]) -> None:
     ids=["overview", "results"],
 )
 def test_the_render_is_deterministic(
-    render: Callable[[], render_overview.Page], shared: str, request: pytest.FixtureRequest
+    render: Callable[[], render_overview.Page], shared: str, page: str, results: str
 ) -> None:
     """A fresh render of each page is the shared one, byte for byte, which is what lets
     every other check read the shared render. One page per node: the two fresh renders
-    together held one node past the per-test ceiling (12.25 s on run 37372707772)."""
-    assert render().html == request.getfixturevalue(shared)
+    together held one node past the per-test ceiling (12.25 s on run 37372707772). The
+    shared renders are fixtures, set up before the call, so a node's call holds its fresh
+    render alone; asked for in the call, the shared homepage, which no earlier test had
+    set up, held the `overview` node at 9.19 s on run 37877186650."""
+    assert render().html == {"page": page, "results": results}[shared]
 
 
 def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
