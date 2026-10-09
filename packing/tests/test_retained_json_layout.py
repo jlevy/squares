@@ -55,7 +55,10 @@ def _failures(root: Path, policy: Policy) -> list[str]:
     return failures
 
 
+@pytest.mark.slow
 def test_the_repository_as_it_stands_passes() -> None:
+    """The whole tracked tree, as the gate step `retained JSON is one record per line`
+    sweeps it on the pull-request surface; it costs every held file parsed and re-laid."""
     failures, held = sweep.check()
     assert failures == []
     assert held > 0

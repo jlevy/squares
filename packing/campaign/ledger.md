@@ -1219,6 +1219,22 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | H-322 | confirmed | proof | Exact Disk Convexification Discriminator |  | 1 |  | 2s wall |
 | H-323 | unresolved | proof | The accepted rational n17 packing supplies an exact feasible endpoint  |  | 1 |  | 2s wall |
 | H-324 | confirmed | proof | The accepted rational n17 packing supplies an exact feasible endpoint  |  | 1 |  | 5s wall |
+| H-325 | open | proof | In the centred container at cap V = S* - 1/100 (walls at (U - V)/2 and |  | 0 |  |  |
+| H-326 | blocked | proof | s(17) > V_1 with V_1 = S* - 1/100 rounded down to a rational below the |  | 0 |  |  |
+| H-327 | open | proof | At least 60 of the 95 distance-2 residue orbits of the 60-entry ledger |  | 0 |  |  |
+| H-328 | blocked | proof | At U = 1169/250 on the H-266 cover, relaxations that keep only each ce |  | 0 |  |  |
+| H-329 | blocked | proof | Every packing of 17 unit squares of side at most U' = 935106018721/200 |  | 0 |  |  |
+| H-330 | blocked | proof | Let m be the side margin at which the whole-state engines exclude the  |  | 0 |  |  |
+| H-331 | blocked | proof | With the B2 branching rule of issue 367 (Farkas multiplier shares accu |  | 0 |  |  |
+| H-332 | open | proof | Each of the four contributor certificates with reported unmodified sta |  | 0 |  |  |
+| H-333 | open question | proof | Of the hand lemmas the n17 argument rests on, which admit a Lean 4 pro |  | 0 |  |  |
+| H-334 | blocked | proof | A composition checker that reads the cover receipt, the admitted ledge |  | 0 |  |  |
+| H-335 | open | proof | The Rust kernel-certificate verifier merged in PR 410 and the Python s |  | 0 |  |  |
+| H-336 | open | proof | All objects named by the n17 hosted-data manifests (the 204 objects of |  | 0 |  |  |
+| H-337 | blocked | proof | With the owned-hull compression pull reduced from 2^-12 to 2^-18 of th |  | 0 |  |  |
+| H-338 | open question | proof | For a residue state X of the H-266 cover and a cap V < S*, does a weig |  | 0 |  |  |
+| H-339 | blocked | proof | At most eight of the 135 unavailable owner-axis options of the retaine |  | 0 |  |  |
+| H-340 | open | proof | The capture-target theorem holds with the per-coordinate radius vector |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
