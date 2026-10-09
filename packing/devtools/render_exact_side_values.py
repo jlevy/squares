@@ -807,6 +807,8 @@ def _historical_kind_claim(entry: Mapping[str, Any]) -> str:
             "furnish a valid packing upper bound."
         )
     if kind == "unreconciled-source":
+        if entry.get("reported_source"):
+            return exact_catalogue.REPORTED_SOURCE_CLAIM
         return (
             "The source fact is retained, but its relationship to the frontier is unresolved."
         )

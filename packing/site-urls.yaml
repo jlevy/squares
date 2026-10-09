@@ -6101,6 +6101,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-08'
   status: live
+- path: papers/exact-side-values-data/coefficients/current-n102-notes-4-polynomial.json
+  canonical: papers/exact-side-values-data/coefficients/current-n102-notes-4-polynomial.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
 - path: papers/exact-side-values-data/coefficients/current-n102.json
   canonical: papers/exact-side-values-data/coefficients/current-n102.json
   kind: asset-file
@@ -6125,8 +6133,24 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-08'
   status: live
+- path: papers/exact-side-values-data/coefficients/current-n105.json
+  canonical: papers/exact-side-values-data/coefficients/current-n105.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
 - path: papers/exact-side-values-data/coefficients/current-n106-notes-2-polynomial.json
   canonical: papers/exact-side-values-data/coefficients/current-n106-notes-2-polynomial.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values-data/coefficients/current-n106-notes-4-polynomial.json
+  canonical: papers/exact-side-values-data/coefficients/current-n106-notes-4-polynomial.json
   kind: asset-file
   generator: devtools.exact_catalogue:output_files
   producer: paper:exact-side-values
@@ -6573,6 +6597,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-08'
   status: live
+- path: papers/exact-side-values-data/coefficients/current-n152-notes-3-polynomial.json
+  canonical: papers/exact-side-values-data/coefficients/current-n152-notes-3-polynomial.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
 - path: papers/exact-side-values-data/coefficients/current-n152.json
   canonical: papers/exact-side-values-data/coefficients/current-n152.json
   kind: asset-file
@@ -6807,6 +6839,14 @@ urls:
   status: live
 - path: papers/exact-side-values-data/coefficients/current-n177-notes-1-polynomial.json
   canonical: papers/exact-side-values-data/coefficients/current-n177-notes-1-polynomial.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values-data/coefficients/current-n177-notes-3-polynomial.json
+  canonical: papers/exact-side-values-data/coefficients/current-n177-notes-3-polynomial.json
   kind: asset-file
   generator: devtools.exact_catalogue:output_files
   producer: paper:exact-side-values
@@ -7639,6 +7679,14 @@ urls:
   status: live
 - path: papers/exact-side-values-data/coefficients/current-n265.json
   canonical: papers/exact-side-values-data/coefficients/current-n265.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values-data/coefficients/current-n266-notes-2-polynomial.json
+  canonical: papers/exact-side-values-data/coefficients/current-n266-notes-2-polynomial.json
   kind: asset-file
   generator: devtools.exact_catalogue:output_files
   producer: paper:exact-side-values
@@ -8765,6 +8813,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-08'
   status: live
+- path: papers/exact-side-values-data/coefficients/historical-n102-s31302e3630373137343638303137363035313132.json
+  canonical: papers/exact-side-values-data/coefficients/historical-n102-s31302e3630373137343638303137363035313132.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
 - path: papers/exact-side-values-data/coefficients/historical-n102-s31302e3631313338373934303737353232.json
   canonical: papers/exact-side-values-data/coefficients/historical-n102-s31302e3631313338373934303737353232.json
   kind: asset-file
@@ -8791,6 +8847,14 @@ urls:
   status: live
 - path: papers/exact-side-values-data/coefficients/historical-n102-s31302e3631333933313238323338303632.json
   canonical: papers/exact-side-values-data/coefficients/historical-n102-s31302e3631333933313238323338303632.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values-data/coefficients/historical-n106-s31302e3832323930383034343133323834373535.json
+  canonical: papers/exact-side-values-data/coefficients/historical-n106-s31302e3832323930383034343133323834373535.json
   kind: asset-file
   generator: devtools.exact_catalogue:output_files
   producer: paper:exact-side-values
@@ -9053,6 +9117,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-08'
   status: live
+- path: papers/exact-side-values-data/coefficients/historical-n152-s31322e3833303731383830303937363630393935.json
+  canonical: papers/exact-side-values-data/coefficients/historical-n152-s31322e3833303731383830303937363630393935.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
 - path: papers/exact-side-values-data/coefficients/historical-n152-s31322e3833313030323832323136373235.json
   canonical: papers/exact-side-values-data/coefficients/historical-n152-s31322e3833313030323832323136373235.json
   kind: asset-file
@@ -9199,6 +9271,14 @@ urls:
   status: live
 - path: papers/exact-side-values-data/coefficients/historical-n1765-s34322e3439313731353232313133333235.json
   canonical: papers/exact-side-values-data/coefficients/historical-n1765-s34322e3439313731353232313133333235.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values-data/coefficients/historical-n177-s31332e3832323937393733343136393434383630.json
+  canonical: papers/exact-side-values-data/coefficients/historical-n177-s31332e3832323937393733343136393434383630.json
   kind: asset-file
   generator: devtools.exact_catalogue:output_files
   producer: paper:exact-side-values
@@ -9647,6 +9727,14 @@ urls:
   status: live
 - path: papers/exact-side-values-data/coefficients/historical-n263-s31362e3734323634303638373131393238.json
   canonical: papers/exact-side-values-data/coefficients/historical-n263-s31362e3734323634303638373131393238.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values-data/coefficients/historical-n266-s31362e3832333036323038323833373830.json
+  canonical: papers/exact-side-values-data/coefficients/historical-n266-s31362e3832333036323038323833373830.json
   kind: asset-file
   generator: devtools.exact_catalogue:output_files
   producer: paper:exact-side-values
@@ -12725,6 +12813,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-08'
   status: live
+- path: papers/exact-side-values-data/metadata/historical-n102-s31302e3630373137343638303137363035313132.json
+  canonical: papers/exact-side-values-data/metadata/historical-n102-s31302e3630373137343638303137363035313132.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
 - path: papers/exact-side-values-data/metadata/historical-n102-s31302e3631313338373934303737353232.json
   canonical: papers/exact-side-values-data/metadata/historical-n102-s31302e3631313338373934303737353232.json
   kind: asset-file
@@ -12751,6 +12847,14 @@ urls:
   status: live
 - path: papers/exact-side-values-data/metadata/historical-n102-s31302e3631333933313238323338303632.json
   canonical: papers/exact-side-values-data/metadata/historical-n102-s31302e3631333933313238323338303632.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values-data/metadata/historical-n106-s31302e3832323930383034343133323834373535.json
+  canonical: papers/exact-side-values-data/metadata/historical-n106-s31302e3832323930383034343133323834373535.json
   kind: asset-file
   generator: devtools.exact_catalogue:output_files
   producer: paper:exact-side-values
@@ -13013,6 +13117,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-08'
   status: live
+- path: papers/exact-side-values-data/metadata/historical-n152-s31322e3833303731383830303937363630393935.json
+  canonical: papers/exact-side-values-data/metadata/historical-n152-s31322e3833303731383830303937363630393935.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
 - path: papers/exact-side-values-data/metadata/historical-n152-s31322e3833313030323832323136373235.json
   canonical: papers/exact-side-values-data/metadata/historical-n152-s31322e3833313030323832323136373235.json
   kind: asset-file
@@ -13159,6 +13271,14 @@ urls:
   status: live
 - path: papers/exact-side-values-data/metadata/historical-n1765-s34322e3439313731353232313133333235.json
   canonical: papers/exact-side-values-data/metadata/historical-n1765-s34322e3439313731353232313133333235.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values-data/metadata/historical-n177-s31332e3832323937393733343136393434383630.json
+  canonical: papers/exact-side-values-data/metadata/historical-n177-s31332e3832323937393733343136393434383630.json
   kind: asset-file
   generator: devtools.exact_catalogue:output_files
   producer: paper:exact-side-values
@@ -13607,6 +13727,14 @@ urls:
   status: live
 - path: papers/exact-side-values-data/metadata/historical-n263-s31362e3734323634303638373131393238.json
   canonical: papers/exact-side-values-data/metadata/historical-n263-s31362e3734323634303638373131393238.json
+  kind: asset-file
+  generator: devtools.exact_catalogue:output_files
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values-data/metadata/historical-n266-s31362e3832333036323038323833373830.json
+  canonical: papers/exact-side-values-data/metadata/historical-n266-s31362e3832333036323038323833373830.json
   kind: asset-file
   generator: devtools.exact_catalogue:output_files
   producer: paper:exact-side-values

@@ -7,6 +7,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -154,12 +155,48 @@ def test_measure_reads_retained_register_and_checks_all_current_and_historical_c
     baseline.write_text("archive" * 4096, encoding="utf-8")
     loaded = packed if storage == "gzip-path" else source
     result = measure(baseline, tmp_path, page, loaded)
+    assert result["maximum_fraction"] == 0.25
+    strict = measure(baseline, tmp_path, page, loaded, maximum_fraction=0.10)
+    assert strict["maximum_fraction"] == 0.10
+    assert strict["passes_acceptance"]
     assert result["coverage"] == {
         "current": 1,
         "historical": 1,
         "coefficient_vectors": 2,
         "integer_coefficients": 6,
     }
+    baseline.write_bytes(b"x" * (result["candidate_bytes"] * 5))
+    assert measure(baseline, tmp_path, page, loaded)["passes_acceptance"]
+    strict = measure(baseline, tmp_path, page, loaded, maximum_fraction=0.10)
+    assert not strict["passes_acceptance"]
+    receipt = tmp_path / "strict-measurement.json"
+    command = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "devtools.measure_exact_catalogue_web",
+            "--baseline",
+            str(baseline),
+            "--site",
+            str(tmp_path),
+            "--page",
+            "papers/browser.html",
+            "--register",
+            str(loaded),
+            "--maximum-fraction",
+            "0.10",
+            "--output",
+            str(receipt),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert command.returncode != 0
+    recorded = json.loads(receipt.read_text(encoding="utf-8"))
+    provenance = recorded.pop("provenance")
+    assert recorded == strict
+    assert "0.10" in provenance["command"]
     coefficient = next(
         (papers / exact_catalogue.DATA_DIRECTORY / "coefficients").glob("*.json")
     )
@@ -168,6 +205,35 @@ def test_measure_reads_retained_register_and_checks_all_current_and_historical_c
     coefficient.write_text(json.dumps(payload), encoding="utf-8")
     with pytest.raises(ValueError, match="coefficient strings"):
         measure(baseline, tmp_path, page, loaded)
+
+
+@pytest.mark.parametrize(
+    "threshold", [0.0, -0.1, 1.01, float("nan"), float("inf"), -float("inf")]
+)
+def test_measure_refuses_invalid_thresholds_before_reading_inputs(
+    threshold: float, tmp_path: Path
+) -> None:
+    missing = tmp_path / "missing"
+    with pytest.raises(ValueError, match="maximum fraction"):
+        measure(missing, missing, missing, missing, maximum_fraction=threshold)
+    command = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "devtools.measure_exact_catalogue_web",
+            "--baseline",
+            str(missing),
+            "--site",
+            str(missing),
+            f"--maximum-fraction={threshold}",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert command.returncode == 2
+    assert "--maximum-fraction" in command.stderr
+    assert "Traceback" not in command.stderr
 
 
 def test_recorded_report_is_current() -> None:
