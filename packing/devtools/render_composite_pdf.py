@@ -2,8 +2,8 @@
 """Export a known-best composite to a print-ready vector PDF.
 
 The page keeps the artwork's intrinsic size rather than being scaled into a
-stock paper box: the 1-100 composite is 2260 by 3995 CSS pixels, which at the
-SVG spec's 96 pixels per inch is 23.54 by 41.61 inches, so the PDF page is
+stock paper box: the 1-100 composite is 2260 by 4023 CSS pixels, which at the
+SVG spec's 96 pixels per inch is 23.54 by 41.91 inches, so the PDF page is
 exactly that and the diagram meets its edges with no silent margin or
 letterboxing. A composite of another size gets its own size the same way. Print
 scaling is then the print dialog's business, not something baked in here.

@@ -60,10 +60,30 @@ def recent_label(recent_since: date = RECENT_SINCE) -> str:
     return f"recent result, since {recent_since:%B, %Y}"
 
 
+def atlas_color_items() -> tuple[LegendItem, LegendItem]:
+    """The two static color encodings shared by the web key and print legend."""
+    return (
+        LegendItem(
+            "angles",
+            "angles",
+            "colors indicate distinct tilt angles",
+            marker_values=(0, 1, 2, 3),
+            marker_labels=("90\N{DEGREE SIGN}", "45\N{DEGREE SIGN}", "", ""),
+        ),
+        LegendItem(
+            "contacts",
+            "shades",
+            "shade indicates number of full-side contacts",
+            marker_values=(4, 3, 2, 1, 0),
+        ),
+    )
+
+
 def atlas_legend(
     counts: AtlasLegendCounts, *, recent_since: date = RECENT_SINCE
 ) -> AtlasLegend:
     """Four status rows and four recency/color/degree rows, in reading order."""
+    angles, contacts = atlas_color_items()
     return AtlasLegend(
         left=(
             LegendItem(
@@ -93,19 +113,8 @@ def atlas_legend(
                 counts.recent_results,
                 counts.depicted_total,
             ),
-            LegendItem(
-                "angles",
-                "angles",
-                "colors indicate distinct tilt angles",
-                marker_values=(0, 1, 2, 3),
-                marker_labels=("90\N{DEGREE SIGN}", "45\N{DEGREE SIGN}", "", ""),
-            ),
-            LegendItem(
-                "contacts",
-                "shades",
-                "shade indicates number of full-side contacts",
-                marker_values=(4, 3, 2, 1, 0),
-            ),
+            angles,
+            contacts,
             LegendItem("degree", None, "deg is the algebraic degree of that side length"),
         ),
     )

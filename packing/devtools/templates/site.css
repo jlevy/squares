@@ -2192,7 +2192,7 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
 }
 html:not([data-site-atlas-scale]) .site-atlas-grid:where([data-atlas-scale="row"]) .site-atlas-cell,
 html[data-site-atlas-scale="row"] .site-atlas-grid .site-atlas-cell {
-  --site-atlas-drawing-ratio: var(--site-atlas-row-ratio);
+  --site-atlas-drawing-ratio: calc(var(--site-atlas-side) / var(--r));
 }
 html:not([data-site-atlas-scale])
   .site-atlas-grid:where([data-atlas-scale="global"])

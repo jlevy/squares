@@ -545,7 +545,7 @@ def control_readings(tmp_path_factory: pytest.TempPathFactory) -> Readings:
     return found
 
 
-def test_choosers_and_the_complete_legend_share_the_content_center(
+def test_choosers_and_the_color_legend_share_the_content_center(
     control_readings: Readings,
 ) -> None:
     for name, reading in control_readings.items():
@@ -563,7 +563,7 @@ def test_choosers_and_the_complete_legend_share_the_content_center(
             assert right <= content["right"] + 1, name
         columns = reading["columns"]
         assert len(columns) == 2, name
-        assert [len(column["items"]) for column in columns] == [4, 4], name
+        assert [len(column["items"]) for column in columns] == [1, 1], name
         items = [item for column in columns for item in column["items"]]
         left = min(item["box"]["left"] for item in items)
         right = max(item["box"]["right"] for item in items)

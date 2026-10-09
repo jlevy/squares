@@ -416,8 +416,9 @@ square packing problem asks for the side $s(n)$ of the smallest square that can 
 unit squares, where the squares are free to rotate but cannot overlap”.
 The printed text has no final period.
 It sets $s$ and both $n$ tokens in italic with upright parentheses.
-The legend uses the same eight semantic items as the website, in two left-aligned
-columns: four status rows and four recency, color and degree rows.
+The print legend has eight semantic items in two left-aligned columns: four status rows
+and four recency, color and degree rows.
+The website retains only the shared tilt-color and contact-shade entries.
 The final right-column item is the unbadged text “deg is the algebraic degree of that
 side length”.
 Each counted item includes the number of depicted cases as its denominator.
@@ -426,8 +427,8 @@ The four rows share the body’s 72-unit baseline pitch.
 Three separate paragraphs begin “Best packings due to”, “Lower bounds due to” and
 “Optimality proofs due to”.
 Complete canonical names remain intact and appear once within each paragraph.
-All twenty recorded construction finders and improvers appear; current lower-bound
-source authors receive the second paragraph.
+All recorded construction finders and improvers appear; current lower-bound source
+authors receive the second paragraph.
 The third paragraph credits mathematical proof authors and explicitly distinguishes
 formalization and verification contributions.
 Method, prerequisite and historical lower-bound credits remain in the structured

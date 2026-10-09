@@ -1373,7 +1373,7 @@ it.
   through `sqpack.known_best.grid_transitions`, which checks that each row has an
   unbroken grid suffix and exposes both half-open segments.
   This is separate from the derived drawing layer: row 8 starts at $n = 56$, and row 15
-  at $n = 212$. The product legend describes the star without layout mechanics.
+  at $n = 212$. The web legend describes only tilt colors and contact shades.
   `place(n, per, starts)` computes each tile’s complete row and local segment column,
   tested against an independent layout in Node (`tests/node/overview_atlas_view`). The
   script writes custom properties; the stylesheet places the tiles within the two
@@ -1384,7 +1384,7 @@ it.
   inset, so switching layouts preserves the drawing size.
   At Medium, Grid holds ten tiles at 1280 pixels and four on a 390-pixel phone.
   Triangle keeps that drawing width across ten complete rows, or eighteen when all 324
-  cases show. The controls and legend align left above the scroll frame.
+  cases show. The controls and legend are centered above the scroll frame.
   **The move.** A change of view, and the expander’s change in either view, moves every
   tile from where it was to where it is: one read of every tile’s box and of each
   element after the tiles, the change of layout, one read more, then one Web Animation a
@@ -1464,14 +1464,11 @@ it.
   Drawing sizes follow the same selected scale in both views.
   Lower-bound statements show five decimal places, and their number-line labels two,
   truncated downward without changing recorded values or the number line’s positions.
-  The shared key under the tabs has two left-aligned columns: optimal, exact, numerical
-  and one dark rigid mark on the left; recent result since August, 2026, tilt-angle
-  colors, full-side contact shades and the degree explanation on the right.
-  The final item reads “deg is the algebraic degree of that side length,” without a
-  badge; it wraps within the right column on a phone.
-  The first two tilt swatches label their pinned angles as `90°` and `45°`. Each counted
-  item uses count/total, such as “proved optimal (77/324)”. Counts cover all 324
-  displayed cases, with recent contributions counted once per case.
+  The centered key under the tabs contains only tilt-angle colors and full-side contact
+  shades, one entry in each left-aligned column.
+  The first two tilt swatches label their pinned angles as `90°` and `45°`. The complete
+  eight-item legend, including status counts, recency and algebraic degree, remains in
+  the printable diagrams.
   The key uses the support colour at the note size (`atlas_legend`) and describes no
   layout mechanics. A case with a retained derived view in
   `atlas/known-best/regularized/` (X-049) uses that selected drawing directly, without a

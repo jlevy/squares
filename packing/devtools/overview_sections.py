@@ -2621,7 +2621,7 @@ def atlas_star() -> str:
     frontier table's Recent column and the tables of results draw it, after the case's
     number. It is hidden from assistive technology because the tile's name ends with
     what it says, "new result" (`NEW_RESULT`), as a starred row's name does
-    (`result_row`); the atlas's key says it in words (`atlas_legend`)."""
+    (`result_row`)."""
     return f'<span class="site-star" aria-hidden="true">{STAR}</span>'
 
 
@@ -2742,7 +2742,7 @@ def _atlas_cell(
         f' style="--r:{row};--c:{row * row - n};--g:{relative_grid};'
         f"--i:{n - (segment.first_n if segment else (row - 1) ** 2 + 1) + 1};"
         f"--o:{int(row > 1 and n == (row - 1) ** 2 + 1)};"
-        f'--site-atlas-side:{side};--site-atlas-row-ratio:{side / row}"'
+        f'--site-atlas-side:{side}"'
     )
     drawing = frontier.drawing_img(n, regularized=regularized, size=ATLAS_UNITS)
     meaning = f", first grid packing in row {row}" if first_grid else ""
@@ -2843,36 +2843,11 @@ def atlas_scale_tabs() -> str:
 
 
 def atlas_legend() -> str:
-    """The shared eight-item legend, with counts over the complete displayed corpus."""
-    from devtools.atlas_legend import (  # noqa: PLC0415
-        AtlasLegendCounts,
-        LegendItem,
-    )
-    from devtools.atlas_legend import (  # noqa: PLC0415
-        atlas_legend as describe_legend,
-    )
-    from devtools.result_overview import badge_glyph, film_facts  # noqa: PLC0415
-    from devtools.result_status import recent_contributions_by_case  # noqa: PLC0415
+    """The web key explains angle colors and contact shades, one item per column."""
+    from devtools.atlas_legend import LegendItem, atlas_color_items  # noqa: PLC0415
     from sqpack.render.color import square_fill_palette  # noqa: PLC0415
     from sqpack.render.model import RenderSpec  # noqa: PLC0415
 
-    facts = film_facts()
-    recent = recent_contributions_by_case()
-    counts = AtlasLegendCounts(
-        proved_optimal=sum(bool(fact["exact"]) for fact in facts.values()),
-        exact_value_known=sum(
-            any(glyph == "=" for glyph, _, _ in fact["badges"]) for fact in facts.values()
-        ),
-        only_known_numerically=sum(
-            any(glyph == "\u2248" for glyph, _, _ in fact["badges"]) for fact in facts.values()
-        ),
-        known_rigid=sum(
-            any(glyph == "R" for glyph, _, _ in fact["badges"]) for fact in facts.values()
-        ),
-        recent_results=sum(recent[n].any for n in facts),
-        depicted_total=len(facts),
-    )
-    legend = describe_legend(counts)
     spec = RenderSpec(overlays=frozenset())
     palette = square_fill_palette(
         hue_count=spec.hue_count,
@@ -2881,52 +2856,42 @@ def atlas_legend() -> str:
     )
 
     def marker(item: LegendItem) -> str:
-        if item.marker is None:
-            return ""
-        if item.marker == "star":
-            return atlas_star()
-        if item.marker in ("angles", "shades"):
-            swatches = []
-            for index, value in enumerate(item.marker_values):
-                fill = (
-                    palette[value][spec.shades_per_hue // 2]
-                    if item.marker == "angles"
-                    else palette[1][spec.shades_per_hue - 1 - value]
-                )
-                label = (
-                    item.marker_labels[index]
-                    if item.marker_labels
-                    else str(value)
-                    if item.marker == "shades"
-                    else ""
-                )
-                angle_label = (
-                    f' data-angle-label="{_esc(label)}"'
-                    if item.marker == "angles" and label
-                    else ""
-                )
-                swatches.append(
-                    f'<span class="site-atlas-swatch" data-value="{value}"{angle_label} '
-                    f'style="--site-atlas-swatch: {fill}">{_esc(label)}</span>'
-                )
-            return (
-                '<span class="site-atlas-swatches" aria-hidden="true">'
-                f"{''.join(swatches)}</span>"
+        swatches = []
+        for index, value in enumerate(item.marker_values):
+            fill = (
+                palette[value][spec.shades_per_hue // 2]
+                if item.marker == "angles"
+                else palette[1][spec.shades_per_hue - 1 - value]
             )
-        style = "muted" if item.marker == "\u2248" else "solid"
-        return badge_glyph(item.marker, style, item.label)
-
-    columns = []
-    for column in (legend.left, legend.right):
-        items = "".join(
-            f'<span class="site-atlas-legend-item" data-atlas-legend-key="{item.key}">'
-            f"{marker(item)} <span>{_esc(item.text)}</span></span>"
-            for item in column
+            label = (
+                item.marker_labels[index]
+                if item.marker_labels
+                else str(value)
+                if item.marker == "shades"
+                else ""
+            )
+            angle_label = (
+                f' data-angle-label="{_esc(label)}"'
+                if item.marker == "angles" and label
+                else ""
+            )
+            swatches.append(
+                f'<span class="site-atlas-swatch" data-value="{value}"{angle_label} '
+                f'style="--site-atlas-swatch: {fill}">{_esc(label)}</span>'
+            )
+        return (
+            f'<span class="site-atlas-swatches" aria-hidden="true">{"".join(swatches)}</span>'
         )
-        columns.append(f'<span class="site-atlas-legend-column">{items}</span>')
+
+    columns = [
+        '<span class="site-atlas-legend-column">'
+        f'<span class="site-atlas-legend-item" data-atlas-legend-key="{item.key}">'
+        f"{marker(item)} <span>{_esc(item.text)}</span></span></span>"
+        for item in atlas_color_items()
+    ]
     return (
         '<div class="site-atlas-legend" role="note" '
-        f'aria-label="What a tile{APOSTROPHE}s marks mean" data-atlas-legend>'
+        f'aria-label="What a tile{APOSTROPHE}s colors mean" data-atlas-legend>'
         f"{''.join(columns)}</div>"
     )
 

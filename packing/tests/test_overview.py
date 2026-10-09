@@ -969,39 +969,26 @@ def test_an_upper_only_recent_contribution_stars_the_tile_and_case_summary(
     assert tile is not None
     assert ', new result"' in tile.group()
     assert overview_sections.atlas_star() in tile.group()
-    assert page.count(overview_sections.atlas_star()) == 2  # Legend and this one tile.
+    assert page.count(overview_sections.atlas_star()) == 1
     facts = overview_sections.atlas_film_facts()
     assert facts[0]["star"] is True
     assert sum(bool(fact["star"]) for fact in facts) == 1
 
 
-def test_the_atlas_key_names_the_star_and_counts_over_the_complete_corpus() -> None:
-    """The product legend explains the star without describing layout mechanics."""
+def test_the_atlas_key_explains_only_angle_colors_and_contact_shades() -> None:
+    """The web key shows just the two color encodings, one per centered column."""
     key = overview_sections.atlas_legend()
+    assert re.findall(r'data-atlas-legend-key="([^"]+)"', key) == ["angles", "contacts"]
     columns = key.split('class="site-atlas-legend-column"')[1:]
     assert len(columns) == 2
-    assert re.findall(r'data-atlas-legend-key="([^"]+)"', columns[0]) == [
-        "optimal",
-        "exact",
-        "numerical",
-        "rigid",
-    ]
-    assert re.findall(r'data-atlas-legend-key="([^"]+)"', columns[1]) == [
-        "recent",
-        "angles",
-        "contacts",
-        "degree",
-    ]
-    degree = key.split('data-atlas-legend-key="degree">', 1)[1].split("</span></span>", 1)[0]
-    assert degree.strip() == "<span>deg is the algebraic degree of that side length"
-    assert "recent result, since August, 2026" in key
-    assert len(re.findall(r"\(\d+/324\)", key)) == 5
-    assert key.count(">R</span>") == 1
-    assert 'data-style="solid" aria-hidden="true">R</span>' in key
-    assert 'data-style="muted" aria-hidden="true">R</span>' not in key
-    assert "regularized" not in key
-    assert "grid-key" not in key
-    assert "half a drawing" not in key
+    assert re.findall(r'data-atlas-legend-key="([^"]+)"', columns[0]) == ["angles"]
+    assert re.findall(r'data-atlas-legend-key="([^"]+)"', columns[1]) == ["contacts"]
+    for removed in ("optimal", "exact", "numerical", "rigid", "recent", "degree"):
+        assert f'data-atlas-legend-key="{removed}"' not in key
+    assert "colors indicate distinct tilt angles" in key
+    assert "shade indicates number of full-side contacts" in key
+    assert overview_sections.atlas_star() not in key
+    assert re.search(r"\(\d+/\d+\)", key) is None
     swatches = re.findall(
         r'<span class="site-atlas-swatch" data-value="(\d+)"[^>]*>([^<]*)</span>', key
     )
