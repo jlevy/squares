@@ -1,0 +1,10 @@
+{
+  "schema": "n17-registered-two-phase-execution/v1",
+  "started_at": "2026-10-07T15:35:26.022762+00:00",
+  "phase_runs": [
+    {"phase":"construction","argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.probe_n17_pooled_relaxation_witness","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/descriptor.json","--max-seconds","60","--output","campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/certificate.json"],"returncode":0,"wall_seconds":0.15160391695098951},
+    {"phase":"fresh_verification","argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.probe_n17_pooled_relaxation_witness","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/descriptor.json","--max-seconds","60","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/replay.json"],"returncode":0,"wall_seconds":0.14875629200832918}
+  ],
+  "wall_seconds": 0.3013035000185482
+}
+

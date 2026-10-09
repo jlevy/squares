@@ -118,6 +118,7 @@ from numpy.typing import NDArray
 
 from devtools import select_n17_sub_patterns as selector
 from devtools.provenance import provenance
+from sqpack import retained_json
 from sqpack.hosted_data import (
     HostedDataError,
     HostedDataMissingError,
@@ -706,10 +707,10 @@ def main(argv: list[str] | None = None) -> int:
     except RefusedError as refusal:
         print(json.dumps({"refused": str(refusal)}))
         return 2
-    text = json.dumps(record, indent=1, sort_keys=True)
+    text = retained_json.dumps(record, sort_keys=True)
     if arguments.output is not None:
-        _ = arguments.output.write_text(text + "\n", encoding="utf-8")
-    print(text)
+        _ = arguments.output.write_text(text, encoding="utf-8")
+    print(text, end="")
     if record["data"]["certificates_not_in_place"]:
         print(
             f"census: {record['data']['full_recheck']} to re-run the verifiers", file=sys.stderr

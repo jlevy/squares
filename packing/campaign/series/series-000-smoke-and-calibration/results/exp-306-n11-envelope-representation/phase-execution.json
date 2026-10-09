@@ -1,0 +1,12 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/execution-manifest.json",
+  "manifest_sha256": "eeb0f45ddf56e44ee9a5885c94fbffbb7e26683af78eaa443f28003acaa60833",
+  "phases": [{"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_n11_envelope_representation","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/descriptor.json","--max-seconds","60","--output","campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/certificate.json"],"name":"construction","returncode":null,"started_at":"2026-10-08T03:05:52.623287Z","status":"running","wall_seconds":null}],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T03:05:52.622927Z",
+  "status": "running",
+  "unstarted_phase_names": ["fresh_verification"]
+}
+

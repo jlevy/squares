@@ -1,0 +1,2 @@
+{"schema": "n17-conditional-owned-hull-production/v1", "status": "production_stall_candidate", "error": null, "child_sha256": "556009919973a061def98fb9408a9eee6b696f560876ba7d3b91f4b197774591"}
+{"schema": "n17-parent-guard-owned-hull-verification/v1", "status": "INCOMPLETE", "error": "conditional gate wall ceiling"}

@@ -1,0 +1,62 @@
+{
+  "schema": "n17-normalized-rank-mechanical-summary/v1",
+  "counts": {
+    "rank_obstruction": 0,
+    "survival": 95,
+    "unresolved": 0
+  },
+  "orbits_accounted": 95,
+  "full_payload_equal": true,
+  "fresh_verification_passed": true,
+  "all_source_bytes_match": true,
+  "imported_source_files": 8,
+  "source_commit": "48cd589d64f30730749e61272948cf4eb12224a5",
+  "outer_seconds": 19.484242416976485,
+  "cleanup_complete": true,
+  "scientific_disposition": "Complete unchanged-method miss; retire coarse filter",
+  "global_optimality": false,
+  "ordinary_census_admission": false,
+  "mathematical_review": "SoleAstra actual CLEAR",
+  "phases": [
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_normalized_contact_rank_filter",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/descriptor.json",
+        "--max-seconds",
+        "120",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/certificate.json"
+      ],
+      "ended_at": "2026-10-08T02:25:42.854509Z",
+      "name": "construction",
+      "returncode": 0,
+      "started_at": "2026-10-08T02:25:24.417836Z",
+      "status": "completed",
+      "wall_seconds": 18.436204666038975
+    },
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_normalized_contact_rank_filter",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/replay.json"
+      ],
+      "ended_at": "2026-10-08T02:25:43.421691Z",
+      "name": "fresh_verification",
+      "returncode": 0,
+      "started_at": "2026-10-08T02:25:42.855041Z",
+      "status": "completed",
+      "wall_seconds": 0.566546667017974
+    }
+  ]
+}

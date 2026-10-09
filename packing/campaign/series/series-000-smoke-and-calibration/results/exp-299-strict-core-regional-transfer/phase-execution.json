@@ -1,0 +1,17 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-08T00:58:51.680412Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/execution-manifest.json",
+  "manifest_sha256": "7a87e29c9b0cd851a082fc362a976bfa1aed51c8fe62d42efbdd0909cea2a4a2",
+  "phases": [
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_strict_core_regional_transfer","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/descriptor.json","--max-seconds","60","--output","campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/certificate.json"],"ended_at":"2026-10-08T00:58:36.133475Z","name":"construction","returncode":0,"started_at":"2026-10-08T00:58:14.984098Z","status":"completed","wall_seconds":21.149027790990658},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_strict_core_regional_transfer","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/descriptor.json","--max-seconds","60","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/replay.json"],"ended_at":"2026-10-08T00:58:51.679873Z","name":"fresh_verification","returncode":0,"started_at":"2026-10-08T00:58:36.133990Z","status":"completed","wall_seconds":15.545606999949086}
+  ],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T00:58:14.983367Z",
+  "status": "completed",
+  "unstarted_phase_names": [],
+  "wall_seconds": 36.69601520802826
+}
+
