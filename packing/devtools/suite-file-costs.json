@@ -32,9 +32,11 @@
     "packages/workbench/tests/test_python_contract_repairs.py": 3.091,
     "packages/workbench/tests/test_record_reference_tolerance.py": 2.735,
     "packages/workbench/tests/test_self_contained.py": 0.035,
+    "packages/workbench/tests/test_shared_picture_sources.py": 0.377,
     "packages/workbench/tests/test_site_nav.py": 0.032,
     "packages/workbench/tests/test_summarize_annealing.py": 0.028,
     "packages/workbench/tests/test_transitions.py": 0.006,
+    "packing/tests/test_acquire_original_gzip.py": 1.183,
     "packing/tests/test_acquire_source.py": 1.729,
     "packing/tests/test_admit_fixed_support_dual.py": 2.8,
     "packing/tests/test_admit_threshold_atom_orbits.py": 0.039,
@@ -178,6 +180,7 @@
     "packing/tests/test_documentation_links.py": 0.009,
     "packing/tests/test_el_moumni7_case1.py": 0.039,
     "packing/tests/test_emission_precision.py": 0.401,
+    "packing/tests/test_evand_arrangement_reports.py": 1.156,
     "packing/tests/test_evand_exact_certificates.py": 7.289,
     "packing/tests/test_evand_mixed_covers.py": 4.803,
     "packing/tests/test_evand_square_packing.py": 0.324,
@@ -234,6 +237,8 @@
     "packing/tests/test_golden_basins.py": 0.004,
     "packing/tests/test_green17.py": 0.375,
     "packing/tests/test_grid_symmetry_audit.py": 0.015,
+    "packing/tests/test_gupta_adoption.py": 22.924,
+    "packing/tests/test_gupta_refinement_reports.py": 3.352,
     "packing/tests/test_guzhou_r052_native.py": 15.135,
     "packing/tests/test_guzhou_r068_packet.py": 1.579,
     "packing/tests/test_guzhou_r071_packet.py": 2.076,
@@ -277,6 +282,7 @@
     "packing/tests/test_known_best_families.py": 0.483,
     "packing/tests/test_known_best_n011_rational_control.py": 0.843,
     "packing/tests/test_known_best_squish.py": 17.442,
+    "packing/tests/test_lifted_q7_history.py": 0.248,
     "packing/tests/test_lint_floor_contract.py": 0.082,
     "packing/tests/test_log_rollup.py": 0.017,
     "packing/tests/test_math_loading.py": 0.523,
@@ -534,6 +540,8 @@
     "packing/tests/test_rust_floor_contract.py": 0.025,
     "packing/tests/test_rust_rectangle_geometry.py": 1.226,
     "packing/tests/test_ryu_k2_minus_c_constants.py": 0.013,
+    "packing/tests/test_ryxu_arrangement_reports.py": 0.144,
+    "packing/tests/test_ryxu_radical_n51.py": 3.23,
     "packing/tests/test_s12_angle_net_rescale.py": 0.035,
     "packing/tests/test_s12_rescaled_certificate.py": 0.41,
     "packing/tests/test_s12_v11_certificate.py": 1.109,
@@ -573,6 +581,7 @@
     "packing/tests/test_source_coverage.py": 2.011,
     "packing/tests/test_source_supersession.py": 0.007,
     "packing/tests/test_squish_receipt_binding.py": 0.329,
+    "packing/tests/test_squish_receipt_retention.py": 4.214,
     "packing/tests/test_squish_second_update_confirmation.py": 82.606,
     "packing/tests/test_squish_update_certification.py": 39.017,
     "packing/tests/test_squish_upper_bound_packets.py": 6.036,
@@ -972,6 +981,84 @@
           "report": "packing/devtools/suite-file-cost-admissions/n17-shared-centre-endpoint-2026-10-08.json",
           "provenance": {},
           "tests": 35
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packages/workbench/tests/test_shared_picture_sources.py",
+        "packing/tests/test_evand_arrangement_reports.py",
+        "packing/tests/test_lifted_q7_history.py",
+        "packing/tests/test_ryxu_arrangement_reports.py",
+        "packing/tests/test_ryxu_radical_n51.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr442-2026-10-09-run1.json",
+          "provenance": {},
+          "tests": 101
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr442-2026-10-09-run2.json",
+          "provenance": {},
+          "tests": 101
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr442-2026-10-09-run3.json",
+          "provenance": {},
+          "tests": 101
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_acquire_original_gzip.py",
+        "packing/tests/test_squish_receipt_retention.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr443-2026-10-09-run1.json",
+          "provenance": {},
+          "tests": 23
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr443-2026-10-09-run2.json",
+          "provenance": {},
+          "tests": 23
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr443-2026-10-09-run3.json",
+          "provenance": {},
+          "tests": 23
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_gupta_adoption.py",
+        "packing/tests/test_gupta_refinement_reports.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr448-2026-10-09-run1.json",
+          "provenance": {},
+          "tests": 45
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr448-2026-10-09-run2.json",
+          "provenance": {},
+          "tests": 45
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr448-2026-10-09-run3.json",
+          "provenance": {},
+          "tests": 45
         }
       ]
     }
