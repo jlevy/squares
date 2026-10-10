@@ -49,15 +49,16 @@ throughout. The three narrow readers took under 0.01 seconds each.
 
 - **n = 28.** The full check2 reader (`audit_check2`) holds every premise: exact
   premises hold.
-- **n = 30.** The full check2 reader refuses at its last but one step, with
-  `KeyError: 'build'`. The pre-publication receipt has a new shape,
-  `fine-net-check2-receipt/v1`, with `verifier` where the reader reads `build` and a
-  control given as tries.
-  Every earlier step of the reader passed, since it reached this one, and the
-  inventories in the receipt show the step after it would pass too: every file
-  `files-sha256.json` lists, its README apart, has the directory’s digest.
-  This is a reader gap, not a defect found in the certificate; the reader needs to read
-  the new shape before the exact premises can be said to hold.
+- **n = 30.** The full check2 reader holds every premise too: exact premises hold.
+  The pre-publication receipt has a newer shape, `fine-net-check2-receipt/v1`, with
+  `verifier` where the earlier shape has `build` and a control given as tries.
+  The first run of `premises` stopped there with `KeyError: 'build'`, a reader gap and
+  not a defect found in the certificate.
+  Commit `d34d0084a` closed it: the reader takes the build from `verifier` and requires
+  the control’s one try to have refused at 197/200, the factor of the check2 control.
+  A second run on the same asset and documents gave the receipt kept here, which differs
+  from the first only in the check2 audit, the status and the two walls; every custody
+  fact is unchanged.
 
 **One reported run each.** The n = 30 pre-publication receipt is the very record the
 check2 receipt embeds: the same start, 12:01:39Z, 1,790.3 seconds, 12 threads and binary
