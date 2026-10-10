@@ -5,7 +5,7 @@ title: Integrate current main imports and requalify atlas cleanup PR 474
 kind: task
 status: in_progress
 priority: 2
-version: 12
+version: 13
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -16,10 +16,11 @@ child_order_hints:
   - is-01m4h77mrc69avms1m7va8k24c
   - is-01m4h9s465x7mphy1xxkmdyqc9
   - is-01m4hk5apeasq61zbr35c27zgq
+  - is-01m4hrkep2e959ed6v6wkbcdt9
 hold: null
 hold_until: null
 created_at: 2026-10-09T19:28:29.900Z
-updated_at: 2026-10-10T00:24:45.517Z
+updated_at: 2026-10-10T01:59:51.231Z
 started_at: 2026-10-09T19:28:49.355Z
 ---
 Origin/main advanced from 6a0499ba4 to d3860c97a with imported scientific records and producer changes; PR474 is conflicting. Preserve all current main scientific imports while retaining reviewed cleanup behavior, refresh curated credit source snapshots against merged records, regenerate release exports and site, run appropriate gates, update PR context and independent review. No GitHub merge authorized. Root owns commits, local merge, canonical generation, PR mutation.
