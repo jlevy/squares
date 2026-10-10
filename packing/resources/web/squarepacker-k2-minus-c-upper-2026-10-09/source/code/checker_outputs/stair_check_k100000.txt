@@ -1,0 +1,14 @@
+certificate data/stair_k100000.json.gz: k = 100000, b = 623, y0 = 257/4, construction = stair; arithmetic fractions.Fraction
+S < k: True   (k - S = 8.271171e-09)
+right band: L = 100000.000000, rows R = 99868, y1 = 65.235393910, y0 <= y1 < y0 + d: True
+  right/bottom end: y matches True, m = 66, pieces 719 (columns 593, layers 66, wedge rows 60), squares 40413, waste U = 237.746789; shape failures 0, containment failures 0, pairs with overlapping boxes 5515 (candidates 6227), overlaps 0, region below L True -> pass (0.1 s)
+  right/top end: y matches True, m = 67, pieces 725 (columns 598, layers 67, wedge rows 60), squares 41030, waste U = 234.647195; shape failures 0, containment failures 0, pairs with overlapping boxes 5626 (candidates 6345), overlaps 0, region below L True -> pass (0.1 s)
+top band: L = 99377.000000, rows R = 99245, y1 = 65.238604216, y0 <= y1 < y0 + d: True
+  top/bottom end: y matches True, m = 66, pieces 719 (columns 593, layers 66, wedge rows 60), squares 40413, waste U = 237.746789; shape failures 0, containment failures 0, pairs with overlapping boxes 5515 (candidates 6227), overlaps 0, region below L True -> pass (0.1 s)
+  top/top end: y matches True, m = 67, pieces 724 (columns 597, layers 67, wedge rows 60), squares 41032, waste U = 234.647216; shape failures 0, containment failures 0, pairs with overlapping boxes 5618 (candidates 6336), overlaps 0, region below L True -> pass (0.1 s)
+N = 9999998416
+c = k^2 - N = 1584
+waste identity holds exactly: True
+exact pair decisions in the four ends: 22274
+c*(k) <= 1583   (N squares in a square of side S < k)
+OVERALL: PASS  (0.3 s)

@@ -1,0 +1,1883 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[shortlabels]{enumitem}
+\usepackage{booktabs,array}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\Reg}{\operatorname{Reg}}
+\newcommand{\cs}{c^{*}}
+\newcommand{\Wmin}{W_{\min}}
+\newcommand{\ca}{\cos\alpha}
+\newcommand{\sa}{\sin\alpha}
+\newcommand{\ta}{\tan\alpha}
+\newcommand{\se}{\sec\alpha}
+\newcommand{\caz}{\cos\alpha_0}
+\newcommand{\saz}{\sin\alpha_0}
+\newcommand{\taz}{\tan\alpha_0}
+\newcommand{\sez}{\sec\alpha_0}
+\newcommand{\Kb}{\bar K}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+\title[An upper bound of order $k^{3/8}$ for the deficiency]{Packing $k^2-c$ unit squares:\\ an upper bound of order $k^{3/8}$ for the deficiency}
+\author{Sungjoon Ryu}
+\date{Preprint, version 1.0, 9 October 2026}
+
+\raggedbottom
+\begin{document}
+\begin{abstract}
+For $n\ge1$ let $s(n)$ be the side of the smallest square that contains $n$ unit squares with pairwise disjoint
+interiors, and for an integer $k\ge2$ let $\cs(k)$ be the largest integer $c$ with $s(k^2-c)=k$. We prove
+\[
+\cs(k)<43.06\,k^{3/8}+2\cdot10^{-5}\qquad\text{for every integer }k\ge4\cdot10^{26},
+\]
+and, with much better constants for moderate $k$,
+$\cs(k)<20.668\,k^{2/5}+0.623$ for every integer $k\ge1.6\cdot10^7$; the second bound is the smaller one for all
+$k$ below about $5.6\cdot10^{12}$. The frame is an L-shaped arrangement in the spirit of Erd\H{o}s and Graham and of
+Chung and Graham, in which two bands of width slightly less than an integer $b$ are filled with rows of $b$ unit squares
+tilted by slightly more than $2\arctan(1/b)$; this frame alone gives $\cs(k)\le8\lceil\sqrt{k-4}\,\rceil-1$ for $k\ge6$,
+which we also prove. The rows are lifted, and the four ends of the bands are filled by a ``staircase'': columns of
+squares with one common small tilt, whose lowest squares are replaced by horizontal layers so that the columns follow
+the rising end of the band. This gives an uncovered area $O(b^{2/3})$ per end and the exponent $2/5$. Filling the two
+walls of each end by chains of staircases whose tilt is lowered from block to block gives $O(b^{3/5})$ per end and the
+exponent $3/8$. These ideas are due to Bui; our proofs are self-contained. The constants of the $3/8$ bound are
+certified by interval arithmetic; its asymptotic regime cannot be tested by explicit computation, and the explicit
+checks test the construction at smaller sizes. Explicit packings, checked in exact rational arithmetic, also by
+checkers written independently of the generating program, give for example $\cs(10^5)\le1583$ and
+$\cs(10^8)\le24790$. Together with the lower bound of order $k^{1/3}$ of [T] (a preprint, not refereed),
+$k^{1/3}\ll\cs(k)\ll k^{3/8}$; the true exponent is open. The paper has not been refereed.
+\end{abstract}
+\maketitle
+
+\section{Introduction and results}\label{sec:intro}
+
+A \emph{packing} of $n$ unit squares in a closed square $K$ is a family of $n$ closed unit squares, in any orientation,
+contained in $K$ and with pairwise disjoint interiors. For $n\ge1$ let $s(n)$ be the infimum of the sides of the squares
+in which $n$ unit squares can be packed. Removing squares from a packing leaves a packing, so $s$ is non-decreasing.
+By area $s(k^2)\ge k$, and the grid gives $s(k^2)\le k$; hence $s(k^2-c)\le k$ for $0\le c<k^2$. For an integer $k\ge2$
+let
+\[
+\cs(k):=\max\{c\in\Z:\ 0\le c\le k^2-1,\ s(k^2-c)=k\},
+\]
+the \emph{deficiency}: removing up to $\cs(k)$ squares from the $k\times k$ grid does not allow a smaller container,
+while removing $\cs(k)+1$ squares does. The wasted area of Erd\H{o}s and Graham [EG] is $W(x):=x^2-M(x)$, where $M(x)$ is
+the largest number of unit squares that can be packed in a square of side $x$. In Section~\ref{sec:prelim} we record
+the elementary relation
+\begin{equation}\label{eq:translation}
+\cs(k)=\lim_{x\to k^-}W(x)-1 ,
+\end{equation}
+so $\cs(k)$ measures the wasted area just below an integer.
+
+\emph{Lower bounds.} The author showed $\cs(k)\to\infty$ in [R], with a bound of order $\log k$; lower bounds of
+order $k^{1/4}$ and $k^{1/3}$ followed in [Q] and [T]. These are preprints that have not been refereed; see
+Section~\ref{sec:lower}.
+
+\emph{Upper bounds.} From the literature on $W(x)$ one gets $\cs(k)=O(k^{3/5})$ (preprints [Bui], [McC]); the refereed
+literature gives $O(k^{7/11})$ [EG] and $O(k^{(3+\sqrt2)/7}\log k)$ [CG], and Arslanov, Mustafin and Shangitbayev
+[AMS] proved $\cs(k)\le k-1$ for $k>12$. See Section~\ref{sec:lit}.
+
+\subsection{Results}
+The main result is the following.
+
+\begin{theorem}[computer-assisted constants]\label{thm:main38}
+For every integer $k\ge k_1:=4\cdot10^{26}$,
+\[
+\cs(k)\ <\ \frac{32}{5}\Bigl(\frac53\Bigr)^{3/8}15.54^{5/8}\,k^{3/8}+2\cdot10^{-5}
+\ <\ 43.06\,k^{3/8}+2\cdot10^{-5} .
+\]
+\end{theorem}
+
+The proof is in Section~\ref{sec:38}. Its constants are certified by interval arithmetic (Corollary~\ref{cor:b35}).
+The asymptotic regime $k\ge4\cdot10^{26}$, where one end of a band has about $10^{16}$ pieces, cannot be tested by
+explicit computation; the explicit checks of Remark~\ref{rem:38exact} test the validity of the construction and of its
+lemmas at smaller sizes. For moderate $k$ the staircase alone gives a smaller bound with much better constants:
+
+\begin{theorem}\label{thm:main}
+For every integer $k\ge k_0:=1.6\cdot10^7$,
+\[
+\cs(k)\ <\ \frac{20}{3}\Bigl(\frac32\Bigr)^{2/5}5.03^{3/5}\,k^{2/5}+\frac83\cdot5.03\cdot10^{-4/3}
+\ <\ 20.668\,k^{2/5}+0.623 .
+\]
+\end{theorem}
+
+The proof (Section~\ref{sec:stair}) gives $\cs(k)\le(18.89+o(1))\,k^{2/5}$ as $k\to\infty$. At $k=k_0$ the bound is
+$15738.5$; the bound of Theorem~\ref{thm:sqrt} below is $31999$ there.
+
+\emph{Which bound to use.} We keep both theorems: Theorem~\ref{thm:main} is the effective bound and
+Theorem~\ref{thm:main38} the asymptotic one. For $1.6\cdot10^7\le k<4\cdot10^{26}$ only Theorem~\ref{thm:main} is
+proved; the closed forms of Theorems~\ref{thm:main38} and~\ref{thm:main} cross at about $k=5.6\cdot10^{12}$
+($43.06\,k^{3/8}<20.668\,k^{2/5}$ exactly when $k^{1/40}>43.06/20.668$). Theorem~\ref{thm:main} also comes with explicit
+packings for moderate $k$ (Theorem~\ref{thm:cert} below), while Theorem~\ref{thm:main38} gives the exponent $3/8$. At
+$k=4\cdot10^{26}$ the two closed forms are about $4.07\cdot10^{11}$ and $9.04\cdot10^{11}$.
+
+The frame of the proof is an L-shaped packing. For an integer $b\ge2$ put $D:=b^2+1$,
+\[
+\gamma_0:=\frac{b^2-1}{D},\qquad h_0:=\frac{3b^2-1}{D},\qquad
+R(L):=\max\bigl(0,\ \lceil (L-h_0)\gamma_0\rceil\bigr)\quad(L\in\Z),
+\]
+and for integers $2\le b\le k$
+\[
+N(k,b):=(k-b)^2+b\,\bigl(R(k)+R(k-b)\bigr).
+\]
+
+\begin{theorem}\label{thm:A}
+Let $k\ge2$ and $2\le b\le k$ be integers with $(k,b)\ne(2,2)$. Then $N(k,b)$ unit squares can be packed in a square of
+side less than $k$. Consequently, for all $2\le b\le k$,
+\[
+\cs(k)\ \le\ k^2-N(k,b)-1\ <\ 6b+\frac{4k}{b}-3 .
+\]
+\end{theorem}
+
+\begin{theorem}\label{thm:sqrt}
+For every integer $k\ge6$,
+\[
+\cs(k)\ \le\ 8\bigl\lceil\sqrt{k-4}\,\bigr\rceil-1\ <\ 8\sqrt{k-4}+7 .
+\]
+\end{theorem}
+
+The bound of Theorem~\ref{thm:sqrt} is the best that the packings of Theorem~\ref{thm:A} give, up to an additive
+constant:
+
+\begin{proposition}\label{prop:D}
+For all integers $2\le b\le k$ one has $k^2-N(k,b)>8\sqrt k-14$.
+\end{proposition}
+
+The packings of Theorem~\ref{thm:A} lose area at the four ends of the two tilted bands, about $b$ at each end
+(Section~\ref{sec:count}). In Section~\ref{sec:ends} we lift the rows of each band and show that the deficiency is
+exactly the body cost of the bands, about $4k/b$, plus the uncovered areas of four end regions
+(Proposition~\ref{prop:waste}). Section~\ref{sec:stair} fills an end region by a staircase of columns with uncovered
+area $O(b^{2/3})$; with $b\asymp k^{3/5}$ this gives Theorem~\ref{thm:main}. Section~\ref{sec:38} replaces the two
+walls of the staircase by chains of staircases with slowly decreasing tilt; the uncovered area becomes $O(b^{3/5})$,
+and with $b\asymp k^{5/8}$ this gives Theorem~\ref{thm:main38}. With tuned parameters the staircase construction gives
+explicit packings for moderate $k$:
+
+\begin{theorem}[computer-assisted]\label{thm:cert}
+For each row of Table~\ref{tab:cert}, $k^2-c$ unit squares can be packed in a square of side less than $k$. Hence
+$\cs(k)\le c-1$, as listed.
+\end{theorem}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrr}
+\toprule
+$k$ & $b$ & $y_0$ & $c=k^2-N$ & bound & Thm.~\ref{thm:main} & $8\lceil\sqrt{k-4}\rceil-1$\\
+\midrule
+$10^5$ & $623$ & $257/4$ & $1584$ & $\cs(k)\le1583$ & $2067$ & $2535$\\
+$10^6$ & $2481$ & $653/4$ & $3973$ & $\cs(k)\le3972$ & $5192$ & $7999$\\
+$10^7$ & $9875$ & $1663/4$ & $10040$ & $\cs(k)\le10039$ & $13041$ & $25303$\\
+$3.825\cdot10^7$ & $22086$ & $710$ & $16989$ & $\cs(k)\le16988$ & $22302$ & $49479$\\
+$10^8$ & $39314$ & $1041$ & $24791$ & $\cs(k)\le24790$ & $32757$ & $79999$\\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{Certified packings (Theorem~\ref{thm:cert}). The band width is $b-\varepsilon$ with
+$\tan(\theta/2)=b/(b^2-1)$, and $y_0$ is the lift of the first row of each band. The column ``Thm.~\ref{thm:main}''
+gives the integer part of $20.668\,k^{2/5}+0.623$ (Theorem~\ref{thm:main} itself applies only for $k\ge1.6\cdot10^7$),
+and the last column is the bound of Theorem~\ref{thm:sqrt}. These staircase certificates are the best values we have
+at these $k$. The construction of Section~\ref{sec:38} gives larger values here (for example $\cs(10^8)\le44299$,
+Remark~\ref{rem:38exact}); it wins only for very large $k$.}\label{tab:cert}
+\end{table}
+
+For comparison, the explicit bound of Wang, Dong and Li [WDL] would give about $8.1\cdot10^4$ at $k=10^5$
+(Section~\ref{sec:lit}).
+
+To the best of our knowledge, no upper bound of order $o(k^{3/5})$ for $\cs(k)$, or for $W(x)$ just below an integer,
+has been stated in the sources we searched (listed in Section~\ref{sec:lit}). The ingredients of
+Theorem~\ref{thm:A} are standard, and the staircase and the chained wall stairs are due to Bui
+(Section~\ref{ssec:credit}); what seems not to have been written down is their use just below an integer, with bands of
+width $b-\varepsilon$.
+
+\emph{The order of $\cs(k)$.} Theorem~\ref{thm:main38} and the lower bound of [T] give
+\[
+k^{1/3}\ \ll\ \cs(k)\ \ll\ k^{3/8}.
+\]
+By a theorem of Roth and Vaughan, a bound $W(x)\le Cx^{\alpha}$ valid for all large real $x$ must have
+$\alpha\ge1/2$, so by \eqref{eq:translation} such bounds cannot give $\cs(k)=o(\sqrt k)$
+(Section~\ref{ssec:structural}); Theorems~\ref{thm:main38} and~\ref{thm:main} use that the band width is just below an
+integer. These are the bounds proved here and in [T]; the true exponent of $\cs(k)$ is open: it lies between $1/3$ and
+$3/8$ (Section~\ref{sec:open}).
+
+\subsection{Credits}\label{ssec:credit}
+The skeleton of the packing of Theorem~\ref{thm:A} (an axis-parallel square, and two bands along two of its sides
+filled with tilted blocks that touch both sides of the band) is the construction of Erd\H{o}s and Graham [EG,
+Figs.~1--2]; the same L-shaped skeleton is the Type~1 packing of Chung and Graham [CG]. The block (a $1\times b$
+rectangle of $b$ unit squares tilted by about $2\arctan(1/b)$ so that it fits in a band of width slightly less than $b$)
+is used by Arslanov, Mustafin and Shangitbayev [AMS] for small $b$ and in a lemma for even $b$; they do not chain the
+blocks into long bands. The staircase of Section~\ref{sec:stair}, in which tilted columns of one fixed tilt keep only
+their upper squares and their lower squares are replaced by horizontal axis-parallel layers, so that one tilt can
+follow a rising ceiling, is the ``primitive'' construction of H.~D.~Bui [Bui, Section~3]. The wall filler of
+Section~\ref{sec:38}, in which a thin trapezoid is filled by a chain of such staircases whose tilt is lowered from block
+to block so that the layers close in phase, follows the ideas of [Bui, Sections~3--4] (arXiv:2508.04603v2). Our proofs
+of the end bounds are self-contained and do not use any argument of [Bui]; the write-up and the constants are ours.
+
+\subsection{Status}\label{ssec:status}
+Theorems~\ref{thm:A} and~\ref{thm:sqrt} and Proposition~\ref{prop:D} are proved in full in
+Sections~\ref{sec:prelim}--\ref{sec:count}, Theorem~\ref{thm:main} in Sections~\ref{sec:ends}
+and~\ref{sec:stair}, and Theorem~\ref{thm:main38} in Sections~\ref{sec:ends} and~\ref{sec:38}.
+Theorem~\ref{thm:main} relies on one evaluation in interval arithmetic,
+$\Phi(10^{-4/3})\le5.0163$ (Corollary~\ref{cor:b23}), done by the author's program and by three independent
+computations; the other numerical constants were certified in the same way. The constants of
+Theorem~\ref{thm:main38} (Corollary~\ref{cor:b35}) are certified by interval arithmetic on covers of the whole range
+$b\ge10^{16}$: the author's own program used too little slack on the wall tilts, and the constant $C_E=15.54$ is
+certified by three independent full-range coverings ($C_E\le14.964$, $14.963$ and $14.9631$), with different libraries
+(\texttt{mpmath.iv} twice and \texttt{python-flint} arb once); the asymptotic regime cannot be tested by
+explicit computation, and the explicit checks test the construction at smaller $b$ (Remark~\ref{rem:38exact}).
+Theorem~\ref{thm:cert} consists of the structural part of Section~\ref{sec:ends} and a finite part (explicit end
+packings), checked in exact rational arithmetic by the program that produced it and by checkers written independently
+from a description of the construction (Section~\ref{sec:cert}). The proofs were written and checked with AI
+assistance and have not been reviewed by a human expert. The paper has not been refereed.
+
+\emph{Organization.} Section~\ref{sec:prelim} proves \eqref{eq:translation} and the reduction used throughout.
+Section~\ref{sec:block} treats the tilted block, Section~\ref{sec:lshape} the L-shaped packing, and
+Section~\ref{sec:count} the count and the proofs of Theorems~\ref{thm:A}, \ref{thm:sqrt} and Proposition~\ref{prop:D}.
+Section~\ref{sec:ends} lifts the rows and proves the waste identity, Section~\ref{sec:stair} constructs the staircase
+end and proves Theorem~\ref{thm:main}, Section~\ref{sec:38} constructs the chained wall fillers and proves
+Theorem~\ref{thm:main38}, and Section~\ref{sec:cert} proves Theorem~\ref{thm:cert}.
+Sections~\ref{sec:lit} and~\ref{sec:lower} compare with the literature, and Section~\ref{sec:open} collects remarks on
+other end constructions and open problems.
+
+\section{The reduction and the wasted area}\label{sec:prelim}
+
+For $x\ge1$ let $M(x)$ be the largest number of unit squares that can be packed in a square of side $x$, and
+$W(x):=x^2-M(x)$. A packing in a square of side $x$ is also a packing in a larger square containing it, so $M$ is
+non-decreasing; it is integer-valued and $M(x)\le x^2$ by area.
+
+\begin{lemma}\label{lem:translation}
+Let $k\ge2$ be an integer and $m(k):=\max_{1\le x<k}M(x)$. Then $\cs(k)=k^2-m(k)-1$, and $W(x)\to k^2-m(k)$ as
+$x\to k^-$. In particular \eqref{eq:translation} holds.
+\end{lemma}
+
+\begin{proof}
+The maximum exists because $M$ is non-decreasing, integer-valued and bounded by $k^2$ on $[1,k)$; and $M(x)=m(k)$ on
+some interval $[x_1,k)$, so $W(x)=x^2-m(k)\to k^2-m(k)$. Let $1\le n\le k^2$. If $s(n)<k$, then by the definition of the
+infimum $n$ unit squares can be packed in a square of some side $x<k$, so $n\le M(x)\le m(k)$. Conversely, if $n\le
+m(k)=M(x)$ with $x<k$, then $s(n)\le x<k$. Since $s(n)\le k$ for $n\le k^2$, we get, for $0\le c\le k^2-1$,
+\[
+s(k^2-c)=k\iff k^2-c>m(k)\iff c\le k^2-m(k)-1 .
+\]
+As $1\le m(k)<k^2$ (one square fits in a square of side $1<k$, and $M(x)\le x^2<k^2$), the largest such $c$ is
+$k^2-m(k)-1$.
+\end{proof}
+
+\begin{lemma}[reduction]\label{lem:reduction}
+If $N\ge1$ unit squares can be packed in a square of side $S<k$, then $\cs(k)\le k^2-N-1$.
+\end{lemma}
+
+\begin{proof}
+By assumption $N\le M(S)\le m(k)$, and Lemma~\ref{lem:translation} gives $\cs(k)=k^2-m(k)-1\le k^2-N-1$.
+\end{proof}
+
+This is the source of the ``$-1$'' in Theorems~\ref{thm:A} and~\ref{thm:cert}: a packing of $N$ squares in a container of
+side less than $k$ shows $\cs(k)\le c-1$ with $c:=k^2-N$. In the notation of [Q] and [T], $m(k)$ is also the largest
+number of unit squares in $[0,k]^2$ that are pairwise disjoint as closed sets, and $\cs(k)=\Wmin(k)-1$ with
+$\Wmin(k):=k^2-m(k)$ ([Q, Section~1]).
+
+\section{The tilted block}\label{sec:block}
+
+Fix an integer $b\ge2$ and an angle $\theta\in(0,\pi/2)$, and write $\gamma:=\cos\theta$, $\sigma:=\sin\theta$,
+$u:=(\gamma,\sigma)$ and $v:=(-\sigma,\gamma)$. For $P\in\R^2$ and $0\le i\le b-1$ let
+\[
+Q_i(P):=\{P+\alpha u+\beta v:\ \alpha\in[i,i+1],\ \beta\in[0,1]\},\qquad B(P):=\bigcup_{i=0}^{b-1}Q_i(P).
+\]
+Each $Q_i(P)$ is a unit square, and $B(P)$ is a $b\times1$ rectangle tilted by $\theta$, with lowest vertex $P$. Put
+\[
+f(\theta):=b\gamma+\sigma\ \ (\text{width}),\qquad h(\theta):=b\sigma+\gamma\ \ (\text{height}),\qquad
+d(\theta):=\sec\theta\ \ (\text{row spacing}).
+\]
+
+\begin{lemma}[projections]\label{lem:proj}
+The projection of $B(P)$ to the $x$-axis is $[P_x-\sigma,\,P_x+b\gamma]$, of length $f(\theta)$, and its projection to the
+$y$-axis is $[P_y,\,P_y+b\sigma+\gamma]$, of length $h(\theta)$.
+\end{lemma}
+
+\begin{proof}
+The coordinates $x=P_x+\alpha\gamma-\beta\sigma$ and $y=P_y+\alpha\sigma+\beta\gamma$ are linear on
+$[0,b]\times[0,1]\ni(\alpha,\beta)$, and $\gamma,\sigma>0$. So $x$ is smallest at $(0,1)$ and largest at $(b,0)$, and $y$
+is smallest at $(0,0)$ and largest at $(b,1)$.
+\end{proof}
+
+\begin{lemma}[width]\label{lem:width}
+Let $\theta_0:=2\arctan(1/b)$. Then $0<\theta_0<\pi/2$,
+\[
+\cos\theta_0=\gamma_0=\frac{b^2-1}{D},\quad \sin\theta_0=\frac{2b}{D},\quad f(\theta_0)=b,\quad
+h(\theta_0)=h_0=\frac{3b^2-1}{D},\quad d(\theta_0)=d_0:=\frac{D}{b^2-1},
+\]
+with $D=b^2+1$, and $f(\theta)<b$ for every $\theta\in(\theta_0,\pi/2]$.
+\end{lemma}
+
+\begin{proof}
+With $t=\tan(\theta_0/2)=1/b$ the half-angle formulas give $\cos\theta_0=(1-t^2)/(1+t^2)=(b^2-1)/D$ and
+$\sin\theta_0=2t/(1+t^2)=2b/D$; hence $f(\theta_0)=(b(b^2-1)+2b)/D=b$ and $h(\theta_0)=(2b^2+b^2-1)/D$. As $b\ge2$,
+$\arctan(1/b)<\pi/4$, so $\theta_0<\pi/2$. With $\varphi:=\arctan(1/b)$ we have $f(\theta)=\sqrt{b^2+1}\cos(\theta-\varphi)$.
+For $\theta\in[\theta_0,\pi/2]$, $\theta-\varphi\in[\varphi,\pi/2-\varphi]\subset[0,\pi]$, where $\cos$ is strictly
+decreasing; so $f(\theta)<f(\theta_0)=b$ for $\theta>\theta_0$.
+\end{proof}
+
+\begin{lemma}[stacking]\label{lem:stack}
+Let $P_0\in\R^2$ and $P_j:=P_0+(0,\,j\sec\theta)$ for $j\in\Z$. If $(i,j)\ne(i',j')$, then $Q_i(P_j)$ and
+$Q_{i'}(P_{j'})$ have disjoint interiors. More precisely, in the coordinates $\alpha'=u\cdot(z-P_0)$,
+$\beta'=v\cdot(z-P_0)$,
+\[
+Q_i(P_j)=[\,i+j\tan\theta,\ i+1+j\tan\theta\,]\times[\,j,\ j+1\,].
+\]
+\end{lemma}
+
+\begin{proof}
+The map $z\mapsto(u\cdot(z-P_0),v\cdot(z-P_0))$ is a rigid motion. Since $v\cdot(0,j\sec\theta)=j$ and
+$u\cdot(0,j\sec\theta)=j\tan\theta$, the square $Q_i(P_j)$ has the stated form. If $j\ne j'$ the $\beta'$-intervals have
+disjoint interiors; if $j=j'$ and $i\ne i'$ the $\alpha'$-intervals do.
+\end{proof}
+
+Thus consecutive rows touch along their long sides: the $v$-component of the shift $(0,\sec\theta)$ is exactly $1$.
+
+\begin{lemma}[one band]\label{lem:band}
+Let $a\in\R$, $L\ge0$, $\theta\in(0,\pi/2)$ and an integer $R\ge0$ with $R=0$ or $(R-1)d(\theta)+h(\theta)\le L$. Then the
+$bR$ squares $Q_i(P_j)$, $0\le i<b$, $0\le j<R$, with $P_j=(a+\sigma,\,j\sec\theta)$, have pairwise disjoint interiors
+and lie in $[a,\,a+f(\theta)]\times[0,L]$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:proj} the row $B(P_j)$ has $x$-projection $[a,a+b\gamma+\sigma]$ and $y$-projection
+$[jd,jd+h]\subset[0,(R-1)d+h]\subset[0,L]$. Disjointness is Lemma~\ref{lem:stack}.
+\end{proof}
+
+\section{The L-shaped packing}\label{sec:lshape}
+
+Let $k\ge2$ and $2\le b\le k$ be integers and $\theta\in(\theta_0,\pi/2)$. By Lemma~\ref{lem:width},
+\[
+\varepsilon:=b-f(\theta)>0,\qquad S:=k-\varepsilon=k-b+f(\theta)<k .
+\]
+Let $R_1,R_2\ge0$ be integers satisfying the \emph{length conditions}
+\[
+\text{(L1)}\ \ R_1=0\ \text{ or }\ (R_1-1)d(\theta)+h(\theta)\le S,\qquad
+\text{(L2)}\ \ R_2=0\ \text{ or }\ (R_2-1)d(\theta)+h(\theta)\le k-b .
+\]
+The packing consists of three parts (Figure~1 of [EG] and the Type~1 packing of [CG] have the same skeleton).
+\begin{enumerate}[label=(\arabic*)]
+\item The \emph{grid} $\cG$: the $(k-b)^2$ squares $[i,i+1]\times[j,j+1]$, $0\le i,j\le k-b-1$, in $G:=[0,k-b]^2$.
+\item The \emph{right band} $\cA$: the $bR_1$ squares of Lemma~\ref{lem:band} with $a=k-b$, $L=S$, $R=R_1$; they lie in
+$A:=[k-b,S]\times[0,S]$, since $a+f(\theta)=S$.
+\item The \emph{top band} $\cT$: the image under the reflection $\iota(x,y):=(y,x)$ of the $bR_2$ squares of
+Lemma~\ref{lem:band} with $a=k-b$, $L=k-b$, $R=R_2$. Before reflection they lie in $[k-b,S]\times[0,k-b]$, so $\cT$ lies
+in $T:=[0,k-b]\times[k-b,S]$.
+\end{enumerate}
+
+\begin{lemma}\label{lem:valid}
+The $N=(k-b)^2+b(R_1+R_2)$ squares of $\cG\cup\cA\cup\cT$ form a packing in $[0,S]^2$, and $S<k$.
+\end{lemma}
+
+\begin{proof}
+Since $f(\theta)>0$ we have $k-b<S$, so $G,A,T\subset[0,S]^2$; and $S<k$. The interiors $(0,k-b)^2$,
+$(k-b,S)\times(0,S)$ and $(0,k-b)\times(k-b,S)$ of $G$, $A$, $T$ are pairwise disjoint ($G$ and $A$ are separated by
+$x=k-b$, $G$ and $T$ by $y=k-b$, and $A$ and $T$ by $x=k-b$); the corner $[k-b,S]^2$ belongs to $A$ only. The interior of
+a square contained in one of these regions lies in the interior of that region, so squares from different parts have
+disjoint interiors. Inside $\cG$ this is clear, inside $\cA$ it is Lemma~\ref{lem:band}, and inside $\cT$ it is
+Lemma~\ref{lem:band} together with the fact that $\iota$ is an isometry.
+\end{proof}
+
+If $k=b$, the grid is empty, $T$ is degenerate and $R_2=0$; the lemma remains true.
+
+\subsection{An explicit angle}
+For an integer $L$ let $R(L)$ be as in Section~\ref{sec:intro}. Then $R(L)$ is the number of integers $j\ge0$ with
+$jd_0+h_0<L$: if $L\le h_0$ both are $0$; otherwise the condition is $j<(L-h_0)/d_0=(L-h_0)\gamma_0$, and the number of
+such $j\ge0$ is $\lceil(L-h_0)\gamma_0\rceil$.
+
+\begin{lemma}\label{lem:angle}
+Let $M:=14kb^2+1$, $p:=M$, $q:=bM-1$ and $\theta:=2\arctan(p/q)$. Then $\theta\in(\theta_0,\pi/2)$, and $R_1:=R(k)$,
+$R_2:=R(k-b)$ satisfy (L1) and (L2). Moreover $\cos\theta=(q^2-p^2)/(q^2+p^2)$ and $\sin\theta=2pq/(p^2+q^2)$ are
+rational, so all vertices of the packing have rational coordinates.
+\end{lemma}
+
+\begin{proof}
+(i) We have $p/q>1/b$ (as $bM>bM-1$) and $p/q<1$ (as $(b-1)M>1$), so $\theta_0<\theta<\pi/2$. Since the derivative of
+$\arctan$ is at most $1$,
+\[
+\theta-\theta_0=2\Bigl(\arctan\frac pq-\arctan\frac1b\Bigr)\le2\Bigl(\frac{M}{bM-1}-\frac1b\Bigr)=\frac{2}{b(bM-1)}
+\le\frac{1}{7kb^4}=:\tau ,
+\]
+because $bM-1=14kb^3+b-1\ge14kb^3$.
+
+(ii) \emph{Slack.} Let $L$ be an integer with $R:=R(L)\ge1$, and $g(L):=L-h_0-(R-1)d_0$. Then $g(L)>0$ by the
+characterization of $R(L)$ above, and
+\[
+(b^2-1)D\,g(L)=(b^4-1)L-(b^2-1)(3b^2-1)-(R-1)D^2
+\]
+is an integer; hence $g(L)\ge1/(b^4-1)$.
+
+(iii) \emph{Derivatives.} For $b\ge2$, $\gamma_0\ge3/5$, and $\tau\le1/224$; so $\cos\ge3/5-\tau\ge1/2$ on
+$[\theta_0,\theta_0+\tau]$. There $d'=\sin/\cos^2\le4$, $h'=b\cos-\sin\le b$ and $|f'|=|\cos-b\sin|\le\sqrt{b^2+1}\le b+1$.
+
+(iv) If $R_1=R(k)\ge1$ (otherwise there is nothing to prove), then by the mean value theorem, using $f(\theta_0)=b$,
+\begin{align*}
+(R_1-1)d(\theta)+h(\theta)-S&=\bigl[(R_1-1)d_0+h_0-k\bigr]+(R_1-1)(d(\theta)-d_0)\\
+&\qquad+(h(\theta)-h_0)+(f(\theta_0)-f(\theta))\\
+&\le-g(k)+(\theta-\theta_0)\bigl(4(R_1-1)+2b+1\bigr).
+\end{align*}
+Here $R_1-1<(k-h_0)\gamma_0<k$ and $b\le k$, so the last factor is at most $7k$, and the right side is at most
+$-1/(b^4-1)+7k\tau=-1/(b^4-1)+1/b^4<0$. This is (L1). Similarly, if $R_2\ge1$,
+$(R_2-1)d(\theta)+h(\theta)-(k-b)\le-g(k-b)+\tau(4k+b)\le-1/(b^4-1)+5/(7b^4)<0$, which is (L2).
+\end{proof}
+
+\begin{lemma}[maximality within the family]\label{lem:max}
+If $\theta\in(\theta_0,\arctan b)$, then every pair $R_1,R_2$ satisfying (L1) and (L2) has $R_1\le R(k)$ and
+$R_2\le R(k-b)$. For $\theta\in(\theta_0,\theta_0+\tau]$ equality is possible.
+\end{lemma}
+
+\begin{proof}
+Note $\tan\theta_0=2b/(b^2-1)<b$, so the interval is non-empty. On it $d'>0$ and $h'=b\cos\theta-\sin\theta>0$, so $d$ and
+$h$ are strictly increasing. If $R_1\ge R(k)+1$, then $(R_1-1)d_0+h_0\ge k$ by the characterization of $R(k)$, hence
+$(R_1-1)d(\theta)+h(\theta)>k>S$, contradicting (L1). The top band is the same with $k-b$ in place of $S$ and $k$. The
+proof of Lemma~\ref{lem:angle} works for every $\theta\in(\theta_0,\theta_0+\tau]$.
+\end{proof}
+
+So $N(k,b)$ is the exact number of squares of the packings of this section with $\theta$ close to $\theta_0$ and with the
+rows of each band starting at the bottom of the band. Remark~\ref{rem:extra} shows that the family can be enlarged.
+
+\section{The count: proofs of the bounds of order \texorpdfstring{$\sqrt k$}{sqrt k}}\label{sec:count}
+
+\begin{proof}[Proof of Theorem~\ref{thm:A}]
+By Lemmas~\ref{lem:angle} and~\ref{lem:valid}, $N(k,b)$ unit squares can be packed in a square of side $S<k$. If $k>b$
+then $N(k,b)\ge(k-b)^2\ge1$; if $k=b$ then $N(k,b)=bR(k)$, and $R(k)=0$ only if $k\le h_0<3$, that is $k=b=2$. So
+$N(k,b)\ge1$ for $(k,b)\ne(2,2)$, and Lemma~\ref{lem:reduction} gives $\cs(k)\le k^2-N(k,b)-1$; for $(k,b)=(2,2)$ this
+bound is $\cs(2)\le3$, which holds by definition.
+
+For the second inequality we compute the count exactly. Put
+\[
+\eta:=\frac{2k-10}{D}+\frac{8}{D^2},\qquad \eta':=\eta-\frac{2b}{D}.
+\]
+We claim
+\begin{equation}\label{eq:exact}
+k^2-N(k,b)\ \le\ 6b+b\bigl(\lfloor\eta\rfloor+\lfloor\eta'\rfloor\bigr),\qquad\text{with equality if }k-b\ge2.
+\end{equation}
+For an integer $L$, using $h_0=3-4/D$ and $\gamma_0=1-2/D$,
+\[
+(L-h_0)\gamma_0=L-3+\frac4D-\frac{2L}{D}+\frac6D-\frac{8}{D^2}=L-3-\eta_L,\qquad \eta_L:=\frac{2L-10}{D}+\frac{8}{D^2}.
+\]
+Since $L$ is an integer, $\lceil L-3-\eta_L\rceil=L-3-\lfloor\eta_L\rfloor$, so
+$R(L)=\max(0,L-3-\lfloor\eta_L\rfloor)\ge L-3-\lfloor\eta_L\rfloor$. Here $\eta_k=\eta$ and $\eta_{k-b}=\eta'$. Hence
+\[
+k^2-N(k,b)=2kb-b^2-b\bigl(R(k)+R(k-b)\bigr)\le2kb-b^2-b\bigl(2k-b-6-\lfloor\eta\rfloor-\lfloor\eta'\rfloor\bigr)
+=6b+b\bigl(\lfloor\eta\rfloor+\lfloor\eta'\rfloor\bigr).
+\]
+If $L\ge2$, then $L-h_0>-1$ and $0<\gamma_0<1$, so $(L-h_0)\gamma_0>-1$ and the ceiling is at least $0$; the maximum is
+then not active. This applies to $L=k$ always and to $L=k-b$ when $k-b\ge2$, which gives the equality case.
+
+Now $\lfloor\eta\rfloor+\lfloor\eta'\rfloor\le2\eta-2b/D$, and therefore
+\[
+k^2-N(k,b)\le6b+\frac{(4k-20)b}{D}+\frac{16b}{D^2}-\frac{2b^2}{D}
+=6b+\frac{4kb}{D}-2+\frac{2-20b+16b/D}{D}.
+\]
+Here $4kb/D<4k/b$, and for $b\ge2$ we have $16b/D\le32/5<7$, so $2-20b+16b/D<9-20b<0$. Hence
+$k^2-N(k,b)<6b+4k/b-2$, and $\cs(k)\le k^2-N(k,b)-1<6b+4k/b-3$.
+\end{proof}
+
+\begin{corollary}\label{cor:B}
+For every integer $k\ge6$, $\cs(k)<4\sqrt6\,\sqrt k\approx9.798\sqrt k$.
+\end{corollary}
+
+\begin{proof}
+The function $g(x)=6x+4k/x$ has its minimum $g(x^*)=4\sqrt6\sqrt k$ at $x^*=\sqrt{2k/3}$. Let $b=\lceil x^*\rceil=x^*+\delta$
+with $0\le\delta<1$. Using $4k/x^{*2}=6$,
+\[
+g(b)-g(x^*)=6\delta-\frac{4k\delta}{x^*(x^*+\delta)}=\frac{6\delta^2}{x^*+\delta}<\frac{6}{x^*}\le3,
+\]
+because $x^*\ge2$ for $k\ge6$. Also $2\le b\le x^*+1\le k$. Theorem~\ref{thm:A} gives $\cs(k)<g(b)-3<4\sqrt6\sqrt k$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sqrt}]
+Let $b:=\lceil\sqrt{k-4}\,\rceil$. Then $b\ge\lceil\sqrt2\,\rceil=2$ and $b\le\sqrt{k-4}+1\le k$. Moreover $D=b^2+1\ge k-3>0$
+and $2k-10>0$, so
+\[
+\eta\le\frac{2k-10}{k-3}+\frac{8}{(k-3)^2}=2-\frac{4(k-3)-8}{(k-3)^2}<2,
+\]
+since $k-3>2$. Hence $\lfloor\eta\rfloor\le1$ and $\lfloor\eta'\rfloor\le\lfloor\eta\rfloor\le1$, and \eqref{eq:exact} gives
+$k^2-N(k,b)\le8b$. Since $(k,b)\ne(2,2)$, Theorem~\ref{thm:A} gives $\cs(k)\le8b-1<8\sqrt{k-4}+7$.
+\end{proof}
+
+For $k>15$ Theorem~\ref{thm:sqrt} is stronger than Corollary~\ref{cor:B}, since $8\sqrt k+7<4\sqrt6\sqrt k$ for
+$\sqrt k>7/(4\sqrt6-8)\approx3.89$.
+
+\begin{proof}[Proof of Proposition~\ref{prop:D}]
+If $k-b\ge2$, equality holds in \eqref{eq:exact}, and $\lfloor z\rfloor>z-1$ gives
+\[
+k^2-N(k,b)>6b+b\Bigl(2\eta-\frac{2b}{D}-2\Bigr)=4b+\frac{(4k-20)b}{D}+\frac{16b}{D^2}-\frac{2b^2}{D}
+\ge4b+\frac{4kb}{D}-12,
+\]
+using $16b/D^2\ge0$, $2b^2/D\le2$ and $20b/D\le10$. With $x:=b+1/b$ we have $kb/D=k/x$ and $4b=4x-4/b\ge4x-2$, so
+$k^2-N(k,b)>4x+4k/x-14\ge8\sqrt k-14$ by the inequality of arithmetic and geometric means. If $b\in\{k-1,k\}$, then
+$R(k-b)\in\{R(0),R(1)\}=\{0\}$ (as $h_0\ge11/5$) and $R(k)\le\lceil k-h_0\rceil\le k-2$, so $N(k,b)\le1+k(k-2)$ and
+$k^2-N(k,b)\ge2k-1$; and $2k-1-(8\sqrt k-14)=2(\sqrt k-2)^2+5>0$.
+\end{proof}
+
+Hence the best bound obtainable from Theorem~\ref{thm:A} satisfies
+$8\sqrt k-15<\min_b\bigl(k^2-N(k,b)-1\bigr)\le8\lceil\sqrt{k-4}\,\rceil-1$.
+
+\begin{remark}[where $8\sqrt k$ comes from]\label{rem:eight}
+The exact count \eqref{eq:exact} is $6b+b(\lfloor\eta\rfloor+\lfloor\eta'\rfloor)$ with $\eta\approx2k/b^2$. The
+estimate $\lfloor z\rfloor\le z$ gives $6b+4k/b$, minimized at about $9.80\sqrt k$; but for $b=\lceil\sqrt{k-4}\rceil$ and
+$k\ge23$ both floors equal $1$ while $\eta$ is just below $2$, and the count is $8b$. (For $k\ge31$: $\eta<2$ by the
+proof of Theorem~\ref{thm:sqrt}, and with $s:=\sqrt{k-4}$, $b<s+1$ gives $b^2+2b<k-1+4s$, so
+$D\eta'>2k-10-2b>b^2+1=D$ as soon as $k-10\ge4s$, which holds for $k\ge31$; hence $1<\eta'\le\eta<2$. For
+$23\le k\le30$ this was checked exactly, as was the whole range $23\le k\le2\cdot10^5$; $k=22$ fails. Nothing
+else in the paper uses this.) Geometrically (Section~\ref{sec:ends}),
+each band loses about $2L/b$ along its length $L$, because the row spacing $\sec\theta$ exceeds $1$ by about $2/b^2$,
+and about $b$ at each of its two ends, where the first and the last row cross the band with a rise of about $2$. The
+total $4k/b+4b$ is at least $8\sqrt k$.
+\end{remark}
+
+\begin{remark}[a larger family]\label{rem:extra}
+Lemma~\ref{lem:max} concerns the family in which the top band stays in $x\le k-b$. One more row in the top band
+protrudes into the corner $[k-b,S]^2$, but often fits into the empty wedge above the last row of the right band. An
+exact computer check (all $6\le k\le30$ with $k-b\ge2$) found $285$ of $375$ such enlarged packings valid; for example
+$k=12$, $b=3$ gives $126$ squares instead of $N(12,3)=123$. We have no general proof, and this remark is not used.
+\end{remark}
+
+\section{Lifted rows and the waste identity}\label{sec:ends}
+
+\subsection{Lifted rows and end regions}\label{ssec:frame}
+Throughout this section $b\ge2$, $\theta\in(\theta_0,\pi/2)$, $\gamma=\cos\theta$, $\sigma=\sin\theta$, and
+$w:=f(\theta)=b\gamma+\sigma<b$, $h:=h(\theta)$, $d:=\sec\theta$. A band is described in its own \emph{strip frame}: the
+strip is $\Sigma:=[0,w]\times[0,L_b]$, where $L_b>0$ is the length of the band. Given a \emph{lift} $y_0\ge0$ and an
+integer $R\ge1$, the rows are $B(P_j)$, $0\le j<R$, with
+\[
+P_j:=(\sigma,\ y_0+jd),\qquad\text{and we put}\qquad y_1:=L_b-h-(R-1)d-y_0 .
+\]
+We assume $y_1\ge0$. For $y\ge0$ the \emph{end region} is
+\[
+\Reg(y):=\{(x',y'):\ 0\le x'\le w,\ \ 0\le y'\le y+(x'-\sigma)\tan\theta\},
+\]
+and $\rho(x',y'):=(w-x',\,L_b-y')$ is the rotation by $\pi$ about the centre of $\Sigma$. The upper side of $\Reg(y_0)$
+is the line through the lower side of the first row $B(P_0)$; on $[0,\sigma]$ the first row is higher than this line,
+so $\Reg(y_0)$ is slightly smaller than the part of $\Sigma$ below the first row.
+
+\begin{lemma}\label{lem:ends}
+Let $\cC_0$ and $\cC_1$ be finite families of unit squares with pairwise disjoint interiors, contained in $\Reg(y_0)$ and
+$\Reg(y_1)$ respectively. Then the $bR$ squares $Q_i(P_j)$ ($0\le i<b$, $0\le j<R$), the squares of $\cC_0$ and the
+squares of $\rho(\cC_1)$ form a packing in $\Sigma$.
+\end{lemma}
+
+\begin{proof}
+\emph{Containment.} By Lemma~\ref{lem:proj} the row $B(P_j)$ has $x$-projection $[0,w]$ and $y$-projection
+$[y_0+jd,\,y_0+jd+h]\subset[y_0,\,L_b-y_1]\subset[0,L_b]$. On $\Reg(y)$ we have
+$y'\le y+(w-\sigma)\tan\theta=y+b\sigma\le y+h$; since $L_b=y_0+y_1+(R-1)d+h$ is at least $y_0+h$ and at least
+$y_1+h$, both end regions lie in $\Sigma$, and $\rho(\Sigma)=\Sigma$.
+
+\emph{Separation.} Let $\beta'(z):=v\cdot(z-P_0)$. By Lemma~\ref{lem:stack} (with this $P_0$), every row square lies in
+$\{0\le\beta'\le R\}$. The upper side of $\Reg(y_0)$ is the line through $P_0$ with direction $u$, and
+$\beta'(x',y')=-\sigma(x'-\sigma)+\gamma(y'-y_0)\le0$ is equivalent to $y'\le y_0+(x'-\sigma)\tan\theta$; so
+$\Reg(y_0)\subset\{\beta'\le0\}$. Next, the highest vertex of the last row is
+$P_{R-1}+bu+v=(b\gamma,\ y_0+(R-1)d+h)$, and
+\begin{equation}\label{eq:rot}
+\rho\bigl(P_{R-1}+bu+v\bigr)=(w-b\gamma,\ L_b-y_0-(R-1)d-h)=(\sigma,\ y_1)=:P_0'.
+\end{equation}
+As above, $\Reg(y_1)\subset\{z:\ v\cdot(z-P_0')\le0\}$. The linear part of $\rho$ is $-\mathrm{id}$, so for
+$z\in\Reg(y_1)$
+\[
+\beta'(\rho(z))=v\cdot\bigl(\rho(P_0')-P_0\bigr)-v\cdot(z-P_0')=v\cdot(P_{R-1}+bu+v-P_0)-v\cdot(z-P_0')\ge(R-1)+1=R,
+\]
+using $v\cdot(P_{R-1}-P_0)=R-1$, $v\cdot u=0$ and $v\cdot v=1$. Hence $\rho(\Reg(y_1))\subset\{\beta'\ge R\}$. The three
+sets $\{\beta'\le0\}$, $\{0\le\beta'\le R\}$ and $\{\beta'\ge R\}$ have pairwise disjoint interiors; inside each group the
+interiors are disjoint by Lemma~\ref{lem:stack} and by assumption ($\rho$ is an isometry).
+\end{proof}
+
+\begin{corollary}\label{cor:assembly}
+Let $k>b$ be an integer, $S:=k-b+w$, and $y_0\ge0$. For the right band put $L_b:=S$ and for the top band $L_b:=k-b$, and
+suppose that for each band an integer $R\ge1$ is given with $y_1\ge0$. Let $\cC_0,\cC_1$ be as in Lemma~\ref{lem:ends}
+for each band. Map the right band into the plane by $(x',y')\mapsto(k-b+x',y')$, and the top band by
+$(x',y')\mapsto\iota(k-b+x',y')=(y',k-b+x')$. Together with the grid $\cG$ these squares form a packing in $[0,S]^2$, with
+$S<k$ and
+\[
+N=(k-b)^2+b\,(R_{\rm right}+R_{\rm top})+\sum_{\text{4 ends}}|\cC| .
+\]
+\end{corollary}
+
+\begin{proof}
+The strips are mapped onto $A$ and $T$ of Section~\ref{sec:lshape}. Lemma~\ref{lem:ends} gives a packing inside each of
+$A$ and $T$, and the separation of $G$, $A$, $T$ is as in the proof of Lemma~\ref{lem:valid}.
+\end{proof}
+
+\subsection{The waste identity}
+For $y\ge0$ let
+\[
+A_0(y):=yw+\tfrac12\gamma\sigma(1+b^2).
+\]
+If $y=y_0$, this is the area of the part of $\Sigma$ below the lower boundary of the first row: that boundary is the
+segment from $(0,y_0+\gamma)$ to $(\sigma,y_0)$ followed by the segment from $(\sigma,y_0)$ to $(w,y_0+b\sigma)$, and
+\[
+\int_0^\sigma\Bigl(y_0+\gamma-\frac{\gamma}{\sigma}x\Bigr)dx+\int_\sigma^w\bigl(y_0+(x-\sigma)\tan\theta\bigr)dx
+=y_0\sigma+\frac{\gamma\sigma}{2}+y_0b\gamma+\frac{b^2\gamma\sigma}{2}=A_0(y_0).
+\]
+For a finite family $\cC$ in $\Reg(y)$ we write $E(y):=A_0(y)-|\cC|$, the \emph{end cost}. It is the uncovered area of
+the part of $\Sigma$ below the first row (for $y=y_0$), resp.\ above the last row (for $y=y_1$, after applying $\rho$).
+
+\begin{proposition}[waste identity]\label{prop:waste}
+In the situation of Lemma~\ref{lem:ends}, with $E(y_0)=A_0(y_0)-|\cC_0|$ and $E(y_1)=A_0(y_1)-|\cC_1|$,
+\[
+wL_b-bR-|\cC_0|-|\cC_1|=(R-1)\tan\theta+E(y_0)+E(y_1).
+\]
+In the situation of Corollary~\ref{cor:assembly},
+\[
+k^2-N=(k^2-S^2)+\sum_{\text{2 bands}}\bigl[(R-1)\tan\theta+E(y_0)+E(y_1)\bigr].
+\]
+\end{proposition}
+
+\begin{proof}
+Split $\Sigma$ into the part below the lower boundary of $B(P_0)$ (area $A_0(y_0)$), the part between the lower boundary
+of $B(P_0)$ and the upper boundary of $B(P_{R-1})$, and the part above the upper boundary of $B(P_{R-1})$. The lower
+boundary of $B(P_j)$ is that of $B(P_0)$ shifted up by $jd$, and each row has $x$-projection $[0,w]$; so the middle part
+has area $(R-1)dw+b$, where $b$ is the area of $B(P_{R-1})$. By \eqref{eq:rot}, $\rho$ maps $B(P_{R-1})$ onto the
+rectangle $B(P_0')$ (a rotation by $\pi$ maps a rectangle with sides along $u$ and $v$ onto such a rectangle, and the
+highest vertex onto the lowest one), so the top part has area $A_0(y_1)$. Hence
+$wL_b=A_0(y_0)+A_0(y_1)+(R-1)dw+b$, and since $dw=b+\tan\theta$,
+\[
+wL_b-bR-|\cC_0|-|\cC_1|=E(y_0)+E(y_1)+(R-1)(dw-b)=E(y_0)+E(y_1)+(R-1)\tan\theta .
+\]
+For the second identity, $[0,S]^2$ is the union of $G$, $A$ and $T$ with disjoint interiors, $G$ is covered by the grid,
+and $A$, $T$ are the images of the two strips.
+\end{proof}
+
+The term $(R-1)\tan\theta$ is the \emph{body cost} of a band. Since $\tan\theta\approx2/b$ and $R\approx L_b$, the two
+bands cost about $4k/b$; the four ends cost $4E$, and $k^2-S^2=(b-w)(k+S)$ is tiny when $\theta$ is close to $\theta_0$.
+For the packing of Theorem~\ref{thm:A} ($y_0=0$, no end squares) $E(0)=\frac12\gamma\sigma(1+b^2)\approx b$; this is the
+end cost $\approx b$ of Remark~\ref{rem:eight}. Any packing of $\Reg(y)$ with end cost $E=o(b)$, for lifts
+$y$ in an interval of length $\sec\theta$, makes the total cost $4k/b+o(b)$; Section~\ref{sec:stair} constructs such
+packings with $E=O(b^{2/3})$.
+
+\section{The staircase end and the exponent \texorpdfstring{$2/5$}{2/5}}\label{sec:stair}
+
+In this section we prove Theorem~\ref{thm:main}. Section~\ref{ssec:stairlemma} packs a general trapezoid of the form
+$\Reg(y)$ by a staircase of columns with one common tilt (Lemma~\ref{lem:stair}); Section~\ref{ssec:b23} specializes
+to the band ends, and Section~\ref{ssec:proofmain} assembles the packing. The idea of replacing the lower squares of
+tilted columns by horizontal layers is that of [Bui, Section~3] (Section~\ref{ssec:credit}).
+
+\subsection{Columns, layers and the end lemma}\label{ssec:stairlemma}
+Fix reals $w>0$, $\mu>0$, $\sigma_0\ge0$ and $y$ with $g_0:=y-\sigma_0\mu>1$, and put
+\[
+g(X):=y+(X-\sigma_0)\mu,\qquad \Reg:=\{(X,Y):\ 0\le X\le w,\ 0\le Y\le g(X)\},
+\]
+$\bar g:=g(w)$ and $\Delta:=\bar g-g_0=w\mu$.
+$\Reg$ is a convex trapezoid of area $\int_0^wg$, and $g$ is increasing with $g(0)=g_0$. For a packing in $\Reg$ let
+$U$ be the area of $\Reg$ minus the number of unit squares of the packing (the \emph{uncovered area}).
+
+\emph{Tilt notation.} For $t\in(0,1)$ let $\alpha:=2\arctan t$, so that
+\[
+\ca=\frac{1-t^2}{1+t^2},\quad \sa=\frac{2t}{1+t^2},\quad \ta=\frac{2t}{1-t^2},\quad \se=\frac{1+t^2}{1-t^2}
+\]
+are rational if $t$ is. Put $u_\alpha:=(\ca,\sa)$, $v_\alpha:=(-\sa,\ca)$ and $\lambda(X,Y):=X+Y\ta$ (the \emph{slab
+coordinate}). We use $\se\ca=1$, $\se\sa=\ta$, $\sa\le\ta$, $\sa\le2t$, $1-\ca=2t^2/(1+t^2)\le2t^2$, and that
+$\ta$ and $\se$ are increasing in $t$.
+
+\emph{Columns.} For a real $\xi$ and integers $J\ge0$, $n\ge1$ put $P:=(\xi-J\ta,\,J)$ and
+\[
+K(\xi,J,n):=\{P+a\,u_\alpha+e\,v_\alpha:\ a\in[0,1],\ e\in[0,n]\},
+\]
+the union of the $n$ unit squares $\{P+a\,u_\alpha+e\,v_\alpha:\ a\in[0,1],\ e\in[i,i+1]\}$, $0\le i<n$: a $1\times n$
+rectangle tilted by $\alpha$ and leaning to the left, with lowest vertex $P$.
+
+\begin{lemma}[columns]\label{lem:col}
+Every point $(X,Y)$ of $K(\xi,J,n)$ satisfies
+\begin{enumerate}[label=(\roman*)]
+\item $\xi\le\lambda(X,Y)\le\xi+\se$;
+\item $J\le Y\le J+n\ca+\sa$;
+\item $X\ge\xi-J\ta-n\sa\ge\xi-(J+n)\ta$;
+\item $X\le\xi-J\ta+\ca\le\xi+\se$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For $z=P+a\,u_\alpha+e\,v_\alpha$ we have $X=\xi-J\ta+a\ca-e\sa$ and $Y=J+a\sa+e\ca$. Hence
+$\lambda=\xi-J\ta+a\ca-e\sa+J\ta+a\sa\ta+e\ca\ta=\xi+a(\ca+\sa^2/\ca)=\xi+a\se$, which is (i). (ii), (iii) and (iv)
+follow from $a\in[0,1]$, $e\in[0,n]$, $\sa,\ca\ge0$, $\sa\le\ta$ and $\ca\le1\le\se$.
+\end{proof}
+
+\begin{lemma}[the tilt]\label{lem:tiltS}
+Let $m$ be an integer and $g_0$ a real number with $1<g_0<m$. Put $D_m:=m+g_0$, $\delta:=m-g_0>0$,
+$F(t):=D_mt^2-2t-\delta$ and
+\[
+t^*:=\frac{1+\sqrt{1+D_m\delta}}{D_m}.
+\]
+Then $t^*\in(0,1)$, and for $t\in(0,1)$: $m\ca+\sa\le g_0$ if and only if $F(t)\ge0$, if and only if $t\ge t^*$.
+Moreover, if $g_0\ge\nu>0$ and $\delta\le\bar\delta$, then $t^*\le\bigl(1+\sqrt{1+2\nu\bar\delta}\bigr)/(2\nu)$.
+\end{lemma}
+
+\begin{proof}
+With $\ca,\sa$ as above, $(1+t^2)(m\ca+\sa-g_0)=m(1-t^2)+2t-g_0(1+t^2)=-F(t)$. $F$ is a convex quadratic with
+$F(0)=-\delta<0$, so $F<0$ on $[0,t^*)$ and $F>0$ on $(t^*,\infty)$, where $t^*$ is its positive root; $F(1)=2g_0-2>0$
+gives $t^*<1$. For the bound, $f(D',e):=\bigl(1+\sqrt{1+D'e}\bigr)/D'$ is increasing in $e\ge0$ and decreasing in $D'>0$,
+because
+\[
+\frac{\partial f}{\partial D'}=\frac{D'e/(2\sqrt{1+D'e})-1-\sqrt{1+D'e}}{D'^2}\quad\text{and}\quad
+\frac{D'e}{2\sqrt{1+D'e}}<\frac{\sqrt{1+D'e}}2 .
+\]
+Since $D_m=m+g_0>2g_0\ge2\nu$ and $\delta\le\bar\delta$, $t^*=f(D_m,\delta)\le f(2\nu,\bar\delta)$.
+\end{proof}
+
+\emph{The construction.} Let $Q\ge1$ be an integer (the tilt grid).
+\begin{enumerate}[label=(S\arabic*)]
+\item \emph{Column length:} $m:=\lfloor\bar g\rfloor+1$. So $m>\bar g\ge g_0$, and $\delta:=m-g_0\in(\Delta,\Delta+1]$.
+\item \emph{Tilt:} $t:=\lceil t^*Q\rceil/Q$ with $t^*=t^*(m,g_0)$ of Lemma~\ref{lem:tiltS}, so $t\in[t^*,t^*+1/Q]$;
+we require $t<1$. Let $\alpha:=2\arctan t$; this one tilt is used for all columns.
+\item \emph{Slabs:} $\xi_i:=m\ta+i\se$ for $i=0,1,2,\dots$, and $I:=\#\{i\ge0:\ \xi_i+\se\le w\}$; we require $I\ge1$,
+that is $m\ta+\se\le w$. Then $w-\se<\xi_I\le w$.
+\item \emph{Staircase:} for $0\le i<I$ let $\Gamma_i:=g(\xi_i-m\ta)$, $H(J):=J+(m-J)\ca+\sa$,
+\[
+J_i:=\Bigl\lfloor\frac{\Gamma_i-m\ca-\sa}{1-\ca}\Bigr\rfloor,\qquad n_i:=m-J_i,
+\]
+and the column $K_i:=K(\xi_i,J_i,n_i)$ ($n_i$ squares with base at height $J_i$).
+\item \emph{Layers:} for integers $j\ge0$ let $p(j):=\#\{i<I:\ J_i\le j\}$ and $a_j:=\xi_{p(j)}-j\ta$, and let $j_1$ be
+the largest $j\in\{-1,0,1,\dots,\lfloor\bar g\rfloor\}$ such that $g(a_{j'})\ge j'+1$ for all integers $0\le j'\le j$.
+For $0\le j\le j_1$ put $L_j:=\lfloor w-a_j\rfloor$ and, if $L_j\ge1$, the layer
+$\Lambda_j:=[a_j,a_j+L_j]\times[j,j+1]$ ($L_j$ axis-parallel unit squares in a row).
+\item \emph{Left wedge:} for $0\le r\le\lfloor g_0\rfloor-1$ put $l_r:=\lfloor(m-r-1)\ta\rfloor$ and, if $l_r\ge1$, the
+row $\Omega_r:=[0,l_r]\times[r,r+1]$ ($l_r$ axis-parallel unit squares).
+\end{enumerate}
+All columns have the same tilt and the same total length $m$: column $i$ keeps its top $n_i$ squares tilted, and its
+$J_i$ lowest squares are replaced by the layers $j<J_i$. Each layer raises the top of a column by exactly $1-\ca$,
+which is how a fixed tilt follows the rising ceiling ($J_0\le J_1\le\cdots$, a staircase). The left wall is handled by
+the rows $\Omega_r$ in the wedge left of the first slab, the right wall by the layers, which run from the slab
+boundary to the wall $X=w$.
+
+\begin{lemma}[end lemma]\label{lem:stair}
+Assume $g_0>1$, $t<1$ and $m\ta+\se\le w$. Then the columns $K_0,\dots,K_{I-1}$, the layers $\Lambda_j$ and the
+wedge rows $\Omega_r$ form a packing in $\Reg$, and
+\begin{multline*}
+U\le B^*:=w\sa+w(1-\ca)+\Delta(\se+m\ta)+\lfloor\bar g\rfloor\bigl(1+\tfrac12\ta\bigr)+(1+\mu\omega)\,\omega\\
++\lfloor g_0\rfloor\bigl(1+\tfrac12\ta\bigr)+(\delta+1)\ta\bigl(1+\mu(\delta+1)\ta\bigr),\qquad
+\omega:=\se+\bar g\ta .
+\end{multline*}
+\end{lemma}
+
+The seven terms are: the triangles beside the columns; the gaps above the columns (the staircase quantum $1-\ca$);
+the slope of the ceiling across one column; the ends and fractional parts of the layers; the corner at the right
+wall; the wedge rows; and the corner at the left wall. No small-angle expansion is used.
+
+\begin{proof}
+(a) \emph{The staircase exists up to the right wall.} For $0\le i<I$ we have
+$0\le\xi_i-m\ta=i\se\le\xi_i\le w-\se$, so $g_0\le\Gamma_i\le\bar g$, and $\Gamma_i$ is non-decreasing in $i$. $H$ is
+affine in $J$ with slope $1-\ca>0$ (note $t\ge t^*>0$), so $J_i=\max\{J\in\Z:\ H(J)\le\Gamma_i\}$. Moreover
+$J_i\ge0$, because $H(0)=m\ca+\sa\le g_0\le\Gamma_i$ by Lemma~\ref{lem:tiltS} ($t\ge t^*$ and $1<g_0<m$);
+$J_i\le m-1$, that is $n_i\ge1$, because $H(m)=m+\sa>m>\bar g\ge\Gamma_i$; the gap $\Gamma_i-H(J_i)$ lies in
+$[0,1-\ca)$, because $H(J_i+1)=H(J_i)+1-\ca>\Gamma_i$; and $J_0\le J_1\le\dots\le J_{I-1}$. So every slab up to the
+right wall receives a column; the columns stop only because the width runs out, and $w-\xi_I<\se$.
+
+(b) \emph{Columns lie in $\Reg$.} By Lemma~\ref{lem:col}(iii),(iv) and $J_i+n_i=m$, every point of $K_i$ has
+$X\ge\xi_i-m\ta\ge0$ and $X\le\xi_i+\se\le w$, and by (ii) and (a),
+$J_i\le Y\le H(J_i)\le\Gamma_i=g(\xi_i-m\ta)\le g(X)$.
+
+(c) \emph{Layers lie in $\Reg$.} For $0\le j\le\lfloor\bar g\rfloor$ we have $a_j\le\xi_{p(j)}\le\xi_I\le w$ and
+$a_j\ge\xi_0-j\ta=(m-j)\ta>0$. If $j\le j_1$, then $g(a_j)\ge j+1$, so every point of $\Lambda_j$ has
+$0\le a_j\le X\le a_j+L_j\le w$ and $0\le Y\le j+1\le g(a_j)\le g(X)$. Also $j_1\le\lfloor\bar g\rfloor-1$: for
+$j=\lfloor\bar g\rfloor$, $g(a_j)\le g(w)=\bar g<j+1$.
+
+(d) \emph{Wedge rows lie in $\Reg$.} For $r\le\lfloor g_0\rfloor-1$, $m-r-1\ge m-\lfloor g_0\rfloor>0$, so
+$0\le l_r\le(m-1)\ta\le w$, and $Y\le r+1\le\lfloor g_0\rfloor\le g_0=g(0)\le g(X)$ on $\Omega_r$.
+
+(e) \emph{Disjointness.} Two closed convex sets on the two sides of a line have disjoint interiors; all separations
+below are of this kind.
+\begin{itemize}
+\item Columns: for $i<i'$, $K_i\subset\{\lambda\le\xi_i+\se\}=\{\lambda\le\xi_{i+1}\}\subset\{\lambda\le\xi_{i'}\}$ and
+$K_{i'}\subset\{\lambda\ge\xi_{i'}\}$ (Lemma~\ref{lem:col}(i)). No gap is needed between slabs, because the tilt never
+changes.
+\item Wedge rows against columns and layers: $\Omega_r\subset\{\lambda\le l_r+(r+1)\ta\le(m-r-1)\ta+(r+1)\ta=\xi_0\}$,
+while the columns lie in $\{\lambda\ge\xi_0\}$ and $\Lambda_j\subset\{\lambda\ge a_j+j\ta=\xi_{p(j)}\ge\xi_0\}$ (as
+$X\ge a_j$, $Y\ge j$ and $\ta>0$ on $\Lambda_j$).
+\item Layer $\Lambda_j$ against column $K_i$: if $i<p(j)$, then $K_i\subset\{\lambda\le\xi_{i+1}\}\subset
+\{\lambda\le\xi_{p(j)}\}$ and $\Lambda_j\subset\{\lambda\ge\xi_{p(j)}\}$. If $i\ge p(j)$, then $J_i\ge j+1$ (the $J_i$ are
+non-decreasing, so $\{i:\ J_i\le j\}=\{0,\dots,p(j)-1\}$), hence $K_i\subset\{Y\ge j+1\}$ and $\Lambda_j\subset\{Y\le j+1\}$.
+\item Layers among themselves, and wedge rows among themselves, lie in different rows $[j,j+1]$.
+\end{itemize}
+
+(f) \emph{A partition of $\Reg$.} Put
+\[
+\mathrm{Wd}:=\Reg\cap\{\lambda<\xi_0\},\quad \mathcal S_i:=\Reg\cap\{\xi_i\le\lambda<\xi_{i+1}\}\ (0\le i<I),\quad
+\mathrm{Rt}:=\Reg\cap\{\lambda\ge\xi_I\},
+\]
+$\mathcal S_i^+:=\mathcal S_i\cap\{Y\ge J_i\}$, $\mathcal S_i^-:=\mathcal S_i\cap\{Y<J_i\}$ and
+$\mathrm{Lay}:=\bigcup_i\mathcal S_i^-\cup\mathrm{Rt}$. Then $\mathrm{Wd}$, the $\mathcal S_i^+$ and $\mathrm{Lay}$
+partition $\Reg$ (as $\xi_{i+1}=\xi_i+\se$, the slabs tile $[\xi_0,\xi_I)$). The interior of each placed piece lies in
+one part: $\operatorname{int}K_i\subset\mathcal S_i^+$ by Lemma~\ref{lem:col}(i),(ii);
+$\operatorname{int}\Omega_r\subset\mathrm{Wd}$ by (e); and $\operatorname{int}\Lambda_j\subset\mathrm{Lay}$, because a
+point of $\Reg$ with $\lambda\ge\xi_{p(j)}$ and $Y<j+1$ lies either in $\mathrm{Rt}$ or in some $\mathcal S_i$ with
+$i\ge p(j)$, where $J_i\ge j+1>Y$. Boundaries have measure $0$ and the pieces have disjoint interiors, so $U$ is the
+sum over the parts of the area of the part minus the number of unit squares in the pieces assigned to it.
+
+(g) \emph{The column parts.} Fix $i$ and write $J=J_i$, $n=n_i$, $H_i=H(J)$. The parallelogram
+$\Pi_i:=\{\xi_i\le\lambda\le\xi_i+\se,\ J\le Y\le H_i\}$ lies in $\Reg$: its points have
+$X\ge\xi_i-H_i\ta\ge\xi_i-m\ta\ge0$ (as $H_i\le\Gamma_i\le\bar g<m$), $X\le\xi_i+\se\le w$, and
+$Y\le H_i\le\Gamma_i=g(\xi_i-m\ta)\le g(X)$. Its horizontal sections have length $\se$, so
+$\operatorname{area}(\Pi_i)=\se(H_i-J)=\se(n\ca+\sa)=n+\ta$. The rest of $\mathcal S_i^+$ lies in $\{Y>H_i\}$; there
+$X\le\lambda<\xi_i+\se$, so $Y\le g(\xi_i+\se)=\Gamma_i+\mu(\se+m\ta)$, and the sections still have length at most
+$\se$. Hence, by (a),
+\begin{align*}
+\operatorname{area}(\mathcal S_i^+)-n_i&\le\ta+\se\bigl(\Gamma_i+\mu(\se+m\ta)-H_i\bigr)\\
+&<\ta+\se(1-\ca)+\se\,\mu(\se+m\ta).
+\end{align*}
+Summing, with $I\se=\xi_I-\xi_0\le w$, $I\ta=I\se\sa\le w\sa$ and $w\mu=\Delta$,
+\[
+\sum_i\bigl[\operatorname{area}(\mathcal S_i^+)-n_i\bigr]\le w\sa+w(1-\ca)+\Delta(\se+m\ta).
+\]
+
+(h) \emph{The layer part.} For an integer $j$ let $\mathrm{Lay}_j:=\mathrm{Lay}\cap\{j\le Y<j+1\}$. By the argument at the
+end of (f), $\mathrm{Lay}_j$ contains $\Reg\cap\{j\le Y<j+1,\ \lambda\ge\xi_{p(j)}\}$; conversely, a point of
+$\mathcal S_i^-$ at height $Y\in[j,j+1)$ has $J_i>Y\ge j$, hence $J_i\ge j+1$, that is $i\ge p(j)$ and
+$\lambda\ge\xi_{p(j)}$; and the points of $\mathrm{Rt}$ have $\lambda\ge\xi_I\ge\xi_{p(j)}$. So $\mathrm{Lay}_j=\Reg\cap\{j\le Y<j+1,\ \lambda\ge\xi_{p(j)}\}$.
+
+\emph{Rows $0\le j\le j_1$.} The section of $\mathrm{Lay}_j$ at height $Y$ lies in $[\xi_{p(j)}-Y\ta,\,w]$, so
+$\operatorname{area}(\mathrm{Lay}_j)\le\int_j^{j+1}\bigl(w-a_j+(Y-j)\ta\bigr)dY=w-a_j+\frac12\ta$, while $\Lambda_j$
+covers $L_j>w-a_j-1$ (if $L_j=0$, nothing is placed and $w-a_j<1$). So
+$\operatorname{area}(\mathrm{Lay}_j)-L_j<1+\frac12\ta$, and there are $j_1+1\le\lfloor\bar g\rfloor$ such rows by (c).
+
+\emph{The rest, $\mathrm{Lay}\cap\{Y\ge j_1+1\}$.} First, $j_1\ge J_{I-1}-1$: if $0\le j\le J_{I-1}-1$ (note
+$J_{I-1}-1\le m-2=\lfloor\bar g\rfloor-1$), then $p:=p(j)\le I-1$ and $J_p\ge j+1$, so
+$\Gamma_p\ge H(J_p)\ge J_p\ge j+1$ (as $(m-J)\ca+\sa\ge0$); and $a_j=\xi_p-j\ta\ge\xi_p-m\ta$, so
+$g(a_j)\ge\Gamma_p\ge j+1$. Hence the points of $\mathcal S_i^-$, which have $Y<J_i\le J_{I-1}\le j_1+1$, are not in
+$\{Y\ge j_1+1\}$, and $\mathrm{Lay}\cap\{Y\ge j_1+1\}=\mathrm{Rt}\cap\{Y\ge j_1+1\}$. Next, $j_1+1\le\lfloor\bar g\rfloor$
+by (c) and $j_1+1\ge J_{I-1}$, so $p(j_1+1)=I$ and, by the maximality of $j_1$, $g(a_{j_1+1})<j_1+2$, where
+$a_{j_1+1}=\xi_I-(j_1+1)\ta\ge\xi_I-\bar g\ta>w-\se-\bar g\ta=w-\omega$. Hence
+$\bar g-\mu\omega=g(w-\omega)<g(a_{j_1+1})<j_1+2$, that is $\bar g-(j_1+1)<1+\mu\omega$. The sections of $\mathrm{Rt}$
+at heights $Y\le\bar g$ lie in $[\xi_I-Y\ta,\,w]$ and have length less than $\se+\bar g\ta=\omega$, and $\mathrm{Rt}$
+lies below $Y=\bar g$. So $\operatorname{area}(\mathrm{Rt}\cap\{Y\ge j_1+1\})<\omega(1+\mu\omega)$. In total,
+\[
+\operatorname{area}(\mathrm{Lay})-\sum_jL_j<\lfloor\bar g\rfloor\bigl(1+\tfrac12\ta\bigr)+(1+\mu\omega)\,\omega .
+\]
+
+(i) \emph{The wedge part.} For $0\le r\le\lfloor g_0\rfloor-1$, the section of $\mathrm{Wd}$ at height $Y\in[r,r+1)$ lies
+in $[0,\xi_0-Y\ta]$ (note $\xi_0-Y\ta=(m-Y)\ta>0$), so
+$\operatorname{area}(\mathrm{Wd}\cap\{r\le Y<r+1\})\le\xi_0-(r+\frac12)\ta$, while $\Omega_r$ covers
+$l_r>(m-r-1)\ta-1=\xi_0-(r+1)\ta-1$ (or nothing, when $(m-r-1)\ta<1$): the waste is less than $1+\frac12\ta$ per row,
+in $\lfloor g_0\rfloor$ rows. The points of $\mathrm{Wd}$ with $Y\ge\lfloor g_0\rfloor$ have
+$0\le X<\xi_0-Y\ta\le(m-\lfloor g_0\rfloor)\ta<(\delta+1)\ta$ and
+$Y\le g(X)\le g_0+\mu(\delta+1)\ta<\lfloor g_0\rfloor+1+\mu(\delta+1)\ta$, so their area is less than
+$(\delta+1)\ta\bigl(1+\mu(\delta+1)\ta\bigr)$.
+
+Adding (g), (h) and (i) gives $U\le B^*$.
+\end{proof}
+
+The bound holds for every $y$ with $g_0>1$: no tuning of $y$, $m$ or $\alpha$ is needed, and by (a) every slab up to
+the right wall gets a column.
+
+\subsection{The band ends}\label{ssec:b23}
+
+\begin{corollary}\label{cor:b23}
+Let $b\ge10^4$ be an integer, $x:=b^{-1/3}$, $\kappa:=3/4$, $\tan(\theta/2)=b/(b^2-1)$, and $w,\gamma,\sigma$ as in
+Section~\ref{sec:ends}. Let $y$ be any real number with
+\[
+\kappa b^{2/3}\le y\le\kappa b^{2/3}+2 .
+\]
+Apply the construction of Section~\ref{ssec:stairlemma} with $\sigma_0=\sigma$ and $\mu=\tan\theta$ (so that
+$\Reg=\Reg(y)$ of Section~\ref{sec:ends}), and with any integer $Q\ge16b$. Then the construction gives a packing in
+$\Reg(y)$ with
+\[
+U\ \le\ \Phi(x)\,b^{2/3}\ \le\ \Phi(10^{-4/3})\,b^{2/3}\ \le\ 5.03\,b^{2/3},
+\]
+where $\Phi$, defined in the proof, is non-decreasing on $(0,10^{-4/3}]$, $\Phi(10^{-4/3})\le5.0163$ and
+$\Phi(x)\to\sqrt{A/\kappa}+3/2\approx4.3284$ as $x\to0$, with $A:=6.000002$. Consequently the end cost of
+Proposition~\ref{prop:waste} satisfies $E(y)=U+\frac12\tan\theta\le5.03\,b^{2/3}+1.0001/b$.
+\end{corollary}
+
+\begin{proof}
+(i) \emph{Band facts.} Write $t_\theta:=b/(b^2-1)$ and $u:=b^{1/3}=1/x$. Then $t_\theta\le1.00000002/b$ (since
+$bt_\theta=b^2/(b^2-1)$), $\sigma<2t_\theta\le2.0000001/b$ and $\mu=2t_\theta/(1-t_\theta^2)\le2.000001/b$; so
+$\Delta=w\mu<b\mu\le2.000001$ and $\sigma\mu\le4.1\cdot10^{-8}$. Also $w<b$ by Lemma~\ref{lem:width}, as $t_\theta>1/b$,
+and $w\ge b\gamma=b\bigl(1-2t_\theta^2/(1+t_\theta^2)\bigr)\ge b-2bt_\theta^2\ge b-2.1/b$.
+
+(ii) \emph{Ranges.} $g_0=y-\sigma\mu\in[\kappa u^2-4.1\cdot10^{-8},\ \kappa u^2+2]$. Put
+$\nu:=\kappa u^2-5\cdot10^{-8}=p(x)u^2$ with $p(x):=\kappa-5\cdot10^{-8}x^2$; then $g_0\ge\nu>1$. Next
+$\bar g=y+(w-\sigma)\mu\le y+\Delta\le\kappa u^2+4.000001$, $m=\lfloor\bar g\rfloor+1\le\kappa u^2+5.000001$,
+$\lfloor g_0\rfloor\le\kappa u^2+2$, and $\delta=m-g_0\in(\Delta,\Delta+1]$, so $\delta\le\bar\delta:=3.000001$ and
+$\delta+1\le4.000001$.
+
+(iii) \emph{Tilt.} By Lemma~\ref{lem:tiltS} with $g_0\ge\nu$, $\delta\le\bar\delta$ and $A=2\bar\delta$,
+\[
+u\,t^*\le u\,\frac{1+\sqrt{1+2\nu\bar\delta}}{2\nu}=\frac{x+\sqrt{x^2+Ap(x)}}{2p(x)}\le\frac{x+\sqrt{x^2+A\kappa}}{2p(x)},
+\]
+and $u/Q\le u/(16u^3)=x^2/16$. So $t\le t^*+1/Q\le x\vartheta(x)=:\bar t(x)$ with
+\[
+\vartheta(x):=\frac{x+\sqrt{x^2+A\kappa}}{2p(x)}+\frac{x^2}{16}.
+\]
+Put $\bar\tau:=2\bar t/(1-\bar t^2)$ and $\bar\varsigma:=(1+\bar t^2)/(1-\bar t^2)$. Then $\ta\le\bar\tau$,
+$\se\le\bar\varsigma$, $\sa\le2t\le2\bar t$ and $1-\ca\le2t^2\le2\bar t^2$. At $x_0:=10^{-4/3}$ (that is, $b=10^4$),
+$\bar t\le0.0672$ and $\bar\tau\le0.1349$.
+
+(iv) \emph{The hypotheses of Lemma~\ref{lem:stair}.} $g_0>1$ by (ii); $t\le\bar t(x)\le\bar t(x_0)\le0.0672<1$ by the
+monotonicity in (v); and $m\ta+\se\le(0.75\,b^{2/3}+5.000001)\cdot0.1349+1.01<b-2.1/b\le w$, since $b^{2/3}\le b/21.5$
+for $b\ge10^4$. Lemma~\ref{lem:stair} gives the packing and $U\le B^*$. We divide each term of $B^*$ by $u^2=b^{2/3}$,
+using $w<b=u^3$, $\Delta\le2.000001$, $\mu\le2.000001\,x^3$ and $\omega=\se+\bar g\ta$:
+\begin{align*}
+T_1&=w\sa/u^2\le2ut\le2\vartheta(x),\qquad T_2=w(1-\ca)/u^2\le2ut^2\le2x\vartheta(x)^2,\\
+T_3&=\Delta(\se+m\ta)/u^2\le2.000001\bigl[x^2\bar\varsigma+(\kappa+5.000001\,x^2)\bar\tau\bigr],\\
+T_4&=\lfloor\bar g\rfloor\bigl(1+\tfrac12\ta\bigr)/u^2\le(\kappa+4.000001\,x^2)\bigl(1+\tfrac12\bar\tau\bigr),\\
+T_5&=(1+\mu\omega)\,\omega/u^2\le(1+2.000001\,x\,\bar\omega)\,\bar\omega,\qquad
+\bar\omega:=x^2\bar\varsigma+(\kappa+4.000001\,x^2)\bar\tau,\\
+T_6&=\lfloor g_0\rfloor\bigl(1+\tfrac12\ta\bigr)/u^2\le(\kappa+2x^2)\bigl(1+\tfrac12\bar\tau\bigr),\\
+T_7&=(\delta+1)\ta\bigl(1+\mu(\delta+1)\ta\bigr)/u^2\le4.000001\,\bar\tau x^2\bigl(1+2.000001\cdot4.000001\,x^3\bar\tau\bigr).
+\end{align*}
+For $T_5$ we used $\omega/u^2\le\bar\omega$ and $\mu\omega\le2.000001\,x^3u^2\bar\omega=2.000001\,x\bar\omega$. Let
+$\Phi(x)$ be the sum of the seven right-hand sides.
+
+(v) \emph{Monotonicity.} On $0<x\le x_0$, $p(x)$ is positive and decreasing and $x+\sqrt{x^2+A\kappa}$ is increasing,
+so $\vartheta$ is increasing; $\bar t=x\vartheta$ is increasing and less than $1$, so $\bar\tau$ and $\bar\varsigma$ are
+increasing. Every right-hand side in (iv) is a sum of products of non-negative non-decreasing functions of $x$. So
+$\Phi$ is non-decreasing in $x$, that is non-increasing in $b$, and $\Phi(x)\le\Phi(x_0)$ for all $b\ge10^4$.
+
+(vi) \emph{Values.} In interval arithmetic, $\Phi(x_0)\le5.01625$ (the terms are about $2.89126$, $0.19400$,
+$0.20946$, $0.80975$, $0.10545$, $0.80515$ and $0.00116$). As $x\to0$, $T_1\to\sqrt{A\kappa}/\kappa=\sqrt{A/\kappa}$,
+$T_4,T_6\to\kappa$ and the other terms tend to $0$, so $\Phi\to\sqrt{A/\kappa}+3/2$. Finally $A_0(y)$ exceeds the area
+of $\Reg(y)$ by $\frac12\tan\theta$ (the triangle with vertices $(0,y-\sigma\mu)$, $(\sigma,y)$, $(0,y+\gamma)$), and
+$\tan\theta\le2.000001/b$.
+\end{proof}
+
+The values in (iii) and (vi) were certified in interval arithmetic (\texttt{mpmath.iv}, $40$ digits, with $x_0$
+enclosed in an interval) by the author's program and by three independent computations (two reviews and an
+independent reimplementation), which all give $\Phi(x_0)\in[5.0162487,\,5.0162488]$; one of them also
+bounds $\Phi$ on all of $(0,x_0]$ by a subdivision into $4000$ intervals, without using (v), and finds the maximum
+$5.0163$ at $x_0$. For larger $b$ the constant improves: $\Phi(10^{-5/3})\le4.6351$, $\Phi(10^{-2})\le4.4685$,
+$\Phi(10^{-8/3})\le4.3583$. The choice $\kappa=3/4$ is close to the minimizer $(\sqrt6/4)^{2/3}\approx0.721$ of the
+limit $\sqrt{6/\kappa}+2\kappa$. The window has length $2>\sec\theta$, which is what Section~\ref{ssec:proofmain}
+needs: the bound holds for every $y$ in the window, not only at sampled points.
+
+\subsection{Proof of Theorem~\ref{thm:main}}\label{ssec:proofmain}
+Let $C_E:=5.03$, $k\ge k_0=1.6\cdot10^7$, $b_*:=(3k/(2C_E))^{3/5}$ (so $k=\frac23C_Eb_*^{5/3}$) and $b:=\lceil b_*\rceil$.
+Since $k_0\ge\frac23C_E\cdot10^{20/3}\approx1.5565\cdot10^7$, we have $b\ge b_*\ge10^4$; since $3/(2C_E)<1$,
+$b\le k^{3/5}+1$. Take $\tan(\theta/2)=b/(b^2-1)>1/b$; then $w<b$ and $S:=k-b+w<k$. Use the packing of
+Corollary~\ref{cor:assembly} with
+\[
+y_0:=\tfrac14\bigl\lceil3b^{2/3}\bigr\rceil\in\bigl[\kappa b^{2/3},\ \kappa b^{2/3}+\tfrac14\bigr]
+\]
+and, in each band, $R:=\lfloor(L_b-h-2y_0)/d\rfloor+1$. Here $h=b\sigma+\gamma<3$ (as $b\sigma=2b^2(b^2-1)/((b^2-1)^2+b^2)<2$) and
+$y_0\le0.75(k^{3/5}+1)^{2/3}+\frac14\le0.75\,k^{2/5}+1$, so $h+2y_0<1.5\,k^{2/5}+5<k-b\le L_b$; hence $R\ge1$ and
+$y_1=L_b-h-(R-1)d-y_0\in[y_0,\,y_0+d)$. As $d<1.0001$, both $y_0$ and $y_1$ lie in the window of
+Corollary~\ref{cor:b23}, whatever value $y_1$ takes. Fill the four end regions $\Reg(y_0)$, $\Reg(y_1)$ of the two bands
+by Corollary~\ref{cor:b23} with $Q$ the least power of $2$ that is at least $16b$. By Corollary~\ref{cor:assembly} this is
+a packing in $[0,S]^2$, and by Proposition~\ref{prop:waste}
+\[
+k^2-N=(k^2-S^2)+\sum_{\text{2 bands}}\bigl[(R-1)\tan\theta+E(y_0)+E(y_1)\bigr].
+\]
+\begin{itemize}
+\item $(R-1)\tan\theta=(R-1)d\sin\theta=(L_b-h-y_0-y_1)\sin\theta\le L_b\sigma<2L_bt_\theta$, so the two bands give less
+than $(S+k-b)\,2t_\theta<4kb/(b^2-1)=4k/b+4k/(b(b^2-1))$.
+\item $b-w=2t_\theta(bt_\theta-1)/(1+t_\theta^2)=2t_\theta/((b^2-1)(1+t_\theta^2))<2b/(b^2-1)^2$, so
+$k^2-S^2<2k(b-w)<4kb/(b^2-1)^2$.
+\item $\sum E\le4\bigl(C_Eb^{2/3}+\frac12\tan\theta\bigr)$ by Corollary~\ref{cor:b23}.
+\end{itemize}
+Hence $k^2-N<4k/b+4C_Eb^{2/3}+\lambda'$ with $\lambda':=4k/(b(b^2-1))+4kb/(b^2-1)^2+2\tan\theta\le8.001\,k/b^3+4.1/b$.
+Since $k\le\frac23C_Eb^{5/3}$, $8.001\,k/b^3\le8.001\cdot\frac23C_E\,b^{-4/3}\le1.25\cdot10^{-4}$, and
+$4.1/b\le4.1\cdot10^{-4}$; so $\lambda'<1$, and Lemma~\ref{lem:reduction} gives
+$\cs(k)\le k^2-N-1<4k/b+4C_Eb^{2/3}$. Finally $4k/b\le4k/b_*=\frac83C_Eb_*^{2/3}$ and
+$b^{2/3}\le(b_*+1)^{2/3}\le b_*^{2/3}+\frac23b_*^{-1/3}\le b_*^{2/3}+\frac23\cdot10^{-4/3}$, so
+\[
+\cs(k)<\frac{20}3C_Eb_*^{2/3}+\frac83C_E\cdot10^{-4/3}=\frac{20}3\Bigl(\frac32\Bigr)^{2/5}C_E^{3/5}k^{2/5}
++\frac83C_E\cdot10^{-4/3}.
+\]
+In interval arithmetic,
+\[
+\tfrac{20}3\bigl(\tfrac32\bigr)^{2/5}5.03^{3/5}\in[20.66740,\,20.66741]\quad\text{and}\quad
+\tfrac83\cdot5.03\cdot10^{-4/3}\in[0.62259,\,0.62260],
+\]
+which gives Theorem~\ref{thm:main}. For every $C>\sqrt{A/\kappa}+3/2\approx4.3284$ we
+have $\Phi(b^{-1/3})\le C$ for all large $b$, and the same argument with $C$ in place of $C_E$ gives
+$\cs(k)\le(\frac{20}3(\frac32)^{2/5}C^{3/5}+o(1))k^{2/5}$; letting $C$ tend to the limit gives
+$\cs(k)\le(18.89+o(1))k^{2/5}$. \qed
+
+\begin{remark}[comparison and exact checks]\label{rem:stairexact}
+The construction of Section~\ref{ssec:stairlemma} was implemented in exact rational arithmetic, with $Q$ the least power
+of $2$ that is at least $16b$. For $b=400$, $1600$, $6400$, $25600$, $102400$ and five lifts each in the window of
+Corollary~\ref{cor:b23}, all $25$ end packings were checked by an exact checker that does not use
+Lemma~\ref{lem:stair} (shapes, containment, separating axis tests for all pairs of pieces with overlapping bounding
+boxes; for $b=102400$ also by a check of the separating lines of the proof); all pass, $U\le B^*$ holds in each, and
+$U/b^{2/3}$ stays between $3.26$ and $4.36$. Deliberately corrupted versions (a column shifted by $2^{-30}$, a layer
+lengthened, a column given one more square, and so on) were rejected. The full packings of
+Section~\ref{ssec:proofmain}, counted exactly (the four ends checked by exact containment and by the separating lines
+of the proof; the rows not checked, their correctness rests on Lemmas~\ref{lem:stack} and~\ref{lem:ends}; the identity
+of Proposition~\ref{prop:waste} checked exactly), give:
+\begin{center}
+\small
+\begin{tabular}{rrrrr}
+\toprule
+$k$ & $b$ & $y_0$ & $\cs(k)\le$ & $20.668\,k^{2/5}+0.623$\\
+\midrule
+$10^5$ & $484$ & $185/4$ & $1794$ & ($k<k_0$)\\
+$10^6$ & $1927$ & $465/4$ & $4467$ & ($k<k_0$)\\
+$10^7$ & $7669$ & $1167/4$ & $10579$ & ($k<k_0$)\\
+$1.6\cdot10^7$ & $10167$ & $352$ & $12707$ & $15738.5$\\
+$3.825\cdot10^7$ & $17152$ & $499$ & $17865$ & $22303.0$\\
+$10^8$ & $30530$ & $2931/4$ & $26998$ & $32757.2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+For $k<k_0$ these packings are still valid (Lemma~\ref{lem:stair} does not need $b\ge10^4$); only the closed form of
+Theorem~\ref{thm:main} is restricted to $k\ge k_0$. An independent reimplementation, written from the text of the proof
+only (with its own admissible choices of $Q$), checked the end packings exactly for $b$ up to $4\cdot10^5$ and many
+lifts in the window, and the full packings for $k=1.6\cdot10^7$, $3.825\cdot10^7$, $10^8$, $10^9$ and $3\cdot10^9$: no
+overlaps, no containment errors, $U\le B^*$ in every case, and $\cs(10^9)\le67065$, $\cs(3\cdot10^9)\le99640$ (against
+$82281.4$ and $127687.7$ from Theorem~\ref{thm:main}); $8$ of $8$ deliberately corrupted versions were rejected. It
+relies on Lemmas~\ref{lem:stack} and~\ref{lem:ends} for the rows. The tuned packings of Theorem~\ref{thm:cert} are
+$4.9$--$11.8\%$ better than these (Section~\ref{sec:cert}).
+\end{remark}
+
+\section{Chained wall fillers and the exponent \texorpdfstring{$3/8$}{3/8}}\label{sec:38}
+
+In the end lemma of Section~\ref{sec:stair} the columns cost about $b/\sqrt m$ and the two walls about $m$ each. In this
+section the walls are filled more efficiently: each wall is a thin trapezoid, and it is filled by a chain of
+staircases (\emph{blocks}) whose tilt is lowered slightly from block to block, so that the horizontal layers opened in
+one block close just before the next block. The wall cost becomes $O(m^{3/4})$, the best column length is
+$m\asymp b^{4/5}$, the end cost is $O(b^{3/5})$, and Proposition~\ref{prop:waste} gives Theorem~\ref{thm:main38}. The
+ideas (horizontal layers under tilted columns, and filling the wall trapezoids by stairs whose tilt is lowered from
+block to block) are those of Bui [Bui, Sections~3--4]; the construction and the proof below are self-contained and do not
+use any argument of [Bui].
+
+Throughout this section we use the tilt notation of Section~\ref{ssec:stairlemma}, the columns $K(\xi,J,n)$ and
+Lemmas~\ref{lem:col} and~\ref{lem:tiltS}, and we put
+\[
+q:=1-\ca=\frac{\ta^2}{\se(\se+1)}\le\frac{\ta^2}2,\qquad\text{so that}\qquad \se-1=q\se,\quad \se\sa=\ta .
+\]
+$q$ is increasing in $t$. On $t\in(0,1/10]$ we have $\ta\le2.1t$, and $t\mapsto\ta$ has derivative
+$2(1+t^2)/(1-t^2)^2\le2.1$, so neighbouring points of a grid $(1/Q^*)\Z$ differ in $\ta$ by at most
+$\delta_Q:=2.1/Q^*$. A tilt with index $0$ (as $t_0$, $\alpha_0$) is the \emph{initial tilt} of a wall. Two closed convex
+sets that lie in the two closed half-planes of one line have disjoint interiors; every disjointness statement below is
+of this kind.
+
+\emph{Grids.} $Q$ is the grid of the main tilt: any power of $2$ with $Q\ge16b$. The wall tilts and the cut tilt use the
+grid $Q^*:=\max(2^{40},Q)$, and the phases the grid $Q_f:=\max(2^{48},Q)$.
+
+\subsection{The wall filler}\label{ssec:wall}
+For reals $\chi\ge4$, $\zeta>0$ and $L\ge0$ let $r(x):=\chi+\zeta x$ and
+\[
+Z=Z(\chi,\zeta,L):=\{(x,y):\ 0\le x\le L,\ 0\le y\le r(x)\},
+\]
+a right trapezoid of area $L\chi+\zeta L^2/2$. The input is a grid tilt $t_0\in(0,1/10]\cap(1/Q^*)\Z$; put
+$N_0:=\lfloor\chi\rfloor-1\ge3$. For a block $\beta$ with tilt $t_\beta$ we write $\lambda_\beta(x,y):=x+y\tan\alpha_\beta$.
+
+\emph{Construction ZC.}
+\begin{enumerate}[label=(Z\arabic*)]
+\item \emph{Block $0$:} tilt $t_0$, base $F_0:=\lfloor\chi-N_0\caz-\saz\rfloor\ge0$, total length $M_0:=F_0+N_0$, offset
+$s_0:=M_0\taz$.
+\item \emph{Block $\beta$} has tilt $t_\beta$ (with $\ca,\sa,\ta,\se,q$), offset $s_\beta$, base $F_\beta$ and total
+length $M_\beta=F_\beta+N_0$. If $s_\beta+\se>L$ the chain stops (block $\beta$ does not exist). Otherwise, for
+$i=0,1,2,\dots$ let $\xi_i:=s_\beta+i\se$; stop (reason `$L$') if $\xi_i+\se>L$; else let
+$\Gamma_i:=r(\xi_i-M_\beta\ta)$ and $\tilde J_i:=\lfloor(\Gamma_i-M_\beta\ca-\sa)/q\rfloor$; stop (reason
+`saturation') if $\tilde J_i>M_\beta-1$; else place the column $K(\xi_i,J_i,n_i)$ with $J_i:=\tilde J_i$,
+$n_i:=M_\beta-J_i$. Let $P_\beta$ be the number of columns and $\hat\xi_\beta:=s_\beta+P_\beta\se$.
+\item \emph{Next block.} If block $\beta$ stopped by saturation (it is \emph{complete}), let $\kappa_\beta:=q^2/\zeta$,
+let $t_{\beta+1}$ be the largest grid point $t'\le t_\beta$ with $\tan\alpha'\le\ta-\kappa_\beta$, and put
+$\hat\kappa_\beta:=\ta-\tan\alpha_{\beta+1}\ge\kappa_\beta$ and $\eta_\beta:=\hat\kappa_\beta-\kappa_\beta\in[0,\delta_Q)$.
+\emph{Phase:} let $J_{\rm lo}:=J_0$ and $J_{\rm L}:=J_{P_\beta-1}$ (indices of block $\beta$). If $J_{\rm L}>J_{\rm lo}$, put
+$A:=(\Gamma_0-M_\beta\ca-\sa)/q$, $B:=q/(\zeta\se)$, $p:=\#\{i:\ J_i\le J_{\rm lo}\}$, $f:=p-B(J_{\rm lo}+1-A)$,
+\[
+\psi:=\hat\xi_\beta-\tan\alpha_{\beta+1}-(s_\beta+p\se)+J_{\rm lo}\hat\kappa_\beta,\qquad
+\omega_0:=\operatorname{frac}\bigl(-(\psi+f(\se-1)-(\se-1))\bigr),
+\]
+and $\omega:=\lceil\omega_0Q_f\rceil/Q_f\in[0,1]$; otherwise $\omega:=0$. Then $s_{\beta+1}:=\hat\xi_\beta+\omega$ and,
+with primes for the tilt $t_{\beta+1}$,
+\begin{align*}
+F_{\beta+1}&:=\max\{J\in\Z:\ J+N_0\ca'+\sa'\le r(s_{\beta+1}-(J+N_0)\ta')\}\\
+&=\Bigl\lfloor\frac{\chi+\zeta s_{\beta+1}-N_0(\ca'+\zeta\ta')-\sa'}{1+\zeta\ta'}\Bigr\rfloor,
+\end{align*}
+$M_{\beta+1}:=F_{\beta+1}+N_0$.
+\item \emph{Rows.} Block $\beta$ \emph{blocks} row $j$ if $J_{\beta,0}\le j$ ($J_{\beta,i}$ is $J_i$ of block $\beta$).
+For each integer $0\le j<\lfloor r(L)\rfloor$, walk from $x=0$ to $x=L$: a \emph{stretch} starts at $x=0$ or just after
+a blocking block $\beta$, at the abscissa $\xi_{\beta,p}-j\tan\alpha_\beta$ with $p:=\#\{i:\ J_{\beta,i}\le j\}$
+($p=P_\beta$ allowed, $\xi_{\beta,P_\beta}=\hat\xi_\beta$), and ends at the next blocking block $\beta_2$, at the
+abscissa $s_{\beta_2}-(j+1)\tan\alpha_{\beta_2}$, or at $x=L$. For a stretch from $a$ to $a^+$ with $a^+-a\ge1$, $a\ge0$
+and $j+1\le r(a)$, place the row $[a,\,a+\lfloor a^+-a\rfloor]\times[j,j+1]$.
+\end{enumerate}
+Each block is one staircase of Section~\ref{ssec:stairlemma} (one tilt, total length $M_\beta$, $J$ non-decreasing); a
+block ends when its staircase is used up, and the next block starts after a phase gap $\omega<1$ with the slightly
+smaller tilt, chosen so that every layer opened in the block ends just before the next block with a small residual
+(see (R) below).
+
+\emph{Parameters.} Let $\varpi\in(0,1)$ (we use $\varpi=0.65$), let $q_{\min}$ be the value of $q$ at the slope
+$\varpi\taz$, that is $q_{\min}:=(\varpi\taz)^2/(s_m(s_m+1))$ with $s_m:=\sqrt{1+\varpi^2\taz^2}$, and put
+$M_{\max}:=r(L)+N_0q_0$ ($q_0$ is $q$ at $t_0$),
+\[
+\Lambda:=\frac{q_{\min}N_0-1-\zeta\taz}{\zeta},\qquad \Kb:=\frac L\Lambda,\qquad
+\varepsilon_W:=(\sez-1)+N_0\delta_Q+\frac1{Q_f}.
+\]
+\emph{Hypotheses.}
+\begin{enumerate}[label=(W\arabic*)]
+\item $\Lambda\ge N_0\taz$ (in particular $\Lambda>0$);
+\item $\Delta_{\rm dr}:=\dfrac{q_0}{N_0}\Bigl(L+\Kb\,\dfrac{1+\zeta\taz}{\zeta}\Bigr)+\Kb\delta_Q<(1-\varpi)\taz$;
+\item $N_0\caz\ge\dfrac{\zeta\sez}{q_{\min}}+\taz+\zeta(2+\sez+M_{\max}\taz)+\dfrac{1+\zeta\taz}{q_{\min}}$;
+\item $\varepsilon_W<1$;
+\item $\delta_Q\le\varpi\taz$ and $t_0\le1/10$.
+\end{enumerate}
+
+\begin{lemma}[wall filler]\label{lem:W}
+Under (W1)--(W5) the construction ZC does not fail, its pieces form a packing in $Z$, and the uncovered area
+$U_Z:=\operatorname{area}(Z)-\#\text{squares}$ satisfies
+\begin{multline*}
+U_Z\le B_W:=Lc_{\rm col}+\Kb\Bigl[(N_0-1)(\varepsilon_W+\taz)+\frac{1+\zeta\taz}{q_{\min}}(1+\taz)+A_T\Bigr]\\
++\lfloor\chi\rfloor\bigl(1+\tfrac12\taz\bigr)+w_0(1+\zeta w_0)+r(L)\bigl(1+\tfrac12\taz\bigr)+w_e(4+2\zeta w_e),
+\end{multline*}
+where $c_{\rm col}:=\taz+\sez q_0+\sez\zeta(\sez+N_0q_0\taz)$, $A_T:=h_Tw_T$,
+\[
+h_T:=1+\frac{\zeta\sez}{q_{\min}}+\taz+\zeta(1+\sez+M_{\max}\taz),\qquad
+w_T:=1+(r(L)+1)\Bigl(\frac{q_0^2}\zeta+\delta_Q\Bigr),
+\]
+$w_0:=(1+N_0q_0)\taz$ and $w_e:=1+\sez+(r(L)+N_0q_0)\taz$.
+\end{lemma}
+
+The terms are: column triangles, gaps and ceiling slope; aligned closings; unaligned closings; transition slivers; the
+left end; the right end.
+
+\begin{proof}
+(a) \emph{One block.} Fix an existing block $\beta$ with tilt $t$ ($\ca,\sa,\ta,\se,q$), offset $s$, base $F$ and total
+$M=F+N_0$, and assume the invariants
+\begin{enumerate}[label=(I\arabic*)]
+\item $\ta\ge\varpi\taz$ (hence $q\ge q_{\min}$);
+\item $s\ge M\ta$;
+\item $F\ge0$ and $F+N_0\ca+\sa\le r(s-M\ta)<F+1+N_0\ca+\sa+\zeta\ta$.
+\end{enumerate}
+(I3) holds for $\beta=0$ ($\Gamma_0=r(0)=\chi$ and the definition of $F_0$) and for $\beta+1$ by the definition of
+$F_{\beta+1}$ as a maximum ($J=F_{\beta+1}+1$ violates the defining inequality, and
+$r(s'-(F'+1+N_0)\ta')=r(s'-M'\ta')-\zeta\ta'$).
+$\Gamma_i=r(s-M\ta)+i\zeta\se$ is affine in $i$, so $\tilde J_i=\lfloor A+i/B\rfloor$, and the $J_i$ are non-decreasing.
+$H(J):=J+(M-J)\ca+\sa$ is affine in $J$ with slope $q$, so $J_i=\max\{J:\ H(J)\le\Gamma_i\}$ and the gap
+$\Gamma_i-H(J_i)$ lies in $[0,q)$. $J_0\ge F$ because $H(F)=F+N_0\ca+\sa\le\Gamma_0$ by (I3); so $J_i\ge F$,
+$n_i\le N_0$, and $n_i\ge1$ (no saturation). By (I3), $A<F+(1+\zeta\ta)/q$, so $J_0<F+(1+\zeta\ta)/q$.
+The block is not empty: it exists, so $s+\se\le L$, and $J_0<F+(1+\zeta\taz)/q_{\min}<F+N_0$ by (W1); so
+$\tilde J_0\le M-1$ and $P\ge1$.
+\emph{Containment of columns} (Lemma~\ref{lem:col}, $J_i+n_i=M$): $X\ge\xi_i-M\ta\ge s-M\ta\ge0$ by (I2),
+$X\le\xi_i+\se\le L$, and $J_i\le Y\le H(J_i)\le\Gamma_i=r(\xi_i-M\ta)\le r(X)$.
+\emph{Length of a complete block.} Saturation at $i=P$ means $A+P/B\ge M$, so $P>B(N_0-(1+\zeta\ta)/q)$ and
+\begin{equation}\label{eq:L1}
+\Lambda_\beta:=P\se>\frac{qN_0-1-\zeta\ta}{\zeta}\ge\Lambda,\qquad\text{equivalently}\qquad
+q\le\frac{\zeta\Lambda_\beta+1+\zeta\ta}{N_0}
+\end{equation}
+(the middle expression is increasing in $q$ and decreasing in $\ta$; use $q\ge q_{\min}$, $\ta\le\taz$).
+\emph{Last column of a complete block:} $J_{\rm L}:=J_{P-1}\ge\tilde J_P-1/B-1\ge M-1/B-1$, so
+$n_{\rm L}:=M-J_{\rm L}\le1+1/B=1+\zeta\se/q$.
+
+(b) \emph{Passing to block $\beta+1$} ($\beta$ complete; primes refer to $t_{\beta+1}$).
+\emph{Tilt drift.} Let $C_\beta$ be the sum of $\kappa_\gamma+\delta_Q$ over the complete blocks $\gamma\le\beta$, and
+suppose (I1) for the blocks $0,\dots,\beta$. By \eqref{eq:L1} these blocks have total length at least
+$(\beta+1)\Lambda$ inside $[0,L]$, so $\beta+1\le\Kb$; and by \eqref{eq:L1},
+$\kappa_\gamma=q_\gamma^2/\zeta\le(q_0/N_0)\bigl(\Lambda_\gamma+(1+\zeta\taz)/\zeta\bigr)$. Summing ($\sum\Lambda_\gamma\le L$)
+gives $C_\beta\le\Delta_{\rm dr}<(1-\varpi)\taz$ by (W2). By induction $\tan\alpha_\beta\ge\taz-C_{\beta-1}$, so
+$\ta-\kappa_\beta\ge\taz-C_\beta+\delta_Q>\varpi\taz+\delta_Q\ge\tan\alpha(1/Q^*)$ by (W5): a positive grid point $t'$
+exists, and $\ta'>\ta-\kappa_\beta-\delta_Q\ge\taz-C_\beta>\varpi\taz$. So (I1) holds for $\beta+1$, and $t'\le t$,
+$\ca'\ge\ca$.
+\emph{$F'\ge F$.} $J=F$ is admissible in the definition of $F'$:
+$r(s'-M\ta')\ge r(\hat\xi-M\ta)=\Gamma_P$, saturation gives $\Gamma_P\ge M\ca+\sa+qM=M+\sa$, and
+$F+N_0\ca'+\sa'\le M+\sa'\le M+\sa$.
+\emph{$J'_0\le J_{\rm L}$.} By maximality of $J_{\rm L}$,
+$\Gamma_{P-1}<H(J_{\rm L}+1)\le J_{\rm L}+n_{\rm L}+\sa$. As $s'\le\hat\xi+1=\xi_{P-1}+\se+1$,
+$r(s')\le\Gamma_{P-1}+\zeta(1+\se+M\ta)$. By (I3) for $\beta+1$,
+$F'+N_0\ca'+\sa'\le r(s'-M'\ta')\le r(s')$, so $F'<J_{\rm L}+n_{\rm L}+\sa-N_0\ca'+\zeta(1+\se+M\ta)$; and by (a) for
+block $\beta+1$, $J'_0<F'+(1+\zeta\ta')/q'$. With $n_{\rm L}\le1+\zeta\se/q$, $M\le M_{\max}$ (from $F+N_0\ca+\sa\le r(L)$),
+$\ca'\ge\caz$, $q,q'\ge q_{\min}$, $\se\le\sez$, $\sa\le\taz$, hypothesis (W3) gives $J'_0<J_{\rm L}+1$.
+\emph{(I2) for $\beta+1$:} $M'=F'+N_0\le J'_0+N_0\le J_{\rm L}+N_0\le M-1+N_0$, so
+$M'\ta'\le M\ta+N_0\taz\le s+\Lambda_\beta=\hat\xi\le s'$ by (I2), \eqref{eq:L1} and (W1).
+\emph{Aligned closings.} For $J_{\rm lo}\le j<J_{\rm L}$ put $p(j):=\#\{i:\ J_i\le j\}$; then $1\le p(j)\le P-1$ and,
+since $j\ge\lfloor A\rfloor=J_{\rm lo}$, $p(j)=\lceil B(j+1-A)\rceil=B(j+1-A)+f_j$ with $f_j\in[0,1)$. The stretch of row
+$j$ from $a_j=\xi_{p(j)}-j\ta$ to $s'-(j+1)\ta'$ has length $\ell_j=s'-\ta'-s-p(j)\se+j\hat\kappa$. Modulo $1$ (as
+$p(j)$ is an integer and $\se=1+(\se-1)$, and $B(\se-1)=q(\se-1)/(\zeta\se)=q^2/\zeta=\kappa$),
+\[
+\ell_j\equiv\omega+C+j\eta-f_j(\se-1),\qquad C:=\hat\xi-\ta'-s-B(1-A)(\se-1).
+\]
+By (Z3), $\psi+f(\se-1)\equiv C+J_{\rm lo}\eta$, so $\omega_0+C+J_{\rm lo}\eta-(\se-1)$ is an integer and
+\[
+\ell_j\equiv(\omega-\omega_0)+(j-J_{\rm lo})\eta+(1-f_j)(\se-1)\pmod1,
+\]
+where $0\le\omega-\omega_0<1/Q_f$, $0\le(j-J_{\rm lo})\eta<N_0\delta_Q$ (as $J_{\rm L}-J_{\rm lo}\le N_0-1$) and
+$0<(1-f_j)(\se-1)\le\sez-1$. The right-hand side lies in $(0,\varepsilon_W]$ with $\varepsilon_W<1$ (W4). Also
+$\ell_j\ge\hat\xi-\xi_{p(j)}-\ta'\ge\se-\ta'>0$. Hence
+\[
+\ell_j\ge0\quad\text{and}\quad\operatorname{frac}(\ell_j)\le\varepsilon_W .\tag{R}
+\]
+
+(c) \emph{Global structure.} By (a), (b) and induction every block satisfies (I1)--(I3), ZC never fails, the bases
+$F_\beta$ are non-decreasing, the tilts non-increasing, $s_{\beta+1}\ge\hat\xi_\beta$, $J_{\beta+1,0}\le J_{\beta,\rm L}$, and
+there are at most $\Kb$ complete blocks. For $Y\ge0$ and $\beta<\beta''$ we have $\lambda_{\beta''}\le\lambda_\beta$.
+A stretch of row $j$ runs from just after a blocking block $\beta$ (left line $\lambda_\beta=\xi_{\beta,p(j)}$) to the
+next blocking block $\beta_2>\beta$ (line $\lambda_{\beta_2}=s_{\beta_2}$), passing below all blocks in between, whose
+columns have $J\ge J_{\beta'',0}\ge j+1$. If $\beta$ is not the last block and $\beta+1$ does not block row $j$, then
+$j<J_{\beta+1,0}\le J_{\beta,\rm L}$, so $p(j)\le P_\beta-1$. Hence $p(j)=P_\beta$ (left end on
+$\lambda_\beta=\hat\xi_\beta$) occurs only for stretches that end at the next block's line (\emph{transition rows},
+$j\ge J_{\beta,\rm L}$) or for the last block (\emph{end rows}).
+
+(d) \emph{Containment of rows.} A placed row has $a\ge0$, $a+\lfloor a^+-a\rfloor\le a^+\le L$ (as $a^+$ is $L$ or
+$s_\beta-(j+1)\tan\alpha_\beta\le s_\beta\le L$), and $j+1\le r(a)\le r(X)$ on it. So every piece lies in $Z$.
+
+(e) \emph{Disjointness.} Columns of one block lie in the slabs $\xi_i\le\lambda_\beta\le\xi_{i+1}$
+(Lemma~\ref{lem:col}(i)). For $\beta<\beta''$, a column of $\beta$ lies in
+$\{\lambda_\beta\le\hat\xi_\beta\}\subset\{\lambda_{\beta''}\le\hat\xi_\beta\}\subset\{\lambda_{\beta''}\le s_{\beta''}\}$
+(as $Y\ge0$), and a column of $\beta''$ in $\{\lambda_{\beta''}\ge s_{\beta''}\}$. A row piece of a stretch of row $j$
+from block $\beta$ to block $\beta_2$ (or $x=L$): all columns of blocks $\gamma<\beta$ and the columns $i<p(j)$ of $\beta$
+lie in $\{\lambda_\beta\le\xi_{\beta,p(j)}\}$, and the row piece in $\{\lambda_\beta\ge\xi_{\beta,p(j)}\}$ (its lower left
+corner is on that line and $\tan\alpha_\beta>0$); the columns $i\ge p(j)$ of $\beta$ and all columns of the blocks
+strictly between $\beta$ and $\beta_2$ have $J\ge j+1$, so they lie in $\{Y\ge j+1\}$ and the row piece in
+$\{Y\le j+1\}$; the columns of $\beta_2$ and of later blocks lie in $\{\lambda_{\beta_2}\ge s_{\beta_2}\}$, and the row
+piece in $\{\lambda_{\beta_2}\le s_{\beta_2}\}$ (its top right corner is on or left of that line). For the first stretch
+of a row (left end $x=0$) only the last two cases occur. Different rows are separated by the lines $Y=j+1$, and the
+stretches of one row by the lines above. So ZC is a packing in $Z$.
+
+(f) \emph{Accounting.} For each column $K_{\beta,i}$ let its \emph{cell} be
+$\{z\in Z:\ \xi_i\le\lambda_\beta<\xi_{i+1},\ Y\ge J_i\}$. The cells are pairwise disjoint: slabs of one block are
+disjoint, and with $E_\beta:=\{z\in Z:\ \lambda_\beta(z)<s_\beta\}$ we have $E_0\subset E_1\subset\cdots$, and the cells
+of block $\beta$ lie in $E_{\beta+1}\setminus E_\beta$. For $Y\in[j,j+1)$ and a slab of a blocking block, $Y\ge J_i$ iff
+$J_i\le j$; so the complement of the cells in $Z\cap\{j\le Y<j+1\}$ is the disjoint union of the \emph{stretch regions}
+$\{j\le Y<j+1,\ \lambda_\beta\ge\xi_{\beta,p(j)}\ (\text{or }X\ge0),\ \lambda_{\beta_2}<s_{\beta_2}\ (\text{or }X\le L)\}\cap Z$.
+The interior of every placed piece lies in its cell or stretch region, and boundaries have measure $0$; so
+$U_Z$ is the sum over the cells of (area $-\,n$) plus the sum over the stretch regions of (area $-$ placed squares).
+
+(f1) \emph{Cells.} The parallelogram $\{\xi_i\le\lambda_\beta\le\xi_i+\se,\ J_i\le Y\le H(J_i)\}$ has area
+$\se(n\ca+\sa)=n+\ta$, so the part of the cell in $\{Y\le H(J_i)\}$ has area at most $n+\ta$. The rest of the cell lies in
+$\{Y>H(J_i)\}$, where $X\le\xi_i+\se-H(J_i)\ta$, so $Y\le r(\xi_i+\se-H(J_i)\ta)=\Gamma_i+\zeta(\se+(M-H(J_i))\ta)$ with
+$M-H(J_i)=nq-\sa\le N_0q$; its sections have length at most $\se$. So (area of the cell) $-\,n\le
+\ta+\se q+\se\zeta(\se+N_0q\ta)\le c_{\rm col}$ (all terms increase with $t\le t_0$, and the gap is less than $q$). The
+slab of column $(\beta,i)$ meets the line $Y=0$ in $[\xi_i,\xi_i+\se]\subset[0,L]$; these intervals have disjoint
+interiors (consecutive inside a block, and $s_{\beta+1}\ge\hat\xi_\beta$) and length $\se\ge1$, so there are at most $L$
+columns, and the cells cost at most $Lc_{\rm col}$.
+
+(f2) \emph{Stretch areas.} A stretch region between the lines $\lambda_\beta=c$ and $\lambda_{\beta_2}=s'$ has horizontal
+sections of length $(s'-Y\tan\alpha_{\beta_2})-(c-Y\tan\alpha_\beta)$, affine in $Y$ with slope
+$\tan\alpha_\beta-\tan\alpha_{\beta_2}\ge0$; so its area is at most $\ell+\taz$, where
+$\ell:=s'-(j+1)\tan\alpha_{\beta_2}-(c-j\tan\alpha_\beta)$ is the stretch length of (Z4) (with $\frac12\taz$ for an end at
+$x=0$ or $x=L$). A placed piece leaves at most $\operatorname{frac}(\ell)+\taz$; if $0\le\ell<1$ the waste is at most
+$\ell+\taz$ as well.
+
+(f3) \emph{The stretches}, each counted by its right end.
+\begin{itemize}
+\item Right end at $s_{\beta+1}$, left end in block $\beta$ with $J_{\beta,0}\le j<J_{\beta,\rm L}$ (\emph{aligned
+closings}): by (R), $\ell\ge0$ and $\operatorname{frac}(\ell)\le\varepsilon_W$; the left end has
+$a_j\ge\xi_p-M\ta\ge0$ and $j+1\le J_{p(j)}\le H(J_{p(j)})\le\Gamma_{p(j)}\le r(a_j)$, so the piece is placed when
+$\ell\ge1$. Waste at most $\varepsilon_W+\taz$, in at most $N_0-1$ rows per complete block.
+\item Right end at $s_{\beta+1}$, left end before block $\beta$ ($j<J_{\beta,0}$; \emph{unaligned closings}): these rows
+have $J_{\beta+1,0}\le j<J_{\beta,0}$, at most $J_{\beta,0}-F_{\beta}<(1+\zeta\taz)/q_{\min}$ per complete block; the
+left end is $x=0$ or a slab line with $p\le P-1$, and the waste is at most $1+\taz$.
+\item Right end at $s_{\beta+1}$, left end on $\hat\xi_\beta$ ($j\ge J_{\beta,\rm L}$; \emph{transition rows}): their
+union lies in $\{\lambda_\beta\ge\hat\xi_\beta,\ \lambda_{\beta+1}<s_{\beta+1},\ Y\ge J_{\beta,\rm L}\}$. Its points have
+$X<s_{\beta+1}$, so $Y\le r(s_{\beta+1})<J_{\rm L}+n_{\rm L}+\sa+\zeta(1+\se+M\ta)$ (see (b)): height at most $h_T$.
+At height $Y$ its section has length $\omega+Y\hat\kappa\le w_T$ (as $\hat\kappa\le q_0^2/\zeta+\delta_Q$). Area at most
+$A_T$ per complete block.
+\item Right end at $s_0$, left end $x=0$: for $j\le\lfloor\chi\rfloor-1$ the piece is placed ($j+1\le\chi=r(0)$), waste
+at most $1+\frac12\taz$, in at most $\lfloor\chi\rfloor$ rows. The part of $E_0$ with $Y\ge\lfloor\chi\rfloor$ has
+$X<s_0-\lfloor\chi\rfloor\taz\le(M_0-\lfloor\chi\rfloor)\taz<w_0$ and $Y\le r(w_0)\le\lfloor\chi\rfloor+1+\zeta w_0$:
+area at most $w_0(1+\zeta w_0)$.
+\item Right end at $x=L$ (\emph{final stretches}), at most one per row $j<\lfloor r(L)\rfloor$. If the left end is $x=0$ or
+a slab line with $p\le P-1$, the piece is placed when $\ell\ge1$ and the waste is at most $1+\frac12\taz$. Otherwise, by
+(c), the left end is on $\hat\xi$ of the last block, and these end rows lie in $E_{\rm end}:=\{\lambda_{\rm last}\ge
+\hat\xi_{\rm last}\}$, where $L-\hat\xi_{\rm last}<1+\sez$ (the last block stopped with reason `$L$', or the next block
+could not start). An end row with $a_j=\hat\xi-j\ta\ge0$ and $j+1\le r(a_j)$ is placed with waste at most
+$1+\frac12\taz$ (counted in $r(L)(1+\frac12\taz)$). The other points of $E_{\rm end}$: (i) rows with $a_j\ge0$ and
+$j+1>r(a_j)$; as $a_j\ge L-w_e$, these rows have $j>r(L)-\zeta w_e-1$, and their points have $X\in[L-w_e,L]$,
+$Y\le r(L)$: area at most $w_e(1+\zeta w_e)$; (ii) rows with $a_j<0$: then $j>\hat\xi/\ta\ge(s+\se)/\ta\ge M+1/\ta>N_0$
+by (I2), so there are at most $r(L)-\lfloor\chi\rfloor+1\le\zeta L+2$ such rows, and $\hat\xi<j\ta\le r(L)\taz$ gives
+$L<w_e$, so each such row meets $Z$ in area at most $L<w_e$: area at most $(\zeta w_e+2)w_e$. In total at most
+$w_e(4+2\zeta w_e)$.
+\end{itemize}
+(f4) Summing (the cells; per complete block, of which there are at most $\Kb$, the aligned, unaligned and transition
+rows; the start; the final stretches) gives $U_Z\le B_W$. If there is no block at all ($s_0+\sez>L$), all rows run from
+$0$ to $L$, rows $j\le\lfloor\chi\rfloor-1$ are placed with waste at most $1$, and the rest has area at most
+$L(1+\zeta L)\le w_e(1+\zeta w_e)$, as $L<s_0+\sez\le w_e$.
+\end{proof}
+
+\subsection{The end packing}\label{ssec:E38}
+We use the band end $\Reg(y)$ of Section~\ref{sec:ends} with $\tan(\theta/2)=b/(b^2-1)$, and, as in
+Corollary~\ref{cor:b23}, $\mu:=\tan\theta$, $g(X):=y+(X-\sigma)\mu$, $g_0:=g(0)$, $\bar g:=g(w)$ and $\Delta:=w\mu$.
+
+\emph{Construction E38$(y)$.}
+\begin{enumerate}[label=(E\arabic*)]
+\item $m:=\lfloor\bar g\rfloor+1$, $D_\ell:=D_r:=\lfloor4m^{3/4}\rfloor$ and $g_D:=g(D_\ell)$.
+\item \emph{Main tilt:} $t:=\lceil t^*Q\rceil/Q$ with $t^*=t^*(m,g_D)$ of Lemma~\ref{lem:tiltS} ($g_0$ replaced by
+$g_D$).
+\item \emph{Main columns:} $\xi_i:=D_\ell+m\ta+i\se$ for $0\le i<N:=\#\{i\ge0:\ \xi_i+\se\le w-D_r\}$,
+$\Gamma_i:=g(\xi_i-m\ta)=g(D_\ell+i\se)$, $J_i:=\lfloor(\Gamma_i-m\ca-\sa)/q\rfloor$ and the columns
+$K(\xi_i,J_i,m-J_i)$. Put $J_{\rm L}:=J_{N-1}$ and $\xi_N:=\xi_0+N\se$.
+\item \emph{Cut:} $\kappa_m:=q^2/\mu$; $\tau:=\tan\alpha_c$, where $t_c$ is the largest point of $(1/Q^*)\Z$ with
+$\tan\alpha_c\le\ta-\kappa_m$; $\hat\kappa:=\ta-\tau$. The phase $\omega_m$ is defined as in (Z3), with
+$(s_\beta,\hat\xi_\beta,\tan\alpha_{\beta+1},B,A)$ replaced by $(\xi_0,\xi_{N-1},\tau,q/(\mu\se),(g_D-m\ca-\sa)/q)$ and
+the rows $J_0\le j<J_{\rm L}$; put $\ell_0:=\xi_{N-1}+\omega_m$.
+\item \emph{Main rows:} for $0\le j<J_{\rm L}$ let $p(j):=\#\{i:\ J_i\le j\}$, $a_j:=\xi_{p(j)}-j\ta$ and
+$a_j^+:=\ell_0-(j+1)\tau$; if $a_j^+-a_j\ge1$ place $[a_j,\,a_j+\lfloor a_j^+-a_j\rfloor]\times[j,j+1]$.
+\item \emph{Walls.} Each of the three regions below is filled by ZC with $t_0:=\lceil Q^*\tilde t\rceil/Q^*$, where
+$\tilde t$ is within relative error $10^{-12}$ of the tilt $t_{\rm tgt}$ with $\tan\alpha(t_{\rm tgt})=\frac32\sqrt\zeta$
+(since $d\log\ta/d\log t=(1+t^2)/(1-t^2)$, a relative error of at most $10^{-12}$ in $t$ gives a relative error of at
+most $\epsilon':=1.00001\cdot10^{-12}$ in $\ta$ whenever $t\le0.0014$, because then $(1+t^2)/(1-t^2)\le1.000004$), and
+mapped by an exact rotation by $\pm90^\circ$ and a translation:
+\begin{itemize}
+\item $Z_{\rm L}$: $\chi=\xi_0-g_0\ta$, $\zeta=\ta$, $L=g_0$, $(x,y)\mapsto(y,\,g_0-x)$; region
+$\{\lambda\le\xi_0,\ Y\le g_0\}$;
+\item $Z_{\rm LR}$: $\chi=w-\ell_0$, $\zeta=\tau$, $L=J_{\rm L}$, $(x,y)\mapsto(w-y,\,x)$; region
+$\{X+Y\tau\ge\ell_0,\ Y\le J_{\rm L}\}$;
+\item $Z_{\rm UR}$: $\chi=w-\xi_N+J_{\rm L}\ta$, $\zeta=\ta$, $L=Y_u-J_{\rm L}$, $(x,y)\mapsto(w-y,\,J_{\rm L}+x)$, with
+$Y_u:=(g_0+\mu\xi_N)/(1+\mu\ta)$; region $\{\lambda\ge\xi_N,\ J_{\rm L}\le Y\le Y_u\}$.
+\end{itemize}
+\end{enumerate}
+Here $\lambda=\lambda(X,Y)=X+Y\ta$ is the slab coordinate of the main tilt. Hypotheses:
+(E-i) $1<g_D<m$ and $t\le1/10$; (E-ii) $N\ge1$; (E-iii) $\ta-\kappa_m\ge\tan\alpha(1/Q^*)$, so that $\tau>0$;
+(E-iv) $\varepsilon_m+\tau<1$, where $\varepsilon_m:=(\se-1)+m\delta_Q+1/Q_f$; (E-v) each of the three walls satisfies
+(W1)--(W5), for $Z_{\rm LR}$ and $Z_{\rm UR}$ with $L$ replaced by the upper bound $m$ (which only strengthens (W2) and
+(W3)).
+
+\begin{lemma}[end lemma for the exponent $3/8$]\label{lem:E38}
+Under (E-i)--(E-v), E38$(y)$ is a packing in $\Reg(y)$, and its uncovered area satisfies
+\begin{multline*}
+U(y)\le w\sa+wq+\Delta(\se+m\ta)+J_0(1+\ta)+J_{\rm L}(\varepsilon_m+\ta)+\tfrac12\mu h_{\rm L}^2+\mu w_R^2\\
++U_{Z_{\rm L}}+U_{Z_{\rm LR}}+U_{Z_{\rm UR}},
+\end{multline*}
+where $h_{\rm L}:=\xi_0-g_0\ta$, $w_R:=w-\xi_N+\bar g\ta$, and each $U_Z\le B_W$ by Lemma~\ref{lem:W}.
+\end{lemma}
+
+\begin{proof}
+(a) \emph{Main staircase.} As in Lemma~\ref{lem:stair}(a), with $g_0$ replaced by $g_D$ and the shift $D_\ell$:
+$\Gamma_i=g_D+i\mu\se$ is affine in $i$; $J_i\in[0,m-1]$, because $H(0)=m\ca+\sa\le g_D\le\Gamma_i$ by
+Lemma~\ref{lem:tiltS} and $H(m)=m+\sa>\bar g\ge\Gamma_i$; the $J_i$ are non-decreasing; the gaps lie in $[0,q)$; and the
+columns lie in $\Reg(y)$ ($X\ge\xi_i-m\ta=D_\ell+i\se\ge0$, $X\le\xi_i+\se\le w-D_r$). The derivation of (R) in the proof
+of Lemma~\ref{lem:W}(b) applies verbatim to the rows $J_0\le j<J_{\rm L}$ (with $p(j)=\lceil B(j+1-A)\rceil\in[1,N-1]$,
+$B(\se-1)=q^2/\mu=\kappa_m$, $\eta:=\hat\kappa-\kappa_m\in[0,\delta_Q)$, $J_{\rm L}-J_0\le m-1$, and $\hat\xi$ replaced
+by $\xi_{N-1}$): the length $\ell_j:=a_j^+-a_j$ satisfies $\operatorname{frac}(\ell_j)\le\varepsilon_m$. Moreover
+$\ell_j\ge\ell_0-\xi_{p(j)}-\tau\ge-\tau$ (as $p(j)\le N-1$); together with $\operatorname{frac}(\ell_j)\le\varepsilon_m<
+1-\tau$ (E-iv) this forces $\ell_j\ge0$. The rows $j<J_0$ ($p(j)=0$) are not aligned and waste at most $1+\ta$ each. Row
+ceiling: for $j<J_{\rm L}$, $p(j)\le N-1$ and $J_{p(j)}\ge j+1$, so
+$j+1\le H(J_{p(j)})\le\Gamma_{p(j)}=g(\xi_{p(j)}-m\ta)\le g(a_j)$ (as $j<m$). Also $a_j\ge\xi_0-m\ta=D_\ell\ge0$ and
+$a_j^+\le\ell_0\le w$.
+
+(b) \emph{The wall regions lie in $\Reg(y)$.} $Z_{\rm L}=\{0\le Y\le g_0,\ 0\le X\le\xi_0-Y\ta\}$ and $Y\le g_0\le g(X)$.
+$Z_{\rm LR}=\{0\le Y\le J_{\rm L},\ \ell_0-Y\tau\le X\le w\}$: its points have $X\ge\ell_0-J_{\rm L}\tau\ge\xi_{N-1}-m\ta$,
+so $g(X)\ge\Gamma_{N-1}\ge H(J_{\rm L})\ge J_{\rm L}\ge Y$. $Z_{\rm UR}=\{J_{\rm L}\le Y\le Y_u,\ \xi_N-Y\ta\le X\le w\}$:
+by the definition of $Y_u$, $Y_u=g(\xi_N-Y_u\ta)$, so $Y\le Y_u\le g(\xi_N-Y\ta)\le g(X)$; and
+$J_{\rm L}\le\Gamma_{N-1}\le g(\xi_N-J_{\rm L}\ta)$ gives $J_{\rm L}\le Y_u$ (the map $Y\mapsto g(\xi_N-Y\ta)-Y$ is
+decreasing), that is $L\ge0$. The maps are isometries, so by Lemma~\ref{lem:W} every wall piece lies in its region.
+
+(c) \emph{Disjointness.} Main columns: slabs. Main rows against columns: as in Lemma~\ref{lem:stair}(e) on the left (the
+line $\lambda=\xi_{p(j)}$, and columns with $J\ge j+1$ above $Y=j+1$); on the right the rows lie in
+$\{X+Y\tau\le\ell_0\}$, the columns $i\le N-2$ in $\{\lambda\le\xi_{N-1}\}\subset\{X+Y\tau\le\ell_0\}$ (as $\tau\le\ta$,
+$Y\ge0$ and $\ell_0\ge\xi_{N-1}$), and column $N-1$ lies in $\{Y\ge J_{\rm L}\}$ while the rows lie in $\{Y\le J_{\rm L}\}$.
+$Z_{\rm L}\subset\{\lambda\le\xi_0\}$, and all main pieces lie in $\{\lambda\ge\xi_0\}$. $Z_{\rm LR}\subset\{X+Y\tau\ge
+\ell_0\}$, against the main rows and the columns $i\le N-2$; against column $N-1$, $Z_{\rm UR}$ and the main rows the line
+$Y=J_{\rm L}$ is used where needed. $Z_{\rm UR}\subset\{\lambda\ge\xi_N\}$, against the main columns (in
+$\{\lambda\le\xi_N\}$), and against the rows by $Y=J_{\rm L}$. $Z_{\rm L}$ against $Z_{\rm LR}$: $Z_{\rm LR}$ lies in
+$\{\lambda\ge\xi_{N-1}\ge\xi_0\}$. $Z_{\rm L}$ against $Z_{\rm UR}$: $\lambda=\xi_0\le\xi_N$. $Z_{\rm LR}$ against
+$Z_{\rm UR}$: $Y=J_{\rm L}$.
+
+(d) \emph{Accounting.} Partition $\Reg(y)$ into $\{\lambda<\xi_0\}$ ($=Z_{\rm L}$ plus
+$S_1:=\{\lambda<\xi_0,\ Y>g_0\}$); $\{\lambda\ge\xi_N,\ Y\ge J_{\rm L}\}$ ($=Z_{\rm UR}$ plus $S_2$, its part with
+$Y>Y_u$); $\{X+Y\tau>\ell_0,\ Y<J_{\rm L}\}$ ($=Z_{\rm LR}$ up to the boundary); the column cells
+$\{\xi_i\le\lambda<\xi_{i+1},\ Y\ge J_i\}$ minus the previous set (for $i\le N-2$ the cell does not meet it; for $i=N-1$,
+$Y\ge J_{\rm L}$); and the row regions $\{j\le Y<j+1,\ \lambda\ge\xi_{p(j)},\ X+Y\tau\le\ell_0\}$, $0\le j<J_{\rm L}$. The
+cells cost at most $w\sa+wq+\Delta(\se+m\ta)$, exactly as in Lemma~\ref{lem:stair}(g) ($N\se\le w$, $N\ta\le w\sa$). A row
+region has sections of length $\ell_0-\xi_{p(j)}+Y\hat\kappa$, so its area is at most $\ell_j+\frac12(\ta+\tau)$ and its
+waste at most $\varepsilon_m+\ta$ for $J_0\le j<J_{\rm L}$, and at most $1+\ta$ for $j<J_0$. $S_1$ consists of points with
+$0\le X<\xi_0-g_0\ta=h_{\rm L}$ and $g_0<Y\le g_0+\mu X$: area at most $\frac12\mu h_{\rm L}^2$. $S_2$ consists of points with
+$X\in[\xi_N-\bar g\ta,w]$ and $Y_u<Y\le g(X)\le Y_u+\mu w_R$: area at most $\mu w_R^2$. The three wall regions contribute
+$U_{Z_{\rm L}}+U_{Z_{\rm LR}}+U_{Z_{\rm UR}}$ (the maps are isometries).
+\end{proof}
+
+\subsection{The band ends}\label{ssec:b35}
+
+\begin{corollary}\label{cor:b35}
+Let $b\ge b_0:=10^{16}$ be an integer, $\tan(\theta/2)=b/(b^2-1)$, and let $y$ be any real number with
+\[
+\tfrac1{12}b^{4/5}\le y\le\tfrac1{12}b^{4/5}+2 .
+\]
+Let $Q$ be a power of $2$ with $Q\ge16b$. Then E38$(y)$ is a packing in $\Reg(y)$ with
+\[
+U(y)\le C_Eb^{3/5},\qquad C_E:=15.54,
+\]
+and the end cost of Proposition~\ref{prop:waste} satisfies $E(y)=U(y)+\frac12\tan\theta\le15.54\,b^{3/5}+1.0001/b$.
+\end{corollary}
+
+\begin{proof}
+Put $z:=m^{-1/4}$.
+
+(i) \emph{Ranges.} By the band facts of Corollary~\ref{cor:b23}(i), $2/b<\mu\le2.000001/b$, $\Delta\le2.000001$,
+$\sigma\mu\le4.1\cdot10^{-8}$ and $b-2.1/b\le w<b$. As $\bar g=y-\sigma\mu+\Delta\in(y,y+2.000001]$ and
+$m=\lfloor\bar g\rfloor+1$, we get $\frac1{12}b^{4/5}<m\le\frac1{12}b^{4/5}+5.000001$, $\delta:=m-g_0\le3.000001$ and
+$m-g_D\le\delta$. So $\hat b:=bz^5$ lies in $[12^{5/4}(1-5.000001z^4)^{5/4},\,12^{5/4}]$ and
+$z<12^{1/4}b^{-1/5}\le z_0:=12^{1/4}10^{-16/5}=0.0011743\ldots$; also $D_\ell z^3,D_rz^3\in[4-z^3,4]$. For the main tilt,
+Lemma~\ref{lem:tiltS} with $D'=m+g_D\ge2m-3.000001$, $\delta'=m-g_D\le3.000001$, and $t^*\ge\sqrt{\delta'/D'}$ with
+$D'\le2m$ and $\delta'>\bar g-g_D=(w-D_\ell)\mu\ge2(1-D_\ell/b-2.1/b^2)$, give
+\[
+\frac t{z^2}\in\Bigl[\sqrt{1-D_\ell/b-2.1/b^2},\ \frac{z^2+\sqrt{z^4+3.000001(2-3.000001z^4)}}{2-3.000001z^4}
++\frac{z^3}{16\hat b}\Bigr].
+\]
+Further $\kappa_m=q^2/\mu\le q^2b/2$ and $\tau\in[\ta-\kappa_m-\delta_Q,\ \ta-\kappa_m]$. Wall inputs: $Z_{\rm L}$:
+$\zeta=\ta$, $\chi\in[D_\ell,D_\ell+3.000001\ta]$, $L\le m$; $Z_{\rm LR}$: $\zeta=\tau$, $\chi\in[D_r+\se-1,D_r+2\se]$,
+$L=J_{\rm L}$; $Z_{\rm UR}$: $\zeta=\ta$, $\chi\in[D_r,D_r+\se+m\ta]$, $L=Y_u-J_{\rm L}$; and
+$J_{\rm L}+(Y_u-J_{\rm L})=Y_u\le\bar g<m$. Wall tilts: the target tilts satisfy
+$\tan\alpha(t_{\rm tgt})=\frac32\sqrt\zeta\le\frac32\sqrt{\ta}\le0.00276$ (as $\zeta\le\ta\le3.38\cdot10^{-6}$, see (iii)),
+so $t_{\rm tgt}\le0.0014$, and by (E6)
+$\taz\in[\frac32\sqrt\zeta(1-\epsilon'),\,\frac32\sqrt\zeta(1+\epsilon')+\delta_Q]$ with $\epsilon'=1.00001\cdot10^{-12}$. (E-i) is immediate:
+$m-3.000001\le g_0\le g_D\le\bar g<m$.
+
+(ii) \emph{Normalisation.} Every term of Lemma~\ref{lem:E38} and of $B_W$ (with $\varpi=0.65$) is multiplied by
+$z^3=m^{-3/4}$ and rewritten in terms of $\hat b$, $t/z^2$, $\ta/z^2$, $\zeta/z^2$, $\chi z^3$, $Lz^4\in[0,1]$, $\taz/z$,
+$q_0/z^2$, $q_{\min}/z^2$, $N_0z^3$ and $\Lambda z^3$, so that only non-negative powers of $z$ occur; the complete list
+of normalised enclosures is in Appendix~\ref{app:enc} and in the program \texttt{cert3e.py} (for example
+$w\sa z^3\le2\hat b\,(t/z^2)$, $\Kb=(Lz^4)/(\Lambda z^3)\cdot z^{-1}$, and $J_0\le(4mt+2)/(Qq)$, because
+$H(0)=m\ca+\sa$ has $|dH/dt|\le4mt+2$ and $t-t^*\le1/Q$). For the two right walls the terms linear in $L$ are bounded
+with the larger of the two coefficients (as $L_{\rm LR}+L_{\rm UR}\le m$) and the other terms are evaluated at $L=m$
+($B_W$ and the hypotheses (W2), (W3) are monotone in $L$).
+
+(iii) \emph{Interval evaluation.} $[0,z_0]$ is split into intervals and the range of $t/z^2$ into pieces; on each box
+all enclosures are evaluated in interval arithmetic. With $160\times64$ boxes and $120$-bit intervals the lower bounds of
+the margins are: $1/10-t\ge0.0999$; (E-ii) $\ge22.33$ (normalised by $z^5$); (E-iii) $\ge1.946$ (normalised by $z^2$);
+$1-\varepsilon_m\ge0.99999$; for each wall (W1) $\ge1.88$, (W2) $\ge0.1314$ (normalised by $z$), (W3) $\ge3.998$, (W4)
+$\ge0.99999$, (W5) $\ge1.36$ (normalised by $z$) and $1/10-t_0\ge0.097$; and $\Psi(z):=z^3\times$(the bound of
+Lemma~\ref{lem:E38}) satisfies $\Psi\le96.477$. Directly, $\varepsilon_m\le6.91\cdot10^{-6}$ (as
+$\se-1\le5.8\cdot10^{-12}$, $m\delta_Q\le\frac{2.1}{16}\cdot\frac mb\le6.902\cdot10^{-6}$ and $1/Q_f\le2^{-48}$) and
+$\tau\le\ta\le3.38\cdot10^{-6}$ (as $t\le1.2248z_0^2$), so $\varepsilon_m+\tau\le1.03\cdot10^{-5}<1$: (E-iv) holds.
+
+(iv) By Lemmas~\ref{lem:E38} and~\ref{lem:W}, $U(y)\le\Psi_{\sup}m^{3/4}\le\Psi_{\sup}(\frac1{12}b^{4/5}+5.000001)^{3/4}
+\le\Psi_{\sup}12^{-3/4}(1+60.000012\,b_0^{-4/5})^{3/4}b^{3/5}$, and with $\Psi_{\sup}\le96.477$ this is at most
+$14.964\,b^{3/5}\le15.54\,b^{3/5}$. The relation between $E$ and $U$ is as in Corollary~\ref{cor:b23}(vi).
+\end{proof}
+
+\emph{Certification.} The author's own program (\texttt{mpmath.iv}, $40\times16$ boxes) gave $\Psi\le100.1875$ and
+$C_E\le15.5392$; this is the origin of $C_E=15.54$. It used the relative slack $10^{-12}$ on the wall tilts, which is
+too little ((E6) requires $\epsilon'=1.00001\cdot10^{-12}$), so it does not count as a certification. The constants in
+(iii) and (iv), and $C_E=15.54$, are certified by three independent full-range coverings written from the text of the
+proof, with different libraries: an independent reimplementation (\texttt{mpmath.iv}, $120$ bits, $160\times64$ boxes,
+slack $1.03\cdot10^{-12}$; $C_E\le14.964$, the values quoted in (iii); this is the program \texttt{cert3e.py} included
+with this text), a review (\texttt{mpmath.iv}, $200\times64$ boxes, slack $1.00001\cdot10^{-12}$; $C_E\le14.963$), and a
+second review (\texttt{python-flint} arb, slack $1.0001\cdot10^{-12}$; $C_E\le14.9631$). All three use a slack
+$\epsilon'\ge1.00001\cdot10^{-12}$ and give $C_E\le14.964$. In the two \texttt{mpmath.iv} coverings the smallest
+normalised margin is that of (W2). At the worst box of the $160\times64$ covering the bound splits as column triangles $54.71$, other main terms
+$0.01$, left wall $16.61$ and right walls $25.14$ (in units of $m^{3/4}$). Exponent bookkeeping: the triangles cost about
+$bt\asymp bm^{-1/2}\asymp m^{3/4}$ (as $m\asymp b^{4/5}$), and each wall about
+$L\taz+\Kb N_0\taz+\Kb/q_{\min}+2\chi\asymp m^{3/4}$, with $\taz\asymp m^{-1/4}$, $\chi\approx4m^{3/4}$ and
+$\Kb\asymp m^{1/4}$.
+
+\emph{Why $b_0=10^{16}$.} Hypothesis (E-iii) ($\tau>0$, where $\kappa_m/\ta\approx76\,b^{-1/5}$) fails below about
+$b=3\cdot10^9$, and for smaller $b_0$ the certified constant grows (about $16.7$ for $b_0=10^{12}$ and $19.2$ for
+$b_0=10^{10}$). As $b\to\infty$ the certified bound of this proof tends to about $14.6$ (a covering with a fine
+subdivision of the $t$-range and $b_0=10^{60}$ gives $14.61$); this reflects the crude estimates of Lemma~\ref{lem:W},
+not $\cs(k)$.
+
+\subsection{Proof of Theorem~\ref{thm:main38}}\label{ssec:proofthm38}
+Let $C_E:=15.54$, $k\ge k_1:=4\cdot10^{26}$, $b_*:=(5k/(3C_E))^{5/8}$ (so $k=\frac35C_Eb_*^{8/5}$) and $b:=\lceil b_*\rceil$.
+Since $\frac35C_E\cdot10^{128/5}\le3.712\cdot10^{26}\le k_1$, $b\ge b_*\ge10^{16}=b_0$. Take $\tan(\theta/2)=b/(b^2-1)$, so
+$w<b$ and $S:=k-b+w<k$, and use the packing of Corollary~\ref{cor:assembly} with
+\[
+y_0:=\tfrac14\bigl\lceil\tfrac13b^{4/5}\bigr\rceil\in\bigl[\tfrac1{12}b^{4/5},\ \tfrac1{12}b^{4/5}+\tfrac14\bigr]
+\]
+and, in each band, $R:=\lfloor(L_b-h-2y_0)/d\rfloor+1$. As $h<3$ and $y_0\le k^{1/2}+1$, $h+2y_0<k-b\le L_b$; so $R\ge1$ and
+$y_1\in[y_0,y_0+d)$ with $d<1.0001$, and both lifts lie in the window of Corollary~\ref{cor:b35}. Fill the four end regions
+by Corollary~\ref{cor:b35} with $Q$ the least power of $2$ that is at least $16b$. As in Section~\ref{ssec:proofmain},
+by Corollary~\ref{cor:assembly} and Proposition~\ref{prop:waste},
+\[
+k^2-N<\frac{4k}b+4C_Eb^{3/5}+\lambda',\qquad \lambda':=\frac{4k}{b(b^2-1)}+\frac{4kb}{(b^2-1)^2}+2\tan\theta\le
+\frac{8.001\,k}{b^3}+\frac{4.1}b .
+\]
+With $k\le\frac35C_Eb^{8/5}$ we get $8.001\,k/b^3\le8.001\cdot9.324\,b^{-7/5}<10^{-20}$ and $4.1/b<10^{-15}$, so $\lambda'<1$,
+and Lemma~\ref{lem:reduction} gives $\cs(k)\le k^2-N-1<4k/b+4C_Eb^{3/5}$. Finally $4k/b\le4k/b_*=\frac{12}5C_Eb_*^{3/5}$
+and $b^{3/5}\le b_*^{3/5}+\frac35b_*^{-2/5}\le b_*^{3/5}+\frac35\cdot10^{-32/5}$, so
+\[
+\cs(k)<\frac{32}5C_Eb_*^{3/5}+\frac{12}5C_E\cdot10^{-32/5}
+=\frac{32}5\Bigl(\frac53\Bigr)^{3/8}C_E^{5/8}k^{3/8}+\frac{12}5C_E\cdot10^{-32/5}.
+\]
+In interval arithmetic $\frac{32}5(\frac53)^{3/8}15.54^{5/8}\in[43.05564,\,43.05565]$ and
+$\frac{12}5\cdot15.54\cdot10^{-32/5}\le1.49\cdot10^{-5}$, which gives Theorem~\ref{thm:main38}. \qed
+
+\begin{remark}[what the explicit computations test]\label{rem:38exact}
+The asymptotic regime of Corollary~\ref{cor:b35} ($b\ge10^{16}$, $k\ge4\cdot10^{26}$) cannot be tested by explicit
+computation: one end has about $10^{16}$ pieces. The constants are certified by interval arithmetic only. The explicit
+checks test the validity of the construction and of Lemmas~\ref{lem:W} and~\ref{lem:E38} at smaller $b$. The
+construction was implemented in exact rational arithmetic and checked by an exact checker that does not use the lemmas
+(shapes, containment, separating axis tests for all pairs with overlapping bounding boxes): for $b=1600,\dots,409600$ and
+five lifts each in the window of Corollary~\ref{cor:b35} (all $25$ pass; there the cut is not aligned, as (E-iii) needs
+$b\gtrsim3\cdot10^9$, so these runs test validity only), at lifts outside the window where the cut is aligned (all pass,
+with the residuals of (R) attained to $4$--$5$ digits), and for the wall filler alone on $Z(4m^{3/4},\zeta,m)$ for $m$ up to
+$10^4$ (certified) and $2.56\cdot10^6$ (exact internal checks of Lemma~\ref{lem:W}), with $U_Z\le B_W$ in every case.
+Deliberately corrupted packings were rejected. Two blank-slate AI reviews and an independent reimplementation, each with
+its own programs written from the text, found no counterexample (over $500$ wall fillers, chains of up to $118$ blocks,
+end packings up to $b=10^7$). The program \texttt{run\_z.py} included with this text builds the wall filler for
+$m=10^4$, $\zeta=0.5/\sqrt m$, $\chi=4m^{3/4}$, $L=m$ and certifies it: $3$ blocks, $25289$ pieces, $28402$ pairs decided
+exactly, no overlap, (W1)--(W5) hold, $7611$ aligned closings with largest residual $0.0056087\le\varepsilon_W=0.0056093$,
+and $U_Z=6712\le B_W\le19615$. Full exact counts with the construction of this section give $\cs(10^8)\le44299$,
+$\cs(10^{10})\le236005$ and $\cs(10^{11})\le547881$ (ends checked exactly); at $k=10^8$ this is worse than
+Theorem~\ref{thm:cert} ($24790$), and at such $k$ the closed form $43.06\,k^{3/8}$ must not be used.
+\end{remark}
+
+\section{The certified packings}\label{sec:cert}
+
+\emph{Generation.} The end packings of Theorem~\ref{thm:cert} were produced by a variant of the construction of
+Section~\ref{ssec:stairlemma} with tuned parameters: $b$ was chosen near the minimizer of a model of the total cost, and the lift $y_0$ (about
+$0.9\,b^{2/3}$) by a floating-point pre-scan; for each end the column length $m$ is $\lfloor\bar g\rfloor$ or $\lfloor\bar g\rfloor+1$,
+whichever leaves less uncovered area; the tilt is the least multiple $t$ of $2^{-40}$ with
+$m\ca+\sa\le g(\ca)$ (the top vertex of the first column, which starts at the left wall, has abscissa $\ca$); and each $J_i$ is the largest value, at least $J_{i-1}$, for which the column (of $m-J_i$ squares) fits under the ceiling.
+These rules play no role in the verification, which uses only the resulting explicit pieces.
+
+\emph{Proof of Theorem~\ref{thm:cert}.} Let $(k,b,y_0)$ be a row of Table~\ref{tab:cert} and $\tan(\theta/2)=b/(b^2-1)$.
+Then $\tan(\theta/2)>1/b$, so $\theta\in(\theta_0,\pi/2)$ and $w<b$ (Lemma~\ref{lem:width}), and $\gamma$, $\sigma$
+are rational. For both bands let $R:=\lfloor(L_b-h-2y_0)/d\rfloor+1$, so that $y_0\le y_1<y_0+d$. The data file for $k$
+lists, for each of the four ends, its lift ($y_0$ for the lower ends, $y_1$ for the upper ends) and its pieces, with
+exact rational coordinates in the frame of $\Reg(y)$: \emph{columns} (a tilted $1\times n$ rectangle, given by its
+lowest vertex, $n$ and the rational cosine and sine of its tilt), \emph{layers} and \emph{wedge rows} (axis-parallel
+$1\times L$ rectangles). By Corollary~\ref{cor:assembly} and Lemma~\ref{lem:reduction} it suffices to check, in exact
+rational arithmetic:
+\begin{enumerate}[label=(C\arabic*),start=0]
+\item the lift given in the file for each end equals $y_0$ (lower ends) or the computed $y_1$ (upper ends), and every
+$n$ and $L$ is a positive integer;
+\item $w<b$, $R\ge1$, $y_0\ge0$ and $y_1\ge0$ for both bands;
+\item every piece is a rectangle with side lengths $1$ and $n$ (hence a union of $n$ unit squares with pairwise
+disjoint interiors); for a column this means $\cos^2+\sin^2=1$ exactly;
+\item the four vertices of every piece lie in $\Reg(y)$ (which is convex);
+\item two pieces of the same end have disjoint interiors.
+\end{enumerate}
+For (C4) it suffices to test pairs whose bounding boxes overlap, and for such pairs the separating axis test along the
+edge normals of the two rectangles is exact (touching is allowed). The count
+$N=(k-b)^2+b(R_{\rm right}+R_{\rm top})+(\text{end squares})$ gives the values $c=k^2-N$ of Table~\ref{tab:cert}, and
+Table~\ref{tab:certdata} lists the resulting data. All checks pass (see below). \qed
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{rrrrrr}
+\toprule
+$k$ & $R_{\rm right}$ & $R_{\rm top}$ & pieces (4 ends) & body cost & end cost\\
+\midrule
+$10^5$ & $99868$ & $99245$ & $2887$ & $639.20$ & $944.79$\\
+$10^6$ & $999671$ & $997190$ & $10111$ & $1609.72$ & $2363.28$\\
+$10^7$ & $9999166$ & $9989291$ & $42550$ & $4048.29$ & $5991.71$\\
+$3.825\cdot10^7$ & $38248577$ & $38226491$ & $93680$ & $6925.21$ & $10063.79$\\
+$10^8$ & $99997915$ & $99958601$ & $165152$ & $10172.28$ & $14618.72$\\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{Data of the certificates. Body cost is $\sum(R-1)\tan\theta$ over the two bands and end cost is the sum of the
+four $E(y)$ of Proposition~\ref{prop:waste}; their sum is $c$ up to $k^2-S^2<0.002$ (rounded to two decimals). The
+average of $E/b^{2/3}$ over the four ends is between $3.1$ and $3.3$.}
+\label{tab:certdata}
+\end{table}
+
+\emph{Verification.} Three programs check the certificates in exact rational arithmetic.
+\begin{enumerate}[label=(\alph*)]
+\item The generating program checks, for each end, that all vertices lie in $\Reg(y)$, that each column lies in its
+slab $\{\xi_i\le\lambda\le\xi_i+\se\}$ and above height $J_i$, that the slabs do not overlap, that the $J_i$ are
+non-decreasing, that each layer starts to the right of the slabs of the columns below it and each wedge row to the left
+of the first slab (the separating lines of Lemma~\ref{lem:stair}(e)), and the exact uncovered area; it also checks the
+identity of Proposition~\ref{prop:waste} exactly.
+\item A checker written from a description of the construction, without reading the generating program, takes only the
+parameters of the pieces from it, builds the vertices itself and checks (C0)--(C4) with the separating axis test for
+all pairs of pieces with overlapping bounding boxes, the exact uncovered area, and the count. It reproduced $N$ and $c$
+for all five rows (for $k\ge10^7$ on a remote machine), and rejected deliberately corrupted end packings for
+$b=400$ and $6400$ (a column shifted, lowered or lengthened, a layer raised, an extra wedge square, a lowered
+ceiling).
+\item The checker \texttt{stair\_check.py}, included with this text, reads only the published data files.
+It recomputes the band, the rows $R$ and the upper lifts $y_1$ from $(k,b,y_0)$, checks (C0)--(C4)
+with the separating axis test for all pairs of pieces with overlapping bounding boxes, the exact uncovered areas, the
+count and the identity of Proposition~\ref{prop:waste}. It was adapted from checker (b) and does not import the
+generating program. Its results are in Table~\ref{tab:verif}; seven deliberately corrupted versions of the data (a
+column shifted, lowered or given an extra square, a layer raised or lengthened, a wedge row lengthened, the ceiling
+lowered by $1/100$) were all rejected at $k=10^5$ and at $k=10^8$.
+\end{enumerate}
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{rrrrl}
+\toprule
+$k$ & pieces & pairs decided exactly & overlaps & result (time)\\
+\midrule
+$10^5$ & $2887$ & $22274$ & $0$ & pass ($0.3$\,s)\\
+$10^6$ & $10111$ & $119522$ & $0$ & pass ($1.2$\,s)\\
+$10^7$ & $42550$ & $969664$ & $0$ & pass ($8.2$\,s)\\
+$3.825\cdot10^7$ & $93680$ & $2730501$ & $0$ & pass ($29.6$\,s)\\
+$10^8$ & $165152$ & $5748521$ & $0$ & pass ($59.2$\,s)\\
+\bottomrule
+\end{tabular}
+\medskip
+\caption{Results of the checker \texttt{stair\_check.py} (c), summed over the four ends, with Python
+\texttt{fractions} on a laptop. For $k\ge10^7$ it was also run with \texttt{gmpy2} rationals on a remote Linux
+machine, with the same output apart from the arithmetic and timing lines.}\label{tab:verif}
+\end{table}
+
+All checkers were written by AI systems; none has been reviewed by a human. The rows of the bands are not listed in
+the data; their correctness rests on Lemmas~\ref{lem:stack} and~\ref{lem:ends}.
+
+The tuned packings are $4.9$--$11.8\%$ better than the packings of the proof of Theorem~\ref{thm:main}
+(Remark~\ref{rem:stairexact}); for $k=10^5,\dots,10^8$ the ratio $c/k^{2/5}$ is between $15.6$ and $16.0$, and the
+local slopes of $\log c$ against $\log k$ between $10^5$, $10^6$, $10^7$ and $10^8$ are $0.399$, $0.403$ and $0.393$.
+
+\section{Comparison with the literature}\label{sec:lit}
+
+\subsection{From the wasted area to the deficiency}
+By Lemma~\ref{lem:translation}, an upper bound $W(x)\le F(x)$ that holds for all $x$ in an interval $(k-\delta,k)$ gives
+$\cs(k)\le\limsup_{x\to k^-}F(x)-1$, that is $\cs(k)\le F(k)-1$ if $F$ is continuous. A bound that holds only for some
+$x$ (for instance for $x$ whose fractional part is bounded away from $0$) gives nothing for $\cs(k)$. Conversely, a
+packing that shows $\cs(k)\le c-1$ shows $W(x)\le x^2-k^2+c$ for $x$ slightly below $k$.
+
+\subsection{Printed bounds}
+The bounds in the literature that we found are listed below (literature search of 2026-10-08; the last column is what
+they give for $\cs(k)$ by the translation above).
+
+\begin{center}
+\small
+\begin{tabular}{>{\raggedright}p{4.4cm}>{\raggedright}p{4.6cm}>{\raggedright\arraybackslash}p{5.6cm}}
+\toprule
+source & statement & consequence for $\cs(k)$\\
+\midrule
+Erd\H{o}s--Graham 1975 [EG] & $W(x)=O(x^{7/11})$, all real $x$ & $O(k^{7/11})$\\
+Chung--Graham 2009 [CG] & $W(x)\le Cx^{(3+\sqrt2)/7}\log x$ & $O(k^{(3+\sqrt2)/7}\log k)$, exponent $\approx0.6306$\\
+Wang--Dong--Li 2016 [WDL] (arXiv) & $W(x)\le(16\sqrt2+38)x^{5/8}$ & $\le60.63\,k^{5/8}-1$\\
+Arslanov--Mustafin--Shangitbayev 2021 [AMS] & $s(n^2-n)<n$ for $n>12$ & $\le k-1$ for $k>12$\\
+Bui 2025 [Bui], McClenagan 2026 [McC] (preprints) & $W(x)=O(x^{3/5})$, all real $x$ & $O(k^{3/5})$, implicit constant\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The best printed bound for $\cs(k)$ is therefore $O(k^{3/5})$. The statement $W(x)=O(x^{3/5})$ was first claimed by
+Chung and Graham [CG2]; an error in that argument is pointed out in [Bui] and [McC]. We have checked the statement of
+[WDL, Theorem~1] but not whether every step of its proof applies to $x$ just below an integer. The bound
+$\cs(k)=O(k^{3/5})$ is stated explicitly in the online problem collections [Ev] and [Le]. [AMS] is the only refereed
+source we found that states a bound in the form of $\cs(k)$; it also notes that [EG] gives $s(n^2-O(n^{7/11}))<n$.
+G\"obel [G\"o] remarked that an improvement of the trivial bound is possible for large $n$ in each range
+$k^2+k\le n<(k+1)^2$, without an order.
+
+For $k=10^5$ the explicit bound of [WDL] gives about $8.1\cdot10^4$, Theorem~\ref{thm:sqrt} gives $2535$ and
+Theorem~\ref{thm:cert} gives $1583$.
+
+For small $k$, the Squares-in-Squares page maintained by D.~Ellsworth [El] (web resource, version of 2026-09-24) lists
+packings showing $s(n^2-n+1)<n$ for $n=16,17,18$, that is $\cs(k)\le k-2$ for these $k$.
+
+To the best of our knowledge, no upper bound of order $o(k^{3/5})$ for $\cs(k)$, or for $W(x)$ just below an integer,
+has been stated in the searched sources; in particular we found neither $\cs(k)=O(\sqrt k)$ nor any statement about
+the ends of tilted bands. The search covered [EG], [RV], [CG], [CG2], [WDL], [Bui] (versions 1 and 2), [McC] and the
+thesis [McC2], [AMS], Friedman's survey [Fr] and the Squares-in-Squares page [El], the repositories [Le] and [Ev],
+MathOverflow and Mathematics Stack Exchange, and arXiv up to 2026-10-08. Neither [Bui] nor [McC] makes a special
+statement for sides just below an integer. A search cannot exclude unpublished or oral results. The ingredients of
+Theorem~\ref{thm:A} are standard, and Theorem~\ref{thm:sqrt} may well be regarded as an easy consequence of known
+techniques; the staircase of Section~\ref{sec:stair} is the primitive construction of [Bui, Section~3]
+(Section~\ref{ssec:credit}).
+
+\subsection{Why uniform bounds cannot go below \texorpdfstring{$\sqrt k$}{sqrt k}}\label{ssec:structural}
+Roth and Vaughan [RV, Theorem] proved that $W(x)\gg(x\|x\|)^{1/2}$ whenever $x(x-\lfloor x\rfloor)>1/6$, where $\|x\|$ is
+the distance from $x$ to the nearest integer.\footnote{The theorem is sometimes quoted with $x-\lfloor x\rfloor$ in
+place of $\|x\|$, for example on p.~1 of [McC]. That form would give $W(x)\gg\sqrt x$ for $x$ just below an integer, and
+hence $\cs(k)\gg\sqrt k$, contradicting Theorem~\ref{thm:main}. The original statement [RV, p.~170] has $\|x\|$ and
+gives nothing for $x$ just below an integer.} In particular $W(n+\frac12)\gg n^{1/2}$. Hence an upper bound
+$W(x)\le Cx^{\alpha}$ valid for all large real $x$ must have $\alpha\ge1/2$, and through \eqref{eq:translation} such a
+bound can never give $\cs(k)=O(k^{\alpha})$ with $\alpha<1/2$. A bound of order $o(\sqrt k)$ for $\cs(k)$ must use the
+fact that the side is just below an integer, where the theorem of Roth and Vaughan gives nothing ($\|x\|\to0$). The
+constructions of this paper do so: the width $b-\varepsilon$ of the bands is just below the integer $b$. Erd\H{o}s and
+Graham remark that perhaps the correct bound is $W(x)=O(x^{1/2})$ [EG, p.~122]; Theorem~\ref{thm:sqrt} gives the
+corresponding order for $\cs(k)$, and Theorems~\ref{thm:main} and~\ref{thm:main38} go below it, just below integers.
+
+\section{Lower bounds and the order of \texorpdfstring{$\cs(k)$}{c*(k)}}\label{sec:lower}
+
+In the notation of Section~\ref{sec:prelim}, $\cs(k)=\Wmin(k)-1$. The following lower bounds are in preprints by the
+author that have not been refereed.
+\begin{itemize}
+\item {[R]}: $\Wmin(k)\ge0.0353\log k$ for every integer $k\ge2$, where $\log$ is the natural logarithm (version~1.2;
+the constant was $0.033$ in earlier versions). Thus $\cs(k)\to\infty$. The constant uses a computer-assisted lemma
+([R, Lemma~4.10]).
+\item {[Q]}: $\Wmin(k)\ge0.1\,k^{1/4}$ for every integer $k\ge4.62\cdot10^{12}$.
+\item {[T]}: $\Wmin(k)>0.06\,k^{1/3}$ for every integer $k\ge3.5\cdot10^{17}$, and
+$\liminf_{k\to\infty}\Wmin(k)/k^{1/3}\ge0.06285$. Without [R, Lemma~4.10], $\Wmin(k)>0.05\,k^{1/3}$ for
+$k\ge3.39\cdot10^{17}$.
+\end{itemize}
+For small $k$ see [R, Section~1]: $\Wmin(k)\ge3$ for $k\ge2$, that is $\cs(k)\ge2$, and a computer-assisted result of
+E.~Daniel that has not been refereed gives $s(k^2-3)=k$ for $k\ge6$, that is $\cs(k)\ge3$ ([R, Corollary~1.3];
+[Le, entry T-064]).
+
+Together with Theorems~\ref{thm:main} and~\ref{thm:main38},
+\begin{align*}
+0.06\,k^{1/3}-1\ <\ \cs(k)\ &<\ 20.668\,k^{2/5}+0.623\qquad(k\ge3.5\cdot10^{17}),\\
+\cs(k)\ &<\ 43.06\,k^{3/8}+2\cdot10^{-5}\qquad(k\ge4\cdot10^{26}),
+\end{align*}
+so $k^{1/3}\ll\cs(k)\ll k^{3/8}$ is what is proved: the upper bound by Theorem~\ref{thm:main38} of this paper and the
+lower bound in [T]. Neither exponent is claimed to be optimal; the true exponent is open
+(Section~\ref{sec:open}). The gap is large for moderate $k$: for $k=10^8$ the lower bounds above give only
+$\cs(k)\ge2$ ($\cs(k)\ge3$ with the result of Daniel), while Theorem~\ref{thm:cert} gives $\cs(k)\le24790$.
+
+\section{Other end constructions and open problems}\label{sec:open}
+
+Nothing in this section is used elsewhere. By Proposition~\ref{prop:waste}, an end packing with uncovered area
+$O(b^{\beta})$, uniformly for lifts in an interval of length $\sec\theta$, gives
+$\cs(k)\le\min_b\bigl(4k/b+O(b^{\beta})\bigr)=O(k^{\beta/(1+\beta)})$, with $b\asymp k^{1/(1+\beta)}$. The staircase
+has $\beta=2/3$, and the chained wall fillers of Section~\ref{sec:38} have $\beta=3/5$.
+
+\begin{remark}[an intermediate construction: tilted columns]\label{rem:37}
+Before the staircase, we filled the end regions by columns of $n$ squares whose tilt is chosen separately for each
+column from the fractional part of the ceiling height, so that $n\cos\beta+\sin\beta$ matches the ceiling; neighbouring
+columns are separated by slabs as in Lemma~\ref{lem:col}(i), but with an extra gap whenever the tilt increases. The
+loss under the ceiling is then about $\sqrt{2/M}$ per unit width for columns of height $M$, and each change of tilt
+costs a gap of order $M\tan\beta$; with $M\asymp\sqrt b$ this gives uncovered area $O(b^{3/4})$ and $\cs(k)=O(k^{3/7})$.
+The staircase avoids the changes of tilt altogether: one tilt serves all columns, and the rising ceiling is followed
+by moving squares into the layers, each move raising a column by $1-\cos\alpha$. Since Theorem~\ref{thm:main} has a smaller
+exponent, and its proof does not use this construction, we do not include the details or a proof of the $k^{3/7}$
+bound.
+\end{remark}
+
+\begin{remark}[Type~3 regions of Chung and Graham]\label{rem:cg3}
+The end regions $\Reg(y)$ are right trapezoids of width $w\approx b$ whose two parallel sides differ by about $2$.
+Cut by two vertical lines into three trapezoids of width $w/3$, and with lifts $y$ of order $b$, each piece appears to
+satisfy the hypotheses of the ``Type~3'' trapezoids of [CG, Theorem~1(3)], for which a packing with uncovered area
+$O(x^{1/\sqrt2}\log x)$ is asserted there. Combining Proposition~\ref{prop:waste} with [CG, Theorem~1(3)] therefore
+appears to give $\cs(k)=O\bigl(k^{\sqrt2-1}(\log k)^{2-\sqrt2}\bigr)$. The exponent $\sqrt2-1\approx0.414$ is larger
+than $2/5$ and than $3/8=0.375$, so this route is weaker than Theorems~\ref{thm:main} and~\ref{thm:main38}. We do not
+verify the details, and the proof in [CG] is written in outline, with lower-order terms suppressed.
+\end{remark}
+
+\begin{remark}[the wall wedges]\label{rem:bui4}
+In the bound of Lemma~\ref{lem:stair}, the column triangles cost about $w\sin\alpha\asymp b/\sqrt m$ and the two walls
+(the wedge rows and the ends of the layers) cost about $m$ each, with $m\asymp b^{2/3}$. Section~\ref{sec:38} reduces the
+cost of a wall of height $m$ from order $m$ to order $m^{3/4}$ (following ideas of [Bui, Sections~3--4]); then the best
+column length is $m\asymp b^{4/5}$, the end cost is $O(b^{3/5})$, and $\cs(k)=O(k^{3/8})$. The constants of
+Section~\ref{sec:38} are crude (the parameters $4$, $3/2$, $0.65$ and $1/12$ and several per-row bounds were not
+optimised).
+\end{remark}
+
+\emph{Open problems.} The true exponent of $\cs(k)$ is open: it lies between $1/3$ ([T]) and $3/8$
+(Theorem~\ref{thm:main38}). We do not claim the true exponent, and we make no claim that $3/8$ is the best exponent
+obtainable from this frame or from known techniques. Better constants for Theorem~\ref{thm:main38}, and a smaller
+threshold than $4\cdot10^{26}$, would also be of interest. It would also be interesting to have a matching structure for the lower bound, or a direct argument that
+some end cost of order $b^{\beta}$ with $\beta>0$ is unavoidable in this frame.
+
+\appendix
+\section{The normalised enclosures of Corollary~\ref{cor:b35}}\label{app:enc}
+This appendix lists the inequalities evaluated on each box in step (iii) of the proof of Corollary~\ref{cor:b35}; they
+are those of the program \texttt{cert3e.py} (functions \texttt{box} and \texttt{wall}). Put $z:=m^{-1/4}$ and
+$\tau_n:=t/z^2$. Enclosures of the inputs: $\hat b\in[12^{5/4}(1-5.000001z^4)^{5/4},\,12^{5/4}]$, $\mu b\in[2,2.000001]$,
+$\Delta\le2.000001$, $D_\ell z^3,D_rz^3\in[4-z^3,4]$, $\delta_Q\le g_qz^5$ with $g_q:=2.1/(16\hat b)$, and
+$1/Q_f\le f_qz^5$ with $f_q:=1/(16\hat b)$. With $t=\tau_nz^2$:
+\[
+\frac{\ta}{z^2}=\frac{2\tau_n}{1-t^2},\quad \frac{\sa}{z^2}=\frac{2\tau_n}{1+t^2},\quad q_n:=\frac q{z^4}=\frac{2\tau_n^2}{1+t^2},
+\quad \frac{\se-1}{z^4}=\frac{2\tau_n^2}{1-t^2},\quad \frac{\kappa_m}{z^2}\le\frac{q_n^2\hat bz}{\mu b},
+\]
+and $\tau/z^2\in[\ta/z^2-\kappa_m/z^2-g_qz^3,\ \ta/z^2-\kappa_m/z^2]$.
+
+\emph{Main part.} (E-i) $1/10-t>0$. (E-ii)
+$z^5(w-D_\ell-D_r-m\ta-\se)\ge\hat b(1-2.1z^{10}/\hat b^2)-(D_\ell z^3+D_rz^3)z^2-(\ta/z^2)z^3-\se z^5>0$. (E-iii)
+$\ta/z^2-\kappa_m/z^2-g_qz^3>0$. (E-iv) $1-\varepsilon_m>0$ with $\varepsilon_m\le((\se-1)/z^4)z^4+g_qz+f_qz^5$
+(together with the direct bound on $\tau$ in (iii)). The main terms of Lemma~\ref{lem:E38}, times $z^3$:
+$w\sa z^3\le\hat b\,\sa/z^2$; $wqz^3\le\hat bq_nz^2$; $\Delta(\se+m\ta)z^3\le\Delta(\se z^3+(\ta/z^2)z)$;
+$J_0z^3\le(4\tau_nz^2+2z^4)/(16\hat bq_n)$, times $1+(\ta/z^2)z^2$; $J_{\rm L}(\varepsilon_m+\ta)z^3\le
+((\se-1)/z^4)z^3+g_q+f_qz^4+(\ta/z^2)z$; $\frac12\mu h_{\rm L}^2z^3\le\mu b(h_{\rm L}z^3)^2z^2/(2\hat b)$ with
+$h_{\rm L}z^3\in[D_\ell z^3,D_\ell z^3+3.000001(\ta/z^2)z^5]$; and $\mu w_R^2z^3\le\mu b(D_rz^3+\se z^3+(\ta/z^2)z)^2z^2/\hat b$.
+
+\emph{Walls.} A wall with $\zeta_n:=\zeta/z^2$, $\chi_n:=\chi z^3$ and $L_n:=Lz^4\le1$ (upper value $1$ used) has
+$a_n:=\taz/z\in[\frac32\sqrt{\zeta_n}(1-\epsilon'),\ \frac32\sqrt{\zeta_n}(1+\epsilon')+g_qz^4]$,
+$\sez=\sqrt{1+a_n^2z^2}$, $\caz=1/\sez$, $(\sez-1)/z^2=a_n^2/(\sez+1)$, $q_{0,n}:=q_0/z^2=a_n^2/(\sez(\sez+1))$,
+$q_{\min,n}:=q_{\min}/z^2=(\varpi a_n)^2/(s_m(s_m+1))$ with $s_m=\sqrt{1+\varpi^2a_n^2z^2}$, $N_0z^3\in[\chi_n-2z^3,\chi_n-z^3]$,
+$\lfloor\chi\rfloor z^3\in[\chi_n-z^3,\chi_n]$, $r(L)z^3=\chi_n+\zeta_nL_nz$, $M_{\max}z^3=r(L)z^3+N_0z^3\,q_{0,n}z^2$,
+\[
+\Lambda z^3=\frac{q_{\min,n}N_0z^3-z-\zeta_na_nz^4}{\zeta_n},\qquad \Kb z=\frac{L_n}{\Lambda z^3},\qquad
+\frac{\varepsilon_W}{z^2}=\frac{\sez-1}{z^2}+N_0z^3\,g_q+f_qz^3 .
+\]
+The hypotheses, normalised: (W1) $\Lambda z^3-N_0z^3\,a_nz\ge0$;
+(W2) $(1-\varpi)a_n-\Delta_{\rm dr}/z>0$ with $\Delta_{\rm dr}/z=\frac{q_{0,n}}{N_0z^3}\bigl(L_n+\Kb z\,(1+\zeta_na_nz^3)z/\zeta_n\bigr)
++\Kb z\,g_qz^3$;
+(W3) $N_0z^3\caz-z^3\bigl(\zeta_n\sez/q_{\min,n}+a_nz+\zeta_nz^2(2+\sez)+\zeta_nM_{\max}z^3a_n\bigr)-z(1+\zeta_na_nz^3)/q_{\min,n}\ge0$;
+(W4) $1-(\varepsilon_W/z^2)z^2>0$; (W5) $\varpi a_n-g_qz^4\ge0$ and $a_nz\le1/10$.
+The bound: $B_Wz^3\le\alpha L_n+R$ with
+$\alpha:=c_{\rm col}/z+X/(\Lambda z^3)$, where
+$c_{\rm col}/z=a_n+\sez q_{0,n}z+\sez^2\zeta_nz+\sez\zeta_nN_0z^3\,q_{0,n}a_nz$,
+$X=(N_0z^3-z^3)((\varepsilon_W/z^2)z+a_n)+(1+\zeta_na_nz^3)(1+a_nz)/q_{\min,n}+h_T\,(w_Tz)\,z$,
+$h_T=1+\zeta_n\sez/q_{\min,n}+a_nz+\zeta_nz^2(1+\sez)+\zeta_nM_{\max}z^3a_n$,
+$w_Tz=z+(r(L)z^3+z^3)(q_{0,n}^2/\zeta_n+g_qz^3)$, and
+$R=\lfloor\chi\rfloor z^3(1+\frac12a_nz)+w_0z^3(1+\zeta_nz^2w_0)+r(L)z^3(1+\frac12a_nz)+(w_ez^2)z(4+2\zeta_nw_ez^2)$
+with $w_0=a_nz+N_0z^3\,q_{0,n}a_n$ and $w_ez^2=z^2(1+\sez)+r(L)z^3\,a_n+N_0z^3\,q_{0,n}a_nz^2$.
+
+The three walls use: $Z_{\rm L}$: $\zeta_n=\ta/z^2$, $\chi_n\in[D_\ell z^3,D_\ell z^3+3.000001(\ta/z^2)z^5]$;
+$Z_{\rm LR}$: $\zeta_n=\tau/z^2$, $\chi_n\in[D_rz^3+((\se-1)/z^4)z^7,\ D_rz^3+2\se z^3]$; $Z_{\rm UR}$: $\zeta_n=\ta/z^2$,
+$\chi_n\in[D_rz^3,\ D_rz^3+\se z^3+(\ta/z^2)z]$. Finally
+$\Psi\le w\sa z^3+(\text{other main terms})+(\alpha+R)_{Z_{\rm L}}+\max(\alpha_{Z_{\rm LR}},\alpha_{Z_{\rm UR}})+R_{Z_{\rm LR}}+R_{Z_{\rm UR}}$.
+
+\section*{Verification status}
+\begin{itemize}
+\item Theorems~\ref{thm:A} and~\ref{thm:sqrt}, Corollary~\ref{cor:B}, Proposition~\ref{prop:D} and
+Lemmas~\ref{lem:translation}--\ref{lem:max}, \ref{lem:ends}, Corollary~\ref{cor:assembly} and
+Proposition~\ref{prop:waste} are proved in full in this text. An earlier write-up of Sections~\ref{sec:block}--\ref{sec:count}
+received an independent AI review, which found no critical or major issue; its minor remarks are included (the case
+$(k,b)=(2,2)$, $L\ge0$ in Lemma~\ref{lem:band}, and the scope of Lemma~\ref{lem:max}, see Remark~\ref{rem:extra}). The
+formulas were also tested in exact arithmetic: \eqref{eq:exact} and the bounds of Theorems~\ref{thm:A}, \ref{thm:sqrt}
+and Proposition~\ref{prop:D} for all $2\le b\le k\le1500$, the angle of Lemma~\ref{lem:angle} for all $2\le b\le k\le250$,
+and actual packings (separating axis tests) for all $b$ and $k\le60$ and some larger cases. Such tests are not proofs.
+\item Theorem~\ref{thm:main} (Section~\ref{sec:stair}) is proved in full; it uses Lemma~\ref{lem:reduction},
+Lemmas~\ref{lem:proj}--\ref{lem:stack}, Lemma~\ref{lem:ends}, Corollary~\ref{cor:assembly} (with
+Lemma~\ref{lem:valid}) and Proposition~\ref{prop:waste}. An earlier write-up of Section~\ref{sec:stair} received two
+independent blank-slate AI reviews, both of which judged it correct with no critical or major issue; their minor
+remarks are included. The proof relies on one evaluation in interval arithmetic, $\Phi(10^{-4/3})\le5.0163$, done by the
+author's program and by three independent computations; the other constants were certified in the same way. The
+construction was tested in exact arithmetic, also by an independent reimplementation (Remark~\ref{rem:stairexact}).
+To our knowledge the proof has not appeared before; it deserves priority in a human review.
+\item Theorem~\ref{thm:main38} (Section~\ref{sec:38}) is proved in full; it uses Lemmas~\ref{lem:col}
+and~\ref{lem:tiltS}, Lemma~\ref{lem:reduction}, Lemmas~\ref{lem:proj}--\ref{lem:stack}, Lemma~\ref{lem:ends},
+Corollary~\ref{cor:assembly} and Proposition~\ref{prop:waste}. An earlier write-up of Section~\ref{sec:38} received two
+independent blank-slate AI reviews, with their own programs: one judged it correct after fixes, the other correct; all
+their fixes are included (the hypothesis (E-iv) in the form $\varepsilon_m+\tau<1$, two table values, the decomposition
+of the certified bound, and the reason for $b_0=10^{16}$). An independent reimplementation found no counterexample. The
+author's own interval program for Corollary~\ref{cor:b35} used too little slack on the wall tilts; the constant
+$C_E=15.54$ is certified by three independent full-range interval coverings ($C_E\le14.964$, $14.963$ and $14.9631$;
+\texttt{mpmath.iv} twice and \texttt{python-flint} arb once). The asymptotic regime ($b\ge10^{16}$) cannot
+be tested by explicit computation; the explicit checks cover the validity of the construction at smaller $b$
+(Remark~\ref{rem:38exact}). It deserves priority in a human review.
+\item Theorem~\ref{thm:cert} is computer-assisted. Its finite part was checked by three programs, two of them written
+independently of the generating program (Section~\ref{sec:cert}).
+\item Section~\ref{sec:open} contains remarks only; Remarks~\ref{rem:37} and~\ref{rem:cg3} are not proved here.
+\item Section~\ref{sec:lit} and the novelty statement rest on a literature search, which cannot prove absence.
+\item No human expert has reviewed this text. The paper has not been refereed. All reviewers and checkers so far are
+AI systems of the same family, which may share blind spots.
+\end{itemize}
+
+\emph{Programs and data.} \url{https://github.com/squarepacker/k2-minus-c-upper} (archived on Zenodo; the DOI is
+given in the repository README). The data files \texttt{stair\_k*.json.gz} (the end pieces of the five certificates),
+the checker \texttt{stair\_check.py}, the generator \texttt{stair\_dump.py} and the interval computation
+\texttt{const\_stair.py} of the constants of Corollary~\ref{cor:b23} and Section~\ref{ssec:proofmain}, the interval
+covering \texttt{cert3e.py} of the constants of Corollary~\ref{cor:b35}, and the wall filler \texttt{r38.py} with the
+exact checker \texttt{chk.py} and the driver \texttt{run\_z.py} (Remark~\ref{rem:38exact}) accompany this text;
+\texttt{README\_code.txt} lists the commands and the expected outputs.
+
+\subsection*{Use of AI}
+Developed with the assistance of Claude (Anthropic), including the proofs, the text and the programs; the author takes
+full responsibility.
+
+\subsection*{Licence}
+This text is distributed under the Creative Commons Attribution 4.0 International licence (CC BY 4.0); the accompanying
+programs are distributed under the MIT licence.
+
+\begin{thebibliography}{WDL}
+\raggedright
+\bibitem[AMS]{AMS} M.~Z.~Arslanov, S.~A.~Mustafin and Z.~K.~Shangitbayev, Improved packings of $n(n-1)$ unit squares in a
+square, Electron.\ J.\ Combin.\ \textbf{28}(4) (2021), \#P4.22.
+\bibitem[Bui]{Bui} H.~D.~Bui, Square packing with $O(x^{0.6})$ wasted area, arXiv:2508.04603v2 (2025, revised 2026).
+\bibitem[CG]{CG} F.~Chung and R.~Graham, Packing equal squares into a large square, J.\ Combin.\ Theory Ser.~A
+\textbf{116} (2009), 1167--1175.
+\bibitem[CG2]{CG2} F.~Chung and R.~Graham, Efficient packings of unit squares in a large square, Discrete Comput.\ Geom.\
+\textbf{64} (2020), 690--699.
+\bibitem[EG]{EG} P.~Erd\H{o}s and R.~L.~Graham, On packing squares with equal squares, J.\ Combin.\ Theory Ser.~A
+\textbf{19} (1975), 119--123.
+\bibitem[El]{El} D.~Ellsworth, Squares in Squares (web page, version of 2026-09-24),
+\url{https://kingbird.myphotos.cc/packing/squares_in_squares.html}.
+\bibitem[Ev]{Ev} evand/square-packing (online problem collection), \url{https://github.com/evand/square-packing},
+consulted 2026-10-08.
+\bibitem[Fr]{Fr} E.~Friedman, Packing unit squares in squares: a survey and new results, Electronic J.\ Combin.,
+Dynamic Survey DS7, version of 2009 (errata 2023).
+\bibitem[G\"o]{Go} F.~G\"obel, Geometrical packing and covering problems, in: Packing and Covering in Combinatorics
+(A.~Schrijver, ed.), Math.\ Centre Tracts \textbf{106}, Mathematisch Centrum, Amsterdam, 1979.
+\bibitem[Le]{Le} jlevy/squares (online collection), \url{https://github.com/jlevy/squares}, consulted 2026-10-08.
+\bibitem[McC]{McC} R.~McClenagan, Optimally packing a large square by unit squares, arXiv:2602.01484 (2026).
+\bibitem[McC2]{McC2} R.~McClenagan, Master's thesis, UNBC (University of Northern British Columbia), 2024.
+\bibitem[Q]{Q} S.~Ryu, Packing $k^2-c$ unit squares: a lower bound of order $k^{1/4}$ for the deficiency, preprint,
+version~1.0, 2026, doi:10.5281/zenodo.23212643 (all versions: doi:10.5281/zenodo.23212642); programs:
+doi:10.5281/zenodo.23211207.
+\bibitem[R]{R} S.~Ryu, Packing $k^2-c$ unit squares: $s(k^2-c)=k$ for all large $k$, preprint, version~1.2, 2026,
+doi:10.5281/zenodo.23194104; programs and data: doi:10.5281/zenodo.23194031 and
+\url{https://github.com/squarepacker/k2-minus-c} (release v1.2).
+\bibitem[RV]{RV} K.~F.~Roth and R.~C.~Vaughan, Inefficiency in packing squares with unit squares, J.\ Combin.\ Theory
+Ser.~A \textbf{24} (1978), 170--186.
+\bibitem[T]{T} S.~Ryu, Packing $k^2-c$ unit squares: a lower bound of order $k^{1/3}$ for the deficiency, preprint,
+version~1.0, 2026, doi:10.5281/zenodo.23213564 (all versions: doi:10.5281/zenodo.23213563); programs:
+doi:10.5281/zenodo.23212059 (all versions: doi:10.5281/zenodo.23212058).
+\bibitem[WDL]{WDL} S.~Wang, T.~Dong and J.~Li, A new result on packing unit squares into a large square,
+arXiv:1603.02368v2 (2016).
+\end{thebibliography}
+\end{document}

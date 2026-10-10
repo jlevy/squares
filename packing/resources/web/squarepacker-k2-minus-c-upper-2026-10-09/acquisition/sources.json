@@ -1,0 +1,57 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-10T10:54:04Z",
+  "git_scope": "Complete v1.0 tree, 35 files: 33 retained byte for byte, the three smaller Theorem 1.6 certificates as their original gzip; the two largest certificates (2.6 and 4.5 MB) are pinned by digest and hosted outside Git under OR-18.",
+  "sources": [
+    {
+      "id": "squarepacker-k2-minus-c-upper",
+      "source_url": "https://github.com/squarepacker/k2-minus-c-upper",
+      "source_ref": "v1.0",
+      "source_commit": "700668795e6b95f0bf2a2c6de104adaf3a3ebce0",
+      "committed_utc": "2026-10-09T07:02:13Z",
+      "git_tree": "ecd79f93062ae969ba217358b12ba00366e81b20",
+      "archived_path": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source",
+      "subtree_manifest": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".zenodo.json",
+        "LICENSE",
+        "README.md",
+        "SHA256SUMS",
+        "code",
+        "data",
+        "paper"
+      ],
+      "subtree_file_count": 35,
+      "subtree_total_bytes": 9554688,
+      "retained_file_count": 33,
+      "retained_total_bytes": 2483157,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "data/stair_k100000000.json.gz",
+          "bytes": 4494252,
+          "sha256": "d4c76e64198c7b4782446a76916b687be694598a446827addc2f0001437918b2",
+          "reason": "a certificate of several megabytes kept out of Git under OR-18; hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml and in the Zenodo archive 10.5281/zenodo.23256655"
+        },
+        {
+          "path": "data/stair_k38250000.json.gz",
+          "bytes": 2577279,
+          "sha256": "2a1e7bdca5be06168167cdb8dfd43bde299847fed4d84bed154ef86fa4f43a0a",
+          "reason": "a certificate of several megabytes kept out of Git under OR-18; hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml and in the Zenodo archive 10.5281/zenodo.23256655"
+        }
+      ],
+      "license": "CC BY 4.0 for the paper (paper/LICENSE); MIT for the programs in code/ and the data in data/ (LICENSE); both original notices retained.",
+      "claims": [
+        "Issue #471, Theorem 1.4: c*(k) <= 8 ceil(sqrt(k-4)) - 1 for every integer k >= 6, from the explicit L-shaped packing of Theorem 1.3 (c*(k) <= k^2 - N(k,b) - 1 < 6b + 4k/b - 3 for 2 <= b <= k).",
+        "Theorem 1.2: c*(k) < 20.668 k^{2/5} + 0.623 for every integer k >= 1.6*10^7, with the constants certified in interval arithmetic (code/const_stair.py).",
+        "Theorem 1.1 of version 1.0: c*(k) < 43.06 k^{3/8} + 2*10^-5 for every integer k >= 4*10^26, with the end constant certified by the interval covering code/cert3e.py.",
+        "Theorem 1.6: c*(10^5) <= 1583, c*(10^6) <= 3972, c*(10^7) <= 10039, c*(3.825*10^7) <= 16988 and c*(10^8) <= 24790, from the end packings in data/ checked in exact rational arithmetic (code/stair_check.py)."
+      ],
+      "original_gzip": [
+        "source/data/stair_k100000.json.gz",
+        "source/data/stair_k1000000.json.gz",
+        "source/data/stair_k10000000.json.gz"
+      ]
+    }
+  ]
+}
