@@ -1148,6 +1148,8 @@ documents:
   - {path: docs/project/postmortems/postmortem-2026-08-23-soundness-class.md, role: postmortem, authority: supporting, lifecycle: maintained}
   - {path: docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md, role: postmortem, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md, role: plan, authority: current, lifecycle: transient}

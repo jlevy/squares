@@ -2,7 +2,7 @@
 
 # Agenda map
 
-436 agenda commitments across 42 agendas, as declared in each agenda's own frontmatter.
+443 agenda commitments across 43 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **20** in_progress, **25** ready, **21** tentative, **72** blocked, **65** stopped, **233** complete.
+- **20** in_progress, **31** ready, **22** tentative, **72** blocked, **65** stopped, **233** complete.
 
 - **29 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`, `BC-364`, `BC-365`, `BC-396`, `BC-436`, `BC-438`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -86,6 +86,13 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-042 | `BC-380` | ready | 3 | correctness | tool_validation | Can a direction-dependent parent-centre clip behind colgen's clip parameter, and a converter from a frozen… | `think-m9iz` |
 | agenda-043 | `BC-430` | in_progress | 0 | process | research | Coordinate the bounded ten-hour continuation | `think-ipel` |
 | agenda-043 | `BC-439` | in_progress | 1 | efficiency | measurement_validation | Close efficiency evidence and integration handoff | `think-ypk2` |
+| agenda-046 | `BC-455` | ready | 0 | process | research | Which commitments most directly reduce the two remaining global proof gaps on the launch host? | `think-wnbr` |
+| agenda-046 | `BC-461` | ready | 0 | correctness | measurement_validation | Do the proposed and completed arguments justify exactly their declared claims? | `think-mfsn` |
+| agenda-046 | `BC-456` | ready | 1 | insight | research | Can exact conversion and coordinatewise slider bounds make the capture target explicit and less wasteful? | `think-9tmv` |
+| agenda-046 | `BC-457` | ready | 1 | insight | research | Does the repaired, correctly scored producer contract from the actual cells within the frozen controls? | `think-ydg5` |
+| agenda-046 | `BC-460` | ready | 1 | insight | research | Can a bounded conversion or stronger wall/pose implication remove surviving nonterminal possibilities? | `think-lhty` |
+| agenda-046 | `BC-458` | tentative | 3 | correctness | measurement_validation | What independent-checker inputs and mutant obligations are missing for a later complete decision? | `think-hye3` |
+| agenda-046 | `BC-459` | ready | 3 | efficiency | tool_validation | Can retained Rust and Python receipts be compared by one maintained, refusal-tested tool? | `think-n53s` |
 
 ## Blocked, and on what
 
@@ -230,6 +237,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-043 | active | 2 |  |  | 2 |  | 6 | 10 |
 | agenda-044 | completed |  |  |  |  |  | 3 | 3 |
 | agenda-045 | completed |  |  |  |  |  | 5 | 5 |
+| agenda-046 | paused |  | 6 | 1 |  |  |  | 7 |
 
 ## By program
 
@@ -538,8 +546,15 @@ Open frontier: `BC-306`.
 | agenda-045 | `BC-452` | complete | Which measured coverage or gate bottleneck should be optimized to unblock n17 progress? |
 | agenda-045 | `BC-453` | complete | Does the contact-normalization hand theorem give a complete useful structural discriminator? |
 | agenda-045 | `BC-454` | complete | Can exact current-source certification debt be repaired beside mathematical work? |
+| agenda-046 | `BC-455` | ready | Which commitments most directly reduce the two remaining global proof gaps on the launch host? |
+| agenda-046 | `BC-456` | ready | Can exact conversion and coordinatewise slider bounds make the capture target explicit and less… |
+| agenda-046 | `BC-457` | ready | Does the repaired, correctly scored producer contract from the actual cells within the frozen… |
+| agenda-046 | `BC-458` | tentative | What independent-checker inputs and mutant obligations are missing for a later complete decision? |
+| agenda-046 | `BC-459` | ready | Can retained Rust and Python receipts be compared by one maintained, refusal-tested tool? |
+| agenda-046 | `BC-460` | ready | Can a bounded conversion or stronger wall/pose implication remove surviving nonterminal… |
+| agenda-046 | `BC-461` | ready | Do the proposed and completed arguments justify exactly their declared claims? |
 
-Open frontier: `BC-430`, `BC-436`, `BC-438`, `BC-439`.
+Open frontier: `BC-430`, `BC-436`, `BC-438`, `BC-439`, `BC-455`, `BC-456`, `BC-457`, `BC-458`, `BC-459`, `BC-460`, `BC-461`.
 
 ### `post-optimality-low-n`
 

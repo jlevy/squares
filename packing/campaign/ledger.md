@@ -951,6 +951,20 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | BC-453 | research | 17 | complete | 1 | think-nvkf | docs/project/research/research-2026-10-07-n17-global-contact-budget.md |
 | BC-454 | tool_validation | 17 | complete | 1 | think-7hy3 | docs/project/reviews/review-2026-10-07-n17-session-186-performance.md |
 
+### [agenda-046](agendas/agenda-046-n17-eight-hour-proof-block.md) — n17 Eight-Hour Proof Block
+
+Status: **paused**. Prepare and, on launch, execute an eight-hour n17 session that advances the two gaps toward a complete proof: exclude nonterminal states and compose capture with the terminal theorem. Keep repeated confirmation bounded and report exact mathematical gains, incomplete obligations and resource refusals separately.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-455 | research | 17 | ready | 0 | think-wnbr | docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md |
+| BC-456 | research | 17 | ready | 1 | think-9tmv | packing/campaign/hypotheses/H-347-n17-exact-conversion-allowances.md |
+| BC-457 | research | 11, 17 | ready | 1 | think-ydg5 | packing/campaign/hypotheses/H-345-n17-cell-seeded-twenty-round-capture.md |
+| BC-458 | measurement_validation | 17 | tentative | 3 | think-hye3 | packing/campaign/hypotheses/H-348-n17-second-local-theorem-checker.md |
+| BC-459 | tool_validation | 17 | ready | 3 | think-n53s | packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md |
+| BC-460 | research | 17 | ready | 1 | think-lhty | packing/campaign/hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md |
+| BC-461 | measurement_validation | 17 | ready | 0 | think-mfsn | docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md |
+
 ## Series
 
 | id | status | title | rounds | opened because |
