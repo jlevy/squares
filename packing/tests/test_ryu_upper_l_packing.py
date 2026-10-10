@@ -25,7 +25,7 @@ def test_every_small_packing_is_valid_with_n_k_b_squares() -> None:
 def test_the_counting_statements_hold_on_a_short_range() -> None:
     checks = check_formulas(300)
     assert all(check.holds for check in checks), [c for c in checks if not c.holds]
-    assert len(checks) == 7
+    assert len(checks) == 8
 
 
 def test_theorem_14_is_tight_for_the_construction_where_the_review_says() -> None:

@@ -197,6 +197,7 @@ def check_formulas(limit: int) -> tuple[Check, ...]:
     corollary_51: list[int] = []
     remark_52: list[int] = []
     first_below_k_minus_1 = None
+    not_below_k_minus_1: list[int] = []
     for k in range(6, limit + 1):
         b = ceil_sqrt(k - 4)
         bound = 8 * b - 1
@@ -212,6 +213,8 @@ def check_formulas(limit: int) -> tuple[Check, ...]:
             remark_52.append(k)
         if first_below_k_minus_1 is None and bound < k - 1:
             first_below_k_minus_1 = k
+        if k >= 60 and not bound < k - 1:
+            not_below_k_minus_1.append(k)
     at_22 = tuple(floor(x) for x in eta(22, ceil_sqrt(18)))
     return (
         Check(
@@ -256,6 +259,15 @@ def check_formulas(limit: int) -> tuple[Check, ...]:
             "Section 1 (the comparison with c*(k) <= k - 1)",
             first_below_k_minus_1 == 65,
             str(first_below_k_minus_1),
+        ),
+        # The bound is below k - 1 at k = 65..68 and again only from k = 73 (where
+        # ceil(sqrt(k-4)) = 9 gives 71 >= k - 1 for k <= 72); the review's "from k = 65
+        # on" overstates it.
+        Check(
+            f"8 ceil(sqrt(k-4)) - 1 >= k - 1 for 60 <= k <= {limit} exactly at 60-64 and 69-72",
+            "Section 1 (the comparison with c*(k) <= k - 1)",
+            limit < 73 or not_below_k_minus_1 == [60, 61, 62, 63, 64, 69, 70, 71, 72],
+            str(not_below_k_minus_1),
         ),
     )
 

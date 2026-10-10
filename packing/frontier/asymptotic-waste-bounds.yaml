@@ -365,9 +365,10 @@ deficiency_upper_bounds:
       eta = (2k-10)/(b^2+1) + 8/(b^2+1)^2 and eta' = eta - 2b/(b^2+1) (equation 5.1);
       Corollary 5.1 gives c*(k) < 4 sqrt(6) sqrt(k) for k >= 6.
     corollary: >-
-      REPORTED: c*(k) <= k - 2 from k = 65 on, which improves Arslanov, Mustafin and
-      Shangitbayev's c*(k) <= k - 1 (stated in their paper for n >= 12); c*(k) = O(sqrt k)
-      with an explicit constant for every k >= 6. It is consistent with every best-known
+      REPORTED: c*(k) <= k - 2 at k = 65-68 and for every k >= 73 (at k = 69-72 the bound
+      is at least k - 1), which improves Arslanov, Mustafin and Shangitbayev's
+      c*(k) <= k - 1 (stated in their paper for n >= 12) there; c*(k) = O(sqrt k) with an
+      explicit constant for every k >= 6. It is consistent with every best-known
       value the atlas holds and weaker than them for k <= 18 (review, section 2).
     complementary_case: >-
       Roth and Vaughan's bound concerns W(x) away from integers and tends to 0 as
