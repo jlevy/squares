@@ -5,7 +5,7 @@ title: Resolve catalogue review findings with lossless storage and bounded publi
 kind: bug
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -13,151 +13,155 @@ parent_id: is-01m4ekeq41zfgtf5dp8r462n05
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:03:17.263Z
-updated_at: 2026-10-10T21:51:38.780Z
+updated_at: 2026-10-10T22:40:05.203Z
 started_at: 2026-10-08T23:04:31.194Z
 ---
 Resolve PR403 A1/B1/C1/D1/D2 source-pin writing, linear isolation, full-precision interval serialization, foundation documentation and native storage findings; complete PR435 original C1 limits using maintained linked assets. Final reviewed parent0f60/child5abc preserve current coefficients, source custody, selected inputs and all8protected replay leaves. All HTML keep2MB and all inline scripts4096B; no publication waiver remains. UpstreamPR474 raises the producer to200MiB; dated192MiB receipts are preserved. Root owns Git/PR publication; final required/full hosted qualification and marked dispositions remain pending. Audit is selected-roster evidence, not all transitive completeness.
 
 ## Notes
 
-# Polynomial refresh checkpoint at 2026-10-10T21:48:23Z
+# Polynomial refresh checkpoint at 2026-10-10T22:38:39Z
 
-Ongoing slice from `2026-10-10T17:15:28Z`: 272.9 minutes elapsed wall.
-Prior qualified slice 141.3 minutes remains separate; wall is not CPU time.
+This slice remains ongoing from `2026-10-10T17:15:28Z`: 323.2 minutes elapsed wall as of
+2026-10-10T22:38:39Z. The prior qualified slice used 141.3 minutes separately.
+Wall is not CPU time.
 No solver, contact, geometry/Lean, adoption or optimality campaign ran.
 
-Stack 447: main → [PR 403](https://github.com/jlevy/squares/pull/403) →
-[PR 435](https://github.com/jlevy/squares/pull/435), open/unmerged.
-Current clean published heads on main `3be3285cff654c6667dcdea88e9d034b550eee02`: parent
-`e5892db72ecc9a79ea09ddfb2d553a2ab806db3e`/source
-`0aa5724da69d2d11a02b7464e20623da363d5054`; child
-`cf639cfef59d0f8859c1567acfa0532c68adcaf0`/source
-`7827bba45340324fe8e0879724460b14facf401e`. `final-upstream3be-restack-heads.json` and
-`child3be-scope-amend-final-pin-receipt.json` record completed official replay/pins.
-Submit/sync0 at21:43:43Z: `stack-final-publication-sync-e589-cf639.json`. Remote/PR
-heads matched; bothOPEN/unmerged, stack447/needsRebase=false.
-Superseded a87/c45 and3d/b810 LOCAL7ce candidates were never published.
-Eight dated small commands0: `final7ce-native-web-receipt.json`,21:13:38–21:14:08Z.
+Published stack 447: main → [PR403](https://github.com/jlevy/squares/pull/403) →
+[PR435](https://github.com/jlevy/squares/pull/435), both OPEN/unmerged.
+Main `3be3285cff654c6667dcdea88e9d034b550eee02`; clean parent
+`e5892db72ecc9a79ea09ddfb2d553a2ab806db3e` / source
+`0aa5724da69d2d11a02b7464e20623da363d5054`; clean child
+`cf639cfef59d0f8859c1567acfa0532c68adcaf0` / source
+`7827bba45340324fe8e0879724460b14facf401e`. Submit/sync exited 0 at 21:43:43Z; remote/PR
+heads and bases matched, needsRebase=false:
+`stack-final-publication-sync-e589-cf639.json`. Actual full negatives now appear in both
+PR bodies, exact readback22:36:53Z:
+`pr403-pr435-final3be-full-negative-body-edit-receipt.json`.
 
-PR477: METHODS v0.2.0/October10 history/five figures, sparse Casson106/SQUISH108, survey
-PDF retained; exact independent edition/zerofigures/HTML+Markdown/no reportPDF. Shared
-huntREADME selects both; ten other exact-only paths strict.
-Private workers clear PACKING_PROJECT_ROOT, replace PYTHONPATH with three private roots;
-sys.prefix missing-.venv fallback only in an actual venv.
-Copy custody/eight replay leaves/200MiB/caps retained:
+Parent full [38088753256](https://github.com/jlevy/squares/actions/runs/38088753256)
+SUCCEEDED/watch 0, all 11 prerequisites plus aggregate and macOS portability.
+Validation took25m57; full envelope27m06. Literal ALL 403 ran 22:11:27.496–28.575Z, exit
+0/snapshot 0 at stable e589. Both repaired tests passed.
+JUnit combined 13.752s (case-pages setup 13.70s) and 3.910s (orientation) are not exact
+calls; neither target appeared in the minimum 12s call-duration list.
+`hosted-38088753256-final.json`; `parent-e5892db7-pr403-final-all-checks-command.json`;
+`parent-e589-repaired-two-case-retained-timing-evidence.json`.
+
+Child full [38088757818](https://github.com/jlevy/squares/actions/runs/38088757818)
+**FAILED**, watch 1, at published cf639. Literal ALL435 22:30:41.330–42.999Z exited
+0/snapshot 0, stable cf639; it does not override the full failure.
+`hosted-38088757818-final.json` / `child-cf639cfe-pr435-final-all-checks-command.json`.
+Sole failure: overview forwarder call 12.44s wall/12.34s CPU exceeded enforced 12s. All
+functional shards passed: A4176/3skip, B4095/18skip, C5186/1skip/1xfail, D3105/23skip.
+Ten other prerequisites/Mac passed; aggregate failed.
+`child-cf639-full-negative-timing-functional-evidence.json` retains exact outcomes.
+A reviewed one-file fixture repair is in progress; 14 replies remain unposted.
+All four current automatic runs succeeded/watch 0: parent Packing 38088709317/Pages
+38088709365, child Packing 38088713477/Pages 38088713506.
+`hosted-e589-cf639-automatic-final-receipt.json`. Full command2484.56s/3600 band was
+reported, not enforced, on nonreference4cpu/jobs1/inner2. Validation job2603s exceeded
+reporting2400; criticalpath2725/3430. No host/test-cause attribution.
+0atx IN_PROGRESS/no delegate owns wall reporting:
+`remaining-validation-reporting-budget-owner-final3be.json`.
+`final3be-final-qualification-summary-e589-cf639-negative-20261010T2230Z.json` retains
+negative qualification.
+Repair qualification/replyURLs/end-wall remain pending.
+
+Broad local `--push` at e589/cf639 has **NOT RUN**, paused for low external space and
+accumulated retained-copy risk.
+Worker/native caps do not bound all clones/outputs.
+No cap, skip, ceiling or worker waiver.
+Parent edit passed 66/66, exit 0/244.057s; child 68/68, exit 0/165.847s. Bounded child
+publication/paper/isolation/two timing controls passed 115 in 58.75s, command 60.413s:
+`final3be-edit-and-bounded-tests-receipt.json`.
+
+PR477 preserves METHODS v0.2.0/five figures/sparse inputs and survey PDF. Exact output
+stays independent/zero figures/HTML+Markdown/no report PDF. Shared hunt README selects
+both reports; ten exact-only paths stay strict.
+Private worker root/import isolation and actual-venv fallback remain:
 `independent-upstream3be-semantic-preflight.json`.
 
-Broad local --push e589/cf639 has NOT RUN: low-space/retained-copy risk remains;
-worker/source caps do not bound accumulated clones.
-No waiver. Current parent edit66/66 passed0/244.057s, child68/68 passed0/165.847s.
-Bounded child Pages/paper/three isolation/two reviewed timing controls:115PASS58.75s,
-command60.413s: `final3be-edit-and-bounded-tests-receipt.json`. Publication/readback
-verified; hosted full/ALL and14 reply URLs pending; strong preserves all14 finding
-IDs/mappings. No full-pass claim.
+There are 324 current cases/321 child exact identities/77 proved; numeric 29/55/71
+remain. Parent 320 exact plus degree-only n=83. Full n=83 degree 672 retains 673
+integers/a 724-digit coefficient; source ordinal 27 is stated, not independently
+counted. Canonical 538 records/214 history/560 vectors/6,378 integers.
+Public 352 records/vectors/2,128 strings = 324 current + 28 source; omits 186
+superseded/ 22 redundant notes only publicly.
+Full coefficients/custody/article/anchors/no-JS remain.
+Fifteen pending occurrences/14 bounds stay V0/C0: Daniel 132/T131 source-only; Daniel
+155/T128 distinct after unchanged Couzo, strict conflicting-custody guard intact.
+Equal side/shared poses establish neither equivalent geometry, global ranking nor
+adoption. All 324 rigidity objects/Ahmed/n=211 reflection+motion/triangle atlas/aliases
+and n266 notes remain.
+Thirteen acquired originals 198,944,687B are separately hosted; tracked-PDF5 MiB.
+Identity, geometry, stationarity, rigidity and optimality require distinct evidence.
 
-Full pending: parent
-[38088753256](https://github.com/jlevy/squares/actions/runs/38088753256)
-created21:44:08Z;child
-[38088757818](https://github.com/jlevy/squares/actions/runs/38088757818)
-created21:44:13Z;queued at21:45:01 discovery:
-`final3be-full-workflow-run-discovery.json`. Previewcf639 updated21:44:41Z:3files
-changed/745unchanged;HTTP200byteequality reader15,879/complete1,959,532/Markdown768,697:
-`preview-update-published-cf639.json`;no new layout/deployed claim.
+Eight native/web commands exited 0 on clean unchanged heads:
+`final3be-native-web-receipt.json`. Parent 200,236,210/209,715,200B, headroom
+9,478,990B/7,064 operations/974,993 dedupe; child 202,391,509B, headroom
+7,323,691B/7,113 operations/975,703 dedupe.
+All 8 protected replay leaves remain.
+Inventory/audit counts are not allocated FS, live-source equality or actual physical
+copies; immutable Git conservation is separate.
+Complete/reader HTML 1,959,532/15,879B,9 approved scripts.
+Startup 295,423/3,100,058 =0.09529595897883202 ≤ explicit 0.10,8 automatic assets/36
+controls: `final3be-web-metrics.json`. Clicked coefficients/metadata are omitted only
+from metric, no latency claim.
+Every physical HTML ≤ 2,000,000B/inline executable ≤ 4,096B before classification;
+missing/changed/collision/unknown refusals intact.
+Preview cf639 HTTP 200 byte equality 21:44:41Z,3 files changed/745 unchanged.
+Eight layout views remain dated 5abc+conserved inputs, not new layout/deployment.
 
-Catalogue324current/321exact/77proved; numeric29/55/71; parent320exact/degree-only83.
-Canonical538records/214history/560vectors/6,378integers; public352records/vectors/
-2,128strings=324current+28source, omits186superseded/22notes only publicly.
-Fulln83:673integers/724-digit coefficient; custody/no-JS retained.
-15pending occurrences/14bounds V0/C0; Daniel132/T131 source-only and155/T128 distinct
-afterCouzo; equal side≠geometry/adoption.
-All324rigidity/Ahmed/n211display/triangle atlas/aliases retained.
-ReportPDF retired;13 scientific originals198,944,687B separately hosted; trackedPDF5MiB.
-Identity/geometry/rigidity/optimality evidence distinct.
+Dated negatives remain in concise/interim bodies and exact history: 0f60 whole 1800s/
+7F/41E printed markers unclassified;5511 process-group/n17 failures;81fff reach 900s
+unfinished widened-annulus;5abc deliberately 130/incomplete.
+Parent 60cf local 66/67, 258/739 files/900s:8,440 PASS/50 SKIP/one unfinished site
+preview. Child709 deliberately 130:68 steps/1,342 PASS/1 SKIP/one unfinished fresh
+register. Child2bd8 local 68/69,522/749 files/900s:3,621 PASS/1 SKIP/one unfinished
+dilation refusal. Normal PACK_JOBS=1, outer 10/inner 3/pool 3 caps; pool-heavy never
+started. Marker-busy routing is known, holder/timeout cause unknown.
+Missing terminal/JUnit/ unstarted censuses and unfinished IDs prevent claiming complete
+local passes.
 
-Current e589/cf639 native/web eight commands0: `final3be-native-web-receipt.json`.
-Parent200,236,210/209,715,200B/headroom9,478,990/7,064operations/974,993dedupe;
-child202,391,509B/headroom7,323,691/7,113operations/975,703dedupe/all8replayleaves.
-Inventory/audit counts≠allocatedFS/live equality/physical copies; immutable Git bridge.
-Complete/readerHTML1,959,532/15,879B;9scripts/352records+vectors/2,128strings retained.
-Metric295,423/3,100,058=.09529595897883202≤.10/8automatic+36controls:
-`final3be-web-metrics.json`; clicked metadata/coefficients excluded only from metric, no
-latency claim. PhysicalHTML≤2M/inline≤4096 before classification unchanged.
-Layout8 dated5abc+inputconservation; prior60cf/2bd8 executions stay dated.
+709 Pages oversized seven 4699B forwarders and SuiteD/full stale 192 vs 200 MiB were
+repaired:15 GREEN/45.01s with file/HTTP JS/no-JS/refusals, lint/types 0. 60cf full
+enforced 12s atlas 15.27/legacy 16.59 failures led to reviewed test reuse: all 11 link+5
+geometry assertions/one real numerical check retained; dirty 60cf2 PASS/ 17.66s under
+unchanged 12s, lint/types 0/independent0 findings.
+Readiness RED−15/reapedtrue became 4 GREEN/1.29s under original 0.2 deadline/0.05
+grace/−9/ reaping. n17 serial 1 PASS/9.37s at unchanged 15/16/20 limits; previous cause
+unknown. No host-cause attribution or erasure of dated negatives.
 
-Dated local negatives: parent60cf since5511 exit1,66/67PASS,258/739files, sole900s
-timeout;8,491starts/8,490finishes=8,440PASS/50SKIP/0failed labels, one unfinished
-site-preview test/gw0missing/noJUnit.
-Readiness/EPERM actual10-worker PASS; n17 absent:
-`parent-push-gate-60cf-final-derived-receipt.json`/node census.
-Child709 since81fff deliberately SIGINT130:68stepsPASS,530/749files,
-1,342PASS/1SKIP/0failed/error IDs/one unfinished fresh-register test:
-`child-push-gate-709cf-interrupted-derived-receipt.json`. Child2bd8 since709 exit1
-at20:39:13.103172Z:68/69PASS,522/749files, sole900s timeout;
-3,623starts/3,622finishes=3,621PASS/1SKIP/0failed labels, unfinished
-`tests/test_dilation_corollary.py::test_a_threshold_record_whose_declarations_disagree_is_refused`.
-No sessionfinish/JUnit/unstarted census:
-`child-push-gate-2bd8-final-derived-receipt.json`. Normal serial pytest/PACK_JOBS1/main;
-outer10/inner3/pool3 are caps, pool-heavy never started.
-Marker-busy fallback establishes serial routing; holder/timeout cause unknown.
-`child-2bd8-reachable-routing-evidence.json`/
-`final7ce-worker-routing-and-clone-risk-reconciliation.json`. No performance
-cause/waiver.
+Root removed 15 audited source-copy leaves (7+8): allocated 4,570,116,096B/~4.26 GiB,
+apparent 4,092,782,284B. Four byte-identical diagnostics total 58,672B, not four
+distinct inputs. Latest readback verifies all 15 absent/all 4diagnostics14,668B each
+Git-blob matched; primary untracked files/original sources/cache
+fixtures/parents/logs/symlink targets kept.
+Dated internal/external free space 12,809,260/4,857,416KiB fluctuates with concurrent
+activity, not exclusive APFS reclaim/test causation.
+Other keep decisions remain; root cleanup bead closed.
+`older20261009-source-copy-permanent-cleanup.json`,
+`olderbase-source-copy-permanent-cleanup.json`,
+`final3be-cleanup-source-preservation-readback.json`.
 
-Parent60cf auto Packing38081729561/Pages38081729567/ALL0;full38081768200 failed only 12s
-atlas15.27/legacy16.59 calls, functional shards3,594PASS1SKIP/5,143PASS25SKIP; 2,412.56s
-within3,600/postmergeFAIL. Different rosters/advisory automatic calls, no host-cause
-claim: `hosted-38081768200-final.json`/ Reviewed reuse retains11+5 assertions/one true
-numerical check; dirty60cf2PASS17.66s, calls0.04/4.29 under12s, lint/types0/independent0
-findings. No production/skip/scheduler/ceiling changes:
-`parent60cf-two-test-reuse-results.json`/
-`independent-parent60cf-two-test-reuse-frozen-review.json`;assertions retained.
-
-Published2bd8 automatic Packing38084616725/Pages38084616747 passed; ALL435exit0 at
-20:46:50.550419–51.691196Z stablehead,32pass/26skip:
-`child-2bd8-final-automatic-qualification.json`. No successor/full verdict.
-Old709 automatic Pages7 oversized4,699B scripts/7,510of7,517PASS; SuiteD
-stale192vs200MiB:1FAIL3,218PASS5SKIP273.05s. Six-file a436
-shared-script/root+nested/assetsfirst/stalecap repair:
-RED1FAIL4.00s→reviewedGREEN15PASS45.01s including file/HTTP,JS/noJS,query/fragment,
-byte/staging/collision/missing/changed refusals;lint/types0:
-`child709-forwarder-fix-results.json`/`independent-child-forwarder-cap-review-dirty709cf.json`.
-709full38081771925/watch1 failed same assertion:1FAIL3,218PASS5SKIP158.86s,
-integration1,497/3,600exit1/postmergeFAIL/oldALL435exit1:
-`hosted-38081771925-final.json`/`child-709cf926-pr435-final-all-checks-command.json`.
-
-Prior0f60 7F/41E and5511/81fff negatives remain dated; broad causes unestablished.
-5511 failed n17 deterministic-core/process-group controls; termination controlledRED-15/
-reapedtrue, reviewed readinessGREEN4PASS1.29s/types0. Exactn17 serial1PASS9.37s,
-unchanged15/16/20limits, cause unestablished.
-Dated81fff68/69timeout2,748PASS/1SKIP/ 0fail/error/oneunfinished widened-annulus;
-earlier5abc130cancel retained.
-
-Root cleanup15 exact audited leaves(7+8):
-`older20261009-source-copy-permanent-cleanup.json`/
-`olderbase-source-copy-permanent-cleanup.json`;4,570,116,096allocated(~~4.26GiB)/
-4,092,782,284apparentB. Four byte-identical mutant instances58,672B, not four distinct
-inputs. Inline/parents/cachefixtures/otherruns/logs/originalsources/symlinktargets kept;
-other source/build/cache decisions unchanged.
-Last cleanupdf4,839,924KiB; observed gain~~2.73GiB includes concurrent writers/cleanup,
-no exclusive APFS reclaim/causal claim.
-Prior24.3GiB scratch audit/pause dated; owner `think-jekl`.
-
-Keep `think-jygq`/`think-wuol`/`think-ja78`/`think-z3qh`/`think-okxn`/`think-wiu3`
-in_progress: unmerged/successor qualification incomplete.
-Delegates jygq/wuol/wiu3 `codex-polynomial-resume-01a11d93`;ja78/z3qh
-`codex@spud10.local`;okxn `claude-code@spud10.local`. Preserve all tails after
-`polynomial-refresh-prior-notes`; close only scoped engineering after actual
-current-head CI. Science owners remain open.
-
-Numeric29/55/71 `think-je8y`/`think-phh8`/`think-1blg`; DanielT131 adoption/atlas
-`think-kkj2`, import/reply `think-iyij`; CouzoT128/T130 replay/adoption `think-lhtz`,
-custody `think-0mlq`;reported106/152/177 geometry/Lean#419/`think-8sm2`;n83 ordinal
-`think-chsu`;Rehwaldt68 `think-nv5o`;ideal68/105/292 `think-056g`/`think-gl59`/
-`think-w622`. Acquisition `think-88r0`closed≠adoption; snapshot `think-t1lk`; startup
-`think-jygq`/`think-5jr5`/`think-rxyl`. Next unopened
-W7/`think-s6np`activecontacts→independentn11octic→currentRyXu102
-certificate/contact+confirmedseed→one preregistered boundedW6/`think-ohhz`, input
-`think-eu89`. Annotation `think-w19q`outside; science#405/#419 open.
+Keep jygq/wuol/ja78/z3qh/okxn/wiu3 IN_PROGRESS until root records scoped dispositions.
+Preserve exact tails after `polynomial-refresh-prior-notes` and delegates:
+jygq/wuol/wiu3 `codex-polynomial-resume-01a11d93`; ja78/z3qh `codex@spud10.local`; okxn
+`claude-code@spud10.local`. Engineering closes no scientific work.
+Owner audit 21 reads exited 0: `remaining-science-owner-status-final3be.json`. OPEN:
+numeric je8y/phh8/1blg; Daniel adoption kkj2; Couzo adoption lhtz; n=83 ordinal chsu;
+ideal 68/105/292 prerequisites 056g/gl59/w622; W7 (s6np)/next bounded n=102 (ohhz).
+IN_PROGRESS: import/reply iyij; custody 0mlq; reported 106/152/177 geometry/Lean #419
+(8sm2); Rehwaldt n=68 (nv5o); snapshot t1lk; startup jygq/5jr5/rxyl; broader W6 (eu89).
+Acquisition 88r0 CLOSED only for acquisition.
+w19q OPEN is pytest pool_heavy lane debt for two three-worker n=11 controls.
+Next entry stays unopened: W7 (s6np) exporter+independent n=11 → RyXu n=102 certificate/
+contact+confirmed seed → one preregistered bounded n=102 protocol under ohhz.
+eu89 owns broader W6 high-precision re-solve/relations.
+Eleven claimed ideals remain unadmitted; finite rational identities prove no ideal
+geometry/stationarity/optimality.
+Scientific #405/#419 remain open.
 
 Evidence:
 `/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/`.
