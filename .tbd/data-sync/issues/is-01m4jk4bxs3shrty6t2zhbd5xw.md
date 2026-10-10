@@ -5,7 +5,7 @@ title: "Import Mishapolk: 28 packings below the register at n = 84-306 (#470)"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:28.441Z
-updated_at: 2026-10-10T15:21:32.095Z
+updated_at: 2026-10-10T20:28:12.589Z
 started_at: 2026-10-10T09:49:27.753Z
 ---
 Issue https://github.com/jlevy/squares/issues/470 (opened 2026-10-09, errata 2026-10-09). Corrected certificates at Mishapolk/square-packing-records dd3da5c (the 4e1a601 square-199 and square-263 overlapped, found by squarepacker's 60-digit check). Decimal pose files rounded up to 12 decimals; n = 105 closed form withdrawn; n = 88 ties SQUISH at 12 decimals. Needs rational witnesses or a declared dilation before any exact replay. Stages 1-3.
@@ -57,3 +57,34 @@ CLAIMS (acquisition/claims.json): smallest is this ceiling only at 103 and 258. 
 REGISTER-PLAN: prints, but its fixed wording misdescribes this source (calls the poses "complete rational source certificates" and all 28 "improvements"; evidence reported_method exact-algebraic). Coordinator: narrow the entry (103 and 258, or the 16 below-case counts) and reword; proposal in the lane report.
 LATENT IMPORTER BUG: register_plan's _comparison reads row["undecided_among"] when smallest is None, but smallest() returns "tied" for equal exact sides; a requested row with a tie raises KeyError. Avoided here by not declaring #476 where it restates another entry's side.
 VALIDATION (tree of 86ad10bfe): packing-validate --records passed (49 of 107 steps, 98 s); --edit ran 65 steps, 64 passed and the type floor (basedpyright, project-wide) timed out at 900 s under load 13-17 and memory pressure from other lanes; three direct runs were killed (SIGKILL / exit 247) while memory was short; a fourth, single-threaded at 15:19Z, passed the project-wide type floor: basedpyright 0 errors, 0 warnings, 0 notes in 2 min 24 s; ruff check and format clean; tests/test_upper_bound_reports.py 136 passed, tests/test_decimal_pose_margins.py 19 passed.
+
+## Stage 7 draft (2026-10-10, to post after PR #487 merges; not posted)
+
+Supports posting after merge: yes (facts checked against PR #487's head 6fb495b3a; post once the merge's Pages deployment shows the T-138 row, and recheck the id if anything else merges first). Ledger: closeable (check_requests --report: all four results settled, no ask queued; house adoption at 103 and 258 waits on PR #403 under think-fvz4, the project's own round, not an ask of the author).
+
+@Mishapolk, thank you, and thanks to @squarepacker for the 60-digit check of the first upload. Your corrected poses are imported on `main` through [PR #487](https://github.com/jlevy/squares/pull/487). Sixteen of them are registered as **[T-138](https://jlevy.github.io/squares/all-results.html#t-138), V3/C3**, confirmed; the other fourteen are retained and cited by no entry. Here is how each part stands.
+
+- **The pin.** The errata's pin, dd3da5c7b39f3796d19e0970bc2350ef9ea14ad, has 39 hex digits and names no commit. The record pins dd3da5c753c5ded6cb3b89476193b7b801005415, your `main` when it was read, whose 28 pose files have exactly the SHA-256 digests the issue lists. Please say here if you meant another commit.
+- **Fourteen named counts, registered and confirmed (T-138).** s(84) ≤ 9.697934799017, s(86) ≤ 9.820535407499, s(103) ≤ 10.679232047362, s(105) ≤ 10.789303783751, s(108) ≤ 10.904821012324, s(127) ≤ 11.810878787590, s(131) ≤ 11.951105389418, s(175) ≤ 13.767155163551, s(180) ≤ 13.916993522482, s(258) ≤ 16.563448002138, s(270) ≤ 16.936723155038, s(302) ≤ 17.881306218091, s(303) ≤ 17.920312372919 and s(306) ≤ 17.963433717497. Each is below the ceiling its case record holds.
+- **132 and 267 (T-138).** The two poses your README adds, at s(132) ≤ 11.986956226066 and s(267) ≤ 16.838828608296, are in the same entry.
+- **Where your side is the smallest known.** At 103 and 258, by 1.49e-10 and 1.15e-12 below the case. At 84, 86, 105, 108, 127, 131, 175, 180, 270 and 306, Francisco Couzo's certificates of 8 October (T-128, T-130) are smaller, and at 131, 132, 175, 267, 270, 302 and 303 certificates that arrived later are smaller (T-134, T-136, T-140, T-141). Your bound stays verified at those counts.
+- **The other fourteen named counts, no entry.** At 88, 130, 153, 154, 179, 199, 207, 208, 209, 236, 237, 238, 239 and 263 your 12-decimal ceiling lies above the case's verified ceiling, by 2.17e-14 (238) to 3.51e-09 (263). There the cases hold Siddharth Gupta's refinements of SQUISH's packings (T-127), and at 263 SQUISH's own. At 88 that is 9.8824510304812469, below 9.882451030482, so there is no tie to register. The witnesses and replays at these counts stay in the packet.
+- **Not registered:** the closed-form fraction at n = 105, which your errata withdraw.
+
+**How it was checked.** Your files are decimal poses, not exact certificates. Measured here in interval arithmetic at 60 working digits (`devtools.decimal_pose_margins`), 19 of the 30 poses in the case corpus are proved not to be packings at their printed sides, by up to about 1.3e-15. So each bound rests on an exact witness derived here: your printed centres dilated about the box centre to your 12-decimal ceiling, and each half-angle tangent rounded down at 32 decimals. The dilation moves no centre by as much as 1e-12, and the rounding moves no corner by as much as 1e-31. Dilated, all 30 are proved packings. The same tool's control proves that the first upload's square-199.txt and square-263.txt (4e1a601) are not packings, matching squarepacker's comment.
+
+- Both maintained exact routes, `sqpack.verify` and `devtools.check_rational_witness_independent`, decided all 30 witnesses, each with a duplicate-square and an outside-container control: 90 jobs and 3,633,654 pair decisions. Every positive passed and every control was refused.
+- A third exact route, `devtools.check_half_angle_area` (half-extent containment and exact intersection area), decided every witness with six controls and derived each one again from its pinned file by separate arithmetic, square for square.
+- The two maintained routes share one parse, the half-angle conversion and the separating-axis method, and all three share Fraction arithmetic. The witnesses are this repository's derivation, so neither of your checks (David Ellsworth's `check_packing.py` at 40 digits and the 60-digit separating-axis test) ran here.
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md) reproduced the replay and found no blocking defect in the bounds. No human review is claimed.
+
+This confirms finite feasibility only. The KKT stationarity in your issue was not checked, and no optimality is registered.
+
+**Credit and custody.** T-138 credits you and, as you ask, the discoverers of the packings your poses started from: Stenlund, Friedman, Ellsworth, SQUISH (Nate Chaoweeraprasit), Francisco Couzo and Ryan Xu. The issue does not say which count started from which packing. The review measured your 103 as Ryan Xu's packing and your 258 as SQUISH's, each refined in precision. If another count started from a published packing, please name it here. Your repository has no licence, so the record keeps digests and derived facts rather than your files.
+
+**Notes on the release.** `square-199.svg` and `square-263.svg` were last changed in 4e1a601, so they still draw the replaced poses. The README prints 19.000000000004 at 349 to 358, where the files print 19.143 to 19.265. The eighteen poses at 343 to 360 all lie above the grid bound s(n) ≤ 19, so none is recorded as a bound.
+
+**What stays open.** The case records, for example [n = 103](https://github.com/jlevy/squares/blob/main/packing/frontier/n-103.md) and [n = 258](https://github.com/jlevy/squares/blob/main/packing/frontier/n-258.md), are unchanged for now. House adoption waits for [PR #403](https://github.com/jlevy/squares/pull/403), which rewrites every case record, and for a custody record of the replay workers; each case's house is chosen in that later adoption round. The review recommends T-138 as the house at 103 and 258, crediting Ryan Xu's and SQUISH's packings as refined by you. Nothing you asked for is queued, so this issue is closed with this comment. If the adoption round changes what this comment says, a follow-up will note it.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_

@@ -5,13 +5,13 @@ title: "Import Francisco Couzo: certificates at 132, 175, 209, 237, 270, 305 (#4
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 created_at: 2026-10-10T16:38:00.454Z
-updated_at: 2026-10-10T19:58:56.044Z
+updated_at: 2026-10-10T20:28:17.220Z
 ---
 Issue https://github.com/jlevy/squares/issues/488 (2026-10-10T14:08Z). franciscouzo/square-packing 3ef76349025bf4bfa99c9c3600bcc273f4c33e02 certificates/nN.cert (Evan Daniel's format). Below SQUISH's #481 at 209, 237, 270, 305; below this author's #476 at 132 and #460 at 175. Superseded at 132 by #489 (evand Hunt 3). Stages 1-3 through devtools.upper_bound_reports, comparing with #470, #476, #481, #489 and the register.
 
@@ -27,3 +27,42 @@ Issue https://github.com/jlevy/squares/issues/488 (2026-10-10T14:08Z). francisco
 - Validation at 46fe607cc: packing-validate --records 49/49 steps passed (59.7 s); --edit 65/65 passed (252.5 s at load ~10, over the 240 s ceiling, reported not enforced); touched tests 229 passed.
 
 2026-10-10 records lane R3: registered #488 as T-140 (ef1f6287e, V0/C0), raised to V3/C3 on review-2026-10-10-upper-bound-imports-488-489.md (b05bc4b26) with E-couzo-488-exact-feasibility; the declaration reads #481 and #489 by exact HOUSES readers and the claim record is refrozen (6d5951166, b05bc4b26); #488's request entry maps the six to T-140. Branch worktree-agent-a45d986d0210d7ec5 (records lane R3, merged into nothing yet). Ids provisional until merged to main.
+
+## Stage 7 draft (2026-10-10, to post after PR #487 merges; not posted)
+
+Supports posting after merge: yes (facts checked against PR #487's head 6fb495b3a; post once the merge's Pages deployment shows the T-140 row, and recheck the id if anything else merges first). Ledger: closeable (check_requests --report: all three results settled, no ask queued; house adoption waits on PR #403 under think-fvz4, and the 338/340 beyond-horizon rows (RL-9) are the owner's decision, neither an ask of the author).
+
+@franciscouzo, thank you. Your six certificates are registered on `main` as **[T-140](https://jlevy.github.io/squares/all-results.html#t-140), V3/C3**, confirmed, through [PR #487](https://github.com/jlevy/squares/pull/487), at the exact sides they state:
+
+- s(132) ≤ 11.986953587254420950497823747297
+- s(175) ≤ 13.767120724692313217301436951952
+- s(209) ≤ 14.946223226446451055256712327571
+- s(237) ≤ 15.90294960767783168971278840528
+- s(270) ≤ 16.929775353541359582336028215624
+- s(305) ≤ 17.951139772206997545942513172626
+
+**Which cases they hold.** Each side is below its case's verified ceiling: by 4.37e-03 at 132, 1.78e-03 at 175, 3.39e-03 at 209, 7.27e-04 at 237, 8.03e-03 at 270 and 1.82e-03 at 305.
+- At 175, 209, 237, 270 and 305 yours is the smallest side known. It is below SQUISH's #481 (T-136) at 209, 237, 270 and 305, by 4.28e-07, 3.96e-05, 4.77e-06 and 5.64e-05, and below your own T-130 certificate at 175 by 3.44e-05.
+- At 132 it is below your #476 side by 6.06e-07, but Evan Daniel's #489 (T-141) is smaller by 1.27e-03. The issue quotes Mishapolk's 132 as 11.986956226077; the record compares his README's 12-place print, 11.986956226066, and your certificate is below either.
+- Evan Daniel's Hunt 3 commit also holds a certificate at 305 with exactly your side, the same arrangement up to a quarter turn. His log gives it to you, and no entry cites it.
+
+The case records, for example [n = 175](https://github.com/jlevy/squares/blob/main/packing/frontier/n-175.md), are unchanged for now. House adoption waits for [PR #403](https://github.com/jlevy/squares/pull/403), which rewrites every case record, and for a custody record of the replay workers; each case's house is chosen in that later adoption round. The review recommends T-140 as the house at 175, 209, 237, 270 and 305, crediting the packings each started from. At 132 it stays verified and is not selected.
+
+**How it was checked.**
+- All 27 jobs, over the nine certificates your commit adds or changes (the six, and 303, 338 and 340), each a positive with a duplicate-square and an outside-container control, were decided again by both maintained exact routes, `sqpack.verify` and `devtools.check_rational_witness_independent`. They equal their retained rows: 1,899,504 pair decisions.
+- A third exact route, `devtools.check_half_angle_area` (half-extent containment and exact intersection area), decided the six with six controls each, four of them sharp, and every retained file was held to its bytes fetched at the pin.
+- Your issue reports a pass from a copy of this repository's `sqpack` verifier, so one maintained route is your own check. The independent re-implementation rests on the rational corner checker and the third route. The two maintained routes share one parse, the half-angle conversion and the separating-axis method, and all three share Fraction arithmetic. Evan Daniel's `verify_cert.py` did not run here.
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-10-upper-bound-imports-488-489.md) reproduced the replay and found no blocking defect. No human review is claimed.
+
+This confirms finite feasibility only, not optimality.
+
+**Not registered.**
+- **The KKT and no-descent statements** are numerical evidence of local optimality, not a bound on s(n). They are recorded as your report and were not checked here.
+- **303, 338 and 340**, which the commit changes and the issue does not name. 303 is above #481's exact side there, and your README marks it superseded. 338 and 340 lie beyond the case corpus, below your own earlier rows there by 1.48e-03 and 1.78e-04. All three were decided on all three routes. Whether the record's beyond-horizon rows at 338 and 340 move to these certificates is the owner's decision, and it is pending.
+
+**Credit.** As you ask, T-140 credits the packings each started from: SQUISH's from #481 at 209, 237, 270 and 305, Mishapolk's at 132 and Ryan Xu's at 175. It also names Evan Daniel's `fq`, your basin hopping and David Ellsworth's `refine_packing`, and Evan Daniel's exact contact solver, which wrote all six.
+
+Nothing you asked for is queued, so this issue is closed with this comment. If the adoption round changes what this comment says, a follow-up will note it.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_

@@ -5,13 +5,13 @@ title: "Import Evan Daniel: Hunt 3 packings at 132, 308, 343, 344 (#489)"
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 created_at: 2026-10-10T16:38:00.983Z
-updated_at: 2026-10-10T19:58:56.333Z
+updated_at: 2026-10-10T20:28:17.816Z
 ---
 Issue https://github.com/jlevy/squares/issues/489 (2026-10-10T14:47Z). Quality-diversity basin explorer with a two-parent crossover (as #465). s(132) <= 11.985680198845808811522231964102, s(308) <= 17.998269879526255875387992744507, s(343) <= 18.978232523635611279730512106023, s(344) <= 18.994450514277401521114135796864; each below #488 (132) or #484 (308, 343, 344). evand/square-packing head 76a529bc6f36 (2026-10-10). 343 and 344 are beyond the n <= 324 horizon. Stages 1-3 through devtools.upper_bound_reports.
 
@@ -26,3 +26,31 @@ Issue https://github.com/jlevy/squares/issues/489 (2026-10-10T14:47Z). Quality-d
 - Validation at 46fe607cc: packing-validate --records 49/49 steps passed (59.7 s); --edit 65/65 passed (252.5 s at load ~10, over the 240 s ceiling, reported not enforced); touched tests 229 passed.
 
 2026-10-10 records lane R3: registered #489 as T-141 (11179cb77, V0/C0), raised to V3/C3 on review-2026-10-10-upper-bound-imports-488-489.md (b05bc4b26) with E-evand-489-exact-feasibility; 343 and 344 are verified beyond-horizon rows and #484's rows there are superseded; the claim record is refrozen with exact readers, so 305 reads as a tie with #488, cited by no entry. Branch worktree-agent-a45d986d0210d7ec5 (records lane R3, merged into nothing yet). Ids provisional until merged.
+
+## Stage 7 draft (2026-10-10, to post after PR #487 merges; not posted)
+
+Supports posting after merge: yes (facts checked against PR #487's head 6fb495b3a; post once the merge's Pages deployment shows the T-141 row, and recheck the id if anything else merges first). Ledger: closeable (check_requests --report: all three results settled, no ask queued; house adoption at 132 and 308 waits on PR #403 under think-fvz4, the project's own round, not an ask of the author).
+
+@evand, thank you. Your Hunt 3 certificates are imported on `main` through [PR #487](https://github.com/jlevy/squares/pull/487), retained at your branch head 76a529bc6f36ed05827cae3d1412d6acb5be00fc, whose files are byte-identical to c013f43's.
+
+- **n = 132 and 308** are registered as **[T-141](https://jlevy.github.io/squares/all-results.html#t-141), V3/C3**, confirmed: s(132) ≤ 11.985680198845808811522231964102 and s(308) ≤ 17.998269879526255875387992744507. Each is the smallest side known. At 132 it is below the case's ceiling (T-098) by 5.65e-03, and below Francisco Couzo's #488 (T-140) and #476 by 1.27e-03. At 308 it is below the grid's 18, which the case holds in both lanes, by 1.73e-03, and below Kevin Fang's #484 (T-135) by 1.04e-03.
+- **n = 343 and 344** lie beyond the case corpus, so they have no case record or register entry. Your sides, 18.978232523635611279730512106023 and 18.994450514277401521114135796864, are verified beyond-horizon rows in the source register, from the same evidence. They supersede Kevin Fang's #484 rows there, which the record keeps.
+- **The unnamed hunt3_n305** has exactly the side of Francisco Couzo's #488 certificate at 305, and the two are one arrangement up to a quarter turn. Your log gives it to him; the record keeps 305 under #488, and no entry cites yours.
+- **Not registered:** the KKT, reduced-Hessian and jamming statements are numerical evidence of local optimality, not a bound on s(n). They are recorded as your report and were not checked here.
+
+The case records, [n = 132](https://github.com/jlevy/squares/blob/main/packing/frontier/n-132.md) and [n = 308](https://github.com/jlevy/squares/blob/main/packing/frontier/n-308.md), are unchanged for now. House adoption waits for [PR #403](https://github.com/jlevy/squares/pull/403), which rewrites every case record, and for a custody record of the replay workers; each case's house is chosen in that later adoption round. The review recommends T-141 as the house at 132 and 308, crediting Kevin Fang's construction at 308 as you ask.
+
+**How it was checked.**
+- All 15 jobs, over the five certificates (132, 305, 308, 343 and 344), each a positive with a duplicate-square and an outside-container control, were decided again by both maintained exact routes, `sqpack.verify` and `devtools.check_rational_witness_independent`. They equal their retained rows: 1,319,598 pair decisions.
+- A third exact route, `devtools.check_half_angle_area` (half-extent containment and exact intersection area), decided the four you name with six controls each, four of them sharp, and every retained file was held to its bytes fetched at the pin.
+- No route here is your code, so the replay is independently re-implemented. The two maintained routes share one parse, the half-angle conversion and the separating-axis method, and all three share Fraction arithmetic. Your `verify_cert.py` and `verify_cert2.py` did not run here.
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-10-upper-bound-imports-488-489.md) reproduced the replay and found no blocking defect. No human review is claimed.
+
+This confirms finite feasibility only, not optimality.
+
+**Credit.** T-141 credits you and your quality-diversity basin explorer with its two-parent crossover move. As you ask, the packings at 308, 343 and 344 are credited as built on Kevin Fang's #484 packings in the Arslanov–Mustafin–Shangitbayev two-wedge family, and 132 as your own lineage from #465. For credit, the review measured your 308 and 344 as Fang's arrangements moved, and found your 343 has no one-to-one matching with his under any symmetry, a different basin, as you say.
+
+Nothing you asked for is queued, so this issue is closed with this comment. If the adoption round changes what this comment says, a follow-up will note it.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_

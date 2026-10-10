@@ -5,7 +5,7 @@ title: "Import Guzhou0806: s(40) > 335427/50000 from wand125's rect_n40_L67 dens
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:25.852Z
-updated_at: 2026-10-10T16:12:22.269Z
+updated_at: 2026-10-10T20:28:16.052Z
 started_at: 2026-10-10T09:49:28.112Z
 ---
 Issue https://github.com/jlevy/squares/issues/485 (opened 2026-10-10). Claim: s(40) > 335427/50000 = 6.70854, unrestricted rotations, above the case's reported and verified 67/10 from wand125's rect_n40_L67 (#281). Also a weaker full-core bound s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908. Source Guzhou0806/n40-square-packing at e5abeb4d078a5c5b35df6204dd9b93378e5a7880, release n40-670854-20261010, n40-670854.zip SHA-256 dbefee8658dc8f7d2e4a6ed21b0c3cd29f36ae393405a218f6bbfdce54465bc5. Rust nodal verifier, 401 directions, 32,970,910 nodes; wand125 commented a review on 2026-10-10 reporting a clean replay. Stages 1-3 on this pass; mathematical review of the clipped-corner estimate and strictness argument by Fable at max.
@@ -73,3 +73,38 @@ Evidence: E-n040-guzhou-clipped-corner-report (reported, external_review informa
 Published: RESULTS, INVENTORY, VERIFIERS, STATUS, research tables, CERTIFICATE-REACH, the synopsis headline and Frontier results row (133 registered, 103 by others), t007 consumer audit, site URLs, bound-citations.json, composite-figure.json, the curated atlas credit-attributions.json (n = 40 group, source, T-133 row, method credits), the retained piercing survey, and an Other Projects card in devtools/overview_sections.py. README has no n = 40 prose. Not done: the review still says "T-NNN, to be assigned"; the owner's reply on #485.
 
 Validation at 0fa726e21, from packing/, --jobs 2 --inner-jobs 1: packing-validate --records exit 0 (49 of 49 record steps), --edit exit 0 (65 of 65), --push (--timeout-seconds 3600) exit 1 on one step, reachable behavioural tests (whole suite, the branch differs from origin/main by the whole integration branch): 16,324 passed, 495 skipped, 4 failed, all in files this lane's diff does not touch and all environmental here: test_fixed_core_packet::test_nonzero_leader_exit_reaps_a_sigterm_ignoring_grandchild and test_fixed_core_packet_calibration::test_timeout_kills_and_reaps_a_termination_resistant_process_group ("worker process group remained alive after SIGKILL"), and test_site_column_measurement's two Playwright tests (browsers not installed). Of the earlier push run's eleven failures, six were this registration's and are fixed in 14f423f17 (test_sqverify_fast_census, test_known_best_atlas curated credits, test_frontier_assurance_contract, test_piercing_lower_bounds, two in test_overview), and test_check_n17_one_round_owned_domain_propagation[missing_typed_row] passed when re-run.
+
+## Stage 7 draft (2026-10-10, to post after PR #487 merges; not posted)
+
+Supports posting after merge: yes (facts checked against PR #487's head 6fb495b3a, the issue body as retitled at 14:50Z and both comments; post once the merge's Pages deployment shows the T-133 and T-145 rows and n-040's moved bound, and recheck the ids if anything else merges first). Ledger: closeable (check_requests --report: all three results settled, no ask queued; a method-distinct decision of the continuous cover waits on an owner budget and is not an ask of the author).
+
+@Guzhou0806, thank you, and thanks to @wand125 for the review. Both of your bounds are registered on `main` through [PR #487](https://github.com/jlevy/squares/pull/487), and the [n = 40 case record](https://github.com/jlevy/squares/blob/main/packing/frontier/n-040.md) has moved.
+
+- **[T-145](https://jlevy.github.io/squares/all-results.html#t-145), V3/C3, confirmed:** s(40) > 1340000/199529 = 6.715815746082023…, from your continuous-pose kernel on wand125's rect_n40_L67 density, unchanged. It is now the case's reported and verified lower bound, 72586117/9976450000 above T-133. The gap to the case's upper bound, 4 + 2√2, is about 0.1126.
+- **[T-133](https://jlevy.github.io/squares/all-results.html#t-133), V3/C3, confirmed:** s(40) > 335427/50000 = 6.70854, from the clipped-corner transfer on a 401-direction net, together with the weaker s(40) > 67000√6400006889/798988091 = 6.7084890815…, which needs no density peak. The case record keeps 335427/50000 as history, as it keeps T-068's 67/10; the full-core bound is a corollary the case does not hold.
+
+**How T-145 was checked.**
+- Your two C++ kernels, built from the retained source into the binaries of your CI run, ran the axis certificate and all 43 slabs here. Every output equals both release receipts apart from timing, and the kernels refused every synthetic density whose least capture is below the threshold. So the continuous cover is confirmed, reproduced with your own code.
+- This repository's exact audit, `devtools.audit_continuous_pose`, shares no code with your release. It regenerated both kernel inputs and decided every finite step. `sqverify-fast` decided the near-axis statement a second way, on the original density.
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md) re-derived the kernel's lemmas, read the kernel line by line and found no blocking defect.
+- No second method has decided the continuous cover. The 401-direction run of `sqverify-fast` at the new parameters is a necessary condition, and it passed.
+
+**How T-133 was checked.**
+- `sqverify-fast`, built from reviewed source, verified all 401 directions on an input regenerated from the retained density. Every row equals both release receipts apart from timing, and it refused two mass mutants. Your release vendors this same crate, so the nodal statement is confirmed, reproduced with the producer's code.
+- This repository's exact audit of the transfer, `devtools.audit_clipped_corner_transfer`, shares no code with your `finite.py`. It recomputed the density's mass, symmetry and essential supremum and every step of the chain, and refused four altered parameters (E to H).
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) re-derived the transfer, the clipped-corner bound and the strict endpoint, and found no blocking defect. No second method decided the nodal statement.
+
+wand125's comment, with its fresh replay and its independent exact check of the transfer, is recorded as a third party's report; it is not retained here as a replay. Neither review is a human review, and no human review is claimed. These are lower bounds, so they say nothing about an optimum.
+
+**Notes from the reviews**, for a later release:
+- GN-1: `PROOF.md` says the reference outside its parent "consists of four interior-disjoint right triangles". That holds only under conditions the text does not state; the bound e^2/(2cs) holds without them.
+- GN-2 and GC-1: the margins are thin. h is within 8.2e-16 of its containment limit, and the near-axis patch holds by 3.58e-06. Both chains are sound only in exact rationals and outward intervals, so a replay must not round.
+- GC-2: `continuous_pose.cpp` ends `main` without a `return`. That is conforming as `main`, but the test harnesses rename it, and the renamed function returns nothing on the verified path, which is undefined behaviour. A `return 0;` costs nothing.
+- GC-7: NaN is not propagated through `min_element` and `std::min`. It cannot arise on this input.
+
+**Credit.** Both entries read Guzhou0806 after wand125, Tokoharu and Levy, as you ask: wand125 for the density, Tokoharu for the rectangle-density method and the translation-derivative structure, and this repository for `sqverify-fast`, which the transfer's nodal step ran and which informs the concave-section bound.
+
+**What remains.** Rung 4 needs a second review by a distinct reviewer and a human oversight record. A method-distinct decision of the continuous cover would need a first-party interval kernel with the angle as an interval dimension, and whether to fund that work is the owner's decision; it is pending. Nothing you asked for is queued, so this issue is closed with this comment.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_

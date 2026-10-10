@@ -5,7 +5,7 @@ title: "Import squarepacker: c*(k) < 43.06 k^{3/8} + 2e-5 (k >= 4e26) and c*(k) 
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:27.941Z
-updated_at: 2026-10-10T11:54:15.654Z
+updated_at: 2026-10-10T20:28:13.143Z
 started_at: 2026-10-10T09:49:28.457Z
 ---
 Issue https://github.com/jlevy/squares/issues/471 (opened 2026-10-09). Preprint Zenodo 10.5281/zenodo.23256655 v1.0 and squarepacker/k2-minus-c-upper. Theorems 1.1, 1.2, 1.4 (c*(k) <= 8 ceil(sqrt(k-4)) - 1, k >= 6) and 1.6 (finite c*(10^5..10^8) bounds with packings as data). Relates to X-049, asymptotic-waste-bounds.yaml and #414's lower bounds (think-6ptr, think-u1kq). Stage 1 triage and the mathematical review by Fable at max; interval-arithmetic replay priced before any run.
@@ -58,3 +58,33 @@ Stage 4. ryu_upper_replay.py replayed from the packets, under Python 3.14.7, mpm
 Register: packing/frontier/asymptotic-waste-bounds.schema.yaml gains deficiency_upper_bounds (RF-10); four REPORTED rows in packing/frontier/asymptotic-waste-bounds.yaml (Theorem 1.4; Theorem 1.2 with Theorem 1.6 in its corollary; Theorem 1.1 v1.0; v1.1 tiers), open_problem and the cube-root row's corollary updated. Shared records (bibliography, resources README, result-requests, intake-watch) proposed to the coordinator, not written.
 
 Correction found here: 8 ceil(sqrt(k-4)) - 1 < k - 1 holds at k = 65-68 and for every k >= 73, not from k = 65 on (at k = 69-72 ceil(sqrt(k-4)) = 9 gives 71 >= k - 1). The review's section 2 says "beats k-1 from k=65 on"; the register row states the exact set and ryu_upper_l_packing.py pins it.
+
+## Stage 7 draft (2026-10-10, to post after PR #487 merges; not posted)
+
+Supports posting after merge: yes (facts checked against PR #487's head 6fb495b3a; no T-NNN or site row is involved, so it can be posted as soon as the merge lands). Ledger: closeable (check_requests --report: all four results settled as not registered by scope, the one ask done; publication of the hosted certificates, think-sk6b, is the owner's decision and not an ask of the author).
+
+@squarepacker, thank you. Version 1.0 of your preprint is imported on `main` through [PR #487](https://github.com/jlevy/squares/pull/487). Its theorems are recorded as reported in the [asymptotic waste-bounds record](https://github.com/jlevy/squares/blob/main/packing/frontier/asymptotic-waste-bounds.yaml), in a new list, `deficiency_upper_bounds`, for bounds on c*(k) at integer sides approached from below. They are credited Ryu after Bui. Version 1.1 is answered on #486.
+
+- **Theorem 1.4**, c*(k) ≤ 8⌈√(k − 4)⌉ − 1 for every integer k ≥ 6, has a row of its own. As recorded, it improves c*(k) ≤ k − 1 at k = 65 to 68 and at every k ≥ 73; at k = 69 to 72 the bound is at least k − 1.
+- **Theorem 1.2**, c*(k) < 20.668 k^{2/5} + 0.623 for every integer k ≥ 1.6·10^7, has a row of its own, with the five values of **Theorem 1.6** (c*(10^5) ≤ 1583, c*(10^6) ≤ 3972, c*(10^7) ≤ 10039, c*(3.825·10^7) ≤ 16988 and c*(10^8) ≤ 24790) as its corollary.
+- **Theorem 1.1**, c*(k) < 43.06 k^{3/8} + 2·10^-5 for every integer k ≥ 4·10^26, has a row of its own. It keeps its claim, and version 1.1's tier A5 supersedes it.
+- **Why there is no register entry.** None of these settles a count n ≤ 324, and those counts are what the result register covers. The new list is needed because the record's `upper_bounds` list holds bounds on W(x) for every large x, which Roth and Vaughan's theorem keeps at exponent 1/2 or above. Your bounds hold only as x approaches an integer from below.
+
+**How it was checked.**
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-10-squarepacker-k2-minus-c-upper.md) re-derived every proof in both versions and accepted them, with ten findings, none blocking. It is one AI reading, not a referee's report, and no human review is claimed.
+- Four programs written here from your text share no code with yours. `cases/asymptotic/ryu_upper_l_packing.py` builds the packing of Lemma 4.2 in exact rationals for all 434 pairs 2 ≤ b ≤ k ≤ 30, and decides Theorems 1.3 and 1.4, Proposition 1.5 and Corollary 5.1 for 2 ≤ b ≤ k ≤ 2000. `ryu_upper_constants.py` recomputes Φ(10^{-4/3}), in [5.0162487, 5.0162488], and the closed forms of Theorems 1.1 and 1.2 in interval arithmetic. `ryu_upper_staircase.py` builds the end packing exactly at b = 400, 1600 and 10^4. `ryu_upper_certificates.py`, written from Section 9, decided all five Theorem 1.6 certificates: it reproduces N and c of Table 2 at every k with the waste identity exact, and refuses six mutations at 10^5 and 10^8.
+- Your own programs were replayed here: `const_stair.py`, `stair_check.py` at all five k with its seven negative controls, `cert3e.py 160 64` (Ψ_sup 96.47689, C_E 14.96364) and `run_z.py`. Each reproduced its recorded output.
+
+**What rests on your report.** As far as this record can say, Theorem 1.1 rests on the review's reading of the proof and on your own covering, `cert3e.py`, reproduced here. The two further coverings you report are not in the release and remain reported. No covering written outside your code exists here, and none is scheduled. The asymptotic regime cannot be tested by explicit computation.
+
+**Notes from the review**, for a later version:
+- RF-1: Lemma 8.1 (f3) needs j + 1 ≤ r(0) = χ, which the proof does not state. It holds, and version 1.1's Lemma 8.7 supplies the line.
+- RF-3: in `cert3e.py` the last t-piece can end one unit in the last place below t_u. The range has slack of relative order 10^-7, so this is harmless here; `cert_v4.py` sets the end to t_u.
+- RF-5: Section 1 cites Arslanov, Mustafin and Shangitbayev for k > 12, where their abstract states n ≥ 12.
+
+**Custody.** The release is retained with its licences (the paper CC BY 4.0, the programs and data MIT). The two largest Theorem 1.6 certificates, of 2.6 and 4.5 MB, are pinned by digest and kept out of Git. Publishing them as a data release of this repository is the owner's decision, and it is pending. Meanwhile they are in your Zenodo archive.
+
+Nothing you asked for is queued, so this issue is closed with this comment.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_
