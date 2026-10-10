@@ -524,6 +524,7 @@ Changing agents changes the driver, not the record or the evidence required for 
 | [`SYNOPSIS.md`](SYNOPSIS.md) | Current research status and roadmap, technical state, workflow contracts, work-unit vocabulary, and handoff |
 | [`epistemics.md`](epistemics.md) | Whole-result V/C/S/N classifications and their executable boundary |
 | [`conventions.md`](conventions.md) | IDs, filenames, artifact shape, evidence fields, provenance, and corrections |
+| [`attribution.md`](attribution.md) | Contributor identities, personal and project credits, lineage, PDF bylines, and exceptions |
 | [`operating-rules.md`](operating-rules.md) | How sessions choose, divide, validate, and hand off work |
 | [Campaign runbook](packing/campaign/README.md) | Hypothesis and experiment mechanics, clocks, budgets, verdicts, and routing |
 | [Result import process](packing/campaign/result-import.md) | Importing, recording, validating, rating and publishing a result by others, and answering its author |
@@ -540,7 +541,9 @@ Changing agents changes the driver, not the record or the evidence required for 
 evidence fields, provenance, corrections, and the boundary between machine checks and
 review.
 [`epistemics.md`](epistemics.md) owns whole-result classifications and the policy
-for results by others: their scope, credit, import and reply.
+for results by others: their scope, import and reply.
+[`attribution.md`](attribution.md) owns contributor names, credit text and lineage,
+project and tool distinctions, and case-specific attribution decisions.
 [`operating-rules.md`](operating-rules.md) owns how sessions are conducted, and
 [`development.md`](development.md) owns the engineering and validation workflow.
 
@@ -551,6 +554,7 @@ for results by others: their scope, credit, import and reply.
 ├── TUTORIAL.md             First-principles orientation for a newcomer
 ├── SYNOPSIS.md             Current research status, roadmap, results, and handoff
 ├── conventions.md          Artifact, identifier, evidence, and correction rules
+├── attribution.md          Contributor identities, credit policy, and exceptions
 ├── epistemics.md           Whole-result verification and confirmation rubric
 ├── operating-rules.md      Session conduct and workflow rules
 ├── development.md          Python setup, engineering boundaries, and validation
