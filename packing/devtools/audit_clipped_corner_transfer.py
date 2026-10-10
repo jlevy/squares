@@ -14,7 +14,8 @@ retained density and the release's parameters and receipts as data:
 
 - ``derive`` writes the 401-direction input the crate decides: the density's 480
   positive rows in file order as exact fractions, with the net in its ``certificate``
-  metadata. Its SHA-256 must be the one both release receipts name as the input.
+  metadata, and prints its SHA-256, which ``check`` holds to the one both release
+  receipts name as the input.
 - ``check`` recomputes the density's mass, its D4 expansion and invariance, the exact
   essential supremum of the density (`peak`) and the release's rounded-up bound ``H``,
   the net's premises, the transfer's scalar chain (`chain`) and the full-core closed
@@ -33,6 +34,23 @@ retained density and the release's parameters and receipts as data:
 
 The nodal statement is decided by the crate, which is the code the release itself ran
 (vendored byte for byte); only the finite steps are re-implemented here.
+
+**What its author read** (its independence record, for the finite steps' evidence).
+Written on 2026-10-10 by an AI agent (Claude Opus 5.5, the records lane of the #485
+import, ``think-3oi5``) from the review named above, which states the argument and
+every finite quantity, and from that review's own scratch measurements
+(``exact_checks.py``, ``mutants.py``, ``captures400.py``, ``net201.py``,
+``run_controls.sh``), themselves written apart from the release's code. Of the release
+it read ``README.md``, ``SOURCES.md``, ``LICENSE``, ``certificate/parameters.json``, both
+``results/verification.json`` and the first rows of ``results/nodes.jsonl``, as data;
+it did not open ``PROOF.md``, ``VERIFICATION.md``, ``REPRODUCIBILITY.md``, the
+workflow, ``verifier/finite.py``, ``verifier/run.py``, ``verifier/prepare.py``,
+``verifier/release.py`` or ``tests/test_finite.py``. It shares with ``finite.py`` the
+definition of the density, its D4 expansion and the transfer's formulas, which the
+review states, and no code. Of this repository's code it uses
+`sqpack.rectangle_density` for the controls' exact captures, and
+`devtools.check_sqverify_fast` and `devtools.sqverify_fast_census` for the crate's
+reviewed-source digest.
 
 Two SHA-256 values are compared, each across the download boundary of issue 485:
 `CANDIDATE_SHA256`, the density the release pins (``SOURCES.md``, and
@@ -920,13 +938,14 @@ def command(binary_name: str, candidate: str, directions: str, *extra: str) -> l
 
 
 def receipts_match(folder: Path, rows: list[dict[str, Any]], summary: dict[str, Any]) -> bool:
-    """Whether ``--receipts`` wrote each stdout row, with the input's digest, and the
-    summary."""
+    """Whether ``--receipts`` wrote each stdout row, beside the input's identity the
+    crate adds to each file, and the summary."""
     for row in rows:
         written = json.loads(
             (folder / f"r{int(row['r']):03d}.json").read_text(encoding="utf-8")
         )
-        if written != {**row, "certificate_sha256": DERIVED_SHA256}:
+        written.pop("certificate_sha256", None)
+        if written != row:
             return False
     files = sorted(path.name for path in folder.iterdir())
     written_summary = json.loads((folder / "summary.json").read_text(encoding="utf-8"))
@@ -948,10 +967,9 @@ def run_replay(binary: Path, out: Path, threads: int) -> dict[str, Any]:
     reviewed = REVIEWED_SOURCES.get(source)
     if reviewed is None or not reviewed.declared_nets:
         raise SystemExit(f"{source} is not reviewed source for a declared net")
-    density = load_density()
-    derived = derived_input(density, CLAIM)
-    if sha256(derived) != DERIVED_SHA256:
-        raise SystemExit("the derived input is not the one the release receipts decided")
+    # Not refused here on its digest: `check` and `check-replay` hold the input the crate
+    # reports to the one the release receipts name, so a run is never lost to drift.
+    derived = derived_input(load_density(), CLAIM)
     out.mkdir(parents=True, exist_ok=True)
     binary_sha = sha256(binary.read_bytes())
     runs: dict[str, Any] = {}
@@ -1325,7 +1343,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         data = derived_input(load_density(), CLAIM)
         args.out.write_bytes(data)
         print(sha256(data))
-        return 0 if sha256(data) == DERIVED_SHA256 else 1
+        return 0
     if args.command == "run":
         record = run_replay(args.binary.resolve(), args.out.resolve(), args.threads)
         for name, item in record["runs"].items():

@@ -266,6 +266,14 @@ allowlist:
   - path: packing/devtools/audit_guzhou_r068.py
     kind: download
     boundary: Guzhou's release certificate against its pin (H5).
+  - path: packing/devtools/audit_clipped_corner_transfer.py
+    kind: download
+    boundary: >-
+      Guzhou0806's #485 release: the density digest its SOURCES.md and both downloaded
+      receipts state, and the derived-input digest both receipts and the 10 October
+      review state, held against the retained rect_n40_L67 candidate and the input
+      derived from it. Every finite value and the replay's rows are recomputed and
+      compared whole; no run is refused on a digest.
   - path: packing/devtools/audit_evand_mixed_covers.py
     kind: download
     boundary: Evan D's run headers against the retained upstream files (H7).
