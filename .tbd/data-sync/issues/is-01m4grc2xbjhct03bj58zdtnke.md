@@ -3,9 +3,9 @@ type: is
 id: is-01m4grc2xbjhct03bj58zdtnke
 title: Compact the web atlas and make Small the default
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 6
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m4e35s7r1e65r1qmpz250h0p
 hold: null
 hold_until: null
 created_at: 2026-10-09T16:36:35.370Z
-updated_at: 2026-10-09T18:06:14.512Z
+updated_at: 2026-10-10T11:24:58.090Z
 started_at: 2026-10-09T16:37:12.688Z
+closed_at: 2026-10-10T11:24:58.090Z
+close_reason: Final accepted atlas behavior implemented and published in PR474 at d83b7c03d, containing main657cc4861. Local repair-delta66PASS; hosted Fast94+actualDeferred13=107PASS on immutable mergec78974427 with identical headtree; Pages17 dependencies+required aggregatePASS; formal seniorI/correctnessJ no findings in declared scopes. Required CI PASS, no unresolvedthreads, CLEAN/MERGEABLE finalreadback. Canonical exports qualified; prior failures retained without acceptance relaxation. Later user refinements supersede earlier styling/layout requirements. Completed ready-to-merge scope; no GitHub merge performed. Browser hold, future intake and performance follow-ups remain open. Final evidence full107-final-proof.json and final-freshness.json under external final/ci-final-head-d83b7c03d.
+resolution: null
+duplicate_of: null
 ---
 Apply the current web-only presentation request: remove dimension/GRID captions while preserving explicit grid segments and half-drawing gap; make Small the default in markup, CSS, head bootstrap, fallback, no-JavaScript and plain addresses; preserve explicit Medium/Large URL choices and accessible controls; compact uniform triangle row gaps to the existing cell-gap token. Shared legend counts use count/total, e.g. proved optimal (77/324), consistently with PDF labels. Print captions stay in the print renderer; concurrent PDF refinements are tracked separately under think-dwqg. Update maintained contracts/docs, manual preview and PR474 with focused browser checks, change-reachable push validation, independent review and current CI. Latest324 PDF revealed in Finder. No automated navigation of localhost8799 or GitHub merge.
 
