@@ -6,6 +6,7 @@
 
 <!-- The explainer has a section of this name, and an old explainer link to it must
      still reach the explainer (forward.js), so this heading keeps the overview's own id. -->
+
 <h1 id="the-problem" class="site-title">The Square Packing Problem</h1>
 
 <!-- The section's first two paragraphs are README's, read from its project-intro block
@@ -25,8 +26,8 @@ with some initial explorations that obtained
 and other low values.
 Now several others have obtained results building on this work, including Kleddamag’s
 [certified lower bound of 31/8](papers/n11-threshold-bound-review.html) and a
-[landmark new proof](papers/n11-optimality-review.html) by Queuingtheorydotcom of the
-optimality of the famous [case of 11 squares](cases/11.html).
+[landmark new proof](papers/n11-optimality-review.html) by Ahmed of the optimality of
+the famous [case of 11 squares](cases/11.html).
 Separately, Evan Daniel has proved the optimality of
 [a whole infinite family](all-results.html#t-064), $s(k^2 - 3) = k$ for every $k \ge 6$,
 along with exact values at [21](cases/21.html), [32](cases/32.html) and
@@ -46,7 +47,7 @@ Contact [ojoshe](https://x.com/ojoshe) if you wish to join.
      2026-08-22; its own lower bounds are at
      n = 11, 12 and 17 to 21 (T-001 to T-034); the explainer the link names is n = 11's,
      and it lists the bounds at 12, 17 and 19 that its method gave; and the optimality
-     of n = 11 is T-060, Queuingtheorydotcom's. On 2026-10-05 (think-92ar) the owner
+     of n = 11 is T-060, Ahmed's. On 2026-10-05 (think-92ar) the owner
      asked for the three n = 11 papers to be linked here: Kleddamag's T-037, also
      building on this project, joins the sentence with Part II, and "landmark new proof"
      links Part III. The sentence after it names the
@@ -124,7 +125,7 @@ The [complete table](all-results.html) includes older results and offers all fil
 
 {{ATLAS_CARDS}}
 
-<p class="site-wide site-atlas-note">On the posters, each star marks a <a href="#recent-results">new result</a>. A shorter film shows the <a href="https://github.com/jlevy/squares/releases/download/v0.4.2/ascent-n1-100-1080p60-citations.mp4">ascent from 1 to 100</a> (2 m 20 s). Both films are on the <a href="https://github.com/jlevy/squares/releases/tag/v0.4.2">v0.4.2 release</a>, with a receipt recording each file and the page it was drawn from. Each poster is also an SVG (<a href="repo:packing/atlas/known-best/known-best-1-100.svg">1 to 100</a>, <a href="repo:packing/atlas/known-best/known-best-1-324.svg">1 to 324</a>), and the <a href="repo:packing/atlas/known-best/README.md">atlas README</a> describes them all.</p>
+<p class="site-wide site-atlas-note">A shorter film shows the <a href="https://github.com/jlevy/squares/releases/download/v0.4.2/ascent-n1-100-1080p60-citations.mp4">ascent from 1 to 100</a> (2 m 20 s). Both films are on the <a href="https://github.com/jlevy/squares/releases/tag/v0.4.2">v0.4.2 release</a>, with a receipt recording each file and the page it was drawn from. Each poster is also an SVG (<a href="repo:packing/atlas/known-best/known-best-1-100.svg">1 to 100</a>, <a href="repo:packing/atlas/known-best/known-best-1-324.svg">1 to 324</a>), and the <a href="repo:packing/atlas/known-best/README.md">atlas README</a> describes them all.</p>
 
 ## Other Square Packing Projects
 

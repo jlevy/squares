@@ -109,11 +109,11 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
     assert structure.h1 == ("How Record Square Packings Are Found",)
     assert structure.title == paper.TITLE
     assert structure.published == "2026-10-08"
-    assert structure.modified == "2026-10-09"
+    assert structure.modified == "2026-10-10"
     assert next(line.text for line in structure.credits if line.kind == "dates") == (
-        "First published October 8, 2026 · Last revised October 9, 2026"
+        "First published October 8, 2026 · Last revised October 10, 2026"
     )
-    assert "- First published October 8, 2026 · Last revised October 9, 2026" in markdown
+    assert "- First published October 8, 2026 · Last revised October 10, 2026" in markdown
     assert structure.pdf == {}
     assert release.PUBLICATION_EDITION not in html
     assert release.PUBLICATION_EDITION not in markdown
@@ -255,7 +255,7 @@ def test_printed_paper_has_its_own_title_dates_and_absolute_links(
     page.parent.mkdir(parents=True, exist_ok=True)
     page.write_text(html, encoding="utf-8")
     pdf = page.with_suffix(".pdf")
-    revised = date(2026, 10, 9)
+    revised = date(2026, 10, 10)
     paper.print_pdf(page, pdf, revised=revised, site_path=paper.SITE_PATH)
     data = pdf.read_bytes()
     assert date_problem(data, revised) is None

@@ -863,12 +863,12 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
         ("Göbel 1979, Squares in Squares", "external", "verified"),
         ("Stromquist 2003, Electron. J. Combin. 10, #R8", "external", "verified"),
     ),
-    # T-060 confirms the exact Trump lower bound; the narrow stage shortens its
-    # lineage and venue, while the bibliography retains both in full.
+    # T-060 confirms the exact Trump lower bound; Ahmed's name leaves room for the
+    # whole lineage and venue on the stage.
     11: (
         ("Trump 1979, Squares in Squares (confirmed T-011)", "external", "verified"),
         (
-            "Queuingtheorydotcom after Levy et al. 2026, Web (confirmed T-060)",
+            "Ahmed after Levy, Kleddamag 2026, GitHub (confirmed T-060)",
             "external",
             "verified",
         ),
@@ -968,7 +968,7 @@ def test_the_recorded_register_gives_these_lines(n: int) -> None:
 @pytest.mark.parametrize(
     ("n", "author", "venue", "entry"),
     [
-        (11, "Queuingtheorydotcom after Levy et al.", "Web", "T-060"),
+        (11, "Ahmed after Levy, Kleddamag", "GitHub", "T-060"),
         (17, "Guzhou0806 after Kleddamag et al.", "GitHub", "T-093"),
         # Tokoharu's T-047 held n = 26 and 29 until 2026-10-02, when wand125's merged
         # rectangle replays raised both, n = 26 under T-045 and n = 29 under T-070, and
@@ -987,9 +987,9 @@ def test_promoted_external_bounds_keep_the_sources_credit(
     Since 2026-09-29 the register holds others' results (epistemics.md, Results by
     Others), so a promoted external bound has an entry of its own that carries the
     replay: the credit stays the source's, the result id stays empty because the bound
-    is not this project's, and the entry is named as what confirms it. Each of these
-    credits names more links than the line has room for beside its confirmation, so the
-    stage prints the source's `short_credit`, and every other renderer the whole credit.
+    is not this project's, and the entry is named as what confirms it. Ahmed's whole
+    credit fits beside its confirmation. The other credits need the source's
+    `short_credit` on the stage; every other renderer prints the whole credit.
     """
     lower = _entry(n)["lower"]
     assert _line(lower) == (
@@ -1000,8 +1000,11 @@ def test_promoted_external_bounds_keep_the_sources_credit(
     assert lower["result"] is None
     assert lower["confirmed_by"] == [entry]
     source = _register().sources[lower["source_key"]]
-    assert author == source.short_credit
-    assert author in citations.short_credits(source.credited)
+    if n == 11:
+        assert author == source.credited
+    else:
+        assert author == source.short_credit
+        assert author in citations.short_credits(source.credited)
 
 
 def test_n29_credits_finder_and_optimizer_and_takes_the_registers_verdict() -> None:
@@ -1223,7 +1226,7 @@ def test_the_project_lower_bounds_are_exactly_those_first_proved_here() -> None:
 
 
 def test_the_star_marks_recent_results_whoever_proved_them() -> None:
-    """n = 11 is starred as Queuingtheorydotcom's, and project bounds are too.
+    """n = 11 is starred as Ahmed's, and project bounds are too.
 
     Kleddamag's 3.875, developed from T-026, preceded the exact T-060 proof. Credit
     is the line's business: joint work names this project after the author, other work
@@ -1233,7 +1236,7 @@ def test_the_star_marks_recent_results_whoever_proved_them() -> None:
     """
     lines = {entry["n"]: entry["lower"] for entry in _record()["entries"]}
     assert lines[11]["recent"]
-    assert lines[11]["text"] == "Queuingtheorydotcom after Levy et al. 2026, Web"
+    assert lines[11]["text"] == "Ahmed after Levy, Kleddamag 2026, GitHub"
     assert lines[12]["recent"]
     # squarepacker's re-weighting of Daniel's points since 5 October 2026 (T-095), after
     # this project's (T-079), which named the project; the credit names Levy for Route B.

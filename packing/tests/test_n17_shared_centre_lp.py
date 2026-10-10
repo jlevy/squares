@@ -818,9 +818,11 @@ def test_cli_nested_submitted_payload_publishes_refusal(
 ) -> None:
     descriptor, submitted = tmp_path / "descriptor.json", tmp_path / "constructed.json"
     descriptor.write_text("{}", encoding="utf-8")
+    # In-process search tools can raise the worker's encoder recursion ceiling.
+    depth = sys.getrecursionlimit() + 1
     submitted.write_text(
         '{"schema":"n17-shared-centre-endpoint/v1","status":"constructed",'
-        '"frame_action":"r3","mathematical":{"point":' + "[" * 1200 + "0" + "]" * 1200 + "}}",
+        '"frame_action":"r3","mathematical":{"point":' + "[" * depth + "0" + "]" * depth + "}}",
         encoding="utf-8",
     )
     monkeypatch.setattr(tool, "endpoint_packet", lambda *_args, **_kwargs: {"point": []})

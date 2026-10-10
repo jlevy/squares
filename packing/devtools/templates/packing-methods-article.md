@@ -1,6 +1,6 @@
 {{FRONT_MATTER}}
 
-*Evidence cutoff: 9 October 2026. The selected-bound tables include the confirmed 8
+*Evidence cutoff: 10 October 2026. The selected-bound tables include the confirmed 8
 October intake; newer replayed certificates awaiting adoption are identified
 separately.*
 
@@ -661,6 +661,19 @@ A valid witness establishes the first.
 A long decimal, equilibrium equations, or unsuccessful perturbation tests do not supply
 the other two.
 
+**Local rigidity** asks whether a specified packing admits nontrivial feasible motion at
+fixed container side, after declared symmetries are removed; the two optimality
+statements above concern whether the side can be reduced
+([tutorial](../../../TUTORIAL.md#contact-graphs-stationary-branches-and-rattlers)). The
+atlas’s $R$ badge can reflect a proved local-rigidity result or a reported catalogue
+assertion, so its accompanying assurance matters.
+A numerical single-square translation screen with no hit establishes neither rigidity
+nor local optimality: it omits rotations and coordinated motions.
+Rigidity evidence belongs to the assessed configuration.
+A different packing at the same side may have different motions, as the retained
+alternatives at $n=52,149,296$ illustrate
+([source index](../../frontier/rigidity-sources.yaml)).
+
 ## Reading the Record
 
 ### Methods and record examples
@@ -717,12 +730,11 @@ account of how the new seed reached the improved result
 
 ### Selected bounds after the October 8 intake
 
-The integrated register on 9 October contains 32 smaller selected upper bounds than at
-this survey’s first publication: 18 from Ryan Xu and 14 precision refinements by
-Siddharth Gupta.
-The table gives safe sixteen-place decimal ceilings for the previous and
-selected witnesses. Each count links to its case and exact form; the finite feasibility
-results are recorded as T-125, T-126, and T-127
+The integrated register contains 32 smaller selected upper bounds than at this survey’s
+first publication: 18 from Ryan Xu and 14 precision refinements by Siddharth Gupta.
+The table gives safe sixteen-place decimal ceilings for the previous and selected
+witnesses. Each count links to its case and exact form; the finite feasibility results
+are recorded as T-125, T-126, and T-127
 ([results register](../../frontier/results.yaml)). For $n=51$, the selected exact side
 is $(16+5\sqrt2)/3$. These are construction upper bounds, with no new local- or
 global-optimality conclusion.

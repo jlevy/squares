@@ -755,7 +755,7 @@ SOURCE_RULES: tuple[Rule, ...] = (
     ),
     (
         "the publisher's n = 11 optimality driver",
-        _source(r"^\[Queuingtheorydotcom"),
+        _source(r"^\[Ahmed"),
         runs(("V-queuingtheory-n11-verify",), PRODUCER),
     ),
     (

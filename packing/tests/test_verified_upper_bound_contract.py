@@ -90,6 +90,15 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/result_status.py": (
+        "reads ceiling evidence to distinguish grid bounds from certified construction "
+        "reports, without redating the reported construction; a ceiling alone never "
+        "establishes s(n), and recent optimality also requires proved case status"
+    ),
+    "packing/tests/test_recent_contributions.py": (
+        "checks that fresh ceiling verification does not redate a historical construction "
+        "or imply optimality; upper, lower and optimality contribution roles remain distinct"
+    ),
     "packing/tests/test_confirm_gupta_records.py": (
         "tests finite ceiling confirmation, retained prior lanes and complete custody; "
         "a feasibility certificate confers neither s(n) nor optimality"

@@ -121,6 +121,8 @@ name: Certificate page
       - packing/devtools/overview_data.py
       - packing/devtools/overview_sections.py
       - packing/devtools/result_overview.py
+      - packing/devtools/atlas_legend.py
+      - packing/devtools/result_status.py
       - packing/devtools/overview/**
       - packing/devtools/render_frontier_page.py
       - packing/devtools/templates/frontier-article.md
@@ -151,11 +153,11 @@ name: Certificate page
       - packing/devtools/templates/fonts/**
       - packing/atlas/known-best/known-best-1-100.svg
       - packing/atlas/known-best/known-best-1-100.png
-      - packing/atlas/known-best/known-best-1-100.pdf
+      - packing/atlas/known-best/square-packings-100-20261008.pdf
       - packing/atlas/known-best/known-best-1-100-card.png
       - packing/atlas/known-best/known-best-1-324.svg
       - packing/atlas/known-best/known-best-1-324.png
-      - packing/atlas/known-best/known-best-1-324.pdf
+      - packing/atlas/known-best/square-packings-324-20261008.pdf
       - vendor/kpress
       - packing/pyproject.toml
       - packing/uv.lock
@@ -1991,8 +1993,9 @@ jobs:
           test -s "$STAGED/papers/square-packing-methods-survey.html"
           uv run --frozen --group dev python -m devtools.assemble_site --destination site "$STAGED"
 
-      # The papers moved to `papers/<slug>` on 2026-10-01. A page that moved is forwarded
-      # by a page of the overview's build; a Markdown file or a PDF cannot forward, so
+      # The papers moved to `papers/<slug>` on 2026-10-01, and atlas PDFs gained dated
+      # filenames on 2026-10-08. Moved pages forward through the overview's build;
+      # a Markdown file or a PDF cannot forward, so
       # each is served at its old address too, as a copy of the checked file. The list is
       # `render_overview.MOVED_FILES`, and a test holds this step to it.
       - name: Serve each moved file at its old address too
@@ -2007,6 +2010,8 @@ jobs:
             mkdir -p "$(dirname "$1")"
             cp "$2" "$1"
           }
+          moved known-best-1-100.pdf square-packings-100-20261008.pdf
+          moved known-best-1-324.pdf square-packings-324-20261008.pdf
           moved t-018-explainer.md papers/n11-lower-bounds-explainer.md
           moved t-018-explainer.pdf papers/n11-lower-bounds-explainer.pdf
           moved n11-optimality/t-060-explainer.md papers/n11-optimality-review.md

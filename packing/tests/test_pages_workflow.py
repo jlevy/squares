@@ -1095,6 +1095,8 @@ def _assembled(
     (site / "papers" / "n11-lower-bounds-explainer.md").write_text("explainer markdown")
     (site / "papers" / "n11-lower-bounds-explainer.pdf").write_text("explainer pdf")
     (site / "known-best-1-100.svg").write_text("atlas")
+    for n in (100, 324):
+        (site / f"square-packings-{n}-20261008.pdf").write_text(f"atlas PDF {n}")
     pages = root / "overview-pages"
     forwarders = [old for old, _ in render_overview.MOVED_PAGES]
     assert {"explainer.html", "n11-optimality/index.html"} < set(forwarders)
@@ -1232,6 +1234,10 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
         "explainer.html",
         "index.html",
         "known-best-1-100.svg",
+        "known-best-1-100.pdf",
+        "known-best-1-324.pdf",
+        "square-packings-100-20261008.pdf",
+        "square-packings-324-20261008.pdf",
         "n11-optimality/index.html",
         "n11-optimality/t-060-explainer.html",
         "n11-optimality/t-060-explainer.md",

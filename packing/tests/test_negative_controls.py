@@ -253,7 +253,7 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
         "devtools/regularize_axis_components.py",
     ):
         assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
-    assert SNAPSHOT_MAX_BYTES == 192 * 1024 * 1024
+    assert SNAPSHOT_MAX_BYTES == 200 * 1024 * 1024
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
@@ -1464,21 +1464,28 @@ try:
 finally:
     shutil.rmtree(probe_root, ignore_errors=True)
 """
-    completed = subprocess.run(
-        [
-            sys.executable,
-            "-c",
-            script,
-            str(tree),
-            str(len(CACHE_PROBE_BYTES)),
-            *CACHE_PROBE_DIRECTORIES,
-        ],
-        cwd=source / HERE,
-        env=environment,
-        check=False,
-        capture_output=True,
-        text=True,
-        timeout=180,
+    try:
+        completed = controls.run_control_command(
+            shlex.join(
+                [
+                    sys.executable,
+                    "-c",
+                    script,
+                    str(tree),
+                    str(len(CACHE_PROBE_BYTES)),
+                    *CACHE_PROBE_DIRECTORIES,
+                ]
+            ),
+            cwd=source / HERE,
+            environment=environment,
+            timeout_seconds=180,
+        )
+    finally:
+        # A killed child cannot run its finally. Reap its descendants before removing
+        # only the probes it planted inside this private shared snapshot.
+        shutil.rmtree(source / HERE / CACHE_PROBE_ROOT.name, ignore_errors=True)
+    assert not completed.timed_out, (
+        "cache probe timed out after 180 seconds: " + completed.stdout + completed.stderr
     )
     assert completed.returncode == 0, completed.stderr
 
@@ -1495,6 +1502,33 @@ finally:
     counted = tree / HERE / ".negative-control-cache-probe/counted.bin"
     assert counted.read_bytes() == CACHE_PROBE_BYTES
     assert not CACHE_PROBE_ROOT.exists()
+
+
+def test_cache_probe_timeout_cleans_the_private_shared_snapshot(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source = tmp_path / "source"
+    work = source / HERE
+    work.mkdir(parents=True)
+    probe_root = work / CACHE_PROBE_ROOT.name
+    retained = work / "ordinary-input.bin"
+    retained.write_bytes(b"keep this input")
+
+    def timed_out(_command: str, **_kwargs: Any) -> controls.CommandOutcome:
+        probe_root.mkdir()
+        (probe_root / "counted.bin").write_bytes(b"abandoned counted input")
+        cache = probe_root / "__pycache__"
+        cache.mkdir()
+        (cache / "probe.bin").write_bytes(b"abandoned child cache")
+        return controls.CommandOutcome(-9, "", "killed child", timed_out=True)
+
+    monkeypatch.setattr(controls, "run_control_command", timed_out)
+    with pytest.raises(AssertionError, match="cache probe timed out after 180 seconds"):
+        test_build_caches_leave_the_counted_surface_and_the_worker_trees(
+            tmp_path, (source, set())
+        )
+    assert not probe_root.exists()
+    assert retained.read_bytes() == b"keep this input"
 
 
 def test_results_register_dependencies_survive_snapshot_pruning() -> None:

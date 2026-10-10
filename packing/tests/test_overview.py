@@ -5,6 +5,7 @@ from __future__ import annotations
 import dataclasses
 import html
 import html.parser
+import math
 import re
 import struct
 import textwrap
@@ -39,7 +40,6 @@ from devtools.render_n11_lower_bounds_explainer import TEMPLATE as EXPLAINER_SHE
 from devtools.repo_links import (
     DEFAULT_BRANCH,
     REPO_URL,
-    branch_file,
     hash_pinned_links,
     repo_url,
 )
@@ -314,11 +314,8 @@ def test_the_posters_and_the_film_have_a_section_of_their_own_under_the_atlas(
         overview_sections.ATLAS_CARDS
     )
     note = section.split('<p class="site-wide site-atlas-note">', 1)[1].split("</p>", 1)[0]
-    # The star is keyed once on the page, in the legend under the recent table
-    # (`rung_legend`); the note links that table and says it no second time.
-    assert note.startswith(
-        'On the posters, each star marks a <a href="#recent-results">new result</a>.'
-    )
+    assert note.startswith("A shorter film shows the ")
+    assert "star" not in note
     assert "22 August" not in note
     assert section.index('class="site-cards-frame') < section.index("site-atlas-note")
     for linked in ("ascent-n1-100-1080p60-citations.mp4", "known-best-1-324.svg"):
@@ -354,15 +351,27 @@ def test_the_atlas_section_is_named_for_its_packings_and_the_sections_run_in_ord
     ]
 
 
+def test_atlas_download_cards_and_paper_assets_match_the_canonical_pdf_names() -> None:
+    from sqpack.known_best import composite_pdf_name  # noqa: PLC0415
+
+    names = [composite_pdf_name(f"known-best-1-{last}") for last in (100, 324)]
+    assert [card[0] for card in overview_sections.ATLAS_CARDS[:2]] == names
+    assert [asset.name for asset in COMPOSITE_ASSETS if asset.suffix == ".pdf"] == names
+    assert "44 by 51" not in overview_sections.ATLAS_CARDS[1][-1]
+    assert "triangle" in overview_sections.ATLAS_CARDS[1][-1]
+
+
 def test_the_atlas_posters_are_hero_cards_each_opening_its_pdf(page: str) -> None:
     """Each poster is a card headed by its picture that is itself the link to its PDF,
     typed as PDF and never marked for download, so the browser opens it in place."""
+    from sqpack.known_best import composite_pdf_name  # noqa: PLC0415
+
     cards = dict(_atlas_cards(page))
     for stem, hero in (
         ("known-best-1-100", "known-best-1-100-card.png"),
         ("known-best-1-324", "known-best-1-324.png"),
     ):
-        body = cards[f"{stem}.pdf"]
+        body = cards[composite_pdf_name(stem)]
         assert body.startswith(' type="application/pdf"'), stem
         assert f'<span class="site-card-hero"><img src="{hero}" alt=""' in body, stem
         assert (COMPOSITE_ASSETS[0].parent / hero).is_file(), hero
@@ -387,8 +396,8 @@ def test_the_atlas_film_is_a_hero_card_opening_the_visualize_page(page: str) -> 
     beside the page, opens the Visualize page, which shows the film alone."""
     cards = _atlas_cards(page)
     assert [href for href, _ in cards] == [
-        "known-best-1-100.pdf",
-        "known-best-1-324.pdf",
+        "square-packings-100-20261008.pdf",
+        "square-packings-324-20261008.pdf",
         overview_sections.VISUALIZE_PAGE,
     ]
     body = dict(cards)[overview_sections.VISUALIZE_PAGE]
@@ -453,9 +462,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(page: str) -> None:
     assert [card[1] for card in pages[1:4]] == ["Part I", "Part II", "Part III"]
     assert overview_sections.OPTIMALITY is overview_sections.PAPERS[2]
     note = pages[3][3]
-    assert note.startswith(
-        "Explains Queuingtheorydotcom\u2019s proof that Trump\u2019s packing"
-    )
+    assert note.startswith("Explains Ahmed\u2019s proof that Trump\u2019s packing")
     assert "(T-060)" in note
     assert "formal" not in note.lower()
     served = {*render_overview.SITE_PAGES, "workbench/"}
@@ -498,7 +505,7 @@ def test_a_same_tab_link_card_leads_only_to_a_page_of_the_site() -> None:
     assert "target=" not in same
     assert "rel=" not in same
     assert same.split(">", 1)[1] == made.split(">", 1)[1]
-    for address in ("https://github.com/jlevy/squares", "known-best-1-100.pdf"):
+    for address in ("https://github.com/jlevy/squares", "square-packings-100-20261008.pdf"):
         with pytest.raises(SystemExit, match="only a page of this site"):
             overview_sections.link_card(address, "Label", "Headline", "A note.", new_tab=False)
 
@@ -528,7 +535,7 @@ def test_a_site_page_is_a_page_the_site_serves() -> None:
         "",
         "#recent-results",
         "https://github.com/jlevy/squares",
-        "known-best-1-100.pdf",
+        "square-packings-100-20261008.pdf",
         "nowhere.html",
         "papers/",
         "workbench",
@@ -646,25 +653,29 @@ def test_the_atlas_expander_reuses_the_action_button_and_tokens() -> None:
     assert ".site-atlas-rest[hidden] {\n  display: none;" in css
 
 
-def test_the_atlas_is_rendered_as_the_grid_under_tabs_that_ship_hidden(
+def test_the_atlas_is_rendered_as_small_triangle_under_its_view_tabs(
     page: str, served: Callable[[str], str]
 ) -> None:
-    """The page is rendered in the grid view, the default, with the two view tabs over
-    the tiles: a tablist of buttons, Grid selected and the one stop in the tab order,
-    each controlling the box of tiles the script places. The strip ships `hidden`, since
-    without the script it would do nothing, as the expander's row does. Both scripts are
-    linked, the views' first: the grid's calls it. `test_site_atlas_views` reads the
-    two views in a browser."""
+    """The page is rendered in Small Triangle, the default, with two view tabs over
+    the tiles: a tablist of buttons, Triangle selected and the one stop in the tab order,
+    each controlling the box of tiles the script places. The strip and static Triangle
+    are present in the first response. Both scripts are linked, the views' first: the
+    grid's calls it. `test_site_atlas_views` reads the two views in a browser."""
     block = re.findall(r'<div class="site-wide site-atlas-grid" ([^>]*)>', page)
-    assert block == ['data-atlas-view="grid" data-atlas-size="medium" data-atlas-grid']
+    assert block == [
+        (
+            'data-atlas-view="triangle" data-atlas-size="small" '
+            'data-atlas-scale="fixed" data-atlas-grid'
+        )
+    ]
     tabs = overview_sections.atlas_view_tabs()
     assert tabs == (
         '<div class="site-tabs site-atlas-views" role="tablist" aria-label="Atlas layout" '
         'data-atlas-views data-atlas-panel="atlas-cells">'
         '<button type="button" role="tab" id="atlas-view-grid" data-atlas-tab="grid" '
-        'aria-selected="true" aria-controls="atlas-cells">Grid</button>'
+        'aria-selected="false" aria-controls="atlas-cells" tabindex="-1">Grid</button>'
         '<button type="button" role="tab" id="atlas-view-triangle" data-atlas-tab="triangle" '
-        'aria-selected="false" aria-controls="atlas-cells" tabindex="-1">Triangle</button>'
+        'aria-selected="true" aria-controls="atlas-cells">Triangle</button>'
         "</div>"
     )
     assert page.count(tabs) == 1
@@ -674,7 +685,7 @@ def test_the_atlas_is_rendered_as_the_grid_under_tabs_that_ship_hidden(
         atlas.index(mark)
         for mark in (
             "data-atlas-views",
-            '<div class="site-atlas-cells" id="atlas-cells">',
+            '<div class="site-atlas-cells" id="atlas-cells"',
             "data-atlas-toggle",
         )
     ]
@@ -706,15 +717,72 @@ def test_the_atlas_is_rendered_as_the_grid_under_tabs_that_ship_hidden(
 
 
 def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(page: str) -> None:
-    """A perfect square ends its row of the triangle, and its tile says so; that mark is
-    all the triangle adds to a tile's markup. Where a tile stands is the script's to
-    write, since it follows from the window's width."""
+    """A perfect square ends its left aligned row of the triangle, and its tile says so;
+    first-grid markers identify the retained grid suffixes. Where a tile stands is the
+    script's to write, since it follows from the window's width."""
     grid = page.split("data-atlas-grid>", 1)[1].split('<p class="site-action-row', 1)[0]
-    squares = re.findall(r'data-atlas-n="(\d+)" data-atlas-square ', grid)
+    squares = re.findall(
+        r'data-atlas-n="(\d+)" data-atlas-side="[^"]+" data-atlas-square(?: |>)', grid
+    )
     assert [int(n) for n in squares] == [k * k for k in range(1, 19)]
     assert grid.count("data-atlas-square") == 18
-    assert 'style="--r:1;--c:0;--o:0"' in _atlas_template(page, "first")
+    first_grids = re.findall(
+        r'data-atlas-n="(\d+)" data-atlas-side="[^"]+"'
+        r"(?: data-atlas-square)? data-atlas-grid-from",
+        grid,
+    )
+    assert [int(n) for n in first_grids] == [
+        1,
+        2,
+        6,
+        12,
+        20,
+        30,
+        42,
+        56,
+        72,
+        90,
+        111,
+        133,
+        157,
+        183,
+        212,
+        242,
+        274,
+        308,
+    ]
+    first = re.search(
+        r'<a\b[^>]* data-atlas-n="1"[^>]* style="([^"]+)"', _atlas_template(page, "first")
+    )
+    assert first is not None
+    positions = {
+        key.strip(): float(value)
+        for key, value in (
+            declaration.split(":", 1)
+            for declaration in first[1].split(";")
+            if declaration.strip()
+        )
+    }
+    assert positions == {
+        "--r": 1,
+        "--c": 0,
+        "--g": 1,
+        "--i": 1,
+        "--o": 0,
+        "--site-atlas-side": 1,
+    }
     assert 'class="site-atlas-key"' not in page
+
+
+def test_the_web_keeps_grid_boundaries_without_dimension_captions() -> None:
+    cell = overview_sections._atlas_cell  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    tile = cell(212, "open", grid_from=212)
+    assert '<span class="site-atlas-n">212</span>' in tile
+    assert "site-atlas-grid-start" not in tile
+    assert "15\N{MULTIPLICATION SIGN}15" not in tile
+    assert 'data-atlas-n="212"' in tile
+    assert " data-atlas-grid-from" in tile
+    assert "first grid packing in row 15" in tile
 
 
 def _regularized_index() -> dict:
@@ -729,9 +797,11 @@ def _atlas_template(page: str, which: str) -> str:
     """The static first or remaining tile run in the atlas block."""
     grid = page.split("data-atlas-grid>", 1)[1].split('<p class="site-action-row', 1)[0]
     if which == "first":
-        return grid.split('<div class="site-atlas-cells" id="atlas-cells">', 1)[1].split(
-            '<div class="site-atlas-rest" data-atlas-rest hidden>', 1
-        )[0]
+        return (
+            grid.split('<div class="site-atlas-cells" id="atlas-cells"', 1)[1]
+            .split(">", 1)[1]
+            .split('<div class="site-atlas-rest" data-atlas-rest hidden>', 1)[0]
+        )
     return grid.split('<div class="site-atlas-rest" data-atlas-rest hidden>', 1)[1].rsplit(
         "</div></div>", 1
     )[0]
@@ -741,39 +811,38 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
     page: str, served: Callable[[str], str]
 ) -> None:
     """Beside the view tabs, in one row over the tiles, three more choose the size of
-    the tiles (think-ht8t): Small, Medium, the default and the size the page is rendered
-    at, and Large. The strip is the view tabs' own, a tablist of buttons controlling the
+    the tiles (think-ht8t): Small, the default and the size the page is rendered at, Medium,
+    and Large. The strip is the view tabs' own, a tablist of buttons controlling the
     box of tiles, and ships `hidden` as they do; the key to a tile's marks follows them
     in the same box. The House and Regularized tabs that stood there went on 2026-10-04
     (think-k8x9), with their script: the views' script mounts the sizes, and the page
     links the views' and the grid's alone."""
     assert [key for key, _ in overview_sections.ATLAS_SIZES] == ["small", "medium", "large"]
-    assert overview_sections.ATLAS_SIZE == "medium"
+    assert overview_sections.ATLAS_SIZE == "small"
     tabs = overview_sections.atlas_size_tabs()
     assert tabs == (
         '<div class="site-tabs site-atlas-sizes" role="tablist" aria-label="Atlas tile size" '
         "data-atlas-sizes>"
         '<button type="button" role="tab" id="atlas-size-small" data-atlas-size-tab="small" '
-        'aria-selected="false" aria-controls="atlas-cells" tabindex="-1">Small</button>'
+        'aria-selected="true" aria-controls="atlas-cells">Small</button>'
         '<button type="button" role="tab" id="atlas-size-medium" data-atlas-size-tab="medium" '
-        'aria-selected="true" aria-controls="atlas-cells">Medium</button>'
+        'aria-selected="false" aria-controls="atlas-cells" tabindex="-1">Medium</button>'
         '<button type="button" role="tab" id="atlas-size-large" data-atlas-size-tab="large" '
         'aria-selected="false" aria-controls="atlas-cells" tabindex="-1">Large</button>'
         "</div>"
     )
     assert page.count(tabs) == 1
-    # The key closes the box; the page's renderer gives its link to GitHub a new tab.
+    # The complete shared legend follows both tab strips and closes their box.
     controls = (
         '<div class="site-atlas-controls" data-atlas-controls>'
-        f'{overview_sections.atlas_view_tabs()}{tabs}<p class="site-atlas-legend" '
+        f"{overview_sections.atlas_view_tabs()}{tabs}{overview_sections.atlas_scale_tabs()}"
+        f"{overview_sections.atlas_legend()}"
     )
     assert page.count(controls) == 1
-    key = page.split(controls, 1)[1].split("</p>", 1)[0]
-    assert key.endswith("regularized view</a></span>")
-    following = page.split(controls, 1)[1].split("</p>", 1)[1]
+    following = page.split(controls, 1)[1]
     assert following.startswith('</div><div class="site-atlas-cells"')
     atlas = page.split('id="the-atlas-of-square-packings"', 1)[1].split("<h2", 1)[0]
-    cells = '<div class="site-atlas-cells" id="atlas-cells">'
+    cells = '<div class="site-atlas-cells" id="atlas-cells"'
     assert atlas.index(controls) < atlas.index(cells)
     for gone in ("data-atlas-layers", "data-atlas-layer-tab", "atlas-layer-house", "House"):
         assert gone not in atlas, gone
@@ -796,7 +865,8 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
     assert "readdress(searchForSize(location.search, next));" in select_size
     assert "history.replaceState(history.state" in view
     assert '"--site-atlas-scale"' in view
-    assert '"--site-atlas-tile-max"' in view
+    assert '"--site-atlas-cell-min"' in view
+    assert '"--site-atlas-reference-gap"' in view
     assert "cells.append" not in grid
 
 
@@ -805,9 +875,8 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     regularized rendering reduced by `packing_svg`, the code that reduces a house
     rendering, so it differs from the house drawing only where the view moved a square
     or changed a square's shade. At tile resolution, subpixel moves can round to the
-    same drawing; the audited equality set is pinned below. Its name says
-    it is the regularized view and its number carries the layer's badge before it. Every
-    other case is drawn from its house rendering, unbadged. Read from the generator's own
+    same drawing. The website shows the selected drawing without layer labels or
+    badges. Every other case is drawn from its house rendering. Read from the generator's own
     markup, before the page's renderer normalizes it."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
 
@@ -820,12 +889,11 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         for a, d, n in tile.findall(tiles)
     }
     assert list(drawn) == list(range(1, 325))
-    mark = overview_sections.atlas_layer_mark()
     for n, (open_tag, drawing, number) in drawn.items():
         is_regularized = n in regularized
         assert drawing == frontier.drawing_img(n, regularized=is_regularized, size=400)
-        assert (", regularized view, " in open_tag) == is_regularized
-        assert (mark in number) == is_regularized
+        assert "regularized" not in open_tag
+        assert "site-atlas-layer-mark" not in number
         assert 'width="400" height="400"' in drawing
         assert frontier.drawing_path(n, regularized=is_regularized) in frontier.drawing_paths()
 
@@ -861,19 +929,17 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     assert "data-atlas-layer" not in tiles
 
 
-def test_a_case_with_a_new_result_carries_the_star_by_the_frontier_tables_rule(
+def test_overview_tiles_omit_recent_stars_but_frontier_keeps_lower_recency(
     rendered: Callable[[str], str],
 ) -> None:
-    """A case's tile carries the star after its number exactly where the frontier
-    table's Recent column stars its row (`render_frontier_page.recent_lower_bounds`, its
-    verified lower bound a recent result), and its name ends "new result", as a starred
-    row's name does in a table of results (think-wwtt). The star is the site's one star,
-    `.site-star`, hidden from assistive technology since the name says it."""
+    """Overview drawings omit recency; case and frontier records retain it."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
 
+    recent = {
+        n: flags.any for n, flags in overview_sections.recent_contributions_by_case().items()
+    }
     star = overview_sections.atlas_star()
     assert star == '<span class="site-star" aria-hidden="true">★</span>'
-    assert overview_sections.STAR in star
     page = overview_sections.atlas_grid()
     tiles = _atlas_template(page, "first") + _atlas_template(page, "rest")
     found = re.findall(
@@ -882,53 +948,88 @@ def test_a_case_with_a_new_result_carries_the_star_by_the_frontier_tables_rule(
         tiles,
     )
     assert [int(n) for n, _, _ in found] == list(range(1, 325))
-    recent = frontier.recent_lower_bounds()
+    lower_recent = frontier.recent_lower_bounds()
     frontier_page = rendered("frontier.html")
     rows = dict(re.findall(r'<tr id="n-(\d+)"[^>]*data-recent="(true|false)"', frontier_page))
     assert sorted(int(n) for n in rows) == list(range(1, 325))
     for n, name, number in found:
-        starred = recent.get(int(n), False)
-        assert starred == (rows[n] == "true"), n
-        assert number.endswith(star) == starred, n
-        assert number.count(star) == (1 if starred else 0), n
-        assert name.endswith(f", {overview_sections.NEW_RESULT}") == starred, n
-    assert sum(recent.values()) == len(
-        [1 for _, name, _ in found if name.endswith("new result")]
-    )
-    # A case without a new result: n = 1, the unit square, and n = 25, a perfect square.
-    assert not recent[1]
-    assert not recent[25]
+        starred = recent[int(n)]
+        assert lower_recent[int(n)] == (rows[n] == "true"), n
+        assert not lower_recent[int(n)] or starred, n
+        assert number == n, n
+        assert star not in number, n
+        assert not name.endswith(f", {overview_sections.NEW_RESULT}"), n
+    assert sum(recent.values()) > 0
+    assert not lower_recent[1]
+    assert not lower_recent[25]
 
 
-def test_the_atlas_key_names_the_star_and_the_badge_and_ships_hidden() -> None:
-    """The key under the tabs names a tile's two marks in words, each mark beside its
-    words as on the tiles: the star, "new result", and the regularized badge,
-    "regularized view", linked to the atlas README's section on the layer. Without a
-    regularized drawing on the page it names the star alone. It ships `hidden`, with the
-    tabs; `atlas-grid.js` shows it as it places the tiles."""
-    key = overview_sections.atlas_legend(regularized=True)
-    readme = branch_file(overview_sections.ATLAS_REGULARIZED_README, "#the-regularized-views")
-    assert key == (
-        '<p class="site-atlas-legend" role="note" aria-label="What a tile\u2019s marks mean" '
-        "data-atlas-legend>"
-        f'<span class="site-atlas-legend-item">{overview_sections.atlas_star()} '
-        "<span>new result</span></span> "
-        f'<span class="site-atlas-legend-item">{overview_sections.atlas_layer_mark()}'
-        f'<a href="{readme}">regularized view</a></span></p>'
+def test_upper_only_recent_stars_stay_in_case_facts_and_off_overview_tiles(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools.result_status import RecentContributions  # noqa: PLC0415
+
+    # Prime immutable real-case facts before patching the star provider.
+    result_overview.film_facts()
+    flags = {
+        n: RecentContributions(upper=False, lower=False, optimal=False) for n in range(1, 325)
+    }
+    flags[1] = RecentContributions(upper=True, lower=False, optimal=False)
+    monkeypatch.setattr(overview_sections, "recent_contributions_by_case", lambda: flags)
+    page = overview_sections.atlas_grid()
+    first = _atlas_template(page, "first")
+    tile = re.search(r'<a class="site-atlas-cell" [^>]*data-atlas-n="1"[^>]*>.*?</a>', first)
+    assert tile is not None
+    assert ', new result"' not in tile.group()
+    assert overview_sections.atlas_star() not in tile.group()
+    assert page.count(overview_sections.atlas_star()) == 0
+    facts = overview_sections.atlas_film_facts()
+    assert facts[0]["star"] is True
+    assert sum(bool(fact["star"]) for fact in facts) == 1
+    assert "★" in result_overview.film_facts_html(facts[0])
+
+
+def test_the_atlas_key_explains_only_angle_colors_and_contact_shades() -> None:
+    """The web key shows just the two color encodings, one per centered column."""
+    key = overview_sections.atlas_legend()
+    assert re.findall(r'data-atlas-legend-key="([^"]+)"', key) == ["angles", "contacts"]
+    columns = key.split('class="site-atlas-legend-column"')[1:]
+    assert len(columns) == 2
+    assert re.findall(r'data-atlas-legend-key="([^"]+)"', columns[0]) == ["angles"]
+    assert re.findall(r'data-atlas-legend-key="([^"]+)"', columns[1]) == ["contacts"]
+    for removed in ("optimal", "exact", "numerical", "rigid", "recent", "degree"):
+        assert f'data-atlas-legend-key="{removed}"' not in key
+    assert "colors indicate distinct tilt angles" in key
+    assert "shade indicates number of full-side contacts" in key
+    assert overview_sections.atlas_star() not in key
+    assert re.search(r"\(\d+/\d+\)", key) is None
+    swatches = re.findall(
+        r'<span class="site-atlas-swatch" data-value="(\d+)"[^>]*>([^<]*)</span>', key
     )
-    assert readme.endswith("packing/atlas/known-best/README.md#the-regularized-views")
-    readme_text = overview_sections.ATLAS_REGULARIZED_README.read_text(encoding="utf-8")
-    assert "\n## The regularized views\n" in readme_text
-    alone = overview_sections.atlas_legend(regularized=False)
-    assert "regularized" not in alone
-    assert overview_sections.atlas_star() in alone
+    assert swatches == [
+        ("0", "90°"),
+        ("1", "45°"),
+        ("2", ""),
+        ("3", ""),
+        ("4", "4"),
+        ("3", "3"),
+        ("2", "2"),
+        ("1", "1"),
+        ("0", "0"),
+    ]
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
+    assert "color: var(--site-atlas-angle-label-ink);" in _rule(
+        css, ".site-atlas-swatch[data-angle-label]"
+    )
+    assert "--site-atlas-angle-label-ink: #000;" in css
     legend = _rule(css, ".kpress .site-atlas-grid .site-atlas-legend")
     for declaration in (
         "color: var(--site-support-color);",
         "font-size: var(--site-font-size-note);",
         "flex-basis: 100%;",
+        "grid-template-columns: repeat(2, minmax(0, max-content));",
         "justify-content: center;",
+        "text-align: start;",
     ):
         assert declaration in legend, declaration
 
@@ -936,12 +1037,14 @@ def test_the_atlas_key_names_the_star_and_the_badge_and_ships_hidden() -> None:
 def test_the_sizes_scale_a_tile_by_one_token_in_either_view() -> None:
     """Medium is a scale of 1, the atlas as it was; Small two thirds and Large half as
     wide again, set on the block by its `data-atlas-size`. The grid's least cell is the
-    scale times 6.4rem, 4.6rem on a phone, as it was at Medium; the triangle's tile is its
-    line's share, scaled down at Small, and no wider than the most a tile may be, scaled,
-    never under the least tile."""
+    scale times 6.4rem, 4.6rem on a phone; Triangle uses the same minimum and gaps,
+    reserving the gaps before sharing the block's width among its columns."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     block = _rule(css, ".site-page .site-atlas-grid")
-    assert "--site-atlas-scale: 1;" in block
+    assert "--site-atlas-scale: 0.667;" in block
+    assert "--site-atlas-scale: 1;" in _rule(
+        css, '.site-page .site-atlas-grid[data-atlas-size="medium"]'
+    )
     assert "--site-atlas-cell-min: 6.4rem;" in block
     assert "--site-atlas-scale: 0.667;" in _rule(
         css, '.site-page .site-atlas-grid[data-atlas-size="small"]'
@@ -952,23 +1055,17 @@ def test_the_sizes_scale_a_tile_by_one_token_in_either_view() -> None:
     plain = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
     assert re.search(
         r"@media \(max-width: 40rem\) \{\s*"
-        r"\.site-page \.site-atlas-grid \{\s*--site-atlas-cell-min: 4\.6rem;\s*\}",
+        r"\.site-page \.site-atlas-grid \{\s*--site-atlas-cell-min: 4\.6rem;\s*"
+        r"--site-atlas-reference-gap: 0\.35rem;\s*\}",
         plain,
     )
     shared = _rule(css, ".site-atlas-cells")
     for declaration in (
-        "--site-atlas-fit: calc(100cqi / var(--site-atlas-per-line, 1));",
-        "--site-atlas-share: calc(var(--site-atlas-fit) * min(1, var(--site-atlas-scale)));",
-        "--site-atlas-most: calc(var(--site-atlas-tile-max) * var(--site-atlas-scale));",
-        (
-            "--site-atlas-tile: clamp(\n"
-            "    var(--site-atlas-tile-min),\n"
-            "    var(--site-atlas-share),\n"
-            "    var(--site-atlas-most)\n"
-            "  );"
-        ),
+        "--site-atlas-tile: calc(",
+        "(100cqi - (var(--site-atlas-per-line) - 1) * var(--site-atlas-reference-gap)) /",
+        "gap: var(--site-atlas-row-gap) var(--site-atlas-cell-gap);",
         "--site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));",
-        "grid-template-columns: repeat(auto-fill, minmax(var(--site-atlas-cell), 1fr));",
+        "grid-template-columns: repeat(var(--site-atlas-per-line), var(--site-atlas-tile));",
     ):
         assert declaration in shared, declaration
     # The size tabs are drawn as the view tabs are, and hidden until the tiles are placed.
@@ -976,6 +1073,7 @@ def test_the_sizes_scale_a_tile_by_one_token_in_either_view() -> None:
         css,
         ".site-atlas-grid .site-atlas-views[hidden],\n"
         ".site-atlas-grid .site-atlas-sizes[hidden],\n"
+        ".site-atlas-grid .site-atlas-scales[hidden],\n"
         ".site-atlas-grid .site-atlas-legend[hidden]",
     )
 
@@ -1017,21 +1115,10 @@ def test_the_regularized_set_is_the_layer_index_and_refuses_a_stale_drawing(
         overview_sections.atlas_regularized()
 
 
-def test_the_marks_hang_either_side_of_a_number_that_stays_centred() -> None:
-    """The badge is one dot in the accent, sized in the text it stands with; the star is
-    the site's one star in its warm ink. Every number's box is shrunk to the number and
-    centred, and on a tile each mark is out of the flow beside it, the badge before its
-    start and the star past its end, so a marked number stands where an unmarked one
-    does (`devtools.measure_atlas_views.mark_problems` holds the boxes in a browser)."""
+def test_overview_counts_are_centered_and_case_stars_keep_the_shared_color() -> None:
+    """Overview counts have no star styling; other recent-result stars keep their ink."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
-    dot = _rule(css, ".site-atlas-layer-mark")
-    for declaration in (
-        "background: var(--kpress-doc-accent);",
-        "block-size: 0.5em;",
-        "inline-size: 0.5em;",
-        "border-radius: 50%;",
-    ):
-        assert declaration in dot, declaration
+    assert "site-atlas-layer-mark" not in css
     assert "color: var(--site-new-result);" in _rule(css, ".site-star")
     number = _rule(css, ".site-atlas-n")
     for declaration in (
@@ -1040,12 +1127,7 @@ def test_the_marks_hang_either_side_of_a_number_that_stays_centred() -> None:
         "position: relative;",
     ):
         assert declaration in number, declaration
-    hung = _rule(css, ".site-atlas-n > .site-atlas-layer-mark")
-    for declaration in ("position: absolute;", "inset-inline-end: calc(100% + 0.3em);"):
-        assert declaration in hung, declaration
-    star = _rule(css, ".site-atlas-n > .site-star")
-    for declaration in ("position: absolute;", "inset-inline-start: calc(100% + 0.12em);"):
-        assert declaration in star, declaration
+    assert ".site-atlas-n > .site-star" not in css
     assert '[data-atlas-layer="regularized"]' not in css
 
 
@@ -1078,18 +1160,22 @@ def test_the_view_tabs_are_the_section_tabs_strip() -> None:
         assert declaration in button
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     placed = _rule(
-        css, ".site-atlas-grid .site-atlas-views,\n.site-atlas-grid .site-atlas-sizes"
+        css,
+        ".site-atlas-grid .site-atlas-views,\n"
+        ".site-atlas-grid .site-atlas-sizes,\n"
+        ".site-atlas-grid .site-atlas-scales",
     )
     assert "line-height: var(--site-nav-line);" in placed
     assert "margin: 0;" in placed
     hidden = (
         ".site-atlas-grid .site-atlas-views[hidden],\n"
         ".site-atlas-grid .site-atlas-sizes[hidden],\n"
+        ".site-atlas-grid .site-atlas-scales[hidden],\n"
         ".site-atlas-grid .site-atlas-legend[hidden]"
     )
     assert "display: none;" in _rule(css, hidden)
     assert "font-size" not in placed
-    # The two strips are one row over the tiles, centred, that wraps on a narrow block.
+    # The chooser strips share the tile block's center and wrap on a narrow block.
     row = _rule(css, ".site-atlas-grid .site-atlas-controls")
     for declaration in (
         "display: flex;",
@@ -1101,8 +1187,8 @@ def test_the_view_tabs_are_the_section_tabs_strip() -> None:
 
 
 def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
-    """The triangle's least and greatest tile and the move's duration and easing are
-    tokens of the atlas block. The script reads the least tile, in rem, to say how many
+    """The shared cell minimum and gap and the move's duration and easing are tokens
+    of the atlas block. The script reads the scaled cell minimum and gap to say how many
     a line holds, and the two timing tokens to move the tiles; reduced motion sets the
     duration to 0ms, which is no move. A tile's size is the stylesheet's, from the block's
     width and the tiles a line holds, and nothing in the sheet transitions or animates a
@@ -1110,8 +1196,8 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     block = _rule(css, ".site-page .site-atlas-grid")
     for declaration in (
-        "--site-atlas-tile-min: 1.625rem;",
-        "--site-atlas-tile-max: 4.5rem;",
+        "--site-atlas-cell-min: 6.4rem;",
+        "--site-atlas-reference-gap: 0.5rem;",
         "--site-atlas-move-duration: 360ms;",
         "--site-atlas-move-easing: cubic-bezier(0.2, 0, 0, 1);",
         "container-type: inline-size;",
@@ -1119,36 +1205,60 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
         assert declaration in block, declaration
     plain = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
     assert re.search(
-        r"@media \(max-width: 40rem\), \(pointer: coarse\) \{\s*"
-        r"\.site-page \.site-atlas-grid \{\s*--site-atlas-tile-min: 2\.5rem;\s*\}",
-        plain,
-    )
-    assert re.search(
         r"@media \(prefers-reduced-motion: reduce\) \{\s*"
         r"\.site-page \.site-atlas-grid \{\s*--site-atlas-move-duration: 0ms;\s*\}",
         plain,
     )
     assert css.count("--site-atlas-move-duration:") == 2
     # The tile's width is declared in the rule both views share, so a change of view
-    # restyles no drawing; the triangle's rule reads it. At Medium, a scale of 1, it is
-    # the line's share no wider than the most a tile may be, as it was before the sizes
-    # (`test_the_sizes_scale_a_tile_by_one_token_in_either_view`).
+    # restyles no drawing; the triangle's rule reads it. The line shares the width left
+    # after reserving the same gaps Grid uses.
     shared = _rule(css, ".site-atlas-cells")
-    assert "--site-atlas-tile: clamp(" in shared
-    assert re.search(r"0\.12\s*\+\s*0\.28\s*\*\s*clamp\(", shared)
-    assert "--site-atlas-row-space: 0.4;" in _rule(css, ".site-atlas-cells[data-atlas-wrapped]")
-    assert "transform-origin: 0 0;" in _rule(css, ".kpress .site-atlas-cell")
-    cells = _rule(css, '.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cells')
-    assert "--site-atlas-tile:" not in cells
+    assert "--site-atlas-tile: calc(" in shared
+    compact_shared = " ".join(shared.split())
     assert (
-        "grid-template-columns: repeat(var(--site-atlas-per-line, 1), var(--site-atlas-tile));"
-        in cells
+        "--site-atlas-number-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.25), 0.8rem);"
+        in compact_shared
     )
-    tile = _rule(css, '.kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell')
+    assert (
+        "--site-atlas-line-height: calc( var(--site-atlas-tile) * 1.04 + "
+        "var(--site-atlas-number-size) * 1.15 );" in compact_shared
+    )
+    # Counts reserve the same track height on every physical line, with the ordinary
+    # gap between segment continuations, split segments and consecutive bound rows.
+    triangle = 'html[data-site-atlas-view="triangle"] .site-atlas-grid'
+    row = _rule(css, f"{triangle} .site-atlas-row")
+    segment = _rule(css, f"{triangle} .site-atlas-segment")
+    boundary = _rule(css, f'{triangle} .site-atlas-row:where(:not([data-atlas-row="1"]))')
+    assert "grid-auto-rows: var(--site-atlas-line-height);" in segment
+    assert "flex-wrap: nowrap;" in row
+    assert "justify-content: end;" in row
+    assert "--site-atlas-segment-columns: max(1, var(--site-atlas-segment-count));" in segment
+    assert "margin-block-start: var(--site-atlas-row-gap);" in boundary
+    assert "--site-atlas-row-space" not in css
+    assert "data-atlas-wrapped" not in css
+    assert "transform-origin: 0 0;" in _rule(css, ".kpress .site-atlas-cell")
+    cells = _rule(
+        css,
+        'html:not([data-site-atlas-view="grid"]) '
+        '.site-atlas-grid:where([data-atlas-view="triangle"]) .site-atlas-cells',
+    )
+    assert "--site-atlas-tile:" not in cells
+    assert "display: block;" in cells
+    assert "overflow-x: auto;" in cells
+    assert "direction: rtl;" in cells
+    assert "--site-atlas-number-leading: 1.15;" in cells
+    assert ".site-atlas-row" in css
+    assert ".site-atlas-segment" in css
+    tile = _rule(
+        css,
+        'html:not([data-site-atlas-view="grid"]) '
+        '.kpress .site-atlas-grid:where([data-atlas-view="triangle"]) .site-atlas-cell',
+    )
     assert "var(--site-atlas-line, var(--site-atlas-initial-line)) /" in tile
     for rule in (cells, tile):
-        assert "transition" not in rule
-        assert "animation" not in rule
+        assert re.search(r"(?:^|[;\n])\s*transition(?:-[\w-]+)?\s*:", rule) is None
+        assert re.search(r"(?:^|[;\n])\s*animation(?:-[\w-]+)?\s*:", rule) is None
     # Nor does anything in the block transition its place by another sheet's rule: KPress
     # gives every classed element a 0.01ms transition of every property under reduced
     # motion, which laid the triangle out for a frame with the grid's gaps.
@@ -1156,15 +1266,15 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     assert "transition: none;" in still
     script = render_overview.ATLAS_VIEW_SCRIPT.read_text(encoding="utf-8")
     for token in (
-        "--site-atlas-tile-min",
-        "--site-atlas-tile-max",
+        "--site-atlas-cell-min",
+        "--site-atlas-reference-gap",
         "--site-atlas-scale",
         "--site-atlas-move-duration",
         "--site-atlas-move-easing",
         "--site-atlas-per-line",
     ):
         assert f'"{token}"' in script, token
-    for written in ("--site-atlas-line: ", "--site-atlas-column: ", "--site-atlas-opens: "):
+    for written in ('setProperty("--site-atlas-line",', 'setProperty("--site-atlas-column",'):
         assert written in script, written
     # The script moves with transforms and opacity alone, and never sets a size.
     assert "transform: `translate(" in script
@@ -1188,7 +1298,7 @@ def test_a_cases_visual_summary_carries_what_the_film_shows() -> None:
     assert eleven["open"] == []
     assert eleven["record"] == "n-011"
     assert eleven["cite"]["lower"] == {
-        "text": "Queuingtheorydotcom after Levy et al. 2026, Web",
+        "text": "Ahmed after Levy, Kleddamag 2026, GitHub",
         "corrects": None,
         "note": "(confirmed T-060)",
     }
@@ -3786,12 +3896,12 @@ def test_recent_results_names_the_headline_results_at_their_rows(
 
 
 #: The site's own statement, the owner's words of 2026-10-03 (`think-a7oa`), with the
-#: name the owner left blank filled from the register (T-060 is Queuingtheorydotcom's),
+#: name the owner left blank filled from the register (T-060 is Ahmed's),
 #: the project's start put as the record has it (its explorations obtained the lower
 #: bounds, from 2026-08-31, after it began on 2026-08-22), and one phrase narrowed to
 #: what the register holds: the project tabulates every known new result and verifies
 #: the proofs behind them, without claiming every one is checked, since some registered
-#: results are recorded and not yet replayed here. The sentence after Queuingtheorydotcom's
+#: results are recorded and not yet replayed here. The sentence after Ahmed's
 #: is the owner's of the same day (`think-nlyc`): the top-line results by others, Evan
 #: Daniel's family T-064 and his exact values T-052, T-051 and T-053, in a sentence of
 #: their own because the bibliography files them as independent of this project, and
@@ -3804,7 +3914,7 @@ SITE_STATEMENT = (
         "$n = 11, 17, 18, 19, 20$ and other low values. Now several others have obtained "
         "results building on this work, including Kleddamag"
         "\N{RIGHT SINGLE QUOTATION MARK}s certified lower bound of 31/8 and a landmark "
-        "new proof by Queuingtheorydotcom of the optimality of the famous case of 11 "
+        "new proof by Ahmed of the optimality of the famous case of 11 "
         "squares. "
         "Separately, Evan Daniel has proved the optimality of a whole infinite family, "
         "$s(k^2 - 3) = k$ for every $k \\ge 6$, along with exact values at 21, 32 and 45 "
@@ -3833,7 +3943,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(
     his exact values at the case records of 21, 32 and 45, and the ladders that show how
     far each result is checked, and does not claim every proof is; the second opens a
     new issue on the repository and links the founder's account on X. Each result the
-    first names is the register's, with the credit it gives: T-060 Queuingtheorydotcom's
+    first names is the register's, with the credit it gives: T-060 Ahmed's
     and building on this project, T-064, T-052, T-051 and T-053 Daniel's and independent
     of it, which is why his results stand in a sentence of their own; each is an
     optimality result at V3/C3 or above, so "proved" holds. No significance score is
@@ -3869,7 +3979,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(
     # The register's own facts, as the sentences state them.
     by_id = {r.id: r for r in overview_data.load().results}
     groups = dict(OTHERS)
-    assert by_id["T-060"].credit.startswith("Queuingtheorydotcom after Levy")
+    assert by_id["T-060"].credit.startswith("Ahmed after Levy")
     assert by_id["T-060"].group == groups["builds-on-project"]
     assert by_id["T-037"].credit.startswith("Kleddamag")
     assert by_id["T-037"].group == groups["builds-on-project"]
@@ -4167,9 +4277,7 @@ def test_the_optimality_papers_card_says_what_t060s_rungs_allow(
     value, note = _page_card_parts(papers, paper.href)
     assert card_text(value) == paper.title
     text = card_text(note)
-    assert text.startswith(
-        "Explains Queuingtheorydotcom\u2019s proof that Trump\u2019s packing"
-    )
+    assert text.startswith("Explains Ahmed\u2019s proof that Trump\u2019s packing")
     assert "(T-060)" in text
     assert "is optimal" in text
     assert "s(11) = 3.8770835" in text
@@ -6255,12 +6363,14 @@ def test_each_address_a_paper_had_serves_a_forwarder_to_where_it_is() -> None:
     assert "movedTo" in script
 
 
-def test_each_file_that_moved_is_a_papers_markdown_or_pdf_under_its_slug() -> None:
+def test_each_file_that_moved_keeps_its_canonical_paper_or_atlas_copy() -> None:
     """A file that moved and cannot forward is served at its old address as a copy
-    (`MOVED_FILES`): each paper's Markdown and PDF, which now sit beside the page under
-    its slug. The copies are made when the site is assembled, by the workflow's
+    (`MOVED_FILES`): each paper's Markdown and PDF under its slug, and both atlas PDFs
+    under their dated names. Copies are made when the site is assembled, by the workflow's
     `publish` job and by `preview_site.copy_moved_files`."""
     assert dict(render_overview.MOVED_FILES) == {
+        "known-best-1-100.pdf": "square-packings-100-20261008.pdf",
+        "known-best-1-324.pdf": "square-packings-324-20261008.pdf",
         "t-018-explainer.md": "papers/n11-lower-bounds-explainer.md",
         "t-018-explainer.pdf": "papers/n11-lower-bounds-explainer.pdf",
         "n11-optimality/t-060-explainer.md": "papers/n11-optimality-review.md",
@@ -6269,7 +6379,10 @@ def test_each_file_that_moved_is_a_papers_markdown_or_pdf_under_its_slug() -> No
     pages = {new for _, new in render_overview.MOVED_PAGES}
     for old, new in render_overview.MOVED_FILES:
         assert Path(old).suffix == Path(new).suffix in {".md", ".pdf"}
-        assert str(Path(new).with_suffix(".html")) in pages, new
+        if old.startswith("known-best-1-"):
+            assert new in {asset.name for asset in COMPOSITE_ASSETS}
+        else:
+            assert str(Path(new).with_suffix(".html")) in pages, new
 
 
 def test_no_page_links_an_address_a_paper_used_to_have(
@@ -6392,3 +6505,110 @@ def test_a_line_link_finds_an_id_whole_and_not_as_the_start_of_a_longer_one() ->
         ), entry
     longer = lines.index("  - id: E-n020-fractional-certificate-97-20")
     assert longer < lines.index("  - id: E-n020-fractional-certificate")
+
+
+def test_atlas_scales_use_selected_witness_sides_and_accessible_reference_descriptions(
+    page: str,
+) -> None:
+    """The scale data is the drawn witness's side, including retained derived views."""
+    from fractions import Fraction  # noqa: PLC0415
+
+    from devtools.render_regularized_atlas import (  # noqa: PLC0415
+        regularized_entries,
+        view_witness,
+    )
+    from sqpack.yamlio import load_yaml  # noqa: PLC0415
+
+    sides = overview_sections.atlas_enclosing_sides()
+    assert sides[5] == pytest.approx(2 + math.sqrt(0.5), abs=1e-15)
+    assert sides[5] != math.sqrt(5)
+    assert sides[25] == 5
+    assert sides[36] == 6
+    canonical = load_yaml(
+        (overview_data.REPO / "packing/witnesses/known-best/n-011.yaml").read_text()
+    )
+    assert sides[11] == float(canonical["witness"]["side"])
+    view = view_witness(regularized_entries()[0])
+    assert sides[view["n"]] == float(Fraction(view["side"]))
+    rendered = {
+        int(n): float(side)
+        for n, side in re.findall(r'data-atlas-n="(\d+)" data-atlas-side="([^"]+)"', page)
+    }
+    assert rendered == sides
+    assert f"--site-atlas-first-side:{max(sides[n] for n in sides if n <= 100)};" in page
+    assert f"--site-atlas-last-side:{max(sides.values())}" in page
+    tabs = overview_sections.atlas_scale_tabs()
+    assert page.count(tabs) == 1
+    assert 'role="tablist" aria-label="Atlas drawing scale"' in tabs
+    assert [key for key, _ in overview_sections.ATLAS_SCALES] == ["fixed", "row", "global"]
+    assert tabs.count('aria-selected="true"') == 1
+    assert tabs.count('tabindex="-1"') == 2
+    for key, text in overview_sections.ATLAS_SCALE_DESCRIPTIONS.items():
+        tab = re.search(rf'<button[^>]*data-atlas-scale-tab="{key}"[^>]*>', tabs)
+        assert tab
+        assert f'aria-description="{html.escape(text, quote=True)}"' in tab[0]
+
+
+def test_row_reference_flags_compare_actual_sides_and_reuse_renderer_frame_bounds() -> None:
+    from xml.etree import ElementTree as ET  # noqa: PLC0415
+
+    from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
+
+    svg = ET.fromstring(packing_svg(5, units=1000))
+    left, _, extent, _ = map(float, svg.attrib["viewBox"].split())
+    frame = svg.find("rect")
+    assert frame is not None
+    expected = (
+        (float(frame.attrib["x"]) - left) / extent,
+        float(frame.attrib["width"]) / extent,
+    )
+    assert overview_sections.atlas_frame_fractions() == expected
+    cell = overview_sections._atlas_cell  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    for n in [5, 11, 18]:
+        assert " data-atlas-row-smaller" in cell(n, "open")
+    for n in [1, 2, 3, 4, 6, 9, 12, 16, 25, 36, 100, 324]:
+        assert " data-atlas-row-smaller" not in cell(n, "open")
+    # No visible-size threshold: a strictly smaller canonical projection is eligible.
+    assert " data-atlas-row-smaller" in cell(5, "open", side=math.nextafter(3, 0))
+    assert " data-atlas-row-smaller" not in cell(5, "open", side=3)
+    assert " data-atlas-row-smaller" not in cell(5, "open", side=math.nextafter(3, 4))
+
+
+def test_atlas_scale_projects_algebraic_coefficients_as_one_exact_side() -> None:
+    """n=51's two coefficients name a square side in Q(sqrt(2)), not two dimensions."""
+    from devtools.build_known_best_atlas import frame_from_witness  # noqa: PLC0415
+    from sqpack.yamlio import load_yaml  # noqa: PLC0415
+
+    witness = load_yaml(
+        (overview_data.REPO / "packing/witnesses/known-best/n-051.yaml").read_text()
+    )["witness"]
+    assert witness["side"] == ["16/3", "5/3"]
+    side = overview_sections.atlas_enclosing_sides()[51]
+    assert side == float(frame_from_witness(witness).container_side.projected)
+    assert side == pytest.approx((16 + 5 * math.sqrt(2)) / 3, abs=1e-15)
+    assert side != 16 / 3
+
+
+def test_atlas_scale_refuses_an_invalid_exact_root_declaration(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """An invalid algebraic root cannot become plausible scale data for a real tile."""
+    from sqpack import yamlio  # noqa: PLC0415
+
+    load_yaml = yamlio.load_yaml
+
+    def invalid_root(text: str):
+        document = load_yaml(text)
+        witness = document["witness"]
+        if witness["n"] == 51:
+            witness["scalar"]["isolating_interval"] = ["1", "1"]
+        return document
+
+    overview_sections.atlas_enclosing_sides.cache_clear()
+    try:
+        with monkeypatch.context() as patch:
+            patch.setattr(yamlio, "load_yaml", invalid_root)
+            with pytest.raises(ValueError, match="isolating interval must be nonempty"):
+                overview_sections.atlas_enclosing_sides()
+    finally:
+        overview_sections.atlas_enclosing_sides.cache_clear()
