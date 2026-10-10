@@ -5,7 +5,7 @@ title: "Website: compact homepage, consistent case layouts, and scroll-aware nav
 kind: epic
 status: in_progress
 priority: 1
-version: 57
+version: 59
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -50,10 +50,12 @@ child_order_hints:
   - is-01m4ksxx124ta571t8cz7e80st
   - is-01m4kv65w7smkjn7pw7tpqwk4a
   - is-01m4kwcp3tcpddyxpxsn1wfbvb
+  - is-01m4kwmhr95zvcr45zj7p4yvtd
+  - is-01m4kwy8y1d871rvz1jdsdysvf
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:13:39.980Z
-updated_at: 2026-10-10T21:44:32.629Z
+updated_at: 2026-10-10T21:54:08.961Z
 started_at: 2026-10-08T23:22:05.552Z
 ---
 Website layout and navigation remediation with an editable local draft. Preserve originalhero and exact problem introduction; nativeSVG Atlas preview Expand/Explore with live themes; recent S4+cap12 results and linkedLegend card; shared main heading styles/spacing and uppercase controls; separate PDFs and inline click-to-play video; About/doc cards and MoreResources; Headroom hide-down/show-up and gear alignment; consistent case/popover math/layout and unique resulttitle. Hero opens its case popover with record/Frontier-row/Atlas-tile actions. Atlas tile navigation fully expands then highlights/scrolls to the case; fullFrontierSurvey sits after Atlas graphics with distinct row/tile targets and legacyforwarding. Track each change in childbeads; verify localdraft beforepublication. ScientificPDF-description edit remains canceled for owner separatework.

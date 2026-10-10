@@ -3,9 +3,9 @@ type: is
 id: is-01m4kvtqrsggvdp81wnjwnm0js
 title: Reviewed credit occurrences and initial contributor population
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: contributor_data
 labels: []
@@ -20,8 +20,12 @@ parent_id: is-01m4kg8rnz0f3k2t115v9ewvwn
 hold: null
 hold_until: null
 created_at: 2026-10-10T21:34:44.504Z
-updated_at: 2026-10-10T21:44:15.196Z
+updated_at: 2026-10-10T22:06:22.411Z
 started_at: 2026-10-10T21:34:56.759Z
+closed_at: 2026-10-10T22:06:22.408Z
+close_reason: "Initial population complete: 20 sourced profiles, 975 reviewed dispositions, source-span credit joins and reusable census. Independent data review passed 85 tests; full PDF census remains in think-bw3z/think-nlob."
+resolution: null
+duplicate_of: null
 ---
 Sol implementation: reusable credit census, explicit source occurrence contracts, reviewed initial key profiles, safe source-aware name links for main results/history/cases. Preserve literal credits; no alias-driven automatic joins. Full archive/PDF census remains parent scope.
 
