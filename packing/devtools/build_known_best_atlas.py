@@ -205,11 +205,11 @@ COMPOSITE_SPECS: tuple[CompositeSpec, ...] = KNOWN_BEST_COMPOSITES
 
 SUMMARY_GRID_LEFT = Decimal(60)
 SUMMARY_GRID_TOP = Decimal(174)
-#: Retained whole-unit pitches. The outline gap falls from 68.85 to 54.85 units;
-#: the deepest caption-to-next-outline gap falls from 131.5197 to 78.5197 units.
-#: Both arrangements share these physical clearances and preserve drawing scale.
-SUMMARY_COLUMN_PITCH = Decimal(214)
-SUMMARY_ROW_PITCH = Decimal(307)
+#: Both arrangements preserve drawing scale while reducing the actual ink gaps.
+#: Whole-unit pitches give 43.85 units between outlines (0.8 of 54.85), and
+#: 58.5197 units from the deepest caption to the next outline (0.75 of 78.5197).
+SUMMARY_COLUMN_PITCH = Decimal(203)
+SUMMARY_ROW_PITCH = Decimal(287)
 #: The margin either side of the grid. One column pitch is a card plus its gutter, so
 #: the trailing gutter falls into the right margin and the two read the same.
 SUMMARY_SIDE_MARGIN = SUMMARY_GRID_LEFT
@@ -860,8 +860,8 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "A ten-by-ten atlas of the retained best known unit-square packings for "
             "n equals 1 through 100. Each tile is normalized to its own container and "
             "labeled with n, the best known upper bound on the container side and, where "
-            "the value is not yet settled, the best proved lower bound beneath it. A star "
-            "in crimson marks a recent construction giving an upper bound, a proof of a "
+            "the value is not yet settled, the best proved lower bound beneath it. "
+            "Crimson marks a recent construction giving an upper bound, a proof of a "
             "lower bound or an optimality proof since August 2026. Badges mark "
             "which side lengths are proved optimal, and whether a side length is pinned "
             "exactly by a radical or a minimal polynomial rather than only by a decimal. "
@@ -892,9 +892,9 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "contains the title, complete legend and publication details. Each tile is "
             "normalized to its own container and labeled with n, the best known upper "
             "bound on the container side and, where the value is not yet settled, the "
-            "best proved lower bound beneath it. A star in crimson marks a recent "
-            "construction giving an upper bound, a proof of a lower bound or an "
-            "optimality proof since August 2026. Badges mark which side lengths are proved "
+            "best proved lower bound beneath it. Crimson marks a recent construction giving "
+            "an upper bound, a proof of a lower bound or an optimality proof since August "
+            "2026. Badges mark which side lengths are proved "
             "optimal, and whether a side length is pinned exactly by a radical or a "
             f"minimal polynomial rather than only by a decimal. "
             "Case counts are gray; the title, two-line definition, other explanatory "
@@ -2009,7 +2009,7 @@ def _append_summary_card(
         },
     ).text = str(n)
 
-    badges = _case_badges(built, recent=recent)
+    badges = _case_badges(built)
     left = packing_x
     right = packing_x + SUMMARY_PACKING_SIZE
     top_row = card_y + SUMMARY_LABEL_BASELINE
@@ -2152,15 +2152,8 @@ def _figure_entries() -> dict[int, dict]:
     return {entry["n"]: entry for entry in load_figure_record()["entries"]}
 
 
-def _case_badges(
-    built: BuiltCase, *, recent: RecentContributions | None = None
-) -> tuple[tuple[str, str, str], ...]:
-    """The card's icons, the new-result star first where the case carries one.
-
-    The star reads as one of the badges rather than as punctuation on the bound line,
-    so it sits with them; being first in the row puts it leftmost, since the row is
-    laid out from the right.
-    """
+def _case_badges(built: BuiltCase) -> tuple[tuple[str, str, str], ...]:
+    """The print card's status badges, with one R and no recency indicator."""
     entry = _figure_entries()[built.frontier.n]
     badges = [
         (badge["glyph"], badge["style"], badge["meaning"])
@@ -2169,8 +2162,6 @@ def _case_badges(
     ]
     if entry["rigidity"]["known_rigid"]:
         badges.append(("R", "solid", "known rigid"))
-    if entry["lower"]["recent_result"] if recent is None else recent.any:
-        badges.insert(0, ("", "star", RECENT_LABEL))
     return tuple(badges)
 
 
@@ -2349,6 +2340,7 @@ def _legend_row(
     font_family: str = SUMMARY_FONT,
     font_weight: str = SUMMARY_FOOTER_WEIGHT,
     mark_font_weight: str = "650",
+    label_fill: str = SUMMARY_SMALL_FILL,
 ) -> None:
     """Lay one legend row centered on the canvas or ending at a right edge.
 
@@ -2466,7 +2458,7 @@ def _legend_row(
                 "font-family": font_family,
                 "font-size": footer_size,
                 "font-weight": font_weight,
-                "fill": SUMMARY_SMALL_FILL,
+                "fill": label_fill,
             },
         ).text = label
         cursor += width + gap
@@ -2479,7 +2471,7 @@ def _append_summary_legend(
     canvas: CompositeCanvas,
     contributions: Mapping[int, RecentContributions] | None = None,
 ) -> None:
-    """The shared eight meanings, with renderer-specific marks and positioning."""
+    """The eight print meanings, with renderer-specific marks and positioning."""
     record = load_figure_record()
     totals = next(
         composite["totals"]
@@ -2510,7 +2502,7 @@ def _append_summary_legend(
 
     def entry(item: LegendItem) -> tuple[object, str]:
         mark: object
-        if item.marker is None:
+        if item.marker is None or item.key == "recent":
             mark = None
         elif item.marker == "angles":
             labels = item.marker_labels or ("",) * len(item.marker_values)
@@ -2538,7 +2530,7 @@ def _append_summary_legend(
     mark_gap = Decimal(8) * scale
 
     def row_width(item: LegendItem) -> Decimal:
-        if item.marker is None:
+        if item.marker is None or item.key == "recent":
             return _text_width(item.formatted_text(count_style="words"), body_size)
         return (
             badge_size * (len(item.marker_values) if item.marker_values else 1)
@@ -2580,6 +2572,9 @@ def _append_summary_legend(
                 font_family=POSTER_BODY_FONT,
                 font_weight=POSTER_BODY_WEIGHT,
                 mark_font_weight=POSTER_BODY_WEIGHT,
+                label_fill=FIRST_PARTY_ACCENT_COLOR
+                if item.key == "recent"
+                else SUMMARY_SMALL_FILL,
             )
         cursor += width + gap
 

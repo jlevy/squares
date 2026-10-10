@@ -1450,17 +1450,12 @@ it.
   explanation of each choice.
   PDF drawing scales stay fixed.
 
-- **Atlas marks.** The new-result star hangs after the centered count, outside its flow.
-  It is the site’s one star in warm ink (`atlas_star`, `.site-star`), on every case with
-  a recent upper construction, verified lower proof or optimality contribution, using
-  `result_status.recent_contributions_by_case().any`. Result-register row stars keep
-  their separate lower-proof contract.
-  It is hidden from assistive technology; the tile’s name ends “new result” instead.
+- **Atlas marks.** Overview tiles carry the centered case count.
+  Recent-result stars remain in individual case records, film facts and result tables.
   Triangle’s grid segment starts with the ordinary count and its accessible name says
   “first grid packing in row”.
   Dimension and `GRID` captions belong to the print diagrams.
-  Counts use one size, including at the start of a grid segment; the star retains its
-  size at Small’s phone width.
+  Counts use one size, including at the start of a grid segment.
   Drawing sizes follow the same selected scale in both views.
   Lower-bound statements show five decimal places, and their number-line labels two,
   truncated downward without changing recorded values or the number line’s positions.
@@ -1477,10 +1472,11 @@ it.
   `devtools.render_regularized_atlas` draws the selected views and its `--check`
   verifies them against the index.
   Each tile opens the same case record, whose drawing is the house rendering.
-  `devtools.measure_atlas_views` checks count centering, star clearance, first-grid
-  horizontal separation, uniform row pitch, complete rows and their right endpoints;
-  `tests/test_site_atlas_views.py` checks the selected counts against the canonical
-  manifest and verifies the initial CSS layout and actual scroll-frame extent too.
+  `devtools.measure_atlas_views` checks count centering, actual outline and count-ink
+  clearances, first-grid horizontal separation, uniform row pitch, complete rows and
+  their right endpoints; `tests/test_site_atlas_views.py` checks the selected counts
+  against the canonical manifest and verifies the initial CSS layout and actual
+  scroll-frame extent too.
 
 - **Action under a table or grid.** Where one control follows a table or a grid, it is
   the site’s one action button, `.site-action`, in a centred `.site-action-row`: the
@@ -1722,8 +1718,8 @@ it.
   `visualize.html`, the film alone at full size.
   A card’s caps label says what it is and the form it opens in, the heading’s two words:
   “Poster · PDF” twice and “Film · Video”.
-  The note under the cards, the star, the shorter film, the release and the SVGs, is the
-  section’s. The overview embeds no video, so nothing on it moves or fetches a film.
+  The note under the cards links the shorter film, the release and the SVGs.
+  The overview embeds no video, so nothing on it moves or fetches a film.
 
 - **The film.** The Visualize section’s Film tab, `visualize.html`, is the n = 1 to 324
   film at full size directly under the section tabs, with no page title and no subtitle
@@ -2192,14 +2188,13 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   verified columns apply.
   Each table of results keeps its own key to the star, since a star without one reads as
   decoration: the legend under it shows the star as “new result” (`rung_legend`), and
-  the Results page’s prose says what it marks (`star_legend`). The atlas note links the
-  recent table, and its legend, in place of a third.
-  The Frontier page opens with the survey’s account, its audit, its recent counts and
-  the seventeen-square history, and ends its prose with the key to its columns, beside
-  the table. The way onward follows the section’s shape: a section whose key element is a
-  table or a grid ends in the one action button (**Action under a table or grid**,
-  below), and a section that is prose leads on with direct cards (**Cards**, above), as
-  The Squares Project does with its page cards.
+  the Results page’s prose says what it marks (`star_legend`). The Frontier page opens
+  with the survey’s account, its audit, its recent counts and the seventeen-square
+  history, and ends its prose with the key to its columns, beside the table.
+  The way onward follows the section’s shape: a section whose key element is a table or
+  a grid ends in the one action button (**Action under a table or grid**, below), and a
+  section that is prose leads on with direct cards (**Cards**, above), as The Squares
+  Project does with its page cards.
   The page cards under The Squares Project are the site’s reading and working pages, the
   Frontier page alone on the first line, then the three papers and the workbench two to
   a line (**Card sizes**, above); the Results page is reached from Recent Results.

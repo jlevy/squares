@@ -314,11 +314,8 @@ def test_the_posters_and_the_film_have_a_section_of_their_own_under_the_atlas(
         overview_sections.ATLAS_CARDS
     )
     note = section.split('<p class="site-wide site-atlas-note">', 1)[1].split("</p>", 1)[0]
-    # The star is keyed once on the page, in the legend under the recent table
-    # (`rung_legend`); the note links that table and says it no second time.
-    assert note.startswith(
-        'On the posters, each star marks a <a href="#recent-results">new result</a>.'
-    )
+    assert note.startswith("A shorter film shows the ")
+    assert "star" not in note
     assert "22 August" not in note
     assert section.index('class="site-cards-frame') < section.index("site-atlas-note")
     for linked in ("ascent-n1-100-1080p60-citations.mp4", "known-best-1-324.svg"):
@@ -869,7 +866,7 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
     assert "history.replaceState(history.state" in view
     assert '"--site-atlas-scale"' in view
     assert '"--site-atlas-cell-min"' in view
-    assert '"--site-atlas-cell-gap"' in view
+    assert '"--site-atlas-reference-gap"' in view
     assert "cells.append" not in grid
 
 
@@ -932,11 +929,10 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     assert "data-atlas-layer" not in tiles
 
 
-def test_a_case_star_marks_any_recent_displayed_contribution(
+def test_overview_tiles_omit_recent_stars_but_frontier_keeps_lower_recency(
     rendered: Callable[[str], str],
 ) -> None:
-    """Atlas stars follow upper, lower and optimality recency; frontier rows follow
-    their displayed lower bound. Both retain the shared accessible star vocabulary."""
+    """Overview drawings omit recency; case and frontier records retain it."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
 
     recent = {
@@ -960,15 +956,15 @@ def test_a_case_star_marks_any_recent_displayed_contribution(
         starred = recent[int(n)]
         assert lower_recent[int(n)] == (rows[n] == "true"), n
         assert not lower_recent[int(n)] or starred, n
-        assert number.endswith(star) == starred, n
-        assert number.count(star) == starred, n
-        assert name.endswith(f", {overview_sections.NEW_RESULT}") == starred, n
-    assert sum(recent.values()) == sum(name.endswith("new result") for _, name, _ in found)
+        assert number == n, n
+        assert star not in number, n
+        assert not name.endswith(f", {overview_sections.NEW_RESULT}"), n
+    assert sum(recent.values()) > 0
     assert not lower_recent[1]
     assert not lower_recent[25]
 
 
-def test_an_upper_only_recent_contribution_stars_the_tile_and_case_summary(
+def test_upper_only_recent_stars_stay_in_case_facts_and_off_overview_tiles(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     from devtools.result_status import RecentContributions  # noqa: PLC0415
@@ -984,12 +980,13 @@ def test_an_upper_only_recent_contribution_stars_the_tile_and_case_summary(
     first = _atlas_template(page, "first")
     tile = re.search(r'<a class="site-atlas-cell" [^>]*data-atlas-n="1"[^>]*>.*?</a>', first)
     assert tile is not None
-    assert ', new result"' in tile.group()
-    assert overview_sections.atlas_star() in tile.group()
-    assert page.count(overview_sections.atlas_star()) == 1
+    assert ', new result"' not in tile.group()
+    assert overview_sections.atlas_star() not in tile.group()
+    assert page.count(overview_sections.atlas_star()) == 0
     facts = overview_sections.atlas_film_facts()
     assert facts[0]["star"] is True
     assert sum(bool(fact["star"]) for fact in facts) == 1
+    assert "★" in result_overview.film_facts_html(facts[0])
 
 
 def test_the_atlas_key_explains_only_angle_colors_and_contact_shades() -> None:
@@ -1059,16 +1056,16 @@ def test_the_sizes_scale_a_tile_by_one_token_in_either_view() -> None:
     assert re.search(
         r"@media \(max-width: 40rem\) \{\s*"
         r"\.site-page \.site-atlas-grid \{\s*--site-atlas-cell-min: 4\.6rem;\s*"
-        r"--site-atlas-cell-gap: 0\.35rem;\s*\}",
+        r"--site-atlas-reference-gap: 0\.35rem;\s*\}",
         plain,
     )
     shared = _rule(css, ".site-atlas-cells")
     for declaration in (
         "--site-atlas-tile: calc(",
-        "(100cqi - (var(--site-atlas-per-line) - 1) * var(--site-atlas-cell-gap)) /",
-        "gap: var(--site-atlas-cell-gap);",
+        "(100cqi - (var(--site-atlas-per-line) - 1) * var(--site-atlas-reference-gap)) /",
+        "gap: var(--site-atlas-row-gap) var(--site-atlas-cell-gap);",
         "--site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));",
-        "grid-template-columns: repeat(auto-fill, minmax(var(--site-atlas-cell), 1fr));",
+        "grid-template-columns: repeat(var(--site-atlas-per-line), var(--site-atlas-tile));",
     ):
         assert declaration in shared, declaration
     # The size tabs are drawn as the view tabs are, and hidden until the tiles are placed.
@@ -1118,8 +1115,8 @@ def test_the_regularized_set_is_the_layer_index_and_refuses_a_stale_drawing(
         overview_sections.atlas_regularized()
 
 
-def test_the_star_hangs_after_the_count_and_grid_marker() -> None:
-    """The star remains outside the centered count; the grid words share its line."""
+def test_overview_counts_are_centered_and_case_stars_keep_the_shared_color() -> None:
+    """Overview counts have no star styling; other recent-result stars keep their ink."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     assert "site-atlas-layer-mark" not in css
     assert "color: var(--site-new-result);" in _rule(css, ".site-star")
@@ -1130,9 +1127,7 @@ def test_the_star_hangs_after_the_count_and_grid_marker() -> None:
         "position: relative;",
     ):
         assert declaration in number, declaration
-    star = _rule(css, ".site-atlas-n > .site-star")
-    for declaration in ("position: absolute;", "inset-inline-start: calc(100% + 0.12em);"):
-        assert declaration in star, declaration
+    assert ".site-atlas-n > .site-star" not in css
     assert '[data-atlas-layer="regularized"]' not in css
 
 
@@ -1202,7 +1197,7 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     block = _rule(css, ".site-page .site-atlas-grid")
     for declaration in (
         "--site-atlas-cell-min: 6.4rem;",
-        "--site-atlas-cell-gap: 0.5rem;",
+        "--site-atlas-reference-gap: 0.5rem;",
         "--site-atlas-move-duration: 360ms;",
         "--site-atlas-move-easing: cubic-bezier(0.2, 0, 0, 1);",
         "container-type: inline-size;",
@@ -1252,7 +1247,7 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     assert "display: block;" in cells
     assert "overflow-x: auto;" in cells
     assert "direction: rtl;" in cells
-    assert "--site-atlas-row-gap: var(--site-atlas-cell-gap);" in cells
+    assert "--site-atlas-number-leading: 1.15;" in cells
     assert ".site-atlas-row" in css
     assert ".site-atlas-segment" in css
     tile = _rule(
@@ -1272,7 +1267,7 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     script = render_overview.ATLAS_VIEW_SCRIPT.read_text(encoding="utf-8")
     for token in (
         "--site-atlas-cell-min",
-        "--site-atlas-cell-gap",
+        "--site-atlas-reference-gap",
         "--site-atlas-scale",
         "--site-atlas-move-duration",
         "--site-atlas-move-easing",

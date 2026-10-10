@@ -6,6 +6,7 @@
 
 <!-- The explainer has a section of this name, and an old explainer link to it must
      still reach the explainer (forward.js), so this heading keeps the overview's own id. -->
+
 <h1 id="the-problem" class="site-title">The Square Packing Problem</h1>
 
 <!-- The section's first two paragraphs are README's, read from its project-intro block
@@ -124,7 +125,7 @@ The [complete table](all-results.html) includes older results and offers all fil
 
 {{ATLAS_CARDS}}
 
-<p class="site-wide site-atlas-note">On the posters, each star marks a <a href="#recent-results">new result</a>. A shorter film shows the <a href="https://github.com/jlevy/squares/releases/download/v0.4.2/ascent-n1-100-1080p60-citations.mp4">ascent from 1 to 100</a> (2 m 20 s). Both films are on the <a href="https://github.com/jlevy/squares/releases/tag/v0.4.2">v0.4.2 release</a>, with a receipt recording each file and the page it was drawn from. Each poster is also an SVG (<a href="repo:packing/atlas/known-best/known-best-1-100.svg">1 to 100</a>, <a href="repo:packing/atlas/known-best/known-best-1-324.svg">1 to 324</a>), and the <a href="repo:packing/atlas/known-best/README.md">atlas README</a> describes them all.</p>
+<p class="site-wide site-atlas-note">A shorter film shows the <a href="https://github.com/jlevy/squares/releases/download/v0.4.2/ascent-n1-100-1080p60-citations.mp4">ascent from 1 to 100</a> (2 m 20 s). Both films are on the <a href="https://github.com/jlevy/squares/releases/tag/v0.4.2">v0.4.2 release</a>, with a receipt recording each file and the page it was drawn from. Each poster is also an SVG (<a href="repo:packing/atlas/known-best/known-best-1-100.svg">1 to 100</a>, <a href="repo:packing/atlas/known-best/known-best-1-324.svg">1 to 324</a>), and the <a href="repo:packing/atlas/known-best/README.md">atlas README</a> describes them all.</p>
 
 ## Other Square Packing Projects
 

@@ -7,6 +7,10 @@
   }
   const box = cells.getBoundingClientRect();
   const style = getComputedStyle(cells);
+  const referenceGap = style.getPropertyValue("--site-atlas-reference-gap").trim();
+  const rootSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+  const referenceGapPx =
+    Number.parseFloat(referenceGap) * (referenceGap.endsWith("rem") ? rootSize : 1);
   const rows = [...cells.querySelectorAll(".site-atlas-row")].filter(
     (row) => row.getClientRects().length > 0,
   );
@@ -51,9 +55,9 @@
     scale: document.documentElement.dataset.siteAtlasScale ?? "fixed",
     largest_side: Number.parseFloat(style.getPropertyValue("--site-atlas-global-side")),
     columns: Math.round(
-      (box.width + Number.parseFloat(style.columnGap)) /
+      (box.width + referenceGapPx) /
         ((cells.querySelector(".site-atlas-cell")?.getBoundingClientRect().width ?? 1) +
-          Number.parseFloat(style.columnGap)),
+          referenceGapPx),
     ),
     width: box.width,
     height: box.height,

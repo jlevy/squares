@@ -19,6 +19,7 @@ import pytest
 from playwright.sync_api import Browser, Error, Page, sync_playwright
 
 from devtools import atlas_print_font
+from devtools import build_known_best_atlas as atlas
 from devtools import render_n11_lower_bounds_explainer_pdf as pdf
 from devtools.check_math_loading import MATH_LIBRARY
 from devtools.check_published_site import pdf_pages
@@ -121,6 +122,7 @@ def test_production_pdf_accepts_typeset_math() -> None:
 def test_the_complete_atlas_and_caption_fit_one_letter_page() -> None:
     """A tall Figure 2 must preserve its full drawing rather than spill or crop."""
     assert pdf.PAGE.is_file(), "Pages must provide its prepared publication page"
+    canvas = atlas.PRIMARY_COMPOSITE
     with sync_playwright() as driver:
         browser = driver.chromium.launch(executable_path=os.environ.get(pdf.BROWSER_OVERRIDE))
         try:
@@ -133,10 +135,10 @@ def test_the_complete_atlas_and_caption_fit_one_letter_page() -> None:
             geometry = page.evaluate(probe(PROBES, "pdf_math_browser/atlas_print_geometry"))
             assert geometry["image_loaded"], geometry
             assert geometry["image_visible"], geometry
-            assert geometry["natural_width"] == 2260, geometry
-            assert geometry["natural_height"] == 4023, geometry
+            assert geometry["natural_width"] == canvas.width, geometry
+            assert geometry["natural_height"] == canvas.height, geometry
             assert geometry["image_width"] / geometry["image_height"] == pytest.approx(
-                2260 / 4023, rel=0.001
+                canvas.width / canvas.height, rel=0.001
             ), geometry
             assert geometry["figure_outer_height"] <= 9.5 * 96, geometry
             assert geometry["caption_visible"], geometry

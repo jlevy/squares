@@ -380,3 +380,20 @@ def test_a_panned_complete_grid_row_must_reach_its_canvas_right_edge() -> None:
     assert atlas.layout_problems(report) == []
     problems = atlas.layout_problems(_moved(report, 100, by=-10))
     assert any("misses the right edge" in problem for problem in problems)
+
+
+def test_ink_clearances_measure_actual_outlines_and_caption_ink_without_separator() -> None:
+    report = _triangle(4, 3)
+    for tile in report["tiles"]:
+        tile["outline"] = {
+            "left": tile["left"] + 3,
+            "right": tile["right"] - 3,
+            "top": tile["top"] + 3,
+        }
+        tile["number_ink"] = {"bottom": tile["bottom"] - 2}
+    measured = atlas.ink_clearances(report)
+    assert measured == {"horizontal": (6.0, 6.0), "vertical": (11.0, 11.0)}
+    report["tiles"][-1]["grid_from"] = True
+    report["tiles"][-1]["outline"]["left"] += 20
+    assert atlas.ink_clearances(report) == measured
+    assert atlas.ink_clearances(_grid(4, 2)) == {}

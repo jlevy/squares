@@ -126,7 +126,7 @@ recent result markers and accents.
 | $s(n) = \ldots$ vs $s(n) \le \ldots$ | `packing.status` (`proved` / `open`) | 45 proved; equality only for those |
 | Side value | `reported_upper_bound.value` | Matches the witness side to its stated precision |
 | $s(n) \ge \ldots$ second line | `verified_lower_bound.value`, shown where `status` is `open` | 55 lines; cut off rather than rounded, so the printed bound stays true |
-| ★ recent result, since August, 2026 | The canonical contribution flags in `devtools/result_status.py`, using original construction or proof dates and the shared `RECENT_SINCE` cutoff | 81 cases in the figure and 297 in the poster; both accent upper numerals, lower numerals and optimality badges independently |
+| Crimson recent-result accents, since August, 2026 | The canonical contribution flags in `devtools/result_status.py`, using original construction or proof dates and the shared `RECENT_SINCE` cutoff | 81 cases in the figure and 297 in the poster; both accent upper numerals, lower numerals and optimality badges independently |
 | `=` exact value known | `exact_form`, else `minimal_polynomial` or `algebraic_degree` | Evaluate the form, compare against the witness side |
 | `≈` only known numerically | none of the three present | 3 cases: $n = 29, 55, 71$ |
 | $\deg d$ | `algebraic_degree` | Printed for 30 cases with degree at least 2; absence is not a claim of low degree |
@@ -371,14 +371,15 @@ derived regularized view.
 Where an irregular prefix precedes the grid suffix, half a drawing width separates the
 segments by 79 units horizontally.
 All-grid rows receive no added gap and place their marker before the first card.
-Both layouts use a 307-unit row pitch and 214-unit column pitch.
-Compared with the earlier poster, visible horizontal box gaps decrease by about 20% and
-the clearance from final annotation ink to the next row outline decreases by about 40%.
-The figure keeps its 10-by-10 geometry, card scale and square encoding.
-Triangle bound captions use five decimal places rather than the figure’s six, with upper
-bounds rounded upward, lower bounds downward and exact equalities to nearest.
-Measured side captions that leave less than five units beside the degree use four places
-instead; the renderer refuses a caption that still overlaps.
+Both layouts use a 287-unit row pitch and 203-unit column pitch.
+Compared with the 214-unit column and 307-unit row pitches, visible horizontal box gaps
+decrease by about 20% and the clearance from final annotation ink to the next row
+outline decreases by about 25%. The figure keeps its 10-by-10 geometry, card scale and
+square encoding.
+Triangle bound captions use five decimal places rather than the figure’s
+six, with upper bounds rounded upward, lower bounds downward and exact equalities to
+nearest. Measured side captions that leave less than five units beside the degree use
+four places instead; the renderer refuses a caption that still overlaps.
 Current fallback cases are $n = 146, 205, 235, 266, 300$, derived from widths rather
 than a case list. The pure shared display helper shortens only the printed numeral; the
 canonical values and display records retain their precision.
@@ -394,7 +395,7 @@ layout string, the manifest record and the figure record’s own legend totals.
 The triangle keeps the figure’s card and label sizes.
 Its eighteen complete logical rows fit a thirty-five-column envelope.
 The longest row’s cards start at $x = 180$; its first drawing starts at $x = 204$. Rows
-begin at $y = 120$ and share the figure’s 307-unit pitch, preserving drawing and caption
+begin at $y = 120$ and share the figure’s 287-unit pitch, preserving drawing and caption
 scale while keeping the annotation clearance consistent.
 The canvas includes 120-unit outside clearance for markers and top/bottom margins.
 All informational text occupies the upper-left block at $x = 204..2804$, starting at
@@ -481,10 +482,10 @@ The packing drawings and card captions retain their original scale.
 | --- | --- | --- |
 | Cases | `n = 1..100` | `n = 1..324` |
 | Arrangement | 10 by 10, row-major | 18 complete right-aligned rows |
-| Canvas | 2260 × 4023 units | 7871 × 5701 units |
+| Canvas | 2150 × 3823 units | 7497 × 5361 units |
 | Squares drawn | 5,050 | 52,650 |
 | Rasters | 1x, 2x, link-preview card | 1x |
-| PDF page | 23.54 × 41.91 in | 81.99 × 59.39 in |
+| PDF page | 22.40 × 39.82 in | 78.09 × 55.84 in |
 
 The remaining fields are the decisions a figure of another size has to make: which
 rasters it publishes, whether it publishes a link-preview crop, and what it may leave

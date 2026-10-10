@@ -2617,11 +2617,7 @@ ATLAS_REGULARIZED = "regularized"
 
 
 def atlas_star() -> str:
-    """The new-result star on a tile: the site's one star (`STAR`, `.site-star`), as the
-    frontier table's Recent column and the tables of results draw it, after the case's
-    number. It is hidden from assistive technology because the tile's name ends with
-    what it says, "new result" (`NEW_RESULT`), as a starred row's name does
-    (`result_row`)."""
+    """The shared recent-result star, hidden where an accessible label names it."""
     return f'<span class="site-star" aria-hidden="true">{STAR}</span>'
 
 
@@ -2711,13 +2707,25 @@ def atlas_frame_fractions() -> tuple[float, float]:
     return (x - left) / width, side / width
 
 
+@cache
+def atlas_frame_ink_inset() -> float:
+    """The whitespace outside a compact drawing's enclosing outline, including stroke."""
+    from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
+
+    svg = ET.fromstring(packing_svg(1, units=ATLAS_UNITS))
+    left, _top, extent, _height = map(float, svg.attrib["viewBox"].split())
+    frame = svg.find("rect")
+    if frame is None:
+        raise ValueError("the compact atlas drawing has no enclosing frame")
+    return (float(frame.attrib["x"]) - left - float(frame.attrib["stroke-width"]) / 2) / extent
+
+
 def _atlas_cell(
     n: int,
     status: str,
     *,
     regularized: bool = False,
     side: float | None = None,
-    new: bool = False,
     grid_from: int | None = None,
     segment: PackingSegment | None = None,
 ) -> str:
@@ -2725,8 +2733,7 @@ def _atlas_cell(
 
     The first retained grid packing in a square-bound row identifies its grid
     suffix for layout and accessibility. Derived drawing provenance stays in the atlas
-    index. A recent displayed upper, lower or optimality contribution carries the
-    shared star and accessible name.
+    index. Recency indicators belong to the individual case records.
     """
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.render_case_pages import case_url  # noqa: PLC0415
@@ -2746,13 +2753,12 @@ def _atlas_cell(
     )
     drawing = frontier.drawing_img(n, regularized=regularized, size=ATLAS_UNITS)
     meaning = f", first grid packing in row {row}" if first_grid else ""
-    name = f"n = {n}, {_esc(status)}{meaning}{f', {NEW_RESULT}' if new else ''}"
-    star = atlas_star() if new else ""
+    name = f"n = {n}, {_esc(status)}{meaning}"
     return (
         f'<a class="site-atlas-cell" href="{case_url(n)}" data-case="{n}" '
         f'data-atlas-n="{n}" data-atlas-side="{side}"{square}{grid}{reference} '
         f'data-status="{_esc(status)}" aria-label="{name}"{position}>'
-        f'{drawing}<span class="site-atlas-n">{n}{star}</span></a>'
+        f'{drawing}<span class="site-atlas-n">{n}</span></a>'
     )
 
 
@@ -2932,8 +2938,7 @@ def atlas_grid() -> str:
     house tiles were the default and a third `<template>` held a second tile for each
     regularized case, which House and Regularized tabs swapped in place; the owner
     dropped the choice for the regularized drawings alone (think-k8x9), and with it the
-    second set. A case with any recent displayed upper, lower or optimality
-    contribution carries the star. Layout, Size and Scale strips and the key
+    second set. Layout, Size and Scale strips and the key
     (`atlas_legend`) share the controls box (`.site-atlas-controls`) above the tiles.
     """
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
@@ -2949,7 +2954,6 @@ def atlas_grid() -> str:
     transitions = grid_transitions(manifest["atlas"]["entries"])
     sides = atlas_enclosing_sides()
     by_n = {case["n"]: case for case in cases}
-    new = {n: flags.any for n, flags in recent_contributions_by_case().items()}
     rows: list[str] = []
     for transition in transitions:
         groups: list[str] = []
@@ -2960,7 +2964,6 @@ def atlas_grid() -> str:
                     by_n[n]["status"],
                     regularized=n in regularized,
                     side=sides[n],
-                    new=new.get(n, False),
                     grid_from=transition.grid.first_n,
                     segment=segment,
                 )
@@ -2985,7 +2988,8 @@ def atlas_grid() -> str:
         f"--site-atlas-last-extra:{int(transitions[-1].has_irregular_prefix)};"
         f"--site-atlas-first-side:{max(sides[n] for n in tracked if n <= ATLAS_FIRST)};"
         f"--site-atlas-last-side:{max(sides[n] for n in tracked)};"
-        f"--site-atlas-frame-inset:{frame_inset};--site-atlas-frame-span:{frame_span}"
+        f"--site-atlas-frame-inset:{frame_inset};--site-atlas-frame-span:{frame_span};"
+        f"--site-atlas-ink-inset:{atlas_frame_ink_inset()}"
     )
     more, less = "Show More", "Show Less"
     name_more = f"Show more: all {len(cases)} cases"

@@ -14,9 +14,8 @@ of a tab starts, what the keyboard does, what the address says, and what a reade
 asks for reduced motion sees. The size tabs beside the view tabs make every tile
 smaller or larger in either view (think-ht8t): the fixture reads that a change of size
 moves the tiles as a change of view does, sets the sizes in order, follows the keyboard
-and the address, and holds every layout to the same rules. A tile carries the
-new-result star after its number where its case has a new result (think-wwtt), and
-accessible first-grid wording at the retained grid boundary in each row. Selected
+and the address, and holds every layout to the same rules. A tile carries its centered
+count and accessible first-grid wording at the retained grid boundary in each row. Selected
 derived drawings are shown directly, without layer labels or badges.
 
 One fixture drives the page through all of it and keeps what it read, so no test waits
@@ -1169,10 +1168,10 @@ def test_a_linked_size_is_that_size_before_a_tile_is_drawn(seen: Readings) -> No
         "phone, small, every case",
     ],
 )
-def test_tiles_keep_new_result_stars_without_layer_indicators(
+def test_overview_tiles_omit_recent_stars_and_layer_indicators(
     seen: Readings, name: str
 ) -> None:
-    """Selected drawings are shown directly; the only result indicator is the star."""
+    """Overview drawings show counts; individual cases retain result indicators."""
     from devtools import render_frontier_page  # noqa: PLC0415
 
     new = {n for n, recent in render_frontier_page.recent_lower_bounds().items() if recent}
@@ -1180,14 +1179,39 @@ def test_tiles_keep_new_result_stars_without_layer_indicators(
     tiles = seen[name]["tiles"]
     for tile in tiles:
         n = tile["n"]
-        assert (tile["star"] is not None) == (n in new), n
-        assert tile["name"].endswith(", new result") == (n in new), n
+        assert tile["star"] is None, n
+        assert not tile["name"].endswith(", new result"), n
         assert tile["mark"] is None, n
         assert "regularized" not in tile["name"], n
         assert tile["grid_from"] == (n == FIRST_GRIDS[atlas.row_of(n)]), n
         assert not tile["grid_marker"], n
         assert tile["grid_label"] is None, n
     assert {tile["n"] for tile in tiles} & new
+
+
+@pytest.mark.parametrize("name", ["default", "grid", "phone", "phone, small, every case"])
+def test_actual_box_and_caption_gaps_reduce_without_changing_drawing_scale(
+    seen: Readings, name: str
+) -> None:
+    report = seen[name]
+    measured = atlas.ink_clearances(report)
+    assert measured.keys() == {"horizontal", "vertical"}
+    horizontal = measured["horizontal"][0]
+    horizontal_air = horizontal - report["gap_px"]
+    assert horizontal / (report["reference_gap_px"] + horizontal_air) == pytest.approx(
+        0.8, abs=0.01
+    )
+    vertical = measured["vertical"][0]
+    row_gap = report["line_gap_px"] if report["view"] == "triangle" else report["row_gap_px"]
+    vertical_air = vertical - row_gap
+    assert vertical / (report["reference_gap_px"] + vertical_air) == pytest.approx(
+        0.75, abs=0.02
+    )
+    # The reference gap still reserves each original responsive tile and drawing.
+    expected = (
+        report["cells"]["width"] - (report["per_line"] - 1) * report["reference_gap_px"]
+    ) / report["per_line"]
+    assert report["tiles"][0]["width"] == pytest.approx(expected, abs=atlas.EDGE)
 
 
 @pytest.mark.parametrize(

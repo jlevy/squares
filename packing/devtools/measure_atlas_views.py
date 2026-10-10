@@ -4,8 +4,8 @@ layouts.
 
 The atlas is one set of tiles, a drawing of the best packing known for each case, that
 the reader sets as a grid or as a triangle (`templates/paper-design.md`, Atlas views),
-at a size of tile, Small, Medium or Large (`overview/atlas-view.js`). A tile carries the
-new-result star after its number where the case has a new result. Selected derived
+at a size of tile, Small, Medium or Large (`overview/atlas-view.js`). A tile carries its
+centered case number. Selected derived
 drawings are shown directly, without layer labels.
 The triangle keeps each complete row of 2k - 1 cases, ending at k squared, aligned to
 a common right edge. Its scroll frame pans wide rows at the same drawing scale as Grid.
@@ -19,9 +19,10 @@ browser made of that:
   run past the window, set a tile outside the block or over another, break the order of
   the cases, cut a row into lines other than `row_lines` gives, or start any Triangle
   row away from the canvas's right edge. Each layout is read at each size (`SIZES`), and
-  a tile's marks have their own faults (`mark_problems`): a star that runs over its
-  number or leaves its tile, a
-  badge that does either, and a number not centred in its tile.
+  count centering is checked by `mark_problems`. The probe also records actual
+  enclosing-outline and count-ink bounds; `ink_clearances` measures ordinary horizontal
+  gaps and the deepest count's clearance above the next drawing. Obsolete stars and
+  layer badges are still reported so tests can refuse them.
   `--markdown` prints one line a layout.
 - `move` times each change of layout (`CHANGES`: to the triangle and back, with a hundred
   cases and with all, the expander's change in the triangle, and changes of size in each
@@ -309,6 +310,31 @@ def mark_problems(report: dict[str, Any]) -> list[str]:
     return problems
 
 
+def ink_clearances(report: dict[str, Any]) -> dict[str, tuple[float, float]]:
+    """Measured outline gaps and deepest count-ink gaps, excluding grid separators."""
+    lines = _lines(report["tiles"])
+    horizontal = [
+        after["outline"]["left"] - before["outline"]["right"]
+        for line in lines
+        for before, after in itertools.pairwise(line)
+        if before.get("outline")
+        and after.get("outline")
+        and not (report["view"] == "triangle" and after.get("grid_from"))
+    ]
+    vertical = [
+        min(tile["outline"]["top"] for tile in after)
+        - max(tile["number_ink"]["bottom"] for tile in before)
+        for before, after in itertools.pairwise(lines)
+        if all(tile.get("number_ink") for tile in before)
+        and all(tile.get("outline") for tile in after)
+    ]
+    return {
+        name: (min(gaps), max(gaps))
+        for name, gaps in (("horizontal", horizontal), ("vertical", vertical))
+        if gaps
+    }
+
+
 def summary(report: dict[str, Any]) -> dict[str, Any]:
     """One layout in a line: its sizes, its lines and the rows that wrap."""
     tiles: list[dict[str, Any]] = report["tiles"]
@@ -325,6 +351,7 @@ def summary(report: dict[str, Any]) -> dict[str, Any]:
         "scale": report.get("scale", DEFAULT_SCALE),
         "shown": len(tiles),
         "starred": sum(tile.get("star") is not None for tile in tiles),
+        "ink_clearances": ink_clearances(report),
         "badged": sum(tile.get("mark") is not None for tile in tiles),
         "block": report["cells"]["width"],
         "per_line": report["per_line"] if report["view"] == "triangle" else len(lines[0]),

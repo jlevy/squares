@@ -47,31 +47,31 @@ properties:
               type: object
               required: [width, height]
               properties:
-                width: {const: 2260}
-                height: {const: 4023}
+                width: {const: 2150}
+                height: {const: 3823}
             png_preview:
               type: object
               required: [width, height]
               properties:
-                width: {const: 2260}
-                height: {const: 4023}
+                width: {const: 2150}
+                height: {const: 3823}
             png_high_resolution:
               type: object
               required: [scale, width, height]
               properties:
                 scale: {const: 2}
-                width: {const: 4520}
-                height: {const: 8046}
+                width: {const: 4300}
+                height: {const: 7646}
             png_link_preview_card:
               type: object
               required: [top_crop, width, height]
               properties:
                 top_crop: {const: true}
-                width: {const: 2260}
+                width: {const: 2150}
                 height: {const: 1256}
       # The poster: eighteen complete square-bound rows share a right edge, holding
-      # up to thirty-five cards at a uniform 360-unit pitch. Grid suffixes stay inline,
-      # with 79 units of extra horizontal air after an irregular prefix. One
+      # up to thirty-five cards at a 203-unit column pitch and 287-unit row pitch.
+      # Grid suffixes stay inline, with 79 units of extra horizontal air after an irregular prefix. One
       # raster and no link-preview crop, which is why only `png_preview` is pinned
       # here; a second raster would be a change to the specification and to this
       # clause, never a file that quietly appeared.
@@ -88,15 +88,15 @@ properties:
               type: object
               required: [width, height]
               properties:
-                width: {const: 7871}
-                height: {const: 5701}
+                width: {const: 7497}
+                height: {const: 5361}
             png_preview:
               type: object
               required: [scale, width, height]
               properties:
                 scale: {const: 1}
-                width: {const: 7871}
-                height: {const: 5701}
+                width: {const: 7497}
+                height: {const: 5361}
   entries:
     type: array
     minItems: 1

@@ -7,9 +7,8 @@
 // an animation the script started; a tile's hover wash, a CSS transition, is not one.
 //
 // And the size it is at: the size tabs as the view tabs are reported, the key to a tile's
-// marks under them, and for each tile its number's box and the boxes of the marks it
-// carries, the new-result star and any obsolete layer badge, each `null` where
-// the tile has none.
+// marks under them, and for each tile its outline and number-ink bounds. Obsolete
+// stars and layer badges are reported as null where absent, so regressions are visible.
 (/** @type {{pan?: 'start' | 'end'} | undefined} */ options) => {
   /** @param {number} value */
   const round = (value) => Math.round(value * 100) / 100;
@@ -40,6 +39,31 @@
   const rows = [...cells.querySelectorAll(".site-atlas-row")].filter(
     (row) => row.getClientRects().length > 0,
   );
+  const cellsStyle = getComputedStyle(cells);
+  const rootSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+  const referenceGap = cellsStyle.getPropertyValue("--site-atlas-reference-gap").trim();
+  const referenceGapPx =
+    Number.parseFloat(referenceGap) * (referenceGap.endsWith("rem") ? rootSize : 1);
+  const inkInset = Number.parseFloat(cellsStyle.getPropertyValue("--site-atlas-ink-inset"));
+  const inkContext = document.createElement("canvas").getContext("2d");
+  /** @param {Element | null} number */
+  const numberInk = (number) => {
+    if (!number || !inkContext) {
+      return null;
+    }
+    const style = getComputedStyle(number);
+    const rect = number.getBoundingClientRect();
+    inkContext.font = `${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+    const metrics = inkContext.measureText(number.textContent?.trim() ?? "");
+    const baseline =
+      rect.top +
+      (rect.height - metrics.fontBoundingBoxAscent - metrics.fontBoundingBoxDescent) / 2 +
+      metrics.fontBoundingBoxAscent;
+    return {
+      top: baseline - metrics.actualBoundingBoxAscent,
+      bottom: baseline + metrics.actualBoundingBoxDescent,
+    };
+  };
   const first = rows[0];
   const last = rows.at(-1);
   const canvas =
@@ -84,9 +108,8 @@
       getComputedStyle(cells).getPropertyValue("--site-atlas-global-side"),
     ),
     per_line: Math.round(
-      (cells.getBoundingClientRect().width + Number.parseFloat(getComputedStyle(cells).columnGap)) /
-        ((tiles[0]?.getBoundingClientRect().width ?? 1) +
-          Number.parseFloat(getComputedStyle(cells).columnGap)),
+      (cells.getBoundingClientRect().width + referenceGapPx) /
+        ((tiles[0]?.getBoundingClientRect().width ?? 1) + referenceGapPx),
     ),
     cells: box(cells),
     canvas,
@@ -98,7 +121,9 @@
     },
     pan: { left: cells.scrollLeft, width: cells.scrollWidth, viewport: cells.clientWidth },
     line_gap_px: rows[1] ? Number.parseFloat(getComputedStyle(rows[1]).marginBlockStart) : 0,
-    gap_px: round(Number.parseFloat(getComputedStyle(cells).columnGap)),
+    gap_px: round(Number.parseFloat(cellsStyle.columnGap)),
+    reference_gap_px: referenceGapPx,
+    row_gap_px: Number.parseFloat(cellsStyle.rowGap),
     block: box(block),
     panel: {
       id: cells.id,
@@ -179,10 +204,27 @@
         grid_marker_box: gridMarker?.getClientRects().length ? box(gridMarker) : null,
         ...box(tile),
         drawing: drawing ? box(drawing) : null,
+        outline: drawing
+          ? {
+              left:
+                drawing.getBoundingClientRect().left +
+                drawing.getBoundingClientRect().width * inkInset,
+              right:
+                drawing.getBoundingClientRect().right -
+                drawing.getBoundingClientRect().width * inkInset,
+              top:
+                drawing.getBoundingClientRect().top +
+                drawing.getBoundingClientRect().width * inkInset,
+              bottom:
+                drawing.getBoundingClientRect().bottom -
+                drawing.getBoundingClientRect().width * inkInset,
+            }
+          : null,
         number_px: number ? round(Number.parseFloat(getComputedStyle(number).fontSize)) : null,
         number_width: number ? round(number.scrollWidth) : null,
         name: tile.getAttribute("aria-label"),
         number_box: number ? box(number) : null,
+        number_ink: numberInk(number),
         mark: mark ? box(mark) : null,
         star: star ? box(star) : null,
       };

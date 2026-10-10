@@ -2016,7 +2016,7 @@ body {
      these tokens in rem or px; complete Triangle rows pan at that cell width. The size's
      scale makes Small two thirds as wide and Large half as wide again. */
   --site-atlas-cell-min: 6.4rem;
-  --site-atlas-cell-gap: 0.5rem;
+  --site-atlas-reference-gap: 0.5rem;
   --site-atlas-cell-padding: 0.3rem;
   --site-atlas-scale: 0.667;
   /* The move between the views: one duration and one easing for every tile, read by
@@ -2134,14 +2134,49 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
     1,
     round(
       down,
-      (100cqi + var(--site-atlas-cell-gap)) /
-      (var(--site-atlas-cell) + var(--site-atlas-cell-gap)),
+      (100cqi + var(--site-atlas-reference-gap)) /
+      (var(--site-atlas-cell) + var(--site-atlas-reference-gap)),
       1
     )
   );
   --site-atlas-tile: calc(
-    (100cqi - (var(--site-atlas-per-line) - 1) * var(--site-atlas-cell-gap)) /
+    (100cqi - (var(--site-atlas-per-line) - 1) * var(--site-atlas-reference-gap)) /
     var(--site-atlas-per-line)
+  );
+  /* Outline air includes tile padding and the normalized SVG's stroke-aware inset.
+     Reduce that actual visible gap, preserving the reserved drawing dimensions. */
+  --site-atlas-outline-air: calc(
+    2 *
+    var(--site-atlas-cell-padding) +
+    2 *
+    (var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) *
+    var(--site-atlas-ink-inset)
+  );
+  --site-atlas-cell-gap: calc(
+    var(--site-atlas-reference-gap) *
+    0.8 -
+    var(--site-atlas-outline-air) *
+    0.2
+  );
+  --site-atlas-number-ink-size: 0.8rem;
+  --site-atlas-number-leading: var(--kpress-line-height-normal);
+  /* Source Sans 3: ascent 1.024em, descent 0.4em; digits descend 0.012em.
+     Half the leading minus 0.324em is the air below the deepest digit ink. */
+  --site-atlas-number-ink-tail: calc(
+    var(--site-atlas-number-ink-size) *
+    (var(--site-atlas-number-leading) / 2 - 0.324)
+  );
+  --site-atlas-caption-air: calc(
+    var(--site-atlas-outline-air) /
+    2 +
+    var(--site-atlas-cell-padding) +
+    var(--site-atlas-number-ink-tail)
+  );
+  --site-atlas-row-gap: calc(
+    var(--site-atlas-reference-gap) *
+    0.75 -
+    var(--site-atlas-caption-air) *
+    0.25
   );
   --site-atlas-grid-space: calc((var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) / 2);
   --site-atlas-number-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.25), 0.8rem);
@@ -2154,13 +2189,13 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
     1.15
   );
   display: grid;
-  gap: var(--site-atlas-cell-gap);
-  grid-template-columns: repeat(auto-fill, minmax(var(--site-atlas-cell), 1fr));
+  gap: var(--site-atlas-row-gap) var(--site-atlas-cell-gap);
+  grid-template-columns: repeat(var(--site-atlas-per-line), var(--site-atlas-tile));
 }
 @media (max-width: 40rem) {
   .site-page .site-atlas-grid {
     --site-atlas-cell-min: 4.6rem;
-    --site-atlas-cell-gap: 0.35rem;
+    --site-atlas-reference-gap: 0.35rem;
   }
 }
 /* A tile in a move between the views is scaled about its own corner, which is where the
@@ -2276,7 +2311,8 @@ html:not([data-site-atlas-view="grid"])
 html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
   --site-atlas-widest: 19;
   --site-atlas-extra: var(--site-atlas-first-extra);
-  --site-atlas-row-gap: var(--site-atlas-cell-gap);
+  --site-atlas-number-ink-size: var(--site-atlas-number-size);
+  --site-atlas-number-leading: 1.15;
   direction: rtl;
   display: block;
   overflow-x: auto;
@@ -2391,18 +2427,6 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
 .site-atlas-grid .site-atlas-toggle-row[hidden] {
   display: none;
 }
-/* A new result's star (overview_sections.atlas_star), the site's one star in its warm
-   ink (`.site-star`), hung past the number's end, out of the flow, a little smaller
-   than the number so it stays inside the smallest tile. */
-.site-atlas-n > .site-star {
-  font-size: 0.8em;
-  inset-block-start: 50%;
-  inset-inline-start: calc(100% + 0.12em);
-  line-height: 1;
-  position: absolute;
-  translate: 0 -50%;
-}
-
 /* The film's panel for a case, which opens every case record as its visual summary
    (`.site-case-summary`, below) and a result's overview as its case (site-result.css):
    the gap bar, the bound as one statement, the badges, where each bound comes from and

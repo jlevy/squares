@@ -415,7 +415,7 @@
       const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
       const style = getComputedStyle(cells);
       const least = lengthPx(style.getPropertyValue("--site-atlas-cell-min"), root);
-      const gap = lengthPx(style.getPropertyValue("--site-atlas-cell-gap"), root);
+      const gap = lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root);
       const scale = Number.parseFloat(style.getPropertyValue("--site-atlas-scale"));
       const width = cells.getBoundingClientRect().width;
       const capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);

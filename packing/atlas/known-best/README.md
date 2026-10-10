@@ -44,10 +44,10 @@ The composite ships in four forms, all drawn from that one SVG in one build:
 
 | File | Size | For |
 | --- | --- | --- |
-| [`known-best-1-100.svg`](known-best-1-100.svg) | 2260 × 4023 units | the source; scales to anything |
-| [`known-best-1-100.png`](known-best-1-100.png) | 2260 × 4023 px | the GitHub-facing raster preview |
-| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4520 × 8046 px | attaching, or downscaling for social media |
-| [`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) | 23.54 × 41.91 in | printing; vector, so text stays selectable |
+| [`known-best-1-100.svg`](known-best-1-100.svg) | 2150 × 3823 units | the source; scales to anything |
+| [`known-best-1-100.png`](known-best-1-100.png) | 2150 × 3823 px | the GitHub-facing raster preview |
+| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4300 × 7646 px | attaching, or downscaling for social media |
+| [`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) | 22.40 × 39.82 in | printing; vector, so text stays selectable |
 
 Each export carries the SHA-256 of its source SVG, so `--check` rejects any one of them
 that has fallen behind the drawing.
@@ -69,9 +69,9 @@ the card retains its ordinary count.
 Its distance from the first grid outline matches the ordinary horizontal gap between
 boxes. Where irregular packings precede it, an extra gap of half a drawing width (79
 units) separates the groups horizontally.
-Both PDFs use the same 307-unit row pitch and 214-unit column pitch.
-The visible horizontal box gaps are about 20% tighter, and the annotation-to-next-row
-clearance is about 40% tighter than the earlier poster.
+Both PDFs use the same 287-unit row pitch and 203-unit column pitch.
+Compared with the 214-unit column and 307-unit row pitches, visible horizontal box gaps
+are about 20% tighter, and the annotation-to-next-row clearance is about 25% tighter.
 Rows that are all grid receive no added horizontal gap.
 The poster draws 52,650 square polygons from the same witnesses.
 Its title, complete legend, explanation, construction credits and closing project
@@ -123,13 +123,13 @@ Both composites apply the recent accent independently to a new upper bound, lowe
 or optimality proof: a new proof of an older packing colors its optimality badge, not
 its upper bound.
 The image above is the raster; the vector it was drawn from is one click
-away, and the PDF is an 81.99-by-59.39-inch page.
+away, and the PDF is a 78.09-by-55.84-inch page.
 
 | File | Size | For |
 | --- | --- | --- |
-| [`known-best-1-324.svg`](known-best-1-324.svg) | 7871 × 5701 units | the source; scales to anything |
-| [`known-best-1-324.png`](known-best-1-324.png) | 7871 × 5701 px | the raster embedded above |
-| [`square-packings-324-20261008.pdf`](square-packings-324-20261008.pdf) | 81.99 × 59.39 in | printing; vector, so text stays selectable |
+| [`known-best-1-324.svg`](known-best-1-324.svg) | 7497 × 5361 units | the source; scales to anything |
+| [`known-best-1-324.png`](known-best-1-324.png) | 7497 × 5361 px | the raster embedded above |
+| [`square-packings-324-20261008.pdf`](square-packings-324-20261008.pdf) | 78.09 × 55.84 in | printing; vector, so text stays selectable |
 
 The poster publishes one raster and a vector PDF. The rectangular poster’s 2x raster
 measured 5,055,264 bytes for 83 megapixels; the poster publishes a single preview, while

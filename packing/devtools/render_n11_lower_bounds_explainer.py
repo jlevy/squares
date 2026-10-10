@@ -1984,7 +1984,7 @@ def _figure_totals() -> dict[str, Any]:
 
 
 def starred_lower_bounds() -> int:
-    """How many cells in Figure 2 carry the star: a recent lower bound, whoever proved it.
+    """How many cells in Figure 2 have a recent lower bound, whoever proved it.
 
     The composite counts them in its own legend from the figure record; the caption
     beside the image reads the same total, so the two cannot disagree.
@@ -1995,8 +1995,8 @@ def starred_lower_bounds() -> int:
 def lower_bounds_proved_here() -> int:
     """How many of Figure 2's lower bounds are this project's own new results.
 
-    Not the star's count: the star marks recent results, most of them by others, and a
-    sentence about what this research agenda produced must not borrow it.
+    The recent-bound count includes results by others; a sentence about what this
+    research agenda produced needs its own total.
     """
     return int(_figure_totals()["lower_bound_first_proved_here"])
 
