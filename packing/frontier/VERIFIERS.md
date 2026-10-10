@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **103** programs: **37** external and **66** first-party; **74** decide claims and **29** check premises.
-- **418** of **471** evidence entries name the programs that verified them: 227 reproduced with the producer’s code, 164 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
+- **419** of **472** evidence entries name the programs that verified them: 228 reproduced with the producer’s code, 164 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -35,7 +35,7 @@ second implementation agrees.
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | wand125 | external | decides | 89 | 14 |
 | [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | wand125 | external | decides | 66 | 11 |
-| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | wand125, adapting this repository's sqverify_fast | external | decides | 9 | 9 |
+| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | wand125, adapting this repository's sqverify_fast | external | decides | 10 | 10 |
 | [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | wand125 | external | decides | 6 | 3 |
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | wand125 | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | wand125 | external | decides | 5 | 1 |
@@ -365,6 +365,7 @@ The source's copy of this repository's sqverify_fast with one change, reading a 
 | `E-n030-wand125-mixed-58835-report` | the source’s own run | producer’s code | T-109 |
 | `E-n039-wand125-mixed-665-report` | the source’s own run | producer’s code | T-110 |
 | `E-n041-wand125-mixed-6775-report` | the source’s own run | producer’s code | T-111 |
+| `E-wand125-fine-net-n29-582-followup-report` | the source’s own run | producer’s code | T-132 |
 
 ### `V-wand125-unified-linear-verify-cpp`
 

@@ -29223,3 +29223,29 @@ evidence:
       The source checks with its own verify_cert.py and verify_cert2.py, not run here; the two maintained
       routes share certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
       method. No two independent methods, human oversight or optimality is claimed.'
+
+  - id: E-wand125-fine-net-n29-582-followup-report
+    claim: lower-bound
+    scope:
+      n_values:
+      - 29
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net n29 2026-10-10]'
+    certificate: packing/resources/web/wand125-fine-net-n29-2026-10-10/reported-n29-followup.json
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: The author reports 291/50 at all 2073 directions of the net its candidate declares
+      (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this repository's sqverify_fast,
+      at 22a23c8, superseding the issue's 1163/200. Complete source-byte custody and the maintained
+      mass and net premises are accepted (receipts/premises.json). Eight sampled directions run here by
+      sqverify-fast verified and matched the source's log; that is a diagnostic, not a replay. The
+      32-direction 197/200 control remains sampled. A complete capture, whole-net controls, restored
+      positives and a review that reads this certificate remain pending under think-r333, priced at
+      about 4.3 CPU-hours. The shared crate establishes no independent implementation. No standing
+      bound or rating changes; the 1163/200 report and its evidence stand.
+    source_reviewed: '2026-10-10'

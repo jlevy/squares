@@ -906,6 +906,14 @@ n28, n29 and n31. The
 records the reported bounds and complete source references.
 Independent whole-net replay and controls remain pending.
 
+**[wand125 fine-net n29 2026-10-10]**: wand125’s later n29 certificate,
+`mixed_n29_L582`, reports $s(29) \ge 291/50 = 5.82$ on the same 2,073-direction net,
+superseding the 1163/200 above.
+The [authored factual packet](web/wand125-fine-net-n29-2026-10-10/README.md) pins
+revision `22a23c8` and its release asset by digest, with the maintained premise check
+and a diagnostic eight-direction sample.
+A complete replay and whole-net controls remain pending.
+
 - **[Couzo exact refinements 2026-10-08]** — Francisco Couzo’s eight complete rational
   certificates and separate decimal context poses; T-128 remains V0/C0 pending
   historical source-house integration and confirmation.

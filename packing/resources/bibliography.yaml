@@ -1602,6 +1602,19 @@ sources:
       SQUISH packing at 155. The n155 side equals Couzo''s earlier issue451 certificate. MIT-licensed
       source bytes retained; Claude assistance disclosed. No KKT, local or global optimality claim is
       admitted.'
+  - key: '[wand125 fine-net n29 2026-10-10]'
+    authors:
+    - wand125
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-10'
+    credit: wand125
+    lineage: builds-on-project
+    note: The later n29 finer-net measure lower-bound report, s(29) >= 291/50, at source 22a23c8a99aa4e9616d596bc2f28555bacbee3dd,
+      with its data in release square-lower-bounds-v1; the release asset is pinned by size and digest and
+      kept outside Git. Maintained measure and declared-net premises accepted; native capture, controls
+      and adoption pending. The enclosing MIT notice does not settle redistribution of the nested verifier,
+      which adapts this project's sqverify_fast, so a maintained replay is not another independent implementation.
 credited_names:
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta
