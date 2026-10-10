@@ -1,0 +1,6 @@
+ab84a4599bd809e4823be132cf0daa2b6b63772a9b99968fc91284ac9588760c  ./README.md
+eeebf55cf3c1614a96f51339695f28443e35f33b0195bfc24ef0549b50550cb1  ./certificate.json
+0c80020cb4bcdb8f339acaceb2cedcea3d9bdd2a65ab5b28034de2e1b4b30f85  ./external-positive.log
+afc9376fae3baa1dfb43d037dce7eb88a0c85369622af1fb4974a56b2f829b87  ./external-positive.txt
+fe7852ee34986ff89c76e8ca94a02fe5dcf4ce7f9e2b90d57c2bd11213dcf3e8  ./verification.json
+8a7373a53119fd751ea38c5d65955d5260d8e4b4e3d70c4ce8a170feccdeb5fe  ./verify_exact.py
