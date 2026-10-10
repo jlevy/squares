@@ -12,7 +12,13 @@ from pathlib import Path
 
 import pytest
 
-from devtools import overview_sections, render_case_pages, render_overview, site_assets
+from devtools import (
+    overview_sections,
+    render_case_pages,
+    render_contributors,
+    render_overview,
+    site_assets,
+)
 from devtools import render_frontier_page as frontier_page
 from devtools import render_research_tables as tables
 from devtools.render_overview import assert_fetches_only_assets
@@ -151,6 +157,7 @@ def test_a_records_links_are_written_from_its_own_directory(
     record = _record(records, 11)
     assert 'href="../frontier.html#n-11"' in record
     assert 'href="../all-results.html#t-018"' in record
+    assert 'href="../contributors/walter-trump.html" data-contributor' in record
     assert 'href="10.html" rel="prev" data-case-step="10"' in record
     assert 'href="12.html" rel="next" data-case-step="12"' in record
     assert 'href="./" data-case-index' in record
@@ -160,7 +167,14 @@ def test_a_records_links_are_written_from_its_own_directory(
         if not re.match(r"#|[a-zA-Z][a-zA-Z0-9+.-]*:|/", url)
     ]
     support_paths = render_overview.support_file_paths()
-    served = {f"../{name}" for name in (*render_overview.SITE_PAGES, *support_paths)} | {
+    served = {
+        f"../{name}"
+        for name in (
+            *render_overview.SITE_PAGES,
+            *support_paths,
+            *render_contributors.page_paths(),
+        )
+    } | {
         "./",
         "../",
     }

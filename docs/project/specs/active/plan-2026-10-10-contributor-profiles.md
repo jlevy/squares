@@ -326,7 +326,7 @@ Unknown identities remain visible as ordinary credit text.
 | `think-0dqj` | Initial profiles, census tool, reviewed occurrence contract and credit links | Sol, `xhigh` | Complete |
 | `think-s3wj` | Directory, standalone profiles, safe biography rendering and publication integration | Sol, `xhigh` | Complete |
 | `think-0d3g` | Shared article loading, accessible contributor popovers and browser checks | Sol, `xhigh` | Complete |
-| `think-vqio` | Independent technical review, integrated preview and validation receipts | Astra, `xhigh`, with coordinator integration | In progress |
+| `think-vqio` | Independent technical review, integrated preview and validation receipts | Astra, `xhigh`, with coordinator integration | Review complete; publication checks on PR #490 |
 
 The first independent implementation review requested three fixes: initialize overlays
 before their controllers run on standalone pages (`think-0cxt`), preserve distinct
@@ -364,7 +364,7 @@ result popover.
 - [x] Verify routes, sitemap, build selection, stale output removal and source drift
   detection.
 - [x] Open a working preview and inspect desktop/mobile and light/dark presentations.
-- [ ] Resolve independent review findings and update PR #490 with executed validation,
+- [x] Resolve independent review findings and update PR #490 with executed validation,
   preview instructions and remaining census coverage.
 
 ### Phase 4: Complete the Archive and Remaining Surfaces
@@ -487,7 +487,23 @@ Independent Astra review accepted the reconciled design guide and final implemen
 with no remaining functional or design blockers.
 The complete contributor browser suite passed 26 tests; a separate eight-case run
 explicitly checked the resolved theme.
-Final push and hosted checks remain part of Phase 3 acceptance.
+Hosted integration also exercised existing page contracts: `think-u5c8` reconciles
+footer navigation, script ordering, contributor output/freshness and real sparse
+evidence restoration; `think-wrpf` preserves relative profile links, full credit text
+and semantic MathML in the existing rendering checks.
+The complete affected modules passed 357 overview/workflow tests and 138
+case/result-column tests, with no skips.
+Astra accepted the final integration fixes and independently passed the pruning and
+sparse-restoration checks.
+
+The local edit floor passed.
+Its broad behavioral run encountered a changing file inventory during formatting; a
+retry was interrupted before the README integration fix, so neither run is a passing
+broad behavioral receipt.
+The README check passed after adding this policy to its layout and authority map.
+Final hosted receipts and publication status are recorded on
+[PR #490](https://github.com/jlevy/squares/pull/490), with the tested head and base,
+rather than copied into this plan as moving CI status.
 
 ## Open Decisions and Limits
 

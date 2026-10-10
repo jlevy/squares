@@ -879,8 +879,7 @@ def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
 
 
 def colophon_html() -> str:
-    """The closing credit every site page carries, in KPress's footer slot: the two lines
-    every page shares (`colophon_lines`), as the explainer's are."""
+    """The shared closing credits and contributor directory in each site's footer."""
     contributors = (
         '<span class="site-colophon-line"><a href="contributors/index.html">'
         "Contributors</a></span>"
@@ -1583,8 +1582,7 @@ def forwarder_pages() -> list[Page]:
 
 
 def render_site() -> list[Page]:
-    """Every file this module writes: the pages, the result fragments, the case record
-    files, and a forwarder at each address a page used to have."""
+    """Every page, result, case, contributor and historical address this build serves."""
     from devtools.render_contributors import contributor_pages  # noqa: PLC0415
 
     return [
@@ -1743,7 +1741,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"wrote {output / page.name} ({len(page.html) // 1024} KB)")
     for forwarder in forwarders:
         print(f"wrote {output / forwarder.name}, a forwarder")
-    shared = asset_files([*pages, *fragments, *records, *forwarders])
+    shared = asset_files([*pages, *fragments, *records, *contributors, *forwarders])
     print(
         f"wrote {len(shared)} shared assets under {output / 'assets'}/ "
         f"({sum(len(data) for data in shared.values()) // 1024} KB in all)"

@@ -25,6 +25,7 @@ from devtools import (
     overview_data,
     overview_sections,
     render_case_pages,
+    render_contributors,
     render_overview,
     render_recent_results,
     result_overview,
@@ -105,6 +106,12 @@ def served() -> Callable[[str], str]:
     them. Every page is assembled here, during setup, as `rendered` renders them."""
     assembled = {name: site_renders.served(name) for name in render_overview.PAGES}
     return assembled.__getitem__
+
+
+@pytest.fixture(scope="module")
+def contributor_documents() -> dict[str, str]:
+    """Render the contributor directory and every profile before per-test patches."""
+    return {page.name: page.html for page in render_contributors.contributor_pages()}
 
 
 def _asset_tag(path: Path, name: str = "index.html") -> str:
@@ -2646,15 +2653,21 @@ def test_the_closing_credit_is_two_lines_the_project_and_the_version() -> None:
     assert part in nav_css
 
 
-@pytest.mark.parametrize("name", sorted(render_overview.PAGES))
+@pytest.mark.parametrize(
+    "name", sorted((*render_overview.PAGES, *render_contributors.page_paths()))
+)
 def test_every_site_page_ends_with_the_closing_credit(
-    name: str, rendered: Callable[[str], str]
+    name: str, rendered: Callable[[str], str], contributor_documents: dict[str, str]
 ) -> None:
-    """Each KPress page carries the two lines once, in its footer slot."""
-    footer = f'<p class="site-colophon">{render_overview.colophon_lines()}</p>'
-    page = rendered(name)
+    """Every page retains the two shared credits and one rebased contributor link."""
+    footer = render_overview.colophon_html()
+    directory = str(Path(name).parent)
+    if directory != ".":
+        footer = render_case_pages.rebase_links(footer, directory)
+    page = contributor_documents[name] if name in contributor_documents else rendered(name)
     assert page.count(footer) == 1
-    assert page.count('class="site-colophon-line"') == 2
+    assert page.count(render_overview.colophon_lines()) == 1
+    assert page.count('class="site-colophon-line"') == 3
 
 
 SITE_NAV_BLOCK = re.compile(r'<nav class="site-nav" aria-label="Site">.*?</nav>', re.DOTALL)
@@ -4155,7 +4168,7 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
     entry there. A paper is a full page the site serves, so its card is the link itself
     and goes there in the same tab, as the overview's page cards do: an `<a href>` with
     the page icon (`data-go="page"`), no popover, no framed preview and no new tab.
-    The page has no popover, so it carries no popover script."""
+    Its shared case and contributor overlays enhance ordinary links outside the cards."""
     page = rendered("papers.html")
     papers = overview_sections.PAPERS
     assert [paper.href for paper in papers] == [
@@ -4190,8 +4203,24 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
     article = papers_article(page)
     for markup in POPOVER_MARKUP:
         assert markup not in article, markup
-    popover = render_overview.POPOVER_SCRIPT.read_text(encoding="utf-8")
-    assert popover not in served("papers.html")
+    programs = (
+        render_overview.THEME_SCRIPT,
+        render_overview.ARTICLE_LOADER_SCRIPT,
+        render_overview.POPOVER_SCRIPT,
+        render_overview.CASE_POPOVER_SCRIPT,
+        render_overview.CONTRIBUTOR_POPOVER_SCRIPT,
+    )
+    tags = [_asset_tag(program, "papers.html") for program in programs]
+    assert all(page.count(tag) == 1 for tag in tags)
+    assert [page.index(tag) for tag in tags] == sorted(page.index(tag) for tag in tags)
+    for selector in ("data-case-popover", "data-contributor-popover"):
+        assert page.count(selector) == 1
+        assert page.index(selector) < page.index(tags[2])
+    for program in (render_overview.TABLE_SCRIPT, render_overview.ROW_POPOVER_SCRIPT):
+        assert _asset_tag(program, "papers.html") not in page
+    assembled = served("papers.html")
+    for program in programs:
+        assert program.read_text(encoding="utf-8") in assembled
 
 
 def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
@@ -4642,13 +4671,23 @@ def test_a_table_of_results_is_one_flat_list_newest_first(
     assert len(overview.groups) > 1
     # Each row's credit is the register's, whole: the finder, then what it builds on.
     for result in overview.results:
-        cell = (
-            f'<td class="site-col-credit" data-value="{html.escape(result.credit)}">'
-            f"{overview_sections.credit_cell(result.credit)}</td>"
-        )
-        assert cell in _row(table, result.id), result.id
+        rows = [_row(table, result.id)]
         if f'data-result="{result.id.lower()}"' in recent:
-            assert cell in _recent_row(recent, result.id), result.id
+            rows.append(_recent_row(recent, result.id))
+        for row in rows:
+            opening = f'<td class="site-col-credit" data-value="{html.escape(result.credit)}">'
+            assert opening in row, result.id
+            cell = row.split(opening, 1)[1].split("</td>", 1)[0]
+            assert _rendered_text(cell) == result.credit, result.id
+            assert Counter(re.findall(r'href="([^"]+)"', cell)) == Counter(
+                re.findall(r'href="([^"]+)"', result.credit_html)
+            ), result.id
+            if " after " in result.credit:
+                quiet = re.search(r'<span class="site-cell-quiet">(.*?)</span>', cell)
+                assert quiet is not None, result.id
+                assert (
+                    _rendered_text(quiet[1]) == "after " + result.credit.partition(" after ")[2]
+                )
         source = "ours" if result.ours else "others"
         assert f'data-source="{source}"' in _row(table, result.id), result.id
     assert {result.ours for result in overview.results} == {True, False}
@@ -5715,9 +5754,10 @@ def test_no_page_carries_a_result_overview(
 def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """`write_site` writes the pages at the root and the fragments in their directory,
-    and removes a fragment a directory built earlier still holds for a result the
-    register no longer has; nothing else in the directory is touched."""
+    """Each result, contributor page and forwarder is written and freshness checked.
+
+    Withdrawn results and retired profiles are pruned; another builder's paper remains.
+    """
     files = [
         render_overview.Page("index.html", "<p>page</p>"),
         render_overview.Page("result/t-001.html", "<p>one</p>\n"),
@@ -5743,16 +5783,36 @@ def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
     monkeypatch.setattr(render_overview, "render_all", lambda: files[:1])
     monkeypatch.setattr(render_overview, "result_fragments", lambda: files[1:])
     monkeypatch.setattr(render_overview, "case_records", list)
+    contributors = [
+        render_overview.Page("contributors/index.html", "<p>contributors</p>"),
+        render_overview.Page("contributors/levy.html", "<p>Levy</p>"),
+    ]
+    monkeypatch.setattr(render_contributors, "contributor_pages", lambda: contributors)
     forwarder = render_overview.Page("old.html", "<p>moved</p>")
     monkeypatch.setattr(render_overview, "forwarder_pages", lambda: [forwarder])
     assert [file.name for file in render_overview.render_site()] == [
         "index.html",
         "result/t-001.html",
+        *(page.name for page in contributors),
         "old.html",
     ]
     # A forwarder is one of the files a render writes, so a build without it is stale.
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
-    render_overview.write_site(tmp_path, [*files, forwarder])
+    complete = [*files, *contributors, forwarder]
+    render_overview.write_site(tmp_path, complete)
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
+    profile = tmp_path / "contributors/levy.html"
+    profile.write_text("changed profile", encoding="utf-8")
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
+    render_overview.write_site(tmp_path, complete)
+    profile.unlink()
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
+    render_overview.write_site(tmp_path, complete)
+    retired = tmp_path / "contributors/retired.html"
+    retired.write_text("retired contributor", encoding="utf-8")
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
+    render_overview.write_site(tmp_path, complete)
+    assert not retired.exists()
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
     (tmp_path / "result" / "t-001.html").write_text("changed", encoding="utf-8")
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
@@ -5773,11 +5833,16 @@ def test_check_finds_a_record_file_or_overview_left_from_another_build(
     monkeypatch.setattr(render_overview, "result_fragments", list)
     monkeypatch.setattr(render_overview, "case_records", lambda: records)
     monkeypatch.setattr(render_overview, "forwarder_pages", list)
+    contributors = [
+        render_overview.Page("contributors/index.html", "<p>contributors</p>"),
+        render_overview.Page("contributors/levy.html", "<p>Levy</p>"),
+    ]
+    monkeypatch.setattr(render_contributors, "contributor_pages", lambda: contributors)
     assert render_overview.main(["--output", str(tmp_path)]) == 0
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
     (tmp_path / "cases" / "325.html").write_text("a dropped case", encoding="utf-8")
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
-    render_overview.write_site(tmp_path, [*files, *records])
+    render_overview.write_site(tmp_path, [*files, *records, *contributors])
     assert not (tmp_path / "cases" / "325.html").exists()
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
 
@@ -6421,8 +6486,17 @@ def test_the_site_writes_its_forwarders_and_checks_them(
     monkeypatch.setattr(render_overview, "render_all", lambda: [page])
     monkeypatch.setattr(render_overview, "result_fragments", list)
     monkeypatch.setattr(render_overview, "case_records", list)
+    contributors = [
+        render_overview.Page("contributors/index.html", "<p>contributors</p>"),
+        render_overview.Page("contributors/levy.html", "<p>Levy</p>"),
+    ]
+    monkeypatch.setattr(render_contributors, "contributor_pages", lambda: contributors)
     moved = [old for old, _ in render_overview.MOVED_PAGES]
-    assert [file.name for file in render_overview.render_site()] == ["index.html", *moved]
+    assert [file.name for file in render_overview.render_site()] == [
+        "index.html",
+        *(profile.name for profile in contributors),
+        *moved,
+    ]
     assert {"explainer.html", "n11-optimality/index.html"} < set(moved)
     assert render_overview.main(["--output", str(tmp_path)]) == 0
     crawl, crawl_assets = site_urls.crawl_files()
@@ -6436,6 +6510,7 @@ def test_the_site_writes_its_forwarders_and_checks_them(
     ) == sorted(
         [
             "index.html",
+            *(profile.name for profile in contributors),
             *moved,
             *render_overview.support_files(),
             *crawl,

@@ -815,9 +815,10 @@ jobs:
       run:
         working-directory: packing
     steps:
-      # The same partial checkout as `prepare`, for the same reason. The one file the
-      # render reads under `packing/resources` is `bibliography.yaml`, a top-level file the
-      # pattern keeps (2026-09-29, every file the render opened, audited). The reader
+      # The same partial checkout as `prepare`, for the same reason. Its sparse
+      # pattern keeps top-level files such as `bibliography.yaml`; before rendering,
+      # --checkout-evidence restores the exact bylines and reviewed occurrence inputs
+      # declared by contributor records, without keeping the whole archive. The reader
       # documents' repository links, which name `main`, are resolved against the checked-out
       # commit's tree with `git ls-tree`, which reads only tree objects: a blobless clone of
       # depth one already holds every tree of that commit, so the render needs no history
