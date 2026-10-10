@@ -5,7 +5,7 @@ title: Resume polynomial catalogue recovery, upstream sync and database work map
 kind: task
 status: in_progress
 priority: 1
-version: 32
+version: 33
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -26,131 +26,135 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T22:26:10.056Z
-updated_at: 2026-10-10T00:14:30.415Z
+updated_at: 2026-10-10T00:57:09.555Z
 started_at: 2026-10-08T22:26:36.377Z
 ---
 W7 continuation of interrupted PR435/stack447. Preserve unpublished local parent and child repairs, reconcile formal stack with latest origin/main, run current record and change-reachable gates, push every validated owning layer and update cost/results/validation in PR descriptions. Reconcile actual current and historical database partitions with every remaining identification/contact/witness bead. Coordinator owns Git, shared records, bead mutations, integration and PR; parallel Sol-medium CI/storage audit, Sol-xhigh coverage reconciliation and Astra-xhigh semantic mathematical review. Preserve unique source and validation evidence outside disposable external scratch. Slice1 recover provenance and assess gates/capacity; slice2 stack integration and local assurance; slice3 PR/CI closeout alongside selected W6 driver readiness work. No PR landing in scope.
 
 ## Notes
 
-Current working notes for think-jygq.
-Earlier chronological notes are preserved in synced tbd history version 29,
-think-jygq-pre-compact-v29.json and think-jygq-notes-archive-v29.md.
-The later checkpoint is preserved in synced history version 31 and
-think-jygq-pre-final-publication-v31.json.
-This replaces repeated working checkpoints while preserving dated positive/negative
-receipts.
+# Polynomial recovery and database work map
 
-Current upstream-refresh checkpoint, 2026-10-10 UTC. Final qualification is in progress.
+Current refresh checkpoint: 2026-10-10T00:55:53.036140+00:00. This W7 slice began
+2026-10-09T20:16:15.292030Z.
 
-Formal stack 447 incorporates origin/main 0f16c033a87464cfab127ba54748ca5e2536babd: main
--> PR 403 claude/friendly-sagan-jk7qzy -> PR 435 codex/exact-polynomial-coverage.
-Parent clean head 5ba9db6c3cea4e92886b2abddf9543fe3139d660, source/data
-300ae957034973bc87012943e70a29d9cf6314d6. Child clean head
-538696a5ab674f8324cef3a578328b5ec8a970b8, source/data
-04c5edc6143cfd315e12b281f7425af4178f3e64. Official upstream rebase and cascade
-completed. Remote branches still hold c1d3aab9 and 10ce3575; no branch push or hosted
-dispatch has occurred in this slice.
-PRs remain unmerged.
+Formal stack 447: main → PR 403 (claude/friendly-sagan-jk7qzy) → PR 435
+(codex/exact-polynomial-coverage).
+Fixed final upstream snapshot 1871b14dc630f802084695b7bd6007bac53b3714, including PR
+475, PR 479 and PR 480; earlier snapshots d3860c97 and0f16c033 remain dated.
+Parent f378489572ee62e2b20a40f1bba3c73faac7462d, source/data pin
+cb2fb083508c3dcab1d44e67de46c716b85e8c35. Child
+949b6f6e06f264edd1bfaf1ec34ff94c2cb00b50, source/data pin
+1c568434d048315d9e9b5b0cb9947b4610e9d2cf. Both clean; official stack tracking reconciled
+to these heads. Source commits amended, with tiny release-pin commits; no new generated
+HTML/PDF or changed source blob above 5 MiB. Not pushed yet; hosted qualification of
+these heads remains pending.
+No PR merge requested or performed.
 
-Current records: parent 320/324 exact; child 321/324 exact, comprising 176 integer, 72
-rational, 60 closed-form and 13 minimal-polynomial values.
-Numeric gaps remain 29/think-je8y, 55/think-phh8 and 71/think-1blg. All 324 claim
-statuses/lower bounds and 77 proved cases are unchanged.
-Thirty-two current case backfills change representation metadata only.
-The 58 finite rational source certificates partition into 31 selected, 14 superseded and
-13 pending; current n=51 is a separate radical and its T-125 rational certificate is
-superseded. Pending Couzo offers, including both n=105 identities, require independent
-replay/adoption under think-lhtz; T-128 historical-house custody remains think-0mlq.
-Closed acquisition think-88r0 does not establish adoption.
+Record result: 32 adopted-current algebraic side backfills (18 RyXu including n51
+radical, 14 Gupta); the other 31 native sides are rational.63 current finite
+witness-side projections retain scoped upper-bound assurance.58 finite rational
+certificate identities partition 31 selected / 14 superseded / 13 pending; the separate
+current n51 radical brings backfills to 32. The complete12-field
+source/certificate/facts/replay/adoption envelope survives, including both distinct n105
+offers. All 324 case statuses/lower bounds and 77 proved cases are unchanged.
+T-120 Daniel n102 is superseded by the current RyXu bound; improving reported
+polynomials 106/152/177 remain V0/C0 with no geometry or Lean replay (think-8sm2/#419).
 
-Child retains 536 raw records, 558 coefficient vectors, 6,374 integer strings and all
-673 n=83 coefficients.
-Its source root ordinal remains stated 27/count null.
-History comprises 186 superseded, 16 unreconciled, seven outside-range and three invalid
-rows.
-Maintained collector regeneration changes exactly 57 relationship_to_current labels
-at 22 counts; all 182 source identities, coefficient vectors, full validation objects
-and other fields are preserved.
-Full collector, unchanged saved-corpus regression, 321 polynomial/root checks and
-composite checks passed.
-Register/composite bytes are unchanged; the register is 2,816,352 decoded/843,142 gzip
-bytes.
+Parent census:324 current / 320 exact,176 integer / 72 rational / 60 closed-form / 12
+minimal-polynomial, 1 degree-only (n=83), 3 numeric-only (29, 55, 71);28 additional = 15
+superseded + 13 pending.
+Child census:324 current / 321 exact,176 integer / 72 rational / 60 closed-form / 13
+minimal-polynomial, 0 degree-only, 3 numeric-only.
+Historical 212 = 186 superseded / 16 unreconciled / 7 outside / 3 invalid.
+Raw 536 records / 558 coefficient vectors / 6,374 integer strings, 2,816,352 decoded /
+843,142 gzip bytes. All 175 old identities survive plus 37 new history rows;57
+relationship objects across 22 counts were refreshed, with coefficients/source
+identities/checks conserved.
+Final Git comparison against538696a5 confirms unchanged exact-register, historical
+corpus and all 324 case blobs.
+All 673 n=83 coefficients remain, degree 672 / longest 724 digits; source ordinal 27 is
+stated, not independently counted (think-chsu).
+Maintained final1871 collector check PASS: 321 polynomials certified irreducible,321
+roots isolated and frontier matches.
 
-Current 5386 web publication reconstructs 350 records, 350 vectors and 2,124 strings:
-324 current and 26 additional rows.
-It omits 186 superseded rows and 22 redundant current notes from publication only.
-Report-only HTML/Markdown and coefficient downloads; no report PDF generated.
-Scientific originals and canonical history remain.
-Current render/check/byte measurement and all eight reader/complete views at 390/1,280
-pixels, light/dark passed with zero findings; desktop complete and mobile reader were
-visually inspected. Initial raw bytes are 293,277/3,653,397 (8.027515%, unchanged 10%
-cap); excludes clicked downloads/archives, with no latency claim.
-Preview: port 60649.
+PR 479 now retains later Couzo 375/378 decimal poses from 2d32a6e as derived facts;
+source-coverage has 22 beyond-horizon rows,20 current + 2 superseded dated ffd900d
+reports. They do not enter the 1..324 corpus or establish geometry/exact identities.
+think-1545 retains outside-corpus reader work.
+Rehwaldt 68 v1.2 is multivariate/root-box evidence, not a univariate minimal polynomial
+(think-nv5o). wand125 fine-net19/20/26/27/28/29/31 and n27 follow-up concern lower
+bounds; replay/review/adoption remain separate.
+PR 475 regional n17 exclusions and producer/progress prerequisites preserve scoped
+meaning:12 regions / 72 admitted / 3,636 orbits / 28,528 states; endpoint survives; no
+global optimum. Preserve exp-317 UNREAD_WORKER_OUTPUTS pruning, producer-receipt
+exemption and SYNOPSIS/controls 246. 24 new hosted objects (411,682,476 B) match the
+228-object (2,579,044,107 B) manifest;204 older objects remain unhosted.
+No complete fresh-clone coverage claim.
 
-Current native inventories pass with live/Git agreement and all eight historical replay
-inputs: parent 7,025 paths/197,775,996 bytes; child 7,074/199,905,437. The unchanged cap
-is 201,326,592 bytes, with respective headroom 3,550,596/1,421,155. Parent schema
-overlap correction and public index_tree API are preserved.
-Eleven copy controls, ambient-Git control, 32 math-startup controls, Ruff/types and
-source/API review passed.
-Math fixture repair preserves the production guard/limits.
-Final documentation/corpus review is bounded to the final amendment; prior complete
-mathematical review remains accepted.
+Publication: clean HTML report on Papers, no report PDF.350public
+records=324current+26source, 350 coefficient vectors / 2,124 integer strings.186
+superseded rows and 22 redundant current notes are omitted from publication only;
+canonical/source history remains.
+Fresh 949 render/check and 8 views (390/1280, light/dark, reader/complete) PASS, zero
+layout/overflow/lost-ink/math findings; root visual desktop/mobile check passed.
+Initial 293,277 B / complete 3,653,397 B, fraction 0.08027515213922823 < 0.10
+acceptance; this is bytes/coverage, not a latency claim.
 
-Actual 5ba9/5386 push gates are running: parent command-start policy is 1,800 seconds,
-child is 900 seconds.
-No timeout/cap/selection flags were widened.
-Parent has concrete Pages declaration/scope failures and an n=17 nested-payload refusal
-failure; child has a fixed-core staging signal failure.
-Progress counts are partial, not completed verdicts.
-The refusal node passes in isolation; broad traceback/cause remains unresolved.
-One reproduced Pages refusal combines a child-worktree path with the parent repository
-root; import-origin diagnosis remains pending.
-Strong owns Pages diagnosis, moderate refusal/signal diagnosis, fast parent gate/PR
-drafts, root shared records/Git/publication.
-No speculative patch or live gate restart.
-Current-head hosted full and automatic PR checks remain to run.
+Fresh native inventories PASS, live=Git/unique lexical paths/clean stable heads / all 8
+replay inputs: parent7027paths/197854549B/headroom3472043B/duplicate-copy
+avoided973473B; child7076paths/199984938B/headroom1341654B/duplicate-copy
+avoided974183B. Cap unchanged 201,326,592 B (192 MiB). No physical local source-copy
+test. Source-copy repair preserves equal-byte paths, aliases, custody and private worker
+writes;11 controls passed, plus ambient-Git isolation 1 PASS. Python 3.14.7 / shared
+taskvenv requires four explicit per-worktree import roots: packing/src, packing,
+packages/workbench/tools, vendor/kpress/src; no uv sync or internal scratch fallback.
+External volume mounted; per-worktree Cargo caches.
 
-Dated negatives remain: 81db parent 66/67, 900-second timeout, 4,318 passed/10
-historical control failures/one skip; eac3 parent 66/67, 1,894.707-second wall, same
-timeout, 6,524 passed/four stale math fixtures/one skip; b024 child 68/69,
-2,000.815-second wall, same timeout, 7,200 passed/five failed/33 skipped finished and
-nine unfinished. Prior-head c1/d0/10c hosted successes qualify only their heads:
-37939481227/37939486545/37964872139. Held-font startup attribution remains unresolved
-think-jygq/think-5jr5/think-rxyl; dependency-selection debt think-t1lk. Launch/cache/
-environment/wrapper interruptions are diagnostics, not completed gate verdicts.
+Validation admissions: final parent f378 edit 66/66 PASS, reachable command currently
+running with its actual 900 s timeout; final child 949 local push and actual-head hosted
+qualification pending.
+Run this stack’s broad local gates sequentially.
+PR 480 supplies owner-authorized current quick-suite ceilings 335/360/360/335 s;
+structural reduction owner think-2hm6. Retained old 106-step D cohort 135.17 s / 1.84x
+includes both over-original 143 s readings; current upstream measurement fields remain
+unchanged. Canonical child 110 steps / 52 records / 68 edit / 97 fast / 71 checks.
+Parent 1675 preparation was interrupted for newly merged records, exit 130/cancellation
+receipt, not a source failure.
 
-Main 0f16 PR 475 adds regional n=17 exclusions/validation repairs, not current side/case
-changes or a global optimum.
-Its 204 older unhosted-object disclosure remains intact.
-Daniel 106/152/177 remain improving reported-only V0/C0 candidates under
-#419/think-8sm2; Daniel 102 is superseded history.
-Rehwaldt 68 multivariate material and Wand lower-bound material confer no current-side
-identity. wand125 is a username; the retained packet covers 19/20/26/27/28/29/31 plus
-n=27 follow-up.
-Later Couzo 2d32a6e n=375/378 remain unretained/pending think-1545; older
-ffd900d packet retained.
+Keep dated negatives: parent 5ba9 broad 66/67,32 failed / 16,587 passed / 52 skipped / 1
+xfailed, 1,666.269 s reachable under its then 1800 s timeout.30 failures came from child
+editable imports; corrected four-path exact 31 nodes gave30 PASS / one missing
+bound-consumer declaration.
+That declaration repaired,1 PASS in 2.33 s. Last fixture assumed recursion limit 1000
+while an earlier test raised it to 10000: wrapper now passes real shallow decoding then
+injects a deeper-than-active-limit submitted value, preserving strict production encoder
+refusal. Four refusal controls PASS at default limit in 28.87 s and at limit 10000 in
+6.77 s, 0 type findings; strong review PASS. Child 5386 broad 68/69,reachable 900 s
+timeout: partial 7,567 PASS / 29 SKIP / 4 FAIL / 10 unfinished; no full pytest
+verdict/tracebacks. Four exact worker nodes later PASS (staging 1 in 2.50 s; other 3 in
+17.87 s); load cause unproved, no timeout widening or production patch.
+Other prior negatives/hosted receipts remain dated in the plan/evidence and are not
+green qualification of these amended heads.
+Startup CLS attribution remains think-jygq/5jr5/rxyl.
 
-Selected research next: W7 think-s6np reusable exact active-contact export ->
-independent n=11 octic control -> current RyXu n=102 certificate
-8dc415296f697f5140caea27c7a0193d52deb4e6, contacts/frozen variables/stable confirmed
-seed -> preregistered bounded W6 think-ohhz (input route think-eu89). Historical Daniel
-13ee36e fixture cannot qualify the current pose.
-No driver/contact control/solver/ geometry/Lean/adoption ran this integration slice.
+Remaining owners: pending 13 Couzo offers need independent replay/adoption/atlas
+think-lhtz (open v3); T-128 historical source-house custody think-0mlq (in progress v2).
+T-130 acquisition think-88r0 is closed; acquisition is not adoption.
+Numeric-only exact gaps: 29 think-je8y, 55 think-phh8, 71 think-1blg (open).
+W7 think-s6np reusable driver → independent n=11 octic control → CURRENT RyXu n102
+cert8dc415296f697f5140caea27c7a0193d52deb4e6, contact system/frozen variables/stable
+confirmed seed → preregistered bounded W6 think-ohhz with input think-eu89. Old Daniel
+13ee36e fixture is historical.
+No new driver, contacts, solver campaign, target identification or geometry/adoption
+delivered in this refresh.
 
-Remaining closeout: resolve actual gate findings, amend owned source commits if
-justified, cascade/pin, publish the formal stack with explicit leases, qualify actual
-pushed heads with all eleven full-checkpoint prerequisites plus aggregate and automatic
-checks, update and read back both PRs and beads.
-Preserve negatives and owners; no PR landing authorized.
-
-The slice began 2026-10-09T20:16:15.292030Z. Original Claude wall unrecorded; dated
-shared recovery 16 h 10 m 18.623 s and separate trim 1 h 0 m 19 s are distinct elapsed
-intervals, not summed solver CPU. Final end/wall remains to record.
 Evidence:
-/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-09.
-Active plan: docs/project/specs/active/plan-2026-10-06-exact-side-values.md.
+/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-09,
+with protected notes/receipts; prior recovery-2026-10-08 also retained.
+Source worktrees /Volumes/spud-ext1/agent-source/polynomial-parent-01a118e4 and
+polynomial-catalogue-01a118e4. Do not close unmerged beads or claim pending local/hosted
+gates green.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
