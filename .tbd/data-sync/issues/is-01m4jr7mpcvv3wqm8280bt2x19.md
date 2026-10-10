@@ -5,7 +5,7 @@ title: Keep website publication and frontend validation within their contracts
 kind: bug
 status: in_progress
 priority: 1
-version: 19
+version: 20
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10
 labels:
@@ -15,7 +15,7 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-10T11:12:38.602Z
-updated_at: 2026-10-10T18:38:30.050Z
+updated_at: 2026-10-10T18:44:21.222Z
 started_at: 2026-10-10T11:13:19.000Z
 ---
 Resolve PR 462 publication and frontend findings without relaxing existing contracts. Preserve script inventory refusal, native MathML readiness, stable Atlas geometry, 300 ms startup assertions, all browser checks and current effective PR hard ceiling. Retained fixes cover non-inherited Headroom clearance, concurrent browser-lane startup, canonical render setup and Atlas host reuse. Final hosted gates must pass before closure; full pre-merge checkpoint remains think-xio5.
@@ -36,3 +36,7 @@ Publication and validation receipt, 2026-10-10: approved process batch is publis
 Local validation is incomplete, not an aggregate pass. The canonical pre-push run took 844.48 seconds: 64 prerequisites passed and the sole failed prerequisite was the missing document-map entry. That registry repair then passed check_documentation across 1,992 documents. Resumed reachable behavioral validation timed out at 901.06 seconds after reporting 1,883 passes, 57 failures/errors and 16 skips; it did not produce completed JUnit or final tracebacks. A host snapshot showed load average 184.66 against 10 available CPUs. This is evidence of heavy contention, not a determination that the reported failures are harmless or that the gate passed.
 
 Independent focused evidence remains 118 policy/CLI tests passed, 193 deselected in 22.23 seconds (pr-cost-policy-final2.log), with the previously recorded clean scoped floors and retained timeout/enforcement controls. The PR description now discloses the failed/incomplete broad local validation. All checks on this exact published head remain pending; no aggregate local or hosted success is claimed. Keep think-o2jd and think-ht59 open. Full checkpoint think-xio5, the website epic and scoping follow-up think-9k61 remain open; this bookkeeping update does not close or alter them.
+
+Settled exact-head hosted receipt for 195c809483dbe737ad27bde7021e721a8bf4ee3d on PR462: 29 checks PASS, 2 FAIL, 26 skipped, 0 pending. All publication checks pass. The two red checks are frontend and its dependent packing-required aggregator; there is no remaining wall-policy failure. Frontend functional selection: 408 PASS, 6 skipped in 235.98s. Floor liveness: 56 PASS in 24.48s. Native HTTP startup: 3 PASS, 1 FAIL in 20.61s. Reported total wall is 257.68s. The sole independent failure is the 390px dark HTTP scenario's 423ms longest task against the unchanged 300ms assertion. Startup diagnosis remains with the coordinator/Astra; this administrative update changes no source, assertions, budgets or verdicts. Keep think-o2jd OPEN.
+
+Exact completed check JSON and full frontend failure log are preserved byte-for-byte outside disposable scratch at /Users/levy/.codex/visualizations/2026/10/08/01a11dc7-6f9d-7060-be5c-4cff21839702/process-review/ci-195c80948-all-checks-final.json and /Users/levy/.codex/visualizations/2026/10/08/01a11dc7-6f9d-7060-be5c-4cff21839702/process-review/ci-195c80948-frontend-failure.log. This completed hosted receipt supersedes the preceding pending-head note without erasing the separate incomplete broad local validation history.
