@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-10: eight new issues, unread replies and comments, f
 kind: epic
 status: in_progress
 priority: 1
-version: 35
+version: 36
 delegate: claude-code@vm
 labels:
   - result-import
@@ -47,7 +47,21 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:42:51.218Z
-updated_at: 2026-10-10T20:40:38.812Z
+updated_at: 2026-10-10T22:08:58.681Z
 started_at: 2026-10-10T09:49:24.452Z
 ---
 W1 intake pass run 2026-10-10 on branch claude/determined-rubin-yjfy2a by packing/campaign/result-import.md, section Running an Intake Pass. Owns every item make intake listed as needing an owner on 2026-10-10 (sweep report: 32 unowned items after tbd sync). Children own each import, the ledger bookkeeping and the watched-repository reads. Never merge, never post on an issue without the owner's word, never start a CPU-hour replay without an owner budget.
+
+## Notes
+
+## Handoff, 2026-10-10 about 22:00 UTC (session credit ran out)
+
+Branch claude/determined-rubin-yjfy2a at d2e82048c, draft PR https://github.com/jlevy/squares/pull/487 (its description carries the full handoff). Registered T-128 to T-146; no case ceiling moved (house adoption waits on PR #403, think-fvz4). No lanes are running; all lane work is merged and pushed.
+
+Next, in order:
+1. CI: read the frontend re-run at 6a5c287fe (three reduced-motion tests in tests/test_site_atlas_views.py that pass locally) and hosted CI on the current head.
+2. think-8k76: write the stage 4 review docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md (model: the 488/489 review), decide the per-count credit wording (at 123, 129, 292 no symmetry matches the credited packing one to one), then raise T-146 to V3/C3 with a confirming evidence entry.
+3. Stage 7: reply drafts for #470 #471 #476 #481 #483 #484 #485 #486 #488 #489 are in each answer bead, to post after PR #487 merges; #375's draft in think-mtwe needs its n = 17 paragraph reworded (think-ybmt) and its 20:31Z comment acknowledged.
+4. Follow-up beads: think-ri84, think-ffh8, think-h1ra.
+
+Owner decisions pending: CPU-hour replays (n28+n30 about 7.8 CPU-h, n122 11-23 CPU-h, #446 s(29)); think-sk6b hosted release; ry-xu credit name (think-ijv2); Couzo's uncited 338/340 (RL-9); closing issues before adoption; credit at 70 for T-146; page-budget exceptions vs PR #462; certificate-citation deferrals (ad5fff90d).
