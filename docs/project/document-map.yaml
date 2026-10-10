@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md, role: review, authority: record, lifecycle: retained}
@@ -1229,6 +1230,12 @@ documents:
     authority: record
     lifecycle: retained
 collections:
+  - pattern: packing/contributors/*.md
+    role: registry
+    authority: record
+    lifecycle: maintained
+    contract: packing.squares:Contributor/v1
+    schema: packing/contributors/contributor.schema.yaml
   - pattern: packing/benchmarks/math-startup/experiments/*.md
     role: experiment-record
     authority: record
