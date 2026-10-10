@@ -171,9 +171,10 @@ superseded. Keep the complete results page’s filters unchanged.
 The register currently contains six qualifying entries; the twelve-row limit allows the
 preview to grow as results qualify.
 Each headline links to its canonical result page.
-The atlas preview preserves the original SVG drawings, bound labels, colors, and case
-destinations in six Triangle rows, cases 1 to 36. Both pages use the shared Atlas layout
-and animation engine.
+The atlas preview preserves the original SVG drawings, colors, and case destinations in
+six Triangle rows, cases 1 to 36. Web labels show only the case number and an applicable
+recent-result star; the PDF retains its additional labels.
+Both pages use the shared Atlas layout and animation engine.
 Prepare the remaining drawings during initialization so Show More starts immediately.
 The first click reveals 100 cases; the second reveals all 324. Keep Triangle at each
 stage. At full coverage Show Less restores 36, using the same shared animation.
@@ -356,10 +357,10 @@ Homepage checks assert the section order, all paper cards grouped under **Papers
 project card’s About target, actual preview limits, and both primary buttons.
 About checks assert the retained project content and links, and **About** immediately
 before **GitHub** in the shared top navigation.
-Atlas checks assert complete case coverage, old-link forwarding, reversible homepage the
-homepage stages 36 → 100 → 324 → 36, immediate animation without click-time requests,
-repeated expansion/collapse, reduced motion, and native SVG colors and labels.
-Measure the homepage against the existing two-megabyte page ceiling.
+Atlas checks assert complete case coverage, old-link forwarding, reversible homepage
+stages 36 → 100 → 324 → 36, immediate animation without click-time requests, repeated
+expansion/collapse, reduced motion, and native SVG colors and labels.
+Measure the homepage against the existing 1.3-megabyte page ceiling.
 Check uppercase computed button styles, the legend card’s destination and keyboard
 activation, hero popover actions, expanded Atlas targets for n=53/291/324, centered solo
 cards, and the loaded T-115 result popover’s single title and accessible name.
@@ -380,10 +381,11 @@ verify old addresses, and use the existing Pages deployment workflow.
 Close the epic when all implementation issues and the combined browser review pass.
 Planning completion leaves the implementation issues open.
 
-## Open Questions
+## Remaining Verification
 
-- Final visual review covers compact copy and narrow-screen chart labels.
-  The initial Atlas cases are 1, 5, 11, 17, 21, 53, 211 and 324.
+- Finish hosted checks on the final PR revision.
+- Run the full pre-merge checkpoint tracked by `think-xio5` before merging.
+  The reviewed homepage starts with cases 1 to 36 in six Triangle rows.
 
 ## References
 
