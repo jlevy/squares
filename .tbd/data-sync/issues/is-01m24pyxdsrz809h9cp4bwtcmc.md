@@ -5,15 +5,15 @@ title: "PR139 R1: validate the corrected combined head with the full checkpoint"
 kind: task
 status: closed
 priority: 1
-version: 13
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
+version: 15
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m24nswnk9b76cq0hdgenfceq
 parent_id: is-01m24nswnk9b76cq0hdgenfceq
 created_at: 2026-09-10T03:49:38.352Z
-updated_at: 2026-09-10T08:09:29.875Z
+updated_at: 2026-10-10T23:04:58.719Z
 closed_at: 2026-09-10T08:09:29.874Z
 close_reason: All73 declared checks passed on the exact final combined tree; source identities, raw artifacts and test-lane union admitted.
 resolution: null

@@ -5,8 +5,8 @@ title: "Spec: Generalized square-packing Motion Lab"
 kind: epic
 status: in_progress
 priority: 1
-version: 12
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md
+version: 13
+spec_path: docs/project/specs/paused/plan-2026-08-25-generalized-motion-lab.md
 labels:
   - packing
   - visualization
@@ -24,7 +24,7 @@ child_order_hints:
   - is-01m0yebyctjrg2kkhyqxtp3d4r
 hold: paused
 created_at: 2026-08-26T06:46:06.801Z
-updated_at: 2026-10-10T22:44:19.499Z
+updated_at: 2026-10-10T23:04:23.251Z
 ---
 Implement the linked generalized Motion Lab plan. Phase 1 builds shared scenario and trace contracts, migrates the exact n=5 lab, adds setup-only snapping and free-quench playback, and validates the complete workflow. Phase 2 remains paused until the persistent-contact and rigid-group semantics are specified and independently controlled.
 

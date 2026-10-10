@@ -5,8 +5,8 @@ title: Define shared Motion Lab scenario and trace contracts
 kind: task
 status: closed
 priority: 1
-version: 7
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md
+version: 9
+spec_path: docs/project/specs/paused/plan-2026-08-25-generalized-motion-lab.md
 labels:
   - packing
   - visualization
@@ -22,7 +22,7 @@ dependencies:
     target: is-01m0yeb5drm2xkfnjp9krxvdwx
 parent_id: is-01m0yd38q3mxynbc38k3gyxt7f
 created_at: 2026-08-26T07:07:22.474Z
-updated_at: 2026-08-26T07:21:29.568Z
+updated_at: 2026-10-10T23:04:30.778Z
 closed_at: 2026-08-26T07:21:29.564Z
 close_reason: Added versioned immutable Motion Lab scenario, frame, overlay, request, event, result, and trace contracts with deterministic serialization, strict Phase 1 payload parsing, resource bounds, and focused red-green tests. Fast packing validation passed (144 tests).
 resolution: null

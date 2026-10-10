@@ -5,8 +5,8 @@ title: Resolve parent receipt pins from the repository root
 kind: bug
 status: closed
 priority: 2
-version: 7
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
+version: 8
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md
 delegate: parent_receipt_binding_prep
 labels: []
 dependencies:
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m25430wcdx8wn8f3qs7b4qjv
 parent_id: null
 created_at: 2026-09-10T07:37:11.955Z
-updated_at: 2026-10-06T08:50:00.258Z
+updated_at: 2026-10-10T23:05:23.772Z
 closed_at: 2026-10-06T08:50:00.258Z
 close_reason: "Done: ParentInputPins in packing/devtools/wall_owner_parent_inputs.py on origin/main carries an explicit absolute repository_root and refuses a relative one (lines 81-84, 163-167); its parent think-fx2y is closed."
 resolution: null

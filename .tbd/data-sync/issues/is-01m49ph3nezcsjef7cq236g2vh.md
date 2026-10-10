@@ -5,8 +5,8 @@ title: "A5: per-family byte budgets and 2,000,000-byte hard limit in check_publi
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
+version: 7
+spec_path: docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md
 delegate: codex-pr395-site-review
 labels:
   - pages
@@ -15,7 +15,7 @@ parent_id: is-01m49ph0abvy6j16zcq4jse39y
 hold: null
 hold_until: null
 created_at: 2026-10-06T22:49:41.806Z
-updated_at: 2026-10-08T13:09:30.538Z
+updated_at: 2026-10-10T23:05:44.798Z
 started_at: 2026-10-06T22:54:04.650Z
 closed_at: 2026-10-08T13:09:30.538Z
 close_reason: |

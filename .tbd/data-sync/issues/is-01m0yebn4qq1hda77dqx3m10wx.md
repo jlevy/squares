@@ -5,8 +5,8 @@ title: Validate and document the generalized Motion Lab workflow
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-25-generalized-motion-lab.md
 labels:
   - packing
   - visualization
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m0yebyctjrg2kkhyqxtp3d4r
 parent_id: is-01m0yd38q3mxynbc38k3gyxt7f
 created_at: 2026-08-26T07:08:10.243Z
-updated_at: 2026-08-26T09:03:32.147Z
+updated_at: 2026-10-10T23:04:38.162Z
 closed_at: 2026-08-26T09:03:32.135Z
 close_reason: "Phase 1 validated: 40 focused Motion Lab tests and the full 32-stage packing gate pass; browser QA, deterministic replay, independent endpoint verification, documentation, accessibility, and D-338 timeline virtualization are complete."
 resolution: null

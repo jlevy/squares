@@ -5,8 +5,8 @@ title: Finalize and merge the combined n11 milestone and consolidate takeaways
 kind: task
 status: closed
 priority: 1
-version: 20
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
+version: 21
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies:
   - type: blocks
@@ -29,7 +29,7 @@ child_order_hints:
   - is-01m24pz58h8cybgv362apngbdn
   - is-01m24pz7cfbh7nxwa9mbv3xza3
 created_at: 2026-09-10T03:29:25.138Z
-updated_at: 2026-09-10T15:44:17.988Z
+updated_at: 2026-10-10T23:04:49.779Z
 closed_at: 2026-09-10T15:44:17.987Z
 close_reason: PR139 merged at3a18a05a with the exact reviewed head and passing tree; the fresh postmerge branch is active.
 resolution: null
