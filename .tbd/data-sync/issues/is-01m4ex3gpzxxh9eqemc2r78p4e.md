@@ -5,7 +5,7 @@ title: Verify the website layouts, math, previews and Headroom interactions
 kind: task
 status: in_progress
 priority: 2
-version: 17
+version: 18
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -15,11 +15,11 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:20:48.607Z
-updated_at: 2026-10-09T04:13:07.566Z
+updated_at: 2026-10-10T02:00:26.223Z
 started_at: 2026-10-08T23:50:51.591Z
 ---
 Verify the combined local website draft: final homepage order, S4+ results capped at12 with unchanged complete-results defaults, shared headings/buttons, linked centered legend, PDFs/Papers and inline video/Visualize, project/About placement and contribution structure, complete Atlas/Results, immediate native-SVG homepage expansion using shared SiteAtlasView into full triangle, reversible collapse, themes/reduced-motion/noJS, hero/case popovers and distinct Frontier-row/Atlas-tile destinations. About omits Reading and Research; Papers retains papers/tutorial/PDFs without Frontier or Workbench cards. Cover legacy/canonical routes, narrow case math/layout, unique accessible result titles and Headroom across shared shells. Keep reviewed evidence and local preview available. Scientific PDF description edit is excluded. Complete combined publication gates separately before publishing.
 
 ## Notes
 
-Current local draft verified through all owner tweaks: originalhero/exactintro, nativeSVG preview/themes/sharedtriangle expansion, compact headings/spacing, linkedLegend, inline video and chevrons. Prior hero/actions/Atlasnavigation18focused checks and26fetchfallbackNode passed; mergedFrontier64source/24browser passed; canonicalconsumers14,forwardNode20,resultlinks3 andAtlas862357bytebudget passed. Latest increment:21sharedengineNode +3source/browserAtlaschecks +15About/Paperssourcechecks passed; live1280/390themes/case291popover/collapse and refresheddedicatedcontrols/URL smoke passed. Homepage1,220,393bytes<2MB. Root reviewed fresh triangle/mobile/preview screenshots; Astra boundedsource review clean after scroll anchoring/collapse order/nativeglyph crop fixes. About readableparagraphs/ContributeH2/documents; Papers onlypapers/tutorial/PDFs, noFrontier/Workbenchcards. Core/papersHTML/Workbench priorfullbuild and latestindex/Atlas/About/Papersrefresh remain served8766; scientificPDFs untouched. Combined publicationverification stillopen: older13wide-block matrix and edit/push/fast/full gates not rerun after latestintegration; prior unrelated URL-history t117/t118 origin-main drift and expired suite_dcost measurement remain unreconciled. Source uncommitted; no publication or merge.
+User requested commit/updatePR462. Effective editing/workflow/subagent grants verified. Integrated origin/main6af6aadf3 via merge85dde7db2 after stashing full local website draft; reapplied draft and resolved fiveconflicts preserving current-main scientific/provenance/native-row behavior. Twelve focused conflict checks passed; I1–I3 source fixes tracked/closedthink-mbp9, Astra aggregate source approved. Homepage preview regenerated1,172,462bytes and3-run1280/390load completed before drive disconnected. Required /Volumes/spud-ext1 is absent and diskutil lists no external disk. Paused disk-heavy validation per suppliedAGENTS scratch rule and asked user to reconnect. Implementation remains preserved staged/unstaged in managed worktree plus stashbackup; not committed or pushed; remote draftPR462 still planning-only. Resume required pre-push validation, normal commit/hooks, push, PRdescription update and all hostedCI checks after reconnection.
