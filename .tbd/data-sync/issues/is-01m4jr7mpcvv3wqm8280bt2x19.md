@@ -5,7 +5,7 @@ title: Keep website publication and frontend validation within their contracts
 kind: bug
 status: in_progress
 priority: 1
-version: 18
+version: 19
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10
 labels:
@@ -15,7 +15,7 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-10T11:12:38.602Z
-updated_at: 2026-10-10T17:57:26.273Z
+updated_at: 2026-10-10T18:38:30.050Z
 started_at: 2026-10-10T11:13:19.000Z
 ---
 Resolve PR 462 publication and frontend findings without relaxing existing contracts. Preserve script inventory refusal, native MathML readiness, stable Atlas geometry, 300 ms startup assertions, all browser checks and current effective PR hard ceiling. Retained fixes cover non-inherited Headroom clearance, concurrent browser-lane startup, canonical render setup and Atlas host reuse. Final hosted gates must pass before closure; full pre-merge checkpoint remains think-xio5.
@@ -30,3 +30,9 @@ Completed exact34 hosted receipt:408functional PASS/6skip,4HTTP PASS,56floor-liv
 Frozen follow-up for draft PR462 after the completed 34e5581ad6d0192fc236be469c563bbc3f24d8ce receipt: all 408 functional site tests (six skips), four HTTP startup checks, 56 floor-liveness checks and 29 other hosted checks pass; only the 399.44-second frontend wall verdict failed. The subsequent systematic process review replaces only completed-run PR wall-ratio hang classification with tracked advisory reporting under think-ht59. Numerical budgets, production 300 ms startup assertions, the 45-second per-test guard and real subprocess timeout/cap failures are unchanged; full/strict and explicit budget enforcement remain independent.
 
 Frozen policy/CLI verification: 118 passed, 193 deselected in 22.23 seconds; scoped types, Ruff, diff and declaration/register checks pass. Astra approved. The test-only readiness barrier preserves the actual 0.25-second process timeout and child/output/leak assertions. The overlapping case-matrix snapshot candidate was rejected and its sole file restored: matched cold pair 47.57 to 62.80 seconds did not establish a gain. Existing negative allocator/native-CSS experiments remain rejected. The PR description now summarizes final behavior and these receipts rather than listing experiment chronology. Integrated local push validation and the new exact-head hosted run remain pending; keep this bead open. Full pre-merge checkpoint think-xio5 and the implementation epic remain separately open.
+
+Publication and validation receipt, 2026-10-10: approved process batch is published at commit 195c809483dbe737ad27bde7021e721a8bf4ee3d on draft PR #462 (https://github.com/jlevy/squares/pull/462). Astra's final bounded review approved the retained eight-file batch and the subsequent document-map/SYNOPSIS registration repair, with no remaining findings in that scope. Both selector experiments remain rejected and reverted; the original conservative selector is retained.
+
+Local validation is incomplete, not an aggregate pass. The canonical pre-push run took 844.48 seconds: 64 prerequisites passed and the sole failed prerequisite was the missing document-map entry. That registry repair then passed check_documentation across 1,992 documents. Resumed reachable behavioral validation timed out at 901.06 seconds after reporting 1,883 passes, 57 failures/errors and 16 skips; it did not produce completed JUnit or final tracebacks. A host snapshot showed load average 184.66 against 10 available CPUs. This is evidence of heavy contention, not a determination that the reported failures are harmless or that the gate passed.
+
+Independent focused evidence remains 118 policy/CLI tests passed, 193 deselected in 22.23 seconds (pr-cost-policy-final2.log), with the previously recorded clean scoped floors and retained timeout/enforcement controls. The PR description now discloses the failed/incomplete broad local validation. All checks on this exact published head remain pending; no aggregate local or hosted success is claimed. Keep think-o2jd and think-ht59 open. Full checkpoint think-xio5, the website epic and scoping follow-up think-9k61 remain open; this bookkeeping update does not close or alter them.
