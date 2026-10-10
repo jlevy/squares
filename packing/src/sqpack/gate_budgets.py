@@ -36,16 +36,15 @@ so the stale rule reads the band's low edge and the drift rule its high edge. Th
 eleven hosted runs and 58.75 to 70.50 s on the next three, on unchanged steps, and no
 single record can hold both regimes inside 0.6x and 1.5x.
 
-The two record-relative rules, drift and stale, may be declared advisory on hosted
-pull-request runs under `policy.pull_request_relative_rules`, the way `pull_request_walls`
-declares an advisory wall: the findings are computed, printed word for word and marked
-advisory, the run is not failed for them, and the declaration must name the bead that
-tracks switching them back on. The ceiling is never relaxed. The measurement behind it is
-2026-09-30: on unchanged code, the `checks` tier read 59.4 to 133.0 s and shard C 84.5 to
-172.5 s across one day's hosted runs, 2.0 to 2.2x on identical work, which no pair of
-edges around a point or a band can hold without also letting a real 2x regression
-through. A single hosted reading cannot tell a slow draw from a slow change; the ceiling
-can still refuse a slow run, and that is the rule a pull request is held to.
+Hosted pull-request cost findings may be declared advisory under tracked policy:
+record-relative findings under `pull_request_relative_rules`, and completed-run ceiling
+findings under `pull_request_ceiling`. Both stay computed, printed and annotated; the
+tracker owns replacing uncontrolled runner walls with attributable measurements. On
+2026-09-30 unchanged code varied 2.0 to 2.3x across hosted draws. By 2026-10-10 a completed
+399s frontend run with all 408 tests and four HTTP budgets passing was being called a
+hang solely because it exceeded twice a 165s cost ceiling. A finished run's wall cannot
+establish that it hung. Actual subprocess deadlines and the retained per-test guard
+bound hangs; main, scheduled and explicit `--enforce-budget` runs keep cost enforcement.
 
 A tier that has never been read at its reference shape may say so instead of leaving its
 record empty without comment. `pending_measurement` names the bead that owns the first
@@ -210,20 +209,18 @@ class Advisory:
     #: What is relaxed, and what still fails a pull-request run under the relaxation, as
     #: the sentence `advisory_note` renders. The defaults are the drift and stale rules'.
     rules: str = "the drift and stale rules"
-    still_fails: str = "Only the ceiling fails a pull-request run."
+    still_fails: str = "Functional failures and subprocess timeouts remain enforced."
 
 
 @dataclass(frozen=True)
 class CeilingAdvisory:
-    """The ceiling's relaxation on hosted pull-request runs, with the hang detector it keeps.
+    """Completed-run cost advisory on pull requests, retaining the per-test guard.
 
-    A tier wall above `hang_ratio` times its ceiling, or one test call of at least
-    `per_test_hang_seconds`, still fails the run: what the relaxation gives up is the
-    verdict on runner speed, not the verdict on a run that has stopped making progress.
+    Subprocess deadlines detect commands that fail to finish. A finished tier's wall
+    remains cost evidence regardless of its ratio to the recorded ceiling.
     """
 
     advisory: Advisory
-    hang_ratio: float
     per_test_hang_seconds: float
 
 
@@ -244,7 +241,8 @@ class Policy:
     #: pull-request runs; None is enforcing. The ceiling is outside this.
     pull_request_relative_rules: Advisory | None = None
     #: Set when the register declares the ceiling, and the per-test call-wall rule,
-    #: advisory on hosted pull-request runs up to a hang detector; None is enforcing.
+    #: advisory on hosted pull-request runs, retaining command/per-test guards; None
+    #: is enforcing.
     pull_request_ceiling: CeilingAdvisory | None = None
 
 
@@ -560,42 +558,42 @@ def _relative_rules_from(raw: object) -> Advisory | None:
 def _ceiling_rule_from(raw: object) -> CeilingAdvisory | None:
     """The ceiling's enforcement on pull requests: None when enforcing.
 
-    Held to the contract of `policy.pull_request_relative_rules` -- an advisory declaration
-    names its tracking bead and its reason, an enforcing one names neither -- and it must
-    also declare the hang detector that keeps failing a run the relaxation should not hide.
+    Advisory cost needs an owner and reason. The retained per-test guard is independent
+    of tier cost; an obsolete completed-wall ratio must not silently reinstate it.
     """
     where = "policy.pull_request_ceiling"
     if raw is None:
         return None
     entry = _require_mapping(raw, where)
+    if "hang_ratio" in entry:
+        raise BudgetError(
+            f"{where}.hang_ratio is no longer supported: a completed-run wall cannot "
+            "establish a hang; use subprocess deadlines and the per-test guard"
+        )
     relaxed = _relative_rules_from(
         {key: entry.get(key) for key in ("enforcement", "tracking_bead", "advisory_reason")}
         | {"enforcement": entry.get("enforcement", "enforcing")}
     )
-    hang, per_test = entry.get("hang_ratio"), entry.get("per_test_hang_seconds")
+    per_test = entry.get("per_test_hang_seconds")
     if relaxed is None:
-        if hang is not None or per_test is not None:
+        if per_test is not None:
             raise BudgetError(
                 f"{where} is enforcing and still declares a hang detector; remove "
-                "hang_ratio and per_test_hang_seconds when enforcement returns"
+                "per_test_hang_seconds when enforcement returns"
             )
         return None
-    ratio = _positive(hang, f"{where}.hang_ratio")
-    if ratio <= 1.0:
-        raise BudgetError(f"{where}.hang_ratio must exceed 1, found {ratio:g}")
+    per_test_seconds = _positive(per_test, f"{where}.per_test_hang_seconds")
     return CeilingAdvisory(
         advisory=Advisory(
             tracking_bead=relaxed.tracking_bead,
             reason=relaxed.reason,
             rules="the tier ceilings and the per-test call-wall rule",
             still_fails=(
-                f"A wall above {ratio:g}x its ceiling, or a test call of "
-                f"{_positive(per_test, f'{where}.per_test_hang_seconds'):g}s or more, "
-                "still fails a pull-request run."
+                "Functional failures, subprocess timeouts, explicit timeout caps, and "
+                f"test calls of {per_test_seconds:g}s or more still fail a pull-request run."
             ),
         ),
-        hang_ratio=ratio,
-        per_test_hang_seconds=_positive(per_test, f"{where}.per_test_hang_seconds"),
+        per_test_hang_seconds=per_test_seconds,
     )
 
 
@@ -1278,9 +1276,10 @@ def judge(
 
     `pull_request` says the run is a hosted pull-request job. When the register declares
     `policy.pull_request_relative_rules` advisory, the drift and stale findings of such a
-    run are reported under that bead and do not fail it; the ceiling still does. `force`
-    is an operator asking the question deliberately and overrides the relaxation, as it
-    overrides the reference-shape match.
+    run are reported under that bead and do not fail it. `pull_request_ceiling` makes
+    completed-run ceiling findings advisory independently of their ratio. `force` is an
+    operator asking deliberately and overrides both relaxations and reference matching.
+    A full checkpoint stays enforcing even if invoked inside a pull-request job.
     """
     top = _named_steps(steps, wall_seconds)
     if tier_id is None:
@@ -1324,16 +1323,14 @@ def judge(
     failures = list(found.failures)
     notes = list(found.notes)
     advisory_failures: tuple[str, ...] = ()
-    advisory = policy.pull_request_relative_rules if pull_request and not force else None
+    # Full checkpoints keep cost enforcement even when invoked inside a PR job.
+    advisory_run = pull_request and not force and tier.id != "full"
+    advisory = policy.pull_request_relative_rules if advisory_run else None
     if advisory is not None and found.relative:
         failures = list(found.ceiling)
         advisory_failures = found.relative
-    ceiling_rule = policy.pull_request_ceiling if pull_request and not force else None
-    if (
-        ceiling_rule is not None
-        and found.ceiling
-        and wall_seconds <= ceiling_rule.hang_ratio * tier.ceiling_seconds
-    ):
+    ceiling_rule = policy.pull_request_ceiling if advisory_run else None
+    if ceiling_rule is not None and found.ceiling:
         failures = [failure for failure in failures if failure not in found.ceiling]
         advisory_failures = (*found.ceiling, *advisory_failures)
         advisory = ceiling_rule.advisory

@@ -367,9 +367,12 @@ def _process_is_running(pid: int) -> bool:
 
 @pytest.mark.slow
 @pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
-def test_run_timeout_terminates_child_and_reports_captured_output(tmp_path: Path) -> None:
+def test_run_timeout_terminates_child_and_reports_captured_output(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     child_pid_path = tmp_path / "child.pid"
     child_ready_path = tmp_path / "child.ready"
+    parent_ready_path = tmp_path / "parent.ready"
     leaked_path = tmp_path / "child-leaked"
     child_script = "\n".join(
         (
@@ -400,6 +403,7 @@ def test_run_timeout_terminates_child_and_reports_captured_output(tmp_path: Path
             "while not ready_path.exists():",
             "    time.sleep(0.01)",
             "print('parent captured output', flush=True)",
+            f"__import__('pathlib').Path({str(parent_ready_path)!r}).write_text('ready')",
             "time.sleep(30)",
         )
     )
@@ -411,15 +415,37 @@ def test_run_timeout_terminates_child_and_reports_captured_output(tmp_path: Path
         environment=os.environ.copy(),
     )
 
-    started = time.monotonic()
-    with pytest.raises(validate.StepFailureError) as captured:
-        validate._run(
-            context,
-            (sys.executable, "-c", parent_script),
-            cwd=tmp_path,
-            timeout_seconds=0.25,
-        )
-    elapsed = time.monotonic() - started
+    real_popen = subprocess.Popen
+    timeout_started = 0.0
+
+    def start_when_ready(*args: Any, **kwargs: Any) -> subprocess.Popen[str]:
+        """The retained 0.25s timeout starts after both interpreters establish the probe."""
+        nonlocal timeout_started
+        process = real_popen(*args, **kwargs)
+        deadline = time.monotonic() + 5
+        try:
+            while not parent_ready_path.exists():
+                if process.poll() is not None:
+                    pytest.fail("timeout control exited before parent/child readiness")
+                if time.monotonic() >= deadline:
+                    pytest.fail("timeout control did not become ready within 5s")
+                Event().wait(0.01)
+        except BaseException:
+            validate._stop_process_group(process)
+            raise
+        timeout_started = time.monotonic()
+        return process
+
+    with monkeypatch.context() as patch:
+        patch.setattr(validate.subprocess, "Popen", start_when_ready)
+        with pytest.raises(validate.StepTimeoutError) as captured:
+            validate._run(
+                context,
+                (sys.executable, "-c", parent_script),
+                cwd=tmp_path,
+                timeout_seconds=0.25,
+            )
+    elapsed = time.monotonic() - timeout_started
 
     assert 1 <= elapsed < 3
     assert "command timed out after 0.25 seconds" in str(captured.value)
@@ -429,7 +455,7 @@ def test_run_timeout_terminates_child_and_reports_captured_output(tmp_path: Path
     while _process_is_running(child_pid) and time.monotonic() < deadline:
         time.sleep(0.01)
     assert not _process_is_running(child_pid)
-    time.sleep(1)
+    # A dead process cannot perform the later write; no fixed post-stop delay is needed.
     assert not leaked_path.exists()
 
 
@@ -1223,7 +1249,7 @@ def _one_slow_call(seconds: float) -> str:
 def test_a_slow_call_on_a_hosted_pull_request_is_reported_below_the_hang_limit(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """Under `policy.pull_request_ceiling` (think-6erz) a 16 s call on a pull request is
+    """Under `policy.pull_request_ceiling` (think-ht59) a 16 s call on a pull request is
     reported with a Cost warning and does not fail the shard."""
     relaxed = validate._pull_request_ceiling()
     assert relaxed is not None, "the live register no longer relaxes the per-test rule"
@@ -2181,6 +2207,112 @@ def test_an_advisory_budget_verdict_prints_its_findings_and_passes(
     # `read_tier_walls` must still count this log as a reading at the reference shape.
     assert "reported and not enforced" not in printed
     assert "THE TIER IS OUTSIDE ITS DECLARED COST BAND:" not in printed
+
+
+@pytest.mark.parametrize(
+    "error_type", [None, validate.StepFailureError, validate.StepTimeoutError]
+)
+def test_completed_pull_request_cost_cannot_hide_a_step_failure_or_timeout(
+    monkeypatch: pytest.MonkeyPatch,
+    error_type: type[validate.StepFailureError] | None,
+) -> None:
+    """Completed >2x cost reports advisory; an actual failed or timed-out step stays red."""
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    register = gate_budgets.load()
+    tier = register.tier("frontend")
+    assert tier is not None
+    budget = gate_budgets.judge(
+        register,
+        tier.id,
+        wall_seconds=tier.ceiling_seconds * 2.3,
+        steps=(("site layout", tier.ceiling_seconds * 2.3),),
+        jobs=tier.reference.jobs,
+        inner_jobs=tier.reference.inner_jobs,
+        cpus=tier.reference.cpus,
+        pull_request=True,
+    )
+    assert budget.status == "advisory", budget
+
+    def action(_context: validate.Context) -> str:
+        if error_type is not None:
+            raise error_type("retained functional failure or subprocess timeout")
+        return "408 functional tests and four HTTP budgets passed"
+
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+    )
+    result = validate._execute_step(validate.Step("site layout", action), context)
+    summary = validate.RunSummary(
+        results=[result],
+        wall_seconds=budget.wall_seconds,
+        selected_count=1,
+        total_count=1,
+        budget=budget,
+    )
+    stdout = io.StringIO()
+    stderr = io.StringIO()
+    with redirect_stdout(stdout), redirect_stderr(stderr):
+        status = validate._render_text(summary, strict=False)
+    assert status == (0 if error_type is None else 1)
+    assert "FAIL (advisory, not enforced)" in stdout.getvalue()
+    if error_type is None:
+        assert "::warning title=Tier cost band (advisory under think-ht59)" in stdout.getvalue()
+    else:
+        assert result.status == "failed"
+        assert "retained functional failure or subprocess timeout" in stderr.getvalue()
+
+
+@pytest.mark.parametrize(
+    ("arguments", "event", "expected_status"),
+    [
+        (("--frontend",), "pull_request", 0),
+        (("--frontend",), "push", 1),
+        (("--frontend",), "schedule", 1),
+        ((), "pull_request", 1),
+        (("--strict",), "pull_request", 1),
+        (("--frontend", "--enforce-budget"), "pull_request", 1),
+    ],
+)
+def test_actual_cli_cost_advisory_scope_excludes_full_strict_and_forced_runs(
+    monkeypatch: pytest.MonkeyPatch,
+    arguments: tuple[str, ...],
+    event: str,
+    expected_status: int,
+) -> None:
+    """The real CLI event/flag path reports PR cost while retaining checkpoint enforcement."""
+    register = gate_budgets.load()
+    tier = register.tier("frontend" if "--frontend" in arguments else "full")
+    assert tier is not None
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("GITHUB_EVENT_NAME", event)
+    monkeypatch.delenv("PACKING_VALIDATE_ENFORCE_BUDGET", raising=False)
+    monkeypatch.delenv("PACKING_VALIDATION_ARTIFACT_DIR", raising=False)
+    monkeypatch.setattr(validate.os, "process_cpu_count", lambda: tier.reference.cpus)
+
+    def completed(selected: Sequence[validate.Step], *_args: Any) -> validate.RunSummary:
+        return validate.RunSummary(
+            results=[validate.StepResult(step.name, "passed", 0.0) for step in selected],
+            wall_seconds=tier.ceiling_seconds * 2.3,
+            selected_count=len(selected),
+            total_count=len(validate.STEPS),
+        )
+
+    monkeypatch.setattr(validate, "_run_selected", completed)
+    status, printed, stderr = _invoke(
+        *arguments,
+        "--jobs",
+        str(tier.reference.jobs),
+        "--inner-jobs",
+        str(tier.reference.inner_jobs),
+    )
+    assert status == expected_status, (printed, stderr)
+    assert stderr == ""
+    if expected_status == 0:
+        assert "FAIL (advisory, not enforced)" in printed
+        assert "::warning title=Tier cost band (advisory under think-ht59)" in printed
+    else:
+        assert "THE TIER IS OUTSIDE ITS DECLARED COST BAND" in printed
+        assert "the budget verdict alone failed" in printed
 
 
 def test_a_hosted_pull_request_is_read_from_the_runner_s_own_variables() -> None:

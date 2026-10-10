@@ -1470,10 +1470,10 @@ def test_an_advisory_relative_rule_with_no_bead_store_fails_under_ci_and_skips_l
     assert "think-aaaa" in printed
 
 
-def test_the_live_relaxation_names_a_live_bead_and_keeps_the_hang_detector() -> None:
+def test_the_live_relaxation_tracks_cost_and_keeps_the_per_test_guard() -> None:
     """The register as checked in: both relaxations advisory under beads the store
-    confirms are open. Since 2026-10-05 (think-6erz) a pull-request run just over a ceiling
-    is advisory; one over the hang ratio still fails."""
+    confirms are open. A completed pull-request run over twice its ceiling still reports
+    cost advisory; actual command deadlines and the per-test guard remain enforced."""
     register = live()
     declared = register.policy.pull_request_relative_rules
     assert declared is not None, "the live register no longer declares the relaxation"
@@ -1497,8 +1497,12 @@ def test_the_live_relaxation_names_a_live_bead_and_keeps_the_hang_detector() -> 
     over = on_a_pull_request(tier.ceiling_seconds * 1.01)
     assert not over.failed, over
     assert any("ceiling" in finding for finding in over.advisory_failures), over
-    hung = on_a_pull_request(tier.ceiling_seconds * ceiling.hang_ratio * 1.01)
-    assert hung.failed, hung
+    completed = on_a_pull_request(tier.ceiling_seconds * 2.3)
+    assert not completed.failed, completed
+    assert any("ceiling" in finding for finding in completed.advisory_failures), completed
+    assert completed.advisory is not None
+    assert completed.advisory.tracking_bead == "think-ht59"
+    assert ceiling.per_test_hang_seconds == 45.0
 
 
 def test_the_day_of_2026_09_30_is_judged_on_code_not_on_the_runner() -> None:
@@ -1609,7 +1613,7 @@ def test_the_day_of_2026_09_30_is_judged_on_code_not_on_the_runner() -> None:
         )
 
 
-# --- the ceiling, advisory on pull requests up to a hang detector (think-6erz, 2026-10-05)
+# --- completed-run cost advisory on pull requests (think-ht59, 2026-10-10)
 
 
 def ceiling_relaxed(
@@ -1618,7 +1622,7 @@ def ceiling_relaxed(
     enforcement: str | None = "advisory",
     bead: str | None = "think-aaaa",
     reason: str | None = "a fabricated owner decision",
-    hang: str | None = "2.0",
+    hang: str | None = None,
     per_test: str | None = "45.0",
 ) -> Path:
     """The fabricated register (ceiling 200 s, record 150 s) with
@@ -1641,7 +1645,7 @@ def ceiling_relaxed(
     return spec
 
 
-def test_a_ceiling_breach_on_a_pull_request_is_advisory_below_the_hang_ratio(
+def test_a_completed_ceiling_breach_on_a_pull_request_is_reported_advisory(
     tmp_path: Path,
 ) -> None:
     """#356's shard C, 171.2 s against 168 s with every test green, is the case: over the
@@ -1655,38 +1659,61 @@ def test_a_ceiling_breach_on_a_pull_request_is_advisory_below_the_hang_ratio(
     assert verdict.advisory.tracking_bead == "think-aaaa"
     note = gate_budgets.advisory_note(verdict.advisory)
     assert "the tier ceilings and the per-test call-wall rule are advisory" in note
-    assert "above 2x its ceiling" in note
+    assert "subprocess timeouts" in note
+    assert "45s or more" in note
+    assert "above 2x" not in note
 
 
-def test_a_pull_request_wall_above_the_hang_ratio_still_fails(tmp_path: Path) -> None:
-    """The relaxation gives up the verdict on runner speed, not on a run that has stopped
-    making progress: above twice the ceiling the ceiling failure stands."""
-    register = gate_budgets.load(ceiling_relaxed(tmp_path))
-    verdict = judge_pull_request(register, 200.0 * 2.0 + 1.0)
-    assert verdict.failed, verdict
-    assert any("ceiling" in failure for failure in verdict.failures)
-
-
-def test_the_ceiling_relaxation_applies_only_to_a_pull_request_run_and_yields_to_force(
+def test_a_completed_pull_request_wall_above_twice_the_ceiling_is_advisory(
     tmp_path: Path,
 ) -> None:
-    """Main, scheduled and deep runs keep the ceiling, and an operator asking on purpose
-    with --enforce-budget gets the enforced verdict."""
+    """A completed slow draw is cost evidence, while command timeouts bound hangs."""
     register = gate_budgets.load(ceiling_relaxed(tmp_path))
-    assert judge_pull_request(register, 210.0, pull_request=False).failed
-    assert judge_pull_request(register, 210.0, force=True).failed
+    register = replace(
+        register,
+        policy=replace(
+            register.policy,
+            pull_request_relative_rules=gate_budgets.Advisory(
+                "think-bbbb", "record-relative findings are advisory"
+            ),
+        ),
+    )
+    verdict = judge_pull_request(register, 200.0 * 2.3)
+    assert verdict.status == "advisory", verdict
+    assert not verdict.failures
+    assert any("ceiling" in finding for finding in verdict.advisory_failures)
+    assert len(verdict.advisory_failures) == 2, verdict
+    assert verdict.wall_seconds == pytest.approx(460.0)
+    assert verdict.ceiling_seconds == 200.0
+    assert any("230%" in line for line in gate_budgets.render(verdict))
+
+
+@pytest.mark.parametrize(
+    ("tier_id", "pull_request", "force"),
+    [("fast", False, False), ("fast", True, True), ("full", True, False)],
+)
+def test_the_ceiling_relaxation_keeps_main_full_and_explicit_enforcement(
+    tmp_path: Path, tier_id: str, *, pull_request: bool, force: bool
+) -> None:
+    """Main/scheduled, full (even inside PR), and --enforce-budget keep cost enforcement."""
+    register = gate_budgets.load(ceiling_relaxed(tmp_path))
+    register = replace(register, tiers=(replace(register.tiers[0], id=tier_id),))
+    verdict = judge_pull_request(register, 460.0, pull_request=pull_request, force=force)
+    assert verdict.failed, verdict
+    assert any("ceiling" in failure for failure in verdict.failures), verdict
+    assert not verdict.advisory_failures
 
 
 def test_the_ceiling_relaxation_is_held_to_the_tracked_advisory_contract(
     tmp_path: Path,
 ) -> None:
-    """No bead, no reason or no hang detector is refused; an enforcing declaration that
-    still names a tracker or a hang detector is refused; enforcing with neither is None."""
-    for missing in ("bead", "reason", "hang", "per_test"):
+    """Missing ownership or the retained per-test guard is refused, as is an obsolete
+    tier-wall ratio that would silently reinstate the rejected completed-run verdict."""
+    for missing in ("bead", "reason", "per_test"):
         with pytest.raises(BudgetError):
             gate_budgets.load(ceiling_relaxed(tmp_path, **{missing: None}))
-    with pytest.raises(BudgetError, match="must exceed 1"):
-        gate_budgets.load(ceiling_relaxed(tmp_path, hang="1.0"))
+    with pytest.raises(BudgetError, match=r"hang_ratio.*no longer supported"):
+        gate_budgets.load(ceiling_relaxed(tmp_path, hang="2.0"))
     with pytest.raises(BudgetError, match="still declares a hang detector"):
         gate_budgets.load(
             ceiling_relaxed(tmp_path, enforcement="enforcing", bead=None, reason=None)

@@ -97,6 +97,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md, role: review, authority: record, lifecycle: retained}

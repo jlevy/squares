@@ -209,7 +209,12 @@ def test_saved_reader_faces_match_native_metric_geometry(
 @pytest.fixture(scope="module")
 def amended_result_pages(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     root = tmp_path_factory.mktemp("result-address-notice")
-    records = {page.name: page for page in render_overview.result_fragments()}
+    records = {
+        page.name: page
+        for page in render_overview.iter_result_fragments(
+            result_ids=frozenset({"T-116", "T-110"})
+        )
+    }
     for name in ("result/t-116.html", "result/t-110.html"):
         target = root / name
         target.parent.mkdir(parents=True, exist_ok=True)
