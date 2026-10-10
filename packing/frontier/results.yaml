@@ -13025,6 +13025,7 @@ results:
       published: '2026-10-08'
     evidence:
     - E-couzo-451-rational-report
+    - E-evand-465-record-hunt-report
     artifacts:
     - packing/resources/web/couzo-exact-refinements-2026-10-08/README.md
     - packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/case-inputs.json
@@ -13051,7 +13052,12 @@ results:
       The source author copied this repository''s sqpack verifier, so the exact_verify route overlaps
       that source checker. The second maintained rational-geometry route is a separate deciding implementation;
       both routes share certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
-      method. No two independent methods, human oversight or optimality is claimed.'
+      method. No two independent methods, human oversight or optimality is claimed.
+
+
+      On 2026-10-09 Evan Daniel''s issue 465 certificate hunt1_n155.cert was retained and replayed here: it states exactly this entry''s n155 side and differs from Couzo''s certificate
+      only in the free square and two flat-motion squares its report lists (E-evand-465-record-hunt-report).
+      It moves no rung.'
     next_rung: Preserve and validate each complete historical source house before any selected-house
       replacement, then independently review source-specific adoption and confirming records. Final
       exact-head CI remains required.
@@ -13164,3 +13170,70 @@ results:
     next_rung: Independently review the retained replay, preserve each complete historical source house
       (Ryan Xu at 84, 86, 105 and 175; Evan Daniel at 270) before any selected-house replacement, then
       record source-specific adoption and confirming evidence. Final exact-head CI remains required.
+  - id: T-131
+    kind: upper-bound
+    registered: '2026-10-09'
+    headline: "`s(132) ≤ 11.987099332245063…` from Evan Daniel's record hunt"
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(132) <= 11.987099332245063227179742877435. Complete native feasibility outcomes
+      are retained separately; the selected standing case is unchanged pending independent review and
+      record review.
+    scope:
+      n_values:
+      - 132
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: A smaller finite construction side, 4.23e-3 below the case's ceiling; no lower bound
+        or optimum.
+      scored: '2026-10-09'
+      by: think-iyij Daniel record-hunt import
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel record hunt 2026-10-09]'
+      published: '2026-10-09'
+    evidence:
+    - E-evand-465-record-hunt-report
+    artifacts:
+    - packing/resources/web/evand-record-hunt-2026-10-09/README.md
+    - packing/resources/web/evand-record-hunt-2026-10-09/acquisition/claims.json
+    - packing/resources/web/evand-record-hunt-2026-10-09/source/search/packer/candidates/hunt1_n132.cert
+    - packing/resources/web/evand-record-hunt-2026-10-09/receipts/exact-certification.json.xz
+    - packing/devtools/evand_hunt_reports.py
+    controls:
+    - packing/tests/test_evand_hunt_reports.py
+    notes: 'The certificate, its 80-digit KKT point, binary64 input and solver report are retained
+      unchanged under the source''s MIT licence. A separate complete repository replay is retained: the
+      n132 and n155 positives and four duplicate-square and outside-container controls passed their required
+      outcomes on both routes, 123486 pair decisions; summed over the six jobs, the receipt records 38.66
+      route CPU seconds and 38.79 job wall seconds, the longest job 7.72 seconds. The n132 positive clears
+      every wall by 1/200000000000000000000 and every pair by just under 1e-20.
+
+
+      The exact side lies 84571108928763690161985083/20000000000000000000000000000 below the case''s
+      selected and verified ceiling, Evan Daniel''s exact optimum of Francisco Couzo''s packing (T-098),
+      which stays retained with its own replay. The source reports a different local minimum, reached
+      from Couzo''s packing by an uphill excursion.
+
+
+      The same release''s n155 certificate states exactly
+      the n155 side of Couzo''s issue451 certificate (T-128) and shares 152 of its 155 exact poses;
+      the three differing indices are exactly those its source report labels as a free square and two
+      flat-motion squares. A connecting motion and equivalence of local minima have not been verified.
+      T-128''s side is pending adoption,
+      not a value a case record holds, so the n155 certificate is an evidence update to T-128 rather
+      than a new entry, and issue 465 maps it there.
+
+
+      The source checks with its own verify_cert.py and verify_cert2.py, not run here. The two maintained
+      routes, the sqpack rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis method.
+      The author''s KKT, reduced-Hessian and jamming statements are numerical and not checked. No two
+      independent methods, human oversight or optimality is claimed.'
+    next_rung: Independently review the retained replay and compare the latest reported n132 candidates,
+      including https://github.com/jlevy/squares/issues/476, before choosing a selected-house replacement.
+      Keep T-098's certificate as the historical house at 132, then record any source-specific adoption
+      and confirming evidence. Final exact-head CI remains required.
