@@ -265,6 +265,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-125](packing/frontier/RESULTS.md) | 51, 70, 84, 86, 88, 102, 103, 105, 108, 123, 126, 127, 129, 130, 131, 146, 153, 175, 179, 236, 258, 261, 263, 267, 295 | `V3` | `C3` | `S3` | `previously-published` | Complete independently reviewed exact replay confirms finite feasibility of all 25 rational source certificates. |
 | [T-126](packing/frontier/RESULTS.md) | 51 | `V3` | `C3` | `S3` | `previously-published` | Complete independently reviewed exact replay confirms the undilated 51-square construction ceiling s(51) <= (16+5sqrt(2))/3. |
 | [T-127](packing/frontier/RESULTS.md) | 88, 108, 123, 129, 130, 153, 154, 179, 180, 199, 207, 208, 209, 236, 237, 238, 239 | `V3` | `C3` | `S3` | `previously-published` | Independently re-implemented exact verification confirms finite feasibility of all seventeen rational source certificates; fourteen strictly improve both prior finite upper lanes. |
+| [T-133](packing/frontier/RESULTS.md) | 40 | `V3` | `C3` | `S3` | `previously-published` | s(40) > 335427/50000 = 6.70854, by Guzhou0806, published on 10 October 2026 as release n40-670854-20261010 of Guzhou0806/n40-square-packing and reported on jlevy/squares#485. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -333,7 +334,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 132 | 132 registered, 102 by others |
+| Frontier results | 133 | 133 registered, 103 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 

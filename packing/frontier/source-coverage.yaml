@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:SourceCoverage/v1
   schema: source-coverage.schema.yaml
   status: enforced
-last_reviewed: '2026-10-07'
+last_reviewed: '2026-10-10'
 coverage_scope: 'Current public upper-bound catalogues and first-party result releases known to this
   project, the Schadt n=29 witness-contract regression source, and the September 2026 external executable
   lower-bound certificate releases. Their proof obligations and assurance are tracked by evidence.yaml;
@@ -1196,7 +1196,9 @@ sources:
     it held the verified lane there too, decided by sqverify-fast, until the check2 certificate mixed_n19_L4825
     (T-103) took both later that day. At n26 to n30, n39 and n41 the source''s mixed certificates
     of 6 October (T-105 to T-111, the 6 October check2 packet) now hold both lanes, decided here by
-    sqverify-fast. At n59, n66, n77, n78 and n90 a stronger report holds the case, so those five case
+    sqverify-fast. At n40 Guzhou0806''s clipped-corner transfer on this source''s rect_n40_L67 density
+    (T-133, the guzhou-n40-clipped-corner-2026-10-10 packet) holds both lanes from 10 October, and the
+    case keeps this source''s 67/10 as history. At n59, n66, n77, n78 and n90 a stronger report holds the case, so those five case
     records do not cite this source. The request says each directory carries a tarball, and none does.'
 - id: wand125-exact-covers-2026-10-01
   title: Mixed covers for s(59) = 8 and s(77) = 9
@@ -3206,6 +3208,35 @@ sources:
     custody and the exact mass and declared-net premises are accepted; an eight-direction maintained
     sample is diagnostic, and the author's full positives and 32-direction controls do not supply a
     maintained capture or whole-net controls. Replay and adoption remain under think-r333.
+- id: guzhou-n40-clipped-corner-2026-10-10
+  title: Strict lower bound for forty unit squares by a clipped-corner transfer, issue485
+  role: source-repository
+  url: https://github.com/Guzhou0806/n40-square-packing/tree/e5abeb4d078a5c5b35df6204dd9b93378e5a7880
+  local: resources/web/guzhou-n40-clipped-corner-2026-10-10/
+  source_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+  scope:
+    n_values:
+    - 40
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-040.md
+  - frontier/results.yaml
+  evidence:
+  - E-n040-guzhou-clipped-corner-report
+  - E-n040-guzhou-clipped-corner-sqverify-fast-replay
+  - E-n040-guzhou-clipped-corner-finite-audit
+  notes: Release n40-670854-20261010 at e5abeb4d, retrieved at 2026-10-10T10:28Z for jlevy/squares#485,
+    with 20 of its 36 files retained, wand125's rect_n40_L67 density and the vendored copy of this
+    repository's sqverify_fast pinned by digest, and the release ZIP's CI receipt kept beside the tree's
+    local one. It reports s(40) > 335427/50000 and the weaker full-core s(40) > 67000 sqrt(6400006889)/798988091.
+    The 401-direction nodal statement was replayed here in full with sqverify-fast, the producer's own
+    nodal code, and the transfer's finite steps were decided again by a first-party exact audit; the
+    mathematics was reviewed on the same day with no blocking defect. Both lanes of n-040.md move to
+    335427/50000 (T-133); T-068's 67/10 on the same density stays as history. The repository's earlier
+    commit 485dd8f, with s(40) > 33509/5000 on the standard net, is pinned by history and not retained.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

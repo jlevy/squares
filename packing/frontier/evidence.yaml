@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-07'
+last_reviewed: '2026-10-10'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -29248,4 +29248,250 @@ evidence:
       positives and a review that reads this certificate remain pending under think-r333, priced at
       about 4.3 CPU-hours. The shared crate establishes no independent implementation. No standing
       bound or rating changes; the 1163/200 report and its evidence stand.
+    source_reviewed: '2026-10-10'
+
+  - id: E-n040-guzhou-clipped-corner-report
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-sqverify-fast, V-guzhou-n40-finite-py]
+    limitations: >-
+      Guzhou0806/n40-square-packing at e5abeb4d078a5c5b35df6204dd9b93378e5a7880
+      (committed 2026-10-10T06:47:01Z), which the release n40-670854-20261010 names
+      (n40-670854.zip, 203,095 bytes, SHA-256 dbefee86...), reported on jlevy/squares#485,
+      claims s(40) > 335427/50000 = 6.70854, unrestricted rotations, strict, and the weaker
+      full-core s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908, which needs no
+      density peak. Both rest on wand125's rect_n40_L67 rectangle density, unchanged
+      (SHA-256 71011d03..., byte for byte the copy the 2026-10-01 packet retains, pinned
+      by digest in the release and not copied into this packet), and on the nodal
+      statement that every closed square of side 9977/10000 inside [0, 67/10]^2 at each of
+      the 401 directions 2 arctan(83 j/80000), j = 0 to 400, captures mass at least
+      10001/10000. The stronger bound also rests on the density's essential supremum, at
+      most H = 2818711359413/10^9, and a continuous-angle transfer with a clipped-corner
+      loss bound at h = 514946944479/10^15, which gives each scaled unit square of side
+      335000/335427 a capture of at least 99979/100000; forty of them exceed the mass
+      3999/100 by 1/625. The source decides the nodal statement with this repository's
+      sqverify-fast, vendored byte for byte from ef79288a4 (crate source digest
+      d97758bb...), on a derived input (SHA-256 49f696a4...) whose certificate metadata
+      sets the 401-direction net, and the finite steps with its own exact Python,
+      verifier/finite.py, both driven by verifier/run.py. It reports two complete runs
+      with 401 rows identical apart from timing, 32,970,910 boxes and least certified
+      bound 1.000100000471634 at r = 73: the producer's local run in the tree's results/
+      (60.06 s of wall time at four threads, 234.58 CPU seconds), and GitHub Actions run
+      38032128403 on e5abeb4d, whose receipt the ZIP carries in place of the tree's
+      (72.35 s); both receipts are retained (GN-3 of the review). Its label
+      CODE_DISTINCT_FULL means distinct from the Tokoharu C++ route its author used in
+      research, which the release does not ship, and not distinct from this repository's
+      crate. The repository's only earlier commit, 485dd8f (2026-10-07), claimed a weaker
+      s(40) > 33509/5000 on the standard 201-direction net; it is pinned by history and
+      not retained. wand125's review comment on the issue (2026-10-10T07:53:18Z), which
+      reports a third run of the release's entry point and an independent exact check of
+      the transfer, is a third party's report and is not retained as a replay. No packing,
+      optimality or priority claim is made. This is the public-claim entry; the replays
+      here are E-n040-guzhou-clipped-corner-sqverify-fast-replay and
+      E-n040-guzhou-clipped-corner-finite-audit.
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude, model Fable 5.1, maximum thinking effort), the mathematical lane
+        of stage 4 of the issue 485 import (think-3oi5), prompted separately from the
+        records lane, before any replay here and before retention
+        (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md)
+      note: >-
+        No blocking defect. Re-derived: the fold by the density's D4 symmetry, one parent at
+        a time; the case split between the upper node, whose concentric reference lies
+        inside the parent, and the lower node, whose angular error is below beta = 2
+        arctan((D - h)/(1 + D h)) and whose reference is legal because B <= q and cos + sin
+        increases on [0, pi/4]; the clipped-corner bound e^2/(2 c s) by the vertex cone and
+        subadditivity, and its monotonicity; g <= H almost everywhere; the counting 40 chi >
+        M; the strict endpoint by compactness and attainment; and the full-core closed
+        form. Every finite quantity was recomputed in exact rationals with the reviewer's
+        own code, six of the 401 directions, the tightest among them, were reproduced on the
+        reviewed build, and four controls refused. Findings GN-1 to GN-7, none blocking:
+        PROOF.md states the clipped pieces as four disjoint triangles, true here but not
+        needed (GN-1); h sits 8.2e-16 below its containment limit, so the chain holds in
+        exact rationals only (GN-2); the ZIP's results/ are the CI run's, not the tree's
+        (GN-3); a replay here with sqverify-fast is the producer's own nodal code (GN-4);
+        the census tooling did not read a format T metadata net (GN-5, fixed in 0b5a62ca5);
+        that path has no review of its own (GN-6, recorded on V-sqverify-fast); and
+        n-040.md's body still said 6.695 (GN-7, corrected at registration). The complete
+        401-direction run was the records lane's and is
+        E-n040-guzhou-clipped-corner-sqverify-fast-replay.
+    source_reviewed: '2026-10-10'
+
+  - id: E-n040-guzhou-clipped-corner-sqverify-fast-replay
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay: >-
+      From packing/, in a tree whose crate is reviewed source (.venv/bin/python3 -m
+      devtools.sqverify_fast_census --source-digest prints its source_sha256 and exits 0;
+      these receipts' build is d97758bb..., the source at 910b6b12c), after cargo build
+      --release --locked in sqverify_fast/ (toolchain 1.98.0): .venv/bin/python3 -m
+      devtools.audit_clipped_corner_transfer run --binary
+      sqverify_fast/target/release/sqverify-fast --out DIR --threads 2 regenerates the
+      401-direction input from the retained density, refusing it unless its SHA-256 is
+      49f696a4..., the input both release receipts name, runs sqverify-fast --candidate
+      derived-401.json --n 40 --side 67/10 --directions all --threshold 10001/10000
+      --confirm on it, and runs controls A to D on the same binary, writing each receipt
+      with its wall and CPU time to DIR; .venv/bin/python3 -m
+      devtools.audit_clipped_corner_transfer check-replay --receipts DIR --rank must then
+      print REPLAY_HOLDS: all 401 directions verified, summary VERIFIED, exit 0, the
+      premises those of the finite audit, every row equal to both release receipts' apart
+      from timing and every even row to the retained 201-direction census row of
+      rect_n40_L67, and each control refused, or re-netted, as the review's replay
+      contract says, every refusal's exact capture evaluated again apart from the crate
+      by sqpack.rectangle_density. Without --receipts it judges the retained receipts,
+      receipts/replay-401.jsonl.gz, runs.json, control-selection.json and the four
+      control receipts in the guzhou-n40-clipped-corner-2026-10-10 packet, and its
+      --output equals the packet's receipts/replay-check.json; tests/test_audit_clipped_corner_transfer.py
+      holds the tool to its controls.
+    replay_status: passed
+    verifiers: [V-sqverify-fast, V-audit-clipped-corner-transfer]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        The net-and-shrink measure-capture statement of SOUNDNESS.md (The Claim; format T,
+        with Tokoharu's centre domain) on the net of 401 half-angle tangents of step
+        83/80000 that the derived input's certificate metadata sets, applied to wand125's
+        rect_n40_L67: every closed square of side 9977/10000 inside [0, 67/10]^2 at each
+        net direction captures mass at least 10001/10000. With Guzhou0806's clipped-corner
+        transfer no 40 unit squares pack in a square of side 335427/50000, so s(40) >
+        335427/50000; with the full-core argument alone, s(40) > 67000
+        sqrt(6400006889)/798988091.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        SOUNDNESS.md's theorem and lemmas, accepted with the crate by
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md, and lemma N0 and
+        the declared-net change by
+        docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md; the
+        format T metadata-net admission path, the transfer, the clipped-corner bound and the
+        strict endpoint, read in
+        docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md (items 2
+        to 7, GN-6); the receipts named in replay.
+      assumptions:
+        - The density is nonnegative and exact, of total mass 3999/100 < 40, which admission recomputes from the derived input; the derived input is the retained density's 480 positive rows with the net in its certificate metadata, which the first-party audit regenerates and binds to the digest both release receipts name.
+        - Every angle and legal centre is covered by the 401-direction net the metadata sets, at core side 9977/10000 with format T's centre domain, whose premises (B(1 + D) = 798988091/800000000 < 1, the last tangent 83/200 past tan(pi/8) and at most 1/2) admission checks in exact rationals, under lemma N0.
+        - The transfer's finite steps, the density's essential supremum at most 2818711359413/10^9, the upper node's reference inside its parent, the clipped-corner loss bound and the counting margin, which E-n040-guzhou-clipped-corner-finite-audit decides in exact rationals; and the transfer's argument, which the 10 October review re-derived.
+        - Binary64 arithmetic has IEEE-754 semantics with directed rounding per operation, as SOUNDNESS.md's Floating Point section uses it.
+      audit_record: docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md
+    limitations: >-
+      sqverify-fast decided the 401-direction nodal statement on 2026-10-10, built with
+      cargo build --release --locked -j 2 at rustc 1.98.0 (88d9e12ae 2026-08-18) from crate
+      source d97758bb..., the source at 910b6b12c, which the 6 October declared-net
+      soundness review accepted and which is unchanged since ef79288a4, the commit the
+      release vendors; the binary 567a0fd5... is the one that review built. Its input was
+      regenerated here from the retained density, SHA-256 49f696a4..., the input both
+      release receipts name. Admission: format T, net_origin metadata, 401 directions at
+      step 83/80000, mass 3999/100, 480 source rectangles and 3,792 expanded, Tokoharu's
+      centre domain, threshold 10001/10000. Every direction verified, summary VERIFIED,
+      exit 0: r = 0 by the exact-event axis sweep over 4,879,681 vertices, bound
+      1.0012141064171602, and the other 400 by interval branch and bound over 32,970,910
+      boxes, greatest depth 30, least certified bound 1.000100000471634 at r = 73, in
+      299.5 s of wall time and 241.0 CPU seconds at two threads on a shared 4-core
+      x86-64 Linux container. Every row equals both release receipts' apart from timing,
+      and the 201 even rows equal the retained 3 October census row of rect_n40_L67. This
+      is the producer's own nodal code re-run: the release ran this crate, so the replay
+      reproduces the release's nodal verification and is not an independent decision of
+      it (GN-4 of the review); it is independent of wand125's and Tokoharu's checkers,
+      which never ran at 401 directions. No second method decided the nodal statement.
+      Controls on the same binary: every weight scaled by 99/100 refused at r = 73 and 220
+      (exit 1, exact captures 0.999322755117 and 0.999227715635 at the witnesses); every
+      weight scaled by the census rule's near-threshold factor at the centre of least
+      exact capture over the 400 oblique least-bound leaves (r = 220, capture
+      1.0013165658) refused at r = 220 (exit 1, 1.0000999998 at the witness); the
+      metadata removed, admitted on the standard 201-direction net, which is another
+      claim; and angle_count 201 at step 83/80000 refused at admission (exit 2). Each
+      refusal's exact capture was evaluated again by sqpack.rectangle_density, which was
+      written before the crate. The census route for this certificate has not run: the
+      census driver reads a format T metadata net since 0b5a62ca5, and no census case
+      holds the derived input. The transfer's finite steps are
+      E-n040-guzhou-clipped-corner-finite-audit's.
+    source_reviewed: '2026-10-10'
+
+  - id: E-n040-guzhou-clipped-corner-finite-audit
+    claim: derived-structure
+    scope: {n_values: [40]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay: >-
+      From packing/: uv run --frozen --all-extras --group dev python -m
+      devtools.audit_clipped_corner_transfer check --output OUT.json must print
+      FINITE_STEPS_HOLD, every check ok and controls E to H refused, and OUT.json must
+      equal the packet's receipts/finite-audit.json in the
+      guzhou-n40-clipped-corner-2026-10-10 packet byte for byte;
+      tests/test_audit_clipped_corner_transfer.py holds the tool to its controls.
+    replay_status: passed
+    verifiers: [V-audit-clipped-corner-transfer]
+    proof:
+      source: packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/PROOF.md
+      theorem: >-
+        If every closed square of side 9977/10000 inside [0, 67/10]^2 at each of the 401
+        directions 2 arctan(83 j/80000), j = 0 to 400, captures at least 10001/10000 of
+        wand125's rect_n40_L67 density, then no 40 unit squares pack in a square of side
+        335427/50000, so s(40) > 335427/50000; and, by the full-core argument from the same
+        hypothesis alone, s(40) > 67000 sqrt(6400006889)/798988091.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations, under the one hypothesis named.
+      pinpoints: >-
+        PROOF.md, whose argument the 10 October review re-derived (items 3 to 7: the D4
+        fold, the case split at delta0 = 2 arctan h, the legality of both references, the
+        clipped-corner cone bound and its monotonicity, the counting and the strict
+        endpoint, and the full-core closed form); the finite quantities of its items 1 and
+        5; the audit's receipt receipts/finite-audit.json in the packet.
+      assumptions:
+        - JSON decimals read as their literal values with Fraction, and Python's unbounded integers, are exact.
+        - The essential supremum of a finite sum of indicator densities is attained on an open cell of the arrangement and equals the greatest sum over the half-open stacks at the lower-left corners, which the review proves.
+        - The 401-direction nodal statement, the theorem's one hypothesis, which this audit does not decide; E-n040-guzhou-clipped-corner-sqverify-fast-replay discharges it.
+      audit_record: docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md
+      conditional_on:
+        - hypothesis: the 401-direction nodal statement
+          discharged_by: [E-n040-guzhou-clipped-corner-sqverify-fast-replay]
+    limitations: >-
+      The finite steps of the transfer, decided on 2026-10-10 in exact rationals from the
+      retained density and the release's parameters by
+      devtools.audit_clipped_corner_transfer, written without opening the release's
+      verifier/finite.py and sharing no code with it (its docstring is the read log): 480
+      positive rows, mass 3999/100, 3,840 D4 images and 3,792 distinct rectangles after
+      merging, the merged density invariant under each of the eight maps and of integral
+      3999/100; the exact essential supremum 2818.71135941178..., below H =
+      2818711359413/10^9 by 1.215e-9, and H reproduced by rounding the merged densities up
+      to 10^-9; the net's premises; q = 335000/335427 >= B; the upper node's containment
+      B(cos delta0 + sin delta0) <= q at h = 514946944479/10^15, with slack 1.63e-15; b =
+      41804244441680000/80000042740596391757; chi = 0.999790035571... >= 99979/100000;
+      40 chi - M = 0.00160142285...; 40 x 99979/100000 - 3999/100 = 1/625; and (L/gamma)^2 =
+      28729630924721000000/638381969559824281, the full-core closed form squared, above
+      6.70848908^2. Every value equals the finite block of both release receipts, and the
+      parameters, digests and nodal premises of both agree with it. Controls, each
+      refused: E, H lowered by 2/10^9, fails the density bound; F, X = 335428/50000, fails
+      at every admissible h, the margin at most -0.00998; G, h + 10^-15, fails the
+      containment; H, the 201-direction net at the same h, gives chi = -0.956. It shares
+      with finite.py the definition of the density, its D4 expansion and the transfer's
+      formulas, and no code. It decides the transfer's finite steps and no coverage: by
+      itself it proves only the implication from the nodal statement, which
+      E-n040-guzhou-clipped-corner-sqverify-fast-replay decides. It is recorded as
+      structure and not as a bound because it decides no bound alone; the result's
+      confirmation is read from the nodal decision, the part of the claim closest to the
+      producer's code (epistemics.md, Which Code Confirmed It).
     source_reviewed: '2026-10-10'

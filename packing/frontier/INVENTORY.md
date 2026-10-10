@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **472** evidence records. **291** are formal; **284** of those were established here.
-- **173** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **475** evidence records. **293** are formal; **286** of those were established here.
+- **174** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **41** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -52,8 +52,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-rectangle-2026-09-28-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | `V-tokoharu-verify-cpp` |
 | `E-wand125-rectangle-2026-09-28-monotone-report` | 0 | lower-bound | reported | - | here | - | previously-published | no code | `V-tokoharu-verify-cpp` |
 | `E-wand125-rectangle-2026-09-28-source-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | `V-tokoharu-verify-cpp`, `V-audit-wand125-rectangles` |
-| `E-wand125-rectangle-2026-10-01-report` | 4 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-tokoharu-verify-cpp` |
-| `E-wand125-rectangle-2026-10-01-source-replay` | 4 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | `V-tokoharu-verify-cpp`, `V-audit-wand125-rectangles` |
+| `E-wand125-rectangle-2026-10-01-report` | 3 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-tokoharu-verify-cpp` |
+| `E-wand125-rectangle-2026-10-01-source-replay` | 3 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | `V-tokoharu-verify-cpp`, `V-audit-wand125-rectangles` |
 | `E-n019-wand125-rect-48175-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | `V-sqverify-fast` |
 | `E-n020-wand125-rect-48975-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | `V-sqverify-fast` |
 | `E-n026-wand125-rect-55325-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | `V-sqverify-fast` |
@@ -495,13 +495,16 @@ results, it is a statement about what this repository has itself examined.
 | `E-couzo-460-followup-rational-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 | `E-evand-465-record-hunt-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 | `E-wand125-fine-net-n29-582-followup-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | `V-wand125-sqverify-proof-net` |
+| `E-n040-guzhou-clipped-corner-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-sqverify-fast`, `V-guzhou-n40-finite-py` |
+| `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | `V-sqverify-fast`, `V-audit-clipped-corner-transfer` |
+| `E-n040-guzhou-clipped-corner-finite-audit` | 0 | derived-structure, conditional on the 401-direction nodal statement, discharged by `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-audit-clipped-corner-transfer` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 177, verified 291
-- **method**: exact-algebraic 113, interval-certified 162, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 177
-- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 413
-- **relationship to the producer's code**: generator 5, independent-implementation 164, not-applicable 22, same-implementation 258, shared-components 17, unknown-historical 6
+- **assurance**: numerically-checked 4, reported 178, verified 293
+- **method**: exact-algebraic 114, interval-certified 163, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 178
+- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 416
+- **relationship to the producer's code**: generator 5, independent-implementation 165, not-applicable 22, same-implementation 260, shared-components 17, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

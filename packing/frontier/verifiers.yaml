@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-07'
+last_reviewed: '2026-10-10'
 verifiers:
   # --- External programs -------------------------------------------------------------
   - id: V-tokoharu-verify-cpp
@@ -520,6 +520,38 @@ verifiers:
         path: packing/resources/web/n17-guzhou-r071-2026-09-30/n17-square-packing/certificates/R071-C029/run_public.js
         revision: 8c11f6962506940c5de67a9fa73b3d1e2e151196
         note: R071's public launcher, which checks the package, builds verify.cpp and runs replay.js at two partitions
+
+  - id: V-guzhou-n40-finite-py
+    program: verifier/finite.py, run beside the vendored sqverify-fast by verifier/run.py
+    author: Guzhou0806
+    provenance: external
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The release's exact-rational checks of the clipped-corner transfer's finite steps
+      for s(40) > 335427/50000: the density's D4 expansion and mass, its essential
+      supremum by two sweeps, the reference-square containment, the clipped-corner bound,
+      the counting margin and the full-core closed form; run.py drives it with the
+      401-direction nodal run and writes results/verification.json.
+    source:
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/finite.py
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/run.py
+    versions:
+      - sha256: 6046849f25beeb3491789f2dd0a2c59e5ce51696e1078c201c410c8f1affc861
+        revision: e5abeb4d078a5c5b35df6204dd9b93378e5a7880
+        note: finite.py
+      - sha256: 4efa0d97dfb0cc0dcce172dfd31c9bb2f4547cfb472d4bde1e84b78695181485
+        revision: e5abeb4d078a5c5b35df6204dd9b93378e5a7880
+        path: packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/run.py
+        note: run.py
+    note: >-
+      Read in full by the 10 October 2026 review of the release
+      (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) and not
+      run here. Its nodal step is this repository's own sqverify-fast, vendored byte for
+      byte, so the release's nodal verification is V-sqverify-fast's; the finite steps
+      were decided again here by V-audit-clipped-corner-transfer, written without opening
+      this file.
 
   - id: V-burns-n17-verify-py
     program: verify-n17-lower-bound-4_4811.py
@@ -1141,6 +1173,34 @@ verifiers:
       implementations of every primitive: they share this repository's exact clipping,
       closed-cover and collision kernels, which the source bundles too.
 
+  - id: V-audit-clipped-corner-transfer
+    program: devtools.audit_clipped_corner_transfer
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides in exact rationals the finite steps of Guzhou0806's clipped-corner transfer
+      for s(40) > 335427/50000 on the retained rect_n40_L67 density: its D4 expansion,
+      mass and exact essential supremum, the net's premises, the transfer's scalar chain
+      and the full-core closed form, each held to both release receipts, with controls E
+      to H. It also derives the 401-direction input, drives a reviewed sqverify-fast build
+      on it with controls A to D, and judges those receipts, re-evaluating each control's
+      exact capture by sqpack.rectangle_density; there it checks premises and receipts and
+      decides no coverage.
+    source:
+      - packing/devtools/audit_clipped_corner_transfer.py
+      - packing/tests/test_audit_clipped_corner_transfer.py
+    independence_record: packing/devtools/audit_clipped_corner_transfer.py
+    note: >-
+      Its module docstring is its read log: written on 2026-10-10 from the review of the
+      release and its scratch measurements, reading the release's parameters and receipts
+      as data and never opening verifier/finite.py, verifier/run.py, verifier/prepare.py,
+      verifier/release.py, tests/test_finite.py or PROOF.md. It shares with finite.py the
+      definition of the density, its D4 expansion and the transfer's formulas, and no
+      code.
+
   # --- First-party programs: premise checks and replay drivers ------------------------
   - id: V-evand-exact-certificates
     program: devtools.evand_exact_certificates
@@ -1269,8 +1329,9 @@ verifiers:
 
   - id: V-sqverify-fast
     program: >-
-      sqverify-fast, run at every direction of a certificate's net (the standard 201, or
-      the net a format M file declares) by devtools.sqverify_fast_census
+      sqverify-fast, run at every direction of a certificate's net (the standard 201, the
+      net a format M file declares, or the net a format T file's certificate metadata
+      sets) by devtools.sqverify_fast_census or another first-party driver
     author: Squares Project (Levy)
     provenance: first-party
     language: [Rust, Python]
@@ -1278,8 +1339,10 @@ verifiers:
     role: decides
     summary: >-
       Decides a measure-capture lower-bound certificate of format T, M or L on the
-      201-direction net, or of format M on the uniform net its file declares (proof_net,
-      lemma N0): exact admission of its premises, then an exact-event vertex sweep
+      201-direction net, of format M on the uniform net its file declares (proof_net,
+      lemma N0), or of format T on the uniform net its certificate metadata sets (D and
+      angle_count, admitted under lemma N0's premises): exact admission of its premises,
+      then an exact-event vertex sweep
       at the axis and outward-rounded interval branch and bound at every other direction,
       every shrunk square at every centre of its domain capturing at least the threshold.
     source:
@@ -1297,7 +1360,16 @@ verifiers:
       accepted by the soundness review of 6 October 2026
       (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md),
       for a declared net once the control's exact evaluator read that net (its DR-1),
-      which the same day's re-check confirmed. Its census drives the binary, keeps every
+      which the same day's re-check confirmed. Its format T metadata-net path, by which a
+      format T file's certificate block sets D and angle_count, has no review of its own:
+      lemma N0 is stated for every net admission accepts, and the review of 10 October
+      2026 of Guzhou0806's s(40) bound
+      (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md, its
+      GN-6) read the admission path and every use of the admitted step and found the
+      admitted net used wherever the net enters; admission refuses a metadata net that
+      stops short of pi/4 (control D there). Since 0b5a62ca5 the census driver and the
+      control evaluator read such a net as admission does (that review's GN-5), and no
+      census case holds one yet. Its census drives the binary, keeps every
       direction's receipt and puts negative controls on a certificate: for format M the
       original and a near-threshold mutant at its least-bound direction, and since the
       review of 6 October of FC-1's fix
