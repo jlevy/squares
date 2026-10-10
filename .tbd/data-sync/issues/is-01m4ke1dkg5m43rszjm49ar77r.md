@@ -5,7 +5,7 @@ title: Review and repair the website development and CI critical path
 kind: feature
 status: in_progress
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
 delegate: codex@spud10
 labels:
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T17:33:43.407Z
-updated_at: 2026-10-10T18:13:13.767Z
+updated_at: 2026-10-10T18:38:31.485Z
 started_at: 2026-10-10T17:35:10.785Z
 ---
 User requests a systematic review of why routine website iteration consumed hours, followed by development-process or CI fixes. Delegate independent analysis of workflow/CI architecture and reachable-test over-selection; coordinator rolls up evidence and implements the smallest justified changes. Capture command wall, repeated work, scope/coverage and failure classification; preserve scientific contracts and assert equivalence before performance claims. Current website PR462 remains separately tracked under think-o2jd; do not close on a report alone.
@@ -40,3 +40,9 @@ One optional host snapshot during the gate showed load averages 102.13/87.44/64.
 Smallest follow-up: reuse select_for_paths for local push prerequisites and behavioral tests from the same complete changed-path set, then audit and split policy/tooling _CORE attribution. Preserve unknown/unclaimed/empty-path fallback, all unattributed checks, old/new rename/delete paths, scientific verifier/certificate/source and shared-core coverage, Workbench render inputs, JS/CSS/probe/toolchain coverage, mixed website/scientific edits, and budget/CLI enforcement contracts. Existing scoped-selection negative controls are the starting coverage contract. Complete required PR CI and full/strict checkpoints remain intact. No implementation, new benchmark framework or overall acceleration claim is part of this rollup.
 
 Host-capacity caveat and recommendation: the existing process gate records 10 available CPUs, outer jobs=10 and inner jobs=3; a single contemporaneous snapshot had load averages 102.13/87.44/64.48. This is evidence of substantial host contention, not proof that every validator or test caused the cost. memory_pressure reported 48% free on 32 GiB, and cumulative swap/compression counters do not establish current memory exhaustion. In the scoped-prerequisite follow-up, account for available host capacity and avoid launching simultaneous host-wide validators; preserve explicitly selected deadlines, limits and complete scientific coverage. Do not kill unrelated threads, add thresholds or claim elapsed savings from selection counts. No further investigation or implementation was performed.
+
+Publication and validation receipt, 2026-10-10: approved process batch is published at commit 195c809483dbe737ad27bde7021e721a8bf4ee3d on draft PR #462 (https://github.com/jlevy/squares/pull/462). Astra's final bounded review approved the retained eight-file batch and the subsequent document-map/SYNOPSIS registration repair, with no remaining findings in that scope. Both selector experiments remain rejected and reverted; the original conservative selector is retained.
+
+Local validation is incomplete, not an aggregate pass. The canonical pre-push run took 844.48 seconds: 64 prerequisites passed and the sole failed prerequisite was the missing document-map entry. That registry repair then passed check_documentation across 1,992 documents. Resumed reachable behavioral validation timed out at 901.06 seconds after reporting 1,883 passes, 57 failures/errors and 16 skips; it did not produce completed JUnit or final tracebacks. A host snapshot showed load average 184.66 against 10 available CPUs. This is evidence of heavy contention, not a determination that the reported failures are harmless or that the gate passed.
+
+Independent focused evidence remains 118 policy/CLI tests passed, 193 deselected in 22.23 seconds (pr-cost-policy-final2.log), with the previously recorded clean scoped floors and retained timeout/enforcement controls. The PR description now discloses the failed/incomplete broad local validation. All checks on this exact published head remain pending; no aggregate local or hosted success is claimed. Keep think-o2jd and think-ht59 open. Full checkpoint think-xio5, the website epic and scoping follow-up think-9k61 remain open; this bookkeeping update does not close or alter them.
