@@ -5,7 +5,7 @@ title: "Stage 4-5: independently review and adopt the pending upper-bound report
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:51:43.927Z
-updated_at: 2026-10-10T17:25:27.583Z
+updated_at: 2026-10-10T18:41:47.664Z
 started_at: 2026-10-10T09:52:52.837Z
 ---
 The register holds rational upper-bound reports by others at V0/C0 whose next_rung is an independent review of the retained replay and a selected-house decision: T-128 (Couzo, eight), T-130 (Couzo, five), T-131 (Daniel, n = 132), and this pass's #470, #476, #481, #483 and #484 once registered. Several counts now carry more than one candidate (132: T-098 house, T-131, #476, #470; 237, 263, 270, 303: #476 and #481; 267: #470, #476). For each count: the smallest certificate whose complete two-route replay passed, a mapped W2 review of that replay (think-mt6e's rule: verified lane only on a replay here and a mapped review), the earlier house kept as history, and the case record's reported and verified ceilings moved together. Mirror the Gupta adoption (PR #448, #459: confirm_gupta_records.py). Coordinate with PR #403 / #435, which own canonical exact-value integration on the case records.
@@ -71,3 +71,5 @@ Registered at V3/C3, each with its reported atom carrying the review as external
 Decision to review: check_certificate_citations fails any verified, replayed certificate no case record cites, so V3/C3 without case edits could not pass --records. Commit ad5fff90d adds packing/devtools/certificate-citation-deferrals.yaml: each orphan named with its citing results, this bead, blocked_on jlevy/squares#403 and a date; a deferral fails once a case cites it, a named result stops citing it, or 30 days pass. Nine confirming entries are deferred. When the adoption round adds them to the case records, remove each deferral in that change (the check forces it). Revert ad5fff90d and the deferral entries if the owner prefers the failure.
 
 Also: importer comparison() fix for L15 (tied) and the signed case difference, with tests (66e318da4); #471/#486 records (6e2dd53a0); ry-xu limitations (120fd32d5); review id notes (584d6f648); views and site URLs (a25d380d1); release pin (d5dc83537); T-128 standing-test fixtures moved to its new rung (dc916571d). Validation: packing-validate --records and --edit exit 0; 936 behavioural tests pass.
+
+2026-10-10, records lane, after the full suite: be2f73b8b adds Other Square Packing Projects cards for TheSnakeFang/squarepack-certs, ebdeleeuw/square-packing-n70 and Mishapolk/square-packing-records (test_overview requires one per reviewed source repository). Open: tests/test_overview.py::test_no_page_carries_a_result_overview fails, index.html 605,376 bytes against the 600,000 ceiling (600,910 before the cards; the new result rows T-134, T-135, T-136, T-138 are about 2.2 kB each). Not raised here: the ceiling is the owner's, and raising it is a decision for the coordinator or owner. Four other full-suite failures are environmental (playwright chromium missing; process-group reaping in the container).
