@@ -1552,7 +1552,8 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "evidence": [declaration["report_evidence"]],
         "notes": (
             f"{'The' if len(rows) == 1 else 'All'} {_many(len(rows), 'complete certificate')} "
-            f"{'is' if len(rows) == 1 else 'are'} {kept}, each admitted only where its "
+            f"{'is' if len(rows) == 1 else 'are'} {kept}, "
+            f"{'admitted' if len(rows) == 1 else 'each admitted'} only where its "
             "exact side equals, or rounds up to, the side its source prints. T-NNN records the "
             f"in-horizon report. All {len(record['cases'])} native jobs have full outcomes. "
             "No selected override or superseded claim is created at this source-only stage; "
@@ -1579,9 +1580,11 @@ def register_plan(packet: Path) -> dict[str, Any]:
         f"`{source['source_commit']}`, {kept}; [packet](web/{packet.name}/README.md). Both "
         "project "
         f"exact routes accept {'the' if len(positives) == 1 else 'all'} "
-        f"{_many(len(positives), 'replayed certificate')} and refuse all "
-        f"{2 * len(positives)} controls. "
-        "T-NNN records the in-horizon sides at V0/C0, pending independent review and adoption."
+        f"{_many(len(positives), 'replayed certificate')} and refuse "
+        f"{'both' if len(positives) == 1 else f'all {2 * len(positives)}'} controls. "
+        "T-NNN records the in-horizon "
+        f"{'side' if sum(row['n'] <= HORIZON for row in rows) == 1 else 'sides'} at V0/C0, "
+        "pending independent review and adoption."
     )
     if beyond:
         readme += (
