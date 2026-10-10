@@ -5,14 +5,14 @@ title: "No CI: every check has only ever run on one developer's machine"
 kind: task
 status: closed
 priority: 2
-version: 5
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 7
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:11:23.925Z
-updated_at: 2026-08-24T23:00:43.377Z
+updated_at: 2026-10-10T22:57:15.239Z
 closed_at: 2026-08-24T22:55:30.072Z
 close_reason: "Added pinned GitHub Actions validation: the locked complete gate on Linux and focused deep-golden reconstruction on macOS, both on Python 3.14 and the same packing-validate command used locally."
 resolution: null

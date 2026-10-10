@@ -5,8 +5,8 @@ title: Basin counts are not stable under 1-ulp perturbation of the LP
 kind: bug
 status: open
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
 dependencies:
@@ -14,7 +14,7 @@ dependencies:
     target: is-01m0rrhwd2zzyj0x0jwa8cqwtw
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:10:53.161Z
-updated_at: 2026-08-24T21:24:06.941Z
+updated_at: 2026-10-10T22:56:30.177Z
 ---
 The golden basin map's n=3 case changed from distinct_basins: 3 / converged: 3 to distinct_basins: 2 / converged: 4 in response to a change of 2.2e-16 in one constraint coefficient (the choose_cell rewrite in this branch).
 

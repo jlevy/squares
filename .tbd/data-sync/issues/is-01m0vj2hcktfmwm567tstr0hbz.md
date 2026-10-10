@@ -5,8 +5,8 @@ title: "PR #23 review R3: Distinguish missing provenance objects from orphaned c
 kind: bug
 status: closed
 priority: 2
-version: 6
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 7
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex@spud10
 labels:
   - engineering-maturity
@@ -17,7 +17,7 @@ parent_id: is-01m0vj13yefxcxhhew81ewfpvq
 hold: null
 hold_until: null
 created_at: 2026-08-25T04:15:22.514Z
-updated_at: 2026-08-25T04:52:33.841Z
+updated_at: 2026-10-10T22:57:16.978Z
 started_at: 2026-08-25T04:16:15.453Z
 closed_at: 2026-08-25T04:52:33.839Z
 close_reason: "Completed in 9736b10 after CI validation: provenance distinguishes reachable, orphaned, and missing objects; a missing object passes only when the artifact explicitly names that commit as unreachable historical loss, rendering UNAVAILABLE, while unannotated missing objects still fail with fetch remediation. Full 31-step gate passed in 102.35s with 34 pytest contracts."

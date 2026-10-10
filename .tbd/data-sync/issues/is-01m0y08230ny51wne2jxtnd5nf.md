@@ -5,8 +5,8 @@ title: Profile and remove repeated exact row-jet construction
 kind: task
 status: closed
 priority: 0
-version: 5
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 labels:
   - packing
   - focus-efficiency
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 created_at: 2026-08-26T03:01:32.382Z
-updated_at: 2026-10-06T08:33:54.834Z
+updated_at: 2026-10-10T22:56:13.948Z
 closed_at: 2026-10-06T08:33:54.833Z
 close_reason: |
   Done (bead review 2026-10-06, origin/main eb43ffe9a): BC-038 complete in agenda-004: rejected on measured arithmetic (17 unavoidable builds, 1.54x ceiling vs the 5x exit); devtools/price_row_jet_sharing.py and results/bc-038-row-jet-sharing.json on origin/main; D-384 fixed

@@ -5,13 +5,13 @@ title: "PR #16 R16-6: handoff invents a serial dependency queue and stale curren
 kind: bug
 status: closed
 priority: 2
-version: 3
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 4
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels: []
 dependencies: []
 parent_id: is-01m0rj3jzb99380az12g72g6n8
 created_at: 2026-08-24T00:26:29.554Z
-updated_at: 2026-08-24T00:38:53.197Z
+updated_at: 2026-10-10T22:55:46.890Z
 closed_at: 2026-08-24T00:38:53.196Z
 close_reason: "Fixed: the current handoff replaces the false serial queue with dated parallel lanes and only real blocker edges. D-077 covers the stale process map."
 resolution: null

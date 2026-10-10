@@ -5,8 +5,8 @@ title: "Address review: PR #23 — packing engineering maturity"
 kind: task
 status: closed
 priority: 1
-version: 31
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 33
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex@spud10
 labels:
   - engineering-maturity
@@ -43,7 +43,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-08-25T04:14:35.982Z
-updated_at: 2026-08-25T04:52:34.295Z
+updated_at: 2026-10-10T22:56:56.938Z
 started_at: 2026-08-25T04:16:15.426Z
 closed_at: 2026-08-25T04:52:34.294Z
 close_reason: Review 5014855987 fully disposed in commits 69e65eb and 9736b10. The CI-exposed annotated-lost-object edge in R3 is fixed, the complete 31-step gate passed again in 102.35s, and R9 remains intentionally deferred to open P1 bead think-5ht0.

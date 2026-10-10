@@ -5,14 +5,14 @@ title: Record why -C target-cpu=native is deliberately off
 kind: chore
 status: open
 priority: 3
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:11:24.221Z
-updated_at: 2026-08-24T21:22:12.967Z
+updated_at: 2026-10-10T22:58:08.630Z
 ---
 sqsearch has no .cargo/config.toml and no target-cpu setting. On this float-heavy kernel native codegen would plausibly be worth 10-30%, and it is the obvious thing for a future reader to reach for.
 

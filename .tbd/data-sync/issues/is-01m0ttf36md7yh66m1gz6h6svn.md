@@ -5,8 +5,8 @@ title: Migrate packing uniformly to Python 3.14 only
 kind: task
 status: closed
 priority: 1
-version: 8
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 10
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
   - python
@@ -23,7 +23,7 @@ dependencies:
     target: is-01m0rrjt4p850rt1t2z32b5sm0
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:22:48.130Z
-updated_at: 2026-08-24T22:55:27.324Z
+updated_at: 2026-10-10T22:56:52.716Z
 closed_at: 2026-08-24T22:55:27.323Z
 close_reason: Python 3.14 is now the sole version in package metadata, uv lock, .python-version, Ruff, BasedPyright, CI, and documentation; the complete validation gate passed under Python 3.14.
 resolution: null

@@ -5,8 +5,8 @@ title: Define and enforce packing module boundaries
 kind: feature
 status: closed
 priority: 1
-version: 5
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 7
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
   - architecture
@@ -19,7 +19,7 @@ dependencies:
     target: is-01m0tth2dgvwnagwh2975ac6k3
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:23:06.989Z
-updated_at: 2026-08-24T22:55:28.140Z
+updated_at: 2026-10-10T22:56:53.484Z
 closed_at: 2026-08-24T22:55:28.139Z
 close_reason: Implemented and documented one-way maintained, research, campaign, CLI, case, developer-tool, and benchmark boundaries; architecture tests reject old locations and reverse imports; complete validation passed.
 resolution: null

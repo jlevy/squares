@@ -5,14 +5,14 @@ title: Preserve interruption semantics for unbounded validation calls
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex-root
 labels: []
 dependencies: []
 parent_id: is-01m0vpakbh6fy8p18cxsmtydgd
 created_at: 2026-08-25T11:47:36.678Z
-updated_at: 2026-08-25T11:57:20.887Z
+updated_at: 2026-10-10T22:57:05.610Z
 closed_at: 2026-08-25T11:57:20.886Z
 close_reason: "Completed before commit: unbounded validation calls keep the original subprocess.run path and process-group interruption behavior; isolation occurs only for an explicit finite timeout."
 resolution: null

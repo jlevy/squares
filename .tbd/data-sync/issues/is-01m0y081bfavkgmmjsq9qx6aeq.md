@@ -5,8 +5,8 @@ title: Tier packing CI into fast Linux and selected macOS lanes
 kind: feature
 status: closed
 priority: 0
-version: 12
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+version: 13
+spec_path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 labels:
   - packing
   - focus-efficiency
@@ -18,7 +18,7 @@ parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 child_order_hints:
   - is-01m0ycwz9g10ckxpgghd62z2qf
 created_at: 2026-08-26T03:01:31.629Z
-updated_at: 2026-09-16T00:19:54.755Z
+updated_at: 2026-10-10T22:56:12.326Z
 closed_at: 2026-09-16T00:19:54.754Z
 close_reason: |
   Superseded. The tier split this bead specified landed on 2026-09-05/06 as five concurrent pull-request jobs (think-doar, think-m5ev); its 60 s p50 go criterion was never completed and is replaced by OR-14's 120-150 s target with a 180 s budget enforced on every pull request by packing/devtools/check_pr_wall.py (think-z121). The standing 288 s wall regression is owned by think-xfqk.

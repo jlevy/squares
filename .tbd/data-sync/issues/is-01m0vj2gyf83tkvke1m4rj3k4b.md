@@ -5,8 +5,8 @@ title: "PR #23 review R2: Make the repo-bound command dependency boundary honest
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex@spud10
 labels:
   - engineering-maturity
@@ -17,7 +17,7 @@ parent_id: is-01m0vj13yefxcxhhew81ewfpvq
 hold: null
 hold_until: null
 created_at: 2026-08-25T04:15:22.062Z
-updated_at: 2026-08-25T04:44:35.235Z
+updated_at: 2026-10-10T22:57:01.693Z
 started_at: 2026-08-25T04:16:15.445Z
 closed_at: 2026-08-25T04:44:35.234Z
 close_reason: "Completed in 69e65eb: repository applications now validate an explicit project root, fail clearly outside a checkout, document their non-library boundary, and expose case/devtool subprocess edges to architecture tests."

@@ -5,8 +5,8 @@ title: Reduce PR 45 known-best census validation latency
 kind: task
 status: closed
 priority: 0
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 delegate: codex@spud10.local
 labels:
   - packing
@@ -17,7 +17,7 @@ parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 hold: null
 hold_until: null
 created_at: 2026-08-27T00:03:19.297Z
-updated_at: 2026-08-27T01:32:22.761Z
+updated_at: 2026-10-10T22:56:21.712Z
 started_at: 2026-08-27T00:03:27.642Z
 closed_at: 2026-08-27T01:32:22.760Z
 close_reason: The five-command atlas improved from 743.07s to 123.93s (6.00x) with exact differential/oracle controls; clean strict completed in 372.24s and final-head Linux/macOS CI are green.
