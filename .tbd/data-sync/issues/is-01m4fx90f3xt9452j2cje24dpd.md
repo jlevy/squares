@@ -5,7 +5,7 @@ title: Publish the exact-side collection as a web-only report
 kind: task
 status: in_progress
 priority: 1
-version: 21
+version: 22
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex@spud10.local
 labels: []
@@ -14,12 +14,121 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T08:43:03.009Z
-updated_at: 2026-10-10T09:51:17.073Z
+updated_at: 2026-10-10T10:25:20.880Z
 started_at: 2026-10-09T08:43:05.688Z
 ---
 Publish the exact-side collection as a clean HTML report on Papers, without report PDF generation. Preserve the complete canonical corpus: 324 current cases, 214 history rows, 560 coefficient vectors and 6,378 integer strings. Publish all 324 current records, including 321 exact current sides, plus 28 source occurrences (18 unreconciled, seven outside the frontier and three invalid), totaling 352 records/vectors and 2,128 coefficient strings. Omit 186 superseded history rows and 22 redundant current notes only from publication. Keep all 673 n=83 coefficients, scoped assurance, source custody, responsive tables, lazy coefficient downloads and scientific PDFs. Capture actual amended-head validation on PR 435 and this bead; pending certificates remain V0/C0 until separate review/adoption. Numeric gaps, contact/driver work and geometry/Lean remain owned separately. No PR landing or mathematical assurance upgrade belongs to this slice.
 
 ## Notes
+
+# Published polynomial refresh, 2026-10-10
+
+The fixed-main refresh is published on formal stack 447: main →
+[PR 403](https://github.com/jlevy/squares/pull/403) →
+[PR 435](https://github.com/jlevy/squares/pull/435). Main remains
+`657cc486130e9020608ff244d8a86d1d04153634`; the official stack push used explicit
+per-branch leases. Remote and PR readbacks verified the heads and bases.
+
+- Parent `11c63df2ca355ef8818db099c7c77d08fb812ae5`, source/data
+  `491a8da5968b1bcd39574fdd711919126d853104`, base main.
+- Child `34e191f274c461ea15197ff6e654ab617aaa786d`, source/data
+  `52bb5bb49d99e991c484946120d4130e671ba0a9`, base the parent branch.
+- Existing source commits were amended; release-pin commits contain only the pin.
+  Both worktrees are clean.
+  No PR is merged.
+
+## Representation and source admission
+
+All 324 selected cases and all 77 proved statuses survive unchanged.
+Parent has 320 exact roots and degree-only n=83; child has 321 exact roots, including
+the full degree-672 n=83 polynomial.
+Numeric-only n=29/55/71 remain.
+The canonical child has 538 records (324 current + 214 history), 560 coefficient vectors
+and 6,378 integer strings; 2,821,903 decoded / 843,684 gzip bytes.
+All 673 n=83 coefficients survive, including the 724-digit integer; ordinal 27 is
+stated, not independently counted.
+
+PR 478 adds source-only Daniel n=132/T-131 and a separate Daniel n=155/T-128
+certificate. The latter equals Couzo’s side without establishing pose or motion
+equivalence. There are 60 finite rational occurrences / 59 distinct bounds: 31 current,
+14 superseded and 15 pending occurrences for 14 distinct pending bounds.
+All pending offers remain V0/C0 and do not replace selected cases.
+Independent T-131 adoption/atlas review remains in think-kkj2; think-iyij owns
+import/reply; think-lhtz owns original Couzo adoption, think-0mlq historical-house
+custody. PR 482’s n=17 plan changes no selected side or proof status.
+PR 479’s n=375/378 reports stay beyond the 1..324 exact register.
+
+## Final web and storage checks
+
+Papers is HTML-only for this report, with responsive wide tables, search/filters and
+lazy coefficient details.
+Complete HTML/Markdown and downloads preserve the public content.
+Public scope is 352 records/vectors and 2,128 integer strings: all 324 current plus 28
+source rows. The 186 superseded rows and 22 redundant notes are omitted publicly while
+retained canonically.
+No report PDF is generated.
+
+At clean child 34e191, maintained reconstruction passed; transfer was 295,269 /
+3,665,570 raw bytes (8.0552%), below the explicit 10% criterion.
+All eight catalogue/complete views at 390/1280 pixels in light/dark themes passed with
+zero document overflow, lost ink or math errors.
+Each complete view exposed all 321 current and 28 additional source polynomial headings.
+Native receipts and all eight screenshots are preserved under upstream-2026-10-09
+evidence outside scratch.
+
+Final child native source inventory passed at 200,113,199 bytes under the unchanged
+201,326,592-byte cap, with 1,213,393 bytes headroom and 7,082 unique paths; all eight
+historical replay leaves remain.
+Parent is 197,970,624 bytes / 3,355,968 headroom / 7,033 paths.
+Roster/byte audits do not establish Git/live byte equality.
+Thirteen original scientific PDFs (198,944,687 bytes) remain in
+https://github.com/jlevy/squares/releases/tag/data/source-pdfs-v1, declared by
+packing/hosted/source-pdfs.yaml; source originals are separate from report PDF
+packaging.
+
+## Qualification and surviving negatives
+
+Independent source/data and final amendment reviews passed.
+The 290/158 focused suites passed on reviewed working patches before amendment, with
+zero affected-file language floor findings.
+Their exact scopes remain in the native receipts.
+
+Parent 11c63’s broad push passed 65 checks but timed out in the type floor at the
+maintained 900-second limit without diagnostics; reachable tests were skipped.
+Its same-head isolated type check then passed in 428.620 seconds with zero findings and
+unchanged input/timeout/jobs 10/inner jobs 3. It does not erase the broad negative or
+supply a reachable verdict.
+No whole-gate retry or ceiling increase was made.
+
+Child 71a224’s actual URL-registry failure was repaired with four payload URL additions,
+no removals or changes to old rows.
+Its gate was stopped normally (exit 130), cancelling three active commands; it has no
+reachable verdict. Focused URL tests passed 47 tests in 85.19 seconds before amendment.
+The maintained final-head registry check passed 1,629 rows/zero failures in the new 34e
+gate, which remains in progress.
+
+Both PR bodies passed the OR-9 preflight and now record these facts and owners.
+Fresh full hosted runs are parent38044596979 and child38044600780 (exact heads,
+currently queued); automatic Packing/Pages runs are parent38044497984/38044497997 and
+child38044498262/38044498316. Both merge-base checks passed.
+Superseded same-head child automatic38044497939/38044497941 were cancelled, separate
+from source-test failures.
+All final automatic/full checks and final gh pr checks --watch summaries remain required
+before calling qualification complete.
+
+## Selected continuation
+
+Finish current-head qualification and final PR/bead readbacks.
+Keep every earlier dated negative below.
+Then the mathematical sequence remains W7 think-s6np active-contact export → independent
+n=11 octic control → bind current RyXu n=102 certificate/contact system/confirmed seed →
+one preregistered bounded W6 slice → think-ohhz audit.
+Numeric gaps think-je8y/think-phh8/think-1blg; reported-only 106/152/177
+think-8sm2/#419; ideal 68/105/292 and Rehwaldt multivariate think-nv5o; startup
+attribution think-jygq/think-5jr5/think-rxyl; and quick-lane cost think-2hm6 remain
+open. This record refresh runs no driver, solver or geometry-adoption campaign.
+
+## Dated checkpoint before final publication
 
 # Polynomial refresh checkpoint, 2026-10-10
 
