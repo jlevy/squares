@@ -29138,6 +29138,29 @@ evidence:
       border-row/grid constructions, not surveyed best records. No geometry replay, native execution, exact
       certificate, independent method, optimality, standing-bound change or verification transferred from
       the separate eight in-horizon issue451 certificates.
+  - id: E-couzo-extended-range-update-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 375
+      - 378
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo extended-range updates 2026-10-08]'
+    certificate: packing/resources/web/couzo-extended-updates-2026-10-08/acquisition/sources.json
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-09'
+    limitations: Author-reported decimal poses at 2d32a6e only, both outside the 324-case corpus. Each
+      side is below the same count's ffd900d report, which stays a dated superseded row; the comparison
+      is exact on the printed decimals, not on geometry. Complete numerical-token custody and representation
+      validation do not establish nonoverlap or containment. No checker or feasibility tolerance is stated
+      for these decimal poses. No geometry replay, native execution, exact certificate, independent method,
+      optimality, standing-bound change or verification transferred from the separate in-horizon certificates.
   - id: E-couzo-460-followup-rational-report
     claim: upper-bound
     scope:

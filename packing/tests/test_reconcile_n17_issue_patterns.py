@@ -297,3 +297,38 @@ def test_publication_does_not_create_missing_parents(tmp_path: Path) -> None:
     with pytest.raises(FileNotFoundError):
         join.publish_metadata(parent / "result.json", "{}")
     assert not parent.exists()
+
+
+def test_a_ledger_that_grew_past_the_frozen_baseline_still_joins(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The ledger only grows; dropping or renaming a baseline class is still refused.
+
+    The frozen baseline's census admits 60 classes, and exp-317 admitted twelve more
+    after it was frozen. The projection rests on the frozen census, so later admissions
+    leave it unchanged, while a ledger that no longer admits a baseline class, or admits
+    it under another name, does not describe the census any more.
+    """
+    source = join.REPO / "packing/campaign/issue-intake/n17-20261008/github-issues.json"
+    document = join.read_document(source)
+    real_load = join.load_yaml
+
+    def ledger_with(change: Any) -> Any:
+        def load(text: str) -> Any:
+            ledger = real_load(text)
+            if isinstance(ledger, dict) and "entries" in ledger:
+                change(ledger["entries"])
+            return ledger
+
+        return load
+
+    def drop_first_admitted(entries: list[dict[str, Any]]) -> None:
+        entries.remove(next(entry for entry in entries if entry["status"] == "admitted"))
+
+    def rename_first_admitted(entries: list[dict[str, Any]]) -> None:
+        next(entry for entry in entries if entry["status"] == "admitted")["name"] = "renamed"
+
+    for change in (drop_first_admitted, rename_first_admitted):
+        monkeypatch.setattr(join, "load_yaml", ledger_with(change))
+        with pytest.raises(join.RefusedError, match="ledger/census class identities differ"):
+            join.reconcile(document, deadline=time.monotonic() + 30)

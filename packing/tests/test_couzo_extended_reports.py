@@ -631,5 +631,13 @@ def test_retained_outside_horizon_packet_has_twenty_complete_source_reports(
     ]
     assert {row["n"]: row["value"] for row in own} == claims
     assert all(row["assurance"] == "reported" for row in own)
-    assert all(row["disposition"] == "tracked-outside-case-corpus" for row in own)
+    # 2d32a6e's later reports at n = 375 and 378 supersede two of these dated rows,
+    # which keep their ffd900d facts; the other eighteen are still current.
+    superseded = {row["n"]: row["superseded_by"] for row in own if "superseded_by" in row}
+    assert superseded == dict.fromkeys((375, 378), "couzo-extended-range-updates-2026-10-08")
+    assert all(
+        row["disposition"]
+        == ("superseded" if row["n"] in superseded else "tracked-outside-case-corpus")
+        for row in own
+    )
     assert coverage["case_corpus"]["n_max"] == 324

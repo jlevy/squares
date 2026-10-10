@@ -13232,6 +13232,7 @@ results:
       certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis method.
       The author''s KKT, reduced-Hessian and jamming statements are numerical and not checked. No two
       independent methods, human oversight or optimality is claimed.'
-    next_rung: Independently review the retained replay, keep T-098's certificate as the historical
-      house at 132 before any selected-house replacement, then record source-specific adoption and confirming
-      evidence. Final exact-head CI remains required.
+    next_rung: Independently review the retained replay and compare the latest reported n132 candidates,
+      including https://github.com/jlevy/squares/issues/476, before choosing a selected-house replacement.
+      Keep T-098's certificate as the historical house at 132, then record any source-specific adoption
+      and confirming evidence. Final exact-head CI remains required.

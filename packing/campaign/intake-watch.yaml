@@ -184,9 +184,11 @@ repositories:
       couzo-followup-refinements packet (T-130), whose fifteen-job native replay is
       retained; the seven other certificates and their decimal poses are byte-identical
       to the issue451 originals. README, decimal-pose and SVG changes are context held
-      by identity only. The n375 and n378 TXT/SVG updates are outside the 1..324
-      corpus, recorded by identity and printed side only, and stay with think-1545,
-      which also keeps the outside-corpus reader work. The eight issue451 certificates
+      by identity only. The n375 and n378 TXT updates are outside the 1..324 corpus;
+      since 2026-10-09 the couzo-extended-updates packet keeps them as derived decimal
+      facts, current beyond-horizon rows that supersede the ffd900d reports, and their
+      SVGs stay context held by identity. think-1545 keeps the outside-corpus reader
+      work. The eight issue451 certificates
       and their native and custody receipts keep their own scope; their historical
       current-house adoption and confirmation remain pending.
       Earlier reads: complete changed-path manifests and README context for b10ad36,
@@ -302,8 +304,9 @@ repositories:
       2 x 2 tiling packings beyond the corpus in search/tilings/, s(964) <=
       31.859493881559810546..., s(1092) <= 33.840529687178261... and s(1228) <=
       35.847313543154434..., each below twice Couzo's record at 241, 273 and 307 and
-      reported valid by both source checkers. They are not registered here, since the
-      beyond-horizon coverage schema is being changed elsewhere; think-jtlq owns them. 7d047a9 adds Lean proofs (ExactQuad.lean) that 62
+      reported valid by both source checkers. The beyond-horizon coverage schema now supports
+      these reports; their source-specific intake remains queued under think-jtlq. 7d047a9
+      adds Lean proofs (ExactQuad.lean) that 62
       quadratic register sides equal closed forms a + b sqrt(d), and ed01e0d says an issue
       about them is drafted: evidence for the exact-form and Lean local-minimum reports
       (T-120 to T-124), owned by think-63vx. 604b43a to 77f3c0a state the

@@ -1560,6 +1560,20 @@ sources:
       register data and says its eight in-horizon certificates replay with this project's verifier; that
       lineage establishes no checker or verification for these twenty poses.
       Expanded comparison bounds are derived references rather than surveyed best records.
+  - key: '[Couzo extended-range updates 2026-10-08]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    credit: Couzo after Levy
+    lineage: builds-on-project
+    note: The later author-reported decimal poses at n375 and n378 in 2d32a6e (2026-10-08T22:12:27Z,
+      parent ffd900df), reviewed 2026-10-09; the commit message attributes them to the author's continuing
+      search and names Claude as a co-author. Derived numerical facts and Git custody metadata are retained;
+      upstream text, SVGs and prose are not redistributed. No redistribution permission or licence
+      determination is asserted. Each beats the same count's ffd900df report, which stays a dated
+      historical row.
   - key: '[Couzo follow-up refinements 2026-10-08]'
     authors:
     - Couzo

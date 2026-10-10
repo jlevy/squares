@@ -3094,12 +3094,39 @@ sources:
   notes: The source date is attributed GitHub commit metadata, not authenticated by the Git tree alone. All twenty complete decimal poses and their source identities are retained as derived facts.
     Read 2026-10-09, the author's later 2d32a6e (2026-10-08T22:12Z) reports smaller sides at n=375
     (19.907024692022954) and n=378 (19.946861170999796). This ffd900d packet does not retain them, so
-    its n=375 and n=378 rows are dated ffd900d reports rather than the author's latest. think-1545 owns
-    those two reports; one beyond-horizon row per n means importing them needs a supersession design.
+    its n=375 and n=378 rows are dated ffd900d reports rather than the author's latest. Since 2026-10-09
+    couzo-extended-range-updates-2026-10-08 keeps those two later reports, and these two rows stay as
+    superseded dated rows with their ffd900d facts unchanged.
     Complete local custody covers 73 current/historical roles across three pinned trees. Raw upstream
     text, diagrams, prose and programs stay outside Git under the existing retention policy. Every claim
     is tracked outside the 1..324 case corpus; no geometry, native replay, selected case, result row or
     transferred issue451 verification.
+- id: couzo-extended-range-updates-2026-10-08
+  title: Francisco Couzo's later decimal reports at n=375 and n=378
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/2d32a6e96f55c5dc1a2dd0e3581098e7c0105252
+  local: resources/web/couzo-extended-updates-2026-10-08
+  source_key: '[Couzo extended-range updates 2026-10-08]'
+  scope:
+    n_values:
+    - 375
+    - 378
+  reviewed: '2026-10-09'
+  source_date: '2026-10-08'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-extended-updates-2026-10-08/README.md
+  - resources/web/couzo-extended-updates-2026-10-08/acquisition/sources.json
+  claims_record: resources/web/couzo-extended-updates-2026-10-08/acquisition/sources.json
+  evidence:
+  - E-couzo-extended-range-update-report
+  notes: The source date is attributed GitHub commit metadata (2026-10-08T22:12:27Z, parent ffd900d).
+    Both complete decimal poses are retained as derived facts that rebuild each source TXT blob identity,
+    length and SHA-256, matching the identities couzo-followup-refinements-2026-10-08 recorded at the
+    same commit. Each side is strictly below the same count's ffd900d report by exact comparison, so
+    those two rows are superseded dated rows. No upstream byte is retained; both claims are tracked outside
+    the 1..324 case corpus, with no geometry, native replay, selected case or result row.
 - id: couzo-followup-refinements-2026-10-08
   title: Francisco Couzo's five follow-up rational refinements at 2d32a6e
   role: source-repository
@@ -5171,6 +5198,14 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.907052698737502'
   assurance: reported
+  disposition: superseded
+  superseded_by: couzo-extended-range-updates-2026-10-08
+  bead: think-1545
+- n: 375
+  source_id: couzo-extended-range-updates-2026-10-08
+  claim: upper-bound
+  value: '19.907024692022954'
+  assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
 - n: 376
@@ -5191,6 +5226,14 @@ beyond_horizon_claims:
   source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.947426312032292'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-extended-range-updates-2026-10-08
+  bead: think-1545
+- n: 378
+  source_id: couzo-extended-range-updates-2026-10-08
+  claim: upper-bound
+  value: '19.946861170999796'
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
