@@ -1358,11 +1358,12 @@ def _replay(positives: dict[int, Any], record: Mapping[str, Any]) -> str:
         f"route CPU seconds and {summary['job_wall_seconds']} job wall seconds, the longest "
         f"job {summary['longest_job_seconds']} seconds. "
         + (
-            f"Every positive clears every wall by at least {_floor_sci(wall)}"
+            f"Every positive clears every wall by at least {_floor_sci(wall)} and every pair "
+            f"by at least {_floor_sci(gap)}."
             if wall
-            else "In every positive squares touch the box, a least wall clearance of exactly 0"
+            else "In every positive squares touch the box, a least wall clearance of exactly "
+            f"0, and every pair clears by at least {_floor_sci(gap)}."
         )
-        + f", and every pair by at least {_floor_sci(gap)}."
     )
 
 
