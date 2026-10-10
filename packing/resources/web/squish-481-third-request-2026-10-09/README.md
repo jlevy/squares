@@ -112,6 +112,56 @@ Gupta’s refinement. Here the sides at 154, 207, 209, 236, 237, 263, 302 and 30
 earlier SQUISH packings that the cases hold directly or through Gupta’s refinements. The
 earlier certificates stay retained in their own packets.
 
+[acquisition/claims.json](acquisition/claims.json) freezes these comparisons, and
+`devtools.upper_bound_reports` rebuilds them: each case ceiling from its holder’s own
+packet, #476 from its retained
+[packet](../couzo-exact-certificates-2026-10-09/README.md), T-128 and T-130 from theirs,
+and #470 at its printed 12-place ceilings. At every count this certificate is the
+smallest report. At 232 the case reports the Kingbird catalogue’s 15.77817459305202,
+which is below the rational ceiling the case verifies, Evan Daniel’s certificate of side
+`3944543648263005692141767432271/250000000000000000000000000000` (T-101); the
+certificate is below both.
+
+## Derived Facts and Exact Replay
+
+`devtools.upper_bound_reports` read the seventeen `nNNN.cert.json` files from a checkout
+at the pin, after `devtools.acquire_source` showed that the checkout yields this
+packet’s acquisition record and manifest, so the bytes it read have the digests above.
+Each certificate is admitted only where its exact side equals the exact fraction
+`summary.csv` prints, to which the issue points; the issue’s own 15-digit displays are
+quotations, as above.
+Each is written as an exact rational `center-basis` Witness/v2 under [facts/](facts/),
+the deciding witness of the maintained exact route, naming its certificate’s SHA-256 as
+`revision_sha256`, and stored compressed.
+The facts are this repository’s derivation; no upstream byte is retained, and offline
+each fact must rebuild itself from the certificate it states.
+The declaration of the import is [acquisition/report.json](acquisition/report.json).
+The three `sources/` certificates are not offered as records and are not imported.
+
+Only the facts enter geometry decisions, through the two-route kernel of
+`devtools.evand_arrangement_reports`: `sqpack`’s exact witness verifier and the
+independent rational corner checker, each deciding every wall and every pair over
+$\mathbb{Q}$. Each count ran a positive job, a duplicate-square control and an
+outside-container control, each in its own child process.
+All seventeen positives pass both routes, and both routes refuse all 34 controls, each on
+the overlap or the wall it was built to break.
+In every positive both routes find the least wall clearance exactly 0: squares touch the
+box, a closed-box packing, which is what $s(n) \le S$ asks and both routes accept. The
+least pair gap is exactly $10^{-32}$, the clearance the source states, except at 263 and
+292, where it is $3.16 \times 10^{-14}$ and $1.21 \times 10^{-14}$.
+The 51 jobs made 3,148,314 pair decisions in 1,340.82 route CPU seconds and 2,487.87 job
+wall seconds, summed; the longest job took 208.94 seconds, and the two-worker run 21
+minutes 36 seconds of wall time, while other lanes held the machine at a load average of
+8 to 9 on four cores.
+The whole receipt exceeds the kernel’s 4,000,000-byte ceiling on uncompressed evidence,
+so it is kept as one receipt per count, `receipts/exact-certification-nNNN.json.xz`,
+each held to the same ceiling and admitted by the same rules; each keeps every deciding
+input and both routes’ complete outputs.
+The receipts were assembled from the run’s 51 finished job outputs after the first
+write of the whole receipt was refused at that ceiling; no job ran twice.
+The two routes share certificate parsing, the half-angle conversion, Python’s rational
+arithmetic and the separating-axis method.
+
 ## What Is Not Established
 
 The source reports that SQUISH’s exact `Fraction` checker accepts all seventeen, testing
@@ -119,8 +169,8 @@ every pair close enough to touch by separating axes and every square against the
 and that David Ellsworth’s `check_packing.py` accepts each 50-digit export at
 $\varepsilon = 10^{-50}$. It reports drawing each certificate from a 60-digit contact
 solution with clearance $10^{-32}$, about $10^{-14}$ at 263 and 292. Those are author
-reports; no program of the source has run here, and no replay is recorded yet.
-The certificates would establish finite upper bounds only. The source gives no KKT,
+reports; no program of the source has run here, and the replay above has not been
+reviewed. The certificates establish finite upper bounds only. The source gives no KKT,
 interval or local-optimality evidence, no closed forms and no optimality claim.
 
 ## Credit
@@ -144,10 +194,37 @@ From `packing/`:
 
 ```sh
 uv run --frozen --all-extras --group dev python -m devtools.acquire_source squish-481-third-request-2026-10-09 --check
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports squish-481-third-request-2026-10-09 check-claims
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports squish-481-third-request-2026-10-09 check --replay
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports squish-481-third-request-2026-10-09 derive --checkout CHECKOUT --check
 ```
 
-`--check` re-derives the record from this packet alone. A replay reads the certificates
-from a checkout at the pin and refuses bytes whose SHA-256 differs from the manifest’s.
+`--check` re-derives the record from this packet alone. The importer’s `check-claims`
+and `check --replay` run offline from the facts; `derive --check` needs a checkout at
+the pin, refuses one that does not yield this packet’s record and manifest, and compares
+each fact it derives with the retained one.
+
+## Compressed Files
+
+| Stored File | Origin | Git Blob of Original | SHA-256 of Original |
+| --- | --- | --- | --- |
+| `facts/n-131.yaml.gz` | receipt | `b39aee550550f2059eccc5cb7e7051f49ec8c3c8` | `3cc0b799eb4b866985b99ff4e5b538e463a9aa8dd6943e1cb40a67e0b8c58d57` |
+| `facts/n-153.yaml.gz` | receipt | `97fe0a5985cc28678a6b2edcfa6ac0828bd3c3c4` | `3fe549aff9734b5b35c8491be1a7ff05e08c6642fd0367a0124e1588487036cb` |
+| `facts/n-154.yaml.gz` | receipt | `201bb8e5d95ca0abe7786e645cb53b6b283dacb0` | `2dc546749f72c5c61d56b92d34457c5593a6a6ed8670c9412f27693ddc45afc1` |
+| `facts/n-207.yaml.gz` | receipt | `a63aebb8fcf098fc8a42b1609e6379c4e7350166` | `0df6d0b83b5b1741d547e5fd1800f631c0ecfce2b05a1bfe944fd16aa3ffa62b` |
+| `facts/n-209.yaml.gz` | receipt | `8ba17443be60040c2ba2ab504f96fe2a2bb41dae` | `59e88014ddb3075c3d71334bde4553805be9f70f20653aedf6e58f15e05f39a0` |
+| `facts/n-232.yaml.gz` | receipt | `fb675e7e4f99a4f7eeb6e7d055d5016d4f015b33` | `ae7ef3ec314877611a15943f88edceeb9ea5ac7fca751b7a8f402cf9142fba93` |
+| `facts/n-236.yaml.gz` | receipt | `9cbe23b220e9cdd810a1d333d5a2f01e947bff28` | `6366bd8b7f37bdfaee05a1e2f2036c6fda43e50e1bc92284ed03c76128342334` |
+| `facts/n-237.yaml.gz` | receipt | `b8ba038e246057cdbd4da02d47ce78c49bffa0dc` | `a3fda264cb07c5c72661c7cc65a34aa61fa9a98ea12cb35b5015d50d695ee283` |
+| `facts/n-259.yaml.gz` | receipt | `0607129764f35e4c47aa9be76087dfb24663d04c` | `c4dac9932211ff9374c317b6b4308558765feeab10698d8d684ebbfca81175e0` |
+| `facts/n-263.yaml.gz` | receipt | `8b6f554715112c9792a50f271b0f0310176cde7b` | `b74091d065c9748dde278c5f429f21ca109d1b923c63a0998dea383ddac60d5a` |
+| `facts/n-269.yaml.gz` | receipt | `7b6902ac61a570e82bed0ba8b63f9714ea653cf4` | `4cb6356781541479a4c53562b2d26e24ce61f8770dfb1c7f85d9968ef0ef709b` |
+| `facts/n-270.yaml.gz` | receipt | `d6d72c66f8d449f7452e7cf2eb3f1c855a869f43` | `2c977f77328288a2dddabf0f2f8f556a10ce6502fe223d92f73eeb16394ebdc7` |
+| `facts/n-292.yaml.gz` | receipt | `dc74ad1298497ea7618dc3e63cbb6c6e2a43e7ee` | `fa0c93510934c56d35aee5bd3f8799c0e9bb2eece1b09f63e4e3773caee30895` |
+| `facts/n-302.yaml.gz` | receipt | `81cbb512e450c57a90d27ae68da9164eb577d770` | `2762f0d1f968f7bb69fa351ebc35fa8921acd1b14243836372d1d7d9b3d416b8` |
+| `facts/n-303.yaml.gz` | receipt | `d5bf1c295cab97a1704caf9cdb2917c7e44d6f47` | `7b858c2a0e41c32a7f900f78188425969ea14422b3cc9c94637a67f628ac15d1` |
+| `facts/n-305.yaml.gz` | receipt | `aafc3232fb9ef468e1296ad819b3044d54b36907` | `944a01324032c9724e8b5abd4448a0b54b411638393f41b4867b1ff9e20289e9` |
+| `facts/n-307.yaml.gz` | receipt | `395876d398e6ee5205cfa593380251eb7a52d62e` | `5b1b6c4a5d83a624c09bcc0d3889a1d2dfea4cfbe2d9a475220fd6713d6b3425` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
