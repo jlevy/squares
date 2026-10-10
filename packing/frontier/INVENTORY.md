@@ -495,9 +495,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-couzo-460-followup-rational-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 | `E-evand-465-record-hunt-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 | `E-wand125-fine-net-n29-582-followup-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | `V-wand125-sqverify-proof-net` |
-| `E-n040-guzhou-clipped-corner-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-sqverify-fast`, `V-guzhou-n40-finite-py` |
+| `E-n040-guzhou-clipped-corner-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | `V-guzhou-n40-finite-py` |
 | `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | `V-sqverify-fast`, `V-audit-clipped-corner-transfer` |
-| `E-n040-guzhou-clipped-corner-finite-audit` | 0 | derived-structure, conditional on the 401-direction nodal statement, discharged by `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-audit-clipped-corner-transfer` |
+| `E-n040-guzhou-clipped-corner-finite-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-audit-clipped-corner-transfer` |
 
 ## What the register rests on
 

@@ -1876,6 +1876,11 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Strict lower bounds for seventeen squares.",
     ),
     (
+        "https://github.com/Guzhou0806/n40-square-packing",
+        "Guzhou0806",
+        "A strict lower bound for forty squares, on wand125's density.",
+    ),
+    (
         "https://github.com/DRMacIver/square-packing-research",
         "David R. MacIver",
         "A lower bound for seventeen squares, with its paper and a Lean check.",

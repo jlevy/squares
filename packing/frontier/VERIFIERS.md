@@ -57,7 +57,7 @@ second implementation agrees.
 | [`V-guzhou-r012-verify-py`](#v-guzhou-r012-verify-py) | certificates/R012/verify.py | Guzhou0806 | external | decides | 1 | 1 |
 | [`V-guzhou-r052-verify-py`](#v-guzhou-r052-verify-py) | certificates/R052/verify.py | Guzhou0806 | external | decides | 2 | 1 |
 | [`V-guzhou-n17-verify-cpp`](#v-guzhou-n17-verify-cpp) | verify.cpp | Guzhou0806 | external | decides | 5 | 3 |
-| [`V-guzhou-n40-finite-py`](#v-guzhou-n40-finite-py) | verifier/finite.py | Guzhou0806 | external | decides | 1 | 1 |
+| [`V-guzhou-n40-finite-py`](#v-guzhou-n40-finite-py) | verifier/run.py | Guzhou0806 | external | decides | 1 | 1 |
 | [`V-burns-n17-verify-py`](#v-burns-n17-verify-py) | verify-n17-lower-bound-4_4811.py | Burns | external | decides | 1 | 0 |
 | [`V-massaccesi-n17-verify-py`](#v-massaccesi-n17-verify-py) | verify-n17-lower-bound-4_5058.py | Massaccesi | external | decides | 1 | 2 |
 | [`V-mira-17squares-point-checker`](#v-mira-17squares-point-checker) | verify_certificate.py | Mira | external | decides | 1 | 0 |
@@ -114,7 +114,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 110 | 21 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 109 | 21 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 5 | 5 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 9 | 8 |
@@ -739,13 +739,13 @@ The source's C++ exclusion checker, run interval by interval beside Kleddamag's 
 
 ### `V-guzhou-n40-finite-py`
 
-**verifier/finite.py, run beside the vendored sqverify-fast by verifier/run.py** · Guzhou0806 · external · decides · Python · exact-algebraic
+**verifier/run.py, the release's entry point, which runs its vendored copy of this repository's sqverify-fast at all 401 directions and verifier/finite.py** · Guzhou0806 · external · decides · Python, Rust · exact-algebraic, interval-certified
 
-The release's exact-rational checks of the clipped-corner transfer's finite steps for s(40) > 335427/50000: the density's D4 expansion and mass, its essential supremum by two sweeps, the reference-square containment, the clipped-corner bound, the counting margin and the full-core closed form; run.py drives it with the 401-direction nodal run and writes results/verification.json.
+The release's own verification of s(40) > 335427/50000: run.py derives the 401-direction input and runs the vendored sqverify-fast on it, which decides the nodal statement, and finite.py's exact-rational checks of the clipped-corner transfer's finite steps (the density's D4 expansion and mass, its essential supremum by two sweeps, the reference-square containment, the clipped-corner bound, the counting margin and the full-core closed form), writing results/verification.json.
 
 - Source: [`packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/finite.py`](../../packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/finite.py), [`packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/run.py`](../../packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/run.py)
 - Versions run: SHA-256 `6046849f25be…`, revision `e5abeb4d078a` (finite.py); SHA-256 `4efa0d97dfb0…`, revision `e5abeb4d078a` (run.py; of `run.py`)
-- Note: Read in full by the 10 October 2026 review of the release (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) and not run here. Its nodal step is this repository's own sqverify-fast, vendored byte for byte, so the release's nodal verification is V-sqverify-fast's; the finite steps were decided again here by V-audit-clipped-corner-transfer, written without opening this file.
+- Note: Read in full by the 10 October 2026 review of the release (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) and not run here. Its nodal step is this repository's own sqverify-fast, vendored byte for byte from ef79288a4 (crate source digest d97758bb...), so a replay here with V-sqverify-fast reproduces the release's nodal verification with the producer's code; the finite steps were decided again here by V-audit-clipped-corner-transfer, written without opening finite.py.
 
 | evidence | run | code | results |
 | --- | --- | --- | --- |
@@ -1754,7 +1754,6 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-n030-wand125-mixed-58835-sqverify-fast-replay` | replayed here | shared components | T-109 |
 | `E-n039-wand125-mixed-665-sqverify-fast-replay` | replayed here | shared components | T-110 |
 | `E-n041-wand125-mixed-6775-sqverify-fast-replay` | replayed here | shared components | T-111 |
-| `E-n040-guzhou-clipped-corner-report` | the source’s own run | producer’s code | T-133 |
 | `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | producer’s code | T-133 |
 
 ### `V-replay-chelokot-lean`

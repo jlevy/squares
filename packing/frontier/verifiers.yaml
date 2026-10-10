@@ -522,18 +522,21 @@ verifiers:
         note: R071's public launcher, which checks the package, builds verify.cpp and runs replay.js at two partitions
 
   - id: V-guzhou-n40-finite-py
-    program: verifier/finite.py, run beside the vendored sqverify-fast by verifier/run.py
+    program: >-
+      verifier/run.py, the release's entry point, which runs its vendored copy of this
+      repository's sqverify-fast at all 401 directions and verifier/finite.py
     author: Guzhou0806
     provenance: external
-    language: [Python]
-    methods: [exact-algebraic]
+    language: [Python, Rust]
+    methods: [exact-algebraic, interval-certified]
     role: decides
     summary: >-
-      The release's exact-rational checks of the clipped-corner transfer's finite steps
-      for s(40) > 335427/50000: the density's D4 expansion and mass, its essential
+      The release's own verification of s(40) > 335427/50000: run.py derives the
+      401-direction input and runs the vendored sqverify-fast on it, which decides the
+      nodal statement, and finite.py's exact-rational checks of the clipped-corner
+      transfer's finite steps (the density's D4 expansion and mass, its essential
       supremum by two sweeps, the reference-square containment, the clipped-corner bound,
-      the counting margin and the full-core closed form; run.py drives it with the
-      401-direction nodal run and writes results/verification.json.
+      the counting margin and the full-core closed form), writing results/verification.json.
     source:
       - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/finite.py
       - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/run.py
@@ -549,9 +552,10 @@ verifiers:
       Read in full by the 10 October 2026 review of the release
       (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) and not
       run here. Its nodal step is this repository's own sqverify-fast, vendored byte for
-      byte, so the release's nodal verification is V-sqverify-fast's; the finite steps
-      were decided again here by V-audit-clipped-corner-transfer, written without opening
-      this file.
+      byte from ef79288a4 (crate source digest d97758bb...), so a replay here with
+      V-sqverify-fast reproduces the release's nodal verification with the producer's
+      code; the finite steps were decided again here by V-audit-clipped-corner-transfer,
+      written without opening finite.py.
 
   - id: V-burns-n17-verify-py
     program: verify-n17-lower-bound-4_4811.py

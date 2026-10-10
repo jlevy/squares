@@ -797,7 +797,7 @@ The programs behind each result, by its cited evidence: who ran each check, how 
 - **T-132** — recorded
   - `E-wand125-fine-net-n29-582-followup-report`, the source’s own run: `V-wand125-sqverify-proof-net` (external)
 - **T-133** — confirmed, reproduced with the producer’s code
-  - `E-n040-guzhou-clipped-corner-report`, the source’s own run: `V-guzhou-n40-finite-py` (external); `V-sqverify-fast` (first-party)
+  - `E-n040-guzhou-clipped-corner-report`, the source’s own run: `V-guzhou-n40-finite-py` (external)
   - `E-n040-guzhou-clipped-corner-sqverify-fast-replay`, replayed here, reproduced with the producer’s code: `V-sqverify-fast`, `V-audit-clipped-corner-transfer` (first-party)
   - `E-n040-guzhou-clipped-corner-finite-audit`, audited here, independently re-implemented: `V-audit-clipped-corner-transfer` (first-party)
 

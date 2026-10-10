@@ -29275,7 +29275,7 @@ evidence:
     source_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
     certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
     replay_status: not-attempted
-    verifiers: [V-sqverify-fast, V-guzhou-n40-finite-py]
+    verifiers: [V-guzhou-n40-finite-py]
     limitations: >-
       Guzhou0806/n40-square-packing at e5abeb4d078a5c5b35df6204dd9b93378e5a7880
       (committed 2026-10-10T06:47:01Z), which the release n40-670854-20261010 names
@@ -29476,11 +29476,8 @@ evidence:
       assumptions:
         - JSON decimals read as their literal values with Fraction, and Python's unbounded integers, are exact.
         - The essential supremum of a finite sum of indicator densities is attained on an open cell of the arrangement and equals the greatest sum over the half-open stacks at the lower-left corners, which the review proves.
-        - The 401-direction nodal statement, the theorem's one hypothesis, which this audit does not decide; E-n040-guzhou-clipped-corner-sqverify-fast-replay discharges it.
+        - The 401-direction nodal statement, the theorem's one hypothesis, which this audit does not decide; E-n040-guzhou-clipped-corner-sqverify-fast-replay decides it.
       audit_record: docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md
-      conditional_on:
-        - hypothesis: the 401-direction nodal statement
-          discharged_by: [E-n040-guzhou-clipped-corner-sqverify-fast-replay]
     limitations: >-
       The finite steps of the transfer, decided on 2026-10-10 in exact rationals from the
       retained density and the release's parameters by
