@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **103** programs: **37** external and **66** first-party; **74** decide claims and **29** check premises.
-- **419** of **472** evidence entries name the programs that verified them: 228 reproduced with the producer’s code, 164 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
+- **105** programs: **38** external and **67** first-party; **76** decide claims and **29** check premises.
+- **422** of **475** evidence entries name the programs that verified them: 230 reproduced with the producer’s code, 165 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -57,6 +57,7 @@ second implementation agrees.
 | [`V-guzhou-r012-verify-py`](#v-guzhou-r012-verify-py) | certificates/R012/verify.py | Guzhou0806 | external | decides | 1 | 1 |
 | [`V-guzhou-r052-verify-py`](#v-guzhou-r052-verify-py) | certificates/R052/verify.py | Guzhou0806 | external | decides | 2 | 1 |
 | [`V-guzhou-n17-verify-cpp`](#v-guzhou-n17-verify-cpp) | verify.cpp | Guzhou0806 | external | decides | 5 | 3 |
+| [`V-guzhou-n40-finite-py`](#v-guzhou-n40-finite-py) | verifier/run.py | Guzhou0806 | external | decides | 1 | 1 |
 | [`V-burns-n17-verify-py`](#v-burns-n17-verify-py) | verify-n17-lower-bound-4_4811.py | Burns | external | decides | 1 | 0 |
 | [`V-massaccesi-n17-verify-py`](#v-massaccesi-n17-verify-py) | verify-n17-lower-bound-4_5058.py | Massaccesi | external | decides | 1 | 2 |
 | [`V-mira-17squares-point-checker`](#v-mira-17squares-point-checker) | verify_certificate.py | Mira | external | decides | 1 | 0 |
@@ -103,6 +104,7 @@ second implementation agrees.
 | [`V-n17-endpoint-checkers`](#v-n17-endpoint-checkers) | devtools.check_n17_root_certificate and devtools.check_n17_endpoint_feasibility | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-n17-catalogue-polynomial`](#v-n17-catalogue-polynomial) | devtools.check_n17_catalogue_polynomial | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-n11-optimality-checkers`](#v-n11-optimality-checkers) | The devtools.check_n11_optimality | Squares Project (Levy) | first-party | decides | 2 | 2 |
+| [`V-audit-clipped-corner-transfer`](#v-audit-clipped-corner-transfer) | devtools.audit_clipped_corner_transfer | Squares Project (Levy) | first-party | decides | 2 | 1 |
 | [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 4 | 2 |
 | [`V-check-n11-final-composition`](#v-check-n11-final-composition) | devtools.check_n11_final_composition | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-n11-lean`](#v-audit-n11-lean) | devtools.audit_n11_lean | Squares Project (Levy) | first-party | premises | 2 | 1 |
@@ -112,7 +114,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 108 | 20 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 109 | 21 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 5 | 5 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 9 | 8 |
@@ -734,6 +736,20 @@ The source's C++ exclusion checker, run interval by interval beside Kleddamag's 
 | `E-n017-guzhou-r067-source-replay` | replayed here | producer’s code | T-042 |
 | `E-n017-guzhou-r071-report` | the source’s own run | producer’s code | T-093 |
 | `E-n017-guzhou-r071-source-replay` | replayed here | producer’s code | T-093 |
+
+### `V-guzhou-n40-finite-py`
+
+**verifier/run.py, the release's entry point, which runs its vendored copy of this repository's sqverify-fast at all 401 directions and verifier/finite.py** · Guzhou0806 · external · decides · Python, Rust · exact-algebraic, interval-certified
+
+The release's own verification of s(40) > 335427/50000: run.py derives the 401-direction input and runs the vendored sqverify-fast on it, which decides the nodal statement, and finite.py's exact-rational checks of the clipped-corner transfer's finite steps (the density's D4 expansion and mass, its essential supremum by two sweeps, the reference-square containment, the clipped-corner bound, the counting margin and the full-core closed form), writing results/verification.json.
+
+- Source: [`packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/finite.py`](../../packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/finite.py), [`packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/run.py`](../../packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/run.py)
+- Versions run: SHA-256 `6046849f25be…`, revision `e5abeb4d078a` (finite.py); SHA-256 `4efa0d97dfb0…`, revision `e5abeb4d078a` (run.py; of `run.py`)
+- Note: Read in full by the 10 October 2026 review of the release (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) and not run here. Its nodal step is this repository's own sqverify-fast, vendored byte for byte from ef79288a4 (crate source digest d97758bb...), so a replay here with V-sqverify-fast reproduces the release's nodal verification with the producer's code; the finite steps were decided again here by V-audit-clipped-corner-transfer, written without opening finite.py.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-n040-guzhou-clipped-corner-report` | the source’s own run | producer’s code | T-133 |
 
 ### `V-burns-n17-verify-py`
 
@@ -1455,6 +1471,22 @@ Consume the published n = 11 optimality proposals component by component and dec
 | `E-n011-global-optimality-independent` | audited here | shared components | T-060 |
 | `E-n011-optimum-uniqueness` | audited here | shared components | T-112 |
 
+### `V-audit-clipped-corner-transfer`
+
+**devtools.audit_clipped_corner_transfer** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides in exact rationals the finite steps of Guzhou0806's clipped-corner transfer for s(40) > 335427/50000 on the retained rect_n40_L67 density: its D4 expansion, mass and exact essential supremum, the net's premises, the transfer's scalar chain and the full-core closed form, each held to both release receipts, with controls E to H. It also derives the 401-direction input, drives a reviewed sqverify-fast build on it with controls A to D, and judges those receipts, re-evaluating each control's exact capture by sqpack.rectangle_density; there it checks premises and receipts and decides no coverage.
+
+- Source: [`packing/devtools/audit_clipped_corner_transfer.py`](../../packing/devtools/audit_clipped_corner_transfer.py), [`packing/tests/test_audit_clipped_corner_transfer.py`](../../packing/tests/test_audit_clipped_corner_transfer.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/devtools/audit_clipped_corner_transfer.py`](../../packing/devtools/audit_clipped_corner_transfer.py)
+- Note: Its module docstring is its read log: written on 2026-10-10 from the review of the release and its scratch measurements, reading the release's parameters and receipts as data and never opening verifier/finite.py, verifier/run.py, verifier/prepare.py, verifier/release.py, tests/test_finite.py or PROOF.md. It shares with finite.py the definition of the density, its D4 expansion and the transfer's formulas, and no code.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | producer’s code | T-133 |
+| `E-n040-guzhou-clipped-corner-finite-audit` | audited here | independent | T-133 |
+
 ### `V-evand-exact-certificates`
 
 **devtools.evand_exact_certificates** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
@@ -1603,14 +1635,14 @@ The audit, replay driver and controls for wand125's linear certificates.
 
 ### `V-sqverify-fast`
 
-**sqverify-fast, run at every direction of a certificate's net (the standard 201, or the net a format M file declares) by devtools.sqverify_fast_census** · Squares Project (Levy) · first-party · decides · Rust, Python · interval-certified
+**sqverify-fast, run at every direction of a certificate's net (the standard 201, the net a format M file declares, or the net a format T file's certificate metadata sets) by devtools.sqverify_fast_census or another first-party driver** · Squares Project (Levy) · first-party · decides · Rust, Python · interval-certified
 
-Decides a measure-capture lower-bound certificate of format T, M or L on the 201-direction net, or of format M on the uniform net its file declares (proof_net, lemma N0): exact admission of its premises, then an exact-event vertex sweep at the axis and outward-rounded interval branch and bound at every other direction, every shrunk square at every centre of its domain capturing at least the threshold.
+Decides a measure-capture lower-bound certificate of format T, M or L on the 201-direction net, of format M on the uniform net its file declares (proof_net, lemma N0), or of format T on the uniform net its certificate metadata sets (D and angle_count, admitted under lemma N0's premises): exact admission of its premises, then an exact-event vertex sweep at the axis and outward-rounded interval branch and bound at every other direction, every shrunk square at every centre of its domain capturing at least the threshold.
 
 - Source: [`packing/sqverify_fast`](../../packing/sqverify_fast), [`packing/devtools/sqverify_fast_census.py`](../../packing/devtools/sqverify_fast_census.py), [`packing/devtools/check_sqverify_fast.py`](../../packing/devtools/check_sqverify_fast.py), [`packing/src/sqpack/rectangle_density.py`](../../packing/src/sqpack/rectangle_density.py)
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/sqverify_fast/independence-record.yaml`](../../packing/sqverify_fast/independence-record.yaml)
-- Note: A clean-room verifier, written from the mathematics without opening the authors' checkers (packing/sqverify_fast/INDEPENDENCE.md), its lemmas proved in packing/sqverify_fast/SOUNDNESS.md, and accepted at 4ddf37d9c by the two adversarial reviews of 3 October 2026, of its soundness and of its testing and independence. Its declared-net change (f007d7afd and 910b6b12c, source_sha256 d97758bb...) was accepted by the soundness review of 6 October 2026 (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md), for a declared net once the control's exact evaluator read that net (its DR-1), which the same day's re-check confirmed. Its census drives the binary, keeps every direction's receipt and puts negative controls on a certificate: for format M the original and a near-threshold mutant at its least-bound direction, and since the review of 6 October of FC-1's fix (docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md) the 99/100 mutant at every direction of the net, with check_sqverify_fast's exact evaluator and mutation helpers; for format T the original and both mutants at the least-bound leaf centre of least exact capture, evaluated by sqpack.rectangle_density, which was written before the crate and which its authors read (the format T route review of 6 October 2026, docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md). None of these decides coverage. tests/test_sqverify_fast_census.py admits a census row as evidence only for a build of a reviewed source.
+- Note: A clean-room verifier, written from the mathematics without opening the authors' checkers (packing/sqverify_fast/INDEPENDENCE.md), its lemmas proved in packing/sqverify_fast/SOUNDNESS.md, and accepted at 4ddf37d9c by the two adversarial reviews of 3 October 2026, of its soundness and of its testing and independence. Its declared-net change (f007d7afd and 910b6b12c, source_sha256 d97758bb...) was accepted by the soundness review of 6 October 2026 (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md), for a declared net once the control's exact evaluator read that net (its DR-1), which the same day's re-check confirmed. Its format T metadata-net path, by which a format T file's certificate block sets D and angle_count, has no review of its own: lemma N0 is stated for every net admission accepts, and the review of 10 October 2026 of Guzhou0806's s(40) bound (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md, its GN-6) read the admission path and every use of the admitted step and found the admitted net used wherever the net enters; admission refuses a metadata net that stops short of pi/4 (control D there). Since 0b5a62ca5 the census driver and the control evaluator read such a net as admission does (that review's GN-5), and no census case holds one yet. Its census drives the binary, keeps every direction's receipt and puts negative controls on a certificate: for format M the original and a near-threshold mutant at its least-bound direction, and since the review of 6 October of FC-1's fix (docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md) the 99/100 mutant at every direction of the net, with check_sqverify_fast's exact evaluator and mutation helpers; for format T the original and both mutants at the least-bound leaf centre of least exact capture, evaluated by sqpack.rectangle_density, which was written before the crate and which its authors read (the format T route review of 6 October 2026, docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md). None of these decides coverage. tests/test_sqverify_fast_census.py admits a census row as evidence only for a build of a reviewed source.
 
 | evidence | run | code | results |
 | --- | --- | --- | --- |
@@ -1722,6 +1754,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-n030-wand125-mixed-58835-sqverify-fast-replay` | replayed here | shared components | T-109 |
 | `E-n039-wand125-mixed-665-sqverify-fast-replay` | replayed here | shared components | T-110 |
 | `E-n041-wand125-mixed-6775-sqverify-fast-replay` | replayed here | shared components | T-111 |
+| `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | producer’s code | T-133 |
 
 ### `V-replay-chelokot-lean`
 

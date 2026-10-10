@@ -5281,7 +5281,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-03'
+  lastmod: '2026-10-10'
   status: live
 - path: cases/41.html
   canonical: cases/41.html
@@ -11916,6 +11916,43 @@ urls:
     - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/sample-diagnostic.json
     - packing/devtools/fine_net_followup.py
     - packing/devtools/audit_wand125_declared_net.py
+- path: result/t-133.html
+  canonical: result/t-133.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-10'
+  lastmod: '2026-10-10'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 40
+    established: null
+    attribution:
+      source_keys:
+      - '[Guzhou0806 n40 clipped corner 2026-10-10]'
+      published: '2026-10-10'
+    builds_on: null
+    evidence:
+    - E-n040-guzhou-clipped-corner-report
+    - E-n040-guzhou-clipped-corner-sqverify-fast-replay
+    - E-n040-guzhou-clipped-corner-finite-audit
+    artifacts:
+    - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/README.md
+    - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/PROOF.md
+    - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/certificate/parameters.json
+    - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/results/verification.json
+    - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/release-ci/results/verification.json
+    - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/replay-401.jsonl.gz
+    - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/runs.json
+    - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/replay-check.json
+    - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/finite-audit.json
+    - packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    - packing/devtools/audit_clipped_corner_transfer.py
+    - packing/sqverify_fast/SOUNDNESS.md
+    - docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md
 - path: results.html
   canonical: all-results.html
   kind: forwarder

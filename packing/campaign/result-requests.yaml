@@ -3831,34 +3831,42 @@ issues:
     opened: '2026-10-10'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: >-
       Guzhou0806 reports a lower bound for n = 40 with unrestricted rotations, extending wand125's
       rect_n40_L67 density (#281) by a 401-direction net and a clipped-corner transfer, and a weaker
       full-core bound that needs no clipped-corner estimate, in Guzhou0806/n40-square-packing at
-      e5abeb4d078a5c5b35df6204dd9b93378e5a7880 with release n40-670854-20261010 (n40-670854.zip, SHA-256
-      dbefee8658dc8f7d2e4a6ed21b0c3cd29f36ae393405a218f6bbfdce54465bc5). Its Rust nodal verifier, vendored
-      from this repository's sqverify-fast, passed all 401 domains locally and in GitHub Actions run
-      38032128403; the transfer and finite checks are Python. wand125 commented a review on 10 October
-      reporting a fresh replay of the published entry point and an independent exact-rational check
-      of the transfer step, with no gaps found.
+      e5abeb4d078a5c5b35df6204dd9b93378e5a7880 with release n40-670854-20261010. Its Rust nodal verifier,
+      vendored from this repository's sqverify-fast, passed all 401 domains locally and in GitHub Actions
+      run 38032128403; the transfer and finite checks are Python. wand125 commented a review on 10
+      October reporting a fresh replay of the published entry point and an independent exact-rational
+      check of the transfer step, with no gaps found. Imported on 10 October 2026: the release retained
+      in the guzhou-n40-clipped-corner-2026-10-10 packet with both its local and its CI receipts; the
+      401-direction nodal statement replayed here in full by sqverify-fast, the producer's own nodal
+      code, with controls A to D; the transfer's finite steps decided again by a first-party exact audit
+      sharing no code with the release's, with controls E to H; the mathematics reviewed the same day
+      with no blocking defect. Both bounds are registered together as T-133, and n = 40's reported and
+      verified lower bounds move to 335427/50000.
     read_through: '2026-10-10T07:53:18Z'
     results:
     - key: s40-clipped-corner
       claim: s(40) > 335427/50000 = 6.70854, by excluding a container of side exactly 335427/50000 and
         compactness.
       source: body
-      not_registered: Triage pending under think-3oi5; the release is not yet retained, replayed or reviewed
-        here.
-      queued: true
-      bead: think-3oi5
+      register:
+      - T-133
+      evidence:
+      - E-n040-guzhou-clipped-corner-report
+      - E-n040-guzhou-clipped-corner-sqverify-fast-replay
+      - E-n040-guzhou-clipped-corner-finite-audit
     - key: s40-full-core
       claim: s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908, without the clipped-corner density estimate.
       source: body
-      not_registered: Triage pending under think-3oi5; the release is not yet retained, replayed or reviewed
-        here.
-      queued: true
-      bead: think-3oi5
+      register:
+      - T-133
+      evidence:
+      - E-n040-guzhou-clipped-corner-report
+      - E-n040-guzhou-clipped-corner-sqverify-fast-replay
     beads:
     - think-3oi5
     answer_bead: think-3oi5
