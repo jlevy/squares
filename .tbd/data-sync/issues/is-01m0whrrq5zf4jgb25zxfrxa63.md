@@ -5,7 +5,7 @@ title: Use work clock role for an early checkpoint phase
 kind: bug
 status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0w9a47h5zrn7jf16pp2kpxs
 created_at: 2026-08-25T13:29:16.772Z
-updated_at: 2026-10-10T22:49:27.194Z
+updated_at: 2026-10-10T22:53:08.036Z
 closed_at: 2026-08-25T13:47:57.950Z
 close_reason: Corrected session 012 phase 3 to clock_role work and checkpoint wording; schema validation passes and D-312 records the recurrence.
 resolution: null

@@ -5,7 +5,7 @@ title: Repair session-012 clock contract
 kind: bug
 status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0w9a47h5zrn7jf16pp2kpxs
 created_at: 2026-08-25T12:43:54.496Z
-updated_at: 2026-10-10T22:49:27.194Z
+updated_at: 2026-10-10T22:53:07.208Z
 closed_at: 2026-08-25T12:50:48.909Z
 close_reason: Corrected the active phase recording mode and non-understated wall budget; AgentSession/v2 validation passes. D-309 retains the draft error.
 resolution: null

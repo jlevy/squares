@@ -5,14 +5,14 @@ title: Stopped session retained a completed final phase
 kind: bug
 status: closed
 priority: 3
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: codex-root
 labels: []
 dependencies: []
 parent_id: is-01m0vr7g27g67p699aepcdksxd
 created_at: 2026-08-25T10:58:11.314Z
-updated_at: 2026-08-25T11:00:40.431Z
+updated_at: 2026-10-10T22:53:30.946Z
 closed_at: 2026-08-25T11:00:40.430Z
 close_reason: "Fixed in pushed terminal checkpoint eb1473a: phase 15 and session-010 are both stopped; packing-ledger check passes."
 resolution: null
