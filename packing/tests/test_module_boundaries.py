@@ -20,6 +20,7 @@ import yaml
 from devtools import (
     evand_arrangement_reports,
     evand_exact_certificates,
+    rigidity_status,
     squish_followup_packets,
     squish_second_update_packets,
     squish_upper_bound_packets,
@@ -28,6 +29,7 @@ from devtools import (
 from devtools.check_readme import meaningful_top_level_entries
 from sqpack.cli import validate
 from sqpack.project import ProjectLayoutError, require_project_root
+from sqpack.yamlio import safe_load
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = PROJECT_ROOT.parent
@@ -582,6 +584,22 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         "/packages/workbench/",
         "/vendor/kpress/",
     } <= sparse
+    # Rigidity provenance is validated even when the selected pose is not rigid.
+    # Keep every cited source/date file, without copying the whole campaign/archive.
+    audit = safe_load(rigidity_status.SOURCES.read_text())["audit"]
+    assessments = [
+        *audit["evidence_dates"].values(),
+        *audit["source_assertions"],
+        *audit["alternatives"],
+    ]
+    required_references = {
+        "/" + reference.split("#", 1)[0]
+        for source in assessments
+        for field in ("reference", "date_reference")
+        if (reference := source[field]) is not None
+        and reference.startswith(("packing/campaign/", "packing/resources/"))
+    }
+    assert required_references <= sparse
     # Every upper-bound packet the atlas can plan from rides in the slice, read from the
     # packet registry rather than listed here, so a new packet cannot pass a whole
     # checkout and fail the slice, as franciscouzo-square-packing-2026-10-03 did on

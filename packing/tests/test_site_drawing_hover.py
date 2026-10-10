@@ -8,8 +8,10 @@ the atlas cell's only visual response is the wash behind it (think-8eb4).
 Chromium decodes the actual asset and the probe reads its fetched SVG content,
 geometry and styles in an isolated shadow root. Screenshot pixels on the frame and
 canvas hold contrast and unchanged ink; pixels in the cell's padding hold its wash.
-Each screenshot uses two device pixels per CSS pixel, so the frame covers a whole
-pixel. The inline hero retains its original checks against the page's own ink.
+The default Small frame's 12-unit stroke spans about 0.74 CSS pixels. Three device
+pixels per CSS pixel make it wider than two device pixels, so at least one pixel is
+wholly covered regardless of subpixel placement. The inline hero retains its original
+checks against the page's own ink.
 """
 
 from __future__ import annotations
@@ -162,7 +164,7 @@ def painted(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
                 for scheme in SCHEMES:
                     page = browser.new_page(
                         viewport={"width": 1280, "height": 900},
-                        device_scale_factor=2,
+                        device_scale_factor=3,
                         color_scheme=scheme,
                     )
                     response = page.goto(

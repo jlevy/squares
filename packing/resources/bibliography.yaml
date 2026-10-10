@@ -64,18 +64,18 @@ sources:
       DOI 10.5281/zenodo.23212059. Primary paper and selected source retained in
       web/squarepacker-k2-minus-c-cube-root-2026-10-07/. The source states extensive
       Claude (Anthropic) assistance and no human peer review. CC BY 4.0 paper, MIT code.
-  - key: '[Queuingtheorydotcom n11 optimality 2026]'
-    authors: [Queuingtheorydotcom]
+  - key: '[Ahmed n11 optimality 2026]'
+    authors: [Ahmed]
     year: 2026
     venue: GitHub
     short_venue: Web
     dated: '2026-09-29'
-    credit: Queuingtheorydotcom after Levy, Kleddamag
-    short_credit: Queuingtheorydotcom after Levy et al.
+    credit: Ahmed after Levy, Kleddamag
+    short_credit: Ahmed after Levy et al.
     lineage: builds-on-project
     note: >-
       11SquaresOptimal at f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c, announced by
-      Queuingtheorydotcom, who posts on X as @ManassehA06, as an Astra-assisted global
+      Mannaseh Ahmed, who posts on X as @ManassehA06, as an Astra-assisted global
       optimality proof (announced on 29 September as @MathCompSciFTW; the post is retained
       in web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/announcement/).
       README and THIRD_PARTY_NOTICES credit jlevy/squares at c55726e1e885227f63110131c0a914665175ff89,
@@ -83,17 +83,17 @@ sources:
       announcement credits Kleddamag. No blanket license covers the collection.
       The public derivative has not had a fresh full geometric replay according to
       docs/PUBLICATION.md. Retained intake: web/n11-optimality-2026-09-29/.
-  - key: '[Queuingtheorydotcom 11SquaresFormalized 2026]'
-    authors: [Queuingtheorydotcom, ctjlewis, wand125, Gurevitch, Julian-JJ, Guzhou0806]
+  - key: '[Ahmed 11SquaresFormalized 2026]'
+    authors: [Ahmed, ctjlewis, wand125, Gurevitch, Julian-JJ, Guzhou0806]
     year: 2026
     venue: GitHub
     short_venue: Web
     dated: '2026-10-06'
-    credit: Queuingtheorydotcom et al. after Levy, Daniel
+    credit: Ahmed et al. after Levy, Daniel
     lineage: builds-on-project
     note: >-
       11SquaresFormalized at cdc746ed907d258057c283aeb6d077cb2c27e349, the Lean 4
-      formalization of T-060's optimality proof. Queuingtheorydotcom, who posts on X as
+      formalization of T-060's optimality proof. Mannaseh Ahmed, who posts on X as
       @ManassehA06, announced on 6 October 2026 that it "has been formalized in lean thanks
       to Astra and Claude", thanking Joshua Levy (@ojoshe), Kleddamag, wand125, Guzhou0806
       and ctjlewis "for aiding in the process"; the post, the author's own and 1/n of a
@@ -102,7 +102,7 @@ sources:
       (https://x.com/ojoshe/status/2107513739222380935), calling it "a Lean formalization
       from @ManassehA06 assembled over the last few days, with assistance from @ctjlewis
       @guzhou0806 and others"; both posts are retained in the intake's
-      receipts/announcement/. Authors as read from ACKNOWLEDGEMENTS.md: Queuingtheorydotcom (the underlying
+      receipts/announcement/. Authors as read from ACKNOWLEDGEMENTS.md: Mannaseh Ahmed (published as Queuingtheorydotcom; the underlying
       computer-assisted proof, and the formalization's development and integration),
       EvolvingPrograms and ctjlewis (verification infrastructure and the complete replay),
       wand125 (n11-optimality-lean, certificate checkers, generated proofs), Benjamin
@@ -1602,6 +1602,19 @@ sources:
       SQUISH packing at 155. The n155 side equals Couzo''s earlier issue451 certificate. MIT-licensed
       source bytes retained; Claude assistance disclosed. No KKT, local or global optimality claim is
       admitted.'
+  - key: '[wand125 fine-net n29 2026-10-10]'
+    authors:
+    - wand125
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-10'
+    credit: wand125 after Tokoharu and Levy
+    lineage: builds-on-project
+    note: The later n29 finer-net measure lower-bound report, s(29) >= 291/50, at source 22a23c8a99aa4e9616d596bc2f28555bacbee3dd,
+      with its data in release square-lower-bounds-v1; the release asset is pinned by size and digest and
+      kept outside Git. Maintained measure and declared-net premises accepted; native capture, controls
+      and adoption pending. The enclosing MIT notice does not settle redistribution of the nested verifier,
+      which adapts this project's sqverify_fast, so a maintained replay is not another independent implementation.
 credited_names:
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta

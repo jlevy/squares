@@ -256,9 +256,17 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
     from devtools.check_source_coverage import scope_contains  # noqa: PLC0415
     from devtools.render_n11_lower_bounds_explainer import COMPOSITE_ASSETS  # noqa: PLC0415
     from devtools.render_research_tables import load_cases  # noqa: PLC0415
+    from sqpack.known_best import (  # noqa: PLC0415
+        COMPOSITE_PDF_EDITION_DATE,
+        PUBLISHED_COMPOSITE_PDF_NAMES,
+    )
     from sqpack.release import PUBLICATION_DATE  # noqa: PLC0415
 
     day = paper_front.iso_date(PUBLICATION_DATE)
+    # Download registration follows the declared PDF edition, independently of the
+    # source-data edition and the wall clock. Retained URL history is handled below.
+    pdf_edition_day = date.fromisoformat(COMPOSITE_PDF_EDITION_DATE).isoformat()
+    dated_pdfs = frozenset(PUBLISHED_COMPOSITE_PDF_NAMES.values())
     records = cast(
         dict[str, Any], load_yaml(overview_data.RESULTS.read_text(encoding="utf-8"))
     )["results"]
@@ -338,7 +346,8 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
             "asset-file",
             "paper:" + render_overview.N11_LOWER_BOUNDS_EXPLAINER,
             "devtools.render_n11_lower_bounds_explainer:write",
-            lastmod=day,
+            first=pdf_edition_day if path.name in dated_pdfs else REGISTRATION_DATE,
+            lastmod=pdf_edition_day if path.name in dated_pdfs else day,
         )
         for path in COMPOSITE_ASSETS
     ]

@@ -69,6 +69,8 @@ WEB = PROJECT / "resources/web"
 #: The verifier's crate, whose sources `build.rs` digests into every build.
 CRATE = PROJECT / "sqverify_fast"
 STEP = Fraction(83, 40000)
+#: The standard net's direction count, which admission uses when nothing declares a net.
+STANDARD_COUNT = 201
 # The retained stage-4 controls of formats M and L: packet and receipt folder.
 MIXED_CONTROLS = (
     ("wand125-point-and-mixed-2026-10-01", "n37"),
@@ -117,15 +119,35 @@ def crate_source_sha256(crate: Path = CRATE) -> str:
     return digest.hexdigest()
 
 
+def metadata_net(raw: dict[str, Any]) -> tuple[Fraction, int] | None:
+    """The net a candidate's `certificate` metadata sets, as admission reads it, or None.
+
+    Admission takes `certificate.D` and `certificate.angle_count` over the standard net,
+    each where present; format T's metadata may change the net that way, and a format M or
+    L file's may only restate it (jlevy/squares#485, GN-5 of the review of 10 October).
+    """
+    metadata = raw.get("certificate")
+    if not isinstance(metadata, dict) or not {"D", "angle_count"} & metadata.keys():
+        return None
+    step = Fraction(str(metadata["D"])) if "D" in metadata else STEP
+    return step, int(metadata.get("angle_count", STANDARD_COUNT))
+
+
 def net_step(raw: dict[str, Any]) -> Fraction:
-    """A format M or L candidate's half-angle step: its `proof_net` step, else 83/40000.
+    """A candidate's half-angle step: its `proof_net` step, else its metadata's, else
+    83/40000.
 
     Read as an exact rational from the file's own text, as admission reads it: a format M
-    file may declare its own net (SOUNDNESS.md, lemma N0), and admission refuses a
-    `proof_net` in any other format and metadata that changes a format M or L net.
+    file may declare its own net (SOUNDNESS.md, lemma N0), a format T file's metadata may
+    set one (`metadata_net`), and admission refuses a `proof_net` in any other format and
+    metadata that changes a format M or L net, so for an admitted file the metadata's step
+    is the net's whenever it is present.
     """
     net = raw.get("proof_net")
-    return Fraction(str(net["step"])) if isinstance(net, dict) else STEP
+    if isinstance(net, dict):
+        return Fraction(str(net["step"]))
+    declared = metadata_net(raw)
+    return STEP if declared is None else declared[0]
 
 
 def read_raw(path: Path) -> dict[str, Any]:
@@ -252,9 +274,17 @@ def write(raw: dict[str, Any], directory: Path, name: str) -> Path:
 
 
 def scaled(raw: dict[str, Any], factor: Fraction) -> dict[str, Any]:
+    """A format T candidate with every weight scaled by `factor` and its metadata
+    dropped, as the stage-4 controls drop it; a net the metadata sets other than the
+    standard one is kept, so the mutant is decided on the original's net (GN-5)."""
     copy = json.loads(json.dumps(raw))
     copy["weights"] = [str(Fraction(w) * factor) for w in raw["weights"]]
-    copy.pop("certificate", None)
+    metadata = copy.pop("certificate", None)
+    declared = metadata_net(raw)
+    if isinstance(metadata, dict) and declared not in (None, (STEP, STANDARD_COUNT)):
+        copy["certificate"] = {
+            key: metadata[key] for key in ("D", "angle_count") if key in metadata
+        }
     return copy
 
 

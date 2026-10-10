@@ -7,13 +7,20 @@
 // Runs in the head, before the body is drawn, so the chrome never flashes.
 (() => {
   const query = new URLSearchParams(location.search);
-  if (query.get("atlas") === "triangle") {
-    document.documentElement.setAttribute("data-site-atlas-view", "triangle");
-  }
+  document.documentElement.setAttribute(
+    "data-site-atlas-view",
+    query.get("atlas") === "grid" ? "grid" : "triangle",
+  );
   const size = query.get("size");
-  if (size === "small" || size === "large") {
-    document.documentElement.setAttribute("data-site-atlas-size", size);
-  }
+  document.documentElement.setAttribute(
+    "data-site-atlas-size",
+    size === "medium" || size === "large" ? size : "small",
+  );
+  const scale = query.get("scale");
+  document.documentElement.setAttribute(
+    "data-site-atlas-scale",
+    scale === "row" || scale === "global" ? scale : "fixed",
+  );
   if (query.get("view") !== "embed") {
     return;
   }

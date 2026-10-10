@@ -736,7 +736,8 @@ issues:
           both quarter-power routes, eight cube-root ranges, geometric ceilings and
           four asymptotic floors. The consequences remain conditional on the reviewed
           geometric premises and the independently tracked per-box obligation.
-          Final integration and merge-readiness gates remain pending.
+          The intake itself merged in PRs #439 and #441 on 9 October; the review's
+          own verdict stays queued under think-6ptr.
     beads: [think-6ptr]
     answer_bead: think-u1kq
     replies: []
@@ -3253,12 +3254,19 @@ issues:
         publication the author ran sqverify_fast from the bundle's source on a fresh machine, with 2,073
         of 2,073 directions verified and the mass x 0.985 control refused in all 32 sampled directions.
       source: https://github.com/jlevy/squares/issues/446#issuecomment-6092965941
-      not_registered: Not yet retained, registered or replayed here; think-r333 owns its stages 1 to 3.
-        The 1163/200 report and its evidence entry stand, and the unreported 2327/400 certificate of
-        dd6a7cc stays with think-ndvg's 2026-10-09 watch read.
-      queued: true
-      bead: think-r333
+      register:
+      - T-132
+      evidence:
+      - E-wand125-fine-net-n29-582-followup-report
     asks:
+    - what: Replay and review the n29 candidate at 291/50 over all 2073 directions with whole-net
+        controls and restored positives, from a candidate retained where the census reads it.
+      state: queued
+      bead: think-r333
+      note: Priced at about 4.3 CPU-hours from an eight-direction diagnostic sample (receipts in
+        wand125-fine-net-n29-2026-10-10); waits for an owner budget. The 1163/200 report and its evidence
+        entry stand, and the unreported 2327/400 certificate of dd6a7cc stays with think-ndvg's
+        2026-10-09 watch read.
     - what: Run a reviewed maintained-only complete seven-case native capture and whole-net v2 control
         protocol, with full input/result custody, before any lower-bound or rating promotion.
       state: queued
@@ -3316,6 +3324,7 @@ issues:
     beads:
     - think-edo8
     - think-88r0
+    - think-fvz4
     answer_bead: think-edo8
     replies: []
     close_when: The supported import and disposition are on main and the owner posts the resulting state;
@@ -3393,10 +3402,14 @@ issues:
     asks:
     - what: Finish the separately reviewed confirming records, final exact-head CI and main publication
         before the final registration reply.
-      state: queued
+      state: done
       bead: think-q3pd
-      note: Complete51-job native and actual private-worker receipts already exist; CI and source-specific
-        confirming-record integration remain separate from author reports.
+      note: >-
+        Complete51-job native and actual private-worker receipts already exist; CI and source-specific
+        confirming-record integration remain separate from author reports. Done on 2026-10-10 by the
+        record on main, where #448 imported and #459 confirmed T-127 at V3/C3, CI passed on main at
+        657cc486, and the Pages deployment 6974749559 of that commit passed its published-site check
+        (3892 of 3892) with the T-127 row matching the register.
     beads:
     - think-l360
     - think-q3pd
@@ -3515,6 +3528,7 @@ issues:
       queued: false
     beads:
     - think-iyij
+    - think-fvz4
     answer_bead: think-iyij
     replies: []
     close_when: T-131 and T-128 are confirmed on main after independent review and adoption, and the

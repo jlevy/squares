@@ -375,14 +375,14 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: 22a23c8a99aa4e9616d596bc2f28555bacbee3dd
     read_on: '2026-10-10'
-    bead: think-r333
     note: >-
       One commit of 10 October past the dd6a7cc read: 22a23c8 adds
       problems/square-lower-bounds/certificates/mixed_n29_L582/, the check2 bundle reporting
-      s(29) >= 291/50 = 5.82 on the 2,073-direction net (README, bundle.json, ASSET.json naming
-      the data asset in release square-lower-bounds-v1, files-sha256.json, the check2 source
-      notes and script, and search notes), with its INDEX.json and README entries. #446's
-      comment of the same day reports it, superseding 1163/200; think-r333 owns its import.
+      s(29) >= 291/50 = 5.82 on the 2,073-direction net, which #446's comment of the same day
+      reports. The register source wand125-fine-net-n29-582-followup-2026-10-10 pins that path at
+      22a23c8 and the wand125-fine-net-n29-2026-10-10 packet retains its facts (T-132, think-r333).
+      The commit's other changes, to problems/square-lower-bounds/INDEX.json and that directory's
+      README, are the index entries for the same certificate; nothing else to import.
   - url: https://github.com/evand/square-packing
     read_through: 799be37ac5d80c3ec39bcdcb8215847e77810c95
     read_on: '2026-10-10'

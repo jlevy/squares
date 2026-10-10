@@ -185,8 +185,8 @@ BADGE_VOCABULARY = {
     ("O", "solid"): "proved optimal",
     ("=", "solid"): "exact value known",
     ("≈", "muted"): "only known numerically",
-    ("R", "solid"): "rigid (established here)",
-    ("R", "muted"): "annotated rigid by the catalogue",
+    ("R", "solid"): "known rigid",
+    ("R", "muted"): "known rigid",  # Legacy records are normalized to one solid R.
 }
 # SUMMARY_STAR_POINTS from packing/devtools/build_known_best_atlas.py: the five-pointed star the
 # poster draws as a polygon, apex up, about its own centre, with its inset and the span it fills
@@ -1164,23 +1164,31 @@ def load_facts(manifest_entries: dict[int, dict]) -> dict[str, dict]:
             key = (badge["glyph"], badge["style"])
             if key not in BADGE_VOCABULARY:
                 raise ValueError(f"n={n}: badge {key} is not in the poster's vocabulary")
-            badges.append(
-                {"glyph": badge["glyph"], "style": badge["style"], "meaning": badge["meaning"]}
-            )
+            if badge["glyph"] != "R":
+                badges.append(
+                    {
+                        "glyph": badge["glyph"],
+                        "style": badge["style"],
+                        "meaning": badge["meaning"],
+                    }
+                )
+        # The producer assesses the displayed witness; alternate catalogue variants do
+        # not establish rigidity for this geometry. Legacy records carry the same fact
+        # through their R badge until the binary assessment is regenerated.
+        known_rigid = entry["rigidity"].get(
+            "known_rigid", any(badge["glyph"] == "R" for badge in entry["badges"])
+        )
+        if known_rigid:
+            badges.append({"glyph": "R", "style": "solid", "meaning": "known rigid"})
         # What the record leaves open for this n, in the panel's fixed order.
         open_items = []
         if entry["optimality"]["status"] == "open":
             open_items.append("optimality")
         if entry["exactness"]["state"] not in ("closed-form", "minimal-polynomial"):
             open_items.append("exact value")
-        # **Rigidity is not listed as open.** `not-established` holds for 304 of the 324 n, and
-        # it means the record carries no rigidity fact -- not that rigidity is an open question
-        # anyone has posed. Printing `? rigidity` against a packing a reader can see is rigid,
-        # which is most of the grid-filling ones, made the panel look wrong about the picture
-        # beside it. An absent fact and an open question are different things and the panel says
-        # only what it knows: rigidity appears as an `R` badge under PROVEN where it is
-        # established, and not at all where it is not. `think-769x` tracks what the record
-        # should actually say.
+        # A missing known-rigid assessment is not an open question. The panel displays
+        # one dark R where the selected geometry is known rigid; proof/source assurance
+        # and dates remain in the canonical rigidity record.
         facts[str(n)] = {
             "relation": relation,
             # The TeX the panel's lines are set from, rendered below, once, for every n.

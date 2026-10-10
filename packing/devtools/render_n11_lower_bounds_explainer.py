@@ -371,9 +371,11 @@ FILM_POSTER = REPO / "packages" / "workbench" / "assets" / "ascent-n1-100-poster
 #: than publishing its own, so its poster travels here with the rest.
 OVERVIEW_FILM_POSTER = FILM_POSTER.with_name("ascent-n1-324-poster.png")
 COMPOSITE_ASSETS = (
-    *(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
+    *(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png")),
+    COMPOSITE_STEM.with_name("square-packings-100-20261008.pdf"),
     COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png"),
-    *(POSTER_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
+    *(POSTER_STEM.with_suffix(f".{ext}") for ext in ("svg", "png")),
+    POSTER_STEM.with_name("square-packings-324-20261008.pdf"),
     FILM_POSTER,
     OVERVIEW_FILM_POSTER,
 )
@@ -383,8 +385,8 @@ COMPOSITE_ASSETS = (
 #: deploy for resolution nothing displays.
 COMPOSITE_PNG = COMPOSITE_STEM.with_suffix(".png")
 #: The landscape crop of the composite the atlas builder writes: the top of the same
-#: drawing at 2400x1256, 1.91:1 to the nearest whole pixel. It was this page's link
-#: preview until 2026-10-01, when every page of the site took the one card
+#: drawing with its current canvas width and a retained 1256-unit height. It was this
+#: page's link preview until 2026-10-01, when every page of the site took the one card
 #: (`render_overview.SOCIAL_CARD`); the overview's atlas card still shows it, so it is
 #: still published beside the page.
 COMPOSITE_CARD = COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png")
@@ -1982,7 +1984,7 @@ def _figure_totals() -> dict[str, Any]:
 
 
 def starred_lower_bounds() -> int:
-    """How many cells in Figure 2 carry the star: a recent lower bound, whoever proved it.
+    """How many cells in Figure 2 have a recent lower bound, whoever proved it.
 
     The composite counts them in its own legend from the figure record; the caption
     beside the image reads the same total, so the two cannot disagree.
@@ -1993,8 +1995,8 @@ def starred_lower_bounds() -> int:
 def lower_bounds_proved_here() -> int:
     """How many of Figure 2's lower bounds are this project's own new results.
 
-    Not the star's count: the star marks recent results, most of them by others, and a
-    sentence about what this research agenda produced must not borrow it.
+    The recent-bound count includes results by others; a sentence about what this
+    research agenda produced needs its own total.
     """
     return int(_figure_totals()["lower_bound_first_proved_here"])
 

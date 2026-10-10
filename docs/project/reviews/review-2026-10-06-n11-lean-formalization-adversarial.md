@@ -33,7 +33,7 @@ by Others); `packing/campaign/result-import.md` stages 3 to 5;
 `E-k2m3-evand-bentz-lean-build`, `E-chelokot-square-minus-two-lean`,
 `E-n013-evand-casefree-cover-lean-kernel` and the two earlier n11 entries in
 `evidence.yaml`; `V-queuingtheory-n11-lean`; the bibliography entry and its predecessor
-`[Queuingtheorydotcom n11 optimality 2026]`; the coverage entry.
+`[Ahmed n11 optimality 2026]`; the coverage entry.
 In the packet: the README and `acquisition/`; `Geometry.lean`, `Endpoint.lean`,
 `EndpointBounds.lean`, `Foundations.lean`, `Optimality.lean`,
 `Pending/S09_GlobalLowerBound.lean`, `Verification.lean`, `lakefile.lean`,
@@ -262,8 +262,8 @@ lines 11 to 12 and 25.
 It links `jlevy.github.io/squares/cases/11.html`, not 11SquaresFormalized, and it says
 the proof “has been formalized … thanks to Astra and Claude” without saying by whom.
 `ACKNOWLEDGEMENTS.md` does not name Square Packing Fan or @ManassehA06. The predecessor
-entry gives Queuingtheorydotcom’s X account as @MathCompSciFTW, so nothing retained
-connects @ManassehA06 to this repository or to its authorship.
+entry gives Ahmed’s X account as @MathCompSciFTW, so nothing retained connects
+@ManassehA06 to this repository or to its authorship.
 epistemics.md line 455 says credit is “read from the source’s own attribution files …
 never inferred here”.
 
@@ -274,7 +274,7 @@ as the poster of the announcement, until the source says otherwise.
 ### Finding 4 — NON-BLOCKING: `after Kleddamag` is not in the source’s attribution files
 
 **Where:** `packing/resources/bibliography.yaml` line 56,
-`credit: Queuingtheorydotcom et al. after Levy, Kleddamag, Daniel`.
+`credit: Ahmed et al. after Levy, Kleddamag, Daniel`.
 
 **What is wrong:** `ACKNOWLEDGEMENTS.md` names what the formalization builds on:
 jlevy/squares' exact formulas (Levy), Evan Daniel’s definitions and checker, and

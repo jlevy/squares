@@ -801,7 +801,47 @@ def _for_author(text: str) -> str:
     return " ".join(text.split())
 
 
-def _plain(entry: Entry, record: Mapped | None) -> str:
+def _lead(claim: str) -> str:
+    """A claim as the lead of a draft's list item, before its colon: without a closing
+    full stop, which would read `.:`. An ellipsis, as in issue 247's repeating decimal
+    `3.875000003875...`, is part of the claim and stays."""
+    claim = claim.rstrip()
+    return claim[:-1] if claim.endswith(".") and not claim.endswith("...") else claim
+
+
+def _run_here(record: Mapped | None, register: Register) -> str:
+    """What the record holds of work done here on a register entry, in words, or nothing.
+
+    `C0` says that nothing is counted toward confirmation, not that nothing ran: a
+    complete replay can be retained beside the report entry while it waits for review,
+    as T-128's, T-130's and T-131's were. So these words follow the evidence rather than
+    the rung: each cited entry whose replay passed, and the `receipts/` directories among
+    the entry's artifacts, where a packet keeps the record of each run here.
+    """
+    if not record:
+        return ""
+    passed = [
+        ref
+        for ref in record.get("evidence") or ()
+        if (register.evidence.get(ref) or {}).get("replay_status") == "passed"
+    ]
+    marker = "/receipts/"
+    receipts = dict.fromkeys(
+        path[: path.index(marker) + len(marker)]
+        for path in map(str, record.get("artifacts") or ())
+        if marker in path
+    )
+    parts: list[str] = []
+    if passed:
+        replays = "replay of {} has" if len(passed) == 1 else "replays of {} have"
+        parts.append(f"the {replays.format(', '.join(passed))} passed")
+    if receipts:
+        where = ", ".join(f"`{path}`" for path in receipts)
+        parts.append(f"receipts of what has been run on it here are retained in {where}")
+    return " and ".join(parts)
+
+
+def _plain(entry: Entry, record: Mapped | None, register: Register) -> str:
     """An entry's state in words an author can read without the ladder beside them."""
     if entry.state == CONFIRMED:
         where = f"at {entry.rungs}" if entry.id.startswith("T-") else "here"
@@ -812,14 +852,18 @@ def _plain(entry: Entry, record: Mapped | None) -> str:
         return f"a defect is recorded against it: {entry.why}"
     if not entry.id.startswith("T-"):
         return f"recorded as evidence ({entry.rungs}); not yet confirmed here"
+    ran = _run_here(record, register) if entry.status == result_status.RECORDED else ""
     words = {
-        result_status.RECORDED: "registered as reported: nothing has been read or replayed "
-        "here yet",
+        result_status.RECORDED: "registered as reported"
+        if ran
+        else "registered as reported: nothing has been read or replayed here yet",
         result_status.REVIEWED: "reviewed: its argument has been read here and no blocking "
         "defect found, and no replay here has passed yet",
         result_status.CONFIRMED: f"replayed, short of confirmation: {entry.how}",
     }[entry.status]
     sentence = f"{words} ({entry.rungs})"
+    if ran:
+        sentence += f"; {ran}, none of it yet counted toward confirmation"
     activity = (record or {}).get("activity") or {}
     if activity.get("state") == result_status.IN_ANALYSIS:
         sentence += (
@@ -877,17 +921,17 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
                     if result.state == DEFECT
                     else "the record does not yet hold this defect"
                 )
-                lines.append(f"- {result.claim}: {held}.")
+                lines.append(f"- {_lead(result.claim)}: {held}.")
             else:
-                lines.append(f"- {result.claim}:")
+                lines.append(f"- {_lead(result.claim)}:")
             for entry in _shown(result, reported[result.key]):
                 record = register.results.get(entry.id)
-                lines.append(f"  - {entry.id}, {_plain(entry, record)}.")
+                lines.append(f"  - {entry.id}, {_plain(entry, record, register)}.")
         lines.append("")
     pending = [result for result in state.results if not result.entries]
     if pending:
         lines += ["**Not registered.**", ""]
-        lines += [f"- {result.claim}: {result.reason}" for result in pending]
+        lines += [f"- {_lead(result.claim)}: {result.reason}" for result in pending]
         lines.append("")
     queued = _still_queued(issue, state, register)
     if queued:
@@ -917,14 +961,18 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
 
 
 def _still_queued(issue: Mapped, state: IssueState, register: Register) -> list[str]:
+    """Each open register entry an unsettled result maps to, with its next rung, once
+    however many results map to it; then each ask still queued."""
     queued: list[str] = []
+    named: set[str] = set()
     for result in state.results:
         if result.settled:
             continue
         for entry in result.entries:
             record = register.results.get(entry.id)
-            if record is None or entry.state != OPEN:
+            if record is None or entry.state != OPEN or entry.id in named:
                 continue
+            named.add(entry.id)
             queued.append(f"{entry.id}: {_for_author(str(record.get('next_rung', '')))}")
     queued.extend(
         str(ask["what"]) + (f" ({ask['note']})" if ask.get("note") else "")

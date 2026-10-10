@@ -273,6 +273,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-128](packing/frontier/RESULTS.md) | 105, 108, 127, 131, 155, 180, 228, 306 | `V0` | `C0` | `S3` | `previously-published` | Eight complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(105) <= 10.790618268107144505815379335866, s(108) <= 10.904821012320356429055628704222, s(127) <= 11.810878787589179839642367108002, s(131) <= 11.951105389414677460694240669403, s(155) <= 12.95249894401400738196585056694, s(180) <= 13.916993522477832483558124720393, s(228) <= 15.604601475729674284720634102188 and s(306) <= 17.963433717491425739593840075522. |
 | [T-130](packing/frontier/RESULTS.md) | 84, 86, 105, 175, 270 | `V0` | `C0` | `S3` | `previously-published` | Five complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(84) <= 9.697934799014921307163820128651, s(86) <= 9.820535407496742209971278280039, s(105) <= 10.789303783748158831034729697921, s(175) <= 13.767155163542549110085664417048 and s(270) <= 16.9367230228761834072968722597. |
 | [T-131](packing/frontier/RESULTS.md) | 132 | `V0` | `C0` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(132) <= 11.987099332245063227179742877435. |
+| [T-132](packing/frontier/RESULTS.md) | 29 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on jlevy/squares#446, is reported to prove s(29) >= 291/50 = 5.82. |
 | [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V3` | `C3` | `S2` | `apparently-novel` | The sixteen-point set’s unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips’ a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
 | [T-005](packing/frontier/RESULTS.md) | 13 | `V3` | `C3` | `S2` | `apparently-novel` | Bentz 2010, Lemma 10 is false as printed -- the middle replacement point (1, 1.74) is refuted by an exact escape certificate, and the published page image carries the same transposed text -- and true under the corrected reading (1.74, 1), with all three corrected replacement covers certified exactly. |
 | [T-011](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `previously-published` | Trump’s 1979 packing is exactly valid: 11 unit squares in a square of side the published degree-8 algebraic number 3.877083590022814 …, with 14 of 55 pairs in exact zero-separation contact and 20 corner coordinates exactly on the boundary, so s(11) <= that side. |
@@ -332,7 +333,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 131 | 131 registered, 101 by others |
+| Frontier results | 132 | 132 registered, 102 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -592,6 +593,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: Couzo’s and Daniel’s Rational Refinement Replays (T-128, T-130, T-131)](docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 335427/50000`: Review of the Clipped-Corner Transfer on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) | dated review record | record | retained | — |
 | [Review: Gupta exact rational refinements, issue #438](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md) | dated review record | record | retained | — |
 | [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |
@@ -4600,7 +4602,7 @@ The earlier lower-bound program passed Stromquist’s bound on 2026-09-04:
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | $3.877083590022814\ldots$ (exactly $T$) | Walter Trump, 1979; exact witness [T-011](packing/frontier/RESULTS.md) |
-| Best certified lower bound | `root(P_trump11, 3.87708359002281417730789706010096) = 3.877083590022814…` (exactly $T$) | Queuingtheorydotcom’s proof, independently replayed and audited here as [T-060](packing/frontier/RESULTS.md), `V3/C3` |
+| Best certified lower bound | `root(P_trump11, 3.87708359002281417730789706010096) = 3.877083590022814…` (exactly $T$) | Ahmed’s proof, independently replayed and audited here as [T-060](packing/frontier/RESULTS.md), `V3/C3` |
 | Bound gap | $0$ | Matching exact lower and upper bounds |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
@@ -5104,8 +5106,8 @@ Montanher and coauthors’ unit squares in a circle.
 packing. [T-011](packing/frontier/RESULTS.md) verifies the algebraic witness and
 [T-060](packing/frontier/RESULTS.md) supplies the matching global lower bound for
 arbitrarily rotated unit squares with disjoint interiors and boundary contact allowed.
-The latter is Queuingtheorydotcom’s Astra-assisted proof, building on this project and
-Kleddamag, independently replayed and mathematically audited here at `V3/C3/S5`.
+The latter is Ahmed’s Astra-assisted proof, building on this project and Kleddamag,
+independently replayed and mathematically audited here at `V3/C3/S5`.
 
 The [proof review](docs/project/reviews/review-2026-09-29-n11-optimality.md) maps the
 2,184 canonical patterns, 2,180 exclusions, four symmetric survivors, exact D4 bridge,
@@ -6161,8 +6163,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 297 | 76,355 | 42,099 | 885 | 6,096 | 646.8 h |
-| claimed by none | 67 | 14,743 | 8,432 | 194 | 1,208 | 68.43 h |
-| **measured** | **364** | **91,098** | **50,531** | **1,079** | **7,304** | **715.23 h** |
+| claimed by none | 73 | 16,977 | 9,645 | 258 | 1,273 | 74.03 h |
+| **measured** | **370** | **93,332** | **51,744** | **1,143** | **7,369** | **720.83 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |

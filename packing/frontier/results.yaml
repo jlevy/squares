@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-09'
+last_reviewed: '2026-10-10'
 results:
   - id: T-001
     kind: lower-bound
@@ -5193,12 +5193,12 @@ results:
       unique root in `(9/25, 37/100)` of `5u⁸−10u⁷−2u⁶+14u⁵+12u⁴−6u³+2u²+2u−1 = 0`.
       Independent rotations and boundary contact are allowed.
 
-      The proof, published by Queuingtheorydotcom on 29 September 2026, is confirmed here
+      The proof, published by Ahmed on 29 September 2026, is confirmed here
       by a re-implementation sharing components with the source -- complete repository
       geometric executions on kernels the source also bundles -- and a mapped mathematical
       audit.
 
-      Queuingtheorydotcom,
+      Ahmed,
       [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c),
       Astra-assisted work building on Squares Project and Kleddamag. The matching construction
       is Trump's.
@@ -5212,7 +5212,7 @@ results:
       by: Astra-max complete mathematical review and coordinator integration
     novelty: previously-published
     attribution:
-      source_keys: ['[Queuingtheorydotcom n11 optimality 2026]']
+      source_keys: ['[Ahmed n11 optimality 2026]']
       published: '2026-09-29'
     evidence: [E-n011-global-optimality-report, E-n011-global-optimality-independent, E-n011-lean-formalization-report]
     composition: >-
@@ -5304,11 +5304,11 @@ results:
 
       2026-10-06: the Lean 4 formalization in
       [11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) is
-      imported (bead think-8spq). Its author, Queuingtheorydotcom, who posts on X as
+      imported (bead think-8spq). Its author, Ahmed, who posts on X as
       @ManassehA06, announced that day that the optimality "has been formalized in lean
       thanks to Astra and Claude", thanking Joshua Levy, Kleddamag, wand125, Guzhou0806 and
       ctjlewis; the retained first post of the thread does not name the repository. Its
-      acknowledgements credit Queuingtheorydotcom, EvolvingPrograms and ctjlewis, wand125,
+      acknowledgements credit Ahmed, EvolvingPrograms and ctjlewis, wand125,
       Benjamin Gurevitch, Julian-JJ and Guzhou0806.
 
       Joshua Levy [quoted the announcement](https://x.com/ojoshe/status/2107513739222380935)
@@ -11644,8 +11644,8 @@ results:
       by: docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md (U-5; the registration proposed S4)
     novelty: apparently-novel
     builds_on:
-      credit: [Queuingtheorydotcom]
-      source_keys: ['[Queuingtheorydotcom n11 optimality 2026]']
+      credit: [Ahmed]
+      source_keys: ['[Ahmed n11 optimality 2026]']
     evidence: [E-n011-optimum-uniqueness]
     composition: >-
       One entry, E-n011-optimum-uniqueness, proof-audited, which cites the completed
@@ -13237,3 +13237,80 @@ results:
       including https://github.com/jlevy/squares/issues/476, before choosing a selected-house replacement.
       Keep T-098's certificate as the historical house at 132, then record any source-specific adoption
       and confirming evidence. Final exact-head CI remains required.
+
+  - id: T-132
+    kind: lower-bound
+    registered: '2026-10-10'
+    headline: "Mixed rectangle-measure lower bound `s(29) ≥ 291/50` reported, on a 2,073-direction declared net"
+    claim: >-
+      A rectangle measure of wand125/square-packing, published on 10 October 2026 and
+      reported on jlevy/squares#446, is reported to prove s(29) >= 291/50 = 5.82.
+
+      The certificate, mixed_n29_L582, is a density of 650 uniform rectangles in D4 orbits,
+      and no point mass, of total mass 2899999/100000, on a net its candidate declares:
+      core side 4999/5000 and 2,073 half-angle tangents of step 1/5002, the net of T-102 and T-103.
+      Since 4999/5000 (1 + 1/5002) = 25009997/25010000 < 1, and the last tangent 1036/2501
+      is past tan(pi/8), every unit square contains a concentric core at a net angle
+      strictly in its interior.
+
+      The source reports every such core capturing mass at least one at all 2,073
+      directions, by sqverify-proof-net, its copy of this repository's sqverify_fast
+      changed to read the declared net, and a control with every mass scaled by 197/200
+      refused at 32 sampled directions.
+
+      The value is above T-108's 581/100 = 5.81, the verified and reported lower bound at
+      n = 29, by 0.01, and above the 1163/200 the issue reported on 8 October by 1/200.
+
+      Here the maintained readers accepted its exact mass and declared-net premises, and
+      sqverify-fast, this repository's clean-room measure verifier, verified it at eight
+      sampled directions with the source's node counts and least certified bounds: a
+      diagnostic, not a replay. No complete replay has run here, so the value stands as
+      reported.
+
+      wand125 after Tokoharu and Levy,
+      [square-packing](https://github.com/wand125/square-packing/tree/22a23c8a99aa4e9616d596bc2f28555bacbee3dd/problems/square-lower-bounds/certificates/mixed_n29_L582).
+      The source says parts of the work were produced with AI assistance under human
+      direction.
+    scope: {n_values: [29]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        Scored as a claim: if a complete replay passes, it is the strongest lower bound on
+        record at n = 29, 0.01 above T-108, by the certificate kind and declared net of
+        T-102 and T-103, with no new technique, at S3 as T-102 to T-111 are. V0/C0 says how far it
+        stands, and the score gates nothing.
+      scored: '2026-10-10'
+      by: think-r333 (repository; draft)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[wand125 fine-net n29 2026-10-10]']
+      published: '2026-10-10'
+    composition: >-
+      One reported certificate on its reported entry. The source's check is a copy of this
+      repository's sqverify_fast crate with one change, so a sqverify-fast replay here
+      would be re-implemented sharing the producer's components, as T-104's is, and no
+      second implementation stands beside it.
+    evidence:
+      - E-wand125-fine-net-n29-582-followup-report
+    artifacts:
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/README.md
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/reported-n29-followup.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/source-manifest.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/premises.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/sample-diagnostic.json
+      - packing/devtools/fine_net_followup.py
+      - packing/devtools/audit_wand125_declared_net.py
+    next_rung: >-
+      C3 needs a complete sqverify-fast census run at all 2,073 directions from a retained
+      candidate, with its whole-net control receipt (the 99/100 mutant at every direction,
+      FC-1) and a review that reads this certificate, by the checklist of the 6 October
+      declared-net soundness review. The eight-direction sample prices the run and its
+      controls at about 4.3 CPU-hours, so it waits in think-r333 for a budget.
+    notes: >-
+      V0 because the cited entry is the source's public claim: assurance reported, replay
+      not attempted. C0 because no cited entry carries a qualifying external_review. The
+      case records' lanes are unchanged, so the entry is pending adoption at n = 29 while
+      T-108 holds both lanes. The release asset is pinned by size and digest and kept
+      outside Git, as the issue-446 packet keeps its seven.

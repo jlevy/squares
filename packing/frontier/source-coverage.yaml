@@ -226,7 +226,7 @@ sources:
   role: source-repository
   url: https://github.com/Queuingtheorydotcom/11SquaresOptimal
   local: resources/web/n11-optimality-2026-09-29/
-  source_key: '[Queuingtheorydotcom n11 optimality 2026]'
+  source_key: '[Ahmed n11 optimality 2026]'
   scope:
     n_values:
     - 11
@@ -248,7 +248,7 @@ sources:
   role: source-repository
   url: https://github.com/Queuingtheorydotcom/11SquaresFormalized/tree/cdc746ed907d258057c283aeb6d077cb2c27e349
   local: resources/web/queuingtheorydotcom-n11-lean-2026-10-06/
-  source_key: '[Queuingtheorydotcom 11SquaresFormalized 2026]'
+  source_key: '[Ahmed 11SquaresFormalized 2026]'
   scope:
     n_values:
     - 11
@@ -3184,6 +3184,28 @@ sources:
     certificate is an evidence update to T-128, which cites this source's report, and not a new entry.
     All six native jobs have full outcomes. No selected override or superseded claim is created at this
     source-only stage; current cases and earlier source ownership remain unchanged.
+- id: wand125-fine-net-n29-582-followup-2026-10-10
+  title: Wand125 later reported n29 fine-net lower bound, issue446
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/22a23c8a99aa4e9616d596bc2f28555bacbee3dd/problems/square-lower-bounds/certificates/mixed_n29_L582
+  local: resources/web/wand125-fine-net-n29-2026-10-10/
+  source_key: '[wand125 fine-net n29 2026-10-10]'
+  scope:
+    n_values:
+    - 29
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-n29-2026-10-10/README.md
+  evidence:
+  - E-wand125-fine-net-n29-582-followup-report
+  notes: The later reported 291/50 supersedes the issue-446 report of 1163/200 at n29 only; the
+    seven-case packet and every standing claim are unchanged. Complete release-asset and document
+    custody and the exact mass and declared-net premises are accepted; an eight-direction maintained
+    sample is diagnostic, and the author's full positives and 32-direction controls do not supply a
+    maintained capture or whole-net controls. Replay and adoption remain under think-r333.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

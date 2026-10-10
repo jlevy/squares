@@ -1,0 +1,506 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-10T09:58Z",
+  "git_scope": "Sparse blobless checkout of the named files at the pinned commit for issue #476. All 65 certificates the commit holds are retained as factual data: the six the issue reports and 59 it does not name, 20 of them beyond the n <= 324 case corpus. The two READMEs and the 65 decimal pose files are pinned by digest only. The rest of the tree, including the drawings, is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "franciscouzo-square-packing",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "master",
+      "source_commit": "02f969075f79d5e13fa21e09e381a44e8647b452",
+      "committed_utc": "2026-10-09T20:28:52Z",
+      "git_tree": "a11227bc2ecbc9b22af11ea4f4a0dd2c9bc62866",
+      "archived_path": "packing/resources/web/couzo-exact-certificates-2026-10-09/source",
+      "subtree_manifest": "packing/resources/web/couzo-exact-certificates-2026-10-09/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "certificates",
+        "n68.txt",
+        "n84.txt",
+        "n86.txt",
+        "n102.txt",
+        "n103.txt",
+        "n105.txt",
+        "n106.txt",
+        "n108.txt",
+        "n110.txt",
+        "n127.txt",
+        "n131.txt",
+        "n132.txt",
+        "n152.txt",
+        "n155.txt",
+        "n156.txt",
+        "n172.txt",
+        "n175.txt",
+        "n177.txt",
+        "n180.txt",
+        "n181.txt",
+        "n182.txt",
+        "n206.txt",
+        "n208.txt",
+        "n210.txt",
+        "n228.txt",
+        "n237.txt",
+        "n240.txt",
+        "n241.txt",
+        "n259.txt",
+        "n263.txt",
+        "n267.txt",
+        "n268.txt",
+        "n269.txt",
+        "n270.txt",
+        "n271.txt",
+        "n272.txt",
+        "n273.txt",
+        "n292.txt",
+        "n297.txt",
+        "n301.txt",
+        "n303.txt",
+        "n304.txt",
+        "n305.txt",
+        "n306.txt",
+        "n307.txt",
+        "n327.txt",
+        "n332.txt",
+        "n335.txt",
+        "n336.txt",
+        "n337.txt",
+        "n338.txt",
+        "n339.txt",
+        "n340.txt",
+        "n341.txt",
+        "n342.txt",
+        "n364.txt",
+        "n369.txt",
+        "n372.txt",
+        "n373.txt",
+        "n374.txt",
+        "n375.txt",
+        "n376.txt",
+        "n377.txt",
+        "n378.txt",
+        "n379.txt"
+      ],
+      "subtree_file_count": 132,
+      "subtree_total_bytes": 3667357,
+      "retained_file_count": 65,
+      "retained_total_bytes": 2465687,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 10769,
+          "sha256": "72fe0aa18b8402bfc57b1e048138a9cc69e92cdf839e36995c6d1bd59ab8b6e8",
+          "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "certificates/README.md",
+          "bytes": 11066,
+          "sha256": "994ec9d9a3a95bf0fa0187fba54d72c594a418a01f70a1396b859deceb49167c",
+          "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "n102.txt",
+          "bytes": 7410,
+          "sha256": "f0ed8d9920f50c4211fa1daedc29d839dcc9350d2290907608d1590d8c113ae8",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n103.txt",
+          "bytes": 7504,
+          "sha256": "71aaf7bc0e8f03378a13c5446f208badec2c940eb2800cfc0ae7db7f02e7702d",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n105.txt",
+          "bytes": 7651,
+          "sha256": "636fc863c915cd06164fc62f1e8ed8c3db9069da86aeb762658d3256a5620f26",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n106.txt",
+          "bytes": 7684,
+          "sha256": "b2e7f81e54220e77689e8111c2e72fde1dca1b16757f63248917341bfe251a92",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n108.txt",
+          "bytes": 7844,
+          "sha256": "7d8234d423f05eeadbaf591f447e86cee5d6f4fa397ebf6553685c8315afc7c6",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n110.txt",
+          "bytes": 8016,
+          "sha256": "8a97279f09a9e7f0be0478e76372ddde8afbe38469f70c52c2cbe3b229850315",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n127.txt",
+          "bytes": 9206,
+          "sha256": "6a82863e50a38660be7ad17b2b266bcb9b9e47d2402c1565f0ccf563a4893d19",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n131.txt",
+          "bytes": 9507,
+          "sha256": "a362306a13985ea80c405ad693498a0a9255dc37cce609e576109213de57fd98",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n132.txt",
+          "bytes": 9580,
+          "sha256": "f0f0042a25ab809ef986ac93623e078bf399c9449c8dd246714a9867cc8a8d89",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n152.txt",
+          "bytes": 10997,
+          "sha256": "e4c6dcb5f906c4a1c9b1c515d787dff992e931ae57a6ad67422d8216eb9e8c81",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n155.txt",
+          "bytes": 11244,
+          "sha256": "8d47bc8466f797f9c3da11e911c6eae0b50c3301f4e488836219a3fdd7483eeb",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n156.txt",
+          "bytes": 11316,
+          "sha256": "f84673bf8118c131f56066859a6efe29c19ba50f280bc72660a43b317144cbfa",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n172.txt",
+          "bytes": 12464,
+          "sha256": "5a40820c8a0b4e9c326fcb92ccadb30c364f2f705a16f61525320c9502af6a3e",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n175.txt",
+          "bytes": 12719,
+          "sha256": "9bce28694bb92276bcbb734a183bfc78c4e06e23d5ef4c83313b3df17e103e7e",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n177.txt",
+          "bytes": 12796,
+          "sha256": "37b4a1e142d44b5a4f9cad81f27b7d0df98981e4f1b2ae459ad2fa9011e4c7fd",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n180.txt",
+          "bytes": 13033,
+          "sha256": "e605b66c5734baed1388c3518e01ddce1321c6297c7a69ea7a5d17ad6b3b00d7",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n181.txt",
+          "bytes": 13126,
+          "sha256": "36b4ac0b13d0afb72dbd2da9e7a17f312d0ce7f5192ecbaf2df6af9eb6f1c3cb",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n182.txt",
+          "bytes": 13197,
+          "sha256": "3253be6fda35959cbf7a8e7df8ab53c484554bd88b62bbeea1a096c5e5be8a30",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n206.txt",
+          "bytes": 14949,
+          "sha256": "d269e6dd4ad82b93616d2d7485a0870bf81957a9b6c5e6d8833a2cc58281f555",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n208.txt",
+          "bytes": 15058,
+          "sha256": "db4029f6d7ff728246a6bc453d975290e8528937ac2abae548ae78bd50bc90a4",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n210.txt",
+          "bytes": 15222,
+          "sha256": "a4e2f75b8d8d5820275576faf0b9c69d7af6edec71b58080c2297d33bed6b1ee",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n228.txt",
+          "bytes": 16515,
+          "sha256": "ac49909623026fdfbc5749767a94e90b46f2da517d84c89005124d4c99c5874d",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n237.txt",
+          "bytes": 17137,
+          "sha256": "50d8b17d6f7e9384ad95f615eaf8e7bb5f6880a1d13a0ea99040580de70f20e1",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n240.txt",
+          "bytes": 17375,
+          "sha256": "0effd45cd8f4ff43907f95cf98bc5ff7c35d1043edd5066151f3f3138823cb25",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n241.txt",
+          "bytes": 17452,
+          "sha256": "46566f101433c615b62522a0e7588790c95387b43bef0e0eb54e8704848e7435",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n259.txt",
+          "bytes": 18734,
+          "sha256": "16ec91a775f191205d7d7717302d53403ecd2e87790c7f7048586e10cfb683ab",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n263.txt",
+          "bytes": 18988,
+          "sha256": "ccbc87121107ad59c573a4516634a90ce2d8c9a9ec90c79f31b9a556e71bd46c",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n267.txt",
+          "bytes": 19344,
+          "sha256": "4518cd5da4a7280b6b53dbc12e16d825aa54dba78d9109487a714c45555a09c2",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n268.txt",
+          "bytes": 19418,
+          "sha256": "2110ba298eaa56c4e908357e7137886a7a09cc802abbb085ada30d23a831bc5d",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n269.txt",
+          "bytes": 19447,
+          "sha256": "ae959989972d7cacdf7a1708c38cb9fdbff4adbc4d42f742b0b7ae871011042a",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n270.txt",
+          "bytes": 19542,
+          "sha256": "57cae3e07de1408f2074808be016c0ed505749ae89cbd782c6a08a43477d8718",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n271.txt",
+          "bytes": 19617,
+          "sha256": "a7146021e75d08b1b332a59697f0f443a192748107ea416b23d7c7da148ed34d",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n272.txt",
+          "bytes": 19689,
+          "sha256": "50bab341c78530e41abc75f9918ae03270d8ac0931223a078a27ffde92e7881a",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n273.txt",
+          "bytes": 19760,
+          "sha256": "d3077598f2b5f1cc0da42da5af04a795cf6a05480670174e522677f6a87887c7",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n292.txt",
+          "bytes": 21193,
+          "sha256": "fd97fbe4d52c941547e9803c8e2821945c3457bb654516ec955986d131d3dc11",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n297.txt",
+          "bytes": 21508,
+          "sha256": "bb31c036fcc3c5bc86cf707fc9f3e69847aeaaabc0f7105b02852a349840a53b",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n301.txt",
+          "bytes": 21890,
+          "sha256": "765693f2f981748719c254f07da6da233c6092ae9573e38eab43c89f564a5c62",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n303.txt",
+          "bytes": 21901,
+          "sha256": "c2d0012135e9cfd5c3df36e55f3c1ce248dbcabc64d5ff2a84296ec234dd8cf7",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n304.txt",
+          "bytes": 21987,
+          "sha256": "19cf3b70f8015f4ea6cf3b8a7f907c954e69e6a5efe39d78c87925a10ce44b40",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n305.txt",
+          "bytes": 22060,
+          "sha256": "131e38ad5fa53bad71fe885243fec267f2b08bb85d3e3f3226426f7f67fae493",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n306.txt",
+          "bytes": 22142,
+          "sha256": "0ab428f60331fe757c26750e080c873bcb285c8573c791713438284e23d44632",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n307.txt",
+          "bytes": 22212,
+          "sha256": "f0c02e2c415c171b16facd22ada81d3825d4134e2c545c2bbadea874470fcc78",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n327.txt",
+          "bytes": 23713,
+          "sha256": "5825b87410d23946e8a1e95bc552969d0628e956304dde9a847352d3313c29db",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n332.txt",
+          "bytes": 24019,
+          "sha256": "05ca5283ca206a47a8b966eeb00b172b5e70a36e2acc0f38210ab0bd17500749",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n335.txt",
+          "bytes": 24314,
+          "sha256": "171abcbcbc54e982cad35fe688927be4a320096b1830cd3541b26bec46a7bae2",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n336.txt",
+          "bytes": 24288,
+          "sha256": "c6a2fca12842816d02295386ccd191498f9f6b71ff961ca92516ac03c1150645",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n337.txt",
+          "bytes": 24355,
+          "sha256": "09e4b87ac58d0218440241dc8c8602699cca4e82cd8e455f281db3977fbe318e",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n338.txt",
+          "bytes": 24423,
+          "sha256": "e49152426f110e1f78352b7ae1ebc748a281b3f8fd5ac7fe703f8b66cee66d26",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n339.txt",
+          "bytes": 24509,
+          "sha256": "9e12035d991580ec387485ea5b4900a81bdfb0f4e416c6b678394f20b90a7384",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n340.txt",
+          "bytes": 24587,
+          "sha256": "b73b4d9f61c0edf05486de634521b68139736bb1623537628ef1edd4a4c7e7f4",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n341.txt",
+          "bytes": 24671,
+          "sha256": "85c0e25ec9df3e2bb51daea3cd2fa1d56121df9328e5051bd530c0e1e8a83ac6",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n342.txt",
+          "bytes": 24850,
+          "sha256": "a3dff2f5e3308e76026133b13fd2bc499b6278b811321275becc6146cf2d227d",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n364.txt",
+          "bytes": 26377,
+          "sha256": "624a5d4d7187bd051cf4582f803cb221fdd2bd3530857b8fa2a2ccf2b918434c",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n369.txt",
+          "bytes": 26692,
+          "sha256": "8dc9b26145e60f8a7e76bdb01834cf1a1c54537d76da0b53ee13a9c764c933b8",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n372.txt",
+          "bytes": 27016,
+          "sha256": "706c8d71c78c25a6b117eb527f4da6b3803df976e8fad6e7779273a5a16aeb5b",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n373.txt",
+          "bytes": 26954,
+          "sha256": "7ef2c8e1db9f6659946502dd5150fd69b762e3c11718c4c97875ab3edaf53f8e",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n374.txt",
+          "bytes": 27040,
+          "sha256": "ec31dc3f4f51b8ac5d19bda7fcc6f0e27a4b0607c59616c749283d4d0c2d8f05",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n375.txt",
+          "bytes": 27083,
+          "sha256": "6e7e0d5c60badeb2ac10687078e2f134305ade203f8658f11054a727ead3287e",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n376.txt",
+          "bytes": 27177,
+          "sha256": "a5dce00e3eab4ffed268f94f34ceab7161b63123b249d2745cf3c0399199edeb",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n377.txt",
+          "bytes": 27238,
+          "sha256": "98590cb7a083e1fc347de7668d1f5b11b78876037ba3e18ba04b0a7f26b83c3a",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n378.txt",
+          "bytes": 27338,
+          "sha256": "21c5f246a4e76138d0336d6974cde31cec2eb62afb685d359113574b72028a85",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n379.txt",
+          "bytes": 27394,
+          "sha256": "19bc2ff11b8f0b70272fdd727737856e61be950302c8f693e38211279623e0d2",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n68.txt",
+          "bytes": 4980,
+          "sha256": "69940c43e4031a79fb6b95bdb73e37d2cd8250d218a0259d0035cc655ef57d3f",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n84.txt",
+          "bytes": 6120,
+          "sha256": "eb68c163cf51a3fe4e4f6a0ec4be58868341f30444790318cb3d9c8d3a43410b",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n86.txt",
+          "bytes": 6263,
+          "sha256": "4c6a0278d1293a11fbfd11723943b5ebfae5ab558ba4581ed00198c4584a3742",
+          "reason": "The decimal packing each certificate was solved from; pinned for provenance, as no claim rests on it."
+        }
+      ],
+      "license": "No licence file or reuse terms at the pin: the tree has no LICENSE, and neither README.md nor certificates/README.md states terms. The 65 certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data); prose is hash-pinned and not copied. certificates/README.md credits Evan Daniel's MIT-licensed exact contact solver, which does not license this bundle.",
+      "claims": [
+        "Issue #476 reports s(132) <= 11986954193640392741450366579623/1000000000000000000000000000000, printed rounded up to 12 decimals as 11.986954193641, an exact optimum from Evan Daniel's exact contact solver.",
+        "Issue #476 reports s(237) <= 3975917726395155753617729398543/250000000000000000000000000000, printed as 15.903670905581, an exact optimum from the same solver.",
+        "Issue #476 reports s(263) <= 7488939206954142477014939239/447356905819500000000000000, printed as 16.740412653820, a rational witness: the decimal packing as rationals with centres scaled apart by 1+1e-12.",
+        "Issue #476 reports s(267) <= 4209703817487065565108620335551/250000000000000000000000000000, printed as 16.838815269949, an exact optimum from the same solver.",
+        "Issue #476 reports s(270) <= 16936720031121015799532991452837/1000000000000000000000000000000, printed as 16.936720031122, an exact optimum from the same solver.",
+        "Issue #476 reports s(303) <= 2239680490686779486489623667067/125000000000000000000000000000, printed as 17.917443925495, an exact optimum from the same solver.",
+        "The same commit holds 59 further certificates the issue does not name, each with its exact side and its side rounded up to 12 decimals in certificates/README.md: 28 in-horizon counts and 20 beyond the n <= 324 corpus new at this commit, 7 byte-identical to the issue #451 certificates of ffd900d and 4 byte-identical to the 2d32a6e follow-up certificates.",
+        "The KKT, no-descent and checker statements are the author's; no optimality claim is made."
+      ]
+    }
+  ]
+}

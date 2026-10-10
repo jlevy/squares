@@ -243,18 +243,22 @@ The shard jobs retain full Git history for history-reading tests, but none insta
 or a browser.
 Browser-floor liveness runs under `--frontend`, on the runner that owns the
 pinned Node toolchain.
-`site table layout in Chromium` runs eight test files on the runner that installs the
-pinned Chromium: functional pixel/layout checks run in parallel, then the four
-native-frontier load-budget cases run serially, each with HTTP JavaScript and
-no-JavaScript contexts under the same assertions and budgets.
-They launch it with `--font-render-hinting=none`: the headless shell hints text at
+`site table layout in Chromium` runs nine test files on the runner that installs the
+pinned Chromium. Functional pixel/layout checks, including the atlas’s readable drawing
+sizes and interactions, run in parallel with file-based distribution.
+After those workers exit, the four native-frontier HTTP load-budget cases run serially,
+without xdist workers; each checks JavaScript and no-JavaScript contexts under the same
+assertions and budgets.
+Both phases share the step’s original total timeout.
+They launch Chromium with `--font-render-hinting=none`: the headless shell hints text at
 `HINTING_FULL` by default, which on Linux rounds every glyph’s advance to a whole pixel,
-and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). Where no
-Chromium launches they fail rather than skip, because a skip on that runner is a hole in
-the surface. Each shard writes a per-file cost report beside its JUnit and timing
-artifacts; the recorder accepts complete coherent cohorts and rejects failed, partial,
-duplicated, coverage-mismatched, and mixed-provenance evidence, and a cohort recorded at
-one shard count may be packed into another, which is how the lane is repartitioned.
+and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). Both
+phases require Chromium and fail rather than skip when it cannot launch, because a skip
+on that runner is a hole in the surface.
+Each shard writes a per-file cost report beside its JUnit and timing artifacts; the
+recorder accepts complete coherent cohorts and rejects failed, partial, duplicated,
+coverage-mismatched, and mixed-provenance evidence, and a cohort recorded at one shard
+count may be packed into another, which is how the lane is repartitioned.
 The current declared ceilings are 335 seconds for shards A and D and 360 seconds for B
 and C, raised for the moment on 2026-10-09 by the owner’s decision and selected on
 purpose as `OR-17` requires; `think-2hm6` tracks the structural fix (a fifth shard, slow
@@ -832,11 +836,16 @@ slow lanes together, against `FAST_SUITE_BUDGET_SECONDS`. A large proper subset 
 dominate the run. When resource settings are implicit, the edit checks run with their
 normal concurrency, then the reachable tests use the available pytest workers after the
 edit pool has drained.
-Nested tool pools are capped at one during the parallel pytest phase.
-Tests marked `pool_heavy` run afterward in a separate serial pytest process with the
-reserved CPUs assigned to their internal pool.
-The whole-atlas composite test uses this allocation; its per-case builder and global
-assertions are unchanged.
+Nested tool pools that read `PACK_JOBS` are capped at one during the parallel pytest
+phase. Tests marked `pool_heavy` run afterward in a separate serial pytest process with
+`PACK_JOBS` set to the reserved CPU count.
+The marker covers real internal execution pools and short-deadline real subprocess
+controls. This includes the whole-atlas composite test’s per-case builder, the
+collection-refusal control’s two-worker xdist invocation, and the resident
+exact-geometry transport controls.
+The collection control keeps its fixed two workers and 30 s command deadline.
+Classification leaves each control’s transport, assertions and time bounds intact.
+Quick/slow membership remains unchanged.
 Both phases use the same selected files and complementary markers, so every selected
 non-exhaustive test belongs to exactly one phase.
 Other slow tests remain parallel.

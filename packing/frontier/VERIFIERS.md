@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **103** programs: **37** external and **66** first-party; **74** decide claims and **29** check premises.
-- **418** of **471** evidence entries name the programs that verified them: 227 reproduced with the producer’s code, 164 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
+- **419** of **472** evidence entries name the programs that verified them: 228 reproduced with the producer’s code, 164 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -35,7 +35,7 @@ second implementation agrees.
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | wand125 | external | decides | 89 | 14 |
 | [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | wand125 | external | decides | 66 | 11 |
-| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | wand125, adapting this repository's sqverify_fast | external | decides | 9 | 9 |
+| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | wand125, adapting this repository's sqverify_fast | external | decides | 10 | 10 |
 | [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | wand125 | external | decides | 6 | 3 |
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | wand125 | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | wand125 | external | decides | 5 | 1 |
@@ -61,8 +61,8 @@ second implementation agrees.
 | [`V-massaccesi-n17-verify-py`](#v-massaccesi-n17-verify-py) | verify-n17-lower-bound-4_5058.py | Massaccesi | external | decides | 1 | 2 |
 | [`V-mira-17squares-point-checker`](#v-mira-17squares-point-checker) | verify_certificate.py | Mira | external | decides | 1 | 0 |
 | [`V-stanislavfort-17squares-point-checker`](#v-stanislavfort-17squares-point-checker) | verify_certificate.py | Stanislav Fort | external | decides | 1 | 0 |
-| [`V-queuingtheory-n11-verify`](#v-queuingtheory-n11-verify) | VERIFY.py | Queuingtheorydotcom | external | decides | 1 | 1 |
-| [`V-queuingtheory-n11-lean`](#v-queuingtheory-n11-lean) | The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack) | Queuingtheorydotcom, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis | external | decides | 2 | 1 |
+| [`V-queuingtheory-n11-verify`](#v-queuingtheory-n11-verify) | VERIFY.py | Ahmed | external | decides | 1 | 1 |
+| [`V-queuingtheory-n11-lean`](#v-queuingtheory-n11-lean) | The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack) | Ahmed, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis | external | decides | 2 | 1 |
 | [`V-wand125-tools`](#v-wand125-tools) | The wand125 tools repository's transfer/l_cap.py and general_pose_tree | wand125 | external | decides | 3 | 2 |
 | [`V-squarepacker-indep-check-cpp`](#v-squarepacker-indep-check-cpp) | indep_check.cpp | squarepacker | external | decides | 4 | 2 |
 | [`V-schadt-n29-check-py`](#v-schadt-n29-check-py) | check.py | Schadt | external | decides | 1 | 0 |
@@ -365,6 +365,7 @@ The source's copy of this repository's sqverify_fast with one change, reading a 
 | `E-n030-wand125-mixed-58835-report` | the source’s own run | producer’s code | T-109 |
 | `E-n039-wand125-mixed-665-report` | the source’s own run | producer’s code | T-110 |
 | `E-n041-wand125-mixed-6775-report` | the source’s own run | producer’s code | T-111 |
+| `E-wand125-fine-net-n29-582-followup-report` | the source’s own run | producer’s code | T-132 |
 
 ### `V-wand125-unified-linear-verify-cpp`
 
@@ -788,7 +789,7 @@ Fort's pure-Python integer checker of a point-only pose-space subdivision certif
 
 ### `V-queuingtheory-n11-verify`
 
-**VERIFY.py, the publisher's n = 11 optimality driver and its component checkers** · Queuingtheorydotcom · external · decides · Python · exact-algebraic
+**VERIFY.py, the publisher's n = 11 optimality driver and its component checkers** · Ahmed · external · decides · Python · exact-algebraic
 
 The publisher's advertised replay of its n = 11 optimality proof, binding every component's final state by digest; four stale final-state digests keep it from passing as published.
 
@@ -801,7 +802,7 @@ The publisher's advertised replay of its n = 11 optimality proof, binding every 
 
 ### `V-queuingtheory-n11-lean`
 
-**The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake at its pinned toolchain, with scripts/run_verification.sh and the finalizer scripts/finalize_verification.py driving the build and the axiom audit** · Queuingtheorydotcom, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis · external · decides · Lean 4, Python, Bash · proof-assistant-checked
+**The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake at its pinned toolchain, with scripts/run_verification.sh and the finalizer scripts/finalize_verification.py driving the build and the axiom audit** · Ahmed, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis · external · decides · Lean 4, Python, Bash · proof-assistant-checked
 
 Proves ElevenSquare.optimality, s(11) = T, in Lean 4.34.1 with Mathlib d13f23b7: the geometry, checker soundness and assembly kernel-checked, and 10,464 numerical certificate declarations decided by native_decide; the finalizer accepts the run only when every module's receipt, source hash and axiom report agree and no admission or unapproved axiom remains.
 

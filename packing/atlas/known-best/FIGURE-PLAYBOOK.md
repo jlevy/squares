@@ -3,14 +3,16 @@
 How [`known-best-1-100.svg`](known-best-1-100.svg) and
 [`known-best-1-324.svg`](known-best-1-324.svg) are built, where every fact on them comes
 from, and what to do when the data or the renderer changes.
-Everything on both is decided the same way; where they differ is the encoding, and
-[“The two composites”](#the-two-composites) is where that is measured.
-Everything under `atlas/known-best/` is generated; nothing here is edited by hand, the
-figures and their exports included.
+Both use one annotation renderer; their layouts and geometry encodings differ, as
+[“The two composites”](#the-two-composites) records.
+The geometry records, figures and exports under `atlas/known-best/` are generated.
+The curated `credit-attributions.json` supplies lower-bound and optimality
+acknowledgments with their roles, citations and evidenced chronology.
+This playbook and the README document their construction.
 
 ## Rebuild it
 
-Two commands, for two layers that change for different reasons:
+The data layer and the drawings are updated separately:
 
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --update
@@ -27,16 +29,32 @@ The second redraws both composite SVGs, every PNG raster and both PDFs from the 
 witnesses, in about a minute.
 Run it at a version bump, or when you want the figures to show the current data; a data
 change does not require it.
-Each composite records the data commit and date it was drawn from, prints them as its
-footer stamp and its dateline, and may trail the data until the next version:
+Each composite records the data commit and date it was drawn from and may trail the data
+until the next version.
+Both put the data date before a middle dot and the edition in their diagram-credit
+block: the figure uses a footer and the poster its upper-left information block.
 [Release assets](../../../development.md#release-assets-are-drawn-at-a-version-bump-or-on-demand)
 has the rule, and `--check-composites` lists the cards that trail.
 It refuses to draw while the pinned data revision is stale or the data has uncommitted
 changes.
 
+For a layout change, refresh the composite geometry in both data records without
+rebuilding any witness:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --update-composite-records
+```
+
+This command preserves case facts and legend totals and refuses unrelated record changes
+before writing either [`manifest.json`](manifest.json) or
+[`composite-figure.json`](composite-figure.json).
+Those records and their schema contracts are release data.
+Commit them, run `python -m devtools.release_pin --update`, commit the new pin, then run
+`--update-composites` to draw under that identity.
+
 Each composite’s exports are one family: a single run draws all of them from the same
 SVG, and a single `--check` reports every one that has fallen behind.
-Both commands are idempotent: a second run changes nothing.
+These commands are idempotent: a second run changes nothing.
 Then confirm nothing drifted:
 
 ```bash
@@ -78,7 +96,7 @@ To see where the figure knows more than the records do:
 uv run --frozen --all-extras --group dev python -m devtools.build_composite_figure_data --review
 ```
 
-Today that reports 287 degrees known over the corpus, 36 stored upstream and **251
+Today that reports 292 degrees known over the corpus, 45 stored upstream and **247
 derived here** — each one a fact the corpus could hold and does not.
 
 ## The rule that matters
@@ -97,20 +115,22 @@ Facts about the mathematics live in `frontier/n-NNN.md`.
 
 ## Field by field
 
-Every count in the third column is the figure’s hundred, which is also what its legend
-prints; the poster counts the same fields over its own 324 cases and prints those
-instead, so the two legends differ while the rules behind them do not.
+Unless noted otherwise, counts in the third column describe the figure’s hundred, which
+is also what its legend counts.
+Each counted legend item includes the depicted total after a slash: 100 for the figure,
+324 for the poster. Both composites use the contribution flags described below for their
+recent result markers and accents.
 
 | Shown | Source | Verify by |
 | --- | --- | --- |
-| $s(n) = \ldots$ vs $s(n) \le \ldots$ | `packing.status` (`proved` / `open`) | 38 proved; equality only for those |
+| $s(n) = \ldots$ vs $s(n) \le \ldots$ | `packing.status` (`proved` / `open`) | 45 proved; equality only for those |
 | Side value | `reported_upper_bound.value` | Matches the witness side to its stated precision |
-| $s(n) \ge \ldots$ second line | `verified_lower_bound.value`, shown where `status` is `open` | 62 lines; cut off rather than rounded, so the printed bound stays true |
-| ★ recent result, since Aug 2026 | `recent` on the lower citation in `bound-citations.json`: first-party evidence the register scores as novel, or a source whose bibliography `dated` is on or after `RECENT_SINCE` (2026-08-22) | 27 cases: $n = 11, 12, 17\text{–}21, 26\text{–}32, 39\text{–}41, 45, 52, 53, 55, 56, 68\text{–}72$, 3 of them ($n = 18, 19, 20$) proved here; the star follows the verified lane, so the 28 cases whose recent bound is only reported carry none; drawn as a polygon, since no figure font carries a star |
+| $s(n) \ge \ldots$ second line | `verified_lower_bound.value`, shown where `status` is `open` | 55 lines; cut off rather than rounded, so the printed bound stays true |
+| Crimson recent-result accents, since August, 2026 | The canonical contribution flags in `devtools/result_status.py`, using original construction or proof dates and the shared `RECENT_SINCE` cutoff | 81 cases in the figure and 297 in the poster; both accent upper numerals, lower numerals and optimality badges independently |
 | `=` exact value known | `exact_form`, else `minimal_polynomial` or `algebraic_degree` | Evaluate the form, compare against the witness side |
-| `≈` only known numerically | none of the three present | 5 cases: $n = 29, 55, 68, 69, 71$ |
-| $\deg d$ | `algebraic_degree` | Present for 11 cases; absence is not a claim of low degree |
-| `R` rigidity established | derived, see below | Perfect squares by exact tiling, plus the first-party arguments at $n = 5$ and $n = 11$; a catalogue annotation is shown muted and not counted |
+| `≈` only known numerically | none of the three present | 3 cases: $n = 29, 55, 71$ |
+| $\deg d$ | `algebraic_degree` | Printed for 30 cases with degree at least 2; absence is not a claim of low degree |
+| `R` known rigid | `rigidity.known_rigid` from the canonical assessment, see below | 14 cases in the figure and 22 in the poster; the one dark badge preserves source assertions, proof status and dates in metadata |
 | Hue | angle class of the square | Right angles pinned to hue 0, 45° tilts to hue 1 |
 | Shade | full-side contact count, 4 down to 0 | `_contact_shade` in `src/sqpack/render/color.py` |
 
@@ -198,26 +218,30 @@ tiling argument**. It no longer means the corpus is silent about the packing.
 The screen’s asymmetry is why the figure derives its badge from the record rather than
 from the screen. A hit proves non-rigidity; a miss proves nothing.
 
-**The badge is two badges, and that is [`D-385`](../../../defects.md).** It used to be
-one: a solid `R` earned by $n$ alone, from a hard-coded set of the four packings the
-catalogue annotates, which rendered a source’s word identically to an exact tiling
-argument — the field split failing to reach the figure.
-Now `established` means the record’s own `rigidity` block says `locally-rigid`, and
-nothing else does: **twelve** solid badges on the figure and **twenty** on the poster —
-the tilings plus $n = 11$’s own `verified` argument and $n = 5$’s, both of which the old
-rule credited to Kingbird.
-The catalogue’s annotation is still shown, because dropping it would lose a fact the
-corpus holds, but as a **muted** `R` on a `not-established` entry with its own legend
-line and its own total: $n = 28, 40$.
+**The printed badge is one dark `R` for known rigid.** The canonical assessment combines
+a verified local-rigidity result with an explicit catalogue assertion for the matching
+displayed witness. Fourteen cases in the figure and twenty-two in the poster carry it:
+the exact tilings, the verified arguments at $n = 5, 11$, and the catalogue assertions
+at $n = 28, 40$. A numerical screen that finds no motion contributes no positive claim.
+Source assertions, verification status, determination dates and recorded dates stay
+distinct in the structured metadata, so one icon does not promote an assertion to a
+verified proof.
 
-$n = 5$ is why the distinction is worth the second glyph, and it is also why the glyph
-is not decoration.
+[`D-385`](../../../defects.md) exposed a disagreement between the record and its
+rendering. The record still preserves the separate established and catalogue assurance
+fields; the current presentation combines their known-rigid positives into one count.
+The same-bound alternatives 52b, 149b and 296b do not confer rigidity on the displayed
+unsuffixed packings, each of which has a certificate of motion.
+
+$n = 5$ shows why the assurance distinction remains important in metadata, even when the
+printed badge is one dark `R`.
 [`X-007`](../../campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md)
-established more about it than the catalogue ever said and still not local rigidity, so
-it held the muted badge for three days while carrying first-party evidence in the
-frontier. It moved to a solid badge on 2026-09-03 only when the missing step was written
-out, checked against a complete local accounting, independently reviewed and registered
-as `T-014` — on the proof, never on the annotation.
+established more about it than the catalogue ever said and still not local rigidity.
+Its earlier rendering held a muted badge for three days while carrying first-party
+evidence in the frontier.
+Its assurance became verified local rigidity on 2026-09-03 only when the missing step
+was written out, checked against a complete local accounting, independently reviewed and
+registered as `T-014` — on the proof, never on the annotation.
 
 ### Checking one claim by hand
 
@@ -261,19 +285,19 @@ for m in build_contact_scaffold_atlas \
 done
 ```
 
-Changing the canvas size means four edits, not one: the card metrics in
-`devtools/build_known_best_atlas.py`, the pinned dimensions in
-[`known-best-atlas.schema.yaml`](known-best-atlas.schema.yaml), the expected dimensions
-in `tests/test_known_best_atlas.py`, and the `width` and `height` on the `img` tag in
-`devtools/templates/n11-lower-bounds-explainer-article.md`, which reserves the space the
-page scrolls past.
-The card metrics are shared, so an edit to them moves both composites;
-the schema pins each canvas under its own stem, so a silent resize of either fails the
-gate. The last three pin every raster each composite publishes — for the figure, the 1x
-preview, the 2x export and the link-preview crop — so a canvas change that moves one and
-not the others is caught rather than shipped.
-Only the builder needs a single edit: each raster derives its size from the canvas
-constants and its own whole-number scale.
+Change an arrangement in its `CompositeSpec` in `src/sqpack/known_best.py`. The canvas
+follows the number of columns and rows at the shared card scale; changing card metrics
+in `devtools/build_known_best_atlas.py` affects both composites.
+Update the pinned geometry in
+[`known-best-atlas.schema.yaml`](known-best-atlas.schema.yaml) and
+[`composite-figure.schema.yaml`](composite-figure.schema.yaml), the expected dimensions
+and placements in `tests/test_known_best_atlas.py`, and any consumer that declares the
+changed image’s dimensions.
+The figure’s consumer is the `img` tag in
+`devtools/templates/n11-lower-bounds-explainer-article.md`. Each raster derives its size
+from the canvas and its own whole-number scale, and the PDF keeps the SVG’s intrinsic
+dimensions. Refresh the layout records, commit and re-pin as above, then redraw the
+composites.
 
 ## Staleness cannot pass quietly
 
@@ -293,6 +317,13 @@ differ only in how they antialias an edge, whereas two drawings differ in what t
 show. Both commands cover both composites, and `render_composite_pdf --check` takes a
 `--stem` only to narrow itself to one.
 
+The published downloads are
+[`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) and
+[`square-packings-324-20261008.pdf`](square-packings-324-20261008.pdf).
+Their names carry the fixed edition date; the embedded PDF dates still follow the
+drawing’s data date.
+SVG and PNG filenames retain their internal composite stems.
+
 The PDF uses a receipt rather than a byte comparison because cairo assigns font-subset
 tags per process, so two runs of identical input are not byte-identical across
 processes.
@@ -302,53 +333,169 @@ and 1 across the whole atlas, and unpinned classes are ordered by descending cla
 
 ## Fonts
 
-The figure sets Helvetica with Arial as the metric-compatible fallback.
-No webfont is referenced and nothing is fetched at render time.
-Helvetica offers regular and bold and nothing between: any weight from 560 up resolves
-to bold, so asking for a semibold silently yields bold.
-Small card labels stay regular and earn legibility from a darker gray instead.
+Both composites use the retained bold and bold italic faces in
+`devtools/fonts/atlas-print/`, derived from Liberation Sans 2.1.5 under its OFL license
+and renamed SquaresAtlasPrint.
+The license and reproduction notes accompany the fonts.
+Layout reads advances and ink bounds from those files.
+SVGs embed the faces; native PDF and PNG exporters register them for their process and
+refuse a substituted face.
+Nothing is fetched at render time, and no font is installed system-wide.
+Math variables select the explicit italic face; parentheses use the upright face.
 
-Legend rows are centered with the Helvetica advance-width table in the builder, not a
-per-character estimate.
-A uniform estimate cannot center mixed strings; it put the two rows 107px and 189px off
-center, in opposite directions.
+Both information blocks use the same renderer and normalized leading of 1.50. Each block
+gap is three body-font ems, measured between visible ink rather than baselines, so
+capitals, ascenders and descenders do not change the apparent gap.
+The title, problem description and all ordinary text are black.
+Case numbers remain gray, with red reserved for recent results and colored swatches
+retained for tilt and contact keys.
 
 ## The two composites
 
 The corpus publishes two figures of itself: the 10-by-10 **figure** of `n = 1..100`, and
-the 18-by-18 **poster** of the whole corpus, `n = 1..324`. They share a builder, a
-record, a palette and a card design; 324 falls into 18 columns of 18 with no short row,
-which is why the poster stops where the catalogue’s completeness statement does.
-The figure is untouched by everything below, byte for byte.
+the triangular **poster** of the whole corpus, `n = 1..324`. They share a builder, a
+record, a palette and a card design.
+The poster’s row $k$ holds $n = (k-1)^2 + 1$ through $k^2$. Each whole row is
+right-aligned, leaving the upper-left corner free for a left-aligned information block.
+Eighteen complete rows cover the catalogue’s range, with thirty-five cards in the final
+row; no grid suffix moves onto a second line.
+A $k×k$ grid label in the separator marks each row’s first retained regular axis-aligned
+grid packing; the count stays in the ordinary card caption.
+Dimensions and `GRID` form one line rotated 90 degrees counterclockwise, centered on the
+drawing’s height. The renderer measures its retained-font ink and leaves the normal
+horizontal inter-box clearance before the first grid outline, refusing a label that
+exceeds the separator.
+Web views keep the separator and omit these print-only labels.
+The threshold comes from the canonical atlas manifest, not a count formula or the
+derived regularized view.
+Where an irregular prefix precedes the grid suffix, half a drawing width separates the
+segments by 79 units horizontally.
+All-grid rows receive no added gap and place their marker before the first card.
+Both layouts use a 287-unit row pitch and 203-unit column pitch.
+Compared with the 214-unit column and 307-unit row pitches, visible horizontal box gaps
+decrease by about 20% and the clearance from final annotation ink to the next row
+outline decreases by about 25%. The figure keeps its 10-by-10 geometry, card scale and
+square encoding.
+Triangle bound captions use five decimal places rather than the figure’s
+six, with upper bounds rounded upward, lower bounds downward and exact equalities to
+nearest. Measured side captions that leave less than five units beside the degree use
+four places instead; the renderer refuses a caption that still overlaps.
+Current fallback cases are $n = 146, 205, 235, 266, 300$, derived from widths rather
+than a case list. The pure shared display helper shortens only the printed numeral; the
+canonical values and display records retain their precision.
+The retained-label check applies the same formatting policy, so shortening the captions
+cannot hide a stale bound.
 
 ### A composite is a specification
 
 `KNOWN_BEST_COMPOSITES` in `src/sqpack/known_best.py` is the whole of it.
-Four fields say what a figure draws — first $n$, last $n$, columns, filename stem — and
-the rest of the geometry follows: rows, the canvas, the legend and footer baselines, the
+First $n$, last $n$, columns, filename stem and placement say what a figure draws.
+The remaining geometry follows: rows, the canvas, the legend and footer baselines, the
 layout string, the manifest record and the figure record’s own legend totals.
-Nothing is absolute, which is what a second entry demonstrated: eighteen columns is
-eight more column pitches of width, and eighteen rows moves the legend and all four
-footer lines by eight row pitches.
+The triangle keeps the figure’s card and label sizes.
+Its eighteen complete logical rows fit a thirty-five-column envelope.
+The longest row’s cards start at $x = 180$; its first drawing starts at $x = 204$. Rows
+begin at $y = 120$ and share the figure’s 287-unit pitch, preserving drawing and caption
+scale while keeping the annotation clearance consistent.
+The canvas includes 120-unit outside clearance for markers and top/bottom margins.
+All informational text occupies the upper-left block at $x = 204..2804$, starting at
+$y = 120$: title, all badge meanings and counts, hue and shade keys, explanation,
+construction, lower-bound and optimality-proof credits and closing project details.
+The renderer derives the block’s bottom from the final line’s retained-font ink extent.
+The 2600-unit block uses 144-unit title type, 66-unit type for the two-line definition,
+and 48-unit type for every subsequent legend, credit and closing line, all in the same
+retained body font at weight 700. The first two tilt swatches contain black 90° and 45°
+labels, shared with the website and the grid figure.
+The information starts at $x = 204$, exactly the left edge of the first drawing in the
+final row; card boundaries include additional caption room.
+The definition and every body line use normalized leading 1.50. All 48-unit lines have a
+72-unit baseline pitch, with clear gaps between sections.
+Rendering refuses lines wider than the block, overlapping documentation lines and text
+that intersects a card.
+The problem definition spans two lines above the legend, breaking after “can”: “The
+square packing problem asks for the side $s(n)$ of the smallest square that can hold $n$
+unit squares, where the squares are free to rotate but cannot overlap”.
+The printed text has no final period.
+It sets $s$ and both $n$ tokens in italic with upright parentheses.
+The print legend has eight semantic items in two left-aligned columns: four status rows
+and four recency, color and degree rows.
+The website retains only the shared tilt-color and contact-shade entries.
+The final right-column item is the unbadged text “deg is the algebraic degree of that
+side length”.
+Each counted item includes the number of depicted cases as its denominator.
+The four rows share the body’s 72-unit baseline pitch.
+
+Three separate paragraphs begin “Best packings due to”, “Lower bounds due to” and
+“Optimality proofs due to”.
+Complete canonical names remain intact and appear once within each paragraph.
+All recorded construction finders and improvers appear; current lower-bound source
+authors receive the second paragraph.
+The third paragraph credits mathematical proof authors and explicitly distinguishes
+formalization and verification contributions.
+Method, prerequisite and historical lower-bound credits remain in the structured
+metadata.
+
+Names run from older to newer evidenced result or contribution dates.
+Non-overlapping date intervals establish precedence; alphabetical ties leave partial
+dates at their original precision.
+A later improver’s source does not redate inherited authors, and a retrieval or snapshot
+date does not establish publication priority.
+Line balancing preserves that order and omits final periods and bracketed citations.
+The widest of the three balanced construction-credit lines sets the common width for all
+three credit paragraphs; complete names and role prefixes remain indivisible.
+
+Both diagrams use the same full-corpus $n = 1..324$ acknowledgments.
+SVG metadata states that credit scope separately from the depicted range and retains the
+complete source citations, original statuses, contribution roles and case associations.
+The curated input is `credit-attributions.json`; `devtools.atlas_credit_attributions`
+validates its roles and chronology without deciding proof acceptance or modifying
+scientific facts.
+
+The shared block gap separates the credits from “Diagram by Joshua Levy”.
+The data date, a middle dot and the generated edition follow on the next line.
+Another block gap precedes exactly “The Squares Project” and “github.com/jlevy/squares”.
+Both final lines use the same 48-unit body font, weight 700 and 72-unit pitch as the
+legend and credits.
+They are plain black text without a hyperlink or PDF annotation; both
+start at the information block’s left edge.
+The final line’s lower extent determines the block’s bottom; it is not a fixed estimate.
+The renderer checks the information rectangle against every card; all text stays inside
+the upper-left whitespace.
+The poster has no publication subtitle; its closing date is the date of the recorded
+data commit. The recent-result accent follows the upper construction, certified lower
+bound and optimality proof independently.
+A recent proof can color an optimality badge while its older construction’s upper-bound
+caption stays neutral.
+The shared row model declares separate non-grid and grid segments, kept together on one
+line. All rows share the final drawing’s right edge, with 120 units of clearance outside
+the card envelope on the right and bottom.
+Cards retain their logical row and column identities; physical and logical row counts
+both equal eighteen.
+SVG metadata records 35 physical columns and 18 physical lines, matching the manifest
+and figure record. The same pure segment plan supplies cards, markers, canvas dimensions
+and export receipts.
+Partial crops allocate only surviving segments, and generic row-major geometry needs no
+canonical preflight.
+The packing drawings and card captions retain their original scale.
 
 |  | figure | poster |
 | --- | --- | --- |
 | Cases | `n = 1..100` | `n = 1..324` |
-| Grid | 10 by 10 | 18 by 18 |
-| Canvas | 2400 × 2896 units | 4224 × 4912 units |
+| Arrangement | 10 by 10, row-major | 18 complete right-aligned rows |
+| Canvas | 2150 × 3823 units | 7497 × 5361 units |
 | Squares drawn | 5,050 | 52,650 |
 | Rasters | 1x, 2x, link-preview card | 1x |
-| PDF page | 25 × 30.17 in | 44 × 51.17 in |
+| PDF page | 22.40 × 39.82 in | 78.09 × 55.84 in |
 
 The remaining fields are the decisions a figure of another size has to make: which
 rasters it publishes, whether it publishes a link-preview crop, and what it may leave
 out of a square to stay inside a byte budget.
-The poster publishes one raster, and the reason is measured rather than assumed: its 1x
-export is 2,369,558 bytes, a 2x of the same drawing is 5,055,264 at 83 megapixels, and
-the PDF carries that detail at any zoom for 491,026. The figure’s 3x was rejected at
-2,150,682 on exactly that argument, so a poster 2x at more than twice the price is not a
-close call. It publishes no link-preview card either: the card is one page’s unfurl, and
-that page already has one.
+The poster publishes one raster.
+On the rectangular poster, a 2x raster measured 5,055,264 bytes at 83 megapixels, while
+its vector PDF measured 491,026 bytes and preserved the detail at any zoom.
+The triangle uses a wider canvas and keeps the same export set.
+It publishes no link-preview card either: the card is one page’s unfurl, and that page
+already has one.
 
 The accessible `<title>` and `<desc>` are the one thing a specification cannot compute —
 nothing spells “one through three hundred twenty-four” from two integers — so they are
@@ -360,8 +507,9 @@ render rather than borrowing another figure’s words.
 The house encoding spends about 460 bytes on every square the figure draws: the
 `points`, the fill, a stroke repeated on each polygon, and six per-square `data-*` facts
 that let a reader interrogate the drawing without the record beside it.
-On the poster it would spend 490, because a wider canvas and larger grids make each
-coordinate longer. At 5,050 squares that is a 2.3 MB file.
+On the rectangular poster it spent 490, because a wider canvas and larger grids made
+each coordinate longer.
+At 5,050 squares that is a 2.3 MB file.
 At 52,650 it is 24.6 MB, which is not a file to commit, so the poster spends less per
 square — and what it stops spending was chosen against measurements rather than guessed.
 `build_known_best_atlas --report` prints them for whatever is committed:
@@ -370,7 +518,9 @@ square — and what it stops spending was chosen against measurements rather tha
 uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --report
 ```
 
-Each lever below was measured on its own and in combination, on the same 52,650 squares:
+Each lever below was measured on its own and in combination on the rectangular poster’s
+52,650 squares.
+The triangle keeps the same encoding; `--report` gives its current sizes.
 
 | Encoding | SVG bytes | Per square |
 | --- | --- | --- |
@@ -388,7 +538,7 @@ The two obvious levers together reach 8.84 MiB, which is over the 8 MiB budget, 
 third was needed rather than optional.
 And the last row is why the coordinates stop at three decimals rather than two: the
 fourth lever buys 5.6 percent and gives up a factor of ten of precision, on a drawing
-whose container is 158 units wide and whose PDF page is 44 inches.
+whose containers are 158 units wide.
 
 What each lever is, and where the fact it drops still lives:
 
@@ -408,7 +558,7 @@ What each lever is, and where the fact it drops still lives:
   specification and recorded in the drawing’s metadata, never inherited from the ambient
   decimal context, which is [`D-359`](../../../defects.md).
   A thousandth of a unit is 1/158,000 of a container: below one device dot at 1200 dpi
-  on the 44-inch page.
+  at the poster’s intrinsic print scale.
 
 The per-`n` renderings keep all three.
 They are where a reader interrogates one packing; the poster is where a reader sees the

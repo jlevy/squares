@@ -7,6 +7,7 @@
   const toggle = grid?.querySelector("[data-atlas-toggle]");
   const tabs = grid?.querySelector("[data-atlas-views]");
   const sizes = grid?.querySelector("[data-atlas-sizes]");
+  const scales = grid?.querySelector("[data-atlas-scales]");
   if (
     !(grid instanceof HTMLElement) ||
     !(cells instanceof HTMLElement) ||
@@ -21,6 +22,7 @@
     cells,
     tabs,
     sizes: sizes instanceof HTMLElement ? sizes : null,
+    scales: scales instanceof HTMLElement ? scales : null,
   });
 
   // The button reads Show More with the double chevron down, and once the rest show,
