@@ -1,11 +1,11 @@
-"""Check a reported fine-net check2 certificate kept outside Git, and price its replay.
+"""Check a reported wand125 certificate kept outside Git, and price its replay.
 
 wand125's fine-net certificates of jlevy/squares#446 and its follow-ups are retained as
 authored facts and hash references (`resources/web/wand125-fine-net-*`): the release
 asset that holds the candidate, its logs and the adapted verifier's source stays outside
 live Git, since the nested verifier carries no licence of its own. This tool reads a
 local copy of that asset beside the certificate's documents from the pinned tree, and
-writes the receipts a packet keeps. It runs no program of the source.
+writes the receipts a packet keeps. Its check2 commands run no program of the source.
 
 - ``premises`` refuses the asset unless its size and SHA-256 are the pinned ones, unpacks
   it safely (plain files and directories under ``certificates/<name>/`` only), lays the
@@ -17,8 +17,11 @@ writes the receipts a packet keeps. It runs no program of the source.
   acquisition record pins it. It also times the three narrower
   readers the 8 October n = 27 follow-up ran (``measure``, ``declared_net``,
   ``semantic_digest``), compares the sealed inner bundle with the manifest and with the
-  directory, member by member, and records both README editions. It decides no
-  coverage.
+  directory, member by member, and records both README editions and whether the
+  pre-publication receipt is the run record the check2 receipt embeds. A refusal by the
+  check2 reader, a field it reads that a receipt of another shape lacks included, is
+  recorded as ``CHECK2_READER_REFUSED`` with its message, and the custody checks still
+  run. It decides no coverage.
 - ``sample`` runs this repository's ``sqverify-fast`` at chosen directions of the
   candidate's declared net, one process per direction, one thread each, with
   ``--confirm``, at most ``--workers`` at a time. Each direction's verdict, nodes and
@@ -33,6 +36,19 @@ writes the receipts a packet keeps. It runs no program of the source.
   directions. A sample is a diagnostic: it decides only the directions it ran, and its
   status says so.
 
+A linear certificate of points, segments and rectangles on the 201-angle net (T-080's
+kind) whose release asset is likewise kept outside Git is read by the T-080 route's own
+functions, `devtools.audit_wand125_linear`, given the files and their digests instead of
+a packet's retained copies:
+
+- ``linear-premises`` unpacks the pinned asset beside the pinned documents and runs
+  `linear_certificate`, `bundle_bindings` and `check_inputs` at all 201 angles. It runs
+  no program of the source and decides no coverage.
+- ``linear-sample`` replays chosen angles as ``linear-replay`` does, with the source's
+  replay function and unchanged checker from this repository's retained, reviewed copies
+  (never the asset's ``code/``), and prices the complete replay and the route's control
+  from the source's per-angle seconds. It is a diagnostic of the angles it ran.
+
 From ``packing/``::
 
     .venv/bin/python3 -m devtools.fine_net_followup premises \\
@@ -43,6 +59,13 @@ From ``packing/``::
         --candidate WORK/certificates/mixed_n29_L582/candidate.json --n 29 --side 291/50 \\
         --directions 0,296,592 --workers 2 --source-run WORK/.../check2/run.jsonl.gz \\
         --out RECEIPT
+    .venv/bin/python3 -m devtools.fine_net_followup linear-premises \\
+        --asset ASSET.tar.gz --sha256 HEX --bytes N --documents CERT_DIR \\
+        --name mixed_n122_L1126 --n 122 --side 563/50 --orbits 502,1268,3 \\
+        --candidate-digest HEX --bundle n122-L11.26-proof-bundle.tar.gz \\
+        --work WORK --out RECEIPT
+    .venv/bin/python3 -m devtools.fine_net_followup linear-sample ... \\
+        --directions 37,108 --workers 2 --out RECEIPT
 """
 
 from __future__ import annotations
@@ -58,12 +81,15 @@ import sys
 import tarfile
 import tempfile
 import time
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from fractions import Fraction
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from devtools import audit_wand125_linear as linear
+from devtools import audit_wand125_point_and_mixed as mixed
 from devtools.audit_wand125_declared_net import (
+    PREPUBLICATION,
     AuditError,
     Certificate,
     audit_check2,
@@ -73,6 +99,12 @@ from devtools.audit_wand125_declared_net import (
     require,
     semantic_digest,
     utc_now,
+)
+from devtools.audit_wand125_linear import (
+    _replay_direction,  # pyright: ignore[reportPrivateUsage]
+)
+from devtools.audit_wand125_point_and_mixed import (
+    _passes,  # pyright: ignore[reportPrivateUsage]
 )
 from devtools.retained_data import git_blob
 from sqpack import retained_json
@@ -87,6 +119,15 @@ MAX_MEMBER_BYTES = 64 * 1024 * 1024
 BUNDLE_SUFFIX = "-check2-bundle.tar.gz"
 #: How long one direction may run before the sample is abandoned.
 DIRECTION_TIMEOUT = 3600
+#: What the check2 reader raises when it refuses: its own refusal, or a field it reads
+#: that a receipt of another shape lacks. Either is recorded as a refusal, never passed.
+READER_REFUSALS = (AuditError, KeyError, TypeError, ValueError)
+CHECK2_READER_REFUSED = "CHECK2_READER_REFUSED"
+#: The suffix of the proof bundle a linear certificate directory ships.
+PROOF_BUNDLE_SUFFIX = "-proof-bundle.tar.gz"
+#: The linear control: the original and two mutations at one oblique direction, each run
+#: to at most the stored node count (`devtools.audit_wand125_linear.linear_control`).
+LINEAR_CONTROL_RUNS = 3
 
 
 def file_digest(path: Path) -> str:
@@ -233,6 +274,31 @@ def sealed_bundle(
     }
 
 
+def prepublication(directory: Path) -> dict[str, Any] | None:
+    """The source's pre-publication receipt beside the run its check2 receipt records.
+
+    The check2 reader takes the pre-publication receipt as a second run on the published
+    bytes. Its shape is named here, and whether it is the very run record
+    ``check2/receipt.json`` embeds under ``receipt``, with both runs' seconds, so that a
+    packet can say when the two receipts are one run.
+    """
+    path = directory / PREPUBLICATION
+    if not path.is_file():
+        return None
+    second = load_json(path.read_bytes())
+    receipt = load_json((directory / "check2/receipt.json").read_bytes())
+    embedded = receipt.get("receipt")
+    shape = second.get("schema") or ("build" if "build" in second else "unnamed")
+    return {
+        "sha256": file_digest(path),
+        "shape": shape,
+        "seconds": second.get("seconds"),
+        "check2_wall_seconds": receipt.get("verifier_summary", {}).get("wall_seconds"),
+        "check2_embeds_a_run_record": embedded is not None,
+        "identical_to_the_embedded_run_record": embedded == second,
+    }
+
+
 def premises(
     asset: Path,
     stated: Certificate,
@@ -258,15 +324,19 @@ def premises(
     view = work / "view" / stated.name
     pins = packet_view(directory, stated.name, view)
     start = time.perf_counter()
-    audit = audit_check2(view, stated, pins=pins)
+    try:
+        audit = audit_check2(view, stated, pins=pins)
+    except READER_REFUSALS as error:
+        audit = {"status": CHECK2_READER_REFUSED, "refusal": f"{type(error).__name__}: {error}"}
     audit_wall = time.perf_counter() - start
     listed = load_json((directory / "files-sha256.json").read_bytes())
     sealed = sealed_bundle(directory, listed, asset_files)
     pinned_readme = file_digest(directory / "README.md")
+    side = stated.side
     return {
         "kind": "fine-net-followup-premises/v1",
         "certificate": stated.name,
-        "claim": audit["claim"],
+        "claim": f"s({stated.n}) >= {side.numerator}/{side.denominator}",
         "asset": {
             "sha256": sha256,
             "bytes": size,
@@ -300,6 +370,7 @@ def premises(
             "pinned_sha256": pinned_readme,
             "different": sealed["sealed_readme_sha256"] != pinned_readme,
         },
+        "prepublication": prepublication(directory),
         "author_code_executed": False,
         "status": audit["status"],
         "scope": (
@@ -468,6 +539,270 @@ def sample(
     }
 
 
+# --------------------------------------------------------------------------- linear
+
+
+def linear_stated(
+    name: str,
+    n: int,
+    side: Fraction,
+    *,
+    orbits: tuple[int, int, int],
+    digest: str,
+    tarball: str,
+) -> linear.LinearCertificate:
+    """A linear certificate as the source states it: count, side, point, segment and
+    rectangle orbits, candidate digest and proof bundle.
+
+    Its packet and revision are only named: the maintained readers, given the files and
+    their digests (`linear_prepare`), read neither.
+    """
+    points, segments, rectangles = orbits
+    return linear.LinearCertificate(
+        name=name,
+        packet=mixed.WEB,
+        revision="",
+        directory=Path("certificates", name),
+        n=n,
+        side=side,
+        rectangles=rectangles,
+        candidate_digest=digest,
+        tarball=tarball,
+        source_audit=True,
+        points=points,
+        segments=segments,
+    )
+
+
+def linear_prepare(
+    asset: Path, *, sha256: str, size: int, documents: Path, name: str, work: Path
+) -> tuple[Path, list[str], list[str], dict[Path, str], str]:
+    """The pinned asset unpacked with the pinned documents laid beside it.
+
+    Returns the certificate directory, the asset's files, the documents' files, every
+    file's SHA-256 by its upstream path (the tree the maintained readers take) and the
+    name of the one proof bundle the directory ships.
+    """
+    directory = unpack_asset(asset, sha256, size, name, work)
+    asset_files = sorted(
+        p.relative_to(directory).as_posix() for p in directory.rglob("*") if p.is_file()
+    )
+    laid = lay_documents(documents, directory)
+    tree = {
+        Path("certificates", name, p.relative_to(directory)): file_digest(p)
+        for p in sorted(directory.rglob("*"))
+        if p.is_file()
+    }
+    bundles = sorted(directory.glob(f"*{PROOF_BUNDLE_SUFFIX}"))
+    require(len(bundles) == 1, f"{len(bundles)} proof bundles in {directory}")
+    return directory, asset_files, laid, tree, bundles[0].name
+
+
+def linear_premises(
+    asset: Path,
+    stated: linear.LinearCertificate,
+    *,
+    sha256: str,
+    size: int,
+    documents: Path,
+    work: Path,
+) -> dict[str, Any]:
+    """Every exact premise of a linear certificate, by the T-080 route's readers.
+
+    `devtools.audit_wand125_linear.linear_certificate` reads the measure, its D4
+    invariance, digest, net, centre domains, checker and code identity, 201 records and
+    the source's audit; `bundle_bindings` holds the proof bundle's 810 files to them; and
+    `check_inputs` binds every angle's input to the exact candidate. None of them imports
+    or runs a program of the source, and none decides coverage.
+    """
+    directory, asset_files, laid, tree, tarball = linear_prepare(
+        asset,
+        sha256=sha256,
+        size=size,
+        documents=documents,
+        name=stated.directory.name,
+        work=work,
+    )
+    require(tarball == stated.tarball, f"the directory ships {tarball}, not {stated.tarball}")
+    files = {name: (directory / name).read_bytes() for name in mixed.MIXED_FILES}
+    start = time.perf_counter()
+    audit = linear.linear_certificate(stated, files, tree)
+    audit_wall = time.perf_counter() - start
+    bundle = mixed.unpack_bundle(stated, directory / tarball, work / "unpacked")
+    bindings = linear.bundle_bindings(stated, bundle, tree)
+    shipped = load_json(files["certificate.json"])["results"]
+    start = time.perf_counter()
+    inputs = linear.check_inputs(
+        bundle, tree[stated.directory / "candidate.json"], range(linear.LAST + 1), shipped
+    )
+    inputs_wall = time.perf_counter() - start
+    return {
+        "kind": "fine-net-followup-linear-premises/v1",
+        "certificate": stated.directory.name,
+        "claim": f"s({stated.n}) >= {stated.side.numerator}/{stated.side.denominator}",
+        "asset": {"sha256": sha256, "bytes": size, "files": inventory(directory, asset_files)},
+        "documents": inventory(directory, laid),
+        "linear_certificate": audit,
+        "linear_certificate_wall_seconds": audit_wall,
+        "bundle": {
+            "name": tarball,
+            "sha256": tree[stated.upstream_tarball],
+            "bytes": (directory / tarball).stat().st_size,
+            **bindings,
+        },
+        "inputs": inputs,
+        "inputs_wall_seconds": inputs_wall,
+        "entrypoints": [
+            "audit_wand125_linear.linear_certificate",
+            "audit_wand125_point_and_mixed.unpack_bundle",
+            "audit_wand125_linear.bundle_bindings",
+            "audit_wand125_linear.check_inputs",
+        ],
+        "author_code_executed": False,
+        "status": "EXACT_PREMISES_HOLD",
+        "scope": (
+            "Exact premises and source-byte custody only, from the pinned asset and"
+            " documents, by the readers of the T-080 route; no coverage is decided and no"
+            " program of the source is run."
+        ),
+    }
+
+
+def linear_price(
+    rows: list[dict[str, Any]], seconds: dict[int, float], nodes: dict[int, int], workers: int
+) -> dict[str, Any]:
+    """The sample's price of a complete replay and of the T-080 route's control.
+
+    The replay is priced twice: this host's CPU over the source's seconds on the same
+    angles, times the source's total, and this host's CPU per node times the certificate's
+    nodes. The larger stands. The control is `LINEAR_CONTROL_RUNS` runs of the oblique
+    angle with the fewest nodes, at the ratio. No complete replay is shorter in wall than
+    its costliest angle, which bounds the wall from below.
+    """
+    ours = sum(row["cpu_seconds"] for row in rows)
+    theirs = sum(seconds[row["index"]] for row in rows)
+    ratio = ours / theirs
+    by_ratio = ratio * sum(seconds.values())
+    by_nodes = ours / sum(nodes[row["index"]] for row in rows) * sum(nodes.values())
+    replay = max(by_ratio, by_nodes)
+    oblique = min((index for index in nodes if index), key=lambda index: (nodes[index], index))
+    control = LINEAR_CONTROL_RUNS * ratio * seconds[oblique]
+    total = replay + control
+    longest = max(seconds, key=lambda index: seconds[index])
+    return {
+        "sample_angles": len(rows),
+        "net_angles": len(seconds),
+        "sample_cpu_seconds": ours,
+        "source_seconds_on_sample": theirs,
+        "source_seconds_whole_net": sum(seconds.values()),
+        "ratio_to_source": ratio,
+        "full_replay_cpu_seconds_by_ratio": by_ratio,
+        "full_replay_cpu_seconds_by_nodes": by_nodes,
+        "full_replay_cpu_seconds": replay,
+        "control_angle": oblique,
+        "control_cpu_seconds": control,
+        "total_cpu_seconds": total,
+        "total_cpu_hours": total / 3600,
+        "costliest_angle": longest,
+        "costliest_angle_cpu_seconds": ratio * seconds[longest],
+        "workers": workers,
+        "total_wall_seconds_at_workers": max(total / workers, ratio * seconds[longest]),
+        "limit_cpu_seconds": FULL_CAPTURE_LIMIT_CPU_SECONDS,
+        "full_replay_within_limit": total <= FULL_CAPTURE_LIMIT_CPU_SECONDS,
+    }
+
+
+def linear_sample(
+    asset: Path,
+    stated: linear.LinearCertificate,
+    *,
+    sha256: str,
+    size: int,
+    documents: Path,
+    work: Path,
+    indices: list[int],
+    workers: int,
+) -> dict[str, Any]:
+    """Chosen angles replayed by the T-080 route, and the price of the rest.
+
+    As `devtools.audit_wand125_linear.linear_replay` does for a registered certificate:
+    the pinned asset unpacked afresh, the proof bundle bound to it, the shipped ``code/``
+    assembled from this repository's retained copies (never the asset's), the driver's
+    preconditions, each sampled input bound to the candidate, the checker built by the
+    shipped ``compile_verifier``, and each angle replayed by the shipped ``replay_angle``
+    in a pool of at most ``workers`` processes, each timed by its own and its children's
+    CPU. An angle passes when it returns the certificate's own record. A sample decides
+    only the angles it ran.
+    """
+    require(1 <= workers <= 2, "at most two workers on a shared host")
+    require(all(0 <= index <= linear.LAST for index in indices), "an angle is off the net")
+    runtime = mixed.replay_runtime()
+    directory, _, _, tree, tarball = linear_prepare(
+        asset,
+        sha256=sha256,
+        size=size,
+        documents=documents,
+        name=stated.directory.name,
+        work=work,
+    )
+    require(tarball == stated.tarball, f"the directory ships {tarball}, not {stated.tarball}")
+    bundle = mixed.unpack_bundle(stated, directory / tarball, work / "unpacked")
+    bindings = linear.bundle_bindings(stated, bundle, tree)
+    code = linear.assemble_code(stated, work / "code", tree)
+    driver = linear.driver_preconditions(bundle, code)
+    require(driver.digest == stated.candidate_digest, "the bundle's candidate differs")
+    shipped = load_json((directory / "certificate.json").read_bytes())["results"]
+    inputs = linear.check_inputs(
+        driver.root, tree[stated.directory / "candidate.json"], indices, shipped
+    )
+    binary = work / "replay-verify"
+    driver.verifier.compile_verifier(binary)
+    summary = load_json((bundle / "summary.json").read_bytes())["records"]
+    seconds = {int(index): float(record["seconds"]) for index, record in summary.items()}
+    nodes = {int(index): int(record["nodes"]) for index, record in shipped.items()}
+    before = os.getloadavg()[0]
+    start = time.monotonic()
+    jobs = [(driver.code, str(driver.root), index, str(binary)) for index in indices]
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        rows = list(pool.map(_replay_direction, jobs))
+    wall = time.monotonic() - start
+    for row in rows:
+        row["passes"] = _passes(row, shipped)
+        row["source_seconds"] = seconds[row["index"]]
+        row["nodes"] = nodes[row["index"]]
+    passing = all(row["passes"] for row in rows)
+    return {
+        "kind": "fine-net-followup-linear-sample/v1",
+        "certificate": stated.directory.name,
+        "candidate_digest": driver.digest,
+        "angles": indices,
+        "rows": rows,
+        "bindings": bindings,
+        "preconditions": driver.facts(),
+        "inputs": {key: inputs[key] for key in ("status", "inputs", "images")},
+        "binary_sha256": file_digest(binary),
+        "compile": "the shipped compile_verifier",
+        "environment": runtime,
+        "host": mixed.host_facts() | {"load_before": before, "load_after": os.getloadavg()[0]},
+        "workers": workers,
+        "wall_seconds": wall,
+        "price": linear_price(rows, seconds, nodes, workers),
+        "ran_at": utc_now(),
+        "status": "DIAGNOSTIC_SAMPLE" if passing else "SAMPLE_REFUSED",
+        "scope": (
+            "A diagnostic sample: the source's replay function and unchanged checker, from"
+            " this repository's retained copies, at the angles it ran; it decides only"
+            " those angles and is not a replay. No control was run."
+        ),
+    }
+
+
+def parse_orbits(text: str) -> tuple[int, int, int]:
+    """``502,1268,3`` as the point, segment and rectangle orbit counts."""
+    points, segments, rectangles = (int(part) for part in text.split(","))
+    return points, segments, rectangles
+
+
 def parse_directions(text: str) -> list[int]:
     """``0,296,592`` as a sorted list of distinct direction indices."""
     return sorted({int(part) for part in text.split(",")})
@@ -477,19 +812,27 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     commands = parser.add_subparsers(dest="command", required=True)
     first = commands.add_parser("premises", help="custody and exact premises")
-    first.add_argument("--asset", type=Path, required=True)
-    first.add_argument("--sha256", required=True)
-    first.add_argument("--bytes", type=int, required=True)
-    first.add_argument("--documents", type=Path, required=True)
-    first.add_argument("--name", required=True)
-    first.add_argument("--work", type=Path, required=True)
     second = commands.add_parser("sample", help="sqverify-fast at chosen directions")
+    third = commands.add_parser("linear-premises", help="a linear certificate's premises")
+    fourth = commands.add_parser("linear-sample", help="a linear certificate's angles")
+    for command in (first, third, fourth):
+        command.add_argument("--asset", type=Path, required=True)
+        command.add_argument("--sha256", required=True)
+        command.add_argument("--bytes", type=int, required=True)
+        command.add_argument("--documents", type=Path, required=True)
+        command.add_argument("--name", required=True)
+        command.add_argument("--work", type=Path, required=True)
+    for command in (third, fourth):
+        command.add_argument("--orbits", type=parse_orbits, required=True)
+        command.add_argument("--candidate-digest", required=True)
+        command.add_argument("--bundle", required=True)
     second.add_argument("--binary", type=Path, required=True)
     second.add_argument("--candidate", type=Path, required=True)
-    second.add_argument("--directions", type=parse_directions, required=True)
-    second.add_argument("--workers", type=int, default=1)
     second.add_argument("--source-run", type=Path)
-    for command in (first, second):
+    for command in (second, fourth):
+        command.add_argument("--directions", type=parse_directions, required=True)
+        command.add_argument("--workers", type=int, default=1)
+    for command in (first, second, third, fourth):
         command.add_argument("--n", type=int, required=True)
         command.add_argument("--side", required=True)
         command.add_argument("--out", type=Path, required=True)
@@ -508,7 +851,7 @@ def main(argv: list[str] | None = None) -> int:
                 work=args.work,
             )
             passing = "EXACT_PREMISES_HOLD"
-        else:
+        elif args.command == "sample":
             receipt = sample(
                 args.binary,
                 args.candidate,
@@ -519,7 +862,34 @@ def main(argv: list[str] | None = None) -> int:
                 run_log=args.source_run,
             )
             passing = "DIAGNOSTIC_SAMPLE"
-    except AuditError as error:
+        else:
+            stated = linear_stated(
+                args.name,
+                args.n,
+                Fraction(args.side),
+                orbits=args.orbits,
+                digest=args.candidate_digest,
+                tarball=args.bundle,
+            )
+            common = {
+                "sha256": args.sha256,
+                "size": args.bytes,
+                "documents": args.documents,
+                "work": args.work,
+            }
+            if args.command == "linear-premises":
+                receipt = linear_premises(args.asset, stated, **common)
+                passing = "EXACT_PREMISES_HOLD"
+            else:
+                receipt = linear_sample(
+                    args.asset,
+                    stated,
+                    **common,
+                    indices=args.directions,
+                    workers=args.workers,
+                )
+                passing = "DIAGNOSTIC_SAMPLE"
+    except (AuditError, ValueError) as error:
         print(f"refused: {error}", file=sys.stderr)
         return 1
     args.out.parent.mkdir(parents=True, exist_ok=True)

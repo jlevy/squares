@@ -46,8 +46,13 @@ def tarball(files: dict[str, bytes]) -> bytes:
     return stream.getvalue()
 
 
-def release(tmp_path: Path) -> tuple[Path, Path, bytes]:
-    """A two-square check2 asset and its documents, laid out as the source's are."""
+def release(tmp_path: Path, *, embedded: bool = False) -> tuple[Path, Path, bytes]:
+    """A two-square check2 asset and its documents, laid out as the source's are.
+
+    ``embedded`` gives the pre-publication receipt the ``fine-net-check2-receipt/v1``
+    shape of 10 October's n = 30 certificate: the very run record the check2 receipt
+    embeds, with ``verifier`` in place of ``build`` and a control with tries.
+    """
     candidate = {
         "n": 2,
         "L": "3",
@@ -61,8 +66,25 @@ def release(tmp_path: Path) -> tuple[Path, Path, bytes]:
     semantic = semantic_digest(candidate)
     facts = net_facts(Fraction(4999, 5000), Fraction(1, 5002), 2073)
     build = {"source_sha256": SOURCE, "target": "x86_64-unknown-linux-gnu"}
+    record = {
+        "schema": "fine-net-check2-receipt/v1",
+        "status": "VERIFIED",
+        "verdict": "PASS",
+        "directions_verified": 2073,
+        "directions_expected": 2073,
+        "candidate_digest": semantic,
+        "file_sha256": digest(raw),
+        "input_sha256": digest(raw),
+        "verifier": build,
+        "seconds": 1,
+        "control": {
+            "refused": True,
+            "tries": [{"factor": "197/200", "status": "REFUSED", "exit": 1, "refused": 32}],
+        },
+    }
     receipt = dumps(
-        {
+        ({"receipt": record} if embedded else {})
+        | {
             "status": "VERIFIED",
             "directions": 2073,
             "failed": 0,
@@ -100,7 +122,9 @@ def release(tmp_path: Path) -> tuple[Path, Path, bytes]:
         }
     )
     prepublication = dumps(
-        {
+        record
+        if embedded
+        else {
             "status": "VERIFIED",
             "verdict": "PASS",
             "directions_verified": 2073,
@@ -187,6 +211,26 @@ def test_the_premises_of_a_complete_asset_hold(tmp_path: Path) -> None:
         f"certificates/{NAME}/check2/run.jsonl.gz",
         f"certificates/{NAME}/{BUNDLE}.tar.gz",
     }
+    assert receipt["prepublication"]["shape"] == "build"
+    assert receipt["prepublication"]["check2_embeds_a_run_record"] is False
+    assert receipt["prepublication"]["identical_to_the_embedded_run_record"] is False
+
+
+def test_a_receipt_shape_the_check2_reader_does_not_take_is_recorded_refused(
+    tmp_path: Path,
+) -> None:
+    """The n = 30 shape: the reader's KeyError is a refusal in the receipt, not a crash,
+    and the custody checks still run."""
+    asset, documents, data = release(tmp_path, embedded=True)
+    assert followup.main(premises_argv(tmp_path, asset, documents, data)) == 1
+    receipt = json.loads((tmp_path / "premises.json").read_text())
+    assert receipt["status"] == followup.CHECK2_READER_REFUSED
+    assert receipt["check2_audit"]["refusal"] == "KeyError: 'build'"
+    assert receipt["claim"] == "s(2) >= 3/1"
+    assert receipt["sealed_bundle"]["listed_hashes_matching"] == 6
+    assert receipt["prepublication"]["shape"] == "fine-net-check2-receipt/v1"
+    assert receipt["prepublication"]["check2_embeds_a_run_record"] is True
+    assert receipt["prepublication"]["identical_to_the_embedded_run_record"] is True
 
 
 def test_an_asset_that_is_not_the_pinned_one_is_refused(tmp_path: Path) -> None:
@@ -273,3 +317,149 @@ def test_a_sample_off_the_net_or_with_three_workers_is_refused(tmp_path: Path) -
         argv += ["--n", "2", "--side", "3", "--directions", directions]
         argv += ["--workers", workers, "--out", str(tmp_path / "refused.json")]
         assert followup.main(argv) == 1
+
+
+# --------------------------------------------------------------------------- linear
+
+LINEAR = "mixed_n3_L4"
+PROOF = "n3-L4-proof-bundle.tar.gz"
+
+
+def linear_release(tmp_path: Path, *, bundles: int = 1) -> tuple[Path, Path, bytes]:
+    """A linear asset (candidate, certificate, proof bundle) and its pinned documents."""
+    outer = {"candidate.json": b"{}", "certificate.json": dumps({"results": {}})}
+    for k in range(bundles):
+        name = PROOF if k == 0 else f"extra{k}-proof-bundle.tar.gz"
+        outer[name] = tarball({f"{name.removesuffix('.tar.gz')}/summary.json": b"{}"})
+    asset = tarball({f"certificates/{LINEAR}/{k}": v for k, v in outer.items()})
+    documents = tmp_path / "documents"
+    for name in ("README.md", "manifest.json", "completion-audit.json", "code/checker.cpp"):
+        (documents / name).parent.mkdir(parents=True, exist_ok=True)
+        (documents / name).write_bytes(name.encode())
+    path = tmp_path / "linear.tar.gz"
+    path.write_bytes(asset)
+    return path, documents, asset
+
+
+def linear_argv(tmp_path: Path, asset: Path, documents: Path, data: bytes) -> list[str]:
+    return [
+        *("--asset", str(asset), "--sha256", digest(data), "--bytes", str(len(data))),
+        *("--documents", str(documents), "--name", LINEAR, "--n", "3", "--side", "4"),
+        *("--orbits", "1,2,3", "--candidate-digest", "c" * 64, "--bundle", PROOF),
+        *("--work", str(tmp_path / "work"), "--out", str(tmp_path / "linear.json")),
+    ]
+
+
+def test_a_linear_asset_is_prepared_with_every_digest_by_upstream_path(
+    tmp_path: Path,
+) -> None:
+    asset, documents, data = linear_release(tmp_path)
+    directory, asset_files, laid, tree, bundle = followup.linear_prepare(
+        asset,
+        sha256=digest(data),
+        size=len(data),
+        documents=documents,
+        name=LINEAR,
+        work=tmp_path / "work",
+    )
+    assert asset_files == ["candidate.json", "certificate.json", PROOF]
+    assert laid == ["README.md", "code/checker.cpp", "completion-audit.json", "manifest.json"]
+    assert bundle == PROOF
+    root = Path("certificates", LINEAR)
+    assert set(tree) == {root / name for name in (*asset_files, *laid)}
+    assert tree[root / "code/checker.cpp"] == digest(b"code/checker.cpp")
+    assert tree[root / PROOF] == followup.file_digest(directory / PROOF)
+
+
+def test_a_linear_asset_with_two_proof_bundles_is_refused(tmp_path: Path) -> None:
+    asset, documents, data = linear_release(tmp_path, bundles=2)
+    with pytest.raises(followup.AuditError, match="2 proof bundles"):
+        followup.linear_prepare(
+            asset,
+            sha256=digest(data),
+            size=len(data),
+            documents=documents,
+            name=LINEAR,
+            work=tmp_path / "work",
+        )
+
+
+def test_linear_premises_hand_the_maintained_readers_the_asset_and_documents(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The T-080 route's readers get the five files, every digest and all 201 angles;
+    their verdicts are theirs, so they are stubbed here and tested with the route."""
+    calls: dict[str, Any] = {}
+
+    def certificate(stated: Any, files: dict[str, bytes], tree: dict[Path, str]) -> Any:
+        calls["certificate"] = (stated, sorted(files), tree)
+        return {"status": "read"}
+
+    def unpack(_stated: Any, archive: Path, into: Path) -> Path:
+        calls["unpack"] = archive.name
+        return into
+
+    def bindings(*_args: Any) -> dict[str, Any]:
+        return {"status": "BUNDLE_BOUND_TO_PACKET", "files": 1}
+
+    def inputs(_root: Path, sha: str, indices: Any, _shipped: Any) -> dict[str, Any]:
+        calls["inputs"] = (sha, list(indices))
+        return {"status": "ALL_INPUTS_ENCLOSE_THE_CANDIDATE"}
+
+    monkeypatch.setattr(followup.linear, "linear_certificate", certificate)
+    monkeypatch.setattr(followup.mixed, "unpack_bundle", unpack)
+    monkeypatch.setattr(followup.linear, "bundle_bindings", bindings)
+    monkeypatch.setattr(followup.linear, "check_inputs", inputs)
+    asset, documents, data = linear_release(tmp_path)
+    argv = ["linear-premises", *linear_argv(tmp_path, asset, documents, data)]
+    assert followup.main(argv) == 0
+    receipt = json.loads((tmp_path / "linear.json").read_text())
+    assert receipt["status"] == "EXACT_PREMISES_HOLD"
+    assert receipt["claim"] == "s(3) >= 4/1"
+    stated, names, tree = calls["certificate"]
+    counts = (stated.n, stated.side, stated.points, stated.segments, stated.rectangles)
+    assert counts == (3, Fraction(4), 1, 2, 3)
+    assert names == sorted(followup.mixed.MIXED_FILES)
+    assert len(names) == 5
+    assert Path("certificates", LINEAR, "code/checker.cpp") in tree
+    assert calls["unpack"] == PROOF
+    assert calls["inputs"] == (digest(b"{}"), list(range(201)))
+    assert receipt["bundle"]["sha256"] == tree[Path("certificates", LINEAR, PROOF)]
+
+
+def test_a_linear_asset_shipping_another_bundle_than_stated_is_refused(
+    tmp_path: Path,
+) -> None:
+    asset, documents, data = linear_release(tmp_path)
+    argv = linear_argv(tmp_path, asset, documents, data)
+    argv[argv.index("--bundle") + 1] = "n3-L5-proof-bundle.tar.gz"
+    assert followup.main(["linear-premises", *argv]) == 1
+    assert not (tmp_path / "linear.json").exists()
+
+
+def test_a_linear_sample_off_the_net_or_with_three_workers_is_refused(
+    tmp_path: Path,
+) -> None:
+    asset, documents, data = linear_release(tmp_path)
+    for directions, workers in (("201", "1"), ("37", "3")):
+        argv = ["linear-sample", *linear_argv(tmp_path, asset, documents, data)]
+        argv += ["--directions", directions, "--workers", workers]
+        assert followup.main(argv) == 1
+    assert not (tmp_path / "work").exists()
+
+
+def test_the_linear_price_takes_the_larger_estimate_and_the_costliest_angle() -> None:
+    rows = [{"index": 1, "cpu_seconds": 2.0}, {"index": 2, "cpu_seconds": 4.0}]
+    seconds = {0: 10.0, 1: 1.0, 2: 2.0, 3: 3.0}
+    nodes = {0: 100, 1: 10, 2: 20, 3: 5}
+    price = followup.linear_price(rows, seconds, nodes, 2)
+    assert price["ratio_to_source"] == 2.0
+    assert price["full_replay_cpu_seconds_by_ratio"] == 32.0
+    assert price["full_replay_cpu_seconds_by_nodes"] == 27.0
+    assert price["full_replay_cpu_seconds"] == 32.0
+    assert price["control_angle"] == 3
+    assert price["control_cpu_seconds"] == 18.0
+    assert price["total_cpu_seconds"] == 50.0
+    assert price["costliest_angle"] == 0
+    assert price["total_wall_seconds_at_workers"] == 25.0
+    assert price["full_replay_within_limit"] is True
