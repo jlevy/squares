@@ -5,7 +5,7 @@ title: Audit upstream rendering precedence in website integration
 kind: task
 status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-10T18:58:50.583Z
-updated_at: 2026-10-10T19:29:23.199Z
+updated_at: 2026-10-10T19:29:55.920Z
 started_at: 2026-10-10T18:59:32.325Z
 closed_at: 2026-10-10T19:29:23.198Z
 close_reason: |
@@ -48,6 +48,6 @@ Final exact-head CI is green for e8243e9ca2bf6e4740c31ac67ad331a6d503d2d0 on PR 
 
 Hosted frontend: 411 behavioral tests passed, 6 skipped, in 323.86s; four native HTTP startup checks passed in 28.73s; browser floor 56 passed in 34.58s. Full frontend completed in 354.28s with only the tracked advisory wall finding under think-ht59; no startup failures and the 300ms startup assertion remains unchanged.
 
-Final CI JSON, frontend log and sole-watch log were copied byte-for-byte (590,867 bytes total) into the durable process-review/p7c4-reconciliation directory; final-ci-archive-manifest.json records the copy verification. Root explicitly authorized closure after all exact-head checks were green. The shared upstream homepage/dedicated Atlas row and placement reconciliation is complete, with website organization preserved. Main af17208c0 was already an ancestor, so no additional PR merge was performed. Scientific/PDF assets are unchanged.
+Final CI JSON, frontend log and sole-watch log (590,867 bytes total) are preserved byte-for-byte directly under the durable process-review directory. Header archived them; duplicate copies in the reconciliation subdirectory were removed after byte-verifying the retained originals. Root explicitly authorized closure after all exact-head checks were green. The shared upstream homepage/dedicated Atlas row and placement reconciliation is complete, with website organization preserved. Main af17208c0 was already an ancestor, so no additional PR merge was performed. Scientific/PDF assets are unchanged.
 
 This closes only think-p7c4. Epic think-2u4x, full checkpoint think-xio5 and process follow-ups think-ht59 and think-9k61 remain open.
