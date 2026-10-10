@@ -592,6 +592,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Guzhou0806’s `s(40) > 335427/50000`: Review of the Clipped-Corner Transfer on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) | dated review record | record | retained | — |
 | [Review: Gupta exact rational refinements, issue #438](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md) | dated review record | record | retained | — |
 | [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |
 | [n17 Paper Review: Global Optimization and Sum-of-Squares Certificates](docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md) | dated review record | record | retained | — |
@@ -6159,8 +6160,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 297 | 76,355 | 42,099 | 885 | 6,096 | 646.8 h |
-| claimed by none | 65 | 14,196 | 8,149 | 185 | 1,184 | 67.13 h |
-| **measured** | **362** | **90,551** | **50,248** | **1,070** | **7,280** | **713.93 h** |
+| claimed by none | 67 | 14,743 | 8,432 | 194 | 1,208 | 68.43 h |
+| **measured** | **364** | **91,098** | **50,531** | **1,079** | **7,304** | **715.23 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |

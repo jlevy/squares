@@ -1,0 +1,78 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "mishapolk-square-packing-records",
+  "source_url": "https://github.com/Mishapolk/square-packing-records",
+  "source_ref": "main",
+  "source_commit": "dd3da5c753c5ded6cb3b89476193b7b801005415",
+  "retrieved_at_utc": "2026-10-10T09:54Z",
+  "git_scope": "Full clone checked out at the pin for issue #470. All 96 files of the tree are in the scope and bound to their Git blobs; under derived-only custody none is copied. The 4e1a601 square-199.txt and square-263.txt, which this commit replaces, were read from the clone for the control receipt only. No source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The issue leaves credit for packings started from the literature with their discoverers and discloses Gemini 3.8 assistance with solver scripting, precision checks and formatting.",
+  "claims": [
+    "Issue #470, resubmitted with errata on 2026-10-09, reports s(n) <= S_n at 28 counts, S_n the side printed in certificates/square-<n>.txt rounded up at 12 decimals, each a decimal centre-angle pose at 16 digits (36 digits for 199 and 263) in a box centred at the origin. At n = 88 the issue says S_n ties SQUISH's 12-decimal display.",
+    "s(84) <= 9.697934799017, from a printed side of 9.6979347990169860.",
+    "s(86) <= 9.820535407499, from a printed side of 9.8205354074987188.",
+    "s(88) <= 9.882451030482, from a printed side of 9.8824510304812740.",
+    "s(103) <= 10.679232047362, from a printed side of 10.6792320473613369.",
+    "s(105) <= 10.789303783751, from a printed side of 10.7893037837503627.",
+    "s(108) <= 10.904821012324, from a printed side of 10.9048210123231399.",
+    "s(127) <= 11.810878787590, from a printed side of 11.8108787875891803.",
+    "s(130) <= 11.904483032516, from a printed side of 11.9044830325157864.",
+    "s(131) <= 11.951105389418, from a printed side of 11.9511053894179291.",
+    "s(153) <= 12.879679373332, from a printed side of 12.8796793733319035.",
+    "s(154) <= 12.926562245853, from a printed side of 12.9265622458523470.",
+    "s(175) <= 13.767155163551, from a printed side of 13.7671551635504397.",
+    "s(179) <= 13.883795490512, from a printed side of 13.8837954905110159.",
+    "s(180) <= 13.916993522482, from a printed side of 13.9169935224813184.",
+    "s(199) <= 14.617572173597, from a printed side of 14.617572173596022011565764842089265585.",
+    "s(207) <= 14.887992258303, from a printed side of 14.8879922583026598.",
+    "s(208) <= 14.924518772030, from a printed side of 14.9245187720293568.",
+    "s(209) <= 14.949617952201, from a printed side of 14.9496179522003985.",
+    "s(236) <= 15.867800839421, from a printed side of 15.8678008394207701.",
+    "s(237) <= 15.903676235190, from a printed side of 15.9036762351891383.",
+    "s(238) <= 15.926146857011, from a printed side of 15.9261468570109788.",
+    "s(239) <= 15.949313169728, from a printed side of 15.9493131697276969.",
+    "s(258) <= 16.563448002138, from a printed side of 16.5634480021371502.",
+    "s(263) <= 16.740419683047, from a printed side of 16.740419683046905419132599490694701672.",
+    "s(270) <= 16.936723155038, from a printed side of 16.9367231550373418.",
+    "s(302) <= 17.881306218091, from a printed side of 17.8813062180900033.",
+    "s(303) <= 17.920312372919, from a printed side of 17.9203123729186586.",
+    "s(306) <= 17.963433717497, from a printed side of 17.9634337174962369.",
+    "s(132) <= 11.986956226066, from a printed side of 11.986956226065860420249009621329605579: in the release's README and certificates/ since 06b484b, not named in the issue.",
+    "s(267) <= 16.838828608296, from a printed side of 16.838828608295706601438723737373948097: in the release's README and certificates/ since 06b484b, not named in the issue.",
+    "certificates/ also holds 18 poses at n = 343 to 360, added in 2b76e6f and called records in the README; every printed side is at least 19.000000000004, above the grid bound s(n) <= 19 that holds for every n <= 361.",
+    "The issue reports that David Ellsworth's check_packing.py at precision 40 and epsilon 1e-14, and an independent 60-digit separating-axis check, accept all 28, and that shrinking the container by 1e-9 or moving a square 1e-6 is refused. These are author reports. squarepacker found overlaps in the 4e1a601 square-199 and square-263; the author re-quenched both in dd3da5c.",
+    "The issue pins dd3da5c7b39f3796d19e0970bc2350ef9ea14ad, which has 39 hex digits and names no commit. The corrected certificates are at dd3da5c753c5ded6cb3b89476193b7b801005415, which shares its first eight digits, is the repository head, and is the only commit after 4e1a601 to change square-199.txt and square-263.txt; its 28 certificate files have the SHA-256 digests the issue lists."
+  ],
+  "scope": [
+    "README.md",
+    "certificates",
+    "check_packing.py"
+  ],
+  "pinned_only": [
+    {
+      "match": "README.md",
+      "reason": "The repository README: the release's record tables and verification note, quoted in this packet's README. Author prose; no licence; pinned by digest only."
+    },
+    {
+      "match": "check_packing.py",
+      "reason": "A copy of David Ellsworth's check_packing.py as the author published it. No licence in the tree; pinned by digest only and never executed here."
+    },
+    {
+      "match": "certificates/square-3[4-6][0-9].txt",
+      "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+    },
+    {
+      "match": "certificates/square-3[4-6][0-9].svg",
+      "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+    },
+    {
+      "match": "certificates/square-*.txt",
+      "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+    },
+    {
+      "match": "certificates/square-*.svg",
+      "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+    }
+  ]
+}
