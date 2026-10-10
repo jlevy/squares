@@ -1454,7 +1454,9 @@ The canonical
 defines native entry points, cache and ID isolation, focus behavior, component owners
 and retained checks.
 Update that contract with a presentation change rather than restating its rules in a
-feature plan. Contributor identity and census work is tracked in the
+feature plan. [Attribution Policy](attribution.md) owns names, credit roles and
+case-specific decisions across the website and PDFs.
+Contributor identity and census work is tracked in the
 [contributor-profile plan](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md).
 
 Before drawing PDF bytes, the exporter checks that visible math is typeset; a completed

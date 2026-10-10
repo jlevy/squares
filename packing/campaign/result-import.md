@@ -12,7 +12,9 @@ This page holds the sequence, and the few rules that belong to no single record.
 The rest has an owner, and is not repeated here:
 
 - [`epistemics.md`](../../epistemics.md#results-by-others) owns which results enter, how
-  they are credited, the `V`, `C` and `S` ratings, and the three end points.
+  their evidential status, the `V`, `C` and `S` ratings, and the three end points.
+- [Attribution Policy](../../attribution.md) owns person names, handle reconciliation,
+  lineage credit, project and tool attribution, and case-specific exceptions.
 - [The frontier README](../frontier/README.md#adding-or-reviewing-a-result) owns the
   rules and fields of the records.
 - [The synopsis](../../SYNOPSIS.md#result-import-and-efficient-confirmation) owns the

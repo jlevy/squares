@@ -117,6 +117,25 @@ TypeScript. Workbench navigation concerns packing/animation.
 No full-text website search index was found; a searchable directory is separate from the
 required profile index and sitemap.
 
+## Attribution Policy and Follow-up
+
+[Attribution Policy](../../../../attribution.md) is the single authority for preferred
+person names, handle reconciliation, project/tool distinctions, lineage and PDF credits.
+It records case-specific decisions and exceptions.
+The shared design guide owns layout; this plan owns rollout and coverage.
+
+The owner added four follow-ups: `think-t3a9` reconciles Ahmed/Queuingtheorydotcom and
+supported handles, including Joshua Levy/jlevy/ojoshe; `think-vix3` audits personal Levy
+credits against project branding, including PDFs; `think-8yk4` verifies the suggested
+EvolvingPrograms/Lewis identity; and `think-xid4` establishes the canonical policy and
+references. A handle match is not a global replacement rule, and archived source wording
+remains unchanged. Complete the scoped identity update now; review historical credit
+migrations by renderer and role under their own beads: `think-2v8h` for bound citations,
+`think-zupq` for verifier author fields and `think-ir3i` for PDF profile links and
+compact credit lines.
+The Lewis audit establishes affiliation with the EvolvingPrograms organization, not a
+personal alias; its person/infrastructure roles remain separate.
+
 ## Design
 
 ### Records and provenance

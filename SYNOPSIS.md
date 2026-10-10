@@ -592,6 +592,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Attribution Policy](attribution.md) | artifact and naming conventions | definitive | maintained | — |
 | [Feature: Contributor Profiles and Linked Result Credits](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md) | implementation plan | current | transient | — |
 | [Review: Gupta exact rational refinements, issue #438](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md) | dated review record | record | retained | — |
 | [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |

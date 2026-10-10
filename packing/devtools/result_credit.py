@@ -4,8 +4,8 @@
 (`devtools.overview_data`) print the same credit cell and group by the same
 lineage, so both read them here and cannot credit a result differently.
 
-Every credit names people, in one form (epistemics.md, Parallel Projects and Their
-Credit): `X`, or `X after Y, Z` where X's result rests directly on Y's and Z's proof,
+Every credit names people, in one form (attribution.md, Credit Text and Lineage):
+`X`, or `X after Y, Z` where X's result rests directly on Y's and Z's proof,
 method or tool. A result by others takes its line from its sources in
 `resources/bibliography.yaml`, the one home of that text. A result of this project is
 credited to `PROJECT_AUTHOR`, and its `after` is the result's own `builds_on.credit`

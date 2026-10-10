@@ -2523,6 +2523,10 @@ would change the formula’s letters.
 
 ## Contributor Profiles
 
+[Attribution Policy](../../../attribution.md) owns preferred names, verified aliases,
+person/project distinctions and exceptions.
+This guide owns their presentation.
+
 The contributor directory at `contributors/` lists every published profile in
 public-name order. Its links and the colophon’s **Contributors** link are ordinary
 anchors. Each profile has one complete article at `contributors/ID.html`; the directory,
@@ -2714,8 +2718,9 @@ The front is, in order:
 
 - **The title.** A Markdown `h1` in the hero, centred, in the page-title role.
 
-- **The credits.** One line each, in the owner’s form (2026-10-01): names in bold,
-  addresses as plain links, the version plain.
+- **The credits.** Names and roles follow [Attribution Policy](../../../attribution.md).
+  One line each, in the owner’s form (2026-10-01): names in bold, addresses as plain
+  links, the version plain.
 
   ```
   From the original proof by **Mannaseh Ahmed**

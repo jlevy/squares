@@ -3,8 +3,9 @@
 # apostrophes and quotation marks.
 """Find, and write, the sentence each case record owes a source that says AI assisted it.
 
-epistemics.md, Results by Others: "Where a source states that AI assisted its work, its
-case record and the README say so in the source's own terms." The bibliography notes
+attribution.md, People, Projects and Assistance requires case records, the register
+and README prose to state declared AI assistance in the source's terms.
+The bibliography notes
 record each source's statement, but a case record is hand-written prose, and on
 2026-09-29 some fifty of them cited wand125's or Tokoharu's releases in their front
 matter without saying so in their bodies. Writing one sentence into each by hand is the

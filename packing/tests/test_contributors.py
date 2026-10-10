@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import json
 import shutil
 from pathlib import Path
 from typing import Any
@@ -56,6 +57,46 @@ def test_seed_records_keep_identity_and_optional_information_separate() -> None:
     assert registry.candidates("Mira-acc") == (mira,)
     assert registry.candidates("unknown person") == ()
     assert registry.candidates(" Mira") == ()
+
+
+def test_reviewed_account_aliases_keep_one_person_and_primary_receipts() -> None:
+    """One stable person retains all reviewed names and linked account identities."""
+    registry = load_contributors(RECORDS, repo=REPO)
+    ahmed = registry.by_id["queuingtheorydotcom"]
+    assert ahmed.real_name is None
+    for spelling in (
+        "Ahmed",
+        "Mannaseh Ahmed",
+        "Queuingtheorydotcom",
+        "ManassehA06",
+        "MathCompSciFTW",
+        "Square Packing Fan",
+        "@Queuingtheorydotcom",
+        "@ManassehA06",
+        "@MathCompSciFTW",
+    ):
+        assert registry.candidates(spelling) == (ahmed,)
+    assert {(link.kind, link.url, link.handle) for link in ahmed.links} == {
+        ("github", "https://github.com/Queuingtheorydotcom", "Queuingtheorydotcom"),
+        ("twitter", "https://x.com/ManassehA06", "ManassehA06"),
+    }
+    packets = PACKING / "resources/web/queuingtheorydotcom-n11-lean-2026-10-06"
+    receipts = packets / "receipts/announcement"
+    announced = json.loads((receipts / "tweet-2107508501610217640.json").read_text())
+    earlier = json.loads((receipts / "tweet-2104772485816168618.json").read_text())
+    assert announced["user"]["id_str"] == earlier["user"]["id_str"] == "1499452114313129988"
+    assert announced["user"]["screen_name"] == "ManassehA06"
+    assert announced["user"]["name"] == "Square Packing Fan"
+    joshua = registry.by_id["joshua-levy"]
+    for spelling in ("Joshua Levy", "Levy", "jlevy", "ojoshe", "@ojoshe"):
+        assert registry.candidates(spelling) == (joshua,)
+    assert {(link.kind, link.url, link.handle) for link in joshua.links} == {
+        ("github", "https://github.com/jlevy", "jlevy"),
+        ("twitter", "https://x.com/ojoshe", "ojoshe"),
+    }
+    quoted = json.loads((receipts / "tweet-2107513739222380935.json").read_text())
+    assert quoted["user"]["name"] == joshua.display_name == "Joshua Levy"
+    assert quoted["user"]["screen_name"] == "ojoshe"
 
 
 def test_shared_alias_is_ambiguous_without_losing_stable_ids(
