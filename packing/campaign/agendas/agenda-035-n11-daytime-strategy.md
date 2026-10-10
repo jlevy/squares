@@ -343,7 +343,7 @@ agenda:
     - docs/project/reviews/review-2026-09-13-n11-bc329-runset-verifier.md
     - docs/project/reviews/review-2026-09-13-n11-bc329-runset-verifier-rereview.md
     - docs/project/reviews/review-2026-09-13-n11-bc329-runset-verifier-r3-final.md
-    - docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
+    - docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
   - id: BC-330
     purpose: research
     owner_focus: insight

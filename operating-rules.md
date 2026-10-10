@@ -842,6 +842,56 @@ The branch’s own integrity-ceremony edit changed that file, and from then on e
 mathematical check passed while the replay reported failure.
 Include this rule when briefing subagents that retain data or write verifiers.
 
+## OR-19: Confirm one bead owner before work; sync at session start, after commits, and at handoff or end
+
+Squares coordinates concurrent agents across worktrees and hosts.
+These requirements are this project’s coordination policy; they are not a requirement
+for lightweight tbd use in other projects.
+A read-only question or lookup needs no new bead.
+
+- **Start with current state.** Run `tbd sync` before selecting or assigning work, then
+  read the current handoff and the relevant beads.
+  `tbd prime` loads instructions; it does not refresh remote bead state.
+  Search for existing work before creating a bead, and track each independently
+  delegated deliverable separately.
+- **Confirm ownership before execution.** Use a unique acting name per agent instance
+  with `tbd start <id> --as <name> --json`. Inspect `claimed` and `skipped`: an exit
+  code of zero can mean the claim was refused.
+  Proceed only after a successful claim, or a verified continuation of that same agent’s
+  claim. Sync the accepted claim and re-read the bead before editing.
+  An accountable `assignee` does not replace the acting `delegate`.
+- **Dispatch disjoint work.** Every brief names the bead, acting agent, write scope,
+  completion evidence, and tracker owner.
+  The coordinator publishes assignments and owns shared bead updates and sync for its
+  sub-agents; workers acknowledge their assignment and report results against that bead.
+  Independent sessions sync their own work.
+  Across separate clones, allocate overlapping work through one coordinator: tbd’s local
+  claim check and Git sync are not a distributed lock.
+- **Checkpoint after each commit.** The tracker owner (the coordinator for delegated
+  work, or the independent session owner) updates the affected beads with progress and
+  validation still pending, then runs `tbd sync`. Do not wait for CI to finish before
+  publishing progress, and do not close work whose acceptance checks remain pending.
+- **Transfer ownership explicitly.** Before handoff, record remaining work, blockers,
+  branch and evidence, and the intended recipient.
+  The outgoing owner stops work; the coordinator or outgoing owner updates the delegate
+  and syncs. The recipient refreshes state, verifies its assignment, and acknowledges
+  before continuing. Never overwrite a live owner merely because a bead looks old.
+  A tracker audit owns its own review bead and does not claim the implementation work it
+  reviews.
+- **Finish with an accurate record.** Close completed beads with evidence, keep
+  unfinished work actionable, and sync before handoff or session end.
+  Verify sync succeeded.
+  If it fails, preserve the updates and report the failure; do not represent a local
+  claim or handoff as published.
+  A read-only review needs no code commit or PR.
+
+The 2026-10-10 audit (`think-qpm4`) found 55 of 197 pre-existing in-progress beads
+without a delegate; other beads used harness-and-host identities that could be shared by
+concurrent agents. The installed tbd v0.10.0 claim command also returns success when it
+skips another agent’s claim.
+These are ownership and visibility gaps; the snapshot does not establish which tasks, if
+any, were executed twice.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

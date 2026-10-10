@@ -225,7 +225,7 @@ agenda:
       repository already transcribes both. BC-045 is now the primary route to the
       n = 29 prize rather than an n = 11 exercise, because it needs no minimal polynomial
       and BC-044 may not terminate. Built under
-      [plan-2026-08-28-interval-certification](../../../docs/project/specs/active/plan-2026-08-28-interval-certification.md).
+      [plan-2026-08-28-interval-certification](../../../docs/project/specs/draft/plan-2026-08-28-interval-certification.md).
   - id: BC-048
     purpose: tool_validation
     owner_focus: correctness
@@ -590,7 +590,7 @@ degree twenty with coefficients below $10^{22}$, so the polynomial is large and
 elimination in six unknowns may not terminate.
 BC-045 needs no polynomial at all.
 **The robust route is therefore the one that had no specification**, which is why
-[plan-2026-08-28-interval-certification](../../../docs/project/specs/active/plan-2026-08-28-interval-certification.md)
+[plan-2026-08-28-interval-certification](../../../docs/project/specs/draft/plan-2026-08-28-interval-certification.md)
 was written before this replan and why BC-045 now owns two of the three blocks.
 
 Within a block, BC-047 and BC-042 are independent of each other and of everything else,

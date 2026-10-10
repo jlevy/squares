@@ -1664,7 +1664,7 @@ uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atl
 `--update-composites` refuses a stale pin and uncommitted data, since the stamp it draws
 has to name the data in the tree.
 `--update` rewrites the data layer alone: witnesses, renderings, manifest and frontier
-links. [The plan](docs/project/specs/active/plan-2026-10-01-release-assets-on-demand.md)
+links. [The plan](docs/project/specs/done/plan-2026-10-01-release-assets-on-demand.md)
 has the measurements behind this and the options that were weighed, and
 `python -m devtools.measure_release_assets` repeats them.
 

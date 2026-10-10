@@ -3,6 +3,14 @@
 Date: September 13, 2026. Owner: `think-vy5i`. Admission owners: `think-gscz`,
 `think-5dql`, `think-n4gh`, and `think-pp3j`.
 
+**Status:** Archived as an unexecuted historical run sheet.
+
+The admission table and commands below are retained as the historical record of an
+abandoned launch surface, not as current launch authorization.
+At retirement, no positive profile or BC329 target had run.
+Closed implementation and review beads preserve the delivered tooling receipts that
+support archival; they do not establish an executed scientific run.
+
 This sheet measures the fixed-core runner on a solved $n=2$ fixture before BC329 is
 allowed to run. Each profile exercises the same four route shapes and retains 14,404
 direction rows. The fixture is deliberately easy, so its time and memory measurements
@@ -290,7 +298,7 @@ Require `run-root-inventory.json`, each profile’s `.command.json`, `.stdout.js
 `.stderr.log`, and `.status`, and `run-set-reader-admission.json` in `REVIEW_ROOT`. The
 join checks all three reader proofs against their coordinator runs, including exact
 argv, revisions, typed invocation identity, and receipt byte counts and digests.
-The [maintained verifier contract](plan-2026-09-13-n11-bc329-runset-verifier.md)
+The [maintained verifier contract](../done/plan-2026-09-13-n11-bc329-runset-verifier.md)
 specifies the exact reader-command/proof join (R2), run-root byte/type inventory and
 archive comparison (R3), and full source-closure check (R4). Its first implementation
 landed at `878e18d0`, but the

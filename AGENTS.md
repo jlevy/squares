@@ -26,8 +26,10 @@ actions rather than telling them to run commands.
   Chained branch bases are not a formal stack.
 - Track all work as beads: `tbd create`, `tbd ready`, `tbd start`, `tbd close`, and
   `tbd sync`.
-- Before editing a bead, pull and re-read it, run `tbd start <id>`, then run `tbd sync`
-  so other replicas can see the claim.
+- Before implementing a bead, refresh and re-read it, confirm its claim with
+  `tbd start <id> --as <unique-agent-name> --json`, then run `tbd sync` so other
+  replicas can see the claim.
+  Follow OR-19 for delegated work and tracker audits.
 
 <!-- BEGIN TBD POLICY GRANTS v=1 -->
 ### Agent Policy Grants
@@ -81,6 +83,8 @@ for each rule. Edit there, not here.
   purpose.
 - **OR-18:** Keep bulk data out of Git, and never bind code or verdicts to a Git commit
   or blob.
+- **OR-19:** Confirm one bead owner before work; sync at session start, after commits,
+  and at handoff or end.
 <!-- END OPERATING RULES SUMMARY -->
 
 ## Build & Test

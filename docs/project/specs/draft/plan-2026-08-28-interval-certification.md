@@ -17,7 +17,7 @@ one that is tractable with near-certainty.
 
 The distinction matters for planning.
 The exact route
-([plan-2026-08-28-promotion-pipeline-implementation](plan-2026-08-28-promotion-pipeline-implementation.md))
+([plan-2026-08-28-promotion-pipeline-implementation](../active/plan-2026-08-28-promotion-pipeline-implementation.md))
 recovers a minimal polynomial and discharges it by exact substitution.
 That is strictly stronger, and it may not terminate: a sweep recorded in
 [X-004](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md) found no
@@ -300,8 +300,8 @@ the reported value as certified.
 ## References
 
 - [BC-045 in agenda-005](../../../../packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md)
-- [plan-2026-08-28 — the promotion pipeline implementation](plan-2026-08-28-promotion-pipeline-implementation.md)
-- [plan-2026-08-28 — the symbolic promotion gap](plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
+- [plan-2026-08-28 — the promotion pipeline implementation](../active/plan-2026-08-28-promotion-pipeline-implementation.md)
+- [plan-2026-08-28 — the symbolic promotion gap](../active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
 - [X-004 — an exact algebraic characterization of the `n = 29` record](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md)
 - [TUTORIAL §5 — from a numeric solution to an exact one](../../../../TUTORIAL.md#from-a-numeric-solution-to-an-exact-one)
 - [SYNOPSIS — What Is Built](../../../../SYNOPSIS.md#what-is-built)

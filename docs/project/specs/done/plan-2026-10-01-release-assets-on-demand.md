@@ -4,9 +4,8 @@
 
 **Author:** Claude (agent), for the repository owner
 
-**Status:** Implemented on `claude/release-assets-on-demand`, provisional where
-[the owner has a choice](#decisions-for-the-owner).
-The version bump to v0.5.0 is not part of it (`think-pt1k`).
+**Status:** Implemented and merged in PR #285 at `69c79ed81`. The v0.5.0 deployment
+followed separately under `think-pt1k`.
 
 **Workflow:** W7 pipeline improvement, with a W5 measurement in front of it
 
@@ -305,8 +304,8 @@ own timezone, and midnight UTC is the evening before in California.
 - [`release.py`](../../../../packing/src/sqpack/release.py), the contract
 - [Publishing the Explainer](../../../../development.md#publishing-the-explainer), the
   procedure
-- [Plan: the GitHub Pages overview](plan-2026-09-29-github-pages-overview.md), whose
-  epic carries both beads
+- [Plan: the GitHub Pages overview](../active/plan-2026-09-29-github-pages-overview.md),
+  whose epic carries both beads
 - `OR-13`, `OR-14`, `OR-16` and `OR-17` in
   [the operating rules](../../../../operating-rules.md)
 

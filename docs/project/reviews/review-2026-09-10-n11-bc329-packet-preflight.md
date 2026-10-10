@@ -306,7 +306,7 @@ Before the fixed-packet runner is admitted for BC329, the operational calibratio
 must retain observed worker topology, run three fresh host profiles through the
 maintained coordinator, admit them through the source-distinct reader, and pass the
 reviewed
-[three-profile run sheet](../specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md).
+[three-profile run sheet](../specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md).
 Parent preflight has a bounded clock, and partial interval and dilation receipts name
 their exact published direction sets.
 None of those tasks asks the BC329 coverage question.

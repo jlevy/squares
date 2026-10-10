@@ -4,7 +4,7 @@
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
-**Status:** Draft (revised 2026-08-23 — see [Revision history](#revision-history))
+**Status:** Active (revised 2026-08-23 — see [Revision history](#revision-history))
 
 ## Overview
 

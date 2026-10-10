@@ -239,7 +239,7 @@ sends any unknown fragment to the lower-bounds explainer).
   site serves, but it omits 324 records, 111 result files, the forwarders, the paper
   files and every asset.
   The only table of paths, in
-  [plan-2026-09-29-github-pages-overview.md](plan-2026-09-29-github-pages-overview.md#url-layout),
+  [plan-2026-09-29-github-pages-overview.md](../active/plan-2026-09-29-github-pages-overview.md#url-layout),
   is stale (no Part II paper, no assets, no queries).
 - **Stability is a policy, not a check.** `development.md` says “an address the site has
   served keeps working”, and `MOVED_PAGES`/`MOVED_FILES` implement it for hand-moved
@@ -699,8 +699,8 @@ values are set last, from the merged build.
 
 - Audit reports (session scratchpad, summarized above): URL system and link graph; SEO
   and crawlability; performance and layout stability
-- [plan-2026-09-29-github-pages-overview.md](plan-2026-09-29-github-pages-overview.md) —
-  the overview, navigation and forwarders this plan builds on
+- [plan-2026-09-29-github-pages-overview.md](../active/plan-2026-09-29-github-pages-overview.md)
+  — the overview, navigation and forwarders this plan builds on
 - [development.md](../../../../development.md) — the published-site paragraphs this plan
   consolidates
 - Bead `think-jl8e` — the missing link preview on X, traced to page size

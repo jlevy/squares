@@ -137,8 +137,8 @@ It mixed three things.
   other.
 - **What kind of result it is.** *Second certificate* and *not a bound* say what the
   entry is, which no bound can change.
-  [The result-kinds plan](plan-2026-10-01-result-kinds.md) took *not a bound* out on the
-  same day and gave every result a kind.
+  [The result-kinds plan](../done/plan-2026-10-01-result-kinds.md) took *not a bound*
+  out on the same day and gave every result a kind.
   It left five results of a kind that is no bound still carrying a standing, because
   each cites a bound’s evidence: T-003, a method limit, *superseded*; T-004, an audit,
   and T-005, a correction, *current best*; T-054 and T-055, simplifications, *second

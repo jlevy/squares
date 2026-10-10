@@ -1,12 +1,12 @@
 # BC329 Run-Set Verifier Contract
 
-Date: September 13, 2026. Status: implementation contract for `think-0ylz`,
-`think-n8sw`, and `think-ndlq`. The first maintained implementation landed at
-`878e18d0`; its
+Date: September 13, 2026. Status: implemented and independently accepted under
+`think-0ylz`, `think-n8sw`, and `think-ndlq`. The first maintained implementation landed
+at `878e18d0`; its
 [exact-head review](../../reviews/review-2026-09-13-n11-bc329-runset-verifier.md)
-refused R2–R4 admission on six reproducible gaps.
-Repair and a new review remain open.
-No profile, BC329 target, or operational admission was performed for it.
+refused R2–R4 admission on six reproducible gaps, which were repaired and accepted in
+the final review. No profile, BC329 target, or operational admission was performed for
+it.
 
 The
 [independent run-sheet review](../../reviews/review-2026-09-13-n11-bc329-three-profile-run-sheet.md)

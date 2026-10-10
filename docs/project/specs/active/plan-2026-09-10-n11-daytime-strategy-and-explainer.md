@@ -468,9 +468,9 @@ An
 [integrated-head review](../../reviews/review-2026-09-13-n11-bc329-integrated-run-sheet.md)
 at `fbd915fc` found that the component source blobs still match those accepted reviews.
 It refused the run sheet because its commands bypassed the maintained verifier.
-The revised [run sheet](plan-2026-09-13-n11-bc329-three-profile-run-sheet.md) now calls
-`snapshot`, `read`, `join`, `retain`, and `source-closure` on both the staged evidence
-tree and the later evidence commit.
+The revised [run sheet](../archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md)
+now calls `snapshot`, `read`, `join`, `retain`, and `source-closure` on both the staged
+evidence tree and the later evidence commit.
 An
 [exact-diff rereview](../../reviews/review-2026-09-13-n11-bc329-run-sheet-identity-refusal.md)
 accepted that command wiring but found no proof that the evidence commit directly
@@ -789,7 +789,7 @@ The PR156 component reviews remain scoped to their recorded heads and synthetic
 controls; they do not admit the integrated PR157 source.
 
 PR157 merge commit `53578447` incorporates that exact PR156 head and the
-[PR157 launch supplement](plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md).
+[PR157 launch supplement](../done/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md).
 An independent mathematical review found no new defect in the combined packet boundary:
 the two MATH05 preflights remain before shared state, workers, or receipts, and the
 maintained producer, reader, and verifier agree on the 23-path source closure.

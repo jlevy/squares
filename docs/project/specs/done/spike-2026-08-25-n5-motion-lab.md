@@ -210,11 +210,11 @@ the publication renderer unchanged.
 Promote the scene contract into shared package code only after a second concrete motion
 family uses it.
 
-The [generalized Motion Lab plan](plan-2026-08-25-generalized-motion-lab.md) is the
-bounded follow-up.
-It keeps this exact family as a known-answer scenario, extracts shared
-UI and timeline components, and adds a setup-only snap-and-quench scenario before
-attempting persistent contacts or rigid groups.
+The [generalized Motion Lab plan](../paused/plan-2026-08-25-generalized-motion-lab.md)
+is the bounded follow-up.
+It keeps this exact family as a known-answer scenario, extracts shared UI and timeline
+components, and adds a setup-only snap-and-quench scenario before attempting persistent
+contacts or rigid groups.
 Physical moving-contact geometry and portable static snapshots remain separate
 follow-ups; neither is required to use the current lab.
 

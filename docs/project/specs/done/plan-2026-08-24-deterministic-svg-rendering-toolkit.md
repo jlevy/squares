@@ -963,7 +963,7 @@ known-answer semantics and all replay checks pass.
 
 ## References
 
-- [Minimal packing toolkit plan](plan-2026-08-22-minimal-packing-toolkit.md)
+- [Minimal packing toolkit plan](../active/plan-2026-08-22-minimal-packing-toolkit.md)
 - [Mathematical frontier strategy: basin ontology and visualization ladder](../../reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder)
 - [`n = 3` exact-moduli experiment](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md)
 - [SVG 2: document structure, descriptive elements, and metadata](https://www.w3.org/TR/SVG2/struct.html)

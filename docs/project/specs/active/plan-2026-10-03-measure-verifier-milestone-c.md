@@ -1,9 +1,11 @@
 # Measure Verifier Milestone C: The Continuous-Angle Family
 
+**Status:** Active
+
 This is the Milestone C section of the independent measure verifier’s specification
-(`docs/project/specs/active/plan-2026-10-02-independent-measure-verifier.md`, lane W1,
-not yet on this branch), written by lane W2 for the bead tree under `think-gpe0`. Its
-mathematics comes from §§3–4 of the
+(`docs/project/specs/active/plan-2026-10-02-independent-measure-verifier.md`, lane W1),
+written by lane W2 for the bead tree under `think-gpe0`. Its mathematics comes from
+§§3–4 of the
 [s(59) and s(77) mixed-cover review](../../reviews/review-2026-10-02-wand125-s59-s77-mixed-covers.md)
 and from the specification’s §1.7, which states the lemmas this plan names (E, P, S, Z,
 W, H, T, DP). It adds no mathematics of its own; it says what `sqverify-fast` must

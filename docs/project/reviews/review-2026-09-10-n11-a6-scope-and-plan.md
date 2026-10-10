@@ -15,9 +15,9 @@ continuation.
 This bounded review inherits the parent W10 phase under `think-gvlg`, with source review
 owned by `think-aocp`. Its sources are the working
 [evidence account, §13](../research/research-2026-09-09-n11-evidence-and-inference.md#13-the-later-a6-and-h157-results-what-has-been-checked),
-the [overnight plan](../specs/active/plan-2026-09-10-n11-overnight-three-blocks.md), and
-the A6 report and retained inputs from author revision `6ed45816`. This review derives
-scope; it does not independently admit numerical geometry.
+the [overnight plan](../specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md),
+and the A6 report and retained inputs from author revision `6ed45816`. This review
+derives scope; it does not independently admit numerical geometry.
 The coordinator owns the point-family and 2,566-orbit replay, and a separate reviewer
 owns the seven-row geometry and exact upper-certificate reader.
 H157 and the unresolved V3 source are outside scope.

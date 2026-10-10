@@ -4,9 +4,8 @@
 
 **Author:** Claude (agent), for the repository owner
 
-**Status:** Proposal for the owner’s confirmation.
-The classification below is applied on the branch so it can be read as a diff; changing
-a result’s kind is an edit to one line of `results.yaml`.
+**Status:** Implemented and merged in PR #270 at `7f1ad844e`. The ten medium-confidence
+classifications and standing derivation remain owner decisions.
 
 **Workflow:** W7 pipeline improvement
 
@@ -261,7 +260,7 @@ not changed.
   [schema](../../../../packing/frontier/results.schema.yaml)
 - [`epistemics.md`](../../../../epistemics.md), Result Kinds
 - [`check_results.py`](../../../../packing/devtools/check_results.py)
-- [Plan: others’ results in the register](plan-2026-09-29-third-party-results-register.md)
+- [Plan: others’ results in the register](../active/plan-2026-09-29-third-party-results-register.md)
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1,9 +1,10 @@
 # PR157 Integrated Calibration Launch Supplement
 
-Date: September 13, 2026. Status: draft for exact-head review under `think-99bz`.
+Date: September 13, 2026. Status: implemented and independently accepted under
+`think-99bz`; the exact-head supplement was published at `786154bd`.
 
 The
-[BC329 target-free three-profile run sheet](plan-2026-09-13-n11-bc329-three-profile-run-sheet.md)
+[BC329 target-free three-profile run sheet](../archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md)
 defines the solved $n=2$ calibration fixture, frozen tuple, host conditions, sequential
 profiles, source-distinct reads, and retention procedure.
 For an integrated PR157 run, replace that sheet’s **Execution Preconditions** block and

@@ -223,14 +223,10 @@ migrated:
 - docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md
 - docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
-- docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 - docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 - docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
-- docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md
 - docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 - docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md
-- docs/project/specs/active/plan-2026-08-28-interval-certification.md
-- docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md
 - docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md
 - docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md
 - docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
@@ -241,12 +237,8 @@ migrated:
 - docs/project/specs/active/plan-2026-09-07-math-text-face.md
 - docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
-- docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
 - docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 - docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
-- docs/project/specs/active/plan-2026-09-13-n11-bc329-runset-verifier.md
-- docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
-- docs/project/specs/active/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md
 - docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
 - docs/project/specs/active/plan-2026-09-22-upper-bound-certification-blocks.md
 - docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
@@ -256,13 +248,21 @@ migrated:
 - docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md
 - docs/project/specs/active/plan-2026-09-29-third-party-results-register.md
 - docs/project/specs/active/plan-2026-09-30-epistemics-ladder-review.md
-- docs/project/specs/active/plan-2026-09-30-n11-optimality-illustrations.md
 - docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
-- docs/project/specs/active/plan-2026-10-01-release-assets-on-demand.md
 - docs/project/specs/active/plan-2026-10-01-result-import-first-application.md
-- docs/project/specs/active/plan-2026-10-01-result-kinds.md
 - docs/project/specs/active/plan-2026-10-01-result-status.md
-- docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md
+- docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md
+- docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
+- docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+- docs/project/specs/done/plan-2026-09-13-n11-bc329-runset-verifier.md
+- docs/project/specs/done/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md
+- docs/project/specs/done/plan-2026-09-30-n11-optimality-illustrations.md
+- docs/project/specs/done/plan-2026-10-01-release-assets-on-demand.md
+- docs/project/specs/done/plan-2026-10-01-result-kinds.md
+- docs/project/specs/done/spike-2026-08-25-n5-motion-lab.md
+- docs/project/specs/draft/plan-2026-08-28-interval-certification.md
+- docs/project/specs/draft/plan-2026-08-28-numeric-symbolic-round-trip.md
+- docs/project/specs/paused/plan-2026-08-25-generalized-motion-lab.md
 - docs/project/stromquist-helper-arguments-math-review.md
 - docs/project/three-lane-research-method.md
 - docs/project/verification-tooling.md
@@ -1555,6 +1555,7 @@ migrated:
 - packing/frontier/n-323.md
 - packing/frontier/n-324.md
 - packing/strategies/preview/README.md
+
 keep:
 - path: SYNOPSIS.md
   span: +W
@@ -1638,7 +1639,7 @@ keep:
 - path: docs/project/reviews/review-2026-09-28-wand125-n50-mixed-verifier.md
   span: g++
   reason: the compiler's name
-- path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+- path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
   span: --
   reason: the literal character pair XML comments forbid
 - path: docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
@@ -1670,7 +1671,7 @@ keep:
 - path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
   span: 200 900
   reason: a CSS font-weight range
-- path: docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
+- path: docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
   span: 4 / 5400 / 7200 / 2
   reason: the frozen worker and time-allowance tuple of a command, not a quotient
 - path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md

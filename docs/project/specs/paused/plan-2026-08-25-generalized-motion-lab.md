@@ -80,10 +80,10 @@ Those modes require an explicit constraint model and are outside the first deliv
 
 ## Background
 
-The [implemented spike](spike-2026-08-25-n5-motion-lab.md) proves that a generated,
-self-contained HTML+SVG document can replay analytic square motions, show source-backed
-contacts and first-order predictors, and keep exact and illustrative geometry separate.
-It covers one specialized $n = 5$ family.
+The [implemented spike](../done/spike-2026-08-25-n5-motion-lab.md) proves that a
+generated, self-contained HTML+SVG document can replay analytic square motions, show
+source-backed contacts and first-order predictors, and keep exact and illustrative
+geometry separate. It covers one specialized $n = 5$ family.
 Its CSS, controls, timeline behavior, and scene logic are still embedded in one
 generator, so another scenario would currently repeat much of that work.
 
@@ -587,9 +587,9 @@ and the ordinary campaign record rules.
 
 ## References
 
-- [Interactive `n = 5` Motion Lab spike](spike-2026-08-25-n5-motion-lab.md)
+- [Interactive `n = 5` Motion Lab spike](../done/spike-2026-08-25-n5-motion-lab.md)
 - [Retained `n = 5` lab](../../../../packing/atlas/rendering/n5-motion-lab.html)
-- [Deterministic SVG rendering plan](plan-2026-08-24-deterministic-svg-rendering-toolkit.md)
+- [Deterministic SVG rendering plan](../done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md)
 - [Packing rendering guide](../../../../packing/atlas/rendering/README.md)
 - [Existing quench implementation](../../../../packing/src/sqpack/research/quench.py)
 - [`tbd web` UI source at the inspected commit](https://github.com/jlevy/tbd/blob/bed816dca101de6e646c8573a292884064652b6b/packages/tbd/src/web/styles.css)
