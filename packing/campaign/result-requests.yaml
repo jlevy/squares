@@ -3301,17 +3301,44 @@ issues:
     opened: '2026-10-09'
     state: open
     kind: result-report
-    triage: pending
-    summary: Evan Daniel reports rational certificates at n=132 and n=155 below the register's current
-      bounds, in evand/square-packing at e008180 (search/packer/candidates/hunt1_n132.cert and hunt1_n155.cert).
-      The author's verify_cert.py and verify_cert2.py passes and numerical local-optimality evidence
-      have not been replayed here; no optimality is claimed.
+    triage: done
+    summary: Evan Daniel reports rational certificates at n=132 and n=155 below the case ceilings, in
+      evand/square-packing at e008180, retained with their KKT points, inputs and solver reports. Both
+      pass both maintained exact routes. The n132 side is new and recorded as T-131 at V0/C0, pending
+      independent review and adoption. The n155 side equals Couzo's earlier issue451 certificate (T-128),
+      with which it shares 152 of 155 exact poses, differing only in its free and flat-motion squares,
+      so it maps to T-128 as an evidence update. Author checkers and KKT evidence
+      were not run here; no optimality is claimed.
     read_through: '2026-10-09T03:38:22Z'
-    results: []
+    results:
+    - key: s132-record-hunt
+      claim: s(132) <= 11.987099332245063227179742877435 by an exact rational certificate from the hunt1
+        record hunt, 4.23e-3 below the register's 11.991327887691501.
+      source: body
+      register:
+      - T-131
+      evidence:
+      - E-evand-465-record-hunt-report
+    - key: s155-record-hunt
+      claim: s(155) <= 12.952498944014007381965850566940 by an exact rational certificate from the hunt1
+        record hunt, 4.26e-6 below the register's 12.9525032026045129. Its exact side is the n155 side
+        of Couzo's issue451 certificate, registered as T-128 the day before.
+      source: body
+      register:
+      - T-128
+      evidence:
+      - E-evand-465-record-hunt-report
+    - key: kkt-local-minima
+      claim: Each exact point is an 80-digit KKT point with positive multipliers on its load-bearing
+        contacts, a reduced Hessian positive semidefinite modulo exact flat motions (132 33, 155 2) and
+        no first-order descent in any corner-to-corner branch; numerical evidence, not interval proofs.
+      source: body
+      not_registered: Numerical evidence of local optimality of the two packings, not a bound on s(n);
+        recorded as reported in E-evand-465-record-hunt-report and not checked here.
+      queued: false
     beads:
     - think-iyij
     answer_bead: think-iyij
     replies: []
-    close_when: The intake owner acquires immutable source custody at e008180, compares both claims
-      with the current records, records native import and supported verdicts, and posts the resulting
-      disposition from main.
+    close_when: T-131 and T-128 are confirmed on main after independent review and adoption, and the
+      owner has posted that state; local and global optimality are outside this feasibility import.
