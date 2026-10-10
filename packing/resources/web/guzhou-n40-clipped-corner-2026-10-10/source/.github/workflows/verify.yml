@@ -1,0 +1,35 @@
+name: 完整验证 / Full verification
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  full:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: 目录核查 / Content audit
+        run: python3 -B verifier/release.py --check
+      - name: 工具链 / Toolchain
+        run: rustup toolchain install 1.98.0 --profile minimal
+      - name: 固定依赖 / Pinned dependencies
+        run: python3 -B verifier/prepare.py --runtime "$RUNNER_TEMP/n40-replay"
+      - name: 完整复验 / Complete replay
+        env:
+          RUSTUP_TOOLCHAIN: 1.98.0
+        run: python3 -B verifier/run.py --runtime "$RUNNER_TEMP/n40-replay" --workers 4
+      - name: 归档复核 / Archive audit
+        run: python3 -B verifier/release.py --package --runtime "$RUNNER_TEMP/n40-replay" --out "$RUNNER_TEMP/n40-publication"
+      - name: 验证成果 / Verified artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: n40-670854-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/n40-publication/n40-670854.zip
+            ${{ runner.temp }}/n40-publication/audit.json
+          retention-days: 30
+          if-no-files-found: error
