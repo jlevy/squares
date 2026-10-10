@@ -1,0 +1,14 @@
+certificate data/stair_k100000000.json.gz: k = 100000000, b = 39314, y0 = 1041, construction = stair; arithmetic gmpy2.mpq
+S < k: True   (k - S = 3.291458e-14)
+right band: L = 100000000.000000, rows R = 99997915, y1 = 1041.870602327, y0 <= y1 < y0 + d: True
+  right/bottom end: y matches True, m = 1043, pieces 41290 (columns 39234, layers 1031, wedge rows 1025), squares 40961573, waste U = 3614.999949; shape failures 0, containment failures 0, pairs with overlapping boxes 1377164 (candidates 1418438), overlaps 0, region below L True -> pass (4.6 s)
+  right/top end: y matches True, m = 1044, pieces 41286 (columns 39225, layers 1035, wedge rows 1026), squares 40995720, waste U = 3694.859836; shape failures 0, containment failures 0, pairs with overlapping boxes 1497113 (candidates 1538379), overlaps 0, region below L True -> pass (2.8 s)
+top band: L = 99960686.000000, rows R = 99958601, y1 = 1041.870653200, y0 <= y1 < y0 + d: True
+  top/bottom end: y matches True, m = 1043, pieces 41290 (columns 39234, layers 1031, wedge rows 1025), squares 40961573, waste U = 3614.999949; shape failures 0, containment failures 0, pairs with overlapping boxes 1377164 (candidates 1418438), overlaps 0, region below L True -> pass (2.7 s)
+  top/top end: y matches True, m = 1044, pieces 41286 (columns 39225, layers 1035, wedge rows 1026), squares 40995723, waste U = 3693.859836; shape failures 0, containment failures 0, pairs with overlapping boxes 1497080 (candidates 1538346), overlaps 0, region below L True -> pass (2.8 s)
+N = 9999999999975209
+c = k^2 - N = 24791
+waste identity holds exactly: True
+exact pair decisions in the four ends: 5748521
+c*(k) <= 24790   (N squares in a square of side S < k)
+OVERALL: PASS  (13.2 s)

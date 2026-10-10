@@ -19,7 +19,11 @@ open_problem: >
   preprint, unrefereed, reports a lower bound of order log k; two October 2026
   preprints report quarter-power and cube-root deficiency bounds for closed-set
   disjoint packings in their stated integer-side ranges. Those reports remain
-  unconfirmed here.
+  unconfirmed here. Just below an integer side the upper side is reported, by an October
+  2026 preprint that is also unrefereed, as 8 ceil(sqrt(k-4)) - 1 for every k >= 6,
+  20.668 k^{2/5} + 0.623 from k = 1.6*10^7 and O(k^{3/8}) with explicit constants from
+  k = 2.48*10^12 (deficiency_upper_bounds), so the exponent of c*(k) is reported to lie
+  in [1/3, 3/8].
 
 upper_bounds:
   - bound: O(x^{7/11})
@@ -279,7 +283,9 @@ lower_bounds:
     corollary: >-
       REPORTED: s(k^2-c) = k for integer c between zero and each strict deficiency
       bound in its stated range. The reported Theorem 1.1 bounds exceed the
-      quarter-power coefficient 0.1 for every k >= 4.62*10^12.
+      quarter-power coefficient 0.1 for every k >= 4.62*10^12. With the k^{3/8} upper
+      bounds reported on #471 and #486 (deficiency_upper_bounds), k^{1/3} << c*(k) <<
+      k^{3/8}; both ends are reported and unrefereed.
     note: >-
       W1 reported intake of issue #414, v1.0 at 15045f9c6b74bd52f60394b9be593ebe4fb3debc,
       DOI 10.5281/zenodo.23212059. Statements were checked against the retained primary
@@ -333,6 +339,178 @@ lower_bounds:
       outcomes, while the changed whole-source manifest is not reused.
       The earlier version's V3/C1 record and replay remain unchanged. No upstream
       program was executed for this acquisition.
+
+deficiency_upper_bounds:
+  - bound: >-
+      REPORTED: c*(k) <= 8 ceil(sqrt(k-4)) - 1 < 8 sqrt(k-4) + 7 for every integer
+      k >= 6 (Theorem 1.4), where c*(k) = max{c : s(k^2-c) = k}. It comes from an
+      explicit L-shaped packing of N(k,b) = (k-b)^2 + b(R(k) + R(k-b)) unit squares in a
+      square of side less than k (Theorem 1.3), which gives
+      c*(k) <= k^2 - N(k,b) - 1 < 6b + 4k/b - 3 for 2 <= b <= k and cannot give less
+      than 8 sqrt(k) - 15 (Proposition 1.5).
+    exponent: 0.5
+    side_condition: >-
+      Integer sides approached from below: c*(k) = lim_{x->k^-} W(x) - 1 (Lemma 2.1, with
+      the packing in a square of side S < k by Lemma 2.2). No hypothesis beyond k >= 6.
+    authors: [Sungjoon Ryu]
+    year: 2026
+    source_key: '[squarepacker k2-minus-c-upper 2026]'
+    local: web/squarepacker-k2-minus-c-upper-2026-10-09/source/paper/paper
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: sqrt k, at integer sides approached from below
+    constant: >-
+      8, with b = ceil(sqrt(k-4)) and the additive -1. The family's exact count is
+      k^2 - N(k,b) = 6b + b(floor(eta) + floor(eta')) when k - b >= 2, with
+      eta = (2k-10)/(b^2+1) + 8/(b^2+1)^2 and eta' = eta - 2b/(b^2+1) (equation 5.1);
+      Corollary 5.1 gives c*(k) < 4 sqrt(6) sqrt(k) for k >= 6.
+    corollary: >-
+      REPORTED: c*(k) <= k - 2 at k = 65-68 and for every k >= 73 (at k = 69-72 the bound
+      is at least k - 1), which improves Arslanov, Mustafin and Shangitbayev's
+      c*(k) <= k - 1 (stated in their paper for n >= 12) there; c*(k) = O(sqrt k) with an
+      explicit constant for every k >= 6. It is consistent with every best-known
+      value the atlas holds and weaker than them for k <= 18 (review, section 2).
+    complementary_case: >-
+      Roth and Vaughan's bound concerns W(x) away from integers and tends to 0 as
+      x -> k^-; it neither implies nor contradicts this row.
+    note: >-
+      W1 intake of issue #471 (v1.0, tag 700668795e6b95f0bf2a2c6de104adaf3a3ebce0, DOI
+      10.5281/zenodo.23256655) and #486 (v1.1, 5742311db220b4bd8e825167aeae689a1bd65ce9,
+      DOI 10.5281/zenodo.23278927), where the theorem is unchanged; both retained, the
+      certificates partly hosted (packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml).
+      The proof was re-derived in one AI review,
+      docs/project/reviews/review-2026-10-10-squarepacker-k2-minus-c-upper.md (accepted,
+      no blocking finding). CHECKED BY COMPUTATION HERE: the maintained
+      cases/asymptotic/ryu_upper_l_packing.py, written from the text, builds the packing
+      of Lemma 4.2 in exact rationals for all 434 pairs 2 <= b <= k <= 30 and finds each
+      valid with exactly N(k,b) squares, and decides (5.1), Theorem 1.3, Proposition 1.5,
+      Theorem 1.4 and Corollary 5.1 for 2 <= b <= k <= 2000 in integers (receipt in the
+      2026-10-09 packet). Not refereed; the source states extensive Claude (Anthropic)
+      assistance and no human review. It settles no count n <= 324, so it is not in the
+      result register.
+  - bound: >-
+      REPORTED: c*(k) < (20/3)(3/2)^{2/5} 5.03^{3/5} k^{2/5} + (8/3) 5.03 10^{-4/3}
+      < 20.668 k^{2/5} + 0.623 for every integer k >= 1.6*10^7 (Theorem 1.2), and
+      c*(k) <= (18.89 + o(1)) k^{2/5}.
+    exponent: 0.4
+    side_condition: >-
+      Integer sides approached from below, k >= 1.6*10^7; each band end is filled by a
+      staircase whose lift lies in the window [0.75 b^{2/3}, 0.75 b^{2/3} + 2].
+    authors: [Sungjoon Ryu]
+    year: 2026
+    source_key: '[squarepacker k2-minus-c-upper 2026]'
+    local: web/squarepacker-k2-minus-c-upper-2026-10-09/source/paper/paper
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: k^{2/5}, at integer sides approached from below
+    constant: >-
+      20.668 and 0.623, from the end constant C_E = 5.03 of Corollary 7.4, which rests on
+      one interval evaluation Phi(10^{-4/3}) <= 5.0163; with b = ceil((3k/(2 C_E))^{3/5}).
+      The limit coefficient 18.89 is Phi(0) = sqrt(6.000002/0.75) + 3/2 = 4.3284 in place
+      of C_E.
+    corollary: >-
+      REPORTED: d_max(k) = O(k^{2/5}) explicitly, below X-049's O(k^{3/5}). Five explicit
+      packings of a tuned staircase give c*(10^5) <= 1583, c*(10^6) <= 3972,
+      c*(10^7) <= 10039, c*(3.825*10^7) <= 16988 and c*(10^8) <= 24790 (Theorem 1.6,
+      certificates in data/ checked in exact rational arithmetic, the band rows carried
+      by Lemmas 3.3 and 6.1). CHECKED BY COMPUTATION HERE: all five certificates were
+      decided by the maintained cases/asymptotic/ryu_upper_certificates.py, written from
+      Section 9 and sharing no code with the source, which reproduces N and c of Table 2
+      at every k with the waste identity exact and refuses six mutations at 10^5 and 10^8.
+    complementary_case: >-
+      Below 1.6*10^7 only Theorem 1.4 and the five certificates apply.
+    note: >-
+      Issue #471 (v1.0) and #486 (v1.1, unchanged). A staircase of columns with one common
+      tilt after Bui (arXiv:2508.04603v2, Section 3); the proof is self-contained and was
+      re-derived in the review of 2026-10-10. CHECKED BY COMPUTATION HERE: the maintained
+      cases/asymptotic/ryu_upper_constants.py recomputes the seven terms of Phi,
+      Phi(10^{-4/3}) in [5.0162487, 5.0162488], a supremum over 4000 subintervals of
+      [0, 10^{-4/3}] without the monotonicity argument, the closed form 20.66741 and
+      0.62260, the threshold 1.5565*10^7, lambda' and 18.886, in mpmath intervals at 50
+      digits; cases/asymptotic/ryu_upper_staircase.py builds the end packing (S1)-(S6)
+      exactly at b = 400, 1600 and 10^4 (two lifts) and finds U <= B* <= Phi(x) b^{2/3}.
+      REPLAYED: the source's const_stair.py and stair_check.py (all five k, seven
+      controls) reproduce their recorded outputs. Not refereed.
+  - bound: >-
+      REPORTED: c*(k) < (32/5)(5/3)^{3/8} 15.54^{5/8} k^{3/8} + 2*10^-5
+      < 43.06 k^{3/8} + 2*10^-5 for every integer k >= 4*10^26 (Theorem 1.1 of version
+      1.0; version 1.1 keeps it and supersedes it by the tier A5,
+      40.62 k^{3/8} + 1.4*10^-5 for k >= 3.4*10^26, next row).
+    exponent: 0.375
+    side_condition: Integer sides approached from below; k >= 4*10^26.
+    authors: [Sungjoon Ryu]
+    year: 2026
+    source_key: '[squarepacker k2-minus-c-upper 2026]'
+    local: web/squarepacker-k2-minus-c-upper-2026-10-09/source/paper/paper
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: k^{3/8}, at integer sides approached from below
+    constant: >-
+      43.06 = (32/5)(5/3)^{3/8} 15.54^{5/8} rounded up, from the end constant C_E = 15.54
+      of Corollary 8.3 for b >= b0 = 10^16, certified by the interval covering
+      code/cert3e.py (160 x 64 boxes, C_E <= 14.964). The source reports two further
+      coverings that are not in the release.
+    corollary: >-
+      REPORTED: with the cube-root lower bound reported on #414, k^{1/3} << c*(k) << k^{3/8};
+      both ends are reported and unrefereed, and the true exponent is open.
+    complementary_case: >-
+      For 1.6*10^7 <= k < 4*10^26 only Theorem 1.2 applies in version 1.0.
+    note: >-
+      Issue #471. Chained wall fillers after Bui (arXiv:2508.04603v2, Sections 3-4); the
+      proof is self-contained and was re-derived in the review of 2026-10-10, proved
+      modulo the covering, with one unstated line (RF-1, supplied by v1.1's Lemma 8.7).
+      REPLAYED: the source's cert3e.py 160 64 reproduces its recorded output (Psi_sup
+      96.47689, C_E 14.96364) under mpmath 1.3.0, and run_z.py its exact wall check. The
+      closed forms 43.05564, 1.485*10^-5 and 3.712*10^26 were recomputed by
+      cases/asymptotic/ryu_upper_constants.py. The asymptotic regime cannot be tested by
+      explicit computation (one end at b = 10^16 has about 10^16 pieces). The covering is
+      the producer's, and no covering written outside the source's AI family exists (W7).
+      Not refereed.
+  - bound: >-
+      REPORTED: for each of twelve tiers, c*(k) < C_i k^{3/8} + a_i for every integer
+      k >= k_i (Theorem 1.1 of version 1.1): B1 46.31, 2.2*10^13, 0.035; B1s 45.49,
+      4.5*10^13, 0.029; B2 45.08, 6.4*10^13, 0.026; A1 48.76, 4.6*10^14, 0.019; A1s 48.38,
+      6.1*10^14, 0.017; A2 46.42, 2.7*10^15, 0.011; A3 43.61, 9.6*10^16, 0.0039; A4 41.73,
+      1.5*10^20, 5.7*10^-4; A5 40.62, 3.4*10^26, 1.4*10^-5; C1 41.19, 5.22*10^12, 0.04;
+      C2 41.78, 2.95*10^12, 0.047; C3 42.09, 2.48*10^12, 0.05. Smaller than Theorem 1.2's
+      bound for every k >= 2.48*10^12.
+    exponent: 0.375
+    side_condition: Integer sides approached from below; k >= k_i in each tier.
+    authors: [Sungjoon Ryu]
+    year: 2026
+    source_key: '[squarepacker k2-minus-c-upper v1.1 2026]'
+    local: web/squarepacker-k2-minus-c-upper-v11-2026-10-10/source/paper/paper
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: k^{3/8}, at integer sides approached from below
+    constant: >-
+      Per tier, C_i >= (32/5)(5/3)^{3/8} C_E^{5/8}, k_i >= (3/5) C_E b0^{8/5} and
+      a_i >= (12/5) C_E b0^{-2/5}, with (b0, C_E) = B1 (10^7.7, 17.461), B1s (10^7.9,
+      16.968), B2 (10^8, 16.721), A1 (10^8.5, 18.961), A1s (10^8.58, 18.722), A2 (10^9,
+      17.523), A3 (10^10, 15.859), A4 (10^12, 14.778), A5 (10^16, 14.153), C1 (10^7.3617,
+      14.473), C2 (10^7.2, 14.805), C3 (10^7.15, 14.983). The tiers B use the variant
+      wall filler ZC' (Lemmas 8.2-8.5); the tiers C also the sawtooth accounting and the
+      lift of each band (Lemmas 8.6-8.8, 8.11). Each C_E is certified by the author's
+      covering, code/cert_v3/cert_v3.py or code/cert_v4/cert_v4.py, at 320 x 128 boxes.
+    corollary: >-
+      REPORTED: k^{1/3} << c*(k) << k^{3/8} as in the previous row; the k^{3/8} tiers
+      overtake the k^{2/5} bound from 2.48*10^12 (tier C3), 5.07*10^13 without the tiers C
+      and 6.1*10^14 with only the lemmas of version 1.0.
+    complementary_case: >-
+      Below 2.48*10^12 only Theorem 1.2 (from 1.6*10^7) and Theorem 1.4 apply.
+    note: >-
+      Issue #486, opened 27 minutes after the v1.1 tag; a later release that raises the
+      earlier row's values, so a row of its own while the version 1.0 row keeps its claim.
+      Theorems 1.2, 1.4 and 1.6 and the data are unchanged. The new lemmas were re-derived
+      in the review of 2026-10-10 (no gap). REPLAYED: all twelve coverings, 24 slices at
+      the source's resolution, reproduce their recorded slices field by field (wall time
+      apart) under mpmath 1.3.0, and their merges reproduce the recorded merges with every
+      stated-constant check true; receipts in the 2026-10-10 packet. The stated
+      inequalities between C_i, k_i, a_i and C_E and the table's crossing column were
+      recomputed by cases/asymptotic/ryu_upper_constants.py. The three further coverings
+      per tier, the direct un-normalised covering of the tiers C for b <= 10^16, the
+      133-instance re-implementation and the fifteen large end packings are reported and
+      not in the release. Not refereed.
 
 related_results:
   - result: >
