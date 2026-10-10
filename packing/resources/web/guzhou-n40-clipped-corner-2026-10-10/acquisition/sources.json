@@ -1,0 +1,144 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-10T10:28Z",
+  "git_scope": "Full clone checked out at the pinned commit, which the release tag n40-670854-20261010 names, for issue #485. The manifest covers all 36 files of the tree. The proof, the finite parameters, the source's finite checker, runner and tests, the workflow, the local run's receipts and the licences are retained; the density is pinned against the copy the 2026-10-01 rect_n40_L67 packet retains, and the vendored crate by digest, since it is this repository's packing/sqverify_fast. The release ZIP's differing CI receipts are kept beside the tree under release-ci/, outside this record.",
+  "sources": [
+    {
+      "id": "guzhou-n40-clipped-corner-2026-10-10",
+      "source_url": "https://github.com/Guzhou0806/n40-square-packing",
+      "source_ref": "n40-670854-20261010",
+      "source_commit": "e5abeb4d078a5c5b35df6204dd9b93378e5a7880",
+      "committed_utc": "2026-10-10T06:47:01Z",
+      "git_tree": "8c01f4dd532befca302b8a04337c94e41096f787",
+      "archived_path": "packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source",
+      "subtree_manifest": "packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".gitattributes",
+        ".github/workflows/verify.yml",
+        ".gitignore",
+        "LICENSE",
+        "PROOF.md",
+        "README.md",
+        "REPRODUCIBILITY.md",
+        "SHA256SUMS",
+        "SOURCES.md",
+        "VERIFICATION.md",
+        "certificate",
+        "licenses",
+        "results",
+        "tests",
+        "verifier"
+      ],
+      "subtree_file_count": 36,
+      "subtree_total_bytes": 783901,
+      "retained_file_count": 20,
+      "retained_total_bytes": 266160,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "certificate/certified_candidate.json",
+          "bytes": 332847,
+          "sha256": "71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0",
+          "reason": "wand125's rect_n40_L67 density, byte for byte the copy the 2026-10-01 rectangle packet retains (SHA-256 71011d03..., as SOURCES.md pins it); not duplicated.",
+          "identical_to": "packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json"
+        },
+        {
+          "path": "verifier/sqverify_fast/Cargo.lock",
+          "bytes": 6976,
+          "sha256": "5c3206fa1eeabb23d52e93d76eec0d2c16820e6065ce02e8e13a7fa47693785c",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/Cargo.toml",
+          "bytes": 1508,
+          "sha256": "df5e6c24699f934dcabe1119273621ac332dfcd9c75dd0650acacfc827466665",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/build.rs",
+          "bytes": 1712,
+          "sha256": "1e238378117bc7716e50cdd4e3d0d3862e756e1ff863794b9b559ffe4b2743e6",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/rust-toolchain.toml",
+          "bytes": 86,
+          "sha256": "495c69d1db93f25f53e3d0d2d40d812313366cc368de317871c2ace6c6ffafa4",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/src/axis.rs",
+          "bytes": 7198,
+          "sha256": "bf18bd9a0a82806bac6a3aa82df73349944eaa56a22ae5a9b67a67ab3d237e97",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/src/certificate.rs",
+          "bytes": 34387,
+          "sha256": "4bf5c5dc1e74dd97040360befbbb2b3e07438b4b3b11d7aa340bc2e20e2ea7d4",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/src/exact.rs",
+          "bytes": 8350,
+          "sha256": "b9d627b740c8a0c7ed069c1faac2563b9db72c03c10c9f88fb3c0234054f481a",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/src/interval.rs",
+          "bytes": 8484,
+          "sha256": "287da6570dfc1278e3ba6b4c09bfaca6409d16fba0713329bf0c4a5dcbfe5e56",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/src/lib.rs",
+          "bytes": 8028,
+          "sha256": "8a8f96380144511afc84734e667d1114bd2c1400623482d50d40eb394646aceb",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/src/main.rs",
+          "bytes": 11446,
+          "sha256": "e4a65d9570a5f91f41474a20c3c90e8804da568c11d32ca632da59605f5f84e8",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/src/oracle.rs",
+          "bytes": 5788,
+          "sha256": "3c993d66c6edb3a235a3e089a586bb4b42de02fb331fc519836b22cadb99c151",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/src/rotated.rs",
+          "bytes": 42225,
+          "sha256": "4bf878c4d0e8acaedcccedbfb52d8885e1ba2657876bad2048fe30e5f3c7ded3",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/src/rotated_tests.rs",
+          "bytes": 13241,
+          "sha256": "02472f4c41ab738bc029d7e88b66cdf3382bc1e5a74aa6a72f81573b292eec86",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/tests/adversarial.rs",
+          "bytes": 25201,
+          "sha256": "63039dc311fea68837399d0b428ff5d048ef27f392e87f91d11acaf3d393e3b0",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        },
+        {
+          "path": "verifier/sqverify_fast/tests/declared_net.rs",
+          "bytes": 10264,
+          "sha256": "556722cf73046d10d8e81b249b5a868440dbd924dbf2e5d2515e81384eb80e49",
+          "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+        }
+      ],
+      "license": "MIT, copyright 2026 Guzhou0806 (LICENSE), for the new material; the density's MIT licence from wand125 is retained in licenses/wand125.txt and this repository's licence for the vendored crate in licenses/jlevy-squares.txt. SOURCES.md states the credit and that the finer-net and transfer work is Guzhou0806's AI-assisted research.",
+      "claims": [
+        "Issue #485 reports s(40) > 335427/50000 = 6.70854, unrestricted rotations, from wand125's rect_n40_L67 density by a continuous-angle transfer on a 401-direction net with a clipped-corner loss bound.",
+        "The same release reports the weaker full-core bound s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908, which needs no density-peak estimate.",
+        "The nodal statement: every side-9977/10000 square at each of the 401 net directions in [0, 67/10]^2 captures at least 10001/10000 of the density, decided by the vendored sqverify-fast; the receipts report 401 of 401 verified and 32,970,910 boxes."
+      ]
+    }
+  ]
+}
