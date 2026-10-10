@@ -5,7 +5,7 @@ title: Keep website publication and frontend validation within their contracts
 kind: bug
 status: in_progress
 priority: 1
-version: 20
+version: 21
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10
 labels:
@@ -15,7 +15,7 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-10T11:12:38.602Z
-updated_at: 2026-10-10T18:44:21.222Z
+updated_at: 2026-10-10T18:48:46.364Z
 started_at: 2026-10-10T11:13:19.000Z
 ---
 Resolve PR 462 publication and frontend findings without relaxing existing contracts. Preserve script inventory refusal, native MathML readiness, stable Atlas geometry, 300 ms startup assertions, all browser checks and current effective PR hard ceiling. Retained fixes cover non-inherited Headroom clearance, concurrent browser-lane startup, canonical render setup and Atlas host reuse. Final hosted gates must pass before closure; full pre-merge checkpoint remains think-xio5.
@@ -40,3 +40,7 @@ Independent focused evidence remains 118 policy/CLI tests passed, 193 deselected
 Settled exact-head hosted receipt for 195c809483dbe737ad27bde7021e721a8bf4ee3d on PR462: 29 checks PASS, 2 FAIL, 26 skipped, 0 pending. All publication checks pass. The two red checks are frontend and its dependent packing-required aggregator; there is no remaining wall-policy failure. Frontend functional selection: 408 PASS, 6 skipped in 235.98s. Floor liveness: 56 PASS in 24.48s. Native HTTP startup: 3 PASS, 1 FAIL in 20.61s. Reported total wall is 257.68s. The sole independent failure is the 390px dark HTTP scenario's 423ms longest task against the unchanged 300ms assertion. Startup diagnosis remains with the coordinator/Astra; this administrative update changes no source, assertions, budgets or verdicts. Keep think-o2jd OPEN.
 
 Exact completed check JSON and full frontend failure log are preserved byte-for-byte outside disposable scratch at /Users/levy/.codex/visualizations/2026/10/08/01a11dc7-6f9d-7060-be5c-4cff21839702/process-review/ci-195c80948-all-checks-final.json and /Users/levy/.codex/visualizations/2026/10/08/01a11dc7-6f9d-7060-be5c-4cff21839702/process-review/ci-195c80948-frontend-failure.log. This completed hosted receipt supersedes the preceding pending-head note without erasing the separate incomplete broad local validation history.
+
+Diagnostic-only follow-up at pushed head d3c99face: failed native HTTP startup scenarios now retain one separate instrumented navigation next to their JUnit evidence. The passing path performs no extra navigation or trace capture. The original failed verdict always propagates, including when diagnostic capture itself raises an error. The 300ms startup assertion and every original assertion remain unchanged. This supplies evidence for future causal diagnosis; it is not a production CSS optimization and does not establish the cause of the prior 423ms longest task.
+
+Verification reported by the coordinator: six mocked diagnostic controls PASS in 14.41s; Ruff check/format and scoped types PASS; Astra and root review approved; normal commit hooks passed and the working tree is clean. Exact-head hosted CI remains pending. Preserve the prior settled 195c80948 receipt and incomplete local-validation history; keep think-o2jd OPEN until the final-head gates settle. No tests, source changes or Git/PR mutations were performed by this bookkeeping lane.
