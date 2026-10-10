@@ -1608,7 +1608,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-10'
-    credit: wand125
+    credit: wand125 after Tokoharu and Levy
     lineage: builds-on-project
     note: The later n29 finer-net measure lower-bound report, s(29) >= 291/50, at source 22a23c8a99aa4e9616d596bc2f28555bacbee3dd,
       with its data in release square-lower-bounds-v1; the release asset is pinned by size and digest and
