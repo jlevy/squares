@@ -31,9 +31,10 @@ SQUISH_481 = "squish-481-third-request-2026-10-09"
 DELEEUW = "ebdeleeuw-n70-refinement-2026-10-10"
 DERIVED = (SQUISH_481, DELEEUW)
 MISHAPOLK = "mishapolk-decimal-poses-2026-10-09"
-#: Issue #488, a retained Evan Daniel format release.
+#: Issues #488 and #489, two retained Evan Daniel format releases of the same afternoon.
 COUZO_488 = "couzo-certificates-2026-10-10"
-EVERY = (*PACKETS, *DERIVED, MISHAPOLK, COUZO_488)
+HUNT3 = "evand-record-hunt3-2026-10-10"
+EVERY = (*PACKETS, *DERIVED, MISHAPOLK, COUZO_488, HUNT3)
 
 
 def _packet(name: str) -> Path:

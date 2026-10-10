@@ -27,9 +27,9 @@ certificate is (`CREDITED`), it is measured pose by pose against that certificat
 ``n126_xu`` against Ryan Xu's at 126, and #470 at 103 and 258, the two counts where its
 side is the smallest known, against Ryan Xu's and SQUISH's.
 
-It reads the issue filed after that sweep too, #488 (``decide-imports --imports
-'#488'``): Francisco Couzo's retained certificates in Evan Daniel's text format, read
-by the same text reader at the counts the entry cites.
+It reads the two issues filed after that sweep too, #488 and #489 (``decide-imports
+--imports '#488' '#489'``): Francisco Couzo's and Evan Daniel's retained certificates in
+Evan Daniel's text format, read by the same text reader at the counts each entry cites.
 
 The register's two maintained routes (``devtools.evand_arrangement_reports``) share one
 parse and one half-angle conversion (``devtools.evand_exact_certificates``) and both decide
@@ -81,7 +81,7 @@ positive inputs and margins, to the side its packet's frozen claim record and re
 plan state, and to its printed side: equal to it, or rounding up to it at its places. A
 decided count the entry does not cite (#470's 132 and 267) must be absent from the plan's
 claim. ``--imports`` selects by key (``#476``, ``#481``, ``#483``, ``#484``, ``#470``,
-``trio126``, ``#488``); it defaults to the first four, the roster of the first
+``trio126``, ``#488``, ``#489``); it defaults to the first four, the roster of the first
 imports review.
 
 ``replay-t128`` is the maintained two-route replay of T-128's retained receipt, which
@@ -649,10 +649,11 @@ LATER_IMPORTS = {
     "#470": "mishapolk-decimal-poses-2026-10-09",
     "trio126": "evand-trio126-2026-10-09",
 }
-#: The imports filed after the sweep: Francisco Couzo's certificates of #488, retained
-#: in Evan Daniel's text format.
+#: The two imports filed after the sweep: Francisco Couzo's certificates of #488 and
+#: Evan Daniel's Hunt 3 certificates of #489, both retained in Evan Daniel's text format.
 IMPORTS_488_489 = {
     "#488": "couzo-certificates-2026-10-10",
+    "#489": "evand-record-hunt3-2026-10-10",
 }
 ALL_IMPORTS = {**IMPORTS, **LATER_IMPORTS, **IMPORTS_488_489}
 #: Imports decided over their whole replayed roster rather than the counts the entry
