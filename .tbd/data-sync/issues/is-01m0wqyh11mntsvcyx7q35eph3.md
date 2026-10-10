@@ -5,15 +5,15 @@ title: Audit parallel research claims against the assurance and evidence contrac
 kind: task
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m0wr07k9y92zmjm65se7s1y3
 parent_id: is-01m0wqx97nb22qwx8v47hrpfqk
 created_at: 2026-08-25T15:17:16.960Z
-updated_at: 2026-08-25T18:48:27.763Z
+updated_at: 2026-10-10T22:59:39.600Z
 closed_at: 2026-08-25T18:48:27.763Z
 close_reason: "Completed in the reviewed frontier-assurance/research stack: IDs and v2 records reconciled, claims audited, semantic validation integrated, definitive docs and handoffs aligned, and ceremonial hashes removed."
 resolution: null

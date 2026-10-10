@@ -5,8 +5,8 @@ title: Standardize campaign, session, workflow phase, experiment, round, and run
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - terminology
@@ -15,7 +15,7 @@ dependencies:
     target: is-01m0v06qf4hksmdqc2rga0vr4x
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-25T04:06:49.790Z
-updated_at: 2026-08-25T07:24:21.165Z
+updated_at: 2026-10-10T22:59:54.824Z
 closed_at: 2026-08-25T07:24:21.165Z
 close_reason: The definitive docs and v2 contracts now reserve verified for formal evidence, use numerically checked for numerical work, retire polished and ambiguous arbitrary-precision labels, and define campaign/session/series/experiment/round/run consistently.
 resolution: null

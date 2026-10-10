@@ -5,13 +5,13 @@ title: Require a named benefit for packing process checks
 kind: task
 status: closed
 priority: 1
-version: 8
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 10
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-24T22:43:30.954Z
-updated_at: 2026-08-25T07:24:22.031Z
+updated_at: 2026-10-10T22:59:48.707Z
 closed_at: 2026-08-25T07:24:22.030Z
 close_reason: Workflow entry contracts, proportional process rules, assurance-language audit, and the 226-document common-doc map are implemented and validated without adding hashes or mandatory routine-session ceremony.
 resolution: null

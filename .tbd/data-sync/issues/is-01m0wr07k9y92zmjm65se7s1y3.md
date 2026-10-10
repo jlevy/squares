@@ -5,13 +5,13 @@ title: Land the reconciled research and assurance stacks coherently
 kind: task
 status: closed
 priority: 0
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0wqx97nb22qwx8v47hrpfqk
 created_at: 2026-08-25T15:18:12.840Z
-updated_at: 2026-08-25T18:48:28.033Z
+updated_at: 2026-10-10T22:59:40.574Z
 closed_at: 2026-08-25T18:48:28.033Z
 close_reason: "PR #39 merged into PR #31 and PR #31 merged into main with explicit merge commits; required CI passed and the final main tree matches the reviewed stack tree exactly."
 resolution: null

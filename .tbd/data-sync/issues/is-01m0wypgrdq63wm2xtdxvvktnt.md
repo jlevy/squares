@@ -5,8 +5,8 @@ title: Remove timer race from SIGINT process-cleanup regression
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - tests
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0wqx97nb22qwx8v47hrpfqk
 created_at: 2026-08-25T17:15:14.571Z
-updated_at: 2026-08-25T17:23:24.403Z
+updated_at: 2026-10-10T23:00:01.921Z
 closed_at: 2026-08-25T17:23:24.403Z
 close_reason: "PR #39 CI/review repairs: deep golden comparison now uses parsed YAML semantics with real-drift diffs; the SIGINT cleanup test synchronizes from the child instead of polling a timer; the synopsis interpretation now matches the canonical detector/class data. Focused deep validation, five repeated interruption runs, the fast gate, and the complete 32-surface gate pass."
 resolution: null
