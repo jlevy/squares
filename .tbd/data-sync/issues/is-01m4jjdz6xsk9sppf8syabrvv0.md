@@ -5,7 +5,7 @@ title: Coordinate eight-hour X-052 overnight proof and confirmation
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-10-10-n17-overnight-proof-and-confirmation.md
 delegate: codex@spud10
 labels: []
@@ -20,7 +20,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:31:14.516Z
-updated_at: 2026-10-10T18:08:16.942Z
+updated_at: 2026-10-10T18:09:09.623Z
 started_at: 2026-10-10T09:36:17.032Z
 ---
 Launch only on execution instruction. Own agenda-046, actual session clocks, resource guards, disjoint worker claims, checkpoint dispositions, integration and morning handoff; preserve existing think-tmz6 program owner.
+
+## Notes
+
+Owner priority: mathematical distance toward complete proof. At kickoff run two Astra mathematical authors for BC-456/457 and BC-460 plus one shared latest Sol engineer; fresh independent review rotates slots. Plan 80/5/15 proof/repeated confirmation/integration separately for CPU and summed worker-agent effort; combined comparator/H-348 support cap60 worker-agent minutes. First soundness, replay and admission stay proof work. Prepared only; no execution authorization in this documentation PR.
