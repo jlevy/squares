@@ -19,8 +19,9 @@ from collections.abc import Callable, Mapping, Sequence
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from textwrap import dedent
-from threading import Barrier, Lock
-from typing import Any
+from threading import Barrier, Event, Lock
+from threading import enumerate as enumerate_threads
+from typing import Any, override
 
 import pytest
 
@@ -981,7 +982,11 @@ def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
 
     def run_here(context: validate.Context, command: tuple[str, ...]) -> str:
         commands.append(command)
-        return run(context, command, cwd=tmp_path)
+        return run(
+            context,
+            (*command, "--basetemp", str(tmp_path / f"child-pytest-tmp-{len(commands)}")),
+            cwd=tmp_path,
+        )
 
     monkeypatch.setattr(validate, "_run", run_here)
     monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
@@ -989,6 +994,9 @@ def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
     environment = os.environ.copy()
     for name in ("PYTEST_ADDOPTS", "PYTEST_XDIST_WORKER", "PACKING_VALIDATION_ARTIFACT_DIR"):
         environment.pop(name, None)
+    inherited_temp = tmp_path / "unusable-shared-pytest-temp"
+    inherited_temp.write_text("child probes must not use the shared numbered temp root")
+    environment["PYTEST_DEBUG_TEMPROOT"] = str(inherited_temp)
     context = validate.Context(
         deep=False,
         strict=False,
@@ -3042,6 +3050,109 @@ def test_implicit_large_push_reserves_an_exclusive_test_phase(
     )
 
 
+@pytest.mark.parametrize(
+    "options",
+    [
+        "-o cache_dir=/tmp/cache",
+        "-ocache_dir=/tmp/cache",
+        "-o=cache_dir=/tmp/cache",
+        "--override-ini cache_dir=/tmp/cache",
+        "--override-ini=cache_dir=/tmp/cache",
+        '-q -o "cache_dir=/tmp/cache with spaces"',
+    ],
+)
+def test_cache_dir_environment_override_is_rejected_before_selection(
+    options: str, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("PYTEST_ADDOPTS", options)
+
+    def select(**_arguments: object) -> list[validate.Step]:
+        pytest.fail("invalid environment must be rejected before selecting or running gates")
+
+    monkeypatch.setattr(validate, "_select_steps", select)
+    status, stdout, stderr = _invoke("--push")
+    assert status == 2
+    assert stdout == ""
+    assert "Unknown config option: cache_dir" in stderr
+    assert "Remove only that override" in stderr
+    assert os.environ["PYTEST_ADDOPTS"] == options
+
+
+def test_pytest_environment_guard_preserves_other_options_and_reports_bad_quoting(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    options = '-q -o "log_cli=true" --override-ini=cache_dir_suffix=harmless'
+    monkeypatch.setenv("PYTEST_ADDOPTS", options)
+    validate._validate_pytest_environment()
+    assert os.environ["PYTEST_ADDOPTS"] == options
+    monkeypatch.setenv("PYTEST_ADDOPTS", "-o 'unfinished")
+    status, _stdout, stderr = _invoke("--edit")
+    assert status == 2
+    assert "PYTEST_ADDOPTS cannot be parsed" in stderr
+
+
+@pytest.mark.parametrize("exclusive", [False, True])
+def test_progress_reports_active_steps_and_failures_before_the_run_finishes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, exclusive: bool
+) -> None:
+    """Short event-controlled workers prove both phases remain observable."""
+    monkeypatch.setattr(validate, "ACTIVITY_MARKER", tmp_path / ".gate-running")
+    monkeypatch.setattr(validate, "PROGRESS_INTERVAL_SECONDS", 0.01)
+    failure_reported = Event()
+    heartbeat_reported = Event()
+    rendezvous = Barrier(2, timeout=2)
+
+    class LiveStderr(io.StringIO):
+        @override
+        def write(self, text: str, /) -> int:
+            written = super().write(text)
+            if "validation failed: failed edit" in text:
+                failure_reported.set()
+            if "active: still running" in text:
+                heartbeat_reported.set()
+            return written
+
+    def running(_context: validate.Context) -> str:
+        if not exclusive:
+            rendezvous.wait()
+            assert failure_reported.wait(2), "failure was hidden until final reporting"
+        assert heartbeat_reported.wait(2), "active step received no heartbeat"
+        return "running output"
+
+    def failed(_context: validate.Context) -> str:
+        rendezvous.wait()
+        raise validate.StepFailureError("prompt failure reason")
+
+    steps = [validate.Step("still running", running, fast=True)]
+    if not exclusive:
+        steps.append(validate.Step("failed edit", failed, fast=True))
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=2,
+        inner_jobs=1,
+        environment={},
+        exclusive_step_name="still running" if exclusive else "",
+    )
+    stdout = io.StringIO()
+    stderr = LiveStderr()
+    with redirect_stdout(stdout), redirect_stderr(stderr):
+        summary = validate._run_selected(steps, context, [])
+        assert "running output" not in stdout.getvalue()
+        status = validate._render_text(summary, strict=False)
+    assert status == (0 if exclusive else 1)
+    assert "validation progress:" in stderr.getvalue()
+    assert "still running (" in stderr.getvalue()
+    assert "running output" not in stderr.getvalue()
+    assert [result.name for result in summary.results] == [step.name for step in steps]
+    assert not any(thread.name == "validation-progress" for thread in enumerate_threads())
+    if not exclusive:
+        assert "prompt failure reason" in stderr.getvalue()
+        assert stdout.getvalue().index("running output") < stdout.getvalue().index(
+            "== failed edit =="
+        )
+
+
 def test_exclusive_push_phase_waits_for_parallel_edits_and_keeps_one_report_order(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -3104,16 +3215,23 @@ def test_exclusive_push_phase_waits_for_parallel_edits_and_keeps_one_report_orde
     assert not marker.exists()
 
 
-def test_exclusive_push_phase_keeps_edit_failures_and_runs_the_remaining_check(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+@pytest.mark.parametrize(("strict", "prerequisite"), [(False, "failed"), (True, "skipped")])
+def test_exclusive_push_phase_keeps_edit_failures_and_skips_reachable_tests(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    strict: bool,
+    prerequisite: str,
 ) -> None:
     monkeypatch.setattr(validate, "ACTIVITY_MARKER", tmp_path / ".gate-running")
 
     def failed(_context: validate.Context) -> str:
+        if prerequisite == "skipped":
+            raise validate.StepSkippedError("edit check refused")
         raise validate.StepFailureError("edit check refused")
 
     def selected(_context: validate.Context) -> str:
-        return "selected tests passed"
+        pytest.fail("reachable tests must wait for successful edit checks")
 
     steps = [
         validate.Step("edit check", failed, fast=True),
@@ -3121,20 +3239,33 @@ def test_exclusive_push_phase_keeps_edit_failures_and_runs_the_remaining_check(
     ]
     context = validate.Context(
         deep=False,
-        strict=False,
+        strict=strict,
         jobs=2,
         inner_jobs=1,
-        environment={"PACK_JOBS": "1"},
+        environment={
+            "PACK_JOBS": "1",
+            "PACKING_VALIDATION_ARTIFACT_DIR": str(tmp_path / "artifacts"),
+        },
         exclusive_step_name="reachable behavioral tests",
     )
 
     summary = validate._run_selected(steps, context, [])
 
     assert [(result.name, result.status) for result in summary.results] == [
-        ("edit check", "failed"),
-        ("reachable behavioral tests", "passed"),
+        ("edit check", prerequisite),
+        ("reachable behavioral tests", "skipped"),
     ]
     assert "edit check refused" in summary.results[0].reason
+    assert "prerequisite edit checks did not pass" in summary.results[1].reason
+    assert summary.selected_count == 2
+    assert validate._summary_status(summary, strict=strict) == 1
+    receipts = [
+        json.loads(path.read_text()) for path in (tmp_path / "artifacts").glob("step-*.json")
+    ]
+    assert {receipt["name"]: receipt["status"] for receipt in receipts} == {
+        "edit check": prerequisite,
+        "reachable behavioral tests": "skipped",
+    }
 
 
 def test_large_narrow_push_keeps_its_floor_when_a_full_gate_holds_the_marker(
@@ -3233,6 +3364,7 @@ def test_exclusive_push_interrupt_stops_run_and_releases_marker(
         validate._run_selected([step], context, [])
     assert context.processes.stopping
     assert not marker.exists()
+    assert not any(thread.name == "validation-progress" for thread in enumerate_threads())
 
 
 def test_exclusive_push_refuses_an_absent_selected_step() -> None:

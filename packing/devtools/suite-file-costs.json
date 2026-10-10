@@ -411,6 +411,7 @@
     "packing/tests/test_n17_endpoint_receipt_audit.py": 0.027,
     "packing/tests/test_n17_enhanced_row_support.py": 0.823,
     "packing/tests/test_n17_external_weighted_certificates.py": 9.589,
+    "packing/tests/test_n17_family_cell_audit.py": 0.168,
     "packing/tests/test_n17_full_core_ablation.py": 1.069,
     "packing/tests/test_n17_kernel_gate.py": 0.04,
     "packing/tests/test_n17_local_minimum.py": 10.424,
@@ -725,6 +726,20 @@
     131.0
   ],
   "local_admissions": [
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_n17_family_cell_audit.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-family-cell-audit-2026-10-09.json",
+          "provenance": {},
+          "tests": 4
+        }
+      ]
+    },
     {
       "method": "successful-unsharded-unfiltered-whole-module-local-reports",
       "aggregation": "per-file-geometric-mean",

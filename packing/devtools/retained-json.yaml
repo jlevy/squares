@@ -58,6 +58,12 @@ exempt:
   bound_by: >-
     WALL_BLOB in devtools/wall_owner_parent_experiment.py, a ReceiptPin on its Git blob,
     which frontier/evidence.yaml and the exp-147..153 records quote too.
+- glob: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m*/producer-receipt.json
+  reason: digest-bound
+  bound_by: >-
+    The issue-472 contributor's producer receipts, committed byte for byte by exp-317.
+    Their SHA-256 is pinned per certificate in
+    results/exp-317-issue-472-kernel-admission/custody.json (receipts.producer.sha256).
 - path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-survivors-16.json
   reason: digest-bound
   bound_by: >-

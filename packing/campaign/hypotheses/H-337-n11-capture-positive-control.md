@@ -31,7 +31,7 @@ hypothesis:
     devtools/pilot_n17_capture.py --system n11 --max-live 64 --max-rounds 15 with the
     pull repair of PR 402 (think-juy9) merged, from a clean worktree; devtools/
     score_n17_capture.py for the reading.
-  instrument_ready: false
+  instrument_ready: true
   regime: >-
     n = 11; the n11 proof's case-438 state and sixteen cells; the n17 producer and
     checker; the frozen thresholds 0.5 and 0.9 of the R9 review's stage 0.
@@ -46,7 +46,11 @@ hypothesis:
     and that has not run. H-281 (exp-268) established first-round readiness of the
     repaired producer on n11 without the contraction verdict. A pass reinstates the
     kernel route for a measured stage 1; a fail closes it with a number. Either answer
-    ends a question that has consumed three sessions.
+    ends a question that has consumed three sessions. Corrected 2026-10-09 (X-052):
+    the pull repair is on main, commit 917163641 of 7 October (FINE_HULL_PULL = 1/2^18
+    in sqpack/hull_kernel/producer.py), an ancestor of 6a0499ba4; the instrument
+    exists and instrument_ready is now true. X-051's statement that the repair was
+    unmerged was stale when written.
 ---
 # H-337: The Positive Control Pilot 2 Omitted
 
@@ -63,6 +67,15 @@ about the architecture or about the code.
 
 **Limits.** A pass on n11 says nothing about n17’s soft slope or wall crowds; it only
 licenses stage 1 of R9 as a measurement of n17.
+
+**Corrected 2026-10-09 (X-052).** The repair this hypothesis waited on is merged:
+`FINE_HULL_PULL = 1/2^{18}` is in `packing/src/sqpack/hull_kernel/producer.py` and
+commit `917163641` (7 October) is an ancestor of `main` at `6a0499ba4`; exp-276 already
+calls the producer repaired.
+The instrument exists, `instrument_ready` is true, and the ledger reads the hypothesis
+as open. The criterion is unchanged.
+[X-052](../explorations/X-052-n17-status-survey-and-completion-plan.md) pairs it with
+H-345, the twenty-round cell-seeded run at n = 17.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -220,8 +220,13 @@ def populations(
         census.class_mask(cover, entry["cells"], "ledger"): entry["name"]
         for entry in ledger_admitted
     }
+    # The baseline is frozen and the ledger only grows, so the join is containment:
+    # every class the frozen census admits is still admitted under the same name, and
+    # the ledger repeats no class. Later admissions (exp-317's twelve) are outside the
+    # frozen projection and leave it unchanged.
     require(
-        admitted == ledger_classes and len(ledger_admitted) == len(admitted),
+        len(ledger_classes) == len(ledger_admitted)
+        and all(ledger_classes.get(mask) == name for mask, name in admitted.items()),
         "ledger/census class identities differ",
     )
     full = assignment_roster(partition["orbits"], cover, "complete residue")
