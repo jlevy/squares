@@ -5,7 +5,7 @@ title: "Import squarepacker: c*(k) < 43.06 k^{3/8} + 2e-5 (k >= 4e26) and c*(k) 
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:27.941Z
-updated_at: 2026-10-10T10:52:29.763Z
+updated_at: 2026-10-10T11:54:15.654Z
 started_at: 2026-10-10T09:49:28.457Z
 ---
 Issue https://github.com/jlevy/squares/issues/471 (opened 2026-10-09). Preprint Zenodo 10.5281/zenodo.23256655 v1.0 and squarepacker/k2-minus-c-upper. Theorems 1.1, 1.2, 1.4 (c*(k) <= 8 ceil(sqrt(k-4)) - 1, k >= 6) and 1.6 (finite c*(10^5..10^8) bounds with packings as data). Relates to X-049, asymptotic-waste-bounds.yaml and #414's lower bounds (think-6ptr, think-u1kq). Stage 1 triage and the mathematical review by Fable at max; interval-arithmetic replay priced before any run.
@@ -44,3 +44,17 @@ Opened 2026-10-10T09:46:30Z, 27 minutes after the v1.1 tag; pins above. What cha
 ## Draft acknowledgement (2026-10-10, not posted; the owner posts it)
 
 Thank you for the report. We have received version 1.0 and pinned it at release commit 700668795e6b95f0bf2a2c6de104adaf3a3ebce0 (DOI 10.5281/zenodo.23256655, zip md5 667f1a1ea308da2df5d309ec674c82c8); the archive's bytes match the commit. We will re-derive the proofs of Theorems 1.1-1.4 and Proposition 1.5, recompute Corollary 7.4's interval evaluation and the closed-form constants in our own interval code, replay cert3e.py and check the un-normalised bound of Lemma 8.2 at sample sizes, and decide the five certificates of Theorem 1.6 with stair_check.py, its negative controls and a checker written here from Section 9. The results will be recorded in packing/frontier/asymptotic-waste-bounds.yaml as reported bounds on c*(k) = lim_{x->k^-} W(x) - 1, since none settles a count n <= 324. We will follow up here when the review is on main.
+
+## Records lane, stages 2-4 (2026-10-10, branch worktree-agent-ad6222b29b6c64137)
+
+Commits: 23f18a264 (packets), 947fc1e46 (schema and rows), 742d53765 (tools and tests), e03edc588 (receipts), efd89b421 (Theorem 1.4 against k - 1 corrected).
+
+Stage 2. Packet packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09 (tag v1.0 = 700668795e6b95f0bf2a2c6de104adaf3a3ebce0, tree ecd79f93062ae969ba217358b12ba00366e81b20, committed 2026-10-09T07:02:13Z, retrieved 2026-10-10T10:54:04Z by a fresh GitHub clone). The Zenodo zip (DOI 10.5281/zenodo.23256655) was downloaded again here: md5 667f1a1ea308da2df5d309ec674c82c8 equals the record; all 35 members equal the tag tree by Git blob; SHA256SUMS passes. 33 of 35 files retained (2,483,157 bytes); the three smaller certificates as original gzip. Custody of bulk data (OR-18): data/stair_k38250000.json.gz (2,577,279 B) and data/stair_k100000000.json.gz (4,494,252 B) are pinned only and staged for hosting in packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml (tag data/squarepacker-k2-minus-c-upper-certificates-v1, fetch path packing/cases/asymptotic/hosted/squarepacker-k2-minus-c-upper/, git-ignored); their SHA-256 equal the source's SHA256SUMS. The release is NOT published (no GitHub mutation from this lane); publish is `python -m devtools.hosted_data publish --manifest hosted/squarepacker-k2-minus-c-upper-certificates.yaml` from a checkout holding the two files. acquire_source --check: PACKET_MATCHES_ITS_CONTRACT.
+
+Stage 3 (OR-1). Maintained tools under packing/cases/asymptotic/, written from the text, with tests: ryu_upper_l_packing.py (Theorems 1.3-1.4, Prop 1.5, Cor 5.1, (5.1), Remark 5.2; exact), ryu_upper_constants.py (Corollary 7.4's Phi, Theorem 1.2 and v1.0 Theorem 1.1 closed forms, v1.1's twelve tier inequalities; mpmath intervals), ryu_upper_staircase.py (Lemma 7.3 end packing, exact, B* <= Phi b^{2/3} on intervals), ryu_upper_certificates.py (Theorem 1.6 independent checker with six controls). e38_point.py was not promoted (a floating-point diagnostic; priced at about an hour to verify its ~40 terms against Lemmas 8.1-8.2 and move it to intervals).
+
+Stage 4. ryu_upper_replay.py replayed from the packets, under Python 3.14.7, mpmath 1.3.0, gmpy2 2.3.1, 2 workers at load 6-19: const_stair.py (ALL CHECKS True, JSON equal to the record), stair_check.py at all five k (text equal to the record, timings and backend aside), its seven controls at 10^5 and 10^8 (MUTATION TEST: PASS), cert3e.py 160 64 (output JSON equal to the record, 18.7 s), run_z.py 10000 1 0.5 4 (equal, 3.5 s). Independent: 434 exact packings and the formulas to k = 2000 (74.5 s); 77 interval checks, Phi(10^{-4/3}) in [5.0162487, 5.0162488], sup over 4000 subintervals 5.01624877 (0.9 s); staircase at (400, 41), (1600, 103), (10^4, 1393/4), (10^4, 1399/4), U/b^{2/3} 3.47-3.79, B*/b^{2/3} 4.51-5.47 (11.7 s); certificates N/c = 9999998416/1584, 999999996027/3973, 99999999989960/10040, 1463062499983011/16989, 9999999999975209/24791 with identity exact and pair decisions 22274, 119522, 969664, 2730501, 5748521 (equal to the source checker's), six controls refused at 10^5 and 10^8. Receipts: packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/receipts/replay/ (replay.json, outputs.jsonl.gz).
+
+Register: packing/frontier/asymptotic-waste-bounds.schema.yaml gains deficiency_upper_bounds (RF-10); four REPORTED rows in packing/frontier/asymptotic-waste-bounds.yaml (Theorem 1.4; Theorem 1.2 with Theorem 1.6 in its corollary; Theorem 1.1 v1.0; v1.1 tiers), open_problem and the cube-root row's corollary updated. Shared records (bibliography, resources README, result-requests, intake-watch) proposed to the coordinator, not written.
+
+Correction found here: 8 ceil(sqrt(k-4)) - 1 < k - 1 holds at k = 65-68 and for every k >= 73, not from k = 65 on (at k = 69-72 ceil(sqrt(k-4)) = 9 gives 71 >= k - 1). The review's section 2 says "beats k-1 from k=65 on"; the register row states the exact set and ryu_upper_l_packing.py pins it.

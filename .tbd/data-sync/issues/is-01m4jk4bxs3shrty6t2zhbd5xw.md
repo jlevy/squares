@@ -5,7 +5,7 @@ title: "Import Mishapolk: 28 packings below the register at n = 84-306 (#470)"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:28.441Z
-updated_at: 2026-10-10T10:52:28.316Z
+updated_at: 2026-10-10T13:46:45.032Z
 started_at: 2026-10-10T09:49:27.753Z
 ---
 Issue https://github.com/jlevy/squares/issues/470 (opened 2026-10-09, errata 2026-10-09). Corrected certificates at Mishapolk/square-packing-records dd3da5c (the 4e1a601 square-199 and square-263 overlapped, found by squarepacker's 60-digit check). Decimal pose files rounded up to 12 decimals; n = 105 closed form withdrawn; n = 88 ties SQUISH at 12 decimals. Needs rational witnesses or a declared dilation before any exact replay. Stages 1-3.
@@ -44,3 +44,5 @@ PRICE: interval measurement of all 30: 4.5 s. Exact witness construction plus tw
 ## Draft acknowledgement (2026-10-10, not posted; the owner posts it)
 
 Thank you for the corrected files. The pin in the errata, dd3da5c7b39f3796d19e0970bc2350ef9ea14ad, has 39 hex digits and names no commit; we pinned Mishapolk/square-packing-records at dd3da5c753c5ded6cb3b89476193b7b801005415, your current main, whose 28 files have exactly the digests you list. Please say if you meant another commit. We also recorded the poses at 132 and 267, and at 343-360; the latter are all above 19, and s(n) <= 19 holds for every n <= 361 by the grid. We measured the 30 poses at n <= 324 with interval arithmetic at their printed digits. At the printed side, 19 overlap or cross the wall by up to about 1.3e-15 (rounding of the last printed digit). With the centres scaled to your 12-decimal ceilings, all 30 are proved packings. Against the record and the other pending reports, your ceiling is the smallest known side at n = 103 and 258. At 84, 86, 105, 108, 127, 131, 175, 180, 270 and 306, Francisco Couzo's exact certificates of 8 October (#451, #460) are smaller. At 88, 130, 153, 154, 179, 199, 207, 208, 209, 236, 237, 238, 239 and 263 the ceiling is not below the record's bound. At 132, 267, 302 and 303 later reports (#476, #481) are smaller. Next we will build exact rational witnesses at your ceilings and replay them by two exact routes. The repository has no licence, so we keep digests and derived measurements rather than the files. Where a pose started from a published packing, please name it so the credit can.
+
+2026-10-10 (importer lane think-md2i): devtools.upper_bound_reports takes a decimal-dilation adapter without changing its core: write decimal_dilation(raw, n, options) -> legacy.Certificate parsing Ellsworth's "s:"/"Square i: x=, y=, deg=" text, reading only declared options (dilation p/q, the rationalisation of t), returning centres in [0,S]^2 with t = tan(theta/2); register ADAPTERS["decimal-dilation"]; declare report.json rows with format decimal-dilation and derived facts (derive --checkout), since the source is unlicensed. Admission still applies to the dilated side: the dilation must keep each side at or below its printed 12-place round-up (about 1e-14 relative at 132). Next: build that adapter and certify the 30 in-horizon poses.
