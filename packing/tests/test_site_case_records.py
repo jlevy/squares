@@ -483,20 +483,22 @@ def _centered_case_bounds(layout: dict[str, Any]) -> None:
 def test_case_headers_keep_the_prominent_math_count_and_shared_action_arrows(
     browser: Any, served: str, tmp_path: Path, width: int, theme: str
 ) -> None:
-    """The same coherent header stack opens from every directory entry point."""
+    """The header stack stays coherent on direct pages and sequential Atlas records."""
     context = browser.new_context(
         viewport={"width": width, "height": 900},
         color_scheme=theme,
         reduced_motion="reduce",
     )
     try:
+        direct_page = context.new_page()
         page = context.new_page()
+        page.goto(f"{served}atlas.html", wait_until="load")
         for n in (15, 53, 291, 324):
-            page.goto(f"{served}cases/{n}.html", wait_until="load")
-            direct = page.evaluate(LAYOUT)
-            assert page.locator("article.site-case [data-case-index]").count() == 0
-            page.goto(f"{served}atlas.html", wait_until="load")
-            page.locator(f"#n-{n} td.site-col-n a").click()
+            direct_page.goto(f"{served}cases/{n}.html", wait_until="load")
+            direct = direct_page.evaluate(LAYOUT)
+            assert direct_page.locator("article.site-case [data-case-index]").count() == 0
+            opener = page.locator(f"#n-{n} td.site-col-n a")
+            opener.click()
             popover = page.locator("#pop-case")
             popover.locator(f'article.site-case[data-case="{n}"]').wait_for(state="visible")
             fetched = page.evaluate(LAYOUT)
@@ -549,6 +551,7 @@ def test_case_headers_keep_the_prominent_math_count_and_shared_action_arrows(
                     assert page.evaluate(LAYOUT)["titleMathText"] == f"n={following}"
                     _case_actions(popover, served, following)
             page.keyboard.press("Escape")
+            site_browser.api().expect(opener).to_be_focused()
     finally:
         context.close()
 
@@ -613,17 +616,18 @@ def test_case_summaries_keep_math_and_layout_when_fetched(
         reduced_motion="reduce",
     )
     try:
+        direct_page = context.new_page()
         page = context.new_page()
+        page.goto(f"{served}atlas.html", wait_until="load")
         for n in (291, 5, 11, 17, 324):
-            page.goto(f"{served}cases/{n}.html", wait_until="load")
-            page.locator(f'article.site-case[data-case="{n}"]').wait_for(state="visible")
+            direct_page.goto(f"{served}cases/{n}.html", wait_until="load")
+            direct_page.locator(f'article.site-case[data-case="{n}"]').wait_for(state="visible")
             if n == 291 and width == 1280 and theme == "light":
-                _case_bounds_at_the_two_column_boundary(page)
-                page.set_viewport_size({"width": width, "height": 900})
-            direct = page.evaluate(LAYOUT)
+                _case_bounds_at_the_two_column_boundary(direct_page)
+                direct_page.set_viewport_size({"width": width, "height": 900})
+            direct = direct_page.evaluate(LAYOUT)
             if n == 291:
-                page.screenshot(path=tmp_path / f"n291-direct-{width}-{theme}.png")
-            page.goto(f"{served}atlas.html", wait_until="load")
+                direct_page.screenshot(path=tmp_path / f"n291-direct-{width}-{theme}.png")
             opener = page.locator(f"#n-{n} td.site-col-n a")
             opener.click()
             popover = page.locator("#pop-case")
