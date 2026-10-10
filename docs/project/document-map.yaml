@@ -100,6 +100,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-squarepacker-k2-minus-c-upper.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-n11-threshold-bound-review.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-karakus-proposition-5-1-machine-check.md, role: review, authority: record, lifecycle: retained}
