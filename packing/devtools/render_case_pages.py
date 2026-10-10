@@ -1079,9 +1079,10 @@ def _rendered() -> str:
         page_scripts=(CASE_PAGE_SCRIPT,),
         prepare_math=False,
     )
-    problems = site_documents.unresolved(
-        {**site_documents.site_documents(), CASES_PAGE: rendered}, report
-    )
+    # Reader documents validate together when published. Case records only need
+    # their rendered IDs when a rewritten link actually names a reader anchor.
+    reader_pages = site_documents.site_documents() if report.anchors else {}
+    problems = site_documents.unresolved({**reader_pages, CASES_PAGE: rendered}, report)
     if problems:
         listing = "\n  ".join(problems)
         raise SystemExit(f"{len(problems)} unresolved links in the case records:\n  {listing}")
@@ -1193,8 +1194,13 @@ def _description(case: dict[str, Any]) -> str:
     return description
 
 
-def case_records() -> list[Page]:
-    """Every case at its complete, styled canonical page, with no content redirect."""
+def case_records(*, only: tuple[int, ...] | None = None) -> list[Page]:
+    """Complete canonical pages, optionally just the requested counts.
+
+    Subsets are cut from the same full raw render, preserving KPress's cross-case
+    IDs. Selecting before math preparation keeps small browser fixtures inexpensive.
+    Publication omits `only` and still prepares every case.
+    """
     from devtools import site_math  # noqa: PLC0415
     from devtools.render_overview import (  # noqa: PLC0415
         PageMeta,
@@ -1203,6 +1209,14 @@ def case_records() -> list[Page]:
     )
 
     raw = _records(_rendered())
+    if only is not None:
+        selected = tuple(sorted(set(only)))
+        if not selected:
+            raise ValueError("a case subset must request at least one count")
+        unknown = set(selected) - raw.keys()
+        if unknown:
+            raise ValueError(f"unknown case counts: {sorted(unknown)}")
+        raw = {n: raw[n] for n in selected}
     prepared = site_math.prepare(
         "".join(
             f"<!-- static-case {n} -->{record}<!-- /static-case -->"
@@ -1218,6 +1232,8 @@ def case_records() -> list[Page]:
     pages = []
     for case in frontier.frontier_cases():
         n = case["n"]
+        if only is not None and n not in raw:
+            continue
         name = case_url(n)
         title = f"{n} Unit Squares in a Square: Bounds and Best Packing"
         meta = PageMeta(

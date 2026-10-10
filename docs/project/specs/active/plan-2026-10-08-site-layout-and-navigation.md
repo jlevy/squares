@@ -9,7 +9,7 @@ author: Codex, for the repository owner
 
 **Author:** Codex, for the repository owner
 
-**Status:** Local draft implemented; integrated commit and PR verification in progress
+**Status:** Implemented in draft PR #462; hosted verification in progress
 
 **Tracking:** `think-2u4x` (epic), `think-s54c` (planning)
 
@@ -20,7 +20,9 @@ author: Codex, for the repository owner
 Make the Square Packing website easier to scan and navigate.
 The homepage starts with a short problem introduction and a **The Squares Project** card
 linking to `about.html`. The atlas preview comes next, followed by **Recent Major
-Results**, then **Papers** with all paper and PDF cards and an inline video player.
+Results**, then **Papers**, **PDFs**, **Video**, **Squares Project Documentation**, and
+**More Resources**. Papers and documentation reuse the dedicated pages’ cards; PDF
+downloads and the inline video remain separate sections.
 The Atlas has **Show More** and **Explore** buttons; the results preview links to the
 complete Results page.
 All buttons use uppercase labels through shared design rules.
@@ -42,7 +44,8 @@ This spec lists the fixes and their acceptance criteria.
 - Prominent buttons from those previews to dedicated pages containing the complete atlas
   and results table.
 - The atlas directly after the problem introduction, followed by **Recent Major
-  Results**, then **Papers** with all paper and PDF cards and an inline video player.
+  Results**, then **Papers**, **PDFs**, **Video**, **Squares Project Documentation**,
+  and **More Resources**.
 - A dedicated About page for the full **The Squares Project** section, a compact project
   card beneath the homepage intro text, and **About** immediately before **GitHub** in
   the top navigation.

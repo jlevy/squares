@@ -44,15 +44,17 @@ LEGEND_WIDTHS = (*WIDTHS, 320)
 
 @pytest.fixture(scope="module")
 def payloads() -> dict[str, bytes]:
-    """The actual homepage, complete Atlas, About and case 291 with their dependencies."""
+    """The real destination pages and exercised cases, with every browser dependency."""
     documents = {
         name: site_renders.html(name)
         for name in ("index.html", "atlas.html", "about.html", "all-results.html")
     }
     documents.update(
         {
-            f"cases/{n}.html": site_renders.case_records()[f"cases/{n}.html"]
-            for n in (18, 36, 291, 306, 324)
+            f"cases/{n}.html": site_renders.case_records((18, 36, 53, 291, 306, 324))[
+                f"cases/{n}.html"
+            ]
+            for n in (18, 36, 53, 291, 306, 324)
         }
     )
     assets = site_assets.shared().assets.referenced(documents.values())
@@ -208,104 +210,9 @@ def _themes(page: Any) -> list[dict[str, Any]]:
 
 
 @pytest.fixture(scope="module")
-def seen(browser: Any, payloads: dict[str, bytes]) -> dict[int, dict[str, Any]]:
-    """Keep every reading from one compact session at each supported window width."""
-    sync_api = site_browser.api()
-    reports: dict[int, dict[str, Any]] = {}
-    for width in WIDTHS:
-        page = browser.new_page(viewport={"width": width, "height": 900})
-        _serve(page, payloads)
-        requests = _requests(page)
-        report: dict[str, Any] = {}
-        try:
-            page.goto(f"{ORIGIN}index.html", wait_until="load")
-            sync_api.expect(page.locator(TOGGLE)).to_be_visible()
-            report["initial"] = page.evaluate(STATE)
-            report["download"] = page.evaluate(DOWNLOAD_ACTION)
-            legend_screenshot = os.environ.get("SQPACK_HOMEPAGE_LEGEND_SCREENSHOT")
-            if width == WIDTHS[0] and legend_screenshot:
-                recent = page.locator('h2[id="recent-results"]').bounding_box()
-                legend = page.locator(".site-rung-legend").bounding_box()
-                assert recent is not None
-                assert legend is not None
-                page.screenshot(
-                    path=legend_screenshot,
-                    full_page=True,
-                    clip={
-                        "x": 0,
-                        "y": recent["y"] - 12,
-                        "width": width,
-                        "height": legend["y"] + legend["height"] - recent["y"] + 36,
-                    },
-                )
-            screenshot = os.environ.get("SQPACK_HOMEPAGE_MEDIA_SCREENSHOT")
-            if width == WIDTHS[0] and screenshot:
-                scroll_y = page.evaluate(MEDIA_IMAGES)
-                pdfs = page.locator('h2[id="pdfs"]').bounding_box()
-                video = page.locator(".site-homepage-film").bounding_box()
-                assert pdfs is not None
-                assert video is not None
-                page.screenshot(
-                    path=screenshot,
-                    full_page=True,
-                    clip={
-                        "x": 0,
-                        "y": pdfs["y"] + scroll_y - 12,
-                        "width": width,
-                        "height": video["y"] + video["height"] - pdfs["y"] + 80,
-                    },
-                )
-            report["preview_pointer"] = _pointer_cases(page, (18, 36))
-            toggle = page.locator(TOGGLE)
-            toggle.focus()
-            page.keyboard.press("Enter")
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
-            sync_api.expect(page.locator(TILES)).to_have_count(100)
-            page.keyboard.press("Enter")
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
-            sync_api.expect(page.locator(TILES)).to_have_count(324)
-            sync_api.expect(toggle).to_be_enabled()
-            report["expanded"] = page.evaluate(STATE)
-
-            toggle.focus()
-            page.keyboard.press("Space")
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
-            sync_api.expect(page.locator(TILES)).to_have_count(36)
-            report["collapsed"] = page.evaluate(STATE)
-            page.keyboard.press("Enter")
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
-            sync_api.expect(page.locator(TILES)).to_have_count(100)
-            page.keyboard.press("Enter")
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
-            sync_api.expect(page.locator(TILES)).to_have_count(324)
-            report["cached"] = page.evaluate(STATE)
-            report["atlas_requests"] = requests.count(f"{ORIGIN}{GRAPHIC}")
-            report["expanded_pointer"] = _pointer_cases(page, (306, 324))
-
-            tile = page.locator(f'{TILES}[data-case="291"]')
-            tile.focus()
-            page.keyboard.press("Enter")
-            article = page.locator('#pop-case article.site-case[data-case="291"]')
-            article.wait_for(state="visible")
-            report["case"] = {
-                "shown": article.get_attribute("data-case"),
-                "action": page.locator("#pop-case [data-case-open]").get_attribute("href"),
-                "address": page.url,
-                "math_errors": article.locator("[data-kpress-math-error]").count(),
-                "unprepared": article.locator(
-                    '.kpress-math:not([data-kpress-math-rendered="true"])'
-                ).count(),
-            }
-            page.keyboard.press("Escape")
-            sync_api.expect(tile).to_be_focused()
-            report["case_closed"] = not page.locator("#pop-case").is_visible()
-            report["themes"] = _themes(page)
-            page.goto(f"{ORIGIN}about.html", wait_until="load")
-            report["about"] = page.evaluate(STATE)
-        finally:
-            page.close()
-        reports[width] = report
-    return reports
+def seen(toggle_seen: dict[int, dict[str, Any]]) -> dict[int, dict[str, Any]]:
+    """Share the retained interaction session with the geometry and content checks."""
+    return toggle_seen
 
 
 @pytest.mark.parametrize("width", WIDTHS)
@@ -463,22 +370,12 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_requests(
 
 @pytest.fixture(scope="module")
 def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[str, Any]]:
-    """The existing keyboard transitions without case-page or theme-matrix rendering."""
+    """One shared session keeps every keyboard, pointer, theme and fallback reading."""
     sync_api = site_browser.api()
     reports = {}
     live = os.environ.get("SQPACK_SITE_PREVIEW_URL")
     origin = f"{live.rstrip('/')}/" if live else ORIGIN
-    files = None
-    if not live:
-        documents = {
-            f"cases/{n}.html": site_renders.case_records()[f"cases/{n}.html"] for n in (53, 291)
-        }
-        assets = site_assets.shared().assets.referenced(documents.values())
-        files = {
-            **request.getfixturevalue("film_payloads"),
-            **{name: html.encode() for name, html in documents.items()},
-            **{f"assets/{name}": data for name, data in assets.items()},
-        }
+    files = request.getfixturevalue("payloads") if not live else None
     for width in WIDTHS:
         page = browser.new_page(viewport={"width": width, "height": 900})
         if files is not None:
@@ -488,6 +385,42 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
             page.goto(f"{origin}index.html", wait_until="load")
             sync_api.expect(page.locator(TOGGLE)).to_be_visible()
             report = {"initial": page.evaluate(STATE)}
+            report["origin"] = origin
+            report["download"] = page.evaluate(DOWNLOAD_ACTION)
+            legend_screenshot = os.environ.get("SQPACK_HOMEPAGE_LEGEND_SCREENSHOT")
+            if width == WIDTHS[0] and legend_screenshot:
+                recent = page.locator('h2[id="recent-results"]').bounding_box()
+                legend = page.locator(".site-rung-legend").bounding_box()
+                assert recent is not None
+                assert legend is not None
+                page.screenshot(
+                    path=legend_screenshot,
+                    full_page=True,
+                    clip={
+                        "x": 0,
+                        "y": recent["y"] - 12,
+                        "width": width,
+                        "height": legend["y"] + legend["height"] - recent["y"] + 36,
+                    },
+                )
+            screenshot = os.environ.get("SQPACK_HOMEPAGE_MEDIA_SCREENSHOT")
+            if width == WIDTHS[0] and screenshot:
+                scroll_y = page.evaluate(MEDIA_IMAGES)
+                pdfs = page.locator('h2[id="pdfs"]').bounding_box()
+                video = page.locator(".site-homepage-film").bounding_box()
+                assert pdfs is not None
+                assert video is not None
+                page.screenshot(
+                    path=screenshot,
+                    full_page=True,
+                    clip={
+                        "x": 0,
+                        "y": pdfs["y"] + scroll_y - 12,
+                        "width": width,
+                        "height": video["y"] + video["height"] - pdfs["y"] + 80,
+                    },
+                )
+            report["preview_pointer"] = _pointer_cases(page, (18, 36))
             report["hero"] = page.evaluate(HERO)
             hero = page.locator('.site-hero-figure a[data-case="53"]')
             hero.click()
@@ -597,15 +530,28 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
             page.evaluate(TRANSITION, {"install": False, "settle": True})
             toggle.click()
             page.evaluate(TRANSITION, {"install": False, "settle": True})
+            report["expanded_pointer"] = _pointer_cases(page, (306, 324))
             late = page.locator(f'{TILES}[data-case="291"]')
-            late.click()
+            late.focus()
+            page.keyboard.press("Enter")
             article = page.locator('#pop-case article[data-case="291"]')
             sync_api.expect(article).to_be_visible()
             report["late_case"] = page.locator("#pop-case [data-case-open]").get_attribute(
                 "href"
             )
+            report["case"] = {
+                "shown": article.get_attribute("data-case"),
+                "action": report["late_case"],
+                "address": page.url,
+                "math_errors": article.locator("[data-kpress-math-error]").count(),
+                "unprepared": article.locator(
+                    '.kpress-math:not([data-kpress-math-rendered="true"])'
+                ).count(),
+            }
             page.keyboard.press("Escape")
             sync_api.expect(late).to_be_focused()
+            report["case_closed"] = not page.locator("#pop-case").is_visible()
+            report["themes"] = _themes(page)
             report["atlas_requests"] = requests.count(f"{origin}{GRAPHIC}")
             static_page = browser.new_page(
                 viewport={"width": width, "height": 900}, java_script_enabled=False
@@ -622,6 +568,8 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
                 report["static_hero"] = static_page.evaluate(HERO)
             finally:
                 static_page.close()
+            page.goto(f"{origin}about.html", wait_until="load")
+            report["about"] = page.evaluate(STATE)
             reports[width] = report
         finally:
             page.close()
@@ -660,8 +608,8 @@ def test_a_newly_inserted_case_opens_its_prepared_record_in_the_existing_popover
 ) -> None:
     case = seen[width]["case"]
     assert case["shown"] == "291"
-    assert case["action"] == f"{ORIGIN}cases/291.html"
-    assert case["address"] == f"{ORIGIN}index.html"
+    assert case["action"] == f"{seen[width]['origin']}cases/291.html"
+    assert case["address"] == f"{seen[width]['origin']}index.html"
     assert case["math_errors"] == case["unprepared"] == 0
     assert seen[width]["case_closed"]
 

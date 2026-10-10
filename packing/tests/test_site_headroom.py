@@ -109,6 +109,7 @@ def test_header_hides_down_and_returns_on_first_upward_scroll(
         )
         try:
             page.goto(path.as_uri(), wait_until="load")
+            page.locator(".site-headroom").wait_for(state="attached")
             before = page.evaluate(STATE)
             assert before["enhanced"], name
             assert before["top"] >= 0, name
@@ -141,6 +142,7 @@ def test_gear_aligns_with_the_navigation_labels_visible_ink(
         page = browser.new_page(viewport={"width": width, "height": 700})
         try:
             page.goto(path.as_uri(), wait_until="load")
+            page.locator(".site-headroom").wait_for(state="attached")
             items = page.evaluate(NAVIGATION)
             github = next(item for item in items if item["label"] == "github")
             gear = next(item for item in items if item["label"] == "site-theme")
@@ -164,6 +166,7 @@ def test_focus_and_open_theme_menu_keep_header_visible(
     page = browser.new_page(viewport={"width": 390, "height": 700}, reduced_motion="reduce")
     try:
         page.goto(shells["ordinary"].as_uri(), wait_until="load")
+        page.locator(".site-headroom").wait_for(state="attached")
         page.evaluate(SCROLL, 600)
         page.locator('.site-nav a[data-page="overview"]').focus()
         assert not page.evaluate(STATE)["hidden"]
@@ -194,10 +197,30 @@ def test_anchor_target_clears_the_whole_header(browser: Any, shells: dict[str, P
     page = browser.new_page(viewport={"width": 390, "height": 700}, reduced_motion="reduce")
     try:
         page.goto(shells["ordinary"].as_uri(), wait_until="load")
+        page.locator(".site-headroom").wait_for(state="attached")
         page.evaluate(ANCHOR)
         page.locator('.site-nav a[data-page="overview"]').focus()
         state = page.evaluate(STATE)
         assert state["targetTop"] >= state["bottom"], state
+    finally:
+        page.close()
+
+
+def test_initial_fragment_keeps_the_top_region_at_the_headers_document_position(
+    browser: Any, shells: dict[str, Path]
+) -> None:
+    page = browser.new_page(viewport={"width": 390, "height": 700}, reduced_motion="reduce")
+    try:
+        page.goto(shells["ordinary"].as_uri() + "#header-target", wait_until="load")
+        page.locator(".site-headroom").wait_for(state="attached")
+        initial = page.evaluate(STATE)
+        assert initial["scroll"] > initial["height"]
+        assert not initial["hidden"]
+        assert initial["targetTop"] >= initial["bottom"], initial
+        page.evaluate(SCROLL, initial["scroll"] + 10)
+        assert page.evaluate(STATE)["hidden"]
+        page.evaluate(SCROLL, initial["scroll"] + 7)
+        assert not page.evaluate(STATE)["hidden"]
     finally:
         page.close()
 
@@ -208,6 +231,7 @@ def test_nonscrolling_workbench_keeps_header_and_tabs_visible(
     page = browser.new_page(viewport={"width": 390, "height": 700}, reduced_motion="reduce")
     try:
         page.goto(shells["workbench"].as_uri(), wait_until="load")
+        page.locator(".site-headroom").wait_for(state="attached")
         page.mouse.wheel(0, 700)
         header = page.locator(".site-headroom")
         assert header.count() == 1

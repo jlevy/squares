@@ -50,7 +50,7 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         *(
             render_overview.Page(
                 render_case_pages.case_url(n),
-                site_renders.case_records()[render_case_pages.case_url(n)],
+                site_renders.case_records(EXERCISED_CASES)[render_case_pages.case_url(n)],
             )
             for n in EXERCISED_CASES
         ),

@@ -147,7 +147,7 @@ def row_site() -> tuple[str, dict[str, bytes]]:
     from devtools import render_overview, site_assets  # noqa: PLC0415
 
     documents = {name: site_renders.html(name) for name in ("atlas.html", "index.html")}
-    records = site_renders.case_records()
+    records = site_renders.case_records((99, 100))
     documents.update({f"cases/{n}.html": records[f"cases/{n}.html"] for n in (99, 100)})
     assets = site_assets.shared().assets.referenced(documents.values())
     return "http://atlas-rows.test/", {

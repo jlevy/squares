@@ -135,6 +135,48 @@ def test_prepared_record_math_matches_the_surrounding_sans_face(
         server.server_close()
 
 
+def test_math_settling_counts_pending_kpress_and_requires_present_native_mathml(
+    browser: Browser,
+) -> None:
+    """Native table formulas need no enhancement; their marker alone proves nothing."""
+    from devtools.render_frontier_page import math_html  # noqa: PLC0415
+
+    native = math_html("x^2", native=True)
+    math = '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math>'
+    pending = preview_site._MATH_PENDING  # noqa: SLF001 # pyright: ignore[reportPrivateUsage]
+    cases = (
+        (native, 0),
+        ('<span class="kpress-math" data-site-native-math="frontier"></span>', 1),
+        ('<span class="kpress-math" data-site-native-math="frontier">x</span>', 1),
+        (
+            (
+                '<span class="kpress-math" data-site-native-math="frontier">'
+                '<math xmlns="http://www.w3.org/1998/Math/MathML"></math></span>'
+            ),
+            1,
+        ),
+        (
+            (
+                '<span class="kpress-math" data-site-native-math="frontier">'
+                '<math xmlns="http://www.w3.org/1998/Math/MathML">'
+                "<merror><mtext>bad formula</mtext></merror></math></span>"
+            ),
+            1,
+        ),
+        (f'<span class="kpress-math">{math}</span>', 1),
+        (f'<span class="kpress-math" data-site-native-math="unknown">{math}</span>', 1),
+        ('<span class="kpress-math"><span class="kpress-math-render">x</span></span>', 1),
+        ('<span class="kpress-math" data-kpress-math-rendered="true">x</span>', 0),
+    )
+    page = browser.new_page()
+    try:
+        for body, expected in cases:
+            page.set_content(body)
+            assert page.evaluate(pending) == expected, body
+    finally:
+        page.close()
+
+
 @pytest.mark.parametrize("hidden", ["main", "h1", "math"])
 def test_static_readability_refuses_hidden_primary_content(
     browser: Browser, tmp_path: Path, hidden: str
