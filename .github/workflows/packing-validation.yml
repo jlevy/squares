@@ -71,6 +71,15 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
+      - name: Refuse added bulk Git blobs
+        if: "github.event_name == 'pull_request'"
+        env:
+          PR_STORAGE_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_STORAGE_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: >-
+          uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs
+          --base "$PR_STORAGE_BASE" --head "$PR_STORAGE_HEAD"
+
       - name: Record the tree this pull-request run validates
         id: pull-request-tree
         if: "github.event_name == 'pull_request'"

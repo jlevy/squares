@@ -2056,6 +2056,22 @@ is the rule; this is how to follow it.
   `git cat-file --batch-check` for the whole branch.
   A binary or dump over a few megabytes, or data totalling tens of megabytes, is hosted
   outside the repository, for example as a release asset on `jlevy/squares`.
+  From `packing/`, run `python -m devtools.check_added_blobs --base LOWER_BRANCH --staged`
+  before committing; `LOWER_BRANCH` is the actual PR base, not always `main`.
+  The proposed guard defaults are 5 MiB per blob and 20 MiB across unique checked blobs;
+  they make OR-18's qualitative sizes explicit for review, rather than claiming those
+  exact numbers were already policy. The PR job passes its actual base and head SHA.
+  It checks all newly reachable blob versions, so committing then deleting a dump still
+  fails, plus tip/index additions and reintroductions from older base history. Unchanged
+  base history and exact renames of current base files are grandfathered; extra copies
+  are checked. Binary, text and generated Git blobs follow the same byte rule; gitlinks
+  are excluded and LFS pointer payloads are not fetched. There is no threshold override
+  or speculative allowlist: a needed exception requires a separate reviewed policy change.
+  Missing base, shallow history, malformed metadata or query failure reports guard refusal,
+  never certification; fetch the explicit base/history outside the tool, then recheck.
+  Git IDs identify repository storage being sized here, not scientific input identity or
+  research verdicts. The tool reads no scientific artifact, downloads nothing and changes
+  no Git configuration.
 - **Manifest.** The repository keeps a small committed manifest with the name, size,
   location, and SHA-256 of each hosted object.
   A tool that needs the bytes downloads them on request and checks them against the
