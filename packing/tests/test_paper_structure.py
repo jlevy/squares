@@ -72,7 +72,10 @@ DATES = {
         f"Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
         f"Last revised {release.OPTIMALITY_REVIEW_REVISED}"
     ),
-    METHODS: f"Published {release.PACKING_METHODS_FIRST_PUBLISHED}",
+    METHODS: (
+        f"First published {release.PACKING_METHODS_FIRST_PUBLISHED} · "
+        f"Last revised {release.PACKING_METHODS_REVISED}"
+    ),
 }
 
 
@@ -250,7 +253,7 @@ def test_each_papers_credits_follow_the_owners_form(
     assert review[-2 - strip].text == f"{release.OPTIMALITY_REVIEW_EDITION} (version history)"
     assert review[-2 - strip].links == (("version history", "#version-history"),)
     methods = structures[METHODS].credits
-    assert methods[-2].text == "v0.1.0 (version history)"
+    assert methods[-2].text == "v0.2.0 (version history)"
     assert methods[-2].links == (("version history", "#version-history"),)
 
 
@@ -558,7 +561,10 @@ def test_standalone_absence_does_not_relax_the_series_or_caption_grammar(
     reference = structures[EXPLAINER]
     standalone = structures[METHODS]
     assert paper_structure.axes(standalone)["series: strip"] == "none"
-    assert paper_structure.axes(standalone)["figures: captions"] == "no figures"
+    assert (
+        paper_structure.axes(standalone)["figures: captions"]
+        == "Figure N. lead, numbered from 1"
+    )
     assert paper_structure.differences(paper_structure.compare(reference, standalone)) == []
     missing = replace(
         reference, credits=tuple(line for line in reference.credits if line.kind != "series")

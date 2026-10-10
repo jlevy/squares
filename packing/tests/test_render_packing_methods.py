@@ -24,6 +24,9 @@ from devtools.render_n11_lower_bounds_explainer_pdf import date_problem
 from sqpack import release
 
 REVISION = "a" * 40
+FIGURES: dict[str, str] = dict.fromkeys(
+    paper.FIGURE_KEYS, '<svg xmlns="http://www.w3.org/2000/svg"></svg>'
+)
 SOURCE = r"""{{FRONT_MATTER}}
 
 ## From a Candidate to an Upper Bound
@@ -31,6 +34,31 @@ SOURCE = r"""{{FRONT_MATTER}}
 A verified packing in a container of side $L$ establishes $s(n) \le L$.
 See the [paper front](../paper_front.py) and the
 [lower-bound paper]({{PAPER:n11-lower-bounds-explainer}}).
+
+<figure>
+{{HAND_CONSTRUCTION_SVG}}
+<figcaption><strong>Figure 1.</strong> Example packing.</figcaption>
+</figure>
+
+<figure>
+{{ANNEALING_SVG}}
+<figcaption><strong>Figure 2.</strong> Example packing.</figcaption>
+</figure>
+
+<figure>
+{{ANNEALING_SLP_SVG}}
+<figcaption><strong>Figure 3.</strong> Example packing.</figcaption>
+</figure>
+
+<figure>
+{{SURGERY_SVG}}
+<figcaption><strong>Figure 4.</strong> Example packing.</figcaption>
+</figure>
+
+<figure>
+{{ALGEBRAIC_WITNESS_SVG}}
+<figcaption><strong>Figure 5.</strong> Example packing.</figcaption>
+</figure>
 
 ## Version History
 
@@ -40,7 +68,7 @@ See the [paper front](../paper_front.py) and the
 
 @pytest.fixture(scope="module")
 def rendered() -> tuple[str, str]:
-    return paper.render(SOURCE, figures={}, facts={}, revision=REVISION)
+    return paper.render(SOURCE, figures=FIGURES, facts={}, revision=REVISION)
 
 
 def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
@@ -58,7 +86,7 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
         "packing-methods.css",
     )
     assert paper.FRONT.history == "version-history"
-    assert paper.FRONT.version == release.PACKING_METHODS_EDITION == "v0.1.0"
+    assert paper.FRONT.version == release.PACKING_METHODS_EDITION == "v0.2.0"
     assert paper_front.revised(paper.FRONT) == release.PACKING_METHODS_REVISED
     assert "Part IV" not in html
     assert "the n = 11 series" not in markdown
@@ -75,16 +103,17 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
         "https://github.com/jlevy/squares",
     ]
     version = next(line for line in structure.credits if line.kind == "version")
-    assert version.text == "v0.1.0 (version history)"
+    assert version.text == "v0.2.0 (version history)"
     assert version.links == (("version history", "#version-history"),)
     assert version.bold == ()
     assert structure.h1 == ("How Record Square Packings Are Found",)
     assert structure.title == paper.TITLE
-    assert structure.published == structure.modified == "2026-10-08"
+    assert structure.published == "2026-10-08"
+    assert structure.modified == "2026-10-10"
     assert next(line.text for line in structure.credits if line.kind == "dates") == (
-        "Published October 8, 2026"
+        "First published October 8, 2026 · Last revised October 10, 2026"
     )
-    assert "- Published October 8, 2026" in markdown
+    assert "- First published October 8, 2026 · Last revised October 10, 2026" in markdown
     assert structure.pdf == {}
     assert release.PUBLICATION_EDITION not in html
     assert release.PUBLICATION_EDITION not in markdown
@@ -112,10 +141,48 @@ def test_the_editions_pin_repository_citations_and_link_sibling_papers(
 @pytest.mark.parametrize(
     ("source", "figures", "facts", "refusal"),
     [
-        (SOURCE, {"WITNESS_SVG": "<svg></svg>"}, {}, "no figure or fact"),
-        (SOURCE, {}, {"L": "1"}, "no figure or fact"),
-        (SOURCE + "\n{{UNDECLARED}}", {}, {}, "unresolved placeholders"),
-        (SOURCE.replace("{{FRONT_MATTER}}", ""), {}, {}, "exactly once"),
+        (SOURCE, {"WITNESS_SVG": "<svg></svg>"}, {}, "exactly the declared"),
+        (SOURCE, FIGURES, {"L": "1"}, "no fact"),
+        (SOURCE + "\n{{UNDECLARED}}", FIGURES, {}, "unresolved placeholders"),
+        (SOURCE.replace("{{FRONT_MATTER}}", ""), FIGURES, {}, "exactly once"),
+        (SOURCE.replace("{{HAND_CONSTRUCTION_SVG}}", ""), FIGURES, {}, "every declared"),
+        (SOURCE + "{{HAND_CONSTRUCTION_SVG}}", FIGURES, {}, "exactly once"),
+        (
+            SOURCE,
+            {**FIGURES, "HAND_CONSTRUCTION_SVG": "<svg><script/></svg>"},
+            {},
+            "active or remote",
+        ),
+        (SOURCE, {**FIGURES, "HAND_CONSTRUCTION_SVG": "<svg"}, {}, "complete SVG"),
+        (
+            SOURCE,
+            {
+                **FIGURES,
+                "HAND_CONSTRUCTION_SVG": (
+                    '<svg xmlns="http://www.w3.org/2000/svg" onload="alert(1)"></svg>'
+                ),
+            },
+            {},
+            "unsafe SVG attribute",
+        ),
+        (
+            SOURCE,
+            {
+                **FIGURES,
+                "HAND_CONSTRUCTION_SVG": '<svg xmlns="http://www.w3.org/2000/svg"><image href = "https://example.invalid/asset.png"/></svg>',
+            },
+            {},
+            "unsupported SVG element",
+        ),
+        (
+            SOURCE,
+            {
+                **FIGURES,
+                "HAND_CONSTRUCTION_SVG": '<svg xmlns="http://www.w3.org/2000/svg"><g></svg>',
+            },
+            {},
+            "complete SVG",
+        ),
     ],
 )
 def test_undeclared_inputs_and_unfilled_slots_are_refused(
@@ -136,11 +203,14 @@ def test_the_canonical_manuscript_renders_through_the_registered_interface() -> 
     assert markdown.startswith(f"# {paper.TITLE}\n")
     assert "{{" not in markdown
     assert 'class="kpress-math' in html
+    assert html.count('class="methods-diagram ') == 5
+    assert html.count("<figcaption") == 5
+    assert markdown.count('class="methods-diagram ') == 5
     assert "square-packing-methods-survey.pdf" in html
     assert 'id="version-history"' in html
     history = markdown.partition("## Version History\n")[2]
     assert history
-    assert release.PACKING_METHODS_HISTORY[0].version == "v0.1.0"
+    assert release.PACKING_METHODS_HISTORY[0].version == "v0.2.0"
     for entry in release.PACKING_METHODS_HISTORY:
         assert (
             f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}" in history
@@ -185,7 +255,7 @@ def test_printed_paper_has_its_own_title_dates_and_absolute_links(
     page.parent.mkdir(parents=True, exist_ok=True)
     page.write_text(html, encoding="utf-8")
     pdf = page.with_suffix(".pdf")
-    revised = date(2026, 10, 8)
+    revised = date(2026, 10, 10)
     paper.print_pdf(page, pdf, revised=revised, site_path=paper.SITE_PATH)
     data = pdf.read_bytes()
     assert date_problem(data, revised) is None

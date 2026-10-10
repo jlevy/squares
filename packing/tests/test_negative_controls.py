@@ -2315,6 +2315,73 @@ def test_registry_python_uses_the_harness_interpreter(
     assert Path(outcome.stdout.strip()).resolve() == Path(sys.executable).resolve()
 
 
+def test_worker_without_checkout_venv_links_the_harness_environment(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source_repo = tmp_path / "source"
+    source_root = source_repo / HERE
+    source_root.mkdir(parents=True)
+    (source_root / "source.py").write_text("private source\n")
+    index_fixture_source(source_repo)
+    runtime = tmp_path / "frozen-environment"
+    runtime.mkdir()
+    (runtime / "pyvenv.cfg").write_text("home = retained-interpreter\n")
+    monkeypatch.setattr(controls, "REPO", source_repo)
+    monkeypatch.setattr(controls, "ROOT", source_root)
+    monkeypatch.setattr(controls, "PRUNE", frozenset())
+    monkeypatch.setattr(controls, "DESCEND", frozenset())
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "LINK_BACK", (Path(".venv"),))
+    monkeypatch.setattr(controls, "snapshot_pruned_targets", list)
+    monkeypatch.setattr(controls, "linked_pruned_directories", list)
+    monkeypatch.setattr(sys, "prefix", str(runtime))
+    tree = tmp_path / "snapshot"
+    clone_tree(tree)
+    environment = tree / HERE / ".venv"
+    assert environment.is_symlink()
+    assert environment.resolve() == runtime
+    assert not (source_root / ".venv").exists()
+    indexed = tracked_files(tree, ".")
+    assert indexed is not None
+    assert environment not in indexed
+
+
+def test_private_child_environment_cannot_fall_back_to_parent_checkout(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    tree = tmp_path / "snapshot"
+    work = tree / HERE
+    work.mkdir(parents=True)
+    (work / "private_probe.py").write_text("VALUE = 'private'\n")
+    parent = tmp_path / "parent"
+    parent.mkdir()
+    (parent / "fallback_only_probe.py").write_text("VALUE = 'parent'\n")
+    monkeypatch.setenv("PACKING_PROJECT_ROOT", str(parent))
+    monkeypatch.setenv("PYTHONPATH", str(parent))
+    environment = controls.control_environment(tree, tree / "pycache")
+    assert "PACKING_PROJECT_ROOT" not in environment
+    assert environment["PYTHONPATH"].split(os.pathsep) == [
+        str(work / "src"),
+        str(work),
+        str(tree / "packages/workbench/tools"),
+    ]
+    assert os.environ["PACKING_PROJECT_ROOT"] == str(parent)
+    assert os.environ["PYTHONPATH"] == str(parent)
+    program = (
+        "import importlib.util; import private_probe; "
+        "assert private_probe.VALUE == 'private'; "
+        "assert importlib.util.find_spec('fallback_only_probe') is None"
+    )
+    outcome = run_control_command(
+        shlex.join((sys.executable, "-c", program)),
+        cwd=work,
+        environment=environment,
+        timeout_seconds=5,
+    )
+    assert outcome.returncode == 0, outcome.stdout + outcome.stderr
+
+
 #: Control commands whose unmutated baseline is held green in a worker. A control is scored
 #: "exited non-zero and printed its expected message", with no green baseline demanded, so
 #: a checker already red in the worker lets its controls pass for a reason that is not
@@ -2392,10 +2459,7 @@ def test_synopsis_snapshot_is_clean_before_its_registered_mutation(
     work = tree / HERE
     synopsis = tree / "SYNOPSIS.md"
     original = synopsis.read_bytes()
-    environment = {
-        **os.environ,
-        "PYTHONPATH": os.pathsep.join((str(work / "src"), str(work))),
-    }
+    environment = controls.control_environment(tree, tree / "synopsis-baseline-pycache")
     baseline = subprocess.run(
         [sys.executable, "-m", "devtools.check_synopsis"],
         cwd=work,
@@ -2655,6 +2719,8 @@ def forbidden(*args, **kwargs):
     raise AssertionError('native admission must not execute a geometric decider')
 packet.decide = packet.original.decide = forbidden
 packet.original.exact_verify = packet.original.independent.check = forbidden
+# Admit all complete inputs once; the guard rereads every premise before reuse.
+packet.admit_certification = _guarded_second_squish_admission(packet)
 assert tuple(packet.check_certification()) == packet.NUMBERS
 # The current n108 house is #432 geometry and must not satisfy the old #422 receipt.
 try:
@@ -2701,6 +2767,13 @@ for producer in (atlas.update, lambda: atlas.update_selected([88])):
 print('all 27 complete inputs admitted; all nine original houses admitted from '
       'current or full retained history; current selected owner reads and output guards passed')
 """
+    baseline_program = (
+        "from collections.abc import Callable\n"
+        "from types import ModuleType\nfrom typing import Any\n"
+        + inspect.getsource(_guarded_second_squish_admission)
+        + "\n"
+        + baseline_program
+    )
     environment = controls.control_environment(tree, tree / "second-squish-baseline-pycache")
     baseline = subprocess.run(
         [sys.executable, "-c", baseline_program],

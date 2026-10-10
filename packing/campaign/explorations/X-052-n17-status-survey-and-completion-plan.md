@@ -114,6 +114,19 @@ component map, scheduling rules and first tracking slice.
 Pending confirmation of an unchanged component does not by itself stop unrelated
 derivation or experiments.
 
+**Owner priority, 10 October 2026.** The next eight-hour session prioritizes
+mathematical distance toward a complete proof.
+New nonterminal exclusions or stronger constraints are co-primary with capture and
+terminal-region mathematics.
+Existing results may serve as named premises while independent confirmation continues;
+new results still require their first soundness decision and the standing admission
+rules.
+[Section 7.6](#76-mathematical-distance-as-the-eight-hour-block-objective) defines
+the mathematical exits, bounded support and autonomous reallocation, implemented by
+[agenda-046](../agendas/agenda-046-n17-eight-hour-proof-block.md) and its
+[eight-hour plan](../../../docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md).
+This is a prospective priority change, with no new result or experiment launched.
+
 **Dated survey baseline.** Sections 1–6 and the following original summary describe the
 pre-exp-317 snapshot at `6a0499ba4`, with the subsequent mathematical corrections.
 Their 60-entry census, 95-orbit tail, pending #472 admission and historical PR states
@@ -988,15 +1001,18 @@ purpose and mark secondary costs unallocated.
 Never add the full job to both paths.
 
 At the next launch, declare available CPU, RAM, disk, worker slots and the next
-checkpoint. A proposed initial allocation is **60% proof, 25% confirmation and 15%
-integration**, applied to both planned CPU-hours and agent effort, with a compatible
-memory/worker allocation.
-These are planning defaults, not measured optimal shares or authorization for an
-unbounded campaign. Confirmation receives a continuing allocation so that its queue does
-not starve. Spare capacity may be lent when the owning path has no ready work, with a
-recorded return point; it does not permanently erase that path’s reservation.
-A large indivisible replay uses a separate machine or an explicitly priced slice, rather
-than occupying the proof workers by default.
+checkpoint. The earlier proposal was 60% proof, 25% confirmation and 15% integration.
+The owner’s 10 October mathematical-priority decision supersedes it for the next
+eight-hour session: target **80% proof, 5% repeated confirmation and 15% integration**
+in planned CPU-hours and agent effort separately, with compatible memory and worker
+allocations. These are scheduling targets, not measured optimal shares or authorization
+for an unbounded campaign.
+Cap comparator and H-348 support at 60 worker-agent minutes combined; initial soundness,
+exact decision and admission of a new result remain funded within proof work.
+Record unused allocation loans and their checkpoint return points.
+Confirmation debt remains tracked even when the eight-hour block defers its larger
+tasks. A large indivisible replay uses a separate machine or an explicitly priced slice,
+rather than occupying the proof workers by default.
 
 Reprioritize at checkpoints using mathematical payoff, risk, prerequisite value and
 cost. Expensive confirmation should identify what changes if it passes: release
@@ -1021,7 +1037,7 @@ status.
 | Endpoint feasibility and algebraic identity | T-065 and exp-245 establish the construction and degree-18 identity | Original reviews and 9 October algebra replay; reconcile T-065’s stale identity wording separately | Reuse the endpoint as a positive control; no new endpoint search needed |
 | Closed cover, capacity and D4 assignment | exp-247 supplies 24 cells and the finite assignment universe | Retained cover/census reviews and independent counting; preserve seam, label and cap joins | Reuse the cover and prove the applicability of each new exclusion or capture rule |
 | Admitted exclusions | 72 entries leave 3,636 orbits / 28,528 states | exp-317’s twelve have listed FULL replay, Rust parity and reviewed admission; the older 204 unhosted objects remain a separate reproducibility gap | H-342 or H-349 bounded new kernel production, with exact marginal coverage; avoid repeating H-341 |
-| Remaining nonterminal states | No complete elimination argument; historical stalls cover only their tested methods and budgets | Confirm each successful new certificate as a separate action; incomplete runs are not exclusions | Select a small H-343 discriminator before financing its whole proposed sweep; investigate complete branch predicates where needed |
+| Remaining nonterminal states | No complete elimination argument; historical stalls cover only their tested methods and budgets | Confirm each successful new certificate as a separate action; incomplete runs are not exclusions | Co-primary block lane: a bounded H-342 population with exact net coverage, or a stronger wall/pose constraint on a surviving hard-tail state; price H-343 separately before financing a sweep |
 | Capture from the actual family cells | No complete reach-to-terminal proof | Confirm new contraction/capture artifacts and their full-domain coverage as produced | H-337 control and a bounded H-345 run; price H-346 only with its corrected affine and terminal conditions |
 | Local family theorem | Retained local composition combines machine certificates and reviewed hand lemmas within its declared neighborhood | Fresh local-recipe runs corroborate parts; H-348’s independent fixed-certificate checker remains distinct | Extend terminal regions only where that could materially help capture; retain slider and feature hypotheses |
 | Restricted family-cell deduction | Maintained exact audit for the exact sixteen-square skeleton, stated smaller slider box and arbitrary orientation of the free square | Uses shared endpoint/cover routines, so it is not an independent implementation | Test whether a certified perturbation extension supplies useful capture constraints; the current result gives no global exclusion |
@@ -1036,8 +1052,10 @@ not reasons to revalidate every unrelated count first.
 
 ### 7.5 First tracking slice and acceptance
 
-`think-fetd` owns this planning revision on `codex/n17-planning-intake`; BC-418 /
-`think-tmz6` remains the research program.
+`think-fetd` owns the original planning revision on `codex/n17-planning-intake`;
+`think-xslr` owns the 10 October mathematical-priority revision on
+`codex/x052-next-work`. BC-418 / `think-tmz6` remains the research program; BC-455 /
+`think-wnbr` coordinates the prepared eight-hour agenda.
 Start with the existing agenda/session format: retain `program: n17-optimality`, use
 `parallel_group: n17-proof` and `parallel_group: n17-confirmation`, and put the work
 class and cost table in each commitment’s existing `budget` and accompanying prose.
@@ -1056,11 +1074,11 @@ Do not make that tooling a prerequisite for the next proof experiment.
 | Next-phase candidate | Path and current disposition | Bounded next decision | Existing anchor |
 | --- | --- | --- | --- |
 | Actual-cell capture | Proof; mathematical gap open | Price H-337’s positive control and one H-345 slice; record the starting domain and terminal target | H-337/H-345; `think-tmz6` selects the commitment |
-| New nonterminal exclusions | Proof; unlaunched candidate work | Rank a small H-342 conversion or H-343 tail pilot against capture; declare the exact population before running | H-342/H-343; #413 |
-| Local fixed-data checker | Confirmation; independent implementation pending | Price the smallest complete H-348 certificate/control set, without generating substitute duals | H-348 |
+| New nonterminal exclusions | Proof; co-primary block work | Freeze a bounded H-342 population and its exact marginal coverage; if it cannot run, derive a stronger constraint on a surviving hard-tail state | BC-460 / `think-lhty`; H-342; #413 |
+| Local fixed-data checker | Confirmation; independent implementation pending | At most 30 worker-agent minutes for fixed-input and mutant readiness; defer the full checker unless a later allocation explicitly selects it | BC-458 / `think-hye3`; H-348 |
 | Existing admission receipt reuse | Confirmation/integration; H-341 complete | Bind retained exp-317 evidence and reuse it unless a section 7.3 rerun trigger applies | exp-317; closed `think-6p3d` |
 | Older certificate custody | Integration enabling specific confirmations; 204-object gap open | Inventory missing inputs and acquisition cost before selecting their replays | `think-jhgi` |
-| Maintained parity comparator | Confirmation tooling; open | Replace ad hoc receipt comparison with the tracked reusable tool, keeping producer/version scope explicit | `think-n53s` |
+| Maintained parity comparator | Confirmation tooling; open | At most 30 worker-agent minutes in the eight-hour block support allocation; retain a usable increment and defer unfinished implementation | BC-459 / `think-n53s` |
 | Held n17 source construction | Intake with separate validation/confirmation steps; open | Identify the immutable #375 object and price exact feasibility; preserve construction credit and scope | `think-00e3` |
 
 These are selection candidates, not newly launched jobs or assignments that override
@@ -1091,6 +1109,124 @@ No full proof replay, new experiment, result-grade change or execution agenda is
 authorized merely by recording this design.
 The next W10 selection prices bounded proof and confirmation jobs together using the
 current capacity and existing owners.
+
+### 7.6 Mathematical distance as the eight-hour block objective
+
+The proposed route to $s(17)=S^\ast$ requires two global obligations: every remaining
+non-family state must be excluded or unable to beat $S^\ast$, and every relevant packing
+in the family state must reach the local theorem’s domain with its frame, coordinate and
+slider premises satisfied.
+The finite cover, endpoint and scoped local results are reusable foundations.
+Rechecking those foundations raises assurance; it does not discharge an uncovered global
+domain.
+
+The eight-hour session therefore protects two mathematical lanes from kickoff:
+
+- **Nonterminal exclusion and stronger constraints, BC-460.** Freeze a small current
+  H-342 population before target execution, selecting up to three rows by greedy exact
+  marginal coverage of the admitted residue, with row ID breaking ties.
+  Budget at most 180 elapsed minutes for production, full verification and admission
+  combined, with at most 30 minutes of production per row and initially one bin
+  configuration. A retry uses the same total ceiling; reserve a full decision before
+  another launch. H-342 budget success also requires certificates under 100 MB; a fully
+  verified and admitted oversized exclusion may advance the proof while missing that
+  criterion. Report the union of newly excluded states and orbits, its distance strata
+  and endpoint control; never extrapolate a three-row outcome into H-342’s 24-row
+  closure-rate claim. If inputs or complete verification cannot be priced within 60
+  minutes of readiness work, retain that refusal and derive an exact universally
+  quantified wall, orientation or joint-pose implication on m851903 or m1964767 only
+  after confirming it survives the current census.
+  Require certified nonzero contraction or exclusion beyond the old relations, with full
+  outer-pose domains and every separating feature covered.
+  Simultaneous three-owner compatibility must share the middle owner’s centre and angle
+  across contacts. Saved-node restrictions inherit their induction history.
+  Existing exact relaxation witnesses must be addressed explicitly: the unchanged
+  centre-distance model and the 96-row binary network both retain witnesses.
+- **Capture and usable terminal mathematics, BC-456/457.** Derive H-347’s exact
+  coordinate allowances and test whether per-square slider coverage makes a larger local
+  region usable. State the effective coordinate target and full slider-domain
+  assumptions. Calibration and actual-cell contraction can test whether the producer
+  approaches that target; H-345’s one-owner 10% motion threshold alone does not prove
+  terminal capture. Preserve its 20-round requirement and record an incomplete run as
+  unresolved.
+
+Two Astra mathematical authors and one shared Sol engineer serve these lanes, with fresh
+independent Astra review rotating through a freed worker slot.
+Source repairs are selected for a named mathematical decision; after the 90-minute
+readiness checkpoint, an unaffordable capture route yields engineering time to the
+reviewed exclusion or exact-interface work.
+Repeated confirmation cannot take that slot by default.
+New hypothetical claims are registered before measurement; a scoped exact derivation is
+recorded through W3 without inventing an experiment.
+
+Judge the block by a reusable new lemma or interface with practical capture value, and a
+decisive bounded nonterminal result or complete diagnosis of a stated domain, followed
+by a priced remaining proof route.
+These are intended exits, not promised theorems.
+Report actual dispositions separately: mathematical coverage gained, complete bounded
+negatives, unresolved prefixes, soundness refusals and infrastructure only.
+A smaller admitted residue, a larger composed terminal region, or a stronger applicable
+lemma advances the proof; a completed checker alone advances confirmation.
+Do not report a percentage of the proof complete or treat task counts as coverage.
+
+At the hour-four checkpoint, rank future slices by their expected effect on the two
+unresolved global obligations, using measured cost and named dependencies.
+Preserve running experiments’ frozen contracts.
+If compute is blocked, both mathematical lanes continue exact derivation or
+counterexample analysis within their declared scope.
+Keep all unfinished confirmation tasks and scientific obligations visible in beads and
+the end-of-block handoff.
+First validity, admission, final review and publication gates retain their existing
+standards.
+
+### 7.7 Three eight-hour blocks, with replanning at each boundary
+
+The
+[three-block session plan](../../../docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md)
+considers a further sixteen hours after the first block.
+This is a conditional planning horizon, not a launch or a forecast of a complete proof.
+Each eight-hour block closes its own AgentSession record and hands its admitted evidence
+to a fresh W10 selection; the next block receives new clocks, leases and resource
+pricing. Preserve unfinished experiments’ frozen criteria and cumulative costs rather
+than restarting their budget or calling an interrupted prefix a negative result.
+
+| Block | Mathematical intent | Evidence that chooses the next step |
+| --- | --- | --- |
+| 1: establish a useful interface and discriminator | Exact H-347 allowances or a scoped obstruction; admitted selected exclusions or a stronger full-domain wall/pose implication | Actual coordinate targets, net orbit coverage, exact witnesses, readiness and full-decision costs |
+| 2: finish and discriminate | Complete the 45-coordinate interface if affordable, then one actual-vector slider extension; another bounded conversion batch or a complete stronger three-owner lemma | Independent review of a usable terminal premise; freshly admitted coverage, certified contraction, or an exact witness showing the strengthened relation still fails |
+| 3: exploit a demonstrated gain | Apply an effective constraint to one more state or a precisely defined class; compose a terminal/assignment bridge or complete a properly calibrated capture chain | Full domain and frame coverage, exact marginal exclusions, complete capture/replay scope and the longest remaining dependency |
+
+Across three blocks, completing a reusable composition interface and acquiring a
+stronger nonterminal discriminator become plausible intermediate outcomes.
+The retained H-347 estimate of 10–20 agent-hours supports continued work across blocks;
+it is not a completion guarantee.
+Successful conversion batches may reduce the admitted residue, but selected
+high-coverage rows cannot establish a population closure rate or a numerical forecast of
+the final census. Generalizing a lemma from one instance requires a new domain argument;
+no successful instance represents all 94 distance-two orbits.
+
+Capture remains a separate global obligation.
+H-345’s 5–20 CPU-hour estimate competes with conversion and verification for the
+heavy-process lease.
+Resume an incomplete chain only through a verified resumption contract, accepted
+calibration and a priced allocation for all 20 rounds and fresh replay.
+Preserve a completed round-20 verdict and register any further measured scope before
+extending that physical chain.
+A useful alternative to price is a perturbation extension of the
+[restricted family-cell audit](../../../docs/project/research/research-2026-10-09-n17-family-cell-audit.md),
+with occupied-cell assignments, frame premises and its retained slider domain included.
+Neither a local robustness lemma nor a completed allowance table proves arbitrary
+packings reach the terminal neighborhood.
+
+At each boundary, rank the remaining global obligations from actual evidence and replace
+the next block’s proposed work when the route has changed.
+Preserve exact counterexamples and bounded failures; do not fund unchanged relaxations
+with finer settings.
+Full H-343, H-344, H-346 and H-348 remain separately priced candidates rather than
+automatic work for additional blocks.
+A complete proof would still require every remaining non-family state and the full
+relevant family domain to be covered; the plan reports precisely which of those
+obligations remain after each block.
 
 ## Evidence Status and Limits
 
