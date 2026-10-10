@@ -63,7 +63,9 @@ manifest. All 96 files of the tree, 2,960,637 bytes, are pinned only; the declar
 `source/` directory is empty by design. They are the README (blob
 `b4b1c4e6252317ff01ecb7277a7664b008c3b242`), a copy of David Ellsworth’s
 `check_packing.py` (blob `716c1562b711da0ab5908cf8deab40bc1264737e`, never executed
-here), 48 pose files and 46 drawings. The 30 in-horizon poses are:
+here), 48 pose files and 46 drawings. What the packet keeps of the poses is its own
+derivation: the interval measurements and the exact witnesses below. The 30 in-horizon
+poses are:
 
 | n | Pose file | Git blob | Bytes | SHA-256 |
 | --- | --- | --- | --- | --- |
@@ -107,7 +109,9 @@ exact witness: the angles’ cosines and sines are not rational, and the printed
 are rounded. An exact witness therefore needs two declared steps the source does not
 take: centres dilated about the box centre to a stated side, and each rotation replaced
 by a rational half-angle tangent close to the printed angle. The record has taken
-decimal reports the same way before, through `sqpack.witness.promote_rational`.
+decimal reports the same way before, through `sqpack.witness.promote_rational`; this
+packet declares both steps per count, as
+[Exact Witnesses at the Ceilings](#exact-witnesses-at-the-ceilings) describes.
 
 ## Measured at the Printed Digits
 
@@ -169,10 +173,8 @@ printed place. The dilation that $S_n$ declares pays for it at every count.
 
 A `packing` verdict at $S_n$ is an interval proof that the dilated published pose packs
 $n$ unit squares in the square of side $S_n$. It is not an exact witness, and it is not
-a replay of the source’s check. Rounding each angle to a rational half-angle tangent at
-30 or more digits moves no corner by more than about $10^{-29}$, far inside every margin
-above, so an exact witness at $S_n$ is expected to exist at every count; the exact route
-decides that, and none has been built here.
+a replay of the source’s check. The exact witnesses below are built from the same
+dilation, and two exact routes decide them.
 
 ### Control: the Replaced 199 and 263
 
@@ -188,10 +190,68 @@ depths
 [squarepacker reported](https://github.com/jlevy/squares/issues/470#issuecomment-6077002689)
 from an independently written 60-digit checker.
 
+## Exact Witnesses at the Ceilings
+
+`devtools.upper_bound_reports` read the 30 poses from a checkout at the pin through its
+`decimal-dilation` adapter, after `devtools.acquire_source` showed that the checkout
+yields this packet’s acquisition record and manifest, so the bytes it read have the
+digests above. The adapter reads only the two options each row of
+[acquisition/report.json](acquisition/report.json) declares, and refuses any other:
+
+- **`dilation`**, the exact ratio $S_n / s$ of the issue’s ceiling to the printed side.
+  Every centre is scaled by it about the box centre, so the side becomes $S_n$ exactly.
+  It is the dilation the margins receipt measured, with $\lambda - 1$ from
+  $1.3 \times 10^{-15}$ (238) to $7.9 \times 10^{-14}$ (108).
+- **`half_angle_places`**, 32. Each square’s $t = \tan(\theta/2)$ is the exact tangent
+  rounded down at 32 decimals, the rounding decided by an outward-rounded enclosure; at
+  0 and $\pm 90$ degrees $t$ is exactly 0 or $\pm 1$. The rounding moves no corner by
+  as much as $10^{-31}$, against interval margins at $S_n$ of at least
+  $4.7 \times 10^{-16}$.
+
+The centres are then translated into $[0, S_n]^2$. Each result is an exact rational
+`center-basis` Witness/v2 under [facts/](facts/), naming its pose file’s SHA-256 as
+`revision_sha256`, stored compressed. The facts are this repository’s derivation; no
+upstream byte is retained, and offline each fact must rebuild itself from the
+certificate it states. Each side is the issue’s printed ceiling exactly (the README’s
+at 132 and 267), so each is admitted there. The witnesses are the dilated,
+rationalised poses; they certify nothing about the printed decimals themselves.
+
+## Exact Replay
+
+Only the facts enter geometry decisions, through the two-route kernel of
+`devtools.evand_arrangement_reports`: `sqpack`’s exact witness verifier and the
+independent rational corner checker, each deciding every wall and every pair over
+$\mathbb{Q}$. Each count ran a positive job, a duplicate-square control and an
+outside-container control, each in its own child process.
+[receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
+deciding input and both routes’ complete outputs.
+
+**All 30 positives pass both routes, and both routes refuse all 60 controls**, each on
+the overlap or the wall it was built to break. The two routes agree on every positive’s
+least wall clearance and least pair gap. The least wall clearance is
+$4.74 \times 10^{-16}$, at 84, and the least pair gap $6.59 \times 10^{-16}$, at 238;
+both are the interval receipt’s margins at $S_n$ to three digits, as the half-angle
+rounding moves nothing at that scale. The 90 jobs made 3,633,654 pair decisions in
+1,261.11 route CPU seconds and 3,235.53 job wall seconds, summed; the longest job, the
+positive at 270, took 131.17 seconds. The two-worker run took 30 minutes 11 seconds of
+wall time, while other lanes held the machine at a load average of 11 to 17. The two
+routes share certificate parsing, the half-angle conversion, Python’s rational arithmetic
+and the separating-axis method.
+
 ## Against the Record
 
-[acquisition/declaration.json](acquisition/declaration.json) lists each claim. Against
-`main` `657cc4861` and every report pending on 2026-10-10, by exact comparison:
+[acquisition/declaration.json](acquisition/declaration.json) lists each claim, and
+[acquisition/claims.json](acquisition/claims.json) is the frozen comparison of each
+exact witness, which the importer’s `check-claims` rebuilds from the facts and from the
+retained packets of every house and pending report. It was read at `main` `af17208c0`;
+the case records at these 30 counts are unchanged since `657cc4861`, where this table
+was first drawn. T-128, T-130, T-131 and #476 are compared by the exact sides of their
+own packets. #476 is declared at the counts where its release states a side no other
+entry states (103, 132, 237, 263, 267, 270 and 303); at the other ten counts it shares
+with this release it restates T-128’s or T-130’s certificate or, at 208, the case’s.
+#481 is compared by its claim record’s 16-place ceilings. #483 (70) and #484 (308, 343,
+344) share no count with these 30. Against every report pending on 2026-10-10, by
+exact comparison:
 
 | n | $S_n$ | Case verified ceiling, house | Below it by | Smaller report dated earlier | Smaller report dated later |
 | --- | --- | --- | --- | --- | --- |
@@ -253,9 +313,12 @@ The issue reports that Ellsworth’s `check_packing.py`, at precision 40 and
 $\varepsilon = 10^{-14}$, and an independent 60-digit separating-axis check accept all
 28, and that shrinking the container by $10^{-9}$ or moving a square $10^{-6}$ is
 refused. Those are author reports, and no program of the source has run here. The
-measurements above are interval-certified statements about the dilated published poses.
-They are not an exact witness, a replay of the source, or evidence of the KKT
-stationarity the issue reports. No optimality is claimed.
+measurements above are interval-certified statements about the dilated published poses,
+and the exact witnesses are this project’s dilation and rationalisation of them, decided
+by two routes that share their parsing, half-angle conversion and arithmetic; the
+replay has not been independently reviewed. Neither is a replay of the source, or
+evidence of the KKT stationarity the issue reports. The witnesses establish finite upper
+bounds only, at the printed ceilings; no optimality is claimed.
 
 ## Credit
 
@@ -275,12 +338,53 @@ uv run --frozen --all-extras --group dev python -m devtools.acquire_source misha
 uv run --frozen --all-extras --group dev python -m devtools.decimal_pose_margins check \
     resources/web/mishapolk-decimal-poses-2026-10-09/receipts/decimal-pose-margins.json \
     --root CHECKOUT
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports mishapolk-decimal-poses-2026-10-09 check-claims
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports mishapolk-decimal-poses-2026-10-09 check --replay
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports mishapolk-decimal-poses-2026-10-09 derive --checkout CHECKOUT --check
 ```
 
 `CHECKOUT` is a clone of the source at the pin; `check` refuses any pose whose bytes
 differ from the receipt’s. The control receipt is checked the same way against a
 directory holding `certificates/square-199.txt` and `certificates/square-263.txt` from
-`git show 4e1a6019fe6de6c9ff5b90b93826dcb34899b7de:certificates/…`.
+`git show 4e1a6019fe6de6c9ff5b90b93826dcb34899b7de:certificates/…`. The importer’s
+`check-claims` and `check --replay` run offline from the facts; `derive --check` needs
+the checkout, refuses one that does not yield this packet’s record and manifest, and
+compares each fact it derives with the retained one.
+
+## Compressed Files
+
+| Stored File | Origin | Git Blob of Original | SHA-256 of Original |
+| --- | --- | --- | --- |
+| `facts/n-084.yaml.gz` | receipt | `00408dec02d7911a52a8557d9dd23996e565d33d` | `3053ad8fc459cc9338d3f4eeba902a73143619f0c4fbc9ba0d9d897ad4149f50` |
+| `facts/n-086.yaml.gz` | receipt | `f134d697d9713ec8d030fe11aa8cde72a7b4d779` | `dbbf3b084ad58094d369043d0196324714d758d6a50e14bea46005985163d4eb` |
+| `facts/n-088.yaml.gz` | receipt | `de615e8917122a618e50c907703a05f2f4231a0d` | `a9912413494e41a1cca8c809158644f49a85df50bde2105a734309852fdc7f24` |
+| `facts/n-103.yaml.gz` | receipt | `6ead2faa1ad3e45b907292368c496aac83d1379f` | `37591d3849c3380a4ac00fe77eaf44c9020f79655c7ff1cbe89370fc6db81645` |
+| `facts/n-105.yaml.gz` | receipt | `025d8425d1706b64eaec0a31ddc2363b0f6d600c` | `682c90ce53ea2f98427ed36f3fc020a404a56c6715ca56deb698dc47c3db85a6` |
+| `facts/n-108.yaml.gz` | receipt | `e813e308341ce8f4d197db350453ef8a00585970` | `9a2269474773f8887166b15ebde0422524a2419dfa63584618151fe66d7cd1e9` |
+| `facts/n-127.yaml.gz` | receipt | `794fabd849839766213359b382e9d0dd3aabb7a0` | `0765c66354bfe6710894960c17a5bd8231fd2cc518a89fe2ca673115abcaafe1` |
+| `facts/n-130.yaml.gz` | receipt | `427208e9f19adf4cabc019cc91930d38a4adaa2a` | `8531969973c8b54c79c32e4deca4d9ddf04d3d48aec83df9e61c31447fe0407c` |
+| `facts/n-131.yaml.gz` | receipt | `c369079dde9b1040b44d369d29701d6dcdcebb19` | `344c98f1c45063ae69c07bcaea801a09dee8d9b5be08314b9fe4565517c138c5` |
+| `facts/n-132.yaml.gz` | receipt | `30bfc07872d082ef72232c6f658e31c5b674d45f` | `ebb4980158833ce25cb97f6eaffc341eea84da02b4ba8910415c1d387d58daa8` |
+| `facts/n-153.yaml.gz` | receipt | `e0f2b4c96e67eec08f6052b440ff8989bd4d2fff` | `512b5372dc51c4b33d3c7671c2d272e5b169b3c13873c24f037e8d9ac6d7042d` |
+| `facts/n-154.yaml.gz` | receipt | `ce5a2c3408c08488e3927a5b8a7bd252fd68caf0` | `e31c859599f3e371aa8d54715c6a497f32fe70a58c9f2d647a959646d0d0faa6` |
+| `facts/n-175.yaml.gz` | receipt | `d20311e8724a0ed0131fea0600994fcb442ce5b0` | `5647620b7dd10a97d434c20ee2941c22c46a806e1a7de5d8b61736f07c404352` |
+| `facts/n-179.yaml.gz` | receipt | `c3b77fb8f70c2382359d47f0c82c19ad3eb21ab0` | `7b056637698d048c57b4062aa70942393b78828751ead6823e0159aa8e33a29f` |
+| `facts/n-180.yaml.gz` | receipt | `4216db966376bc4b66caa27b9022a2bb61b8f35b` | `84e48446b0000346ee15229a1a5b7aa42b280eec533f50111b34b28ceb81ea6e` |
+| `facts/n-199.yaml.gz` | receipt | `637f670a98bc9fa1407192ca41680c448d9fc9f1` | `815207d420d24019ccfa7d4555075a02d2b12970b5b43596deb8ef5a20dde8c4` |
+| `facts/n-207.yaml.gz` | receipt | `bc530cd0105a3821b8d20221290f8b26baf4f067` | `c3af78e76ceed6f5e4c9ab9a6ad85bf6c719d9c26a7af1a585258a015115a1ec` |
+| `facts/n-208.yaml.gz` | receipt | `5bb07d55466ae133c3b2a3a7f32ab5fd7de3d289` | `b30225dfa241e781c47fb7fd2d03be6d38f04a224cec832b9176c23070c452e5` |
+| `facts/n-209.yaml.gz` | receipt | `a967d10be7c03bb0d15e310abcadd9b1748c6eb4` | `b19a26b03b24e5cb0e9e648902f6555a277737277b9c68384c4f19886160e2b8` |
+| `facts/n-236.yaml.gz` | receipt | `bb05900e3e17febd39503e11697352e6d45813f7` | `aae2720698ee3704b28e5894e5d29e88c7a23bcdf375a4b7b4bdfeecab2517a3` |
+| `facts/n-237.yaml.gz` | receipt | `03a076f7c98dd951ced6b48178e70f1efd2048d3` | `f628b947e8ac7eb46b612ab09a950d7d387a903fa16519d4f6f5ad775ccefb2a` |
+| `facts/n-238.yaml.gz` | receipt | `63e53be5173a2e5633bcdf464095c8beccbeb675` | `1b26038b81dd62fa922ab09e7b3e9b1c35c0138a17ef03b9e7aba7cc6933678b` |
+| `facts/n-239.yaml.gz` | receipt | `a8973c99ad90b1b44882670600b03f5e97264ce2` | `3dbf31fdba0b0a595e4c27df88c8b4db683db5ddfa385814cebbce3df791c7eb` |
+| `facts/n-258.yaml.gz` | receipt | `c9f85b758aec2459eb16ccef521188905e3274aa` | `f67f108cc37d77963903f9f1e83274082e6ecdc7f39fa7dcf6a0599e77e11eab` |
+| `facts/n-263.yaml.gz` | receipt | `3c410cd66a4a10943d647fa69af87b2f4c8bbb81` | `dd2dad875251e70d9da35b1c5d61e4427d4d603419031202680792a48537dba4` |
+| `facts/n-267.yaml.gz` | receipt | `d45c6c9d9e18e8b00e026e892f832c9eeb1bd74d` | `893112db4526d18cf566c4bca6fc264b0925334e2ddea2264470e3d614516cbc` |
+| `facts/n-270.yaml.gz` | receipt | `3e9318f762d3caa632cffd7f26c4e3c7995598a3` | `d8d7311b46d5e1df1874bc3eab92562979a5e57bca103b6ead52d79eabae71fb` |
+| `facts/n-302.yaml.gz` | receipt | `29ed6005ac55649b35acd22019453f7f776cdd84` | `1ef1fc6844539c43ada999d5f04a3cfc36f9074c6331cfba836bceaa4d8b0b02` |
+| `facts/n-303.yaml.gz` | receipt | `e2577a56d6f6f4604a506c2e56857d6bc085415e` | `fa880889d2235df90a2adacb310149d7d11d3203f234446702803796213b6de8` |
+| `facts/n-306.yaml.gz` | receipt | `f159c2aff249bc99d998106f7fb098ec65639355` | `6fd6333e74aa16d5c99ef71fcc2d3941659189a42803448ebf817808c79f6c94` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
