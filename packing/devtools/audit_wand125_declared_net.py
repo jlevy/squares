@@ -479,6 +479,9 @@ CHECK2_CONTROL_FACTOR = Fraction(197, 200)
 #: The source's second run of its check2 check before publication, on another host; not in
 #: the bundle, so not listed.
 PREPUBLICATION = "verification/prepublication-receipt.json"
+#: The schema ``mixed_n30_L58925``'s pre-publication receipt of 10 October names: its build
+#: under ``verifier``, and its control as tries. The earlier receipts name none.
+PREPUBLICATION_V1 = "fine-net-check2-receipt/v1"
 #: The one file a check2 directory's ``files-sha256.json`` lists that is not the
 #: directory's own: the README inside the tarball, shorter than the directory's, which
 #: `bundle` holds to its listed digest.
@@ -501,7 +504,8 @@ def audit_check2(
     unpublished input `UNPUBLISHED_RUN_INPUTS` names for it (finding FN-1 of the 6
     October review); the control must be this candidate with every mass scaled by
     197/200, refused; the source's pre-publication run (`PREPUBLICATION`) by the same
-    build must verify every node on the published bytes; and every file
+    build must verify every node on the published bytes, in either shape
+    `prepublication_run` reads, with its control refused; and every file
     ``files-sha256.json`` lists, the tarball's own README apart (`BUNDLE_README`), must be
     the directory's, retained or pinned. It decides no coverage.
 
@@ -580,14 +584,14 @@ def audit_check2(
         "the source's control is not this candidate with every mass scaled by 197/200",
     )
     second = load_json(read_retained_bytes(directory / PREPUBLICATION))
+    second_build, second_refused = prepublication_run(second)
     require(
         second["status"] == "VERIFIED"
         and second["verdict"] == "PASS"
         and second["directions_verified"] == second["directions_expected"] == count
         and second["candidate_digest"] == digest
         and second["file_sha256"] == second["input_sha256"] == sha256(raw)
-        and second["build"]["source_sha256"] == summary["build"]["source_sha256"]
-        and second["control"]["status"] == "REFUSED",
+        and second_build["source_sha256"] == summary["build"]["source_sha256"],
         "the source's pre-publication run does not verify every node of this candidate",
     )
     listed = load_json(read_retained_bytes(directory / "files-sha256.json"))
@@ -633,8 +637,8 @@ def audit_check2(
             "input_is_published_candidate": True,
             "directions": second["directions_verified"],
             "seconds": second["seconds"],
-            "target": second["build"]["target"],
-            "control_refused_directions": second["control"]["refused_directions"],
+            "target": second_build["target"],
+            "control_refused_directions": second_refused,
         },
         "status": "EXACT_PREMISES_HOLD",
         "scope": (
@@ -674,6 +678,44 @@ def control_factor(control: dict[str, Any]) -> Fraction | None:
     if not kind.startswith(prefix):
         return None
     return Fraction(kind.removeprefix(prefix).split(",")[0])
+
+
+def prepublication_run(second: dict[str, Any]) -> tuple[dict[str, Any], Any]:
+    """The build a pre-publication receipt states and the directions its control refused,
+    read by the receipt's shape.
+
+    The earlier receipts name no schema: their build is under ``build`` and their control
+    has a status of its own, which must be ``REFUSED``. `PREPUBLICATION_V1` puts the build
+    under ``verifier`` and gives the control as one try, which must have refused at
+    197/200 (`control_refused`, `control_factor`). A receipt of any other schema, or with
+    no build under its shape's field, is refused.
+    """
+    schema = second.get("schema")
+    control = second["control"]
+    if schema is None:
+        field = "build"
+        require(
+            control["status"] == "REFUSED",
+            "the source's pre-publication control was not refused",
+        )
+        refused = control["refused_directions"]
+    else:
+        require(schema == PREPUBLICATION_V1, f"no reader for pre-publication schema {schema}")
+        field = "verifier"
+        tries = control.get("tries")
+        require(
+            isinstance(tries, list) and len(tries) == 1,
+            "the source's pre-publication control is not one try",
+        )
+        require(
+            control_refused(control) and control_factor(control) == CHECK2_CONTROL_FACTOR,
+            "the source's pre-publication control was not refused at 197/200",
+        )
+        refused = tries[0]["refused"]
+    build: dict[str, Any] | None = second.get(field)
+    require(isinstance(build, dict), f"the pre-publication receipt states no build in {field}")
+    assert build is not None
+    return build, refused
 
 
 def pinned_digests(stated: Certificate) -> dict[str, str]:
