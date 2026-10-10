@@ -98,6 +98,7 @@ from devtools import squish_second_update_confirmation as second
 from devtools import squish_second_update_house_links as house
 from devtools import wand125_fn1_bindings as fn1
 from devtools.repo_scope import tracked_files
+from sqpack.contributors import load_contributors
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
 
@@ -1512,9 +1513,28 @@ def result_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
     return sorted(targets)
 
 
+def contributor_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
+    """Pruned archive files explicitly supporting contributor identity and bio claims."""
+    directory = ROOT / "contributors"
+    if not directory.is_dir():
+        return []
+    registry = load_contributors(directory, repo=REPO)
+    selected_roots = frozenset(LINKED_PRUNE_ROOTS if roots is None else roots)
+    targets: set[Path] = set()
+    for contributor in registry.by_id.values():
+        for source in contributor.sources:
+            if source.archive_path is not None:
+                path = (REPO / source.archive_path).resolve()
+                if in_pruned_roots(path, selected_roots):
+                    targets.add(path)
+    return sorted(targets)
+
+
 def snapshot_pruned_targets() -> list[Path]:
     """All pruned source files needed by checks that run inside a worker."""
-    return sorted({*linked_pruned_targets(), *result_pruned_targets()})
+    return sorted(
+        {*linked_pruned_targets(), *result_pruned_targets(), *contributor_pruned_targets()}
+    )
 
 
 def snapshot_copy_targets() -> tuple[Path, ...]:
@@ -1617,6 +1637,7 @@ def snapshot_audit(
     roots = (*LINKED_PRUNE_ROOTS, *proposed)
     linked = set(linked_pruned_targets(roots=roots))
     registered = set(result_pruned_targets(roots=roots))
+    contributors = set(contributor_pruned_targets(roots=roots))
     records = safe_load(spec_path.read_text(encoding="utf-8"))["controls"]
 
     def rows(selected: Sequence[Path] | set[Path]) -> list[dict[str, object]]:
@@ -1631,7 +1652,8 @@ def snapshot_audit(
         copied = [path for path in paths if in_pruned_roots(path, below)]
         linked_here = {path for path in linked if in_pruned_roots(path, below)}
         registered_here = {path for path in registered if in_pruned_roots(path, below)}
-        rescued = linked_here | registered_here
+        contributors_here = {path for path in contributors if in_pruned_roots(path, below)}
+        rescued = linked_here | registered_here | contributors_here
         mentions = []
         for record in records:
             target = (ROOT / record["file"]).resolve()
@@ -1648,6 +1670,7 @@ def snapshot_audit(
                 "currently_copied_bytes": sum(sizes[path] for path in copied),
                 "inline_rescue": rows(linked_here),
                 "result_rescue": rows(registered_here),
+                "contributor_rescue": rows(contributors_here),
                 "net_saved_bytes": sum(sizes[path] for path in copied if path not in rescued),
                 "registered_mentions": mentions,
             }
@@ -1656,7 +1679,8 @@ def snapshot_audit(
     saved = sum(
         sizes[path]
         for path in paths
-        if in_pruned_roots(path, frozenset(proposed)) and path not in linked | registered
+        if in_pruned_roots(path, frozenset(proposed))
+        and path not in linked | registered | contributors
     )
     return {
         "source_bytes": total,
@@ -1715,7 +1739,12 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
         and BUILD_CACHES.isdisjoint(path.relative_to(REPO).parts)
     ]
     register = ROOT / "frontier/results.yaml"
-    readers = [*documents, register]
+    contributor_documents = sorted(
+        path
+        for path in inventory
+        if path.parent == ROOT / "contributors" and path.suffix == ".md"
+    )
+    readers = [*documents, register, *contributor_documents]
     queries = "".join(inventory[path][0] + "\n" for path in readers)
     contents = subprocess.run(
         ["git", "cat-file", "--batch"],
@@ -1754,6 +1783,13 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
             path = (REPO / raw).resolve()
             if path in inventory and in_pruned_roots(path, roots):
                 rescued.add(path)
+    for document in contributor_documents:
+        contributor = safe_load(texts[document].split("---\n")[1])["contributor"]
+        for source in contributor["sources"]:
+            if "archive_path" in source:
+                path = (REPO / source["archive_path"]).resolve()
+                if path in inventory and in_pruned_roots(path, roots):
+                    rescued.add(path)
     named = {*COPY_SEPARATELY, *ROOT_DOCUMENTS}
     separate = [
         *COPY_SEPARATELY,
