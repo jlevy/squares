@@ -632,6 +632,40 @@ def test_the_later_roster_is_all_thirty_of_470_and_the_n126_certificate() -> Non
     assert found == [*(("#470", n) for n in MISHAPOLK_470), ("trio126", 126)]
 
 
+def test_the_488_and_489_rosters_are_the_counts_their_entries_cite() -> None:
+    found = [(case.issue, case.n) for case in route.import_cases(("#488", "#489"))]
+    assert found == [
+        *(("#488", n) for n in (132, 175, 209, 237, 270, 305)),
+        *(("#489", n) for n in (132, 308, 343, 344)),
+    ]
+
+
+@pytest.mark.slow
+def test_the_489_certificate_at_305_has_488s_side_in_a_quarter_turned_arrangement() -> None:
+    """Hunt 3's unnamed n305 certificate states exactly the side #488 reports there.
+
+    No entry cites it, so no roster reads it; this route's own parser reads both files
+    after their packets' custody, and `route.arrangement_gap` measures them, for credit.
+    """
+    packings = []
+    for issue, path in (
+        ("#489", "search/packer/candidates/hunt3_n305.cert"),
+        ("#488", "certificates/n305.cert"),
+    ):
+        packet = route.WEB / route.ALL_IMPORTS[issue]
+        upper.read_facts(packet)
+        source = route.REPO / upper.acquisition(packet)["archived_path"]
+        side, poses = parse_certificate(route.packet_bytes(source / path).decode("utf-8"), 305)
+        packings.append((side, tuple(placed(poses))))
+    (hunt_side, _), (couzo_side, _) = packings
+    assert hunt_side == couzo_side == Fraction(8975569886103498772971256586313, 5 * 10**29)
+    gap = route.arrangement_gap(packings[0], packings[1])
+    assert (gap["symmetry"], gap["side_difference"]) == (1, "0")
+    assert gap["moved_beyond"] == {"1e-9": 34, "1e-6": 33, "1e-3": 19, "1e-2": 2, "1e-1": 0}
+    assert gap["largest_displacement"] == "1.765499e-2"
+    assert gap["turned_beyond_1e-6"] == 3
+
+
 def test_the_n126_import_agrees_with_its_receipt_plan_and_print_to_every_digit() -> None:
     case = route.import_cases(("trio126",))[0]
     row = route.decide_import(case)
