@@ -74,3 +74,8 @@ packing/atlas/known-best/video/spikes/**/frames/
 
 /packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/conditional-node.json.gz
 packages/workbench/node_modules
+
+# The two largest Theorem 1.6 certificates of Ryu's k2-minus-c-upper preprint (#471, #486),
+# 2.6 and 4.5 MB, are hosted outside Git (OR-18) and listed in
+# packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml; its fetch puts them here.
+/packing/cases/asymptotic/hosted/squarepacker-k2-minus-c-upper/*.json.gz
