@@ -1,0 +1,39 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "(no issue)",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel trio126 2026-10-09]",
+  "report_evidence": "E-evand-trio126-certificate-report",
+  "receipt_format": "evand-trio126-exact-replay-v1",
+  "witness_prefix": "W-evand-trio126-n",
+  "claim_limitations": "Complete 268af52 rational centre/half-angle certificate of Ryan Xu's n126 packing as reconstructed from a picture, retained from the source. Finite construction feasibility only; no exact form, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-10",
+  "read_at_main": "af17208c02b08f343199ac102401d40278cf0dfc",
+  "certificates": [
+    {"n": 126, "path": "search/trio126/n126_xu.cert", "format": "evand-cert", "offered": "11742640687119285146522492579501/1000000000000000000000000000000", "printed_in": "https://github.com/evand/square-packing/blob/268af529546176a25224ea3b2c7d29cef8d9e911/search/trio126/n126_xu.cert", "first_committed": "2026-10-09T05:43:37Z"}
+  ],
+  "requested": [126],
+  "replayed": [126],
+  "houses": [
+    {"n": 126, "reader": "[ry-xu square packing 2026]", "source_key": "[ry-xu square packing 2026]", "holders": "ry-xu", "result": "T-125", "reported_value": "11.7426406872117427", "verified_value": "11.7426406872117427", "evidence": ["E-ryxu-432-rational-feasibility"]}
+  ],
+  "pending": [],
+  "register": {
+    "title": "Evan Daniel's n126 trio reconstructions at 268af52, no issue",
+    "headline": "An exact rational refinement of Ryan Xu's packing of 126 squares, from Evan Daniel",
+    "significance": 2,
+    "source_checks": "The source reports that its two exact checkers, verify_cert.py and the independent polygon-intersection verify_cert2.py, accept all three trio126 certificates, and that its exactsolve finds each packing a local minimum of S, strict modulo exact flat motions and jammed in every corner-corner branch, at 70 digits. The two checkers are byte-identical to the copies the issue-399 packet retains. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Ryan Xu (ry-xu, https://github.com/ry-xu/square_packing, issue 432) with the arrangement, and Evan Daniel (https://github.com/evand/square-packing) with its reconstruction from a picture, the local minimum the source gives as 15/2 + 3 sqrt 2, and the rational certificate. The same commit reconstructs two packings of Nate Chaoweeraprasit's SQUISH, phases 14 and 10, at larger sides. The source says the packings are other people's and makes no claim; the commit names Claude Opus 5.5 as co-author.",
+    "next_rung": "Independently review the retained replay, then record source-specific adoption of the n126 side, which refines the ceiling T-125 holds by 9.25e-11, with confirming evidence. Keep T-125's certificate as the historical house at 126. The source's local-minimum statement at 15/2 + 3 sqrt 2 would need an interval enclosure of its exactsolve point, which bears on the packing and not on s(126). Final exact-head CI remains required.",
+    "bead": "think-ilwc",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "independent",
+      "credit": "Daniel after Xu, Chaoweeraprasit",
+      "short_credit": "Daniel after Xu et al.",
+      "note": "Three complete exact certificates at 268af529546176a25224ea3b2c7d29cef8d9e911 of n = 126 packings reconstructed from a picture and polished to exact local minima: Ryan Xu's, at 15/2 + 3 sqrt 2 rounded up to a rational side, and Nate Chaoweeraprasit's SQUISH phases 14 and 10. MIT-licensed source bytes retained; Claude co-authorship disclosed. The source makes no claim; no local or global optimality is admitted."
+    }
+  }
+}

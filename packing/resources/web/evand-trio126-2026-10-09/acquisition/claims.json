@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "(no issue)",
+  "source": "https://github.com/evand/square-packing",
+  "revision": "268af529546176a25224ea3b2c7d29cef8d9e911",
+  "read_on": "2026-10-10",
+  "read_at_main": "af17208c02b08f343199ac102401d40278cf0dfc",
+  "horizon": 324,
+  "results": [
+    {"n": 126, "certificate": "search/trio126/n126_xu.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "11742640687119285146522492579501/1000000000000000000000000000000", "printed_in": "https://github.com/evand/square-packing/blob/268af529546176a25224ea3b2c7d29cef8d9e911/search/trio126/n126_xu.cert", "exact_side": "11742640687119285146522492579501/1000000000000000000000000000000", "ceiling": "11.7426406871192852", "first_committed": "2026-10-09T05:43:37Z", "grid_side": "12", "case": {"source_key": "[ry-xu square packing 2026]", "holders": "ry-xu", "result": "T-125", "reported_value": "11.7426406872117427", "verified_value": "11.7426406872117427", "evidence": ["E-ryxu-432-rational-feasibility"], "exact_side": "14678300859014678300859/1250000000000000000000", "relation": "below", "difference": "92457494164707420499/1000000000000000000000000000000"}, "pending": [], "smallest": "this certificate"}
+  ]
+}
