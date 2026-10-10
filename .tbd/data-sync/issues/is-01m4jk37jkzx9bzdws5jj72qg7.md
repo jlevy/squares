@@ -1,0 +1,28 @@
+---
+type: is
+id: is-01m4jk37jkzx9bzdws5jj72qg7
+title: "Intake pass 2026-10-10: eight new issues, unread replies and comments, five watched repositories"
+kind: epic
+status: open
+priority: 1
+version: 13
+labels:
+  - result-import
+dependencies: []
+child_order_hints:
+  - is-01m4jk49cwm1b2prnhb3yrnztn
+  - is-01m4jk49sdqkab8sbngjs0tvwm
+  - is-01m4jk4a6jsy0cvkmbrwfcbk0n
+  - is-01m4jk4am36yqbh6zcwxys40mj
+  - is-01m4jk4b15spab5c19x1k08yas
+  - is-01m4jk4be5gt8mqhrhkaytes7f
+  - is-01m4jk4bxs3shrty6t2zhbd5xw
+  - is-01m4jk4cae8514p87y79gsh17n
+  - is-01m4jk4cpsdkkrr0r1ewwdmgym
+  - is-01m4jk4d3exfdh39s5q032f5a1
+  - is-01m4jk4dgpq98j2baa6mzg54vm
+  - is-01m4jk4pyqedxzmwav3se4dg8c
+created_at: 2026-10-10T09:42:51.218Z
+updated_at: 2026-10-10T09:43:39.735Z
+---
+W1 intake pass run 2026-10-10 on branch claude/determined-rubin-yjfy2a by packing/campaign/result-import.md, section Running an Intake Pass. Owns every item make intake listed as needing an owner on 2026-10-10 (sweep report: 32 unowned items after tbd sync). Children own each import, the ledger bookkeeping and the watched-repository reads. Never merge, never post on an issue without the owner's word, never start a CPU-hour replay without an owner budget.
