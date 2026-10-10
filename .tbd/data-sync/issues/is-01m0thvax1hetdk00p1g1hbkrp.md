@@ -5,8 +5,8 @@ title: Prevent excerpt-boundary artifacts from becoming false synopsis defects
 kind: bug
 status: closed
 priority: 2
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: unknown@spud10.local
 labels:
   - packing
@@ -16,7 +16,7 @@ parent_id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
 hold: null
 hold_until: null
 created_at: 2026-08-24T18:52:12.063Z
-updated_at: 2026-08-24T18:58:35.219Z
+updated_at: 2026-10-10T22:52:27.701Z
 started_at: 2026-08-24T18:56:46.503Z
 closed_at: 2026-08-24T18:58:35.210Z
 close_reason: "D-184 fixed in 29d99b1: the overlapping-excerpt false positive is corrected in the log, and check_synopsis now counts each experiment exactly once in both tables; the duplicate-row mutation fires."

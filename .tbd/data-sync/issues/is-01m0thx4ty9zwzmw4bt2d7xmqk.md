@@ -5,8 +5,8 @@ title: Derive defect-direction and detector aggregates in SYNOPSIS
 kind: bug
 status: closed
 priority: 2
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: unknown@spud10.local
 labels:
   - packing
@@ -16,7 +16,7 @@ parent_id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
 hold: null
 hold_until: null
 created_at: 2026-08-24T18:53:11.389Z
-updated_at: 2026-08-24T18:58:35.499Z
+updated_at: 2026-10-10T22:52:30.810Z
 started_at: 2026-08-24T18:56:46.514Z
 closed_at: 2026-08-24T18:58:35.498Z
 close_reason: "D-185 fixed in 29d99b1: SYNOPSIS now states the derived 50/61 soundness-direction and 7/185 gate-detector aggregates; both focused mutations fire."

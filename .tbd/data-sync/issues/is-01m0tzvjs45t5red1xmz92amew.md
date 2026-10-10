@@ -5,7 +5,7 @@ title: "PR 24 review R8: make focus primary rather than exclusive"
 kind: bug
 status: closed
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -13,7 +13,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tz8s4yps8zgqwk8cng9qnx
 created_at: 2026-08-24T22:57:00.195Z
-updated_at: 2026-10-10T22:49:52.912Z
+updated_at: 2026-10-10T22:52:33.753Z
 closed_at: 2026-08-24T23:24:51.371Z
 close_reason: "Fixed in 0775c20: focus is the primary emphasis while all four principles still constrain and may contribute."
 resolution: null

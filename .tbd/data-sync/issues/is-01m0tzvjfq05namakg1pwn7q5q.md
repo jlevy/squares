@@ -5,7 +5,7 @@ title: "PR 24 review R7: avoid mandatory review churn after routine W6 rounds"
 kind: bug
 status: closed
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -13,7 +13,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tz8s4yps8zgqwk8cng9qnx
 created_at: 2026-08-24T22:56:59.894Z
-updated_at: 2026-10-10T22:49:52.912Z
+updated_at: 2026-10-10T22:52:33.384Z
 closed_at: 2026-08-24T23:24:50.848Z
 close_reason: "Fixed in 0775c20: W2 is required for promoted/high-risk claims, optional for routine guarded results, and may apply authorized bounded factual corrections."
 resolution: null

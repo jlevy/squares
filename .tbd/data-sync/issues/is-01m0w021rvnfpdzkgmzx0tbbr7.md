@@ -5,13 +5,13 @@ title: Remove exp-037 checker wrapper from forbidden legacy tools path
 kind: bug
 status: closed
 priority: 2
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies: []
 parent_id: is-01m0vr7g27g67p699aepcdksxd
 created_at: 2026-08-25T08:19:46.568Z
-updated_at: 2026-08-25T08:20:51.413Z
+updated_at: 2026-10-10T22:52:41.278Z
 closed_at: 2026-08-25T08:20:51.401Z
 close_reason: "Completed: removed the forbidden tools wrapper, rebound exp-037 and its session to python -m cases.n5.tangent_inventory, reconciled the synopsis, README, defect log, and ledger, and passed direct record/replay, ten module-boundary tests, and the 15-step fast gate."
 resolution: null

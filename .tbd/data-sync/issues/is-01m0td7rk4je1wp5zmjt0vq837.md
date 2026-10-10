@@ -5,7 +5,7 @@ title: Scope auxiliary-loss and duplicate-retention advice
 kind: bug
 status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tbtgpb92e81ndvw4xm9be6
 created_at: 2026-08-24T17:31:36.419Z
-updated_at: 2026-10-10T22:49:07.866Z
+updated_at: 2026-10-10T22:52:27.282Z
 closed_at: 2026-08-24T17:36:31.982Z
 close_reason: "D-182 fixed: equivalent loss shaping remains possible with proof, and duplicate suppression is limited to exploration rather than unbiased frequency measurement; normal gate passed."
 resolution: null

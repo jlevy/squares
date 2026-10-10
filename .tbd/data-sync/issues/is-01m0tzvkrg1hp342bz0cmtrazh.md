@@ -5,7 +5,7 @@ title: "PR 24 review R11: close workflow checker and mutation blind spots"
 kind: bug
 status: closed
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -13,7 +13,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tz8s4yps8zgqwk8cng9qnx
 created_at: 2026-08-24T22:57:01.199Z
-updated_at: 2026-10-10T22:49:52.912Z
+updated_at: 2026-10-10T22:52:34.891Z
 closed_at: 2026-08-24T23:24:52.658Z
 close_reason: "Fixed in 0775c20: extra workflow rows, volatile datelines, malformed transitions, terminal fields, status mismatches, and clock contracts are checked and mutation-controlled."
 resolution: null

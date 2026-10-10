@@ -5,8 +5,8 @@ title: Record and repair Python-format drift that broke both PR 29 CI jobs
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - gate
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0vr7g27g67p699aepcdksxd
 created_at: 2026-08-25T09:55:46.260Z
-updated_at: 2026-08-25T10:17:42.917Z
+updated_at: 2026-10-10T22:51:40.662Z
 closed_at: 2026-08-25T10:17:42.916Z
 close_reason: "D-268 is recorded and fixed: both replacement CI platforms passed the Python format floor, the complete local gate passes, and the remaining macOS failure was the separately owned obsolete D-272 expected-failure guard."
 resolution: null

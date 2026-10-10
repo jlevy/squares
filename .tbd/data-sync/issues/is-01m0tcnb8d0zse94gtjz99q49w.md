@@ -5,7 +5,7 @@ title: Bind PR20 tutorial claims to retained evidence
 kind: bug
 status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tbtgpb92e81ndvw4xm9be6
 created_at: 2026-08-24T17:21:32.941Z
-updated_at: 2026-10-10T22:49:07.866Z
+updated_at: 2026-10-10T22:52:26.842Z
 closed_at: 2026-08-24T17:36:30.982Z
 close_reason: "D-178 fixed: tutorial claims link directly to exp-011, exp-013 through exp-017, D-029, and agenda-001; link and normal gates passed."
 resolution: null
