@@ -141,6 +141,34 @@
     };
   }
 
+  /** Responsive positions for the native poster's persistent direct cards.
+   * @param {number} n @param {number} per @returns {AtlasTrianglePlace}
+   */
+  function wrappedPlace(n, per) {
+    const k = row(n);
+    const columns = Math.max(1, Math.floor(per));
+    let above = 0;
+    for (let earlier = 1; earlier < k; earlier += 1) {
+      above += Math.ceil((2 * earlier - 1) / columns);
+    }
+    const tiles = 2 * k - 1;
+    const lines = Math.ceil(tiles / columns);
+    const at = n - (k - 1) * (k - 1);
+    const line = Math.ceil(at / columns);
+    const within = at - (line - 1) * columns;
+    // What the tile's line holds: a full line, or on the last line what is left over.
+    const held = line === lines ? tiles - (lines - 1) * columns : columns;
+    return {
+      row: k,
+      line: above + line,
+      column: columns - held + within,
+      opens: k > 1 && line === 1,
+      gap: false,
+      segmentLine: above + line,
+      segmentColumn: columns - held + within,
+    };
+  }
+
   /**
    * The view a query string asks for: Grid when named, else the default Triangle.
    * @param {string} search
@@ -370,8 +398,8 @@
    * @param {SiteAtlasParts} parts
    * @returns {SiteAtlasViews}
    */
-  function mount({ block, cells, tabs, sizes, scales }) {
-    const buttons = tabsOf(tabs);
+  function mount({ block, cells, tabs, sizes, scales = null, scoped = false, beforeArrange }) {
+    const buttons = tabs === null ? [] : tabsOf(tabs);
     const sizeButtons = sizes === null ? [] : tabsOf(sizes);
     const scaleButtons = scales === null ? [] : tabsOf(scales);
     /** @type {Record<number, number>} */
@@ -382,6 +410,8 @@
     }
     /** The tiles a line holds and the last case shown, as last arranged. */
     let arranged = "";
+    /** The border-box width consumed by the latest arrangement. */
+    let priorWidth = 0;
     /** @type {Animation[]} */
     let running = [];
 
@@ -392,13 +422,12 @@
     /** @returns {AtlasScale} */
     const drawingScale = () => asScale(block.dataset.atlasScale);
 
-    /** The tiles that show: the first hundred, and the rest once the grid is expanded. */
+    // Dedicated row containers and native homepage anchors share the same FLIP.
+    // Visibility is controlled by persistent wrappers or boundary cells, never clones.
     const shown = () =>
-      [
-        ...cells.querySelectorAll(
-          ":scope > .site-atlas-row .site-atlas-cell, :scope > .site-atlas-rest:not([hidden]) .site-atlas-cell",
-        ),
-      ].filter((tile) => tile instanceof HTMLElement);
+      [...cells.querySelectorAll(".site-atlas-cell")]
+        .filter((tile) => tile instanceof HTMLElement)
+        .filter((tile) => tile.closest("[hidden]") === null);
 
     // Write each tile's line and column for the tiles a line now holds. Only the
     // triangle reads them, but they are kept current in the grid too, so a change of
@@ -407,18 +436,35 @@
     // neither the tiles a line holds nor the last case shown has changed. The size's
     // scale is the stylesheet's (`--site-atlas-scale`), read as the tiles are arranged.
     const arrange = () => {
+      // Visibility changes only the rows' height and scroll canvas, not this track's
+      // available width. Snapshot its geometry before completing the shown prefix.
+      const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+      const style = getComputedStyle(cells);
+      const least = lengthPx(
+        style.getPropertyValue(scoped ? "--site-atlas-tile-min" : "--site-atlas-cell-min"),
+        root,
+      );
+      const gap = lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root);
+      const scale = Number.parseFloat(style.getPropertyValue("--site-atlas-scale"));
+      const largestTile = scoped
+        ? lengthPx(style.getPropertyValue("--site-atlas-tile-max"), root)
+        : 0;
+      const width = cells.getBoundingClientRect().width;
+      priorWidth = width;
+      let capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
+      beforeArrange?.(capacity);
       const tiles = shown();
       const last = Number(tiles.at(-1)?.dataset.atlasN);
       if (!(last >= 1)) {
         return;
       }
-      const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
-      const style = getComputedStyle(cells);
-      const least = lengthPx(style.getPropertyValue("--site-atlas-cell-min"), root);
-      const gap = lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root);
-      const scale = Number.parseFloat(style.getPropertyValue("--site-atlas-scale"));
-      const width = cells.getBoundingClientRect().width;
-      const capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
+      if (scoped) {
+        // Native poster cards keep their existing responsive, wrapped square rows.
+        const medium = perLine(width, least, widest(last));
+        const tile = largestTile > 0 ? Math.min(largestTile, width / medium) : width / medium;
+        capacity =
+          scale > 1 ? Math.max(1, Math.min(medium, Math.round(width / (scale * tile)))) : medium;
+      }
       const per = Number.isFinite(capacity) ? capacity : widest(last) + 1;
       const largest = largestSide(tiles.map((tile) => Number(tile.dataset.atlasSide)));
       const key = `${per}:${tiles.map((tile) => tile.dataset.atlasN).join(":")}:${largest}`;
@@ -428,10 +474,18 @@
       arranged = key;
       cells.style.setProperty("--site-atlas-per-line", String(per));
       cells.style.setProperty("--site-atlas-global-side", String(largest));
+      if (scoped) {
+        cells.toggleAttribute("data-atlas-wrapped", per < widest(last));
+      }
       for (const tile of tiles) {
-        const at = place(Number(tile.dataset.atlasN), widest(last), starts);
+        const at = scoped
+          ? wrappedPlace(Number(tile.dataset.atlasN), per)
+          : place(Number(tile.dataset.atlasN), widest(last), starts);
         tile.style.setProperty("--site-atlas-line", String(at.segmentLine));
         tile.style.setProperty("--site-atlas-column", String(at.segmentColumn));
+        if (scoped) {
+          tile.style.setProperty("--site-atlas-opens", at.opens ? "1" : "0");
+        }
       }
     };
 
@@ -606,7 +660,9 @@
     /** @param {AtlasView} current */
     const mark = (current) => {
       block.dataset.atlasView = current;
-      document.documentElement.dataset.siteAtlasView = current;
+      if (!scoped) {
+        document.documentElement.dataset.siteAtlasView = current;
+      }
       for (const tab of buttons) {
         const on = tab.dataset.atlasTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -620,7 +676,9 @@
     /** @param {AtlasSize} current */
     const markSize = (current) => {
       block.dataset.atlasSize = current;
-      document.documentElement.dataset.siteAtlasSize = current;
+      if (!scoped) {
+        document.documentElement.dataset.siteAtlasSize = current;
+      }
       for (const tab of sizeButtons) {
         const on = tab.dataset.atlasSizeTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -631,7 +689,9 @@
     /** @param {AtlasScale} current */
     const markScale = (current) => {
       block.dataset.atlasScale = current;
-      document.documentElement.dataset.siteAtlasScale = current;
+      if (!scoped) {
+        document.documentElement.dataset.siteAtlasScale = current;
+      }
       for (const tab of scaleButtons) {
         const on = tab.dataset.atlasScaleTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -650,7 +710,9 @@
         return;
       }
       change(() => mark(next));
-      readdress(searchFor(location.search, next));
+      if (!scoped) {
+        readdress(searchFor(location.search, next));
+      }
     };
 
     /** @param {AtlasSize} next */
@@ -659,7 +721,9 @@
         return;
       }
       change(() => markSize(next));
-      readdress(searchForSize(location.search, next));
+      if (!scoped) {
+        readdress(searchForSize(location.search, next));
+      }
     };
 
     /** @param {AtlasScale} next */
@@ -668,19 +732,23 @@
         return;
       }
       change(() => markScale(next));
-      readdress(searchForScale(location.search, next));
+      if (!scoped) {
+        readdress(searchForScale(location.search, next));
+      }
     };
 
-    cells.id = tabs.dataset.atlasPanel ?? "";
-    cells.setAttribute("role", "tabpanel");
-    mark(viewOf(location.search));
-    markSize(sizeOf(location.search));
-    markScale(scaleOf(location.search));
-
-    wire(tabs, (tab) => select(tab.dataset.atlasTab === "triangle" ? "triangle" : "grid"));
+    if (tabs !== null) {
+      cells.id = tabs.dataset.atlasPanel ?? "";
+      cells.setAttribute("role", "tabpanel");
+      wire(tabs, (tab) => select(tab.dataset.atlasTab === "triangle" ? "triangle" : "grid"));
+    }
+    mark(scoped ? view() : viewOf(location.search));
+    markSize(scoped ? size() : sizeOf(location.search));
+    markScale(scoped ? drawingScale() : scaleOf(location.search));
     if (sizes !== null) {
       wire(sizes, (tab) => selectSize(asSize(tab.dataset.atlasSizeTab)));
     }
+    arrange();
 
     if (scales !== null) {
       wire(scales, (tab) => selectScale(asScale(tab.dataset.atlasScaleTab)));
@@ -691,9 +759,9 @@
     // moving everything.
     if ("ResizeObserver" in window) {
       let waiting = false;
-      let priorWidth = cells.getBoundingClientRect().width;
-      new ResizeObserver(() => {
-        const width = cells.getBoundingClientRect().width;
+      new ResizeObserver((entries) => {
+        const width =
+          entries[0]?.borderBoxSize[0]?.inlineSize ?? cells.getBoundingClientRect().width;
         if (width === priorWidth) {
           return;
         }

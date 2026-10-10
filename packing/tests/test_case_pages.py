@@ -15,6 +15,7 @@ import pytest
 from devtools import overview_sections, render_case_pages, render_overview, site_assets
 from devtools import render_frontier_page as frontier_page
 from devtools import render_research_tables as tables
+from devtools.overview_data import math_html
 from devtools.render_overview import assert_fetches_only_assets
 from devtools.repo_links import DEFAULT_BRANCH, REPO_URL, hash_pinned_links
 from sqpack.probes import probe
@@ -35,7 +36,9 @@ RECORD_CEILING_BYTES = 300_000
 
 @pytest.fixture(scope="module")
 def page() -> str:
-    return site_renders.html(render_case_pages.CASES_PAGE)
+    return next(
+        p.html for p in site_renders.forwarders() if p.name == render_case_pages.CASES_PAGE
+    )
 
 
 @pytest.fixture(scope="module")
@@ -50,7 +53,7 @@ def result_bodies() -> dict[str, str]:
 
 @pytest.fixture(scope="module")
 def frontier() -> str:
-    return site_renders.html("frontier.html")
+    return site_renders.html("atlas.html")
 
 
 @pytest.fixture(scope="module")
@@ -69,9 +72,9 @@ def n11_result_page() -> str:
 
 @pytest.fixture(scope="module")
 def served() -> dict[str, str]:
-    """The three pages above as a reader's browser assembles them, with every shared
-    asset they link put back in them (`tests.site_renders.served`), by name."""
-    names = (render_case_pages.CASES_PAGE, "frontier.html", "index.html")
+    """The entry pages as a reader's browser assembles them, with every shared asset
+    they link put back in them (`tests.site_renders.served`), by name."""
+    names = ("index.html", "atlas.html")
     return {name: site_renders.served(name) for name in names}
 
 
@@ -104,13 +107,13 @@ def test_every_case_has_a_record_file_at_its_own_address(
         assert record.count('<article class="site-case"') == 1, n
 
 
-def test_the_record_page_is_served_and_the_old_page_forwards_to_it() -> None:
+def test_the_old_record_directories_forward_to_the_atlas() -> None:
     assert render_case_pages.CASES_PAGE == "cases/index.html"
-    assert render_case_pages.CASES_PAGE in render_overview.SITE_PAGES
-    assert render_case_pages.CASES_PAGE in render_overview.PAGES
+    assert render_case_pages.CASES_PAGE not in render_overview.SITE_PAGES
+    assert render_case_pages.CASES_PAGE not in render_overview.PAGES
     assert "cases.html" not in render_overview.SITE_PAGES
-    assert ("cases.html", render_case_pages.CASES_PAGE) in render_overview.MOVED_PAGES
-    assert render_overview.canonical_url(render_case_pages.CASES_PAGE).endswith("/cases/")
+    assert ("cases.html", "atlas.html") in render_overview.MOVED_PAGES
+    assert (render_case_pages.CASES_PAGE, "atlas.html") in render_overview.MOVED_PAGES
 
 
 def test_a_record_file_is_a_complete_styled_canonical_page(records: dict[str, str]) -> None:
@@ -144,16 +147,16 @@ def test_a_records_links_are_written_from_its_own_directory(
     records: dict[str, str], tmp_path: Path
 ) -> None:
     """Every relative link in a record file resolves from `cases/`, where the record
-    page that shows it also stands: a site page climbs out (`../frontier.html`), a
-    neighbouring record does not (`12.html`), and every case is `./`. A host page
+    page that shows it also stands: a site page climbs out (`../atlas.html`), a
+    neighbouring record does not (`12.html`). A host page
     elsewhere rebases them against the record file's own address
     (`overview/case-popover.js`)."""
     record = _record(records, 11)
-    assert 'href="../frontier.html#n-11"' in record
+    assert 'href="../atlas.html#n-11"' in record
     assert 'href="../all-results.html#t-018"' in record
     assert 'href="10.html" rel="prev" data-case-step="10"' in record
     assert 'href="12.html" rel="next" data-case-step="12"' in record
-    assert 'href="./" data-case-index' in record
+    assert "data-case-index" not in record
     relative = [
         html.unescape(url)
         for url in re.findall(r'\s(?:href|src)="([^"]*)"', record)
@@ -238,7 +241,9 @@ def test_the_atlas_grid_and_the_frontier_table_open_the_same_record(
     assert [int(n) for n, _, _ in cells] == numbers
     assert all(a == b == c for a, b, c in cells)
     for n in overview_sections.atlas_regularized():
-        tile = re.findall(rf'<a class="site-atlas-cell" href="cases/{n}\.html"[^>]*>', grid)
+        tile = re.findall(
+            rf'<a class="site-atlas-cell" id="atlas-n-{n}" href="cases/{n}\.html"[^>]*>', grid
+        )
         assert len(tile) == 1, n
         assert "regularized" not in tile[0], n
     assert grid.count(render_case_pages.case_popover()) == 1
@@ -264,25 +269,30 @@ def test_the_frontier_rows_minimal_popovers_are_gone(
     page as it is served."""
     assert "pop-frontier-n-" not in frontier
     assert not re.search(r"<tr\b[^>]*\sdata-row-popover", frontier)
-    whole = served["frontier.html"]
+    whole = served["atlas.html"]
     assert render_overview.ROW_POPOVER_SCRIPT.read_text(encoding="utf-8") not in whole
     assert "site-pairs" not in whole
 
 
-def test_both_entry_pages_carry_the_case_popover_script(
-    overview: str, frontier: str, served: dict[str, str]
+def test_case_entry_pages_carry_the_case_popover_script(
+    overview: str, served: dict[str, str]
 ) -> None:
-    """Each links the case popover's program, the overview the atlas grid's too, and
-    each as it is served carries their text."""
+    """Case entry pages load the same popover; the dedicated atlas also loads its grid
+    controls once, and each served page carries the linked programs."""
+    atlas = site_renders.html("atlas.html")
     case_popover = render_case_pages.CASE_POPOVER_SCRIPT
-    for name, page in (("index.html", overview), ("frontier.html", frontier)):
+    for name, page in (
+        ("index.html", overview),
+        ("atlas.html", atlas),
+    ):
         assert page.count(_program_tag(case_popover, name)) == 1, name
         assert case_popover.read_text(encoding="utf-8") in served[name], name
-    assert overview.count(_program_tag(render_overview.ATLAS_GRID_SCRIPT, "index.html")) == 1
-    grid = render_overview.ATLAS_GRID_SCRIPT.read_text(encoding="utf-8")
-    assert grid in served["index.html"]
-    assert "data-atlas-facts" not in served["index.html"]
-    assert 'id="pop-atlas"' not in overview
+    grid_script = render_overview.ATLAS_GRID_SCRIPT
+    assert atlas.count(_program_tag(grid_script, "atlas.html")) == 1
+    assert grid_script.read_text(encoding="utf-8") in served["atlas.html"]
+    assert _program_tag(grid_script, "index.html") not in overview
+    assert "data-atlas-facts" not in served["atlas.html"]
+    assert 'id="pop-atlas"' not in atlas
 
 
 def test_the_popover_fetches_the_record_and_opens_its_address() -> None:
@@ -290,31 +300,50 @@ def test_the_popover_fetches_the_record_and_opens_its_address() -> None:
     assert 'id="pop-case" popover' in markup
     assert "data-case-popover" in markup
     assert "data-case-body" in markup
-    assert 'data-case-open href="cases/"' in markup
+    assert 'data-case-open href="atlas.html"' in markup
+    assert 'data-case-frontier href="atlas.html">Frontier Survey row</a>' in markup
+    assert 'data-case-atlas href="atlas.html">Atlas diagram</a>' in markup
+    assert markup.count('data-go="page"') == 3
+    assert "site-card-label" not in markup
     assert "<iframe" not in markup
 
 
-def test_the_case_index_links_complete_records_without_fetching(
-    page: str, numbers: list[int], served: dict[str, str]
+def test_a_case_count_is_math_above_its_ordered_status_row() -> None:
+    """The common header keeps the count separate from icons, notes and status tags."""
+    case = dict(next(case for case in frontier_page.frontier_cases() if case["n"] == 15))
+    case["reported_status"] = "open" if case["status"] != "open" else "proved"
+    markup = render_case_pages.record_head(
+        case,
+        recent=True,
+        first=1,
+        last=324,
+        corrects={"result": "T-018", "credit": "Published result"},
+    ).split("</header>", 1)[0]
+    eyebrow = markup.index('class="site-card-label site-case-eyebrow"')
+    title = markup.index('class="site-case-title" data-math-face="serif"')
+    badges = markup.index('class="site-case-badges"')
+    star = markup.index('class="site-star"')
+    correction = markup.index('class="site-corrects"')
+    reported = markup.index('class="site-credit"')
+    status = markup.index('class="site-chip"')
+    assert eyebrow < title < badges < star < correction < reported < status
+    assert math_html("n = 15") in markup
+    assert 'data-case-step="14"' in markup
+    assert 'data-case-step="16"' in markup
+    assert "All cases" not in markup
+    assert "data-case-index" not in markup
+
+
+def test_the_old_case_directory_retains_known_counts_in_its_forwarder(
+    page: str, numbers: list[int]
 ) -> None:
-    """The record page holds no record: its reader fetches the one the address names,
-    and its index links every record file. The reader is a shared program, which the
-    page names from `cases/` (`../assets/js/`)."""
-    reader = render_case_pages.CASE_PAGE_SCRIPT
-    tag = _program_tag(reader, render_case_pages.CASES_PAGE)
-    assert tag.startswith('<script src="../assets/js/case-page.')
-    assert page.count(tag) == 1
-    assert reader.read_text(encoding="utf-8") in served[render_case_pages.CASES_PAGE]
+    """Atlas is the directory; the legacy address retains validated case selectors."""
+    assert 'data-moved-to="../atlas.html"' in page
+    assert f'data-case-numbers="{",".join(map(str, numbers))}"' in page
     assert "data-case-reader" not in page
-    assert "fetch(" not in reader.read_text(encoding="utf-8")
     assert '<article class="site-case"' not in page
-    index = page.split('<nav class="site-case-index', 1)[1].split("</nav>", 1)[0]
-    assert "data-case-index" in index
-    links = re.findall(r'href="(\d+)\.html" data-case="(\d+)"', index)
-    assert [int(n) for n, _ in links] == numbers
-    # The page stands in `cases/`: its bar climbs out to the site's root.
-    assert 'href="../all-results.html"' in page
-    assert 'href="../frontier.html"' in page
+    assert 'href="../atlas.html"' in page
+    assert "site-case-index" not in page
 
 
 def test_the_page_fetches_only_the_shared_assets_and_is_under_its_ceiling(page: str) -> None:
@@ -322,8 +351,6 @@ def test_the_page_fetches_only_the_shared_assets_and_is_under_its_ceiling(page: 
     writes, and names every one from `cases/`, where it stands: `../assets/`, never an
     `assets/` beside it that the site does not have."""
     assert_fetches_only_assets(render_case_pages.CASES_PAGE, page)
-    assert site_assets.shared().assets.referenced([page])
-    assert '="../assets/' in page
     assert not re.search(r'(?:href|src)="assets/', page)
     assert len(page.encode()) < PAGE_CEILING_BYTES
 
@@ -368,18 +395,16 @@ def _declarations(css: str, selector: str) -> str:
 
 
 @pytest.mark.parametrize("units", [1000, overview_sections.ATLAS_UNITS])
-def test_the_drawing_fills_the_case_popover_at_its_own_line_weight(units: int) -> None:
-    """In the case popover the visual summary's drawing is as wide as the panel, short
-    of the panel's height less the room its caption and actions take (`think-u214`), and
-    its lines keep the weight they have at 12rem however large it is shown
+def test_the_compact_case_drawing_keeps_its_own_line_weight(units: int) -> None:
+    """The canonical and fetched article share a compact drawing, whose lines keep
+    the weight they have at 12rem however large it is shown
     (`think-pkz0`): the stylesheet draws them in the page's units (`non-scaling-stroke`)
     at the share of the drawing's width the drawing gives them up to 12rem across. The
     shares are read here from the drawing itself, at the record's units and a result
     overview's, so the stylesheet and the drawing cannot part."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
-    assert "inline-size: min(100%, var(--site-popover-max-block) - 8rem);" in _declarations(
-        css, ".site-case-pop .site-case-figure"
-    )
+    assert "inline-size: min(20rem, 100%);" in _declarations(css, ".site-case-figure")
+    assert ".site-case-pop .site-case-figure" not in css
     figure = _declarations(css, ".site-case-figure")
     assert "container-type: inline-size;" in figure
     assert "--site-case-figure-lines: min(100cqi, 12rem);" in figure
@@ -422,6 +447,23 @@ def test_no_math_is_left_as_source_text(records: dict[str, str]) -> None:
     assert "<code>31/8</code>" not in record
 
 
+def test_case_291_typesets_the_general_bound_and_retains_the_exact_ceiling(
+    records: dict[str, str],
+) -> None:
+    record = _record(records, 291)
+    formula = re.search(r"General bound: (.*?)\.</p>", record, re.DOTALL)
+    assert formula is not None
+    assert "data-kpress-math-rendered" in formula[1]
+    assert "sqrt(" not in formula[1]
+    assert "&gt;=" not in formula[1]
+    assert "<msqrt>" in formula[1]
+    assert "<mn>876776695296637</mn>" in record
+    assert "<mn>50000000000000</mn>" in record
+    assert "17.53553390593274" in record
+    assert "Trevor Green" in record
+    assert "Source-reported only; no verification promotion." in record
+
+
 def test_case_11_carries_its_polynomial_results_verification_and_links(
     records: dict[str, str],
 ) -> None:
@@ -431,7 +473,7 @@ def test_case_11_carries_its_polynomial_results_verification_and_links(
     assert "<msup><mi>s</mi><mn>7</mn></msup>" in record
     for result in ("T-018", "T-026", "T-033"):
         assert f'<a href="../all-results.html#{result.lower()}">{result}</a>' in record
-    assert '<a href="../frontier.html#n-11">' in record
+    assert '<a href="../atlas.html#n-11">' in record
     branch = f"{REPO_URL}/blob/{DEFAULT_BRANCH}/"
     assert f'class="site-case-github" href="{branch}packing/frontier/n-011.md"' in record
     # What the frontier row's popover said until 2026-10-03 is the record's now.
@@ -545,7 +587,17 @@ def test_a_cases_badges_are_one_mark_wherever_a_case_is_drawn(
         named = result_overview.badge_glyph(
             glyph, style, label, named=True, recent=label == "optimal"
         )
-        assert f'role="img" aria-label="{label}" title="{label}">' in named
+        mark = ET.fromstring(named)
+        assert mark.tag == "span"
+        assert mark.text == glyph
+        assert mark.attrib == {
+            "class": "site-atlas-badge",
+            "data-style": style,
+            "role": "img",
+            "aria-label": label,
+            "title": label,
+            **({"data-recent": "true"} if label == "optimal" else {}),
+        }
         assert named in badges
         # The summary's list draws the same square, its word beside it.
         listed = result_overview.badge_glyph(glyph, style, label, recent=label == "optimal")
@@ -643,8 +695,7 @@ def test_each_record_steps_to_its_neighbours_with_the_sites_arrows(
     records: dict[str, str], numbers: list[int]
 ) -> None:
     """A record's steps are the site's drawn arrows, left before the previous case and
-    right after the next, never the arrow characters the site's face lacks; between
-    them, every case."""
+    right after the next, never the arrow characters the site's face lacks."""
     left, right = overview_sections.arrow_icon("left"), overview_sections.arrow_icon("right")
     for n in (numbers[0], 11, numbers[-1]):
         record = _record(records, n)
@@ -654,7 +705,8 @@ def test_each_record_steps_to_its_neighbours_with_the_sites_arrows(
         assert "→" not in steps
         assert (f'data-case-step="{n - 1}">{left}n = {n - 1}</a>' in steps) == (n != numbers[0])
         assert (f"n = {n + 1}{right}</a>" in steps) == (n != numbers[-1])
-        assert '<a href="./" data-case-index>All cases</a>' in steps
+        assert "data-case-index" not in steps
+        assert "All cases" not in steps
 
 
 def test_case_eleven_reserves_and_locally_serves_its_original_figure(

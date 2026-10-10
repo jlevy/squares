@@ -27,3 +27,13 @@ follows the discovery process from a seed through search and local refinement to
 certified upper bound, with examples from published record packings.
 
 {{PAPER_CARDS}}
+
+## PDFs
+
+{{PDF_CARDS}}
+
+{{PDF_NOTE}}
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

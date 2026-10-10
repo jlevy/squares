@@ -353,10 +353,7 @@ def test_home_includes_only_its_visible_recent_subset_and_ordinary_links(
     assert found["bar_count"] == found["controls"] == 0
     assert sorted(found["included"]) == sorted(found["visible"]) == expected
     assert found["hidden"] == [], "omitted results must not be duplicated as hidden rows"
-    assert f"{len(expected)} recent results" in found["scope"]
-    assert "S3 or higher" in found["scope"]
-    assert "last 180 days" in found["scope"]
-    assert "excluding superseded" in found["scope"]
+    assert not found["scope_present"]
     assert sorted(found["registered"]) == sorted(r.id.lower() for r in overview.results)
     assert found["retired"] == {Path(row.path).stem: row.path for row in RETIRED}
     assert {row["result"]: row["href"] for row in found["links"]} == {
@@ -380,7 +377,9 @@ def test_legacy_home_query_and_registered_fragment_reach_the_complete_filtered_t
         for result in overview.results
         if result.record["kind"] == "rigidity"
         and overview_sections.shown_by_default(
-            result, defaults, overview_sections.reference_date(overview)
+            result,
+            defaults._replace(significance=3),
+            overview_sections.reference_date(overview),
         )
     )
     assert target not in expected
@@ -405,7 +404,7 @@ def test_legacy_home_query_and_registered_fragment_reach_the_complete_filtered_t
             "age": ["180"],
         }
         with page.expect_navigation(wait_until="load"):
-            page.get_by_role("link", name="Browse and filter every result", exact=True).click()
+            page.get_by_role("link", name="View all results", exact=True).click()
         landed = urlsplit(page.url)
         assert landed.path.endswith("/all-results.html")
         assert landed.query == destination.query
@@ -464,7 +463,7 @@ def test_initial_registered_home_result_fragment_retains_automatic_forwarding(
         if result.record["kind"] == "rigidity"
         and overview_sections.shown_by_default(
             result,
-            overview_sections.RECENT_DEFAULTS,
+            overview_sections.RECENT_DEFAULTS._replace(significance=3),
             overview_sections.reference_date(overview),
         )
     }
@@ -553,7 +552,7 @@ def test_retired_reader_fragment_updates_the_ordinary_home_link_and_reaches_its_
         assert destination.fragment == fragment
         assert parse_qs(destination.query) == parse_qs(supported)
         with page.expect_navigation(wait_until="load"):
-            page.get_by_role("link", name="Browse and filter every result", exact=True).click()
+            page.get_by_role("link", name="View all results", exact=True).click()
         assert_tombstone(page, row, fragment, supported)
     finally:
         page.close()

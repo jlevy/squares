@@ -109,10 +109,13 @@ def case_popover() -> str:
         'data-case-popover role="dialog" aria-label="Case record">'
         f'<button type="button" class="site-popover-close" popovertarget="{CASE_POPOVER_ID}" '
         'popovertargetaction="hide" aria-label="Close">\u00d7</button>'
-        '<span class="site-card-label">Case record</span>'
         '<div class="site-case-pop-body" data-case-body data-kpress-prose-font="sans"></div>'
         '<p class="site-popover-actions"><a class="site-popover-action" data-go="page" '
-        f'data-case-open href="{CASES_HOME}">Open the Case Record</a></p>'
+        'data-case-open href="atlas.html">Open the Case Record</a>'
+        '<a class="site-popover-action" data-go="page" data-case-frontier href="atlas.html">'
+        "Frontier Survey row</a>"
+        '<a class="site-popover-action" data-go="page" data-case-atlas href="atlas.html">'
+        "Atlas diagram</a></p>"
         "</div>"
     )
 
@@ -425,6 +428,8 @@ _FENCED = re.compile(r"(^```.*?^```[ \t]*$)", re.MULTILINE | re.DOTALL)
 _CODE_SPAN = re.compile(r"(?<![`\\\[])`([^`\n]+)`(?!`)")
 _HEADING = re.compile(r"^(#{1,4}) ", re.MULTILINE)
 _COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
+#: The labelled ASCII bound in the case prose, including a wrapped source line.
+_PLAIN_BOUND = re.compile(r"(General bound: )([^.$`]+?)(?=\.)")
 
 
 def prose_markdown(body: str) -> str:
@@ -446,11 +451,17 @@ def prose_markdown(body: str) -> str:
 
     parts = _FENCED.split(_FENCE.sub(fence, body))
 
+    def plain_bound(match: re.Match[str]) -> str:
+        tex = code_tex(" ".join(match.group(2).split()))
+        return f"{match.group(1)}${tex}$" if tex is not None else match.group(0)
+
     def demote(match: re.Match[str]) -> str:
         return "#" * (len(match.group(1)) + 2) + " "
 
     return "".join(
-        part if number % 2 else _HEADING.sub(demote, _CODE_SPAN.sub(span, part))
+        part
+        if number % 2
+        else _HEADING.sub(demote, _PLAIN_BOUND.sub(plain_bound, _CODE_SPAN.sub(span, part)))
         for number, part in enumerate(parts)
     )
 
@@ -838,15 +849,20 @@ def record_head(
     and each record file writes them again from its own directory (`rebase_links`). A
     recent lower bound's star in the head is followed, where the bound corrects a
     published result, by the tag naming that work (`corrects_tag`)."""
-    from devtools.overview_sections import arrow_icon, case_status_chip  # noqa: PLC0415
+    from devtools.overview_sections import (  # noqa: PLC0415
+        SERIF_MATH,
+        arrow_icon,
+        case_status_chip,
+    )
     from devtools.repo_links import branch_file  # noqa: PLC0415
     from devtools.result_overview import case_badges  # noqa: PLC0415
 
     n = case["n"]
     status = case["status"]
     chip = case_status_chip(status)
+    reported = ""
     if case["reported_status"] != status:
-        chip += f' <span class="site-credit">reported {_esc(case["reported_status"])}</span>'
+        reported = f' <span class="site-credit">reported {_esc(case["reported_status"])}</span>'
     star = ' <span class="site-star" title="Recent lower bound">\u2605</span>' if recent else ""
     star += corrects_tag(corrects)
     previous = (
@@ -869,9 +885,10 @@ def record_head(
     )
     return (
         f'<header class="site-case-head" data-kpress-prose-font="sans">'
-        f'<nav class="site-case-steps" aria-label="Cases">{previous}'
-        f'<a href="{CASES_HOME}" data-case-index>All cases</a>{following}</nav>'
-        f'<p class="site-case-title"><b>n = {n}</b> {chip}{star}{case_badges(n)}</p>'
+        f'<nav class="site-case-steps" aria-label="Cases">{previous}{following}</nav>'
+        '<span class="site-card-label site-case-eyebrow">Case record</span>'
+        f'<p class="site-case-title" {SERIF_MATH}>{_math(f"n = {n}")}</p>'
+        f'<p class="site-case-status">{case_badges(n)}{star}{reported}{chip}</p>'
         f'<p class="site-case-interval">{_math(interval_tex(case))}</p></header>'
         f"{visual_summary(n, upper=upper)}"
         '<div class="site-case-data" data-kpress-prose-font="sans">'
@@ -887,7 +904,7 @@ def record_head(
         '<div class="site-case-note"><span class="site-card-label">Evidence and sources</span>'
         f"<details><summary>{len(evidence)} evidence entries</summary>"
         f"<p>{frontier.evidence_links(evidence)}</p></details>{_sources(case)}</div>"
-        f'<p class="site-case-links"><a href="frontier.html#n-{n}">In the frontier survey</a>'
+        f'<p class="site-case-links"><a href="atlas.html#n-{n}">In the frontier survey</a>'
         f' <a class="site-case-github" href="{branch_file(source)}">On GitHub</a></p></div>'
     )
 
@@ -1052,7 +1069,7 @@ def _rendered() -> str:
     rendered = render_overview.kpress_page(
         cases_markdown(render_overview.fill),
         name=meta.path,
-        current="frontier",
+        current="atlas",
         title=meta.name,
         description=meta.description,
         toc=False,
@@ -1062,9 +1079,10 @@ def _rendered() -> str:
         page_scripts=(CASE_PAGE_SCRIPT,),
         prepare_math=False,
     )
-    problems = site_documents.unresolved(
-        {**site_documents.site_documents(), CASES_PAGE: rendered}, report
-    )
+    # Reader documents validate together when published. Case records only need
+    # their rendered IDs when a rewritten link actually names a reader anchor.
+    reader_pages = site_documents.site_documents() if report.anchors else {}
+    problems = site_documents.unresolved({**reader_pages, CASES_PAGE: rendered}, report)
     if problems:
         listing = "\n  ".join(problems)
         raise SystemExit(f"{len(problems)} unresolved links in the case records:\n  {listing}")
@@ -1176,8 +1194,13 @@ def _description(case: dict[str, Any]) -> str:
     return description
 
 
-def case_records() -> list[Page]:
-    """Every case at its complete, styled canonical page, with no content redirect."""
+def case_records(*, only: tuple[int, ...] | None = None) -> list[Page]:
+    """Complete canonical pages, optionally just the requested counts.
+
+    Subsets are cut from the same full raw render, preserving KPress's cross-case
+    IDs. Selecting before math preparation keeps small browser fixtures inexpensive.
+    Publication omits `only` and still prepares every case.
+    """
     from devtools import site_math  # noqa: PLC0415
     from devtools.render_overview import (  # noqa: PLC0415
         PageMeta,
@@ -1186,6 +1209,14 @@ def case_records() -> list[Page]:
     )
 
     raw = _records(_rendered())
+    if only is not None:
+        selected = tuple(sorted(set(only)))
+        if not selected:
+            raise ValueError("a case subset must request at least one count")
+        unknown = set(selected) - raw.keys()
+        if unknown:
+            raise ValueError(f"unknown case counts: {sorted(unknown)}")
+        raw = {n: raw[n] for n in selected}
     prepared = site_math.prepare(
         "".join(
             f"<!-- static-case {n} -->{record}<!-- /static-case -->"
@@ -1201,6 +1232,8 @@ def case_records() -> list[Page]:
     pages = []
     for case in frontier.frontier_cases():
         n = case["n"]
+        if only is not None and n not in raw:
+            continue
         name = case_url(n)
         title = f"{n} Unit Squares in a Square: Bounds and Best Packing"
         meta = PageMeta(
@@ -1209,17 +1242,17 @@ def case_records() -> list[Page]:
             name,
             structured_data=(
                 breadcrumb_data(
-                    ("Home", "index.html"), ("Case Records", CASES_PAGE), (f"n = {n}", name)
+                    ("Home", "index.html"), ("Atlas", "atlas.html"), (f"n = {n}", name)
                 ),
             ),
         )
         record = records[n]
         record = re.sub(
-            r'<p class="site-case-title">(.*?)</p>',
-            r'<h1 class="site-case-title" id="case-title">\1</h1>',
+            r'<p class="site-case-title"([^>]*)>(.*?)</p>',
+            r'<h1 class="site-case-title" id="case-title"\1>\2</h1>',
             record,
             count=1,
             flags=re.DOTALL,
         )
-        pages.append(static_content_page(record, meta=meta, current="frontier"))
+        pages.append(static_content_page(record, meta=meta, current="atlas"))
     return pages

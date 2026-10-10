@@ -135,6 +135,8 @@ INLINE_SCRIPT_ASSETS = {
     "FINISH_MATH": EXPLAINER_SCRIPTS / "finish-math.js",
     "SITE_EMBED": PACKING / "devtools" / "overview" / "embed.js",
     "SITE_THEME": PACKING / "devtools" / "overview" / "theme.js",
+    "SITE_HEADROOM": PACKING / "devtools" / "overview" / "headroom.js",
+    "SITE_TOOLTIPS": PACKING / "devtools" / "overview" / "rating-tooltips.js",
 }
 #: The browser code this module hands the page, one file each under `probes/`.
 PROBES = Path(__file__).resolve().parent / "probes"
@@ -2112,7 +2114,9 @@ EXTERNAL_REFERENCE = re.compile(
     r"<script[^>]*\ssrc="
     r'|<link(?![^>]*\srel="canonical")(?![^>]*\shref="data:)[^>]*\shref='
     r"|@import\b"
-    r"|url\((?!\s*[\"']?(?:data:|#))",
+    # JavaScript's `new URL(...)` constructs an address; it is not CSS url(...).
+    # Keep every script body under the other reference checks.
+    r"|(?<!\bnew\s)\burl\((?!\s*[\"']?(?:data:|#))",
     re.IGNORECASE,
 )
 
@@ -2888,6 +2892,8 @@ RENDER_INPUTS = (
     MARKDOWN,
     SITE_NAV,
     SITE_NAV_CSS,
+    INLINE_SCRIPT_ASSETS["SITE_HEADROOM"],
+    INLINE_SCRIPT_ASSETS["SITE_TOOLTIPS"],
     PAPER_TYPE_CSS,
     PACKING / "devtools" / "render_overview.py",
     PACKING / "devtools" / "templates" / "fonts",

@@ -21,7 +21,7 @@ const EXPLAINER = "papers/n11-lower-bounds-explainer.html";
  * leaves them where they are. `moved` is the page's `data-moved-to`, which only a
  * forwarder page has.
  * @param {string} hash
- * @param {{ search?: string, ids?: readonly string[], results?: readonly string[], retired?: string, moved?: string, fileMoved?: string, caseNumbers?: string, protocol?: string }} [options]
+ * @param {{ search?: string, ids?: readonly string[], results?: readonly string[], retired?: string, moved?: string, fileMoved?: string, caseNumbers?: string, protocol?: string, preview?: boolean }} [options]
  * @returns {string | null}
  */
 function forwarded(
@@ -35,26 +35,34 @@ function forwarded(
     fileMoved,
     caseNumbers,
     protocol = "https:",
+    preview = false,
   } = {},
 ) {
   /** @type {string | null} */
   let target = null;
   const context = vm.createContext({
     URL,
+    URLSearchParams,
     decodeURIComponent,
     document: {
       documentElement: { dataset: { movedTo: moved, fileMovedTo: fileMoved, caseNumbers } },
       /** @param {string} id */
       getElementById: (id) => (ids.includes(id) ? {} : null),
-      querySelector: () => ({
-        /** @param {string} name */
-        getAttribute: (name) =>
-          name === "data-result-ids"
-            ? results.join(" ")
-            : name === "data-retired-results"
-              ? retired
-              : null,
-      }),
+      /** @param {string} selector */
+      querySelector: (selector) =>
+        selector === "[data-atlas-preview]"
+          ? preview
+            ? {}
+            : null
+          : {
+              /** @param {string} name */
+              getAttribute: (name) =>
+                name === "data-result-ids"
+                  ? results.join(" ")
+                  : name === "data-retired-results"
+                    ? retired
+                    : null,
+            },
     },
     window: {
       location: {
@@ -144,11 +152,11 @@ void test("the ladders' two fragments go to the results page where the section i
   assert.equal(forwarded("#verification-at-a-glance"), "all-results.html#verification-at-a-glance");
 });
 
-void test("the survey's two fragments go to the Frontier page", () => {
+void test("the survey's two fragments go to the combined Atlas page", () => {
   // The Frontier Survey left the overview on 2026-10-02, its account the Frontier page's
   // own; it was `#the-survey` until 2026-10-01, and both fragments are sent there.
-  assert.equal(forwarded("#the-frontier-survey"), "frontier.html#the-frontier-survey");
-  assert.equal(forwarded("#the-survey", { search: "?x=1" }), "frontier.html?x=1#the-survey");
+  assert.equal(forwarded("#the-frontier-survey"), "atlas.html#the-frontier-survey");
+  assert.equal(forwarded("#the-survey", { search: "?x=1" }), "atlas.html?x=1#the-survey");
 });
 
 void test("a renamed section's old fragment stays while an anchor keeps its id", () => {
@@ -157,6 +165,31 @@ void test("a renamed section's old fragment stays while an anchor keeps its id",
   const atlas = "#the-atlas";
   assert.equal(forwarded(atlas, { ids: ["the-atlas-of-square-packings", "the-atlas"] }), null);
   assert.equal(forwarded(atlas, { ids: ["the-atlas-of-square-packings"] }), null);
+});
+
+void test("the compact homepage forwards full atlas state and moved resource fragments", () => {
+  for (const hash of ["#the-atlas", "#the-atlas-of-square-packings"]) {
+    assert.equal(
+      forwarded(hash, { preview: true, ids: [hash.slice(1)], search: "?size=large" }),
+      `atlas.html?size=large${hash}`,
+    );
+  }
+  assert.equal(
+    forwarded("", { preview: true, search: "?atlas=triangle&size=small" }),
+    "atlas.html?atlas=triangle&size=small",
+  );
+  for (const hash of ["#squares-project-documentation"]) {
+    assert.equal(forwarded(hash, { preview: true }), `about.html${hash}`);
+  }
+  for (const id of ["squares-project-documentation", "learn-more"]) {
+    assert.equal(forwarded(`#${id}`, { preview: true, ids: [id] }), null);
+  }
+  assert.equal(
+    forwarded("#the-squares-project", { preview: true, ids: ["the-squares-project"] }),
+    null,
+  );
+  assert.equal(forwarded("#pdfs-and-videos", { preview: true, ids: ["pdfs-and-videos"] }), null);
+  assert.equal(forwarded("#the-atlas", { ids: ["the-atlas"], search: "?atlas=triangle" }), null);
 });
 
 void test("a forwarder page sends every visit where it names", () => {
@@ -202,76 +235,45 @@ void test("unknown and malformed fragments stay where the reader put them", () =
   );
 });
 
-const CASE_SOURCE = readFileSync(
-  new URL("../../../devtools/overview/case-page.js", import.meta.url),
-  "utf8",
-);
-/** @param {string} address */
-function caseAlias(address) {
-  /** @type {string | null} */
-  let destination = null;
-  class Anchor {
-    /** @param {string} n */
-    constructor(n) {
-      this.href = new URL(`${n}.html`, address).href;
-    }
+void test("retired case directories select registered Atlas rows and preserve record sections", () => {
+  for (const moved of ["atlas.html", "../atlas.html"]) {
+    const options = { moved, caseNumbers: "11,12,291" };
+    assert.equal(forwarded("#n-11", options), `${moved}#n-11`);
+    assert.equal(forwarded("#n-00012", options), `${moved}#n-12`);
+    assert.equal(
+      forwarded("#n-291", { ...options, search: "?recent=true" }),
+      `${moved}?recent=true#n-291`,
+    );
+    assert.equal(
+      forwarded("", { ...options, search: "?n=12&view=embed" }),
+      `${moved}?view=embed#n-12`,
+    );
+    assert.equal(forwarded("#n-11", { ...options, search: "?n=12" }), `${moved}#n-12`);
+    assert.equal(
+      forwarded("#bounds", { ...options, search: "?n=12&view=embed&raw=1" }),
+      `${moved.replace("atlas.html", "cases/12.html")}?view=embed&raw=1#bounds`,
+    );
+    assert.equal(forwarded("#n-999", options), `${moved}#n-999`);
+    assert.equal(
+      forwarded("#bounds", { ...options, search: "?n=999&view=embed" }),
+      `${moved}?n=999&view=embed#bounds`,
+    );
   }
-  vm.runInContext(
-    CASE_SOURCE,
-    vm.createContext({
-      URL,
-      HTMLAnchorElement: Anchor,
-      location: {
-        href: address,
-        /** @param {string} target */
-        replace: (target) => {
-          destination = target;
-        },
-      },
-      document: {
-        /** @param {string} selector */
-        querySelector: (selector) => {
-          const n = /data-case="(\d+)"/.exec(selector)?.[1];
-          return n && ["11", "12"].includes(n) ? new Anchor(n) : null;
-        },
-      },
-    }),
-  );
-  return destination;
-}
-void test("published case directory and index aliases reach complete canonical pages", () => {
-  const root = "https://example.test/squares/cases/";
-  assert.equal(caseAlias(`${root}#n-11`), `${root}11.html`);
-  assert.equal(caseAlias(`${root}index.html#n-11`), `${root}11.html`);
-  assert.equal(caseAlias(`${root}?n=11&view=embed#bounds`), `${root}11.html?view=embed#bounds`);
-  assert.equal(caseAlias(`${root}?n=12#n-11`), `${root}12.html`);
-  assert.equal(caseAlias(`${root}?n=999`), null);
-  assert.equal(caseAlias(`${root}#n-999`), null);
-});
-
-void test("the retired cases.html alias forwards only registered case numbers", () => {
-  const options = { moved: "cases/", caseNumbers: "11,12" };
-  assert.equal(forwarded("#n-11", options), "cases/11.html");
-  assert.equal(
-    forwarded("#bounds", { ...options, search: "?n=12&view=embed&raw=1" }),
-    "cases/12.html?view=embed&raw=1#bounds",
-  );
-  assert.equal(forwarded("#n-999", options), "cases/#n-999");
 });
 
 const EMBED_SOURCE = readFileSync(
   new URL("../../../devtools/overview/embed.js", import.meta.url),
   "utf8",
 );
-/** @param {string} search @returns {Record<string, string>} */
-function bootstrapped(search) {
+/** @param {string} search @param {string} [pathname] @returns {Record<string, string>} */
+function bootstrapped(search, pathname = "/atlas.html") {
   /** @type {Record<string, string>} */
   const attributes = {};
   vm.runInContext(
     EMBED_SOURCE,
     vm.createContext({
       URLSearchParams,
-      location: { search },
+      location: { search, pathname },
       document: {
         documentElement: {
           /** @param {string} name @param {string} value */
@@ -321,25 +323,34 @@ void test("layout queries establish only whitelisted root attributes before pain
     "data-site-atlas-size": "small",
     "data-site-atlas-scale": "fixed",
   });
+  assert.deepEqual(bootstrapped("", "/index.html"), {});
+  assert.deepEqual(bootstrapped("?atlas=triangle&size=large&scale=row", "/index.html"), {});
 });
 
-void test("directory forwarders retain canonical HTTP targets and physical file fallbacks", () => {
-  const options = { moved: "cases/", fileMoved: "cases/index.html", caseNumbers: "11,12" };
-  for (const protocol of ["https:", "file:"]) {
-    const target = protocol === "file:" ? options.fileMoved : options.moved;
-    assert.equal(
-      forwarded("#unknown", { ...options, protocol, search: "?view=embed" }),
-      `${target}?view=embed#unknown`,
-    );
-    assert.equal(forwarded("#n-999", { ...options, protocol }), `${target}#n-999`);
-    assert.equal(
-      forwarded("#bounds", { ...options, protocol, search: "?n=999&view=embed" }),
-      `${target}?n=999&view=embed#bounds`,
-    );
-    assert.equal(
-      forwarded("#bounds", { ...options, protocol, search: "?n=12&view=embed" }),
-      "cases/12.html?view=embed#bounds",
-    );
-    assert.equal(forwarded("#n-11", { ...options, protocol }), "cases/11.html");
+void test("case directory migration uses the same Atlas destination for HTTP and files", () => {
+  for (const moved of ["atlas.html", "../atlas.html"]) {
+    const options = { moved, fileMoved: moved, caseNumbers: "11,12" };
+    for (const protocol of ["https:", "file:"]) {
+      assert.equal(
+        forwarded("#unknown", { ...options, protocol, search: "?view=embed" }),
+        `${moved}?view=embed#unknown`,
+      );
+      assert.equal(forwarded("#n-11", { ...options, protocol }), `${moved}#n-11`);
+      assert.equal(forwarded("#n-999", { ...options, protocol }), `${moved}#n-999`);
+      assert.equal(
+        forwarded("#bounds", { ...options, protocol, search: "?n=12&view=embed" }),
+        `${moved.replace("atlas.html", "cases/12.html")}?view=embed#bounds`,
+      );
+    }
   }
+});
+
+void test("related projects retain their homepage destination", () => {
+  assert.equal(
+    forwarded("#other-square-packing-projects", {
+      preview: true,
+      ids: ["other-square-packing-projects"],
+    }),
+    null,
+  );
 });

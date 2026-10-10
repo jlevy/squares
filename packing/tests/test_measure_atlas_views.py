@@ -260,9 +260,9 @@ def test_runs_are_reported_as_their_median_and_their_most_long_tasks() -> None:
 
 
 def test_a_page_that_is_not_built_is_refused(tmp_path: Path) -> None:
-    with pytest.raises(SystemExit, match="no built overview"):
+    with pytest.raises(SystemExit, match="no built atlas"):
         atlas.page_address(tmp_path, render=False)
-    built = tmp_path / "index.html"
+    built = tmp_path / "atlas.html"
     built.write_text("<!doctype html>", encoding="utf-8")
     assert atlas.page_address(tmp_path, render=False) == built.resolve().as_uri()
     assert atlas.page_address(built, render=False) == built.resolve().as_uri()

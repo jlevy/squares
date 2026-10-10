@@ -84,13 +84,16 @@ def test_the_bar_has_one_papers_entry_reaching_the_site_root(page: str) -> None:
     entries = re.findall(r'<a data-page="(\w+)"[^>]* href="([^"]+)">([^<]+)</a>', page)
     assert [key for key, _, _ in entries] == [
         "overview",
+        "atlas",
         "results",
         "papers",
-        "frontier",
         "visualize",
+        "about",
         "github",
     ]
     assert ("papers", "../papers.html", "Papers") in entries
+    assert ("atlas", "../atlas.html", "Atlas") in entries
+    assert ("about", "../about.html", "About") in entries
 
 
 def test_the_page_is_the_workbench_tab_of_the_visualize_section(page: str) -> None:

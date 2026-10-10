@@ -164,27 +164,28 @@ class _FrontierMath(HTMLParser):
         ):
             self.token = True
 
-    def counts(self) -> tuple[int, int]:
+    def counts(self, *, prose_formulas: int = 9) -> tuple[int, int]:
         assert not self.stack
         assert self.native_depth is None
         assert self.rows == [f"n-{n}" for n in range(1, 325)]
         assert self.native > 0
-        assert self.total - self.native == 9
+        assert self.total - self.native == prose_formulas
         return self.native, self.total
 
 
-def count_frontier_math(source: str) -> tuple[int, int]:
+def count_frontier_math(source: str, *, prose_formulas: int = 9) -> tuple[int, int]:
     """Require the complete row roster and structurally readable native formulas."""
     parser = _FrontierMath()
     parser.feed(source)
     parser.close()
-    return parser.counts()
+    return parser.counts(prose_formulas=prose_formulas)
 
 
 @cache
 def frontier_math_counts() -> tuple[int, int]:
     """Native and total formulas from every canonical frontier row and its prose."""
-    return count_frontier_math(html("frontier.html"))
+    # Atlas adds two introductory formulas before the survey's nine.
+    return count_frontier_math(html("atlas.html"), prose_formulas=11)
 
 
 def served(name: str) -> str:
@@ -243,10 +244,22 @@ def result_bodies() -> dict[str, str]:
     }
 
 
+def case_records(only: tuple[int, ...] | None = None) -> dict[str, str]:
+    """Canonical record files, all by default or a normalized, cached fixture subset."""
+    selected = None if only is None else tuple(sorted(set(only)))
+    return _case_records(selected)
+
+
 @cache
-def case_records() -> dict[str, str]:
-    """Every case's record file (`render_overview.case_records`), by served name."""
-    return {record.name: record.html for record in render_overview.case_records()}
+def _case_records(only: tuple[int, ...] | None) -> dict[str, str]:
+    from devtools import render_case_pages  # noqa: PLC0415
+
+    records = (
+        render_overview.case_records()
+        if only is None
+        else render_case_pages.case_records(only=only)
+    )
+    return {record.name: record.html for record in records}
 
 
 @cache

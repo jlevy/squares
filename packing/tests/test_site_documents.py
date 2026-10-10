@@ -174,8 +174,8 @@ def _record_context(base: str = "") -> LinkContext:
         ),
         # Any other text is the page that shows what the register or the table holds.
         ('<a href="packing/frontier/RESULTS.md">results register</a>', "", "all-results.html"),
-        ('<a href="packing/frontier/STATUS.md">status table</a>', "", "frontier.html"),
-        ('<a href="STATUS.md">the status table</a>', "packing/frontier", "frontier.html"),
+        ('<a href="packing/frontier/STATUS.md">status table</a>', "", "atlas.html"),
+        ('<a href="STATUS.md">the status table</a>', "packing/frontier", "atlas.html"),
         # A code span naming the file is about the file, which is on `main`.
         (
             '<a href="packing/frontier/RESULTS.md"><code>frontier/RESULTS.md</code></a>',
@@ -264,7 +264,7 @@ def test_a_forwarder_stands_at_each_address_a_page_used_to_have() -> None:
         physical = (
             destination if external else posixpath.relpath(destination, posixpath.dirname(old))
         )
-        target = "cases/" if old == "cases.html" else physical
+        target = physical
         canonical = destination if external else render_overview.canonical_url(destination)
         page = forwarders[old]
         opening = re.search(r"<html\b[^>]*>", page)
@@ -550,7 +550,7 @@ def test_the_introductions_links_reach_the_sites_own_pages(
     assert re.findall(r'<a href="([^"]+)">([^<]+)</a>', intro) == [
         ("all-results.html#t-060", "T-060"),
         ("all-results.html", "results register"),
-        ("frontier.html", "frontier"),
+        ("atlas.html", "frontier"),
         ("cases/11.html", "case record"),
         ("epistemics.html", "the rungs"),
         (f"{REPO_URL}/blob/{BRANCH}/docs/review.md", "review"),
@@ -570,7 +570,7 @@ def test_only_the_shared_block_has_its_links_rewritten(
         _overview('<p><a href="packing/frontier/STATUS.md">frontier</a></p>')
     )
     intro = out.split(OVERVIEW_INTRO_OPEN, 1)[1].split(OVERVIEW_INTRO_CLOSE, 1)[0]
-    assert intro == '<p><a href="frontier.html">frontier</a></p>'
+    assert intro == '<p><a href="atlas.html">frontier</a></p>'
     assert out.count('<a href="packing/frontier/RESULTS.md">outside the block</a>') == 3
     assert "recent-progress" not in out
 

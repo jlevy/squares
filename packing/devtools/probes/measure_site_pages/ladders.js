@@ -79,7 +79,10 @@
           overflow: meaning ? Math.max(0, meaning.scrollHeight - meaning.clientHeight) : 0,
           beside: (words?.left ?? 0) >= (chip?.getBoundingClientRect().right ?? 0),
           clear: round((words?.left ?? 0) - (chip?.getBoundingClientRect().right ?? 0)),
-          title: chip?.getAttribute("title") ?? "",
+          title:
+            chip?.getAttribute("title") ??
+            chip?.getAttribute("data-site-tooltip")?.replace(/^[SVC][^:]*: /, "") ??
+            "",
           parts: cell.querySelector(".site-ladders-rung")?.children.length ?? 0,
         };
       });

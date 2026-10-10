@@ -259,6 +259,12 @@ def test_the_hover_transition_is_one_token_declared_once() -> None:
     assert 120 <= int(motion["--site-hover-duration"].removesuffix("ms")) <= 160
     assert motion["--site-hover-easing"] == "ease-out"
     assert still["--site-hover-duration"] == "0ms"
+    header = {
+        context: declarations["--site-header-duration"]
+        for context, selectors, declarations in _sheet(render_overview.SITE_NAV_CSS)
+        if selectors == [":root"] and "--site-header-duration" in declarations
+    }
+    assert header == {"": "180ms", "@media (prefers-reduced-motion: reduce)": "0ms"}
     assert f"--kpress-transition-fast: {TIMING};" in nav
     for sheet in SHEETS:
         if sheet != render_overview.SITE_NAV_CSS:
@@ -271,11 +277,15 @@ def test_every_transition_is_the_token_or_one_property_on_its_timing() -> None:
     """A colour eases on the token alone, never listed beside anything, so it composes
     under reduced motion, where the token is `none`; anything else a hover moves, an
     arrow's nudge or an icon's fade, names its one property on the token's timing. No
-    transition names a time of its own or `all`."""
+    transition names a time of its own or `all`. The scroll-driven header uses its
+    separate travel token, verified above, rather than the hover timing."""
     for sheet in SHEETS:
         for _, selectors, declarations in _sheet(sheet):
             value = declarations.get("transition")
             if value is None or value in {"none", TOKEN}:
+                continue
+            if sheet == render_overview.SITE_NAV_CSS and selectors == [".site-headroom"]:
+                assert value == "transform var(--site-header-duration) ease-out"
                 continue
             for entry in (" ".join(part.split()) for part in value.split(",")):
                 name, _, timing = entry.partition(" ")
@@ -336,7 +346,7 @@ def test_the_hover_contract_reads_selectors_as_written() -> None:
 def frontier(tmp_path_factory: pytest.TempPathFactory) -> str:
     """The frontier page, written with its assets where a browser can open it."""
     root = tmp_path_factory.mktemp("hover-motion")
-    return site_renders.write(root, "frontier.html")["frontier.html"].as_uri()
+    return site_renders.write(root, "atlas.html")["atlas.html"].as_uri()
 
 
 @pytest.fixture(scope="module")

@@ -11,6 +11,7 @@ filters on top while `overview/row-popover.js` makes the whole row the control.
 from __future__ import annotations
 
 import base64
+import gzip
 import html
 import itertools
 import json
@@ -19,6 +20,7 @@ import re
 import textwrap
 from collections.abc import Collection, Iterable, Mapping, Sequence
 from datetime import date, timedelta
+from decimal import Decimal
 from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
@@ -72,7 +74,11 @@ def _fill(rung: str) -> str:
 def _rung(label: str) -> str:
     """A rung chip as a table prints it. The rung's full meaning is the title of the
     diagram's chip (`_ladder_cell`), where the rubric is explained once."""
-    return f'<span class="site-chip site-rung-fill" {_fill(label)}>{_esc(label)}</span>'
+    meaning = rung_meanings()[label]
+    return (
+        f'<span class="site-chip site-rung-fill" title="{_esc(meaning)}" '
+        f"{_fill(label)}>{_esc(label)}</span>"
+    )
 
 
 #: The significance ladder's top rung, the most bars its mark draws.
@@ -727,9 +733,13 @@ class FilterDefaults(NamedTuple):
     hide_superseded: bool = False
 
 
-#: The overview's Recent Results: what matters most, from the last half year, and of
+#: The overview's Recent Major Results: S4 or higher from the last half year, and of
 #: that only what nothing has superseded.
-RECENT_DEFAULTS = FilterDefaults(significance=3, max_age=180, hide_superseded=True)
+RECENT_DEFAULTS = FilterDefaults(significance=4, max_age=180, hide_superseded=True)
+
+#: The homepage writes this many eligible rows, rather than hiding the rest of the
+#: register in its DOM. The complete Results page remains the filtering surface.
+RECENT_LIMIT = 12
 
 #: The results page: every result, of any significance, any age and any standing.
 RESULTS_DEFAULTS = FilterDefaults()
@@ -1067,6 +1077,16 @@ def retired_result_aliases() -> dict[str, str]:
     }
 
 
+def all_results_link_attributes(overview: Overview) -> str:
+    """Keep query state and retired result fragments on the homepage's Results link."""
+    retired = json.dumps(retired_result_aliases(), separators=(",", ":"))
+    return (
+        "data-all-results "
+        f'data-result-ids="{_esc(" ".join(r.id.lower() for r in overview.results))}" '
+        f'data-retired-results="{_esc(retired)}"'
+    )
+
+
 def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool) -> str:
     """The complete results table or the overview's static recent selection.
 
@@ -1085,8 +1105,9 @@ def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool
         results = [
             result for result in results if shown_by_default(result, defaults, reference)
         ]
+    if not here:
+        results = results[:RECENT_LIMIT]
     aliases = retired_result_aliases()
-    retired = json.dumps(aliases, separators=(",", ":")) if not here else ""
     notices = (
         "".join(
             f'<p class="site-withdrawn-result" id="{_esc(name)}">'
@@ -1107,23 +1128,13 @@ def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool
         popovers.append(popover)
     return (
         '<div class="site-wide">'
-        + (
-            result_filters(overview, results, defaults)
-            if here
-            else f'<p class="site-recent-scope">{len(results)} recent results of significance '
-            "S3 or higher, "
-            "from the last 180 days, excluding superseded results. "
-            '<a href="all-results.html" data-all-results '
-            f'data-result-ids="{_esc(" ".join(r.id.lower() for r in overview.results))}" '
-            f'data-retired-results="{_esc(retired)}">'
-            "Browse and filter every "
-            "result</a>.</p>"
-        )
+        + (result_filters(overview, results, defaults) if here else "")
         + '<div class="site-table-wrap">'
         '<table class="kpress-table site-table site-results" data-site-table>'
         f"{result_head()}"
         f"<tbody>{''.join(body)}</tbody></table></div>"
-        f"{rung_legend(here=here)}{notices}{''.join(popovers)}</div>"
+        f"{rung_legend(here=here, heading='Legend' if not here else '')}"
+        f"{notices}{''.join(popovers)}</div>"
     )
 
 
@@ -1131,7 +1142,7 @@ def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool
 LADDERS_SECTION = "verification-ladders"
 
 
-def rung_legend(*, here: bool) -> str:
+def rung_legend(*, here: bool, heading: str = "") -> str:
     """The legend under a table of results, boxed, three short lines: every significance
     mark, S1 to S5; every verification and confirmation chip, V0 to C5; and the star,
     with a link to where the ladders define each rung in full, on the results page
@@ -1139,7 +1150,8 @@ def rung_legend(*, here: bool) -> str:
     meaning. It took the place, on 2026-10-03, of the whole ladder grid the overview
     set under its table (the owner, `think-42dx`), and stood between the table's bar and
     the table until 2026-10-04, when the owner moved it under the table in a box of its
-    own, so it reads as a legend and not as more of the filters."""
+    own, so it reads as a legend and not as more of the filters. An optional heading
+    names the homepage's whole-card link; the complete Results legend keeps its layout."""
     meanings = rung_meanings()
     levels = rubric_levels()
 
@@ -1155,7 +1167,7 @@ def rung_legend(*, here: bool) -> str:
         significance_mark(level, meanings[f"S{level}"]) for level, _ in sorted(levels["S"])
     )
     href = f"#{LADDERS_SECTION}" if here else f"{RESULTS_PAGE}#{LADDERS_SECTION}"
-    star = f'<span class="site-star" aria-hidden="true">{STAR}</span>'
+    star = f'<span class="site-star" aria-hidden="true" title="{NEW_RESULT}">{STAR}</span>'
 
     def group(scale: str, shown: str) -> str:
         return (
@@ -1165,10 +1177,33 @@ def rung_legend(*, here: bool) -> str:
 
     # The star's words are a span of their own: no shipped face carries the star, and a
     # run that held both would be drawn, and measured, as the star's host face.
+    title = f'<h2 class="site-rung-legend-heading">{_esc(heading)}</h2>' if heading else ""
+    checks = (
+        f"<p>{group('V', chips('V'))}</p><p>{group('C', chips('C'))}</p>"
+        if heading
+        else f"<p>{group('V', chips('V'))} {group('C', chips('C'))}</p>"
+    )
+    if heading:
+
+        def row(label: str, shown: str) -> str:
+            return (
+                f'<p><span class="site-rung-legend-icons">{shown}</span>'
+                f'<span class="site-rung-legend-name">{_esc(label)}</span></p>'
+            )
+
+        return (
+            '<a class="site-card site-card-link site-rung-legend" '
+            f'data-card-size="medium" data-go="page" href="{href}" '
+            'aria-label="Legend: what the significance, verification and confirmation '
+            'ratings mean">'
+            f"{title}{row(names['S'], marks)}{row(names['V'], chips('V'))}"
+            f"{row(names['C'], chips('C'))}{row(NEW_RESULT, star)}</a>"
+        )
     return (
         '<div class="site-rung-legend" role="note" aria-label="What a row\u2019s marks mean">'
+        f"{title}"
         f"<p>{group('S', marks)}</p>"
-        f"<p>{group('V', chips('V'))} {group('C', chips('C'))}</p>"
+        f"{checks}"
         f'<p><span class="site-rung-legend-group">{star} <span>{NEW_RESULT}</span></span> '
         f'<a href="{href}">What each rung means</a></p>'
         "</div>"
@@ -1476,10 +1511,11 @@ def status_chips(result: Result) -> str:
 
 
 def recent_table(overview: Overview, defaults: FilterDefaults = RECENT_DEFAULTS) -> str:
-    """The overview's Recent Results: the results page's table (`table_of_results`), its
-    bar starting at the recent defaults. The line under it, "See all results", links to
-    the other table, as a status line's superseding results do, each to its row there
-    (`supersession_marks`)."""
+    """The homepage's bounded preview, using the complete table's rows and popovers.
+
+    Only the newest `RECENT_LIMIT` eligible results are emitted; the complete table
+    keeps all rows and owns their filters and fragment addresses.
+    """
     return table_of_results(overview, defaults, here=False)
 
 
@@ -1527,7 +1563,7 @@ DOCUMENTS: tuple[tuple[str, str, str], ...] = (
     (repo_links.EPISTEMICS, "Epistemics", "How each result is verified, confirmed and scored."),
     (
         repo_links.SYNOPSIS,
-        "The synopsis",
+        "The Synopsis",
         "The full research record: methods, claims and status.",
     ),
     (repo_links.CONVENTIONS, "Conventions", "Record formats, identifiers and naming."),
@@ -1555,6 +1591,16 @@ def document_cards() -> str:
     )
 
 
+def documentation_block() -> str:
+    """The shared repository introduction and reader-document cards on Home and About."""
+    lead = (
+        "<p>The code, the certificates, the literature archive and the documents that "
+        "record all of this live in the Squares Project\u2019s "
+        f'<a href="{repo_links.REPO_URL}">repository</a>.</p>'
+    )
+    return f"{lead}\n\n{document_cards()}"
+
+
 class Paper(NamedTuple):
     """One of the site's papers, as its card says what it is: where it is served, a caps
     label naming it, its title, one or two sentences on what it is, and the size of its
@@ -1572,20 +1618,21 @@ class Paper(NamedTuple):
 
 #: What each part of the n = 11 series says of itself on its cards and in README, by
 #: slug, in the words of the series plan (`docs/project/specs/active/
-#: plan-2026-10-05-n11-explainer-series.md`, Series Presentation): each title is its
-#: renderer's (`render_overview.PAPERS`) in sentence case, and each line names the result
+#: plan-2026-10-05-n11-explainer-series.md`, Series Presentation): each title presents
+#: its renderer's title (`render_overview.PAPERS`) in Chicago Title Case, preserving
+#: mathematical notation, and each line names the result
 #: the paper proves or explains. Part III's line says what T-060's rungs allow, `V3/C3`:
 #: a proof, machine-checked here with its review record pending, never a formal one.
 SERIES_CARDS: dict[str, tuple[str, str]] = {
     N11_LOWER_BOUNDS_EXPLAINER: (
-        "New lower bounds for square packing for n = 11",
+        "New Lower Bounds for Square Packing for n = 11",
         (
             "How weighted points and 2-of-3 threshold atoms prove T-018, T-025 and T-026, "
             "s(11) >= 3.8264\u2026, with interactive figures."
         ),
     ),
     N11_THRESHOLD_BOUND_REVIEW: (
-        "A review of the certified lower bound s(11) > 31/8 for 11 squares",
+        "A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares",
         (
             "Explains Kleddamag\u2019s proof that s(11) > 31/8 (T-037): five-site k-of-m "
             "charges, k-of-m charges on shrunken parents with strict cores, and a "
@@ -1593,7 +1640,7 @@ SERIES_CARDS: dict[str, tuple[str, str]] = {
         ),
     ),
     N11_OPTIMALITY_REVIEW: (
-        "A review of the optimality proof of the Trump packing of 11 squares",
+        "A Review of the Optimality Proof of the Trump Packing of 11 Squares",
         (
             "Explains Ahmed\u2019s proof that Trump\u2019s packing is optimal, "
             "s(11) = 3.8770835\u2026 (T-060): construction, case exclusions, capture and "
@@ -1629,7 +1676,7 @@ PAPERS: tuple[Paper, ...] = (
     Paper(
         href=paper_path(PACKING_METHODS),
         label=paper_record(PACKING_METHODS).label,
-        title="How record square packings are found",
+        title=paper_record(PACKING_METHODS).title,
         description=(
             "How seeds, search, local refinement and exact checks produce record upper bounds."
         ),
@@ -1637,7 +1684,7 @@ PAPERS: tuple[Paper, ...] = (
     Paper(
         href="tutorial.html",
         label="Tutorial",
-        title="Square packing from first principles",
+        title="Square Packing from First Principles",
         description=(
             "An introduction for anyone new to the problem: what the objects are, why the "
             "approach is shaped the way it is, and what the research has and has not "
@@ -1673,6 +1720,22 @@ def paper_cards() -> str:
     )
 
 
+def project_card() -> str:
+    """The compact project introduction and its retained homepage fragment."""
+    return (
+        '<div class="site-project-card" id="the-squares-project">'
+        + link_card(
+            "about.html",
+            "About",
+            "The Squares Project",
+            "New bounds, independent verification, and open collaboration on square packing.",
+            size="small",
+            new_tab=False,
+        )
+        + "</div>"
+    )
+
+
 #: The site's reading and working pages, as the overview's cards under The Squares
 #: Project show them: the page, a label, its title, and one line on what a reader finds
 #: there. Both are register prose, so a bound in either is written in ASCII
@@ -1686,22 +1749,22 @@ def paper_cards() -> str:
 #: The Results page is reached from Recent Results, whose pointer is its own.
 PAGES: tuple[tuple[str, str, str, str], ...] = (
     (
-        "frontier.html",
-        "Frontier survey",
-        "Every case from n = 1 to 324",
+        "atlas.html#the-frontier-survey",
+        "Frontier Survey",
+        "Every Case from n = 1 to 324",
         "Reported and verified bounds side by side, with their sources.",
     ),
     *((paper.href, paper.label, paper.title, paper.description) for paper in PAPERS[:-1]),
     (
         "tutorial.html",
         "Tutorial",
-        "Square packing from first principles",
+        "Square Packing from First Principles",
         "The problem, its configuration space, exact algebra and the search.",
     ),
     (
         "workbench/",
         "Workbench",
-        "Pack squares by hand",
+        "Pack Squares by Hand",
         "Move squares yourself and watch the known packings.",
     ),
 )
@@ -1727,21 +1790,29 @@ def page_cards() -> str:
     )
 
 
-#: The case drawn large under the homepage's title.
+#: The representative packing retained by the site's social card.
 HERO_CASE = 53
+#: The homepage's native packing examples, in reading order.
+HERO_CASES = (HERO_CASE,)
 
 
 def hero() -> str:
-    """The homepage's picture: one known-best packing, drawn from its atlas rendering
-    and linked to its row in the frontier atlas."""
+    """The representative native packing with its shared case popover."""
+    from devtools.render_case_pages import case_url  # noqa: PLC0415
     from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
 
-    n = HERO_CASE
-    return (
-        f'<figure class="site-hero-figure"><a href="frontier.html#n-{n}" '
-        f'aria-label="The best packing known for {n} squares, in the frontier survey">'
+    links = "".join(
+        f'<a href="{case_url(n)}" data-case="{n}" '
+        f'aria-label="The best packing known for {n} squares: packing and bounds">'
         f"{packing_svg(n, units=1000)}</a>"
-        f"<figcaption>The best packing known for {n} squares</figcaption></figure>"
+        for n in HERO_CASES
+    )
+    return (
+        '<figure class="site-hero-figure"><div class="site-hero-packings">'
+        f"{links}</div>"
+        "<figcaption>Best known packing for 53 identical squares. "
+        "Colors indicate angle. Darker colors mean more common shared faces.</figcaption>"
+        "</figure>"
     )
 
 
@@ -1950,7 +2021,7 @@ CATALOGUE_SITES: tuple[tuple[str, str, str, str], ...] = (
 OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
     (
         "https://github.com/jlevy/squares/issues/401#issuecomment-6031977107",
-        "SQUISH packing of 153 squares",
+        "SQUISH Packing of 153 Squares",
         "Nate Chaoweeraprasit",
         "The supplemental rational certificate submitted with the SQUISH packings.",
     ),
@@ -2393,15 +2464,14 @@ def other_project_cards(overview: Overview) -> str:
 #: The page the atlas's film card opens: the film alone, at full size.
 VISUALIZE_PAGE = "visualize.html"
 
-#: The atlas's three direct cards, the overview's PDFs and Videos section: where each
+#: The posters and film available from the homepage: where each
 #: goes, the picture heading it (a file served beside the page), its label, value and
-#: note. A label says what the card is and the form it opens in, which are the section
-#: heading's two words: a poster is a PDF, the film a video.
+#: note. PDF cards also belong to Papers; the film opens Visualize.
 ATLAS_CARDS: tuple[tuple[str, str, str, str, str], ...] = (
     (
         "square-packings-100-20261008.pdf",
         "known-best-1-100-card.png",
-        "Poster \u00b7 PDF",
+        "PDF",
         "n = 1 to 100",
         (
             "The first hundred, each labelled with its best-known side and, where the case is "
@@ -2411,15 +2481,15 @@ ATLAS_CARDS: tuple[tuple[str, str, str, str, str], ...] = (
     (
         "square-packings-324-20261008.pdf",
         "known-best-1-324.png",
-        "Poster \u00b7 PDF",
+        "PDF",
         "n = 1 to 324",
         ("Every tracked case as its best-known packing, arranged in a triangle on one sheet."),
     ),
     (
         VISUALIZE_PAGE,
         "ascent-n1-324-poster.png",
-        "Film \u00b7 Video",
-        "The ascent to n = 324",
+        "Video",
+        "The Ascent to n = 324",
         (
             "The atlas built one square at a time, each step naming the bound it reaches and "
             "its source. 8\u00a0m\u00a014\u00a0s."
@@ -2428,10 +2498,13 @@ ATLAS_CARDS: tuple[tuple[str, str, str, str, str], ...] = (
 )
 
 
-def atlas_cards() -> str:
-    """The atlas's posters and film as three cards side by side, each headed by its
-    picture and itself the link: a poster opens its PDF, the film its own page. They
-    are the overview's PDFs and Videos section, after Recent Results."""
+#: The print sheets and the film are separate groups on the homepage.
+PDF_CARD_SPECS = ATLAS_CARDS[:2]
+VIDEO_CARD_SPEC = ATLAS_CARDS[2]
+
+
+def _media_cards(specs: Sequence[tuple[str, str, str, str, str]]) -> str:
+    """Direct media links with their existing thumbnails, labels and descriptions."""
     return _cards(
         [
             link_card(
@@ -2442,8 +2515,38 @@ def atlas_cards() -> str:
                 hero=hero,
                 size=SECTION_CARD_SIZES["atlas"],
             )
-            for href, hero, label, value, note in ATLAS_CARDS
+            for href, hero, label, value, note in specs
         ]
+    )
+
+
+def pdf_cards() -> str:
+    """Both poster PDFs, shared by the homepage and Papers."""
+    return _media_cards(PDF_CARD_SPECS)
+
+
+def homepage_video(film_url: str) -> str:
+    """The existing ascent film, started only through the reader's native controls."""
+    return (
+        '<figure class="site-film-frame site-homepage-film">'
+        '<video class="site-film" controls playsinline preload="none" '
+        f'width="1920" height="1080" poster="{VIDEO_CARD_SPEC[1]}" '
+        'aria-label="The atlas built one unit square at a time, from n = 1 to n = 324.">'
+        f'<source src="{_esc(film_url)}" type="video/mp4; codecs=&quot;avc1.640028&quot;">'
+        f'<a href="{_esc(film_url)}">The film of the ascent from 1 to 324</a>.'
+        "</video></figure>"
+    )
+
+
+def pdf_note() -> str:
+    """Retained SVG/source links, for the Papers page's PDFs."""
+    atlas = REPO / "packing" / "atlas" / "known-best"
+    return (
+        '<p class="site-wide site-atlas-note">Each poster is also an SVG '
+        f'(<a href="{branch_file(atlas / "known-best-1-100.svg")}">1 to 100</a>, '
+        f'<a href="{branch_file(atlas / "known-best-1-324.svg")}">1 to 324</a>), '
+        f'and the <a href="{branch_file(atlas / "README.md")}">atlas README</a> '
+        "describes them all.</p>"
     )
 
 
@@ -2553,9 +2656,18 @@ def atlas_film_facts() -> list[dict[str, object]]:
 
 #: The directions of the site's one arrow (paper-design.md, Arrows): each is the one
 #: drawing, `--site-arrow` in site.css, turned or mirrored by `data-arrow`.
-#: The arrow's five directions, and the double chevron's two: `double-down` for a control
-#: that shows more below, `double-up` for one that shows less.
-ARROW_DIRECTIONS = ("right", "left", "down", "up", "external", "double-down", "double-up")
+#: The arrow's five directions, the double chevron's two (`double-down` to show more,
+#: `double-up` to show less), and the down arrow onto a line for a download.
+ARROW_DIRECTIONS = (
+    "right",
+    "left",
+    "down",
+    "up",
+    "external",
+    "double-down",
+    "double-up",
+    "download",
+)
 
 
 def arrow_icon(direction: str = "right") -> str:
@@ -2572,9 +2684,9 @@ def arrow_icon(direction: str = "right") -> str:
 #: address's `?atlas=` take, and the tab's label. The default is independent of tab
 #: order; `overview/atlas-view.js` selects the view the address asks for.
 ATLAS_VIEWS: tuple[tuple[str, str], ...] = (("grid", "Grid"), ("triangle", "Triangle"))
-
 #: The view a plain address opens, also rendered in the first response.
-ATLAS_VIEW = "triangle"
+ATLAS_DEFAULT = "triangle"
+ATLAS_VIEW = ATLAS_DEFAULT
 
 #: The atlas's three sizes of tile, in tab order: the key the block's `data-atlas-size`
 #: and the address's `?size=` take, and the tab's label. Medium is the size the atlas had
@@ -2617,8 +2729,12 @@ ATLAS_REGULARIZED = "regularized"
 
 
 def atlas_star() -> str:
-    """The shared recent-result star, hidden where an accessible label names it."""
-    return f'<span class="site-star" aria-hidden="true">{STAR}</span>'
+    """The new-result star on a tile: the site's one star (`STAR`, `.site-star`), as the
+    frontier table's Recent column and the tables of results draw it, after the case's
+    number. It is hidden from assistive technology because the tile's name ends with
+    what it says, "new result" (`NEW_RESULT`), as a starred row's name does
+    (`result_row`); the same words provide its tooltip."""
+    return f'<span class="site-star" aria-hidden="true" title="{NEW_RESULT}">{STAR}</span>'
 
 
 def atlas_regularized() -> tuple[int, ...]:
@@ -2725,6 +2841,7 @@ def _atlas_cell(
     status: str,
     *,
     regularized: bool = False,
+    new: bool = False,
     side: float | None = None,
     grid_from: int | None = None,
     segment: PackingSegment | None = None,
@@ -2733,7 +2850,7 @@ def _atlas_cell(
 
     The first retained grid packing in a square-bound row identifies its grid
     suffix for layout and accessibility. Derived drawing provenance stays in the atlas
-    index. Recency indicators belong to the individual case records.
+    index. A star marks any recent displayed contribution to the case.
     """
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.render_case_pages import case_url  # noqa: PLC0415
@@ -2753,12 +2870,14 @@ def _atlas_cell(
     )
     drawing = frontier.drawing_img(n, regularized=regularized, size=ATLAS_UNITS)
     meaning = f", first grid packing in row {row}" if first_grid else ""
-    name = f"n = {n}, {_esc(status)}{meaning}"
+    star = atlas_star() if new else ""
+    recent_name = f", {NEW_RESULT}" if new else ""
+    name = f"n = {n}, {_esc(status)}{meaning}{recent_name}"
     return (
-        f'<a class="site-atlas-cell" href="{case_url(n)}" data-case="{n}" '
+        f'<a class="site-atlas-cell" id="atlas-n-{n}" href="{case_url(n)}" data-case="{n}" '
         f'data-atlas-n="{n}" data-atlas-side="{side}"{square}{grid}{reference} '
         f'data-status="{_esc(status)}" aria-label="{name}"{position}>'
-        f'{drawing}<span class="site-atlas-n">{n}</span></a>'
+        f'{drawing}<span class="site-atlas-n">{n}{star}</span></a>'
     )
 
 
@@ -2954,6 +3073,7 @@ def atlas_grid() -> str:
     transitions = grid_transitions(manifest["atlas"]["entries"])
     sides = atlas_enclosing_sides()
     by_n = {case["n"]: case for case in cases}
+    recent = recent_contributions_by_case()
     rows: list[str] = []
     for transition in transitions:
         groups: list[str] = []
@@ -2963,6 +3083,7 @@ def atlas_grid() -> str:
                     n,
                     by_n[n]["status"],
                     regularized=n in regularized,
+                    new=recent[n].any,
                     side=sides[n],
                     grid_from=transition.grid.first_n,
                     segment=segment,
@@ -2996,7 +3117,8 @@ def atlas_grid() -> str:
     name_less = f"Show less: the first {ATLAS_FIRST}"
     return (
         f'<div class="site-wide site-atlas-grid" data-atlas-view="{ATLAS_VIEW}" '
-        f'data-atlas-size="{ATLAS_SIZE}" data-atlas-scale="{ATLAS_SCALE}" data-atlas-grid>'
+        f'data-atlas-size="{ATLAS_SIZE}" data-atlas-scale="{ATLAS_SCALE}" '
+        f'data-atlas-first="{ATLAS_FIRST}" data-atlas-grid>'
         '<div class="site-atlas-controls" data-atlas-controls>'
         f"{atlas_view_tabs()}{atlas_size_tabs()}{atlas_scale_tabs()}"
         f"{atlas_legend()}</div>"
@@ -3004,8 +3126,13 @@ def atlas_grid() -> str:
         f"{''.join(rows[:first_rows])}"
         '<div class="site-atlas-rest" data-atlas-rest hidden>'
         f"{''.join(rows[first_rows:])}</div></div>"
-        '<noscript><p><a href="cases/">All case records</a> · '
-        '<a href="frontier.html">Every packing and bound in the frontier '
+        "<noscript><style>[data-atlas-grid] .site-atlas-rest[hidden]{display:contents}"
+        ".kpress .site-page [data-atlas-grid] .site-atlas-cells{--site-atlas-widest:35;"
+        "--site-atlas-extra:var(--site-atlas-last-extra);"
+        "--site-atlas-global-side:var(--site-atlas-last-side)}"
+        "[data-atlas-grid] .site-atlas-toggle-row{display:none}</style>"
+        "<p>"
+        '<a href="atlas.html#the-frontier-survey">Every packing and bound in the frontier '
         "survey</a></p></noscript>"
         # The triangle's one-line key ("Each row ends at a perfect square…") stood here
         # and the line under the expander ("Every case from n = 1 to 324 is also in the
@@ -3019,4 +3146,155 @@ def atlas_grid() -> str:
         f'data-name-more="{name_more}" data-name-less="{name_less}">'
         f"<span data-atlas-label>{more}</span>{arrow_icon('double-down')}</button></p>"
         f"</div>{case_popover()}"
+    )
+
+
+#: The homepage starts with six mathematical square rows, then ten, then all eighteen.
+ATLAS_PREVIEW_ROWS = 6
+ATLAS_COMPOSITE = REPO / "packing" / "atlas" / "known-best" / "known-best-1-324.svg"
+
+
+def _web_atlas_graphic(source: str) -> str:
+    """Prepare native card drawings, their number and applicable star for the web.
+
+    Read the poster as XML: its compact serialization and triangular row positions
+    are independent of the website. Each card supplies its actual crop from the
+    enclosing frame. Auxiliary badges and labels stay in the scientific source only.
+    """
+    from devtools.build_known_best_atlas import (  # noqa: PLC0415
+        SUMMARY_CARD_WIDTH,
+        SUMMARY_PACKING_INSET_X,
+        SUMMARY_PACKING_INSET_Y,
+        SUMMARY_ROW_PITCH,
+        SUMMARY_STAR_POINTS,
+        _append_star,  # pyright: ignore[reportPrivateUsage]
+        _star_center_y,  # pyright: ignore[reportPrivateUsage]
+        _star_scale,  # pyright: ignore[reportPrivateUsage]
+        _text_width,  # pyright: ignore[reportPrivateUsage]
+    )
+    from sqpack.render.numbers import format_svg_number  # noqa: PLC0415
+
+    namespace = "http://www.w3.org/2000/svg"
+    ET.register_namespace("", namespace)
+    original = ET.fromstring(source)
+    prepared = ET.Element(
+        f"{{{namespace}}}svg",
+        {
+            key: value
+            for key, value in original.attrib.items()
+            if key in ("width", "height", "viewBox")
+        },
+    )
+    recent = recent_contributions_by_case()
+    cards = [
+        element for element in original.iter() if element.get("data-feature") == "packing-card"
+    ]
+    if [int(card.attrib["data-n"]) for card in cards] != list(range(1, 325)):
+        raise SystemExit(
+            "The retained Atlas must contain one ordered card for each of 324 cases"
+        )
+    for card in cards:
+        # Poster provenance stays in its scientific source; the browser needs only
+        # card identity and crop metadata. Keep every drawing attribute intact.
+        card.attrib = {key: card.attrib[key] for key in ("data-feature", "data-n")}
+        frame = next(
+            (element for element in card if element.get("data-feature") == "container-outline"),
+            None,
+        )
+        label = next(
+            (element for element in card if element.get("data-feature") == "packing-label"),
+            None,
+        )
+        if frame is None or label is None:
+            raise SystemExit("The retained Atlas card is missing its enclosing frame or number")
+        left = Decimal(frame.attrib["x"]) - SUMMARY_PACKING_INSET_X
+        top = Decimal(frame.attrib["y"]) - SUMMARY_PACKING_INSET_Y
+        card.set(
+            "data-homepage-atlas-viewbox",
+            " ".join(
+                map(format_svg_number, (left, top, SUMMARY_CARD_WIDTH, SUMMARY_ROW_PITCH))
+            ),
+        )
+        for parent in card.iter():
+            for element in list(parent):
+                if (
+                    element.tag == f"{{{namespace}}}text" and element is not label
+                ) or element.get("data-feature") == "evidence-badge":
+                    parent.remove(element)
+        n = int(card.attrib["data-n"])
+        size = label.attrib["font-size"]
+        # Use the served site face with the retained number advance. Leave half an
+        # em before the star's left edge, including at small hinted glyph sizes.
+        number_width = _text_width(str(n), size)
+        label.set("font-family", "var(--kpress-font-sans)")
+        label.set("textLength", format_svg_number(number_width))
+        label.set("lengthAdjust", "spacingAndGlyphs")
+        if recent[n].any:
+            star_half_width = max(abs(dx) for dx, _dy in SUMMARY_STAR_POINTS) * _star_scale(
+                size
+            )
+            _append_star(
+                card,
+                center_x=(
+                    Decimal(label.attrib["x"])
+                    + number_width
+                    + Decimal(size) / 2
+                    + star_half_width
+                ),
+                center_y=_star_center_y(Decimal(label.attrib["y"]), size),
+                feature="release-star",
+                label=NEW_RESULT,
+                scale=_star_scale(size),
+            )
+        prepared.append(card)
+    return ET.tostring(prepared, encoding="unicode")
+
+
+@cache
+def atlas_preview() -> str:
+    """Six native mathematical rows, prepared for the shared Atlas triangle animation.
+
+    The visible cards and inert compressed expansion source share each card's actual
+    native crop. Prepared cards make expansion synchronous without a click-time request.
+    """
+    from devtools.build_known_best_atlas import (  # noqa: PLC0415
+        SUMMARY_CARD_WIDTH,
+        SUMMARY_ROW_PITCH,
+    )
+    from devtools.render_case_pages import case_popover, case_url  # noqa: PLC0415
+
+    source = _web_atlas_graphic(ATLAS_COMPOSITE.read_text(encoding="utf-8"))
+    cards = list(ET.fromstring(source))
+    count = ATLAS_PREVIEW_ROWS**2
+    recent = recent_contributions_by_case()
+    tiles = []
+    for card in cards[:count]:
+        n = int(card.attrib["data-n"])
+        row = math.isqrt(n - 1) + 1
+        viewbox = card.attrib["data-homepage-atlas-viewbox"]
+        left, top, width, height = viewbox.split()
+        name = f"Case {n}: packing and bounds" + (f", {NEW_RESULT}" if recent[n].any else "")
+        tiles.append(
+            f'<a class="site-atlas-cell" href="{case_url(n)}" data-case="{n}" '
+            f'data-atlas-n="{n}" aria-label="{name}" '
+            f'style="--r:{row};--c:{row * row - n};'
+            f'--o:{int(row > 1 and n == (row - 1) ** 2 + 1)}">'
+            '<svg xmlns="http://www.w3.org/2000/svg" '
+            f'width="{SUMMARY_CARD_WIDTH}" height="{SUMMARY_ROW_PITCH}" '
+            f'viewBox="{viewbox}" aria-hidden="true" data-homepage-atlas-svg>'
+            '<rect data-feature="atlas-background" '
+            f'x="{left}" y="{top}" width="{width}" height="{height}" fill="#ffffff" />'
+            f"{ET.tostring(card, encoding='unicode')}</svg></a>"
+        )
+    payload = base64.b64encode(gzip.compress(source.encode("utf-8"), mtime=0)).decode("ascii")
+    return (
+        '<div class="site-wide site-atlas-grid site-homepage-atlas" data-atlas-preview '
+        f'data-atlas-view="triangle" data-atlas-size="medium" data-atlas-count="{count}" '
+        f'data-atlas-card-width="{SUMMARY_CARD_WIDTH}" '
+        f'data-atlas-card-height="{SUMMARY_ROW_PITCH}">'
+        '<div class="site-atlas-cells" id="homepage-atlas-cells" '
+        f'style="--site-atlas-widest:{2 * ATLAS_PREVIEW_ROWS - 1}">'
+        f'{"".join(tiles)}<div class="site-atlas-rest" data-atlas-rest hidden></div></div>'
+        f"<template data-homepage-atlas-gzip>{payload}</template></div>"
+        f"{case_popover()}"
     )

@@ -110,7 +110,7 @@ def test_prepared_record_math_matches_the_surrounding_sans_face(
             "Prepared math matches each surrounding text face.",
             "index.html",
         ),
-        current="frontier",
+        current="atlas",
     )
     render_overview.write_site(tmp_path, [page])
     site_assets.write_assets(tmp_path, site_assets.shared().assets.files())
@@ -133,6 +133,53 @@ def test_prepared_record_math_matches_the_surrounding_sans_face(
         context.close()
         server.shutdown()
         server.server_close()
+
+
+def test_math_settling_counts_pending_kpress_and_requires_present_native_mathml(
+    browser: Browser,
+) -> None:
+    """Native table formulas need no enhancement; their marker alone proves nothing."""
+    from devtools.render_frontier_page import math_html  # noqa: PLC0415
+
+    native = math_html("x^2", native=True)
+    math = '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math>'
+    # This production probe belongs to the devtools tree, not tests/probes.
+    native_pending_name = "preview_site/math_pending"
+    pending = probe(
+        Path(__file__).resolve().parent.parent / "devtools" / "probes",
+        native_pending_name,
+    )
+    cases = (
+        (native, 0),
+        ('<span class="kpress-math" data-site-native-math="frontier"></span>', 1),
+        ('<span class="kpress-math" data-site-native-math="frontier">x</span>', 1),
+        (
+            (
+                '<span class="kpress-math" data-site-native-math="frontier">'
+                '<math xmlns="http://www.w3.org/1998/Math/MathML"></math></span>'
+            ),
+            1,
+        ),
+        (
+            (
+                '<span class="kpress-math" data-site-native-math="frontier">'
+                '<math xmlns="http://www.w3.org/1998/Math/MathML">'
+                "<merror><mtext>bad formula</mtext></merror></math></span>"
+            ),
+            1,
+        ),
+        (f'<span class="kpress-math">{math}</span>', 1),
+        (f'<span class="kpress-math" data-site-native-math="unknown">{math}</span>', 1),
+        ('<span class="kpress-math"><span class="kpress-math-render">x</span></span>', 1),
+        ('<span class="kpress-math" data-kpress-math-rendered="true">x</span>', 0),
+    )
+    page = browser.new_page()
+    try:
+        for body, expected in cases:
+            page.set_content(body)
+            assert page.evaluate(pending) == expected, body
+    finally:
+        page.close()
 
 
 @pytest.mark.parametrize("hidden", ["main", "h1", "math"])
@@ -614,10 +661,10 @@ def test_native_frontier_readability_requires_visible_nonempty_math(
 @pytest.fixture(scope="module")
 def frontier_native_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     root = tmp_path_factory.mktemp("frontier-native-layout")
-    site_renders.write(root, "frontier.html")
+    site_renders.write(root, "atlas.html")
     server = preview_site.serve(root, 0, as_pages=True)
     try:
-        yield f"http://127.0.0.1:{server.server_port}/frontier.html"
+        yield f"http://127.0.0.1:{server.server_port}/atlas.html"
     finally:
         server.shutdown()
         server.server_close()
@@ -681,6 +728,53 @@ def native_frontier_failure(
         indent=2,
         sort_keys=True,
     )
+
+
+def test_atlas_startup_does_not_repeat_full_tile_restyles(
+    browser: Browser, frontier_native_site: str, tmp_path: Path
+) -> None:
+    """Initial placement measures once before its visibility and position writes."""
+    trace = tmp_path / "atlas-startup-native-trace.json"
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    stop_trace = check_site_rendering.record_native_trace(page, trace)
+    try:
+        page.goto(frontier_native_site, wait_until="load")
+        check_site_rendering.wait_for_fonts(page)
+        tiles = page.locator("[data-atlas-grid] .site-atlas-cell").count()
+        assert tiles == 324
+    finally:
+        stop_trace()
+        page.close()
+    events = json.loads(trace.read_text())["traceEvents"]
+    evaluations = [
+        event
+        for event in events
+        if event["name"] == "EvaluateScript"
+        and "atlas-grid." in event.get("args", {}).get("data", {}).get("url", "")
+    ]
+    assert len(evaluations) == 1
+    evaluation = evaluations[0]
+    updates = sorted(
+        (
+            event
+            for event in events
+            if event["name"] == "UpdateLayoutTree"
+            and event["pid"] == evaluation["pid"]
+            and event["tid"] == evaluation["tid"]
+            and evaluation["ts"] <= event["ts"]
+            and event["ts"] + event.get("dur", 0) <= evaluation["ts"] + evaluation["dur"]
+        ),
+        key=lambda event: event["ts"],
+    )
+    assert updates, "Atlas startup trace has no attributable style update"
+    counts = []
+    for update in updates:
+        count = update.get("args", {}).get("elementCount")
+        assert type(count) in (int, float), update
+        counts.append(count)
+    # Initial native layout is unavoidable. Subsequent token reads may settle small
+    # tab boxes, but must not repeatedly flush the tiles after placement writes.
+    assert max(counts[1:], default=0) < tiles, counts
 
 
 @pytest.mark.parametrize(
@@ -1019,7 +1113,7 @@ def test_frontier_native_radical_paints_hook_and_bar_and_rejects_text_font(
                     )
                     route.fulfill(response=response, body=damaged)
 
-                context.route("**/frontier.html", text_font)
+                context.route("**/atlas.html", text_font)
             page = context.new_page()
             page.emulate_media(media=media)
             page.goto(frontier_native_site, wait_until="load")

@@ -122,8 +122,12 @@
       const n = digits === undefined ? "" : String(Number(digits));
       if (known.split(",").includes(n)) {
         url.searchParams.delete("n");
-        const hash = fragment === undefined ? url.hash : "";
-        window.location.replace(`cases/${n}.html${url.search}${hash}`);
+        // A named record section keeps its canonical record destination. Plain
+        // selectors use the Atlas survey row, whose fragment overrides its filters.
+        const recordSection = query !== null && fragment === undefined && url.hash !== "";
+        const target = recordSection ? moved.replace(/atlas\.html$/, `cases/${n}.html`) : moved;
+        const hash = recordSection ? url.hash : `#n-${n}`;
+        window.location.replace(`${target}${url.search}${hash}`);
         return;
       }
     }
@@ -132,14 +136,27 @@
     return;
   }
   const fragment = window.location.hash.slice(1);
-  if (!fragment) {
-    return;
-  }
   let id = fragment;
   try {
     id = decodeURIComponent(fragment);
   } catch {
     // A malformed escape cannot name an element here either.
+  }
+  if (document.querySelector("[data-atlas-preview]")) {
+    if (
+      new URLSearchParams(window.location.search).has("atlas") ||
+      ["the-atlas", "the-atlas-of-square-packings"].includes(id)
+    ) {
+      forward("atlas.html");
+      return;
+    }
+    if (id === "squares-project-documentation" && !document.getElementById(id)) {
+      forward("about.html");
+      return;
+    }
+  }
+  if (!fragment) {
+    return;
   }
   if (document.getElementById(id)) {
     return;
@@ -168,7 +185,7 @@
   if (result) {
     forward("all-results.html");
   } else if (id === "the-frontier-survey" || id === "the-survey") {
-    forward("frontier.html");
+    forward("atlas.html");
   } else if (explainerAnchors.has(id)) {
     forward("papers/n11-lower-bounds-explainer.html");
   }

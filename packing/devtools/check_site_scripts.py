@@ -23,6 +23,18 @@ FAMILIES = {
         "input-response",
         "Reader theme choice; persisted attributes are set before paint.",
     ),
+    "headroom": (
+        "input-response",
+        "Reveal or hide the in-flow navigation header in response to scrolling.",
+    ),
+    "rating-tooltips": (
+        "input-response",
+        "Explain existing evidence marks on pointer or keyboard interaction.",
+    ),
+    "homepage-atlas": (
+        "input-response",
+        "Prepare inert tiles and expand the existing static Atlas preview on input.",
+    ),
     "table": (
         "input-response",
         "Sort/filter complete static rows; query presets select existing rows.",
@@ -71,6 +83,14 @@ FAMILIES = {
 # Paper publication links pre-existing inline programs as page.<hash>.js. These
 # stable source markers give each retained program its own reviewed declaration.
 PAPER_PROGRAMS = (
+    (
+        "Every shell keeps its whole header in the document flow.",
+        *FAMILIES["headroom"],
+    ),
+    (
+        "Rating and case-property explanations use KPress",
+        *FAMILIES["rating-tooltips"],
+    ),
     (
         "Typesets a kpress page's formulas",
         "non-layout",

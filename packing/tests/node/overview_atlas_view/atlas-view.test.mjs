@@ -266,6 +266,7 @@ void test("the address defaults to Triangle and explicitly names Grid", () => {
   assert.equal(atlas.viewOf("?atlas=triangle"), "triangle");
   assert.equal(atlas.viewOf("?atlas=grid"), "grid");
   assert.equal(atlas.viewOf("?atlas=pyramid"), "triangle");
+  assert.equal(atlas.viewOf("?s-min=4&atlas=triangle&age=180"), "triangle");
   assert.equal(atlas.viewOf("?s-min=4&atlas=grid&age=180"), "grid");
   assert.equal(atlas.searchFor("", "triangle"), "");
   assert.equal(atlas.searchFor("?atlas=triangle", "grid"), "?atlas=grid");

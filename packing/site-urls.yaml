@@ -9,6 +9,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-07'
   status: live
+- path: about.html
+  canonical: about.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
 - path: all-results.html
   canonical: all-results.html
   kind: page
@@ -50,6 +58,14 @@ urls:
   lastmod: '2026-10-02'
   status: live
   pattern: assets/(?:css/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.css|js/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.js|fonts/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.woff2)
+- path: atlas.html
+  canonical: atlas.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
 - path: atlas/house/n-1.svg
   canonical: atlas/house/n-1.svg
   kind: asset-file
@@ -3195,14 +3211,21 @@ urls:
   lastmod: '2026-10-07'
   status: live
 - path: cases.html
-  canonical: cases/
+  canonical: atlas.html
   kind: forwarder
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-02'
+  lastmod: '2026-10-09'
   status: forwarded
-  target: cases/index.html
+  target: atlas.html
+  amendments:
+  - date: '2026-10-09'
+    reason: Atlas owns case browsing; individual case records retain their canonical URLs.
+    previous:
+      kind: forwarder
+      canonical: cases/
+      target: cases/index.html
 - path: cases/1.html
   canonical: cases/1.html
   kind: record
@@ -5796,13 +5819,21 @@ urls:
   lastmod: '2026-10-07'
   status: live
 - path: cases/index.html
-  canonical: cases/
-  kind: page
-  generator: devtools.render_overview:render_all
+  canonical: atlas.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-02'
-  status: live
+  lastmod: '2026-10-09'
+  status: forwarded
+  target: atlas.html
+  amendments:
+  - date: '2026-10-09'
+    reason: Atlas owns case browsing; individual case records retain their canonical URLs.
+    previous:
+      kind: page
+      canonical: cases/
+      target: ''
 - path: conventions.html
   canonical: conventions.html
   kind: page
@@ -5862,13 +5893,14 @@ urls:
   lastmod: '2026-10-07'
   status: live
 - path: frontier.html
-  canonical: frontier.html
-  kind: page
-  generator: devtools.render_overview:render_all
+  canonical: atlas.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
-  status: live
+  status: forwarded
+  target: atlas.html
 - path: index.html
   canonical: ''
   kind: page
@@ -11929,14 +11961,14 @@ urls:
   lastmod: '2026-10-08'
   status: live
 - path: status.html
-  canonical: frontier.html
+  canonical: atlas.html
   kind: forwarder
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
   status: forwarded
-  target: frontier.html
+  target: atlas.html
 - path: synopsis.html
   canonical: synopsis.html
   kind: page

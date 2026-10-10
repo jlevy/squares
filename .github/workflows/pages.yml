@@ -100,6 +100,8 @@ name: Certificate page
       - packing/devtools/templates/site.css
       - packing/devtools/templates/site-result.css
       - packing/devtools/templates/overview-article.md
+      - packing/devtools/templates/atlas-article.md
+      - packing/devtools/templates/about-article.md
       - packing/devtools/templates/all-results-article.md
       - packing/devtools/templates/visualize-article.md
       - packing/devtools/templates/papers-article.md
@@ -107,6 +109,9 @@ name: Certificate page
       - packing/devtools/render_overview.py
       - packing/devtools/overview_data.py
       - packing/devtools/overview_sections.py
+      - packing/devtools/build_known_best_atlas.py
+      - packing/devtools/atlas_print_font.py
+      - packing/devtools/fonts/atlas-print/**
       - packing/devtools/result_overview.py
       - packing/devtools/atlas_legend.py
       - packing/devtools/result_status.py

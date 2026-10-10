@@ -222,7 +222,7 @@ def test_every_page_has_a_description_of_its_own(pages: dict[str, str]) -> None:
         assert 20 <= len(description) <= DESCRIPTION_LIMIT, (name, len(description))
         assert description.endswith("."), name
     assert described["index.html"] == render_overview.OVERVIEW_DESCRIPTION
-    assert described["frontier.html"] == render_overview.FRONTIER_DESCRIPTION
+    assert described["atlas.html"] == render_overview.ATLAS_DESCRIPTION
     assert described[render_overview.RESULTS_PAGE] == render_overview.RESULTS_DESCRIPTION
     assert described["papers.html"] == render_overview.PAPERS_DESCRIPTION
     assert described["visualize.html"] == render_overview.VISUALIZE_DESCRIPTION
@@ -932,20 +932,19 @@ def test_a_page_added_later_or_a_record_that_loses_a_tag_fails_the_check(
     assert "0 twitter:card tags, not one" in failure
     (tmp_path / "results.html").unlink()
 
-    # The frontier atlas beside a forwarder that names it as the forwarder from
-    # `status.html` did, by a name the page no longer had.
-    site_renders.write(tmp_path, "frontier.html")
+    # The combined Atlas beside a forwarder that previews it under a different name.
+    site_renders.write(tmp_path, "atlas.html")
     forwarder = next(
         moved.html for moved in render_overview.forwarder_pages() if moved.name == "status.html"
     )
     (tmp_path / "status.html").write_text(forwarder, encoding="utf-8")
     assert all(passed for passed, _ in local_head_checks(tmp_path))
-    renamed = forwarder.replace("The Frontier Survey", "The Frontier Atlas")
+    renamed = forwarder.replace("The Atlas of Square Packings", "The Frontier Atlas")
     (tmp_path / "status.html").write_text(renamed, encoding="utf-8")
     (failure,) = [line for passed, line in local_head_checks(tmp_path) if not passed]
     assert failure == (
         "forwarder status.html: head: its og:title is ['The Frontier Atlas'], and the "
-        "page's own is ['The Frontier Survey']"
+        "page's own is ['The Atlas of Square Packings']"
     )
 
 

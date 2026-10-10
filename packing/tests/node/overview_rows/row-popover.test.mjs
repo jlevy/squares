@@ -21,7 +21,7 @@ const CASE_SOURCE = readFileSync(
 );
 
 /** The script's own selectors, which is all the stand-in has to match. */
-const COMPOUND = /^([a-z]+)?((?:\[[^\]]+\]|\.[a-z-]+|:popover-open)*)$/;
+const COMPOUND = /^([a-z][a-z0-9]*)?((?:\[[^\]]+\]|\.[a-z-]+|:popover-open)*)$/;
 
 /**
  * @typedef {object} Press what a test dispatches: a click or a key press
@@ -125,15 +125,25 @@ function page(protocol = "https:") {
     set innerHTML(text) {
       const isCase = text.includes('class="site-case"');
       const style = /<link data-site-math-styles href="([^"]+)"/.exec(text);
+      const heading = /<h1 id="([^"]+)">/.exec(text);
       this.content = new StandInElement("fragment", {}, [
         ...(style
           ? [new StandInElement("link", { "data-site-math-styles": "", href: style[1] || "" })]
           : []),
-        new StandInElement("article", {
-          class: isCase ? "site-case" : "site-result",
-          ...(isCase ? { "data-case": "11" } : { "data-result-overview": "t-004" }),
-          "data-text": text,
-        }),
+        new StandInElement(
+          "article",
+          {
+            class: isCase ? "site-case" : "site-result",
+            ...(isCase ? { "data-case": "11" } : { "data-result-overview": "t-004" }),
+            "data-text": text,
+          },
+          heading
+            ? [
+                new StandInElement("h1", { id: heading[1] || "" }),
+                new StandInElement("a", { href: `#${heading[1] || ""}` }),
+              ]
+            : [],
+        ),
       ]);
     }
 
@@ -357,7 +367,13 @@ function page(protocol = "https:") {
       { class: "site-row-pop-body", ...(source ? { "data-row-pop-src": source } : {}) },
       [deferred ? held : detail],
     );
-    const popover = new StandInElement("div", { id: target, class: "site-popover" }, [close, body]);
+    const title = new StandInElement("p", { class: "site-popover-value", id: `${target}-title` });
+    const label = new StandInElement("span", { class: "site-card-label" });
+    const popover = new StandInElement(
+      "div",
+      { id: target, class: "site-popover", "aria-labelledby": title.id },
+      [close, label, title, body],
+    );
     return { element, trigger, link, text, popover, close, body, held, detail };
   }
 
@@ -665,12 +681,35 @@ void test("a body that cannot be fetched keeps its short form, and the next open
     assert.deepEqual(fetched.body.children, [fetched.detail], reach);
     assert.equal(fetched.body.getAttribute("data-row-pop-src"), "result/t-004.html");
     assert.ok(!fetched.body.hasAttribute("data-row-pop-loading"));
+    const fallback = fetched.popover.querySelector(".site-popover-value");
+    assert.ok(fallback);
+    assert.equal(fetched.popover.getAttribute("aria-labelledby"), fallback.id);
+    assert.ok(fetched.popover.querySelector(".site-card-label"));
     assert.deepEqual(typeset, []);
     fetched.popover.hidePopover();
     fire(fetched.text, "click");
     await settled();
     assert.equal(requests.length, 2, reach);
   }
+});
+
+void test("the complete article title replaces outer titles and has a dialog-specific id", async () => {
+  const { document, fire, fetched, served, settled } = page();
+  served.set(
+    "result/t-004.html",
+    '<article class="site-result"><h1 id="t-004">T-004: Result</h1><a href="#t-004">Title</a></article>',
+  );
+  fire(fetched.text, "click");
+  await settled();
+  const heading = fetched.body.querySelector("h1");
+  assert.ok(heading);
+  assert.equal(fetched.popover.querySelector(".site-card-label"), null);
+  assert.equal(fetched.popover.querySelector(".site-popover-value"), null);
+  assert.equal(heading.id, "pop-t-004-record-title");
+  assert.equal(fetched.popover.getAttribute("aria-labelledby"), heading.id);
+  assert.equal(document.getElementById(heading.id), heading);
+  assert.equal(document.getElementById("t-004"), fetched.element);
+  assert.equal(fetched.body.querySelector("a")?.getAttribute("href"), `#${heading.id}`);
 });
 
 void test("a page read from a file fetches nothing and keeps the short body", async () => {

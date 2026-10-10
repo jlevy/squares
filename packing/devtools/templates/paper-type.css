@@ -15,6 +15,102 @@
   --kpress-host-font-size-base: 18px;
 }
 
+/* Shared screen scrollbars: quiet theme-aware thumbs without an opaque track.
+   The standard properties cover Firefox and current Chromium; the pseudo-elements
+   retain the same treatment on WebKit surfaces. */
+:root {
+  --paper-scrollbar-size: 6px;
+  --paper-scrollbar-strength: 55%;
+}
+@media screen {
+  :where(*) {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(
+        in srgb,
+        var(--kpress-doc-muted, currentColor) var(--paper-scrollbar-strength),
+        transparent
+      )
+      transparent;
+  }
+  ::-webkit-scrollbar {
+    width: var(--paper-scrollbar-size);
+    height: var(--paper-scrollbar-size);
+  }
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(
+      in srgb,
+      var(--kpress-doc-muted, currentColor) var(--paper-scrollbar-strength),
+      transparent
+    );
+    border-radius: 999px;
+  }
+}
+@media screen and (forced-colors: active) {
+  :where(*) {
+    scrollbar-color: auto;
+  }
+}
+
+/* Badge explanations share KPress's tooltip surface, including over top-layer panels.
+   Explicit surface properties also support shells that carry only the shared type CSS. */
+.kpress-tooltip.site-rating-tooltip {
+  background: var(--color-bg-meta-solid);
+  border: 1px solid var(--color-hint-gentle);
+  border-inline-start: 2px solid var(--kpress-doc-link);
+  border-radius: 0;
+  box-sizing: border-box;
+  color: var(--kpress-doc-text);
+  cursor: default;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-font-size-small);
+  font-weight: var(--kpress-font-weight-sans-regular);
+  inset: auto;
+  line-height: var(--paper-support-leading, 1.4);
+  margin: 0;
+  max-block-size: calc(100dvh - 2rem);
+  max-inline-size: min(20rem, calc(100vw - 2rem));
+  min-inline-size: 0;
+  opacity: 0;
+  overflow: auto;
+  overflow-wrap: break-word;
+  padding: 0.5rem 0.75rem;
+  pointer-events: none;
+  position: absolute;
+  text-transform: none;
+  transition:
+    opacity var(--site-hover-duration) var(--site-hover-easing),
+    visibility var(--site-hover-duration) var(--site-hover-easing);
+  visibility: hidden;
+  white-space: normal;
+  width: max-content;
+}
+.kpress-tooltip.site-rating-tooltip.kpress-tooltip-visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+.kpress-tooltip.site-rating-tooltip.kpress-tooltip-mobile-bottom {
+  position: fixed;
+}
+[data-site-tooltip]:focus-visible {
+  outline: 2px solid var(--kpress-doc-link);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kpress-tooltip.site-rating-tooltip {
+    transition: none;
+  }
+}
+@media print {
+  .site-rating-tooltip {
+    display: none;
+  }
+}
+
 /* The reading measure: forty of the base, which at 18px is the same 720px KPress's
    default of forty-five gives at 16px, so the larger type keeps the column's width.
    Declared on the scopes KPress declares its own on, so it wins there. */
@@ -71,6 +167,23 @@
   --paper-colophon-scale: 0.85;
   --paper-note-inset: 1.4rem;
   --paper-support-leading: 1.4;
+  --paper-button-label-case: uppercase;
+  --paper-popover-title-scale: 1.25;
+  --paper-popover-section-scale: 1.1;
+}
+
+/* Button labels share one case across site, paper and application controls. A preview
+   card is a reading surface; its prose keeps the article's capitalization. Math keeps
+   its symbols even when it appears in a button label. */
+button:not(.site-card),
+a.site-action,
+a.site-popover-action,
+.site-tabs a {
+  text-transform: var(--paper-button-label-case);
+}
+:is(button, a.site-action, a.site-popover-action, .site-tabs a)
+  :is(.kpress-math, .katex, .tex, math) {
+  text-transform: none;
 }
 @media print {
   /* Keep small sans text compact as its letter size increases. */
