@@ -36,6 +36,8 @@ import jsonschema_rs
 import pytest
 from jsonschema import Draft202012Validator as PyValidator
 
+from devtools import validate_schemas
+from devtools.retained_data import write_retained_text
 from devtools.validate_schemas import corpus_paths, payload_and_meta
 from sqpack.yamlio import load_yaml
 
@@ -296,3 +298,24 @@ def test_quoting_normalisation_does_not_hide_a_real_difference() -> None:
         "'b' is a required property"
     )
     assert re.search(r"required", normalise_message('"a" is a required property'))
+
+
+def test_compressed_register_is_still_in_the_complete_schema_corpus(
+    tmp_path: pathlib.Path,
+) -> None:
+    _, datasets = corpus_paths()
+    assert validate_schemas.EXACT_VALUES in datasets
+    payload, _meta = payload_and_meta(validate_schemas.EXACT_VALUES)
+    assert len(payload["entries"]) == 324
+    path = tmp_path / "record.json.gz"
+    write_retained_text(
+        path,
+        '{"softschema":{"schema":"example.schema.yaml","envelope":"register"},'
+        '"register":{"integer":1,"float":1.0,"side":"123/17"}}\n',
+    )
+    assert payload_and_meta(path) == (
+        {"integer": 1, "float": 1.0, "side": "123/17"},
+        {"schema": "example.schema.yaml", "envelope": "register"},
+    )
+    path.write_bytes(b"not gzip")
+    assert validate_schemas.check(path)

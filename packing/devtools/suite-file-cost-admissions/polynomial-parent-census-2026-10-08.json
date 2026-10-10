@@ -1,0 +1,74 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 93,
+  "seconds": 1.17,
+  "files": [
+    {
+      "file": "packing/tests/test_audit_n11_lean.py",
+      "tests": 26,
+      "seconds": 0.141
+    },
+    {
+      "file": "packing/tests/test_k2_minus_c_packet.py",
+      "tests": 10,
+      "seconds": 0.431
+    },
+    {
+      "file": "packing/tests/test_n17_cached_collision.py",
+      "tests": 25,
+      "seconds": 0.056
+    },
+    {
+      "file": "packing/tests/test_n17_selective_halving.py",
+      "tests": 32,
+      "seconds": 0.542
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_audit_n11_lean.py",
+      "packing/tests/test_k2_minus_c_packet.py",
+      "packing/tests/test_n17_cached_collision.py",
+      "packing/tests/test_n17_selective_halving.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_audit_n11_lean.py": 26,
+      "packing/tests/test_k2_minus_c_packet.py": 10,
+      "packing/tests/test_n17_cached_collision.py": 25,
+      "packing/tests/test_n17_selective_halving.py": 32
+    },
+    "deselected_tests": 0
+  }
+}

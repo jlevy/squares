@@ -3465,6 +3465,79 @@ def test_limit_record_tools_select_the_complete_exact_replay(path: str) -> None:
         assert "exact verification" in {step.name for step in selection.steps}
 
 
+@pytest.mark.parametrize(
+    "path",
+    [
+        "packing/devtools/evand_exact_certificates.py",
+        "packing/devtools/upper_bound_packets.py",
+        "packing/devtools/retained_data.py",
+        "packing/resources/web/evand-square-packing-2026-10-05/acquisition/upstream-subtree.sha256",
+        "packing/resources/web/evand-square-packing-2026-10-05/receipts/first-party-check.json",
+        "packing/resources/web/evand-square-packing-2026-10-05/receipts/source-replay.json",
+        "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-102.cert.gz",
+        "packing/witnesses/witness.schema.yaml",
+        "packing/resources/web/franciscouzo-square-packing-2026-09-27/acquisition/sources.json",
+        "packing/resources/web/franciscouzo-square-packing-2026-09-27/receipts/certification.json.gz",
+        "packing/witnesses/franciscouzo-2026/n-292-rational.yaml.gz",
+    ],
+)
+def test_verified_bound_inputs_select_the_exact_register_replay(path: str) -> None:
+    """A changed bound proof must invalidate the side identity projected from it."""
+    step = next(step for step in validate.STEPS if step.name == "exact side values register")
+    sentinel = validate.Step("unrelated check", lambda _context: "", touches=("other/*",))
+    selection = validate.select_for_paths([path], (step, sentinel))
+    assert not selection.unattributed_paths
+    assert selection.steps == (step,)
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "packing/devtools/acquire_source.py",
+        "packing/devtools/collect_reported_exact_roots.py",
+        "packing/devtools/evand_report_catalogue.py",
+        "packing/devtools/evand_arrangement_reports.py",
+        "packing/devtools/evand_arrangement_houses.py",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/prior-state.json.xz",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/exact_forms.json.gz",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/README.md",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/archive/extra.json.gz",
+        "packing/witnesses/known-best/n-266.yaml",
+        "packing/witnesses/known-best/n-270.yaml",
+        "packing/witnesses/known-best/n-272.yaml",
+        "packing/devtools/refinement_packets.py",
+        "packing/devtools/refinement_custody.py",
+        "packing/devtools/refinement_house_links.py",
+        "packing/devtools/import_half_angle_witness.py",
+        "packing/devtools/squish_upper_bound_packets.py",
+        "packing/devtools/squish_followup_packets.py",
+        "packing/devtools/squish_second_update_confirmation.py",
+        "packing/devtools/squish_second_update_house_links.py",
+        "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/sources.json",
+        "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/n-068.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/sources.json",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-105.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-292.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/admission.json.xz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/house-metadata.json.xz",
+        "packing/witnesses/known-best/n-068.yaml",
+        "packing/witnesses/known-best/n-105.yaml",
+        "packing/witnesses/known-best/n-292.yaml",
+    ],
+)
+def test_refinement_inputs_select_the_exact_register_in_each_owning_tier(path: str) -> None:
+    """Finite identities must be rechecked when any admitted source input changes."""
+    sentinel = validate.Step("unrelated check", lambda _context: "", touches=("other/*",))
+    for fast, records in ((False, False), (True, False), (False, True)):
+        universe = validate._select_steps(only=[], fast=fast, records=records)
+        step = next(step for step in universe if step.name == "exact side values register")
+        selection = validate.select_for_paths([path], (step, sentinel))
+        assert not selection.unattributed_paths
+        assert selection.steps == (step,)
+
+
 def test_every_step_is_reachable_from_some_tier() -> None:
     """A step in no tier is a check nobody runs, which is worse than not having it.
 
@@ -5127,3 +5200,25 @@ def test_frontend_browser_workers_fit_outer_topology(
     ) in captured
     assert any("devtools.check_probes" in command for command in captured)
     assert any("devtools.check_motion_lab_pages" in command for command in captured)
+
+
+def test_compressed_generated_inputs_select_the_same_required_checks() -> None:
+    names = {step.name: step for step in validate.STEPS}
+    for name in (
+        "assembly coverage agrees with the contract",
+        "chunk taxonomy agrees with the corpus",
+    ):
+        assert names[name].reachable_from("packing/atlas/known-best/chunk-components.json.gz")
+        assert names[name].reachable_from("packing/devtools/retained_data.py")
+    assert names["exact side values register"].reachable_from(
+        "packing/frontier/exact-values.json.gz"
+    )
+    assert names["exact side values register"].reachable_from(
+        "packing/devtools/retained_data.py"
+    )
+    assert names["retained JSON is one record per line"].reachable_from(
+        "packing/frontier/exact-values.json.gz"
+    )
+    assert names["retained JSON is one record per line"].reachable_from(
+        "packing/atlas/known-best/chunk-components.json.gz"
+    )

@@ -1545,6 +1545,15 @@ tiers:
     Four shards at 131/154/154/131 carry 278.9 and 327.9, predicting 84 and 98 s. The
     partition is complete and disjoint by construction, as for the other three;
     `packing-required` requires this job as it requires them.
+    The first hosted baseline requested by think-t7k5 is retained separately:
+    devtools.read_tier_walls --tier suite_d --job-id 110628224361 read run
+    36939743802 attempt 1, head 898553a294bc4ef87bd6e708f17b7ceb9e0532f7.
+    Its checkout merged that head as 75636e83f into
+    eaa1a4b45c5042888d098f2d302e6a90e5455fec. On 2026-10-01 its successful
+    suite-d job read 104.95 s for one of 88 registered steps at jobs 1,
+    inner_jobs 1, cpus 4. That single historical baseline has no empirical
+    spread estimate and is excluded from the retained 106-step cohort's mean. Later upstream refinements
+    are outside these three observations; their new selection requires fresh hosted checks.
     A separate current reading at head 49903c6d00a7085c65e84726f8074e78150274e1,
     run 37859894227 attempt 1, job 113592848932 on 2026-10-08, read by the same
     maintained tool at the reference shape, cost 163.63 s with one of 106 registered

@@ -3362,6 +3362,22 @@ def _generated_tables(context: Context) -> str:
     )
 
 
+def _exact_values(context: Context) -> str:
+    """The exact side values register, rebuilt from the frontier records byte for byte.
+
+    The rebuild is the check: every minimal polynomial is certified irreducible over Q
+    again, its root isolated again in exact rational arithmetic, and the record's decimal
+    and the closed form's derivation compared again, so a record edit that breaks any of
+    them fails here rather than in the paper rendered from the register. Measured whole on
+    2026-10-06 at 4.3s wall for `--check` on a four-cpu box, the two modular certificates
+    at degree 144 and 158 most of the arithmetic, so there is no cheaper mode for the pull
+    request to run instead.
+    """
+    output = _module(context, "devtools.build_exact_values", "--check")
+    _require_text(output, "exact values register check passed")
+    return output
+
+
 def _strategy_catalogues(_context: Context) -> str:
     lines: list[str] = []
     for kind, field_name, expected in (("search", "outcome", 28), ("proof", "status", 30)):
@@ -4705,6 +4721,8 @@ STEPS: tuple[Step, ...] = (
             # Any tracked JSON can cross the threshold, and `biome.json` says which are
             # Biome's rather than a retained result's.
             "*.json",
+            "*.json.gz",
+            "packing/devtools/retained_data.py",
             "packing/devtools/check_retained_json.py",
             "packing/devtools/retained-json.yaml",
             "packing/devtools/repo_scope.py",
@@ -4999,6 +5017,74 @@ STEPS: tuple[Step, ...] = (
             "docs/*",
         ),
     ),
+    # 4.3s: every polynomial re-certified, which is why it rebuilds rather than compares.
+    Step(
+        "exact side values register",
+        _exact_values,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/build_exact_values.py",
+            "packing/devtools/backfill_algebraic_facts.py",
+            "packing/devtools/extract_kingbird_svg_exact.py",
+            "packing/devtools/ryxu_arrangement_reports.py",
+            "packing/devtools/ryxu_radical_n51.py",
+            "packing/devtools/ryxu_house_links.py",
+            "packing/devtools/gupta_refinement_reports.py",
+            "packing/devtools/gupta_house_links.py",
+            "packing/devtools/couzo_refinement_reports.py",
+            "packing/devtools/couzo_followup_reports.py",
+            "packing/devtools/evand_hunt_reports.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/devtools/register_gupta_reports.py",
+            "packing/resources/web/ry-xu-new-packings-2026-10-08/**",
+            "packing/resources/web/gupta-square-packing-refinements-2026-10-08/**",
+            "packing/resources/web/couzo-exact-refinements-2026-10-08/**",
+            "packing/resources/web/couzo-followup-refinements-2026-10-08/**",
+            "packing/resources/web/evand-record-hunt-2026-10-09/**",
+            "packing/resources/web/evand-batch-105-130-2026-10-07/**",
+            "packing/resources/web/evand-batch-292-2026-10-07/**",
+            "packing/witnesses/known-best/*",
+            "packing/devtools/collect_reported_exact_roots.py",
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/evand_report_catalogue.py",
+            "packing/devtools/evand_arrangement_reports.py",
+            "packing/devtools/evand_arrangement_houses.py",
+            "packing/resources/web/evand-new-arrangements-2026-10-07/**",
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/**",
+            "packing/witnesses/known-best/n-266.yaml",
+            "packing/witnesses/known-best/n-270.yaml",
+            "packing/witnesses/known-best/n-272.yaml",
+            "packing/devtools/evand_exact_certificates.py",
+            "packing/devtools/upper_bound_packets.py",
+            "packing/devtools/retained_data.py",
+            # Finite refinements read complete private facts, replay custody and houses.
+            "packing/devtools/refinement_packets.py",
+            "packing/devtools/refinement_custody.py",
+            "packing/devtools/refinement_house_links.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/devtools/squish_upper_bound_packets.py",
+            "packing/devtools/squish_followup_packets.py",
+            "packing/devtools/squish_second_update_confirmation.py",
+            "packing/devtools/squish_second_update_house_links.py",
+            "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/**",
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/**",
+            "packing/witnesses/known-best/n-068.yaml",
+            "packing/witnesses/known-best/n-105.yaml",
+            "packing/witnesses/known-best/n-292.yaml",
+            # Rational projections are bound to the retained proof and its custody.
+            "packing/witnesses/witness.schema.yaml",
+            "packing/resources/web/evand-square-packing-2026-10-05/*",
+            "packing/resources/web/franciscouzo-square-packing-2026-09-27/*",
+            "packing/witnesses/franciscouzo-2026/*",
+            # The records, the register and its schema all live here.
+            "packing/frontier/*",
+            # The catalogue it reads printed polynomials from, and the KKT batch.
+            "packing/resources/web/kingbird-squares-in-squares.md",
+            "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
+        ),
+    ),
     Step(
         "strategy catalogues",
         _strategy_catalogues,
@@ -5161,7 +5247,8 @@ STEPS: tuple[Step, ...] = (
         records=True,
         touches=(
             *_CORE,
-            "packing/atlas/known-best/chunk-components.json",
+            "packing/atlas/known-best/chunk-components.json*",
+            "packing/devtools/retained_data.py",
             "packing/atlas/known-best/contact-assembly-grammar.yaml",
             "packing/atlas/known-best/manifest.json",
             "packing/witnesses/*",
@@ -5177,7 +5264,8 @@ STEPS: tuple[Step, ...] = (
         records=True,
         touches=(
             *_CORE,
-            "packing/atlas/known-best/chunk-components.json",
+            "packing/atlas/known-best/chunk-components.json*",
+            "packing/devtools/retained_data.py",
             "packing/atlas/known-best/manifest.json",
             "packing/witnesses/*",
             "packing/devtools/census_chunk_taxonomy.py",
@@ -5923,6 +6011,10 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         # The same shape: it reads the tracked Markdown under `packing/resources/` and
         # compares three numbers found in those bytes. No clock, no network, no history.
         "archive annotation census agrees with the archive",
+        # Tracked frontier records, catalogue transcription, KKT batch, and retained
+        # bound certificates, source manifests and replay receipts determine the exact
+        # rebuild. No clock, no network or repository history enters its verdict.
+        "exact side values register",
         "derivation (needs sympy)",
         "search engine (sqsearch)",
         "lint floor (rust)",

@@ -286,6 +286,18 @@ register entry with its ratings and `next_rung`. Four rules are the process’s 
 - **The `T-NNN` is taken last.** An id is its row’s position and cannot be reserved
   across branches, so take it in the commit that registers the result, merge that day,
   and quote it to no author until it is on `main`.
+- **Exact facts are recorded with their source.** A result that changes a best known
+  packing, or states its side exactly, writes `reported_upper_bound.exact_form`,
+  `algebraic_degree`, `minimal_polynomial` and `algebraic_source`. The source is
+  `catalogue` where it prints the degree or polynomial, `derived-from-exact-form` where
+  this repository computes them from a closed form, and `contact-system` where they come
+  from an exact contact system, with that evidence cited.
+  `sqpack.exact_values.algebraic_fields` writes the first two cases, and the frontier
+  generator and the upper-bound intakes call it, so a catalogue or packet intake arrives
+  complete. A new best known packing with no exact fact writes all four as null, which
+  leaves the count numeric-only in the
+  [exact side values register](../frontier/exact-values.json.gz) until an identification
+  lands.
 
 The record checks pass without a packet, a coverage entry or evidence over the whole
 scope. The reviewer of the pull request looks for those.
@@ -371,6 +383,11 @@ The pull request that registers or raises a result runs
 [New Result Publication](documentation-pass.md#new-result-publication): the views are
 rendered in the commit that changes the record, and the data pin moves in the next.
 No documentation phase is opened for it.
+Where the result changes an exact fact, those views include the exact side values
+register (`devtools.build_exact_values --update`). The gate’s register check fails until
+the register is regenerated.
+The exact side values paper belongs to the later publication layer, which supplies its
+renderer.
 
 ### Verify the Published Result
 

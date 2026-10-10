@@ -62,6 +62,176 @@ def test_changed_release_data_selects_the_release_contract() -> None:
     assert "packing/tests/test_release.py" in selection.tests
 
 
+@pytest.mark.parametrize(
+    ("path", "selected"),
+    [
+        ("packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/n-068.json.gz", True),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-105.json.gz",
+            True,
+        ),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-292.json.gz",
+            True,
+        ),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/admission.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/house-metadata.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/prior-state.json",
+            True,
+        ),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/prior-state.json",
+            True,
+        ),
+        ("packing/witnesses/known-best/n-068.yaml", True),
+        ("packing/witnesses/known-best/n-105.yaml", True),
+        ("packing/witnesses/known-best/n-292.yaml", True),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-106.json.gz",
+            False,
+        ),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/admission.json.xz.backup",
+            False,
+        ),
+        ("packing/resources/web/other-packet/receipts/admission.json.xz", False),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/sources.json",
+            False,
+        ),
+        ("packing/witnesses/known-best/n-106.yaml", False),
+        ("packing/hosted/refinement-evidence-425-428-v1.yaml", False),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/prior-state.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/declaration.json",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/sources.json",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/upstream-subtree.sha256",
+            True,
+        ),
+        ("packing/witnesses/known-best/n-266.yaml", True),
+        ("packing/witnesses/known-best/n-270.yaml", True),
+        ("packing/witnesses/known-best/n-272.yaml", True),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/exact_forms.json.gz",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/declaration.json",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/sources.json",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/upstream-subtree.sha256",
+            True,
+        ),
+        (
+            "packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz.backup",
+            False,
+        ),
+        ("packing/witnesses/known-best/n-267.yaml", False),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/other_forms.json.gz",
+            True,
+        ),
+        ("packing/resources/web/other-packet/acquisition/sources.json", False),
+        ("packing/resources/web/evand-exact-and-local-reports-2026-10-07/README.md", True),
+        ("packing/resources/web/evand-exact-and-local-reports-2026-10-07/extra.json.gz", True),
+        (
+            "packing/resources/web/evand-exact-and-local-reports-2026-10-07/archive/extra.json.gz",
+            True,
+        ),
+        ("packing/resources/web/another-packet/archive/extra.json.gz", False),
+        (
+            "packing/resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/gupta-square-packing-refinements-2026-10-08/receipts/exact-certification.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/case-inputs.json",
+            True,
+        ),
+        ("packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-105.yaml", True),
+        (
+            "packing/resources/web/couzo-followup-refinements-2026-10-08-old/facts/n-105.yaml",
+            False,
+        ),
+        ("packing/resources/web/evand-batch-105-130-2026-10-07/acquisition/sources.json", True),
+        ("packing/resources/web/evand-batch-292-2026-10-07/acquisition/sources.json", True),
+    ],
+)
+def test_refinement_data_reaches_builder_tests_without_widening_the_suite(
+    path: str, *, selected: bool, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Exercise the real push selector with a tiny import graph and no fixture files."""
+    root = reachable_tests.ROOT
+    tests = root / "tests"
+    files = {
+        "devtools.build_exact_values": root / "devtools/build_exact_values.py",
+        "devtools.exact_consumer": root / "devtools/exact_consumer.py",
+        "tests.test_build_exact_values": tests / "test_build_exact_values.py",
+        "tests.test_exact_consumer": tests / "test_exact_consumer.py",
+        "tests.test_unrelated": tests / "test_unrelated.py",
+    }
+    imports = {
+        files["devtools.build_exact_values"]: set(),
+        files["devtools.exact_consumer"]: {"devtools.build_exact_values"},
+        files["tests.test_build_exact_values"]: {"devtools.build_exact_values"},
+        files["tests.test_exact_consumer"]: {"devtools.exact_consumer"},
+        files["tests.test_unrelated"]: set(),
+    }
+    monkeypatch.setattr(reachable_tests, "TEST_ROOTS", (tests,))
+    monkeypatch.setattr(reachable_tests, "_mapped_files", lambda: files)
+    monkeypatch.setattr(reachable_tests, "_imports_of", lambda file: imports[file])
+    monkeypatch.setattr(reachable_tests, "_walker_evidence", lambda _file: False)
+    monkeypatch.setattr(Path, "read_text", lambda _path, **_options: "def test_case(): pass\n")
+    monkeypatch.setattr(
+        Path,
+        "glob",
+        lambda _path, _pattern: (file for file in files.values() if file.parent == tests),
+    )
+    selection = select_tests([path])
+    assert not selection.everything
+    assert selection.tests == (
+        ("packing/tests/test_build_exact_values.py", "packing/tests/test_exact_consumer.py")
+        if selected
+        else ()
+    )
+
+
 def test_a_changed_test_file_selects_itself() -> None:
     selection = select_tests(["packing/tests/test_reachable_tests.py"])
     assert not selection.everything

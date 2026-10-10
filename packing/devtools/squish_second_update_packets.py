@@ -23,6 +23,7 @@ from strif import atomic_output_file
 
 from devtools import squish_followup_packets as followup
 from devtools import squish_upper_bound_packets as original
+from sqpack.exact_values import algebraic_fields
 from sqpack.yamlio import safe_load
 
 REPO = original.REPO
@@ -247,8 +248,7 @@ def adopt_report(n: int, existing: str, generated: str | None = None) -> str:
     report.update(
         value=followup.display(fact["side"]),
         exact_form=fact["side"],
-        algebraic_degree=1,
-        minimal_polynomial=None,
+        **algebraic_fields(fact["side"], 1, None),
         analytically_optimized=None,
         catalogue_rigid="not-stated",
         construction_method="unknown",

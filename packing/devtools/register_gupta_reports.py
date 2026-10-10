@@ -21,6 +21,7 @@ from devtools import register_ryxu_reports as previous
 from devtools import render_case_verifiers
 from devtools.confirm_refinement_records import replace_row
 from devtools.register_refinement_reports import FOOTER, append_rows, dump, save
+from sqpack.exact_values import algebraic_fields
 from sqpack.yamlio import safe_load
 
 REPO = houses.REPO
@@ -41,8 +42,7 @@ def reported_bound(n: int) -> dict[str, Any]:
     return {
         "value": houses.reports.legacy.ceiling_decimal(certificate.side, 16),
         "exact_form": str(certificate.side),
-        "algebraic_degree": 1,
-        "minimal_polynomial": None,
+        **algebraic_fields(str(certificate.side), None, None),
         "analytically_optimized": None,
         "catalogue_rigid": "not-stated",
         "construction_method": "unknown",

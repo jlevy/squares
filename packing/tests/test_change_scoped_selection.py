@@ -192,6 +192,24 @@ def test_results_register_runs_for_its_open_ended_path_dependencies() -> None:
         assert "results rungs are earned and the view agrees" in names
 
 
+def test_new_exact_source_inputs_select_register_validation() -> None:
+    for path in (
+        "packing/devtools/backfill_algebraic_facts.py",
+        "packing/devtools/extract_kingbird_svg_exact.py",
+        "packing/devtools/ryxu_radical_n51.py",
+        "packing/resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
+        "packing/resources/web/gupta-square-packing-refinements-2026-10-08/receipts/exact-certification.json.xz",
+        "packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/case-inputs.json",
+        "packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-105.yaml",
+        "packing/resources/web/evand-batch-105-130-2026-10-07/source/s12/search/exact/batch/certs/n-105.cert",
+        "packing/resources/web/evand-batch-292-2026-10-07/source/s12/search/exact/batch/certs/n-292.cert",
+        "packing/witnesses/known-best/n-051.yaml",
+    ):
+        selection = select_for_paths([path])
+        assert not selection.is_whole_gate
+        assert "exact side values register" in {step.name for step in selection.steps}
+
+
 def test_the_five_under_selections_an_adversarial_review_found() -> None:
     """Each of these was a real hole: a file that changes a step's verdict, unclaimed.
 

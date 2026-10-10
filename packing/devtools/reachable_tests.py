@@ -94,6 +94,57 @@ SUITE_WIDE = (
 
 PAGES_WORKFLOW = ".github/workflows/pages.yml"
 
+#: These exact inputs determine the current finite refinement identities and the
+#: retained earlier-bound controls. They reach the builder's tests through the same
+#: import closure as its Python source; this does not add a production step to --push.
+REFINEMENT_REGISTER_INPUTS = frozenset(
+    {
+        "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/n-068.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-105.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-292.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/admission.json.xz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/house-metadata.json.xz",
+        "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/prior-state.json",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/prior-state.json",
+        "packing/witnesses/known-best/n-068.yaml",
+        "packing/witnesses/known-best/n-105.yaml",
+        "packing/witnesses/known-best/n-292.yaml",
+    }
+)
+
+#: Latest native arrangements and source-only root candidates use the same closure.
+LATEST_EXACT_SOURCE_INPUTS = frozenset(
+    {
+        "packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/prior-state.json.xz",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/declaration.json",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/sources.json",
+        "packing/resources/web/evand-new-arrangements-2026-10-07/acquisition/upstream-subtree.sha256",
+        "packing/witnesses/known-best/n-266.yaml",
+        "packing/witnesses/known-best/n-270.yaml",
+        "packing/witnesses/known-best/n-272.yaml",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/exact_forms.json.gz",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/declaration.json",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/sources.json",
+        "packing/resources/web/evand-exact-and-local-reports-2026-10-07/acquisition/upstream-subtree.sha256",
+    }
+)
+
+#: This collector checks README and the packet-wide closed gzip inventory.
+REPORTED_ROOT_PACKET = "packing/resources/web/evand-exact-and-local-reports-2026-10-07/"
+
+#: Newly retained finite certificate identities and their complete source custody.
+CERTIFICATE_REGISTER_PACKETS = (
+    "packing/resources/web/ry-xu-new-packings-2026-10-08/",
+    "packing/resources/web/gupta-square-packing-refinements-2026-10-08/",
+    "packing/resources/web/couzo-exact-refinements-2026-10-08/",
+    "packing/resources/web/couzo-followup-refinements-2026-10-08/",
+    "packing/resources/web/evand-batch-105-130-2026-10-07/",
+    "packing/resources/web/evand-batch-292-2026-10-07/",
+)
+
 WALKER_MARKERS = ("rglob(", "iterdir(", ".glob(", "listdir(", "importlib", "__import__")
 
 
@@ -401,6 +452,14 @@ def select_tests(changed: list[str]) -> TestSelection:
     ):
         changed_modules.add("sqpack.release")
         changed_dotted.add("sqpack.release")
+
+    if any(
+        path in REFINEMENT_REGISTER_INPUTS | LATEST_EXACT_SOURCE_INPUTS
+        or path.startswith((REPORTED_ROOT_PACKET, *CERTIFICATE_REGISTER_PACKETS))
+        for path in changed
+    ):
+        changed_modules.add("devtools.build_exact_values")
+        changed_dotted.add("devtools.build_exact_values")
 
     # Transitive closure: grow the changed-module set by everything that imports it.
     grew = True

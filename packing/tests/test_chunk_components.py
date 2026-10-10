@@ -13,6 +13,7 @@ import pytest
 
 import sqpack.chunks as chunks_module
 from devtools import census_known_best_chunks as census
+from devtools.retained_data import read_retained_text
 from sqpack.chunks import (
     NEAR_ADJACENCY_TOLERANCE,
     component_census,
@@ -82,9 +83,7 @@ def test_census_trigonometry_does_not_call_the_platform_libm(
 
 
 def test_retained_census_reports_source_stratified_coverage() -> None:
-    document = json.loads(
-        (ROOT / "atlas/known-best/chunk-components.json").read_text(encoding="utf-8")
-    )
+    document = json.loads(read_retained_text(ROOT / "atlas/known-best/chunk-components.json"))
     registered = document["contact_sweeps"][0]
     assert registered["name"] == "registered-angle-contact"
     non_grid = registered["summary"]["non_grid"]

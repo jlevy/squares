@@ -28,6 +28,7 @@ import yaml
 from jsonschema_rs import Draft202012Validator
 
 from devtools.check_basic_bounds import check_case_basic_bounds
+from devtools.retained_data import read_retained_text
 from devtools.verifier_registry import problems as verifier_problems
 from sqpack.assurance import (
     check_case_semantics,
@@ -51,6 +52,8 @@ SESSION_CLOSE_REPORT = RESOURCE_USAGE.parent / "session-close-report.yaml"
 INTAKE_WATCH = RESOURCE_USAGE.parent / "intake-watch.yaml"
 DOCUMENT_MAP = FRONTIER.parent.parent / "docs" / "project" / "document-map.yaml"
 COMPOSITE_FIGURE = FRONTIER.parent / "atlas" / "known-best" / "composite-figure.json"
+#: The exact side values register, a generated view of the frontier records' exact facts.
+EXACT_VALUES = FRONTIER / "exact-values.json"
 BOUND_CITATIONS = FRONTIER.parent / "atlas" / "known-best" / "bound-citations.json"
 #: The citation fields behind `BOUND_CITATIONS`, kept beside the archive index they mirror.
 BIBLIOGRAPHY = FRONTIER.parent / "resources" / "bibliography.yaml"
@@ -90,7 +93,7 @@ def load_schema(name: str) -> dict:
 
 def payload_and_meta(path: pathlib.Path) -> tuple[dict, dict]:
     """Return (payload, softschema metadata) for either profile."""
-    text = path.read_text(encoding="utf-8")
+    text = read_retained_text(path)
     doc = load_yaml(text.split("---\n")[1]) if path.suffix == ".md" else load_yaml(text)
     meta = doc.get("softschema")
     if meta is None:
@@ -130,7 +133,7 @@ def check(path: pathlib.Path) -> list[str]:
     errs: list[str] = []
     try:
         payload, meta = payload_and_meta(path)
-    except (ValueError, yaml.YAMLError) as error:
+    except (ValueError, OSError, EOFError, yaml.YAMLError) as error:
         return [f"invalid or ambiguous YAML: {error}"]
     errs.extend(
         f"softschema.{key} missing"
@@ -309,6 +312,7 @@ def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
     datasets.append(DOCUMENT_MAP)
     datasets.append(KNOWN_BEST_MANIFEST)
     datasets.append(COMPOSITE_FIGURE)
+    datasets.append(EXACT_VALUES)
     datasets.append(BOUND_CITATIONS)
     datasets.append(BIBLIOGRAPHY)
     datasets.append(TRANSLATION_ESCAPE_SCREEN)
@@ -362,9 +366,7 @@ def main() -> int:
         f"  {len(md)} frontmatter-md artifacts + {len(datasets)} pure-yaml datasets "
         f"validate against their declared schemas"
     )
-    declared = {
-        safe_load(d.read_text(encoding="utf-8"))["softschema"]["schema"] for d in datasets
-    }
+    declared = {safe_load(read_retained_text(d))["softschema"]["schema"] for d in datasets}
     print(f"  schemas in use: {sorted(declared | {'square-packing-case.schema.yaml'})}")
     return 0
 

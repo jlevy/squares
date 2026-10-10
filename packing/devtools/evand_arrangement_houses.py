@@ -70,7 +70,17 @@ def build_witness(n: int) -> dict[str, Any]:
     return witness
 
 
-def check_houses(numbers: list[int] | None = None) -> None:
+class VerifiedInputs:
+    """Complete source and nine-job custody admitted within one caller invocation."""
+
+    def __init__(self) -> None:
+        self.rows = reports.check_certification()
+        self.facts = reports.read_facts()
+
+
+def check_houses(
+    numbers: list[int] | None = None, *, verified_inputs: VerifiedInputs | None = None
+) -> None:
     selected = list(NUMBERS) if numbers is None else numbers
     if (
         not selected
@@ -78,8 +88,10 @@ def check_houses(numbers: list[int] | None = None) -> None:
         or any(type(n) is not int or n not in NUMBERS for n in selected)
     ):
         raise reports.ReportError("unique explicit #399 atlas roster required")
-    rows = reports.check_certification()
-    facts = reports.read_facts()
+    if verified_inputs is not None and type(verified_inputs) is not VerifiedInputs:
+        raise reports.ReportError("house inputs require complete validated #399 custody")
+    inputs = VerifiedInputs() if verified_inputs is None else verified_inputs
+    rows, facts = inputs.rows, inputs.facts
     for n in selected:
         path = house_path(n)
         if path.parent.is_symlink() or not path.parent.resolve().is_relative_to(REPO.resolve()):

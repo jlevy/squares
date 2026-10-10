@@ -37,6 +37,7 @@ from devtools import (
     render_known_best_contact_overlays,
 )
 from devtools.assess_frontier_rigidity import tiling_cases
+from devtools.retained_data import read_retained_text
 from sqpack.known_best import (
     CALIBRATION_CORPUS,
     KNOWN_BEST_CORPUS,
@@ -163,7 +164,7 @@ def test_a_widened_census_reaches_its_readers_as_an_error() -> None:
 
 
 def test_the_retained_census_declares_the_calibration_range() -> None:
-    census = json.loads((ATLAS / "chunk-components.json").read_text(encoding="utf-8"))
+    census = json.loads(read_retained_text(ATLAS / "chunk-components.json"))
     partitions = json.loads((ATLAS / "chunk-partitions.json").read_text(encoding="utf-8"))
     for corpus, name in (
         (census["corpus"], "chunk-components.json"),

@@ -236,8 +236,66 @@ UNREAD_WORKER_OUTPUTS = frozenset(
         ROOT / "atlas/rendering/free-quench-n1-trace.json",
     }
 )
+# Frozen numerical outputs from earlier research lanes can leave mutation workers;
+# their narrative records, queues and ordinary replay fixtures remain. Selecting
+# leaves rather than whole agendas also leaves the existing inline/result rescue
+# unchanged. The retained audit measured 3,937,571 candidate bytes before protecting
+# those fixtures; no registered mutation target or command names these roots.
+HISTORICAL_RESEARCH_ROOTS = frozenset(
+    ROOT / "campaign/series/series-000-smoke-and-calibration/results" / name
+    for name in (
+        "agenda-037",
+        "agenda-038",
+        "agenda-040",
+        "bc-241-trump-local-theorem-review.json",
+        "exp-053-h-057-n17-parent-bound-parallel-speedup.raw",
+        "exp-204-basin-hopping",
+        "exp-212-h214-preset-signatures.json",
+        "exp-242-n17-core-stress",
+        "exp-243-n17-charge-floor-pilot",
+        "exp-249-n17-first-certified-sub-patterns",
+        "exp-251-n17-overnight-flag-certification",
+        "exp-253-n17-stalls-under-adaptive-rows",
+        "exp-254-n17-second-tranche-flags",
+        "exp-256-n17-third-tranche-flags",
+        "exp-257-n17-unsampled-strata",
+        "exp-258-n17-draw-31",
+    )
+)
+HISTORICAL_REPLAY_INPUTS = frozenset(
+    ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-040" / name
+    for name in (
+        "exp-214-n13-399-100-family.json",
+        "exp-214-n13-399-100-family-merged.json",
+        "exp-218-n17-23-5-family.json",
+        "exp-218-n17-23-5-family-merged.json",
+        "exp-219-n11-96-25-clip-covering.json",
+        "exp-220-n11-96-25-class-covering.json",
+        "h230-gap-wedge-port-partial.patch",
+        "h232-threshold-clip-partial.patch",
+    )
+)
+
+
+def historical_research_output(path: Path) -> bool:
+    """Recognize historical output leaves without dropping records or replay inputs."""
+    return (
+        any(path == root or root in path.parents for root in HISTORICAL_RESEARCH_ROOTS)
+        and path.suffix not in {".md", ".yaml", ".yml", ".py", ".js", ".ts"}
+        and not path.name.endswith(".schema.json")
+        and path not in HISTORICAL_REPLAY_INPUTS
+    )
+
+
+HISTORICAL_RESEARCH_OUTPUTS = frozenset(
+    path
+    for root in HISTORICAL_RESEARCH_ROOTS
+    for path in ([root] if root.is_file() else root.rglob("*"))
+    if path.is_file() and historical_research_output(path)
+)
 PRUNE = frozenset(
     {
+        *HISTORICAL_RESEARCH_OUTPUTS,
         second.WITNESSES,
         *(ROOT / relative for relative in HOUSE_LINK_LEAVES),
         # The gate's own marker. A clone that carried it would make the campaign runner
@@ -324,9 +382,8 @@ PRUNE = frozenset(
         SESSION184_RESULTS / "exp-298-coverage-y-prefilter/04-baseline.json",
         SESSION184_RESULTS / "exp-298-coverage-y-prefilter/05-baseline.json",
         SESSION184_RESULTS / "exp-298-coverage-y-prefilter/06-candidate.json",
-        # Session186 main-refresh measurement: these five historical output roots
-        # are absent from registered control targets/commands and test consumers.
-        # Keep every inline/frontier-declared input through the existing copyback;
+        # Session186 main-refresh measurement: keep these historical roots pruned.
+        # Exact replay inputs and inline/frontier declarations return by copyback;
         # the full original logs, journals and receipts remain in the primary tree.
         # This is worker selection only; the portable 192 MiB cap is unchanged.
         SESSION184_RESULTS / "agenda-037",
@@ -973,9 +1030,9 @@ LINK_BACK = (
 # into a worker. Both checkers were red before any mutation was applied.
 COPY_SEPARATELY = (
     *couzo.private_input_paths(),
-    # The retained n13 family is an exact worker consumer asserted by the n32
-    # inventory contract; agenda-040's unrelated generated bulk stays pruned.
-    SESSION184_RESULTS / "agenda-040/exp-214-n13-399-100-family.json",
+    # Replay consumers need these leaves even when agenda-040's ancestor is pruned.
+    # Its unrelated generated bulk stays behind that prune.
+    *sorted(HISTORICAL_REPLAY_INPUTS),
     # Preserve the scientific inputs promised by the historical snapshot contract
     # even when their records mention them in commands rather than inline links.
     # Their generated profile/endpoint outputs remain under the existing prunes.
@@ -1500,45 +1557,54 @@ def snapshot_pruned_targets() -> list[Path]:
     return sorted({*linked_pruned_targets(), *result_pruned_targets()})
 
 
-def snapshot_copy_targets() -> tuple[Path, ...]:
-    """Copy each declared private path once, preserving distinct path aliases.
+def _claim_source_copy(source: Path, copied: set[Path]) -> bool:
+    """Claim one lexical path, preserving distinct files with identical bytes.
 
-    A full scientific input can be explicitly carried and separately rescued by its
-    result registration. Both names identify the same destination; copying it twice
-    repeats I/O and counts bytes that are overwritten, rather than additional source.
-    This roster is rebuilt on every invocation and admits no source validity cache.
+    Normalize dot segments without resolving symlinks or merging equal-content
+    paths. The copier, live inventory and committed projection share this rule.
     """
-    return tuple(dict.fromkeys((*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())))
+    key = Path(os.path.abspath(source))  # noqa: PTH100 — resolve() merges symlink paths
+    if key in copied:
+        return False
+    copied.add(key)
+    return True
 
 
-def snapshot_duplicate_copy_bytes() -> int:
-    """Bytes of repeated writes to identical named destinations at this invocation."""
-    paths = (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())
-    return sum(path.stat().st_size for path in paths) - sum(
-        path.stat().st_size for path in dict.fromkeys(paths)
+def _unique_source_paths(paths: Sequence[Path]) -> list[Path]:
+    copied: set[Path] = set()
+    for path in paths:
+        _claim_source_copy(path, copied)
+    return sorted(copied)
+
+
+def snapshot_copy_targets() -> tuple[Path, ...]:
+    """Copy each declared private path once, preserving first spelling and order.
+
+    Repeated declarations share the copier's lexical path identity; distinct
+    aliases and equal-content files remain separate. The roster is rebuilt on
+    every invocation and admits no source validity cache.
+    """
+    copied: set[Path] = set()
+    return tuple(
+        path
+        for path in (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())
+        if _claim_source_copy(path, copied)
     )
 
 
-def snapshot_source_paths() -> list[Path]:
-    """Actual copied source destinations, excluding build products and caches.
+def snapshot_duplicate_copy_bytes() -> int:
+    """Bytes of repeated declarations of the same lexical path at this invocation."""
+    copied: set[Path] = set()
+    return sum(
+        path.stat().st_size
+        for path in (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())
+        if not _claim_source_copy(path, copied)
+    )
 
-    Explicit and dependency-rescued paths share the copier's unique named roster;
-    repeated declarations do not add another physical file to the worker.
-    """
-    paths = list(snapshot_copy_targets())
-    for document in ROOT_DOCUMENTS:
-        if document.is_dir():
-            # `.agents` carries a Python file (`skills/experiment-loop/assets/ledger.py`),
-            # so this glob can reach a `__pycache__` the moment anything runs it. It holds
-            # none today; the exclusion is here so the count does not start drifting on
-            # the day something does.
-            paths.extend(
-                path
-                for path in document.rglob("*")
-                if path.is_file() and not _inside_build_cache(path, below=document)
-            )
-        elif document.is_file():
-            paths.append(document)
+
+def _packing_source_paths() -> list[Path]:
+    """Files carried by the initial packing bulk clone, after cache removal."""
+    paths = []
     for directory, names, files in os.walk(ROOT):
         parent = Path(directory)
         names[:] = [
@@ -1550,6 +1616,28 @@ def snapshot_source_paths() -> list[Path]:
                 continue
             paths.append(path)
     return paths
+
+
+def snapshot_source_paths() -> list[Path]:
+    """One copy per lexical source path, excluding build products and caches.
+
+    Explicit inputs, dependency rescue and root documents can select the same
+    path. The copier skips those later writes too; the count describes actual
+    operations rather than discounting bytes that are still copied repeatedly.
+    """
+    paths = list(snapshot_copy_targets())
+    for document in ROOT_DOCUMENTS:
+        if document.is_dir():
+            # `.agents` carries Python source, so exclude bytecode at any depth.
+            paths.extend(
+                path
+                for path in document.rglob("*")
+                if path.is_file() and not _inside_build_cache(path, below=document)
+            )
+        elif document.is_file():
+            paths.append(document)
+    paths.extend(_packing_source_paths())
+    return _unique_source_paths(paths)
 
 
 def snapshot_source_bytes() -> int:
@@ -1683,8 +1771,9 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
         for path in inventory
         if (path.parent == regularized_root and path.match(REGULARIZED_WITNESS_PATTERN))
     )
-    effective_prune = PRUNE | regularized
-    roots = frozenset(LINKED_PRUNE_ROOTS) | regularized
+    historical = frozenset(path for path in inventory if historical_research_output(path))
+    effective_prune = PRUNE | regularized | historical
+    roots = frozenset(LINKED_PRUNE_ROOTS) | regularized | historical
     documents = [
         path
         for path in inventory
@@ -1759,10 +1848,7 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
             and not in_pruned_roots(path, effective_prune)
         )
     )
-    projected: dict[Path, int] = {}
-    for path in selected:
-        projected[path] = projected.get(path, 0) + inventory[path][1]
-    return projected
+    return {path: inventory[path][1] for path in _unique_source_paths(selected)}
 
 
 def snapshot_git_source_bytes(revision: str = "HEAD") -> int:
@@ -1842,12 +1928,18 @@ def index_tree(root: Path) -> None:
 def clone_tree(dest: Path) -> None:
     """A private, writable source snapshot for one worker to corrupt."""
     work = dest / HERE
+    copied = set(_unique_source_paths(_packing_source_paths()))
     _clone_into(ROOT, work)
+
+    def copy_once(source: str, landing: str) -> str:
+        if _claim_source_copy(Path(source), copied):
+            shutil.copy2(source, landing)
+        return landing
 
     for target in snapshot_copy_targets():
         landing = dest / target.relative_to(REPO)
         landing.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(target, landing)
+        copy_once(str(target), str(landing))
     for directory in linked_pruned_directories():
         (dest / directory.relative_to(REPO)).mkdir(parents=True, exist_ok=True)
 
@@ -1858,9 +1950,10 @@ def clone_tree(dest: Path) -> None:
                 dest / document.name,
                 dirs_exist_ok=True,
                 ignore=shutil.ignore_patterns(*BUILD_CACHES),
+                copy_function=copy_once,
             )
         elif document.is_file():
-            shutil.copy2(document, dest / document.name)
+            copy_once(str(document), str(dest / document.name))
 
     # After every copier and before the symlinks, so the sweep sees the whole tree and
     # none of the real checkout: `.venv` alone holds 147 `__pycache__` directories that

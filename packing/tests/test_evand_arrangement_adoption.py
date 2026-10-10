@@ -9,6 +9,7 @@ import shutil
 import subprocess
 import sys
 from decimal import Decimal
+from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
@@ -20,6 +21,7 @@ from devtools import evand_arrangement_houses as houses
 from devtools import evand_arrangement_reports as reports
 from devtools import register_evand_arrangements as adoption
 from devtools import run_negative_controls as controls
+from sqpack.kingbird_catalogue import normalized_polynomial
 from sqpack.witness import witness_document
 from sqpack.yamlio import safe_load
 from tests.test_negative_controls import index_fixture_source
@@ -58,6 +60,14 @@ def test_exact_new_pose_adoption_preserves_historical_case_and_is_idempotent(n: 
     assert case["reported_upper_bound"]["exact_form"] == reports.legacy.literal(
         reports.read_fact(n).side
     )
+    reported = case["reported_upper_bound"]
+    side = Fraction(reported["exact_form"])
+    assert reported["algebraic_degree"] == 1
+    assert reported["algebraic_source"] == "derived-from-exact-form"
+    assert normalized_polynomial(reported["minimal_polynomial"]) == (
+        side.denominator,
+        -side.numerator,
+    )
     assert case["reported_lower_bound"] == old["reported_lower_bound"]
     assert case["verified_lower_bound"] == old["verified_lower_bound"]
     assert case["rigidity"] is None
@@ -88,6 +98,7 @@ def test_generator_preserves_new_geometry_and_adopts_ordinary_lower_lane() -> No
         reports.read_fact(n).side
     )
     assert case["verified_upper_bound"] == reports.confirmed_bound(n)
+    assert case["reported_upper_bound"] == document["packing"]["reported_upper_bound"]
 
 
 def test_actual_houses_bind_every_complete_input_and_native_field(private: Path) -> None:

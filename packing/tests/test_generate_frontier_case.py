@@ -59,6 +59,7 @@ import shutil
 import subprocess
 import sys
 from collections.abc import Mapping
+from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
@@ -69,6 +70,7 @@ from devtools import source_supersession, validate_schemas
 from devtools import squish_followup_packets as update
 from devtools import squish_second_update_packets as second
 from devtools.apply_upper_bound_packets import PREVIOUS_HEADING, earlier_reports, normalized
+from devtools.backfill_algebraic_facts import backfilled
 from devtools.check_basic_bounds import check_case_basic_bounds
 from devtools.check_case_prose import check_case_file
 from devtools.check_source_coverage import COVERAGE, pending_intake_blocker, record_catalogue
@@ -115,6 +117,8 @@ from devtools.generate_frontier_case import (
     write_record,
 )
 from sqpack.assurance import check_case_semantics
+from sqpack.exact_values import CATALOGUE as CATALOGUE_SOURCE
+from sqpack.exact_values import DERIVED_FROM_EXACT_FORM, format_polynomial
 from sqpack.yamlio import safe_load
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -249,7 +253,42 @@ def _before_ryxu(n: int, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> str
         monkeypatch.setattr(houses, "REPO", tmp_path)
         monkeypatch.setattr(houses, "METADATA", metadata)
         monkeypatch.setattr(houses, "house_path", lambda _n: house_path)
-    return original
+    # These immutable snapshots predate the maintained algebraic projection. Derive
+    # only those fields in memory; the old side, source, geometry and evidence stay pinned.
+    return backfilled(original, n)
+
+
+@pytest.mark.parametrize("n", [105, 108, 126, 130, 153, 179])
+def test_historical_source_fixture_keeps_bound_and_custody_pins(
+    n: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    original = _pre_ryxu_records()[n]["frontier"]
+    projected = _before_ryxu(n, monkeypatch, tmp_path)
+    _, old_front, old_body = original.split("---\n", 2)
+    _, new_front, new_body = projected.split("---\n", 2)
+    old_case = safe_load(old_front)["packing"]
+    new_case = safe_load(new_front)["packing"]
+    assert old_body == new_body
+    assert {key: value for key, value in old_case.items() if key != "reported_upper_bound"} == {
+        key: value for key, value in new_case.items() if key != "reported_upper_bound"
+    }
+    old_report = old_case["reported_upper_bound"]
+    new_report = new_case["reported_upper_bound"]
+    derived_fields = {"algebraic_degree", "minimal_polynomial", "algebraic_source"}
+    assert {key: value for key, value in old_report.items() if key not in derived_fields} == {
+        key: value for key, value in new_report.items() if key not in derived_fields
+    }
+    rational = Fraction(old_report["exact_form"])
+    assert new_report["algebraic_degree"] == 1
+    assert new_report["minimal_polynomial"] == format_polynomial(
+        (rational.denominator, -rational.numerator)
+    )
+    assert new_report["algebraic_source"] == DERIVED_FROM_EXACT_FORM
+    assert (
+        new_report["source_key"]
+        != _committed(n)[0]["packing"]["reported_upper_bound"]["source_key"]
+    )
+    assert backfilled(projected, n) == projected
 
 
 def _committed(n: int) -> tuple[dict[str, Any], str]:
@@ -266,12 +305,15 @@ def _injected_facts(n: int) -> CatalogueFacts:
     comparison tests the generator's assembly rather than the parser's reading.
     """
     reported = _committed(n)[0]["packing"]["reported_upper_bound"]
+    # The catalogue prints a degree and polynomial only where the record says it did; a
+    # derived pair is the generator's own to compute from the closed form.
+    printed = reported.get("algebraic_source") == CATALOGUE_SOURCE
     return CatalogueFacts(
         n=n,
         side_decimal=str(reported["value"]),
         exact_form=reported["exact_form"],
-        algebraic_degree=reported["algebraic_degree"],
-        minimal_polynomial=reported["minimal_polynomial"],
+        algebraic_degree=reported["algebraic_degree"] if printed else None,
+        minimal_polynomial=reported["minimal_polynomial"] if printed else None,
         found_by=tuple(reported["found_by"]),
         found_year=reported["found_year"],
         catalogue_rigid=reported["catalogue_rigid"],
@@ -1332,6 +1374,77 @@ def test_confirmed_squish_draft_rebuilds_and_requires_both_displays(
     # Coverage selecting a later source does not authorize assigning that source's
     # facts to an earlier draft's evidence, resources or body before intake.
     assert source_supersession.adopt_selected_report(n, historical, historical) == historical
+
+
+@pytest.mark.parametrize(
+    "n",
+    [
+        88,
+        108,
+        123,
+        126,
+        129,
+        130,
+        153,
+        154,
+        155,
+        179,
+        180,
+        199,
+        207,
+        208,
+        209,
+        236,
+        237,
+        238,
+        239,
+        258,
+        263,
+        302,
+        303,
+    ],
+)
+def test_selected_rational_metadata_survives_refresh_and_backfill(n: int) -> None:
+    """Rebuilding a selected certificate restores its primitive rational identity."""
+    committed = record_path(FRONTIER, n).read_text()
+    _, front, body = committed.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    report = case["reported_upper_bound"]
+    rational = Fraction(report["exact_form"])
+    expected = {
+        "algebraic_degree": 1,
+        "minimal_polynomial": format_polynomial((rational.denominator, -rational.numerator)),
+        "algebraic_source": DERIVED_FROM_EXACT_FORM,
+    }
+    assert {field: report[field] for field in expected} == expected
+    verified = case["verified_upper_bound"]
+    status = (case["reported_status"], case["status"])
+    report["minimal_polynomial"] = None
+    stale = (
+        "---\n" + yaml.safe_dump(document, sort_keys=False, allow_unicode=True) + "---\n" + body
+    )
+    availability = load_availability()
+    if n == 88:
+        availability[n] = _availability(n, CATALOGUE)
+    refreshed = redraft(
+        n,
+        stale,
+        availability=availability,
+        catalogue=load_drafting_catalogue([n], availability),
+        review_date="2026-10-07",
+        retrieved_date="2026-10-07",
+    )
+    rebuilt = safe_load(refreshed.split("---\n", 2)[1])["packing"]
+    regenerated = rebuilt["reported_upper_bound"]
+    assert {field: regenerated[field] for field in expected} == expected
+    assert regenerated["exact_form"] == report["exact_form"]
+    assert regenerated["source_key"] == report["source_key"]
+    assert regenerated["evidence"] == report["evidence"]
+    assert rebuilt["verified_upper_bound"] == verified
+    assert (rebuilt["reported_status"], rebuilt["status"]) == status
+    assert backfilled(refreshed, n) == refreshed
+    assert backfilled(backfilled(stale, n), n) == backfilled(stale, n)
 
 
 def test_selected_squish_publication_admits_integer_rational_sides(

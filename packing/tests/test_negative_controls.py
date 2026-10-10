@@ -1358,6 +1358,42 @@ def test_unread_worker_outputs_leave_workers_while_declared_files_return(
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
+def test_historical_research_outputs_leave_workers_without_losing_custody(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The cap repair omits unused output and preserves every declared or replay input."""
+    tree, rescued = control_snapshot
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    omitted = []
+    for source in controls.HISTORICAL_RESEARCH_OUTPUTS:
+        relative = source.relative_to(controls.REPO)
+        packing_relative = source.relative_to(ROOT).as_posix()
+        assert all(
+            (ROOT / control["file"]).resolve() != source
+            and packing_relative not in control["run"]
+            for control in specification["controls"]
+        )
+        landed = tree / relative
+        if relative in rescued:
+            assert landed.read_bytes() == source.read_bytes()
+        else:
+            omitted.append(source)
+            assert not landed.exists()
+    assert sum(path.stat().st_size for path in omitted) > 3_500_000
+    for root in controls.HISTORICAL_RESEARCH_ROOTS:
+        sources = [root] if root.is_file() else root.rglob("*")
+        for source in sources:
+            if source.is_file() and not controls.historical_research_output(source):
+                assert (
+                    tree / source.relative_to(controls.REPO)
+                ).read_bytes() == source.read_bytes()
+    for source in controls.HISTORICAL_REPLAY_INPUTS:
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == source.read_bytes()
+    for control in specification["controls"]:
+        source = (ROOT / control["file"]).resolve()
+        assert (tree / source.relative_to(controls.REPO)).is_file()
+
+
 def test_math_startup_reports_are_pruned_but_record_sources_survive(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -1528,9 +1564,96 @@ def test_snapshot_inventory_preserves_copy_count_and_cache_exclusions(
     monkeypatch.setattr(controls, "snapshot_pruned_targets", lambda: [omitted])
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (docs,))
     monkeypatch.setattr(controls, "PRUNE", frozenset((omitted,)))
-    assert controls.snapshot_source_paths() == [omitted, document, ordinary]
+    assert controls.snapshot_source_paths() == sorted((omitted, document, ordinary))
     assert controls.snapshot_source_bytes() == omitted.stat().st_size + 11
     assert controls.snapshot_duplicate_copy_bytes() == omitted.stat().st_size
+
+
+def test_overlapping_copy_routes_copy_each_private_path_once(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Count real copies while preserving distinct paths, schemas and private bytes."""
+    packing = tmp_path / "packing"
+    resources = packing / "resources"
+    resources.mkdir(parents=True)
+    needed = resources / "input.json"
+    needed.write_bytes(b"retained receipt")
+    separate = resources / "same-bytes.json"
+    separate.write_bytes(needed.read_bytes())
+    (resources / "unused-output.json").write_bytes(b"generated output")
+    source = packing / "source.py"
+    source.write_bytes(b"source")
+    schema = packing / "source.schema.yaml"
+    schema.write_bytes(b"schema")
+    register = packing / "frontier/results.yaml"
+    register.parent.mkdir()
+    register.write_text("results: []\n")
+    docs = tmp_path / "docs"
+    docs.mkdir()
+    document = docs / "notes.md"
+    document.write_text("[input](../packing/resources/input.json)\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "REPO", tmp_path)
+    monkeypatch.setattr(controls, "HERE", Path("packing"))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({resources}))
+    monkeypatch.setattr(controls, "DESCEND", frozenset(resources.parents))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (resources,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (needed, separate, source, document))
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (docs,))
+    monkeypatch.setattr(controls, "root_files", lambda: (document, source))
+    monkeypatch.setattr(controls, "_linked_documents", lambda: [document])
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+    monkeypatch.setattr(controls, "index_tree", lambda _tree: None)
+    copied: list[Path] = []
+    copy = shutil.copy2
+
+    def counted_copy(source_path: str | Path, destination: str | Path) -> str | Path:
+        copied.append(Path(source_path))
+        return copy(source_path, destination)
+
+    monkeypatch.setattr(shutil, "copy2", counted_copy)
+    destination = tmp_path / "worker"
+    controls.clone_tree(destination)
+    assert copied.count(needed) == 1
+    assert copied.count(separate) == 1
+    assert copied.count(document) == 1
+    # The packing bulk clone already carried this path; explicit routes must not
+    # overwrite it a second time. Equal bytes at distinct paths still copy separately.
+    assert source not in copied
+    selected = {needed, separate, source, schema, register, document}
+    assert controls.snapshot_source_paths() == sorted(selected)
+    assert controls.snapshot_source_bytes() == sum(path.stat().st_size for path in selected)
+    for path in selected:
+        landing = destination / path.relative_to(tmp_path)
+        assert landing.read_bytes() == path.read_bytes()
+        assert not landing.is_symlink()
+    assert not (destination / "packing/resources/unused-output.json").exists()
+    (destination / "packing/resources/input.json").write_bytes(b"private mutation")
+    assert needed.read_bytes() == b"retained receipt"
+    assert (
+        destination / "packing/resources/same-bytes.json"
+    ).read_bytes() == needed.read_bytes()
+
+
+def test_copy_identity_normalizes_dot_segments_without_merging_aliases(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source = tmp_path / "source.json"
+    source.write_bytes(b"source")
+    alias = tmp_path / "alias.json"
+    alias.symlink_to(source)
+    identical = tmp_path / "same-bytes.json"
+    identical.write_bytes(source.read_bytes())
+    (tmp_path / "nested").mkdir()
+    dotted = tmp_path / "nested/../source.json"
+    monkeypatch.setattr(controls, "ROOT", tmp_path / "empty-packing")
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (dotted, source, alias, identical))
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "snapshot_pruned_targets", list)
+    assert controls.snapshot_copy_targets() == (dotted, alias, identical)
+    assert controls.snapshot_duplicate_copy_bytes() == source.stat().st_size
+    assert controls.snapshot_source_paths() == sorted((source, alias, identical))
 
 
 @pytest.fixture
@@ -3224,8 +3347,14 @@ def test_duplicate_stdout_prune_preserves_canonical_and_declared_input(
 
 @pytest.mark.parametrize("declaration", ["inline", "frontier", "none"])
 @pytest.mark.parametrize("explicit", [False, True])
+@pytest.mark.parametrize("selector", ["explicit", "historical"])
 def test_git_projection_preserves_sparse_declared_inputs(
-    declaration: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, explicit: bool
+    declaration: str,
+    selector: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    explicit: bool,
 ) -> None:
     """Absent sparse files still count; genuine declarations rescue exact outputs."""
     packing = tmp_path / "packing"
@@ -3277,8 +3406,14 @@ def test_git_projection_preserves_sparse_declared_inputs(
     monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
-    monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
-    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
+    monkeypatch.setattr(
+        controls, "PRUNE", frozenset({output}) if selector == "explicit" else frozenset()
+    )
+    monkeypatch.setattr(
+        controls, "LINKED_PRUNE_ROOTS", (output,) if selector == "explicit" else ()
+    )
+    monkeypatch.setattr(controls, "HISTORICAL_RESEARCH_ROOTS", frozenset({output.parent}))
+    monkeypatch.setattr(controls, "HISTORICAL_REPLAY_INPUTS", frozenset({canonical}))
     monkeypatch.setattr(controls, "COPY_SEPARATELY", (output,) if explicit else ())
     assert controls.snapshot_git_source_bytes(tree) == expected
 
