@@ -3,15 +3,19 @@ type: is
 id: is-01m4kg2ccs06580txqw4c12qs0
 title: Scope pre-push prerequisites to changed inputs
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
+delegate: codex@spud10
 labels: []
 dependencies: []
 parent_id: is-01m4ke1dkg5m43rszjm49ar77r
+hold: null
+hold_until: null
 created_at: 2026-10-10T18:09:12.086Z
-updated_at: 2026-10-10T18:09:12.086Z
+updated_at: 2026-10-10T18:12:46.510Z
+started_at: 2026-10-10T18:12:46.496Z
 ---
 Reuse the existing select_for_paths contract to scope local --push prerequisite checks, then separate policy/tooling inputs from the overly broad _CORE attribution after auditing actual dependencies. No implementation is authorized in the current slice.
 
