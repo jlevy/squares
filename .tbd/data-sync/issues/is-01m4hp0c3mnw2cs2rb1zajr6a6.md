@@ -5,13 +5,15 @@ title: "PR #478: resolve main conflicts, review intake integration and merge"
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m4hpzt83nc67m0y559vn9808
 hold: null
 hold_until: null
 created_at: 2026-10-10T01:14:28.829Z
-updated_at: 2026-10-10T01:14:43.984Z
+updated_at: 2026-10-10T01:31:39.135Z
 started_at: 2026-10-10T01:14:43.970Z
 ---
