@@ -5,8 +5,8 @@ title: Normalize packing campaign and work-unit vocabulary
 kind: task
 status: closed
 priority: 1
-version: 6
-spec_path: explorations/packing/SYNOPSIS.md
+version: 7
+spec_path: SYNOPSIS.md
 delegate: codex@spud10
 labels:
   - packing
@@ -24,7 +24,7 @@ parent_id: is-01m0r7tkdt35ged6b10gaf9wa0
 hold: null
 hold_until: null
 created_at: 2026-08-24T21:38:36.017Z
-updated_at: 2026-08-24T22:08:31.498Z
+updated_at: 2026-10-10T23:02:21.890Z
 started_at: 2026-08-24T21:38:43.035Z
 closed_at: 2026-08-24T22:08:31.498Z
 close_reason: Defined the canonical W1-W6 taxonomy and normalized campaign, series, session, phase, slice, experiment, round, run, result, and ledger vocabulary in the synopsis, with compact README orientation and enforced schema agreement.

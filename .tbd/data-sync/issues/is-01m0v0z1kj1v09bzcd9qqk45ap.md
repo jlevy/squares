@@ -5,8 +5,8 @@ title: Add explicit-source SVG rendering CLI and atomic output
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+version: 6
+spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
   - visualization
@@ -18,7 +18,7 @@ dependencies:
     target: is-01m0v102z22dxytc6atqpnszdz
 parent_id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 created_at: 2026-08-24T23:16:22.257Z
-updated_at: 2026-08-25T03:00:04.880Z
+updated_at: 2026-10-10T23:02:54.921Z
 closed_at: 2026-08-25T03:00:04.880Z
 close_reason: Implemented and validated the deterministic SVG toolkit, exact and numerical adapters, safe serializer, static and animated views, typed overlays, CLI, retained gallery, n=3 migration, documentation, and full gate.
 resolution: null
