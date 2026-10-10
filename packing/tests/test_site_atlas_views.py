@@ -743,7 +743,7 @@ def test_a_linked_triangle_is_the_triangle_before_a_tile_is_drawn(seen: Readings
             "view": "triangle",
             "size": "small",
             "scale": "fixed",
-            "per_line": "15",
+            "per_line": "16",
             "tiles": 100,
             "moving": 0,
         }
@@ -847,7 +847,7 @@ def test_every_triangle_line_has_uniform_height_and_vertical_pitch(
 ) -> None:
     """Every complete logical row reserves identical height and vertical spacing."""
     report = seen[name]
-    assert report["line_gap_px"] == pytest.approx(report["gap_px"], abs=atlas.EDGE)
+    assert report["line_gap_px"] == pytest.approx(report["row_gap_px"], abs=atlas.EDGE)
     for tile in report["tiles"]:
         drawing = tile["drawing"]
         padding = (tile["width"] - drawing["width"]) / 2
