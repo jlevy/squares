@@ -5,7 +5,7 @@ chips offering the Markdown it is rendered from, its typeset PDF and the project
 GitHub; then the title; then the credits, in the owner's form (2026-10-01), and under
 them the series strip (the series plan, 2026-10-05):
 
-    From the original proof by **Queuingtheorydotcom**
+    From the original proof by **Mannaseh Ahmed**
     github.com/Queuingtheorydotcom/11SquaresOptimal
 
     Human oversight: **Joshua Levy**

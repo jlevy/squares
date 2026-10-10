@@ -174,7 +174,7 @@ def test_the_columns_table_has_one_line_a_column() -> None:
                     "column": "Credit",
                     "width": 102.6,
                     "lines": 9,
-                    "broken": ["Queuingtheorydotcom", "Guzhou0806"],
+                    "broken": ["Ahmed", "Guzhou0806"],
                     "tallest": {"row": "t-048", "height": 238.8, "lines": 9},
                 },
                 {

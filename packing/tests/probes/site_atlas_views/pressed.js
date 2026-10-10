@@ -24,6 +24,25 @@
     );
   const tiles = moves.filter((effect) => effect.target?.matches(".site-atlas-cell") === true);
   const timing = tiles[0]?.getComputedTiming();
+  const tileMoves = tiles.map((effect) => {
+    const motionTiming = effect.getComputedTiming();
+    return {
+      n: Number(effect.target?.getAttribute("data-atlas-n")),
+      duration: Number(motionTiming.duration),
+      easing: motionTiming.easing,
+      properties: [
+        ...new Set(
+          effect
+            .getKeyframes()
+            .flatMap((frame) =>
+              Object.keys(frame).filter(
+                (name) => !["offset", "computedOffset", "easing", "composite"].includes(name),
+              ),
+            ),
+        ),
+      ].sort(),
+    };
+  });
   return {
     scroll_before: scrollBefore,
     scroll_after: window.scrollY,
@@ -33,18 +52,7 @@
     followers: moves.length - tiles.length,
     duration: timing ? Number(timing.duration) : null,
     easing: timing?.easing ?? null,
-    properties: [
-      ...new Set(
-        tiles.flatMap((effect) =>
-          effect
-            .getKeyframes()
-            .flatMap((frame) =>
-              Object.keys(frame).filter(
-                (name) => !["offset", "computedOffset", "easing", "composite"].includes(name),
-              ),
-            ),
-        ),
-      ),
-    ].sort(),
+    properties: [...new Set(tileMoves.flatMap((motion) => motion.properties))].sort(),
+    tile_moves: tileMoves,
   };
 };

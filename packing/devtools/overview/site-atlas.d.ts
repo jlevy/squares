@@ -12,6 +12,7 @@ interface SiteAtlasParts {
   scoped?: boolean;
   /** Complete the visible preview before measuring its final layout. */
   beforeArrange?: () => void;
+  scales?: HTMLElement | null;
 }
 
 /** A mounted block's two acts: arrange the triangle for the width, and change the

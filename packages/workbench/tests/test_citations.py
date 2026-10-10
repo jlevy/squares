@@ -349,3 +349,40 @@ def test_the_fold_is_made_as_the_page_loads_not_in_the_file() -> None:
         "Karakus 2026"
     )
     assert cited_lines(row)["lower"][0].startswith("Karakus 2026")
+
+
+@pytest.mark.parametrize(
+    ("known", "legacy_style", "expected"),
+    [(True, "muted", True), (False, "solid", False), (None, "muted", True), (True, None, True)],
+)
+def test_facts_display_one_dark_r_from_the_selected_packing_assessment(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    known: bool | None,
+    legacy_style: str | None,
+    expected: bool,
+) -> None:
+    from workbench_tools import build_candidate  # noqa: PLC0415
+
+    entry = json.loads(build_candidate.COMPOSITE.read_text())["figure"]["entries"][0]
+    entry["badges"] = [badge for badge in entry["badges"] if badge["glyph"] != "R"]
+    if legacy_style is not None:
+        entry["badges"].append(
+            {"glyph": "R", "style": legacy_style, "meaning": "legacy rigidity assurance"}
+        )
+    if known is None:
+        entry["rigidity"].pop("known_rigid", None)
+    else:
+        entry["rigidity"]["known_rigid"] = known
+    record = {"figure": {"entries": [entry]}}
+    path = tmp_path / "composite.json"
+    path.write_text(json.dumps(record))
+    monkeypatch.setattr(build_candidate, "COMPOSITE", path)
+    monkeypatch.setattr(build_candidate, "katex_html", lambda tex: ["<math/>" for _ in tex])
+    facts = build_candidate.load_facts({1: {"source": {"kind": "exact-grid"}}})
+    rigid = [badge for badge in facts["1"]["badges"] if badge["glyph"] == "R"]
+    assert rigid == (
+        [{"glyph": "R", "style": "solid", "meaning": "known rigid"}] if expected else []
+    )
+    assert json.loads(path.read_text()) == record

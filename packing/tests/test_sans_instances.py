@@ -25,8 +25,8 @@ So the three are exercised directly:
   `li.kpress-footnote-item::before` numbers the footnotes -- and this is the rule that
   decides which of those count as a request.
 
-Nothing here launches a browser or reads a real font: the fixture writes stand-in files
-of a few bytes, and the whole file runs in milliseconds.
+Nothing here launches a browser. Font-dictionary fixtures use stand-in bytes; the atlas
+provenance check also reads the retained font assets' PostScript names.
 """
 
 # `_attribution` reads one node's cascade and is private because nothing outside the
@@ -40,12 +40,15 @@ import re
 from pathlib import Path
 
 import pytest
+from fontTools.ttLib import TTFont
 from nodejs_wheel import node
 
-from devtools import render_n11_lower_bounds_explainer_pdf
+from devtools import atlas_print_font, render_n11_lower_bounds_explainer_pdf
 from devtools.render_n11_lower_bounds_explainer_pdf import (
     EXPECTED_HOST_FONTS,
+    RETAINED_ATLAS_FACES,
     atlas_face_bead,
+    atlas_faces_present,
     embedded_fonts,
     font_findings,
     host_font_bead,
@@ -354,6 +357,58 @@ def test_the_atlas_figures_host_sans_is_the_documented_exception() -> None:
     assert host_font_bead("LiberationSans-BoldItalic") is None
     assert not shipped("DejaVuSans-Bold")
     assert atlas_face_bead("PTSerif-Bold") is None
+
+
+def test_the_retained_atlas_faces_match_the_shipped_font_names_and_embed() -> None:
+    """Accept the drawing's exact retained faces rather than a host substitute."""
+    names = []
+    for path in atlas_print_font.FONT_PATHS:
+        with TTFont(path) as font:
+            names.append(font["name"].getDebugName(6))
+    assert tuple(names) == RETAINED_ATLAS_FACES
+    for name in RETAINED_ATLAS_FACES:
+        document = _descriptor(9, name, program=True) + _font(
+            1, "Type0", 9, face=f"AAAAAA+{name}"
+        )
+        assert embedded_fonts(document) == [f"AAAAAA+{name}"]
+        assert shipped(name)
+        assert atlas_face_bead(name) == "think-01fv"
+        assert font_findings(document) == []
+        assert atlas_faces_present(document) == {}
+        host = _descriptor(8, "Helvetica-Bold", program=True) + _font(
+            2, "Type0", 8, face="BAAAAA+Helvetica-Bold"
+        )
+        assert atlas_faces_present(document + host) == {"Helvetica-Bold": "think-czt4"}
+
+
+def test_retained_atlas_faces_refuse_outlines_missing_programs_and_lookalikes() -> None:
+    """The retained faces owe embedding; the former host exceptions do not excuse them."""
+    for name in RETAINED_ATLAS_FACES:
+        outlined = _descriptor(9, name) + _font(1, "Type3", 9) + EMBEDDED_SERIF
+        assert any(
+            "Type3" in finding and name in finding for finding in font_findings(outlined)
+        )
+        referenced = _descriptor(9, name) + _font(1, "Type0", 9, face=f"AAAAAA+{name}")
+        assert embedded_fonts(referenced) == []
+        assert any(
+            "not embedded" in finding and name in finding
+            for finding in font_findings(referenced)
+        )
+        descriptor_missing = _font(1, "Type0", face=f"AAAAAA+{name}")
+        assert any("not embedded" in finding for finding in font_findings(descriptor_missing))
+        # A valid subset cannot excuse a second subset that lost its font program.
+        mixed = (
+            referenced
+            + _descriptor(8, name, program=True)
+            + _font(2, "Type0", 8, face=f"BAAAAA+{name}")
+        )
+        assert any("not embedded" in finding for finding in font_findings(mixed))
+        for lookalike in (f"{name}Narrow", f"{name}-Alternate"):
+            assert not shipped(lookalike)
+            stranger = _descriptor(9, lookalike, program=True) + _font(
+                1, "Type0", 9, face=f"AAAAAA+{lookalike}"
+            )
+            assert any(lookalike in finding for finding in font_findings(stranger))
 
 
 def test_a_third_face_in_the_figures_labels_is_a_finding() -> None:

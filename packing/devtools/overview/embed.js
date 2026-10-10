@@ -13,9 +13,15 @@
       query.get("atlas") === "grid" ? "grid" : "triangle",
     );
     const size = query.get("size");
-    if (size === "small" || size === "large") {
-      document.documentElement.setAttribute("data-site-atlas-size", size);
-    }
+    document.documentElement.setAttribute(
+      "data-site-atlas-size",
+      size === "medium" || size === "large" ? size : "small",
+    );
+    const scale = query.get("scale");
+    document.documentElement.setAttribute(
+      "data-site-atlas-scale",
+      scale === "row" || scale === "global" ? scale : "fixed",
+    );
   }
   if (query.get("view") !== "embed") {
     return;

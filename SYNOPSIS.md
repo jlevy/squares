@@ -4599,7 +4599,7 @@ The earlier lower-bound program passed Stromquist’s bound on 2026-09-04:
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | $3.877083590022814\ldots$ (exactly $T$) | Walter Trump, 1979; exact witness [T-011](packing/frontier/RESULTS.md) |
-| Best certified lower bound | `root(P_trump11, 3.87708359002281417730789706010096) = 3.877083590022814…` (exactly $T$) | Queuingtheorydotcom’s proof, independently replayed and audited here as [T-060](packing/frontier/RESULTS.md), `V3/C3` |
+| Best certified lower bound | `root(P_trump11, 3.87708359002281417730789706010096) = 3.877083590022814…` (exactly $T$) | Ahmed’s proof, independently replayed and audited here as [T-060](packing/frontier/RESULTS.md), `V3/C3` |
 | Bound gap | $0$ | Matching exact lower and upper bounds |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
@@ -5103,8 +5103,8 @@ Montanher and coauthors’ unit squares in a circle.
 packing. [T-011](packing/frontier/RESULTS.md) verifies the algebraic witness and
 [T-060](packing/frontier/RESULTS.md) supplies the matching global lower bound for
 arbitrarily rotated unit squares with disjoint interiors and boundary contact allowed.
-The latter is Queuingtheorydotcom’s Astra-assisted proof, building on this project and
-Kleddamag, independently replayed and mathematically audited here at `V3/C3/S5`.
+The latter is Ahmed’s Astra-assisted proof, building on this project and Kleddamag,
+independently replayed and mathematically audited here at `V3/C3/S5`.
 
 The [proof review](docs/project/reviews/review-2026-09-29-n11-optimality.md) maps the
 2,184 canonical patterns, 2,180 exclusions, four symmetric survivors, exact D4 bridge,

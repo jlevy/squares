@@ -17,9 +17,9 @@ The first three are one series on $n = 11$, read in order:
 [Part II]({{THRESHOLD_BOUND_PAPER}}) reviews Kleddamag’s certified bound $s(11) > 31/8$,
 [T-037](all-results.html#t-037), and [Part III]({{OPTIMALITY_PAPER}}) reviews the proof
 that settles the case.
-Trump’s 1979 packing of eleven squares has been proved optimal by Queuingtheorydotcom’s
-proof, [T-060](all-results.html#t-060), which is machine-checked and reviewed here with
-its review record pending (`V3/C3`). T-060 settles the case; Part III explains it.
+Trump’s 1979 packing of eleven squares has been proved optimal by Ahmed’s proof,
+[T-060](all-results.html#t-060), which is machine-checked and reviewed here with its
+review record pending (`V3/C3`). T-060 settles the case; Part III explains it.
 
 The [square-packing tutorial](tutorial.html) introduces the problem and its mathematics.
 [How Record Square Packings Are Found](papers/square-packing-methods-survey.html)

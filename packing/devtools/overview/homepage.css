@@ -30,10 +30,10 @@
   max-inline-size: 30rem;
 }
 
-/* Include the native 252-unit row pitch: the lower label's glyph tails extend into
+/* Include the native 287-unit row pitch: the lower label's glyph tails extend into
    the poster's gutter at small sizes. Packing geometry remains unscaled internally. */
 .site-homepage-atlas .site-atlas-cell > svg {
-  aspect-ratio: 216 / 252;
+  aspect-ratio: 216 / 287;
 }
 
 /* Native polygon colors retain the poster's angle/contact palette. Its background,

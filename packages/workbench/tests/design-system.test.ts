@@ -261,6 +261,19 @@ test("a recent result is a `new result` star badge, first in the row", () => {
   );
 });
 
+test("legacy and canonical rigidity badges share one dark R", () => {
+  const plan = planFacts(
+    facts({
+      badges: [
+        { glyph: "R", style: "muted", meaning: "annotated rigid by the catalogue" },
+        { glyph: "R", style: "solid", meaning: "known rigid" },
+      ],
+    }),
+    28,
+  );
+  assert.deepEqual(plan.badges, [{ glyph: "R", style: "solid", label: "rigid" }]);
+});
+
 test("OPEN is drawn only when something is open", () => {
   assert.equal(planFacts(facts({ open: [] }), 16).open, null);
   assert.deepEqual(planFacts(facts({ open: ["optimality", "rigidity"] }), 17).open, [
@@ -273,6 +286,10 @@ test("an unknown badge is refused rather than drawn unlabelled", () => {
   assert.throws(
     () => planFacts(facts({ badges: [{ glyph: "X", style: "solid", meaning: "?" }] }), 9),
     /unknown badge X\/solid for n = 9/,
+  );
+  assert.throws(
+    () => planFacts(facts({ badges: [{ glyph: "R", style: "unknown", meaning: "?" }] }), 9),
+    /unknown badge R\/unknown for n = 9/,
   );
 });
 

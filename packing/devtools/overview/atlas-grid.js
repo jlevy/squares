@@ -7,6 +7,7 @@
   const toggle = grid?.querySelector("[data-atlas-toggle]");
   const tabs = grid?.querySelector("[data-atlas-views]");
   const sizes = grid?.querySelector("[data-atlas-sizes]");
+  const scales = grid?.querySelector("[data-atlas-scales]");
   if (
     !(grid instanceof HTMLElement) ||
     !(cells instanceof HTMLElement) ||
@@ -18,6 +19,7 @@
   }
   const tiles = [...cells.querySelectorAll("a.site-atlas-cell")];
   const first = Number(grid.dataset.atlasFirst) || 100;
+  let expanded = false;
 
   // The button reads Show More with the double chevron down, and once the rest show,
   // Show Less with the chevron up; its name for assistive technology says what each
@@ -43,43 +45,62 @@
   // rows in Triangle. Only boundary anchors move; stable links retain their focus.
   const completePreview = () => {
     const triangle = grid.dataset.atlasView === "triangle";
-    const columns = Math.max(
-      1,
-      getComputedStyle(cells).gridTemplateColumns.trim().split(/\s+/).length,
+    // Inline per-line state still describes the previous arrangement here. Use
+    // the shared capacity calculation with the current width/size tokens, so the
+    // completed prefix and the layout that follows use the same columns.
+    const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const style = getComputedStyle(cells);
+    const columns = SiteAtlasView.perLineAt(
+      cells.getBoundingClientRect().width,
+      SiteAtlasView.lengthPx(style.getPropertyValue("--site-atlas-cell-min"), root),
+      Number.POSITIVE_INFINITY,
+      Number.parseFloat(style.getPropertyValue("--site-atlas-scale")),
+      SiteAtlasView.lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root),
     );
     let count = triangle
       ? Math.round(Math.sqrt(first)) ** 2
       : Math.max(columns, Math.round(first / columns) * columns);
-    const direct = cells.querySelectorAll(":scope > .site-atlas-cell").length;
+    const direct = Number(grid.dataset.atlasPreviewCount) || first;
     // A stepped popover still returns to its original opener. Retain the visible
     // prefix while it is open, rounding up so that origin cannot become hidden.
-    if (rest.hidden && count < direct && document.querySelector("#pop-case:popover-open")) {
+    if (!expanded && count < direct && document.querySelector("#pop-case:popover-open")) {
       count = triangle ? Math.ceil(Math.sqrt(direct)) ** 2 : Math.ceil(direct / columns) * columns;
     }
     count = Math.min(tiles.length, count);
     grid.dataset.atlasPreviewCount = String(count);
     toggle.dataset.nameLess = `Show less: the first ${count}`;
-    if (rest.hidden && count !== direct) {
-      const focused = document.activeElement;
-      if (count > direct) {
-        rest.before(...tiles.slice(direct, count));
-      } else {
-        rest.prepend(...tiles.slice(count, direct));
-      }
-      if (focused instanceof HTMLElement && rest.contains(focused)) {
-        const last = tiles[count - 1];
-        if (last instanceof HTMLElement) {
-          last.focus({ preventScroll: true });
-        }
+    const shown = expanded ? tiles.length : count;
+    const focused = document.activeElement;
+    // Keep the server's row/segment structure and all link identities intact.
+    rest.hidden = false;
+    for (const tile of tiles) {
+      tile.toggleAttribute("hidden", Number(tile.getAttribute("data-atlas-n")) > shown);
+    }
+    for (const row of cells.querySelectorAll(".site-atlas-row")) {
+      row.toggleAttribute(
+        "hidden",
+        [...row.querySelectorAll(".site-atlas-cell")].every((tile) => tile.hasAttribute("hidden")),
+      );
+    }
+    cells.style.setProperty("--site-atlas-widest", String(SiteAtlasView.widest(shown)));
+    cells.style.setProperty(
+      "--site-atlas-extra",
+      expanded ? "var(--site-atlas-last-extra)" : "var(--site-atlas-first-extra)",
+    );
+    if (focused instanceof HTMLElement && focused.closest("[hidden]") !== null) {
+      const last = tiles[shown - 1];
+      if (last instanceof HTMLElement) {
+        last.focus({ preventScroll: true });
       }
     }
-    relabel(!rest.hidden);
+    relabel(expanded);
   };
   const views = SiteAtlasView.mount({
     block: grid,
     cells,
     tabs,
     sizes: sizes instanceof HTMLElement ? sizes : null,
+    scales: scales instanceof HTMLElement ? scales : null,
     beforeArrange: completePreview,
   });
 
@@ -95,14 +116,14 @@
    */
   const expandGrid = (open, settle) => {
     views.change(() => {
-      rest.hidden = !open;
+      expanded = open;
       // Settle scrolling against the final completed rows and triangle positions.
       views.arrange();
       settle?.();
     });
   };
   toggle.addEventListener("click", () => {
-    const open = rest.hidden !== false;
+    const open = !expanded;
     expandGrid(open, open ? undefined : () => toggle.scrollIntoView({ block: "nearest" }));
   });
 

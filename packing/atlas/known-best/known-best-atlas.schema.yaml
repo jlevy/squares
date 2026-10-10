@@ -47,30 +47,31 @@ properties:
               type: object
               required: [width, height]
               properties:
-                width: {const: 2400}
-                height: {const: 2896}
+                width: {const: 2150}
+                height: {const: 3823}
             png_preview:
               type: object
               required: [width, height]
               properties:
-                width: {const: 2400}
-                height: {const: 2896}
+                width: {const: 2150}
+                height: {const: 3823}
             png_high_resolution:
               type: object
               required: [scale, width, height]
               properties:
                 scale: {const: 2}
-                width: {const: 4800}
-                height: {const: 5792}
+                width: {const: 4300}
+                height: {const: 7646}
             png_link_preview_card:
               type: object
               required: [top_crop, width, height]
               properties:
                 top_crop: {const: true}
-                width: {const: 2400}
+                width: {const: 2150}
                 height: {const: 1256}
-      # The poster: 18 columns of 18 at the same card scale, so its canvas is eight
-      # column pitches wider and eight row pitches taller than the figure above. One
+      # The poster: eighteen complete square-bound rows share a right edge, holding
+      # up to thirty-five cards at a 203-unit column pitch and 287-unit row pitch.
+      # Grid suffixes stay inline, with 79 units of extra horizontal air after an irregular prefix. One
       # raster and no link-preview crop, which is why only `png_preview` is pinned
       # here; a second raster would be a change to the specification and to this
       # clause, never a file that quietly appeared.
@@ -79,23 +80,23 @@ properties:
           required: [stem, columns, rows, layout, square_count, svg, png_preview]
           properties:
             stem: {const: known-best-1-324}
-            columns: {const: 18}
+            columns: {const: 35}
             rows: {const: 18}
-            layout: {const: '18 by 18, row-major n=1..324'}
+            layout: {const: '35 by 18, right-aligned square-bound triangle n=1..324'}
             square_count: {const: 52650}
             svg:
               type: object
               required: [width, height]
               properties:
-                width: {const: 4224}
-                height: {const: 4912}
+                width: {const: 7497}
+                height: {const: 5361}
             png_preview:
               type: object
               required: [scale, width, height]
               properties:
                 scale: {const: 1}
-                width: {const: 4224}
-                height: {const: 4912}
+                width: {const: 7497}
+                height: {const: 5361}
   entries:
     type: array
     minItems: 1
@@ -199,7 +200,7 @@ $defs:
       range: {$ref: '#/$defs/range'}
       columns: {type: integer, minimum: 1}
       rows: {type: integer, minimum: 1}
-      layout: {type: string, pattern: '^[0-9]+ by [0-9]+, row-major n=[0-9]+\.\.[0-9]+$'}
+      layout: {type: string, pattern: '^[0-9]+ by [0-9]+, (row-major|left-aligned square-bound triangle|right-aligned square-bound triangle) n=[0-9]+\.\.[0-9]+$'}
       renderer: {const: sqpack deterministic composite renderer}
       square_count: {type: integer, minimum: 1}
       svg:

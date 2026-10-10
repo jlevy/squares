@@ -2,7 +2,6 @@
 (/** @type {{install?: boolean}} */ options) => {
   const block = document.querySelector("[data-atlas-grid]");
   const cells = block?.querySelector(".site-atlas-cells");
-  const rest = cells?.querySelector("[data-atlas-rest]");
   const toggle = block?.querySelector("[data-atlas-toggle]");
   if (!(block instanceof HTMLElement) || !(cells instanceof HTMLElement)) {
     throw new Error("Missing dedicated Atlas");
@@ -33,9 +32,9 @@
     columns: getComputedStyle(cells).gridTemplateColumns.trim().split(/\s+/).length,
     total: tiles.length,
     shown: shown.map((tile) => Number(tile.getAttribute("data-atlas-n"))),
-    direct: cells.querySelectorAll(":scope > .site-atlas-cell").length,
+    direct: shown.length,
     expanded: toggle?.getAttribute("aria-expanded"),
-    collapsed: rest instanceof HTMLElement ? rest.hidden : null,
+    collapsed: toggle?.getAttribute("aria-expanded") === "false",
     name: toggle?.getAttribute("aria-label"),
     collapse_name: toggle?.getAttribute("data-name-less"),
     same_nodes: block.dataset.testIdentity === "true",

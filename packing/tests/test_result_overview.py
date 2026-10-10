@@ -8,7 +8,7 @@ import re
 import xml.etree.ElementTree as ET
 from collections import Counter
 from dataclasses import replace
-from decimal import Decimal
+from decimal import ROUND_FLOOR, Decimal
 from unittest.mock import patch
 from urllib.parse import urljoin
 
@@ -177,7 +177,11 @@ def test_a_single_case_shows_the_films_panel_and_the_packing(
     assert ">3.877</span>" in bar
     assert bar.count('class="site-atlas-gap-rule"') == 1  # exact: one rule, no lower
     # The chained bound, as the film states it, with its star and badges.
-    assert overview_data.math_html(f"s(11) = {fact['upper']}") in body
+    assert overview_data.math_html("s(11) ={}") in body
+    assert (
+        '<span class="is-upper is-exact-value">'
+        f"{overview_data.math_html(fact['upper'])}</span>" in body
+    )
     assert '<span class="site-atlas-pop-star" aria-hidden="true">\u2605</span>' in body
     for _, _, label in fact["badges"]:
         assert f"</span>{label}</li>" in body
@@ -200,12 +204,21 @@ def test_an_open_case_draws_both_bounds_and_the_span_between(bodies: dict[str, s
     fact = result_overview.film_facts()[211]
     bar = body.split('<div class="site-atlas-gap">', 1)[1].split("site-atlas-pop-head", 1)[0]
     assert bar.count('class="site-atlas-gap-rule"') == 2
-    assert f">{float(fact['lower']):.3f}</span>" in bar
+    lower = Decimal(fact["lower"])
+    gap_lower = lower.quantize(Decimal("0.01"), rounding=ROUND_FLOOR)
+    assert f">{gap_lower}</span>" in bar
     assert f">{float(fact['upper']):.3f}</span>" in bar
     assert '<span class="site-atlas-gap-open" style="left: ' in bar
-    assert f'<span class="is-lower">{overview_data.math_html(fact["lower"])}</span>' in body
+    bound_lower = str(lower.quantize(Decimal("0.00001"), rounding=ROUND_FLOOR))
+    assert (
+        f'<span class="{result_overview.contribution_class(211, "lower")}">'
+        f"{overview_data.math_html(bound_lower)}</span>" in body
+    )
     assert overview_data.math_html(r"{}\le s(211) \le{}") in body
-    assert f'<span class="is-upper">{overview_data.math_html(fact["upper"])}</span>' in body
+    assert (
+        f'<span class="{result_overview.contribution_class(211, "upper")}">'
+        f"{overview_data.math_html(fact['upper'])}</span>" in body
+    )
 
 
 def _case_cells(body: str) -> dict[int, list[ET.Element]]:
@@ -265,15 +278,19 @@ def _assert_case_values(cases: list[int], overview: overview_data.Overview, body
         lower = fact["lower"] if fact["lower"] is not None else fact["upper"]
         assert cells[0][0].attrib["href"] == f"cases/{n}.html"
         assert cells[0][0].text == str(n)
-        assert cells[1].attrib["class"] == "lower"
+        assert cells[1].attrib["class"] == result_overview.contribution_class(
+            n, "lower"
+        ).removeprefix("is-")
         assert cells[1].text == lower
-        stars = cells[1].findall("span")
+        stars = cells[1].findall("span[@class='site-star']")
         assert bool(stars) is fact["star"]
         if stars:
             assert len(stars) == 1
-            assert stars[0].attrib == {"class": "site-star", "title": "Recent lower bound"}
+            assert stars[0].attrib == {"class": "site-star", "title": "Recent result"}
             assert stars[0].text == "★"
-        assert cells[2].attrib["class"] == "upper"
+        assert cells[2].attrib["class"] == result_overview.contribution_class(
+            n, "upper"
+        ).removeprefix("is-")
         assert cells[2].text == fact["upper"]
         _, gap = render_frontier_page.gap(case)
         assert cells[3].text == render_frontier_page.decimal_text(Decimal(gap).normalize())
@@ -755,12 +772,27 @@ def test_the_gap_bar_keeps_the_films_scale() -> None:
     assert result_overview.bar_number(3.8770836) == "3.877"
 
 
+def test_compact_lower_labels_keep_recorded_facts_and_gap_positions() -> None:
+    fact = dict(overview_sections.atlas_film_facts()[16])
+    original = dict(fact)
+    bar = result_overview.gap_bar(fact)
+    bound = result_overview.film_bound(fact)
+    assert ">4.66</span>" in bar
+    assert "4.66044" in bound
+    assert "4.660442" not in bound
+    at = result_overview.bar_at(float(str(fact["lower"])), result_overview.grid_floor(17))
+    assert f"left: {at:.3f}%" in bar
+    assert fact == original
+
+
 def test_two_close_values_sit_either_side_of_their_marks() -> None:
     """Values that would overlap centred on their marks are anchored apart."""
     near = {"n": 17, "exact": False, "upper": "4.675531", "lower": "4.660440"}
     bar = result_overview.gap_bar(near)
-    assert '<span class="is-lower" data-anchor="end"' in bar
-    assert '<span class="is-upper" data-anchor="start"' in bar
+    lower = result_overview.contribution_class(17, "lower")
+    upper = result_overview.contribution_class(17, "upper")
+    assert f'<span class="{lower}" data-anchor="end"' in bar
+    assert f'<span class="{upper}" data-anchor="start"' in bar
     far = {"n": 211, "exact": False, "upper": "14.997961", "lower": "14.100000"}
     assert "data-anchor" not in result_overview.gap_bar(far)
 
@@ -898,3 +930,37 @@ def test_address_notice_requires_a_registered_local_target(
             ],
             registered_paths={"result/t-110.html"},
         )
+
+
+def test_recent_upper_lower_and_optimal_marks_follow_independent_contributions() -> None:
+    from devtools.result_status import recent_contributions_by_case  # noqa: PLC0415
+
+    flags = recent_contributions_by_case()
+    facts = result_overview.film_facts()
+    assert (flags[11].upper, flags[11].lower, flags[11].optimal) == (False, True, True)
+    assert result_overview.contribution_class(11, "upper") == "is-upper"
+    assert result_overview.contribution_class(11, "lower") == "is-lower is-new-result"
+    assert result_overview.contribution_class(11, "optimal") == "is-optimal is-new-result"
+    badges = result_overview.case_badges(11)
+    assert 'data-style="solid" data-recent="true" role="img" aria-label="optimal"' in badges
+    assert badges.count('data-recent="true"') == 1
+    assert 'class="is-upper is-exact-value"' in result_overview.film_bound(facts[11])
+    assert "is-new-result" not in result_overview.film_bound(facts[11])
+    assert 'class="is-upper" style=' in result_overview.gap_bar(facts[11])
+    assert result_overview.contribution_class(211, "upper") == "is-upper is-new-result"
+    assert 'class="is-upper is-new-result"' in result_overview.film_bound(facts[211])
+    assert 'data-recent="true"' not in result_overview.case_badges(1)
+
+
+def test_an_exact_value_uses_its_own_recent_upper_contribution(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import result_status  # noqa: PLC0415
+
+    facts = result_overview.film_facts()
+    flags = dict(result_status.recent_contributions_by_case())
+    flags[1] = result_status.RecentContributions(upper=True, lower=False, optimal=False)
+    monkeypatch.setattr(result_status, "recent_contributions_by_case", lambda: flags)
+    bound = result_overview.film_bound(facts[1])
+    assert 'class="is-upper is-new-result is-exact-value"' in bound
+    assert "is-optimal" not in bound

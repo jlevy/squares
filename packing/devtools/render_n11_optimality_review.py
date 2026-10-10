@@ -78,7 +78,7 @@ SITE_PATH = paper_path(SLUG)
 SITE_ROOT = PAPERS_ROOT
 TITLE = "A Review of the Optimality Proof of the Trump Packing of 11 Squares"
 DESCRIPTION = (
-    "A review of Queuingtheorydotcom's computer-assisted proof that Trump's 1979 packing "
+    "A review of Ahmed's computer-assisted proof that Trump's 1979 packing "
     "of eleven unit squares is optimal, explained step by step."
 )
 #: The paper's front, in the two papers' one form (`devtools.paper_front`): the proof it
@@ -92,7 +92,7 @@ FRONT = paper_front.check(
         slug=SLUG,
         title=TITLE,
         source=paper_front.Source(
-            "Queuingtheorydotcom", "https://github.com/Queuingtheorydotcom/11SquaresOptimal"
+            "Mannaseh Ahmed", "https://github.com/Queuingtheorydotcom/11SquaresOptimal"
         ),
         oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
         agents=("GPT-6 Astra", "GPT-6 Sol"),

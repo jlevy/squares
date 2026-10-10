@@ -250,9 +250,9 @@ still needs its own source and rendering checks.
 
 The article’s attribution agrees with the source packet and current T-060 record:
 Trump’s attaining construction, Ellsworth’s reconstruction, the Squares Project and
-Kleddamag antecedents, and Queuingtheorydotcom’s Astra-assisted global argument have
-different roles. This paper explains the imported argument and the repository’s
-confirmation; it does not claim a new global proof method.
+Kleddamag antecedents, and Ahmed’s Astra-assisted global argument have different roles.
+This paper explains the imported argument and the repository’s confirmation; it does not
+claim a new global proof method.
 
 The accepted equality remains S5/V4/C5. Shared construction, derivative and arithmetic
 primitives remain in the trust base.

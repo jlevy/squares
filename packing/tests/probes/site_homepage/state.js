@@ -72,9 +72,39 @@ async () => {
   return {
     cases: tiles.map((tile) => Number(tile.getAttribute("data-case"))),
     prepared_cases: allTiles.length,
+    case_names: Object.fromEntries(
+      tiles.map((tile) => [tile.getAttribute("data-case"), tile.getAttribute("aria-label")]),
+    ),
+    number_fonts: [
+      ...new Set(
+        tiles.map((tile) => {
+          const number = tile.querySelector('[data-feature="packing-label"]');
+          return number ? getComputedStyle(number).fontFamily : null;
+        }),
+      ),
+    ],
+    sans_family: cardLabel ? getComputedStyle(cardLabel).fontFamily : null,
+    mark_errors: tiles.flatMap((tile) => {
+      const svg = tile.querySelector("svg");
+      const number = svg?.querySelector('[data-feature="packing-label"]');
+      const star = svg?.querySelector('[data-feature="release-star"]');
+      if (!(svg instanceof SVGSVGElement) || !(number instanceof SVGGraphicsElement)) {
+        return [tile.getAttribute("data-case")];
+      }
+      const view = svg.viewBox.baseVal;
+      const numberBox = number.getBBox();
+      const starBox = star instanceof SVGGraphicsElement ? star.getBBox() : null;
+      return numberBox.x >= view.x &&
+        numberBox.x + numberBox.width <= view.x + view.width &&
+        (!starBox ||
+          (starBox.x > numberBox.x + numberBox.width &&
+            starBox.x + starBox.width <= view.x + view.width))
+        ? []
+        : [tile.getAttribute("data-case")];
+    }),
     raw_markup: cells?.querySelectorAll("pre, code").length ?? 0,
     star_cases: allTiles
-      .filter((tile) => tile.querySelector('[data-feature="legend-star"]'))
+      .filter((tile) => tile.querySelector('[data-feature="release-star"]'))
       .map((tile) => Number(tile.getAttribute("data-case"))),
     label_errors: allTiles.flatMap((tile) => {
       const n = tile.getAttribute("data-case");
@@ -92,7 +122,11 @@ async () => {
     visible_cases: tiles.filter((tile) => tile.getClientRects().length > 0).length,
     svg: {
       cards: cards.length,
-      rows: [...new Set(cards.map((card) => Number(card.getAttribute("data-row"))))],
+      rows: [
+        ...new Set(
+          cards.map((card) => Math.floor(Math.sqrt(Number(card.getAttribute("data-n")) - 1))),
+        ),
+      ],
       viewbox: svg?.getAttribute("viewBox"),
     },
     busy: cells?.getAttribute("aria-busy"),

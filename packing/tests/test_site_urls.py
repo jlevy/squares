@@ -362,6 +362,62 @@ def test_case_lastmod_follows_amended_results_within_declared_scope(
         assert rows[f"cases/{n}.html"].lastmod == expected
 
 
+def test_dated_atlas_pdfs_keep_original_addresses_and_static_asset_declarations() -> None:
+    from devtools import render_n11_lower_bounds_explainer as explainer  # noqa: PLC0415
+    from sqpack.known_best import composite_pdf_name  # noqa: PLC0415
+
+    prior = site_urls.load_registry()
+    previous = {entry.path: entry for entry in prior}
+    current = {entry.path: entry for entry in site_urls.derive_registry(prior)}
+    for last in (100, 324):
+        old = f"known-best-1-{last}.pdf"
+        new = composite_pdf_name(f"known-best-1-{last}")
+        alias = current[old]
+        assert (alias.kind, alias.producer, alias.target, alias.canonical) == (
+            "copy",
+            "assembly",
+            new,
+            new,
+        )
+        assert alias.first_published == previous[old].first_published
+        assert current[new].kind == "asset-file"
+        assert current[new].producer == "paper:n11-lower-bounds-explainer"
+    constants = site_urls._constants(  # pyright: ignore[reportPrivateUsage] # noqa: SLF001
+        Path(explainer.__file__).read_text()
+    )
+    assets = site_urls._static(  # pyright: ignore[reportPrivateUsage] # noqa: SLF001
+        constants["COMPOSITE_ASSETS"],
+        constants,
+        {"REPO": Path("/repo"), "PACKING": Path("/repo/packing")},
+    )
+    assert [asset.name for asset in assets] == [
+        asset.name for asset in explainer.COMPOSITE_ASSETS
+    ]
+
+
+def test_dated_atlas_pdf_url_dates_follow_declared_edition_not_source_data(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from sqpack import release  # noqa: PLC0415
+    from sqpack.known_best import composite_pdf_name  # noqa: PLC0415
+
+    dated = {composite_pdf_name(f"known-best-1-{last}") for last in (100, 324)}
+    prior = [entry for entry in site_urls.load_registry() if entry.path not in dated]
+    previous = {entry.path: entry for entry in prior}
+    monkeypatch.setattr(release, "PUBLICATION_DATE", "October 1, 2026")
+    current = {entry.path: entry for entry in site_urls.derive_registry(prior)}
+    for path in dated:
+        assert (current[path].first_published, current[path].lastmod) == (
+            "2026-10-08",
+            "2026-10-08",
+        )
+    for last in (100, 324):
+        alias = f"known-best-1-{last}.pdf"
+        assert current[alias].first_published == previous[alias].first_published
+        assert current[alias].amendments == previous[alias].amendments
+        assert current[f"known-best-1-{last}.svg"].lastmod == "2026-10-01"
+
+
 def test_standalone_case_figure_is_registered_from_support_declarations() -> None:
     path = "atlas/trump11-overview.svg"
     assert path in render_overview.support_file_paths()

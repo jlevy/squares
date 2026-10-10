@@ -143,7 +143,12 @@ def test_math_settling_counts_pending_kpress_and_requires_present_native_mathml(
 
     native = math_html("x^2", native=True)
     math = '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math>'
-    pending = preview_site._MATH_PENDING  # noqa: SLF001 # pyright: ignore[reportPrivateUsage]
+    # This production probe belongs to the devtools tree, not tests/probes.
+    native_pending_name = "preview_site/math_pending"
+    pending = probe(
+        Path(__file__).resolve().parent.parent / "devtools" / "probes",
+        native_pending_name,
+    )
     cases = (
         (native, 0),
         ('<span class="kpress-math" data-site-native-math="frontier"></span>', 1),

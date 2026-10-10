@@ -10,7 +10,9 @@ import xml.etree.ElementTree as ET
 from dataclasses import replace
 from datetime import timedelta
 
+from devtools import build_known_best_atlas as composite
 from devtools import overview_data, overview_sections
+from devtools.result_status import recent_contributions_by_case
 
 
 def test_homepage_legend_keeps_original_rungs_in_four_icon_and_label_rows() -> None:
@@ -47,7 +49,7 @@ def test_homepage_legend_keeps_original_rungs_in_four_icon_and_label_rows() -> N
 def test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts() -> None:
     grid = overview_sections.atlas_grid()
     assert overview_sections.ATLAS_DEFAULT == "triangle"
-    assert 'data-atlas-view="triangle" data-atlas-size="medium"' in grid
+    assert 'data-atlas-view="triangle" data-atlas-size="small"' in grid
     assert 'data-atlas-first="100" data-atlas-grid' in grid
     tabs = overview_sections.atlas_view_tabs()
     selected = re.findall(r'<button[^>]*aria-selected="true"[^>]*>', tabs)
@@ -56,8 +58,8 @@ def test_canonical_atlas_targets_keep_every_tile_addressable_without_scripts() -
     assert re.findall(r'id="atlas-n-(\d+)"', grid) == [str(n) for n in range(1, 325)]
     assert 'id="atlas-n-324" href="cases/324.html" data-case="324"' in grid
     fallback = grid.split("<noscript>", 1)[1].split("</noscript>", 1)[0]
-    assert ".site-atlas-grid .site-atlas-rest[hidden]{display:contents}" in fallback
-    assert ".site-atlas-grid .site-atlas-toggle-row{display:none}" in fallback
+    assert "[data-atlas-grid] .site-atlas-rest[hidden]{display:contents}" in fallback
+    assert "[data-atlas-grid] .site-atlas-toggle-row{display:none}" in fallback
     assert 'href="atlas.html#the-frontier-survey"' in fallback
     assert 'href="atlas.html#the-frontier-survey"' in overview_sections.page_cards()
     assert 'href="frontier.html"' not in fallback
@@ -140,17 +142,31 @@ def test_atlas_preview_keeps_six_rows_and_prepares_web_labels_without_changing_p
     web = gzip.decompress(base64.b64decode(payload)).decode("utf-8")
     originals = ET.fromstring(source).findall('.//*[@data-feature="packing-card"]')
     cards = ET.fromstring(web).findall('.//*[@data-feature="packing-card"]')
+    recent = recent_contributions_by_case()
     assert len(originals) == len(cards) == 324
     for n, (original, card) in enumerate(zip(originals, cards, strict=True), 1):
-        assert card.attrib == original.attrib
+        assert card.get("data-feature") == "packing-card"
+        assert card.get("data-n") == str(n)
+        assert set(card.attrib) == {"data-feature", "data-n", "data-homepage-atlas-viewbox"}
+        frame = original.find('./{*}rect[@data-feature="container-outline"]')
+        assert frame is not None
+        assert tuple(map(float, card.attrib["data-homepage-atlas-viewbox"].split())) == (
+            float(frame.attrib["x"]) - float(composite.SUMMARY_PACKING_INSET_X),
+            float(frame.attrib["y"]) - float(composite.SUMMARY_PACKING_INSET_Y),
+            float(composite.SUMMARY_CARD_WIDTH),
+            float(composite.SUMMARY_ROW_PITCH),
+        )
         texts = card.findall(".//{*}text")
         assert [(text.get("data-feature"), "".join(text.itertext())) for text in texts] == [
             ("packing-label", str(n))
         ]
+        assert texts[0].get("font-family") == "var(--kpress-font-sans)"
+        assert float(texts[0].attrib["textLength"]) > 0
+        assert texts[0].get("lengthAdjust") == "spacingAndGlyphs"
         assert card.findall('.//*[@data-feature="evidence-badge"]') == []
         assert len(original.findall(".//{*}text")) > 1
         assert original.findall('.//*[@data-feature="evidence-badge"]')
-        for feature in ("container-outline", "square-fills", "legend-star"):
+        for feature in ("container-outline", "square-fills"):
             original_nodes = original.findall(f'.//*[@data-feature="{feature}"]')
             web_nodes = card.findall(f'.//*[@data-feature="{feature}"]')
             assert [
@@ -160,26 +176,31 @@ def test_atlas_preview_keeps_six_rows_and_prepares_web_labels_without_changing_p
                 [(child.tag, child.attrib, (child.text or "").strip()) for child in node.iter()]
                 for node in original_nodes
             ], (n, feature)
-    starts = list(
-        re.finditer(r'^  <g data-feature="packing-card" data-n="(\d+)"', web, re.MULTILINE)
-    )
-    links = re.findall(r'<a class="site-atlas-cell"[^>]*>', preview)
-    assert len(links) == 36
+        stars = card.findall('.//*[@data-feature="release-star"]')
+        assert len(stars) == int(recent[n].any), n
+        assert all(star.tag.endswith("polygon") and star.get("points") for star in stars)
+    visible = preview.split("<template data-homepage-atlas-gzip>", 1)[0]
+    svgs = re.findall(r"<svg\b.*?</svg>", visible, re.DOTALL)
+    links = re.findall(r'<a class="site-atlas-cell"[^>]*>', visible)
+    assert len(svgs) == len(links) == 36
     assert overview_sections.ATLAS_PREVIEW_ROWS == 6
     assert 'data-atlas-view="triangle"' in preview
     assert 'data-atlas-count="36"' in preview
     assert 'style="--site-atlas-widest:11"' in preview
-    assert re.findall(r'data-feature="packing-card" data-n="(\d+)"', preview) == [
-        str(n) for n in range(1, 37)
-    ]
-    for index, start in enumerate(starts[:36]):
-        assert web[start.start() : starts[index + 1].start()] in preview
-        assert re.search(r"\n[ \t]*\n", web[start.start() : starts[index + 1].start()]) is None
-        n = index + 1
+    for n, (svg, link, prepared) in enumerate(zip(svgs, links, cards[:36], strict=True), 1):
+        # Parse the native group independently of HTML's boolean SVG-host attribute.
+        initial = ET.fromstring(svg[svg.index("<g") : svg.rfind("</g>") + 4])
+        assert [
+            (node.tag, node.attrib, (node.text or "").strip()) for node in initial.iter()
+        ] == [(node.tag, node.attrib, (node.text or "").strip()) for node in prepared.iter()]
+        assert f'viewBox="{prepared.attrib["data-homepage-atlas-viewbox"]}"' in svg
+        assert re.search(r"\n[ \t]*\n", svg) is None
         k = int((n - 1) ** 0.5) + 1
-        assert f'style="--r:{k};--c:{k * k - n};--o:' in links[index]
-    assert 'viewBox="60 174 216 252"' in preview
-    assert 'viewBox="1428 426 216 252"' in preview
+        assert f'style="--r:{k};--c:{k * k - n};--o:' in link
+        assert f'href="cases/{n}.html" data-case="{n}"' in link
+        name = f"Case {n}: packing and bounds" + (", new result" if recent[n].any else "")
+        assert f'aria-label="{name}"' in link
+    assert overview_sections.ATLAS_COMPOSITE.read_text(encoding="utf-8") == source
     assert len(preview.encode("utf-8")) < 1_200_000
     assert '<div class="site-atlas-rest" data-atlas-rest hidden></div>' in preview
     assert "data-atlas-preview" in preview
@@ -188,8 +209,3 @@ def test_atlas_preview_keeps_six_rows_and_prepares_web_labels_without_changing_p
         'role="tab"',
     ):
         assert absent not in preview
-    for link in links:
-        n = re.search(r'data-atlas-n="(\d+)"', link)
-        assert n is not None
-        assert f'href="cases/{n[1]}.html" data-case="{n[1]}"' in link
-        assert f'aria-label="Case {n[1]}: packing and bounds"' in link

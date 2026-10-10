@@ -363,8 +363,11 @@ OFF_SITE_TITLES: dict[str, str] = {
 #: when the site is assembled, since the files come from other builds than this one: by
 #: the Pages workflow's `publish` job, and by `preview_site.copy_moved_files` on one
 #: machine. The first paper's had been linked since September, a dated review among the
-#: links; the optimality paper's PDF was linked from the README.
+#: links; the optimality paper's PDF was linked from the README. Atlas PDFs keep their
+#: original addresses as copies of the dated October 8 edition too.
 MOVED_FILES: tuple[tuple[str, str], ...] = (
+    ("known-best-1-100.pdf", "square-packings-100-20261008.pdf"),
+    ("known-best-1-324.pdf", "square-packings-324-20261008.pdf"),
     ("t-018-explainer.md", paper_path(N11_LOWER_BOUNDS_EXPLAINER, ".md")),
     ("t-018-explainer.pdf", paper_path(N11_LOWER_BOUNDS_EXPLAINER, ".pdf")),
     ("n11-optimality/t-060-explainer.md", paper_path(N11_OPTIMALITY_REVIEW, ".md")),
@@ -380,6 +383,8 @@ FORWARDER = TEMPLATES / "site-forwarder.html"
 RENDER_INPUTS: tuple[Path, ...] = (
     Path(__file__).resolve(),
     PACKING / "devtools/build_known_best_atlas.py",
+    PACKING / "devtools/atlas_print_font.py",
+    PACKING / "devtools/fonts/atlas-print",
     SITE_CSS,
     PACKING / "devtools/templates/site-math.css",
     PACKING / "devtools/site_math.py",
@@ -401,6 +406,8 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "src" / "sqpack",
     PACKING / "devtools" / "site_documents.py",
     PACKING / "devtools" / "result_overview.py",
+    PACKING / "devtools" / "atlas_legend.py",
+    PACKING / "devtools" / "result_status.py",
     PACKING / "devtools" / "site_urls.py",
     PACKING / "site-urls.yaml",
     # The card every page's head names is drawn beside the pages, in the page's colours.

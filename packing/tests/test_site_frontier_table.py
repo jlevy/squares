@@ -43,15 +43,15 @@ LAYOUT = probe(PROBES, "site_frontier_table/layout")
 #: sideways at, and a phone.
 WIDTHS = (1280, 1024, 768, 390)
 #: The rows read: a row of whole numbers (the shortest a row can be), a radical with its
-#: credit, the proved case with a root shown as a decimal and the longest credited name,
-#: a fraction that is a recent bound, a verified bound printed beside the reported one,
+#: credit, the proved case with a root shown as a decimal, a fraction that is a recent
+#: bound, a verified bound printed beside the reported one, a current long surname,
 #: and a three-digit case with a rational upper bound. The fraction was n = 18's until
 #: 2026-10-02, when its verified bound rose to the reported one, and then n = 19's until
 #: the same happened there later that day; n = 12's has terminated since 5 October. The
 #: verified bound beside the reported one was n = 51's, 37/5 and from the morning of 6
 #: October 2977/400 (T-070), until sqverify-fast decided its own certificate (T-090) later
 #: that day, and is n = 96's since.
-CASES = (1, 5, 11, 12, 51, 70, 96, 108, 230)
+CASES = (1, 5, 11, 12, 51, 70, 88, 96, 108, 230)
 ROWS = [f"n-{n}" for n in CASES]
 #: The drawing's side before it had a column: 2.6rem.
 OLD_THUMB = 41.6
@@ -198,9 +198,12 @@ def test_the_table_fits_its_track_at_1280_and_scrolls_in_its_wrap_below(
     # 4512425581603/15625000000000 was the widest gap; GAP_DIGITS), and 1165 since 6
     # October 2026, when Evan Daniel's exact optima (T-098) put the upper lane of 48
     # counts, n = 68 among them, at their certified sides and narrowed the gap column.
+    # The n = 11 credit now reads Ahmed. A same-page control changing only that credit
+    # back to Queuingtheorydotcom restores 1165.3 from 1150.5 pixels by widening the
+    # reported-lower column; Linux reads the current table at 1150 (think-66ym).
     own = laid[WIDTHS[1]]["table_width"]
     assert own <= wide["table_width"]
-    assert own == pytest.approx(1165, abs=10)
+    assert own == pytest.approx(1150, abs=10)
     for width in WIDTHS[1:]:
         assert laid[width]["scrolls"] > 0, width
         assert laid[width]["table_width"] == pytest.approx(own, abs=1), width
@@ -214,7 +217,7 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
     under it: the value cut after eight places. The example was n = 12's reported lower
     bound, `31360/7901`, then its verified one, `15680000/3949423`, until T-095's
     terminating `7943/2000` took both of n = 12's lower cells on 5 October 2026. A
-    credit's longest name, in the row above n = 12, is set on one line."""
+    credit's long surname, Chaoweeraprasit at n = 88, stays whole at every width."""
     rows = {row["id"]: row for row in laid[1280]["rows"]}
     upper = rows["n-230"]["cells"][column("Best known packing")]["approx"]
     assert upper == ["≈ 15.68292682…"]
@@ -239,6 +242,12 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
     assert rows["n-96"]["cells"][column("Verified lower")]["approx"] == ["= 9.97"]
     assert all(cell["approx"] == [] for cell in rows["n-1"]["cells"])
     assert rows["n-11"]["cells"][column("Reported lower")]["broken"] == []
+    for width in WIDTHS:
+        long_name = laid[width]["rows"][ROWS.index("n-88")]["cells"][
+            column("Best known packing")
+        ]
+        assert "Nate Chaoweeraprasit (itsnaka) 2026" in long_name["notes"], width
+        assert long_name["broken"] == [], width
 
 
 def test_the_table_still_sorts_filters_and_opens(page: Any, laid: dict[int, Any]) -> None:

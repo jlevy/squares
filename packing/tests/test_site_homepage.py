@@ -13,11 +13,14 @@ from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
+from xml.etree import ElementTree as ET
 
 import pytest
 
+from devtools import build_known_best_atlas as composite
 from devtools import overview_sections, render_overview, site_assets
 from devtools.render_n11_lower_bounds_explainer import COMPOSITE_ASSETS
+from devtools.result_status import recent_contributions_by_case
 from sqpack.probes import probe
 from tests import site_browser, site_renders
 
@@ -40,6 +43,22 @@ STATUS = "[data-homepage-atlas-status]"
 EXPLORE = '.site-homepage-atlas-actions a[href="atlas.html"]'
 WIDTHS = (1280, 390)
 LEGEND_WIDTHS = (*WIDTHS, 320)
+
+
+def _native_first_viewbox() -> tuple[float, float, float, float]:
+    """Independent crop from the published composite's actual first packing frame."""
+    graphic = ET.fromstring(overview_sections.ATLAS_COMPOSITE.read_text())
+    namespace = {"svg": "http://www.w3.org/2000/svg"}
+    frame = graphic.find(
+        ".//svg:g[@data-n='1']/svg:rect[@data-feature='container-outline']", namespace
+    )
+    assert frame is not None
+    return (
+        float(frame.attrib["x"]) - float(composite.SUMMARY_PACKING_INSET_X),
+        float(frame.attrib["y"]) - float(composite.SUMMARY_PACKING_INSET_Y),
+        float(composite.SUMMARY_CARD_WIDTH),
+        float(composite.SUMMARY_ROW_PITCH),
+    )
 
 
 @pytest.fixture(scope="module")
@@ -248,7 +267,11 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_requests(
     assert report["static_hero"]["drawings"][0]["href"] == "cases/53.html"
     assert initial["cases"] == list(range(1, 37))
     assert initial["visible_cases"] == 36
-    assert initial["svg"] == {"cards": 36, "rows": [0, 1], "viewbox": "60 174 216 252"}
+    assert initial["svg"]["cards"] == 36
+    assert initial["svg"]["rows"] == list(range(6))
+    assert tuple(map(float, initial["svg"]["viewbox"].split())) == pytest.approx(
+        _native_first_viewbox()
+    )
     assert initial["stage"] == 36
     assert initial["view"] == "triangle"
     assert initial["toggle"]["name"] == "Show more: expand from 36 to 100 cases (10 rows)"
@@ -275,11 +298,9 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_requests(
         assert state["toggle"]["arrow"] == "double-up", name
         assert not state["toggle"]["disabled"], name
         assert state["busy"] is None, name
-        assert state["svg"] == {
-            "cards": 324,
-            "rows": list(range(18)),
-            "viewbox": "60 174 216 252",
-        }
+        assert state["svg"]["cards"] == 324
+        assert state["svg"]["rows"] == list(range(18))
+        assert state["svg"]["viewbox"] == initial["svg"]["viewbox"]
         assert state["view"] == "triangle"
     collapsed = report["collapsed"]
     assert collapsed["cases"] == initial["cases"]
@@ -290,10 +311,18 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_requests(
     assert collapsed["toggle"]["focused"]
     assert collapsed["prepared_cases"] == 324
     assert collapsed["view"] == "triangle"
+    recent = recent_contributions_by_case()
     for name in ("initial", "intermediate", "expanded", "collapsed", "cached"):
-        assert report[name]["label_errors"] == [], name
+        state = report[name]
+        assert state["label_errors"] == [], name
+        assert state["mark_errors"] == [], name
+        assert state["number_fonts"] == [state["sans_family"]], name
+        assert state["case_names"] == {
+            str(n): f"Case {n}: packing and bounds" + (", new result" if recent[n].any else "")
+            for n in state["cases"]
+        }, name
         assert report[name]["raw_markup"] == 0, name
-        assert {11, 12, 17, 18, 19, 20, 21}.issubset(report[name]["star_cases"]), name
+        assert state["star_cases"] == [n for n in range(1, 325) if recent[n].any], name
     assert report["atlas_requests"] == 0
     for name in ("initial", "expanded", "collapsed", "cached"):
         assert report[name]["toggle"]["arrow_hidden"] == "true"
@@ -325,7 +354,7 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_requests(
         assert transition["panel_id"] == "homepage-atlas-cells"
         assert transition["panel_role"] is None
         assert all(
-            aspect == pytest.approx(216 / 252, abs=0.002) for aspect in transition["aspects"]
+            aspect == pytest.approx(216 / 287, abs=0.002) for aspect in transition["aspects"]
         )
     assert report["collapsed_move"]["input"]["same_nodes"]
     assert report["collapsed_move"]["toggle_in_view"]
@@ -347,7 +376,7 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_requests(
     static = report["static"]["tiles"]
     assert report["static_labels"]["raw_markup"] == 0
     assert report["static_labels"]["label_errors"] == []
-    assert {11, 12, 17, 18, 19, 20, 21}.issubset(report["static_labels"]["star_cases"])
+    assert report["static_labels"]["star_cases"] == [n for n in range(1, 37) if recent[n].any]
     assert [tile["n"] for tile in static] == list(range(1, 37))
     for index, tile in enumerate(static):
         assert tile["left"] >= -0.5
@@ -589,7 +618,7 @@ def test_native_svg_case_links_align_with_drawings_and_open_by_pointer_after_scr
                 ("left_gap", 24),
                 ("top_gap", 12),
                 ("link_width", 216),
-                ("link_height", 252),
+                ("link_height", 287),
                 ("drawing_width", 158),
                 ("drawing_height", 158),
             ):
@@ -636,7 +665,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     assert all(style == home["main_title_style"] for style in home["section_title_styles"])
     assert home["recent_title"] == "Recent Major Results"
     assert home["media"] == {
-        "pdfs": ["known-best-1-100.pdf", "known-best-1-324.pdf"],
+        "pdfs": ["square-packings-100-20261008.pdf", "square-packings-324-20261008.pdf"],
         "video": [],
     }
     assert home["legacy_pdf_anchor"]

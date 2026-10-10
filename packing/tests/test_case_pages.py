@@ -245,7 +245,7 @@ def test_the_atlas_grid_and_the_frontier_table_open_the_same_record(
             rf'<a class="site-atlas-cell" id="atlas-n-{n}" href="cases/{n}\.html"[^>]*>', grid
         )
         assert len(tile) == 1, n
-        assert ", regularized view, " in tile[0], n
+        assert "regularized" not in tile[0], n
     assert grid.count(render_case_pages.case_popover()) == 1
     links = re.findall(
         r'<a aria-label="n = \d+: open its case record" href="cases/(\d+)\.html" '
@@ -584,11 +584,13 @@ def test_a_cases_badges_are_one_mark_wherever_a_case_is_drawn(
     assert [label for _, _, label in facts[11]["badges"]] == ["optimal", "exact", "rigid"]
     badges = result_overview.case_badges(11)
     for glyph, style, label in facts[11]["badges"]:
-        named = result_overview.badge_glyph(glyph, style, label, named=True)
+        named = result_overview.badge_glyph(
+            glyph, style, label, named=True, recent=label == "optimal"
+        )
         assert f'role="img" aria-label="{label}" title="{label}">' in named
         assert named in badges
         # The summary's list draws the same square, its word beside it.
-        listed = result_overview.badge_glyph(glyph, style, label)
+        listed = result_overview.badge_glyph(glyph, style, label, recent=label == "optimal")
         assert f"{listed}{label}</li>" in _record(records, 11)
     head = _record(records, 11).split("</header>", 1)[0]
     assert badges in head

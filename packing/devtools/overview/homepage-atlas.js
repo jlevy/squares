@@ -22,12 +22,6 @@
     return;
   }
   const initialCount = cells.querySelectorAll("a[data-case]").length;
-  const left = Number(grid.dataset.atlasGridLeft);
-  const top = Number(grid.dataset.atlasGridTop);
-  const columnPitch = Number(grid.dataset.atlasColumnPitch);
-  const rowPitch = Number(grid.dataset.atlasRowPitch);
-  const cardWidth = Number(grid.dataset.atlasCardWidth);
-  const cardHeight = Number(grid.dataset.atlasCardHeight);
   let count = initialCount;
 
   const relabel = () => {
@@ -67,18 +61,31 @@
     const additional = document.createDocumentFragment();
     for (const card of cards.slice(initialCount)) {
       const n = Number(card.getAttribute("data-n"));
-      const x = left + columnPitch * Number(card.getAttribute("data-column"));
-      const y = top + rowPitch * Number(card.getAttribute("data-row"));
+      const viewBox = card.getAttribute("data-homepage-atlas-viewbox") ?? "";
+      const viewport = viewBox.split(/\s+/).map(Number);
+      const [x = Number.NaN, y = Number.NaN, cardWidth = Number.NaN, cardHeight = Number.NaN] =
+        viewport;
+      if (
+        ![x, y, cardWidth, cardHeight].every(Number.isFinite) ||
+        !(cardWidth > 0) ||
+        !(cardHeight > 0)
+      ) {
+        throw new Error(`Case ${n} has no native card viewport`);
+      }
       const link = document.createElement("a");
       link.className = "site-atlas-cell";
       link.href = new URL(`cases/${n}.html`, document.baseURI).href;
       link.dataset.case = String(n);
       link.dataset.atlasN = String(n);
-      link.setAttribute("aria-label", `Case ${n}: packing and bounds`);
+      const recent = card.querySelector('[data-feature="release-star"]') !== null;
+      link.setAttribute(
+        "aria-label",
+        `Case ${n}: packing and bounds${recent ? ", new result" : ""}`,
+      );
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svg.setAttribute("width", String(cardWidth));
       svg.setAttribute("height", String(cardHeight));
-      svg.setAttribute("viewBox", `${x} ${y} ${cardWidth} ${cardHeight}`);
+      svg.setAttribute("viewBox", viewBox);
       svg.setAttribute("aria-hidden", "true");
       svg.setAttribute("data-homepage-atlas-svg", "");
       const background = document.createElementNS("http://www.w3.org/2000/svg", "rect");

@@ -2,7 +2,7 @@
 /** @param {{install: boolean, settle: boolean, rapid?: boolean, position?: boolean}} options */
 async (options) => {
   const atlas =
-    /** @type {typeof globalThis & {SiteAtlasView: {milliseconds(value: string): number, place(n: number, per: number): {line: number, column: number, opens: boolean}}}} */ (
+    /** @type {typeof globalThis & {SiteAtlasView: {milliseconds(value: string): number}}} */ (
       globalThis
     ).SiteAtlasView;
   const grid = document.querySelector("[data-atlas-preview]");
@@ -104,7 +104,23 @@ async (options) => {
         return [0];
       }
       const n = Number(link.dataset.atlasN);
-      const at = atlas.place(n, per);
+      // Native direct cards wrap logical rows; dedicated rows pan without wrapping.
+      // Derive this oracle independently of the shared engine's layout adapter.
+      const k = Math.ceil(Math.sqrt(n));
+      const rowSize = 2 * k - 1;
+      const position = n - (k - 1) ** 2;
+      const rowLine = Math.ceil(position / per);
+      const lines = Math.ceil(rowSize / per);
+      const held = rowLine === lines ? rowSize - (lines - 1) * per : per;
+      let above = 0;
+      for (let row = 1; row < k; row += 1) {
+        above += Math.ceil((2 * row - 1) / per);
+      }
+      const at = {
+        line: above + rowLine,
+        column: per - held + position - (rowLine - 1) * per,
+        opens: k > 1 && rowLine === 1,
+      };
       return Number(link.style.getPropertyValue("--site-atlas-line")) === at.line &&
         Number(link.style.getPropertyValue("--site-atlas-column")) === at.column &&
         Number(link.style.getPropertyValue("--site-atlas-opens")) === Number(at.opens)

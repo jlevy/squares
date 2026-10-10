@@ -65,6 +65,8 @@ body {
    dark mode turns the lightness over (below). `devtools.rung_scale` measures every fill
    these make and its text contrast (paper-design.md, Color). */
 :root {
+  --site-atlas-angle-label-ink: #000;
+  --site-atlas-swatch: transparent;
   --site-rung-base: 95%;
   --site-rung-step: -5.5%;
   --site-rung-chroma-base: 0.015;
@@ -2045,18 +2047,13 @@ body:has([data-atlas-preview]) {
 .site-page .site-atlas-grid {
   --site-wide: var(--site-bleed-max);
   --site-atlas-toggle-space: 1.2rem;
-  /* The triangle's tiles: the least width one may have, which sets how many a line
-     holds (overview/atlas-view.js reads it, in rem or px), and the most. The least is
-     the smallest at which a drawing still reads as a packing and its three-figure
-     number fits under it, a little over the 24 pixels a pointer target needs; it lets
-     all 35 tiles of the eighteenth row stand on one line from a 1024-pixel window up. */
-  --site-atlas-tile-min: 1.625rem;
-  --site-atlas-tile-max: 4.5rem;
-  /* The grid's least cell at Medium, and the size's scale (overview/atlas-view.js reads
-     it): Small draws a tile two thirds as wide and Large half as wide again, in either
-     view. The block's `data-atlas-size` sets it, below. */
+  /* Both views share the grid's readable cell minimum and gap. The script reads
+     these tokens in rem or px; complete Triangle rows pan at that cell width. The size's
+     scale makes Small two thirds as wide and Large half as wide again. */
   --site-atlas-cell-min: 6.4rem;
-  --site-atlas-scale: 1;
+  --site-atlas-reference-gap: 0.5rem;
+  --site-atlas-cell-padding: 0.3rem;
+  --site-atlas-scale: 0.667;
   /* The move between the views: one duration and one easing for every tile, read by
      the script. Reduced motion makes the switch instant, as it does every hover. */
   --site-atlas-move-duration: 360ms;
@@ -2066,32 +2063,29 @@ body:has([data-atlas-preview]) {
   container-type: inline-size;
   position: relative;
 }
-/* Under a finger a tile is at least 2.5rem, 40 pixels, so a phone's line holds eight. */
-@media (max-width: 40rem), (pointer: coarse) {
-  .site-page .site-atlas-grid {
-    --site-atlas-tile-min: 2.5rem;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .site-page .site-atlas-grid {
     --site-atlas-move-duration: 0ms;
   }
 }
-/* The three sizes of tile (think-ht8t): Medium is the scale of 1 above, the size the
-   atlas had before it offered a choice. */
+/* Small is the default; Medium restores the original scale of 1. Root attributes
+   select explicit URL sizes before the atlas programs run. */
 .site-page .site-atlas-grid[data-atlas-size="small"],
-html[data-site-atlas-size="small"] .site-page .site-atlas-grid {
+html[data-site-atlas-size="small"] .site-page .site-atlas-grid:where([data-atlas-grid]) {
   --site-atlas-scale: 0.667;
 }
+.site-page .site-atlas-grid[data-atlas-size="medium"],
+html[data-site-atlas-size="medium"] .site-page .site-atlas-grid:where([data-atlas-grid]) {
+  --site-atlas-scale: 1;
+}
 .site-page .site-atlas-grid[data-atlas-size="large"],
-html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
+html[data-site-atlas-size="large"] .site-page .site-atlas-grid:where([data-atlas-grid]) {
   --site-atlas-scale: 1.5;
 }
-/* The view tabs and the size tabs: two of the section tabs' strip (site-nav.css), on
-   the bar's line, so each is as tall here as under the bar. One row centred over the
-   tiles, the key to a tile's marks on a line of its own under it; on a narrow block the
-   size tabs wrap under the view tabs. Each is hidden until the script has tiles to
-   arrange. */
+/* Layout, Size and Scale use the section tabs' strip (site-nav.css), on
+   the bar's line, so each is as tall here as under the bar. Each chooser line is
+   centered over the tiles, with the compact two-column key centered beneath it;
+   on a narrow block the controls wrap beneath one another. */
 .site-atlas-grid .site-atlas-controls {
   display: flex;
   flex-wrap: wrap;
@@ -2100,45 +2094,407 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   margin-block-end: var(--site-atlas-toggle-space);
 }
 .site-atlas-grid .site-atlas-views,
-.site-atlas-grid .site-atlas-sizes {
+.site-atlas-grid .site-atlas-sizes,
+.site-atlas-grid .site-atlas-scales {
   line-height: var(--site-nav-line);
   margin: 0;
 }
 .site-atlas-grid .site-atlas-views[hidden],
 .site-atlas-grid .site-atlas-sizes[hidden],
+.site-atlas-grid .site-atlas-scales[hidden],
 .site-atlas-grid .site-atlas-legend[hidden] {
   display: none;
 }
-/* The key: each mark beside its words, in the support colour at the note size, as the
-   tables of results key their star (`.site-rung-legend`), centred on a line of its own
-   under the tabs. */
+/* The web atlas key shows angle colors and contact shades, centered as a group
+   with each explanatory line aligned left. */
 .kpress .site-atlas-grid .site-atlas-legend {
   color: var(--site-support-color);
   column-gap: 1.2rem;
-  display: flex;
+  display: grid;
   flex-basis: 100%;
-  flex-wrap: wrap;
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
   font-weight: var(--site-font-weight-sans-light);
+  grid-template-columns: repeat(2, minmax(0, max-content));
   justify-content: center;
   margin: 0;
-  row-gap: 0.3rem;
+  text-align: start;
 }
-.site-atlas-legend-item {
-  align-items: center;
-  display: inline-flex;
+.site-atlas-legend-column {
+  align-items: start;
+  display: flex;
+  flex-direction: column;
   gap: 0.3rem;
 }
-/* The two custom properties are the triangle's (below); they are declared here, in the
-   rule both views share, because every line of every drawing inherits them, and a
-   declaration for the triangle alone would have the browser restyle all of those, some
-   three thousand elements, at each change of view. A tile is its line's share of the
-   block, no wider than the most a tile may be, both scaled by the size: Small draws it
-   two thirds as wide, never under the least tile, and Large lets it grow to half as wide
-   again, the script having set fewer to a line. At Medium it is the share alone, no
-   wider than `--site-atlas-tile-max`. The grid's least cell is scaled the same way. */
+.site-atlas-legend-item {
+  align-items: start;
+  display: flex;
+  gap: 0.3rem;
+}
+.site-atlas-legend-item > :first-child:not(:last-child) {
+  flex: none;
+}
+.site-atlas-legend-item > :last-child {
+  min-inline-size: 0;
+}
+.site-atlas-swatches {
+  display: inline-flex;
+  gap: 1px;
+  margin-block-start: 0.125em;
+}
+.site-atlas-swatch {
+  background: var(--site-atlas-swatch);
+  block-size: 1.1rem;
+  color: var(--kpress-doc-text);
+  font-size: 0.55rem;
+  font-variant-numeric: tabular-nums;
+  inline-size: 0.65rem;
+  line-height: 1.1rem;
+  text-align: center;
+}
+/* The first two angle swatches name their degrees; contact swatches keep their
+   compact single-number width. */
+.site-atlas-swatch[data-angle-label] {
+  color: var(--site-atlas-angle-label-ink);
+  inline-size: 1rem;
+}
+/* The triangle's column count and tile width live in the shared rule so changing
+   view does not restyle every drawing's inherited properties. The count uses the same
+   scaled cell minimum and gaps as Grid, and the tile fills one column after the gaps
+   are reserved. Container arithmetic also places the static Triangle before scripts. */
 .site-atlas-cells {
+  --site-atlas-global-side: var(--site-atlas-first-side);
+  --site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));
+  --site-atlas-per-line: max(
+    1,
+    round(
+      down,
+      (100cqi + var(--site-atlas-reference-gap)) /
+      (var(--site-atlas-cell) + var(--site-atlas-reference-gap)),
+      1
+    )
+  );
+  --site-atlas-tile: calc(
+    (100cqi - (var(--site-atlas-per-line) - 1) * var(--site-atlas-reference-gap)) /
+    var(--site-atlas-per-line)
+  );
+  /* Outline air includes tile padding and the normalized SVG's stroke-aware inset.
+     Reduce that actual visible gap, preserving the reserved drawing dimensions. */
+  --site-atlas-outline-air: calc(
+    2 *
+    var(--site-atlas-cell-padding) +
+    2 *
+    (var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) *
+    var(--site-atlas-ink-inset)
+  );
+  --site-atlas-cell-gap: calc(
+    var(--site-atlas-reference-gap) *
+    0.8 -
+    var(--site-atlas-outline-air) *
+    0.2
+  );
+  --site-atlas-number-ink-size: 0.8rem;
+  --site-atlas-number-leading: var(--kpress-line-height-normal);
+  /* Source Sans 3: ascent 1.024em, descent 0.4em; digits descend 0.012em.
+     Half the leading minus 0.324em is the air below the deepest digit ink. */
+  --site-atlas-number-ink-tail: calc(
+    var(--site-atlas-number-ink-size) *
+    (var(--site-atlas-number-leading) / 2 - 0.324)
+  );
+  --site-atlas-caption-air: calc(
+    var(--site-atlas-outline-air) /
+    2 +
+    var(--site-atlas-cell-padding) +
+    var(--site-atlas-number-ink-tail)
+  );
+  --site-atlas-row-gap: calc(
+    var(--site-atlas-reference-gap) *
+    0.75 -
+    var(--site-atlas-caption-air) *
+    0.25
+  );
+  --site-atlas-grid-space: calc((var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) / 2);
+  --site-atlas-number-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.25), 0.8rem);
+  /* Every Triangle line reserves its drawing and padding, the count margin and
+     count leading. Atlas drawings have no document image margins. */
+  --site-atlas-line-height: calc(
+    var(--site-atlas-tile) *
+    1.04 +
+    var(--site-atlas-number-size) *
+    1.15
+  );
+  display: grid;
+  gap: var(--site-atlas-row-gap) var(--site-atlas-cell-gap);
+  grid-template-columns: repeat(var(--site-atlas-per-line), var(--site-atlas-tile));
+}
+@media (max-width: 40rem) {
+  .site-page .site-atlas-grid {
+    --site-atlas-cell-min: 4.6rem;
+    --site-atlas-reference-gap: 0.35rem;
+  }
+}
+/* A tile in a move between the views is scaled about its own corner, which is where the
+   script measures from (overview/atlas-view.js). It has no transform at rest, so the
+   origin changes nothing then. */
+.kpress .site-atlas-cell {
+  --site-atlas-drawing-ratio: 1;
+  position: relative;
+  color: var(--kpress-doc-text);
+  display: block;
+  padding: var(--site-atlas-cell-padding);
+  text-align: center;
+  text-decoration: none;
+  transform-origin: 0 0;
+  transition: var(--site-hover-transition);
+}
+.kpress .site-atlas-cell:target {
+  background: var(--site-wash);
+  outline: 2px solid var(--kpress-doc-accent);
+  outline-offset: -2px;
+  scroll-margin-block-start: 6rem;
+}
+.kpress .site-atlas-cell:is(:hover, :focus-visible) {
+  background: var(--site-wash);
+  text-decoration: none;
+}
+/* The drawing is stroked in `currentColor`, and it names that colour itself. Read from
+   the link, it went to the lighter accent KPress gives a hovered link's text (`.kpress
+   a:hover`, which outranks the cell's own colour), and the outlines all but vanished
+   against the squares. */
+/* Scale changes only the drawn enclosing square. Its layout box and the count stay
+   fixed, so every row keeps its pitch and all captions retain their alignment. The
+   head bootstrap selects the same ratio before the atlas programs mount. */
+.site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
+  --site-atlas-global-side: var(--site-atlas-last-side);
+}
+html:not([data-site-atlas-scale])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-scale="row"])
+  .site-atlas-cell,
+html[data-site-atlas-scale="row"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-cell {
+  --site-atlas-drawing-ratio: calc(var(--site-atlas-side) / var(--r));
+}
+html:not([data-site-atlas-scale])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-scale="global"])
+  .site-atlas-cell,
+html[data-site-atlas-scale="global"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-cell {
+  --site-atlas-drawing-ratio: calc(var(--site-atlas-side) / var(--site-atlas-global-side));
+}
+/* A smaller Row drawing sits inside its logical grid-sized enclosing frame. The
+   inset and span come from packing_svg's actual viewBox/frame bounds, including the
+   margin around the normalized SVG. The reference has no fill or hit target. */
+html:not([data-site-atlas-scale])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-scale="row"])
+  .site-atlas-cell[data-atlas-row-smaller]::before,
+html[data-site-atlas-scale="row"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-cell[data-atlas-row-smaller]::before {
+  --site-atlas-reference-margin: calc(
+    (var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) *
+    var(--site-atlas-frame-inset)
+  );
+  aspect-ratio: 1;
+  border: 0.5px solid var(--kpress-doc-border);
+  box-sizing: border-box;
+  content: "";
+  inline-size: calc(
+    (var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) *
+    var(--site-atlas-frame-span)
+  );
+  inset-block-start: calc(var(--site-atlas-cell-padding) + var(--site-atlas-reference-margin));
+  inset-inline-start: calc(var(--site-atlas-cell-padding) + var(--site-atlas-reference-margin));
+  pointer-events: none;
+  position: absolute;
+}
+.site-atlas-cell :is(svg, img) {
+  transform: scale(var(--site-atlas-drawing-ratio));
+  aspect-ratio: 1;
+  color: var(--kpress-doc-text);
+  display: block;
+  height: auto;
+  margin-block: 0;
+  width: 100%;
+}
+/* The number's box is shrunk to the number and centred, so the marks it carries can
+   hang outside it (below) and the number stand where it would without them. */
+.site-atlas-n {
+  color: var(--kpress-doc-muted);
+  display: block;
+  font-family: var(--kpress-font-sans);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--site-font-weight-sans-light);
+  inline-size: fit-content;
+  margin-block-start: 0.2rem;
+  margin-inline: auto;
+  position: relative;
+}
+/* Nothing in the atlas transitions its place: the move between the views is the
+   script's (overview/atlas-view.js), and the layout a view sets must be the whole of it
+   the moment it is set, since the script reads every box right then. KPress's
+   reduced-motion rule (`components.css`, `.kpress [class]`) gives every classed element
+   a 0.01ms transition of every property, under which the triangle was laid out for one
+   frame with the grid's gaps, 1344 pixels wide at 1280, before it settled. A tile keeps
+   its own transition, which is the wash alone. */
+.site-atlas-cells,
+.site-atlas-cell :is(svg, img),
+.site-atlas-n {
+  transition: none;
+}
+/* Grid flattens the explicit row and segment structure into ordinary reading order. */
+.site-atlas-row,
+.site-atlas-segment {
+  display: contents;
+}
+/* Triangle keeps complete rows at Grid's readable drawing scale. Its own scroll
+   frame contains wide rows, and opens at their common right endpoint before scripts.
+   Rows restore left-to-right reading order inside that right-origin scroll frame. */
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-cells,
+html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-cells {
+  --site-atlas-widest: 19;
+  --site-atlas-extra: var(--site-atlas-first-extra);
+  --site-atlas-number-ink-size: var(--site-atlas-number-size);
+  --site-atlas-number-leading: 1.15;
+  direction: rtl;
+  display: block;
+  overflow-x: auto;
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-cells:has(.site-atlas-rest:not([hidden])),
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
+  --site-atlas-widest: 35;
+  --site-atlas-extra: var(--site-atlas-last-extra);
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-row,
+html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-row {
+  direction: ltr;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: end;
+  column-gap: calc(
+    (var(--site-atlas-grid-space) + var(--site-atlas-cell-gap)) *
+    clamp(0, var(--site-atlas-prefix-count), 1)
+  );
+  min-inline-size: max(
+    100%,
+    calc(
+      var(--site-atlas-widest) *
+      var(--site-atlas-tile) +
+      (var(--site-atlas-widest) - 1) *
+      var(--site-atlas-cell-gap) +
+      var(--site-atlas-extra) *
+      var(--site-atlas-grid-space)
+    )
+  );
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-row:where(:not([data-atlas-row="1"])),
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-row:where(:not([data-atlas-row="1"])) {
+  margin-block-start: var(--site-atlas-row-gap);
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-segment,
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-segment {
+  --site-atlas-segment-columns: max(1, var(--site-atlas-segment-count));
+  --site-atlas-segment-width: calc(
+    var(--site-atlas-segment-columns) *
+    var(--site-atlas-tile) +
+    (var(--site-atlas-segment-columns) - 1) *
+    var(--site-atlas-cell-gap)
+  );
+  display: grid;
+  flex: none;
+  column-gap: var(--site-atlas-cell-gap);
+  grid-auto-rows: var(--site-atlas-line-height);
+  grid-template-columns: repeat(var(--site-atlas-segment-columns), var(--site-atlas-tile));
+  inline-size: var(--site-atlas-segment-width);
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-segment:where([data-empty]),
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-segment:where([data-empty]) {
+  display: none;
+}
+html:not([data-site-atlas-view="grid"])
+  .kpress
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-cell,
+html[data-site-atlas-view="triangle"]
+  .kpress
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-cell {
+  --site-atlas-initial-line: 1;
+  --site-atlas-initial-column: var(--i, 1);
+  grid-area:
+    var(--site-atlas-line, var(--site-atlas-initial-line)) /
+    var(--site-atlas-column, var(--site-atlas-initial-column));
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-n,
+html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-n {
+  font-size: var(--site-atlas-number-size);
+  line-height: 1.15;
+  margin-block-start: calc(var(--site-atlas-tile) * 0.04);
+}
+/* The perfect squares that end each row are numbered in the text's own colour and
+   the medium weight. */
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  [data-atlas-square]
+  .site-atlas-n,
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid:where([data-atlas-grid])
+  [data-atlas-square]
+  .site-atlas-n {
+  color: var(--kpress-doc-text);
+  font-weight: var(--site-font-weight-sans-medium);
+}
+/* The grid shows n = 1 to 100 until its button, centred under it, places the rest. The
+   rest sit in one box the grid lays out as its own cells, so hiding them again is the
+   box's `hidden`. */
+.site-atlas-rest {
+  display: contents;
+}
+.site-atlas-rest[hidden] {
+  display: none;
+}
+.site-atlas-n > .site-star {
+  font-size: 0.8em;
+  inset-block-start: 50%;
+  inset-inline-start: calc(100% + 0.12em);
+  line-height: 1;
+  position: absolute;
+  translate: 0 -50%;
+}
+
+/* Native homepage cards keep their compact wrapped Triangle, independently of
+   the dedicated Atlas's complete row/segment canvas and size/scale controls. */
+.site-page .site-homepage-atlas {
+  --site-atlas-tile-min: 1.625rem;
+  --site-atlas-tile-max: 4.5rem;
+  --site-atlas-scale: 1;
+}
+@media (max-width: 40rem), (pointer: coarse) {
+  .site-page .site-homepage-atlas {
+    --site-atlas-tile-min: 2.5rem;
+  }
+}
+.site-homepage-atlas .site-atlas-cells {
   --site-atlas-widest: 19;
   --site-atlas-medium-columns: min(
     var(--site-atlas-widest),
@@ -2174,107 +2530,21 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   gap: 0.5rem;
   grid-template-columns: repeat(auto-fill, minmax(var(--site-atlas-cell), 1fr));
 }
-@media (max-width: 40rem) {
-  .site-page .site-atlas-grid {
-    --site-atlas-cell-min: 4.6rem;
-  }
-  .site-atlas-cells {
-    gap: 0.35rem;
-  }
-}
-/* A tile in a move between the views is scaled about its own corner, which is where the
-   script measures from (overview/atlas-view.js). It has no transform at rest, so the
-   origin changes nothing then. */
-.kpress .site-atlas-cell {
-  color: var(--kpress-doc-text);
-  display: block;
-  padding: 0.3rem;
-  text-align: center;
-  text-decoration: none;
-  transform-origin: 0 0;
-  transition: var(--site-hover-transition);
-}
-.kpress .site-atlas-cell:target {
-  background: var(--site-wash);
-  outline: 2px solid var(--kpress-doc-accent);
-  outline-offset: -2px;
-  scroll-margin-block-start: 6rem;
-}
-.kpress .site-atlas-cell:is(:hover, :focus-visible) {
-  background: var(--site-wash);
-  text-decoration: none;
-}
-/* The drawing is stroked in `currentColor`, and it names that colour itself. Read from
-   the link, it went to the lighter accent KPress gives a hovered link's text (`.kpress
-   a:hover`, which outranks the cell's own colour), and the outlines all but vanished
-   against the squares. */
-.site-atlas-cell :is(svg, img) {
-  aspect-ratio: 1;
-  color: var(--kpress-doc-text);
-  display: block;
-  height: auto;
-  width: 100%;
-}
-/* The number's box is shrunk to the number and centred, so the marks it carries can
-   hang outside it (below) and the number stand where it would without them. */
-.site-atlas-n {
-  color: var(--kpress-doc-muted);
-  display: block;
-  font-family: var(--kpress-font-sans);
-  font-size: 0.8rem;
-  font-variant-numeric: tabular-nums;
-  font-weight: var(--site-font-weight-sans-light);
-  inline-size: fit-content;
-  margin-block-start: 0.2rem;
-  margin-inline: auto;
-  position: relative;
-}
-/* Nothing in the atlas transitions its place: the move between the views is the
-   script's (overview/atlas-view.js), and the layout a view sets must be the whole of it
-   the moment it is set, since the script reads every box right then. KPress's
-   reduced-motion rule (`components.css`, `.kpress [class]`) gives every classed element
-   a 0.01ms transition of every property, under which the triangle was laid out for one
-   frame with the grid's gaps, 1344 pixels wide at 1280, before it settled. A tile keeps
-   its own transition, which is the wash alone. */
-.site-atlas-cells,
-.site-atlas-cell :is(svg, img),
-.site-atlas-n {
-  transition: none;
-}
-/* The triangle: the same tiles, set by the grid bound. Row k holds the 2k - 1 cases a
-   square of side k is known to hold and ends at k squared on the right edge, so the
-   perfect squares, whose packing is the grid itself, run down it. A row too long for
-   the block wraps in reading order: every line but its last is full, from the left,
-   and the last holds what is left over, set from the right so it still ends at the
-   square. overview/atlas-view.js says how many tiles a line holds
-   (`--site-atlas-per-line`) and writes each tile's line and column; every size here
-   follows from that one number and the block's width. A tile is its line's share of
-   the block, no wider than `--site-atlas-tile-max`, and its inset, its number and the
-   space over a new row are fractions of it, so the triangle keeps its proportions from
-   a phone to a wide screen. A triangle narrower than the block is centred. The tile's
-   width, `--site-atlas-tile`, is declared with the grid's rule above, for the reason
-   given there. */
-.site-atlas-grid[data-atlas-view="triangle"]:not(html[data-site-atlas-view="grid"] *)
-.site-atlas-cells,
-html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
+.site-homepage-atlas[data-atlas-view="triangle"] .site-atlas-cells {
+  direction: ltr;
+  display: grid;
   gap: 0;
   grid-template-columns: repeat(var(--site-atlas-per-line, 1), var(--site-atlas-tile));
   justify-content: safe center;
   overflow-x: auto;
 }
-.site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
+.site-homepage-atlas .site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
   --site-atlas-widest: 35;
 }
-/* The space over a new row, `--site-atlas-row-space`, is a share of a tile: 0.12 where
-   every row is one line, and where a row wraps 0.4, larger than anything between two
-   lines of one row, so the lines of a row read as one group. */
-.site-atlas-cells[data-atlas-wrapped] {
+.site-homepage-atlas .site-atlas-cells[data-atlas-wrapped] {
   --site-atlas-row-space: 0.4;
 }
-.kpress
-  .site-atlas-grid[data-atlas-view="triangle"]:not(html[data-site-atlas-view="grid"] *)
-  .site-atlas-cell,
-html[data-site-atlas-view="triangle"] .kpress .site-atlas-grid .site-atlas-cell {
+.kpress .site-homepage-atlas[data-atlas-view="triangle"] .site-atlas-cell {
   /* Initial positions mirror place() in atlas-view.js. Each earlier row contributes
      ceil((2k - 1) / columns) lines; --r is the row and --c its offset from the square.
      Container arithmetic settles the query-selected layout before any script runs. */
@@ -2344,30 +2614,11 @@ html[data-site-atlas-view="triangle"] .kpress .site-atlas-grid .site-atlas-cell 
   );
   padding: calc(var(--site-atlas-tile) * 0.07);
 }
-.site-atlas-grid[data-atlas-view="triangle"]:not(html[data-site-atlas-view="grid"] *) .site-atlas-n,
-html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-n {
-  font-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.25), 0.8rem);
-  line-height: 1.15;
-  margin-block-start: calc(var(--site-atlas-tile) * 0.04);
-}
-/* The perfect squares, down the right edge, are numbered in the text's own colour and
-   the medium weight: the row ends there. */
-.site-atlas-grid[data-atlas-view="triangle"]:not(html[data-site-atlas-view="grid"] *)
-  [data-atlas-square]
-  .site-atlas-n,
-html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site-atlas-n {
-  color: var(--kpress-doc-text);
-  font-weight: var(--site-font-weight-sans-medium);
-}
-/* The grid shows n = 1 to 100 until its button, centred under it, places the rest. The
-   rest sit in one box the grid lays out as its own cells, so hiding them again is the
-   box's `hidden`. */
-.site-atlas-rest {
-  display: contents;
-}
-.site-atlas-rest[hidden] {
+.site-page [data-atlas-grid] .site-atlas-cell[hidden],
+.site-page [data-atlas-grid] .site-atlas-row[hidden] {
   display: none;
 }
+
 /* The expander's row is the action row, set the grid's own space under the tiles. */
 .site-atlas-grid .site-atlas-toggle-row {
   --site-action-space: var(--site-atlas-toggle-space);
@@ -2375,37 +2626,6 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
 .site-atlas-grid .site-atlas-toggle-row[hidden] {
   display: none;
 }
-/* The regularized drawing's badge (overview_sections.atlas_layer_mark): a dot in the
-   accent, sized in its text. The atlas's key carries it before its words; a regularized
-   tile hangs it before its number, out of the flow, so the number stays centred as on
-   every other tile. It hung past the number until the new-result star took that side
-   on 2026-10-04 (think-wwtt), and the Regularized tab was its key until then. */
-.site-atlas-layer-mark {
-  background: var(--kpress-doc-accent);
-  block-size: 0.5em;
-  border-radius: 50%;
-  display: inline-block;
-  inline-size: 0.5em;
-  vertical-align: 0.08em;
-}
-.site-atlas-n > .site-atlas-layer-mark {
-  inset-block-start: 50%;
-  inset-inline-end: calc(100% + 0.3em);
-  position: absolute;
-  translate: 0 -50%;
-}
-/* A new result's star (overview_sections.atlas_star), the site's one star in its warm
-   ink (`.site-star`), hung past the number's end, out of the flow, a little smaller
-   than the number so it stays inside the smallest tile. */
-.site-atlas-n > .site-star {
-  font-size: 0.8em;
-  inset-block-start: 50%;
-  inset-inline-start: calc(100% + 0.12em);
-  line-height: 1;
-  position: absolute;
-  translate: 0 -50%;
-}
-
 /* The film's panel for a case, which opens every case record as its visual summary
    (`.site-case-summary`, below) and a result's overview as its case (site-result.css):
    the gap bar, the bound as one statement, the badges, where each bound comes from and
@@ -2623,6 +2843,26 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
   block-size: calc(100% + 0.8rem);
   inline-size: 3px;
   inset-block-start: -0.4rem;
+}
+/* An equality displays the packing value. A recent proof accents O independently;
+   historical exact values retain the ordinary text ink. */
+.site-atlas-pop .is-exact-value:not(.is-new-result),
+.site-atlas-pop .is-exact-value:not(.is-new-result) .katex {
+  color: var(--kpress-doc-text);
+}
+/* Recent construction, proof and optimality contributions share the new-result ink.
+   Historical upper packings retain their role colour when only optimality is new. */
+.kpress .site-page .is-new-result,
+.kpress .site-page .is-new-result .katex {
+  color: var(--site-new-result);
+}
+.kpress .site-atlas-badge[data-recent="true"] {
+  border-color: var(--site-new-result);
+  color: var(--site-new-result);
+}
+.kpress .site-atlas-badge[data-recent="true"][data-style="solid"] {
+  background: var(--site-new-result);
+  color: var(--kpress-doc-bg);
 }
 /* ---------- Case records ----------
    One record per case, in its own file at `cases/11.html`, shown by the record page
