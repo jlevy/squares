@@ -5,13 +5,13 @@ title: "Import Guzhou0806: s(40) > 1340000/199529 by a continuous-pose kernel on
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 created_at: 2026-10-10T16:37:59.906Z
-updated_at: 2026-10-10T18:53:44.915Z
+updated_at: 2026-10-10T19:58:57.295Z
 ---
 Comment https://github.com/jlevy/squares/issues/485#issuecomment-6098734391 (2026-10-10T14:50:00Z). s(40) > 1340000/199529 = 6.715815746…, unrestricted, raising T-133's 335427/50000 by 72586117/9976450000. New continuous-pose kernel: 43 closed slabs in t = tan(theta/2) covering [10^-6, 83/200] for squares of side B = 199529/200000 with a t-dependent legal centre domain, a separate horizontal certificate at side A = 997643/1000000 for t in [0, 10^-6], threshold tau = 4999/5000, 40 tau - 3999/100 = 1/500. Outward-rounded binary64 intervals, a concave-section integral lower bound, translation-derivative bounds; two frozen C++ kernels. Pin Guzhou0806/n40-square-packing 71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3, release n40-continuous-1340000-199529-20261010, ZIP SHA-256 78d693ae5bd08cc3065348c6593c2bec36412bebe48eb2f744786dc115bba26f; local 510.96 s at 4 workers, CI 983.95 s. wand125's review covers 6.70854 only. Needs a Fable max review of the new kernel's soundness before any replay counts.
 
@@ -47,3 +47,5 @@ Replay contract in the review (retention, inputs by digest, builds and their dig
 Proposed shared-record YAML (results T-NNN at V3/C3, confirmed, reproduced with the producer's code; four evidence entries; verifiers V-guzhou-n40-continuous-pose, V-guzhou-n40-axis-integer-grid, V-audit-continuous-pose; coverage; bibliography '[Guzhou0806 n40 continuous pose 2026-10-10]' lineage builds-on-project; n-040.md change) in the lane's report; not applied.
 
 Commits on worktree-agent-aa9fa88dc2268833c, for the coordinator to merge: ac5596144 (retention), 91d980730 (devtool, tests, receipts, README), 9d9c69a33 (OR-16: the devtool keeps only its download-boundary digest comparisons, allowlisted in devtools/integrity-ceremony.yaml as kind download; reports regenerated). packing-validate --edit (65 steps, 171.6 s) and --records (49 steps, 46.2 s) pass at --jobs 2 --inner-jobs 1; an earlier --only "type floor" run timed out at its 900 s step limit at a load average of 12 and the type floor then passed inside --edit (137 s); touched tests, 145, pass.
+
+2026-10-10 records lane R3: registered the continuous-pose bound as T-145 at V3/C3 (9b825844d), n-040.md's lower-bound lanes moved to 1340000/199529 with T-133 as history; #485's comment mapped as s40-continuous-pose; the review's dated note records control H's correction (tau = 999804/10^6 gives AXIS_TEST_REFUSED, exit 2). Branch worktree-agent-a45d986d0210d7ec5 (records lane R3, merged into nothing yet).

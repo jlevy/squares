@@ -5,13 +5,13 @@ title: "Import Evan Daniel: Hunt 3 packings at 132, 308, 343, 344 (#489)"
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 created_at: 2026-10-10T16:38:00.983Z
-updated_at: 2026-10-10T17:42:59.624Z
+updated_at: 2026-10-10T19:58:56.333Z
 ---
 Issue https://github.com/jlevy/squares/issues/489 (2026-10-10T14:47Z). Quality-diversity basin explorer with a two-parent crossover (as #465). s(132) <= 11.985680198845808811522231964102, s(308) <= 17.998269879526255875387992744507, s(343) <= 18.978232523635611279730512106023, s(344) <= 18.994450514277401521114135796864; each below #488 (132) or #484 (308, 343, 344). evand/square-packing head 76a529bc6f36 (2026-10-10). 343 and 344 are beyond the n <= 324 horizon. Stages 1-3 through devtools.upper_bound_reports.
 
@@ -24,3 +24,5 @@ Issue https://github.com/jlevy/squares/issues/489 (2026-10-10T14:47Z). Quality-d
 - Replay: certify --workers 2, 15 jobs, 1,319,598 pair decisions, 308.35 route CPU s, 3 min 33 s wall at load ~7; all 5 positives pass both routes, all 10 controls refused; check --replay serial 5 min 33 s, exit 0. Third route: decide-imports --imports '#488' '#489' --upstream, the four requested certificates pass with all 24 controls, retained files equal to upstream bytes, no disagreement; the unnamed 305 measured by arrangement_gap against #488's: one side, a quarter turn apart, 34 squares moved beyond 1e-9 (largest 1.77e-2).
 - Register plan printed (T-NNN for 132 and 308; beyond-horizon rows at 343 and 344 that supersede #484's once both are registered); shared records not edited, proposed YAML handed to the coordinator.
 - Validation at 46fe607cc: packing-validate --records 49/49 steps passed (59.7 s); --edit 65/65 passed (252.5 s at load ~10, over the 240 s ceiling, reported not enforced); touched tests 229 passed.
+
+2026-10-10 records lane R3: registered #489 as T-141 (11179cb77, V0/C0), raised to V3/C3 on review-2026-10-10-upper-bound-imports-488-489.md (b05bc4b26) with E-evand-489-exact-feasibility; 343 and 344 are verified beyond-horizon rows and #484's rows there are superseded; the claim record is refrozen with exact readers, so 305 reads as a tie with #488, cited by no entry. Branch worktree-agent-a45d986d0210d7ec5 (records lane R3, merged into nothing yet). Ids provisional until merged.

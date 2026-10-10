@@ -5,13 +5,13 @@ title: "Intake 2026-10-10 evening reads: wand125 27ed168 (8 commits), Guzhou0806
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 created_at: 2026-10-10T16:38:01.528Z
-updated_at: 2026-10-10T16:53:25.348Z
+updated_at: 2026-10-10T19:58:57.576Z
 ---
 The 16:40Z sweep: wand125/square-packing has 8 commits past 22a23c8 (2026-10-10 to 10-11; newest drops the archived n = 11 density from the best-certificate table); Guzhou0806/n40-square-packing 71c97d0 (#485 follow-up); evand/square-packing 76a529b (#489); franciscouzo/square-packing 3ef7634 (#488); squarepacker/k2-minus-c-upper c6df2f4 (README DOI only). Read each: an import bead for any new result, else a read in intake-watch.yaml.
 
@@ -26,3 +26,5 @@ The 16:40Z sweep: wand125/square-packing has 8 commits past 22a23c8 (2026-10-10 
 - squarepacker/k2-minus-c-upper c6df2f4: one README line (v1.1 DOI 10.5281/zenodo.23278927). Read proposed, nothing to import.
 - #485 comment 6098734391: proposed result s40-continuous-pose, queued, bead think-xms6; read_through to 2026-10-10T14:50:00Z; think-xms6 added to beads.
 Proposed rows validated against intake-watch.schema.yaml and the #485 change against result-requests.schema.yaml with jsonschema on scratch copies; no tracked file written.
+
+2026-10-10 records lane R3: the 16:40 sweep's reads written as one read per repository through its head, no bead, since packets or register sources now pin every commit holding a result (d7ff53975): wand125/square-packing through 27ed168, evand through 76a529b, franciscouzo through 3ef7634. Guzhou0806/n40-square-packing's head 71c97d0 is the continuous-pose packet's pin and needs no read; squarepacker/k2-minus-c-upper already had its read. evand's head has moved to 346c6ed (18:05Z), unread. Branch worktree-agent-a45d986d0210d7ec5 (records lane R3, merged into nothing yet).

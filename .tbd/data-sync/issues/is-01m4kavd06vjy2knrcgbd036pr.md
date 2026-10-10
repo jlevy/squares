@@ -5,13 +5,13 @@ title: "Import Francisco Couzo: certificates at 132, 175, 209, 237, 270, 305 (#4
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 created_at: 2026-10-10T16:38:00.454Z
-updated_at: 2026-10-10T17:42:58.906Z
+updated_at: 2026-10-10T19:58:56.044Z
 ---
 Issue https://github.com/jlevy/squares/issues/488 (2026-10-10T14:08Z). franciscouzo/square-packing 3ef76349025bf4bfa99c9c3600bcc273f4c33e02 certificates/nN.cert (Evan Daniel's format). Below SQUISH's #481 at 209, 237, 270, 305; below this author's #476 at 132 and #460 at 175. Superseded at 132 by #489 (evand Hunt 3). Stages 1-3 through devtools.upper_bound_reports, comparing with #470, #476, #481, #489 and the register.
 
@@ -25,3 +25,5 @@ Issue https://github.com/jlevy/squares/issues/488 (2026-10-10T14:08Z). francisco
 - 305: exactly the side of Hunt 3's hunt3_n305 (c013f43); same arrangement up to a quarter turn; the Hunt 3 log at 76a529b drops 305 as Couzo's.
 - Register plan printed (T-NNN); shared records not edited, proposed YAML handed to the coordinator.
 - Validation at 46fe607cc: packing-validate --records 49/49 steps passed (59.7 s); --edit 65/65 passed (252.5 s at load ~10, over the 240 s ceiling, reported not enforced); touched tests 229 passed.
+
+2026-10-10 records lane R3: registered #488 as T-140 (ef1f6287e, V0/C0), raised to V3/C3 on review-2026-10-10-upper-bound-imports-488-489.md (b05bc4b26) with E-couzo-488-exact-feasibility; the declaration reads #481 and #489 by exact HOUSES readers and the claim record is refrozen (6d5951166, b05bc4b26); #488's request entry maps the six to T-140. Branch worktree-agent-a45d986d0210d7ec5 (records lane R3, merged into nothing yet). Ids provisional until merged to main.
