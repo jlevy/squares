@@ -7,15 +7,22 @@ import sys
 import time
 from fractions import Fraction
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 
+from sqpack import rectangle_density
 from sqpack.rectangle_density import (
     CandidateError,
+    DensityRectangle,
     RectangleDensityCandidate,
     load_candidate,
     verify_candidate,
 )
+from sqpack.rust_rectangle_geometry import RustRectangleGeometry
+
+if TYPE_CHECKING:
+    import subprocess
 
 PACKING = Path(__file__).resolve().parents[1]
 ANALYTIC = PACKING / "resources/web/wand125-tools-2026-09-29/native-analytic-control.json"
@@ -71,9 +78,23 @@ def _candidate() -> RectangleDensityCandidate:
     return load_candidate(ANALYTIC, n=3, expected_side=Fraction(3, 2))
 
 
-@pytest.mark.parametrize("mode", ["wrong_sequence", "duplicate_key", "extra_output"])
-def test_invalid_resident_response_refuses(tmp_path: Path, mode: str) -> None:
-    with pytest.raises(CandidateError, match="Rust exact geometry refused"):
+@pytest.mark.pool_heavy
+@pytest.mark.parametrize(
+    ("mode", "reason"),
+    [
+        ("wrong_sequence", "Rust response identity or result count changed"),
+        ("duplicate_key", "duplicate Rust response key: version"),
+        ("extra_output", "Rust process emitted unsolicited output"),
+    ],
+)
+def test_invalid_resident_response_refuses(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mode: str, reason: str
+) -> None:
+    # Reach the malformed protocol response independently of snapshot/startup time.
+    # Real select waits keep their two-second bound; the timeout controls below keep
+    # the real clock.
+    monkeypatch.setattr(time, "monotonic", lambda: 0.0)
+    with pytest.raises(CandidateError, match="Rust exact geometry refused") as refused:
         verify_candidate(
             _candidate(),
             angle_indices=(0,),
@@ -82,17 +103,55 @@ def test_invalid_resident_response_refuses(tmp_path: Path, mode: str) -> None:
             backend="rust",
             rust_binary=_fake_server(tmp_path, mode),
         )
-
-
-def test_partial_line_timeout_retains_unresolved_event_census(tmp_path: Path) -> None:
-    start = time.monotonic()
-    report = verify_candidate(
-        _candidate(),
-        angle_indices=(0,),
-        max_seconds=0.5,
-        backend="rust",
-        rust_binary=_fake_server(tmp_path, "partial"),
+    assert str(refused.value) == f"Rust exact geometry refused: {reason}", refused.getrepr(
+        style="long"
     )
+
+
+@pytest.mark.pool_heavy
+def test_partial_line_timeout_retains_unresolved_event_census(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    class ObservedGeometry(RustRectangleGeometry):
+        @property
+        def process(self) -> subprocess.Popen[bytes] | None:
+            return self._process
+
+        @property
+        def partial_response(self) -> bytes:
+            return bytes(self._buffer)
+
+    start = time.monotonic()
+    candidate = _candidate()
+    binary = _fake_server(tmp_path, "partial")
+    # Validate genuine readiness before the response-phase deadline starts. Startup
+    # still counts toward the original two-second outer bound; all clocks, pipes
+    # and select waits remain real.
+    with ObservedGeometry(candidate.rectangles, binary, deadline=start + 2) as engine:
+        process = engine.process
+        assert process is not None
+        constructor_calls = 0
+
+        def prepared_engine(
+            rectangles: tuple[DensityRectangle, ...], binary_path: Path, *, deadline: float
+        ) -> RustRectangleGeometry:
+            nonlocal constructor_calls
+            constructor_calls += 1
+            assert constructor_calls == 1
+            assert rectangles == candidate.rectangles
+            assert binary_path == binary
+            assert 0 < deadline - time.monotonic() <= 0.5
+            engine.deadline = deadline
+            return engine
+
+        monkeypatch.setattr(rectangle_density, "RustRectangleGeometry", prepared_engine)
+        report = verify_candidate(
+            candidate,
+            angle_indices=(0,),
+            max_seconds=0.5,
+            backend="rust",
+            rust_binary=binary,
+        )
     assert time.monotonic() - start < 2
     assert report.status == "INCONCLUSIVE"
     assert report.backend_timeout
@@ -100,8 +159,15 @@ def test_partial_line_timeout_retains_unresolved_event_census(tmp_path: Path) ->
     assert report.angles[0].nodes == 0
     assert report.angles[0].unresolved_leaves > 0
     assert report.angles[0].stop_cause == "time_limit"
+    assert constructor_calls == 1
+    assert report.rust_binary_sha256 == engine.binary_sha256
+    assert report.rust_table_sha256 == engine.table_sha256
+    assert engine.partial_response == b'{"version":'
+    assert process.poll() is not None
+    assert engine.process is None
 
 
+@pytest.mark.pool_heavy
 def test_shutdown_timeout_cannot_promote_completed_angles(tmp_path: Path) -> None:
     report = verify_candidate(
         _candidate(),
@@ -117,6 +183,7 @@ def test_shutdown_timeout_cannot_promote_completed_angles(tmp_path: Path) -> Non
     assert report.angles[0].nodes > 0
 
 
+@pytest.mark.pool_heavy
 def test_a_rebuild_during_verification_keeps_the_bytes_that_ran(tmp_path: Path) -> None:
     """The child runs from a private snapshot, so the source path may change mid-run.
 

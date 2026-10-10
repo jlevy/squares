@@ -191,8 +191,8 @@ its deferred independent-kernel work or reclassifying the existing confirmation.
 ### F7: Reconcile the Lean Transition with the Dated Report
 
 The undated statement that both formalizations are “in progress” precedes the report
-that Queuingtheorydotcom completed one on October 6. The revision introduces the two
-projects neutrally and identifies this project’s limitation as the absence of a full
+that Ahmed completed one on October 6. The revision introduces the two projects
+neutrally and identifies this project’s limitation as the absence of a full
 proof-assistant replay.
 
 The [October 6 statement audit][lean-audit] supports the existing distinctions: the

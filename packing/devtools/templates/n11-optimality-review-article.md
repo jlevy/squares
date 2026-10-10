@@ -1,7 +1,7 @@
 {{FRONT_MATTER}}
 
 This paper explains the computer-assisted optimality proof published by
-[Queuingtheorydotcom in 11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal).
+[Ahmed in 11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal).
 The original
 [mathematical argument](https://github.com/Queuingtheorydotcom/11SquaresOptimal/blob/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c/PROOF.md),
 [verification driver](https://github.com/Queuingtheorydotcom/11SquaresOptimal/blob/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c/VERIFY.py),
@@ -9,8 +9,8 @@ The original
 and
 [reproduction instructions](https://github.com/Queuingtheorydotcom/11SquaresOptimal/blob/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c/docs/REPRODUCING.md)
 are pinned to the source revision reviewed here.
-[Queuingtheorydotcom’s announcement](https://x.com/MathCompSciFTW/status/2104772485816168618)
-credits Astra’s work building on the Squares Project and Kleddamag.
+[Ahmed’s announcement](https://x.com/MathCompSciFTW/status/2104772485816168618) credits
+Astra’s work building on the Squares Project and Kleddamag.
 
 The components have distinct provenance:
 
@@ -1013,13 +1013,12 @@ wand125 reports that the 76 prior-family cases and the 173 returned cases are al
 kernel-checked using only Lean’s standard axioms; an independent replay of the 173
 against the 11SquaresFormalized assembly is recorded in
 [an open pull request to that repository](https://github.com/Queuingtheorydotcom/11SquaresFormalized/pull/7),
-not merged as of October 4.[^lean] On October 6 Queuingtheorydotcom reported the
-formalization in 11SquaresFormalized complete: 7,920 Lean modules with no admitted goal,
-its numerical certificates checked by `native_decide`, so that it trusts Lean’s compiler
-as well as its kernel.[^lean-done] The Squares Project’s statement audit of October 6
-reads its theorem, `ElevenSquare.optimality`, as exactly $s(11)=T$; the full run is
-private, so T-060 records it as the source’s report, and no rung rests on either
-formalization.
+not merged as of October 4.[^lean] On October 6 Ahmed reported the formalization in
+11SquaresFormalized complete: 7,920 Lean modules with no admitted goal, its numerical
+certificates checked by `native_decide`, so that it trusts Lean’s compiler as well as
+its kernel.[^lean-done] The Squares Project’s statement audit of October 6 reads its
+theorem, `ElevenSquare.optimality`, as exactly $s(11)=T$; the full run is private, so
+T-060 records it as the source’s report, and no rung rests on either formalization.
 
 The final composition receipt reconciles the completed geometric executions and their
 reviewed dependencies.

@@ -183,6 +183,7 @@ DATA_PATHS: tuple[str, ...] = ("packing/frontier", "packing/atlas/known-best")
 #: line then needed a one-word playbook edit that would have done it again.
 DATA_EXCLUDED: tuple[str, ...] = (
     "packing/atlas/known-best/known-best-1-*",
+    "packing/atlas/known-best/square-packings-*-????????.pdf",
     "packing/atlas/known-best/video",
     "packing/frontier/README.md",
     "packing/atlas/known-best/README.md",
@@ -203,7 +204,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "f7ea62fa53f54a8e03dc6c0320278905f9280acb"
+DATA_REVISION = "c8abd537fa0a41cda3310460c4568228dd2cbdbf"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -349,7 +350,7 @@ EXPLAINER_FIRST_PUBLISHED = EXPLAINER_HISTORY[-1].first_published
 #: `PUBLICATION_DATE`, the day the edition was first published, which stood still while
 #: the article changed under it: merging is the whole publish, so the text a reader sees
 #: moves between editions. Change it in the commit that changes the article.
-EXPLAINER_REVISED = "October 5, 2026"
+EXPLAINER_REVISED = "October 9, 2026"
 
 #: The optimality review's own editions, newest first, each with the day it was first
 #: published and what changed in the paper: the review's history, as `EXPLAINER_HISTORY`
@@ -375,7 +376,7 @@ OPTIMALITY_REVIEW_HISTORY = (
             "The uniqueness corollary is registered as T-112 and no longer called "
             "unreviewed, with its prior art: Trump's rigidity claim is local, and "
             "Stromquist's three optimal packings of ten squares show uniqueness is not "
-            "automatic; and Queuingtheorydotcom's report of a complete Lean 4 "
+            "automatic; and Ahmed's report of a complete Lean 4 "
             "formalization of October 6 is cited, with its native-compiler trust base "
             "and the project's statement audit."
         ),
@@ -463,7 +464,7 @@ OPTIMALITY_REVIEW_EDITION = " ".join(
 #: prints, by the rule `EXPLAINER_REVISED` follows -- the author date of the last commit
 #: that changed its article, `n11-optimality-review-article.md`, held to git by
 #: `devtools.artifact_dates`. Change it in the commit that changes the article.
-OPTIMALITY_REVIEW_REVISED = "October 7, 2026"
+OPTIMALITY_REVIEW_REVISED = "October 9, 2026"
 
 #: The day the proof the review explains was published by its source, which the review's
 #: "Original proof" date prints. A fact about someone else's work, so it is typed, and
@@ -494,7 +495,7 @@ THRESHOLD_REVIEW_EDITION = " ".join(
 #: When Part II's text last changed, by the rule `OPTIMALITY_REVIEW_REVISED` follows: the
 #: author date of the last commit that changed `n11-threshold-bound-review-article.md`,
 #: held to git by `devtools.artifact_dates`.
-THRESHOLD_REVIEW_REVISED = "October 5, 2026"
+THRESHOLD_REVIEW_REVISED = "October 9, 2026"
 
 #: The day Kleddamag published the proof Part II reviews (v1.0.2 of
 #: 11-squares-certified-bound), which its "Original proof" date prints.

@@ -261,6 +261,7 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_frontier_table.py",
     "tests/test_site_rendering.py",
     "tests/test_site_math_preferences.py",
+    "tests/test_site_atlas_views.py",
 )
 #: The four HTTP load/no-JS cases measure browser timing without competing browser
 #: workers from the functional layout command. Their assertions and budgets stay shared

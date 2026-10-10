@@ -222,6 +222,17 @@ def test_linked_publication_preloads_only_its_front_faces_once_before_styles(
         site_assets.preload_tags(bundle.assets, page_path),
     )
     assert len(expected) == len(site_assets.PRELOADED_FACES)
+    assert len(expected) == len(set(expected))
+    # Prose variables need the italic face before first layout, just as surrounding
+    # prose and navigation need their upright faces.
+    for face_name in (
+        "pt-serif-latin-400-normal.woff2",
+        "pt-serif-latin-400-italic.woff2",
+        "source-sans-3-latin-wght-normal.woff2",
+    ):
+        ref = bundle.assets.face_ref(face_name)
+        assert ref is not None
+        assert f'href="{site_assets.asset_href(ref, page_path)}"' in "".join(expected)
     for tag in expected:
         assert linked.count(tag) == 1
         assert linked.index(tag) < linked.index('rel="stylesheet"')

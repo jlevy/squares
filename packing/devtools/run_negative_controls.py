@@ -460,6 +460,10 @@ PRUNE = frozenset(
         ROOT / "atlas/known-best/known-best-1-324.pdf",
         ROOT / "atlas/known-best/known-best-1-324.png",
         ROOT / "atlas/known-best/known-best-1-324.svg",
+        # Dated edition downloads replace the legacy PDF names above; both generations
+        # stay prunable when replaying historical snapshots.
+        ROOT / "atlas/known-best/square-packings-100-20261008.pdf",
+        ROOT / "atlas/known-best/square-packings-324-20261008.pdf",
         ROOT / "atlas/known-best/rendering",
         # Full generated update certificates remain readable through LINK_BACK.
         # Receipt/code mutations copy the inputs into their private temporary tree.
@@ -1198,6 +1202,16 @@ def root_files() -> tuple[Path, ...]:
 #
 # With this change's own comments and test counted, the branch measures 196,433,238
 # bytes and its merge with main 196,616,698, 4.67 MiB and 4.49 MiB under an unchanged cap.
+# 2026-10-08, the atlas cleanup (think-lq8t): the maintained snapshot audit reads
+# 201,971,305 bytes across 6,757 copy operations, 644,713 over 192 MiB. The prior
+# gap-export revision measured 201,280,929, with only 45,663 bytes of headroom.
+# Structured rigidity source/date metadata grows composite-figure.json by 564,800
+# bytes; validate_schemas consumes that record and retained_json already bounds its
+# serialization. The renamed PDFs, vectors and PNGs remain pruned. Independent review
+# found no additional prune justified by the consumer evidence, so calibrate the cap
+# to 200 MiB: 7,743,895 bytes (7.39 MiB) headroom, with no change to copied inputs,
+# dependency rescue or timeout. Three portable workers remain bounded at 600 MiB,
+# 24 MiB above the prior ceiling. think-t1lk still owns dependency-aware selection.
 #
 # 2026-10-08, #404 (1af586ef4): no entry was written for this one, so it is recorded
 # here. `_link_needs_private_target` stopped copying back five historical browser
@@ -1238,7 +1252,10 @@ def root_files() -> tuple[Path, ...]:
 #
 # With this change's comments and tests counted, the snapshot measures 200,145,032
 # bytes, 1,181,560 under the unchanged cap.
-SNAPSHOT_MAX_BYTES = 192 * 1024 * 1024
+#
+# The upstream measurements used its 192 MiB cap; retain the independently
+# calibrated 200 MiB atlas-metadata capacity on this branch.
+SNAPSHOT_MAX_BYTES = 200 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

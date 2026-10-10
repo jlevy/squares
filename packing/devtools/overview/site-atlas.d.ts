@@ -8,6 +8,7 @@ interface SiteAtlasParts {
   cells: HTMLElement;
   tabs: HTMLElement;
   sizes: HTMLElement | null;
+  scales: HTMLElement | null;
 }
 
 /** A mounted block's two acts: arrange the triangle for the width, and change the

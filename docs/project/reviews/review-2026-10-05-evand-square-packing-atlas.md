@@ -58,7 +58,7 @@ build here), **best known** (a construction not proved optimal), or **asserted**
 
 | # | Claim | Where | Status here | Register action | Id |
 | --- | --- | --- | --- | --- | --- |
-| 1 | $s(11) = 3.8770835900\ldots$, Trump’s packing optimal (Queuingtheorydotcom) | Overview, Proofs, Sources §5, floors table | Computationally verified | Already registered | `T-060` |
+| 1 | $s(11) = 3.8770835900\ldots$, Trump’s packing optimal (Ahmed) | Overview, Proofs, Sources §5, floors table | Computationally verified | Already registered | `T-060` |
 | 2 | $s(21) = 5$, $s(32) = 6$, $s(45) = 7$, $s(60) = 8$, $s(61) = 8$ | Overview cards, Proofs, Sources §5, `/s21/` to `/s60/` | Computationally verified | Already registered | `T-052`, `T-051`, `T-053`, `T-062`, `T-063` |
 | 3 | $s(59) = 8$ and $s(77) = 9$ (wand125) | Floors table, Sources §5 | Computationally verified | Already registered | `T-066`, `T-067` |
 | 4 | $s(k^2 - 3) = k$ for every $k \ge 6$ | Overview, Proofs, `/k2m3/` | Computationally verified for $k = 6$ to $18$, the reduction to every $k$ built here | Already registered | `T-064` |
@@ -109,8 +109,8 @@ as its verified lower bound.
 For $c = 4$ the site waits for `T-081`’s replay, and correctly so: the verified lane
 holds $k$ at none of the eight counts from $n = 117$ to $320$.
 
-**Agreements.** The site credits wand125 with $s(77) = 9$ first, Queuingtheorydotcom
-with $s(11)$, and this record’s `T-079` with the best $s(12)$ floor.
+**Agreements.** The site credits wand125 with $s(77) = 9$ first, Ahmed with $s(11)$, and
+this record’s `T-079` with the best $s(12)$ floor.
 It describes the $k^2 - 3$ family as independently re-checked by wand125’s checker, and
 says the $k^2 - 4$ family has one implementation and waits for replay.
 It says Nagamochi’s 2005 proof rests on a false lemma, and that Karakuş re-proved
@@ -128,9 +128,9 @@ is true.
   The value is right and the route is not.
 - The $n = 17$ note calls `T-043` “`V4/C3`”. Since the ladder change of 30 September it
   is `V3/C3` ([epistemics.md](../../../epistemics.md#what-changed-on-2026-09-30)).
-- Sources §5 says Queuingtheorydotcom’s proof was “replayed independently by
-  jlevy/squares”. The register’s confirmation of `T-060` is a re-implementation sharing
-  the producer’s components, not an independent one.
+- Sources §5 says Ahmed’s proof was “replayed independently by jlevy/squares”.
+  The register’s confirmation of `T-060` is a re-implementation sharing the producer’s
+  components, not an independent one.
 - Sources §5 dates `T-079` to 3 October, its registration.
   Its `established` date is 2 October.
 - The overview rings $k^2 - 1$ as register-verified on Karakuş’s re-proof.

@@ -9,7 +9,14 @@ from typing import Any
 
 import pytest
 
+from devtools import atlas_orientation
 from devtools import screen_translation_escape as screen
+from devtools.atlas_orientation import (
+    Reflection,
+    orient_atlas_witness,
+    reflect_escape_case,
+    reflect_x_axis,
+)
 from sqpack.known_best import exact_grid_witness
 from sqpack.witness import witness_document
 
@@ -150,3 +157,68 @@ def test_cli_refuses_invalid_targeted_modes(
     monkeypatch.setattr(sys, "argv", ["screen_translation_escape", *args])
     with pytest.raises(SystemExit, match=r"narrows|positive"):
         screen.main()
+
+
+@pytest.mark.parametrize("operation", ["reflect-x-axis", "reflect-y-axis"])
+def test_reflected_screen_replays_each_mapped_slide_against_the_selected_pose(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    operation: Reflection,
+) -> None:
+    witness = {
+        "id": "W-pair",
+        "n": 2,
+        "side": "3",
+        "square_size": "1",
+        "representation": "center-angle",
+        "scalar": {"kind": "decimal"},
+        "coordinates": {
+            "origin": "lower-left",
+            "axes": "x-right-y-up",
+            "angle_unit": "radians",
+        },
+        "squares": [
+            {"id": 7, "center": ["0.75", "0.75"], "angle": "0.2"},
+            {"id": 3, "center": ["2.25", "2.25"], "angle": "0"},
+        ],
+        "claim": {
+            "coordinate_provenance": "numerically-checked",
+            "method": "numerical-multiprecision",
+            "precision": {"decimal_digits": 120, "rounding": "nearest"},
+            "tolerance": "1e-12",
+            "limitations": "Synthetic finite-precision fixture.",
+        },
+        "source": {"path": "tests/pair"},
+    }
+    path = tmp_path / "pair.yaml"
+    path.write_text(witness_document(witness, schema=str(screen.WITNESS_SCHEMA)))
+    entry = {"n": 2, "reported_side": "3", "witness": {"path": str(path)}}
+    _, original = screen._screen_entry(entry)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    monkeypatch.setattr(atlas_orientation, "REFLECTED_N", 2)
+    monkeypatch.setattr(atlas_orientation, "PARENT_FACTS", "tests/pair")
+    monkeypatch.setattr(atlas_orientation, "PARENT_SOURCE_KEY", "synthetic-parent")
+    witness["source"]["key"] = "synthetic-parent"
+    selected = orient_atlas_witness(witness)
+    if operation == "reflect-x-axis":
+        legacy = reflect_x_axis(witness)
+        legacy["certificate"] = selected["certificate"]
+        legacy["certificate"]["geometry_transform"]["operation"] = operation
+        selected = legacy
+    path.write_text(witness_document(selected, schema=str(screen.WITNESS_SCHEMA)))
+    selected_squares, _, _ = screen.materialize_record(entry)
+    replay = screen._replay  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    selected_replays = []
+
+    def recording(geometry: screen.RecordGeometry, motion: dict, tolerance: Any) -> bool:
+        if geometry.squares == selected_squares:
+            selected_replays.append(motion["witness_square_id"])
+        return replay(geometry, motion, tolerance)
+
+    monkeypatch.setattr(screen, "_replay", recording)
+    screened, reflected = screen._screen_entry(entry)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert screened is True
+    assert reflected == reflect_escape_case(original, operation=operation)
+    assert selected_replays == [7, 3]
+    monkeypatch.setattr(screen, "_replay", lambda *_args: False)
+    with pytest.raises(ValueError, match=r"reflected certificate.*did not replay"):
+        screen._reflected_record(entry, original, [7, 3])  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
