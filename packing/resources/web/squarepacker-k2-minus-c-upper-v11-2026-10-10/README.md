@@ -26,16 +26,17 @@ files that are new or changed since version 1.0 are retained byte for byte under
 `code/stair_dump.py`, the coverings `code/cert_v3/` and `code/cert_v4/`, the exact tests
 `code/zc_tests/`, and their recorded outputs under `code/checker_outputs/`.
 
-The 28 files that keep their version 1.0 Git blob are pinned only and bound to the
-2026-10-09 packet: the two licences, the six programs `cert3e.py`, `chk.py`,
-`const_stair.py`, `r38.py`, `run_z.py` and `stair_check.py`, and the fifteen recorded
-outputs at the top of `code/checker_outputs/`, each by `identical_to`, which
-`acquire_source --check` compares byte for byte.
-The five certificates are bound by their equal digests: the earlier packet retains the
-three smaller as original gzip and
-[`packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml`](../../../hosted/squarepacker-k2-minus-c-upper-certificates.yaml)
-hosts the two largest.
-They carry no `identical_to`, because that comparison reads a `.gz` copy decompressed.
+The 28 files that keep their version 1.0 Git blob are pinned only.
+Twenty-six are bound to the 2026-10-09 packet by `identical_to`, which
+`acquire_source --check` compares byte for byte: the two licences, the six programs
+`cert3e.py`, `chk.py`, `const_stair.py`, `r38.py`, `run_z.py` and `stair_check.py`, the
+fifteen recorded outputs at the top of `code/checker_outputs/`, and the three smaller
+certificates, which that packet retains as original gzip and lists in its Original Gzip
+Files table, so they are compared as stored and not decompressed.
+The two largest certificates are retained by neither packet and are bound by their
+digests to
+[`packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml`](../../../hosted/squarepacker-k2-minus-c-upper-certificates.yaml),
+which hosts them.
 
 Every member of the Zenodo archive was compared here with the tagged tree by Git blob:
 all 102 are equal, and all 99 entries of `SHA256SUMS` verify.
@@ -109,7 +110,7 @@ From `packing/`:
 uv run --frozen --all-extras --group dev python -m devtools.acquire_source squarepacker-k2-minus-c-upper-v11-2026-10-10 --check
 ```
 
-This checks the full version manifest, the retained bytes and the 23 copies bound by
+This checks the full version manifest, the retained bytes and the 26 copies bound by
 `identical_to`. It does not verify the theorem.
 
 <!-- This document follows common-doc-guidelines.md.
