@@ -54,6 +54,38 @@ Xu’s certificate side `88809603717088809603717/10000000000000000000000`
 (8.8809603717088810, T-125, `E-ryxu-432-rational-feasibility`). The claimed side is
 exactly `14263000000014263/100000000000000000000000000` ($1.4263 \times 10^{-10}$)
 below it, as the issue states. No other pending report names $n = 70$.
+[acquisition/claims.json](acquisition/claims.json) freezes that comparison, and
+`devtools.upper_bound_reports` rebuilds it with the case ceiling read from Ryan Xu’s own
+packet.
+
+## Derived Facts and Exact Replay
+
+`devtools.upper_bound_reports` read `certificate.json` from a checkout at the pin, after
+`devtools.acquire_source` showed that the checkout yields this packet’s acquisition
+record and manifest, so the bytes it read have the digests above.
+It translated every centre by $S/2$, exactly, into $[0, S]^2$ and wrote the certificate
+as an exact rational `center-basis` Witness/v2,
+[facts/n-070.yaml.gz](facts/n-070.yaml.gz), the deciding witness of the maintained exact
+route, naming the certificate’s SHA-256 as `revision_sha256`.
+The fact is this repository’s derivation; no upstream byte is retained.
+Its side is the issue’s exactly, and offline the fact must rebuild itself from the
+certificate it states.
+The declaration of the import is [acquisition/report.json](acquisition/report.json).
+
+Only the fact enters geometry decisions, through the two-route kernel of
+`devtools.evand_arrangement_reports`: `sqpack`’s exact witness verifier and the
+independent rational corner checker, each deciding every wall and every pair over
+$\mathbb{Q}$. A positive job, a duplicate-square control and an outside-container
+control each ran in their own child process.
+The positive passes both routes and both routes refuse both controls, each on the
+overlap or the wall it was built to break.
+Both routes find the least wall clearance $6.01 \times 10^{-13}$ and the least pair gap
+$1.20 \times 10^{-12}$. The three jobs made 14,490 pair decisions in 3.31 route CPU
+seconds and 3.34 job wall seconds, summed; the longest took 1.12 seconds.
+[receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
+deciding input and both routes’ complete outputs.
+The two routes share certificate parsing, the half-angle conversion, Python’s rational
+arithmetic and the separating-axis method.
 
 ## What Is Not Established
 
@@ -61,8 +93,8 @@ The source reports that its own exact checker accepts all 2,415 pairs and all 28
 corners with zero tolerance, and that David Ellsworth’s `check_packing.py` at
 `79f8a378d52e757d70f7cfb2c2f7a24a53da0204` accepts the 60-digit export at
 $\varepsilon = 10^{-40}$. Those are author reports; no program of the source has run
-here, and no replay is recorded yet. The certificate would establish a finite upper
-bound only. The source claims no new arrangement family and no optimality, and its
+here, and the replay above has not been reviewed. The certificate establishes a finite
+upper bound only. The source claims no new arrangement family and no optimality, and its
 generator and exact checker were written together.
 
 ## Credit
@@ -79,11 +111,21 @@ From `packing/`:
 
 ```sh
 uv run --frozen --all-extras --group dev python -m devtools.acquire_source ebdeleeuw-n70-refinement-2026-10-10 --check
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports ebdeleeuw-n70-refinement-2026-10-10 check-claims
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports ebdeleeuw-n70-refinement-2026-10-10 check --replay
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports ebdeleeuw-n70-refinement-2026-10-10 derive --checkout CHECKOUT --check
 ```
 
-`--check` re-derives the record from this packet alone. A replay reads
-`certificate.json` from a checkout at the pin and refuses bytes whose SHA-256 differs
-from the manifest’s.
+`--check` re-derives the record from this packet alone. The importer’s `check-claims`
+and `check --replay` run offline from the fact; `derive --check` needs a checkout at the
+pin, refuses one that does not yield this packet’s record and manifest, and compares
+the fact it derives with the retained one.
+
+## Compressed Files
+
+| Stored File | Origin | Git Blob of Original | SHA-256 of Original |
+| --- | --- | --- | --- |
+| `facts/n-070.yaml.gz` | receipt | `e228ec3670ff2c6f1f29ce853abadf4d2c0013a8` | `211f669047683e84c5571dae7437e53d83679d2105d239641e6c442a33898f6c` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
