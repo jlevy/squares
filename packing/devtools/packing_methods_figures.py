@@ -64,6 +64,7 @@ WIDTH = 390
 MARGIN = 12
 EXTENT = WIDTH - 2 * MARGIN
 POSE_ROW = re.compile(r"Square ([0-9]+): x=([-+0-9.eE]+), y=([-+0-9.eE]+), deg=([-+0-9.eE]+)")
+HEX_FILL = re.compile(r"#[0-9a-fA-F]{6}")
 CASSON_URL = (
     "https://github.com/griffcass/square-packing/blob/"
     "82661bc8777beeecf458312e8aca9179a969da4f/results/packings/n106.txt"
@@ -202,6 +203,9 @@ def _surgery_drawing() -> Drawing:
 def _render(drawing: Drawing) -> str:
     if len(drawing.squares) != drawing.n or len(drawing.fills) != drawing.n:
         raise ValueError(f"{drawing.identifier}: expected {drawing.n} retained squares")
+    # SVG paint expressions can reference external URLs through CSS escapes.
+    if any(HEX_FILL.fullmatch(fill) is None for fill in drawing.fills):
+        raise ValueError(f"{drawing.identifier}: fill must be a six-digit hexadecimal colour")
     if any(
         len(square) != 4 or any(not math.isfinite(value) for point in square for value in point)
         for square in drawing.squares

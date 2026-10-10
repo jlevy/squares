@@ -176,3 +176,60 @@ def test_incomplete_rosters_and_mixed_historical_identity_are_refused(
         patches.setattr(Path, "read_bytes", mixed_squish)
         with pytest.raises(ValueError, match="historical SQUISH facts differ"):
             figures.render_figures()
+
+
+@pytest.mark.parametrize(
+    "fill",
+    [
+        pytest.param(
+            r"u\72l(https://example.invalid/security-fill.svg#paint)", id="escaped-url"
+        ),
+        pytest.param(
+            r"\75\72\6c(https://example.invalid/security-fill.svg#paint)",
+            id="fully-escaped-url",
+        ),
+        pytest.param("var(--figure-fill)", id="css-variable"),
+        pytest.param("red", id="named-colour"),
+        pytest.param("#abc", id="short-hex"),
+        pytest.param("#4b9582\n", id="trailing-newline"),
+    ],
+)
+def test_retained_square_fills_require_six_digit_hex_colours(
+    monkeypatch: pytest.MonkeyPatch, fill: str
+) -> None:
+    source = ET.fromstring(figures.TRUMP_DRAWING.read_text(encoding="utf-8"))
+    square = source.find(f'.//{svg_tag("polygon")}[@data-feature="square-fill"]')
+    assert square is not None
+    square.set("fill", fill)
+    modified = ET.tostring(source, encoding="unicode")
+    read_text = Path.read_text
+
+    def untrusted_fill(
+        path: Path,
+        encoding: str | None = None,
+        errors: str | None = None,
+        newline: str | None = None,
+    ) -> str:
+        if path == figures.TRUMP_DRAWING:
+            return modified
+        return read_text(path, encoding=encoding, errors=errors, newline=newline)
+
+    monkeypatch.setattr(Path, "read_text", untrusted_fill)
+    with pytest.raises(ValueError, match="fill must be a six-digit hexadecimal colour"):
+        figures.render_figures()
+
+
+def test_retained_square_colours_are_preserved() -> None:
+    rendered = figures.render_figures()
+    sources = {
+        "HAND_CONSTRUCTION_SVG": figures.TRUMP_DRAWING,
+        "ANNEALING_SVG": figures.ANNEALING_DRAWING,
+        "ALGEBRAIC_WITNESS_SVG": figures.ALGEBRAIC_DRAWING,
+    }
+    for key, path in sources.items():
+        source = ET.fromstring(path.read_text(encoding="utf-8"))
+        drawing = ET.fromstring(rendered[key])
+        selector = f'.//{svg_tag("polygon")}[@data-feature="square-fill"]'
+        assert [square.attrib["fill"] for square in drawing.findall(selector)] == [
+            square.attrib["fill"] for square in source.findall(selector)
+        ]
