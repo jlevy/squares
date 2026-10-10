@@ -5,7 +5,7 @@ title: Keep website publication and frontend validation within their contracts
 kind: bug
 status: in_progress
 priority: 1
-version: 15
+version: 16
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10
 labels:
@@ -15,11 +15,13 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-10T11:12:38.602Z
-updated_at: 2026-10-10T16:30:39.844Z
+updated_at: 2026-10-10T17:15:13.860Z
 started_at: 2026-10-10T11:13:19.000Z
 ---
 Resolve PR 462 publication and frontend findings without relaxing existing contracts. Preserve script inventory refusal, native MathML readiness, stable Atlas geometry, 300 ms startup assertions, all browser checks and current effective PR hard ceiling. Retained fixes cover non-inherited Headroom clearance, concurrent browser-lane startup, canonical render setup and Atlas host reuse. Final hosted gates must pass before closure; full pre-merge checkpoint remains think-xio5.
 
 ## Notes
 
-Published f489084511a56b130e6d86fc46a8260f4fb530bb / draft PR462: all407 functional browser tests pass,6skip; HTTP desktop initial native tasks303/302ms exceed300ms, two mobile scenarios pass; overall413.44s exceeds effective330s PR ceiling. Other29 checks pass including publication and strict papers. Removed Atlas startup flushes and reduced-motion correction remain verified. Native MathML wrapper controls are rejected: baseline desktop medians160/159ms, max-width-only161/160, inline-plus-width167/159 with overlapping ranges. All72 timing contexts pass readability/CLS/budgets; width-only geometry and font controls match exactly. CSS restored byte-for-byte; raw generated ledger retained in task visualization native-wrapper-controls. Test-probe memoization passes exact52-field equality on direct/fetched53, reducing style reads17000 to1174 and93684 to8114; nested clipping/order/boundary regression1PASS1.28s. Matched pair33.63 to32.31s total,4.86 to4.14s calls: modest single-pair evidence, not a hosted guarantee. Astra and scoped Ruff/Biome/types/ESLint/BasedPyright approve three files, not yet committed. Frozen full-frontend allocation control now measures site3 versus4 workers at declared4CPU/outer2/inner1, Workbench2 unchanged, identical408functional nodes plus4HTTP and56floor checks. Require at least15percent wall gain and exact selection equality before considering retention; any eventual change must preserve other local topology behavior. No budgets/assertions/content are relaxed. Full checkpoint remains think-xio5; implementation closeouts held until exact-final-head hosted checks pass.
+Final pushed head 34e5581ad6d0192fc236be469c563bbc3f24d8ce on draft PR462. Invocation-local case-layout ancestor cache preserves all52 report fields and exact diagnostics while reducing style reads17000→1174 and93684→8114. Matched cold pair33.63→32.31s; modest single-pair evidence, not a hosted guarantee. Astra approved all three files; scoped source floors and normal commit hooks pass. Native-wrapper CSS controls rejected with overlapping timing ranges; all72 timing contexts retained and CSS restored exactly. Site3→4worker control rejected:191.42→163.00s gives14.85percent, below predeclared15percent; identical474JUnit identities/statuses; allocation source restored. No budgets/assertions/scientific data changed.
+Pre-push evidence spans recorded runs, not one aggregate pass:65prerequisites pass; constrained run4414normal pass/35skip then pool phase exceeds original900s reachable timeout. Normal-allocation retry4413pass/35skip plus existing load-sensitive child.pid timeout-test failure; unchanged isolated control1PASS5.50s. Remaining pool phase3PASS128.15s within420seconds remaining from original budget. Full aggregate checkpoint remains think-xio5.
+Exact-head hosted CI pending: Packing38070700709/frontend114267324846, Certificate38070700820. Strict papers pass all eight viewport/theme scenarios below unchanged300ms: optimality203/180/207/205; threshold230/204/217/213. Previous f489 head407functional pass/6skip; two desktop native startup tasks303/302ms and413.44s frontend wall failed. Sole exact-head watch remains active. Implementation closeouts held until every final-head check passes; full pre-merge checkpoint and epic remain open.
