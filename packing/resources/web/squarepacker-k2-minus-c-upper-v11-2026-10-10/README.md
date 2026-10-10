@@ -99,6 +99,7 @@ the lemmas into the normalised inequalities.
 
 | Stored path | Origin | Git blob | SHA-256 |
 | --- | --- | --- | --- |
+| `receipts/replay/outputs.jsonl.gz` | receipt | `aecceadcb2417572cbec5997245bd2f5e6214203` | `4a5af900cd7c633020bcc8b5947ef550c9067831c3b51d8833a8d0f2cc073728` |
 
 ## Check Retained Bytes
 

@@ -113,6 +113,7 @@ They do not referee the proofs.
 
 | Stored path | Origin | Git blob | SHA-256 |
 | --- | --- | --- | --- |
+| `receipts/replay/outputs.jsonl.gz` | receipt | `8874eaf4be05802324841c559860506017f89a44` | `8c5fd6bd66d572c44e9e24a6a1837135015a7007ad2f2d4c09071d9439b2f1d9` |
 
 ## Check Retained Bytes
 
