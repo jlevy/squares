@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import io
+import json
 import math
 import re
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
+from unittest.mock import Mock
 from urllib.parse import urlsplit
 
 import pytest
@@ -19,9 +21,16 @@ from sqpack.probes import applied, probe
 from tests import site_browser, site_renders
 
 if TYPE_CHECKING:
-    from playwright.sync_api import Browser, Page, Route
+    from playwright.sync_api import Browser, CDPSession, Page, Route
 
 _SHIFT = applied(probe(Path(__file__).parent / "probes", "site_rendering/shift"))
+_FONT_INITIATORS = probe(Path(__file__).parent / "probes", "site_rendering/font_initiators")
+_LOCAL_FACE = probe(Path(__file__).parent / "probes", "site_rendering/local_face")
+
+
+@pytest.fixture(scope="module")
+def frontier_math_counts() -> tuple[int, int]:
+    return site_renders.frontier_math_counts()
 
 
 @pytest.fixture(scope="module")
@@ -37,8 +46,9 @@ def test_early_shift_is_measured_and_missing_static_math_fails(
 ) -> None:
     page = tmp_path / "index.html"
     page.write_text(
-        '<!doctype html><html><body style="margin:0"><main><h1>Static content</h1>'
-        '<p style="font-size:40px">A readable paragraph whose movement is large enough '
+        '<!doctype html><html><body style="margin:0"><main>'
+        '<h1>Static content</h1><p style="font-size:40px">A readable paragraph whose '
+        "movement is large enough "
         "to fail the declared layout budget.</p></main></body></html>"
     )
     server = preview_site.serve(tmp_path, 0)
@@ -55,6 +65,14 @@ def test_early_shift_is_measured_and_missing_static_math_fails(
             shifted.wait_for_timeout(450)
             bad = check_site_rendering.read_report(shifted)
             assert bad["cls"] > check_site_rendering.CLS_LIMIT
+            sources = [source for shift in bad["layoutShifts"] for source in shift["sources"]]
+            moved = next(
+                (source for source in sources if source["node"] == "html > body"), None
+            )
+            assert moved is not None, sources
+            # Chromium attributes this inserted gap to the body's changed box.
+            assert moved["currentRect"]["height"] - moved["previousRect"]["height"] >= 500
+            assert moved["previousRect"]["width"] > 0
             assert any(
                 problem.startswith("cls ") for problem in check_site_rendering.problems(bad)
             )
@@ -368,6 +386,14 @@ def test_results_prose_font_arrival_retains_layout(
         assert report["shownMath"] > 0
         assert report["unreadableMath"] == 0
         assert report["supported"], report
+        font_events = report["fontEvents"]
+        started = [event["startTime"] for event in font_events if event["type"] == "loading"]
+        completed = [
+            event["startTime"] for event in font_events if event["type"] == "loadingdone"
+        ]
+        assert started, font_events
+        assert completed, font_events
+        assert completed[-1] >= started[-1] > 0, font_events
         assert report["lcpMs"] > 0, report
         # Holding a font, substituting CSS and inspecting fonts through CDP is
         # not the production load protocol. Keep readability and native CLS here;
@@ -421,6 +447,94 @@ def test_results_prose_fallback_preserves_reader_choices(
         assert check_site_rendering.read_report(page)["unreadableMath"] == 0
     finally:
         context.close()
+
+
+def test_native_trace_retains_full_events_and_marks_diagnostic_overhead(tmp_path: Path) -> None:
+    page = Mock()
+    page.url = "http://127.0.0.1/papers/n11-threshold-bound-review.html"
+    session = page.context.new_cdp_session.return_value
+    callbacks: dict[str, Callable[[dict[str, Any]], None]] = {}
+
+    def on(name: str, callback: Callable[[dict[str, Any]], None]) -> None:
+        callbacks[name] = callback
+
+    session.on.side_effect = on
+    session.send.return_value = {"product": "test Chromium"}
+    destination = tmp_path / "native.json"
+    stop = check_site_rendering.record_native_trace(cast("Page", page), destination)
+    events = [
+        {"name": "UpdateLayoutTree", "ph": "X", "dur": 351000, "args": {"data": {"nodeId": 7}}},
+        {"name": "Paint", "ph": "X", "dur": 8000, "args": {"frame": "initial"}},
+    ]
+    callbacks["Tracing.dataCollected"]({"value": events[:1]})
+    callbacks["Tracing.dataCollected"]({"value": events[1:]})
+    callbacks["Tracing.tracingComplete"]({"dataLossOccurred": False})
+    stop()
+    payload = json.loads(destination.read_text())
+    assert payload["traceEvents"] == events
+    assert payload["diagnostic"]["url"] == page.url
+    assert payload["diagnostic"]["tracingComplete"] == {"dataLossOccurred": False}
+    assert "no gate timing credit" in payload["diagnostic"]["overhead"]
+    session.detach.assert_called_once()
+    assert check_site_rendering.LONGEST_TASK_LIMIT_MS == 300
+
+
+def test_native_trace_refuses_to_overwrite_unique_evidence(tmp_path: Path) -> None:
+    destination = tmp_path / "native.json"
+    destination.write_text("retained actual receipt")
+    page = Mock()
+    with pytest.raises(FileExistsError, match="already exists"):
+        check_site_rendering.record_native_trace(cast("Page", page), destination)
+    assert destination.read_text() == "retained actual receipt"
+    page.context.new_cdp_session.assert_not_called()
+
+
+def test_native_trace_detaches_and_refuses_an_incomplete_capture(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    page = Mock()
+    session = page.context.new_cdp_session.return_value
+    destination = tmp_path / "native.json"
+    stop = check_site_rendering.record_native_trace(cast("Page", page), destination)
+    times = iter((0, 11))
+    monkeypatch.setattr(check_site_rendering.time, "monotonic", lambda: next(times))
+    with pytest.raises(TimeoutError, match="did not finish"):
+        stop()
+    session.detach.assert_called_once()
+    assert not destination.exists()
+
+
+def test_native_trace_summary_reports_inclusive_work_without_changing_events() -> None:
+    events = [
+        {"name": "Layout", "ph": "X", "dur": 12000},
+        {"name": "Layout", "ph": "X", "dur": 4000},
+        {"name": "Paint", "ph": "X", "dur": 500},
+        {
+            "name": "SelectorStats",
+            "args": {
+                "selector_stats": {
+                    "selector_timings": [
+                        {
+                            "selector": ".actual",
+                            "elapsed (us)": 25,
+                            "match_attempts": 7,
+                            "match_count": 3,
+                        }
+                    ]
+                }
+            },
+        },
+    ]
+    preserved = json.dumps(events, sort_keys=True)
+    summary = check_site_rendering.native_trace_summary(events)
+    assert summary["event_count"] == 4
+    assert summary["phases"]["Layout"] == {"count": 2, "inclusive_ms": 16.0, "max_ms": 12.0}
+    assert summary["selectors"] == [
+        {"selector": ".actual", "elapsed_us": 25, "match_attempts": 7, "match_count": 3}
+    ]
+    assert "overlap" in summary["interpretation"]
+    assert "no gate timing credit" in summary["interpretation"]
+    assert json.dumps(events, sort_keys=True) == preserved
 
 
 @pytest.mark.parametrize(
@@ -509,11 +623,72 @@ def frontier_native_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[s
         server.server_close()
 
 
+def native_frontier_failure(
+    report: dict[str, Any], *, width: int, scheme: str, javascript: bool
+) -> str:
+    """Expose the slowest retained timings only when the unchanged budget fails."""
+
+    def timings(key: str, fields: tuple[str, ...], limit: int) -> list[dict[str, Any]]:
+        rows = sorted(
+            report.get(key) or [], key=lambda row: row.get("durationMs", 0), reverse=True
+        )
+        return [{field: row.get(field) for field in fields} for row in rows[:limit]]
+
+    frames = timings(
+        "animationFrames",
+        ("startTime", "durationMs", "renderStart", "styleAndLayoutStart", "scripts"),
+        3,
+    )
+    for frame in frames:
+        scripts = sorted(
+            frame["scripts"] or [], key=lambda row: row.get("durationMs", 0), reverse=True
+        )
+        frame["scripts"] = [
+            {
+                field: str(script.get(field, ""))[:200]
+                if field in {"sourceURL", "sourceFunctionName", "invoker"}
+                else script.get(field)
+                for field in (
+                    "executionStart",
+                    "durationMs",
+                    "forcedStyleAndLayoutDurationMs",
+                    "sourceURL",
+                    "sourceFunctionName",
+                    "invoker",
+                )
+            }
+            for script in scripts[:3]
+        ]
+    return json.dumps(
+        {
+            "scenario": {"width": width, "scheme": scheme, "javascript": javascript},
+            "metrics": {
+                key: report.get(key)
+                for key in (
+                    "supported",
+                    "cls",
+                    "lcpMs",
+                    "longestTaskMs",
+                    "blockingMs",
+                    "shownMath",
+                    "unreadableMath",
+                )
+            },
+            "longTasks": timings("longTasks", ("startTime", "durationMs", "name"), 5),
+            "readabilitySamples": timings("readabilitySamples", ("startTime", "durationMs"), 3),
+            "animationFrames": frames,
+        },
+        indent=2,
+        sort_keys=True,
+    )
+
+
 @pytest.mark.parametrize(
     ("width", "scheme"), [(390, "light"), (390, "dark"), (1280, "light"), (1280, "dark")]
 )
 def test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets(
     browser: Browser,
+    frontier_math_counts: tuple[int, int],
     frontier_native_site: str,
     width: int,
     scheme: Any,
@@ -526,9 +701,155 @@ def test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets(
             scheme=scheme,
             javascript=javascript,
         )
-        assert report["shownMath"] == 359
+        assert report["shownMath"] == frontier_math_counts[1]
         assert report["unreadableMath"] == 0
-        assert check_site_rendering.problems(report, javascript=javascript) == [], report
+        assert check_site_rendering.problems(report, javascript=javascript) == [], (
+            native_frontier_failure(report, width=width, scheme=scheme, javascript=javascript)
+        )
+
+
+def test_frontier_preloads_every_pt_serif_face_it_draws(
+    browser: Browser, frontier_native_site: str
+) -> None:
+    """Italic and bold are first-screen text: the opening paragraphs set both.
+
+    A face left to the layout that discovers it is requested only after that layout,
+    so it arrives after the first paint, and the visible paragraph around its
+    invisible run rewraps when it does. The hosted runner measured that as CLS 0.134
+    and 0.209 at 1280px (frontier.html), above the unchanged 0.1 limit."""
+    context = browser.new_context(viewport={"width": 1280, "height": 900})
+    try:
+        page = context.new_page()
+        page.goto(frontier_native_site, wait_until="load")
+        check_site_rendering.wait_for_fonts(page)
+        fetched = page.evaluate(_FONT_INITIATORS)
+    finally:
+        context.close()
+    serif = {
+        re.sub(r"\.[0-9a-f]{16}\.woff2$", ".woff2", row["file"]): row["initiator"]
+        for row in fetched
+        if row["file"].startswith("pt-serif-")
+    }
+    assert {
+        "pt-serif-latin-400-normal.woff2",
+        "pt-serif-latin-400-italic.woff2",
+        "pt-serif-latin-700-normal.woff2",
+    } <= set(serif), fetched
+    assert set(serif) <= set(site_assets.PRELOADED_FACES), fetched
+    assert set(serif.values()) == {"link"}, fetched
+
+
+def _navigation_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[str, Any]]]:
+    """The bar's link boxes and the faces Chromium actually draws their labels in."""
+    boxes = []
+    for link in page.locator(".site-nav-inner > a").all():
+        box = link.bounding_box()
+        assert box is not None
+        boxes.append(dict(box))
+    assert len(boxes) > 3
+    session = page.context.new_cdp_session(page)
+    try:
+        session.send("DOM.enable")
+        session.send("CSS.enable")
+        document = session.send("DOM.getDocument")
+        links = session.send(
+            "DOM.querySelectorAll",
+            {"nodeId": document["root"]["nodeId"], "selector": ".site-nav-inner > a"},
+        )
+        fonts = [
+            face
+            for node in links["nodeIds"]
+            for face in session.send("CSS.getPlatformFontsForNode", {"nodeId": node})["fonts"]
+        ]
+        return boxes, fonts
+    finally:
+        session.detach()
+
+
+def _unresolved_sans_alias_sources(browser: Browser) -> list[str]:
+    """Each `src` of `paper-type.css`'s "Site Sans Arial" faces that names no face the
+    browser can load from this machine."""
+    css = render_overview.PAPER_TYPE_CSS.read_text(encoding="utf-8")
+    sources = re.findall(r'font-family: "Site Sans Arial";\s*src: ([^;]+);', css)
+    assert len(sources) == 2, sources
+    context = browser.new_context()
+    try:
+        page = context.new_page()
+        return [source for source in sources if not page.evaluate(_LOCAL_FACE, source)]
+    finally:
+        context.close()
+
+
+def test_frontier_sans_arrival_keeps_the_navigation_in_place(
+    browser: Browser, frontier_native_site: str
+) -> None:
+    """Source Sans 3 arriving after the first layout moves nothing at 390px.
+
+    Its preload can lose that race, and the face it holds invisible is laid out in the
+    next family of the stack. The hosted runner's was DejaVu Sans, about a quarter
+    wider: a link wrapped to the bar's second line and the hero's summary took two more
+    lines, and the face's arrival measured CLS 0.251 (run 37875117402); this page
+    measured 0.232 the same way. The metric-adjusted Arial alias in `paper-type.css`
+    (Liberation Sans on Linux) is what stands in now, so every link stays on its line
+    and the published bar is unchanged once the face is in."""
+    unresolved = _unresolved_sans_alias_sources(browser)
+    assert not unresolved, (
+        "this machine has neither Arial nor Liberation Sans for the sans alias in "
+        f"paper-type.css, so there is no fallback to measure ({unresolved}); install "
+        "Liberation Sans (fonts-liberation on Debian and Ubuntu)"
+    )
+    reference = browser.new_context(viewport={"width": 390, "height": 900})
+    try:
+        view = reference.new_page()
+        view.goto(frontier_native_site, wait_until="load")
+        check_site_rendering.wait_for_fonts(view)
+        view.wait_for_timeout(check_site_rendering.SETTLE_MS)
+        expected, _ = _navigation_reading(view)
+    finally:
+        reference.close()
+
+    context = browser.new_context(viewport={"width": 390, "height": 900})
+    held: list[Route] = []
+    try:
+        check_site_rendering.install_observer(context)
+
+        def hold_font(route: Route) -> None:
+            held.append(route)
+
+        context.route("**/assets/fonts/source-sans-3-latin-wght-normal.*.woff2", hold_font)
+        page = context.new_page()
+        page.goto(frontier_native_site, wait_until="domcontentloaded")
+        page.wait_for_timeout(check_site_rendering.SETTLE_MS)
+        assert len(held) == 1
+        temporary, standing = _navigation_reading(page)
+        assert standing
+        assert all(
+            any(name in face["postScriptName"] for name in ("Arial", "LiberationSans"))
+            for face in standing
+        ), standing
+        for request in held:
+            request.continue_()
+        page.wait_for_load_state("load")
+        check_site_rendering.wait_for_fonts(page)
+        page.wait_for_timeout(check_site_rendering.SETTLE_MS)
+        actual, final = _navigation_reading(page)
+        assert all(
+            "SourceSans3" in face["postScriptName"] and face["isCustomFont"] for face in final
+        ), final
+        # Once the face is in, the alias draws nothing it covers: the published bar is
+        # unchanged.
+        for before, after in zip(expected, actual, strict=True):
+            assert after == pytest.approx(before, abs=0.04)
+        # And every link stood on the line it ends on while the face was held.
+        assert [box["y"] for box in temporary] == pytest.approx(
+            [box["y"] for box in actual], abs=0.5
+        )
+        report = check_site_rendering.read_report(page)
+        assert report["supported"], report
+        assert report["unreadableMath"] == 0
+        assert report["cls"] <= check_site_rendering.CLS_LIMIT, report
+    finally:
+        context.close()
 
 
 @pytest.mark.parametrize(
@@ -537,6 +858,7 @@ def test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets(
 )
 def test_frontier_native_math_keeps_actual_reader_and_print_fonts(
     browser: Browser,
+    frontier_math_counts: tuple[int, int],
     frontier_native_site: str,
     prose: str,
     fonts: str,
@@ -571,11 +893,11 @@ def test_frontier_native_math_keeps_actual_reader_and_print_fonts(
                 page.emulate_media(media=media)
                 check_site_rendering.wait_for_fonts(page)
                 report = check_site_rendering.read_report(page)
-                assert report["shownMath"] == 359
+                assert report["shownMath"] == frontier_math_counts[1]
                 assert report["unreadableMath"] == 0
                 assert (
                     page.locator('.site-frontier [data-site-native-math="frontier"]').count()
-                    == 350
+                    == frontier_math_counts[0]
                 )
                 assert page.locator("#frontier-table tbody tr").count() == 324
                 nodes = [
@@ -710,3 +1032,468 @@ def test_frontier_native_radical_paints_hook_and_bar_and_rejects_text_font(
                 assert painted["bar"], painted
         finally:
             context.close()
+
+
+@pytest.fixture(scope="module")
+def semantic_math_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
+    """A prepared formula beside native and unrendered MathML, without a site build."""
+    root = tmp_path_factory.mktemp("semantic-math")
+    fragment = parse_markdown(
+        r"Copy $x^2 + \frac{1}{2}$ exactly.", title="Semantic mathematics"
+    ).html
+    body = (
+        '<article class="kpress kpress-doc kpress-prose"><h1>Semantic mathematics</h1>'
+        f'<div id="copy-formula">{fragment}</div><div id="fallback-slot"></div>'
+        '<div class="site-frontier"><span data-site-native-math="frontier">'
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math>'
+        "</span></div></article>"
+    )
+    page = render_overview.static_content_page(
+        body,
+        meta=render_overview.PageMeta(
+            "Semantic mathematics", "Accessible static mathematical content.", "index.html"
+        ),
+        current="papers",
+    )
+    fallback = (
+        '<span id="fallback-math" class="kpress-math" data-kpress-math="inline">'
+        '<span class="kpress-math-semantic"><math '
+        'xmlns="http://www.w3.org/1998/Math/MathML"><mi>z</mi></math></span></span>'
+    )
+    assert page.html.count('<div id="fallback-slot"></div>') == 1
+    output = page.html.replace('<div id="fallback-slot"></div>', fallback)
+    (root / "index.html").write_text(output, encoding="utf-8")
+    site_assets.write_assets(root, render_overview.asset_files([page]))
+    server = preview_site.serve(root, 0)
+    try:
+        yield f"http://127.0.0.1:{server.server_port}/index.html"
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+def semantic_math_state(page: Page, *, javascript: bool) -> dict[str, Any]:
+    """Native geometry/accessibility and an intercepted copy, without clipboard writes."""
+    copied = page.evaluate(
+        probe(Path(__file__).parent / "probes", "site_rendering/math_copy"),
+        {"selector": "#copy-formula", "copy": javascript},
+    )
+    assert copied["mode"] == (
+        "native-copy-intercepted" if javascript else "selection-only-nojs"
+    )
+    assert copied["intercepted"] is javascript
+    assert copied["command_succeeded"] is javascript
+    assert copied["text"]
+    assert "Copy" in copied["text"]
+    assert len(copied["mathml"]) == 1
+    assert "<msup><mi>x</mi><mn>2</mn></msup>" in copied["mathml"][0]
+    assert "<mfrac>" in copied["mathml"][0]
+    assert copied["mathml"]
+    assert copied["source_html"]
+    assert all(
+        row["reset"] == row["increment"] == row["set"] == "none"
+        and row["before"] in {"none", "normal"}
+        and row["after"] in {"none", "normal"}
+        for row in copied["semantic_styles"]
+    )
+    session = page.context.new_cdp_session(page)
+    try:
+        dom = session.send("DOMSnapshot.captureSnapshot", {"computedStyles": []})
+        ax = session.send("Accessibility.getFullAXTree")["nodes"]
+    finally:
+        session.detach()
+    document = dom["documents"][0]["nodes"]
+    math_ids = {
+        document["backendNodeId"][index]
+        for index, name in enumerate(document["nodeName"])
+        if dom["strings"][name].lower() == "math"
+    }
+    nodes = {node["nodeId"]: node for node in ax}
+
+    def subtree(node: dict[str, Any]) -> dict[str, Any]:
+        return {key: node.get(key, {}).get("value") for key in ("role", "name", "value")} | {
+            "ignored": node.get("ignored"),
+            "children": [subtree(nodes[key]) for key in node.get("childIds", [])],
+        }
+
+    roots = [node for node in ax if node.get("backendDOMNodeId") in math_ids]
+    assert len(math_ids) == len(roots) == 3
+    assert not any(node["ignored"] for node in roots)
+    boxes = [
+        node.bounding_box()
+        for node in page.locator(".kpress-math, [data-site-native-math]").all()
+    ]
+    assert len(boxes) == 3
+    assert all(box and box["width"] > 0 and box["height"] > 0 for box in boxes)
+    return {"copy": copied, "ax_math": [subtree(node) for node in roots], "boxes": boxes}
+
+
+@pytest.mark.parametrize("javascript", [True, False])
+@pytest.mark.parametrize("width", [390, 1280])
+def test_clipped_semantic_math_keeps_print_nojs_accessibility_and_copy(
+    browser: Browser, semantic_math_site: str, *, javascript: bool, width: int
+) -> None:
+    context = browser.new_context(
+        viewport={"width": width, "height": 900}, java_script_enabled=javascript
+    )
+    try:
+        page = context.new_page()
+        page.goto(semantic_math_site, wait_until="load")
+        page.locator("#fallback-math > .kpress-math-semantic").wait_for(state="visible")
+        session = context.new_cdp_session(page)
+        try:
+            session.send("DOM.enable")
+            session.send("CSS.enable")
+
+            def containment(selector: str) -> str:
+                root = session.send("DOM.getDocument")["root"]["nodeId"]
+                node = session.send("DOM.querySelector", {"nodeId": root, "selector": selector})
+                styles = session.send("CSS.getComputedStyleForNode", {"nodeId": node["nodeId"]})
+                return next(
+                    row["value"] for row in styles["computedStyle"] if row["name"] == "contain"
+                )
+
+            selector = '.kpress-math[data-kpress-math-rendered="true"] > .kpress-math-semantic'
+            frame = session.send("Page.getFrameTree")["frameTree"]["frame"]["id"]
+            override = session.send("CSS.createStyleSheet", {"frameId": frame, "force": True})[
+                "styleSheetId"
+            ]
+            for medium in ("screen", "print"):
+                page.emulate_media(media=medium)
+                check_site_rendering.wait_for_fonts(page)
+                assert containment(selector) == "strict"
+                assert containment("#fallback-math > .kpress-math-semantic") == "none"
+                assert containment('[data-site-native-math="frontier"] > math') == "none"
+                original = semantic_math_state(page, javascript=javascript)
+                # Inspector styles do not wait for disabled page-script load handlers.
+                session.send(
+                    "CSS.setStyleSheetText",
+                    {
+                        "styleSheetId": override,
+                        "text": selector + " { contain: none !important; }",
+                    },
+                )
+                try:
+                    assert containment(selector) == "none"
+                    assert semantic_math_state(page, javascript=javascript) == original
+                finally:
+                    session.send(
+                        "CSS.setStyleSheetText", {"styleSheetId": override, "text": ""}
+                    )
+                assert containment(selector) == "strict"
+                assert semantic_math_state(page, javascript=javascript) == original
+        finally:
+            session.detach()
+    finally:
+        context.close()
+
+
+#: The paper's own nesting of the diagnostic's declared targets (review B3 on #468): a
+#: home link whose words are hidden at 390 px beside its logo, a flex `.doc-links` row of
+#: `a.chip` links, and a `.hero` whose title carries nested math and whose credit lines
+#: are spans in a `.credits` block. `CSS.getPlatformFontsForNode` asked about those
+#: containers found no face for the chips and only the title's words in the hero.
+PAPER_NESTING = (
+    "<style>@font-face{font-family:PinnedSans;src:url(font.woff2);font-display:swap}"
+    "body{font-family:serif;font-size:24px} .doc-links{display:flex}"
+    " .chip{display:inline-flex} .site-name-text{display:none}"
+    " .site-nav-inner a,.chip,.credits,.katex{font-family:PinnedSans,sans-serif}</style>"
+    '<nav class="site-nav-inner"><a class="site-name" href="/" aria-label="Home">'
+    '<svg width="20" height="20"></svg><span class="site-name-text">Home</span></a>'
+    '<a href="/">Nav link</a></nav>'
+    '<div class="doc-links"><a class="chip" href="a.md">MD</a>'
+    '<a class="chip" href="a.pdf">PDF</a></div>'
+    '<div class="hero"><h1>Title <span class="kpress-math"><span class="katex">'
+    '<span class="katex-html"><span class="base"><span class="mord">x</span></span>'
+    '</span></span></span></h1><div class="credits"><span>From the original proof by '
+    "<strong>Someone</strong></span><span>Agents and a long credit line</span></div></div>"
+)
+
+
+def diagnose_font_fixture(browser: Browser, site: Path, body: str) -> dict[str, Any]:
+    """Serve `body` with the pinned Source Sans face beside it, and diagnose it."""
+    font = (
+        Path(__file__).parents[2]
+        / "vendor/kpress/src/kpress/format/static/fonts"
+        / "source-sans-3-latin-wght-normal.woff2"
+    )
+    (site / "font.woff2").write_bytes(font.read_bytes())
+    (site / "index.html").write_text(f'<!doctype html><meta charset="utf-8">{body}')
+    server = preview_site.serve(site, 0)
+    try:
+        return check_site_rendering.diagnose_font_delivery(
+            browser,
+            f"http://127.0.0.1:{server.server_port}/index.html",
+            site / "font-diagnostic.json",
+            width=390,
+            scheme="light",
+        )
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+def test_font_diagnostic_observes_physical_fallback_then_pinned_face(
+    browser: Browser, tmp_path: Path
+) -> None:
+    result = diagnose_font_fixture(browser, tmp_path, PAPER_NESTING)
+    assert result == json.loads((tmp_path / "font-diagnostic.json").read_text())
+    assert result["complete"] is True
+    assert result["gate_credit"] is False
+    assert result["failed_fonts"] == []
+    assert len(result["held_fonts"]) == 1
+    assert [row["phase"] for row in result["snapshots"]] == ["fonts-held", "fonts-settled"]
+    before, after = (row["nodes"] for row in result["snapshots"])
+    # What the container reads missed: any face at all for the chips, and the pinned face
+    # of the hero's credit lines (their 61 characters) rather than only the title's.
+    assert before[2]["fonts"]
+    assert after[2]["fonts"]
+    assert sum(face["glyphCount"] for face in after[3]["fonts"] if face["isCustomFont"]) > 61
+    assert all(row["problems"] == [] for row in result["snapshots"])
+    assert [row["selector"] for row in after] == [
+        ".site-nav-inner > a",
+        ".site-nav-inner > a",
+        ".doc-links",
+        ".hero",
+    ]
+    for fallback, custom in zip(before, after, strict=True):
+        assert fallback["backendNodeId"] == custom["backendNodeId"]
+        assert fallback["html"] == custom["html"]
+        assert fallback["complete"] is custom["complete"] is True
+        assert fallback["box"]["width"] > 0
+        assert custom["box"]["width"] > 0
+        assert [text["backendNodeId"] for text in fallback["text"]] == [
+            text["backendNodeId"] for text in custom["text"]
+        ]
+        for row in (fallback, custom):
+            assert sum(face["glyphCount"] for face in row["fonts"]) == sum(
+                face["glyphCount"] for text in row["text"] for face in text["fonts"]
+            )
+        for held, settled in zip(fallback["text"], custom["text"], strict=True):
+            assert held["typography"] == settled["typography"]
+            assert held["fonts"]
+            assert settled["fonts"]
+            assert not any(face["isCustomFont"] for face in held["fonts"])
+            pinned = any(
+                face["isCustomFont"] and face["familyName"].startswith("Source Sans")
+                for face in settled["fonts"]
+            )
+            assert pinned is held["typography"]["font-family"].startswith("PinnedSans")
+    home, link, documents, hero = after
+    # The home link renders only its logo at this width; its words are kept, unrendered.
+    assert home["text"] == []
+    assert [(text["element"], text["text"]) for text in home["unrendered_text"]] == [
+        ("span.site-name-text", "Home")
+    ]
+    assert [text["text"] for text in link["text"]] == ["Nav link"]
+    # The chips' own text, face and family: not the container's serif, and not nothing.
+    assert [(text["element"], text["text"]) for text in documents["text"]] == [
+        ("a.chip", "MD"),
+        ("a.chip", "PDF"),
+    ]
+    assert documents["typographies"][0]["font-family"] == "PinnedSans, sans-serif"
+    assert [
+        face["glyphCount"]
+        for face in documents["fonts"]
+        if face["isCustomFont"] and face["familyName"].startswith("Source Sans")
+    ] == [5]
+    # The hero's title, its nested math and every credit line.
+    assert [(text["element"], text["text"]) for text in hero["text"]] == [
+        ("h1", "Title "),
+        ("span.mord", "x"),
+        ("span", "From the original proof by "),
+        ("strong", "Someone"),
+        ("span", "Agents and a long credit line"),
+    ]
+    assert [text["typography"]["font-family"] for text in hero["text"]] == [
+        "serif",
+        *["PinnedSans, sans-serif"] * 4,
+    ]
+    # The title, its math at the title's size, the credit lines, and the bold name.
+    assert len(hero["typographies"]) == 4
+
+
+def test_font_diagnostic_fails_a_declared_target_that_renders_no_text(
+    browser: Browser, tmp_path: Path
+) -> None:
+    body = PAPER_NESTING.replace('<a class="chip" href="a.pdf">PDF</a>', "").replace(
+        '<a class="chip" href="a.md">', '<a class="chip" href="a.md" style="display:none">'
+    )
+    with pytest.raises(
+        ValueError, match=r"rows are incomplete: .*\.doc-links: renders no text"
+    ):
+        diagnose_font_fixture(browser, tmp_path, body)
+    result = json.loads((tmp_path / "font-diagnostic.json").read_text())
+    assert result["complete"] is False
+    assert [snapshot["problems"] for snapshot in result["snapshots"]] == [
+        [".doc-links: renders no text"],
+        [".doc-links: renders no text"],
+    ]
+    documents = next(
+        row for row in result["snapshots"][1]["nodes"] if row["selector"] == ".doc-links"
+    )
+    assert documents["text"] == []
+    assert [text["text"] for text in documents["unrendered_text"]] == ["MD"]
+
+
+class FacelessSession:
+    """A CDP session over a page whose `.doc-links` text shapes with no face."""
+
+    def __init__(self) -> None:
+        def element(node: int, name: str, children: list[dict[str, Any]]) -> dict[str, Any]:
+            return {
+                "nodeId": node,
+                "backendNodeId": node,
+                "nodeType": 1,
+                "nodeName": name.upper(),
+                "localName": name,
+                "attributes": [],
+                "children": children,
+            }
+
+        def text(node: int, value: str) -> dict[str, Any]:
+            return {"nodeId": node, "backendNodeId": node, "nodeType": 3, "nodeValue": value}
+
+        self.selectors = {".site-nav-inner > a": [3], ".doc-links": [5], ".hero": [7]}
+        self.root = element(
+            1,
+            "body",
+            [
+                element(2, "nav", [element(3, "a", [text(4, "Nav")])]),
+                element(5, "div", [element(10, "span", [text(6, "Formats")])]),
+                element(7, "div", [text(8, "Title"), text(9, "\n  ")]),
+            ],
+        )
+
+    def send(self, method: str, parameters: dict[str, Any] | None = None) -> dict[str, Any]:
+        node = (parameters or {}).get("nodeId")
+        face = {"familyName": "Sans", "postScriptName": "Sans", "isCustomFont": False}
+        replies: dict[str, Callable[[], dict[str, Any]]] = {
+            "DOM.getDocument": lambda: {"root": self.root},
+            "DOM.querySelectorAll": lambda: {
+                "nodeIds": self.selectors[(parameters or {})["selector"]]
+            },
+            "DOM.getContentQuads": lambda: {"quads": [[0, 0, 1, 0, 1, 1, 0, 1]]},
+            "CSS.getComputedStyleForNode": lambda: {
+                "computedStyle": [{"name": "font-family", "value": "Sans"}]
+            },
+            "CSS.getPlatformFontsForNode": lambda: {
+                "fonts": [] if node == 6 else [{**face, "glyphCount": 3}]
+            },
+            "DOM.getOuterHTML": lambda: {"outerHTML": "<div></div>"},
+            "DOM.getBoxModel": lambda: {"model": {"width": 1, "height": 1}},
+        }
+        return replies[method]()
+
+
+def test_a_rendered_text_without_a_physical_face_marks_its_row_incomplete() -> None:
+    rows = check_site_rendering.physical_font_snapshot(cast("CDPSession", FacelessSession()))
+    assert [(row["selector"], row["complete"]) for row in rows] == [
+        (".site-nav-inner > a", True),
+        (".doc-links", False),
+        (".hero", True),
+    ]
+    documents = rows[1]
+    assert [(text["element"], text["text"]) for text in documents["text"]] == [
+        ("span", "Formats")
+    ]
+    assert documents["fonts"] == []
+    assert documents["problems"] == [
+        ".doc-links: span text 'Formats' resolved no physical face"
+    ]
+    # Collapsible whitespace is not text; the title's face is summed once.
+    assert [text["text"] for text in rows[2]["text"]] == ["Title"]
+    assert rows[2]["fonts"] == [
+        {"familyName": "Sans", "postScriptName": "Sans", "isCustomFont": False, "glyphCount": 3}
+    ]
+    assert check_site_rendering.snapshot_problems(rows) == documents["problems"]
+
+
+@pytest.mark.parametrize("failure", ["no-font", "missing-node", "failed-font"])
+def test_font_diagnostic_retains_incomplete_native_observations(
+    browser: Browser, tmp_path: Path, failure: str
+) -> None:
+    styles = (
+        "<style>@font-face{font-family:MissingFont;src:url(missing.woff2)}"
+        "body{font-family:MissingFont,serif}</style>"
+        if failure != "no-font"
+        else ""
+    )
+    hero = ' class="hero"' if failure != "missing-node" else ""
+    (tmp_path / "index.html").write_text(
+        "<!doctype html>"
+        + styles
+        + '<nav class="site-nav-inner"><a href="/">Navigation text</a></nav>'
+        + '<div class="doc-links">Document formats</div>'
+        + f"<main{hero}><h1>Readable title</h1><p>This complete paragraph remains "
+        + "readable while a native diagnostic rejects an incomplete observation.</p></main>"
+    )
+    destination = tmp_path / "incomplete.json"
+    messages = {
+        "no-font": "no held font requests",
+        "missing-node": "selector is absent",
+        "failed-font": "failed font loads",
+    }
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with pytest.raises(ValueError, match=messages[failure]):
+            check_site_rendering.diagnose_font_delivery(
+                browser,
+                f"http://127.0.0.1:{server.server_port}/index.html",
+                destination,
+                width=390,
+                scheme="light",
+            )
+    finally:
+        server.shutdown()
+        server.server_close()
+    result = json.loads(destination.read_text())
+    assert result["complete"] is False
+    assert result["gate_credit"] is False
+    assert result["error"]["type"] == "ValueError"
+    assert messages[failure] in result["error"]["message"]
+    if failure == "failed-font":
+        assert result["failed_fonts"]
+        assert len(result["snapshots"]) == 2
+
+
+def test_font_diagnostic_refuses_overwrite_before_context(tmp_path: Path) -> None:
+    destination = tmp_path / "retained.json"
+    destination.write_text("retained evidence")
+    driver = Mock()
+    with pytest.raises(FileExistsError):
+        check_site_rendering.diagnose_font_delivery(
+            driver, "http://localhost/index.html", destination, width=390, scheme="light"
+        )
+    driver.new_context.assert_not_called()
+    assert destination.read_text() == "retained evidence"
+
+
+def test_font_diagnostic_retains_context_failure(tmp_path: Path) -> None:
+    driver = Mock()
+    driver.new_context.side_effect = RuntimeError("native context failed")
+    destination = tmp_path / "failed-context.json"
+    with pytest.raises(RuntimeError, match="native context failed"):
+        check_site_rendering.diagnose_font_delivery(
+            driver, "http://localhost/index.html", destination, width=390, scheme="light"
+        )
+    result = json.loads(destination.read_text())
+    assert result["complete"] is False
+    assert result["error"] == {"type": "RuntimeError", "message": "native context failed"}
+
+
+def test_font_diagnostic_cli_refuses_receipt_before_launch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (tmp_path / "index.html").write_text("<main>Existing page</main>")
+    destination = tmp_path / "retained.json"
+    destination.write_text("retained evidence")
+    launch = Mock()
+    monkeypatch.setattr(preview_site, "launch_chromium", launch)
+    with pytest.raises(SystemExit) as error:
+        check_site_rendering.main(
+            [str(tmp_path), "--page", "index.html", "--font-diagnostic", str(destination)]
+        )
+    assert error.value.code == 2
+    launch.assert_not_called()
+    assert destination.read_text() == "retained evidence"

@@ -18,6 +18,7 @@ import pytest
 import yaml
 
 from devtools import (
+    evand_arrangement_reports,
     evand_exact_certificates,
     squish_followup_packets,
     squish_second_update_packets,
@@ -567,6 +568,10 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         # jlevy/squares#248's first run.
         "/packing/resources/web/franciscouzo-square-packing-2026-09-27/",
         "/packing/resources/web/de-winter-square-packing-211-2026-09-16/",
+        # The three refinement houses require private full source facts and metadata,
+        # even in the atlas sweep's sparse checkout.
+        "/packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/",
+        "/packing/resources/web/rehwaldt-n68-refinement-2026-10-07/",
         "/packing/resources/papers/kingbird-square-29-provenance.svg",
         # X-049's two censuses compare against JSON retained beside the exploration, and
         # the campaign history is otherwise outside the slice; without this directory the
@@ -588,6 +593,11 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # comparison, so that packet rides in the slice, named by the module that reads it; it
     # was missing on jlevy/squares#369's run 37403920231.
     assert f"/packing/resources/web/{evand_exact_certificates.PACKET.name}/" in sparse
+    # The three T-119 atlas sources require their complete retained fact and receipt.
+    assert f"/packing/resources/web/{evand_arrangement_reports.PACKET.name}/" in sparse
+    from devtools import gupta_refinement_reports  # noqa: PLC0415
+
+    assert f"/packing/resources/web/{gupta_refinement_reports.PACKET.name}/" in sparse
     # SQUISH's exact rational facts are a separate packet from the ordinary packet
     # registry; omitting it makes the atlas refuse all eleven newly reported cases.
     assert f"/packing/resources/web/{squish_upper_bound_packets.PACKET.name}/" in sparse
@@ -1028,6 +1038,39 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
       signal to move the read, not a signal to move the test.
     """
     expected: dict[str, set[str]] = {
+        # Full private snapshot/admission measured406.23s under IO contention;
+        # complete confirmation/idempotence measured24.04s and16.06s per call.
+        # The fast12s and child45s ceilings remain unchanged.
+        "test_ryxu_house_links.py": {
+            "test_actual_worker_keeps_full_scientific_inputs_and_refuses_producers",
+            "test_confirmation_preserves_complete_scope_history_and_lower_lanes",
+        },
+        # Hosted run 37639254949, 2026-10-07: 82.51s uncached call. The fast
+        # controls use the retained symbolic packet; this node rebuilds its identities.
+        "test_check_n17_widened_positive_cone.py": {
+            "test_exact_symbolic_root_joins_cubic_and_weighted_incidence",  # 82.51s
+        },
+        # Hosted run37910870148/job113762412367, 2026-10-09, post-merge on 533dd42c6:
+        # the two complete exact two-case proofs, one generated and freshly checked in
+        # process and one as two clean child processes; 7.41s and 7.89s of call on a
+        # loaded four-cpu box. Each builds its own synthetic premise, so no shared build.
+        # The fast tier keeps the seven custody and typed-row tampers and the clip,
+        # union, intersection and ceiling controls.
+        "test_check_n17_two_child_collective_propagation.py": {
+            "test_generate_inherits_base_proof_and_freshly_reconstructs_new_geometry",  # 18.15s
+            "test_two_clean_processes_match_new_finite_payload",  # 19.02s
+        },
+        # Hosted run37910870148/job113762412367, 2026-10-09: four nodes that each run two
+        # complete exact one-round generations, in process or as two clean children,
+        # 5.69s to 6.53s of call locally. The fresh-geometry tamper left its parametrized
+        # custody test to be marked alone; its three custody cases, 3.2s to 3.3s locally,
+        # stay on the pull-request surface with the regional mode and the unit controls.
+        "test_check_n17_one_round_owned_domain_propagation.py": {
+            "test_prior_proof_reconstructed_once_and_transitive_bytes_retained",  # 14.45s
+            "test_fresh_payload_tamper_refuses",  # 14.59s as fresh_geometry
+            "test_direct_regional_replays_complete_component_without_reconditioning",  # 16.19s
+            "test_two_fresh_clean_processes_match_full_new_payload",  # 15.96s
+        },
         # Hosted run36864534354/job110376645051,2026-10-01:31.66s call time.
         # Exact symbolic reconstruction/normalizations; eight fast controls stay in PR CI.
         "test_n17_endpoint_feasibility.py": {
@@ -1300,11 +1343,57 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_n5_local_rigidity.py": {
             "test_every_control_rejects",  # 8.0s
         },
+        # 2026-10-08, final merged parent ef9ef806: 92.43s call, 95.60s pytest wall.
+        # One actual full private copy, complete FN1/SQUISH admission, three receipt/input
+        # mutants and restorations; no shared fixture/build or geometric replay.
+        # Durable receipt: review-notes/fn1-final-evidence/fn1-actual-worker.log and JUnit
+        # outside disposable scratch. Every bounded source/receipt control stays fast.
+        # 2026-10-08 actual private metadata transactions: full fourteen-case
+        # confirmation/repeat/re-registration 18.62s; interrupted writes and
+        # fresh complete-admission retries 21.23s. Scientific inputs stay complete,
+        # geometry is forbidden and no whole-worker clone/shared build is involved.
+        # Receipt: issue438-driver-prep/confirmation-metadata-v2.log outside scratch.
+        "test_confirm_gupta_records.py": {
+            "test_complete_proposal_preserves_all_lower_history_withdrawals_and_unowned_rows",
+            "test_interrupted_atomic_write_resumes_from_the_unchanged_complete_history",
+        },
+        "test_fn1_input_bindings.py": {
+            "test_actual_worker_carries_every_input_and_refuses_a_receipt_mutant",  # 92.43s
+        },
         # 8s of call time across 1; 8.15s on the hosted PR runner. This directly copies
         # the source tree into a worker and has no shared builder whose cost can move to
         # a neighbouring test, so the slow marker is the measured classification.
         "test_negative_controls.py": {
+            # Hosted run37739373988/job113186283659, 2026-10-08: complete private
+            # results checker and first-SQUISH custody/mutation transactions.
+            "test_unmutated_results_checker_is_green_inside_a_worker",  # 19.78s
+            # 15.34s complete custody and two actual mutation/restoration transactions.
+            "test_squish_complete_replay_survives_worker_custody_and_private_controls",
             "test_build_caches_leave_the_counted_surface_and_the_worker_trees",  # 8.15s on CI
+            # Hosted run37736038877/job113175670339, 2026-10-08: complete 27-input,
+            # nine-house admission and two live mutants; module-scoped clone is setup,
+            # while these uncached complete-reader transactions are measured call time.
+            "test_second_squish_complete_replay_survives_native_worker_boundaries",  # 16.87s
+            # Hosted run37773892849/job113299852249, 2026-10-08: 15.224s call,
+            # 14.99s CPU lower bound for complete Gupta admission, four mutations and
+            # restorations. The shared clone remains setup and child45s is unchanged.
+            "test_gupta_complete_sources_survive_native_worker_boundaries",  # 15.224s
+        },
+        # Hosted run37739373988/job113186283659: 14.52s; 68 full geometry replays
+        # cover 85,204 pair decisions across the n108 translation/tolerance surface.
+        "test_translation_escape_screen.py": {
+            "test_squish_n108_retains_its_replayed_tolerance_instability",
+        },
+        # Hosted run37743601485/job113199788788, 2026-10-08: 25.04s for the
+        # actual complete clone, all three #399 houses/native custody and two private
+        # producer/native refusal transactions; 45/30/45s child deadlines unchanged.
+        "test_evand_arrangement_adoption.py": {
+            "test_production_clone_copies_every_scientific_input_and_admits_exact_links",
+        },
+        # Hosted run37739373988/job113186283659: actual complete clone, independent
+        # custody bytes and subprocess admission; no clone or assertion is removed.
+        "test_refinement_custody.py": {
+            "test_production_snapshot_copies_complete_refinement_custody",  # 19.36s
         },
         # 3s of call time across 1, measured 2026-09-20: `git worktree add --detach` of
         # Session 148's opening commit -- a whole checkout of the tree -- and then
@@ -1313,6 +1402,16 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # commit, so it belongs in the lane that checks out with `fetch-depth: 0`.
         "test_retained_patches_apply.py": {
             "test_every_retained_patch_applies_to_its_declared_base",  # 3.3s
+        },
+        # Hosted run37910870148/job113762412367, 2026-10-09: 32.51s of call post-merge,
+        # 21.76s on the stack head's pull-request lane; 15.03s locally on a loaded
+        # four-cpu box. The sweep parses and re-lays all 32 held files, 333 MB, and the
+        # n17 stack (#404, #454, #461) added 21 of them, 314 MB; on e0b02b3ab, before
+        # it, the test was not in the 6s report. The gate step `retained JSON is one
+        # record per line` runs the same whole-tree sweep on the pull-request surface,
+        # and the planted failures in this file stay there too.
+        "test_retained_json_layout.py": {
+            "test_the_repository_as_it_stands_passes",  # 32.51s
         },
         # 16s of call time across 1.
         "test_promote_elimination.py": {

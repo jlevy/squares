@@ -1,0 +1,70 @@
+{
+  "schema": "n17-incircle-projection-redundancy-mechanical-summary/v1",
+  "status": "strict_difference_cuts_detected",
+  "source_commit": "0db24daac5ea1be2dd416971b0c78b3dfc087388",
+  "source_files": 15,
+  "all_source_bytes_match": true,
+  "full_payload_equal": true,
+  "fresh_verification_passed": true,
+  "complete_classification": true,
+  "outer_seconds": 1.4576359579805285,
+  "cleanup_complete": true,
+  "cells": 24,
+  "relevant_pairs": 228,
+  "states": 95,
+  "state_pair_incidences": 12920,
+  "proper_cut_pairs": 102,
+  "mathematical_review": "sole Astra CLEAR; independent confirmation false",
+  "ordinary_assignment_exclusion_proved": false,
+  "census_admission_proved": false,
+  "global_bound_proved": false,
+  "global_optimality_proved": false,
+  "shared_center_LP_solved": false,
+  "work": {
+    "face_checks": 10856,
+    "state_pairs_accounted": 12920,
+    "vertex_differences": 4298
+  },
+  "phases": [
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_incircle_projection_redundancy",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/certificate.json"
+      ],
+      "ended_at": "2026-10-08T05:17:49.856431Z",
+      "name": "construction",
+      "returncode": 0,
+      "started_at": "2026-10-08T05:17:49.185227Z",
+      "status": "completed",
+      "wall_seconds": 0.6711119590327144
+    },
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_incircle_projection_redundancy",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/replay.json"
+      ],
+      "ended_at": "2026-10-08T05:17:50.527476Z",
+      "name": "fresh_verification",
+      "returncode": 0,
+      "started_at": "2026-10-08T05:17:49.856937Z",
+      "status": "completed",
+      "wall_seconds": 0.6704453330021352
+    }
+  ]
+}

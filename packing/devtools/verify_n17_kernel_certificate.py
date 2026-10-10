@@ -78,13 +78,47 @@ from typing import Any
 from devtools.provenance import provenance, repository_path
 
 SCHEMA = "n17-certificate-verification/v1"
+CENTERED_SCHEMA = "n17-centered-cap-certificate-verification/v1"
 KIND = "kernel"
 PROVENANCE = provenance(Path(__file__))
 HULL_LIMIT = 16
+CENTERED_HULL_LIMIT = 48
 GRID = 2**20
 
 Point = tuple[Q, Q]
 Plane = tuple[Q, Q, Q]
+
+
+@dataclass(frozen=True)
+class CenteredContainer:
+    """A physical inner square in the unchanged outer coordinate frame.
+
+    The scientific caller separately freezes the root/cap/target and world custody.
+    This pure rational interface also permits equal caps for default-parity controls.
+    """
+
+    outer: Q
+    inner: Q
+
+    def __post_init__(self) -> None:
+        require(
+            isinstance(self.outer, Q)
+            and isinstance(self.inner, Q)
+            and 0 < self.inner <= self.outer,
+            "invalid centered container caps",
+        )
+
+    @property
+    def offset(self) -> Q:
+        return (self.outer - self.inner) / 2
+
+    def record(self) -> dict[str, str]:
+        return {
+            "outer_U": str(self.outer),
+            "inner_V": str(self.inner),
+            "offset": str(self.offset),
+            "B": "1",
+        }
 
 
 class VerificationError(Exception):
@@ -193,14 +227,21 @@ def trig(t: Q) -> tuple[Q, Q]:
     return (1 - t * t) / (1 + t * t), 2 * t / (1 + t * t)
 
 
-def wall_box(lo: Q, hi: Q, cap: Q) -> list[Point]:
+def wall_box(
+    lo: Q, hi: Q, cap: Q, *, container: CenteredContainer | None = None
+) -> list[Point]:
     """The closed legal centre box for the half-angle row `[lo, hi]`.
 
     `cos + sin` is concave in the angle on `[0, pi/2]` and the chart is monotone, so its
     least value on the row is at an endpoint.
     """
     h = min(sum(trig(t), Q(0)) for t in (lo, hi)) / 2
-    return [(h, h), (cap - h, h), (cap - h, cap - h), (h, cap - h)]
+    require(container is None or container.outer == cap, "wall context outer cap differs")
+    offset = Q(0) if container is None else container.offset
+    low, high = offset + h, cap - offset - h
+    if container is not None and low > high:
+        return []
+    return [(low, low), (high, low), (high, high), (low, high)]
 
 
 def intersect_convex(polygon: list[Point], other: list[Point]) -> list[Point]:
@@ -209,6 +250,15 @@ def intersect_convex(polygon: list[Point], other: list[Point]) -> list[Point]:
         if not polygon:
             break
     return polygon
+
+
+def intersect_walls(
+    polygon: list[Point], lo: Q, hi: Q, cap: Q, *, container: CenteredContainer | None = None
+) -> list[Point]:
+    walls = wall_box(lo, hi, cap, container=container)
+    if container is not None and not walls:
+        return []
+    return intersect_convex(polygon, walls)
 
 
 def quad_min_positive(a0: Q, a1: Q, a2: Q, lo: Q, hi: Q) -> bool:
@@ -243,12 +293,19 @@ def minkowski_diff(first: list[Point], second: list[Point]) -> list[Point]:
 
 
 def owned(
-    cell: list[Point], pt: Point, cap: Q, *, lo: Q = Q(0), hi: Q = Q(1), depth: int = 0
+    cell: list[Point],
+    pt: Point,
+    cap: Q,
+    *,
+    lo: Q = Q(0),
+    hi: Q = Q(1),
+    depth: int = 0,
+    container: CenteredContainer | None = None,
 ) -> bool:
     """The point is strictly inside the square for every centre in the cell cut by the
     legal box and every half-angle in `[lo, hi]`: bisection with an interval product bound.
     """
-    legal = intersect_convex(list(cell), wall_box(lo, hi, cap))
+    legal = intersect_walls(list(cell), lo, hi, cap, container=container)
     if not legal:
         return True
     c_lo, s_lo = trig(lo)
@@ -270,8 +327,8 @@ def owned(
     if depth >= 18:
         return False
     mid = (lo + hi) / 2
-    return owned(cell, pt, cap, lo=lo, hi=mid, depth=depth + 1) and owned(
-        cell, pt, cap, lo=mid, hi=hi, depth=depth + 1
+    return owned(cell, pt, cap, lo=lo, hi=mid, depth=depth + 1, container=container) and owned(
+        cell, pt, cap, lo=mid, hi=hi, depth=depth + 1, container=container
     )
 
 
@@ -462,7 +519,7 @@ def compile_edges(
     return edges, verticals
 
 
-def sweep_events(
+def sweep_events_reference(
     polygons: Sequence[Sequence[HPoint]], edges: Sequence[Edge], left: Ratio, right: Ratio
 ) -> list[Ratio]:
     """Every vertex abscissa in `[left, right]` and every crossing of two edges there.
@@ -496,6 +553,87 @@ def sweep_events(
                 events.add(normalised(xn, det))
         active.append(i)
     return sorted(events, key=lambda r: Q(*r))
+
+
+def sweep_events_y_filtered(
+    polygons: Sequence[Sequence[HPoint]],
+    edges: Sequence[Edge],
+    left: Ratio,
+    right: Ratio,
+    *,
+    filter_y: bool = True,
+    counts: dict[str, int] | None = None,
+) -> list[Ratio]:
+    """Exact reference sweep with only strictly disjoint closed Y ranges rejected.
+
+    Endpoint ordinates come from the unchanged exact edge line. Touching/equal
+    ranges remain candidates. Counters are optional diagnostic work, not proof
+    obligations; no clocks or global tracing run inside the pair loop.
+    """
+    if counts is not None:
+        for name in (
+            "pair_candidates",
+            "strict_y_rejections",
+            "executed_determinants",
+            "event_calls",
+            "events",
+            "probes",
+        ):
+            counts.setdefault(name, 0)
+    ranges = []
+    if filter_y:
+        for edge in edges:
+            ordinates = [
+                (-(edge.a * x + edge.c * z), edge.b * z) for x, z in (edge.lo, edge.hi)
+            ]
+            ranges.append(ratio_extremes(ordinates))
+    events: set[Ratio] = set()
+    for polygon in polygons:
+        for x, _, z in polygon:
+            if not ratio_lt((x, z), left) and not ratio_lt(right, (x, z)):
+                events.add(normalised(x, z))
+    order = sorted(range(len(edges)), key=lambda i: Q(*edges[i].lo))
+    active: list[int] = []
+    for i in order:
+        edge = edges[i]
+        if ratio_lt(edge.hi, left) or ratio_lt(right, edge.lo):
+            continue
+        active = [j for j in active if not ratio_lt(edges[j].hi, edge.lo)]
+        for j in active:
+            other = edges[j]
+            if counts is not None:
+                counts["pair_candidates"] = counts.get("pair_candidates", 0) + 1
+            if filter_y and (
+                ratio_lt(ranges[i][1], ranges[j][0]) or ratio_lt(ranges[j][1], ranges[i][0])
+            ):
+                if counts is not None:
+                    counts["strict_y_rejections"] = counts.get("strict_y_rejections", 0) + 1
+                continue
+            if counts is not None:
+                counts["executed_determinants"] = counts.get("executed_determinants", 0) + 1
+            det = edge.a * other.b - edge.b * other.a
+            if det == 0:
+                continue
+            xn = edge.b * other.c - edge.c * other.b
+            if det < 0:
+                xn, det = -xn, -det
+            start = ratio_extremes([edge.lo, other.lo, left])[1]
+            stop = ratio_extremes([edge.hi, other.hi, right])[0]
+            if not ratio_lt((xn, det), start) and not ratio_lt(stop, (xn, det)):
+                events.add(normalised(xn, det))
+        active.append(i)
+    if counts is not None:
+        counts["event_calls"] = counts.get("event_calls", 0) + 1
+        counts["events"] = counts.get("events", 0) + len(events)
+        counts["probes"] = counts.get("probes", 0) + max(0, 2 * len(events) - 1)
+    return sorted(events, key=lambda r: Q(*r))
+
+
+def sweep_events(
+    polygons: Sequence[Sequence[HPoint]], edges: Sequence[Edge], left: Ratio, right: Ratio
+) -> list[Ratio]:
+    """The exact closed-Y prefilter; the original sweep remains the reference."""
+    return sweep_events_y_filtered(polygons, edges, left, right)
 
 
 def well_formed(section: Any) -> bool:
@@ -904,6 +1042,11 @@ class State:
     stats: dict[str, int] = field(default_factory=dict[str, int])
     facets: dict[CorePair, list[Facet]] = field(default_factory=dict[CorePair, list[Facet]])
     forbidden: dict[HullPair, list[Point]] = field(default_factory=dict[HullPair, list[Point]])
+    container: CenteredContainer | None = None
+    hull_limit: int = field(init=False)
+
+    def __post_init__(self) -> None:
+        self.hull_limit = HULL_LIMIT if self.container is None else CENTERED_HULL_LIMIT
 
     def tick(self, key: str, amount: int = 1) -> None:
         self.stats[key] = self.stats.get(key, 0) + amount
@@ -953,7 +1096,10 @@ def check_seed(state: State, seed: dict[str, Any], node: dict[str, Any]) -> None
     for o in state.mask:
         points = poly(seed["groups"][str(o)])
         for pt in points:
-            require(owned(state.cells[o], pt, state.cap), f"seed point {pt} of {o} not owned")
+            require(
+                owned(state.cells[o], pt, state.cap, container=state.container),
+                f"seed point {pt} of {o} not owned",
+            )
         state.groups[o] = hull(points)
         seed_rows = seed["cells"][str(o)]
         require(len(seed_rows) == bins, f"seed owner {o} has the wrong number of rows")
@@ -961,7 +1107,9 @@ def check_seed(state: State, seed: dict[str, Any], node: dict[str, Any]) -> None
         for i, r in enumerate(seed_rows):
             lo, hi = Q(r["interval"][0]), Q(r["interval"][1])
             require((lo, hi) == (Q(i, bins), Q(i + 1, bins)), f"seed row {o}/{i} interval")
-            domain = intersect_convex(list(state.cells[o]), wall_box(lo, hi, state.cap))
+            domain = intersect_walls(
+                list(state.cells[o]), lo, hi, state.cap, container=state.container
+            )
             require(same_set(poly(r["outer_domain"]), domain), f"seed row {o}/{i} domain")
             residual = [poly(x) for x in r["residual_polygons"]]
             require(
@@ -1162,7 +1310,7 @@ def check_step(
         )
         require(row.get("self_hull_cuts", []) == [], f"{where}: self-hull cuts")
         required = (
-            intersect_convex(list(prior.outer), wall_box(lo, hi, state.cap))
+            intersect_walls(list(prior.outer), lo, hi, state.cap, container=state.container)
             if prior.outer
             else []
         )
@@ -1270,7 +1418,7 @@ def compress(
         state.groups[owner] = hull(points)
     else:
         state.groups[owner] = hull(state.groups[owner] + points)
-    require(len(state.groups[owner]) <= HULL_LIMIT, f"step {si}: owned hull too large")
+    require(len(state.groups[owner]) <= state.hull_limit, f"step {si}: owned hull too large")
 
 
 def derive_closure(state: State, owner: int, si: int) -> dict[str, Any] | None:
@@ -1320,6 +1468,45 @@ def check_final(state: State, node: dict[str, Any], *, stall: bool) -> None:
     )
 
 
+def check_centered_final(state: State, node: dict[str, Any]) -> None:
+    """Additional complete context joins for the separately scoped centered mode."""
+    final = node["final_state"]
+    require(
+        final["mask_index"] == node["mask_index"]
+        and final["mask"] == state.mask
+        and Q(final["U"]) == state.cap
+        and Q(final["B"]) == 1
+        and final["constraints"] == []
+        and final["guard"] == {}
+        and final["guard_source"] is None
+        and final["source"] == node["source"],
+        "centered final state premise changed",
+    )
+    keys = set(map(str, state.mask))
+    require(
+        set(final["groups"]) == keys and set(final["cells"]) == keys,
+        "centered final owner keys differ",
+    )
+    require(
+        len(final["world"]) == len(state.cells)
+        and all(
+            same_set(poly(got), expected)
+            for got, expected in zip(final["world"], state.cells, strict=True)
+        ),
+        "centered final world differs",
+    )
+    for owner in state.mask:
+        require(
+            all(
+                tuple(Q(q) for q in recorded["interval"]) == row.interval
+                for recorded, row in zip(
+                    final["cells"][str(owner)], state.rows[owner], strict=True
+                )
+            ),
+            f"centered final interval {owner} differs",
+        )
+
+
 MEMO_PAIRS = 1 << 15
 
 
@@ -1345,6 +1532,7 @@ def verify_objects(
     sample: int | None = None,
     sample_seed: int = 12345,
     progress: bool = False,
+    container: CenteredContainer | None = None,
 ) -> dict[str, Any]:
     """Verify the seed and node saved in `directory`; raises on the first failure."""
     seeds = sorted(directory.glob("seed-*.json.gz"))
@@ -1357,9 +1545,17 @@ def verify_objects(
     node = stream.header
     require(node["source"]["sha256"] == seed_sha, "the node's source is not the seed")
     mask = check_frame(seed, node, cells)
+    if container is not None:
+        require(sample is None, "centered verification requires full replay")
+        require(container.outer == cells.cap, "centered outer frame differs")
+        require(
+            set(seed["groups"]) == set(seed["cells"]) == set(map(str, mask))
+            and seed["mask_index"] == node["mask_index"],
+            "centered seed owner/index custody differs",
+        )
     bins = seed["bins"]
     require(isinstance(bins, int) and bins > 0, "bins")
-    state = State([list(p) for p in cells.polygons], cells.cap, bins, mask)
+    state = State([list(p) for p in cells.polygons], cells.cap, bins, mask, container=container)
     clock = time.perf_counter()
     check_seed(state, seed, node)
     contradiction = node["contradiction"]
@@ -1415,12 +1611,18 @@ def verify_objects(
                 and derived.get("owner") == contradiction.get("owner"),
                 f"step {si}: the derived closure is not the declared one",
             )
+            if container is not None:
+                require(
+                    derived == contradiction, f"step {si}: centered closure identities differ"
+                )
             require(next(steps, None) is None, "steps after the closure")
             break
     else:
         require(stall, "no closure derived")
     require(stream.sha256 is not None, "the node was not read to its end")
     check_final(state, node, stall=stall)
+    if container is not None:
+        check_centered_final(state, node)
     return {
         "certificate": {"seed_sha256": seed_sha, "node_sha256": stream.sha256},
         "mask": mask,
@@ -1439,11 +1641,12 @@ def verify(
     sample: int | None = None,
     sample_seed: int = 12345,
     progress: bool = False,
+    container: CenteredContainer | None = None,
 ) -> dict[str, Any]:
     """The verification receipt: PASS only for a closed certificate that checks in full."""
     clock = time.perf_counter()
     receipt: dict[str, Any] = {
-        "schema": SCHEMA,
+        "schema": SCHEMA if container is None else CENTERED_SCHEMA,
         "verifier": KIND,
         "provenance": PROVENANCE,
         "directory": repository_path(directory),
@@ -1452,12 +1655,32 @@ def verify(
         "sample_rows_per_step": sample,
         "sample_seed": None if sample is None else sample_seed,
     }
+    if container is not None:
+        receipt.update(
+            container=container.record(),
+            root_cap_join_checked=False,
+            root_cap_join_scope="separate parent context checker",
+            scope="supplied rational centered-container exclusion only; unchanged outer world",
+            existing_U_census_admission=False,
+            global_optimality_proved=False,
+            centered_exclusion_proved=False,
+            owned_hull_limit=CENTERED_HULL_LIMIT,
+        )
     try:
         result = verify_objects(
-            directory, cells, sample=sample, sample_seed=sample_seed, progress=progress
+            directory,
+            cells,
+            sample=sample,
+            sample_seed=sample_seed,
+            progress=progress,
+            container=container,
         )
     except VerificationError as failure:
         receipt.update(status="FAIL", failure=str(failure))
+    except EOFError as failure:
+        if container is None:
+            raise
+        receipt.update(status="FAIL", failure=f"incomplete compressed certificate: {failure!r}")
     except (
         KeyError,
         TypeError,
@@ -1472,9 +1695,15 @@ def verify(
         receipt.update(result)
         closed = result["closed"]
         receipt.update(
-            status="PASS" if closed else "FAIL",
-            failure=None if closed else "the node is a stall, not a closure",
+            status=("PASS_CLOSED" if closed else "PASS_STALL")
+            if container is not None
+            else ("PASS" if closed else "FAIL"),
+            failure=None
+            if closed or container is not None
+            else "the node is a stall, not a closure",
         )
+        if container is not None:
+            receipt["centered_exclusion_proved"] = closed
     receipt["seconds"] = round(time.perf_counter() - clock, 3)
     return receipt
 
@@ -1488,6 +1717,11 @@ def main(argv: list[str] | None = None) -> int:
     _ = parser.add_argument("--sample-seed", type=int, default=12345)
     _ = parser.add_argument("--output", type=Path, required=True, help="the receipt")
     _ = parser.add_argument("--progress", action="store_true")
+    _ = parser.add_argument(
+        "--centered-inner-cap",
+        type=Q,
+        help="separate rational centered mode; root/cap/target custody checked by parent",
+    )
     arguments = parser.parse_args(argv)
     if arguments.cells is not None:
         if not arguments.cells_sha256:
@@ -1501,11 +1735,16 @@ def main(argv: list[str] | None = None) -> int:
         sample=arguments.sample,
         sample_seed=arguments.sample_seed,
         progress=arguments.progress,
+        container=(
+            None
+            if arguments.centered_inner_cap is None
+            else CenteredContainer(cells.cap, arguments.centered_inner_cap)
+        ),
     )
     arguments.output.parent.mkdir(parents=True, exist_ok=True)
     _ = arguments.output.write_text(json.dumps(receipt, indent=1) + "\n", encoding="utf-8")
     print(json.dumps({k: receipt.get(k) for k in ("status", "failure", "mode", "seconds")}))
-    return 0 if receipt["status"] == "PASS" else 1
+    return 0 if receipt["status"] in {"PASS", "PASS_CLOSED", "PASS_STALL"} else 1
 
 
 if __name__ == "__main__":

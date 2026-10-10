@@ -168,10 +168,9 @@ def test_partial_edge_overlap_does_not_count_as_a_flush_side() -> None:
 def test_n68_near_wall_rotations_are_not_full_side_contacts() -> None:
     """Squares turned a thousandth of a radian at a wall are neither axis squares nor flush.
 
-    Since the #227 intake `n = 68` is Couzo's packing (T-056), and it still carries the
-    case: `square-011` sits 0.00057 from the right wall and `square-014` touches the
-    bottom wall at a corner, each turned about 0.00097 rad. The UnitSquare packing it
-    replaced carried the same case in `square-019`, `square-049` and `square-050`.
+    Rehwaldt's rational refinement of Couzo's construction (T-118) retains the case
+    with source-ordered square IDs: `square-020` and `square-063` turn about 0.00096
+    and 0.00097 rad. Earlier Couzo and UnitSquare witnesses use different square IDs.
     """
     witness = load_witness(
         ROOT / "witnesses/known-best/n-068.yaml",
@@ -181,7 +180,7 @@ def test_n68_near_wall_rotations_are_not_full_side_contacts() -> None:
     colors = assign_square_colors(frame_from_witness(witness), spec)
 
     quarter_turn = Decimal("1.57079632679489661923132169163975144209858469968755291048747")
-    near_wall = ("square-011", "square-014")
+    near_wall = ("square-020", "square-063")
     near_axis_offsets = tuple(
         min(
             colors[square_id].orientation_radians,
@@ -197,7 +196,7 @@ def test_n68_near_wall_rotations_are_not_full_side_contacts() -> None:
         assert colors[square_id].hue_index != colors["square-001"].hue_index
         assert colors[square_id].contact_sides == 0
         assert colors[square_id].full_side_contacts == ()
-    assert colors["square-011"].hue_index != colors["square-014"].hue_index
+    assert colors["square-020"].hue_index != colors["square-063"].hue_index
 
 
 def test_full_side_contacts_join_numerically_split_angle_classes() -> None:

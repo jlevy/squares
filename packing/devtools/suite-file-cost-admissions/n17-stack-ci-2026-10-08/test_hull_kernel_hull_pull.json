@@ -1,0 +1,53 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 6,
+  "seconds": 0.004,
+  "files": [
+    {
+      "file": "packing/tests/test_hull_kernel_hull_pull.py",
+      "tests": 6,
+      "seconds": 0.004
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_hull_kernel_hull_pull.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_hull_kernel_hull_pull.py": 6
+    },
+    "deselected_tests": 0
+  }
+}

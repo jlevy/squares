@@ -1,0 +1,71 @@
+{
+  "audit_date": "2026-10-08",
+  "paper": {
+    "title": "Out-of-the-Box Global Optimization for Packing Problems: New Models and Improved Solutions",
+    "arxiv": "2605.04850v1",
+    "submission_utc": "2026-05-06T12:49:15Z",
+    "source": "https://arxiv.org/pdf/2605.04850v1",
+    "pages": 32,
+    "pdf_bytes": 933101,
+    "pdf_format_version": "1.7",
+    "pdf_sha256": "c9be799bd98605287b909841dab1bf2e272923aba709851690246d3f7c6d4862",
+    "raw_sha256": "dd59769d1fbffa20ce39adbbe6a90bbb6ff3a0b5daeba826b0ff72c9116d6031",
+    "fresh_download_byte_identical": true,
+    "pdftotext_layout_regeneration_byte_identical": true,
+    "original_capture_date": "2026-09-08",
+    "license": "arXiv non-exclusive license to distribute",
+    "license_url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+    "archive_status": "PDF plus faithful raw extraction; documented raw-only entry; no repair or duplicate required"
+  },
+  "references": [
+    {
+      "path": "packing/resources/README.md"
+    },
+    {
+      "path": "packing/resources/web/annealing-methods-audit-2026-09-08/README.md"
+    },
+    {
+      "path": "docs/project/research/research-2026-09-08-annealing-for-square-packing.md"
+    },
+    {
+      "path": "docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md"
+    }
+  ],
+  "supplement": {
+    "url": "https://github.com/DominikKamp/Packing",
+    "branch": "main",
+    "commit": "27f71632d8655ae4b6a049410a401976748b94e3",
+    "commit_date": "2026-04-16T22:48:50Z",
+    "tree_sha": "34038a61ef8994127d02a8eaee93c210d933a1d6",
+    "recursive_tree_truncated": false,
+    "file_count": 3994,
+    "file_extensions": {
+      "txt": 1619,
+      "pdf": 1619,
+      "html": 749,
+      "dat": 4,
+      "md": 1,
+      "DS_Store": 2
+    },
+    "models_found": false,
+    "verification_tools_found": false,
+    "machine_checkable_optimality_certificates_found": false,
+    "declared_license": null,
+    "n17_square_numeric_witness": {
+      "path": "polygon/l4/m4/n17/polygon_n17_m4_l4.txt",
+      "bytes": 960,
+      "git_blob": "9077111bce797c6840c70056eba399dd6c2e5236",
+      "outer_circumradius": 4.676812769745167,
+      "inner_circumradius": 1,
+      "format": "4 4 17; R; 17 x y theta triples",
+      "source_url": "https://raw.githubusercontent.com/DominikKamp/Packing/27f71632d8655ae4b6a049410a401976748b94e3/polygon/l4/m4/n17/polygon_n17_m4_l4.txt"
+    },
+    "limits": [
+      "Paper page 6 says supplement includes models, numerical solutions, visualizations; current complete tree contains numeric solutions and visualizations but no model or solver source files.",
+      "Numerical coordinates are not an optimality certificate; no replay or feasibility verification performed.",
+      "No ellipse directory appears in supplement root.",
+      "No repository license declared; paper arXiv license grants distribution rights to arXiv and is not CC.",
+      "Supplement was inspected via metadata and one small witness; no bulk content was downloaded."
+    ]
+  }
+}

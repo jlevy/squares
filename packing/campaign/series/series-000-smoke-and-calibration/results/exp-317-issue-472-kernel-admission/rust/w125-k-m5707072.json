@@ -1,0 +1,64 @@
+{
+ "schema": "n17-certificate-verification/v1",
+ "verifier": "kernel",
+ "provenance": {
+  "implementation": "rust",
+  "crate": "n17-kernel-verifier",
+  "version": "0.1.0",
+  "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+ },
+ "directory": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5707072",
+ "cells_source": {
+  "kind": "cover",
+  "design": "ring-3-voronoi-8-tabbed-unique"
+ },
+ "mode": "full",
+ "sample_rows_per_step": null,
+ "sample_seed": null,
+ "certificate": {
+  "seed_sha256": "a51cb6f36392e1cd570a48cb6796c6d70e1a3442c986a3c52b40f687de062526",
+  "node_sha256": "901bc62808878c619b0b44d28cf03acf7d5ff5435db3c4590f4c184c3ff92428"
+ },
+ "mask": [
+  6,
+  8,
+  10,
+  12,
+  16,
+  17,
+  18,
+  20,
+  22
+ ],
+ "cells": [
+  "side-W0",
+  "side-S1",
+  "side-W1",
+  "side-S2",
+  "interior-SW",
+  "interior-NW",
+  "interior-W",
+  "interior-N",
+  "interior-SE"
+ ],
+ "bins": 128,
+ "closure": {
+  "kind": "all_parent_poses_forbidden",
+  "owner": 8,
+  "step": 37
+ },
+ "closed": true,
+ "counts": {
+  "collision_facet_checks": 202973944,
+  "collision_regions": 12658,
+  "cover_checks": 4466,
+  "partner_rows": 33487,
+  "rows_full": 4466,
+  "seed_points": 6,
+  "seed_rows": 1152,
+  "steps": 38
+ },
+ "status": "PASS",
+ "failure": null,
+ "seconds": 103.329
+}

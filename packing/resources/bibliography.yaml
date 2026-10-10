@@ -30,6 +30,40 @@ last_reviewed: '2026-10-06'
 # not in the README's Web Sources table, so its `note` says which retained bytes they
 # were read from.
 sources:
+  - key: '[Daniel exact and local reports 2026]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Couzo
+    lineage: independent
+    note: Issue419 reports269 exact side forms, four newly derived forms and258 source Lean feasibility
+      checks. Issue420 reports178 non-strict local minima. Retained f58a017 source metadata and Lean
+      code are reports, without an independent checker or Lean build here; source MIT licences and
+      original credits remain in the packet.
+  - key: '[squarepacker quarter-power 2026]'
+    authors: [Ryu]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    lineage: independent
+    note: >-
+      Sungjoon Ryu, quarter-power deficiency preprint v1.0, abbedcf4bba2e4053f0278e669d84966a89c8b73,
+      DOI 10.5281/zenodo.23211207. Primary paper and selected source retained in
+      web/squarepacker-k2-minus-c-quarter-2026-10-07/. The source states extensive
+      Claude (Anthropic) assistance and no human peer review. CC BY 4.0 paper, MIT code.
+  - key: '[squarepacker cube-root 2026]'
+    authors: [Ryu]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    lineage: independent
+    note: >-
+      Sungjoon Ryu, cube-root deficiency preprint v1.0, 15045f9c6b74bd52f60394b9be593ebe4fb3debc,
+      DOI 10.5281/zenodo.23212059. Primary paper and selected source retained in
+      web/squarepacker-k2-minus-c-cube-root-2026-10-07/. The source states extensive
+      Claude (Anthropic) assistance and no human peer review. CC BY 4.0 paper, MIT code.
   - key: '[Queuingtheorydotcom n11 optimality 2026]'
     authors: [Queuingtheorydotcom]
     year: 2026
@@ -495,6 +529,25 @@ sources:
       could not reach Zenodo, are kept in its zenodo/ with their digests: 23164302
       (v1.0) is tag v1.0 (0eb29d44) byte for byte, and its preprint PDF is retained;
       23165736 (v1.1) is tag v1.1; and 23165916 is the v1.1 preprint alone.
+  - key: '[squarepacker k2-minus-c v1.2 2026]'
+    authors: [Ryu]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-06'
+    credit: squarepacker after Roth, Vaughan
+    lineage: independent
+    note: >-
+      Sungjoon Ryu's version 1.2 of Packing k^2 - c unit squares, immutable tag
+      e16a5cfa7eed489ea8d84b500e590bf6855a5f2f, committed 2026-10-06T17:11:30Z,
+      DOI 10.5281/zenodo.23194031, reported in issue #368 comment 6022000514.
+      The full 78-file composition is bound in
+      web/squarepacker-k2-minus-c-v12-2026-10-06/: ten changed files retained and
+      68 byte-identical files explicitly linked to retained version 1.1 copies.
+      The source reports extensive Claude assistance and no peer review; paper
+      CC BY 4.0, code and data MIT. Its new numerical consequences are checked
+      independently, separately for nine- and thirteen-overlap routes. The
+      independent per-box labelling obligation remains think-k3tk; source custody
+      and arithmetic do not discharge it. No small-count bound is imported.
   - key: '[squarepacker s12 2026-10-05]'
     authors: [Ryu]
     year: 2026
@@ -1369,7 +1422,177 @@ sources:
 # `improved_by` carry. Listed rather than derived from the last word of the name, because
 # a credit can be an organization; a name missing here fails the build instead of being
 # guessed at.
+  - key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    authors:
+    - Rehwaldt
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Rehwaldt after Couzo and earlier contributors
+    lineage: independent
+    note: Seth Rehwaldt’s exact certificate refinement at bc389ddf7d65277cd19a9b08fb285d86346d6806,
+      issue 425, with OpenAI Codex assistance. No new arrangement or unrestricted optimality claim.
+      Normalized geometric facts and attributed source custody are retained; source notices assign no
+      blanket licence.
+  - key: '[Rehwaldt n68 refinement 2026-10-07]'
+    authors:
+    - Rehwaldt
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Rehwaldt after Couzo and earlier contributors
+    lineage: independent
+    note: Seth Rehwaldt’s exact certificate refinement at fded686668e29258dad2eb29d0482fa3fd51bd6b,
+      issue 428, with OpenAI Codex assistance. No new arrangement or unrestricted optimality claim.
+      Normalized geometric facts and attributed source custody are retained; source notices assign no
+      blanket licence.
+  - key: '[ry-xu square packing 2026]'
+    authors:
+    - ry-xu
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    lineage: independent
+    note: The retained factual source certificates at 8dc415296f697f5140caea27c7a0193d52deb4e6 identify
+      ry-xu and disclose LLM assistance; no unrestricted optimality or contact-count theorem is admitted.
+  - key: '[Daniel new arrangements 2026-10-07]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Levy, Ellsworth, Couzo, Stead
+    short_credit: Daniel after Levy et al.
+    lineage: builds-on-project
+    note: Issue399 supplies three complete changed rational packings at266,270,272. Pinned7eef24f source
+      MIT licences and original lineage remain retained. Exact feasibility is certified independently;
+      source arrangement novelty and local/global optimality are unestablished.
+  - key: '[Gupta rational refinements 2026-10-08]'
+    authors:
+    - Gupta
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    lineage: independent
+    credit: Gupta after Chaoweeraprasit, Daniel
+    short_credit: Gupta after Chaoweeraprasit et al.
+    note: Siddharth Gupta's seventeen rational precision certificates at 9643cb5a78c1d4dcfc867c80a6920c3a6219d05a
+      refine SQUISH constructions and credit Nate Chaoweeraprasit and Evan Daniel. Fourteen offers are
+      selected; three are withdrawn. Complete factual inputs are retained; unlicensed programs/prose
+      are hash-pinned, and the solver MIT notice is not a bundle licence.
+  - key: '[Rehwaldt n68 exact-root report v1.2]'
+    authors:
+    - Rehwaldt
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    credit: Rehwaldt after Couzo and earlier contributors
+    lineage: independent
+    note: Seth Rehwaldt with disclosed OpenAI Codex assistance, source revision 495238e3d5a542008ff2f01a1dbbb78527cbe732
+      and release v1.2.0. Exact-root feasibility and restricted-family attainment are reported only.
+      The release was published 8 October UTC, 7 October in America/Chicago. No whole-publication license
+      was observed; authored metadata and external-byte identities are public, with the original publication
+      preserved outside live Git.
+  - key: '[wand125 fine-net lower bounds 2026-10-08]'
+    authors:
+    - wand125
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    credit: wand125 after Levy
+    lineage: builds-on-project
+    note: Seven finer-net measure lower-bound reports for n19,20,26,27,28,29,31 at source 61e37d583ad690266da2188ad027ef3f697bf162;
+      original archives/nested source identities retained outside live Git. Conditional maintained measure/net-premise
+      review accepted, native capture/outcomes/adoption pending. Nearest enclosing project MIT notice
+      does not settle nested verifier third-party redistribution. The source adapts this project’s sqverify_fast
+      geometric kernel; the prospective maintained replay is not another independent implementation.
+  - key: '[Couzo exact refinements 2026-10-08]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    lineage: builds-on-project
+    credit: Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel, Levy
+    short_credit: Couzo after Xu et al.
+    note: Eight complete certificates and decimal context poses at ffd900dfff6d2674ad995359208c2f0714915c82;
+      source credits and tools are attributed. The source uses Squares Project (Levy) verification code;
+      this project lineage is not independent. No optimizer/local/global claims. Unlicensed programs/prose
+      are pinned rather than copied.
+  - key: '[Daniel dated certificates 105 and 130 2026-10-07]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Couzo, Levy
+    lineage: builds-on-project
+    note: Complete dated certificates and matching inputs at 7eef24f7221b8c3371d6171dd664b52541bbd479,
+      retained in web/evand-batch-105-130-2026-10-07/. Francisco Couzo construction credit, Evan Daniel
+      refinement and source code credit; Joshua Levy and squares register-data lineage. Source discloses
+      Claude assistance. MIT code and CC BY4.0 batch data are distinct. Source-only historical reports;
+      no new maintained geometry replay or selected-bound adoption.
+  - key: '[Daniel dated certificate 292 2026-10-07]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Couzo, Levy
+    lineage: builds-on-project
+    note: Complete dated certificates and matching inputs at f58a01774a733b232a88576470332185d8d11641,
+      retained in web/evand-batch-292-2026-10-07/. Francisco Couzo construction credit, Evan Daniel
+      refinement and source code credit; Joshua Levy and squares register-data lineage. Source discloses
+      Claude assistance. MIT code and CC BY4.0 batch data are distinct. Source-only historical reports;
+      no new maintained geometry replay or selected-bound adoption.
+  - key: '[Couzo extended-range reports 2026-10-08]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    credit: Couzo after Levy
+    lineage: builds-on-project
+    note: Twenty author-reported decimal poses beyond n324 at b10ad36, 74f7e8b and ffd900df, reviewed 2026-10-09. The cited final revision is dated 2026-10-08 by GitHub commit metadata.
+      Derived numerical facts and Git custody metadata are retained; upstream text, SVGs and prose are not
+      redistributed. No redistribution permission or licence determination is asserted. The publication
+      holds no code file through ffd900df. It compares its separate in-horizon reports with this project's
+      register data and says its eight in-horizon certificates replay with this project's verifier; that
+      lineage establishes no checker or verification for these twenty poses.
+      Expanded comparison bounds are derived references rather than surveyed best records.
+  - key: '[Couzo extended-range updates 2026-10-08]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    credit: Couzo after Levy
+    lineage: builds-on-project
+    note: The later author-reported decimal poses at n375 and n378 in 2d32a6e (2026-10-08T22:12:27Z,
+      parent ffd900df), reviewed 2026-10-09; the commit message attributes them to the author's continuing
+      search and names Claude as a co-author. Derived numerical facts and Git custody metadata are retained;
+      upstream text, SVGs and prose are not redistributed. No redistribution permission or licence
+      determination is asserted. Each beats the same count's ffd900df report, which stays a dated
+      historical row.
+  - key: '[Couzo follow-up refinements 2026-10-08]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    lineage: builds-on-project
+    credit: Couzo after Xu, Daniel, Ellsworth, Levy
+    short_credit: Couzo after Xu et al.
+    note: 'Five complete exact certificates at 2d32a6e96f55c5dc1a2dd0e3581098e7c0105252, refined from
+      Xu''s #432 and Daniel''s #399 packings with Ellsworth''s refine_packing and Daniel''s fq, and
+      written by Daniel''s exact contact solver. The source checks with Squares Project (Levy) verification
+      code; this project lineage is not independent. Derived exact facts only; no upstream byte is retained.
+      No optimizer/local/global claims.'
 credited_names:
+  Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
+  Siddharth Gupta: Gupta
+  ry-xu: ry-xu
+  Seth Rehwaldt: Rehwaldt
   Nate Chaoweeraprasit: Chaoweeraprasit
   Allen Chang: Chang
   David Ellsworth: Ellsworth

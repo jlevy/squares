@@ -97,6 +97,19 @@ This hypothesis stays unresolved as worded: the composition review exhibits a pa
 side $S^\ast$ that meets every premise outside $B_W'$, the family with squares 5 and 6
 exchanged.
 
+*Note of 2026-10-09 (X-052).* The local-side review checked that witness exactly: for
+$a = 1$ and $a = 1.07$ the exchanged configuration is, as a set of seventeen squares
+with rational corners, the family member $w = (0, 0, 0)$ with square 6 on the bottom
+wall at $x = x_5^\ast - a$, inside square 6’s box.
+It is a relabelled family member, not a packing off the family, as X-048’s 5 October
+note already says; under the state-induced labelling (the square in `side-S2` is “6”)
+the equality clause holds for it.
+What fails is only that the certified box does not cover the labelled slider domain,
+which is disconnected ($a \in [0, 0.115] \cup [1, 1.074]$ at $z = 0$ by the review’s
+float scan). The verdict stays unresolved as worded, a process choice rather than a
+mathematical gap; the usable theorem carries the state premise.
+See [X-052](../explorations/X-052-n17-status-survey-and-completion-plan.md).
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -88,22 +88,31 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: carry binary64 coordinates, so a contact gap near the tightest tolerance moves more
 #: of them than it moved the 28-digit records they replaced.
 GOLDEN_UNSTABLE = {
-    "n=1..100": [68, 88],
+    "n=1..100": [68, 70, 84, 86, 88],
     "n=1..200": [
         68,
+        70,
+        84,
+        86,
         88,
         102,
+        103,
         105,
         106,
         108,
         110,
         123,
+        126,
+        127,
         129,
         130,
+        131,
         132,
+        146,
         154,
         155,
         172,
+        175,
         177,
         179,
         180,
@@ -111,19 +120,28 @@ GOLDEN_UNSTABLE = {
     ],
     "n=1..324": [
         68,
+        70,
+        84,
+        86,
         88,
         102,
+        103,
         105,
         106,
         108,
         110,
         123,
+        126,
+        127,
         129,
         130,
+        131,
         132,
+        146,
         154,
         155,
         172,
+        175,
         177,
         179,
         180,
@@ -135,20 +153,22 @@ GOLDEN_UNSTABLE = {
         211,
         228,
         236,
-        237,
         238,
         239,
         241,
         258,
         259,
+        261,
         263,
+        266,
+        267,
         268,
         269,
-        270,
         271,
         272,
         273,
         292,
+        295,
         297,
         301,
         302,
@@ -159,6 +179,7 @@ GOLDEN_UNSTABLE = {
         307,
     ],
 }
+
 """Records screened at a corpus whose result has actually been looked at.
 
 The count itself is derived below -- the corpus less the shape-residual exclusions -- so
@@ -240,6 +261,7 @@ def test_small_records_rescreen_to_the_retained_result() -> None:
         assert screened == (True, cases[n])
 
 
+@pytest.mark.slow
 def test_squish_n108_retains_its_replayed_tolerance_instability() -> None:
     entry = next(row for row in manifest_entries() if row["n"] == 108)
     screened = screen_translation_escape._screen_entry(entry)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001

@@ -116,7 +116,9 @@ def test_an_entry_that_claims_no_bound_has_no_standing(records: view.Records) ->
     }
     # T-112, from 2026-10-06: the uniqueness of the optimal packing of eleven squares
     # cites only its derived-structure entry, which claims no bound.
-    assert len(without) == 11
+    # T-124 reports local minima of source configurations, without a global bound.
+    assert without["T-124"] == "restricted-optimality"
+    assert len(without) == 12
 
 
 def test_standing_agrees_with_the_recent_rows(
@@ -149,6 +151,9 @@ def test_standing_agrees_with_the_recent_rows(
         # A second, point-only route to s(21) = 5, reported until its complete replay here
         # was recorded on 2026-10-02.
         ("T-055", view.SECOND_CERTIFICATE),
+        # Couzo's eight rational certificates of 8 October report sides below every
+        # ceiling their cases hold, and the case records have not taken them in yet.
+        ("T-128", view.PENDING_ADOPTION),
     ],
 )
 def test_standing_is_read_from_the_case_records(

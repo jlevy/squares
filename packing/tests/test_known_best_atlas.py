@@ -5,10 +5,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import lzma
 import re
 import subprocess
 from collections import Counter
 from pathlib import Path
+from typing import Any
 from xml.etree import ElementTree as ET
 
 import cairosvg
@@ -17,7 +19,15 @@ import pytest
 import yaml
 
 from devtools import build_known_best_atlas as known_best_builder
+from devtools import evand_arrangement_houses as evand_houses
+from devtools import evand_arrangement_reports as evand_reports
+from devtools import gupta_house_links as gupta_houses
+from devtools import refinement_house_links as refinement_houses
+from devtools import refinement_packets as refinement_sources
 from devtools import render_composite_pdf
+from devtools import ryxu_arrangement_reports as ryxu_reports
+from devtools import ryxu_house_links as ryxu_houses
+from devtools import ryxu_radical_n51 as ryxu_radical
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
     CompositeSpec,
@@ -39,11 +49,13 @@ from sqpack.render.model import RenderSpec
 from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR
 from sqpack.witness import load_witness
 from sqpack.workers import worker_count
+from sqpack.yamlio import safe_load
 
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
 #: The first SQUISH update moved n = 179 and 258 onto packet-derived facts;
-#: the second also moved n = 88. These inventory counts follow the current corpus.
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 26, "n=1..324": 57}
+#: the second also moved n = 88. Complete evand and ry-xu packets now supersede
+#: earlier catalogue sources. These inventory counts follow the current corpus.
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 23, "n=1..324": 50}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -56,18 +68,18 @@ GOLDEN_UNITSQUARE: dict[str, set[int]] = {
 GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     "n=1..100": {
         "exact-grid": 64,
-        "kingbird-derived-facts": 34,
-        "packet-derived-facts": 2,
+        "kingbird-derived-facts": 30,
+        "packet-derived-facts": 6,
     },
     "n=1..200": {
         "exact-grid": 114,
-        "kingbird-derived-facts": 60,
-        "packet-derived-facts": 26,
+        "kingbird-derived-facts": 53,
+        "packet-derived-facts": 33,
     },
     "n=1..324": {
         "exact-grid": 176,
-        "kingbird-derived-facts": 91,
-        "packet-derived-facts": 57,
+        "kingbird-derived-facts": 80,
+        "packet-derived-facts": 68,
     },
 }
 
@@ -157,7 +169,6 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
         40,
         41,
         50,
-        51,
         52,
         53,
         54,
@@ -166,13 +177,10 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
         66,
         67,
         69,
-        70,
         71,
         82,
         83,
-        84,
         85,
-        86,
         87,
         89,
     }
@@ -213,6 +221,89 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
         assert (
             hashlib.sha256(path.read_bytes()).hexdigest() == record["upstream_declared_sha256"]
         )
+
+
+def _packet_acquisition(packet: Path) -> tuple[str, dict[str, str]]:
+    """The revision a packet acquired its source at, and each upstream file's SHA-256 by
+    its path in the source tree, read from the packet's own acquisition record."""
+    acquisition = packet / "acquisition"
+    inputs = acquisition / "upstream-factual-inputs.json"
+    if inputs.is_file():
+        record = json.loads(inputs.read_text(encoding="utf-8"))
+        return record["revision"], {row["path"]: row["sha256"] for row in record["files"]}
+    (source,) = json.loads((acquisition / "sources.json").read_text(encoding="utf-8"))[
+        "sources"
+    ]
+    manifest = (acquisition / "upstream-subtree.sha256").read_text(encoding="utf-8")
+    digests = {}
+    for line in manifest.splitlines():
+        digest, name = line.split(maxsplit=1)
+        digests[name.removeprefix("./")] = digest
+    return source["source_commit"], digests
+
+
+def _retained_container(path: Path) -> dict[str, Any]:
+    assert path.name.endswith(".json.xz"), path
+    return json.loads(lzma.decompress(path.read_bytes()))
+
+
+def _assert_container_retains(
+    row: dict[str, Any], container: dict[str, Any], acquisition: tuple[str, dict[str, str]]
+) -> None:
+    """The container's one entry for the row's `url` is the upstream file's exact text."""
+    revision, digests = acquisition
+    assert container["revision"] == revision, row["url"]
+    entries = [
+        entry
+        for entry in container["cases"]
+        if f"{container['source']}/blob/{revision}/{entry['source_path']}" == row["url"]
+    ]
+    assert len(entries) == 1, row["url"]
+    (entry,) = entries
+    assert entry["n"] == row["source_n"], row["url"]
+    retained = hashlib.sha256(entry["source_certificate"].encode("utf-8")).hexdigest()
+    assert retained == digests[entry["source_path"]], row["url"]
+
+
+def test_every_retained_packet_source_holds_its_upstream_bytes() -> None:
+    """A packet row marked `raw_asset_retained` keeps the file its `url` names, byte for
+    byte: the builder marks a row so when its `path` is a complete-certificate container
+    (`build_known_best_atlas._source_index`), and the container's entry for that url
+    carries the SHA-256 the packet's acquisition record pinned upstream."""
+    source_index = json.loads((SOURCES / "sources.json").read_text(encoding="utf-8"))
+    rows = [
+        record
+        for record in source_index["sources"]
+        if record["kind"] == "packet-derived-facts" and record["raw_asset_retained"]
+    ]
+    assert rows
+    containers: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        path = ROOT / row["path"]
+        if row["path"] not in containers:
+            containers[row["path"]] = _retained_container(path)
+        _assert_container_retains(
+            row, containers[row["path"]], _packet_acquisition(path.parent.parent)
+        )
+
+
+@pytest.mark.parametrize("change", ["edited text", "other revision"])
+def test_a_retained_source_row_refuses_a_copy_that_is_not_upstream(change: str) -> None:
+    path = ryxu_reports.fact_path()
+    container = _retained_container(path)
+    acquisition = _packet_acquisition(path.parent.parent)
+    url = ryxu_houses.source_url(70)
+    row = {"path": path.relative_to(ROOT).as_posix(), "source_n": 70, "url": url}
+    _assert_container_retains(row, container, acquisition)
+    if change == "edited text":
+        entry = next(entry for entry in container["cases"] if entry["n"] == 70)
+        edited = entry["source_certificate"].replace("1", "2", 1)
+        assert edited != entry["source_certificate"]
+        entry["source_certificate"] = edited
+    else:
+        row["url"] = url.replace(ryxu_reports.REVISION, "0" * 40)
+    with pytest.raises(AssertionError):
+        _assert_container_retains(row, container, acquisition)
 
 
 @pytest.mark.usefixtures("isolated_atlas_build_cache")
@@ -409,7 +500,8 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
         assert (ROOT / entry["witness"]["path"]).is_file()
         assert (ROOT / entry["rendering"]["path"]).is_file()
         frontier = (ROOT / entry["frontier_path"]).read_text(encoding="utf-8")
-        assert f"    - {entry['witness']['id']}\n" in frontier
+        case = safe_load(frontier.split("---\n", 2)[1])["packing"]
+        assert entry["witness"]["id"] in case["reported_upper_bound"]["witnesses"]
         if n in sampled:
             _assert_witness_agrees_with_entry(entry, release_by_n)
 
@@ -419,6 +511,8 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
 
 def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
     n = entry["n"]
+    if n in ryxu_houses.NUMBERS and entry["source"]["url"] == ryxu_houses.source_url(n):
+        assert ROOT / entry["witness"]["path"] == ryxu_houses.house_path(n)
     witness = load_witness(ROOT / entry["witness"]["path"], fallback_schema=SCHEMA)
     assert witness["n"] == n
     assert witness["id"] == entry["witness"]["id"]
@@ -430,16 +524,70 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         assert "not a legal conclusion" in witness["claim"]["limitations"]
     elif entry["source"]["kind"] == "packet-derived-facts":
         assert entry["source"]["path"].startswith("resources/web/")
-        assert entry["source"]["path"].endswith(
-            (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
+        evand_url = (
+            f"{evand_reports.SOURCE}/blob/{evand_reports.REVISION}/{evand_reports.source_path(n)}"
+            if n in evand_houses.NUMBERS
+            else None
         )
-        assert witness["source"]["path"] == entry["source"]["path"]
+        source = refinement_houses.source(n) if n in refinement_houses.NUMBERS else None
+        if (
+            n in gupta_houses.NUMBERS
+            and witness["source"]["key"] == gupta_houses.reports.SOURCE_KEY
+        ):
+            assert ROOT / entry["witness"]["path"] == gupta_houses.house_path(n)
+            assert (
+                entry["source"]["path"]
+                == gupta_houses.reports.fact_path().relative_to(ROOT).as_posix()
+            )
+            assert witness["source"]["path"] == entry["source"]["path"]
+            gupta_houses.check_houses([n])
+        elif n in ryxu_houses.NUMBERS and entry["source"]["url"] == ryxu_houses.source_url(n):
+            # Complete rational and number-field records retain all poses and deciding
+            # inputs. Admit their entire house; a matching path alone is insufficient.
+            facts = ryxu_radical.fact_path() if n == 51 else ryxu_reports.fact_path()
+            assert entry["source"]["path"] == facts.relative_to(ROOT).as_posix()
+            assert witness == ryxu_houses.check_houses([n])[n]
+            assert witness["source"]["path"] == entry["source"]["path"]
+        elif entry["source"]["url"] == evand_url:
+            assert (
+                entry["witness"]["path"]
+                == evand_houses.house_path(n).relative_to(ROOT).as_posix()
+            )
+            assert (
+                entry["source"]["path"]
+                == evand_reports.fact_path().relative_to(ROOT).as_posix()
+            )
+            assert witness["source"]["path"] == "packing/" + entry["source"]["path"]
+            evand_houses.check_houses([n])
+        elif source is not None and entry["source"]["url"] == source.url(n):
+            assert entry["source"]["path"].endswith(
+                (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
+            )
+            # New source facts use repository-relative custody paths. Admit the whole
+            # imported house, not merely an accepted alternative path spelling.
+            assert witness["source"] == refinement_sources.to_witness(source, n)["source"]
+            assert witness["source"]["path"] == "packing/" + entry["source"]["path"]
+            refinement_houses.check_houses([n])
+        else:
+            assert entry["source"]["path"].endswith(
+                (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
+            )
+            assert witness["source"]["path"] == entry["source"]["path"]
+            assert "not a legal conclusion" in witness["claim"]["limitations"]
         assert witness["source"]["url"] == entry["source"]["url"]
-        assert "not a legal conclusion" in witness["claim"]["limitations"]
     elif entry["source"]["kind"] == "unitsquare-rendering":
         assert witness["source"]["revision"] == (
             f"upstream-declared parent-content SHA-256 {release_by_n[n]['record_sha256']}"
         )
+
+
+@pytest.mark.parametrize("n", [51, 70])
+def test_ryxu_manifest_refuses_a_noncanonical_house_path(n: int) -> None:
+    document = json.loads((ATLAS / "manifest.json").read_text(encoding="utf-8"))
+    entry = next(row for row in document["atlas"]["entries"] if row["n"] == n)
+    changed = {**entry, "witness": {**entry["witness"], "path": "witnesses/other-house.yaml"}}
+    with pytest.raises(AssertionError):
+        _assert_witness_agrees_with_entry(changed, {})
 
 
 @pytest.mark.slow
@@ -1454,3 +1602,13 @@ def test_a_catalogue_case_is_unaffected_by_the_unitsquare_selector() -> None:
 
     assert plan.kind == "kingbird-derived-facts"
     assert plan.url == "https://kingbird.myphotos.cc/packing/square-71.svg"
+
+
+@pytest.mark.parametrize("n", refinement_houses.NUMBERS)
+def test_each_refinement_atlas_source_binds_full_private_custody(n: int) -> None:
+    entry = next(
+        row
+        for row in json.loads(known_best_builder.MANIFEST.read_text())["atlas"]["entries"]
+        if row["n"] == n
+    )
+    _assert_witness_agrees_with_entry(entry, {})

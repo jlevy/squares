@@ -114,9 +114,10 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
 ) -> None:
     """On load the complete page's checkbox is clear as its HTML has it; every row
     shows and the count is theirs. The rows that carry the flag are every result
-    that is not superseded: the current bests, the second certificates and the results
-    that claim no bound, which have no standing, but for one the register declares a
-    later result implies whole (T-031, superseded by T-060)."""
+    that is not superseded: the current bests, the second certificates, the better
+    bounds the case records have not taken in yet (T-128, pending adoption) and the
+    results that claim no bound, which have no standing, but for one the register
+    declares a later result implies whole (T-031, superseded by T-060)."""
     defaults = PAGES[name]
     page = opened(browser, pages[name], overview)
     try:
@@ -141,16 +142,20 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     # its evidence makes its standing, the limit of a method among them (T-003), unless
     # a later result is declared to imply all of it: T-031 goes, and T-036, superseded
     # only in part, stays. No result has stood as a reported second certificate since
-    # 2 October 2026, when T-055's replay made it a verified one.
+    # 2 October 2026, when T-055's replay made it a verified one. A bound pending adoption
+    # stays too: nothing has replaced it (think-h0d1).
     kept = [result for result in overview.results if result.id.lower() in current]
     assert {result.standing for result in kept} == {
         render_recent_results.HOLDS,
         render_recent_results.HOLDS_REPORTED,
         render_recent_results.SECOND_CERTIFICATE,
+        render_recent_results.PENDING_ADOPTION,
         render_recent_results.NO_STANDING,
         render_recent_results.SUPERSEDED,
     }
     assert [result.id for result in kept if result.standing == "superseded"] == ["T-003"]
+    pending = render_recent_results.PENDING_ADOPTION
+    assert "T-128" in [result.id for result in kept if result.standing == pending]
     assert "t-031" not in current
     assert "t-036" in current
     assert set(found["current"]) < set(found["shown"])
@@ -592,7 +597,7 @@ def test_direct_retired_results_fragment_has_a_visible_static_notice_and_tombsto
             "link", name=f"{name.upper()} withdrawal explanation", exact=True
         )
         assert link.get_attribute("href") == row.path
-        with page.expect_navigation(wait_until="load"):
+        with page.expect_navigation(url=pages[row.path].as_uri(), wait_until="load"):
             link.click()
         assert_tombstone(page, row, "", "")
     finally:

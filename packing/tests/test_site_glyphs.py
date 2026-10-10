@@ -45,7 +45,6 @@ from PIL import Image
 from devtools import measure_site_pages as measure
 from devtools import render_n11_lower_bounds_explainer, render_overview, site_assets
 from devtools import render_n11_optimality_review as paper
-from devtools import render_n11_threshold_bound_review as threshold
 from devtools.preview_site import serve
 from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
 from tests import site_renders
@@ -58,7 +57,7 @@ EXPLAINER, PAPER = "n11-lower-bounds-explainer.html", "n11-optimality-review.htm
 THRESHOLD = "n11-threshold-bound-review.html"
 #: Every paper of the site, in reading order, as written here.
 PAPERS = (EXPLAINER, THRESHOLD, PAPER)
-#: The figures each review draws (Part II's twelve, the series plan's §6.2).
+#: Both retained review templates draw 12 captioned figures.
 REVIEW_FIGURES = {PAPER: 12, THRESHOLD: 12}
 #: The site's own pages measured here: a long report, whose headings, tables and block
 #: quotes hold formulas, and the homepage, whose cards, chips and tables do.
@@ -514,18 +513,21 @@ def test_every_shell_with_the_publication_stylesheet_carries_its_head_script() -
     """The stylesheet's math rule reads the platform from an attribute its head script
     stamps, so a shell that names one names the other, in its head, where it runs before
     the body paints; and every paper takes the pair from one function."""
+    paper_shells: set[Path] = set()
+    for record in render_overview.PAPERS:
+        renderer = importlib.import_module(record.module)
+        shell = (
+            renderer.TEMPLATE
+            if record.slug == render_overview.N11_LOWER_BOUNDS_EXPLAINER
+            else renderer.SHELL
+        )
+        assert isinstance(shell, Path), record.slug
+        paper_shells.add(shell)
+    assert paper_shells
     shells = sorted(TEMPLATES.glob("*-shell.html"))
-    assert {shell.name for shell in shells} >= {
-        "n11-lower-bounds-explainer-shell.html",
-        threshold.SHELL.name,
-        paper.SHELL.name,
-    }
+    assert set(shells) >= paper_shells
     carrying = [shell for shell in shells if "{{PUBLICATION_CSS}}" in shell.read_text("utf-8")]
-    assert {shell.name for shell in carrying} == {
-        "n11-lower-bounds-explainer-shell.html",
-        threshold.SHELL.name,
-        paper.SHELL.name,
-    }
+    assert set(carrying) == paper_shells
     for shell in carrying:
         head = shell.read_text(encoding="utf-8").split("</head>", 1)[0]
         assert head.count("<style>{{PUBLICATION_CSS}}</style>") == 1, shell.name
@@ -632,6 +634,7 @@ def test_the_probe_only_marks_exact_local_prose_fallback_sources_optional(
 ) -> None:
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
+    sans_alias = 'local("Arial"), local("Liberation Sans")'
     cases = [
         ("Site Prose Georgia", 'local("Georgia")', "400", "normal", "", True),
         (
@@ -651,6 +654,18 @@ def test_the_probe_only_marks_exact_local_prose_fallback_sources_optional(
             False,
         ),
         ("Site Prose Times", 'local("Georgia")', "400", "normal", "", False),
+        ("Site Sans Arial", sans_alias, "400", "normal", "", True),
+        (
+            "Site Sans Arial",
+            'local("Arial Bold"), local("Liberation Sans Bold")',
+            "700",
+            "normal",
+            "",
+            True,
+        ),
+        ("Site Sans Arial", sans_alias, "700", "normal", "", False),
+        ("Site Sans Arial", sans_alias, "400", "italic", "", False),
+        ("Site Sans Arial", 'local("Arial")', "400", "normal", "", False),
         ("PT Serif", 'local("Georgia")', "400", "normal", "", False),
         ("Site Prose Georgia, malformed", 'local("Georgia")', "400", "normal", "", False),
         ("Site Prose Georgia", 'local("Georgia")', "700", "normal", "", False),

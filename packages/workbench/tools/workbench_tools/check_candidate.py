@@ -4,7 +4,7 @@
     uv run --frozen --all-extras --group dev python -m workbench_tools.check_candidate
 
 Asserts byte-identical regeneration on two runs, that every correspondence is a
-bijection from n into n+1 with exactly one unmatched square, that the five
+bijection from n into n+1 with exactly one unmatched square, that the four
 shared-picture pairs and every grid-to-grid pair are recognised as such, and that
 index.html never references the network. Everything is checked on fresh builds in a
 temporary directory. The copies of `transition-stats.json` and `stats-summary.md` kept
@@ -71,7 +71,7 @@ from workbench_tools.probes import probe
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 PYTHON = Path(sys.executable)
-SHARED_PICTURE_PAIRS = {147, 232, 264, 290, 295}
+SHARED_PICTURE_PAIRS = {147, 232, 264, 290}
 # Five levels up from this directory is `packing`; its parent is the checkout. Derived
 # for the same reason as in `build_candidate.py`: a hard-coded absolute path is only ever
 # right on one machine.
@@ -212,7 +212,8 @@ def digit_bearing_px() -> float:
 
 def witness_centres(n: int) -> list[tuple[float, float]]:
     """Square centres of witness n, read independently of the build (corners averaged, or the
-    centre-angle form's centres)."""
+    centre-angle form's centres). Exact basis/field views retain their source arithmetic
+    until this independent presentation projection."""
     from fractions import Fraction  # noqa: PLC0415
 
     import yaml  # noqa: PLC0415
@@ -221,6 +222,16 @@ def witness_centres(n: int) -> list[tuple[float, float]]:
         (REPO / f"packing/witnesses/known-best/n-{n:03d}.yaml").read_text(),
         Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader),
     )["witness"]
+    if data["representation"] == "center-basis" or data.get("scalar", {}).get("kind") == (
+        "algebraic-number-field"
+    ):
+        from sqpack.witness import materialize_exact_witness  # noqa: PLC0415
+
+        squares, _side = materialize_exact_witness(data)
+        return [
+            (float(sum(x for x, _ in square) / 4), float(sum(y for _, y in square) / 4))
+            for square in squares
+        ]
     centres = []
     for square in data["squares"]:
         if data["representation"] == "center-angle":
@@ -1239,7 +1250,7 @@ def record_checks(stats: dict, check) -> None:
                 f"({worst:.4f} vs {block['residual_max']})",
             )
     matched = [p for p in pairs if p["kind"] == "matched"]
-    check(len(matched) == 158, f"{len(matched)} matched pairs")
+    check(len(matched) == 160, f"{len(matched)} matched pairs")
     check(
         sum(1 for p in matched if p["moving"] and p["moving_in_block"] >= 0.5 * p["moving"])
         >= 120,
@@ -1321,7 +1332,7 @@ def main() -> int:
         for n in range(1, 324)
         if kind_by_n[n] == "exact-grid" and kind_by_n[n + 1] == "exact-grid"
     ]
-    check(len(grid_pairs) == 160, f"expected 160 grid-to-grid pairs, found {len(grid_pairs)}")
+    check(len(grid_pairs) == 159, f"expected 159 grid-to-grid pairs, found {len(grid_pairs)}")
     for n in grid_pairs:
         check(
             by_n[n]["kind"] == "prefix", f"grid pair {n}->{n + 1} is not recognised as a prefix"
@@ -1638,7 +1649,7 @@ def main() -> int:
         return 1
     print(
         "OK: 2 identical builds; 323 bijective correspondences; "
-        "160 prefix, 5 shared-picture, 158 matched; "
+        "159 prefix, 4 shared-picture, 160 matched; "
         "identity chain composed and present; blocks rigid up to their residuals, "
         "statistics and the new-square rule on every pair, "
         "overlap census present; index.html offline; "

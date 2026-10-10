@@ -58,6 +58,12 @@ exempt:
   bound_by: >-
     WALL_BLOB in devtools/wall_owner_parent_experiment.py, a ReceiptPin on its Git blob,
     which frontier/evidence.yaml and the exp-147..153 records quote too.
+- glob: packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m*/producer-receipt.json
+  reason: digest-bound
+  bound_by: >-
+    The issue-472 contributor's producer receipts, committed byte for byte by exp-317.
+    Their SHA-256 is pinned per certificate in
+    results/exp-317-issue-472-kernel-admission/custody.json (receipts.producer.sha256).
 - path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-x4-survivors-16.json
   reason: digest-bound
   bound_by: >-
@@ -143,6 +149,13 @@ exempt:
     receipts/selector-fast/lever-sample.json, beside it.
 
 # --- Frozen output and open decisions --------------------------------------------------
+- path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-262-widened-apex/certificate.json
+  reason: frozen
+  bound_by: >-
+    Original failed H279 production receipt at76e2830b4, preserved byte-for-byte with
+    exp-262's oversized-bare-integer fresh-replay refusal. The serialization-only
+    successor exp-264 has separate receipts in the current layout; it does not rewrite
+    this historical failure.
 - path: packing/atlas/known-best/video/spikes/v2-transitions/transition-stats.json
   reason: frozen
   bound_by: >-

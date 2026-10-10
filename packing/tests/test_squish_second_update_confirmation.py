@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import functools
 import gzip
 import json
 import lzma
@@ -18,6 +19,18 @@ from devtools import squish_second_update_house_links as house
 SOURCE = confirmation.REPO
 PACKET_RELATIVE = confirmation.PACKET.relative_to(SOURCE)
 PROOFS_RELATIVE = confirmation.WITNESSES.relative_to(SOURCE)
+
+
+@functools.cache
+def previous_source_case(n: int) -> str:
+    """Read the complete previous source when Gupta now owns the current case."""
+    from devtools import register_gupta_reports as gupta  # noqa: PLC0415
+
+    if gupta.HISTORY.exists():
+        for row in gupta.read_history():
+            if row["n"] == n:
+                return row["frontier"]
+    return (SOURCE / f"packing/frontier/n-{n:03d}.md").read_text()
 
 
 @pytest.fixture
@@ -166,20 +179,20 @@ def test_admission_normalizes_each_fact_once_and_rechecks_next_call(
 ) -> None:
     assert private == confirmation.REPO
     parsed: list[int] = []
-    parse_source = confirmation.original.parse_source
+    parse_source_bytes = confirmation.original.parse_source_bytes
     checker_input = confirmation.original.checker_input
     checked_inputs = 0
 
-    def counted(path: Path, expected_n: int) -> tuple[dict, bytes]:
+    def counted(raw: bytes, expected_n: int) -> tuple[dict, bytes]:
         parsed.append(expected_n)
-        return parse_source(path, expected_n)
+        return parse_source_bytes(raw, expected_n)
 
     def counted_input(value: dict, *, receipt: bool = False) -> dict:
         nonlocal checked_inputs
         checked_inputs += 1
         return checker_input(value, receipt=receipt)
 
-    monkeypatch.setattr(confirmation.original, "parse_source", counted)
+    monkeypatch.setattr(confirmation.original, "parse_source_bytes", counted)
     monkeypatch.setattr(confirmation.original, "checker_input", counted_input)
     for _ in range(2):
         parsed.clear()
@@ -238,6 +251,48 @@ def linked_proofs(private: Path) -> Path:
     confirmation.WITNESSES.rename(store)
     confirmation.WITNESSES.symlink_to(store, target_is_directory=True)
     return private
+
+
+def test_linked_proof_batch_checks_all_complete_proofs(linked_proofs: Path) -> None:
+    proof_paths = [
+        confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
+        for n in confirmation.NUMBERS
+    ]
+    invalid_paths = [
+        "packing/witnesses/squish-422-second-update-2026/n-089-rational.yaml.gz",
+        "../outside.yaml",
+        "/outside.yaml",
+    ]
+    paths = proof_paths + invalid_paths
+    batched = confirmation.linked_certificate_problems(paths, repository=linked_proofs)
+    assert set(batched) == set(paths)
+    assert all(batched[path] is None for path in proof_paths)
+    assert all(batched[path] for path in invalid_paths)
+    assert all(confirmation.linked_certificate_problems(paths, repository=SOURCE).values())
+
+
+def test_linked_proof_standalone_checks_complete_proof_and_invalid_paths(
+    linked_proofs: Path,
+) -> None:
+    # One complete proof exercises the wrapper's full nine-source admission. The
+    # mutation tests below compare both APIs again on misbound and unchanged proofs.
+    proof_path = (
+        confirmation.certificate_path(confirmation.NUMBERS[0])
+        .relative_to(linked_proofs)
+        .as_posix()
+    )
+    assert confirmation.linked_certificate_problem(proof_path, repository=linked_proofs) is None
+    invalid_paths = [
+        "packing/witnesses/squish-422-second-update-2026/n-089-rational.yaml.gz",
+        "../outside.yaml",
+        "/outside.yaml",
+    ]
+    assert confirmation.linked_certificate_problems(
+        invalid_paths, repository=linked_proofs
+    ) == {
+        path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
+        for path in invalid_paths
+    }
 
 
 def test_linked_proof_batch_admits_exact_roster_and_refuses_other_escapes(
@@ -423,10 +478,19 @@ def test_xz_trailing_and_schema_contract_refused(private: Path) -> None:
 
 
 def add_house_files(private: Path) -> None:
+    rows = confirmation.admit_certification()
+    metadata = house.admitted_metadata(rows)
+    retained = private.parent / "historical-houses"
+    retained.mkdir(exist_ok=True)
     for n in confirmation.NUMBERS:
         path = house.house_path(n)
         path.parent.mkdir(parents=True, exist_ok=True)
-        source = SOURCE / path.relative_to(private)
+        witness = confirmation.original.to_witness(confirmation.read_fact(n))
+        witness.update(copy.deepcopy(metadata[n]["metadata"]))
+        source = retained / path.name
+        source.write_text(
+            confirmation.witness_document(witness, schema="../witness.schema.yaml")
+        )
         if n in house.LINK_NUMBERS:
             path.symlink_to(source)
         else:
@@ -523,7 +587,7 @@ def test_confirmed_case_adoption_preserves_lower_and_refutes_older_conjecture(
     private: Path,
 ) -> None:
     assert private == confirmation.REPO
-    current = (SOURCE / "packing/frontier/n-088.md").read_text()
+    current = previous_source_case(88)
     adapted = confirmation.adopt_verified(88, current)
     marker, end = "  rigidity:\n", "  conjectured_optimum:"
     assert (
@@ -553,7 +617,7 @@ def test_confirmed_case_adoption_preserves_lower_and_refutes_older_conjecture(
 
 def test_confirmed_case_cannot_relabel_an_unreviewed_bound(private: Path) -> None:
     assert private == confirmation.REPO
-    current = (SOURCE / "packing/frontier/n-088.md").read_text()
+    current = previous_source_case(88)
     _, front, body = current.split("---\n", 2)
     document = confirmation.safe_load(front)
     document["packing"]["verified_upper_bound"]["exact_form"] = "10"
@@ -562,3 +626,29 @@ def test_confirmed_case_cannot_relabel_an_unreviewed_bound(private: Path) -> Non
         confirmation.original.PacketError, match="differs from admitted evidence"
     ):
         confirmation.adopt_verified(88, forged)
+
+
+def test_bounded_house_validates_without_serializing_parsed_geometry(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from sqpack import witness as interchange  # noqa: PLC0415
+
+    schema = SOURCE / "packing/witnesses/witness.schema.yaml"
+    document = confirmation.safe_load((SOURCE / "packing/witnesses/grid-n004.yaml").read_text())
+    witness = document["witness"]
+    witness["certificate"]["typed_payload"] = {
+        "boolean": True,
+        "integer": 4,
+        "float": 4.25,
+        "null": None,
+        "sequence": ["1/2", False, 0],
+    }
+    path = tmp_path / "house.yaml"
+    path.write_text(interchange.witness_document(witness, schema="../witness.schema.yaml"))
+    monkeypatch.setattr(confirmation, "SCHEMA", schema)
+
+    def forbidden(*_args, **_kwargs):
+        pytest.fail("parsed house geometry was serialized again")
+
+    monkeypatch.setattr(interchange.yaml, "safe_dump", forbidden)
+    assert house.bounded_house(path) == witness

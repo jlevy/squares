@@ -90,6 +90,43 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/tests/test_confirm_gupta_records.py": (
+        "tests finite ceiling confirmation, retained prior lanes and complete custody; "
+        "a feasibility certificate confers neither s(n) nor optimality"
+    ),
+    "packing/devtools/confirm_gupta_records.py": (
+        "publishes complete admitted rational feasibility as finite upper ceilings; "
+        "preserves historical lower lanes and never claims s(n), optimality or rigidity"
+    ),
+    "packing/devtools/confirm_ryxu_records.py": (
+        "records finite upper ceilings from complete admitted exact replay, never s(n)"
+    ),
+    "packing/devtools/register_ryxu_reports.py": (
+        "preserves the historical verified ceiling while selecting a reported upper bound"
+    ),
+    "packing/tests/test_ryxu_house_links.py": (
+        "checks finite upper-bound admission and complete custody, never optimality"
+    ),
+    "packing/devtools/register_gupta_reports.py": (
+        "adopts a reported finite construction while preserving the older verified "
+        "ceiling and both lower lanes; no value is read as s(n) or optimality"
+    ),
+    "packing/tests/test_gupta_adoption.py": (
+        "checks historical ceilings and lower lanes survive complete reported adoption "
+        "and interruption; a smaller reported side gains no confirmation"
+    ),
+    "packing/devtools/register_refinement_reports.py": (
+        "registers rational source reports while preserving earlier verified ceilings; "
+        "the reported geometry and a historical ceiling never establish s(n)"
+    ),
+    "packing/tests/test_couzo_followup_reports.py": (
+        "holds each frozen comparison to the live verified finite ceiling while the report "
+        "is unadopted; a smaller side establishes neither s(n) nor adoption"
+    ),
+    "packing/devtools/confirm_refinement_records.py": (
+        "publishes accepted complete replay as a finite feasible upper ceiling; "
+        "retains historical verification and establishes no optimality or value of s(n)"
+    ),
     "packing/devtools/squish_second_update_confirmation.py": (
         "publishes the admitted complete exact replay as a feasible upper ceiling, "
         "retaining earlier ceilings and refusing optimality claims"
@@ -157,6 +194,11 @@ DECLARED_CONSUMERS = {
         "builds two case records whose ceiling is the same and checks the rendered count of "
         "changed ceilings is zero; it asserts nothing about s(n)"
     ),
+    "packing/tests/test_check_standing.py": (
+        "collects the evidence ids every case bound cites, the ceiling's among them, to find "
+        "register entries no case record cites; it reads no value of the ceiling and "
+        "asserts nothing about s(n)"
+    ),
     "packing/tests/test_catalogue_upper_bounds.py": (
         "checks that n = 69, 83 and 87 carry the ceiling their exact certificates' receipts "
         "derive and that it still trails the printed side; it asserts nothing about s(n)"
@@ -213,6 +255,14 @@ DECLARED_CONSUMERS = {
     "docs/project/reviews/review-2026-10-06-evand-exact-optima-fix-check.md": (
         "the check of that review's fixes, quoting its proposed bracket of a conjecture "
         "between the verified floor and ceiling; a ceiling, not s(n)"
+    ),
+    "packing/devtools/register_evand_arrangements.py": (
+        "adopts an exact rational feasible ceiling for the complete new #399 pose; "
+        "preserves older ceilings and poses as historical evidence, never as s(n)"
+    ),
+    "packing/tests/test_evand_arrangement_adoption.py": (
+        "checks exact ceiling/complete-pose adoption and generator preservation; "
+        "never identifies feasibility with optimality or s(n)"
     ),
     "packing/tests/test_evand_exact_certificates.py": (
         "holds a synthetic case's ceiling against conjectures inside and past half a unit "
@@ -526,6 +576,15 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
             e.startswith("E-squish-second-update-")
             for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
         )
+    }
+    from devtools import gupta_house_links as gupta  # noqa: PLC0415
+
+    pending |= {
+        n
+        for n in gupta.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == gupta.reports.SOURCE_KEY
+        and gupta.reports.EXACT_EVIDENCE
+        not in loaded_cases[n]["verified_upper_bound"]["evidence"]
     }
     interval = (
         {29}

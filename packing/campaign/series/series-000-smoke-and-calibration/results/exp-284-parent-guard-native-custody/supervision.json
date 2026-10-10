@@ -1,0 +1,27 @@
+{
+  "schema": "posix-bounded-command-supervision/v1",
+  "status": "COMPLETED",
+  "reason": "normal_exit",
+  "failure": null,
+  "argv": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/tmp/run-exp284.py"],
+  "pid": 99469,
+  "owned_pgid": 99469,
+  "returncode": 1,
+  "signal_received": null,
+  "wall_seconds": 619.3647507919814,
+  "max_seconds": 900,
+  "cleanup_seconds": 10,
+  "max_memory_mib_per_process": 4096,
+  "sample_seconds": 1,
+  "samples": 593,
+  "maximum_sampled_current_rss_bytes_by_pid": {"99469":24805376,"99471":1583874048,"5962":1189265408},
+  "rss_source": "/bin/ps RSS KiB; current resident bytes, not lifetime peak",
+  "rss_enforcement": "sampled per live process in owned group; not allocation-time hardcap",
+  "term_elapsed_seconds": 619.1607210420188,
+  "kill_elapsed_seconds": null,
+  "cleanup_complete": true,
+  "stdout": "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/stdout.log",
+  "stderr": "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/stderr.log",
+  "scope": "one owned process group; children must not escape it"
+}
+

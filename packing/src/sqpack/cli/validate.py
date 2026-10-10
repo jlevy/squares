@@ -23,6 +23,7 @@ import math
 import os
 import platform
 import re
+import shlex
 import shutil
 import signal
 import subprocess
@@ -36,7 +37,7 @@ from contextlib import contextmanager, nullcontext, suppress
 from dataclasses import asdict, dataclass, field, replace
 from datetime import UTC, datetime
 from pathlib import Path
-from threading import Lock
+from threading import Event, Lock, Thread
 from typing import Literal, Never, TextIO, override
 
 from sqpack import gate_budgets
@@ -136,10 +137,17 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: imported poses (T-113, T-114) took 364.07s. The twelve T-115 update poses were
 #: re-screened serially in 107.952s; unselected records remain unchanged. All three
 #: corpus tripwires below are the sums over the current retained square motions.
+#: The three T-117/T-118 rational refinements replace the motions at 68, 105 and 292;
+#: these are the corresponding sums from their refreshed retained numerical screen.
+#: T-119 replaces the houses at 266, 270 and 272. T-125/T-126 replace eighteen
+#: more houses. Their selected-case numerical refresh preserves every other screen
+#: row and produces these measured current aggregate tripwires.
+#: T-127 refreshes fourteen Gupta rows; all three corpus tripwires below sum their
+#: current complete retained motions, with the other 310 screen rows unchanged.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (27, 102, 86, 570),
-    "n=1..200": (66, 558, 182, 2038),
-    "n=1..324": (121, 1578, 302, 4689),
+    "n=1..100": (28, 159, 86, 631),
+    "n=1..200": (67, 558, 182, 2030),
+    "n=1..324": (121, 1593, 302, 5022),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -168,6 +176,9 @@ SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 PROCESS_TERMINATION_GRACE_SECONDS = 1.0
 DEFAULT_TIMEOUT_SECONDS = 900.0
+PROGRESS_INTERVAL_SECONDS = 30.0
+PROGRESS_NAMES_SHOWN = 8
+PROGRESS_TEXT_LIMIT = 240
 #: The tiers this command can select as a whole, and therefore the tiers that must
 #: carry a declared ceiling in `devtools/gate-budgets.yaml`. `devtools.check_gate_budgets`
 #: compares the two sets in both directions, so a tier added here without a ceiling fails
@@ -250,6 +261,13 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_frontier_table.py",
     "tests/test_site_rendering.py",
     "tests/test_site_math_preferences.py",
+)
+#: The four HTTP load/no-JS cases measure browser timing without competing browser
+#: workers from the functional layout command. Their assertions and budgets stay shared
+#: with the production checker; this changes allocation, not the measured contract.
+SITE_LOAD_BUDGET_TEST = (
+    "tests/test_site_rendering.py::"
+    "test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets"
 )
 #: Set for the step that owns them, and read by `tests.site_browser`: a Chromium that does
 #: not launch fails the test rather than skipping it.
@@ -1782,7 +1800,9 @@ def _exhaustive_exact_tests(context: Context) -> str:
 
 
 def _soundness_perimeter(context: Context) -> str:
-    output = _module(context, "devtools.check_soundness_perimeter")
+    output = _module(
+        context, "devtools.check_soundness_perimeter", "--binary", str(_engine_path(context))
+    )
     if "skipping engine cells" in output:
         raise StepSkippedError(
             "soundness perimeter did not exercise sqsearch cells",
@@ -1942,30 +1962,50 @@ def _site_url_registry(context: Context) -> str:
 
 
 def _site_layout_tests(context: Context) -> str:
-    """Measure the site's tables in the Chromium the frontend runner installs.
+    """Run functional pixel/layout checks in parallel, then load budgets serially.
 
-    `SITE_LAYOUT_TESTS` pin pixel widths, which no behavioural shard can measure, so they
-    run here, one file to an xdist worker as the quick lane runs its files, and they fail
-    rather than skip when no Chromium launches: `REQUIRE_CHROMIUM` is set for this command
-    alone, and `tests.site_browser` reads it.
+    The four native-frontier timing cases use one browser command after the functional
+    workers exit. Both commands require Chromium and retain the existing assertions;
+    serial allocation removes browser competition within this step, without promising
+    an otherwise idle host. Both phases share the original total subprocess timeout.
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()
-    return _run(
-        context,
+    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    commands = (
         (
-            sys.executable,
-            "-m",
-            "pytest",
-            "-q",
-            "-p",
-            "no:cacheprovider",
+            *common,
             *distribution,
             *loadfile,
             *SITE_LAYOUT_TESTS,
+            "-k",
+            f"not {SITE_LOAD_BUDGET_TEST.rpartition('::')[-1]}",
         ),
-        extra_environment={REQUIRE_CHROMIUM: "1"},
+        (*common, "-n", "0", SITE_LOAD_BUDGET_TEST),
     )
+    outputs: list[str] = []
+    deadline = time.monotonic() + context.timeout_seconds
+    for command in commands:
+        try:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise StepTimeoutError(
+                    "site table layout in Chromium exhausted its "
+                    f"{context.timeout_seconds:g}s subprocess budget"
+                )
+            outputs.append(
+                _run(
+                    context,
+                    command,
+                    timeout_seconds=remaining,
+                    extra_environment={REQUIRE_CHROMIUM: "1"},
+                )
+            )
+        except StepFailureError as error:
+            if outputs:
+                raise type(error)("\n".join((*outputs, str(error)))) from error
+            raise
+    return "\n".join(output for output in outputs if output)
 
 
 def _browser_code_in_files(context: Context) -> str:
@@ -2061,7 +2101,9 @@ def _type_floor(context: Context) -> str:
     """
     basedpyright = _required_tool(context, "basedpyright")
     threads = _pytest_workers(context.jobs)
-    command = (basedpyright, "--threads", str(threads)) if threads > 1 else (basedpyright,)
+    command = (basedpyright, "--pythonpath", sys.executable)
+    if threads > 1:
+        command += ("--threads", str(threads))
     output = _commands(context, (command,))
     _require_text(output, "0 errors, 0 warnings, 0 notes")
     return output
@@ -2585,10 +2627,22 @@ def _derivation(context: Context) -> str:
     return output
 
 
+def _engine_path(context: Context) -> Path:
+    """Resolve the runtime artifact from cargo's configured build directory."""
+    configured = context.environment.get("CARGO_TARGET_DIR")
+    if configured is None:
+        return ENGINE
+    target = Path(configured)
+    if not target.is_absolute():
+        target = PROJECT_ROOT / "sqsearch" / target
+    return target / "release" / "sqsearch"
+
+
 def _search_engine(context: Context) -> str:
-    if not ENGINE.is_file():
+    engine = _engine_path(context)
+    if not engine.is_file():
         raise StepSkippedError("sqsearch binary is absent")
-    output = _run(context, (str(ENGINE), "--selftest"))
+    output = _run(context, (str(engine), "--selftest"))
     _require_text(output, "SELFTEST PASSED")
     if "FAIL" in output:
         raise StepFailureError(output)
@@ -2709,11 +2763,29 @@ def _rust_n17_kernel_verifier(context: Context) -> str:
     )
     tests = _run(
         child,
-        (cargo, "test", "--locked", "--release", "--all-targets", "--quiet"),
+        (
+            cargo,
+            "test",
+            "--locked",
+            "--release",
+            "--all-targets",
+            "--quiet",
+            "--",
+            "--format",
+            "pretty",
+        ),
         cwd=N17_KERNEL_CRATE,
     )
-    # Count cargo test itself, not other commands' output. The first target is the
-    # library's 22 controls; the final integration target binds the compiled world.
+    # Count cargo test itself, not other commands' output. Required receipt tests
+    # must actually pass; the final integration target binds the compiled world.
+    for name in (
+        "receipt_publication_replaces_complete_json_and_cleans_staging",
+        "receipt_publication_write_failure_preserves_old_file",
+        "receipt_publication_rename_failure_preserves_old_file",
+        "receipt_publication_refuses_directory_collision",
+    ):
+        if re.search(rf"^test tests::{name} \.\.\. ok$", tests, re.MULTILINE) is None:
+            raise StepFailureError(f"n17 kernel verifier gate requires passing {name}")
     counts = [int(count) for count in re.findall(r"test result: ok\. (\d+) passed", tests)]
     if len(counts) < 2 or counts[0] < 22 or counts[-1] < 1:
         raise StepFailureError(
@@ -3625,6 +3697,12 @@ def _squish_second_update_certification(context: Context) -> str:
     return _module(context, "devtools.squish_second_update_confirmation", "check-certification")
 
 
+def _refinement_custody(context: Context) -> str:
+    # Admit the complete retained input/result bindings from the reviewed replay;
+    # publication and this offline check do not repeat a scientific decision.
+    return _module(context, "devtools.refinement_custody", "check")
+
+
 def _results_headline(context: Context) -> str:
     # Sub-second: one register, one document, one rubric. Records tier because it checks
     # presentation of the record -- that every registered result reaches the section a
@@ -3651,6 +3729,11 @@ def _class_record_claims(context: Context) -> str:
     # `C-n011-fractional-96-25` (review finding L3). That one is exempt by name with its
     # reason, and the exemption fails if it ever stops applying.
     return _module(context, "devtools.check_class_record_claims")
+
+
+def _fn1_original_bindings(context: Context) -> str:
+    """Complete original-input custody, without geometric replay (#366 FN-1)."""
+    return _module(context, "devtools.wand125_fn1_bindings")
 
 
 def _retained_json_layout(context: Context) -> str:
@@ -3770,11 +3853,14 @@ def _n40_rigidity_bracket(context: Context) -> str:
 
 
 def _differential(context: Context) -> str:
-    if not ENGINE.is_file():
+    engine = _engine_path(context)
+    if not engine.is_file():
         raise StepSkippedError(
             "sqsearch binary is absent; differential geometry was not checked"
         )
-    return _module(context, "devtools.check_search_differential", "20000")
+    return _module(
+        context, "devtools.check_search_differential", "20000", "--binary", str(engine)
+    )
 
 
 def _run_returncode(context: Context, command: Sequence[str]) -> int:
@@ -4582,6 +4668,19 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step("soft-schema validation", _schemas, fast=True, records=True),
+    Step(
+        "FN1 original-input bindings",
+        _fn1_original_bindings,
+        fast=True,
+        records=True,
+        touches=(
+            "packing/devtools/wand125_fn1_bindings.py",
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/retained_data.py",
+            "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/*",
+            "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/*",
+        ),
+    ),
     Step(
         "class records do not claim the unconditional bound",
         _class_record_claims,
@@ -5394,6 +5493,22 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step(
+        "rational refinement custody binds complete replay inputs",
+        _refinement_custody,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/refinement_*.py",
+            "packing/hosted/refinement-evidence-425-428-v1.yaml",
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/**",
+            "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/**",
+            "packing/witnesses/known-best/n-068.yaml",
+            "packing/witnesses/known-best/n-105.yaml",
+            "packing/witnesses/known-best/n-292.yaml",
+        ),
+    ),
+    Step(
         "result requests name registered results",
         _result_requests,
         fast=True,
@@ -5734,10 +5849,13 @@ def _push_test_step(base: str) -> Step:
                 # suite-configuration change, so the serial case was the whole non-exhaustive
                 # suite -- quick lane and slow lane together.
                 *_xdist_distribution(context.jobs),
-                *(
-                    ("--pool-workers", str(context.pool_workers))
+                # Explicit resource shapes need the same complementary pool lane as
+                # implicit broad pushes; otherwise each xdist worker inherits a pool.
+                "--pool-workers",
+                str(
+                    context.pool_workers
                     if context.pool_workers is not None
-                    else ()
+                    else context.inner_jobs
                 ),
             ),
         )
@@ -6029,6 +6147,10 @@ def _unless_verified(namespace: argparse.Namespace, selected: list[Step]) -> lis
 
 def _execute_step(step: Step, context: Context) -> StepResult:
     result = _execute_step_result(step, replace(context, step_name=step.name))
+    return _record_step_result(result, context)
+
+
+def _record_step_result(result: StepResult, context: Context) -> StepResult:
     directory = _artifact_directory(context)
     if directory is not None:
         _write_artifact(
@@ -6092,7 +6214,7 @@ def _build_engine(context: Context, selected: Sequence[Step]) -> str:
         (cargo, "build", "--locked", "--release", "--quiet"),
         cwd=PROJECT_ROOT / "sqsearch",
     )
-    suffix = "  built sqsearch/target/release/sqsearch"
+    suffix = f"  built {_engine_path(context)}"
     return f"{output}\n{suffix}".strip()
 
 
@@ -6180,6 +6302,71 @@ def _submission_order(selected: Sequence[Step]) -> list[Step]:
     )
 
 
+class _StepProgress:
+    """Live stderr diagnostics without changing the ordered final report."""
+
+    def __init__(self, total: int) -> None:
+        self.total = total
+        self.started = time.perf_counter()
+        self.completed = 0
+        self.active: dict[str, float] = {}
+        self.lock = Lock()
+
+    def report(self) -> None:
+        with self.lock:
+            now = time.perf_counter()
+            names = sorted(self.active)
+            active = "; ".join(
+                f"{name[:PROGRESS_TEXT_LIMIT]} ({now - self.active[name]:.0f}s)"
+                for name in names[:PROGRESS_NAMES_SHOWN]
+            )
+            if len(names) > PROGRESS_NAMES_SHOWN:
+                active += f"; +{len(names) - PROGRESS_NAMES_SHOWN} more"
+            print(
+                f"== validation progress: {self.completed}/{self.total} complete, "
+                f"{now - self.started:.0f}s elapsed; active: {active or 'starting'} ==",
+                file=sys.stderr,
+                flush=True,
+            )
+
+    def execute(self, step: Step, context: Context) -> StepResult:
+        with self.lock:
+            self.active[step.name] = time.perf_counter()
+        try:
+            result = _execute_step(step, context)
+        finally:
+            with self.lock:
+                del self.active[step.name]
+        with self.lock:
+            self.completed += 1
+            if result.status == "failed":
+                reason = " ".join(result.reason.split())[:PROGRESS_TEXT_LIMIT]
+                print(
+                    f"== validation failed: {result.name} ({result.seconds:.1f}s): {reason} ==",
+                    file=sys.stderr,
+                    flush=True,
+                )
+        return result
+
+
+@contextmanager
+def _validation_progress(total: int) -> Iterator[_StepProgress]:
+    progress = _StepProgress(total)
+    stopped = Event()
+
+    def heartbeat() -> None:
+        while not stopped.wait(PROGRESS_INTERVAL_SECONDS):
+            progress.report()
+
+    thread = Thread(target=heartbeat, name="validation-progress", daemon=True)
+    thread.start()
+    try:
+        yield progress
+    finally:
+        stopped.set()
+        thread.join()
+
+
 def _run_selected(
     selected: Sequence[Step],
     context: Context,
@@ -6202,7 +6389,7 @@ def _run_selected(
     else:
         print("== no gate marker: every selected step is read-only and edit-tier ==")
         activity = nullcontext(enter_result=False)
-    with activity as reserved:
+    with activity as reserved, _validation_progress(len(selected)) as progress:
         if exclusive is not None and not mandatory_marker and not reserved:
             # A full gate already owns the load lock. Preserve the narrow floor's
             # non-refusal and its prior conservative pytest allocation.
@@ -6226,7 +6413,7 @@ def _run_selected(
         by_name: dict[str, StepResult] = {}
         with ThreadPoolExecutor(max_workers=context.jobs) as pool:
             futures = {
-                pool.submit(_execute_step, step, context): step.name
+                pool.submit(progress.execute, step, context): step.name
                 for step in _submission_order(selected)
                 if step is not exclusive
             }
@@ -6239,7 +6426,16 @@ def _run_selected(
                     future.cancel()
                 context.processes.stop()
                 raise
-        if exclusive is not None:
+        if exclusive is not None and any(
+            result.status == "failed" or (context.strict and result.status == "skipped")
+            for result in by_name.values()
+        ):
+            reason = "reachable tests not run: prerequisite edit checks did not pass"
+            by_name[exclusive.name] = _record_step_result(
+                StepResult(exclusive.name, "skipped", 0.0, reason=reason), context
+            )
+            print(f"== {reason} ==", file=sys.stderr, flush=True)
+        elif exclusive is not None:
             # All edit work has finished, including nested command pools, before pytest
             # claims the host. Its own descendants receive a one-worker PACK_JOBS cap.
             test_context = replace(
@@ -6251,7 +6447,7 @@ def _run_selected(
                 pool_workers=_pytest_workers(1),
             )
             try:
-                by_name[exclusive.name] = _execute_step(exclusive, test_context)
+                by_name[exclusive.name] = progress.execute(exclusive, test_context)
             except BaseException:
                 context.processes.stop()
                 raise
@@ -7111,6 +7307,29 @@ def _exhaustive_shard(value: str | None) -> str:
     return f"{index}/{count}"
 
 
+def _validate_pytest_environment() -> None:
+    options = os.environ.get("PYTEST_ADDOPTS", "")
+    try:
+        arguments = shlex.split(options)
+    except ValueError as error:
+        raise UsageError(f"PYTEST_ADDOPTS cannot be parsed: {error}") from error
+    for index, argument in enumerate(arguments):
+        value = ""
+        if argument in ("-o", "--override-ini") and index + 1 < len(arguments):
+            value = arguments[index + 1]
+        elif argument.startswith("--override-ini="):
+            value = argument.removeprefix("--override-ini=")
+        elif argument.startswith("-o"):
+            value = argument[2:].removeprefix("=")
+        if value.partition("=")[0].strip() == "cache_dir":
+            raise UsageError(
+                "PYTEST_ADDOPTS overrides cache_dir, which breaks nested pytest probes "
+                "that disable cacheprovider (Unknown config option: cache_dir). "
+                "Remove only that override from PYTEST_ADDOPTS; use --basetemp for "
+                "temporary test directories or a cache_dir option on a direct pytest run."
+            )
+
+
 def _validate_runtime() -> None:
     if sys.version_info[:2] != SUPPORTED_PYTHON:
         raise UsageError(f"Python 3.14 is required, running {sys.version.split()[0]}")
@@ -7170,6 +7389,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             else DEFAULT_TIMEOUT_SECONDS
         )
         _validate_runtime()
+        _validate_pytest_environment()
         require_project_root(PROJECT_ROOT)
         selected = _select_steps(
             only=namespace.only,

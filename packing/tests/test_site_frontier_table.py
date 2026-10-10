@@ -50,7 +50,7 @@ WIDTHS = (1280, 1024, 768, 390)
 #: verified bound beside the reported one was n = 51's, 37/5 and from the morning of 6
 #: October 2977/400 (T-070), until sqverify-fast decided its own certificate (T-090) later
 #: that day, and is n = 96's since.
-CASES = (1, 5, 11, 12, 96, 230)
+CASES = (1, 5, 11, 12, 51, 70, 96, 108, 230)
 ROWS = [f"n-{n}" for n in CASES]
 #: The drawing's side before it had a column: 2.6rem.
 OLD_THUMB = 41.6

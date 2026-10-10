@@ -469,6 +469,7 @@ def coverage_text(text: str) -> str:
     coverage = safe_load(text)
     from devtools.source_supersession import (  # noqa: PLC0415
         preserve_other_coverage,
+        replace_coverage_list,
         superseded_counts,
     )
 
@@ -528,19 +529,11 @@ def coverage_text(text: str) -> str:
             }
         )
     superseded.sort(key=lambda entry: (entry["n"], entry["source_id"]))
-    text = re.sub(
-        r"^selected_overrides:.*\n(?:(?:  |    ).*\n)*",
-        lambda _match: coverage_entries("selected_overrides", overrides),
-        text,
-        count=1,
-        flags=re.MULTILINE,
+    text = replace_coverage_list(
+        text, "selected_overrides", coverage_entries("selected_overrides", overrides)
     )
-    text = re.sub(
-        r"^superseded_reports:.*\n(?:(?:  |    ).*\n)*",
-        lambda _match: coverage_entries("superseded_reports", superseded),
-        text,
-        count=1,
-        flags=re.MULTILINE,
+    text = replace_coverage_list(
+        text, "superseded_reports", coverage_entries("superseded_reports", superseded)
     )
     return preserve_other_coverage(original, text, counts)
 

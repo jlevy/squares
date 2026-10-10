@@ -109,6 +109,11 @@ class Rows(HTMLParser):
 
 
 @pytest.fixture(scope="module")
+def frontier_math_counts() -> tuple[int, int]:
+    return site_renders.frontier_math_counts()
+
+
+@pytest.fixture(scope="module")
 def page() -> str:
     return site_renders.html("frontier.html")
 
@@ -597,12 +602,19 @@ def test_a_row_opens_its_case_record(cases: dict[int, dict[str, Any]]) -> None:
     assert "<details" not in table
 
 
-def test_no_math_is_left_as_source_text_in_the_table(page: str) -> None:
+def test_no_math_is_left_as_source_text_in_the_table(
+    page: str, frontier_math_counts: tuple[int, int]
+) -> None:
     table = page[page.index("<tbody>") : page.index("</tbody>")]
     assert "$" not in table
     assert "sqrt(" not in table
     assert 'class="katex"' not in table
-    assert table.count("<math ") == table.count('data-site-native-math="frontier"') > 300
+    assert (
+        table.count("<math ")
+        == table.count('data-site-native-math="frontier"')
+        == frontier_math_counts[0]
+        > 0
+    )
     prose = page[: page.index("<tbody>")] + page[page.index("</tbody>") :]
     assert prose.count('data-kpress-math="inline"') == 9
     assert 'class="katex"' in prose
@@ -631,6 +643,24 @@ def test_the_frontier_inputs_are_render_inputs() -> None:
 )
 def test_exact_forms_render_as_latex(form: str, tex: str) -> None:
     assert tables.latex(form) == tex
+
+
+def test_long_rational_bounds_fit_without_losing_the_exact_form() -> None:
+    form = "85052083333333333333333/10000000000000000000000"
+    bound = {"value": "8.5052083333333333333333", "exact_form": form}
+    original = dict(bound)
+    assert len(tables.latex(form)) <= frontier.VALUE_SHOWN
+    shown = frontier.value_html(bound)
+    assert 'class="site-decimal"' in shown
+    assert "kpress-math" not in shown
+    assert f'title="{form}"' in shown
+    assert "8.50520833…" in shown
+    assert frontier.bound_approx_html(bound) == ""
+    assert bound == original
+    for short in ("643/41", "(16+5sqrt(2))/3"):
+        item = {"value": "1", "exact_form": short}
+        assert "kpress-math" in frontier.value_html(item)
+        assert frontier.bound_approx_html(item)
 
 
 def test_a_polynomial_root_has_no_closed_form() -> None:
@@ -717,3 +747,32 @@ def test_shared_frontier_helpers_keep_prepared_katex_unless_table_opts_in(cases)
     ):
         assert 'data-site-native-math="frontier"' in rendered
         assert "katex-html" not in rendered
+
+
+def test_frontier_formula_oracle_refuses_missing_rows_and_invalid_math() -> None:
+    formula = (
+        '<span class="kpress-math" data-site-native-math="frontier">'
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn></math></span>'
+    )
+    rows = "".join(
+        f'<tr id="n-{n}"><td>{formula if n == 1 else ""}</td></tr>' for n in range(1, 325)
+    )
+    source = (
+        '<table id="frontier-table"><tbody>'
+        + rows
+        + "</tbody></table>"
+        + '<span class="kpress-math">prose</span>' * 9
+    )
+    assert site_renders.count_frontier_math(source) == (1, 10)
+    for mutant in (
+        source.replace('<tr id="n-324"><td></td></tr>', ""),
+        source.replace("<mn>1</mn>", "<mn></mn>"),
+        source.replace("<mn>1</mn>", "<merror><mn>1</mn></merror>"),
+        source.replace(
+            "</math>",
+            '</math><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn></math>',
+        ),
+        source.replace("http://www.w3.org/1998/Math/MathML", "invalid-namespace"),
+    ):
+        with pytest.raises(AssertionError):
+            site_renders.count_frontier_math(mutant)

@@ -1,0 +1,128 @@
+{
+  "schema": "n17-two-center-children-mechanical-review/v1",
+  "reviewed_at": "2026-10-07T21:19:19.161112+00:00",
+  "experiment": "exp-295",
+  "method": "retained metadata, byte identities and exact serialized payload comparison; no geometry rerun",
+  "status": "criterion_missed",
+  "criterion_met": false,
+  "fresh_verification_passed": true,
+  "mathematical_payload_equal": true,
+  "accepted_input_byte_joins": {
+    "guard_descriptor": true,
+    "guard_certificate": true,
+    "guard_replay": true
+  },
+  "accepted_inputs_equal_descriptor": true,
+  "parent_custody_equal_accepted_exp293": true,
+  "all17_endpoint_premise_equal_accepted_exp293": true,
+  "original_rows_inherited": 1056,
+  "foreign_rows_reconstructed_from_accepted_domains": 992,
+  "selection": {
+    "axis": 0,
+    "candidate_count": 20,
+    "child_squared_diagonals": [
+      "167129/250000",
+      "365775201332720189/587104581756250000"
+    ],
+    "midpoint": "471/250",
+    "owner": 18,
+    "tie_order": "score,owner,axis(x_before_y)",
+    "worst_child_squared_diagonal": "167129/250000"
+  },
+  "children": [
+    {
+      "side": -1,
+      "closed": false,
+      "closure": null,
+      "row_count": 64,
+      "empty_rows": 0,
+      "owned_vertex_count": 56,
+      "intrinsic_diagonal_below_one": true,
+      "all64_interval_reference_records_equal_accepted_parent": true
+    },
+    {
+      "side": 1,
+      "closed": false,
+      "closure": null,
+      "row_count": 64,
+      "empty_rows": 0,
+      "owned_vertex_count": 105,
+      "intrinsic_diagonal_below_one": true,
+      "all64_interval_reference_records_equal_accepted_parent": true
+    }
+  ],
+  "both_point_children_closed": false,
+  "regional_context_started": false,
+  "regional_skip_reason": "complete_fixed_split_point_miss_monotonic_inclusion",
+  "new_child_work": {
+    "generated_clip_vertices": 10519,
+    "intersection_vertex_pairs": 29302
+  },
+  "new_recovery_work": {
+    "context_piece_baseline": 0,
+    "fastpath_support_products": 0,
+    "generated_clip_output_vertices": 0,
+    "intersection_vertex_pairs": 0,
+    "minimum_support_products": 9216,
+    "raw_minkowski_vertex_products": 0,
+    "retained_conditional_pieces": 0,
+    "strict_quadratic_checks": 191744,
+    "strict_vertex_pairs": 47936,
+    "subtraction_branches": 0
+  },
+  "all_scope_proof_flags": {
+    "capture_proved": false,
+    "census_admission_proved": false,
+    "conditional_I_exclusion_proved": false,
+    "conditional_endpoint_retention_proved": false,
+    "declared_guard_exclusion_proved": false,
+    "fresh_point_parent_replay": false,
+    "global_optimality_proved": false,
+    "mask_exclusion_proved": false,
+    "new_producer_run": false,
+    "parent_exclusion_proved": false,
+    "parent_geometry_replayed": false,
+    "point_guard_exclusion_proved": false,
+    "root_checked_now": false,
+    "seventeen_square_packing_proved": false
+  },
+  "resource_observations": {
+    "status": "COMPLETED",
+    "reason": "normal_exit",
+    "returncode": 0,
+    "wall_seconds": 23.770477665995713,
+    "max_seconds": 360.0,
+    "max_memory_mib_per_process": 4096.0,
+    "samples": 85,
+    "maximum_sampled_current_rss_bytes_by_pid": {
+      "36961": 28753920,
+      "36963": 311001088,
+      "37330": 304840704
+    },
+    "rss_source": "/bin/ps RSS KiB; current resident bytes, not lifetime peak",
+    "rss_enforcement": "sampled per live process in owned group; not allocation-time hardcap",
+    "cleanup_complete": true
+  },
+  "phase_wall_seconds": {
+    "construction": 11.804273209010717,
+    "fresh_verification": 11.634983875032049
+  },
+  "phase_argv_equal_manifest": [
+    true,
+    true
+  ],
+  "phase_manifest_byte_join": true,
+  "source_commit": "d68a3fd24a2dc86580c02f5fba922228a88782c1",
+  "relevant_provenance_dirty": false,
+  "overall_launch_dirty": true,
+  "launch_metadata_path_correction": "Initial launch-only source status query used repository-relative paths from packing cwd; corrected repository-root query is clean. Scientific modules and frozen criterion did not change.",
+  "retained_bytes": {
+    "certificate.json": 58322,
+    "replay.json": 58468,
+    "descriptor.json": 761,
+    "execution-manifest.json": 4429,
+    "launch.json": 1204
+  },
+  "scientific_interpretation": "completed miss of the frozen two-child regional recipe; not a packing counterexample or global exclusion",
+  "semantic_review": "Astra actual semantic acceptance CLEAR: completed fixed-split method miss; not a packing contradiction."
+}

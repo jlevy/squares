@@ -19,11 +19,13 @@ from collections.abc import Callable, Mapping, Sequence
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from textwrap import dedent
-from threading import Barrier, Lock
-from typing import Any
+from threading import Barrier, Event, Lock
+from threading import enumerate as enumerate_threads
+from typing import Any, override
 
 import pytest
 
+from devtools import check_search_differential, reachable_tests
 from sqpack import gate_budgets
 from sqpack.cli import validate
 from sqpack.cli.validate import main
@@ -442,7 +444,7 @@ def test_run_ordinary_action_inherits_context_timeout(
         encoding="utf-8",
     )
     engine.chmod(0o755)
-    monkeypatch.setattr(validate, "ENGINE", engine)
+    monkeypatch.setattr(validate, "_engine_path", lambda _context: engine)
     context = validate.Context(
         deep=False,
         strict=False,
@@ -489,7 +491,7 @@ def test_run_selected_interrupt_stops_detached_production_process(
         encoding="utf-8",
     )
     engine.chmod(0o755)
-    monkeypatch.setattr(validate, "ENGINE", engine)
+    monkeypatch.setattr(validate, "_engine_path", lambda _context: engine)
     context = validate.Context(
         deep=False,
         strict=False,
@@ -980,7 +982,11 @@ def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
 
     def run_here(context: validate.Context, command: tuple[str, ...]) -> str:
         commands.append(command)
-        return run(context, command, cwd=tmp_path)
+        return run(
+            context,
+            (*command, "--basetemp", str(tmp_path / f"child-pytest-tmp-{len(commands)}")),
+            cwd=tmp_path,
+        )
 
     monkeypatch.setattr(validate, "_run", run_here)
     monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
@@ -988,6 +994,9 @@ def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
     environment = os.environ.copy()
     for name in ("PYTEST_ADDOPTS", "PYTEST_XDIST_WORKER", "PACKING_VALIDATION_ARTIFACT_DIR"):
         environment.pop(name, None)
+    inherited_temp = tmp_path / "unusable-shared-pytest-temp"
+    inherited_temp.write_text("child probes must not use the shared numbered temp root")
+    environment["PYTEST_DEBUG_TEMPROOT"] = str(inherited_temp)
     context = validate.Context(
         deep=False,
         strict=False,
@@ -2870,6 +2879,8 @@ def test_push_tests_forward_the_shared_worker_allocation(
             "origin/main",
             "-n",
             "4",
+            "--pool-workers",
+            "1",
         )
     ]
 
@@ -2903,6 +2914,58 @@ def test_exclusive_push_forwards_pytest_and_pool_worker_allocations(
 
     assert validate._push_test_step("origin/main").action(context) == "selected tests passed"
     assert commands[0][-4:] == ("-n", "10", "--pool-workers", "10")
+
+
+def test_explicit_push_runs_complementary_normal_and_exclusive_pool_lanes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Retain both selected files without nested pools in each xdist worker."""
+
+    monkeypatch.delenv("PACKING_REACHABLE_TEST_ARTIFACT_STEM", raising=False)
+    monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 4)
+    monkeypatch.setattr(reachable_tests, "changed_paths", lambda _base: [])
+    monkeypatch.setattr(
+        reachable_tests,
+        "select_tests",
+        lambda _paths: reachable_tests.TestSelection(
+            everything=False,
+            reason="synthetic selected files",
+            tests=("packing/tests/test_normal.py", "packing/tests/test_pooled.py"),
+        ),
+    )
+    calls: list[tuple[tuple[str, ...], str]] = []
+
+    def subprocess_run(
+        command: Sequence[str], **kwargs: Any
+    ) -> subprocess.CompletedProcess[str]:
+        if "--summary" in command:
+            return subprocess.CompletedProcess(command, 0, stdout="narrow 2\n", stderr="")
+        calls.append((tuple(command), kwargs["env"]["PACK_JOBS"]))
+        return subprocess.CompletedProcess(command, 0)
+
+    def execute(_context: validate.Context, command: tuple[str, ...]) -> str:
+        assert reachable_tests.main(command[3:]) == 0
+        return "both lanes passed"
+
+    monkeypatch.setattr(validate.subprocess, "run", subprocess_run)
+    monkeypatch.setattr(validate, "_run", execute)
+    context = validate.Context(
+        deep=False, strict=False, jobs=3, inner_jobs=2, environment=os.environ.copy()
+    )
+    step = validate._push_test_step("origin/main")
+    assert step.budget_seconds is None
+    assert step.action(context) == "both lanes passed"
+    assert len(calls) == 2
+    normal, pooled = calls
+    assert normal[1] == "1"
+    assert pooled[1] == "2"
+    assert normal[0][normal[0].index("-m", 3) + 1] == "not exhaustive_exact and not pool_heavy"
+    assert pooled[0][pooled[0].index("-m", 3) + 1] == "not exhaustive_exact and pool_heavy"
+    assert normal[0][normal[0].index("-n") + 1] == "4"
+    assert "-n" not in pooled[0]
+    for command, _jobs in calls:
+        assert "tests/test_normal.py" in command
+        assert "tests/test_pooled.py" in command
 
 
 @pytest.mark.parametrize(
@@ -2987,6 +3050,109 @@ def test_implicit_large_push_reserves_an_exclusive_test_phase(
     )
 
 
+@pytest.mark.parametrize(
+    "options",
+    [
+        "-o cache_dir=/tmp/cache",
+        "-ocache_dir=/tmp/cache",
+        "-o=cache_dir=/tmp/cache",
+        "--override-ini cache_dir=/tmp/cache",
+        "--override-ini=cache_dir=/tmp/cache",
+        '-q -o "cache_dir=/tmp/cache with spaces"',
+    ],
+)
+def test_cache_dir_environment_override_is_rejected_before_selection(
+    options: str, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("PYTEST_ADDOPTS", options)
+
+    def select(**_arguments: object) -> list[validate.Step]:
+        pytest.fail("invalid environment must be rejected before selecting or running gates")
+
+    monkeypatch.setattr(validate, "_select_steps", select)
+    status, stdout, stderr = _invoke("--push")
+    assert status == 2
+    assert stdout == ""
+    assert "Unknown config option: cache_dir" in stderr
+    assert "Remove only that override" in stderr
+    assert os.environ["PYTEST_ADDOPTS"] == options
+
+
+def test_pytest_environment_guard_preserves_other_options_and_reports_bad_quoting(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    options = '-q -o "log_cli=true" --override-ini=cache_dir_suffix=harmless'
+    monkeypatch.setenv("PYTEST_ADDOPTS", options)
+    validate._validate_pytest_environment()
+    assert os.environ["PYTEST_ADDOPTS"] == options
+    monkeypatch.setenv("PYTEST_ADDOPTS", "-o 'unfinished")
+    status, _stdout, stderr = _invoke("--edit")
+    assert status == 2
+    assert "PYTEST_ADDOPTS cannot be parsed" in stderr
+
+
+@pytest.mark.parametrize("exclusive", [False, True])
+def test_progress_reports_active_steps_and_failures_before_the_run_finishes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, exclusive: bool
+) -> None:
+    """Short event-controlled workers prove both phases remain observable."""
+    monkeypatch.setattr(validate, "ACTIVITY_MARKER", tmp_path / ".gate-running")
+    monkeypatch.setattr(validate, "PROGRESS_INTERVAL_SECONDS", 0.01)
+    failure_reported = Event()
+    heartbeat_reported = Event()
+    rendezvous = Barrier(2, timeout=2)
+
+    class LiveStderr(io.StringIO):
+        @override
+        def write(self, text: str, /) -> int:
+            written = super().write(text)
+            if "validation failed: failed edit" in text:
+                failure_reported.set()
+            if "active: still running" in text:
+                heartbeat_reported.set()
+            return written
+
+    def running(_context: validate.Context) -> str:
+        if not exclusive:
+            rendezvous.wait()
+            assert failure_reported.wait(2), "failure was hidden until final reporting"
+        assert heartbeat_reported.wait(2), "active step received no heartbeat"
+        return "running output"
+
+    def failed(_context: validate.Context) -> str:
+        rendezvous.wait()
+        raise validate.StepFailureError("prompt failure reason")
+
+    steps = [validate.Step("still running", running, fast=True)]
+    if not exclusive:
+        steps.append(validate.Step("failed edit", failed, fast=True))
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=2,
+        inner_jobs=1,
+        environment={},
+        exclusive_step_name="still running" if exclusive else "",
+    )
+    stdout = io.StringIO()
+    stderr = LiveStderr()
+    with redirect_stdout(stdout), redirect_stderr(stderr):
+        summary = validate._run_selected(steps, context, [])
+        assert "running output" not in stdout.getvalue()
+        status = validate._render_text(summary, strict=False)
+    assert status == (0 if exclusive else 1)
+    assert "validation progress:" in stderr.getvalue()
+    assert "still running (" in stderr.getvalue()
+    assert "running output" not in stderr.getvalue()
+    assert [result.name for result in summary.results] == [step.name for step in steps]
+    assert not any(thread.name == "validation-progress" for thread in enumerate_threads())
+    if not exclusive:
+        assert "prompt failure reason" in stderr.getvalue()
+        assert stdout.getvalue().index("running output") < stdout.getvalue().index(
+            "== failed edit =="
+        )
+
+
 def test_exclusive_push_phase_waits_for_parallel_edits_and_keeps_one_report_order(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -3049,16 +3215,23 @@ def test_exclusive_push_phase_waits_for_parallel_edits_and_keeps_one_report_orde
     assert not marker.exists()
 
 
-def test_exclusive_push_phase_keeps_edit_failures_and_runs_the_remaining_check(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+@pytest.mark.parametrize(("strict", "prerequisite"), [(False, "failed"), (True, "skipped")])
+def test_exclusive_push_phase_keeps_edit_failures_and_skips_reachable_tests(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    strict: bool,
+    prerequisite: str,
 ) -> None:
     monkeypatch.setattr(validate, "ACTIVITY_MARKER", tmp_path / ".gate-running")
 
     def failed(_context: validate.Context) -> str:
+        if prerequisite == "skipped":
+            raise validate.StepSkippedError("edit check refused")
         raise validate.StepFailureError("edit check refused")
 
     def selected(_context: validate.Context) -> str:
-        return "selected tests passed"
+        pytest.fail("reachable tests must wait for successful edit checks")
 
     steps = [
         validate.Step("edit check", failed, fast=True),
@@ -3066,20 +3239,33 @@ def test_exclusive_push_phase_keeps_edit_failures_and_runs_the_remaining_check(
     ]
     context = validate.Context(
         deep=False,
-        strict=False,
+        strict=strict,
         jobs=2,
         inner_jobs=1,
-        environment={"PACK_JOBS": "1"},
+        environment={
+            "PACK_JOBS": "1",
+            "PACKING_VALIDATION_ARTIFACT_DIR": str(tmp_path / "artifacts"),
+        },
         exclusive_step_name="reachable behavioral tests",
     )
 
     summary = validate._run_selected(steps, context, [])
 
     assert [(result.name, result.status) for result in summary.results] == [
-        ("edit check", "failed"),
-        ("reachable behavioral tests", "passed"),
+        ("edit check", prerequisite),
+        ("reachable behavioral tests", "skipped"),
     ]
     assert "edit check refused" in summary.results[0].reason
+    assert "prerequisite edit checks did not pass" in summary.results[1].reason
+    assert summary.selected_count == 2
+    assert validate._summary_status(summary, strict=strict) == 1
+    receipts = [
+        json.loads(path.read_text()) for path in (tmp_path / "artifacts").glob("step-*.json")
+    ]
+    assert {receipt["name"]: receipt["status"] for receipt in receipts} == {
+        "edit check": prerequisite,
+        "reachable behavioral tests": "skipped",
+    }
 
 
 def test_large_narrow_push_keeps_its_floor_when_a_full_gate_holds_the_marker(
@@ -3178,6 +3364,7 @@ def test_exclusive_push_interrupt_stops_run_and_releases_marker(
         validate._run_selected([step], context, [])
     assert context.processes.stopping
     assert not marker.exists()
+    assert not any(thread.name == "validation-progress" for thread in enumerate_threads())
 
 
 def test_exclusive_push_refuses_an_absent_selected_step() -> None:
@@ -3817,8 +4004,10 @@ def test_a_verified_merge_repeats_everything_not_positively_tree_reusable() -> N
         # The new native crate is not yet classified as tree-reusable.
         "n17 kernel verifier (Rust)",
         # New custody checks repeat until their tree reuse is explicitly classified.
+        "FN1 original-input bindings",
         "SQUISH update certification binds complete reviewed inputs",
         "SQUISH second update certification binds complete reviewed inputs",
+        "rational refinement custody binds complete replay inputs",
     }
 
     # Fail closed: a new fast step is repeated until explicitly classified.
@@ -4057,18 +4246,16 @@ def test_a_frontend_job_without_chromium_is_detected() -> None:
     assert _installs_chromium(document["jobs"]["validate"], pull_request=False)
 
 
-def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
+def _captured_site_layout_commands(
     monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """The step fails rather than skips when no Chromium launches: it sets the name
-    `tests.site_browser` reads, for its command alone, and runs exactly the files the
-    quick lane ignores, one to a worker as the quick lane runs its own."""
-    observed: dict[str, Any] = {}
+) -> tuple[list[tuple[str, ...]], list[object], str]:
+    commands: list[tuple[str, ...]] = []
+    environments: list[object] = []
 
     def capture(_context: validate.Context, command: Sequence[str], **options: Any) -> str:
-        observed["command"] = tuple(command)
-        observed["environment"] = options.get("extra_environment")
-        return ""
+        commands.append(tuple(command))
+        environments.append(options.get("extra_environment"))
+        return f"command {len(commands)} passed"
 
     monkeypatch.setattr(validate, "_run", capture)
     monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
@@ -4079,21 +4266,172 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
         inner_jobs=1,
         environment=os.environ.copy(),
     )
-    validate._site_layout_tests(context)
-    assert observed["command"] == (
-        sys.executable,
-        "-m",
-        "pytest",
-        "-q",
-        "-p",
-        "no:cacheprovider",
-        "-n",
-        "2",
-        "--dist=loadfile",
-        *validate.SITE_LAYOUT_TESTS,
-    )
-    assert observed["environment"] == {validate.REQUIRE_CHROMIUM: "1"}
+    output = validate._site_layout_tests(context)
+    return commands, environments, output
+
+
+def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Keep functional layout parallel and the four load-budget cases serial."""
+    commands, environments, output = _captured_site_layout_commands(monkeypatch)
+    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    assert commands == [
+        (
+            *common,
+            "-n",
+            "2",
+            "--dist=loadfile",
+            *validate.SITE_LAYOUT_TESTS,
+            "-k",
+            "not test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets",
+        ),
+        (
+            *common,
+            "-n",
+            "0",
+            validate.SITE_LOAD_BUDGET_TEST,
+        ),
+    ]
+    assert environments == [{validate.REQUIRE_CHROMIUM: "1"}] * 2
+    assert output == "command 1 passed\ncommand 2 passed"
     assert validate.REQUIRE_CHROMIUM == site_browser.REQUIRED
+
+
+def test_site_layout_commands_partition_the_original_collection(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Neither phase may drop, repeat, or widen the existing four timing cases."""
+    commands, _environments, _output = _captured_site_layout_commands(monkeypatch)
+    assert len(commands) == 2
+
+    def collect(command: Sequence[str]) -> set[str]:
+        # Collection needs no xdist worker: preserve selection, remove allocation.
+        serial = [
+            argument
+            for index, argument in enumerate(command)
+            if argument != "-n"
+            and not argument.startswith("--dist=")
+            and (index == 0 or command[index - 1] != "-n")
+        ]
+        completed = subprocess.run(
+            (*serial, "-n", "0", "--collect-only"),
+            cwd=validate.PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=30,
+        )
+        return {line for line in completed.stdout.splitlines() if line.startswith("tests/")}
+
+    original = collect(
+        (
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            "-p",
+            "no:cacheprovider",
+            *validate.SITE_LAYOUT_TESTS,
+        )
+    )
+    parallel, serial = (collect(command) for command in commands)
+    assert serial == {
+        f"tests/test_site_rendering.py::"
+        f"test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets[{case}]"
+        for case in ("390-light", "390-dark", "1280-light", "1280-dark")
+    }
+    assert original == parallel | serial
+    assert not parallel & serial
+
+
+@pytest.mark.parametrize("failure_index", [0, 1])
+@pytest.mark.parametrize("error_type", [validate.StepFailureError, validate.StepTimeoutError])
+def test_site_layout_command_failure_keeps_prior_output_and_stops(
+    monkeypatch: pytest.MonkeyPatch,
+    failure_index: int,
+    error_type: type[validate.StepFailureError],
+) -> None:
+    """A failed layout or timing command cannot become a passing combined step."""
+    calls = 0
+
+    def fail(_context: validate.Context, _command: Sequence[str], **_options: Any) -> str:
+        nonlocal calls
+        index = calls
+        calls += 1
+        if index == failure_index:
+            raise error_type("browser command failed")
+        return "functional layout passed"
+
+    monkeypatch.setattr(validate, "_run", fail)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+    with pytest.raises(error_type, match="browser command failed") as failed:
+        validate._site_layout_tests(context)
+    assert calls == failure_index + 1
+    if failure_index:
+        assert "functional layout passed" in str(failed.value)
+
+
+@pytest.mark.parametrize("timeout_seconds", [7.0, 900.0])
+def test_site_layout_commands_share_the_original_total_timeout(
+    monkeypatch: pytest.MonkeyPatch, timeout_seconds: float
+) -> None:
+    """Splitting the step must not give its second command a fresh hang budget."""
+    clock = iter((100.0, 100.0, 103.0))
+    monkeypatch.setattr(validate.time, "monotonic", lambda: next(clock))
+    timeouts: list[object] = []
+
+    def capture(_context: validate.Context, _command: Sequence[str], **options: Any) -> str:
+        timeouts.append(options.get("timeout_seconds"))
+        return "passed"
+
+    monkeypatch.setattr(validate, "_run", capture)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        timeout_seconds=timeout_seconds,
+        environment=os.environ.copy(),
+    )
+    validate._site_layout_tests(context)
+    assert timeouts == [timeout_seconds, timeout_seconds - 3.0]
+
+
+@pytest.mark.parametrize("completed_commands", [0, 1])
+def test_site_layout_exhausted_budget_cannot_start_another_command(
+    monkeypatch: pytest.MonkeyPatch, completed_commands: int
+) -> None:
+    """At the deadline, refuse launching and retain any completed phase's output."""
+    clock = iter((100.0, *((100.0,) * completed_commands), 107.0))
+    monkeypatch.setattr(validate.time, "monotonic", lambda: next(clock))
+    calls = 0
+
+    def capture(_context: validate.Context, _command: Sequence[str], **_options: Any) -> str:
+        nonlocal calls
+        calls += 1
+        return "functional layout passed"
+
+    monkeypatch.setattr(validate, "_run", capture)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        timeout_seconds=7.0,
+        environment=os.environ.copy(),
+    )
+    with pytest.raises(validate.StepTimeoutError, match="subprocess budget") as failed:
+        validate._site_layout_tests(context)
+    assert calls == completed_commands
+    if completed_commands:
+        assert "functional layout passed" in str(failed.value)
 
 
 def test_a_commands_extra_environment_reaches_only_that_command(
@@ -4472,6 +4810,114 @@ def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:
     }
 
 
+@pytest.mark.parametrize("configured", [None, "scratch-target", "/scratch/sqsearch-target"])
+def test_sqsearch_build_and_runtime_use_the_same_target(
+    configured: str | None, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    project = tmp_path / "packing"
+    crate = project / "sqsearch"
+    default = crate / "target" / "release" / "sqsearch"
+    monkeypatch.setattr(validate, "PROJECT_ROOT", project)
+    monkeypatch.setattr(validate, "ENGINE", default)
+    environment = {} if configured is None else {"CARGO_TARGET_DIR": configured}
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=environment
+    )
+    target = Path(configured or "target")
+    if not target.is_absolute():
+        target = crate / target
+    expected = target / "release" / "sqsearch"
+    calls: list[tuple[tuple[str, ...], Path, dict[str, str]]] = []
+
+    def run(child: validate.Context, command: tuple[str, ...], *, cwd: Path = project) -> str:
+        calls.append((command, cwd, dict(child.environment)))
+        return "SELFTEST PASSED" if command[-1] == "--selftest" else ""
+
+    monkeypatch.setattr(validate.shutil, "which", lambda *_, **__: "cargo")
+    monkeypatch.setattr(validate, "_run", run)
+    monkeypatch.setattr(Path, "is_file", lambda path: path == expected)
+    step = next(step for step in validate.STEPS if step.name == "search engine (sqsearch)")
+    assert validate._build_engine(context, [step]) == f"built {expected}"
+    assert step.action(context) == "SELFTEST PASSED"
+    assert validate._differential(context) == ""
+    assert validate._soundness_perimeter(context) == ""
+    assert calls == [
+        (("cargo", "build", "--locked", "--release", "--quiet"), crate, environment),
+        ((str(expected), "--selftest"), project, environment),
+        (
+            (
+                sys.executable,
+                "-m",
+                "devtools.check_search_differential",
+                "20000",
+                "--binary",
+                str(expected),
+            ),
+            project,
+            environment,
+        ),
+        (
+            (
+                sys.executable,
+                "-m",
+                "devtools.check_soundness_perimeter",
+                "--binary",
+                str(expected),
+            ),
+            project,
+            environment,
+        ),
+    ]
+    assert validate._engine_path(context) == expected
+
+
+@pytest.mark.parametrize(("override", "pairs"), [(False, 37), (True, 37), (False, None)])
+def test_search_differential_invokes_the_explicit_binary_with_unchanged_pair_count(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, override: bool, pairs: int | None
+) -> None:
+    engine = tmp_path / "external-target" / "release" / "sqsearch"
+    arguments = ["check_search_differential"]
+    if pairs is not None:
+        arguments.append(str(pairs))
+    if override:
+        arguments.extend(("--binary", str(engine)))
+    monkeypatch.setattr(sys, "argv", arguments)
+    calls: list[list[str]] = []
+
+    def run(command: list[str], **options: object) -> subprocess.CompletedProcess[str]:
+        assert options == {"capture_output": True, "text": True, "check": True}
+        calls.append(command)
+        return subprocess.CompletedProcess(command, 0, stdout="")
+
+    monkeypatch.setattr(check_search_differential.subprocess, "run", run)
+    assert check_search_differential.main() == 0
+    assert calls == [
+        [
+            str(engine if override else check_search_differential.BIN),
+            "--pairdump",
+            "--pairs",
+            str(pairs if pairs is not None else 20000),
+        ]
+    ]
+
+
+def test_sqsearch_override_does_not_fall_back_to_an_old_internal_binary(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    default = tmp_path / "old-engine"
+    default.write_bytes(b"old artifact")
+    monkeypatch.setattr(validate, "ENGINE", default)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={"CARGO_TARGET_DIR": str(tmp_path / "external-target")},
+    )
+    with pytest.raises(validate.StepSkippedError, match="sqsearch binary is absent"):
+        validate._search_engine(context)
+
+
 def test_exact_rust_geometry_is_fast_and_runs_the_differential_oracle(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -4653,7 +5099,7 @@ def test_the_type_floor_threads_across_the_cpus_the_selection_leaves(
         deep=False, strict=False, jobs=jobs, inner_jobs=1, environment={}
     )
     validate._type_floor(context)
-    assert captured == [("basedpyright", *threads)]
+    assert captured == [("basedpyright", "--pythonpath", sys.executable, *threads)]
 
 
 @pytest.mark.parametrize(("cpus", "jobs", "workers"), [(4, 2, "2"), (2, 2, "1"), (4, 4, "1")])

@@ -1535,3 +1535,123 @@ verifiers:
     note: This wrapper checks premises and receipt applicability; sqpack exact_verify and the independent
       rational-corner checker decide geometry. Their shared SAT theorem, Fraction, YAML and source-to-corner
       conversion are disclosed. Earlier packet constants, evidence and review scopes remain unchanged.
+  - id: V-evand-arrangement-receipts
+    program: devtools.evand_arrangement_reports
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    summary: Binds all three complete source certificates and all nine full deciding inputs/native results;
+      explicit replay repeats both project geometric deciders.
+    source:
+    - packing/devtools/evand_arrangement_reports.py
+
+  - id: V-rehwaldt-n68-verify
+    program: verify.py
+    author: Seth Rehwaldt
+    provenance: external
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/verify.py.txt
+    versions:
+    - sha256: 911b9822334636ffc49472e4df32e38cb162efbfad9a4684879f006b1c90e7f9
+      note: fded686668e29258dad2eb29d0482fa3fd51bd6b
+    summary: Decides all 68 rational unit squares, containment and 2278 unordered pairs.
+    note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two
+      programs use the same SAT theorem and arithmetic; their distinct code does not establish independence
+      from the source producer. Analytic root and dual programs are outside this replay.
+
+  - id: V-rehwaldt-n68-independent-support-check
+    program: independent_support_check.py
+    author: Seth Rehwaldt
+    provenance: external
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/independent_support_check.py.txt
+    versions:
+    - sha256: 48e1ae336855ba5cc05c3fd161bf51ef71cab24ebc33ae590be040f78a932423
+      note: fded686668e29258dad2eb29d0482fa3fd51bd6b
+    summary: Decides all 68 rational unit squares, containment and 2278 unordered pairs.
+    note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two
+      programs use the same SAT theorem and arithmetic; their distinct code does not establish independence
+      from the source producer. Analytic root and dual programs are outside this replay.
+
+  - id: V-refinement-custody
+    program: devtools.refinement_custody
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/refinement_custody.py
+    - packing/devtools/refinement_packets.py
+    - packing/devtools/refinement_house_links.py
+    summary: Admits all 13 complete actual input/result jobs, immutable source conversion, process outcomes,
+      full control coverage and three complete house witnesses.
+    note: Offline admission reconciles retained executions and runs no geometric predicate.
+  - id: V-ryxu-undilated-n51-independent
+    program: devtools.ryxu_radical_n51.independent
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/devtools/ryxu_radical_n51.py
+    summary: Decides all 51 undilated coefficient poses in Q(sqrt2), unit-square identities, containment
+      and all 1275 unordered pairs.
+    note: Rational-pair scalar order and direct axis/diamond corners are distinct from native number-field
+      materialization and geometry. The reviewed source input is shared. Complete positive, duplicate
+      and outside outcomes are retained; 119 touching and 1156 strict pairs are observed, while the
+      source's 191-touching-pair assertion remains unconfirmed.
+  - id: V-ryxu-complete-custody
+    program: devtools.ryxu_house_links
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/ryxu_arrangement_reports.py
+    - packing/devtools/ryxu_radical_n51.py
+    - packing/devtools/ryxu_house_links.py
+    - packing/devtools/evand_arrangement_reports.py
+    summary: Admits complete pinned source facts, all 75 rational and three radical actual input/result
+      jobs, required controls and all 18 complete houses.
+    note: Admission reconciles retained executions and private-worker scientific inputs. It executes
+      no geometric predicate and does not itself confer a confirmation rung.
+  - id: V-gupta-complete-custody
+    program: devtools.gupta_house_links
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/gupta_refinement_reports.py
+    - packing/devtools/gupta_house_links.py
+    - packing/devtools/evand_arrangement_reports.py
+    summary: Admits all seventeen pinned originals and comparators, all 51 complete actual input/result
+      jobs, required controls and fourteen complete selected houses.
+    note: Reconciles retained executions and ordinary private scientific inputs. No geometric predicate
+      runs and admission alone confers no confirmation rung.

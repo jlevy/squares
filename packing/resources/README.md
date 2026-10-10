@@ -12,6 +12,19 @@ source gaps. The
 [X-050 audit](../campaign/explorations/X-050-fibonacci-torus-and-boundary-information.md)
 contains the dispositions; no full manuscript or geometric torus inverse was supplied.
 
+**[Berthold et al. 2026b]** — the already retained arXiv:2605.04850v1 PDF and raw
+extraction were rechecked against a fresh download on October 8, 2026. The
+[n17 paper review](../../docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md)
+assesses its Farkas formulation and relevance to exact sum-of-squares certificates.
+It adds no packing bound or optimality result.
+
+**SOS certificate methods** — the
+[October 8 source packet](web/n17-sos-sources-2026-10-08/README.md) records extraction
+quality for the Blekherman–Parrilo–Thomas book and Laplagne’s facial-reduction paper.
+The
+[extended n17 review](../../docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md)
+includes the derived exact weighted-vertex screen and conditional SOS plan.
+
 ## Layout
 
 ```
@@ -60,7 +73,7 @@ formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive normally stores an original
 source, a cleaned `.md` transcription, and a faithful `.raw.md` extraction.
-One hundred and nine entries currently fall short in ways worth naming rather than
+One hundred and ten entries currently fall short in ways worth naming rather than
 hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
@@ -79,6 +92,12 @@ hiding:
   faithful extraction, no cleaned transcription yet.
   All fourteen were read directly from the PDF, and the claims resting on them were
   checked there.
+- `laplagne-2018-facial-reduction-exact-polynomial-sos-1810.04215v1` is **raw-only**:
+  original PDF, unedited text and original TeX, with no cleaned Markdown transcription.
+  The [source packet](web/n17-sos-sources-2026-10-08/README.md) records PDF/TeX checks
+  and glyph artifacts.
+  The book’s full source remains outside Git; its extraction status is also recorded
+  there.
 - The fifteen search-method sources retained on 2026-09-08 for
   [the annealing report](../../docs/project/research/research-2026-09-08-annealing-for-square-packing.md)
   are **raw-only** on the same terms:
@@ -525,9 +544,9 @@ for `n = 68…307`, which issue #227 asked this project to register,
 [Joost de Winter’s `s(211) < 15`](web/de-winter-square-packing-211-2026-09-16/README.md),
 and [Griffin Casson’s 39 packings](web/casson-square-packing-2026-09-23/README.md) for
 `n = 103…307`, each of which Couzo’s beats.
-The first two publish no licence, so their packets keep derived facts and metadata only,
-on the [known-best retention policy](web/known-best-packings/README.md); Casson’s
-packings are CC BY 4.0 and retained byte for byte.
+The first two publish no licence, and their packets take the derived-only form of the
+[known-best retention policy](web/known-best-packings/README.md), keeping derived facts
+and metadata only; Casson’s packings are CC BY 4.0 and retained byte for byte.
 Every Couzo and de Winter packing is certified here by an exact rational replay whose
 certificates are under `packing/witnesses/`. A fourth, of 5 October,
 [retains the seven packings Couzo lowered on 3 October](web/franciscouzo-square-packing-2026-10-03/README.md),
@@ -553,6 +572,9 @@ key remain bound to the bytes they originally named.
 | [evand/square-packing](https://github.com/evand/square-packing) | Weighted point, segment and area covers, exact and interval verifiers, and Lean reductions | **[evand square-packing 2026-10-01]**, **[evand square-packing 2026-10-02]**, **[evand square-packing 2026-10-03]**, **[evand square-packing 2026-10-04]**, **[evand exact optima 2026-10-05]** and, for its site, **[evand square packing atlas 2026-10-04]**; [1 October selective packet](web/evand-square-packing-2026-10-01/README.md), [2 October selective packet](web/evand-square-packing-2026-10-02/README.md), [3 October `k2m4` packet](web/evand-square-packing-2026-10-03/README.md), [4 October site packet](web/evand-square-packing-2026-10-04/README.md), [5 October exact-optima packet](web/evand-square-packing-2026-10-05/README.md), [the `zmx2` source of its `s(32)` run without the D4 fold](web/evand-zmx2-sym-atoms-2026-09-30/README.md), [source audit](../../docs/project/reviews/review-2026-10-01-evand-source-coverage.md) [mathematical review](../../docs/project/reviews/review-2026-10-01-evand-mathematical-transfer.md) and [site review](../../docs/project/reviews/review-2026-10-05-evand-square-packing-atlas.md) |
 | [squarepacker/s12-lower-bound](https://github.com/squarepacker/s12-lower-bound) | Ryu Sungjoon’s `s(12) ≥ 31360/7901` (v1.0): Evan Daniel’s `s(12)` certificate with every coordinate and the side multiplied by `7902/7901`, Daniel’s verifier and the author’s own checker at the angle net `N = 24000`, archived as Zenodo [10.5281/zenodo.23106582](https://doi.org/10.5281/zenodo.23106582) and reported on jlevy/squares#309; and his `s(12) ≥ 7943/2000` (v1.1): Daniel’s points dilated and re-weighted, checked by both at `N = 96000`, with a write-up, archived as Zenodo [10.5281/zenodo.23157015](https://doi.org/10.5281/zenodo.23157015) and reported on jlevy/squares#363 | **[squarepacker s12 2026]**; [2 October packet](web/squarepacker-s12-lower-bound-2026-10-02/README.md), pinned `8c53049025b94bb589ed25a90203f0a34c2945e4`, with the replays and controls here; **[squarepacker s12 2026-10-05]**; [5 October packet](web/squarepacker-s12-lower-bound-2026-10-05/README.md), pinned `7a96bec36bc6811c3715ef581598f22ff9b7ba3a` |
 | [squarepacker/k2-minus-c](https://github.com/squarepacker/k2-minus-c) | Sungjoon Ryu’s preprint `k² − M(k) ≥ 0.033 log k` for closed packings of `[0,k]²`, so `s(k² − c) = k` for every fixed `c` and all large `k`, with the ball-arithmetic certificate of its Lemma 4.10; archived as Zenodo [10.5281/zenodo.23165736](https://doi.org/10.5281/zenodo.23165736), reported on jlevy/squares#368 | **[squarepacker k2-minus-c 2026]**; [5 October packet](web/squarepacker-k2-minus-c-2026-10-05/README.md), pinned `25f645e8fcadb3c2768f4da42d80e977fb1a508d`, with the replay here and the three Zenodo records, the `v1.0` preprint PDF among them |
+| [squarepacker/k2-minus-c v1.2](https://github.com/squarepacker/k2-minus-c/tree/e16a5cfa7eed489ea8d84b500e590bf6855a5f2f) | Ryu’s revised closed-packing deficiency constants; issue #368, DOI 10.5281/zenodo.23194031 | **[squarepacker k2-minus-c v1.2 2026]**; [version 1.2 packet](web/squarepacker-k2-minus-c-v12-2026-10-06/README.md), all 78 source files bound; arithmetic reviewed, independent labelling remains open |
+| [squarepacker/k2-minus-c-quarter](https://github.com/squarepacker/k2-minus-c-quarter) | Ryu’s reported quarter-power deficiency theorem, with its separate analytic variant; issue #414, DOI 10.5281/zenodo.23211207 | **[squarepacker quarter-power 2026]**; [7 October packet](web/squarepacker-k2-minus-c-quarter-2026-10-07/README.md), pinned `abbedcf4bba2e4053f0278e669d84966a89c8b73`; scoped proof review and conditional interval arithmetic retained; independent box labelling remains open |
+| [squarepacker/k2-minus-c-cube-root](https://github.com/squarepacker/k2-minus-c-cube-root) | Ryu’s reported cube-root deficiency theorem and intermediate square-root regimes; issue #414, DOI 10.5281/zenodo.23212059 | **[squarepacker cube-root 2026]**; [7 October packet](web/squarepacker-k2-minus-c-cube-root-2026-10-07/README.md), pinned `15045f9c6b74bd52f60394b9be593ebe4fb3debc`; scoped proof review and conditional interval arithmetic retained; independent box labelling remains open |
 | [Kleddamag/11-squares-certified-bound](https://github.com/Kleddamag/11-squares-certified-bound) | The `s(11) > 31/8` certificate and its two source checkers | **[Kleddamag n11 2026]**; [retained source](web/external-square-certificates-2026-09-22/kleddamag-11/README.md) |
 | [Kleddamag/17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound) | The `n = 17` mixed-charge certificate line through `466001/100000` | **[Kleddamag n17 4.66001]**; [27 September packet](web/n17-kleddamag-466001-2026-09-27/README.md) |
 | [Guzhou0806/n17-square-packing](https://github.com/Guzhou0806/n17-square-packing) | Parent-angle and mixed-charge certificates for `n = 17`, including R068 and R071 | **[Guzhou0806 n17 R068]**; [28 September packet](web/n17-guzhou-r068-2026-09-28/README.md); **[Guzhou0806 n17 R071]**; [30 September packet](web/n17-guzhou-r071-2026-09-30/README.md), pinned `8c11f6962506940c5de67a9fa73b3d1e2e151196` |
@@ -641,6 +663,7 @@ is [epistemics.md → Results by Others](../../epistemics.md#results-by-others).
 | **[SQUISH n153 2026-10-07]** | Nate Chaoweeraprasit’s later rational packing certificate for n = 153, attached to issue #401 comment 6031977107 on 7 October 2026. Upper bound independently re-verified as T-114 with the same credit, AI disclosure and retention policy; the attachment is pinned by digest | github.com/itsnaka | `squish-401-2026-10-07/` |
 | **[SQUISH update 2026-10-07]** | Nate Chaoweeraprasit’s thirteen pinned update certificates: seven additional counts, five tighter packings and unchanged n153. Twelve improvements were independently replayed and confirmed at V3/C3 as T-115; their evidence remains retained when later reports supersede selected poses. Per-count Couzo and SQUISH seed attribution; no licence, derived facts only | github.com/itsnaka | `squish-401-update-2026-10-07/` |
 | **[SQUISH second update 2026-10-07]** | Nate Chaoweeraprasit’s nine pinned new or smaller rational packing reports at e63e4e5, V0/C0; previous verified bounds retained. Ellsworth, Couzo and SQUISH seeds; human-directed Claude Opus5.5 assistance; no licence, derived facts only | github.com/itsnaka | `squish-422-second-update-2026-10-07/` |
+| **[Daniel exact and local reports 2026]** | Evan Daniel’s pinned exact-form catalogue and non-strict local-minimum reports at f58a017; four new feasible-side forms and178 source configurations retained as V0/C0. Full source metadata and Lean code, without independent geometry, minimality or Lean replay | github.com/evand | `evand-exact-and-local-reports-2026-10-07/` |
 | **[franciscouzo square-packing 2026-09-27]** | Francisco Couzo’s `square-packing` at `f3c5a529`, 27 September 2026: 49 packings for `n = 68…307`, each below both this project’s recorded side and the live catalogue on 29 September. No licence, so the packet keeps each packing as derived Witness/v2 facts with the upstream digests and the per-case commit history, never the files. Every packing certifies exactly over `ℚ` here at centre dilation 1 (`packing-witness promote --strategy robust-rational`, then the independent Fraction checker), the side moving by less than `2.2e-15` either way; rounded up at the printed 15 decimals it lands one unit above the printed side at 26 counts, which the record’s agreement rule accepts, and 2–3 units above at `n = 206, 259, 305`, recorded as conflicts. Registered as T-056 at `V4`/`C3`; issue #227 | github.com/franciscouzo | `franciscouzo-square-packing-2026-09-27/` |
 | **[franciscouzo square-packing 2026-10-03]** | Francisco Couzo’s `square-packing` at `6042c56b`, 3 October 2026, the revision after `f3c5a529`: it lowers seven of the 49 packings, at `n = 208, 209, 228, 263, 272, 303, 306`, each below his earlier side and the catalogue captured on 30 September. Still no licence, so the packet keeps the seven as derived Witness/v2 facts with the upstream digests of all 99 files and the per-case commit history. Each certifies exactly over `ℚ` at centre dilation 1 and again by interval arithmetic on the printed pose; rounded up at 15 decimals the certificate lands one unit above the printed side at three counts and two units above at `n = 306`, recorded as a conflict. Registered as T-092 at `V3`/`C3`; no issue | github.com/franciscouzo | `franciscouzo-square-packing-2026-10-03/` |
 | **[de Winter n211 2026-09-16]** | Joost de Winter’s `square-packing-211` at `702df9bb`, 16 September 2026: 211 unit squares at side `14.99796070496771500150`, the first `s(211) < 15` on the catalogue or this record, with the author’s 80-digit interval verification summary. No licence, so derived facts only. Certified exactly over `ℚ` here, the certificate `2.1e-14` inside the printed side; registered as T-057 at `V4`/`C3` | github.com/JoostdeWinter | `de-winter-square-packing-211-2026-09-16/` |
@@ -810,6 +833,132 @@ The arXiv and Electronic Journal of Combinatorics items are open access; the Sta
 technical report and PMC item are publicly posted.
 Retained for private research use.
 Consult the original publisher before redistributing.
+
+## Rational certificate refinements, 7 October 2026
+
+- **[Rehwaldt Couzo refinements 2026-10-07]**: Seth Rehwaldt after Couzo and earlier
+  contributors, with OpenAI Codex assistance.
+  Finite rational ceilings from issue 425, pinned at
+  `bc389ddf7d65277cd19a9b08fb285d86346d6806`;
+  [packet](web/rehwaldt-couzo-refinements-2026-10-07/README.md).
+- **[Rehwaldt n68 refinement 2026-10-07]**: Seth Rehwaldt after Couzo and earlier
+  contributors, with OpenAI Codex assistance.
+  Finite rational ceilings from issue 428, pinned at
+  `fded686668e29258dad2eb29d0482fa3fd51bd6b`;
+  [packet](web/rehwaldt-n68-refinement-2026-10-07/README.md).
+
+## Three new rational arrangements, 7 October 2026
+
+**[Daniel new arrangements 2026-10-07]**: Evan Daniel’s complete certificates for n =
+266, 270 and 272, pinned at `7eef24f7221b8c3371d6171dd664b52541bbd479`;
+[packet](web/evand-new-arrangements-2026-10-07/README.md).
+Both project exact routes accept all three and reject all six complete-roster controls.
+Source novelty and local/global optimality remain unestablished.
+The source credits Ellsworth, Couzo, Cleemann, Arslanov, Mustafin, Shangitbayev and
+Stead, with register data from the Squares Project (Joshua Levy) under CC BY 4.0 and
+Claude assistance under Daniel’s direction.
+Source MIT licences and the earlier #375 namespace remain unchanged.
+
+## Ryan Xu’s rational and radical packings
+
+- **[ry-xu square packing 2026]** — Ryan Xu’s complete packing reports, pinned at
+  `8dc415296f697f5140caea27c7a0193d52deb4e6`;
+  [packet](web/ry-xu-new-packings-2026-10-08/README.md).
+  All 25 rational certificates have complete exact finite-feasibility replay (T-125).
+  The separate undilated n = 51 construction in $Q(\sqrt 2)$ is confirmed by T-126. The
+  atlas selects 17 rational packings and that radical construction; eight rational
+  certificates remain as nonselected evidence.
+  Native exact checks find 119 touching pairs at n = 51; the source’s count of 191
+  remains unconfirmed.
+  These results establish finite upper bounds, without local or global optimality.
+  The packet preserves factual inputs and credits Xu’s direction and LLM assistance; it
+  does not treat the unlicensed source programs as a licensed software bundle.
+
+- **[Gupta rational refinements 2026-10-08]** — Siddharth Gupta’s seventeen complete
+  rational source cases at `9643cb5a78c1d4dcfc867c80a6920c3a6219d05a`; fourteen selected
+  finite upper-bound improvements and three withdrawals, T-127 at V3/C3.
+  [Factual packet](web/gupta-square-packing-refinements-2026-10-08/README.md).
+  Independently re-implemented deciding code verified every complete source certificate
+  and full-roster control; actual private custody admitted the complete retained
+  inputs/results without repeating geometry.
+  These results establish finite feasibility, not optimality or human oversight.
+  SQUISH credit remains with Nate Chaoweeraprasit, and Evan Daniel’s optimizer is
+  credited. Unlicensed programs/prose remain hash-pinned; the solver MIT notice is not
+  treated as a bundle licence.
+
+## Exact-Root Report for n68, v1.2
+
+**[Rehwaldt n68 exact-root report v1.2]**: Seth Rehwaldt after Couzo and earlier
+contributors, with OpenAI Codex assistance.
+The [authored packet](web/rehwaldt-n68-exact-root-2026-10-08/README.md) records
+exact-root feasibility and restricted-family attainment at pinned revision
+`495238e3d5a542008ff2f01a1dbbb78527cbe732`. Both claims remain unconfirmed here; the
+earlier finite rational T-118 result remains unchanged.
+Complete original custody is preserved outside live Git; public files contain attributed
+factual metadata and external-byte identities only.
+
+## Reported Fine-Net Lower Bounds
+
+**[wand125 fine-net lower bounds 2026-10-08]**: wand125, using the project’s maintained
+geometric kernel, reports seven finer-net measure certificates for n19, n20, n26, n27,
+n28, n29 and n31. The
+[authored factual packet](web/wand125-fine-net-lower-bounds-2026-10-08/README.md)
+records the reported bounds and complete source references.
+Independent whole-net replay and controls remain pending.
+
+- **[Couzo exact refinements 2026-10-08]** — Francisco Couzo’s eight complete rational
+  certificates and separate decimal context poses; T-128 remains V0/C0 pending
+  historical source-house integration and confirmation.
+  All 24 native jobs completed their finite-feasibility and control outcomes in 6.64
+  wall minutes; actual private-worker custody passed complete stored-input and
+  mutation-restoration checks.
+  [Factual packet](web/couzo-exact-refinements-2026-10-08/README.md).
+  Ryan Xu, Nate Chaoweeraprasit, Siddharth Gupta, David Ellsworth and Evan Daniel
+  receive the source’s construction/refinement credits; no optimality is asserted.
+
+- **[Daniel dated certificates 105 and 130 2026-10-07]** — Evan Daniel’s complete dated
+  certificate reports and matching inputs for Francisco Couzo constructions at 105 and
+  130, pinned at 7eef24f.
+  [Historical source packet](web/evand-batch-105-130-2026-10-07/README.md).
+  T-129 records V0/C0/S1; both sides are superseded by smaller currently verified
+  bounds. Code is MIT; batch data credits Joshua Levy and this project under CC BY 4.0.
+  No geometry replay or selected-case change.
+
+- **[Daniel dated certificate 292 2026-10-07]** — Evan Daniel’s complete dated
+  certificate report and matching input for Francisco Couzo’s 292 construction, pinned
+  at f58a017. [Historical source packet](web/evand-batch-292-2026-10-07/README.md).
+  T-129 records V0/C0/S1; its side is superseded by the current verified bound.
+  Code is MIT; batch data credits Joshua Levy and this project under CC BY 4.0. The
+  [separate wrapper correction](web/evand-batch-wrapper-2026-10-07/README.md) is pinned
+  at cca7bf1; its reported rerun earns no replay credit here.
+
+- **[Couzo extended-range reports 2026-10-08]** — Francisco Couzo’s twenty complete
+  decimal poses beyond n324, retained as numerical facts and Git custody metadata.
+  [Source packet](web/couzo-extended-reports-2026-10-08/README.md).
+  All twenty remain author reports outside the standing-case corpus; no result row,
+  geometry replay, selected bound or verification from the separate issue451
+  certificates. Raw upstream text, SVGs, prose and programs remain outside Git under the
+  existing retention policy; no redistribution permission is asserted.
+  Since 2026-10-09 its $n = 375$ and $378$ reports are dated history, superseded in the
+  source register by the later reports below.
+
+- **[Couzo extended-range updates 2026-10-08]** — Francisco Couzo’s later decimal poses
+  at $n = 375$ and $378$, pinned at 2d32a6e and retained as numerical facts and Git
+  custody metadata. [Source packet](web/couzo-extended-updates-2026-10-08/README.md).
+  Each side is below the same count’s ffd900d report, by exact comparison of the printed
+  decimals; both remain author reports outside the standing-case corpus, with no result
+  row, geometry replay or selected bound.
+  No upstream byte is retained, and no redistribution permission is asserted.
+
+- **[Couzo follow-up refinements 2026-10-08]** — Francisco Couzo’s five follow-up exact
+  rational certificates at 84, 86, 105, 175 and 270, pinned at 2d32a6e and kept as
+  derived exact facts with the complete pinned tree; no upstream byte is retained.
+  [Derived packet](web/couzo-followup-refinements-2026-10-08/README.md).
+  T-130 remains V0/C0: all five positives passed both maintained exact routes and both
+  routes refused all ten controls, while independent review, historical source-house
+  integration and confirmation remain pending.
+  Ryan Xu, Evan Daniel and David Ellsworth receive the source’s seed and refinement
+  credits; no optimality is asserted.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

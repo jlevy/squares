@@ -1,0 +1,23 @@
+	Command being timed: ".venv/bin/python3 -m devtools.verify_n17_kernel_certificate campaign/explorations/X048-session-168-pilots/certificates/w125-k-m3869440 --output /tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/new/w125-k-m3869440.json"
+	User time (seconds): 649.57
+	System time (seconds): 6.96
+	Percent of CPU this job got: 97%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 11:11.19
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1106400
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 66
+	Minor (reclaiming a frame) page faults: 566484
+	Voluntary context switches: 1425
+	Involuntary context switches: 9956
+	Swaps: 0
+	File system inputs: 113112
+	File system outputs: 144
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

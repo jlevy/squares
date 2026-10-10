@@ -623,7 +623,11 @@ def test_overview_writer_emits_every_registered_crawl_output(
     monkeypatch.setattr(render_overview, "asset_files", lambda _pages: {})
     monkeypatch.setattr(render_overview, "support_files", dict)
     files, assets = site_urls.crawl_files()
-    assert set(files) == {"404.html", "sitemap.xml", "result/t-117.html", "result/t-118.html"}
+    assert set(files) == {
+        "404.html",
+        "sitemap.xml",
+        *(row.path for row in site_urls.load_registry() if row.status == "withdrawn"),
+    }
     render_overview.write_site(tmp_path, ())
     assert all(
         (tmp_path / name).read_text(encoding="utf-8") == text for name, text in files.items()
@@ -657,6 +661,7 @@ def test_every_partial_paper_or_workbench_check_stages_the_shared_card() -> None
     assert set(checked) == {
         "n11-optimality-review",
         "n11-threshold-bound-review",
+        "square-packing-methods-survey",
         "workbench",
         "pdf",
     }

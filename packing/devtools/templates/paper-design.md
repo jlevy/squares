@@ -406,18 +406,49 @@ fetched them again on every page, since a page’s own bytes were all it could c
   other source, a CSS import, and a `url()` in the page’s own text that is not a data
   URI or a fragment.
 - **Faces.** Every face keeps `font-display: block`, so a face that arrives late holds
-  the text it draws invisible.
-  The faces a page draws its first screen in, PT Serif’s regular and Source Sans 3’s
-  upright, are declared beside the stylesheets (`site_assets.PRELOADED_FACES`). A small
-  prepaint program activates these hints with anonymous CORS on HTTP and HTTPS, and
-  without CORS for local files; choosing the mode before requesting the fonts avoids
-  WebKit’s file-origin cache failure while preserving shared HTTP font downloads.
-  With JavaScript disabled, the same stylesheets load their faces normally.
+  the text it draws invisible, laid out in its fallback’s advances; the visible text
+  around it moves when it arrives.
+  The faces a page draws its first screen in, PT Serif’s regular, italic and bold and
+  Source Sans 3’s upright, are declared beside the stylesheets
+  (`site_assets.PRELOADED_FACES`). Emphasis counts: the frontier’s opening paragraphs
+  set italic and bold PT Serif, and while those two waited for the layout that
+  discovered them, their arrival moved the paragraphs by a CLS of 0.134 or 0.209 on the
+  hosted runner. The two emphasis preloads add 64,484 bytes at high priority to every
+  page, 34,896 for the italic and 29,588 for the bold.
+  Only a reader’s first page pays: the files are shared and named by their content, so
+  later pages read them from cache.
+  Not every page draws them: measured in Chromium on 2026-10-09 across the twelve
+  top-level pages at 390 and 1280px, `visualize.html` draws neither, `index.html`,
+  `papers.html` and `cases/index.html` draw the italic but not the bold, and
+  `readme.html` and `epistemics.html` draw the bold only below the first screen.
+  A first visit that lands on one of those pages fetches a face early that it draws late
+  or never. A per-page preload list in `site_assets.preload_tags` would remove that cost
+  and is not built. A small prepaint program activates these hints with anonymous CORS on
+  HTTP and HTTPS, and without CORS for local files; choosing the mode before requesting
+  the fonts avoids WebKit’s file-origin cache failure while preserving shared HTTP font
+  downloads. With JavaScript disabled, the same stylesheets load their faces normally.
   While regular PT Serif loads, the default prose stack uses metric-adjusted local
   Georgia or Times New Roman/Liberation Serif aliases to keep opening paragraphs stable.
   The delayed-face regression checks both fallback families, final PT Serif attribution,
   paragraph geometry and the existing layout-shift limit; saved sans and system choices
   retain their more specific stacks.
+  A preload can still lose the race to the first layout.
+  Source Sans 3 did on the runner, where its fallback is DejaVu Sans, about a quarter
+  wider: at 390px a navigation link wrapped to the bar’s second line and the hero’s
+  summary took two more lines, and their return was a CLS of 0.251. So on screen
+  `paper-type.css`, which every page carries, puts a metric-adjusted local Arial
+  (Liberation Sans on Linux) behind Source Sans 3, regular for its 410 and bold for its
+  550 and heavier, with Source Sans 3’s ascent and descent and only its unicode range,
+  so it stands in for nothing the shipped face draws once loaded.
+  The fix is measured in Chromium only.
+  `test_frontier_sans_arrival_keeps_the_navigation_in_place` runs there and fails up
+  front, saying so, where neither Arial nor Liberation Sans is installed.
+  WebKit is not covered: on the hosted WebKit runner `load()` on these local-only faces
+  rejected (run 37888293870), so the explainer’s font probe skips them, and whether
+  WebKit lays text out in them was not measured.
+  Safari applies `size-adjust` from version 17, but by MDN’s compatibility data on
+  2026-10-09 ships `ascent-override`, `descent-override` and `line-gap-override` only in
+  Technology Preview, so there the alias would keep Arial’s own ascent and descent.
   The rest are fetched when a page first draws in them, and a face no page draws, a
   print instance, only when one prints.
 - **What a build writes.** `render_overview.write_site` writes exactly the files its
@@ -1979,7 +2010,9 @@ Max age is a number of days, and empty is no limit. There is no date range.
   Every other result stays: one that still holds a bound, verified or reported, a result
   of a kind that is no bound, such as a rigidity, a simplification or the limit of a
   method, which no better bound supersedes, and one superseded only in part.
-  A result that holds one case of several is not superseded.
+  A result that holds one case of several is not superseded, and neither is a bound
+  better than its case holds that the case records have not taken in yet: it is pending
+  adoption, since nothing has replaced it.
   For a bound the word is derived from the case records
   (`render_recent_results.standing`), so the checkbox and the `superseded` chip cannot
   disagree, and `devtools.check_standing` holds it to the bounds each entry states.
@@ -2532,11 +2565,16 @@ The front is, in order:
   first version has no history to link.
 
 - **The dates line.** One grammar on every paper: `<What> <Month D, YYYY>` parts joined
-  by a middle dot, ending with “Last revised”, the day the article last changed.
-  A paper with a source leads with the day the source published its proof (“Original
-  proof September 29, 2026”); the explainer leads with the day its first edition went
-  live (“First published September 5, 2026”). Every value is `sqpack.release`’s, and
-  `devtools.artifact_dates` holds each to its rule.
+  by a middle dot. When first publication and revision fall on the same day, show
+  “Published October 8, 2026” once.
+  When they differ, show “First published” and end with “Last revised”, the day the
+  article last changed.
+  Source dates such as “Original proof September 29, 2026” keep their labels, even when
+  they share a publication date.
+  `paper_front` applies this display rule to HTML, Markdown, and the page printed as
+  PDF. The source record retains both publication and revision dates for metadata.
+  Every value is `sqpack.release`’s, and `devtools.artifact_dates` holds each to its
+  rule.
 
 - **The series strip.** Under the dates, after a line’s space, which part of the series
   the paper is (“Part II of 3 in the n = 11 series”), then each other part on a line of
