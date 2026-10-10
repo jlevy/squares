@@ -5,7 +5,7 @@ title: "Stage 4-5: independently review and adopt the pending upper-bound report
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:51:43.927Z
-updated_at: 2026-10-10T13:46:44.398Z
+updated_at: 2026-10-10T15:36:14.022Z
 started_at: 2026-10-10T09:52:52.837Z
 ---
 The register holds rational upper-bound reports by others at V0/C0 whose next_rung is an independent review of the retained replay and a selected-house decision: T-128 (Couzo, eight), T-130 (Couzo, five), T-131 (Daniel, n = 132), and this pass's #470, #476, #481, #483 and #484 once registered. Several counts now carry more than one candidate (132: T-098 house, T-131, #476, #470; 237, 263, 270, 303: #476 and #481; 267: #470, #476). For each count: the smallest certificate whose complete two-route replay passed, a mapped W2 review of that replay (think-mt6e's rule: verified lane only on a replay here and a mapped review), the earlier house kept as history, and the case record's reported and verified ceilings moved together. Mirror the Gupta adoption (PR #448, #459: confirm_gupta_records.py). Coordinate with PR #403 / #435, which own canonical exact-value integration on the case records.
@@ -36,3 +36,18 @@ Adoption per count: T-130 at 84, 86, 105, 175; T-128 at 108, 127, 155 (Couzo's; 
 Validation: --edit failed only on the stale SYNOPSIS document map (expected) and a basedpyright exit 247 with no output under load ~17 on 4 cores; basedpyright rerun alone: 0 errors, 0 warnings, 0 notes (255.8 s). --records failed only on the stale SYNOPSIS document map.
 
 2026-10-10 13:45Z (coordinator): house adoption, i.e. moving case records' reported and verified ceilings, is deferred until jlevy/squares#403 lands: that open PR rewrites all 324 packing/frontier/n-NNN.md case records, including every count this round touches, so adoption now would collide with it. Register-level work proceeds tonight: the W2 review (docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md, accepted, RD-1 to RD-6 non-blocking) supports V3/C3 for T-128, T-130 and T-131, and the new imports (#476, #481, #483, #484) are registered as reported without case-record edits, as T-131 was. The per-count house table in the review's notes (84, 86, 105, 175: T-130; 108, 127, 155, 180, 228, 306: T-128; 131 and 270: #481; 132: #476) is the adoption plan once #403 merges; RD-5 (private-worker custody for T-130 and T-131) precedes any house move.
+
+
+2026-10-10, W2 review lane for the four upper-bound imports (sub-agent, Claude Opus 5.5), commit 4eb4317ba on worktree-agent-adf4676833d746daf, fast-forwarded to claude/determined-rubin-yjfy2a at 3884e9669.
+
+Review: docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md, mapped in docs/project/document-map.yaml (SYNOPSIS.md not re-rendered). Verdict accepted, finite feasibility only, for all 27 certificates the entries would cite: #476 at 132, 237, 263, 267, 270, 303; #481 at its seventeen counts; #483 at 70; #484 at 308 (343 and 344 beyond the corpus). Seven non-blocking findings: RI-1 #476's claim record compares #481 by 15-digit displays as `unstated` (one unit) though they miss the exact side by up to 1.84 units (259, 263, 270, 292, 307); no relation changes (least margin 1.68e-4 at 307); RI-2 no retained check binds a derived fact (#481, #483) to its upstream bytes; closed once here by --upstream; RI-3 kernel controls gross (RD-2); RI-4 at #476 V-sqpack-verify is the producer's checker (issue says it ran verify.py); RI-5 no private-worker custody at any of the four; RI-6 #484's 343/344 are beyond-horizon rows, can take assurance: verified; RI-7 reviewer and three producers (#476, #481, #484) share the Claude model family.
+
+#481 wall contact: least wall clearance exactly 0 on all three routes at all 17 counts (457 zero clearances, far wall touched at every count), none negative; admissible under the record's closed-box convention (sqpack.verify passes wall contact; the n = 308 grid ceiling itself touches the wall), and the bound also holds if s(n) is read as an open-box infimum. Pairs clear by 1e-32 (3.16e-14 at 263, 1.21e-14 at 292).
+
+Replays reproduced here (from packing/, at most two processes, load 9-25): #476 51/51 jobs equal (546.5 s); #484 9/9 (514.2 s); #483 3/3 (4.5 s); #481 51/51 in full, as two processes `check --n 154 207 232 237 259 292 302 303 --replay` (1084.4 s) and `check --n 131 153 209 236 263 269 270 305 307 --replay` (1085.4 s); `check-claims` rebuilt equal for all four (0.5-2.6 s).
+
+Third route: devtools.check_half_angle_area gained `decide-imports` (own evand-cert, SQUISH-JSON and centred-JSON readers, derived facts read as their bases state; #484 .cert held equal to .cert.json) and `--upstream PACKET DIR`. Run: `decide-imports --workers 2 --upstream squish-481-third-request-2026-10-09 DIR481 --upstream ebdeleeuw-n70-refinement-2026-10-10 DIR483`: 27 certificates, 880,705 pairs (15,359 clipped), 162 controls all at required outcomes, no disagreement with maintained inputs, margins, frozen claim records, register-plan claims or prints; receipt totals equal the packets'; 35 upstream checks (17 #481 certificates, 17 summary.csv sides, 1 #483 certificate) pass, files fetched from raw.githubusercontent.com at the pins with SHA-256 equal to the packets' pins; 101.5 s. Tests: packing/tests/test_check_half_angle_area.py, 48 passed. Validation: --records and --edit fail only on the stale SYNOPSIS document map; the edit tier's type floor was OOM-killed twice by the shared memory cgroup under other lanes' load and passed on a quiet rerun (163 s), basedpyright alone 0/0/0 (122 s). The upstream digest check is allowlisted in devtools/integrity-ceremony.yaml as a `download` boundary.
+
+Rungs: each import can take V3/C3 once registered with its confirming evidence (E-couzo-476-exact-feasibility, E-squish-481-exact-feasibility, E-deleeuw-483-exact-feasibility, E-fang-484-exact-feasibility; independent-implementation), verifiers V-check-half-angle-area (decides) and V-upper-bound-reports (premises), and the reviews entry. No V4/C4.
+
+Adoption per count (once #403 lands and RI-5 is closed): 70 -> #483; 131 -> #481 (T-128 verified, not selected); 132 -> #476 (T-131 verified); 153, 154, 207, 209, 232, 236, 237, 259, 263, 269, 270, 292, 302, 303, 305, 307 -> #481 (237, 263, 303: then #476; 270: then #476, then T-130); 267 -> #476; 308 -> #484; unchanged from the earlier review: 84, 86, 105, 175 -> T-130; 108, 127, 155, 180, 228, 306 -> T-128. 343/344: no house, beyond-horizon rows.
