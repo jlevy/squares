@@ -51,9 +51,10 @@ From ``packing/``, with the project interpreter::
 exact certificate, centres in ``[0, S]^2`` and ``t = tan(theta/2)``. ``options`` is the
 row's declared ``options`` as a mapping of strings, and an adapter refuses any it does not
 read. Add it to `ADAPTERS` under a new name and declare that name as a row's ``format``;
-nothing else changes. A declared-dilation reader of decimal poses (#470) is such an
-adapter: it takes its dilation and its rationalisation as options, and the side it
-returns, like any other, is admitted only if it rounds up to the side the report prints.
+nothing else changes. `decimal_dilation`, the reader of #470's decimal poses, is such an
+adapter: it takes its dilation and its rounding of each half-angle tangent as options,
+and the side it returns, like any other, is admitted only if it rounds up to the side the
+report prints.
 """
 
 from __future__ import annotations
@@ -74,13 +75,16 @@ from fractions import Fraction
 from pathlib import Path, PurePosixPath
 from typing import Any, NamedTuple, NotRequired, TypedDict, cast
 
+import mpmath as mp
 import yaml
+from mpmath.libmp import to_rational
 from strif import atomic_output_file
 
 from devtools import acquire_source, retained_data
 from devtools import check_source_coverage as coverage_check
 from devtools import couzo_followup_reports as couzo_followup
 from devtools import couzo_refinement_reports as couzo_451
+from devtools import decimal_pose_margins as decimal_poses
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools import evand_hunt_reports as evand_hunt
@@ -505,11 +509,124 @@ def centred_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certi
     return _certificate(n, side, rows)
 
 
+#: The two options `decimal_dilation` reads, and the bounds on the places it rounds at.
+DILATION = "dilation"
+HALF_ANGLE_PLACES = "half_angle_places"
+MIN_HALF_ANGLE_PLACES = 30
+MAX_HALF_ANGLE_PLACES = 100
+#: Working digits beyond the rounding place, tried in turn until an enclosure decides it.
+GUARD_DIGITS = (20, 60, 200)
+#: The angles, reduced to [-180, 180) degrees, whose half-angle tangent is rational.
+EXACT_TANGENTS = {
+    Fraction(0): Fraction(0),
+    Fraction(90): Fraction(1),
+    Fraction(-90): Fraction(-1),
+}
+_POSITIVE = re.compile(r"[1-9][0-9]*(?:/[1-9][0-9]*)?")
+_PLACES = re.compile(r"[1-9][0-9]{0,2}")
+
+
+def _exact_endpoint(value: Any) -> Fraction | None:
+    """An enclosure's endpoint as the exact dyadic it is, or None where it is infinite."""
+    number = mp.mpf(value)
+    if not mp.isfinite(number):
+        return None
+    numerator, denominator = to_rational(number._mpf_)
+    return Fraction(int(numerator), int(denominator))
+
+
+def half_angle_tangent(degrees: Fraction, places: int) -> Fraction:
+    """``tan(theta/2)`` for an angle in degrees, rounded down at ``places`` decimals.
+
+    The angle is reduced exactly to [-180, 180). There the tangent is rational only at
+    0 and +-90 degrees, where it is 0 or +-1 and is returned exactly; at every other
+    rational angle it is irrational, so an outward-rounded enclosure narrow enough puts
+    both its endpoints on one side of every rounding point, and the working precision
+    rises until it does. The floor is therefore proved, whatever precision decided it,
+    and a floor no enclosure decides is refused. At 180 degrees no finite tangent exists.
+    """
+    turn = (degrees + 180) % 360 - 180
+    _require(turn != -180, f"an angle of {degrees} degrees has no finite half-angle tangent")
+    if turn in EXACT_TANGENTS:
+        return EXACT_TANGENTS[turn]
+    scale = 10**places
+    for guard in GUARD_DIGITS:
+        with decimal_poses.working_precision(places + guard):
+            enclosure = mp.iv.tan(decimal_poses.enclose(turn) * mp.iv.pi / 360)
+            low, high = (_exact_endpoint(end) for end in (enclosure.a, enclosure.b))
+        if low is not None and high is not None:
+            floor = math.floor(low * scale)
+            if floor == math.floor(high * scale):
+                return Fraction(floor, scale)
+    raise ReportError(f"no enclosure decides tan({degrees}/2 degrees) at {places} places")
+
+
+def _dilation_options(options: Mapping[str, str]) -> tuple[Fraction, int]:
+    _require(
+        set(options) == {DILATION, HALF_ANGLE_PLACES},
+        f"decimal-dilation reads exactly {DILATION} and {HALF_ANGLE_PLACES}, not "
+        f"{sorted(options)}",
+    )
+    value, places = options[DILATION], options[HALF_ANGLE_PLACES]
+    _require(
+        len(value) <= MAX_LITERAL_CHARS and _POSITIVE.fullmatch(value),
+        f"{DILATION} is no positive integer or p/q: {value[:80]!r}",
+    )
+    dilation = Fraction(value)
+    _require(dilation >= 1, f"a {DILATION} moves centres apart; {value} is below 1")
+    _require(
+        _PLACES.fullmatch(places)
+        and MIN_HALF_ANGLE_PLACES <= int(places) <= MAX_HALF_ANGLE_PLACES,
+        f"{HALF_ANGLE_PLACES} is an integer from {MIN_HALF_ANGLE_PLACES} to "
+        f"{MAX_HALF_ANGLE_PLACES}, not {places[:80]!r}",
+    )
+    return dilation, int(places)
+
+
+def decimal_dilation(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """David Ellsworth's decimal centre-angle text (#470), made exact by a declared dilation.
+
+    The file states ``s: SIDE``, then ``Square K: x=X, y=Y, deg=D`` for ``K = 1..n`` in
+    order, in the box ``[-s/2, s/2]^2`` (`devtools.decimal_pose_margins.parse_pose` reads
+    it). Its digits are rounded, so it is no exact certificate. Two declared options make
+    one, and nothing else is read:
+
+    - ``dilation``, a rational ``p/q >= 1``: every centre is scaled by it about the box
+      centre, and the side is ``dilation * s``;
+    - ``half_angle_places``, an integer from 30 to 100: each square's
+      ``t = tan(theta/2)`` is the exact tangent rounded down at that many decimals
+      (`half_angle_tangent`).
+
+    The centres are then translated by half the side into ``[0, S]^2``. Like any other,
+    the side is admitted only where it rounds up to the side the report prints, and only
+    the exact routes decide whether the result packs.
+    """
+    dilation, places = _dilation_options(options)
+    try:
+        pose = decimal_poses.parse_pose(_text(raw))
+    except decimal_poses.PoseError as error:
+        raise ReportError(f"n={n}: {error}") from error
+    labels = [square.label for square in pose.squares]
+    _require(labels == list(range(1, len(labels) + 1)), f"n={n}: squares are not 1..n in order")
+    side = dilation * pose.side
+    half = side / 2
+    rows = [
+        (
+            dilation * square.x + half,
+            dilation * square.y + half,
+            half_angle_tangent(square.degrees, places),
+        )
+        for square in pose.squares
+    ]
+    return _certificate(n, side, rows)
+
+
 #: Every certificate format a declaration may name. The module docstring says how to add one.
 ADAPTERS: dict[str, Adapter] = {
     "evand-cert": evand_cert,
     "squish-json": squish_json,
     "centred-json": centred_json,
+    "decimal-dilation": decimal_dilation,
 }
 
 

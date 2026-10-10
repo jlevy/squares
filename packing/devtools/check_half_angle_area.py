@@ -1,4 +1,15 @@
-"""A third exact route for the rational half-angle certificates of T-128, T-130 and T-131.
+"""A third exact route for the rational upper-bound certificates of the 2026-10-10 reviews.
+
+It was written for T-128, T-130 and T-131, and extended for the four imports of the same
+intake pass, #476, #481, #483 and #484 (``decide-imports``), in the review
+``review-2026-10-10-upper-bound-imports-476-481-483-484.md``. For those it reads each
+certificate the register would cite with readers of its own: Evan Daniel's text format,
+SQUISH's JSON (#484 holds each count in both, which must agree), and the derived facts of
+#481 and #483, rational centre-basis witnesses whose bases it reads as stated, holding
+each to the unit circle. Where no upstream byte is retained, ``--upstream PACKET DIR``
+holds each fact to the file it was derived from, fetched at the pin into ``DIR``: the
+packet's pinned SHA-256, this route's own SQUISH or centred-JSON reader (centres moved by
+``S/2``), and the printed side in its row of the file it is printed in.
 
 The register's two maintained routes (``devtools.evand_arrangement_reports``) share one
 parse and one half-angle conversion (``devtools.evand_exact_certificates``) and both decide
@@ -25,12 +36,14 @@ box ``[0, S]^2``:
   are disjoint iff the intersection has area zero.
 
 Arithmetic is ``fractions.Fraction`` throughout, the one component this route shares with
-every exact checker here. For each positive it also measures the least Euclidean distance
-between squares whose centres lie within 2 of each other, a different quantity from the
-separating-axis gap the maintained routes report and never smaller than it; every other
-pair is at least ``2 - sqrt(2)`` apart.
+every exact checker here; it reads a derived fact with ``sqpack.yamlio``, as every YAML
+read in this repository must, and a JSON certificate with the standard library. For each
+positive it also measures the least Euclidean distance between squares whose centres lie
+within 2 of each other, a different quantity from the separating-axis gap the maintained
+routes report and never smaller than it; every other pair is at least ``2 - sqrt(2)``
+apart.
 
-Every certificate gets five controls with required outcomes, each a full decision:
+Every certificate gets six controls with required outcomes, each a full decision:
 a duplicated square and a square moved outside the box (refused); the side shrunk by the
 least far-wall clearance (accepted, the box being closed) and by ``10^-40`` more
 (refused); and the closest pair, translated into contact (that pair accepted) and then
@@ -39,7 +52,13 @@ least far-wall clearance (accepted, the box being closed) and by ``10^-40`` more
 From ``packing/``, with the project interpreter::
 
     python -m devtools.check_half_angle_area decide [--workers 2] [--json PATH]
+    python -m devtools.check_half_angle_area decide-imports [--workers 2] [--json PATH]
+        [--upstream PACKET DIRECTORY ...]
     python -m devtools.check_half_angle_area replay-t128 [--workers 2]
+
+``decide-imports`` holds each import's certificates to the maintained routes' retained
+positive inputs and margins, to the side its packet's frozen claim record and register
+plan state, and to its printed side: equal to it, or rounding up to it at its places.
 
 ``replay-t128`` is the maintained two-route replay of T-128's retained receipt, which
 ``devtools.couzo_refinement_reports`` has no command for: every job decided again by the
@@ -49,6 +68,10 @@ kernel and held to its retained row, as ``check --replay`` does for T-130 and T-
 from __future__ import annotations
 
 import argparse
+import csv
+import gzip
+import hashlib
+import io
 import json
 import re
 import time
@@ -64,6 +87,7 @@ from devtools import couzo_followup_reports as t130
 from devtools import couzo_refinement_reports as t128
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_hunt_reports as t131
+from devtools import upper_bound_reports as upper
 from sqpack.yamlio import load_yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -73,6 +97,8 @@ FRONTIER = ROOT / "frontier"
 Point = tuple[Fraction, Fraction]
 Square = tuple[Point, Point, Point, Point]
 Pose = tuple[Fraction, Fraction, Fraction]
+#: A square as every decision reads it: centre ``(x, y)`` and rotation ``(cos, sin)``.
+Placed = tuple[Fraction, Fraction, Fraction, Fraction]
 
 #: The side-shrink control's step past contact, and the pair control's push past contact
 #: as a fraction of the centre distance: both far below binary64 resolution at these sides.
@@ -110,6 +136,8 @@ class Decision:
     wall_clearance: Fraction
     far_wall_clearance: Fraction
     closest: tuple[Fraction, int, int, Point, Point] | None
+    #: How many square-to-wall clearances are exactly zero: squares touching the closed box.
+    wall_contacts: int = 0
 
 
 def literal(text: str) -> Fraction:
@@ -156,6 +184,18 @@ def rotation(t: Fraction) -> tuple[Fraction, Fraction]:
     c, s = (1 - t * t) / q, 2 * t / q
     if c * c + s * s != 1:
         raise AreaRouteError("the half-angle map left the unit circle")
+    return c, s
+
+
+def placed(poses: Sequence[Pose]) -> list[Placed]:
+    """Each centre with its exact rotation: the form every decision below reads."""
+    return [(x, y, *rotation(t)) for x, y, t in poses]
+
+
+def unit_basis(c: Fraction, s: Fraction) -> tuple[Fraction, Fraction]:
+    """A basis read as stated, refused unless it is a rotation, so the square is a unit one."""
+    if c * c + s * s != 1:
+        raise AreaRouteError("a stated basis is not a rotation")
     return c, s
 
 
@@ -253,12 +293,19 @@ def closest_points(left: Square, right: Square) -> tuple[Fraction, Point, Point]
 
 def decide(side: Fraction, poses: Sequence[Pose], *, measure: bool = False) -> Decision:
     """Decide every square against the box and every pair against each other."""
+    return decide_placed(side, placed(poses), measure=measure)
+
+
+def decide_placed(
+    side: Fraction, placements: Sequence[Placed], *, measure: bool = False
+) -> Decision:
+    """`decide` on squares whose rotation is already exact, as a derived fact states it."""
     squares: list[Square] = []
     clearances: list[Fraction] = []
     far: list[Fraction] = []
     outside = 0
-    for x, y, t in poses:
-        c, s = rotation(t)
+    for x, y, c, s in placements:
+        unit_basis(c, s)
         h = (abs(c) + abs(s)) / 2
         near_walls = (x - h, y - h)
         far_walls = (side - h - x, side - h - y)
@@ -269,9 +316,9 @@ def decide(side: Fraction, poses: Sequence[Pose], *, measure: bool = False) -> D
         squares.append(corners(x, y, c, s))
     pairs = clipped = overlapping = 0
     closest: tuple[Fraction, int, int, Point, Point] | None = None
-    for i, (lx, ly, _lt) in enumerate(poses):
-        for j in range(i + 1, len(poses)):
-            rx, ry, _rt = poses[j]
+    for i, (lx, ly, _lc, _ls) in enumerate(placements):
+        for j in range(i + 1, len(placements)):
+            rx, ry, _rc, _rs = placements[j]
             pairs += 1
             spread = (lx - rx) ** 2 + (ly - ry) ** 2
             if spread < 2:
@@ -291,39 +338,49 @@ def decide(side: Fraction, poses: Sequence[Pose], *, measure: bool = False) -> D
         wall_clearance=min(clearances),
         far_wall_clearance=min(far),
         closest=closest,
+        wall_contacts=sum(1 for clearance in clearances if clearance == 0),
     )
 
 
 def controls(side: Fraction, poses: Sequence[Pose], decision: Decision) -> dict[str, bool]:
     """Each control's outcome; every one must match its required outcome."""
-    duplicate = list(poses)
+    return controls_placed(side, placed(poses), decision)
+
+
+def controls_placed(
+    side: Fraction, placements: Sequence[Placed], decision: Decision
+) -> dict[str, bool]:
+    """`controls` on squares whose rotation is already exact."""
+    duplicate = list(placements)
     duplicate[1] = duplicate[0]
-    outside = list(poses)
-    x, y, t = outside[0]
-    outside[0] = (x + side + 2, y, t)
+    outside = list(placements)
+    x, y, c0, s0 = outside[0]
+    outside[0] = (x + side + 2, y, c0, s0)
     touching = side - decision.far_wall_clearance
     result = {
-        "duplicate-square-refused": not decide(side, duplicate).passed,
-        "square-outside-refused": not decide(side, outside).passed,
-        "side-at-far-wall-contact-accepted": decide(touching, poses).passed,
-        "side-past-far-wall-contact-refused": not decide(touching - WALL_STEP, poses).passed,
+        "duplicate-square-refused": not decide_placed(side, duplicate).passed,
+        "square-outside-refused": not decide_placed(side, outside).passed,
+        "side-at-far-wall-contact-accepted": decide_placed(touching, placements).passed,
+        "side-past-far-wall-contact-refused": not decide_placed(
+            touching - WALL_STEP, placements
+        ).passed,
     }
     if decision.closest is None:
         raise AreaRouteError("the pair controls need two squares within 2 of each other")
     _distance, i, j, p, q = decision.closest
-    (xi, yi, _ti), (xj, yj, tj) = poses[i], poses[j]
-    c, s = rotation(tj)
+    (xi, yi, ci, si), (xj, yj, cj, sj) = placements[i], placements[j]
     shift = (p[0] - q[0], p[1] - q[1])
-    contact = corners(xj + shift[0], yj + shift[1], c, s)
-    left = corners(xi, yi, *rotation(poses[i][2]))
+    contact = corners(xj + shift[0], yj + shift[1], cj, sj)
+    left = corners(xi, yi, ci, si)
     result["closest-pair-in-contact-accepted"] = not overlaps(left, contact)
-    pushed = list(poses)
+    pushed = list(placements)
     pushed[j] = (
         xj + shift[0] + PAIR_PUSH * (xi - xj),
         yj + shift[1] + PAIR_PUSH * (yi - yj),
-        tj,
+        cj,
+        sj,
     )
-    result["closest-pair-pushed-past-contact-refused"] = not decide(side, pushed).passed
+    result["closest-pair-pushed-past-contact-refused"] = not decide_placed(side, pushed).passed
     return result
 
 
@@ -338,21 +395,16 @@ def _text(value: Fraction) -> str:
     return str(value.numerator) if value.denominator == 1 else str(value)
 
 
-def decide_case(case: Case) -> dict[str, Any]:
-    """This route's full verdict on one certificate, its margins and its controls."""
+def verdict(side: Fraction, placements: Sequence[Placed]) -> dict[str, Any]:
+    """This route's full verdict on one packing, its margins and its six controls."""
     started = time.monotonic()
-    side, poses = parse_certificate(case.text, case.n)
-    decision = decide(side, poses, measure=True)
-    outcomes = controls(side, poses, decision)
+    decision = decide_placed(side, placements, measure=True)
+    outcomes = controls_placed(side, placements, decision)
     if decision.closest is None:
         raise AreaRouteError("no pair within 2 to measure")
     distance, i, j, _p, _q = decision.closest
     return {
-        "entry": case.entry,
-        "packet": case.packet,
-        "n": case.n,
         "side": _text(side),
-        "poses": [[_text(value) for value in pose] for pose in poses],
         "passed": decision.passed,
         "pairs": decision.pairs,
         "clipped_pairs": decision.clipped,
@@ -360,11 +412,24 @@ def decide_case(case: Case) -> dict[str, Any]:
         "outside_squares": decision.outside,
         "wall_clearance": _text(decision.wall_clearance),
         "far_wall_clearance": _text(decision.far_wall_clearance),
+        "wall_contacts": decision.wall_contacts,
         "least_distance_squared": _text(distance),
         "least_distance": _root(distance),
         "closest_pair": [i, j],
         "controls": outcomes,
         "wall_seconds": round(time.monotonic() - started, 2),
+    }
+
+
+def decide_case(case: Case) -> dict[str, Any]:
+    """This route's full verdict on one certificate, its margins and its controls."""
+    side, poses = parse_certificate(case.text, case.n)
+    return {
+        "entry": case.entry,
+        "packet": case.packet,
+        "n": case.n,
+        "poses": [[_text(value) for value in pose] for pose in poses],
+        **verdict(side, placed(poses)),
     }
 
 
@@ -419,21 +484,22 @@ def register_claims() -> dict[str, dict[int, Fraction]]:
 
 def receipt_totals() -> dict[str, dict[str, Any]]:
     """What each retained receipt records in total, for the register's prose to be held to."""
-    totals: dict[str, dict[str, Any]] = {}
-    for module in (t128, t130, t131):
-        jobs = kernel.read_xz(module.receipt_path())["cases"]
-        totals[module.PACKET.name] = {
-            "jobs": len(jobs),
-            "pair_decisions": sum(
-                job[route]["pairs_tested"] for job in jobs for route in kernel.ROUTES
-            ),
-            "route_cpu_seconds": round(
-                sum(sum(job["cpu_seconds"].values()) for job in jobs), 2
-            ),
-            "job_wall_seconds": round(sum(job["wall_seconds"] for job in jobs), 2),
-            "longest_job_seconds": round(max(job["wall_seconds"] for job in jobs), 2),
-        }
-    return totals
+    return {
+        module.PACKET.name: _totals(kernel.read_xz(module.receipt_path())["cases"])
+        for module in (t128, t130, t131)
+    }
+
+
+def _totals(jobs: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "jobs": len(jobs),
+        "pair_decisions": sum(
+            job[route]["pairs_tested"] for job in jobs for route in kernel.ROUTES
+        ),
+        "route_cpu_seconds": round(sum(sum(job["cpu_seconds"].values()) for job in jobs), 2),
+        "job_wall_seconds": round(sum(job["wall_seconds"] for job in jobs), 2),
+        "longest_job_seconds": round(max(job["wall_seconds"] for job in jobs), 2),
+    }
 
 
 def case_ceiling(n: int) -> dict[str, str]:
@@ -540,17 +606,416 @@ def run_replay_t128(workers: int) -> int:
     return 0
 
 
+# --------------------------------------------------------------------------- 2026-10-10 imports
+
+#: The four upper-bound imports of the 2026-10-10 intake pass, by issue, with their packets.
+IMPORTS = {
+    "#476": "couzo-exact-certificates-2026-10-09",
+    "#481": "squish-481-third-request-2026-10-09",
+    "#483": "ebdeleeuw-n70-refinement-2026-10-10",
+    "#484": "fang-two-wedge-certificates-2026-10-10",
+}
+WEB = ROOT / "resources/web"
+REPO = ROOT.parent
+PLAN_CLAIM = re.compile(r"s\((\d+)\)\s*<=\s*(\d+(?:\.\d+|/\d+))")
+_DECIMALS = re.compile(r"[0-9]+\.([0-9]+)")
+_BLOB = re.compile(r"https://github\.com/[^/]+/[^/]+/blob/([0-9a-f]{40})/([^?#]+)")
+
+
+@dataclass(frozen=True, slots=True)
+class Imported:
+    """One certificate an import's register entry would cite, as this route read it."""
+
+    issue: str
+    packet: str
+    n: int
+    read: str
+    side: Fraction
+    placements: tuple[Placed, ...]
+
+
+def _unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    keys = [key for key, _value in pairs]
+    if len(keys) != len(set(keys)):
+        raise AreaRouteError("a JSON object names a key twice")
+    return dict(pairs)
+
+
+def _json_object(raw: bytes, n: int) -> dict[str, Any]:
+    value = json.loads(raw.decode("utf-8"), object_pairs_hook=_unique)
+    if type(value) is not dict or type(value.get("n")) is not int or value["n"] != n:
+        raise AreaRouteError(f"n={n}: not a JSON certificate of {n} squares")
+    if type(value.get("squares")) is not list or len(value["squares"]) != n:
+        raise AreaRouteError(f"n={n}: the squares are not a list of {n}")
+    return value
+
+
+def _scalar(value: object, where: str) -> Fraction:
+    """A rational as a JSON or YAML document states it: a literal string, or an integer."""
+    if type(value) is int:
+        return Fraction(value)
+    if type(value) is not str:
+        raise AreaRouteError(f"{where}: not a rational")
+    return literal(value)
+
+
+def read_squish_json(raw: bytes, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
+    """SQUISH's JSON: ``s_exact`` and ``[x, y, t]`` strings, centres in ``[0, S]^2``.
+
+    Its display fields, ``s_decimal`` and ``note``, are not read.
+    """
+    value = _json_object(raw, n)
+    side = _scalar(value.get("s_exact"), f"n={n} side")
+    poses: list[Pose] = []
+    for index, square in enumerate(value["squares"], start=1):
+        if type(square) is not list or len(square) != 3:
+            raise AreaRouteError(f"n={n} square {index}: not [x, y, t]")
+        x, y, t = (_scalar(item, f"n={n} square {index}") for item in square)
+        poses.append((x, y, t))
+    if side <= 0:
+        raise AreaRouteError("the side must be positive")
+    return side, tuple(poses)
+
+
+def read_centred_json(raw: bytes, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
+    """#483's JSON: ``side`` and ``{x, y, t}`` squares, centres in ``[-S/2, S/2]^2``.
+
+    Each centre is moved by ``S/2`` into ``[0, S]^2``. The ``schema`` label is not read.
+    """
+    value = _json_object(raw, n)
+    if value.get("coordinate_system") != "centered":
+        raise AreaRouteError(f"n={n}: not a centred certificate")
+    side = _scalar(value.get("side"), f"n={n} side")
+    if side <= 0:
+        raise AreaRouteError("the side must be positive")
+    poses: list[Pose] = []
+    for index, square in enumerate(value["squares"], start=1):
+        if type(square) is not dict or set(square) != {"x", "y", "t"}:
+            raise AreaRouteError(f"n={n} square {index}: not exactly x, y and t")
+        x, y, t = (_scalar(square[key], f"n={n} square {index}") for key in ("x", "y", "t"))
+        poses.append((x + side / 2, y + side / 2, t))
+    return side, tuple(poses)
+
+
+def read_fact(text: str, n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """A derived fact, a rational centre-basis Witness/v2, read as its bases state them."""
+    document = load_yaml(text)
+    witness = document.get("witness") if type(document) is dict else None
+    if type(witness) is not dict:
+        raise AreaRouteError(f"n={n}: no witness")
+    coordinates = witness.get("coordinates")
+    if (
+        witness.get("n") != n
+        or witness.get("representation") != "center-basis"
+        or witness.get("scalar") != {"kind": "rational"}
+        or _scalar(witness.get("square_size"), "square size") != 1
+        or type(coordinates) is not dict
+        or coordinates.get("origin") != "lower-left"
+        or coordinates.get("axes") != "x-right-y-up"
+    ):
+        raise AreaRouteError(f"n={n}: not a rational unit centre-basis witness in [0, S]^2")
+    side = _scalar(witness.get("side"), f"n={n} side")
+    squares = witness.get("squares")
+    if side <= 0 or type(squares) is not list or len(squares) != n:
+        raise AreaRouteError(f"n={n}: a positive side and {n} squares")
+    placements: list[Placed] = []
+    for index, square in enumerate(squares, start=1):
+        where = f"n={n} square {index}"
+        if (
+            type(square) is not dict
+            or set(square) != {"id", "center", "basis"}
+            or square["id"] != index
+            or type(square["center"]) is not list
+            or type(square["basis"]) is not list
+            or len(square["center"]) != 2
+            or len(square["basis"]) != 2
+        ):
+            raise AreaRouteError(f"{where}: not one exact pose")
+        x, y = (_scalar(value, where) for value in square["center"])
+        c, s = (_scalar(value, where) for value in square["basis"])
+        placements.append((x, y, *unit_basis(c, s)))
+    return side, tuple(placements)
+
+
+def packet_bytes(path: Path) -> bytes:
+    """A packet file, or the deterministic gzip copy it is stored as, decompressed here."""
+    stored = path if path.is_file() else path.with_name(path.name + ".gz")
+    if stored.is_symlink() or not stored.resolve().is_relative_to(REPO.resolve()):
+        raise AreaRouteError(f"{path}: not a private repository file")
+    raw = stored.read_bytes()
+    return raw if stored == path else gzip.decompress(raw)
+
+
+def _declaration(packet: Path) -> dict[str, Any]:
+    return json.loads((packet / "acquisition/report.json").read_text(encoding="utf-8"))
+
+
+def import_cases() -> list[Imported]:
+    """Every certificate the four imports' entries would cite, after each packet's custody.
+
+    ``upper_bound_reports.read_facts`` admits each packet's bytes, as the packet modules
+    do for the first roster; this route then reads the files itself. A count of #484 is
+    read from its ``.cert`` and held to its ``.cert.json`` by this route's own readers.
+    """
+    found: list[Imported] = []
+    for issue, name in IMPORTS.items():
+        packet = WEB / name
+        upper.read_facts(packet)
+        declaration = _declaration(packet)
+        record = json.loads((packet / "acquisition/sources.json").read_text(encoding="utf-8"))
+        source = REPO / record["sources"][0]["archived_path"]
+        for row in declaration["certificates"]:
+            n = row["n"]
+            if n not in declaration["requested"]:
+                continue
+            if "fact" in row:
+                read = row["fact"]
+                side, placements = read_fact(packet_bytes(packet / read).decode("utf-8"), n)
+            else:
+                if row["format"] != "evand-cert":
+                    raise AreaRouteError(f"{issue} n={n}: no reader for {row['format']}")
+                read = (source / row["path"]).relative_to(packet).as_posix()
+                side, poses = parse_certificate(
+                    packet_bytes(source / row["path"]).decode("utf-8"), n
+                )
+                for other in row.get("same_packing", []):
+                    if other["format"] != "squish-json":
+                        raise AreaRouteError(f"{issue} n={n}: no reader for {other['format']}")
+                    copy = read_squish_json(packet_bytes(source / other["path"]), n)
+                    if copy != (side, poses):
+                        raise AreaRouteError(f"{issue} n={n}: {other['path']} differs")
+                placements = tuple(placed(poses))
+            found.append(Imported(issue, name, n, read, side, placements))
+    return found
+
+
+def decide_import(case: Imported) -> dict[str, Any]:
+    """This route's verdict on one imported certificate."""
+    return {
+        "issue": case.issue,
+        "packet": case.packet,
+        "n": case.n,
+        "read": case.read,
+        "placements": [[_text(value) for value in square] for square in case.placements],
+        **verdict(case.side, case.placements),
+    }
+
+
+def admitted(side: Fraction, offered: str) -> bool:
+    """Whether ``side`` is the printed side, or a decimal print is ``side`` rounded up there."""
+    printed = literal(offered)
+    if printed == side:
+        return True
+    match = _DECIMALS.fullmatch(offered)
+    if match is None:
+        return False
+    scale = 10 ** len(match.group(1))
+    return printed == Fraction(-(-side.numerator * scale // side.denominator), scale)
+
+
+def import_positives() -> dict[tuple[str, int], dict[str, Any]]:
+    """Each retained positive job of the four imports, as `upper_bound_reports` admits it."""
+    rows: dict[tuple[str, int], dict[str, Any]] = {}
+    for name in IMPORTS.values():
+        for n, row in upper.check_certification(WEB / name).items():
+            rows[name, n] = row
+    return rows
+
+
+def import_receipt_totals() -> dict[str, dict[str, Any]]:
+    """What each import's retained receipt, whole or by count, records in total."""
+    totals: dict[str, dict[str, Any]] = {}
+    for name in IMPORTS.values():
+        paths = sorted((WEB / name / "receipts").glob("exact-certification*.json.xz"))
+        totals[name] = _totals([job for path in paths for job in kernel.read_xz(path)["cases"]])
+    return totals
+
+
+def plan_claims() -> dict[str, dict[int, Fraction]]:
+    """Every ``s(n) <= v`` each import's register plan would write, as exact rationals."""
+    claims: dict[str, dict[int, Fraction]] = {}
+    for name in IMPORTS.values():
+        claim = upper.register_plan(WEB / name)["results.yaml"]["claim"]
+        printed = PLAN_CLAIM.findall(" ".join(str(claim).split()))
+        claims[name] = {int(n): literal(value) for n, value in printed}
+    return claims
+
+
+def compare_import(
+    row: dict[str, Any],
+    maintained: dict[str, Any],
+    claimed: Fraction | None,
+    frozen: dict[str, Any],
+    offered: str,
+) -> list[str]:
+    """Every way this route's reading and margins disagree with the import's record."""
+    problems: list[str] = []
+    where = f"{row['issue']} n={row['n']} ({row['packet']})"
+    side = literal(row["side"])
+    inputs = maintained["checker_input"]
+    if literal(inputs["side"]) != side:
+        problems.append(f"{where}: side differs from the maintained routes' input")
+    mine = [tuple(literal(value) for value in square) for square in row["placements"]]
+    theirs = [(literal(x), literal(y), *rotation(literal(t))) for x, y, t in inputs["poses"]]
+    if mine != theirs:
+        problems.append(f"{where}: a pose differs from the maintained routes' input")
+    if claimed != side:
+        problems.append(f"{where}: the register plan's claim is not the exact side")
+    if literal(frozen["exact_side"]) != side or frozen["offered_side"] != offered:
+        problems.append(f"{where}: the frozen claim record states another side")
+    if not admitted(side, offered):
+        problems.append(
+            f"{where}: the side is neither the printed {offered} nor rounds up to it"
+        )
+    distance = literal(row["least_distance_squared"])
+    for route in kernel.ROUTES:
+        found = maintained[route]
+        if found["verification_passed"] is not row["passed"]:
+            problems.append(f"{where}: {route} verdict differs")
+        if literal(found["minimum_containment_clearance"]) != literal(row["wall_clearance"]):
+            problems.append(f"{where}: {route} wall clearance differs from h-extent clearance")
+        gap = literal(found["minimum_best_pair_gap"])
+        if gap > 0 and gap * gap > distance:
+            problems.append(f"{where}: {route} separating gap exceeds the Euclidean distance")
+    if not row["passed"] or not all(row["controls"].values()):
+        problems.append(f"{where}: a positive or control missed its required outcome")
+    return problems
+
+
+UPSTREAM_READERS = {"squish-json": read_squish_json, "centred-json": read_centred_json}
+
+
+def upstream_problems(packet: Path, directory: Path) -> tuple[int, list[str]]:
+    """Hold each derived fact to the upstream file it was derived from, fetched at the pin.
+
+    These packets retain no upstream byte. Given a directory holding the source's files at
+    the pinned commit, each requested certificate there must have the SHA-256 the packet
+    pins, read by this route's own reader as the packing its fact states; where the file
+    its side is printed in is there too, at its pinned digest, the printed side must be a
+    cell of that file's row for the count. Returns the number of checks made, certificates
+    and printed sides, and every disagreement.
+    """
+    declaration = _declaration(packet)
+    record = json.loads((packet / "acquisition/sources.json").read_text(encoding="utf-8"))
+    source = record["sources"][0]
+    pinned = {item["path"]: item["sha256"] for item in source["pinned_only"]}
+    held = 0
+    problems: list[str] = []
+
+    def pinned_bytes(path: str) -> bytes | None:
+        target = directory / path
+        if not target.is_file():
+            problems.append(f"{packet.name}: no upstream {path} in {directory}")
+            return None
+        raw = target.read_bytes()
+        if pinned.get(path) != hashlib.sha256(raw).hexdigest():
+            problems.append(f"{packet.name}: {path} is not the file the packet pins")
+            return None
+        return raw
+
+    for row in declaration["certificates"]:
+        n = row["n"]
+        if n not in declaration["requested"] or "fact" not in row:
+            continue
+        raw = pinned_bytes(row["path"])
+        if raw is None:
+            continue
+        side, poses = UPSTREAM_READERS[row["format"]](raw, n)
+        fact = read_fact(packet_bytes(packet / row["fact"]).decode("utf-8"), n)
+        if (side, tuple(placed(poses))) != fact:
+            problems.append(
+                f"{packet.name} n={n}: the fact is not the packing {row['path']} states"
+            )
+        held += 1
+        blob = _BLOB.fullmatch(row.get("printed_in", ""))
+        if blob is None or not (directory / blob.group(2)).is_file():
+            continue
+        if blob.group(1) != source["source_commit"]:
+            problems.append(f"{packet.name} n={n}: the side is printed at another commit")
+            continue
+        table = pinned_bytes(blob.group(2))
+        if table is None:
+            continue
+        rows = [line for line in csv.reader(io.StringIO(table.decode("utf-8"))) if line]
+        if not any(line[0] == str(n) and row["offered"] in line for line in rows):
+            problems.append(f"{packet.name} n={n}: {blob.group(2)} does not print the side")
+        held += 1
+    return held, problems
+
+
+def run_decide_imports(workers: int, output: Path | None, upstream: list[list[str]]) -> int:
+    started = time.monotonic()
+    found = import_cases()
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        rows = list(pool.map(decide_import, found))
+    maintained = import_positives()
+    claims = plan_claims()
+    problems: list[str] = []
+    for row in rows:
+        packet = WEB / row["packet"]
+        frozen = json.loads((packet / "acquisition/claims.json").read_text(encoding="utf-8"))
+        offered = {r["n"]: r["offered"] for r in _declaration(packet)["certificates"]}
+        problems += compare_import(
+            row,
+            maintained[row["packet"], row["n"]],
+            claims[row["packet"]].get(row["n"]),
+            next(r for r in frozen["results"] if r["n"] == row["n"]),
+            offered[row["n"]],
+        )
+    for row in rows:
+        print(
+            f"{row['issue']} n={row['n']:3d} passed={row['passed']} pairs={row['pairs']} "
+            f"clipped={row['clipped_pairs']} wall={row['wall_clearance']} "
+            f"wall_contacts={row['wall_contacts']} least_distance={row['least_distance']} "
+            f"controls={sum(row['controls'].values())}/{len(row['controls'])} "
+            f"{row['wall_seconds']}s"
+        )
+    totals = import_receipt_totals()
+    for packet_name, total in totals.items():
+        print(f"retained receipt {packet_name}: {json.dumps(total)}")
+    held: dict[str, int] = {}
+    for name, directory in upstream:
+        if name not in IMPORTS.values():
+            problems.append(f"{name}: not one of the four imports")
+            continue
+        held[name], found_problems = upstream_problems(WEB / name, Path(directory))
+        problems += found_problems
+        print(f"upstream {name}: {held[name]} certificates and printed sides checked")
+    wall = round(time.monotonic() - started, 2)
+    print(f"{len(rows)} certificates, {sum(r['pairs'] for r in rows)} pairs, {wall}s wall")
+    if output is not None:
+        report = {
+            "rows": rows,
+            "receipts": totals,
+            "upstream": held,
+            "problems": problems,
+            "wall_seconds": wall,
+        }
+        output.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+    for problem in problems:
+        print(f"DISAGREEMENT: {problem}")
+    return 1 if problems else 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="action", required=True)
     deciding = sub.add_parser("decide")
     deciding.add_argument("--workers", type=int, choices=(1, 2), default=2)
     deciding.add_argument("--json", type=Path)
+    imports = sub.add_parser("decide-imports")
+    imports.add_argument("--workers", type=int, choices=(1, 2), default=2)
+    imports.add_argument("--json", type=Path)
+    imports.add_argument(
+        "--upstream", nargs=2, action="append", default=[], metavar=("PACKET", "DIRECTORY")
+    )
     replay = sub.add_parser("replay-t128")
     replay.add_argument("--workers", type=int, choices=(1, 2), default=2)
     args = parser.parse_args(argv)
     if args.action == "decide":
         return run_decide(args.workers, args.json)
+    if args.action == "decide-imports":
+        return run_decide_imports(args.workers, args.json, args.upstream)
     return run_replay_t128(args.workers)
 
 

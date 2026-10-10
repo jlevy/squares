@@ -30,7 +30,8 @@ PACKETS = (COUZO, FANG)
 SQUISH_481 = "squish-481-third-request-2026-10-09"
 DELEEUW = "ebdeleeuw-n70-refinement-2026-10-10"
 DERIVED = (SQUISH_481, DELEEUW)
-EVERY = (*PACKETS, *DERIVED)
+MISHAPOLK = "mishapolk-decimal-poses-2026-10-09"
+EVERY = (*PACKETS, *DERIVED, MISHAPOLK)
 
 
 def _packet(name: str) -> Path:
@@ -154,7 +155,7 @@ def test_the_declaration_refuses_what_it_does_not_describe(
     elif mutation == "reader-and-print":
         value["pending"][0]["printed"] = "11.9"
     elif mutation == "unknown-adapter":
-        value["certificates"][0]["format"] = "decimal-dilation"
+        value["certificates"][0]["format"] = "no-such-format"
     elif mutation == "witness-prefix":
         value["witness_prefix"] = "W_couzo"
     elif mutation == "replayed-undeclared":
@@ -227,7 +228,7 @@ def test_an_adapter_refuses_options_and_unknown_formats_are_refused() -> None:
     with pytest.raises(reports.ReportError, match="reads no options"):
         reports.parse_certificate(EVAND, 2, "evand-cert", {"dilation": "1"})
     with pytest.raises(reports.ReportError, match="unknown certificate format"):
-        reports.parse_certificate(EVAND, 2, "decimal-dilation")
+        reports.parse_certificate(EVAND, 2, "no-such-format")
     with pytest.raises(reports.ReportError, match="square rows"):
         reports.parse_certificate(EVAND + b"0 0 0\n", 2, "evand-cert")
     with pytest.raises(reports.ReportError, match="duplicate JSON key"):
@@ -246,10 +247,128 @@ def test_a_new_adapter_needs_only_its_entry_and_receives_its_declared_options(
             n, certificate.side * Fraction(options["dilation"]), certificate.poses
         )
 
-    monkeypatch.setitem(reports.ADAPTERS, "decimal-dilation", dilated)
-    certificate = reports.parse_certificate(EVAND, 2, "decimal-dilation", {"dilation": "2"})
+    monkeypatch.setitem(reports.ADAPTERS, "dilated-cert", dilated)
+    certificate = reports.parse_certificate(EVAND, 2, "dilated-cert", {"dilation": "2"})
     assert seen == [{"dilation": "2"}]
     assert certificate.side == 6
+
+
+# --------------------------------------------------------------------------- decimal poses
+
+#: Ellsworth's text: a side, then centres and degrees in the box centred at the origin.
+POSE = b"s: 2.5\n\nSquare 1: x=-0.5, y=-0.5, deg=0.0000\nSquare 2: x=0.75, y=0.5, deg=-90\n"
+DILATED = {"dilation": "2", "half_angle_places": "30"}
+
+
+def test_a_decimal_pose_is_dilated_about_its_centre_into_the_kernels_box() -> None:
+    # Side 2 * 2.5; each centre doubled, then moved by half the side; t = tan(theta/2).
+    expected = legacy.Certificate(
+        2,
+        Fraction(5),
+        (
+            legacy.Pose(Fraction(3, 2), Fraction(3, 2), Fraction(0)),
+            legacy.Pose(Fraction(4), Fraction(7, 2), Fraction(-1)),
+        ),
+    )
+    assert reports.parse_certificate(POSE, 2, "decimal-dilation", DILATED) == expected
+    undilated = {**DILATED, "dilation": "1"}
+    centred = reports.parse_certificate(POSE, 2, "decimal-dilation", undilated)
+    assert centred.side == Fraction(5, 2)
+    assert (centred.poses[1].x, centred.poses[1].y) == (Fraction(2), Fraction(7, 4))
+
+
+def _below(square: Callable[[Fraction], Fraction], t: Fraction, places: int) -> bool:
+    """Whether ``t <= tangent < t + 10^-places``, for a tangent ``square`` is increasing in."""
+    unit = Fraction(1, 10**places)
+    return square(t) <= 0 < square(t + unit)
+
+
+@pytest.mark.parametrize("places", [30, 32, 100])
+@pytest.mark.parametrize(
+    ("degrees", "square"),
+    [
+        # tan(22.5) = sqrt(2) - 1, a root of (t + 1)^2 - 2.
+        (Fraction(45), lambda t: (t + 1) ** 2 - 2),
+        (Fraction(405), lambda t: (t + 1) ** 2 - 2),
+        (Fraction(-315), lambda t: (t + 1) ** 2 - 2),
+        # tan(-22.5) = 1 - sqrt(2), a root of 2 - (1 - t)^2 below 1.
+        (Fraction(-45), lambda t: 2 - (1 - t) ** 2),
+        # tan(30) = 1/sqrt(3) and tan(60) = sqrt(3).
+        (Fraction(60), lambda t: 3 * t * t - 1),
+        (Fraction(120), lambda t: t * t - 3),
+    ],
+)
+def test_a_half_angle_tangent_is_its_exact_value_rounded_down(
+    degrees: Fraction, square: Callable[[Fraction], Fraction], places: int
+) -> None:
+    t = reports.half_angle_tangent(degrees, places)
+    assert (t * 10**places).denominator == 1
+    assert _below(square, t, places)
+
+
+def test_a_half_angle_tangent_near_zero_keeps_its_places() -> None:
+    # 2.68e-14 degrees, the size of the source's near-axis angles: t is about 2.34e-16.
+    t = reports.half_angle_tangent(Fraction("0.0000000000000268"), 32)
+    assert (t * 10**32).denominator == 1
+    assert Fraction(233874119767, 10**27) < t < Fraction(233874119768, 10**27)
+
+
+@pytest.mark.parametrize(
+    ("degrees", "tangent"),
+    [(0, 0), (-0, 0), (90, 1), (-90, -1), (270, -1), (360, 0), (450, 1), (-270, 1)],
+)
+def test_the_rational_half_angle_tangents_are_exact(degrees: int, tangent: int) -> None:
+    assert reports.half_angle_tangent(Fraction(degrees), 30) == tangent
+
+
+@pytest.mark.parametrize("degrees", [180, -180, 540])
+def test_a_half_turn_has_no_half_angle_tangent(degrees: int) -> None:
+    with pytest.raises(reports.ReportError, match="no finite half-angle tangent"):
+        reports.half_angle_tangent(Fraction(degrees), 30)
+
+
+@pytest.mark.parametrize(
+    ("options", "message"),
+    [
+        ({}, "reads exactly"),
+        ({"dilation": "2"}, "reads exactly"),
+        ({**DILATED, "side": "5"}, "reads exactly"),
+        ({**DILATED, "dilation": "0"}, "positive integer or p/q"),
+        ({**DILATED, "dilation": "1.5"}, "positive integer or p/q"),
+        ({**DILATED, "dilation": "-2"}, "positive integer or p/q"),
+        ({**DILATED, "dilation": "3/0"}, "positive integer or p/q"),
+        ({**DILATED, "dilation": "1" * 1025}, "positive integer or p/q"),
+        ({**DILATED, "dilation": "1/2"}, "below 1"),
+        ({**DILATED, "half_angle_places": "29"}, "integer from 30 to 100"),
+        ({**DILATED, "half_angle_places": "101"}, "integer from 30 to 100"),
+        ({**DILATED, "half_angle_places": "032"}, "integer from 30 to 100"),
+        ({**DILATED, "half_angle_places": "3e1"}, "integer from 30 to 100"),
+    ],
+)
+def test_the_decimal_adapter_reads_exactly_its_two_declared_options(
+    options: Mapping[str, str], message: str
+) -> None:
+    with pytest.raises(reports.ReportError, match=message):
+        reports.parse_certificate(POSE, 2, "decimal-dilation", options)
+
+
+@pytest.mark.parametrize(
+    ("raw", "n", "message"),
+    [
+        (POSE.replace(b"Square 1", b"Square 3"), 2, r"1\.\.n in order"),
+        (POSE, 3, "2 squares for n = 3"),
+        (POSE + b"Square 3: x=0, y=0\n", 3, "neither the side nor a square"),
+        (POSE.replace(b"s: 2.5", b""), 2, "states no side"),
+        (POSE + b"s: 3\n", 2, "second side line"),
+        (POSE.replace(b"2.5", b"\xff"), 2, "not UTF-8"),
+        (POSE.replace(b"deg=-90", b"deg=180"), 2, "no finite half-angle tangent"),
+    ],
+)
+def test_the_decimal_adapter_refuses_what_the_format_does_not_state(
+    raw: bytes, n: int, message: str
+) -> None:
+    with pytest.raises(reports.ReportError, match=message):
+        reports.parse_certificate(raw, n, "decimal-dilation", DILATED)
 
 
 # --------------------------------------------------------------------------- admission
@@ -646,7 +765,12 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         n: Fraction(rows[n]["exact_side"]) for n in scope
     }
     assert not check_standing.statements(result["headline"], scope)
-    published = {COUZO: "2026-10-09", FANG: "2026-10-10", SQUISH_481: "2026-10-09"}
+    published = {
+        COUZO: "2026-10-09",
+        FANG: "2026-10-10",
+        SQUISH_481: "2026-10-09",
+        MISHAPOLK: "2026-10-09",
+    }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
     assert evidence["scope"]["n_values"] == list(rows)
@@ -864,3 +988,56 @@ def test_the_481_claims_compare_issue_476_from_its_own_packet() -> None:
         (couzo,) = [other for other in rows[n]["pending"] if other["report"] == "#476"]
         assert couzo["relation"] == "below"
         assert Fraction(couzo["exact_side"]) == reports.read_facts(_packet(COUZO))[n].side
+
+
+# --------------------------------------------------------------------------- decimal packet
+
+MARGINS = "receipts/decimal-pose-margins.json"
+#: Where the issue's ceiling is below the case's verified ceiling.
+BELOW_CASE = (84, 86, 103, 105, 108, 127, 131, 132, 175, 180, 258, 267, 270, 302, 303, 306)
+
+
+def test_each_decimal_fact_is_the_issue_ceiling_by_the_dilation_the_margins_measured() -> None:
+    packet = _packet(MISHAPOLK)
+    measured = {row["n"]: row for row in _json(packet / MARGINS)["files"]}
+    record = _json(packet / reports.acquire_source.RECORD)
+    pinned = {item["path"]: item["sha256"] for item in record["sources"][0]["pinned_only"]}
+    certificates = reports.read_facts(packet)
+    assert list(certificates) == list(measured)
+    for row in reports.load_declaration(packet)["certificates"]:
+        n, certificate = row["n"], certificates[row["n"]]
+        options = {option["name"]: option["value"] for option in row.get("options", [])}
+        assert (row["format"], options["half_angle_places"]) == ("decimal-dilation", "32")
+        # The measured file, at the digest the packet pins, with the dilation it measured.
+        assert measured[n]["path"] == row["path"]
+        assert measured[n]["sha256"] == pinned[row["path"]]
+        assert Fraction(options["dilation"]) == Fraction(measured[n]["dilation"])
+        printed = Fraction(measured[n]["printed_side"])
+        assert certificate.side == Fraction(options["dilation"]) * printed
+        # The side is the issue's ceiling exactly, which the interval route proved packs.
+        assert certificate.side == Fraction(row["offered"])
+        assert measured[n]["target_side"] == row["offered"]
+        assert measured[n]["at_target_side"]["verdict"] == "packing"
+        assert all((pose.t * 10**32).denominator == 1 for pose in certificate.poses)
+
+
+def test_the_decimal_claims_find_the_ceiling_smallest_only_at_103_and_258() -> None:
+    rows = _rows(MISHAPOLK)
+    assert [n for n, row in rows.items() if row["smallest"] == reports.THIS] == [103, 258]
+    assert [n for n, row in rows.items() if not row["requested"]] == [132, 267]
+    below = tuple(n for n, row in rows.items() if row["case"]["relation"] == "below")
+    assert below == BELOW_CASE
+    assert all(row["case"]["relation"] == "above" for n, row in rows.items() if n not in below)
+    earlier = {
+        n
+        for n, row in rows.items()
+        for other in row["pending"]
+        if other["report"].startswith(("T-128", "T-130")) and other["relation"] == "above"
+    }
+    assert earlier == {84, 86, 105, 108, 127, 131, 175, 180, 270, 306}
+    assert {n: rows[n]["smallest"] for n in (132, 267, 302, 303)} == {
+        132: "#476",
+        267: "#476",
+        302: "#481",
+        303: "#481",
+    }

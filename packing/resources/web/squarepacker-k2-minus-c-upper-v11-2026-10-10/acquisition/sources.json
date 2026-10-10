@@ -185,31 +185,34 @@
           "path": "data/stair_k100000.json.gz",
           "bytes": 81776,
           "sha256": "68d858032be5db1622ffeebeecf75caa8fcb4cd59e512bc6a54e16a146987a1c",
-          "reason": "unchanged since v1.0 (same Git blob and digest); retained once, as original gzip, by the 2026-10-09 packet, or for the two largest hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml; not bound by identical_to, which compares a .gz copy decompressed"
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes as original gzip",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/data/stair_k100000.json.gz"
         },
         {
           "path": "data/stair_k1000000.json.gz",
           "bytes": 285363,
           "sha256": "6aeeb2e14b6a9b9f86b81d809d659e3d12e02aa9dfd62b9cdb0d5ad0f5b0dc19",
-          "reason": "unchanged since v1.0 (same Git blob and digest); retained once, as original gzip, by the 2026-10-09 packet, or for the two largest hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml; not bound by identical_to, which compares a .gz copy decompressed"
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes as original gzip",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/data/stair_k1000000.json.gz"
         },
         {
           "path": "data/stair_k10000000.json.gz",
           "bytes": 1129603,
           "sha256": "8e6e12d2a208f5ffbd9968843102041a1671abc013bcf071e6902ee659ec9212",
-          "reason": "unchanged since v1.0 (same Git blob and digest); retained once, as original gzip, by the 2026-10-09 packet, or for the two largest hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml; not bound by identical_to, which compares a .gz copy decompressed"
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes as original gzip",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/data/stair_k10000000.json.gz"
         },
         {
           "path": "data/stair_k100000000.json.gz",
           "bytes": 4494252,
           "sha256": "d4c76e64198c7b4782446a76916b687be694598a446827addc2f0001437918b2",
-          "reason": "unchanged since v1.0 (same Git blob and digest); retained once, as original gzip, by the 2026-10-09 packet, or for the two largest hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml; not bound by identical_to, which compares a .gz copy decompressed"
+          "reason": "unchanged since v1.0 (same Git blob and digest); a certificate of several megabytes kept out of Git under OR-18 and hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml"
         },
         {
           "path": "data/stair_k38250000.json.gz",
           "bytes": 2577279,
           "sha256": "2a1e7bdca5be06168167cdb8dfd43bde299847fed4d84bed154ef86fa4f43a0a",
-          "reason": "unchanged since v1.0 (same Git blob and digest); retained once, as original gzip, by the 2026-10-09 packet, or for the two largest hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml; not bound by identical_to, which compares a .gz copy decompressed"
+          "reason": "unchanged since v1.0 (same Git blob and digest); a certificate of several megabytes kept out of Git under OR-18 and hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml"
         },
         {
           "path": "paper/LICENSE",

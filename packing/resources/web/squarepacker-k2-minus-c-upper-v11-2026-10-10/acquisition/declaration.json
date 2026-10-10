@@ -68,8 +68,17 @@
       "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs"
     },
     {
+      "match": "data/stair_k38250000.json.gz",
+      "reason": "unchanged since v1.0 (same Git blob and digest); a certificate of several megabytes kept out of Git under OR-18 and hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml"
+    },
+    {
+      "match": "data/stair_k100000000.json.gz",
+      "reason": "unchanged since v1.0 (same Git blob and digest); a certificate of several megabytes kept out of Git under OR-18 and hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml"
+    },
+    {
       "match": "data/*",
-      "reason": "unchanged since v1.0 (same Git blob and digest); retained once, as original gzip, by the 2026-10-09 packet, or for the two largest hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml; not bound by identical_to, which compares a .gz copy decompressed"
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes as original gzip",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/data"
     }
   ]
 }
