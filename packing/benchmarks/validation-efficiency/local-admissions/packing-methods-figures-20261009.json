@@ -1,0 +1,53 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 5,
+  "seconds": 0.124,
+  "files": [
+    {
+      "file": "packing/tests/test_packing_methods_figures.py",
+      "tests": 5,
+      "seconds": 0.124
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_packing_methods_figures.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_packing_methods_figures.py": 5
+    },
+    "deselected_tests": 0
+  }
+}

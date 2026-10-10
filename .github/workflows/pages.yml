@@ -38,6 +38,10 @@ name: Certificate page
       - packing/devtools/render_n11_lower_bounds_explainer.py
       - packing/devtools/paper_front.py
       - packing/devtools/render_packing_methods.py
+      - packing/devtools/packing_methods_figures.py
+      - packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/results/packings/n106.txt
+      - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/sources.json
+      - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz
       - packing/devtools/artifact_dates.py
       - packing/devtools/templates/packing-methods-article.md
       - packing/devtools/templates/packing-methods-shell.html
@@ -46,20 +50,29 @@ name: Certificate page
       - docs/project/research/research-2026-09-08-annealing-for-square-packing.md
       - docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md
       - packing/campaign/explorations/X-034-the-workbench-physics-as-a-search.md
+      - packing/campaign/result-requests.yaml
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md
       - packing/resources/papers/gensane-ryckelynck-2005-improved-dense-packings.raw.md
       - packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md
+      - packing/resources/web/couzo-exact-refinements-2026-10-08/README.md
+      - packing/resources/web/couzo-followup-refinements-2026-10-08/README.md
       - packing/resources/web/de-winter-square-packing-211-2026-09-16/README.md
+      - packing/resources/web/evand-batch-292-2026-10-07/source/s12/search/packer/s292.md
+      - packing/resources/web/evand-batch-wrapper-2026-10-07/source/s12/search/exact/README.md
+      - packing/resources/web/evand-record-hunt-2026-10-09/README.md
+      - packing/resources/web/evand-record-hunt-2026-10-09/acquisition/claims.json
       - packing/resources/web/evand-square-packing-2026-10-05/README.md
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/README.md
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/README.md
       - packing/resources/web/franciscouzo-square-packing-2026-09-27/README.md
       - packing/resources/web/franciscouzo-square-packing-2026-10-03/README.md
       - packing/resources/web/friedman-ds7-survey-2009-html.md
+      - packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md
       - packing/resources/web/kingbird-run-statistics-2026/README.md
       - packing/resources/web/kingbird-squares-in-squares-analytic-minimization.md
       - packing/resources/web/kingbird-squares-in-squares-compared-2026-08-22.md
+      - packing/resources/web/ry-xu-new-packings-2026-10-08/README.md
       - packing/resources/web/schadt-s29-2025/README.md
       - packing/resources/web/squish-401-2026-10-07/README.md
       - packing/resources/web/squish-401-update-2026-10-07/README.md
@@ -542,24 +555,36 @@ jobs:
             !/packing/resources/*/
             !/packing/campaign/*/
             /packing/campaign/explorations/X-034-the-workbench-physics-as-a-search.md
+            /packing/campaign/result-requests.yaml
             /packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
             /packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md
             /packing/resources/papers/gensane-ryckelynck-2005-improved-dense-packings.raw.md
             /packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md
+            /packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/results/packings/n106.txt
+            /packing/resources/web/couzo-exact-refinements-2026-10-08/README.md
+            /packing/resources/web/couzo-followup-refinements-2026-10-08/README.md
             /packing/resources/web/de-winter-square-packing-211-2026-09-16/README.md
+            /packing/resources/web/evand-batch-292-2026-10-07/source/s12/search/packer/s292.md
+            /packing/resources/web/evand-batch-wrapper-2026-10-07/source/s12/search/exact/README.md
+            /packing/resources/web/evand-record-hunt-2026-10-09/README.md
+            /packing/resources/web/evand-record-hunt-2026-10-09/acquisition/claims.json
             /packing/resources/web/evand-square-packing-2026-10-05/README.md
             /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/README.md
             /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/README.md
             /packing/resources/web/franciscouzo-square-packing-2026-09-27/README.md
             /packing/resources/web/franciscouzo-square-packing-2026-10-03/README.md
             /packing/resources/web/friedman-ds7-survey-2009-html.md
+            /packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md
             /packing/resources/web/kingbird-run-statistics-2026/README.md
             /packing/resources/web/kingbird-squares-in-squares-analytic-minimization.md
             /packing/resources/web/kingbird-squares-in-squares-compared-2026-08-22.md
+            /packing/resources/web/ry-xu-new-packings-2026-10-08/README.md
             /packing/resources/web/schadt-s29-2025/README.md
             /packing/resources/web/squish-401-2026-10-07/README.md
             /packing/resources/web/squish-401-update-2026-10-07/README.md
             /packing/resources/web/squish-422-second-update-2026-10-07/README.md
+            /packing/resources/web/squish-422-second-update-2026-10-07/acquisition/sources.json
+            /packing/resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0

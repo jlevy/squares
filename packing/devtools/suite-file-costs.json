@@ -447,6 +447,7 @@
     "packing/tests/test_owner_five_dot_figure.py": 0.014,
     "packing/tests/test_owner_footprints.py": 3.78,
     "packing/tests/test_p12_escape_candidate.py": 0.031,
+    "packing/tests/test_packing_methods_figures.py": 0.124,
     "packing/tests/test_pages_scope.py": 9.067,
     "packing/tests/test_pages_workflow.py": 10.704,
     "packing/tests/test_paper_figures.py": 0.637,
@@ -759,6 +760,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/n17-family-cell-audit-2026-10-09.json",
           "provenance": {},
           "tests": 4
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_packing_methods_figures.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/benchmarks/validation-efficiency/local-admissions/packing-methods-figures-20261009.json",
+          "provenance": {},
+          "tests": 5
         }
       ]
     }
