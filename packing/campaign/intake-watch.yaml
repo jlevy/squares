@@ -326,3 +326,60 @@ repositories:
       the f58a017 packet leaves out; f1548ff's candidates are the n = 292 certificate the
       f58a017 batch packet retains; cca7bf1 changes verify scripts and indexes. The rest are
       TODO, task and draft notes, including s(12) wall-strip notes that claim no bound.
+
+  # The intake pass of 2026-10-10 (think-apri) read these heads. Each commit holds a
+  # result an open import bead owns, so each read names it until a packet pins the commit.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 9bf90e74973027e8b609b3be6992e1b5e3391aeb
+    read_on: '2026-10-10'
+    bead: think-m8ck
+    note: >-
+      Two commits of 9 October past the 2d32a6e read. 02f9690 is the pin of #476 (think-m8ck):
+      it adds certificates/, one exact certificate in Evan Daniel's format for each of the
+      repository's 65 packings, 58 at the exact optimum of Evan Daniel's exact contact solver
+      and 7 rational witnesses, and rewrites pose files and SVGs at those optima. Its message
+      reports the six new values #476 asks for (n = 132, 237, 263, 267, 270, 303), and that
+      the exact solver lowered 59 sides by 1e-12 to 1e-10 and n = 303's by 4.7e-5;
+      think-m8ck's triage lists every in-horizon claim the commit makes. The 20 beyond-horizon
+      certificates at n = 327 to 379 are think-1545's, in the read beside this one. 9bf90e7
+      deletes the n = 102, 103 and 272 pose files, SVGs and certificates as superseded in
+      this record (Ryan Xu's #432 packings at 102 and 103, Evan Daniel's #399 packing at
+      272); the history keeps them, and no record entry changes.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 9bf90e74973027e8b609b3be6992e1b5e3391aeb
+    read_on: '2026-10-10'
+    bead: think-1545
+    note: >-
+      The beyond-horizon half of 02f9690 (9 October): certificates for the 20 packings at n =
+      327, 332, 335 to 342, 364, 369 and 372 to 379, 15 at exact optima whose pose files and
+      SVGs it rewrites and 5 rational witnesses (327, 335, 342, 364, 372). Against the rows
+      the record tracks as current, n = 375 drops to 9953490883645300797660281830293/(5*10^29)
+      = 19.906981767290601..., 4.29e-5 below 2d32a6e's 19.907024692022954 and the same exact
+      side as Evan Daniel's big1_n375.cert of 41fc9ec, and n = 378 to
+      9973230520053043026984980967643/(5*10^29) = 19.946461040106..., 4.0e-4 below
+      19.946861170999796; n = 376, 377 and 379 move by 2.3e-8 or less. think-1545 owns these
+      outside-corpus updates; 9bf90e7 touches none of them.
+  - url: https://github.com/itsnaka/squish-certs
+    read_through: d45669b48cc97ad3aa17a6c847a8d06630f66eac
+    read_on: '2026-10-10'
+    bead: think-ac4h
+    note: >-
+      One commit of 9 October past the e63e4e5 read, the pin of #481 (think-ac4h). It adds
+      squish-submission-2026-10-09/: one folder per n for the 15 new packings (131, 153, 207,
+      209, 232, 236, 259, 263, 269, 270, 292, 302, 303, 305, 307) and the smaller 154 and 237,
+      each with nNNN.cert.json, two 50-digit text exports, an SVG, a comparison PNG and
+      check_packing_output.txt; summary.csv; a README; and sources/, the exact certificates of
+      three unfiled packings at n = 155, 240 and 306 used as pieces. The root README index is
+      updated. Its n = 153 certificate is a later release of the SQUISH n153 source the register
+      reviews by hand.
+  - url: https://github.com/wand125/square-packing
+    read_through: 22a23c8a99aa4e9616d596bc2f28555bacbee3dd
+    read_on: '2026-10-10'
+    bead: think-r333
+    note: >-
+      One commit of 10 October past the dd6a7cc read: 22a23c8 adds
+      problems/square-lower-bounds/certificates/mixed_n29_L582/, the check2 bundle reporting
+      s(29) >= 291/50 = 5.82 on the 2,073-direction net (README, bundle.json, ASSET.json naming
+      the data asset in release square-lower-bounds-v1, files-sha256.json, the check2 source
+      notes and script, and search notes), with its INDEX.json and README entries. #446's
+      comment of the same day reports it, superseding 1163/200; think-r333 owns its import.
