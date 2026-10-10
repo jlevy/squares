@@ -383,3 +383,19 @@ repositories:
       the data asset in release square-lower-bounds-v1, files-sha256.json, the check2 source
       notes and script, and search notes), with its INDEX.json and README entries. #446's
       comment of the same day reports it, superseding 1163/200; think-r333 owns its import.
+  - url: https://github.com/evand/square-packing
+    read_through: 799be37ac5d80c3ec39bcdcb8215847e77810c95
+    read_on: '2026-10-10'
+    bead: think-ilwc
+    note: >-
+      The 19 commits of 8 and 9 October from e059b1e to 799be37 past the ed01e0d read.
+      268af52 adds search/trio126/, exact certificates of three n = 126 packings
+      reconstructed from a picture (Ryan Xu's and SQUISH phases 14 and 10); n126_xu.cert
+      certifies s(126) <= 11742640687119285146522492579501/10^30, the local minimum
+      15/2 + 3 sqrt 2, 9.25e-11 below the register's ceiling, with "No claim here" in its
+      README; think-ilwc holds it. 41fc9ec adds big1_n375 (s(375) <=
+      9953490883645300797660281830293/(5*10^29), beyond the horizon, the side of Couzo's
+      02f9690 certificate), polish_n375 and hunt2_n270, whose side equals the n = 270
+      refinement registered from Couzo's 2d32a6e. e059b1e releases slack-separated pairs in
+      exactsolve; the rest is packer tooling, the s(110) census of certified minima above the
+      record (493 to 683), a site page and TODO, NEEDS and DESIGN notes.

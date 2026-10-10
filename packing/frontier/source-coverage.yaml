@@ -2483,7 +2483,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-10-09'
+  reviewed: '2026-10-10'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -2586,7 +2586,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-09'
+  reviewed: '2026-10-10'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -2610,7 +2610,9 @@ sources:
     resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json binds its exact side
     and rational triples to the retained original. This is provenance only, not a new result. A fresh
     read on 2026-10-09 found the update comment unchanged since its 2026-10-07T18:33:04Z edit and issue
-    401 closed with no later comment.'
+    401 closed with no later comment. On 2026-10-10 it was still unchanged, and a later release
+    exists: itsnaka/squish-certs d45669b, squish-submission-2026-10-09/n153, reports s(153) <=
+    12.872029849081180 in issue 481, whose import think-ac4h owns.'
 - id: squish-update-2026-10-07
   title: 'SQUISH update: seven additional and five tighter rational packings'
   role: source-repository

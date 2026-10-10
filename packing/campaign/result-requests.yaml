@@ -3851,3 +3851,34 @@ issues:
     replies: []
     close_when: The import and its review disposition are on main and the owner has posted the resulting
       state; optimality and first-publication priority are outside this request.
+  - number: 486
+    title: 'Preprint v1.1: c*(k) = O(k^{3/8}) with tiered constants, now below the k^{2/5} bound for every
+      k ≥ 2.48×10^12'
+    author: squarepacker
+    opened: '2026-10-10'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      squarepacker announces version 1.1 of the #471 preprint (Zenodo 10.5281/zenodo.23278927, release
+      v1.1 of squarepacker/k2-minus-c-upper). Theorem 1.1 becomes twelve tiers c*(k) < C_i k^{3/8} + a_i
+      for k >= k_i with interval-certified constants, below the k^{2/5} bound for every k >= 2.48*10^12;
+      Theorems 1.2, 1.4 and 1.6 are reported unchanged. Not refereed; the source says its reviews and
+      checks are by AI systems.
+    read_through: '2026-10-10T09:46:30Z'
+    results:
+    - key: theorem-1.1-v1.1-tiers
+      claim: Twelve tiers c*(k) < C_i k^{3/8} + a_i (k >= k_i), among them c*(k) < 42.09 k^{3/8} + 0.05 for
+        k >= 2.48*10^12, < 41.19 k^{3/8} + 0.04 for k >= 5.22*10^12 and < 40.62 k^{3/8} + 1.4*10^-5 for
+        k >= 3.4*10^26, superseding v1.0's 43.06 k^{3/8} + 2*10^-5.
+      source: body
+      not_registered: Triage pending under think-7lpw; not yet retained or reviewed here. The mathematical
+        review runs with #471's under think-rd8u.
+      queued: true
+      bead: think-7lpw
+    beads:
+    - think-7lpw
+    answer_bead: think-7lpw
+    replies: []
+    close_when: The reported import and its review disposition are on main and the owner has posted the
+      resulting state.
