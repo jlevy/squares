@@ -5,7 +5,7 @@ title: "Stage 4-5: independently review and adopt the pending upper-bound report
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:51:43.927Z
-updated_at: 2026-10-10T16:54:17.849Z
+updated_at: 2026-10-10T17:25:27.583Z
 started_at: 2026-10-10T09:52:52.837Z
 ---
 The register holds rational upper-bound reports by others at V0/C0 whose next_rung is an independent review of the retained replay and a selected-house decision: T-128 (Couzo, eight), T-130 (Couzo, five), T-131 (Daniel, n = 132), and this pass's #470, #476, #481, #483 and #484 once registered. Several counts now carry more than one candidate (132: T-098 house, T-131, #476, #470; 237, 263, 270, 303: #476 and #481; 267: #470, #476). For each count: the smallest certificate whose complete two-route replay passed, a mapped W2 review of that replay (think-mt6e's rule: verified lane only on a replay here and a mapped review), the earlier house kept as history, and the case record's reported and verified ceilings moved together. Mirror the Gupta adoption (PR #448, #459: confirm_gupta_records.py). Coordinate with PR #403 / #435, which own canonical exact-value integration on the case records.
@@ -62,3 +62,12 @@ Third route: `check_half_angle_area decide-imports --workers 2 --imports '#470' 
 Findings: RK-1 BLOCKS registering #470 with the register-plan text as printed (not the bounds): the claim calls 28 "complete rational source certificates" "improvements" (14 of 28 are above the case's verified ceiling; the files are decimal poses, the witnesses are the repository's), the significance says "-3.51e-09 to 1.74e-03 below", the notes print "above ... by -7.53e-13" (upper_bound_reports._comparison prints the case's signed difference), and E-mishapolk-470-pose-report says exact-algebraic where the source reports a precision-40, eps 1e-14 check; proposed rewrites are in the review. RK-2: 19 of 30 printed poses are not packings at the printed side; the bound rests on the dilation. RK-6: #470's 103 is Ryan Xu's packing (all squares within 2.1e-10) and 258 SQUISH's (within 4.3e-10), each refined. RK-7: n126_xu matches T-125 at 58 of 126 squares; 68 move (up to 0.06) and 13 turn; same arrangement, different poses. Others non-blocking (custody RI-2/RI-5, gross controls, pin string, shared model family at trio126, #481 compared by ceilings).
 
 Adoption per count (once #403 lands and private-worker custody is closed): 103 -> #470 crediting Ryan Xu's packing refined by Mishapolk; 258 -> #470 crediting SQUISH's packing refined by Mishapolk; 126 -> n126_xu crediting Ryan Xu's arrangement and Evan Daniel's reconstruction; 88, 130, 179, 199, 208, 238, 239 unchanged (case houses); every other count as the first imports review's table, which the new review's merged table replaces.
+
+
+2026-10-10, records lane of the intake pass (sub-agent, Claude Opus 5.5), worktree branch worktree-agent-af77bc1990859851b, from claude/determined-rubin-yjfy2a at a3d47c00a, merged with it again at 1e642dc88 (7812be32f). Register-level work only; no case record touched (#403).
+
+Registered at V3/C3, each with its reported atom carrying the review as external_review, a confirming entry (verified, exact-algebraic, replayed-here, independent-implementation, independence_record the review) and a reviews block: T-128, T-130, T-131 moved from V0/C0 (23e396d5c; E-couzo-451-exact-feasibility, E-couzo-460-followup-exact-feasibility, E-evand-465-record-hunt-exact-feasibility; stale "Final exact-head CI" gone); T-134 #476 (d519cf1ed); T-135 #484, 308 only, 343/344 as verified beyond-horizon rows (61a6261e3); T-136 #481 (517ff0770); T-137 #483 (09c3e1bf8); T-138 #470, sixteen below-case counts incl. README 132/267, text per RK-1 (18851fe9b); T-139 trio126 n126_xu, per RK-7 a more precise certificate of Ryan Xu's arrangement (22143847e). Verifiers V-check-half-angle-area (decides) and V-upper-bound-reports (premises).
+
+Decision to review: check_certificate_citations fails any verified, replayed certificate no case record cites, so V3/C3 without case edits could not pass --records. Commit ad5fff90d adds packing/devtools/certificate-citation-deferrals.yaml: each orphan named with its citing results, this bead, blocked_on jlevy/squares#403 and a date; a deferral fails once a case cites it, a named result stops citing it, or 30 days pass. Nine confirming entries are deferred. When the adoption round adds them to the case records, remove each deferral in that change (the check forces it). Revert ad5fff90d and the deferral entries if the owner prefers the failure.
+
+Also: importer comparison() fix for L15 (tied) and the signed case difference, with tests (66e318da4); #471/#486 records (6e2dd53a0); ry-xu limitations (120fd32d5); review id notes (584d6f648); views and site URLs (a25d380d1); release pin (d5dc83537); T-128 standing-test fixtures moved to its new rung (dc916571d). Validation: packing-validate --records and --edit exit 0; 936 behavioural tests pass.
