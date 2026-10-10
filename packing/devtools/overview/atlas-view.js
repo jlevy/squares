@@ -410,6 +410,8 @@
     }
     /** The tiles a line holds and the last case shown, as last arranged. */
     let arranged = "";
+    /** The border-box width consumed by the latest arrangement. */
+    let priorWidth = 0;
     /** @type {Animation[]} */
     let running = [];
 
@@ -434,12 +436,8 @@
     // neither the tiles a line holds nor the last case shown has changed. The size's
     // scale is the stylesheet's (`--site-atlas-scale`), read as the tiles are arranged.
     const arrange = () => {
-      beforeArrange?.();
-      const tiles = shown();
-      const last = Number(tiles.at(-1)?.dataset.atlasN);
-      if (!(last >= 1)) {
-        return;
-      }
+      // Visibility changes only the rows' height and scroll canvas, not this track's
+      // available width. Snapshot its geometry before completing the shown prefix.
       const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
       const style = getComputedStyle(cells);
       const least = lengthPx(
@@ -448,12 +446,21 @@
       );
       const gap = lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root);
       const scale = Number.parseFloat(style.getPropertyValue("--site-atlas-scale"));
+      const largestTile = scoped
+        ? lengthPx(style.getPropertyValue("--site-atlas-tile-max"), root)
+        : 0;
       const width = cells.getBoundingClientRect().width;
+      priorWidth = width;
       let capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
+      beforeArrange?.(capacity);
+      const tiles = shown();
+      const last = Number(tiles.at(-1)?.dataset.atlasN);
+      if (!(last >= 1)) {
+        return;
+      }
       if (scoped) {
         // Native poster cards keep their existing responsive, wrapped square rows.
         const medium = perLine(width, least, widest(last));
-        const largestTile = lengthPx(style.getPropertyValue("--site-atlas-tile-max"), root);
         const tile = largestTile > 0 ? Math.min(largestTile, width / medium) : width / medium;
         capacity =
           scale > 1 ? Math.max(1, Math.min(medium, Math.round(width / (scale * tile)))) : medium;
@@ -752,9 +759,9 @@
     // moving everything.
     if ("ResizeObserver" in window) {
       let waiting = false;
-      let priorWidth = cells.getBoundingClientRect().width;
-      new ResizeObserver(() => {
-        const width = cells.getBoundingClientRect().width;
+      new ResizeObserver((entries) => {
+        const width =
+          entries[0]?.borderBoxSize[0]?.inlineSize ?? cells.getBoundingClientRect().width;
         if (width === priorWidth) {
           return;
         }

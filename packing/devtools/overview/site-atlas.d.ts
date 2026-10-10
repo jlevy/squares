@@ -10,8 +10,8 @@ interface SiteAtlasParts {
   sizes: HTMLElement | null;
   /** Keep view/size state local and preserve the cells' ordinary semantics. */
   scoped?: boolean;
-  /** Complete the visible preview before measuring its final layout. */
-  beforeArrange?: () => void;
+  /** Complete the visible preview with freshly measured capacity, before layout writes. */
+  beforeArrange?: (capacity: number) => void;
   scales?: HTMLElement | null;
 }
 

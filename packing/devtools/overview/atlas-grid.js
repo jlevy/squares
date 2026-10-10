@@ -43,20 +43,11 @@
 
   // Complete physical grid rows near the nominal limit, or mathematical square
   // rows in Triangle. Only boundary anchors move; stable links retain their focus.
-  const completePreview = () => {
+  /** @param {number} columns freshly measured capacity for this arrangement */
+  const completePreview = (columns) => {
     const triangle = grid.dataset.atlasView === "triangle";
-    // Inline per-line state still describes the previous arrangement here. Use
-    // the shared capacity calculation with the current width/size tokens, so the
-    // completed prefix and the layout that follows use the same columns.
-    const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
-    const style = getComputedStyle(cells);
-    const columns = SiteAtlasView.perLineAt(
-      cells.getBoundingClientRect().width,
-      SiteAtlasView.lengthPx(style.getPropertyValue("--site-atlas-cell-min"), root),
-      Number.POSITIVE_INFINITY,
-      Number.parseFloat(style.getPropertyValue("--site-atlas-scale")),
-      SiteAtlasView.lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root),
-    );
+    // Triangle's square-number prefix needs no width measurement. Grid receives
+    // the same fresh capacity that places its cells, before any visibility writes.
     let count = triangle
       ? Math.round(Math.sqrt(first)) ** 2
       : Math.max(columns, Math.round(first / columns) * columns);

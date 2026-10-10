@@ -730,6 +730,53 @@ def native_frontier_failure(
     )
 
 
+def test_atlas_startup_does_not_repeat_full_tile_restyles(
+    browser: Browser, frontier_native_site: str, tmp_path: Path
+) -> None:
+    """Initial placement measures once before its visibility and position writes."""
+    trace = tmp_path / "atlas-startup-native-trace.json"
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    stop_trace = check_site_rendering.record_native_trace(page, trace)
+    try:
+        page.goto(frontier_native_site, wait_until="load")
+        check_site_rendering.wait_for_fonts(page)
+        tiles = page.locator("[data-atlas-grid] .site-atlas-cell").count()
+        assert tiles == 324
+    finally:
+        stop_trace()
+        page.close()
+    events = json.loads(trace.read_text())["traceEvents"]
+    evaluations = [
+        event
+        for event in events
+        if event["name"] == "EvaluateScript"
+        and "atlas-grid." in event.get("args", {}).get("data", {}).get("url", "")
+    ]
+    assert len(evaluations) == 1
+    evaluation = evaluations[0]
+    updates = sorted(
+        (
+            event
+            for event in events
+            if event["name"] == "UpdateLayoutTree"
+            and event["pid"] == evaluation["pid"]
+            and event["tid"] == evaluation["tid"]
+            and evaluation["ts"] <= event["ts"]
+            and event["ts"] + event.get("dur", 0) <= evaluation["ts"] + evaluation["dur"]
+        ),
+        key=lambda event: event["ts"],
+    )
+    assert updates, "Atlas startup trace has no attributable style update"
+    counts = []
+    for update in updates:
+        count = update.get("args", {}).get("elementCount")
+        assert type(count) in (int, float), update
+        counts.append(count)
+    # Initial native layout is unavoidable. Subsequent token reads may settle small
+    # tab boxes, but must not repeatedly flush the tiles after placement writes.
+    assert max(counts[1:], default=0) < tiles, counts
+
+
 @pytest.mark.parametrize(
     ("width", "scheme"), [(390, "light"), (390, "dark"), (1280, "light"), (1280, "dark")]
 )
