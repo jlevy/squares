@@ -13,7 +13,6 @@
   --site-wash: var(--kpress-doc-surface-hover);
   --site-shadow: oklch(0% 0 0 / 0.15);
   --site-tab-current-tint: 16%;
-  --site-header-offset: 0px;
   --site-header-duration: 180ms;
   --site-header-layer: 5;
 }
@@ -22,7 +21,7 @@
    its ordinary, visible layout; print and embedded documents retain theirs too. */
 @media screen {
   :root {
-    scroll-padding-block-start: var(--site-header-offset);
+    scroll-padding-block-start: 0px;
   }
   .site-headroom {
     background: var(--kpress-doc-bg);

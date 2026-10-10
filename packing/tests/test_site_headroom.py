@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from collections.abc import Iterator
 from pathlib import Path
@@ -9,7 +10,7 @@ from typing import Any
 
 import pytest
 
-from devtools import render_overview, site_assets
+from devtools import check_site_rendering, render_overview, site_assets
 from devtools.render_n11_lower_bounds_explainer import kpress_css, kpress_static
 from sqpack.probes import probe
 from tests import site_browser
@@ -223,6 +224,74 @@ def test_initial_fragment_keeps_the_top_region_at_the_headers_document_position(
         assert not page.evaluate(STATE)["hidden"]
     finally:
         page.close()
+
+
+def test_header_measurement_does_not_restyle_the_native_math_document(
+    browser: Any, shells: dict[str, Path], tmp_path: Path
+) -> None:
+    """Header startup and wrapping must not invalidate the whole paper's styles."""
+    expressions = 500
+    mathematics = (
+        '<math xmlns="http://www.w3.org/1998/Math/MathML">'
+        "<mfrac><mrow><mi>s</mi><mo>(</mo><mi>n</mi><mo>)</mo></mrow>"
+        "<msqrt><mi>n</mi></msqrt></mfrac></math>"
+    ) * expressions
+    path = tmp_path / "native-math-header.html"
+    path.write_text(
+        shells["ordinary"]
+        .read_text()
+        .replace("<h1>Header test</h1>", f"<h1>Header test</h1><div>{mathematics}</div>")
+    )
+    trace = tmp_path / "header-native-trace.json"
+    page = browser.new_page(viewport={"width": 390, "height": 700}, reduced_motion="reduce")
+    stop_trace = check_site_rendering.record_native_trace(page, trace)
+    try:
+        page.goto(path.as_uri(), wait_until="load")
+        assert page.locator("math").count() == expressions
+        page.locator(".site-headroom").wait_for(state="attached")
+        narrow = page.evaluate(STATE)
+        assert narrow["offset"] == pytest.approx(narrow["height"] + 8, abs=0.01)
+        page.set_viewport_size({"width": 1280, "height": 700})
+        page.evaluate(SCROLL, 0)
+        wide = page.evaluate(STATE)
+        assert wide["height"] < narrow["height"]
+        assert wide["offset"] == pytest.approx(wide["height"] + 8, abs=0.01)
+        page.evaluate(ANCHOR)
+        page.locator('.site-nav a[data-page="overview"]').focus()
+        anchored = page.evaluate(STATE)
+        assert anchored["targetTop"] >= anchored["bottom"], anchored
+    finally:
+        stop_trace()
+        page.close()
+
+    events = json.loads(trace.read_text())["traceEvents"]
+    measures = [
+        event
+        for event in events
+        if event["name"] == "FunctionCall"
+        and event.get("args", {}).get("data", {}).get("functionName") == "measure"
+    ]
+    assert len(measures) >= 2, measures
+    invalidations = []
+    for measure in measures:
+        task = next(
+            event
+            for event in events
+            if event["name"] == "RunTask"
+            and event["tid"] == measure["tid"]
+            and event["ts"] <= measure["ts"] < event["ts"] + event.get("dur", 0)
+        )
+        styles = [
+            event.get("args", {}).get("elementCount", 0)
+            for event in events
+            if event["name"] == "UpdateLayoutTree"
+            and event["tid"] == measure["tid"]
+            and measure["ts"] + measure["dur"] <= event["ts"] < task["ts"] + task["dur"]
+        ]
+        invalidations.extend(styles)
+    # Native trace counts establish the invalidation's scope without a machine-speed
+    # threshold or an assertion about how the scroll clearance is implemented.
+    assert max(invalidations, default=0) < expressions, invalidations
 
 
 def test_nonscrolling_workbench_keeps_header_and_tabs_visible(

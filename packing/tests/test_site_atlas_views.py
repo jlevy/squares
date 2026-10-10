@@ -63,6 +63,7 @@ ACTIONS = probe(PROBES, "site_atlas_views/actions")
 DRAWING = probe(PROBES, "site_atlas_views/drawing")
 INITIAL = probe(PROBES, "site_atlas_views/initial")
 ROWS = probe(PROBES, "site_atlas_views/rows")
+RESIZE_SETTLED = probe(PROBES, "site_atlas_views/resize-settled")
 SUBSET = probe(PROBES, "site_atlas_views/subset")
 REFERENCE = probe(PROBES, "site_atlas_views/reference")
 CONTRIBUTIONS = probe(PROBES, "site_atlas_views/contributions")
@@ -367,6 +368,16 @@ def test_default_triangle_explicit_grid_and_complete_rows_keep_all_case_nodes(
         page.close()
 
 
+def _resize_grid(page: Any, width: int) -> None:
+    """Wait for the observer's next-frame arrangement, not just existing animations."""
+    page.set_viewport_size({"width": width, "height": 900})
+    try:
+        page.wait_for_function(RESIZE_SETTLED, arg={"width": width}, timeout=5000)
+    except site_browser.api().TimeoutError as error:
+        state = page.evaluate(ROWS, {})
+        raise AssertionError(f"Atlas Grid did not settle at width {width}: {state}") from error
+
+
 def test_grid_boundary_focus_and_stepped_popover_return_remain_visible(
     row_browser: Any, row_site: str
 ) -> None:
@@ -379,23 +390,23 @@ def test_grid_boundary_focus_and_stepped_popover_return_remain_visible(
         # Find actual nearby capacities, independent of retained CSS tile sizes.
         widths = {}
         for width in range(680, 1281, 20):
-            page.set_viewport_size({"width": width, "height": 900})
+            _resize_grid(page, width)
             state = _completed(page)
             widths.setdefault(state["columns"], width)
             if {9, 10} <= widths.keys():
                 break
         assert {9, 10} <= widths.keys()
-        page.set_viewport_size({"width": widths[10], "height": 900})
+        _resize_grid(page, widths[10])
         _completed(page)
         tile = page.locator("#atlas-n-100")
         tile.focus()
-        page.set_viewport_size({"width": widths[9], "height": 900})
+        _resize_grid(page, widths[9])
         state = _completed(page)
         assert state["columns"] == 9
         assert state["shown"][-1] == 99
         assert state["focus"] == "99"
         assert state["focus_visible"]
-        page.set_viewport_size({"width": widths[10], "height": 900})
+        _resize_grid(page, widths[10])
         _completed(page)
         tile.click()
         site_browser.api().expect(
@@ -405,7 +416,7 @@ def test_grid_boundary_focus_and_stepped_popover_return_remain_visible(
         site_browser.api().expect(
             page.locator('#pop-case article[data-case="99"]')
         ).to_be_visible()
-        page.set_viewport_size({"width": widths[9], "height": 900})
+        _resize_grid(page, widths[9])
         atlas.settle(page)
         state = page.evaluate(ROWS, {})
         assert len(state["shown"]) == 108

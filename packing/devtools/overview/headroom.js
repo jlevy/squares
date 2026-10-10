@@ -90,7 +90,10 @@
     if (height !== measured) {
       height = measured;
       topRegion = initialTop + height;
-      root.style.setProperty("--site-header-offset", `${height + anchorGap}px`);
+      // Scroll padding belongs only to the root. An inherited custom property here
+      // would restyle every descendant, including a paper's native MathML, after
+      // its first layout and each wrapped-header resize.
+      root.style.scrollPaddingBlockStart = `${height + anchorGap}px`;
       // A face loading or a wrapped row changes the geometry, not scroll intent.
       // Keep a hidden header hidden while updating its full anchor clearance.
       document.dispatchEvent(new CustomEvent("squares:headerchange"));
