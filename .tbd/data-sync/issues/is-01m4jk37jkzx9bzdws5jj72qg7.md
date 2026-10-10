@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-10: eight new issues, unread replies and comments, f
 kind: epic
 status: in_progress
 priority: 1
-version: 30
+version: 32
 delegate: claude-code@vm
 labels:
   - result-import
@@ -39,10 +39,12 @@ child_order_hints:
   - is-01m4kavd06vjy2knrcgbd036pr
   - is-01m4kavdgqztf67yz76a1bwnck
   - is-01m4kave1ry14781fh7qhx9sgw
+  - is-01m4kbxmtaqt87tdw33cs19ah8
+  - is-01m4kbxna1xdmjd8nkka3wax60
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:42:51.218Z
-updated_at: 2026-10-10T16:38:01.528Z
+updated_at: 2026-10-10T16:56:43.073Z
 started_at: 2026-10-10T09:49:24.452Z
 ---
 W1 intake pass run 2026-10-10 on branch claude/determined-rubin-yjfy2a by packing/campaign/result-import.md, section Running an Intake Pass. Owns every item make intake listed as needing an owner on 2026-10-10 (sweep report: 32 unowned items after tbd sync). Children own each import, the ledger bookkeeping and the watched-repository reads. Never merge, never post on an issue without the owner's word, never start a CPU-hour replay without an owner budget.

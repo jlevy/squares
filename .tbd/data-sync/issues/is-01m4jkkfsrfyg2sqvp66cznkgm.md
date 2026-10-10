@@ -5,7 +5,7 @@ title: "Stage 4-5: independently review and adopt the pending upper-bound report
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:51:43.927Z
-updated_at: 2026-10-10T15:36:14.022Z
+updated_at: 2026-10-10T16:54:17.849Z
 started_at: 2026-10-10T09:52:52.837Z
 ---
 The register holds rational upper-bound reports by others at V0/C0 whose next_rung is an independent review of the retained replay and a selected-house decision: T-128 (Couzo, eight), T-130 (Couzo, five), T-131 (Daniel, n = 132), and this pass's #470, #476, #481, #483 and #484 once registered. Several counts now carry more than one candidate (132: T-098 house, T-131, #476, #470; 237, 263, 270, 303: #476 and #481; 267: #470, #476). For each count: the smallest certificate whose complete two-route replay passed, a mapped W2 review of that replay (think-mt6e's rule: verified lane only on a replay here and a mapped review), the earlier house kept as history, and the case record's reported and verified ceilings moved together. Mirror the Gupta adoption (PR #448, #459: confirm_gupta_records.py). Coordinate with PR #403 / #435, which own canonical exact-value integration on the case records.
@@ -51,3 +51,14 @@ Third route: devtools.check_half_angle_area gained `decide-imports` (own evand-c
 Rungs: each import can take V3/C3 once registered with its confirming evidence (E-couzo-476-exact-feasibility, E-squish-481-exact-feasibility, E-deleeuw-483-exact-feasibility, E-fang-484-exact-feasibility; independent-implementation), verifiers V-check-half-angle-area (decides) and V-upper-bound-reports (premises), and the reviews entry. No V4/C4.
 
 Adoption per count (once #403 lands and RI-5 is closed): 70 -> #483; 131 -> #481 (T-128 verified, not selected); 132 -> #476 (T-131 verified); 153, 154, 207, 209, 232, 236, 237, 259, 263, 269, 270, 292, 302, 303, 305, 307 -> #481 (237, 263, 303: then #476; 270: then #476, then T-130); 267 -> #476; 308 -> #484; unchanged from the earlier review: 84, 86, 105, 175 -> T-130; 108, 127, 155, 180, 228, 306 -> T-128. 343/344: no house, beyond-horizon rows.
+
+
+2026-10-10 W2 review lane, #470 and trio126 (Claude Opus 5.5, worktree-agent-a7c7887a3045fbc12, commit 8f73d4d11): docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md, mapped in document-map.yaml (SYNOPSIS not re-rendered). Verdict: accepted for finite feasibility; both entries can take V3/C3 once registered (T-NNN to be assigned) with their confirming evidence and this review; no V4/C4.
+
+Replays reproduced (from packing/, at most two processes, load 2-3.5): mishapolk-decimal-poses-2026-10-09 `check --replay` in two halves of 15 counts each, 45/45 equal (644.9 s) and 45/45 equal (641.0 s), all 90 jobs; evand-trio126-2026-10-09 `check --replay` 3/3 equal (11.8 s); `check-claims` rebuilt equal for both; `acquire_source --check` both PACKET_MATCHES_ITS_CONTRACT; `decimal_pose_margins check` on both #470 interval receipts RECEIPT_REPRODUCED from files fetched at dd3da5c and 4e1a601.
+
+Third route: `check_half_angle_area decide-imports --workers 2 --imports '#470' trio126 --upstream mishapolk-decimal-poses-2026-10-09 DIR --upstream evand-trio126-2026-10-09 DIR`: 31 witnesses (all 30 #470 facts, n126_xu), 613,484 pairs (12,913 clipped), 186 controls at required outcomes, no disagreement; 32 #470 upstream checks (each witness derived again from its pinned decimal pose with own parser, own dilation S_n/s and a decimal Machin/Taylor tangent floor, all 5,677 squares exact; README prints at 132 and 267) and 1 trio126 retained-file comparison pass; 40.3 s. Default roster (first review's 27) re-run: no disagreement, 880,705 pairs, 51.7 s. Tests: tests/test_check_half_angle_area.py 82 passed. Validation: --records (46.6 s) and --edit (164.5 s) fail only on the stale SYNOPSIS document map.
+
+Findings: RK-1 BLOCKS registering #470 with the register-plan text as printed (not the bounds): the claim calls 28 "complete rational source certificates" "improvements" (14 of 28 are above the case's verified ceiling; the files are decimal poses, the witnesses are the repository's), the significance says "-3.51e-09 to 1.74e-03 below", the notes print "above ... by -7.53e-13" (upper_bound_reports._comparison prints the case's signed difference), and E-mishapolk-470-pose-report says exact-algebraic where the source reports a precision-40, eps 1e-14 check; proposed rewrites are in the review. RK-2: 19 of 30 printed poses are not packings at the printed side; the bound rests on the dilation. RK-6: #470's 103 is Ryan Xu's packing (all squares within 2.1e-10) and 258 SQUISH's (within 4.3e-10), each refined. RK-7: n126_xu matches T-125 at 58 of 126 squares; 68 move (up to 0.06) and 13 turn; same arrangement, different poses. Others non-blocking (custody RI-2/RI-5, gross controls, pin string, shared model family at trio126, #481 compared by ceilings).
+
+Adoption per count (once #403 lands and private-worker custody is closed): 103 -> #470 crediting Ryan Xu's packing refined by Mishapolk; 258 -> #470 crediting SQUISH's packing refined by Mishapolk; 126 -> n126_xu crediting Ryan Xu's arrangement and Evan Daniel's reconstruction; 88, 130, 179, 199, 208, 238, 239 unchanged (case houses); every other count as the first imports review's table, which the new review's merged table replaces.
