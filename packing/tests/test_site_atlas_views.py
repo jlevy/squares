@@ -321,7 +321,7 @@ def test_no_javascript_triangle_remains_a_usable_static_full_atlas(
         page.close()
 
 
-def _results_action(browser: Any, address: str, viewport: dict[str, int]) -> dict[str, Any]:
+def _results_action(browser: Any, address: str, viewport: Window) -> dict[str, Any]:
     """Read the homepage Results action against the dedicated Atlas toggle's design."""
     page = browser.new_page(viewport=viewport)
     try:

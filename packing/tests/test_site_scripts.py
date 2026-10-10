@@ -2,6 +2,8 @@
 
 from pathlib import Path
 
+import pytest
+
 from devtools import site_assets
 from devtools.check_site_scripts import inventory
 
@@ -56,3 +58,25 @@ def test_inventory_accepts_the_actual_protocol_font_bootstrap(tmp_path: Path) ->
     _, errors = inventory(tmp_path)
     assert len(errors) == 1
     assert "exceeds 4096 bytes" in errors[0]
+
+
+@pytest.mark.parametrize(
+    ("family", "linked_name"),
+    [
+        ("headroom", "headroom.0123456789abcdef.js"),
+        ("headroom", "page.0123456789abcdef.js"),
+        ("rating-tooltips", "rating-tooltips.0123456789abcdef.js"),
+        ("rating-tooltips", "page.0123456789abcdef.js"),
+        ("homepage-atlas", "homepage-atlas.0123456789abcdef.js"),
+    ],
+)
+def test_inventory_accepts_reviewed_shared_interaction_programs(
+    tmp_path: Path, family: str, linked_name: str
+) -> None:
+    source = Path(__file__).parents[1] / "devtools" / "overview" / f"{family}.js"
+    (tmp_path / linked_name).write_text(source.read_text())
+    (tmp_path / "index.html").write_text(f'<script src="{linked_name}"></script>')
+    records, errors = inventory(tmp_path)
+    assert not errors
+    assert len(records) == 1
+    assert records[0].category == "input-response"

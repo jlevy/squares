@@ -300,7 +300,7 @@ def test_the_popover_fetches_the_record_and_opens_its_address() -> None:
     assert 'id="pop-case" popover' in markup
     assert "data-case-popover" in markup
     assert "data-case-body" in markup
-    assert 'data-case-open href="cases/"' in markup
+    assert 'data-case-open href="atlas.html"' in markup
     assert 'data-case-frontier href="atlas.html">Frontier Survey row</a>' in markup
     assert 'data-case-atlas href="atlas.html">Atlas diagram</a>' in markup
     assert markup.count('data-go="page"') == 3
