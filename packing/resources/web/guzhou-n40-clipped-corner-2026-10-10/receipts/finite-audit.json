@@ -1,0 +1,393 @@
+{
+ "kind": "clipped-corner-transfer-audit/v1",
+ "claim": "s(40) > 335427/50000; s(40) > 67000 sqrt(6400006889)/798988091",
+ "candidate": "packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json",
+ "values": {
+  "X": "335427/50000",
+  "parent_side": "335000/335427",
+  "h": "514946944479/1000000000000000",
+  "b": "41804244441680000/80000042740596391757",
+  "density_upper": "2818711359413/1000000000",
+  "cap_area_upper": "105927371547130481204125144554133943395765128268560305244818368346061468958861099752826441/963267580951601619904685415785783879319746290421792565279679963683203350358126945184000000000000",
+  "charge_lower": "963065329024244121971001715896012899686320301532665610603262939462756671201569266806261866384199839360867/963267580951601619904685415785783879319746290421792565279679963683203350358126945184000000000000000000000",
+  "simple_charge": "99979/100000",
+  "counting_margin": "38564967880402471292471464175466336403947683478493464902895770474121681031853358557866384199839360867/24081689523790040497617135394644596982993657260544814131991999092080083758953173629600000000000000000000",
+  "simple_counting_margin": "1/625",
+  "uncut_side_squared": "28729630924721000000/638381969559824281",
+  "ess_sup": "744157113224753949201233200959491557948628550000000000000000000000000000000/264006142643866310314006500845084529851262768737056316088338267454599309",
+  "ess_sup_decimal": "2818.71135941178",
+  "H_minus_ess_sup_decimal": "1.21531e-09",
+  "containment_slack_decimal": "1.62595e-15",
+  "chi_decimal": "0.999790035571",
+  "counting_margin_decimal": "0.00160142285",
+  "clipped_area_decimal": "1.09967e-07",
+  "full_core_decimal": "6.708489081558"
+ },
+ "checks": [
+  {
+   "name": "density: the release's candidate",
+   "held": true,
+   "detail": "71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0"
+  },
+  {
+   "name": "density: n, L and B are the claim's",
+   "held": true,
+   "detail": "n 40, L 67/10, B 9977/10000"
+  },
+  {
+   "name": "density: 480 positive rows",
+   "held": true,
+   "detail": "480 of 2526 listed"
+  },
+  {
+   "name": "density: mass M",
+   "held": true,
+   "detail": "3999/100"
+  },
+  {
+   "name": "density: M below n",
+   "held": true,
+   "detail": "n - M = 1/100"
+  },
+  {
+   "name": "density: D4 expansion",
+   "held": true,
+   "detail": "3840 terms, 3792 distinct rectangles"
+  },
+  {
+   "name": "density: D4-invariant",
+   "held": true,
+   "detail": "under each of the eight maps"
+  },
+  {
+   "name": "density: integral of g is M",
+   "held": true,
+   "detail": "3999/100"
+  },
+  {
+   "name": "density: ess sup g <= H",
+   "held": true,
+   "detail": "ess sup 2818.71135941178, H - ess sup 1.21531e-09, at (0.875674813256255, 2.7130663463425)"
+  },
+  {
+   "name": "density: H is the peak with densities rounded up to 1e-9",
+   "held": true,
+   "detail": "2818711359413/1000000000"
+  },
+  {
+   "name": "derived input: the receipts' input",
+   "held": true,
+   "detail": "49f696a4533ded9532b879bf69706da35bc03a49db79718573760adc08cd458e"
+  },
+  {
+   "name": "net: positive step, 2 to 65536 directions",
+   "held": true,
+   "detail": "D 83/80000, 401 directions"
+  },
+  {
+   "name": "net: B (1 + D) < 1",
+   "held": true,
+   "detail": "798988091/800000000"
+  },
+  {
+   "name": "net: the last node passes pi/4",
+   "held": true,
+   "detail": "t_last 83/200, t^2 + 2t - 1 = 89/40000"
+  },
+  {
+   "name": "net: last tangent at most 1/2",
+   "held": true,
+   "detail": "83/200"
+  },
+  {
+   "name": "net: half-gap tangents at most D",
+   "held": true,
+   "detail": "j = 0..399"
+  },
+  {
+   "name": "transfer: X > L and q >= B",
+   "held": true,
+   "detail": "q = 335000/335427"
+  },
+  {
+   "name": "transfer: 0 < h < D, delta0 <= pi/4",
+   "held": true,
+   "detail": "514946944479/1000000000000000"
+  },
+  {
+   "name": "transfer: first-branch containment",
+   "held": true,
+   "detail": "q - B (cos d0 + sin d0) = 1.62595e-15"
+  },
+  {
+   "name": "transfer: 0 < b, beta <= pi/4",
+   "held": true,
+   "detail": "41804244441680000/80000042740596391757"
+  },
+  {
+   "name": "transfer: chi >= charge",
+   "held": true,
+   "detail": "chi 0.999790035571"
+  },
+  {
+   "name": "transfer: n chi - M > 0",
+   "held": true,
+   "detail": "0.00160142285"
+  },
+  {
+   "name": "transfer: n charge - M > 0",
+   "held": true,
+   "detail": "1/625"
+  },
+  {
+   "name": "full core: n tau - M > 0",
+   "held": true,
+   "detail": "7/500"
+  },
+  {
+   "name": "full core: (L/gamma)^2 is the closed form",
+   "held": true,
+   "detail": "28729630924721000000/638381969559824281"
+  },
+  {
+   "name": "full core: above 6.70848908",
+   "held": true,
+   "detail": "L/gamma ~ 6.708489081558"
+  },
+  {
+   "name": "retained parameters.json is the claim",
+   "held": true,
+   "detail": "all keys"
+  },
+  {
+   "name": "local receipt: parameters",
+   "held": true,
+   "detail": "the claim's"
+  },
+  {
+   "name": "local receipt: finite.X",
+   "held": true,
+   "detail": "335427/50000"
+  },
+  {
+   "name": "local receipt: finite.parent_side",
+   "held": true,
+   "detail": "335000/335427"
+  },
+  {
+   "name": "local receipt: finite.h",
+   "held": true,
+   "detail": "514946944479/1000000000000000"
+  },
+  {
+   "name": "local receipt: finite.b",
+   "held": true,
+   "detail": "41804244441680000/80000042740596391757"
+  },
+  {
+   "name": "local receipt: finite.density_upper",
+   "held": true,
+   "detail": "2818711359413/1000000000"
+  },
+  {
+   "name": "local receipt: finite.cap_area_upper",
+   "held": true,
+   "detail": "105927371547130481204125144554133943395765128268560305244818368346061468958861099752826441/963267580951601619904685415785783879319746290421792565279679963683203350358126945184000000000000"
+  },
+  {
+   "name": "local receipt: finite.charge_lower",
+   "held": true,
+   "detail": "963065329024244121971001715896012899686320301532665610603262939462756671201569266806261866384199839360867/963267580951601619904685415785783879319746290421792565279679963683203350358126945184000000000000000000000"
+  },
+  {
+   "name": "local receipt: finite.simple_charge",
+   "held": true,
+   "detail": "99979/100000"
+  },
+  {
+   "name": "local receipt: finite.counting_margin",
+   "held": true,
+   "detail": "38564967880402471292471464175466336403947683478493464902895770474121681031853358557866384199839360867/24081689523790040497617135394644596982993657260544814131991999092080083758953173629600000000000000000000"
+  },
+  {
+   "name": "local receipt: finite.simple_counting_margin",
+   "held": true,
+   "detail": "1/625"
+  },
+  {
+   "name": "local receipt: finite.uncut_side_squared",
+   "held": true,
+   "detail": "28729630924721000000/638381969559824281"
+  },
+  {
+   "name": "local receipt: finite block has no other field",
+   "held": true,
+   "detail": "none"
+  },
+  {
+   "name": "local receipt: candidate and input digests",
+   "held": true,
+   "detail": "71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0, 49f696a4533ded9532b879bf69706da35bc03a49db79718573760adc08cd458e"
+  },
+  {
+   "name": "local receipt: net and threshold",
+   "held": true,
+   "detail": "401 at 83/80000"
+  },
+  {
+   "name": "local receipt: nodal premises",
+   "held": true,
+   "detail": "the derived input's"
+  },
+  {
+   "name": "local receipt: nodal summary",
+   "held": true,
+   "detail": "VERIFIED, 401 directions"
+  },
+  {
+   "name": "ci receipt: parameters",
+   "held": true,
+   "detail": "the claim's"
+  },
+  {
+   "name": "ci receipt: finite.X",
+   "held": true,
+   "detail": "335427/50000"
+  },
+  {
+   "name": "ci receipt: finite.parent_side",
+   "held": true,
+   "detail": "335000/335427"
+  },
+  {
+   "name": "ci receipt: finite.h",
+   "held": true,
+   "detail": "514946944479/1000000000000000"
+  },
+  {
+   "name": "ci receipt: finite.b",
+   "held": true,
+   "detail": "41804244441680000/80000042740596391757"
+  },
+  {
+   "name": "ci receipt: finite.density_upper",
+   "held": true,
+   "detail": "2818711359413/1000000000"
+  },
+  {
+   "name": "ci receipt: finite.cap_area_upper",
+   "held": true,
+   "detail": "105927371547130481204125144554133943395765128268560305244818368346061468958861099752826441/963267580951601619904685415785783879319746290421792565279679963683203350358126945184000000000000"
+  },
+  {
+   "name": "ci receipt: finite.charge_lower",
+   "held": true,
+   "detail": "963065329024244121971001715896012899686320301532665610603262939462756671201569266806261866384199839360867/963267580951601619904685415785783879319746290421792565279679963683203350358126945184000000000000000000000"
+  },
+  {
+   "name": "ci receipt: finite.simple_charge",
+   "held": true,
+   "detail": "99979/100000"
+  },
+  {
+   "name": "ci receipt: finite.counting_margin",
+   "held": true,
+   "detail": "38564967880402471292471464175466336403947683478493464902895770474121681031853358557866384199839360867/24081689523790040497617135394644596982993657260544814131991999092080083758953173629600000000000000000000"
+  },
+  {
+   "name": "ci receipt: finite.simple_counting_margin",
+   "held": true,
+   "detail": "1/625"
+  },
+  {
+   "name": "ci receipt: finite.uncut_side_squared",
+   "held": true,
+   "detail": "28729630924721000000/638381969559824281"
+  },
+  {
+   "name": "ci receipt: finite block has no other field",
+   "held": true,
+   "detail": "none"
+  },
+  {
+   "name": "ci receipt: candidate and input digests",
+   "held": true,
+   "detail": "71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0, 49f696a4533ded9532b879bf69706da35bc03a49db79718573760adc08cd458e"
+  },
+  {
+   "name": "ci receipt: net and threshold",
+   "held": true,
+   "detail": "401 at 83/80000"
+  },
+  {
+   "name": "ci receipt: nodal premises",
+   "held": true,
+   "detail": "the derived input's"
+  },
+  {
+   "name": "ci receipt: nodal summary",
+   "held": true,
+   "detail": "VERIFIED, 401 directions"
+  }
+ ],
+ "controls": [
+  {
+   "control": "E",
+   "change": "H replaced by H - 2/10^9",
+   "expect_failed": [
+    "density: ess sup g <= H"
+   ],
+   "failed": [
+    "density: ess sup g <= H",
+    "density: H is the peak with densities rounded up to 1e-9"
+   ],
+   "refused": true
+  },
+  {
+   "control": "F",
+   "change": "X = 335428/50000, the next side on the release's grid",
+   "expect_failed": [
+    "transfer: first-branch containment"
+   ],
+   "failed": [
+    "transfer: first-branch containment",
+    "transfer: chi >= charge",
+    "transfer: n chi - M > 0"
+   ],
+   "refused": true,
+   "h_admissible": "60033020064996940486676608924122508200574596768687/116920130986472233456294786617302641572474603438080000",
+   "h_inadmissible": "6003302006499694048667660892412250820057459676877/11692013098647223345629478661730264157247460343808000",
+   "margin_upper_bound": "-93861887553430355201474714646311573727834000265719108231432075909266056733950090402090798050305453564198848303488924264938901745940368634660133300452691254926383327403167398208379965483384942972892805788269599987105948445099152159668811331904298551/9402538578947971189772000439261726972401527183810263475735801141135948396365600606227491513536040727237065907414204697610438635219742579320386619365264341573043405089865332017971470587766932253851522924857273401280866657593998410720000000000000000000",
+   "margin_upper_bound_decimal": "-0.00998261"
+  },
+  {
+   "control": "G",
+   "change": "h + 1/10^15",
+   "expect_failed": [
+    "transfer: first-branch containment"
+   ],
+   "failed": [
+    "transfer: first-branch containment"
+   ],
+   "refused": true
+  },
+  {
+   "control": "H",
+   "change": "the 201 net, D = 83/40000 with last index 200, the same h",
+   "expect_failed": [
+    "transfer: chi >= charge",
+    "transfer: n chi - M > 0"
+   ],
+   "failed": [
+    "transfer: chi >= charge",
+    "transfer: n chi - M > 0",
+    "full core: (L/gamma)^2 is the closed form",
+    "full core: above 6.70848908"
+   ],
+   "refused": true,
+   "chi": "-171856939691949582146012353684913863194386388943077443759057708286697885596015518044442847586502616799133/179736258194415196645020353160554874877803252163461087735625772300293388553463472592000000000000000000000",
+   "chi_decimal": "-0.956162"
+  }
+ ],
+ "status": "FINITE_STEPS_HOLD"
+}

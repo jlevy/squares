@@ -1,0 +1,134 @@
+{
+ "kind": "clipped-corner-replay-check/v1",
+ "binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+ "build": {
+  "profile": "release",
+  "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+  "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+  "target": "x86_64-unknown-linux-gnu"
+ },
+ "wall_seconds": 299.53,
+ "cpu_seconds": 241.037,
+ "control_point": {
+  "r": 220,
+  "centre": [
+   3.353931795732347,
+   5.09801085267264
+  ],
+  "weighed": 400,
+  "factor": "499392017517921/500000000000000"
+ },
+ "checks": [
+  {
+   "name": "replay: every direction verified",
+   "held": true,
+   "detail": "401 of 401"
+  },
+  {
+   "name": "replay: summary",
+   "held": true,
+   "detail": "VERIFIED"
+  },
+  {
+   "name": "replay: premises",
+   "held": true,
+   "detail": "the finite audit's"
+  },
+  {
+   "name": "replay: boxes",
+   "held": true,
+   "detail": "32970910"
+  },
+  {
+   "name": "replay: least certified bound",
+   "held": true,
+   "detail": "1.000100000471634 at r = 73"
+  },
+  {
+   "name": "replay: the axis sweep",
+   "held": true,
+   "detail": "4879681 vertices"
+  },
+  {
+   "name": "replay: oblique directions by branch and bound",
+   "held": true,
+   "detail": "greatest depth 30"
+  },
+  {
+   "name": "replay: reviewed source for a declared net",
+   "held": true,
+   "detail": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88 (910b6b12c)"
+  },
+  {
+   "name": "replay: rows equal the local receipt's apart from timing",
+   "held": true,
+   "detail": "401 of 401"
+  },
+  {
+   "name": "replay: rows equal the ci receipt's apart from timing",
+   "held": true,
+   "detail": "401 of 401"
+  },
+  {
+   "name": "replay: even rows equal the retained census row's",
+   "held": true,
+   "detail": "201 of 201"
+  },
+  {
+   "name": "replay: exit 0, --receipts wrote the rows",
+   "held": true,
+   "detail": "exit 0"
+  },
+  {
+   "name": "control point: capture recorded, evaluated again",
+   "held": true,
+   "detail": "r = 220, capture 1.00131656576"
+  },
+  {
+   "name": "control point: the census rule's factor",
+   "held": true,
+   "detail": "499392017517921/500000000000000"
+  },
+  {
+   "name": "control point: least exact capture over the oblique leaf centres",
+   "held": true,
+   "detail": "400 centres weighed"
+  },
+  {
+   "name": "control A: refused, on the 401 net",
+   "held": true,
+   "detail": "exit 1, REFUSED at [73, 220]"
+  },
+  {
+   "name": "control A: r = 73 refused at an exact witness below tau",
+   "held": true,
+   "detail": "capture 0.999322755117 at (4.154087469614815, 3.54558884396036)"
+  },
+  {
+   "name": "control A: r = 220 refused at an exact witness below tau",
+   "held": true,
+   "detail": "capture 0.999227715635 at (3.360484788619592, 3.370969577239184)"
+  },
+  {
+   "name": "control B: refused, on the 401 net",
+   "held": true,
+   "detail": "exit 1, REFUSED at [220]"
+  },
+  {
+   "name": "control B: r = 220 refused at an exact witness below tau",
+   "held": true,
+   "detail": "capture 1.0000999998 at (5.090310404843237, 3.357863270244454)"
+  },
+  {
+   "name": "control C: admitted on the standard net, another claim",
+   "held": true,
+   "detail": "exit 0, 201 directions at 83/40000"
+  },
+  {
+   "name": "control D: refused at admission",
+   "held": true,
+   "detail": "sqverify-fast: the net does not reach past pi/4"
+  }
+ ],
+ "status": "REPLAY_HOLDS"
+}
