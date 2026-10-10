@@ -5,7 +5,7 @@ title: Publish the exact-side collection as a web-only report
 kind: task
 status: in_progress
 priority: 1
-version: 20
+version: 21
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex@spud10.local
 labels: []
@@ -14,12 +14,84 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T08:43:03.009Z
-updated_at: 2026-10-10T01:20:03.232Z
+updated_at: 2026-10-10T09:51:17.073Z
 started_at: 2026-10-09T08:43:05.688Z
 ---
-Publish the exact-side collection as a clean HTML report on the Papers page. The user retired PDF packaging and excessive superseded rows from publication. Preserve the complete canonical source: 324 current entries, 175 historical records, 519 coefficient vectors and 6,273 integer strings. Publish all 324 current entries, including 321 current exact polynomials, plus 14 additional source records: seven outside-frontier, three source-invalid and four unreconciled V0/C0. Published payloads contain 339 vectors and 2,152 strings. Omit 161 superseded history rows and 19 redundant current notes only from HTML, Markdown and lazy payloads; preserve all 673 n=83 coefficients and scientific assurance. Keep the responsive searchable catalogue, complete web report and coefficient downloads without report PDF builds. Guard obsolete unpublished payload URL retirement and independently verify every retained field and coefficient. Capture actual amended-head CI on PR435 and beads, preserving dated parent PR403 and full-source qualification separately. No PR merge or mathematical admission belongs to this slice. Remaining contact-system driver, numeric identities and geometry/Lean work stay tracked.
+Publish the exact-side collection as a clean HTML report on Papers, without report PDF generation. Preserve the complete canonical corpus: 324 current cases, 214 history rows, 560 coefficient vectors and 6,378 integer strings. Publish all 324 current records, including 321 exact current sides, plus 28 source occurrences (18 unreconciled, seven outside the frontier and three invalid), totaling 352 records/vectors and 2,128 coefficient strings. Omit 186 superseded history rows and 22 redundant current notes only from publication. Keep all 673 n=83 coefficients, scoped assurance, source custody, responsive tables, lazy coefficient downloads and scientific PDFs. Capture actual amended-head validation on PR 435 and this bead; pending certificates remain V0/C0 until separate review/adoption. Numeric gaps, contact/driver work and geometry/Lean remain owned separately. No PR landing or mathematical assurance upgrade belongs to this slice.
 
 ## Notes
+
+# Polynomial refresh checkpoint, 2026-10-10
+
+This continuation resumed at 2026-10-10T08:57:29Z against fixed `origin/main`
+`657cc486130e9020608ff244d8a86d1d04153634`, including PR 478 and PR 482. Formal stack
+447 remains main → PR 403 → PR 435. The source commits were amended and release pins
+kept small; neither resumed head has been pushed yet.
+
+- Parent: `11c63df2ca355ef8818db099c7c77d08fb812ae5`, source/data
+  `491a8da5968b1bcd39574fdd711919126d853104`.
+- Child: `71a2249082b9238460f98b168dc1fa0c18b8b014`, source/data
+  `a3640a51e7598a419beb0ec56748b0fd887c86de`.
+- Both source trees are clean; the official upstack rebase reconciled tracking without
+  changing the fixed main checkpoint.
+
+All 324 current records, their statuses and lower bounds, and all 77 proved cases are
+unchanged. Parent has 320 exact identities; child has 321 including n=83. The exact
+representation gaps remain n=29,55,71. All 32 current algebraic backfills survive.
+
+The finite certificate roster now has 60 source occurrences for 59 distinct bounds: 31
+selected, 14 superseded and 15 pending occurrences for 14 distinct pending bounds.
+Only Daniel’s n=132/T-131 and separate n=155/T-128 custody were added.
+The latter shares Couzo’s exact side but has its own source and receipt; equal sides
+establish no motion or local-minimum equivalence.
+Every pending occurrence remains V0/C0.
+
+Existing open `think-kkj2` owns T-131 independent review and adoption, retaining T-098
+as historical evidence; `think-iyij` retains import/reply work.
+Original Couzo adoption `think-lhtz` and T-128 historical-house custody `think-0mlq`
+remain. Acquisition is not adoption.
+
+Actual child rebuild: 538 records, 560 coefficient vectors and 6,378 integer strings;
+214 history rows = 186 superseded + 18 unreconciled + seven outside + three invalid.
+Storage is 843,684 gzip / 2,821,903 decoded bytes.
+All 324 current and all 212 previous history objects survive unchanged versus 4819.
+Publication contains 352 records/vectors and 2,128 strings; prior 350 index rows and
+payloads are unchanged, with four new payload files.
+All 673 n=83 coefficients remain, including the 724-digit maximum; source root ordinal
+27 is still independently uncounted.
+Superseded history remains canonical and is omitted publicly.
+Report PDF generation stays disabled.
+
+Parent focused checks passed: 290 tests, one redundant slow deselection, maintained
+update/check and touched-file Ruff/BasedPyright.
+Child full register check passed with 321 irreducibility/root certificates, historical
+source collector check passed, and 158 focused builder/custody/catalogue/renderer/Pages
+tests passed (217.49 seconds).
+The affected test file has zero type or lint findings.
+Independent review found no remaining material findings; two test/citation mistakes were
+fixed.
+
+Parent snapshot inventory passed: 197,970,624 bytes under the unchanged 201,326,592-byte
+cap; 3,355,968 bytes headroom, 7,033 paths and all eight replay leaves retained.
+Its one broad push attempt remains NEGATIVE: 65 edit checks passed, type floor hit its
+900-second timeout with an empty log, and reachable tests were skipped.
+A single focused type-floor diagnosis is running with unchanged inputs, limits and
+worker flags; this does not erase that negative.
+Final child inventory, web reconstruction/layout, local gate and fresh exact-head hosted
+qualification remain pending.
+
+The external volume recovered after two earlier disconnects; an actual writable probe
+passed at resume. Cached environments and separate Cargo targets are reused.
+No internal scratch fallback or extra report PDF packaging was used.
+Source and unique evidence stay outside disposable scratch.
+
+Remaining W7 driver → independent n=11 octic control → current RyXu n=102 bounded W6
+work, numeric identities and geometry/Lean/adoption lanes have not been executed in this
+record refresh. Final PR status/body updates and guarded stack push are in progress.
+No PR landing is authorized.
+
+The previous checkpoint notes below are dated evidence; their heads, counts and results
+do not qualify this resumed stack.
 
 # Web publication and complete coefficient coverage
 

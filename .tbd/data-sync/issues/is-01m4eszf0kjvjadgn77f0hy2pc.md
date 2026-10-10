@@ -5,7 +5,7 @@ title: Resume polynomial catalogue recovery, upstream sync and database work map
 kind: task
 status: in_progress
 priority: 1
-version: 35
+version: 36
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -27,12 +27,84 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T22:26:10.056Z
-updated_at: 2026-10-10T01:20:02.654Z
+updated_at: 2026-10-10T09:51:15.518Z
 started_at: 2026-10-08T22:26:36.377Z
 ---
-W7 continuation of interrupted PR435/stack447. Preserve unpublished local parent and child repairs, reconcile formal stack with latest origin/main, run current record and change-reachable gates, push every validated owning layer and update cost/results/validation in PR descriptions. Reconcile actual current and historical database partitions with every remaining identification/contact/witness bead. Coordinator owns Git, shared records, bead mutations, integration and PR; parallel Sol-medium CI/storage audit, Sol-xhigh coverage reconciliation and Astra-xhigh semantic mathematical review. Preserve unique source and validation evidence outside disposable external scratch. Slice1 recover provenance and assess gates/capacity; slice2 stack integration and local assurance; slice3 PR/CI closeout alongside selected W6 driver readiness work. No PR landing in scope.
+Continue W7 recovery and the fixed origin/main refresh of formal stack 447 (PR 403 source/register, PR 435 web publication). Preserve all current database records and source custody, admit the two new Daniel source occurrences without adopting them, and maintain the complete polynomial register. Current child scope is 324 cases with 321 exact sides, three numeric gaps, and 214 retained history rows. Publish amended source commits with small release pins, qualify the actual frozen heads, and keep every dated negative receipt and remaining owner visible on both PRs and beads. Coordinator owns Git, shared records, beads and PR changes; reviewers own bounded disjoint checks. No PR landing, solver campaign, geometry/Lean admission or contact-derived identification belongs to this refresh.
 
 ## Notes
+
+# Polynomial refresh checkpoint, 2026-10-10
+
+This continuation resumed at 2026-10-10T08:57:29Z against fixed `origin/main`
+`657cc486130e9020608ff244d8a86d1d04153634`, including PR 478 and PR 482. Formal stack
+447 remains main → PR 403 → PR 435. The source commits were amended and release pins
+kept small; neither resumed head has been pushed yet.
+
+- Parent: `11c63df2ca355ef8818db099c7c77d08fb812ae5`, source/data
+  `491a8da5968b1bcd39574fdd711919126d853104`.
+- Child: `71a2249082b9238460f98b168dc1fa0c18b8b014`, source/data
+  `a3640a51e7598a419beb0ec56748b0fd887c86de`.
+- Both source trees are clean; the official upstack rebase reconciled tracking without
+  changing the fixed main checkpoint.
+
+All 324 current records, their statuses and lower bounds, and all 77 proved cases are
+unchanged. Parent has 320 exact identities; child has 321 including n=83. The exact
+representation gaps remain n=29,55,71. All 32 current algebraic backfills survive.
+
+The finite certificate roster now has 60 source occurrences for 59 distinct bounds: 31
+selected, 14 superseded and 15 pending occurrences for 14 distinct pending bounds.
+Only Daniel’s n=132/T-131 and separate n=155/T-128 custody were added.
+The latter shares Couzo’s exact side but has its own source and receipt; equal sides
+establish no motion or local-minimum equivalence.
+Every pending occurrence remains V0/C0.
+
+Existing open `think-kkj2` owns T-131 independent review and adoption, retaining T-098
+as historical evidence; `think-iyij` retains import/reply work.
+Original Couzo adoption `think-lhtz` and T-128 historical-house custody `think-0mlq`
+remain. Acquisition is not adoption.
+
+Actual child rebuild: 538 records, 560 coefficient vectors and 6,378 integer strings;
+214 history rows = 186 superseded + 18 unreconciled + seven outside + three invalid.
+Storage is 843,684 gzip / 2,821,903 decoded bytes.
+All 324 current and all 212 previous history objects survive unchanged versus 4819.
+Publication contains 352 records/vectors and 2,128 strings; prior 350 index rows and
+payloads are unchanged, with four new payload files.
+All 673 n=83 coefficients remain, including the 724-digit maximum; source root ordinal
+27 is still independently uncounted.
+Superseded history remains canonical and is omitted publicly.
+Report PDF generation stays disabled.
+
+Parent focused checks passed: 290 tests, one redundant slow deselection, maintained
+update/check and touched-file Ruff/BasedPyright.
+Child full register check passed with 321 irreducibility/root certificates, historical
+source collector check passed, and 158 focused builder/custody/catalogue/renderer/Pages
+tests passed (217.49 seconds).
+The affected test file has zero type or lint findings.
+Independent review found no remaining material findings; two test/citation mistakes were
+fixed.
+
+Parent snapshot inventory passed: 197,970,624 bytes under the unchanged 201,326,592-byte
+cap; 3,355,968 bytes headroom, 7,033 paths and all eight replay leaves retained.
+Its one broad push attempt remains NEGATIVE: 65 edit checks passed, type floor hit its
+900-second timeout with an empty log, and reachable tests were skipped.
+A single focused type-floor diagnosis is running with unchanged inputs, limits and
+worker flags; this does not erase that negative.
+Final child inventory, web reconstruction/layout, local gate and fresh exact-head hosted
+qualification remain pending.
+
+The external volume recovered after two earlier disconnects; an actual writable probe
+passed at resume. Cached environments and separate Cargo targets are reused.
+No internal scratch fallback or extra report PDF packaging was used.
+Source and unique evidence stay outside disposable scratch.
+
+Remaining W7 driver → independent n=11 octic control → current RyXu n=102 bounded W6
+work, numeric identities and geometry/Lean/adoption lanes have not been executed in this
+record refresh. Final PR status/body updates and guarded stack push are in progress.
+No PR landing is authorized.
+
+The previous checkpoint notes below are dated evidence; their heads, counts and results
+do not qualify this resumed stack.
 
 # Polynomial recovery and database work map
 
