@@ -5,12 +5,12 @@ title: Integrate SVG toolkit with current main and add a large gallery example
 kind: task
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+version: 3
+spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels: []
 dependencies: []
 created_at: 2026-08-25T06:45:32.860Z
-updated_at: 2026-08-25T07:27:53.552Z
+updated_at: 2026-10-10T23:03:23.695Z
 closed_at: 2026-08-25T07:27:53.551Z
 close_reason: Merged current origin/main, ported the renderer to the mature layout, added and embedded verified n=29, regenerated all gallery SVGs with renderer v4, added systematic embed/palette controls, and passed the full 32-step gate plus focused post-merge gates.
 resolution: null

@@ -5,7 +5,7 @@ title: Add certified and illustrative accessible SVG trajectories
 kind: task
 status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
@@ -21,7 +21,7 @@ dependencies:
     target: is-01m0v10ekmcac6c3v3wm9qtsda
 parent_id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 created_at: 2026-08-24T23:16:39.818Z
-updated_at: 2026-10-10T23:02:54.921Z
+updated_at: 2026-10-10T23:03:12.224Z
 closed_at: 2026-08-25T03:00:04.903Z
 close_reason: Implemented and validated the deterministic SVG toolkit, exact and numerical adapters, safe serializer, static and animated views, typed overlays, CLI, retained gallery, n=3 migration, documentation, and full gate.
 resolution: null

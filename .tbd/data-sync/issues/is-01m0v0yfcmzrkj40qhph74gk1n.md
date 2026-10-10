@@ -5,7 +5,7 @@ title: Adapt numerical and exact packing records into render frames
 kind: task
 status: closed
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m0v0z1kj1v09bzcd9qqk45ap
 parent_id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 created_at: 2026-08-24T23:16:03.603Z
-updated_at: 2026-10-10T23:02:54.921Z
+updated_at: 2026-10-10T23:03:04.660Z
 closed_at: 2026-08-25T03:00:04.864Z
 close_reason: Implemented and validated the deterministic SVG toolkit, exact and numerical adapters, safe serializer, static and animated views, typed overlays, CLI, retained gallery, n=3 migration, documentation, and full gate.
 resolution: null
