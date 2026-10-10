@@ -485,7 +485,9 @@ PREPUBLICATION = "verification/prepublication-receipt.json"
 BUNDLE_README = "README.md"
 
 
-def audit_check2(directory: Path, stated: Certificate) -> dict[str, Any]:
+def audit_check2(
+    directory: Path, stated: Certificate, pins: dict[str, str] | None = None
+) -> dict[str, Any]:
     """Every exact premise of a check2 certificate, from the retained files alone.
 
     A check2 directory carries no C++ records: ``bundle.json`` states the claim and the
@@ -502,6 +504,10 @@ def audit_check2(directory: Path, stated: Certificate) -> dict[str, Any]:
     build must verify every node on the published bytes; and every file
     ``files-sha256.json`` lists, the tarball's own README apart (`BUNDLE_README`), must be
     the directory's, retained or pinned. It decides no coverage.
+
+    ``pins`` are the pinned-only digests by upstream path, the packet's acquisition
+    record's unless given; `devtools.fine_net_followup` passes the raw digests of the
+    ``.gz`` files of a release asset unpacked outside any packet.
     """
     raw = read_retained_bytes(directory / "candidate.json")
     candidate = load_json(raw)
@@ -585,7 +591,7 @@ def audit_check2(directory: Path, stated: Certificate) -> dict[str, Any]:
         "the source's pre-publication run does not verify every node of this candidate",
     )
     listed = load_json(read_retained_bytes(directory / "files-sha256.json"))
-    pins = pinned_digests(stated)
+    pins = pinned_digests(stated) if pins is None else pins
     for name, value in listed.items():
         if name == BUNDLE_README:
             continue

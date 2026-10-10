@@ -251,6 +251,9 @@ allowlist:
   - path: packing/devtools/audit_wand125_declared_net.py
     kind: download
     boundary: wand125's finer-net bundle, its candidate, axis tables and checker files against the digests its manifest and the n50 packet's upstream copy pin (#366).
+  - path: packing/devtools/fine_net_followup.py
+    kind: download
+    boundary: wand125's fine-net release assets kept outside Git against the size and digest the packet pins, and their sealed inner bundles against the source's own files-sha256.json (#446).
   - path: packing/devtools/audit_n11_lean.py
     kind: download
     boundary: 11SquaresFormalized's final audit, downloaded from the source, against the digest the packet's manifest pinned at retention and the uncompressed digest the source's summary.json states.
