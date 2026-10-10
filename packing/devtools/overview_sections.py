@@ -49,7 +49,6 @@ from devtools.render_overview import (
     RESULTS_PAGE,
     SITE_PAGES,
     paper_path,
-    paper_record,
 )
 from devtools.render_overview import PAPERS as PAPER_RECORDS
 from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, superseded
@@ -1573,37 +1572,31 @@ class Paper(NamedTuple):
     size: CardSize = "large"
 
 
-#: What each part of the n = 11 series says of itself on its cards and in README, by
-#: slug, in the words of the series plan (`docs/project/specs/active/
-#: plan-2026-10-05-n11-explainer-series.md`, Series Presentation): each title is its
-#: renderer's (`render_overview.PAPERS`) in sentence case, and each line names the result
-#: the paper proves or explains. Part III's line says what T-060's rungs allow, `V3/C3`:
+#: Each paper's card description, by slug. Titles come from the same paper record as
+#: the renderer and series strip. Part III's description respects T-060's V3/C3 rungs:
 #: a proof, machine-checked here with its review record pending, never a formal one.
-SERIES_CARDS: dict[str, tuple[str, str]] = {
+PAPER_DESCRIPTIONS: dict[str, str] = {
     N11_LOWER_BOUNDS_EXPLAINER: (
-        "New lower bounds for square packing for n = 11",
-        (
-            "How weighted points and 2-of-3 threshold atoms prove T-018, T-025 and T-026, "
-            "s(11) >= 3.8264\u2026, with interactive figures."
-        ),
+        "How weighted points and 2-of-3 threshold atoms prove T-018, T-025 and T-026, "
+        "s(11) >= 3.8264\u2026, with interactive figures."
     ),
     N11_THRESHOLD_BOUND_REVIEW: (
-        "A review of the certified lower bound s(11) > 31/8 for 11 squares",
-        (
-            "Explains Kleddamag\u2019s proof that s(11) > 31/8 (T-037): five-site k-of-m "
-            "charges, k-of-m charges on shrunken parents with strict cores, and a "
-            "reoptimized certificate over 12,028 angle rows."
-        ),
+        "Explains Kleddamag\u2019s proof that s(11) > 31/8 (T-037): five-site k-of-m "
+        "charges, k-of-m charges on shrunken parents with strict cores, and a "
+        "reoptimized certificate over 12,028 angle rows."
     ),
     N11_OPTIMALITY_REVIEW: (
-        "A review of the optimality proof of the Trump packing of 11 squares",
-        (
-            "Explains Ahmed\u2019s proof that Trump\u2019s packing is optimal, "
-            "s(11) = 3.8770835\u2026 (T-060): construction, case exclusions, capture and "
-            "local isolation."
-        ),
+        "Explains Ahmed\u2019s proof that Trump\u2019s packing is optimal, "
+        "s(11) = 3.8770835\u2026 (T-060): construction, case exclusions, capture and "
+        "local isolation."
+    ),
+    PACKING_METHODS: (
+        "How seeds, search, local refinement and exact checks produce record upper bounds."
     ),
 }
+
+#: The first-principles tutorial's title, as its own H1 writes it in TUTORIAL.md.
+TUTORIAL_TITLE = "Square Packing from First Principles"
 
 #: Where each part of the series is served, under `papers/` by its slug
 #: (`render_overview.paper_path`); each renderer's `SITE_PATH` is the same path from the
@@ -1623,24 +1616,15 @@ PAPERS: tuple[Paper, ...] = (
         Paper(
             href=paper_path(record.slug),
             label=record.label,
-            title=SERIES_CARDS[record.slug][0],
-            description=SERIES_CARDS[record.slug][1],
+            title=record.title,
+            description=PAPER_DESCRIPTIONS[record.slug],
         )
         for record in PAPER_RECORDS
-        if record.part is not None
-    ),
-    Paper(
-        href=paper_path(PACKING_METHODS),
-        label=paper_record(PACKING_METHODS).label,
-        title="How record square packings are found",
-        description=(
-            "How seeds, search, local refinement and exact checks produce record upper bounds."
-        ),
     ),
     Paper(
         href="tutorial.html",
         label="Tutorial",
-        title="Square packing from first principles",
+        title=TUTORIAL_TITLE,
         description=(
             "An introduction for anyone new to the problem: what the objects are, why the "
             "approach is shaped the way it is, and what the research has and has not "
@@ -1698,7 +1682,7 @@ PAGES: tuple[tuple[str, str, str, str], ...] = (
     (
         "tutorial.html",
         "Tutorial",
-        "Square packing from first principles",
+        TUTORIAL_TITLE,
         "The problem, its configuration space, exact algebra and the search.",
     ),
     (

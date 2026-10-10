@@ -406,10 +406,7 @@ def version_history_markdown() -> str:
     """The paper's own editions, newest first, each with the date it was first published
     and what changed in the paper: `sqpack.release.EXPLAINER_HISTORY`, not the site's
     record, which lists editions in which this paper did not change."""
-    return "\n".join(
-        f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}"
-        for entry in EXPLAINER_HISTORY
-    )
+    return paper_front.version_history_markdown(EXPLAINER_HISTORY)
 
 
 def edition_file(path: Path) -> str:

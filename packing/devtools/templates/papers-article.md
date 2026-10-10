@@ -22,8 +22,12 @@ Trump’s 1979 packing of eleven squares has been proved optimal by Ahmed’s pr
 review record pending (`V3/C3`). T-060 settles the case; Part III explains it.
 
 The [square-packing tutorial](tutorial.html) introduces the problem and its mathematics.
-[How Record Square Packings Are Found](papers/square-packing-methods-survey.html)
-follows the discovery process from a seed through search and local refinement to a
-certified upper bound, with examples from published record packings.
+[{{METHODS_PAPER_TITLE}}]({{METHODS_PAPER}}) follows the discovery process from a seed
+through search and local refinement to a certified upper bound, with examples from
+published record packings.
 
 {{PAPER_CARDS}}
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

@@ -86,7 +86,7 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
         "packing-methods.css",
     )
     assert paper.FRONT.history == "version-history"
-    assert paper.FRONT.version == release.PACKING_METHODS_EDITION == "v0.2.0"
+    assert paper.FRONT.version == release.PACKING_METHODS_EDITION
     assert paper_front.revised(paper.FRONT) == release.PACKING_METHODS_REVISED
     assert "Part IV" not in html
     assert "the n = 11 series" not in markdown
@@ -103,7 +103,7 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
         "https://github.com/jlevy/squares",
     ]
     version = next(line for line in structure.credits if line.kind == "version")
-    assert version.text == "v0.2.0 (version history)"
+    assert version.text == f"{release.PACKING_METHODS_EDITION} (version history)"
     assert version.links == (("version history", "#version-history"),)
     assert version.bold == ()
     assert structure.h1 == ("How Record Square Packings Are Found",)
@@ -210,11 +210,43 @@ def test_the_canonical_manuscript_renders_through_the_registered_interface() -> 
     assert 'id="version-history"' in html
     history = markdown.partition("## Version History\n")[2]
     assert history
-    assert release.PACKING_METHODS_HISTORY[0].version == "v0.2.0"
+    assert release.PACKING_METHODS_HISTORY[0].version == release.PACKING_METHODS_EDITION
+    assert paper.version_history_markdown() in history
     for entry in release.PACKING_METHODS_HISTORY:
-        assert (
-            f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}" in history
-        )
+        assert f"- **{entry.version} — {entry.first_published}.**" in history
+
+
+def test_generated_history_formats_both_editions_without_retyping_source_quotes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        paper,
+        "PACKING_METHODS_HISTORY",
+        (
+            release.PublicationHistoryEntry(
+                version="v1.2.3",
+                first_published="October 10, 2026",
+                result_scope='Compare Couzo\'s "basin hopping" with Xu\'s "exact refinement".',
+            ),
+        ),
+    )
+    quotation = '> "Couzo\'s coordinates," Xu reported.'
+    code = "`print('Xu')`"
+    markup = '<span title="Couzo\'s source">Source text</span>'
+    source = SOURCE.replace(
+        "## Version History", f"{quotation}\n\n{code}\n\n{markup}\n\n## Version History"
+    )
+    html, markdown = paper.render(source, figures=FIGURES, revision=REVISION)
+    visible_html = paper_structure.parse(html).text()
+    visible_markdown = " ".join(markdown.split())
+    for author, phrase in (("Couzo", "basin hopping"), ("Xu", "exact refinement")):
+        expected = f"{author}\u2019s \u201c{phrase}\u201d"
+        assert expected in visible_html
+        assert expected in visible_markdown
+    assert quotation in markdown
+    assert code in markdown
+    assert markup in markdown
+    assert '<span title="Couzo&#x27;s source">Source text</span>' in html
 
 
 def test_cli_checks_the_same_files_and_assets_it_publishes(

@@ -4114,7 +4114,7 @@ def card_text(fragment: str) -> str:
     return text.replace("≥", r" \ge ").replace("≤", r" \le ").replace("…", r"\ldots")
 
 
-EXPLAINER_TITLE = "New lower bounds for square packing for n = 11"
+EXPLAINER_TITLE = "New Lower Bounds for Square Packing for n = 11"
 EXPLAINER_NOTE = (
     "How weighted points and 2-of-3 threshold atoms prove T-018, T-025 and T-026, "
     "s(11) \\ge 3.8264\\ldots, with interactive figures."
@@ -4270,7 +4270,7 @@ def test_the_papers_page_says_what_each_paper_is(
     assert (value, note) == _page_card_parts(page, explainer)
 
     value, note = _page_card_parts(papers, "tutorial.html")
-    assert card_text(value) == "Square packing from first principles"
+    assert card_text(value) == "Square Packing from First Principles"
     opening = (overview_data.REPO / "TUTORIAL.md").read_text(encoding="utf-8")
     opening = " ".join(opening.split("## Contents", 1)[0].split())
     assert "Square Packing from First Principles" in opening
@@ -4291,7 +4291,7 @@ def test_the_optimality_papers_card_says_what_t060s_rungs_allow(
     register: list[dict], rendered: Callable[[str], str]
 ) -> None:
     """The optimality paper is Part III, the third card: served where its renderer writes
-    it, titled as its renderer titles it, in sentence case, and described as explaining
+    it, titled as its renderer titles it, and described as explaining
     the proof of T-060 in the words T-060's rungs allow, V3 and C3: a proof, never a
     formal one. The card is the link to the paper, in the same tab."""
     from devtools import render_n11_optimality_review as renderer  # noqa: PLC0415
@@ -4299,8 +4299,8 @@ def test_the_optimality_papers_card_says_what_t060s_rungs_allow(
     paper = overview_sections.PAPERS[2]
     assert paper.href == overview_sections.OPTIMALITY_PAPER == renderer.SITE_PATH
     assert paper.href in render_overview.SITE_PAGES
-    assert paper.title.lower() == renderer.TITLE.lower()
-    assert paper.title == "A review of the optimality proof of the Trump packing of 11 squares"
+    assert paper.title == renderer.TITLE
+    assert paper.title == "A Review of the Optimality Proof of the Trump Packing of 11 Squares"
     papers = rendered("papers.html")
     assert _page_cards(papers)[2][0] == paper.href
     value, note = _page_card_parts(papers, paper.href)
@@ -6367,6 +6367,153 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
         assert name in BUILDER_INPUTS, slug
         assert name in {line.split(" ", 1)[0] for line in skip_notices.splitlines()}, slug
     assert render_overview.paper_path("a-b", ".pdf") == "papers/a-b.pdf"
+
+
+def test_reviewed_paper_titles_are_used_across_the_site(
+    rendered: Callable[[str], str],
+) -> None:
+    """Independent editorial expectations require review when a paper title changes.
+
+    Chicago title case keeps internal articles and short prepositions lowercase,
+    capitalizes Are, preserves Trump, and leaves mathematical n and s unchanged.
+    Check the reader's cards too, rather than only comparing their input records.
+    """
+    reviewed = {
+        "n11-lower-bounds-explainer": "New Lower Bounds for Square Packing for n = 11",
+        "n11-threshold-bound-review": (
+            "A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares"
+        ),
+        "n11-optimality-review": (
+            "A Review of the Optimality Proof of the Trump Packing of 11 Squares"
+        ),
+        "square-packing-methods-survey": "How Record Square Packings Are Found",
+    }
+    assert {paper.slug: paper.title for paper in render_overview.PAPERS} == reviewed
+    assert render_overview.paper_title_problems() == []
+    for name in ("index.html", "papers.html"):
+        page = rendered(name)
+        for slug, title in reviewed.items():
+            value, _ = _page_card_parts(page, render_overview.paper_path(slug))
+            assert card_text(value) == title, (name, slug)
+        value, _ = _page_card_parts(page, "tutorial.html")
+        assert card_text(value) == "Square Packing from First Principles"
+
+
+def test_paper_title_check_rejects_card_front_series_and_source_drift(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    from devtools import render_n11_optimality_review as renderer  # noqa: PLC0415
+
+    assert render_overview.paper_title_problems(sources=()) == []
+    paper = overview_sections.PAPERS[0]
+    with monkeypatch.context() as patch:
+        patch.setattr(
+            overview_sections,
+            "PAPERS",
+            (paper._replace(title=paper.title.lower()), *overview_sections.PAPERS[1:]),
+        )
+        assert any("Papers card" in p for p in render_overview.paper_title_problems(sources=()))
+    with monkeypatch.context() as patch:
+        bad = tuple(
+            (href, label, title.lower(), note)
+            if href == paper.href
+            else (href, label, title, note)
+            for href, label, title, note in overview_sections.PAGES
+        )
+        patch.setattr(overview_sections, "PAGES", bad)
+        assert any(
+            "Overview card" in p for p in render_overview.paper_title_problems(sources=())
+        )
+    with monkeypatch.context() as patch:
+        patch.setattr(renderer, "FRONT", renderer.FRONT._replace(title=renderer.TITLE.lower()))
+        assert any(".FRONT:" in p for p in render_overview.paper_title_problems(sources=()))
+    series = renderer.FRONT.series
+    assert series is not None
+    with monkeypatch.context() as patch:
+        bad_series = series._replace(
+            parts=(
+                series.parts[0]._replace(
+                    title=series.parts[0].title.replace("n = 11", "N = 11")
+                ),
+                *series.parts[1:],
+            )
+        )
+        patch.setattr(renderer, "FRONT", renderer.FRONT._replace(series=bad_series))
+        assert any(".series[" in p for p in render_overview.paper_title_problems(sources=()))
+    source = tmp_path / "paper-links.md"
+    source.write_text(
+        "[How record square packings are found](papers/square-packing-methods-survey.html)\n"
+        "[New Lower Bounds For Square Packing For $n = 11$]"
+        "(papers/n11-lower-bounds-explainer.html)\n"
+        "[A Review of the Certified Lower Bound S(11) > 31/8 for 11 Squares]"
+        "(papers/n11-threshold-bound-review.html)\n"
+    )
+    problems = render_overview.paper_title_problems(sources=(source,))
+    assert len(problems) == 3
+    assert all(str(source) in problem for problem in problems)
+    source.write_text("[Part I](papers/n11-lower-bounds-explainer.html)\n")
+    assert render_overview.paper_title_problems(sources=(source,)) == []
+
+
+def test_reviewed_external_paper_titles_check_authored_references(tmp_path: Path) -> None:
+    """Check real bibliography references and reject sentence case for each work.
+
+    The independent reviewed list also requires an editorial decision when the
+    reference registry changes. Quoted source wording remains verbatim.
+    """
+    reviewed = (
+        "Packing 10 or 11 Unit Squares in a Square",
+        "Packing Unit Squares in Squares: A Survey and New Results",
+        "Geometrical Packing and Covering Problems",
+        "Packing Unit Squares in a Rectangle",
+        "On Packing Squares with Equal Squares",
+        "Rigorous Packing of Unit Squares into a Circle",
+        "Complete Search in Continuous Global Optimization and Constraint Satisfaction",
+        "The Double-Funnel Energy Landscape of the 38-Atom Lennard-Jones Cluster",
+        "Illuminating Search Spaces by Mapping Elites",
+        "Hidden Structure in Liquids",
+    )
+    assert reviewed == render_overview.REFERENCED_PAPER_TITLES
+    sources = (
+        render_overview.TEMPLATES / "n11-lower-bounds-explainer-article.md",
+        render_overview.REPO / "TUTORIAL.md",
+        render_overview.REPO / "SYNOPSIS.md",
+    )
+    assert render_overview.paper_title_problems(sources=sources) == []
+    text = " ".join("\n".join(path.read_text() for path in sources).split())
+    assert all(title in text for title in reviewed)
+    source = tmp_path / "external-references.md"
+    source.write_text("\n".join(f"*{title.lower()}*" for title in reviewed))
+    problems = render_overview.paper_title_problems(sources=(source,))
+    assert len(problems) == len(reviewed)
+    assert all(str(source) in problem for problem in problems)
+    source.write_text("\n".join(f"> {title.lower()}" for title in reviewed))
+    assert render_overview.paper_title_problems(sources=(source,)) == []
+
+
+def test_paper_title_cli_checks_without_rendering_or_writing(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    from devtools import render_n11_optimality_review as renderer  # noqa: PLC0415
+
+    def unexpected_render() -> list[render_overview.Page]:
+        raise AssertionError("The title check must not render pages")
+
+    monkeypatch.setattr(render_overview, "render_all", unexpected_render)
+    output = tmp_path / "unwritten-site"
+    args = ["--check-paper-titles", "--output", str(output)]
+    assert render_overview.main(args) == 0
+    success = capsys.readouterr().out
+    assert "4 reviewed paper titles" in success
+    assert "10 referenced titles" in success
+    assert not output.exists()
+    monkeypatch.setattr(renderer, "TITLE", renderer.TITLE.lower())
+    assert render_overview.main(args) == 1
+    assert "render_n11_optimality_review.TITLE" in capsys.readouterr().err
+    assert not output.exists()
 
 
 def test_each_address_a_paper_had_serves_a_forwarder_to_where_it_is() -> None:

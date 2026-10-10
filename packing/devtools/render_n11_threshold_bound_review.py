@@ -331,10 +331,7 @@ RENDER_INPUTS = tuple(
 def version_history_markdown() -> str:
     """The paper's own editions, newest first, each with the day it was first published
     and what changed in the paper: `sqpack.release.THRESHOLD_REVIEW_HISTORY`."""
-    return "\n".join(
-        f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}"
-        for entry in THRESHOLD_REVIEW_HISTORY
-    )
+    return paper_front.version_history_markdown(THRESHOLD_REVIEW_HISTORY)
 
 
 def render_all_figures() -> dict[str, str]:

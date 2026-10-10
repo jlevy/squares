@@ -1288,9 +1288,11 @@ def test_version_history_lists_the_papers_own_editions_and_no_others(
     listed = re.findall(r"^- \*\*(v\d+\.\d+\.\d+) — ", history, re.MULTILINE)
     assert listed == [entry.version for entry in EXPLAINER_HISTORY]
     compact_history = " ".join(history.split())
+    expected_history = render_n11_lower_bounds_explainer.version_history_markdown()
+    assert " ".join(expected_history.split()) in compact_history
     for entry in EXPLAINER_HISTORY:
-        expected = f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}"
-        assert " ".join(expected.split()) in compact_history
+        expected = f"- **{entry.version} — {entry.first_published}.**"
+        assert expected in compact_history
         assert entry.version in page
         assert entry.first_published in page
     site_only = {e.version for e in PUBLICATION_HISTORY} - set(listed)

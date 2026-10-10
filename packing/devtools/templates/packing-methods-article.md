@@ -19,7 +19,7 @@ improvement in its last decimal places can be a different contribution.
 4. [Constructing and Reusing Seeds](#constructing-and-reusing-seeds)
 5. [Moving Between Arrangements](#moving-between-arrangements)
 6. [Refining a Promising Arrangement](#refining-a-promising-arrangement)
-7. [Turning Coordinates Into a Bound](#turning-coordinates-into-a-bound)
+7. [Turning Coordinates into a Bound](#turning-coordinates-into-a-bound)
 8. [Reading the Record](#reading-the-record)
 9. [Vocabulary and Further Reading](#vocabulary-and-further-reading)
 10. [Version History](#version-history)
@@ -563,7 +563,7 @@ Those conclusions concern the selected branch; other admissible branches need se
 checks
 ([updated solver limitations](../../resources/web/evand-batch-wrapper-2026-10-07/source/s12/search/exact/README.md#limitations)).
 
-## Turning Coordinates Into a Bound
+## Turning Coordinates into a Bound
 
 A **witness** supplies the container side and every square’s pose.
 A certificate adds the data and interpretation needed for a rigorous checker.

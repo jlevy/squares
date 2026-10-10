@@ -8076,7 +8076,7 @@ the citation keys below resolve there and in the per-case
 [`frontier/`](packing/frontier/README.md) artifacts.
 Each entry names what this project relies on it for.
 
-- Stromquist, W. (2003). *Packing 10 or 11 unit squares in a square.* Electronic Journal
+- Stromquist, W. (2003). *Packing 10 or 11 Unit Squares in a Square.* Electronic Journal
   of Combinatorics 10(1), R8. Supplies $s(10)$, states the $s(11)$ lower-bound value,
   and proves the $0^{\circ}$/`45°` class bound.
   Exp-016 refutes its printed unrestricted Figure 14 cover; exp-017 independently
@@ -8086,20 +8086,20 @@ Each entry names what this project relies on it for.
   The standing upper bound.
 - Friedman, E. (2009). *Packing Unit Squares in Squares: A Survey and New Results.*
   Electronic Journal of Combinatorics, DS7. The survey the corpus is checked against.
-- Erdős, P. and Graham, R. L. (1975). *On packing squares with equal squares.* The
+- Erdős, P. and Graham, R. L. (1975). *On Packing Squares with Equal Squares.* The
   asymptotic waste line of work.
-- Nagamochi, H. (2005). *Packing unit squares in a rectangle.* The general closed-form
+- Nagamochi, H. (2005). *Packing Unit Squares in a Rectangle.* The general closed-form
   lower bound used where the register has no stronger formal evidence.
 - Montanher, T. et al.
-  (2018). *Rigorous packing of unit squares into a circle.* The only rigorous
+  (2018). *Rigorous Packing of Unit Squares into a Circle.* The only rigorous
   computer-assisted optimality proof for rotatable unit squares in any container, and
   the scope limit on what `sqpack` claims.
-- Doye, J. P. K., Miller, M. A. and Wales, D. J. (1999). The double funnel energy
-  landscape of the 38-atom Lennard-Jones cluster.
+- Doye, J. P. K., Miller, M. A. and Wales, D. J. (1999). The Double-Funnel Energy
+  Landscape of the 38-Atom Lennard-Jones Cluster.
   The precedent behind the rarity premise.
-- Stillinger, F. H. and Weber, T. A. (1982). Inherent structures and the quench map.
+- Stillinger, F. H. and Weber, T. A. (1982). Hidden Structure in Liquids.
   The decomposition T-2 supplies a cell-exact version of.
-- Mouret, J.-B. and Clune, J. (2015). *Illuminating search spaces by mapping elites.*
+- Mouret, J.-B. and Clune, J. (2015). *Illuminating Search Spaces by Mapping Elites.*
   The precedent behind H-015.
 
 <!-- This document follows common-doc-guidelines.md.

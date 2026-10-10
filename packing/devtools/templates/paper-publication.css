@@ -1466,7 +1466,7 @@ html[data-kpress-math-pending]
     margin-block: calc(var(--kpress-font-size-base) * 1.5) 0.75rem;
   }
   .cert-page .colophon {
-    margin-block-start: 1.5rem;
+    margin-block-start: 0.5rem;
   }
   /* Keep reading-guide groups together and set their short entries compactly. */
   #further-reading + ul {
@@ -1548,6 +1548,7 @@ html[data-kpress-math-pending]
      colour rather than the muted one kpress gives them. */
   .cert-page .kpress-footnotes {
     color: var(--kpress-doc-text);
+    break-after: avoid-page;
     margin-block-start: 1rem;
     padding-block-start: 0.5rem;
   }
@@ -1556,7 +1557,7 @@ html[data-kpress-math-pending]
     margin-block: 0.5rem 0;
   }
   .cert-page .kpress-footnotes ol > li {
-    margin-block: 0.25rem 0;
+    margin-block: 0.125rem 0;
   }
 
   /* Their numbers in the sans the entries are set in. kpress replaces the list marker in

@@ -283,12 +283,103 @@ PAPERS: tuple[PaperRecord, ...] = (
 )
 
 
+#: Reviewed title case for authored references to external works. These are citations,
+#: not papers served by this site. Archives and Markdown block quotations retain their
+#: original wording and capitalization.
+REFERENCED_PAPER_TITLES: tuple[str, ...] = (
+    "Packing 10 or 11 Unit Squares in a Square",
+    "Packing Unit Squares in Squares: A Survey and New Results",
+    "Geometrical Packing and Covering Problems",
+    "Packing Unit Squares in a Rectangle",
+    "On Packing Squares with Equal Squares",
+    "Rigorous Packing of Unit Squares into a Circle",
+    "Complete Search in Continuous Global Optimization and Constraint Satisfaction",
+    "The Double-Funnel Energy Landscape of the 38-Atom Lennard-Jones Cluster",
+    "Illuminating Search Spaces by Mapping Elites",
+    "Hidden Structure in Liquids",
+)
+
+
 def paper_record(slug: str) -> PaperRecord:
     """The site's paper `slug`; a slug that names no paper of the site is refused."""
     for paper in PAPERS:
         if paper.slug == slug:
             return paper
     raise ValueError(f"no paper of the site has the slug {slug!r}")
+
+
+def paper_title_problems(*, sources: Sequence[Path] | None = None) -> list[str]:
+    """Check paper-title references against the editorially reviewed registry.
+
+    Fronts may wrap mathematical notation in HTML or Markdown, but its letters keep
+    their case. Full titles in reader sources must match too; short descriptive links
+    and part labels are independent prose. This check imports renderers without
+    rendering pages or writing output. Reviewed CMOS titles are pinned separately in
+    the behavioral tests; this is not a grammatical title-case converter.
+    """
+    import importlib  # noqa: PLC0415
+
+    from devtools import overview_sections, site_documents  # noqa: PLC0415
+
+    problems: list[str] = []
+    records = {record.slug: record for record in PAPERS}
+
+    def plain(title: str) -> str:
+        return " ".join(
+            re.sub(r"</?[A-Za-z][^>]*>", "", html.unescape(title))
+            .replace("$", "")
+            .replace("*", "")
+            .split()
+        )
+
+    def check(where: str, title: str, expected: str) -> None:
+        if plain(title) != expected:
+            problems.append(f"{where}: paper title {title!r}; expected {expected!r}")
+
+    for record in PAPERS:
+        renderer = importlib.import_module(record.module)
+        check(f"{record.module}.TITLE", renderer.TITLE, record.title)
+        check(f"{record.module}.FRONT", renderer.FRONT.title, record.title)
+        if renderer.FRONT.series is not None:
+            for part in renderer.FRONT.series.parts:
+                if part.slug not in records:
+                    problems.append(f"{record.module}.series: unknown paper {part.slug!r}")
+                    continue
+                check(
+                    f"{record.module}.series[{part.slug}]", part.title, records[part.slug].title
+                )
+        path = paper_path(record.slug)
+        cards = [paper for paper in overview_sections.PAPERS if paper.href == path]
+        if len(cards) != 1:
+            problems.append(f"Papers cards: expected one card for {path}, found {len(cards)}")
+        for card in cards:
+            check(f"Papers card {path}", card.title, record.title)
+        page_cards = [card for card in overview_sections.PAGES if card[0] == path]
+        if len(page_cards) != 1:
+            problems.append(
+                f"Overview cards: expected one card for {path}, found {len(page_cards)}"
+            )
+        for card in page_cards:
+            check(f"Overview card {path}", card[2], record.title)
+
+    if sources is None:
+        sources = (
+            *(document.source for document in site_documents.DOCUMENTS),
+            *sorted(TEMPLATES.glob("*-article.md")),
+        )
+    titles = (*(record.title for record in PAPERS), *REFERENCED_PAPER_TITLES)
+    for source in sources:
+        text = source.read_text(encoding="utf-8")
+        text = re.sub(r"(?m)^[ \t]*>.*$", "", text)
+        text = re.sub(r"</?[A-Za-z][^>]*>", "", html.unescape(text))
+        text = text.replace("$", "").replace("*", "")
+        for title in titles:
+            pattern = r"\s+".join(re.escape(word) for word in title.split())
+            for match in re.finditer(r"(?<!\w)" + pattern + r"(?!\w)", text, re.IGNORECASE):
+                if plain(match.group()) != title:
+                    line = text[: match.start()].count("\n") + 1
+                    check(f"{source}:{line}", match.group(), title)
+    return problems
 
 
 def paper_path(slug: str, suffix: str = ".html") -> str:
@@ -1236,6 +1327,8 @@ def papers_page() -> Page:
         "LOWER_BOUNDS_PAPER": overview_sections.LOWER_BOUNDS_PAPER,
         "THRESHOLD_BOUND_PAPER": overview_sections.THRESHOLD_BOUND_PAPER,
         "OPTIMALITY_PAPER": overview_sections.OPTIMALITY_PAPER,
+        "METHODS_PAPER_TITLE": html.escape(paper_record(PACKING_METHODS).title),
+        "METHODS_PAPER": paper_path(PACKING_METHODS),
     }
     markdown = fill(
         PAPERS_ARTICLE.read_text(encoding="utf-8"), values, where=PAPERS_ARTICLE.name
@@ -1674,7 +1767,22 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="exit non-zero if a file on disk differs from a fresh render",
     )
+    parser.add_argument(
+        "--check-paper-titles",
+        action="store_true",
+        help="check paper-title references without rendering or writing pages",
+    )
     args = parser.parse_args(argv)
+    if args.check_paper_titles:
+        problems = paper_title_problems()
+        if problems:
+            print("\n".join(problems), file=sys.stderr)
+            return 1
+        print(
+            f"{len(PAPERS)} reviewed paper titles and {len(REFERENCED_PAPER_TITLES)} "
+            "referenced titles agree across renderers, cards and references"
+        )
+        return 0
     from devtools.render_contributors import (  # noqa: PLC0415
         CONTRIBUTORS_DIR,
         contributor_pages,

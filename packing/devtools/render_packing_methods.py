@@ -169,10 +169,7 @@ def render_all_facts() -> dict[str, str]:
 
 def version_history_markdown() -> str:
     """The paper's own editions, newest first, with publication date and changes."""
-    return "\n".join(
-        f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}"
-        for entry in PACKING_METHODS_HISTORY
-    )
+    return paper_front.version_history_markdown(PACKING_METHODS_HISTORY)
 
 
 def expanded_markdown(

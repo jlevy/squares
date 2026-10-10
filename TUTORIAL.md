@@ -141,7 +141,7 @@ labels describe the retained evidence and confirmation; the mathematical claim i
 proved lower bound above.
 
 The detailed lesson below starts with the simpler point-only T-018 certificate;
-[the standalone v0.4.4 explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html#proof-of-the-new-lower-bound)
+[the standalone v0.4.5 explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html#proof-of-the-new-lower-bound)
 uses it as a visual worked example, then gives the threshold-counting and dilation proof
 of T-025 and T-026. The numerical $3.81$ result is not a premise of T-026. Keeping the
 T-018 proof in full also gives readers an assurance bridge: its short standard-library
@@ -1908,8 +1908,8 @@ occupancy states up to the container’s symmetries, and the lemma is why the co
 the state count divided by the group’s order.
 
 **Branch and bound with certified pruning** ([§9](#9-how-an-optimality-proof-is-built)).
-Neumaier’s survey *Complete search in continuous global optimization and constraint
-satisfaction* for the general method, and Farkas’s lemma in any linear programming text
+Neumaier’s survey *Complete Search in Continuous Global Optimization and Constraint
+Satisfaction* for the general method, and Farkas’s lemma in any linear programming text
 for why a nonnegative combination of valid rows that stays positive proves a box empty.
 The interval sources above supply the outward rounding.
 
@@ -1922,7 +1922,7 @@ Trump’s 1979 packing is documented there and by this directory’s exact certi
 records, while the original 1979 communication is not, and Bidwell’s 1998 record
 likewise has no retained first-party document:
 
-- Stromquist (2003), *Packing 10 or 11 unit squares in a square*—the $s(10)$ proof, the
+- Stromquist (2003), *Packing 10 or 11 Unit Squares in a Square*—the $s(10)$ proof, the
   $s(11)$ lower-bound value, and the $0^{\circ}$/`45°` class bound
 - Trump (1979), the $n = 11$ construction that is still the standing upper bound
 - Friedman, *Packing Unit Squares in Squares: A Survey and New Results* (DS7)—the survey
