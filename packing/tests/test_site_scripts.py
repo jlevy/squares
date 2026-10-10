@@ -1,8 +1,11 @@
 """Unknown scripts and remote/missing application assets fail the published inventory."""
 
+from dataclasses import replace
 from pathlib import Path
 
-from devtools import site_assets
+import pytest
+
+from devtools import check_site_scripts, site_assets, site_urls
 from devtools.check_site_scripts import inventory
 
 
@@ -56,3 +59,76 @@ def test_inventory_accepts_the_actual_protocol_font_bootstrap(tmp_path: Path) ->
     _, errors = inventory(tmp_path)
     assert len(errors) == 1
     assert "exceeds 4096 bytes" in errors[0]
+
+
+def test_catalogue_browser_requires_its_exact_source_and_published_asset_path() -> None:
+    programs = check_site_scripts.publication_programs()
+    (browser,) = [program for program in programs if not program.inline]
+    source = site_urls.CATALOGUE_BROWSER_PATH
+    assert check_site_scripts.classify(source, browser.text, programs=programs).category == (
+        "catalogue-application"
+    )
+    with pytest.raises(ValueError, match="retained publication source"):
+        check_site_scripts.classify(source, browser.text + "\n", programs=programs)
+    with pytest.raises(ValueError, match="unclassified"):
+        check_site_scripts.classify("papers/unowned.js", browser.text, programs=programs)
+    oversized = replace(browser, text=browser.text + " " * (browser.limit + 1))
+    with pytest.raises(ValueError, match="exceeds"):
+        check_site_scripts.classify(source, oversized.text, programs=(oversized,))
+
+
+def test_template_inline_programs_require_source_identity_owned_pages_and_byte_caps() -> None:
+    programs = check_site_scripts.publication_programs()
+    source = site_urls.CATALOGUE_ARCHIVE_PATH + "#script-4"
+    inline = [program for program in programs if program.inline]
+    assert len(inline) == 3
+    for program in inline:
+        classified = check_site_scripts.classify(
+            source, program.text, inline=True, programs=programs
+        )
+        assert classified.bytes == len(program.text.encode()) <= program.limit
+        with pytest.raises(ValueError, match="exceeds 4096"):
+            check_site_scripts.classify(
+                source, program.text + "\n", inline=True, programs=programs
+            )
+        with pytest.raises(ValueError, match="exceeds 4096"):
+            check_site_scripts.classify(
+                "unowned.html#script-1", program.text, inline=True, programs=programs
+            )
+        oversized = replace(program, text=program.text + " " * (program.limit + 1))
+        with pytest.raises(ValueError, match="exceeds"):
+            check_site_scripts.classify(
+                source, oversized.text, inline=True, programs=(oversized,)
+            )
+
+
+def test_copied_paper_alias_keeps_approved_footer_and_math_programs(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    archive = site_urls.SiteURL(
+        path=site_urls.CATALOGUE_ARCHIVE_PATH,
+        canonical=site_urls.CATALOGUE_ARCHIVE_PATH,
+        kind="archive-file",
+        generator=site_urls.CATALOGUE_GENERATOR,
+        producer=site_urls.CATALOGUE_PRODUCER,
+        first_published="2026-10-07",
+        lastmod="2026-10-08",
+    )
+    alias = replace(
+        archive,
+        path="old-exact-values.html",
+        kind="copy",
+        producer="assembly",
+        generator="fixture:copy",
+        target=archive.path,
+    )
+    monkeypatch.setattr(site_urls, "load_registry", lambda: [archive, alias])
+    programs = check_site_scripts.publication_programs()
+    for program in programs:
+        if program.inline:
+            assert (
+                check_site_scripts.classify(
+                    alias.path + "#script-1", program.text, inline=True, programs=programs
+                ).category
+                == program.category
+            )

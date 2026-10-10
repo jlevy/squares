@@ -22,7 +22,7 @@ description: >-
   manifest paths inside reported_source are repository-relative.
 type: object
 additionalProperties: false
-required: [generated_by, range, sources, totals, entries]
+required: [generated_by, range, sources, totals, entries, historical_entries]
 properties:
   generated_by: {type: string, minLength: 1}
   range:
@@ -35,15 +35,18 @@ properties:
   sources:
     type: object
     additionalProperties: false
-    required: [records, catalogue, kkt]
+    required: [records, catalogue, svg_facts, svg_receipts, historical_polynomials, kkt]
     properties:
       records: {type: string, minLength: 1}
       catalogue: {type: string, minLength: 1}
+      svg_facts: {type: string, minLength: 1}
+      svg_receipts: {type: string, minLength: 1}
+      historical_polynomials: {type: string, minLength: 1}
       kkt:
         type: object
         additionalProperties: false
         description: >-
-          Evan Daniel's exact-contact batch: an exact KKT point per count, solved at 80
+          Evan Daniel's exact-contact batch: a numerical KKT point per count, computed at 80
           digits and printed to `digits` significant digits, cited by its bibliography key.
         required: [path, key, digits]
         properties:
@@ -83,6 +86,9 @@ properties:
     items: {$ref: '#/$defs/entry'}
   historical_entries:
     type: array
+    description: >-
+      Printed source polynomials and polynomials derived from retained source closed forms,
+      checked at their own sides. These never promote a frontier bound.
     items: {$ref: '#/$defs/historical_entry'}
 $defs:
   source_certificate:
@@ -202,127 +208,6 @@ $defs:
             type: 'null'
           adoption:
             const: not-selected
-  historical_entry:
-    type: object
-    additionalProperties: false
-    required:
-    - n
-    - kind
-    - algebraic_source
-    - current_side
-    - side
-    - degree
-    - polynomial
-    - checks
-    - sources
-    - source_statuses
-    - attribution
-    - bead
-    - text
-    properties:
-      n:
-        type: integer
-        minimum: 1
-      kind:
-        enum:
-        - superseded
-        - unreconciled-source
-      algebraic_source:
-        enum:
-        - derived-from-source-closed-form
-        - reported-source-polynomial
-      current_side:
-        $ref: '#/$defs/decimal'
-      side:
-        $ref: '#/$defs/decimal'
-      exact_form:
-        $ref: '#/$defs/rational'
-      degree:
-        type: integer
-        minimum: 1
-      polynomial:
-        $ref: '#/$defs/polynomial'
-      checks:
-        $ref: '#/$defs/source_root_checks'
-      sources:
-        type: array
-        minItems: 1
-        items:
-          $ref: '#/$defs/source_occurrence'
-      source_statuses:
-        type: array
-        items:
-          type: string
-      attribution:
-        $ref: '#/$defs/source_attribution'
-      bead:
-        oneOf:
-        - type: 'null'
-        - type: string
-          pattern: ^think-[0-9a-z]+$
-      text:
-        type: string
-        minLength: 1
-      reported_source:
-        $ref: '#/$defs/reported_source'
-      assurance:
-        $ref: '#/$defs/source_assurance'
-      source_certificate:
-        $ref: '#/$defs/source_certificate'
-    allOf:
-    - if:
-        required:
-        - source_certificate
-        properties:
-          kind:
-            const: unreconciled-source
-      then:
-        properties:
-          source_certificate:
-            properties:
-              adoption:
-                const: pending
-    - if:
-        required:
-        - source_certificate
-        properties:
-          kind:
-            const: superseded
-      then:
-        properties:
-          source_certificate:
-            properties:
-              adoption:
-                const: not-selected
-    oneOf:
-    - required:
-      - reported_source
-      - assurance
-      properties:
-        algebraic_source:
-          const: reported-source-polynomial
-        degree:
-          enum:
-          - 8
-          - 32
-          - 40
-      not:
-        required:
-        - source_certificate
-    - required:
-      - source_certificate
-      - exact_form
-      properties:
-        algebraic_source:
-          const: derived-from-source-closed-form
-        degree:
-          const: 1
-      not:
-        anyOf:
-        - required:
-          - reported_source
-        - required:
-          - assurance
   source_occurrence:
     type: object
     additionalProperties: false
@@ -398,6 +283,30 @@ $defs:
       recorded_agreement_digits: {$ref: '#/$defs/checks/properties/recorded_agreement_digits'}
       catalogue: {const: not-in-catalogue}
       galois: {type: 'null'}
+  derived_source_checks:
+    type: object
+    additionalProperties: false
+    required: [irreducible, root, decimal, kkt_agreement_digits, recorded_agreement_digits, catalogue, galois]
+    properties:
+      irreducible:
+        unevaluatedProperties: false
+        oneOf:
+          - {type: 'null'}
+          - {$ref: '#/$defs/checks/properties/irreducible/oneOf/1'}
+      root:
+        unevaluatedProperties: false
+        oneOf:
+          - {type: 'null'}
+          - {$ref: '#/$defs/checks/properties/root/oneOf/1'}
+      decimal: {$ref: '#/$defs/checks/properties/decimal'}
+      kkt_agreement_digits: {$ref: '#/$defs/checks/properties/kkt_agreement_digits'}
+      recorded_agreement_digits: {$ref: '#/$defs/checks/properties/recorded_agreement_digits'}
+      catalogue: {const: derived-here}
+      galois:
+        unevaluatedProperties: false
+        oneOf:
+          - {type: 'null'}
+          - {$ref: '#/$defs/checks/properties/galois/oneOf/1'}
   source_assurance:
     type: object
     additionalProperties: false
@@ -410,6 +319,122 @@ $defs:
       lean_replay: {const: not-attempted}
       current_pose_identity: {const: not-established}
       global_optimality: {const: not-established}
+  historical_entry:
+    type: object
+    additionalProperties: false
+    required: [n, kind, algebraic_source, current_side, side, degree, polynomial, checks, sources, source_statuses, attribution, bead]
+    allOf:
+      - if:
+          anyOf:
+            - required: [reported_source]
+            - required: [assurance]
+            - required: [algebraic_source]
+              properties:
+                algebraic_source: {const: reported-source-polynomial}
+        then:
+          required: [algebraic_source, reported_source, assurance, text]
+          properties:
+            algebraic_source: {const: reported-source-polynomial}
+            kind: {enum: [unreconciled-source, superseded]}
+            degree: {enum: [8, 32, 40]}
+            checks: {$ref: '#/$defs/source_root_checks'}
+          not:
+            required: [source_certificate]
+      - if:
+          anyOf:
+            - required: [source_certificate]
+            - required: [algebraic_source, checks]
+              properties:
+                algebraic_source: {const: derived-from-source-closed-form}
+                checks:
+                  properties:
+                    catalogue: {const: not-in-catalogue}
+        then:
+          required: [algebraic_source, source_certificate, exact_form, text]
+          properties:
+            algebraic_source: {const: derived-from-source-closed-form}
+            exact_form: {$ref: '#/$defs/rational'}
+            kind: {enum: [unreconciled-source, superseded]}
+            degree: {const: 1}
+            checks: {$ref: '#/$defs/source_root_checks'}
+          not:
+            anyOf:
+              - required: [reported_source]
+              - required: [assurance]
+      - if:
+          required: [source_certificate]
+          properties:
+            kind: {const: unreconciled-source}
+        then:
+          properties:
+            source_certificate:
+              properties:
+                adoption: {const: pending}
+      - if:
+          required: [source_certificate]
+          properties:
+            kind: {const: superseded}
+        then:
+          properties:
+            source_certificate:
+              properties:
+                adoption: {const: not-selected}
+      - if:
+          not:
+            required: [source_certificate]
+        then:
+          if:
+            properties:
+              algebraic_source: {const: derived-from-source-closed-form}
+          then:
+            required: [exact_form]
+            properties:
+              checks: {$ref: '#/$defs/derived_source_checks'}
+              sources:
+                contains:
+                  properties:
+                    kind: {const: derived-from-source-closed-form}
+          else:
+            properties:
+              sources:
+                contains:
+                  properties:
+                    kind: {not: {const: derived-from-source-closed-form}}
+    properties:
+      n: {type: integer, minimum: 1}
+      kind: {enum: [superseded, outside-frontier, source-invalid, unreconciled-source]}
+      algebraic_source:
+        description: Whether coefficients are retained from a catalogue, derived from its expression, or independently checked as a source-only root establishing no packing bound.
+        enum: [catalogue, derived-from-source-closed-form, reported-source-polynomial]
+      reported_source: {$ref: '#/$defs/reported_source'}
+      assurance: {$ref: '#/$defs/source_assurance'}
+      source_certificate: {$ref: '#/$defs/source_certificate'}
+      text: {type: string, minLength: 1}
+      exact_form:
+        description: The retained source expression, where one is available; checked against this row's root.
+        type: string
+        minLength: 1
+      current_side:
+        oneOf:
+          - {$ref: '#/$defs/decimal'}
+          - {type: 'null'}
+      side: {$ref: '#/$defs/decimal'}
+      degree: {type: integer, minimum: 1}
+      polynomial: {$ref: '#/$defs/polynomial'}
+      checks: {$ref: '#/$defs/checks'}
+      sources: {type: array, minItems: 1, items: {$ref: '#/$defs/source_occurrence'}}
+      source_statuses: {type: array, items: {type: string}}
+      attribution:
+        type: object
+        additionalProperties: false
+        required: [date_mentions, source_text]
+        properties:
+          date_mentions: {type: array, items: {type: string}}
+          source_text: {type: array, items: {type: string}}
+      bead:
+        oneOf:
+          - {type: string, pattern: '^think-[a-z0-9]+$'}
+          - {type: 'null'}
   rational:
     type: string
     pattern: '^-?[0-9]+/[0-9]+$'
@@ -429,6 +454,11 @@ $defs:
           properties:
             degree: {enum: [8, 32, 40]}
             checks: {$ref: '#/$defs/source_root_checks'}
+      - if:
+          properties:
+            kind: {const: superseded-catalogue-polynomial}
+        then:
+          required: [side, polynomial, checks]
     properties:
       side:
         description: The reported source root, which establishes no current packing bound.
@@ -534,8 +564,21 @@ $defs:
                 const: true
                 description: >-
                   The recorded decimal is the root truncated or rounded to its printed
-                  places. False would be a wrong polynomial, which fails the build.
+                  places. A replay-backed SQUISH rational upper bound may instead use its
+                  upward decimal ceiling: the exact value is at most the display and less
+                  than one printed unit below it. This identifies a feasible bound's value,
+                  without asserting that it is an optimum. A mismatch fails the build.
               window: {enum: [kkt, record, exact]}
+              source_index:
+                type: object
+                additionalProperties: false
+                required: [stated, counted]
+                properties:
+                  stated: {type: integer, minimum: 1}
+                  counted:
+                    oneOf:
+                      - {type: integer, minimum: 1}
+                      - {type: 'null'}
       decimal:
         description: The isolated root to 40 significant digits, correctly rounded.
         oneOf:
@@ -556,11 +599,12 @@ $defs:
       catalogue:
         description: >-
           `matches`: the record transcribes the catalogue's polynomial for the same packing.
+          `matches-svg`: coefficients and the side agree with the pinned retained SVG facts.
           `derived-here`: computed from the record's closed form, and recomputed on every
           build. `not-in-catalogue`: neither.
         oneOf:
           - {type: 'null'}
-          - {enum: [matches, derived-here, not-in-catalogue]}
+          - {enum: [matches, matches-svg, derived-here, not-in-catalogue]}
       galois:
         description: SymPy's Galois group, for degrees 2 to 6 only.
         oneOf:
@@ -590,6 +634,9 @@ $defs:
       - kkt
       - notes
     properties:
+      source_occurrences:
+        type: array
+        items: {$ref: '#/$defs/source_occurrence'}
       n: {type: integer, minimum: 1}
       status: {enum: [proved, open]}
       side:

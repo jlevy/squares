@@ -792,6 +792,8 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "--ignore=tests/test_site_frontier_table.py",
         "--ignore=tests/test_site_rendering.py",
         "--ignore=tests/test_site_math_preferences.py",
+        "--ignore=tests/test_exact_side_values_browser.py",
+        "--ignore=tests/test_exact_side_values_web.py",
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
@@ -1510,6 +1512,21 @@ def test_the_records_tier_selects_every_record_check_and_no_test() -> None:
     # tagged into it would put the cost straight back.
     assert not any(step.name.startswith("fast behavioral tests") for step in selected)
     assert all(step.fast for step in selected)
+
+
+def test_the_pdf_size_guard_runs_in_records_edit_and_pull_request_checks() -> None:
+    name = "tracked PDFs stay within 5 MiB"
+    selections = (
+        validate._select_steps(only=[], fast=False, records=True),
+        validate._select_steps(only=[], fast=False, edit=True),
+        validate._select_steps(only=[], fast=False, checks=True),
+        validate._select_steps(only=[], fast=True),
+    )
+    for selected in selections:
+        assert name in {step.name for step in selected}
+    for path in ("nested/New Source.PdF", "packing/devtools/check_tracked_pdfs.py"):
+        selected = validate.select_for_paths([path], validate.STEPS)
+        assert name in {step.name for step in selected.steps}
 
 
 def test_strict_mode_enables_deep_validation(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -4298,9 +4315,23 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
         "tests/test_site_frontier_table.py",
         "tests/test_site_rendering.py",
         "tests/test_site_math_preferences.py",
+        "tests/test_exact_side_values_browser.py",
+        "tests/test_exact_side_values_web.py",
     }
     for path in validate.SITE_LAYOUT_TESTS:
         assert (validate.PROJECT_ROOT / path).is_file(), path
+
+
+def test_an_isolated_print_control_edit_selects_its_chromium_owner() -> None:
+    path = "packing/tests/test_exact_side_values_web.py"
+    for universe in (
+        validate.STEPS,
+        tuple(step for step in validate.STEPS if step.fast),
+        tuple(step for step in validate.STEPS if step.frontend),
+    ):
+        selection = validate.select_for_paths([path], universe)
+        assert not selection.unattributed_paths
+        assert SITE_LAYOUT_STEP in {step.name for step in selection.steps}
 
 
 def test_a_frontend_job_without_chromium_is_detected() -> None:

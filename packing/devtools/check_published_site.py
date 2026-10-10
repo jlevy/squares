@@ -69,6 +69,7 @@ from devtools.repo_links import (
 )
 from sqpack.probes import probe
 from sqpack.release import (
+    EXACT_SIDE_VALUES_EDITION,
     EXPLAINER_VERSION,
     OPTIMALITY_REVIEW_EDITION,
     PACKING_METHODS_EDITION,
@@ -121,6 +122,7 @@ PAPER_VERSIONS: dict[str, str] = {
     render_overview.N11_THRESHOLD_BOUND_REVIEW: THRESHOLD_REVIEW_EDITION,
     render_overview.N11_OPTIMALITY_REVIEW: OPTIMALITY_REVIEW_EDITION,
     render_overview.PACKING_METHODS: PACKING_METHODS_EDITION,
+    render_overview.EXACT_SIDE_VALUES: EXACT_SIDE_VALUES_EDITION,
 }
 #: The reviews, every paper after the first, by the path each is served at, which is the
 #: one its Papers card links: each built and served as the optimality review is.
@@ -131,11 +133,11 @@ REVIEW_PAPERS: tuple[str, ...] = tuple(
 )
 
 
-def paper_files(page: str) -> tuple[str, str]:
-    """What is served with a paper's page, by path under the site's root: its Markdown
-    and its PDF, beside it under its slug."""
+def paper_files(page: str) -> tuple[str, ...]:
+    """The paper's declared companion editions, by path under the site's root."""
     stem = page.removesuffix(".html")
-    return f"{stem}.md", f"{stem}.pdf"
+    record = render_overview.paper_record(Path(stem).name)
+    return (f"{stem}.md", f"{stem}.pdf") if record.has_pdf else (f"{stem}.md",)
 
 
 #: What is served with the optimality paper's page (`paper_files`).
@@ -442,20 +444,26 @@ def head_problems(
         problems.append("og:image:alt is empty")
     require("twitter:image:alt", tags["twitter:image:alt"], alt or "")
     require("twitter:card", tags["twitter:card"], "summary_large_image")
-    # Stable SVG/PNG icons are resolved from each page's address. The standalone
-    # workbench artifact keeps its approved inline SVG under its isolated CSP.
+    # Site pages use stable SVG/PNG icons. Self-contained artifacts keep the exact
+    # approved inline SVG so a downloaded complete document needs no icon files.
     icons = head.link("icon")
     expected_icons = {
         render_overview.SITE_URL + "favicon.svg",
         render_overview.SITE_URL + "favicon-48.png",
     }
     resolved = [urljoin(page_url or canonical, icon) for icon in icons]
-    inline_workbench = (
-        (allow_inline_favicon or canonical == render_overview.canonical_url(WORKBENCH_PAGE))
+    inline_pages = {
+        render_overview.canonical_url(WORKBENCH_PAGE),
+        render_overview.canonical_url(
+            render_overview.paper_path(f"{render_overview.EXACT_SIDE_VALUES}-complete")
+        ),
+    }
+    inline_artifact = (
+        (allow_inline_favicon or canonical in inline_pages)
         and len(icons) == 1
         and icons[0] == render_overview.favicon_url()
     )
-    if not inline_workbench:
+    if not inline_artifact:
         if len(icons) != 2:
             problems.append(f"{len(icons)} icon links, expected the SVG/PNG pair")
         elif set(resolved) != expected_icons:
@@ -1443,7 +1451,7 @@ def deployed_registry_checks(
         budget = site_urls.page_budget(row)
         results.append(
             (
-                len(body) <= min(budget, site_urls.HARD_HTML_LIMIT),
+                len(body) <= min(budget, site_urls.html_limit(row)),
                 f"registered HTML {row.path}: {len(body)} bytes, budget {budget}",
             )
         )
@@ -1827,7 +1835,7 @@ def check(
             cites_commit(review, paper_text)
             paper_pages[review] = paper_text
         heads[review] = paper_text
-        review_markdown, _ = paper_files(review)
+        review_markdown = paper_files(review)[0]
         for name in paper_files(review):
             cited_here = name == review_markdown
             status, body = read(site + name, head=not cited_here, timeout=timeout)

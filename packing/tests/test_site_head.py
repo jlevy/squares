@@ -608,6 +608,27 @@ def test_a_page_without_the_sites_exact_icon_pair_is_named(icons: str, finding: 
     assert head.link("apple-touch-icon") == ["apple-touch-icon.png"]
 
 
+@pytest.mark.parametrize("complete", [False, True])
+def test_only_the_complete_exact_archive_accepts_its_self_contained_icon(
+    *,
+    complete: bool,
+) -> None:
+    slug = render_overview.EXACT_SIDE_VALUES + ("-complete" if complete else "")
+    page = PageMeta(
+        name="Exact archive icon control",
+        description="A control for the self-contained archive icon policy.",
+        path=render_overview.paper_path(slug),
+    )
+    text = document(head_tags(page)).replace(favicon_html(), favicon_html(inline=True))
+    problems = head_problems(text, canonical_url(page.path))
+    if complete:
+        assert problems == []
+        changed = text.replace(render_overview.favicon_url(), "data:image/svg+xml,bad", 1)
+        assert head_problems(changed, canonical_url(page.path))
+    else:
+        assert any("expected the SVG/PNG pair" in problem for problem in problems)
+
+
 @pytest.fixture(scope="module")
 def result_pages() -> dict[str, str]:
     return {page.name: page.html for page in site_renders.result_pages()}

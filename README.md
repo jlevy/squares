@@ -99,6 +99,29 @@ refinement, and upper-bound certification
 ([PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf),
 [source](packing/devtools/templates/packing-methods-article.md)).
 
+The independent
+[Exact Side Values for Packing Unit Squares](packing/devtools/templates/exact-side-values-article.md)
+is generated from the [exact-values register](packing/frontier/exact-values.json.gz).
+It assembles 321 exact current sides across $n = 1\ldots324$ and 26 additional source
+records, with every published coefficient, source locator and algebraic certificate.
+The source register retains superseded entries separately.
+Historical examples reach $n = 2135$; source-invalid proposals retain their flags.
+Three improving reported roots retain V0/C0 assurance while geometry and Lean replay
+await verification. Thirteen Couzo finite-certificate offers remain pending adoption,
+with their original source pins, certificates and replay custody.
+The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html)
+supports search, filters and per-entry coefficient downloads.
+The full HTML report and Markdown export retain every equation and coefficient in the
+published collection.
+The
+[mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
+states what was independently checked, and the
+[continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md) maps
+the three remaining numeric-only cases $n = 29,55,71$ to beads and separates their
+identification from ideal contact-system and exact-witness research.
+Pages builds this report for web reading, with the complete record available as HTML and
+Markdown.
+
 This repository also contains
 **[a set of tools and AI workflows for automated mathematical research](#autonomous-research-process)**:
 the results and the frontier survey are produced and checked by AI agents running a
@@ -121,6 +144,7 @@ The rest of this README is about that work.
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for $n = 1\ldots324$, with reported and verified bounds kept separate |
+| [**Exact side values**](packing/frontier/exact-values.json.gz) | Certified current side expressions and polynomials, historical source polynomials, and remaining exact-value routes |
 | [**Atlas**](packing/atlas/README.md) | Known-best and prospective packings, contact-scaffold enumeration, and deterministic renderings |
 | [**Literature**](packing/resources/README.md) | Retained primary sources, cleaned transcriptions, raw extractions, and the [maintained index of upstream repositories](packing/resources/README.md#recent-external-github-repositories) we integrate from |
 | [**Reports**](#reports) | Research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |

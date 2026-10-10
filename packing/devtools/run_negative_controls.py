@@ -277,6 +277,21 @@ HISTORICAL_REPLAY_INPUTS = frozenset(
 )
 
 
+# Exact presentation outputs with no mutation target, command, inline link or
+# frontier result consumer. Their generators, records, schemas and source receipts
+# remain; a later declared dependency still rescues the exact image automatically.
+# The read-only 2026-10-08 audit measured 387,934 bytes across these four leaves.
+UNCONSUMED_GENERATED_IMAGES = frozenset(
+    ROOT / relative
+    for relative in (
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-032/four-owner-five-dot.png",
+        "atlas/prospective/source-coverage-101-324.svg",
+        "atlas/enumerated/rendering/contact-scaffolds-size5-overview.svg",
+        "atlas/rendering/gobel10-source-return-comparison.svg",
+    )
+)
+
+
 def historical_research_output(path: Path) -> bool:
     """Recognize historical output leaves without dropping records or replay inputs."""
     return (
@@ -953,7 +968,12 @@ REGULARIZED_WITNESS_PATTERN = "n-*-regularized.yaml*"
 REGULARIZED_WITNESSES = frozenset(
     (ROOT / "atlas/known-best/regularized").glob(REGULARIZED_WITNESS_PATTERN)
 )
-PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS | UNREAD_WORKER_OUTPUTS
+PRUNE |= (
+    REGULARIZED_WITNESSES
+    | HISTORICAL_SNAPSHOT_OUTPUTS
+    | UNREAD_WORKER_OUTPUTS
+    | UNCONSUMED_GENERATED_IMAGES
+)
 # Build caches: excluded from the counted surface and from every worker tree, by
 # NAME at any depth. Not a prune, and the distinction is the point. Every entry in
 # `PRUNE` is a committed path that a worker does not need; these are generated

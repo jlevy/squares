@@ -271,6 +271,39 @@ def test_t060_article_selects_only_its_page(declared: dict[str, tuple[Path, ...]
     assert in_scope(
         ["packing/devtools/templates/n11-optimality-review-article.md"], declared
     ) == {"n11_optimality_review"}
+
+
+def test_exact_values_inputs_select_the_complete_paper_job(
+    declared: dict[str, tuple[Path, ...]],
+) -> None:
+    for changed in (
+        "packing/devtools/templates/exact-side-values-article.md",
+        "packing/devtools/templates/exact-side-values-shell.html",
+        "packing/devtools/templates/exact-side-values.css",
+        "packing/devtools/templates/exact-side-values-browser-shell.html",
+        "packing/devtools/templates/exact-side-values-browser.css",
+        "packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/README.md",
+        "packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md",
+        "packing/resources/web/couzo-extended-reports-2026-10-08/README.md",
+        "packing/resources/web/evand-record-hunt-2026-10-09/README.md",
+        "packing/tests/test_exact_catalogue.py",
+        "packing/tests/test_render_exact_side_values.py",
+    ):
+        assert in_scope([changed], declared) == {"exact_side_values"}, changed
+    # The shared URL and script inventories read the catalogue source contract.
+    # Every page whose publication checks consume it must run when those producers change.
+    for changed in (
+        "packing/devtools/render_exact_side_values.py",
+        "packing/devtools/exact_catalogue.py",
+    ):
+        assert in_scope([changed], declared) == set(pages_scope.BUILDER_INPUTS)
+    assert in_scope(["packing/tests/test_exact_side_values_web.py"], declared) == {
+        "exact_side_values"
+    }
+    assert in_scope(["packing/frontier/exact-values.json"], declared) == {
+        "exact_side_values",
+        "overview",
+    }
     assert in_scope(
         ["packing/resources/web/n11-optimality-2026-09-29/receipts/final-composition.json"],
         declared,
@@ -282,6 +315,17 @@ def test_methods_manuscript_selects_only_its_own_page(
 ) -> None:
     assert in_scope(["packing/devtools/templates/packing-methods-article.md"], declared) == {
         "square_packing_methods_survey"
+    }
+
+
+@pytest.mark.parametrize("suffix", [".json", ".json.gz"])
+def test_both_retained_register_paths_select_the_catalogue_and_overview(
+    suffix: str,
+    declared: dict[str, tuple[Path, ...]],
+) -> None:
+    assert in_scope([f"packing/frontier/exact-values{suffix}"], declared) == {
+        "exact_side_values",
+        "overview",
     }
 
 
@@ -308,10 +352,18 @@ def test_each_paper_has_an_independent_required_build(slug: str) -> None:
     browser_name = module.removeprefix("render_").upper()
     assert browser_control["env"][f"SQPACK_{browser_name}_BROWSER"] == "1"
     commands = "\n".join(str(step.get("run", "")) for step in job["steps"])
+    assert f"pytest -q tests/test_{module}.py" in commands
     # Rendered where it is served: under `papers/` in the site, by the paper's slug.
-    assert f"{module} --site site --pdf" in commands
+    paper = render_overview.paper_record(slug)
+    assert f"{module} --site site" in commands
     assert f"{module} --site site --check" in commands
-    assert f"test -s site/papers/{slug}.pdf" in commands
+    if paper.has_pdf:
+        assert f"{module} --site site --pdf" in commands
+        assert f"test -s site/papers/{slug}.pdf" in commands
+    else:
+        assert f"{module} --site site --pdf" not in commands
+        assert f"test ! -e site/papers/{slug}.pdf" in commands
+        assert f"{module} --site site --check-web --web-report" in commands
     assert slug in jobs["publish"]["needs"]
     assert slug in jobs["pages-required"]["needs"]
     assert f"--partial --producer paper:{slug}" in commands
@@ -447,3 +499,12 @@ def test_an_identical_pair_of_revisions_changes_nothing() -> None:
     assert pages_scope.changed_paths("HEAD", "HEAD") == []
     with pytest.raises(SystemExit, match="git diff"):
         pages_scope.changed_paths("HEAD", "no-such-revision-anywhere")
+
+
+def test_a_pytest_command_selects_every_test_argument() -> None:
+    command = (
+        "uv run pytest -q tests/test_render_exact_side_values.py tests/test_exact_catalogue.py"
+    )
+    files = pages_scope.commands_run([{"steps": [{"run": command}]}])
+    assert REPO / "packing/tests/test_render_exact_side_values.py" in files
+    assert REPO / "packing/tests/test_exact_catalogue.py" in files

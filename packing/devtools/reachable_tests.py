@@ -55,6 +55,7 @@ from pathlib import Path
 
 from yaml import YAMLError
 
+from devtools.retained_data import DATA_SUFFIXES, compressed_path
 from sqpack.cli.validate import BEHAVIORAL_TEST_ROOTS, changed_paths
 from sqpack.release import DATA_PATHS as RELEASE_DATA_PATHS
 
@@ -320,11 +321,21 @@ def _pages_workflow_inputs() -> set[Path]:
     jobs = tuple(workflow["jobs"].values())
     files = pages_scope.import_closure(pages_scope.commands_run(jobs))
     for builder in pages_scope.BUILDER_INPUTS.values():
-        for path in builder():
+        declared = frozenset(builder())
+        for path in declared:
+            resolved = path
             if not path.exists():
-                raise FileNotFoundError(f"declared Pages input is missing: {path}")
-            if path.is_file():
-                files.add(path.resolve())
+                logical = path.with_suffix("") if path.suffix == ".gz" else path
+                alternate = logical if path.suffix == ".gz" else compressed_path(path)
+                if (
+                    logical.suffix not in DATA_SUFFIXES
+                    or alternate not in declared
+                    or not alternate.is_file()
+                ):
+                    raise FileNotFoundError(f"declared Pages input is missing: {path}")
+                resolved = alternate
+            if resolved.is_file():
+                files.add(resolved.resolve())
     for job in jobs:
         for step in job.get("steps", []):
             command = str(step.get("run", ""))

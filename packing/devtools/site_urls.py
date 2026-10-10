@@ -35,6 +35,20 @@ FIRST_SITE_DATE = "2026-09-29"
 # The declared registration day for this URL migration, never the render clock.
 REGISTRATION_DATE = "2026-10-07"
 HARD_HTML_LIMIT = 2_000_000
+CATALOGUE_PRODUCER = "paper:exact-side-values"
+CATALOGUE_GENERATOR = "devtools.render_exact_side_values:main"
+CATALOGUE_PAYLOAD_GENERATOR = "devtools.exact_catalogue:output_files"
+CATALOGUE_DATA_PREFIX = "papers/exact-side-values-data/"
+CATALOGUE_BROWSER_PATH = "papers/exact-side-values-browser.js"
+CATALOGUE_ARCHIVE_PATH = "papers/exact-side-values-complete.html"
+ARCHIVE_HTML_LIMIT = 6_000_000
+ARCHIVE_BUDGET_REASON = (
+    "The complete web report contains 324 current and 14 additional source records, "
+    "every published coefficient and the self-contained math runtime. "
+    "This download "
+    "has a separate bounded archive classification; the compact browser and every "
+    "ordinary HTML page retain their existing limits."
+)
 # Measured exceptions retain the global two-megabyte ceiling.
 PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
     "papers/n11-threshold-bound-review.html": (
@@ -110,7 +124,17 @@ FOOTER = (
     "See github.com/jlevy/practical-prose and review guidelines before editing.\n-->\n"
 )
 KINDS = frozenset(
-    {"page", "record", "result", "paper-file", "forwarder", "copy", "asset-file", "site-file"}
+    {
+        "page",
+        "record",
+        "result",
+        "paper-file",
+        "archive-file",
+        "forwarder",
+        "copy",
+        "asset-file",
+        "site-file",
+    }
 )
 STATUSES = frozenset({"live", "forwarded", "withdrawn"})
 HASHED_ASSET_PATTERN = (
@@ -245,6 +269,40 @@ def _new_row(
     )
 
 
+def catalogue_output_contracts() -> dict[str, tuple[str, str]]:
+    """Exact renderer-owned names and types, including every nested coefficient vector."""
+    from devtools import exact_catalogue, render_exact_side_values  # noqa: PLC0415
+
+    payloads = exact_catalogue.output_files(
+        render_exact_side_values.load_register(), papers=Path("papers")
+    )
+    return {
+        **{path.as_posix(): ("asset-file", CATALOGUE_PAYLOAD_GENERATOR) for path in payloads},
+        CATALOGUE_BROWSER_PATH: ("asset-file", CATALOGUE_GENERATOR),
+        CATALOGUE_ARCHIVE_PATH: ("archive-file", CATALOGUE_GENERATOR),
+    }
+
+
+def _catalogue_archive(row: SiteURL) -> bool:
+    return (
+        row.path == CATALOGUE_ARCHIVE_PATH
+        and row.canonical == row.path
+        and row.kind == "archive-file"
+        and row.producer == CATALOGUE_PRODUCER
+        and row.generator == CATALOGUE_GENERATOR
+        and row.status == "live"
+        and not row.pattern
+        and not row.target
+    )
+
+
+def html_limit(row: SiteURL | None) -> int:
+    """Only the exact owned complete archive has a separate bounded HTML classification."""
+    return (
+        ARCHIVE_HTML_LIMIT if row is not None and _catalogue_archive(row) else HARD_HTML_LIMIT
+    )
+
+
 def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
     """Builder declarations and retained registrations, without rendering site pages."""
     from devtools import (  # noqa: PLC0415
@@ -299,7 +357,7 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
         front = importlib.import_module(paper.module).FRONT
         first = paper_front.iso_date(front.dates[0].day)
         revised = paper_front.iso_date(paper_front.revised(front))
-        for extension in (".html", ".md", ".pdf"):
+        for extension in (".html", ".md", ".pdf") if paper.has_pdf else (".html", ".md"):
             rows.append(  # noqa: PERF401 -- each output has its own registration
                 _new_row(
                     render_overview.paper_path(paper.slug, extension),
@@ -309,6 +367,18 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
                     first=first,
                     lastmod=revised,
                 )
+            )
+        if "paper:" + paper.slug == CATALOGUE_PRODUCER:
+            rows.extend(
+                _new_row(
+                    path,
+                    kind,
+                    CATALOGUE_PRODUCER,
+                    generator,
+                    first=max(first, REGISTRATION_DATE),
+                    lastmod=revised,
+                )
+                for path, (kind, generator) in catalogue_output_contracts().items()
             )
     rows += [
         _new_row(
@@ -446,11 +516,19 @@ def _parse_row(record: dict[str, Any]) -> SiteURL:
     return SiteURL(**{**record, "amendments": tuple(record.get("amendments", []))})
 
 
-def load_registry(path: Path = REGISTRY) -> list[SiteURL]:
+def _read_registry(path: Path) -> list[SiteURL]:
+    """Decode rows before explicit guarded retirement of obsolete unpublished names."""
     document = cast(dict[str, Any], load_yaml(path.read_text(encoding="utf-8")))
     if document.get("version") != 1:
         raise ValueError("site URL registry version must be 1")
     rows = [_parse_row(row) for row in document["urls"]]
+    if len({row.path for row in rows}) != len(rows):
+        raise ValueError("duplicate URL in site registry")
+    return rows
+
+
+def load_registry(path: Path = REGISTRY) -> list[SiteURL]:
+    rows = _read_registry(path)
     _require_valid(rows)
     return rows
 
@@ -510,7 +588,7 @@ def render_document(rows: Sequence[SiteURL]) -> str:
         lines.append("| " + " | ".join(cell.replace("|", r"\|") for cell in cells) + " |")
     lines += ["", "## HTML Byte Budgets", "", "| Family | Bytes |", "| --- | ---: |"]
     lines += [f"| {family} | {limit:,} |" for family, limit in PAGE_BUDGETS.items()]
-    lines += [f"| Every HTML file, hard limit | {HARD_HTML_LIMIT:,} |", ""]
+    lines += [f"| Ordinary HTML hard limit | {HARD_HTML_LIMIT:,} |", ""]
     lines += [
         "### Measured exceptions",
         "",
@@ -521,7 +599,22 @@ def render_document(rows: Sequence[SiteURL]) -> str:
         f"| {path} | {limit:,} | {reason} |"
         for path, (limit, reason) in sorted(PAGE_BUDGET_EXCEPTIONS.items())
     ]
-    lines += ["", FOOTER.rstrip(), ""]
+    lines += [
+        "",
+        "### Complete archive classification",
+        "",
+        "The archive cap requires its exact registered path, type, producer and generator.",
+        "",
+        "| Physical path | Kind | Bytes | Reason |",
+        "| --- | --- | ---: | --- |",
+        (
+            f"| {CATALOGUE_ARCHIVE_PATH} | archive-file | {ARCHIVE_HTML_LIMIT:,} | "
+            f"{ARCHIVE_BUDGET_REASON} |"
+        ),
+        "",
+        FOOTER.rstrip(),
+        "",
+    ]
     return "\n".join(lines)
 
 
@@ -541,6 +634,16 @@ def validate_registry(rows: Sequence[SiteURL]) -> Checks:
         )
         for path, (limit, reason) in PAGE_BUDGET_EXCEPTIONS.items()
     ]
+    catalogue = (
+        catalogue_output_contracts()
+        if any(
+            row.kind == "archive-file"
+            or row.path.startswith(CATALOGUE_DATA_PREFIX)
+            or row.path in {CATALOGUE_BROWSER_PATH, CATALOGUE_ARCHIVE_PATH}
+            for row in rows
+        )
+        else {}
+    )
     paths = {row.path: row for row in rows}
     checks.append((len(paths) == len(rows), "registry: unique physical paths"))
     for row in rows:
@@ -574,6 +677,31 @@ def validate_registry(rows: Sequence[SiteURL]) -> Checks:
                 f"registry {row.path}: valid path, producer, dates and constrained pattern",
             )
         )
+        if row.path.startswith(CATALOGUE_DATA_PREFIX) or row.path in {
+            CATALOGUE_BROWSER_PATH,
+            CATALOGUE_ARCHIVE_PATH,
+        }:
+            checks.append(
+                (
+                    catalogue.get(row.path) == (row.kind, row.generator)
+                    and row.producer == CATALOGUE_PRODUCER
+                    and not row.pattern
+                    and row.canonical == row.path
+                    and row.status == "live"
+                    and not row.target,
+                    f"catalogue {row.path}: exact renderer filename, type and owner",
+                )
+            )
+        if row.kind == "archive-file":
+            checks.append(
+                (
+                    _catalogue_archive(row),
+                    (
+                        f"archive {row.path}: only the owned complete catalogue has "
+                        "this classification"
+                    ),
+                )
+            )
         if not row.pattern and not row.canonical.startswith("https://"):
             checks.append(
                 (
@@ -697,6 +825,8 @@ def check_history(current: Sequence[SiteURL], baseline: Sequence[SiteURL]) -> Ch
 
 
 def page_budget(row: SiteURL) -> int:
+    if _catalogue_archive(row):
+        return ARCHIVE_HTML_LIMIT
     if exception := PAGE_BUDGET_EXCEPTIONS.get(row.path):
         return exception[0]
     family = (
@@ -746,8 +876,8 @@ def check_site(
             size = file.stat().st_size
             checks.append(
                 (
-                    size <= HARD_HTML_LIMIT,
-                    f"HTML {name}: {size} bytes, hard limit {HARD_HTML_LIMIT}",
+                    size <= html_limit(row),
+                    f"HTML {name}: {size} bytes, hard limit {html_limit(row)}",
                 )
             )
             if row:
@@ -1174,7 +1304,13 @@ def _seed_history(ref: str) -> list[SiteURL]:
             _static(kw.value, constants) for kw in paper.keywords if kw.arg == "module"
         )
         first, revised = _historical_paper_dates(ref, module)
-        for extension in (".html", ".md", ".pdf"):
+        has_pdf = next(
+            (_static(kw.value, constants) for kw in paper.keywords if kw.arg == "has_pdf"),
+            True,
+        )
+        if type(has_pdf) is not bool:
+            raise TypeError("historical paper PDF capability is not a boolean")
+        for extension in (".html", ".md", ".pdf") if has_pdf else (".html", ".md"):
             rows.append(  # noqa: PERF401 -- each output has its own registration
                 _new_row(
                     f"papers/{slug}{extension}",
@@ -1266,6 +1402,49 @@ def _seed_history(ref: str) -> list[SiteURL]:
     )
 
 
+def retire_unpublished(
+    previous: Sequence[SiteURL], historical: Sequence[SiteURL], paths: Sequence[str]
+) -> list[SiteURL]:
+    """Remove abandoned local PDFs or obsolete catalogue payloads, never published URLs."""
+    from devtools import render_overview  # noqa: PLC0415
+
+    retained = {row.path: row for row in previous}
+    published = {row.path for row in historical}
+    disabled = {
+        render_overview.paper_path(paper.slug, ".pdf"): "paper:" + paper.slug
+        for paper in render_overview.PAPERS
+        if not paper.has_pdf
+    }
+    if len(set(paths)) != len(paths):
+        raise ValueError("duplicate unpublished retirement")
+    payloads = (
+        catalogue_output_contracts()
+        if any(path.startswith(CATALOGUE_DATA_PREFIX) for path in paths)
+        else {}
+    )
+    for path in paths:
+        if path in published:
+            raise ValueError(f"cannot retire historical URL {path} as unpublished")
+        if path not in disabled and not path.startswith(CATALOGUE_DATA_PREFIX):
+            raise ValueError(f"{path}: retirement requires a declared web-only paper")
+        row = retained.get(path)
+        if row is None:
+            raise ValueError(f"{path}: no local registration to retire")
+        if path.startswith(CATALOGUE_DATA_PREFIX):
+            if path in payloads:
+                raise ValueError(f"{path}: catalogue payload is still produced")
+            if (
+                row.kind != "asset-file"
+                or row.producer != CATALOGUE_PRODUCER
+                or row.generator != CATALOGUE_PAYLOAD_GENERATOR
+            ):
+                raise ValueError(f"{path}: unpublished catalogue payload owner differs")
+        elif row.kind != "paper-file" or row.producer != disabled[path]:
+            raise ValueError(f"{path}: unpublished PDF owner differs from its paper")
+        del retained[path]
+    return list(retained.values())
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group()
@@ -1274,13 +1453,27 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--write", action="store_false", dest="check", help="write registry/document"
     )
     parser.add_argument("--history-ref", default="origin/main", help="retained URL baseline")
+    parser.add_argument(
+        "--retire-unpublished",
+        action="append",
+        default=[],
+        metavar="PATH",
+        help=(
+            "retire an abandoned local PDF or catalogue payload "
+            "only if absent from --history-ref"
+        ),
+    )
     args = parser.parse_args(argv)
     try:
-        previous = (
-            load_registry() if REGISTRY.is_file() else historical_registry(args.history_ref)
-        )
+        historical = historical_registry(args.history_ref)
+        if args.retire_unpublished:
+            previous = _read_registry(REGISTRY) if REGISTRY.is_file() else historical
+            previous = retire_unpublished(previous, historical, args.retire_unpublished)
+            _require_valid(previous)
+        else:
+            previous = load_registry() if REGISTRY.is_file() else historical
         rows = derive_registry(previous)
-        checks = check_history(rows, historical_registry(args.history_ref))
+        checks = check_history(rows, historical)
         for path, text in (
             (REGISTRY, render_registry(rows)),
             (DOCUMENT, render_document(rows)),

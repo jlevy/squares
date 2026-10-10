@@ -55,9 +55,11 @@ TEMPLATES = Path(render_n11_lower_bounds_explainer.__file__).with_name("template
 #: review, whose formulas once came out lighter) and Part II (`THRESHOLD`).
 EXPLAINER, PAPER = "n11-lower-bounds-explainer.html", "n11-optimality-review.html"
 THRESHOLD = "n11-threshold-bound-review.html"
-#: Every paper of the site, in reading order, as written here.
+#: The three papers of the n = 11 series measured by the browser fixtures here, in
+#: reading order. The independent exact-values paper has no figures or shared formula.
 PAPERS = (EXPLAINER, THRESHOLD, PAPER)
-#: Both retained review templates draw 12 captioned figures.
+#: Both retained review templates draw 12 captioned figures; Part II's count is
+#: the series plan's §6.2.
 REVIEW_FIGURES = {PAPER: 12, THRESHOLD: 12}
 #: The site's own pages measured here: a long report, whose headings, tables and block
 #: quotes hold formulas, and the homepage, whose cards, chips and tables do.
@@ -525,6 +527,12 @@ def test_every_shell_with_the_publication_stylesheet_carries_its_head_script() -
         paper_shells.add(shell)
     assert paper_shells
     shells = sorted(TEMPLATES.glob("*-shell.html"))
+    series = tuple(record for record in render_overview.PAPERS if record.part is not None)
+    assert [record.part for record in series] == [1, 2, 3]
+    assert [record.slug for record in render_overview.PAPERS if record.part is None] == [
+        render_overview.PACKING_METHODS,
+        render_overview.EXACT_SIDE_VALUES,
+    ]
     assert set(shells) >= paper_shells
     carrying = [shell for shell in shells if "{{PUBLICATION_CSS}}" in shell.read_text("utf-8")]
     assert set(carrying) == paper_shells

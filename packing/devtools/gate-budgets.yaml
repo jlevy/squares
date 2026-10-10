@@ -2057,6 +2057,19 @@ pages:
       checks, and artifact upload. It reads no certificate packet. The provisional
       ceiling matches the unmeasured threshold review until a hosted run supplies this
       job's own cost; its 10-minute operational timeout bounds setup faults.
+  - id: exact-side-values
+    measured_seconds: 103.0
+    measured_on: 2026-10-08
+    measured_where: run 37717191603, job 113116412409
+    ceiling_seconds: 150.0
+    argument: >-
+      The full 366-page coefficient appendix is printed deliberately on this paper's
+      runner. The first hosted run at 69ebd1a93 took 103s from 02:19:37 to 02:21:20 UTC,
+      including setup, renderer tests, the 55s HTML/Markdown/PDF render/check and upload.
+      The 150s ceiling is 1.46 times that measured job wall, inside max_headroom.
+      Full coefficients, source-invalid labels and real PDF layout checks remain;
+      the 10-minute operational timeout bounds provisioning faults. Evidence:
+      https://github.com/jlevy/squares/actions/runs/37717191603/job/113116412409
   - id: pdf
     measured_seconds: 73.3
     measured_on: 2026-09-16

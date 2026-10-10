@@ -594,7 +594,7 @@ def test_the_builds_are_named_for_what_they_build(
     """`--skip` takes a paper by its slug, as everything else names it, and every paper
     of the site is a build (`render_overview.PAPERS`): the first, then the site's pages
     and the workbench, then each independent paper, built by its registered renderer
-    with its PDF, as its Pages job builds it."""
+    with its declared editions, as its Pages job builds it."""
     from devtools import preview_site  # noqa: PLC0415
 
     independent = tuple(
@@ -614,4 +614,10 @@ def test_the_builds_are_named_for_what_they_build(
     monkeypatch.setattr(preview_site, "_run", lambda *args: ran.append(args))
     for paper in independent:
         preview_site.build_paper(paper.slug, Path("/site"))
-    assert ran == [(paper.module, "--site", "/site", "--pdf") for paper in independent]
+    assert ran == [
+        (paper.module, "--site", "/site") + (("--pdf",) if paper.has_pdf else ())
+        for paper in independent
+    ]
+    exact = render_overview.paper_record(render_overview.EXACT_SIDE_VALUES)
+    assert not exact.has_pdf
+    assert (exact.module, "--site", "/site") in ran

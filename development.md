@@ -86,10 +86,14 @@ Developer infrastructure has its own explicit locations:
 
 - `devtools/` contains repository checks, renderers, schema validation, and negative
   controls. It is not an application API.
+
 - `benchmarks/` contains performance probes whose purpose is measurement, not pass/fail
   correctness.
+
 - `tests/` contains fast behavior, architecture, and CLI contracts.
+
 - `sqsearch/` contains the Rust screening engine.
+
 - `campaign/`, `frontier/`, `atlas/`, and `golden/` contain research state and retained
   evidence, not importable implementation code.
 
@@ -144,11 +148,16 @@ Use these verbs consistently:
 
 - `check` reads and compares without changing durable state; for a packing witness it
   reports numerical assurance and the actual arithmetic, precision, and tolerance;
+
 - `verify` is reserved for a formal decision from exact arithmetic, a rigorous
   certificate, or a complete proof;
+
 - `replay` validates retained output without rerunning the producer;
+
 - `render` regenerates a derived view atomically;
+
 - `run` performs the declared experiment or workflow;
+
 - `update` replaces a reviewed golden or source-of-truth artifact.
 
 CLI modules adapt typed operations; they do not carry a second implementation of the
@@ -184,24 +193,24 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 49 of 107 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 65 of 107 | 240 s | 59.4 s |
+| `--records` | contributor, before touching a registry; also every pull request | 52 of 110 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | 68 of 110 | 240 s | 59.4 s |
 | `--push` | contributor, once before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
-| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 94 of 107 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 68 of 107 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
-| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 107 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 107 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 107 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
-| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 107 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
-| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 107 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
-| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 107 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
-| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 107 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 107 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
-| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 107 | 90 s | pending its first hosted cohort under `think-th8p`; the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks`; the verifier’s step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 107 of 107 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
+| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 97 of 110 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 71 of 110 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 110 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 110 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 110 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
+| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 110 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
+| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 110 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
+| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 110 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
+| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 110 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 110 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
+| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 110 | 90 s | pending its first hosted cohort under `think-th8p`; the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks`; the verifier’s step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 110 of 110 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
 
-Step counts describe the current 107-step registry, read from the validator’s canonical
-selection API on 2026-10-09. Its ten PR partitions cover all 94 fast steps.
+Step counts describe the current 110-step registry, read from the validator’s canonical
+selection API on 2026-10-09. Its ten PR partitions cover all 97 fast steps.
 Dated costs retain their measured source and resource shape; they are not fresh
 measurements of the new scheduling.
 
@@ -337,7 +346,9 @@ Splitting the partitions did not end the overruns.
 After `main` merged into the stack, #160 read 200.68 s and 199.74 s at `72629c03`.
 `think-lrs0` records three causes:
 - runner speed, which moved every step of one branch by about 1.3x together;
+
 - the branch cost rollup’s render step, at 45 to 61 s, which `main` fixed at `65a5c001`;
+
 - type-floor time from the Python #160 adds.
   With `main`’s fix merged, #125 read 146.04 s of 195 s at `bca21da0` (run 34923097435).
   #160 has not been re-read since, and `think-lrs0` stays open until it is.
@@ -492,8 +503,10 @@ Three things answer it:
   required check does not go green on work that never ran, and then print
   `FAILURE CLASS: infrastructure` with one `Infrastructure` error annotation per
   prerequisite that never acquired a runner.
+
 - `pages-required` runs under `!cancelled()`, as `packing-required` has since `D-380`,
   so a superseded run no longer queues an aggregator against its cancelled jobs.
+
 - [`rerun-starved.yml`](.github/workflows/rerun-starved.yml) re-runs the failed jobs of
   a starved run once. [`rerun_starved.py`](packing/devtools/rerun_starved.py) decides
   from the API’s JSON and writes every condition to the step summary.
@@ -651,10 +664,12 @@ A duration does not establish that the work is irreducible.
 - The label starts it, and every subsequent push re-runs it, because a label that
   attested to an older commit would be the same stale evidence as the daily backstop.
   **Label last**, when the branch is otherwise ready.
+
 - Without the label every job skips in seconds, so the workflow adds nothing to an
   ordinary pull request.
   It reports one context, `deep-gate-required`, for the reason `packing-required` is one
   context: `D-380` records what a fan-out of separately required checks cost here.
+
 - To run it without touching the author’s labels, dispatch **Deferred checkpoint** with
   `pull_request: <number>`; it checks out that pull request’s merge ref.
   Select the PR head branch as the dispatch ref when the PR changes the workflow: GitHub
@@ -671,11 +686,15 @@ Pay particular attention when the branch:
 
 - moves a certificate, a retained witness, a rung, or anything under `packing/cases/` —
   the exhaustive tier is what decides those, and it is what `6bd136b0` broke;
+
 - edits `devtools/controls.yaml` or a mutation the negative controls declare (`D-403`:
   stale controls accumulate unseen because they do not run on a pull request);
+
 - touches `devtools/assess_n40_rigidity.py` or `devtools/assess_n5_rigidity.py`, the
   n=40 bracket’s declared inputs;
+
 - adds, removes or could slow a test marked `slow`;
+
 - or changes mathematics rather than prose, which is the blunt version of all four.
 
 **These runs provide advisory evidence.** A reviewer can request and inspect the deep
@@ -1302,20 +1321,23 @@ The survey posters are not redrawn for a result; they are
 [release assets](#release-assets-are-drawn-at-a-version-bump-or-on-demand).
 That sequence also applies when no explainer edition changes.
 
-**The site’s three papers are served under `papers/`, each by its slug**, and the slug
-is the paper’s name in the source too (see
-[conventions.md → Naming](conventions.md#2-naming)). They are one series on n = 11, read
-in order:
+**The site’s five papers are served under `papers/`, each by its slug**, and the slug is
+the paper’s name in the source too (see
+[conventions.md → Naming](conventions.md#2-naming)). Three form the n = 11 series; the
+methods survey and exact-values report are independent and carry no series strip:
 
-| Part | Slug | Title | Renderer |
+| Series part | Slug | Title | Renderer |
 | --- | --- | --- | --- |
 | I | `n11-lower-bounds-explainer` | New Lower Bounds for Square Packing for n = 11 | `render_n11_lower_bounds_explainer` |
 | II | `n11-threshold-bound-review` | A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares | `render_n11_threshold_bound_review` |
 | III | `n11-optimality-review` | A Review of the Optimality Proof of the Trump Packing of 11 Squares | `render_n11_optimality_review` |
+| Independent | `square-packing-methods-survey` | How Record Square Packings Are Found | `render_packing_methods` |
+| Independent | `exact-side-values` | Exact Side Values for Packing Unit Squares | `render_exact_side_values` |
 
-Each is `papers/<slug>.html` with `papers/<slug>.md` and `papers/<slug>.pdf` beside it.
+Each has `papers/<slug>.html` and `papers/<slug>.md`; a declared PDF edition is served
+beside them. The exact-values report publishes its complete content on the web.
 **The list of papers is written once**, as `render_overview.PAPERS` (slug, renderer
-module, card label, part and title, in reading order).
+module, card label, part, title and PDF availability, in reading order).
 `SITE_PAGES`, the Papers page and home cards, each paper’s series strip
 (`paper_front.series`), the slugs a link between papers may name (`paper_links`), the
 structure audit (`paper_structure`), the Pages scope (`pages_scope`), the preview build
@@ -1329,6 +1351,9 @@ dates in `sqpack.release`, its rows in `devtools.artifact_dates`, and its versio
 missing. A renderer is given the site’s root (`--site`, by default `packing/site/`) and
 writes its paper there, where it is served, so every check reads the page at its
 published path and the publication renames nothing.
+Set `part` to `None` for an independent paper; `paper_front.series` then emits no series
+credits, while the structure audit still checks the common front, typography, formats,
+metadata and colophon.
 
 The explainer at
 <https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html> is not checked
@@ -1402,6 +1427,55 @@ A dedicated Pages job builds this paper and its PDF independently of the histori
 explainer. The paper is an explanation of accepted evidence, and rendering it does not
 rerun the geometric proof.
 
+The independent **exact side values paper** lives at `/papers/exact-side-values.html`.
+[`render_exact_side_values.py`](packing/devtools/render_exact_side_values.py) reads
+[`exact-values.json.gz`](packing/frontier/exact-values.json.gz) as its only mathematical
+input and publishes a searchable browser with a compact index, individual metadata files
+and lazy coefficient payloads.
+The full HTML report and Markdown export retain every recorded closed form and integer
+polynomial in full.
+Large tabular reports are published for web reading; a PDF edition is
+optional and is reserved for short documents where it helps the reader.
+The register keeps the current $n=1\ldots324$ values and their totals separate from
+historical polynomial-side pairs transcribed from retained catalogues and exact-solution
+articles, including facts outside that horizon.
+Each historical row keeps its own attribution, source identity and status; inclusion
+does not say that it is current, geometrically feasible, locally optimal, or globally
+optimal.
+
+The exact-value intake also reads the retained Kingbird SVG facts packet.
+That route supplies the complete degree-672 polynomial at $n=83$ and keeps the source’s
+Root index distinct from the independently rebuilt irreducibility and root-isolation
+checks. Numeric-only rows and any source fact still missing exact text retain their
+assigned route beads in the register and paper.
+From `packing/`:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --update
+uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --check
+uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values
+uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values --check
+```
+
+The renderer writes the browser to `site/papers/exact-side-values.html`, its classic
+script beside it, and index/metadata/coefficient JSON under `exact-side-values-data/`.
+The complete editions are `exact-side-values-complete.html` and `exact-side-values.md`.
+This report does not generate a PDF. `render_overview.PAPERS` declares each paper’s
+formats so preview, publication and URL checks agree on which editions exist.
+`--check` rebuilds all text payloads and refuses missing, stale or extra generated
+files. The dedicated `exact-side-values` Pages job checks the renderer and lossless
+projection, builds the complete artifact and contributes it to `publish`. Required
+Chromium controls run in the existing frontend gate, where the browser is installed.
+
+The retained `devtools.measure_exact_catalogue_web` tool counts the default browser
+route’s automatic raw assets and independently restores its records against the
+register. Its `--baseline PATH --site site` comparison excludes clicked records and
+coefficients; it does not measure latency or compression.
+The bounded [experiment record](packing/benchmarks/exact-catalogue-web/ideas.md) keeps
+the frozen criterion, original receipt and generated report.
+Regenerate or check the report with
+`python -m devtools.report_exact_catalogue_web [--check]` from `packing/`.
+
 Publication uses `python -m devtools.render_n11_lower_bounds_explainer --prepare-math`
 after installing the locked Playwright Chromium.
 This pass measures the final math bases under the page’s CSS and ships their geometry
@@ -1428,7 +1502,7 @@ The overview, other papers and workbench build beside `prepare`. The workbench j
 selects Node 24.18.0, installs the root lockfile with scripts disabled, and builds the
 typed workbench package into the self-contained `/workbench/` page, beside `prepare`
 rather than after it.
-The publish job puts the three papers, the checked PDF, the site’s own pages and the
+The publish job puts the four papers, the checked PDF, the site’s own pages and the
 workbench back into one tree and holds every page’s head in it to the site’s contract,
 and every shared asset a page names to being there whole (`check_published_site
 --local`); only a push to `main` uploads that tree to Pages.
@@ -1666,15 +1740,19 @@ its source and whether it is what the rule gives:
 
 - A date derived from a commit is the commit’s author date, on the author’s own
   calendar.
+
 - A paper’s “revised” date is the date of the last commit that changed its article.
   The explainer’s is `EXPLAINER_REVISED`, the threshold-bound review’s
-  `THRESHOLD_REVIEW_REVISED` and the optimality paper’s `OPTIMALITY_REVIEW_REVISED`, all
-  in `release.py`, where each paper’s front reads it (`devtools.paper_front`). Change it
-  in the commit that changes the article; `tests/test_artifact_dates.py` fails when it
-  stands still.
+  `THRESHOLD_REVIEW_REVISED`, the optimality paper’s `OPTIMALITY_REVIEW_REVISED`, and
+  the exact-values paper’s `EXACT_SIDE_VALUES_REVISED`, all in `release.py`, where each
+  paper’s front reads it (`devtools.paper_front`). Change it in the commit that changes
+  the article; `tests/test_artifact_dates.py` fails when it stands still.
+
 - A poster’s dateline is the date of the data commit it was drawn from.
+
 - A PDF’s `CreationDate` and `ModDate` are the date on its face, at noon UTC, and never
   the build clock.
+
 - A date a person asserts stays typed: an edition’s first publication, the day a source
   published its proof, the day the register was reviewed.
 
@@ -1697,9 +1775,12 @@ It does these, and `--dry-run` lists them without doing any:
    UTC by default; correct it if the deployment lands on another day), and sets
    `PUBLICATION_REVISION`, the commit the claim documents link to, to `HEAD`.
    `DATA_REVISION` follows the data, not the edition.
+
 2. Redraws both posters and their exports (`build_known_best_atlas --update-composites`;
    see the cairo note under Supported Environment).
+
 3. Regenerates the claim documents (`render_verifiable_claim`).
+
 4. Runs `--check-composites` and
    `pytest tests/test_release.py tests/test_n11_lower_bounds_explainer.py tests/test_verify_claim.py tests/test_known_best_composites.py tests/test_artifact_dates.py`.
 
@@ -1729,12 +1810,15 @@ It is one edit, in the commit that makes the change, with no command:
    `October 2, 2026`, and one sentence on what changed in the paper.
    The number is the paper’s own and is not the site’s; a number already published is
    never changed.
-2. Set `EXPLAINER_REVISED` (or `THRESHOLD_REVIEW_REVISED`, or
-   `OPTIMALITY_REVIEW_REVISED`) to the commit’s date, as any change to the article
+
+2. Set `EXPLAINER_REVISED` (or `THRESHOLD_REVIEW_REVISED`, `OPTIMALITY_REVIEW_REVISED`,
+   or `EXACT_SIDE_VALUES_REVISED`) to the commit’s date, as any change to the article
    requires; `python -m devtools.artifact_dates --check` and
    `tests/test_artifact_dates.py` hold it to git.
+
 3. Where the entry points name the paper’s version, update them: TUTORIAL.md names the
    explainer’s (`test_reader_facing_version_references_follow_release_metadata`).
+
 4. Run
    `pytest tests/test_release.py tests/test_n11_lower_bounds_explainer.py tests/test_paper_structure.py tests/test_artifact_dates.py`.
    The explainer’s Version History is written from the list, so a longer history can
@@ -1923,11 +2007,13 @@ A Python tool that drives a page uses a **probe**:
    object, in `probes/<tool>/<name>.js` beside the tool: `packing/devtools/probes/`,
    `packing/tests/probes/`, or a spike’s own `probes/`. Declare any page global it reads
    in a `.d.ts` in the same tree.
+
 2. Load it with `probe(PROBES, "<tool>/<name>")` from `sqpack.probes`, where `PROBES` is
    that `probes` directory, and pass values as Playwright’s one argument:
    `page.evaluate(probe(PROBES, "check_layout/slots"), {"n": 26})`. Never format a value
    into the text. `add_init_script` takes no argument, so give it
    `applied(probe(...), argument)`, which serialises the argument as JSON.
+
 3. Write the name out whole.
    `devtools.check_probes` reads names from string literals, and a probe no literal
    names fails as unused.
@@ -1967,6 +2053,7 @@ Two checks hold the rule, and both run in `--edit` and on every pull request as 
   Its signatures and enforced empty allowlist are in
   `packing/devtools/embedded-javascript.yaml`. Any detected site fails the check;
   `--inventory` prints every site.
+
 - `devtools.check_probes` fails on a probe that does not evaluate to a function, one no
   Python file beside its tree names, and a name no file answers.
 
@@ -1980,13 +2067,19 @@ Use red-green-refactor for a behavior change and characterize intended behavior 
 structural move:
 
 1. Identify the public behavior, persisted record, or scientific claim at risk.
+
 2. Run its focused check and capture the clean baseline.
+
 3. Add a failing test for corrected behavior, or a characterization test for correct
    behavior that is not yet protected.
+
 4. Make one bounded change and keep structural movement separate from semantic change.
+
 5. Run focused tests, Ruff, formatting, types, and the relevant exact, property, replay,
    or differential check.
+
 6. Run full validation at the integration checkpoint.
+
 7. Review a golden diff as a behavior change.
    Never regenerate a golden merely to make validation green.
 
@@ -2047,6 +2140,7 @@ is the rule; this is how to follow it.
   `git cat-file --batch-check` for the whole branch.
   A binary or dump over a few megabytes, or data totalling tens of megabytes, is hosted
   outside the repository, for example as a release asset on `jlevy/squares`.
+
 - **Manifest.** The repository keeps a small committed manifest with the name, size,
   location, and SHA-256 of each hosted object.
   A tool that needs the bytes downloads them on request and checks them against the
@@ -2054,15 +2148,18 @@ is the rule; this is how to follow it.
   That comparison is a trust-boundary check under `OR-16`. Without the bytes, the tool
   still reports from the committed receipts and says that a full re-check needs the
   fetch. Tests use a small fixture, never the hosted object.
+
 - **Paths, not revisions.** A tool reads its inputs by repository-relative path or
   through a manifest. It never reads them from a recorded commit (`git show REV:path`),
   and never refuses because a file’s blob id or commit differs from a recorded one.
   Record a commit or blob id as provenance if it helps a reader.
   Where a verdict must be tied to the input it was computed from, give the input a
   semantic identity (a design name and version) and compare that, or recompute.
+
 - **No self-pins.** Do not pin the SHA-256 of a file this repository writes and commits.
   Git already holds it, and the pin makes regenerating the file identically, or moving
   it, a failure.
+
 - **Removing data later.** Data that is already in a branch’s history cannot be removed
   by a deleting commit.
   The branch has to be rebuilt from main without the blobs.
@@ -2072,6 +2169,17 @@ Pytest collection is explicit in `pyproject.toml`; `tests/conftest.py` fails if 
 configured test directory disappears.
 Domain programs are named by what they check, not with `_test.py`, so pytest cannot
 silently collect or omit them by accident.
+
+**Tracked PDFs have a universal 5 MiB limit.** `python -m devtools.check_tracked_pdfs`
+reads Git index blob sizes, including nested paths and mixed-case suffixes, so shrinking
+a working copy cannot hide oversized staged bytes.
+It runs in the records and edit tiers and in every pull request’s `--checks` partition.
+`--revision HEAD` audits a committed tree.
+There are no size exemptions: host larger originals through a manifest and retain their
+text extractions, citation records and download links in Git.
+The source-PDF archive follows this route in
+[`packing/hosted/source-pdfs.yaml`](packing/hosted/source-pdfs.yaml).
+Removing files from a new tree leaves existing Git history intact.
 
 #### Publishing Hosted Data
 
@@ -2227,8 +2335,10 @@ Some files keep the bytes they have:
   A large third-party file there is stored as deterministic gzip by
   `devtools.retained_data` instead, which keeps its bytes and gives up the readable diff
   an archive does not need;
+
 - a file whose bytes a record, test, verifier or archive names by SHA-256 or Git blob,
   which includes the certificates under `packing/cases/*_certificate/`; and
+
 - frozen historical output, and a file whose layout waits on an owner’s decision.
 
 `packing/devtools/retained-json.yaml` lists each with its reason and what binds it.
@@ -2411,8 +2521,10 @@ rule and none of them is about `touches`:
 
 - **13 of 70 deep runs ran against a tree that had not moved** since the run before
   them. Every one of those repeated the whole gate.
+
 - **53 of 55 merges to `main` carried a tree byte-identical to the pull-request head**
   merged, so the pull-request surface had already run against exactly those bytes.
+
 - **8 of the 66 steps then declared no `touches` at all**, deliberately, and they are
   the expensive ones — so `touches` cannot prune the deep surface by cost.
   The escape hatch that protects a mis-declared pattern is reachable by 17 of 1,933
@@ -2509,10 +2621,15 @@ copies are local working state and are not durable link targets.
 The applicable names are:
 
 - `general-eng-agent-principles` and `general-coding-rules`;
+
 - `general-tdd-guidelines` and `general-testing-rules`;
+
 - `python-rules`, `python-modern-guidelines`, and `python-cli-patterns`;
+
 - `error-handling-rules` and `backward-compatibility-rules`;
+
 - `golden-testing-guidelines`; and
+
 - `common-doc-guidelines`.
 
 <!-- This document follows common-doc-guidelines.md.

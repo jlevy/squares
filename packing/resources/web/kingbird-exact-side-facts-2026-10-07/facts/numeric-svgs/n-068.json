@@ -1,0 +1,55 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 68,
+ "url": "https://kingbird.myphotos.cc/packing/square-68.svg",
+ "retrieved_utc": "2026-10-08T03:11:57Z",
+ "read_from": "fetched into memory",
+ "bytes": 15632,
+ "sha256": "8387ef9c17e77c13c00bb3a62b01784a57e567a7a42fc13c1028e2690c0ef6ce",
+ "last_modified": "Thu, 24 Sep 2026 02:11:10 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by Sigvart Brendberg in June 2023.",
+  "Source: Private communication between Erich Friedman and Sigvart Brendberg and David Ellsworth",
+  "The original unpolished version shows up in Sigvart Brendberg's program, https://hohmiyazawa.github.io/squares_in_rects/squaredrawer.html (with s = 8.813780000001)",
+  "Improved by Thomas Schadt on December 19, 2025 using a simulated annealing computer program he wrote, starting from randomness.",
+  "Source: Private communication from Thomas Schadt to David Ellsworth, December 19, 2025.",
+  "Improved by David Ellsworth on December 26, 2025, with exact analytic solution.",
+  "Improved by Joost de Winter on August 14, 2026, working with unspecified AI (probably GPT5.6-Sol and/or Claude Fable 5)",
+  "Source: Private communication from Joost de Winter to David Ellsworth, on August 14, 2026",
+  "The following notes were provided:",
+  "Found by wave 14 of an evolutionary beam search (source w14<-e2[swap]):",
+  "structured perturbation of known good packings, followed by numerical refinement (sequential linear programming over separating-axis constraints, margin homotopy, clearance ladder). 34 rotated squares; not 180-degree symmetric; not analytically optimised.",
+  "The following method summary was provided:",
+  "I essentially vibe coded an annealing program and tuned its meta-parameters. Then I fed it known-good packings from previous waves, which made it an evolutionary algorithm, and added constraints such as a fixed number of unrotated squares. Finally I fed it the existing record, with the symmetry assumptions of David Ellsworth's analytic solution relaxed (s = 8.803382739007741), and that worked: after two intermediate packings it produced s = 8.802212238746405, in minutes on my CPU.",
+  "Cleaned up by David Ellsworth on September 6, 2026, to resemble the previous version (with approximated internal rotational symmetry), with no change in size.",
+  "Improved and optimized by Allen Chang on September 10, 2026, with GPT-5.6 Sol and/or GPT-6 Astra, with exact analytic solution.",
+  "This is claimed to be a full analytic optimization, but that hasn't been verified yet.",
+  "Improved by Ruilin Wang on September 10, 2026, using ChatGPT-6 Astra.",
+  "Cleaned up by David Ellsworth on September 16, 2026.",
+  "Improved by Jake Loyd on September 19, 2026 using a computer program he wrote, starting from randomness.",
+  "Source: Private communication from Jake Loyd to David Ellsworth, September 19, 2026.",
+  "The following notes were provided by the submitter:",
+  "Found using the same CPU code I use for other polygon packing (on Erich's site).",
+  "This packing was found from randomized initial configurations and had zero input from any other records/configurations. I wrote the original implementation myself and have had AI check for bugs (basically as a rubber duck replacement).",
+  "The main local solver uses L-BFGS (using a slightly modified LBFGSpp) to optimize each squares x/y/rotation at a fixed container scale S. The objective combines squared overlap penalties based on SAT tests with squared wall protrusion penalties. Analytic gradients are used on the active branches. An outer loop reduces S and reoptimizes. The search also uses a few techniques to escape from local minima (basin hopping, targeted perturbations and ruin and recreate plus others). I do a final polish which includes using a per square coordinate descent among other things.",
+  "The last logged result is s=8.79882518426999738. I refined that layout in a separate program.",
+  "I was trying to refine the result further before submitting using higher precision. I was able to reach s=8.79879612851587152562627538544 but that is not yet properly verified."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "8.79879614026010000000000000000000000000000000000000",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "4.39939807013005000000000000000000000000000000000000",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

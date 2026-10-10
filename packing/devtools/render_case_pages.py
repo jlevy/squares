@@ -57,6 +57,9 @@ CASES_INPUTS: tuple[Path, ...] = (
 
 #: A case file's minimal polynomial longer than this, in characters, opens on request.
 POLYNOMIAL_OPEN = 400
+#: Beyond this source length, KaTeX's full expansion overwhelms the small case record;
+#: the dedicated exact-side-values paper carries every coefficient instead.
+POLYNOMIAL_FULL = 4_000
 #: A result about more cases than this is summarized in each of their records, with its
 #: claim and records left to its row in the overview's results table.
 BROAD_RESULT = 4
@@ -522,14 +525,26 @@ def _value_block(bound: dict[str, Any]) -> str:
     return f'<p class="site-case-value">{shown}</p>{_full_decimal(bound)}'
 
 
-def polynomial_block(upper: dict[str, Any]) -> str:
-    """The minimal polynomial, typeset whatever its length; a long one opens on request."""
+def polynomial_block(upper: dict[str, Any], *, n: int) -> str:
+    """Readable polynomials stay in the record; larger ones link their full paper entry."""
     polynomial = upper.get("minimal_polynomial")
     if not polynomial:
         return ""
     degree = upper.get("algebraic_degree")
-    shown = _math(tables.polynomial_latex(polynomial))
     label = f"Minimal polynomial, degree {degree}" if degree else "Minimal polynomial"
+    if len(polynomial) > POLYNOMIAL_FULL:
+        from devtools.render_overview import (  # noqa: PLC0415
+            EXACT_SIDE_VALUES,
+            paper_path,
+        )
+
+        target = f"{paper_path(EXACT_SIDE_VALUES)}#current-polynomial-for--{n}"
+        coefficients = f"All {degree + 1} coefficients" if degree else "The full coefficients"
+        return (
+            f"<dt>{_esc(label)}</dt><dd>{coefficients} are listed in "
+            f'<a href="{_esc(target)}">Exact Side Values for Packing Unit Squares</a>.</dd>'
+        )
+    shown = _math(tables.polynomial_latex(polynomial))
     if len(polynomial) > POLYNOMIAL_OPEN:
         return (
             f'<details class="site-case-polynomial"><summary>{_esc(label)}</summary>'
@@ -553,7 +568,7 @@ def _upper_panel(case: dict[str, Any]) -> str:
         _math(frontier.decimal_text(a).replace("\u2026", "\\text{\u2026}") + r"^\circ")
         for a in angles
     )
-    polynomial = polynomial_block(upper)
+    polynomial = polynomial_block(upper, n=case["n"])
     inline_polynomial = polynomial if polynomial.startswith("<dt>") else ""
     rows = (
         _row("Found by", frontier.credit(upper.get("found_by"), upper.get("found_year")))

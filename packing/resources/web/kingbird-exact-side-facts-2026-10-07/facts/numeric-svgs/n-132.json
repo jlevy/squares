@@ -1,0 +1,40 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 132,
+ "url": "https://kingbird.myphotos.cc/packing/square-132.svg",
+ "retrieved_utc": "2026-10-08T03:12:18Z",
+ "read_from": "fetched into memory",
+ "bytes": 17092,
+ "sha256": "e38af8db4df170be00819668ddd9aae3bd653a2b65a6ee873c07166e7206bfc8",
+ "last_modified": "Thu, 10 Sep 2026 00:07:37 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by M.Z. Arslanov, S.A. Mustafin, and Z.K. Shangitbayev in March 2019 (to 11 decimal digits of precision: s < 11.99790201731).",
+  "Source: Improved Packings of n(n\u22121) Unit Squares in a Square (Submitted March 14, 2019; Published October 15, 2021): https://doi.org/10.37236/8586",
+  "Source: Private communication from K\u00e1roly Hajba to David Ellsworth, October 19, 2024 (Showed me a bitmap render of his recreation of the paper's s(132), and referred me to the paper)",
+  "Exact analytic solution by David Ellsworth on October 22, 2024.",
+  "Improved by David W. Cantrell on March 21, 2025, with exact analytic solution.",
+  "Source: E-mail from David W. Cantrell to David Ellsworth, on March 21, 2025, with attached mathematical data",
+  "A separate email was also sent by David W. Cantrell to David Ellsworth, M.Z. Arslanov, S.A. Mustafin, and Z.K. Shangitbayev, with 461\u00d7461 rasterized image of the packing, and the side length to 13 decimal places. The latter three never replied.",
+  "Exact analytic solution reconstructed by David Ellsworth on December 19, 2025.",
+  "Improved by David Ellsworth on January 17-18, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program.",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026"
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "11.99137344423646987006030626166692356288511876604934",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "5.99568672211823493503015313083346178144255938302467",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

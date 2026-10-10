@@ -1,0 +1,215 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 55,
+ "url": "https://kingbird.myphotos.cc/packing/square-55.svg",
+ "retrieved_utc": "2026-10-08T00:31:34Z",
+ "read_from": "fetched into memory",
+ "bytes": 8953,
+ "sha256": "77a0ff9aee57df261c922f45250d7b17b8fdc063c63be3a9a1c0772eb85eb3f7",
+ "last_modified": "Sun, 08 Feb 2026 23:18:28 GMT",
+ "same_as_reading_of_2026_10_05": true,
+ "credits": [
+  "Found by Thomas Schadt on January 3, 2026, using a GPU simulated annealing program he wrote, starting from a cherry-picked state found by his earlier program (started from randomness) which reimplements the G&R algorithm.",
+  "G&R = Thierry Gensane and Philippe Ryckelynck, as described in the April 2004 paper https://doi.org/10.1007/s00454-004-1129-z",
+  "The cherry-picked state has s=7.9951486563, which was important because without special modifications, the simulated annealing algorithm almost always gets stuck just above the trivial size (8.0 in this case) due to stacked rows and/or columns.",
+  "When left to continue being optimized by the G&R reimplmentation, it went in a different direction and got stuck at s=7.9577055242.",
+  "Refound by David Ellsworth on February 5, 2026, using his modified version #3 of Thomas Schadt's GPU simulated annealing computer program, starting from randomness.",
+  "Refined by David Ellsworth on February 5-6 & 8, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program.",
+  "Optimized by David Ellsworth on February 8, 2026, with exact analytic solution."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "7.9457710075039129789580095385274780713965449730227",
+   "notes": []
+  },
+  {
+   "name": "a",
+   "value": "23.487112861335972965617818076839680516773805408352",
+   "notes": []
+  },
+  {
+   "name": "b",
+   "value": "22.285247201102765779133923930270866403102846197034",
+   "notes": []
+  },
+  {
+   "name": "c",
+   "value": "23.997729685891283824878206250102383329338970817255",
+   "notes": []
+  },
+  {
+   "name": "d",
+   "value": "5.0442618863622854395043743585041107200244227544934",
+   "notes": []
+  },
+  {
+   "name": "e",
+   "value": "41.132687795489072910748853113555412309496712430986",
+   "notes": []
+  },
+  {
+   "name": "f",
+   "value": "43.771752974439788558025243847461011500317453956073",
+   "notes": []
+  },
+  {
+   "name": "r1",
+   "value": ".13258636729100089408015927948384565206506898558060",
+   "notes": []
+  },
+  {
+   "name": "r2",
+   "value": ".32820443342636067933535534518763775103845727458300",
+   "notes": []
+  },
+  {
+   "name": "v3",
+   "value": ".01117793822455590402247371849001830006924610080394",
+   "notes": []
+  },
+  {
+   "name": "v4",
+   "value": ".02693827691882896451975988765763825926006163912296",
+   "notes": []
+  },
+  {
+   "name": "u5",
+   "value": ".55377557530617010870154876836100102537456280358941",
+   "notes": []
+  },
+  {
+   "name": "u6",
+   "value": ".53638507865082160389636817573997174087997573409640",
+   "notes": []
+  },
+  {
+   "name": "r7",
+   "value": ".38111751502494122290840894206305878800546184547401",
+   "notes": []
+  },
+  {
+   "name": "u8",
+   "value": ".90658275666007874044696810997214593720904652165753",
+   "notes": []
+  },
+  {
+   "name": "x9",
+   "value": ".93709638293724302242163554609952670062714540509097",
+   "notes": []
+  },
+  {
+   "name": "rA",
+   "value": ".45619874352983102379057132833168323169747250062460",
+   "notes": []
+  },
+  {
+   "name": "uB",
+   "value": ".02526529679750517258803685686812735113725896558754",
+   "notes": []
+  },
+  {
+   "name": "rC",
+   "value": ".28765640815314540673124756131061852327601007173216",
+   "notes": []
+  },
+  {
+   "name": "xD",
+   "value": ".06290361706275697757836445390047329937285459490903",
+   "notes": []
+  },
+  {
+   "name": "rE",
+   "value": ".35172866147245652121636858793618761482652167323409",
+   "notes": []
+  }
+ ],
+ "statements": [
+  "Unset[{s, a, b, c, d, e, f, r1, r2, v3, v4, u5, u6, r7, u8, x9, f1, f2, f3, f4, f5, solution}]",
+  "r1 = 1 - (s - 7)*Cos[a]",
+  "r2 = (1 - RotationTransform[-a][{2, s - 1} - ({s - 4, s - 2} + RotationTransform[b][{-1, 1}])][[2]])/Cos[a - b]",
+  "v3 = RotationTransform[-b][({s - 4, s - 2} + RotationTransform[b][{-1, 1 - r2}]) - ({2, s - 1} + RotationTransform[a][{-r1, -1}])][[2]]",
+  "v4 = v3 - ({s - 4, s - 2} + RotationTransform[b][{-4, 1 - r2 - v3}])[[1]]/Sin[b]",
+  "u5 = RotationTransform[-b][{s - 4, s - 2} - ({2, s - 1} + RotationTransform[a][{-r1, 0}])][[1]] - 1",
+  "u6 = ((s - 3) - ({s - 4, s - 2} + RotationTransform[b][{0, -1 - r2}])[[1]])/Cos[b]",
+  "r7 = 1 - RotationTransform[-c][({s - 4, s - 2} + RotationTransform[b][{-3 + u6, -1 - r2 - v4}]) - {2, 3}][[2]]",
+  "u8 = RotationTransform[-b][{s - 4, s - 2} - ({2, 3} + RotationTransform[c][{1, -r7}])][[1]] - 1",
+  "x9 = r7/Sin[c]",
+  "rA = (r2 + v3 + 2 - RotationTransform[-b][{s - 4, s - 2} - ({s - 3, s - 5} + RotationTransform[d][{-1, 1}])][[2]])/Cos[b - d]",
+  "uB = RotationTransform[-d][{s - 3, s - 5} - {4, 2}][[1]] - 1",
+  "rC = RotationTransform[e][{5, 1} - ({s - 3, s - 5} + RotationTransform[d][{-uB, -1 - rA}])][[1]]",
+  "xD = (1 - RotationTransform[-d][{s - 3, s - 6} - {4, 2}][[1]])/Cos[d]",
+  "rE = 1 - (1 - xD)*Sin[f]",
+  "f1 = RotationTransform[-b][{s - 4, s - 2} - ({2, 3} + RotationTransform[c][{1, 1 - r7}])][[2]] - r2 - v3 - 1",
+  "f2 = RotationTransform[-d][{s - 3, s - 5} - {3 + x9, 3}][[1]] - 1",
+  "f3 = RotationTransform[e][{s - 2, 1} - ({s - 3, s - 5} + RotationTransform[d][{-uB, -1 - rA}])][[1]] - 1",
+  "f4 = RotationTransform[-f][{s - 1, s - 6} - ({5, 1} + RotationTransform[-e][{1 - rC, 1}])][[1]] - 1",
+  "(*f5 = (s - 6) - ({5, 1} + RotationTransform[-e][{-rC, 1}])[[2]];*)",
+  "f5 = RotationTransform[-b][{s - 4, s - 2} - {1, 4}][[1]] + u6 - 4",
+  "f6 = ({s - 1, s - 6} + RotationTransform[f][{-1, -rE}])[[2]] - 1",
+  "f7 = Det[Grad[{s, f1, f2, f3, f4, f5, f6}, {s, a, b, c, d, e, f}]]",
+  "solution = FindRoot[{f1==0, f2==0, f3==0, f4==0, f5==0, f6==0, f7==0}, {{s, 8}, {a, 23*Pi/180}, {b, 22*Pi/180}, {c, 24*Pi/180}, {d, 5*Pi/180}, {e, 41*Pi/180}, {f, 44*Pi/180}}, WorkingPrecision -> 100]",
+  "(*f7 = (s - 3) - ({s - 4, s - 2} + RotationTransform[b][{1 - u8, -2 - r2 - v3}])[[1]]; solution = FindMinimum[{s, f1==0, f2==0, f3==0, f4==0, f5==0, f6==0, f7 >= 0, a >= 0, a < Pi/2, b >= 0, c >= 0, d >= 0, e >= 0, f >= 0, v3 >= 0, v4 >= 0}, {{s, 7.94578}, {a, 23.485*Pi/180}, {b, 22.283*Pi/180}, {c, 23.996*Pi/180}, {d, 5.083*Pi/180}, {e, 41.166*Pi/180}, {f, 44.276*Pi/180}}, WorkingPrecision -> 200, AccuracyGoal -> 65, MaxIterations -> 2000][[2]];*)",
+  "N[{s, a*180/Pi, b*180/Pi, c*180/Pi, d*180/Pi, e*180/Pi, f*180/Pi, r1, r2, v3, v4, u5, u6, r7, u8, x9, rA, uB, rC, xD, rE, {f1, f2, f3, f4, f5, f6, f7}} /. solution, 50]"
+ ],
+ "solver_calls": [
+  {
+   "solver": "FindRoot",
+   "equations": [
+    "f1==0",
+    "f2==0",
+    "f3==0",
+    "f4==0",
+    "f5==0",
+    "f6==0",
+    "f7==0"
+   ],
+   "unknowns": [
+    "s",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f"
+   ],
+   "working_precision": 100,
+   "text": "FindRoot[{f1==0, f2==0, f3==0, f4==0, f5==0, f6==0, f7==0}, {{s, 8}, {a, 23*Pi/180}, {b, 22*Pi/180}, {c, 24*Pi/180}, {d, 5*Pi/180}, {e, 41*Pi/180}, {f, 44*Pi/180}}, WorkingPrecision -> 100]"
+  },
+  {
+   "solver": "FindMinimum",
+   "equations": [
+    "s",
+    "f1==0",
+    "f2==0",
+    "f3==0",
+    "f4==0",
+    "f5==0",
+    "f6==0",
+    "f7 >= 0",
+    "a >= 0",
+    "a < Pi/2",
+    "b >= 0",
+    "c >= 0",
+    "d >= 0",
+    "e >= 0",
+    "f >= 0",
+    "v3 >= 0",
+    "v4 >= 0"
+   ],
+   "unknowns": [
+    "s",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f"
+   ],
+   "working_precision": 200,
+   "text": "FindMinimum[{s, f1==0, f2==0, f3==0, f4==0, f5==0, f6==0, f7 >= 0, a >= 0, a < Pi/2, b >= 0, c >= 0, d >= 0, e >= 0, f >= 0, v3 >= 0, v4 >= 0}, {{s, 7.94578}, {a, 23.485*Pi/180}, {b, 22.283*Pi/180}, {c, 23.996*Pi/180}, {d, 5.083*Pi/180}, {e, 41.166*Pi/180}, {f, 44.276*Pi/180}}, WorkingPrecision -> 200, AccuracyGoal -> 65, MaxIterations -> 2000]"
+  }
+ ],
+ "roots": [],
+ "checks": []
+}

@@ -261,6 +261,8 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_frontier_table.py",
     "tests/test_site_rendering.py",
     "tests/test_site_math_preferences.py",
+    "tests/test_exact_side_values_browser.py",
+    "tests/test_exact_side_values_web.py",
 )
 #: The four HTTP load/no-JS cases measure browser timing without competing browser
 #: workers from the functional layout command. Their assertions and budgets stay shared
@@ -277,6 +279,8 @@ REQUIRE_CHROMIUM = "SQPACK_REQUIRE_CHROMIUM"
 _SITE_INPUTS = (
     "packing/devtools/*",
     "packing/tests/test_site_*.py",
+    "packing/tests/test_exact_side_values_browser.py",
+    "packing/tests/test_exact_side_values_web.py",
     "packing/tests/site_*.py",
     "packing/tests/probes/*",
     "packing/frontier/*",
@@ -1962,12 +1966,13 @@ def _site_url_registry(context: Context) -> str:
 
 
 def _site_layout_tests(context: Context) -> str:
-    """Run functional pixel/layout checks in parallel, then load budgets serially.
+    """Run site and lazy catalogue layout in parallel, then load budgets serially.
 
-    The four native-frontier timing cases use one browser command after the functional
-    workers exit. Both commands require Chromium and retain the existing assertions;
-    serial allocation removes browser competition within this step, without promising
-    an otherwise idle host. Both phases share the original total subprocess timeout.
+    `SITE_LAYOUT_TESTS` checks tables and lazy requests in required Chromium. The four
+    native-frontier timing cases use one browser command after the functional workers
+    exit. Both commands require Chromium and retain the existing assertions; serial
+    allocation removes browser competition within this step, without promising an
+    otherwise idle host. Both phases share the original total subprocess timeout.
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()
@@ -3368,13 +3373,20 @@ def _exact_values(context: Context) -> str:
     The rebuild is the check: every minimal polynomial is certified irreducible over Q
     again, its root isolated again in exact rational arithmetic, and the record's decimal
     and the closed form's derivation compared again, so a record edit that breaks any of
-    them fails here rather than in the paper rendered from the register. Measured whole on
-    2026-10-06 at 4.3s wall for `--check` on a four-cpu box, the two modular certificates
-    at degree 144 and 158 most of the arithmetic, so there is no cheaper mode for the pull
-    request to run instead.
+    them fails here rather than in the paper rendered from the register. The degree-672
+    source admission is rechecked too: exact-sign comparisons inside the isolated cell
+    keep the complete replay at 31.67s on the 2026-10-07 local reference, with no cached
+    mathematical verdict replacing a check.
     """
     output = _module(context, "devtools.build_exact_values", "--check")
     _require_text(output, "exact values register check passed")
+    return output
+
+
+def _historical_side_polynomial_audit(context: Context) -> str:
+    """Independent source, finite-field and Descartes replay (29.19s locally)."""
+    output = _module(context, "devtools.audit_historical_side_polynomials")
+    _require_text(output, '"status": "PASS"')
     return output
 
 
@@ -3759,6 +3771,12 @@ def _retained_json_layout(context: Context) -> str:
     # that owns them, so a tool that goes back to `indent=2` fails here on its first
     # commit and not after a hundred thousand lines have landed (think-k131).
     return _module(context, "devtools.check_retained_json")
+
+
+def _tracked_pdf_sizes(context: Context) -> str:
+    # Only staged blob metadata is read. The universal limit holds the bytes that a
+    # commit would retain, even if a working copy has since shrunk or disappeared.
+    return _module(context, "devtools.check_tracked_pdfs")
 
 
 def _rung_figures(context: Context) -> str:
@@ -4730,6 +4748,20 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step(
+        "tracked PDFs stay within 5 MiB",
+        _tracked_pdf_sizes,
+        fast=True,
+        records=True,
+        # An indexed PDF can appear anywhere, with any suffix case. Claim its
+        # suffix and guard sources without masking the unknown-path whole-gate fallback.
+        touches=(
+            "*.[pP][dD][fF]",
+            "packing/devtools/check_tracked_pdfs.py",
+            "packing/tests/test_check_tracked_pdfs.py",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+    ),
+    Step(
         "derivation (needs sympy)",
         _derivation,
         fast=True,
@@ -5017,7 +5049,8 @@ STEPS: tuple[Step, ...] = (
             "docs/*",
         ),
     ),
-    # 4.3s: every polynomial re-certified, which is why it rebuilds rather than compares.
+    # Every polynomial is re-certified, including degree 672; direct root comparisons
+    # keep the measured full replay in the routine gate (31.67s locally, 2026-10-07).
     Step(
         "exact side values register",
         _exact_values,
@@ -5078,11 +5111,32 @@ STEPS: tuple[Step, ...] = (
             "packing/resources/web/evand-square-packing-2026-10-05/*",
             "packing/resources/web/franciscouzo-square-packing-2026-09-27/*",
             "packing/witnesses/franciscouzo-2026/*",
+            "packing/devtools/collect_kingbird_historical_polynomials.py",
+            "packing/resources/web/kingbird-squares-in-squares-*.md",
+            "packing/resources/web/kingbird-*solutions*.md",
             # The records, the register and its schema all live here.
             "packing/frontier/*",
             # The catalogue it reads printed polynomials from, and the KKT batch.
             "packing/resources/web/kingbird-squares-in-squares.md",
+            "packing/resources/web/kingbird-exact-side-facts-2026-10-07/*",
+            "packing/resources/web/known-best-packings/receipts/kingbird-2026-10-05-pictures.json",
             "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
+        ),
+    ),
+    # The independent full-corpus audit fits the PR surface at 29.19s (2026-10-07).
+    # Records remain a subset of the edit floor; no cached verdict replaces this replay.
+    Step(
+        "historical side polynomials independently audited",
+        _historical_side_polynomial_audit,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/audit_historical_side_polynomials.py",
+            "packing/devtools/collect_kingbird_historical_polynomials.py",
+            "packing/resources/web/kingbird-exact-side-facts-2026-10-07/*",
+            "packing/resources/web/kingbird-squares-in-squares-*.md",
+            "packing/resources/web/kingbird-*solutions*.md",
         ),
     ),
     Step(
@@ -6008,6 +6062,8 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         # The same shape: the tracked JSON, its own policy and `biome.json`, and the
         # writer it re-lays them with. No clock, no network, no history.
         "retained JSON is one record per line",
+        # Git index blob sizes are a function of the checked tree, not its history.
+        "tracked PDFs stay within 5 MiB",
         # The same shape: it reads the tracked Markdown under `packing/resources/` and
         # compares three numbers found in those bytes. No clock, no network, no history.
         "archive annotation census agrees with the archive",
@@ -6015,6 +6071,7 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         # bound certificates, source manifests and replay receipts determine the exact
         # rebuild. No clock, no network or repository history enters its verdict.
         "exact side values register",
+        "historical side polynomials independently audited",
         "derivation (needs sympy)",
         "search engine (sqsearch)",
         "lint floor (rust)",

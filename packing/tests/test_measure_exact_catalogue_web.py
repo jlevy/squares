@@ -1,0 +1,377 @@
+"""The payload counter includes automatic resources and refuses lossy projections."""
+
+from __future__ import annotations
+
+import gzip
+import json
+import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+import pytest
+
+from devtools import exact_catalogue
+from devtools.measure_exact_catalogue_web import (
+    check_projection,
+    initial_assets,
+    local_path,
+    measure,
+    working_tree_dirty,
+)
+from devtools.report_exact_catalogue_web import CAMPAIGN, report
+
+
+def test_counts_automatic_assets_once_and_follows_css(tmp_path: Path) -> None:
+    (tmp_path / "papers").mkdir()
+    page = tmp_path / "papers/browser.html"
+    page.write_text(
+        '<style>@font-face {src:url("font.woff2")}</style>'
+        '<script src="browser.js"></script><script src="browser.js"></script>'
+        '<link rel="stylesheet" href="browser.css">'
+        '<main data-index-url="index.json"></main>'
+        '<a href="coefficients.json">deferred</a>',
+        encoding="utf-8",
+    )
+    for name, content in (
+        ("browser.js", "void 0"),
+        ("browser.css", "a{background:url(icon.svg)}"),
+        ("font.woff2", "font"),
+        ("icon.svg", "svg"),
+        ("index.json", "{}"),
+        ("coefficients.json", "deferred"),
+    ):
+        (page.parent / name).write_text(content, encoding="utf-8")
+    assets, index = initial_assets(page, tmp_path)
+    assert index == page.parent / "index.json"
+    assert set(assets) == {
+        f"papers/{name}"
+        for name in (
+            "browser.html",
+            "browser.js",
+            "browser.css",
+            "font.woff2",
+            "icon.svg",
+            "index.json",
+        )
+    }
+    assert sum(assets.values()) == sum((tmp_path / name).stat().st_size for name in assets)
+
+
+@pytest.mark.parametrize(
+    "url", ["../../outside.json", "https://example.com/file.json", "absent.json"]
+)
+def test_refuses_uncounted_assets(tmp_path: Path, url: str) -> None:
+    with pytest.raises(ValueError, match="asset"):
+        local_path(url, base=tmp_path, site=tmp_path)
+
+
+def test_projection_keeps_zero_and_large_integer_strings(tmp_path: Path) -> None:
+    papers = tmp_path / "papers"
+    data = papers / "data"
+    data.mkdir(parents=True)
+    vector = ["1", "0", "-" + "9" * 724]
+    original = {
+        "n": 83,
+        "status": "open",
+        "polynomial": {"coefficients": vector, "text": "large", "latex": "large"},
+    }
+    register = {"entries": [original], "historical_entries": [], "summary": {"proved": 0}}
+    index = {
+        "entries": [
+            {"id": "current-83", "section": "current", "metadata_url": "data/metadata.json"}
+        ],
+        "summary": {"proved": 0},
+    }
+    metadata = {
+        "id": "current-83",
+        "section": "current",
+        "record": {
+            "n": 83,
+            "status": "open",
+            "polynomial": {"coefficients_url": "data/coefficients.json", "order": "descending"},
+        },
+    }
+    payload: dict[str, Any] = {"order": "descending", "coefficients": list(vector)}
+    for name, content in (("index", index), ("metadata", metadata), ("coefficients", payload)):
+        (data / f"{name}.json").write_text(json.dumps(content), encoding="utf-8")
+    assert check_projection(register, data / "index.json", tmp_path) == {
+        "current": 1,
+        "historical": 0,
+        "coefficient_vectors": 1,
+        "integer_coefficients": 3,
+        "omitted_superseded_historical": 0,
+        "omitted_superseded_notes": 0,
+    }
+    payload["coefficients"][1] = "1"
+    (data / "coefficients.json").write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ValueError, match="coefficient strings"):
+        check_projection(register, data / "index.json", tmp_path)
+
+
+@pytest.mark.parametrize("storage", ["plain", "gzip", "both", "gzip-path"])
+def test_measure_reads_retained_register_and_checks_all_current_and_historical_coefficients(
+    storage: str,
+    tmp_path: Path,
+) -> None:
+    vector = ["1", "0", "-" + "9" * 724]
+    register = {
+        "entries": [
+            {
+                "n": 83,
+                "status": "open",
+                "side": {"value": "9.25", "relation": "upper-bound"},
+                "degree": 2,
+                "polynomial": {"coefficients": vector},
+                "notes": [
+                    {
+                        "kind": "superseded-catalogue-polynomial",
+                        "degree": 2,
+                        "polynomial": {"coefficients": vector},
+                    },
+                    {"kind": "retained-source", "text": "retain this metadata"},
+                ],
+            }
+        ],
+        "historical_entries": [
+            {
+                "n": 83,
+                "kind": "source-invalid",
+                "side": "9.5",
+                "degree": 2,
+                "polynomial": {"coefficients": vector},
+            },
+            {
+                "n": 83,
+                "kind": "superseded",
+                "side": "9.6",
+                "degree": 2,
+                "polynomial": {"coefficients": vector},
+            },
+        ],
+    }
+    source = tmp_path / "exact-values.json"
+    raw = json.dumps({"softschema": {"envelope": "register"}, "register": register}).encode()
+    packed = source.with_name(source.name + ".gz")
+    if storage in {"plain", "both"}:
+        source.write_bytes(raw)
+    if storage in {"gzip", "both", "gzip-path"}:
+        packed.write_bytes(gzip.compress(raw, mtime=0))
+    papers = tmp_path / "papers"
+    for path, content in exact_catalogue.output_files(register, papers=papers).items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+    page = papers / "browser.html"
+    page.write_text(
+        f'<main data-index-url="{exact_catalogue.INDEX_PATH.as_posix()}"></main>',
+        encoding="utf-8",
+    )
+    baseline = papers / "complete.html"
+    baseline.write_text("archive" * 4096, encoding="utf-8")
+    loaded = packed if storage == "gzip-path" else source
+    result = measure(baseline, tmp_path, page, loaded)
+    assert result["maximum_fraction"] == 0.25
+    strict = measure(baseline, tmp_path, page, loaded, maximum_fraction=0.10)
+    assert strict["maximum_fraction"] == 0.10
+    assert strict["passes_acceptance"]
+    assert result["coverage"] == {
+        "current": 1,
+        "historical": 1,
+        "coefficient_vectors": 2,
+        "integer_coefficients": 6,
+        "omitted_superseded_historical": 1,
+        "omitted_superseded_notes": 1,
+    }
+    baseline.write_bytes(b"x" * (result["candidate_bytes"] * 5))
+    assert measure(baseline, tmp_path, page, loaded)["passes_acceptance"]
+    strict = measure(baseline, tmp_path, page, loaded, maximum_fraction=0.10)
+    assert not strict["passes_acceptance"]
+    receipt = tmp_path / "strict-measurement.json"
+    command = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "devtools.measure_exact_catalogue_web",
+            "--baseline",
+            str(baseline),
+            "--site",
+            str(tmp_path),
+            "--page",
+            "papers/browser.html",
+            "--register",
+            str(loaded),
+            "--maximum-fraction",
+            "0.10",
+            "--output",
+            str(receipt),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert command.returncode != 0
+    recorded = json.loads(receipt.read_text(encoding="utf-8"))
+    provenance = recorded.pop("provenance")
+    assert recorded == strict
+    assert "0.10" in provenance["command"]
+    coefficient = next(
+        (papers / exact_catalogue.DATA_DIRECTORY / "coefficients").glob("*.json")
+    )
+    payload = json.loads(coefficient.read_text(encoding="utf-8"))
+    payload["coefficients"][1] = "1"
+    coefficient.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ValueError, match="coefficient strings"):
+        measure(baseline, tmp_path, page, loaded)
+
+
+def test_projection_derives_the_subset_independently_and_refuses_retained_note_loss(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    register = {
+        "entries": [
+            {
+                "n": 83,
+                "notes": [
+                    {"kind": "superseded-catalogue-polynomial", "text": "omit"},
+                    {"kind": "retained-source", "text": "keep"},
+                ],
+            }
+        ],
+        "historical_entries": [
+            {"n": 83, "side": "9.5", "kind": "superseded"},
+            {"n": 1, "side": "1", "kind": "source-invalid"},
+        ],
+    }
+    papers = tmp_path / "papers"
+    for path, content in exact_catalogue.output_files(register, papers=papers).items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+
+    def refuse_exporter_dependency(*_arguments: object) -> None:
+        raise AssertionError("independent checker must not call the publication helper")
+
+    monkeypatch.setattr(exact_catalogue, "publication_register", refuse_exporter_dependency)
+    index = papers / exact_catalogue.INDEX_PATH
+    coverage = check_projection(register, index, tmp_path)
+    assert coverage == {
+        "current": 1,
+        "historical": 1,
+        "coefficient_vectors": 0,
+        "integer_coefficients": 0,
+        "omitted_superseded_historical": 1,
+        "omitted_superseded_notes": 1,
+    }
+    rows = json.loads(index.read_text(encoding="utf-8"))["entries"]
+    metadata = papers / rows[0]["metadata_url"]
+    payload = json.loads(metadata.read_text(encoding="utf-8"))
+    payload["record"]["notes"] = []
+    metadata.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ValueError, match="record array"):
+        check_projection(register, index, tmp_path)
+    payload["record"]["notes"] = [{"kind": "retained-source", "text": "keep"}]
+    metadata.write_text(json.dumps(payload), encoding="utf-8")
+    document = json.loads(index.read_text(encoding="utf-8"))
+    document["entries"].pop()
+    index.write_text(json.dumps(document), encoding="utf-8")
+    with pytest.raises(ValueError, match="historical record count"):
+        check_projection(register, index, tmp_path)
+
+
+@pytest.mark.parametrize(
+    "threshold", [0.0, -0.1, 1.01, float("nan"), float("inf"), -float("inf")]
+)
+def test_measure_refuses_invalid_thresholds_before_reading_inputs(
+    threshold: float, tmp_path: Path
+) -> None:
+    missing = tmp_path / "missing"
+    with pytest.raises(ValueError, match="maximum fraction"):
+        measure(missing, missing, missing, missing, maximum_fraction=threshold)
+    command = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "devtools.measure_exact_catalogue_web",
+            "--baseline",
+            str(missing),
+            "--site",
+            str(missing),
+            f"--maximum-fraction={threshold}",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert command.returncode == 2
+    assert "--maximum-fraction" in command.stderr
+    assert "Traceback" not in command.stderr
+
+
+def test_recorded_report_is_current() -> None:
+    assert report() == (CAMPAIGN / "report.md").read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize(
+    "omission", ["omitted_superseded_historical", "omitted_superseded_notes"]
+)
+def test_report_refuses_publication_omissions(tmp_path: Path, omission: str) -> None:
+    copied = tmp_path / "record"
+    shutil.copytree(CAMPAIGN, copied)
+    for receipt in copied.glob("exp-*-bytes.json"):
+        measured = json.loads(receipt.read_text(encoding="utf-8"))
+        measured["coverage"][omission] = 1
+        receipt.write_text(json.dumps(measured), encoding="utf-8")
+    with pytest.raises(ValueError, match="H-001 requires every canonical record and note"):
+        report(copied)
+
+
+def test_report_refuses_forged_acceptance(tmp_path: Path) -> None:
+    copied = tmp_path / "record"
+    shutil.copytree(CAMPAIGN, copied)
+    receipt = copied / "exp-001-bytes.json"
+    measured = json.loads(receipt.read_text(encoding="utf-8"))
+    measured["passes_acceptance"] = False
+    receipt.write_text(json.dumps(measured), encoding="utf-8")
+    with pytest.raises(ValueError, match="registered threshold"):
+        report(copied)
+
+
+def test_provenance_includes_staged_and_untracked_inputs(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    for name in tuple(os.environ):
+        if name.startswith("GIT_"):
+            monkeypatch.delenv(name)
+
+    def git(*arguments: str) -> None:
+        subprocess.run(
+            [
+                "git",
+                "-c",
+                "user.name=Provenance Control",
+                "-c",
+                "user.email=control@example.invalid",
+                "-c",
+                "core.hooksPath=/dev/null",
+                *arguments,
+            ],
+            cwd=tmp_path,
+            check=True,
+            capture_output=True,
+        )
+
+    git("init", "-q", "-b", "main")
+    git("commit", "--allow-empty", "-qm", "control")
+    assert not working_tree_dirty(tmp_path)
+    source = tmp_path / "source.txt"
+    source.write_text("first input", encoding="utf-8")
+    assert working_tree_dirty(tmp_path)
+    git("add", "source.txt")
+    assert working_tree_dirty(tmp_path)
+    git("commit", "-qm", "retained input")
+    assert not working_tree_dirty(tmp_path)
+    source.write_text("edited input", encoding="utf-8")
+    assert working_tree_dirty(tmp_path)
+    git("add", "source.txt")
+    assert working_tree_dirty(tmp_path)

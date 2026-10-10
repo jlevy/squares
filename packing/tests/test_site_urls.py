@@ -1,7 +1,9 @@
 """The published URL boundary: omissions, identity changes, crawl files and aliases."""
 
 import json
+import os
 import subprocess
+from collections.abc import Iterator
 from dataclasses import replace
 from pathlib import Path
 
@@ -512,13 +514,21 @@ def test_t116_registry_retains_the_complete_historical_source_binding() -> None:
         ("October 7, 2026", "September 22, 2026", "October 7, 2026"),
     ],
 )
+@pytest.mark.parametrize("has_pdf", [None, False])
 def test_paper_history_seed_uses_publication_history_not_original_proof(
-    monkeypatch: pytest.MonkeyPatch, published: str, proof: str, revised: str
+    monkeypatch: pytest.MonkeyPatch,
+    published: str,
+    proof: str,
+    revised: str,
+    *,
+    has_pdf: bool | None,
 ) -> None:
     declarations = (
         'PAGES = {"index.html": None}\nDOCUMENT_PAGES = ()\n'
         "MOVED_PAGES = ()\nMOVED_FILES = ()\n"
-        'PAPERS = (PaperRecord(slug="example", module="devtools.example"),)\n'
+        'PAPERS = (PaperRecord(slug="example", module="devtools.example"'
+        + (", has_pdf=False" if has_pdf is False else "")
+        + "),)\n"
         'SOCIAL_CARD = "preview-card.png"\n'
     )
     release = (
@@ -559,7 +569,8 @@ def test_paper_history_seed_uses_publication_history_not_original_proof(
         ),
     )
     seeded = {entry.path: entry for entry in site_urls.historical_registry("trusted-history")}
-    for extension in (".html", ".md", ".pdf"):
+    assert ("papers/example.pdf" in seeded) is (has_pdf is not False)
+    for extension in (".html", ".md", ".pdf") if has_pdf is not False else (".html", ".md"):
         paper_row = seeded[f"papers/example{extension}"]
         assert paper_row.first_published == paper_front.iso_date(published)
         assert paper_row.first_published != paper_front.iso_date(proof)
@@ -659,9 +670,304 @@ def test_every_partial_paper_or_workbench_check_stages_the_shared_card() -> None
                 assert command.index(card) < command.index(publication), name
                 checked.append(name)
     assert set(checked) == {
-        "n11-optimality-review",
-        "n11-threshold-bound-review",
-        "square-packing-methods-survey",
+        *(paper.slug for paper in render_overview.PAPERS if paper.part != 1),
         "workbench",
         "pdf",
     }
+
+
+def _memory_site(monkeypatch: pytest.MonkeyPatch, files: dict[str, int]) -> Path:
+    """Exercise physical ownership and byte ceilings without allocating site fixtures."""
+    directory = Path("/virtual-publication")
+    original_glob, original_file, original_stat = Path.rglob, Path.is_file, Path.stat
+
+    def rglob(path: Path, pattern: str) -> Iterator[Path]:
+        if path == directory:
+            return iter(directory / name for name in files)
+        return original_glob(path, pattern)
+
+    def is_file(path: Path) -> bool:
+        if path.is_relative_to(directory):
+            return path.relative_to(directory).as_posix() in files
+        return original_file(path)
+
+    def stat(path: Path, *, follow_symlinks: bool = True) -> os.stat_result:
+        if path.is_relative_to(directory):
+            size = files[path.relative_to(directory).as_posix()]
+            return os.stat_result((0, 0, 0, 0, 0, 0, size, 0, 0, 0))
+        return original_stat(path, follow_symlinks=follow_symlinks)
+
+    monkeypatch.setattr(Path, "rglob", rglob)
+    monkeypatch.setattr(Path, "is_file", is_file)
+    monkeypatch.setattr(Path, "stat", stat)
+    return directory
+
+
+def _catalogue_rows() -> list[site_urls.SiteURL]:
+    return [
+        replace(
+            row(path),
+            kind=kind,
+            producer=site_urls.CATALOGUE_PRODUCER,
+            generator=generator,
+        )
+        for path, (kind, generator) in site_urls.catalogue_output_contracts().items()
+    ]
+
+
+def test_catalogue_outputs_are_exact_and_required_for_the_selected_producer(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    rows = [*_catalogue_rows(), row("index.html")]
+    files = {item.path: 1 for item in rows if item.producer == site_urls.CATALOGUE_PRODUCER}
+    directory = _memory_site(monkeypatch, files)
+    options = {"partial": True, "producers": (site_urls.CATALOGUE_PRODUCER,)}
+    assert not failures(site_urls.check_site(directory, rows, **options))
+    assert "required overview output missing" in failures(site_urls.check_site(directory, rows))
+    for suffix in (
+        "index.json",
+        "metadata/current-n83.json",
+        "coefficients/current-n83.json",
+    ):
+        name = site_urls.CATALOGUE_DATA_PREFIX + suffix
+        assert name in files
+        del files[name]
+        failed = failures(site_urls.check_site(directory, rows, **options))
+        assert f"site {name}: required {site_urls.CATALOGUE_PRODUCER} output missing" in failed
+        files[name] = 1
+    files["index.html"] = 1
+    for name in (
+        site_urls.CATALOGUE_DATA_PREFIX + "metadata/unowned.json",
+        site_urls.CATALOGUE_DATA_PREFIX + "coefficients/unowned.json",
+        "papers/unowned.js",
+    ):
+        files[name] = 1
+        assert f"site {name}: unregistered file" in failures(
+            site_urls.check_site(directory, rows, **options)
+        )
+        del files[name]
+    coefficient = site_urls.CATALOGUE_DATA_PREFIX + "coefficients/current-n83.json"
+    del files[coefficient]
+    assert not failures(
+        site_urls.check_site(directory, rows, partial=True, producers=("overview",))
+    )
+    assert coefficient in failures(site_urls.check_site(directory, rows))
+    owned = next(item for item in rows if item.path == coefficient)
+    for wrong in (
+        replace(owned, producer="overview"),
+        replace(owned, kind="paper-file"),
+        replace(owned, generator="fixture:unowned"),
+        replace(owned, path=site_urls.CATALOGUE_DATA_PREFIX + "unowned.json"),
+    ):
+        assert "exact renderer filename, type and owner" in failures(
+            site_urls.validate_registry([wrong])
+        )
+
+
+def test_archive_cap_requires_the_exact_classified_path_and_owner(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    archive = next(item for item in _catalogue_rows() if item.kind == "archive-file")
+    files = {archive.path: 5_016_486}
+    directory = _memory_site(monkeypatch, files)
+    assert site_urls.HARD_HTML_LIMIT == 2_000_000
+    assert site_urls.html_limit(archive) == 6_000_000
+    assert not failures(site_urls.check_site(directory, [archive]))
+    files[archive.path] = 6_000_001
+    assert "hard limit 6000000" in failures(site_urls.check_site(directory, [archive]))
+    files[archive.path] = 5_016_486
+    for wrong in (
+        replace(
+            archive,
+            path="papers/unowned-complete.html",
+            canonical="papers/unowned-complete.html",
+        ),
+        replace(archive, producer="overview"),
+        replace(archive, generator="fixture:unowned"),
+        replace(archive, kind="paper-file"),
+        replace(archive, canonical="papers/exact-side-values.html"),
+    ):
+        assert site_urls.html_limit(wrong) == site_urls.HARD_HTML_LIMIT
+        assert failures(site_urls.validate_registry([wrong]))
+    ordinary = replace(row("papers/unowned.html"), kind="paper-file")
+    files.clear()
+    files[ordinary.path] = 2_000_001
+    assert "hard limit 2000000" in failures(site_urls.check_site(directory, [ordinary]))
+
+
+def test_deployed_archive_uses_the_same_qualified_cap(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    archive = next(item for item in _catalogue_rows() if item.kind == "archive-file")
+    body = b"x" * 5_016_486
+    monkeypatch.setattr(check_published_site, "head_checks", lambda *_args: [])
+
+    def read(_url: str, *, timeout: float) -> tuple[int, bytes]:
+        assert timeout == 1
+        return 200, body
+
+    assert not failures(
+        check_published_site.deployed_registry_checks(
+            "https://example.org/squares/", read, timeout=1, rows=[archive]
+        )
+    )
+    body = b"x" * 6_000_001
+    assert "registered HTML" in failures(
+        check_published_site.deployed_registry_checks(
+            "https://example.org/squares/", read, timeout=1, rows=[archive]
+        )
+    )
+
+
+def test_web_only_paper_has_no_pdf_output_contract() -> None:
+    rows = {entry.path: entry for entry in site_urls.derive_registry()}
+    for paper in render_overview.PAPERS:
+        assert render_overview.paper_path(paper.slug) in rows
+        assert render_overview.paper_path(paper.slug, ".md") in rows
+        assert (render_overview.paper_path(paper.slug, ".pdf") in rows) is paper.has_pdf
+
+
+def test_explicit_unpublished_retirement_preserves_all_true_history() -> None:
+    path = "papers/exact-side-values.pdf"
+    abandoned = replace(row(path), kind="paper-file", producer="paper:exact-side-values")
+    published = row("index.html")
+    previous = [published, abandoned]
+    retained = site_urls.retire_unpublished(previous, [published], [path])
+    assert retained == [published]
+    assert previous == [published, abandoned]
+    assert not failures(site_urls.check_history(retained, [published]))
+    assert site_urls.retire_unpublished(previous, [published], []) == previous
+    with pytest.raises(ValueError, match="historical URL"):
+        site_urls.retire_unpublished(previous, previous, [path])
+    with pytest.raises(ValueError, match="declared web-only"):
+        site_urls.retire_unpublished(previous, [], ["papers/n11-optimality-review.pdf"])
+    with pytest.raises(ValueError, match="no local registration"):
+        site_urls.retire_unpublished([published], [published], [path])
+    with pytest.raises(ValueError, match="owner differs"):
+        site_urls.retire_unpublished([replace(abandoned, producer="overview")], [], [path])
+    with pytest.raises(ValueError, match="duplicate"):
+        site_urls.retire_unpublished(previous, [published], [path, path])
+
+
+def test_unpublished_payload_retirement_refuses_published_current_and_foreign_urls(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    abandoned_path = site_urls.CATALOGUE_DATA_PREFIX + "metadata/historical-old.json"
+    current_path = site_urls.CATALOGUE_DATA_PREFIX + "metadata/current-n83.json"
+    abandoned = replace(
+        row(abandoned_path),
+        kind="asset-file",
+        producer=site_urls.CATALOGUE_PRODUCER,
+        generator=site_urls.CATALOGUE_PAYLOAD_GENERATOR,
+    )
+    current = replace(abandoned, path=current_path, canonical=current_path)
+    published = row("index.html")
+    previous = [published, abandoned, current]
+    monkeypatch.setattr(
+        site_urls,
+        "catalogue_output_contracts",
+        lambda: {current_path: ("asset-file", site_urls.CATALOGUE_PAYLOAD_GENERATOR)},
+    )
+    assert site_urls.retire_unpublished(previous, [published], [abandoned_path]) == [
+        published,
+        current,
+    ]
+    assert previous == [published, abandoned, current]
+    with pytest.raises(ValueError, match="historical URL"):
+        site_urls.retire_unpublished(previous, [published, abandoned], [abandoned_path])
+    with pytest.raises(ValueError, match="still produced"):
+        site_urls.retire_unpublished(previous, [published], [current_path])
+    with pytest.raises(ValueError, match="owner differs"):
+        site_urls.retire_unpublished(
+            [replace(abandoned, producer="overview")], [], [abandoned_path]
+        )
+    with pytest.raises(ValueError, match="owner differs"):
+        site_urls.retire_unpublished(
+            [replace(abandoned, generator="foreign:render")], [], [abandoned_path]
+        )
+    with pytest.raises(ValueError, match="no local registration"):
+        site_urls.retire_unpublished([published], [published], [abandoned_path])
+    with pytest.raises(ValueError, match="declared web-only"):
+        site_urls.retire_unpublished(previous, [published], [site_urls.CATALOGUE_ARCHIVE_PATH])
+
+
+def test_unpublished_retirement_cli_checks_history_before_writing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    path = "papers/exact-side-values.pdf"
+    abandoned = replace(row(path), kind="paper-file", producer="paper:exact-side-values")
+    published = row("index.html")
+    previous = [published, abandoned]
+    writes: list[tuple[Path, str]] = []
+    monkeypatch.setattr(site_urls, "_read_registry", lambda _path: previous)
+    monkeypatch.setattr(site_urls, "historical_registry", lambda _ref: [published])
+    monkeypatch.setattr(site_urls, "derive_registry", list)
+    monkeypatch.setattr(
+        site_urls, "_write", lambda destination, text: writes.append((destination, text))
+    )
+    command = ["--write", "--history-ref", "published-fixture", "--retire-unpublished", path]
+    assert site_urls.main(command) == 0
+    assert [destination for destination, _text in writes] == [
+        site_urls.REGISTRY,
+        site_urls.DOCUMENT,
+    ]
+    assert all(path not in text for _destination, text in writes)
+    writes.clear()
+    monkeypatch.setattr(site_urls, "historical_registry", lambda _ref: previous)
+    assert site_urls.main(command) == 1
+    assert not writes
+
+
+def test_obsolete_payload_retirement_precedes_contract_validation_without_losing_history(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    obsolete_path = site_urls.CATALOGUE_DATA_PREFIX + "metadata/historical-old.json"
+    current_path = site_urls.CATALOGUE_DATA_PREFIX + "metadata/current-n83.json"
+    obsolete = replace(
+        row(obsolete_path),
+        kind="asset-file",
+        producer=site_urls.CATALOGUE_PRODUCER,
+        generator=site_urls.CATALOGUE_PAYLOAD_GENERATOR,
+    )
+    current = replace(obsolete, path=current_path, canonical=current_path)
+    published = row("index.html")
+    original_rows = [published, obsolete, current]
+    registry = tmp_path / "site-urls.yaml"
+    document = tmp_path / "site-urls.md"
+    registry.write_text(site_urls.render_registry(original_rows), encoding="utf-8")
+    document.write_text("previous document", encoding="utf-8")
+    monkeypatch.setattr(site_urls, "REGISTRY", registry)
+    monkeypatch.setattr(site_urls, "DOCUMENT", document)
+    monkeypatch.setattr(site_urls, "historical_registry", lambda _ref: [published])
+    monkeypatch.setattr(site_urls, "derive_registry", list)
+    monkeypatch.setattr(
+        site_urls,
+        "catalogue_output_contracts",
+        lambda: {current_path: ("asset-file", site_urls.CATALOGUE_PAYLOAD_GENERATOR)},
+    )
+    with pytest.raises(ValueError, match="exact renderer filename"):
+        site_urls.load_registry(registry)
+    before_registry = registry.read_bytes()
+    before_document = document.read_bytes()
+    for refused in (current_path, obsolete_path):
+        if refused == obsolete_path:
+            monkeypatch.setattr(
+                site_urls, "historical_registry", lambda _ref: [published, obsolete]
+            )
+        assert (
+            site_urls.main(
+                ["--write", "--history-ref", "fixture", "--retire-unpublished", refused]
+            )
+            == 1
+        )
+        assert registry.read_bytes() == before_registry
+        assert document.read_bytes() == before_document
+    monkeypatch.setattr(site_urls, "historical_registry", lambda _ref: [published])
+    assert (
+        site_urls.main(
+            ["--write", "--history-ref", "fixture", "--retire-unpublished", obsolete_path]
+        )
+        == 0
+    )
+    assert site_urls.load_registry(registry) == [published, current]
+    assert obsolete_path not in document.read_text(encoding="utf-8")

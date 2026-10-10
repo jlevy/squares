@@ -74,3 +74,18 @@ packing/atlas/known-best/video/spikes/**/frames/
 
 /packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/conditional-node.json.gz
 packages/workbench/node_modules
+
+# Original source PDFs hosted through packing/hosted/source-pdfs.yaml (OR-18).
+/packing/resources/papers/antonova-yang-jatavallabhula-2022-rethinking-optimization-differentiable-simulation.pdf
+/packing/resources/papers/bender-muller-macklin-2017-survey-position-based-dynamics.pdf
+/packing/resources/papers/debnath-tiwari-sadekar-2025-rasp-shadow-guided-packing.pdf
+/packing/resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf
+/packing/resources/papers/klement-engel-2021-newtonian-event-chain-monte-carlo-collision-prediction-polyhedra.pdf
+/packing/resources/papers/macklin-storey-lu-2019-small-steps-physics-simulation.pdf
+/packing/resources/papers/maher-stillinger-torquato-2021-kinetic-frustration-2d-convex-packings.pdf
+/packing/resources/papers/mazhar-heyn-pazouki-2013-chrono-parallel-multiphysics-library.pdf
+/packing/resources/papers/muller-macklin-chentanez-2020-detailed-rigid-body-xpbd.pdf
+/packing/resources/papers/stuyck-chen-2023-diffxpbd.pdf
+/packing/resources/papers/wang-lu-2024-image-space-collage-and-packing-differentiable-rendering.pdf
+/packing/resources/papers/zhang-lyu-rudra-2026-sequential-object-placement-convex-decomposition.pdf
+/packing/resources/papers/zhou-he-zheng-2023-geometric-batch-optimization-equal-circles.pdf

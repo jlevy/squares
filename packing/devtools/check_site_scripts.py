@@ -16,8 +16,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-# The only exceptions to static primary content are the interactive workbench and
-# allowlisted old-address forwarding. Every other program enhances existing HTML.
+# Exceptions to static primary content are the registered interactive workbench and
+# catalogue, plus allowlisted old-address forwarding. Other programs enhance existing HTML.
 FAMILIES = {
     "theme": (
         "input-response",
@@ -130,8 +130,101 @@ class Script:
     bytes: int
 
 
-def classify(source: str, text: str, *, inline: bool = False) -> Script:
+@dataclass(frozen=True)
+class SourceProgram:
+    """A retained source program, bounded in bytes and scoped to owned publication paths."""
+
+    text: str
+    category: str
+    reason: str
+    limit: int
+    paths: frozenset[str]
+    inline: bool
+
+
+def publication_programs() -> tuple[SourceProgram, ...]:
+    """Read current approved template inputs once per inventory, including copied aliases."""
+    from devtools import render_exact_side_values as paper  # noqa: PLC0415
+    from devtools import site_urls  # noqa: PLC0415
+
+    rows = site_urls.load_registry()
+    pages = {
+        row.path
+        for row in rows
+        if row.path.endswith(".html") and row.producer.startswith("paper:")
+    } | {paper.SITE_PATH, paper.COMPLETE_PATH}
+    pages |= {row.path for row in rows if row.kind == "copy" and row.target in pages}
+    paths = frozenset(pages)
+    static = paper.render_n11_lower_bounds_explainer.kpress_static()
+    return (
+        SourceProgram(
+            paper.BROWSER_SCRIPT.read_text(encoding="utf-8"),
+            "catalogue-application",
+            (
+                "A small index loads at startup; metadata and coefficients follow input. "
+                "Complete archives remain linked."
+            ),
+            24_000,
+            frozenset({site_urls.CATALOGUE_BROWSER_PATH}),
+            inline=False,
+        ),
+        SourceProgram(
+            paper.THEME_SCRIPT.read_text(encoding="utf-8"),
+            "input-response",
+            "Retained shared publication footer theme controls (measured 6,013 bytes).",
+            8_192,
+            paths,
+            inline=True,
+        ),
+        SourceProgram(
+            paper.MATH_SCRIPT.read_text(encoding="utf-8"),
+            "non-layout",
+            "Retained math wiring skips prepared primary formulas (measured 6,094 bytes).",
+            8_192,
+            paths,
+            inline=True,
+        ),
+        SourceProgram(
+            paper.render_n11_lower_bounds_explainer.katex_js(static),
+            "input-response",
+            "Pinned KPress math runtime for paper controls (measured 393,760 bytes).",
+            450_000,
+            paths,
+            inline=True,
+        ),
+    )
+
+
+def classify(
+    source: str,
+    text: str,
+    *,
+    inline: bool = False,
+    programs: Sequence[SourceProgram] | None = None,
+) -> Script:
     """Classify a reviewed program; fail closed when a new family is shipped."""
+    size = len(text.encode())
+    path = source.partition("#script-")[0] if inline else source
+    owned = programs if programs is not None else publication_programs()
+    candidates = [
+        program for program in owned if program.inline == inline and path in program.paths
+    ]
+    for program in candidates:
+        if text == program.text:
+            if size > program.limit:
+                raise ValueError(
+                    f"retained publication program exceeds {program.limit} bytes: {source}"
+                )
+            return Script(source, program.category, program.reason, size)
+    if not inline and candidates:
+        raise ValueError(
+            f"executable script differs from its retained publication source: {source}"
+        )
+    return _family_script(source, text, inline=inline)
+
+
+def _family_script(source: str, text: str, *, inline: bool) -> Script:
+    """Existing reviewed startup, interaction and linked-paper declarations."""
     if inline:
         if text.lstrip().startswith("// Input response and registered forwarding:"):
             category, reason = FAMILIES["forward"]
@@ -203,6 +296,7 @@ def inventory(directory: Path) -> tuple[list[Script], list[str]]:
     project_root = urlsplit(SITE_URL).path
     declarations: dict[str, Script] = {}
     failures: list[str] = []
+    programs = publication_programs()
 
     def linked(page: Path, src: str) -> None:
         address = urlsplit(src)
@@ -225,7 +319,9 @@ def inventory(directory: Path) -> tuple[list[Script], list[str]]:
         name = path.relative_to(root).as_posix()
         if name not in declarations:
             try:
-                declarations[name] = classify(name, path.read_text(encoding="utf-8"))
+                declarations[name] = classify(
+                    name, path.read_text(encoding="utf-8"), programs=programs
+                )
             except ValueError as error:
                 failures.append(str(error))
 
@@ -240,7 +336,7 @@ def inventory(directory: Path) -> tuple[list[Script], list[str]]:
             elif text.strip():
                 name = f"{page.relative_to(root)}#script-{index + 1}"
                 try:
-                    declarations[name] = classify(name, text, inline=True)
+                    declarations[name] = classify(name, text, inline=True, programs=programs)
                 except ValueError as error:
                     failures.append(str(error))
         for src in parsed.application:
@@ -249,7 +345,9 @@ def inventory(directory: Path) -> tuple[list[Script], list[str]]:
         name = path.relative_to(root).as_posix()
         if name not in declarations:
             try:
-                declarations[name] = classify(name, path.read_text(encoding="utf-8"))
+                declarations[name] = classify(
+                    name, path.read_text(encoding="utf-8"), programs=programs
+                )
             except ValueError as error:
                 failures.append(str(error))
     return list(declarations.values()), sorted(set(failures))

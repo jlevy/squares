@@ -217,8 +217,10 @@
     "packing/tests/test_exact_contracts.py": 0.11,
     "packing/tests/test_exact_jets.py": 0.014,
     "packing/tests/test_exact_lp_infeasibility.py": 0.331,
+    "packing/tests/test_exact_side_values_web.py": 106.294,
     "packing/tests/test_exact_stage_progress.py": 0.058,
     "packing/tests/test_experiment_assurance_contract.py": 0.02,
+    "packing/tests/test_extract_kingbird_svg_exact.py": 0.986,
     "packing/tests/test_falsify.py": 0.635,
     "packing/tests/test_fetch_external_release_inventory.py": 0.042,
     "packing/tests/test_fibonacci_torus.py": 8.171,
@@ -629,6 +631,7 @@
     "packing/tests/test_snapshot_link_consumers.py": 0.112,
     "packing/tests/test_soundness_perimeter.py": 0.045,
     "packing/tests/test_source_coverage.py": 1.367,
+    "packing/tests/test_source_history_contract.py": 0.106,
     "packing/tests/test_source_supersession.py": 0.007,
     "packing/tests/test_squish_receipt_binding.py": 0.524,
     "packing/tests/test_squish_receipt_retention.py": 3.672,
@@ -755,6 +758,24 @@
             "PACKING_VALIDATED_SHA": "98367a7484d426287c370c826744c8b22c5149f5"
           },
           "tests": 32
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_exact_side_values_web.py",
+        "packing/tests/test_extract_kingbird_svg_exact.py",
+        "packing/tests/test_source_history_contract.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/polynomial-web-2026-10-09.json",
+          "provenance": {
+            "PACKING_VALIDATED_SHA": "c28de41ba2603b3ea4d2f36ae8b7fd6ac5095870"
+          },
+          "tests": 86
         }
       ]
     }

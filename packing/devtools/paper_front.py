@@ -1,8 +1,8 @@
 """The front of a paper, which every paper takes from one place.
 
-A paper opens the same way on the site whichever paper it is: the formats row, three
-chips offering the Markdown it is rendered from, its typeset PDF and the project on
-GitHub; then the title; then the credits, in the owner's form (2026-10-01), and under
+A paper opens the same way on the site whichever paper it is: the formats row offers
+the Markdown it is rendered from, its PDF when declared, and the project on GitHub;
+then the title; then the credits, in the owner's form (2026-10-01), and under
 them the series strip (the series plan, 2026-10-05):
 
     From the original proof by **Queuingtheorydotcom**
@@ -129,7 +129,7 @@ def numeral(number: int) -> str:
     return _NUMERALS[number - 1]
 
 
-def series(slug: str) -> Series:
+def series(slug: str) -> Series | None:
     """The series strip of the site's paper `slug`, from the site's one list of papers
     (`render_overview.PAPERS`): the entries with a part number, in reading order."""
     part = render_overview.paper_record(slug).part
@@ -151,7 +151,7 @@ class PaperFront(NamedTuple):
     writes its front from."""
 
     slug: str
-    """Names the page, its Markdown and its PDF, which the formats row links."""
+    """Names the page and its declared editions, which the formats row links."""
     title: str
     """The title as the article's `h1` writes it; the explainer's carries its one
     formula as the page's own math span."""
@@ -170,10 +170,14 @@ class PaperFront(NamedTuple):
     series: Series | None = None
     """The series the paper is part of, which the strip under the credits names
     (`series`); None for a paper in no series."""
+    has_pdf: bool = True
+    """Whether the formats row offers the registry-declared PDF edition."""
 
 
 def check(front: PaperFront) -> PaperFront:
     """`front`, refused where it would write a line the form has no place for."""
+    if type(front.has_pdf) is not bool:
+        raise ValueError("a paper declares PDF availability as a boolean")
     if not front.slug or "/" in front.slug:
         raise ValueError(f"a paper's slug names its files, and {front.slug!r} cannot")
     if not front.title.strip():
@@ -248,14 +252,12 @@ def _linked_name(person: Person) -> str:
 
 
 def chips(front: PaperFront) -> tuple[tuple[str, str, str], ...]:
-    """The formats row's three chips, in order: each one's label, where it goes and what
-    its title says. The Markdown and the PDF are beside the page under its slug; the
-    third is the project on GitHub, with its mark."""
-    return (
-        ("MD", f"{front.slug}.md", "The Markdown this page is rendered from"),
-        ("PDF", f"{front.slug}.pdf", "The typeset PDF of this page"),
-        ("GITHUB", REPO_URL, "The project on GitHub"),
-    )
+    """Offer Markdown, the declared PDF edition, and the project source in order."""
+    formats = [("MD", f"{front.slug}.md", "The Markdown this page is rendered from")]
+    if front.has_pdf:
+        formats.append(("PDF", f"{front.slug}.pdf", "The typeset PDF of this page"))
+    formats.append(("GITHUB", REPO_URL, "The project on GitHub"))
+    return tuple(formats)
 
 
 def formats_row(front: PaperFront) -> str:

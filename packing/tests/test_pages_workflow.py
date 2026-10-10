@@ -16,6 +16,7 @@ from typing import Any
 
 import pytest
 
+from devtools import render_exact_side_values as exact_paper
 from devtools import render_n11_optimality_review as optimality_paper
 from devtools import render_overview
 from devtools import render_packing_methods as methods_paper
@@ -52,7 +53,12 @@ PREPARED_PAGE_CONSUMERS = {
 #: measurement, and whoever records it removes the name here, so the exception cannot
 #: quietly outlive the reason for it.
 AWAITING_FIRST_RUN = frozenset(
-    {"overview", "publish", "n11-threshold-bound-review", "square-packing-methods-survey"}
+    {
+        "overview",
+        "publish",
+        "n11-threshold-bound-review",
+        "square-packing-methods-survey",
+    }
 )
 #: Independently built papers, each named by its registry slug.
 PAPER_JOBS = frozenset(
@@ -71,6 +77,9 @@ PUT_OPTIMALITY_REVIEW = (
 PUT_METHODS_PAPER = (
     "Put the methods survey beside the other papers, refusing any name already there"
 )
+PUT_EXACT_VALUES = (
+    "Put the exact-side-values paper beside the others, refusing any name already there"
+)
 #: The archived copy of Kleddamag's proof, which both reviews cite.
 KLEDDAMAG = "packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11"
 KLEDDAMAG_README_PATTERN = f"/{KLEDDAMAG}/README.md"
@@ -78,6 +87,14 @@ KLEDDAMAG_README_PATTERN = f"/{KLEDDAMAG}/README.md"
 METHODS_CITATION_PATTERNS = tuple(
     "/" + path.relative_to(REPO).as_posix()
     for path in methods_paper.CITATION_SOURCES
+    if path.is_relative_to(REPO / "packing/resources")
+    or path.is_relative_to(REPO / "packing/campaign")
+)
+
+#: Exact-report citations inside the omitted archive, each retained as one file.
+EXACT_CITATION_PATTERNS = tuple(
+    "/" + path.relative_to(REPO).as_posix()
+    for path in exact_paper.CITATION_SOURCES
     if path.is_relative_to(REPO / "packing/resources")
     or path.is_relative_to(REPO / "packing/campaign")
 )
@@ -101,6 +118,7 @@ SKIP_NOTICE_PAGES = {
     "n11_threshold_bound_review": "threshold-bound review",
     "n11_optimality_review": "optimality review",
     "square_packing_methods_survey": "square packing methods survey",
+    "exact_side_values": "exact-side-values paper",
 }
 
 
@@ -1048,6 +1066,7 @@ def test_publication_holds_the_assembled_site_to_the_head_contract() -> None:
         PUT_THRESHOLD_REVIEW,
         PUT_OPTIMALITY_REVIEW,
         PUT_METHODS_PAPER,
+        PUT_EXACT_VALUES,
         "Serve each moved file at its old address too",
     )
     assert max(_publish_step(steps, name) for name in writes) < check
@@ -1074,6 +1093,15 @@ def _assembled(
     threshold: tuple[str, ...] = (),
     review: tuple[str, ...] = (),
     methods: tuple[str, ...] = (),
+    exact_files: tuple[str, ...] = (
+        "exact-side-values.html",
+        "exact-side-values.md",
+        "exact-side-values-complete.html",
+        "exact-side-values-browser.js",
+        "exact-side-values-data/index.json",
+        "exact-side-values-data/metadata/current-n83.json",
+        "exact-side-values-data/coefficients/current-n83.json",
+    ),
 ) -> tuple[Path, list[subprocess.CompletedProcess[str]]]:
     """Run the `publish` job's assembly steps, in order, on a tree shaped like the one
     its downloads leave: the lower-bounds explainer and its PDF under `papers/` with an
@@ -1119,6 +1147,12 @@ def _assembled(
         )
     for extra in methods:
         (staged_methods / "papers" / extra).write_text("methods explainer's")
+    staged_exact = root / "exact-side-values-page"
+    (staged_exact / "papers").mkdir(parents=True)
+    for filename in exact_files:
+        target = staged_exact / "papers" / filename
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(f"exact paper {Path(filename).suffix}")
     results = []
     for step_name, cwd, environment in (
         ("Put the site's pages at the root, refusing any name already there", root, pages),
@@ -1137,6 +1171,11 @@ def _assembled(
             root,
             staged_methods,
         ),
+        (
+            PUT_EXACT_VALUES,
+            root,
+            staged_exact,
+        ),
         ("Serve each moved file at its old address too", site, None),
     ):
         step = steps[_publish_step(steps, step_name)]
@@ -1153,15 +1192,18 @@ def _assembled(
                 "uv run --frozen --group dev python -m devtools.assemble_site "
                 '--destination site "$STAGED"'
             )
+            # Run the artifact-presence guards too, using this test's interpreter
+            # instead of provisioning another environment through uv.
             command = (
-                sys.executable,
-                "-m",
-                "devtools.assemble_site",
-                "--destination",
-                str(site),
-                str(environment),
+                bash,
+                "-e",
+                "-c",
+                step["run"].replace(
+                    "uv run --frozen --group dev python", shlex.quote(sys.executable)
+                ),
             )
-            command_cwd = REPO / "packing"
+            command_cwd = root / step["working-directory"]
+            env["PYTHONPATH"] = str(REPO / "packing")
         else:
             command = (bash, "-e", "-c", step["run"])
         results.append(
@@ -1208,6 +1250,8 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
             PUT_OPTIMALITY_REVIEW,
             "Use the checked methods survey",
             PUT_METHODS_PAPER,
+            "Use the checked exact-side-values paper",
+            PUT_EXACT_VALUES,
             "Serve each moved file at its old address too",
             "List what the publication holds",
         )
@@ -1220,7 +1264,7 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
     )
 
     site, results = _assembled(tmp_path, "whole")
-    assert [result.returncode for result in results] == [0, 0, 0, 0, 0], results
+    assert [result.returncode for result in results] == [0, 0, 0, 0, 0, 0], results
     served = sorted(
         path.relative_to(site).as_posix() for path in site.rglob("*") if path.is_file()
     )
@@ -1245,6 +1289,13 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
         "papers/square-packing-methods-survey.html",
         "papers/square-packing-methods-survey.md",
         "papers/square-packing-methods-survey.pdf",
+        "papers/exact-side-values.html",
+        "papers/exact-side-values.md",
+        "papers/exact-side-values-complete.html",
+        "papers/exact-side-values-browser.js",
+        "papers/exact-side-values-data/index.json",
+        "papers/exact-side-values-data/metadata/current-n83.json",
+        "papers/exact-side-values-data/coefficients/current-n83.json",
         "t-018-explainer.md",
         "t-018-explainer.pdf",
     ]
@@ -1295,9 +1346,32 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
     assert (site / "papers" / "n11-optimality-review.md").read_text() == "review md"
     assert not (site / "papers" / "square-packing-methods-survey.html").exists()
 
-    site, results = _assembled(tmp_path, "moved", overview=("t-018-explainer.md",))
+    site, results = _assembled(
+        tmp_path, "exact-partial", exact_files=("exact-side-values.html",)
+    )
     assert [result.returncode for result in results] == [0, 0, 0, 0, 1]
-    assert "t-018-explainer.md is already published" in results[4].stdout
+    assert not (site / "papers" / "exact-side-values.html").exists()
+
+    site, results = _assembled(
+        tmp_path,
+        "exact-collision",
+        exact_files=(
+            "exact-side-values.html",
+            "exact-side-values.md",
+            "exact-side-values-complete.html",
+            "exact-side-values-data/index.json",
+            "exact-side-values-browser.js",
+            "n11-lower-bounds-explainer.md",
+        ),
+    )
+    assert [result.returncode for result in results] == [0, 0, 0, 0, 1]
+    assert "publication collision: papers/n11-lower-bounds-explainer.md" in results[4].stderr
+    assert (site / "papers/n11-lower-bounds-explainer.md").read_text() == "explainer markdown"
+    assert not (site / "papers/exact-side-values.html").exists()
+
+    site, results = _assembled(tmp_path, "moved", overview=("t-018-explainer.md",))
+    assert [result.returncode for result in results] == [0, 0, 0, 0, 0, 1]
+    assert "t-018-explainer.md is already published" in results[5].stdout
     assert (site / "t-018-explainer.md").read_text() == "overview build's t-018-explainer.md"
 
 
@@ -1787,6 +1861,11 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
     # What each review's job keeps of the two trees: the retained data its render reads
     # and the archived files it cites, each a directory (`/` at its end) or a file.
     kept = {
+        "exact-side-values": (
+            "/packing/resources/web/kingbird-squares-in-squares.md",
+            "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
+            *EXACT_CITATION_PATTERNS,
+        ),
         "n11-optimality-review": (
             "/packing/resources/web/n11-optimality-2026-09-29/",
             "/packing/resources/papers/kingbird-square-11-provenance.svg",
@@ -1894,6 +1973,23 @@ REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
         (
             "packing/resources/web/unrelated/README.md",
             "packing/resources/papers/unrelated.pdf",
+            "packing/campaign/old/README.md",
+        ),
+    ),
+    "exact-side-values": (
+        (
+            "packing/resources/README.md",
+            "packing/resources/web/kingbird-squares-in-squares.md",
+            "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
+            *(pattern.removeprefix("/") for pattern in EXACT_CITATION_PATTERNS),
+        ),
+        (
+            "packing/resources/web/unrelated/README.md",
+            "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/inputs/n-102.txt",
+            "packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/source-manifest.json",
+            "packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/source-manifest.json",
+            "packing/resources/web/couzo-extended-reports-2026-10-08/source-manifest.json",
+            "packing/resources/web/evand-record-hunt-2026-10-09/acquisition/sources.json",
             "packing/campaign/old/README.md",
         ),
     ),

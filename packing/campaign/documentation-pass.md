@@ -121,21 +121,37 @@ For each result, complete this sequence before declaring the change ready to lan
    uv run --frozen --all-extras --group dev python -m devtools.release_pin --update
    ```
 
-4. When a result changes what is known exactly about a best known side (a new best known
-   packing, a closed form, a minimal polynomial, a degree, or an identification from a
-   contact system), regenerate the exact side values register:
+4. When a result changes what is known exactly about a best known side, or a retained
+   primary source adds a historical polynomial-side pair, regenerate the exact side
+   values register and its paper.
+   The triggers include a new best known packing, closed form, minimal polynomial,
+   algebraic degree, contact-system identification, retained SVG fact, superseded source
+   polynomial, and a source fact beyond $n=324$. Keep the current frontier rows and
+   totals separate from the historical collection; each historical row keeps its own
+   attribution, source identity and status.
 
    ```shell
    uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --update
+   uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --check
+   uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values
+   uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values --check
    ```
 
-   The register re-checks every polynomial (irreducibility, a unique root in a rational
-   interval, agreement with the record and with the independent KKT values), so a new
-   fact that fails one of those checks stops here rather than reaching publication.
+   The register re-checks every polynomial for irreducibility and a unique root in a
+   rational interval. A current entry must also agree with its case record and with the
+   independent KKT value where one is available, so a new fact that fails its applicable
+   checks stops here rather than reaching the paper.
+   A historical polynomial is checked against its own printed side and source, without a
+   comparison to the current packing’s KKT value.
+   A polynomial identity alone does not establish a feasible packing, local optimality,
+   or global optimality; keep those claims at the evidence level the source supports.
+   Numeric-only rows and incomplete exact-source facts retain their route beads, and a
+   PSLQ-only relation stays a numerical candidate until exact elimination, branch
+   selection and feasibility connect it to a packing.
    The gate’s `build_exact_values --check` fails while the register trails the records,
-   so this step cannot be skipped silently.
-   A later publication layer supplies the exact side values paper and its renderer; this
-   foundation does not require it.
+   retained exact-source facts, or historical collection, so this step cannot be skipped
+   silently. The paper’s `--check` catches stale HTML and Markdown, and the Pages
+   workflow rebuilds all three publication formats whenever a declared input changes.
 
 5. Reconcile the README prose around its generated tables (the introduction’s summaries,
    the $s(11)$ thread under New Results, the machine audits, Earlier in 2026 and the
@@ -149,7 +165,8 @@ For each result, complete this sequence before declaring the change ready to lan
    Append dated updates to historical reports instead of rewriting their original
    conclusions.
 
-6. Run the renderers’ check modes, README and synopsis checks, and the applicable
+6. Run the renderers’ check modes, including `render_exact_side_values --check` when
+   exact-value inputs changed, README and synopsis checks, and the applicable
    [validation tiers](../../development.md#validation-tiers).
    The atlas `--check --sample` checks every retained record, composite label, and
    export receipt while rebuilding sampled case geometry; the full `--check` belongs in

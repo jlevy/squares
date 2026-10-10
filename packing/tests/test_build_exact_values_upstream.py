@@ -70,6 +70,25 @@ def test_all_thirty_two_imports_identify_native_sides_without_optimality(current
         assert "optimality" in provenance["text"]
 
 
+def test_current_n102_route_keeps_its_group_and_retained_pose_prerequisites(current_imports):
+    current = current_imports[102]
+    assert current["state"] == "rational"
+    (route,) = [note for note in current["notes"] if note["kind"] == "route"]
+    assert route["bead"] == "think-ohhz"
+    text = route["text"]
+    for prerequisite in (
+        "bind and convert the already retained current ry-xu certificate",
+        "8dc415296f697f5140caea27c7a0193d52deb4e6",
+        "active, weak and forced contacts and frozen variables",
+        "confirm the current-pose seed",
+        "W7 driver and n11 control before a preregistered bounded W6 run",
+        "evand 13ee36e5 input remains a historical fixture",
+        "claims do not transfer to this new geometry",
+    ):
+        assert prerequisite in text
+    assert "ideal contact research open" in text
+
+
 @pytest.mark.parametrize(
     "control", ["form", "polynomial", "source", "evidence", "display", "degree"]
 )

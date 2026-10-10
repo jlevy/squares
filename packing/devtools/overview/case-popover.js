@@ -187,6 +187,10 @@
    * @type {HTMLElement | null}
    */
   let origin = null;
+  /** The closing session's opener, retained until native focus handling finishes.
+   * @type {HTMLElement | null}
+   */
+  let closedOrigin = null;
   /**
    * The opener whose record is on its way.
    * @type {HTMLElement | null}
@@ -355,24 +359,39 @@
   });
 
   popover.addEventListener("beforetoggle", (event) => {
-    if (!(event instanceof ToggleEvent) || event.newState !== "closed") {
+    if (!(event instanceof ToggleEvent)) {
       return;
     }
-    // The native close hides the record before the queued toggle event runs. Clear
-    // its row's expanded state synchronously, while the visibility changes with it.
+    if (event.newState === "open") {
+      // A queued close must not restore an earlier session's focus after reopening.
+      closedOrigin = null;
+      return;
+    }
+    // Native hiding is synchronous; toggle is queued and may be coalesced with a
+    // reopen. Collapse the row and invalidate pending records in this closing task.
     expanded?.setAttribute("aria-expanded", "false");
     expanded = null;
+    latest += 1;
+    asking = null;
+    closedOrigin = origin;
+    origin = null;
   });
 
   popover.addEventListener("toggle", (event) => {
-    if (!(event instanceof ToggleEvent) || event.newState !== "closed" || origin === null) {
+    if (
+      !(event instanceof ToggleEvent) ||
+      event.newState !== "closed" ||
+      popover.matches(":popover-open")
+    ) {
       return;
     }
-    // Back to what opened the popover, unless the reader has already moved on to
-    // something else, such as another row whose press closed it.
+    const opener = closedOrigin;
+    closedOrigin = null;
+    // Native focus handling has finished. Return to this session's opener unless
+    // the reader has already moved to another control, such as an outside row.
     const focus = document.activeElement;
     if (focus === null || focus === document.body || popover.contains(focus)) {
-      origin.focus();
+      opener?.focus();
     }
   });
 

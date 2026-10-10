@@ -1,0 +1,39 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 131,
+ "url": "https://kingbird.myphotos.cc/packing/square-131.svg",
+ "retrieved_utc": "2026-10-08T03:12:15Z",
+ "read_from": "fetched into memory",
+ "bytes": 14561,
+ "sha256": "e16d43b87750e89678916b4029da61eafb779264f35e672152847d403755959f",
+ "last_modified": "Thu, 10 Sep 2026 00:07:34 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by K\u00e1roly Hajba on November 11, 2024.",
+  "Source: Private communication between David Ellsworth and K\u00e1roly Hajba, November 11, 2024",
+  "Exact analytic solution by David Ellsworth on November 13, 2024.",
+  "Improved by David Ellsworth on January 23, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program.",
+  "This resulted in significant reorganization of the packing.",
+  "Probably the same result would come from using either of the following as a starting state (this hasn't been tried yet):",
+  "- s(156) with 25 squares removed to shrink it",
+  "- s(132) with 1 square removed",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026"
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "11.95652543280926418975966386692935732464748784764342",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "5.97826271640463209487983193346467866232374392382171",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}
