@@ -5,7 +5,7 @@ title: "Import Guzhou0806: s(40) > 335427/50000 from wand125's rect_n40_L67 dens
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:25.852Z
-updated_at: 2026-10-10T11:12:47.810Z
+updated_at: 2026-10-10T16:12:22.269Z
 started_at: 2026-10-10T09:49:28.112Z
 ---
 Issue https://github.com/jlevy/squares/issues/485 (opened 2026-10-10). Claim: s(40) > 335427/50000 = 6.70854, unrestricted rotations, above the case's reported and verified 67/10 from wand125's rect_n40_L67 (#281). Also a weaker full-core bound s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908. Source Guzhou0806/n40-square-packing at e5abeb4d078a5c5b35df6204dd9b93378e5a7880, release n40-670854-20261010, n40-670854.zip SHA-256 dbefee8658dc8f7d2e4a6ed21b0c3cd29f36ae393405a218f6bbfdce54465bc5. Rust nodal verifier, 401 directions, 32,970,910 nodes; wand125 commented a review on 2026-10-10 reporting a clean replay. Stages 1-3 on this pass; mathematical review of the clipped-corner estimate and strictness argument by Fable at max.
@@ -61,3 +61,15 @@ GN-5 (0b5a62ca5): metadata_net in check_sqverify_fast; net_step, net_directions,
 Validation at 0ab05b7aa: packing-validate --edit 64 of 65 steps pass, --records 48 of 49; the one failure in each is "every session's cost is attributed" (close_session --check: session-close-report.yaml and SYNOPSIS.md drifted), whose inputs (campaign/agent-sessions, campaign/resource-usage) this lane did not touch, so it is in the base (usage rollups of 631fbbbbe); the coordinator renders it. An integrity-ceremony finding on the new tool was fixed in 0ab05b7aa (three internal digest checks removed, a download allowlist entry for the four that cross the boundary).
 
 Proposed rungs V3/C3: nodal reproduced with the producer's code (same-implementation), finite independently re-implemented; the result takes the nodal relation. Shared-record drafts are in the lane's report to the coordinator.
+
+## Records lane: registration and publication (2026-10-10, worktree-agent-a17d853b8856c5169)
+
+Registered as T-133 (row after T-132) in data commit 3eaf61fbf; the push tier's behavioural tests then drove a second data commit, 14f423f17. Integration merges e308bcfe3, c1f84606d, f4debde25, fda119b4d and 0fa726e21 (last merged branch head 6fdf4ea43), release.py taken whole from the branch on each conflict; URL registry re-rendered in 89951a989; DATA_REVISION re-pinned alone in ac6fcc922 (to 14f423f17), and release.py differs from the branch only by that line.
+
+Rungs V3/C3, derived by check_results: V3 and C3 from E-n040-guzhou-clipped-corner-sqverify-fast-replay (interval-certified, replayed-here, certificate, replay, passed, controls named); one adversarial AI review (the 10 October review, relation project, verdict accepted), so no rung 4. Mark: confirmed, reproduced with the producer's code (GN-4), as RESULTS.md prints it. The finite audit E-n040-guzhou-clipped-corner-finite-audit is independent-implementation and recorded as claim derived-structure: check_results.confirmation_code takes the strongest relation among a lower bound's lower-bound entries, so a lower-bound audit entry would have printed "independently re-implemented" for a result whose nodal part was only reproduced with the producer's code. Costs: the case's verified lane cites the nodal replay alone (a verified bound cites lower-bound entries only), with the audit in the case's evidence list and named in the replay's proof assumptions; and no proof.conditional_on on the audit (tests/test_frontier_assurance_contract.py enumerates the register's conditional theorems), so its hypothesis is stated in prose.
+
+Evidence: E-n040-guzhou-clipped-corner-report (reported, external_review informally-verified; verifiers V-guzhou-n40-finite-py only, since tests/test_sqverify_fast_census.py reads every entry naming V-sqverify-fast as a census row), -sqverify-fast-replay, -finite-audit. Verifiers: V-guzhou-n40-finite-py (external, the release's run.py with the vendored crate and finite.py, read by the review, not run here) and V-audit-clipped-corner-transfer (first-party, decides the finite steps, independence record its docstring); V-sqverify-fast names the format T metadata-net path (GN-6). n-040.md: both lower lanes 335427/50000, T-068's 67/10 kept as history, GN-7 fixed, the 2026-09-27 paragraph's stale "has not yet run" corrected, Verification Code re-rendered. Bibliography key '[Guzhou0806 n40 clipped corner 2026-10-10]' (credit names Levy, lineage builds-on-project); resources README key and repository rows; coverage entry guzhou-n40-clipped-corner-2026-10-10; result-requests #485 triage done, both keys register T-133 (check_requests --report: 2/2 settled, confirmed, reply due, closeable).
+
+Published: RESULTS, INVENTORY, VERIFIERS, STATUS, research tables, CERTIFICATE-REACH, the synopsis headline and Frontier results row (133 registered, 103 by others), t007 consumer audit, site URLs, bound-citations.json, composite-figure.json, the curated atlas credit-attributions.json (n = 40 group, source, T-133 row, method credits), the retained piercing survey, and an Other Projects card in devtools/overview_sections.py. README has no n = 40 prose. Not done: the review still says "T-NNN, to be assigned"; the owner's reply on #485.
+
+Validation at 0fa726e21, from packing/, --jobs 2 --inner-jobs 1: packing-validate --records exit 0 (49 of 49 record steps), --edit exit 0 (65 of 65), --push (--timeout-seconds 3600) exit 1 on one step, reachable behavioural tests (whole suite, the branch differs from origin/main by the whole integration branch): 16,324 passed, 495 skipped, 4 failed, all in files this lane's diff does not touch and all environmental here: test_fixed_core_packet::test_nonzero_leader_exit_reaps_a_sigterm_ignoring_grandchild and test_fixed_core_packet_calibration::test_timeout_kills_and_reaps_a_termination_resistant_process_group ("worker process group remained alive after SIGKILL"), and test_site_column_measurement's two Playwright tests (browsers not installed). Of the earlier push run's eleven failures, six were this registration's and are fixed in 14f423f17 (test_sqverify_fast_census, test_known_best_atlas curated credits, test_frontier_assurance_contract, test_piercing_lower_bounds, two in test_overview), and test_check_n17_one_round_owned_domain_propagation[missing_typed_row] passed when re-run.
