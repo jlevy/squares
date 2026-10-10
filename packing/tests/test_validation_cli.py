@@ -4648,9 +4648,9 @@ def test_the_longest_steps_are_submitted_first() -> None:
     checks; the 2026-09-05 promotion put eleven steps and 476s there, which greedy
     submission would have spent delaying the suite's start rather than running beside it.
 
-    Budget precedence remains ahead of early-start hints. Two unbudgeted steps have
+    Budget precedence remains ahead of early-start hints. Three unbudgeted steps have
     measured late tails, so they start ahead of the remaining declaration-order work:
-    Chromium (declared first) and exact verification.
+    the two Chromium lanes (declared first) and exact verification.
 
     `fast behavioral tests` is no longer in this list, and its absence is the point rather
     than an omission. It carried an 1800s exception to the shared cap for as long as it
@@ -4673,10 +4673,11 @@ def test_the_longest_steps_are_submitted_first() -> None:
     budgeted_count = sum(step.budget_seconds is not None for step in validate.STEPS)
     early = (
         "workbench browser behavior in Chromium",
+        "site table layout in Chromium",
         "exact verification",
     )
-    assert order[budgeted_count : budgeted_count + 2] == list(early)
-    assert order[budgeted_count + 2 :] == [
+    assert order[budgeted_count : budgeted_count + len(early)] == list(early)
+    assert order[budgeted_count + len(early) :] == [
         step.name
         for step in validate.STEPS
         if step.budget_seconds is None and step.name not in early
@@ -4748,18 +4749,25 @@ def test_submission_order_does_not_change_the_reported_order(
     ]
 
 
-def test_workbench_chromium_starts_ahead_of_the_other_frontend_steps() -> None:
-    """`--jobs 2` otherwise starts biome and liveness, and Chromium is the late tail."""
+def test_both_browser_lanes_start_ahead_of_the_shorter_frontend_steps() -> None:
+    """Use both slots immediately rather than delaying the longest browser lane."""
     chromium = next(
         step for step in validate.STEPS if step.name == "workbench browser behavior in Chromium"
     )
     assert chromium.start_early is True
     assert chromium.frontend is True
     frontend = [step for step in validate.STEPS if step.frontend]
-    assert next(step.name for step in validate._submission_order(frontend)) == chromium.name
+    order = validate._submission_order(frontend)
+    assert [step.name for step in order[:2]] == [
+        chromium.name,
+        "site table layout in Chromium",
+    ]
+    assert all(step.start_early for step in order[:2])
+    assert {step.name for step in order} == {step.name for step in frontend}
     assert {step.name for step in validate.STEPS if step.start_early} == {
         "exact verification",
         "workbench browser behavior in Chromium",
+        "site table layout in Chromium",
     }
 
 

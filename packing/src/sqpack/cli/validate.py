@@ -4274,12 +4274,16 @@ STEPS: tuple[Step, ...] = (
         records=True,
         touches=(*_SITE_INPUTS, "packing/site-urls.yaml", "docs/project/site-urls.md"),
     ),
+    # Hosted PR 462 run 38056029813: site 268.42s started after floor 44.36s and
+    # liveness 24.40s, making the wall 337.19s. Start both browser lanes in the two
+    # existing slots; this changes no step selection, subprocess cap or budget.
     Step(
         "site table layout in Chromium",
         _site_layout_tests,
         fast=True,
         broad=True,
         frontend=True,
+        start_early=True,
         touches=(*_CORE, *_SITE_INPUTS),
     ),
     # 9.63s.
