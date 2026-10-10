@@ -5,13 +5,13 @@ title: Certificate type replacing the boolean, with JSON serialization
 kind: task
 status: open
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p5tswc9s27gb5c1d3da27b
 created_at: 2026-08-22T23:59:12.363Z
-updated_at: 2026-08-25T03:03:40.221Z
+updated_at: 2026-10-10T22:47:11.391Z
 ---
 Per pair: the separating axis and the sign of the gap, or an exact-zero witness; plus container contacts. 'Valid' is unverifiable; this is the object a third party can re-check. Version the JSON from the start -- the Lean work consumes it.
 
