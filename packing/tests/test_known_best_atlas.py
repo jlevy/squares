@@ -11,6 +11,7 @@ import hashlib
 import io
 import json
 import lzma
+import os
 import re
 import subprocess
 import sys
@@ -32,6 +33,7 @@ import jsonschema
 import pytest
 import yaml
 from fontTools.ttLib import TTFont
+from PIL import Image, PngImagePlugin
 
 from devtools import (
     atlas_credit_attributions,
@@ -149,6 +151,21 @@ def _assert_poster_text_clears_cards(
                 or right <= position.left
                 or left >= position.left + 216
             ), (node.attrib.get("data-feature"), position)
+
+
+def _assert_print_body_ink(nodes: Sequence[ET.Element]) -> None:
+    recent = [
+        node
+        for node in nodes
+        if node.attrib.get("data-feature") == "legend-label"
+        and (node.text or "").startswith("recent result")
+    ]
+    assert len(recent) == 1
+    assert len(recent[0]) == 0
+    assert all(
+        node.attrib["fill"] == (FIRST_PARTY_ACCENT_COLOR if node is recent[0] else "#000000")
+        for node in nodes
+    )
 
 
 @pytest.fixture
@@ -1538,7 +1555,7 @@ def test_triangle_crop_resolves_complete_records_and_row_major_skips_grid_prefli
     )
     prefix_crop = prefix_crop.with_transitions(resolve(prefix_crop))
     assert prefix_crop.physical_rows == 15
-    assert prefix_crop.height == 4780
+    assert prefix_crop.height == 4500
     assert [
         (line.kind, line.numbers.count)
         for line in prefix_crop.segment_lines(prefix_crop.transitions[-1])
@@ -1554,11 +1571,11 @@ def test_triangle_crop_resolves_complete_records_and_row_major_skips_grid_prefli
     )
     split_crop = split_crop.with_transitions(resolve(split_crop))
     assert split_crop.physical_rows == 15
-    assert split_crop.height == 4780
+    assert split_crop.height == 4500
     non_grid, grid = split_crop.segment_lines(split_crop.transitions[-1])
     assert grid.numbers.count == 1
     assert grid.top == non_grid.top
-    for last_n, physical_rows, expected_height in ((273, 17, 5394), (274, 17, 5394)):
+    for last_n, physical_rows, expected_height in ((273, 17, 5074), (274, 17, 5074)):
         wrapped_crop = known_best_builder.CompositeCanvas(
             CompositeSpec(
                 1,
@@ -1645,15 +1662,7 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
         (node.attrib["font-family"], node.attrib["font-size"], node.attrib["font-weight"])
         for node in body_lines
     } == {(known_best_builder.POSTER_BODY_FONT, "48", "700")}
-    assert all(
-        node.attrib["fill"]
-        == (
-            "#000000"
-            if node.attrib["data-feature"] in {"citations", "repository"}
-            else known_best_builder.SUMMARY_SMALL_FILL
-        )
-        for node in body_lines
-    )
+    _assert_print_body_ink(body_lines)
     marks = [
         node
         for node in information_text
@@ -1724,8 +1733,8 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
         outline = card.find("svg:rect[@data-feature='container-outline']", SVG)
         assert outline is not None
         assert (outline.attrib["x"], outline.attrib["y"]) == (
-            str(6410 if case.frontier.n == 11 else 6703),
-            "1053",
+            str(6091 if case.frontier.n == 11 else 6373),
+            "993",
         )
         assert (outline.attrib["width"], outline.attrib["height"]) == ("158", "158")
         for node in card.iter(f"{{{SVG['svg']}}}text"):
@@ -2623,7 +2632,11 @@ def test_a_second_composite_is_a_specification_and_not_a_second_set_of_constants
 
     extra_columns = poster.physical_columns - figure.spec.columns
     widening = extra_columns * known_best_builder.SUMMARY_COLUMN_PITCH
-    assert poster.width == figure.width + widening + 79 + 182
+    # The triangle adds 180 units of outside air and the 79-unit grid separator.
+    # Row-major width reserves a full pitch after its final card origin; the triangle
+    # ends at the 216-unit card edge, now 13 units beyond the tighter 203-unit pitch.
+    trailing_card_overhang = 216 - 203
+    assert poster.width == figure.width + widening + 79 + 180 + trailing_card_overhang
     assert poster.grid_bottom == poster.grid_top + poster.physical_rows * poster.row_pitch
     assert poster.height == (
         poster.grid_bottom
@@ -2879,6 +2892,84 @@ def test_known_best_composite_png_refuses_a_raster_of_the_wrong_size(
     with pytest.raises(ValueError, match="PNG preview dimensions are 8x8"):
         known_best_builder._update_png_export(export, "<svg/>\n")  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     assert not export.path.exists()
+
+
+def _test_png_with_source(image: Image.Image, source_sha256: str) -> bytes:
+    metadata = PngImagePlugin.PngInfo()
+    metadata.add_text("sqpack-source-svg-sha256", source_sha256)
+    with io.BytesIO() as output:
+        image.save(output, format="PNG", pnginfo=metadata)
+        return output.getvalue()
+
+
+def test_composite_png_crop_preserves_full_pixels_and_replaces_a_matching_stale_card(
+    tmp_path: Path,
+) -> None:
+    """A matching receipt cannot justify retaining shortened-viewport pixels."""
+    export = known_best_builder.RasterExport(
+        path=tmp_path / "card.png",
+        scale=2,
+        role="link-preview",
+        manifest_key="png_link_preview_card",
+        canvas_width=2,
+        canvas_height=3,
+        crop_units=2,
+    )
+    svg_text = '<svg xmlns="http://www.w3.org/2000/svg" width="2" height="3"/>\n'
+    digest = hashlib.sha256(svg_text.encode()).hexdigest()
+    colors = (
+        (255, 0, 0),
+        (0, 255, 0),
+        (0, 0, 255),
+        (255, 255, 0),
+        (255, 0, 255),
+        (0, 255, 255),
+    )
+    full = Image.new("RGB", (4, 6))
+    full.putdata([color for color in colors for _ in range(4)])
+    full_png = _test_png_with_source(full, digest)
+    cropped = known_best_builder.png_export_bytes(export, svg_text, full_png=full_png)
+    assert known_best_builder.png_summary_receipt(cropped) == (4, 4, digest)
+    with Image.open(io.BytesIO(cropped)) as card:
+        assert card.convert("RGB").tobytes() == bytes(
+            channel for color in colors[:4] for _ in range(4) for channel in color
+        )
+    stale = _test_png_with_source(Image.new("RGB", (4, 4), "white"), digest)
+    export.path.write_bytes(stale)
+    assert known_best_builder.png_summary_receipt(stale) == (4, 4, digest)
+    update = known_best_builder._update_png_export  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    update(export, svg_text, full_png=full_png)
+    assert export.path.read_bytes() == cropped
+    # A fixed old timestamp makes rewriting identical bytes observable without a sleep.
+    os.utime(export.path, ns=(0, 0))
+    update(export, svg_text, full_png=full_png)
+    assert export.path.read_bytes() == cropped
+    assert export.path.stat().st_mtime_ns == 0
+
+
+@pytest.mark.parametrize("mismatch", ["dimensions", "receipt"])
+def test_composite_png_crop_refuses_a_mismatched_full_source(
+    mismatch: str, tmp_path: Path
+) -> None:
+    export = known_best_builder.RasterExport(
+        path=tmp_path / "card.png",
+        scale=2,
+        role="link-preview",
+        manifest_key="png_link_preview_card",
+        canvas_width=2,
+        canvas_height=3,
+        crop_units=2,
+    )
+    svg_text = "<svg/>\n"
+    source = svg_text if mismatch == "dimensions" else "<svg id='another-source'/>\n"
+    digest = hashlib.sha256(source.encode()).hexdigest()
+    full = Image.new("RGB", (4, 5) if mismatch == "dimensions" else (4, 6))
+    full_png = _test_png_with_source(full, digest)
+    retained = b"previously retained card"
+    export.path.write_bytes(retained)
+    with pytest.raises(ValueError, match="crop source dimensions or SVG receipt"):
+        known_best_builder._update_png_export(export, svg_text, full_png=full_png)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert export.path.read_bytes() == retained
 
 
 def test_known_best_atlas_check_reports_the_pdf_export_too(
@@ -3793,7 +3884,7 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
                 "repository",
             }
         ]
-        assert all(node.attrib["fill"] == "#000000" for node in body)
+        _assert_print_body_ink(body)
         assert all(
             node.attrib["font-family"] == known_best_builder.POSTER_BODY_FONT for node in body
         )

@@ -42,6 +42,7 @@ from datetime import date
 from decimal import ROUND_CEILING, ROUND_HALF_EVEN, Decimal
 from fractions import Fraction
 from functools import cache
+from io import BytesIO
 from itertools import combinations, pairwise
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -525,9 +526,8 @@ class RasterExport:
     canvas_width: int
     canvas_height: int
     #: Drawing units kept from the top, or None for the whole canvas. A cropped
-    #: export is rendered from a copy of the SVG whose viewport is this tall, so the
-    #: rasteriser draws the band directly rather than drawing the canvas and
-    #: discarding most of it, and no image library enters the pipeline.
+    #: export keeps the full raster's pixels: shortening the SVG viewport can change
+    #: text rasterisation at the crop boundary.
     crop_units: int | None = None
 
     @property
@@ -3371,23 +3371,9 @@ def _png_matches_summary(export: RasterExport, svg_text: str) -> bool:
     )
 
 
-def _cropped_svg(svg_text: str, export: RasterExport) -> str:
-    """The SVG an export is drawn from: the drawing itself, or a shortened viewport.
-
-    An SVG viewport clips, so narrowing `viewBox` and `height` on the root is the whole
-    crop: the rasteriser draws the band and never draws what falls outside it. Only the
-    root is touched, and only for an export that asks, so the receipt stamped into every
-    raster still names the sha256 of the one drawing all three come from.
-    """
-    if export.crop_units is None:
-        return svg_text
-    root = ET.fromstring(svg_text)
-    root.set("height", str(export.crop_units))
-    root.set("viewBox", f"0 0 {export.canvas_width} {export.crop_units}")
-    return ET.tostring(root, encoding="unicode")
-
-
-def _update_png_export(export: RasterExport, svg_text: str) -> None:
+def _update_png_export(
+    export: RasterExport, svg_text: str, *, full_png: bytes | None = None
+) -> None:
     """Draw one raster from the SVG, with the same rasteriser that draws the PDF.
 
     ImageMagick used to draw the preview, and its own SVG renderer restarts each
@@ -3399,37 +3385,64 @@ def _update_png_export(export: RasterExport, svg_text: str) -> None:
 
     The size guard is what stops a resized canvas from leaving a stale export behind:
     the receipt names the canvas, so a raster drawn at another size is refused rather
-    than written.
+    than written. Crops are always derived again, since a matching size and receipt
+    cannot distinguish an old shortened-viewport render from the full raster's pixels.
     """
-    if _png_matches_summary(export, svg_text):
+    if export.crop_units is None and _png_matches_summary(export, svg_text):
         return
-    stamped = png_export_bytes(export, svg_text)
+    stamped = png_export_bytes(export, svg_text, full_png=full_png)
+    if export.path.is_file() and export.path.read_bytes() == stamped:
+        return
     with atomic_output_file(export.path, make_parents=True) as temporary:
         temporary.write_bytes(stamped)
 
 
-def png_export_bytes(export: RasterExport, svg_text: str) -> bytes:
+def png_export_bytes(
+    export: RasterExport, svg_text: str, *, full_png: bytes | None = None
+) -> bytes:
     """One raster of the SVG, with its receipt, as bytes and without writing it.
 
     Apart from `_update_png_export` so the cost of drawing an export can be measured
     (`devtools.measure_release_assets`) by the code that draws it, without touching the
-    retained file.
+    retained file. A crop reuses a validated full raster at the same scale when supplied;
+    otherwise it draws the complete SVG before retaining the requested pixels.
     """
-    # SVG construction and receipt checks do not need the native Cairo library.
-    import cairosvg  # noqa: PLC0415
+    source_sha256 = hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+    if export.crop_units is not None:
+        from PIL import Image  # noqa: PLC0415
 
-    atlas_print_font.register_print_fonts()
-    content = cairosvg.svg2png(
-        bytestring=_cropped_svg(svg_text, export).encode("utf-8"),
-        output_width=export.width,
-        output_height=export.height,
-        background_color="white",
-    )
-    if not isinstance(content, bytes):  # pragma: no cover - cairosvg returns bytes here
-        raise TypeError("cairosvg returned no PNG bytes")
-    stamped = _png_with_summary_source(
-        content, hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
-    )
+        if not 0 < export.crop_units <= export.canvas_height:
+            raise ValueError(f"PNG {export.role} crop falls outside its full canvas")
+        if full_png is None:
+            full_png = png_export_bytes(replace(export, crop_units=None), svg_text)
+        full_receipt = png_summary_receipt(full_png)
+        expected_receipt = (
+            export.width,
+            export.canvas_height * export.scale,
+            source_sha256,
+        )
+        if full_receipt != expected_receipt:
+            raise ValueError(
+                f"PNG {export.role} crop source dimensions or SVG receipt do not "
+                "match its full canvas"
+            )
+        with Image.open(BytesIO(full_png)) as full, BytesIO() as output:
+            full.crop((0, 0, export.width, export.height)).save(output, format="PNG")
+            content = output.getvalue()
+    else:
+        # SVG construction and receipt checks do not need the native Cairo library.
+        import cairosvg  # noqa: PLC0415
+
+        atlas_print_font.register_print_fonts()
+        content = cairosvg.svg2png(
+            bytestring=svg_text.encode("utf-8"),
+            output_width=export.width,
+            output_height=export.height,
+            background_color="white",
+        )
+        if not isinstance(content, bytes):  # pragma: no cover - cairosvg returns bytes here
+            raise TypeError("cairosvg returned no PNG bytes")
+    stamped = _png_with_summary_source(content, source_sha256)
     width, height, _source_sha256 = png_summary_receipt(stamped)
     if (width, height) != (export.width, export.height):
         raise ValueError(
@@ -3441,8 +3454,16 @@ def png_export_bytes(export: RasterExport, svg_text: str) -> bytes:
 
 def _update_png_exports(canvas: CompositeCanvas, svg_text: str) -> None:
     """Redraw every raster of one composite from the SVG this run produced."""
+    full_exports: dict[int, RasterExport] = {}
     for export in canvas.rasters:
-        _update_png_export(export, svg_text)
+        full_export = full_exports.get(export.scale) if export.crop_units is not None else None
+        _update_png_export(
+            export,
+            svg_text,
+            full_png=full_export.path.read_bytes() if full_export is not None else None,
+        )
+        if export.crop_units is None:
+            full_exports[export.scale] = export
 
 
 def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]:
