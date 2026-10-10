@@ -5,15 +5,15 @@ title: "W2: full factual check of the reworked TUTORIAL, and cross-document cons
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
+version: 6
+spec_path: docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m0w1qqdsy78rbz6dsw6qfcz0
 parent_id: is-01m0w1p1t7gaen5tzf1pt94f3x
 created_at: 2026-08-25T08:48:41.788Z
-updated_at: 2026-08-25T09:04:03.215Z
+updated_at: 2026-10-10T23:04:15.322Z
 closed_at: 2026-08-25T09:04:03.214Z
 close_reason: "W2 correctness pass done (2962343); dispositions recorded in the review doc under 'W2 Correctness Pass, 2026-08-25'. Confirmed: every measured number against the infrastructure report, the quench description against quench.py, HiGHS via SciPy at both call sites, Martin 2000 attainment via frontier/proof-strategies.yaml entry 27, the weak-separation statement, and the primitive element argument. Corrected: the k/m collision the rework introduced (reverted the perfect-square root to m, restoring SYNOPSIS agreement), the unattributed semialgebraic claim (now named as Tarski-Seidenberg with a further-reading entry), the card's false 'complete' claim about the synopsis, and two terms in README (local refinement -> polish, and the missing hyphen in numerically-checked). Recorded but not fixed: the bound-gap vs search-gap split has no owner, which is think-segx's question."
 resolution: null
