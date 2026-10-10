@@ -9,7 +9,7 @@ exploration:
   id: X-052
   title: The n = 17 Optimality Program on Every Front, and the Path to a Proof
   date: '2026-10-09'
-  author: Claude Fable 5.1 at max reasoning, W3 insight-iteration lane for the owner, synthesizing two Fable max mathematical reviews (global side and local side) and a Claude Opus 5.5 inventory of the record, issues, PRs and beads; not yet reviewed by the coordinator
+  author: Claude Fable 5.1 at max reasoning, synthesizing two Fable max mathematical reviews and a Claude Opus 5.5 inventory; factual and mathematical review dispositions in PR475; Codex continuation for parallel proof and confirmation planning
   campaign: packing.squares
   brief: >-
     The owner asked for a full W3 exploration summary, end to end: a broad, detailed
@@ -19,7 +19,10 @@ exploration:
     at 6a0499ba4 (the merge of PR 473, 9 October), the three review documents written
     for it on 9 October, and GitHub as of 17:00 UTC. It supersedes the status sections
     of X-051 and extends its directions; it certifies nothing, registers no round and
-    changes no bound, verdict or census count.
+    changes no bound, verdict or census count. The later planning checkpoint records
+    the merged exp-317 admission and the owner's instruction to schedule proof work
+    and independent confirmation in parallel. It preserves the original survey's
+    dated measurements and costs; section 7 governs the next planning phase.
   sources:
     - packing/campaign/explorations/X-051-n17-optimality-program-review.md
     - packing/campaign/explorations/X-048-n17-optimality-after-n11.md
@@ -34,6 +37,11 @@ exploration:
     - packing/hosted/n17-x048-session-168-certificates.yaml
     - packing/campaign/intake-watch.yaml
     - packing/campaign/result-requests.yaml
+    - epistemics.md
+    - packing/campaign/review-planning-oversight.md
+    - packing/campaign/schemas/agenda.schema.yaml
+    - packing/campaign/schemas/agent-session.schema.yaml
+    - https://github.com/jlevy/squares/pull/475#issuecomment-6090970439
     - packing/campaign/issue-intake/n17-20261008/reconciliation.json
     - packing/campaign/ledger.md
     - packing/campaign/ideas.md
@@ -88,6 +96,30 @@ exploration:
   proposes: [H-341, H-342, H-343, H-344, H-345, H-346, H-347, H-348, H-349]
 ---
 # X-052: The n = 17 Optimality Program on Every Front, and the Path to a Proof
+
+**Current planning checkpoint, 9 October 2026, after PR475.** Main has 72 admitted
+exclusions, leaving 3,636 orbits / 28,528 states, including 94 distance-2 orbits / 736
+states. H-341 is complete: exp-317 admitted the twelve certificates, hosted their 24
+objects, and passed listed-verifier FULL replay, Rust parity and independent admission
+review. The endpoint survives and the numerical bound is unchanged.
+The older 204-object custody gap remains separate.
+The
+[final consolidation](https://github.com/jlevy/squares/pull/475#issuecomment-6090970439)
+records the exact scope of each review and replay.
+
+The next phase runs the **proof path and confirmation path in parallel**. Mathematical
+coverage, first validation, independent confirmation and release readiness need separate
+statuses and costs. [Section 7](#7-parallel-proof-and-confirmation-planning) defines the
+component map, scheduling rules and first tracking slice.
+Pending confirmation of an unchanged component does not by itself stop unrelated
+derivation or experiments.
+
+**Dated survey baseline.** Sections 1–6 and the following original summary describe the
+pre-exp-317 snapshot at `6a0499ba4`, with the subsequent mathematical corrections.
+Their 60-entry census, 95-orbit tail, pending #472 admission and historical PR states
+are not current queue instructions.
+Use the checkpoint above and section 7 for planning; retain the old figures as the
+baselines of their measurements and projections.
 
 **The proof of $s(17)=S^\ast$ has two real gaps, both measured now, and neither moved
 this week: exclusion of the hard tail of the residue, where per-state runs have reached
@@ -684,6 +716,11 @@ proof-tree estimate.
 
 ### 5.2 Parallel lanes with disjoint deliverables
 
+This is the original proposal.
+Section 7 separates its mixed production/admission lane and assurance package into
+proof, confirmation and integration costs.
+H-341 has since completed; launching every H-343 target is not the next funded action.
+
 | Lane | Hypotheses | Deliverable | Owner skill | First week |
 | --- | --- | --- | --- | --- |
 | A. Admission and census | H-341, H-342, H-349; H-332 re-scoped to the kernel route for C1/C2 and rows 1–2 | regenerated ledger, census and partition receipts; a verifier listing for `be8135f6e`; the reconciliation tool reading 38 rows | engineering, admission review | #472 replay and parity; answer #472; rows with wall cells queued |
@@ -698,6 +735,12 @@ OR-2 and OR-6: three to five sub-agents at a time, one per lane, each with a sli
 day or less to a falsifiable verdict.
 
 ### 5.3 Critical path, with the uncertainty stated
+
+This dated forecast is not the next execution schedule.
+In particular, composition interface design starts alongside production; its final check
+waits for its inputs, and the already completed #472 admission is not scheduled again.
+Section 7 replaces the forecast’s single schedule with separate proof and confirmation
+paths.
 
 ```text
 week 1   A: #472 admitted; wall rows queued      C: H-337, H-345 verdicts     D: H-340 registered, patch pilot
@@ -827,6 +870,228 @@ threshold is predicted refuted by its own slopes unless $m \lesssim 5\times10^{-
 should be re-scoped with $m$ as the variable before any round; H-261 carries a note that
 the exchanged witness is a relabelled family member and the claim is not refuted.
 
+## 7. Parallel Proof and Confirmation Planning
+
+The owner’s next-phase decision is to develop the proof while confirming its components
+in parallel. The scheduling objective is to shorten the time to a complete mathematical
+argument, while keeping the remaining confirmation visible and funded.
+First validation of a new result belongs to its proof work: a search output without a
+deciding argument or certificate is still a candidate.
+Repeating an already validated calculation, auditing its proof, or deciding its fixed
+certificate with another implementation belongs to the confirmation path.
+One job can contribute to both, but its cost is charged once.
+
+### 7.1 One component map, two paths
+
+Track the smallest claim with a precise scope and a useful independent disposition.
+Keep the component map in the existing research record and execution commitments in the
+agenda; beads own the work.
+This exploration is the initial dated map and design, not a second live scheduler.
+The next implementation slice should extend those records and generate views, rather
+than introduce another task registry.
+
+Each component needs the following fields, with existing result, evidence, hypothesis
+and experiment identifiers reused where they apply:
+
+| Field | What it records |
+| --- | --- |
+| Claim and scope | Quantifiers, domain, frame, cap, boundary convention, labels, certificate identity and expected output. Split feasibility, local minimality, exclusion and capture into different claims. |
+| Mathematical coverage | `open`, `partial`, `covered`, `refuted`, or `superseded`, with the argument or artifact supporting that judgment. A conditional derivation names every unresolved premise; its implication may be covered while its unconditional parent remains open. |
+| Validation | The first complete deciding evidence and who produced it. Show the existing source-aware `V` classification where one is registered, or an explicitly unclassified scoped description. |
+| Confirmation | Existing `C` classification where available, exact confirmed scope, deciding code relationship, reviewer and evidence. Show `not assessed` when the mapping has not been audited; never infer C0 from a missing local row. |
+| Dependencies | Mathematical premises, confirmation requirements for admission, and engineering requirements as separate edge types. Include frame/cap/root/coverage joins as components of their own. |
+| Two next actions | A proof action and a confirmation action, each with its existing bead, bounded outcome and separate estimate. A completed path has no invented next action. |
+| Admission and disposition | `pending`, `admitted`, `blocked`, or `not applicable` for the named consumer, separately from validation/confirmation. Record current defects, reuse decisions, superseding artifacts and the assessment checkpoint. |
+
+[Epistemics](../../../epistemics.md) already distinguishes source verification from
+independent confirmation.
+“Validated” in the planning view means that the stated scope has first deciding
+evidence; it is not a new assurance rung or an alternative to `V`. A source’s
+recoverable certificate and documented verification can support verification without a
+local rerun, subject to the existing evidence rules.
+A reported pass alone is not silently promoted.
+A local replay of the same program increases reproducibility evidence; it does not
+become an independent implementation.
+
+An implication whose premises remain open can itself be covered as an implication; the
+unconditional conclusion remains open until those premises are discharged.
+The map must represent those as different scopes rather than discard the conditional
+result.
+
+The proof map is an AND/OR dependency graph.
+Every conjunct and interface of a selected route must close; one complete alternative
+can discharge an OR node.
+Cyclic reasoning requires an explicit induction or fixed-point argument, not a cycle of
+`covered` flags.
+For composition, the weakest required part bounds both `V` and `C` under
+the existing rules. A confirmed fragment cannot confer its grades on a broader parent
+claim.
+
+Generate two views from that same map:
+
+- **Proof view:** uncovered mathematical obligations, available validated components,
+  conditional routes and the next experiment or lemma that could close each gap.
+- **Confirmation view:** which of those same components have sufficient independent
+  support for the stated release target, what remains to check, and the cost of doing
+  so.
+
+Neither view uses “percentage of the proof complete.”
+Counts of arbitrary lemmas are misleading.
+Report the remaining required obligations, domain coverage where it is defined, and the
+longest unresolved dependency chain.
+For census work, show the union of excluded states under the same cover and cap, with
+overlap removed. Keep the admitted census separate from any explicitly provisional
+projection using external claims.
+
+### 7.2 What can proceed before confirmation finishes
+
+An agent may develop a conditional argument or test a method using a named, scoped
+external lemma while its confirmation runs elsewhere.
+The output retains that assumption and the dependency, including the cost of reworking
+the result if the lemma fails.
+Cheap interface checks should establish that the source statement actually covers the
+intended domain before expensive dependent work begins.
+A known soundness defect blocks unconditional use of the affected component;
+confirmation debt by itself does not block unrelated proof work.
+
+Add a scheduling dependency only when the downstream action actually consumes the
+upstream result. For example, an independent replay of the local theorem is not a
+prerequisite for measuring contraction from the original cells.
+The local theorem’s precise input region is a prerequisite for claiming successful
+capture. A new exclusion’s initial soundness checks and the standing admission
+requirements remain prerequisites for changing the official census.
+
+Track three separate milestones: a complete candidate argument, a validated composed
+argument, and confirmation at the chosen target.
+The first may retain explicit assumptions; the second must discharge them.
+Publication of a confirmed proof still requires all applicable reviews, dependencies and
+assurance requirements.
+Parallel planning changes execution order, not mathematical acceptance criteria.
+
+### 7.3 Costs and protected research capacity
+
+Every selected commitment gets one primary work class:
+
+| Class | Included work | Progress credited |
+| --- | --- | --- |
+| `proof` | New derivation, search, counterexample, stronger lemma, new certificate and its first soundness decision | A mathematical obligation resolved, narrowed or rejected at its stated scope |
+| `confirmation` | Fixed-artifact replay, independent checker, proof review, controls and confirmation-specific acquisition | Explicit assurance or reproducibility coverage of an existing claim |
+| `integration` | General custody, source comparison, case/atlas adoption, record reconciliation, publication and CI | An accepted result made usable and accurately recorded |
+
+Maintain per-class estimates and actuals for CPU-hours, elapsed wall time, agent time,
+peak memory, disk and network needs.
+Record the machine and worker shape for estimates; use ranges and `unknown` instead of
+invented precision. Keep elapsed time separate from summed parallel worker time.
+Failed attempts and interrupted repeats remain charged.
+A mixed job records a phase breakdown when measured; otherwise charge its primary
+purpose and mark secondary costs unallocated.
+Never add the full job to both paths.
+
+At the next launch, declare available CPU, RAM, disk, worker slots and the next
+checkpoint. A proposed initial allocation is **60% proof, 25% confirmation and 15%
+integration**, applied to both planned CPU-hours and agent effort, with a compatible
+memory/worker allocation.
+These are planning defaults, not measured optimal shares or authorization for an
+unbounded campaign. Confirmation receives a continuing allocation so that its queue does
+not starve. Spare capacity may be lent when the owning path has no ready work, with a
+recorded return point; it does not permanently erase that path’s reservation.
+A large indivisible replay uses a separate machine or an explicitly priced slice, rather
+than occupying the proof workers by default.
+
+Reprioritize at checkpoints using mathematical payoff, risk, prerequisite value and
+cost. Expensive confirmation should identify what changes if it passes: release
+readiness, a critical premise, implementation independence, or reproducibility.
+Record unchanged-artifact receipt reuse explicitly; rerun only for a changed input or
+deciding code, a discovered defect, missing scope, or a deliberately selected assurance
+goal. Source retention and cheap checks may run without buying a full corpus replay.
+Superseded historical results normally receive custody and disposition before additional
+compute. Any allocation change applies to future jobs, preserving running experiments’
+frozen criteria and limits.
+
+### 7.4 Initial n17 component map
+
+This is a planning assessment of the retained evidence after exp-317, not a new replay
+or a reassignment of result grades.
+The validation and confirmation columns describe the scope actually available; the next
+record pass must bind exact evidence IDs before deriving machine-readable aggregate
+status.
+
+| Component | Validation at the stated scope | Confirmation evidence and remaining scope | Proof-path next action |
+| --- | --- | --- | --- |
+| Endpoint feasibility and algebraic identity | T-065 and exp-245 establish the construction and degree-18 identity | Original reviews and 9 October algebra replay; reconcile T-065’s stale identity wording separately | Reuse the endpoint as a positive control; no new endpoint search needed |
+| Closed cover, capacity and D4 assignment | exp-247 supplies 24 cells and the finite assignment universe | Retained cover/census reviews and independent counting; preserve seam, label and cap joins | Reuse the cover and prove the applicability of each new exclusion or capture rule |
+| Admitted exclusions | 72 entries leave 3,636 orbits / 28,528 states | exp-317’s twelve have listed FULL replay, Rust parity and reviewed admission; the older 204 unhosted objects remain a separate reproducibility gap | H-342 or H-349 bounded new kernel production, with exact marginal coverage; avoid repeating H-341 |
+| Remaining nonterminal states | No complete elimination argument; historical stalls cover only their tested methods and budgets | Confirm each successful new certificate as a separate action; incomplete runs are not exclusions | Select a small H-343 discriminator before financing its whole proposed sweep; investigate complete branch predicates where needed |
+| Capture from the actual family cells | No complete reach-to-terminal proof | Confirm new contraction/capture artifacts and their full-domain coverage as produced | H-337 control and a bounded H-345 run; price H-346 only with its corrected affine and terminal conditions |
+| Local family theorem | Retained local composition combines machine certificates and reviewed hand lemmas within its declared neighborhood | Fresh local-recipe runs corroborate parts; H-348’s independent fixed-certificate checker remains distinct | Extend terminal regions only where that could materially help capture; retain slider and feature hypotheses |
+| Restricted family-cell deduction | Maintained exact audit for the exact sixteen-square skeleton, stated smaller slider box and arbitrary orientation of the free square | Uses shared endpoint/cover routines, so it is not an independent implementation | Test whether a certified perturbation extension supplies useful capture constraints; the current result gives no global exclusion |
+| Composition interfaces | Some cap/root joins are established; full terminal conversion and global composition are incomplete | H-347 allowances and whole-route review have their own confirmation obligations | Make frame, normalization, root, slider and terminal assumptions explicit at each join; close the global implication only when every branch is covered |
+
+The proof-path priority is the missing nonterminal/capture argument.
+The confirmation path prioritizes evidence that enables use of a new result or
+challenges a critical premise; it can continue older custody, parity and local-checker
+work without occupying all research capacity.
+#375’s held n17 construction and the n17 portions of #419/#420 are scoped intake tasks,
+not reasons to revalidate every unrelated count first.
+
+### 7.5 First tracking slice and acceptance
+
+`think-fetd` owns this planning revision on `codex/n17-planning-intake`; BC-418 /
+`think-tmz6` remains the research program.
+Start with the existing agenda/session format: retain `program: n17-optimality`, use
+`parallel_group: n17-proof` and `parallel_group: n17-confirmation`, and put the work
+class and cost table in each commitment’s existing `budget` and accompanying prose.
+Attribute measured command costs through the session phase’s `commitment` and receipt
+references. No unsupported schema fields are introduced by this revision.
+Existing `depends_on` retains its hard scheduling meaning; confirmation references are
+not automatically copied into it.
+Use session write scopes and integration boundaries for temporary writer conflicts.
+
+Keep evidence and grades in the frontier records, scope judgments in the component map,
+work state in the agenda and ownership in beads.
+After one checkpoint establishes which manual joins are useful, a bounded W7 slice may
+add optional structured fields and generated views over these existing records.
+Do not make that tooling a prerequisite for the next proof experiment.
+
+| Next-phase candidate | Path and current disposition | Bounded next decision | Existing anchor |
+| --- | --- | --- | --- |
+| Actual-cell capture | Proof; mathematical gap open | Price H-337’s positive control and one H-345 slice; record the starting domain and terminal target | H-337/H-345; `think-tmz6` selects the commitment |
+| New nonterminal exclusions | Proof; unlaunched candidate work | Rank a small H-342 conversion or H-343 tail pilot against capture; declare the exact population before running | H-342/H-343; #413 |
+| Local fixed-data checker | Confirmation; independent implementation pending | Price the smallest complete H-348 certificate/control set, without generating substitute duals | H-348 |
+| Existing admission receipt reuse | Confirmation/integration; H-341 complete | Bind retained exp-317 evidence and reuse it unless a section 7.3 rerun trigger applies | exp-317; closed `think-6p3d` |
+| Older certificate custody | Integration enabling specific confirmations; 204-object gap open | Inventory missing inputs and acquisition cost before selecting their replays | `think-jhgi` |
+| Maintained parity comparator | Confirmation tooling; open | Replace ad hoc receipt comparison with the tracked reusable tool, keeping producer/version scope explicit | `think-n53s` |
+| Held n17 source construction | Intake with separate validation/confirmation steps; open | Identify the immutable #375 object and price exact feasibility; preserve construction credit and scope | `think-00e3` |
+
+These are selection candidates, not newly launched jobs or assignments that override
+their existing owners.
+Absolute runtime estimates remain unknown until each bounded input set and host shape is
+selected. The original aggregate lane-E estimate is not an estimate of this table and
+must not be charged as a prerequisite to the proof path.
+
+Acceptance for that implementation:
+
+1. The same component can be validated and awaiting confirmation, and it appears in both
+   views without appearing mathematically open solely because C is lower.
+2. A partial or narrower proof never closes a parent domain, even if strongly confirmed.
+3. A proof job with satisfied mathematical prerequisites remains ready while an
+   unrelated confirmation job is queued or running.
+4. A new admitted exclusion still requires its standing validity and admission checks; a
+   projected census is never substituted for the admitted census.
+5. One retained job receipt contributes to actual cost once; unknown costs and failed
+   runs remain visible.
+   Estimate totals do not silently include historical spent cost.
+6. Changes to a premise flag dependent claims for reassessment; alternative complete
+   routes and artifact-compatible receipts remain reusable.
+7. The launch report shows both paths’ selected jobs, resource reservations and separate
+   critical paths; the checkpoint shows mathematical progress, confirmation progress and
+   integration overhead separately.
+
+No full proof replay, new experiment, result-grade change or execution agenda is
+authorized merely by recording this design.
+The next W10 selection prices bounded proof and confirmation jobs together using the
+current capacity and existing owners.
+
 ## Evidence Status and Limits
 
 The original W3 survey registered no round, replayed no admitted certificate and changed
@@ -857,8 +1122,12 @@ they become census facts only after the admission round.
 The tail characterisation rests on two diagnosed states; of the other 93 surviving
 distance-2 orbits, u1 has one incomplete run and 92 have none.
 Agent-hour costs are estimates from this week’s receipts, which are lower bounds.
-The lanes assume the hosting decision is taken; without it lane E cannot start and every
-admission in lanes A and B remains a receipt.
+The original assurance lane mixed several dependencies.
+Missing hosted inputs block the specific replays that require them, and standing
+admission still requires its custody contract.
+They do not prevent independent checker development, local-theorem work or capture
+research. Exp-317 has already established custody for its 24 objects; section 7 tracks
+the older gap separately.
 
 **W2 review.**
 [Factual review A](https://github.com/jlevy/squares/pull/475#pullrequestreview-5473799813)

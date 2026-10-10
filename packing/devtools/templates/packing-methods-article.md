@@ -423,6 +423,13 @@ as standing bounds remains pending at this survey’s cutoff
 ([eight refinements](../../resources/web/couzo-exact-refinements-2026-10-08/README.md);
 [five follow-up refinements](../../resources/web/couzo-followup-refinements-2026-10-08/README.md)).
 
+Daniel’s 9 October record hunt supplies a reported example of moving uphill between
+minima. He reports starting from Couzo’s $n=132$ packing, taking an uphill excursion
+through intermediate minima, and applying contact/KKT refinement and rational
+certification. The retained certificate permits independent feasibility checking; the
+search path and numerical local-minimum checks have not been reproduced here
+([record-hunt packet](../../resources/web/evand-record-hunt-2026-10-09/README.md)).
+
 Joost de Winter describes the 16 September 2026 $n=211$ result as full-packing adaptive
 search, grouped-angle local refinement, and interval-verified decimal export.
 This identifies the stages but not their detailed mechanics.
@@ -692,6 +699,7 @@ records.
 | 7 October 2026 | [Nate Chaoweeraprasit, SQUISH](../../resources/web/squish-422-second-update-2026-10-07/README.md): author-reported neighbor-count seeds, basin hopping, grafting, carving, and polishing; exact certificates | 23 distinct counts across the original release, supplement, and two updates; second-update $n=108$ has verified ceiling $10.9099400734448775$ |
 | 8 October 2026 | [Ryan Xu](../../resources/web/ry-xu-new-packings-2026-10-08/README.md): LLM-assisted workflow, with exploration algorithm unspecified | 25 rational certificates and a separate undilated radical $n=51$ witness; 17 rational witnesses and the radical witness supply selected bounds |
 | 8 October 2026 | [Siddharth Gupta](../../resources/web/gupta-square-packing-refinements-2026-10-08/README.md): precision refinement of Chaoweeraprasit’s SQUISH constructions with Daniel’s optimizer | 17 verified rational certificates; 14 selected improvements and three withdrawn offers retained as historical inputs |
+| 9 October 2026 | [Evan Daniel](../../resources/web/evand-record-hunt-2026-10-09/README.md): reported uphill excursions between minima, contact/KKT refinement, and rational certification | two replayed certificates: $n=132$ below the selected bound and $n=155$ at the same exact side as Couzo’s pending T-128 certificate; review and adoption remain pending |
 
 Casson’s 37 direct-refinement improvements have all since been superseded in this
 repository’s frontier ([source coverage](../../frontier/source-coverage.yaml)). That
@@ -794,11 +802,27 @@ adoption
 ([eight-case packet](../../resources/web/couzo-exact-refinements-2026-10-08/README.md);
 [five-case packet](../../resources/web/couzo-followup-refinements-2026-10-08/README.md)).
 
+Daniel’s 9 October $n=132,155$ certificates have complete feasibility replays.
+Both positive jobs passed both rational geometry implementations, which also rejected
+all four duplicate-square and outside-container controls.
+The $n=132$ certificate has safe sixteen-place ceiling $11.9870993322450633$, about
+$4.23\times10^{-3}$ below the selected bound.
+It is recorded as T-131, with independent review and standing-bound adoption pending
+([record-hunt packet](../../resources/web/evand-record-hunt-2026-10-09/README.md);
+[results register](../../frontier/results.yaml)).
+
+The $n=155$ certificate has exactly the side of Couzo’s pending T-128 certificate, with
+safe ceiling $12.9524989440140074$. The two share 152 of 155 exact poses.
+The producer labels the three differing squares as free or having flat motion; a
+connecting motion and equivalence of their local minima have not been verified.
+Daniel’s certificate supplies equal-bound evidence to T-128, whose adoption remains
+pending
+([exact comparison](../../resources/web/evand-record-hunt-2026-10-09/acquisition/claims.json)).
+
 Pending source claims need their own scope.
-Daniel’s newer $n=132,155$ submission awaits intake; the retained $n=105,130,292$
-supplement, T-129, is an unreplayed historical source report.
-Exact-form, KKT, or local-minimum claims attached to a previous configuration do not
-transfer to a newly adopted packing at the same count
+Daniel’s retained $n=105,130,292$ supplement, T-129, is an unreplayed historical source
+report. Exact-form, KKT, or local-minimum claims attached to a previous configuration do
+not transfer to a newly adopted packing at the same count
 ([intake requests](../../campaign/result-requests.yaml);
 [results register](../../frontier/results.yaml)).
 
