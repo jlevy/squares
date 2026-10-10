@@ -183,9 +183,12 @@ UnitSquare’s at $n = 69$, larger than the catalogue’s later side for the sam
 baseline, and every claim a source’s retained record makes — the UnitSquare release, a
 packet’s acquisition record, or a directory of exact certificates — is reparsed and
 accounted for exactly once, as selected, superseded or beyond the horizon.
-The selected source register has no remaining beyond-horizon claims.
-The check is local and deterministic; refreshing a public source is a dated W1 research
-survey, not a network operation hidden inside ordinary validation.
+Claims beyond $n = 324$ are listed by count and source.
+A count has at most one current row; an earlier dated report that a later one beats
+stays listed as its source printed it, marked superseded and naming the source of the
+row that beats it, which must be dated no earlier and strictly better by exact
+comparison. The check is local and deterministic; refreshing a public source is a dated
+W1 research survey, not a network operation hidden inside ordinary validation.
 
 SQUISH’s ten-packing release and its later $n = 153$ supplement, published on 7 October
 2026, carry the upper bounds at eleven counts (T-113 and T-114). Nate Chaoweeraprasit

@@ -1509,9 +1509,11 @@ def test_the_day_of_2026_09_30_is_judged_on_code_not_on_the_runner() -> None:
     table in the fixture is what the code does and not a story about it. The `intended`
     column is judged against the live register with the two tiers' records as they were
     re-taken from these readings on 2026-10-01, which the fixture's `retaken` block
-    carries, so a later re-take of either record from later readings does not rewrite what
-    this day's readings were held to. Under it every clean reading passes, and the only
-    walls still failed are the two over the 154 s ceiling, which `OR-17` keeps absolute.
+    carries, and the ceilings they had that day, which its `superseded` block carries, so
+    a later re-take of either record, or a later raise of either ceiling, does not rewrite
+    what this day's readings were held to. Under it every clean reading passes, and the
+    only walls still failed are the two over the 154 s ceiling, which `OR-17` keeps
+    absolute.
 
     Two things keep `retaken` honest. It is the counted readings' own geometric mean and
     range, computed here; and each of its records is still in the live register, as the
@@ -1534,6 +1536,8 @@ def test_the_day_of_2026_09_30_is_judged_on_code_not_on_the_runner() -> None:
                     float(retaken[tier.id]["measured_band"]["low"]),
                     float(retaken[tier.id]["measured_band"]["high"]),
                 ),
+                # That day's ceiling, which the superseded record also ran under.
+                ceiling_seconds=float(superseded[tier.id]["ceiling_seconds"]),
             )
             if tier.id in retaken
             else tier

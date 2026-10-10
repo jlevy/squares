@@ -25,8 +25,10 @@ of 2026-10-08T22:12Z, reports smaller sides at $n=375$ (19.907024692022954, agai
 here). This packet is pinned at ffd900d and does not retain those two reports, so its
 $n=375$ and $n=378$ facts are dated ffd900d reports rather than the author’s latest.
 They remain valid dated reports.
-`think-1545` owns the later two; the source register allows one beyond-horizon row per
-count, so importing them needs a supersession design.
+Since 2026-10-09 the
+[later packet pinned at 2d32a6e](../couzo-extended-updates-2026-10-08/README.md) keeps
+those two reports, and the source register keeps this packet’s $n=375$ and $n=378$ rows
+as dated rows it supersedes; their facts and this packet’s pins are unchanged.
 
 ## Source Custody and Retention
 
