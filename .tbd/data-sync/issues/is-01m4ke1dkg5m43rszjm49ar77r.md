@@ -5,7 +5,7 @@ title: Review and repair the website development and CI critical path
 kind: feature
 status: in_progress
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
 delegate: codex@spud10
 labels:
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T17:33:43.407Z
-updated_at: 2026-10-10T18:11:51.875Z
+updated_at: 2026-10-10T18:13:13.767Z
 started_at: 2026-10-10T17:35:10.785Z
 ---
 User requests a systematic review of why routine website iteration consumed hours, followed by development-process or CI fixes. Delegate independent analysis of workflow/CI architecture and reachable-test over-selection; coordinator rolls up evidence and implements the smallest justified changes. Capture command wall, repeated work, scope/coverage and failure classification; preserve scientific contracts and assert equivalence before performance claims. Current website PR462 remains separately tracked under think-o2jd; do not close on a report alone.
@@ -38,3 +38,5 @@ Existing integrated receipt: process-batch-push-artifacts/run-224126af950344ef8f
 One optional host snapshot during the gate showed load averages 102.13/87.44/64.48 against its recorded 10 available CPUs. This supports substantial host contention without identifying its cause or assigning a speedup. memory_pressure reported 48% free on 32 GiB; compression/swap counters are cumulative and do not establish current memory exhaustion. sysctl CPU/swap reads were restricted. No repeated sampling or private process dump was used.
 
 Smallest follow-up: reuse select_for_paths for local push prerequisites and behavioral tests from the same complete changed-path set, then audit and split policy/tooling _CORE attribution. Preserve unknown/unclaimed/empty-path fallback, all unattributed checks, old/new rename/delete paths, scientific verifier/certificate/source and shared-core coverage, Workbench render inputs, JS/CSS/probe/toolchain coverage, mixed website/scientific edits, and budget/CLI enforcement contracts. Existing scoped-selection negative controls are the starting coverage contract. Complete required PR CI and full/strict checkpoints remain intact. No implementation, new benchmark framework or overall acceleration claim is part of this rollup.
+
+Host-capacity caveat and recommendation: the existing process gate records 10 available CPUs, outer jobs=10 and inner jobs=3; a single contemporaneous snapshot had load averages 102.13/87.44/64.48. This is evidence of substantial host contention, not proof that every validator or test caused the cost. memory_pressure reported 48% free on 32 GiB, and cumulative swap/compression counters do not establish current memory exhaustion. In the scoped-prerequisite follow-up, account for available host capacity and avoid launching simultaneous host-wide validators; preserve explicitly selected deadlines, limits and complete scientific coverage. Do not kill unrelated threads, add thresholds or claim elapsed savings from selection counts. No further investigation or implementation was performed.

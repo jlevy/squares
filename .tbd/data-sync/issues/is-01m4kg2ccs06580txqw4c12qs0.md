@@ -5,7 +5,7 @@ title: Scope pre-push prerequisites to changed inputs
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
 delegate: codex@spud10
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4ke1dkg5m43rszjm49ar77r
 hold: null
 hold_until: null
 created_at: 2026-10-10T18:09:12.086Z
-updated_at: 2026-10-10T18:12:46.510Z
+updated_at: 2026-10-10T18:13:08.263Z
 started_at: 2026-10-10T18:12:46.496Z
 ---
 Reuse the existing select_for_paths contract to scope local --push prerequisite checks, then separate policy/tooling inputs from the overly broad _CORE attribution after auditing actual dependencies. No implementation is authorized in the current slice.
@@ -24,3 +24,7 @@ Read-only evidence: --push currently selects all 65 fast/non-broad prerequisites
 Acceptance contract: compute both prerequisite and behavioral selection from the same complete changed-path set, including working-tree changes and old/new rename/delete paths. Preserve empty/unclaimed-path whole-tier fallback and all unattributed checks. Retain named negative controls for unknown files, missing attribution, scientific verifier/source/certificate edits, shared core changes, all declared Workbench render inputs, JavaScript/CSS/probe/toolchain edits, and a mixed website-plus-scientific change. Ensure no empty or silently reduced verdict. Policy/tooling changes must still run budget declaration/enforcement and validation-CLI contracts. Keep complete required PR CI and full/strict release checkpoints intact.
 
 Implement in a bounded follow-up with focused selection tests and one ordinary push receipt. Distinguish selector overhead, subprocess/check runtime, and host contention; do not claim overall acceleration from fewer selected steps or add a generic benchmark framework. Parent process tracker remains open.
+
+## Notes
+
+Host-capacity caveat and recommendation: the existing process gate records 10 available CPUs, outer jobs=10 and inner jobs=3; a single contemporaneous snapshot had load averages 102.13/87.44/64.48. This is evidence of substantial host contention, not proof that every validator or test caused the cost. memory_pressure reported 48% free on 32 GiB, and cumulative swap/compression counters do not establish current memory exhaustion. In the scoped-prerequisite follow-up, account for available host capacity and avoid launching simultaneous host-wide validators; preserve explicitly selected deadlines, limits and complete scientific coverage. Do not kill unrelated threads, add thresholds or claim elapsed savings from selection counts. No further investigation or implementation was performed.
