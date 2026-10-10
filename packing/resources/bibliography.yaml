@@ -1588,6 +1588,20 @@ sources:
       written by Daniel''s exact contact solver. The source checks with Squares Project (Levy) verification
       code; this project lineage is not independent. Derived exact facts only; no upstream byte is retained.
       No optimizer/local/global claims.'
+  - key: '[Daniel record hunt 2026-10-09]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-09'
+    lineage: builds-on-project
+    credit: Daniel after Couzo, Chaoweeraprasit, Levy
+    short_credit: Daniel after Couzo et al.
+    note: 'Two complete exact certificates at e0081804736a4613c2cf44c693ef1afe92518927 from the hunt1
+      record hunt, seeded from this project''s register packings: Couzo''s at 132 and Chaoweeraprasit''s
+      SQUISH packing at 155. The n155 side equals Couzo''s earlier issue451 certificate. MIT-licensed
+      source bytes retained; Claude assistance disclosed. No KKT, local or global optimality claim is
+      admitted.'
 credited_names:
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta
