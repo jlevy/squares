@@ -5,8 +5,8 @@ title: Benchmark a rare-event proposer ensemble
 kind: feature
 status: open
 priority: 1
-version: 4
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 5
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -18,7 +18,7 @@ dependencies:
     target: is-01m0qxpf8pe8qze02qp1nrz58x
 parent_id: is-01m0r7q4h688g8gx54wk0vmrhp
 created_at: 2026-08-23T18:21:31.168Z
-updated_at: 2026-08-24T03:05:22.254Z
+updated_at: 2026-10-10T22:54:16.129Z
 ---
 Category: creative alternatives. Treat record-basin entry as a rare-event estimation problem. Prototype adaptive multilevel splitting or subset simulation, cross-entropy adaptation, replica exchange, basin hopping, and a plain independent-restart control. Score progress by side thresholds plus non-hackable structural novelty, while preserving weights needed for probability estimates.
 

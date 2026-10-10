@@ -5,8 +5,8 @@ title: Audit merged-main square-packing research-loop readiness
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 6
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0r7tk07nw6nb8wyzv4v776z
 created_at: 2026-08-25T04:29:42.183Z
-updated_at: 2026-08-25T04:32:06.527Z
+updated_at: 2026-10-10T22:55:06.091Z
 closed_at: 2026-08-25T04:32:06.526Z
 close_reason: First-principles readiness review complete; layer verdict, exact blockers, gate evidence, queue repairs, creative promotion omission, and all follow-up work are durably tracked.
 resolution: null

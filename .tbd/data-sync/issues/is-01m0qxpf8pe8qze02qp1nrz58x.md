@@ -5,8 +5,8 @@ title: Attack n = 12 from certified upper- and lower-bound lanes
 kind: task
 status: open
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 4
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -16,7 +16,7 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q4h688g8gx54wk0vmrhp
 created_at: 2026-08-23T18:21:32.309Z
-updated_at: 2026-08-24T03:05:22.741Z
+updated_at: 2026-10-10T22:54:25.384Z
 ---
 Category: tractable open questions. n = 12 is an open target, not a negative control. Run both a rare-event and continuation upper-bound campaign below side 4 and an unavoidable-set or interval lower-bound campaign that improves the certified lower bound or rules out declared structural classes.
 

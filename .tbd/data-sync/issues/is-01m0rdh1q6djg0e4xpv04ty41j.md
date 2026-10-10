@@ -5,14 +5,14 @@ title: "Attic: Git-environment audit for abandoned isolation prototype"
 kind: bug
 status: closed
 priority: 0
-version: 3
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 4
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - focus-efficiency
 dependencies: []
 parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 created_at: 2026-08-23T22:58:11.813Z
-updated_at: 2026-08-23T23:23:41.473Z
+updated_at: 2026-10-10T22:53:57.767Z
 closed_at: 2026-08-23T23:23:41.473Z
 close_reason: "Canceled after the scope reset: this finding belongs to the stashed hostile-isolation prototype, not the stable branch. The prototype remains recoverable in stash@{0}; no claim is made that its fixes landed. Reuse only narrowly useful timeout or crash-recovery patterns if a measured cooperative-workflow need justifies them."
 resolution: canceled

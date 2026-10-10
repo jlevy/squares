@@ -5,8 +5,8 @@ title: Benchmark proposer-conditioned null measures for basin frequency
 kind: task
 status: open
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 4
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - pr-14
@@ -15,7 +15,7 @@ labels:
 dependencies: []
 parent_id: is-01m0qxpd3pnhvjh5s55b2w5gq8
 created_at: 2026-08-23T20:29:52.886Z
-updated_at: 2026-08-23T20:57:20.149Z
+updated_at: 2026-10-10T22:54:33.869Z
 ---
 PR #14 ambiguity 4. Basin frequency is not a distribution-free property of the packing landscape: for named proposer distribution P and deterministic quench Q it is the probability of the preimage of a terminal component. Uniform centres and angles in one chosen box is a useful baseline, but it is parameterisation- and box-dependent, often infeasible, and cannot justify a global rarity claim. Acceptance: version P, Q, initial-side rule, feasibility conditioning or repair, random-number generator, and budget; compare raw uniform, feasible-conditioned or repaired, Sobol or Latin-hypercube, record-neighbour perturbation, continuation or surgery, and annealer-endpoint arms through one validator/quench at equal pair tests; report per-arm frequencies, confidence intervals, censoring, effective sample size and sensitivity to box size; use importance weights only where densities are known; and scope H-012 and every basin-volume statement to its measured P/Q regime.
 

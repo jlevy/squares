@@ -5,8 +5,8 @@ title: Publish the four-principle packing research charter
 kind: task
 status: closed
 priority: 0
-version: 3
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 4
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m0r7tkdt35ged6b10gaf9wa0
 parent_id: is-01m0r7q3zk8x6cg4e30d149698
 created_at: 2026-08-23T21:18:32.451Z
-updated_at: 2026-08-23T21:48:03.462Z
+updated_at: 2026-10-10T22:53:52.274Z
 closed_at: 2026-08-23T21:48:03.461Z
 close_reason: Completed in explorations/packing/README.md, SYNOPSIS.md, and the four-focus review/bead hierarchy. The charter names all four focuses, ownership and veto boundaries, one-focus-at-a-time rule, explicit handoff sequence, and cross-focus visualization responsibilities. README/synopsis reconciliation and the full normal gate passed at the 65-defect checkpoint.
 ---

@@ -5,8 +5,8 @@ title: Review and integrate stacked PR 21 onto the current packing checkpoint
 kind: task
 status: closed
 priority: 0
-version: 10
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 11
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 delegate: unknown@spud10.local
 labels:
   - packing
@@ -21,7 +21,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-08-24T20:25:14.475Z
-updated_at: 2026-08-24T20:48:48.520Z
+updated_at: 2026-10-10T22:54:03.783Z
 started_at: 2026-08-24T20:25:18.872Z
 closed_at: 2026-08-24T20:48:48.519Z
 close_reason: "Completed the four-child PR21 integration. Initial stack reconciliation: think-2pld. Contract/log corrections D-188..D-193: think-tbmj / 8611e85. Late exp-033 float-to-exact boundary delta: think-5u3p / 1210e07 + f9c2f94. Final gate/push/body/closure/sweep: think-t5hm / d237802. PR21 closed superseded; PR19 is clean and mergeable. Paused scientific work remains independently captured at think-1582 under think-1q3g and was neither preregistered nor executed."

@@ -5,8 +5,8 @@ title: Extend the m^2 - 3 frontier at n = 61, 78, or 97
 kind: task
 status: open
 priority: 2
-version: 3
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 4
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -16,7 +16,7 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q4h688g8gx54wk0vmrhp
 created_at: 2026-08-23T18:21:32.657Z
-updated_at: 2026-08-24T03:05:24.053Z
+updated_at: 2026-10-10T22:55:18.689Z
 ---
 Category: tractable open questions. The general grid-optimality statement is proved for m^2, m^2-1 and m^2-2, while m^2-3 is established only through the known finite range; n = 61, 78 and 97 are the nearest unresolved cases in the corpus. Explore both constructive sub-grid packings and computer-assisted boundary-layer reductions.
 
