@@ -1,0 +1,642 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-10T09:54Z",
+  "git_scope": "Full clone checked out at the pin for issue #470. All 96 files of the tree are in the scope and bound to their Git blobs; under derived-only custody none is copied. The 4e1a601 square-199.txt and square-263.txt, which this commit replaces, were read from the clone for the control receipt only. No source program was executed.",
+  "sources": [
+    {
+      "id": "mishapolk-square-packing-records",
+      "source_url": "https://github.com/Mishapolk/square-packing-records",
+      "source_ref": "main",
+      "source_commit": "dd3da5c753c5ded6cb3b89476193b7b801005415",
+      "committed_utc": "2026-10-09T08:56:05Z",
+      "git_tree": "db3e1d43e22924153213d7a50ed085febadf2eb0",
+      "archived_path": "packing/resources/web/mishapolk-decimal-poses-2026-10-09/source",
+      "subtree_manifest": "packing/resources/web/mishapolk-decimal-poses-2026-10-09/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "certificates",
+        "check_packing.py"
+      ],
+      "subtree_file_count": 96,
+      "subtree_total_bytes": 2960637,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 5406,
+          "sha256": "6966d26f60110ec1808d4305e0ff72889e7f4238d47c9f045598c177eeddc117",
+          "reason": "The repository README: the release's record tables and verification note, quoted in this packet's README. Author prose; no licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-103.svg",
+          "bytes": 16180,
+          "sha256": "40b5ad498be2a134c0930d842bb58bb31402600fc30e9e90240921ddca611da2",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-103.txt",
+          "bytes": 8256,
+          "sha256": "66e946e5848f2febfca351dddc037a78539cc8591573806cbb0061f896c74d7b",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-105.svg",
+          "bytes": 17119,
+          "sha256": "dc5394786c97a413d751dde35ad52daf2412301e0f498c18f743b83b212a3e5b",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-105.txt",
+          "bytes": 8405,
+          "sha256": "28a72a9bd4b2b5f88010b380ad696709b8aafd0a3e980fa179cf19061ecc587f",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-108.svg",
+          "bytes": 17587,
+          "sha256": "61f323fdbfe5f12c1f41262e81042a8666fae8974451a14b36a984fc19cff6da",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-108.txt",
+          "bytes": 8604,
+          "sha256": "deb836cd3c4d64b2a9ab655f53ca4187226dedc6fbe326ff6b6532f8a1c4ef00",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-127.svg",
+          "bytes": 20551,
+          "sha256": "ed6e403819053e920746a6579701e1fc2c70c109082c2581689a787f4b32d3e0",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-127.txt",
+          "bytes": 10134,
+          "sha256": "d72ea01c8fd69d892687a0367ca6da56d62a0867a248ff15e66fb26406e97cb3",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-130.svg",
+          "bytes": 20230,
+          "sha256": "21e0e0ca70871f65adc2688436b489cc2575e0640bd878cf4befa2ed42787e72",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-130.txt",
+          "bytes": 10418,
+          "sha256": "46eba43ea47e25db18e0610adaa581c736a7d8b445c33233558fec672a190691",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-131.svg",
+          "bytes": 21176,
+          "sha256": "257309b489cb7ef372bad831c5c7f68e736d3c31144be7bed9842c816e433da2",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-131.txt",
+          "bytes": 10494,
+          "sha256": "9fe179d60eed2c802ef04617a00619895ee8c23e42b36c48c9d66841400129c6",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-132.txt",
+          "bytes": 18493,
+          "sha256": "89115e7393c4d5afafcdd4046f85f8b33d8211503b5aac8143771c7771f40f43",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-153.svg",
+          "bytes": 24608,
+          "sha256": "173e0794669eaeb2afa3354a0bd699c3819441a026f30a5afd7fb653eac4ab03",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-153.txt",
+          "bytes": 12245,
+          "sha256": "341a2dc94e0aa8f63bd68e7e87839bf8519377726a8e313434002afddd9463e3",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-154.svg",
+          "bytes": 23830,
+          "sha256": "510e2ef42a70b649cc1df9c0d02d96f52a5541e440c912935084bdb721c78a1d",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-154.txt",
+          "bytes": 12359,
+          "sha256": "1cea4c25064042c4ef0c5b300b08067ad398680263ac09b79cdfb7ac7cc868c3",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-175.svg",
+          "bytes": 28040,
+          "sha256": "b0639d2300cf999703434e3673eddbe565d815d97ecdf237db2ddcd413f72366",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-175.txt",
+          "bytes": 14055,
+          "sha256": "a3f44fa83b163cdde2ec0abaeb65c2c537b781eac1361e94c29c216f0a4d92cf",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-179.svg",
+          "bytes": 28664,
+          "sha256": "4a5f752c8a4bfbcd4a6ffcf99ff97f5caed5bb35cdac0a1b812e01b56c4c23b1",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-179.txt",
+          "bytes": 14349,
+          "sha256": "e92d88ae577ae47d0efeacbc2aedcc683305b1bd639f97dae86363f532102e07",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-180.svg",
+          "bytes": 28820,
+          "sha256": "6df5a9181889122784f226f9d3b46bc7b779c4d7646e5d8c5c3a1ac98d1785a6",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-180.txt",
+          "bytes": 14457,
+          "sha256": "8edafd0411efd93b831729ab7b63d368a26cf3e4676c6792b61ce74c26289fda",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-199.svg",
+          "bytes": 30580,
+          "sha256": "4b8fe7630499ebffef2be8a357b6002ffb1e0cce4f924db50302cf0de6bedc2c",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-199.txt",
+          "bytes": 27927,
+          "sha256": "8f4212771950c2824156190f67e1cc205305fad58457cf261f43c079454e4c87",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-207.svg",
+          "bytes": 31780,
+          "sha256": "5da37575a685a0e497b739c63b380743b72fb8ef6bdb0ad7e4348532f900d53e",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-207.txt",
+          "bytes": 16613,
+          "sha256": "c01242eb1b32d72d719f0d50d3bad4e9f9d05523371dd971e6c3a642a96e1212",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-208.svg",
+          "bytes": 31930,
+          "sha256": "aafa95405147f7c58cbcae04c93eda8eaf7c8eab085ff9025a893d0bbe8fd49b",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-208.txt",
+          "bytes": 16716,
+          "sha256": "b2d9d5e70aef2b1d3fa15259382d11a7fed383925af674b266586c9fe6264f04",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-209.svg",
+          "bytes": 32080,
+          "sha256": "c24772a8b9055bed18c616b23c3c4ea26d9b6094a73a276363e807472b5bcea7",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-209.txt",
+          "bytes": 16806,
+          "sha256": "c7c26dc4f8eb76afabd991ed82b1b73eb068ca118f691750c75b2f399c2ff1a5",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-236.svg",
+          "bytes": 36130,
+          "sha256": "3e639ed419da6b067ea651dbe21fdd21f490376d2f2d683552682f516d2ccedb",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-236.txt",
+          "bytes": 18973,
+          "sha256": "440f31dff992dc19b35b3964d82e46bc5ab81650b679b7670439fcba0ca72988",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-237.svg",
+          "bytes": 36280,
+          "sha256": "bd34ca9f81ece390fdeaa13c7fe0cc3d442754e23d16085e392ba7109091c488",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-237.txt",
+          "bytes": 19063,
+          "sha256": "49f1150110face947e945f4ea8058c781c15d1a3bca7c4dc32f67795df534ab7",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-238.svg",
+          "bytes": 36430,
+          "sha256": "3be37d10d711c434e67423271c902aa0340467d5e824986743f1358325874381",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-238.txt",
+          "bytes": 19098,
+          "sha256": "43dbdcd41300760a40ec32e105de156d8bbf8f7bdde55aee161a898fc14dceda",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-239.svg",
+          "bytes": 36579,
+          "sha256": "2a33af9a0904ead5979f04961541eabff8d23133c134b90b0700af5f9f59d0ea",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-239.txt",
+          "bytes": 19190,
+          "sha256": "819aca7c56b1562bc890f4ed8cf1dc650d9f7f7c0f5d36be25368198a5cf57e6",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-258.svg",
+          "bytes": 40988,
+          "sha256": "6865b83561e1a6cb1b0403b58390ce7ab668346895dc38cadf2c8a8b42b61f60",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-258.txt",
+          "bytes": 20696,
+          "sha256": "0cc2a7d9854080ac700939eefe3489f4dedae0f6c9d032419e39a37ecfc00bc6",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-263.svg",
+          "bytes": 40180,
+          "sha256": "67956b668a14c26ca491324b4fab3554a4afdd5e8889464cf28801623ed824cd",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-263.txt",
+          "bytes": 36921,
+          "sha256": "9b2d1cda5eb57dd7709a50db7c8c62d92da906a1455974c1dee4b2cdacd0a97c",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-267.txt",
+          "bytes": 37481,
+          "sha256": "4802db4f295af62d909e8e6a710e597b7e135f2fbb947a8dbf31eb1c6946e655",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-270.svg",
+          "bytes": 42860,
+          "sha256": "a9d3e805b9a6dbc7f4216a0e007257834111f5a546690b1f112e0843afa3d963",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-270.txt",
+          "bytes": 21753,
+          "sha256": "6b8b4addbf5cbc24b7c38c0acc0e3516835061091d0ad989bd0e4e65fe1d789c",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-302.svg",
+          "bytes": 46030,
+          "sha256": "af1d11951634f2dbc4c53fc46be94d86ae011f81a9fd33c55351589ed6e671ea",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-302.txt",
+          "bytes": 24245,
+          "sha256": "6b6a9152623e3428184a83c85ad67f28d5f74a4c29ec383bbd16c428b78c652a",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-303.svg",
+          "bytes": 46180,
+          "sha256": "17abe51c25783914e20b7e2cee4a2d52fb2977e27a38fa81d44fbecc6866d201",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-303.txt",
+          "bytes": 24318,
+          "sha256": "8062a183e1060abf8d45a032a72cd9f4832d7aa437de3d5cf0628f9dffe6d6f5",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-306.svg",
+          "bytes": 48475,
+          "sha256": "7475240ec5a6c550ddd3ce8d0a09923bec88d13be3e1aa285c9a2174b627f7a2",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-306.txt",
+          "bytes": 24639,
+          "sha256": "47b488cfb7740516869266fb26b41911a37242533188f9bd6fedb919623430d2",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-343.svg",
+          "bytes": 39326,
+          "sha256": "c90eca67714c5a0eea71eeaf794d9f961e9f83302202e91951b07dc435987b53",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-343.txt",
+          "bytes": 48157,
+          "sha256": "75cbd47684668af894f734410af4ec23ddd21e505a8dd07d01d59d3343e8cb4b",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-344.svg",
+          "bytes": 39472,
+          "sha256": "1fd78bef08720113aef653211e3566fdb1f01891fae7e530b87eae6f93fbd4ee",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-344.txt",
+          "bytes": 48329,
+          "sha256": "c026436121089507b42f5c8eddd115b418a327122b79d5b7336b285b79231b1c",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-345.svg",
+          "bytes": 39580,
+          "sha256": "8a019a9cb528edd61b08aa368529cb3cd9ee7db71181b61bfa63d34b1c46aca6",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-345.txt",
+          "bytes": 48463,
+          "sha256": "36401c0f00f936c6e50090cce95fb01693755781d7b2efbd3429b118c414db08",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-346.svg",
+          "bytes": 39636,
+          "sha256": "4732d0aafbaff499c27ea14435c3480a114ab8f3d45d257d0064bc67b524ceab",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-346.txt",
+          "bytes": 48545,
+          "sha256": "86a97d6704111fa6ead0a2bed040ea0a932e6e4f6fa41e1804e8f657b6e4045c",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-347.svg",
+          "bytes": 39796,
+          "sha256": "01eaae9cb933769b86ee6e3f78b6a1861afa0e1eef267ff67935ecad3bc6c476",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-347.txt",
+          "bytes": 48732,
+          "sha256": "0e48c14af87269e573c83e1ae200b8355e5d9cc0a3634f4703ef8006d54576d3",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-348.svg",
+          "bytes": 39901,
+          "sha256": "98c5319ef89308a1fc0aa49738feee26b32274b027bab3212ecb67fb0d7ed904",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-348.txt",
+          "bytes": 48865,
+          "sha256": "aadcaed74d62c3c60bffee0b8b86bc1cdbe15e51a41dd8b2f66091c2f286d82b",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-349.svg",
+          "bytes": 39963,
+          "sha256": "bafcf6171c76ab6f83e20fec2682d4fda03bb35652657844cb0a9e17f337f9b0",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-349.txt",
+          "bytes": 48954,
+          "sha256": "b66147bd5fac7a7345d6c9e375eb8fc76b515da73e2d24097ba0c9c4280a8d91",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-350.svg",
+          "bytes": 40078,
+          "sha256": "589697c132da888ad44a80bdeef112ff9eaecdab13e9c9070c7953e4333a9070",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-350.txt",
+          "bytes": 49095,
+          "sha256": "a5751ed9bc7c4d1f05f3622fbc9097058cbce72d0bac81f4a2aadaef881fabf9",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-351.svg",
+          "bytes": 40208,
+          "sha256": "53f3c2477866ddc2a25c264dfcec089def13cc8815b98880dc316f17214c7c9a",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-351.txt",
+          "bytes": 49251,
+          "sha256": "aed6c91b1ea48197afce9378452c5f34c93baeb661415a774d4a4e31f4466e8b",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-352.svg",
+          "bytes": 40352,
+          "sha256": "b1fbd310a8155872e9e38ff63638a41ed68198860e7d718118e9d94ea5ff0b20",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-352.txt",
+          "bytes": 49422,
+          "sha256": "73ad7dbc3f16c0ed868e6861fd3390204eb70d5aaa8ce00f3e4fce9b577956a0",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-353.svg",
+          "bytes": 40464,
+          "sha256": "41b2182ba920f00ff50fdcb9815121f051c93bfa88eaf24e62326ee6b34120aa",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-353.txt",
+          "bytes": 49560,
+          "sha256": "982c19eacab5532460eca9cd2d63894304c7a911af72ebfbed59f28f0b9796b5",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-354.svg",
+          "bytes": 40550,
+          "sha256": "f37dd554f538c49c1d6632b2b9475afb4711c0a7e79117092be0c6b5a3b6247f",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-354.txt",
+          "bytes": 49673,
+          "sha256": "1442b61af61a8a417531fd43065439540c612cffcd5f7a8bb36d3d8abf0d8821",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-355.svg",
+          "bytes": 40631,
+          "sha256": "77afe59edca43e61a38a76d535a36cff1dd3e1ca84ceba8f74482bcbd4848ad1",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-355.txt",
+          "bytes": 49781,
+          "sha256": "0914be68bf2e00d8eabe66a108047dab9a4c1ddc7304b59f6c6e79d5a48d586a",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-356.svg",
+          "bytes": 40816,
+          "sha256": "5dcd21121466f8cd7486bdd3a494ffc711728183fd2f850e8ff6b535196fa968",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-356.txt",
+          "bytes": 49992,
+          "sha256": "f44e0fe3e15c2b1b7a9193039d80a997b2dc8079947945e36a07d93a0dac8523",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-357.svg",
+          "bytes": 40813,
+          "sha256": "dd11f1a19ed9f4ecb872529d6ef966115a9a153a0badfe836fd7b19a05469dfc",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-357.txt",
+          "bytes": 50016,
+          "sha256": "19dae629037e33f3d928169eb64dc9aa9a9dbb1ca9014b8d83a65f705b538874",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-358.svg",
+          "bytes": 41043,
+          "sha256": "e677601470f190393cdab68ad1699eed0994f39f3b791a1e796ed0e1bed8b1a6",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-358.txt",
+          "bytes": 50272,
+          "sha256": "3ceb06754c9e6ffd2c2100d84e49ba52ccc7dedaa183cf92492223f28e52bc36",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-359.svg",
+          "bytes": 41158,
+          "sha256": "fc204be0fe9de88eae39a35eef525a5ada1f86fbac3f44fc6d92614b7449e445",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-359.txt",
+          "bytes": 50413,
+          "sha256": "02b8f6de188806ff1d636754d5c317bd64d1d144ffaebd3a5b1f1750b4ada6c4",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-360.svg",
+          "bytes": 41194,
+          "sha256": "1149d4f5b35a4ac1aa7116cc4abae87d9349a5606ff37d7c23967f3205c9937a",
+          "reason": "A drawing of a pose beyond the case corpus. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-360.txt",
+          "bytes": 50476,
+          "sha256": "3b5a26fa9c416462d6eb3a6106c17b93f43f7f1c970b8fcb591dee177119c7f4",
+          "reason": "A decimal centre-angle pose beyond the 1-324 case corpus, its printed side above the grid bound 19. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-84.svg",
+          "bytes": 13844,
+          "sha256": "be6975734adabff40bc854ea37a1cec16881c0462cd1b156536a2b1fab8e1c4c",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-84.txt",
+          "bytes": 6709,
+          "sha256": "6819807c98b716afbadd13e8cde7a2ed74392b7b07069865f42170ecbf8bdc8c",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-86.svg",
+          "bytes": 14156,
+          "sha256": "6d011c812666ac58609cf5a8931fbf3c9a35d10e41cc8af48da138fae6567e08",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-86.txt",
+          "bytes": 6856,
+          "sha256": "10aabbe0cc7be597218ea7013606c12d073c0653aee52e86ba1ff94f5f5bd2ed",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "certificates/square-88.svg",
+          "bytes": 14468,
+          "sha256": "9e8b81f73a284d590ab88d12d07733e93e71a1701e697e29adaac1577ca93c88",
+          "reason": "A drawing of the pose, with the side and coordinates as XML entities. No licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/square-88.txt",
+          "bytes": 7006,
+          "sha256": "67f60fd35d74f7be01025e25d63f985b30eed5e01eda7b0ab8c3167b62451344",
+          "reason": "A decimal centre-angle pose in David Ellsworth's text format, box centred at the origin: the source's certificate, which is decimal and not an exact witness. No licence in the tree, so derived-only custody: the pose is measured from a checkout at this pin bound to this digest, and an importer reads it the same way."
+        },
+        {
+          "path": "check_packing.py",
+          "bytes": 9200,
+          "sha256": "75f60160e43521514263e6f51b35de2b7588ec6e61268cb22104ab139a4107f5",
+          "reason": "A copy of David Ellsworth's check_packing.py as the author published it. No licence in the tree; pinned by digest only and never executed here."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The issue leaves credit for packings started from the literature with their discoverers and discloses Gemini 3.8 assistance with solver scripting, precision checks and formatting.",
+      "claims": [
+        "Issue #470, resubmitted with errata on 2026-10-09, reports s(n) <= S_n at 28 counts, S_n the side printed in certificates/square-<n>.txt rounded up at 12 decimals, each a decimal centre-angle pose at 16 digits (36 digits for 199 and 263) in a box centred at the origin. At n = 88 the issue says S_n ties SQUISH's 12-decimal display.",
+        "s(84) <= 9.697934799017, from a printed side of 9.6979347990169860.",
+        "s(86) <= 9.820535407499, from a printed side of 9.8205354074987188.",
+        "s(88) <= 9.882451030482, from a printed side of 9.8824510304812740.",
+        "s(103) <= 10.679232047362, from a printed side of 10.6792320473613369.",
+        "s(105) <= 10.789303783751, from a printed side of 10.7893037837503627.",
+        "s(108) <= 10.904821012324, from a printed side of 10.9048210123231399.",
+        "s(127) <= 11.810878787590, from a printed side of 11.8108787875891803.",
+        "s(130) <= 11.904483032516, from a printed side of 11.9044830325157864.",
+        "s(131) <= 11.951105389418, from a printed side of 11.9511053894179291.",
+        "s(153) <= 12.879679373332, from a printed side of 12.8796793733319035.",
+        "s(154) <= 12.926562245853, from a printed side of 12.9265622458523470.",
+        "s(175) <= 13.767155163551, from a printed side of 13.7671551635504397.",
+        "s(179) <= 13.883795490512, from a printed side of 13.8837954905110159.",
+        "s(180) <= 13.916993522482, from a printed side of 13.9169935224813184.",
+        "s(199) <= 14.617572173597, from a printed side of 14.617572173596022011565764842089265585.",
+        "s(207) <= 14.887992258303, from a printed side of 14.8879922583026598.",
+        "s(208) <= 14.924518772030, from a printed side of 14.9245187720293568.",
+        "s(209) <= 14.949617952201, from a printed side of 14.9496179522003985.",
+        "s(236) <= 15.867800839421, from a printed side of 15.8678008394207701.",
+        "s(237) <= 15.903676235190, from a printed side of 15.9036762351891383.",
+        "s(238) <= 15.926146857011, from a printed side of 15.9261468570109788.",
+        "s(239) <= 15.949313169728, from a printed side of 15.9493131697276969.",
+        "s(258) <= 16.563448002138, from a printed side of 16.5634480021371502.",
+        "s(263) <= 16.740419683047, from a printed side of 16.740419683046905419132599490694701672.",
+        "s(270) <= 16.936723155038, from a printed side of 16.9367231550373418.",
+        "s(302) <= 17.881306218091, from a printed side of 17.8813062180900033.",
+        "s(303) <= 17.920312372919, from a printed side of 17.9203123729186586.",
+        "s(306) <= 17.963433717497, from a printed side of 17.9634337174962369.",
+        "s(132) <= 11.986956226066, from a printed side of 11.986956226065860420249009621329605579: in the release's README and certificates/ since 06b484b, not named in the issue.",
+        "s(267) <= 16.838828608296, from a printed side of 16.838828608295706601438723737373948097: in the release's README and certificates/ since 06b484b, not named in the issue.",
+        "certificates/ also holds 18 poses at n = 343 to 360, added in 2b76e6f and called records in the README; every printed side is at least 19.000000000004, above the grid bound s(n) <= 19 that holds for every n <= 361.",
+        "The issue reports that David Ellsworth's check_packing.py at precision 40 and epsilon 1e-14, and an independent 60-digit separating-axis check, accept all 28, and that shrinking the container by 1e-9 or moving a square 1e-6 is refused. These are author reports. squarepacker found overlaps in the 4e1a601 square-199 and square-263; the author re-quenched both in dd3da5c.",
+        "The issue pins dd3da5c7b39f3796d19e0970bc2350ef9ea14ad, which has 39 hex digits and names no commit. The corrected certificates are at dd3da5c753c5ded6cb3b89476193b7b801005415, which shares its first eight digits, is the repository head, and is the only commit after 4e1a601 to change square-199.txt and square-263.txt; its 28 certificate files have the SHA-256 digests the issue lists."
+      ]
+    }
+  ]
+}
