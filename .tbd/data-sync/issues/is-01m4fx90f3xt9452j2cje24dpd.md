@@ -5,7 +5,7 @@ title: Publish the exact-side collection as a web-only report
 kind: task
 status: in_progress
 priority: 1
-version: 22
+version: 23
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex@spud10.local
 labels: []
@@ -14,12 +14,49 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T08:43:03.009Z
-updated_at: 2026-10-10T10:25:20.880Z
+updated_at: 2026-10-10T10:42:04.719Z
 started_at: 2026-10-09T08:43:05.688Z
 ---
 Publish the exact-side collection as a clean HTML report on Papers, without report PDF generation. Preserve the complete canonical corpus: 324 current cases, 214 history rows, 560 coefficient vectors and 6,378 integer strings. Publish all 324 current records, including 321 exact current sides, plus 28 source occurrences (18 unreconciled, seven outside the frontier and three invalid), totaling 352 records/vectors and 2,128 coefficient strings. Omit 186 superseded history rows and 22 redundant current notes only from publication. Keep all 673 n=83 coefficients, scoped assurance, source custody, responsive tables, lazy coefficient downloads and scientific PDFs. Capture actual amended-head validation on PR 435 and this bead; pending certificates remain V0/C0 until separate review/adoption. Numeric gaps, contact/driver work and geometry/Lean remain owned separately. No PR landing or mathematical assurance upgrade belongs to this slice.
 
 ## Notes
+
+# Qualification checkpoint at published 11c63 / 34e191, 2026-10-10
+
+All current-head automatic Packing, Pages and merge-base checks passed on both PRs.
+Both macOS portability checks passed.
+Fresh full runs remain in progress: parent38044596979 (8/11 prerequisites passed) and
+child38044600780 (9/11 passed), with no hosted failures observed.
+Their final aggregates and complete gh pr checks --watch summaries remain required.
+
+Child34e191’s one completed local push is a scoped negative: **68/69 checks passed**,
+all68 edit checks passed, and reachable tests hit the unchanged900-second ceiling
+(step901.028s / gate1136.288s / exit1). Selection was521of744 testfiles; actual
+progress2457PASS /1SKIP /0FAIL /1unfinished, ending in
+`test_check_n17_one_round_owned_domain_propagation.py::test_custody_tamper_refuses[extra_role]`.
+No traceback or test-failure finding was emitted; partial progress supplies no reachable
+PASS. Type floor passed in561.239s with zero errors/warnings/notes; URL compatibility
+passed in51.903s. The maintained conservative allocation reported another gate’s load
+marker, poolworkers3 and ordinarypytestworkers1/PACK_JOBS1. That is an observed
+allocation, not a demonstrated cause.
+No retry, worker override or limit change occurred.
+The owned process check was empty after exit.
+
+The native receipt is
+`/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-09/child-push-34e191f2-final-receipt.json`.
+The parent11c63 broad type timeout and same-head isolated428.620s pass remain separate
+receipts; neither local broad run is called green.
+All mathematical register, source preservation, final-head native-cap, HTML
+reconstruction and eight responsive-view checks retain their individual PASS scope
+below. Both PR bodies passed preflight and were updated with this local outcome.
+
+Next: finish final hosted watch/readbacks and capture its actual verdict, then leave
+PR403/435 open for the requested final review.
+Pending adoption owners and numeric gaps remain exactly as recorded below.
+This checkpoint preserves all older notes verbatim; statements there about pending local
+gates are dated prior states.
+
+## Published state and dated prior qualification
 
 # Published polynomial refresh, 2026-10-10
 
