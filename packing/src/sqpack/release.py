@@ -510,7 +510,7 @@ PACKING_METHODS_HISTORY = (
             "Add the confirmed October 8 intake: 32 selected upper-bound improvements, "
             "Couzo's disclosed refinement workflow, Xu's radical certificate, and "
             "refiner calibration and branch-selection examples, with five attributed "
-            "packing illustrations. Include Daniel’s replayed October 9 record-hunt "
+            "packing illustrations. Include Daniel's replayed October 9 record-hunt "
             "certificates, pending independent review and standing-bound adoption."
         ),
     ),
