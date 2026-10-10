@@ -5,7 +5,7 @@ title: Publish the exact-side collection as a web-only report
 kind: task
 status: in_progress
 priority: 1
-version: 27
+version: 28
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex@spud10.local
 labels: []
@@ -14,129 +14,156 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T08:43:03.009Z
-updated_at: 2026-10-10T19:41:59.204Z
+updated_at: 2026-10-10T20:08:30.127Z
 started_at: 2026-10-09T08:43:05.688Z
 ---
 Publish the exact-side collection as a clean HTML report on Papers, without report PDF generation. Preserve the complete canonical corpus: 324 current cases, 214 history rows, 560 coefficient vectors and 6,378 integer strings. Publish all 324 current records, including 321 exact current sides, plus 28 source occurrences (18 unreconciled, seven outside the frontier and three invalid), totaling 352 records/vectors and 2,128 coefficient strings. Omit 186 superseded history rows and 22 redundant current notes only from publication. Keep all 673 n=83 coefficients, scoped assurance, source custody, responsive tables, lazy coefficient downloads and scientific PDFs. Capture actual amended-head validation on PR 435 and this bead; pending certificates remain V0/C0 until separate review/adoption. Numeric gaps, contact/driver work and geometry/Lean remain owned separately. No PR landing or mathematical assurance upgrade belongs to this slice.
 
 ## Notes
 
-# Polynomial refresh checkpoint at 2026-10-10T19:41:52.077183+00:00
+# Polynomial refresh checkpoint at 2026-10-10T20:07:58.401092+00:00
 
-For think-jygq/wuol/ja78/z3qh/okxn/wiu3: preserve the existing
-`polynomial-refresh-prior-notes` marker and all later history.
+This slice began at 2026-10-10T17:15:28Z and remains ongoing after 172.5 minutes of
+elapsed wall. The previous qualified slice used 141.3 minutes separately.
+No solver, contact, geometry/Lean, adoption or optimality campaign ran.
 
-Stack 447 remains main → [PR 403](https://github.com/jlevy/squares/pull/403) →
+Stack 447 is main → [PR 403](https://github.com/jlevy/squares/pull/403) →
 [PR 435](https://github.com/jlevy/squares/pull/435), both unmerged.
-Main: `af17208c02b08f343199ac102401d40278cf0dfc` (PR 474). Clean parent:
+Main is `af17208c02b08f343199ac102401d40278cf0dfc` (PR 474). Published parent is
 `60cf9e1db95264e8bef165839c7e90a9954b5799`, source
-`65d8120f1615d2dda01ab20136998795f3ee6c99`; child:
+`65d8120f1615d2dda01ab20136998795f3ee6c99`; published child is
 `709cf926aa8bc701ad54961e05eea8925b7090f7`, source
-`d512ed1035fd66f296f95536a8a267456fadc237`. The
-[new Git bridge](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/independent-final-readiness-cleanhead-bridge-709cf.json)
-confirms reviewed code/pins; execution and CI keep their dated scope.
+`d512ed1035fd66f296f95536a8a267456fadc237`. Official
+`gh stack submit --auto --remote origin` exited 0; PR/branch equality, expected bases
+and remote stack 447 were read back.
+The child has a working repair for two actual CI findings; that patch is not yet
+committed or qualified.
 
-Catalogue: 324 current, 321 exact, 77 proved, three numeric (29/55/71); canonical data
-retain all 538 records/source occurrences.
-HTML-only publication retains 352 records; 186 superseded histories and 22 redundant
-notes are public-only omissions.
-Coefficients, source custody and Markdown stay complete; no adoption, geometry or
-global-optimality claim was added.
-[Dated bridge](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/independent-final-isolation-cleanhead-bridge-81fff179f4.json).
+Catalogue: 324 current cases, 321 exact identities, 77 proved statuses and three numeric
+gaps at n=29/55/71. Canonical data retain 538 records/source occurrences.
+The web report retains 352 records (324 current + 28 source), omitting 186 superseded
+rows and 22 redundant notes publicly.
+Full coefficients, source custody, Markdown and no-JavaScript access remain.
+Report-PDF production is retired; acquired scientific originals remain separately
+hosted. No new adoption or global-optimality claim was added.
+All 324 upstream rigidity records, Ahmed attribution, n=211 display orientation,
+triangle atlas layout and dated aliases survive.
 
-Dated child `81fff` resource bytes: 295,423 browser / 3,100,058 complete-control =
-9.5296%, within the unchanged 10% ceiling.
-Limits remain 2,000,000 bytes for every physical HTML file and 4,096 bytes for
-executable inline scripts.
-[Metric receipt](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/child-final-web-metrics-81fff.json).
+At clean 60cf/709cf, native source/audit commands passed: parent 200,103,308 bytes
+against 209,715,200, headroom 9,611,892; child 202,254,867, headroom 7,460,333. Unique
+paths: 7,058/7,107; all eight protected replay leaves (301,894 bytes) remain.
+This audits selected live bytes, without Git/live equality or exhaustive transitive
+completeness. Parent also fits the historical 192 MiB cap.
+The current producer cap is the accepted upstream 200 MiB; older inventories keep their
+historical criteria.
+`final-60cf-709cf-native-results.json` retains commands and clean-head readbacks.
 
-Dated parent `5511` / child `81fff` native totals: 200,101,252 / 202,252,811 bytes
-against 209,715,200 bytes (200 MiB). Headroom: 9,613,948 / 7,462,389 bytes; 7,058 /
-7,107 unique paths, all eight protected replay leaves.
-Dated growth: 1,540 bytes in the two isolation files.
-Audit covers live bytes/selection, without Git/live equality.
-[Native receipt](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/parent-child-final-5511-81fff-native-results.json).
-New-head inventories remain pending.
+At clean 709cf, report render/drift and nine script declarations passed.
+Browser automatic resources are 295,423 bytes across eight paths; complete control
+3,100,058 across 36: 9.5296%, within the unchanged explicit 10% criterion.
+Every physical HTML file is capped at 2,000,000 bytes; every executable inline script at
+4,096 bytes before classification.
+The earlier eight layout views remain dated at clean 5abc, with reviewed input equality.
+The existing preview serves the published 709cf HTML/Markdown; HTTP 200 and byte
+equality were checked.
+Receipts: `child-final-render-709cf.json`, `child-final-web-metrics-709cf.json`,
+`preview-update-published-709cf.json`.
 
-Private-worker isolation: the repair selects the private packing root despite a foreign
-checkout override, preserving the caller.
-Six controls passed in 10.28 seconds; review accepted the patch.
-[Isolation acceptance](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/independent-parent-worker-isolation-review-dirty0f60f9a51a.json).
-Old parent `0f60` 7F/41E remain unclassified; host causality is unestablished.
-Obsolete child `5abc`: cancelled, exit 130, incomplete.
+Parent 60cf local push since 5511: exit 1, 66/67 steps passed; the actual 258/739-file
+reachable selection timed out at 900 seconds (step 901.0136; gate 1,079.7262;
+coordinator 1,090.807 seconds).
+Final unique telemetry: 8,440 passed, 50 skipped, zero failed/errors, one started
+unfinished site-preview test.
+Nine workers finished; gw0 did not; no JUnit.
+Both readiness-delay and both EPERM controls passed under the actual ten-worker pool.
+The n17 deterministic-core node was absent, so no current selected-run verdict is
+credited. `parent-push-gate-60cf-final-derived-receipt.json` and exact census retain the
+negative.
 
-Dated parent `5511` gate: exit 1 at 19:03:34 UTC, 66/67 steps passed; 518/739-file
-reachable selection timed out at 900 seconds (901.029-second step; 1,304.483-second
-wall). Telemetry: 6,244 passed, two aggregate failed, one skipped; ten started
-unfinished. Failed IDs:
-`tests/test_fixed_core_packet_calibration.py::test_timeout_kills_and_reaps_a_termination_resistant_process_group`
-and
-`tests/test_audit_n17_certificate_dependencies.py::test_fresh_cli_processes_preserve_deterministic_core`.
-[Parent final ID census](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/parent-5511-final-reachable-telemetry.json).
-No JUnit/traceback, failure-phase classification or never-started roster survives.
+Child 709cf local push since 81fff was interrupted for the confirmed CI repair: actual
+SIGINT at 20:01:27 UTC, overall exit 130. Step artifacts: 68 passed plus cancelled
+reachable, actual 530/749-file selection.
+Final telemetry: 1,342 passed, one skipped, zero failed/errors, one started unfinished
+fresh-register-build test.
+No complete gate verdict or broad pass is inferred.
+Receipt: `child-push-gate-709cf-interrupted-derived-receipt.json`.
 
-Dated child `81fff` gate: exit 1, 68/69 steps passed; 529/749-file reachable selection
-timed out at 900 seconds.
-Recorded finishes: 2,748 passed, one skipped, zero failed/errors; one started
-unfinished:
-`tests/test_check_n17_widened_annulus_patch.py::test_tampered_patch_refused[root]`.
-[Child final gate](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/child-push-gate-81fff-final-derived-receipt.json),
-[complete node census](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/child-push-gate-81fff-final-node-census.json).
+Automatic parent Packing and Pages passed at 60cf:
+[runs 38081729561](https://github.com/jlevy/squares/actions/runs/38081729561) and
+[38081729567](https://github.com/jlevy/squares/actions/runs/38081729567), actual watch
+exits 0. Full parent
+[38081768200](https://github.com/jlevy/squares/actions/runs/38081768200) is still
+running; final ALL PR-check watch remains pending.
+Automatic child
+[Packing 38081731048](https://github.com/jlevy/squares/actions/runs/38081731048) and
+[Pages 38081731148](https://github.com/jlevy/squares/actions/runs/38081731148) failed,
+actual watch exits 1. Child full
+[38081771925](https://github.com/jlevy/squares/actions/runs/38081771925) is still
+running at the old published head; its evidence will not qualify a replacement head.
 
-Original termination fixture plus 0.3-second handler delay: controlled RED, one failure,
-exit -15/group reaped true.
-[RED signal receipt](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/parent5511-delayed-handler-red-result.json).
-Reviewed readiness repair: both 0.0/0.3-second cases plus two EPERM controls passed
-(four in 1.29 seconds), both real exits -9/reaped true.
-Ruff/format passed; BasedPyright had zero findings.
-Deadline/grace stayed 0.2/0.05 seconds.
-[Dirty-5511 GREEN](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/parent-readiness-style-20261010T192638Z-results.json).
-Exact n17 node: one serial PASS in 9.37 seconds; inventory limits 15/16 seconds and
-subprocess timeout 20 seconds unchanged.
-Prior cause remains unestablished.
-[n17 serial receipt](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/parent5511-n17-exact-control.json).
+The two actual child issues are being fixed in the existing C1 publication/qualification
+scope (think-z3qh/okxn/wiu3):
 
-Pending coordinator fields:
+- Pages overview reported seven old-address forwarders with the same 4,699-byte inline
+  `forward.js` (7,510/7,517 checks passed).
+  The patch links the existing named shared asset synchronously at the same head
+  position, uses depth-correct paths and publishes assets before pages.
+  It does not widen or waive either original HTML/script limit.
+- Suite D reported the child-only snapshot test’s stale 192 MiB literal (one failed,
+  3,218 passed, five skipped in 273.05 seconds).
+  Only that expectation changes to the upstream producer’s existing strict 200 MiB cap;
+  four image exclusions, all 16 scientific inputs and the actual-byte/retention
+  assertions remain.
 
-- Parent `60cf` incremental push since `5511`: running — command remains in progress;
-  all 66 edit steps passed; no final reachable verdict yet.
-- Child `709cf` incremental/push: pending — not yet run at this candidate; dated81fff
-  timeout retained above.
-- New-head native inventories: clean60cf/709cf source/audit commands all exit0.
-  Parent200,103,308B/cap209,715,200/headroom9,611,892/7,058paths;
-  child202,254,867B/headroom7,460,333/7,107paths. Same8protectedleaves301,894B;
-  rostersunchanged;+2,056B reviewedfixture.
-  `final-60cf-709cf-native-results.json`.
-- Actual full-head hosted CI: Pending publication.
-  Neither replacement candidate is pushed or dispatched yet; old11c63/34e191 remote-head
-  CI is dated.
-- Final review/issue watch: 19:26:38UTC: no new/edited reviews, inline comments, issue
-  comments or referred issue changes; `review-resweep-20261010T192638Z-summary.json`.
-- Posted disposition replies: 14 complete reply drafts independently audited, not
-  posted; no new marked dispositions on either PR yet.
-- Session end/wall: Ongoing as of 2026-10-10T19:41:52.077183+00:00; elapsed 146.4min for
-  this slice; prior141.3min retained separately.
+Actual job URLs:
+[Pages overview](https://github.com/jlevy/squares/actions/runs/38081731148/job/114299958946),
+[Suite D](https://github.com/jlevy/squares/actions/runs/38081731048/job/114299862274).
+Controlled seven-forwarder RED failed before the producer repair; independent six-file
+source review found no material issue.
+Focused GREEN/style and immutable-head qualification remain pending.
+Receipt: `independent-child-forwarder-cap-review-dirty709cf.json`.
 
-Numeric owners remain think-je8y/phh8/1blg. Daniel T-131 adoption/atlas remains
-think-kkj2, import/reply think-iyij; Couzo T-128/T-130 replay/adoption remains
-think-lhtz, custody think-0mlq. Acquisition does not complete adoption.
-W7 stays unopened: think-s6np driver → independent n=11 octic control → current RyXu
-n=102 certificate/contact system and confirmed seed → one preregistered bounded
-W6/think-ohhz execution, input owner think-eu89.
+Fresh review sweep at 19:58:24–19:58:28 UTC found no new or edited content: nine parent
+and five child reviews, seven PR comments, zero inline comments and 47 comments across
+six referring issues.
+All 14 complete disposition drafts retain original/carried finding IDs, but remain
+unposted until final qualification.
+Scientific #405/#419 remain open.
 
-Close only scoped completed engineering after actual current-head CI. Unmerged
-recovery/catalogue/publication stays in progress; research/adoption dependencies stay
-open. Receipts are in
-[E](/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/);
-preserve prior checkpoints after their marker.
+The earlier 0f60 7F/41E cause is unclassified.
+Earlier 5511 retained two failed nodes; its readiness race was reproduced and repaired,
+with 4 controlled passes and independent review.
+The exact n17 serial rerun passed at unchanged limits; its earlier broad-run cause
+remains unestablished.
+Earlier 81fff’s 900-second timeout and all earlier negative receipts retain their
+original scope; none becomes a broad local pass.
+Three independently reconstructible completed 5511 scratch leaves were deleted after
+unique mutation/bytecode bytes and all known failed inputs were preserved, plus
+immediate lsof recheck.
+Observed free space rose from about 560 MiB to 1 GiB; this is not an exclusive
+physical-reclaim claim.
+Source, fixture parents, other campaigns and unique evidence remain.
+
+Numeric owners: think-je8y/phh8/1blg. Daniel T-131 adoption/atlas: think-kkj2;
+import/reply: think-iyij.
+Couzo T-128/T-130 replay/adoption/atlas: think-lhtz; custody: think-0mlq. Reported
+n=106/152/177 geometry/Lean: #419/think-8sm2. Optional n83 ordinal count: think-chsu;
+Rehwaldt68 binding: think-nv5o; ideal68/105/292: think-056g/gl59/w622. Acquisition does
+not complete adoption.
+Selected next entry remains W7/think-s6np active-contact driver → independent n11 octic
+control → current RyXu102 certificate/contact system and confirmed seed → one bounded
+preregistered W6/think-ohhz execution, input owner think-eu89.
+
+All six existing delegates and prior history are preserved.
+No bead closes at this pending qualification checkpoint.
+Recovery/catalogue/publication remain in progress while unmerged; scientific
+dependencies remain open.
+Durable evidence is under
+`/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/`.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
-
-Candidate publication remains pending; official stack tracking is current and both
-source worktrees are clean.
-The six existing delegates are preserved; this checkpoint updates notes only.
 
 <!-- polynomial-refresh-prior-notes:2026-10-10T1715 -->
 
