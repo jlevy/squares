@@ -5,7 +5,7 @@ title: Review and repair the website development and CI critical path
 kind: feature
 status: in_progress
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
 delegate: codex@spud10
 labels:
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T17:33:43.407Z
-updated_at: 2026-10-10T18:38:31.485Z
+updated_at: 2026-10-10T21:37:02.760Z
 started_at: 2026-10-10T17:35:10.785Z
 ---
 User requests a systematic review of why routine website iteration consumed hours, followed by development-process or CI fixes. Delegate independent analysis of workflow/CI architecture and reachable-test over-selection; coordinator rolls up evidence and implements the smallest justified changes. Capture command wall, repeated work, scope/coverage and failure classification; preserve scientific contracts and assert equivalence before performance claims. Current website PR462 remains separately tracked under think-o2jd; do not close on a report alone.
@@ -46,3 +46,7 @@ Publication and validation receipt, 2026-10-10: approved process batch is publis
 Local validation is incomplete, not an aggregate pass. The canonical pre-push run took 844.48 seconds: 64 prerequisites passed and the sole failed prerequisite was the missing document-map entry. That registry repair then passed check_documentation across 1,992 documents. Resumed reachable behavioral validation timed out at 901.06 seconds after reporting 1,883 passes, 57 failures/errors and 16 skips; it did not produce completed JUnit or final tracebacks. A host snapshot showed load average 184.66 against 10 available CPUs. This is evidence of heavy contention, not a determination that the reported failures are harmless or that the gate passed.
 
 Independent focused evidence remains 118 policy/CLI tests passed, 193 deselected in 22.23 seconds (pr-cost-policy-final2.log), with the previously recorded clean scoped floors and retained timeout/enforcement controls. The PR description now discloses the failed/incomplete broad local validation. All checks on this exact published head remain pending; no aggregate local or hosted success is claimed. Keep think-o2jd and think-ht59 open. Full checkpoint think-xio5, the website epic and scoping follow-up think-9k61 remain open; this bookkeeping update does not close or alter them.
+
+Final exact-head receipt, 2026-10-10: draft PR462 head 5b04d007db69cb688db7bad04a30c1617c935268 completed with 23 successful checks, seven failures, 27 skips and zero pending. Five stale source contracts and a stale runtime tab-font expectation were found after canonical Results/shared-controller/90%-label changes; the focused corrections passed 10 tests in 211.73s, with scoped lint and strict production-probe types clean. The frontend recorded 409 passes, two failures and six skips in 285.07s, plus 56 floor-liveness passes in 29.11s; tier wall was 285.72s. Its 165s completed-run cost finding remained advisory. Serial native HTTP scenarios were not reached after the functional failure; no aggregate frontend pass is claimed.
+
+The overview separately failed Atlas 1280/light startup at 302ms against the unchanged 300ms guard. The task started at97.2ms and was an initial native frame with scripts=[]; it finished before Atlas JavaScript began at412.8ms (35.8ms execution,30.1ms forced layout). This excludes image preparation/preload as the source of that observed task and does not establish a performance optimization. Separately, the retained startup trace found a real post-placement style flush (3064 then848 elements) from reading FontFaceSet.ready after mount writes; the coordinator captured that promise before mount without changing preparation behavior. The unchanged restyle and desktop-light native HTTP/no-JS controls passed two focused tests in101.69s. The failed302ms receipt remains authoritative; the corrected candidate still requires new exact-head CI, with every300ms/45s/deadline contract unchanged. Durable final logs, exact-head JSON and extracted report are under /Users/levy/.codex/visualizations/2026/10/08/01a11dc7-6f9d-7060-be5c-4cff21839702/results-rename/ci-5b04d007/. Keep this process owner, think-9k61 and full checkpoint think-xio5 open; preserve the earlier incomplete local receipt.
