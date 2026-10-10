@@ -736,7 +736,8 @@ issues:
           both quarter-power routes, eight cube-root ranges, geometric ceilings and
           four asymptotic floors. The consequences remain conditional on the reviewed
           geometric premises and the independently tracked per-box obligation.
-          Final integration and merge-readiness gates remain pending.
+          The intake itself merged in PRs #439 and #441 on 9 October; the review's
+          own verdict stays queued under think-6ptr.
     beads: [think-6ptr]
     answer_bead: think-u1kq
     replies: []
@@ -3323,6 +3324,7 @@ issues:
     beads:
     - think-edo8
     - think-88r0
+    - think-fvz4
     answer_bead: think-edo8
     replies: []
     close_when: The supported import and disposition are on main and the owner posts the resulting state;
@@ -3400,10 +3402,14 @@ issues:
     asks:
     - what: Finish the separately reviewed confirming records, final exact-head CI and main publication
         before the final registration reply.
-      state: queued
+      state: done
       bead: think-q3pd
-      note: Complete51-job native and actual private-worker receipts already exist; CI and source-specific
-        confirming-record integration remain separate from author reports.
+      note: >-
+        Complete51-job native and actual private-worker receipts already exist; CI and source-specific
+        confirming-record integration remain separate from author reports. Done on 2026-10-10 by the
+        record on main, where #448 imported and #459 confirmed T-127 at V3/C3, CI passed on main at
+        657cc486, and the Pages deployment 6974749559 of that commit passed its published-site check
+        (3892 of 3892) with the T-127 row matching the register.
     beads:
     - think-l360
     - think-q3pd
@@ -3522,6 +3528,7 @@ issues:
       queued: false
     beads:
     - think-iyij
+    - think-fvz4
     answer_bead: think-iyij
     replies: []
     close_when: T-131 and T-128 are confirmed on main after independent review and adoption, and the
