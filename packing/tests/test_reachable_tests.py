@@ -545,7 +545,11 @@ def test_pool_split_executes_the_exact_selected_tests_once_each(
     assert (tmp_path / "pool").read_text(encoding="utf-8") == "2"
 
 
-def test_whole_atlas_pool_heavy_collection_is_one_canonical_node() -> None:
+def test_whole_atlas_pool_heavy_collection_is_one_canonical_node(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    # The probe's node-list format must not inherit the outer gate's verbose options.
+    monkeypatch.delenv("PYTEST_ADDOPTS", raising=False)
     command = (
         sys.executable,
         "-m",

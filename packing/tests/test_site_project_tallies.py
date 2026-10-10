@@ -323,7 +323,7 @@ def browser() -> Iterator[Any]:
 
 @pytest.fixture(scope="module")
 def site(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    """The overview and the results page side by side, so a link between them works."""
+    """The project catalogue and results page, so a tally link between them works."""
     root = tmp_path_factory.mktemp("site")
     site_renders.write(root, "index.html", render_overview.RESULTS_PAGE)
     return root
@@ -331,7 +331,7 @@ def site(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 def _follow(browser: Any, site: Path, overview: overview_data.Overview, link: str) -> Any:
     """The results page as a reader reaches it by pressing `link`, a tally's link on the
-    overview, on the register's reference date."""
+    project catalogue, on the register's reference date."""
     opened = browser.new_page(viewport={"width": 1280, "height": 900})
     noon = datetime.combine(overview_sections.reference_date(overview), time(12))
     opened.clock.set_fixed_time(noon)

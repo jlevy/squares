@@ -68,6 +68,8 @@ READER_TIER = (
     REPO / "README.md",
     REPO / "SYNOPSIS.md",
     ROOT / "devtools" / "templates" / "overview-article.md",
+    ROOT / "devtools" / "templates" / "about-article.md",
+    ROOT / "devtools" / "templates" / "atlas-article.md",
     ROOT / "devtools" / "templates" / "all-results-article.md",
     ROOT / "devtools" / "templates" / "frontier-article.md",
     ROOT / "devtools" / "templates" / "papers-article.md",

@@ -110,7 +110,7 @@ def test_prepared_record_math_matches_the_surrounding_sans_face(
             "Prepared math matches each surrounding text face.",
             "index.html",
         ),
-        current="frontier",
+        current="atlas",
     )
     render_overview.write_site(tmp_path, [page])
     site_assets.write_assets(tmp_path, site_assets.shared().assets.files())
@@ -614,10 +614,10 @@ def test_native_frontier_readability_requires_visible_nonempty_math(
 @pytest.fixture(scope="module")
 def frontier_native_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     root = tmp_path_factory.mktemp("frontier-native-layout")
-    site_renders.write(root, "frontier.html")
+    site_renders.write(root, "atlas.html")
     server = preview_site.serve(root, 0, as_pages=True)
     try:
-        yield f"http://127.0.0.1:{server.server_port}/frontier.html"
+        yield f"http://127.0.0.1:{server.server_port}/atlas.html"
     finally:
         server.shutdown()
         server.server_close()
@@ -1019,7 +1019,7 @@ def test_frontier_native_radical_paints_hook_and_bar_and_rejects_text_font(
                     )
                     route.fulfill(response=response, body=damaged)
 
-                context.route("**/frontier.html", text_font)
+                context.route("**/atlas.html", text_font)
             page = context.new_page()
             page.emulate_media(media=media)
             page.goto(frontier_native_site, wait_until="load")

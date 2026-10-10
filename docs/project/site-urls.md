@@ -9,11 +9,13 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | Physical path | Canonical path | Kind | Producer | First published | Last modified | Status / target |
 | --- | --- | --- | --- | --- | --- | --- |
 | 404.html | 404.html | site-file | overview | 2026-10-07 | 2026-10-07 | live |
+| about.html | about.html | page | overview | 2026-10-08 | 2026-10-08 | live |
 | all-results.html | all-results.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | apple-touch-icon.png | apple-touch-icon.png | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | ascent-n1-100-poster.png | ascent-n1-100-poster.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
 | ascent-n1-324-poster.png | ascent-n1-324-poster.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
 | assets/{css,js,fonts}/*.{hash}.{ext} | — | asset-file | shared | 2026-09-29 | 2026-10-02 | live |
+| atlas.html | atlas.html | page | overview | 2026-10-08 | 2026-10-08 | live |
 | atlas/house/n-1.svg | atlas/house/n-1.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/house/n-10.svg | atlas/house/n-10.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/house/n-100.svg | atlas/house/n-100.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
@@ -407,7 +409,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | atlas/regularized/n-86.svg | atlas/regularized/n-86.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/regularized/n-88.svg | atlas/regularized/n-88.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/trump11-overview.svg | atlas/trump11-overview.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
-| cases.html | cases/ | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → cases/index.html |
+| cases.html | atlas.html | forwarder | overview | 2026-09-29 | 2026-10-09 | forwarded → atlas.html |
 | cases/1.html | cases/1.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/10.html | cases/10.html | record | overview | 2026-10-03 | 2026-10-03 | live |
 | cases/100.html | cases/100.html | record | overview | 2026-10-03 | 2026-10-07 | live |
@@ -732,7 +734,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/97.html | cases/97.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/98.html | cases/98.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/99.html | cases/99.html | record | overview | 2026-10-03 | 2026-10-07 | live |
-| cases/index.html | cases/ | page | overview | 2026-09-29 | 2026-10-02 | live |
+| cases/index.html | atlas.html | forwarder | overview | 2026-09-29 | 2026-10-09 | forwarded → atlas.html |
 | conventions.html | conventions.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | defects.html | https://github.com/jlevy/squares/blob/main/defects.md | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → https://github.com/jlevy/squares/blob/main/defects.md |
 | development.html | development.html | page | overview | 2026-09-29 | 2026-10-02 | live |
@@ -740,7 +742,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | explainer.html | papers/n11-lower-bounds-explainer.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → papers/n11-lower-bounds-explainer.html |
 | favicon-48.png | favicon-48.png | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | favicon.svg | favicon.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
-| frontier.html | frontier.html | page | overview | 2026-09-29 | 2026-10-02 | live |
+| frontier.html | atlas.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → atlas.html |
 | index.html | / | page | overview | 2026-09-29 | 2026-10-02 | live |
 | known-best-1-100-card.png | known-best-1-100-card.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
 | known-best-1-100.pdf | known-best-1-100.pdf | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
@@ -901,7 +903,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | results.html | all-results.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → all-results.html |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-07 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-02 | live |
-| status.html | frontier.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → frontier.html |
+| status.html | atlas.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → atlas.html |
 | synopsis.html | synopsis.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | synopsis/experiments-conducted.html | synopsis/experiments-conducted.html | page | overview | 2026-10-07 | 2026-10-07 | live |
 | synopsis/handoff-record.html | synopsis/handoff-record.html | page | overview | 2026-10-07 | 2026-10-07 | live |
@@ -945,10 +947,11 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | Physical path | Bytes | Reason |
 | --- | ---: | --- |
 | all-results.html | 800,000 | The complete registered-result table with prepared math measures 717,328 bytes. |
+| atlas.html | 1,000,000 | Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete Frontier Survey and 174,245 for graphics and the shared shell. |
 | cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes. |
 | cases/17.html | 500,000 | Complete n=17 proof/certificate record and prepared bounds measure 443,761 bytes. |
 | cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 326,548 bytes. |
-| frontier.html | 1,750,000 | All 324 case rows and prepared exact bounds measure 1,536,618 bytes. |
+| index.html | 1,300,000 | The native 324-case Atlas payload, six-row preview and shared reading and documentation cards measure 1,172,462 bytes. Three-run loopback load medians are 274 ms at 1280 px and 261 ms at 390 px; retained staged expansion checks cover the embedded preview. The page-specific ceiling remains below the global two-megabyte limit. |
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |
 | papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 823,322 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
 | result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 711,115 bytes. |

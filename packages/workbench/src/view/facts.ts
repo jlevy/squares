@@ -184,6 +184,7 @@ export function createFactsView(document: Document, DATA: Corpus) {
   }
   function badgeItem(cls: string, glyph: string, style: string, label: string) {
     const item = text("span", cls);
+    item.title = label;
     item.appendChild(badgeSvg(glyph, style));
     item.appendChild(text("span", "label", label));
     return item;

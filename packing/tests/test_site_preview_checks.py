@@ -532,13 +532,13 @@ def test_a_link_to_a_page_that_moved_is_reported(tmp_path: Path) -> None:
     `render_overview.MOVED_PAGES` is named with the link, from the root or from a
     directory under it. The forwarders themselves and an address off the site are not."""
     moved = [old for old, _ in render_overview.MOVED_PAGES]
-    assert moved[:3] == ["results.html", "status.html", "defects.html"]
+    assert moved[:4] == ["results.html", "status.html", "frontier.html", "defects.html"]
     (tmp_path / "result").mkdir()
     for old in moved:
         (tmp_path / old).parent.mkdir(exist_ok=True)
         (tmp_path / old).write_text('<a href="all-results.html">moved</a>', encoding="utf-8")
     (tmp_path / "all-results.html").write_text(
-        '<a href="frontier.html#n-11">a row</a>'
+        '<a href="atlas.html#n-11">a row</a>'
         '<a href="https://example.org/results.html">elsewhere</a>',
         encoding="utf-8",
     )

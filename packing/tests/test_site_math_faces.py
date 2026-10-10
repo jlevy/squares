@@ -10,6 +10,7 @@ The shared browser launcher fails when an installed-browser gate cannot launch i
 from __future__ import annotations
 
 import html
+import os
 import re
 import socket
 from collections.abc import Iterator, Sequence
@@ -109,16 +110,18 @@ def results(browser: Any, root: Path) -> Walk:
 
 @pytest.fixture(scope="module")
 def frontier_atlas(browser: Any, root: Path) -> Walk:
-    path = site_renders.write(root, "frontier.html")["frontier.html"]
+    path = site_renders.write(root, "atlas.html")["atlas.html"]
     return walk(browser, path.as_uri(), presses=(), whole=False)
 
 
 @pytest.fixture(scope="module")
 def served(root: Path) -> Iterator[str]:
-    """The real frontier, index and two complete records, served for fetch overlays."""
+    """The Atlas and two complete records, served for fetch overlays."""
+    if live := os.environ.get("SQPACK_SITE_PREVIEW_URL"):
+        yield live.rstrip("/") + "/"
+        return
     files = [
-        site_renders.page("frontier.html"),
-        site_renders.page(render_case_pages.CASES_PAGE),
+        site_renders.page("atlas.html"),
         *(
             render_overview.Page(
                 render_case_pages.case_url(n),
@@ -159,7 +162,7 @@ def case_records(browser: Any, served: str) -> dict[int, Walk]:
 def frontier_popover(browser: Any, served: str) -> Walk:
     """The frontier page with case 11's row pressed: its record in the case popover."""
     return walk(
-        browser, f"{served}frontier.html", presses=("#n-11 td.site-thumb img",), whole=False
+        browser, f"{served}atlas.html", presses=("#n-11 td.site-thumb img",), whole=False
     )
 
 
@@ -205,7 +208,9 @@ def test_the_frontier_table_sets_sans_math(
     assert not [key for key in rows if key[0] == "subtitle"]
 
 
-def test_the_case_popover_sets_its_records_math_sans(frontier_popover: Walk) -> None:
+def test_the_case_popover_sets_its_count_serif_and_its_panels_sans(
+    frontier_popover: Walk,
+) -> None:
     """A case's record in the frontier's case popover is set as on its own page: its
     head, panels and visual summary are sans text with sans math, the case file's prose
     serif with serif math, and nothing is set wrongly. In the popover the probe counts
@@ -214,9 +219,16 @@ def test_the_case_popover_sets_its_records_math_sans(frontier_popover: Walk) -> 
     assert wrong == []
     assert rows[("popover", SANS_TEXT, SANS_MATH)]["count"] > 0
     assert rows[("visual summary", SANS_TEXT, SANS_MATH)]["count"] > 0
+    count = rows[("popover", SANS_TEXT, SERIF_MATH)]
+    assert count["count"] == count["alone"] == 1
     for surface, text, face in rows:
         if surface in {"popover", "visual summary"}:
-            assert (text == SANS_TEXT) == (face == SANS_MATH), (surface, text, face)
+            assert text == SANS_TEXT, (surface, text, face)
+            assert face == SANS_MATH or (surface == "popover" and face == SERIF_MATH), (
+                surface,
+                text,
+                face,
+            )
 
 
 @pytest.mark.parametrize("n", CASES)
@@ -225,7 +237,15 @@ def test_a_case_records_panels_set_sans_math(case_records: dict[int, Walk], n: i
     assert wrong == []
     for surface in ("case head", "case bounds", "visual summary"):
         assert rows[(surface, SANS_TEXT, SANS_MATH)]["count"] > 0, surface
-    assert not [key for key in rows if key[0].startswith("case") and key[2] != SANS_MATH]
+    count = rows[("case head", SANS_TEXT, SERIF_MATH)]
+    assert count["count"] == count["alone"] == 1
+    assert not [
+        key
+        for key in rows
+        if key[0].startswith("case")
+        and key[2] != SANS_MATH
+        and key != ("case head", SANS_TEXT, SERIF_MATH)
+    ]
 
 
 def test_the_walk_catches_serif_math_in_a_sans_headline(browser: Any, root: Path) -> None:
@@ -275,7 +295,7 @@ def test_frontier_native_math_wrong_face_is_reported(
     frontier_math_counts: tuple[int, int],
     tmp_path: Path,
 ) -> None:
-    path = site_renders.write(tmp_path, "frontier.html")["frontier.html"]
+    path = site_renders.write(tmp_path, "atlas.html")["atlas.html"]
     source = path.read_text()
     source = source.replace(
         "</head>",

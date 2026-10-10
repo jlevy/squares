@@ -306,23 +306,26 @@ void test("the first line of each row after the first opens it, and no other lin
   }
 });
 
-void test("the address names the triangle and says nothing for the grid", () => {
-  assert.equal(atlas.viewOf(""), "grid");
+void test("the address names Grid explicitly and defaults to Triangle", () => {
+  assert.equal(atlas.viewOf(""), "triangle");
   assert.equal(atlas.viewOf("?atlas=triangle"), "triangle");
   assert.equal(atlas.viewOf("?atlas=grid"), "grid");
-  assert.equal(atlas.viewOf("?atlas=pyramid"), "grid");
+  assert.equal(atlas.viewOf("?atlas=pyramid"), "triangle");
   assert.equal(atlas.viewOf("?s-min=4&atlas=triangle&age=180"), "triangle");
-  assert.equal(atlas.searchFor("", "triangle"), "?atlas=triangle");
-  assert.equal(atlas.searchFor("?atlas=triangle", "grid"), "");
-  assert.equal(atlas.searchFor("", "grid"), "");
+  assert.equal(atlas.searchFor("", "triangle"), "");
+  assert.equal(atlas.searchFor("?atlas=triangle", "grid"), "?atlas=grid");
+  assert.equal(atlas.searchFor("", "grid"), "?atlas=grid");
 });
 
 void test("writing the view keeps every other parameter, and round-trips", () => {
-  assert.equal(atlas.searchFor("?s-min=4&age=180", "triangle"), "?s-min=4&age=180&atlas=triangle");
-  assert.equal(atlas.searchFor("?s-min=4&atlas=triangle&age=180", "grid"), "?s-min=4&age=180");
+  assert.equal(atlas.searchFor("?s-min=4&age=180", "triangle"), "?s-min=4&age=180");
+  assert.equal(
+    atlas.searchFor("?s-min=4&atlas=triangle&age=180", "grid"),
+    "?s-min=4&atlas=grid&age=180",
+  );
   assert.equal(
     atlas.searchFor("?atlas=grid&project=evand-square-packing", "triangle"),
-    "?atlas=triangle&project=evand-square-packing",
+    "?project=evand-square-packing",
   );
   for (const search of ["", "?age=180", "?atlas=triangle", "?x=1&atlas=grid"]) {
     for (const view of /** @type {AtlasView[]} */ (["grid", "triangle"])) {
@@ -354,14 +357,14 @@ void test("the view and the size are two parameters that never overwrite each ot
   let search = "?age=180";
   search = atlas.searchFor(search, "triangle");
   search = atlas.searchForSize(search, "large");
-  assert.equal(search, "?age=180&atlas=triangle&size=large");
+  assert.equal(search, "?age=180&size=large");
   assert.equal(atlas.viewOf(search), "triangle");
   assert.equal(atlas.sizeOf(search), "large");
   search = atlas.searchFor(search, "grid");
-  assert.equal(search, "?age=180&size=large");
+  assert.equal(search, "?age=180&size=large&atlas=grid");
   assert.equal(atlas.sizeOf(search), "large");
   search = atlas.searchForSize(search, "medium");
-  assert.equal(search, "?age=180");
+  assert.equal(search, "?age=180&atlas=grid");
   assert.equal(atlas.viewOf(search), "grid");
 });
 

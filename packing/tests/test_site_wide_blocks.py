@@ -55,7 +55,7 @@ from devtools.preview_site import (
 from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
 from tests import site_renders
 
-PAGES = ("index.html", "all-results.html", "frontier.html", "visualize.html", "tutorial.html")
+PAGES = ("index.html", "all-results.html", "atlas.html", "visualize.html", "tutorial.html")
 WIDTHS = (*CLIP_WIDTHS, 390)
 #: The rule the wide track had: its room measured from the window, a rem a side.
 FROM_THE_WINDOW = ".site-page .site-wide { --site-wide-room: calc(100vw - 2rem) !important; }"
@@ -198,7 +198,8 @@ def test_tabs_over_the_rule_are_caught(
             page.close()
         assert len(problems) == 1, name
         assert problems[0].startswith("the section tabs start "), name
-        assert problems[0].endswith("which is on header"), name
+        owner = "header.site-headroom" if name == "visualize.html" else "header"
+        assert problems[0].endswith(f"which is on {owner}"), name
 
 
 def _header(browser: Any, path: Path, width: int, *, style: str = "") -> dict[str, Any]:
@@ -230,7 +231,7 @@ def test_the_bars_type_is_one_step_under_the_bodys(
     on one line on a desktop and a tablet and two on a phone, and no page wider than its
     window."""
     opened = {
-        "frontier.html": pages["frontier.html"],
+        "atlas.html": pages["atlas.html"],
         **{name: path for name, (path, _, _) in section_pages.items()},
     }
     seen: dict[str, set[tuple[float, float | None, float]]] = {name: set() for name in opened}
@@ -244,7 +245,7 @@ def test_the_bars_type_is_one_step_under_the_bodys(
             assert below <= sizes["link"] < body <= sizes["name"], where
             assert sizes["name_shown"] is (width == 1280), where
             assert (sizes["links_rows"], sizes["overflow"]) == (rows, 0), where
-            if name == "frontier.html":
+            if name == "atlas.html":
                 assert sizes["body"] == body, where
                 assert sizes["tab"] is None, where
             else:
@@ -299,7 +300,7 @@ def test_the_name_stands_on_the_links_baseline(
     current link's baseline is as far over the rule with the name beside it as without,
     and the current tab's as far over the foot of its strip at every width."""
     opened = {
-        "frontier.html": pages["frontier.html"],
+        "atlas.html": pages["atlas.html"],
         **{name: path for name, (path, _, _) in section_pages.items()},
     }
     over_rule: dict[int, set[float]] = {}
@@ -311,13 +312,13 @@ def test_the_name_stands_on_the_links_baseline(
             assert baseline_problems(found) == [], where
             lines = {link["top"] for link in found["links"]}
             assert len(lines) == rows, where
-            assert len(found["links"]) == 6, where
+            assert len(found["links"]) == 7, where
             first = min(found["links"], key=lambda link: link["top"])
             if width == 1280:
                 assert abs(found["name"] - first["baseline"]) <= BASELINE_TOLERANCE, where
             else:
                 assert found["name"] is None, where
-            assert len(found["tabs"]) == (0 if name == "frontier.html" else 2), where
+            assert len(found["tabs"]) == (0 if name == "atlas.html" else 2), where
             if rows == 1:
                 over_rule.setdefault(width, set()).add(found["current_above_rule"])
             if found["tabs"]:
@@ -330,7 +331,7 @@ def test_the_name_stands_on_the_links_baseline(
 def test_a_name_aligned_by_its_mark_is_caught(browser: Any, pages: dict[str, Path]) -> None:
     """The control: let the name's row take its baseline from its first item again, the
     mark, and the check names the name, some pixels above the links."""
-    found = _baselines(browser, pages["frontier.html"], 1280, style=NAME_ALIGNED_BY_ITS_MARK)
+    found = _baselines(browser, pages["atlas.html"], 1280, style=NAME_ALIGNED_BY_ITS_MARK)
     problems = baseline_problems(found)
     assert len(problems) == 1, problems
     assert problems[0].startswith("the site's name stands -"), problems

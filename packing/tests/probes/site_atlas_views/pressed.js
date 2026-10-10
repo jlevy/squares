@@ -11,6 +11,7 @@
   if (!(control instanceof HTMLElement) || !(block instanceof HTMLElement)) {
     return null;
   }
+  const scrollBefore = window.scrollY;
   control.click();
   const moves = document
     .getAnimations()
@@ -24,6 +25,8 @@
   const tiles = moves.filter((effect) => effect.target?.matches(".site-atlas-cell") === true);
   const timing = tiles[0]?.getComputedTiming();
   return {
+    scroll_before: scrollBefore,
+    scroll_after: window.scrollY,
     view: block.dataset.atlasView ?? null,
     size: block.dataset.atlasSize ?? null,
     moving: tiles.length,

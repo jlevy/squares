@@ -157,6 +157,20 @@
       place();
     }
   });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (menu.matches(":popover-open")) {
+        place();
+      }
+    },
+    { passive: true },
+  );
+  document.addEventListener("squares:headerchange", () => {
+    if (menu.matches(":popover-open")) {
+      place();
+    }
+  });
   button.closest(".site-nav-inner")?.addEventListener("scroll", () => {
     if (menu.matches(":popover-open")) {
       place();

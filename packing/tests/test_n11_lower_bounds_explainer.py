@@ -265,6 +265,16 @@ def test_an_external_reference_is_refused(fragment: str) -> None:
         assert_self_contained(f"<html><body>{fragment}</body></html>")
 
 
+def test_inline_runtime_url_constructors_are_not_css_fetches() -> None:
+    program = render_overview.kpress_client_script()
+    assert_self_contained(f"<html><body><script>{program}</script></body></html>")
+    with pytest.raises(SystemExit, match="not self-contained"):
+        assert_self_contained(
+            '<html><body><script src="https://cdn.example/x.js">'
+            f"{program}</script></body></html>"
+        )
+
+
 @pytest.mark.parametrize(
     "fragment",
     [

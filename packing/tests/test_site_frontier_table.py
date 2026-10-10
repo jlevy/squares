@@ -22,6 +22,7 @@ launched, unless the run requires one.
 
 from __future__ import annotations
 
+import os
 from collections.abc import Iterator
 from fractions import Fraction
 from pathlib import Path
@@ -65,14 +66,18 @@ LEVEL = 1.5
 
 @pytest.fixture(scope="module")
 def page(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Any]:
-    """The rendered frontier atlas, loaded once with its math typeset."""
+    """The rendered Atlas, or SQPACK_SITE_PREVIEW_URL's existing local build."""
     sync_api = site_browser.api()
-    root = Path(tmp_path_factory.mktemp("site"))
-    path = site_renders.write(root, "frontier.html")["frontier.html"]
+    live = os.environ.get("SQPACK_SITE_PREVIEW_URL")
+    if live:
+        address = f"{live.rstrip('/')}/atlas.html"
+    else:
+        root = Path(tmp_path_factory.mktemp("site"))
+        address = site_renders.write(root, "atlas.html")["atlas.html"].as_uri()
     with sync_api.sync_playwright() as driver:
         browser = site_browser.launch(driver)
         opened = browser.new_page(viewport={"width": WIDTHS[0], "height": 900})
-        opened.goto(path.as_uri(), wait_until="load")
+        opened.goto(address, wait_until="load")
         settle_math(opened)
         yield opened
         browser.close()

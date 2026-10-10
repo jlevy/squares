@@ -652,10 +652,11 @@ def case_row(
     if case["reported_status"] != status:
         shown_status += f" (reported {html.escape(case['reported_status'])})"
     gap_html, gap_value = gap(case, native=True)
-    # The star carries no tooltip of its own: its column's heading names it, once
-    # (`HEADER_TITLES`), where the phrase on each of 297 stars was 8 KB of a page held
-    # under a byte ceiling, the room the correction tags beside them now take.
-    star = '<span class="site-star">★</span>' if recent else ""
+    star = (
+        '<span class="site-star" title="New result: a recent verified lower bound">★</span>'
+        if recent
+        else ""
+    )
     if corrects:
         star += corrects_html(corrects)
     cells = [
@@ -756,7 +757,7 @@ def _tools(count: int, last: int) -> str:
     )
 
 
-def table_html(cases: list[dict[str, Any]]) -> str:
+def table_html(cases: list[dict[str, Any]], *, include_popover: bool = True) -> str:
     """The controls, the table and the popover its rows open each case's record in, as
     one HTML block with no blank line inside it."""
     from devtools.render_case_pages import case_popover  # noqa: PLC0415
@@ -773,16 +774,17 @@ def table_html(cases: list[dict[str, Any]]) -> str:
         '<div class="site-table-wrap site-wide site-frontier" id="frontier-table">\n'
         '<table class="kpress-table site-table">\n'
         f"<thead><tr>{head}</tr></thead>\n<tbody>\n{rows}\n</tbody>\n</table>\n</div>\n"
-        f"{case_popover()}"
+        f"{case_popover() if include_popover else ''}"
     )
 
 
-def frontier_markdown(fill: Callable[..., str]) -> str:
+def frontier_markdown(fill: Callable[..., str], *, embedded: bool = False) -> str:
     """The article with every count and link filled from the record: the case counts
     from the case records, the survey's four counts from `render_recent_results`, and
     the two documents the prose links at their addresses on `main`. The star's own
     count over every case is not written: the prose counts the starred cases among the
-    first hundred, and the bar's "recent only" counts them all."""
+    first hundred, and the bar's "recent only" counts them all. Embedded after the Atlas
+    graphics, the survey is a section and uses the Atlas's shared case popover."""
     cases = frontier_cases()
     values = {
         "COUNT": str(len(cases)),
@@ -795,7 +797,16 @@ def frontier_markdown(fill: Callable[..., str]) -> str:
         "CORRECTIONS": corrections_prose(),
         "ARCHIVE_URL": repo_url(ARCHIVE_README),
         "INVENTORY_URL": repo_url(EVIDENCE_INVENTORY),
-        "TABLE": table_html(cases),
+        "TABLE": table_html(cases, include_popover=not embedded),
     }
     template = FRONTIER_ARTICLE.read_text(encoding="utf-8")
+    if embedded:
+        title = '<div class="site-hero">\n\n# The Frontier Survey\n\n</div>'
+        if not template.startswith(title):
+            raise SystemExit("frontier-article.md: the survey title block is missing")
+        template = template.replace(
+            title,
+            '<h2 id="the-frontier-survey">The Frontier Survey<a id="the-survey"></a></h2>',
+            1,
+        )
     return fill(template, values, where=FRONTIER_ARTICLE.name)

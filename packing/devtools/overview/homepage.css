@@ -1,0 +1,162 @@
+/* The front door starts with six square rows of the retained native Atlas graphic. */
+.site-page:has([data-atlas-preview]) {
+  overflow-anchor: none;
+}
+
+@media screen {
+  .kpress h1.site-title {
+    margin-block-start: 2.5rem;
+  }
+
+  .kpress h2.site-title {
+    margin-block-start: calc(var(--paper-section-space) + 0.5rem);
+  }
+}
+
+.site-homepage-hero .site-hero-figure {
+  inline-size: calc(100% - 1rem);
+  max-inline-size: 18rem;
+}
+
+.site-homepage-hero .site-hero-packings {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.site-project-card {
+  display: grid;
+  margin-block: 1.2rem;
+  margin-inline: auto;
+  max-inline-size: 30rem;
+}
+
+/* Include the native 252-unit row pitch: the lower label's glyph tails extend into
+   the poster's gutter at small sizes. Packing geometry remains unscaled internally. */
+.site-homepage-atlas .site-atlas-cell > svg {
+  aspect-ratio: 216 / 252;
+}
+
+/* Native polygon colors retain the poster's angle/contact palette. Its background,
+   labels and lines use the reader's current theme, including prepared hidden rows.
+   Each thumbnail link opens the complete, prepared case detail on selection. */
+[data-homepage-atlas-svg] [data-feature="atlas-background"],
+[data-homepage-atlas-svg] [data-feature="container-outline"] {
+  fill: var(--kpress-doc-bg);
+}
+
+[data-homepage-atlas-svg] [data-feature="container-outline"],
+[data-homepage-atlas-svg] [data-feature="square-fills"] {
+  stroke: var(--kpress-doc-text);
+}
+
+[data-homepage-atlas-svg] [data-feature="packing-label"] {
+  fill: var(--kpress-doc-text);
+}
+
+[data-homepage-atlas-svg]
+  :is(
+    [data-feature="side-bound"],
+    [data-feature="lower-bound"],
+    [data-feature="algebraic-degree"]
+  ) {
+  fill: var(--kpress-doc-muted);
+}
+
+[data-homepage-atlas-svg] [data-feature="evidence-badge"]:not([fill="none"]) {
+  fill: var(--kpress-doc-muted);
+}
+
+[data-homepage-atlas-svg] [data-feature="evidence-badge"] + text {
+  fill: var(--kpress-doc-bg);
+}
+
+[data-homepage-atlas-svg] [data-feature="evidence-badge"][fill="none"] {
+  stroke: var(--kpress-doc-muted);
+}
+
+[data-homepage-atlas-svg] [data-feature="evidence-badge"][fill="none"] + text {
+  fill: var(--kpress-doc-muted);
+}
+
+[data-homepage-atlas-svg] [data-feature="release-star"] {
+  fill: var(--site-new-result);
+}
+
+.site-homepage-atlas .site-atlas-cell:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+
+.kpress .site-homepage-atlas-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+
+.kpress .site-homepage-atlas-status {
+  color: var(--site-support-color);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note);
+}
+
+/* The linked homepage key uses the shared card treatment below its wider table. */
+.kpress .site-rung-legend:has(> .site-rung-legend-heading) {
+  --site-card-pad-start: var(--site-card-pad-end);
+  align-items: center;
+  box-sizing: border-box;
+  column-gap: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, max-content) max-content;
+  inline-size: 100%;
+  justify-content: center;
+  margin-inline: auto;
+  max-inline-size: 52rem;
+}
+
+.kpress .site-rung-legend > .site-rung-legend-heading {
+  color: var(--kpress-doc-muted);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--kpress-caps-label-size, 0.8rem);
+  font-style: normal;
+  font-weight: var(--site-font-weight-sans-medium);
+  grid-column: 1 / -1;
+  letter-spacing: var(--kpress-caps-spacing);
+  line-height: var(--paper-heading-leading);
+  margin: 0 0 0.25rem;
+  text-align: center;
+  text-transform: var(--kpress-caps-transform);
+}
+
+.kpress .site-rung-legend:has(> .site-rung-legend-heading) > p {
+  display: contents;
+}
+
+.kpress .site-rung-legend .site-rung-legend-icons {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.4rem;
+  min-inline-size: 0;
+}
+
+.site-homepage-atlas-status[hidden] {
+  display: none;
+}
+
+.site-homepage-atlas-actions [data-homepage-atlas-toggle][hidden] {
+  display: none;
+}
+
+.site-homepage-media .site-cards-frame {
+  margin-block: 1rem;
+}
+
+.kpress .site-homepage-media .site-card-hero {
+  aspect-ratio: 3 / 1;
+  margin-block-end: 0.4rem;
+}
+
+.site-page .site-film-frame.site-homepage-film {
+  --site-film-width: min(52rem, 100cqw - 2 * var(--site-wide-gutter), (100svh - 5rem) * 16 / 9);
+}

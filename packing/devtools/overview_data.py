@@ -424,11 +424,16 @@ def _records(
     links: list[Link] = []
     scope = record["scope"]
     if "n_values" in scope and len(scope["n_values"]) > CASE_LINKS:
-        links.append(Link(f"{len(scope['n_values'])} cases", "frontier.html"))
+        links.append(Link(f"{len(scope['n_values'])} cases", "atlas.html#the-frontier-survey"))
     elif "n_values" in scope:
         links.extend(Link(f"n = {n}", f"cases/{n}.html") for n in scope["n_values"])
     else:
-        links.append(Link(f"n = {scope['n_min']}{EN_DASH}{scope['n_max']}", "frontier.html"))
+        links.append(
+            Link(
+                f"n = {scope['n_min']}{EN_DASH}{scope['n_max']}",
+                "atlas.html#the-frontier-survey",
+            )
+        )
     links.append(Link("register", register_lines.link(f"id: {record['id']}"), record["id"]))
     seen: set[str] = set()
     extra: list[Link] = []

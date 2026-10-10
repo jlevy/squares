@@ -45,7 +45,7 @@ right. This opens a built overview in Chromium and reports what the browser made
   at each width in both themes; and the window at five points of the move from the grid
   to the triangle (0, 25, 50, 75 and 100 percent).
 
-`PAGE` is a built `index.html`, or a directory `preview_site` built. `--render` renders
+`PAGE` is a built `atlas.html`, or a directory `preview_site` built. `--render` renders
 the overview alone into `PAGE` first, which takes seconds where a whole site takes a
 minute. Usage, from `packing/`:
 
@@ -131,7 +131,9 @@ def size_tab(size: str) -> str:
 
 
 #: The presses `move` makes on one page, in order: what the change is called, how many
-#: cases show once it is made, and the control pressed. A change with no name is made
+#: nominal cases for the state, and the control pressed. Preview Grid counts finish
+#: complete rows near 100; the report reads the actual count after its timed window.
+#: A change with no name is made
 #: and not timed: it only sets the page up for the next. The first two are such a pair,
 #: to the triangle and back. A first change of view brings the sections under the atlas
 #: nearer the window, and the page then typesets their math and loads the pages its
@@ -343,14 +345,14 @@ def settle(page: Any) -> None:
 
 
 def query_for(view: str, size: str = MEDIUM) -> str:
-    """The query string that asks for `view` and `size`: nothing for the grid at Medium,
+    """The query string that asks for `view` and `size`: nothing for Triangle at Medium,
     the defaults."""
     if view not in VIEWS:
         raise ValueError(f"the atlas has no view {view!r}")
     if size not in SIZES:
         raise ValueError(f"the atlas has no size {size!r}")
     params = [
-        *(["atlas=triangle"] if view == "triangle" else []),
+        *(["atlas=grid"] if view == "grid" else []),
         *([f"size={size}"] if size != MEDIUM else []),
     ]
     return f"?{'&'.join(params)}" if params else ""
@@ -410,7 +412,7 @@ def layout(page: Any) -> dict[str, Any]:
 def measure_layout(
     address: str, widths: Sequence[int], sizes: Sequence[str] = SIZES
 ) -> list[dict[str, Any]]:
-    """Each view at each width at each size, with a hundred cases and with all."""
+    """Each view at each width at each size, with its preview and with all cases."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     rows: list[dict[str, Any]] = []
@@ -468,7 +470,7 @@ def measure_move(
                 top(page)
                 client = page.context.new_cdp_session(page)
                 client.send("Performance.enable", {"timeDomain": "threadTicks"})
-                for change, shown, press in CHANGES:
+                for change, _, press in CHANGES:
                     if change is None:
                         page.locator(press).click()
                         settle(page)
@@ -483,6 +485,7 @@ def measure_move(
                     else:
                         top(page)
                     report = timed(page, client, press, frames=frames)
+                    shown = len(layout(page)["tiles"])
                     rows.append(
                         {"width": width, "change": change, "shown": shown, "run": run, **report}
                     )
@@ -520,7 +523,7 @@ ACTIONS = (("see-all", ".site-more"), ("expander", ".site-atlas-toggle-row"))
 
 
 def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
-    """The atlas block in each view at each width, light and dark, with a hundred cases
+    """The atlas block in each view at each width, light and dark, with its preview
     and with all, at each size; the two actions (`ACTIONS`) at each width in both
     themes, the expander collapsed and expanded; then the window at each of `FRACTIONS`
     of the move to the triangle."""
@@ -537,17 +540,19 @@ def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
                         page = open_atlas(
                             browser, address, width=width, view=view, size=size, scheme=scheme
                         )
-                        for shown in (100, 324):
-                            if shown == 324:
+                        for all_cases in (False, True):
+                            if all_cases:
                                 expand(page)
+                            shown = len(layout(page)["tiles"])
                             target = out / f"atlas-{view}-{shown}-{width}-{scheme}-{size}.png"
                             page.locator(BLOCK).screenshot(path=str(target))
                             written.append(target)
                         page.close()
                     page = open_atlas(browser, address, width=width, view=view, scheme=scheme)
-                    for shown in (100, 324):
-                        if shown == 324:
+                    for all_cases in (False, True):
+                        if all_cases:
                             expand(page)
+                        shown = len(layout(page)["tiles"])
                         target = out / f"atlas-{view}-{shown}-{width}-{scheme}.png"
                         page.locator(BLOCK).screenshot(path=str(target))
                         written.append(target)
@@ -600,16 +605,15 @@ def markdown_table(rows: Sequence[dict[str, Any]]) -> str:
 
 
 def page_address(target: Path, *, render: bool) -> str:
-    """The address of the overview at `target`, a built `index.html` or the directory
-    that holds one; with `render`, the overview is rendered there first."""
-    path = target / "index.html" if target.is_dir() or target.suffix != ".html" else target
+    """The complete atlas at `target`, rendered there first when requested."""
+    path = target / "atlas.html" if target.is_dir() or target.suffix != ".html" else target
     if render:
         from devtools import render_overview  # noqa: PLC0415
 
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(render_overview.PAGES["index.html"]().html, encoding="utf-8")
+        path.write_text(render_overview.PAGES["atlas.html"]().html, encoding="utf-8")
     if not path.is_file():
-        raise SystemExit(f"no built overview at {path}; pass --render to write one")
+        raise SystemExit(f"no built atlas at {path}; pass --render to write one")
     return path.resolve().as_uri()
 
 
@@ -618,8 +622,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("mode", choices=MODES)
-    parser.add_argument("page", type=Path, help="a built index.html, or its directory")
-    parser.add_argument("--render", action="store_true", help="render the overview there first")
+    parser.add_argument("page", type=Path, help="a built atlas.html, or its directory")
+    parser.add_argument("--render", action="store_true", help="render the atlas there first")
     parser.add_argument("--width", type=int, action="append", help="window width; repeatable")
     parser.add_argument("--runs", type=int, default=5, help="move: how many times each change")
     parser.add_argument(

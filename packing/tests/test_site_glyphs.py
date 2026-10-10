@@ -86,7 +86,10 @@ KNOWN: dict[str, dict[str, str]] = {
         ),
     },
     "index.html": {
-        r"caption `The best packing known for .*`: 16.15px, not the role's 17.48\d*px": (
+        (
+            r"caption `Best known packing for 53 identical squa`: 16.15px, "
+            r"not the role's 17.48\d*px"
+        ): (
             "the homepage's hero caption is set at 0.85 of the sans base, written as a "
             "number in site.css, where every other caption is the note size, 0.92"
         ),

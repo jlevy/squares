@@ -13,6 +13,45 @@
   --site-wash: var(--kpress-doc-surface-hover);
   --site-shadow: oklch(0% 0 0 / 0.15);
   --site-tab-current-tint: 16%;
+  --site-header-offset: 0px;
+  --site-header-duration: 180ms;
+  --site-header-layer: 5;
+}
+/* JS measures the entire header, including wrapped links and section tabs. Its sticky
+   box keeps its original space while a transform hides it. Without JS the bar retains
+   its ordinary, visible layout; print and embedded documents retain theirs too. */
+@media screen {
+  :root {
+    scroll-padding-block-start: var(--site-header-offset);
+  }
+  .site-headroom {
+    background: var(--kpress-doc-bg);
+    inset-block-start: 0;
+    position: sticky;
+    transform: translateY(0);
+    transition: transform var(--site-header-duration) ease-out;
+    z-index: var(--site-header-layer);
+  }
+  /* On direct paper shells, the navigation itself is the sticky carrier. */
+  .site-nav.site-headroom {
+    position: sticky;
+  }
+  .site-headroom-hidden {
+    pointer-events: none;
+    transform: translateY(-100%);
+  }
+  /* Keyboard focus and an opening native menu reveal the control immediately, so the
+     menu is placed against its final position rather than a moving button. */
+  .site-headroom:is(:focus-within, :has(.site-theme-menu:popover-open)) {
+    pointer-events: auto;
+    transform: translateY(0);
+    transition: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --site-header-duration: 0ms;
+  }
 }
 /* ---------- Motion ----------
    Every hover and focus change on the site runs on one timing, fast and smooth, here
@@ -55,7 +94,6 @@
 .kpress-page-main {
   --kpress-page-margin-block-start: 1rem;
   --site-page-top: 4rem;
-  --site-gear-drop: 0.11em;
 }
 /* The space from the bar's rule to the top of a page's first block (its title, its hero,
    or the explainer's hero), one token for every page: kpress's document padding above
@@ -114,6 +152,7 @@
   font-family: var(--kpress-font-sans);
   font-feature-settings: var(--kpress-font-features-sans);
   font-size: var(--site-nav-font-size);
+  line-height: var(--site-nav-line);
 }
 .site-nav-inner {
   align-items: baseline;
@@ -192,43 +231,29 @@
    (`kpress.theme`), which kpress's head bootstrap applies before first paint, so the
    stylesheets only ever key on `data-kpress-resolved-theme`; overview/theme.js wires the
    menu. The gear takes the nav items' wash and never underlines. */
-/* The bar centres the gear on its row, but the eye reads a row of text at the middle of
-   its capitals, which sits lower than the middle of its line box, so the gear drops by
-   `--site-gear-drop` to put its centre there, level with the tab text at every width. */
+/* The button takes the links' line box. Its inline SVG is centred on the font's capital
+   height, so the taller icon does not sit above the label's visible ink. Its wrapper
+   participates in the same baseline-aligned flex row, including wrapped phone rows. */
 .site-theme {
-  align-self: center;
+  align-self: baseline;
   display: flex;
   flex: 0 0 auto;
-  translate: 0 var(--site-gear-drop);
-}
-/* On a wide screen the links keep their centred track and the gear leaves it for the
-   bar's far right, its edge over the right end of the rule under the bar. From 80rem
-   the margin beside the 70rem track holds it clear of the last link; below that the
-   track spans the bar, and the gear ends the row. */
-@media (width >= 80rem) {
-  .site-nav {
-    position: relative;
-  }
-  .site-nav .site-theme {
-    inset-block: 0;
-    inset-inline-end: 0;
-    position: absolute;
-  }
 }
 .site-theme-button {
-  align-items: center;
   background: none;
   border: 0;
   color: var(--kpress-doc-muted);
   cursor: pointer;
-  display: flex;
+  display: block;
   font: inherit;
   padding: 0.3rem 0.45rem;
   transition: var(--site-hover-transition);
 }
 .site-theme-button svg {
   block-size: 1.05rem;
+  display: inline-block;
   inline-size: 1.05rem;
+  vertical-align: calc((1cap - 1.05rem) / 2);
 }
 .site-theme-button:is(:hover, :focus-visible, [aria-expanded="true"]) {
   background: var(--site-wash);
@@ -304,6 +329,9 @@
    line and less padding above and below each link, with no gap between rows. A link
    stays 26px tall, above the 24px a tap target needs. */
 @media (width < 40rem) {
+  .site-nav {
+    --site-nav-line: calc(var(--site-nav-font-size) * 1.3);
+  }
   .site-nav-inner {
     gap: 0 0.1rem;
     justify-content: center;
@@ -311,15 +339,24 @@
     padding-inline: 0.5rem;
   }
   .site-nav a {
-    line-height: 1.3;
     padding-block: 0.15rem;
     padding-inline: 0.45rem;
   }
 }
-/* Narrower than the whole bar fits in one row with the name (56rem), the name gives
+/* With eight destinations the tablet row also needs the phone's shorter horizontal
+   padding and smaller gaps; otherwise the gear alone wraps below all the links. */
+@media (40rem <= width < 56rem) {
+  .site-nav-inner {
+    column-gap: 0.2rem;
+  }
+  .site-nav a {
+    padding-inline: 0.45rem;
+  }
+}
+/* Narrower than the whole bar fits in one row with the name (72rem), the name gives
    way and the mark alone leads home, so the links keep one row down to a phone. The
    link keeps its label, "Square Packing home", for a screen reader. */
-@media (width < 56rem) {
+@media (width < 72rem) {
   .site-nav .site-name-text {
     display: none;
   }

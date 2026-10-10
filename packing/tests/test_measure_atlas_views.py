@@ -200,11 +200,11 @@ def test_a_grid_is_held_to_order_and_room_and_not_to_the_triangle() -> None:
 
 
 def test_the_views_and_their_controls_are_named_one_way() -> None:
-    assert atlas.query_for("grid") == ""
-    assert atlas.query_for("triangle") == "?atlas=triangle"
-    assert atlas.query_for("grid", "large") == "?size=large"
-    assert atlas.query_for("triangle", "small") == "?atlas=triangle&size=small"
-    assert atlas.query_for("triangle", "medium") == "?atlas=triangle"
+    assert atlas.query_for("grid") == "?atlas=grid"
+    assert atlas.query_for("triangle") == ""
+    assert atlas.query_for("grid", "large") == "?atlas=grid&size=large"
+    assert atlas.query_for("triangle", "small") == "?size=small"
+    assert atlas.query_for("triangle", "medium") == ""
     assert atlas.tab("triangle") == '[data-atlas-tab="triangle"]'
     assert atlas.size_tab("large") == '[data-atlas-size-tab="large"]'
     assert atlas.SIZES == ("small", "medium", "large")
@@ -270,9 +270,9 @@ def test_runs_are_reported_as_their_median_and_their_most_long_tasks() -> None:
 
 
 def test_a_page_that_is_not_built_is_refused(tmp_path: Path) -> None:
-    with pytest.raises(SystemExit, match="no built overview"):
+    with pytest.raises(SystemExit, match="no built atlas"):
         atlas.page_address(tmp_path, render=False)
-    built = tmp_path / "index.html"
+    built = tmp_path / "atlas.html"
     built.write_text("<!doctype html>", encoding="utf-8")
     assert atlas.page_address(tmp_path, render=False) == built.resolve().as_uri()
     assert atlas.page_address(built, render=False) == built.resolve().as_uri()

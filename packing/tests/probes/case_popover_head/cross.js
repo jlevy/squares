@@ -11,10 +11,19 @@
   }
   const panel = popover.getBoundingClientRect();
   const box = cross.getBoundingClientRect();
+  const hit = document.elementFromPoint((box.left + box.right) / 2, (box.top + box.bottom) / 2);
   return {
     cross_left: box.left,
     cross_right: box.right,
     next_right: next.getBoundingClientRect().right,
     panel_right: panel.left + popover.clientLeft + popover.clientWidth,
+    cross_width: box.width,
+    cross_height: box.height,
+    cross_top: box.top,
+    cross_bottom: box.bottom,
+    panel_top: panel.top,
+    panel_bottom: panel.bottom,
+    scroll_top: popover.scrollTop,
+    hit: hit === cross || (hit !== null && cross.contains(hit)),
   };
 };

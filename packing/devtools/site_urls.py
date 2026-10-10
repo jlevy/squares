@@ -33,10 +33,20 @@ REGISTRY = PACKING / "site-urls.yaml"
 DOCUMENT = REPO / "docs/project/site-urls.md"
 FIRST_SITE_DATE = "2026-09-29"
 # The declared registration day for this URL migration, never the render clock.
-REGISTRATION_DATE = "2026-10-07"
+REGISTRATION_DATE = "2026-10-08"
 HARD_HTML_LIMIT = 2_000_000
 # Measured exceptions retain the global two-megabyte ceiling.
 PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
+    "index.html": (
+        1_300_000,
+        (
+            "The native 324-case Atlas payload, six-row preview and shared reading "
+            "and documentation cards measure 1,172,462 bytes. Three-run loopback load "
+            "medians are 274 ms at 1280 px and 261 ms at 390 px; retained staged "
+            "expansion checks cover the embedded preview. "
+            "The page-specific ceiling remains below the global two-megabyte limit."
+        ),
+    ),
     "papers/n11-threshold-bound-review.html": (
         900_000,
         (
@@ -78,9 +88,12 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         400_000,
         "Complete broad scope history and prepared exact bounds measure 355,078 bytes.",
     ),
-    "frontier.html": (
-        1_750_000,
-        "All 324 case rows and prepared exact bounds measure 1,536,618 bytes.",
+    "atlas.html": (
+        1_000_000,
+        (
+            "Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete "
+            "Frontier Survey and 174,245 for graphics and the shared shell."
+        ),
     ),
     "all-results.html": (
         800_000,

@@ -368,13 +368,10 @@ def badge_glyph(glyph: str, style: str, text: str, *, named: bool = False) -> st
     exact, numerical, rigid, a new result, something open): its glyph in a small square,
     solid or outlined (`.site-atlas-badge`). `named`, where no word follows it, gives it
     its word as its name and its tooltip."""
-    name = (
-        f'role="img" aria-label="{_esc(text)}" title="{_esc(text)}"'
-        if named
-        else 'aria-hidden="true"'
-    )
+    name = f'role="img" aria-label="{_esc(text)}"' if named else 'aria-hidden="true"'
     return (
-        f'<span class="site-atlas-badge" data-style="{_esc(style)}" {name}>{_esc(glyph)}</span>'
+        f'<span class="site-atlas-badge" data-style="{_esc(style)}" {name} '
+        f'title="{_esc(text)}">{_esc(glyph)}</span>'
     )
 
 
@@ -588,7 +585,7 @@ def case_list(cases: Sequence[int], overview: Overview) -> str:
                     _esc(gap),
                     case_status_chip(status) + case_badges(n),
                     (
-                        f'<a href="frontier.html#n-{n}">frontier</a> '
+                        f'<a href="atlas.html#n-{n}">frontier</a> '
                         f'<a href="{_esc(repo_url(case_file(n)))}">'
                         f"{_esc(case_file(n).name)}</a>"
                     ),
@@ -907,17 +904,16 @@ def links_section(result: Result, overview: Overview, cases: Sequence[int]) -> s
         OPTIMALITY_PAPER,
         result_url,
     )
-    from devtools.render_case_pages import CASES_HOME, case_url  # noqa: PLC0415
+    from devtools.render_case_pages import case_url  # noqa: PLC0415
 
     record = result.record
     site: list[str] = []
     if is_broad(cases):
-        site.append(_link("frontier.html", "The frontier survey"))
-        site.append(_link(CASES_HOME, "Every case record"))
+        site.append(_link("atlas.html#the-frontier-survey", "The frontier survey"))
     else:
         for n in cases:
             site.append(_link(case_url(n), f"Case record, {math_html(f'n = {n}')}"))
-            site.append(_link(f"frontier.html#n-{n}", f"Frontier row, {math_html(f'n = {n}')}"))
+            site.append(_link(f"atlas.html#n-{n}", f"Frontier row, {math_html(f'n = {n}')}"))
     site.append(_link(result_url(result.id), f"{_esc(result.id)} in the results table"))
     if 11 in cases:
         site.append(_link(OPTIMALITY_PAPER, f"The {math_html('n = 11')} optimality paper"))
@@ -1037,7 +1033,7 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
     commit-pinned repository link, a page the site does not serve, or a fragment no row
     or record carries."""
     from devtools.overview_sections import result_fragment  # noqa: PLC0415
-    from devtools.render_case_pages import CASES_HOME, case_url  # noqa: PLC0415
+    from devtools.render_case_pages import case_url  # noqa: PLC0415
     from devtools.render_overview import SITE_PAGES  # noqa: PLC0415
 
     pinned = repo_links.hash_pinned_links(body)
@@ -1049,12 +1045,11 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
             missing.append(f"{kind}/{path}")
     ids = {other.id.lower() for other in overview.results}
     fragments = {
-        "frontier.html": {f"n-{n}" for n in overview.cases},
+        "atlas.html": {"the-frontier-survey", *(f"n-{n}" for n in overview.cases)},
         "all-results.html": ids,
     }
     served = {
         *SITE_PAGES,
-        CASES_HOME,
         *(case_url(n) for n in overview.cases),
         *(result_fragment(result.id) for result in overview.results),
     }

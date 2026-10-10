@@ -35,9 +35,8 @@ import pytest
 from devtools import check_published_site, render_case_pages, render_overview
 from devtools.overview_sections import LOWER_BOUNDS_PAPER, OPTIMALITY_PAPER
 from devtools.preview_site import serve
-from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
 from devtools.repo_links import REPO_URL
-from tests import site_renders
+from tests import site_browser, site_renders
 
 #: What stands at each target: a page with nothing to run and nothing to fetch.
 STAND_IN = "<!doctype html><title>target</title><p>target</p>"
@@ -50,12 +49,9 @@ REVIEW_LINKS = ("#the-result", "#fn-1", "?view=embed#fn-3")
 
 @pytest.fixture(scope="module")
 def browser() -> Iterator[Any]:
-    sync_api = pytest.importorskip("playwright.sync_api")
+    sync_api = site_browser.api()
     with sync_api.sync_playwright() as driver:
-        try:
-            launched = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
-        except sync_api.Error as error:
-            pytest.skip(f"no Chromium to launch: {error.message.splitlines()[0]}")
+        launched = site_browser.launch(driver)
         yield launched
         launched.close()
 
@@ -63,7 +59,7 @@ def browser() -> Iterator[Any]:
 def _stand_ins(root: Path) -> None:
     """A stand-in page at each address of the site a forwarder sends a reader to."""
     for _, new in render_overview.MOVED_PAGES:
-        if not new.startswith("https://") and new != render_case_pages.CASES_PAGE:
+        if not new.startswith("https://") and new != "atlas.html":
             (root / new).parent.mkdir(parents=True, exist_ok=True)
             (root / new).write_text(STAND_IN, encoding="utf-8")
     # A registered individual-case target exercises selector forwarding separately
@@ -77,7 +73,7 @@ def site(tmp_path_factory: pytest.TempPathFactory) -> Path:
     root = tmp_path_factory.mktemp("forwarders")
     render_overview.write_site(
         root,
-        [*render_overview.forwarder_pages(), site_renders.page(render_case_pages.CASES_PAGE)],
+        [*render_overview.forwarder_pages(), site_renders.page("atlas.html")],
     )
     _stand_ins(root)
     return root
@@ -93,14 +89,18 @@ def _free_port() -> int:
 def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     """The forwarders and the overview as they are rendered, beside the stand-ins, served
     on a local address as a deployed site is on its own; the address, with its closing
-    slash. A directory's address and the overview's fragment forwarding need a server."""
+    slash. SQPACK_SITE_PREVIEW_URL reuses an existing local build without copying it.
+    A directory's address and the overview's fragment forwarding need a server."""
+    if live := os.environ.get("SQPACK_SITE_PREVIEW_URL"):
+        yield live.rstrip("/") + "/"
+        return
     container = tmp_path_factory.mktemp("served")
     root = container / "squares"
     root.mkdir()
     files = [
         *render_overview.forwarder_pages(),
         site_renders.page("index.html"),
-        site_renders.page(render_case_pages.CASES_PAGE),
+        site_renders.page("atlas.html"),
     ]
     render_overview.write_site(root, files)
     _stand_ins(root)
@@ -113,7 +113,7 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
 
 
 def _arrives(
-    browser: Any, address: str, expected: str, *, scripts: bool, case_index: bool = False
+    browser: Any, address: str, expected: str, *, scripts: bool, atlas: bool = False
 ) -> str:
     """Where a reader who opens `address` ends up, with or without scripts, once the
     browser has had the chance to reach `expected`."""
@@ -129,34 +129,46 @@ def _arrives(
         # A page that never arrives is left where it is, and the caller compares.
         with contextlib.suppress(sync_api.TimeoutError):
             page.wait_for_url(expected, timeout=5000)
-        if case_index:
-            assert page.locator("h1#case-records").text_content() == "Case Records"
-            assert page.locator('a[data-case="17"]').get_attribute("href") == "17.html"
-            assert page.locator('link[rel="canonical"]').get_attribute("href") == (
-                render_overview.canonical_url(render_case_pages.CASES_PAGE)
+        if atlas:
+            assert page.locator("h1#the-atlas-of-square-packings").text_content() == (
+                "The Atlas of Square Packings"
             )
+            assert page.locator('tr#n-17 a[data-case="17"]').first.get_attribute("href") == (
+                "cases/17.html"
+            )
+            assert page.locator('link[rel="canonical"]').get_attribute("href") == (
+                render_overview.canonical_url("atlas.html")
+            )
+            fragment = page.url.rsplit("#", 1)[-1]
+            if fragment.startswith("n-") and fragment[2:].isdigit():
+                row = page.locator(f"tr#{fragment}")
+                if row.count():
+                    assert row.is_visible()
         return page.url
     finally:
         context.close()
 
 
-def _arrivals(root: str, *, published: bool = False) -> dict[str, str]:
+def _arrivals(root: str) -> dict[str, str]:
     """Where each old address should arrive, for a site whose root is `root`."""
     return {
         "results.html": f"{root}/all-results.html",
-        "status.html": f"{root}/frontier.html",
+        "status.html": f"{root}/atlas.html",
+        "frontier.html": f"{root}/atlas.html",
         "defects.html": DEFECTS,
         "explainer.html": f"{root}/{LOWER_BOUNDS_PAPER}",
         "n11-optimality/t-060-explainer.html": f"{root}/{OPTIMALITY_PAPER}",
         "n11-optimality/index.html": f"{root}/{OPTIMALITY_PAPER}",
-        "cases.html": f"{root}/cases/" if published else f"{root}/cases/index.html",
+        "cases.html": f"{root}/atlas.html",
+        "cases/index.html": f"{root}/atlas.html",
     }
 
 
 def test_each_old_address_arrives_with_its_query_and_fragment(browser: Any, site: Path) -> None:
     moved = dict(render_overview.MOVED_PAGES)
     assert moved["results.html"] == "all-results.html"
-    assert moved["status.html"] == "frontier.html"
+    assert moved["status.html"] == "atlas.html"
+    assert moved["frontier.html"] == "atlas.html"
     assert moved["defects.html"] == DEFECTS
     assert moved["explainer.html"] == LOWER_BOUNDS_PAPER
     root = site.as_uri()
@@ -165,15 +177,43 @@ def test_each_old_address_arrives_with_its_query_and_fragment(browser: Any, site
     for old, target in arrivals.items():
         assert (
             _arrives(
-                browser, f"{root}/{old}", target, scripts=True, case_index=old == "cases.html"
+                browser,
+                f"{root}/{old}",
+                target,
+                scripts=True,
+                atlas=old in {"cases.html", "cases/index.html"},
             )
             == target
         ), old
         kept = f"{target}?view=embed#retained-forwarder-fragment"
         came = f"{root}/{old}?view=embed#retained-forwarder-fragment"
         assert (
-            _arrives(browser, came, kept, scripts=True, case_index=old == "cases.html") == kept
+            _arrives(
+                browser,
+                came,
+                kept,
+                scripts=True,
+                atlas=old in {"cases.html", "cases/index.html"},
+            )
+            == kept
         ), old
+
+
+@pytest.mark.parametrize(
+    "suffix",
+    [
+        "#n-291",
+        "?recent=true#n-291",
+        "#the-frontier-survey",
+        "#the-survey",
+        "?view=embed#frontier-table",
+    ],
+)
+def test_legacy_frontier_row_section_and_query_links_arrive_on_atlas(
+    browser: Any, served: str, suffix: str
+) -> None:
+    arrival = f"{served}atlas.html{suffix}"
+    assert _arrives(browser, f"{served}frontier.html{suffix}", arrival, scripts=True) == arrival
 
 
 def test_without_scripts_the_refresh_still_arrives(browser: Any, site: Path) -> None:
@@ -182,7 +222,11 @@ def test_without_scripts_the_refresh_still_arrives(browser: Any, site: Path) -> 
     for old, target in _arrivals(root).items():
         assert (
             _arrives(
-                browser, f"{root}/{old}", target, scripts=False, case_index=old == "cases.html"
+                browser,
+                f"{root}/{old}",
+                target,
+                scripts=False,
+                atlas=old in {"cases.html", "cases/index.html"},
             )
             == target
         ), old
@@ -192,7 +236,7 @@ def test_without_scripts_the_refresh_still_arrives(browser: Any, site: Path) -> 
                 f"{root}/{old}#fn-3",
                 target,
                 scripts=False,
-                case_index=old == "cases.html",
+                atlas=old in {"cases.html", "cases/index.html"},
             )
             == target
         ), old
@@ -247,7 +291,7 @@ def test_the_overview_sends_an_old_explainer_fragment_to_the_paper(
     # The Frontier Survey left the overview the same day: both its fragments go to the
     # Frontier page, whose title carries the first.
     for survey in ("the-frontier-survey", "the-survey"):
-        arrival = f"{served}frontier.html#{survey}"
+        arrival = f"{served}atlas.html#{survey}"
         assert _arrives(browser, f"{served}#{survey}", arrival, scripts=True) == arrival
     stays = f"{served}#recent-results"
     assert _arrives(browser, stays, stays, scripts=True) == stays
@@ -298,9 +342,9 @@ def test_published_forwarders_reach_canonical_content(
 ) -> None:
     """HTTP uses canonical script targets and the physical no-script fallback.
 
-    Both spellings reach the generated case index, with the same canonical identity.
+    Both retired case directories reach Atlas with the same canonical identity.
     """
-    for old, target in _arrivals(served.rstrip("/"), published=scripts).items():
+    for old, target in _arrivals(served.rstrip("/")).items():
         suffix = "?view=embed#retained-forwarder-fragment"
         expected = target + suffix if scripts else target
         assert (
@@ -309,41 +353,53 @@ def test_published_forwarders_reach_canonical_content(
                 served + old + suffix,
                 expected,
                 scripts=scripts,
-                case_index=old == "cases.html",
+                atlas=old in {"cases.html", "cases/index.html"},
             )
             == expected
         ), old
 
 
 @pytest.mark.parametrize("transport", ["site", "served"])
+@pytest.mark.parametrize("old", ["cases.html", "cases/index.html"])
 @pytest.mark.parametrize(
     ("suffix", "target"),
     [
-        ("#n-17", "cases/17.html"),
+        ("#n-17", "atlas.html#n-17"),
+        ("?recent=true#n-291", "atlas.html?recent=true#n-291"),
+        ("?n=17&view=embed", "atlas.html?view=embed#n-17"),
         ("?n=17&view=embed#bounds", "cases/17.html?view=embed#bounds"),
-        ("#n-999", None),
-        ("?n=999&view=embed#bounds", None),
-        ("?n=invalid#unknown", None),
+        ("#n-999", "atlas.html#n-999"),
+        ("?n=999&view=embed#bounds", "atlas.html?n=999&view=embed#bounds"),
+        ("?n=invalid#unknown", "atlas.html?n=invalid#unknown"),
     ],
 )
 def test_case_selectors_preserve_state_and_only_use_registered_destinations(
     request: pytest.FixtureRequest,
     browser: Any,
     transport: str,
+    *,
+    old: str,
     suffix: str,
-    target: str | None,
+    target: str,
 ) -> None:
     fixture = request.getfixturevalue(transport)
     root = fixture.as_uri() + "/" if isinstance(fixture, Path) else fixture
-    index = "cases/index.html" if transport == "site" else "cases/"
-    expected = root + (target if target is not None else index + suffix)
+    expected = root + target
     assert (
         _arrives(
             browser,
-            root + "cases.html" + suffix,
+            root + old + suffix,
             expected,
             scripts=True,
-            case_index=target is None,
+            atlas=target.startswith("atlas.html"),
         )
+        == expected
+    )
+
+
+def test_case_directory_address_arrives_on_its_atlas_row(browser: Any, served: str) -> None:
+    expected = served + "atlas.html#n-291"
+    assert (
+        _arrives(browser, served + "cases/#n-291", expected, scripts=True, atlas=True)
         == expected
     )

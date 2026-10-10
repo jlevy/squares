@@ -61,8 +61,8 @@ others with their credit, the
 [the atlas](https://jlevy.github.io/squares/#the-atlas-of-square-packings) of known-best
 packings and its films, the table of
 [every result](https://jlevy.github.io/squares/all-results.html), and
-[the frontier survey](https://jlevy.github.io/squares/frontier.html) of every case
-$n = 1\ldots324$, all generated from the record in this repository.
+[the frontier survey](https://jlevy.github.io/squares/atlas.html#the-frontier-survey) of
+every case $n = 1\ldots324$, all generated from the record in this repository.
 The in-repository record is the [results register](packing/frontier/RESULTS.md), the
 per-case [status table](packing/frontier/STATUS.md), and
 [`epistemics.md`](epistemics.md), which defines how each claim is graded.

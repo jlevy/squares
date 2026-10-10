@@ -784,7 +784,11 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         f"--ignore={validate.BROWSER_FLOOR_LIVENESS_TESTS}",
         # Browser layout and prepared mathematics run where Chromium is installed, in
         # `site table layout in Chromium`; a shard has no browser for them (D-513).
+        "--ignore=tests/test_site_headroom.py",
+        "--ignore=tests/test_site_homepage.py",
+        "--ignore=tests/test_site_result_popover.py",
         "--ignore=tests/test_site_case_records.py",
+        "--ignore=tests/test_site_rating_tooltips.py",
         "--ignore=tests/test_site_math_faces.py",
         "--ignore=tests/test_site_column_measurement.py",
         "--ignore=tests/test_site_result_filters.py",
@@ -4217,6 +4221,10 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
     for job_name in ("suite-a", "suite-b", "suite-c", "suite-d"):
         assert not _installs_chromium(document["jobs"][job_name], pull_request=True), job_name
     assert set(validate.SITE_LAYOUT_TESTS) == {
+        "tests/test_site_headroom.py",
+        "tests/test_site_homepage.py",
+        "tests/test_site_result_popover.py",
+        "tests/test_site_rating_tooltips.py",
         "tests/test_site_case_records.py",
         "tests/test_site_math_faces.py",
         "tests/test_site_column_measurement.py",
@@ -4302,6 +4310,8 @@ def test_site_layout_commands_partition_the_original_collection(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Neither phase may drop, repeat, or widen the existing four timing cases."""
+    # Collect node IDs independently of the outer gate's verbose execution options.
+    monkeypatch.delenv("PYTEST_ADDOPTS", raising=False)
     commands, _environments, _output = _captured_site_layout_commands(monkeypatch)
     assert len(commands) == 2
 

@@ -6,8 +6,12 @@
 interface SiteAtlasParts {
   block: HTMLElement;
   cells: HTMLElement;
-  tabs: HTMLElement;
+  tabs: HTMLElement | null;
   sizes: HTMLElement | null;
+  /** Keep view/size state local and preserve the cells' ordinary semantics. */
+  scoped?: boolean;
+  /** Complete the visible preview before measuring its final layout. */
+  beforeArrange?: () => void;
 }
 
 /** A mounted block's two acts: arrange the triangle for the width, and change the

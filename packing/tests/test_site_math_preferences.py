@@ -109,7 +109,7 @@ def pages(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
             meta=render_overview.PageMeta(
                 "Reader fonts", "Saved reading fonts retain matching math.", "index.html"
             ),
-            current="frontier",
+            current="atlas",
         ).html
     prepared = site_math.prepare(raw)
     (root / "index.html").write_text(prepared)

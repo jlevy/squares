@@ -28,6 +28,7 @@
           right: at.right - box.left,
           top: at.top - box.top,
           width: at.width,
+          height: at.height,
         };
       }),
   };

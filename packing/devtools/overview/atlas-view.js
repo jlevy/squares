@@ -30,8 +30,8 @@
 // The tokens `--site-atlas-move-duration` and `--site-atlas-move-easing` time it, and the
 // duration is 0ms for a reader who asks for reduced motion, which switches at once.
 //
-// The view is in the address as `?atlas=triangle`, so it can be linked; the grid, the
-// default, has no parameter. A query parameter and not a fragment: `forward.js` sends a
+// Triangle is the default; `?atlas=grid` links the grid. Legacy `?atlas=triangle`
+// remains valid. A query parameter and not a fragment: `forward.js` sends a
 // fragment the overview does not have to the explainer.
 //
 // The tiles come in three sizes, Small, Medium and Large, chosen by a second strip of
@@ -155,23 +155,22 @@
   }
 
   /**
-   * The view a query string asks for: the triangle when it says so, else the grid.
+   * The view a query string asks for: explicit grid, otherwise the default triangle.
    * @param {string} search
    * @returns {AtlasView}
    */
   function viewOf(search) {
-    return new URLSearchParams(search).get(PARAM) === "triangle" ? "triangle" : "grid";
+    return new URLSearchParams(search).get(PARAM) === "grid" ? "grid" : "triangle";
   }
 
   /**
-   * `search` with the view written into it: the parameter for the triangle, none for the
-   * grid, and every other parameter kept in its place.
+   * `search` with an explicit grid or no default-triangle parameter; preserve others.
    * @param {string} search
    * @param {AtlasView} view
    * @returns {string}
    */
   function searchFor(search, view) {
-    return searchWith(search, PARAM, view === "triangle" ? "triangle" : null);
+    return searchWith(search, PARAM, view === "grid" ? "grid" : null);
   }
 
   /**
@@ -350,8 +349,8 @@
    * @param {SiteAtlasParts} parts
    * @returns {SiteAtlasViews}
    */
-  function mount({ block, cells, tabs, sizes }) {
-    const buttons = tabsOf(tabs);
+  function mount({ block, cells, tabs, sizes, scoped = false, beforeArrange }) {
+    const buttons = tabs === null ? [] : tabsOf(tabs);
     const sizeButtons = sizes === null ? [] : tabsOf(sizes);
     /** The tiles a line holds and the last case shown, as last arranged. */
     let arranged = "";
@@ -378,6 +377,7 @@
     // neither the tiles a line holds nor the last case shown has changed. The size's
     // scale is the stylesheet's (`--site-atlas-scale`), read as the tiles are arranged.
     const arrange = () => {
+      beforeArrange?.();
       const tiles = shown();
       const last = Number(tiles.at(-1)?.dataset.atlasN);
       if (!(last >= 1)) {
@@ -559,7 +559,9 @@
     /** @param {AtlasView} current */
     const mark = (current) => {
       block.dataset.atlasView = current;
-      document.documentElement.dataset.siteAtlasView = current;
+      if (!scoped) {
+        document.documentElement.dataset.siteAtlasView = current;
+      }
       for (const tab of buttons) {
         const on = tab.dataset.atlasTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -573,7 +575,9 @@
     /** @param {AtlasSize} current */
     const markSize = (current) => {
       block.dataset.atlasSize = current;
-      document.documentElement.dataset.siteAtlasSize = current;
+      if (!scoped) {
+        document.documentElement.dataset.siteAtlasSize = current;
+      }
       for (const tab of sizeButtons) {
         const on = tab.dataset.atlasSizeTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -592,7 +596,9 @@
         return;
       }
       change(() => mark(next));
-      readdress(searchFor(location.search, next));
+      if (!scoped) {
+        readdress(searchFor(location.search, next));
+      }
     };
 
     /** @param {AtlasSize} next */
@@ -601,18 +607,24 @@
         return;
       }
       change(() => markSize(next));
-      readdress(searchForSize(location.search, next));
+      if (!scoped) {
+        readdress(searchForSize(location.search, next));
+      }
     };
 
-    cells.id = tabs.dataset.atlasPanel ?? "";
-    cells.setAttribute("role", "tabpanel");
-    mark(document.documentElement.dataset.siteAtlasView === "triangle" ? "triangle" : "grid");
-    markSize(asSize(document.documentElement.dataset.siteAtlasSize));
-
-    wire(tabs, (tab) => select(tab.dataset.atlasTab === "triangle" ? "triangle" : "grid"));
+    if (tabs !== null) {
+      cells.id = tabs.dataset.atlasPanel ?? "";
+      cells.setAttribute("role", "tabpanel");
+      wire(tabs, (tab) => select(tab.dataset.atlasTab === "triangle" ? "triangle" : "grid"));
+    }
+    mark(scoped ? view() : viewOf(location.search));
+    markSize(
+      asSize(scoped ? block.dataset.atlasSize : document.documentElement.dataset.siteAtlasSize),
+    );
     if (sizes !== null) {
       wire(sizes, (tab) => selectSize(asSize(tab.dataset.atlasSizeTab)));
     }
+    arrange();
 
     // The tiles a line holds follow the block's width. A resize is settled on the next
     // frame, at most once a frame, and placed without a move: the window is already

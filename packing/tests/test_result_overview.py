@@ -286,7 +286,7 @@ def _assert_case_values(cases: list[int], overview: overview_data.Overview, body
         assert _inner(cells[4]) == _inner(expected_status)
         assert cells[5].attrib["class"] == "records"
         assert [(link.attrib["href"], link.text) for link in cells[5].findall("a")] == [
-            (f"frontier.html#n-{n}", "frontier"),
+            (f"atlas.html#n-{n}", "frontier"),
             (repo_links.repo_url(result_overview.case_file(n)), f"n-{n:03d}.md"),
         ]
 
@@ -535,11 +535,11 @@ def test_the_links_reach_the_site_and_the_record(
     links = bodies[result_id].split('class="site-result-section site-result-links"', 1)[1]
     assert f'<a href="all-results.html#{result_id.lower()}">' in links
     if result_id == BROAD:
-        assert '<a href="frontier.html">' in links
-        assert '<a href="cases/">' in links
+        assert '<a href="atlas.html#the-frontier-survey">' in links
+        assert 'href="cases/"' not in links
     else:
         assert '<a href="cases/11.html">' in links
-        assert '<a href="frontier.html#n-11">' in links
+        assert '<a href="atlas.html#n-11">' in links
         # Both papers on the case, the one on the result that stands first, each where
         # it is served under `papers/`.
         paper = f'<a href="{overview_sections.OPTIMALITY_PAPER}">'
@@ -661,8 +661,8 @@ def test_every_site_link_is_a_served_page_and_a_real_fragment(
             assert page in render_overview.SITE_PAGES, (result_id, href)
             if page == render_overview.RESULTS_PAGE:
                 assert fragment in rows, href
-            elif page == "frontier.html":
-                assert not fragment or fragment in cases, href
+            elif page == "atlas.html":
+                assert fragment == "the-frontier-survey" or fragment in cases, href
             else:
                 assert page in {
                     overview_sections.LOWER_BOUNDS_PAPER,

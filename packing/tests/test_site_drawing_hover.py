@@ -120,7 +120,7 @@ def _read(page: Any, holder: str) -> Painted:
     return Painted(state, ink, ground, canvas)
 
 
-def _readings(page: Any) -> dict[str, Painted]:
+def _readings(page: Any, hero_address: str) -> dict[str, Painted]:
     """The cell at rest and in each washed state, then the hero's link at rest and under
     the pointer. The press is last and is never released, so nothing is followed."""
     page.locator("[data-atlas-grid]").scroll_into_view_if_needed()
@@ -135,12 +135,17 @@ def _readings(page: Any) -> dict[str, Painted]:
     page.locator(BEFORE).focus()
     page.keyboard.press("Tab")
     found["focus"] = _read(page, CELL)
+    atlas_address = page.url
+    page.goto(hero_address, wait_until="load")
+    check_site_rendering.wait_for_fonts(page)
     hero = page.locator(HERO)
     hero.scroll_into_view_if_needed()
     page.mouse.move(*AWAY)
     found["hero rest"] = _read(page, HERO)
     hero.hover()
     found["hero hover"] = _read(page, HERO)
+    page.goto(atlas_address, wait_until="load")
+    check_site_rendering.wait_for_fonts(page)
     cell.scroll_into_view_if_needed()
     cell.hover()
     page.mouse.down()
@@ -152,7 +157,7 @@ def _readings(page: Any) -> dict[str, Painted]:
 def painted(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
     """Every reading of the overview's drawings, by theme and then by state."""
     root = Path(tmp_path_factory.mktemp("site"))
-    site_renders.write(root, "index.html")
+    site_renders.write(root, "index.html", "atlas.html")
     server = preview_site.serve(root, 0)
     try:
         with site_browser.api().sync_playwright() as driver:
@@ -166,7 +171,8 @@ def painted(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
                         color_scheme=scheme,
                     )
                     response = page.goto(
-                        f"http://127.0.0.1:{server.server_port}/index.html", wait_until="load"
+                        f"http://127.0.0.1:{server.server_port}/atlas.html?atlas=grid",
+                        wait_until="load",
                     )
                     assert response is not None
                     assert response.ok
@@ -175,7 +181,9 @@ def painted(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
                         == scheme
                     )
                     check_site_rendering.wait_for_fonts(page)
-                    found[scheme] = _readings(page)
+                    found[scheme] = _readings(
+                        page, f"http://127.0.0.1:{server.server_port}/index.html"
+                    )
                     page.close()
             finally:
                 browser.close()

@@ -253,7 +253,11 @@ BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 #: quick lane ignores them: in a shard, with no browser, they could only skip, which is
 #: what they did on every pull request until that run.
 SITE_LAYOUT_TESTS = (
+    "tests/test_site_headroom.py",
+    "tests/test_site_homepage.py",
+    "tests/test_site_result_popover.py",
     "tests/test_site_case_records.py",
+    "tests/test_site_rating_tooltips.py",
     "tests/test_site_math_faces.py",
     "tests/test_site_column_measurement.py",
     "tests/test_site_result_filters.py",
@@ -4027,6 +4031,9 @@ _WORKBENCH_INPUTS = (
     "packing/devtools/templates/site-nav.css",
     "packing/devtools/templates/paper-type.css",
     "packing/devtools/overview/theme.js",
+    "packing/devtools/overview/headroom.js",
+    "packing/devtools/overview/kpress-client.js",
+    "packing/devtools/overview/rating-tooltips.js",
     "packing/witnesses/known-best/*",
     "packing/atlas/known-best/*",
     "package.json",

@@ -481,8 +481,9 @@ body {
    font (paper-design.md, Arrows). A shaft and an open head in a 16-unit box, stroke 1.6
    with round caps and joins, painted as a mask over the text colour. Each direction is
    the drawing turned: right as drawn, left mirrored, down and up a quarter turn,
-   external an eighth turn back. The two other shapes are the sort pair and the double
-   chevron: the arrow's open head twice, one over the other, in the same box and stroke,
+   external an eighth turn back. The other shapes are the sort pair, the download arrow
+   onto a horizontal line, and the double chevron: the arrow's open head twice, one over
+   the other, in the same box and stroke,
    pointing down as drawn (double-down) and up turned half round (double-up), which the
    atlas's expander carries. Inline markup is `overview_sections.arrow_icon`; the rest
    are the pseudo-elements named here. */
@@ -490,6 +491,7 @@ body {
   --site-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 8h11M9 3.5 13.5 8 9 12.5'/%3E%3C/svg%3E");
   --site-arrow-sort: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13.5v-11M2 5.5l3-3 3 3M11 2.5v11M8 10.5l3 3 3-3'/%3E%3C/svg%3E");
   --site-arrow-double: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 3 8 7.5 12.5 3M3.5 8 8 12.5 12.5 8'/%3E%3C/svg%3E");
+  --site-arrow-download: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10'/%3E%3C/svg%3E");
 }
 /* Kept at low specificity, so each place an arrow sits can place and time it. */
 .site-icon-arrow,
@@ -551,6 +553,10 @@ body {
 .site-icon-arrow[data-arrow="double-up"] {
   --site-arrow-turn: 180deg;
   --site-arrow-nudge: 0 -2px;
+}
+.site-icon-arrow[data-arrow="download"] {
+  --site-arrow-nudge: 0 2px;
+  mask-image: var(--site-arrow-download);
 }
 /* The one hover: an arrow in a link or button moves a little the way it points and keeps
    the element's colour. A disabled button's arrow stays still; a card's corner icon fades
@@ -705,6 +711,34 @@ body {
 .site-popover .site-popover-value {
   font-size: 1.15em;
   margin-block: 0.5rem 1rem;
+}
+/* Fetched articles and a document framed in a popover share the compact hierarchy.
+   Result section labels keep their separate small caps treatment. */
+.kpress .site-popover :is(h1, h2, h3, h4, h5, h6),
+:root[data-site-view="embed"]
+  .site-page
+  :is(h1, h2, h3, h4, h5, h6):where(:not(.site-result-heading)) {
+  font-family: var(--kpress-font-sans);
+  font-style: normal;
+  font-weight: var(--site-font-weight-sans-medium);
+  letter-spacing: normal;
+  line-height: var(--paper-heading-leading);
+  text-transform: none;
+}
+.kpress .site-popover h1,
+:root[data-site-view="embed"] .site-page h1:where(:not(.site-result-heading)) {
+  font-size: calc(1em * var(--paper-popover-title-scale));
+  max-inline-size: 100%;
+  overflow: auto hidden;
+  position: relative;
+}
+.kpress .site-popover h2,
+:root[data-site-view="embed"] .site-page h2:where(:not(.site-result-heading)) {
+  font-size: calc(1em * var(--paper-popover-section-scale));
+}
+.kpress .site-popover :is(h3, h4, h5, h6),
+:root[data-site-view="embed"] .site-page :is(h3, h4, h5, h6):where(:not(.site-result-heading)) {
+  font-size: 1em;
 }
 .site-popover .site-popover-links {
   font-size: var(--site-font-size-note);
@@ -2004,7 +2038,8 @@ body {
    behind the drawing, and it is all that changes: every line keeps the page's ink. */
 /* Expansion moves following sections. Keep the viewport fixed through that input
    response instead of scroll-anchoring a result row below the changing atlas. */
-.site-page:has([data-atlas-grid]) {
+body:has([data-atlas-grid]),
+body:has([data-atlas-preview]) {
   overflow-anchor: none;
 }
 .site-page .site-atlas-grid {
@@ -2159,6 +2194,12 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   transform-origin: 0 0;
   transition: var(--site-hover-transition);
 }
+.kpress .site-atlas-cell:target {
+  background: var(--site-wash);
+  outline: 2px solid var(--kpress-doc-accent);
+  outline-offset: -2px;
+  scroll-margin-block-start: 6rem;
+}
 .kpress .site-atlas-cell:is(:hover, :focus-visible) {
   background: var(--site-wash);
   text-decoration: none;
@@ -2213,7 +2254,8 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
    a phone to a wide screen. A triangle narrower than the block is centred. The tile's
    width, `--site-atlas-tile`, is declared with the grid's rule above, for the reason
    given there. */
-.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cells,
+.site-atlas-grid[data-atlas-view="triangle"]:not(html[data-site-atlas-view="grid"] *)
+.site-atlas-cells,
 html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
   gap: 0;
   grid-template-columns: repeat(var(--site-atlas-per-line, 1), var(--site-atlas-tile));
@@ -2229,7 +2271,9 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
 .site-atlas-cells[data-atlas-wrapped] {
   --site-atlas-row-space: 0.4;
 }
-.kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell,
+.kpress
+  .site-atlas-grid[data-atlas-view="triangle"]:not(html[data-site-atlas-view="grid"] *)
+  .site-atlas-cell,
 html[data-site-atlas-view="triangle"] .kpress .site-atlas-grid .site-atlas-cell {
   /* Initial positions mirror place() in atlas-view.js. Each earlier row contributes
      ceil((2k - 1) / columns) lines; --r is the row and --c its offset from the square.
@@ -2300,7 +2344,7 @@ html[data-site-atlas-view="triangle"] .kpress .site-atlas-grid .site-atlas-cell 
   );
   padding: calc(var(--site-atlas-tile) * 0.07);
 }
-.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-n,
+.site-atlas-grid[data-atlas-view="triangle"]:not(html[data-site-atlas-view="grid"] *) .site-atlas-n,
 html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-n {
   font-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.25), 0.8rem);
   line-height: 1.15;
@@ -2308,7 +2352,9 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-n {
 }
 /* The perfect squares, down the right edge, are numbered in the text's own colour and
    the medium weight: the row ends there. */
-.site-atlas-grid[data-atlas-view="triangle"] [data-atlas-square] .site-atlas-n,
+.site-atlas-grid[data-atlas-view="triangle"]:not(html[data-site-atlas-view="grid"] *)
+  [data-atlas-square]
+  .site-atlas-n,
 html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site-atlas-n {
   color: var(--kpress-doc-text);
   font-weight: var(--site-font-weight-sans-medium);
@@ -2582,8 +2628,14 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
    One record per case, in its own file at `cases/11.html`, shown by the record page
    (`cases/`, overview/case-page.js) and by the one case popover every page that links
    cases carries (overview/case-popover.js). A record opens with its visual summary,
-   the drawing first and large, then the number line of its bounds and the film's facts
-   under it, and the rest of the record follows. */
+   the drawing and bound facts together, followed by the detailed record. */
+.site-case {
+  container-type: inline-size;
+  inline-size: 100%;
+  margin-inline: auto;
+  max-inline-size: 48rem;
+  min-inline-size: 0;
+}
 .site-case-reader {
   margin-block-start: 1rem;
 }
@@ -2599,7 +2651,7 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
    in it as its own page shows it. Its action, to the record's own address, stays in
    reach at the foot of a record taller than the window. */
 .site-popover.site-case-pop {
-  inline-size: min(62rem, 100vw - 2rem);
+  inline-size: min(52rem, 100vw - 2rem);
   max-inline-size: none;
 }
 .site-popover.site-case-pop:popover-open {
@@ -2613,12 +2665,20 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
    screens, and a phone leaves almost no room outside the panel to press. */
 .site-popover.site-case-pop .site-popover-close {
   background: var(--kpress-doc-bg);
-  float: inline-end;
+  display: block;
+  float: none;
   inset-block-start: var(--site-popover-close-inset);
   /* Held at the top alone: the card's `inset-inline-end`, read by a sticky box as a
      second limit, set it a padding's width in from the corner, over the steps. */
   inset-inline-end: auto;
   margin-block-start: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
+  /* A float narrows the record's inline-size container and moves its centre. Keep
+     the sticky cross in a block that occupies no height beside the first steps. */
+  margin-block-end: calc(
+    -1 *
+    (var(--site-popover-close) + var(--site-popover-close-inset) - var(--site-popover-pad))
+  );
+  margin-inline-start: auto;
   margin-inline-end: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
   position: sticky;
   z-index: 2;
@@ -2626,13 +2686,17 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
 .site-popover.site-case-pop .site-popover-close:is(:hover, :focus-visible) {
   background: var(--site-wash);
 }
+.site-popover.site-case-pop > .site-case-pop-body {
+  /* Only the steps beside the cross reserve its width; the article stays centred. */
+  padding-inline-end: 0;
+}
 
 .site-case-pop .site-popover-actions {
   background: var(--kpress-doc-bg);
   border-block-start: 1px solid var(--kpress-doc-border);
   inset-block-end: calc(-1 * var(--site-popover-pad));
   margin-block-end: calc(-1 * var(--site-popover-pad));
-  padding-block: 0.6rem var(--site-popover-pad);
+  padding-block: var(--site-popover-pad);
   position: sticky;
 }
 @media (max-width: 40rem) {
@@ -2660,6 +2724,9 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
   justify-content: space-between;
   margin-block-end: 1rem;
 }
+.site-case-steps [rel~="next"] {
+  margin-inline-start: auto;
+}
 /* The record's steps are the first line the cross stands beside once it is held at the
    corner, so they keep clear of it as the label above them does: the next case's link
    ended under the cross (`think-0dxa`). */
@@ -2675,42 +2742,80 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
     padding-inline-end: calc(var(--site-popover-close) + var(--site-popover-close-inset) - 0.75rem);
   }
 }
-.kpress .site-case-title {
-  font-size: calc(var(--site-font-size-sans-base) * 1.6);
+.site-case-eyebrow {
+  display: block;
+  text-align: center;
+}
+.kpress .site-case-title,
+.kpress .site-popover .site-case-title {
+  font-family: var(--kpress-font-sans);
+  font-size: calc(var(--site-font-size-sans-base) * var(--paper-title-scale));
+  font-weight: var(--site-font-weight-sans-medium);
   line-height: var(--paper-heading-leading);
   margin-block: 0.5rem 0.6rem;
 }
-.site-case-title b {
-  font-weight: var(--site-font-weight-sans-medium);
-  margin-inline-end: 0.4rem;
+.site-case-status {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--site-font-size-note);
+  gap: 0.45rem;
+  justify-content: center;
+  margin-block: 0 0.6rem;
 }
-.site-case-title :is(.site-chip, .site-corrects) {
-  vertical-align: middle;
+.site-case-status .site-case-badges {
+  margin: 0;
 }
 .kpress .site-case-interval {
   font-size: calc(var(--site-font-size-sans-base) * 1.25);
-  margin-block: 0 1.5rem;
+  margin-block: 0 1rem;
+  overflow-x: auto;
+  padding-block: 0.4em;
+  position: relative;
+  white-space: nowrap;
 }
-/* The visual summary: the drawing centred and large, as wide as the reading measure
-   allows up to 28rem, then the number line and the facts under it on the measure. */
+/* A full exact interval can be wider than a phone. Its contents start at the scroll
+   origin rather than being centred past the left edge, and its fractions keep room
+   above and below the line. */
+.site-case-interval > .kpress-math {
+  display: block;
+  inline-size: max-content;
+  min-inline-size: 100%;
+}
+/* Both the canonical article and the fetched article use their own available width.
+   A compact drawing leaves the verified bounds and their credits in the opening view. */
 .site-case-summary {
   display: grid;
   gap: 1.2rem;
+  grid-template-columns: minmax(0, 1fr);
   justify-items: center;
   margin-block: 0 1.5rem;
+  min-inline-size: 0;
 }
 .site-case-figure {
-  inline-size: min(28rem, 100%);
+  inline-size: min(20rem, 100%);
   margin: 0;
+  min-inline-size: 0;
 }
-/* In the popover the drawing fills the panel's width and grows and shrinks with it,
-   square at every width (the owner, 2026-10-04, `think-u214`), and is never taller than
-   the panel shows at once: the panel's height less 8rem, room for the caption (2rem) and
-   the actions held at its foot (5rem), so the whole square can be seen without the
-   actions covering its foot. At 1280 by 800 that is 608px of the panel's 934; a tablet
-   or a phone, taller than it is wide, keeps the full width. */
-.site-case-pop .site-case-figure {
-  inline-size: min(100%, var(--site-popover-max-block) - 8rem);
+@container (max-width: 41.999rem) {
+  .site-case .site-case-figure {
+    inline-size: min(18rem, 100%);
+  }
+}
+@container (max-width: 20rem) {
+  .site-case .site-case-figure {
+    inline-size: min(14rem, 100%);
+  }
+  .site-case .site-atlas-gap-values {
+    line-height: 1.4;
+  }
+  /* Close bounds keep their labels on separate lines at the same number-line marks. */
+  .site-case .site-atlas-gap-values:has(.is-lower + .is-upper) {
+    block-size: 2.9em;
+  }
+  .site-case .site-atlas-gap-values .is-lower + .is-upper {
+    inset-block-start: 1.45em;
+  }
 }
 .site-case-summary-facts {
   font-family: var(--kpress-font-sans);
@@ -2718,6 +2823,10 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
   font-weight: var(--site-font-weight-sans-light);
   inline-size: min(40rem, 100%);
   min-inline-size: 0;
+}
+/* Labels near either end of the number line keep their full width inside the case. */
+.site-case-summary .site-atlas-gap {
+  margin-inline: 1.5rem;
 }
 .site-case-summary .site-atlas-gap-values span[data-anchor="end"] {
   transform: translateX(calc(-100% - 0.3rem));
@@ -2773,6 +2882,15 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
 }
+/* The case's 48rem measure fits at most two columns. A final unpaired panel keeps
+   the same width as its neighbours and centres on the row when both columns fit. */
+@container (min-width: 35rem) {
+  .site-case-bounds > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    inline-size: calc((100% - 1rem) / 2);
+    justify-self: center;
+  }
+}
 .site-case-bound,
 .site-case-note {
   border: 1px solid var(--kpress-doc-border);
@@ -2820,6 +2938,17 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
 }
 .site-case-polynomial {
   font-size: var(--site-font-size-note);
+}
+/* Exact formulas scroll in their own block; the article, surrounding explanation and
+   popover controls keep their width even when a polynomial needs a much longer line. */
+.site-case :is(.site-case-value, .site-case-polynomial p, .site-case-result-summary),
+.site-case .site-detail dd:has(.kpress-math),
+.site-case-summary .site-atlas-pop-bound,
+.site-case-prose :is(p, .kpress-math[data-kpress-math="display"]) {
+  max-inline-size: 100%;
+  overflow-x: auto;
+  padding-block: 0.25em;
+  position: relative;
 }
 .site-case-data {
   border-block-start: 1px solid var(--kpress-doc-border);

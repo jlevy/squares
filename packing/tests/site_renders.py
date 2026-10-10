@@ -164,27 +164,28 @@ class _FrontierMath(HTMLParser):
         ):
             self.token = True
 
-    def counts(self) -> tuple[int, int]:
+    def counts(self, *, prose_formulas: int = 9) -> tuple[int, int]:
         assert not self.stack
         assert self.native_depth is None
         assert self.rows == [f"n-{n}" for n in range(1, 325)]
         assert self.native > 0
-        assert self.total - self.native == 9
+        assert self.total - self.native == prose_formulas
         return self.native, self.total
 
 
-def count_frontier_math(source: str) -> tuple[int, int]:
+def count_frontier_math(source: str, *, prose_formulas: int = 9) -> tuple[int, int]:
     """Require the complete row roster and structurally readable native formulas."""
     parser = _FrontierMath()
     parser.feed(source)
     parser.close()
-    return parser.counts()
+    return parser.counts(prose_formulas=prose_formulas)
 
 
 @cache
 def frontier_math_counts() -> tuple[int, int]:
     """Native and total formulas from every canonical frontier row and its prose."""
-    return count_frontier_math(html("frontier.html"))
+    # Atlas adds two introductory formulas before the survey's nine.
+    return count_frontier_math(html("atlas.html"), prose_formulas=11)
 
 
 def served(name: str) -> str:

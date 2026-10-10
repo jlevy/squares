@@ -115,14 +115,14 @@ def frontier_math_counts() -> tuple[int, int]:
 
 @pytest.fixture(scope="module")
 def page() -> str:
-    return site_renders.html("frontier.html")
+    return site_renders.html("atlas.html")
 
 
 @pytest.fixture(scope="module")
 def served() -> str:
     """The page as a reader's browser assembles it, with every shared asset it links put
     back in it (`tests.site_renders.served`)."""
-    return site_renders.served("frontier.html")
+    return site_renders.served("atlas.html")
 
 
 @pytest.fixture(scope="module")
@@ -150,7 +150,7 @@ def test_every_case_file_is_a_row_and_every_row_a_case_file(rows) -> None:
 
 
 def test_every_row_is_its_cases_anchor(rows) -> None:
-    """`frontier.html#n-11` lands on the case, which the overview's case cards open."""
+    """`atlas.html#n-11` lands on its survey row; the old Frontier address forwards here."""
     for attributes, _ in rows:
         assert attributes["id"] == f"n-{attributes['data-n']}"
 
@@ -253,14 +253,18 @@ def test_a_correcting_bound_keeps_its_star_and_names_what_it_corrects(
     case = next(case for case in tables.load_cases() if case["n"] == 106)
     row = frontier.case_row(case, recent=True, corrects=corrected[106])
     assert (
-        '<td data-value="1"><span class="site-star">★</span>'
+        '<td data-value="1"><span class="site-star" '
+        'title="New result: a recent verified lower bound">★</span>'
         '<span class="site-corrects">corrects Nagamochi 2005</span></td>'
     ) in row
     assert ' data-recent="true" data-corrects="T-007" ' in row
     plain = frontier.case_row(case, recent=True)
-    assert '<td data-value="1"><span class="site-star">★</span></td>' in plain
+    assert (
+        '<td data-value="1"><span class="site-star" '
+        'title="New result: a recent verified lower bound">★</span></td>'
+    ) in plain
     assert "data-corrects" not in plain
-    # The star's tooltip is said once, by its column's heading, not on every star.
+    # The heading still explains the correction tags; each star now has its meaning.
     (recent,) = [cell for cell in parsed.head if (cell["words"] or "").strip() == "Recent"]
     assert recent["title"] == frontier.HEADER_TITLES["Recent"]
     assert all("title" not in cell for cell in parsed.head if cell is not recent)
@@ -539,12 +543,14 @@ def test_an_invalid_record_fails_the_render(tmp_path: Path, monkeypatch) -> None
         frontier.frontier_cases()
 
 
-def test_the_page_fetches_only_the_shared_assets_and_is_under_its_ceiling(page: str) -> None:
-    assert_fetches_only_assets("frontier.html", page)
+def test_the_page_fetches_only_assets_and_the_survey_retains_its_ceiling(page: str) -> None:
+    assert_fetches_only_assets("atlas.html", page)
     # Each file it names is one the build writes beside it.
     assert site_assets.shared().assets.referenced([page])
-    size = len(page.encode("utf-8"))
-    assert size < PAGE_CEILING_BYTES, f"frontier.html is {size:,} bytes"
+    start = page.index('<h2 id="the-frontier-survey"')
+    survey = page[start : page.index("</article>", start)]
+    size = len(survey.encode("utf-8"))
+    assert size < PAGE_CEILING_BYTES, f"the Frontier Survey is {size:,} bytes"
     # KPress's per-cell column labels, which nothing on the site reads, are dropped.
     assert "data-col=" not in page
     assert "data-col-index=" not in page
@@ -552,10 +558,32 @@ def test_the_page_fetches_only_the_shared_assets_and_is_under_its_ceiling(page: 
 
 def test_the_page_carries_the_table_script_and_its_controls(page: str, served: str) -> None:
     table = site_assets.shared().assets.script_file(frontier.TABLE_SCRIPT)
-    assert page.count(site_assets.script_tag(table, "frontier.html")) == 1
+    assert page.count(site_assets.script_tag(table, "atlas.html")) == 1
     assert frontier.TABLE_SCRIPT.read_text(encoding="utf-8") in served
     assert 'class="site-table-tools" data-table="frontier" hidden' in page
-    assert 'aria-current="page" href="frontier.html"' in page
+    assert 'aria-current="page" href="atlas.html"' in page
+    assert 'data-page="frontier"' not in page
+
+
+def test_the_complete_survey_follows_the_graphics_and_shares_one_case_popover(
+    page: str,
+) -> None:
+    graphic = page.index("data-atlas-grid")
+    survey = page.index('<h2 id="the-frontier-survey"')
+    table = page.index('id="frontier-table"')
+    assert graphic < survey < table
+    assert 'id="the-survey"' in page
+    assert page.count('id="pop-case"') == 1
+    ids = re.findall(r'\bid="([^"]+)"', page)
+    assert len(ids) == len(set(ids))
+    assert {f"n-{n}" for n in range(1, 325)} <= set(ids)
+    assert {f"atlas-n-{n}" for n in range(1, 325)} <= set(ids)
+    total = len(page.encode("utf-8"))
+    survey_size = len(page[survey : page.index("</article>", survey)].encode("utf-8"))
+    print(
+        f"Prepared Atlas HTML: {total:,} bytes; Frontier Survey: {survey_size:,}; "
+        f"graphics and shared shell: {total - survey_size:,}."
+    )
 
 
 def test_an_evidence_name_and_its_comma_are_one_box() -> None:
@@ -615,8 +643,11 @@ def test_no_math_is_left_as_source_text_in_the_table(
         == frontier_math_counts[0]
         > 0
     )
-    prose = page[: page.index("<tbody>")] + page[page.index("</tbody>") :]
+    start = page.index('<h2 id="the-frontier-survey"')
+    end = page.index("</article>", start)
+    prose = page[start : page.index("<tbody>")] + page[page.index("</tbody>") : end]
     assert prose.count('data-kpress-math="inline"') == 9
+    assert page[:start].count('data-kpress-math="inline"') == 2
     assert 'class="katex"' in prose
     assert r"\(\dfrac{7943}{2000}\)" not in table
 
