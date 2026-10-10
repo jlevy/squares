@@ -5,7 +5,7 @@ title: Credit Levy personally for new results while retaining The Squares Projec
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: codex@spud10
 labels: []
@@ -17,7 +17,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T22:25:52.024Z
-updated_at: 2026-10-10T22:30:50.035Z
+updated_at: 2026-10-10T22:34:11.159Z
 started_at: 2026-10-10T22:26:46.340Z
 ---
 User convention: The Squares Project names the general project; new-result authorship and personal contributions credit Levy, linked to Joshua Levy (GitHub jlevy, X ojoshe). Audit notes, records, generated result credit defaults and PDF credit/byline surfaces. Simplify repeated name/handle expansions through canonical profile links. Preserve archived source wording, genuine project/tool attribution, roles, collaborators and model assistance. Enumerate and review precise migrations rather than global replacement.
+
+## Notes
+
+Canonical attribution.md now distinguishes project branding from Levy personal credit. New result default already Levy. Concrete migration sub-beads: think-2v8h bound-citation default and consumers; think-zupq66verifier author fields and5producers; think-ir3i PDF compact profile links/credit presentation. Existing PDF oversight and scholarly metadata already name Joshua Levy. Preserve source quotations and project/tool roles.
