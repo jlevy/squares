@@ -5,7 +5,7 @@ title: "Website: compact homepage, consistent case layouts, and scroll-aware nav
 kind: epic
 status: in_progress
 priority: 1
-version: 86
+version: 87
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -82,7 +82,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:13:39.980Z
-updated_at: 2026-10-10T23:52:53.495Z
+updated_at: 2026-10-10T23:57:25.522Z
 started_at: 2026-10-08T23:22:05.552Z
 ---
 Website layout and navigation remediation with an editable local draft. Preserve originalhero and exact problem introduction; nativeSVG Atlas preview Expand/Explore with live themes; recent S4+cap12 results and linkedLegend card; shared main heading styles/spacing and uppercase controls; separate PDFs and inline click-to-play video; About/doc cards and MoreResources; Headroom hide-down/show-up and gear alignment; consistent case/popover math/layout and unique resulttitle. Hero opens its case popover with record/Frontier-row/Atlas-tile actions. Atlas tile navigation fully expands then highlights/scrolls to the case; fullFrontierSurvey sits after Atlas graphics with distinct row/tile targets and legacyforwarding. Track each change in childbeads; verify localdraft beforepublication. ScientificPDF-description edit remains canceled for owner separatework.
@@ -90,3 +90,11 @@ Website layout and navigation remediation with an editable local draft. Preserve
 ## Notes
 
 All requested website changes are committed and pushed to draft PR 462, final head 16beeb1bdf8c196c66bd32cef5b531d7a91259b4. Canonical homepage: single centered n=53 SVG hero/popover, readable two-paragraph introduction, centered About card, six Triangle rows (1-36) expanding immediately through 100 and 324, Download PDF and Explore actions, recent S4+ results, linked aligned Legend, Papers, separate PDFs, inline video, mirrored Squares Project Documentation and More Resources. Shared design covers headings, uppercase buttons/arrows, thin scrollbars, themed accessible icon tooltips, Headroom and consistent popover math/layout. Atlas defaults to Triangle, preserves complete preview rows and all 324 expanded cases, deep-links to tiles, and includes Frontier Survey after graphics; About retains project/contribution/documentation sections. Astra final technical reviews are clean. Final hosted CI is pending under think-o2jd; implementation beads await green checks. Keep epic open for the separate full pre-merge checkpoint think-xio5. No local server is currently claimed running. Scientific data and PDFs are unchanged; the PDF description edit remains canceled.
+
+Current reconciliation (2026-10-11; supersedes earlier UI descriptions, not their receipts): upstream 8fc983414 is merged by 68b9eb3f13ba106f632f38382453836b5c70be27; formatting follow-up ef61c64eb997242fe772f71450407563a33ca08c fixes one overlong test line. Current website uses a single 53 hero, shared responsive Row-default Atlas with approximately 100->324->100 complete-row stages, canonical results.html, one full content-versioned 7497x5361 Triangle preview in Visuals plus inline video, Papers with both PDFs, linked full author credits, shared headings/choosers/action gaps and record layouts. Earlier 36-stage, About-card, linked homepage Legend, and unchanged-PDF notes above are historical.
+
+The latest substantive work remains open: think-077n removes the Atlas intro and adds shared Frontier Survey / Best Known Results for n <= 324 H1s (including adjacent C1 stale assertion cleanup); think-7j48 removes web recency stars in favor of red dates/case numbers and the concise color legend; think-kg7a removes print recency stars in favor of crimson case numerals and coherent export families. Documentation cleanup of current recency-star instructions is tracked with think-7j48; unrelated significance, mathematical and archived/provenance star references are preserved. Existing think-rxkc print legend wording/order/red phrase is verified; its future no-star exports require think-kg7a verification.
+
+Older UI implementation beads remain open pending final integrated-head publication/CI, rather than evidence of unfinished implementation. Final consolidation think-12zr, end-to-end review think-mvh7 and full checkpoint think-xio5 remain open. think-24se is a separate reviewed Row comparison, not authorization to replace canonical PDF drawing scale; owner disposition remains. Older active-plan think-lt7k still has unfinished overview resource-coverage notes and needs disposition against current organization. Process owner think-ht59, prerequisite-scoping follow-up think-9k61 and timing-enforcement debt think-9dhb remain open. No bead is closed by this reconciliation.
+
+Validation remains honest: the current merged-tree push run was interrupted before a complete behavioral verdict, including early failures and later disk-exhaustion errors; neither later environment errors nor previous green checkpoints establish current-head PASS. Final exact-head CI and the matching deferred full checkpoint are still required. No merge authorization is inferred.
