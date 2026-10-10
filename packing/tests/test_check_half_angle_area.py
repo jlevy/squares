@@ -1,22 +1,34 @@
-"""`devtools.check_half_angle_area`: the third exact route for T-128, T-130 and T-131."""
+"""`devtools.check_half_angle_area`: the third exact route for the 2026-10-10 reviews."""
 
 from __future__ import annotations
 
+import hashlib
+import json
 from fractions import Fraction
+from pathlib import Path
+from typing import Any
 
 import pytest
 
 from devtools import check_half_angle_area as route
+from devtools import upper_bound_reports as upper
 from devtools.check_half_angle_area import (
     AreaRouteError,
     Pose,
+    admitted,
     controls,
     corners,
     decide,
+    decide_placed,
     literal,
     overlaps,
     parse_certificate,
+    placed,
+    read_centred_json,
+    read_fact,
+    read_squish_json,
     rotation,
+    unit_basis,
 )
 
 TINY = Fraction(1, 10**30)
@@ -159,3 +171,237 @@ def test_register_claims_print_every_count_once() -> None:
     assert sorted(claims["T-128"]) == [105, 108, 127, 131, 155, 180, 228, 306]
     assert sorted(claims["T-130"]) == [84, 86, 105, 175, 270]
     assert sorted(claims["T-131"]) == [132]
+
+
+# --------------------------------------------------------------------------- the imports
+
+#: Two unit squares in the box of side 12/5, the right one turned to c = 3/5 and touching
+#: the left one with a vertex, as in the rotated-contact test above.
+PAIR_JSON: dict[str, Any] = {
+    "n": 2,
+    "s_exact": "12/5",
+    "squares": [["1/2", "3/5", "0"], ["17/10", "7/10", "1/2"]],
+}
+
+
+def test_a_stated_basis_must_be_a_rotation() -> None:
+    assert unit_basis(Fraction(3, 5), Fraction(-4, 5)) == (Fraction(3, 5), Fraction(-4, 5))
+    with pytest.raises(AreaRouteError):
+        unit_basis(Fraction(1), Fraction(1, 2))
+    with pytest.raises(AreaRouteError):
+        decide_placed(Fraction(2), [(Fraction(1), Fraction(1), Fraction(1), Fraction(1, 2))])
+
+
+def test_a_placed_decision_is_the_half_angle_one_and_counts_wall_contacts() -> None:
+    assert decide(Fraction(2), GRID, measure=True) == decide_placed(
+        Fraction(2), placed(GRID), measure=True
+    )
+    # Each grid square touches two walls of the closed box; nothing touches at side 3.
+    assert decide(Fraction(2), GRID).wall_contacts == 8
+    assert (
+        decide(Fraction(3), [(Fraction(3, 2), Fraction(3, 2), Fraction(0))]).wall_contacts == 0
+    )
+
+
+def test_the_squish_and_centred_readers_read_one_packing_alike() -> None:
+    squish = read_squish_json(json.dumps(PAIR_JSON).encode(), 2)
+    shifted = [
+        {"x": str(literal(x) - Fraction(6, 5)), "y": str(literal(y) - Fraction(6, 5)), "t": t}
+        for x, y, t in PAIR_JSON["squares"]
+    ]
+    centred = {"n": 2, "coordinate_system": "centered", "side": "12/5", "squares": shifted}
+    assert read_centred_json(json.dumps(centred).encode(), 2) == squish
+    assert squish == parse_certificate("2 12/5\n1/2 3/5 0\n17/10 7/10 1/2\n", 2)
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        '{"n": 2, "n": 2, "s_exact": "12/5", "squares": []}',
+        '{"n": 3, "s_exact": "12/5", "squares": [["1", "1", "0"], ["2", "1", "0"]]}',
+        '{"n": 2, "s_exact": "12/5", "squares": [["1", "1"], ["2", "1", "0"]]}',
+        '{"n": 2, "s_exact": 2.4, "squares": [["1", "1", "0"], ["2", "1", "0"]]}',
+        '{"n": 2, "s_exact": "1e3", "squares": [["1", "1", "0"], ["2", "1", "0"]]}',
+    ],
+)
+def test_the_squish_reader_refuses_what_its_format_does_not_state(text: str) -> None:
+    with pytest.raises(AreaRouteError):
+        read_squish_json(text.encode(), 2)
+
+
+def test_the_centred_reader_refuses_another_coordinate_system() -> None:
+    square = {"x": "0", "y": "0", "t": "0"}
+    value = {"n": 1, "coordinate_system": "lower-left", "side": "2", "squares": [square]}
+    centred = json.dumps({**value, "coordinate_system": "centered"}).encode()
+    assert read_centred_json(centred, 1) == (
+        Fraction(2),
+        ((Fraction(1), Fraction(1), Fraction(0)),),
+    )
+    with pytest.raises(AreaRouteError):
+        read_centred_json(json.dumps(value).encode(), 1)
+
+
+def test_the_n70_fact_reads_as_its_bases_state_and_as_the_kernel_reads_it() -> None:
+    packet = route.WEB / route.IMPORTS["#483"]
+    certificate = upper.read_facts(packet)[70]
+    text = route.packet_bytes(packet / "facts/n-070.yaml").decode()
+    side, placements = read_fact(text, 70)
+    assert side == certificate.side
+    assert placements == tuple((p.x, p.y, *p.basis) for p in certificate.poses)
+    # One basis off the unit circle, by one unit in a numerator, is refused.
+    tampered = text.replace("- -60000000000000000/", "- -60000000000000001/", 1)
+    assert tampered != text
+    with pytest.raises(AreaRouteError):
+        read_fact(tampered, 70)
+
+
+@pytest.mark.parametrize(
+    ("side", "offered"),
+    [
+        (Fraction(3, 7), "3/7"),
+        (Fraction(3, 7), "6/14"),
+        (Fraction(3, 7), "0.429"),
+        (Fraction(1, 8), "0.125"),
+        (Fraction(1, 8), "0.13"),
+    ],
+)
+def test_admission_takes_the_printed_side_or_its_rounding_up(
+    side: Fraction, offered: str
+) -> None:
+    assert admitted(side, offered)
+
+
+@pytest.mark.parametrize("offered", ["0.428", "0.430", "4/7", "0.4285714285714285"])
+def test_admission_refuses_a_print_below_the_side_or_above_its_rounding_up(
+    offered: str,
+) -> None:
+    assert not admitted(Fraction(3, 7), offered)
+
+
+SQUISH_481 = (
+    131,
+    153,
+    154,
+    207,
+    209,
+    232,
+    236,
+    237,
+    259,
+    263,
+    269,
+    270,
+    292,
+    302,
+    303,
+    305,
+    307,
+)
+
+
+def test_the_import_roster_is_every_certificate_the_entries_would_cite() -> None:
+    found = [(case.issue, case.n) for case in route.import_cases()]
+    assert found == [
+        *(("#476", n) for n in (132, 237, 263, 267, 270, 303)),
+        *(("#481", n) for n in SQUISH_481),
+        ("#483", 70),
+        *(("#484", n) for n in (308, 343, 344)),
+    ]
+
+
+def test_the_n70_import_agrees_with_its_receipt_plan_and_print_to_every_digit() -> None:
+    case = next(case for case in route.import_cases() if case.issue == "#483")
+    row = route.decide_import(case)
+    packet = route.WEB / case.packet
+    maintained = upper.check_certification(packet)[70]
+    claim = route.PLAN_CLAIM.findall(upper.register_plan(packet)["results.yaml"]["claim"])
+    frozen = upper.check_claims(packet)["results"][0]
+    assert row["passed"]
+    assert row["wall_contacts"] == 0
+    assert all(row["controls"].values())
+    assert (
+        route.compare_import(
+            row, maintained, literal(claim[0][1]), frozen, "8.88096037156625096037155737"
+        )
+        == []
+    )
+    assert route.compare_import(
+        row, maintained, literal(claim[0][1]), frozen, "8.880960371566"
+    ) == [
+        f"#483 n=70 ({case.packet}): the frozen claim record states another side",
+        (
+            f"#483 n=70 ({case.packet}): the side is neither the printed 8.880960371566 nor "
+            "rounds up to it"
+        ),
+    ]
+
+
+@pytest.fixture
+def mock_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path, Path]:
+    """A derived-fact packet of two squares and its upstream files at a pinned commit."""
+    monkeypatch.setattr(route, "REPO", tmp_path)
+    commit = "0" * 40
+    upstream = tmp_path / "upstream"
+    (upstream / "run").mkdir(parents=True)
+    centred = {
+        "n": 2,
+        "coordinate_system": "centered",
+        "side": "12/5",
+        "squares": [
+            {"x": "-7/10", "y": "-3/5", "t": "0"},
+            {"x": "1/2", "y": "-1/2", "t": "1/2"},
+        ],
+    }
+    (upstream / "run/cert.json").write_text(json.dumps(centred), encoding="utf-8")
+    (upstream / "run/summary.csv").write_text("n,exact\n2,12/5\n", encoding="utf-8")
+    packet = tmp_path / "packet"
+    (packet / "acquisition").mkdir(parents=True)
+    (packet / "facts").mkdir()
+    pinned = [
+        {"path": path, "sha256": hashlib.sha256((upstream / path).read_bytes()).hexdigest()}
+        for path in ("run/cert.json", "run/summary.csv")
+    ]
+    record = {"sources": [{"source_commit": commit, "pinned_only": pinned}]}
+    (packet / "acquisition/sources.json").write_text(json.dumps(record), encoding="utf-8")
+    row = {
+        "n": 2,
+        "path": "run/cert.json",
+        "format": "centred-json",
+        "offered": "12/5",
+        "printed_in": f"https://github.com/someone/repo/blob/{commit}/run/summary.csv",
+        "fact": "facts/n-002.yaml",
+    }
+    declaration = {"certificates": [row], "requested": [2]}
+    (packet / "acquisition/report.json").write_text(json.dumps(declaration), encoding="utf-8")
+    fact = (
+        "witness:\n  n: 2\n  side: 12/5\n  square_size: '1'\n"
+        "  representation: center-basis\n  scalar:\n    kind: rational\n"
+        "  coordinates:\n    origin: lower-left\n    axes: x-right-y-up\n  squares:\n"
+        "  - id: 1\n    center: [1/2, 3/5]\n    basis: ['1', '0']\n"
+        "  - id: 2\n    center: [17/10, 7/10]\n    basis: [3/5, 4/5]\n"
+    )
+    (packet / "facts/n-002.yaml").write_text(fact, encoding="utf-8")
+    return packet, upstream
+
+
+def test_a_fact_is_held_to_its_pinned_upstream_file_and_printed_side(
+    mock_packet: tuple[Path, Path],
+) -> None:
+    packet, upstream = mock_packet
+    assert route.upstream_problems(packet, upstream) == (2, [])
+
+
+def test_an_upstream_file_off_its_pin_or_another_packing_is_reported(
+    mock_packet: tuple[Path, Path],
+) -> None:
+    packet, upstream = mock_packet
+    path = upstream / "run/summary.csv"
+    path.write_text("n,exact\n2,13/5\n", encoding="utf-8")
+    assert route.upstream_problems(packet, upstream) == (
+        1,
+        ["packet: run/summary.csv is not the file the packet pins"],
+    )
+    fact = packet / "facts/n-002.yaml"
+    fact.write_text(fact.read_text().replace("[17/10, 7/10]", "[9/5, 7/10]"), encoding="utf-8")
+    _held, problems = route.upstream_problems(packet, upstream)
+    assert "packet n=2: the fact is not the packing run/cert.json states" in problems

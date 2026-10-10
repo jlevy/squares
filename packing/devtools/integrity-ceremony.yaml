@@ -99,6 +99,16 @@ allowlist:
       value the packet's acquire_source manifest pins, and `check` refuses a file
       whose bytes are not the measured ones before re-measuring. The digest
       decides no geometry and names no file this repository wrote.
+  - path: packing/devtools/check_half_angle_area.py
+    kind: download
+    boundary: >-
+      `decide-imports --upstream` reads certificates and a summary table that #481
+      and #483 publish without a licence and that their packets therefore keep
+      outside Git, fetched from the source repository at the pinned commit into a
+      directory the reviewer names. Each file's SHA-256 is held against the value
+      the packet's acquisition record pinned at import, before the third route's own
+      reader holds it to the retained derived fact. The digest decides no geometry
+      and names no file this repository wrote.
   - path: packing/devtools/n17_shared_centre_lp.py
     kind: generated-artifact
     boundary: >-
