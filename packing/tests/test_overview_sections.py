@@ -179,6 +179,15 @@ def test_atlas_preview_keeps_six_rows_and_prepares_web_labels_without_changing_p
         stars = card.findall('.//*[@data-feature="release-star"]')
         assert len(stars) == int(recent[n].any), n
         assert all(star.tag.endswith("polygon") and star.get("points") for star in stars)
+        for star in stars:
+            star_x = [float(point.split(",")[0]) for point in star.attrib["points"].split()]
+            label_right = float(texts[0].attrib["x"]) + float(texts[0].attrib["textLength"])
+            gap = min(star_x) - label_right
+            assert abs(gap - float(texts[0].attrib["font-size"]) / 2) < 1e-6, n
+            left, _top, width, _height = map(
+                float, card.attrib["data-homepage-atlas-viewbox"].split()
+            )
+            assert max(star_x) < left + width, n
     visible = preview.split("<template data-homepage-atlas-gzip>", 1)[0]
     svgs = re.findall(r"<svg\b.*?</svg>", visible, re.DOTALL)
     links = re.findall(r'<a class="site-atlas-cell"[^>]*>', visible)

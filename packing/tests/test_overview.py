@@ -1302,7 +1302,7 @@ def test_the_regularized_set_is_the_layer_index_and_refuses_a_stale_drawing(
 
 
 def test_overview_counts_are_centered_and_case_stars_keep_the_shared_color() -> None:
-    """Overview counts have no star styling; other recent-result stars keep their ink."""
+    """Counts stay centered; applicable stars sit beside them in the shared accent."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     assert "site-atlas-layer-mark" not in css
     assert "color: var(--site-new-result);" in _rule(css, ".site-star")
@@ -1313,7 +1313,14 @@ def test_overview_counts_are_centered_and_case_stars_keep_the_shared_color() -> 
         "position: relative;",
     ):
         assert declaration in number, declaration
-    assert ".site-atlas-n > .site-star" not in css
+    star = _rule(css, ".site-atlas-n > .site-star")
+    for declaration in (
+        "position: absolute;",
+        "inset-inline-start: calc(100% + 0.12em);",
+        "inset-block-start: 50%;",
+        "translate: 0 -50%;",
+    ):
+        assert declaration in star, declaration
     assert '[data-atlas-layer="regularized"]' not in css
 
 
@@ -3994,12 +4001,13 @@ def test_recent_preview_headlines_link_to_their_canonical_result_pages(page: str
 
 
 #: The site's own statement, the owner's words of 2026-10-03 (`think-a7oa`), with the
-#: name the owner left blank filled from the register (T-060 is Ahmed's),
+#: name the owner left blank filled with the source's handle, Queuingtheorydotcom
+#: (T-060 is credited to Ahmed in the register),
 #: the project's start put as the record has it (its explorations obtained the lower
 #: bounds, from 2026-08-31, after it began on 2026-08-22), and one phrase narrowed to
 #: what the register holds: the project tabulates every known new result and verifies
 #: the proofs behind them, without claiming every one is checked, since some registered
-#: results are recorded and not yet replayed here. The sentence after Ahmed's
+#: results are recorded and not yet replayed here. The sentence after that proof
 #: is the owner's of the same day (`think-nlyc`): the top-line results by others, Evan
 #: Daniel's family T-064 and his exact values T-052, T-051 and T-053, in a sentence of
 #: their own because the bibliography files them as independent of this project, and
@@ -4014,7 +4022,7 @@ SITE_STATEMENT = (
     (
         "Now several others have obtained results building on this work, including "
         "Kleddamag\N{RIGHT SINGLE QUOTATION MARK}s certified lower bound of 31/8 and a "
-        "landmark new proof by Ahmed of the optimality of the famous case "
+        "landmark new proof by Queuingtheorydotcom of the optimality of the famous case "
         "of 11 squares."
     ),
     (
@@ -6534,17 +6542,45 @@ def test_no_page_links_an_address_a_paper_used_to_have(
     the reader documents, whose links to the site are written in full. A link to the
     directory the optimality paper was in, to an old Markdown or PDF, and to the
     deployed site's own old address are all found, which a pattern over the pages' paths
-    alone (`test_site_documents`) does not read."""
+    alone (`test_site_documents`) does not read. The explicit homepage download
+    alone keeps its registered, live Atlas PDF copy address."""
     old = _old_addresses()
     assert "explainer.html" in old
     assert "n11-optimality/" in old
     assert "https://jlevy.github.io/squares/n11-optimality/t-060-explainer.pdf" in old
+    download_alias = "known-best-1-324.pdf"
+    copied_pdf = dict(render_overview.MOVED_FILES)[download_alias]
+    registered = {row.path: row for row in site_urls.load_registry()}
+    copy = registered[download_alias]
+    assert (copy.kind, copy.status, copy.target, copy.canonical) == (
+        "copy",
+        "live",
+        copied_pdf,
+        copied_pdf,
+    )
+    assert (registered[copied_pdf].kind, registered[copied_pdf].status) == (
+        "asset-file",
+        "live",
+    )
     bodies = {name: rendered(name) for name in render_overview.PAGES}
     bodies |= {f"the overview of {result}": body for result, body in result_bodies.items()}
     for name, body in bodies.items():
+        checked_body = body
+        if name == "index.html":
+            anchors = re.findall(rf'<a\b[^>]*\shref="{re.escape(download_alias)}"[^>]*>', body)
+            assert len(anchors) == 1
+            assert re.search(r"\sdownload(?:\s|=|>)", anchors[0])
+            # Exempt only this native href. Other address attributes on the same
+            # anchor, and every other reference to a legacy path, remain checked.
+            checked_anchor = re.sub(
+                rf'(\s)href="{re.escape(download_alias)}"', r"\1", anchors[0], count=1
+            )
+            checked_body = body.replace(anchors[0], checked_anchor, 1)
         links = {
             html.unescape(link).partition("#")[0].partition("?")[0]
-            for link in re.findall(r'\b(?:href|src|data-pop-src|poster)="([^"]+)"', body)
+            for link in re.findall(
+                r'\b(?:href|src|data-pop-src|poster)="([^"]+)"', checked_body
+            )
         }
         assert not links & old, (name, sorted(links & old))
     # The papers are linked, where they are served, from the pages that card them.

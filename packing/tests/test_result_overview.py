@@ -942,7 +942,18 @@ def test_recent_upper_lower_and_optimal_marks_follow_independent_contributions()
     assert result_overview.contribution_class(11, "lower") == "is-lower is-new-result"
     assert result_overview.contribution_class(11, "optimal") == "is-optimal is-new-result"
     badges = result_overview.case_badges(11)
-    assert 'data-style="solid" data-recent="true" role="img" aria-label="optimal"' in badges
+    optimal = next(
+        mark for mark in ET.fromstring(badges) if mark.get("aria-label") == "optimal"
+    )
+    assert optimal.text == "O"
+    assert optimal.attrib == {
+        "class": "site-atlas-badge",
+        "data-style": "solid",
+        "data-recent": "true",
+        "role": "img",
+        "aria-label": "optimal",
+        "title": "optimal",
+    }
     assert badges.count('data-recent="true"') == 1
     assert 'class="is-upper is-exact-value"' in result_overview.film_bound(facts[11])
     assert "is-new-result" not in result_overview.film_bound(facts[11])

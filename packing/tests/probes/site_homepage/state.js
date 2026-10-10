@@ -100,7 +100,11 @@ async () => {
           (starBox.x > numberBox.x + numberBox.width &&
             starBox.x + starBox.width <= view.x + view.width))
         ? []
-        : [tile.getAttribute("data-case")];
+        : [
+            `Case ${tile.getAttribute("data-case")}: number ${numberBox.x}..${numberBox.x + numberBox.width}; ` +
+              `star ${starBox ? `${starBox.x}..${starBox.x + starBox.width}` : "none"}; ` +
+              `crop ${view.x}..${view.x + view.width}; font ${getComputedStyle(number).fontFamily}`,
+          ];
     }),
     raw_markup: cells?.querySelectorAll("pre, code").length ?? 0,
     star_cases: allTiles

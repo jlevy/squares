@@ -3166,6 +3166,7 @@ def _web_atlas_graphic(source: str) -> str:
         SUMMARY_PACKING_INSET_X,
         SUMMARY_PACKING_INSET_Y,
         SUMMARY_ROW_PITCH,
+        SUMMARY_STAR_POINTS,
         _append_star,  # pyright: ignore[reportPrivateUsage]
         _star_center_y,  # pyright: ignore[reportPrivateUsage]
         _star_scale,  # pyright: ignore[reportPrivateUsage]
@@ -3222,16 +3223,24 @@ def _web_atlas_graphic(source: str) -> str:
                     parent.remove(element)
         n = int(card.attrib["data-n"])
         size = label.attrib["font-size"]
-        # Use the served site face, reserving the retained number advance explicitly
-        # so the adjacent star has the same safe gap without an installed print font.
+        # Use the served site face with the retained number advance. Leave half an
+        # em before the star's left edge, including at small hinted glyph sizes.
         number_width = _text_width(str(n), size)
         label.set("font-family", "var(--kpress-font-sans)")
         label.set("textLength", format_svg_number(number_width))
         label.set("lengthAdjust", "spacingAndGlyphs")
         if recent[n].any:
+            star_half_width = max(abs(dx) for dx, _dy in SUMMARY_STAR_POINTS) * _star_scale(
+                size
+            )
             _append_star(
                 card,
-                center_x=Decimal(label.attrib["x"]) + number_width + Decimal(size) / 2,
+                center_x=(
+                    Decimal(label.attrib["x"])
+                    + number_width
+                    + Decimal(size) / 2
+                    + star_half_width
+                ),
                 center_y=_star_center_y(Decimal(label.attrib["y"]), size),
                 feature="release-star",
                 label=NEW_RESULT,

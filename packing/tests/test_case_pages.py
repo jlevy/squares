@@ -587,7 +587,17 @@ def test_a_cases_badges_are_one_mark_wherever_a_case_is_drawn(
         named = result_overview.badge_glyph(
             glyph, style, label, named=True, recent=label == "optimal"
         )
-        assert f'role="img" aria-label="{label}" title="{label}">' in named
+        mark = ET.fromstring(named)
+        assert mark.tag == "span"
+        assert mark.text == glyph
+        assert mark.attrib == {
+            "class": "site-atlas-badge",
+            "data-style": style,
+            "role": "img",
+            "aria-label": label,
+            "title": label,
+            **({"data-recent": "true"} if label == "optimal" else {}),
+        }
         assert named in badges
         # The summary's list draws the same square, its word beside it.
         listed = result_overview.badge_glyph(glyph, style, label, recent=label == "optimal")
