@@ -1,0 +1,56 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/489",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel record hunt 3 2026-10-10]",
+  "report_evidence": "E-evand-489-hunt3-report",
+  "receipt_format": "evand-489-exact-replay-v1",
+  "witness_prefix": "W-evand-489-n",
+  "claim_limitations": "Complete 76a529b rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-10",
+  "read_at_main": "af17208c02b08f343199ac102401d40278cf0dfc",
+  "certificates": [
+    {"n": 132, "path": "search/packer/candidates/hunt3_n132.cert", "format": "evand-cert", "offered": "11.985680198845808811522231964102", "first_committed": "2026-10-10T09:15:50Z"},
+    {"n": 305, "path": "search/packer/candidates/hunt3_n305.cert", "format": "evand-cert", "offered": "17.951139772207", "first_committed": "2026-10-10T13:46:56Z", "printed_in": "https://github.com/evand/square-packing/commit/c013f43cefd006f007a6f37bc3a56aadead815d6"},
+    {"n": 308, "path": "search/packer/candidates/hunt3_n308.cert", "format": "evand-cert", "offered": "17.998269879526255875387992744507", "first_committed": "2026-10-10T13:46:56Z"},
+    {"n": 343, "path": "search/packer/candidates/hunt3_n343.cert", "format": "evand-cert", "offered": "18.978232523635611279730512106023", "first_committed": "2026-10-10T13:46:56Z"},
+    {"n": 344, "path": "search/packer/candidates/hunt3_n344.cert", "format": "evand-cert", "offered": "18.994450514277401521114135796864", "first_committed": "2026-10-10T09:15:50Z"}
+  ],
+  "requested": [132, 308, 343, 344],
+  "replayed": [132, 305, 308, 343, 344],
+  "houses": [
+    {"n": 132, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "11.991327887691501411687842131585", "verified_value": "11.991327887691501411687842131585", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]},
+    {"n": 305, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "17.952959459015527962875662582531", "verified_value": "17.952959459015527962875662582531", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]},
+    {"n": 308, "reader": "grid", "source_key": "[Kingbird]", "holders": "the grid", "reported_value": "18.0", "verified_value": "18", "evidence": ["E-basic-grid-upper"]}
+  ],
+  "pending": [
+    {"n": 132, "report": "T-131 (#465)", "url": "https://github.com/jlevy/squares/issues/465", "holders": "Evan Daniel", "result": "T-131", "reader": "[Daniel record hunt 2026-10-09]"},
+    {"n": 132, "report": "#470", "url": "https://github.com/Mishapolk/square-packing-records/blob/dd3da5c753c5ded6cb3b89476193b7b801005415/README.md", "holders": "Mishapolk", "printed": "11.986956226066", "rounding": "up"},
+    {"n": 132, "report": "#476", "url": "https://github.com/jlevy/squares/issues/476", "holders": "Francisco Couzo", "reader": "[Couzo exact certificates 2026-10-09]"},
+    {"n": 132, "report": "#488", "url": "https://github.com/jlevy/squares/issues/488", "holders": "Francisco Couzo", "printed": "11.986953587255", "rounding": "up"},
+    {"n": 305, "report": "#476", "url": "https://github.com/jlevy/squares/issues/476", "holders": "Francisco Couzo", "reader": "[Couzo exact certificates 2026-10-09]"},
+    {"n": 305, "report": "#481", "url": "https://github.com/jlevy/squares/issues/481", "holders": "Nate Chaoweeraprasit", "printed": "17.951196144147385", "rounding": "unstated"},
+    {"n": 305, "report": "#488", "url": "https://github.com/jlevy/squares/issues/488", "holders": "Francisco Couzo", "printed": "17.951139772207", "rounding": "up"},
+    {"n": 308, "report": "#484", "url": "https://github.com/jlevy/squares/issues/484", "holders": "Kevin Fang", "printed": "17.999309855162748", "rounding": "up"},
+    {"n": 343, "report": "#470", "url": "https://github.com/Mishapolk/square-packing-records/blob/dd3da5c753c5ded6cb3b89476193b7b801005415/README.md", "holders": "Mishapolk", "printed": "19.000000000007", "rounding": "unstated"},
+    {"n": 343, "report": "#484", "url": "https://github.com/jlevy/squares/issues/484", "holders": "Kevin Fang", "printed": "18.994903529220497", "rounding": "up"},
+    {"n": 344, "report": "#470", "url": "https://github.com/Mishapolk/square-packing-records/blob/dd3da5c753c5ded6cb3b89476193b7b801005415/README.md", "holders": "Mishapolk", "printed": "19.002369297056", "rounding": "unstated"},
+    {"n": 344, "report": "#484", "url": "https://github.com/jlevy/squares/issues/484", "holders": "Kevin Fang", "printed": "18.995489275430816", "rounding": "up"}
+  ],
+  "register": {
+    "title": "Evan Daniel's Hunt 3 certificates at 76a529b, issue489",
+    "headline": "Hunt 3: exact rational certificates at 132 and 308 from Evan Daniel",
+    "significance": 3,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py and verify_cert2.py, with different geometry, pass all four, with least certified clearances of 1e-20 for pairs and 5e-21 for walls. Each side is an 80-digit KKT point with positive multipliers on the load-bearing contacts, a reduced Hessian positive semidefinite modulo exact flat motions and a jammed first-order MILP in every corner-corner branch; those are numerical evidence, as the source says, not proofs. No source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose quality-diversity basin explorer with a two-parent crossover move found all four. The packings at 308, 343 and 344 build on Kevin Fang's packings from issue 484 in the Arslanov-Mustafin-Shangitbayev two-wedge family, and the author asks that the construction be credited to him: 344 is his packing polished and moved by a corner-corner descent, 308 his packing polished and moved seven explorer steps, and 343 his 344 less one square, in a different basin from his 343. The packing at 132 is the author's own lineage from issue 465. The search code and the request were written with Claude under the author's direction.",
+    "next_rung": "Independently review the retained replay, then weigh the pending reports before any selected-house replacement: at 132 this side is below every pending report, issue 488's included, and at 308 below Kevin Fang's issue 484 side, where the case holds the grid's 18 in both lanes. The n343 and n344 sides supersede issue 484's beyond-horizon rows. Then record source-specific adoption and confirming evidence. Final exact-head CI remains required.",
+    "bead": "think-xm4h",
+    "bibliography": {
+      "authors": ["Daniel"],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Couzo, Levy",
+      "short_credit": "Daniel after Fang et al.",
+      "note": "Five complete exact certificates at 76a529bc6f36ed05827cae3d1412d6acb5be00fc from the record hunt Hunt 3, unchanged from c013f43, the four reported in issue 489 and one at 305 its log drops for issue 488; 308, 343 and 344 grown from Fang's two-wedge packings of issue 484, 132 from Daniel's own lineage of issue 465. MIT-licensed certificates and solver reports retained; Claude assistance disclosed. KKT and jamming statements are the author's numerical evidence; no local or global optimality claim."
+    }
+  }
+}

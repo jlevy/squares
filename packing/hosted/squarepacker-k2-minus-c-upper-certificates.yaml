@@ -1,0 +1,26 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+
+repository: jlevy/squares
+tag: data/squarepacker-k2-minus-c-upper-certificates-v1
+description: >-
+  The two largest Theorem 1.6 end-packing certificates of Sungjoon Ryu's preprint
+  squarepacker/k2-minus-c-upper (issues 471 and 486), upstream gzip files of 2.6 and
+  4.5 MB kept out of Git under OR-18. They are byte-identical at tags v1.0
+  (700668795e6b95f0bf2a2c6de104adaf3a3ebce0) and v1.1, carry the digests of the source's
+  SHA256SUMS, and are also in the Zenodo archives 10.5281/zenodo.23256655 and
+  10.5281/zenodo.23278927. Both packets pin them; cases/asymptotic/ryu_upper_certificates.py
+  reads them through this manifest. MIT licence (the source's LICENSE).
+objects:
+- path: packing/cases/asymptotic/hosted/squarepacker-k2-minus-c-upper/stair_k100000000.json.gz
+  asset: stair_k100000000.json.gz
+  size: 4494252
+  sha256: d4c76e64198c7b4782446a76916b687be694598a446827addc2f0001437918b2
+  description: data/stair_k100000000.json.gz, the certificate of c*(10^8) <= 24790
+- path: packing/cases/asymptotic/hosted/squarepacker-k2-minus-c-upper/stair_k38250000.json.gz
+  asset: stair_k38250000.json.gz
+  size: 2577279
+  sha256: 2a1e7bdca5be06168167cdb8dfd43bde299847fed4d84bed154ef86fa4f43a0a
+  description: data/stair_k38250000.json.gz, the certificate of c*(3.825*10^7) <= 16988

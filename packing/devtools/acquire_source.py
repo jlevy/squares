@@ -20,7 +20,8 @@ file's bytes are bound to the commit by comparing its Git blob with ``git ls-tre
 shallow or sparse checkout is enough and a locally modified file is refused. A file the
 declaration pins by digest only is listed in the record with its size, digest and reason;
 where the reason is that another packet already retains the same bytes, the declaration
-names that copy and the bytes are compared.
+names that copy and the bytes are compared. A copy that its packet's ``Original Gzip
+Files`` table lists is compared as stored; any other is compared after decompression.
 
 ``--check`` needs no checkout. From the packet alone it re-derives that the record and
 the declaration have every required field, that every retained file, after decompression,
@@ -79,7 +80,8 @@ from devtools.retained_data import (
 )
 
 REPO = Path(__file__).resolve().parents[2]
-WEB = REPO / "packing/resources/web"
+_WEB = PurePosixPath("packing/resources/web")
+WEB = REPO / _WEB
 
 FORMAT = "external-source-acquisition-v1"
 DECLARATION_FORMAT = "external-source-declaration-v1"
@@ -105,7 +107,9 @@ class PinnedOnly(TypedDict):
     - ``sha256``: its SHA-256, equal to its line in the subtree manifest.
     - ``reason``: why it is not retained, as the declaration's rule states it.
     - ``identical_to`` (optional): the repository-relative path of a file this
-      repository already retains with the same bytes, plain or as ``X.gz``.
+      repository already retains with the same bytes, plain or as ``X.gz``, or as an
+      original gzip that its packet's ``Original Gzip Files`` table lists, whose stored
+      bytes are compared.
     """
 
     path: str
@@ -187,7 +191,8 @@ class Rule(TypedDict):
       ``**`` crosses them. The first rule that matches a file decides it.
     - ``reason``: why the files are not retained.
     - ``identical_to`` (optional): the repository-relative path of a retained file with
-      the same bytes, or of a directory holding one under each matched file's name.
+      the same bytes, or of a directory holding one under each matched file's name. The
+      bytes are compared as `PinnedOnly` says.
     """
 
     match: str
@@ -298,6 +303,32 @@ def _twin(rule: Rule, path: str, root: Path) -> str | None:
     if target is None:
         return None
     return f"{target}/{PurePosixPath(path).name}" if (root / target).is_dir() else target
+
+
+def _original_gzip_twin(twin: str, root: Path) -> bool:
+    """Whether the packet holding ``twin`` lists it in its ``Original Gzip Files`` table.
+
+    That table is the custody that binds an upstream gzip's raw bytes
+    (`devtools.retained_data`), so it, and never the file's name, decides that the stored
+    bytes are the upstream bytes.
+    """
+    parts, web = PurePosixPath(twin).parts, _WEB.parts
+    if parts[: len(web)] != web or len(parts) < len(web) + 2:
+        return False
+    readme = root.joinpath(*parts[: len(web) + 1], "README.md")
+    stored = PurePosixPath(*parts[len(web) + 1 :]).as_posix()
+    return readme.is_file() and any(
+        row.stored == stored for row in read_table(readme, heading=ORIGINAL_GZIP_HEADING)
+    )
+
+
+def _twin_bytes(twin: str, root: Path) -> bytes:
+    """The upstream bytes of the retained file ``twin``: as stored for an original gzip,
+    and otherwise plain or decompressed from ``X.gz`` (`read_retained_bytes`)."""
+    path = root / twin
+    if _original_gzip_twin(twin, root):
+        return read_original_gzip_bytes(path)
+    return read_retained_bytes(path)
 
 
 def load_declaration(packet: Path) -> Declaration:
@@ -423,7 +454,7 @@ def acquire(packet: Path, checkout: Path, root: Path) -> Source:
         twin = _twin(rule, path, root)
         if twin is not None:
             _require(
-                read_retained_bytes(root / twin) == contents[path],
+                _twin_bytes(twin, root) == contents[path],
                 f"{path} is not the bytes of {twin}",
             )
             item["identical_to"] = twin
@@ -527,7 +558,7 @@ def _pinned_problems(
         if twin is None:
             continue
         try:
-            same = _sha256(read_retained_bytes(root / twin)) == item["sha256"]
+            same = _sha256(_twin_bytes(twin, root)) == item["sha256"]
         except OSError, ValueError, EOFError, zlib.error:
             same = False
         if not same:

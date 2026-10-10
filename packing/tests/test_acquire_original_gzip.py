@@ -142,3 +142,90 @@ def test_original_paths_are_exact_and_unique(
     (packet / acquisition.DECLARATION).write_text(json.dumps(declaration))
     with pytest.raises(ValueError, match="original_gzip"):
         acquisition.acquire(packet, checkout, repository)
+
+
+LATER = "example-later-release-2026-01-03"
+
+
+def _later(source: tuple[Path, Path, Path, bytes]) -> tuple[Path, str]:
+    """A later packet of the same tree that pins the gzip as the earlier packet's copy."""
+    packet, _checkout, repository, _raw = source
+    twin = (packet / "source/original.json.gz").relative_to(repository).as_posix()
+    later = packet.with_name(LATER)
+    (later / "acquisition").mkdir(parents=True)
+    declaration = json.loads((packet / acquisition.DECLARATION).read_text())
+    del declaration["original_gzip"]
+    declaration["pinned_only"] = [
+        {
+            "match": "original.json.gz",
+            "reason": "unchanged; the earlier packet retains it as original gzip",
+            "identical_to": twin,
+        }
+    ]
+    (later / acquisition.DECLARATION).write_text(json.dumps(declaration))
+    (later / "README.md").write_text("# Later release\n")
+    return later, twin
+
+
+def test_identical_to_binds_an_original_gzip_by_its_stored_bytes(
+    source: tuple[Path, Path, Path, bytes],
+) -> None:
+    _acquire(source)
+    _packet, checkout, repository, raw = source
+    later, twin = _later(source)
+    entry = acquisition.acquire(later, checkout, repository)
+    (item,) = entry["pinned_only"]
+    assert item.get("identical_to") == twin
+    assert item["sha256"] == hashlib.sha256(raw).hexdigest()
+    assert acquisition.check(later, repository) == []
+
+
+def test_an_original_gzip_twin_is_not_compared_decompressed(
+    source: tuple[Path, Path, Path, bytes],
+) -> None:
+    _acquire(source)
+    packet, checkout, repository, raw = source
+    later, twin = _later(source)
+    acquisition.acquire(later, checkout, repository)
+    # The same content recompressed: equal once decompressed, different as stored.
+    recompressed = gzip.compress(gzip.decompress(raw), mtime=0)
+    (packet / "source/original.json.gz").write_bytes(recompressed)
+    assert acquisition.check(later, repository) == [
+        f"{LATER}: pinned-only original.json.gz is not the bytes of {twin}"
+    ]
+    with pytest.raises(ValueError, match="is not the bytes of"):
+        acquisition.acquire(later, checkout, repository)
+
+
+def test_only_the_custody_table_makes_a_twin_original_gzip(
+    source: tuple[Path, Path, Path, bytes],
+) -> None:
+    """A ``.gz`` twin its packet does not list as original gzip is read decompressed."""
+    _acquire(source)
+    packet, checkout, repository, _raw = source
+    later, _twin = _later(source)
+    (packet / "README.md").write_text("# Source\n")
+    with pytest.raises(ValueError, match="is not the bytes of"):
+        acquisition.acquire(later, checkout, repository)
+
+
+def test_ryu_v11_binds_every_certificate_the_v10_packet_retains() -> None:
+    """The three certificates v1.0 keeps as original gzip bind v1.1's; the hosted two don't."""
+    v10 = acquisition.WEB / "squarepacker-k2-minus-c-upper-2026-10-09"
+    v11 = acquisition.WEB / "squarepacker-k2-minus-c-upper-v11-2026-10-10"
+    (earlier,) = json.loads((v10 / acquisition.RECORD).read_text())["sources"]
+    (later,) = json.loads((v11 / acquisition.RECORD).read_text())["sources"]
+    certificates = {
+        item["path"]: item for item in later["pinned_only"] if "/stair_k" in item["path"]
+    }
+    assert len(certificates) == 5
+    retained = {path.removeprefix("source/"): path for path in earlier["original_gzip"]}
+    hosted = {item["path"] for item in earlier["pinned_only"]}
+    assert certificates.keys() == retained.keys() | hosted
+    for path, stored in retained.items():
+        assert (
+            certificates[path]["identical_to"]
+            == f"{v10.relative_to(acquisition.REPO)}/{stored}"
+        )
+    assert all("identical_to" not in certificates[path] for path in hosted)
+    assert acquisition.check(v11, acquisition.REPO) == []

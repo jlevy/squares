@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:Bibliography/v1
   schema: bibliography.schema.yaml
   status: enforced
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-10'
 # The citation fields a generator needs, keyed by the source keys the frontier records
 # use. The Markdown tables in README.md stay the human index; this file holds only what
 # a line of citation text is built from, for the keys something cites.
@@ -1602,6 +1602,41 @@ sources:
       SQUISH packing at 155. The n155 side equals Couzo''s earlier issue451 certificate. MIT-licensed
       source bytes retained; Claude assistance disclosed. No KKT, local or global optimality claim is
       admitted.'
+  - key: '[wand125 fine-net n29 2026-10-10]'
+    authors:
+    - wand125
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-10'
+    credit: wand125 after Tokoharu and Levy
+    lineage: builds-on-project
+    note: The later n29 finer-net measure lower-bound report, s(29) >= 291/50, at source 22a23c8a99aa4e9616d596bc2f28555bacbee3dd,
+      with its data in release square-lower-bounds-v1; the release asset is pinned by size and digest and
+      kept outside Git. Maintained measure and declared-net premises accepted; native capture, controls
+      and adoption pending. The enclosing MIT notice does not settle redistribution of the nested verifier,
+      which adapts this project's sqverify_fast, so a maintained replay is not another independent implementation.
+  - key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    authors: [Guzhou0806]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-10'
+    credit: Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi
+    short_credit: Guzhou0806 after wand125 et al.
+    lineage: builds-on-project
+    note: >-
+      Release n40-670854-20261010 of Guzhou0806/n40-square-packing at
+      e5abeb4d078a5c5b35df6204dd9b93378e5a7880 (committed 2026-10-10T06:47:01Z), reported
+      on jlevy/squares#485: s(40) > 335427/50000 by a clipped-corner transfer from a
+      401-direction nodal statement on wand125's rect_n40_L67 density, unchanged, and the
+      weaker full-core s(40) > 67000 sqrt(6400006889)/798988091. Credit is read from its
+      SOURCES.md, which credits the density and the original verification method to
+      wand125, Tokoharu and their cited predecessors, including Stromquist, Burns and
+      Massaccesi, keeps the Rust verifier, this project's sqverify_fast, byte for byte from
+      Joshua Levy's squares project, and gives Guzhou0806's contribution as the finer-net
+      verification, the strict core transfer and the clipped-corner composition, from
+      "AI-assisted research"; the issue says AI assisted the exploration, proof drafting,
+      implementation, testing, packaging and submission under the author's direction
+      (web/guzhou-n40-clipped-corner-2026-10-10/README.md). Dated by that commit.
 credited_names:
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta

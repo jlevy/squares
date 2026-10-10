@@ -70,6 +70,16 @@ def test_a_repository_is_named_without_its_revision_path_or_git_suffix() -> None
     assert sweep.repository("https://doi.org/10.5281/zenodo.1") is None
 
 
+def test_an_issue_or_pull_request_address_is_not_a_watched_repository() -> None:
+    """The SQUISH n153 source is an issue comment; reading it as a repository watched
+    jlevy/squares itself, with no packet able to pin it."""
+    comment = "https://github.com/jlevy/squares/issues/401#issuecomment-6043191866"
+    assert sweep.repository(comment) is None
+    assert sweep.repository("https://github.com/a/b/pull/7") is None
+    assert sweep.repository("https://github.com/a/b/discussions") is None
+    assert sweep.repository("https://github.com/a/issues") == "https://github.com/a/issues"
+
+
 def test_a_pin_is_structured_and_a_commit_named_in_prose_pins_nothing(tmp_path: Path) -> None:
     """A README that names a commit as "an import of its own" must not make it current."""
     packet = tmp_path / "someone-packings-2026-10-01"

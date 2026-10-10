@@ -1,0 +1,49 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "ebdeleeuw-square-packing-n70",
+  "source_url": "https://github.com/ebdeleeuw/square-packing-n70",
+  "source_ref": "main",
+  "source_commit": "24221d5e51244ca5290d5b1c43f1fbe36f9749e0",
+  "retrieved_at_utc": "2026-10-10T09:54Z",
+  "git_scope": "Full clone of the one-commit repository, checked out at the pin for issue #483. All six files of the tree are in the scope and bound to their Git blobs; under derived-only custody none is copied. No source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source credits Ryan Xu with the arrangement and ebdeleeuw with the refinement and certificate, and discloses OpenAI Codex assistance.",
+  "claims": [
+    "Issue #483 reports the exact rational certificate s(70) <= 888096037156625096037155737/100000000000000000000000000 = 8.88096037156625096037155737, a precision refinement of Ryan Xu's n70 construction, 14263000000014263/100000000000000000000000000 below Ryan Xu's certificate side 88809603717088809603717/10000000000000000000000.",
+    "The source reports that its own exact Fraction checker and David Ellsworth's check_packing.py at 79f8a378d52e757d70f7cfb2c2f7a24a53da0204, run on a 60-digit export at epsilon 1e-40, accept the packing. These are author reports; no new arrangement family, local or global optimality is claimed."
+  ],
+  "scope": [
+    "README.md",
+    "certificate.json",
+    "external-positive.log",
+    "external-positive.txt",
+    "verification.json",
+    "verify_exact.py"
+  ],
+  "pinned_only": [
+    {
+      "match": "certificate.json",
+      "reason": "The exact rational certificate: side S and 70 rational centres in [-S/2, S/2]^2 with rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+    },
+    {
+      "match": "external-positive.txt",
+      "reason": "The 60-digit decimal export, in David Ellsworth's text format, that the source ran check_packing.py on. Context, not the certificate. No licence: pinned by digest only."
+    },
+    {
+      "match": "external-positive.log",
+      "reason": "The source's check_packing.py output on the export, an author report. No licence: pinned by digest only."
+    },
+    {
+      "match": "verification.json",
+      "reason": "The source's own check results, timings and file digests, an author report. No licence: pinned by digest only."
+    },
+    {
+      "match": "verify_exact.py",
+      "reason": "The source's exact Fraction checker, written with the certificate generator. No licence: pinned by digest only and never executed here."
+    },
+    {
+      "match": "README.md",
+      "reason": "Author prose stating the claim and credit, quoted in this packet's README. No licence: pinned by digest only."
+    }
+  ]
+}

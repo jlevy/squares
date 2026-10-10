@@ -49,7 +49,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`37`](n-037.md) | `6.59861960924436` | `659861960924437/100000000000000` | `161/25` | `161/25` | open | upper: replayed here; lower: replayed here | — | 2026-10-06 |
 | [`38`](n-038.md) | `6 + (1/2)√2` | `6 + (1/2)√2` | `1309/200` | `1309/200` | open | upper: replayed here; lower: replayed here | — | 2026-10-01 |
 | [`39`](n-039.md) | `6.81072208306864` | `136214441661373/20000000000000` | `133/20` | `133/20` | open | upper: replayed here; lower: replayed here | — | 2026-10-06 |
-| [`40`](n-040.md) | `4 + 2 √2` | `4 + 2 √2` | `67/10` | `67/10` | open | upper: replayed here; lower: replayed here | — | 2026-10-01 |
+| [`40`](n-040.md) | `4 + 2 √2` | `4 + 2 √2` | `335427/50000` | `335427/50000` | open | upper: replayed here; lower: replayed here | — | 2026-10-10 |
 | [`41`](n-041.md) | `6.92669309446880` | `692669309446881/100000000000000` | `271/40` | `271/40` | open | upper: replayed here; lower: replayed here | — | 2026-10-06 |
 | [`42`](n-042.md) | `7` | `7` | `2739/400` | `2739/400` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |
 | [`43`](n-043.md) | `7` | `7` | `2763/400` | `2763/400` | open | upper: replayed here; lower: replayed here | — | 2026-10-05 |

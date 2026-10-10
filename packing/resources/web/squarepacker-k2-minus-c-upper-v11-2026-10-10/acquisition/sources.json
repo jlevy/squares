@@ -1,0 +1,232 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-10T10:54:04Z",
+  "git_scope": "Complete v1.1 tree, 102 files: the 74 new or changed files retained byte for byte; the 28 files unchanged since v1.0 (licences, six programs, fifteen recorded outputs, five certificates) bound to the 2026-10-09 packet's copies or to the hosted certificates.",
+  "sources": [
+    {
+      "id": "squarepacker-k2-minus-c-upper",
+      "source_url": "https://github.com/squarepacker/k2-minus-c-upper",
+      "source_ref": "v1.1",
+      "source_commit": "5742311db220b4bd8e825167aeae689a1bd65ce9",
+      "committed_utc": "2026-10-10T09:20:20Z",
+      "git_tree": "a88be3b0bc4aa4e12a221121f6fee25fb2d5dbde",
+      "archived_path": "packing/resources/web/squarepacker-k2-minus-c-upper-v11-2026-10-10/source",
+      "subtree_manifest": "packing/resources/web/squarepacker-k2-minus-c-upper-v11-2026-10-10/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".zenodo.json",
+        "LICENSE",
+        "README.md",
+        "SHA256SUMS",
+        "code",
+        "data",
+        "paper"
+      ],
+      "subtree_file_count": 102,
+      "subtree_total_bytes": 10059393,
+      "retained_file_count": 74,
+      "retained_total_bytes": 1417122,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE",
+          "bytes": 1069,
+          "sha256": "b9f4dab0b5b8e821e4a2322d8fc4f5f588fbce145b4ec1a3a7882c231e7b0239",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/LICENSE"
+        },
+        {
+          "path": "code/cert3e.py",
+          "bytes": 8144,
+          "sha256": "3aa9c17257dd14fc80ee55baa1d6cf549b92b597496a2672a9438e160745ed20",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/cert3e.py"
+        },
+        {
+          "path": "code/checker_outputs/cert3e_out_160_64.json",
+          "bytes": 3351,
+          "sha256": "2dc06c12ccf21ebb7b389c47f99b350ac610e5b263acc2ca0cba314a5bd216f6",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/cert3e_out_160_64.json"
+        },
+        {
+          "path": "code/checker_outputs/cert3e_stdout_160_64.txt",
+          "bytes": 3306,
+          "sha256": "088c494d27e113defcfbed2e2e109301b0637a805f46a63133a686a178010cc2",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/cert3e_stdout_160_64.txt"
+        },
+        {
+          "path": "code/checker_outputs/const_stair_out.json",
+          "bytes": 2195,
+          "sha256": "92726fbb178d3008af287ebb8acc98877cacd66b0dd433edff0f873ce9a42b6a",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/const_stair_out.json"
+        },
+        {
+          "path": "code/checker_outputs/const_stair_stdout.txt",
+          "bytes": 2215,
+          "sha256": "4b5272e0199a2f9932cb9afdd492b6ec06c28b518c4638eb2c58631ae695e836",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/const_stair_stdout.txt"
+        },
+        {
+          "path": "code/checker_outputs/stair_check_k100000.txt",
+          "bytes": 1624,
+          "sha256": "37b050fc3a3e4a026eb22bb78723c476b74a25c2b3d3de01ed72fc361a222af2",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/stair_check_k100000.txt"
+        },
+        {
+          "path": "code/checker_outputs/stair_check_k1000000.txt",
+          "bytes": 1668,
+          "sha256": "dc0bb87bba26245b3797e7e1f0b06fc49e03a8a86ad5df95022a3d0f2e24c8b1",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/stair_check_k1000000.txt"
+        },
+        {
+          "path": "code/checker_outputs/stair_check_k10000000.txt",
+          "bytes": 1690,
+          "sha256": "10512c2a6b723e5c391c3f084c0d169612f1e8f45908415344ca2dc759c51682",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/stair_check_k10000000.txt"
+        },
+        {
+          "path": "code/checker_outputs/stair_check_k100000000.txt",
+          "bytes": 1729,
+          "sha256": "0e34f39a3af1fcf7d901bbc17c0f7b7361d75be47593d141ac990f36601d4a36",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/stair_check_k100000000.txt"
+        },
+        {
+          "path": "code/checker_outputs/stair_check_k100000000_fraction.txt",
+          "bytes": 1742,
+          "sha256": "2e46df643830fb6d5bd7b2968d685cb726494ed08d4b948da0a052987eaa71bf",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/stair_check_k100000000_fraction.txt"
+        },
+        {
+          "path": "code/checker_outputs/stair_check_k100000000_mutate.txt",
+          "bytes": 834,
+          "sha256": "521ac66d7927f50d74a386cb12e4006a54edcc61cd4eafc8168b1caa4f9fb9f5",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/stair_check_k100000000_mutate.txt"
+        },
+        {
+          "path": "code/checker_outputs/stair_check_k10000000_fraction.txt",
+          "bytes": 1699,
+          "sha256": "67ac3ba72eda990969df9553bd1ffd8b9723e2b89abc00e6d3b35a658534c9ea",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/stair_check_k10000000_fraction.txt"
+        },
+        {
+          "path": "code/checker_outputs/stair_check_k100000_mutate.txt",
+          "bytes": 822,
+          "sha256": "4633a51409ff84a20b5f2ba18ec84c87daccf16da8d34cb507538b9c9639131b",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/stair_check_k100000_mutate.txt"
+        },
+        {
+          "path": "code/checker_outputs/stair_check_k38250000.txt",
+          "bytes": 1703,
+          "sha256": "27a9f3929735bd486ebf1d4fe355e4ce23a1549926205c97b1de50fa2bbb5136",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/stair_check_k38250000.txt"
+        },
+        {
+          "path": "code/checker_outputs/stair_check_k38250000_fraction.txt",
+          "bytes": 1712,
+          "sha256": "6800a1d4ee436c8568246bfa7f747979ad78f2af7281d46d4f883b0c0543b204",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/stair_check_k38250000_fraction.txt"
+        },
+        {
+          "path": "code/checker_outputs/wall_check_m10000_B4.txt",
+          "bytes": 1154,
+          "sha256": "f836883bc9598476660d5130cca4ab5d5b593a2dbe618a2e2f0c91edaf01e688",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs/wall_check_m10000_B4.txt"
+        },
+        {
+          "path": "code/chk.py",
+          "bytes": 7237,
+          "sha256": "6391da258b33269cd75e43004da70eb0d9baf980d8674a4795405646ba5809b3",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/chk.py"
+        },
+        {
+          "path": "code/const_stair.py",
+          "bytes": 3840,
+          "sha256": "f2b50a70e1c15b1144776b3b772d8586cde2c205927330510ea0f220eb123ae4",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/const_stair.py"
+        },
+        {
+          "path": "code/r38.py",
+          "bytes": 13094,
+          "sha256": "f95f0fced16bf91d06e3c588e9b6cbc66ce5e4d74711b4e1abd18cf20a46b65f",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/r38.py"
+        },
+        {
+          "path": "code/run_z.py",
+          "bytes": 2601,
+          "sha256": "703ba32122027536b1fd5132a8f16b77f2cd6157d82cdf250b10bfd49321c840",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/run_z.py"
+        },
+        {
+          "path": "code/stair_check.py",
+          "bytes": 9922,
+          "sha256": "52f39830d399af1b309c5968dd55f7b6efed496b4aff02d788d82f9a702bb71a",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/stair_check.py"
+        },
+        {
+          "path": "data/stair_k100000.json.gz",
+          "bytes": 81776,
+          "sha256": "68d858032be5db1622ffeebeecf75caa8fcb4cd59e512bc6a54e16a146987a1c",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes as original gzip",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/data/stair_k100000.json.gz"
+        },
+        {
+          "path": "data/stair_k1000000.json.gz",
+          "bytes": 285363,
+          "sha256": "6aeeb2e14b6a9b9f86b81d809d659e3d12e02aa9dfd62b9cdb0d5ad0f5b0dc19",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes as original gzip",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/data/stair_k1000000.json.gz"
+        },
+        {
+          "path": "data/stair_k10000000.json.gz",
+          "bytes": 1129603,
+          "sha256": "8e6e12d2a208f5ffbd9968843102041a1671abc013bcf071e6902ee659ec9212",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes as original gzip",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/data/stair_k10000000.json.gz"
+        },
+        {
+          "path": "data/stair_k100000000.json.gz",
+          "bytes": 4494252,
+          "sha256": "d4c76e64198c7b4782446a76916b687be694598a446827addc2f0001437918b2",
+          "reason": "unchanged since v1.0 (same Git blob and digest); a certificate of several megabytes kept out of Git under OR-18 and hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml"
+        },
+        {
+          "path": "data/stair_k38250000.json.gz",
+          "bytes": 2577279,
+          "sha256": "2a1e7bdca5be06168167cdb8dfd43bde299847fed4d84bed154ef86fa4f43a0a",
+          "reason": "unchanged since v1.0 (same Git blob and digest); a certificate of several megabytes kept out of Git under OR-18 and hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml"
+        },
+        {
+          "path": "paper/LICENSE",
+          "bytes": 647,
+          "sha256": "a9aded3beb6c3ba6b2ba5d905e9bfa6c1d509c0e6a90585b4d04f6c97b9dc0e4",
+          "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+          "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/paper/LICENSE"
+        }
+      ],
+      "license": "CC BY 4.0 for the paper (paper/LICENSE); MIT for the programs in code/ and the data in data/ (LICENSE); both original notices retained through the unchanged 2026-10-09 copies.",
+      "claims": [
+        "Issue #486, Theorem 1.1 of version 1.1: for each of twelve tiers, c*(k) < C_i k^{3/8} + a_i for every integer k >= k_i, among them 42.09 k^{3/8} + 0.05 for k >= 2.48*10^12 (tier C3) and 40.62 k^{3/8} + 1.4*10^-5 for k >= 3.4*10^26 (tier A5, which supersedes version 1.0's 43.06 k^{3/8} + 2*10^-5), with the end constants certified by the interval coverings code/cert_v3/cert_v3.py and code/cert_v4/cert_v4.py.",
+        "Theorems 1.2, 1.4 and 1.6 are stated as in version 1.0, and the five certificates in data/ are byte-identical to version 1.0's."
+      ]
+    }
+  ]
+}

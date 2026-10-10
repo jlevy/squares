@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-09'
+last_reviewed: '2026-10-10'
 results:
   - id: T-001
     kind: lower-bound
@@ -13237,3 +13237,226 @@ results:
       including https://github.com/jlevy/squares/issues/476, before choosing a selected-house replacement.
       Keep T-098's certificate as the historical house at 132, then record any source-specific adoption
       and confirming evidence. Final exact-head CI remains required.
+
+  - id: T-132
+    kind: lower-bound
+    registered: '2026-10-10'
+    headline: "Mixed rectangle-measure lower bound `s(29) ≥ 291/50` reported, on a 2,073-direction declared net"
+    claim: >-
+      A rectangle measure of wand125/square-packing, published on 10 October 2026 and
+      reported on jlevy/squares#446, is reported to prove s(29) >= 291/50 = 5.82.
+
+      The certificate, mixed_n29_L582, is a density of 650 uniform rectangles in D4 orbits,
+      and no point mass, of total mass 2899999/100000, on a net its candidate declares:
+      core side 4999/5000 and 2,073 half-angle tangents of step 1/5002, the net of T-102 and T-103.
+      Since 4999/5000 (1 + 1/5002) = 25009997/25010000 < 1, and the last tangent 1036/2501
+      is past tan(pi/8), every unit square contains a concentric core at a net angle
+      strictly in its interior.
+
+      The source reports every such core capturing mass at least one at all 2,073
+      directions, by sqverify-proof-net, its copy of this repository's sqverify_fast
+      changed to read the declared net, and a control with every mass scaled by 197/200
+      refused at 32 sampled directions.
+
+      The value is above T-108's 581/100 = 5.81, the verified and reported lower bound at
+      n = 29, by 0.01, and above the 1163/200 the issue reported on 8 October by 1/200.
+
+      Here the maintained readers accepted its exact mass and declared-net premises, and
+      sqverify-fast, this repository's clean-room measure verifier, verified it at eight
+      sampled directions with the source's node counts and least certified bounds: a
+      diagnostic, not a replay. No complete replay has run here, so the value stands as
+      reported.
+
+      wand125 after Tokoharu and Levy,
+      [square-packing](https://github.com/wand125/square-packing/tree/22a23c8a99aa4e9616d596bc2f28555bacbee3dd/problems/square-lower-bounds/certificates/mixed_n29_L582).
+      The source says parts of the work were produced with AI assistance under human
+      direction.
+    scope: {n_values: [29]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        Scored as a claim: if a complete replay passes, it is the strongest lower bound on
+        record at n = 29, 0.01 above T-108, by the certificate kind and declared net of
+        T-102 and T-103, with no new technique, at S3 as T-102 to T-111 are. V0/C0 says how far it
+        stands, and the score gates nothing.
+      scored: '2026-10-10'
+      by: think-r333 (repository; draft)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[wand125 fine-net n29 2026-10-10]']
+      published: '2026-10-10'
+    composition: >-
+      One reported certificate on its reported entry. The source's check is a copy of this
+      repository's sqverify_fast crate with one change, so a sqverify-fast replay here
+      would be re-implemented sharing the producer's components, as T-104's is, and no
+      second implementation stands beside it.
+    evidence:
+      - E-wand125-fine-net-n29-582-followup-report
+    artifacts:
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/README.md
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/reported-n29-followup.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/source-manifest.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/premises.json
+      - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/sample-diagnostic.json
+      - packing/devtools/fine_net_followup.py
+      - packing/devtools/audit_wand125_declared_net.py
+    next_rung: >-
+      C3 needs a complete sqverify-fast census run at all 2,073 directions from a retained
+      candidate, with its whole-net control receipt (the 99/100 mutant at every direction,
+      FC-1) and a review that reads this certificate, by the checklist of the 6 October
+      declared-net soundness review. The eight-direction sample prices the run and its
+      controls at about 4.3 CPU-hours, so it waits in think-r333 for a budget.
+    notes: >-
+      V0 because the cited entry is the source's public claim: assurance reported, replay
+      not attempted. C0 because no cited entry carries a qualifying external_review. The
+      case records' lanes are unchanged, so the entry is pending adoption at n = 29 while
+      T-108 holds both lanes. The release asset is pinned by size and digest and kept
+      outside Git, as the issue-446 packet keeps its seven.
+
+  - id: T-133
+    kind: lower-bound
+    registered: '2026-10-10'
+    headline: "`s(40) > 335427/50000 = 6.70854`, by a clipped-corner transfer on a 401-direction net"
+    claim: >-
+      s(40) > 335427/50000 = 6.70854, by Guzhou0806, published on 10 October 2026 as
+      release n40-670854-20261010 of Guzhou0806/n40-square-packing and reported on
+      jlevy/squares#485. It raises the reported and verified lower bound at n = 40 by
+      427/50000 = 0.00854 over T-068's 67/10, from the same certificate. The release also
+      gives the weaker s(40) > 67000√(6400006889)/798988091 = 6.7084890815…, which needs no
+      density peak.
+
+      The certificate is wand125's rect_n40_L67 rectangle density of T-068, unchanged, of
+      mass 3999/100 at core side 9977/10000. Every closed square of that side inside
+      [0, 67/10]^2, at each of 401 half-angle tangents of step 83/80000, twice as fine as
+      T-068's net of 201, captures mass at least 10001/10000.
+
+      A continuous-angle transfer carries this to every unit square scaled into that
+      container: the net
+      direction above a square's angle gives a reference square inside it when the angle is
+      close enough, and otherwise the one below it does, less the density's essential
+      supremum, at most 2818711359413/10^9, times a bound on the area of the reference's
+      four clipped corners. Each square then captures at least 99979/100000, and forty of
+      them exceed the mass by 1/625, so no packing fits at side 335427/50000; compactness
+      makes the bound strict.
+
+      The source decided the nodal statement with this repository's sqverify-fast,
+      vendored unchanged, at all 401 directions, and the finite steps with its own exact
+      Python, in a local run and a GitHub Actions run.
+
+      Both parts were decided here on 10 October 2026. sqverify-fast, built from reviewed
+      source, verified all 401 directions on an input regenerated from the retained
+      density, every row equal to both release receipts apart from timing, and refused two
+      mass mutants: confirmed, reproduced with the producer's code, since the release ran
+      the same crate.
+
+      This repository's exact audit of the transfer, which shares no code with the
+      release's finite checks, recomputed the density's mass, symmetry and essential
+      supremum and every step of the chain, and refused four altered parameters: the
+      finite steps were independently re-implemented. The 10 October review re-derived the
+      transfer, the clipped-corner bound and the strict endpoint and found no blocking
+      defect. No second method decided the nodal statement.
+
+      Guzhou0806 after wand125, Tokoharu and Levy,
+      [n40-square-packing](https://github.com/Guzhou0806/n40-square-packing/tree/e5abeb4d078a5c5b35df6204dd9b93378e5a7880).
+      The source credits the density and the original verification method to wand125,
+      Tokoharu and their cited predecessors, and says Guzhou0806's contribution, the
+      finer-net verification, the strict core transfer and the clipped-corner composition,
+      came from AI-assisted research; the issue says AI assisted the exploration, proof
+      drafting, implementation, testing, packaging and submission under the author's
+      direction.
+    scope: {n_values: [40]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        The strongest lower bound on record at n = 40, 0.00854 above T-068 on T-068's own
+        certificate. The transfer, a continuous-angle argument from a finer net with a
+        clipped-corner loss bound and the density's peak, is new to this record and applies
+        with a finer net to any format T certificate it holds, but it is one count and not
+        yet a bound family. S3 by the precedent of T-099, a finer net on a certificate kind
+        the record holds, with the technique noted, as the 10 October review suggested.
+      scored: '2026-10-10'
+      by: 'think-3oi5 import, registering lane (repository; draft, as the 10 October review suggests)'
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Guzhou0806 n40 clipped corner 2026-10-10]']
+      published: '2026-10-10'
+    composition: >-
+      One certificate, wand125's rect_n40_L67, and one transfer, with two load-bearing
+      parts, each decided here once. The 401-direction nodal statement is decided by
+      sqverify-fast, interval-certified, the code the release itself ran, so that part is
+      reproduced with the producer's code. The transfer's finite steps, the density's peak
+      and the scalar chain, are decided by this repository's exact audit, exact-algebraic,
+      which is independently re-implemented with respect to the release's finite.py and is
+      recorded as structure, since alone it proves only the implication from the nodal
+      statement.
+
+      The result takes the part closest to the producer's code: confirmed, reproduced with
+      the producer's code. C3 rests on the complete nodal replay and its
+      controls, and the transfer's argument on the 10 October review. No second method
+      decides the nodal statement, and the census route has not run on it.
+    evidence:
+      - E-n040-guzhou-clipped-corner-report
+      - E-n040-guzhou-clipped-corner-sqverify-fast-replay
+      - E-n040-guzhou-clipped-corner-finite-audit
+    reviews:
+      - path: docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md
+        kind: adversarial
+        reviewer: AI agent (Claude, model Fable 5.1, maximum thinking effort), the mathematical lane of stage 4 of the issue 485 import (think-3oi5), prompted separately from the records lane, before any replay here and before retention
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-10'
+        scope: >-
+          Guzhou0806's s(40) > 335427/50000 and the full-core s(40) > 67000 sqrt(6400006889)/798988091, pinned at e5abeb4d: the argument from wand125's rect_n40_L67 density to the bound, re-derived (the D4 fold, the case split, the legality of both references, the clipped-corner bound and its monotonicity, the density peak, the counting and the strict endpoint); every finite quantity recomputed in exact rationals with the reviewer's own code; six of the 401 directions reproduced on the reviewed build and four controls run; the checkers' hypotheses and trust boundaries; the replay contract; and the drafted significance.
+        verdict: accepted
+        covers: [T-133]
+    artifacts:
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/README.md
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/PROOF.md
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/certificate/parameters.json
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/results/verification.json
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/release-ci/results/verification.json
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/replay-401.jsonl.gz
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/runs.json
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/replay-check.json
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/finite-audit.json
+      - packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+      - packing/devtools/audit_clipped_corner_transfer.py
+      - packing/sqverify_fast/SOUNDNESS.md
+      - docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md
+    controls:
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/control-A-scaled-99-100.jsonl.gz
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/control-B-near-threshold.jsonl.gz
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/control-C-no-metadata.jsonl.gz
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/control-D-short-net.jsonl.gz
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/receipts/control-selection.json
+      - packing/tests/test_audit_clipped_corner_transfer.py
+    next_rung: >-
+      V4 and C4 need a second adversarial AI review of this result by a distinct reviewer
+      and a human oversight record; the 10 October review is one. A method-distinct
+      decision of the nodal statement would stand beside the rung: Tokoharu's verify.cpp
+      at all 401 directions, about twice its 201-direction cost on this density (6,521 s of
+      wall time upstream), once an input generator for a finer net exists, a W7 slice and a
+      budget the owner sets. The census route, a census row at all 401 directions with its
+      whole-net control receipt, is open now that the census driver reads a format T
+      metadata net; no census case holds the derived input yet.
+    notes: >-
+      Registered on 10 October 2026 by the records lane of the issue 485 import
+      (think-3oi5), after the complete 401-direction replay and the finite audit, whose
+      receipts are in the packet; the review lane was prompted separately, before any
+      replay here and before retention. Of the review's findings, GN-1 (the triangle
+      statement in PROOF.md) and GN-2 (h at its containment limit) are notes for the
+      author; the packet keeps both release receipts (GN-3); the composition says which
+      code decided each part (GN-4); the census driver and control evaluator now read a
+      format T metadata net (GN-5); V-sqverify-fast's registry entry names the
+      metadata-net path (GN-6); and n-040.md's stale paragraph on 6.695 was corrected with
+      the case's move (GN-7).
+
+      n = 40's reported and verified lower bounds move from T-068's 67/10, which the case
+      record keeps as history, to 335427/50000. The full-core bound, weaker, is a corollary
+      the case records do not hold. wand125's comment on the issue reporting a third run
+      and an exact check of the transfer is a third party's report and is not retained as a
+      replay. Ids here are provisional until merged.

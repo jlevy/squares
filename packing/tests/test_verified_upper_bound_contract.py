@@ -132,6 +132,15 @@ DECLARED_CONSUMERS = {
         "holds each frozen comparison to the live verified finite ceiling while the report "
         "is unadopted; a smaller side establishes neither s(n) nor adoption"
     ),
+    "packing/devtools/upper_bound_reports.py": (
+        "compares each reported certificate with the case's selected verified ceiling when "
+        "its claim record is frozen, and refuses a rewrite once that ceiling has moved; a "
+        "smaller side establishes neither s(n) nor adoption"
+    ),
+    "packing/devtools/check_half_angle_area.py": (
+        "prints the case's verified finite ceiling beside each certificate it decides, as "
+        "context for the review; it decides feasibility only, never s(n) or adoption"
+    ),
     "packing/devtools/confirm_refinement_records.py": (
         "publishes accepted complete replay as a finite feasible upper ceiling; "
         "retains historical verification and establishes no optimality or value of s(n)"

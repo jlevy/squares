@@ -90,6 +90,25 @@ allowlist:
       the seven certificates the author calls unchanged against the issue-451
       acquisition roster. Geometry is decided from the complete exact inputs;
       no digest decides geometry or pins this repository's code.
+  - path: packing/devtools/decimal_pose_margins.py
+    kind: external-checkout
+    boundary: >-
+      Decimal pose files read from another repository's checkout at a pinned
+      revision, kept outside Git under derived-only custody (the #470 Mishapolk
+      poses at dd3da5c). A receipt records each measured file's SHA-256, the same
+      value the packet's acquire_source manifest pins, and `check` refuses a file
+      whose bytes are not the measured ones before re-measuring. The digest
+      decides no geometry and names no file this repository wrote.
+  - path: packing/devtools/check_half_angle_area.py
+    kind: download
+    boundary: >-
+      `decide-imports --upstream` reads certificates and a summary table that #481
+      and #483 publish without a licence and that their packets therefore keep
+      outside Git, fetched from the source repository at the pinned commit into a
+      directory the reviewer names. Each file's SHA-256 is held against the value
+      the packet's acquisition record pinned at import, before the third route's own
+      reader holds it to the retained derived fact. The digest decides no geometry
+      and names no file this repository wrote.
   - path: packing/devtools/n17_shared_centre_lp.py
     kind: generated-artifact
     boundary: >-
@@ -242,6 +261,9 @@ allowlist:
   - path: packing/devtools/audit_wand125_declared_net.py
     kind: download
     boundary: wand125's finer-net bundle, its candidate, axis tables and checker files against the digests its manifest and the n50 packet's upstream copy pin (#366).
+  - path: packing/devtools/fine_net_followup.py
+    kind: download
+    boundary: wand125's fine-net release assets kept outside Git against the size and digest the packet pins, and their sealed inner bundles against the source's own files-sha256.json (#446).
   - path: packing/devtools/audit_n11_lean.py
     kind: download
     boundary: 11SquaresFormalized's final audit, downloaded from the source, against the digest the packet's manifest pinned at retention and the uncompressed digest the source's summary.json states.
@@ -266,6 +288,14 @@ allowlist:
   - path: packing/devtools/audit_guzhou_r068.py
     kind: download
     boundary: Guzhou's release certificate against its pin (H5).
+  - path: packing/devtools/audit_clipped_corner_transfer.py
+    kind: download
+    boundary: >-
+      Guzhou0806's #485 release: the density digest its SOURCES.md and both downloaded
+      receipts state, and the derived-input digest both receipts and the 10 October
+      review state, held against the retained rect_n40_L67 candidate and the input
+      derived from it. Every finite value and the replay's rows are recomputed and
+      compared whole; no run is refused on a digest.
   - path: packing/devtools/audit_evand_mixed_covers.py
     kind: download
     boundary: Evan D's run headers against the retained upstream files (H7).

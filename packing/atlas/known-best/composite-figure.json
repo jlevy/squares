@@ -1029,7 +1029,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"},{"glyph":"R","meaning":"known rigid","style":"solid"}],
         "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"4 + 2 sqrt(2)","minimal_polynomial":"s**2 - 8*s + 8 = 0","state":"closed-form"},
-        "lower": {"correction":false,"display":"s(40) ≥ 6.700000","evidence":["E-wand125-rectangle-2026-10-01-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"6.7"},
+        "lower": {"correction":false,"display":"s(40) ≥ 6.708540","evidence":["E-n040-guzhou-clipped-corner-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"6.70854"},
         "n": 40,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {

@@ -1,0 +1,44 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/484",
+  "author": "Kevin Fang",
+  "source_key": "[Fang two-wedge certificates 2026-10-10]",
+  "report_evidence": "E-fang-484-certificate-report",
+  "receipt_format": "fang-484-exact-replay-v1",
+  "witness_prefix": "W-fang-484-n",
+  "claim_limitations": "Complete c75bebd rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no exact form, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-10",
+  "read_at_main": "657cc486130e9020608ff244d8a86d1d04153634",
+  "certificates": [
+    {"n": 308, "path": "n0308/n0308.cert", "format": "evand-cert", "offered": "17.999309855162748", "first_committed": "2026-10-10T02:22:44Z", "same_packing": [{"path": "n0308/n0308.cert.json", "format": "squish-json"}]},
+    {"n": 343, "path": "n0343/n0343.cert", "format": "evand-cert", "offered": "18.994903529220497", "first_committed": "2026-10-10T02:22:44Z", "same_packing": [{"path": "n0343/n0343.cert.json", "format": "squish-json"}]},
+    {"n": 344, "path": "n0344/n0344.cert", "format": "evand-cert", "offered": "18.995489275430816", "first_committed": "2026-10-10T02:22:44Z", "same_packing": [{"path": "n0344/n0344.cert.json", "format": "squish-json"}]}
+  ],
+  "requested": [308, 343, 344],
+  "replayed": [308, 343, 344],
+  "houses": [
+    {"n": 308, "reader": "grid", "source_key": "[Kingbird]", "holders": "the grid", "reported_value": "18.0", "verified_value": "18", "evidence": ["E-basic-grid-upper"]}
+  ],
+  "pending": [
+    {"n": 343, "report": "#470", "url": "https://github.com/Mishapolk/square-packing-records/blob/dd3da5c753c5ded6cb3b89476193b7b801005415/README.md", "holders": "Mishapolk", "printed": "19.000000000007", "rounding": "unstated"},
+    {"n": 344, "report": "#470", "url": "https://github.com/Mishapolk/square-packing-records/blob/dd3da5c753c5ded6cb3b89476193b7b801005415/README.md", "holders": "Mishapolk", "printed": "19.002369297056", "rounding": "unstated"}
+  ],
+  "register": {
+    "title": "Kevin Fang's three two-wedge certificates at c75bebd, issue484",
+    "headline": "A packing of 308 squares below the grid, from Kevin Fang",
+    "significance": 3,
+    "source_checks": "The author reports that three checkers accept all three certificates: Evan Daniel's verify_cert.py, unchanged; David Ellsworth's check_packing.py on the 40-digit exports, which prints Container OK and Overlaps NONE; and the author's own verify.py, which shares the half-angle representation and the separating-axis test with Daniel's. Their outputs are retained; no source program ran here.",
+    "credit": "Credit the packings to Kevin Fang (https://github.com/TheSnakeFang/squarepack-certs). They extend the k^2 - k + 1 two-wedge family of Arslanov, Mustafin and Shangitbayev (Electronic Journal of Combinatorics 28(4), P4.22, 2021) one k up and one square past it, grown from David Ellsworth's and Tej Stead's packings of 273 and 307 squares on the Kingbird table; the certificate format is Evan Daniel's and the JSON layout SQUISH's. The search, the verifier and the bundle were written with Claude under the author's direction.",
+    "next_rung": "Independently review the retained replay, then record source-specific adoption of the n308 side, where the case holds the grid's 18 in both lanes, with confirming evidence. The n343 and n344 sides stay beyond-horizon rows. Final exact-head CI remains required.",
+    "bead": "think-ar8g",
+    "bibliography": {
+      "authors": [
+        "Fang"
+      ],
+      "lineage": "independent",
+      "credit": "Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead",
+      "short_credit": "Fang after Arslanov et al.",
+      "note": "Three complete exact certificates at c75bebd87933416d3e1c7aba35ec733ea8ac7da0 in the k^2 - k + 1 two-wedge family of Arslanov, Mustafin and Shangitbayev, grown from Ellsworth's and Stead's Kingbird packings of 273 and 307 squares; Daniel's certificate format and SQUISH's JSON layout. MIT verifier and CC0 certificates retained; Claude assistance disclosed. No exact form, local or global optimality claim."
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-10T09:58Z",
+  "git_scope": "Blobless clone checked out at the pinned commit, the repository's first and only commit, for issue #484. The whole tree is in scope: the licence, attribution, README and standalone checker, and each count's folder with its certificate in three formats, notes, checksums and the two checkers' outputs. The three drawings are pinned by digest only. No program was executed.",
+  "sources": [
+    {
+      "id": "thesnakefang-squarepack-certs",
+      "source_url": "https://github.com/TheSnakeFang/squarepack-certs",
+      "source_ref": "main",
+      "source_commit": "c75bebd87933416d3e1c7aba35ec733ea8ac7da0",
+      "committed_utc": "2026-10-10T02:22:44Z",
+      "git_tree": "3616465b86f213af4c55a9089eba65d3ebafb963",
+      "archived_path": "packing/resources/web/fang-two-wedge-certificates-2026-10-10/source",
+      "subtree_manifest": "packing/resources/web/fang-two-wedge-certificates-2026-10-10/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "ATTRIBUTION.md",
+        "LICENSE",
+        "README.md",
+        "verify.py",
+        "n0308",
+        "n0343",
+        "n0344"
+      ],
+      "subtree_file_count": 28,
+      "subtree_total_bytes": 699772,
+      "retained_file_count": 25,
+      "retained_total_bytes": 565779,
+      "compressed": [
+        "source/n0308/n0308.cert.json.gz",
+        "source/n0343/n0343.cert.json.gz",
+        "source/n0344/n0344.cert.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "n0308/n0308.svg",
+          "bytes": 41495,
+          "sha256": "437e7b6672db44f5fdf3d4cb37b1c3e43ad6157ab41cdcc6bad3782da867e0e7",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0343/n0343.svg",
+          "bytes": 46047,
+          "sha256": "7ed33d693eb132298c94ffaab0a8b80db3cf6b339d30a5f38c45ffd5e12ad47c",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0344/n0344.svg",
+          "bytes": 46451,
+          "sha256": "ec0d357a0d0730872ddf8214b9c968cb5e3c7b980a07397c53a26e9d75a51489",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        }
+      ],
+      "license": "MIT, copyright 2026 Kevin Fang (LICENSE), for verify.py and its documentation; ATTRIBUTION.md releases the certificates, text files and drawings in the nNNNN folders under CC0 1.0. The source discloses Claude assistance under Kevin Fang's direction.",
+      "claims": [
+        "Issue #484 reports s(308) <= 496906684150483564257053639569689586211617178631487101147707692165192097/27606985387162255916575391130373464080218179016903156277167119960899584, printed rounded up to 15 decimals as 17.999309855162748, below the grid's 18.",
+        "Issue #484 reports s(343) <= 789017423383549575129979982295456201/41538374868278621028243970633760768, printed as 18.994903529220497, beyond the n <= 324 case corpus.",
+        "Issue #484 reports s(344) <= 262204097424407923560664994905454377606094204426897481135606818230728643/13803492693581127593573619627880932674597656005283617050019749892718592, printed as 18.995489275430816, beyond the n <= 324 case corpus.",
+        "Each is a two-wedge construction in the k^2 - k + 1 family of Arslanov, Mustafin and Shangitbayev; no exact form, local minimality or optimality is claimed."
+      ]
+    }
+  ]
+}
