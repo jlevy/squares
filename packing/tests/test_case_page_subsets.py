@@ -8,12 +8,27 @@ from devtools import render_case_pages, site_math
 from tests import site_renders
 
 
-def test_selected_case_pages_are_byte_identical_to_the_complete_publication() -> None:
-    complete = site_renders.case_records()
+@pytest.fixture(scope="module")
+def canonical_case_pages() -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
+    """Prepare the real complete publication and subset before assertion timing.
+
+    As with the other site renderer tests, costly canonical rendering belongs in
+    module setup; pytest still reports that setup wall separately.
+    """
+    return (
+        site_renders.case_records(),
+        site_renders.case_records((291, 53, 53)),
+        site_renders.case_records((53, 291)),
+    )
+
+
+def test_selected_case_pages_are_byte_identical_to_the_complete_publication(
+    canonical_case_pages: tuple[dict[str, str], dict[str, str], dict[str, str]],
+) -> None:
+    complete, selected, normalized = canonical_case_pages
     assert len(complete) == 324
-    selected = site_renders.case_records((291, 53, 53))
     assert list(selected) == ["cases/53.html", "cases/291.html"]
-    assert selected is site_renders.case_records((53, 291))
+    assert selected is normalized
     assert selected == {name: complete[name] for name in selected}
 
 
