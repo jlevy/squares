@@ -666,7 +666,8 @@ fixed container side, after declared symmetries are removed; the two optimality
 statements above concern whether the side can be reduced
 ([tutorial](../../../TUTORIAL.md#contact-graphs-stationary-branches-and-rattlers)). The
 atlas’s $R$ badge can reflect a proved local-rigidity result or a reported catalogue
-assertion, so its accompanying assurance matters.
+assertion. When comparing methods, record which configuration was assessed and whether
+its rigidity evidence is proved or reported.
 A numerical single-square translation screen with no hit establishes neither rigidity
 nor local optimality: it omits rotations and coordinated motions.
 Rigidity evidence belongs to the assessed configuration.
