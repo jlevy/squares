@@ -6,7 +6,12 @@ import declaration, ``acquisition/report.json`` (`Declaration`), beside the cust
 declaration ``devtools.acquire_source`` writes the packet from:
 
 - **custody.** ``read_facts`` admits nothing until ``acquire_source.check`` passes, so
-  every certificate it reads is a retained file bound to its upstream blob;
+  every certificate it reads is a retained file bound to its upstream blob. Where the
+  source states no licence and the packet retains no upstream byte, a row names a derived
+  ``fact`` instead: the certificate as an exact rational Witness/v2, which ``derive``
+  writes from a checkout once ``acquire_source.acquire`` shows the checkout yields this
+  packet's own acquisition record, so its bytes have the digests the packet pins. The
+  fact names those digests, and ``read_facts`` holds it to its own rebuild;
 - **format.** Each certificate is read by the adapter its row names (`ADAPTERS`) into the
   kernel's exact centre/half-angle certificate, with centres in ``[0, S]^2``;
 - **admission.** A certificate is admitted only where its exact side equals, or rounds up
@@ -22,8 +27,9 @@ declaration ``devtools.acquire_source`` writes the packet from:
 - **replay.** ``certify`` runs a positive, a duplicate-square and an outside-container job
   for every count of the declared ``replayed`` roster, each in its own child process,
   through the two exact routes of ``devtools.evand_arrangement_reports``, and writes
-  ``receipts/exact-certification.json.xz``; ``check`` admits the receipt, and ``check
-  --replay`` decides it again;
+  ``receipts/exact-certification.json.xz``, or one ``receipts/exact-certification-nNNN.json.xz``
+  per count where the whole would exceed the kernel's ceiling on uncompressed evidence;
+  ``check`` admits the receipt, and ``check --replay`` decides it again;
 - **registration.** ``register-plan`` prints, and writes nowhere, the register, evidence,
   coverage, bibliography and resources entries the ``requested`` counts need. A
   certificate the issue does not name is an import of its own (``result-import.md``, stage
@@ -34,6 +40,7 @@ no KKT, local-minimum, rigidity, novelty or optimality statement is replayed her
 
 From ``packing/``, with the project interpreter::
 
+    python -m devtools.upper_bound_reports PACKET derive --checkout CHECKOUT [--check]
     python -m devtools.upper_bound_reports PACKET check-claims [--write]
     python -m devtools.upper_bound_reports PACKET certify --jobs-dir SCRATCH/jobs --workers 2
     python -m devtools.upper_bound_reports PACKET check [--n N ...] [--replay]
@@ -52,11 +59,14 @@ returns, like any other, is admitted only if it rounds up to the side the report
 from __future__ import annotations
 
 import argparse
+import functools
 import json
 import math
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 from collections.abc import Callable, Mapping
 from concurrent.futures import ThreadPoolExecutor
 from decimal import Decimal
@@ -67,7 +77,7 @@ from typing import Any, NamedTuple, NotRequired, TypedDict, cast
 import yaml
 from strif import atomic_output_file
 
-from devtools import acquire_source
+from devtools import acquire_source, retained_data
 from devtools import check_source_coverage as coverage_check
 from devtools import couzo_followup_reports as couzo_followup
 from devtools import couzo_refinement_reports as couzo_451
@@ -81,7 +91,13 @@ from devtools import squish_followup_packets as squish_update
 from devtools import squish_second_update_packets as squish_second
 from devtools import squish_upper_bound_packets as squish_first
 from devtools.retained_data import read_retained_bytes
-from sqpack.yamlio import safe_load
+from sqpack.witness import (
+    WitnessError,
+    validate_witness_document,
+    witness_document,
+    witness_envelope,
+)
+from sqpack.yamlio import load_yaml, safe_load
 
 MODULE = "devtools.upper_bound_reports"
 ROOT = Path(__file__).resolve().parents[1]
@@ -91,6 +107,17 @@ DECLARATION = Path("acquisition/report.json")
 CLAIMS = Path("acquisition/claims.json")
 BEYOND = Path("acquisition/beyond-horizon-claims.json")
 RECEIPT = Path("receipts/exact-certification.json.xz")
+
+
+def shard(n: int) -> Path:
+    """The receipt of one count, where the roster's receipt would exceed the ceiling."""
+    return Path(f"receipts/exact-certification-n{n:03d}.json.xz")
+
+
+FACTS = "facts"
+#: The witness schema, as a fact under ``packing/resources/web/PACKET/facts/`` names it.
+FACT_SCHEMA = "../../../../witnesses/witness.schema.yaml"
+WITNESS_SCHEMA = ROOT / "witnesses/witness.schema.yaml"
 DECLARATION_FORMAT = "upper-bound-report-declaration-v1"
 CLAIMS_FORMAT = "upper-bound-report-claims-v1"
 BEYOND_FORMAT = "upper-bound-beyond-horizon-claims-v1"
@@ -109,6 +136,7 @@ MAX_LITERAL_CHARS = 1024
 ROUNDINGS = ("up", "unstated")
 THIS = "this certificate"
 _PRINTED = re.compile(r"[0-9]+\.[0-9]+")
+_FRACTION = re.compile(r"[1-9][0-9]*/[1-9][0-9]*")
 _LITERAL = re.compile(r"-?[0-9]+(?:/[1-9][0-9]*)?")
 _DATE = re.compile(r"\d{4}-\d\d-\d\d")
 _UTC = re.compile(r"\d{4}-\d\d-\d\dT\d\d:\d\d(:\d\d)?Z")
@@ -142,13 +170,16 @@ class CertificateRow(TypedDict):
 
     - ``path``: its upstream path under the packet's archived directory.
     - ``format``: the adapter that reads it (`ADAPTERS`).
-    - ``offered``: the side the issue prints, as printed.
+    - ``offered``: the side the issue prints, as printed: decimals, which the exact side
+      must equal or round up to there, or an exact fraction, which it must equal.
     - ``printed_in`` (optional): where ``offered`` is printed, for a certificate the issue
       does not name; its source's own table.
     - ``first_committed``: the UTC time of the first commit holding these bytes, which
       dates the claim (``attribution.published``).
     - ``options`` (optional): what the adapter reads besides the bytes.
     - ``same_packing`` (optional): other retained files that state the same packing.
+    - ``fact`` (optional): the packet-relative derived fact, ``facts/n-NNN.yaml``, read in
+      place of ``path`` where no upstream byte is retained (``derive``).
     """
 
     n: int
@@ -159,6 +190,7 @@ class CertificateRow(TypedDict):
     printed_in: NotRequired[str]
     options: NotRequired[list[Option]]
     same_packing: NotRequired[list[SamePacking]]
+    fact: NotRequired[str]
 
 
 class House(TypedDict):
@@ -169,6 +201,9 @@ class House(TypedDict):
       the case prints it, and the register entry that holds it.
     - ``reported_value``, ``verified_value``: the two lanes' values as printed.
     - ``evidence``: the verified lane's evidence.
+    - ``reported_rounding`` (optional): where the reported lane is another source's print
+      and not the house's side, how it was rounded (`ROUNDINGS`); it is compared as a
+      printed side. A catalogue print below a rational ceiling is such a lane.
     """
 
     n: int
@@ -179,6 +214,7 @@ class House(TypedDict):
     reported_value: str
     verified_value: str
     evidence: list[str]
+    reported_rounding: NotRequired[str]
 
 
 class Pending(TypedDict):
@@ -294,7 +330,19 @@ def load_declaration(packet: Path) -> Declaration:
         )
     for row in declaration["certificates"]:
         _require(row["format"] in ADAPTERS, f"n={row['n']}: unknown format {row['format']}")
-        _require(_PRINTED.fullmatch(row["offered"]), f"n={row['n']}: offered side")
+        _require(
+            _PRINTED.fullmatch(row["offered"])
+            or (_FRACTION.fullmatch(row["offered"]) and row["n"] <= HORIZON),
+            f"n={row['n']}: offered side is no plain decimal or, in the corpus, fraction",
+        )
+        if "fact" in row:
+            fact = PurePosixPath(row["fact"])
+            _require(
+                fact.parent.as_posix() == FACTS
+                and fact.name == f"n-{row['n']:03d}.yaml"
+                and "same_packing" not in row,
+                f"n={row['n']}: a derived fact is facts/n-NNN.yaml, with no second format",
+            )
         _require(_UTC.fullmatch(row["first_committed"]), f"n={row['n']}: first_committed")
         for other in row.get("same_packing", []):
             _require(other["format"] in ADAPTERS, f"n={row['n']}: unknown format")
@@ -304,6 +352,10 @@ def load_declaration(packet: Path) -> Declaration:
     )
     for house in declaration["houses"]:
         _require(house["reader"] in HOUSES, f"n={house['n']}: no reader {house['reader']}")
+        _require(
+            house.get("reported_rounding", "up") in ROUNDINGS,
+            f"n={house['n']}: unknown reported rounding",
+        )
     labels = [(pending["n"], pending["report"]) for pending in declaration["pending"]]
     _require(len(labels) == len(set(labels)), "a pending report is named twice at one count")
     for pending in declaration["pending"]:
@@ -471,6 +523,13 @@ def parse_certificate(
 
 def admit(certificate: legacy.Certificate, offered: str) -> None:
     """Refuse a side that neither equals the printed side nor rounds up to it there."""
+    if _FRACTION.fullmatch(offered):
+        _require(
+            certificate.side == Fraction(offered),
+            f"n={certificate.n}: exact side {legacy.literal(certificate.side)} is not the "
+            f"printed {offered}",
+        )
+        return
     _require(_PRINTED.fullmatch(offered), f"n={certificate.n}: offered side is not a decimal")
     places = len(offered.partition(".")[2])
     printed = Fraction(Decimal(offered))
@@ -505,6 +564,86 @@ def _read(source: Path, path: str) -> bytes:
         raise ReportError(f"{path}: {error}") from error
 
 
+def _record(packet: Path) -> acquire_source.Record:
+    value = json.loads((packet / acquire_source.RECORD).read_text(encoding="utf-8"))
+    return cast("acquire_source.Record", value)
+
+
+def fact_witness(
+    packet: Path, declaration: Declaration, row: CertificateRow, certificate: legacy.Certificate
+) -> dict[str, Any]:
+    """A derived fact: the positive job's deciding witness, with the pinned file it is from.
+
+    ``revision_sha256`` is the digest the packet's acquisition record pins for the file,
+    which is not retained; ``derive`` writes the fact only from bytes that have it.
+    """
+    record = _record(packet)
+    source = record["sources"][0]
+    pinned = {item["path"]: item for item in source["pinned_only"]}
+    _require(row["path"] in pinned, f"n={row['n']}: a fact for a file the packet does not pin")
+    witness = kernel.to_witness(certificate, **_profile(declaration))
+    witness["source"] = {
+        "key": declaration["source_key"],
+        "path": (packet / acquire_source.RECORD).relative_to(REPO).as_posix(),
+        "url": f"{source['source_url']}/blob/{source['source_commit']}/{row['path']}",
+        "retrieved": record["retrieved_at_utc"][:10],
+        "revision": source["source_commit"],
+        "revision_sha256": pinned[row["path"]]["sha256"],
+    }
+    return witness
+
+
+def certificate_from_witness(witness: Mapping[str, Any], n: int) -> legacy.Certificate:
+    """Recover every centre and half-angle exactly; refuse a basis that is no rotation."""
+    squares = witness.get("squares")
+    _require(
+        witness.get("n") == n
+        and witness.get("representation") == "center-basis"
+        and witness.get("scalar") == {"kind": "rational"}
+        and type(squares) is list,
+        f"n={n}: a derived fact is a complete rational centre-basis witness",
+    )
+    rows = []
+    for index, entry in enumerate(cast("list[Any]", squares), start=1):
+        where = f"n={n} square {index}"
+        square = cast("dict[str, list[Any]]", entry) if type(entry) is dict else {}
+        _require(
+            set(square) == {"id", "center", "basis"}
+            and square["id"] == index
+            and len(square["center"]) == len(square["basis"]) == 2,
+            f"{where}: incomplete exact pose",
+        )
+        x, y = (_literal(value, where) for value in square["center"])
+        c, s = (_literal(value, where) for value in square["basis"])
+        _require(c != -1, f"{where}: no finite half-angle")
+        t = s / (1 + c)
+        _require(legacy.Pose(x, y, t).basis == (c, s), f"{where}: the basis is no rotation")
+        rows.append((x, y, t))
+    return _certificate(n, _literal(witness.get("side"), f"n={n} side"), rows)
+
+
+def read_fact(
+    packet: Path, declaration: Declaration, row: CertificateRow
+) -> legacy.Certificate:
+    """Admit one derived fact: a valid witness that rebuilds itself from its certificate."""
+    path = packet / row.get("fact", "")
+    ensure_private(retained_data.compressed_path(path))
+    try:
+        raw = read_retained_bytes(path, limit=4 * MAX_SOURCE_BYTES)
+        document = load_yaml(raw.decode("utf-8"))
+        witness = validate_witness_document(document, path=path, fallback_schema=WITNESS_SCHEMA)
+    except (OSError, ValueError, yaml.YAMLError, WitnessError) as error:
+        raise ReportError(
+            f"n={row['n']}: derived fact is not a valid witness: {error}"
+        ) from error
+    certificate = certificate_from_witness(witness, row["n"])
+    rebuilt = witness_envelope(
+        fact_witness(packet, declaration, row, certificate), schema=FACT_SCHEMA
+    )
+    _require(document == rebuilt, f"n={row['n']}: derived fact differs from its own rebuild")
+    return certificate
+
+
 def read_facts(packet: Path) -> dict[int, legacy.Certificate]:
     """Admit every declared certificate once the packet's custody check passes."""
     ensure_private(packet)
@@ -513,8 +652,11 @@ def read_facts(packet: Path) -> dict[int, legacy.Certificate]:
     certificates = {}
     for row in declaration["certificates"]:
         n = row["n"]
-        raw = _read(source, row["path"])
-        certificate = parse_certificate(raw, n, row["format"], _options(row))
+        if "fact" in row:
+            certificate = read_fact(packet, declaration, row)
+        else:
+            raw = _read(source, row["path"])
+            certificate = parse_certificate(raw, n, row["format"], _options(row))
         admit(certificate, row["offered"])
         for other in row.get("same_packing", []):
             copy = parse_certificate(_read(source, other["path"]), n, other["format"])
@@ -530,6 +672,16 @@ def grid_side(n: int) -> Fraction:
     """The trivial bound ``ceil(sqrt(n))``: a grid of that side holds ``n`` squares."""
     _require(type(n) is int and n >= 1, "count must be positive")
     return Fraction(math.isqrt(n - 1) + 1)
+
+
+def _couzo_476(n: int) -> Fraction:
+    return read_facts(packet_path("couzo-exact-certificates-2026-10-09"))[n].side
+
+
+@functools.cache
+def _sides(loader: Callable[[], Mapping[int, legacy.Certificate]]) -> dict[int, Fraction]:
+    """Every side of one retained house packet, read once: those packets never change."""
+    return {n: certificate.side for n, certificate in loader().items()}
 
 
 def _evand_optima(n: int) -> Fraction:
@@ -549,14 +701,15 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
         rehwaldt.read_fact(rehwaldt.COUZO, n)["side"]
     ),
     "[SQUISH update 2026-10-07]": lambda n: Fraction(squish_update.read_fact(n)["side"]),
-    "[Couzo exact refinements 2026-10-08]": lambda n: couzo_451.read_facts()[n].side,
-    "[Gupta rational refinements 2026-10-08]": lambda n: gupta.read_fact(n).side,
+    "[Couzo exact refinements 2026-10-08]": lambda n: _sides(couzo_451.read_facts)[n],
+    "[Gupta rational refinements 2026-10-08]": lambda n: _sides(gupta.read_facts)[n],
     "[SQUISH second update 2026-10-07]": lambda n: Fraction(squish_second.read_fact(n)["side"]),
     "[SQUISH ten packings 2026-10-07]": lambda n: Fraction(squish_first.read_fact(n)["side"]),
-    "[ry-xu square packing 2026]": lambda n: ryxu.read_fact(n).side,
-    "[Daniel new arrangements 2026-10-07]": lambda n: kernel.read_fact(n).side,
-    "[Daniel record hunt 2026-10-09]": lambda n: evand_hunt.read_facts()[n].side,
-    "[Couzo follow-up refinements 2026-10-08]": lambda n: couzo_followup.read_facts()[n].side,
+    "[ry-xu square packing 2026]": lambda n: _sides(ryxu.read_facts)[n],
+    "[Daniel new arrangements 2026-10-07]": lambda n: _sides(kernel.read_facts)[n],
+    "[Daniel record hunt 2026-10-09]": lambda n: _sides(evand_hunt.read_facts)[n],
+    "[Couzo follow-up refinements 2026-10-08]": lambda n: _sides(couzo_followup.read_facts)[n],
+    "[Couzo exact certificates 2026-10-09]": _couzo_476,
 }
 
 
@@ -663,7 +816,9 @@ def _row(
     if n <= HORIZON:
         house = houses[n]
         prior = house_side(house["reader"], n)
-        for lane in ("reported_value", "verified_value"):
+        printed_lane = "reported_rounding" in house
+        lanes = ("verified_value",) if printed_lane else ("reported_value", "verified_value")
+        for lane in lanes:
             shown = Fraction(Decimal(house[lane]))
             unit = Fraction(1, 10 ** len(house[lane].partition(".")[2]))
             _require(
@@ -677,6 +832,10 @@ def _row(
             "difference": legacy.literal(prior - side),
         }
         candidates.append((f"case: {house['holders']}", exact_span(prior)))
+        if printed_lane:
+            span = printed_span(house["reported_value"], house.get("reported_rounding", ""))
+            result["case"]["reported_relation"] = relation(side, span)
+            candidates.append((f"case reported: {house['source_key']}", span))
     else:
         result["case"] = None
         candidates.append(("grid", exact_span(grid_side(n))))
@@ -847,21 +1006,101 @@ def check_claims(
     return rebuilt
 
 
+# --------------------------------------------------------------------------- derivation
+
+
+def checkout_problems(packet: Path, checkout: Path) -> list[str]:
+    """Where a checkout fails to yield this packet's acquisition record and manifest.
+
+    ``acquire_source.acquire`` writes a scratch copy of the packet from the checkout: it
+    refuses a checkout at another commit and binds every file to its Git blob there. Equal
+    records and manifests then mean every pinned file has the digest the packet records.
+    """
+    with tempfile.TemporaryDirectory() as scratch:
+        root = Path(scratch)
+        copy = root / packet.relative_to(REPO)
+        (copy / acquire_source.DECLARATION).parent.mkdir(parents=True)
+        shutil.copyfile(packet / acquire_source.DECLARATION, copy / acquire_source.DECLARATION)
+        try:
+            acquire_source.acquire(copy, checkout.resolve(), root)
+        except (OSError, ValueError, subprocess.CalledProcessError) as error:
+            return [f"the checkout does not yield this packet: {error}"]
+        problems = []
+        if _record(copy) != _record(packet):
+            problems.append("the checkout does not yield this packet's acquisition record")
+        fresh = acquire_source.read_manifest(copy / acquire_source.MANIFEST)
+        if fresh != acquire_source.read_manifest(packet / acquire_source.MANIFEST):
+            problems.append("the checkout does not yield this packet's manifest")
+        return problems
+
+
+def derive(packet: Path, checkout: Path, *, check: bool = False) -> list[retained_data.Row]:
+    """Write, or with ``check`` compare, each derived fact from a checkout at the pin.
+
+    A fact is stored as ``facts/n-NNN.yaml.gz``, deterministic gzip by the archive's rule,
+    and its row belongs in the packet README's Compressed Files table, origin ``receipt``.
+    """
+    ensure_private(packet)
+    declaration = load_declaration(packet)
+    acquisition(packet)
+    if problems := checkout_problems(packet, checkout):
+        raise ReportError("; ".join(problems))
+    written = []
+    for row in declaration["certificates"]:
+        if "fact" not in row:
+            continue
+        upstream = checkout / row["path"]
+        _require(
+            not upstream.is_symlink() and upstream.resolve().is_relative_to(checkout.resolve()),
+            f"{row['path']}: not a plain file of the checkout",
+        )
+        with upstream.open("rb") as stream:
+            raw = stream.read(MAX_SOURCE_BYTES + 1)
+        certificate = parse_certificate(raw, row["n"], row["format"], _options(row))
+        admit(certificate, row["offered"])
+        witness = fact_witness(packet, declaration, row, certificate)
+        text = witness_document(witness, schema=FACT_SCHEMA)
+        target = packet / row["fact"]
+        stored = retained_data.compressed_path(target)
+        validate_witness_document(load_yaml(text), path=target, fallback_schema=WITNESS_SCHEMA)
+        if check:
+            ensure_private(stored)
+            _require(
+                stored.is_file() and read_retained_bytes(stored) == text.encode(),
+                f"n={row['n']}: the retained fact is not what the checkout derives",
+            )
+        else:
+            ensure_private(target.parent if target.parent.exists() else packet)
+            target.parent.mkdir(exist_ok=True)
+            stored.unlink(missing_ok=True)
+            with atomic_output_file(target) as temporary:
+                temporary.write_text(text, encoding="utf-8")
+            retained_data.compress(target)
+        written.append(retained_data.describe(packet, stored, "receipt"))
+    return written
+
+
 # --------------------------------------------------------------------------- replay
 
 
-def replayed_facts(packet: Path) -> tuple[Declaration, dict[int, legacy.Certificate]]:
+def replayed_facts(
+    packet: Path, certificates: Mapping[int, legacy.Certificate] | None = None
+) -> tuple[Declaration, dict[int, legacy.Certificate]]:
     """The declaration and the admitted certificates of its ``replayed`` roster, in order."""
-    certificates = read_facts(packet)
+    certificates = read_facts(packet) if certificates is None else certificates
     declaration = load_declaration(packet)
     return declaration, {n: certificates[n] for n in declaration["replayed"]}
 
 
 def check_certification(
-    packet: Path, numbers: list[int] | None = None, *, replay: bool = False
+    packet: Path,
+    numbers: list[int] | None = None,
+    *,
+    replay: bool = False,
+    certificates: Mapping[int, legacy.Certificate] | None = None,
 ) -> dict[int, Any]:
     """Admit the retained receipt; with ``replay``, decide the selected counts again."""
-    declaration, facts = replayed_facts(packet)
+    declaration, facts = replayed_facts(packet, certificates)
     selected = list(facts) if numbers is None else numbers
     _require(
         selected
@@ -870,15 +1109,65 @@ def check_certification(
         and not set(selected) - set(facts),
         "empty, repeated or unknown replay selection",
     )
-    ensure_private(packet / RECEIPT)
-    record = kernel.read_xz(packet / RECEIPT)
     profile = _profile(declaration)
-    positives = kernel.validate_receipt(
-        record, facts, receipt_format=declaration["receipt_format"], **profile
-    )
-    if replay:
-        kernel.replay_receipt(record, facts, selected, **profile)
+    positives: dict[int, Any] = {}
+    for record, part in receipt_parts(packet, facts):
+        positives |= kernel.validate_receipt(
+            record, part, receipt_format=declaration["receipt_format"], **profile
+        )
+        if replay and set(part) & set(selected):
+            kernel.replay_receipt(record, part, selected, **profile)
     return positives
+
+
+def evidence_bytes(value: Any) -> int:
+    """The size of the kernel's serialization of a record, which its ceiling bounds."""
+    text = json.dumps(value, separators=(",", ":"), allow_nan=False, sort_keys=True)
+    return len(text.encode()) + 1
+
+
+def receipt_parts(
+    packet: Path, facts: Mapping[int, legacy.Certificate]
+) -> list[tuple[dict[str, Any], dict[int, legacy.Certificate]]]:
+    """The retained receipt, whole or by count, each with the certificates it decides."""
+    whole = packet / RECEIPT
+    parts = {n: packet / shard(n) for n in facts}
+    stray = {
+        path
+        for path in (packet / "receipts").glob("exact-certification-n*.json.xz")
+        if path not in parts.values()
+    }
+    present = [path for path in parts.values() if path.exists()]
+    _require(not stray, f"receipts for counts outside the replayed roster: {sorted(stray)}")
+    _require(
+        whole.exists() != bool(present) and len(present) in {0, len(parts)},
+        "a receipt is the roster's whole receipt or one per replayed count, not both",
+    )
+    if whole.exists():
+        ensure_private(whole)
+        return [(kernel.read_xz(whole), dict(facts))]
+    result = []
+    for n, path in parts.items():
+        ensure_private(path)
+        result.append((kernel.read_xz(path), {n: facts[n]}))
+    return result
+
+
+def save_receipt(
+    packet: Path, declaration: Declaration, facts: Mapping[int, Any], rows: list[Any]
+) -> None:
+    """Write the roster's receipt, split by count where the whole exceeds the ceiling."""
+    head = {"format": declaration["receipt_format"], "routes": list(ROUTES)}
+    record = {**head, "cases": rows}
+    for path in [packet / RECEIPT, *(packet / shard(n) for n in facts)]:
+        ensure_private(path)
+        path.unlink(missing_ok=True)
+    if evidence_bytes(record) <= kernel.MAX_BYTES:
+        kernel.save_xz(packet / RECEIPT, record)
+        return
+    for n in facts:
+        cases = [row for row in rows if row["n"] == n]
+        kernel.save_xz(packet / shard(n), {**head, "cases": cases})
 
 
 def run_job(
@@ -910,10 +1199,27 @@ def run_job(
     return json.loads(data, object_pairs_hook=kernel.unique_object)
 
 
+def read_job(path: Path) -> dict[str, Any]:
+    """One finished job's row, as its child process wrote it."""
+    with path.open("rb") as stream:
+        data = stream.read(kernel.MAX_BYTES + 1)
+    _require(len(data) <= kernel.MAX_BYTES, "native child receipt exceeds its ceiling")
+    return json.loads(data, object_pairs_hook=kernel.unique_object)
+
+
 def certify(
-    packet: Path, directory: Path, *, workers: int = MAX_WORKERS, timeout: int = JOB_TIMEOUT
+    packet: Path,
+    directory: Path,
+    *,
+    workers: int = MAX_WORKERS,
+    timeout: int = JOB_TIMEOUT,
+    finished: bool = False,
 ) -> dict[int, Any]:
-    """Run every job of every count in a fresh directory; write the receipt once all pass."""
+    """Run every job of every count in a fresh directory; write the receipt once all pass.
+
+    With ``finished``, the directory instead holds every job's output from an earlier run
+    of this command, and the receipt is assembled from those rows, admitted as any is.
+    """
     _require(
         type(workers) is int
         and 1 <= workers <= MAX_WORKERS
@@ -921,19 +1227,22 @@ def certify(
         and 1 <= timeout <= JOB_TIMEOUT,
         "invalid bounded worker/deadline selection",
     )
-    ensure_private(packet / RECEIPT)
     declaration, facts = replayed_facts(packet)
-    _require(not directory.exists(), "native job directory must be a fresh attempt")
-    directory.mkdir(parents=True)
     jobs = [(n, control) for n in facts for control in JOBS]
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = [pool.submit(run_job, packet, job, directory, timeout) for job in jobs]
-        rows = [future.result() for future in futures]
+    if finished:
+        _require(directory.is_dir(), "no finished job directory")
+        rows = [read_job(directory / f"n{n}-{control}.json") for n, control in jobs]
+    else:
+        _require(not directory.exists(), "native job directory must be a fresh attempt")
+        directory.mkdir(parents=True)
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = [pool.submit(run_job, packet, job, directory, timeout) for job in jobs]
+            rows = [future.result() for future in futures]
     record = {"format": declaration["receipt_format"], "routes": list(ROUTES), "cases": rows}
     positives = kernel.validate_receipt(
         record, facts, receipt_format=declaration["receipt_format"], **_profile(declaration)
     )
-    kernel.save_xz(packet / RECEIPT, record)
+    save_receipt(packet, declaration, facts, rows)
     return positives
 
 
@@ -988,6 +1297,53 @@ def _sci(value: str | Fraction) -> str:
     return f"{float(Fraction(value)):.2e}"
 
 
+def _floor_sci(value: Fraction) -> str:
+    """Three significant digits rounded down, so a bound stated as "at least" holds."""
+    if value <= 0:
+        return "0"
+    exponent = math.floor(math.log10(value))
+    while Fraction(10) ** exponent > value:
+        exponent -= 1
+    while Fraction(10) ** (exponent + 1) <= value:
+        exponent += 1
+    mantissa = math.floor(value / Fraction(10) ** exponent * 100)
+    return f"{mantissa / 100:.2f}e{exponent:+03d}"
+
+
+_WORDS = [
+    "Zero",
+    "One",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten",
+    "Eleven",
+    "Twelve",
+    "Thirteen",
+    "Fourteen",
+    "Fifteen",
+    "Sixteen",
+    "Seventeen",
+    "Eighteen",
+    "Nineteen",
+    "Twenty",
+]
+
+
+def _many(count: int, noun: str) -> str:
+    """``count`` and ``noun``, made plural with an ``s`` unless the count is one."""
+    return f"{count} {noun}" if count == 1 else f"{count} {noun}s"
+
+
+def _count_word(n: int) -> str:
+    return _WORDS[n] if n < len(_WORDS) else str(n)
+
+
 def _replay(positives: dict[int, Any], record: Mapping[str, Any]) -> str:
     summary = receipt_summary(record)
     found = margins(positives).values()
@@ -995,13 +1351,18 @@ def _replay(positives: dict[int, Any], record: Mapping[str, Any]) -> str:
     gap = min(Fraction(row["exact_verify_best_pair_gap"]) for row in found)
     return (
         f"A separate complete repository replay is retained for n = "
-        f"{_and([str(n) for n in positives])}: {len(positives)} positives and "
+        f"{_and([str(n) for n in positives])}: {_many(len(positives), 'positive')} and "
         f"{2 * len(positives)} duplicate-square and outside-container controls passed their "
         f"required outcomes on both routes, {summary['pair_decisions']} pair decisions; summed "
         f"over the {summary['jobs']} jobs, the receipt records {summary['route_cpu_seconds']} "
         f"route CPU seconds and {summary['job_wall_seconds']} job wall seconds, the longest "
-        f"job {summary['longest_job_seconds']} seconds. Every positive clears every wall by "
-        f"at least {_sci(wall)} and every pair by at least {_sci(gap)}."
+        f"job {summary['longest_job_seconds']} seconds. "
+        + (
+            f"Every positive clears every wall by at least {_floor_sci(wall)}"
+            if wall
+            else "In every positive squares touch the box, a least wall clearance of exactly 0"
+        )
+        + f", and every pair by at least {_floor_sci(gap)}."
     )
 
 
@@ -1034,12 +1395,22 @@ def register_plan(packet: Path) -> dict[str, Any]:
     """
     declaration = load_declaration(packet)
     register = declaration["register"]
-    every = check_claims(packet, read_facts(packet))["results"]
+    certificates = read_facts(packet)
+    every = check_claims(packet, certificates)["results"]
     rows = [row for row in every if row["requested"]]
     others = [row["n"] for row in every if not row["requested"]]
-    positives = check_certification(packet)
-    record = kernel.read_xz(packet / RECEIPT)
+    positives = check_certification(packet, certificates=certificates)
+    _declaration, facts = replayed_facts(packet, certificates)
+    parts = receipt_parts(packet, facts)
+    record = {"cases": [row for part, _ in parts for row in part["cases"]]}
+    receipts = [packet / RECEIPT] if len(parts) == 1 else [packet / shard(n) for n in facts]
     source = acquisition(packet)
+    derived = {row["n"]: row["fact"] for row in declaration["certificates"] if "fact" in row}
+    kept = (
+        "kept as derived exact facts, no upstream byte retained"
+        if derived
+        else "retained as the source wrote them"
+    )
     inside = [row for row in rows if row["n"] <= HORIZON]
     beyond = [row for row in rows if row["n"] > HORIZON]
     dated = {row["n"]: row["first_committed"][:10] for row in declaration["certificates"]}
@@ -1049,7 +1420,8 @@ def register_plan(packet: Path) -> dict[str, Any]:
         return _and([f"s({r['n']}) <= {claim_value(Fraction(r['exact_side']))}" for r in group])
 
     claim = (
-        f"{len(inside)} complete rational source certificates report finite upper-bound "
+        f"{_count_word(len(inside))} complete rational source certificates report finite "
+        "upper-bound "
         f"improvements at the exact sides they state: {states(inside)}. Complete native "
         "feasibility outcomes are retained separately; the selected standing cases are "
         "unchanged pending independent review and record review."
@@ -1090,9 +1462,15 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "significance": {
             "score": register["significance"],
             "rationale": (
-                f"Smaller finite construction sides at n = "
-                f"{_and([str(row['n']) for row in inside])}, {_sci(min(below_by))} to "
-                f"{_sci(max(below_by))} below the case ceilings; no lower bound or optimum."
+                (
+                    f"A smaller finite construction side at n = {inside[0]['n']}, "
+                    f"{_sci(below_by[0])} below the case ceiling"
+                    if len(inside) == 1
+                    else f"Smaller finite construction sides at n = "
+                    f"{_and([str(row['n']) for row in inside])}, {_sci(min(below_by))} to "
+                    f"{_sci(max(below_by))} below the case ceilings"
+                )
+                + "; no lower bound or optimum."
             ),
             "scored": declaration["read_on"],
             "by": f"{register['bead']} {declaration['author']} import",
@@ -1106,8 +1484,13 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "artifacts": [
             f"{packet_path}/README.md",
             f"{packet_path}/{CLAIMS.as_posix()}",
-            *(f"{source['archived_path']}/{row['certificate']}" for row in inside),
-            f"{packet_path}/{RECEIPT.as_posix()}",
+            *(
+                f"{packet_path}/{derived[row['n']]}.gz"
+                if row["n"] in derived
+                else f"{source['archived_path']}/{row['certificate']}"
+                for row in inside
+            ),
+            *(path.relative_to(REPO).as_posix() for path in receipts),
             "packing/devtools/upper_bound_reports.py",
         ],
         "controls": ["packing/tests/test_upper_bound_reports.py"],
@@ -1136,13 +1519,18 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "origin": "external",
         "novelty": "previously-published",
         "source_key": declaration["source_key"],
-        "certificate": f"{(PurePosixPath(source['archived_path']) / folder).as_posix()}/",
+        "certificate": (
+            f"{packet_path}/{FACTS}/"
+            if derived
+            else f"{(PurePosixPath(source['archived_path']) / folder).as_posix()}/"
+        ),
         "replay_status": "not-attempted",
         "verifiers": [],
         "source_reviewed": declaration["read_on"],
         "limitations": (
-            f"This atom records the source author's report of {len(rows)} exact rational "
-            f"certificates at {source['source_commit'][:7]}. {replay} Independent review and "
+            "This atom records the source author's report of "
+            f"{_many(len(rows), 'exact rational certificate')} at "
+            f"{source['source_commit'][:7]}. {replay} Independent review and "
             "confirmation remain pending. The source's own checkers were not run here. "
             f"{shared}"
         ),
@@ -1162,8 +1550,9 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "represented_by": ["frontier/results.yaml", f"{local}/{CLAIMS.as_posix()}"],
         "evidence": [declaration["report_evidence"]],
         "notes": (
-            f"All {len(rows)} complete certificates are retained, each admitted only where "
-            "its exact side rounds up to the side the issue prints. T-NNN records the "
+            f"{'The' if len(rows) == 1 else 'All'} {_many(len(rows), 'complete certificate')} "
+            f"{'is' if len(rows) == 1 else 'are'} {kept}, each admitted only where its "
+            "exact side equals, or rounds up to, the side its source prints. T-NNN records the "
             f"in-horizon report. All {len(record['cases'])} native jobs have full outcomes. "
             "No selected override or superseded claim is created at this source-only stage; "
             "current cases and earlier source ownership remain unchanged."
@@ -1184,9 +1573,13 @@ def register_plan(packet: Path) -> dict[str, Any]:
     }
     readme = (
         f"**{declaration['source_key']}**: {declaration['author']}'s exact rational "
-        f"certificates for n = {_and([str(row['n']) for row in rows])}, pinned at "
-        f"`{source['source_commit']}`; [packet](web/{packet.name}/README.md). Both project "
-        f"exact routes accept every certificate and refuse all {2 * len(rows)} controls. "
+        f"{'certificate' if len(rows) == 1 else 'certificates'} for n = "
+        f"{_and([str(row['n']) for row in rows])}, pinned at "
+        f"`{source['source_commit']}`, {kept}; [packet](web/{packet.name}/README.md). Both "
+        "project "
+        f"exact routes accept {'the' if len(positives) == 1 else 'all'} "
+        f"{_many(len(positives), 'replayed certificate')} and refuse all "
+        f"{2 * len(positives)} controls. "
         "T-NNN records the in-horizon sides at V0/C0, pending independent review and adoption."
     )
     if beyond:
@@ -1226,12 +1619,16 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("packet", help="the packet's directory name under resources/web/")
     sub = parser.add_subparsers(dest="action", required=True)
+    derivation = sub.add_parser("derive")
+    derivation.add_argument("--checkout", type=Path, required=True)
+    derivation.add_argument("--check", action="store_true")
     claims = sub.add_parser("check-claims")
     claims.add_argument("--write", action="store_true")
     campaign = sub.add_parser("certify")
     campaign.add_argument("--jobs-dir", type=Path, required=True)
     campaign.add_argument("--workers", type=int, default=MAX_WORKERS)
     campaign.add_argument("--timeout", type=int, default=JOB_TIMEOUT)
+    campaign.add_argument("--finished", action="store_true")
     check = sub.add_parser("check")
     check.add_argument("--n", type=int, nargs="+")
     check.add_argument("--replay", action="store_true")
@@ -1242,12 +1639,24 @@ def main(argv: list[str] | None = None) -> int:
     job.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     packet = packet_path(args.packet)
-    if args.action == "check-claims":
+    if args.action == "derive":
+        rows = derive(packet, args.checkout, check=args.check)
+        verb = "match the checkout" if args.check else "written"
+        print(f"{len(rows)} derived facts {verb}; their Compressed Files rows:")
+        for row in rows:
+            print(row.markdown())
+    elif args.action == "check-claims":
         if args.write:
             write_claims(packet)
         print(_json_text(check_claims(packet)), end="")
     elif args.action == "certify":
-        positives = certify(packet, args.jobs_dir, workers=args.workers, timeout=args.timeout)
+        positives = certify(
+            packet,
+            args.jobs_dir,
+            workers=args.workers,
+            timeout=args.timeout,
+            finished=args.finished,
+        )
         print(_json_text(margins(positives)), end="")
     elif args.action == "check":
         positives = check_certification(packet, args.n, replay=args.replay)

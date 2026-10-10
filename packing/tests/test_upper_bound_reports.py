@@ -5,8 +5,10 @@ Every test reads retained packets only; none needs the network.
 
 from __future__ import annotations
 
+import functools
 import gzip
 import json
+import os
 import shutil
 import subprocess
 from collections.abc import Callable, Mapping
@@ -25,6 +27,10 @@ from devtools import upper_bound_reports as reports
 COUZO = "couzo-exact-certificates-2026-10-09"
 FANG = "fang-two-wedge-certificates-2026-10-10"
 PACKETS = (COUZO, FANG)
+SQUISH_481 = "squish-481-third-request-2026-10-09"
+DELEEUW = "ebdeleeuw-n70-refinement-2026-10-10"
+DERIVED = (SQUISH_481, DELEEUW)
+EVERY = (*PACKETS, *DERIVED)
 
 
 def _packet(name: str) -> Path:
@@ -317,7 +323,9 @@ def test_smallest_names_one_report_only_when_it_is_decidably_below_every_other()
     ) == {"smallest": None, "tied": ["a", "b"]}
 
 
+@functools.cache
 def _rows(name: str) -> dict[int, dict[str, Any]]:
+    """A retained packet's frozen comparison, rebuilt once: the tests only read it."""
     return {row["n"]: row for row in reports.check_claims(_packet(name))["results"]}
 
 
@@ -451,11 +459,13 @@ def test_a_case_value_that_is_not_its_house_rounded_up_is_refused(
 # --------------------------------------------------------------------------- receipts
 
 
-@pytest.mark.parametrize("name", PACKETS)
+@pytest.mark.parametrize("name", EVERY)
 def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
     packet = _packet(name)
     positives = reports.check_certification(packet)
-    record = kernel.read_xz(packet / reports.RECEIPT)
+    _declaration, facts = reports.replayed_facts(packet)
+    parts = reports.receipt_parts(packet, facts)
+    record = {"cases": [row for part, _ in parts for row in part["cases"]]}
     assert [(row["n"], row["control"]) for row in record["cases"]] == [
         (n, control) for n in positives for control in reports.JOBS
     ]
@@ -465,7 +475,66 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
     for margins in reports.margins(positives).values():
         for field in ("containment_clearance", "best_pair_gap"):
             assert margins[f"exact_verify_{field}"] == margins[f"independent_{field}"]
-            assert Fraction(margins[f"exact_verify_{field}"]) > 0
+        assert Fraction(margins["exact_verify_best_pair_gap"]) > 0
+        assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
+    # SQUISH's squares touch the box; every other source's clear it.
+    walls = {
+        Fraction(m["exact_verify_containment_clearance"])
+        for m in reports.margins(positives).values()
+    }
+    assert (walls == {0}) is (name == SQUISH_481)
+
+
+def _jobs_from_receipt(packet: Path, directory: Path) -> None:
+    """Write a retained receipt's rows back out as a finished job directory."""
+    _declaration, facts = reports.replayed_facts(packet)
+    directory.mkdir()
+    for part, _ in reports.receipt_parts(packet, facts):
+        for row in part["cases"]:
+            _write_json(directory / f"n{row['n']}-{row['control']}.json", row)
+
+
+def test_a_receipt_over_the_ceiling_is_kept_by_count_and_admitted_alike(
+    private: Callable[[str], Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    packet = private(FANG)
+    _jobs_from_receipt(packet, tmp_path / "jobs")
+    whole = kernel.read_xz(packet / reports.RECEIPT)
+    sizes = [
+        reports.evidence_bytes({**whole, "cases": [r for r in whole["cases"] if r["n"] == n]})
+        for n in (308, 343, 344)
+    ]
+    ceiling = kernel.MAX_BYTES
+    monkeypatch.setattr(kernel, "MAX_BYTES", max(sizes))
+    assert reports.evidence_bytes(whole) > kernel.MAX_BYTES
+    reports.certify(packet, tmp_path / "jobs", finished=True)
+    assert not (packet / reports.RECEIPT).exists()
+    assert [path.name for path in sorted((packet / "receipts").iterdir())] == [
+        f"exact-certification-n{n}.json.xz" for n in (308, 343, 344)
+    ]
+    assert list(reports.check_certification(packet)) == [308, 343, 344]
+    monkeypatch.setattr(kernel, "MAX_BYTES", ceiling)
+    kernel.save_xz(packet / reports.RECEIPT, whole)
+    with pytest.raises(reports.ReportError, match="not both"):
+        reports.check_certification(packet)
+
+
+def test_assembling_a_receipt_refuses_a_missing_or_altered_job(
+    private: Callable[[str], Path], tmp_path: Path
+) -> None:
+    packet = private(DELEEUW)
+    jobs = tmp_path / "jobs"
+    _jobs_from_receipt(packet, jobs)
+    before = (packet / reports.RECEIPT).read_bytes()
+    row = _json(jobs / "n70-positive.json")
+    row["checker_input"]["side"] = "9"
+    _write_json(jobs / "n70-positive.json", row)
+    with pytest.raises(kernel.ReportError):
+        reports.certify(packet, jobs, finished=True)
+    (jobs / "n70-positive.json").unlink()
+    with pytest.raises(FileNotFoundError):
+        reports.certify(packet, jobs, finished=True)
+    assert (packet / reports.RECEIPT).read_bytes() == before
 
 
 @pytest.mark.parametrize("kind", ["flipped-control", "moved-input", "reordered", "format"])
@@ -562,7 +631,7 @@ def test_the_driver_refuses_duplicate_keys_and_incomplete_rows(
 # --------------------------------------------------------------------------- register plan
 
 
-@pytest.mark.parametrize("name", PACKETS)
+@pytest.mark.parametrize("name", EVERY)
 def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: str) -> None:
     plan = reports.register_plan(_packet(name))
     result = plan["results.yaml"]
@@ -577,7 +646,8 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         n: Fraction(rows[n]["exact_side"]) for n in scope
     }
     assert not check_standing.statements(result["headline"], scope)
-    assert result["attribution"]["published"] == {COUZO: "2026-10-09", FANG: "2026-10-10"}[name]
+    published = {COUZO: "2026-10-09", FANG: "2026-10-10", SQUISH_481: "2026-10-09"}
+    assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
     assert evidence["scope"]["n_values"] == list(rows)
     assert evidence["assurance"] == "reported"
@@ -607,3 +677,190 @@ def test_a_claim_states_a_short_terminating_side_in_decimals_and_others_as_fract
     )
     assert reports.claim_value(Fraction(10, 3)) == "10/3"
     assert reports.claim_value(Fraction(1, 2**200)).count("/") == 1
+
+
+# --------------------------------------------------------------------------- derived facts
+
+SYNTHETIC = "synthetic-derived-2026-10-10"
+DATE = "2026-10-10T00:00:00Z"
+
+
+def _git(directory: Path, *arguments: str) -> str:
+    environment = {**os.environ, "GIT_AUTHOR_DATE": DATE, "GIT_COMMITTER_DATE": DATE}
+    identity = ["-c", "user.name=Test", "-c", "user.email=test@example.invalid"]
+    completed = subprocess.run(
+        ["git", *identity, "-C", str(directory), *arguments],
+        capture_output=True,
+        text=True,
+        check=True,
+        env=environment,
+    )
+    return completed.stdout.strip()
+
+
+def _upstream(tmp_path: Path, certificate: Mapping[str, Any]) -> tuple[Path, str]:
+    """A one-commit upstream repository holding one centred certificate, unlicensed."""
+    upstream = tmp_path / "upstream"
+    upstream.mkdir()
+    _git(upstream, "init", "--quiet")
+    (upstream / "certificate.json").write_text(json.dumps(certificate, indent=2) + "\n")
+    _git(upstream, "add", "certificate.json")
+    _git(upstream, "commit", "--quiet", "-m", "certificate")
+    return upstream, _git(upstream, "rev-parse", "HEAD")
+
+
+def _readme(packet: Path, rows: list[Any]) -> None:
+    table = "\n".join(row.markdown() for row in rows)
+    (packet / "README.md").write_text(
+        "# Synthetic\n\n## Compressed Files\n\n"
+        "| Stored File | Origin | Git Blob of Original | SHA-256 of Original |\n"
+        f"| --- | --- | --- | --- |\n{table}\n"
+    )
+
+
+@pytest.fixture
+def derived(private: Callable[[str], Path], tmp_path: Path) -> tuple[Path, Path]:
+    """A derived-only packet written from a synthetic checkout, and the checkout."""
+    upstream, commit = _upstream(tmp_path, CENTRED)
+    packet = reports.WEB / SYNTHETIC
+    (packet / "acquisition").mkdir(parents=True)
+    _write_json(
+        packet / "acquisition/declaration.json",
+        {
+            "format": "external-source-declaration-v1",
+            "id": "synthetic",
+            "source_url": "https://example.invalid/synthetic",
+            "source_ref": "main",
+            "source_commit": commit,
+            "retrieved_at_utc": "2026-10-10T00:00Z",
+            "git_scope": "The one file of a synthetic one-commit repository.",
+            "archived_dir": "source",
+            "license": "None stated: derived-only custody.",
+            "claims": ["s(2) <= 3, a synthetic centred certificate."],
+            "scope": ["certificate.json"],
+            "pinned_only": [{"match": "certificate.json", "reason": "Derived-only custody."}],
+        },
+    )
+    reports.acquire_source.acquire(packet, upstream, reports.REPO)
+    declaration = _json(private(DELEEUW) / reports.DECLARATION)
+    declaration.update(
+        {
+            "issue": "https://example.invalid/issue",
+            "certificates": [
+                {
+                    "n": 2,
+                    "path": "certificate.json",
+                    "format": "centred-json",
+                    "offered": "3.0",
+                    "first_committed": DATE,
+                    "fact": "facts/n-002.yaml",
+                }
+            ],
+            "requested": [2],
+            "replayed": [2],
+            "houses": [
+                {
+                    "n": 2,
+                    "reader": "grid",
+                    "source_key": "[Kingbird]",
+                    "holders": "the grid",
+                    "reported_value": "2",
+                    "verified_value": "2",
+                    "evidence": ["E-basic-grid-upper"],
+                }
+            ],
+            "pending": [],
+        }
+    )
+    _write_json(packet / reports.DECLARATION, declaration)
+    _readme(packet, [])
+    _readme(packet, reports.derive(packet, upstream))
+    return packet, upstream
+
+
+def test_a_derived_fact_reads_offline_as_the_certificate_it_was_derived_from(
+    derived: tuple[Path, Path],
+) -> None:
+    packet, upstream = derived
+    assert not (packet / "source").exists() or not any((packet / "source").iterdir())
+    raw = (upstream / "certificate.json").read_bytes()
+    expected = reports.parse_certificate(raw, 2, "centred-json")
+    assert reports.read_facts(packet) == {2: expected}
+    assert [row.stored for row in reports.derive(packet, upstream, check=True)] == [
+        "facts/n-002.yaml.gz"
+    ]
+    fact = gzip.decompress((packet / "facts/n-002.yaml.gz").read_bytes()).decode()
+    assert "revision_sha256:" in fact
+
+
+def test_derivation_refuses_a_checkout_that_does_not_yield_the_packet(
+    derived: tuple[Path, Path],
+) -> None:
+    packet, upstream = derived
+    changed = {**CENTRED, "side": "4"}
+    (upstream / "certificate.json").write_text(json.dumps(changed, indent=2) + "\n")
+    with pytest.raises(reports.ReportError, match="does not yield this packet"):
+        reports.derive(packet, upstream, check=True)
+    _git(upstream, "commit", "--quiet", "-am", "a later revision")
+    with pytest.raises(reports.ReportError, match="does not yield this packet"):
+        reports.derive(packet, upstream, check=True)
+
+
+def test_a_derived_fact_that_names_other_bytes_is_refused(derived: tuple[Path, Path]) -> None:
+    packet, _upstream = derived
+    stored = packet / "facts/n-002.yaml.gz"
+    text = gzip.decompress(stored.read_bytes()).decode()
+    marker = "revision_sha256: "
+    start = text.index(marker) + len(marker)
+    text = text[:start] + "a" * 64 + text[start + 64 :]
+    stored.write_bytes(gzip.compress(text.encode(), mtime=0))
+    _readme(packet, [reports.retained_data.describe(packet, stored, "receipt")])
+    with pytest.raises(reports.ReportError, match="differs from its own rebuild"):
+        reports.read_facts(packet)
+
+
+def test_a_derived_fact_names_its_file_and_admits_no_second_format(
+    private: Callable[[str], Path],
+) -> None:
+    packet = private(DELEEUW)
+    path = packet / reports.DECLARATION
+    value = _json(path)
+    value["certificates"][0]["fact"] = "facts/n-70.yaml"
+    _write_json(path, value)
+    with pytest.raises(reports.ReportError, match=r"facts/n-NNN\.yaml"):
+        reports.load_declaration(packet)
+
+
+@pytest.mark.parametrize("name", DERIVED)
+def test_the_derived_packets_admit_every_certificate_at_its_printed_exact_side(
+    name: str,
+) -> None:
+    packet = _packet(name)
+    declaration = reports.load_declaration(packet)
+    certificates = reports.read_facts(packet)
+    assert list(certificates) == [row["n"] for row in declaration["certificates"]]
+    for row in declaration["certificates"]:
+        assert certificates[row["n"]].side == Fraction(row["offered"])
+    rows = _rows(name)
+    assert all(row["smallest"] == reports.THIS for row in rows.values())
+    assert all(row["case"]["relation"] == "below" for row in rows.values())
+
+
+def test_the_n232_case_reports_a_catalogue_print_under_its_verified_ceiling() -> None:
+    row = _rows(SQUISH_481)[232]
+    assert row["case"]["reported_relation"] == "below"
+    # The verified lane prints Evan Daniel's certificate side rounded up at 14 places; the
+    # comparison is with the certificate's exact side, rebuilt from its packet.
+    exact = Fraction(row["case"]["exact_side"])
+    assert exact == Fraction(3944543648263005692141767432271, 250000000000000000000000000000)
+    assert exact < Fraction(row["case"]["verified_value"]) < exact + Fraction(1, 10**14)
+    assert Fraction(row["case"]["reported_value"]) < exact
+    assert row["case"]["result"] == "T-101"
+
+
+def test_the_481_claims_compare_issue_476_from_its_own_packet() -> None:
+    rows = _rows(SQUISH_481)
+    for n in (237, 263, 270, 303):
+        (couzo,) = [other for other in rows[n]["pending"] if other["report"] == "#476"]
+        assert couzo["relation"] == "below"
+        assert Fraction(couzo["exact_side"]) == reports.read_facts(_packet(COUZO))[n].side
