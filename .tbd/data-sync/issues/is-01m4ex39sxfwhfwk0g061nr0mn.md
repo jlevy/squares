@@ -3,9 +3,9 @@ type: is
 id: is-01m4ex39sxfwhfwk0g061nr0mn
 title: Publish the complete atlas on a dedicated page
 kind: feature
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -19,8 +19,17 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:20:41.532Z
-updated_at: 2026-10-09T05:17:13.221Z
+updated_at: 2026-10-10T18:55:57.022Z
 started_at: 2026-10-09T00:25:38.385Z
+closed_at: 2026-10-10T18:55:57.022Z
+close_reason: |-
+  Completed the reviewed implementation and CI repair published in PR462 (https://github.com/jlevy/squares/pull/462) at exact head d3c99face8fa81fd6ad265111265e4f6a6067106. The coordinator's sole final CI watch exited 0: 31 PASS, 26 intentional SKIP, 0 failures, 0 pending; frontend PASS and all final-head checks green.
+
+  Final behavior supersedes stale descriptions: single centered n=53 hero; homepage Triangle preview 36→100→324→36; About H1; inline homepage video; complete Atlas and Frontier Survey, shared navigation/design and case/result previews retained. The canceled scientific PDF change is excluded. No assertion, 300ms startup bound or scientific content is changed by this closeout.
+
+  Earlier local 901-second incomplete validation and the 195c80948 startup failure remain preserved in prior notes and durable receipts; final hosted success does not relabel those runs. This closes implementation and CI-repair beads only. Full checkpoint think-xio5, epic think-2u4x, process owner think-ht59 and scoping follow-up think-9k61 remain open.
+resolution: null
+duplicate_of: null
 ---
 Add atlas.html for the full 324-case atlas, reusing drawing assets, views, controls and canonical case pages/popovers. Expose it through shared navigation while retaining the Frontier survey. Register its URL, crawl metadata, builder assets, preview coverage and Pages scope. Forward existing homepage atlas fragments and query view state to the full atlas. Preserve published case/result addresses. See L4 in the spec.
 
