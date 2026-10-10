@@ -5,7 +5,7 @@ title: Resume polynomial catalogue recovery, upstream sync and database work map
 kind: task
 status: in_progress
 priority: 1
-version: 38
+version: 39
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -27,12 +27,140 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T22:26:10.056Z
-updated_at: 2026-10-10T10:42:04.117Z
+updated_at: 2026-10-10T11:03:05.229Z
 started_at: 2026-10-08T22:26:36.377Z
 ---
 Continue W7 recovery and the fixed origin/main refresh of formal stack 447 (PR 403 source/register, PR 435 web publication). Preserve all current database records and source custody, admit the two new Daniel source occurrences without adopting them, and maintain the complete polynomial register. Current child scope is 324 cases with 321 exact sides, three numeric gaps, and 214 retained history rows. Publish amended source commits with small release pins, qualify the actual frozen heads, and keep every dated negative receipt and remaining owner visible on both PRs and beads. Coordinator owns Git, shared records, beads and PR changes; reviewers own bounded disjoint checks. No PR landing, solver campaign, geometry/Lean admission or contact-derived identification belongs to this refresh.
 
 ## Notes
+
+# Published refresh checkpoint at 2026-10-10T11:03:04Z
+
+Workflow entry point: continue the existing upstream refresh and formal stack 447
+qualification; retain HTML-only report publication and the original adoption owners.
+
+Main snapshot is `657cc486130e9020608ff244d8a86d1d04153634`, including PR 478 and PR
+482\. The parent PR 403 is published at `11c63df2ca355ef8818db099c7c77d08fb812ae5`
+(source `491a8da5968b1bcd39574fdd711919126d853104`), based on main.
+Child PR 435 is published at `34e191f274c461ea15197ff6e654ab617aaa786d` (source
+`52bb5bb49d99e991c484946120d4130e671ba0a9`), based on that parent.
+Both source worktrees are clean, official stack tracking is reconciled, and remote/PR
+head and base readbacks agree.
+Existing source commits were amended; the separate release-pin commits contain only the
+required pin changes.
+
+Child full hosted run
+[38044600780](https://github.com/jlevy/squares/actions/runs/38044600780) completed
+SUCCESS at the exact published child: all eleven required prerequisites,
+post-merge-required aggregate and optional macOS portability passed.
+The final ALL `gh pr checks --watch` summary exited 0; head readbacks before and after
+are unchanged. Parent full run
+[38044596979](https://github.com/jlevy/squares/actions/runs/38044596979) still requires
+its complete integration job and final aggregate; ten of eleven required prerequisites
+and macOS portability passed.
+Its final all-checks watch remains required.
+Both current-head automatic Packing, Pages and merge-base checks passed.
+Cancelled superseded child automatic runs retain their cancelled status.
+No extra dispatch, retry, worker override or timeout increase occurred.
+
+Current database: 324 cases, parent 320 exact identities plus n=83 degree-only; child
+321 exact identities, with numeric gaps n=29/55/71. All 77 proved statuses and all
+selected sides are unchanged.
+The refresh adds only Daniel n=132/T-131 and a distinct Daniel n=155/T-128 source
+occurrence. The latter has the same exact side as the retained Couzo offer with distinct
+custody; the full expected Couzo row and generic conflict guards remain checked.
+There are 15 pending occurrences for 14 distinct bounds, retained at V0/C0; acquisition
+is not independent adoption.
+Parent history has 30 rows; child history 214. The canonical child has 538 records, 560
+coefficient vectors and 6,378 integer strings.
+All 324 current and 212 previous historical objects survive, with only two occurrences
+appended.
+
+The Papers report is HTML-only with responsive wide tables, search/filtering and full
+coefficient downloads.
+Public output has 352 records, 352 vectors and 2,128 strings; 186 superseded rows and 22
+redundant notes are omitted publicly but retained in the complete canonical/source
+evidence. No report PDF was generated.
+Thirteen acquired scientific originals remain in the declared source-PDF release,
+separate from report packaging.
+The full n=83 polynomial retains all 673 coefficients and its 724-digit integer; source
+ordinal 27 remains stated, not independently counted.
+
+Final child native inventory: 200,113,199 / 201,326,592 bytes, 1,213,393 bytes headroom,
+7,082 unique paths and all eight replay leaves.
+Parent inventory: 197,970,624 bytes, 3,355,968 bytes headroom and 7,033 paths.
+The cap is unchanged; these are maintained roster/byte receipts, not Git/live
+byte-equality claims.
+Final HTML reconstruction and all eight catalogue/complete views at 390/1280 in
+light/dark passed, with zero document overflow, lost ink or math errors.
+Initial 295,269 / complete 3,665,570 bytes gives 8.0552% under the explicit 10% test;
+this is a bytes/coverage result, not a latency claim.
+Screenshots are preserved outside scratch.
+URL history compatibility passed at 1,629 rows with four payload additions and no
+removals or old-row changes.
+Focused tests passed 290 parent, 158 child and 47 URL tests on their reviewed pre-amend
+working patches; final source/data preservation was independently reviewed.
+
+Local negative receipts remain separate from hosted success.
+Parent’s one broad push passed 65 edit checks, then hit the unchanged 900-second
+type-floor ceiling; reachable tests were skipped.
+Same-head isolated type floor subsequently passed in 428.620 seconds with zero findings,
+using the same limit; that does not erase the broad negative or provide a reachable
+verdict. Child’s one final push passed 68/69 checks (all 68 edit checks), then reachable
+tests hit the unchanged 900-second ceiling: step 901.028 seconds, gate 1,136.288
+seconds, selection 521/744 files, final progress 2,457 passed / one skipped / zero
+failed / one unfinished.
+The unfinished node is
+`test_check_n17_one_round_owned_domain_propagation.py::test_custody_tamper_refuses[extra_role]`.
+There was no traceback or observed source-test failure; partial progress supplies no
+reachable PASS. Child type floor passed in 561.239 seconds with zero findings.
+Maintained conservative allocation reported another gate’s load marker, pool workers 3
+and ordinary pytest workers 1; that is an observation, not a demonstrated timeout cause.
+Both owned local gate process groups are absent.
+Older negatives and volume losses remain dated in the retained history; no internal
+scratch fallback was used.
+
+Next: finish parent hosted qualification and actual final all-checks watch, then record
+that verdict. Leave the PRs open for review; Pages deployment follows integration into
+main. No landing was requested or performed.
+Remaining numeric owners: think-je8y (n=29), think-phh8 (55), think-1blg (71).
+Independent T-131 review/adoption and atlas update: think-kkj2; source import/reply:
+think-iyij. Couzo independent replay, adoption and atlas work remains think-lhtz;
+historical custody remains think-0mlq. Source-root n=106/152/177
+field-to-side/geometry/Lean obligations remain #419/ think-8sm2. Optional n=83
+source-index counting remains think-chsu.
+Ideal routes n=68/105/292 and Rehwaldt n=68 multivariate binding remain separate.
+Selected research entry remains W7/think-s6np driver → independent n=11 octic control →
+current RyXu n=102 certificate/contact system/confirmed seed → preregistered bounded
+W6/think-ohhz. None of that solver, geometry, contact or adoption campaign was executed
+in this record refresh.
+Startup attribution remains think-jygq/think-5jr5/think-rxyl; source snapshot headroom
+remains tracked in think-t1lk.
+
+The shared resumed slice began at `2026-10-10T08:57:29Z`; elapsed wall at this
+checkpoint is 125.6 minutes, including qualification, not CPU time or a closed research
+duration. Earlier interruption/integration intervals remain separate; do not sum this
+shared wall across the two PRs.
+
+Both PR descriptions passed required preflight and their published body/head/base
+readbacks exactly match the reviewed files:
+[PR 403](https://github.com/jlevy/squares/pull/403),
+[PR 435](https://github.com/jlevy/squares/pull/435). Evidence root:
+`/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-09/`.
+Child full and ALL-watch receipts: `hosted-38044600780-final.json`,
+`hosted-38044600780-watch-exit.txt`, `pr435-final-all-checks-watch-exit.txt`,
+`pr435-final-checks-head-before.json`, `pr435-final-checks-head-after.json`. Local
+negatives: `parent-push-11c63df2-final-receipt.json` and
+`child-push-34e191f2-final-receipt.json`; isolated pass:
+`parent-type-floor-11c63df2-focused-final-receipt.json`. Native/web/independent review:
+`child-source-bytes-34e191f274-record-reader.json`,
+`child-audit-snapshot-34e191f274-record-reader.json`, `child-web-metrics-34e191.json`,
+`child-web-layout-34e191.json`,
+`integration-review-final-heads-34e191f274-2026-10-10.json`.
+
+The notes below retain their own dated scopes and do not qualify later heads.
+
+* * *
 
 # Qualification checkpoint at published 11c63 / 34e191, 2026-10-10
 
