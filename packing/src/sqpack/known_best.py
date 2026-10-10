@@ -8,10 +8,13 @@ import re
 from collections.abc import Iterable, Mapping, Sequence
 from copy import deepcopy
 from dataclasses import dataclass
+from decimal import ROUND_CEILING, ROUND_FLOOR, ROUND_HALF_UP, Decimal, localcontext
+from enum import StrEnum
 from fractions import Fraction
 from itertools import pairwise
+from math import isqrt
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 from xml.etree import ElementTree as ET
 
 import mpmath as mp
@@ -72,6 +75,45 @@ than revisiting it.
 """
 
 
+#: The published PDF edition's download date, fixed independently of its data stamp.
+COMPOSITE_PDF_EDITION_DATE = "20261008"
+PUBLISHED_COMPOSITE_PDF_NAMES = {
+    "known-best-1-100": f"square-packings-100-{COMPOSITE_PDF_EDITION_DATE}.pdf",
+    "known-best-1-324": f"square-packings-324-{COMPOSITE_PDF_EDITION_DATE}.pdf",
+}
+
+
+def composite_pdf_name(stem: str) -> str:
+    """The dated published download name, or a generic composite's usual filename."""
+    return PUBLISHED_COMPOSITE_PDF_NAMES.get(stem, f"{stem}.pdf")
+
+
+def display_bound_value(
+    value: str,
+    *,
+    decimal_places: int,
+    direction: Literal["lower", "upper", "exact"] = "lower",
+) -> str:
+    """A compact bound numeral without changing its recorded value.
+
+    Floor lower bounds and ceil upper bounds so their inequalities remain true as
+    written. Exact values use nearest rounding. Whole numbers stay plain, and an
+    isolated decimal context keeps labels independent of other rendering work.
+    """
+    number = Decimal(value)
+    if decimal_places < 0 or not number.is_finite():
+        raise ValueError("bound labels require finite values and nonnegative decimal places")
+    rounding = {"lower": ROUND_FLOOR, "upper": ROUND_CEILING, "exact": ROUND_HALF_UP}[direction]
+    with localcontext() as context:
+        context.prec = max(
+            28, len(number.as_tuple().digits), number.adjusted() + decimal_places + 2
+        )
+        rounded = number.quantize(Decimal(1).scaleb(-decimal_places), rounding=rounding)
+    text = format(rounded, "f")
+    whole, _, fraction = text.partition(".")
+    return whole if not fraction.strip("0") else text
+
+
 @dataclass(frozen=True)
 class CorpusRange:
     """A closed range of case counts, named once so nothing re-spells ``1..100``.
@@ -110,15 +152,120 @@ class CorpusRange:
 
 
 @dataclass(frozen=True)
-class CompositeSpec:
-    """One composite figure: the cases it draws, its grid width, and its filename stem.
+class PackingSegment:
+    """A contiguous packing range, half-open so an empty non-grid segment is explicit."""
 
-    Everything about a composite that is not a drawing decision follows from the four
-    fields below, so a second figure is a second specification rather than a second set
-    of constants; the fields after them are the drawing decisions a figure of another
-    size has to make -- which exports it publishes, and what it may leave out of a square
-    to stay inside a byte budget. Rows, the canvas, the legend and footer baselines and
-    the layout string are all computed; the ones that need the card metrics are computed
+    first_n: int
+    stop_n: int
+
+    def __post_init__(self) -> None:
+        if self.first_n < 1 or self.stop_n < self.first_n:
+            raise ValueError("a packing segment requires an ordered positive range")
+
+    @property
+    def count(self) -> int:
+        return self.stop_n - self.first_n
+
+    @property
+    def empty(self) -> bool:
+        return self.count == 0
+
+    @property
+    def numbers(self) -> range:
+        return range(self.first_n, self.stop_n)
+
+
+@dataclass(frozen=True)
+class GridTransition:
+    """The first retained exact grid in square-bound row ``row``, the one-based side k.
+
+    This describes the canonical packing source, independent of any regularized drawing
+    derived from it. A row whose first case is already a grid has no separating gap.
+    """
+
+    row: int
+    first_grid_n: int
+
+    def __post_init__(self) -> None:
+        if self.row < 1 or not self.first_n <= self.first_grid_n <= self.last_n:
+            raise ValueError("a grid transition must stand inside its square-bound row")
+
+    @property
+    def first_n(self) -> int:
+        return (self.row - 1) ** 2 + 1
+
+    @property
+    def last_n(self) -> int:
+        return self.row**2
+
+    @property
+    def non_grid(self) -> PackingSegment:
+        return PackingSegment(self.first_n, self.first_grid_n)
+
+    @property
+    def grid(self) -> PackingSegment:
+        return PackingSegment(self.first_grid_n, self.last_n + 1)
+
+    @property
+    def has_irregular_prefix(self) -> bool:
+        return not self.non_grid.empty
+
+
+def grid_transitions(entries: Sequence[Mapping[str, Any]]) -> tuple[GridTransition, ...]:
+    """Read each complete row's first grid from canonical atlas manifest entries.
+
+    ``source.kind == exact-grid`` records a canonical axis-aligned integer-grid witness;
+    its reported side must equal the row's one-based side k. No threshold is inferred
+    from n alone, and the regularized drawing layer is not consulted. Entries must cover
+    complete square-bound rows from n=1 in case order, with an unbroken grid suffix in
+    every row. Refuse stale or changed facts rather than label a later irregular case as
+    a grid. This pure linear scan reads no files and keeps no cache.
+    """
+    if not entries:
+        return ()
+    numbers = [entry["n"] for entry in entries]
+    if any(type(n) is not int for n in numbers) or numbers != list(range(1, len(entries) + 1)):
+        raise ValueError("grid transitions require contiguous entries from n=1 in case order")
+    rows = isqrt(numbers[-1])
+    if rows**2 != numbers[-1]:
+        raise ValueError("grid transitions require complete square-bound rows")
+    found: list[GridTransition] = []
+    for row in range(1, rows + 1):
+        first_grid: int | None = None
+        for entry in entries[(row - 1) ** 2 : row**2]:
+            n = entry["n"]
+            is_grid = entry["source"]["kind"] == "exact-grid"
+            if is_grid:
+                if Fraction(entry["reported_side"]) != row:
+                    raise ValueError(
+                        f"n={n}: exact grid's reported side does not equal row {row}"
+                    )
+                if first_grid is None:
+                    first_grid = n
+            elif first_grid is not None:
+                raise ValueError(f"row {row}: non-grid n={n} follows first grid n={first_grid}")
+        if first_grid is None:
+            raise ValueError(f"row {row} has no retained exact grid")
+        found.append(GridTransition(row, first_grid))
+    return tuple(found)
+
+
+class CompositePlacement(StrEnum):
+    """How case counts occupy cells without changing the shared card dimensions."""
+
+    row_major = "row-major"
+    square_bound_triangle = "square-bound-triangle"
+
+
+@dataclass(frozen=True)
+class CompositeSpec:
+    """One composite figure: its cases, cell placement, grid width, and filename stem.
+
+    Each figure declares its range, columns, placement and filename, plus the exports
+    and square encoding it uses to stay inside a byte budget. A second figure is a
+    second specification rather than a second set of constants.
+    Rows, the canvas, the legend and footer baselines, and the layout string are all
+    computed; the ones that need the card metrics are computed
     by ``CompositeCanvas`` in ``devtools/build_known_best_atlas.py``, which is where
     those metrics live.
     """
@@ -158,6 +305,9 @@ class CompositeSpec:
     #: figure applies is a property of the figure, recorded in its metadata and pinned
     #: here, not something the process it was built in happened to be left in.
     coordinate_decimals: int | None = None
+    #: Square-bound rows grow from the left, with k**2 at each row's end. The canvas widens
+    #: to fit their cells at the same scale as a rectangular figure.
+    placement: CompositePlacement = CompositePlacement.row_major
 
     def __post_init__(self) -> None:
         # Constructing the range is what validates first_n and last_n.
@@ -165,6 +315,12 @@ class CompositeSpec:
             raise ValueError("a composite needs at least one case and one column")
         if not self.stem:
             raise ValueError("a composite needs a filename stem")
+        if self.placement == CompositePlacement.square_bound_triangle and (
+            self.first_n != 1 or self.columns != 2 * self.rows - 1
+        ):
+            raise ValueError(
+                "a square-bound triangle starts at 1 and needs 2 * rows - 1 columns"
+            )
         if self.card_units is not None and self.card_units < 1:
             raise ValueError("a link-preview crop keeps a positive number of units")
         if any(scale < 1 for scale in self.raster_scales):
@@ -191,13 +347,29 @@ class CompositeSpec:
 
     @property
     def rows(self) -> int:
-        """Rows the grid needs, the last one short where the count does not fill it."""
+        """Rows the arrangement needs, including a partially filled final row."""
+        if self.placement == CompositePlacement.square_bound_triangle:
+            return isqrt(self.last_n - 1) + 1
         return -(-self.count // self.columns)
+
+    def card_position(self, n: int) -> tuple[int, int]:
+        """Zero-based logical cell; triangle rows start at (k-1)**2 + 1 in column zero."""
+        if n not in self.numbers:
+            raise ValueError(f"n={n} is outside {self.cases.label}")
+        if self.placement == CompositePlacement.square_bound_triangle:
+            row = isqrt(n - 1)
+            return row, n - row**2 - 1
+        return divmod(n - self.first_n, self.columns)
 
     @property
     def layout(self) -> str:
-        """The grid, columns first: ``10 by 10, row-major n=1..100``."""
-        return f"{self.columns} by {self.rows}, row-major {self.cases.label}"
+        """The arrangement, columns first, as recorded beside every export."""
+        arrangement = (
+            "right-aligned square-bound triangle"
+            if self.placement == CompositePlacement.square_bound_triangle
+            else "row-major"
+        )
+        return f"{self.columns} by {self.rows}, {arrangement} {self.cases.label}"
 
     @property
     def svg_name(self) -> str:
@@ -205,7 +377,7 @@ class CompositeSpec:
 
     @property
     def pdf_name(self) -> str:
-        return f"{self.stem}.pdf"
+        return composite_pdf_name(self.stem)
 
     @property
     def card_png_name(self) -> str:
@@ -407,27 +579,25 @@ KNOWN_BEST_COMPOSITES = (
         # and centre-crops what it is given, so the portrait composite would lose its
         # title and keep a band from the middle of the grid -- the part that says least
         # about what the picture is. Cropping it here means the crop is chosen rather
-        # than inherited: this is the title block plus four whole rows, and the sliver of
-        # the fifth that completes the ratio reads as a continuation rather than a cut.
-        # 2400x1256 is 1.911:1, which is 1.91:1 to the nearest whole pixel, so a platform
-        # expecting that ratio crops nothing at all.
+        # than inherited. The retained 1256-unit crop keeps the title and upper rows.
+        # Its width follows the current canvas; the site uses a separate social card
+        # for page unfurls, so this crop does not declare a fixed social aspect ratio.
         card_units=1256,
     ),
     CompositeSpec(
         first_n=1,
         last_n=324,
-        columns=18,
+        columns=35,
         stem="known-best-1-324",
-        # The poster of the whole corpus, at the card scale of the figure above it: 324
-        # cases fall into 18 columns of 18 with no short row, which is the only square
-        # grid the range admits and the reason the horizon is 324 rather than 300.
+        placement=CompositePlacement.square_bound_triangle,
+        # At the figure's card scale, row k holds (k-1)**2+1 through k**2. Aligning each
+        # complete row on the right leaves the upper-left corner for the information
+        # block; the final row sets the canvas width without shrinking any card.
         #
-        # One raster, not two, and the reason is measured: the 1x export is 2,369,558
-        # bytes at 4224 by 4912, and a 2x of the same drawing is 5,055,264 at 83
-        # megapixels -- more than twice what the figure's 3x cost when that was rejected
-        # as too expensive for detail already in the vector. The PDF carries that detail
-        # at any zoom for 491,026 bytes. The published figure keeps its 2x because it is
-        # the copy people attach; nobody attaches a poster.
+        # One raster: the original rectangular poster's 2x export cost 5,055,264 bytes
+        # at 83 megapixels. The triangle widens the canvas further, while the PDF keeps
+        # every square sharp at any zoom. The published figure keeps its 2x because it
+        # is the copy people attach.
         raster_scales=(1,),
         # No link-preview card either. The card is the unfurl of one page, the
         # repository's front door, and that page already has one; a second would be a
@@ -445,10 +615,10 @@ KNOWN_BEST_COMPOSITES = (
 )
 """Every composite figure published from the known-best corpus.
 
-Two: the published 10-by-10 figure of the first hundred cases, and the 18-by-18 poster
-of the whole corpus. A third is a third entry here, not a third copy of the builder: the
-geometry, the export set, the manifest record and the drift report all read the
-specification.
+Two: the published 10-by-10 figure of the first hundred cases, and the right-aligned
+square-bound triangle poster of the whole corpus. A third is a third entry here, not a
+third copy of the builder: the geometry, the export set, the manifest record and the
+drift report all read the specification.
 """
 
 _NUMBER = r"[-+]?(?:(?:\d+(?:\.\d*)?)|(?:\.\d+))(?:[eE][-+]?\d+)?"

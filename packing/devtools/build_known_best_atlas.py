@@ -3,6 +3,7 @@
 
 Usage:
     uv run --frozen python -m devtools.build_known_best_atlas --update
+    uv run --frozen python -m devtools.build_known_best_atlas --update-composite-records
     uv run --frozen python -m devtools.build_known_best_atlas --update-composites
     uv run --frozen python -m devtools.build_known_best_atlas --check
     uv run --frozen python -m devtools.build_known_best_atlas --check --jobs 4
@@ -15,7 +16,10 @@ the two posters and their PNG and PDF exports from the retained witnesses, and i
 a version bump or on demand, never because the data moved: a poster states the data
 commit it was drawn from (`CompositeIdentity`) and may trail the pin until the next
 version (`sqpack.release`, rules 4 and 5). `--check-composites` holds the retained
-posters to that record without rebuilding anything.
+posters to that record without rebuilding anything. A layout change first uses
+`--update-composite-records` to refresh only the composite geometry in the manifest and
+figure record, refusing changed case facts; commit and re-pin those records before
+redrawing the posters.
 """
 
 from __future__ import annotations
@@ -33,20 +37,28 @@ import urllib.request
 import zlib
 from collections.abc import Callable, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date
-from decimal import ROUND_HALF_EVEN, Decimal
+from decimal import ROUND_CEILING, ROUND_HALF_EVEN, Decimal
 from fractions import Fraction
 from functools import cache
+from io import BytesIO
+from itertools import combinations, pairwise
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Any
+from typing import Any, Literal
 from xml.etree import ElementTree as ET
 
 import mpmath as mp
 from strif import atomic_output_file
 
-from devtools import build_composite_figure_data, render_composite_pdf
+from devtools import (
+    atlas_credit_attributions,
+    atlas_print_font,
+    build_bound_citations,
+    build_composite_figure_data,
+    render_composite_pdf,
+)
 from devtools import evand_arrangement_houses as evand_houses
 from devtools import evand_arrangement_reports as evand_reports
 from devtools import evand_exact_certificates as evand_certificates
@@ -59,8 +71,11 @@ from devtools import squish_second_update_house_links as squish_house
 from devtools import squish_second_update_packets as squish_second
 from devtools import squish_upper_bound_packets as squish_packets
 from devtools import upper_bound_packets as packets
-from devtools.build_bound_citations import RECENT_SINCE
+from devtools.atlas_legend import AtlasLegendCounts, LegendItem, atlas_legend, recent_label
+from devtools.atlas_orientation import orient_atlas_witness
 from devtools.build_composite_figure_data import load_record as load_figure_record
+from devtools.result_status import RecentContributions, recent_contributions_by_case
+from devtools.rigidity_status import load_context as load_rigidity_context
 from sqpack import retained_json
 from sqpack.field import FieldElement
 from sqpack.known_best import (
@@ -73,10 +88,15 @@ from sqpack.known_best import (
     KNOWN_BEST_CORPUS,
     RETRIEVED_DATE,
     UNITSQUARE_BASE_URL,
+    CompositePlacement,
     CompositeSpec,
     CorpusRange,
+    GridTransition,
+    PackingSegment,
     catalogue_source_map,
+    display_bound_value,
     exact_grid_witness,
+    grid_transitions,
     kingbird_derived_witness,
     packet_derived_witness,
     parse_unitsquare_svg,
@@ -119,6 +139,7 @@ from sqpack.render.numbers import (
 )
 from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR, LABEL_MUTED_COLOR, PAPER_THEME
 from sqpack.render.svg import (
+    PRINT_FONT_MARKER,
     append_metadata,
     append_title_desc,
     element,
@@ -185,14 +206,31 @@ COMPOSITE_SPECS: tuple[CompositeSpec, ...] = KNOWN_BEST_COMPOSITES
 
 SUMMARY_GRID_LEFT = Decimal(60)
 SUMMARY_GRID_TOP = Decimal(174)
-SUMMARY_COLUMN_PITCH = Decimal(228)
-SUMMARY_ROW_PITCH = Decimal(252)
+#: Both arrangements preserve drawing scale while reducing the actual ink gaps.
+#: Whole-unit pitches give 43.85 units between outlines (0.8 of 54.85), and
+#: 58.5197 units from the deepest caption to the next outline (0.75 of 78.5197).
+SUMMARY_COLUMN_PITCH = Decimal(203)
+SUMMARY_ROW_PITCH = Decimal(287)
 #: The margin either side of the grid. One column pitch is a card plus its gutter, so
 #: the trailing gutter falls into the right margin and the two read the same.
 SUMMARY_SIDE_MARGIN = SUMMARY_GRID_LEFT
 SUMMARY_CARD_WIDTH = Decimal(216)
 SUMMARY_CARD_HEIGHT = Decimal(242)
 SUMMARY_PACKING_SIZE = Decimal(158)
+#: Outline strokes contribute half their width on either side of a box edge.
+SUMMARY_CONTAINER_STROKE = Decimal("1.15")
+SUMMARY_OUTLINE_GAP = SUMMARY_COLUMN_PITCH - SUMMARY_PACKING_SIZE - SUMMARY_CONTAINER_STROKE
+#: Additional horizontal separation before an inline regular-grid suffix, in drawing units.
+POSTER_GRID_GAP = SUMMARY_PACKING_SIZE / 2
+#: Outside air surrounds the cards and the all-grid labels, without scaling either.
+POSTER_OUTER_MARGIN = Decimal(120)
+POSTER_GRID_LEFT = POSTER_OUTER_MARGIN + SUMMARY_SIDE_MARGIN
+POSTER_GRID_MARKER_SIZE = "15"
+#: Marker ink sits slightly nearer its box than two neighboring box outlines.
+POSTER_GRID_MARKER_CLEARANCE_RATIO = Decimal("0.90")
+#: One fewer decimal digit in triangle captions, leaving space beside the degree.
+POSTER_BOUND_DECIMAL_PLACES = 5
+POSTER_BOUND_DEGREE_GAP = Decimal(5)
 SUMMARY_PACKING_INSET_X = Decimal(24)
 SUMMARY_PACKING_INSET_Y = Decimal(12)
 SUMMARY_LABEL_BASELINE = Decimal(203)
@@ -237,15 +275,15 @@ SUMMARY_FOOTER_LINE_PITCH = Decimal(27)
 #: under `sqpack.release.DATA_PATHS`, so a taller canvas would have been a data commit
 #: and moved the version every artifact prints.
 SUMMARY_BOTTOM_MARGIN = Decimal(25)
-#: The footer gloss, as runs of (text, italic). The variables are set in italic like the
-#: ones on the cards; `deg` is a function name and stays upright.
+#: The footer gloss, as runs of (text, italic). The variables are set in italic like
+#: the ones on the cards; the shared legend defines `deg` separately.
 SUMMARY_EXPLAINER_RUNS = (
     ("s", True),
     ("(", False),
     ("n", True),
     (") is the side of the smallest square holding ", False),
     ("n", True),
-    (" unit squares; deg is the algebraic degree of that side length", False),
+    (" unit squares", False),
 )
 SUMMARY_EXPLAINER = "".join(text for text, _italic in SUMMARY_EXPLAINER_RUNS)
 # Cap height as a fraction of font size, used to sit the badges flush with the
@@ -258,84 +296,25 @@ SUMMARY_SMALL_SIZE = "14"
 # than beside a packing, so it sits larger than the card labels and takes bold.
 # Helvetica has no semibold, so bold is the only heavier face available.
 SUMMARY_FOOTER_SIZE = "19"
-# Helvetica-Bold advance widths in units of 1/1000 em, for the characters the
-# figure actually sets. A uniform per-character estimate cannot center a mixed
-# string: it put the two legend rows 107px and 189px off center, in opposite
-# amounts, because their character mixes differ.
-_HELVETICA_BOLD_WIDTHS = {
-    " ": 278,
-    "(": 333,
-    ")": 333,
-    ",": 278,
-    "-": 333,
-    ".": 278,
-    "/": 278,
-    ":": 333,
-    "=": 584,
-    "\u2264": 584,
-    "\u2265": 584,
-    "\u2248": 584,
-    "\u00b0": 400,
-    "a": 556,
-    "b": 611,
-    "c": 556,
-    "d": 611,
-    "e": 556,
-    "f": 333,
-    "g": 611,
-    "h": 611,
-    "i": 278,
-    "j": 278,
-    "k": 556,
-    "l": 278,
-    "m": 889,
-    "n": 611,
-    "o": 611,
-    "p": 611,
-    "q": 611,
-    "r": 389,
-    "s": 556,
-    "t": 333,
-    "u": 611,
-    "v": 556,
-    "w": 778,
-    "x": 556,
-    "y": 556,
-    "z": 500,
-    "A": 722,
-    "B": 722,
-    "C": 722,
-    "D": 722,
-    "E": 667,
-    "F": 611,
-    "G": 778,
-    "H": 722,
-    "I": 278,
-    "J": 556,
-    "K": 722,
-    "L": 611,
-    "M": 833,
-    "N": 722,
-    "O": 778,
-    "P": 667,
-    "Q": 778,
-    "R": 722,
-    "S": 667,
-    "T": 611,
-    "U": 722,
-    "V": 667,
-    "W": 944,
-    "X": 667,
-    "Y": 667,
-    "Z": 611,
-}
-_DEFAULT_ADVANCE = 556
 
 
 def _text_width(text: str, size: str) -> Decimal:
-    """Advance width of a string set in Helvetica Bold at this size."""
-    units = sum(_HELVETICA_BOLD_WIDTHS.get(ch, _DEFAULT_ADVANCE) for ch in text)
-    return Decimal(units) * Decimal(size) / Decimal(1000)
+    """Advance width in the retained Arial-compatible bold print face."""
+    return atlas_print_font.text_width(text, Decimal(size))
+
+
+def _print_ink_bounds(content: str, size: str) -> tuple[Decimal, Decimal]:
+    _left, top, _right, bottom = atlas_print_font.ink_bounds(content, Decimal(size))
+    return top, bottom
+
+
+def _information_text_style(size: str) -> dict[str, str]:
+    return {
+        "font-family": POSTER_BODY_FONT,
+        "font-size": size,
+        "font-weight": POSTER_BODY_WEIGHT,
+        "fill": "#000000",
+    }
 
 
 SUMMARY_FOOTER_WEIGHT = "700"
@@ -344,7 +323,7 @@ SUMMARY_LEGEND_ROW_PITCH = Decimal(28)
 # to ask for: the card labels take bold, the only heavier face available, over a
 # darker grey. The footer block stays regular so the two do not compete.
 SUMMARY_SMALL_WEIGHT = "700"
-SUMMARY_SMALL_FILL = LABEL_MUTED_COLOR
+SUMMARY_SMALL_FILL = "#000000"
 # Letters sit on their cap height, math symbols on the math axis, so a single
 # baseline cannot center both inside the badge box. Offsets are from the box top.
 SUMMARY_BADGE_FONT_SIZE = Decimal(15)
@@ -363,6 +342,8 @@ SUMMARY_REPOSITORY = "github.com/jlevy/squares"
 SUMMARY_CITATIONS = (
     f"Citations for all results are available in the Squares Project: {SUMMARY_REPOSITORY}"
 )
+POSTER_CITATIONS = "The Squares Project"
+POSTER_DIAGRAM_CREDIT = "Diagram by Joshua Levy"
 # Set a step above the other small labels so the URL reads as part of the
 # heading block rather than as another footnote.
 #: One size for the two lines under the title: the release line and the repository.
@@ -372,10 +353,55 @@ SUMMARY_RELEASE_BASELINE = Decimal(114)
 SUMMARY_RELEASE_SIZE = SUMMARY_SUBTITLE_SIZE
 SUMMARY_RELEASE_GAP = Decimal(11)
 SUMMARY_SUBTITLE_BASELINE = Decimal(148)
-# Helvetica, with Arial as the metric-compatible stand-in where Helvetica is
-# absent. No webfont is referenced, so nothing is fetched at render time and the
-# figure is the same family everywhere it is opened.
-SUMMARY_FONT = "Helvetica, Arial, sans-serif"
+
+#: The title and problem keep their enlarged type. Documentation below the problem
+#: uses one smaller type step, preserving card scale and the spacious baselines.
+POSTER_INFORMATION_TYPE_SCALE = Decimal(3)
+POSTER_TITLE_SIZE = "144"
+POSTER_BODY_FONT = atlas_print_font.FAMILY
+POSTER_BODY_SIZE = "48"
+POSTER_BODY_WEIGHT = "700"
+POSTER_BODY_LINE_HEIGHT_RATIO = Decimal("1.50")
+POSTER_BODY_LINE_PITCH = Decimal(POSTER_BODY_SIZE) * POSTER_BODY_LINE_HEIGHT_RATIO
+# Finite scale keeps the two column edges and their explicit gap exact in Decimal.
+POSTER_LEGEND_TYPE_SCALE = (Decimal(POSTER_BODY_SIZE) / Decimal(SUMMARY_FOOTER_SIZE)).quantize(
+    Decimal("0.000001"), rounding=ROUND_HALF_EVEN
+)
+POSTER_PROBLEM_SIZE = "66"
+POSTER_PROBLEM_LINE_PITCH = Decimal(POSTER_PROBLEM_SIZE) * POSTER_BODY_LINE_HEIGHT_RATIO
+POSTER_INFORMATION_WIDTH = Decimal(2600)
+POSTER_INFORMATION_TOP = POSTER_OUTER_MARGIN
+POSTER_TITLE_BASELINE = POSTER_INFORMATION_TOP + Decimal(144)
+POSTER_LEGEND_BASELINE = POSTER_INFORMATION_TOP + Decimal(660)
+POSTER_LEGEND_COLUMN_GAP = Decimal(180)
+POSTER_EXPLAINER_BASELINE = POSTER_INFORMATION_TOP + Decimal(360)
+POSTER_PACKING_CREDITS_BASELINE = POSTER_INFORMATION_TOP + Decimal(1206)
+POSTER_PACKING_CREDITS_LINE_COUNT = 3
+POSTER_PACKING_CREDITS_PREFIX = "Best packings due to"
+POSTER_PACKING_CREDITS_SECTION_GAP = Decimal(180)
+POSTER_PROBLEM = (
+    "The square packing problem asks for the side s(n) of the smallest square that can "
+    "hold n unit squares, where the squares are free to rotate but cannot overlap"
+)
+POSTER_EXPLAINER_LINES = (
+    (
+        ("The square packing problem asks for the side ", False),
+        ("s", True),
+        ("(", False),
+        ("n", True),
+        (") of the smallest square that can", False),
+    ),
+    (
+        ("hold ", False),
+        ("n", True),
+        (" unit squares, where the squares are free to rotate but cannot overlap", False),
+    ),
+)
+#: The retained italic companion is named explicitly for Quartz's face lookup.
+POSTER_ITALIC_FONT = atlas_print_font.ITALIC_FAMILY
+# All composite annotations use the retained family. Its bytes are embedded in
+# standalone SVGs and provisioned in-process for native PDF/PNG exports.
+SUMMARY_FONT = atlas_print_font.FAMILY
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 # The one failure this catches: the committed PNG was exported from an older SVG.
 # --check rebuilds the SVG and compares it in full, but nothing otherwise ties the
@@ -395,10 +421,10 @@ class CompositeIdentity:
     """What one composite was drawn from: the data commit, and that commit's date.
 
     A poster is stamped once, when it is drawn, and is not re-stamped when the data
-    moves (`sqpack.release`, rule 4). So what its footer and its dateline say is held to
-    this record, which the drawing carries in its own metadata, and not to the pin: the
-    footer is the edition as it read at this revision, and the dateline is the day of
-    the data the cards show. A poster that travels alone can be traced to its data by
+    moves (`sqpack.release`, rule 4). Its visible edition and date are held to this
+    record, which the drawing carries in its own metadata, and not to the pin: the
+    edition is as it read at this revision, and the date is the day of the data the
+    cards show. A poster that travels alone can be traced to its data by
     either. The record is a git revision and a date, nothing a second file has to keep
     in step (`OR-16`).
 
@@ -417,10 +443,20 @@ class CompositeIdentity:
         return edition_at(self.data_revision)
 
     @property
-    def dateline(self) -> str:
-        """The line under the title, dated by the data and written as a reader reads it."""
+    def formatted_date(self) -> str:
+        """The data's date, written as a reader reads it."""
         day = date.fromisoformat(self.data_date)
-        return f"Including new results ({day:%B} {day.day}, {day.year})"
+        return f"{day:%B} {day.day}, {day.year}"
+
+    @property
+    def dateline(self) -> str:
+        """The row-major figure's line under the title, dated by its data."""
+        return f"Including new results ({self.formatted_date})"
+
+    @property
+    def poster_stamp(self) -> str:
+        """The triangle's closing line, joining its edition and authoritative data date."""
+        return f"{self.formatted_date} · {self.stamp}"
 
     @property
     def current(self) -> bool:
@@ -490,9 +526,8 @@ class RasterExport:
     canvas_width: int
     canvas_height: int
     #: Drawing units kept from the top, or None for the whole canvas. A cropped
-    #: export is rendered from a copy of the SVG whose viewport is this tall, so the
-    #: rasteriser draws the band directly rather than drawing the canvas and
-    #: discarding most of it, and no image library enters the pipeline.
+    #: export keeps the full raster's pixels: shortening the SVG viewport can change
+    #: text rasterisation at the crop boundary.
     crop_units: int | None = None
 
     @property
@@ -540,58 +575,235 @@ def _whole_units(value: Decimal, what: str) -> int:
 
 
 @dataclass(frozen=True)
-class CompositeCanvas:
-    """Where every part of one composite sits, computed from its specification.
+class CompositeSegmentLine:
+    """One explicit packing segment on a physical line of a logical square-bound row."""
 
-    Nothing here is an absolute constant. The canvas is the grid the specification asks
-    for, plus the margins, the legend and the footer, so a composite of another size
-    moves all of them together instead of leaving a baseline behind at a number chosen
-    for a canvas that no longer exists. The 1-100 figure's 2400 by 2896 canvas, its
-    legend at 2724 and its footer at 2790/2817/2844/2871 are what these formulas return
-    for ten columns of ten.
+    numbers: PackingSegment
+    kind: Literal["non-grid", "grid"]
+    physical_row: int
+    left: Decimal
+    top: Decimal
+
+
+@dataclass(frozen=True)
+class CompositeCardPosition:
+    """Logical identity and physical placement, kept separate when a row wraps."""
+
+    row: int
+    column: int
+    physical_row: int
+    left: Decimal
+    top: Decimal
+    segment: Literal["non-grid", "grid", "unsegmented"]
+
+
+@dataclass(frozen=True)
+class CompositeCanvas:
+    """Place the retained card scale and the common annotation blocks.
+
+    The row-major figure reserves a title band and a bottom information block. The
+    triangle places the same annotations in its upper-left whitespace, so only the
+    grid's page height includes the information block's content-aware extent.
     """
 
     spec: CompositeSpec
+    #: Resolved only at the triangle renderer boundary. Geometry remains pure; a
+    #: partial crop can carry full-row thresholds without reading a canonical file.
+    transitions: tuple[GridTransition, ...] = ()
+
+    def with_transitions(self, transitions: Sequence[GridTransition]) -> CompositeCanvas:
+        """Bind canonical row segments to this pure placement calculation."""
+        rows = [transition.row for transition in transitions]
+        if len(set(rows)) != len(rows):
+            raise ValueError("a composite cannot have duplicate grid-transition rows")
+        selected = tuple(
+            transition
+            for transition in transitions
+            if transition.first_n <= self.spec.last_n and transition.last_n >= self.spec.first_n
+        )
+        return replace(self, transitions=selected)
+
+    @property
+    def physical_columns(self) -> int:
+        """Every logical row fits within the complete triangle envelope."""
+        return self.spec.columns
+
+    @property
+    def row_pitch(self) -> Decimal:
+        return SUMMARY_ROW_PITCH
+
+    def _transition(self, row: int) -> GridTransition | None:
+        return next(
+            (transition for transition in self.transitions if transition.row == row), None
+        )
+
+    def _selected_segments(
+        self, transition: GridTransition
+    ) -> tuple[PackingSegment, PackingSegment]:
+        stop = min(transition.last_n, self.spec.last_n) + 1
+        first = max(transition.first_n, self.spec.first_n)
+        boundary = min(max(transition.grid.first_n, first), stop)
+        return PackingSegment(first, boundary), PackingSegment(boundary, stop)
+
+    def _row_origin(self, row: int) -> tuple[int, Decimal]:
+        physical_row = row - 1
+        return physical_row, self.grid_top + self.row_pitch * physical_row
+
+    @property
+    def physical_rows(self) -> int:
+        return self.spec.rows
+
+    def segment_lines(self, transition: GridTransition) -> tuple[CompositeSegmentLine, ...]:
+        """Keep both selected segments inline, with a common right edge for every row."""
+        if not self.information_in_corner:
+            raise ValueError("square-bound segments require a triangle composite")
+        non_grid, grid = self._selected_segments(transition)
+        count = non_grid.count + grid.count
+        if not count:
+            return ()
+        physical_row, top = self._row_origin(transition.row)
+        gap = POSTER_GRID_GAP if not non_grid.empty and not grid.empty else Decimal(0)
+        left = (
+            Decimal(self.width)
+            - POSTER_OUTER_MARGIN
+            - SUMMARY_CARD_WIDTH
+            - SUMMARY_COLUMN_PITCH * (count - 1)
+            - gap
+        )
+        lines = []
+        if not non_grid.empty:
+            lines.append(CompositeSegmentLine(non_grid, "non-grid", physical_row, left, top))
+        if not grid.empty:
+            lines.append(
+                CompositeSegmentLine(
+                    grid,
+                    "grid",
+                    physical_row,
+                    left + SUMMARY_COLUMN_PITCH * non_grid.count + gap,
+                    top,
+                )
+            )
+        return tuple(lines)
+
+    def card_position(
+        self, n: int, transition: GridTransition | None = None
+    ) -> CompositeCardPosition:
+        """Resolve one card from explicit segments, retaining its logical coordinates."""
+        row, column = self.spec.card_position(n)
+        transition = transition or self._transition(row + 1)
+        if transition is not None and transition.row != row + 1:
+            raise ValueError("a grid transition must belong to the card's square-bound row")
+        if self.information_in_corner and transition is not None:
+            line = next(
+                line for line in self.segment_lines(transition) if n in line.numbers.numbers
+            )
+            return CompositeCardPosition(
+                row,
+                column,
+                line.physical_row,
+                line.left + SUMMARY_COLUMN_PITCH * (n - line.numbers.first_n),
+                line.top,
+                line.kind,
+            )
+        left = self.grid_left
+        if self.information_in_corner:
+            # Synthetic/direct helpers remain file-free. Without retained transitions
+            # the selected logical row is right aligned, with no inferred separator.
+            row_count = min((row + 1) ** 2, self.spec.last_n) - row**2
+            left = (
+                Decimal(self.width)
+                - POSTER_OUTER_MARGIN
+                - SUMMARY_CARD_WIDTH
+                - SUMMARY_COLUMN_PITCH * (row_count - 1)
+            )
+        return CompositeCardPosition(
+            row,
+            column,
+            row,
+            left + SUMMARY_COLUMN_PITCH * column,
+            self.grid_top + self.row_pitch * row,
+            "unsegmented",
+        )
 
     @property
     def width(self) -> int:
-        """A side margin either side of `columns` cells of one column pitch each."""
-        return _whole_units(
-            SUMMARY_SIDE_MARGIN * 2 + SUMMARY_COLUMN_PITCH * self.spec.columns,
-            f"{self.spec.stem} width",
+        """Outside air around the actual cards, or the legacy row-major pitches."""
+        width = (
+            self.grid_left
+            + SUMMARY_COLUMN_PITCH * (self.physical_columns - 1)
+            + POSTER_GRID_GAP
+            + SUMMARY_CARD_WIDTH
+            + POSTER_OUTER_MARGIN
+            if self.information_in_corner
+            else SUMMARY_SIDE_MARGIN * 2 + SUMMARY_COLUMN_PITCH * self.spec.columns
         )
+        return _whole_units(width, f"{self.spec.stem} width")
+
+    @property
+    def information_in_corner(self) -> bool:
+        return self.spec.placement == CompositePlacement.square_bound_triangle
+
+    @property
+    def grid_left(self) -> Decimal:
+        return POSTER_GRID_LEFT if self.information_in_corner else SUMMARY_GRID_LEFT
+
+    @property
+    def grid_top(self) -> Decimal:
+        return POSTER_OUTER_MARGIN if self.information_in_corner else SUMMARY_GRID_TOP
+
+    def card_left(self, n: int, transition: GridTransition | None = None) -> Decimal:
+        """A cell's left edge, with a gap only in a triangle's regular-grid suffix."""
+        return self.card_position(n, transition).left
+
+    @property
+    def information_right(self) -> Decimal:
+        if self.information_in_corner:
+            return self.information_left + POSTER_INFORMATION_WIDTH
+        return Decimal(self.width) - SUMMARY_SIDE_MARGIN
+
+    @property
+    def information_left(self) -> Decimal:
+        """Align the corner text with the first drawing of the final, complete row."""
+        if self.information_in_corner:
+            return self.grid_left + SUMMARY_PACKING_INSET_X
+        return self.information_right - POSTER_INFORMATION_WIDTH
 
     @property
     def grid_bottom(self) -> Decimal:
-        """One row pitch below the last row's top, where the footer block begins."""
-        return SUMMARY_GRID_TOP + SUMMARY_ROW_PITCH * self.spec.rows
+        """One row pitch below the last row's top."""
+        return self.grid_top + self.row_pitch * self.physical_rows
 
     @property
     def legend_baseline(self) -> Decimal:
-        """The first legend row; the second sits one legend pitch under it."""
-        return self.grid_bottom + SUMMARY_LEGEND_GAP
+        return _information_layout(self).legend_baseline
 
     @property
     def explainer_baseline(self) -> Decimal:
-        return self.legend_baseline + SUMMARY_LEGEND_ROW_PITCH + SUMMARY_FOOTER_GAP
+        return _information_layout(self).problem_baselines[0]
 
     @property
     def citations_baseline(self) -> Decimal:
-        return self.explainer_baseline + SUMMARY_FOOTER_LINE_PITCH
+        return _information_layout(self).project_baseline
 
     @property
     def credit_baseline(self) -> Decimal:
-        return self.citations_baseline + SUMMARY_FOOTER_LINE_PITCH
+        return _information_layout(self).diagram_baseline
 
     @property
     def stamp_baseline(self) -> Decimal:
-        return self.credit_baseline + SUMMARY_FOOTER_LINE_PITCH
+        return _information_layout(self).stamp_baseline
 
     @property
     def height(self) -> int:
-        return _whole_units(
-            self.stamp_baseline + SUMMARY_BOTTOM_MARGIN, f"{self.spec.stem} height"
+        bottom = (
+            self.grid_top
+            + self.row_pitch * (self.physical_rows - 1)
+            + SUMMARY_CARD_HEIGHT
+            + POSTER_OUTER_MARGIN
+            if self.information_in_corner
+            else _information_layout(self).bottom + SUMMARY_BOTTOM_MARGIN
         )
+        return int(bottom.to_integral_value(rounding=ROUND_CEILING))
 
     @property
     def svg_path(self) -> Path:
@@ -648,26 +860,52 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "A ten-by-ten atlas of the retained best known unit-square packings for "
             "n equals 1 through 100. Each tile is normalized to its own container and "
             "labeled with n, the best known upper bound on the container side and, where "
-            "the value is not yet settled, the best proved lower bound beneath it. A star "
-            "in crimson marks a recent result, a lower bound proved since August 2026. "
-            "Badges mark "
+            "the value is not yet settled, the best proved lower bound beneath it. "
+            "Crimson marks a recent construction giving an upper bound, a proof of a "
+            "lower bound or an optimality proof since August 2026. Badges mark "
             "which side lengths are proved optimal, and whether a side length is pinned "
             "exactly by a radical or a minimal polynomial rather than only by a decimal. "
-            f"{SUMMARY_CITATIONS}."
+            "The black title and inline project reference sit above the grid. "
+            "The black two-line definition, shared eight-item legend and unique "
+            "corpus-wide construction, lower-bound and optimality credits sit below it, "
+            "followed by the diagram credit and "
+            "dated edition. Every counted legend item includes the depicted total. "
+            "Case counts are gray and ordinary bounds and annotations are black. "
+            f"{POSTER_CITATIONS}: {SUMMARY_REPOSITORY}."
         ),
     ),
     "known-best-1-324": (
         "Best known packings of one through three hundred twenty-four unit squares",
         (
-            "An eighteen-by-eighteen poster of the retained best known unit-square "
-            "packings for n equals 1 through 324, the whole audited corpus. Each tile is "
+            "A right-aligned triangular poster of the retained best known unit-square "
+            "packings for n equals 1 through 324, the whole audited corpus. Row k holds "
+            "n equals (k minus 1) squared plus 1 through k squared, ending at the "
+            "common right edge. Eighteen complete logical rows end at 324, occupying "
+            "eighteen physical lines within a thirty-five-column envelope. "
+            "A single-line bottom-to-top k by k GRID label sits nearly one ordinary box gap "
+            "left of the first retained regular grid packing "
+            "in each row; an extra half-drawing width separates an irregular prefix "
+            "from its grid suffix horizontally. All rows retain the same vertical pitch. "
+            f"{POSTER_PROBLEM} "
+            "A left-aligned information block in the "
+            "upper-left corner "
+            "contains the title, complete legend and publication details. Each tile is "
             "normalized to its own container and labeled with n, the best known upper "
             "bound on the container side and, where the value is not yet settled, the "
-            "best proved lower bound beneath it. A star in crimson marks a recent result, "
-            "a lower bound proved since August 2026. Badges mark which side lengths are "
-            "proved "
+            "best proved lower bound beneath it. Crimson marks a recent construction giving "
+            "an upper bound, a proof of a lower bound or an optimality proof since August "
+            "2026. Badges mark which side lengths are proved "
             "optimal, and whether a side length is pinned exactly by a radical or a "
-            f"minimal polynomial rather than only by a decimal. {SUMMARY_CITATIONS}."
+            f"minimal polynomial rather than only by a decimal. "
+            "Case counts are gray; the title, two-line definition, other explanatory "
+            "text and ordinary bound captions are black. Every counted legend item "
+            "includes the depicted total. The same corpus-wide construction, lower-bound "
+            "and optimality credit paragraphs name contributors oldest first, "
+            "with formalization and verification roles explicitly qualified. "
+            "Full source and per-case attribution is retained in the SVG metadata. "
+            "The diagram credit and dated edition follow. "
+            "A blank line precedes the plain project reference and address. "
+            f"{POSTER_CITATIONS}: {SUMMARY_REPOSITORY}."
         ),
     ),
 }
@@ -1473,13 +1711,185 @@ def _summary_points(
     )
 
 
+def _poster_grid_transitions(canvas: CompositeCanvas) -> tuple[GridTransition, ...]:
+    """Resolve the full retained corpus before selecting a triangle, including a crop.
+
+    The shared contract requires complete square-bound rows. A partial drawing must
+    therefore resolve against the complete canonical manifest, not its selected cases.
+    Row-major figures and generic geometry readers never enter this preflight.
+    """
+    if not canvas.information_in_corner:
+        return ()
+    if canvas.transitions:
+        return canvas.transitions
+    entries = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]["entries"]
+    return tuple(
+        transition
+        for transition in grid_transitions(entries)
+        if transition.first_n <= canvas.spec.last_n and transition.last_n >= canvas.spec.first_n
+    )
+
+
+def resolved_composites(
+    entries: Sequence[Mapping[str, Any]] | None = None,
+) -> tuple[CompositeCanvas, ...]:
+    """Bind triangle segment plans at a production boundary, leaving generic geometry pure.
+
+    Data producers pass their complete entry sequence; retained export consumers read
+    the canonical manifest through the existing triangle preflight. Neither path asks
+    the strict row contract to classify a synthetic row-major or a cropped sequence.
+    """
+    transitions = (
+        grid_transitions(entries)
+        if entries is not None and any(canvas.information_in_corner for canvas in COMPOSITES)
+        else None
+    )
+    return tuple(
+        canvas.with_transitions(
+            tuple(
+                transition
+                for transition in transitions
+                if transition.first_n <= canvas.spec.last_n
+                and transition.last_n >= canvas.spec.first_n
+            )
+            if transitions is not None
+            else _poster_grid_transitions(canvas)
+        )
+        if canvas.information_in_corner
+        else canvas
+        for canvas in COMPOSITES
+    )
+
+
+def _append_grid_transition_marker(
+    root: ET.Element, transition: GridTransition, *, canvas: CompositeCanvas
+) -> None:
+    """Place bottom-to-top grid dimensions beside the first grid drawing's ink."""
+    grid_position = canvas.card_position(transition.grid.first_n, transition)
+    lines = canvas.segment_lines(transition)
+    extra_gap = (
+        POSTER_GRID_GAP
+        if len(lines) == 2 and lines[0].physical_row == lines[1].physical_row
+        else Decimal(0)
+    )
+    dimensions = f"{transition.row}\u00d7{transition.row}"
+    label = f"{dimensions} GRID"
+    size = Decimal(POSTER_GRID_MARKER_SIZE)
+    x = -_text_width(label, POSTER_GRID_MARKER_SIZE) / 2
+    left, ink_top, right, ink_bottom = atlas_print_font.ink_bounds(label, size)
+    ink_left, ink_right = x + left, x + right
+    drawing_left = grid_position.left + SUMMARY_PACKING_INSET_X
+    drawing_top = grid_position.top + SUMMARY_PACKING_INSET_Y
+    clearance = SUMMARY_OUTLINE_GAP * POSTER_GRID_MARKER_CLEARANCE_RATIO
+    # A -90-degree rotation maps local (x, y) to (y, -x). Center the single
+    # line's ink vertically and measure its clearance from the stroked outline.
+    center_x = drawing_left - SUMMARY_CONTAINER_STROKE / 2 - clearance - ink_bottom
+    center_y = drawing_top + SUMMARY_PACKING_SIZE / 2 + (ink_left + ink_right) / 2
+    bounds = (
+        center_x + ink_top,
+        center_y - ink_right,
+        center_x + ink_bottom,
+        center_y - ink_left,
+    )
+    available_left = grid_position.left - (
+        POSTER_GRID_GAP if transition.has_irregular_prefix else SUMMARY_SIDE_MARGIN
+    )
+    if not (
+        max(POSTER_OUTER_MARGIN, available_left) <= bounds[0] < bounds[2] < drawing_left
+        and drawing_top <= bounds[1] < bounds[3] <= drawing_top + SUMMARY_PACKING_SIZE
+    ):
+        raise ValueError("a rotated grid transition marker exceeds its separator space")
+    marker = sub(
+        root,
+        "g",
+        {
+            "data-feature": "grid-transition",
+            "data-row": str(transition.row - 1),
+            "data-physical-row": str(grid_position.physical_row),
+            "data-gap-axis": "horizontal" if extra_gap else "none",
+            "data-first-grid-n": str(transition.first_grid_n),
+            "data-grid-side": str(transition.row),
+            "data-extra-gap": format_svg_number(extra_gap),
+            "data-rotation": "-90",
+            "data-left": format_svg_number(bounds[0]),
+            "data-top": format_svg_number(bounds[1]),
+            "data-right": format_svg_number(bounds[2]),
+            "data-bottom": format_svg_number(bounds[3]),
+            "data-drawing-clearance": format_svg_number(clearance),
+            "transform": (
+                f"translate({format_svg_number(center_x)} {format_svg_number(center_y)}) "
+                "rotate(-90)"
+            ),
+            "aria-label": f"{dimensions} grid packings begin at n={transition.first_grid_n}",
+        },
+    )
+    sub(
+        marker,
+        "text",
+        {
+            "data-feature": "grid-transition-label",
+            "x": format_svg_number(x),
+            "y": "0",
+            "text-anchor": "start",
+            "font-family": SUMMARY_FONT,
+            "font-size": POSTER_GRID_MARKER_SIZE,
+            "font-weight": "700",
+            "fill": SUMMARY_SMALL_FILL,
+        },
+    ).text = label
+
+
+def _composite_bound_display(
+    display: str, canvas: CompositeCanvas, *, degree: int | None = None
+) -> str:
+    """Shorten triangle captions without strengthening a stored inequality.
+
+    Five decimals ordinarily fit. A longer degree label can need one fewer digit;
+    measure the two captions with their italic kern before accepting either precision.
+    """
+    if not canvas.information_in_corner:
+        return display
+    head, separator, numeral = display.rpartition(" ")
+    direction: Literal["lower", "upper", "exact"]
+    if head.endswith("≥"):
+        direction = "lower"
+    elif head.endswith("≤"):
+        direction = "upper"
+    elif head.endswith("="):
+        direction = "exact"
+    else:
+        raise ValueError("a composite bound display lacks a supported relation")
+    for decimals in (POSTER_BOUND_DECIMAL_PLACES, POSTER_BOUND_DECIMAL_PLACES - 1):
+        caption = (
+            head
+            + separator
+            + display_bound_value(numeral, decimal_places=decimals, direction=direction)
+        )
+        if degree is None or degree < 2:
+            return caption
+        extent = (
+            _text_width(caption, SUMMARY_SMALL_SIZE)
+            + Decimal(SUMMARY_SMALL_SIZE) * SUMMARY_ITALIC_KERN
+            + _text_width(f"deg {degree}", SUMMARY_SMALL_SIZE)
+        )
+        if extent + POSTER_BOUND_DEGREE_GAP <= SUMMARY_PACKING_SIZE:
+            return caption
+    raise ValueError("a triangle bound caption collides with its algebraic degree")
+
+
 def _append_summary_card(
-    root: ET.Element, built: BuiltCase, *, spec: RenderSpec, canvas: CompositeCanvas
+    root: ET.Element,
+    built: BuiltCase,
+    *,
+    spec: RenderSpec,
+    canvas: CompositeCanvas,
+    grid_transition: GridTransition | None = None,
+    recent: RecentContributions | None = None,
 ) -> None:
     n = built.frontier.n
-    row, column = divmod(n - canvas.spec.first_n, canvas.spec.columns)
-    card_x = SUMMARY_GRID_LEFT + SUMMARY_COLUMN_PITCH * column
-    card_y = SUMMARY_GRID_TOP + SUMMARY_ROW_PITCH * row
+    position = canvas.card_position(n, grid_transition)
+    row, column = position.row, position.column
+    card_x, card_y = position.left, position.top
     packing_x = card_x + SUMMARY_PACKING_INSET_X
     packing_y = card_y + SUMMARY_PACKING_INSET_Y
     frame = frame_from_witness(built.witness)
@@ -1495,7 +1905,19 @@ def _append_summary_card(
             "data-n": str(n),
             "data-row": str(row),
             "data-column": str(column),
+            **(
+                {
+                    "data-physical-row": str(position.physical_row),
+                    "data-segment": position.segment,
+                }
+                if canvas.information_in_corner
+                else {}
+            ),
             "data-source-id": frame.source_id,
+            "data-known-rigid": str(_figure_entries()[n]["rigidity"]["known_rigid"]).lower(),
+            "data-rigidity": json.dumps(
+                _figure_entries()[n]["rigidity"], ensure_ascii=False, separators=(",", ":")
+            ),
         },
     )
     sub(
@@ -1521,7 +1943,7 @@ def _append_summary_card(
             # the same file rendered standalone. One artifact, two line weights, depending on
             # who drew it.
             "stroke": PAPER_THEME.container,
-            "stroke-width": "1.15",
+            "stroke-width": format_svg_number(SUMMARY_CONTAINER_STROKE),
         },
     )
     encoding = canvas.spec
@@ -1583,7 +2005,7 @@ def _append_summary_card(
             "font-size": "29",
             "font-weight": "700",
             "letter-spacing": "-0.5",
-            "fill": PAPER_THEME.ink,
+            "fill": LABEL_MUTED_COLOR,
         },
     ).text = str(n)
 
@@ -1596,7 +2018,17 @@ def _append_summary_card(
     badge_top = top_row - Decimal(29) * SUMMARY_LABEL_CAP_RATIO
     cursor = right - SUMMARY_BADGE_SIZE
     for glyph, style, label in reversed(badges):
-        _append_badge(card, glyph, style, label, x=cursor, top=badge_top)
+        _append_badge(
+            card,
+            glyph,
+            style,
+            label,
+            x=cursor,
+            top=badge_top,
+            accent=FIRST_PARTY_ACCENT_COLOR
+            if recent is not None and recent.optimal and glyph == "O"
+            else None,
+        )
         cursor -= SUMMARY_BADGE_SIZE + Decimal(4)
     bound = sub(
         card,
@@ -1613,7 +2045,16 @@ def _append_summary_card(
     )
     # Only the function name is italic, as in ordinary mathematical setting: the
     # parentheses, the argument, the relation and the numeral stay upright.
-    _append_function_text(bound, _figure_entries()[n]["side"]["display"], SUMMARY_SMALL_SIZE)
+    _append_function_text(
+        bound,
+        _composite_bound_display(
+            _figure_entries()[n]["side"]["display"],
+            canvas,
+            degree=_figure_entries()[n]["exactness"]["degree"],
+        ),
+        SUMMARY_SMALL_SIZE,
+        accent=FIRST_PARTY_ACCENT_COLOR if recent is not None and recent.upper else None,
+    )
 
     # The record carries a degree for all 95 known cases, but printing "deg 1"
     # on the 65 integer sides is noise: a whole number is self-evidently
@@ -1635,10 +2076,25 @@ def _append_summary_card(
             },
         ).text = f"deg {degree}"
 
-    _append_lower_bound(card, n, left=left, baseline=card_y + SUMMARY_LOWER_BASELINE)
+    _append_lower_bound(
+        card,
+        n,
+        left=left,
+        baseline=card_y + SUMMARY_LOWER_BASELINE,
+        recent=None if recent is None else recent.lower,
+        canvas=canvas,
+    )
 
 
-def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: Decimal) -> None:
+def _append_lower_bound(
+    card: ET.Element,
+    n: int,
+    *,
+    left: Decimal,
+    baseline: Decimal,
+    recent: bool | None = None,
+    canvas: CompositeCanvas | None = None,
+) -> None:
     """The certified floor, under the best known side.
 
     A proved case says `s(n) = ...` on the line above and gets nothing here. Where the
@@ -1665,9 +2121,13 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
     )
     _append_function_text(
         lower,
-        entry["display"],
+        entry["display"]
+        if canvas is None
+        else _composite_bound_display(entry["display"], canvas),
         SUMMARY_SMALL_SIZE,
-        accent=FIRST_PARTY_ACCENT_COLOR if entry["recent_result"] else None,
+        accent=FIRST_PARTY_ACCENT_COLOR
+        if (entry["recent_result"] if recent is None else recent)
+        else None,
     )
 
 
@@ -1676,7 +2136,7 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
 #: so went out at n = 11 when Kleddamag's 3.875, developed from T-026, became the bound.
 #: The month is read from `RECENT_SINCE`, so the label cannot name another; it is the
 #: old label's width.
-RECENT_LABEL = f"recent result, since {RECENT_SINCE:%b %Y}"
+RECENT_LABEL = recent_label()
 
 
 @cache
@@ -1685,23 +2145,23 @@ def _figure_entries() -> dict[int, dict]:
 
     Every claim the figure states is decided in
     devtools/build_composite_figure_data.py and validated against
-    composite-figure.schema.yaml. Nothing is re-derived here, so the drawing and
-    the record cannot disagree.
+    composite-figure.schema.yaml. These numeric claims and badge meanings come from
+    that record; both composites separately receive contribution-recency flags from
+    the canonical status helper.
     """
     return {entry["n"]: entry for entry in load_figure_record()["entries"]}
 
 
 def _case_badges(built: BuiltCase) -> tuple[tuple[str, str, str], ...]:
-    """The card's icons, the new-result star first where the case carries one.
-
-    The star reads as one of the badges rather than as punctuation on the bound line,
-    so it sits with them; being first in the row puts it leftmost, since the row is
-    laid out from the right.
-    """
+    """The print card's status badges, with one R and no recency indicator."""
     entry = _figure_entries()[built.frontier.n]
-    badges = [(badge["glyph"], badge["style"], badge["meaning"]) for badge in entry["badges"]]
-    if entry["lower"]["recent_result"]:
-        badges.insert(0, ("", "star", RECENT_LABEL))
+    badges = [
+        (badge["glyph"], badge["style"], badge["meaning"])
+        for badge in entry["badges"]
+        if badge["glyph"] != "R"
+    ]
+    if entry["rigidity"]["known_rigid"]:
+        badges.append(("R", "solid", "known rigid"))
     return tuple(badges)
 
 
@@ -1731,7 +2191,11 @@ def _append_function_text(
     value at the same x to within a hundredth of a unit and sets the same total width,
     so neither trims the space at the seam.
     """
-    sub(parent, "tspan", {"font-style": "italic"}).text = display[0]
+    sub(
+        parent,
+        "tspan",
+        {"font-style": "italic", "font-family": atlas_print_font.ITALIC_FAMILY},
+    ).text = display[0]
     kern = {"dx": format_svg_number(Decimal(size) * SUMMARY_ITALIC_KERN)}
     rest = display[1:]
     head, separator, value = rest.rpartition(" ")
@@ -1783,45 +2247,55 @@ def _append_star(
 
 
 def _badge_baseline(glyph: str) -> Decimal:
-    """Where a badge's glyph sits, so every badge centres its mark the same way.
-
-    A letter is centred on its cap height: the box is `SUMMARY_BADGE_SIZE` tall and the
-    caps are `SUMMARY_LABEL_CAP_RATIO` of the font, so the baseline sits half a cap
-    below the box's middle. Deriving it rather than tabulating it is what keeps `R`
-    level with `O`; `R` used to fall through to the math baseline and rode high.
-    """
-    if not glyph.isalpha():
-        return SUMMARY_MATH_GLYPH_BASELINE
-    cap = SUMMARY_BADGE_FONT_SIZE * SUMMARY_LABEL_CAP_RATIO
-    return (SUMMARY_BADGE_SIZE + cap) / 2
+    top, bottom = _print_ink_bounds(glyph, str(SUMMARY_BADGE_FONT_SIZE))
+    return SUMMARY_BADGE_SIZE / 2 - (top + bottom) / 2
 
 
 def _append_badge(
-    parent: ET.Element, glyph: str, style: str, label: str, *, x: Decimal, top: Decimal
+    parent: ET.Element,
+    glyph: str,
+    style: str,
+    label: str,
+    *,
+    x: Decimal,
+    top: Decimal,
+    type_scale: Decimal = Decimal(1),
+    font_family: str = POSTER_BODY_FONT,
+    font_weight: str = "650",
+    accent: str | None = None,
 ) -> None:
     """Draw one badge at an explicit box top.
 
     Callers position the box rather than passing a text baseline, so the card can
     sit its badges flush with the top of the big number.
     """
+    size = SUMMARY_BADGE_SIZE * type_scale
     if style == "star":
         # The legend's star is the same polygon the cards carry, centred in a badge box
         # so the row lays out as if it were one. `glyph` is unused: there is no star to
         # typeset, which is the point.
         _append_star(
             parent,
-            center_x=x + SUMMARY_BADGE_SIZE / 2,
-            center_y=top + SUMMARY_BADGE_SIZE / 2,
+            center_x=x + size / 2,
+            center_y=top + size / 2,
             feature="legend-star",
             label=label,
-            scale=SUMMARY_BADGE_SIZE * SUMMARY_BADGE_STAR_SPAN / (SUMMARY_STAR_INSET * 2),
+            scale=size * SUMMARY_BADGE_STAR_SPAN / (SUMMARY_STAR_INSET * 2),
         )
         return
+    glyph_left, _glyph_top, glyph_right, _glyph_bottom = atlas_print_font.ink_bounds(
+        glyph, SUMMARY_BADGE_FONT_SIZE * type_scale
+    )
     fill, stroke, glyph_fill = {
         "solid": (PAPER_THEME.muted, "none", PAPER_THEME.background),
         "ink": ("none", PAPER_THEME.muted, PAPER_THEME.muted),
         "muted": ("none", PAPER_THEME.muted, PAPER_THEME.muted),
     }[style]
+    if accent is not None:
+        if style == "solid":
+            fill = accent
+        else:
+            stroke = glyph_fill = accent
     sub(
         parent,
         "rect",
@@ -1830,24 +2304,24 @@ def _append_badge(
             "data-evidence": label,
             "x": format_svg_number(x),
             "y": format_svg_number(top),
-            "width": format_svg_number(SUMMARY_BADGE_SIZE),
-            "height": format_svg_number(SUMMARY_BADGE_SIZE),
-            "rx": "4.5",
+            "width": format_svg_number(size),
+            "height": format_svg_number(size),
+            "rx": format_svg_number(Decimal("4.5") * type_scale),
             "fill": fill,
             "stroke": stroke,
-            "stroke-width": "1.2",
+            "stroke-width": format_svg_number(Decimal("1.2") * type_scale),
         },
     )
     sub(
         parent,
         "text",
         {
-            "x": format_svg_number(x + SUMMARY_BADGE_SIZE / 2),
-            "y": format_svg_number(top + _badge_baseline(glyph)),
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": format_svg_number(SUMMARY_BADGE_FONT_SIZE),
-            "font-weight": "650",
+            "x": format_svg_number(x + size / 2 - (glyph_left + glyph_right) / 2),
+            "y": format_svg_number(top + _badge_baseline(glyph) * type_scale),
+            "text-anchor": "start",
+            "font-family": font_family,
+            "font-size": format_svg_number(SUMMARY_BADGE_FONT_SIZE * type_scale),
+            "font-weight": font_weight,
             "fill": glyph_fill,
         },
     ).text = glyph
@@ -1859,33 +2333,71 @@ def _legend_row(
     *,
     baseline: Decimal,
     canvas_width: int,
+    right_edge: Decimal | None = None,
+    left_edge: Decimal | None = None,
+    type_scale: Decimal = Decimal(1),
+    label_size: str | None = None,
+    font_family: str = SUMMARY_FONT,
+    font_weight: str = SUMMARY_FOOTER_WEIGHT,
+    mark_font_weight: str = "650",
+    label_fill: str = SUMMARY_SMALL_FILL,
 ) -> None:
-    """Lay one centerd legend row, centered on a canvas this wide.
+    """Lay one legend row centered on the canvas or ending at a right edge.
 
-    Each entry is (mark, label), where mark is either a badge triple or a run of
-    swatches. Widths are estimated from the label length because the renderer
-    holds no font metrics, so widths come from the Helvetica advance table.
+    Each entry is (mark, label), where mark is a badge triple, a run of
+    swatches or None for an unbadged definition. Widths come from the Helvetica
+    advance table, because the renderer holds no font metrics.
     """
-    top = baseline - SUMMARY_BADGE_SIZE + Decimal(4)
+    badge_size = SUMMARY_BADGE_SIZE * type_scale
+    footer_size = label_size or format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
+    mark_gap = Decimal(8) * type_scale
+    top = baseline - badge_size + Decimal(4) * type_scale
 
     def mark_width(mark: object) -> Decimal:
+        if mark is None:
+            return Decimal(0)
         if isinstance(mark, tuple):
-            return SUMMARY_BADGE_SIZE
-        return SUMMARY_BADGE_SIZE * Decimal(len(mark))  # pyright: ignore[reportArgumentType]
+            return badge_size
+        return badge_size * Decimal(len(mark))  # pyright: ignore[reportArgumentType]
 
-    gap = Decimal(34)
+    gap = Decimal(34) * type_scale
     widths = [
-        mark_width(mark) + Decimal(8) + _text_width(label, SUMMARY_FOOTER_SIZE)
+        mark_width(mark)
+        + (mark_gap if mark is not None else 0)
+        + _text_width(label, footer_size)
         for mark, label in entries
     ]
+    row_width = sum(widths, Decimal(0)) + gap * Decimal(len(entries) - 1)
+    if (
+        right_edge is not None or left_edge is not None
+    ) and row_width > POSTER_INFORMATION_WIDTH:
+        raise ValueError("a poster legend line exceeds its information block")
     cursor = (
-        Decimal(canvas_width) - sum(widths, Decimal(0)) - gap * Decimal(len(entries) - 1)
-    ) / 2
+        left_edge
+        if left_edge is not None
+        else (
+            (Decimal(canvas_width) - row_width) / 2
+            if right_edge is None
+            else right_edge - row_width
+        )
+    )
     for (mark, label), width in zip(entries, widths, strict=True):
-        if isinstance(mark, tuple):
+        if mark is None:
+            run_end = cursor
+        elif isinstance(mark, tuple):
             glyph, style, name = mark
-            _append_badge(legend, glyph, style, name, x=cursor, top=top)
-            run_end = cursor + SUMMARY_BADGE_SIZE
+            _append_badge(
+                legend,
+                glyph,
+                style,
+                name,
+                x=cursor,
+                top=top,
+                type_scale=type_scale,
+                font_family=font_family,
+                font_weight=mark_font_weight,
+            )
+            run_end = cursor + badge_size
         else:
             run_end = cursor
             for fill, numeral in mark:  # pyright: ignore[reportGeneralTypeIssues]
@@ -1896,102 +2408,767 @@ def _legend_row(
                         "data-feature": "legend-swatch",
                         "x": format_svg_number(run_end),
                         "y": format_svg_number(top),
-                        "width": format_svg_number(SUMMARY_BADGE_SIZE),
-                        "height": format_svg_number(SUMMARY_BADGE_SIZE),
+                        "width": format_svg_number(badge_size),
+                        "height": format_svg_number(badge_size),
                         "fill": fill,
                         "stroke": PAPER_THEME.container,
-                        "stroke-width": "0.8",
+                        "stroke-width": format_svg_number(Decimal("0.8") * type_scale),
                     },
                 )
                 if numeral:
+                    numeral_size = format_svg_number(Decimal("11.5") * type_scale)
+                    if _text_width(numeral, numeral_size) > badge_size - type_scale:
+                        raise ValueError("a legend swatch label exceeds its square")
                     sub(
                         legend,
                         "text",
                         {
-                            "x": format_svg_number(run_end + SUMMARY_BADGE_SIZE / 2),
-                            "y": format_svg_number(top + Decimal("13.4")),
+                            "data-swatch-label": numeral,
+                            "x": format_svg_number(run_end + badge_size / 2),
+                            "y": format_svg_number(top + Decimal("13.4") * type_scale),
                             "text-anchor": "middle",
-                            "font-family": SUMMARY_FONT,
-                            "font-size": "11.5",
-                            "font-weight": "650",
-                            "fill": PAPER_THEME.background
+                            "font-family": font_family,
+                            "font-size": numeral_size,
+                            "font-weight": mark_font_weight,
+                            "fill": "#000000"
+                            if numeral in {"90°", "45°"}
+                            else PAPER_THEME.background
                             if hex_oklch(fill)[0] < 0.62
                             else PAPER_THEME.ink,
                         },
                     ).text = numeral
-                run_end += SUMMARY_BADGE_SIZE
+                run_end += badge_size
         sub(
             legend,
             "text",
             {
-                "x": format_svg_number(run_end + Decimal(8)),
+                "x": format_svg_number(
+                    run_end + (mark_gap if mark is not None else 0)
+                    if right_edge is None
+                    else cursor + width
+                ),
                 "y": format_svg_number(baseline),
-                "font-family": SUMMARY_FONT,
-                "font-size": SUMMARY_FOOTER_SIZE,
-                "font-weight": SUMMARY_FOOTER_WEIGHT,
-                "fill": SUMMARY_SMALL_FILL,
+                **(
+                    {"text-anchor": "start", "data-feature": "legend-label"}
+                    if left_edge is not None
+                    else {"text-anchor": "end", "data-feature": "legend-label"}
+                    if right_edge is not None
+                    else {}
+                ),
+                "font-family": font_family,
+                "font-size": footer_size,
+                "font-weight": font_weight,
+                "fill": label_fill,
             },
         ).text = label
         cursor += width + gap
 
 
 def _append_summary_legend(
-    root: ET.Element, *, spec: RenderSpec, canvas: CompositeCanvas
+    root: ET.Element,
+    *,
+    spec: RenderSpec,
+    canvas: CompositeCanvas,
+    contributions: Mapping[int, RecentContributions] | None = None,
 ) -> None:
-    """Two rows: what the badges assert, then what color and shade encode."""
+    """The eight print meanings, with renderer-specific marks and positioning."""
     record = load_figure_record()
     totals = next(
         composite["totals"]
         for composite in record["composites"]
         if composite["stem"] == canvas.spec.stem
     )
-    tally = {
-        RECENT_LABEL: totals["lower_bound_recent_result"],
-        "proved optimal": totals["proved_optimal"],
-        "exact value known": totals["exact_value_known"],
-        "only known numerically": totals["only_known_numerically"],
-        "rigid (established here)": totals["rigidity_established"],
-        "annotated rigid by the catalogue": totals["rigidity_catalogue_annotated"],
-    }
+    recent_count = (
+        totals["lower_bound_recent_result"]
+        if contributions is None
+        else sum(contributions[n].any for n in canvas.spec.numbers)
+    )
+    descriptor = atlas_legend(
+        AtlasLegendCounts(
+            proved_optimal=totals["proved_optimal"],
+            exact_value_known=totals["exact_value_known"],
+            only_known_numerically=totals["only_known_numerically"],
+            known_rigid=totals["rigidity_known"],
+            recent_results=recent_count,
+            depicted_total=canvas.spec.count,
+        )
+    )
     palette = square_fill_palette(
         hue_count=spec.hue_count,
         shades_per_hue=spec.shades_per_hue,
         lightness_span=spec.shade_lightness_span,
     )
     middle = spec.shades_per_hue // 2
+
+    def entry(item: LegendItem) -> tuple[object, str]:
+        mark: object
+        if item.marker is None or item.key == "recent":
+            mark = None
+        elif item.marker == "angles":
+            labels = item.marker_labels or ("",) * len(item.marker_values)
+            mark = [
+                (palette[index][middle], label)
+                for index, label in zip(item.marker_values, labels, strict=True)
+            ]
+        elif item.marker == "shades":
+            mark = [
+                (palette[1][index], str(value))
+                for index, value in enumerate(item.marker_values)
+            ]
+        else:
+            mark = (
+                "" if item.marker == "star" else item.marker,
+                "star" if item.marker == "star" else "muted" if item.marker == "≈" else "solid",
+                item.label,
+            )
+        return mark, item.formatted_text(count_style="words")
+
+    layout = _information_layout(canvas)
+    body_size = POSTER_BODY_SIZE if canvas.information_in_corner else SUMMARY_FOOTER_SIZE
+    scale = POSTER_LEGEND_TYPE_SCALE if canvas.information_in_corner else Decimal(1)
+    badge_size = SUMMARY_BADGE_SIZE * scale
+    mark_gap = Decimal(8) * scale
+
+    def row_width(item: LegendItem) -> Decimal:
+        if item.marker is None or item.key == "recent":
+            return _text_width(item.formatted_text(count_style="words"), body_size)
+        return (
+            badge_size * (len(item.marker_values) if item.marker_values else 1)
+            + mark_gap
+            + _text_width(item.formatted_text(count_style="words"), body_size)
+        )
+
+    widths = [
+        max(row_width(item) for item in column)
+        for column in (descriptor.left, descriptor.right)
+    ]
+    gap = POSTER_LEGEND_COLUMN_GAP * layout.scale
+    if sum(widths, Decimal(0)) + gap > layout.right - layout.left:
+        raise ValueError("the poster legend columns exceed their information block")
     legend = sub(root, "g", {"data-feature": "evidence-legend"})
-    badges = [
-        ("O", "solid", "proved optimal"),
-        ("=", "solid", "exact value known"),
-        ("\u2248", "muted", "only known numerically"),
-        ("R", "solid", "rigid (established here)"),
-        # The muted twin is the point of D-385: one glyph used to cover both, so a
-        # source's annotation was rendered indistinguishable from an argument of ours.
-        ("R", "muted", "annotated rigid by the catalogue"),
-        ("", "star", RECENT_LABEL),
-    ]
-    _legend_row(
-        legend,
-        [(badge, f"{badge[2]} ({tally.get(badge[2], 0)})") for badge in badges],
-        baseline=canvas.legend_baseline,
-        canvas_width=canvas.width,
+    cursor = layout.left
+    for name, items, width in zip(
+        ("left", "right"), (descriptor.left, descriptor.right), widths, strict=True
+    ):
+        column = sub(
+            legend,
+            "g",
+            {
+                "data-feature": "legend-column",
+                "data-column": name,
+                "data-left": format_svg_number(cursor),
+                "data-width": format_svg_number(width),
+            },
+        )
+        for index, item in enumerate(items):
+            _legend_row(
+                column,
+                [entry(item)],
+                baseline=layout.legend_baseline + layout.line_pitch * index,
+                canvas_width=canvas.width,
+                left_edge=cursor,
+                type_scale=scale,
+                label_size=body_size,
+                font_family=POSTER_BODY_FONT,
+                font_weight=POSTER_BODY_WEIGHT,
+                mark_font_weight=POSTER_BODY_WEIGHT,
+                label_fill=FIRST_PARTY_ACCENT_COLOR
+                if item.key == "recent"
+                else SUMMARY_SMALL_FILL,
+            )
+        cursor += width + gap
+
+
+def _append_summary_explainer(
+    root: ET.Element,
+    *,
+    baseline: Decimal,
+    canvas_width: int,
+    right_edge: Decimal | None = None,
+    left_edge: Decimal | None = None,
+    type_scale: Decimal = Decimal(1),
+    runs: Sequence[tuple[str, bool]] = SUMMARY_EXPLAINER_RUNS,
+    feature: str = "explainer",
+    italic_font_family: str | None = None,
+    font_size: str | None = None,
+) -> None:
+    font_size = font_size or format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
+    kern_width = Decimal(font_size) * SUMMARY_ITALIC_KERN
+    kern = format_svg_number(kern_width)
+    line_width = sum(
+        (_text_width(text, font_size) for text, _italic in runs),
+        Decimal(0),
+    ) + kern_width * Decimal(
+        sum(
+            1
+            for index, (_text, italic) in enumerate(runs)
+            if index and not italic and runs[index - 1][1]
+        )
     )
-    # Color carries the tilt angle, shade the contact count. Four hues stand in
-    # for the twenty; the citron ramp illustrates the shades because that family
-    # shows every contact count in the atlas.
-    hue_run = [(palette[index][middle], "") for index in range(4)]
-    shade_run = [
-        (fill, str(spec.shades_per_hue - 1 - index)) for index, fill in enumerate(palette[1])
-    ]
-    _legend_row(
-        legend,
-        [
-            (hue_run, "colors indicate distinct tilt angles"),
-            (shade_run, "shade indicates number of full-side contacts"),
+    if left_edge is not None and right_edge is not None:
+        raise ValueError("an explainer has one horizontal alignment")
+    if (
+        left_edge is not None or right_edge is not None
+    ) and line_width > POSTER_INFORMATION_WIDTH:
+        raise ValueError("the poster explainer exceeds its information block")
+    explainer = sub(
+        root,
+        "text",
+        {
+            "data-feature": feature,
+            # Anchored from the left rather than centred: a centred run made of several
+            # tspans is not laid out as one chunk by every renderer, and the parts stack
+            # on the same centre. Measuring the line and starting it is unambiguous.
+            "x": format_svg_number(
+                left_edge
+                if left_edge is not None
+                else right_edge - line_width
+                if right_edge is not None
+                else (Decimal(canvas_width) - line_width) / 2
+            ),
+            "y": format_svg_number(baseline),
+            **_information_text_style(font_size),
+        },
+    )
+    previous_italic = False
+    for text, italic in runs:
+        attributes: dict[str, str] = {"font-style": "italic"} if italic else {}
+        if italic and italic_font_family is not None:
+            attributes["font-family"] = italic_font_family
+        # An upright run following an italic one needs the same thin space the cards use.
+        if previous_italic and not italic:
+            attributes["dx"] = kern
+        sub(explainer, "tspan", attributes).text = text
+        previous_italic = italic
+
+
+@dataclass(frozen=True, slots=True)
+class PackingCredit:
+    """Every named contributor to displayed constructions, grouped by source family."""
+
+    names: tuple[str, ...]
+    source_keys: tuple[str, ...]
+    citation: str
+    #: Supported author-attribution dates; an integer retains year-only precision.
+    dates: tuple[tuple[str, date | int], ...] = ()
+
+
+def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
+    if isinstance(value, date):
+        return value.year, 1, value.month, value.day
+    return (value, 0, 0, 0) if value is not None else (0, 0, 0, 0)
+
+
+@cache
+def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, ...]:
+    """Read construction credits from typed case fields and the canonical bibliography.
+
+    The ordinary citation can shorten three authors to ``et al.``; this list retains
+    every finder and improver. Source families group the metadata, with every complete
+    source key retained in the SVG.
+    """
+    register = build_bound_citations.load_register()
+    groups: dict[str, tuple[list[str], list[str], dict[str, date | int]]] = {}
+    for n in range(first_n, last_n + 1):
+        case = build_bound_citations.load_case(n)
+        citation = build_bound_citations.upper_citation(n, case, register)
+        if citation is None:
+            continue
+        reported = case["reported_upper_bound"]
+        credited = [*(reported.get("found_by") or []), *(reported.get("improved_by") or [])]
+        names = [register.names[name] for name in dict.fromkeys(credited)]
+        source_key = citation["source_key"]
+        source: build_bound_citations.Source | None = None
+        if source_key is None:
+            reference = citation["text"]
+            names = names or [build_bound_citations.PROJECT_NAME]
+            source_keys = []
+        else:
+            source = register.sources[source_key]
+            # Repository handles identify the retained packet, while the bibliography
+            # names its author. Group these sources by their canonical author names.
+            family = (
+                ", ".join(source.authors)
+                if source.venue == "GitHub"
+                else source.key.removeprefix("[").removesuffix("]").split()[0]
+            )
+            reference = f"[{family}{f' {source.year}' if source.year is not None else ''}]"
+            names = names or list(source.authors)
+            source_keys = [source.key]
+        group_names, group_sources, group_dates = groups.setdefault(reference, ([], [], {}))
+        group_names.extend(name for name in names if name not in group_names)
+        group_sources.extend(key for key in source_keys if key not in group_sources)
+        found_year = reported.get("found_year")
+        dated_names: list[tuple[str, date | int]] = (
+            [(register.names[name], found_year) for name in (reported.get("found_by") or [])]
+            if isinstance(found_year, int)
+            else []
+        )
+        if source is not None:
+            source_date = source.dated or source.year
+            if source_date is not None:
+                # An improver's publication does not redate inherited finders.
+                dated_names.extend(
+                    (name, source_date) for name in names if name in source.authors
+                )
+        for name, supported in dated_names:
+            if name not in group_dates or _credit_date_key(supported) < _credit_date_key(
+                group_dates[name]
+            ):
+                group_dates[name] = supported
+    return tuple(
+        PackingCredit(tuple(names), tuple(keys), reference, tuple(dates.items()))
+        for reference, (names, keys, dates) in groups.items()
+    )
+
+
+def _balanced_credit_lines(
+    paragraph: atlas_credit_attributions.CreditParagraph,
+    *,
+    line_count: int | None = None,
+    measure: Decimal = POSTER_INFORMATION_WIDTH,
+) -> tuple[str, ...]:
+    """Balance consecutive whole-name runs within one measured paragraph width."""
+    atoms = paragraph.atoms
+    if not atoms:
+        return (paragraph.clauses[0].prefix,)
+    failure = (
+        "poster packing credits exceed their three-line information block"
+        if line_count is not None
+        else "poster attribution credits exceed their information block"
+    )
+    # The retained face measures unkerned advances, so span widths are exactly additive.
+    # Measure each indivisible role-prefix/name atom once, even in a four-line search.
+    atom_widths = tuple(_text_width(atom, POSTER_BODY_SIZE) for atom in atoms)
+    if max(atom_widths) > measure:
+        raise ValueError(failure)
+    space = _text_width(" ", POSTER_BODY_SIZE)
+    prefix_widths = [Decimal(0)]
+    for width in atom_widths:
+        prefix_widths.append(prefix_widths[-1] + width)
+    counts = (
+        (min(line_count, len(atoms)),) if line_count is not None else range(1, len(atoms) + 1)
+    )
+    for count in counts:
+        best_lines: tuple[str, ...] = ()
+        best_score: Decimal | None = None
+        for breaks in combinations(range(1, len(atoms)), count - 1):
+            boundaries = (0, *breaks, len(atoms))
+            widths = tuple(
+                prefix_widths[last] - prefix_widths[first] + space * (last - first - 1)
+                for first, last in pairwise(boundaries)
+            )
+            if max(widths) > measure:
+                continue
+            mean = sum(widths, Decimal(0)) / count
+            score = sum(((width - mean) ** 2 for width in widths), Decimal(0))
+            if best_score is None or score < best_score:
+                best_lines = tuple(
+                    " ".join(atoms[first:last]) for first, last in pairwise(boundaries)
+                )
+                best_score = score
+        if best_score is not None:
+            return best_lines
+    raise ValueError(failure)
+
+
+@cache
+def _print_attributions() -> atlas_credit_attributions.CreditAttributions:
+    return atlas_credit_attributions.parse(
+        json.loads((ATLAS_ROOT / "credit-attributions.json").read_text())
+    )
+
+
+def _poster_credit_lines(packing_credits: Sequence[PackingCredit]) -> tuple[str, ...]:
+    """Unique normalized names, oldest first by their earliest supported attribution.
+
+    Year-only dates preserve their precision; unknown intra-year priority uses
+    alphabetical ties. Full original names and sources remain in the SVG metadata.
+    """
+    normalize = _print_attributions().normalize_name
+    earliest: dict[str, date | int | None] = {
+        normalize(name): None for credit in packing_credits for name in credit.names
+    }
+    for credit in packing_credits:
+        for original_name, supported in credit.dates:
+            name = normalize(original_name)
+            previous = earliest[name]
+            if previous is None or _credit_date_key(supported) < _credit_date_key(previous):
+                earliest[name] = supported
+    names = atlas_credit_attributions.chronological_names(earliest)
+    return _balanced_credit_lines(
+        atlas_credit_attributions.CreditParagraph(
+            "packing",
+            (atlas_credit_attributions.CreditClause(POSTER_PACKING_CREDITS_PREFIX, names),),
+        ),
+        line_count=POSTER_PACKING_CREDITS_LINE_COUNT,
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class InformationLayout:
+    scale: Decimal
+    left: Decimal
+    right: Decimal
+    line_pitch: Decimal
+    title_baseline: Decimal
+    problem_baselines: tuple[Decimal, ...]
+    legend_baseline: Decimal
+    credit_baselines: tuple[Decimal, ...]
+    attribution_baselines: tuple[tuple[Decimal, ...], ...]
+    diagram_baseline: Decimal
+    stamp_baseline: Decimal
+    project_baseline: Decimal
+    repository_baseline: Decimal
+    bottom: Decimal
+
+
+@cache
+def _print_credit_lines() -> tuple[str, ...]:
+    return _poster_credit_lines(_poster_packing_credits(CORPUS.first_n, CORPUS.last_n))
+
+
+@cache
+def _print_attribution_lines() -> tuple[tuple[str, ...], ...]:
+    # Construction credits retain three balanced lines. Their widest line sets the
+    # shared measure for the following paragraphs without widening the print block.
+    measure = max(_text_width(line, POSTER_BODY_SIZE) for line in _print_credit_lines())
+    return tuple(
+        _balanced_credit_lines(paragraph, measure=measure)
+        for paragraph in _print_attributions().paragraphs
+    )
+
+
+@cache
+def _print_credit_metadata() -> str:
+    document = json.loads(_print_attributions().metadata)
+    packing_credits = _poster_packing_credits(CORPUS.first_n, CORPUS.last_n)
+    keys = {key for credit in packing_credits for key in credit.source_keys}
+    document["construction"] = {
+        "credit_scope": [CORPUS.first_n, CORPUS.last_n],
+        "source_groups": [
+            {
+                "names": credit.names,
+                "source_keys": credit.source_keys,
+                "citation": credit.citation,
+                "earliest_dates": {
+                    name: supported.isoformat() if isinstance(supported, date) else supported
+                    for name, supported in credit.dates
+                },
+            }
+            for credit in packing_credits
         ],
-        baseline=canvas.legend_baseline + SUMMARY_LEGEND_ROW_PITCH,
-        canvas_width=canvas.width,
+        "sources": [
+            entry
+            for entry in safe_load(build_bound_citations.BIBLIOGRAPHY.read_text())["sources"]
+            if entry["key"] in keys
+        ],
+        "cases": [
+            {
+                "n": n,
+                **{
+                    key: value
+                    for key, value in build_bound_citations.load_case(n)[
+                        "reported_upper_bound"
+                    ].items()
+                    if key in {"found_by", "found_year", "improved_by", "source_key"}
+                },
+            }
+            for n in CORPUS.numbers
+        ],
+    }
+    return json.dumps(document, ensure_ascii=False, separators=(",", ":"), default=str)
+
+
+def _information_layout(
+    canvas: CompositeCanvas, identity: CompositeIdentity | None = None
+) -> InformationLayout:
+    corner = canvas.information_in_corner
+    scale = Decimal(1) if corner else Decimal(SUMMARY_FOOTER_SIZE) / Decimal(POSTER_BODY_SIZE)
+    body_size = POSTER_BODY_SIZE if corner else SUMMARY_FOOTER_SIZE
+    problem_size = format_svg_number(Decimal(POSTER_PROBLEM_SIZE) * scale)
+    pitch = POSTER_BODY_LINE_PITCH * scale
+    gap = Decimal(body_size) * 3
+    width = POSTER_INFORMATION_WIDTH * scale
+    left = canvas.information_left if corner else (Decimal(canvas.width) - width) / 2
+    title_baseline = POSTER_TITLE_BASELINE if corner else Decimal(76)
+    first_problem = "".join(text for text, _italic in POSTER_EXPLAINER_LINES[0])
+    top, _bottom = _print_ink_bounds(first_problem, problem_size)
+    title_bottom = (
+        title_baseline + _print_ink_bounds("BEST KNOWN SQUARE PACKINGS", POSTER_TITLE_SIZE)[1]
     )
+    first_baseline = (
+        title_bottom + gap if corner else canvas.grid_bottom + SUMMARY_LEGEND_GAP
+    ) - top
+    problem_baselines = tuple(
+        first_baseline + POSTER_PROBLEM_LINE_PITCH * scale * index
+        for index in range(len(POSTER_EXPLAINER_LINES))
+    )
+    last_problem = "".join(text for text, _italic in POSTER_EXPLAINER_LINES[-1])
+    problem_bottom = problem_baselines[-1] + _print_ink_bounds(last_problem, problem_size)[1]
+    legend_scale = POSTER_LEGEND_TYPE_SCALE if corner else Decimal(1)
+    legend_top = -Decimal(15) * legend_scale
+    legend_bottom = max(Decimal(4) * legend_scale, _print_ink_bounds("gjpqy", body_size)[1])
+    legend_baseline = problem_bottom + gap - legend_top
+    credit_lines = _print_credit_lines()
+    credit_first = (
+        legend_baseline
+        + pitch * 3
+        + legend_bottom
+        + gap
+        - _print_ink_bounds(credit_lines[0], body_size)[0]
+    )
+    credit_baselines = tuple(credit_first + pitch * index for index in range(len(credit_lines)))
+    credit_bottom = credit_baselines[-1] + _print_ink_bounds(credit_lines[-1], body_size)[1]
+    attribution_baselines = []
+    for lines in _print_attribution_lines():
+        first = credit_bottom + gap - _print_ink_bounds(lines[0], body_size)[0]
+        baselines = tuple(first + pitch * index for index in range(len(lines)))
+        attribution_baselines.append(baselines)
+        credit_bottom = baselines[-1] + _print_ink_bounds(lines[-1], body_size)[1]
+    diagram_baseline = (
+        credit_bottom + gap - _print_ink_bounds(POSTER_DIAGRAM_CREDIT, body_size)[0]
+    )
+    stamp_baseline = diagram_baseline + pitch
+    # Page geometry reserves the deepest possible date descender. A drawn edition
+    # supplies its actual text so the project's visible gap is exact for every month.
+    stamp_descent = (
+        _print_ink_bounds(identity.poster_stamp, body_size)[1]
+        if identity is not None
+        else _print_ink_bounds("gjpqy", body_size)[1]
+    )
+    stamp_bottom = stamp_baseline + stamp_descent
+    project_baseline = (
+        stamp_bottom + gap - _print_ink_bounds(POSTER_CITATIONS, body_size)[0]
+        if corner
+        else Decimal(114)
+    )
+    repository_baseline = project_baseline + pitch
+    bottom = (
+        repository_baseline + _print_ink_bounds(SUMMARY_REPOSITORY, body_size)[1]
+        if corner
+        else stamp_bottom
+    )
+    return InformationLayout(
+        scale,
+        left,
+        left + width,
+        pitch,
+        title_baseline,
+        problem_baselines,
+        legend_baseline,
+        credit_baselines,
+        tuple(attribution_baselines),
+        diagram_baseline,
+        stamp_baseline,
+        project_baseline,
+        repository_baseline,
+        bottom,
+    )
+
+
+def _append_composite_information(
+    root: ET.Element,
+    *,
+    spec: RenderSpec,
+    canvas: CompositeCanvas,
+    identity: CompositeIdentity,
+    contributions: Mapping[int, RecentContributions] | None = None,
+) -> None:
+    layout = _information_layout(canvas, identity)
+    corner = canvas.information_in_corner
+    size = POSTER_BODY_SIZE if corner else SUMMARY_FOOTER_SIZE
+    block = sub(
+        root,
+        "g",
+        {
+            "data-feature": "poster-information",
+            "data-placement": "corner" if corner else "footer",
+            "data-credit-scope": CORPUS.label,
+            "data-depicted-range": canvas.spec.cases.label,
+            "data-left": format_svg_number(layout.left),
+            "data-right": format_svg_number(layout.right),
+            "data-top": format_svg_number(
+                POSTER_INFORMATION_TOP if corner else canvas.grid_bottom + SUMMARY_LEGEND_GAP
+            ),
+            "data-bottom": format_svg_number(layout.bottom),
+        },
+    )
+    positions = tuple(canvas.card_position(n) for n in canvas.spec.numbers)
+
+    def text_line(
+        feature: str,
+        content: str,
+        baseline: Decimal,
+        font_size: str = size,
+        *,
+        parent: ET.Element | None = None,
+        centered: bool = False,
+    ) -> ET.Element:
+        spacing = Decimal("4.5") if feature == "poster-title" and corner else Decimal(0)
+        extent = _text_width(content, font_size) + spacing * max(len(content) - 1, 0)
+        room = (
+            POSTER_INFORMATION_WIDTH
+            if corner
+            else Decimal(canvas.width) - SUMMARY_SIDE_MARGIN * 2
+        )
+        if extent > room:
+            raise ValueError(f"the poster {feature} line exceeds its information block")
+        top, bottom = _print_ink_bounds(content, font_size)
+        text_left = (Decimal(canvas.width) - extent) / 2 if centered else layout.left
+        text_right = text_left + extent
+        if any(
+            text_left < position.left + SUMMARY_CARD_WIDTH
+            and text_right > position.left
+            and baseline + top < position.top + SUMMARY_CARD_HEIGHT
+            and baseline + bottom > position.top
+            for position in positions
+        ):
+            raise ValueError(f"the poster {feature} line overlaps a packing card")
+        if corner and (
+            baseline + top < POSTER_INFORMATION_TOP or baseline + bottom > layout.bottom
+        ):
+            raise ValueError(f"the poster {feature} line lies outside its information block")
+        node = sub(
+            block if parent is None else parent,
+            "text",
+            {
+                "data-feature": feature,
+                "x": format_svg_number(Decimal(canvas.width) / 2 if centered else layout.left),
+                "y": format_svg_number(baseline),
+                "text-anchor": "middle" if centered else "start",
+                **_information_text_style(font_size),
+            },
+        )
+        if spacing:
+            node.set("letter-spacing", format_svg_number(spacing))
+        node.text = content
+        return node
+
+    heading = (
+        "BEST KNOWN SQUARE PACKINGS"
+        if corner
+        else f"{canvas.spec.count} BEST KNOWN SQUARE PACKINGS"
+    )
+    text_line(
+        "poster-title",
+        heading,
+        layout.title_baseline,
+        POSTER_TITLE_SIZE if corner else "48",
+        parent=block if corner else root,
+        centered=not corner,
+    )
+    if not corner:
+        text_line(
+            "project-reference",
+            f"{POSTER_CITATIONS} · {SUMMARY_REPOSITORY}",
+            layout.project_baseline,
+            parent=root,
+            centered=True,
+        )
+    for index, runs in enumerate(POSTER_EXPLAINER_LINES):
+        _append_summary_explainer(
+            block,
+            baseline=layout.problem_baselines[index],
+            canvas_width=canvas.width,
+            left_edge=layout.left,
+            font_size=format_svg_number(Decimal(POSTER_PROBLEM_SIZE) * layout.scale),
+            runs=runs,
+            feature=("explainer", "problem-explainer")[index],
+            italic_font_family=POSTER_ITALIC_FONT,
+        )
+    _append_summary_legend(block, spec=spec, canvas=canvas, contributions=contributions)
+    packing_credits = _poster_packing_credits(CORPUS.first_n, CORPUS.last_n)
+    credit_block = sub(
+        block,
+        "g",
+        {
+            "data-feature": "packing-credits",
+            "data-credit-scope": CORPUS.label,
+            "data-credited-names": json.dumps(
+                list(
+                    dict.fromkeys(name for credit in packing_credits for name in credit.names)
+                ),
+                ensure_ascii=False,
+            ),
+            "data-source-keys": json.dumps(
+                list(
+                    dict.fromkeys(
+                        key for credit in packing_credits for key in credit.source_keys
+                    )
+                ),
+                ensure_ascii=False,
+            ),
+        },
+    )
+    for content, baseline in zip(_print_credit_lines(), layout.credit_baselines, strict=True):
+        text_line("packing-credit-line", content, baseline, parent=credit_block)
+    attribution_blocks = []
+    attributions = _print_attributions()
+    sub(
+        block, "metadata", {"data-feature": "credit-attributions"}
+    ).text = _print_credit_metadata()
+    for paragraph, lines, baselines in zip(
+        attributions.paragraphs,
+        _print_attribution_lines(),
+        layout.attribution_baselines,
+        strict=True,
+    ):
+        attribution_block = sub(
+            block,
+            "g",
+            {
+                "data-feature": f"{paragraph.key}-credits",
+                "data-credit-scope": CORPUS.label,
+                "data-credited-names": json.dumps(paragraph.names, ensure_ascii=False),
+            },
+        )
+        attribution_blocks.append(attribution_block)
+        for content, baseline in zip(lines, baselines, strict=True):
+            text_line(
+                f"{paragraph.key}-credit-line", content, baseline, parent=attribution_block
+            )
+    text_line("credit", POSTER_DIAGRAM_CREDIT, layout.diagram_baseline)
+    text_line("release-stamp", identity.poster_stamp, layout.stamp_baseline)
+    if corner:
+        text_line("citations", POSTER_CITATIONS, layout.project_baseline)
+        text_line("repository", SUMMARY_REPOSITORY, layout.repository_baseline)
+
+    groups = [
+        [
+            block.find(
+                f"svg:text[@data-feature='{feature}']", {"svg": "http://www.w3.org/2000/svg"}
+            )
+            for feature in ("explainer", "problem-explainer")
+        ],
+        *[
+            [
+                node
+                for node in column.findall(svg_tag("text"))
+                if node.attrib.get("data-feature") == "legend-label"
+            ]
+            for column in block.iter(svg_tag("g"))
+            if column.attrib.get("data-feature") == "legend-column"
+        ],
+        list(credit_block.findall(svg_tag("text"))),
+        *(list(paragraph.findall(svg_tag("text"))) for paragraph in attribution_blocks),
+        [
+            node
+            for node in block.findall(svg_tag("text"))
+            if node.attrib.get("data-feature") in {"credit", "release-stamp"}
+        ],
+    ]
+    for lines in groups:
+        bounds = [
+            (Decimal(node.attrib["y"]) + top, Decimal(node.attrib["y"]) + bottom)
+            for node in lines
+            if node is not None
+            for top, bottom in [
+                _print_ink_bounds("".join(node.itertext()), node.attrib["font-size"])
+            ]
+        ]
+        if any(above[1] > below[0] for above, below in pairwise(bounds)):
+            raise ValueError("poster documentation lines overlap")
 
 
 @emission_precision()
@@ -2001,7 +3178,7 @@ def render_known_best_summary_svg(
     """Render a complete, zoomable overview of one composite's range of cases.
 
     `identity` is what the drawing says of itself: the data commit it shows, in its
-    metadata and its footer, and that commit's date, in its dateline. The caller says
+    metadata and its footer, and that commit's date, in its visible date. The caller says
     which: `drawable_identity` for a new drawing, the retained one to check an old one.
 
     The pin covers the per-card scale and corner arithmetic in `_append_summary_card`
@@ -2014,6 +3191,9 @@ def render_known_best_summary_svg(
         raise ValueError(
             f"the {composite.stem} composite requires exactly {composite.cases.label} in order"
         )
+    transitions = _poster_grid_transitions(canvas)
+    if canvas.information_in_corner:
+        canvas = canvas.with_transitions(transitions)
     accessible_title, accessible_description = SUMMARY_PROSE[composite.stem]
     width, height = canvas.width, canvas.height
     spec = RenderSpec(overlays=frozenset())
@@ -2028,6 +3208,11 @@ def render_known_best_summary_svg(
         },
     )
     append_title_desc(root, accessible_title, accessible_description)
+    sub(
+        root,
+        "style",
+        {"data-feature": "retained-print-fonts", "data-sqpack-style": PRINT_FONT_MARKER},
+    ).text = atlas_print_font.embedded_css()
     append_metadata(
         root,
         {
@@ -2046,7 +3231,27 @@ def render_known_best_summary_svg(
             "generated-by": GENERATOR,
             "last-n": str(composite.last_n),
             "rows": str(composite.rows),
+            "physical-column-pitch": format_svg_number(SUMMARY_COLUMN_PITCH),
+            "physical-row-pitch": format_svg_number(canvas.row_pitch),
             "square-count": str(composite.square_count),
+            **(
+                {
+                    "layout": composite.layout,
+                    "regular-grid-extra-gap": format_svg_number(POSTER_GRID_GAP),
+                    "physical-columns": str(canvas.physical_columns),
+                    "physical-rows": str(canvas.physical_rows),
+                    "grid-suffix-layout": "inline",
+                    "grid-transition-label-layout": "single-line",
+                    "grid-transition-marker-clearance-ratio": format_svg_number(
+                        POSTER_GRID_MARKER_CLEARANCE_RATIO
+                    ),
+                    "grid-transition-marker-outline-gap": format_svg_number(
+                        SUMMARY_OUTLINE_GAP * POSTER_GRID_MARKER_CLEARANCE_RATIO
+                    ),
+                }
+                if composite.placement == CompositePlacement.square_bound_triangle
+                else {}
+            ),
             **_encoding_metadata(composite),
         },
     )
@@ -2059,143 +3264,27 @@ def render_known_best_summary_svg(
             "fill": PAPER_THEME.background,
         },
     )
-    heading_x = str(width // 2)
-    sub(
-        root,
-        "text",
-        {
-            "x": heading_x,
-            "y": "76",
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": "48",
-            "font-weight": "700",
-            "letter-spacing": "1.5",
-            "fill": PAPER_THEME.ink,
-        },
-    ).text = f"{composite.count} BEST KNOWN SQUARE PACKINGS"
-    release_width = _text_width(identity.dateline, SUMMARY_RELEASE_SIZE)
-    release_scale = _star_scale(SUMMARY_RELEASE_SIZE)
-    star_span = SUMMARY_STAR_INSET * 2 * release_scale
-    group_width = star_span + SUMMARY_RELEASE_GAP + release_width
-    group_left = (Decimal(width) - group_width) / 2
-    _append_star(
-        root,
-        center_x=group_left + star_span / 2,
-        center_y=_star_center_y(SUMMARY_RELEASE_BASELINE, SUMMARY_RELEASE_SIZE),
-        feature="release-star",
-        scale=release_scale,
+    contributions = recent_contributions_by_case()
+    _append_composite_information(
+        root, spec=spec, canvas=canvas, identity=identity, contributions=contributions
     )
-    sub(
-        root,
-        "text",
-        {
-            "data-feature": "release",
-            "x": format_svg_number(group_left + star_span + SUMMARY_RELEASE_GAP),
-            "y": format_svg_number(SUMMARY_RELEASE_BASELINE),
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_RELEASE_SIZE,
-            "font-weight": "700",
-            "fill": PAPER_THEME.ink,
-        },
-    ).text = identity.dateline
-    sub(
-        root,
-        "text",
-        {
-            "data-feature": "repository",
-            "x": heading_x,
-            "y": format_svg_number(SUMMARY_SUBTITLE_BASELINE),
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_REPOSITORY_SIZE,
-            "font-weight": "700",
-            # Where the figure came from reads as part of the title, not as a caption.
-            "fill": PAPER_THEME.ink,
-        },
-    ).text = SUMMARY_REPOSITORY
-    _append_summary_legend(root, spec=spec, canvas=canvas)
-    kern_width = Decimal(SUMMARY_FOOTER_SIZE) * SUMMARY_ITALIC_KERN
-    kern = format_svg_number(kern_width)
-    line_width = sum(
-        (_text_width(text, SUMMARY_FOOTER_SIZE) for text, _italic in SUMMARY_EXPLAINER_RUNS),
-        Decimal(0),
-    ) + kern_width * Decimal(
-        sum(
-            1
-            for index, (_text, italic) in enumerate(SUMMARY_EXPLAINER_RUNS)
-            if index and not italic and SUMMARY_EXPLAINER_RUNS[index - 1][1]
-        )
-    )
-    explainer = sub(
-        root,
-        "text",
-        {
-            "data-feature": "explainer",
-            # Anchored from the left rather than centred: a centred run made of several
-            # tspans is not laid out as one chunk by every renderer, and the parts stack
-            # on the same centre. Measuring the line and starting it is unambiguous.
-            "x": format_svg_number((Decimal(width) - line_width) / 2),
-            "y": format_svg_number(canvas.explainer_baseline),
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_FOOTER_SIZE,
-            "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": SUMMARY_SMALL_FILL,
-        },
-    )
-    previous_italic = False
-    for text, italic in SUMMARY_EXPLAINER_RUNS:
-        attributes: dict[str, str] = {"font-style": "italic"} if italic else {}
-        # An upright run following an italic one needs the same thin space the cards use.
-        if previous_italic and not italic:
-            attributes["dx"] = kern
-        sub(explainer, "tspan", attributes).text = text
-        previous_italic = italic
-    sub(
-        root,
-        "text",
-        {
-            "data-feature": "citations",
-            "x": heading_x,
-            "y": format_svg_number(canvas.citations_baseline),
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_FOOTER_SIZE,
-            "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": SUMMARY_SMALL_FILL,
-        },
-    ).text = SUMMARY_CITATIONS
-    sub(
-        root,
-        "text",
-        {
-            "data-feature": "credit",
-            "x": heading_x,
-            "y": format_svg_number(canvas.credit_baseline),
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_FOOTER_SIZE,
-            "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": SUMMARY_SMALL_FILL,
-        },
-    ).text = SUMMARY_CREDIT
-    sub(
-        root,
-        "text",
-        {
-            "data-feature": "release-stamp",
-            "x": heading_x,
-            "y": format_svg_number(canvas.stamp_baseline),
-            "text-anchor": "middle",
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_FOOTER_SIZE,
-            "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": SUMMARY_SMALL_FILL,
-        },
-    ).text = identity.stamp
+    by_row = {transition.row: transition for transition in transitions}
     for item in built:
-        _append_summary_card(root, item, spec=spec, canvas=canvas)
-    return serialize_svg(root)
+        row, _column = composite.card_position(item.frontier.n)
+        _append_summary_card(
+            root,
+            item,
+            spec=spec,
+            canvas=canvas,
+            grid_transition=by_row.get(row + 1),
+            recent=contributions.get(item.frontier.n),
+        )
+    for transition in transitions:
+        if transition.grid.first_n in composite.numbers:
+            _append_grid_transition_marker(root, transition, canvas=canvas)
+    return serialize_svg(
+        root, embedded_print_fonts=atlas_print_font.embedded_css(), compact=True
+    )
 
 
 def _png_chunks(content: bytes) -> list[tuple[bytes, bytes]]:
@@ -2282,23 +3371,9 @@ def _png_matches_summary(export: RasterExport, svg_text: str) -> bool:
     )
 
 
-def _cropped_svg(svg_text: str, export: RasterExport) -> str:
-    """The SVG an export is drawn from: the drawing itself, or a shortened viewport.
-
-    An SVG viewport clips, so narrowing `viewBox` and `height` on the root is the whole
-    crop: the rasteriser draws the band and never draws what falls outside it. Only the
-    root is touched, and only for an export that asks, so the receipt stamped into every
-    raster still names the sha256 of the one drawing all three come from.
-    """
-    if export.crop_units is None:
-        return svg_text
-    root = ET.fromstring(svg_text)
-    root.set("height", str(export.crop_units))
-    root.set("viewBox", f"0 0 {export.canvas_width} {export.crop_units}")
-    return ET.tostring(root, encoding="unicode")
-
-
-def _update_png_export(export: RasterExport, svg_text: str) -> None:
+def _update_png_export(
+    export: RasterExport, svg_text: str, *, full_png: bytes | None = None
+) -> None:
     """Draw one raster from the SVG, with the same rasteriser that draws the PDF.
 
     ImageMagick used to draw the preview, and its own SVG renderer restarts each
@@ -2310,36 +3385,64 @@ def _update_png_export(export: RasterExport, svg_text: str) -> None:
 
     The size guard is what stops a resized canvas from leaving a stale export behind:
     the receipt names the canvas, so a raster drawn at another size is refused rather
-    than written.
+    than written. Crops are always derived again, since a matching size and receipt
+    cannot distinguish an old shortened-viewport render from the full raster's pixels.
     """
-    if _png_matches_summary(export, svg_text):
+    if export.crop_units is None and _png_matches_summary(export, svg_text):
         return
-    stamped = png_export_bytes(export, svg_text)
+    stamped = png_export_bytes(export, svg_text, full_png=full_png)
+    if export.path.is_file() and export.path.read_bytes() == stamped:
+        return
     with atomic_output_file(export.path, make_parents=True) as temporary:
         temporary.write_bytes(stamped)
 
 
-def png_export_bytes(export: RasterExport, svg_text: str) -> bytes:
+def png_export_bytes(
+    export: RasterExport, svg_text: str, *, full_png: bytes | None = None
+) -> bytes:
     """One raster of the SVG, with its receipt, as bytes and without writing it.
 
     Apart from `_update_png_export` so the cost of drawing an export can be measured
     (`devtools.measure_release_assets`) by the code that draws it, without touching the
-    retained file.
+    retained file. A crop reuses a validated full raster at the same scale when supplied;
+    otherwise it draws the complete SVG before retaining the requested pixels.
     """
-    # SVG construction and receipt checks do not need the native Cairo library.
-    import cairosvg  # noqa: PLC0415
+    source_sha256 = hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+    if export.crop_units is not None:
+        from PIL import Image  # noqa: PLC0415
 
-    content = cairosvg.svg2png(
-        bytestring=_cropped_svg(svg_text, export).encode("utf-8"),
-        output_width=export.width,
-        output_height=export.height,
-        background_color="white",
-    )
-    if not isinstance(content, bytes):  # pragma: no cover - cairosvg returns bytes here
-        raise TypeError("cairosvg returned no PNG bytes")
-    stamped = _png_with_summary_source(
-        content, hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
-    )
+        if not 0 < export.crop_units <= export.canvas_height:
+            raise ValueError(f"PNG {export.role} crop falls outside its full canvas")
+        if full_png is None:
+            full_png = png_export_bytes(replace(export, crop_units=None), svg_text)
+        full_receipt = png_summary_receipt(full_png)
+        expected_receipt = (
+            export.width,
+            export.canvas_height * export.scale,
+            source_sha256,
+        )
+        if full_receipt != expected_receipt:
+            raise ValueError(
+                f"PNG {export.role} crop source dimensions or SVG receipt do not "
+                "match its full canvas"
+            )
+        with Image.open(BytesIO(full_png)) as full, BytesIO() as output:
+            full.crop((0, 0, export.width, export.height)).save(output, format="PNG")
+            content = output.getvalue()
+    else:
+        # SVG construction and receipt checks do not need the native Cairo library.
+        import cairosvg  # noqa: PLC0415
+
+        atlas_print_font.register_print_fonts()
+        content = cairosvg.svg2png(
+            bytestring=svg_text.encode("utf-8"),
+            output_width=export.width,
+            output_height=export.height,
+            background_color="white",
+        )
+        if not isinstance(content, bytes):  # pragma: no cover - cairosvg returns bytes here
+            raise TypeError("cairosvg returned no PNG bytes")
+    stamped = _png_with_summary_source(content, source_sha256)
     width, height, _source_sha256 = png_summary_receipt(stamped)
     if (width, height) != (export.width, export.height):
         raise ValueError(
@@ -2351,8 +3454,16 @@ def png_export_bytes(export: RasterExport, svg_text: str) -> bytes:
 
 def _update_png_exports(canvas: CompositeCanvas, svg_text: str) -> None:
     """Redraw every raster of one composite from the SVG this run produced."""
+    full_exports: dict[int, RasterExport] = {}
     for export in canvas.rasters:
-        _update_png_export(export, svg_text)
+        full_export = full_exports.get(export.scale) if export.crop_units is not None else None
+        _update_png_export(
+            export,
+            svg_text,
+            full_png=full_export.path.read_bytes() if full_export is not None else None,
+        )
+        if export.crop_units is None:
+            full_exports[export.scale] = export
 
 
 def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]:
@@ -2380,6 +3491,7 @@ def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]
 def _build_case(n: int, plan: SourcePlan) -> BuiltCase:
     case = _frontier_case(n)
     witness = _build_witness(case, plan)
+    witness = orient_atlas_witness(witness)
     problems = check_witness_semantics(witness)
     if problems:
         raise ValueError(f"{witness['id']}: {problems[0]}")
@@ -2610,8 +3722,9 @@ def _raster_record(export: RasterExport, derived_from: str) -> dict:
 def _composite_record(canvas: CompositeCanvas) -> dict:
     """One composite, as the manifest describes it.
 
-    Every number here is computed from the specification, so the record cannot claim a
-    canvas or an export size the drawing does not have.
+    Logical rows and columns come from the specification; canvas dimensions come from
+    its bound segment plan. Production callers resolve that plan before recording it,
+    so the record cannot claim an export size the drawing does not have.
     """
     composite = canvas.spec
     svg_path = f"atlas/known-best/{composite.svg_name}"
@@ -2657,9 +3770,10 @@ def _expected_outputs(workers: int) -> tuple[dict[Path, str], dict]:
         outputs[item.frontier.path] = _frontier_with_witness(
             item.frontier, str(item.witness["id"])
         )
+    entries = [_manifest_entry(item) for item in built]
     manifest = _manifest_document(
-        [_manifest_entry(item) for item in built],
-        [_composite_record(canvas) for canvas in COMPOSITES],
+        entries,
+        [_composite_record(canvas) for canvas in resolved_composites(entries)],
     )
     outputs[MANIFEST] = _manifest_text(manifest)
     return outputs, manifest
@@ -2755,18 +3869,27 @@ def update(workers: int = 1) -> None:
     ryxu_houses.guard_house_outputs(list(CORPUS.numbers))
     gupta_houses.guard_house_outputs(list(CORPUS.numbers))
     evand_houses.guard_house_outputs(list(CORPUS.numbers))
-    # The figure record decides every claim a drawing states, so refresh it first and
-    # drop the memo, or the comparison below would read a stale one.
-    build_composite_figure_data.update()
-    _figure_entries.cache_clear()
     clear_build_caches()
-    outputs, _manifest = expected_outputs(workers)
+    outputs, manifest = expected_outputs(workers)
+    # Derive the figure from the geometry being published, not the old manifest.
+    # Finish both producers and serialization before the first retained-file write.
+    figure = build_composite_figure_data.build_record(
+        atlas_entries={entry["n"]: entry for entry in manifest["atlas"]["entries"]}
+    )
+    outputs = {
+        **outputs,
+        build_composite_figure_data.RECORD: retained_json.dumps(
+            figure, sort_keys=True, ensure_ascii=False
+        ),
+    }
     for path, content in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
         path.parent.mkdir(parents=True, exist_ok=True)
         if path.is_file() and path.read_text(encoding="utf-8") == content:
             continue
         with atomic_output_file(path) as temporary:
             temporary.write_text(content, encoding="utf-8")
+    _figure_entries.cache_clear()
+    load_rigidity_context.cache_clear()
     print(
         f"known-best atlas updated: {CORPUS.count} witnesses, {CORPUS.count} house "
         f"renderings, {CORPUS.count} frontier links; the {len(COMPOSITES)} "
@@ -2781,7 +3904,9 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
 
     Source selection and displayed side must agree with the old manifest outside the
     requested scope. Each selected witness is rebuilt through the ordinary strict
-    producer; all other manifest entries and geometry files are preserved.
+    producer; all other manifest and figure entries and geometry files are preserved.
+    Derivation and serialization finish before publishing any file, so a refused scope
+    or failed selected build leaves every retained output unchanged.
     """
     squish_house.guard_house_outputs(list(numbers))
     refinement_houses.guard_house_outputs(list(numbers))
@@ -2791,8 +3916,6 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
     selected = set(numbers)
     if not selected or len(selected) != len(numbers) or not selected <= set(CORPUS.numbers):
         raise ValueError("selected atlas refresh requires unique corpus counts")
-    build_composite_figure_data.update()
-    _figure_entries.cache_clear()
     clear_build_caches()
     retained: list[dict] = json.loads(MANIFEST.read_text())["atlas"]["entries"]
     if [row["n"] for row in retained] != list(CORPUS.numbers):
@@ -2815,8 +3938,31 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
     built = built_cases(numbers, workers)
     replacement: dict[int, dict] = {item.frontier.n: _manifest_entry(item) for item in built}
     entries = [replacement.get(row["n"], row) for row in retained]
-    manifest = _manifest_document(entries, [_composite_record(canvas) for canvas in COMPOSITES])
+    prospective_figure = build_composite_figure_data.build_record(
+        atlas_entries={entry["n"]: entry for entry in entries}
+    )
+    retained_figure = load_figure_record()
+    figure_entries = {}
+    for name, figure in (
+        ("retained", retained_figure),
+        ("derived", prospective_figure["figure"]),
+    ):
+        rows = figure["entries"]
+        if [row["n"] for row in rows] != list(CORPUS.numbers):
+            raise ValueError(f"selected atlas refresh requires a complete {name} figure corpus")
+        figure_entries[name] = {row["n"]: row for row in rows}
+    for n in CORPUS.numbers:
+        if n not in selected and figure_entries["retained"][n] != figure_entries["derived"][n]:
+            raise ValueError(
+                f"unselected figure n={n} changed; use the complete atlas producer"
+            )
+    manifest = _manifest_document(
+        entries, [_composite_record(canvas) for canvas in resolved_composites(entries)]
+    )
     outputs = {
+        build_composite_figure_data.RECORD: retained_json.dumps(
+            prospective_figure, sort_keys=True, ensure_ascii=False
+        ),
         MANIFEST: _manifest_text(manifest),
         SOURCE_MANIFEST: _json_text(_source_index(plans)),
     }
@@ -2828,9 +3974,12 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
             item.frontier, str(item.witness["id"])
         )
     for path, text in outputs.items():
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with atomic_output_file(path) as temporary:
+        if path.is_file() and path.read_text(encoding="utf-8") == text:
+            continue
+        with atomic_output_file(path, make_parents=True) as temporary:
             temporary.write_text(text, encoding="utf-8")
+    _figure_entries.cache_clear()
+    load_rigidity_context.cache_clear()
     print(
         f"Selected atlas refreshed: {len(selected)} geometries; "
         f"{CORPUS.count - len(selected)} entries preserved"
@@ -2890,6 +4039,64 @@ def retained_identity(svg_text: str) -> CompositeIdentity:
     return CompositeIdentity(values[IDENTITY_REVISION_KEY], values[IDENTITY_DATE_KEY])
 
 
+def _without_composite_geometry(document: dict, envelope: str) -> dict:
+    unchanged = copy.deepcopy(document)
+    for composite in unchanged[envelope]["composites"]:
+        for key in ("columns", "rows", "layout"):
+            composite.pop(key, None)
+        for key in ("svg", "png_preview", "png_high_resolution", "png_link_preview_card"):
+            if key in composite:
+                composite[key].pop("width", None)
+                composite[key].pop("height", None)
+    return unchanged
+
+
+def update_composite_records() -> None:
+    """Refresh layout facts, refusing changes to cases, sources, or legend totals.
+
+    Read retained witnesses instead of re-deriving their feasibility receipts. Both
+    documents pass preflight before either is written, so a layout refresh cannot
+    silently import a data change or repair unrelated record drift.
+    """
+    figure_path = build_composite_figure_data.RECORD
+    retained_figure = json.loads(figure_path.read_text(encoding="utf-8"))
+    retained_manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    problems, entries = _retained_problems(
+        composite_records=retained_manifest["atlas"]["composites"]
+    )
+    if problems or entries is None:
+        raise ValueError(
+            "unrelated retained atlas discrepancies prevent a layout refresh:\n  "
+            + "\n  ".join(problems[:20])
+        )
+    expected_figure = build_composite_figure_data.build_record()
+    expected_entries = [_manifest_entry(case) for case in retained_cases(CORPUS.numbers)]
+    expected_manifest = _manifest_document(
+        expected_entries,
+        [_composite_record(canvas) for canvas in resolved_composites(expected_entries)],
+    )
+    for envelope, retained, expected in (
+        ("figure", retained_figure, expected_figure),
+        ("atlas", retained_manifest, expected_manifest),
+    ):
+        if _without_composite_geometry(retained, envelope) != _without_composite_geometry(
+            expected, envelope
+        ):
+            raise ValueError(
+                f"unrelated {envelope} facts differ; a layout refresh changes only geometry"
+            )
+    outputs = (
+        (figure_path, retained_json.dumps(expected_figure, sort_keys=True, ensure_ascii=False)),
+        (MANIFEST, _manifest_text(expected_manifest)),
+    )
+    for path, content in outputs:
+        if path.read_text(encoding="utf-8") != content:
+            with atomic_output_file(path) as temporary:
+                temporary.write_text(content, encoding="utf-8")
+    _figure_entries.cache_clear()
+    print("known-best composite records refreshed: layout only; case facts preserved")
+
+
 def update_composites() -> None:
     """Redraw both composites and every export, from the retained witnesses.
 
@@ -2910,7 +4117,7 @@ def update_composites() -> None:
         )
     cases = retained_cases(CORPUS.numbers)
     rasters = 0
-    for canvas in COMPOSITES:
+    for canvas in resolved_composites():
         svg_text = render_known_best_summary_svg(_cards(cases, canvas), canvas, identity)
         retained = canvas.svg_path
         if not retained.is_file() or retained.read_text(encoding="utf-8") != svg_text:
@@ -2988,7 +4195,9 @@ def check(workers: int = 1) -> None:
     )
 
 
-def _retained_problems() -> tuple[list[str], list[dict] | None]:
+def _retained_problems(
+    *, composite_records: Sequence[dict] | None = None
+) -> tuple[list[str], list[dict] | None]:
     """Everything the retained data records say about themselves, checked without geometry.
 
     This is the half of `check` that does not rebuild a case, and at `n=1..324` it is
@@ -3001,7 +4210,8 @@ def _retained_problems() -> tuple[list[str], list[dict] | None]:
     Returns the problems and, when the manifest is readable and covers the declared
     range, its entries. `None` means the sampled half has nothing to compare against and
     must not run: a missing manifest should be reported as a missing manifest rather than
-    as whatever the next reader of it raises.
+    as whatever the next reader of it raises. A layout refresh supplies the old
+    composite records so this preflight still catches every other manifest discrepancy.
     """
     scoped = [
         n
@@ -3042,7 +4252,12 @@ def _retained_problems() -> tuple[list[str], list[dict] | None]:
     if stated != list(CORPUS.numbers):
         return [f"manifest entries are not exactly {CORPUS.label}"], None
     problems: list[str] = []
-    rebuilt = _manifest_document(entries, [_composite_record(canvas) for canvas in COMPOSITES])
+    composites = (
+        list(composite_records)
+        if composite_records is not None
+        else [_composite_record(canvas) for canvas in resolved_composites(entries)]
+    )
+    rebuilt = _manifest_document(entries, composites)
     if _manifest_text(rebuilt) != retained:
         problems.append(
             f"stale {_relative(MANIFEST)}: everything but its entries is re-derived here"
@@ -3184,7 +4399,7 @@ def composite_findings(
     """
     problems: list[str] = []
     notes: list[str] = []
-    for canvas in COMPOSITES:
+    for canvas in resolved_composites():
         path = _relative(canvas.svg_path)
         if not canvas.svg_path.is_file():
             problems.append(f"missing {path}")
@@ -3291,9 +4506,17 @@ def _composite_label_problems(canvas: CompositeCanvas, root: ET.Element) -> list
         entry = entries[n]
         expected = {
             "packing-label": (str(n),),
-            "side-bound": (str(entry["side"]["display"]),),
+            "side-bound": (
+                _composite_bound_display(
+                    str(entry["side"]["display"]),
+                    canvas,
+                    degree=entry.get("exactness", {}).get("degree"),
+                ),
+            ),
             "lower-bound": (
-                (str(entry["lower"]["display"]),) if entry["lower"]["shown"] else ()
+                (_composite_bound_display(str(entry["lower"]["display"]), canvas),)
+                if entry["lower"]["shown"]
+                else ()
             ),
         }
         card = matching[0]
@@ -3313,7 +4536,7 @@ def _composite_label_problems(canvas: CompositeCanvas, root: ET.Element) -> list
 def _composite_edition_problems(
     canvas: CompositeCanvas, root: ET.Element, identity: CompositeIdentity
 ) -> list[str]:
-    """Compare the dateline and the version stamp with the composite's own record.
+    """Compare each mode's visible date and edition with the composite's own record.
 
     Both say which data the drawing shows. They are held to the record the drawing
     carries, not to the pin, so re-pinning the data revision leaves a composite right;
@@ -3322,17 +4545,15 @@ def _composite_edition_problems(
     """
     path = _relative(canvas.svg_path)
     problems: list[str] = []
-    for feature, expected in (
-        ("release", identity.dateline),
-        ("release-stamp", identity.stamp),
-    ):
+    expected_lines = (("release", ()), ("release-stamp", (identity.poster_stamp,)))
+    for feature, expected in expected_lines:
         actual = tuple(
             "".join(node.itertext())
             for node in root.iter(svg_tag("text"))
             if node.attrib.get("data-feature") == feature
         )
-        if actual != (expected,):
-            problems.append(f"{path} {feature} is {actual!r}; expected {(expected,)!r}")
+        if actual != expected:
+            problems.append(f"{path} {feature} is {actual!r}; expected {expected!r}")
             if feature == "release-stamp" and not any(
                 PUBLICATION_VERSION in text for text in actual
             ):
@@ -3452,7 +4673,7 @@ def report() -> None:
     actually pays for. `--check` is what says they are current.
     """
     print(f"known-best composites: {len(COMPOSITES)}")
-    for canvas in COMPOSITES:
+    for canvas in resolved_composites():
         composite = canvas.spec
         print(f"\n{composite.stem}  {composite.layout}")
         print(f"  encoding: {_encoding_summary(composite)}")
@@ -3505,6 +4726,12 @@ def parser() -> argparse.ArgumentParser:
         help="regenerate the data layer: witnesses, renderings, manifest, frontier links",
     )
     mode.add_argument(
+        "--update-composite-records",
+        action="store_true",
+        help="refresh composite layout records without rebuilding witnesses; "
+        "refuse changes to case facts before writing either record",
+    )
+    mode.add_argument(
         "--update-composites",
         action="store_true",
         help="redraw both composites and their PNG and PDF exports from the retained "
@@ -3541,6 +4768,13 @@ def parser() -> argparse.ArgumentParser:
         ),
     )
     command.add_argument(
+        "--n",
+        type=int,
+        nargs="+",
+        metavar="N",
+        help="with --update, refresh only these counts and preserve the retained remainder",
+    )
+    command.add_argument(
         "--jobs",
         type=int,
         metavar="N",
@@ -3559,6 +4793,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         raise SystemExit("--refresh requires --fetch")
     if args.sample and not args.check:
         raise SystemExit("--sample narrows --check")
+    if args.n is not None and not args.update:
+        raise SystemExit("--n narrows --update")
     if args.jobs is not None and args.jobs < 1:
         raise SystemExit("--jobs must be positive")
     # The count is resolved here and nowhere else: `worker_count` reads the machine when
@@ -3568,7 +4804,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.fetch:
         fetch_sources(refresh=args.refresh)
     elif args.update:
-        update(workers)
+        update_selected(args.n, workers) if args.n is not None else update(workers)
+    elif args.update_composite_records:
+        update_composite_records()
     elif args.update_composites:
         update_composites()
     elif args.check_composites:

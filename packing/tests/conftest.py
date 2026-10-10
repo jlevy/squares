@@ -13,7 +13,7 @@ def pytest_configure(config: pytest.Config) -> None:
     """Register the test-only pool lane and refuse missing configured test roots."""
     config.addinivalue_line(
         "markers",
-        "pool_heavy: test that uses the per-case process pool in an exclusive phase",
+        "pool_heavy: real internal execution pools or short-deadline real subprocess controls",
     )
     root = Path(str(config.rootpath))
     missing = [

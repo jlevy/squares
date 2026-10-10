@@ -1325,70 +1325,78 @@ it.
   remaining cells are already present in a hidden container.
   Images use native lazy loading, and `overview/atlas-grid.js` changes visibility after
   reader input. Each drawing has a 1000-unit frame, fine enough to show large.
-  The grid is the atlas’s default view; the triangle is the other (**Atlas views**,
-  below).
+  Triangle at Small is the atlas’s default; Grid remains available under the view tabs
+  (**Atlas views**, below).
 
 - **Atlas views.** The atlas is one set of tiles under two views, **Grid** and
   **Triangle**, chosen by a strip over the tiles (`atlas_view_tabs`): the section tabs’
-  strip (**Section tabs**, above) as a `tablist` of two buttons, Grid selected by
-  default and the one tab in the page’s tab order, with the arrow keys, Home and End
-  moving between the two and selecting the tab the focus lands on
-  (`overview/atlas-view.js`). The grid is the stylesheet’s alone, and the page is
-  rendered in it; the strip is present in the first response, and scripting handles its
-  controls. Without scripting, ordinary links reach all case records and the complete
-  frontier. The triangle sets the cases by the grid bound: row $k$ holds the $2k - 1$
-  cases $n = (k - 1)^2 + 1$ to $k^2$, the ones that need a square of side $k$, and ends
-  at $k^2$ on the right edge, so the perfect squares $1, 4, 9, 16, \ldots$ run down it;
-  those are the cases whose best packing is the $k \times k$ grid itself, and their
-  tiles are numbered in the text’s colour at the medium weight.
+  strip (**Section tabs**, above) as a `tablist` of two buttons in that order, Triangle
+  selected by default and the one tab in the page’s tab order, with the arrow keys, Home
+  and End moving between the two and selecting the tab the focus lands on
+  (`overview/atlas-view.js`). The page is rendered in Triangle; its static tile
+  positions and container arithmetic lay it out before the atlas scripts run.
+  The strip is present in the first response, and scripting handles its controls.
+  Without scripting, ordinary links reach all case records and the complete frontier.
+  The triangle sets the cases by the grid bound: row $k$ holds the $2k - 1$ cases
+  $n = (k - 1)^2 + 1$ to $k^2$, the cases covered by the same side-$k$ grid bound,
+  ending at $k^2$. The perfect squares $1, 4, 9, 16, \ldots$ are the cases whose best
+  packing is the $k \times k$ grid itself, and their tiles are numbered in the text’s
+  colour at the medium weight.
   Ten rows show the first hundred cases, the last 19 tiles wide; eighteen show all 324,
   the last 35 wide. A one-line key under the triangle said what the rows are until
   2026-10-02, when the owner dropped it as obvious (`think-l38m`), with the line under
   the expander that said every case is in the frontier survey and has a case record:
   each tile opens its case record, and the Frontier page is a page card.
-  The view is in the address as `?atlas=triangle` (the grid has no parameter), written
-  with `history.replaceState` so every other parameter and the fragment keep their
-  places, and read before any tile is placed, so a linked triangle never shows the grid
-  first. **Wrapping, by one rule at every width.** A line holds as many tiles as the
-  block’s width allows at the least tile width, `--site-atlas-tile-min` (1.625rem, 26px,
-  which keeps a tile over a pointer target’s 24px with its three-figure number legible
-  under it; 2.5rem, 40px, under 40rem or with a coarse pointer, for a finger), and never
-  more than the longest row holds.
-  A row wider than a line wraps in reading order, as text does: its first line is full,
-  from the row’s first case at the left edge; further full lines follow, each from the
-  left edge; and what is left over goes on its last line, right-aligned, so the row
-  still ends at $k^2$ on the right edge, in the same column as the rows that fit.
-  So 19 tiles at eight to a line are lines of 8, 8 and 3, the 3 ending at the square,
-  and a row that fits is one right-aligned line.
-  The next row always starts a new line, and where any row wraps the space over a new
-  row is 0.4 of a tile rather than 0.12, so a row’s lines read as one group.
-  Where some rows fit and the later ones wrap, as on a phone from row 5, the picture
-  reads as one column of squares down the right edge with the wrapped rows flowing in
-  from the left to meet it; the owner chose this over the earlier cut, which put the
-  remainder first and read back to front.
-  Where a case stands, `place(n, per)`, is one pure function of the case and the tiles a
-  line holds, tested in Node (`tests/node/overview_atlas_view`); the script writes each
-  tile’s line and column as custom properties, the stylesheet lays the tiles out from
-  them (`grid-area`), and the placement is redone on the frame after a resize and when
-  the expander opens or closes.
-  At Medium a tile is its line’s share of the block, `100cqi` over the tiles a line
-  holds and no wider than `--site-atlas-tile-max` (4.5rem), with its inset, its number
-  and the space over a row as fractions of it, so the triangle keeps its proportions.
-  Measured in Chromium: at 1280 pixels 63px tiles for the hundred and 34px for all 324,
-  no row wrapping; at 1024, 50 and 27px; at 768, 36px for the hundred, and 26px for all
-  324 with rows 14 to 18 wrapping at 26 to a line; at 390, 45px tiles at eight to a
-  line, rows 5 to 10 wrapping (`devtools.measure_atlas_views layout`). **The move.** A
-  change of view, and the expander’s change in either view, moves every tile from where
-  it was to where it is: one read of every tile’s box and of each element after the
-  tiles, the change of layout, one read more, then one Web Animation a tile on
-  `transform` alone, a translation and a scale about the tile’s corner, all started in
-  one batch for `--site-atlas-move-duration` (360ms) with `--site-atlas-move-easing` (an
-  ease-out). A tile outside the window before and after is not animated; a tile the
-  expander shows for the first time fades in; and what follows the tiles moves with
-  them, so nothing jumps under them.
-  Under `prefers-reduced-motion: reduce` the duration is 0ms and the view switches at
-  once. A second press mid-move reads the tiles where they have got to, cancels the first
-  move and starts from there, with the focus kept on the tab pressed.
+  The address names Grid as `?atlas=grid`; Triangle has no parameter and is selected
+  when the parameter is absent or invalid.
+  Existing `?atlas=triangle` links also open Triangle.
+  A change of view writes the address with `history.replaceState`, preserving every
+  other parameter and the fragment.
+  The head bootstrap selects the view before the body is painted, and its Grid selection
+  overrides the static Triangle markup.
+  **Complete rows at a readable scale.** Both views use the same scaled cell minimum,
+  `--site-atlas-cell-min` (6.4rem, 4.6rem under 40rem), and the same horizontal gaps,
+  `--site-atlas-cell-gap` (0.5rem, 0.35rem under 40rem). Grid’s viewport capacity sets
+  the drawing width in both views, even when it exceeds the longest bound row.
+  Triangle keeps every bound row complete, with its non-grid and grid segments side by
+  side and an extra separator of half the displayed drawing’s width.
+  Every perfect-square endpoint aligns to the canvas’s right edge.
+  Narrow screens pan the canvas inside the atlas without shrinking or breaking rows; the
+  initial scroll position shows the right edge before scripts run.
+  Each row reserves its drawing and count-caption height, without prose-image margins,
+  and the shared cell gap, 0.5rem on desktop and 0.35rem on a phone.
+  There is no blank logical-row padding.
+  Rows 1 and 2 have no non-grid prefix and need no horizontal separator.
+  The first retained axis-aligned grid packing in each row begins its grid segment
+  without an additional caption.
+  Its threshold comes from the manifest’s canonical `source.kind = exact-grid` entries
+  through `sqpack.known_best.grid_transitions`, which checks that each row has an
+  unbroken grid suffix and exposes both half-open segments.
+  This is separate from the derived drawing layer: row 8 starts at $n = 56$, and row 15
+  at $n = 212$. The web legend describes only tilt colors and contact shades.
+  `place(n, per, starts)` computes each tile’s complete row and local segment column,
+  tested against an independent layout in Node (`tests/node/overview_atlas_view`). The
+  script writes custom properties; the stylesheet places the tiles within the two
+  segment containers, whose static metadata matches placement before atlas scripts run.
+  Resize and the expander repeat the placement.
+  Grid flattens the segment containers into its ordinary layout.
+  A tile shares the block’s width after reserving the gaps, and uses Grid’s drawing
+  inset, so switching layouts preserves the drawing size.
+  At Medium, Grid holds ten tiles at 1280 pixels and four on a 390-pixel phone.
+  Triangle keeps that drawing width across ten complete rows, or eighteen when all 324
+  cases show. The controls and legend are centered above the scroll frame.
+  **The move.** A change of view, and the expander’s change in either view, moves every
+  tile from where it was to where it is: one read of every tile’s box and of each
+  element after the tiles, the change of layout, one read more, then one Web Animation a
+  tile on `transform` alone, a translation and a scale about the tile’s corner, all
+  started in one batch for `--site-atlas-move-duration` (360ms) with
+  `--site-atlas-move-easing` (an ease-out).
+  A tile outside the window before and after is not animated; a tile the expander shows
+  for the first time fades in; and what follows the tiles moves with them, so nothing
+  jumps under them. Under `prefers-reduced-motion: reduce` the duration is 0ms and the
+  view switches at once.
+  A second press mid-move reads the tiles where they have got to, cancels the first move
+  and starts from there, with the focus kept on the tab pressed.
   The final layout is the stylesheet’s, correct with no animation at all, and nothing in
   the block transitions its place (`transition: none` on the box of tiles, the drawings
   and the numbers): KPress’s reduced-motion rule gives every classed element a 0.01ms
@@ -1397,69 +1405,78 @@ it.
   `devtools.measure_atlas_views` measures the layouts (`layout`), times the moves
   (`move`) and pictures both (`shots`); `tests/test_site_atlas_views.py` holds the page
   to all of it in Chromium.
-  Timed at 1280 pixels, the median of five: the press’s handler runs 8ms for the hundred
-  cases and 24ms for all 324, with 64 and 225 tiles in the window moving over 383 and
-  420ms; the hundred miss no frame, and all 324 miss ten of 39 at 120Hz, the longest
-  18ms.
 
 - **Atlas sizes.** Beside the view tabs, in one row over the tiles that wraps under them
   on a phone, a second strip of the same tabs chooses the size of the tiles
-  (`atlas_size_tabs`, think-ht8t): **Small**, **Medium** and **Large**, Medium selected
+  (`atlas_size_tabs`, think-ht8t): **Small**, **Medium** and **Large**, Small selected
   by default and the strip’s one stop in the page’s tab order, with the keys of the view
-  tabs. Medium is the atlas as it was before it offered a choice; the page is rendered at
-  it, and without scripting the strip stays `hidden`. The size is one token,
-  `--site-atlas-scale` on the block (1, Small 0.667, Large 1.5), set by its
-  `data-atlas-size`, and applies in either view.
-  In the grid it scales the least cell, `--site-atlas-cell-min` (6.4rem, 4.6rem on a
-  phone): at 1280 pixels a line holds 15 tiles at Small, 10 at Medium and 7 at Large,
-  and on a phone 6, 4 and 3. In the triangle it scales the most a tile may be and, at
-  Small, the tile’s share of its line, never under the least tile, so Small keeps the
-  tiles a line holds and draws each smaller, centred.
-  Large holds fewer to a line, as many as tiles half as wide again as Medium’s leave
-  room for (`perLineAt`, tested in Node), so where the triangle already fills the block
-  its long rows wrap by the one rule: at 1280 pixels the hundred go from 19 to a line to
-  13, rows 8 to 10 wrapping, and all 324 from 35 to 23; on a phone the hundred go from 8
-  to 5. A block wide enough that Medium’s tiles stop at the most a tile may be lets
-  Large grow them first.
+  tabs. The page is rendered at Small.
+  The size is one token, `--site-atlas-scale` on the block (1, Small 0.667, Large 1.5),
+  set by its `data-atlas-size`, and applies in either view.
+  It scales the shared cell minimum, `--site-atlas-cell-min`, so both views fit more
+  tiles at Small and fewer at Large (`perLineAt`, tested in Node).
+  At 1280 pixels a line holds 15 tiles at Small, 10 at Medium and 7 at Large, and on a
+  390-pixel phone 6, 4 and 3. Triangle preserves that drawing width on complete,
+  right-aligned rows, with horizontal panning when needed.
   A change of size is a change of layout and moves every tile as a change of view does
   (**Atlas views**, above).
-  The size is in the address as `?size=small` or `?size=large` (Medium has none),
+  The size is in the address as `?size=medium` or `?size=large` (Small has none),
   written and read as the view is, before any tile is placed.
   `tests/test_site_atlas_views.py` reads each size in Chromium, and
   `devtools.measure_atlas_views` measures every layout at every size (`layout`), times
   the changes of size in each view (`move`) and pictures them (`shots`).
 
-- **Atlas marks.** A tile carries up to two marks beside its number, each hung out of
-  the flow so the number stays centred: the new-result star after it, and the
-  regularized layer’s badge before it.
-  The star is the site’s one star in its warm ink (`atlas_star`, `.site-star`), on every
-  case whose verified lower bound is a new result, the rule the frontier table’s Recent
-  column stars by (`render_frontier_page.recent_lower_bounds`, think-wwtt); it is hidden
-  from assistive technology, and the tile’s name ends “new result” instead, as a starred
-  row’s does in a table of results.
-  A case that `atlas/known-best/regularized/` keeps a derived view of (X-049) is drawn
-  from that view, the record’s exact frame with its nearly axis-aligned squares
-  straightened, each square shaded by the house rule on the regularized pose, and its
-  tile carries the layer’s badge, a dot in the accent, and says “regularized view” in
-  its name; every other case is drawn from its house rendering.
-  `devtools.render_regularized_atlas` draws those views from the layer’s index, so a
-  view the layer gains joins the atlas at the next render; its `--check` holds the
-  drawings to the index.
-  The tile opens the same case record as any other, whose drawing is the house one: the
-  regularized layer is the atlas’s view, not the record’s. Until 2026-10-04 the house
-  drawing was the default and a **House** and **Regularized** strip swapped a second
-  tile in for each such case; the owner dropped the choice for the regularized drawings
-  alone (think-k8x9), and the page stopped shipping the second set, 264 KB. A key under
-  the two strips, on a line of its own, names both marks in words, each beside its mark
-  as on a tile, “new result” and “regularized view”, the second a link to the atlas
-  README’s section on the layer (`atlas_legend`), in the support colour at the note
-  size, as the tables of results key their star: a star without a key reads as
-  decoration, and a regularized drawing is shown only labelled as one.
-  It ships `hidden` with the strips.
-  At the smallest tile, 26 pixels with a three-figure number, the star is set at 0.8 of
-  the number’s size and both marks stay inside their tile:
-  `devtools.measure_atlas_views` holds every layout to that (`mark_problems`), and
-  `tests/test_site_atlas_views.py` holds which tiles carry which mark to the records.
+- **Atlas scale.** A third strip chooses **Fixed**, **Row** or **Global** on the website
+  only. Fixed is selected by default and retains equal displayed enclosing-container
+  sizes. Row scales each drawing by its selected witness’s enclosing side divided by the
+  logical row’s grid side, $k = \lceil\sqrt{n}\rceil$; grid reference containers retain
+  the same displayed size across rows.
+  Where the actual container is smaller, Row shows a thin gray outline of the grid-sized
+  reference container.
+  The outline follows the normalized SVG container frame inside its image margin,
+  appears in both layouts, and disappears in Fixed and Global.
+  Global scales each drawing against the largest enclosing side among the cases
+  currently shown, recalculating when the atlas expands or collapses.
+  Row uses those logical groups in either view, independent of responsive wrapping.
+  Size still controls tile slots; scale changes only drawing size, preserving count
+  positions, complete rows and the regular-grid separator.
+  The drawing side comes from the canonical selected witness, including the regularized
+  view where it is the published drawing, rather than from a lower bound or an area
+  estimate. The address uses `?scale=row` or `?scale=global`; Fixed omits the parameter.
+  Control changes preserve size, view, unrelated parameters and the fragment.
+  Invalid values select Fixed.
+  Static ratios and the head bootstrap reserve the selected drawing scale before scripts
+  mount. The controls share the tabs’ keyboard behavior and give an accessible
+  explanation of each choice.
+  PDF drawing scales stay fixed.
+
+- **Atlas marks.** Overview tiles carry the centered case count.
+  Recent-result stars remain in individual case records, film facts and result tables.
+  Triangle’s grid segment starts with the ordinary count and its accessible name says
+  “first grid packing in row”.
+  Dimension and `GRID` captions belong to the print diagrams.
+  Counts use one size, including at the start of a grid segment.
+  Drawing sizes follow the same selected scale in both views.
+  Lower-bound statements show five decimal places, and their number-line labels two,
+  truncated downward without changing recorded values or the number line’s positions.
+  The centered key under the tabs contains only tilt-angle colors and full-side contact
+  shades, one entry in each left-aligned column.
+  The first two tilt swatches label their pinned angles as `90°` and `45°`. The complete
+  eight-item legend, including status counts, recency and algebraic degree, remains in
+  the printable diagrams.
+  The key uses the support colour at the note size (`atlas_legend`) and describes no
+  layout mechanics. A case with a retained derived view in
+  `atlas/known-best/regularized/` (X-049) uses that selected drawing directly, without a
+  website layer badge, label or legend link.
+  The index and atlas documentation keep the provenance.
+  `devtools.render_regularized_atlas` draws the selected views and its `--check`
+  verifies them against the index.
+  Each tile opens the same case record, whose drawing is the house rendering.
+  `devtools.measure_atlas_views` checks count centering, actual outline and count-ink
+  clearances, first-grid horizontal separation, uniform row pitch, complete rows and
+  their right endpoints; `tests/test_site_atlas_views.py` checks the selected counts
+  against the canonical manifest and verifies the initial CSS layout and actual
+  scroll-frame extent too.
 
 - **Action under a table or grid.** Where one control follows a table or a grid, it is
   the site’s one action button, `.site-action`, in a centred `.site-action-row`: the
@@ -1497,9 +1514,11 @@ it.
   expanded or not, since a step loads the neighbouring record in place and closing
   returns focus to the cell pressed.
   Without scripting the button’s row stays `hidden`, since it would do nothing.
-  In the triangle, expanding changes how many tiles a line holds, since the longest row
-  grows from 19 to 35, so the hundred move into their smaller places as the rest fade
-  in, by the same move a change of view makes (**Atlas views**, above).
+  In Triangle, expanding adds complete bound rows through row 18, whose 35 tiles retain
+  the same drawing size and horizontal separator.
+  The canvas widens inside its frame.
+  The new cases fade in, and any tiles whose positions change move as they do on a
+  change of view (**Atlas views**, above).
 
 - **Wide bleed.** A wide block (`.site-wide`) takes the wide track, `--site-wide`, less
   the page gutters (`--site-wide-gutter` on either side; **Spacing**, above).
@@ -1570,10 +1589,15 @@ it.
   (the owner, `think-7aar`, `think-necq`).
 
 - **Case badges.** A case’s properties have one mark on the site, the film’s badges:
-  optimal (O), exact (=), numerical (≈) and rigid (R, outlined when it is the
-  catalogue’s), each its glyph in a small square, solid or outlined
-  (`.site-atlas-badge`, `result_overview.badge_glyph`); a new result is the star and
-  what is open the outlined “?”. The visual summary lists them with their words.
+  optimal (O), exact (=), numerical (≈) and known rigid (one dark R), each its glyph in
+  a small square, solid or outlined (`.site-atlas-badge`,
+  `result_overview.badge_glyph`); a new result is the star and what is open the outlined
+  “?”. The visual summary lists them with their words.
+  Recent upper constructions, verified lower proofs and optimality each have independent
+  flags from `result_status.recent_contributions_by_case`, rendered in the new-result
+  ink. An optimality proof can therefore make O red while the historic upper construction
+  and equality numeral remain in ordinary ink, as for $n = 11$. The displayed bound
+  numeral follows its own contribution flag; R stays dark.
   Where a case is one line, a record’s head beside its status chip, a frontier row and a
   broad result’s list of cases under it, they are the glyphs alone, each named for a
   screen reader and in a tooltip (`result_overview.case_badges`, `.site-case-badges`;
@@ -1694,8 +1718,8 @@ it.
   `visualize.html`, the film alone at full size.
   A card’s caps label says what it is and the form it opens in, the heading’s two words:
   “Poster · PDF” twice and “Film · Video”.
-  The note under the cards, the star, the shorter film, the release and the SVGs, is the
-  section’s. The overview embeds no video, so nothing on it moves or fetches a film.
+  The note under the cards links the shorter film, the release and the SVGs.
+  The overview embeds no video, so nothing on it moves or fetches a film.
 
 - **The film.** The Visualize section’s Film tab, `visualize.html`, is the n = 1 to 324
   film at full size directly under the section tabs, with no page title and no subtitle
@@ -2164,14 +2188,13 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   verified columns apply.
   Each table of results keeps its own key to the star, since a star without one reads as
   decoration: the legend under it shows the star as “new result” (`rung_legend`), and
-  the Results page’s prose says what it marks (`star_legend`). The atlas note links the
-  recent table, and its legend, in place of a third.
-  The Frontier page opens with the survey’s account, its audit, its recent counts and
-  the seventeen-square history, and ends its prose with the key to its columns, beside
-  the table. The way onward follows the section’s shape: a section whose key element is a
-  table or a grid ends in the one action button (**Action under a table or grid**,
-  below), and a section that is prose leads on with direct cards (**Cards**, above), as
-  The Squares Project does with its page cards.
+  the Results page’s prose says what it marks (`star_legend`). The Frontier page opens
+  with the survey’s account, its audit, its recent counts and the seventeen-square
+  history, and ends its prose with the key to its columns, beside the table.
+  The way onward follows the section’s shape: a section whose key element is a table or
+  a grid ends in the one action button (**Action under a table or grid**, below), and a
+  section that is prose leads on with direct cards (**Cards**, above), as The Squares
+  Project does with its page cards.
   The page cards under The Squares Project are the site’s reading and working pages, the
   Frontier page alone on the first line, then the three papers and the workbench two to
   a line (**Card sizes**, above); the Results page is reached from Recent Results.
@@ -2532,7 +2555,7 @@ The front is, in order:
   addresses as plain links, the version plain.
 
   ```
-  From the original proof by **Queuingtheorydotcom**
+  From the original proof by **Mannaseh Ahmed**
   github.com/Queuingtheorydotcom/11SquaresOptimal
 
   Human oversight: **Joshua Levy**
@@ -2630,7 +2653,7 @@ keeps.
 | --- | --- | --- |
 | I | `n11-lower-bounds-explainer` | The project’s point and 2-of-3 certificates: T-018, T-025, T-026 |
 | II | `n11-threshold-bound-review` | Kleddamag’s `s(11) > 31/8` (T-037): k-of-m charges, parents with strict cores over angle rows, the exact sweep |
-| III | `n11-optimality-review` | Queuingtheorydotcom’s `s(11) = T` (T-060): cover, pose invariant, charge transfer, symmetry, capture, isolation |
+| III | `n11-optimality-review` | Ahmed’s `s(11) = T` (T-060): cover, pose invariant, charge transfer, symmetry, capture, isolation |
 
 - **Every paper stands alone, and each concept has one owner.** One paper derives a
   concept in full; another gives a recap of at most a paragraph that links the owner’s

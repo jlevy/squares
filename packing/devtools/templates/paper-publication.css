@@ -1254,9 +1254,11 @@ html[data-kpress-math-pending]
     max-width: 100%;
   }
 
-  /* The hundred-packing atlas gets a page of its own. With 0.75in vertical
-     margins, its full six-inch width leaves room for the caption. Remove the
-     stage's side padding and the old height cap that narrowed the graphic. */
+  /* Keep the complete hundred-packing atlas and caption on one Letter page
+     (think-yabp). The 2260x4023 portrait drawing overflows at the six-inch text
+     width. A 6.75in height leaves 2.75in of the 9.5in content box for the caption,
+     stage padding and figure margins. Auto width/height retain its true aspect
+     ratio; the linked standalone PDF keeps the full-size printable drawing. */
   .cert-page .stage:has(img[src$="known-best-1-100.svg"]) {
     padding-inline: 0;
   }
@@ -1264,8 +1266,9 @@ html[data-kpress-math-pending]
     width: 100%;
   }
   .cert-page figure img[src$="known-best-1-100.svg"] {
-    max-height: none;
-    width: 100%;
+    max-height: 6.75in;
+    width: auto;
+    height: auto;
   }
 
   /* Link targets are deliberately not spelled out after each link: a URL set in

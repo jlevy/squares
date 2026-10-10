@@ -20,8 +20,9 @@ The rules:
   `OPTIMALITY_REVIEW_REVISED`),
   and held to git here, so it is changed in the commit that changes the article and
   cannot stand still under one.
-- **A poster's dateline is the date of the data commit it was drawn from**, which the
-  poster records (`build_known_best_atlas.CompositeIdentity`).
+- **A composite's visible date is the date of the data commit it was drawn from**,
+  which it records (`build_known_best_atlas.CompositeIdentity`). The grid figure
+  prints a dateline; the triangle poster puts the date beside its closing edition.
 - **A PDF's `CreationDate` and `ModDate` are the date its face gives, at noon UTC**, and
   never the build clock: the poster's data date, the paper's revised date.
 - **A date a person asserts stays typed**, and is listed here with what holds it: an
@@ -160,15 +161,29 @@ def _poster_rows() -> list[Row]:
             day: str | None = release.commit_date(REPO, identity.data_revision)
         except RuntimeError:
             day = None
+        expected_identity = (
+            None if day is None else atlas.CompositeIdentity(identity.data_revision, day)
+        )
+        date_label = "edition date" if canvas.information_in_corner else "dateline"
+        shown_date = (
+            identity.formatted_date if canvas.information_in_corner else identity.dateline
+        )
+        expected_date = (
+            None
+            if expected_identity is None
+            else (
+                expected_identity.formatted_date
+                if canvas.information_in_corner
+                else expected_identity.dateline
+            )
+        )
         rows.append(
             Row(
-                f"{stem} dateline (SVG, PNG, PDF)",
-                identity.dateline,
+                f"{stem} {date_label} (SVG, PNG, PDF)",
+                shown_date,
                 f"its record: data of {identity.data_revision[:12]}",
                 "the date of the data commit it was drawn from",
-                None
-                if day is None
-                else atlas.CompositeIdentity(identity.data_revision, day).dateline,
+                expected_date,
                 "git cannot date the commit here",
             )
         )
@@ -178,7 +193,7 @@ def _poster_rows() -> list[Row]:
         expected = render_composite_pdf.pdf_date_text(date.fromisoformat(identity.data_date))
         rows.append(
             Row(
-                f"{stem}.pdf CreationDate, ModDate",
+                f"{render_composite_pdf.composite_pdf(stem).name} CreationDate, ModDate",
                 ", ".join(sorted(set(stated.values()))) or "none",
                 "set by render_composite_pdf from the SVG's record",
                 "the poster's data date, at noon UTC",

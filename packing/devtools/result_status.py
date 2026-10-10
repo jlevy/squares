@@ -34,9 +34,15 @@ from __future__ import annotations
 import argparse
 import re
 from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
 from datetime import date
+from functools import cache
 from pathlib import Path, PurePosixPath
-from typing import Any
+from types import MappingProxyType
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from devtools.build_bound_citations import Register
 
 REPO = Path(__file__).resolve().parents[2]
 
@@ -82,6 +88,87 @@ def _rank(rung: object) -> int:
 
 Record = Mapping[str, Any]
 Evidence = Mapping[str, Mapping[str, Any]]
+
+
+@dataclass(frozen=True, slots=True)
+class RecentContributions:
+    """Which displayed contributions originate within the shared recent-result window.
+
+    These flags date contributions, not their subsequent verification. An upper flag
+    leaves the construction's reported/verified status alone; lower and optimal refer
+    to the verified proof lane. Renderers can therefore accent each bound and the
+    optimality mark independently.
+    """
+
+    upper: bool
+    lower: bool
+    optimal: bool
+
+    @property
+    def any(self) -> bool:
+        return self.upper or self.lower or self.optimal
+
+
+def recent_contributions(n: int, case: Record, register: Register) -> RecentContributions:
+    """Date the current construction and proof from their original typed provenance.
+
+    The citation module owns the date cutoff and the proof-origin rule. In particular,
+    a new replay of a historical proof retains the original source's date. Upper
+    recency likewise follows the reported construction, never a new certificate of it.
+    A recent lower proof also contributes optimality only when the frontier explicitly
+    declares the case proved; rounded equality is not an optimality certificate.
+    """
+    from devtools import build_bound_citations as citations  # noqa: PLC0415
+    from sqpack.assurance import bounds_agree_at_declared_precision  # noqa: PLC0415
+
+    reported = case["reported_upper_bound"]
+    verified = case["verified_upper_bound"]
+    certificate = citations.own_evidence(verified["evidence"], register)
+    is_grid = not certificate and bounds_agree_at_declared_precision(reported, verified)
+    construction = citations.own_evidence(reported["evidence"], register)
+    if is_grid or not construction:
+        upper = False
+    elif any(
+        citations.is_novel_first_party(register.evidence[item], "upper-bound")
+        for item in construction
+    ):
+        upper = True
+    else:
+        source_key = reported.get("source_key")
+        if source_key not in register.sources:
+            raise ValueError(
+                f"n={n}: upper construction has no bibliography source: {source_key}"
+            )
+        upper = citations.is_recent(register.sources[source_key])
+
+    origin = citations.lower_origin(n, case["verified_lower_bound"], register)
+    lower = bool(
+        origin
+        and origin.recent
+        and all(
+            register.evidence[item].get("assurance") == "verified"
+            and register.evidence[item].get("claim") in {"lower-bound", "exact-value"}
+            and register.evidence[item].get("replay_status") != FAILED_REPLAY
+            for item in origin.own
+        )
+    )
+    return RecentContributions(
+        upper=upper, lower=lower, optimal=lower and case["status"] == "proved"
+    )
+
+
+@cache
+def recent_contributions_by_case() -> Mapping[int, RecentContributions]:
+    """The atlas corpus's contribution flags, loaded once for a renderer invocation."""
+    from devtools import build_bound_citations as citations  # noqa: PLC0415
+
+    register = citations.load_register()
+    return MappingProxyType(
+        {
+            n: recent_contributions(n, citations.load_case(n), register)
+            for n in citations.CORPUS.numbers
+        }
+    )
 
 
 def open_issues(record: Record, evidence: Evidence) -> list[str]:

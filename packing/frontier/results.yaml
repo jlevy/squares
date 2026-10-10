@@ -5193,12 +5193,12 @@ results:
       unique root in `(9/25, 37/100)` of `5u⁸−10u⁷−2u⁶+14u⁵+12u⁴−6u³+2u²+2u−1 = 0`.
       Independent rotations and boundary contact are allowed.
 
-      The proof, published by Queuingtheorydotcom on 29 September 2026, is confirmed here
+      The proof, published by Ahmed on 29 September 2026, is confirmed here
       by a re-implementation sharing components with the source -- complete repository
       geometric executions on kernels the source also bundles -- and a mapped mathematical
       audit.
 
-      Queuingtheorydotcom,
+      Ahmed,
       [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c),
       Astra-assisted work building on Squares Project and Kleddamag. The matching construction
       is Trump's.
@@ -5212,7 +5212,7 @@ results:
       by: Astra-max complete mathematical review and coordinator integration
     novelty: previously-published
     attribution:
-      source_keys: ['[Queuingtheorydotcom n11 optimality 2026]']
+      source_keys: ['[Ahmed n11 optimality 2026]']
       published: '2026-09-29'
     evidence: [E-n011-global-optimality-report, E-n011-global-optimality-independent, E-n011-lean-formalization-report]
     composition: >-
@@ -5304,11 +5304,11 @@ results:
 
       2026-10-06: the Lean 4 formalization in
       [11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) is
-      imported (bead think-8spq). Its author, Queuingtheorydotcom, who posts on X as
+      imported (bead think-8spq). Its author, Ahmed, who posts on X as
       @ManassehA06, announced that day that the optimality "has been formalized in lean
       thanks to Astra and Claude", thanking Joshua Levy, Kleddamag, wand125, Guzhou0806 and
       ctjlewis; the retained first post of the thread does not name the repository. Its
-      acknowledgements credit Queuingtheorydotcom, EvolvingPrograms and ctjlewis, wand125,
+      acknowledgements credit Ahmed, EvolvingPrograms and ctjlewis, wand125,
       Benjamin Gurevitch, Julian-JJ and Guzhou0806.
 
       Joshua Levy [quoted the announcement](https://x.com/ojoshe/status/2107513739222380935)
@@ -11644,8 +11644,8 @@ results:
       by: docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md (U-5; the registration proposed S4)
     novelty: apparently-novel
     builds_on:
-      credit: [Queuingtheorydotcom]
-      source_keys: ['[Queuingtheorydotcom n11 optimality 2026]']
+      credit: [Ahmed]
+      source_keys: ['[Ahmed n11 optimality 2026]']
     evidence: [E-n011-optimum-uniqueness]
     composition: >-
       One entry, E-n011-optimum-uniqueness, proof-audited, which cites the completed

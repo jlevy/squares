@@ -52,6 +52,7 @@
     "packing/tests/test_assemble_site.py": 0.019,
     "packing/tests/test_assembly_coverage.py": 0.146,
     "packing/tests/test_atlas_contact_shades.py": 0.419,
+    "packing/tests/test_atlas_orientation.py": 13.943,
     "packing/tests/test_audit_corner_dual_salvage.py": 0.068,
     "packing/tests/test_audit_ds7_lower_bounds.py": 2.987,
     "packing/tests/test_audit_evand_mixed_covers.py": 16.826,
@@ -312,6 +313,7 @@
     "packing/tests/test_known_best_composites.py": 1.044,
     "packing/tests/test_known_best_contact_overlays.py": 0.956,
     "packing/tests/test_known_best_families.py": 0.502,
+    "packing/tests/test_known_best_grid_transitions.py": 0.01,
     "packing/tests/test_known_best_n011_rational_control.py": 0.868,
     "packing/tests/test_known_best_squish.py": 27.014,
     "packing/tests/test_lifted_q7_history.py": 0.445,
@@ -508,6 +510,7 @@
     "packing/tests/test_read_n17_widened_lp.py": 0.903,
     "packing/tests/test_read_tier_walls.py": 0.023,
     "packing/tests/test_readme.py": 0.082,
+    "packing/tests/test_recent_contributions.py": 0.731,
     "packing/tests/test_recent_results.py": 3.156,
     "packing/tests/test_reconcile_n17_issue_patterns.py": 8.613,
     "packing/tests/test_rectangle_ceiling.py": 0.588,
@@ -521,6 +524,7 @@
     "packing/tests/test_rectangle_rust_verifier_ab.py": 0.004,
     "packing/tests/test_rectangle_verifier_parity.py": 0.014,
     "packing/tests/test_refinement_custody.py": 32.833,
+    "packing/tests/test_refresh_atlas_orientation.py": 0.015,
     "packing/tests/test_regenerate_sites1_checkpoint.py": 0.06,
     "packing/tests/test_register_couzo_followup_report.py": 5.502,
     "packing/tests/test_register_couzo_refinement_report.py": 3.426,
@@ -569,6 +573,7 @@
     "packing/tests/test_retained_json_layout.py": 0.095,
     "packing/tests/test_retained_patches_apply.py": 0.002,
     "packing/tests/test_review_trump_local_theorem.py": 1.489,
+    "packing/tests/test_rigidity_status.py": 2.795,
     "packing/tests/test_rounded_measure_audit.py": 1.284,
     "packing/tests/test_run_arm_sweep.py": 1.176,
     "packing/tests/test_run_basin_hopping.py": 1.282,
@@ -725,6 +730,24 @@
     131.0
   ],
   "local_admissions": [
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_atlas_orientation.py",
+        "packing/tests/test_known_best_grid_transitions.py",
+        "packing/tests/test_recent_contributions.py",
+        "packing/tests/test_refresh_atlas_orientation.py",
+        "packing/tests/test_rigidity_status.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/atlas-cleanups-2026-10-09.json",
+          "provenance": {},
+          "tests": 64
+        }
+      ]
+    },
     {
       "method": "successful-unsharded-unfiltered-whole-module-local-reports",
       "aggregation": "per-file-geometric-mean",

@@ -1,0 +1,75 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:RigiditySources/v1
+title: Dated sources and alternate witnesses for rigidity assessments
+type: object
+additionalProperties: false
+required: [recorded_at, recording_event, date_policy, evidence_dates, source_assertions, alternatives]
+properties:
+  recorded_at: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+  recording_event: {type: string, minLength: 1}
+  date_policy: {type: string, minLength: 1}
+  evidence_dates:
+    type: object
+    additionalProperties: false
+    patternProperties:
+      '^E-[a-z0-9-]+$': {$ref: '#/$defs/dated_source'}
+  source_assertions:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required: [id, reference, url, property, assurance, requires_catalogue_annotation, determined_at, date_reference, date_note, targets]
+      properties:
+        id: {type: string, minLength: 1}
+        reference: {$ref: '#/$defs/reference'}
+        url: {type: [string, 'null']}
+        property: {const: locally-rigid}
+        assurance: {const: reported}
+        requires_catalogue_annotation: {type: boolean}
+        determined_at: {$ref: '#/$defs/partial_date'}
+        date_reference: {type: [string, 'null']}
+        date_note: {type: string, minLength: 1}
+        targets:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            additionalProperties: false
+            required: [n, reported_side, source_url]
+            properties:
+              n: {type: integer, minimum: 1}
+              reported_side: {type: string, minLength: 1}
+              source_url: {type: string, minLength: 1}
+  alternatives:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required: [n, selected_source_url, alternative_source_url, reported_side, property, assurance, reference, determined_at, date_reference, date_note, disposition, reason]
+      properties:
+        n: {type: integer, minimum: 1}
+        selected_source_url: {type: string, minLength: 1}
+        alternative_source_url: {type: string, minLength: 1}
+        reported_side: {type: string, minLength: 1}
+        property: {const: locally-rigid}
+        assurance: {const: reported}
+        reference: {$ref: '#/$defs/reference'}
+        determined_at: {$ref: '#/$defs/partial_date'}
+        date_reference: {type: [string, 'null']}
+        date_note: {type: string, minLength: 1}
+        disposition: {const: not-selected}
+        reason: {type: string, minLength: 1}
+$defs:
+  reference: {type: string, pattern: '^packing/'}
+  partial_date:
+    type: [string, 'null']
+    pattern: '^\d{4}(-\d{2}(-\d{2})?)?$'
+  dated_source:
+    type: object
+    additionalProperties: false
+    required: [reference, determined_at, date_reference, date_note]
+    properties:
+      reference: {$ref: '#/$defs/reference'}
+      determined_at: {$ref: '#/$defs/partial_date'}
+      date_reference: {type: [string, 'null']}
+      date_note: {type: string, minLength: 1}

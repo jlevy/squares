@@ -5886,13 +5886,14 @@ urls:
   lastmod: '2026-10-02'
   status: live
 - path: known-best-1-100.pdf
-  canonical: known-best-1-100.pdf
-  kind: asset-file
-  generator: devtools.render_n11_lower_bounds_explainer:write
-  producer: paper:n11-lower-bounds-explainer
+  canonical: square-packings-100-20261008.pdf
+  kind: copy
+  generator: devtools.preview_site:copy_moved_files
+  producer: assembly
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
   status: live
+  target: square-packings-100-20261008.pdf
 - path: known-best-1-100.png
   canonical: known-best-1-100.png
   kind: asset-file
@@ -5910,13 +5911,14 @@ urls:
   lastmod: '2026-10-02'
   status: live
 - path: known-best-1-324.pdf
-  canonical: known-best-1-324.pdf
-  kind: asset-file
-  generator: devtools.render_n11_lower_bounds_explainer:write
-  producer: paper:n11-lower-bounds-explainer
+  canonical: square-packings-324-20261008.pdf
+  kind: copy
+  generator: devtools.preview_site:copy_moved_files
+  producer: assembly
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
   status: live
+  target: square-packings-324-20261008.pdf
 - path: known-best-1-324.png
   canonical: known-best-1-324.png
   kind: asset-file
@@ -5983,7 +5985,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/n11-lower-bounds-explainer.md
   canonical: papers/n11-lower-bounds-explainer.md
@@ -5991,7 +5993,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/n11-lower-bounds-explainer.pdf
   canonical: papers/n11-lower-bounds-explainer.pdf
@@ -5999,7 +6001,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/n11-optimality-review.html
   canonical: papers/n11-optimality-review.html
@@ -6007,7 +6009,7 @@ urls:
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
   first_published: '2026-09-30'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/n11-optimality-review.md
   canonical: papers/n11-optimality-review.md
@@ -6015,7 +6017,7 @@ urls:
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
   first_published: '2026-09-30'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/n11-optimality-review.pdf
   canonical: papers/n11-optimality-review.pdf
@@ -6023,7 +6025,7 @@ urls:
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
   first_published: '2026-09-30'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/n11-threshold-bound-review.html
   canonical: papers/n11-threshold-bound-review.html
@@ -6031,7 +6033,7 @@ urls:
   generator: devtools.render_n11_threshold_bound_review:main
   producer: paper:n11-threshold-bound-review
   first_published: '2026-10-05'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/n11-threshold-bound-review.md
   canonical: papers/n11-threshold-bound-review.md
@@ -6039,7 +6041,7 @@ urls:
   generator: devtools.render_n11_threshold_bound_review:main
   producer: paper:n11-threshold-bound-review
   first_published: '2026-10-05'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/n11-threshold-bound-review.pdf
   canonical: papers/n11-threshold-bound-review.pdf
@@ -6047,7 +6049,7 @@ urls:
   generator: devtools.render_n11_threshold_bound_review:main
   producer: paper:n11-threshold-bound-review
   first_published: '2026-10-05'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-09'
   status: live
 - path: papers/square-packing-methods-survey.html
   canonical: papers/square-packing-methods-survey.html
@@ -7959,7 +7961,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-09-29'
+  lastmod: '2026-10-09'
   status: live
   identity:
     kind: optimality
@@ -7969,7 +7971,7 @@ urls:
     established: null
     attribution:
       source_keys:
-      - '[Queuingtheorydotcom n11 optimality 2026]'
+      - '[Ahmed n11 optimality 2026]'
       published: '2026-09-29'
     builds_on: null
     evidence:
@@ -7986,6 +7988,35 @@ urls:
     - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/README.md
     - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/axioms-public-theorems.json
     - docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md
+  amendments:
+  - date: '2026-10-09'
+    reason: Owner-requested attribution replacement from Queuingtheorydotcom to Mannaseh Ahmed (Ahmed
+      in citation credits); no theorem, status or bound change.
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 11
+      established: null
+      attribution:
+        source_keys:
+        - '[Queuingtheorydotcom n11 optimality 2026]'
+        published: '2026-09-29'
+      builds_on: null
+      evidence:
+      - E-n011-global-optimality-report
+      - E-n011-global-optimality-independent
+      - E-n011-lean-formalization-report
+      artifacts:
+      - packing/resources/web/n11-optimality-2026-09-29/source/PROOF.md
+      - packing/resources/web/n11-optimality-2026-09-29/README.md
+      - packing/resources/web/n11-optimality-2026-09-29/receipts/final-composition.json
+      - packing/resources/web/n11-optimality-2026-09-29/receipts/exclusion-inventory.json
+      - packing/resources/web/n11-optimality-2026-09-29/receipts/completion-inventory.json
+      - docs/project/reviews/review-2026-09-29-n11-optimality.md
+      - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/README.md
+      - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/axioms-public-theorems.json
+      - docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md
 - path: result/t-061.html
   canonical: result/t-061.html
   kind: result
@@ -10584,7 +10615,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-06'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-09'
   status: live
   identity:
     kind: uniqueness
@@ -10595,9 +10626,9 @@ urls:
     attribution: null
     builds_on:
       credit:
-      - Queuingtheorydotcom
+      - Ahmed
       source_keys:
-      - '[Queuingtheorydotcom n11 optimality 2026]'
+      - '[Ahmed n11 optimality 2026]'
     evidence:
     - E-n011-optimum-uniqueness
     artifacts:
@@ -10608,6 +10639,32 @@ urls:
     - docs/project/reviews/review-2026-10-03-n11-optimality-upstream-delta.md
     - docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md
     - docs/project/reviews/review-2026-10-06-n11-uniqueness-fix-check.md
+  amendments:
+  - date: '2026-10-09'
+    reason: Owner-requested attribution replacement from Queuingtheorydotcom to Mannaseh Ahmed (Ahmed
+      in citation credits); no theorem, status or bound change.
+    previous:
+      kind: uniqueness
+      scope:
+        n_values:
+        - 11
+      established: '2026-10-06'
+      attribution: null
+      builds_on:
+        credit:
+        - Queuingtheorydotcom
+        source_keys:
+        - '[Queuingtheorydotcom n11 optimality 2026]'
+      evidence:
+      - E-n011-optimum-uniqueness
+      artifacts:
+      - packing/resources/web/n11-optimality-2026-09-29/source/PROOF.md
+      - packing/resources/web/n11-optimality-2026-09-29/receipts/final-composition.json
+      - packing/devtools/templates/n11-optimality-review-article.md
+      - docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md
+      - docs/project/reviews/review-2026-10-03-n11-optimality-upstream-delta.md
+      - docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md
+      - docs/project/reviews/review-2026-10-06-n11-uniqueness-fix-check.md
 - path: result/t-113.html
   canonical: result/t-113.html
   kind: result
@@ -11883,6 +11940,22 @@ urls:
   producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
+  status: live
+- path: square-packings-100-20261008.pdf
+  canonical: square-packings-100-20261008.pdf
+  kind: asset-file
+  generator: devtools.render_n11_lower_bounds_explainer:write
+  producer: paper:n11-lower-bounds-explainer
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+- path: square-packings-324-20261008.pdf
+  canonical: square-packings-324-20261008.pdf
+  kind: asset-file
+  generator: devtools.render_n11_lower_bounds_explainer:write
+  producer: paper:n11-lower-bounds-explainer
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
   status: live
 - path: status.html
   canonical: frontier.html

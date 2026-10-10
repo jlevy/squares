@@ -2,8 +2,8 @@
 
 `devtools.measure_atlas_views` reads the homepage's atlas in a browser and says what is
 wrong with a layout (`layout_problems`). The browser tests (`test_site_atlas_views`) rely
-on that judgement, so this holds it: the triangle's rows and the lines a wrapped row is
-cut into, written here independently of the page's script, and each fault a layout may
+on that judgement, so this holds it: the triangle's complete right-aligned rows,
+written here independently of the page's script, and each fault a layout may
 have, planted in a layout that is otherwise right and required to be named. The same
 goes for the marks a tile carries (`mark_problems`): a new-result star or a regularized
 badge over its number or out of its tile, and a number pushed off its tile's centre.
@@ -56,23 +56,24 @@ def _report(view: str, per: int | None, tiles: list[dict[str, Any]]) -> dict[str
 
 
 def _triangle(last: int, per: int) -> dict[str, Any]:
-    """Cases 1 to `last` set as the triangle is at `per` tiles to a line: each row's
-    lines from `row_lines`, in reading order, every line full from the left but the
-    last, which holds what is left over and is set from the right."""
+    """Complete rows, right aligned on a canvas that keeps the viewport tile scale."""
     size = WIDTH / per
+    canvas_width = max(WIDTH, (2 * atlas.row_of(last) - 1) * size)
     tiles: list[dict[str, Any]] = []
-    top, n = 0.0, 1
     for k in range(1, atlas.row_of(last) + 1):
-        lines = atlas.row_lines(k, per)
-        top += 6 if k > 1 else 0
-        for index, count in enumerate(lines):
-            start = per - count if index == len(lines) - 1 else 0
-            assert index == len(lines) - 1 or count == per
-            for column in range(count):
-                tiles.append(_tile(n, LEFT + (start + column) * size, top, size))
-                n += 1
-            top += size + 12
-    return _report("triangle", per, [tile for tile in tiles if tile["n"] <= last])
+        count = 2 * k - 1
+        for index, n in enumerate(range((k - 1) ** 2 + 1, k * k + 1)):
+            tiles.append(
+                _tile(
+                    n,
+                    LEFT + canvas_width - count * size + index * size,
+                    (k - 1) * (size + 18),
+                    size,
+                )
+            )
+    report = _report("triangle", per, [tile for tile in tiles if tile["n"] <= last])
+    report["canvas"] = {**report["cells"], "right": LEFT + canvas_width, "width": canvas_width}
+    return report
 
 
 def _grid(last: int, per: int) -> dict[str, Any]:
@@ -113,29 +114,18 @@ def test_a_case_is_in_the_row_of_the_next_perfect_square() -> None:
         atlas.row_of(0)
 
 
-def test_a_row_is_cut_in_reading_order_into_full_lines_with_the_rest_last() -> None:
-    """Nineteen tiles at eight a line are 8, 8 and 3; a row that fits is one line; a row
-    that is a whole number of lines has no short one. Whatever the width, a row's lines
-    hold its 2k - 1 tiles, every line but the last is full, and the last holds between
-    one tile and a full line."""
-    assert atlas.row_lines(10, 8) == (8, 8, 3)
-    assert atlas.row_lines(4, 8) == (7,)
-    assert atlas.row_lines(4, 7) == (7,)
-    assert atlas.row_lines(5, 3) == (3, 3, 3)
-    assert atlas.row_lines(18, 26) == (26, 9)
-    assert atlas.row_lines(18, 35) == (35,)
+def test_a_bound_row_is_complete_at_every_viewport_capacity() -> None:
     for per in range(1, 41):
         for k in range(1, 19):
-            lines = atlas.row_lines(k, per)
-            assert sum(lines) == 2 * k - 1
-            assert all(count == per for count in lines[:-1])
-            assert 1 <= lines[-1] <= per
+            assert atlas.row_lines(k, per) == (2 * k - 1,)
+    assert atlas.row_lines(10, 8) == (19,)
+    assert atlas.row_lines(18, 26) == (35,)
     with pytest.raises(ValueError, match="no row"):
         atlas.row_lines(3, 0)
 
 
 @pytest.mark.parametrize(("last", "per"), [(100, 19), (324, 35), (100, 8), (324, 8), (324, 26)])
-def test_a_right_triangle_has_no_problem(last: int, per: int) -> None:
+def test_a_complete_right_aligned_triangle_has_no_problem(last: int, per: int) -> None:
     report = _triangle(last, per)
     assert atlas.layout_problems(report) == []
     found = atlas.summary(report)
@@ -161,29 +151,25 @@ def test_each_fault_of_a_layout_is_named() -> None:
 
     assert "past the window" in problems({**right, "overflow": 12})
     assert "still in a move" in problems({**right, "moving": 3})
-    assert "outside the block: [100]" in problems(_moved(right, 100, by=30))
+    assert "outside the block: [100]" in problems(_moved(right, 100, by=300))
     assert "n = 99 runs over n = 100" in problems(_moved(right, 99, by=20))
-    assert "perfect squares off the right edge: [81]" in problems(_moved(right, 81, by=-4))
-    # A whole line set over the one above it.
+    assert "row 9's line of n = 65 misses the right edge" in problems(_moved(right, 81, by=-4))
+    assert "row 1's line of n = 1 misses the right edge" in problems(_moved(right, 1, by=4))
+    # A whole logical row overlaps the one above it.
     over = right
-    for n in range(93, 101):
+    for n in range(82, 101):
         over = _moved(over, n, down=-30)
     assert "runs over the next" in problems(over)
-    # A wrapped row's full line set in from the left edge (its end then runs out of the
-    # block too, which is named as well).
+    # A complete row is indented away from its common right endpoint.
     shifted = right
-    for n in range(82, 90):
-        shifted = _moved(shifted, n, by=WIDTH / 16)
-    assert "row 10 wraps and its line of n = 82 starts 25.0px in" in problems(shifted)
-    # A wrapped row's leftover line set from the left, so its square leaves the edge.
-    leftover = right
+    for n in range(82, 101):
+        shifted = _moved(shifted, n, by=-25)
+    assert "row 10's line of n = 82 misses the right edge" in problems(shifted)
+    # A row broken into a continuation violates the complete-row contract.
+    broken = right
     for n in (98, 99, 100):
-        leftover = _moved(leftover, n, by=-5 * (WIDTH / 8))
-    assert "perfect squares off the right edge: [100]" in problems(leftover)
-    # A row cut into lines other than the width gives.
-    assert "row 10 is set (8, 8, 3), not (9, 9, 1)" in problems(
-        {**_triangle(100, 8), "per_line": 9}
-    )
+        broken = _moved(broken, n, down=100)
+    assert "row 10 is set (16, 3), not (19,)" in problems(broken)
     swapped = [{**tile, "n": {5: 6, 6: 5}.get(tile["n"], tile["n"])} for tile in right["tiles"]]
     assert "out of order" in problems({**right, "tiles": swapped})
     assert atlas.layout_problems({**right, "tiles": []}) == ["no tile shows"]
@@ -200,15 +186,19 @@ def test_a_grid_is_held_to_order_and_room_and_not_to_the_triangle() -> None:
 
 
 def test_the_views_and_their_controls_are_named_one_way() -> None:
-    assert atlas.query_for("grid") == ""
-    assert atlas.query_for("triangle") == "?atlas=triangle"
-    assert atlas.query_for("grid", "large") == "?size=large"
-    assert atlas.query_for("triangle", "small") == "?atlas=triangle&size=small"
-    assert atlas.query_for("triangle", "medium") == "?atlas=triangle"
+    assert atlas.query_for("grid") == "?atlas=grid"
+    assert atlas.query_for("triangle") == ""
+    assert atlas.query_for("grid", "large") == "?atlas=grid&size=large"
+    assert atlas.query_for("triangle", "small") == ""
+    assert atlas.query_for("triangle", "medium") == "?size=medium"
+    assert atlas.query_for("triangle", "small", "row") == "?scale=row"
+    assert atlas.query_for("grid", "large", "global") == "?atlas=grid&size=large&scale=global"
+    with pytest.raises(ValueError, match="no scale"):
+        atlas.query_for("grid", "small", "invalid")
     assert atlas.tab("triangle") == '[data-atlas-tab="triangle"]'
     assert atlas.size_tab("large") == '[data-atlas-size-tab="large"]'
     assert atlas.SIZES == ("small", "medium", "large")
-    assert atlas.MEDIUM in atlas.SIZES
+    assert atlas.DEFAULT_SIZE in atlas.SIZES
     assert not hasattr(atlas, "LAYERS")
     for name in (atlas.query_for, atlas.tab):
         with pytest.raises(ValueError, match="no view"):
@@ -358,3 +348,52 @@ def test_each_fault_of_a_tiles_marks_is_named() -> None:
     ]
     found = atlas.summary(right)
     assert (found["size"], found["starred"], found["badged"]) == ("medium", 3, 2)
+
+
+def test_complete_transition_rows_keep_the_half_drawing_gap() -> None:
+    for per in (1, 2, 4, 6, 35):
+        assert atlas.row_lines(3, per, 6) == (5,)
+        assert atlas.row_lines(8, per, 56) == (15,)
+    size = WIDTH / 6
+    half_drawing = (size - 4) / 2
+    left = LEFT + WIDTH - 5 * size - half_drawing
+    tiles = [
+        _tile(n, left + (n - 5) * size + (half_drawing if n >= 6 else 0), 0, size)
+        for n in range(5, 10)
+    ]
+    report = _report("triangle", 6, tiles)
+    report["gap_px"] = 0
+    tiles[1]["grid_from"] = True
+    assert atlas.layout_problems(report) == []
+    # Scaling the drawing must not shrink the separator's reserved Fixed width.
+    for tile in tiles:
+        tile["drawing_slot_width"] = tile["drawing"]["width"]
+        tile["drawing"]["width"] /= 3
+    assert atlas.layout_problems(report) == []
+    faults = atlas.layout_problems(_moved(report, 6, by=-10))
+    assert any("gap before n = 6" in problem for problem in faults)
+
+
+def test_a_panned_complete_grid_row_must_reach_its_canvas_right_edge() -> None:
+    report = _triangle(100, 3)
+    assert report["canvas"]["width"] > report["cells"]["width"]
+    assert atlas.layout_problems(report) == []
+    problems = atlas.layout_problems(_moved(report, 100, by=-10))
+    assert any("misses the right edge" in problem for problem in problems)
+
+
+def test_ink_clearances_measure_actual_outlines_and_caption_ink_without_separator() -> None:
+    report = _triangle(4, 3)
+    for tile in report["tiles"]:
+        tile["outline"] = {
+            "left": tile["left"] + 3,
+            "right": tile["right"] - 3,
+            "top": tile["top"] + 3,
+        }
+        tile["number_ink"] = {"bottom": tile["bottom"] - 2}
+    measured = atlas.ink_clearances(report)
+    assert measured == {"horizontal": (6.0, 6.0), "vertical": (11.0, 11.0)}
+    report["tiles"][-1]["grid_from"] = True
+    report["tiles"][-1]["outline"]["left"] += 20
+    assert atlas.ink_clearances(report) == measured
+    assert atlas.ink_clearances(_grid(4, 2)) == {}
