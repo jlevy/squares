@@ -5,7 +5,7 @@ title: "Website: compact homepage, consistent case layouts, and scroll-aware nav
 kind: epic
 status: in_progress
 priority: 1
-version: 48
+version: 49
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -45,11 +45,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:13:39.980Z
-updated_at: 2026-10-10T11:12:38.602Z
+updated_at: 2026-10-10T15:20:37.564Z
 started_at: 2026-10-08T23:22:05.552Z
 ---
 Website layout and navigation remediation with an editable local draft. Preserve originalhero and exact problem introduction; nativeSVG Atlas preview Expand/Explore with live themes; recent S4+cap12 results and linkedLegend card; shared main heading styles/spacing and uppercase controls; separate PDFs and inline click-to-play video; About/doc cards and MoreResources; Headroom hide-down/show-up and gear alignment; consistent case/popover math/layout and unique resulttitle. Hero opens its case popover with record/Frontier-row/Atlas-tile actions. Atlas tile navigation fully expands then highlights/scrolls to the case; fullFrontierSurvey sits after Atlas graphics with distinct row/tile targets and legacyforwarding. Track each change in childbeads; verify localdraft beforepublication. ScientificPDF-description edit remains canceled for owner separatework.
 
 ## Notes
 
-Current draft served at127.0.0.1:8766. Twelve implementation beads plus combinedverification, including think-pvod fornativeSVG live light/dark themes. Final ownerlayout: originalhero/exactintro, sharedtitle styling onlyH1/H2, Atlas2SVGrows Expand/Explore, RecentS4+cap12,52remcenteredboxedLegend withcenteredcompactH2 andseparateS/V/Clines, LearnMore+separatePDF/Video, MoreResourcesH1overprojectcards. Removedlink-summaryblock,oldOtherProjectsheading/catalogueintro,shorterfilm/releaseparagraph. PDFs/Papers,Video/Visualize;doccardsAbout. Allchangestracked5c8r/pvodandepic. Astra latest productionreviewclean; finalbrowser/pipelinechecksrecordedin xio5, whichremainsopen.
+All requested website changes are committed and pushed to draft PR 462, final head 16beeb1bdf8c196c66bd32cef5b531d7a91259b4. Canonical homepage: single centered n=53 SVG hero/popover, readable two-paragraph introduction, centered About card, six Triangle rows (1-36) expanding immediately through 100 and 324, Download PDF and Explore actions, recent S4+ results, linked aligned Legend, Papers, separate PDFs, inline video, mirrored Squares Project Documentation and More Resources. Shared design covers headings, uppercase buttons/arrows, thin scrollbars, themed accessible icon tooltips, Headroom and consistent popover math/layout. Atlas defaults to Triangle, preserves complete preview rows and all 324 expanded cases, deep-links to tiles, and includes Frontier Survey after graphics; About retains project/contribution/documentation sections. Astra final technical reviews are clean. Final hosted CI is pending under think-o2jd; implementation beads await green checks. Keep epic open for the separate full pre-merge checkpoint think-xio5. No local server is currently claimed running. Scientific data and PDFs are unchanged; the PDF description edit remains canceled.
