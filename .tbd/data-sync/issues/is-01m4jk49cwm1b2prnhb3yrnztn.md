@@ -5,7 +5,7 @@ title: "Import Guzhou0806: s(40) > 335427/50000 from wand125's rect_n40_L67 dens
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:25.852Z
-updated_at: 2026-10-10T10:52:26.020Z
+updated_at: 2026-10-10T11:12:47.810Z
 started_at: 2026-10-10T09:49:28.112Z
 ---
 Issue https://github.com/jlevy/squares/issues/485 (opened 2026-10-10). Claim: s(40) > 335427/50000 = 6.70854, unrestricted rotations, above the case's reported and verified 67/10 from wand125's rect_n40_L67 (#281). Also a weaker full-core bound s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908. Source Guzhou0806/n40-square-packing at e5abeb4d078a5c5b35df6204dd9b93378e5a7880, release n40-670854-20261010, n40-670854.zip SHA-256 dbefee8658dc8f7d2e4a6ed21b0c3cd29f36ae393405a218f6bbfdce54465bc5. Rust nodal verifier, 401 directions, 32,970,910 nodes; wand125 commented a review on 2026-10-10 reporting a clean replay. Stages 1-3 on this pass; mathematical review of the clipped-corner estimate and strictness argument by Fable at max.
@@ -46,3 +46,18 @@ Findings: GN-1 proof text (triangles unconditional), GN-2 h at the limit (exact 
 ## Draft acknowledgement (2026-10-10, not posted; the owner posts it)
 
 Received, thank you. We have pinned Guzhou0806/n40-square-packing at e5abeb4d (release n40-670854-20261010; n40-670854.zip, SHA-256 dbefee86...) and read the issue and wand125's review. The claim s(40) > 335427/50000, with the weaker full-core bound s(40) > 67000·√6400006889/798988091, is mapped as a new lower-bound result at n = 40 on wand125's rect_n40_L67 density, whose retained copy here has the SHA-256 you give. What will be checked: the 401-direction nodal statement with this repository's sqverify-fast (the crate you vendored, byte for byte), the density's expansion, mass and essential supremum, and the transfer's scalar chain in exact rationals, each with mutation controls; the transfer argument, the reference-square legality, the clipping bound and the strict endpoint have been read in a mathematical review, which found no blocking defect. The replay is priced at minutes. The register entry and its ratings follow the replay.
+
+
+## Records lane: stage 2 and the stage 4 replay (2026-10-10, worktree-agent-a9d8fa9c23fcafee7)
+
+Packet packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/ (commit b2c16f84c): acquire_source from a full clone at e5abeb4d (tree 8c01f4dd, committed 2026-10-10T06:47:01Z, tag n40-670854-20261010), 36-file manifest; 20 retained; density pinned identical_to the 2026-10-01 rect_n40_L67 copy (71011d03); vendored crate (15 files) pinned by digest, compared byte for byte with packing/sqverify_fast (unchanged since ef79288a4; build.rs digest of the vendored copy d97758bb). release-ci/ keeps the ZIP's CI receipt (run 38032128403), its SHA256SUMS, the release's .sha256, the API records of the release and the run, and digests of all 36 ZIP entries (33 equal the tree; GN-3). acquire_source --check: PACKET_MATCHES_ITS_CONTRACT. The repository's earlier commit 485dd8f (2026-10-07T18:50:46Z) claimed s(40) > 33509/5000 on the 201 net; pinned by history, not retained.
+
+Tool devtools/audit_clipped_corner_transfer.py (5f7bbc2df, 0ab05b7aa) with tests/test_audit_clipped_corner_transfer.py (14 tests, 1.4-2.7 s): derive, check (finite audit + controls E-H), run (nodal replay + controls A-D on the binary), check-replay. Shares no code with finite.py (not opened); its docstring is the read log.
+
+Replay (receipts f41ec10bc, packet receipts/): reviewed source d97758bb (--source-digest exit 0), rustc 1.98.0 (88d9e12ae 2026-08-18), cargo build --release --locked -j 2, binary 567a0fd5. Derived input 49f696a4. Nodal: VERIFIED, 401/401, refused [], exit 0, 32,970,910 boxes, least 1.000100000471634 at r = 73, r = 0 axis sweep 4,879,681 vertices / 2,209 events / 1.0012141064171602, depth 30, premises as the contract; all 401 rows equal both release receipts apart from timing, all 201 even rows equal the retained census row. 299.5 s wall, 241.0 CPU-s at 2 threads (load 6.8-8.0; an earlier identical run 396.0 s / 242.6 CPU-s at load 12.8-15.6). Controls: A REFUSED [73, 220] exit 1 (exact 0.999322755117, 0.999227715635); B (factor 499392017517921/500000000000000 at r = 220, centre (3.353931795732347, 5.09801085267264), capture 1.0013165658 = crate probe) REFUSED [220] exit 1 (exact 1.0000999998); C exit 0, standard net 201 at 83/40000; D exit 2 "the net does not reach past pi/4". Finite: FINITE_STEPS_HOLD, every finite-block field of both receipts equal; E, F (bound -0.00998261 at every admissible h), G, H (chi -0.956) refused. check-replay --rank: REPLAY_HOLDS.
+
+GN-5 (0b5a62ca5): metadata_net in check_sqverify_fast; net_step, net_directions, scaled (keeps a non-standard metadata net), exact_candidate (loads without metadata) read it as admission does; new census test fails on the old code at each assertion. check_sqverify_fast on the binary: 57 ok, 0 FAIL. Remaining for the census route: no census case holds the derived input.
+
+Validation at 0ab05b7aa: packing-validate --edit 64 of 65 steps pass, --records 48 of 49; the one failure in each is "every session's cost is attributed" (close_session --check: session-close-report.yaml and SYNOPSIS.md drifted), whose inputs (campaign/agent-sessions, campaign/resource-usage) this lane did not touch, so it is in the base (usage rollups of 631fbbbbe); the coordinator renders it. An integrity-ceremony finding on the new tool was fixed in 0ab05b7aa (three internal digest checks removed, a download allowlist entry for the four that cross the boundary).
+
+Proposed rungs V3/C3: nodal reproduced with the producer's code (same-implementation), finite independently re-implemented; the result takes the nodal relation. Shared-record drafts are in the lane's report to the coordinator.
