@@ -5,7 +5,7 @@ title: "Import squarepacker: c*(k) < 43.06 k^{3/8} + 2e-5 (k >= 4e26) and c*(k) 
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:27.941Z
-updated_at: 2026-10-10T10:48:25.920Z
+updated_at: 2026-10-10T10:52:29.763Z
 started_at: 2026-10-10T09:49:28.457Z
 ---
 Issue https://github.com/jlevy/squares/issues/471 (opened 2026-10-09). Preprint Zenodo 10.5281/zenodo.23256655 v1.0 and squarepacker/k2-minus-c-upper. Theorems 1.1, 1.2, 1.4 (c*(k) <= 8 ceil(sqrt(k-4)) - 1, k >= 6) and 1.6 (finite c*(10^5..10^8) bounds with packings as data). Relates to X-049, asymptotic-waste-bounds.yaml and #414's lower bounds (think-6ptr, think-u1kq). Stage 1 triage and the mathematical review by Fable at max; interval-arithmetic replay priced before any run.
@@ -40,3 +40,7 @@ Verdict accepted; no blocking defect; ten findings RF-1..RF-10, none blocking (R
 ## #486 (version 1.1)
 
 Opened 2026-10-10T09:46:30Z, 27 minutes after the v1.1 tag; pins above. What changed: Section 8 only (1,185 changed TeX lines, Sections 2-7 and 9 unchanged in substance; Theorems 1.2, 1.4, 1.6 and the five data files byte-identical). (1) E38 stated with six parameters (b0, c_y, c_D, c_R, a_w, varpi); v1.0 is the row (10^16, 1/12, 4, 4, 3/2, 0.65), kept and superseded by tier A5; no lemma changes for this, two added arguments ((E6) for all t <= 1/10 with eps' = 1.03e-12 and the exact half-angle test t_up < 1/10; the room y0 <= sqrt k + 1 needing c_y (5/(3 C_E))^{1/2} <= 1), both re-derived. (2) Variant ZC' (row starts at a* = max(a, 0, (j+1-chi)/zeta)) and Lemmas 8.2 (packing and B_W survive), 8.3 (transition rows <= A_T'), 8.4 (end term w_e(4+2 zeta w_e) -> w_e via the partial layer P_z), 8.5 (B_W''): all re-derived, correct; tiers B1, B1s, B2. (3) Sawtooth: Lemma 8.6 (sum of frac of an arithmetic progression <= n(1+nu)/2 + n eps + 1/(8 nu), sharp), Lemma 8.7 (start rows and final stretches in four classes F0/F1/F2a/F2b), Lemma 8.8 (B_W4) with new hypothesis (W6) nu_* = varpi tan a0 - q0^2/zeta > 0: re-derived, correct. (4) Lemma 8.11 (per-band lift with frac(gbar) >= 1/2, y1 - y0 in {0,1}, y0 in [alpha0, alpha0 + (d+1)/2)) and Cor 8.12 (delta <= 2.500001, m <= c_y b^{4/5} + 4.500101): re-derived, correct; the real-lift remark is right (Lemma 6.1, Cor 6.2, Prop 6.3 are per band for any real lift). Tiered proof of Theorem 1.1: Section 8.4 of v1.0 with per-tier constants and the conditions C_i >= (32/5)(5/3)^{3/8} C_E^{5/8}, k_i >= (3/5) C_E b0^{8/5}, a_i >= (12/5) C_E b0^{-2/5}, lambda' < 1, room; (32/5)(5/3)^{3/8} = 7.751277 checked. Code: cert_v3.py = cert3e.py generalised (parameters, t_up by half-angle, chi >= 4, (E-iv) as 1 - eps_m - tau, parts ABC with A_T' and w_e + 2(1+tan a0)); cert_v4.py adds per-wall a_w, (W6), 4.5002/2.500002, R_start/R_end of B_W4; both merges check slice coverage, exact positive margins and the stated constants; every normalised term checked against Appendices A/B and the lemmas. Established by the code: yes for what the release contains, i.e. one covering per tier by the author (cert_v3/cert_v4), replayed here with every Psi_sup, C_E_cert and margin reproduced and every stated constant passing its merge check (B1 17.46021991, B1s 16.96721215, B2 16.72078458, A1 18.96098158, A1s 18.72101720, A2 17.52221442, A3 15.85844696, A4 14.77798713, A5 14.15236483, C1 14.47250922, C2 14.80458900, C3 14.98287272). Not in the release, reported only: the three independent coverings per tier, the direct un-normalised arb covering of C1-C3 for b <= 10^16 (13.910/14.235/14.319), the 133-instance re-implementation, the 15 end packings at b = 1.41e7..2.30e7. Register: a new reported row for the twelve tiers (later release raising the values); the v1.0 row keeps its claim and gains a sentence; bibliography key '[squarepacker k2-minus-c-upper v1.1 2026]' dated 2026-10-10; packet squarepacker-k2-minus-c-upper-v11-2026-10-10 with the data and the six unchanged programs bound to the v1.0 packet. Draft acknowledgement for #486 in the final report.
+
+## Draft acknowledgement (2026-10-10, not posted; the owner posts it)
+
+Thank you for the report. We have received version 1.0 and pinned it at release commit 700668795e6b95f0bf2a2c6de104adaf3a3ebce0 (DOI 10.5281/zenodo.23256655, zip md5 667f1a1ea308da2df5d309ec674c82c8); the archive's bytes match the commit. We will re-derive the proofs of Theorems 1.1-1.4 and Proposition 1.5, recompute Corollary 7.4's interval evaluation and the closed-form constants in our own interval code, replay cert3e.py and check the un-normalised bound of Lemma 8.2 at sample sizes, and decide the five certificates of Theorem 1.6 with stair_check.py, its negative controls and a checker written here from Section 9. The results will be recorded in packing/frontier/asymptotic-waste-bounds.yaml as reported bounds on c*(k) = lim_{x->k^-} W(x) - 1, since none settles a count n <= 324. We will follow up here when the review is on main.

@@ -5,7 +5,7 @@ title: "Import ebdeleeuw: s(70) <= 888096037156625096037155737/10^26, an exact r
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:26.674Z
-updated_at: 2026-10-10T10:44:54.090Z
+updated_at: 2026-10-10T10:52:27.175Z
 started_at: 2026-10-10T09:49:27.373Z
 ---
 Issue https://github.com/jlevy/squares/issues/483 (opened 2026-10-10). Refinement 1.4263e-10 below Ryan Xu's exact certificate side 88809603717088809603717/10^22. Source ebdeleeuw/square-packing-n70 at 24221d5e51244ca5290d5b1c43f1fbe36f9749e0; certificate.json SHA-256 eeebf55cf3c1614a96f51339695f28443e35f33b0195bfc24ef0549b50550cb1, centres in [-S/2,S/2]^2, half-angle tangents. Stages 1-3 and a maintained exact replay (seconds).
@@ -32,3 +32,7 @@ Register action proposed: a new upper-bound entry at n = 70, published 2026-10-1
 FORMAT (for the importer's centred-JSON adapter): JSON {schema: "sqpack-rational-v1" (the source's own label, not a repository format), n: 70, coordinate_system: "centered", side "p/q", squares: [{x, y, t}, ...]} rational strings, box [-S/2, S/2]^2, cos=(1-t^2)/(1+t^2), sin=2t/(1+t^2).
 
 PRICE: a timing probe of sqpack.verify.verify_packing found the certificate valid, 2,415 pairs in 0.18 s. A two-route replay with two controls: seconds. Not a recorded replay.
+
+## Draft acknowledgement (2026-10-10, not posted; the owner posts it)
+
+Thank you. We received the n = 70 certificate and pinned ebdeleeuw/square-packing-n70 at 24221d5e51244ca5290d5b1c43f1fbe36f9749e0; `certificate.json` has the SHA-256 you give. Its side is exactly 14263000000014263/10^26 below Ryan Xu's certificate, which the case holds in both lanes today, and no other pending report names n = 70. The repository has no licence, so we keep digests and derived facts rather than the files. Next we will replay the certificate exactly (centred box, rational half-angle tangents) by two maintained exact routes with duplicate-square and outside-container controls, and review the replay. Credit will read Ryan Xu's arrangement, refined by you, with the Codex assistance you disclose.

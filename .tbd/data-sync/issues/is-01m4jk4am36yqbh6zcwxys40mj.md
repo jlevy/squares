@@ -5,7 +5,7 @@ title: "Import itsnaka (SQUISH): 15 new packings at n = 131-307 and smaller pack
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:27.107Z
-updated_at: 2026-10-10T10:44:53.781Z
+updated_at: 2026-10-10T10:52:27.729Z
 started_at: 2026-10-10T09:49:26.857Z
 ---
 Issue https://github.com/jlevy/squares/issues/481 (opened 2026-10-09). Counts 131, 153, 207, 209, 232, 236, 259, 263, 269, 270, 292, 302, 303, 305, 307, plus 154 and 237 replacing SQUISH's #401 packings. Source itsnaka/squish-certs at d45669b48cc9 (squish-submission-2026-10-09, 50-digit certificates). Overlaps #476 at 237, 263, 270, 303 and #470 at several counts: compare by value and date. Stages 1-3 and maintained exact replays.
@@ -51,3 +51,7 @@ Display note: the issue's 15-digit S_n and each cert's s_decimal are not roundin
 FORMAT (for the importer's SQUISH adapter): JSON {n, s_exact "p/q", s_decimal, note, squares: [[x, y, t], ...]} rational strings, box [0, S]^2, cos=(1-t^2)/(1+t^2), sin=2t/(1+t^2). Numerators/denominators ~80 digits. Same layout as the 2026-10-07 SQUISH packets. Files: squish-submission-2026-10-09/nNNN/nNNN.cert.json (17), sources/squish-sNNN-source.cert.json (3); SHA-256 in the packet manifest and README table.
 
 PRICE: a timing probe of sqpack.verify.verify_packing (exact Fraction SAT, all pairs) found n131 valid in 1.00 s (8,515 pairs) and n307 valid in 5.36 s (46,971 pairs): ~0.11 ms/pair. All 17 positives = 526,784 pairs per route, about 1 min per route; with duplicate-square and outside-container controls on both routes, about 6 min serial, 3 min on 2 workers. Minutes: stage 4 can run on the import branch per the runbook. The probe is a price, not a recorded replay.
+
+## Draft acknowledgement (2026-10-10, not posted; the owner posts it)
+
+Thank you, Nate. We received the seventeen exact certificates in `squish-submission-2026-10-09` and pinned itsnaka/squish-certs at d45669b48cc97ad3aa17a6c847a8d06630f66eac, the commit that adds them; the three certificates in `sources/` (n = 155, 240, 306) are recorded with them as provenance, each above the current bound at its count. Each of the seventeen sides is below the bound the record holds at its count today and below every other report pending there, including #470 and #476. The tree has no licence, so as before we keep digests and derived facts rather than the files. Next we will replay every certificate exactly from `s_exact`, the rational centres and the half-angle tangents, by two maintained exact routes with duplicate-square and outside-container controls, and review the replay. One note: the 15-digit values in the issue and each certificate's `s_decimal` are not roundings of `s_exact`; at 131, 153, 154, 207, 263, 269, 305 and 307 they sit up to 1.8e-15 below it, so the record will display each side rounded up from the exact fraction.
