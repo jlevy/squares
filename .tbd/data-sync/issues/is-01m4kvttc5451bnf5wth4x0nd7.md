@@ -3,9 +3,9 @@ type: is
 id: is-01m4kvttc5451bnf5wth4x0nd7
 title: Independent Astra review and end-to-end preview acceptance
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: codex@spud10
 labels: []
@@ -22,8 +22,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T21:34:47.172Z
-updated_at: 2026-10-10T23:11:27.403Z
+updated_at: 2026-10-10T23:27:32.222Z
 started_at: 2026-10-10T21:51:15.637Z
+closed_at: 2026-10-10T23:27:32.201Z
+close_reason: Astra accepted implementation, policy, design and current-main integration. Required Packing 38093633427 and Pages 38093633405 passed; Pages had one timing-only retry (477 ms initial, maximum 251 ms retry, unchanged 300 ms limit). Deferred 38093661604 passed all ten workers and aggregate in 23m04s. Final unchanged head ed89bfdda3f3a4d49b2a00df44fa594468331119, base 8fc98341411ecf22bd045cef96ca6fe0946a615e, merge e9ad4062eb038a2281e4b5fe7b7e3d81827591c4, tree 9b4485e3efb5ce194b961ffb100af275cec52377. Packing tree artifact and all ten deferred receipts match. PR 490 updated; initial 20-profile preview available at localhost:8790/contributors/index.html. Full historical census and remaining publication migrations remain in their separate phase beads. No merge or deployment.
+resolution: null
+duplicate_of: null
 ---
 Astra reviews final frozen data/link/render/overlay changes; fix findings, run selected gates and hosted CI, publish reviewable preview and update PR490 with accurate completion and remaining census scope.
 
