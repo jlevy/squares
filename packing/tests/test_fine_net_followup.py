@@ -46,12 +46,15 @@ def tarball(files: dict[str, bytes]) -> bytes:
     return stream.getvalue()
 
 
-def release(tmp_path: Path, *, embedded: bool = False) -> tuple[Path, Path, bytes]:
+def release(
+    tmp_path: Path, *, embedded: bool = False, schema: str = "fine-net-check2-receipt/v1"
+) -> tuple[Path, Path, bytes]:
     """A two-square check2 asset and its documents, laid out as the source's are.
 
     ``embedded`` gives the pre-publication receipt the ``fine-net-check2-receipt/v1``
-    shape of 10 October's n = 30 certificate: the very run record the check2 receipt
-    embeds, with ``verifier`` in place of ``build`` and a control with tries.
+    shape of 10 October's n = 30 certificate, or the other ``schema`` given: the very run
+    record the check2 receipt embeds, with ``verifier`` in place of ``build`` and a
+    control with tries.
     """
     candidate = {
         "n": 2,
@@ -67,7 +70,7 @@ def release(tmp_path: Path, *, embedded: bool = False) -> tuple[Path, Path, byte
     facts = net_facts(Fraction(4999, 5000), Fraction(1, 5002), 2073)
     build = {"source_sha256": SOURCE, "target": "x86_64-unknown-linux-gnu"}
     record = {
-        "schema": "fine-net-check2-receipt/v1",
+        "schema": schema,
         "status": "VERIFIED",
         "verdict": "PASS",
         "directions_verified": 2073,
@@ -216,19 +219,38 @@ def test_the_premises_of_a_complete_asset_hold(tmp_path: Path) -> None:
     assert receipt["prepublication"]["identical_to_the_embedded_run_record"] is False
 
 
+def test_the_premises_of_an_asset_with_the_n30_receipt_shape_hold(tmp_path: Path) -> None:
+    """The n = 30 shape, ``fine-net-check2-receipt/v1``: the check2 reader takes the build
+    from ``verifier`` and the control's refused directions from its one try."""
+    asset, documents, data = release(tmp_path, embedded=True)
+    assert followup.main(premises_argv(tmp_path, asset, documents, data)) == 0
+    receipt = json.loads((tmp_path / "premises.json").read_text())
+    assert receipt["status"] == "EXACT_PREMISES_HOLD"
+    check = receipt["check2_audit"]["prepublication_check"]
+    assert check["target"] == "x86_64-unknown-linux-gnu"
+    assert check["control_refused_directions"] == 32
+    assert receipt["prepublication"]["shape"] == "fine-net-check2-receipt/v1"
+    assert receipt["prepublication"]["check2_embeds_a_run_record"] is True
+    assert receipt["prepublication"]["identical_to_the_embedded_run_record"] is True
+
+
 def test_a_receipt_shape_the_check2_reader_does_not_take_is_recorded_refused(
     tmp_path: Path,
 ) -> None:
-    """The n = 30 shape: the reader's KeyError is a refusal in the receipt, not a crash,
-    and the custody checks still run."""
-    asset, documents, data = release(tmp_path, embedded=True)
+    """A schema the reader does not know: its refusal is recorded in the receipt, not a
+    crash, and the custody checks still run."""
+    asset, documents, data = release(
+        tmp_path, embedded=True, schema="fine-net-check2-receipt/v2"
+    )
     assert followup.main(premises_argv(tmp_path, asset, documents, data)) == 1
     receipt = json.loads((tmp_path / "premises.json").read_text())
     assert receipt["status"] == followup.CHECK2_READER_REFUSED
-    assert receipt["check2_audit"]["refusal"] == "KeyError: 'build'"
+    assert receipt["check2_audit"]["refusal"] == (
+        "AuditError: no reader for pre-publication schema fine-net-check2-receipt/v2"
+    )
     assert receipt["claim"] == "s(2) >= 3/1"
     assert receipt["sealed_bundle"]["listed_hashes_matching"] == 6
-    assert receipt["prepublication"]["shape"] == "fine-net-check2-receipt/v1"
+    assert receipt["prepublication"]["shape"] == "fine-net-check2-receipt/v2"
     assert receipt["prepublication"]["check2_embeds_a_run_record"] is True
     assert receipt["prepublication"]["identical_to_the_embedded_run_record"] is True
 

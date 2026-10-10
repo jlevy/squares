@@ -598,6 +598,119 @@ def test_both_forms_of_the_source_control_record_are_read() -> None:
     assert not declared.control_refused({"status": "REFUSED", "exit": 0})
 
 
+def receipt_v1(value: dict[str, Any]) -> None:
+    """An earlier pre-publication receipt rewritten in the shape of `mixed_n30_L58925`'s
+    of 10 October: a schema, the build as ``verifier``, and the control as one try."""
+    control = value.pop("control")
+    value["schema"] = declared.PREPUBLICATION_V1
+    value["verifier"] = {"name": "sqverify-fast"} | value.pop("build")
+    value["control"] = {
+        "kind": "every mass times factor, 32 directions spread over the net",
+        "tries": [
+            {
+                "factor": "197/200",
+                "status": control["status"],
+                "exit": control["exit"],
+                "directions": 32,
+                "refused": control["refused_directions"],
+                "exact_below_threshold": control["exact_below_threshold"],
+            }
+        ],
+        "refused": True,
+    }
+
+
+def other_factor(value: dict[str, Any]) -> None:
+    value["control"]["tries"][0]["factor"] = "99/100"
+
+
+def verified_try(value: dict[str, Any]) -> None:
+    value["control"]["tries"][0]["status"] = "VERIFIED"
+
+
+def passing_try(value: dict[str, Any]) -> None:
+    value["control"]["tries"][0]["exit"] = 0
+
+
+def control_not_refused(value: dict[str, Any]) -> None:
+    value["control"]["refused"] = False
+
+
+def second_try(value: dict[str, Any]) -> None:
+    tries = value["control"]["tries"]
+    tries.append(tries[0] | {"factor": "99/100"})
+
+
+def no_verifier(value: dict[str, Any]) -> None:
+    del value["verifier"]
+
+
+def build_for_verifier(value: dict[str, Any]) -> None:
+    value["build"] = value.pop("verifier")
+
+
+def later_schema(value: dict[str, Any]) -> None:
+    value["schema"] = "fine-net-check2-receipt/v2"
+
+
+def test_both_shapes_of_the_pre_publication_receipt_are_read_alike(tmp_path: Path) -> None:
+    """The earlier shape and `PREPUBLICATION_V1`, of the same run, give the same facts."""
+    directory = copy_check2(tmp_path, "n18-L4705")
+    earlier = declared.audit(directory, key="n18-L4705")
+    assert earlier["status"] == "EXACT_PREMISES_HOLD"
+    edit(directory, declared.PREPUBLICATION, receipt_v1)
+    later = declared.audit(directory, key="n18-L4705")
+    assert later == earlier
+    assert later["prepublication_check"]["control_refused_directions"] == 29
+
+
+@pytest.mark.parametrize(
+    ("change", "message"),
+    [
+        (other_factor, "not refused at 197/200"),
+        (verified_try, "not refused at 197/200"),
+        (passing_try, "not refused at 197/200"),
+        (control_not_refused, "not refused at 197/200"),
+        (second_try, "not one try"),
+        (no_verifier, "no build in verifier"),
+        (build_for_verifier, "no build in verifier"),
+        (later_schema, "no reader for pre-publication schema"),
+    ],
+)
+def test_a_v1_pre_publication_receipt_without_its_build_or_refused_control_is_refused(
+    tmp_path: Path, change: Any, message: str
+) -> None:
+    directory = copy_check2(tmp_path, "n18-L4705")
+    edit(directory, declared.PREPUBLICATION, receipt_v1)
+    edit(directory, declared.PREPUBLICATION, change)
+    with pytest.raises(declared.AuditError, match=message):
+        declared.audit(directory, key="n18-L4705")
+
+
+def no_build(value: dict[str, Any]) -> None:
+    del value["build"]
+
+
+def unrefused_status(value: dict[str, Any]) -> None:
+    value["control"]["status"] = "VERIFIED"
+
+
+@pytest.mark.parametrize(
+    ("change", "message"),
+    [
+        (no_build, "no build in build"),
+        (unrefused_status, "pre-publication control was not refused"),
+    ],
+)
+def test_an_earlier_pre_publication_receipt_without_its_build_or_refused_control_is_refused(
+    tmp_path: Path, change: Any, message: str
+) -> None:
+    directory = copy_check2(tmp_path, "n18-L4705")
+    edit(directory, declared.PREPUBLICATION, change)
+    with pytest.raises(declared.AuditError, match=message):
+        declared.audit(directory, key="n18-L4705")
+
+
 @pytest.mark.parametrize("key", sorted(CHECK2))
 def test_each_check2_bundle_is_bound_to_the_packet_and_its_logs_to_the_net(key: str) -> None:
     _rows, _step, count = CHECK2[key]
