@@ -27,6 +27,7 @@ PROBES = Path(__file__).resolve().parent / "probes"
 FIGURE = probe(PROBES, "case_popover_figure/figure")
 CROSS = probe(PROBES, "case_popover_head/cross")
 LAYOUT = probe(PROBES, "case_layout/read")
+OVERFLOW = probe(PROBES, "case_layout/overflow")
 NAVIGATION = probe(PROBES, "case_navigation/read")
 EXERCISED_CASES = (5, 10, 11, 12, 13, 14, 15, 16, 17, 29, 32, 53, 291, 324)
 
@@ -476,6 +477,36 @@ def _centered_case_bounds(layout: dict[str, Any]) -> None:
     assert bounds["lastWidth"] == pytest.approx(bounds["firstWidth"], abs=0.1), layout
     assert bounds["lastCenter"] == pytest.approx(bounds["center"], abs=0.1), layout
     assert bounds["lastTop"] > bounds["precedingTop"], layout
+
+
+def test_case_layout_keeps_overflow_diagnostics_with_fewer_ancestor_style_reads(
+    browser: Any, served: str
+) -> None:
+    """A cached reading retains self/ancestor clipping, DOM order and all diagnostics."""
+    with _page(browser) as page:
+        page.goto(f"{served}atlas.html", wait_until="load")
+        page.locator("#n-53 td.site-col-n a").click()
+        page.locator('#pop-case article.site-case[data-case="53"]').wait_for(state="visible")
+        page.evaluate(OVERFLOW, {"mode": "install"})
+        try:
+            actual = page.evaluate(LAYOUT)
+            original = page.evaluate(OVERFLOW, {"mode": "read"})
+            assert actual["overflowing"] == original["overflowing"]
+            assert len(actual["overflowing"]) == 30
+            classes = [entry["classes"] for entry in actual["overflowing"]]
+            for value in ("visible", "auto", "scroll", "hidden", "clip"):
+                assert f"case-overflow-fixture host-{value}" in classes
+                assert (f"case-overflow-fixture child-{value}" in classes) == (
+                    value == "visible"
+                )
+            assert "case-overflow-fixture threshold" not in classes
+            assert "case-overflow-fixture nested-hidden" in classes
+            assert "case-overflow-fixture intermediary-visible" not in classes
+            assert "case-overflow-fixture nested-grandchild" not in classes
+            assert "case-overflow-fixture outside-sibling" in classes
+            assert original["actualStyleReads"] < original["legacyStyleReads"]
+        finally:
+            page.evaluate(OVERFLOW, {"mode": "restore"})
 
 
 @pytest.mark.parametrize("width", [1280, 390, 320])

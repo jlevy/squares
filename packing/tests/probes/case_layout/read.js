@@ -67,6 +67,31 @@
           value.bottom > other.top,
       ),
   );
+  // One synchronous reading has stable styles. Classify each ancestor once instead
+  // of walking the complete Atlas's shared ancestors for every descendant.
+  /** @type {Map<Element, boolean>} */
+  const clippedAncestors = new Map();
+  /** @param {Element} node */
+  const hasClippingAncestor = (node) => {
+    const lineage = [];
+    let clipped = false;
+    for (let ancestor = node.parentElement; ancestor; ancestor = ancestor.parentElement) {
+      const cached = clippedAncestors.get(ancestor);
+      if (cached !== undefined) {
+        clipped = cached;
+        break;
+      }
+      lineage.push(ancestor);
+      if (["auto", "scroll", "hidden", "clip"].includes(getComputedStyle(ancestor).overflowX)) {
+        clipped = true;
+        break;
+      }
+    }
+    for (const ancestor of lineage) {
+      clippedAncestors.set(ancestor, clipped);
+    }
+    return clipped;
+  };
   return {
     pageWidth: document.documentElement.scrollWidth,
     viewportWidth: innerWidth,
@@ -175,14 +200,7 @@
       (node) => node.outerHTML,
     ),
     overflowing: [...document.querySelectorAll("body *")]
-      .filter((node) => {
-        for (let ancestor = node.parentElement; ancestor; ancestor = ancestor.parentElement) {
-          if (["auto", "scroll", "hidden", "clip"].includes(getComputedStyle(ancestor).overflowX)) {
-            return false;
-          }
-        }
-        return true;
-      })
+      .filter((node) => !hasClippingAncestor(node))
       .map((node) => ({
         element: node.tagName,
         classes: node.getAttribute("class"),
