@@ -1,0 +1,7 @@
+$ python3 check_packing.py n0343.txt 40    # David Ellsworth's checker
+Checking n0343.txt
+Epsilon: 1E-40
+S: 18.99490352922049698464080847426657455717
+Container: OK
+Overlaps: NONE
+VALID
