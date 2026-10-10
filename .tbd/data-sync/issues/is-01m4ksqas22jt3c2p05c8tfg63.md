@@ -5,7 +5,7 @@ title: Center visible Atlas rows and animate expansion on both pages
 kind: bug
 status: in_progress
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-10T20:57:55.731Z
-updated_at: 2026-10-10T20:58:07.606Z
+updated_at: 2026-10-10T21:03:57.873Z
 started_at: 2026-10-10T20:58:07.605Z
 ---
-Center homepage and dedicated Atlas canvases based on currently visible rows, rather than full hidden coverage. Preserve shared upstream geometry, complete Grid/Triangle row cutoffs, homepage36→100→324→36, dedicated preview/full controls, case links/popovers and mobile panning. Expansion/collapse must smoothly animate centering with shared FLIP; reduced motion settles immediately. Verify desktop/mobile stages, then commit/update PR462 and local preview.
+Center homepage and dedicated Atlas canvases based on visible rows. Use the same shared controls, legend, overview and initial100-square preview on both pages, expanding to324 with complete Grid/Triangle row cutoffs. Prepare hidden diagrams before reveal so artwork does not arrive incrementally; preserve first-paint responsiveness, shared FLIP animation, mobile panning, case links/popovers and reduced motion. Supersedes earlier36-square homepage staging. Verify representative desktop/mobile transitions, then update PR462 and local preview.
