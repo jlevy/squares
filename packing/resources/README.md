@@ -939,6 +939,16 @@ Independent whole-net replay and controls remain pending.
   geometry replay, selected bound or verification from the separate issue451
   certificates. Raw upstream text, SVGs, prose and programs remain outside Git under the
   existing retention policy; no redistribution permission is asserted.
+  Since 2026-10-09 its $n = 375$ and $378$ reports are dated history, superseded in the
+  source register by the later reports below.
+
+- **[Couzo extended-range updates 2026-10-08]** — Francisco Couzo’s later decimal poses
+  at $n = 375$ and $378$, pinned at 2d32a6e and retained as numerical facts and Git
+  custody metadata. [Source packet](web/couzo-extended-updates-2026-10-08/README.md).
+  Each side is below the same count’s ffd900d report, by exact comparison of the printed
+  decimals; both remain author reports outside the standing-case corpus, with no result
+  row, geometry replay or selected bound.
+  No upstream byte is retained, and no redistribution permission is asserted.
 
 - **[Couzo follow-up refinements 2026-10-08]** — Francisco Couzo’s five follow-up exact
   rational certificates at 84, 86, 105, 175 and 270, pinned at 2d32a6e and kept as

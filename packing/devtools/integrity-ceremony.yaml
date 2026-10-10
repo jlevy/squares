@@ -47,6 +47,16 @@ allowlist:
       retained witness of unretained bytes, catching an edited or rounded pose token;
       the retained commit block, written from PINS, is compared whole, not label by
       label. No digest names a file this repository wrote, decides geometry or pins code.
+  - path: packing/devtools/couzo_extended_updates.py
+    kind: download
+    boundary: >-
+      Couzo's two later outside-horizon reports at 2d32a6e stay outside Git. The
+      acquired tree is held to the follow-up packet's record of the same commit and
+      rebuilt to its pinned root, and each input's bytes to the blob identity and
+      length that record names, before parsing. The retained facts are rebuilt into
+      each report's text and re-exported, so the recorded blob id and SHA-256, the
+      only retained witnesses of the unretained bytes, catch an edited or rounded pose
+      token. No digest names a file this repository wrote, decides geometry or pins code.
   - path: packing/devtools/gupta_refinement_reports.py
     kind: download
     boundary: >-
