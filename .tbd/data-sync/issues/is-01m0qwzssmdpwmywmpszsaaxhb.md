@@ -5,15 +5,15 @@ title: Golden basin maps for the small proved cases, grounded in mathematics not
 kind: task
 status: closed
 priority: 0
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m0p4asxdaenzfkx53j4vh6qs
 parent_id: is-01m0pw7redm194km37gpb3cvmf
 created_at: 2026-08-23T18:09:09.427Z
-updated_at: 2026-08-23T19:40:03.548Z
+updated_at: 2026-10-10T22:48:36.803Z
 closed_at: 2026-08-23T19:40:03.548Z
 close_reason: |
   Built as tools/golden_basins.py plus golden/basin-maps.yaml on claude/packing-overnight-strategy-queue (PR #14), wired into test.sh.

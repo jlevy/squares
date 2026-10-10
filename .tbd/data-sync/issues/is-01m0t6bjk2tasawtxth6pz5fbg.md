@@ -5,15 +5,15 @@ title: Record per-event wall time in basin archives
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - focus-efficiency
 dependencies: []
 parent_id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
 created_at: 2026-08-24T15:31:21.301Z
-updated_at: 2026-08-24T15:32:12.370Z
+updated_at: 2026-10-10T22:49:35.137Z
 closed_at: 2026-08-24T15:32:12.369Z
 close_reason: "D-167 fixed: each basin event now retains monotonic wall_seconds; replay requires a finite nonnegative value and selftest rejects a negative mutation. The precommit n=3 data was moved to /tmp and will be regenerated from the clean committed tool."
 resolution: null

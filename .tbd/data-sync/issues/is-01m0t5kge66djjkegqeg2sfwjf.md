@@ -5,8 +5,8 @@ title: Separate LP solver rejection from mathematical cell infeasibility
 kind: bug
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - focus-correctness
@@ -15,7 +15,7 @@ parent_id: is-01m0t4phe1905yy2jk7czp1391
 child_order_hints:
   - is-01m0t9capk4djgs9r9d9vvrr84
 created_at: 2026-08-24T15:18:12.677Z
-updated_at: 2026-08-24T16:34:34.597Z
+updated_at: 2026-10-10T22:48:56.555Z
 closed_at: 2026-08-24T16:34:34.595Z
 close_reason: Fixed in f933887. Cell outcomes are typed as optimal, infeasible, solver_failure, or postcheck_rejection with solver status, failing row, residual, repair, and actual call count. The retained n=3 failing cell replays exactly. A preregistered single-row/single-retry policy restored n=3, n=10, and n=11 controls without changing the 1e-10 acceptance screen. Independent sqpack.verify validation accepts the n=10 result at the proved side within 1.33e-15, all 45 pairs checked. D-165 remains separately open until a new BasinEvent derives and replays all-probes-accounted evidence.
 resolution: null

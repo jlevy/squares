@@ -5,8 +5,8 @@ title: "Run session-010: eight-hour mixed pipeline and mathematical portfolio"
 kind: epic
 status: closed
 priority: 0
-version: 25
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 27
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - unattended
@@ -35,7 +35,7 @@ child_order_hints:
   - is-01m0w943qydjjq7xdn58tg55qz
   - is-01m0w9a47h5zrn7jf16pp2kpxs
 created_at: 2026-08-25T06:02:56.442Z
-updated_at: 2026-10-06T08:36:05.359Z
+updated_at: 2026-10-10T22:49:20.456Z
 closed_at: 2026-10-06T08:36:05.358Z
 close_reason: |
   Finished wrapper (bead review 2026-10-06, origin/main eb43ffe9a): Session-010 wrapper: record session-010-eight-hour-mixed-research.md is status stopped on origin/main and PR #29 MERGED 2026-08-25. Open children think-3s9s and think-bfwm (D-280) moved to think-ydus before closing
