@@ -5,8 +5,8 @@ title: Prevent cross-wired n4 solver fixture context
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - validity
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tyazcycsqvm34fyxb4hdtx
 created_at: 2026-08-25T09:16:21.265Z
-updated_at: 2026-08-25T09:26:46.368Z
+updated_at: 2026-10-10T22:51:01.109Z
 closed_at: 2026-08-25T09:26:46.367Z
 close_reason: "D-260 fixed before persistence: discarded the cross-wired capture; retained same-call theta/cell and solver arrays; independent 22-row/22-RHS exact rebuild and a mutated first-axis control now guard the fixture."
 resolution: null

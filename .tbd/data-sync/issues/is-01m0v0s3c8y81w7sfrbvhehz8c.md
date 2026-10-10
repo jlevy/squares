@@ -5,15 +5,15 @@ title: "PR 24 transition T2a: replace lost negctl receipt"
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - process
 dependencies: []
 parent_id: is-01m0v0ga616pdtr2n71pktm229
 created_at: 2026-08-24T23:13:07.463Z
-updated_at: 2026-08-24T23:24:53.396Z
+updated_at: 2026-10-10T22:50:06.525Z
 closed_at: 2026-08-24T23:24:53.395Z
 close_reason: D-217 recorded the discarded parallel result; a direct receipt-preserving rerun passed all 55 controls in 11.12 seconds. Systemic rehearsal remains think-b3bm.
 resolution: null

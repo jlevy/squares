@@ -5,8 +5,8 @@ title: "PR 24 transition T1: resolve corrected merge and regenerate views"
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - pr24-transition
@@ -15,7 +15,7 @@ parent_id: is-01m0tz8s4yps8zgqwk8cng9qnx
 child_order_hints:
   - is-01m0v0z0d7dvbdbs5mn604376s
 created_at: 2026-08-24T23:08:18.902Z
-updated_at: 2026-08-24T23:18:24.922Z
+updated_at: 2026-10-10T22:50:00.436Z
 closed_at: 2026-08-24T23:18:24.921Z
 close_reason: Corrected PR 24 merge applied; D199-D204 state preserved; generated ledger and 218-defect view regenerated without conflict markers.
 resolution: null

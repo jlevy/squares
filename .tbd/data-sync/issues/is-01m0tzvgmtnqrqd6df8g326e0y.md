@@ -5,15 +5,15 @@ title: "PR 24 review R1: preserve current scientific checkpoint"
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - pr24-review
 dependencies: []
 parent_id: is-01m0tz8s4yps8zgqwk8cng9qnx
 created_at: 2026-08-24T22:56:58.010Z
-updated_at: 2026-08-24T23:24:47.813Z
+updated_at: 2026-10-10T22:49:53.609Z
 closed_at: 2026-08-24T23:24:47.811Z
 close_reason: "Fixed in 0775c20: preserved D199-D204, completed the solver phase, retained D203/think-nr5w, and regenerated current views."
 resolution: null

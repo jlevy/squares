@@ -5,15 +5,15 @@ title: "PR 24 review R6: distinguish retrospective workflow reconstruction"
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - pr24-review
 dependencies: []
 parent_id: is-01m0tz8s4yps8zgqwk8cng9qnx
 created_at: 2026-08-24T22:56:59.585Z
-updated_at: 2026-08-24T23:24:50.373Z
+updated_at: 2026-10-10T22:49:58.760Z
 closed_at: 2026-08-24T23:24:50.372Z
 close_reason: "Fixed in 0775c20: every phase records retrospective or contemporaneous provenance and the ledger reports those statistics separately."
 resolution: null
