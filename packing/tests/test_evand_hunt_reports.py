@@ -62,14 +62,14 @@ def test_claims_record_rebuilds_from_the_retained_houses() -> None:
     assert "equal_side" not in rows[132]
 
 
-def test_n155_is_t128s_minimum_modulo_its_zero_modes() -> None:
+def test_n155_matches_t128_bound_and_source_labeled_indices() -> None:
     row = {r["n"]: r for r in reports.check_claims()["results"]}[155]
     equal = row["equal_side"]
     assert equal["result"] == "T-128"
     assert equal["exact_side"] == row["exact_side"]
     assert equal["identical_poses"] == 152
     assert len(equal["differing_here"]) == len(equal["differing_there"]) == 3
-    # The free square and the two flat-motion squares of the source's report, exactly.
+    # The differing indices match the source's free/flat labels.
     assert equal["differing_here"] == equal["source_zero_mode_squares"] == [83, 134, 138]
     assert equal["differing_are_zero_modes"] is True
 

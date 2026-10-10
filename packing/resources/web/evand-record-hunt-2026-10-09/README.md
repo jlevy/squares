@@ -89,17 +89,17 @@ At $n = 155$ the side is exactly the side of Francisco Couzo’s certificate fro
 [issue #451](https://github.com/jlevy/squares/issues/451), committed on 8 October 2026
 and registered as T-128, pending adoption.
 The two certificates share 152 of their 155 exact poses, centre and rotation alike.
-The three that differ are exactly the source report’s zero modes: square 83 (counting
-from zero), which `hunt1_n155.json` lists under `free_squares`, and squares 134 and 138,
+The three differing indices in Daniel’s certificate are square 83 (counting from
+zero), which `hunt1_n155.json` lists under `free_squares`, and squares 134 and 138,
 which it lists under `second_order.flat_squares`.
-So this is Couzo’s minimum modulo its zero modes, not a second packing.
+A connecting motion between the certificates and equivalence of their local minima
+have not been verified.
 The source calls this packing a nearby minimum of SQUISH’s; Couzo’s issue credits SQUISH
 for his.
 
-That decides how the record takes it.
-T-128’s side is pending adoption, so no case record holds it yet, and the certificate
-adds no new minimum, so it is new evidence for a registered entry: no new entry, and an
-evidence update to T-128.
+The n155 certificate has the same exact bound as T-128, whose side is still pending
+adoption and is not held by a case record.
+The record therefore keeps it as an equal-bound evidence update to T-128.
 `E-evand-465-record-hunt-report` is cited by T-128 as well as T-131.
 
 At $n = 132$ no certificate the record holds is as small.
