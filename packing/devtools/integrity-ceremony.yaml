@@ -90,6 +90,15 @@ allowlist:
       the seven certificates the author calls unchanged against the issue-451
       acquisition roster. Geometry is decided from the complete exact inputs;
       no digest decides geometry or pins this repository's code.
+  - path: packing/devtools/decimal_pose_margins.py
+    kind: external-checkout
+    boundary: >-
+      Decimal pose files read from another repository's checkout at a pinned
+      revision, kept outside Git under derived-only custody (the #470 Mishapolk
+      poses at dd3da5c). A receipt records each measured file's SHA-256, the same
+      value the packet's acquire_source manifest pins, and `check` refuses a file
+      whose bytes are not the measured ones before re-measuring. The digest
+      decides no geometry and names no file this repository wrote.
   - path: packing/devtools/n17_shared_centre_lp.py
     kind: generated-artifact
     boundary: >-
