@@ -3,11 +3,11 @@ type: is
 id: is-01m4jjdz6xsk9sppf8syabrvv0
 title: Coordinate eight-hour X-052 overnight proof and confirmation
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-10-n17-overnight-proof-and-confirmation.md
-delegate: codex@spud10
+delegate: null
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:31:14.516Z
-updated_at: 2026-10-10T18:09:09.623Z
+updated_at: 2026-10-10T18:09:55.656Z
 started_at: 2026-10-10T09:36:17.032Z
 ---
 Launch only on execution instruction. Own agenda-046, actual session clocks, resource guards, disjoint worker claims, checkpoint dispositions, integration and morning handoff; preserve existing think-tmz6 program owner.
