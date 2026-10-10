@@ -632,6 +632,13 @@ def test_the_later_roster_is_all_thirty_of_470_and_the_n126_certificate() -> Non
     assert found == [*(("#470", n) for n in MISHAPOLK_470), ("trio126", 126)]
 
 
+def test_the_488_roster_is_the_counts_its_entry_cites() -> None:
+    found = [(case.issue, case.n) for case in route.import_cases(("#488",))]
+    assert found == [
+        *(("#488", n) for n in (132, 175, 209, 237, 270, 305)),
+    ]
+
+
 def test_the_n126_import_agrees_with_its_receipt_plan_and_print_to_every_digit() -> None:
     case = route.import_cases(("trio126",))[0]
     row = route.decide_import(case)

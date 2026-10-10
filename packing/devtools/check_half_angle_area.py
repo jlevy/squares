@@ -27,6 +27,10 @@ certificate is (`CREDITED`), it is measured pose by pose against that certificat
 ``n126_xu`` against Ryan Xu's at 126, and #470 at 103 and 258, the two counts where its
 side is the smallest known, against Ryan Xu's and SQUISH's.
 
+It reads the issue filed after that sweep too, #488 (``decide-imports --imports
+'#488'``): Francisco Couzo's retained certificates in Evan Daniel's text format, read
+by the same text reader at the counts the entry cites.
+
 The register's two maintained routes (``devtools.evand_arrangement_reports``) share one
 parse and one half-angle conversion (``devtools.evand_exact_certificates``) and both decide
 pairs by the separating-axis theorem; at T-128 and T-130 one of them, ``sqpack.verify``, is
@@ -77,7 +81,8 @@ positive inputs and margins, to the side its packet's frozen claim record and re
 plan state, and to its printed side: equal to it, or rounding up to it at its places. A
 decided count the entry does not cite (#470's 132 and 267) must be absent from the plan's
 claim. ``--imports`` selects by key (``#476``, ``#481``, ``#483``, ``#484``, ``#470``,
-``trio126``); it defaults to the first four, the roster of the first imports review.
+``trio126``, ``#488``); it defaults to the first four, the roster of the first
+imports review.
 
 ``replay-t128`` is the maintained two-route replay of T-128's retained receipt, which
 ``devtools.couzo_refinement_reports`` has no command for: every job decided again by the
@@ -644,7 +649,12 @@ LATER_IMPORTS = {
     "#470": "mishapolk-decimal-poses-2026-10-09",
     "trio126": "evand-trio126-2026-10-09",
 }
-ALL_IMPORTS = {**IMPORTS, **LATER_IMPORTS}
+#: The imports filed after the sweep: Francisco Couzo's certificates of #488, retained
+#: in Evan Daniel's text format.
+IMPORTS_488_489 = {
+    "#488": "couzo-certificates-2026-10-10",
+}
+ALL_IMPORTS = {**IMPORTS, **LATER_IMPORTS, **IMPORTS_488_489}
 #: Imports decided over their whole replayed roster rather than the counts the entry
 #: cites: #470's README-printed 132 and 267 are certified beside the issue's 28.
 WHOLE_ROSTER = frozenset({"#470"})
