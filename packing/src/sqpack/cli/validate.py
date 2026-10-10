@@ -254,6 +254,7 @@ BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 #: what they did on every pull request until that run.
 SITE_LAYOUT_TESTS = (
     "tests/test_site_case_records.py",
+    "tests/test_site_contributor_popovers.py",
     "tests/test_site_math_faces.py",
     "tests/test_site_column_measurement.py",
     "tests/test_site_result_filters.py",
@@ -281,6 +282,7 @@ _SITE_INPUTS = (
     "packing/tests/site_*.py",
     "packing/tests/probes/*",
     "packing/frontier/*",
+    "packing/contributors/*",
     "packing/atlas/*",
     "packing/witnesses/*",
     "packing/campaign/*",
@@ -289,6 +291,7 @@ _SITE_INPUTS = (
     "packing/pyproject.toml",
     "packing/uv.lock",
     "vendor/kpress/*",
+    "LICENSE",
     "*.md",
 )
 SLOW_TESTS = "slow and not exhaustive_exact"

@@ -7,6 +7,7 @@ import html
 import re
 import xml.etree.ElementTree as ET
 from collections import Counter
+from collections.abc import Callable
 from dataclasses import replace
 from decimal import ROUND_FLOOR, Decimal
 from unittest.mock import patch
@@ -19,6 +20,7 @@ from devtools import (
     overview_sections,
     register_prose,
     render_case_pages,
+    render_contributors,
     render_frontier_page,
     render_overview,
     repo_links,
@@ -38,9 +40,7 @@ SETTLED, EARLIER, BROAD = "T-060", "T-037", "T-056"
 
 HREF = re.compile(r'href="([^"]+)"')
 LINE_LINK = re.compile(re.escape(REPO_URL) + r"/blob/main/([^\"?#]+)\?plain=1#L(\d+)")
-STEP = re.compile(
-    r'<li class="site-result-step" data-step="(t-\d{3})" data-standing="([a-z-]*)"'
-)
+STEP = re.compile(r'<li data-step="(t-\d{3})" data-standing="([a-z-]*)"')
 
 
 @pytest.fixture(scope="module")
@@ -129,7 +129,7 @@ def test_the_head_states_the_result_as_the_site_does(
     meta = head.split('<p class="site-result-meta">', 1)[1].split("</p>", 1)[0]
     assert meta.startswith(f'{dated} <span class="site-date-kind">{kind}</span> \u00b7 ')
     assert overview_sections.date_cell(result) in meta
-    assert html.escape(result.credit) in head
+    assert result.credit in html.unescape(re.sub(r"<[^>]+>", "", meta))
     assert "Significance" in head
     assert f'data-novelty="{result.novelty}"' in head
 
@@ -325,6 +325,7 @@ def test_a_broad_result_lists_its_cases_instead_of_drawing_them(
 
 def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     overview: overview_data.Overview,
+    record_property: Callable[[str, object], None],
 ) -> None:
     """T-124's complete broad report fits without losing cases, chain or source links."""
     result = _result(overview, "T-124")
@@ -350,7 +351,7 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     for member in members:
         step = body.split(f'data-step="{member.id.lower()}"', 1)[1].split("</li>", 1)[0]
         assert overview_data.tex_bounds(member.summary) in step
-        assert html.escape(member.credit) in step
+        assert member.credit in html.unescape(re.sub(r"<[^>]+>", "", step))
         shared = [n for n in result_overview.scope(member) if n in cases]
         if len(shared) <= result_overview.CASES_NAMED:
             label = "case " if len(shared) == 1 else "cases "
@@ -361,6 +362,7 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     assert page.name == "result/t-124.html"
     row = next(row for row in site_urls.load_registry() if row.path == page.name)
     assert site_urls.page_budget(row) == 300_000
+    record_property("html_bytes", len(page.html.encode("utf-8")))
     assert len(page.html.encode("utf-8")) <= site_urls.page_budget(row)
     article = page.html.split('<article class="site-result"', 1)[1].split("</article>", 1)[0]
     assert re.findall(r'data-overview-case="(\d+)"', article) == [str(n) for n in cases]
@@ -383,6 +385,53 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
         Counter(urljoin(page.name, html.unescape(link)) for link in HREF.findall(article))
         == expected_links
     )
+
+
+def test_every_result_page_keeps_its_registered_byte_budget(
+    overview: overview_data.Overview, record_property: Callable[[str, object], None]
+) -> None:
+    """The complete result table keeps every registered row and linked literal credit."""
+    page = site_renders.page("all-results.html")
+    row = next(row for row in site_urls.load_registry() if row.path == page.name)
+    assert site_urls.page_budget(row) == 800_000
+    record_property("html_bytes", len(page.html.encode("utf-8")))
+    assert len(page.html.encode("utf-8")) <= site_urls.page_budget(row)
+    assert re.findall(r'<tr id="(t-\d{3})"', page.html) == [
+        result.id.lower() for result in overview_sections.recent_results(overview)
+    ]
+    for result in overview.results:
+        output = page.html.split(f'<tr id="{result.id.lower()}"', 1)[1].split("</tr>", 1)[0]
+        assert result.credit in html.unescape(re.sub(r"<[^>]+>", "", output))
+        assert Counter(HREF.findall(result.credit_html)) <= Counter(HREF.findall(output))
+
+
+def test_case_table_compaction_keeps_xml_source_values_and_links(
+    overview: overview_data.Overview,
+) -> None:
+    """Source bodies remain XML while published table compaction keeps every link."""
+    result = _result(overview, "T-124")
+    body = result_overview.result_popover_html(result, overview)
+    # Existing XML consumers still receive all explicit end tags.
+    _assert_case_values(result_overview.scope(result), overview, body)
+    reference = body + '<table class="other"><tr><td>untouched</td></tr></table>'
+    compact = result_overview.compact_case_tables(reference)
+    assert len(compact) < len(reference)
+    assert '<table class="other"><tr><td>untouched</td></tr></table>' in compact
+    assert Counter(HREF.findall(compact)) == Counter(HREF.findall(reference))
+    assert result_overview.compact_case_tables(compact) == compact
+
+
+@pytest.mark.parametrize("tex", ["n = 11", r"s(11) \geq 31/8", r"x < y", r"\sqrt{2}"])
+def test_compact_math_entities_keep_the_complete_xml_tree(tex: str) -> None:
+    """UTF-8 operators preserve every MathML node, attribute and rendered placeholder."""
+    from kpress.format.markdown import (  # noqa: PLC0415
+        _render_math,  # pyright: ignore[reportPrivateUsage]
+    )
+
+    original = _render_math(tex, display="inline", math="auto", env={})
+    compact = overview_data.math_html(tex)
+    assert ET.tostring(ET.fromstring(compact)) == ET.tostring(ET.fromstring(original))
+    assert len(compact.encode("utf-8")) <= len(original.encode("utf-8"))
 
 
 @pytest.mark.parametrize("result_id", [BROAD, "T-124"])
@@ -445,7 +494,7 @@ def test_the_chain_is_every_result_on_the_case_oldest_first(
         assert f'<a href="all-results.html#{other.id.lower()}">{other.id}</a>' in step
         # A step's date leads and what it dates follows, then the id, as in the tables.
         dated = overview_sections.date_cell(other)
-        assert f'<p class="site-result-step-head">{dated} <a href=' in step
+        assert f"<p>{dated} <a href=" in step
         assert not re.search(r'class="site-date-kind">\w+</span> [\d-]+', step)
         assert overview_data.tex_bounds(other.summary) in step
         # Where the result stands here as it does as a whole, its marks name only the
@@ -459,7 +508,7 @@ def test_the_chain_is_every_result_on_the_case_oldest_first(
         )
         assert overview_sections.kind_and_status(shown) in step
         assert f"packing/frontier/results.yaml?plain=1#L{lines[other.id]}" in step
-        assert html.escape(other.credit) in step
+        assert other.credit in html.unescape(re.sub(r"<[^>]+>", "", step))
         for key in (other.record.get("attribution") or {}).get("source_keys") or []:
             assert html.escape(key.strip("[]")) in step
 
@@ -539,7 +588,7 @@ def test_a_chain_names_only_the_successors_on_its_own_cases(bodies: dict[str, st
     names only the result on that case that supersedes it now, T-093, which replaced
     T-043 on 2026-10-05 (think-6zg1), not those that supersede it at n = 18 or 19."""
     step = bodies["T-043"].split('data-step="t-019"', 1)[1].split("</li>", 1)[0]
-    chips = step.split('<p class="site-result-step-chips">', 1)[1].split("</p>", 1)[0]
+    chips = step.split("<p>", 3)[3].split("</p>", 1)[0]
     assert re.findall(r'href="all-results\.html#(t-\d+)"', chips) == ["t-093"]
 
 
@@ -666,7 +715,10 @@ def test_every_site_link_is_a_served_page_and_a_real_fragment(
 ) -> None:
     rows = {result.id.lower() for result in overview.results}
     cases = {f"n-{n}" for n in overview.cases}
-    records = {render_case_pages.case_url(n) for n in overview.cases}
+    records = {
+        *(render_case_pages.case_url(n) for n in overview.cases),
+        *render_contributors.page_paths(),
+    }
     for result_id, body in bodies.items():
         for href in HREF.findall(body):
             if href.startswith("https://"):
@@ -964,3 +1016,14 @@ def test_an_exact_value_uses_its_own_recent_upper_contribution(
     bound = result_overview.film_bound(facts[1])
     assert 'class="is-upper is-new-result is-exact-value"' in bound
     assert "is-optimal" not in bound
+
+
+@pytest.mark.parametrize("separator", ["\u2028", "\u2029", "\r", "\r\n", "\v", "\f"])
+def test_case_table_compaction_uses_html_parser_line_coordinates(separator: str) -> None:
+    prefix = f"<p>a{separator}bbbbb</p>\n"
+    table = (
+        '<table class="site-result-cases"><tbody><tr><td>1</td><td>2</td></tr></tbody></table>'
+    )
+    assert result_overview.compact_case_tables(prefix + table) == (
+        prefix + '<table class="site-result-cases"><tbody><tr><td>1<td>2</tbody></table>'
+    )

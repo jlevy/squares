@@ -1,0 +1,65 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ContributorOccurrences/v1
+title: Reviewed contributor credit occurrences
+type: object
+additionalProperties: false
+required: [occurrences, inspections]
+properties:
+  occurrences:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required: [origin, expected_text, start, end, label, role, disposition, evidence]
+      properties:
+        origin:
+          type: object
+          additionalProperties: false
+          required: [path, record_key, field]
+          properties:
+            path: {$ref: '#/$defs/text'}
+            record_key: {$ref: '#/$defs/text'}
+            field: {type: string, pattern: '^/'}
+        expected_text: {$ref: '#/$defs/text'}
+        start: {type: integer, minimum: 0}
+        end: {type: integer, minimum: 1}
+        label: {$ref: '#/$defs/text'}
+        role: {$ref: '#/$defs/text'}
+        disposition: {enum: [resolved, unresolved, non-person]}
+        contributor_id: {$ref: '#/$defs/id'}
+        evidence:
+          type: array
+          uniqueItems: true
+          items: {$ref: '#/$defs/id'}
+          description: Source IDs in the resolved contributor record supporting this identity join.
+        note: {$ref: '#/$defs/text'}
+      allOf:
+        - if:
+            properties:
+              disposition: {const: resolved}
+          then:
+            required: [contributor_id]
+            properties:
+              evidence: {minItems: 1}
+          else:
+            not: {required: [contributor_id]}
+            required: [note]
+            properties:
+              evidence: {maxItems: 0}
+  inspections:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required: [path, status, scope, locators]
+      properties:
+        path: {$ref: '#/$defs/text'}
+        status: {enum: [pending, inspected]}
+        scope: {$ref: '#/$defs/text'}
+        locators:
+          type: array
+          uniqueItems: true
+          items: {$ref: '#/$defs/text'}
+$defs:
+  id: {type: string, pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'}
+  text: {type: string, minLength: 1, pattern: '\S'}

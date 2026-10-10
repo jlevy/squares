@@ -15,10 +15,13 @@ result's evidence cites. Nothing here restates either.
 
 from __future__ import annotations
 
+import html
 from collections.abc import Mapping
 from typing import Any
 
 from devtools.build_bound_citations import RECENT_SINCE
+from devtools.contributor_credit import render_credit
+from sqpack.contributor_occurrences import CreditOrigin
 
 #: The groups results by others fall into, in reading order, by the lineage their
 #: sources carry in the bibliography.
@@ -34,6 +37,11 @@ OTHERS = (
 #: other author gets (the owner, 2026-10-01). It is also how other sources' credit lines
 #: name this project: `Kleddamag after Levy, Guzhou0806, Mira`.
 PROJECT_AUTHOR = "Levy"
+
+#: The generator-owned credit is reviewed as a literal source field, like a record's.
+PROJECT_AUTHOR_ORIGIN = CreditOrigin(
+    "packing/devtools/result_credit.py", "constants", "/PROJECT_AUTHOR"
+)
 
 
 def credit_line(record: Mapping[str, Any], sources: Mapping[str, Mapping[str, Any]]) -> str:
@@ -51,6 +59,54 @@ def credit_line(record: Mapping[str, Any], sources: Mapping[str, Mapping[str, An
         for key in record["attribution"]["source_keys"]
     ]
     return "; ".join(dict.fromkeys(lines)).replace("|", r"\|")
+
+
+def result_credit_html(
+    record: Mapping[str, Any], sources: Mapping[str, Mapping[str, Any]], *, prefix: str = ""
+) -> str:
+    """Compose source-addressed credits, retaining ambiguous deduplicated lines as text."""
+    if not record.get("attribution"):
+        author = render_credit(PROJECT_AUTHOR_ORIGIN, PROJECT_AUTHOR, prefix=prefix)
+        after = (record.get("builds_on") or {}).get("credit") or []
+        joined = ", ".join(
+            render_credit(
+                CreditOrigin(
+                    "packing/frontier/results.yaml", record["id"], f"/builds_on/credit/{index}"
+                ),
+                name,
+                prefix=prefix,
+            )
+            for index, name in enumerate(after)
+        )
+        return author + (f" after {joined}" if after else "")
+    rendered: dict[str, str] = {}
+    for key in record["attribution"]["source_keys"]:
+        source = sources[key]
+        if source.get("credit"):
+            text = source["credit"]
+            markup = render_credit(
+                CreditOrigin("packing/resources/bibliography.yaml", key, "/credit"),
+                text,
+                prefix=prefix,
+            )
+        else:
+            text = ", ".join(source["authors"])
+            markup = ", ".join(
+                render_credit(
+                    CreditOrigin(
+                        "packing/resources/bibliography.yaml", key, f"/authors/{index}"
+                    ),
+                    name,
+                    prefix=prefix,
+                )
+                for index, name in enumerate(source["authors"])
+            )
+        if text in rendered and rendered[text] != markup:
+            # Plain-string deduplication cannot authorize one of conflicting identity joins.
+            rendered[text] = html.escape(text)
+        else:
+            rendered.setdefault(text, markup)
+    return "; ".join(rendered.values())
 
 
 def source_lineage(

@@ -34,6 +34,7 @@ from sqpack.assurance import (
     check_evidence_semantics,
     conditional_problems,
 )
+from sqpack.contributor_occurrences import OccurrenceError, load_occurrences
 from sqpack.contributors import ContributorError, load_contributor, load_contributors
 from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.yamlio import load_yaml, safe_load
@@ -84,6 +85,7 @@ CONTACT_STRUCTURES = FRONTIER.parent / "atlas" / "known-best" / "contact-structu
 #: Hosted-data manifests (OR-18): one per release that holds bulk data outside Git.
 HOSTED = FRONTIER.parent / "hosted"
 CONTRIBUTORS = FRONTIER.parent / "contributors"
+CONTRIBUTOR_OCCURRENCES = CONTRIBUTORS / "occurrences.yaml"
 
 
 def load_schema(name: str) -> dict:
@@ -129,10 +131,16 @@ def _validator(schema_path: pathlib.Path) -> Draft202012Validator:
 
 
 def check(path: pathlib.Path) -> list[str]:
-    if path.parent.resolve() == CONTRIBUTORS.resolve() and path.suffix == ".md":
+    occurrence_manifest = path.resolve() == CONTRIBUTOR_OCCURRENCES.resolve()
+    if occurrence_manifest or (
+        path.parent.resolve() == CONTRIBUTORS.resolve() and path.suffix == ".md"
+    ):
         try:
-            load_contributor(path, repo=REPO)
-        except (ContributorError, OSError) as error:
+            if occurrence_manifest:
+                load_occurrences(path, repo=REPO)
+            else:
+                load_contributor(path, repo=REPO)
+        except (ContributorError, OccurrenceError, OSError, yaml.YAMLError) as error:
             return [str(error)]
         return []
     errs: list[str] = []
@@ -314,6 +322,7 @@ def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
     """
     md = sorted(FRONTIER.glob("n-*.md")) + sorted(CONTRIBUTORS.glob("*.md"))
     datasets = sorted(p for p in FRONTIER.glob("*.yaml") if not p.name.endswith(".schema.yaml"))
+    datasets.append(CONTRIBUTOR_OCCURRENCES)
     datasets += [FRONTIER.parent / "defects.yaml"]
     datasets += sorted(
         path for path in WITNESSES.rglob("*.yaml") if not path.name.endswith(".schema.yaml")

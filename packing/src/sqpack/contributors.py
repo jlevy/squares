@@ -102,7 +102,8 @@ def _validator(schema: Path) -> Draft202012Validator:
     return Draft202012Validator(load_yaml(schema.read_text(encoding="utf-8")))
 
 
-def _safe_url(value: str) -> None:
+def validate_public_url(value: str) -> None:
+    """Reject non-HTTP and ambiguous URLs before rendering public contributor links."""
     try:
         parsed = urlsplit(value)
         host = parsed.hostname
@@ -129,7 +130,7 @@ def _safe_url(value: str) -> None:
 
 
 def _account_link(link: Mapping[str, Any]) -> None:
-    _safe_url(link["url"])
+    validate_public_url(link["url"])
     parsed = urlsplit(link["url"])
     host = parsed.hostname
     path = parsed.path.removeprefix("/").removesuffix("/")
@@ -220,7 +221,7 @@ def _semantics(payload: dict[str, Any], bio: str | None, repo: Path) -> None:
         if "archive_path" in source:
             _archive(source["archive_path"], repo)
         if "url" in source:
-            _safe_url(source["url"])
+            validate_public_url(source["url"])
     for link in payload.get("links", []):
         _account_link(link)
     pointers = set()

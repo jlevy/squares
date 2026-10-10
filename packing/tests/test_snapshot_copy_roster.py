@@ -8,6 +8,7 @@ import pytest
 import yaml
 
 from devtools import run_negative_controls as controls
+from sqpack.contributor_occurrences import dependency_paths
 from sqpack.contributors import load_contributors
 from sqpack.yamlio import load_yaml
 from tests.test_negative_controls import index_fixture_source
@@ -82,7 +83,18 @@ def test_contributor_seed_evidence_survives_archive_pruning() -> None:
         for source in contributor.sources
         if source.archive_path is not None
     }
-    assert set(controls.contributor_pruned_targets()) == declared
+    declared.update(
+        path.resolve()
+        for path in dependency_paths(
+            controls.ROOT / "contributors/occurrences.yaml", repo=controls.REPO
+        )
+        if controls.in_pruned_roots(path, frozenset(controls.LINKED_PRUNE_ROOTS))
+    )
+    assert set(controls.contributor_pruned_targets()) == {
+        path
+        for path in declared
+        if controls.in_pruned_roots(path, frozenset(controls.LINKED_PRUNE_ROOTS))
+    }
     assert declared <= set(controls.snapshot_copy_targets())
     assert any(path.name == "LICENSE" for path in declared)
     assert any(path.name == "CITATION.cff" for path in declared)
@@ -104,6 +116,20 @@ def test_snapshot_copies_only_declared_contributor_evidence(
     cited.write_text("authors:\n  - name: Mira\n")
     unrelated = archive / "unrelated.bin"
     unrelated.write_bytes(b"not a deciding input")
+    origin = archive / "origin.yaml"
+    origin.write_text("credit: Mira\n")
+    inspected = archive / "inspected.txt"
+    inspected.write_text("public byline")
+    pending = archive / "pending.pdf"
+    pending.write_bytes(b"pending archive bytes")
+    manifest = {
+        "occurrences": [{"origin": {"path": "packing/resources/origin.yaml"}}],
+        "inspections": [
+            {"path": "packing/resources/inspected.txt", "status": "inspected"},
+            {"path": "packing/resources/pending.pdf", "status": "pending"},
+        ],
+    }
+    (directory / "occurrences.yaml").write_text(yaml.dump(manifest))
     document = load_yaml((original / "mira.md").read_text().split("---\n")[1])
     document["contributor"]["sources"][0]["archive_path"] = "packing/resources/CITATION.cff"
     header = yaml.dump(document, sort_keys=False)
@@ -121,12 +147,15 @@ def test_snapshot_copies_only_declared_contributor_evidence(
     monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
     monkeypatch.setattr(controls, "LINK_BACK", ())
     monkeypatch.setattr(controls, "root_files", tuple)
-    assert controls.snapshot_pruned_targets() == [cited]
+    assert set(controls.snapshot_pruned_targets()) == {cited, origin, inspected}
     index_fixture_source(repo)
     worker = tmp_path / "worker"
     controls.clone_tree(worker)
     assert (worker / cited.relative_to(repo)).read_bytes() == cited.read_bytes()
     assert not (worker / unrelated.relative_to(repo)).exists()
+    assert (worker / origin.relative_to(repo)).read_bytes() == origin.read_bytes()
+    assert (worker / inspected.relative_to(repo)).read_bytes() == inspected.read_bytes()
+    assert not (worker / pending.relative_to(repo)).exists()
     assert (
         load_contributors(worker / "packing/contributors", repo=worker).by_id["mira"].id
         == "mira"

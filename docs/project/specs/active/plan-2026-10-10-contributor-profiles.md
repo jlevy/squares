@@ -4,13 +4,13 @@
 
 **Author:** Codex, for Joshua Levy
 
-**Status:** Draft design with a bounded data-model spike; population and publication
-remain implementation work.
+**Status:** Data-model spike complete; initial population and website implementation in
+progress in [PR #490](https://github.com/jlevy/squares/pull/490).
 
 **Workflow:** W7 pipeline improvement, entered through `tbd shortcut new-plan-spec`.
 
-**Beads:** `think-sxpm` (this plan and spike), `think-m7il` (profile population),
-`think-9yli` (pages and name links).
+**Beads:** `think-39mp` (feature epic), `think-sxpm` (completed model spike),
+`think-m7il` (population and full census), `think-9yli` (pages and name links).
 
 ## Overview
 
@@ -175,6 +175,17 @@ Unresolved occurrences retain plain text and an actionable disposition.
 When profiles merge, preserve retired URLs through the existing URL-history mechanism
 and migrate occurrence IDs together.
 
+The initial implementation fixes an occurrence origin as repository-relative `path`,
+stable `record_key` and `field`. Each reviewed span records the complete
+`expected_text`, `start`, `end`, original `label`, `role`, `disposition`, optional
+`contributor_id` and supporting evidence.
+The validator reads the source field and rejects stale text, overlapping spans, labels
+that differ from their spans, unknown profiles and unresolved evidence pointers.
+Array items use individual field pointers.
+Existing plain credit strings remain available for sorting, print and metadata.
+When equal credit strings from different sources have conflicting reviewed identities,
+the composed credit remains unlinked rather than selecting one source arbitrarily.
+
 ### Convert names to links
 
 Render each resolved occurrence’s original label as an anchor to
@@ -216,9 +227,18 @@ Avoid host-ID collisions from injected headings/fragments.
 Existing prepared-math asset paths assume one directory below the site root, which the
 proposed route satisfies.
 
+A shared article loader owns same-site fetches, inert parsing, relative URL rebasing,
+prepared assets and a pristine cached article; each consumer receives a clone.
+Controllers own request generation and visibility, invalidate pending requests when
+closed or replaced, and scope injected IDs and their fragment/ARIA references.
+Contributor links inside an active overlay are handled before its ordinary anchor-close
+handler and preserve the original visible page opener for focus restoration.
+Static case, result and profile pages include the same enhancement scripts as the
+overview.
+
 ## Implementation Plan
 
-### Phase 0: Review and Data-Model Spike — This PR
+### Phase 0: Review and Data-Model Spike
 
 - [x] Review record families, identity evidence and the relevant website code path.
 - [x] Write the phased plan and record limits of the source census.
@@ -227,15 +247,15 @@ proposed route satisfies.
   with publication site, and handle-only identity without an invented biography.
 - [x] Exercise invalid metadata, provenance, IDs, unsafe links and body shapes;
   independently validate using softschema.
-- [ ] Complete independent review and PR validation; record the outcomes.
+- [x] Complete independent model review and required PR validation; record the outcomes.
 
 This phase proves the record contract against examples.
-Publishing routes and converting names belong to Phase 2, so the spike introduces no
-dead profile links.
+Publishing routes and converting names belong to Phase 2. The model spike alone
+introduces no dead profile links.
 
 ### Phase 1: Select Contributors and Build Profile Records
 
-Owner: `think-m7il`.
+Owner: `think-m7il`; first reviewed batch and reusable tooling: `think-0dqj`.
 
 Build the reusable census tool before bulk authoring.
 Begin with main-site credits, case contributors and PDF bylines; include acknowledgment
@@ -258,7 +278,9 @@ Validate profiles through softschema repair and the project checker before accep
 
 ### Phase 2: Publish Pages and Link Every Resolved Name
 
-Owner: `think-9yli`; starts after the first reviewed population batch.
+Owner: `think-9yli`; page generation: `think-s3wj`; browser behavior: `think-0d3g`.
+Implementation proceeds beside the initial population batch, with publication acceptance
+depending on its reviewed mappings.
 
 Implement standalone pages/index and shared popovers, then the full name-link surface
 matrix. Once the occurrence and renderer APIs are fixed, delegate page/overlay work,
@@ -270,6 +292,103 @@ Report which occurrences became links and why any remain text.
 Historical population may continue in reviewed batches, but publication never uses
 guessed identities or missing destinations.
 Add profile/occurrence maintenance to ordinary result intake.
+
+### Phase 3: Reviewable Basic Website
+
+Acceptance owner: `think-vqio`. This PR includes the model spike, the initial reviewed
+population and a working website.
+The first acceptance scope is the contributor directory, sourced profile pages,
+popovers, and reviewed name links in main result tables, result histories, frontier
+credits and case panels, figures and result lists.
+Unknown identities remain visible as ordinary credit text.
+
+| Sub-bead | Deliverable | Requested agent | Status |
+| --- | --- | --- | --- |
+| `think-0dqj` | Initial profiles, census tool, reviewed occurrence contract and credit links | Sol, `xhigh` | Complete |
+| `think-s3wj` | Directory, standalone profiles, safe biography rendering and publication integration | Sol, `xhigh` | Complete |
+| `think-0d3g` | Shared article loading, accessible contributor popovers and browser checks | Sol, `xhigh` | Complete |
+| `think-vqio` | Independent technical review, integrated preview and validation receipts | Astra, `xhigh`, with coordinator integration | In progress |
+
+The first independent implementation review requested three fixes: initialize overlays
+before their controllers run on standalone pages (`think-0cxt`), preserve distinct
+publication backlinks and accept every valid provenance pointer (`think-4f3u`). The
+integrated build also identified two pages over their existing byte budgets
+(`think-c5gl`) and missing executable-script classifications.
+These are acceptance work for this PR, with regression tests, rather than deferred
+archive work.
+
+The coordinator owns plan updates, beads, commits and final validation.
+Implementation agents own disjoint file sets, with one owner for generated routes and
+shared page shells. The Astra review fixes the source-aware credit and overlay contracts
+before edits, then reviews the frozen implementation after integration.
+
+`think-erx9` adds the requested design-system audit to this acceptance phase.
+The canonical specification is
+[`paper-design.md`](../../../../packing/devtools/templates/paper-design.md), not a
+second profile-specific design system.
+Review case, result, contributor and legacy card popovers together: token and typography
+ownership, dimensions and scrolling, close actions, keyboard/focus behavior, native
+links, canonical-page content, responsive themes, prepared math and script loading.
+Reconcile stale descriptions in that specification and link this plan to the shared
+contract; track any implementation discrepancy as an acceptance fix.
+`think-jm0i` owns typography and close-button clearance corrections; `think-iu56` owns
+publication-input and required-browser coverage gaps identified by the audit.
+`think-iabo` owns the duplicate result headline found in the same review; a fetched
+article retains its title on the standalone page and shows one visible title in its
+result popover.
+
+- [x] Render the same biography, identity fields and public links in a standalone page
+  and its popover.
+- [x] Preserve credit wording and role while converting reviewed names to links.
+- [x] Verify keyboard focus, Escape, modified clicks, fetch failure, request races and
+  transitions from case/result popovers.
+- [x] Verify routes, sitemap, build selection, stale output removal and source drift
+  detection.
+- [x] Open a working preview and inspect desktop/mobile and light/dark presentations.
+- [ ] Resolve independent review findings and update PR #490 with executed validation,
+  preview instructions and remaining census coverage.
+
+### Phase 4: Complete the Archive and Remaining Surfaces
+
+`think-m7il` remains open until every inventoried source has an inspection receipt and
+every credit occurrence has a disposition.
+Batch work continues across PDF bylines, acknowledgments, referenced authors, historical
+construction catalogues and contributed reports.
+`think-bw3z` owns historical PDF inspection and profile batches; `think-nlob` owns web,
+construction and contributed-report reconciliation.
+The census distinguishes inspected, pending, unresolved and non-person records.
+Profile and occurrence counts are reported separately from the count of inspected PDFs.
+
+`think-jn87`, under `think-9yli`, tracks remaining paper, project-card, footer,
+authored-prose, atlas and first-party print conversions after the basic website passes
+review. Create disjoint authoring and renderer sub-beads for each batch, preserving the
+same identity review and validation requirements.
+The initial release does not establish complete archive coverage.
+
+### Intake and Progress Checks
+
+From `packing/`, with the task environment configured, run
+`uv run --frozen --all-extras --group dev python -m devtools.contributor_census` for
+profile counts, structured credit dispositions and PDF inspection coverage.
+Add `--json` for pending source addresses and candidate profile IDs.
+Candidate IDs are review suggestions only.
+
+The first implementation batch contains 20 profiles.
+Its structured census covers 974 occurrences: 738 resolved to profiles, 230 unresolved
+and six non-person credits.
+The manifest also reviews the generator-owned project-author credit separately, for 975
+retained occurrences and 739 resolved joins in total.
+All 144 tracked PDFs still require the complete credit census; a byline-only inspection
+does not count as reading a paper’s acknowledgments and references.
+These counts describe the initial batch and are regenerated by the census command.
+
+For each intake batch, inspect the cited source, reserve person IDs, author sourced
+profiles and review the exact source spans before adding resolved mappings.
+Run the schema/semantic checks, render the affected pages and verify the new name links
+before closing the batch bead.
+If a source field changes, review the changed attribution before updating its expected
+text; do not silence source drift by copying the new text without checking identity and
+role.
 
 ## Testing and Rollout
 
@@ -287,9 +406,8 @@ failure, stale responses and overlay transitions on mobile/desktop and light/dar
 themes. Use existing page budgets and the case/result/URL test patterns.
 
 Run records/edit and change-reachable push checks, then the required checkpoint and
-hosted PR checks.
-Distinguish executed spike evidence from future UI acceptance criteria;
-this PR does not establish browser behavior that Phase 2 has not implemented.
+hosted PR checks. Record executed evidence against the relevant phase; unexecuted
+acceptance criteria remain unchecked.
 
 ### Spike verification
 
@@ -311,11 +429,52 @@ The unchanged full schema-mutation test selection was interrupted after ten minu
 without observed failures; it is not counted as a passing run.
 Final PR and checkpoint results are recorded on the pull request.
 
+### Basic Website Verification
+
+The records tier passed all 49 selected steps in 57.50 seconds after publication
+integration. Softschema repair checks accepted all 20 profiles and the occurrence
+manifest without repairs or warnings.
+Independent Astra checks passed 85 contributor/occurrence tests, then six targeted
+review regressions covering distinct bibliography works, valid provenance pointers,
+generated-page popovers and script inventory.
+The source-aware census reports the initial coverage above; it does not mark the
+remaining PDFs inspected.
+
+The local preview serves the complete site at `http://127.0.0.1:8790/`, with the
+directory at `/contributors/index.html` and progress at `http://127.0.0.1:7790/` while
+those local servers run.
+Rebuild with `python -m devtools.preview_site --output PATH --serve` from `packing/` in
+the project environment; use external scratch for the output.
+Manual inspection confirmed directory-to-popover navigation, the standalone profile,
+Escape/focus restoration and mobile dark-mode layout.
+The generated-page browser selection passed six checks with Chromium required and no
+skips. It covers directory, profile, case and result entry points, native navigation
+without scripts and fetch-failure fallback.
+The budget and content-preservation selection passed 12 tests: T-124 is 299,837 bytes
+against 300,000, and the results table is 791,833 against 800,000. All 178 cases, 67
+history steps and source links remain present; browser DOM and XML math equivalence
+checks passed. The design audit reconciled the canonical guide, component ownership,
+standalone and overlay contracts, and the development guide.
+Profile metadata and headings now use shared typography roles; close-button clearance
+applies to the opening breadcrumb rather than narrowing the whole article.
+Eight computed-style browser combinations cover desktop/mobile, light/dark and
+standalone/popover layouts, including long source identifiers and URLs.
+Publication filters include the contributor stylesheet and cited license; browser
+coverage includes its sans roles and the case-table DOM preservation check.
+The result popover shows one visible title after fetching, while standalone pages and
+cached articles retain theirs.
+Three generated-page browser checks and 28 Node checks cover that correction.
+Independent Astra review accepted the reconciled design guide and final implementation
+with no remaining functional or design blockers.
+The complete contributor browser suite passed 26 tests; a separate eight-case run
+explicitly checked the resolved theme.
+Final push and hosted checks remain part of Phase 3 acceptance.
+
 ## Open Decisions and Limits
 
 - Additional organization-wide code review requires named repositories beyond this
   checkout and its declared dependency.
-- Fix occurrence-manifest fields against the census tool’s output before parallel edits.
+- Keep occurrence-manifest fields and source accessors consistent with census output.
 - The distinct-person count and unresolved PDF identities are Phase 1 outputs.
 - Preserve Unicode public spellings and original credit labels even when profile display
   names differ; the complete bibliography of each retained paper is included in the

@@ -250,6 +250,7 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
     from devtools import (  # noqa: PLC0415
         overview_data,
         paper_front,
+        render_contributors,
         render_overview,
         site_documents,
     )
@@ -273,6 +274,17 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
     rows = [
         _new_row(path, "page", "overview", "devtools.render_overview:render_all", lastmod=day)
         for path in render_overview.PAGES
+    ]
+    rows += [
+        _new_row(
+            path,
+            "page",
+            "overview",
+            "devtools.render_contributors:contributor_pages",
+            first="2026-10-10",
+            lastmod=max(day, "2026-10-10"),
+        )
+        for path in render_contributors.page_paths()
     ]
     for record in records:
         first, revised = _result_dates(record)
@@ -308,7 +320,7 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
         first = paper_front.iso_date(front.dates[0].day)
         revised = paper_front.iso_date(paper_front.revised(front))
         for extension in (".html", ".md", ".pdf"):
-            rows.append(  # noqa: PERF401 -- each output has its own registration
+            rows.append(
                 _new_row(
                     render_overview.paper_path(paper.slug, extension),
                     "paper-file",

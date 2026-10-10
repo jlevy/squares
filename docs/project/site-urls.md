@@ -733,6 +733,27 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/98.html | cases/98.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/99.html | cases/99.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/index.html | cases/ | page | overview | 2026-09-29 | 2026-10-02 | live |
+| contributors/erich-friedman.html | contributors/erich-friedman.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/evan-daniel.html | contributors/evan-daniel.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/f-gobel.html | contributors/f-gobel.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/francisco-couzo.html | contributors/francisco-couzo.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/gustavo-massaccesi.html | contributors/gustavo-massaccesi.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/guzhou0806.html | contributors/guzhou0806.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/hiroshi-nagamochi.html | contributors/hiroshi-nagamochi.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/index.html | contributors/ | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/joshua-levy.html | contributors/joshua-levy.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/kleddamag.html | contributors/kleddamag.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/michael-j-kearney.html | contributors/michael-j-kearney.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/mira.html | contributors/mira.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/peter-shiu.html | contributors/peter-shiu.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/queuingtheorydotcom.html | contributors/queuingtheorydotcom.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/ryu-sungjoon.html | contributors/ryu-sungjoon.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/sam-burns.html | contributors/sam-burns.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/tokoharu.html | contributors/tokoharu.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/walter-stromquist.html | contributors/walter-stromquist.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/walter-trump.html | contributors/walter-trump.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/wand125.html | contributors/wand125.html | page | overview | 2026-10-10 | 2026-10-10 | live |
+| contributors/wolfram-bentz.html | contributors/wolfram-bentz.html | page | overview | 2026-10-10 | 2026-10-10 | live |
 | conventions.html | conventions.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | defects.html | https://github.com/jlevy/squares/blob/main/defects.md | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → https://github.com/jlevy/squares/blob/main/defects.md |
 | development.html | development.html | page | overview | 2026-09-29 | 2026-10-02 | live |

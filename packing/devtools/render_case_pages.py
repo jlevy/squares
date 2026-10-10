@@ -556,8 +556,16 @@ def _upper_panel(case: dict[str, Any]) -> str:
     polynomial = polynomial_block(upper)
     inline_polynomial = polynomial if polynomial.startswith("<dt>") else ""
     rows = (
-        _row("Found by", frontier.credit(upper.get("found_by"), upper.get("found_year")))
-        + _row("Improved by", _esc(", ".join(upper.get("improved_by") or [])))
+        _row(
+            "Found by",
+            frontier.credit(upper.get("found_by"), upper.get("found_year"), n=case["n"]),
+        )
+        + _row(
+            "Improved by",
+            frontier.case_credit(
+                case["n"], "/reported_upper_bound/improved_by", upper.get("improved_by")
+            ),
+        )
         + _row("Construction", construction)
         + _row("Tilt angles", tilts)
         + inline_polynomial
@@ -609,7 +617,15 @@ def _lower_panel(case: dict[str, Any]) -> str:
     lower = case["reported_lower_bound"]
     kind = str(tables.LB_LABEL.get(lower["kind"], lower["kind"])).replace("`", "")
     rows = (
-        _row("Proved by", frontier.credit(lower.get("proved_by"), lower.get("proved_year")))
+        _row(
+            "Proved by",
+            frontier.credit(
+                lower.get("proved_by"),
+                lower.get("proved_year"),
+                n=case["n"],
+                field="/reported_lower_bound/proved_by",
+            ),
+        )
         + _row("Kind", _esc(kind))
         + _row("Scope", tex_bounds(lower.get("scope") or ""))
         + _row("Note", tex_bounds(" ".join(str(lower.get("note") or "").split())))
@@ -767,7 +783,8 @@ def results_block(n: int) -> str:
             f'<li class="site-case-result" data-result="{_esc(result.id)}">'
             f'<p class="site-case-result-head"><a href="{_esc(result_url(result.id))}">'
             f"{_esc(result.id)}</a> {rungs} "
-            f'<span class="site-credit">{_esc(result.credit)} · {_esc(result.date)} · '
+            f'<span class="site-credit">{result.credit_html or _esc(result.credit)} '
+            f"· {_esc(result.date)} · "
             f"{where}</span></p>"
             f'<p class="site-case-result-summary">{tex_bounds(result.summary)}</p>'
             f"{detail}</li>"
@@ -811,7 +828,7 @@ def visual_summary(n: int, *, units: int = 1000, upper: dict[str, Any] | None = 
         figcaption = (
             f"<figcaption>The best packing known for {n} square{'s' if n != 1 else ''}, "
             f"side {_math(bound_tex(upper))}, "
-            f"{frontier.credit(upper.get('found_by'), upper.get('found_year'))}"
+            f"{frontier.credit(upper.get('found_by'), upper.get('found_year'), n=n)}"
             "</figcaption>"
         )
     return (
@@ -1036,7 +1053,7 @@ def _rendered() -> str:
         repository_tree(),
         "packing/frontier",
         served=frozenset(
-            {*render_overview.SITE_PAGES, "./", CASES_HOME, *(case_url(n) for n in numbers)}
+            {*site_documents.served_pages(), "./", CASES_HOME, *(case_url(n) for n in numbers)}
         ),
         aliases={
             **site_documents.RECORD_PAGES,

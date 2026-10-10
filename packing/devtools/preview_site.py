@@ -193,12 +193,18 @@ def build(output: Path, skip: set[str]) -> None:
         pages = render_overview.render_all()
         fragments = render_overview.result_fragments()
         records = render_overview.case_records()
+        from devtools.render_contributors import contributor_pages  # noqa: PLC0415
+
+        contributors = contributor_pages()
         forwarders = render_overview.forwarder_pages()
-        render_overview.write_site(output, [*pages, *fragments, *records, *forwarders])
+        render_overview.write_site(
+            output, [*pages, *fragments, *records, *contributors, *forwarders]
+        )
         for page in pages:
             print(f"wrote {output / page.name}")
         print(f"wrote {len(fragments)} result overviews beside them")
         print(f"wrote {len(records)} case record files under {output / 'cases'}")
+        print(f"wrote {len(contributors)} contributor pages under {output / 'contributors'}")
         for forwarder in forwarders:
             print(f"wrote {output / forwarder.name}, a forwarder")
         print(f"wrote {social_card.write(output)}, the link preview's card")

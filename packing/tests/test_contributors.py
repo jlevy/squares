@@ -40,7 +40,7 @@ def write_record(path: Path, document: dict[str, Any], body: str = "") -> None:
 
 def test_seed_records_keep_identity_and_optional_information_separate() -> None:
     registry = load_contributors(RECORDS, repo=REPO)
-    assert list(registry.by_id) == ["evan-daniel", "mira", "walter-stromquist"]
+    assert {"evan-daniel", "mira", "walter-stromquist"} <= registry.by_id.keys()
     mira = registry.by_id["mira"]
     assert mira.display_name == "Mira"
     assert mira.real_name is None

@@ -467,9 +467,10 @@ class RowDetail(NamedTuple):
     the row's accessible name. It carries no `tabindex`: `overview/row-popover.js` makes
     the row focusable, so a row is never a stop that does nothing."""
     trigger: str
-    """The row's one native trigger, a `<button popovertarget>` around the row's own key:
-    without scripts it is what opens the popover; with them the whole row does, and the
-    button leaves the tab order so each row is one stop."""
+    """The native entry around the row's key: a generic `<button popovertarget>` or a
+    result's ordinary link to its complete page. Enhancement makes the row focusable
+    and removes native popover buttons from the tab order; result links remain links.
+    """
     popover: str
     """The panel: a card's popover in every way (`.site-popover`: the close cross, the caps
     label, the headline, Escape and a click outside), with the row's body and an optional
@@ -627,8 +628,10 @@ RESULT_FRAGMENTS = "result"
 
 
 def result_fragment(result_id: str) -> str:
-    """The address of a result's overview, from a page at the site's root. Its links
-    are written from the root too, so only a page there may place it."""
+    """The complete result page's address from the site root.
+
+    Its article's relative links are rebased against the response URL when fetched.
+    """
     return f"{RESULT_FRAGMENTS}/{result_id.lower()}.html"
 
 
@@ -687,11 +690,11 @@ def star_legend() -> str:
 
 def result_row(result: Result, *, trigger: str, starred: bool = False) -> RowDetail:
     """A result's row popover, the same on both tables of results: its id as the caps
-    label, its summary as the headline, then the result's short detail (`_detail`),
-    which the script replaces with the whole overview, fetched from `result_fragment`
-    when the popover first opens. It has no button: the row pressed is the result's
-    row, in either table, and a button from one table to the same row of the other
-    leads nowhere new. A `starred` row's name ends ", new result", what its star says
+    label, its summary as the headline, then a native link to the complete record.
+    The script replaces that short body with the record's article, fetched from
+    `result_fragment` when the popover first opens. Its Open Result Record action
+    always reaches the complete page; the result ID is an ordinary link too.
+    A `starred` row's name ends ", new result", what its star says
     (`new_result_star`)."""
     name = f"{result.id}: {plain_text(result.summary)}"
     detail = row_detail(
@@ -986,14 +989,14 @@ def result_text(result: Result) -> str:
     return f'<a href="{result_fragment(result.id)}">{tex_bounds(result.summary)}</a>'
 
 
-def credit_cell(credit: str) -> str:
+def credit_cell(credit: str, markup: str = "") -> str:
     """A credit as its cell sets it, whatever the register's credit line says: the
     finder first, and "after …", the work it builds on, quiet after it, in full. So a
     row says whose the result is and what it rests on without a heading over it."""
-    finder, _, after = credit.partition(" after ")
+    finder, _, after = (markup or _esc(credit)).partition(" after ")
     if not after:
-        return _esc(finder)
-    return f'{_esc(finder)} <span class="site-cell-quiet">after {_esc(after)}</span>'
+        return finder
+    return f'{finder} <span class="site-cell-quiet">after {after}</span>'
 
 
 def date_cell(result: Result) -> str:
@@ -1024,7 +1027,7 @@ def result_cells(result: Result, overview: Overview, detail: RowDetail) -> str:
         f'<td class="{case_cell_class(result)}" data-value="{result.first_n}">'
         f"{case_list(result)}</td>"
         f'<td class="site-col-credit" data-value="{_esc(result.credit)}">'
-        f"{credit_cell(result.credit)}</td>"
+        f"{credit_cell(result.credit, result.credit_html)}</td>"
         f'<td class="site-rungs" '
         f'data-value="{_esc(record["confirmation"] + record["verification"])}">'
         f'{ladder_chips(result)}<span class="site-kind">{kind_chip(result)}</span></td>'

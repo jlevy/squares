@@ -17,7 +17,7 @@ from typing import Any
 
 import pytest
 
-from devtools import render_case_pages, render_overview
+from devtools import render_case_pages, render_overview, result_overview
 from devtools.preview_site import serve
 from sqpack.probes import probe
 from tests import site_browser, site_renders
@@ -25,6 +25,7 @@ from tests import site_browser, site_renders
 PROBES = Path(__file__).resolve().parent / "probes"
 FIGURE = probe(PROBES, "case_popover_figure/figure")
 CROSS = probe(PROBES, "case_popover_head/cross")
+TABLE_DOM = probe(PROBES, "case_pages/table_dom")
 EXERCISED_CASES = (10, 11, 12, 13, 14, 17, 29, 32)
 
 
@@ -83,6 +84,18 @@ def _page(browser: Any, *, scripts: bool = True, width: int = 1280) -> Iterator[
 def _shown_case(popover: Any) -> str | None:
     """The case the popover's record is, by its article."""
     return popover.locator("[data-case-body] article.site-case").get_attribute("data-case")
+
+
+def test_case_table_compaction_preserves_the_browser_dom(browser: Any) -> None:
+    """The native parser restores omitted table ends with every case node intact."""
+    overview = site_renders.overview()
+    result = next(result for result in overview.results if result.id == "T-124")
+    body = result_overview.result_popover_html(result, overview)
+    reference = body + '<table class="other"><tr><td>untouched</td></tr></table>'
+    compact = result_overview.compact_case_tables(reference)
+    assert len(compact) < len(reference)
+    with _page(browser, scripts=False) as page:
+        assert page.evaluate(TABLE_DOM, compact) == page.evaluate(TABLE_DOM, reference)
 
 
 def test_a_frontier_row_opens_its_record_and_steps_to_the_next(

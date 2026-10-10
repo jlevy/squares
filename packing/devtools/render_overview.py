@@ -78,6 +78,7 @@ SITE_CSS = TEMPLATES / "site.css"
 #: The result overview's styles, the popover body a result's row opens
 #: (`devtools.result_overview`), kept apart from `site.css` and inlined after it.
 SITE_RESULT_CSS = TEMPLATES / "site-result.css"
+SITE_CONTRIBUTOR_CSS = TEMPLATES / "site-contributor.css"
 SITE_NAV = TEMPLATES / "site-nav.html"
 SITE_NAV_CSS = TEMPLATES / "site-nav.css"
 #: The text tokens every page shares with the explainer: its type base, reading measure,
@@ -99,6 +100,8 @@ ATLAS_VIEW_SCRIPT = BROWSER / "atlas-view.js"
 ATLAS_GRID_SCRIPT = BROWSER / "atlas-grid.js"
 EMBED_SCRIPT = BROWSER / "embed.js"
 CASE_POPOVER_SCRIPT = BROWSER / "case-popover.js"
+ARTICLE_LOADER_SCRIPT = BROWSER / "article-loader.js"
+CONTRIBUTOR_POPOVER_SCRIPT = BROWSER / "contributor-popover.js"
 #: What starts the Visualize page's film when the page is visited.
 FILM_SCRIPT = BROWSER / "film.js"
 THEME_SCRIPT = BROWSER / "theme.js"
@@ -301,6 +304,7 @@ SITE_PAGES: tuple[str, ...] = (
     "frontier.html",
     RESULTS_PAGE,
     "cases/index.html",
+    "contributors/index.html",
     "papers.html",
     *(paper_path(paper.slug) for paper in PAPERS),
     "tutorial.html",
@@ -369,6 +373,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "devtools/probes/site_assets/preload_fonts.js",
     PACKING / "devtools/node/render-site-math.mjs",
     SITE_RESULT_CSS,
+    SITE_CONTRIBUTOR_CSS,
     SITE_NAV,
     SITE_NAV_CSS,
     PAPER_TYPE_CSS,
@@ -607,6 +612,7 @@ def inputs() -> tuple[Path, ...]:
     from devtools import overview_data  # noqa: PLC0415
     from devtools import render_n11_lower_bounds_explainer as explainer  # noqa: PLC0415
     from devtools.render_case_pages import CASES_INPUTS  # noqa: PLC0415
+    from devtools.render_contributors import inputs as contributor_inputs  # noqa: PLC0415
     from devtools.render_frontier_page import FRONTIER_INPUTS  # noqa: PLC0415
 
     return tuple(
@@ -618,6 +624,7 @@ def inputs() -> tuple[Path, ...]:
                 *overview_data.INPUTS,
                 *FRONTIER_INPUTS,
                 *CASES_INPUTS,
+                *contributor_inputs(),
                 *explainer.COMPOSITE_ASSETS,
                 *explainer.WALKTHROUGH,
                 explainer.THRESHOLD_CERTIFICATE,
@@ -645,7 +652,7 @@ def page_assets() -> tuple[str, str]:
     from devtools import site_assets  # noqa: PLC0415
 
     bundle = site_assets.shared()
-    own = (PAPER_TYPE_CSS, SITE_NAV_CSS, SITE_CSS, SITE_RESULT_CSS)
+    own = (PAPER_TYPE_CSS, SITE_NAV_CSS, SITE_CSS, SITE_RESULT_CSS, SITE_CONTRIBUTOR_CSS)
     head = "\n".join(
         [
             bundle.head(_FROM_ROOT),
@@ -680,6 +687,8 @@ def nav_html(current: str, *, root: str = "") -> str:
     """The navigation bar, with the current page marked."""
     nav = SITE_NAV.read_text(encoding="utf-8")
     nav = nav.replace("{{ROOT}}", root).replace("{{LOGO}}", site_logo())
+    if not current:
+        return nav
     marker = f'data-page="{current}"'
     if marker not in nav:
         raise SystemExit(f"site-nav.html has no entry for {current!r}")
@@ -872,7 +881,53 @@ def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
 def colophon_html() -> str:
     """The closing credit every site page carries, in KPress's footer slot: the two lines
     every page shares (`colophon_lines`), as the explainer's are."""
-    return f'<p class="site-colophon">{colophon_lines()}</p>'
+    contributors = (
+        '<span class="site-colophon-line"><a href="contributors/index.html">'
+        "Contributors</a></span>"
+    )
+    return f'<p class="site-colophon">{colophon_lines()}{contributors}</p>'
+
+
+def article_overlay_shells(page: str) -> str:
+    """Add the shared article overlays once, including on standalone record pages."""
+    from devtools.render_case_pages import case_popover  # noqa: PLC0415
+
+    shells = []
+    if "data-case-popover" not in page:
+        shells.append(case_popover())
+    if "data-contributor-popover" not in page:
+        shells.append(
+            '<div id="pop-contributor" class="site-popover site-contributor-popover" '
+            'popover="auto" data-contributor-popover role="dialog" '
+            'aria-label="Contributor profile">'
+            '<button type="button" class="site-popover-close" '
+            'popovertarget="pop-contributor" popovertargetaction="hide" '
+            'aria-label="Close">\u00d7</button>'
+            "<div data-contributor-body></div>"
+            '<p class="site-popover-actions"><a class="site-popover-action" '
+            'data-contributor-open href="contributors/index.html">Open profile</a></p></div>'
+        )
+    return page.replace(
+        "</body>",
+        '<div class="kpress site-overlay-shells">' + "".join(shells) + "</div></body>",
+        1,
+    )
+
+
+def article_page_scripts(page_scripts: Sequence[Path]) -> tuple[Path, ...]:
+    """Load shared fetch/lifecycle code before every article controller."""
+    return tuple(
+        dict.fromkeys(
+            (
+                THEME_SCRIPT,
+                ARTICLE_LOADER_SCRIPT,
+                POPOVER_SCRIPT,
+                *page_scripts,
+                CASE_POPOVER_SCRIPT,
+                CONTRIBUTOR_POPOVER_SCRIPT,
+            )
+        )
+    )
 
 
 def kpress_page(
@@ -966,6 +1021,7 @@ def kpress_page(
     )
     if rewrite_body is not None:
         page = rewrite_body(page)
+    page = article_overlay_shells(page)
     from devtools import site_assets  # noqa: PLC0415
 
     assets = site_assets.shared().assets
@@ -973,7 +1029,7 @@ def kpress_page(
         f"\n{site_assets.script_tag(ref, _FROM_ROOT)}"
         for ref in (
             kpress_client_asset(),
-            *(assets.script_file(path) for path in (THEME_SCRIPT, *page_scripts)),
+            *(assets.script_file(path) for path in article_page_scripts(page_scripts)),
         )
     )
     page = page.replace("</body>", f"{programs}\n</body>", 1)
@@ -1171,8 +1227,8 @@ def results_page() -> Page:
 
 def papers_page() -> Page:
     """The Papers section's page: a short introduction and one large card per paper,
-    each the link to its paper, which is a full page of the site. It has no popover,
-    so it carries no popover script. The introduction's links to the three parts of the
+    each the link to its paper, which is a full page of the site. Shared article overlays
+    remain available for marked record links. The introduction's links to the three parts of the
     series are the cards' own addresses, filled from the one constant each."""
     from devtools import overview_sections  # noqa: PLC0415
 
@@ -1229,7 +1285,9 @@ def frontier_page() -> Page:
     )
 
 
-def static_content_page(body: str, *, meta: PageMeta, current: str) -> Page:
+def static_content_page(
+    body: str, *, meta: PageMeta, current: str, page_scripts: Sequence[Path] = ()
+) -> Page:
     """A complete styled page around an already rendered article."""
     from devtools import site_assets, site_math  # noqa: PLC0415
     from devtools.render_case_pages import rebase_links  # noqa: PLC0415
@@ -1241,7 +1299,7 @@ def static_content_page(body: str, *, meta: PageMeta, current: str) -> Page:
     head, _math_scripts = page_assets()
     programs = "\n".join(
         site_assets.script_tag(site_assets.shared().assets.script_file(path), _FROM_ROOT)
-        for path in (THEME_SCRIPT,)
+        for path in article_page_scripts(page_scripts)
     )
     page = fill(
         (TEMPLATES / "case-record.html").read_text(encoding="utf-8"),
@@ -1251,10 +1309,12 @@ def static_content_page(body: str, *, meta: PageMeta, current: str) -> Page:
             "NAV": nav_html(current),
             "RECORD": body,
             "FOOTER": colophon_html(),
-            "PROGRAMS": programs,
+            "PROGRAMS": "",
         },
         where="case-record.html",
     )
+    page = article_overlay_shells(page)
+    page = page.replace("</body>", f"{programs}\n</body>", 1)
     page = site_math.prepare(page)
     directory = str(Path(meta.path).parent)
     if directory != ".":
@@ -1352,7 +1412,12 @@ def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterat
 
     Chains, amendments and neighbors always use the complete register; row overlays
     extract each page's article on input."""
-    from devtools import overview_data, overview_sections, site_urls  # noqa: PLC0415
+    from devtools import (  # noqa: PLC0415
+        overview_data,
+        overview_sections,
+        result_overview,
+        site_urls,
+    )
 
     overview = overview_data.load()
     rows = site_urls.load_registry()
@@ -1408,7 +1473,8 @@ def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterat
             f"{overview_sections.tex_bounds(result.summary)}</h1>"
         )
         body = body.replace(">", ">" + heading, 1)
-        yield static_content_page(body, meta=meta, current="results")
+        page = static_content_page(body, meta=meta, current="results")
+        yield Page(page.name, result_overview.compact_case_tables(page.html))
 
 
 def result_fragments() -> list[Page]:
@@ -1519,7 +1585,15 @@ def forwarder_pages() -> list[Page]:
 def render_site() -> list[Page]:
     """Every file this module writes: the pages, the result fragments, the case record
     files, and a forwarder at each address a page used to have."""
-    return [*render_all(), *result_fragments(), *case_records(), *forwarder_pages()]
+    from devtools.render_contributors import contributor_pages  # noqa: PLC0415
+
+    return [
+        *render_all(),
+        *result_fragments(),
+        *case_records(),
+        *contributor_pages(),
+        *forwarder_pages(),
+    ]
 
 
 def asset_files(files: Sequence[Page]) -> dict[str, bytes]:
@@ -1572,10 +1646,11 @@ def write_site(output: Path, files: Sequence[Page]) -> None:
     from devtools import site_assets  # noqa: PLC0415
     from devtools.overview_sections import RESULT_FRAGMENTS  # noqa: PLC0415
     from devtools.render_case_pages import CASES_DIR  # noqa: PLC0415
+    from devtools.render_contributors import CONTRIBUTORS_DIR  # noqa: PLC0415
 
     output.mkdir(parents=True, exist_ok=True)
     kept = {output / file.name for file in files}
-    for directory in (RESULT_FRAGMENTS, CASES_DIR):
+    for directory in (RESULT_FRAGMENTS, CASES_DIR, CONTRIBUTORS_DIR):
         for stale in sorted((output / directory).glob("*.html")):
             if stale not in kept:
                 stale.unlink()
@@ -1602,15 +1677,21 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="exit non-zero if a file on disk differs from a fresh render",
     )
     args = parser.parse_args(argv)
+    from devtools.render_contributors import (  # noqa: PLC0415
+        CONTRIBUTORS_DIR,
+        contributor_pages,
+    )
+
     output = args.output.resolve()
     pages = render_all()
     fragments = result_fragments()
     records = case_records()
+    contributors = contributor_pages()
     forwarders = forwarder_pages()
     if args.check:
         stale = [
             p.name
-            for p in (*pages, *fragments, *records, *forwarders)
+            for p in (*pages, *fragments, *records, *contributors, *forwarders)
             if not (output / p.name).is_file()
             or (output / p.name).read_text(encoding="utf-8") != p.html
         ]
@@ -1627,17 +1708,21 @@ def main(argv: Sequence[str] | None = None) -> int:
             if not (output / name).is_file()
             or (output / name).read_text(encoding="utf-8") != text
         ]
-        written = {p.name for p in (*pages, *fragments, *records)} | set(crawl)
+        written = {p.name for p in (*pages, *fragments, *records, *contributors)} | set(crawl)
         stale += [
             path.relative_to(output).as_posix()
-            for directory in (RESULT_FRAGMENTS, CASES_DIR)
+            for directory in (RESULT_FRAGMENTS, CASES_DIR, CONTRIBUTORS_DIR)
             for path in sorted((output / directory).glob("*.html"))
             if path.relative_to(output).as_posix() not in written
         ]
         from devtools import site_assets  # noqa: PLC0415
 
         stale += site_assets.stale_assets(
-            output, {**asset_files([*pages, *fragments, *records, *forwarders]), **crawl_assets}
+            output,
+            {
+                **asset_files([*pages, *fragments, *records, *contributors, *forwarders]),
+                **crawl_assets,
+            },
         )
         stale += [
             name
@@ -1649,10 +1734,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
         print(
             f"{len(pages)} pages, {len(fragments)} result overviews, {len(records)} case "
-            f"records and {len(forwarders)} forwarders match a fresh render"
+            f"records, {len(contributors)} contributor pages and {len(forwarders)} forwarders "
+            "match a fresh render"
         )
         return 0
-    write_site(output, [*pages, *fragments, *records, *forwarders])
+    write_site(output, [*pages, *fragments, *records, *contributors, *forwarders])
     for page in pages:
         print(f"wrote {output / page.name} ({len(page.html) // 1024} KB)")
     for forwarder in forwarders:

@@ -112,12 +112,17 @@ name: Certificate page
       - packing/devtools/templates/site-math.css
       - packing/devtools/templates/site.css
       - packing/devtools/templates/site-result.css
+      - packing/devtools/templates/site-contributor.css
       - packing/devtools/templates/overview-article.md
       - packing/devtools/templates/all-results-article.md
       - packing/devtools/templates/visualize-article.md
       - packing/devtools/templates/papers-article.md
       - packing/devtools/templates/site-forwarder.html
       - packing/devtools/render_overview.py
+      - packing/devtools/render_contributors.py
+      - packing/devtools/contributor_credit.py
+      - packing/contributors/**
+      - packing/resources/**
       - packing/devtools/overview_data.py
       - packing/devtools/overview_sections.py
       - packing/devtools/result_overview.py
@@ -150,6 +155,7 @@ name: Certificate page
       - SYNOPSIS.md
       - conventions.md
       - development.md
+      - LICENSE
       - packing/devtools/templates/fonts/**
       - packing/atlas/known-best/known-best-1-100.svg
       - packing/atlas/known-best/known-best-1-100.png
@@ -854,6 +860,7 @@ jobs:
       # lacks, so those failures stop the build here too.
       - name: Render the site's pages twice and require the renders to agree
         run: |
+          uv run --frozen --group dev python -m devtools.render_contributors --checkout-evidence
           twin="$RUNNER_TEMP/render-twin"
           uv run --frozen --group dev python -m devtools.render_overview --output "$twin" &
           twin_pid=$!

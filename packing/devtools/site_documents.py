@@ -191,6 +191,7 @@ RECORD_PAGES: dict[str, str] = {
 #: Where every case's record is served, one address per case (`render_case_pages`).
 CASES_DIR = "cases"
 _CASE_FILE = re.compile(r"packing/frontier/n-(\d{3})\.md")
+_CONTRIBUTOR_FILE = re.compile(r"packing/contributors/([a-z0-9]+(?:-[a-z0-9]+)*)\.md")
 #: A link as kpress writes one, with its text plain or one code span.
 _TEXT_LINK = re.compile(r'<a href="([^"]*)">(<code>)?([^<]*)(</code>)?</a>')
 _RESULT_ID = re.compile(r"T-\d{3}")
@@ -306,7 +307,19 @@ def record_aliases(tree: RepositoryTree) -> dict[str, str]:
         for path in tree.files
         if (match := _CASE_FILE.fullmatch(path))
     }
-    return {**RECORD_PAGES, **cases}
+    contributors = {
+        path: f"contributors/{match.group(1)}.html"
+        for path in tree.files
+        if (match := _CONTRIBUTOR_FILE.fullmatch(path))
+    }
+    return {**RECORD_PAGES, **cases, **contributors}
+
+
+def served_pages() -> frozenset[str]:
+    """Every static page a reader-document link may name directly."""
+    from devtools.render_contributors import page_paths  # noqa: PLC0415
+
+    return frozenset((*render_overview.SITE_PAGES, *page_paths()))
 
 
 @cache
@@ -398,7 +411,7 @@ def render_document(
         document.name,
         tree,
         base,
-        served=frozenset(render_overview.SITE_PAGES),
+        served=served_pages(),
         aliases=record_aliases(tree),
     )
     return render_overview.kpress_page(
@@ -518,7 +531,7 @@ def rewrite_overview_blocks(page: str) -> str:
     context = LinkContext(
         "index.html",
         tree,
-        served=frozenset(render_overview.SITE_PAGES),
+        served=served_pages(),
         aliases=record_aliases(tree),
     )
     report = LinkReport()

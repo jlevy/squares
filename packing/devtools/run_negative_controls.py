@@ -1528,6 +1528,15 @@ def contributor_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[P
                 path = (REPO / source.archive_path).resolve()
                 if in_pruned_roots(path, selected_roots):
                     targets.add(path)
+    manifest = directory / "occurrences.yaml"
+    if manifest.is_file():
+        from sqpack.contributor_occurrences import dependency_paths  # noqa: PLC0415
+
+        targets.update(
+            path.resolve()
+            for path in dependency_paths(manifest, repo=REPO)
+            if in_pruned_roots(path.resolve(), selected_roots)
+        )
     return sorted(targets)
 
 
@@ -1745,7 +1754,10 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
         for path in inventory
         if path.parent == ROOT / "contributors" and path.suffix == ".md"
     )
+    occurrence_manifest = ROOT / "contributors/occurrences.yaml"
     readers = [*documents, register, *contributor_documents]
+    if occurrence_manifest in inventory:
+        readers.append(occurrence_manifest)
     queries = "".join(inventory[path][0] + "\n" for path in readers)
     contents = subprocess.run(
         ["git", "cat-file", "--batch"],
@@ -1791,6 +1803,16 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
                 path = (REPO / source["archive_path"]).resolve()
                 if path in inventory and in_pruned_roots(path, roots):
                     rescued.add(path)
+    if occurrence_manifest in texts:
+        manifest = safe_load(texts[occurrence_manifest])
+        dependencies = [row["origin"]["path"] for row in manifest["occurrences"]]
+        dependencies.extend(
+            row["path"] for row in manifest["inspections"] if row["status"] == "inspected"
+        )
+        for raw in dependencies:
+            path = (REPO / raw).resolve()
+            if path in inventory and in_pruned_roots(path, roots):
+                rescued.add(path)
     named = {*COPY_SEPARATELY, *ROOT_DOCUMENTS}
     separate = [
         *COPY_SEPARATELY,

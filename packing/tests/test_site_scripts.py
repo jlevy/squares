@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from devtools import site_assets
+from devtools import render_overview, site_assets
 from devtools.check_site_scripts import inventory
 
 
@@ -56,3 +56,26 @@ def test_inventory_accepts_the_actual_protocol_font_bootstrap(tmp_path: Path) ->
     _, errors = inventory(tmp_path)
     assert len(errors) == 1
     assert "exceeds 4096 bytes" in errors[0]
+
+
+def test_inventory_classifies_published_contributor_article_programs(tmp_path: Path) -> None:
+    """Actual hashed first-party assets are declared as enhancements over static pages."""
+    assets = site_assets.SiteAssets()
+    programs = (
+        render_overview.BROWSER / "article-loader.js",
+        render_overview.BROWSER / "contributor-popover.js",
+    )
+    directory = tmp_path / "contributors"
+    directory.mkdir()
+    directory.joinpath("index.html").write_text(
+        "".join(
+            site_assets.script_tag(assets.script_file(program), "contributors/index.html")
+            for program in programs
+        )
+    )
+    site_assets.write_assets(tmp_path, assets.files())
+    records, errors = inventory(tmp_path)
+    assert errors == []
+    assert len(records) == 2
+    assert {record.category for record in records} == {"input-response"}
+    assert all(record.bytes > 0 for record in records)
