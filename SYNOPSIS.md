@@ -6162,8 +6162,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | claimed by a session | 297 | 76,355 | 42,099 | 885 | 6,096 | 646.8 h |
-| claimed by none | 67 | 14,743 | 8,432 | 194 | 1,208 | 68.43 h |
-| **measured** | **364** | **91,098** | **50,531** | **1,079** | **7,304** | **715.23 h** |
+| claimed by none | 73 | 16,977 | 9,645 | 258 | 1,273 | 74.03 h |
+| **measured** | **370** | **93,332** | **51,744** | **1,143** | **7,369** | **720.83 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
