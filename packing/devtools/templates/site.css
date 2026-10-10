@@ -2336,6 +2336,8 @@ html[data-site-atlas-scale="row"]
    frame with the grid's gaps, 1344 pixels wide at 1280, before it settled. A tile keeps
    its own transition, which is the wash alone. */
 .site-atlas-cells,
+.site-atlas-row,
+.site-atlas-segment,
 .site-atlas-cell :is(svg, img),
 .site-atlas-n {
   transition: none;

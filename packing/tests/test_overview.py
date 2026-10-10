@@ -1459,7 +1459,11 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     # Nor does anything in the block transition its place by another sheet's rule: KPress
     # gives every classed element a 0.01ms transition of every property under reduced
     # motion, which laid the triangle out for a frame with the grid's gaps.
-    still = _rule(css, ".site-atlas-cells,\n.site-atlas-cell :is(svg, img),\n.site-atlas-n")
+    still = _rule(
+        css,
+        ".site-atlas-cells,\n.site-atlas-row,\n.site-atlas-segment,\n"
+        ".site-atlas-cell :is(svg, img),\n.site-atlas-n",
+    )
     assert "transition: none;" in still
     script = render_overview.ATLAS_VIEW_SCRIPT.read_text(encoding="utf-8")
     for token in (

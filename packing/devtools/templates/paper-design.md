@@ -1449,10 +1449,10 @@ it.
   A second press mid-move reads the tiles where they have got to, cancels the first move
   and starts from there, with the focus kept on the tab pressed.
   The final layout is the stylesheet’s, correct with no animation at all, and nothing in
-  the block transitions its place (`transition: none` on the box of tiles, the drawings
-  and the numbers): KPress’s reduced-motion rule gives every classed element a 0.01ms
-  transition of every property, under which the triangle was laid out for one frame with
-  the grid’s gaps, 1344 pixels wide at 1280, before it settled.
+  the block transitions its place (`transition: none` on the tile track, row and segment
+  wrappers, drawings, and numbers): KPress’s reduced-motion rule gives every classed
+  element a 0.01ms transition of every property, under which the triangle was laid out
+  for one frame with the grid’s gaps, 1344 pixels wide at 1280, before it settled.
   `devtools.measure_atlas_views` measures the layouts (`layout`), times the moves
   (`move`) and pictures both (`shots`); `tests/test_site_atlas_views.py` holds the page
   to all of it in Chromium.

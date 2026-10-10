@@ -64,6 +64,7 @@ DRAWING = probe(PROBES, "site_atlas_views/drawing")
 INITIAL = probe(PROBES, "site_atlas_views/initial")
 ROWS = probe(PROBES, "site_atlas_views/rows")
 RESIZE_SETTLED = probe(PROBES, "site_atlas_views/resize-settled")
+REDUCED_GEOMETRY = probe(PROBES, "site_atlas_views/reduced-geometry")
 SUBSET = probe(PROBES, "site_atlas_views/subset")
 REFERENCE = probe(PROBES, "site_atlas_views/reference")
 CONTRIBUTIONS = probe(PROBES, "site_atlas_views/contributions")
@@ -1072,6 +1073,42 @@ def test_a_linked_triangle_is_the_triangle_before_a_tile_is_drawn(seen: Readings
             "moving": 0,
         }
     ]
+
+
+def test_reduced_motion_wrappers_commit_geometry_in_the_click_frame(
+    row_browser: Any, row_site: str, tmp_path: Path
+) -> None:
+    """Rows and segments change geometry immediately, without a CSS transition."""
+    page = atlas.open_atlas(
+        row_browser,
+        row_site + "atlas.html",
+        view="grid",
+        size="medium",
+        reduced_motion="reduce",
+        **DESKTOP,
+    )
+    try:
+        report = page.evaluate(REDUCED_GEOMETRY, {"press": TRIANGLE})
+    finally:
+        page.close()
+    assert report is not None
+    (tmp_path / "reduced-motion-geometry.json").write_text(json.dumps(report, indent=2) + "\n")
+    immediate, frame = report["immediate"], report["next_frame"]
+    assert immediate["view"] == frame["view"] == "triangle"
+    assert immediate["line_gap"] == pytest.approx(immediate["row_gap"], abs=atlas.EDGE)
+    assert immediate["properties"] == ["none"]
+    assert immediate["transitions"] == []
+    assert sum(box["key"].startswith("tile:") for box in immediate["geometry"]) == 100
+    assert len(immediate["geometry"]) > 100
+    for first, next_frame in zip(immediate["geometry"], frame["geometry"], strict=True):
+        assert first["key"] == next_frame["key"]
+        for dimension in ("left", "top", "width", "height"):
+            assert first[dimension] == pytest.approx(next_frame[dimension], abs=atlas.EDGE), (
+                first["key"],
+                dimension,
+                first,
+                next_frame,
+            )
 
 
 def test_reduced_motion_switches_at_once(seen: Readings) -> None:
