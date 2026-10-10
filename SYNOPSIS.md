@@ -594,6 +594,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: Mishapolk’s Decimal Poses (#470) and Evan Daniel’s n = 126 Certificate](docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md) | dated review record | record | retained | — |
 | [Review: Four Rational Upper-Bound Imports of 9 and 10 October (#476, #481, #483, #484)](docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md) | dated review record | record | retained | — |
 | [Review: Couzo’s and Daniel’s Rational Refinement Replays (T-128, T-130, T-131)](docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 335427/50000`: Review of the Clipped-Corner Transfer on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) | dated review record | record | retained | — |
