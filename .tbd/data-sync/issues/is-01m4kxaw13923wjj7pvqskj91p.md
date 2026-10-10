@@ -3,9 +3,9 @@ type: is
 id: is-01m4kxaw13923wjj7pvqskj91p
 title: Audit and align contributor profiles with the shared design system
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: codex@spud10
 labels: []
@@ -18,7 +18,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T22:01:01.730Z
-updated_at: 2026-10-10T22:11:20.845Z
+updated_at: 2026-10-10T22:18:04.908Z
 started_at: 2026-10-10T22:01:29.737Z
+closed_at: 2026-10-10T22:18:04.894Z
+close_reason: Implementation and design documentation complete; Astra accepted with no functional or design blockers. Contributor browser suite26/26 plus8 explicit theme/design checks pass. Shared article contracts and owner/test matrix reconciled in paper-design.md; plan and development guide link the canonical contract. Broader pre-push/hosted acceptance remains think-vqio.
+resolution: null
+duplicate_of: null
 ---
 User requested comprehensive design-system review of popovers, profiles and related surfaces. Compare canonical paper-design.md and active site plans against shared controllers, CSS roles/tokens, accessibility, themes/responsive behavior, canonical pages and fetched article parity. Reconcile documentation, fix concrete inconsistencies, and retain Astra review evidence.
