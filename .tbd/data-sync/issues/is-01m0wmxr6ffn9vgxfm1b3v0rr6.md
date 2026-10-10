@@ -5,13 +5,13 @@ title: Reconcile D-318 stale mutation-control expectation
 kind: bug
 status: closed
 priority: 3
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies: []
 parent_id: is-01m0w9a47h5zrn7jf16pp2kpxs
 created_at: 2026-08-25T14:24:25.806Z
-updated_at: 2026-10-10T22:49:27.194Z
+updated_at: 2026-10-10T22:53:38.329Z
 closed_at: 2026-08-25T14:25:57.032Z
 close_reason: Recorded D-318 and corrected the mutated unprotected-fix expectation to 105; schema, synopsis, and all 62 negative controls pass.
 resolution: null
