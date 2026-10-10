@@ -5,7 +5,7 @@ title: Port PR 25 visualization toolkit onto the current packing architecture
 kind: task
 status: closed
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 created_at: 2026-08-25T07:16:00.450Z
-updated_at: 2026-10-10T23:02:54.921Z
+updated_at: 2026-10-10T23:03:42.352Z
 closed_at: 2026-08-25T07:24:42.798Z
 close_reason: PR 25 toolkit is ported to src/sqpack, cases, devtools, and packing-validate on current main.
 resolution: null
