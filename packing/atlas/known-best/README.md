@@ -5,11 +5,14 @@ through $n = 324$ and renders every record with the repository’s deterministic
 renderer. The machine-readable discovery layer is [`manifest.json`](manifest.json).
 The range widened from 100 on 2026-09-07 under
 [the expansion plan](../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md).
-Two composites are drawn from it: the published figure of the first hundred, unchanged,
-and a poster of the whole corpus beside it.
+Two composites are drawn from it: the published figure of the first hundred, with its
+10-by-10 layout, and a poster of the whole corpus beside it.
 The calibration annotations further down stay pinned to the first hundred by design.
 
-Everything in this directory is generated.
+The geometry records, drawings and exports in this directory are generated.
+[`credit-attributions.json`](credit-attributions.json) is the curated input for
+lower-bound and optimality-proof acknowledgments; it retains names, roles, source
+references and evidenced dates without changing any scientific result.
 [FIGURE-PLAYBOOK.md](FIGURE-PLAYBOOK.md) is the playbook for both: how to rebuild them,
 where each fact on them comes from, what a third would take, and how the poster’s byte
 budget was measured.
@@ -20,50 +23,125 @@ budget was measured.
 
 The composite is a native 10-by-10 SVG, not a screenshot montage.
 Its 5,050 square polygons come from the same normalized witnesses as the individual
-figures under [`rendering/`](rendering/).
+figures under [`rendering/`](rendering/). The title and plain black “The Squares Project
+· github.com/jlevy/squares” line sit above the grid; its problem description, legend,
+construction, lower-bound and optimality-proof credits and dated diagram credit occupy a
+footer.
+
+Both composites share the same two-line problem description, two-column legend and
+construction credits.
+Each counted legend item names the count and number of cases in that composite, such as
+“proved optimal (45 of 100)” or “proved optimal (77 of 324)”. Titles, problem
+descriptions and all ordinary text use black; case numbers remain gray.
+Recent-result marks and the angle/contact swatches keep their semantic colors.
+A bundled bold sans-serif face supplies the print text and its layout measurements.
+The gap between information blocks is three body-text ems, measured between their ink
+bounds; the lines within a block share 1.50 leading and weight 700. All three credit
+paragraphs use the width of the balanced three-line construction paragraph, with
+complete names and role clauses kept together.
 
 The composite ships in four forms, all drawn from that one SVG in one build:
 
 | File | Size | For |
 | --- | --- | --- |
-| [`known-best-1-100.svg`](known-best-1-100.svg) | 2400 × 2896 units | the source; scales to anything |
-| [`known-best-1-100.png`](known-best-1-100.png) | 2400 × 2896 px | the GitHub-facing raster preview |
-| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4800 × 5792 px | attaching, or downscaling for social media |
-| [`known-best-1-100.pdf`](known-best-1-100.pdf) | 25 × 30.17 in | printing; vector, so text stays selectable |
+| [`known-best-1-100.svg`](known-best-1-100.svg) | 2150 × 3823 units | the source; scales to anything |
+| [`known-best-1-100.png`](known-best-1-100.png) | 2150 × 3823 px | the GitHub-facing raster preview |
+| [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4300 × 7646 px | attaching, or downscaling for social media |
+| [`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) | 22.40 × 39.82 in | printing; vector, so text stays selectable |
 
 Each export carries the SHA-256 of its source SVG, so `--check` rejects any one of them
 that has fallen behind the drawing.
 The 2x raster is scaled by a whole number rather than to a round pixel width: a
 fractional scale lands every edge on a fractional pixel boundary, and the antialiasing
 shades the rasteriser then invents cost more bytes than the extra pixels do.
-Rendered from this SVG, a 4096-pixel-wide export is 1,440,555 bytes for 20.2 megapixels
-where the 2x export is 1,294,216 for 27.8.
 
 ## The poster, `n = 1..324`
 
 [![The complete known-best atlas from n equals one through three hundred twenty-four.](known-best-1-324.png)](known-best-1-324.svg)
 
-Every case the register holds, at the figure’s card scale: 18 columns of 18, with 52,650
-square polygons from the same witnesses.
-The image above is the raster; the vector it was drawn from is one click away, and the
-PDF is a 44-by-51-inch page.
+Every case the register holds, at the figure’s card scale, arranged in a triangle: row
+$k$ holds $n = (k-1)^2 + 1$ through $k^2$. All eighteen rows are complete and
+right-aligned; the final row has thirty-five cards.
+The packing drawings and card scale remain unchanged.
+A $k×k$ grid label marks each row’s first retained regular axis-aligned grid packing;
+the dimensions and `GRID` form one line rotated 90 degrees beside the grid segment, and
+the card retains its ordinary count.
+Its distance from the first grid outline matches the ordinary horizontal gap between
+boxes. Where irregular packings precede it, an extra gap of half a drawing width (79
+units) separates the groups horizontally.
+Both PDFs use the same 287-unit row pitch and 203-unit column pitch.
+Compared with the 214-unit column and 307-unit row pitches, visible horizontal box gaps
+are about 20% tighter, and the annotation-to-next-row clearance is about 25% tighter.
+Rows that are all grid receive no added horizontal gap.
+The poster draws 52,650 square polygons from the same witnesses.
+Its title, complete legend, explanation, construction credits and closing project
+details form one block in the upper-left whitespace, leaving the bottom for the final
+row of packings. Title and documentation are left-aligned; the legend has two
+left-aligned columns, four status rows beside four recency, color and degree rows.
+The last right-column item reads “deg is the algebraic degree of that side length,”
+without a badge. The first two tilt-color swatches carry black $90^\circ$ and $45^\circ$
+labels.
+The information starts at the left edge of the first drawing in the final row; at
+least 120 units of outside clearance keep the grid labels inside the page margins.
+One dark $R$ means known rigid; its verification status, dates and sources remain in the
+structured metadata.
+The two-line definition uses 66-unit type; the following legend, credits and closing use
+48-unit type in the shared bundled body font at weight 700. The definition and all body
+lines use normalized leading 1.50, giving the 48-unit lines a uniform 72-unit baseline
+pitch. The packing drawings and card captions keep their original scale.
+The triangle’s bound captions use five decimal places, one fewer than the figure,
+leaving room for the algebraic degree; a longer degree label can shorten the adjacent
+side caption to four places.
+Upper bounds round upward and lower bounds downward; stored bounds retain their full
+precision. Three paragraphs credit best packings, lower bounds and optimality proofs.
+Each uses complete canonical names once, ordered from oldest to newest by the earliest
+supported result or contribution date.
+Year-only dates retain their precision; ties follow alphabetical order.
+Acquisition and snapshot dates do not establish priority.
+The construction paragraph names all recorded finders and improvers.
+The lower-bound paragraph names current bound-source authors; its metadata also retains
+method, prerequisite and historical contributions.
+The proof paragraph separately identifies formalization and verification contributions
+alongside mathematical proof authors.
+Both PDFs use the same acknowledgments for the full $n = 1..324$ corpus; their diagram
+counts and depicted ranges remain specific to each figure.
+Names wrap intact into balanced lines without bracketed citations or final periods.
+Complete source citations, roles and case associations remain in the SVG metadata and
+curated credit input.
+A section gap separates the credits from the diagram credit, followed by the data date,
+a middle dot and the generated edition stamp.
+A blank line precedes exactly “The Squares Project” and “github.com/jlevy/squares”.
+Both lines use the same 48-unit body font, weight and leading as the legend and credits.
+They are plain black text without a hyperlink or PDF annotation, and start flush with
+the information block’s left edge.
+The black two-line definition appears above the legend: “The square packing problem asks
+for the side $s(n)$ of the smallest square that can hold $n$ unit squares, where the
+squares are free to rotate but cannot overlap”.
+The first line ends after “can”.
+The definition and credit paragraphs omit a final period.
+Both composites apply the recent accent independently to a new upper bound, lower bound
+or optimality proof: a new proof of an older packing colors its optimality badge, not
+its upper bound.
+The image above is the raster; the vector it was drawn from is one click
+away, and the PDF is a 78.09-by-55.84-inch page.
 
-| File | Size | Bytes | For |
-| --- | --- | --- | --- |
-| [`known-best-1-324.svg`](known-best-1-324.svg) | 4224 × 4912 units | 6,198,351 | the source; scales to anything |
-| [`known-best-1-324.png`](known-best-1-324.png) | 4224 × 4912 px | 2,369,558 | the raster embedded above |
-| [`known-best-1-324.pdf`](known-best-1-324.pdf) | 44 × 51.17 in | 491,026 | printing; vector, so text stays selectable |
+| File | Size | For |
+| --- | --- | --- |
+| [`known-best-1-324.svg`](known-best-1-324.svg) | 7497 × 5361 units | the source; scales to anything |
+| [`known-best-1-324.png`](known-best-1-324.png) | 7497 × 5361 px | the raster embedded above |
+| [`square-packings-324-20261008.pdf`](square-packings-324-20261008.pdf) | 78.09 × 55.84 in | printing; vector, so text stays selectable |
 
-One raster rather than three, measured rather than assumed: a 2x of the same drawing is
-5,055,264 bytes for 83 megapixels, more than twice what the figure’s 3x cost when that
-was rejected as too expensive, and the PDF carries the same detail at any zoom for
-491,026. The link-preview card is one page’s unfurl, which the figure above supplies.
+The poster publishes one raster and a vector PDF. The rectangular poster’s 2x raster
+measured 5,055,264 bytes for 83 megapixels; the poster publishes a single preview, while
+the PDF preserves every square at any zoom.
+The link-preview card is one page’s unfurl, which the figure above supplies.
 
 The poster also draws a square more cheaply than the figure does, because ten times as
 many of them will not fit in a file anyone should clone.
-The house encoding costs 490 bytes a square here, or 24.6 MB; the poster drops the
-per-square `data-*` facts, states the stroke once per card instead of once per polygon,
-and rounds coordinates to three decimals, which brings it to 117.7 bytes a square.
+The poster drops the per-square `data-*` facts, states the stroke once per card instead
+of once per polygon, and rounds coordinates to three decimals.
+Measured on the rectangular poster, those choices reduced the house encoding’s 490 bytes
+a square to 117.7. The triangle uses the same encoding.
 All three departures are recorded in the drawing’s own metadata, the facts they drop are
 still carried per case by [`rendering/`](rendering/) and
 [`composite-figure.json`](composite-figure.json), and each was measured before it was
@@ -83,7 +161,8 @@ written by `python -m devtools.regularize_axis_components --update-atlas`, check
 digest with `--check-atlas` and re-derived with `--verify-atlas`. A view straightens
 near-axis squares and slides axis-aligned ones into exact contact at the certified side,
 verified twice over the rationals; it never replaces a witness, changes a side or
-promotes a tier, and is drawn only with a “regularized” label.
+promotes a tier. The selected website drawings use these verified views directly; the
+index and source records retain their provenance.
 Exploration
 [X-049](../../campaign/explorations/X-049-families-shading-and-the-large-n-limit.md#exact-regularization)
 explains why and what it changes.
@@ -309,6 +388,9 @@ The first command acquires only missing UnitSquare assets unless `--refresh` is
 requested; Kingbird live audits are ephemeral and write no geometry.
 The second rebuilds witnesses, individual house renderings, the manifest, and frontier
 witness links from retained inputs.
+For a layout change, `--update-composite-records` refreshes only the composite geometry
+in the manifest and figure record, refusing changes to case facts or legend totals.
+Commit those data records and re-pin the release before redrawing the composites.
 The two composites and their exports are drawn apart, by `--update-composites`, at a
 version bump or on demand; each states the data commit it was drawn from, and
 `--check-composites` holds it to that statement without rebuilding anything

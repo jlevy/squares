@@ -13,6 +13,7 @@ from copy import deepcopy
 from pathlib import Path
 
 from sqpack.assurance import check_case_semantics
+from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.yamlio import safe_load
 
 FRONTIER = Path(__file__).resolve().parent.parent / "frontier"
@@ -33,11 +34,11 @@ def rigidity_errors(case: dict, evidence: dict[str, dict]) -> list[str]:
 
 
 def test_every_retained_case_satisfies_the_rigidity_contract() -> None:
-    """All hundred cases pass as they stand, so the guard added no retroactive debt."""
+    """Every retained case satisfies the proof/evidence contract, across the full corpus."""
     evidence = load_evidence()
     failures = {
         n: errors
-        for n in range(1, 101)
+        for n in KNOWN_BEST_CORPUS.numbers
         if (errors := check_case_semantics(load_case(n), evidence))
     }
     assert failures == {}, f"cases now failing: {failures}"

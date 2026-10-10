@@ -612,7 +612,7 @@
           {"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},
           {"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"}
         ],
-        "registered_reported": {"basis":"display-decimal-as-printed","decimal":"3.877083590022","exact":"387708359002281/100000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.427593847240","sources":[{"evidence":["E-n011-global-optimality-report"],"n":11,"proved_by":["Queuingtheorydotcom"],"results":["T-060"],"via":"direct"}]},
+        "registered_reported": {"basis":"display-decimal-as-printed","decimal":"3.877083590022","exact":"387708359002281/100000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.427593847240","sources":[{"evidence":["E-n011-global-optimality-report"],"n":11,"proved_by":["Ahmed"],"results":["T-060"],"via":"direct"}]},
         "registered_verified": {"basis":"display-decimal","decimal":"3.877083590022","exact":"24231772437642588608174356625631/6250000000000000000000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.427593847240","sources":[{"evidence":["E-n011-global-optimality-independent"],"n":11,"results":["T-060"],"via":"direct"}]}
       },
       "weakened_to": null,

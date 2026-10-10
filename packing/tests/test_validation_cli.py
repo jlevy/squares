@@ -792,6 +792,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "--ignore=tests/test_site_frontier_table.py",
         "--ignore=tests/test_site_rendering.py",
         "--ignore=tests/test_site_math_preferences.py",
+        "--ignore=tests/test_site_atlas_views.py",
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
@@ -954,6 +955,7 @@ def test_an_empty_slow_lane_passes_and_a_real_failure_does_not(
         validate._slow_tests(context)
 
 
+@pytest.mark.pool_heavy
 @pytest.mark.parametrize("worker_failure", [False, True], ids=["empty", "worker-failure"])
 def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, worker_failure: bool
@@ -978,15 +980,16 @@ def test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection(
         + "def test_selected():\n    pass\n"
     )
     commands: list[tuple[str, ...]] = []
+    # Confine nested pytest cleanup to a distinct child tree for each invocation.
+    child_temps = tmp_path / "child-pytest"
+    child_temps.mkdir()
     run = validate._run
 
     def run_here(context: validate.Context, command: tuple[str, ...]) -> str:
-        commands.append(command)
-        return run(
-            context,
-            (*command, "--basetemp", str(tmp_path / f"child-pytest-tmp-{len(commands)}")),
-            cwd=tmp_path,
-        )
+        basetemp = child_temps / f"run-{len(commands)}"
+        executed = (*command, "--basetemp", str(basetemp))
+        commands.append(executed)
+        return run(context, executed, cwd=tmp_path)
 
     monkeypatch.setattr(validate, "_run", run_here)
     monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
@@ -4225,6 +4228,7 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
         "tests/test_site_frontier_table.py",
         "tests/test_site_rendering.py",
         "tests/test_site_math_preferences.py",
+        "tests/test_site_atlas_views.py",
     }
     for path in validate.SITE_LAYOUT_TESTS:
         assert (validate.PROJECT_ROOT / path).is_file(), path

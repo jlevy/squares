@@ -607,7 +607,7 @@ verifiers:
 
   - id: V-queuingtheory-n11-verify
     program: VERIFY.py, the publisher's n = 11 optimality driver and its component checkers
-    author: Queuingtheorydotcom
+    author: Ahmed
     provenance: external
     language: [Python]
     methods: [exact-algebraic]
@@ -626,7 +626,7 @@ verifiers:
       The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake
       at its pinned toolchain, with scripts/run_verification.sh and the finalizer
       scripts/finalize_verification.py driving the build and the axiom audit
-    author: Queuingtheorydotcom, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis
+    author: Ahmed, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis
     provenance: external
     language: [Lean 4, Python, Bash]
     methods: [proof-assistant-checked]

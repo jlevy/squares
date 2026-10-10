@@ -48,7 +48,7 @@ REVIEWS = tuple(record.slug for record in PAPERS[1:])
 #: Each review's source, as the first two lines of its credits name it.
 SOURCES = {
     THRESHOLD: ("Kleddamag", "https://github.com/Kleddamag/11-squares-certified-bound"),
-    REVIEW: ("Queuingtheorydotcom", "https://github.com/Queuingtheorydotcom/11SquaresOptimal"),
+    REVIEW: ("Mannaseh Ahmed", "https://github.com/Queuingtheorydotcom/11SquaresOptimal"),
 }
 #: Each paper's own version line and dates line, from `sqpack.release`.
 VERSIONS = {
@@ -63,8 +63,9 @@ DATES = {
         f"Last revised {release.EXPLAINER_REVISED}"
     ),
     THRESHOLD: (
+        f"First published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.THRESHOLD_PROOF_PUBLISHED} · "
-        f"Published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published}"
+        f"Last revised {release.THRESHOLD_REVIEW_REVISED}"
     ),
     REVIEW: (
         f"First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "
@@ -303,7 +304,7 @@ def test_the_tool_prints_the_audit_of_a_built_site(
 
     # A paper whose credits set a name plain is a form difference, and the tool says so.
     html = renders[REVIEW][0]
-    broken = html.replace("<strong>Queuingtheorydotcom</strong>", "Queuingtheorydotcom")
+    broken = html.replace("<strong>Mannaseh Ahmed</strong>", "Mannaseh Ahmed")
     (tmp_path / paper_path(REVIEW)).write_text(broken, encoding="utf-8")
     assert paper_structure.main([str(tmp_path)]) == 1
     assert "credits: names bold" in capsys.readouterr().err

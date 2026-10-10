@@ -1172,7 +1172,7 @@ Use the structured form to query or plot; use these tables to read.
 | 8 | `3` | counting | Said El Moumni (1999) | proved |
 | 9 | `3` | perfect square | classical | proved |
 | 10 | `3 + (1/2)√2` | unavoidable points | Walter Stromquist (2003) | proved |
-| 11 | `3.87708359` | counting | Queuingtheorydotcom (2026) | proved |
+| 11 | `3.87708359` | counting | Ahmed (2026) | proved |
 | 13 | `4` | unavoidable points | Wolfram Bentz (2010) | proved |
 | 14 | `4` | unavoidable points | Erich Friedman (2009) | proved |
 | 15 | `4` | counting | Said El Moumni (1999) | proved |

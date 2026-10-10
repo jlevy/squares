@@ -594,6 +594,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: Couzo’s and Daniel’s Rational Refinement Replays (T-128, T-130, T-131)](docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 335427/50000`: Review of the Clipped-Corner Transfer on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) | dated review record | record | retained | — |
 | [Review: Gupta exact rational refinements, issue #438](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md) | dated review record | record | retained | — |
 | [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |
@@ -4602,7 +4603,7 @@ The earlier lower-bound program passed Stromquist’s bound on 2026-09-04:
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | $3.877083590022814\ldots$ (exactly $T$) | Walter Trump, 1979; exact witness [T-011](packing/frontier/RESULTS.md) |
-| Best certified lower bound | `root(P_trump11, 3.87708359002281417730789706010096) = 3.877083590022814…` (exactly $T$) | Queuingtheorydotcom’s proof, independently replayed and audited here as [T-060](packing/frontier/RESULTS.md), `V3/C3` |
+| Best certified lower bound | `root(P_trump11, 3.87708359002281417730789706010096) = 3.877083590022814…` (exactly $T$) | Ahmed’s proof, independently replayed and audited here as [T-060](packing/frontier/RESULTS.md), `V3/C3` |
 | Bound gap | $0$ | Matching exact lower and upper bounds |
 
 ![Walter Trump’s exact eleven-square packing.](packing/atlas/rendering/trump11-overview.svg)
@@ -5106,8 +5107,8 @@ Montanher and coauthors’ unit squares in a circle.
 packing. [T-011](packing/frontier/RESULTS.md) verifies the algebraic witness and
 [T-060](packing/frontier/RESULTS.md) supplies the matching global lower bound for
 arbitrarily rotated unit squares with disjoint interiors and boundary contact allowed.
-The latter is Queuingtheorydotcom’s Astra-assisted proof, building on this project and
-Kleddamag, independently replayed and mathematically audited here at `V3/C3/S5`.
+The latter is Ahmed’s Astra-assisted proof, building on this project and Kleddamag,
+independently replayed and mathematically audited here at `V3/C3/S5`.
 
 The [proof review](docs/project/reviews/review-2026-09-29-n11-optimality.md) maps the
 2,184 canonical patterns, 2,180 exclusions, four symmetric survivors, exact D4 bridge,

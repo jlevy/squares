@@ -1,0 +1,107 @@
+softschema:
+  contract: packing.squares:RigiditySources/v1
+  schema: rigidity-sources.schema.yaml
+  envelope: audit
+  status: enforced
+audit:
+  recorded_at: '2026-10-08'
+  recording_event: Import of the unified displayed-packing rigidity assessment after the 2026-10-08 source audit.
+  date_policy: >-
+    determined_at dates the cited determination or assertion, at the precision the source
+    supports. It is not a claim of earliest historical priority. Null means that date is
+    unknown. recorded_at dates this metadata import, not the mathematical result, its
+    retrieval, or its latest review. Source review dates remain separate in the evidence register.
+  evidence_dates:
+    E-perfect-square-tiling-rigid:
+      reference: packing/devtools/assess_frontier_rigidity.py
+      determined_at: null
+      date_reference: null
+      date_note: Elementary tiling argument; no historical determination date is asserted.
+    E-n005-second-order-rigidity:
+      reference: packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md
+      determined_at: null
+      date_reference: null
+      date_note: This intermediate result alone does not establish local rigidity; its review date is not a determination date.
+    E-n005-fixed-side-local-rigidity:
+      reference: packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md
+      determined_at: '2026-09-03'
+      date_reference: packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md#provenance-and-installation
+      date_note: The frozen BC-152 local-isolation proof packet explicitly dates itself 2026-09-03; T-014 records the reviewed proof separately.
+    E-n011-trump-local-rigidity:
+      reference: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md
+      determined_at: '2026-08-24'
+      date_reference: packing/campaign/agent-sessions/session-006-h026-exact-tangent.md
+      date_note: The completed session is dated 2026-08-24; its progress.after explicitly records that the finite-branch lemma locally isolates the pose. This determination is separate from the 2026-08-30 evidence review.
+    E-n040-first-order-flexibility:
+      reference: packing/devtools/assess_n40_rigidity.py
+      determined_at: null
+      date_reference: null
+      date_note: First-order flexibility with partial second-order obstructions does not decide local rigidity; no determination date is inferred from the review.
+    E-translation-escape-not-rigid:
+      reference: packing/atlas/known-best/translation-escape-screen.json
+      determined_at: null
+      date_reference: null
+      date_note: The current retained screen has no generation date; the historical source-review date does not date the current witness assessments.
+  source_assertions:
+    - id: kingbird-rigid-catalogue
+      reference: packing/resources/web/kingbird-squares-in-squares.md
+      url: https://kingbird.myphotos.cc/packing/squares_in_squares.html
+      property: locally-rigid
+      assurance: reported
+      requires_catalogue_annotation: true
+      determined_at: null
+      date_reference: null
+      date_note: The catalogue's explicit Rigid annotations do not date when rigidity was determined. Packing discovery years and archive dates are different events.
+      targets:
+        - {n: 5, reported_side: '2.70710678118654', source_url: 'https://kingbird.myphotos.cc/packing/square-5.svg'}
+        - {n: 11, reported_side: '3.87708359002281', source_url: 'https://kingbird.myphotos.cc/packing/square-11.svg'}
+        - {n: 28, reported_side: '5.82444461667405', source_url: 'https://kingbird.myphotos.cc/packing/square-28.svg'}
+        - {n: 40, reported_side: '6.82842712474619', source_url: 'https://kingbird.myphotos.cc/packing/square-40.svg'}
+    - id: trump-2023-rigidity-assertion
+      reference: packing/resources/papers/trump-2023-packing-11-unit-squares.raw.md
+      url: null
+      property: locally-rigid
+      assurance: reported
+      requires_catalogue_annotation: false
+      determined_at: '2023'
+      date_reference: packing/resources/bibliography.yaml
+      date_note: The dated author preprint explicitly asserts rigidity. This is its publication year, not a first-party proof or a claim of first discovery.
+      targets:
+        - {n: 11, reported_side: '3.87708359002281', source_url: 'https://kingbird.myphotos.cc/packing/square-11.svg'}
+  alternatives:
+    - n: 52
+      selected_source_url: https://kingbird.myphotos.cc/packing/square-52.svg
+      alternative_source_url: https://kingbird.myphotos.cc/packing/square-52b.svg
+      reported_side: '7.70710678118654'
+      property: locally-rigid
+      assurance: reported
+      reference: packing/resources/web/kingbird-squares-in-squares-rigid.md
+      determined_at: '2005'
+      date_reference: packing/resources/web/kingbird-squares-in-squares-rigid.md
+      date_note: The source explicitly dates Cantrell's rigid alternative to 2005.
+      disposition: not-selected
+      reason: The displayed unsuffixed witness has six movable squares in the retained screen. Import and assess the alternative before changing the displayed witness or its R badge.
+    - n: 149
+      selected_source_url: https://kingbird.myphotos.cc/packing/square-149.svg
+      alternative_source_url: https://kingbird.myphotos.cc/packing/square-149b.svg
+      reported_side: '12.70710678118654'
+      property: locally-rigid
+      assurance: reported
+      reference: packing/resources/web/kingbird-squares-in-squares-rigid.md
+      determined_at: '2024-11'
+      date_reference: packing/resources/web/kingbird-squares-in-squares-rigid.md
+      date_note: The source explicitly dates Ellsworth's rigid alternative to November 2024.
+      disposition: not-selected
+      reason: The displayed unsuffixed witness has eight movable squares in the retained screen. The same side length does not transfer rigidity between arrangements.
+    - n: 296
+      selected_source_url: https://kingbird.myphotos.cc/packing/square-296.svg
+      alternative_source_url: https://kingbird.myphotos.cc/packing/square-296b.svg
+      reported_side: '17.70710678118654'
+      property: locally-rigid
+      assurance: reported
+      reference: packing/resources/web/kingbird-squares-in-squares-rigid.md
+      determined_at: null
+      date_reference: null
+      date_note: The source dates the earlier n=52 construction to 2005, not this n=296 alternative; no determination date is stated for this arrangement.
+      disposition: not-selected
+      reason: The displayed unsuffixed witness has ten movable squares in the retained screen. Retain this candidate for source intake without classifying the displayed packing as rigid.
