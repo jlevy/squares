@@ -206,8 +206,13 @@ def notice_pin(entry: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def pinned_reason(relative: str, row: dict[str, Any], *, in_asset: bool) -> dict[str, Any]:
-    """Why one file of the directory is pinned and not retained."""
+def pinned_reason(row: dict[str, Any], *, in_asset: bool) -> dict[str, Any]:
+    """Why one file of the directory is pinned and not retained.
+
+    A document the source manifest records as byte-identical to a retained copy names
+    that copy; the linear tools refuse the copy unless it has the pinned digest
+    (`audit_wand125_linear.code_sources`), so it is not compared here as well.
+    """
     if in_asset:
         reason = (
             "a member of the release asset below, which stays with its author; "
@@ -219,8 +224,6 @@ def pinned_reason(relative: str, row: dict[str, Any], *, in_asset: bool) -> dict
         reason = "a document the replay does not read"
     pinned = {"reason": reason}
     if row.get("byte_identical_to_retained"):
-        copy = REPO / str(row["byte_identical_to_retained"])
-        require(sha256(copy.read_bytes()) == row["sha256"], f"{relative}'s copy differs")
         pinned["identical_to"] = str(row["byte_identical_to_retained"])
     return pinned
 
@@ -250,8 +253,7 @@ def acquisition(
         relative = path.removeprefix(f"{directory}/")
         row = documents.get(relative, {})
         pinned.append(
-            {"path": path, **files[path]}
-            | pinned_reason(relative, row, in_asset=relative in members)
+            {"path": path, **files[path]} | pinned_reason(row, in_asset=relative in members)
         )
     pin = entry["release"]
     root = (packet.relative_to(REPO) if packet.is_relative_to(REPO) else packet).as_posix()

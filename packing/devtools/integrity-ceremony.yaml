@@ -264,6 +264,13 @@ allowlist:
   - path: packing/devtools/fine_net_followup.py
     kind: download
     boundary: wand125's fine-net release assets kept outside Git against the size and digest the packet pins, and their sealed inner bundles against the source's own files-sha256.json (#446).
+  - path: packing/devtools/retain_wand125_release.py
+    kind: download
+    boundary: >-
+      wand125's 10 October release assets, each asset member and each document fetched
+      from the pinned commit's raw address, against the size and digests the packet's
+      source manifest pinned at the intake's retrieval, before any byte is retained
+      (think-r333, think-i85v, think-nd7g).
   - path: packing/devtools/audit_n11_lean.py
     kind: download
     boundary: 11SquaresFormalized's final audit, downloaded from the source, against the digest the packet's manifest pinned at retention and the uncompressed digest the source's summary.json states.

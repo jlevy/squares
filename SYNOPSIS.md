@@ -1406,6 +1406,7 @@ case or experiment separately.
 | [Proof Verification Consolidation and Independent n11 Completion](docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md) | implementation plan | current | transient | — |
 | [n17 Eight-Hour Proof Block](docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md) | implementation plan | current | transient | — |
 | [n17 Three-Block Session Plan](docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md) | implementation plan | current | transient | — |
+| [Plan: Confirming Four wand125 Lower Bounds of 10 October](docs/project/specs/active/plan-2026-10-11-wand125-confirmations.md) | implementation plan | current | transient | — |
 | [Feature: Minimal Packing Toolkit](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | implementation plan | current | transient | — |
 | [Feature: Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | implementation plan | current | transient | — |
 | [Feature: Frontier Assurance and Verification](docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md) | implementation plan | current | transient | — |
