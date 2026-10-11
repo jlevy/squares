@@ -5,7 +5,7 @@ title: "Import dostashev: s(155), s(156), s(211) (#501)"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,14 +14,14 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:11.046Z
-updated_at: 2026-10-11T21:32:09.653Z
+updated_at: 2026-10-11T22:08:36.605Z
 started_at: 2026-10-11T20:28:24.309Z
 ---
 https://github.com/jlevy/squares/issues/501 (2026-10-11T07:13Z). dostashev/square-packing, records/n0155.*, n0156.*, n0211.*; no pin given, pin the head. Below Couzo's n155 refinement (7.35e-5), Evan Daniel's exact optima at 156 (2.91e-3) and 211 (1.62e-3) as the author lists them. Stages 1-4 replay through devtools.upper_bound_reports.
 
 ## Notes
 
-2026-10-11 lane D (intake W1 stages 1, 2 and the stage 4 replay; worktree branch worktree-agent-aea6e45c2fb8e7a4d, base main 3a5a91a90).
+2026-10-11 lane D (intake W1 stages 1, 2 and the stage 4 replay; worktree branch worktree-agent-aea6e45c2fb8e7a4d, base main 3a5a91a90, commit 835dd7004 with both packets, the sqcert adapter and tests; not pushed). Register plans: scratchpad laneD/register-plan-barnett.yaml and register-plan-dostashev.yaml, printed by upper_bound_reports register-plan; no shared record edited.
 
 PIN: dostashev/square-packing main c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49 (tree b06d6805, committed 2026-10-11T13:21:30Z), read 20:35Z. The issue (07:13Z) names no revision; its three sides are the README's at 41019fb (06:16:17Z), the head when it was filed. Later commits: 662a13d (11:01Z) and a31a747 (12:24Z) lowered 211 ("same arrangement"); c3d17ab (13:21Z) replaced all three certificates with "the exact optima of their contact topologies". History: 3dc5969 (05:05Z, 155 and 156 with code), c6893aa (05:15Z, MIT licence), 36ee631 (05:22Z, 211), 4576f6a, 41019fb, 662a13d, a31a747, c3d17ab.
 
@@ -38,7 +38,9 @@ Other 2026-10-11 issues (#500, #503, #504, #505, #506) share no count. Register 
 CREDIT (from the README; the issue states none): Daniil Ostashev (git author, LICENSE, sqpk headers), packings built from scratch ("No existing record geometry is used": explicit V-band with integer-programmed corner blocks), GPU re-hardening by Yohei Nakajima's soft-to-rigid method, polish by the fixed-angle LP it credits to this project ("cell" idea, [2] = jlevy/squares), certificates following Ryan Xu's construction. Proposed bibliography: lineage builds-on-project, credit "Ostashev after Nakajima, Levy, Xu". AI assistance: not stated anywhere in the repository or the issue. A cited write-up, "Square Packing (Daniil Ostashev, October 2026)", is not in the repository. Owner comment on #501 (jlevy, 20:25Z) already asks whether to credit "Daniil Ostashev".
 
 PRICE: no checker is needed beyond the importer: the certificates are exact, read by the new sqcert adapter, and decided by the two maintained routes; the source prices nothing. Measured: certify 9 jobs in about 10 min wall on one worker.
-REPLAY (stage 4, receipts/exact-certification.json.xz): certify --workers 1, 20:45:52-20:56:14Z (10 min 22 s wall, machine load 9-16): 3 positives pass both routes, all 6 controls refused, routes agree on every margin; least wall clearance and least pair gap about 5.0e-21 at every count (the README's 1 + 1e-20 scaling of load-bearing squares; register-plan floors: wall >= 5.00e-21, pair >= 4.99e-21). 9 jobs, 277,080 pair decisions, 280.98 route CPU s, 595.29 job wall s, longest 118.47 s (211 positive). The author's C++ GMP checker and mpmath cross-check were not run (not needed for the maintained routes; a same-implementation replay would need a C++20/GMP/MPFR build). Third route (check_half_angle_area) not run: separate review lane.
+REPLAY (stage 4, receipts/exact-certification.json.xz): certify --workers 1, 20:45:52-20:56:14Z (10 min 22 s wall, machine load 9-16): 3 positives pass both routes, all 6 controls refused, routes agree on every margin; least wall clearance and least pair gap about 5.0e-21 at every count (the README's 1 + 1e-20 scaling of load-bearing squares; register-plan floors: wall >= 5.00e-21, pair >= 4.99e-21). 9 jobs, 277,080 pair decisions, 280.98 route CPU s, 595.29 job wall s, longest 118.47 s (211 positive). The author's C++ GMP checker and mpmath cross-check were not run (not needed for the maintained routes; a same-implementation replay would need a C++20/GMP/MPFR build). Third route (check_half_angle_area) not run: separate review lane. check --replay (serial) 21:28:31-21:39:05Z, 10 min 34 s, exit 0: "3 certificates and 9 jobs admitted", every fresh row equal to the retained one apart from timing.
+VALIDATION: tests/test_upper_bound_reports.py 183 passed (2 min 13 s at load ~20; 29 new cases: 19 for the sqcert adapter, 6 claim tests for the two packets, and the two packets added to the receipt and register-plan parametrizations); ruff check/format clean and basedpyright 0/0/0 on the two touched Python files; packing-validate --records 49 of 49 named steps passed with the files staged (293.9 s wall at load ~25; no stale SYNOPSIS map failure). acquire_source --check passes.
+REGISTER-PLAN: printed (no shared record edited); the coordinator's records lane registers it. Its evidence entry says "reported_method: exact-algebraic" and "relationship_to_generator: same-implementation" for the author's report, as every importer plan does.
 
 ## Draft acknowledgement (not posted; the owner posts it)
 
