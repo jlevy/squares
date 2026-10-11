@@ -5,7 +5,7 @@ title: Review and repair the website development and CI critical path
 kind: feature
 status: in_progress
 priority: 1
-version: 14
+version: 15
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
 delegate: codex@spud10
 labels:
@@ -18,10 +18,11 @@ child_order_hints:
   - is-01m4m1d6gge4p10sbrmch00tj8
   - is-01m4macn5samk7erjwyeyzxfe3
   - is-01m4macp2mx1x4x3n0sdg19mz9
+  - is-01m4magbbw3y4tzva4jykt8xje
 hold: null
 hold_until: null
 created_at: 2026-10-10T17:33:43.407Z
-updated_at: 2026-10-11T01:49:12.655Z
+updated_at: 2026-10-11T01:51:12.763Z
 started_at: 2026-10-10T17:35:10.785Z
 ---
 User requests a systematic review of why routine website iteration consumed hours, followed by development-process or CI fixes. Delegate independent analysis of workflow/CI architecture and reachable-test over-selection; coordinator rolls up evidence and implements the smallest justified changes. Capture command wall, repeated work, scope/coverage and failure classification; preserve scientific contracts and assert equivalence before performance claims. Current website PR462 remains separately tracked under think-o2jd; do not close on a report alone.
