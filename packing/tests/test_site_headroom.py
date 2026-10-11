@@ -1,4 +1,4 @@
-"""The shared header's scroll, focus and geometry contract across its four shells."""
+"""The shared header's scroll, focus and geometry contract across page and paper shells."""
 
 from __future__ import annotations
 
@@ -66,6 +66,8 @@ def shells(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
         "n11-optimality-review",
         "n11-threshold-bound-review",
         "packing-methods",
+        "exact-side-values",
+        "exact-side-values-browser",
     ):
         template = (render_overview.TEMPLATES / f"{paper}-shell.html").read_text()
         values = {
@@ -79,6 +81,10 @@ def shells(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
             "SITE_THEME": render_overview.THEME_SCRIPT.read_text(),
             "SITE_HEADROOM": render_overview.HEADROOM_SCRIPT.read_text(),
             "BODY_HTML": BODY,
+            "BROWSER_CREDITS": BODY,
+            "BROWSER_STYLE": (
+                render_overview.TEMPLATES / "exact-side-values-browser.css"
+            ).read_text(),
         }
         documents[paper] = re.sub(
             r"\{\{([A-Z_]+)\}\}", lambda m, values=values: values.get(m[1], ""), template
