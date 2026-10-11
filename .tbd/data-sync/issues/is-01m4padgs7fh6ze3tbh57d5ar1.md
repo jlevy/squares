@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-11: six new upper-bound reports, two n17 issues, fou
 kind: epic
 status: in_progress
 priority: 1
-version: 20
+version: 22
 delegate: claude-code@vm
 labels:
   - result-import
@@ -29,10 +29,15 @@ child_order_hints:
   - is-01m3wx2hm1ezys1w50g5pk9eet
   - is-01m4pcccsnaq8tp3nvze2wfpcs
   - is-01m4pd6dbc6j1wyjg6n62dv8ag
+  - is-01m4pe36zqv5wkdyp33hpb5ahh
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:08.870Z
-updated_at: 2026-10-11T21:16:41.708Z
+updated_at: 2026-10-11T21:32:25.463Z
 started_at: 2026-10-11T20:28:23.012Z
 ---
 Intake pass of 2026-10-11 (owner's request in session 01UXZs37jGv5vqVGADH7Gkn8), on branch claude/wizardly-meitner-wqn4x3. Sweep: 18 items needing an owner: issues #494, #495, #500, #501, #503, #504, #505, #506 not in result-requests.yaml; unread comments #419 (evand 6104596297), #413 (wand125 6104576642), #485 (Guzhou0806 6106761997, wand125 6111583905); watched repositories evand 675a5ea, franciscouzo 337078c, Guzhou0806 6a65957, itsnaka 56fa71f, ry-xu 9535d65, wand125 04fbef0. Kingbird: 0 counts moved. Owner priority: quick-to-validate new best results first, merged; longer validation runs recorded with their price and status.
+
+## Notes
+
+2026-10-11 21:40Z: the owner asked for the pass as a stack of PRs, fast-to-validate layers first, credits updated. Layer 1 (reads lane, think-q655 and think-tln9 stage 1-2): https://github.com/jlevy/squares/pull/512 on claude/wizardly-meitner-wqn4x3. Planned layers: 2 case-record adoption of the reviewed V3/C3 houses (think-fvz4, owner decision not to wait for #403); 3 the 2026-10-11 imports at V3/C3 with adoption and the announcement; 4 rung and significance reviews (think-18b8, think-66e5, think-qh3s) and #485's 6.718 registered. The results-page overview (think-2z22) goes as its own PR. R1: no rung wrong in T-120..T-146; 39 counts pending adoption. R2: T-060 stays V3/C3; V4 needs a second review entry and an owner oversight record.
