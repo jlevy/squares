@@ -5,7 +5,7 @@ title: Exact same-side re-solve over Q of a regularized view at the witness side
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: claude-code@vm
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
 hold: null
 hold_until: null
 created_at: 2026-10-11T18:37:28.909Z
-updated_at: 2026-10-11T21:07:19.134Z
+updated_at: 2026-10-11T21:12:46.018Z
 started_at: 2026-10-11T20:03:59.728Z
 closed_at: null
 close_reason: null
@@ -30,3 +30,5 @@ think-ux1v slice 3. Tools layer: branch claude/busy-pascal-vgiccb, stacked on #5
 2026-10-11 (session_017JNnKDwL74rnktr9s8BdjP): the implementation the note above records was never committed or pushed; no remote branch carries packing/devtools/regularize_same_side.py (claude/gifted-bell-57e62o holds only the vendor layer), so it was lost with that session's container. Rebuilt in this session on branch claude/busy-pascal-vgiccb (the tools layer, stacked on #509) against a fixed interface (resolve(source_witness, view poses, mode=relax|refuse) -> SameSideOutcome; CLI with --survey), by a Fable sub-agent; the survey figures above are to be re-measured, not carried over.
 
 2026-10-11 (session_017JNnKDwL74rnktr9s8BdjP): rebuilt and landed (b56f6cb60; generator_box diagnostic fix in 6cba173ed): 18 tests. Survey n = 1..80 (own poses perturbed 1e-12, relax): every rational witness same (54); decimal 15 same, 10 overlap (the Göbel family: printed sides truncate an irrational optimum, so no rational packing exists at s_W); n = 51 no-exact-frame. relax is required (refuse mode: inconsistent-tight-set at most counts). Pilot: same at 11, 17, 26, 37, 66, 87, 101, 126, 200, 260, 292, 295, 324; unmatched-rotation at 70, 102, 129, 146, 206, 267 because the exact solve turns tilted bands by up to hundredths of a degree (0.0115 at 70) to a lower packing.
+
+2026-10-11: PR https://github.com/jlevy/squares/pull/511 (draft, base claude/gifted-bell-57e62o), added to GitHub stack #498 (#487 merged, #497, #509, #511) via POST /stacks/498/add (gh stack could not be installed: the session proxy refuses github/gh-stack).
