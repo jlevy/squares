@@ -708,6 +708,7 @@ case or experiment separately.
 | [Review: Couzo’s and Daniel’s Rational Refinement Replays (T-128, T-130, T-131)](docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 1340000/199529`: Review of the Continuous-Pose Kernel on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 335427/50000`: Review of the Clipped-Corner Transfer on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) | dated review record | record | retained | — |
+| [Polynomial PR stack: publication checkpoint and remaining work](docs/project/handoff-2026-10-10-polynomial-pr-stack.md) | dated handoff record | record | retained | — |
 | [Review: Gupta exact rational refinements, issue #438](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md) | dated review record | record | retained | — |
 | [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |
 | [n17 Paper Review: Global Optimization and Sum-of-Squares Certificates](docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md) | dated review record | record | retained | — |

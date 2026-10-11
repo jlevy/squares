@@ -6495,6 +6495,7 @@ def test_reviewed_paper_titles_are_used_across_the_site(
             "A Review of the Optimality Proof of the Trump Packing of 11 Squares"
         ),
         "square-packing-methods-survey": "How Record Square Packings Are Found",
+        "exact-side-values": "Exact Side Values for Packing Unit Squares",
     }
     assert {paper.slug: paper.title for paper in render_overview.PAPERS} == reviewed
     assert render_overview.paper_title_problems() == []
@@ -6615,7 +6616,7 @@ def test_paper_title_cli_checks_without_rendering_or_writing(
     args = ["--check-paper-titles", "--output", str(output)]
     assert render_overview.main(args) == 0
     success = capsys.readouterr().out
-    assert "4 reviewed paper titles" in success
+    assert "5 reviewed paper titles" in success
     assert "10 referenced titles" in success
     assert not output.exists()
     monkeypatch.setattr(renderer, "TITLE", renderer.TITLE.lower())
