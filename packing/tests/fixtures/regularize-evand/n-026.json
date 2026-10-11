@@ -1,0 +1,17 @@
+{
+ "n": 26,
+ "S_exact": "5.62132034355964257320253308631454711785450781306542210976502",
+ "S_cert": "5621320343559642573258746289751/1000000000000000000000000000000",
+ "cert_valid": true,
+ "orientation_g": 0,
+ "orient_argument": "0",
+ "symmetry": [],
+ "groups_before": 4,
+ "groups_after": 2,
+ "angle_changes": [],
+ "policy": "conservative",
+ "style": "coincide",
+ "level": 1,
+ "level_text": "differs from the source only in rattlers (force-free squares)",
+ "note": "Trimmed from devtools.regularize_evand_shim output for n = 26 (conservative, coincide, orient 0) at evand/square-packing@675a5ea; the fields devtools.regularize_evand import reads."
+}

@@ -1,0 +1,118 @@
+<title>{{TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a review sheet. Summary and decisions first, then one card per count with the
+   three-panel drawing on a light plate (the drawings are the house renderer's, light only). */
+:root {
+  --bg: #f3f5f4;
+  --surface: #ffffff;
+  --ink: #1b2622;
+  --muted: #5a6b65;
+  --rule: #d5ddd9;
+  --accent: #257260;      /* the house renderer's deep contact green */
+  --ok: #1f7a4d;
+  --hold: #9a6a00;
+  --flat: #5a6b65;
+  --none: #8a4b4b;
+  --chip-ok: #dcefe4;
+  --chip-hold: #f5ead0;
+  --chip-flat: #e6ebe9;
+  --chip-none: #f2e1e1;
+  --plate: #fafafa;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111816; --surface: #18211e; --ink: #e3ebe7; --muted: #9db0a8; --rule: #2c3934;
+    --accent: #5fb89f; --ok: #6fcf9a; --hold: #e0b14d; --flat: #9db0a8; --none: #e09a9a;
+    --chip-ok: #1d3a2b; --chip-hold: #3b3016; --chip-flat: #26302c; --chip-none: #3d2424;
+    --plate: #fafafa; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111816; --surface: #18211e; --ink: #e3ebe7; --muted: #9db0a8; --rule: #2c3934;
+  --accent: #5fb89f; --ok: #6fcf9a; --hold: #e0b14d; --flat: #9db0a8; --none: #e09a9a;
+  --chip-ok: #1d3a2b; --chip-hold: #3b3016; --chip-flat: #26302c; --chip-none: #3d2424;
+  --plate: #fafafa; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 64px; display: grid; gap: 40px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: 0.005em; }
+h1 { font-size: 2.1rem; line-height: 1.15; }
+h2 { font-size: 1.45rem; display: flex; align-items: baseline; gap: 10px; }
+h3 { font-size: 1.2rem; }
+p { margin: 0; max-width: 72ch; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+code { font-family: var(--mono); font-size: 0.88em; }
+.eyebrow { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { display: grid; gap: 12px; }
+.lede { font-size: 1.05rem; color: var(--ink); }
+.meta { color: var(--muted); font-size: 0.9rem; }
+.tally { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.95rem; }
+.tally b { font-family: var(--mono); font-weight: 500; }
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 20px; display: grid; gap: 12px; min-width: 0; }
+.decisions ol { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; max-width: 80ch; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+td a { font-family: var(--mono); font-weight: 500; text-decoration: none; }
+.chip { display: inline-block; font: 500 0.75rem/1 var(--mono); padding: 4px 8px; border-radius: 999px; white-space: nowrap; }
+.chip.ok { background: var(--chip-ok); color: var(--ok); }
+.chip.hold { background: var(--chip-hold); color: var(--hold); }
+.chip.flat { background: var(--chip-flat); color: var(--flat); }
+.chip.none, .chip.bad { background: var(--chip-none); color: var(--none); }
+.pilot { font: 500 0.68rem/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); border: 1px solid currentColor; border-radius: 3px; padding: 2px 5px; margin-left: 8px; }
+.group { display: grid; gap: 18px; }
+.count-n { font: 500 0.95rem var(--mono); color: var(--muted); }
+.blurb { color: var(--muted); }
+.count { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 18px; display: grid; gap: 12px; min-width: 0; scroll-margin-top: 16px; }
+.count header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.count .row { font: 0.78rem var(--mono); color: var(--muted); }
+.note { max-width: 80ch; }
+.facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 16px; margin: 0; }
+.facts div { display: grid; gap: 2px; min-width: 0; }
+.facts dt { font: 500 0.7rem/1.2 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 0.9rem; }
+.plate { background: var(--plate); border-radius: 4px; overflow-x: auto; }
+.plate svg { display: block; width: 100%; min-width: 760px; height: auto; }
+.effort table td:first-child { white-space: normal; }
+footer { color: var(--muted); font-size: 0.85rem; display: grid; gap: 6px; }
+@media (max-width: 560px) { h1 { font-size: 1.6rem; } .panel, .count { padding: 14px; } }
+</style>
+
+<div class="wrap">
+<header class="top">
+  <span class="eyebrow">jlevy/squares · regularization review</span>
+  <h1>{{HEADING}}</h1>
+  <p class="lede">{{LEDE}}</p>
+  <p class="meta">{{META}}</p>
+  <div class="tally">{{TALLY}}</div>
+</header>
+
+{{DECISIONS}}
+
+<section class="panel">
+  <h2>All counts</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>n</th><th>report</th><th>row</th><th>witness</th><th>project layer</th><th>same side</th><th>1 : 1</th><th>max move</th><th>max turn°</th><th>light contacts</th><th>register</th></tr></thead>
+    <tbody>
+{{TABLE}}
+    </tbody>
+  </table>
+  </div>
+</section>
+
+{{SECTIONS}}
+
+{{EFFORT}}
+
+<footer>{{FOOTER}}</footer>
+</div>

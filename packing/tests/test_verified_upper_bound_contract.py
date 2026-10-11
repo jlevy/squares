@@ -96,6 +96,12 @@ DECLARED_CONSUMERS = {
         "his results.json as the record a count was solved against, a ceiling it compares "
         "with and never s(n); this project's driver writes its own inputs and does not run it"
     ),
+    "packing/devtools/regularize_evand.py": (
+        "the regularization driver reads the verified value and its exact form as the "
+        "ceiling U a regularized view's exact side is compared with to classify it under the "
+        "regularization policy's decision table (a register-result candidate when s_V < U, "
+        "otherwise a drawing or a refusal), never as s(n)"
+    ),
     "packing/devtools/result_status.py": (
         "reads ceiling evidence to distinguish grid bounds from certified construction "
         "reports, without redating the reported construction; a ceiling alone never "
