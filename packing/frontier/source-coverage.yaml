@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:SourceCoverage/v1
   schema: source-coverage.schema.yaml
   status: enforced
-last_reviewed: '2026-10-07'
+last_reviewed: '2026-10-10'
 coverage_scope: 'Current public upper-bound catalogues and first-party result releases known to this
   project, the Schadt n=29 witness-contract regression source, and the September 2026 external executable
   lower-bound certificate releases. Their proof obligations and assurance are tracked by evidence.yaml;
@@ -1196,7 +1196,9 @@ sources:
     it held the verified lane there too, decided by sqverify-fast, until the check2 certificate mixed_n19_L4825
     (T-103) took both later that day. At n26 to n30, n39 and n41 the source''s mixed certificates
     of 6 October (T-105 to T-111, the 6 October check2 packet) now hold both lanes, decided here by
-    sqverify-fast. At n59, n66, n77, n78 and n90 a stronger report holds the case, so those five case
+    sqverify-fast. At n40 Guzhou0806''s clipped-corner transfer on this source''s rect_n40_L67 density
+    (T-133, the guzhou-n40-clipped-corner-2026-10-10 packet) holds both lanes from 10 October, and the
+    case keeps this source''s 67/10 as history. At n59, n66, n77, n78 and n90 a stronger report holds the case, so those five case
     records do not cite this source. The request says each directory carries a tarball, and none does.'
 - id: wand125-exact-covers-2026-10-01
   title: Mixed covers for s(59) = 8 and s(77) = 9
@@ -2483,7 +2485,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-10-09'
+  reviewed: '2026-10-10'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -2586,7 +2588,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-09'
+  reviewed: '2026-10-10'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -2610,7 +2612,9 @@ sources:
     resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json binds its exact side
     and rational triples to the retained original. This is provenance only, not a new result. A fresh
     read on 2026-10-09 found the update comment unchanged since its 2026-10-07T18:33:04Z edit and issue
-    401 closed with no later comment.'
+    401 closed with no later comment. On 2026-10-10 it was still unchanged, and a later release
+    exists: itsnaka/squish-certs d45669b, squish-submission-2026-10-09/n153, reports s(153) <=
+    12.872029849081180 in issue 481, whose import think-ac4h owns.'
 - id: squish-update-2026-10-07
   title: 'SQUISH update: seven additional and five tighter rational packings'
   role: source-repository
@@ -3182,6 +3186,401 @@ sources:
     certificate is an evidence update to T-128, which cites this source's report, and not a new entry.
     All six native jobs have full outcomes. No selected override or superseded claim is created at this
     source-only stage; current cases and earlier source ownership remain unchanged.
+- id: wand125-fine-net-n29-582-followup-2026-10-10
+  title: Wand125 later reported n29 fine-net lower bound, issue446
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/22a23c8a99aa4e9616d596bc2f28555bacbee3dd/problems/square-lower-bounds/certificates/mixed_n29_L582
+  local: resources/web/wand125-fine-net-n29-2026-10-10/
+  source_key: '[wand125 fine-net n29 2026-10-10]'
+  scope:
+    n_values:
+    - 29
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-n29-2026-10-10/README.md
+  evidence:
+  - E-wand125-fine-net-n29-582-followup-report
+  notes: The later reported 291/50 supersedes the issue-446 report of 1163/200 at n29 only; the
+    seven-case packet and every standing claim are unchanged. Complete release-asset and document
+    custody and the exact mass and declared-net premises are accepted; an eight-direction maintained
+    sample is diagnostic, and the author's full positives and 32-direction controls do not supply a
+    maintained capture or whole-net controls. Replay and adoption remain under think-r333.
+- id: guzhou-n40-clipped-corner-2026-10-10
+  title: Strict lower bound for forty unit squares by a clipped-corner transfer, issue485
+  role: source-repository
+  url: https://github.com/Guzhou0806/n40-square-packing/tree/e5abeb4d078a5c5b35df6204dd9b93378e5a7880
+  local: resources/web/guzhou-n40-clipped-corner-2026-10-10/
+  source_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+  scope:
+    n_values:
+    - 40
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-040.md
+  - frontier/results.yaml
+  evidence:
+  - E-n040-guzhou-clipped-corner-report
+  - E-n040-guzhou-clipped-corner-sqverify-fast-replay
+  - E-n040-guzhou-clipped-corner-finite-audit
+  notes: Release n40-670854-20261010 at e5abeb4d, retrieved at 2026-10-10T10:28Z for jlevy/squares#485,
+    with 20 of its 36 files retained, wand125's rect_n40_L67 density and the vendored copy of this
+    repository's sqverify_fast pinned by digest, and the release ZIP's CI receipt kept beside the tree's
+    local one. It reports s(40) > 335427/50000 and the weaker full-core s(40) > 67000 sqrt(6400006889)/798988091.
+    The 401-direction nodal statement was replayed here in full with sqverify-fast, the producer's own
+    nodal code, and the transfer's finite steps were decided again by a first-party exact audit; the
+    mathematics was reviewed on the same day with no blocking defect. Both lanes of n-040.md moved to
+    335427/50000 (T-133) and then to 1340000/199529 (T-145); T-068's 67/10 on the same density stays as
+    history. The repository's earlier
+    commit 485dd8f, with s(40) > 33509/5000 on the standard net, is pinned by history and not retained.
+- id: couzo-exact-certificates-2026-10-09
+  title: Francisco Couzo's six exact rational certificates at 02f9690, issue476
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/02f969075f79d5e13fa21e09e381a44e8647b452
+  local: resources/web/couzo-exact-certificates-2026-10-09/
+  source_key: '[Couzo exact certificates 2026-10-09]'
+  scope:
+    n_values: [132, 237, 263, 267, 270, 303]
+  reviewed: '2026-10-10'
+  source_date: '2026-10-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-exact-certificates-2026-10-09/acquisition/claims.json
+  evidence:
+  - E-couzo-476-certificate-report
+  - E-couzo-476-exact-feasibility
+  notes: All 6 complete certificates are retained as the source wrote them, each admitted only where
+    its exact side equals, or rounds up to, the side its source prints. T-134 records the in-horizon
+    report at V3/C3 on the review of 10 October, which reproduced all 51 native jobs and decided the six
+    by a third exact route. No selected override or superseded claim is created while house adoption
+    waits for jlevy/squares#403; current cases and earlier source ownership remain unchanged. The 59
+    further certificates of the commit are compared in the claim record and registered by no entry.
+- id: fang-two-wedge-certificates-2026-10-10
+  title: Kevin Fang's three two-wedge certificates at c75bebd, issue484
+  role: source-repository
+  url: https://github.com/TheSnakeFang/squarepack-certs/tree/c75bebd87933416d3e1c7aba35ec733ea8ac7da0
+  local: resources/web/fang-two-wedge-certificates-2026-10-10/
+  source_key: '[Fang two-wedge certificates 2026-10-10]'
+  scope:
+    n_values: [308, 343, 344]
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/fang-two-wedge-certificates-2026-10-10/acquisition/claims.json
+  evidence:
+  - E-fang-484-certificate-report
+  - E-fang-484-exact-feasibility
+  notes: All 3 complete certificates are retained as the source wrote them, each admitted only where
+    its exact side equals, or rounds up to, the side its source prints. T-135 records the in-horizon
+    report at V3/C3 on the review of 10 October, which reproduced all 9 native jobs and decided the three
+    by a third exact route; the n343 and n344 sides are beyond-horizon rows at assurance verified from
+    the same evidence, each the issue's 15-place print, the exact side rounded up, and both are superseded
+    by issue 489's smaller sides there (evand-record-hunt3-2026-10-10). No selected override is created
+    while house adoption waits for jlevy/squares#403; current cases and earlier source ownership remain
+    unchanged.
+  claims_record: resources/web/fang-two-wedge-certificates-2026-10-10/acquisition/beyond-horizon-claims.json
+- id: squish-481-third-request-2026-10-09
+  title: Nate Chaoweeraprasit's SQUISH third request at d45669b, issue481
+  role: source-repository
+  url: https://github.com/itsnaka/squish-certs/tree/d45669b48cc97ad3aa17a6c847a8d06630f66eac
+  local: resources/web/squish-481-third-request-2026-10-09/
+  source_key: '[SQUISH third request 2026-10-09]'
+  scope:
+    n_values: [131, 153, 154, 207, 209, 232, 236, 237, 259, 263, 269, 270, 292, 302, 303, 305, 307]
+  reviewed: '2026-10-10'
+  source_date: '2026-10-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/squish-481-third-request-2026-10-09/acquisition/claims.json
+  evidence:
+  - E-squish-481-certificate-report
+  - E-squish-481-exact-feasibility
+  notes: All 17 complete certificates are kept as derived exact facts, no upstream byte retained, each
+    admitted only where its exact side equals the exact fraction the source's summary.csv prints; the
+    issue's 15-digit displays are quotations. T-136 records them at V3/C3 on the review of 10 October,
+    which reproduced all 51 native jobs, decided the seventeen by a third exact route and held each fact
+    to its upstream certificate fetched at the pin. Squares touch the closed box at every count. No
+    selected override or superseded claim is created while house adoption waits for jlevy/squares#403;
+    current cases and earlier source ownership remain unchanged. The three sources/ certificates at 155,
+    240 and 306 are above their cases and not imported.
+- id: ebdeleeuw-n70-refinement-2026-10-10
+  title: Eric Deleeuw's n70 refinement at 24221d5, issue483
+  role: source-repository
+  url: https://github.com/ebdeleeuw/square-packing-n70/tree/24221d5e51244ca5290d5b1c43f1fbe36f9749e0
+  local: resources/web/ebdeleeuw-n70-refinement-2026-10-10/
+  source_key: '[Deleeuw n70 refinement 2026-10-10]'
+  scope:
+    n_values: [70]
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ebdeleeuw-n70-refinement-2026-10-10/acquisition/claims.json
+  evidence:
+  - E-deleeuw-483-certificate-report
+  - E-deleeuw-483-exact-feasibility
+  notes: The complete certificate is kept as a derived exact fact, no upstream byte retained, admitted
+    because its exact side equals the side the issue prints, with every centre moved by half the side
+    out of the source's centred box. T-137 records it at V3/C3 on the review of 10 October, which
+    reproduced all 3 native jobs, decided it by a third exact route and held the fact to its upstream
+    certificate fetched at the pin. No selected override or superseded claim is created while house
+    adoption waits for jlevy/squares#403; the current case and earlier source ownership remain unchanged.
+- id: mishapolk-decimal-poses-2026-10-09
+  title: Mishapolk's decimal poses at dd3da5c, issue470
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/tree/dd3da5c753c5ded6cb3b89476193b7b801005415
+  local: resources/web/mishapolk-decimal-poses-2026-10-09/
+  source_key: '[Mishapolk decimal poses 2026-10-09]'
+  scope:
+    n_values: [84, 86, 88, 103, 105, 108, 127, 130, 131, 132, 153, 154, 175, 179, 180, 199, 207, 208, 209, 236, 237, 238, 239, 258, 263, 267, 270, 302, 303, 306]
+  reviewed: '2026-10-10'
+  source_date: '2026-10-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/mishapolk-decimal-poses-2026-10-09/acquisition/claims.json
+  evidence:
+  - E-mishapolk-470-pose-report
+  - E-mishapolk-470-exact-feasibility
+  notes: >-
+    Decimal centre-and-angle poses, pinned only, with exact rational witnesses derived here by a
+    declared dilation of the centres about the box centre to each printed 12-decimal ceiling and
+    half-angle tangents rounded down at 32 decimals; derived exact facts only, no upstream byte
+    retained. All 30 in-horizon witnesses pass both maintained routes in 90 native jobs and the
+    third route of the 10 October review, which derived each again from its pinned file; the
+    interval receipt proves every dilated pose a packing at its ceiling and 19 printed poses not
+    to be packings. T-138 records the sixteen counts whose ceiling is below the case's at V3/C3;
+    the other fourteen in-horizon poses, at 88, 130, 153, 154, 179, 199, 207, 208, 209, 236,
+    237, 238, 239 and 263, have no entry, and the 18 poses at 343 to 360 print sides above the
+    grid's 19. No selected override or superseded claim is created while house adoption waits
+    for jlevy/squares#403; current cases and earlier source ownership remain unchanged.
+- id: evand-trio126-2026-10-09
+  title: Evan Daniel's n126 trio reconstructions at 268af52, no issue
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/268af529546176a25224ea3b2c7d29cef8d9e911
+  local: resources/web/evand-trio126-2026-10-09/
+  source_key: '[Daniel trio126 2026-10-09]'
+  scope:
+    n_values: [126]
+  reviewed: '2026-10-10'
+  source_date: '2026-10-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-trio126-2026-10-09/acquisition/claims.json
+  evidence:
+  - E-evand-trio126-certificate-report
+  - E-evand-trio126-exact-feasibility
+  notes: >-
+    The three certificates of search/trio126/ are retained under the source's MIT licence;
+    n126_xu, the one below the case, is admitted at the exact side it states and replayed in all
+    3 native jobs. T-139 records it at V3/C3 on the review of 10 October, which decided it by a
+    third exact route and found 68 of its 126 squares displaced from T-125's, a more precise
+    certificate of the same arrangement. The two SQUISH reconstructions lie above the case and
+    were not replayed. No selected override or superseded claim is created while house adoption
+    waits for jlevy/squares#403; the current case and earlier source ownership remain unchanged.
+- id: couzo-certificates-2026-10-10
+  title: Francisco Couzo's six exact rational certificates at 3ef7634, issue488
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/3ef76349025bf4bfa99c9c3600bcc273f4c33e02
+  local: resources/web/couzo-certificates-2026-10-10/
+  source_key: '[Couzo certificates 2026-10-10]'
+  scope:
+    n_values: [132, 175, 209, 237, 270, 305]
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-certificates-2026-10-10/acquisition/claims.json
+  evidence:
+  - E-couzo-488-certificate-report
+  - E-couzo-488-exact-feasibility
+  notes: >-
+    All 6 complete certificates are retained as the source wrote them, each admitted only where
+    its exact side equals, or rounds up to, the side its source prints. T-140 records the
+    in-horizon report at V3/C3 on the review of 10 October, which reproduced all 27 native jobs
+    and decided the six by a third exact route. The three further
+    certificates the commit changes, at 303, 338 and 340, are compared in the claim record and
+    registered by no entry, and the other 54 are pinned to the issue-476 packet's identical
+    copies. No selected override or superseded claim is created while house adoption waits for
+    jlevy/squares#403; current cases and earlier source ownership remain unchanged.
+- id: evand-record-hunt3-2026-10-10
+  title: Evan Daniel's Hunt 3 certificates at 76a529b, issue489
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/76a529bc6f36ed05827cae3d1412d6acb5be00fc
+  local: resources/web/evand-record-hunt3-2026-10-10/
+  source_key: '[Daniel record hunt 3 2026-10-10]'
+  scope:
+    n_values: [132, 308, 343, 344]
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-record-hunt3-2026-10-10/acquisition/claims.json
+  evidence:
+  - E-evand-489-hunt3-report
+  - E-evand-489-exact-feasibility
+  notes: >-
+    All 4 complete certificates are retained as the source wrote them, each admitted only where
+    its exact side equals, or rounds up to, the side its source prints. T-141 records the
+    in-horizon report at V3/C3 on the review of 10 October, which reproduced all 15 native jobs
+    and decided the four by a third exact route; the n343 and n344 sides are beyond-horizon
+    rows at assurance verified from the same evidence, the issue's prints, which are the exact
+    sides, and supersede issue 484's rows at those counts. The certificate at 305, which the issue
+    does not name, is compared in the claim record and registered by no entry. No selected
+    override is created while house adoption waits for jlevy/squares#403; current cases and
+    earlier source ownership remain unchanged.
+  claims_record: resources/web/evand-record-hunt3-2026-10-10/acquisition/beyond-horizon-claims.json
+- id: wand125-fine-net-n28-57425-2026-10-10
+  title: Wand125 reported n28 fine-net lower bound, no issue
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/36b85b9f37efa7cc5d4464805cfb0f2d21576267/problems/square-lower-bounds/certificates/mixed_n28_L57425
+  local: resources/web/wand125-fine-net-n28-n30-2026-10-10/
+  source_key: '[wand125 fine-net n28 n30 2026-10-10]'
+  scope:
+    n_values:
+    - 28
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-n28-n30-2026-10-10/README.md
+  evidence:
+  - E-wand125-fine-net-n28-57425-report
+  notes: The reported 2297/400 at n28 is above T-107's 1147/200 and the issue-446 report of 287/50;
+    both standing claims and the seven-case packet are unchanged. Complete release-asset and document
+    custody and the exact mass, declared-net and check2 premises are accepted; an eight-direction
+    maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
+    supply a maintained capture or whole-net controls. Replay and adoption remain under think-i85v.
+- id: wand125-fine-net-n30-58925-2026-10-10
+  title: Wand125 reported n30 fine-net lower bound, no issue
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/ff9f2692afe7d1e65a51bb079b61b3710b97fc82/problems/square-lower-bounds/certificates/mixed_n30_L58925
+  local: resources/web/wand125-fine-net-n28-n30-2026-10-10/
+  source_key: '[wand125 fine-net n28 n30 2026-10-10]'
+  scope:
+    n_values:
+    - 30
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-n28-n30-2026-10-10/README.md
+  evidence:
+  - E-wand125-fine-net-n30-58925-report
+  notes: The reported 2357/400 at n30 is above T-109's 11767/2000, which is unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
+    maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
+    supply a maintained capture or whole-net controls. Replay and adoption remain under think-i85v.
+- id: wand125-linear-n122-1126-2026-10-10
+  title: Linear point, segment and rectangle certificate for n = 122, no issue
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/a9f76c382d023b4095899c4eb7ea7483b8b87ecf/problems/square-lower-bounds/certificates/mixed_n122_L1126
+  local: resources/web/wand125-linear-n122-2026-10-10/
+  source_key: '[wand125 linear n122 2026-10-10]'
+  scope:
+    n_values:
+    - 122
+    - 123
+    - 124
+    - 125
+    - 126
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-linear-n122-2026-10-10/README.md
+  evidence:
+  - E-wand125-linear-n122-1126-report
+  notes: Revision a9f76c382d023b4095899c4eb7ea7483b8b87ecf, retrieved at 2026-10-10T17:00:59Z. A
+    measure of points, uniform segments and uniform rectangles on T-080's net, checked by
+    code/unified_linear_verify.cpp, byte for byte T-080's checker; by its mass it raises n = 122 to 126
+    above Green's and Nagamochi's reported values and the Karakus strip bounds. The T-080 route's exact
+    premises, bundle bindings and input enclosures pass, and a two-angle replay sample returned the
+    certificate's records; the complete replay waits under think-nd7g. The release asset is pinned by
+    digest and not retained.
+- id: guzhou-n40-continuous-pose-2026-10-10
+  title: Strict lower bound for forty unit squares by a continuous-pose interval kernel, issue485
+  role: source-repository
+  url: https://github.com/Guzhou0806/n40-square-packing/tree/71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3
+  local: resources/web/guzhou-n40-continuous-pose-2026-10-10/
+  source_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+  scope:
+    n_values:
+    - 40
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-040.md
+  - frontier/results.yaml
+  evidence:
+  - E-n040-guzhou-continuous-pose-report
+  - E-n040-guzhou-continuous-pose-kernel-replay
+  - E-n040-guzhou-continuous-pose-finite-audit
+  - E-n040-guzhou-continuous-pose-crate-axis
+  notes: Release n40-continuous-1340000-199529-20261010 at 71c97d07, retrieved at 2026-10-10T17:25Z for
+    the follow-up comment on jlevy/squares#485, with 27 of its 28 files retained, wand125's rect_n40_L67
+    density pinned by digest, and the release ZIP's CI receipt kept beside the tree's local one. It
+    reports s(40) > 1340000/199529 by a continuous-pose interval kernel over 43 slabs and an exact axis
+    certificate. Both kernels were rebuilt here into the CI run's binaries and replayed in full, every
+    output equal to both release receipts apart from timing; the finite steps were decided again by a
+    first-party exact audit and the near-axis statement by sqverify-fast; the mathematics was reviewed
+    the same day with no blocking defect. Both lanes of n-040.md move to 1340000/199529 (T-145); T-133's
+    335427/50000 on the same density stays as history.
+- id: evand-regularized-2026-10-10
+  title: Evan Daniel's regularized record lists at ea1a2f2, no issue
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7
+  local: resources/web/evand-regularized-2026-10-10/
+  source_key: '[Daniel regularized lists 2026-10-10]'
+  scope:
+    n_values: [70, 102, 103, 123, 129, 146, 153, 236, 258, 263, 269, 292, 295, 302, 303]
+  reviewed: '2026-10-10'
+  source_date: '2026-10-10'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-regularized-2026-10-10/acquisition/claims.json
+  evidence:
+  - E-evand-regularized-certificate-report
+  - E-evand-regularized-exact-feasibility
+  notes: >-
+    The fifteen certificates of search/regularize/lists/certs/ below every value the record held
+    are retained as their upstream gzip, with their 50-digit JSON, under the source's MIT licence;
+    each is admitted at the exact side its JSON prints as S_cert. T-146 records them at V3/C3, on
+    the 11 October review (docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md),
+    which accepted all fifteen for finite feasibility only. All 45 native jobs have full outcomes,
+    and the third exact route agrees. The source claims no record:
+    each JSON calls its certificate a regularized display view at the same side and not a new bound.
+    The other 314 certificates of the lists are pinned by the commit and not retained. No selected
+    override or superseded claim is created while house adoption waits for jlevy/squares#403;
+    current cases and earlier source ownership remain unchanged.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026
@@ -5159,6 +5558,36 @@ beyond_horizon_claims:
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-1545
+- n: 343
+  source_id: fang-two-wedge-certificates-2026-10-10
+  claim: upper-bound
+  value: '18.994903529220497'
+  assurance: verified
+  disposition: superseded
+  superseded_by: evand-record-hunt3-2026-10-10
+  bead: think-ar8g
+- n: 343
+  source_id: evand-record-hunt3-2026-10-10
+  claim: upper-bound
+  value: '18.978232523635611279730512106023'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-xm4h
+- n: 344
+  source_id: fang-two-wedge-certificates-2026-10-10
+  claim: upper-bound
+  value: '18.995489275430816'
+  assurance: verified
+  disposition: superseded
+  superseded_by: evand-record-hunt3-2026-10-10
+  bead: think-ar8g
+- n: 344
+  source_id: evand-record-hunt3-2026-10-10
+  claim: upper-bound
+  value: '18.994450514277401521114135796864'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-xm4h
 - n: 364
   source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound

@@ -1,0 +1,41 @@
+TABLE 3.1
+   tier parts b0      cy         cD=cR    aw       mu        boxes     Psi_sup   C_E^cert  C_E    (E-iii) (W2)/z  t0     (E-iv)
+   B1   ABC   10^7.7  0.170157   2.92683  1.25781  0.65      320x128   65.9031   17.46022  17.461 0.593   0.0173  0.0559 0.9970 
+   B1s  ABC   10^7.9  0.16       2.92683  1.26     0.65      320x128   67.0680   16.96721  16.968 0.593   0.0167  0.0590 0.9974 
+   B2   ABC   10^8    0.154681   2.92683  1.26562  0.65      320x128   67.7914   16.72078  16.721 0.585   0.0141  0.0604 0.9976 
+   A1   A     10^8.5  0.133923   2.90865  1.13636  0.681818  320x128   85.6481   18.96098  18.961 0.612   0.0145  0.0707 0.9984 
+   A1s  A     10^8.58 0.131625   2.90865  1.13636  0.681818  320x128   85.6691   18.72102  18.722 0.632   0.0147  0.0716 0.9984 
+   A2   A     10^9    0.116939   2.90909  1.13636  0.681818  320x128   87.6231   17.52221  17.523 0.661   0.0157  0.0759 0.9989 
+   A3   A     10^10   0.0957429  2.61999  1.13     0.65      320x128   92.1363   15.85845  15.859 0.927   0.0158  0.0841 0.9994 
+   A4   A     10^12   0.0769401  2.60016  1.13     0.65      320x128   101.1581  14.77799  14.778 1.607   0.0145  0.0933 0.9999 
+   A5   A     10^16   0.0838149  2.86364  1.25     0.65      320x128   90.8528   14.15236  14.153 1.948   0.0156  0.0989 1.0000 
+TABLE 4.1
+   tier parts b0      C_E     C_i     k_i      a_i      k_x(2/5)   lam_bound  theorem_ok
+   B1   ABC   10^7.7  17.461  46.31   2.2e13   3.5e-2   1.04e+14   8.32e-08   True
+        checks: {'CE_stated>=cert': True, 'C>=Cprime(CE)': True, 'k>=k0(CE)': True, 'a>=(12/5)CE b0^-2/5': True, 'lambda_bound<1': True, 'room_cy_sqrt': True, 'k_below_cross': True}
+   B1s  ABC   10^7.9  16.968  45.49   4.5e13   2.9e-2   5.07e+13   5.23e-08   True
+        checks: {'CE_stated>=cert': True, 'C>=Cprime(CE)': True, 'k>=k0(CE)': True, 'a>=(12/5)CE b0^-2/5': True, 'lambda_bound<1': True, 'room_cy_sqrt': True, 'k_below_cross': True}
+   B2   ABC   10^8    16.721  45.08   6.4e13   2.6e-2   3.53e+13   4.15e-08   True
+        checks: {'CE_stated>=cert': True, 'C>=Cprime(CE)': True, 'k>=k0(CE)': True, 'a>=(12/5)CE b0^-2/5': True, 'lambda_bound<1': True, 'room_cy_sqrt': True, 'k_below_cross': False}
+   A1   A     10^8.5  18.961  48.76   4.6e14   1.9e-2   8.14e+14   1.31e-08   True
+        checks: {'CE_stated>=cert': True, 'C>=Cprime(CE)': True, 'k>=k0(CE)': True, 'a>=(12/5)CE b0^-2/5': True, 'lambda_bound<1': True, 'room_cy_sqrt': True, 'k_below_cross': True}
+   A1s  A     10^8.58 18.722  48.38   6.1e14   1.7e-2   5.95e+14   1.09e-08   True
+        checks: {'CE_stated>=cert': True, 'C>=Cprime(CE)': True, 'k>=k0(CE)': True, 'a>=(12/5)CE b0^-2/5': True, 'lambda_bound<1': True, 'room_cy_sqrt': True, 'k_below_cross': False}
+   A2   A     10^9    17.523  46.42   2.7e15   1.1e-2   1.14e+14   4.12e-09   True
+        checks: {'CE_stated>=cert': True, 'C>=Cprime(CE)': True, 'k>=k0(CE)': True, 'a>=(12/5)CE b0^-2/5': True, 'lambda_bound<1': True, 'room_cy_sqrt': True, 'k_below_cross': False}
+   A3   A     10^10   15.859  43.61   9.6e16   3.9e-3   9.36e+12   4.11e-10   True
+        checks: {'CE_stated>=cert': True, 'C>=Cprime(CE)': True, 'k>=k0(CE)': True, 'a>=(12/5)CE b0^-2/5': True, 'lambda_bound<1': True, 'room_cy_sqrt': True, 'k_below_cross': False}
+   A4   A     10^12   14.778  41.73   1.5e20   5.7e-4   1.61e+12   4.10e-12   True
+        checks: {'CE_stated>=cert': True, 'C>=Cprime(CE)': True, 'k>=k0(CE)': True, 'a>=(12/5)CE b0^-2/5': True, 'lambda_bound<1': True, 'room_cy_sqrt': True, 'k_below_cross': False}
+   A5   A     10^16   14.153  40.62   3.4e26   1.4e-5   5.47e+11   4.10e-16   True
+        checks: {'CE_stated>=cert': True, 'C>=Cprime(CE)': True, 'k>=k0(CE)': True, 'a>=(12/5)CE b0^-2/5': True, 'lambda_bound<1': True, 'room_cy_sqrt': True, 'k_below_cross': False}
+WORST
+   B1 z=[0.0447639,0.0449043] t/z^2=[1.22399,1.22576] tri 22.432 other 0.406 left 18.186 right 24.878
+   B1s z=[0.0414582,0.0415882] t/z^2=[1.22385,1.22561] tri 24.223 other 0.376 left 17.924 right 24.546
+   B2 z=[0.0399284,0.0400535] t/z^2=[1.22379,1.22555] tri 25.268 other 0.361 left 17.787 right 24.376
+   A1 z=[0.0328796,0.0329827] t/z^2=[1.22353,1.22529] tri 30.248 other 0.296 left 23.905 right 31.199
+   A1s z=[0.0318278,0.0319275] t/z^2=[1.22350,1.22526] tri 30.909 other 0.286 left 23.608 right 30.866
+   A2 z=[0.0270179,0.0271026] t/z^2=[1.22335,1.22511] tri 35.831 other 0.242 left 22.264 right 29.287
+   A3 z=[0.0179211,0.0179773] t/z^2=[1.22315,1.22491] tri 45.999 other 0.158 left 19.933 right 26.046
+   A4 z=[0.00753533,0.00755896] t/z^2=[1.22302,1.22477] tri 60.450 other 0.065 left 17.420 right 23.223
+   A5 z=[0.00116899,0.00117265] t/z^2=[1.22299,1.22475] tri 54.316 other 0.015 left 15.292 right 21.230

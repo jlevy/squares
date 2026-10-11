@@ -2,7 +2,7 @@
 """The overview of one registered result: the body of the popover its row opens.
 
 A result's row, in Recent Results on the homepage and in the table on
-`all-results.html`, opens a popover with everything the site knows about the result.
+`results.html`, opens a popover with everything the site knows about the result.
 This module writes that popover's body, `result_popover_html(result, overview)`; the
 popover around it, with the result's id as its caps label and its summary as its
 headline, and the row that opens it, belong to the pages that list results
@@ -367,11 +367,12 @@ def gap_bar(fact: dict[str, Any]) -> str:
 
 def film_bound(fact: dict[str, Any]) -> str:
     """The bound as one statement, as the film writes it (`drawBound`): the proved lower
-    bound and the best known side in their colours, or the exact value, after the star a
-    recent lower bound earns."""
+    bound and the best known side in their colours, or the exact value. Recent
+    contributions use the shared recency ink."""
+    from devtools.overview_sections import SERIF_MATH  # noqa: PLC0415
+
     n = int(fact["n"])
-    star = "\u2605" if fact["star"] else ""
-    parts = [f'<span class="site-atlas-pop-star" aria-hidden="true">{star}</span>']
+    parts: list[str] = []
     if fact["exact"]:
         parts.append(math_html(f"s({n}) ={{}}"))
         parts.append(
@@ -390,7 +391,7 @@ def film_bound(fact: dict[str, Any]) -> str:
             f'<span class="{contribution_class(n, "upper")}">'
             f"{math_html(str(fact['upper']))}</span>"
         )
-    return f'<p class="site-atlas-pop-bound">{"".join(parts)}</p>'
+    return f'<p class="site-atlas-pop-bound" {SERIF_MATH}>{"".join(parts)}</p>'
 
 
 def badge_glyph(
@@ -400,15 +401,11 @@ def badge_glyph(
     exact, numerical, rigid, a new result, something open): its glyph in a small square,
     solid or outlined (`.site-atlas-badge`). `named`, where no word follows it, gives it
     its word as its name and its tooltip."""
-    name = (
-        f'role="img" aria-label="{_esc(text)}" title="{_esc(text)}"'
-        if named
-        else 'aria-hidden="true"'
-    )
+    name = f'role="img" aria-label="{_esc(text)}"' if named else 'aria-hidden="true"'
     accent = ' data-recent="true"' if recent else ""
     return (
-        f'<span class="site-atlas-badge" data-style="{_esc(style)}"{accent} '
-        f"{name}>{_esc(glyph)}</span>"
+        f'<span class="site-atlas-badge" data-style="{_esc(style)}" {name} '
+        f'title="{_esc(text)}"{accent}>{_esc(glyph)}</span>'
     )
 
 
@@ -437,7 +434,7 @@ def case_badges(n: int) -> str:
 
 def film_facts_html(fact: dict[str, Any]) -> str:
     """The badges, the citation and what is open, as the film lists them (`drawFacts`)."""
-    badges = [_badge("\u2605", "star", "new result", "is-new-result")] if fact["star"] else []
+    badges: list[str] = []
     from devtools.result_status import recent_contributions_by_case  # noqa: PLC0415
 
     flags = recent_contributions_by_case()[int(fact["n"])]
@@ -552,12 +549,12 @@ def bounds_table(case: dict[str, Any]) -> str:
     )
 
 
-def case_panel(n: int, overview: Overview, *, label: bool) -> str:
+def case_panel(n: int, overview: Overview) -> str:
     """One case as its record opens, the visual summary (`render_case_pages.
     visual_summary`, the drawing at the atlas's size), with the record's bounds under it
     and its own link to the record among the overview's links."""
     from devtools.overview_sections import ATLAS_UNITS  # noqa: PLC0415
-    from devtools.render_case_pages import visual_summary  # noqa: PLC0415
+    from devtools.render_case_pages import packing_figure, visual_summary  # noqa: PLC0415
 
     case = overview.cases[n]
     # The case's n heads its panel as a case record's title does: a caps label would
@@ -565,12 +562,12 @@ def case_panel(n: int, overview: Overview, *, label: bool) -> str:
     head = (
         '<p class="site-popover-value site-result-case-n" data-math-face="serif">'
         f"{math_html(f'n = {n}')}</p>"
-        if label
-        else ""
     )
     return (
-        f'<div class="site-atlas-pop site-result-film" data-overview-case="{n}">{head}'
-        f"{visual_summary(n, units=ATLAS_UNITS)}"
+        f'<div class="site-atlas-pop site-result-film" data-overview-case="{n}">'
+        '<span class="site-card-label site-case-eyebrow">Case record</span>'
+        f"{packing_figure(n, units=ATLAS_UNITS)}{head}"
+        f"{visual_summary(n, drawing=False)}"
         f'<p class="site-atlas-pop-head">The case record</p>{bounds_table(case)}</div>'
     )
 
@@ -647,22 +644,17 @@ def case_list(cases: Sequence[int], overview: Overview) -> str:
         _, gap_value = frontier.gap(case)
         gap = frontier.decimal_text(Decimal(gap_value).normalize()) if gap_value != "0" else "0"
         status = case["status"]
-        star = (
-            '<span class="site-star" title="Recent result">\u2605</span>'
-            if fact["star"]
-            else ""
-        )
         rows.append(
             (
                 n,
                 [
                     f'<a href="{case_url(n)}">{n}</a>',
-                    _esc(lower) + star,
+                    _esc(lower),
                     _esc(fact["upper"]),
                     _esc(gap),
                     case_status_chip(status) + case_badges(n),
                     (
-                        f'<a href="frontier.html#n-{n}">frontier</a> '
+                        f'<a href="atlas.html#n-{n}">frontier</a> '
                         f'<a href="{_esc(repo_url(case_file(n)))}">'
                         f"{_esc(case_file(n).name)}</a>"
                     ),
@@ -694,13 +686,18 @@ def head(result: Result, cases: Sequence[int]) -> str:
     """The chips, the date and credit, the claim, and what a later result its entry
     declares implies of it (`superseded_by`). The date leads and what it dates follows,
     as a table's date cell sets it (`overview_sections.date_cell`). The id and the
-    headline are the popover's own, above the body (`overview_sections.result_row`)."""
+    headline are the popover's own, above the body (`overview_sections.result_row`).
+    In the details under the claim, the next rung is followed by the confirmations the
+    entry lists as not yet run, each with its rung and cost
+    (`result_status.unfinished_sentence`), and by the packings its certificate
+    regularizes, one sentence a count (`Result.regularizations`)."""
     from devtools.overview_sections import (  # noqa: PLC0415
         date_cell,
         novelty_labels,
         result_url,
         status_chips,
     )
+    from devtools.result_status import unfinished_sentence  # noqa: PLC0415
 
     record = result.record
     claim = prose_html(record["claim"], between='</p><p class="site-result-claim">')
@@ -718,6 +715,14 @@ def head(result: Result, cases: Sequence[int]) -> str:
         ("Significance", record["significance"]["rationale"]),
         ("Composition", record.get("composition")),
         ("Next rung", record.get("next_rung")),
+        (
+            "Unfinished confirmations",
+            "\n".join(
+                unfinished_sentence(item)
+                for item in record.get("unfinished_confirmations") or []
+            ),
+        ),
+        ("Regularizations", "\n".join(result.regularizations)),
     ]
     rows = "".join(
         f"<dt>{label}</dt><dd>{prose_html(text)}</dd>" for label, text in more if text
@@ -749,7 +754,7 @@ def case_section(result: Result, overview: Overview, cases: Sequence[int]) -> st
         body = case_list(cases, overview)
         title = "The cases"
     else:
-        body = "".join(case_panel(n, overview, label=len(cases) > 1) for n in cases)
+        body = "".join(case_panel(n, overview) for n in cases)
         title = "The case" if len(cases) == 1 else "The cases"
     return (
         f'<section class="site-result-section"><h3 class="site-result-heading">{title}</h3>'
@@ -981,17 +986,16 @@ def links_section(result: Result, overview: Overview, cases: Sequence[int]) -> s
         OPTIMALITY_PAPER,
         result_url,
     )
-    from devtools.render_case_pages import CASES_HOME, case_url  # noqa: PLC0415
+    from devtools.render_case_pages import case_url  # noqa: PLC0415
 
     record = result.record
     site: list[str] = []
     if is_broad(cases):
-        site.append(_link("frontier.html", "The frontier survey"))
-        site.append(_link(CASES_HOME, "Every case record"))
+        site.append(_link("atlas.html#the-frontier-survey", "The frontier survey"))
     else:
         for n in cases:
             site.append(_link(case_url(n), f"Case record, {math_html(f'n = {n}')}"))
-            site.append(_link(f"frontier.html#n-{n}", f"Frontier row, {math_html(f'n = {n}')}"))
+            site.append(_link(f"atlas.html#n-{n}", f"Frontier row, {math_html(f'n = {n}')}"))
     site.append(_link(result_url(result.id), f"{_esc(result.id)} in the results table"))
     if 11 in cases:
         site.append(_link(OPTIMALITY_PAPER, f"The {math_html('n = 11')} optimality paper"))
@@ -1111,7 +1115,7 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
     commit-pinned repository link, a page the site does not serve, or a fragment no row
     or record carries."""
     from devtools.overview_sections import result_fragment  # noqa: PLC0415
-    from devtools.render_case_pages import CASES_HOME, case_url  # noqa: PLC0415
+    from devtools.render_case_pages import case_url  # noqa: PLC0415
     from devtools.render_overview import SITE_PAGES  # noqa: PLC0415
 
     pinned = repo_links.hash_pinned_links(body)
@@ -1123,12 +1127,11 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
             missing.append(f"{kind}/{path}")
     ids = {other.id.lower() for other in overview.results}
     fragments = {
-        "frontier.html": {f"n-{n}" for n in overview.cases},
-        "all-results.html": ids,
+        "atlas.html": {"the-frontier-survey", *(f"n-{n}" for n in overview.cases)},
+        "results.html": ids,
     }
     served = {
         *SITE_PAGES,
-        CASES_HOME,
         *(case_url(n) for n in overview.cases),
         *(result_fragment(result.id) for result in overview.results),
     }

@@ -10,6 +10,7 @@ The shared browser launcher fails when an installed-browser gate cannot launch i
 from __future__ import annotations
 
 import html
+import os
 import re
 import socket
 from collections.abc import Iterator, Sequence
@@ -24,6 +25,7 @@ from devtools.preview_site import MATH_FACE, press, serve, settle_math
 from tests import site_browser, site_renders
 
 SANS_TEXT = "Source Sans 3 Variable"
+SERIF_TEXT = "KPress Quotes"
 SERIF_MATH, SANS_MATH = "KPress Math Text", "KPress Math Text Sans"
 #: The cases whose records are walked: the settled case, with a closed form in every
 #: panel, and an open one.
@@ -109,20 +111,22 @@ def results(browser: Any, root: Path) -> Walk:
 
 @pytest.fixture(scope="module")
 def frontier_atlas(browser: Any, root: Path) -> Walk:
-    path = site_renders.write(root, "frontier.html")["frontier.html"]
+    path = site_renders.write(root, "atlas.html")["atlas.html"]
     return walk(browser, path.as_uri(), presses=(), whole=False)
 
 
 @pytest.fixture(scope="module")
 def served(root: Path) -> Iterator[str]:
-    """The real frontier, index and two complete records, served for fetch overlays."""
+    """The Atlas and two complete records, served for fetch overlays."""
+    if live := os.environ.get("SQPACK_SITE_PREVIEW_URL"):
+        yield live.rstrip("/") + "/"
+        return
     files = [
-        site_renders.page("frontier.html"),
-        site_renders.page(render_case_pages.CASES_PAGE),
+        site_renders.page("atlas.html"),
         *(
             render_overview.Page(
                 render_case_pages.case_url(n),
-                site_renders.case_records()[render_case_pages.case_url(n)],
+                site_renders.case_records(CASES)[render_case_pages.case_url(n)],
             )
             for n in CASES
         ),
@@ -159,7 +163,7 @@ def case_records(browser: Any, served: str) -> dict[int, Walk]:
 def frontier_popover(browser: Any, served: str) -> Walk:
     """The frontier page with case 11's row pressed: its record in the case popover."""
     return walk(
-        browser, f"{served}frontier.html", presses=("#n-11 td.site-thumb img",), whole=False
+        browser, f"{served}atlas.html", presses=("#n-11 td.site-thumb img",), whole=False
     )
 
 
@@ -205,27 +209,46 @@ def test_the_frontier_table_sets_sans_math(
     assert not [key for key in rows if key[0] == "subtitle"]
 
 
-def test_the_case_popover_sets_its_records_math_sans(frontier_popover: Walk) -> None:
-    """A case's record in the frontier's case popover is set as on its own page: its
-    head, panels and visual summary are sans text with sans math, the case file's prose
-    serif with serif math, and nothing is set wrongly. In the popover the probe counts
-    the record's head and panels under the popover's surface."""
+def test_the_case_popover_sets_its_count_serif_and_its_panels_sans(
+    frontier_popover: Walk,
+) -> None:
+    """The count remains a serif math headline. Main bound statements use serif text
+    and math; numeric rails and other panels keep their sans faces."""
     wrong, rows = frontier_popover
     assert wrong == []
     assert rows[("popover", SANS_TEXT, SANS_MATH)]["count"] > 0
     assert rows[("visual summary", SANS_TEXT, SANS_MATH)]["count"] > 0
+    assert rows[("visual summary", SERIF_TEXT, SERIF_MATH)]["count"] > 0
+    assert rows[("popover", SERIF_TEXT, SERIF_MATH)]["count"] == 1
+    count = rows[("popover", SANS_TEXT, SERIF_MATH)]
+    assert count["count"] == count["alone"] == 1
     for surface, text, face in rows:
         if surface in {"popover", "visual summary"}:
-            assert (text == SANS_TEXT) == (face == SANS_MATH), (surface, text, face)
+            allowed = {(SANS_TEXT, SANS_MATH), (SERIF_TEXT, SERIF_MATH)}
+            if surface == "popover":
+                allowed.add((SANS_TEXT, SERIF_MATH))
+            assert (text, face) in allowed, (surface, text, face)
 
 
 @pytest.mark.parametrize("n", CASES)
 def test_a_case_records_panels_set_sans_math(case_records: dict[int, Walk], n: int) -> None:
     wrong, rows = case_records[n]
     assert wrong == []
-    for surface in ("case head", "case bounds", "visual summary"):
+    for surface in ("case bounds", "visual summary"):
         assert rows[(surface, SANS_TEXT, SANS_MATH)]["count"] > 0, surface
-    assert not [key for key in rows if key[0].startswith("case") and key[2] != SANS_MATH]
+    assert rows[("case head", SERIF_TEXT, SERIF_MATH)]["count"] == 1
+    assert rows[("visual summary", SERIF_TEXT, SERIF_MATH)]["count"] > 0
+    count = rows[("case head", SANS_TEXT, SERIF_MATH)]
+    assert count["count"] == count["alone"] == 1
+    serif_head = {
+        ("case head", SANS_TEXT, SERIF_MATH),
+        ("case head", SERIF_TEXT, SERIF_MATH),
+    }
+    assert not [
+        key
+        for key in rows
+        if key[0].startswith("case") and key[2] != SANS_MATH and key not in serif_head
+    ]
 
 
 def test_the_walk_catches_serif_math_in_a_sans_headline(browser: Any, root: Path) -> None:
@@ -275,7 +298,7 @@ def test_frontier_native_math_wrong_face_is_reported(
     frontier_math_counts: tuple[int, int],
     tmp_path: Path,
 ) -> None:
-    path = site_renders.write(tmp_path, "frontier.html")["frontier.html"]
+    path = site_renders.write(tmp_path, "atlas.html")["atlas.html"]
     source = path.read_text()
     source = source.replace(
         "</head>",

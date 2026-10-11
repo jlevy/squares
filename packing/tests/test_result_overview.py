@@ -23,6 +23,7 @@ from devtools import (
     render_overview,
     repo_links,
     result_overview,
+    result_status,
     site_assets,
     site_urls,
 )
@@ -154,6 +155,25 @@ def test_the_head_says_what_a_declared_later_result_implies(bodies: dict[str, st
     assert successor in bodies["T-037"].split("</header>", 1)[0]
 
 
+def test_the_head_says_whose_packing_each_regularization_is(
+    overview: overview_data.Overview, bodies: dict[str, str]
+) -> None:
+    """A result whose certificate regularizes packings other results hold lists them
+    after the next rung, one sentence a count, as `RESULTS.md` prints them; T-146 is the
+    first, at fifteen counts. A result that regularizes nothing has no such row."""
+    result = _result(overview, "T-146")
+    assert len(result.regularizations) == 15
+    assert result.regularizations[0].startswith(
+        "n = 70: a regularization of T-125\u2019s packing by Daniel (fewest; solved to its"
+    )
+    head = bodies["T-146"].split("</header>", 1)[0]
+    value = result_overview.prose_html("\n".join(result.regularizations))
+    assert f"<dt>Regularizations</dt><dd>{value}</dd>" in head
+    assert head.index("<dt>Next rung</dt>") < head.index("<dt>Regularizations</dt>")
+    assert not _result(overview, "T-125").regularizations
+    assert "<dt>Regularizations</dt>" not in bodies["T-125"]
+
+
 @pytest.mark.parametrize("result_id", [SETTLED, EARLIER])
 def test_a_single_case_shows_the_films_panel_and_the_packing(
     result_id: str, bodies: dict[str, str]
@@ -176,13 +196,14 @@ def test_a_single_case_shows_the_films_panel_and_the_packing(
     assert '<span class="is-upper" style="left: ' in bar
     assert ">3.877</span>" in bar
     assert bar.count('class="site-atlas-gap-rule"') == 1  # exact: one rule, no lower
-    # The chained bound, as the film states it, with its star and badges.
+    # The chained bound and mathematical badges remain without a recency symbol.
     assert overview_data.math_html("s(11) ={}") in body
     assert (
         '<span class="is-upper is-exact-value">'
         f"{overview_data.math_html(fact['upper'])}</span>" in body
     )
-    assert '<span class="site-atlas-pop-star" aria-hidden="true">\u2605</span>' in body
+    assert "site-atlas-pop-star" not in body
+    assert "\u2605" not in body
     for _, _, label in fact["badges"]:
         assert f"</span>{label}</li>" in body
     for which in ("lower", "upper"):
@@ -282,12 +303,7 @@ def _assert_case_values(cases: list[int], overview: overview_data.Overview, body
             n, "lower"
         ).removeprefix("is-")
         assert cells[1].text == lower
-        stars = cells[1].findall("span[@class='site-star']")
-        assert bool(stars) is fact["star"]
-        if stars:
-            assert len(stars) == 1
-            assert stars[0].attrib == {"class": "site-star", "title": "Recent result"}
-            assert stars[0].text == "★"
+        assert cells[1].findall("span[@class='site-star']") == []
         assert cells[2].attrib["class"] == result_overview.contribution_class(
             n, "upper"
         ).removeprefix("is-")
@@ -303,7 +319,7 @@ def _assert_case_values(cases: list[int], overview: overview_data.Overview, body
         assert _inner(cells[4]) == _inner(expected_status)
         assert cells[5].attrib["class"] == "records"
         assert [(link.attrib["href"], link.text) for link in cells[5].findall("a")] == [
-            (f"frontier.html#n-{n}", "frontier"),
+            (f"atlas.html#n-{n}", "frontier"),
             (repo_links.repo_url(result_overview.case_file(n)), f"n-{n:03d}.md"),
         ]
 
@@ -335,13 +351,22 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     assert 'rowspan="' in body
     for paragraph in register_prose.paragraphs(result.record["claim"]):
         assert f'<p class="site-result-claim">{overview_data.tex_bounds(paragraph)}</p>' in body
+    unfinished = result.record.get("unfinished_confirmations") or []
+    # T-124's one unfinished confirmation, an audit and an independent Lean build, is
+    # unpriced, and its page says so under the next rung.
+    assert [item["rung"] for item in unfinished] == ["C3"]
     for label, value in (
         ("Significance", result.record["significance"]["rationale"]),
         ("Composition", result.record.get("composition")),
         ("Next rung", result.record.get("next_rung")),
+        (
+            "Unfinished confirmations",
+            "\n".join(result_status.unfinished_sentence(item) for item in unfinished),
+        ),
     ):
         if value:
             assert f"<dt>{label}</dt><dd>{result_overview.prose_html(value)}</dd>" in body
+    assert "Lean proof. Not priced.</dd>" in body
     members = result_overview.chain(overview, cases)
     assert len(members) >= 67
     assert [identity for identity, _ in STEP.findall(body)] == [
@@ -360,7 +385,10 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     page = pages[0]
     assert page.name == "result/t-124.html"
     row = next(row for row in site_urls.load_registry() if row.path == page.name)
-    assert site_urls.page_budget(row) == 300_000
+    # The canonical result budget held the whole report until 10 October 2026, when four
+    # chain steps (T-135, T-141 to T-143) took it to 304,237 bytes; its measured exception
+    # keeps every case, step and link rather than dropping any to fit.
+    assert site_urls.page_budget(row) == site_urls.PAGE_BUDGET_EXCEPTIONS[page.name][0]
     assert len(page.html.encode("utf-8")) <= site_urls.page_budget(row)
     article = page.html.split('<article class="site-result"', 1)[1].split("</article>", 1)[0]
     assert re.findall(r'data-overview-case="(\d+)"', article) == [str(n) for n in cases]
@@ -442,7 +470,7 @@ def test_the_chain_is_every_result_on_the_case_oldest_first(
     lines = result_overview.result_lines()
     for other in expected:
         step = body.split(f'data-step="{other.id.lower()}"', 1)[1].split("</li>", 1)[0]
-        assert f'<a href="all-results.html#{other.id.lower()}">{other.id}</a>' in step
+        assert f'<a href="results.html#{other.id.lower()}">{other.id}</a>' in step
         # A step's date leads and what it dates follows, then the id, as in the tables.
         dated = overview_sections.date_cell(other)
         assert f'<p class="site-result-step-head">{dated} <a href=' in step
@@ -540,7 +568,7 @@ def test_a_chain_names_only_the_successors_on_its_own_cases(bodies: dict[str, st
     T-043 on 2026-10-05 (think-6zg1), not those that supersede it at n = 18 or 19."""
     step = bodies["T-043"].split('data-step="t-019"', 1)[1].split("</li>", 1)[0]
     chips = step.split('<p class="site-result-step-chips">', 1)[1].split("</p>", 1)[0]
-    assert re.findall(r'href="all-results\.html#(t-\d+)"', chips) == ["t-093"]
+    assert re.findall(r'href="results\.html#(t-\d+)"', chips) == ["t-093"]
 
 
 @pytest.mark.parametrize("result_id", [SETTLED, EARLIER, BROAD])
@@ -550,13 +578,13 @@ def test_the_links_reach_the_site_and_the_record(
     result = _result(overview, result_id)
     record = result.record
     links = bodies[result_id].split('class="site-result-section site-result-links"', 1)[1]
-    assert f'<a href="all-results.html#{result_id.lower()}">' in links
+    assert f'<a href="results.html#{result_id.lower()}">' in links
     if result_id == BROAD:
-        assert '<a href="frontier.html">' in links
-        assert '<a href="cases/">' in links
+        assert '<a href="atlas.html#the-frontier-survey">' in links
+        assert 'href="cases/"' not in links
     else:
         assert '<a href="cases/11.html">' in links
-        assert '<a href="frontier.html#n-11">' in links
+        assert '<a href="atlas.html#n-11">' in links
         # Both papers on the case, the one on the result that stands first, each where
         # it is served under `papers/`.
         paper = f'<a href="{overview_sections.OPTIMALITY_PAPER}">'
@@ -678,8 +706,8 @@ def test_every_site_link_is_a_served_page_and_a_real_fragment(
             assert page in render_overview.SITE_PAGES, (result_id, href)
             if page == render_overview.RESULTS_PAGE:
                 assert fragment in rows, href
-            elif page == "frontier.html":
-                assert not fragment or fragment in cases, href
+            elif page == "atlas.html":
+                assert fragment == "the-frontier-survey" or fragment in cases, href
             else:
                 assert page in {
                     overview_sections.LOWER_BOUNDS_PAPER,
@@ -720,7 +748,7 @@ def test_a_link_to_nothing_fails_the_render(overview: overview_data.Overview) ->
         '<a href="nowhere.html">x</a>',
         '<a href="cases/999.html">x</a>',
         '<a href="cases.html#n-11">x</a>',
-        '<a href="all-results.html#t-999">x</a>',
+        '<a href="results.html#t-999">x</a>',
     )
     for body in refused:
         with pytest.raises(SystemExit):
@@ -942,7 +970,18 @@ def test_recent_upper_lower_and_optimal_marks_follow_independent_contributions()
     assert result_overview.contribution_class(11, "lower") == "is-lower is-new-result"
     assert result_overview.contribution_class(11, "optimal") == "is-optimal is-new-result"
     badges = result_overview.case_badges(11)
-    assert 'data-style="solid" data-recent="true" role="img" aria-label="optimal"' in badges
+    optimal = next(
+        mark for mark in ET.fromstring(badges) if mark.get("aria-label") == "optimal"
+    )
+    assert optimal.text == "O"
+    assert optimal.attrib == {
+        "class": "site-atlas-badge",
+        "data-style": "solid",
+        "data-recent": "true",
+        "role": "img",
+        "aria-label": "optimal",
+        "title": "optimal",
+    }
     assert badges.count('data-recent="true"') == 1
     assert 'class="is-upper is-exact-value"' in result_overview.film_bound(facts[11])
     assert "is-new-result" not in result_overview.film_bound(facts[11])

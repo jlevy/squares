@@ -7,10 +7,12 @@ import json
 import math
 import re
 from collections.abc import Callable, Iterator
+from contextlib import nullcontext
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
 from unittest.mock import Mock
 from urllib.parse import urlsplit
+from uuid import uuid4
 
 import pytest
 from kpress.format.markdown import parse_markdown
@@ -110,7 +112,7 @@ def test_prepared_record_math_matches_the_surrounding_sans_face(
             "Prepared math matches each surrounding text face.",
             "index.html",
         ),
-        current="frontier",
+        current="atlas",
     )
     render_overview.write_site(tmp_path, [page])
     site_assets.write_assets(tmp_path, site_assets.shared().assets.files())
@@ -133,6 +135,53 @@ def test_prepared_record_math_matches_the_surrounding_sans_face(
         context.close()
         server.shutdown()
         server.server_close()
+
+
+def test_math_settling_counts_pending_kpress_and_requires_present_native_mathml(
+    browser: Browser,
+) -> None:
+    """Native table formulas need no enhancement; their marker alone proves nothing."""
+    from devtools.render_frontier_page import math_html  # noqa: PLC0415
+
+    native = math_html("x^2", native=True)
+    math = '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math>'
+    # This production probe belongs to the devtools tree, not tests/probes.
+    native_pending_name = "preview_site/math_pending"
+    pending = probe(
+        Path(__file__).resolve().parent.parent / "devtools" / "probes",
+        native_pending_name,
+    )
+    cases = (
+        (native, 0),
+        ('<span class="kpress-math" data-site-native-math="frontier"></span>', 1),
+        ('<span class="kpress-math" data-site-native-math="frontier">x</span>', 1),
+        (
+            (
+                '<span class="kpress-math" data-site-native-math="frontier">'
+                '<math xmlns="http://www.w3.org/1998/Math/MathML"></math></span>'
+            ),
+            1,
+        ),
+        (
+            (
+                '<span class="kpress-math" data-site-native-math="frontier">'
+                '<math xmlns="http://www.w3.org/1998/Math/MathML">'
+                "<merror><mtext>bad formula</mtext></merror></math></span>"
+            ),
+            1,
+        ),
+        (f'<span class="kpress-math">{math}</span>', 1),
+        (f'<span class="kpress-math" data-site-native-math="unknown">{math}</span>', 1),
+        ('<span class="kpress-math"><span class="kpress-math-render">x</span></span>', 1),
+        ('<span class="kpress-math" data-kpress-math-rendered="true">x</span>', 0),
+    )
+    page = browser.new_page()
+    try:
+        for body, expected in cases:
+            page.set_content(body)
+            assert page.evaluate(pending) == expected, body
+    finally:
+        page.close()
 
 
 @pytest.mark.parametrize("hidden", ["main", "h1", "math"])
@@ -312,7 +361,11 @@ def _prose_font_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[s
         document = session.send("DOM.getDocument")
         selected = session.send(
             "DOM.querySelector",
-            {"nodeId": document["root"]["nodeId"], "selector": ".site-page > p"},
+            {
+                "nodeId": document["root"]["nodeId"],
+                # Measure prose, excluding a paragraph that names a file as code or math.
+                "selector": ".site-page > p:not(:has(code, .kpress-math))",
+            },
         )
         fonts = session.send("CSS.getPlatformFontsForNode", {"nodeId": selected["nodeId"]})
         return boxes, fonts["fonts"]
@@ -614,10 +667,10 @@ def test_native_frontier_readability_requires_visible_nonempty_math(
 @pytest.fixture(scope="module")
 def frontier_native_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     root = tmp_path_factory.mktemp("frontier-native-layout")
-    site_renders.write(root, "frontier.html")
+    site_renders.write(root, "atlas.html")
     server = preview_site.serve(root, 0, as_pages=True)
     try:
-        yield f"http://127.0.0.1:{server.server_port}/frontier.html"
+        yield f"http://127.0.0.1:{server.server_port}/atlas.html"
     finally:
         server.shutdown()
         server.server_close()
@@ -683,6 +736,53 @@ def native_frontier_failure(
     )
 
 
+def test_atlas_startup_does_not_repeat_full_tile_restyles(
+    browser: Browser, frontier_native_site: str, tmp_path: Path
+) -> None:
+    """Initial placement measures once before its visibility and position writes."""
+    trace = tmp_path / "atlas-startup-native-trace.json"
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    stop_trace = check_site_rendering.record_native_trace(page, trace)
+    try:
+        page.goto(frontier_native_site, wait_until="load")
+        check_site_rendering.wait_for_fonts(page)
+        tiles = page.locator("[data-atlas-grid] .site-atlas-cell").count()
+        assert tiles == 324
+    finally:
+        stop_trace()
+        page.close()
+    events = json.loads(trace.read_text())["traceEvents"]
+    evaluations = [
+        event
+        for event in events
+        if event["name"] == "EvaluateScript"
+        and "atlas-grid." in event.get("args", {}).get("data", {}).get("url", "")
+    ]
+    assert len(evaluations) == 1
+    evaluation = evaluations[0]
+    updates = sorted(
+        (
+            event
+            for event in events
+            if event["name"] == "UpdateLayoutTree"
+            and event["pid"] == evaluation["pid"]
+            and event["tid"] == evaluation["tid"]
+            and evaluation["ts"] <= event["ts"]
+            and event["ts"] + event.get("dur", 0) <= evaluation["ts"] + evaluation["dur"]
+        ),
+        key=lambda event: event["ts"],
+    )
+    assert updates, "Atlas startup trace has no attributable style update"
+    counts = []
+    for update in updates:
+        count = update.get("args", {}).get("elementCount")
+        assert type(count) in (int, float), update
+        counts.append(count)
+    # Initial native layout is unavoidable. Subsequent token reads may settle small
+    # tab boxes, but must not repeatedly flush the tiles after placement writes.
+    assert max(counts[1:], default=0) < tiles, counts
+
+
 @pytest.mark.parametrize(
     ("width", "scheme"), [(390, "light"), (390, "dark"), (1280, "light"), (1280, "dark")]
 )
@@ -692,7 +792,13 @@ def test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets(
     frontier_native_site: str,
     width: int,
     scheme: Any,
+    *,
+    request: pytest.FixtureRequest,
+    tmp_path: Path,
 ) -> None:
+    timing_mode = cast(
+        "check_site_rendering.TimingMode", request.config.getoption("site_timing_mode")
+    )
     for javascript in (True, False):
         report = check_site_rendering.measure(
             browser,
@@ -701,11 +807,135 @@ def test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets(
             scheme=scheme,
             javascript=javascript,
         )
-        assert report["shownMath"] == frontier_math_counts[1]
-        assert report["unreadableMath"] == 0
-        assert check_site_rendering.problems(report, javascript=javascript) == [], (
-            native_frontier_failure(report, width=width, scheme=scheme, javascript=javascript)
+        junit = request.config.getoption("xmlpath")
+        directory = Path(junit).parent if junit else tmp_path
+        directory.mkdir(parents=True, exist_ok=True)
+        receipt = (
+            directory / f"native-frontier-{width}-{scheme}-{javascript}-{uuid4().hex}.json"
         )
+        with receipt.open("x", encoding="utf-8") as output:
+            json.dump(
+                {
+                    "scenario": {"width": width, "scheme": scheme, "javascript": javascript},
+                    "timing_mode": timing_mode,
+                    "timing_budgets": check_site_rendering.TIMING_BUDGETS,
+                    "timing_exceedances": check_site_rendering.timing_problems(report)
+                    if javascript
+                    else [],
+                    "failures": check_site_rendering.problems(
+                        report, javascript=javascript, timing_mode=timing_mode
+                    ),
+                    "report": report,
+                },
+                output,
+                indent=2,
+            )
+        try:
+            assert report["shownMath"] == frontier_math_counts[1]
+            assert report["unreadableMath"] == 0
+            assert (
+                check_site_rendering.problems(
+                    report, javascript=javascript, timing_mode=timing_mode
+                )
+                == []
+            ), native_frontier_failure(
+                report, width=width, scheme=scheme, javascript=javascript
+            )
+        except AssertionError as error:
+            # The first navigation alone decides the verdict. Trace one separate
+            # navigation only after failure: tracing changes the measured workload.
+            try:
+                trace = directory / f"native-frontier-{width}-{scheme}-{uuid4().hex}.json"
+                error.add_note(
+                    f"Separate instrumented navigation: {trace}. This is not a trace "
+                    "of the failed navigation and cannot replace its verdict "
+                    "or prove its cause."
+                )
+                check_site_rendering.measure(
+                    browser,
+                    frontier_native_site,
+                    width=width,
+                    scheme=scheme,
+                    javascript=javascript,
+                    trace=trace,
+                )
+            except Exception as diagnostic_error:  # noqa: BLE001
+                # A diagnostic failure must never replace the original assertion.
+                error.add_note(
+                    f"Separate trace capture failed: {type(diagnostic_error).__name__}: "
+                    f"{diagnostic_error}"
+                )
+            raise
+
+
+@pytest.mark.parametrize("outcome", ["pass", "report-only", "trace", "trace-error"])
+def test_native_frontier_diagnostic_never_replaces_the_original_verdict(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, outcome: str
+) -> None:
+    requests: list[dict[str, Any]] = []
+    artifact_directory = tmp_path / "artifacts"
+    request = Mock()
+    mode = "report-only" if outcome == "report-only" else "enforce"
+    request.config.getoption.side_effect = lambda name: (
+        mode if name == "site_timing_mode" else str(artifact_directory / "command.junit.xml")
+    )
+
+    def measure(_browser: Browser, _url: str, **options: Any) -> dict[str, Any]:
+        requests.append(options)
+        if trace := options.get("trace"):
+            if outcome == "trace-error":
+                raise RuntimeError("capture unavailable")
+            trace.parent.mkdir(parents=True, exist_ok=True)
+            trace.write_text('{"traceEvents": []}')
+        return {
+            "heading": "The Atlas",
+            "contentChars": 100,
+            "supported": True,
+            "cls": 0,
+            "lcpMs": 100,
+            "longestTaskMs": 0 if outcome == "pass" or options.get("trace") else 423,
+            "blockingMs": 0,
+            "shownMath": 282,
+            "unreadableMath": 0,
+        }
+
+    monkeypatch.setattr(check_site_rendering, "measure", measure)
+    arguments = (
+        cast("Browser", Mock()),
+        (271, 282),
+        "http://127.0.0.1/atlas.html",
+        390,
+        "dark",
+    )
+    if outcome in ("pass", "report-only"):
+        test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets(
+            *arguments, request=request, tmp_path=tmp_path
+        )
+        assert [options["javascript"] for options in requests] == [True, False]
+        assert all("trace" not in options for options in requests)
+        receipts = list(artifact_directory.glob("native-frontier-*.json"))
+        assert len(receipts) == 2
+        retained = [json.loads(path.read_text()) for path in receipts]
+        assert all(row["timing_mode"] == mode for row in retained)
+        if outcome == "report-only":
+            native = next(row for row in retained if row["scenario"]["javascript"])
+            assert native["timing_exceedances"] == ["longestTaskMs 423.000 exceeds 300"]
+            assert native["report"]["longestTaskMs"] == 423
+    else:
+        with pytest.raises(AssertionError, match="423") as caught:
+            test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets(
+                *arguments, request=request, tmp_path=tmp_path
+            )
+        assert len(requests) == 2
+        assert "trace" not in requests[0]
+        trace = requests[1]["trace"]
+        assert trace.parent == artifact_directory
+        assert trace.exists() == (outcome == "trace")
+        assert any(
+            "not a trace of the failed navigation" in note for note in caught.value.__notes__
+        )
+        if outcome == "trace-error":
+            assert any("capture unavailable" in note for note in caught.value.__notes__)
 
 
 def test_frontier_preloads_every_pt_serif_face_it_draws(
@@ -1019,7 +1249,7 @@ def test_frontier_native_radical_paints_hook_and_bar_and_rejects_text_font(
                     )
                     route.fulfill(response=response, body=damaged)
 
-                context.route("**/frontier.html", text_font)
+                context.route("**/atlas.html", text_font)
             page = context.new_page()
             page.emulate_media(media=media)
             page.goto(frontier_native_site, wait_until="load")
@@ -1497,3 +1727,75 @@ def test_font_diagnostic_cli_refuses_receipt_before_launch(
     assert error.value.code == 2
     launch.assert_not_called()
     assert destination.read_text() == "retained evidence"
+
+
+def test_report_only_timing_preserves_blocking_rendering_failures() -> None:
+    report = {
+        "heading": "The Atlas",
+        "contentChars": 100,
+        "supported": True,
+        "cls": 0,
+        "lcpMs": 5000,
+        "longestTaskMs": 423,
+        "blockingMs": 700,
+    }
+    timing = check_site_rendering.timing_problems(report)
+    assert timing == [
+        "lcpMs 5000.000 exceeds 4000",
+        "longestTaskMs 423.000 exceeds 300",
+        "blockingMs 700.000 exceeds 600",
+    ]
+    assert check_site_rendering.problems(report) == timing
+    assert check_site_rendering.problems(report, timing_mode="report-only") == []
+    broken = {
+        **report,
+        "cls": 0.2,
+        "unreadableMath": 1,
+        "unreservedImages": 1,
+        "errors": ["HTTP 404: missing.svg"],
+        "heading": "",
+        "supported": False,
+    }
+    assert check_site_rendering.problems(broken, timing_mode="report-only") == [
+        "primary heading/prose missing",
+        "visual mathematics missing",
+        "image dimensions are not reserved",
+        "HTTP 404: missing.svg",
+        "required native load timing is unavailable",
+        "cls 0.200 exceeds 0.1",
+    ]
+
+
+def test_report_only_cli_retains_samples_limits_and_exceedances(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    (tmp_path / "index.html").write_text("<main>Existing page</main>")
+    report = {
+        "heading": "The Atlas",
+        "contentChars": 100,
+        "supported": True,
+        "cls": 0,
+        "lcpMs": 100,
+        "longestTaskMs": 423,
+        "blockingMs": 0,
+    }
+    monkeypatch.setattr("playwright.sync_api.sync_playwright", lambda: nullcontext(Mock()))
+    monkeypatch.setattr(check_site_rendering, "measure", lambda *_a, **_kw: dict(report))
+    monkeypatch.setattr(preview_site, "launch_chromium", lambda _p: Mock())
+    arguments = [str(tmp_path), "--page", "index.html", "--runs", "2"]
+    assert check_site_rendering.main(arguments) == 1
+    enforced = json.loads(capsys.readouterr().out)
+    assert enforced["failures"] == enforced["timing_exceedances"]
+    assert check_site_rendering.main([*arguments, "--timing-mode", "report-only"]) == 0
+    advisory = json.loads(capsys.readouterr().out)
+    assert advisory["failures"] == []
+    assert advisory["timing_exceedances"] == enforced["timing_exceedances"]
+    assert advisory["protocol"]["budgets"] == enforced["protocol"]["budgets"]
+    assert advisory["protocol"]["timing_mode"] == "report-only"
+    assert len(advisory["pages"]) == 4
+    for row in advisory["pages"]:
+        assert row["longestTaskMs"] == 423
+        assert row["samples"] == [report, report]
+    report["cls"] = 0.2
+    assert check_site_rendering.main([*arguments, "--timing-mode", "report-only"]) == 1
+    assert all("cls " in failure for failure in json.loads(capsys.readouterr().out)["failures"])

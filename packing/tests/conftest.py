@@ -9,6 +9,16 @@ from pathlib import Path
 import pytest
 
 
+def pytest_addoption(parser: pytest.Parser) -> None:
+    # think-9dhb: only shared CI opts into advisory timing; controlled runs enforce.
+    parser.addoption(
+        "--site-timing-mode",
+        choices=("enforce", "report-only"),
+        default="enforce",
+        help="native browser load timing verdict; structural rendering guards always enforce",
+    )
+
+
 def pytest_configure(config: pytest.Config) -> None:
     """Register the test-only pool lane and refuse missing configured test roots."""
     config.addinivalue_line(

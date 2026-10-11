@@ -4,7 +4,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join, relative } from "node:path";
 import { test } from "node:test";
 import type { CorpusFacts } from "../src/data/corpus.ts";
-import { BADGE_LABELS, NEW_RESULT_BADGE, planFacts } from "../src/view/facts.ts";
+import { planFacts } from "../src/view/facts.ts";
 import {
   type AllowEntry,
   type ContrastPair,
@@ -247,16 +247,14 @@ function facts(overrides: Partial<CorpusFacts>): CorpusFacts {
   };
 }
 
-test("a recent result is a `new result` star badge, first in the row", () => {
-  const plan = planFacts(facts({ star: true, open: ["optimality"] }), 17);
-  assert.deepEqual(plan.badges[0], { glyph: "★", style: "star", label: "new result" });
-  assert.equal(BADGE_LABELS[`${NEW_RESULT_BADGE.glyph}/${NEW_RESULT_BADGE.style}`], "new result");
+test("recency colors the case number without adding a status badge", () => {
+  const current = planFacts(facts({ star: true, open: ["optimality"] }), 17);
+  const standing = planFacts(facts({ star: false, open: ["optimality"] }), 18);
+  assert.equal(current.recentResult, true);
+  assert.equal(standing.recentResult, false);
+  assert.deepEqual(current.badges, standing.badges);
   assert.deepEqual(
-    plan.badges.map((b) => b.label),
-    ["new result", "exact"],
-  );
-  assert.deepEqual(
-    planFacts(facts({ star: false, open: ["optimality"] }), 18).badges.map((b) => b.label),
+    current.badges.map((badge) => badge.label),
     ["exact"],
   );
 });

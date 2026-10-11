@@ -197,6 +197,7 @@ void test("a covers control takes the plain key as its query parameter, and an a
  * @param {string} ids
  * @param {string} [nextHash]
  * @param {string} [retired]
+ * @param {string} [destination]
  */
 function homepageLink(
   search,
@@ -204,9 +205,10 @@ function homepageLink(
   ids = "t-001 t-018 t-031",
   nextHash,
   retired = '{"t-117":"result/t-117.html","t-118":"result/t-118.html"}',
+  destination = "https://example.test/results.html",
 ) {
   class Link {
-    href = "https://example.test/all-results.html";
+    href = destination;
     /** @param {string} name */
     getAttribute(name) {
       return name === "data-result-ids" ? ids : name === "data-retired-results" ? retired : null;
@@ -253,9 +255,37 @@ void test("the home link carries supported filters and a known historical result
     "?kind=rigidity&current=true&s-min=3&age=180&utm_source=unrelated&redirect=elsewhere",
     "#t-031",
   );
-  assert.equal(target.pathname, "/all-results.html");
+  assert.equal(target.pathname, "/results.html");
   assert.equal(target.search, "?kind=rigidity&current=true&s-min=3&age=180");
   assert.equal(target.hash, "#t-031");
+});
+
+void test("the authored complete-table anchor survives supported filters and fragment changes", () => {
+  const destination = "https://example.test/results.html#all-results";
+  const target = homepageLink(
+    "?s=4&unrelated=omitted",
+    "",
+    undefined,
+    undefined,
+    undefined,
+    destination,
+  );
+  assert.equal(target.search, "?s=4");
+  assert.equal(target.hash, "#all-results");
+  assert.equal(
+    homepageLink("", "#atlas", undefined, undefined, undefined, destination).hash,
+    "#all-results",
+  );
+  assert.equal(
+    homepageLink("", "#t-031", undefined, undefined, undefined, destination).hash,
+    "#t-031",
+  );
+  const retired = homepageLink("?s=4", "#t-117", undefined, undefined, undefined, destination);
+  assert.equal(retired.pathname, "/result/t-117.html");
+  assert.equal(retired.hash, "#t-117");
+  const restored = homepageLink("?s=4", "#t-117", undefined, "#atlas", undefined, destination);
+  assert.equal(restored.pathname, "/results.html");
+  assert.equal(restored.hash, "#all-results");
 });
 
 void test("unknown and unrelated home fragments never become result anchors", () => {
@@ -295,10 +325,10 @@ void test("retired result fragments select the registered tombstone and preserve
   assert.equal(target.hash, "#%74-117");
   assert.equal(homepageLink("", "#t-118").pathname, "/result/t-118.html");
   const restored = homepageLink("?current=false", "#t-117", "t-031", "#t-031");
-  assert.equal(restored.pathname, "/all-results.html");
+  assert.equal(restored.pathname, "/results.html");
   assert.equal(restored.hash, "#t-031");
   const cleared = homepageLink("", "#t-117", "t-031", "#t-999");
-  assert.equal(cleared.pathname, "/all-results.html");
+  assert.equal(cleared.pathname, "/results.html");
   assert.equal(cleared.hash, "");
 });
 
@@ -312,7 +342,7 @@ void test("retired home link targets reject malformed and unsafe alias metadata"
     '{"t-117":"result/t-118.html"}',
   ]) {
     const target = homepageLink("?current=false", "#t-117", "", undefined, retired);
-    assert.equal(target.pathname, "/all-results.html", retired);
+    assert.equal(target.pathname, "/results.html", retired);
     assert.equal(target.hash, "", retired);
   }
 });

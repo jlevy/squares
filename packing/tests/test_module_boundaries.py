@@ -1178,6 +1178,12 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_check_declared_bounds.py": {
             "test_n68_depth_bound_is_named_by_its_refusal_test",  # 3.4s
         },
+        # 4s of call time across 1, measured on 2026-10-10 at load 4.7 on four cores:
+        # `test_the_489_certificate_at_305_has_488s_side_in_a_quarter_turned_arrangement`
+        # took 4.1s.
+        "test_check_half_angle_area.py": {
+            "test_the_489_certificate_at_305_has_488s_side_in_a_quarter_turned_arrangement",
+        },
         # 24s of call time across 1.
         "test_contact_assembly_labels.py": {
             "test_every_rich_d4_and_relabeling_image_has_one_label",  # 23.6s

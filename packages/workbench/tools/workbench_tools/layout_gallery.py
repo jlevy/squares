@@ -139,7 +139,7 @@ class View:
 
 VIEWS: tuple[View, ...] = (
     View("animate", "Animate, as the page opens", lambda _page: None),
-    View("animate-star", "Animate at n = 17, a new result", _show_n(17)),
+    View("animate-recent", "Animate at n = 17, a new result", _show_n(17)),
     View("animate-open-none", "Animate at n = 16, nothing open", _show_n(16)),
     # The stage both ways (the owner, 2026-09-21): n = 17 again, with its citations on.
     View("animate-citations", "Animate at n = 17 with citations", _with_citations(17)),

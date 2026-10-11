@@ -110,6 +110,12 @@ KINGBIRD = "kingbird-current"
 IMPORT_LABEL = "result-import"
 _GITHUB = re.compile(r"https://github\.com/([\w.-]+)/([\w.-]+)")
 _GIST = re.compile(r"https://gist\.github\.com/(?:[\w.-]+/)?([0-9a-f]+)(?:\.git)?")
+#: An issue, pull request or discussion: a page read by hand, not a repository to watch.
+#: The SQUISH n153 source's address is an issue comment, and the sweep once watched
+#: jlevy/squares itself because of it.
+_TRACKER = re.compile(
+    r"https://github\.com/[\w.-]+/[\w.-]+/(?:issues|pull|discussions)(?:[/#?]|$)"
+)
 #: A register address's pinned revision, and the path within it the address names.
 _TREE = re.compile(r"/tree/([0-9a-f]{40})(?![0-9a-f])(?:/([^?#]*))?")
 _CAPTURE_DIR = re.compile(rf"{re.escape(CAPTURE_PREFIX)}(\d{{4}}-\d{{2}}-\d{{2}})")
@@ -400,7 +406,12 @@ def _github_step(difference: str) -> str:
 
 
 def repository(url: str) -> str | None:
-    """A source's address as its repository's, with no revision, path or `.git`."""
+    """A source's address as its repository's, with no revision, path or `.git`.
+
+    An issue, pull request or discussion is no repository's address: it is read by hand.
+    """
+    if _TRACKER.match(url):
+        return None
     if match := _GITHUB.match(url):
         name = match[2].rstrip(".").removesuffix(".git")
         return f"https://github.com/{match[1]}/{name}"

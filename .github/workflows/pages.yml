@@ -113,6 +113,8 @@ name: Certificate page
       - packing/devtools/templates/site.css
       - packing/devtools/templates/site-result.css
       - packing/devtools/templates/overview-article.md
+      - packing/devtools/templates/atlas-article.md
+      - packing/devtools/templates/about-article.md
       - packing/devtools/templates/all-results-article.md
       - packing/devtools/templates/visualize-article.md
       - packing/devtools/templates/papers-article.md
@@ -120,6 +122,9 @@ name: Certificate page
       - packing/devtools/render_overview.py
       - packing/devtools/overview_data.py
       - packing/devtools/overview_sections.py
+      - packing/devtools/build_known_best_atlas.py
+      - packing/devtools/atlas_print_font.py
+      - packing/devtools/fonts/atlas-print/**
       - packing/devtools/result_overview.py
       - packing/devtools/atlas_legend.py
       - packing/devtools/result_status.py
@@ -435,7 +440,19 @@ jobs:
           test -s site/papers/n11-optimality-review.pdf
           uv run --frozen --group dev python -m devtools.social_card --output-dir site
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:n11-optimality-review
-          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-optimality-review.html
+          # think-9dhb: shared-runner timing stays advisory until controlled
+          # same-run baseline/noise evidence exists; structural gates enforce.
+          set -o pipefail
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-optimality-review.html --timing-mode report-only | tee "$RUNNER_TEMP/site-rendering.json"
+
+      - name: Retain browser rendering measurements and timing advisories
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: site-rendering-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/site-rendering.json
+          if-no-files-found: warn
+          retention-days: 30
 
       - name: Share the checked paper
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -521,7 +538,19 @@ jobs:
           test -s site/papers/n11-threshold-bound-review.pdf
           uv run --frozen --group dev python -m devtools.social_card --output-dir site
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:n11-threshold-bound-review
-          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-threshold-bound-review.html
+          # think-9dhb: shared-runner timing stays advisory until controlled
+          # same-run baseline/noise evidence exists; structural gates enforce.
+          set -o pipefail
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-threshold-bound-review.html --timing-mode report-only | tee "$RUNNER_TEMP/site-rendering.json"
+
+      - name: Retain browser rendering measurements and timing advisories
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: site-rendering-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/site-rendering.json
+          if-no-files-found: warn
+          retention-days: 30
 
       - name: Share the checked paper
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -622,7 +651,19 @@ jobs:
           uv run --frozen --group dev python -m devtools.artifact_dates --pdf site/papers/square-packing-methods-survey.pdf --revised packing-methods
           uv run --frozen --group dev python -m devtools.social_card --output-dir site
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:square-packing-methods-survey
-          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/square-packing-methods-survey.html
+          # think-9dhb: shared-runner timing stays advisory until controlled
+          # same-run baseline/noise evidence exists; structural gates enforce.
+          set -o pipefail
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/square-packing-methods-survey.html --timing-mode report-only | tee "$RUNNER_TEMP/site-rendering.json"
+
+      - name: Retain browser rendering measurements and timing advisories
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: site-rendering-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/site-rendering.json
+          if-no-files-found: warn
+          retention-days: 30
 
       - name: Share the checked paper
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -888,7 +929,19 @@ jobs:
           done
           diff --recursive site "$twin"
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer overview
-          uv run --frozen --group dev python -m devtools.check_site_rendering site
+          # think-9dhb: shared-runner timing stays advisory until controlled
+          # same-run baseline/noise evidence exists; structural gates enforce.
+          set -o pipefail
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --timing-mode report-only | tee "$RUNNER_TEMP/site-rendering.json"
+
+      - name: Retain browser rendering measurements and timing advisories
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: site-rendering-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/site-rendering.json
+          if-no-files-found: warn
+          retention-days: 30
 
       - name: Share the site's pages with the publication
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -1058,7 +1111,19 @@ jobs:
         run: |
           uv run --frozen --group dev python -m devtools.social_card --output-dir site
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:n11-lower-bounds-explainer
-          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-lower-bounds-explainer.html
+          # think-9dhb: shared-runner timing stays advisory until controlled
+          # same-run baseline/noise evidence exists; structural gates enforce.
+          set -o pipefail
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-lower-bounds-explainer.html --timing-mode report-only | tee "$RUNNER_TEMP/site-rendering.json"
+
+      - name: Retain browser rendering measurements and timing advisories
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: site-rendering-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/site-rendering.json
+          if-no-files-found: warn
+          retention-days: 30
 
       # The print half of the saved-setting geometry; the screen half is `geometry`.
       # The trap is what lets a cancelled run stop here: `uv run` turns the runner's
@@ -2175,6 +2240,9 @@ jobs:
     needs: deploy
     if: ${{ !cancelled() && needs.deploy.result == 'success' }}
     runs-on: ubuntu-latest
+    # Bound the live network audit; exceeding this ceiling leaves verification
+    # failed (think-6y2j).
+    timeout-minutes: 30
     steps:
       - name: Check out the repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

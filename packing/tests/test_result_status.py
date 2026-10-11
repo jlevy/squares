@@ -274,7 +274,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # lanes there from T-099 and T-100, the one count each held; forty-nine when wand125's
     # mixed certificate of 3 October for n = 52 (T-082), decided here by sqverify-fast,
     # took the last count T-070 held; fifty when T-117's exact rational refinements
-    # took n = 105 and 292, the last verified ceilings T-056 held.
+    # took n = 105 and 292, the last verified ceilings T-056 held; fifty-four when
+    # Guzhou0806's continuous-pose kernel (T-145) took both of n = 40's lower-bound lanes
+    # from his clipped-corner transfer (T-133) on the same density.
     # T-120..T-123 report exact side forms for historical source configurations; no
     # current frontier lane relies on these unverified catalogue assertions. Each claim
     # states its side cut where its root interval's ends agree. T-120's lies above the
@@ -343,6 +345,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-114",
         "T-120",
         "T-129",
+        "T-133",
     }
     # Couzo's eight-case source report of 8 October (T-128) holds no case lane either,
     # but every side it states is below the ceiling its case holds: nothing has replaced
@@ -446,9 +449,16 @@ def test_a_superseding_report_is_named_as_one() -> None:
 
 
 def stating(records: Any, sides: dict[int, str], **changes: Any) -> Record:
-    """T-128, a source-only report at C0, stating `sides` as its claim and cut to them."""
+    """T-128 as registered on 8 October, a source-only report at C0, stating `sides` as its
+    claim and cut to them. Its review of 10 October raised the live entry to C3."""
     claim = ", ".join(f"s({n}) <= {side}" for n, side in sides.items())
-    entry = {**records.results["T-128"], "claim": f"Reported {claim}."}
+    entry = {
+        **records.results["T-128"],
+        "verification": "V0",
+        "confirmation": "C0",
+        "evidence": ["E-couzo-451-rational-report"],
+        "claim": f"Reported {claim}.",
+    }
     return {**entry, "scope": {"n_values": list(sides)}, **changes}
 
 
@@ -457,7 +467,9 @@ def test_a_bound_better_than_its_cases_hold_is_pending_adoption_not_superseded()
     cases hold one at least as good as each it states, and named by the results that hold
     them; where one it states is strictly better, nothing has replaced it, and it is
     pending adoption, with no mark. Until 9 October T-128, eight sides below every ceiling
-    its cases hold, read "superseded by T-098, T-115, T-125 and T-127" (think-h0d1)."""
+    its cases hold, read "superseded by T-098, T-115, T-125 and T-127" (think-h0d1). Its
+    review of 10 October confirmed its replay, and with the case records unchanged it is
+    still pending adoption: confirmed, and no mark."""
     view = render_recent_results
     records = view.load_records()
     evidence = records.register.evidence
@@ -465,11 +477,11 @@ def test_a_bound_better_than_its_cases_hold_is_pending_adoption_not_superseded()
     assert view.standing(entry, records) == view.PENDING_ADOPTION
     assert not view.superseded(entry, view.PENDING_ADOPTION)
     assert view.position_marks(entry, view.PENDING_ADOPTION, records) == []
-    assert status_line(entry, evidence) == RECORDED
+    assert status_line(entry, evidence) == CONFIRMED
     row = next(
         row for row in render_results.render().splitlines() if row.startswith("| T-128 ")
     )
-    assert f"| {RECORDED} |" in row
+    assert f"| {CONFIRMED}, independently re-implemented |" in row
     assert "superseded" not in row
     assert [finding.n for finding in check_standing.improvements(entry, records)] == [
         105, 108, 127, 131, 155, 180, 228, 306,

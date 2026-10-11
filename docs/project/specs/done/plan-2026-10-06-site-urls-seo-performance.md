@@ -226,7 +226,7 @@ All paths are relative to `SITE_URL` (`packing/devtools/render_overview.py:112`)
 | Root atlas files (`known-best-*`, posters), `social-card.png` | 10 | explainer job; `social_card` | `known-best-1-100.png` is linked nowhere |
 | `assets/{css,fonts,js}/{name}.{hash}.{ext}` | 45 | `site_assets` | Content-hashed; used by the site’s own pages, not by the papers or the workbench |
 
-Addresses with meaning beyond the path: `all-results.html#t-nnn`, `frontier.html#n-N`,
+Addresses with meaning beyond the path: `results.html#t-nnn`, `frontier.html#n-N`,
 `cases/?n=N`, `cases/N.html?raw`, `?view=embed`, table filter queries, and the
 overview’s old fragments, which `overview/forward.js` sends on (with a catch-all that
 sends any unknown fragment to the lower-bounds explainer).
@@ -373,7 +373,7 @@ enforces them.
 | Result | `/squares/result/t-{nnn}.html` | lowercase, three digits; a complete page |
 | Paper | `/squares/papers/{slug}.html`, `.md`, `.pdf` | slug `n{N}-{subject}-{kind}` |
 | Workbench | `/squares/workbench/` |  |
-| Row anchor | `all-results.html#t-{nnn}`, `frontier.html#n-{N}` | stable fragment ids |
+| Row anchor | `results.html#t-{nnn}`, `frontier.html#n-{N}` | stable fragment ids |
 
 **Alternative and legacy forms**, each forwarded rather than duplicated:
 
@@ -509,8 +509,8 @@ structured data and robots directives through `PageMeta`.
   0.1–0.2 MB gzipped per paper after the first, cached across pages.
   The self-contained copy remains a build output for offline use.
 - **The overview carries only what it shows.** Recent results render server-side (the
-  rows `RECENT_DEFAULTS` selects), with “See all results” linking `all-results.html`.
-  Broad filters live on that complete table; the overview explains its recent subset and
+  rows `RECENT_DEFAULTS` selects), with “See all results” linking `results.html`. Broad
+  filters live on that complete table; the overview explains its recent subset and
   passes supported query state to the full-table link.
   The atlas tiles leave the HTML: each tile is an SVG file under `atlas/` referenced by
   `<img width height>`, which keeps them in Google Images and in the browser cache; a
@@ -610,7 +610,7 @@ Each bead below names its lane.
 - [x] B4: `result/t-nnn.html` as complete pages with rebased links; popovers extract
   from them; overview drops inline popover summaries
 - [x] B5: every “n = N” link points at `cases/N.html`; `epistemics.html` instead of the
-  GitHub copy on `all-results.html`; `cases.html` forwards to `cases/`
+  GitHub copy on `results.html`; `cases.html` forwards to `cases/`
 
 **Lane C — Head metadata and structured data** (`head_tags`, `PageMeta`, `page_title`,
 `site_documents.py` descriptions, paper front matter, favicon files):

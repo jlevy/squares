@@ -1,0 +1,44 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "guzhou-n40-clipped-corner-2026-10-10",
+  "source_url": "https://github.com/Guzhou0806/n40-square-packing",
+  "source_ref": "n40-670854-20261010",
+  "source_commit": "e5abeb4d078a5c5b35df6204dd9b93378e5a7880",
+  "retrieved_at_utc": "2026-10-10T10:28Z",
+  "git_scope": "Full clone checked out at the pinned commit, which the release tag n40-670854-20261010 names, for issue #485. The manifest covers all 36 files of the tree. The proof, the finite parameters, the source's finite checker, runner and tests, the workflow, the local run's receipts and the licences are retained; the density is pinned against the copy the 2026-10-01 rect_n40_L67 packet retains, and the vendored crate by digest, since it is this repository's packing/sqverify_fast. The release ZIP's differing CI receipts are kept beside the tree under release-ci/, outside this record.",
+  "archived_dir": "source",
+  "license": "MIT, copyright 2026 Guzhou0806 (LICENSE), for the new material; the density's MIT licence from wand125 is retained in licenses/wand125.txt and this repository's licence for the vendored crate in licenses/jlevy-squares.txt. SOURCES.md states the credit and that the finer-net and transfer work is Guzhou0806's AI-assisted research.",
+  "claims": [
+    "Issue #485 reports s(40) > 335427/50000 = 6.70854, unrestricted rotations, from wand125's rect_n40_L67 density by a continuous-angle transfer on a 401-direction net with a clipped-corner loss bound.",
+    "The same release reports the weaker full-core bound s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908, which needs no density-peak estimate.",
+    "The nodal statement: every side-9977/10000 square at each of the 401 net directions in [0, 67/10]^2 captures at least 10001/10000 of the density, decided by the vendored sqverify-fast; the receipts report 401 of 401 verified and 32,970,910 boxes."
+  ],
+  "scope": [
+    ".gitattributes",
+    ".github/workflows/verify.yml",
+    ".gitignore",
+    "LICENSE",
+    "PROOF.md",
+    "README.md",
+    "REPRODUCIBILITY.md",
+    "SHA256SUMS",
+    "SOURCES.md",
+    "VERIFICATION.md",
+    "certificate",
+    "licenses",
+    "results",
+    "tests",
+    "verifier"
+  ],
+  "pinned_only": [
+    {
+      "match": "certificate/certified_candidate.json",
+      "reason": "wand125's rect_n40_L67 density, byte for byte the copy the 2026-10-01 rectangle packet retains (SHA-256 71011d03..., as SOURCES.md pins it); not duplicated.",
+      "identical_to": "packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json"
+    },
+    {
+      "match": "verifier/sqverify_fast/**",
+      "reason": "This repository's own crate packing/sqverify_fast, vendored byte for byte from ef79288a4 (all 15 files compared at acquisition; build.rs source digest d97758bb..., the reviewed source the replay here was built from); pinned by digest, not duplicated."
+    }
+  ]
+}

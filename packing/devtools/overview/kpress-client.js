@@ -6,4 +6,8 @@
 // nothing around them. `render_overview.kpress_client_script` fills the sentinel.
 (() => {
   __SQUARES_KPRESS_CLIENT_JS__();
+  // Badge explanations use the same placement, without enabling link previews.
+  behaviors.override("tooltip", () => undefined);
+  behaviors.override("footnote-preview", () => undefined);
+  globalThis.siteKpressTooltipPosition = positionTooltip;
 })();

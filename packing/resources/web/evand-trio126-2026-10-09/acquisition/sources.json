@@ -1,0 +1,54 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-10T13:50Z",
+  "git_scope": "Blobless clone checked out at the pinned commit, which adds search/trio126/; no issue asked. The whole trio126 directory is retained: three n = 126 certificates with their binary64 and 70-digit exactsolve points, the README and its SHA256SUMS. The licence, credits, certificate-format README and the picture-to-packing tool the README names are retained beside it; the two exact checkers are pinned by digest against the identical copies the issue-399 packet retains. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-square-packing",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "268af529546176a25224ea3b2c7d29cef8d9e911",
+      "source_commit": "268af529546176a25224ea3b2c7d29cef8d9e911",
+      "committed_utc": "2026-10-09T05:43:37Z",
+      "git_tree": "2679e86744bae0c4a6f1096b0c9413d63896c02d",
+      "archived_path": "packing/resources/web/evand-trio126-2026-10-09/source",
+      "subtree_manifest": "packing/resources/web/evand-trio126-2026-10-09/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/img2packing.py",
+        "search/trio126"
+      ],
+      "subtree_file_count": 17,
+      "subtree_total_bytes": 177611,
+      "retained_file_count": 15,
+      "retained_total_bytes": 171109,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two exact checkers, which the trio126 README runs on each certificate; byte-identical to the copies the issue-399 packet retains, and never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two exact checkers, which the trio126 README runs on each certificate; byte-identical to the copies the issue-399 packet retains, and never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert2.py"
+        }
+      ],
+      "license": "MIT, copyright 2026 Evan Daniel (LICENSE); attribution retained in CREDITS.md. The commit names Claude Opus 5.5 as co-author, and CREDITS.md says the repository's work was produced by Claude under human direction.",
+      "claims": [
+        "search/trio126/n126_xu.cert, Ryan Xu's packing of 126 reconstructed from a picture and polished to an exact local minimum, states s(126) <= 11742640687119285146522492579501/1000000000000000000000000000000 = 11.742640687119285146522492579501; the README gives the local minimum's side as 15/2 + 3 sqrt 2 = 11.742640687119285...",
+        "search/trio126/n126_ph14.cert, Nate Chaoweeraprasit's SQUISH phase-14 packing of 126 reconstructed the same way, states s(126) <= 11763736443985669176333330330349/1000000000000000000000000000000 = 11.763736443985669176333330330349.",
+        "search/trio126/n126_ph10.cert, Nate Chaoweeraprasit's SQUISH phase-10 packing of 126 reconstructed the same way, states s(126) <= 11773303606603240442283309232987/1000000000000000000000000000000 = 11.773303606603240442283309232987.",
+        "The README says \"No claim here: register status not checked\", that exactsolve finds each packing a local minimum of S, strict modulo exact flat motions and jammed in every corner-corner branch, and that a reconstruction may differ from the original in rattlers; no optimality is claimed."
+      ]
+    }
+  ]
+}

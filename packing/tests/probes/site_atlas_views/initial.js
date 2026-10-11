@@ -52,7 +52,10 @@
     },
     view: document.documentElement.dataset.siteAtlasView ?? "triangle",
     size: document.documentElement.dataset.siteAtlasSize ?? "small",
-    scale: document.documentElement.dataset.siteAtlasScale ?? "fixed",
+    scale:
+      document.documentElement.dataset.siteAtlasScale ??
+      cells.closest("[data-atlas-grid]")?.getAttribute("data-atlas-scale") ??
+      "row",
     largest_side: Number.parseFloat(style.getPropertyValue("--site-atlas-global-side")),
     columns: Math.round(
       (box.width + referenceGapPx) /

@@ -16,6 +16,7 @@ from devtools import (
     overview_sections,
     render_case_pages,
     render_overview,
+    site_urls,
 )
 from devtools import render_n11_lower_bounds_explainer_pdf as pdf
 from devtools.check_published_site import (
@@ -78,7 +79,7 @@ COMMIT = "0123456789abcdef0123456789abcdef01234567"
 
 #: The tree `main` holds at the deploy: every path a fixture page links on `main`.
 TREE = RepositoryTree(
-    files=frozenset({"README.md", *(f"packing/{name}.md" for name in SITE_PAGES)}),
+    files=frozenset({"README.md", "LICENSE", *(f"packing/{name}.md" for name in SITE_PAGES)}),
     directories=frozenset({"", "packing"}),
 )
 
@@ -130,7 +131,7 @@ def source_receipt(page: bytes) -> bytes:
     return f"\n%sqpack-source-html-sha256: {hashlib.sha256(page).hexdigest()}\n".encode()
 
 
-#: How many cases the fake deploy's record page indexes.
+#: How many canonical case records the fake deploy's Atlas indexes.
 CASE_COUNT = 324
 
 
@@ -144,11 +145,15 @@ def page(
 ) -> bytes:
     """A served page as the check reads one: the head of the page served at `canonical`,
     with its canonical link, then for a paper its bar's current entry (`bar`), the stamp
-    and a repository link; the record page also indexes every case's record file."""
+    and a repository link; Atlas also indexes every canonical case record."""
     path = canonical.removeprefix(render_overview.SITE_URL) or "index.html"
     index = (
-        "".join(f'<a href="{n}.html" data-case="{n}">{n}</a>' for n in range(1, CASE_COUNT + 1))
-        if path == render_case_pages.CASES_HOME
+        "".join(
+            f'<tr id="n-{n}" data-case-href="cases/{n}.html">'
+            f'<td><a href="cases/{n}.html" data-case="{n}">{n}</a></td></tr>'
+            for n in range(1, CASE_COUNT + 1)
+        )
+        if path == "atlas.html"
         else ""
     )
     return (
@@ -460,7 +465,7 @@ def test_the_checked_pages_are_every_page_the_site_serves_but_the_workbench() ->
     assert PAGE_URL.endswith(f"/squares/{EXPLAINER}")
     assert EXPLAINER == "papers/n11-lower-bounds-explainer.html"
     assert {*SITE_PAGES, EXPLAINER, "workbench/index.html"} <= set(render_overview.SITE_PAGES)
-    assert {"index.html", "frontier.html", "all-results.html"} == LINK_CHECKED_PAGES
+    assert {"index.html", "atlas.html", "results.html"} == LINK_CHECKED_PAGES
     assert render_overview.canonical_url("index.html") == check_published_site.SITE_URL
     assert render_overview.canonical_url("tutorial.html").endswith("/squares/tutorial.html")
     # The papers page was added to the renderer alone, and is checked here for it.
@@ -535,12 +540,26 @@ def test_check_requires_each_page_to_name_its_own_canonical_url(
         wrong = site_pages(**{name: page(PAGE_URL)})
         found = failures(monkeypatch, fake_site(wrong))
         assert any(f"{name} names canonical URL" in line for line in found), name
-        # The record page served as another page has lost its index of record files too.
-        assert len(found) == (2 if name == render_case_pages.CASES_PAGE else 1), found
+        # Serving another page as Atlas also loses its canonical-record index.
+        assert len(found) == (2 if name == "atlas.html" else 1), found
 
     missing = site_pages(**{"index.html": b"<p>(" + PUBLICATION_EDITION.encode() + b")</p>"})
     found = failures(monkeypatch, fake_site(missing))
     assert any("index.html names canonical URL None" in line for line in found), found
+
+
+def test_check_requires_the_atlas_to_link_every_registered_case_record(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    complete = page(render_overview.canonical_url("atlas.html"))
+    for n in (17, CASE_COUNT):
+        lost = re.sub(
+            rf'<tr id="n-{n}"[^>]*>.*?</tr>', "", complete.decode(), flags=re.DOTALL
+        ).encode()
+        found = failures(monkeypatch, fake_site(site_pages(**{"atlas.html": lost})))
+        assert any(
+            "atlas.html indexes 323 registered case records in order" in line for line in found
+        )
 
 
 def test_check_refuses_a_repository_link_pinned_to_a_commit(
@@ -605,7 +624,7 @@ def test_check_requires_every_result_overview_the_results_table_names(
     assert failure.endswith("but it is 'result/t-001.html'")
 
     assert failures(monkeypatch, fake_site(site_naming(()))) == [
-        "all-results.html names 0 result overviews",
+        "results.html names 0 result overviews",
         f"result overview {OVERVIEWS[0]}: sampled for its record links and not served",
     ]
 
@@ -675,7 +694,14 @@ def test_check_accepts_the_deployed_lazy_record_links_without_refetching(
         assert requested.count(f"https://example.org/{address}") == 1
     requested.clear()
 
-    def registry_prefetch(site: str, read: Fetch, *, timeout: float) -> list[tuple[bool, str]]:
+    def registry_prefetch(
+        site: str,
+        read: Fetch,
+        *,
+        timeout: float,
+        rows: Sequence[site_urls.SiteURL],
+    ) -> list[tuple[bool, str]]:
+        assert rows
         for address in OVERVIEWS:
             read(f"{site.rstrip('/')}/{address}", timeout=timeout)
         return []
@@ -689,6 +715,137 @@ def test_check_accepts_the_deployed_lazy_record_links_without_refetching(
     )
     for address in OVERVIEWS:
         assert requested.count(f"https://example.org/{address}") == 1
+
+
+def test_check_shares_fragment_requests_but_keeps_queries_methods_and_failures(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    website = fake_site(site_pages())
+    assert failures(monkeypatch, website) == []
+    requested: list[tuple[str, bool]] = []
+    resource = f"{REPO_URL}/blob/main/README.md"
+
+    def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        requested.append((url, head))
+        if "?missing" in url:
+            return 503, b""
+        return website(url, head=head, timeout=timeout)
+
+    def registry_prefetch(_site: str, read: Fetch, **_kwargs: object) -> list[tuple[bool, str]]:
+        read(resource + "#L1", timeout=1)
+        read(resource + "#L2", head=True, timeout=1)
+        read(resource + "?raw=1#L1", head=True, timeout=1)
+        read(resource + "?raw=1#L2", timeout=1)
+        read(resource + "?raw=2#L1", timeout=1)
+        for url in (resource + "?missing#L1", resource + "?missing#L2"):
+            assert read(url, head=True, timeout=1) == (503, b"")
+        return []
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    monkeypatch.setattr(check_published_site, "deployed_registry_checks", registry_prefetch)
+    checked = check_published_site.check(
+        "https://example.org", COMMIT, timeout=1, browser=False
+    )
+    assert all(passed for passed, _ in checked)
+    assert [(url, head) for url, head in requested if url.startswith(resource)] == [
+        (resource, False),
+        (resource + "?raw=1", True),
+        (resource + "?raw=1", False),
+        (resource + "?raw=2", False),
+        (resource + "?missing", True),
+    ]
+    pages = site_pages()
+    pages[EXPLAINER] += (
+        f'<a href="{resource}#L1">one</a><a href="{resource}#L2">two</a>'.encode()
+    )
+    urls: list[str] = []
+    assert failures(monkeypatch, fake_site(pages, requested=urls, lost=("README.md",))) == [
+        f"link HTTP 404: {resource}",
+        f"link HTTP 404: {resource}#L1",
+        f"link HTTP 404: {resource}#L2",
+    ]
+    assert urls.count(resource) == 1
+
+
+def test_live_progress_reports_phases_requests_and_retries_without_changing_verdicts(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    real_fetch = check_published_site.fetch
+    website = fake_site(site_pages())
+    assert failures(monkeypatch, website) == []
+    monkeypatch.setattr(check_published_site, "forwarders_followed", lambda *_args, **_kw: [])
+    monkeypatch.setattr(
+        check_published_site,
+        "workbench_startup",
+        lambda *_args, **_kw: (True, "browser started"),
+    )
+    expected = check_published_site.check("https://example.org", COMMIT, timeout=1)
+    events: list[str] = []
+    requests: list[tuple[str, bool]] = []
+    clock = [0.0]
+    resource = f"{REPO_URL}/blob/main/README.md"
+
+    def fetch_once(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        assert events, "progress must precede network work"
+        assert "start" in events[0]
+        requests.append((url, head))
+        clock[0] += 0.25
+        if url == resource and requests.count((url, head)) == 1:
+            clock[0] += 5
+            return 503, b""
+        return website(url, head=head, timeout=timeout)
+
+    def advance(delay: float) -> None:
+        clock[0] += delay
+
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        return real_fetch(url, head=head, timeout=timeout, sleep=advance, on_retry=on_retry)
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    monkeypatch.setattr(check_published_site, "fetch_once", fetch_once)
+    monkeypatch.setattr(check_published_site.time, "monotonic", lambda: clock[0])
+    actual = check_published_site.check(
+        "https://example.org", COMMIT, timeout=1, progress=events.append
+    )
+    assert actual == expected
+    assert any("repository links: retry HEAD" in line and "HTTP 503" in line for line in events)
+    assert any("registry: start" in line for line in events)
+    assert any("content: complete" in line for line in events)
+    assert any("publication files: start" in line for line in events)
+    assert any("browser forwarders: start" in line for line in events)
+    assert any("browser workbench: complete" in line for line in events)
+    assert any(f"HEAD {resource}: HTTP 200 in 7.50s" in line for line in events)
+    assert "complete" in events[-1]
+    assert f"unique_requests={len(set(requests))}" in events[-1]
+    assert "retries=1" in events[-1]
+    assert f"audit +{clock[0]:.2f}s" in events[-1]
+
+
+def test_live_cli_keeps_progress_separate_and_preserves_failure_exit_status(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def check(
+        _site: str,
+        _commit: str,
+        *,
+        progress: Callable[[str], object],
+        **_kwargs: object,
+    ) -> list[tuple[bool, str]]:
+        progress("audit registry: start")
+        assert capsys.readouterr().err == "audit registry: start\n"
+        return [(False, "link HTTP 503: https://example.org/missing")]
+
+    monkeypatch.setattr(check_published_site, "check", check)
+    assert check_published_site.main(["--commit", COMMIT, "--no-browser"]) == 1
+    assert capsys.readouterr().out == (
+        "FAIL link HTTP 503: https://example.org/missing\n0 of 1 checks passed\n"
+    )
 
 
 @pytest.mark.parametrize(
@@ -1370,13 +1527,15 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     that is."""
     moved = dict(render_overview.MOVED_PAGES)
     assert set(moved) == {
-        "results.html",
+        "all-results.html",
         "status.html",
+        "frontier.html",
         "defects.html",
         "explainer.html",
         "n11-optimality/t-060-explainer.html",
         "n11-optimality/index.html",
         "cases.html",
+        "cases/index.html",
     }
     assert not set(moved) & set(render_overview.SITE_PAGES)
     requested: list[str] = []
@@ -1385,7 +1544,7 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         assert f"https://example.org/{old}" in requested, old
 
     for old, new in moved.items():
-        # The slash keeps `results.html` from also losing `all-results.html`.
+        # Match the whole old path without hiding another page with a shared suffix.
         (failure,) = failures(monkeypatch, fake_site(site_pages(), lost=(f"/{old}",)))
         assert failure.startswith(f"forwarder {old}: HTTP 404, says "), failure
 
@@ -1649,11 +1808,14 @@ def test_check_fails_a_forwarder_that_previews_its_page_by_another_name_or_kind(
         site = fake_site(site_pages(**{name: text.encode()}))
         return failures(monkeypatch, site, heads=True)
 
-    renamed = forwarders["status.html"].replace("The Frontier Survey", "The Frontier Atlas")
+    renamed = forwarders["status.html"].replace(
+        render_overview.ATLAS_META.name, "The Frontier Atlas"
+    )
+    assert renamed != forwarders["status.html"]
     (failure,) = found("status.html", renamed)
     assert failure == (
         "forwarder status.html: head: its og:title is ['The Frontier Atlas'], and the page's "
-        "own is ['The Frontier Survey']"
+        f"own is {[render_overview.ATLAS_META.name]!r}"
     )
     dated = re.compile(r'<meta property="article:\w+" content="[^"]*">\n')
     website = dated.sub("", forwarders["explainer.html"]).replace(

@@ -183,8 +183,9 @@ def cross_checks() -> list[str]:
             errs.append(f"{kind}-strategies: families not declared: {sorted(unknown)}")
     a = safe_load((FRONTIER / "asymptotic-waste-bounds.yaml").read_text(encoding="utf-8"))
     errs.extend(
-        f"asymptotic: reconstructed bound {b['source_key']} carries no note"
-        for b in a["lower_bounds"]
+        f"asymptotic: reconstructed {side} bound {b['source_key']} carries no note"
+        for side in ("lower_bounds", "deficiency_upper_bounds")
+        for b in a.get(side, [])
         if b["confidence"] == "reconstructed" and not b.get("note")
     )
     evidence_document = safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))

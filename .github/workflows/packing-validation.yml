@@ -1230,6 +1230,10 @@ jobs:
           test "$playwright_status" -eq 0
 
       - name: Run the frontend source and built-page contracts
+        # think-9dhb: shared-runner load timing is advisory until controlled baseline
+        # evidence establishes a regression/noise margin. Structural/trace gates enforce.
+        env:
+          PYTEST_ADDOPTS: "--site-timing-mode=report-only"
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --frontend --jobs 2 --inner-jobs 1

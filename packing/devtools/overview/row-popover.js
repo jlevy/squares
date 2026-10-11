@@ -124,7 +124,31 @@
             held.content,
             response.url || new URL(source, document.baseURI).href,
           );
+          const heading = article.querySelector("h1");
+          if (heading instanceof HTMLElement) {
+            // The canonical heading's ID is also the row's fragment on the results
+            // page. Give this copy a dialog-specific ID and preserve its local links.
+            const previous = heading.id;
+            heading.setAttribute("id", `${popover.id}-record-title`);
+            if (previous) {
+              for (const link of article.querySelectorAll("[href]")) {
+                if (link.getAttribute("href") === `#${previous}`) {
+                  link.setAttribute("href", `#${heading.id}`);
+                }
+              }
+            }
+          }
           body.replaceChildren(article);
+          if (heading instanceof HTMLElement) {
+            popover.setAttribute("aria-labelledby", heading.id);
+            // The short title stays usable while loading or offline. Once the full
+            // title is present it owns the dialog's name, without repeating above it.
+            for (const outer of [...popover.children]) {
+              if (outer.matches(".site-card-label, .site-popover-value")) {
+                outer.remove();
+              }
+            }
+          }
           body.removeAttribute("data-row-pop-src");
         })
         // The short body is already there; a later opening tries again.

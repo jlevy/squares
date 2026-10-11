@@ -184,7 +184,8 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     lines = [line.strip() for line in block.strip().splitlines()]
     assert lines[0] == (
         '<span class="credits-source">From the original proof by '
-        "<strong>Kleddamag</strong></span>"
+        '<a href="https://x.com/kleddamag" target="_blank" rel="noopener noreferrer">'
+        "<strong>Kleddamag</strong></a></span>"
     )
     assert lines[1] == (
         f'<span class="credits-source"><a href="https://{address}" target="_blank" '
@@ -213,7 +214,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     # The shared rule keeps the hero's caps off the formula (`paper-publication.css`).
     assert ".hero h1 .tex,\n.hero h1 .kpress-math {" in html
     assert markdown.startswith(
-        f"# {paper.HERO_TITLE}\n\n- From the original proof by **Kleddamag**\n"
+        f"# {paper.HERO_TITLE}\n\n- From the original proof by [**Kleddamag**](https://x.com/kleddamag)\n"
     )
     assert (
         f"- {release.THRESHOLD_REVIEW_EDITION} ([version history](#version-history))"

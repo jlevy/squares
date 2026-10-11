@@ -142,7 +142,7 @@ The recent merges the page has to reflect:
   lineage.
 - PR #241: Evan Daniel’s $s(21) = 5$ and $s(45) = 7$, Guzhou0806’s R068 at
   $s(17) > 116511/25000$, and wand125’s rectangle bounds to $n = 95$.
-- PRs #239 and #240: the v0.4.2 edition, the starred recent results on the atlas, and
+- PRs #239 and #240: the v0.4.2 edition, recent-result highlighting on the atlas, and
   the ascent films.
 
 ## Design
@@ -278,7 +278,7 @@ runs:
 3. **Recent Results.** One table of every result, newest first, in the results page’s
    six columns (id, n, result, credit, rungs with the kind and the status under them,
    date), filtered by default to significance S4 and up, a maximum age of 180 days and
-   superseded results hidden, with a link to the full table on `all-results.html`. It
+   superseded results hidden, with a link to the full table on `results.html`. It
    replaces the headline cards, the exact-value cards and the recent-changes list.
    Until 2026-10-01 a separate disclosure followed it, the cases awaiting a replay; a
    reported result is now a row of the table with the status *recorded* (`think-d04u`).
@@ -312,7 +312,7 @@ the template as a literal.
 
 One row per register entry, grouped and ordered exactly as `RESULTS.md` is, through the
 shared `grouped_results()`. Amended 2026-09-30: the table is its own page,
-`all-results.html`, with a Results nav tab; the overview keeps Recent Results, and
+`results.html`, with a Results nav tab; the overview keeps Recent Results, and
 `forward.js` sends old `index.html#every-result` and `#t-nnn` links there.
 Amended 2026-10-01: the table is one flat list, newest first, with no lineage headings;
 `RESULTS.md` keeps the grouping.
@@ -366,7 +366,7 @@ No value on the page is typed by hand or read from `STATUS.md`.
 | Reported lower | `reported_lower_bound`: `exact_form`, `kind`, `proved_by`, `proved_year`, `source_key` |
 | Verified lower | `verified_lower_bound`: `exact_form`, else `value` |
 | Gap | verified upper minus verified lower, computed exactly where both are exact |
-| Recent | a star when the verified lower bound is recent, from `bound-citations.json`, as on the atlas figure |
+| Recent | a recent verified lower bound from `bound-citations.json`, highlighted in red |
 | Records | the case file, and each `evidence` id on the bounds, linked |
 
 **Rendering values cleanly.** Exact forms are shown as mathematics, not as ASCII: `31/8`
@@ -783,7 +783,7 @@ decisions that changed the plan above:
   (`think-7oho`). The homepage has no `h1` or tagline, the version is in the footer
   only, and the problem section makes no bound or open-case claim (`think-sz43`,
   `think-r07m`, `think-7stg`).
-- **More pages.** Every result moves to `all-results.html`, each case gets a record at
+- **More pages.** Every result appears on `results.html`, each case gets a record at
   `cases.html#n-N`, and Visualize (`visualize.html`) shows the film with the workbench
   under a second tab (`think-x8ev`, `think-7vjh`, `think-88zu`).
 - **Recent Results replaces the headline cards and the recent-changes list**: one table

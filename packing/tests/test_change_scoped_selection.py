@@ -17,8 +17,13 @@ and a check that silently stops running.
 
 from __future__ import annotations
 
+import os
+import subprocess
 from pathlib import Path
 
+import pytest
+
+from sqpack.cli import validate
 from sqpack.cli.validate import STEPS, Step, select_for_paths
 from workbench_tools.build_site import RENDER_INPUTS, REPO
 
@@ -323,3 +328,64 @@ def test_browser_floor_inputs_select_the_browser_floor() -> None:
         "packages/workbench/assets/workbench.css",
     ):
         assert _selects(path, BROWSER_FLOOR_STEP), path
+
+
+def test_push_paths_include_committed_and_worktree_renames_deletions_and_additions(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """An attributed source moved out of its subtree must still select its old consumers."""
+    environment = {
+        key: value for key, value in os.environ.items() if not key.startswith("GIT_")
+    }
+
+    def git(*args: str) -> str:
+        return subprocess.run(
+            ("git", "-c", "commit.gpgsign=false", "-c", f"core.hooksPath={os.devnull}", *args),
+            cwd=tmp_path,
+            env=environment,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+
+    git("init", "-q")
+    for name in ("old.py", "staged-old.py", "deleted.py", "edited.py"):
+        (tmp_path / name).write_text(name)
+    git("add", ".")
+    git(
+        "-c", "user.name=Test", "-c", "user.email=test@example.invalid", "commit", "-qm", "base"
+    )
+    base = git("rev-parse", "HEAD")
+    (tmp_path / "old.py").rename(tmp_path / "renamed.py")
+    git("add", "-A")
+    git(
+        "-c",
+        "user.name=Test",
+        "-c",
+        "user.email=test@example.invalid",
+        "commit",
+        "-qm",
+        "rename",
+    )
+    (tmp_path / "staged-old.py").rename(tmp_path / "staged-new.py")
+    git("add", "-A")
+    (tmp_path / "deleted.py").unlink()
+    (tmp_path / "edited.py").write_text("changed")
+    (tmp_path / "untracked é\n.py").write_text("new")
+    monkeypatch.setattr(validate, "REPOSITORY_ROOT", tmp_path)
+    for key in tuple(os.environ):
+        if key.startswith("GIT_"):
+            monkeypatch.delenv(key)
+    assert validate.changed_paths(base) == sorted(
+        [
+            "old.py",
+            "renamed.py",
+            "staged-old.py",
+            "staged-new.py",
+            "deleted.py",
+            "edited.py",
+            "untracked é\n.py",
+        ]
+    )
+    with pytest.raises(validate.UsageError, match="failed"):
+        validate.changed_paths("edited.py")

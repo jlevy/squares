@@ -11,6 +11,7 @@
   if (!(control instanceof HTMLElement) || !(block instanceof HTMLElement)) {
     return null;
   }
+  const scrollBefore = window.scrollY;
   control.click();
   const moves = document
     .getAnimations()
@@ -23,16 +24,14 @@
     );
   const tiles = moves.filter((effect) => effect.target?.matches(".site-atlas-cell") === true);
   const timing = tiles[0]?.getComputedTiming();
-  return {
-    view: block.dataset.atlasView ?? null,
-    size: block.dataset.atlasSize ?? null,
-    moving: tiles.length,
-    followers: moves.length - tiles.length,
-    duration: timing ? Number(timing.duration) : null,
-    easing: timing?.easing ?? null,
-    properties: [
-      ...new Set(
-        tiles.flatMap((effect) =>
+  const tileMoves = tiles.map((effect) => {
+    const motionTiming = effect.getComputedTiming();
+    return {
+      n: Number(effect.target?.getAttribute("data-atlas-n")),
+      duration: Number(motionTiming.duration),
+      easing: motionTiming.easing,
+      properties: [
+        ...new Set(
           effect
             .getKeyframes()
             .flatMap((frame) =>
@@ -41,7 +40,19 @@
               ),
             ),
         ),
-      ),
-    ].sort(),
+      ].sort(),
+    };
+  });
+  return {
+    scroll_before: scrollBefore,
+    scroll_after: window.scrollY,
+    view: block.dataset.atlasView ?? null,
+    size: block.dataset.atlasSize ?? null,
+    moving: tiles.length,
+    followers: moves.length - tiles.length,
+    duration: timing ? Number(timing.duration) : null,
+    easing: timing?.easing ?? null,
+    properties: [...new Set(tileMoves.flatMap((motion) => motion.properties))].sort(),
+    tile_moves: tileMoves,
   };
 };

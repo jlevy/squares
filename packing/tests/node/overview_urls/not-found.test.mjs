@@ -13,7 +13,7 @@ const aliases = {
   cases: [11],
   results: ["result/t-001.html"],
   rows: ["t-001"],
-  allResults: "all-results.html",
+  allResults: "results.html",
 };
 
 /** @param {string} address @returns {string | null} */
@@ -60,7 +60,7 @@ void test("uppercase result ID leads to its retained page", () => {
 void test("missing canonical result page leads to its known row", () => {
   assert.equal(
     arrival("https://example.org/squares/result/t-001.html?view=embed#proof"),
-    "https://example.org/squares/all-results.html?view=embed#t-001",
+    "https://example.org/squares/results.html?view=embed#t-001",
   );
 });
 

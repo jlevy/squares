@@ -57,12 +57,12 @@ on, and a human expert’s review of the formalization, are still to come.
 [Square Packing](https://jlevy.github.io/squares/).** It carries the
 [recent results](https://jlevy.github.io/squares/#recent-results) by this project and by
 others with their credit, the
-[verification ratings](https://jlevy.github.io/squares/all-results.html#verification-ladders),
+[verification ratings](https://jlevy.github.io/squares/results.html#verification-ladders),
 [the atlas](https://jlevy.github.io/squares/#the-atlas-of-square-packings) of known-best
 packings and its films, the table of
-[every result](https://jlevy.github.io/squares/all-results.html), and
-[the frontier survey](https://jlevy.github.io/squares/frontier.html) of every case
-$n = 1\ldots324$, all generated from the record in this repository.
+[every result](https://jlevy.github.io/squares/results.html), and
+[the frontier survey](https://jlevy.github.io/squares/atlas.html#the-frontier-survey) of
+every case $n = 1\ldots324$, all generated from the record in this repository.
 The in-repository record is the [results register](packing/frontier/RESULTS.md), the
 per-case [status table](packing/frontier/STATUS.md), and
 [`epistemics.md`](epistemics.md), which defines how each claim is graded.

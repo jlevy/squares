@@ -9,6 +9,7 @@ change nobody can attribute must select everything.
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import subprocess
@@ -214,10 +215,52 @@ def test_pages_selection_refuses_malformed_workflow(
     assert "Pages invocation inputs could not be resolved" in selection.reason
 
 
-@pytest.mark.parametrize("everything", [False, True])
+@pytest.mark.parametrize(
+    ("everything", "changed", "marker"),
+    [
+        (False, ["packing/src/sqpack/cli/validate.py"], "not exhaustive_exact"),
+        (True, [], "not exhaustive_exact"),
+        (True, ["packing/tests/conftest.py"], validate.QUICK_TESTS),
+        (True, ["packing/uv.lock"], validate.QUICK_TESTS),
+        (True, [".github/workflows/packing-validation.yml"], validate.QUICK_TESTS),
+        (True, [".github/workflows/deep-gate.yml"], validate.QUICK_TESTS),
+        (
+            True,
+            ["packing/tests/conftest.py", ".github/workflows/packing-validation.yml"],
+            validate.QUICK_TESTS,
+        ),
+        (True, [".github/workflows/unknown.yml"], "not exhaustive_exact"),
+        (True, ["packing/scripts/unmapped.py"], "not exhaustive_exact"),
+        (
+            True,
+            ["packing/tests/conftest.py", "packing/src/sqpack/assurance.py"],
+            "not exhaustive_exact",
+        ),
+        (
+            True,
+            ["packing/tests/conftest.py", "packing/frontier/results.yaml"],
+            "not exhaustive_exact",
+        ),
+        (
+            True,
+            ["packing/tests/conftest.py", "packing/devtools/render_overview.py"],
+            "not exhaustive_exact",
+        ),
+        (
+            True,
+            ["packing/tests/conftest.py", ".github/workflows/unknown.yml"],
+            "not exhaustive_exact",
+        ),
+    ],
+)
 @pytest.mark.parametrize("workers", [1, 4])
 def test_running_selected_tests_preserves_coverage_and_uses_requested_workers(
-    monkeypatch: pytest.MonkeyPatch, *, everything: bool, workers: int
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    everything: bool,
+    changed: list[str],
+    marker: str,
+    workers: int,
 ) -> None:
     selection = reachable_tests.TestSelection(
         everything=everything,
@@ -228,7 +271,7 @@ def test_running_selected_tests_preserves_coverage_and_uses_requested_workers(
             "packages/workbench/tests/test_benchmark_admission.py",
         ),
     )
-    monkeypatch.setattr(reachable_tests, "changed_paths", lambda _since: ["changed"])
+    monkeypatch.setattr(reachable_tests, "changed_paths", lambda _since: changed)
     monkeypatch.setattr(reachable_tests, "select_tests", lambda _changed: selection)
     commands: list[tuple[str, ...]] = []
 
@@ -259,7 +302,7 @@ def test_running_selected_tests_preserves_coverage_and_uses_requested_workers(
             "-q",
             *targets,
             "-m",
-            "not exhaustive_exact",
+            marker,
             *(("-n", "4") if workers == 4 else ()),
             "--durations=0",
             "--durations-min=0",
@@ -426,9 +469,11 @@ def test_the_runner_wires_its_argument_to_the_command_it_builds(
         (0, None, 5, 2, 5, ("normal", "pool", "probe")),
     ],
 )
+@pytest.mark.parametrize("configuration_only", [False, True])
 def test_pool_phases_preserve_complements_failures_and_proved_empty_lanes(
     monkeypatch: pytest.MonkeyPatch,
     *,
+    configuration_only: bool,
     normal_status: int,
     normal_probe: int | None,
     pool_status: int,
@@ -437,18 +482,26 @@ def test_pool_phases_preserve_complements_failures_and_proved_empty_lanes(
     phases: tuple[str, ...],
 ) -> None:
     selection = reachable_tests.TestSelection(
-        everything=False,
+        everything=configuration_only,
         reason="fixture",
         tests=("packing/tests/test_reachable_tests.py",),
     )
-    monkeypatch.setattr(reachable_tests, "changed_paths", lambda _since: ["changed"])
+    changed = ["packing/tests/conftest.py"] if configuration_only else ["changed"]
+    base_marker = validate.QUICK_TESTS if configuration_only else "not exhaustive_exact"
+    monkeypatch.setattr(reachable_tests, "changed_paths", lambda _since: changed)
     monkeypatch.setattr(reachable_tests, "select_tests", lambda _changed: selection)
     seen: list[str] = []
 
     def capture(command: tuple[str, ...], **kwargs: object) -> subprocess.CompletedProcess[str]:
         assert kwargs["cwd"] == reachable_tests.ROOT
         marker = command[command.index("-m", 2) + 1]
-        assert "tests/test_reachable_tests.py" in command
+        expected_target = (
+            reachable_tests.BEHAVIORAL_TEST_ROOTS[0]
+            if configuration_only
+            else "tests/test_reachable_tests.py"
+        )
+        assert expected_target in command
+        assert marker in (f"{base_marker} and not pool_heavy", f"{base_marker} and pool_heavy")
         if "--collect-only" in command:
             seen.append("probe")
             status = normal_probe if "not pool_heavy" in marker else pool_probe
@@ -462,7 +515,7 @@ def test_pool_phases_preserve_complements_failures_and_proved_empty_lanes(
             assert environment["PACK_JOBS"] == "1"
             return subprocess.CompletedProcess(command, normal_status)
         seen.append("pool")
-        assert marker == "not exhaustive_exact and pool_heavy"
+        assert marker == f"{base_marker} and pool_heavy"
         assert "-n" not in command
         assert environment["PACK_JOBS"] == "4"
         return subprocess.CompletedProcess(command, pool_status)
@@ -512,8 +565,9 @@ def test_invalid_pool_worker_counts_refuse_before_selection(
     assert error.value.code == 2
 
 
+@pytest.mark.parametrize("configuration_only", [False, True])
 def test_pool_split_executes_the_exact_selected_tests_once_each(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, configuration_only: bool
 ) -> None:
     test_file = tmp_path / "test_pool_split.py"
     test_file.write_text(
@@ -526,26 +580,51 @@ def test_pool_split_executes_the_exact_selected_tests_once_each(
         "@pytest.mark.pool_heavy\n"
         "def test_pool():\n"
         "    Path(os.environ['SPLIT_OUTPUT']).joinpath('pool')"
-        ".write_text(os.environ['PACK_JOBS'])\n",
+        ".write_text(os.environ['PACK_JOBS'])\n"
+        "@pytest.mark.slow\n"
+        "def test_slow_normal():\n"
+        "    Path(os.environ['SPLIT_OUTPUT']).joinpath('slow-normal')"
+        ".write_text(os.environ['PACK_JOBS'])\n"
+        "@pytest.mark.slow\n"
+        "@pytest.mark.pool_heavy\n"
+        "def test_slow_pool():\n"
+        "    Path(os.environ['SPLIT_OUTPUT']).joinpath('slow-pool')"
+        ".write_text(os.environ['PACK_JOBS'])\n"
+        "@pytest.mark.exhaustive_exact\n"
+        "def test_exhaustive():\n"
+        "    raise AssertionError('exhaustive belongs to the final checkpoint')\n",
         encoding="utf-8",
     )
     monkeypatch.setenv("SPLIT_OUTPUT", str(tmp_path))
     monkeypatch.delenv("PACKING_REACHABLE_TEST_ARTIFACT_STEM", raising=False)
     monkeypatch.setattr(reachable_tests, "REPO", tmp_path)
-    monkeypatch.setattr(reachable_tests, "changed_paths", lambda _since: ["changed"])
+    changed = ["packing/tests/conftest.py"] if configuration_only else ["changed"]
+    monkeypatch.setattr(reachable_tests, "changed_paths", lambda _since: changed)
+    monkeypatch.setattr(reachable_tests, "BEHAVIORAL_TEST_ROOTS", (str(test_file),))
     monkeypatch.setattr(
         reachable_tests,
         "select_tests",
         lambda _changed: reachable_tests.TestSelection(
-            everything=False, reason="fixture", tests=("test_pool_split.py",)
+            everything=configuration_only, reason="fixture", tests=("test_pool_split.py",)
         ),
     )
     assert reachable_tests.main(["--run", "-n", "2", "--pool-workers", "2"]) == 0
     assert (tmp_path / "normal").read_text(encoding="utf-8") == "1"
     assert (tmp_path / "pool").read_text(encoding="utf-8") == "2"
 
+    if configuration_only:
+        assert not (tmp_path / "slow-normal").exists()
+        assert not (tmp_path / "slow-pool").exists()
+    else:
+        assert (tmp_path / "slow-normal").read_text(encoding="utf-8") == "1"
+        assert (tmp_path / "slow-pool").read_text(encoding="utf-8") == "2"
 
-def test_whole_atlas_pool_heavy_collection_is_one_canonical_node() -> None:
+
+def test_whole_atlas_pool_heavy_collection_is_one_canonical_node(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    # The probe's node-list format must not inherit the outer gate's verbose options.
+    monkeypatch.delenv("PYTEST_ADDOPTS", raising=False)
     command = (
         sys.executable,
         "-m",
@@ -564,3 +643,48 @@ def test_whole_atlas_pool_heavy_collection_is_one_canonical_node() -> None:
     assert collected == {
         "tests/test_known_best_atlas.py::test_known_best_composite_contains_every_case_and_square"
     }
+
+
+@pytest.mark.parametrize(
+    "paths", [[], ["old/name.py", "new/name.py", "deleted.py", "space and é\nname.py"]]
+)
+def test_explicit_changed_paths_are_used_without_reading_git(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    paths: list[str],
+) -> None:
+    snapshot = tmp_path / "paths.json"
+    snapshot.write_text(json.dumps(paths))
+    monkeypatch.setattr(
+        reachable_tests,
+        "changed_paths",
+        lambda _base: pytest.fail("snapshot must not read Git"),
+    )
+    seen: list[list[str]] = []
+
+    def select(changed: list[str]) -> reachable_tests.TestSelection:
+        seen.append(changed)
+        return reachable_tests.TestSelection(everything=True, reason="control", tests=())
+
+    monkeypatch.setattr(reachable_tests, "select_tests", select)
+    assert reachable_tests.main(["--summary", "--changed-paths-file", str(snapshot)]) == 0
+    assert capsys.readouterr().out == "everything\n"
+    assert seen == [paths]
+
+
+@pytest.mark.parametrize("content", [None, "{", "{}", '["valid.py", 7]', '[""]'])
+def test_changed_path_snapshot_errors_never_become_an_empty_selection(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, content: str | None
+) -> None:
+    snapshot = tmp_path / "paths.json"
+    if content is not None:
+        snapshot.write_text(content)
+    monkeypatch.setattr(
+        reachable_tests,
+        "select_tests",
+        lambda _paths: pytest.fail("invalid snapshot must fail before selection"),
+    )
+    with pytest.raises(SystemExit) as error:
+        reachable_tests.main(["--summary", "--changed-paths-file", str(snapshot)])
+    assert error.value.code == 2

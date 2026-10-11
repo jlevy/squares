@@ -36,6 +36,8 @@ from devtools import artifact_dates, paper_front, paper_links, render_n11_lower_
 from devtools.render_n11_lower_bounds_explainer_pdf import dated
 from devtools.render_overview import (
     EMBED_SCRIPT,
+    HEADROOM_SCRIPT,
+    KPRESS_CLIENT_FRAME,
     MATH_SCRIPT,
     N11_OPTIMALITY_REVIEW,
     PAPER_TYPE_CSS,
@@ -44,10 +46,12 @@ from devtools.render_overview import (
     SITE_NAV_CSS,
     SITE_URL,
     THEME_SCRIPT,
+    TOOLTIP_SCRIPT,
     PageMeta,
     colophon_lines,
     favicon_html,
     head_tags,
+    kpress_client_script,
     nav_html,
     paper_path,
 )
@@ -89,7 +93,9 @@ FRONT = paper_front.check(
         slug=SLUG,
         title=TITLE,
         source=paper_front.Source(
-            "Mannaseh Ahmed", "https://github.com/Queuingtheorydotcom/11SquaresOptimal"
+            "Mannaseh Ahmed",
+            "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
+            author_url="https://x.com/ManassehA06",
         ),
         oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
         agents=("GPT-6 Astra", "GPT-6 Sol"),
@@ -173,6 +179,9 @@ RENDER_INPUTS = (
     SITE_NAV_CSS,
     THEME_SCRIPT,
     EMBED_SCRIPT,
+    HEADROOM_SCRIPT,
+    KPRESS_CLIENT_FRAME,
+    TOOLTIP_SCRIPT,
     MATH_SCRIPT,
     render_n11_lower_bounds_explainer.INLINE_SCRIPT_ASSETS["NATIVE_MATH_METRICS"],
     render_n11_lower_bounds_explainer.PROBES
@@ -501,6 +510,9 @@ def render(
         "COLOPHON": colophon_lines(edition=""),
         "SITE_EMBED": EMBED_SCRIPT.read_text(encoding="utf-8"),
         "SITE_THEME": THEME_SCRIPT.read_text(encoding="utf-8"),
+        "SITE_HEADROOM": HEADROOM_SCRIPT.read_text(encoding="utf-8"),
+        "SITE_KPRESS_CLIENT": kpress_client_script(),
+        "SITE_TOOLTIPS": TOOLTIP_SCRIPT.read_text(encoding="utf-8"),
         "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
         "BODY_HTML": document.html,
         **(math_scripts(static) if document.has_math else {"KATEX_JS": "", "SITE_MATH": ""}),

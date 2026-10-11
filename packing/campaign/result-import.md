@@ -264,7 +264,7 @@ Triage decides what the import is before anything is retained, in an hour or les
 
 Record the claim as reported, by the frontier README’s rules: a reported evidence entry,
 a coverage entry that cites it, the reported lane of each case it improves, and a
-register entry with its ratings and `next_rung`. Four rules are the process’s own:
+register entry with its ratings and `next_rung`. Six rules are the process’s own:
 
 - **`attribution.published` is the claim’s date, not the pin’s:** the date the source
   gives for it, or the UTC date of the first commit that contains the certificate; for
@@ -283,6 +283,17 @@ register entry with its ratings and `next_rung`. Four rules are the process’s 
   all that relate the entry to its cases: it is *pending adoption* where one is better
   than its case’s bound, and *superseded* only where the case holds one at least as good
   ([epistemics.md](../../epistemics.md#status)).
+- **A confirmation the triage priced and did not run is listed** in the entry’s
+  `unfinished_confirmations`, with the rung it would reach, its bead and its
+  `estimated_cost` from the bead’s price, and it is removed in the change that lands it
+  ([epistemics.md](../../epistemics.md#status)).
+- **A regularization is listed as one.** Where an imported certificate rearranges a
+  packing the record already credits, as Evan Daniel’s regularized record lists do
+  (`T-146`), the entry lists each count in `regularizations`, naming the result whose
+  packing it regularizes, so the packing keeps its finder’s credit and the regularizer
+  is credited with the regularization; the `identity` stays the source’s claim until a
+  measurement here decides it
+  ([epistemics.md](../../epistemics.md#parallel-projects-and-their-credit)).
 - **The `T-NNN` is taken last.** An id is its row’s position and cannot be reserved
   across branches, so take it in the commit that registers the result, merge that day,
   and quote it to no author until it is on `main`.

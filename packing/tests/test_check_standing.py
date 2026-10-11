@@ -337,14 +337,26 @@ def test_a_bound_better_than_its_case_record_is_pending_adoption(
     records: view.Records,
 ) -> None:
     """T-128 states eight sides, each below the reported and the verified ceiling its case
-    holds, and no case bound rests on it. Marked superseded, it is refused at every count,
-    as a report held to the reported lane; pending adoption, it passes, and the summary
-    names where it is better. An entry beaten everywhere is refused the word (think-h0d1)."""
+    holds, and no case bound rests on it. Marked superseded, it is refused at every count:
+    as registered on 8 October, a report at V0 held to the reported lane, and since its
+    review of 10 October, at V3, held to the verified lane. Pending adoption, it passes, and
+    the summary names where it is better. An entry beaten everywhere is refused the word
+    (think-h0d1)."""
     record = records.results["T-128"]
     assert view.standing(record, records) == view.PENDING_ADOPTION
     assert check_standing.problems(record, view.PENDING_ADOPTION, records) == []
     cases = "n = 105, 108, 127, 131, 155, 180, 228, 306"
     (superseded,) = check_standing.problems(record, view.SUPERSEDED, records)
+    assert f"T-128 is superseded, yet at {cases} its stated bound" in superseded
+    assert "no worse than the verified one" in superseded
+    reported = {
+        **record,
+        "verification": "V0",
+        "confirmation": "C0",
+        "evidence": ["E-couzo-451-rational-report"],
+    }
+    assert view.standing(reported, records) == view.PENDING_ADOPTION
+    (superseded,) = check_standing.problems(reported, view.SUPERSEDED, records)
     assert f"T-128 is superseded, yet at {cases} its stated bound" in superseded
     assert "no worse than the reported one" in superseded
     line = check_standing.summary(record, view.PENDING_ADOPTION, records)

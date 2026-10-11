@@ -157,9 +157,9 @@ Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages math SITE \
         --page index.html --press '[data-atlas-n="11"]' --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages space SITE \
-        --page index.html --page all-results.html --width 1280 --width 390 --markdown
+        --page index.html --page results.html --width 1280 --width 390 --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages \
-        columns SITE --page index.html --page all-results.html \
+        columns SITE --page index.html --page results.html \
         --width 1280 --width 1024 --width 768 --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages header SITE \
         --page visualize.html --page workbench/index.html --width 1280 --width 390 --markdown

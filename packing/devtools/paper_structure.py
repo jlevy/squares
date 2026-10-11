@@ -218,8 +218,8 @@ def _credit_kind(line: Node, text: str) -> str:
     if text.startswith("Agents"):
         return "agents"
     if "credits-source" in classes:
-        # The source's address is its link; its author's line has none.
-        return "address" if line.find("a") else "source"
+        # Author credits may link the name; repository addresses have their own line.
+        return "source" if text.startswith("From the original proof by ") else "address"
     return "other"
 
 

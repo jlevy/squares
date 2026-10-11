@@ -2,7 +2,9 @@
 
 `frontier/RESULTS.md` (`devtools.render_results`) and the site's overview
 (`devtools.overview_data`) print the same credit cell and group by the same
-lineage, so both read them here and cannot credit a result differently.
+lineage, so both read them here and cannot credit a result differently. Both also
+print a result's `regularizations` in one sentence each (`regularization_sentence`):
+whose packing the certificate regularizes, and who regularized it.
 
 Every credit names people, in one form (epistemics.md, Parallel Projects and Their
 Credit): `X`, or `X after Y, Z` where X's result rests directly on Y's and Z's proof,
@@ -68,3 +70,76 @@ def source_lineage(
         if lineage in lineages:
             return lineage
     return None
+
+
+#: The typographic apostrophe the generated views use (`render_results.APOSTROPHE`).
+_APOSTROPHE = "\u2019"
+#: How a regularization's `side` reads: at the packing's own side, or after an exact solve.
+_SIDES = {"same": "at its own side", "solved": "solved to its side"}
+#: How the basis of a regularization's `identity` reads: whose the claim of identity is.
+_BASES = {
+    "source-claim": f"identity: the source{_APOSTROPHE}s claim",
+    "measured": "identity: measured here",
+}
+
+
+def regularizer(by: str, sources: Mapping[str, Mapping[str, Any]]) -> str:
+    """Who made a regularization, as a credit line names them: the names before `after`
+    in its source's credit, or this project's author for its own (`project`)."""
+    if by == "project":
+        return PROJECT_AUTHOR
+    source = sources[by]
+    return str(source.get("credit") or ", ".join(source["authors"])).split(" after ")[0]
+
+
+def _number(value: float) -> str:
+    return format(value, "g")
+
+
+def _plural(count: int, one: str, many: str) -> str:
+    return f"{count} {one if count == 1 else many}"
+
+
+def regularization_sentence(
+    item: Mapping[str, Any], sources: Mapping[str, Mapping[str, Any]]
+) -> str:
+    """One item of a result's `regularizations` as a reader is told it: the count, whose
+    packing it regularizes and who regularized it, then the method, the side, what the
+    regularization changed, and what the identity rests on with what was measured here.
+    `n = 70: a regularization of T-125's packing by Daniel (fewest; solved to its side;
+    rotation groups merged by up to 0.93°; identity: the source's claim; ...).`"""
+    parts = [str(item["method"]), _SIDES[str(item["side"])]]
+    changes = item.get("changes")
+    if changes:
+        changed = []
+        if changes.get("merged_rotation_groups_deg"):
+            merged = _number(changes["merged_rotation_groups_deg"])
+            changed.append(f"rotation groups merged by up to {merged}\u00b0")
+        if changes.get("straightened"):
+            changed.append(
+                _plural(changes["straightened"], "free square", "free squares")
+                + " straightened"
+            )
+        if changes.get("re_angled"):
+            changed.append(
+                _plural(changes["re_angled"], "free angle", "free angles") + " moved"
+            )
+        parts.append(", ".join(changed) or "no angle changed")
+    identity = item["identity"]
+    parts.append(_BASES[str(identity["basis"])])
+    if "one_to_one" in identity:
+        paired = "" if identity["one_to_one"] else "not "
+        parts.append(f"nearest centres {paired}one to one")
+    moved, largest = identity.get("moved"), identity.get("max_move")
+    if moved is not None:
+        squares = _plural(moved, "square", "squares") + " moved"
+        parts.append(squares + (f", at most {_number(largest)}" if largest is not None else ""))
+    elif largest is not None:
+        parts.append(f"moves up to {_number(largest)}")
+    if "max_turn_deg" in identity:
+        turn = identity["max_turn_deg"]
+        parts.append(f"turns up to {_number(turn)}\u00b0" if turn else "no square turned")
+    return (
+        f"n = {item['n']}: a regularization of {item['of']}{_APOSTROPHE}s packing by "
+        f"{regularizer(str(item['by']), sources)} ({'; '.join(parts)})."
+    )

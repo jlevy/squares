@@ -120,14 +120,14 @@ Three contracts hold it:
 - `workbench_tools.check_layout` measures Animate at rest and mid-step, the animation
   studio, Pack and Search in Chromium at 1440 × 900, 1024 × 768 and 390 × 844. It checks
   the shared edges, gutters and gaps, one height per control kind, horizontal overflow,
-  panel overlap, the stage panel’s OPEN and badge rules (one type, with `new result`
-  alone in the star’s scarlet), one type for the PROVEN, CITATION and OPEN heads, the
-  CITATION section inside its column and above what it is set over, the one frame width
-  in its three colours, and that the attribution stands one legend line under the legend
-  at its left edge, with the shared version on its baseline at the column’s right edge,
-  both clear of what each mode draws.
-  It runs inside `check_stage_resize`’s browser session in `check_frontend`, and
-  `tests/test_check_layout.py` proves each rule refuses a page that breaks it.
+  panel overlap, the stage panel’s OPEN and badge rules, red case numbers for recent
+  results, one type for the PROVEN, CITATION and OPEN heads, the CITATION section inside
+  its column and above what it is set over, the one frame width in its three colours,
+  and that the attribution stands one legend line under the legend at its left edge,
+  with the shared version on its baseline at the column’s right edge, both clear of what
+  each mode draws. It runs inside `check_stage_resize`’s browser session in
+  `check_frontend`, and `tests/test_check_layout.py` proves each rule refuses a page
+  that breaks it.
 - `workbench_tools.layout_gallery` photographs every view at every review viewport and
   writes a side-by-side comparison page for design review.
 

@@ -59,7 +59,7 @@ pytestmark = pytest.mark.usefixtures(prepared_forwarders.__name__)
 RESULTS = PageMeta(
     name="Every Result",
     description="Every reviewed result, with its claim, its credit and its ratings.",
-    path="all-results.html",
+    path="results.html",
 )
 
 
@@ -86,7 +86,7 @@ def test_head_tags_writes_each_tag_once_from_a_page_record() -> None:
     """One record gives the whole set: the title, the description, the canonical link,
     Open Graph and Twitter, each once, the addresses in full under the published root."""
     head = read_head(document(head_tags(RESULTS)))
-    url = SITE_URL + "all-results.html"
+    url = SITE_URL + "results.html"
     assert head.titles == ("Every Result · The Squares Project",)
     assert head.link("canonical") == [url]
     assert [key for key, _ in head.metas] == ["description", "robots", *REQUIRED_META[1:]]
@@ -222,7 +222,7 @@ def test_every_page_has_a_description_of_its_own(pages: dict[str, str]) -> None:
         assert 20 <= len(description) <= DESCRIPTION_LIMIT, (name, len(description))
         assert description.endswith("."), name
     assert described["index.html"] == render_overview.OVERVIEW_DESCRIPTION
-    assert described["frontier.html"] == render_overview.FRONTIER_DESCRIPTION
+    assert described["atlas.html"] == render_overview.ATLAS_DESCRIPTION
     assert described[render_overview.RESULTS_PAGE] == render_overview.RESULTS_DESCRIPTION
     assert described["papers.html"] == render_overview.PAPERS_DESCRIPTION
     assert described["visualize.html"] == render_overview.VISUALIZE_DESCRIPTION
@@ -282,8 +282,8 @@ OG_TITLE = '<meta property="og:title" content="Every Result">'
         ),
         (
             (
-                'og:url" content="https://jlevy.github.io/squares/all-results.html',
                 'og:url" content="https://jlevy.github.io/squares/results.html',
+                'og:url" content="https://jlevy.github.io/squares/all-results.html',
             ),
             "og:url is",
         ),
@@ -292,7 +292,7 @@ OG_TITLE = '<meta property="og:title" content="Every Result">'
                 'rel="canonical" href="https://jlevy.github.io/squares/',
                 'rel="canonical" href="',
             ),
-            "the canonical link is 'all-results.html'",
+            "the canonical link is 'results.html'",
         ),
         (
             ('og:image" content="https://jlevy.github.io/squares/', 'og:image" content="'),
@@ -543,7 +543,7 @@ def test_a_forwarder_previewing_its_page_by_another_name_kind_or_sentence_is_nam
     forwarder = next(
         moved.html
         for moved in render_overview.forwarder_pages()
-        if moved.name == "results.html"
+        if moved.name == "all-results.html"
     )
     target = canonical_url(render_overview.RESULTS_PAGE)
     destination = document(head_tags(render_overview.RESULTS_META))
@@ -922,57 +922,56 @@ def test_a_page_added_later_or_a_record_that_loses_a_tag_fails_the_check(
     (tmp_path / "cases/12.html").write_text(good["cases/12.html"], encoding="utf-8")
     target = canonical_url(render_overview.RESULTS_PAGE)
     bare = (
-        '<!doctype html><html lang="en" data-moved-to="all-results.html"><head>'
+        '<!doctype html><html lang="en" data-moved-to="results.html"><head>'
         f'<title>Every Result</title><link rel="canonical" href="{target}"></head></html>'
     )
-    (tmp_path / "results.html").write_text(bare, encoding="utf-8")
+    (tmp_path / "all-results.html").write_text(bare, encoding="utf-8")
     (failure,) = [line for passed, line in local_head_checks(tmp_path) if not passed]
-    assert failure.startswith("forwarder results.html: head: ")
+    assert failure.startswith("forwarder all-results.html: head: ")
     assert "0 og:url tags, not one" in failure
     assert "0 twitter:card tags, not one" in failure
-    (tmp_path / "results.html").unlink()
+    (tmp_path / "all-results.html").unlink()
 
-    # The frontier atlas beside a forwarder that names it as the forwarder from
-    # `status.html` did, by a name the page no longer had.
-    site_renders.write(tmp_path, "frontier.html")
+    # The combined Atlas beside a forwarder that previews it under a different name.
+    site_renders.write(tmp_path, "atlas.html")
     forwarder = next(
         moved.html for moved in render_overview.forwarder_pages() if moved.name == "status.html"
     )
     (tmp_path / "status.html").write_text(forwarder, encoding="utf-8")
     assert all(passed for passed, _ in local_head_checks(tmp_path))
-    renamed = forwarder.replace("The Frontier Survey", "The Frontier Atlas")
+    renamed = forwarder.replace("The Atlas of Square Packings", "The Frontier Atlas")
     (tmp_path / "status.html").write_text(renamed, encoding="utf-8")
     (failure,) = [line for passed, line in local_head_checks(tmp_path) if not passed]
     assert failure == (
         "forwarder status.html: head: its og:title is ['The Frontier Atlas'], and the "
-        "page's own is ['The Frontier Survey']"
+        "page's own is ['The Atlas of Square Packings']"
     )
 
 
 def test_head_checks_report_one_line_a_page_a_forwarder_and_the_card(card: bytes) -> None:
     page = document(head_tags(render_overview.RESULTS_META))
-    target = SITE_URL + "all-results.html"
+    target = SITE_URL + "results.html"
     forwarder = next(
         moved.html
         for moved in render_overview.forwarder_pages()
-        if moved.name == "results.html"
+        if moved.name == "all-results.html"
     )
     results = head_checks(
-        {"all-results.html": page}, {"results.html": (forwarder, target)}, card
+        {"results.html": page}, {"all-results.html": (forwarder, target)}, card
     )
     assert [passed for passed, _ in results] == [True, True, True, True]
     assert (
         results[2][1]
-        == f"forwarder results.html: previews {target} as that page's own head does"
+        == f"forwarder all-results.html: previews {target} as that page's own head does"
     )
     # The same forwarder under another name fails beside the page, and passes alone.
     renamed = forwarder.replace("Every Result", "All Results")
-    results = head_checks({"all-results.html": page}, {"results.html": (renamed, target)}, card)
+    results = head_checks({"results.html": page}, {"all-results.html": (renamed, target)}, card)
     assert [passed for passed, _ in results] == [True, True, False, True]
-    results = head_checks({}, {"results.html": (renamed, target)}, card)
+    results = head_checks({}, {"all-results.html": (renamed, target)}, card)
     assert results[1] == (
         True,
-        f"forwarder results.html: previews {target}, whose page is not here to compare",
+        f"forwarder all-results.html: previews {target}, whose page is not here to compare",
     )
-    results = head_checks({"papers.html": page}, {"results.html": (forwarder, "x")}, None)
+    results = head_checks({"papers.html": page}, {"all-results.html": (forwarder, "x")}, None)
     assert [passed for passed, _ in results] == [False, True, False, False]

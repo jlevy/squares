@@ -38,7 +38,7 @@ from collections.abc import Callable, Mapping, Sequence
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import NamedTuple, override
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urldefrag, urljoin, urlsplit
 
 from playwright.sync_api import Browser, BrowserContext, sync_playwright
 from playwright.sync_api import Error as PlaywrightError
@@ -90,7 +90,7 @@ RESULT_OVERVIEW = re.compile(
 )
 #: The record page's index, each case's link to its record file beside it, and the
 #: record a record file holds (`render_case_pages`).
-CASE_INDEX_LINK = re.compile(r'href="(\d+)\.html" data-case="(\d+)"')
+CASE_INDEX_LINK = re.compile(r'<tr id="n-(\d+)"[^>]*data-case-href="cases/(\d+)\.html"')
 CASE_RECORD = re.compile(r'<article class="site-case" data-case="(\d+)"')
 #: The record files a deploy check fetches: the first and last cases indexed and the
 #: settled n = 11. The record page and every case popover fetch these files, so a deploy
@@ -111,7 +111,7 @@ SITE_PAGES = tuple(render_overview.PAGES)
 #: links already are when they are rendered; asking GitHub would cost a request per link
 #: on every deploy. The results page is one, since its records are the register's links
 #: and were asked of GitHub when the table was on the overview.
-LINK_CHECKED_PAGES = frozenset({"index.html", "frontier.html", render_overview.RESULTS_PAGE})
+LINK_CHECKED_PAGES = frozenset({"index.html", "atlas.html", render_overview.RESULTS_PAGE})
 
 #: Each paper's own version, as its front prints it (`sqpack.release`), by slug: the
 #: explainer's number, and each review's status and number (`Draft v0.1.4`). A test holds
@@ -1234,6 +1234,10 @@ def pdf_source_matches(data: bytes, page: bytes) -> bool:
 RETRY_DELAYS = (2.0, 4.0, 8.0, 16.0)
 #: Answers worth asking again: unreachable (0), not yet there, throttled, or a server error.
 TRANSIENT_STATUSES = frozenset({0, 404, 408, 429, 500, 502, 503, 504})
+#: Progress describes long live audits without printing every routine request.
+SLOW_REQUEST_SECONDS = 5.0
+PROGRESS_INTERVAL_SECONDS = 10.0
+PROGRESS_REQUEST_INTERVAL = 50
 
 
 #: A site this machine serves, as `devtools.preview_site --serve` does: the one kind of
@@ -1265,6 +1269,7 @@ def fetch(
     timeout: float = 30.0,
     delays: Sequence[float] = RETRY_DELAYS,
     sleep: Callable[[float], object] = time.sleep,
+    on_retry: Callable[[int, float], object] | None = None,
 ) -> tuple[int, bytes]:
     """`fetch_once`, asked again after each delay while the answer is transient.
 
@@ -1275,6 +1280,8 @@ def fetch(
     for delay in delays:
         if answer[0] not in TRANSIENT_STATUSES:
             break
+        if on_retry is not None:
+            on_retry(answer[0], delay)
         sleep(delay)
         answer = fetch_once(url, head=head, timeout=timeout)
     return answer
@@ -1375,7 +1382,7 @@ def forwarder_arrivals(
         ) + FORWARDED_SUFFIX
         page = browser.new_page()
         try:
-            page.goto(start, wait_until="load", timeout=timeout * 1000)
+            page.goto(start, wait_until="commit", timeout=timeout * 1000)
             page.wait_for_url(arrival, wait_until="commit", timeout=timeout * 1000)
         except PlaywrightError:
             pass  # Where the visit is now says what went wrong.
@@ -1514,19 +1521,77 @@ def check(
     *,
     timeout: float,
     browser: bool = True,
+    progress: Callable[[str], object] | None = None,
 ) -> list[tuple[bool, str]]:
-    """Every check as (passed, line), in the order they are printed."""
+    """Every check as (passed, line), in the order they are printed.
+
+    Optional progress counts cumulative HTTP identities (URL and method) and retries;
+    cache hits, including HEAD requests satisfied by a GET, add no request.
+    """
     cache: dict[tuple[str, bool], tuple[int, bytes]] = {}
+    started = phase_started = last_report = time.monotonic()
+    phase_name = ""
+    requests = retries = 0
+
+    def report(detail: str) -> None:
+        nonlocal last_report
+        if progress is not None:
+            last_report = time.monotonic()
+            progress(
+                f"audit +{last_report - started:.2f}s {phase_name}: {detail}; "
+                f"total_unique_requests={requests} total_retries={retries}"
+            )
+
+    def phase(name: str | None) -> None:
+        nonlocal phase_name, phase_started
+        if phase_name:
+            report(f"complete in {time.monotonic() - phase_started:.2f}s")
+        if name is not None:
+            phase_name, phase_started = name, time.monotonic()
+            report("start")
 
     def read(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        nonlocal requests
+        original = url
+        # Fragments name locations in a document, not distinct HTTP resources.
+        url = urldefrag(url).url
         key = (url, head)
         if head and (url, False) in cache:
             return cache[(url, False)]
         if key not in cache:
-            cache[key] = fetch(url, head=head, timeout=timeout)
+            requests += 1
+            request_started = time.monotonic()
+            method = "HEAD" if head else "GET"
+
+            def retry(status: int, delay: float) -> None:
+                nonlocal retries
+                retries += 1
+                report(f"retry {method} {original}: HTTP {status}, waiting {delay:g}s")
+
+            cache[key] = (
+                fetch(url, head=head, timeout=timeout, on_retry=retry)
+                if progress is not None
+                else fetch(url, head=head, timeout=timeout)
+            )
+            elapsed = time.monotonic() - request_started
+            # Report slow requests and bounded progress, not hundreds of routine URLs.
+            if (
+                elapsed >= SLOW_REQUEST_SECONDS
+                or time.monotonic() - last_report >= PROGRESS_INTERVAL_SECONDS
+                or requests % PROGRESS_REQUEST_INTERVAL == 0
+            ):
+                report(f"{method} {original}: HTTP {cache[key][0]} in {elapsed:.2f}s")
         return cache[key]
 
-    results = deployed_registry_checks(site, read, timeout=timeout)
+    phase("registry")
+    registered = site_urls.load_registry()
+    expected_cases = sorted(
+        int(match[1])
+        for row in registered
+        if row.kind == "record" and (match := re.fullmatch(r"cases/(\d+)\.html", row.path))
+    )
+    results = deployed_registry_checks(site, read, timeout=timeout, rows=registered)
+    phase("content")
     site = site.rstrip("/") + "/"
 
     def served_page(
@@ -1615,7 +1680,7 @@ def check(
             checked_links |= repository_links(text)
         if name in RECORD_LINK_PAGES:
             tables[name] = text
-        if name == render_case_pages.CASES_PAGE:
+        if name == "atlas.html":
             indexed = [int(n) for n, case in CASE_INDEX_LINK.findall(text) if n == case]
 
     overviews = sorted(
@@ -1658,12 +1723,12 @@ def check(
     if bodies:
         links_main("the result overviews", "\n".join(bodies))
 
-    # The case records are files beside the record page, which it and every case popover
-    # fetch: the index names each in order, and a sample of them is fetched.
+    # The Atlas survey names every canonical record in register order. The registry
+    # walk checks all records; this content sample also verifies their identities.
     results.append(
         (
-            bool(indexed) and indexed == list(range(1, len(indexed) + 1)),
-            f"{render_case_pages.CASES_PAGE} indexes {len(indexed)} case records in order",
+            bool(indexed) and indexed == expected_cases,
+            f"atlas.html indexes {len(indexed)} registered case records in order",
         )
     )
     sample = (
@@ -1735,18 +1800,15 @@ def check(
     links_main(LOWER_BOUNDS_PAPER, text)
     links_main(LOWER_BOUNDS_MARKDOWN, markdown_text)
     checked_links |= repository_links(text) | repository_links(markdown_text)
-    # This loop is where the check's time goes: one request to github.com for each distinct
-    # link, in turn. On 2026-10-01 it was 614 of 783 checks and nearly all of a 14 m 47 s
-    # run from a laptop, at 1.3 to 3.8 s a request (the deploy job's whole run took
-    # 4 m 35 s). 558 of the 614 name `packing/frontier`, among them the 324 case files
-    # and 170 line anchors into `results.yaml` and `evidence.yaml`, each anchor asked as an
-    # address of its own though the files are two. The record-link checks above add no
-    # request.
+    # Keep a verdict for every original link, including its fragment. read() shares
+    # transport resources without collapsing diagnostics for different anchors.
+    phase("repository links")
     for kind, ref, path in sorted(checked_links):
         url = f"{REPO_URL}/{kind}/{ref}/{path}"
         status, _ = read(url, head=True, timeout=timeout)
         results.append((status == 200, f"link HTTP {status}: {url}"))
 
+    phase("publication files")
     for name in SERVED:
         if name == LOWER_BOUNDS_MARKDOWN:
             continue
@@ -1867,8 +1929,10 @@ def check(
         )
         results.append((same, line))
     if browser:
+        phase("browser forwarders")
         results.extend(forwarders_followed(site, timeout=timeout))
 
+    phase("workbench")
     workbench_url = site + WORKBENCH_PATH
     status, workbench = read(workbench_url, timeout=timeout)
     workbench_text = workbench.decode("utf-8", errors="replace")
@@ -1896,8 +1960,10 @@ def check(
         )
     )
     if browser:
+        phase("browser workbench")
         results.append(workbench_startup(workbench_url, site, timeout=timeout))
 
+    phase("heads and assets")
     # What every page says of itself to a tab, a search engine and a link preview, and
     # the one image they all name, which is served at the root of the site under test.
     heads[WORKBENCH_PAGE] = workbench_text
@@ -1908,7 +1974,9 @@ def check(
         status, body = read(site + path, timeout=timeout)
         return body if status == 200 else None
 
-    return results + asset_checks(heads, served)
+    results.extend(asset_checks(heads, served))
+    phase(None)
+    return results
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -1961,7 +2029,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             parser.error(str(error))
     else:
         commit = args.commit or expected_commit()
-        results = check(args.site, commit, timeout=args.timeout, browser=not args.no_browser)
+        results = check(
+            args.site,
+            commit,
+            timeout=args.timeout,
+            browser=not args.no_browser,
+            progress=lambda line: print(line, file=sys.stderr, flush=True),
+        )
     failed = 0
     for passed, line in results:
         print(f"{'ok  ' if passed else 'FAIL'} {line}", flush=True)

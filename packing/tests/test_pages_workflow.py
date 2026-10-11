@@ -816,6 +816,9 @@ def test_live_verification_waits_for_the_exact_deployed_revision() -> None:
     verify = workflow["jobs"]["verify-deployment"]
     assert deploy["outputs"]["page-url"] == "${{ steps.deployment.outputs.page_url }}"
     assert verify["needs"] == "deploy"
+    timeout = verify["timeout-minutes"]
+    assert type(timeout) in (int, float)
+    assert 0 < timeout <= 30
     commands = "\n".join(step.get("run", "") for step in verify["steps"])
     assert "python -m devtools.check_published_site" in commands
     assert '--site "${{ needs.deploy.outputs.page-url }}"' in commands

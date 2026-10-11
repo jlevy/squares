@@ -44,6 +44,7 @@ function visited({ reduced = false, view = null, film = new HTMLVideoElement() }
         /** @param {string} name */
         getAttribute: (name) => (name === "data-site-view" ? view : null),
       },
+      querySelectorAll: () => [],
       /** @param {string} selector */
       querySelector: (selector) => {
         selectors.push(selector);

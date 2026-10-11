@@ -54,6 +54,11 @@
       return {
         chip: kind(chip),
         text: (chip.textContent ?? "").trim(),
+        kind: chip.getAttribute("data-kind"),
+        status: chip.getAttribute("data-status"),
+        standing: chip.getAttribute("data-standing"),
+        fill: style.backgroundColor,
+        ink: style.color,
         surface: surface(chip),
         font_size: round(Number.parseFloat(style.fontSize)),
         line_height: round(line),

@@ -72,7 +72,7 @@ AS_OPENED = "index.html as it opens"
 #: A view where no long list of cases shows: the results of one kind that each hold a
 #: case or two. (The overview as it opens held only such rows until T-064, a family of
 #: thirteen cases at S4, joined it.)
-SHORT_LISTS = "all-results.html, one kind of short lists"
+SHORT_LISTS = "results.html, one kind of short lists"
 SHORT_LISTS_QUERY = "?s-min=&age=&current=false&kind=rigidity"
 #: The credit column's floor, 11.5rem, in pixels (`site.css`).
 CREDIT_MIN = 184
@@ -337,18 +337,28 @@ def test_the_result_column_gives_way_to_its_floor(
 ) -> None:
     """The result column narrows to its 16.55rem floor where the window is short of
     room, well under the 411 pixels it was held to, as it is with every row showing at
-    1280 and below now the table has eight columns, and with the overview's own filters
-    at 1280 too, since they show T-056's long list from S3 up (`think-x60s`). At 1440
-    it has room to spare either way. Its widest piece of typeset math, the numerator of
-    T-033's quotient, fits that floor with the cell's padding: so nothing the column
-    holds is wider than it at any width."""
+    1024 and below now the complete table has eight columns. At 1280 the automatic
+    table layout may distribute spare track width beyond the floor. The compact S4+
+    preview may use the room its shorter rows leave; its floor protects its formulas.
+    At 1440 the complete table has room to spare. Its widest piece of typeset math,
+    the numerator of T-033's quotient, fits that floor with the cell's padding: so
+    nothing the column holds is wider than it at any width."""
     for width in AT_FLOORS:
         result = _column(laid[name, width].table, "Result")
-        assert result["width"] == pytest.approx(RESULT_MIN, abs=0.5), width
-    for laid_out in (laid[name, ROOMY], laid[AS_OPENED, ROOMY]):
-        assert RESULT_MIN < _column(laid_out.table, "Result")["width"] < RESULT_WAS
+        if width in SCROLLS:
+            assert result["width"] == pytest.approx(RESULT_MIN, abs=0.5), width
+        else:
+            # A minimum is not an exact width while the table still fits its track.
+            assert RESULT_MIN <= result["width"] < RESULT_WAS, width
+        assert result["piece"]["width"] + PADDING <= result["width"], width
+    assert RESULT_MIN < _column(laid[name, ROOMY].table, "Result")["width"] < RESULT_WAS
+    # The compact S4+ preview has fewer competing long cells, so its result column
+    # can use more of the track than the complete table's worst-case fixture.
+    opened_roomy = _column(laid[AS_OPENED, ROOMY].table, "Result")
+    assert RESULT_MIN < opened_roomy["width"] < laid[AS_OPENED, ROOMY].table["table_width"]
     opened = _column(laid[AS_OPENED, FITS].table, "Result")
-    assert opened["width"] == pytest.approx(RESULT_MIN, abs=0.5)
+    assert RESULT_MIN <= opened["width"] < laid[AS_OPENED, FITS].table["table_width"]
+    assert opened["piece"]["width"] + PADDING <= opened["width"]
     wide = _column(laid[name, FITS].table, "Result")
     assert wide["piece"]["row"] == "t-033"
     assert wide["piece"]["width"] + PADDING <= RESULT_MIN
@@ -367,7 +377,7 @@ def test_a_formula_ends_a_line_only_where_it_may(
     pixels some formulas do wrap, so this is measured and not vacuous."""
     result = _column(laid[name, width].table, "Result" if width != PHONE else "site-col-result")
     assert (result["cuts"], result["stranded"], result["broken"]) == ([], [], [])
-    if width < 1280:
+    if width < 1280 and name == render_overview.RESULTS_PAGE:
         assert result["wrapped"] > 0
 
 
@@ -543,10 +553,29 @@ def test_every_kind_and_standing_chip_is_one_size(
     standing = [chip for chip in chips if chip["chip"] == "standing"]
     kinds = [chip for chip in chips if chip["chip"] == "kind"]
     rungs = [chip for chip in chips if chip["chip"] == "rung"]
-    assert {chip["text"] for chip in standing} >= {"confirmed", "superseded"}
+    assert "confirmed" in {chip["text"] for chip in standing}
+    if name == render_overview.RESULTS_PAGE:
+        assert "superseded" in {chip["text"] for chip in standing}
+    else:
+        assert "superseded" not in {chip["text"] for chip in standing}
     gone = {"current best", "reported", "not a bound", "second certificate"}
     assert not gone & {chip["text"] for chip in standing}
-    assert {chip["text"] for chip in kinds} >= {"lower bound", "optimality"}
+    assert kinds
+    if name == render_overview.RESULTS_PAGE:
+        assert {chip["text"] for chip in kinds} >= {"lower bound", "optimality"}
+    else:
+        overview = site_renders.overview()
+        reference = overview_sections.reference_date(overview)
+        selected = [
+            result
+            for result in overview_sections.recent_results(overview)
+            if overview_sections.shown_by_default(
+                result, overview_sections.RECENT_DEFAULTS, reference
+            )
+        ][: overview_sections.RECENT_LIMIT]
+        assert {chip["text"] for chip in kinds} == {
+            overview_sections.kind_label(str(result.record["kind"])) for result in selected
+        }
     for measure in ("font_size", "line_height", "block_size"):
         sizes = {chip[measure] for chip in (*standing, *kinds)}
         assert len(sizes) == 1, (measure, sizes)

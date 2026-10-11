@@ -26,7 +26,7 @@ class AtlasLegendCounts:
 @dataclass(frozen=True, slots=True)
 class LegendItem:
     key: str
-    marker: Literal["O", "=", "≈", "R", "star", "angles", "shades"] | None
+    marker: Literal["O", "=", "≈", "R", "angles", "shades"] | None
     label: str
     count: int | None = None
     depicted_total: int | None = None
@@ -108,7 +108,7 @@ def atlas_legend(
         right=(
             LegendItem(
                 "recent",
-                "star",
+                None,
                 recent_label(recent_since),
                 counts.recent_results,
                 counts.depicted_total,

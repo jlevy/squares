@@ -7,20 +7,23 @@
 // Runs in the head, before the body is drawn, so the chrome never flashes.
 (() => {
   const query = new URLSearchParams(location.search);
-  document.documentElement.setAttribute(
-    "data-site-atlas-view",
-    query.get("atlas") === "grid" ? "grid" : "triangle",
-  );
+  if (location.pathname.endsWith("/atlas.html")) {
+    document.documentElement.setAttribute(
+      "data-site-atlas-view",
+      query.get("atlas") === "grid" ? "grid" : "triangle",
+    );
+    const scale = query.get("scale");
+    document.documentElement.setAttribute(
+      "data-site-atlas-scale",
+      scale === "fixed" || scale === "global" ? scale : "row",
+    );
+  }
+  // Both the dedicated Atlas and the homepage preview honor an explicit size.
+  // An absent or invalid choice leaves the CSS viewport default in control.
   const size = query.get("size");
-  document.documentElement.setAttribute(
-    "data-site-atlas-size",
-    size === "medium" || size === "large" ? size : "small",
-  );
-  const scale = query.get("scale");
-  document.documentElement.setAttribute(
-    "data-site-atlas-scale",
-    scale === "row" || scale === "global" ? scale : "fixed",
-  );
+  if (size === "small" || size === "medium" || size === "large") {
+    document.documentElement.setAttribute("data-site-atlas-size", size);
+  }
   if (query.get("view") !== "embed") {
     return;
   }

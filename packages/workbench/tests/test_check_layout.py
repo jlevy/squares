@@ -28,12 +28,11 @@ from workbench_tools.check_layout import (
 )
 
 TYPE = {"family": '"Source Sans 3", sans-serif', "size": "28px", "weight": "500"}
-#: The label grey (`--scene-label`) and the star's scarlet (`--scene-proved`), as a computed
-#: colour is reported. `new result` is the one badge label set in the second.
+#: Computed colors for status labels, ordinary case numbers, and recent case numbers.
 GREY = "rgb(71, 82, 95)"
+INK = "rgb(17, 21, 25)"
 SCARLET = "rgb(163, 18, 63)"
 LABEL = {**TYPE, "color": GREY}
-STARRED = {**TYPE, "color": SCARLET}
 #: The frames' three colours: `--scene-frame`, `--scene-frame-locked`, `--scene-trace`.
 FRAME = "rgb(125, 133, 144)"
 LOCKED = "rgb(23, 121, 74)"
@@ -100,17 +99,21 @@ def _page() -> dict[str, Any]:
     }
 
 
-def _layer(*, star: bool, open_items: int) -> dict[str, Any]:
+def _layer(*, recent: bool, open_items: int) -> dict[str, Any]:
     badges = [{"icon": "badge badge-solid", "text": "exact", **LABEL}]
-    if star:
-        badges.insert(0, {"icon": "badge badge-star", "text": "new result", **STARRED})
     heads = ["Proven", "Open"] if open_items else ["Proven"]
     return {
         "heads": heads,
         "headTypes": [{"text": head, **HEAD} for head in heads],
         "citations": None,
         "openItems": open_items,
-        "colours": {"starred": SCARLET, "label": GREY},
+        "colours": {"recent": SCARLET, "ink": INK, "label": GREY},
+        "numeral": {
+            "recent": recent,
+            "color": SCARLET if recent else INK,
+            "title": "Recent result" if recent else None,
+        },
+        "recencyMarks": 0,
         "badges": badges,
     }
 
@@ -176,8 +179,8 @@ def _attribution() -> dict[str, Any]:
 
 def test_a_page_that_keeps_every_rule_passes() -> None:
     assert findings(_page()) == []
-    assert facts_findings(_layer(star=True, open_items=2), star=True) == []
-    assert facts_findings(_layer(star=False, open_items=0), star=False) == []
+    assert facts_findings(_layer(recent=True, open_items=2), recent=True) == []
+    assert facts_findings(_layer(recent=False, open_items=0), recent=False) == []
     assert frames_findings(_frames()) == []
     assert frames_findings(_frames(locked=False)) == []
     assert frames_findings(_frames(catalogue=False)) == []
@@ -249,46 +252,37 @@ def test_a_nested_panel_is_not_an_overlap() -> None:
 
 
 def test_open_is_headed_only_when_something_is_open() -> None:
-    headed_over_nothing = _layer(star=False, open_items=0)
+    headed_over_nothing = _layer(recent=False, open_items=0)
     headed_over_nothing["heads"] = ["Proven", "Open"]
     assert facts_findings(headed_over_nothing) == ["OPEN is headed with 0 open items"]
-    unheaded_items = _layer(star=False, open_items=2)
+    unheaded_items = _layer(recent=False, open_items=2)
     unheaded_items["heads"] = ["Proven"]
     assert facts_findings(unheaded_items) == ["OPEN is not headed with 2 open items"]
 
 
-def test_new_result_is_a_badge_in_the_badges_own_type() -> None:
-    serif = _layer(star=True, open_items=2)
-    serif["badges"][0]["family"] = '"PT Serif", serif'
-    assert any("2 different types" in item for item in facts_findings(serif, star=True))
-    missing = _layer(star=False, open_items=2)
-    assert any("has no `new result`" in item for item in facts_findings(missing, star=True))
-    not_a_star = _layer(star=True, open_items=2)
-    not_a_star["badges"][0]["icon"] = "badge badge-solid"
-    assert any("has no `new result`" in item for item in facts_findings(not_a_star, star=True))
-    unearned = _layer(star=True, open_items=2)
-    assert any(
-        "where no bound is a recent result" in item
-        for item in facts_findings(unearned, star=False)
-    )
-
-
-def test_new_result_is_the_one_badge_label_in_the_stars_scarlet() -> None:
-    """The owner's colour, 2026-09-17: scarlet for `new result`, the label grey for the rest."""
-    greyed = _layer(star=True, open_items=2)
-    greyed["badges"][0]["color"] = GREY
-    assert [
-        item for item in facts_findings(greyed, star=True) if "the star's scarlet" in item
-    ] == [f"the `new result` label is {GREY}, not the star's scarlet {SCARLET}"]
-    spread = _layer(star=True, open_items=2)
-    spread["badges"][1]["color"] = SCARLET
-    assert [item for item in facts_findings(spread, star=True) if "the label grey" in item] == [
-        f"the `exact` label is {SCARLET}, not the label grey {GREY}"
+def test_recent_case_numbers_use_red_and_an_accessible_title() -> None:
+    layer = _layer(recent=True, open_items=2)
+    layer["numeral"]["color"] = INK
+    assert facts_findings(layer, recent=True) == [f"the case number is {INK}, not {SCARLET}"]
+    layer["numeral"]["color"] = SCARLET
+    layer["numeral"]["title"] = None
+    assert facts_findings(layer, recent=True) == [
+        "the recent case number has no Recent result title"
     ]
-    # The colour is the only thing that differs: a `new result` in a second size is still one.
-    resized = _layer(star=True, open_items=2)
-    resized["badges"][0]["size"] = "26px"
-    assert any("2 different types" in item for item in facts_findings(resized, star=True))
+    assert facts_findings(layer, recent=False) == [
+        "the case number's recency does not match False"
+    ]
+    layer["recencyMarks"] = 1
+    assert "the facts panel still draws a recency symbol" in facts_findings(layer)
+
+
+def test_status_badges_keep_one_type_and_label_color() -> None:
+    layer = _layer(recent=True, open_items=2)
+    layer["badges"].append({"icon": "badge badge-solid", "text": "rigid", **LABEL})
+    layer["badges"][0]["family"] = '"PT Serif", serif'
+    assert any("2 different types" in item for item in facts_findings(layer))
+    layer["badges"][0]["color"] = SCARLET
+    assert f"the `exact` label is {SCARLET}, not the label grey {GREY}" in facts_findings(layer)
 
 
 @pytest.mark.parametrize(
@@ -651,7 +645,7 @@ def test_the_citation_section_is_built_exactly_while_its_setting_is_on() -> None
 
 
 def test_the_citation_head_is_set_in_the_heads_type() -> None:
-    layer = _layer(star=False, open_items=2)
+    layer = _layer(recent=False, open_items=2)
     layer["headTypes"].insert(1, {"text": "Citation", **HEAD})
     assert facts_findings(layer) == []
     for key, value in (

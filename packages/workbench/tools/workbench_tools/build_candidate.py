@@ -179,8 +179,8 @@ STATIC_KINDS = frozenset({"prefix", "shared-picture"})
 STATIC_TIMING = {"dwell": 0.4, "move": 0.28, "correct": 0.12, "settle": 0.35}
 
 # The poster's badge vocabulary, exactly as composite-figure.json states it (glyph, style); the
-# star is `lower.recent_result`, a recent result whoever proved it. A badge outside this set
-# fails the build rather than being drawn.
+# recency is `lower.recent_result`. A badge outside this set fails the build rather than
+# being drawn.
 BADGE_VOCABULARY = {
     ("O", "solid"): "proved optimal",
     ("=", "solid"): "exact value known",
@@ -188,9 +188,7 @@ BADGE_VOCABULARY = {
     ("R", "solid"): "known rigid",
     ("R", "muted"): "known rigid",  # Legacy records are normalized to one solid R.
 }
-# SUMMARY_STAR_POINTS from packing/devtools/build_known_best_atlas.py: the five-pointed star the
-# poster draws as a polygon, apex up, about its own centre, with its inset and the span it fills
-# of a badge box. `check_candidate` checks these against the atlas source.
+# Legacy corpus geometry retained for decoding previously generated offline pages.
 STAR_POINTS = [
     (0, -6),
     (1.411, -1.942),

@@ -33,10 +33,20 @@ REGISTRY = PACKING / "site-urls.yaml"
 DOCUMENT = REPO / "docs/project/site-urls.md"
 FIRST_SITE_DATE = "2026-09-29"
 # The declared registration day for this URL migration, never the render clock.
-REGISTRATION_DATE = "2026-10-07"
+REGISTRATION_DATE = "2026-10-08"
 HARD_HTML_LIMIT = 2_000_000
 # Measured exceptions retain the global two-megabyte ceiling.
 PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
+    "index.html": (
+        1_300_000,
+        (
+            "The shared 100-case Atlas preview includes all 324 canonical case links "
+            "and per-case SVG references, with common controls, reading and "
+            "documentation cards. Retained desktop/mobile expansion checks cover "
+            "the prepared shared row layout. "
+            "The page-specific ceiling remains below the global two-megabyte limit."
+        ),
+    ),
     "papers/n11-threshold-bound-review.html": (
         900_000,
         (
@@ -78,13 +88,23 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         400_000,
         "Complete broad scope history and prepared exact bounds measure 355,078 bytes.",
     ),
-    "frontier.html": (
-        1_750_000,
-        "All 324 case rows and prepared exact bounds measure 1,536,618 bytes.",
+    "result/t-124.html": (
+        400_000,
+        "Complete broad scope history and prepared exact bounds measure 304,237 bytes.",
     ),
-    "all-results.html": (
-        800_000,
-        "The complete registered-result table with prepared math measures 717,328 bytes.",
+    "atlas.html": (
+        1_000_000,
+        (
+            "Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete "
+            "Frontier Survey and 174,245 for graphics and the shared shell."
+        ),
+    ),
+    "results.html": (
+        950_000,
+        (
+            "The complete registered-result table with prepared math measures 843,037 bytes "
+            "at 146 results."
+        ),
     ),
     "tutorial.html": (
         800_000,
@@ -118,10 +138,11 @@ HASHED_ASSET_PATTERN = (
     r"|js/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.js"
     r"|fonts/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.woff2)"
 )
+IMAGE_ASSET_PATTERN = r"assets/images/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.png"
 WORKBENCH_ASSET_PATTERN = "workbench/" + HASHED_ASSET_PATTERN
 WORKBENCH_DATA_PATTERN = r"workbench/data/corpus\.[0-9a-f]{16}\.json"
 ALLOWED_PATTERNS = frozenset(
-    {HASHED_ASSET_PATTERN, WORKBENCH_ASSET_PATTERN, WORKBENCH_DATA_PATTERN}
+    {HASHED_ASSET_PATTERN, IMAGE_ASSET_PATTERN, WORKBENCH_ASSET_PATTERN, WORKBENCH_DATA_PATTERN}
 )
 Checks = list[tuple[bool, str]]
 
@@ -209,7 +230,17 @@ def hashed_asset_rows(day: str) -> list[SiteURL]:
             day,
             day,
             pattern=HASHED_ASSET_PATTERN,
-        )
+        ),
+        SiteURL(
+            "assets/images/*.{hash}.png",
+            "",
+            "asset-file",
+            "devtools.site_assets:shared",
+            "overview",
+            day,
+            day,
+            pattern=IMAGE_ASSET_PATTERN,
+        ),
     ]
 
 
@@ -837,8 +868,8 @@ def render_not_found(rows: Sequence[SiteURL]) -> tuple[str, dict[str, bytes]]:
                 for row in rows
                 if row.kind == "result" and row.status == "live"
             ),
-            "allResults": "all-results.html"
-            if any(row.path == "all-results.html" and row.status == "live" for row in rows)
+            "allResults": "results.html"
+            if any(row.path == "results.html" and row.status == "live" for row in rows)
             else None,
         },
         separators=(",", ":"),
