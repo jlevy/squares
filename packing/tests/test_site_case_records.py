@@ -170,7 +170,7 @@ def test_native_close_collapses_the_row_before_the_queued_toggle(
 ) -> None:
     """Native visibility and the row's ARIA state agree in the closing task itself."""
     with _page(browser) as page:
-        page.goto(f"{served}frontier.html", wait_until="load")
+        page.goto(f"{served}atlas.html", wait_until="load")
         page.locator("#n-12 td.site-thumb img").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="12"]').wait_for()
@@ -185,7 +185,7 @@ def test_cached_reopen_keeps_its_row_expanded_and_its_close_focus(
 ) -> None:
     """Coalesced native toggles cannot collapse or steal focus from a reopened record."""
     with _page(browser) as page:
-        page.goto(f"{served}frontier.html", wait_until="load")
+        page.goto(f"{served}atlas.html", wait_until="load")
         row = page.locator("#n-12")
         row.locator("td.site-thumb img").click()
         popover = page.locator("#pop-case")
@@ -212,7 +212,7 @@ def test_closing_invalidates_an_awaited_record_without_stealing_outside_focus(
             held.append(route)
 
         page.route("**/cases/14.html", hold)
-        page.goto(f"{served}frontier.html", wait_until="load")
+        page.goto(f"{served}atlas.html", wait_until="load")
         page.locator("#n-12 td.site-thumb img").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="12"]').wait_for()
@@ -234,7 +234,7 @@ def test_closing_invalidates_an_awaited_record_without_stealing_outside_focus(
             probe(PROBES, "case_popover_state/settled"), {"observer": observer}
         )
         assert state == {"open": False, "expanded": [], "active": "14"}
-        assert page.url == f"{served}frontier.html"
+        assert page.url == f"{served}atlas.html"
         page.unroute("**/cases/14.html", hold)
         page.keyboard.press("Enter")
         popover.locator('[data-case-body] article.site-case[data-case="14"]').wait_for()
