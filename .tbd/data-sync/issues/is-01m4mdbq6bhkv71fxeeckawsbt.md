@@ -5,7 +5,7 @@ title: "Regularize every packing n = 1..324 with the adapted process, as a pull 
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 labels:
   - regularization
 dependencies:
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m4kbxna1xdmjd8nkka3wax60
 parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
 created_at: 2026-10-11T02:41:06.762Z
-updated_at: 2026-10-11T18:41:52.441Z
+updated_at: 2026-10-11T19:36:40.518Z
 ---
 Owner request 2026-10-11 (epic think-cdud, item 4): adapt evand's search/regularize process as think-kl2v's assessment recommends and run it over every packing the record holds, n = 1..324, so the atlas and case drawings are clean and regular. A separate process, so a separate pull request stacked on PR #487 (gh stack; github-stacked-prs is granted), begun once the 2026-10-10 imports are in good shape; the owner checks it. Obligations: every regularized view exactly feasible at its stated side and verified over Q; no side, frontier value or evidence tier changed by a drawing; each regularization recorded with its typed credit and identity basis (the register's regularizations field for results, and the atlas layer's contract per the atlas bead); drawings labelled regularized; the existing gates (regularized atlas views match their index, re-derive exactly, drawings match their index) kept green and extended to the new process. Record the run cost in the bead. The wand125 confirmation runs (think-r333, think-i85v, think-nd7g) wait for this.
 
@@ -33,3 +33,5 @@ Owner request 2026-10-11 (epic think-cdud, item 4): adapt evand's search/regular
 Upstream pin: evand/square-packing 675a5eaa (search/regularize and search/exact byte-identical to the assessed 060c1a1 except posted_cert.py and 16 raw posted certificates).
 Layout: #497 (claude/regularization-2026-10-11) = docs layer: review A fixes (think-t4q5), regularization policy (think-7f9y), effort scope. Stacked PR on claude/gifted-bell-57e62o = implementation: vendor/evand-regularize at 675a5ea (think-csds), devtools.regularize_evand driver = slices 1-2 (think-up3h), devtools.regularize_same_side exact re-solve = slice 3 (think-7hmc), spikes at n = 5, 10, 11, 17, 26, 37, 51, 70, 101, 129, 146, 200, 261, 292, 324 with a before/after gallery and the effort scope (think-ubr0).
 Then: owner answers (Q3 first) with the spike gallery as evidence; slice 4 (record) and slice 5 (drawings and gates) and the full n = 1..324 run with manual review per the policy.
+
+2026-10-11, owner: land in pieces and review quality across a few n before drawings change. Stack: (1) #497 assessment + policy; (2) #509 vendor at 675a5ea (claude/gifted-bell-57e62o); (3) tools: driver + same-side re-solve + gallery, no record/drawing change, reviewed with the spike gallery; (4) pilot: n = 10, 26, 70, 101, 129, 146, 200, 324 admitted after owner review, review records, gates; (5+) batches 1-108, 109-216, 217-324 each with gallery and review records. Outside the stack: #510 documentation-organization plan (think-xfuz); register-result import after owner question 3.
