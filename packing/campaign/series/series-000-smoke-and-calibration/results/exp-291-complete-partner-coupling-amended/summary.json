@@ -1,0 +1,162 @@
+{
+  "status": "criterion_missed",
+  "criterion_met": false,
+  "all_rows_checked": 1056,
+  "foreign_rows_checked": 992,
+  "input_vertices_parsed": 348153,
+  "fixed_witness_excluded": false,
+  "point_excluded_by": [],
+  "generated_facets": 1152,
+  "facet_instances_checked": 11904,
+  "MIN_support_vertex_products": 48516,
+  "unstarted_ladder": [
+    "1/128",
+    "1/512",
+    "1/2048",
+    "1/8192"
+  ],
+  "fresh_verification_passed": true,
+  "endpoint_control": {
+    "all17_retained": true,
+    "label1_charts_disjoint_from_ladder": true,
+    "witnesses": [
+      {
+        "label": 1,
+        "owner": 0,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 2,
+        "owner": 4,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 3,
+        "owner": 6,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 4,
+        "owner": 2,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 5,
+        "owner": 1,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 6,
+        "owner": 12,
+        "row_indices": [
+          0,
+          31
+        ]
+      },
+      {
+        "label": 7,
+        "owner": 7,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 8,
+        "owner": 3,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 9,
+        "owner": 14,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 10,
+        "owner": 5,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 11,
+        "owner": 18,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 12,
+        "owner": 20,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 13,
+        "owner": 8,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 14,
+        "owner": 21,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 15,
+        "owner": 9,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 16,
+        "owner": 13,
+        "row_indices": [
+          32
+        ]
+      },
+      {
+        "label": 17,
+        "owner": 11,
+        "row_indices": [
+          0,
+          63
+        ]
+      }
+    ]
+  },
+  "supervisor_wall_seconds": 106.92935470899101,
+  "phase_wall_seconds": {
+    "construction": 51.699170999985654,
+    "fresh_verification": 54.94613545900211
+  },
+  "maximum_sampled_per_live_process_rss_bytes": 743997440,
+  "cleanup_complete": true,
+  "source_revision": "0ca9a58ff"
+}

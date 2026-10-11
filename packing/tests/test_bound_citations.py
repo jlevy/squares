@@ -20,6 +20,7 @@ from typing import Any
 import pytest
 
 from devtools import build_bound_citations as citations
+from devtools import squish_second_update_packets as second_update
 from devtools import validate_schemas
 from sqpack.assurance import bounds_agree_at_declared_precision
 from sqpack.yamlio import safe_load
@@ -556,6 +557,83 @@ def test_our_certificate_of_someone_else_s_packing_confirms_it_and_does_not_own_
     )
 
 
+@pytest.mark.parametrize("verified_value", ["2.75", "2.5"])
+def test_an_earlier_certificate_confirms_only_the_displayed_upper_value(
+    verified_value: str,
+) -> None:
+    register = _synthetic_register()
+    case = _synthetic_case(["E-area"], certificate=True)
+    case["reported_upper_bound"]["exact_form"] = "5/2"
+    case["verified_upper_bound"]["value"] = verified_value
+    case["verified_upper_bound"]["exact_form"] = "5/2" if verified_value == "2.5" else "11/4"
+    before = json.dumps(case, sort_keys=True)
+    line = citations.upper_citation(7, case, register)
+    assert line is not None
+    assert line["value"] == "2.5"
+    # Earlier evidence and its result link survive even when it certifies a weaker bound.
+    assert line["results"] == ["T-910"]
+    assert json.dumps(case, sort_keys=True) == before
+    if verified_value == "2.5":
+        assert line["confirmed_by"] == ["T-910"]
+        assert (line["note"], line["assurance"]) == ("(confirmed T-910)", "verified")
+    else:
+        assert line["confirmed_by"] == []
+        assert (line["note"], line["assurance"]) == ("(reported)", "reported")
+
+
+def _first_update_case(n: int) -> dict[str, Any]:
+    """Retain the first update's actual lanes when a later report supersedes it."""
+    from devtools import register_gupta_reports as gupta  # noqa: PLC0415
+    from devtools.register_ryxu_reports import read_history  # noqa: PLC0415
+
+    history = {row["n"]: row["frontier"] for row in gupta.read_history()}
+    # RY selection follows the first update; its complete older boundary wins.
+    history.update({row["n"]: row["frontier"] for row in read_history()})
+    case = (
+        safe_load(history[n].split("---\n", 2)[1])["packing"]
+        if n in history
+        else citations.load_case(n)
+    )
+    if n in (179, 263):
+        prior = second_update.prior_lanes()[n]
+        case["reported_upper_bound"] = prior["prior_reported"]
+        case["verified_upper_bound"] = prior["prior_verified"]
+    return case
+
+
+@pytest.mark.parametrize("n", [123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263])
+def test_the_selected_squish_update_does_not_inherit_earlier_confirmation(n: int) -> None:
+    case = _first_update_case(n)
+    # Hold the earlier verified lane independently of whether the live update has
+    # since been confirmed. These are the actual twelve pre-confirmation bounds.
+    previous = json.loads(
+        (ROOT / "tests/fixtures/squish-update-prior-verified.json").read_text()
+    )
+    case["verified_upper_bound"] = previous[str(n)]
+    assert case["reported_upper_bound"]["source_key"] == "[SQUISH update 2026-10-07]"
+    assert not bounds_agree_at_declared_precision(
+        case["reported_upper_bound"], case["verified_upper_bound"]
+    )
+    upper = citations.upper_citation(n, case, _register())
+    assert upper is not None
+    assert upper["value"] == case["reported_upper_bound"]["value"]
+    assert upper["confirmed_by"] == []
+    assert (upper["note"], upper["assurance"]) == ("(reported)", "reported")
+
+
+@pytest.mark.parametrize("n", [123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263])
+def test_the_confirmed_squish_update_cites_only_its_matching_result(n: int) -> None:
+    case = _first_update_case(n)
+    assert bounds_agree_at_declared_precision(
+        case["reported_upper_bound"], case["verified_upper_bound"]
+    )
+    upper = citations.upper_citation(n, case, _register())
+    assert upper is not None
+    assert upper["value"] == case["verified_upper_bound"]["value"]
+    assert upper["confirmed_by"] == ["T-115"]
+    assert (upper["note"], upper["assurance"]) == ("(confirmed T-115)", "verified")
+
+
 def test_a_confirmation_that_would_not_fit_falls_back_to_the_short_venue() -> None:
     register = _synthetic_register()
     sources = {
@@ -785,12 +863,12 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
         ("Göbel 1979, Squares in Squares", "external", "verified"),
         ("Stromquist 2003, Electron. J. Combin. 10, #R8", "external", "verified"),
     ),
-    # T-060 confirms the exact Trump lower bound; the narrow stage shortens its
-    # lineage and venue, while the bibliography retains both in full.
+    # T-060 confirms the exact Trump lower bound; Ahmed's name leaves room for the
+    # whole lineage and venue on the stage.
     11: (
         ("Trump 1979, Squares in Squares (confirmed T-011)", "external", "verified"),
         (
-            "Queuingtheorydotcom after Levy et al. 2026, Web (confirmed T-060)",
+            "Ahmed after Levy, Kleddamag 2026, GitHub (confirmed T-060)",
             "external",
             "verified",
         ),
@@ -825,7 +903,7 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # 1 October replayed as T-074, which took the case on 2026-10-02 from its 28 September
     # certificate (T-070), itself raised that day from the point bound of T-044.
     68: (
-        ("Couzo & Daniel, GitHub (confirmed T-098)", "external", "verified"),
+        ("Couzo & Rehwaldt, GitHub (confirmed T-118)", "external", "verified"),
         (
             "wand125 after Tokoharu, Levy et al. 2026, GitHub (confirmed T-074)",
             "external",
@@ -833,14 +911,15 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
         ),
     ),
     # The catalogue credits nobody, so the line cites the catalogue by its compilers. Since
-    # 6 October 2026 Evan Daniel's exact certificate of the packing (T-101) checks the bound
-    # to one unit of its fourteenth decimal, short of the closed form, so the line says both,
-    # as n = 29's does, and the venue gives way to the note. The lower line was Nagamochi's
+    # 6 October 2026 Evan Daniel's exact certificate of the packing (T-101) checks a ceiling
+    # one unit above its fourteenth decimal, short of the reported closed form. That earlier
+    # certificate remains a result link and does not confirm the displayed value.
+    # The lower line was Nagamochi's
     # until 3 October 2026, when the replayed linear certificate of 2 October was recorded
     # (T-080); on PR 305's line it was Karakuş's from 2 October (T-083) until the two lines
     # merged.
     101: (
-        ("Friedman & Ellsworth (reported; confirmed T-101)", "external", "reported"),
+        ("Friedman & Ellsworth, Squares in Squares (reported)", "external", "reported"),
         (
             "wand125 after Tokoharu, Levy et al. 2026, GitHub (confirmed T-080)",
             "external",
@@ -889,7 +968,7 @@ def test_the_recorded_register_gives_these_lines(n: int) -> None:
 @pytest.mark.parametrize(
     ("n", "author", "venue", "entry"),
     [
-        (11, "Queuingtheorydotcom after Levy et al.", "Web", "T-060"),
+        (11, "Ahmed after Levy, Kleddamag", "GitHub", "T-060"),
         (17, "Guzhou0806 after Kleddamag et al.", "GitHub", "T-093"),
         # Tokoharu's T-047 held n = 26 and 29 until 2026-10-02, when wand125's merged
         # rectangle replays raised both, n = 26 under T-045 and n = 29 under T-070, and
@@ -908,9 +987,9 @@ def test_promoted_external_bounds_keep_the_sources_credit(
     Since 2026-09-29 the register holds others' results (epistemics.md, Results by
     Others), so a promoted external bound has an entry of its own that carries the
     replay: the credit stays the source's, the result id stays empty because the bound
-    is not this project's, and the entry is named as what confirms it. Each of these
-    credits names more links than the line has room for beside its confirmation, so the
-    stage prints the source's `short_credit`, and every other renderer the whole credit.
+    is not this project's, and the entry is named as what confirms it. Ahmed's whole
+    credit fits beside its confirmation. The other credits need the source's
+    `short_credit` on the stage; every other renderer prints the whole credit.
     """
     lower = _entry(n)["lower"]
     assert _line(lower) == (
@@ -921,8 +1000,11 @@ def test_promoted_external_bounds_keep_the_sources_credit(
     assert lower["result"] is None
     assert lower["confirmed_by"] == [entry]
     source = _register().sources[lower["source_key"]]
-    assert author == source.short_credit
-    assert author in citations.short_credits(source.credited)
+    if n == 11:
+        assert author == source.credited
+    else:
+        assert author == source.short_credit
+        assert author in citations.short_credits(source.credited)
 
 
 def test_n29_credits_finder_and_optimizer_and_takes_the_registers_verdict() -> None:
@@ -930,15 +1012,18 @@ def test_n29_credits_finder_and_optimizer_and_takes_the_registers_verdict() -> N
 
     Its assurance is whatever `bounds_agree_at_declared_precision` says, as for every other
     case; this test names it so a change of that rule is seen here, not special-cased. The
-    certificate is scored new and the packing is still Schadt and Ellsworth's, so T-009
-    confirms the bound and does not make it this project's.
+    certificate is scored new and the packing is still Schadt and Ellsworth's. T-009
+    remains linked to the case but its weaker ceiling does not confirm the displayed bound.
     """
     case = citations.load_case(29)
     upper = _entry(29)["upper"]
-    # The one bound that is both reported and confirmed, and so the one line that says both.
     assert upper["text"] == "Schadt & Ellsworth, Squares in Squares"
-    assert upper["note"] == "(reported; confirmed T-009)"
-    assert (upper["basis"], upper["confirmed_by"]) == ("external", ["T-009"])
+    assert upper["note"] == "(reported)"
+    assert (upper["basis"], upper["confirmed_by"], upper["results"]) == (
+        "external",
+        [],
+        ["T-009"],
+    )
     agrees = bounds_agree_at_declared_precision(
         case["reported_upper_bound"], case["verified_upper_bound"]
     )
@@ -1141,7 +1226,7 @@ def test_the_project_lower_bounds_are_exactly_those_first_proved_here() -> None:
 
 
 def test_the_star_marks_recent_results_whoever_proved_them() -> None:
-    """n = 11 is starred as Queuingtheorydotcom's, and project bounds are too.
+    """n = 11 is starred as Ahmed's, and project bounds are too.
 
     Kleddamag's 3.875, developed from T-026, preceded the exact T-060 proof. Credit
     is the line's business: joint work names this project after the author, other work
@@ -1151,7 +1236,7 @@ def test_the_star_marks_recent_results_whoever_proved_them() -> None:
     """
     lines = {entry["n"]: entry["lower"] for entry in _record()["entries"]}
     assert lines[11]["recent"]
-    assert lines[11]["text"] == "Queuingtheorydotcom after Levy et al. 2026, Web"
+    assert lines[11]["text"] == "Ahmed after Levy, Kleddamag 2026, GitHub"
     assert lines[12]["recent"]
     # squarepacker's re-weighting of Daniel's points since 5 October 2026 (T-095), after
     # this project's (T-079), which named the project; the credit names Levy for Route B.

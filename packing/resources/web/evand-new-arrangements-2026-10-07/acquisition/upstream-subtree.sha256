@@ -1,0 +1,9 @@
+c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578  ./LICENSE
+778884d09f88ce159ea2cea2134d30fb14bf01bf58fc9e69c6f3d77433da8168  ./s12/CREDITS.md
+c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578  ./s12/LICENSE
+7317817e1e84a667114e5dae5728f72927abed2b133c04cd321833cc78b73a48  ./s12/search/exact/README.md
+72a764513e0eef50cad798184ead0334f3d4bc5428fc878c6da59e9718781f3e  ./s12/search/exact/results/sw2/dc1_n266.cert
+286e186ef21e4a4fd9fd84c69a39d52bc322b35e1111c096115e3561ad99ec89  ./s12/search/exact/results/sw2/rd1_n272.cert
+c0310361895273cef4ae6c85c87c0569120a5c4201cb65ca67733f53b3294f97  ./s12/search/exact/results/sw2/sw2_n270.cert
+3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52  ./s12/search/exact/verify_cert.py
+55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3  ./s12/search/exact/verify_cert2.py

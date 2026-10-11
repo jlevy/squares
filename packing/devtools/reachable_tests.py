@@ -43,8 +43,10 @@ from __future__ import annotations
 import argparse
 import ast
 import gc
+import json
 import os
 import re
+import shlex
 import subprocess
 import sys
 from collections.abc import Sequence
@@ -52,7 +54,9 @@ from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
 
-from sqpack.cli.validate import BEHAVIORAL_TEST_ROOTS, changed_paths
+from yaml import YAMLError
+
+from sqpack.cli.validate import BEHAVIORAL_TEST_ROOTS, QUICK_TESTS, changed_paths
 from sqpack.release import DATA_PATHS as RELEASE_DATA_PATHS
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -87,6 +91,15 @@ SUITE_WIDE = (
     "uv.lock",
     "tests/conftest.py",
     ".python-version",
+)
+
+PAGES_WORKFLOW = ".github/workflows/pages.yml"
+
+#: think-xyub: only configuration-only pushes move the complete slow lane to the
+#: matching PR fast + Deferred checkpoint. Mixed changes keep local slow coverage;
+#: unknown workflows and other fallbacks retain the original execution policy.
+CONFIGURATION_ONLY_PUSH_PATHS = frozenset(
+    (*SUITE_WIDE, ".github/workflows/packing-validation.yml", ".github/workflows/deep-gate.yml")
 )
 
 WALKER_MARKERS = ("rglob(", "iterdir(", ".glob(", "listdir(", "importlib", "__import__")
@@ -250,18 +263,99 @@ def _walker_evidence(path: Path) -> bool:
     return _walker_markers_in(source, tree)
 
 
-def select_tests(changed: list[str]) -> TestSelection:
-    """The test files a change to `changed` (repo-relative paths) can reach."""
+def _pages_workflow_inputs() -> set[Path]:
+    """Publication invocation inputs, without pretending unchanged libraries were edited.
+
+    Reuse the site's live declarations and command resolver. Every literal pytest
+    target is included: the scope resolver recognizes only the first per command line.
+    Directory declarations retain their builder/tool contracts rather than marking
+    every descendant as changed. Actual changed Python/config paths are checked first.
+    """
+    from devtools import pages_scope  # noqa: PLC0415
+
+    workflow = pages_scope.load_workflow()
+    jobs = tuple(workflow["jobs"].values())
+    files = pages_scope.import_closure(pages_scope.commands_run(jobs))
+    for builder in pages_scope.BUILDER_INPUTS.values():
+        for path in builder():
+            if not path.exists():
+                raise FileNotFoundError(f"declared Pages input is missing: {path}")
+            if path.is_file():
+                files.add(path.resolve())
+    for job in jobs:
+        for step in job.get("steps", []):
+            command = str(step.get("run", ""))
+            for module in re.findall(r"\bpython\s+-m\s+(\S+)", command):
+                if module in {"playwright", "pytest"}:
+                    continue
+                if re.fullmatch(r"(?:devtools|workbench_tools)(?:\.\w+)+", module) is None:
+                    raise ValueError(f"unknown Pages Python entrypoint: {module}")
+            targets = re.findall(r"\btests/[\w/.-]+\.py\b", command)
+            for line in command.replace("\\\n", " ").splitlines():
+                if re.search(r"\bpytest\b", line) is None:
+                    continue
+                words = shlex.split(line, comments=True)
+                if "pytest" not in words:
+                    continue
+                arguments = words[words.index("pytest") + 1 :]
+                if not arguments or not any(word != "-q" for word in arguments):
+                    raise ValueError("Pages pytest invocation has no explicit test files")
+                if any(
+                    word != "-q" and re.fullmatch(r"tests/[\w/.-]+\.py(?:::.+)?", word) is None
+                    for word in arguments
+                ):
+                    raise ValueError("Pages pytest invocation contains an unknown selection")
+            for target in targets:
+                path = (ROOT / target).resolve()
+                if not path.is_file():
+                    raise FileNotFoundError(f"Pages test target is missing: {target}")
+                files.add(path)
+    files.update(
+        ROOT / "tests" / name for name in ("test_pages_workflow.py", "test_pages_scope.py")
+    )
+    files.add(Path(pages_scope.__file__).resolve())
+    if any(not path.is_relative_to(REPO) for path in files):
+        raise ValueError("a Pages input is outside the repository")
+    return files
+
+
+def _suite_configuration_reason(changed: list[str]) -> str | None:
     if not changed:
-        return TestSelection(everything=True, reason="no changed paths were determined")
+        return "no changed paths were determined"
 
     for path in changed:
-        if path in SUITE_WIDE or path.startswith(".github/"):
-            return TestSelection(everything=True, reason=f"{path} configures the suite")
+        if path in SUITE_WIDE or (path.startswith(".github/") and path != PAGES_WORKFLOW):
+            return f"{path} configures the suite"
         resolved = (REPO / path).resolve()
         if path.endswith(".py") and _module_name(resolved) is None:
+            return f"{path} is Python outside the mapped roots"
+
+    return None
+
+
+def select_tests(changed: list[str]) -> TestSelection:
+    """The test files a change to `changed` (repo-relative paths) can reach."""
+    configuration = _suite_configuration_reason(changed)
+    if configuration is not None:
+        return TestSelection(everything=True, reason=configuration)
+
+    publication_inputs: set[Path] = set()
+    if PAGES_WORKFLOW in changed:
+        try:
+            publication_inputs = _pages_workflow_inputs()
+        except (
+            OSError,
+            ValueError,
+            SyntaxError,
+            ImportError,
+            TypeError,
+            KeyError,
+            AttributeError,
+            SystemExit,
+            YAMLError,
+        ) as exc:
             return TestSelection(
-                everything=True, reason=f"{path} is Python outside the mapped roots"
+                everything=True, reason=f"Pages invocation inputs could not be resolved: {exc}"
             )
 
     modules = _mapped_files()
@@ -291,6 +385,18 @@ def select_tests(changed: list[str]) -> TestSelection:
             changed_dotted.add(name)
         else:
             changed_basenames.add(Path(path).name)
+
+    for path in publication_inputs:
+        # Workflow discovery includes these to resolve imports, but the workflow
+        # has not edited package initializers or changed the pytest environment.
+        if path.name in {"__init__.py", "conftest.py"}:
+            continue
+        name = _module_name(path) if path.suffix == ".py" else None
+        if name is not None:
+            changed_modules.add(name)
+            changed_dotted.add(name)
+        else:
+            changed_basenames.add(path.name)
 
     # `release.data_revision` reads these Git paths rather than their file contents.
     # Give that declared non-Python input the same import-closure treatment as an edit
@@ -357,7 +463,7 @@ def pytest_command(
     all, so the pre-push tier's behavioural step ran in one process at every `--jobs`
     value, including the `--jobs 1` that `_xdist_distribution` documents as the way to
     get four workers on a four-cpu box. The whole-suite fallback is the expensive case:
-    any change to a workflow file or to suite configuration selects everything, which is
+    other workflow changes or suite configuration select everything, which is
     the quick lane and the slow lane together in a single process.
     """
     distribution = ("-n", str(workers)) if workers > 1 else ()
@@ -385,7 +491,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Select the test files a change can reach, erring toward running too many."
     )
-    parser.add_argument("--since", metavar="REF", default="origin/main")
+    change = parser.add_mutually_exclusive_group()
+    change.add_argument("--since", metavar="REF", default="origin/main")
+    change.add_argument(
+        "--changed-paths-file",
+        type=Path,
+        metavar="JSON",
+        help="use a captured JSON list of changed paths instead of re-reading Git",
+    )
     parser.add_argument(
         "--summary",
         action="store_true",
@@ -394,7 +507,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--run",
         action="store_true",
-        help="run pytest on the selection (the whole non-exhaustive suite when everything)",
+        help="run pytest on the selection; configuration-only pushes defer slow tests to CI",
     )
     parser.add_argument(
         "-n",
@@ -425,7 +538,19 @@ def main(argv: Sequence[str] | None = None) -> int:
     if namespace.pool_workers is not None and not namespace.run:
         parser.error("--pool-workers requires --run")
 
-    selection = select_tests(changed_paths(namespace.since))
+    if namespace.changed_paths_file is None:
+        changed = changed_paths(namespace.since)
+    else:
+        try:
+            value = json.loads(namespace.changed_paths_file.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as error:
+            parser.error(f"cannot read changed-path snapshot: {error}")
+        if not isinstance(value, list) or any(
+            not isinstance(path, str) or not path or "\0" in path for path in value
+        ):
+            parser.error("changed-path snapshot must be a JSON list of nonempty path strings")
+        changed = value
+    selection = select_tests(changed)
     if namespace.summary:
         print("everything" if selection.everything else f"narrow {len(selection.tests)}")
         return 0
@@ -443,11 +568,22 @@ def main(argv: Sequence[str] | None = None) -> int:
         if selection.everything
         else [os.path.relpath(REPO / test, start=ROOT) for test in selection.tests]
     )
-    # `not exhaustive_exact`, which keeps the `slow` lane in. That is deliberate and it
-    # is the difference between this tier and the pull-request surface: `--fast` defers
-    # every test above the per-test ceiling because it pays for them on every pull
-    # request, while `--push` pays only for the tests your own change reaches, and a slow
-    # test your change reaches is exactly the one worth waiting for.
+    # Reachability remains conservative. Only a nonempty configuration-only change
+    # moves slow execution to the existing matching-tree CI checkpoint (think-xyub).
+    # Any mixed source/record change, narrow selection or unknown fallback keeps slow
+    # tests locally; exhaustive tests already belong to the final checkpoint.
+    marker = (
+        QUICK_TESTS
+        if selection.everything
+        and changed
+        and all(path in CONFIGURATION_ONLY_PUSH_PATHS for path in changed)
+        else "not exhaustive_exact"
+    )
+    if marker == QUICK_TESTS:
+        print(
+            "configuration-only push: slow and exhaustive coverage requires passing "
+            "PR fast + Deferred checkpoint on the same source/base before merge (think-xyub)"
+        )
     parent_stem_value = os.environ.get("PACKING_REACHABLE_TEST_ARTIFACT_STEM")
     parent_stem: Path | None = None
     child_environment: dict[str, str] | None = None
@@ -495,7 +631,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return subprocess.run(command, cwd=ROOT, check=False, env=environment).returncode
 
     if namespace.pool_workers is None:
-        return run_phase("pytest-all", "not exhaustive_exact", namespace.numprocesses, None)
+        return run_phase("pytest-all", marker, namespace.numprocesses, None)
 
     def empty_lane(marker: str) -> bool:
         # xdist's exit 5 could hide a collection mismatch. Only a separate serial
@@ -512,8 +648,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         return subprocess.run(probe, cwd=ROOT, check=False).returncode == 5
 
-    normal_marker = "not exhaustive_exact and not pool_heavy"
-    pool_marker = "not exhaustive_exact and pool_heavy"
+    normal_marker = f"{marker} and not pool_heavy"
+    pool_marker = f"{marker} and pool_heavy"
     normal_status = run_phase("pytest-normal", normal_marker, namespace.numprocesses, 1)
     if normal_status != 0 and (normal_status != 5 or not empty_lane(normal_marker)):
         return normal_status

@@ -271,8 +271,8 @@ def test_the_handover_is_sampled_where_the_section_changes_in_each_way() -> None
     wainwright = ("Wainwright 1979, Squares in Squares", None, None)
     assert cited_lines(entries["19"]) == {"upper": wainwright}
     assert cited_lines(entries["1"]) == {}
-    # The one bound that is both reported and confirmed says both in its one note, which is
-    # why the note exists: it used to be drawn as two marks in two styles (`think-qzmf`).
+    # The historical fixture keeps both notes; the renderer must preserve its admitted
+    # vocabulary. Current-data confirmation is qualified by the citation producer.
     assert cited_lines(entries["29"])["upper"] == (
         "Schadt & Ellsworth, Squares in Squares",
         None,
@@ -280,6 +280,26 @@ def test_the_handover_is_sampled_where_the_section_changes_in_each_way() -> None
     )
     # 4 is the first n cited at all; 5 gains an upper line, and 18 changes a reference.
     assert citation_steps(entries, N_MAX) == (4, 5, 18)
+
+
+@pytest.mark.parametrize(("n", "earlier_result"), [(29, "T-009"), (123, "T-098")])
+def test_the_current_handover_does_not_label_an_earlier_ceiling_as_confirmation(
+    n: int,
+    earlier_result: str,
+) -> None:
+    document = json.loads(CITATIONS.read_text(encoding="utf-8"))
+    entry = next(row for row in document["citations"]["entries"] if row["n"] == n)
+    assert earlier_result not in entry["upper"]["confirmed_by"]
+    if n == 123:
+        assert entry["upper"]["results"] == ["T-125"]
+        assert entry["upper"]["assurance"] == "verified"
+        assert entry["upper"]["confirmed_by"] == ["T-125"]
+        assert cited_lines(entry)["upper"][2] == "(confirmed T-125)"
+    else:
+        assert earlier_result in entry["upper"]["results"]
+        assert entry["upper"]["assurance"] == "reported"
+        assert entry["upper"]["confirmed_by"] == []
+        assert cited_lines(entry)["upper"][2] == "(reported)"
 
 
 def test_a_lower_bound_names_the_published_work_it_corrects(tmp_path: Path) -> None:
@@ -329,3 +349,40 @@ def test_the_fold_is_made_as_the_page_loads_not_in_the_file() -> None:
         "Karakus 2026"
     )
     assert cited_lines(row)["lower"][0].startswith("Karakus 2026")
+
+
+@pytest.mark.parametrize(
+    ("known", "legacy_style", "expected"),
+    [(True, "muted", True), (False, "solid", False), (None, "muted", True), (True, None, True)],
+)
+def test_facts_display_one_dark_r_from_the_selected_packing_assessment(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    known: bool | None,
+    legacy_style: str | None,
+    expected: bool,
+) -> None:
+    from workbench_tools import build_candidate  # noqa: PLC0415
+
+    entry = json.loads(build_candidate.COMPOSITE.read_text())["figure"]["entries"][0]
+    entry["badges"] = [badge for badge in entry["badges"] if badge["glyph"] != "R"]
+    if legacy_style is not None:
+        entry["badges"].append(
+            {"glyph": "R", "style": legacy_style, "meaning": "legacy rigidity assurance"}
+        )
+    if known is None:
+        entry["rigidity"].pop("known_rigid", None)
+    else:
+        entry["rigidity"]["known_rigid"] = known
+    record = {"figure": {"entries": [entry]}}
+    path = tmp_path / "composite.json"
+    path.write_text(json.dumps(record))
+    monkeypatch.setattr(build_candidate, "COMPOSITE", path)
+    monkeypatch.setattr(build_candidate, "katex_html", lambda tex: ["<math/>" for _ in tex])
+    facts = build_candidate.load_facts({1: {"source": {"kind": "exact-grid"}}})
+    rigid = [badge for badge in facts["1"]["badges"] if badge["glyph"] == "R"]
+    assert rigid == (
+        [{"glyph": "R", "style": "solid", "meaning": "known rigid"}] if expected else []
+    )
+    assert json.loads(path.read_text()) == record

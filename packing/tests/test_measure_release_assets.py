@@ -15,7 +15,10 @@ from pathlib import Path
 
 import pytest
 
+from devtools import build_known_best_atlas as atlas
 from devtools import measure_release_assets as measure
+from devtools import render_composite_pdf
+from sqpack.known_best import CompositeSpec
 
 SCRATCH_GIT = (
     "-c",
@@ -127,6 +130,81 @@ def test_a_commits_cost_is_its_new_blobs_and_whether_a_drawing_changed(
     assert measure.history("HEAD", "", 30, [POSTER], None) == 0
     with pytest.raises(SystemExit, match="no commit on HEAD matches"):
         measure.history("HEAD", "no such subject", 30, [], None)
+
+
+def test_release_cost_counts_legacy_and_dated_pdf_exports(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo = tmp_path / "origin"
+    repo.mkdir()
+    _git(repo, "init", "--quiet")
+    monkeypatch.setattr(measure, "REPO", repo)
+    _commit(repo, "baseline", {"README.md": b"baseline\n"})
+    pdfs = {
+        "packing/atlas/known-best/known-best-1-324.pdf": b"legacy PDF",
+        "packing/atlas/known-best/square-packings-100-20261008.pdf": b"dated hundred PDF",
+        "packing/atlas/known-best/square-packings-324-20261008.pdf": b"dated poster PDF",
+    }
+    changed = _commit(repo, "PDF edition", {**pdfs, "papers/other.pdf": b"other PDF"})
+    cost = measure.commit_cost(changed)
+    assert cost.files == 4
+    assert cost.family_files == 3
+    assert cost.family_blob_bytes == sum(len(content) for content in pdfs.values())
+    assert cost.blob_bytes == cost.family_blob_bytes + len(b"other PDF")
+    assert (cost.redrawn, cost.reframed) == ((), ())
+    for path in (
+        "papers/square-packings-324-20261008.pdf",
+        "packing/atlas/known-best/square-packings-324-20261008.svg",
+        "packing/atlas/known-best/square-packings-324-latest.pdf",
+        "packing/atlas/known-best/square-packings-324-20261008.pdf.bak",
+    ):
+        assert measure.COMPOSITE_FAMILY.search(path) is None
+
+
+def test_pdf_timing_reports_the_published_download_names(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    monkeypatch.setattr(render_composite_pdf, "render_pdf_bytes", lambda _stem: b"PDF")
+    measure._atlas_pdfs()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    report = capsys.readouterr().out
+    assert "square-packings-100-20261008.pdf: 3 bytes" in report
+    assert "square-packings-324-20261008.pdf: 3 bytes" in report
+
+
+def test_raster_timing_uses_resolved_production_dimensions_without_rendering(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    hundred, poster = atlas.COMPOSITES
+    custom = atlas.CompositeCanvas(CompositeSpec(1, 4, 2, "synthetic", raster_scales=(1,)))
+    monkeypatch.setattr(atlas, "COMPOSITES", (*atlas.COMPOSITES, custom))
+    # Cold production geometry reads the retained credit paragraphs from ATLAS_ROOT.
+    (tmp_path / "credit-attributions.json").write_bytes(
+        (atlas.ATLAS_ROOT / "credit-attributions.json").read_bytes()
+    )
+    monkeypatch.setattr(atlas, "ATLAS_ROOT", tmp_path)
+    for canvas in atlas.COMPOSITES:
+        canvas.svg_path.write_text(f"source for {canvas.spec.stem}", encoding="utf-8")
+    requested: list[tuple[str, int, int]] = []
+
+    def capture(export: atlas.RasterExport, svg_text: str) -> bytes:
+        assert svg_text.startswith("source for ")
+        requested.append((export.path.name, export.width, export.height))
+        return b"PNG"
+
+    monkeypatch.setattr(atlas, "png_export_bytes", capture)
+    measure._atlas_rasters()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert requested == [
+        ("known-best-1-100.png", hundred.width, hundred.height),
+        ("known-best-1-100@2x.png", hundred.width * 2, hundred.height * 2),
+        ("known-best-1-100-card.png", hundred.width, hundred.spec.card_units),
+        ("known-best-1-324.png", poster.width, poster.height),
+        ("synthetic.png", custom.width, custom.height),
+    ]
+    assert capsys.readouterr().out.count(": 3 bytes,") == len(requested)
 
 
 def test_the_phases_are_commands_that_exist_and_groups_select_them() -> None:

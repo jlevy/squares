@@ -195,7 +195,13 @@ def test_the_status_chips_take_fills_from_the_scale() -> None:
     WCAG AA or better on it in both themes, and the one `oklch()` that makes them is the
     status rule's, so no status has a colour of its own."""
     statuses = rung_scale.status_fills()
-    assert {fill.rung for fill in statuses} == {"confirmed", "reviewed", "proved", "open"}
+    assert {fill.rung for fill in statuses} == {
+        "confirmed",
+        "reviewed",
+        "proved",
+        "open",
+        "recorded",
+    }
     assert {fill.theme for fill in statuses} == set(rung_scale.THEMES)
     for fill in statuses:
         assert fill.in_gamut, fill

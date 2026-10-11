@@ -1,0 +1,701 @@
+{
+ "rule": "H-335 receipt equality, excluding provenance, directory, seconds",
+ "certificates": [
+  {
+   "certificate": "w125-k-m1000708",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 16,
+    "step": 44
+   },
+   "rust_counts": {
+    "collision_facet_checks": 25348352,
+    "collision_regions": 5824,
+    "cover_checks": 2127,
+    "partner_rows": 13534,
+    "rows_full": 2127,
+    "seed_points": 6,
+    "seed_rows": 512,
+    "steps": 45
+   },
+   "rust_wall_s": 16.61,
+   "rust_peak_rss_kb": 152688,
+   "rust_seconds_self": 16.604,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m1000708/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 147.403,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m1000708.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 108.067,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m14353473",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 16,
+    "step": 192
+   },
+   "rust_counts": {
+    "collision_facet_checks": 42104984,
+    "collision_regions": 15019,
+    "cover_checks": 7230,
+    "partner_rows": 53706,
+    "rows_full": 7230,
+    "seed_points": 10,
+    "seed_rows": 576,
+    "steps": 193
+   },
+   "rust_wall_s": 41.54,
+   "rust_peak_rss_kb": 89528,
+   "rust_seconds_self": 41.489,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m14353473/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 297.676,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m14353473.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 232.257,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m214101",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 4,
+    "step": 154
+   },
+   "rust_counts": {
+    "collision_facet_checks": 31641024,
+    "collision_regions": 12827,
+    "cover_checks": 5541,
+    "partner_rows": 36204,
+    "rows_full": 5541,
+    "seed_points": 8,
+    "seed_rows": 512,
+    "steps": 155
+   },
+   "rust_wall_s": 30.99,
+   "rust_peak_rss_kb": 84492,
+   "rust_seconds_self": 30.982,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m214101/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 229.141,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m214101.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 178.543,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m3869440",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 21,
+    "step": 23
+   },
+   "rust_counts": {
+    "collision_facet_checks": 162246404,
+    "collision_regions": 7377,
+    "cover_checks": 2984,
+    "partner_rows": 20473,
+    "rows_full": 2984,
+    "seed_points": 4,
+    "seed_rows": 1024,
+    "steps": 24
+   },
+   "rust_wall_s": 78.91,
+   "rust_peak_rss_kb": 769188,
+   "rust_seconds_self": 78.786,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m3869440/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 974.21,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m3869440.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 1196.239,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m4657489",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 16,
+    "step": 266
+   },
+   "rust_counts": {
+    "collision_facet_checks": 33742548,
+    "collision_regions": 15037,
+    "cover_checks": 7186,
+    "partner_rows": 53260,
+    "rows_full": 7186,
+    "seed_points": 8,
+    "seed_rows": 576,
+    "steps": 267
+   },
+   "rust_wall_s": 36.5,
+   "rust_peak_rss_kb": 86220,
+   "rust_seconds_self": 36.441,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m4657489/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 316.999,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m4657489.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 217.584,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m5116178",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 8,
+    "step": 266
+   },
+   "rust_counts": {
+    "collision_facet_checks": 47885856,
+    "collision_regions": 17903,
+    "cover_checks": 9096,
+    "partner_rows": 59607,
+    "rows_full": 9096,
+    "seed_points": 6,
+    "seed_rows": 512,
+    "steps": 267
+   },
+   "rust_wall_s": 52.61,
+   "rust_peak_rss_kb": 114852,
+   "rust_seconds_self": 52.572,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5116178/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 384.691,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m5116178.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 309.553,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m5707072",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 8,
+    "step": 37
+   },
+   "rust_counts": {
+    "collision_facet_checks": 202973944,
+    "collision_regions": 12658,
+    "cover_checks": 4466,
+    "partner_rows": 33487,
+    "rows_full": 4466,
+    "seed_points": 6,
+    "seed_rows": 1152,
+    "steps": 38
+   },
+   "rust_wall_s": 103.44,
+   "rust_peak_rss_kb": 782464,
+   "rust_seconds_self": 103.329,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5707072/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 1271.843,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m5707072.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 1384.048,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m6177056",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 19,
+    "step": 253
+   },
+   "rust_counts": {
+    "collision_facet_checks": 204028440,
+    "collision_regions": 34647,
+    "cover_checks": 14581,
+    "partner_rows": 97044,
+    "rows_full": 14581,
+    "seed_points": 4,
+    "seed_rows": 512,
+    "steps": 254
+   },
+   "rust_wall_s": 128.17,
+   "rust_peak_rss_kb": 157044,
+   "rust_seconds_self": 128.136,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m6177056/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 1617.771,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m6177056.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 1276.331,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m7799616",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 21,
+    "step": 70
+   },
+   "rust_counts": {
+    "collision_facet_checks": 34965856,
+    "collision_regions": 8283,
+    "cover_checks": 3399,
+    "partner_rows": 25178,
+    "rows_full": 3399,
+    "seed_points": 6,
+    "seed_rows": 576,
+    "steps": 71
+   },
+   "rust_wall_s": 33.23,
+   "rust_peak_rss_kb": 192852,
+   "rust_seconds_self": 33.195,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7799616/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 283.992,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m7799616.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 226.735,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m7815200",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 22,
+    "step": 191
+   },
+   "rust_counts": {
+    "collision_facet_checks": 27419932,
+    "collision_regions": 12589,
+    "cover_checks": 6069,
+    "partner_rows": 39140,
+    "rows_full": 6069,
+    "seed_points": 6,
+    "seed_rows": 512,
+    "steps": 192
+   },
+   "rust_wall_s": 30.74,
+   "rust_peak_rss_kb": 89228,
+   "rust_seconds_self": 30.698,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7815200/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 311.032,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m7815200.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 180.167,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m935012",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 10,
+    "step": 27
+   },
+   "rust_counts": {
+    "collision_facet_checks": 27409328,
+    "collision_regions": 4942,
+    "cover_checks": 1792,
+    "partner_rows": 12484,
+    "rows_full": 1792,
+    "seed_points": 4,
+    "seed_rows": 512,
+    "steps": 28
+   },
+   "rust_wall_s": 18.51,
+   "rust_peak_rss_kb": 171280,
+   "rust_seconds_self": 18.473,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m935012/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 197.896,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m935012.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 125.063,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  },
+  {
+   "certificate": "w125-k-m983396",
+   "rust_status": "PASS",
+   "rust_failure": null,
+   "rust_closed": true,
+   "rust_closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 19,
+    "step": 383
+   },
+   "rust_counts": {
+    "collision_facet_checks": 94625604,
+    "collision_regions": 34983,
+    "cover_checks": 19415,
+    "partner_rows": 131337,
+    "rows_full": 19415,
+    "seed_points": 6,
+    "seed_rows": 512,
+    "steps": 384
+   },
+   "rust_wall_s": 148.27,
+   "rust_peak_rss_kb": 101904,
+   "rust_seconds_self": 148.229,
+   "rust_provenance": {
+    "implementation": "rust",
+    "crate": "n17-kernel-verifier",
+    "version": "0.1.0",
+    "source_sha256": "3ae979c3b16380882e6ade275363a2ad3317367ca8d782101c46c6adf6515b84"
+   },
+   "contributor": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m983396/verification.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 761.468,
+    "python_provenance": {
+     "revision": "14c251461d4316ec4ceed0c482bd30ecf6aba1de",
+     "dirty": true,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   },
+   "replay": {
+    "path": "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m983396.json",
+    "fields_compared": 26,
+    "agree": true,
+    "differences": {},
+    "python_seconds": 1026.452,
+    "python_provenance": {
+     "revision": "3213d651b880d7768bce8506efaf75c2089aeb4f",
+     "dirty": false,
+     "files": {
+      "packing/devtools/verify_n17_kernel_certificate.py": "1ad706c21d04cc4a052af8a942c848cbca59fd76"
+     }
+    }
+   }
+  }
+ ]
+}

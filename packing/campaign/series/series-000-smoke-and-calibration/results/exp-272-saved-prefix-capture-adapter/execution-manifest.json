@@ -1,0 +1,14 @@
+{
+  "experiment": "exp-272",
+  "hypothesis": "H-286",
+  "cwd": "/Users/levy/wrk/github/squares/packing",
+  "argv": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3","-m","devtools.check_n17_capture_leaf","--leaf","campaign/series/series-000-smoke-and-calibration/results/exp-272-saved-prefix-capture-adapter/descriptor.json","--max-seconds","180","--fresh-replay-seconds","60","--max-nodes","200000","--output","campaign/series/series-000-smoke-and-calibration/results/exp-272-saved-prefix-capture-adapter/receipt.json"],
+  "parent_seconds": 180,
+  "child_max_seconds": 60,
+  "child_within_parent": true,
+  "term_seconds": 180,
+  "kill_seconds": 190,
+  "no_optional_terminal_inputs": true,
+  "scientific_leaf_unrun": true,
+  "source_freeze": "registration commit; relevant source clean before launch"
+}

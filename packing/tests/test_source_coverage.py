@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+import pytest
 from jsonschema_rs import Draft202012Validator
 
 from devtools import check_source_coverage as coverage_check
@@ -269,3 +270,291 @@ def test_the_schema_requires_an_owner_on_every_deferral() -> None:
 
 def test_the_recorded_coverage_reconciles() -> None:
     assert coverage_check.main() == 0
+
+
+def _dated_source(identifier: str, day: str | None, values: list[int]) -> dict[str, Any]:
+    return {
+        "id": identifier,
+        "scope": {"n_values": values},
+        "evidence": [f"E-{identifier}-report"],
+        "source_date": day,
+        "claims_record": f"resources/web/{identifier}/acquisition/sources.json",
+    }
+
+
+def _row(
+    source_id: str, n: int, value: str, superseded_by: str | None = None
+) -> dict[str, Any]:
+    row: dict[str, Any] = {
+        "n": n,
+        "source_id": source_id,
+        "claim": "upper-bound",
+        "value": value,
+        "assurance": "reported",
+        "disposition": "tracked-outside-case-corpus",
+    }
+    if superseded_by is not None:
+        row |= {"disposition": "superseded", "superseded_by": superseded_by}
+    return row
+
+
+#: Three dated reports of one upper bound at n = 400, each beating the last by less than
+#: a binary64 value can show, and two at n = 401.
+FIRST_SIDE, SECOND_SIDE, THIRD_SIDE = (
+    "20.00000000000000000002",
+    "20.00000000000000000001",
+    "20.0",
+)
+
+
+def _beyond() -> tuple[dict[str, Any], dict[str, dict[int, str]]]:
+    coverage = _coverage()
+    coverage["sources"] += [
+        _dated_source("first", "2026-10-01", [400, 401]),
+        _dated_source("second", "2026-10-02", [400]),
+        _dated_source("third", "2026-10-02", [400]),
+        _dated_source("late", "2026-10-03", [401]),
+    ]
+    coverage["beyond_horizon_claims"] = [
+        _row("first", 400, FIRST_SIDE, superseded_by="second"),
+        _row("second", 400, SECOND_SIDE, superseded_by="third"),
+        _row("third", 400, THIRD_SIDE),
+        _row("first", 401, "20.1", superseded_by="late"),
+        _row("late", 401, "20.05"),
+    ]
+    claims = {
+        **CLAIMS,
+        "first": {400: FIRST_SIDE, 401: "20.1"},
+        "second": {400: SECOND_SIDE},
+        "third": {400: THIRD_SIDE},
+        "late": {401: "20.05"},
+    }
+    return coverage, claims
+
+
+def _beyond_errors(coverage: dict[str, Any], claims: dict[str, dict[int, str]]) -> list[str]:
+    return coverage_check.beyond_horizon_errors(coverage, claims)[0]
+
+
+def test_dated_beyond_horizon_rows_reconcile_by_exact_comparison() -> None:
+    """Each successor beats its predecessor below binary64 resolution, and is accepted."""
+    assert float(FIRST_SIDE) == float(SECOND_SIDE) == float(THIRD_SIDE)
+    coverage, claims = _beyond()
+    assert _errors(coverage, claims) == []
+    errors, inventory = coverage_check.beyond_horizon_errors(coverage, claims)
+    assert errors == []
+    assert inventory == {"first": {400, 401}, "second": {400}, "third": {400}, "late": {401}}
+    current = coverage_check.current_beyond_horizon(coverage)
+    assert {n: row["source_id"] for n, row in current.items()} == {400: "third", 401: "late"}
+
+
+def test_the_current_row_is_found_wherever_it_is_listed_and_never_chosen() -> None:
+    coverage, claims = _beyond()
+    rows = coverage["beyond_horizon_claims"]
+    # Each count's current row listed before the rows it supersedes.
+    rows.insert(0, rows.pop(2))
+    rows.insert(0, rows.pop())
+    assert [(row["n"], row["source_id"]) for row in rows[:3]] == [
+        (401, "late"),
+        (400, "third"),
+        (400, "first"),
+    ]
+    assert _beyond_errors(coverage, claims) == []
+    current = coverage_check.current_beyond_horizon(coverage)
+    assert {n: row["source_id"] for n, row in current.items()} == {400: "third", 401: "late"}
+    rows[2] = _row("first", 400, FIRST_SIDE)
+    with pytest.raises(
+        ValueError, match=r"n=400 has more than one current row \(third, first\)"
+    ):
+        coverage_check.current_beyond_horizon(coverage)
+
+
+def test_a_beyond_horizon_row_is_unique_by_count_and_source() -> None:
+    coverage, claims = _beyond()
+    coverage["beyond_horizon_claims"].append(_row("third", 400, THIRD_SIDE))
+    assert _beyond_errors(coverage, claims) == [
+        "beyond-horizon n=400 from third is listed twice; a count has one row per source"
+    ]
+
+
+def test_a_count_has_at_most_one_current_row() -> None:
+    coverage, claims = _beyond()
+    coverage["beyond_horizon_claims"][0] = _row("first", 400, FIRST_SIDE)
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=400 has 2 current rows (first, third); a count has at most one, "
+            "and each earlier report names the row that supersedes it"
+        )
+    ]
+
+
+def test_only_a_superseded_row_names_a_successor_and_it_always_does() -> None:
+    coverage, claims = _beyond()
+    del coverage["beyond_horizon_claims"][1]["superseded_by"]
+    coverage["beyond_horizon_claims"][2]["superseded_by"] = "second"
+    errors = _beyond_errors(coverage, claims)
+    assert "beyond-horizon n=400 from second is superseded but names no successor" in errors
+    assert (
+        "beyond-horizon n=400 from third names successor second but is not superseded" in errors
+    )
+
+
+def test_a_successor_is_a_row_at_the_same_count() -> None:
+    coverage, claims = _beyond()
+    coverage["beyond_horizon_claims"][1]["superseded_by"] = "late"
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=400 from second names successor late, which has no row at "
+            "n=400; its rows are at n=[401]"
+        )
+    ]
+    coverage["beyond_horizon_claims"][1]["superseded_by"] = "unknown"
+    assert _beyond_errors(coverage, claims) == [
+        ("beyond-horizon n=400 from second names successor unknown, which has no row at n=400")
+    ]
+
+
+def test_a_successor_is_dated_no_earlier() -> None:
+    coverage, claims = _beyond()
+    coverage["sources"][-2]["source_date"] = "2026-09-30"
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=400 from second is dated 2026-10-02, after its successor from "
+            "third, dated 2026-09-30"
+        )
+    ]
+    coverage["sources"][-2]["source_date"] = None
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=400 from second: third has no source_date, and a supersession "
+            "orders dated reports"
+        )
+    ]
+
+
+def test_a_successor_is_strictly_better_compared_exactly() -> None:
+    coverage, claims = _beyond()
+    # Equal to its predecessor, and then above it: by less than binary64 can show.
+    for value in (SECOND_SIDE, "20.000000000000000000015"):
+        coverage["beyond_horizon_claims"][2]["value"] = value
+        claims["third"][400] = value
+        assert _beyond_errors(coverage, claims) == [
+            (
+                f"beyond-horizon n=400 from second: {SECOND_SIDE} is not strictly beaten by "
+                f"{value} from third, compared exactly"
+            )
+        ]
+
+
+def test_a_lower_bound_is_beaten_from_below_and_an_exact_value_never_is() -> None:
+    coverage, claims = _beyond()
+    rows = coverage["beyond_horizon_claims"]
+    for row in rows[:3]:
+        row["claim"] = "lower-bound"
+    # Each later side is smaller, which loses as a lower bound.
+    assert _beyond_errors(coverage, claims) == [
+        (
+            f"beyond-horizon n=400 from {owner}: {earlier} is not strictly beaten by "
+            f"{later} from {successor}, compared exactly"
+        )
+        for owner, earlier, successor, later in (
+            ("first", FIRST_SIDE, "second", SECOND_SIDE),
+            ("second", SECOND_SIDE, "third", THIRD_SIDE),
+        )
+    ]
+    for row, value in zip(rows[:3], (THIRD_SIDE, SECOND_SIDE, FIRST_SIDE), strict=True):
+        row["value"] = value
+        claims[row["source_id"]][400] = value
+    assert _beyond_errors(coverage, claims) == []
+    # A lower bound, too, must be beaten strictly: an equal later report does not.
+    rows[2]["value"] = claims["third"][400] = SECOND_SIDE
+    assert _beyond_errors(coverage, claims) == [
+        (
+            f"beyond-horizon n=400 from second: {SECOND_SIDE} is not strictly beaten by "
+            f"{SECOND_SIDE} from third, compared exactly"
+        )
+    ]
+    rows[2]["value"] = claims["third"][400] = FIRST_SIDE
+    rows[2]["claim"] = "upper-bound"
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=400 from second claims lower-bound, and its successor from "
+            "third claims upper-bound"
+        )
+    ]
+    for row in rows[:3]:
+        row["claim"] = "exact-value"
+    message = (
+        "an exact-value claim is never superseded; a later report that differs from it "
+        "conflicts with it, and one that agrees adds nothing"
+    )
+    assert _beyond_errors(coverage, claims) == [
+        f"beyond-horizon n=400 from {owner}: {message}" for owner in ("first", "second")
+    ]
+    # Equal exact values are refused the same way.
+    for row in rows[:3]:
+        row["value"] = claims[row["source_id"]][400] = THIRD_SIDE
+    assert _beyond_errors(coverage, claims) == [
+        f"beyond-horizon n=400 from {owner}: {message}" for owner in ("first", "second")
+    ]
+
+
+def test_a_row_never_names_itself_as_its_successor() -> None:
+    """Longer cycles need no check of their own: a cycle of strictly better links would
+    make some value strictly better than itself, so the strictness rule refuses one."""
+    coverage, claims = _beyond()
+    rows = coverage["beyond_horizon_claims"]
+    rows[0]["superseded_by"] = "first"
+    assert _beyond_errors(coverage, claims) == [
+        "beyond-horizon n=400 from first names itself as its successor"
+    ]
+
+
+def test_a_dated_row_keeps_its_sources_facts_byte_for_byte() -> None:
+    coverage, claims = _beyond()
+    coverage["beyond_horizon_claims"][3]["value"] = "20.10"
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=401 from first reads '20.10', not '20.1' as its source prints "
+            "it; a dated row keeps its source's facts byte for byte"
+        )
+    ]
+    coverage["beyond_horizon_claims"][3]["value"] = "20.2"
+    assert _beyond_errors(coverage, claims) == [
+        "beyond-horizon n=401 from first: first prints 20.1, the inventory says 20.2"
+    ]
+
+
+def test_every_beyond_horizon_row_names_a_source_with_a_claims_record() -> None:
+    """A row is held to what its source prints, so its source must retain a record."""
+    coverage, claims = _beyond()
+    # A caller may pass only the claims it loaded; what decides is the source's record.
+    del claims["late"]
+    assert _beyond_errors(coverage, claims) == []
+    del coverage["sources"][-1]["claims_record"]
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=401 from late: late declares no claims record, so the row "
+            "is compared with nothing its source prints"
+        )
+    ]
+
+
+def test_the_schema_names_a_successor_exactly_when_a_row_is_superseded() -> None:
+    schema = safe_load(
+        coverage_check.COVERAGE.with_name("source-coverage.schema.yaml").read_text()
+    )
+    validator = Draft202012Validator(schema)
+    document = safe_load(coverage_check.COVERAGE.read_text(encoding="utf-8"))
+    document.pop("softschema")
+    later = {**_row("later", 400, "20.0"), "bead": "think-ab12"}
+    earlier = {**_row("earlier", 400, "20.1", superseded_by="later"), "bead": "think-ab12"}
+    document["beyond_horizon_claims"] = [earlier, later]
+    assert validator.is_valid(document)
+    document["beyond_horizon_claims"] = [
+        {key: value for key, value in earlier.items() if key != "superseded_by"},
+        later,
+    ]
+    assert not validator.is_valid(document)
+    document["beyond_horizon_claims"] = [earlier, {**later, "superseded_by": "earlier"}]
+    assert not validator.is_valid(document)

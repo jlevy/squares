@@ -69,8 +69,8 @@ Write $T=3.8770835900\ldots$ for the side of Walter Trump’s packing of 1979, t
 packing known; the **bound gap**, the distance between the best upper and lower bounds,
 was ${{LADDER_GAP}}$ after this proof.[^register] The result was superseded within a
 week: on 2026-09-29 Ke Wang and Can Li reweighted and scaled this same certificate to
-$s(11)>3875000000/999999999$, a step of about $3.9\times10^{-9}$ (T-061), and
-Queuingtheorydotcom proved $s(11)=T$ by different machinery (T-060), which
+$s(11)>3875000000/999999999$, a step of about $3.9\times10^{-9}$ (T-061), and Ahmed
+proved $s(11)=T$ by different machinery (T-060), which
 [Part III]({{PAPER:n11-optimality-review}}) reviews.
 With T-061’s reweighting of it, it is the furthest the charge method reached, and Part
 III’s field certificates, which also charge cores, are easiest to follow against it.

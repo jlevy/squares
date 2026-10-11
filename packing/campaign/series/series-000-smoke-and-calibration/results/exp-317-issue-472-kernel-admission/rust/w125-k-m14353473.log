@@ -1,0 +1,218 @@
+{"step": 0, "owner": 0, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 0.3}
+{"step": 1, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 0.7}
+{"step": 2, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 1.1}
+{"step": 3, "owner": 16, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 1.5}
+{"step": 4, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 1.8}
+{"step": 5, "owner": 19, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 2.5}
+{"step": 6, "owner": 20, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 3.6}
+{"step": 7, "owner": 22, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 4.3}
+{"step": 8, "owner": 23, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 4.7}
+{"step": 9, "owner": 0, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 5.1}
+{"step": 10, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 5.7}
+{"step": 11, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 6.5}
+{"step": 12, "owner": 16, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 7.1}
+{"step": 13, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 7.8}
+{"step": 14, "owner": 19, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 8.5}
+{"step": 15, "owner": 20, "live_rows": 44, "rows_checked_in_full": 64, "closure": false, "seconds": 9.1}
+{"step": 16, "owner": 22, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 9.9}
+{"step": 17, "owner": 23, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 10.5}
+{"step": 18, "owner": 0, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 11.0}
+{"step": 19, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 11.5}
+{"step": 20, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 12.0}
+{"step": 21, "owner": 16, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 12.4}
+{"step": 22, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 13.0}
+{"step": 23, "owner": 19, "live_rows": 40, "rows_checked_in_full": 64, "closure": false, "seconds": 13.5}
+{"step": 24, "owner": 20, "live_rows": 37, "rows_checked_in_full": 64, "closure": false, "seconds": 13.9}
+{"step": 25, "owner": 22, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 14.5}
+{"step": 26, "owner": 23, "live_rows": 66, "rows_checked_in_full": 66, "closure": false, "seconds": 15.0}
+{"step": 27, "owner": 0, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 15.5}
+{"step": 28, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 15.9}
+{"step": 29, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 16.4}
+{"step": 30, "owner": 16, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 16.8}
+{"step": 31, "owner": 17, "live_rows": 46, "rows_checked_in_full": 64, "closure": false, "seconds": 17.2}
+{"step": 32, "owner": 19, "live_rows": 31, "rows_checked_in_full": 64, "closure": false, "seconds": 17.5}
+{"step": 33, "owner": 20, "live_rows": 37, "rows_checked_in_full": 64, "closure": false, "seconds": 17.8}
+{"step": 34, "owner": 22, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 18.3}
+{"step": 35, "owner": 23, "live_rows": 100, "rows_checked_in_full": 100, "closure": false, "seconds": 19.1}
+{"step": 36, "owner": 0, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 19.4}
+{"step": 37, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 19.8}
+{"step": 38, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 20.2}
+{"step": 39, "owner": 16, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 20.6}
+{"step": 40, "owner": 17, "live_rows": 46, "rows_checked_in_full": 64, "closure": false, "seconds": 20.9}
+{"step": 41, "owner": 19, "live_rows": 17, "rows_checked_in_full": 68, "closure": false, "seconds": 21.1}
+{"step": 42, "owner": 20, "live_rows": 40, "rows_checked_in_full": 67, "closure": false, "seconds": 21.3}
+{"step": 43, "owner": 22, "live_rows": 18, "rows_checked_in_full": 64, "closure": false, "seconds": 21.6}
+{"step": 44, "owner": 23, "live_rows": 105, "rows_checked_in_full": 105, "closure": false, "seconds": 22.2}
+{"step": 45, "owner": 0, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 22.5}
+{"step": 46, "owner": 6, "live_rows": 54, "rows_checked_in_full": 64, "closure": false, "seconds": 22.8}
+{"step": 47, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 23.2}
+{"step": 48, "owner": 16, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 23.5}
+{"step": 49, "owner": 17, "live_rows": 46, "rows_checked_in_full": 64, "closure": false, "seconds": 23.8}
+{"step": 50, "owner": 19, "live_rows": 14, "rows_checked_in_full": 68, "closure": false, "seconds": 23.9}
+{"step": 51, "owner": 20, "live_rows": 40, "rows_checked_in_full": 67, "closure": false, "seconds": 24.1}
+{"step": 52, "owner": 22, "live_rows": 13, "rows_checked_in_full": 64, "closure": false, "seconds": 24.3}
+{"step": 53, "owner": 23, "live_rows": 133, "rows_checked_in_full": 133, "closure": false, "seconds": 24.9}
+{"step": 54, "owner": 0, "live_rows": 61, "rows_checked_in_full": 64, "closure": false, "seconds": 25.2}
+{"step": 55, "owner": 6, "live_rows": 46, "rows_checked_in_full": 64, "closure": false, "seconds": 25.5}
+{"step": 56, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 25.9}
+{"step": 57, "owner": 16, "live_rows": 10, "rows_checked_in_full": 64, "closure": false, "seconds": 26.2}
+{"step": 58, "owner": 17, "live_rows": 28, "rows_checked_in_full": 64, "closure": false, "seconds": 26.5}
+{"step": 59, "owner": 19, "live_rows": 14, "rows_checked_in_full": 68, "closure": false, "seconds": 26.5}
+{"step": 60, "owner": 20, "live_rows": 26, "rows_checked_in_full": 80, "closure": false, "seconds": 26.9}
+{"step": 61, "owner": 22, "live_rows": 11, "rows_checked_in_full": 64, "closure": false, "seconds": 27.0}
+{"step": 62, "owner": 23, "live_rows": 81, "rows_checked_in_full": 133, "closure": false, "seconds": 27.5}
+{"step": 63, "owner": 0, "live_rows": 61, "rows_checked_in_full": 64, "closure": false, "seconds": 27.8}
+{"step": 64, "owner": 6, "live_rows": 25, "rows_checked_in_full": 64, "closure": false, "seconds": 27.9}
+{"step": 65, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 28.2}
+{"step": 66, "owner": 16, "live_rows": 10, "rows_checked_in_full": 64, "closure": false, "seconds": 28.2}
+{"step": 67, "owner": 17, "live_rows": 19, "rows_checked_in_full": 64, "closure": false, "seconds": 28.3}
+{"step": 68, "owner": 19, "live_rows": 13, "rows_checked_in_full": 68, "closure": false, "seconds": 28.4}
+{"step": 69, "owner": 20, "live_rows": 24, "rows_checked_in_full": 80, "closure": false, "seconds": 28.5}
+{"step": 70, "owner": 22, "live_rows": 11, "rows_checked_in_full": 64, "closure": false, "seconds": 28.6}
+{"step": 71, "owner": 23, "live_rows": 81, "rows_checked_in_full": 133, "closure": false, "seconds": 28.8}
+{"step": 72, "owner": 0, "live_rows": 27, "rows_checked_in_full": 64, "closure": false, "seconds": 29.0}
+{"step": 73, "owner": 6, "live_rows": 18, "rows_checked_in_full": 65, "closure": false, "seconds": 29.2}
+{"step": 74, "owner": 10, "live_rows": 56, "rows_checked_in_full": 64, "closure": false, "seconds": 29.4}
+{"step": 75, "owner": 16, "live_rows": 9, "rows_checked_in_full": 64, "closure": false, "seconds": 29.4}
+{"step": 76, "owner": 17, "live_rows": 19, "rows_checked_in_full": 64, "closure": false, "seconds": 29.5}
+{"step": 77, "owner": 19, "live_rows": 20, "rows_checked_in_full": 79, "closure": false, "seconds": 29.6}
+{"step": 78, "owner": 20, "live_rows": 23, "rows_checked_in_full": 80, "closure": false, "seconds": 29.8}
+{"step": 79, "owner": 22, "live_rows": 8, "rows_checked_in_full": 64, "closure": false, "seconds": 29.9}
+{"step": 80, "owner": 23, "live_rows": 69, "rows_checked_in_full": 140, "closure": false, "seconds": 30.2}
+{"step": 81, "owner": 0, "live_rows": 26, "rows_checked_in_full": 64, "closure": false, "seconds": 30.3}
+{"step": 82, "owner": 6, "live_rows": 17, "rows_checked_in_full": 65, "closure": false, "seconds": 30.4}
+{"step": 83, "owner": 10, "live_rows": 49, "rows_checked_in_full": 64, "closure": false, "seconds": 30.6}
+{"step": 84, "owner": 16, "live_rows": 8, "rows_checked_in_full": 64, "closure": false, "seconds": 30.7}
+{"step": 85, "owner": 17, "live_rows": 17, "rows_checked_in_full": 64, "closure": false, "seconds": 30.8}
+{"step": 86, "owner": 19, "live_rows": 18, "rows_checked_in_full": 79, "closure": false, "seconds": 30.8}
+{"step": 87, "owner": 20, "live_rows": 20, "rows_checked_in_full": 80, "closure": false, "seconds": 31.0}
+{"step": 88, "owner": 22, "live_rows": 8, "rows_checked_in_full": 64, "closure": false, "seconds": 31.0}
+{"step": 89, "owner": 23, "live_rows": 63, "rows_checked_in_full": 140, "closure": false, "seconds": 31.3}
+{"step": 90, "owner": 0, "live_rows": 28, "rows_checked_in_full": 68, "closure": false, "seconds": 31.4}
+{"step": 91, "owner": 6, "live_rows": 13, "rows_checked_in_full": 67, "closure": false, "seconds": 31.5}
+{"step": 92, "owner": 10, "live_rows": 44, "rows_checked_in_full": 64, "closure": false, "seconds": 31.6}
+{"step": 93, "owner": 16, "live_rows": 7, "rows_checked_in_full": 64, "closure": false, "seconds": 31.7}
+{"step": 94, "owner": 17, "live_rows": 16, "rows_checked_in_full": 64, "closure": false, "seconds": 31.8}
+{"step": 95, "owner": 19, "live_rows": 18, "rows_checked_in_full": 79, "closure": false, "seconds": 31.8}
+{"step": 96, "owner": 20, "live_rows": 20, "rows_checked_in_full": 80, "closure": false, "seconds": 32.0}
+{"step": 97, "owner": 22, "live_rows": 8, "rows_checked_in_full": 64, "closure": false, "seconds": 32.0}
+{"step": 98, "owner": 23, "live_rows": 60, "rows_checked_in_full": 140, "closure": false, "seconds": 32.3}
+{"step": 99, "owner": 0, "live_rows": 21, "rows_checked_in_full": 68, "closure": false, "seconds": 32.4}
+{"step": 100, "owner": 6, "live_rows": 12, "rows_checked_in_full": 67, "closure": false, "seconds": 32.4}
+{"step": 101, "owner": 10, "live_rows": 42, "rows_checked_in_full": 64, "closure": false, "seconds": 32.6}
+{"step": 102, "owner": 16, "live_rows": 7, "rows_checked_in_full": 64, "closure": false, "seconds": 32.6}
+{"step": 103, "owner": 17, "live_rows": 16, "rows_checked_in_full": 64, "closure": false, "seconds": 32.7}
+{"step": 104, "owner": 19, "live_rows": 18, "rows_checked_in_full": 79, "closure": false, "seconds": 32.8}
+{"step": 105, "owner": 20, "live_rows": 20, "rows_checked_in_full": 80, "closure": false, "seconds": 32.9}
+{"step": 106, "owner": 22, "live_rows": 8, "rows_checked_in_full": 64, "closure": false, "seconds": 33.0}
+{"step": 107, "owner": 23, "live_rows": 60, "rows_checked_in_full": 140, "closure": false, "seconds": 33.2}
+{"step": 108, "owner": 0, "live_rows": 19, "rows_checked_in_full": 68, "closure": false, "seconds": 33.3}
+{"step": 109, "owner": 6, "live_rows": 13, "rows_checked_in_full": 68, "closure": false, "seconds": 33.4}
+{"step": 110, "owner": 10, "live_rows": 48, "rows_checked_in_full": 70, "closure": false, "seconds": 33.5}
+{"step": 111, "owner": 16, "live_rows": 11, "rows_checked_in_full": 68, "closure": false, "seconds": 33.6}
+{"step": 112, "owner": 17, "live_rows": 18, "rows_checked_in_full": 66, "closure": false, "seconds": 33.7}
+{"step": 113, "owner": 19, "live_rows": 33, "rows_checked_in_full": 94, "closure": false, "seconds": 33.8}
+{"step": 114, "owner": 20, "live_rows": 23, "rows_checked_in_full": 84, "closure": false, "seconds": 34.0}
+{"step": 115, "owner": 22, "live_rows": 14, "rows_checked_in_full": 71, "closure": false, "seconds": 34.1}
+{"step": 116, "owner": 23, "live_rows": 55, "rows_checked_in_full": 142, "closure": false, "seconds": 34.3}
+{"step": 117, "owner": 0, "live_rows": 19, "rows_checked_in_full": 68, "closure": false, "seconds": 34.4}
+{"step": 118, "owner": 6, "live_rows": 12, "rows_checked_in_full": 71, "closure": false, "seconds": 34.5}
+{"step": 119, "owner": 10, "live_rows": 42, "rows_checked_in_full": 72, "closure": false, "seconds": 34.6}
+{"step": 120, "owner": 16, "live_rows": 11, "rows_checked_in_full": 68, "closure": false, "seconds": 34.7}
+{"step": 121, "owner": 17, "live_rows": 17, "rows_checked_in_full": 66, "closure": false, "seconds": 34.8}
+{"step": 122, "owner": 19, "live_rows": 28, "rows_checked_in_full": 96, "closure": false, "seconds": 34.9}
+{"step": 123, "owner": 20, "live_rows": 22, "rows_checked_in_full": 84, "closure": false, "seconds": 35.1}
+{"step": 124, "owner": 22, "live_rows": 11, "rows_checked_in_full": 71, "closure": false, "seconds": 35.1}
+{"step": 125, "owner": 23, "live_rows": 54, "rows_checked_in_full": 142, "closure": false, "seconds": 35.4}
+{"step": 126, "owner": 0, "live_rows": 16, "rows_checked_in_full": 75, "closure": false, "seconds": 35.5}
+{"step": 127, "owner": 6, "live_rows": 11, "rows_checked_in_full": 71, "closure": false, "seconds": 35.5}
+{"step": 128, "owner": 10, "live_rows": 38, "rows_checked_in_full": 72, "closure": false, "seconds": 35.6}
+{"step": 129, "owner": 16, "live_rows": 8, "rows_checked_in_full": 68, "closure": false, "seconds": 35.7}
+{"step": 130, "owner": 17, "live_rows": 16, "rows_checked_in_full": 66, "closure": false, "seconds": 35.8}
+{"step": 131, "owner": 19, "live_rows": 16, "rows_checked_in_full": 96, "closure": false, "seconds": 35.9}
+{"step": 132, "owner": 20, "live_rows": 19, "rows_checked_in_full": 84, "closure": false, "seconds": 36.0}
+{"step": 133, "owner": 22, "live_rows": 8, "rows_checked_in_full": 71, "closure": false, "seconds": 36.0}
+{"step": 134, "owner": 23, "live_rows": 47, "rows_checked_in_full": 142, "closure": false, "seconds": 36.2}
+{"step": 135, "owner": 0, "live_rows": 16, "rows_checked_in_full": 75, "closure": false, "seconds": 36.3}
+{"step": 136, "owner": 6, "live_rows": 9, "rows_checked_in_full": 71, "closure": false, "seconds": 36.3}
+{"step": 137, "owner": 10, "live_rows": 56, "rows_checked_in_full": 93, "closure": false, "seconds": 36.5}
+{"step": 138, "owner": 16, "live_rows": 8, "rows_checked_in_full": 68, "closure": false, "seconds": 36.6}
+{"step": 139, "owner": 17, "live_rows": 14, "rows_checked_in_full": 66, "closure": false, "seconds": 36.6}
+{"step": 140, "owner": 19, "live_rows": 13, "rows_checked_in_full": 96, "closure": false, "seconds": 36.7}
+{"step": 141, "owner": 20, "live_rows": 18, "rows_checked_in_full": 84, "closure": false, "seconds": 36.8}
+{"step": 142, "owner": 22, "live_rows": 8, "rows_checked_in_full": 71, "closure": false, "seconds": 36.9}
+{"step": 143, "owner": 23, "live_rows": 47, "rows_checked_in_full": 142, "closure": false, "seconds": 37.0}
+{"step": 144, "owner": 0, "live_rows": 14, "rows_checked_in_full": 77, "closure": false, "seconds": 37.1}
+{"step": 145, "owner": 6, "live_rows": 8, "rows_checked_in_full": 71, "closure": false, "seconds": 37.1}
+{"step": 146, "owner": 10, "live_rows": 55, "rows_checked_in_full": 93, "closure": false, "seconds": 37.3}
+{"step": 147, "owner": 16, "live_rows": 8, "rows_checked_in_full": 68, "closure": false, "seconds": 37.4}
+{"step": 148, "owner": 17, "live_rows": 13, "rows_checked_in_full": 66, "closure": false, "seconds": 37.4}
+{"step": 149, "owner": 19, "live_rows": 12, "rows_checked_in_full": 96, "closure": false, "seconds": 37.5}
+{"step": 150, "owner": 20, "live_rows": 18, "rows_checked_in_full": 84, "closure": false, "seconds": 37.6}
+{"step": 151, "owner": 22, "live_rows": 8, "rows_checked_in_full": 71, "closure": false, "seconds": 37.6}
+{"step": 152, "owner": 23, "live_rows": 51, "rows_checked_in_full": 147, "closure": false, "seconds": 37.8}
+{"step": 153, "owner": 0, "live_rows": 13, "rows_checked_in_full": 77, "closure": false, "seconds": 37.9}
+{"step": 154, "owner": 6, "live_rows": 8, "rows_checked_in_full": 71, "closure": false, "seconds": 37.9}
+{"step": 155, "owner": 10, "live_rows": 50, "rows_checked_in_full": 93, "closure": false, "seconds": 38.0}
+{"step": 156, "owner": 16, "live_rows": 8, "rows_checked_in_full": 68, "closure": false, "seconds": 38.1}
+{"step": 157, "owner": 17, "live_rows": 13, "rows_checked_in_full": 66, "closure": false, "seconds": 38.2}
+{"step": 158, "owner": 19, "live_rows": 12, "rows_checked_in_full": 96, "closure": false, "seconds": 38.2}
+{"step": 159, "owner": 20, "live_rows": 18, "rows_checked_in_full": 84, "closure": false, "seconds": 38.3}
+{"step": 160, "owner": 22, "live_rows": 8, "rows_checked_in_full": 71, "closure": false, "seconds": 38.4}
+{"step": 161, "owner": 23, "live_rows": 51, "rows_checked_in_full": 147, "closure": false, "seconds": 38.6}
+{"step": 162, "owner": 0, "live_rows": 12, "rows_checked_in_full": 77, "closure": false, "seconds": 38.6}
+{"step": 163, "owner": 6, "live_rows": 8, "rows_checked_in_full": 71, "closure": false, "seconds": 38.7}
+{"step": 164, "owner": 10, "live_rows": 48, "rows_checked_in_full": 93, "closure": false, "seconds": 38.8}
+{"step": 165, "owner": 16, "live_rows": 8, "rows_checked_in_full": 68, "closure": false, "seconds": 38.9}
+{"step": 166, "owner": 17, "live_rows": 13, "rows_checked_in_full": 66, "closure": false, "seconds": 38.9}
+{"step": 167, "owner": 19, "live_rows": 12, "rows_checked_in_full": 96, "closure": false, "seconds": 39.0}
+{"step": 168, "owner": 20, "live_rows": 18, "rows_checked_in_full": 84, "closure": false, "seconds": 39.1}
+{"step": 169, "owner": 22, "live_rows": 8, "rows_checked_in_full": 71, "closure": false, "seconds": 39.1}
+{"step": 170, "owner": 23, "live_rows": 51, "rows_checked_in_full": 147, "closure": false, "seconds": 39.3}
+{"step": 171, "owner": 0, "live_rows": 12, "rows_checked_in_full": 77, "closure": false, "seconds": 39.4}
+{"step": 172, "owner": 6, "live_rows": 8, "rows_checked_in_full": 71, "closure": false, "seconds": 39.4}
+{"step": 173, "owner": 10, "live_rows": 48, "rows_checked_in_full": 93, "closure": false, "seconds": 39.6}
+{"step": 174, "owner": 16, "live_rows": 8, "rows_checked_in_full": 68, "closure": false, "seconds": 39.6}
+{"step": 175, "owner": 17, "live_rows": 13, "rows_checked_in_full": 66, "closure": false, "seconds": 39.7}
+{"step": 176, "owner": 19, "live_rows": 13, "rows_checked_in_full": 97, "closure": false, "seconds": 39.7}
+{"step": 177, "owner": 20, "live_rows": 18, "rows_checked_in_full": 84, "closure": false, "seconds": 39.9}
+{"step": 178, "owner": 22, "live_rows": 7, "rows_checked_in_full": 72, "closure": false, "seconds": 39.9}
+{"step": 179, "owner": 23, "live_rows": 59, "rows_checked_in_full": 157, "closure": false, "seconds": 40.1}
+{"step": 180, "owner": 0, "live_rows": 12, "rows_checked_in_full": 77, "closure": false, "seconds": 40.2}
+{"step": 181, "owner": 6, "live_rows": 13, "rows_checked_in_full": 78, "closure": false, "seconds": 40.3}
+{"step": 182, "owner": 10, "live_rows": 69, "rows_checked_in_full": 131, "closure": false, "seconds": 40.6}
+{"step": 183, "owner": 16, "live_rows": 8, "rows_checked_in_full": 76, "closure": false, "seconds": 40.7}
+{"step": 184, "owner": 17, "live_rows": 16, "rows_checked_in_full": 72, "closure": false, "seconds": 40.8}
+{"step": 185, "owner": 19, "live_rows": 1, "rows_checked_in_full": 103, "closure": false, "seconds": 40.8}
+{"step": 186, "owner": 20, "live_rows": 25, "rows_checked_in_full": 95, "closure": false, "seconds": 40.9}
+{"step": 187, "owner": 22, "live_rows": 1, "rows_checked_in_full": 72, "closure": false, "seconds": 41.0}
+{"step": 188, "owner": 23, "live_rows": 36, "rows_checked_in_full": 159, "closure": false, "seconds": 41.1}
+{"step": 189, "owner": 0, "live_rows": 14, "rows_checked_in_full": 89, "closure": false, "seconds": 41.2}
+{"step": 190, "owner": 6, "live_rows": 6, "rows_checked_in_full": 78, "closure": false, "seconds": 41.2}
+{"step": 191, "owner": 10, "live_rows": 26, "rows_checked_in_full": 131, "closure": false, "seconds": 41.4}
+{"step": 192, "owner": 16, "live_rows": 0, "rows_checked_in_full": 76, "closure": true, "seconds": 41.4}
+{"status": "PASS", "failure": null, "mode": "full", "seconds": 41.489}
+exit=0
+	Command being timed: "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/wt-i472-rust/packing/n17_kernel_verify/target/release/n17-kernel-verifier /tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m14353473 --output /tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/rust/w125-k-m14353473.json --threads 2 --progress"
+	User time (seconds): 46.16
+	System time (seconds): 0.31
+	Percent of CPU this job got: 111%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:41.54
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 89528
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 33666
+	Voluntary context switches: 865
+	Involuntary context switches: 6635
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 120
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

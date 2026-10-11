@@ -20,8 +20,8 @@ MOTION_SETTINGS = PACKAGE_ROOT / "src/motion-settings.ts"
 
 SPANS = {"dwell", "move", "correct", "settle"}
 
-#: The corpus's pair kinds: 160 grid prefixes, 5 shared pictures and 158 matched pairs.
-CORPUS_KINDS = ["prefix"] * 160 + ["shared-picture"] * 5 + ["matched"] * 158
+#: The corpus's pair kinds: 159 grid prefixes, 4 shared pictures and 160 matched pairs.
+CORPUS_KINDS = ["prefix"] * 159 + ["shared-picture"] * 4 + ["matched"] * 160
 
 
 def test_a_beat_lasts_all_four_spans() -> None:
@@ -72,5 +72,5 @@ def test_the_build_prices_the_beats_the_page_plays() -> None:
     lines = run_time_lines(CORPUS_KINDS)
     moving = beat_seconds(TIMING)
     static = beat_seconds(STATIC_TIMING)
-    assert f"= {158 * moving + 165 * static:.2f} s" in lines[0]
+    assert f"= {160 * moving + 163 * static:.2f} s" in lines[0]
     assert f"= {323 * moving:.2f} s" in lines[1]

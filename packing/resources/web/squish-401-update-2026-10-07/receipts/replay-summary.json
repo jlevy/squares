@@ -1,0 +1,68 @@
+{
+  "excluded_n153_wall_seconds": 4.596482075001404,
+  "format": "squish-reviewed-replay-origin-v1",
+  "original_batch": {
+    "all_full_size_controls_rejected": true,
+    "all_positive_passed": true,
+    "certificates": 13,
+    "checker_routes": [
+      "devtools.check_rational_witness_independent",
+      "sqpack.witness.exact_verify"
+    ],
+    "controls_wall_seconds": 7.683716989005916,
+    "counts": [
+      123,
+      126,
+      129,
+      153,
+      154,
+      155,
+      179,
+      208,
+      237,
+      238,
+      239,
+      258,
+      263
+    ],
+    "limits": [
+      "Feasible upper bounds only; no optimality claim.",
+      "Upstream producer and producer checker not executed.",
+      "Both checkers consume the same exact rational corner representation; conversion independently re-derived above.",
+      "No assurance ledger changes are performed by this reviewer."
+    ],
+    "n153_comparison": {
+      "checker_input_equals_old_witness": true,
+      "fact_equal": true,
+      "first_different_roster_index": null,
+      "new_print": "12.8796793733329640",
+      "new_side": "7250614903299225/562949953421312",
+      "old_print": "12.8796793733329640",
+      "old_side": "7250614903299225/562949953421312",
+      "roster_equal": true,
+      "side_equal": true
+    },
+    "pairs_per_checker": 248653,
+    "positive_wall_seconds": 108.59782994199486,
+    "source_revision": "5e32bbd7028b6e3b869979278079cd37ed6770aa",
+    "squares": 2462,
+    "total_wall_seconds_including_download": 116.74706951899861
+  },
+  "replay_origin": "reused-complete-review-replay",
+  "scoped_counts": [
+    123,
+    126,
+    129,
+    154,
+    155,
+    179,
+    208,
+    237,
+    238,
+    239,
+    258,
+    263
+  ],
+  "scoped_positive_wall_seconds": 104.00134786699346,
+  "source_commit": "5e32bbd7028b6e3b869979278079cd37ed6770aa"
+}

@@ -1,0 +1,231 @@
+{
+  "schema": "n17-issue-pattern-source/v1",
+  "observed_at": "2026-10-08 16:17:07 UTC",
+  "cap": "1169/250",
+  "baseline": {
+    "census": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/current-census.json",
+    "partition": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/current-partition.json",
+    "tail": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/descriptor.json",
+    "certified": {
+      "admitted": 60,
+      "endpoint_survives": true,
+      "orbits": 4683,
+      "surviving_states": 36768
+    },
+    "checkout_reference": "ecb0bf82c38958089c7a41aa3980ce62dcc848b8 (documentary provenance, not admission)"
+  },
+  "pilot": {
+    "selection": "first eight increasing canonical distance-two masks",
+    "masks": [
+      849919,
+      850943,
+      851839,
+      851903,
+      916351,
+      980927,
+      981887,
+      1630207
+    ],
+    "scope": "eight canonical assignment records frozen for metadata; LP target remains unexecuted"
+  },
+  "reports": [
+    {
+      "source": "https://github.com/jlevy/squares/issues/413",
+      "updated_at": "2026-10-08T15:44:46Z",
+      "table": "| 1 | side-S1, side-S2, interior-SW, interior-NW, interior-W, interior-S, interior-SE | Certificate verified | upstream standing verifier (full) and our fast verifier |\n| 2 | side-W0, side-N1, interior-SW, interior-NW, interior-W, interior-S, interior-SE | Certificate verified | upstream standing verifier (full) and our fast verifier |\n| 3 | side-S0, side-S1, interior-SW, interior-NW, interior-W, interior-S, interior-N | Certificate verified | upstream standing verifier (full) and our fast verifier |\n| 4 | side-W0, side-W2, interior-SW, interior-NW, interior-W, interior-S, interior-N | Certificate verified | upstream standing verifier (full) and our fast verifier |\n| 5 | interior-NW, interior-W, interior-S, interior-N, interior-E, interior-SE | Certificate verified | our fast verifier |\n| 6 | side-S1, side-N1, interior-SW, interior-NW, interior-S, interior-N, interior-SE, interior-NE | Certificate verified | our fast verifier |\n| 7 | side-W0, side-S1, side-W1, side-W2, interior-SW, interior-NW, interior-W, interior-S | Certificate verified | our fast verifier |\n| 8 | side-N0, side-W0, side-S1, interior-SW, interior-NW, interior-W, interior-S, interior-N | Certificate verified | our fast verifier |\n| 9 | side-S0, side-W0, side-W2, interior-SW, interior-NW, interior-W, interior-S | Computed | — |\n| 10 | corner-SE, side-S0, side-S1, side-S2, interior-SW, interior-NW, interior-W, interior-S | Computed | — |\n| 11 | side-W0, side-W1, interior-SW, interior-NW, interior-W, interior-S, interior-N | Computed | — |\n| 12 | side-N0, side-N1, interior-SW, interior-NW, interior-W, interior-N, interior-E, interior-SE | Computed | — |\n| 13 | side-E1, interior-SW, interior-NW, interior-W, interior-N, interior-E, interior-SE | Computed | — |\n| 14 | corner-SW, side-S0, side-W0, side-W2, interior-SW, interior-NW, interior-W | Computed | — |\n| 15 | corner-SW, side-N0, side-W0, side-W1, interior-SW, interior-NW, interior-W | Computed | — |\n| 16 | side-N0, side-W2, interior-SW, interior-NW, interior-W, interior-S, interior-E | Certificate verified | our fast verifier |\n| 17 | side-W0, side-W2, interior-SW, interior-NW, interior-W, interior-N, interior-E, interior-SE | Computed | — |\n| 18 | side-N0, side-W0, side-S1, side-W1, interior-SW, interior-NW, interior-W, interior-S | Computed | — |\n| 19 | side-S0, side-W0, side-E1, interior-SW, interior-NW, interior-W, interior-S, interior-E | Computed | — |\n| 20 | side-W0, side-S1, side-W2, interior-SW, interior-NW, interior-W, interior-S, interior-E | Computed | — |\n| 21 | side-S1, side-S2, interior-NW, interior-W, interior-S, interior-N, interior-SE | Computed | — |\n| 22 | corner-SW, side-W0, side-S1, side-W1, interior-SW, interior-NW, interior-W, interior-S | Computed | — |\n| 23 | corner-NW, side-N0, side-W0, side-W1, side-W2, interior-NW, interior-W, interior-S | Computed | — |\n| 24 | corner-SE, side-S0, side-S1, side-S2, interior-NW, interior-W, interior-S, interior-SE | Computed | — |\n| 25 | corner-SW, corner-NW, side-S0, side-W0, side-W1, side-W2, interior-SW, interior-NW | Computed | — |\n| 26 | side-N0, side-W0, side-W1, interior-SW, interior-NW, interior-W, interior-S, interior-E | Computed | — |\n| 27 | side-N1, side-E1, interior-SW, interior-W, interior-S, interior-N, interior-E | Computed | — |",
+      "totals": null
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6041249982",
+      "created_at": "2026-10-07T15:36:26Z",
+      "table": "| 17 | side-W0, side-W2, interior-SW, interior-NW, interior-W, interior-N, interior-E, interior-SE | Certificate verified | our fast verifier |\n| 18 | side-N0, side-W0, side-S1, side-W1, interior-SW, interior-NW, interior-W, interior-S | Certificate verified | our fast verifier |",
+      "totals": {
+        "verified": 11,
+        "computed": 16
+      }
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6043615280",
+      "created_at": "2026-10-07T17:51:15Z",
+      "table": "| 9 | side-S0, side-W0, side-W2, interior-SW, interior-NW, interior-W, interior-S | Certificate verified | our fast verifier |\n| 10 | corner-SE, side-S0, side-S1, side-S2, interior-SW, interior-NW, interior-W, interior-S | Certificate verified | our fast verifier |\n| 11 | side-W0, side-W1, interior-SW, interior-NW, interior-W, interior-S, interior-N | Certificate verified | our fast verifier |\n| 12 | side-N0, side-N1, interior-SW, interior-NW, interior-W, interior-N, interior-E, interior-SE | Certificate verified | our fast verifier |\n| 13 | side-E1, interior-SW, interior-NW, interior-W, interior-N, interior-E, interior-SE | Certificate verified | our fast verifier |",
+      "totals": {
+        "verified": 16,
+        "computed": 11
+      }
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6043764207",
+      "created_at": "2026-10-07T18:00:16Z",
+      "table": "| 22 | corner-SW, side-W0, side-S1, side-W1, interior-SW, interior-NW, interior-W, interior-S | Certificate verified | our fast verifier |",
+      "totals": {
+        "verified": 17,
+        "computed": 10
+      }
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6048198846",
+      "created_at": "2026-10-07T22:30:54Z",
+      "table": "| 21 | side-S1, side-S2, interior-NW, interior-W, interior-S, interior-N, interior-SE | Certificate verified | our fast verifier |",
+      "totals": {
+        "verified": 18,
+        "computed": 9
+      }
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6050977003",
+      "created_at": "2026-10-08T02:32:37Z",
+      "table": "| 26 | side-N0, side-W0, side-W1, interior-SW, interior-NW, interior-W, interior-S, interior-E | Certificate verified | our fast verifier |",
+      "totals": {
+        "verified": 19,
+        "computed": 8
+      }
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6052856841",
+      "created_at": "2026-10-08T05:16:23Z",
+      "table": "| 28 | side-N0, side-W0, side-S1, interior-SW, interior-NW, interior-W, interior-S, interior-E | Computed | — |",
+      "totals": {
+        "verified": 19,
+        "computed": 9
+      }
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6053187784",
+      "created_at": "2026-10-08T05:41:20Z",
+      "table": "| 29 | side-N0, side-W2, interior-SW, interior-NW, interior-W, interior-N, interior-E, interior-SE | Computed | — |",
+      "totals": {
+        "verified": 19,
+        "computed": 10
+      }
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6055253328",
+      "created_at": "2026-10-08T07:47:25Z",
+      "table": "| 19 | side-S0, side-W0, side-E1, interior-SW, interior-NW, interior-W, interior-S, interior-E | Certificate verified | our fast verifier |\n| 30 | corner-NW, side-S1, side-W1, side-W2, interior-SW, interior-NW, interior-W, interior-S | Computed | — |\n| 31 | corner-NW, side-N0, side-W0, side-S1, interior-SW, interior-NW, interior-W, interior-S | Computed | — |",
+      "totals": {
+        "verified": 20,
+        "computed": 11
+      }
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6059040980",
+      "created_at": "2026-10-08T11:38:42Z",
+      "table": "| 20 | side-W0, side-S1, side-W2, interior-SW, interior-NW, interior-W, interior-S, interior-E | Certificate verified | our fast verifier |\n| 32 | side-W0, side-S1, side-W1, interior-SW, interior-NW, interior-S, interior-N, interior-SE, interior-NE | Computed | — |",
+      "totals": {
+        "verified": 21,
+        "computed": 11
+      }
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6062766060",
+      "created_at": "2026-10-08T15:02:58Z",
+      "table": "| 33 | corner-SW, side-N0, side-W0, interior-NW, interior-W, interior-S, interior-N, interior-SE | Computed | — |",
+      "totals": {
+        "verified": 22,
+        "computed": 11
+      }
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6064272233",
+      "created_at": "2026-10-08T16:21:26Z",
+      "updated_at": "2026-10-08T16:21:26Z",
+      "table": "| 14 | corner-SW, side-S0, side-W0, side-W2, interior-SW, interior-NW, interior-W | Certificate verified | our fast verifier |",
+      "totals": {
+        "verified": 22,
+        "computed": 11
+      },
+      "excerpt": "Correction to the 15:02 UTC comment: the verified total rose from 21 to 22 because row 14 also passed our fast verifier, and that row was left out of the comment.\n\n| # | Regions | Status | Verified with |\n|---|---|---|---|\n| 14 | corner-SW, side-S0, side-W0, side-W2, interior-SW, interior-NW, interior-W | Certificate verified | our fast verifier |\n\nThe issue body now carries the complete current table (33 rows: 22 certificate verified, 11 computed).\n"
+    },
+    {
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6064443079",
+      "created_at": "2026-10-08T16:31:11Z",
+      "updated_at": "2026-10-08T16:31:11Z",
+      "table": "",
+      "verifier_corrections": [
+        {
+          "row": 3,
+          "verified_with": "standing verifier's node checks over all nodes with our parallel driver, plus our fast verifier"
+        },
+        {
+          "row": 4,
+          "verified_with": "standing verifier's node checks over all nodes with our parallel driver, plus our fast verifier"
+        }
+      ],
+      "excerpt": "Correction to the table: rows 3 and 4 were listed as \"upstream standing verifier (full)\". That was not accurate. Unmodified standing FULL receipts exist for rows 1 and 2 (and for the two classes in #358). For rows 3 and 4 we ran the standing verifier's node checks over all nodes with our parallel driver, plus our fast verifier; an unmodified standing FULL run did not fit in memory (#445). The issue body has been corrected.\n"
+    }
+  ],
+  "companion_patterns": [
+    {
+      "id": "358-C1",
+      "issue": 358,
+      "cells": [
+        "side-S0",
+        "side-N0",
+        "interior-SW",
+        "interior-NW",
+        "interior-W",
+        "interior-S",
+        "interior-SE"
+      ],
+      "status": "standing FULL reported",
+      "verified_with": "upstream standing verifier (full) and independent Rust reported",
+      "source": "https://github.com/jlevy/squares/issues/358#issuecomment-5997259692",
+      "custody": "original compact-header and manifest metadata joined; local complete FULL replay absent"
+    },
+    {
+      "id": "358-C2",
+      "issue": 358,
+      "cells": [
+        "side-S0",
+        "side-W0",
+        "interior-SW",
+        "interior-NW",
+        "interior-W",
+        "interior-S",
+        "interior-SE"
+      ],
+      "status": "standing FULL reported",
+      "verified_with": "upstream standing verifier (full) and independent Rust reported",
+      "source": "https://github.com/jlevy/squares/issues/358#issuecomment-5997259692",
+      "custody": "original compact-header and161objects acquired; maintained FULL replay INCOMPLETE480.468s (issuecomment6053195806)"
+    }
+  ],
+  "additional_source_notes": [
+    {
+      "issue": 413,
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6051483962",
+      "scope": "Contributor preparing rows1–4 and358 full packages; standing receipts rerunning; B2d/native producer publication pending; node records regrouped, manifests change."
+    },
+    {
+      "issue": 413,
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6062766060",
+      "scope": "Row33 computed; author76orbits uses main plus their closed patterns, not this60entrybaseline.116Mnodes/480GB certificate estimates; certificate not generated. No explicitrow promotion supports22/11aggregate.",
+      "historical_status": "The missing promotion described here was later identified as row14 in comment6064272233."
+    },
+    {
+      "issue": 375,
+      "source": "https://github.com/jlevy/squares/issues/375#issuecomment-6007913483",
+      "scope": "320 nonn17certificates replayed; n17certificate expressly not imported/replayed/recorded, held for separate work.48ceilingconfirmations later merged369."
+    },
+    {
+      "issue": 375,
+      "source": "https://github.com/jlevy/squares/issues/375#issuecomment-6046733132",
+      "scope": "Contributor fixes INVALID substring bug atcca7bf1 and reports324/324valid; othercounts superseded bySQUISH. Does not discharge n17hold or localminimum/globaloptimality."
+    },
+    {
+      "issue": 419,
+      "source": "https://github.com/jlevy/squares/issues/419",
+      "source_packet": "https://github.com/evand/square-packing/blob/f58a017/s12/search/exact/exact_forms.json",
+      "scope": "n17source entry field/side degree18, verify_exact=true, lean_packs=true, lean_local_min empty; sourceclaims feasibility, no lowerbound/optimum. Same author/agent/shareddata limits independence."
+    },
+    {
+      "issue": 413,
+      "source": "https://github.com/jlevy/squares/issues/413#issuecomment-6064503349",
+      "created_at": "2026-10-08T16:34:40Z",
+      "updated_at": "2026-10-08T16:34:40Z",
+      "excerpt": "Following the reconciliation in #405, we checked the 33 rows of this issue against the upstream admitted ledger and the distance-two tail, with upstream tools only (main `f0ec5b6`; census tool blob `923813b6`, ledger blob `9e72b79b`, partition from `ecb0bf82`). Both baselines reproduce: 4,685 orbits after main's 58 entries, 4,683 after PR404's 60.\n\n- All 33 rows are independent of main's 58 admitted entries, and no row contains another row.\n- Rows 15, 19 and 26 each lie inside both PR404 additions (Tail A, Tail B).\n- Together with main's 58 entries, the 33 rows would leave 19,164 states / 2,449 orbits (from 36,784 / 4,685).\n- Of the 95 distance-two orbits / 744 states, the rows cover only 1 orbit / 8 states (row 23, the orbit of state 1965787). The other 94 orbits are untouched.\n\nThe per-row table (D4 mask, premises, overlaps, tail coverage, marginal counts on both baselines), the script and its full output: https://github.com/wand125/square-packing/tree/main/problems/n17/reconcile-413-20261009\n",
+      "scope": "Contributor conditional arithmetic/source comparison; no certificate custody or admission."
+    }
+  ],
+  "refresh_observed_at": "2026-10-08 17:29:33 UTC"
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "n17-centered-cap-standing-context/v1",
+  "status": "refused",
+  "error": "fresh standing child refused",
+  "readiness_passed": false,
+  "verification_passed": false,
+  "existing_U_census_admission": false,
+  "new_target_admission_proved": false,
+  "global_optimality_proved": false
+}

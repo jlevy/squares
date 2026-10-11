@@ -35,6 +35,8 @@ def _environment(stem: Path, *, workers: int) -> dict[str, str]:
 def _probe(
     stem: Path, test_file: Path, *, workers: int, extra: tuple[str, ...] = ()
 ) -> tuple[str, ...]:
+    # xdist allocates a basetemp even without tmp_path. An inherited shared root can
+    # make this short probe clean up unrelated prior sessions before it exits.
     return (
         sys.executable,
         "-m",
@@ -44,6 +46,8 @@ def _probe(
         os.devnull,
         "--rootdir",
         str(test_file.parent),
+        "--basetemp",
+        f"{stem}.pytest-tmp",
         "-p",
         "devtools.reachable_progress",
         str(test_file),
@@ -66,10 +70,14 @@ def test_two_workers_write_separate_complete_progress_and_junit(tmp_path: Path) 
         encoding="utf-8",
     )
     stem = tmp_path / "child"
+    inherited_temproot = tmp_path / "inherited-temproot"
+    inherited_temproot.write_text("not a directory", encoding="utf-8")
+    environment = _environment(stem, workers=2)
+    environment["PYTEST_DEBUG_TEMPROOT"] = str(inherited_temproot)
     result = subprocess.run(
         _probe(stem, test_file, workers=2),
         cwd=PACKING,
-        env=_environment(stem, workers=2),
+        env=environment,
         capture_output=True,
         text=True,
         check=False,

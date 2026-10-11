@@ -5,13 +5,17 @@
 
 from __future__ import annotations
 
+import copy
+import json
 import time
 from fractions import Fraction as Q
 from pathlib import Path
+from typing import Any
 
 import pytest
 
 from devtools import check_n17_core_stress as stress
+from devtools import check_n17_endpoint_feasibility as endpoint_module
 from devtools.check_n17_contact_chart import ANCHORS, CONTACTS
 from devtools.check_n17_endpoint_feasibility import _layout
 
@@ -173,7 +177,7 @@ def test_missing_required_input_is_refused(
     assert "all required" in capsys.readouterr().out
 
 
-def test_tampered_input_is_refused_by_frozen_blob_binding(
+def test_prerequisite_elsewhere_is_refused_by_retained_path(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     monkeypatch.setattr(stress, "synthetic_controls", lambda: {"passed": True, "seconds": 0})
@@ -183,4 +187,174 @@ def test_tampered_input_is_refused_by_frozen_blob_binding(
     for path in paths:
         path.write_bytes(b"{}")
     assert stress.main([*(str(path) for path in paths[:3]), "--source", str(paths[3])]) == 2
-    assert "frozen" in capsys.readouterr().out
+    assert "expected the retained" in capsys.readouterr().out
+
+
+@pytest.fixture(scope="module")
+def replayed_prerequisites() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], bytes]:
+    """One real prerequisite replay; never run the full stress computation."""
+    references = (stress.FROZEN_ROOT_REF, stress.FROZEN_ENDPOINT_REF, stress.FROZEN_FEATURE_REF)
+    documents = [
+        json.loads(
+            stress._read_limited(endpoint_module.REPO / ref.partition(":")[2]),
+            object_pairs_hook=stress._object_unique,
+        )
+        for ref in references
+    ]
+    root, endpoint, feature = documents
+    source = stress._read_limited(stress.SOURCE)
+    stress._require_prerequisites(root, endpoint, feature, source)
+    return root, endpoint, feature, source
+
+
+@pytest.fixture
+def prerequisite_inputs(
+    replayed_prerequisites: tuple[dict[str, Any], dict[str, Any], dict[str, Any], bytes],
+    monkeypatch: pytest.MonkeyPatch,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], bytes]:
+    """Reuse that replay for grammar controls, without repeating its exact algebra."""
+    root, endpoint, feature, source = replayed_prerequisites
+    monkeypatch.setattr(stress, "symbolic_zero_proofs", lambda: feature["identities"])
+    monkeypatch.setattr(stress, "interval_geometry", lambda *_: endpoint["geometry"])
+    monkeypatch.setattr(stress, "interval_inventory", lambda *_: feature["inventory"])
+    return copy.deepcopy(root), copy.deepcopy(endpoint), copy.deepcopy(feature), source
+
+
+def test_prerequisite_real_replay_preserves_legacy_scientific_content(
+    replayed_prerequisites: tuple[dict[str, Any], dict[str, Any], dict[str, Any], bytes],
+) -> None:
+    _, endpoint, feature, _ = replayed_prerequisites
+    assert endpoint["identities"] == {
+        "normalizations": 3,
+        "pair_identities": 21,
+        "slider_identity": True,
+        "wall_identities": 15,
+    }
+    assert feature["identities"]["pair_unique_identities"] == 22
+    assert feature["identities"]["wall_zero_corners"] == 29
+    assert feature["identities"]["parallel_offset_identities"] == 9
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "endpoint_identity",
+        "feature_identity",
+        "missing_identity",
+        "identity_bool",
+        "geometry_bound",
+        "geometry_coverage",
+        "geometry_bool",
+        "option_coverage",
+        "option_bool",
+        "wall_coverage",
+        "offset_bound",
+        "source",
+        "schema",
+        "verdict_bool",
+    ],
+)
+def test_prerequisite_semantic_mutations_refuse(
+    mutation: str,
+    prerequisite_inputs: tuple[dict[str, Any], dict[str, Any], dict[str, Any], bytes],
+) -> None:
+    root, endpoint, feature, source = prerequisite_inputs
+    if mutation == "endpoint_identity":
+        endpoint["identities"]["pair_identities"] = 0
+    elif mutation == "feature_identity":
+        feature["identities"]["pair_unique_identities"] = 21
+    elif mutation == "missing_identity":
+        del feature["identities"]["foundation"]
+    elif mutation == "identity_bool":
+        endpoint["identities"]["slider_identity"] = 1
+    elif mutation == "geometry_bound":
+        endpoint["geometry"]["side"] = ["0", "0"]
+    elif mutation == "geometry_coverage":
+        endpoint["geometry"]["pairs"].pop()
+    elif mutation == "geometry_bool":
+        endpoint["geometry"]["geometry_passed"] = 1
+    elif mutation == "option_coverage":
+        feature["inventory"]["pair_options"].pop()
+    elif mutation == "option_bool":
+        feature["inventory"]["pair_options"][0]["passed"] = 1
+    elif mutation == "wall_coverage":
+        feature["inventory"]["wall_corners"].pop()
+    elif mutation == "offset_bound":
+        tau = feature["inventory"]["parallel_offsets"][0]["tau"]
+        tau[0] = str(Q(tau[0]) + 1)
+        tau[1] = str(Q(tau[1]) + 1)
+    elif mutation == "source":
+        feature["source_sha256"] = "wrong"
+    elif mutation == "schema":
+        endpoint["schema"] = "wrong"
+    else:
+        feature["criterion_passed"] = 1
+    with pytest.raises(ValueError, match="prerequisite"):
+        stress._require_prerequisites(root, endpoint, feature, source)
+
+
+def test_prerequisite_metadata_changes_are_informational(
+    prerequisite_inputs: tuple[dict[str, Any], dict[str, Any], dict[str, Any], bytes],
+) -> None:
+    root, endpoint, feature, source = prerequisite_inputs
+    endpoint["root_certificate_git_ref"] = "historical-object-unavailable"
+    feature.pop("root_git_ref")
+    feature["endpoint_git_ref"] = "revised-provenance"
+    for document in (endpoint, feature):
+        document["timing_seconds"] = {"new-reporting-field": 123}
+        document["root_verification"] = {"historical-only": True}
+    assert stress._require_prerequisites(root, endpoint, feature, source)
+
+
+def test_prerequisite_root_content_is_independently_checked(
+    prerequisite_inputs: tuple[dict[str, Any], dict[str, Any], dict[str, Any], bytes],
+) -> None:
+    root, endpoint, feature, source = prerequisite_inputs
+    root["box"]["midpoint"][0] = "0"
+    with pytest.raises(stress.CertificateError):
+        stress._require_prerequisites(root, endpoint, feature, source)
+
+
+def test_prerequisite_source_only_export_needs_no_git_and_accepts_reformatting(
+    tmp_path: Path,
+    prerequisite_inputs: tuple[dict[str, Any], dict[str, Any], dict[str, Any], bytes],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    root, endpoint, feature, source = prerequisite_inputs
+    endpoint["root_certificate_git_ref"] = "unavailable-old-commit"
+    feature["endpoint_git_ref"] = "changed-reporting"
+    paths = []
+    for document, reference in zip(
+        (root, endpoint, feature),
+        (stress.FROZEN_ROOT_REF, stress.FROZEN_ENDPOINT_REF, stress.FROZEN_FEATURE_REF),
+        strict=True,
+    ):
+        path = tmp_path / reference.partition(":")[2]
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(document, separators=(",", ":")), encoding="utf-8")
+        paths.append(str(path))
+    source_path = tmp_path / "source.json"
+    source_path.write_bytes(source)
+    monkeypatch.setattr(endpoint_module, "REPO", tmp_path)
+    monkeypatch.setattr(stress, "synthetic_controls", lambda: {"passed": True, "seconds": 0})
+    monkeypatch.setattr(stress, "provenance", lambda _: {"Git": "unavailable"})
+
+    def refuse_git(*_: Any, **__: Any) -> None:
+        pytest.fail("prerequisite acceptance tried to read Git history")
+
+    def stop_before_stress() -> None:
+        raise ValueError("prerequisites-passed-stop-before-full-stress")
+
+    monkeypatch.setattr(stress.subprocess, "run", refuse_git)
+    monkeypatch.setattr(stress, "symbolic_residual_proofs", stop_before_stress)
+    assert stress.main([*paths, "--source", str(source_path)]) == 2
+    assert "prerequisites-passed-stop-before-full-stress" in capsys.readouterr().out
+
+
+def test_prerequisite_duplicate_json_still_refuses() -> None:
+    with pytest.raises(ValueError, match="duplicate JSON key"):
+        json.loads(
+            '{"criterion_passed":true,"criterion_passed":1}',
+            object_pairs_hook=stress._object_unique,
+        )

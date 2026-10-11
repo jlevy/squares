@@ -1,0 +1,23 @@
+	Command being timed: "uv run --frozen --all-extras --group dev python -m devtools.verify_n17_kernel_certificate ../packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m5707072 --output /tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/replay/old/w125-k-m5707072.json"
+	User time (seconds): 972.04
+	System time (seconds): 5.38
+	Percent of CPU this job got: 70%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 23:09.56
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1138092
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 10
+	Minor (reclaiming a frame) page faults: 548660
+	Voluntary context switches: 279
+	Involuntary context switches: 112728
+	Swaps: 0
+	File system inputs: 56336
+	File system outputs: 24088
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

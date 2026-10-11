@@ -1,0 +1,67 @@
+{
+  "schema": "n17-case-preserving-mechanical-summary/v1",
+  "status": "complete_primary_miss",
+  "full_payload_equal": true,
+  "fresh_verification_passed": true,
+  "all_source_bytes_match": true,
+  "source_files": 25,
+  "source_commit": "f8bacf1c836a41ab520f8a467a46c23a0c091b1a",
+  "outer_seconds": 97.15814574999968,
+  "cleanup_complete": true,
+  "open_cases": 2,
+  "recoveries_each_case": 16,
+  "foreign_rows_each_case": 992,
+  "additional_combined_union_loss": "0 for everyowner",
+  "secondary_lower_x_owner6_loss": "1/64",
+  "secondary_lower_x_owner6_cover": [
+    "3/8",
+    "31/64"
+  ],
+  "not_a_per_case_fixed_point": true,
+  "global_optimality": false,
+  "ordinary_census_admission": false,
+  "mathematical_review": "SoleAstra actual CLEAR",
+  "mechanical_review": "IndependentSol actual CLEAR",
+  "phases": [
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_case_preserving_owned_propagation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/certificate.json"
+      ],
+      "ended_at": "2026-10-08T02:41:07.589268Z",
+      "name": "construction",
+      "returncode": 0,
+      "started_at": "2026-10-08T02:40:19.284654Z",
+      "status": "completed",
+      "wall_seconds": 48.303664041974116
+    },
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_case_preserving_owned_propagation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/replay.json"
+      ],
+      "ended_at": "2026-10-08T02:41:56.084055Z",
+      "name": "fresh_verification",
+      "returncode": 0,
+      "started_at": "2026-10-08T02:41:07.590535Z",
+      "status": "completed",
+      "wall_seconds": 48.49245004099794
+    }
+  ]
+}

@@ -45,19 +45,27 @@ declare function enhanceMath(): Promise<void> | undefined;
 /** The atlas's two views (`atlas-view.js`): the grid, and the triangle of rows by k. */
 type AtlasView = "grid" | "triangle";
 
-/** The atlas's three sizes of tile (`atlas-view.js`), Medium the default. */
+/** The atlas's three sizes of tile (`atlas-view.js`), Small the default. */
 type AtlasSize = "small" | "medium" | "large";
 
+/** Drawing scale within a reserved tile, Fixed the default. */
+type AtlasScale = "fixed" | "row" | "global";
+
 /**
- * Where a case stands in the triangle for the tiles a line holds: its row k, its line
+ * Where a case stands in the complete right-aligned triangle: its row k, its line
  * from the top of the triangle, its column from the left, and whether its line opens a
  * row after the first.
  */
+type AtlasGridStarts = Readonly<Record<number, number>>;
+
 interface AtlasTrianglePlace {
   row: number;
   line: number;
   column: number;
   opens: boolean;
+  gap: boolean;
+  segmentLine: number;
+  segmentColumn: number;
 }
 
 /** As much of a box as a move is worked out from: a `DOMRect` has all three. */
@@ -78,13 +86,17 @@ interface AtlasMove {
 interface SiteAtlasViewApi {
   row(n: number): number;
   widest(last: number): number;
-  perLine(width: number, least: number, most: number): number;
-  perLineAt(width: number, least: number, largest: number, most: number, scale: number): number;
-  place(n: number, per: number): AtlasTrianglePlace;
+  perLine(width: number, least: number, most: number, gap?: number): number;
+  perLineAt(width: number, least: number, most: number, scale: number, gap?: number): number;
+  place(n: number, per: number, starts?: AtlasGridStarts): AtlasTrianglePlace;
   viewOf(search: string): AtlasView;
   searchFor(search: string, view: AtlasView): string;
   sizeOf(search: string): AtlasSize;
   searchForSize(search: string, size: AtlasSize): string;
+  scaleOf(search: string): AtlasScale;
+  searchForScale(search: string, scale: AtlasScale): string;
+  rowRatio(n: number, side: number): number;
+  largestSide(sides: readonly number[]): number;
   stepTo(key: string, from: number, count: number): number;
   lengthPx(text: string, rootPx: number): number;
   milliseconds(text: string): number;

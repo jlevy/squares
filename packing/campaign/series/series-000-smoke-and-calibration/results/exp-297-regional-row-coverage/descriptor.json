@@ -1,0 +1,17 @@
+{
+  "schema": "n17-regional-row-coverage-context/v1",
+  "parent_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/descriptor.json",
+  "parent_descriptor_sha256": "0b53818fd660020782b4e56313f7a8c2c7c09ce558415c39735b3546724adffa",
+  "centered_receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-280-centered-endpoint-hull-capacity/receipt.json",
+  "centered_receipt_sha256": "5e861eb8049f6893259922550b721e1c1f4769161c99d15ac6ee6eca305150a5",
+  "feasible_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/descriptor.json",
+  "feasible_descriptor_sha256": "e8e5f5931dd2bdbf3efa639661539a7330d427b97b38460f6076254cf0fe0180",
+  "feasible_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/certificate.json",
+  "feasible_certificate_sha256": "14eebce070340940cd1114483187d5bcca90223b5a13494984a8b8cfe3a0793e",
+  "feasible_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/replay.json",
+  "feasible_replay_sha256": "fa81bcc5b918fbc9d18565a199cecb4d80e3508e98196a28e3202f8b9104232b",
+  "collective_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/certificate.json",
+  "collective_certificate_sha256": "4c7a1050ce09f22bf735a76d17d47aaca433576d06a390c448c5fc4b57a9d250",
+  "collective_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/replay.json",
+  "collective_replay_sha256": "3242d00f9f2c88e8c6fd6ee8d6a9455b918389f3e93a8773449fcf39421d70d6"
+}

@@ -96,7 +96,7 @@ BADGE_LABELS = {
     ("=", "solid"): "exact",
     ("≈", "muted"): "numerical",
     ("R", "solid"): "rigid",
-    ("R", "muted"): "rigid (catalogue)",
+    ("R", "muted"): "rigid",
 }
 STAR_LABEL = "new lower bound"
 # The open group's rows: what the record has not yet proved, found or established.
@@ -601,7 +601,7 @@ def badge_symbols(outlines: dict[str, tuple[str, Decimal, Decimal, Decimal]]) ->
 
     symbols = []
     for (glyph, style), ident in BADGE_IDS.items():
-        if style == "solid":
+        if style == "solid" or glyph == "R":
             body = box(BADGE_MUTED, "none") + glyph_path(glyph, BADGE_PAPER)
         else:
             body = box("none", BADGE_MUTED) + glyph_path(glyph, BADGE_MUTED)
@@ -702,19 +702,23 @@ def build_facts(n: int, entry: dict, manifest: dict, frontier: dict, radical: st
     for badge in entry["badges"]:
         key = (badge["glyph"], badge["style"])
         assert key in BADGE_IDS, f"n={n}: badge {key!r} is not one the poster draws"
-        labels.append((BADGE_IDS[key], badge["style"], BADGE_LABELS[key], badge["meaning"]))
+        if badge["glyph"] != "R":
+            labels.append((BADGE_IDS[key], badge["style"], BADGE_LABELS[key], badge["meaning"]))
+    known_rigid = entry["rigidity"].get(
+        "known_rigid", any(badge["glyph"] == "R" for badge in entry["badges"])
+    )
+    if known_rigid:
+        labels.append((BADGE_IDS[("R", "solid")], "solid", "rigid", "known rigid"))
     assert len(labels) <= 3, f"n={n}: {len(labels)} badges"
 
-    # What the record leaves open for this n, from the same three fields the badges
-    # are derived from: optimality not proved, exact value not known, rigidity not
-    # established, each named by the thing that is open.
+    # Unknown rigidity is an absent assessment, not an open mathematical question.
+    # Its proof/source assurance remains in the canonical metadata; the panel lists
+    # only the optimality and exact-value questions the record leaves open.
     open_items: list[str] = []
     if entry["optimality"]["status"] == "open":
         open_items.append(OPEN_LABELS[0])
     if exactness["state"] not in ("closed-form", "minimal-polynomial"):
         open_items.append(OPEN_LABELS[1])
-    if entry["rigidity"]["state"] == "not-established":
-        open_items.append(OPEN_LABELS[2])
     assert len(open_items) <= 3, f"n={n}: {len(open_items)} open items"
     assert len(labels) + max(len(open_items), 1) <= 4, f"n={n}: status rows"
 

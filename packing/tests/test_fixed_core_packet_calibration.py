@@ -1624,28 +1624,66 @@ def test_parent_readback_that_finishes_after_deadline_revokes_admission(
 ) -> None:
     output = tmp_path / "late-readback"
     output.mkdir()
-    document = _seed(output)
+    document = _seed(output, invocation_started=0.0)
     document["phase"] = "awaiting-worker-exit"
     document["error"] = "parent has not observed worker exit"
     calibration.write_result(output, document)
-    started = time.perf_counter()
+    now = [0.0]
 
-    program = "import sys,time;time.sleep(0.3 if '--readback-only' in sys.argv else 0.02)"
-    status = calibration.supervise_worker(
-        (sys.executable, "-c", program, "--worker"),
-        output,
-        repository=REPOSITORY,
-        expected_revision=REVISION,
-        external_seconds=0.18,
-        grace_seconds=0.05,
-        invocation_started=started,
-        external_deadline=started + 0.18,
-    )
+    class Worker:
+        pid = 101
+
+        @staticmethod
+        def poll() -> int:
+            now[0] = 0.02
+            return 0
+
+    class Readback:
+        pid = 102
+
+        @staticmethod
+        def wait(*, timeout: float) -> int:
+            assert 0 < timeout < 0.18
+            assert timeout == pytest.approx(0.16)
+            now[0] = 0.3
+            return 0
+
+    worker, readback = Worker(), Readback()
+    with (
+        patch.object(calibration.subprocess, "Popen", side_effect=[worker, readback]) as launch,
+        patch.object(calibration, "_reap_process_group", return_value=(0, 0.0)) as reap,
+        patch.object(calibration.time, "perf_counter", side_effect=lambda: now[0]),
+    ):
+        status = calibration.supervise_worker(
+            ("worker", "--worker"),
+            output,
+            repository=REPOSITORY,
+            expected_revision=REVISION,
+            external_seconds=0.18,
+            grace_seconds=0.05,
+            invocation_started=0.0,
+            external_deadline=0.18,
+        )
+
+    assert [call.args[0] for call in launch.call_args_list] == [
+        ("worker", "--worker"),
+        ("worker", "--readback-only"),
+    ]
+    assert [(call.args[0], call.kwargs) for call in reap.call_args_list] == [
+        (worker, {"grace_seconds": 0.05}),
+        (readback, {"grace_seconds": 0.05}),
+    ]
     receipt = json.loads((output / "result.json").read_bytes())
     assert status == 1
     assert receipt["status"] == "partial"
+    assert receipt["disposition"] == "incomplete"
     assert receipt["phase"] == "timeout"
-    assert "parent final readback" in receipt["error"]
+    assert receipt["error"] == "external deadline reached during parent final readback"
+    assert receipt["supervision"]["worker_exit_status"] == 0
+    assert receipt["supervision"]["process_group_reaped"] is True
+    assert receipt["clocks"]["worker_exit_seconds"] == pytest.approx(0.02)
+    assert receipt["clocks"]["external_lifetime_seconds"] == pytest.approx(0.3)
+    assert not any(path.name.startswith(".result-admission-") for path in output.iterdir())
 
 
 @pytest.mark.parametrize(

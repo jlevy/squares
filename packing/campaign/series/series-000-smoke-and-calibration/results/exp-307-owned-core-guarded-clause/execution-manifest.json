@@ -1,0 +1,85 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_owned_core_guarded_clause",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_owned_core_guarded_clause",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": 60,
+    "fresh_seconds": 60,
+    "combined_term_seconds": 120,
+    "combined_kill_seconds": 130,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "output_bytes": 1048576
+  },
+  "criterion": "Bind completeaccepted302 three roles and fixedSAMEQ0 foreign proofchain, excluding obsolete owner0 targetrow diagnostics. Emitexactcleared-denominator16signed vertex inequalities (jointtotaldegree3 incentre+halfangle). Finiteprimary alloldh1/512 guard corners/univariatequadraticminima<=0 withreserve2^-21, positiveareaQ0, andNEWfullaxisalignedendpoint disjointness fromQ0xoryspan>1; freshcompletepayload/roles/postcustody match. The same-Q0 transport implication is an explicit source-audited handpremise, independentlyverifiedflagfalse. No guardvolume/strictwidening/complementcover/globalcapture/ordinaryadmission claim; failedfiniteprimary ismiss, resource/refusalunresolved.",
+  "registered_at": "2026-10-08T02:57:27.159687+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch"
+}

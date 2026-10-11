@@ -1,0 +1,36 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-08T21:49:06Z",
+  "git_scope": "Selected complete immutable named files acquired through the GitHub contents API; every original is bound to its Git blob and SHA-256. No checkout, author execution, geometric decision, native replay or standing-bound adoption.",
+  "sources": [
+    {
+      "id": "evand-batch-292-2026-10-07",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "f58a01774a733b232a88576470332185d8d11641",
+      "source_commit": "f58a01774a733b232a88576470332185d8d11641",
+      "committed_utc": "2026-10-07T20:01:52Z",
+      "git_tree": "488b25c01df9ecfcd0cd3d5a4eb13940cd2de31a",
+      "archived_path": "packing/resources/web/evand-batch-292-2026-10-07/source",
+      "subtree_manifest": "packing/resources/web/evand-batch-292-2026-10-07/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "s12/search/exact/batch/README.md",
+        "s12/search/exact/batch/certs/n-292.cert",
+        "s12/search/exact/batch/inputs/n-292.txt",
+        "s12/search/exact/batch/results.json",
+        "s12/search/packer/s292.md"
+      ],
+      "subtree_file_count": 5,
+      "subtree_total_bytes": 267785,
+      "retained_file_count": 5,
+      "retained_total_bytes": 267785,
+      "compressed": [
+        "source/s12/search/exact/batch/results.json.gz"
+      ],
+      "pinned_only": [],
+      "license": "MIT for source code, copyright Evan Daniel; batch register data is CC BY 4.0, Joshua Levy and the squares project. Construction credit Francisco Couzo; refinement credit Evan Daniel; source discloses Claude assistance. No blanket MIT claim for packing data or excluded website material.",
+      "claims": [
+        "Evan Daniel reports an exact rational certificate side for a Francisco Couzo construction at n=292."
+      ]
+    }
+  ]
+}

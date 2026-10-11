@@ -12,6 +12,7 @@ import mpmath
 import pytest
 
 from devtools import pilot_n17_subpattern_bb as bb
+from devtools import verify_n17_bb_certificate as verifier
 
 Q = Fraction
 
@@ -587,23 +588,46 @@ def test_taylor_mode_certifies_crowded_rows_and_never_a_feasible_one() -> None:
     assert feasible["verdict"] != "certified-infeasible"
 
 
-# Chunk names of interval certificates written by the tool before the Taylor option; an
-# interval run must still write exactly these bytes. (The enclosure table holds every
-# angle the process has evaluated, so its name is not pinned.)
-UNCHANGED_CHUNKS = {
-    ("2.80", 0): "27d6798960522cace2fb3e33f16cf7676df68df4ca39a0b60cec38f3d8053a64",
-    ("2.80", 3): "3c55b054898682ab4b10deb12c645b29f7e664e45edac61ccfe08aa6cb913370",
-    ("2.94", 3): "f85e95fb536920f128c001d1ca1c2b7e2ec0a47d6ba0577ad81ad676c975f497",
-}
-
-
-@pytest.mark.parametrize(("right", "obbt_rounds"), sorted(UNCHANGED_CHUNKS))
+@pytest.mark.parametrize(("right", "obbt_rounds"), [("2.80", 0), ("2.80", 3), ("2.94", 3)])
 def test_interval_certificates_are_unchanged_by_the_taylor_option(
     right: str, obbt_rounds: int, tmp_path: Path
 ) -> None:
+    # The pre-Taylor and current implementations produce the same interval chunks
+    # on one host, but HiGHS-proposed multipliers need not match another build's bits.
+    # Compare fresh interval runs around an actual opt-in run, then independently
+    # re-prove every certificate instead of pinning one solver build's proposals.
     pattern = three_in_a_row((str(float(Q(right))), str(float(Q(right) + Q("0.05")))))
-    result = bb.search(pattern, bb.Settings(obbt_rounds=obbt_rounds), certificate=tmp_path)
-    saved = bb.load_certificate(tmp_path, result["certificate_manifest"])
-    assert saved["manifest"]["chunks"] == [UNCHANGED_CHUNKS[right, obbt_rounds]]
-    assert saved["manifest"]["schema"] == bb.CERTIFICATE_SCHEMA
-    assert "taylor" not in saved["manifest"]["header"]["settings"]
+    cells = verifier.Cells(
+        dict(zip(pattern.names, pattern.polygons, strict=True)),
+        pattern.cap,
+        {"kind": "test", "case": right, "obbt_rounds": obbt_rounds},
+    )
+    settings = {
+        "default": bb.Settings(obbt_rounds=obbt_rounds),
+        "taylor": bb.Settings(obbt_rounds=obbt_rounds, taylor=True),
+        "interval": bb.Settings(obbt_rounds=obbt_rounds, taylor=False),
+    }
+    certificates: dict[str, dict[str, Any]] = {}
+    for name, option in settings.items():
+        directory = tmp_path / name
+        result = bb.search(pattern, option, certificate=directory)
+        assert result["verdict"] == "certified-infeasible"
+        certificates[name] = bb.load_certificate(directory, result["certificate_manifest"])
+        receipt = verifier.verify_certificate(
+            directory, cells, manifest=result["certificate_manifest"]
+        )
+        assert receipt["status"] == "PASS", receipt["failures"]
+        assert receipt["mode"] == "full"
+        assert receipt["checked_nodes"] == receipt["nodes"] == result["nodes"] > 0
+    baseline, enabled, interval = (
+        certificates[name] for name in ("default", "taylor", "interval")
+    )
+    assert baseline["manifest"]["chunks"] == interval["manifest"]["chunks"]
+    assert enabled["manifest"]["chunks"] != baseline["manifest"]["chunks"]
+    assert enabled["manifest"]["schema"] == bb.TAYLOR_SCHEMA
+    assert enabled["manifest"]["header"]["settings"]["taylor"] is True
+    assert all("taylor" in node for node in enabled["nodes"])
+    for saved in (baseline, interval):
+        assert saved["manifest"]["schema"] == bb.CERTIFICATE_SCHEMA
+        assert "taylor" not in saved["manifest"]["header"]["settings"]
+        assert all("taylor" not in node for node in saved["nodes"])

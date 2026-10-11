@@ -1,0 +1,38 @@
+{
+  "schema": "n17-conditional-owned-hull-launch/v1",
+  "source_head": "d691c99f563275b8e8b0175c3b0edba92230bf4d",
+  "started_at": "2026-10-07T12:55:52.335651+00:00",
+  "relevant_source_clean": true,
+  "source_blobs": {
+    "packing/devtools/probe_n17_conditional_owned_hull.py": "796039f1dffa88290243714773c8ee396a2accab",
+    "packing/devtools/verify_n17_kernel_certificate.py": "526548939861b811d1be45f4f28352995434c151",
+    "packing/devtools/supervise_posix.py": "4ed7f34a91779292ea0f1b943d21cc00b87505ce"
+  },
+  "controls": {
+    "focused_tests": 38,
+    "independent_engineering_review": "clear",
+    "astra_mathematical_review": "clear"
+  },
+  "argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "1",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-281-conditional-owned-hull-gate/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-281-conditional-owned-hull-gate/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-281-conditional-owned-hull-gate/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-c",
+    "import json,subprocess,sys; from pathlib import Path; m=json.loads(Path(\"campaign/series/series-000-smoke-and-calibration/results/exp-281-conditional-owned-hull-gate/execution-manifest.json\").read_text()); a=subprocess.run(m[\"construction\"],check=False); sys.exit(a.returncode) if a.returncode else None; sys.exit(subprocess.run(m[\"fresh_verification\"],check=False).returncode)"
+  ],
+  "scope": "one frozen finite gain gate; no propagation or automatic retry"
+}

@@ -21,6 +21,8 @@ from typing import Any
 
 import pytest
 
+from devtools import atlas_orientation
+from devtools.atlas_orientation import orient_atlas_witness, reflect_y_axis
 from devtools.regularize_axis_components import (
     ALGORITHM,
     RATIONAL_DIGITS,
@@ -31,9 +33,11 @@ from devtools.regularize_axis_components import (
     WITNESS_SCHEMA,
     AtlasLayout,
     RegularizeError,
+    atlas_record,
     axis_square,
     centre,
     check_atlas,
+    exact_frame,
     house_count_of,
     house_partners,
     interior_overlap_interval,
@@ -47,6 +51,7 @@ from devtools.regularize_axis_components import (
 )
 from devtools.upper_bound_packets import MAX_SIDE_INCREASE
 from sqpack.witness import exact_verify, load_witness, promote_rational, witness_document
+from sqpack.yamlio import load_yaml
 
 HALF = Fraction(1, 2)
 
@@ -578,3 +583,55 @@ def test_the_atlas_records_a_dilation_only_when_the_prototype_is_asked_for(
     (problem,) = check_atlas(layout)
     assert problem.startswith("index parameters is ")
     assert main(["--verify-atlas"], layout=layout) == 1
+
+
+def test_an_oriented_atlas_view_derives_in_the_ancestor_pose_then_rechecks_the_image(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    layout = scratch_atlas(tmp_path)
+    path = layout.packing / "w/n-004.yaml"
+    ancestor = load_witness(path, fallback_schema=WITNESS_SCHEMA)
+    ancestor["claim"].update(
+        method="numerical-multiprecision",
+        precision={"decimal_digits": 120, "rounding": "nearest"},
+    )
+    write_witness(path, ancestor)
+    frame = exact_frame(ancestor)
+    certificate = corner_witness(
+        [[(str(x), str(y)) for x, y in piece.corners] for piece in frame.pieces],
+        str(frame.side),
+        kind="rational",
+        name="ancestor",
+    )
+    parent = layout.certificates / "packet/n-004-rational.yaml.gz"
+    parent.parent.mkdir()
+    parent.write_bytes(gzip.compress(witness_document(certificate).encode(), mtime=0))
+    entry = {"n": 4, "witness": {"path": "w/n-004.yaml"}}
+    before, parent_text, _ = atlas_record(entry, layout)
+    assert parent_text is not None
+    assert before["exact_frame"]["matches_retained_certificate"] is True
+
+    # The registered case is replaced by this small fixture to exercise the same
+    # wrapper without paying for an unrelated full-corpus derivation.
+    monkeypatch.setattr(atlas_orientation, "REFLECTED_N", 4)
+    monkeypatch.setattr(atlas_orientation, "PARENT_FACTS", "tests/synthetic")
+    monkeypatch.setattr(atlas_orientation, "PARENT_SOURCE_KEY", "synthetic-parent")
+    ancestor["source"]["key"] = "synthetic-parent"
+    write_witness(path, orient_atlas_witness(ancestor))
+    after, image_text, _ = atlas_record(entry, layout)
+    assert image_text is not None
+    assert after["exact_frame"]["matches_retained_certificate"] is False
+    assert after["exact_frame"]["ancestor_matches_retained_certificate"] is True
+    assert after["exact_frame"]["geometry_transform"]["operation"] == "reflect-y-axis"
+    assert after["exact_verification"]["passed"] is True
+    assert after["exact_verification"]["independent_checker"] is True
+    for key in ("moves", "statuses", "non_regression", "side", "shades", "changed_squares"):
+        assert after[key] == before[key]
+    original = load_yaml(parent_text)["witness"]
+    image = load_yaml(image_text)["witness"]
+    assert image["squares"] == reflect_y_axis(original)["squares"]
+    assert image["side"] == original["side"]
+    assert image["certificate"]["regularization"] == original["certificate"]["regularization"]
+    assert image["certificate"]["geometry_transform"]["parent"]["exact_certificate"] == (
+        layout.relative(parent)
+    )

@@ -10,6 +10,7 @@ and the GitHub comparison to a recorded fetch.
 from __future__ import annotations
 
 import copy
+import re
 from collections.abc import Mapping
 from typing import Any
 
@@ -448,6 +449,122 @@ def test_the_draft_states_each_result_links_main_and_ends_in_the_footer() -> Non
     assert "closed with this comment" in closing
 
 
+def test_a_recorded_result_is_told_what_was_run_on_it_here_and_not_only_its_rung() -> None:
+    """A complete replay can be retained beside a report entry while it waits for review,
+    as T-128's, T-130's and T-131's were at `C0`, and the draft told their authors that
+    nothing had been read or replayed here. The words follow the evidence: a cited
+    replay that passed, or receipts retained with the entry."""
+    packet = "packing/resources/web/a-packet"
+    register = Register(
+        results={
+            "T-001": result_entry("T-001", "V0", "C0", "E-report"),
+            "T-002": result_entry(
+                "T-002",
+                "V0",
+                "C0",
+                "E-report",
+                artifacts=[
+                    f"{packet}/README.md",
+                    f"{packet}/receipts/exact-certification.json.xz",
+                    f"{packet}/receipts/custody.json",
+                ],
+            ),
+            "T-003": result_entry("T-003", "V0", "C0", "E-report", "E-passed"),
+        },
+        evidence={
+            **REGISTER.evidence,
+            "E-passed": {
+                "origin": "external",
+                "assurance": "reported",
+                "replay_status": "passed",
+            },
+        },
+    )
+
+    def drafted(rid: str) -> str:
+        results = [{"key": "a", "claim": "s(9) >= 3", "register": [rid]}]
+        return check_requests.draft(issue(results=results), register, "owner/repo")
+
+    untouched = drafted("T-001")
+    assert (
+        "T-001, registered as reported: nothing has been read or replayed here yet (V0/C0)."
+    ) in untouched
+    retained = drafted("T-002")
+    assert "nothing has been read or replayed" not in retained
+    assert (
+        f"T-002, registered as reported (V0/C0); receipts of what has been run on it here are "
+        f"retained in `{packet}/receipts/`, none of it yet counted toward confirmation."
+    ) in retained
+    passed = drafted("T-003")
+    assert "nothing has been read or replayed" not in passed
+    assert (
+        "T-003, registered as reported (V0/C0); the replay of E-passed has passed, none of it "
+        "yet counted toward confirmation."
+    ) in passed
+
+
+def test_a_claim_that_ends_in_a_full_stop_takes_its_colon_without_it() -> None:
+    entry = issue(
+        results=[
+            {"key": "bound", "claim": "s(9) >= 3.", "register": ["T-001"]},
+            {
+                "key": "flaw",
+                "claim": "A defect in it.",
+                "evidence": ["E-defect"],
+                "defect": True,
+            },
+            {
+                "key": "later",
+                "claim": "s(11) >= 3.",
+                "not_registered": "Below the bound.",
+                "queued": False,
+            },
+            {"key": "decimal", "claim": "s(12) > 3.875...", "register": ["T-001"]},
+        ]
+    )
+    text = check_requests.draft(entry, REGISTER, "owner/repo")
+    assert not re.search(r"(?<!\.)\.:", text)
+    assert "- s(9) >= 3:\n" in text
+    assert "- A defect in it: the record holds this defect." in text
+    assert "- s(11) >= 3: Below the bound." in text
+    assert "- s(12) > 3.875...:\n" in text, "an ellipsis is part of the claim"
+
+
+def test_an_entry_two_results_map_to_is_queued_once() -> None:
+    """Issue 375's two status reports both map to T-129, and its draft queued T-129 twice."""
+    entry = issue(
+        results=[
+            {"key": "a", "claim": "s(10) >= 3", "register": ["T-002"]},
+            {"key": "b", "claim": "s(11) >= 3", "register": ["T-002", "T-005"]},
+        ]
+    )
+    text = check_requests.draft(entry, REGISTER, "owner/repo")
+    assert text.count("  - T-002, ") == 2, "each result still names the entries it maps to"
+    queued = text.split("**What is still queued, and how it will be completed.**")[1]
+    assert [line for line in queued.splitlines() if line.startswith("- ")] == [
+        "- T-002: T-002's next rung.",
+        "- T-005: T-005's next rung.",
+    ]
+
+
+def test_no_live_draft_says_nothing_ran_beside_a_receipt_doubles_a_colon_or_a_queued_line() -> (
+    None
+):
+    live = check_requests.load_record()
+    register = check_requests.load_register()
+    for entry in live["issues"]:
+        text = check_requests.draft(entry, register, str(live["repository"]))
+        number = entry["number"]
+        assert not re.search(r"(?<!\.)\.:", text), number
+        queued = [line for line in text.splitlines() if line.startswith("- T-")]
+        assert len(queued) == len(set(queued)), number
+        for line in text.splitlines():
+            if "nothing has been read or replayed here" in line:
+                rid = line.split(",", 1)[0].removeprefix("  - ")
+                artifacts = register.results[rid].get("artifacts") or ()
+                assert not any("/receipts/" in path for path in artifacts), (number, rid)
+
+
 def test_the_draft_corrects_what_earlier_replies_said() -> None:
     said = [
         {
@@ -527,6 +644,57 @@ def test_the_backlog_lists_every_entry_below_v3_or_c3_with_its_beads_and_issues(
     assert "think-abcd" in rows[0]
     assert "#7" in rows[0]
     assert "in analysis since 2026-10-01" in rows[2]
+
+
+def test_the_backlog_prices_each_unfinished_confirmation_and_totals_the_known_hours() -> None:
+    """Each entry's unfinished confirmations are listed with their rung and cost, their
+    beads join the entry's, and one line sums the CPU-hours the record knows: the central
+    estimates, the upper ends where given, and how many carry no price."""
+    priced = {
+        "what": "a complete census",
+        "rung": "C3",
+        "link": "think-wxyz",
+        "estimated_cost": {"cpu_hours": 4.3, "basis": "a sample", "priced": "2026-10-10"},
+    }
+    ranged = {
+        "what": "a complete replay",
+        "rung": "C3",
+        "estimated_cost": {
+            "cpu_hours": 11.24,
+            "cpu_hours_high": 23,
+            "basis": "a sample, and the author's own run",
+            "priced": "2026-10-10",
+        },
+    }
+    unpriced = {"what": "a read of the proof", "rung": "C1"}
+    results = dict(REGISTER.results)
+    results["T-002"] = {**results["T-002"], "unfinished_confirmations": [priced]}
+    results["T-005"] = {**results["T-005"], "unfinished_confirmations": [ranged, unpriced]}
+    register = Register(results=results, evidence=REGISTER.evidence)
+    lines = check_requests.backlog(record(issue()), register)
+    rows = {line.split(" | ")[0][2:]: line for line in lines if line.startswith("| T-")}
+    assert (
+        "| C3: about 4.3 CPU-hours (priced 2026-10-10) | think-abcd, think-wxyz |"
+        in (rows["T-002"])
+    )
+    assert (
+        "| C3: about 11.24 CPU-hours, up to about 23 (priced 2026-10-10); C1: not priced |"
+        in rows["T-005"]
+    )
+    assert "|  | think-abcd |" in rows["T-003"]
+    assert (
+        "Unfinished confirmations listed: 3; the 2 with a price come to about 15.5 "
+        "CPU-hours, up to about 27.3, and 1 has none."
+    ) in lines
+    assert check_requests.priced_line([]) == (
+        "No entry above names an unfinished confirmation."
+    )
+    assert check_requests.priced_line([unpriced]) == (
+        "Unfinished confirmations listed: 1, none with a price."
+    )
+    assert check_requests.priced_line([priced]) == (
+        "Unfinished confirmations listed: 1; the 1 with a price comes to about 4.3 CPU-hours."
+    )
 
 
 def test_the_live_backlog_and_report_render() -> None:

@@ -124,21 +124,15 @@ The ones that carry the most weight:
 - `verified_upper_bound` and `verified_lower_bound` contain only formally supported
   bounds. They are a ceiling and a floor, not the value of $s(n)$. The certified ceiling
   may be a weaker rational construction or the exact grid when the tighter public pose
-  is only numerical: for 56 of the 324 cases it is *larger* than the best-known side
-  recorded two fields above it by more than that side’s printed precision allows, by at
-  most $10^{-14}$, and each of those cases says so in its own body and carries a
-  `mathematics` blocker.
-  At 55 of them the catalogue gives the side as a closed form, which Evan Daniel’s
-  rational certificate of the packing bounds from above without reaching it (T-101); at
-  $n = 29$ the ceiling is an interval-certified bound written in full.
-  In 43 more it sits above the printed side by no more than one unit of its last place,
-  which `bounds_agree_at_declared_precision` reads as the same bound: 2 of them are
-  Couzo’s packings certified here (T-056), at $n = 105$ and $130$, whose exact sides
-  round up past the fifteen decimals the source prints, and 22 are the catalogue’s
-  packings certified by Evan Daniel and rounded up at its fourteen (T-101). At 48 counts
-  both lanes hold one exact side, the exact optimum of the reported packing (T-098). An
-  `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known exactly
-  only when `status` is `proved`.
+  is only numerical. A gap exceeding the reported side’s declared precision carries a
+  `mathematics` blocker in the case record; the generated [status table](STATUS.md)
+  lists those gaps. A rational certificate can lie just above the source’s printed side,
+  as Evan Daniel’s catalogue certificates do (T-101), or reach one exact side in both
+  lanes, as his refinements of the earlier packings do (T-098).
+  `bounds_agree_at_declared_precision` accepts a ceiling within one unit of the printed
+  side’s last place as the same displayed bound.
+  An `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known
+  exactly only when `status` is `proved`.
 - `reported_status` is the source-set view; `status` is `proved` only when the verified
   bounds match exactly.
   There are currently 77 proved and 247 open formal cases.
@@ -189,9 +183,23 @@ UnitSquare’s at $n = 69$, larger than the catalogue’s later side for the sam
 baseline, and every claim a source’s retained record makes — the UnitSquare release, a
 packet’s acquisition record, or a directory of exact certificates — is reparsed and
 accounted for exactly once, as selected, superseded or beyond the horizon.
-The selected source register has no remaining beyond-horizon claims.
-The check is local and deterministic; refreshing a public source is a dated W1 research
-survey, not a network operation hidden inside ordinary validation.
+Claims beyond $n = 324$ are listed by count and source.
+A count has at most one current row; an earlier dated report that a later one beats
+stays listed as its source printed it, marked superseded and naming the source of the
+row that beats it, which must be dated no earlier and strictly better by exact
+comparison. The check is local and deterministic; refreshing a public source is a dated
+W1 research survey, not a network operation hidden inside ordinary validation.
+
+SQUISH’s ten-packing release and its later $n = 153$ supplement, published on 7 October
+2026, carry the upper bounds at eleven counts (T-113 and T-114). Nate Chaoweeraprasit
+credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5
+assistance. The certificates are retained as derived facts and were replayed here by two
+independently re-implemented exact-rational checks, with two accepted project AI
+reviews. Both bound lanes display each exact rational side rounded upward at sixteen
+decimals; both `exact_form` fields retain that original certified rational side.
+The source’s finite displays remain attributed metadata in the packet: four were one
+unit too low, five eight or nine units too high, and two agree with the safe display.
+Neither release claims optimality.
 
 The catalogue was last captured on 2026-09-30. The capture of 2026-08-22 is kept beside
 it byte for byte, because the UnitSquare and certified-packet intakes read it and their
@@ -261,6 +269,16 @@ The process relies on these rules of the records:
   or a question is with the authors, the entry says so, dated and linked to the bead or
   issue that shows it, and the line is removed when the work lands or the answer
   arrives.
+- **`regularizations` says whose packing a regularized certificate is.** Where the
+  certificate an entry states rearranges a packing another registered result holds, the
+  entry lists each count: the result `of` whose packing it regularizes, whose finder
+  keeps the credit; the regularizer `by`, one of the entry’s source keys or `project`;
+  the regularizer’s `method`; the `side`, `same` or `solved` to an exact side first; the
+  `changes` the source reports; and what the `identity` rests on, the source’s claim or
+  a measurement here, with what was measured and where (`measured_in`).
+  [`devtools.check_results`](../devtools/check_results.py) holds each item to the
+  register, and the third exact route measures each certificate against the packing its
+  item names.
 - **Geometry is adapted once** to [`Witness/v2`](../witnesses/witness.schema.yaml), and
   then checked with `packing-witness inspect` or `check` under explicit arithmetic,
   precision, and tolerance.
@@ -394,7 +412,13 @@ certificate’s replay command.
    `produced_by` is optional and, when present, must name a recorded hypothesis, agenda
    cell, session, or experiment.
    `next_rung` names the next evidence-improving action or says why no independent one
-   applies. A registration also dates `last_reviewed` at the top of both files.
+   applies. Where it names a confirmation not yet run that would raise `confirmation`,
+   list it also in `unfinished_confirmations`: `what` it is, the `rung` it would reach,
+   the bead or issue that owns it in `link`, and, wherever a price is known, an
+   `estimated_cost` in CPU-hours with its upper end, its `basis` and the day it was
+   `priced` ([epistemics.md](../../epistemics.md#status)). The field is optional; remove
+   an item when its confirmation lands, since the checker refuses one at or below the
+   result’s rung. A registration also dates `last_reviewed` at the top of both files.
 
 6. **Derive the rung; do not choose it.** `verification` and `confirmation` are declared
    in the row and re-derived from the cited entries by the checker, which refuses a

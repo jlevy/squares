@@ -1,0 +1,9 @@
+{
+  "schema": "n17-case-preserving-owned-propagation-context/v1",
+  "cases_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/descriptor.json",
+  "cases_descriptor_sha256": "70958c0d6cbe0aa3e2bfa27b1f606bb2acb8a854bca6360d314346ca237fd8d3",
+  "cases_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/certificate.json",
+  "cases_certificate_sha256": "f44d6730accf37edb62b5face0094468be1c3652d24c21ba6058f6414bfb81d5",
+  "cases_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/replay.json",
+  "cases_replay_sha256": "40ab2ec6a24daf642d411629a0d16ce03016b53e92100c0cba5aa87e7839d023"
+}

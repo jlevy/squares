@@ -16,7 +16,8 @@ The published integration checkpoint `5d276119c52b98ac6770b08bc9b1e582746abe02` 
 its local push tier in 856.20 seconds: 51 selected steps, 2,959 passing tests, 6 skips
 and 19 deselections.
 Pytest took 824.46 seconds for 114 selected test files.
-The [retained log](../../../packing/campaign/agent-sessions/session-164-push-final.log)
+The
+[retained log](../../../packing/campaign/agent-sessions/session-164-push-final.log.gz)
 is a successful operational baseline, not a repeated performance experiment.
 
 The scheduler defaults to as many outer jobs as CPUs.
@@ -99,7 +100,7 @@ Its pytest phase passed 7,714 tests with 9 skips in 968.77 seconds on ten worker
 `PACK_JOBS=1`. The complete push tier took 1,034.70 seconds and failed one documentation
 check because this review was absent from the document map.
 The
-[failed run log](../../../packing/campaign/agent-sessions/session-164-efficiency-push.log)
+[failed run log](../../../packing/campaign/agent-sessions/session-164-efficiency-push.log.gz)
 retains that result.
 The earlier 2,959-test run selected a different workload, so those two walls do not form
 a speedup comparison.

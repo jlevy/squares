@@ -1,0 +1,9 @@
+{
+  "schema": "n17-parent-guard-owned-hull-verification/v1",
+  "status": "INCOMPLETE",
+  "error": "conditional gate wall ceiling",
+  "conditional_exclusion_proved": false,
+  "provenance": {"revision":"26453b94c4575af7c77669a26c9bbdea74585d31","dirty":false,"files":{"packing/devtools/verify_n17_conditional_owned_hull.py":"70dac66c25e0e0c060b1bbc9182fec301a1738d6","packing/devtools/verify_n17_kernel_certificate.py":"526548939861b811d1be45f4f28352995434c151","packing/devtools/probe_n17_conditional_owned_hull.py":"5d0402637370f5aa7b8cd65ea3092a4f308b42e4"}},
+  "invocation": {"argv":["/Users/levy/wrk/github/squares/packing/devtools/verify_n17_conditional_owned_hull.py","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/fresh-descriptor.json","--max-seconds","300","--output","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/verification.json"],"interpreter":"/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python"}
+}
+

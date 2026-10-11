@@ -1,0 +1,46 @@
+{
+  "schema": "n17-independent-coarse-slider-floor/v1",
+  "scope": "conditional physical 9/11 pair lemma on the independent closed coarse domain; no actual leaf acceptance, BW' assumption, LP-relaxation consequence or global coverage",
+  "convention": "all SAT normals directed against Delta=x9-x11; +v survives",
+  "inputs": {
+    "root": {
+      "root_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json",
+      "root_reference": "7866e2623:packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json",
+      "root_search_box": {"midpoint":["362043893314323383453621978739944164218293243036741520638379/1000000000000000000000000000000000000000000000000000000000000","330948674722739910429808533282915634174672003999685385633441/1000000000000000000000000000000000000000000000000000000000000"],"radius":"1/1000000000000"},
+      "root_inclusion_box_used": [["41921818802477517529334234781948756445253267059625055182998803216468608092403/115792089237316195423570985008687907853269984665640564039457584007913129639936","20960909401238758764668259011905145380440350633236115438423009424688580186749/57896044618658097711785492504343953926634992332820282019728792003956564819968"],["4790154809558378799750804220213213320282063630549422836230538472842675061455/14474011154664524427946373126085988481658748083205070504932198000989141204992","19160619238233515199010772715475749057667964055926075885968276233504584885497/57896044618658097711785492504343953926634992332820282019728792003956564819968"]],
+      "root_verification_passed": true
+    },
+    "root_only_prerequisite": true
+  },
+  "constants": {"root_tau_lower":"-1/3","root_tau_upper":"-1/8","coordinate_radius9":"1/100","eta_radius11":"1/100","v_projection_radius9":"1/5000","sqrt2_upper":"99/70","U_absolute_upper":"9/25","universal_pair_support_lower":"1","desired_b_floor":"-1/2500","floor":"-14333333/41666665000","headroom":"2333333/41666665000"},
+  "coarse_domain": {"e9_x":["-1/100","1/100"],"e9_y":["-1/100","1/100"],"eta11":["-1/100","1/100"],"v_dot_e9":["-1/5000","1/5000"],"b_independent_coarse":["-1/2","1/12"],"q9":["-1/200","1/5000"],"q11":["-1/200","1/5000"],"closed":true,"physical_pair_non_overlap":[9,11],"H278_required":false,"BW_prime_required":false},
+  "symbolic": {"nominal_displacement":"x9*-x11*=tau0*u+v","tau0":"c*(s-1)","u":["c","s"],"v":["-s","c"],"root_axis_unit_identity":"c^2+s^2=1 from exact half-angle chart","b_definition":"b=-v dot (x11-x11*)","eta11_definition":"eta11=u dot (x11-x11*)","U":"tau0+u dot e9-eta11","V":"1+b+v dot e9","positive_v_projection":"cos(delta_i)*V-sin(delta_i)*U","half_angle_cosine":"(1 - q**2)/(q**2 + 1)","half_angle_sine":"2*q/(q**2 + 1)","half_angle_tangent":"2*q/(1 - q**2)","half_angle_secant":"(q**2 + 1)/(1 - q**2)","surviving_row_rearrangement":"cos(delta)*(b-(sec(delta)-1+tan(delta)*U-v dot e9))>=0","support_lemma":"own support1/2; other support>=1/2 by unit l1>=unit l2","SAT_lemma":"physical interior non-overlap leaves at least one of eight signed owner-axis rows","nominal_corner_witness_used":false,"interval_division_by_zero":false},
+  "finite": {
+    "U_derived_bounds": ["-7507/21000","-353/3500"],
+    "U_strict_outer_bounds": ["-9/25","0"],
+    "V_closed_bounds": ["2499/5000","16253/15000"],
+    "cosine_lower": "39999/40001",
+    "absolute_sine_upper": "400/40001",
+    "positive_tangent_upper": "10000/24999999",
+    "positive_q_upper": "1/5000",
+    "omitted": [
+      {"id":"9:u:-1","owner":9,"axis":"u","sign":-1,"projection_upper":"1112533/3000075","gap_upper":"-1887542/3000075","witness":"whole-coarse-domain rational envelope; universal support>=1"},
+      {"id":"9:u:1","owner":9,"axis":"u","sign":1,"projection_upper":"1112533/3000075","gap_upper":"-1887542/3000075","witness":"whole-coarse-domain rational envelope; universal support>=1"},
+      {"id":"9:v:-1","owner":9,"axis":"v","sign":-1,"projection_upper":"-99237501/200005000","gap_upper":"-299242501/200005000","witness":"whole-coarse-domain rational envelope; universal support>=1"},
+      {"id":"11:u:-1","owner":11,"axis":"u","sign":-1,"projection_upper":"1112533/3000075","gap_upper":"-1887542/3000075","witness":"whole-coarse-domain rational envelope; universal support>=1"},
+      {"id":"11:u:1","owner":11,"axis":"u","sign":1,"projection_upper":"1112533/3000075","gap_upper":"-1887542/3000075","witness":"whole-coarse-domain rational envelope; universal support>=1"},
+      {"id":"11:v:-1","owner":11,"axis":"v","sign":-1,"projection_upper":"-99237501/200005000","gap_upper":"-299242501/200005000","witness":"whole-coarse-domain rational envelope; universal support>=1"}
+    ],
+    "survivors": [{"id":"9:v:1","owner":9,"axis":"v","sign":1},{"id":"11:v:1","owner":11,"axis":"v","sign":1}],
+    "floor": "-14333333/41666665000",
+    "desired_b_floor": "-1/2500",
+    "strict_headroom": "2333333/41666665000",
+    "floor_implication": "sec(delta)-1>=0; tan(delta)*U>=0 for delta<=0; otherwise tan(delta)<=positive_tangent_upper and U>=-9/25",
+    "closes_BW_prime": false,
+    "leaf_predicate_checked": false
+  },
+  "root_intervals": {"tau0":["-8002008212812054834865167062042715166408308533684561441358784202414510436111/28948022309329048855892746252171976963317496166410141009864396001978282409984","-16004016425624109669727958919465061323963616286598508829667883724453401911725/57896044618658097711785492504343953926634992332820282019728792003956564819968"]},
+  "checker": {"schema":"n17-independent-coarse-slider-floor-check/v1","verification_passed":true,"floor_certified":true,"status":"conditional_slider_floor_certified","root_guard_passed":true,"SAT_options":8,"omitted_options":6,"surviving_options":2,"floor":"-14333333/41666665000","strict_headroom":"2333333/41666665000","physical_pair_non_overlap_required":[9,11],"H278_required":false,"BW_prime_required":false,"LP_relaxation_consequence":false,"leaf_predicate_checked":false,"global_coverage_certified":false,"scope":"conditional physical 9/11 pair lemma on the independent closed coarse domain; no actual leaf acceptance, BW' assumption, LP-relaxation consequence or global coverage","hand_implication":"Astra hand derivation; not independently mathematically reviewed or machine-checked"},
+  "provenance": {"revision":"549c79b6530c1f15e321da9e7a20a3f507e7357b","dirty":false,"files":{"packing/devtools/check_n17_coarse_slider_floor.py":"9fd13bfbdc865fb019890298ff2198081d2958cb","packing/devtools/check_n17_widened_features.py":"a889a3f937e4c7a192b4cb27fa15b131812d1d40","packing/devtools/check_n17_root_certificate.py":"2e390e3f79d8f8d0bb67b132c637ff83b50ecb8f","packing/devtools/audit_n17_endpoint_receipt.py":"e011510a6efc986d13e939fdd44f57fe4bf0572b","packing/devtools/check_n17_endpoint_feasibility.py":"40a5d59e2becef590b18a01db05be20c2c3bd008","packing/devtools/check_n17_core_stress.py":"1466135bc59d37fca7c8c218ade21cd9832ecbe3"}},
+  "execution": {"argv":["--root","campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-270-coarse-slider-floor/certificate.json"],"root":"campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json","python":"3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]","sympy":"1.14.0"}
+}

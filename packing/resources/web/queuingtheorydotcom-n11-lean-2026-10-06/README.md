@@ -8,7 +8,7 @@ public theorem is `ElevenSquare.optimality : ElevenSquare.Optimality`, and its R
 reports that the proof passed a full verification run and final axiom audit, with
 numerical certificates trusted to Lean’s compiler through `native_decide`.
 
-Queuingtheorydotcom, who posts on X as
+Mannaseh Ahmed, who posts on X as
 [@ManassehA06](https://x.com/ManassehA06/status/2107508501610217640), announced the
 formalization on 6 October 2026, so the announcement is the author’s own.
 The retained post is the first of a thread and does not name the repository; the rest of
@@ -30,7 +30,7 @@ is where wand125 reported on 4 October that both Lean formalizations were in pro
 | Committed | 2026-10-06T05:23:42Z (01:23:42 in the commit’s −04:00), by the generic identity “Square Packing Contributors” that `docs/PUBLICATION.md` describes |
 | Retrieved | 2026-10-06T18:41Z, a blobless, depth-1, sparse clone; `main` pointed at this commit |
 | Licence | No licence file at the root and none stated in `README.md`. `integrations/wand125/` keeps three MIT notices for the incorporated work of wand125 and Evan Daniel, and `PROVENANCE.md` says it assigns no new licence to anything else |
-| Announcement | Queuingtheorydotcom as @ManassehA06 (display name “Square Packing Fan”, account 1499452114313129988), 2026-10-06T16:29:17Z, retained as [`receipts/announcement/tweet-2107508501610217640.json`](receipts/announcement/tweet-2107508501610217640.json), the post as X’s syndication endpoint returned it at 18:43Z |
+| Announcement | Ahmed as @ManassehA06 (display name “Square Packing Fan”, account 1499452114313129988), 2026-10-06T16:29:17Z, retained as [`receipts/announcement/tweet-2107508501610217640.json`](receipts/announcement/tweet-2107508501610217640.json), the post as X’s syndication endpoint returned it at 18:43Z |
 | Owner’s post | Joshua Levy ([@ojoshe](https://x.com/ojoshe/status/2107513739222380935)), 2026-10-06T16:50:05Z, quoting the announcement; retained as [`receipts/announcement/tweet-2107513739222380935.json`](receipts/announcement/tweet-2107513739222380935.json), as the same endpoint returned it at 22:22Z. It is a long post, edited once from 2107513041701273913 of 16:47:19Z; the endpoint returns only its first 276 characters, as does X’s oEmbed endpoint, and the rest was not retained |
 | Earlier announcement | 11SquaresOptimal’s, 2026-09-29T03:17:20Z, which the 29 September intake recorded as @MathCompSciFTW’s and the [review article](../../../devtools/templates/n11-optimality-review-article.md) still links at that handle; retained as [`receipts/announcement/tweet-2104772485816168618.json`](receipts/announcement/tweet-2104772485816168618.json), fetched at 22:22Z, when X served it as @ManassehA06’s, from account 1499452114313129988 |
 | Request | None. Bead `think-8spq` (epic `think-wyf4`) imports it at the owner’s request; jlevy/squares#317 is the $n = 11$ umbrella |
@@ -65,7 +65,7 @@ The announcement reads, in full: “The optimality of the packing for 11 squares
 formalized in lean thanks to Astra and Claude! Huge thanks to @ojoshe, @kleddamag,
 @wand_125, @guzhou0806, and @ctjlewis for aiding in the process.” @ojoshe is Joshua Levy,
 this project’s owner. The post links this project’s $n = 11$ page as its image credit.
-It is the author’s own announcement: @ManassehA06 is Queuingtheorydotcom, whom
+It is the author’s own announcement: @ManassehA06 is Ahmed, whom
 `ACKNOWLEDGEMENTS.md` credits with developing and integrating the formalization.
 The owner’s post quoting it reads, as far as X returned it: “Exciting to see a
 resolution of the long-standing geometry problem of packing 11 squares.

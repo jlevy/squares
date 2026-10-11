@@ -1,0 +1,16 @@
+{
+  "experiment": "exp-275",
+  "hypothesis": "H-288",
+  "scientific_target_unrun": true,
+  "generation_argv": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3","-m","devtools.check_n17_capture_cap","--output","campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/certificate.json"],
+  "fresh_argv": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3","-m","devtools.check_n17_capture_cap","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/replay.json"],
+  "combined_argv": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3","-m","devtools.supervise_posix","--max-seconds","180","--max-memory-mib","4096","--sample-seconds","1","--output","campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/supervision.json","--stdout","campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/stdout.log","--stderr","campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/stderr.log","--","/bin/bash","campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/run-cap.sh"],
+  "max_seconds": 180,
+  "kill_seconds": 190,
+  "fixed_cap": "935106018721/200000000000",
+  "outer_cover_cap": "1169/250",
+  "full_root_only": true,
+  "original_objects_never_relabelled": true,
+  "source_freeze": "registrationcommit; soleAstra finalsourceclear required beforelaunch"
+}
+

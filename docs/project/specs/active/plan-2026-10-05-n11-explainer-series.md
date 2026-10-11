@@ -565,7 +565,7 @@ None changes a claim, receipt or rung.
 | --- | --- | --- |
 | I | New Lower Bounds for Square Packing for n = 11 (the owner’s, unchanged) | How weighted points and 2-of-3 threshold atoms prove T-018, T-025 and T-026, s(11) ≥ 3.8264…, with interactive figures. |
 | II | A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares | Explains Kleddamag’s proof that s(11) > 31/8 (T-037): five-site k-of-m charges, threshold charges on shrunken parents with strict cores, and a re-optimised certificate over 12,028 angle rows. |
-| III | A Review of the Optimality Proof of the Trump Packing of 11 Squares (unchanged) | Explains Queuingtheorydotcom’s proof that Trump’s packing is optimal, s(11) = 3.8770835… (T-060): construction, case exclusions, capture and local isolation. |
+| III | A Review of the Optimality Proof of the Trump Packing of 11 Squares (unchanged) | Explains Ahmed’s proof that Trump’s packing is optimal, s(11) = 3.8770835… (T-060): construction, case exclusions, capture and local isolation. |
 
 **Inventory** of every place that lists, links or describes the papers (found by `git
 grep` of both slugs and the paper constants):

@@ -1,0 +1,19 @@
+{
+  "schema": "n17-c2-full-replay-mechanical-summary/v1",
+  "status": "incomplete_guard_unavailable",
+  "source_commit": "e72c7f3c6d59b25a002c54d6f04c8fb34e4d2aee",
+  "source_checkout": "/Users/levy/.codex/worktrees/n17-hosted-recovery/squares",
+  "source_files": 9,
+  "all_source_bytes_match": true,
+  "outer_seconds": 480.46827850001864,
+  "failure": "Command '['/bin/ps', '-axo', 'pid=,pgid=,rss=,stat=']' timed out after 1 seconds",
+  "returncode": -15,
+  "cleanup_complete": true,
+  "last_progress_checked_nodes": 18000,
+  "progress_is_not_full_receipt": true,
+  "full_verification_passed": false,
+  "ordinary_exclusion_admitted": false,
+  "census_admission": false,
+  "replay_retried": false,
+  "original_phase_journal_preserved": true
+}

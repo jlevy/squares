@@ -1,0 +1,9 @@
+{
+  "schema": "n17-pooled-relaxation-witness-context/v1",
+  "union_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/descriptor.json",
+  "union_descriptor_sha256": "60695551b20e1afdfaebbe4d35cd9e53e30afd501bd9705009bc974b83982df4",
+  "union_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/certificate.json",
+  "union_certificate_sha256": "806cd97871fc6fc6fb489260391c2f94b595f19042ca74e09a042b429e445166",
+  "union_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/replay.json",
+  "union_replay_sha256": "c849c7b0326ce3faa2f97cc60a6e3162bf273ac3f7cbab29d99f136477eda9c2"
+}

@@ -267,6 +267,40 @@ jobs:
           steps.measure-cache.outputs.cache-hit == 'true'
         run: git ls-files -z -- sqverify_fast | xargs -0 touch -t 200001010000
 
+      # The 600s cold-build ceiling is provisional. The native floor below retains
+      # its 120s warm per-command ceiling and the verifier tier's measured wall ceiling.
+      # Partial dependency builds are reusable; cargo validates every fingerprint.
+      - name: Key the ordinary n17 verifier cache
+        id: n17-kernel-key
+        if: "github.event_name != 'pull_request'"
+        working-directory: packing/n17_kernel_verify
+        run: |
+          rustc_vv="$(rustc -vV)"
+          echo "tree=$(git rev-parse HEAD:packing/n17_kernel_verify)" >> "$GITHUB_OUTPUT"
+          echo "lock=$(sha256sum Cargo.lock | cut -c1-16)" >> "$GITHUB_OUTPUT"
+          echo "rustc=$(printf '%s' "$rustc_vv" | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore ordinary n17 verifier dependencies and build
+        id: n17-kernel-cache
+        if: "github.event_name != 'pull_request'"
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: packing/n17_kernel_verify/target
+          key: >-
+            ${{ runner.os }}-n17-kernel-${{ steps.n17-kernel-key.outputs.rustc }}-${{
+            steps.n17-kernel-key.outputs.lock }}-${{ steps.n17-kernel-key.outputs.tree }}
+          restore-keys: |
+            ${{ runner.os }}-n17-kernel-${{ steps.n17-kernel-key.outputs.rustc }}-${{ steps.n17-kernel-key.outputs.lock }}-
+
+      - name: Prepare the ordinary n17 verifier under its cold ceiling
+        if: "github.event_name != 'pull_request'"
+        working-directory: packing/n17_kernel_verify
+        run: |
+          mkdir -p "$PACKING_VALIDATION_ARTIFACT_DIR"
+          timeout --signal=TERM --kill-after=10s 600s \
+            cargo test --locked --release --all-targets --no-run --quiet \
+            2>&1 | tee "$PACKING_VALIDATION_ARTIFACT_DIR/n17-kernel-cold-build.log"
+
       # `--fast` is the pull-request surface, and two separate pieces of work in one day
       # made it what it is. They pull in opposite directions on purpose.
       #
@@ -466,6 +500,15 @@ jobs:
         with:
           path: packing/sqverify_fast/target
           key: ${{ steps.measure-cache.outputs.cache-primary-key }}
+
+      - name: Retain ordinary n17 verifier dependency intermediates
+        if: >-
+          always() && steps.n17-kernel-cache.outcome == 'success' &&
+          steps.n17-kernel-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: packing/n17_kernel_verify/target
+          key: ${{ steps.n17-kernel-cache.outputs.cache-primary-key }}
 
       - name: Preserve validation timings and partial logs
         if: always()
@@ -1054,6 +1097,37 @@ jobs:
         if: "steps.n17-native-cache.outputs.cache-hit == 'true'"
         run: git ls-files -z -- n17bb_native | xargs -0 touch -t 200001010000
 
+      # The 600s cold-build ceiling is provisional. The native floor below retains
+      # its 120s warm per-command ceiling and the verifier tier's measured wall ceiling.
+      # Partial dependency builds are reusable; cargo validates every fingerprint.
+      - name: Key the ordinary n17 verifier cache
+        id: n17-kernel-key
+        working-directory: packing/n17_kernel_verify
+        run: |
+          rustc_vv="$(rustc -vV)"
+          echo "tree=$(git rev-parse HEAD:packing/n17_kernel_verify)" >> "$GITHUB_OUTPUT"
+          echo "lock=$(sha256sum Cargo.lock | cut -c1-16)" >> "$GITHUB_OUTPUT"
+          echo "rustc=$(printf '%s' "$rustc_vv" | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore ordinary n17 verifier dependencies and build
+        id: n17-kernel-cache
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: packing/n17_kernel_verify/target
+          key: >-
+            ${{ runner.os }}-n17-kernel-${{ steps.n17-kernel-key.outputs.rustc }}-${{
+            steps.n17-kernel-key.outputs.lock }}-${{ steps.n17-kernel-key.outputs.tree }}
+          restore-keys: |
+            ${{ runner.os }}-n17-kernel-${{ steps.n17-kernel-key.outputs.rustc }}-${{ steps.n17-kernel-key.outputs.lock }}-
+
+      - name: Prepare the ordinary n17 verifier under its cold ceiling
+        working-directory: packing/n17_kernel_verify
+        run: |
+          mkdir -p "$PACKING_VALIDATION_ARTIFACT_DIR"
+          timeout --signal=TERM --kill-after=10s 600s \
+            cargo test --locked --release --all-targets --no-run --quiet \
+            2>&1 | tee "$PACKING_VALIDATION_ARTIFACT_DIR/n17-kernel-cold-build.log"
+
       - name: Run the required pull-request measure verifier tier
         run: >-
           uv run --frozen --all-extras --group dev
@@ -1078,6 +1152,15 @@ jobs:
         with:
           path: packing/n17bb_native/target
           key: ${{ steps.n17-native-cache.outputs.cache-primary-key }}
+
+      - name: Retain ordinary n17 verifier dependency intermediates
+        if: >-
+          always() && steps.n17-kernel-cache.outcome == 'success' &&
+          steps.n17-kernel-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: packing/n17_kernel_verify/target
+          key: ${{ steps.n17-kernel-cache.outputs.cache-primary-key }}
 
       - name: Preserve validation timings and partial logs
         if: always()
@@ -1156,6 +1239,10 @@ jobs:
           test "$playwright_status" -eq 0
 
       - name: Run the frontend source and built-page contracts
+        # think-9dhb: shared-runner load timing is advisory until controlled baseline
+        # evidence establishes a regression/noise margin. Structural/trace gates enforce.
+        env:
+          PYTEST_ADDOPTS: "--site-timing-mode=report-only"
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --frontend --jobs 2 --inner-jobs 1
@@ -1320,12 +1407,27 @@ jobs:
             /packing/resources/web/casson-square-packing-2026-09-23/
             /packing/resources/web/de-winter-square-packing-211-2026-09-16/
             /packing/resources/web/evand-square-packing-2026-10-05/
+            /packing/resources/web/evand-new-arrangements-2026-10-07/
+            /packing/resources/web/squish-401-2026-10-07/
+            /packing/resources/web/squish-401-update-2026-10-07/
+            /packing/resources/web/squish-422-second-update-2026-10-07/
+            /packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/
+            /packing/resources/web/rehwaldt-n68-refinement-2026-10-07/
+            /packing/resources/web/ry-xu-new-packings-2026-10-08/
+            /packing/resources/web/gupta-square-packing-refinements-2026-10-08/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg
             /packing/campaign/explorations/
             !/packing/campaign/explorations/*
             /packing/campaign/explorations/X049-families-data/
+            /packing/campaign/agent-sessions/session-006-h026-exact-tangent.md
+            /packing/campaign/explorations/X-007-the-n5-optimum-flexes-once-and-that-once-is-shut.md
+            /packing/campaign/explorations/X-012-one-chart-four-hundred-inequalities-and-an-order-2m-contradiction.md
+            /packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md
+            /packing/resources/papers/trump-2023-packing-11-unit-squares.raw.md
+            /packing/resources/web/kingbird-squares-in-squares-rigid.md
+            /packing/resources/web/kingbird-squares-in-squares.md
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0

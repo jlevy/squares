@@ -1,0 +1,11 @@
+{
+  "n": 153,
+  "new_assurance_claimed": false,
+  "prior_evidence_preserved": true,
+  "prior_facts": "packing/resources/web/squish-401-2026-10-07/facts/n-153.json.gz",
+  "prior_printed_side": "12.8796793733329640",
+  "same_exact_side": true,
+  "same_ordered_rational_triples": true,
+  "update_facts": "packing/resources/web/squish-401-update-2026-10-07/facts/n-153.json.gz",
+  "update_printed_side": "12.8796793733329640"
+}

@@ -22,6 +22,8 @@ from typing import Any, Protocol
 
 from playwright.sync_api import Page
 
+from workbench_tools.probes import probe
+
 
 class Session(Protocol):
     """The Animate contract's structural seam to its browser-session driver."""
@@ -227,6 +229,7 @@ def range_and_chooser(session: Session) -> str:
     page = session.page
     # W-step2-2 is about the first entry, so the page is loaded again for it.
     page.reload()
+    page.wait_for_function(probe("policy/api-ready"))
     session.enter_animate()
     corpus = session.api(("pairs",))
     first, last = corpus[0]["n"] + 1, corpus[-1]["n"] + 1

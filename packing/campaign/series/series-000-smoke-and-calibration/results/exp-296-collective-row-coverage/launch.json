@@ -1,0 +1,25 @@
+{
+  "started_at": "2026-10-07T21:40:55.155200+00:00",
+  "source_commit": "65dbccbcaf07b8913ca49f9e2a899bbf5a9ebf54",
+  "overall_working_tree_dirty": true,
+  "scientific_source_clean": true,
+  "scientific_source_check_command": [
+    "git",
+    "-C",
+    "..",
+    "status",
+    "--porcelain",
+    "--",
+    "packing/devtools/check_n17_collective_row_coverage.py",
+    "packing/devtools/check_n17_guard_conditioned_ownership.py",
+    "packing/devtools/check_n17_full_square_partner_coupling.py",
+    "packing/devtools/check_n17_partner_pose_coupling.py",
+    "packing/devtools/run_registered_phases.py",
+    "packing/devtools/supervise_posix.py"
+  ],
+  "manifest_sha256": "c1fb26de4d84d53f2b9a5058f22b452ed06c87580adcf9df00bd19659c68843c",
+  "author_controls": "23 PASS1.87s",
+  "independent_sol_controls": "23 PASS1.90s; static-only final delta read CLEAR",
+  "mathematical_review": "Sole Astra source and prospective criterion CLEAR before target",
+  "target_unrun_before_launch": true
+}

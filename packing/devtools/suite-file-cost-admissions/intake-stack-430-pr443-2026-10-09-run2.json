@@ -1,0 +1,60 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 23,
+  "seconds": 5.457,
+  "files": [
+    {
+      "file": "packing/tests/test_acquire_original_gzip.py",
+      "tests": 9,
+      "seconds": 1.165
+    },
+    {
+      "file": "packing/tests/test_squish_receipt_retention.py",
+      "tests": 14,
+      "seconds": 4.292
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_acquire_original_gzip.py",
+      "packing/tests/test_squish_receipt_retention.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_acquire_original_gzip.py": 9,
+      "packing/tests/test_squish_receipt_retention.py": 14
+    },
+    "deselected_tests": 0
+  }
+}

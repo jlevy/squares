@@ -112,6 +112,7 @@ from devtools import check_n11_optimality_pose_inclusion as pose_tool
 from devtools import check_n17_capacity_one_cover as cover
 from devtools import check_n17_slider_coverage as slider_tool
 from devtools.check_n17_endpoint_feasibility import THETA_LABELS, Box
+from devtools.process_memory import current_memory_bytes, peak_memory_bytes
 from devtools.provenance import provenance
 from sqpack import retained_json
 from sqpack.hull_kernel import n11, node, producer, sequential
@@ -133,7 +134,11 @@ from sqpack.hull_kernel.ownership import ownership
 from sqpack.hull_kernel.rational import Q, as_fraction
 
 KERNEL_DIR = Path(producer.__file__).resolve().parent
-PROVENANCE = provenance(Path(__file__), *sorted(KERNEL_DIR.glob("*.py")))
+PROVENANCE = provenance(
+    Path(__file__),
+    Path(__file__).with_name("process_memory.py"),
+    *sorted(KERNEL_DIR.glob("*.py")),
+)
 SCHEMA = "n17-capture-pilot/v1"
 RADIUS = Q(1, 5000)
 CAP_GRID = 10**12
@@ -220,7 +225,10 @@ def load_endpoint(frame: Frame) -> Endpoint:
     require(direct.lo <= side.hi and side.lo <= direct.hi, "S* differs from the layout's side")
     upper = max(side.hi, direct.hi)
     capture_cap = Q(math.ceil(upper * CAP_GRID), CAP_GRID)
-    require(0 < capture_cap - side.hi <= Q(1, CAP_GRID), "U' is not within 10^-12 of S*")
+    require(
+        capture_cap - side.hi > 0 and capture_cap - side.lo <= Q(1, CAP_GRID),
+        "U' is not within 10^-12 of S*",
+    )
     state = slider_tool.endpoint_state(cover.UNIQUE_24.name)
     require(sorted(state) == list(range(1, 18)), "the endpoint state does not label 17 squares")
     t16 = (
@@ -1094,6 +1102,52 @@ def certify_step(
 
 
 @dataclass
+class MemoryGuard:
+    """Optional cooperative current-RSS stop at capture phase boundaries."""
+
+    limit_bytes: int
+    samples: list[dict[str, Any]] = field(default_factory=list)
+    stop: dict[str, Any] | None = None
+
+    def check(self, boundary: str) -> bool:
+        if self.stop is not None:
+            return False
+        sample: dict[str, Any] = {"boundary": boundary, "current_rss_bytes": None}
+        try:
+            current = current_memory_bytes()
+        except OSError as error:
+            sample["current_error"] = str(error)
+        else:
+            if type(current) is not int or current <= 0:
+                sample["current_error"] = "current RSS sampler returned no positive byte count"
+            else:
+                sample["current_rss_bytes"] = current
+        try:
+            sample["lifetime_peak_rss_bytes"] = peak_memory_bytes()
+        except OSError as error:
+            sample["lifetime_peak_rss_bytes"] = None
+            sample["peak_error"] = str(error)
+        self.samples.append(sample)
+        if sample["current_rss_bytes"] is None:
+            self.stop = {"outcome": "memory_unavailable", **sample}
+        elif sample["current_rss_bytes"] > self.limit_bytes:
+            self.stop = {"outcome": "memory_cap", **sample}
+        return self.stop is None
+
+    def report(self) -> dict[str, Any]:
+        return {
+            "limit_bytes": self.limit_bytes,
+            "kind": "cooperative current RSS; lifetime peak is reporting only",
+            "samples": self.samples,
+            "stop": self.stop,
+        }
+
+
+class MemoryStopError(IncompleteError):
+    """A memory stop before an admitted capture state is available."""
+
+
+@dataclass
 class Pilot:
     seed: dict[str, Any]
     node: dict[str, Any]
@@ -1104,6 +1158,7 @@ class Pilot:
     closure: dict[str, Any] | None = None
     refusal: dict[str, Any] | None = None
     resumed: dict[str, Any] | None = None
+    memory: dict[str, Any] | None = None
 
 
 def order(frame: Frame, mask: Sequence[int], coarse: int | None) -> list[int]:
@@ -1136,6 +1191,7 @@ def run_pilot(
     partial: Path | None = None,
     checkpoints: Path | None = None,
     resume: Path | None = None,
+    memory_guard: MemoryGuard | None = None,
 ) -> Pilot:
     """Seed, then rounds of certified owner updates with the endpoint control after each.
 
@@ -1176,7 +1232,11 @@ def run_pilot(
     }
     restored = None if resume is None else load_checkpoint(resume, settings)
     if restored is None:
+        if memory_guard is not None and not memory_guard.check("before_seed"):
+            raise MemoryStopError("current memory guard stopped before seed")
         seed = build_seed(frame, mask, bins=bins, seed_grid=seed_grid, budget=budget)
+        if memory_guard is not None and not memory_guard.check("after_seed_production"):
+            raise MemoryStopError("current memory guard stopped before seed admission")
         admitted = node.admit_seed(
             frame, seed, mask=mask, bins=bins, budget=budget, allow_empty_groups=True
         )
@@ -1242,11 +1302,22 @@ def run_pilot(
             "changed_since": restored["drift"],
         }
     previous = measured
+    if (
+        memory_guard is not None
+        and pilot.endpoint_lost is None
+        and not memory_guard.check("after_seed_admission")
+    ):
+        assert memory_guard.stop is not None
+        pilot.outcome = memory_guard.stop["outcome"]
     for round_index in range(first_round, max_rounds + 1):
-        if pilot.outcome == "endpoint_lost":
+        if pilot.outcome in {"endpoint_lost", "memory_cap", "memory_unavailable"}:
             break
         round_splits = 0
         for owner in contracting:
+            if memory_guard is not None and not memory_guard.check("before_owner_update"):
+                assert memory_guard.stop is not None
+                pilot.outcome = memory_guard.stop["outcome"]
+                break
             if time.monotonic() >= budget.deadline:
                 pilot.outcome = "time_cap"
                 break
@@ -1270,6 +1341,10 @@ def run_pilot(
                 core_kind=core_kind,
             )
             produced_wall, produced_cpu = time.monotonic(), time.process_time()
+            if memory_guard is not None and not memory_guard.check("after_owner_production"):
+                assert memory_guard.stop is not None
+                pilot.outcome = memory_guard.stop["outcome"]
+                break
             try:
                 checked = certify_step(
                     frame, step, groups, rows, node_id=node_id, mask=mask, budget=budget
@@ -1321,6 +1396,10 @@ def run_pilot(
             if not control(f"step {step_index}"):
                 pilot.outcome = "endpoint_lost"
                 break
+            if memory_guard is not None and not memory_guard.check("after_certified_update"):
+                assert memory_guard.stop is not None
+                pilot.outcome = memory_guard.stop["outcome"]
+                break
             if checked["closure"] is not None:
                 pilot.closure = checked["closure"]
                 pilot.outcome = "closed"
@@ -1333,6 +1412,8 @@ def run_pilot(
             "step_refused",
             "endpoint_lost",
             "closed",
+            "memory_cap",
+            "memory_unavailable",
         )
         pilot.rounds.append(
             {
@@ -1344,6 +1425,8 @@ def run_pilot(
             }
         )
         if partial is not None:
+            if memory_guard is not None:
+                pilot.memory = memory_guard.report()
             write_partial(partial, pilot)
         if not complete:
             break
@@ -1434,6 +1517,13 @@ def run_pilot(
         "mask_exclusion_proved": False,
         "global_optimality_proved": False,
     }
+    if memory_guard is not None:
+        pilot.memory = memory_guard.report()
+        if memory_guard.stop is not None:
+            if partial is not None:
+                write_partial(partial, pilot)
+            if checkpoints is not None:
+                write_memory_stop_checkpoint(checkpoints, pilot)
     return pilot
 
 
@@ -1488,6 +1578,24 @@ def write_checkpoint(path: Path, record: Mapping[str, Any]) -> None:
     temporary.replace(path)
 
 
+def write_memory_stop_checkpoint(directory: Path, pilot: Pilot) -> None:
+    """Retain checked state without pretending an interrupted round can be resumed."""
+    write_checkpoint(
+        directory / "checkpoint-memory-stop.json.gz",
+        {
+            "schema": f"{SCHEMA}/incomplete-checkpoint",
+            "resumable": False,
+            "reason": "memory stop at checked boundary; resume from last complete round",
+            "provenance": PROVENANCE,
+            "memory": pilot.memory,
+            "seed": pilot.seed,
+            "node": pilot.node,
+            "rounds": pilot.rounds,
+            "updates": pilot.updates,
+        },
+    )
+
+
 def load_checkpoint(path: Path, settings: Mapping[str, Any]) -> dict[str, Any]:
     """A checkpoint, refused only when it is not one or was written with other settings.
 
@@ -1536,6 +1644,9 @@ def write_partial(path: Path, pilot: Pilot) -> None:
         "rounds": pilot.rounds,
         "updates": pilot.updates,
     }
+    if pilot.memory is not None:
+        record["memory"] = pilot.memory
+        record["outcome"] = pilot.outcome
     temporary = path.with_suffix(".tmp")
     temporary.write_text(
         json.dumps(record, sort_keys=True, default=str) + "\n", encoding="utf-8"
@@ -1724,8 +1835,45 @@ def run(
     checkpoints: Path | None = None,
     resume: Path | None = None,
     max_live_for: Mapping[str, int] | None = None,
+    max_memory_mib: int | None = None,
 ) -> dict[str, Any]:
     started, cpu = time.monotonic(), time.process_time()
+    require(
+        max_memory_mib is None or (type(max_memory_mib) is int and max_memory_mib > 0),
+        "max_memory_mib must be a positive integer",
+    )
+    memory_guard = None if max_memory_mib is None else MemoryGuard(max_memory_mib * 1024**2)
+
+    def early_memory_stop() -> dict[str, Any]:
+        assert memory_guard is not None
+        assert memory_guard.stop is not None
+        record: dict[str, Any] = {
+            "schema": SCHEMA,
+            "status": f"INCOMPLETE_{memory_guard.stop['outcome'].upper()}",
+            "system": system,
+            "cap": cap,
+            "outcome": memory_guard.stop["outcome"],
+            "claim": "no admitted capture state or endpoint check; memory guard stopped work",
+            "endpoint_control": {"held": None, "checked_after": 0},
+            "rounds": [],
+            "updates": [],
+            "scales_first_round": first_rounds([]),
+            "falsifier": falsifier_reading([]),
+            "contraction": {},
+            "memory": memory_guard.report(),
+            "provenance": PROVENANCE,
+            "wall_seconds": time.monotonic() - started,
+            "process_cpu_seconds": time.process_time() - cpu,
+        }
+        if partial is not None:
+            partial.parent.mkdir(parents=True, exist_ok=True)
+            temporary = partial.with_suffix(".tmp")
+            temporary.write_text(json.dumps(record) + "\n", encoding="utf-8")
+            temporary.replace(partial)
+        return record
+
+    if memory_guard is not None and not memory_guard.check("before_sources"):
+        return early_memory_stop()
     if system == "n11":
         require(
             box is None and cap == "capture", "the n11 control runs at n11's cap, from cells"
@@ -1739,32 +1887,43 @@ def run(
         if box is not None:
             frame, endpoint = box_frame(frame, endpoint, box)
     pilot_seconds = max_seconds * (1 - replay_share)
-    pilot = run_pilot(
-        frame,
-        endpoint,
-        bins=bins,
-        max_rounds=max_rounds,
-        max_live=max_live,
-        max_live_for=max_live_for,
-        min_width=min_width,
-        hull_limit=hull_limit,
-        max_seconds=pilot_seconds,
-        seed_grid=seed_grid,
-        core_kind=core_kind,
-        rounds_after_start=rounds_after_start,
-        node_id=f"{system}-capture-pilot",
-        partial=partial,
-        checkpoints=checkpoints,
-        resume=resume,
-    )
+    if memory_guard is not None and not memory_guard.check("after_sources"):
+        return early_memory_stop()
+    try:
+        pilot = run_pilot(
+            frame,
+            endpoint,
+            bins=bins,
+            max_rounds=max_rounds,
+            max_live=max_live,
+            max_live_for=max_live_for,
+            min_width=min_width,
+            hull_limit=hull_limit,
+            max_seconds=pilot_seconds,
+            seed_grid=seed_grid,
+            core_kind=core_kind,
+            rounds_after_start=rounds_after_start,
+            node_id=f"{system}-capture-pilot",
+            partial=partial,
+            checkpoints=checkpoints,
+            resume=resume,
+            memory_guard=memory_guard,
+        )
+    except MemoryStopError:
+        return early_memory_stop()
     replayed: dict[str, Any] | None = None
-    if replay_share > 0 and pilot.endpoint_lost is None:
+    replay_allowed = memory_guard is None or memory_guard.stop is None
+    if replay_share > 0 and pilot.endpoint_lost is None and replay_allowed:
+        replay_allowed = memory_guard is None or memory_guard.check("before_replay")
+    if replay_share > 0 and pilot.endpoint_lost is None and replay_allowed:
         remaining = max_seconds - (time.monotonic() - started)
         try:
             replayed = replay(frame, pilot, max_seconds=max(remaining, 1.0))
         except IncompleteError as error:
             replayed = {"status": "INCOMPLETE", "reason": str(error)}
-    if save_objects is not None:
+        if memory_guard is not None:
+            memory_guard.check("after_replay")
+    if save_objects is not None and (memory_guard is None or memory_guard.stop is None):
         save_objects.mkdir(parents=True, exist_ok=True)
         for kind, value in (("seed", pilot.seed), ("node", pilot.node)):
             raw = json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
@@ -1864,6 +2023,19 @@ def run(
         "wall_seconds": time.monotonic() - started,
         "process_cpu_seconds": time.process_time() - cpu,
     }
+    if memory_guard is not None:
+        result["settings"]["max_memory_mib"] = max_memory_mib
+        result["memory"] = memory_guard.report()
+        if memory_guard.stop is not None:
+            pilot.outcome = memory_guard.stop["outcome"]
+            result["outcome"] = pilot.outcome
+            if not str(result["status"]).startswith("REFUSED"):
+                result["status"] = f"INCOMPLETE_{pilot.outcome.upper()}"
+            pilot.memory = memory_guard.report()
+            if partial is not None:
+                write_partial(partial, pilot)
+            if checkpoints is not None:
+                write_memory_stop_checkpoint(checkpoints, pilot)
     return result
 
 
@@ -1891,6 +2063,11 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--max-seconds", type=float, default=540.0)
     parser.add_argument(
+        "--max-memory-mib",
+        type=int,
+        help="optional cooperative current-RSS ceiling; lifetime peak is reporting only",
+    )
+    parser.add_argument(
         "--replay-share",
         type=float,
         default=0.0,
@@ -1913,6 +2090,8 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("the wall ceiling must be positive and finite")
     if args.bins <= 0 or args.max_rounds <= 0 or args.max_live <= 0:
         parser.error("bins, rounds and live rows must be positive")
+    if args.max_memory_mib is not None and args.max_memory_mib <= 0:
+        parser.error("the current-memory ceiling must be positive")
     if not 0 <= args.replay_share < 1:
         parser.error("the replay share must lie in [0, 1)")
     result = run(
@@ -1934,6 +2113,7 @@ def main(argv: list[str] | None = None) -> int:
         checkpoints=args.checkpoints,
         resume=args.resume,
         max_live_for=parse_caps(args.max_live_for),
+        max_memory_mib=args.max_memory_mib,
     )
     encoded = retained_json.dumps(result, sort_keys=True, default=str)
     if args.output:

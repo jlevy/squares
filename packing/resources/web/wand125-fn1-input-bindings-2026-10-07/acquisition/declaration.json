@@ -1,0 +1,38 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "wand125-fn1-input-bindings",
+  "source_url": "https://github.com/wand125/square-packing-bounds",
+  "source_ref": "refs/heads/main",
+  "source_commit": "b73473fcf60421222b739294d3f7d9c4a8b8da07",
+  "retrieved_at_utc": "2026-10-08T03:45:32Z",
+  "git_scope": "Eleven explicitly selected files at the immutable FN-1 supplement revision: all eight original recorded gzip inputs, the source binding manifest and explanation, and the root licence. No archive bundle or geometric checker is acquired or run.",
+  "archived_dir": "square-packing-bounds",
+  "license": "MIT, Copyright (c) 2026 wand125 (root LICENSE)",
+  "claims": [
+    "Original compressed inputs bind the existing eight check2 records to byte-identical retained candidates; mathematical digests and existing bounds are unchanged."
+  ],
+  "scope": [
+    "LICENSE",
+    "verification/fn1/README.md",
+    "verification/fn1/input-bindings.json",
+    "certificates/mixed_n19_L4825/check2/recorded-input.json.gz",
+    "certificates/mixed_n20_L4905/check2/recorded-input.json.gz",
+    "certificates/mixed_n26_L5545/check2/recorded-input.json.gz",
+    "certificates/mixed_n27_L56435/check2/recorded-input.json.gz",
+    "certificates/mixed_n28_L5735/check2/recorded-input.json.gz",
+    "certificates/mixed_n30_L58835/check2/recorded-input.json.gz",
+    "certificates/mixed_n39_L665/check2/recorded-input.json.gz",
+    "certificates/mixed_n41_L6775/check2/recorded-input.json.gz"
+  ],
+  "pinned_only": [],
+  "original_gzip": [
+    "certificates/mixed_n19_L4825/check2/recorded-input.json.gz",
+    "certificates/mixed_n20_L4905/check2/recorded-input.json.gz",
+    "certificates/mixed_n26_L5545/check2/recorded-input.json.gz",
+    "certificates/mixed_n27_L56435/check2/recorded-input.json.gz",
+    "certificates/mixed_n28_L5735/check2/recorded-input.json.gz",
+    "certificates/mixed_n30_L58835/check2/recorded-input.json.gz",
+    "certificates/mixed_n39_L665/check2/recorded-input.json.gz",
+    "certificates/mixed_n41_L6775/check2/recorded-input.json.gz"
+  ]
+}

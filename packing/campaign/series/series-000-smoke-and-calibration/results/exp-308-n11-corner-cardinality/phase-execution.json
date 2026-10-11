@@ -1,0 +1,17 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-08T03:23:04.794458Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/execution-manifest.json",
+  "manifest_sha256": "1f415797c4974e1d971fad4b713afedd4707d968c7a7989a36478a152febf150",
+  "phases": [
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_n11_corner_cardinality","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/descriptor.json","--max-seconds","120","--output","campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/certificate.json"],"ended_at":"2026-10-08T03:22:38.054779Z","name":"construction","returncode":0,"started_at":"2026-10-08T03:21:35.535465Z","status":"completed","wall_seconds":62.51923350000288},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_n11_corner_cardinality","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/descriptor.json","--max-seconds","120","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/replay.json"],"ended_at":"2026-10-08T03:23:04.793787Z","name":"fresh_verification","returncode":0,"started_at":"2026-10-08T03:22:38.056453Z","status":"completed","wall_seconds":26.73723454104038}
+  ],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T03:21:35.535090Z",
+  "status": "completed",
+  "unstarted_phase_names": [],
+  "wall_seconds": 89.25914416700834
+}
+

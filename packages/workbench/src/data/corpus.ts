@@ -39,6 +39,7 @@ export interface CorpusFacts {
   lower: string | null;
   kind: string;
   badges: { glyph: string; style: string; meaning: string }[];
+  /** Legacy corpus field for lower-bound recency, displayed as red case numbers. */
   star: boolean;
   open: string[];
   html_side: string | null;

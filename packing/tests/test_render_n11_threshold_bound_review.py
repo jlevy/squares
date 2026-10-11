@@ -147,9 +147,9 @@ def test_the_papers_head_is_the_sites_set_at_the_papers_own_address(
         paper.SLUG == render_overview.N11_THRESHOLD_BOUND_REVIEW == "n11-threshold-bound-review"
     )
     assert paper.SITE_PATH == "papers/n11-threshold-bound-review.html"
-    assert check_published_site.head_problems(html, url) == []
+    assert check_published_site.head_problems(html, url, allow_inline_favicon=True) == []
     head = check_published_site.read_head(html)
-    assert head.titles == (f"{paper.TITLE} · {render_overview.PROJECT_NAME}",)
+    assert head.titles == (paper.TITLE,)
     assert head.meta("og:title") == [paper.TITLE]
     assert head.meta("og:type") == ["article"]
     assert head.meta("description") == [paper.DESCRIPTION]
@@ -157,7 +157,9 @@ def test_the_papers_head_is_the_sites_set_at_the_papers_own_address(
     meta = paper.page_meta()
     assert meta.modified == paper_front.iso_date(release.THRESHOLD_REVIEW_REVISED)
     assert head.meta("article:modified_time") == [meta.modified]
-    assert meta.published == ""
+    assert meta.published == paper_front.iso_date(
+        release.THRESHOLD_REVIEW_HISTORY[-1].first_published
+    )
     assert paper_front.revised(paper.FRONT) == release.THRESHOLD_REVIEW_REVISED
 
 
@@ -182,7 +184,8 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     lines = [line.strip() for line in block.strip().splitlines()]
     assert lines[0] == (
         '<span class="credits-source">From the original proof by '
-        "<strong>Kleddamag</strong></span>"
+        '<a href="https://x.com/kleddamag" target="_blank" rel="noopener noreferrer">'
+        "<strong>Kleddamag</strong></a></span>"
     )
     assert lines[1] == (
         f'<span class="credits-source"><a href="https://{address}" target="_blank" '
@@ -197,6 +200,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     )
     assert lines[5] == (
         '<span class="publication-date">'
+        f"First published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.THRESHOLD_PROOF_PUBLISHED} · "
         f"Last revised {release.THRESHOLD_REVIEW_REVISED}</span>"
     )
@@ -210,7 +214,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     # The shared rule keeps the hero's caps off the formula (`paper-publication.css`).
     assert ".hero h1 .tex,\n.hero h1 .kpress-math {" in html
     assert markdown.startswith(
-        f"# {paper.HERO_TITLE}\n\n- From the original proof by **Kleddamag**\n"
+        f"# {paper.HERO_TITLE}\n\n- From the original proof by [**Kleddamag**](https://x.com/kleddamag)\n"
     )
     assert (
         f"- {release.THRESHOLD_REVIEW_EDITION} ([version history](#version-history))"

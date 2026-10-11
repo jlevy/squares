@@ -1,0 +1,81 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 54,
+  "seconds": 9.514,
+  "files": [
+    {
+      "file": "packing/tests/test_known_best_squish.py",
+      "tests": 11,
+      "seconds": 7.606
+    },
+    {
+      "file": "packing/tests/test_source_supersession.py",
+      "tests": 3,
+      "seconds": 0.004
+    },
+    {
+      "file": "packing/tests/test_squish_receipt_binding.py",
+      "tests": 10,
+      "seconds": 0.212
+    },
+    {
+      "file": "packing/tests/test_squish_upper_bound_packets.py",
+      "tests": 16,
+      "seconds": 1.323
+    },
+    {
+      "file": "packing/tests/test_translation_escape_update.py",
+      "tests": 14,
+      "seconds": 0.369
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_known_best_squish.py",
+      "packing/tests/test_source_supersession.py",
+      "packing/tests/test_squish_receipt_binding.py",
+      "packing/tests/test_squish_upper_bound_packets.py",
+      "packing/tests/test_translation_escape_update.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_known_best_squish.py": 11,
+      "packing/tests/test_source_supersession.py": 3,
+      "packing/tests/test_squish_receipt_binding.py": 10,
+      "packing/tests/test_squish_upper_bound_packets.py": 16,
+      "packing/tests/test_translation_escape_update.py": 14
+    },
+    "deselected_tests": 0
+  }
+}

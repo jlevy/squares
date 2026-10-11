@@ -7,6 +7,7 @@ frontend job no browser launch or page load of its own.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import tempfile
 from pathlib import Path
@@ -14,6 +15,7 @@ from typing import Any
 
 from playwright.sync_api import Page, sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.build_site import build
 from workbench_tools.check_layout import check_open as check_layout_open
 from workbench_tools.probes import probe
@@ -33,7 +35,7 @@ def check(page_path: Path) -> str:
             reduced_motion="reduce", viewport={"width": 1440, "height": 1000}
         )
         page.on("pageerror", lambda error: errors.append(str(error)))
-        page.goto(page_path.resolve().as_uri())
+        open_page(page, page_path)
         handle = page.locator("#stage-resize")
 
         def require(condition: bool, message: str) -> None:  # noqa: FBT001
@@ -131,8 +133,41 @@ def check(page_path: Path) -> str:
         page.locator("#mode-animate").click()
         shifted = stage_height(page)
 
+        def reload_observation(phase: str) -> dict[str, Any]:
+            observed = layout(page)
+            print(
+                "stage separator reload: "
+                + json.dumps(
+                    {
+                        "phase": phase,
+                        "layout": observed,
+                        "viewport": page.viewport_size,
+                        "page_errors": list(errors),
+                    },
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
+            return observed
+
+        before_reload = reload_observation("before-reload")
+        require(
+            before_reload["stored"] is not None,
+            f"the chosen stage share was not stored before reload: {before_reload}",
+        )
         page.reload()
-        restored = stage_height(page)
+        reload_observation("after-load")
+        # Loading the document does not imply that its workbench API and font layout
+        # are ready. Use the same readiness boundaries as the retained layout checker.
+        page.wait_for_function(probe("policy/api-ready"))
+        page.evaluate(probe("capture/fonts-ready"))
+        after_ready = reload_observation("after-ready")
+        require(
+            after_ready["stored"] is not None
+            and after_ready["stored"] == before_reload["stored"],
+            f"reload changed the chosen stage share: {before_reload} then {after_ready}",
+        )
+        restored = float(after_ready["stageHeight"])
         require(
             abs(restored - shifted) <= 2,
             f"a reload did not keep the stage at {shifted}, it came back at {restored}",

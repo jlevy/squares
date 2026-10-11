@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from kpress.format import markdown
 
 from devtools import render_frontier_page as frontier
 from devtools import render_overview, site_assets
@@ -38,7 +39,7 @@ from tests import site_renders
 #: than carries: 1,656,135 bytes, with the ceiling, 4 MiB until then, lowered by as much
 #: to keep the room it had. The merge of main into PR 305 that day, carrying both,
 #: measured 1,681,361 bytes.
-PAGE_CEILING_BYTES = 2_350_000
+PAGE_CEILING_BYTES = 1_750_000
 
 #: The columns as a reader meets them: the drawing under no heading, the case, the star,
 #: and then what is known.
@@ -108,15 +109,20 @@ class Rows(HTMLParser):
 
 
 @pytest.fixture(scope="module")
+def frontier_math_counts() -> tuple[int, int]:
+    return site_renders.frontier_math_counts()
+
+
+@pytest.fixture(scope="module")
 def page() -> str:
-    return site_renders.html("frontier.html")
+    return site_renders.html("atlas.html")
 
 
 @pytest.fixture(scope="module")
 def served() -> str:
     """The page as a reader's browser assembles it, with every shared asset it links put
     back in it (`tests.site_renders.served`)."""
-    return site_renders.served("frontier.html")
+    return site_renders.served("atlas.html")
 
 
 @pytest.fixture(scope="module")
@@ -144,7 +150,7 @@ def test_every_case_file_is_a_row_and_every_row_a_case_file(rows) -> None:
 
 
 def test_every_row_is_its_cases_anchor(rows) -> None:
-    """`frontier.html#n-11` lands on the case, which the overview's case cards open."""
+    """`atlas.html#n-11` lands on its survey row; the old Frontier address forwards here."""
     for attributes, _ in rows:
         assert attributes["id"] == f"n-{attributes['data-n']}"
 
@@ -166,10 +172,10 @@ def test_every_value_cell_carries_the_records_value(rows, cases) -> None:
             )
 
 
-def test_the_columns_run_drawing_case_star_and_then_what_is_known(parsed: Rows) -> None:
+def test_the_columns_run_drawing_case_recency_and_then_what_is_known(parsed: Rows) -> None:
     """The drawing has the first column to itself, under a header with no words that a
     screen reader is told is the packing; `n` is next and holds the number alone, the
-    link to the case record; the star follows, ahead of the status and the bounds, so the
+    link to the case record; recency follows, ahead of the status and the bounds, so the
     table's left edge says which case a row is and whether its bound is new."""
     assert [heading for heading, _, _ in frontier.HEADERS] == COLUMNS
     assert [(cell["words"] or "").strip() for cell in parsed.head] == COLUMNS
@@ -195,10 +201,9 @@ def test_the_columns_run_drawing_case_star_and_then_what_is_known(parsed: Rows) 
         n = attributes["data-n"]
         assert len(cells) == len(COLUMNS), n
         thumb, number, star = cells[0], cells[column("n")], cells[column("Recent")]
-        # The drawing, bare: one `svg` of paths and nothing to read.
+        # A standalone SVG image reserves its size without expanding the table HTML.
         assert thumb["class"] == "site-thumb", n
-        assert (thumb["tags"] or "").split()[0] == "svg", n
-        assert set((thumb["tags"] or "").split()) == {"svg", "rect", "g", "path"}, n
+        assert thumb["tags"] == "img", n
         assert thumb["words"] == "", n
         assert "data-value" not in thumb
         # The number alone, as the one link to the case record.
@@ -206,17 +211,17 @@ def test_the_columns_run_drawing_case_star_and_then_what_is_known(parsed: Rows) 
         assert number["tags"] == "a", n
         assert number["words"] == n
         # The star, and after it the tag of a bound that corrects a published result.
-        shown = "★" if attributes["data-recent"] == "true" else ""
+        shown = ""
         if "data-corrects" in attributes:
             shown += "corrects Nagamochi 2005"
         assert star["words"] == shown, n
 
 
-def test_a_correcting_bound_keeps_its_star_and_names_what_it_corrects(
+def test_a_correcting_bound_keeps_its_recency_and_names_what_it_corrects(
     rows, parsed: Rows
 ) -> None:
     """A verified lower bound that corrects a published result is still recent, so its
-    row keeps the star, and the same cell says which work it corrects, in one short span
+    row keeps its recency, and the same cell says which work it corrects, in one short span
     with no link; the row names the register's record of that work in `data-corrects`
     (the owner, 2026-10-02). Which bounds those are is the citation record's to say."""
     corrected = frontier.corrected_lower_bounds()
@@ -238,8 +243,8 @@ def test_a_correcting_bound_keeps_its_star_and_names_what_it_corrects(
         assert attributes["data-corrects"] == corrected[n]["result"] == "T-007", n
         assert attributes["data-recent"] == "true", n
         assert star["data-value"] == "1", n
-        assert star["tags"] == "span span", n
-        assert star["words"] == f"★corrects {corrected[n]['credit']}", n
+        assert star["tags"] == "span", n
+        assert star["words"] == f"corrects {corrected[n]['credit']}", n
     assert seen == len(corrected)
     # n = 38 was the example until the merge of 2026-10-03 put wand125's replayed
     # certificate (T-074) above its corrected floor, and n = 82 until the third merge that
@@ -248,14 +253,16 @@ def test_a_correcting_bound_keeps_its_star_and_names_what_it_corrects(
     case = next(case for case in tables.load_cases() if case["n"] == 106)
     row = frontier.case_row(case, recent=True, corrects=corrected[106])
     assert (
-        '<td data-value="1"><span class="site-star">★</span>'
-        '<span class="site-corrects">corrects Nagamochi 2005</span></td>'
+        '<td data-value="1"><span class="site-corrects">corrects Nagamochi 2005</span></td>'
     ) in row
     assert ' data-recent="true" data-corrects="T-007" ' in row
     plain = frontier.case_row(case, recent=True)
-    assert '<td data-value="1"><span class="site-star">★</span></td>' in plain
+    assert '<td data-value="1"></td>' in plain
+    assert 'class="is-new-result"' not in plain
+    assert 'aria-label="n = 106: recent result; open its case record"' in plain
+    assert "site-star" not in row + plain
     assert "data-corrects" not in plain
-    # The star's tooltip is said once, by its column's heading, not on every star.
+    # The heading still explains the correction tags; each recency marker now has its meaning.
     (recent,) = [cell for cell in parsed.head if (cell["words"] or "").strip() == "Recent"]
     assert recent["title"] == frontier.HEADER_TITLES["Recent"]
     assert all("title" not in cell for cell in parsed.head if cell is not recent)
@@ -269,18 +276,20 @@ def test_the_page_says_once_what_the_tag_means_and_links_the_corrected_result(
     corrected work linked to its row, and the register's words for what failed."""
     sentence = frontier.corrections_prose()
     assert sentence == (
-        "Beside 219 of the stars, *corrects Nagamochi 2005* says the bound stands in for "
+        "For 219 recent verified bounds, *corrects Nagamochi 2005* says the bound "
+        "stands in for "
         "a published result found unsound, the register\u2019s "
-        "[T-007](all-results.html#t-007): "
+        "[T-007](results.html#t-007): "
         "Lemma 1, on which Theorem 2\u2019s proof rests, is false."
     )
     prose = page[: page.index('id="frontier-table"')]
     assert (
-        "Beside 219 of the stars, <em>corrects Nagamochi 2005</em> says the bound stands in"
+        "For 219 recent verified bounds, <em>corrects Nagamochi 2005</em> "
+        "says the bound stands in"
     ) in prose
-    assert '<a href="all-results.html#t-007">T-007</a>' in prose
+    assert '<a href="results.html#t-007">T-007</a>' in prose
     table = page[page.index("<tbody>") : page.index("</tbody>")]
-    assert "all-results.html#t-007" not in table
+    assert "results.html#t-007" not in table
 
 
 #: The cases whose verified lower bound rests only on a published proof nobody here has
@@ -397,8 +406,10 @@ def test_the_gap_is_exact_where_both_bounds_are(rows, cases) -> None:
     # 15680000/3949423, 31360/7901 and 15680/3951 before it), so the gap is 57/2000.
     assert gaps[12] is not None
     assert abs(float(gaps[12]) - 57 / 2000) < 1e-15
-    html_12, _ = frontier.gap(cases[12])
-    assert r"\dfrac{57}{2000}" in html_12
+    html_12, _ = frontier.gap(cases[12], native=True)
+    fraction = re.search(r"<mfrac>(.*?)</mfrac>", html_12, re.DOTALL)
+    assert fraction is not None
+    assert re.findall(r"<mn>(.*?)</mn>", fraction[1]) == ["57", "2000"]
     assert html_12.endswith('<span class="site-approx">= 0.0285</span>')
 
 
@@ -483,8 +494,8 @@ def test_the_tables_cells_carry_those_decimals(page: str, cases) -> None:
         '<span class="site-approx">= 3.9715</span>',
         '<span class="site-approx">= 0.0285</span>',
     ]
-    assert r"\(\dfrac{7943}{2000}\)</span>" in row_12
-    assert r"\(\dfrac{57}{2000}\)</span>" in row_12
+    assert "<mfrac><mrow><mn>7943</mn></mrow><mrow><mn>2000</mn></mrow></mfrac>" in row_12
+    assert "<mfrac><mrow><mn>57</mn></mrow><mrow><mn>2000</mn></mrow></mfrac>" in row_12
     table = page[page.index("<tbody>") : page.index("</tbody>")]
     expected = sum(
         bool(frontier.bound_approx_html(case[field]))
@@ -532,12 +543,14 @@ def test_an_invalid_record_fails_the_render(tmp_path: Path, monkeypatch) -> None
         frontier.frontier_cases()
 
 
-def test_the_page_fetches_only_the_shared_assets_and_is_under_its_ceiling(page: str) -> None:
-    assert_fetches_only_assets("frontier.html", page)
+def test_the_page_fetches_only_assets_and_the_survey_retains_its_ceiling(page: str) -> None:
+    assert_fetches_only_assets("atlas.html", page)
     # Each file it names is one the build writes beside it.
     assert site_assets.shared().assets.referenced([page])
-    size = len(page.encode("utf-8"))
-    assert size < PAGE_CEILING_BYTES, f"frontier.html is {size:,} bytes"
+    start = page.index('<h1 id="the-frontier-survey"')
+    survey = page[start : page.index("</article>", start)]
+    size = len(survey.encode("utf-8"))
+    assert size < PAGE_CEILING_BYTES, f"the Frontier Survey is {size:,} bytes"
     # KPress's per-cell column labels, which nothing on the site reads, are dropped.
     assert "data-col=" not in page
     assert "data-col-index=" not in page
@@ -545,10 +558,32 @@ def test_the_page_fetches_only_the_shared_assets_and_is_under_its_ceiling(page: 
 
 def test_the_page_carries_the_table_script_and_its_controls(page: str, served: str) -> None:
     table = site_assets.shared().assets.script_file(frontier.TABLE_SCRIPT)
-    assert page.count(site_assets.script_tag(table, "frontier.html")) == 1
+    assert page.count(site_assets.script_tag(table, "atlas.html")) == 1
     assert frontier.TABLE_SCRIPT.read_text(encoding="utf-8") in served
     assert 'class="site-table-tools" data-table="frontier" hidden' in page
-    assert 'aria-current="page" href="frontier.html"' in page
+    assert 'aria-current="page" href="atlas.html"' in page
+    assert 'data-page="frontier"' not in page
+
+
+def test_the_complete_survey_follows_the_graphics_and_shares_one_case_popover(
+    page: str,
+) -> None:
+    graphic = page.index("data-atlas-grid")
+    survey = page.index('<h1 id="the-frontier-survey"')
+    table = page.index('id="frontier-table"')
+    assert graphic < survey < table
+    assert 'id="the-survey"' in page
+    assert page.count('id="pop-case"') == 1
+    ids = re.findall(r'\bid="([^"]+)"', page)
+    assert len(ids) == len(set(ids))
+    assert {f"n-{n}" for n in range(1, 325)} <= set(ids)
+    assert {f"atlas-n-{n}" for n in range(1, 325)} <= set(ids)
+    total = len(page.encode("utf-8"))
+    survey_size = len(page[survey : page.index("</article>", survey)].encode("utf-8"))
+    print(
+        f"Prepared Atlas HTML: {total:,} bytes; Frontier Survey: {survey_size:,}; "
+        f"graphics and shared shell: {total - survey_size:,}."
+    )
 
 
 def test_an_evidence_name_and_its_comma_are_one_box() -> None:
@@ -595,11 +630,26 @@ def test_a_row_opens_its_case_record(cases: dict[int, dict[str, Any]]) -> None:
     assert "<details" not in table
 
 
-def test_no_math_is_left_as_source_text_in_the_table(page: str) -> None:
+def test_no_math_is_left_as_source_text_in_the_table(
+    page: str, frontier_math_counts: tuple[int, int]
+) -> None:
     table = page[page.index("<tbody>") : page.index("</tbody>")]
     assert "$" not in table
     assert "sqrt(" not in table
-    assert r"\(\dfrac{7943}{2000}\)" in table
+    assert 'class="katex"' not in table
+    assert (
+        table.count("<math ")
+        == table.count('data-site-native-math="frontier"')
+        == frontier_math_counts[0]
+        > 0
+    )
+    start = page.index('<h1 id="the-frontier-survey"')
+    end = page.index("</article>", start)
+    prose = page[start : page.index("<tbody>")] + page[page.index("</tbody>") : end]
+    assert 'data-kpress-math="inline"' in prose
+    assert "$" not in prose
+    assert 'class="katex"' in prose
+    assert r"\(\dfrac{7943}{2000}\)" not in table
 
 
 def test_the_frontier_inputs_are_render_inputs() -> None:
@@ -626,6 +676,24 @@ def test_exact_forms_render_as_latex(form: str, tex: str) -> None:
     assert tables.latex(form) == tex
 
 
+def test_long_rational_bounds_fit_without_losing_the_exact_form() -> None:
+    form = "85052083333333333333333/10000000000000000000000"
+    bound = {"value": "8.5052083333333333333333", "exact_form": form}
+    original = dict(bound)
+    assert len(tables.latex(form)) <= frontier.VALUE_SHOWN
+    shown = frontier.value_html(bound)
+    assert 'class="site-decimal"' in shown
+    assert "kpress-math" not in shown
+    assert f'title="{form}"' in shown
+    assert "8.50520833…" in shown
+    assert frontier.bound_approx_html(bound) == ""
+    assert bound == original
+    for short in ("643/41", "(16+5sqrt(2))/3"):
+        item = {"value": "1", "exact_form": short}
+        assert "kpress-math" in frontier.value_html(item)
+        assert frontier.bound_approx_html(item)
+
+
 def test_a_polynomial_root_has_no_closed_form() -> None:
     with pytest.raises(ValueError, match="polynomial root"):
         tables.latex("root(P_trump11, 3.877)")
@@ -634,8 +702,11 @@ def test_a_polynomial_root_has_no_closed_form() -> None:
 
 
 def test_every_thumbnail_draws_its_cases_squares() -> None:
-    svg = frontier.thumbnail_svg(11)
+    image = frontier.thumbnail_svg(11)
+    assert 'src="atlas/house/n-11.svg" width="50" height="50"' in image
+    svg = frontier.drawing_files()[frontier.drawing_path(11)].decode()
     assert svg.count("z") == 11
+    assert 'xmlns="http://www.w3.org/2000/svg"' in svg
     assert "id=" not in svg
 
 
@@ -644,3 +715,95 @@ def test_a_minimal_polynomial_with_radical_coefficients_renders_as_latex() -> No
     assert tex == r"24s^4-(1400+352\sqrt{2})s^3+641430=0"
     with pytest.raises(ValueError, match="no LaTeX form"):
         tables.polynomial_latex("s^2 - log(2) = 0")
+
+
+@pytest.mark.parametrize("tex", [r"\dfrac{31}{8}", r"1+\sqrt{2}", r"\frac{5}{2}"])
+def test_table_math_reuses_the_existing_semantic_mathml_exactly(tex: str) -> None:
+    semantic = re.findall(
+        r"<math\b[^>]*>.*?</math>",
+        markdown.parse_markdown(f"${tex}$", title="Semantic control").html,
+        re.DOTALL,
+    )
+    assert len(semantic) == 1
+    assert frontier.math_html(tex, native=True) == (
+        '<span class="kpress-math kpress-math-inline" data-site-native-math="frontier">'
+        + semantic[0]
+        + "</span>"
+    )
+
+
+@pytest.mark.parametrize(
+    "rendered",
+    [
+        '<span data-kpress-math-error="true">invalid</span>',
+        "<span>no semantic root</span>",
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math>' * 2,
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><merror><mi>x</mi></merror></math>',
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"></math>',
+        '<math xmlns="http://www.w3.org/1999/xhtml"><mi>x</mi></math>',
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</math>',
+    ],
+    ids=[
+        "render-error",
+        "missing",
+        "ambiguous",
+        "math-error",
+        "empty",
+        "wrong-namespace",
+        "malformed",
+    ],
+)
+def test_table_math_refuses_invalid_semantic_output(
+    monkeypatch: pytest.MonkeyPatch,
+    rendered: str,
+) -> None:
+    monkeypatch.setattr(markdown, "_render_math", lambda *_args, **_kwargs: rendered)
+    with pytest.raises(ValueError, match="frontier table mathematics"):
+        frontier.math_html("x", native=True)
+
+
+def test_shared_frontier_helpers_keep_prepared_katex_unless_table_opts_in(cases) -> None:
+    shared = [
+        frontier.math_html(r"1+\sqrt{2}"),
+        frontier.value_html(cases[5]["reported_upper_bound"]),
+        frontier.gap(cases[12])[0],
+    ]
+    for rendered in shared:
+        assert 'data-kpress-math-renderer="katex"' in rendered
+        assert 'class="kpress-math-semantic"' in rendered
+        assert 'data-site-native-math="frontier"' not in rendered
+    for rendered in (
+        frontier.value_html(cases[5]["reported_upper_bound"], native=True),
+        frontier.gap(cases[12], native=True)[0],
+    ):
+        assert 'data-site-native-math="frontier"' in rendered
+        assert "katex-html" not in rendered
+
+
+def test_frontier_formula_oracle_refuses_missing_rows_and_invalid_math() -> None:
+    formula = (
+        '<span class="kpress-math" data-site-native-math="frontier">'
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn></math></span>'
+    )
+    rows = "".join(
+        f'<tr id="n-{n}"><td>{formula if n == 1 else ""}</td></tr>' for n in range(1, 325)
+    )
+    source = (
+        '<table id="frontier-table"><tbody>'
+        + rows
+        + "</tbody></table>"
+        + '<span class="kpress-math">prose</span>' * 9
+    )
+    assert site_renders.count_frontier_math(source) == (1, 10)
+    for mutant in (
+        source.replace('<tr id="n-324"><td></td></tr>', ""),
+        source.replace("<mn>1</mn>", "<mn></mn>"),
+        source.replace("<mn>1</mn>", "<merror><mn>1</mn></merror>"),
+        source.replace(
+            "</math>",
+            '</math><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn></math>',
+        ),
+        source.replace("http://www.w3.org/1998/Math/MathML", "invalid-namespace"),
+    ):
+        with pytest.raises(AssertionError):
+            site_renders.count_frontier_math(mutant)

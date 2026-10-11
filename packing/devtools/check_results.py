@@ -28,7 +28,16 @@ result the clause is about holds (`devtools.rung_prose`); a statement of what a 
 needs is not such an assertion. A result's status (recorded, reviewed, confirmed, incomplete) is
 derived from its rungs by `devtools.result_status` and never stored; this holds
 the one hand-recorded workflow fact, an entry's `activity`, to its fields, its
-link and its age. Human review owns evidence relevance, claim
+link and its age, and an entry's `unfinished_confirmations`, the confirmations it names
+and has not run, to rungs above its own, one listing each, a link that resolves and a
+price that is positive, ordered and dated no later than the register's last review
+(`unfinished_confirmations_problems`). It holds an entry's `regularizations`, the counts
+at which its certificate rearranges a packing another result holds, to counts in its
+scope, each once, to a registered result (`of`) dated no later whose scope holds the
+count, to a regularizer among the entry's own sources (or `project`, on a result of
+this project), and to measurements that are numbers no lower than zero, one at least
+where the identity was decided here (`regularizations_problems`). Human review owns
+evidence relevance, claim
 coverage, composition, significance, novelty, whether a headline says what its
 claim says, and the choice between kinds the record cannot tell apart.
 
@@ -46,7 +55,13 @@ from typing import Any
 
 from devtools.build_bound_citations import RECENT_SINCE
 from devtools.render_document_map import document_link
-from devtools.result_status import STATUSES, activity_problems, latest_review, status
+from devtools.result_status import (
+    STATUSES,
+    activity_problems,
+    latest_review,
+    link_problem,
+    status,
+)
 from devtools.rung_prose import REGISTER_FIELDS, Standing, label_problems
 from devtools.verifier_registry import RANK, confirming_runs, strongest
 from sqpack.assurance import EXTERNAL_ORIGINS, PROOF_METHODS
@@ -68,6 +83,8 @@ READER_TIER = (
     REPO / "README.md",
     REPO / "SYNOPSIS.md",
     ROOT / "devtools" / "templates" / "overview-article.md",
+    ROOT / "devtools" / "templates" / "about-article.md",
+    ROOT / "devtools" / "templates" / "atlas-article.md",
     ROOT / "devtools" / "templates" / "all-results-article.md",
     ROOT / "devtools" / "templates" / "frontier-article.md",
     ROOT / "devtools" / "templates" / "papers-article.md",
@@ -337,9 +354,9 @@ def confirmation_code(
     return strongest(pool)
 
 
-#: The word whose kind the prose rule asks for, as a verb or a participle; a novelty label
-#: or a status in code is not the word.
-_CONFIRMED = re.compile(r"(?<![\w`])confirmed(?![\w`-])", re.IGNORECASE)
+#: The word whose kind the prose rule asks for, as a verb or a participle; a novelty label,
+#: a status in code, or a hypothesis a run bears out (``confirms H-219``) is not the word.
+_CONFIRMED = re.compile(r"(?<![\w`])confirm(?:ed|s)(?![\w`-])(?!\s+H-\d)", re.IGNORECASE)
 #: The phrases that say which kind of confirmation a sentence means (epistemics.md,
 #: Confirmation): the producer's own code re-run, a re-implementation sharing its named
 #: components, or an independent re-implementation.
@@ -353,8 +370,8 @@ _SENTENCE_END = re.compile(r"(?<=[.;:])\s+(?=[A-Z`(\[])")
 
 
 def confirmation_prose_problems(record: Mapping[str, Any]) -> list[str]:
-    """Sentences of a result's `claim`, `composition` or `next_rung` that say "confirmed"
-    without saying which kind of confirmation: the producer's code re-run, shared
+    """Sentences of a result's `claim`, `composition` or `next_rung` that say "confirmed" or
+    "confirms" without saying which kind of confirmation: the producer's code re-run, shared
     components, or an independent re-implementation. `notes` is history and exempt."""
     return [
         f"{record['id']}: {name} says confirmed without saying how: {sentence[:90]}"
@@ -433,10 +450,98 @@ def repository_file_problem(path: str) -> str | None:
     try:
         target.relative_to(REPO.resolve())
     except ValueError:
-        return "resolves outside the repository"
+        return linked_repository_file_problem(path)
     if not target.is_file():
         return "does not name a file"
     return None
+
+
+def linked_repository_file_problem(path: str) -> str | None:
+    """Only separately admitted exact proof and atlas leaves may link outside."""
+    from devtools import evand_arrangement_houses as evand  # noqa: PLC0415
+    from devtools import gupta_house_links as gupta  # noqa: PLC0415
+    from devtools import refinement_house_links as refinements  # noqa: PLC0415
+    from devtools import ryxu_house_links as ryxu  # noqa: PLC0415
+    from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+    from devtools import squish_second_update_house_links as house  # noqa: PLC0415
+    from devtools.squish_followup_packets import linked_certificate_problem  # noqa: PLC0415
+
+    # Proof paths name their fixed source; atlas paths additionally require the
+    # private current selection. A linked witness cannot choose its own validator.
+    proofs = {
+        f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in second.NUMBERS
+    }
+    if path in proofs:
+        return second.linked_certificate_problem(path, repository=REPO)
+    owners = (
+        (gupta, gupta.NUMBERS, gupta.reports.SOURCE_KEY),
+        (ryxu, ryxu.NUMBERS, ryxu.SOURCE_KEY),
+        (house, house.LINK_NUMBERS, house.confirmation.reported.SOURCE_KEY),
+        (refinements, refinements.packets.COUZO.numbers, refinements.packets.COUZO.key),
+        (refinements, refinements.packets.N68.numbers, refinements.packets.N68.key),
+        (evand, evand.NUMBERS, evand.reports.SOURCE_KEY),
+    )
+    declared = {
+        f"packing/witnesses/known-best/n-{n:03d}.yaml": n
+        for _owner, numbers, _key in owners
+        for n in numbers
+    }
+    if path in declared:
+        n = declared[path]
+        frontier = REPO / "packing/frontier" / f"n-{n:03d}.md"
+        if frontier.is_symlink() or not frontier.resolve().is_relative_to(REPO.resolve()):
+            return "selected frontier escapes the private checkout"
+        try:
+            selected = _frontmatter(frontier)["packing"]
+            selected_n = selected["n"]
+            source_key = selected["reported_upper_bound"]["source_key"]
+        except ValueError, KeyError, TypeError, OSError:
+            return "linked house requires its complete private selected frontier"
+        for owner, numbers, expected_key in owners:
+            if n not in numbers:
+                continue
+            if selected_n == n and source_key == expected_key:
+                return owner.linked_house_problem(path, repository=REPO)
+        return "selected source has no admitted linked-house owner"
+    return linked_certificate_problem(path, repository=REPO)
+
+
+def repository_file_problems(paths: Iterable[str]) -> dict[str, str | None]:
+    """Check one register invocation, sharing each packet's complete linked-proof admission."""
+    from devtools import squish_followup_packets as first  # noqa: PLC0415
+    from devtools.squish_second_update_packets import NUMBERS  # noqa: PLC0415
+
+    selected = dict.fromkeys(paths)
+    declared = {
+        f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in NUMBERS
+    }
+    linked = [
+        path
+        for path in selected
+        if path in declared and not (REPO / path).resolve().is_relative_to(REPO.resolve())
+    ]
+    problems: dict[str, str | None] = {}
+    if linked:
+        from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+
+        problems.update(second.linked_certificate_problems(linked, repository=REPO))
+    first_declared = {
+        f"packing/witnesses/squish-401-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in first.RESULT_NUMBERS
+    }
+    first_linked = [
+        path
+        for path in selected
+        if path in first_declared and not (REPO / path).resolve().is_relative_to(REPO.resolve())
+    ]
+    if first_linked:
+        problems.update(first.linked_certificate_problems(first_linked, repository=REPO))
+    problems.update(
+        (path, repository_file_problem(path)) for path in selected if path not in problems
+    )
+    return problems
 
 
 def _frontmatter(path: Path) -> dict:
@@ -909,6 +1014,202 @@ def _established_date_problem(established: str, last_reviewed: str) -> str | Non
     return None
 
 
+#: The confirmation rungs an unfinished confirmation may name: a confirmation reaches one
+#: of them, never `C0`.
+UNFINISHED_RUNGS = ("C1", "C2", "C3", "C4", "C5")
+
+
+def _cpu_hours(value: object) -> float | None:
+    """A price in CPU-hours as the schema types it, a positive number, or nothing."""
+    if isinstance(value, bool) or not isinstance(value, int | float) or value <= 0:
+        return None
+    return float(value)
+
+
+def unfinished_confirmations_problems(
+    record: Mapping[str, Any], last_reviewed: str
+) -> list[str]:
+    """What is wrong with a result's `unfinished_confirmations`, the confirmations its
+    record names and has not run (epistemics.md, Status).
+
+    Each names what it is and the confirmation rung it would reach, which lies above the
+    result's own: a confirmation that has landed raised the rung and is removed. It is
+    listed once, its `link` is a bead, an issue, a branch or a repository file, and a
+    price, where one is recorded, is a positive number of CPU-hours whose upper end is no
+    lower than its estimate, dated no later than the register's last review. The check
+    reads the register's own date and never the clock, as `activity_problems` does.
+    """
+    items = record.get("unfinished_confirmations")
+    if not items:
+        return []
+    rid = record["id"]
+    held = str(record.get("confirmation", "C0"))
+    reviewed = _iso_date(last_reviewed)
+    problems: list[str] = []
+    seen: dict[str, int] = {}
+    for number, item in enumerate(items, start=1):
+        rung = str(item.get("rung"))
+        name = f"{rid}: unfinished confirmation {number} ({rung})"
+        what = " ".join(str(item.get("what") or "").split())
+        if not what:
+            problems.append(f"{name} says what it is in `what`")
+        elif (first := seen.setdefault(what.casefold(), number)) != number:
+            problems.append(f"{name} repeats unfinished confirmation {first}")
+        if rung not in UNFINISHED_RUNGS:
+            problems.append(f"{name} names no rung among {', '.join(UNFINISHED_RUNGS)}")
+        elif _rank(rung) <= _rank(held):
+            problems.append(
+                f"{name} is not above the result's confirmation, {held}; a confirmation "
+                "that has landed is removed"
+            )
+        if item.get("link") and (problem := link_problem(str(item["link"]))):
+            problems.append(f"{name}: link {problem}: {item['link']}")
+        problems.extend(_cost_problems(name, item.get("estimated_cost"), reviewed))
+    return problems
+
+
+def _cost_problems(
+    name: str, cost: Mapping[str, Any] | None, reviewed: date | None
+) -> list[str]:
+    """What is wrong with one unfinished confirmation's `estimated_cost`, if it has one."""
+    if cost is None:
+        return []
+    problems: list[str] = []
+    central = _cpu_hours(cost.get("cpu_hours"))
+    if central is None:
+        problems.append(f"{name}: estimated_cost.cpu_hours is not a positive number")
+    if "cpu_hours_high" in cost:
+        high = _cpu_hours(cost.get("cpu_hours_high"))
+        if high is None:
+            problems.append(f"{name}: estimated_cost.cpu_hours_high is not a positive number")
+        elif central is not None and high < central:
+            problems.append(
+                f"{name}: estimated_cost.cpu_hours_high, {cost['cpu_hours_high']}, is below "
+                f"its estimate, {cost['cpu_hours']}"
+            )
+    if not str(cost.get("basis") or "").strip():
+        problems.append(f"{name}: estimated_cost says how it was priced in `basis`")
+    priced = _iso_date(cost.get("priced"))
+    if priced is None:
+        problems.append(f"{name}: estimated_cost.priced is not a calendar date")
+    elif reviewed is not None and priced > reviewed:
+        problems.append(
+            f"{name}: estimated_cost.priced {priced.isoformat()} is after the register's "
+            f"last_reviewed {reviewed.isoformat()}"
+        )
+    return problems
+
+
+#: The `by` of a regularization this project made, of a result without `attribution`.
+PROJECT_REGULARIZER = "project"
+#: What a regularization's `changes` and `identity` count or measure, none below zero;
+#: the counts are whole numbers.
+REGULARIZATION_NUMBERS = {
+    "changes": ("merged_rotation_groups_deg", "straightened", "re_angled"),
+    "identity": ("moved", "max_move", "max_turn_deg"),
+}
+REGULARIZATION_COUNTS = frozenset({"straightened", "re_angled", "moved"})
+#: The measurements an identity decided here rests on; `measured` needs one at least.
+IDENTITY_MEASUREMENTS = ("one_to_one", "moved", "max_move", "max_turn_deg")
+
+
+def _regularization_number_problems(name: str, item: Mapping[str, Any]) -> list[str]:
+    """The counts and measurements of one regularization that are no number, negative, or
+    a count that is no whole number."""
+    problems: list[str] = []
+    for block, fields in REGULARIZATION_NUMBERS.items():
+        values = item.get(block) or {}
+        for field in fields:
+            if field not in values:
+                continue
+            value = values[field]
+            whole = isinstance(value, int) and not isinstance(value, bool)
+            number = whole or isinstance(value, float)
+            if not number or value < 0 or (field in REGULARIZATION_COUNTS and not whole):
+                kind = "a whole number" if field in REGULARIZATION_COUNTS else "a number"
+                problems.append(f"{name}: {block}.{field} is not {kind} of at least 0: {value}")
+    return problems
+
+
+def regularizations_problems(
+    record: Mapping[str, Any],
+    dated: Mapping[str, str],
+    scopes: Mapping[str, set[int]],
+) -> list[str]:
+    """What is wrong with a result's `regularizations`, the counts at which its certificate
+    is a regularization of a packing another registered result holds (epistemics.md,
+    Results by Others).
+
+    Each count lies in this result's scope and is listed once. The result it names as
+    `of` is registered, is not this one, holds that count in its scope and is dated no
+    later than this one (`result_date`, as `superseded_by_problems` compares them): a
+    packing is regularized after it is published. `by` is one of this result's
+    `attribution.source_keys`, or `project` on a result of this project, which has none.
+    The counts and measurements are numbers no lower than zero, `moved` is no more
+    squares than the count holds, a `measured_in` names a repository file, and an
+    identity decided here (`measured`) carries at least one measurement. `dated` and
+    `scopes` are every result's date and cases.
+    """
+    items = record.get("regularizations")
+    if not items:
+        return []
+    rid = str(record["id"])
+    keys = set((record.get("attribution") or {}).get("source_keys") or [])
+    own = scopes.get(rid, set())
+    problems: list[str] = []
+    seen: set[int] = set()
+    for item in items:
+        n = item.get("n")
+        name = f"{rid}: regularization at n = {n}"
+        if n in seen:
+            problems.append(f"{name} is listed twice")
+        seen.add(n)
+        if n not in own:
+            problems.append(f"{name} is outside this result's scope")
+        other = str(item.get("of"))
+        if other == rid:
+            problems.append(f"{name} names the result itself as the packing it regularizes")
+        elif other not in dated:
+            problems.append(f"{name} names {other}, which is not registered")
+        else:
+            if n not in scopes.get(other, set()):
+                problems.append(f"{name} names {other}, whose scope does not hold n = {n}")
+            if _earlier(dated[rid], dated[other]):
+                problems.append(
+                    f"{name} names {other}, dated {dated[other]}, after this result's "
+                    f"{dated[rid]}"
+                )
+        by = str(item.get("by"))
+        if keys and by not in keys:
+            problems.append(
+                f"{name} is by {by}, which is not among this result's attribution.source_keys"
+            )
+        elif not keys and by != PROJECT_REGULARIZER:
+            problems.append(
+                f"{name} is by {by}, but a result of this project is regularized by "
+                f"`{PROJECT_REGULARIZER}`"
+            )
+        problems.extend(_regularization_number_problems(name, item))
+        identity = item.get("identity") or {}
+        moved = identity.get("moved")
+        if isinstance(moved, int) and isinstance(n, int) and moved > n:
+            problems.append(f"{name}: identity.moved, {moved}, is more squares than n = {n}")
+        if identity.get("measured_in") and (
+            problem := repository_file_problem(str(identity["measured_in"]))
+        ):
+            problems.append(
+                f"{name}: identity.measured_in {problem}: {identity['measured_in']}"
+            )
+        if identity.get("basis") == "measured" and not any(
+            field in identity for field in IDENTITY_MEASUREMENTS
+        ):
+            problems.append(
+                f"{name}: an identity measured here carries at least one of "
+                f"{', '.join(IDENTITY_MEASUREMENTS)}"
+            )
+    return problems
+
+
 def coverage_problems(
     results: list[dict],
     evidence_index: dict[str, dict],
@@ -1102,6 +1403,12 @@ def main() -> int:
     problems.extend(superseded_by_cycles(results))
 
     standings: dict[str, Standing] = {}
+    artifact_problems = repository_file_problems(
+        path
+        for record in results
+        for field in ("artifacts", "controls")
+        for path in record.get(field) or []
+    )
     for record in results:
         rid = record["id"]
         scope = record["scope"]
@@ -1121,7 +1428,7 @@ def main() -> int:
             problems.extend(
                 f"{rid}: {field} path {problem}: {path}"
                 for path in record.get(field) or []
-                if (problem := repository_file_problem(path))
+                if (problem := artifact_problems[path])
             )
 
         problems.extend(attribution_problems(record, sources))
@@ -1133,6 +1440,10 @@ def main() -> int:
         problems.extend(superseded_by_problems(record, dated, scopes, holding))
         problems.extend(established_problems(record, register["last_reviewed"]))
         problems.extend(activity_problems(record, str(register["last_reviewed"])))
+        problems.extend(
+            unfinished_confirmations_problems(record, str(register["last_reviewed"]))
+        )
+        problems.extend(regularizations_problems(record, dated, scopes))
         problems.extend(confirmation_prose_problems(record))
 
         for kind, value in (record.get("produced_by") or {}).items():
@@ -1216,8 +1527,10 @@ def main() -> int:
         "headline and date holds, every kind agrees with its claim and evidence, every "
         "declared supersession names a result no earlier on a shared case, never "
         "supersedes all of a result a case bound rests on and never leads back, every "
-        "recent case lower bound is covered, every reader-tier mention exists; by status, "
-        + ", ".join(f"{held.count(name)} {name}" for name in STATUSES)
+        "unfinished confirmation lies above its result's rung, every regularization names "
+        "a registered packing no later on the count it regularizes, by a source of its "
+        "own, every recent case lower bound is covered, every reader-tier mention exists; "
+        "by status, " + ", ".join(f"{held.count(name)} {name}" for name in STATUSES)
     )
     return 0
 

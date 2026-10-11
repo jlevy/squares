@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-11'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -665,7 +665,7 @@ evidence:
     relationship_to_generator: not-applicable
     origin: external
     novelty: previously-published
-    source_key: '[Queuingtheorydotcom n11 optimality 2026]'
+    source_key: '[Ahmed n11 optimality 2026]'
     replay_status: not-attempted
     verifiers: [V-queuingtheory-n11-verify]
     external_review:
@@ -703,7 +703,7 @@ evidence:
     shared_components: ["this repository's exact arithmetic and construction primitives (clipping, closed-cover and collision kernels), which the published source bundles"]
     origin: audited-here
     novelty: previously-published
-    source_key: '[Queuingtheorydotcom n11 optimality 2026]'
+    source_key: '[Ahmed n11 optimality 2026]'
     certificate: packing/resources/web/n11-optimality-2026-09-29/receipts/final-composition.json
     replay: >-
       Replay the geometric components with the frozen commands in
@@ -764,7 +764,7 @@ evidence:
     relationship_to_generator: same-implementation
     origin: external
     novelty: previously-published
-    source_key: '[Queuingtheorydotcom 11SquaresFormalized 2026]'
+    source_key: '[Ahmed 11SquaresFormalized 2026]'
     certificate: resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ElevenSquare/Optimality.lean
     replay_status: not-attempted
     verifiers: [V-queuingtheory-n11-lean, V-audit-n11-lean]
@@ -832,7 +832,7 @@ evidence:
     relationship_to_generator: same-implementation
     origin: replayed-here
     novelty: previously-published
-    source_key: '[Queuingtheorydotcom 11SquaresFormalized 2026]'
+    source_key: '[Ahmed 11SquaresFormalized 2026]'
     certificate: resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ElevenSquare/Construction.lean
     replay: >-
       From packing/, with elan: .venv/bin/python3 -m devtools.audit_n11_lean stage --out W,
@@ -887,7 +887,7 @@ evidence:
     relationship_to_generator: shared-components
     shared_components: ["this repository's exact arithmetic and construction primitives (clipping, closed-cover and collision kernels), which the published source bundles, as in E-n011-global-optimality-independent"]
     origin: audited-here
-    source_key: '[Queuingtheorydotcom n11 optimality 2026]'
+    source_key: '[Ahmed n11 optimality 2026]'
     source_reviewed: '2026-10-06'
     certificate: packing/resources/web/n11-optimality-2026-09-29/receipts/final-composition.json
     replay: >-
@@ -10106,7 +10106,20 @@ evidence:
         Searched the corpus for systematic screens of translational freedom. The phrase 'translation escape' returns zero files, and no bulk screen appears anywhere. The concept is NOT new, and the record should be read accordingly: Gensane-Ryckelynck 2005 observe of one packing that 'six squares are isolated and six can be displaced by small translations', the Kingbird catalogue annotates individual cases 'Rigid.', and [Friedman DS7] and Trump 2023 assert rigidity case by case. What is novel is the systematic application across 318 retained configurations with replayable certificates, not the idea of checking whether a square can slide. This is the thinnest novelty claim in the register
       gaps: >-
         Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's personal site and the unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
-    limitations: 'Sound in one direction only. A hit exhibits a square, a direction and a distance, and every constraint is exactly affine in the slide parameter, so it certifies that the retained configuration admits a non-trivial feasible motion: 296 of the 318 screened records are not rigid on this evidence. A miss is weak and never establishes rigidity, because rotation and coordinated multi-square motion are outside the screen. Coordinates are the witness''s own finite-precision transcription, so every finding is about the retained configuration rather than the true optimum; the smallest certified slide is 2.03e-4 against witness coordinates carrying at least 28 digits. Twenty-three records added on 2026-09-07 (n=132, 154, 155, 156, 179, 180, 181, 182, 206, 207, 208, 209, 210, 238, 239, 240, 241, 270, 273, 297, 301, 305, 307) have movable-square counts that differ between the screen''s four tolerances, because their sources carry fewer digits (17 at n=179); each still holds a replayed hit at the primary tolerance, so the not-rigid verdict stands, and the screen lists them under tolerance_disagreement_ns rather than counting them as stable. n=68, 69, 103, 105, 110 and 131 are excluded by shape residual. Rigidity and optimality are independent and nothing here bears on the latter.'
+    limitations: >-
+      Sound in one direction only. The current retained screen covers all
+      324 displayed configurations: 302 have a replayed single-square translation, 22
+      have no hit, and none are excluded by shape residual. Its tolerance-disagreement
+      list contains 58 cases; each motion assessment uses the replayed hit at the
+      primary tolerance of 1e-8, not an assertion of stability across tolerances.
+      A hit exhibits a square, direction and distance; every constraint is affine in
+      the slide parameter, with no linearization error. Coordinates are the retained
+      witness's finite-precision transcription and validity is checked at the declared
+      tolerance, so the finding concerns that configuration rather than the true
+      optimum. A miss never establishes rigidity: rotation and coordinated multi-square
+      motion are outside the screen. Rigidity and optimality are independent. The
+      historical novelty assessment remains dated 2026-09-07; this coverage audit does
+      not redate that assessment or claim a new mathematical determination.
     source_reviewed: '2026-09-07'
 
   - id: E-perfect-square-tiling-rigid
@@ -27831,3 +27844,3154 @@ evidence:
       run among them (receipts/n41-L6775/cpp-sample/ in the packet, 642 CPU seconds),
       and was not run in full: samples that decide those nodes only.
     source_reviewed: '2026-10-06'
+
+  - id: E-squish-ten-packings-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 108
+      - 126
+      - 129
+      - 130
+      - 154
+      - 155
+      - 180
+      - 209
+      - 238
+      - 303
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH ten packings 2026-10-07]'
+    certificate: packing/resources/web/squish-401-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: 'Nate Chaoweeraprasit reports exact rational centres and t = tan(theta/2), with cos(theta)
+      = (1-t^2)/(1+t^2) and sin(theta) = 2t/(1+t^2), for pairwise interior-disjoint closed unit squares
+      contained in a square of rational side S. The source reports SQUISH exact Fraction checks and David
+      Ellsworth numerical checks at epsilon 1e-40; none is replay evidence here. The exact rational side
+      is authoritative; s_decimal is a finite display and at n = 130, 154, 238 and 303 lies below it.
+      Only upper bounds are claimed: numerical polishing supplies no optimality, local-optimality or rigidity
+      proof. Source assets publish no license; only derived facts and provenance metadata are retained.
+      The source states human-directed Claude Opus 5.5 assistance.'
+    source_reviewed: '2026-10-07'
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra high reasoning mathematics reviewer and GPT-6 Astra max reasoning correctness
+        reviewer, separately prompted project AI review lanes
+      note: The two accepted reviews (docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md;
+        docs/project/reviews/review-2026-10-06-squish-import-correctness.md) re-derive exact unit-square
+        geometry from rational half-angle triples, check complete all-pair separating-axis and wall decisions
+        and their trust boundaries, match the eleven source certificates to retained facts, and accept
+        the source-to-witness and receipt bindings. Their reproduced roster, JSON round-trip and receipt-integrity
+        defects were fixed and regression-tested; no mathematical or correctness defect remains open.
+        The source’s own checker was neither retained nor executed. No local/global optimality, rigidity
+        or human oversight is established.
+
+  - id: E-squish-n153-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 153
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH n153 2026-10-07]'
+    certificate: packing/resources/web/squish-401-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: 'Nate Chaoweeraprasit reports exact rational centres and t = tan(theta/2), with cos(theta)
+      = (1-t^2)/(1+t^2) and sin(theta) = 2t/(1+t^2), for pairwise interior-disjoint closed unit squares
+      contained in a square of rational side S. The source reports SQUISH exact Fraction checks and David
+      Ellsworth numerical checks at epsilon 1e-40; none is replay evidence here. The exact rational side
+      is authoritative; s_decimal is a finite display and at n = 130, 154, 238 and 303 lies below it.
+      Only upper bounds are claimed: numerical polishing supplies no optimality, local-optimality or rigidity
+      proof. Source assets publish no license; only derived facts and provenance metadata are retained.
+      The source states human-directed Claude Opus 5.5 assistance.'
+    source_reviewed: '2026-10-07'
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra high reasoning mathematics reviewer and GPT-6 Astra max reasoning correctness
+        reviewer, separately prompted project AI review lanes
+      note: The two accepted reviews (docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md;
+        docs/project/reviews/review-2026-10-06-squish-import-correctness.md) re-derive exact unit-square
+        geometry from rational half-angle triples, check complete all-pair separating-axis and wall decisions
+        and their trust boundaries, match the eleven source certificates to retained facts, and accept
+        the source-to-witness and receipt bindings. Their reproduced roster, JSON round-trip and receipt-integrity
+        defects were fixed and regression-tested; no mathematical or correctness defect remains open.
+        The source’s own checker was neither retained nor executed. No local/global optimality, rigidity
+        or human oversight is established.
+
+
+  - id: E-squish-ten-packings-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 108
+      - 126
+      - 129
+      - 130
+      - 154
+      - 155
+      - 180
+      - 209
+      - 238
+      - 303
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH ten packings 2026-10-07]'
+    certificate: packing/witnesses/squish-401-2026
+    replay: From packing/, uv run --frozen --all-extras --group dev python -m devtools.squish_upper_bound_packets
+      check --replay. The complete replay checks all eleven retained source fact records, losslessly regenerates
+      each rational-corner witness, and runs sqpack.witness.exact_verify and devtools.check_rational_witness_independent
+      on every square pair and wall. Both routes must accept every original and refuse both geometric
+      negative controls. The certification and negative-control receipts are retained in packing/resources/web/squish-401-2026-10-07/receipts/.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-squish-upper-bound-packets
+    independence_record: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    limitations: The producer’s verification code is unavailable and was neither retained nor executed.
+      The two first-party deciders independently implement the same separating-axis theorem, sharing the
+      losslessly converted rational corners, YAML infrastructure and Python integer/Fraction arithmetic.
+      The mathematical review checks that shared conversion, the exact unit-square geometry and closed-boundary
+      semantics. All 177,440 pairs over the eleven certificates were decided by each route; this entry
+      covers only its declared counts. No source success log, numerical tolerance, pose optimization or
+      dilation enters the decision. Every retained witness has the original exact rational side; the case’s
+      reported and verified decimal displays are that fraction rounded upward at sixteen decimals, and
+      both case exact_form fields retain the certified rational side. The receipt's exact_form and
+      certified_side fields retain the same source rational. Both 108-square controls preserve the roster
+      and unit-square
+      shapes, force overlap or escape respectively, and are rejected after all 5,778 pairs are examined.
+      The receipt records the complete semantic deciding input, including the count, rational side,
+      unit-square side and corner/id roster. The fast packet check compares that input to the current
+      witness independently of nongeometric metadata, and
+      validates the recorded diagnostics; it does not replace geometric replay. The certificates establish
+      upper bounds only, with no optimality, rigidity, proof-assistant verification or human oversight
+      claim.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra high reasoning mathematics reviewer and GPT-6 Astra max reasoning correctness
+        reviewer, separately prompted project AI review lanes
+      note: The two accepted reviews (docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md;
+        docs/project/reviews/review-2026-10-06-squish-import-correctness.md) re-derive exact unit-square
+        geometry from rational half-angle triples, check complete all-pair separating-axis and wall decisions
+        and their trust boundaries, match the eleven source certificates to retained facts, and accept
+        the source-to-witness and receipt bindings. Their reproduced roster, JSON round-trip and receipt-integrity
+        defects were fixed and regression-tested; no mathematical or correctness defect remains open.
+        The source’s own checker was neither retained nor executed. No local/global optimality, rigidity
+        or human oversight is established.
+    source_reviewed: '2026-10-07'
+  - id: E-squish-n153-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 153
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH n153 2026-10-07]'
+    certificate: packing/witnesses/squish-401-2026
+    replay: From packing/, uv run --frozen --all-extras --group dev python -m devtools.squish_upper_bound_packets
+      check --replay. The complete replay checks all eleven retained source fact records, losslessly regenerates
+      each rational-corner witness, and runs sqpack.witness.exact_verify and devtools.check_rational_witness_independent
+      on every square pair and wall. Both routes must accept every original and refuse both geometric
+      negative controls. The certification and negative-control receipts are retained in packing/resources/web/squish-401-2026-10-07/receipts/.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-squish-upper-bound-packets
+    independence_record: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    limitations: The producer’s verification code is unavailable and was neither retained nor executed.
+      The two first-party deciders independently implement the same separating-axis theorem, sharing the
+      losslessly converted rational corners, YAML infrastructure and Python integer/Fraction arithmetic.
+      The mathematical review checks that shared conversion, the exact unit-square geometry and closed-boundary
+      semantics. All 177,440 pairs over the eleven certificates were decided by each route; this entry
+      covers only its declared counts. No source success log, numerical tolerance, pose optimization or
+      dilation enters the decision. Every retained witness has the original exact rational side; the case’s
+      reported and verified decimal displays are that fraction rounded upward at sixteen decimals, and
+      both case exact_form fields retain the certified rational side. The receipt's exact_form and
+      certified_side fields retain the same source rational. Both 108-square controls preserve the roster
+      and unit-square
+      shapes, force overlap or escape respectively, and are rejected after all 5,778 pairs are examined.
+      The receipt records the complete semantic deciding input, including the count, rational side,
+      unit-square side and corner/id roster. The fast packet check compares that input to the current
+      witness independently of nongeometric metadata, and
+      validates the recorded diagnostics; it does not replace geometric replay. The certificates establish
+      upper bounds only, with no optimality, rigidity, proof-assistant verification or human oversight
+      claim.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra high reasoning mathematics reviewer and GPT-6 Astra max reasoning correctness
+        reviewer, separately prompted project AI review lanes
+      note: The two accepted reviews (docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md;
+        docs/project/reviews/review-2026-10-06-squish-import-correctness.md) re-derive exact unit-square
+        geometry from rational half-angle triples, check complete all-pair separating-axis and wall decisions
+        and their trust boundaries, match the eleven source certificates to retained facts, and accept
+        the source-to-witness and receipt bindings. Their reproduced roster, JSON round-trip and receipt-integrity
+        defects were fixed and regression-tested; no mathematical or correctness defect remains open.
+        The source’s own checker was neither retained nor executed. No local/global optimality, rigidity
+        or human oversight is established.
+    source_reviewed: '2026-10-07'
+
+  - id: E-squish-update-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH update 2026-10-07]'
+    certificate: packing/resources/web/squish-401-update-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: 'The author reports thirteen rational certificates: twelve new or tighter bounds and
+      an exact duplicate of the earlier n153 attachment. Claims are retained as attributed derived facts
+      only; no producer checker is executed, and no new project feasibility assurance, optimality or
+      rigidity is claimed. Francisco Couzo is credited for ten update seeds and SQUISH for the other
+      three, as recorded per case in acquisition/sources.json. Human-directed Claude Opus 5.5 assistance
+      is disclosed. Finite source prints are kept separate from exact rational sides and safe upward
+      decimal displays.'
+    source_reviewed: '2026-10-07'
+
+  - id: E-squish-update-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH update 2026-10-07]'
+    certificate: packing/witnesses/squish-401-update-2026
+    replay: From packing/, uv run --frozen --all-extras --group dev python -m devtools.squish_followup_packets
+      check-certification --replay. The retained complete reviewer replay is reused; retention did
+      not rerun either decider. Both routes accepted the twelve exact rational packings and rejected
+      both full-size controls.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-squish-followup-packets
+    independence_record: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+    limitations: The twelve geometries contain 2309 squares and 237025 unordered pairs per deciding
+      route. Scoped positive wall time was 104.001 seconds, taken from the completed thirteen-case
+      108.598-second run; the duplicate n153 is excluded. Each 123-square control tested all 7503
+      pairs per route, with 7.684 seconds total measured control time. The first-party routes share
+      exact converted corners, YAML and Python rational arithmetic, but no geometry code. Two separately
+      prompted AI reviews cover the conversion and full semantic source/input/control binding. The
+      producer checker was not executed. Sides are unchanged exact rationals, with least upward sixteen-place
+      decimal displays and separate original source prints. Feasible upper bounds establish neither
+      optimality nor rigidity, proof-assistant verification or independently audited human oversight.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra mathematics and separately prompted semantic binding AI review lanes
+      note: The accepted scoped reviews docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+        and docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md cover these twelve
+        update geometries, full decided inputs and full-size controls. The original eleven-case reviews
+        retain their original scope.
+    source_reviewed: '2026-10-07'
+
+  - id: E-squish-second-update-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH second update 2026-10-07]'
+    certificate: packing/resources/web/squish-422-second-update-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Nine source claims are retained as attributed normalized rational facts only.
+      Current reported layer V0/C0 admits no feasibility replay or scoped review; producer code,
+      success logs, raw prose and raw drawings remain outside Git. No optimality, rigidity or
+      human oversight established. Five source decimal prints lie below their exact sides and
+      remain quotations; current displays use safe upward ceilings. Nate Chaoweeraprasit reports
+      Kingbird (David Ellsworth), Francisco Couzo and SQUISH seeds and human-directed Claude Opus5.5
+      assistance. Earlier verified lanes remain unchanged.
+    source_reviewed: '2026-10-07'
+
+  - id: E-squish-second-update-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH second update 2026-10-07]'
+    certificate: packing/witnesses/squish-422-second-update-2026
+    replay: From packing/, uv run --frozen --all-extras --group dev python -m devtools.squish_second_update_confirmation
+      check-certification --replay. The completed 27-job dual exact replay is retained unchanged; canonical
+      retention itself does not rerun either decider. Both routes accepted all nine positives and rejected
+      all eighteen complete-roster controls.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-squish-second-update-confirmation
+    independence_record: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+    limitations: The nine packings contain 1762 squares and 190303 unordered pairs per route. Across nine
+      positives and eighteen full-roster controls, each route tested 570909 pairs, 1141818 across both
+      routes. All 27 children and the outer batch exited zero. The sum of per-job dual-route decision
+      wall times is 222.246477794 seconds; parallel batch elapsed time was not recorded. The two independently
+      implemented SAT routes share the SAT theorem, Python Fraction, YAML loading and serialized source-to-corner
+      conversion. Independent rotation-matrix derivation in the mathematics review addresses that shared
+      conversion. Historical actual witness metadata, complete deciding inputs, runtime identities, schema
+      and source custody remain retained unchanged; canonical repository-relative metadata is an explicit
+      transformation validated by full ordered geometry equality. No source producer executable was run.
+      Exact sides are unchanged, with zero dilation, safe upward sixteen-place displays and separate source
+      prints. Feasibility establishes no optimality, rigidity, proof-assistant verification or independently
+      audited human oversight.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra mathematics and separately prompted GPT-6 Astra semantic-binding AI review
+        lanes
+      note: Two distinct accepted reviews docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md
+        and docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md cover all
+        nine immutable source geometries, all 27 complete deciding inputs, all 54 outcomes and full-size
+        controls. Their acceptance concerns the completed scientific replay, not a future integration
+        pull request.
+    source_reviewed: '2026-10-07'
+  - id: E-rehwaldt-couzo-refinements-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 292
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    certificate: packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Source-reported finite rational witnesses for existing constructions. Center-expansion
+      metadata describes repair already applied; no additional expansion is performed. Source checker
+      reports are external claims. No unrestricted lower-bound, optimality, rigidity or human-oversight
+      assurance is admitted.
+    source_reviewed: '2026-10-08'
+  - id: E-rehwaldt-n68-refinement-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 68
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Rehwaldt n68 refinement 2026-10-07]'
+    certificate: packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Source-reported finite rational witnesses for existing constructions. Center-expansion
+      metadata describes repair already applied; no additional expansion is performed. Source checker
+      reports are external claims. No unrestricted lower-bound, optimality, rigidity or human-oversight
+      assurance is admitted.
+    source_reviewed: '2026-10-08'
+
+  - id: E-evand-exact-form-n102-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 102
+    assurance: reported
+    source_reviewed: '2026-10-07'
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026]'
+    certificate: packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Source assertions only. No upstream checker or Lean build was executed here; retained
+      checker flags are not local verdicts. Polynomial irreducibility, minimality, published-expression
+      equality and exact geometry remain unverified. No global optimality or rigidity established.
+      Source packings are configuration-specific; later bounds at the same count receive no transferred
+      proof.
+  - id: E-evand-exact-form-n106-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 106
+    assurance: reported
+    source_reviewed: '2026-10-07'
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026]'
+    certificate: packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Source assertions only. No upstream checker or Lean build was executed here; retained
+      checker flags are not local verdicts. Polynomial irreducibility, minimality, published-expression
+      equality and exact geometry remain unverified. No global optimality or rigidity established.
+      Source packings are configuration-specific; later bounds at the same count receive no transferred
+      proof.
+  - id: E-evand-exact-form-n152-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 152
+    assurance: reported
+    source_reviewed: '2026-10-07'
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026]'
+    certificate: packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Source assertions only. No upstream checker or Lean build was executed here; retained
+      checker flags are not local verdicts. Polynomial irreducibility, minimality, published-expression
+      equality and exact geometry remain unverified. No global optimality or rigidity established.
+      Source packings are configuration-specific; later bounds at the same count receive no transferred
+      proof.
+  - id: E-evand-exact-form-n177-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 177
+    assurance: reported
+    source_reviewed: '2026-10-07'
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026]'
+    certificate: packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Source assertions only. No upstream checker or Lean build was executed here; retained
+      checker flags are not local verdicts. Polynomial irreducibility, minimality, published-expression
+      equality and exact geometry remain unverified. No global optimality or rigidity established.
+      Source packings are configuration-specific; later bounds at the same count receive no transferred
+      proof.
+  - id: E-evand-local-minima-178-report
+    claim: derived-structure
+    scope:
+      n_values:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 6
+      - 7
+      - 8
+      - 9
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 28
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 35
+      - 36
+      - 42
+      - 43
+      - 44
+      - 45
+      - 46
+      - 47
+      - 48
+      - 49
+      - 56
+      - 57
+      - 58
+      - 59
+      - 60
+      - 61
+      - 62
+      - 63
+      - 64
+      - 72
+      - 73
+      - 74
+      - 75
+      - 76
+      - 77
+      - 78
+      - 79
+      - 80
+      - 81
+      - 90
+      - 91
+      - 92
+      - 93
+      - 94
+      - 95
+      - 96
+      - 97
+      - 98
+      - 99
+      - 100
+      - 111
+      - 112
+      - 113
+      - 114
+      - 115
+      - 116
+      - 117
+      - 118
+      - 119
+      - 120
+      - 121
+      - 133
+      - 134
+      - 135
+      - 136
+      - 137
+      - 138
+      - 139
+      - 140
+      - 141
+      - 142
+      - 143
+      - 144
+      - 157
+      - 158
+      - 159
+      - 160
+      - 161
+      - 162
+      - 163
+      - 164
+      - 165
+      - 166
+      - 167
+      - 168
+      - 169
+      - 183
+      - 184
+      - 185
+      - 186
+      - 187
+      - 188
+      - 189
+      - 190
+      - 191
+      - 192
+      - 193
+      - 194
+      - 195
+      - 196
+      - 212
+      - 213
+      - 214
+      - 215
+      - 216
+      - 217
+      - 218
+      - 219
+      - 220
+      - 221
+      - 222
+      - 223
+      - 224
+      - 225
+      - 242
+      - 243
+      - 244
+      - 245
+      - 246
+      - 247
+      - 248
+      - 249
+      - 250
+      - 251
+      - 252
+      - 253
+      - 254
+      - 255
+      - 256
+      - 274
+      - 275
+      - 276
+      - 277
+      - 278
+      - 279
+      - 280
+      - 281
+      - 282
+      - 283
+      - 284
+      - 285
+      - 286
+      - 287
+      - 288
+      - 289
+      - 308
+      - 309
+      - 310
+      - 311
+      - 312
+      - 313
+      - 314
+      - 315
+      - 316
+      - 317
+      - 318
+      - 319
+      - 320
+      - 321
+      - 322
+      - 323
+      - 324
+    assurance: reported
+    source_reviewed: '2026-10-07'
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026]'
+    certificate: packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Reported non-strict local minima under the source matched-index perturbation convention,
+      with angles modulo 90 degrees and plateaux permitted. The actual roster has 176 integer-band configurations
+      plus n11 and n28; it is not every count in the shorthand bands. Full source Lean code is retained;
+      the 176 band localMin statements and N11L/N28L theorems with embedded configurations are retained,
+      but their bindings and full pinned builds have not been independently audited or replayed.
+      No rigidity, isolated strict minimum or global lower bound follows. Same-count replacement poses
+      receive no transferred theorem.
+  - id: E-evand-399-new-arrangements-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 266
+      - 270
+      - 272
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    replay_status: not-attempted
+    verifiers: []
+    source_key: '[Daniel new arrangements 2026-10-07]'
+    origin: external
+    novelty: previously-published
+    certificate: packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz
+    limitations: Author-reported new arrangements. Novelty, KKT, local/global optimality and rigidity
+      remain unestablished.
+    source_reviewed: '2026-10-08'
+  - id: E-evand-399-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 266
+      - 270
+      - 272
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    replay_status: passed
+    source_key: '[Daniel new arrangements 2026-10-07]'
+    origin: audited-here
+    novelty: previously-published
+    certificate: packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz
+    replay: From packing/, python -m devtools.evand_arrangement_reports check --replay; all nine complete
+      jobs and both exact routes are repeated.
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    independence_record: docs/project/reviews/review-2026-10-08-evand-new-arrangements.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-08'
+      reviewed_by: GPT-6 Astra independent mathematical reviewer
+      note: Fresh nine-job replay agrees with all18 complete native outcomes apart from measured timing;650496
+        pair decisions.
+    limitations: Two independently implemented exact routes share the strict lossless half-angle conversion
+      and Python rational arithmetic. Feasible upper bounds only; no novelty, local/global optimality,
+      rigidity or human-oversight assurance.
+    source_reviewed: '2026-10-08'
+
+  - id: E-rehwaldt-couzo-refinements-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 292
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    certificate: packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/
+    replay: Recover the complete public evidence with python -m devtools.refinement_custody recover
+      --destination /Volumes/spud-ext1/agent-scratch/refinement-recovery. The retained unchanged couzo_replay.py
+      replay-batch --root host-v3 --reviews coordinator-accepted-reviews.json --execute-reviewed-replay
+      completed all ten jobs after the explicitly reviewed host relocation. A different host requires
+      a separately reviewed runtime relocation.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-refinement-custody
+    independence_record: docs/project/reviews/review-2026-10-07-refinement-custody-closure.md
+    limitations: Ten full jobs cover 397 positive squares and 239730 pairs per route across positives
+      and four controls per case, 479460 total. Both routes share Fraction, SAT, schema/YAML and serialized
+      corner inputs; reviewed independent matrix derivation addresses the common conversion. All children
+      exit 0 without timeout; full batch wall 453.85665345803136s. Complete source/runtime/review/actual
+      receipt custody was publicly recovered byte-identically and independently reviewed. Canonical
+      admission executes no new decider. No analytic contact limit, lower bound, optimality, rigidity,
+      novel arrangement, formal proof or human oversight is established.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra separately prompted refinement custody review
+      note: The retained closure review accepts complete finite-feasibility replay and public custody
+        only.
+    source_reviewed: '2026-10-07'
+
+  - id: E-rehwaldt-n68-refinement-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 68
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Rehwaldt n68 refinement 2026-10-07]'
+    certificate: packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/
+    replay: Recover the complete public evidence with python -m devtools.refinement_custody recover
+      --destination /Volumes/spud-ext1/agent-scratch/refinement-recovery. The completed command was
+      python -m devtools.refinement_packets replay-n68 --source-root n68-upstream --output source-geometry.json.gz;
+      all three complete jobs ran both pinned source programs.
+    replay_status: passed
+    verifiers:
+    - V-rehwaldt-n68-verify
+    - V-rehwaldt-n68-independent-support-check
+    - V-refinement-custody
+    independence_record: docs/project/reviews/review-2026-10-07-refinement-custody-closure.md
+    limitations: Three full jobs cover 68 squares and 2278 pairs per job/route, 13668 total across both
+      source programs. Both accept the positive and reject duplicate and outside controls; wall 7.843s.
+      This reproduces producer implementations and does not claim independence from them. Complete source/runtime/review/actual
+      receipt custody was publicly recovered byte-identically and independently reviewed. Canonical
+      admission executes no new decider. No analytic contact limit, lower bound, optimality, rigidity,
+      novel arrangement, formal proof or human oversight is established.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra separately prompted refinement custody review
+      note: The retained closure review accepts complete finite-feasibility replay and public custody
+        only.
+    source_reviewed: '2026-10-07'
+  - id: E-ryxu-432-rational-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 51
+      - 70
+      - 84
+      - 86
+      - 88
+      - 102
+      - 103
+      - 105
+      - 108
+      - 123
+      - 126
+      - 127
+      - 129
+      - 130
+      - 131
+      - 146
+      - 153
+      - 175
+      - 179
+      - 236
+      - 258
+      - 261
+      - 263
+      - 267
+      - 295
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[ry-xu square packing 2026]'
+    certificate: packing/resources/web/ry-xu-new-packings-2026-10-08/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The source reports finite rational feasible ceilings for all 25 complete certificates
+      retained in the factual packet. Compared with the pre-intake frontier, eighteen rational certificates
+      improve the displays. After selecting undilated radical n51, seventeen rational certificates are
+      selected and eight are non-selected; all remain retained. This claim establishes no optimality
+      or local-minimum theorem.
+    source_reviewed: '2026-10-08'
+  - id: E-ryxu-432-radical-n51-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 51
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[ry-xu square packing 2026]'
+    certificate: packing/resources/web/ry-xu-new-packings-2026-10-08/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The 51 exact coefficient poses give the construction upper bound s(51) <= (16+5sqrt(2))/3.
+      This does not assert equality with s(51), optimality, rigidity or the unconfirmed 191-touching-pair
+      source claim.
+    source_reviewed: '2026-10-08'
+  - id: E-ryxu-432-rational-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 51
+      - 70
+      - 84
+      - 86
+      - 88
+      - 102
+      - 103
+      - 105
+      - 108
+      - 123
+      - 126
+      - 127
+      - 129
+      - 130
+      - 131
+      - 146
+      - 153
+      - 175
+      - 179
+      - 236
+      - 258
+      - 261
+      - 263
+      - 267
+      - 295
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[ry-xu square packing 2026]'
+    certificate: packing/resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz
+    replay: 'From packing with project Python 3.14: python -m devtools.ryxu_arrangement_reports check
+      --replay. This runs all 75 complete jobs through both native routes and compares full retained
+      outcomes.'
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-ryxu-complete-custody
+    independence_record: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md
+    limitations: 'All 25 complete rational source certificates pass both routes. Eight rational certificates
+      are non-selected in the current atlas, including the separate rational n51; all remain retained.
+      Each of 50 duplicate and outside full-roster controls fails both. The 75-job batch retained 2078082
+      pair decisions and wall 330.19143345800694s. Shared exact half-angle conversion was independently
+      reviewed; deciding geometry implementations are distinct. The source dilation is already baked
+      into each rational input; no further dilation or rounding is applied. Rational n51 is separate
+      from the selected undilated radical witness. Complete source/result/house binding, private-worker
+      copied inputs, mutation refusals, producer guards and original-frontier recovery were independently
+      reviewed. Offline admission is not a fresh deciding replay. Issue 432 reports that ry-xu''s own
+      checks ran this repository''s sqpack at 84881f2 (packing-witness check, promote and verify, the
+      last VERIFIED for all 25), so the sqpack exact_verify route reproduces with the producer''s
+      checker; the independent rational-corner checker decides apart
+      from it, so the recorded relation and the rung are unaffected. Only finite feasibility enters: no
+      optimality, lower bound, local-minimum theorem, rigidity, novelty, formal proof or human oversight
+      is established.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-08'
+      reviewed_by: GPT-6 Astra separately prompted ry-xu integration review
+      note: Accepted finite scientific feasibility and production custody only.
+    source_reviewed: '2026-10-08'
+  - id: E-ryxu-432-radical-n51-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 51
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[ry-xu square packing 2026]'
+    certificate: packing/resources/web/ry-xu-new-packings-2026-10-08/facts/n051-undilated-record.json.xz
+    replay: 'From packing with project Python 3.14: python -m devtools.ryxu_radical_n51 check --replay.
+      This runs all three complete native and independent jobs and compares full results with retained
+      actual outcomes.'
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-ryxu-undilated-n51-independent
+    - V-ryxu-complete-custody
+    independence_record: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md
+    limitations: 'All three full 51-square jobs accept the positive and reject duplicate and outside
+      controls in both routes; 7650 pair decisions, original batch wall 18.707450165995397s. A scoped
+      independent review repeated complete inputs and outcomes. The admitted exact side is (16+5sqrt(2))/3,
+      with polynomial 9s^2-96s+206=0, a feasible construction ceiling. Native and independent routes
+      observe 119 touching/1156 strict pairs; the source''s 191 assertion remains unconfirmed. Complete
+      source/result/house binding, private-worker copied inputs, mutation refusals, producer guards
+      and original-frontier recovery were independently reviewed. Offline admission is not a fresh deciding
+      replay. Only finite feasibility enters: no optimality, lower bound, local-minimum theorem, rigidity,
+      novelty, formal proof or human oversight is established.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-08'
+      reviewed_by: GPT-6 Astra separately prompted ry-xu integration review
+      note: Accepted finite scientific feasibility and production custody only.
+    source_reviewed: '2026-10-08'
+  - id: E-gupta-438-rational-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 123
+      - 129
+      - 130
+      - 153
+      - 154
+      - 179
+      - 180
+      - 199
+      - 207
+      - 208
+      - 209
+      - 236
+      - 237
+      - 238
+      - 239
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Gupta rational refinements 2026-10-08]'
+    certificate: packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/complete-certificates-and-comparators.json.xz
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-08'
+    limitations: Seventeen complete originals; fourteen improve both current exact upper lanes, three
+      withdrawn certificates remain retained. No optimizer, optimality, rigidity, priority or novelty
+      is established.
+  - id: E-rehwaldt-n68-root-feasibility-v12-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 68
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Rehwaldt n68 exact-root report v1.2]'
+    certificate: packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The specified exact-root packing is a source-reported upper bound only. No contraction,
+      nonsingularity, polynomial identity, full geometry or private-worker replay has run here. The
+      old rational pose cannot represent this root configuration. Independent proof/replay work remains
+      open under think-nv5o; source-byte custody is not mathematical assurance. T-118 and all standing
+      bounds remain unchanged.
+    source_reviewed: '2026-10-08'
+  - id: E-rehwaldt-n68-restricted-attainment-v12-report
+    claim: derived-structure
+    scope:
+      n_values:
+      - 68
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Rehwaldt n68 exact-root report v1.2]'
+    certificate: packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Attainment concerns only the specified same-root contact family with 145 held equalities,
+      eight signed inequalities, eight angle groups, 35 fixed poses, 22 gauges and radius 10^-11. No
+      unrestricted local/global optimum, lower bound or minimal polynomial is established. Independent
+      proof/replay work remains open under think-nv5o; source-byte custody is not mathematical assurance.
+      T-118 and all standing bounds remain unchanged.
+    source_reviewed: '2026-10-08'
+  - id: E-wand125-fine-net-lower-bounds-446-report
+    claim: lower-bound
+    scope:
+      n_values:
+      - 19
+      - 20
+      - 26
+      - 27
+      - 28
+      - 29
+      - 31
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-08]'
+    certificate: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Complete original candidate/log/source byte custody and conditional measure/net premise
+      review do not decide full native capture. Author positive results and 32 sampled 197/200 controls
+      remain attributed; maintained whole-net v2 controls, private-worker/input/result controls, independent
+      result review and explicit hosted research budget remain pending. No bound, theorem, optimality
+      or rating promotion; earlier FN1/T-102–T-111 results unchanged.
+    source_reviewed: '2026-10-08'
+  - id: E-gupta-438-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 123
+      - 129
+      - 130
+      - 153
+      - 154
+      - 179
+      - 180
+      - 199
+      - 207
+      - 208
+      - 209
+      - 236
+      - 237
+      - 238
+      - 239
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Gupta rational refinements 2026-10-08]'
+    certificate: packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/complete-certificates-and-comparators.json.xz
+    replay: 'From packing with project Python 3.14 and external TMPDIR: python -m devtools.gupta_refinement_reports
+      certify --jobs-dir "$TMPDIR/gupta-native-jobs" --workers 2. This executes all 51 complete jobs
+      through both native routes; check admits the retained full outcomes without repeating geometry.'
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-gupta-complete-custody
+    independence_record: docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md
+    limitations: 'All seventeen complete rational source certificates pass both routes. All 34 full-roster
+      duplicate and outside controls fail both routes, covering 3017 poses and 1714956 pair decisions
+      in the original 255.692986-second two-worker campaign. Fourteen sides are selected; the three
+      withdrawn offers 108/123/129 retain complete inputs and results without current upper-bound credit.
+      First-party deciding geometry is independently re-implemented from the theorem and certificate
+      format; no author program runs. Both repository routes share certificate parsing, rational half-angle
+      conversion, Fraction arithmetic, source inputs and the SAT method. Their separate deciding implementations
+      do not make them independent of those shared premises. The recorded source-code relationship is
+      to the author''s solver verification, not to the other repository route. No dilation or rounding
+      changes source geometry. The actual hosted private-worker transaction passed in 15.224 seconds
+      with all four ordinary inputs, live native/input/original/comparator refusals and restorations,
+      producer guards and the unchanged 45-second child. That transaction forbids geometric deciders;
+      offline admission is not a fresh native replay. Only finite feasibility enters: no lower bound,
+      optimum, optimizer, local-minimum theorem, rigidity, novelty, priority, formal proof or human
+      oversight is established.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-08'
+      reviewed_by: GPT-6 Astra source/native reviewer and separately prompted project custody and record
+        reviewers
+      note: Accepted complete finite rational feasibility and actual production custody only; no human
+        oversight or higher-rung claim.
+    source_reviewed: '2026-10-08'
+  - id: E-couzo-451-rational-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 108
+      - 127
+      - 131
+      - 155
+      - 180
+      - 228
+      - 306
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo exact refinements 2026-10-08]'
+    certificate: packing/resources/web/couzo-exact-refinements-2026-10-08/facts/complete-certificates-and-decimal-poses.json.xz
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-08'
+    limitations: 'This atom records the source author''s report. A separate complete repository replay
+      is retained: eight positives and sixteen controls on both routes passed their required outcomes
+      in 398.40 seconds. Actual production private-worker custody passed all complete-input and mutation-restoration
+      checks without geometric deciders. The 10 October review
+      (docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) reproduced the replay,
+      which T-128 cites as E-couzo-451-exact-feasibility, and house integration waits on jlevy/squares#403.
+      The source author copied this repository''s sqpack verifier, so the exact_verify route
+      overlaps that source checker. The second maintained rational-geometry route is a separate deciding
+      implementation; both routes share certificate parsing, half-angle conversion, Fraction arithmetic
+      and the separating-axis method. No two independent methods, human oversight or optimality is claimed.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md accepted
+        all eight certificates for finite feasibility only, with six non-blocking findings
+        (RD-1 to RD-6); the replay it reproduced is E-couzo-451-exact-feasibility.
+  - id: E-couzo-451-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [105, 108, 127, 131, 155, 180, 228, 306]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo exact refinements 2026-10-08]'
+    certificate: packing/resources/web/couzo-exact-refinements-2026-10-08/facts/complete-certificates-and-decimal-poses.json.xz
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.check_half_angle_area
+      replay-t128 --workers 2 decides all 24 retained jobs again through both maintained
+      routes and holds each to its retained row (all equal, 339.0 s wall on 2026-10-10);
+      python -m devtools.check_half_angle_area decide --workers 2 decides the eight
+      certificates by the third route with six controls each, and holds every side, pose,
+      margin and register decimal to the record (no disagreement, 37.0 s for the review's
+      fifteen certificates).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+      - V-evand-arrangement-receipts
+    independence_record: docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All 24 retained jobs reproduced on both
+        maintained routes, and the third route, its own literal reader, half-extent
+        containment and exact intersection area, agreed with them at every side, pose,
+        wall clearance and register decimal; its 48 controls reached their required
+        outcomes. Findings RD-1 to RD-6, none blocking.
+    limitations: >-
+      All eight certificates pass both maintained routes and the third route; the 16
+      kernel controls (a duplicated square, a square moved outside) are refused by both
+      maintained routes and the 48 third-route controls reach their required outcomes,
+      four of them at exact contact or 10^-40 to 10^-30 past it. The receipt holds 770052
+      pair decisions; the longest job took 40.89 s. Every positive clears its nearest wall
+      by exactly 1/(2*10^20) and every pair by a Euclidean distance of at least
+      9.9999999999999865e-21. The kernel's own controls are gross, a pair gap of exactly -1
+      and a square whole units outside the box (RD-2); the maintained routes read one parse and one
+      half-angle conversion (RD-3), which the third route's own reader closes; and one
+      maintained route, sqpack.verify, is the copy of this repository's verifier the
+      source ran (RD-4), so the independently re-implemented relation rests on the
+      independent rational corner checker and the third route. All three routes share
+      Fraction arithmetic, and the two maintained routes the separating-axis method. The
+      source's own checkers, KKT and no-descent statements were not run or checked. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-10'
+
+  - id: E-wand125-fine-net-n27-5655-followup-report
+    claim: lower-bound
+    scope:
+      n_values:
+      - 27
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-08]'
+    certificate: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-n27-followup.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The author reports 1131/200 at all 2073 directions; complete original byte custody and
+      conditional maintained mass/net premises are accepted. The 32-direction 197/200 control remains
+      sampled. Fresh full native capture, whole-net controls, restored positives, private-worker binding
+      and independent result review remain pending. The copied project kernel establishes no independent
+      implementation. No standing bound or rating changes; the original seven-case report is preserved.
+    source_reviewed: '2026-10-08'
+  - id: E-daniel-375-dated-105-130-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 130
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel dated certificates 105 and 130 2026-10-07]'
+    certificate: packing/resources/web/evand-batch-105-130-2026-10-07/source/s12/search/exact/batch/certs
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-08'
+    limitations: Complete dated certificate and matching input custody is retained. Maintained parsing
+      and exact side comparison are not geometric replay. Every claimed side is strictly larger than
+      the corresponding currently verified selected side; older source-specific receipts and T-098/T-101
+      remain scoped to their original inputs. Author acceptance counters, numerical local-minimum, flat-motion
+      and batch-completion claims remain source reports. No optimality, rigidity, independent-method
+      count or standing-bound upgrade.
+  - id: E-daniel-375-dated-292-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 292
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel dated certificate 292 2026-10-07]'
+    certificate: packing/resources/web/evand-batch-292-2026-10-07/source/s12/search/exact/batch/certs
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-08'
+    limitations: Complete dated certificate and matching input custody is retained. Maintained parsing
+      and exact side comparison are not geometric replay. Every claimed side is strictly larger than
+      the corresponding currently verified selected side; older source-specific receipts and T-098/T-101
+      remain scoped to their original inputs. Author acceptance counters, numerical local-minimum, flat-motion
+      and batch-completion claims remain source reports. No optimality, rigidity, independent-method
+      count or standing-bound upgrade.
+  - id: E-couzo-extended-range-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 327
+      - 332
+      - 335
+      - 336
+      - 337
+      - 338
+      - 339
+      - 340
+      - 341
+      - 342
+      - 364
+      - 369
+      - 372
+      - 373
+      - 374
+      - 375
+      - 376
+      - 377
+      - 378
+      - 379
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo extended-range reports 2026-10-08]'
+    certificate: packing/resources/web/couzo-extended-reports-2026-10-08/acquisition/sources.json
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-09'
+    limitations: Author-reported decimal poses only, all outside the 324-case corpus. Complete numerical-token
+      custody and representation validation do not establish nonoverlap or containment. No checker or feasibility
+      tolerance is stated for these decimal poses. Comparison references in the expanded search are derived
+      border-row/grid constructions, not surveyed best records. No geometry replay, native execution, exact
+      certificate, independent method, optimality, standing-bound change or verification transferred from
+      the separate eight in-horizon issue451 certificates.
+  - id: E-couzo-extended-range-update-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 375
+      - 378
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo extended-range updates 2026-10-08]'
+    certificate: packing/resources/web/couzo-extended-updates-2026-10-08/acquisition/sources.json
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-09'
+    limitations: Author-reported decimal poses at 2d32a6e only, both outside the 324-case corpus. Each
+      side is below the same count's ffd900d report, which stays a dated superseded row; the comparison
+      is exact on the printed decimals, not on geometry. Complete numerical-token custody and representation
+      validation do not establish nonoverlap or containment. No checker or feasibility tolerance is stated
+      for these decimal poses. No geometry replay, native execution, exact certificate, independent method,
+      optimality, standing-bound change or verification transferred from the separate in-horizon certificates.
+  - id: E-couzo-460-followup-rational-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 84
+      - 86
+      - 105
+      - 175
+      - 270
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo follow-up refinements 2026-10-08]'
+    certificate: packing/resources/web/couzo-followup-refinements-2026-10-08/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-09'
+    limitations: 'This atom records the source author''s report of five exact rational certificates
+      at 2d32a6e. The packet keeps derived exact facts that rebuild each pinned certificate blob, not
+      the source bytes. A separate complete repository replay is retained: five positives and ten duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 384846 pair decisions
+      with two workers and unchanged kernel limits. Summed over the fifteen jobs, the receipt records
+      131.84 route CPU seconds and 132.22 job wall seconds; the longest job took 22.42 seconds. The 10 October
+      review (docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) reproduced the
+      replay, which T-130 cites as E-couzo-460-followup-exact-feasibility, and house integration waits
+      on jlevy/squares#403 and this packet''s private-worker custody (RD-5). Author KKT and no-descent
+      statements are not checked. The source author reports passes from Evan Daniel''s verify_cert.py
+      and a copy of this repository''s sqpack verifier, so the exact_verify route overlaps that source
+      checker. The second maintained rational-geometry route is a separate deciding implementation;
+      both routes share certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method. No two independent methods, human oversight or optimality is claimed.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md accepted
+        all five certificates for finite feasibility only, with six non-blocking findings
+        (RD-1 to RD-6); the replay it reproduced is E-couzo-460-followup-exact-feasibility.
+  - id: E-couzo-460-followup-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [84, 86, 105, 175, 270]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo follow-up refinements 2026-10-08]'
+    certificate: packing/resources/web/couzo-followup-refinements-2026-10-08/facts/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.couzo_followup_reports
+      check --replay decides all 15 retained jobs again through both maintained routes,
+      serially in one process, and holds each to its retained row (all equal, 130.5 s wall
+      on 2026-10-10); python -m devtools.check_half_angle_area decide --workers 2 decides
+      the five certificates by the third route with six controls each, and holds every
+      side, pose, margin and register decimal to the record (no disagreement, 37.0 s for
+      the review's fifteen certificates).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+      - V-evand-arrangement-receipts
+    independence_record: docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All 15 retained jobs reproduced on both
+        maintained routes, and the third route agreed with them at every side, pose, wall
+        clearance and register decimal; its 30 controls reached their required outcomes.
+        Findings RD-1 to RD-6, none blocking.
+    limitations: >-
+      All five certificates, kept as derived exact facts that rebuild each pinned blob,
+      pass both maintained routes and the third route; the 10 kernel controls are refused
+      by both maintained routes and the 30 third-route controls reach their required
+      outcomes, four per certificate at exact contact or 10^-40 to 10^-30 past it. The
+      receipt holds 384846 pair decisions, 131.84 route CPU seconds and 132.22 job wall
+      seconds; the longest job took 22.42 s. Every positive clears its nearest wall by
+      exactly 1/(2*10^20) and every pair by a Euclidean distance of at least
+      9.9999999999999865e-21. The kernel's own controls are gross (RD-2); the maintained routes read one parse and
+      one half-angle conversion (RD-3), which the third route's own reader closes; and the
+      source reports a pass from a copy of this repository's sqpack verifier, so one
+      maintained route is the producer's checker (RD-4) and the independently
+      re-implemented relation rests on the independent rational corner checker and the
+      third route. All three routes share Fraction arithmetic, and the two maintained
+      routes the separating-axis method. No private-worker custody is recorded for this
+      packet (RD-5), which a house move needs and this rung does not. The source's own
+      checkers, KKT and no-descent statements were not run or checked. Finite feasibility
+      only: no lower bound, optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-10'
+  - id: E-evand-465-record-hunt-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 132
+      - 155
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel record hunt 2026-10-09]'
+    certificate: packing/resources/web/evand-record-hunt-2026-10-09/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-09'
+    limitations: 'This atom records the source author''s report of two exact rational certificates
+      at e008180, retained with their KKT points, inputs and solver reports. A separate complete repository
+      replay is retained: two positives and four duplicate-square and outside-container controls passed
+      their required outcomes on both routes, 123486 pair decisions; summed over the six jobs, the receipt
+      records 38.66 route CPU seconds and 38.79 job wall seconds, the longest job 7.72 seconds. Each positive
+      clears every wall by 1/200000000000000000000 and every pair by just under 1e-20. The 10 October
+      review (docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) reproduced the
+      replay, which T-131 and T-128 cite as E-evand-465-record-hunt-exact-feasibility. House integration
+      waits on jlevy/squares#403, and none rests on this certificate: at 132 T-141''s side is smaller,
+      and at 155 Couzo''s equal certificate is the one T-128 adopts. The n155 side equals T-128''s n155
+      side exactly, from Couzo''s
+      issue451 certificate committed nine hours earlier, and the two certificates share 152 of 155 exact
+      poses, differing only in the free and flat-motion squares the source''s report lists; T-128 cites
+      this atom as an evidence update. The author''s KKT, reduced-Hessian and jamming statements are numerical and not checked.
+      The source checks with its own verify_cert.py and verify_cert2.py, not run here; the two maintained
+      routes share certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method. No two independent methods, human oversight or optimality is claimed.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md accepted
+        both certificates, n132 for T-131 and n155 as an evidence update to T-128, for
+        finite feasibility only, with six non-blocking findings (RD-1 to RD-6); the replay
+        it reproduced is E-evand-465-record-hunt-exact-feasibility.
+  - id: E-evand-465-record-hunt-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [132, 155]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel record hunt 2026-10-09]'
+    certificate: packing/resources/web/evand-record-hunt-2026-10-09/source/search/packer/candidates/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.evand_hunt_reports
+      check --replay decides all six retained jobs again through both maintained routes
+      and holds each to its retained row (all equal, 38.5 s wall on 2026-10-10), and
+      check-claims rebuilds the frozen comparison with T-098, T-115 and T-128 (equal, 0.5
+      s); python -m devtools.check_half_angle_area decide --workers 2 decides both
+      certificates by the third route with six controls each, and holds every side, pose,
+      margin and register decimal to the record (no disagreement, 37.0 s for the review's
+      fifteen certificates).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+      - V-evand-arrangement-receipts
+    independence_record: docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All six retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and register decimal; its 12
+        controls reached their required outcomes. Findings RD-1 to RD-6, none blocking.
+    limitations: >-
+      Both certificates, n132 for T-131 and n155 as an evidence update to T-128, pass both
+      maintained routes and the third route; the four kernel controls are refused by both
+      maintained routes and the 12 third-route controls reach their required outcomes. The
+      receipt holds 123486 pair decisions, 38.66 route CPU seconds and 38.79 job wall
+      seconds; the longest job took 7.72 s. Each positive clears its nearest wall by
+      exactly 1/(2*10^20) and every pair by a Euclidean distance of at least
+      9.9999999999999865e-21. The two n155 certificates share 152 of 155 exact poses and
+      differ exactly at the three squares the source's report lists as free or flat. The
+      kernel's own controls are gross (RD-2); the maintained routes read one parse and one
+      half-angle conversion (RD-3), which the third route's own reader closes. Neither
+      maintained route is the producer's checker here (RD-4). All three routes share
+      Fraction arithmetic, and the two maintained routes the separating-axis method. No
+      private-worker custody is recorded for this packet (RD-5), which a house move needs
+      and this rung does not. The source's verify_cert.py and verify_cert2.py were not
+      run, and its KKT, reduced-Hessian and jamming statements are not checked. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-10'
+
+  - id: E-wand125-fine-net-n29-582-followup-report
+    claim: lower-bound
+    scope:
+      n_values:
+      - 29
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net n29 2026-10-10]'
+    certificate: packing/resources/web/wand125-fine-net-n29-2026-10-10/reported-n29-followup.json
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: The author reports 291/50 at all 2073 directions of the net its candidate declares
+      (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this repository's sqverify_fast,
+      at 22a23c8, superseding the issue's 1163/200. Complete source-byte custody and the maintained
+      mass and net premises are accepted (receipts/premises.json). Eight sampled directions run here by
+      sqverify-fast verified and matched the source's log; that is a diagnostic, not a replay. The
+      32-direction 197/200 control remains sampled. A complete capture, whole-net controls, restored
+      positives and a review that reads this certificate remain pending under think-r333, priced at
+      about 4.3 CPU-hours. The shared crate establishes no independent implementation. No standing
+      bound or rating changes; the 1163/200 report and its evidence stand.
+    source_reviewed: '2026-10-10'
+
+  - id: E-n040-guzhou-clipped-corner-report
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-guzhou-n40-finite-py]
+    limitations: >-
+      Guzhou0806/n40-square-packing at e5abeb4d078a5c5b35df6204dd9b93378e5a7880
+      (committed 2026-10-10T06:47:01Z), which the release n40-670854-20261010 names
+      (n40-670854.zip, 203,095 bytes, SHA-256 dbefee86...), reported on jlevy/squares#485,
+      claims s(40) > 335427/50000 = 6.70854, unrestricted rotations, strict, and the weaker
+      full-core s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908, which needs no
+      density peak. Both rest on wand125's rect_n40_L67 rectangle density, unchanged
+      (SHA-256 71011d03..., byte for byte the copy the 2026-10-01 packet retains, pinned
+      by digest in the release and not copied into this packet), and on the nodal
+      statement that every closed square of side 9977/10000 inside [0, 67/10]^2 at each of
+      the 401 directions 2 arctan(83 j/80000), j = 0 to 400, captures mass at least
+      10001/10000. The stronger bound also rests on the density's essential supremum, at
+      most H = 2818711359413/10^9, and a continuous-angle transfer with a clipped-corner
+      loss bound at h = 514946944479/10^15, which gives each scaled unit square of side
+      335000/335427 a capture of at least 99979/100000; forty of them exceed the mass
+      3999/100 by 1/625. The source decides the nodal statement with this repository's
+      sqverify-fast, vendored byte for byte from ef79288a4 (crate source digest
+      d97758bb...), on a derived input (SHA-256 49f696a4...) whose certificate metadata
+      sets the 401-direction net, and the finite steps with its own exact Python,
+      verifier/finite.py, both driven by verifier/run.py. It reports two complete runs
+      with 401 rows identical apart from timing, 32,970,910 boxes and least certified
+      bound 1.000100000471634 at r = 73: the producer's local run in the tree's results/
+      (60.06 s of wall time at four threads, 234.58 CPU seconds), and GitHub Actions run
+      38032128403 on e5abeb4d, whose receipt the ZIP carries in place of the tree's
+      (72.35 s); both receipts are retained (GN-3 of the review). Its label
+      CODE_DISTINCT_FULL means distinct from the Tokoharu C++ route its author used in
+      research, which the release does not ship, and not distinct from this repository's
+      crate. The repository's only earlier commit, 485dd8f (2026-10-07), claimed a weaker
+      s(40) > 33509/5000 on the standard 201-direction net; it is pinned by history and
+      not retained. wand125's review comment on the issue (2026-10-10T07:53:18Z), which
+      reports a third run of the release's entry point and an independent exact check of
+      the transfer, is a third party's report and is not retained as a replay. No packing,
+      optimality or priority claim is made. This is the public-claim entry; the replays
+      here are E-n040-guzhou-clipped-corner-sqverify-fast-replay and
+      E-n040-guzhou-clipped-corner-finite-audit.
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude, at maximum reasoning effort), the mathematical lane
+        of stage 4 of the issue 485 import (think-3oi5), prompted separately from the
+        records lane, before any replay here and before retention
+        (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md)
+      note: >-
+        No blocking defect. Re-derived: the fold by the density's D4 symmetry, one parent at
+        a time; the case split between the upper node, whose concentric reference lies
+        inside the parent, and the lower node, whose angular error is below beta = 2
+        arctan((D - h)/(1 + D h)) and whose reference is legal because B <= q and cos + sin
+        increases on [0, pi/4]; the clipped-corner bound e^2/(2 c s) by the vertex cone and
+        subadditivity, and its monotonicity; g <= H almost everywhere; the counting 40 chi >
+        M; the strict endpoint by compactness and attainment; and the full-core closed
+        form. Every finite quantity was recomputed in exact rationals with the reviewer's
+        own code, six of the 401 directions, the tightest among them, were reproduced on the
+        reviewed build, and four controls refused. Findings GN-1 to GN-7, none blocking:
+        PROOF.md states the clipped pieces as four disjoint triangles, true here but not
+        needed (GN-1); h sits 8.2e-16 below its containment limit, so the chain holds in
+        exact rationals only (GN-2); the ZIP's results/ are the CI run's, not the tree's
+        (GN-3); a replay here with sqverify-fast is the producer's own nodal code (GN-4);
+        the census tooling did not read a format T metadata net (GN-5, fixed in 0b5a62ca5);
+        that path has no review of its own (GN-6, recorded on V-sqverify-fast); and
+        n-040.md's body still said 6.695 (GN-7, corrected at registration). The complete
+        401-direction run was the records lane's and is
+        E-n040-guzhou-clipped-corner-sqverify-fast-replay.
+    source_reviewed: '2026-10-10'
+
+  - id: E-n040-guzhou-clipped-corner-sqverify-fast-replay
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay: >-
+      From packing/, in a tree whose crate is reviewed source (.venv/bin/python3 -m
+      devtools.sqverify_fast_census --source-digest prints its source_sha256 and exits 0;
+      these receipts' build is d97758bb..., the source at 910b6b12c), after cargo build
+      --release --locked in sqverify_fast/ (toolchain 1.98.0): .venv/bin/python3 -m
+      devtools.audit_clipped_corner_transfer run --binary
+      sqverify_fast/target/release/sqverify-fast --out DIR --threads 2 regenerates the
+      401-direction input from the retained density, refusing it unless its SHA-256 is
+      49f696a4..., the input both release receipts name, runs sqverify-fast --candidate
+      derived-401.json --n 40 --side 67/10 --directions all --threshold 10001/10000
+      --confirm on it, and runs controls A to D on the same binary, writing each receipt
+      with its wall and CPU time to DIR; .venv/bin/python3 -m
+      devtools.audit_clipped_corner_transfer check-replay --receipts DIR --rank must then
+      print REPLAY_HOLDS: all 401 directions verified, summary VERIFIED, exit 0, the
+      premises those of the finite audit, every row equal to both release receipts' apart
+      from timing and every even row to the retained 201-direction census row of
+      rect_n40_L67, and each control refused, or re-netted, as the review's replay
+      contract says, every refusal's exact capture evaluated again apart from the crate
+      by sqpack.rectangle_density. Without --receipts it judges the retained receipts,
+      receipts/replay-401.jsonl.gz, runs.json, control-selection.json and the four
+      control receipts in the guzhou-n40-clipped-corner-2026-10-10 packet, and its
+      --output equals the packet's receipts/replay-check.json; tests/test_audit_clipped_corner_transfer.py
+      holds the tool to its controls.
+    replay_status: passed
+    verifiers: [V-sqverify-fast, V-audit-clipped-corner-transfer]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        The net-and-shrink measure-capture statement of SOUNDNESS.md (The Claim; format T,
+        with Tokoharu's centre domain) on the net of 401 half-angle tangents of step
+        83/80000 that the derived input's certificate metadata sets, applied to wand125's
+        rect_n40_L67: every closed square of side 9977/10000 inside [0, 67/10]^2 at each
+        net direction captures mass at least 10001/10000. With Guzhou0806's clipped-corner
+        transfer no 40 unit squares pack in a square of side 335427/50000, so s(40) >
+        335427/50000; with the full-core argument alone, s(40) > 67000
+        sqrt(6400006889)/798988091.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        SOUNDNESS.md's theorem and lemmas, accepted with the crate by
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md, and lemma N0 and
+        the declared-net change by
+        docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md; the
+        format T metadata-net admission path, the transfer, the clipped-corner bound and the
+        strict endpoint, read in
+        docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md (items 2
+        to 7, GN-6); the receipts named in replay.
+      assumptions:
+        - The density is nonnegative and exact, of total mass 3999/100 < 40, which admission recomputes from the derived input; the derived input is the retained density's 480 positive rows with the net in its certificate metadata, which the first-party audit regenerates and binds to the digest both release receipts name.
+        - Every legal centre at each of the 401 net directions the metadata sets is covered, and lemma N0's net premises hold, at core side 9977/10000 with format T's centre domain, whose premises (B(1 + D) = 798988091/800000000 < 1, the last tangent 83/200 past tan(pi/8) and at most 1/2) admission checks in exact rationals, under lemma N0.
+        - The transfer's finite steps, the density's essential supremum at most 2818711359413/10^9, the upper node's reference inside its parent, the clipped-corner loss bound and the counting margin, which E-n040-guzhou-clipped-corner-finite-audit decides in exact rationals; and the transfer's argument, which the 10 October review re-derived.
+        - Binary64 arithmetic has IEEE-754 semantics with directed rounding per operation, as SOUNDNESS.md's Floating Point section uses it.
+      audit_record: docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md
+    limitations: >-
+      sqverify-fast decided the 401-direction nodal statement on 2026-10-10, built with
+      cargo build --release --locked -j 2 at rustc 1.98.0 (88d9e12ae 2026-08-18) from crate
+      source d97758bb..., the source at 910b6b12c, which the 6 October declared-net
+      soundness review accepted and which is unchanged since ef79288a4, the commit the
+      release vendors; the binary 567a0fd5... is the one that review built. Its input was
+      regenerated here from the retained density, SHA-256 49f696a4..., the input both
+      release receipts name. Admission: format T, net_origin metadata, 401 directions at
+      step 83/80000, mass 3999/100, 480 source rectangles and 3,792 expanded, Tokoharu's
+      centre domain, threshold 10001/10000. Every direction verified, summary VERIFIED,
+      exit 0: r = 0 by the exact-event axis sweep over 4,879,681 vertices, bound
+      1.0012141064171602, and the other 400 by interval branch and bound over 32,970,910
+      boxes, greatest depth 30, least certified bound 1.000100000471634 at r = 73, in
+      299.5 s of wall time and 241.0 CPU seconds at two threads on a shared 4-core
+      x86-64 Linux container. Every row equals both release receipts' apart from timing,
+      and the 201 even rows equal the retained 3 October census row of rect_n40_L67. This
+      is the producer's own nodal code re-run: the release ran this crate, so the replay
+      reproduces the release's nodal verification and is not an independent decision of
+      it (GN-4 of the review); it is independent of wand125's and Tokoharu's checkers,
+      which never ran at 401 directions. No second method decided the nodal statement.
+      Controls on the same binary: every weight scaled by 99/100 refused at r = 73 and 220
+      (exit 1, exact captures 0.999322755117 and 0.999227715635 at the witnesses); every
+      weight scaled by the census rule's near-threshold factor at the centre of least
+      exact capture over the 400 oblique least-bound leaves (r = 220, capture
+      1.0013165658) refused at r = 220 (exit 1, 1.0000999998 at the witness); the
+      metadata removed, admitted on the standard 201-direction net, which is another
+      claim; and angle_count 201 at step 83/80000 refused at admission (exit 2). Each
+      refusal's exact capture was evaluated again by sqpack.rectangle_density, which was
+      written before the crate. The census route for this certificate has not run: the
+      census driver reads a format T metadata net since 0b5a62ca5, and no census case
+      holds the derived input. The transfer's finite steps are
+      E-n040-guzhou-clipped-corner-finite-audit's.
+    source_reviewed: '2026-10-10'
+
+  - id: E-n040-guzhou-clipped-corner-finite-audit
+    claim: derived-structure
+    scope: {n_values: [40]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 clipped corner 2026-10-10]'
+    certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay: >-
+      From packing/: uv run --frozen --all-extras --group dev python -m
+      devtools.audit_clipped_corner_transfer check --output OUT.json must print
+      FINITE_STEPS_HOLD, every check ok and controls E to H refused, and OUT.json must
+      equal the packet's receipts/finite-audit.json in the
+      guzhou-n40-clipped-corner-2026-10-10 packet byte for byte;
+      tests/test_audit_clipped_corner_transfer.py holds the tool to its controls.
+    replay_status: passed
+    verifiers: [V-audit-clipped-corner-transfer]
+    proof:
+      source: packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/PROOF.md
+      theorem: >-
+        If every closed square of side 9977/10000 inside [0, 67/10]^2 at each of the 401
+        directions 2 arctan(83 j/80000), j = 0 to 400, captures at least 10001/10000 of
+        wand125's rect_n40_L67 density, then no 40 unit squares pack in a square of side
+        335427/50000, so s(40) > 335427/50000; and, by the full-core argument from the same
+        hypothesis alone, s(40) > 67000 sqrt(6400006889)/798988091.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations, under the one hypothesis named.
+      pinpoints: >-
+        PROOF.md, whose argument the 10 October review re-derived (items 3 to 7: the D4
+        fold, the case split at delta0 = 2 arctan h, the legality of both references, the
+        clipped-corner cone bound and its monotonicity, the counting and the strict
+        endpoint, and the full-core closed form); the finite quantities of its items 1 and
+        5; the audit's receipt receipts/finite-audit.json in the packet.
+      assumptions:
+        - JSON decimals read as their literal values with Fraction, and Python's unbounded integers, are exact.
+        - The essential supremum of a finite sum of indicator densities is attained on an open cell of the arrangement and equals the greatest sum over the half-open stacks at the lower-left corners, which the review proves.
+        - The 401-direction nodal statement, the theorem's one hypothesis, which this audit does not decide; E-n040-guzhou-clipped-corner-sqverify-fast-replay decides it.
+      audit_record: docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md
+    limitations: >-
+      The finite steps of the transfer, decided on 2026-10-10 in exact rationals from the
+      retained density and the release's parameters by
+      devtools.audit_clipped_corner_transfer, written without opening the release's
+      verifier/finite.py and sharing no code with it (its docstring is the read log): 480
+      positive rows, mass 3999/100, 3,840 D4 images and 3,792 distinct rectangles after
+      merging, the merged density invariant under each of the eight maps and of integral
+      3999/100; the exact essential supremum 2818.71135941178..., below H =
+      2818711359413/10^9 by 1.215e-9, and H reproduced by rounding the merged densities up
+      to 10^-9; the net's premises; q = 335000/335427 >= B; the upper node's containment
+      B(cos delta0 + sin delta0) <= q at h = 514946944479/10^15, with slack 1.63e-15; b =
+      41804244441680000/80000042740596391757; chi = 0.999790035571... >= 99979/100000;
+      40 chi - M = 0.00160142285...; 40 x 99979/100000 - 3999/100 = 1/625; and (L/gamma)^2 =
+      28729630924721000000/638381969559824281, the full-core closed form squared, above
+      6.70848908^2. Every value equals the finite block of both release receipts, and the
+      parameters, digests and nodal premises of both agree with it. Controls, each
+      refused: E, H lowered by 2/10^9, fails the density bound; F, X = 335428/50000, fails
+      at every admissible h, the margin at most -0.00998; G, h + 10^-15, fails the
+      containment; H, the 201-direction net at the same h, gives chi = -0.956. It shares
+      with finite.py the definition of the density, its D4 expansion and the transfer's
+      formulas, and no code. It decides the transfer's finite steps and no coverage: by
+      itself it proves only the implication from the nodal statement, which
+      E-n040-guzhou-clipped-corner-sqverify-fast-replay decides. It is recorded as
+      structure and not as a bound because it decides no bound alone; the result's
+      confirmation is read from the nodal decision, the part of the claim closest to the
+      producer's code (epistemics.md, Which Code Confirmed It).
+    source_reviewed: '2026-10-10'
+
+  - id: E-couzo-476-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [132, 237, 263, 267, 270, 303]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo exact certificates 2026-10-09]'
+    certificate: packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md
+        accepted all six certificates for finite feasibility only, with seven non-blocking
+        findings (RI-1 to RI-7); the replay it reproduced is E-couzo-476-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of six exact rational certificates at
+      02f9690, which the issue prints rounded up at 12 places: five exact optima from Evan
+      Daniel's exact contact solver and a rational witness at 263, its decimal packing with
+      centres scaled apart by 1 + 1e-12. The author reports passes from Evan Daniel's
+      verify_cert.py and a copy of this repository's sqpack verifier; neither was run here,
+      and the KKT and no-descent statements are not checked. The same commit holds 59
+      further certificates the issue does not name, compared in the packet's claim record
+      and registered by no entry. The repository replay and its review are
+      E-couzo-476-exact-feasibility. No optimality is claimed.
+    source_reviewed: '2026-10-10'
+
+  - id: E-couzo-476-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [132, 237, 263, 267, 270, 303]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo exact certificates 2026-10-09]'
+    certificate: packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      couzo-exact-certificates-2026-10-09 check --replay decides all 51 retained jobs of the
+      17-count roster again through both maintained routes, serially in one process, and
+      holds each to its retained row (all equal, 546.5 s wall on 2026-10-10); check-claims
+      rebuilds the frozen comparison (equal); python -m devtools.check_half_angle_area
+      decide-imports --workers 2 decides the six certificates by the third route with six
+      controls each, and holds every side, pose, margin, frozen claim and print to the
+      record (no disagreement, 101.5 s for the review's 27 certificates).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All 51 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance, frozen claim and print; its 36
+        controls for the six reached their required outcomes. Findings RI-1 to RI-7, none
+        blocking.
+    limitations: >-
+      All six certificates pass both maintained routes and the third route; the 12 kernel
+      controls are refused by both maintained routes and the 36 third-route controls reach
+      their required outcomes, four per certificate at exact contact or 10^-40 to 10^-30
+      past it. The receipt's 51 jobs hold 1486686 pair decisions, 338.07 route CPU seconds
+      and 958.00 job wall seconds; the longest job took 99.13 s. Five positives clear their
+      nearest wall by exactly 1/(2*10^20) and every pair by a least Euclidean distance that
+      rounds to 1.000000e-20; the rational witness at 263 clears by 1e-15 and 1.582645e-12.
+      The kernel's controls are gross (RI-3), and the source reports a pass from a copy of
+      this repository's sqpack verifier, so one maintained route is the producer's checker
+      (RI-4) and the independently re-implemented relation rests on the independent rational
+      corner checker and the third route. The maintained routes share one parse, half-angle
+      conversion and the separating-axis method, and all three share Fraction arithmetic.
+      The claim record compares issue 481 by printed displays that miss its exact sides by
+      up to 1.84 units in the last place, which changes no relation (RI-1). No
+      private-worker custody is on file (RI-5), and the reviewer and the producer share a
+      model family (RI-7). Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-10'
+
+  - id: E-fang-484-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [308, 343, 344]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Fang two-wedge certificates 2026-10-10]'
+    certificate: packing/resources/web/fang-two-wedge-certificates-2026-10-10/source/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md
+        accepted all three certificates for finite feasibility only, 308 in the register
+        and 343 and 344 as beyond-horizon rows, with seven non-blocking findings (RI-1 to
+        RI-7); the replay it reproduced is E-fang-484-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of three exact rational certificates
+      at c75bebd, which the issue prints rounded up at 15 places, each in Evan Daniel's
+      text format and in SQUISH's JSON layout. The author reports that Evan Daniel's
+      verify_cert.py, David Ellsworth's check_packing.py on the 40-digit exports and the
+      author's own verify.py accept all three; their outputs are retained and none was run
+      here. 343 and 344 lie beyond the case corpus. The repository replay and its review
+      are E-fang-484-exact-feasibility. No exact form, local minimality or optimality is
+      claimed.
+    source_reviewed: '2026-10-10'
+
+  - id: E-fang-484-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [308, 343, 344]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fang two-wedge certificates 2026-10-10]'
+    certificate: packing/resources/web/fang-two-wedge-certificates-2026-10-10/source/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      fang-two-wedge-certificates-2026-10-10 check --replay decides all nine retained jobs
+      again through both maintained routes, serially in one process, and holds each to its
+      retained row (all equal, 514.2 s wall on 2026-10-10); check-claims rebuilds the frozen
+      comparison (equal); python -m devtools.check_half_angle_area decide-imports
+      --workers 2 decides the three certificates by the third route with six controls each,
+      holds each .cert equal to its .cert.json under the route's own two readers, and holds
+      every side, pose, margin, frozen claim and print to the record (no disagreement, 101.5
+      s for the review's 27 certificates).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All nine retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance, frozen claim and print; its 18
+        controls reached their required outcomes. Findings RI-1 to RI-7, none blocking.
+    limitations: >-
+      All three certificates pass both maintained routes and the third route; the six
+      kernel controls are refused by both maintained routes and the 18 third-route
+      controls reach their required outcomes, four per certificate at exact contact or
+      10^-40 to 10^-30 past it. The receipt's nine jobs hold 989562 pair decisions, 307.82
+      route CPU seconds and 680.92 job wall seconds; the longest job took 87.93 s. Every
+      positive clears every wall by exactly 2^-65 and every pair by a least Euclidean
+      distance of 1.649991e-20 at 308, 5.029464e-20 at 343 and 3.146894e-20 at 344. The
+      kernel's controls are gross (RI-3). No maintained route is the producer's checker
+      here; the maintained routes share one parse, half-angle conversion and the
+      separating-axis method, and all three share Fraction arithmetic. 343 and 344 lie
+      beyond the case corpus and are beyond-horizon rows, not register scope (RI-6). No
+      private-worker custody is on file (RI-5), and the reviewer and the producer share a
+      model family (RI-7). Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-10'
+
+  - id: E-squish-481-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [131, 153, 154, 207, 209, 232, 236, 237, 259, 263, 269, 270, 292, 302, 303, 305, 307]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH third request 2026-10-09]'
+    certificate: packing/resources/web/squish-481-third-request-2026-10-09/facts/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md
+        accepted all seventeen certificates for finite feasibility only, admitted by their
+        exact summary.csv fractions and not by the issue's displays, with seven non-blocking
+        findings (RI-1 to RI-7); the replay it reproduced is E-squish-481-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of 17 exact rational certificates at
+      d45669b, kept as derived exact facts with no upstream byte retained. Each side is
+      admitted by equality to the exact fraction the source's summary.csv prints; the
+      issue's 15-digit displays and each certificate's s_decimal are not roundings of it
+      and lie below it at eight counts. The author reports that SQUISH's exact Fraction
+      checker and David Ellsworth's check_packing.py accept all seventeen; neither was run
+      here. The three sources/ certificates at 155, 240 and 306 are above their cases and
+      not imported. The repository replay and its review are
+      E-squish-481-exact-feasibility. No KKT, interval, local or global optimality claim.
+    source_reviewed: '2026-10-10'
+
+  - id: E-squish-481-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [131, 153, 154, 207, 209, 232, 236, 237, 259, 263, 269, 270, 292, 302, 303, 305, 307]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH third request 2026-10-09]'
+    certificate: packing/resources/web/squish-481-third-request-2026-10-09/facts/
+    replay: >-
+      From packing/ with the project interpreter, as two processes at once: python -m
+      devtools.upper_bound_reports squish-481-third-request-2026-10-09 check --n 154 207 232
+      237 259 292 302 303 --replay and the same with --n 131 153 209 236 263 269 270 305
+      307, which decide all 51 retained jobs again through both maintained routes and hold
+      each to its retained row (all equal, 1084.4 s and 1085.4 s wall on 2026-10-10);
+      check-claims rebuilds the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 2 --upstream
+      squish-481-third-request-2026-10-09 DIRECTORY decides the seventeen by the third
+      route with six controls each and holds each fact to its certificate and summary.csv
+      row fetched at the pin into DIRECTORY (no disagreement, 101.5 s for the review's 27
+      certificates).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All 51 retained jobs reproduced on both
+        maintained routes in full, the frozen comparison rebuilt equal, and the third route
+        agreed with them at every side, pose, wall clearance, frozen claim and exact
+        summary.csv fraction; its 102 controls reached their required outcomes, and the 17
+        facts are the packings their pinned upstream files state. Findings RI-1 to RI-7,
+        none blocking.
+    limitations: >-
+      All seventeen certificates pass both maintained routes and the third route; the 34
+      kernel controls are refused by both maintained routes and the 102 third-route
+      controls reach their required outcomes. The receipts' 51 jobs hold 3148314 pair
+      decisions, 1340.82 route CPU seconds and 2487.87 job wall seconds; the longest job
+      took 208.94 s. At every count squares touch the closed box: the least wall clearance
+      is exactly 0 on all three routes, with 457 zero square-to-wall clearances and the far
+      wall touched at every count, and none negative; the record's closed-box convention
+      admits that contact, and the bound also holds if s(n) is read as an open-box
+      infimum. No two squares meet: the least pair gap is exactly 1e-32, and 3.16e-14 and
+      1.21e-14 at 263 and 292. Nothing retained binds a derived fact to the bytes it was
+      derived from (RI-2): the review held each fact to its upstream certificate, fetched
+      at the pin with the SHA-256 the packet pins, once on 2026-10-10. The kernel's
+      controls are gross (RI-3). No maintained route is the producer's checker; the
+      maintained routes share one parse, half-angle conversion and the separating-axis
+      method, and all three share Fraction arithmetic. No private-worker custody is on file
+      (RI-5), and the reviewer and the producer share a model family (RI-7). Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-10'
+
+  - id: E-deleeuw-483-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [70]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Deleeuw n70 refinement 2026-10-10]'
+    certificate: packing/resources/web/ebdeleeuw-n70-refinement-2026-10-10/facts/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md
+        accepted the certificate for finite feasibility only, with seven non-blocking
+        findings (RI-1 to RI-7); the replay it reproduced is E-deleeuw-483-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of one exact rational certificate at
+      24221d5, a centred rational centre and half-angle certificate kept as a derived exact
+      fact with no upstream byte retained; its stated side already carries its stated
+      dilation. The author reports that its own exact Fraction checker, written with the
+      generator, accepts all 280 corners and 2,415 pairs, and that David Ellsworth's
+      check_packing.py accepts a 60-digit export at epsilon 1e-40; neither was run here.
+      The repository replay and its review are E-deleeuw-483-exact-feasibility. No local
+      or global optimality claim.
+    source_reviewed: '2026-10-10'
+
+  - id: E-deleeuw-483-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [70]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Deleeuw n70 refinement 2026-10-10]'
+    certificate: packing/resources/web/ebdeleeuw-n70-refinement-2026-10-10/facts/n-070.yaml.gz
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      ebdeleeuw-n70-refinement-2026-10-10 check --replay decides all three retained jobs
+      again through both maintained routes and holds each to its retained row (all equal,
+      4.5 s wall on 2026-10-10); check-claims rebuilds the frozen comparison (equal);
+      python -m devtools.check_half_angle_area decide-imports --workers 2 --upstream
+      ebdeleeuw-n70-refinement-2026-10-10 DIRECTORY decides the certificate by the third
+      route with six controls, and holds the fact to certificate.json fetched at the pin
+      into DIRECTORY, read by the route's own centred-JSON reader with every centre moved by
+      S/2 (no disagreement, 101.5 s for the review's 27 certificates).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10
+        intake pass under think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All three retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at the side, every pose, the wall clearance and the frozen claim; its six
+        controls reached their required outcomes, and the fact is the packing its pinned
+        upstream file states. Findings RI-1 to RI-7, none blocking.
+    limitations: >-
+      The certificate passes both maintained routes and the third route; both kernel
+      controls are refused by both maintained routes and the six third-route controls
+      reach their required outcomes. The receipt's three jobs hold 14490 pair decisions,
+      3.31 route CPU seconds and 3.34 job wall seconds; the longest job took 1.12 s. The
+      positive clears every wall by 6.01e-13 and every pair by a least Euclidean distance of
+      1.200573e-12. The certificate states its centres in [-S/2, S/2]^2, and the adapter
+      moves each by exactly S/2, which the box arithmetic needs. Nothing retained binds the
+      derived fact to the bytes it was derived from (RI-2): the review held it to its
+      upstream certificate, fetched at the pin with the SHA-256 the packet pins, once on
+      2026-10-10. The kernel's controls are gross (RI-3). No maintained route is the
+      producer's checker; the maintained routes share one parse, half-angle conversion and
+      the separating-axis method, and all three share Fraction arithmetic. No
+      private-worker custody is on file (RI-5). Finite feasibility only: no lower bound,
+      optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-10'
+
+  - id: E-mishapolk-470-pose-report
+    claim: upper-bound
+    scope:
+      n_values: [84, 86, 88, 103, 105, 108, 127, 130, 131, 132, 153, 154, 175, 179, 180, 199, 207, 208, 209, 236, 237, 238, 239, 258, 263, 267, 270, 302, 303, 306]
+    assurance: reported
+    reported_method: numerical-multiprecision
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk decimal poses 2026-10-09]'
+    certificate: packing/resources/web/mishapolk-decimal-poses-2026-10-09/acquisition/sources.json
+    precision: {decimal_digits: 40, rounding: source-defined}
+    tolerance: '1e-14'
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10 intake pass
+        under think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md accepted
+        the derived witnesses for finite feasibility only, with eleven findings (RK-1 to RK-11),
+        RK-1 blocking the register plan's text and not the bounds; the replay it reproduced is
+        E-mishapolk-470-exact-feasibility.
+    limitations: >-
+      This atom records Mishapolk's report at dd3da5c, which the issue's errata pin by a
+      39-digit string that names no commit and the packet resolves by digest (RK-5): decimal
+      centre-and-angle poses, 16 decimals or 36 at 132, 199, 263 and 267, each printed side
+      rounded up at 12 decimals, accepted by David Ellsworth's check_packing.py at precision 40
+      and epsilon 1e-14 and by an unnamed 60-digit separating-axis check, numerical at
+      multiprecision; neither was run here. 132 and 267 are printed in the release's README and
+      not in the issue. No upstream byte is retained; the certificate field names the
+      acquisition record that pins each pose file by digest. At the printed side 19 of the 30
+      in-horizon poses are interval-certified here not to be packings, so the bound rests on the
+      separate confirming entry's derived witnesses, E-mishapolk-470-exact-feasibility. No KKT,
+      local or global optimality is claimed.
+    source_reviewed: '2026-10-10'
+
+  - id: E-mishapolk-470-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [84, 86, 88, 103, 105, 108, 127, 130, 131, 132, 153, 154, 175, 179, 180, 199, 207, 208, 209, 236, 237, 238, 239, 258, 263, 267, 270, 302, 303, 306]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk decimal poses 2026-10-09]'
+    certificate: packing/resources/web/mishapolk-decimal-poses-2026-10-09/facts/
+    replay: >-
+      From packing/ with the project interpreter, as two processes at once: python -m
+      devtools.upper_bound_reports mishapolk-decimal-poses-2026-10-09 check --n 84 88 103 105
+      127 132 175 180 199 208 237 238 270 303 306 --replay and the same with --n 86 108 130 131
+      153 154 179 207 209 236 239 258 263 267 302, which decide all 90 retained jobs again
+      through both maintained routes and hold each to its retained row (all equal, 644.9 s and
+      641.0 s wall on 2026-10-10); check-claims rebuilds the frozen comparison (equal); python
+      -m devtools.decimal_pose_margins check reproduces both interval receipts from the pinned
+      files; python -m devtools.check_half_angle_area decide-imports --workers 2 --imports
+      '#470' trio126 --upstream mishapolk-decimal-poses-2026-10-09 DIRECTORY decides every
+      witness by the third route with six controls each and derives each again from its file
+      fetched at the pin into DIRECTORY (no disagreement, 40.3 s).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10 intake pass
+        under think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All 90 retained jobs reproduced on both maintained
+        routes in full, the frozen comparison and both interval receipts rebuilt equal, and the
+        third route agreed with them at every side, pose, wall clearance and frozen claim,
+        derived every witness again from its pinned file and reached every one of its 180
+        controls' required outcomes. Findings RK-1 to RK-11; RK-1 blocks only the register
+        plan's text.
+    limitations: >-
+      The 30 witnesses are this repository's derivation from the source's decimal poses by
+      upper_bound_reports' decimal_dilation adapter: centres dilated about the box centre by the
+      declared exact ratio of the 12-decimal ceiling to the printed side, and half-angle
+      tangents rounded down at 32 decimals, so for this claim the generator of the exact witness
+      is this repository (RK-4) and the relation is to the source's code. All 30 positives pass
+      both maintained routes and the third route; all 60 kernel controls are refused by both
+      maintained routes and the 180 third-route controls reach their required outcomes. The
+      receipt's 90 jobs hold 3633654 pair decisions, 1261.11 route CPU seconds and 3235.53 job
+      wall seconds; the longest job took 131.17 s. No square touches a wall: the least wall
+      clearance is 4.74e-16 (84) and the least pair gap 6.59e-16 (238), against a corner
+      movement from the tangent rounding below 1.5e-32. Each fact was derived again from its
+      pinned upstream file by the third route's own parser, dilation and tangent floor in
+      decimal arithmetic on 2026-10-10, and all 5677 squares agree exactly; no retained check
+      binds a fact to those bytes (RK-3). The kernel's controls are gross (RK-8). The maintained
+      routes share one parse, half-angle conversion and the separating-axis method, and all
+      three share Fraction arithmetic. No source checker ran, and no private-worker custody is
+      on file (RK-10). 132 and 267 are decided and the register cites them; the 14 counts at or
+      above their cases are decided and cited by no entry. Finite feasibility only: no lower
+      bound, optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-10'
+
+  - id: E-evand-trio126-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [126]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel trio126 2026-10-09]'
+    certificate: packing/resources/web/evand-trio126-2026-10-09/source/search/trio126/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10 intake pass
+        under think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md accepted
+        n126_xu.cert for finite feasibility only, with eleven findings (RK-1 to RK-11), none
+        blocking for this certificate; the replay it reproduced is
+        E-evand-trio126-exact-feasibility.
+    limitations: >-
+      This atom records the source's three exact rational certificates at 268af52, of n = 126
+      packings reconstructed from a picture, of which only n126_xu is below the case and cited:
+      Ryan Xu's arrangement, at 11742640687119285146522492579501/10^30, 1.17e-19 above the
+      closed form 15/2 + 3 sqrt 2 its exactsolve reports. The source reports that verify_cert.py
+      and verify_cert2.py accept all three and that each packing is a local minimum, strict
+      modulo exact flat motions; none of its programs ran here. Its README says it makes no
+      claim. The repository replay and its review are E-evand-trio126-exact-feasibility. No
+      local or global optimality is admitted.
+    source_reviewed: '2026-10-10'
+
+  - id: E-evand-trio126-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [126]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel trio126 2026-10-09]'
+    certificate: packing/resources/web/evand-trio126-2026-10-09/source/search/trio126/n126_xu.cert
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      evand-trio126-2026-10-09 check --replay decides all three retained jobs again through both
+      maintained routes and holds each to its retained row (all equal, 11.8 s wall on
+      2026-10-10); check-claims rebuilds the frozen comparison (equal); python -m
+      devtools.check_half_angle_area decide-imports --workers 2 --imports trio126 decides the
+      certificate by the third route with six controls and holds its side, poses, margins and
+      frozen claim to the record (no disagreement).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10 intake pass
+        under think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All three retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed with
+        them at the side, every pose, the wall clearance and the frozen claim; its six controls
+        reached their required outcomes. Findings RK-1 to RK-11, none blocking here.
+    limitations: >-
+      The certificate passes both maintained routes and the third route; both kernel controls
+      are refused by both maintained routes and the six third-route controls reach their
+      required outcomes. The receipt's three jobs hold 47250 pair decisions, 11.48 route CPU
+      seconds and 26.27 job wall seconds; the longest job took 10.76 s. The positive clears
+      every wall by exactly 1/(2*10^20) and every pair by a separating-axis gap of
+      9.99999999999999e-21. The retained file equals the upstream file at 268af52. Its poses
+      differ from T-125's at 68 of 126 squares, so it is a more precise certificate of the same
+      arrangement, not T-125's poses refined (RK-7). The kernel's controls are gross (RK-8). No
+      maintained route is the producer's checker; the maintained routes share one parse,
+      half-angle conversion and the separating-axis method, and all three share Fraction
+      arithmetic. The source's checkers, exactsolve and its local-minimum and closed-form
+      statements were not run or decided, no private-worker custody is on file (RK-10), and the
+      reviewer and the producer share a model family (RK-9). Finite feasibility only: no lower
+      bound, optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-10'
+
+  - id: E-couzo-488-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [132, 175, 209, 237, 270, 305]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo certificates 2026-10-10]'
+    certificate: packing/resources/web/couzo-certificates-2026-10-10/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10 intake pass under
+        think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-upper-bound-imports-488-489.md accepted all
+        six certificates for finite feasibility only, with ten non-blocking findings (RL-1 to
+        RL-10); the replay it reproduced is E-couzo-488-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of six exact rational certificates at
+      3ef7634, which the issue prints rounded up at 12 places, all exact optima from Evan
+      Daniel's exact contact solver. The author reports passes from Evan Daniel's
+      verify_cert.py and a copy of this repository's sqpack verifier; neither was run here,
+      and the KKT and no-descent statements are not checked. The same commit changes three
+      further certificates the issue does not name, at 303, 338 and 340, compared in the
+      packet's claim record and registered by no entry, and leaves 54 byte-identical to the
+      issue-476 packet's. The repository replay and its review are
+      E-couzo-488-exact-feasibility. No optimality is claimed.
+    source_reviewed: '2026-10-10'
+
+  - id: E-couzo-488-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [132, 175, 209, 237, 270, 305]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo certificates 2026-10-10]'
+    certificate: packing/resources/web/couzo-certificates-2026-10-10/source/certificates/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      couzo-certificates-2026-10-10 check --replay decides all 27 retained jobs of the
+      nine-count roster again through both maintained routes, serially in one process, and
+      holds each to its retained row (all equal, 390.1 s wall on 2026-10-10); check-claims
+      rebuilds the frozen comparison (equal, 1.9 s); python -m devtools.check_half_angle_area
+      decide-imports --workers 2 --imports '#488' '#489' decides the six certificates by the
+      third route with six controls each, and holds every side, pose, margin, frozen claim
+      and print to the record (no disagreement, 14.7 s for the two imports' ten
+      certificates, with --upstream holding each retained file to its bytes at the pin).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-10-upper-bound-imports-488-489.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10 intake pass under
+        think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All 27 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance, frozen claim and print; its 36
+        controls for the six reached their required outcomes. Every file of the manifest was
+        fetched again at the pin and matched. Findings RL-1 to RL-10, none blocking.
+    limitations: >-
+      All six certificates pass both maintained routes and the third route; their 12 kernel
+      controls are refused by both maintained routes and the 36 third-route controls reach
+      their required outcomes, four per certificate at exact contact or 10^-40 to 10^-30
+      past it. The receipt's 27 jobs, over the nine certificates the commit adds or changes,
+      hold 1899504 pair decisions, 388.00 route CPU seconds and 393.15 job wall seconds; the
+      longest job took 25.21 s. Every positive clears its nearest wall by exactly
+      1/(2*10^20), no square touches a wall, and every pair clears by a least Euclidean
+      distance that rounds to 1.000000e-20. The kernel's controls are gross (RL-4), and the
+      source reports a pass from a copy of this repository's sqpack verifier, so one
+      maintained route is the producer's checker (RL-5) and the independently
+      re-implemented relation rests on the independent rational corner checker and the
+      third route. The maintained routes share one parse, half-angle conversion and the
+      separating-axis method, and all three share Fraction arithmetic. The certificates at
+      303, 338 and 340 are replayed in the receipt and were decided by the review on the
+      third route as well; no entry cites them (RL-9). The claim record reads issue 481's
+      and issue 489's sides exactly from their packets (RL-2). No private-worker custody is
+      on file (RL-6), and the reviewer and the producer share a model family (RL-8). Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-10'
+
+  - id: E-evand-489-hunt3-report
+    claim: upper-bound
+    scope:
+      n_values: [132, 308, 343, 344]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel record hunt 3 2026-10-10]'
+    certificate: packing/resources/web/evand-record-hunt3-2026-10-10/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10 intake pass under
+        think-fvz4, prompted separately from the import lanes
+      note: >-
+        docs/project/reviews/review-2026-10-10-upper-bound-imports-488-489.md accepted all
+        four certificates for finite feasibility only, 132 and 308 in the register and 343
+        and 344 as beyond-horizon rows, with ten non-blocking findings (RL-1 to RL-10); the
+        replay it reproduced is E-evand-489-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of four exact rational certificates at
+      c013f43, retained at the branch head 76a529b with byte-identical files, which the
+      issue prints in full at 30 places. The author reports that his two exact rational
+      checkers, verify_cert.py and verify_cert2.py, accept all four; neither was run here,
+      and the KKT, reduced-Hessian and jamming statements are not checked. 343 and 344 lie
+      beyond the case corpus. The same commit holds a fifth certificate, at 305, which the
+      issue does not name; its exact side is issue 488's there, the source's log gives it to
+      Couzo, and no entry cites it. The repository replay and its review are
+      E-evand-489-exact-feasibility. No optimality is claimed.
+    source_reviewed: '2026-10-10'
+
+  - id: E-evand-489-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [132, 308, 343, 344]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel record hunt 3 2026-10-10]'
+    certificate: packing/resources/web/evand-record-hunt3-2026-10-10/source/search/packer/candidates/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      evand-record-hunt3-2026-10-10 check --replay decides all 15 retained jobs of the
+      five-count roster again through both maintained routes, serially in one process, and
+      holds each to its retained row (all equal, 308.7 s wall on 2026-10-10); check-claims
+      rebuilds the frozen comparison (equal, 0.7 s); python -m devtools.check_half_angle_area
+      decide-imports --workers 2 --imports '#488' '#489' decides the four certificates by the
+      third route with six controls each, and holds every side, pose, margin, frozen claim
+      and print to the record (no disagreement, 14.7 s for the two imports' ten
+      certificates, with --upstream holding each retained file to its bytes at the pin).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-10-upper-bound-imports-488-489.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10 intake pass under
+        think-fvz4, prompted separately from the import lanes
+      note: >-
+        Accepted for finite feasibility only. All 15 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance, frozen claim and print; its 24
+        controls for the four reached their required outcomes. Every file of the manifest was
+        fetched again at the pin, and the five certificates again at c013f43, and matched.
+        Findings RL-1 to RL-10, none blocking.
+    limitations: >-
+      All four certificates pass both maintained routes and the third route; their eight
+      kernel controls are refused by both maintained routes and the 24 third-route controls
+      reach their required outcomes, four per certificate at exact contact or 10^-40 to
+      10^-30 past it. The receipt's 15 jobs, over the five certificates of the commit, hold
+      1319598 pair decisions, 308.35 route CPU seconds and 409.47 job wall seconds; the
+      longest job took 43.27 s. Every positive clears its nearest wall by exactly
+      1/(2*10^20), no square touches a wall, and every pair clears by a least Euclidean
+      distance that rounds to 1.000000e-20. 343 and 344 lie beyond the case corpus; their
+      beyond-horizon rows take assurance verified from this entry (RL-7). The certificate at
+      305 is replayed in the receipt and was decided by the review on the third route; its
+      exact side is issue 488's there, the source's log gives it to Couzo, and no entry
+      cites it (RL-3). The kernel's controls are gross (RL-4). No maintained route is the
+      producer's checker (RL-5); the maintained routes share one parse, half-angle
+      conversion and the separating-axis method, and all three share Fraction arithmetic.
+      No private-worker custody is on file (RL-6), and the reviewer and the producer share a
+      model family (RL-8). Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-10'
+
+  - id: E-wand125-fine-net-n28-57425-report
+    claim: lower-bound
+    scope:
+      n_values:
+      - 28
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net n28 n30 2026-10-10]'
+    certificate: packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/reported-n28-followup.json
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: The author reports 2297/400 at all 2073 directions of the net its candidate declares
+      (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this repository's sqverify_fast,
+      at 36b85b9, on no issue. Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n28.json). Eight sampled directions run here by
+      sqverify-fast verified and matched the source's log; that is a diagnostic, not a replay. The
+      pre-publication receipt repeats the source's check2 run (772 s against 771.6 s), so one complete
+      author run is reported. The 32-direction 197/200 control remains sampled. A complete capture,
+      whole-net controls, restored positives and a review that reads this certificate remain pending
+      under think-i85v, priced at about 3.3 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes; T-107 and the issue-446 287/50 report stand.
+    source_reviewed: '2026-10-10'
+
+  - id: E-wand125-fine-net-n30-58925-report
+    claim: lower-bound
+    scope:
+      n_values:
+      - 30
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net n28 n30 2026-10-10]'
+    certificate: packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/reported-n30-followup.json
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: The author reports 2357/400 at all 2073 directions of the net its candidate declares
+      (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this repository's sqverify_fast,
+      at ff9f269, on no issue. Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n30.json), and every listed file has the directory's
+      digest. That receipt is the very run
+      record the check2 receipt embeds, so one complete author run is reported. Eight sampled directions
+      run here by sqverify-fast verified and matched the source's log; that is a diagnostic, not a replay.
+      The 32-direction 197/200 control remains sampled. A complete capture, whole-net
+      controls, restored positives and a review that reads this certificate remain pending under
+      think-i85v, priced at about 4.5 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes; T-109 stands.
+    source_reviewed: '2026-10-10'
+
+  - id: E-wand125-linear-n122-1126-report
+    claim: lower-bound
+    scope: {n_values: [122, 123, 124, 125, 126]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 linear n122 2026-10-10]'
+    certificate: packing/resources/web/wand125-linear-n122-2026-10-10/reported-n122.json
+    replay_status: not-attempted
+    verifiers: [V-wand125-unified-linear-verify-cpp]
+    limitations: >-
+      wand125/square-packing at a9f76c382d023b4095899c4eb7ea7483b8b87ecf, on no issue,
+      reports s(122) >= 563/50 = 11.26 from a linear measure of 502 point, 1,268 segment and
+      3 rectangle orbits under D4, total mass 12199999/100000, core side 9977/10000 and 201
+      net half-angles of step 83/40000, checked at all 201 angles by
+      code/unified_linear_verify.cpp (SHA-256 0249726a...), T-080's checker; 73,694,735
+      nodes. A packing of 123 to 126 squares contains one of 122, so the value is also the
+      strongest report at those counts. Complete source-byte custody of the 31,784,537-byte
+      release asset, which the release's SHA256SUMS does not list, and the T-080 route's
+      exact premises, bundle bindings and 201 input enclosures are accepted
+      (receipts/linear-premises.json). Two angles replayed here (37 and 108) by the shipped
+      replay function and checker from this repository's retained copies returned the
+      certificate's records; that is a diagnostic, not a replay. The author's complete
+      replay (7 h 41 min at three workers) has no published receipt. A complete replay, the
+      route's control and a review that reads this certificate remain pending under
+      think-nd7g, priced at about 11.2 CPU-hours. No standing bound or rating changes.
+    source_reviewed: '2026-10-10'
+
+  - id: E-n040-guzhou-continuous-pose-report
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-guzhou-n40-continuous-pose, V-guzhou-n40-axis-integer-grid]
+    limitations: >-
+      Guzhou0806/n40-square-packing at 71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3 (committed
+      2026-10-10T14:30:28Z, a descendant of T-133's e5abeb4d), which the release
+      n40-continuous-1340000-199529-20261010 names (n40-continuous-1340000-199529.zip, 129,976
+      bytes, SHA-256 78d693ae...), reported in the comment of 2026-10-10T14:50:00Z on
+      jlevy/squares#485, claims s(40) > 1340000/199529 = 6.715815746082023..., unrestricted
+      rotations, strict. It rests on wand125's rect_n40_L67 rectangle density, unchanged (SHA-256
+      71011d03..., byte for byte the copy the 2026-10-01 packet retains, pinned by digest and not
+      copied into this packet), and on the statement that every closed square of side
+      199529/200000 inside [0, 67/10]^2 captures mass at least 4999/5000, so that 40 squares
+      capture more than the mass 3999/100 by 1/500. The source decides it with two frozen C++
+      kernels on inputs its exact.py regenerates from the density (pose input ccf7b68a..., axis
+      input d57e8bb2...): continuous_pose.cpp (da06206b...) over 43 closed slabs of t =
+      tan(theta/2) covering [10^-6, 83/200], each by outward-rounded binary64 interval branch and
+      bound over centre and angle together with a 30,000,000-node budget, and
+      axis_integer_grid.cpp (f5bc3f60...), an exact signed 128-bit vertex sweep for horizontal
+      squares of side 997643/1000000 on the density rounded inward to 10^-9, which covers t in
+      [0, 10^-6] because A W(10^-6) <= B. It reports two complete runs driven by verifier/run.py,
+      every non-timing slab and axis field identical: the producer's local run in the tree's
+      results/ (GCC 15.2.0, Python 3.14.4, 510.96 s at four workers, binaries a5dcfa3e... and
+      051e306d...) and GitHub Actions run 38059878931 on 71c97d07, whose receipt the ZIP carries in
+      place of the tree's (GCC 13.3.0, Python 3.12.3, 983.95 s, binaries 69bc9e64... and
+      cccecb9a...); both receipts are retained (GC-3 of the review). Both report 61,860,927 nodes,
+      30,930,485 leaves, 14,096,668 angle bisections, least leaf bound 2251349454150741/2^51 and
+      the axis minimum 249950896232809301864786207/(25 x 10^25) over 4,897,369 vertices. Its label
+      REPLAYED_SAME_KERNEL means its two runs are the same kernel on two compilers; it does not
+      claim distinct-code or method-distinct verification. wand125's review on the issue covers
+      6.70854 only. No packing, optimality or priority claim is made. This is the public-claim
+      entry; the replays here are E-n040-guzhou-continuous-pose-kernel-replay,
+      E-n040-guzhou-continuous-pose-finite-audit and E-n040-guzhou-continuous-pose-crate-axis.
+    external_review:
+      state: informally-verified
+      date: '2026-10-10'
+      reviewed_by: >-
+        AI agent (Claude, at maximum reasoning effort), the mathematical lane of
+        stage 4 of the issue 485 follow-up import (think-xms6), prompted separately from the
+        records lane, before any complete replay here and before retention
+        (docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md)
+      note: >-
+        No blocking defect. Re-derived: the D4 reduction (quarter-turns carry the centre to the
+        northeast quadrant, the diagonal reflection the angle to [0, pi/4]); the t-dependent
+        centre domain x = L/2 + u E(t), E > 0; the enclosures of cos, sin and W = cos + sin, W
+        unimodal with its critical point at sqrt 2 - 1 and upper bound 1414213562373096/10^15;
+        whole-box containment and exclusion by projection on the square's normals; the concave
+        clipped section and its trapezoid lower bound; the derivative formula and the Lipschitz
+        extension over the centre box; the dyadic closed cover; the near-axis containment, margin
+        589499411/125000000000125000, and the dominated measure; the bilinear-vertex lemma and the
+        int128 guards; the counting and the strict endpoint. Findings GC-1 to GC-8, none
+        blocking: the axis margin is 3.6e-6 and the chain holds in exact rationals only (GC-1);
+        main has no return, undefined once the harnesses rename it and never reached there
+        (GC-2); the ZIP's results/ are the CI run's (GC-3); nothing first-party decides the
+        continuous cover (GC-4); the full budget is part of the contract (GC-5); no floating
+        heuristic decides acceptance (GC-6); NaN is not propagated through min_element, which
+        cannot arise on this input (GC-7); the release's tests are regression controls (GC-8).
+        The complete 43-slab run was the records lane's and is
+        E-n040-guzhou-continuous-pose-kernel-replay.
+    source_reviewed: '2026-10-10'
+
+  - id: E-n040-guzhou-continuous-pose-kernel-replay
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay: >-
+      From packing/, with g++ and the project interpreter: uv run --frozen --all-extras --group
+      dev python -m devtools.audit_continuous_pose run --out DIR --workers 2 --crate-binary
+      sqverify_fast/target/release/sqverify-fast regenerates both kernel inputs from the retained
+      density, copies the retained verifier/ and tests/ sources into DIR and builds them there
+      with the release's flags (g++ -O3 -std=c++17 -fno-fast-math -ffp-contract=off
+      verifier/continuous_pose.cpp and g++ -O2 -std=c++17 verifier/axis_integer_grid.cpp, from
+      the tree's directory), runs the axis kernel, the 43 slabs as continuous PL PH 1000000 4999
+      5000 30000000 over the consecutive endpoints, controls A to F and H, the release's own
+      exact.py on control G, and sqverify-fast's two runs, writing each receipt with its wall and
+      CPU time to DIR/receipts; uv run ... python -m devtools.audit_continuous_pose check-replay
+      --receipts DIR/receipts must then print REPLAY_HOLDS. Without --receipts it judges the
+      packet's receipts/ and its --output equals receipts/replay-check.json;
+      tests/test_audit_continuous_pose.py holds the tool to its controls.
+    replay_status: passed
+    verifiers: [V-guzhou-n40-continuous-pose, V-guzhou-n40-axis-integer-grid, V-audit-continuous-pose]
+    proof:
+      source: packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
+      theorem: >-
+        Every closed square of side 199529/200000 inside [0, 67/10]^2, at any angle, captures
+        mass at least 4999/5000 of wand125's rect_n40_L67; since 40 x 4999/5000 - 3999/100 =
+        1/500 > 0, no 40 unit squares pack in a square of side 1340000/199529, so s(40) >
+        1340000/199529.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        PROOF.md and the two kernels, whose lemmas the 10 October review re-derived and whose
+        code it read line by line (items 2 to 9, GC-1 to GC-8); the receipts named in replay.
+      assumptions:
+        - The kernel inputs are the retained density's D4 expansion, each number bracketed by a binary64 pair (pose) or rounded inward to 10^-9 (axis), which the first-party audit regenerates and binds to the digests both release receipts name.
+        - IEEE-754 binary64 with round-to-nearest and subnormals, SSE2 evaluation without fused multiply-add, and GCC honouring -fno-fast-math -ffp-contract=off at -O3; asserted at start-up where the kernel can (controls F) and trusted for the rest.
+        - Exact signed 128-bit integer arithmetic within the axis kernel's guarded bound.
+        - The finite steps, which E-n040-guzhou-continuous-pose-finite-audit decides in exact rationals.
+      audit_record: docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
+    limitations: >-
+      Both kernels decided their statements here on 2026-10-10, built by
+      devtools.audit_continuous_pose from a scratch copy of the retained sources at their
+      upstream paths, with relative paths as the release's runner builds them, by g++ (Ubuntu
+      13.3.0-6ubuntu2~24.04.1) 13.3.0, the CI run's compiler: the pose binary 69bc9e64... and
+      the axis binary cccecb9a... are byte for byte the CI run's. Their inputs were regenerated
+      here from the retained density and are the digests both receipts name. The axis kernel:
+      AXIS_COVERAGE_PROVED, 2,213 x 2,213 vertices, minimum 999803584931237207459144828/10^27
+      at (4207731377, 6201178500)/10^9, direct sum matching, every field equal to both
+      receipts', 0.30 s. The 43 slabs, each continuous PL PH 1000000 4999 5000 30000000 over the
+      consecutive endpoints of 1, 500, 10000, ..., 410000, 415000: every one verified, exit 0,
+      every non-timing field of its output equal to both receipts'; in all 61,860,927 nodes,
+      30,930,485 leaves, 14,096,668 angle bisections, least leaf bound 2251349454150741/2^51 at
+      slab 1, 1.9e-10 above 4999/5000; 1,364 s of wall time at two workers and 1,854.9 CPU
+      seconds on a shared 4-core x86-64 Linux container at a one-minute load average between 3
+      and 14 (the local receipt's slab time is 1,891.8 s). This is the producer's own kernel
+      re-run: it reproduces the release's verification and is not an independent decision of
+      the continuous cover (GC-4); the release's own label for its two runs,
+      REPLAYED_SAME_KERNEL, is exact. Controls on the same binaries, each as the review's
+      contract states it: A, the release's synthetic-negative (uniform density 1/2) and
+      limited-budget (budget 1), exit 3 unresolved, beside its synthetic-positive, verified; B,
+      uniform density tau(1 - 10^-9)/B^2 on three slabs at the full budget, exit 3 within 92
+      nodes; C, densities cut at depth h at the top or the right with least capture tau(1 -
+      10^-9) at the slab's left end, the review's seven slab-depth pairs in both regimes, all 14
+      exit 3 (budget 1,500,000); D, densities off a horizontal gap with least capture tau(1 -
+      10^-9) at the slab's right end, five slabs, all exit 3; E, C's densities at tau(1 +
+      10^-4), all 14 verified within 251,829 nodes, and D's at about tau(1 + 3.4 x 10^-4) on
+      [400000, 410000], verified at 140,859; F, the rounding harness's 1,000,008-value IEEE
+      neighbour test passed, and the wrong-rounding and flush-to-zero runs (exit -6) and the
+      NDEBUG and fast-math compilations (exit 1) refused; G, the release's own exact.py,
+      copied into scratch with A = 997644/10^6, refused NEAR_AXIS_CONTAINMENT; H, the axis
+      kernel at tau = 999804/10^6, just above its minimum, AXIS_TEST_REFUSED, exit 2, and at
+      999803/10^6 proved. The contract's H as written, tau = 1/2, is admitted (exit 0), since
+      1/2 is below the minimum; it was run and recorded. The near-axis statement was also
+      decided by sqverify-fast (E-n040-guzhou-continuous-pose-crate-axis), and the finite
+      steps are E-n040-guzhou-continuous-pose-finite-audit's.
+    source_reviewed: '2026-10-10'
+
+  - id: E-n040-guzhou-continuous-pose-finite-audit
+    claim: derived-structure
+    scope: {n_values: [40]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay: >-
+      From packing/: uv run --frozen --all-extras --group dev python -m
+      devtools.audit_continuous_pose check --output OUT.json must print FINITE_STEPS_HOLD, every
+      check ok and controls G to G4 refused, and OUT.json must equal the packet's
+      receipts/finite-audit.json in the guzhou-n40-continuous-pose-2026-10-10 packet byte for
+      byte; tests/test_audit_continuous_pose.py holds the tool to its controls.
+    replay_status: passed
+    verifiers: [V-audit-continuous-pose]
+    proof:
+      source: packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
+      theorem: >-
+        If every side-199529/200000 square at t in [10^-6, 83/200] captures at least 4999/5000 of
+        wand125's rect_n40_L67 density (the slabs) and every horizontal side-997643/1000000 square
+        captures at least 4999/5000 of the density rounded inward to 10^-9 (the axis), then every
+        side-199529/200000 square in [0, 67/10]^2 does, and s(40) > 1340000/199529.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations, under the two hypotheses named.
+      pinpoints: >-
+        PROOF.md, whose argument the 10 October review re-derived (items 2, 8 and 9: the D4
+        reduction, the near-axis containment and the counting with the strict endpoint); the
+        audit's receipt receipts/finite-audit.json in the packet.
+      assumptions:
+        - JSON decimals read as their literal values with Fraction, and Python's unbounded integers, are exact.
+        - CPython's integer true division rounds to nearest, as the kernel's binary64 quotient of its threshold does.
+        - The slab and axis statements, the theorem's hypotheses, which this audit does not decide; E-n040-guzhou-continuous-pose-kernel-replay decides them.
+      audit_record: docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
+    limitations: >-
+      The finite steps, decided on 2026-10-10 in exact rationals from the retained density
+      and the release's parameters by devtools.audit_continuous_pose, written without opening
+      the release's verifier/exact.py and sharing no code with it (its docstring is the read
+      log; exact.py was read afterwards only to run control G on it): 480 positive rows, mass
+      3999/100, 3,840 D4 terms and 3,792 distinct rectangles, invariant under each of the
+      eight maps, integral 3999/100; the pose input regenerated in the release's order with
+      all 19,202 of its numbers bracketing their rationals, SHA-256 ccf7b68a...; the axis
+      input regenerated in quarter-turn order, 3,840 rows each dominated by its term, none
+      dropped, quarter-turn invariant, of mass M - 4.10e-6, SHA-256 d57e8bb2...; the int128
+      guard 16 sum w (l + l + A/2)^2 = 384178892657373682994447839008000000 < 2^125; the
+      2,213 x 2,213 grid; the dominated measure's capture at the reported minimiser, evaluated
+      again in integers, equal to the axis minimum 999803584931237207459144828/10^27, and the
+      original density's there 0.999803704300973; X = L/B = 1340000/199529, 72586117/9976450000
+      above T-133; 40 tau - M = 1/500; L > B x 1414213562373096/10^15, whose square exceeds 2;
+      T^2 + 2T - 1 = 89/40000 and T <= 1/2; the 44 endpoints partitioning [10^-6, 83/200];
+      the kernel's threshold up(fl(4999/5000)) above tau by 1.33e-16 and the receipts' least
+      leaf bound above it; W(eps) >= 1, A <= B and B - A W(eps) = 589499411/125000000000125000;
+      the axis minimum at least ceil(10^27 tau), by 3.58e-6. Every value equals the scalar, admission, coverage and axis blocks of both
+      release receipts, every slab row of both is the contract's run with the receipt's
+      binary, and the source digests both list are the retained files'. Controls, each
+      refused: G, A = 997644/10^6, fails the near-axis containment (A W(eps) - B = 9.95e-7);
+      tau = 3999/4000 fails the counting; T = 41/100 falls short of pi/4; eps = 10^-5 fails
+      the containment and the partition. It shares with exact.py the definition of the
+      density, its D4 expansion, the kernels' input order, the enclosure rule and the inward
+      rounding, and no code. It decides the finite steps and no coverage: by itself it proves
+      only the implication from the slab and axis statements, which
+      E-n040-guzhou-continuous-pose-kernel-replay decides. It is recorded as structure and not
+      as a bound because it decides no bound alone.
+    source_reviewed: '2026-10-10'
+
+  - id: E-n040-guzhou-continuous-pose-crate-axis
+    claim: derived-structure
+    scope: {n_values: [40]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n40 continuous pose 2026-10-10]'
+    certificate: resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay: >-
+      The crate stage of devtools.audit_continuous_pose run (E-n040-guzhou-continuous-pose-kernel-replay's
+      command), in a tree whose crate is reviewed source (python -m devtools.sqverify_fast_census
+      --source-digest prints d97758bb... and exits 0) after cargo build --release --locked -j 2 in
+      sqverify_fast/: sqverify-fast --candidate axis-A.json --n 40 --side 67/10 --directions 0
+      --threshold 1 --threads 1 --confirm and sqverify-fast --candidate net401-B.json --n 40 --side
+      67/10 --directions all --threshold 1 --threads 2 --confirm, on inputs the audit regenerates
+      (379193ff... and 94c3ab2e...); check-replay judges both.
+    replay_status: passed
+    verifiers: [V-sqverify-fast, V-audit-continuous-pose]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        Every horizontal closed square of side 997643/1000000 inside [0, 67/10]^2 captures at
+        least 4999/5000 of wand125's rect_n40_L67 density, decided as capture at least 1 of the
+        density scaled by 5000/4999 (mass 199950/4999 < 40), the same statement exactly.
+      scope: The near-axis lemma of the claim; with the slab cover it gives s(40) > 1340000/199529.
+      pinpoints: >-
+        SOUNDNESS.md's exact-event axis sweep, accepted with the crate by
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md; the format T
+        metadata-net admission read in
+        docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md; the receipts
+        named in replay.
+      assumptions:
+        - Scaling every weight by 5000/4999 turns capture at least 4999/5000 into capture at least 1, exactly.
+        - The axis-vertex sweep's lemma, that a horizontal square's capture is bilinear between breakpoints, as SOUNDNESS.md proves it.
+      audit_record: docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
+    limitations: >-
+      sqverify-fast decided two statements on 2026-10-10, built with cargo build --release
+      --locked -j 2 at rustc 1.98.0 (88d9e12ae 2026-08-18) from crate source d97758bb..., the
+      source at 910b6b12c, which the 6 October declared-net soundness review accepted; the
+      binary 567a0fd5... is the one that review built. Both inputs were regenerated here from
+      the retained density, the 480 positive rows with weights scaled by 5000/4999 (mass
+      199950/4999 < 40) and threshold 1, the same statement as capture at least 4999/5000 of
+      the original. The near-axis statement, input 379193ff... (B = 997643/1000000 with the
+      standard net in metadata), direction 0: verified by the exact-event axis-vertex sweep
+      over 4,897,369 vertices, 2,213 events per axis, least certified 1.0000037044548487 at
+      (2103865688632621/(5 x 10^14), 12402357/(2 x 10^6)), the breakpoint of the axis kernel's
+      minimiser, in 0.53 s; the summary reads PARTIAL because one direction of the net was
+      asked. This decides the near-axis lemma a second way, on the original density rather
+      than the dominated one, with code that shares none with axis_integer_grid.cpp. The
+      necessary condition, input 94c3ab2e... (B = 199529/200000, D = 83/80000, 401
+      directions): VERIFIED, 401 of 401, r = 0 by the axis sweep at least 1.000091413240477,
+      the other 400 by interval branch and bound over 32,763,798 boxes, least certified
+      1.000000000357051 at r = 289, 313.6 s of wall time and 295.1 CPU seconds at two threads.
+      A refusal there would have refuted the claim; the pass does not decide it, since the
+      continuous cover between net directions is the kernel's (GC-4).
+    source_reviewed: '2026-10-10'
+
+  - id: E-evand-regularized-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [70, 102, 103, 123, 129, 146, 153, 236, 258, 263, 269, 292, 295, 302, 303]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel regularized lists 2026-10-10]'
+    certificate: packing/resources/web/evand-regularized-2026-10-10/source/search/regularize/lists/certs/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10 intake pass under
+        think-8k76, prompted separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md accepted
+        all fifteen certificates for finite feasibility only, with eleven non-blocking
+        findings (RG-1 to RG-11); the replay it reproduced is
+        E-evand-regularized-exact-feasibility. The source's exact-optimum and same-packing
+        statements are the source's, and at 123, 129 and 292 the arrangement's identity
+        rests on them alone.
+    source_reviewed: '2026-10-10'
+    limitations: >-
+      This atom records the 15 exact rational certificates of the source's regularized record
+      lists at ea1a2f2, which the source presents as display views at the same side and not
+      new bounds. A separate complete repository replay is retained for n = 70, 102, 103,
+      123, 129, 146, 153, 236, 258, 263, 269, 292, 295, 302 and 303: 15 positives and 30
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 2155368 pair decisions; summed over the 45 jobs, the receipt records 413.8
+      route CPU seconds and 566.29 job wall seconds, the longest job 39.16 seconds. Every
+      positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
+      The repository replay and its review are E-evand-regularized-exact-feasibility. The
+      source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method. No two independent methods, human oversight or optimality is claimed.
+
+  - id: E-evand-regularized-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [70, 102, 103, 123, 129, 146, 153, 236, 258, 263, 269, 292, 295, 302, 303]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel regularized lists 2026-10-10]'
+    certificate: packing/resources/web/evand-regularized-2026-10-10/source/search/regularize/lists/certs/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      evand-regularized-2026-10-10 check --replay decides all 45 retained jobs of the
+      fifteen-count roster again through both maintained routes, serially in one process,
+      and holds each to its retained row (all equal, 535.5 s wall on 2026-10-11 beside two
+      other runs, 476 s alone on 2026-10-10); check-claims rebuilds the frozen comparison
+      (equal, 3.0 s); python -m devtools.check_half_angle_area decide-imports --workers 2
+      --imports regularized decides the fifteen certificates by the third route with six
+      controls each, decompressing each retained gzip itself, and holds every side, pose,
+      margin, frozen claim and S_cert print to the record (no disagreement, 137.7 s on
+      2026-10-11; with --upstream evand-regularized-2026-10-10 DIR, DIR a checkout at the
+      pin, it holds each retained gzip to its upstream bytes, 30 checks).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-exact-certificates
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+    independence_record: docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-10 intake pass under
+        think-8k76, prompted separately from the import lane
+      note: >-
+        Accepted for finite feasibility only. All 45 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance, frozen claim and print; its 90
+        controls reached their required outcomes, as did 45 on a checker written for the
+        review. Every file of the manifest was fetched again at the pin and matched.
+        Findings RG-1 to RG-11, none blocking.
+    limitations: >-
+      All fifteen certificates pass both maintained routes and the third route; their 30
+      kernel controls are refused by both maintained routes and the 90 third-route controls
+      reach their required outcomes, four per certificate at exact contact or 10^-40 to
+      10^-30 past it. The receipt's 45 jobs hold 2155368 pair decisions, 413.8 route CPU
+      seconds and 566.29 job wall seconds; the longest job took 39.16 s. Every positive
+      clears its nearest wall by exactly 1/(2*10^20), no square touches a wall, and every
+      pair clears by a least Euclidean distance that rounds to 1.000000e-20. No route here
+      is the source's code: its checkers verify_cert.py and verify_cert2.py are pinned and
+      did not run, and neither did its solver, regularizer or path test. The maintained
+      routes share one parse, half-angle conversion and the separating-axis method, and all
+      three share Fraction arithmetic. The kernel's controls are gross (RG-5). The source's
+      statements that each side is the exact optimum of the store's best packing and that
+      each view is the same packing traversable without expansion are not decided here;
+      measured pose by pose, every view differs from the certificate the entry credits,
+      and at 123, 129 and 292 only an optimal assignment pairs the squares (RG-3, RG-4).
+      No private-worker custody is on file (RG-7), and the reviewer and the producer share
+      a model family (RG-6). Finite feasibility only: no lower bound, optimum, local
+      minimum, same-packing connectivity, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-11'

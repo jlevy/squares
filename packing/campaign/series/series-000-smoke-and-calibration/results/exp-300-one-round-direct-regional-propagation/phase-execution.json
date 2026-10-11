@@ -1,0 +1,17 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-08T01:38:02.402972Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/execution-manifest.json",
+  "manifest_sha256": "46babcc3768345effa23bfe33fb6e87ae6487b33a0505ed7a63bfc3619d5a6e6",
+  "phases": [
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_one_round_owned_domain_propagation","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/descriptor.json","--max-seconds","180","--output","campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/certificate.json"],"ended_at":"2026-10-08T01:37:25.220432Z","name":"construction","returncode":0,"started_at":"2026-10-08T01:36:49.373410Z","status":"completed","wall_seconds":35.84634687501239},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_one_round_owned_domain_propagation","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/descriptor.json","--max-seconds","180","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/replay.json"],"ended_at":"2026-10-08T01:38:02.402298Z","name":"fresh_verification","returncode":0,"started_at":"2026-10-08T01:37:25.220945Z","status":"completed","wall_seconds":37.18069445801666}
+  ],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T01:36:49.372073Z",
+  "status": "completed",
+  "unstarted_phase_names": [],
+  "wall_seconds": 73.02953466604231
+}
+

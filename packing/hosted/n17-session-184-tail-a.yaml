@@ -1,0 +1,18 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+repository: jlevy/squares
+tag: data/n17-x048-session-168-certificates-v1
+objects:
+- path: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311/node-ec6ac70d574eea5deddb12eddb76019a6bc4bccd06273235713da845ab0a1381.json.gz
+  asset: node-ec6ac70d574eea5deddb12eddb76019a6bc4bccd06273235713da845ab0a1381.json.gz
+  size: 14898202
+  sha256: 3543306444647541bda375b68ebd87c5afa7d0c6c63e78013b42037f9837e8f9
+- path: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311/seed-6faea90c24b780eb86d46d6a001d39a8a6d945163950802800a8be3d67c65739.json.gz
+  asset: seed-6faea90c24b780eb86d46d6a001d39a8a6d945163950802800a8be3d67c65739.json.gz
+  size: 22023
+  sha256: 700c95007450a246c3441c74a10af0f4020f3dd332c8ac3f7271a9ecac63db84
+description: Two immutable native objects for Session184 TailA, independently checked by the full standing
+  kernel-streamed verifier in exp271. Other historical assets on this release are not republished by this
+  narrow manifest.

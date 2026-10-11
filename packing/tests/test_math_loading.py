@@ -11,7 +11,7 @@ from pathlib import Path
 import pytest
 from nodejs_wheel import node
 
-from devtools import check_math_faces
+from devtools import check_math_faces, check_math_loading, site_assets
 from devtools.check_math_loading import (
     LoadingReport,
     Readout,
@@ -208,3 +208,55 @@ def test_each_readout_contract_is_checked(field: str, value: object, message: st
 
 def test_visibility_requires_readable_geometry_after_ancestor_clipping() -> None:
     run_node("visibility.mjs")
+
+
+@pytest.mark.parametrize("report_control_failures", [True, False])
+def test_relocated_loading_controls_keep_linked_scripts_styles_and_fonts(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, report_control_failures: bool
+) -> None:
+    assets = site_assets.SiteAssets()
+    face = assets.face("probe.woff2", b"woff2 font control")
+    stylesheet = assets.stylesheet(
+        "probe.css", f'@font-face{{font-family:Probe;src:url("{face}")}}'
+    )
+    script = assets.script("probe.js", check_math_loading.HOLD_FONTS_SCRIPT)
+    page = tmp_path / "papers/example.html"
+    page.parent.mkdir()
+    page.write_text(
+        "<html><head>"
+        + site_assets.stylesheet_tag(stylesheet, "papers/example.html")
+        + site_assets.script_tag(script, "papers/example.html")
+        + "</head><body>Loading controls</body></html>"
+    )
+    site_assets.write_assets(tmp_path, assets.files())
+    observed: list[str] = []
+
+    def loading(path: Path, *, width: int, browser_name: str) -> LoadingReport:
+        assert width == 390
+        assert browser_name == "chromium"
+        report = clean_report()
+        if path == page:
+            assert '<script src="../assets/' in path.read_text()
+            return report
+        whole = path.read_text()
+        assert check_math_loading.HOLD_FONTS_SCRIPT in whole
+        assert "data:font/woff2;base64," in whole
+        assert 'rel="stylesheet"' not in whole
+        assert "../assets/" not in whole
+        name = path.stem
+        observed.append(name)
+        _, expected = check_math_loading.NEGATIVE_FIXTURES[name]
+        report["findings"] = list(expected) if report_control_failures else []
+        return report
+
+    monkeypatch.setattr(check_math_loading, "check_loading", loading)
+    report = check_math_loading.self_test(page, width=390)
+    assert observed == list(check_math_loading.NEGATIVE_FIXTURES)
+    assert report["baseline_findings"] == []
+    if report_control_failures:
+        assert report["findings"] == []
+    else:
+        assert len(report["findings"]) == sum(
+            len(expected) for _, expected in check_math_loading.NEGATIVE_FIXTURES.values()
+        )
+        assert all(control["missing_findings"] for control in report["controls"])

@@ -1,0 +1,69 @@
+{
+ "status": "PASS_PILOT_MEASURED",
+ "system": "n11",
+ "cap": "capture",
+ "outcome": "round_cap",
+ "endpoint_control": {
+  "held": true,
+  "checked_after": 12
+ },
+ "scales_first_round": {
+  "0.01": null,
+  "0.001": null,
+  "0.0003": null,
+  "0.0002": null
+ },
+ "falsifier": {
+  "falsified": false,
+  "longest_fine_and_flat_run": 0,
+  "first_round_rows_under_a_tenth": 0,
+  "first_round_rows_under_a_twentieth": null,
+  "contraction_start": {
+   "round": 1,
+   "max_row_to_extent_before": 0.08100216762624143,
+   "median_row_to_extent_before": 0.08069079413707354,
+   "worst_position_extent": 0.7661224591518506
+  },
+  "g_worst_extent_after_start": [],
+  "g_after_start_geometric_mean": null
+ },
+ "rounds": [
+  {
+   "round": 0,
+   "worst": "7.854e-01",
+   "position": "7.743e-01",
+   "turn": "7.854e-01",
+   "inside": 0,
+   "seconds": 0.7
+  },
+  {
+   "round": 1,
+   "worst": "7.854e-01",
+   "position": "7.661e-01",
+   "turn": "7.854e-01",
+   "inside": 0,
+   "seconds": 413.1
+  }
+ ],
+ "g": {
+  "ratios": {
+   "worst": [
+    1.0
+   ],
+   "worst_position": [
+    0.98942636447149
+   ],
+   "worst_turn": [
+    1.0
+   ]
+  },
+  "g_tail_geometric_mean": 1.0,
+  "worst_final": 0.7853981633974483,
+  "rounds_more_to_scale": {
+   "0.01": null,
+   "0.001": null,
+   "0.0003": null,
+   "0.0002": null
+  }
+ }
+}

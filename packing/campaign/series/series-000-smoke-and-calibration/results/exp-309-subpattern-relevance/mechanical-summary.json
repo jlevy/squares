@@ -1,0 +1,109 @@
+{
+  "schema": "n17-subpattern-relevance-mechanical-summary/v1",
+  "status": "metadata_criterion_met",
+  "source_commit": "d91cc22ffa889afa1ababafb1e4ffca4c3dc08c4",
+  "source_files": 12,
+  "all_source_bytes_match": true,
+  "full_payload_equal": true,
+  "fresh_verification_passed": true,
+  "outer_seconds": 3.004369249974843,
+  "cleanup_complete": true,
+  "candidates": [
+    {
+      "canonical_D4_mask": 5177392,
+      "id": "C1",
+      "manifest_id": "131e014393e8cc50ea643e38ae8a11d19bb3a1d133f3df23b54225d781a8db64",
+      "potential_current_residue": {
+        "orbits": 14,
+        "states": 104
+      },
+      "potential_distance_two": {
+        "orbits": 0,
+        "states": 0
+      }
+    },
+    {
+      "canonical_D4_mask": 5177424,
+      "id": "C2",
+      "manifest_id": "505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57",
+      "potential_current_residue": {
+        "orbits": 13,
+        "states": 84
+      },
+      "potential_distance_two": {
+        "orbits": 0,
+        "states": 0
+      }
+    }
+  ],
+  "pairwise_overlap": [
+    {
+      "candidates": [
+        "C1",
+        "C2"
+      ],
+      "current_residue": {
+        "orbits": 6,
+        "states": 40
+      },
+      "distance_two": {
+        "orbits": 0,
+        "states": 0
+      }
+    }
+  ],
+  "union_potential_current_residue": {
+    "orbits": 21,
+    "states": 148
+  },
+  "union_potential_distance_two": {
+    "orbits": 0,
+    "states": 0
+  },
+  "D4_subset_comparisons": 74928,
+  "ordinary_assignment_exclusion_proved": false,
+  "census_admission_proved": false,
+  "global_optimality_proved": false,
+  "phases": [
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.inspect_n17_subpattern_relevance",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/descriptor.json",
+        "--max-seconds",
+        "30",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/certificate.json"
+      ],
+      "ended_at": "2026-10-08T03:50:18.270332Z",
+      "name": "construction",
+      "returncode": 0,
+      "started_at": "2026-10-08T03:50:16.938368Z",
+      "status": "completed",
+      "wall_seconds": 1.3317961660213768
+    },
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.inspect_n17_subpattern_relevance",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/descriptor.json",
+        "--max-seconds",
+        "30",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/replay.json"
+      ],
+      "ended_at": "2026-10-08T03:50:19.473012Z",
+      "name": "fresh_verification",
+      "returncode": 0,
+      "started_at": "2026-10-08T03:50:18.270895Z",
+      "status": "completed",
+      "wall_seconds": 1.2019839590066113
+    }
+  ]
+}

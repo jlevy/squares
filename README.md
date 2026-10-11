@@ -31,7 +31,7 @@ $s(11) = T = 3.877083590022814\ldots$, the exact side of Walter Trump’s 1979 p
 [T-060](packing/frontier/RESULTS.md) records the global lower bound from the
 Astra-assisted
 [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal) proof by
-Queuingtheorydotcom, building on this project and Kleddamag.
+Mannaseh Ahmed, building on this project and Kleddamag.
 This repository independently replayed the proof’s exact inputs and audited their
 mathematical composition (`V3/C3/S5`: machine-checked, review record pending);
 [T-011](packing/frontier/RESULTS.md) verifies Trump’s matching witness.
@@ -46,7 +46,7 @@ the confirmation depends on and the reproducibility defects found in the source.
 On 6 October 2026 the proof was announced as formalized in Lean 4 “thanks to Astra and
 Claude”, in
 [11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) by
-Queuingtheorydotcom and contributors.
+Mannaseh Ahmed and contributors.
 This project’s statement audit reads its theorem as exactly $s(11) = T$, and its source
 reports that its full verification run, resumed from earlier validated receipts, passed,
 trusting Lean’s compiler for its numerical certificates.
@@ -57,12 +57,12 @@ on, and a human expert’s review of the formalization, are still to come.
 [Square Packing](https://jlevy.github.io/squares/).** It carries the
 [recent results](https://jlevy.github.io/squares/#recent-results) by this project and by
 others with their credit, the
-[verification ratings](https://jlevy.github.io/squares/all-results.html#verification-ladders),
+[verification ratings](https://jlevy.github.io/squares/results.html#verification-ladders),
 [the atlas](https://jlevy.github.io/squares/#the-atlas-of-square-packings) of known-best
 packings and its films, the table of
-[every result](https://jlevy.github.io/squares/all-results.html), and
-[the frontier survey](https://jlevy.github.io/squares/frontier.html) of every case
-$n = 1\ldots324$, all generated from the record in this repository.
+[every result](https://jlevy.github.io/squares/results.html), and
+[the frontier survey](https://jlevy.github.io/squares/atlas.html#the-frontier-survey) of
+every case $n = 1\ldots324$, all generated from the record in this repository.
 The in-repository record is the [results register](packing/frontier/RESULTS.md), the
 per-case [status table](packing/frontier/STATUS.md), and
 [`epistemics.md`](epistemics.md), which defines how each claim is graded.
@@ -70,7 +70,8 @@ The site and the atlas posters are at edition `v0.5.0`; each paper carries a ver
 its own; the atlas films are the ones cut for the
 [`v0.4.2` release](https://github.com/jlevy/squares/releases/tag/v0.4.2).
 
-The site’s [papers](https://jlevy.github.io/squares/papers.html) explain the proofs.
+The site’s [papers](https://jlevy.github.io/squares/papers.html) explain constructions,
+search methods, and proofs.
 Three of them form one series on $n = 11$, read in order:
 
 1. [**New Lower Bounds for Square Packing for n = 11**](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html):
@@ -85,11 +86,18 @@ Three of them form one series on $n = 11$, read in order:
    ([PDF](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.pdf),
    [source](packing/devtools/templates/n11-threshold-bound-review-article.md)).
 3. [**A Review of the Optimality Proof of the Trump Packing of 11 Squares**](https://jlevy.github.io/squares/papers/n11-optimality-review.html):
-   explains Queuingtheorydotcom’s proof that Trump’s packing is optimal,
-   $s(11) = 3.8770835\ldots$ (T-060): construction, case exclusions, capture and local
-   isolation, with figures drawn from or checked against the retained proof data
+   explains Ahmed’s proof that Trump’s packing is optimal, $s(11) = 3.8770835\ldots$
+   (T-060): construction, case exclusions, capture and local isolation, with figures
+   drawn from or checked against the retained proof data
    ([PDF](https://jlevy.github.io/squares/papers/n11-optimality-review.pdf),
    [source](packing/devtools/templates/n11-optimality-review-article.md)).
+
+For how record packings are found, read
+[**How Record Square Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html),
+a tutorial on geometric construction, physics-inspired search, annealing, surgery, local
+refinement, and upper-bound certification
+([PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf),
+[source](packing/devtools/templates/packing-methods-article.md)).
 
 This repository also contains
 **[a set of tools and AI workflows for automated mathematical research](#autonomous-research-process)**:
@@ -109,6 +117,7 @@ The rest of this README is about that work.
 | Where | What |
 | --- | --- |
 | [**Tutorial**](TUTORIAL.md) | First-principles introduction to the objects, bounds, cells, stationary branches, search, and proof obligations |
+| [**How Record Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) | Geometric construction, physics-inspired search, annealing, surgery, local refinement, and upper-bound certification, with sourced record histories |
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for $n = 1\ldots324$, with reported and verified bounds kept separate |
@@ -270,10 +279,27 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These 23 research reports are the durable topical syntheses:
+These 40 research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
+| [n17 Restricted Family-Cell Audit](docs/project/research/research-2026-10-09-n17-family-cell-audit.md) | Exact replay forces the free square into side-S2 for a fixed sixteen-square endpoint skeleton on a restricted slider box; no perturbed-core capture or global exclusion |
+| [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | Prospective first-eight shared-centre pilot, exact endpoint feasibility control and bounded certificate contract; no LP implementation or result |
+| [Owned-Core Guarded Clauses](docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md) | Transport of the verified same-core implication to a polynomial pose guard, with endpoint disjointness and the complementary-cover obligation separated |
+| [Case-Preserving Owned Propagation](docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md) | Verified regional orientation gain, retained case correlations and the next simultaneous propagation contract |
+| [n11 Envelope Transfer](docs/project/research/research-2026-10-07-n17-n11-envelope-transfer.md) | Whole-square containment windows transferring the settled n11 bound, with complete finite positive and negative checks |
+| [Normalized Contact Rank Filter](docs/project/research/research-2026-10-07-n17-normalized-contact-rank-filter.md) | Hand forest/capacity relaxation for full-rank representatives, exact rejection-certificate contract and a bounded prospective 95-orbit discriminator |
+| [Global Contact Budget for n17](docs/project/research/research-2026-10-07-n17-global-contact-budget.md) | Hand normalization proof requiring at least 19 distinct pair contacts and three graph cycles; finite arithmetic checks and global capture remain separate obligations |
+| [Two-Child Collective Propagation](docs/project/research/research-2026-10-07-n17-two-child-collective-propagation.md) | Two closed regional centre cases and a verified additional 15/32 orientation restriction measured after their surviving-case union |
+| [One-Round Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-one-round-owned-domain-propagation.md) | Complete one-round ownership recovery and collective restriction contract on accepted guarded geometry |
+| [Strict Core Regional Transfer](docs/project/research/research-2026-10-07-n17-strict-core-regional-transfer.md) | Freshly checked 25-row conditional restriction at radius $2^{-23}$ in [exp299](packing/campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/README.md); direct reconstruction at radius $1/512$ retains 22 rows in [exp297](packing/campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/README.md) |
+| [n17 Session 186 W3 Strategy](docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md) | Positive-width regional lifting, conditional propagation and measured verification priorities for the six-hour continuation |
+| [Full-square partner coupling](docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md) | Prospective exact separating-axis test and a positive-margin lift to a closed nonzero region |
+| [Complete Partner-Pose Coupling for the n17 Parent](docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md) | Complete-row collision quantifiers, the fixed-witness discriminator, closed-region ladder and endpoint-family safeguards |
+| [n17 W3 Capacity and Route Selection](docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md) | Global capture versus replay bottlenecks, the accepted reduced-model witness, prioritized coupling and optimization blocks, and conditional alternatives |
+| [n17 Proof Interfaces and Finite-Angle LP Contract](docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md) | Conditional fixed-container proof joins, finite-angle branch semantics, exact feature/apex/patch contracts, and remaining global capture obligations |
+| [Publishing GitHub Work from Codex Cloud](docs/project/research/research-2026-10-07-codex-cloud-github-publication.md) | Diagnosis of GitHub access in Codex Cloud, the verified publication repair, and reusable setup and validation evidence |
+| [Cloud Intake State Checkpoint](docs/project/research/research-2026-10-07-cloud-intake-state-checkpoint.md) | Completed SQUISH publication, pending second-update validation, retained preparation archives, and the open intake queue |
 | [s(12) Beyond Rescaling](docs/project/research/research-2026-10-02-s12-beyond-rescaling.md) | Daniel’s s(12) certificate scaled past #309 at a finer angle net, then re-weighted by linear programming to a candidate s(12) ≥ 15680000/3949423, with source-verifier receipts and controls |
 | [Where the Authors’ Measure Checkers Spend Their Time](docs/project/research/research-2026-10-02-author-checker-profile.md) | Function-level profiles of Tokoharu’s and wand125’s outward-rounded checkers on one certificate per family, and what they imply for an independent verifier; withheld from that verifier’s clean-room implementers |
 | [Exact Arithmetic for Independent Verifiers](docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md) | Source-level comparison of Python and Rust rational arithmetic, native-library options, sampled profiles, and a controlled experiment measuring redundant normalization |

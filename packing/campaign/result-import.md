@@ -264,12 +264,36 @@ Triage decides what the import is before anything is retained, in an hour or les
 
 Record the claim as reported, by the frontier README’s rules: a reported evidence entry,
 a coverage entry that cites it, the reported lane of each case it improves, and a
-register entry with its ratings and `next_rung`. Three rules are the process’s own:
+register entry with its ratings and `next_rung`. Six rules are the process’s own:
 
 - **`attribution.published` is the claim’s date, not the pin’s:** the date the source
   gives for it, or the UTC date of the first commit that contains the certificate; for
   an entry over several certificates, the last of those dates.
 - **The entry’s `scope` is covered** by the scopes of the evidence it cites.
+- **The claim states each bound it reports**, in a form `devtools.check_standing` reads:
+  `s(n) <= v` for an upper bound, `s(n) >= v` for a lower bound and the same with `=`
+  for an exact value, where $v$ is the value the source certifies, written as a fraction
+  or as decimals that end.
+  A value that is no such number, such as a root of a polynomial, is written by its
+  decimals cut where they are certain and ended with an ellipsis,
+  `s(106) <= 10.822908044132847555086207…`, which stands for every number that starts
+  so. A closed form written with `√` or `sqrt` may stand before them,
+  `s(11) >= 38100√(8100042893309449)/899996306539 = 3.8100257…`. Where the case lanes
+  are left unchanged until the result is adopted, as `T-128`’s were, those values are
+  all that relate the entry to its cases: it is *pending adoption* where one is better
+  than its case’s bound, and *superseded* only where the case holds one at least as good
+  ([epistemics.md](../../epistemics.md#status)).
+- **A confirmation the triage priced and did not run is listed** in the entry’s
+  `unfinished_confirmations`, with the rung it would reach, its bead and its
+  `estimated_cost` from the bead’s price, and it is removed in the change that lands it
+  ([epistemics.md](../../epistemics.md#status)).
+- **A regularization is listed as one.** Where an imported certificate rearranges a
+  packing the record already credits, as Evan Daniel’s regularized record lists do
+  (`T-146`), the entry lists each count in `regularizations`, naming the result whose
+  packing it regularizes, so the packing keeps its finder’s credit and the regularizer
+  is credited with the regularization; the `identity` stays the source’s claim until a
+  measurement here decides it
+  ([epistemics.md](../../epistemics.md#parallel-projects-and-their-credit)).
 - **The `T-NNN` is taken last.** An id is its row’s position and cannot be reserved
   across branches, so take it in the commit that registers the result, merge that day,
   and quote it to no author until it is on `main`.
@@ -358,6 +382,51 @@ The pull request that registers or raises a result runs
 [New Result Publication](documentation-pass.md#new-result-publication): the views are
 rendered in the commit that changes the record, and the data pin moves in the next.
 No documentation phase is opened for it.
+
+### Verify the Published Result
+
+An import’s publication includes its public results and drawings.
+Passing a local build or PR CI establishes the candidate; verify the deployed main tree
+before the final publication reply in stage 7.
+
+Before merge, check the generated result/evidence registers, owning case pages, bound
+citations and selected case/overview graphics together.
+Each drawn packing must match its selected exact source geometry and displayed safe
+ceiling. A confirmation label must refer to evidence for that displayed bound, rather
+than an earlier, weaker ceiling.
+Preserve the source’s decimal print as a quote and the earlier certificate as history
+when a tighter reported packing supersedes it.
+Inspect representative desktop and mobile views for cropped drawings, missing source
+credit or unreadable labels.
+
+Synchronize the owning beads to the native `tbd-sync` branch before clearing fallback
+outbox exports.
+Verify every exported issue identity/version and alias against the remote
+native records, retain the raw variants, and commit outbox cleanup separately.
+An empty local outbox alone does not establish successful synchronization.
+
+After merge:
+
+1. Identify the successful main Pages deployment and its full source commit.
+   A newer deployment is suitable when it contains the merged import.
+   Record its run and commit; a successful PR build is not deployment evidence.
+2. From `packing/`, run the existing site checker with project Python:
+   `uv run --frozen --all-extras --group dev python -m devtools.check_published_site --commit FULL_DEPLOYED_SHA`.
+   Preserve its completion receipt and actual pass/fail/skip counts.
+   Diagnose browser or environment failures without disabling TLS verification or
+   publication checks.
+3. Follow each imported result’s `all-results.html#t-NNN` link on the main site.
+   Check its scope, V/C/S rungs, status and credit against the merged register;
+   provisional branch-only status must not survive publication.
+4. Check every changed case’s main drawing and overview/regularized rendering against
+   the selected source, exact side and safe display.
+   Confirm that reported versus verified labels and their citations agree, and that
+   retained historical evidence remains accessible.
+   Check the rendered layouts as well as their source metadata.
+5. Record deployment, result-row and graphics evidence in the owning intake bead.
+   The final author reply states only the scope actually imported, reviewed and
+   published; a later source revision or newly split issue remains queued with its own
+   owner.
 
 ## Stage 6: Explain
 

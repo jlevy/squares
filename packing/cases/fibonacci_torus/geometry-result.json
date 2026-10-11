@@ -1,0 +1,1608 @@
+{
+  "contact_graph": {
+    "automorphism_group_order": 1,
+    "color_refinement": [
+      [
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4,
+        2,
+        4,
+        4,
+        2
+      ],
+      [
+        0,
+        0,
+        1,
+        2,
+        4,
+        4,
+        6,
+        3,
+        7,
+        5,
+        1
+      ],
+      [
+        1,
+        0,
+        3,
+        4,
+        7,
+        6,
+        9,
+        5,
+        10,
+        8,
+        2
+      ]
+    ],
+    "edges": [
+      [
+        0,
+        6
+      ],
+      [
+        1,
+        9
+      ],
+      [
+        2,
+        8
+      ],
+      [
+        2,
+        10
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        4,
+        8
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        6,
+        8
+      ],
+      [
+        7,
+        9
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        9,
+        10
+      ]
+    ],
+    "nontrivial_cell_action_preserves_original_square_contacts": false,
+    "source": "packing/atlas/known-best/contact-structures.json"
+  },
+  "crossing_polynomial": "5*u**8 - 10*u**7 - 2*u**6 + 14*u**5 + 12*u**4 - 6*u**3 + 2*u**2 + 2*u - 1",
+  "cusp_bound": "L - T_star >= abs(u - u_star)/4",
+  "f1": "(6*u + 4)/(-u**2 + 2*u + 1)",
+  "f2": "(4*u + 4)*(u**6 - 2*u**5 + 2*u**4 + 7*u**3 - 2*u**2 + u + 1)/(u**8 - 2*u**7 - 2*u**5 + 14*u**4 + 2*u**3 + 2*u + 1)",
+  "identities": {
+    "Fibonacci_determinant": true,
+    "crossing_polynomial": true,
+    "first_clearance": true,
+    "second_clearance": true
+  },
+  "passed": true,
+  "rectangle_geometry": {
+    "cosine_sine_positive": {
+      "cosine": {
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "1 - u**2",
+        "numerator_bernstein_minimum": "8631/10000",
+        "strict": true
+      },
+      "sine": {
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "2*u",
+        "numerator_bernstein_minimum": "18/25",
+        "strict": true
+      }
+    },
+    "feasible_iff_both_clearances_nonnegative_on_rectangle": true,
+    "other_pair_bounds": [
+      {
+        "axis": [
+          "1",
+          "0"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 2",
+        "numerator_bernstein_minimum": "187/100",
+        "pair": [
+          0,
+          1
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "1"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 2",
+        "numerator_bernstein_minimum": "187/100",
+        "pair": [
+          0,
+          2
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "1"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 2",
+        "numerator_bernstein_minimum": "187/100",
+        "pair": [
+          0,
+          3
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "1"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 2",
+        "numerator_bernstein_minimum": "187/100",
+        "pair": [
+          0,
+          4
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "1"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 3",
+        "numerator_bernstein_minimum": "87/100",
+        "pair": [
+          0,
+          5
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          0,
+          6
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "1",
+          "0"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "L*u**4 - L + 4",
+        "numerator_bernstein_minimum": "1712276/9765625",
+        "pair": [
+          0,
+          7
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "1",
+        "numerator_bernstein_minimum": "1",
+        "pair": [
+          0,
+          8
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "-L*u**4 + 2*L*u**2 - L + 2*u**3 - 8*u**2 + 2*u + 4",
+        "numerator_bernstein_minimum": "8100224/9765625",
+        "pair": [
+          0,
+          9
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "-L*u**4 + 2*L*u**2 - L + 4*u**3 - 8*u**2 + 4*u + 4",
+        "numerator_bernstein_minimum": "16042724/9765625",
+        "pair": [
+          0,
+          10
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "1"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 2",
+        "numerator_bernstein_minimum": "187/100",
+        "pair": [
+          1,
+          2
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-1",
+          "0"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 2",
+        "numerator_bernstein_minimum": "187/100",
+        "pair": [
+          1,
+          3
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "1"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 2",
+        "numerator_bernstein_minimum": "187/100",
+        "pair": [
+          1,
+          4
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-1",
+          "0"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 2",
+        "numerator_bernstein_minimum": "187/100",
+        "pair": [
+          1,
+          5
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-1",
+          "0"
+        ],
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "L*u**4 - 2*L*u**3 + 2*L*u**2 + 2*L*u + L - u**4 + 4*u**3 - 4*u**2 - 8*u - 3",
+        "numerator_bernstein_minimum": "11082183/9765625",
+        "pair": [
+          1,
+          6
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-1",
+          "0"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "-L*u**4 + 2*L*u**3 + 2*L*u + L - 2*u**3 - 4*u**2 - 6*u - 4",
+        "numerator_bernstein_minimum": "1765667/9765625",
+        "pair": [
+          1,
+          7
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-2*u/(u**2 + 1)",
+          "(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "-L*u**2 + 2*L*u + L + u**2 - 6*u - 3",
+        "numerator_bernstein_minimum": "1120897/1000000",
+        "pair": [
+          1,
+          8
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "1"
+        ],
+        "denominator": "4*u**4 + 4*u**2",
+        "denominator_bernstein_minimum": "228744/390625",
+        "numerator": "-L*u**6 + 2*L*u**5 + L*u**4 + L*u**2 - 2*L*u - L + 4*u**5 - 8*u**4 + 4*u**3 - 4*u**2 + 8*u + 4",
+        "numerator_bernstein_minimum": "2168562344/6103515625",
+        "pair": [
+          1,
+          10
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-1",
+          "0"
+        ],
+        "denominator": "1 - u**2",
+        "denominator_bernstein_minimum": "8631/10000",
+        "numerator": "-2*L*u + 2*u**2 + 4*u + 2",
+        "numerator_bernstein_minimum": "547/625",
+        "pair": [
+          2,
+          3
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-1",
+          "0"
+        ],
+        "denominator": "1 - u**2",
+        "denominator_bernstein_minimum": "8631/10000",
+        "numerator": "-2*L*u + 3*u**2 + 4*u + 1",
+        "numerator_bernstein_minimum": "121/10000",
+        "pair": [
+          2,
+          4
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-1",
+          "0"
+        ],
+        "denominator": "1 - u**2",
+        "denominator_bernstein_minimum": "8631/10000",
+        "numerator": "-2*L*u + 2*u**2 + 4*u + 2",
+        "numerator_bernstein_minimum": "547/625",
+        "pair": [
+          2,
+          5
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-(1 - u**2)/(u**2 + 1)",
+          "-2*u/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "1",
+        "numerator_bernstein_minimum": "1",
+        "pair": [
+          2,
+          6
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "-1"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "L*u**2 + L - 2*u - 2",
+        "numerator_bernstein_minimum": "51611/31250",
+        "pair": [
+          2,
+          7
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-(1 - u**2)/(u**2 + 1)",
+          "-2*u/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          2,
+          8
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "-1"
+        ],
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "L*u**4 + 2*L*u**2 + L - u**4 - 6*u**3 - 2*u - 3",
+        "numerator_bernstein_minimum": "8997783/9765625",
+        "pair": [
+          2,
+          9
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "1",
+          "0"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          3,
+          4
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "-1"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          3,
+          5
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "1 - u**2",
+        "numerator_bernstein_minimum": "8631/10000",
+        "pair": [
+          3,
+          6
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "2",
+        "numerator_bernstein_minimum": "2",
+        "pair": [
+          3,
+          7
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "2*u",
+        "numerator_bernstein_minimum": "18/25",
+        "pair": [
+          3,
+          8
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "u**2 + 2*u + 1",
+        "numerator_bernstein_minimum": "1156/625",
+        "pair": [
+          3,
+          9
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "1",
+          "0"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "L*u**2 + L - 2*u - 2",
+        "numerator_bernstein_minimum": "51611/31250",
+        "pair": [
+          3,
+          10
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-1",
+          "0"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          4,
+          5
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "-1"
+        ],
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "4*L*u**2 + u**4 - 2*u**3 - 10*u**2 - 2*u + 1",
+        "numerator_bernstein_minimum": "356911/390625",
+        "pair": [
+          4,
+          6
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "0",
+          "-1"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "L*u**2 + L - 2*u - 2",
+        "numerator_bernstein_minimum": "51611/31250",
+        "pair": [
+          4,
+          7
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          4,
+          8
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "1",
+        "numerator_bernstein_minimum": "1",
+        "pair": [
+          4,
+          9
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "4*u**4 + 4*u**2",
+        "denominator_bernstein_minimum": "228744/390625",
+        "numerator": "-L*u**6 + 2*L*u**5 - L*u**4 + 4*L*u**3 + L*u**2 + 2*L*u + L + 4*u**5 - 4*u**4 - 12*u**3 - 8*u - 4",
+        "numerator_bernstein_minimum": "2262525902/6103515625",
+        "pair": [
+          4,
+          10
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          5,
+          6
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "1",
+        "numerator_bernstein_minimum": "1",
+        "pair": [
+          5,
+          7
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "1",
+          "0"
+        ],
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "2*L*u**3 - 2*L*u - u**4 - 4*u**3 + 4*u**2 + 4*u + 1",
+        "numerator_bernstein_minimum": "123892/390625",
+        "pair": [
+          5,
+          8
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "1",
+          "0"
+        ],
+        "denominator": "2*u**5 + 4*u**3 + 2*u",
+        "denominator_bernstein_minimum": "8971848/9765625",
+        "numerator": "L*u**6 + L*u**4 - L*u**2 - L - 2*u**5 + 4*u**4 + 8*u**3 + 2*u + 4",
+        "numerator_bernstein_minimum": "5053711856/6103515625",
+        "pair": [
+          5,
+          9
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "1",
+          "0"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "L*u**2 + L - 2*u - 2",
+        "numerator_bernstein_minimum": "51611/31250",
+        "pair": [
+          5,
+          10
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          6,
+          7
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          6,
+          8
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "-L*u**4 + 2*L*u**2 - L - 8*u**2 + 4",
+        "numerator_bernstein_minimum": "69771371/10000000000",
+        "pair": [
+          6,
+          9
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "-L*u**4 + 2*L*u**2 - L + 2*u**3 - 8*u**2 + 2*u + 4",
+        "numerator_bernstein_minimum": "8100224/9765625",
+        "pair": [
+          6,
+          10
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "-2*u/(u**2 + 1)",
+          "(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "-u**2 - 2*u + 1",
+        "numerator_bernstein_minimum": "1231/10000",
+        "pair": [
+          7,
+          8
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          7,
+          9
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "1",
+        "numerator_bernstein_minimum": "1",
+        "pair": [
+          7,
+          10
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          8,
+          9
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "-L*u**4 + 2*L*u**2 - L - 8*u**2 + 4",
+        "numerator_bernstein_minimum": "69771371/10000000000",
+        "pair": [
+          8,
+          10
+        ],
+        "strict": false
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "pair": [
+          9,
+          10
+        ],
+        "strict": false
+      }
+    ],
+    "unavailable_active_pair_features": [
+      {
+        "axis": [
+          "1",
+          "0"
+        ],
+        "denominator": "2*u**5 + 4*u**3 + 2*u",
+        "denominator_bernstein_minimum": "8971848/9765625",
+        "numerator": "-L*u**6 + 2*L*u**5 - L*u**4 + 4*L*u**3 + L*u**2 + 2*L*u + L - 4*u**4 - 12*u**3 - 4*u - 4",
+        "numerator_bernstein_minimum": "10903965902/6103515625",
+        "pair": [
+          1,
+          9
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "-1",
+          "0"
+        ],
+        "denominator": "2*u**5 + 4*u**3 + 2*u",
+        "denominator_bernstein_minimum": "8971848/9765625",
+        "numerator": "L*u**6 - 2*L*u**5 + L*u**4 - 4*L*u**3 - L*u**2 - 2*L*u - L + 8*u**4 + 16*u**3 + 4*u**2 + 8*u + 4",
+        "numerator_bernstein_minimum": "2350561406/6103515625",
+        "pair": [
+          1,
+          9
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "0",
+          "1"
+        ],
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "-4*u**3 + 4*u**2",
+        "numerator_bernstein_minimum": "5184/15625",
+        "pair": [
+          1,
+          9
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "0",
+          "-1"
+        ],
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "6*u**3 - 2*u**2 + 2*u + 2",
+        "numerator_bernstein_minimum": "42824/15625",
+        "pair": [
+          1,
+          9
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "L*u**4 - 2*L*u**3 - 2*L*u**2 + 2*L*u + L + 8*u**2 - 4*u - 4",
+        "numerator_bernstein_minimum": "9316208/9765625",
+        "pair": [
+          1,
+          9
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "-(1 - u**2)/(u**2 + 1)",
+          "-2*u/(u**2 + 1)"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "-L*u**4 + 2*L*u**3 + 2*L*u**2 - 2*L*u - L - 4*u**2 + 8*u + 4",
+        "numerator_bernstein_minimum": "9538424/9765625",
+        "pair": [
+          1,
+          9
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "2*u/(u**2 + 1)",
+          "-(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "-L*u**2 + 2*L*u + L - 4*u - 2",
+        "numerator_bernstein_minimum": "84839/31250",
+        "pair": [
+          1,
+          9
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "1",
+          "0"
+        ],
+        "denominator": "1 - u**4",
+        "denominator_bernstein_minimum": "98125839/100000000",
+        "numerator": "L*u**4 - 2*L*u**3 - 2*L*u - L + u**4 + 2*u**3 + 2*u**2 + 6*u + 5",
+        "numerator_bernstein_minimum": "5240721329/10000000000",
+        "pair": [
+          2,
+          10
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "-1",
+          "0"
+        ],
+        "denominator": "1 - u**2",
+        "denominator_bernstein_minimum": "8631/10000",
+        "numerator": "-L*u**2 + 2*L*u + L - u**2 - 4*u - 3",
+        "numerator_bernstein_minimum": "49539/31250",
+        "pair": [
+          2,
+          10
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "0",
+          "1"
+        ],
+        "denominator": "4*u**4 + 4*u**2",
+        "denominator_bernstein_minimum": "228744/390625",
+        "numerator": "L*u**6 - 2*L*u**5 + 3*L*u**4 + 3*L*u**2 + 2*L*u + L - 4*u**5 + 4*u**4 - 4*u**3 - 8*u - 4",
+        "numerator_bernstein_minimum": "7898296598/6103515625",
+        "pair": [
+          2,
+          10
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "0",
+          "-1"
+        ],
+        "denominator": "4*u**4 + 4*u**2",
+        "denominator_bernstein_minimum": "228744/390625",
+        "numerator": "-L*u**6 + 2*L*u**5 - 3*L*u**4 - 3*L*u**2 - 2*L*u - L + 4*u**5 - 4*u**4 + 12*u**3 + 8*u**2 + 8*u + 4",
+        "numerator_bernstein_minimum": "445591094/6103515625",
+        "pair": [
+          2,
+          10
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "(1 - u**2)/(u**2 + 1)",
+          "2*u/(u**2 + 1)"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "L*u**4 - 2*L*u**2 + L - 2*u**3 + 12*u**2 + 2*u - 4",
+        "numerator_bernstein_minimum": "10876808/9765625",
+        "pair": [
+          2,
+          10
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "-(1 - u**2)/(u**2 + 1)",
+          "-2*u/(u**2 + 1)"
+        ],
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "-L*u**4 + 2*L*u**2 - L + 2*u**3 - 8*u**2 + 2*u + 4",
+        "numerator_bernstein_minimum": "8100224/9765625",
+        "pair": [
+          2,
+          10
+        ],
+        "strict": true
+      },
+      {
+        "axis": [
+          "-2*u/(u**2 + 1)",
+          "(1 - u**2)/(u**2 + 1)"
+        ],
+        "denominator": "-4*u**6 + 4*u**2",
+        "denominator_bernstein_minimum": "124436736/244140625",
+        "numerator": "L*u**8 - 2*L*u**7 - 2*L*u**5 + 14*L*u**4 + 2*L*u**3 + 2*L*u + L - 4*u**7 + 4*u**6 - 8*u**5 - 44*u**4 - 12*u**3 + 12*u**2 - 8*u - 4",
+        "numerator_bernstein_minimum": "4612943778188/3814697265625",
+        "pair": [
+          2,
+          10
+        ],
+        "strict": true
+      }
+    ],
+    "wall_bounds": [
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 0,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 1",
+        "numerator_bernstein_minimum": "287/100",
+        "square": 0,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 0,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 1",
+        "numerator_bernstein_minimum": "287/100",
+        "square": 0,
+        "strict": false,
+        "wall": "top"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 1",
+        "numerator_bernstein_minimum": "287/100",
+        "square": 1,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 1,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 1,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 1",
+        "numerator_bernstein_minimum": "287/100",
+        "square": 1,
+        "strict": false,
+        "wall": "top"
+      },
+      {
+        "denominator": "1 - u**2",
+        "denominator_bernstein_minimum": "8631/10000",
+        "numerator": "-2*L*u + u**2 + 4*u + 3",
+        "numerator_bernstein_minimum": "17383/10000",
+        "square": 2,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "1 - u**2",
+        "denominator_bernstein_minimum": "8631/10000",
+        "numerator": "-L*u**2 + 2*L*u + L - 4*u - 4",
+        "numerator_bernstein_minimum": "22339/31250",
+        "square": 2,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 1",
+        "numerator_bernstein_minimum": "287/100",
+        "square": 2,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 2,
+        "strict": false,
+        "wall": "top"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 3,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 1",
+        "numerator_bernstein_minimum": "287/100",
+        "square": 3,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 1",
+        "numerator_bernstein_minimum": "287/100",
+        "square": 3,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 3,
+        "strict": false,
+        "wall": "top"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "1",
+        "numerator_bernstein_minimum": "1",
+        "square": 4,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 2",
+        "numerator_bernstein_minimum": "187/100",
+        "square": 4,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 1",
+        "numerator_bernstein_minimum": "287/100",
+        "square": 4,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 4,
+        "strict": false,
+        "wall": "top"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 5,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 1",
+        "numerator_bernstein_minimum": "287/100",
+        "square": 5,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "L - 2",
+        "numerator_bernstein_minimum": "187/100",
+        "square": 5,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "1",
+        "numerator_bernstein_minimum": "1",
+        "square": 5,
+        "strict": false,
+        "wall": "top"
+      },
+      {
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "2*L*u**3 - 2*L*u + u**4 - 6*u**3 + 2*u**2 + 6*u + 1",
+        "numerator_bernstein_minimum": "280564/390625",
+        "square": 6,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "L*u**4 - 2*L*u**3 + 2*L*u**2 + 2*L*u + L + 4*u**3 - 2*u**2 - 8*u - 2",
+        "numerator_bernstein_minimum": "23543083/9765625",
+        "square": 6,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "L*u**4 - 2*L*u**2 + L - u**4 + 8*u**2 - 3",
+        "numerator_bernstein_minimum": "9295908/9765625",
+        "square": 6,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "4*L*u**2 + 2*u**4 - 2*u**3 - 8*u**2 - 2*u + 2",
+        "numerator_bernstein_minimum": "855347/390625",
+        "square": 6,
+        "strict": false,
+        "wall": "top"
+      },
+      {
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "L*u**4 - L + 2*u**3 + 2*u + 4",
+        "numerator_bernstein_minimum": "9654776/9765625",
+        "square": 7,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "2*u**3 + 2*u",
+        "denominator_bernstein_minimum": "12708/15625",
+        "numerator": "-L*u**4 + 2*L*u**3 + 2*L*u + L - 4*u**2 - 4*u - 4",
+        "numerator_bernstein_minimum": "9708167/9765625",
+        "square": 7,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 7,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "L*u**2 + L + u**2 - 2*u - 1",
+        "numerator_bernstein_minimum": "86911/31250",
+        "square": 7,
+        "strict": false,
+        "wall": "top"
+      },
+      {
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "2*L*u**3 - 2*L*u - 4*u**3 + 6*u**2 + 4*u + 2",
+        "numerator_bernstein_minimum": "622328/390625",
+        "square": 8,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "L*u**4 - 2*L*u**3 + 2*L*u**2 + 2*L*u + L + u**4 + 2*u**3 - 6*u**2 - 6*u - 3",
+        "numerator_bernstein_minimum": "14998983/9765625",
+        "square": 8,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "L*u**4 - 2*L*u**2 + L + 4*u**3 + 6*u**2 - 2",
+        "numerator_bernstein_minimum": "18516808/9765625",
+        "square": 8,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "4*L*u**2 + u**4 - 6*u**3 - 6*u**2 - 2*u + 1",
+        "numerator_bernstein_minimum": "486511/390625",
+        "square": 8,
+        "strict": false,
+        "wall": "top"
+      },
+      {
+        "denominator": "2*u**5 + 4*u**3 + 2*u",
+        "denominator_bernstein_minimum": "8971848/9765625",
+        "numerator": "L*u**6 + L*u**4 - L*u**2 - L + 4*u**4 + 12*u**3 + 4*u + 4",
+        "numerator_bernstein_minimum": "10661116856/6103515625",
+        "square": 9,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "2*u**5 + 4*u**3 + 2*u",
+        "denominator_bernstein_minimum": "8971848/9765625",
+        "numerator": "-L*u**6 + 2*L*u**5 - L*u**4 + 4*L*u**3 + L*u**2 + 2*L*u + L + 2*u**5 - 8*u**4 - 12*u**3 - 4*u**2 - 6*u - 4",
+        "numerator_bernstein_minimum": "3009120902/6103515625",
+        "square": 9,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "u**4 + 4*u**3 - 2*u**2 + 1",
+        "numerator_bernstein_minimum": "368836/390625",
+        "square": 9,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "u**4 + 2*u**2 + 1",
+        "denominator_bernstein_minimum": "498436/390625",
+        "numerator": "L*u**4 + 2*L*u**2 + L - 6*u**3 + 2*u**2 - 2*u - 2",
+        "numerator_bernstein_minimum": "21458683/9765625",
+        "square": 9,
+        "strict": false,
+        "wall": "top"
+      },
+      {
+        "denominator": "u**2 + 1",
+        "denominator_bernstein_minimum": "706/625",
+        "numerator": "L*u**2 + L + u**2 - 2*u - 1",
+        "numerator_bernstein_minimum": "86911/31250",
+        "square": 10,
+        "strict": false,
+        "wall": "left"
+      },
+      {
+        "denominator": "1",
+        "denominator_bernstein_minimum": "1",
+        "numerator": "0",
+        "numerator_bernstein_minimum": "0",
+        "square": 10,
+        "strict": false,
+        "wall": "right"
+      },
+      {
+        "denominator": "4*u**4 + 4*u**2",
+        "denominator_bernstein_minimum": "228744/390625",
+        "numerator": "-L*u**6 + 2*L*u**5 + L*u**4 + L*u**2 - 2*L*u - L + 4*u**5 - 4*u**4 + 4*u**3 + 8*u + 4",
+        "numerator_bernstein_minimum": "5742687344/6103515625",
+        "square": 10,
+        "strict": false,
+        "wall": "bottom"
+      },
+      {
+        "denominator": "4*u**4 + 4*u**2",
+        "denominator_bernstein_minimum": "228744/390625",
+        "numerator": "L*u**6 - 2*L*u**5 + 3*L*u**4 + 3*L*u**2 + 2*L*u + L - 4*u**5 + 8*u**4 - 12*u**3 - 4*u**2 - 8*u - 4",
+        "numerator_bernstein_minimum": "2866171598/6103515625",
+        "square": 10,
+        "strict": false,
+        "wall": "top"
+      }
+    ]
+  },
+  "root_endpoint_values": [
+    "-772365104/30517578125",
+    "37988917991321/2000000000000000"
+  ],
+  "schema": "fibonacci-torus-geometry/v1",
+  "scope": "independent contact reconstruction on an explicit closed parameter rectangle",
+  "screenshot_manuscript_theorem_fully_verified": false,
+  "side_interval": [
+    "387/100",
+    "389/100"
+  ],
+  "side_polynomial_divisibility": true,
+  "side_root_enclosure": [
+    "275/71",
+    "62200/16031"
+  ],
+  "slope_bounds": {
+    "clearance_side_coefficient": {
+      "denominator": "-4*u**6 + 4*u**2",
+      "denominator_bernstein_minimum": "124436736/244140625",
+      "numerator": "u**8 - 2*u**7 - 2*u**5 + 14*u**4 + 2*u**3 + 2*u + 1",
+      "numerator_bernstein_minimum": "310528538896/152587890625",
+      "strict": true
+    },
+    "f1_prime_minus_quarter": {
+      "denominator": "4*u**4 - 16*u**3 + 8*u**2 + 16*u + 4",
+      "denominator_bernstein_minimum": "3952144/390625",
+      "numerator": "-u**4 + 4*u**3 + 22*u**2 + 28*u - 9",
+      "numerator_bernstein_minimum": "1601964/390625",
+      "strict": true
+    },
+    "first_denominator": {
+      "denominator": "1",
+      "denominator_bernstein_minimum": "1",
+      "numerator": "-u**2 + 2*u + 1",
+      "numerator_bernstein_minimum": "994/625",
+      "strict": true
+    },
+    "minus_f2_prime_minus_quarter": {
+      "denominator": "4*u**16 - 16*u**15 + 16*u**14 - 16*u**13 + 144*u**12 - 208*u**11 - 16*u**10 - 208*u**9 + 728*u**8 + 208*u**7 - 16*u**6 + 208*u**5 + 144*u**4 + 16*u**3 + 16*u**2 + 16*u + 4",
+      "denominator_bernstein_minimum": "385711893875538339595264/23283064365386962890625",
+      "numerator": "-u**16 + 4*u**15 + 12*u**14 - 28*u**13 - 4*u**12 + 692*u**11 - 1164*u**10 - 364*u**9 + 10*u**8 - 820*u**7 + 756*u**6 - 660*u**5 + 252*u**4 + 124*u**3 - 116*u**2 + 28*u - 1",
+      "numerator_bernstein_minimum": "98046820790681186641248919802959/100000000000000000000000000000000",
+      "strict": true
+    },
+    "root_polynomial_prime": {
+      "denominator": "1",
+      "denominator_bernstein_minimum": "1",
+      "numerator": "40*u**7 - 70*u**6 - 12*u**5 + 70*u**4 + 48*u**3 - 18*u**2 + 4*u + 2",
+      "numerator_bernstein_minimum": "5284217152/1220703125",
+      "strict": true
+    },
+    "second_denominator": {
+      "denominator": "1",
+      "denominator_bernstein_minimum": "1",
+      "numerator": "u**8 - 2*u**7 - 2*u**5 + 14*u**4 + 2*u**3 + 2*u + 1",
+      "numerator_bernstein_minimum": "310528538896/152587890625",
+      "strict": true
+    }
+  },
+  "u_interval": [
+    "9/25",
+    "37/100"
+  ],
+  "unrestricted_global_capture_proved": false
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 64,
+  "seconds": 17.494,
+  "files": [
+    {
+      "file": "packing/tests/test_atlas_orientation.py",
+      "tests": 14,
+      "seconds": 13.943
+    },
+    {
+      "file": "packing/tests/test_known_best_grid_transitions.py",
+      "tests": 5,
+      "seconds": 0.01
+    },
+    {
+      "file": "packing/tests/test_recent_contributions.py",
+      "tests": 15,
+      "seconds": 0.731
+    },
+    {
+      "file": "packing/tests/test_refresh_atlas_orientation.py",
+      "tests": 9,
+      "seconds": 0.015
+    },
+    {
+      "file": "packing/tests/test_rigidity_status.py",
+      "tests": 21,
+      "seconds": 2.795
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_atlas_orientation.py",
+      "packing/tests/test_known_best_grid_transitions.py",
+      "packing/tests/test_recent_contributions.py",
+      "packing/tests/test_refresh_atlas_orientation.py",
+      "packing/tests/test_rigidity_status.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_atlas_orientation.py": 14,
+      "packing/tests/test_known_best_grid_transitions.py": 5,
+      "packing/tests/test_recent_contributions.py": 15,
+      "packing/tests/test_refresh_atlas_orientation.py": 9,
+      "packing/tests/test_rigidity_status.py": 21
+    },
+    "deselected_tests": 0
+  }
+}

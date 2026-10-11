@@ -72,9 +72,11 @@ each bound’s reference and the frontier case record they are held in.
 Everything this project has to say about a bound is one grey parenthesis after the
 reference, in one vocabulary: `(reported)` where the register carries the bound without
 certifying it, `(confirmed T-009)` where a result of ours checks it, and
-`(reported; confirmed T-009)` where both are true, which in the whole corpus is n = 29
-alone. The words are composed with the data, not at the stage, and the width a line is
-checked against counts them.
+`(reported; confirmed T-009)` where both are true.
+A certificate of an earlier, weaker ceiling remains linked in the case record and does
+not confirm the displayed bound.
+The words are composed with the data, not at the stage, and the width a line is checked
+against counts them.
 It is a setting — `show citations`, off until it is asked for, `setCitations` on the
 browser API — and its data is
 [`bound-citations.json`](../../packing/atlas/known-best/bound-citations.json), read at
@@ -118,14 +120,14 @@ Three contracts hold it:
 - `workbench_tools.check_layout` measures Animate at rest and mid-step, the animation
   studio, Pack and Search in Chromium at 1440 × 900, 1024 × 768 and 390 × 844. It checks
   the shared edges, gutters and gaps, one height per control kind, horizontal overflow,
-  panel overlap, the stage panel’s OPEN and badge rules (one type, with `new result`
-  alone in the star’s scarlet), one type for the PROVEN, CITATION and OPEN heads, the
-  CITATION section inside its column and above what it is set over, the one frame width
-  in its three colours, and that the attribution stands one legend line under the legend
-  at its left edge, with the shared version on its baseline at the column’s right edge,
-  both clear of what each mode draws.
-  It runs inside `check_stage_resize`’s browser session in `check_frontend`, and
-  `tests/test_check_layout.py` proves each rule refuses a page that breaks it.
+  panel overlap, the stage panel’s OPEN and badge rules, red case numbers for recent
+  results, one type for the PROVEN, CITATION and OPEN heads, the CITATION section inside
+  its column and above what it is set over, the one frame width in its three colours,
+  and that the attribution stands one legend line under the legend at its left edge,
+  with the shared version on its baseline at the column’s right edge, both clear of what
+  each mode draws. It runs inside `check_stage_resize`’s browser session in
+  `check_frontend`, and `tests/test_check_layout.py` proves each rule refuses a page
+  that breaks it.
 - `workbench_tools.layout_gallery` photographs every view at every review viewport and
   writes a side-by-side comparison page for design review.
 

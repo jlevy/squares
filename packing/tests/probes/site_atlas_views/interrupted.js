@@ -22,8 +22,8 @@ async (/** @type {{first: string, second: string, wait: number}} */ { first, sec
           animation.playState === "running",
       ).length;
   const drawings = () =>
-    [...document.querySelectorAll(".site-atlas-cells .site-atlas-cell svg")].map((drawing) =>
-      drawing.getBoundingClientRect(),
+    [...document.querySelectorAll(".site-atlas-cells .site-atlas-cell :is(svg, img)")].map(
+      (drawing) => drawing.getBoundingClientRect(),
     );
   one.focus();
   one.click();

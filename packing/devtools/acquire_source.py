@@ -20,7 +20,8 @@ file's bytes are bound to the commit by comparing its Git blob with ``git ls-tre
 shallow or sparse checkout is enough and a locally modified file is refused. A file the
 declaration pins by digest only is listed in the record with its size, digest and reason;
 where the reason is that another packet already retains the same bytes, the declaration
-names that copy and the bytes are compared.
+names that copy and the bytes are compared. A copy that its packet's ``Original Gzip
+Files`` table lists is compared as stored; any other is compared after decompression.
 
 ``--check`` needs no checkout. From the packet alone it re-derives that the record and
 the declaration have every required field, that every retained file, after decompression,
@@ -31,10 +32,12 @@ Files table matches the stored files. It decides nothing about what the files cl
 
 The packet's ``README.md`` is prose and is not written here; writing the packet prints
 the rows its Compressed Files table needs. Three limits are deliberate. One packet holds
-one source. An upstream file whose own name ends in ``.gz`` can be pinned but not
-retained, because the archive reads every stored ``.gz`` as this repository's compression
-of the file beside it. And the record lists every pinned-only file, so the scope is the
-claim directories and the few root files a packet answers for, not a whole tree.
+one source. An upstream file whose own name ends in ``.gz`` is pinned only by default.
+A declaration may explicitly retain selected ``original_gzip`` upstream paths unchanged;
+the record repeats their stored paths and a separate ``Original Gzip Files`` table binds
+their compressed bytes. These files are never renamed or recompressed. The record lists
+every pinned-only file, so the scope is the claim directories and the few root files a
+packet answers for, not a whole tree.
 
 Usage, from ``packing/``::
 
@@ -64,17 +67,21 @@ from devtools.retained_data import (
     DATA_SUFFIXES,
     GZIP_SUFFIX,
     LINE_THRESHOLD,
+    ORIGINAL_GZIP_HEADING,
     candidates,
     check_packet,
     compress,
     describe,
+    describe_original_gzip,
     git_blob,
+    read_original_gzip_bytes,
     read_retained_bytes,
     read_table,
 )
 
 REPO = Path(__file__).resolve().parents[2]
-WEB = REPO / "packing/resources/web"
+_WEB = PurePosixPath("packing/resources/web")
+WEB = REPO / _WEB
 
 FORMAT = "external-source-acquisition-v1"
 DECLARATION_FORMAT = "external-source-declaration-v1"
@@ -100,7 +107,9 @@ class PinnedOnly(TypedDict):
     - ``sha256``: its SHA-256, equal to its line in the subtree manifest.
     - ``reason``: why it is not retained, as the declaration's rule states it.
     - ``identical_to`` (optional): the repository-relative path of a file this
-      repository already retains with the same bytes, plain or as ``X.gz``.
+      repository already retains with the same bytes, plain or as ``X.gz``, or as an
+      original gzip that its packet's ``Original Gzip Files`` table lists, whose stored
+      bytes are compared.
     """
 
     path: str
@@ -128,9 +137,11 @@ class Source(TypedDict):
     - ``subtree_file_count``, ``subtree_total_bytes``: the files in the manifest and
       their total upstream size.
     - ``retained_file_count``, ``retained_total_bytes``: the files copied here and their
-      total size after decompression.
+      logical upstream size (raw bytes for original gzip, decoded for archive compression).
     - ``compressed``: the packet-relative stored paths of the retained files kept as
       deterministic gzip.
+    - ``original_gzip`` (optional): packet-relative original upstream gzip paths,
+      retained without recompression; their counts and digests refer to raw bytes.
     - ``pinned_only``: every file in the manifest that is not retained (`PinnedOnly`).
     - ``license``: the licence the source's own files state.
     - ``claims``: the results the retained files are evidence for, one line each, as
@@ -151,6 +162,7 @@ class Source(TypedDict):
     retained_file_count: int
     retained_total_bytes: int
     compressed: list[str]
+    original_gzip: NotRequired[list[str]]
     pinned_only: list[PinnedOnly]
     license: str
     claims: list[str]
@@ -179,7 +191,8 @@ class Rule(TypedDict):
       ``**`` crosses them. The first rule that matches a file decides it.
     - ``reason``: why the files are not retained.
     - ``identical_to`` (optional): the repository-relative path of a retained file with
-      the same bytes, or of a directory holding one under each matched file's name.
+      the same bytes, or of a directory holding one under each matched file's name. The
+      bytes are compared as `PinnedOnly` says.
     """
 
     match: str
@@ -197,6 +210,7 @@ class Declaration(TypedDict):
     - ``archived_dir``: the directory inside the packet that receives the retained
       files. It is replaced whole on every run.
     - ``scope``: the upstream files and directories to digest.
+    - ``original_gzip`` (optional): exact upstream gzip paths to retain unchanged.
     - ``pinned_only``: the rules for what is digested and not copied (`Rule`). A file in
       the scope that no rule matches is retained.
     """
@@ -213,6 +227,7 @@ class Declaration(TypedDict):
     claims: list[str]
     scope: list[str]
     pinned_only: list[Rule]
+    original_gzip: NotRequired[list[str]]
 
 
 type _Shape = type[PinnedOnly | Source | Record | Rule | Declaration]
@@ -290,6 +305,32 @@ def _twin(rule: Rule, path: str, root: Path) -> str | None:
     return f"{target}/{PurePosixPath(path).name}" if (root / target).is_dir() else target
 
 
+def _original_gzip_twin(twin: str, root: Path) -> bool:
+    """Whether the packet holding ``twin`` lists it in its ``Original Gzip Files`` table.
+
+    That table is the custody that binds an upstream gzip's raw bytes
+    (`devtools.retained_data`), so it, and never the file's name, decides that the stored
+    bytes are the upstream bytes.
+    """
+    parts, web = PurePosixPath(twin).parts, _WEB.parts
+    if parts[: len(web)] != web or len(parts) < len(web) + 2:
+        return False
+    readme = root.joinpath(*parts[: len(web) + 1], "README.md")
+    stored = PurePosixPath(*parts[len(web) + 1 :]).as_posix()
+    return readme.is_file() and any(
+        row.stored == stored for row in read_table(readme, heading=ORIGINAL_GZIP_HEADING)
+    )
+
+
+def _twin_bytes(twin: str, root: Path) -> bytes:
+    """The upstream bytes of the retained file ``twin``: as stored for an original gzip,
+    and otherwise plain or decompressed from ``X.gz`` (`read_retained_bytes`)."""
+    path = root / twin
+    if _original_gzip_twin(twin, root):
+        return read_original_gzip_bytes(path)
+    return read_retained_bytes(path)
+
+
 def load_declaration(packet: Path) -> Declaration:
     """The packet's declaration, refused unless it has every field of `Declaration`."""
     value: object = json.loads((packet / DECLARATION).read_text(encoding="utf-8"))
@@ -302,6 +343,18 @@ def load_declaration(packet: Path) -> Declaration:
         _NAME.fullmatch(directory) is not None and directory != DECLARATION.parts[0],
         f"archived_dir must be one plain directory name: {directory!r}",
     )
+    originals = declaration.get("original_gzip", [])
+    _require(len(originals) == len(set(originals)), "original_gzip lists a path twice")
+    for path in originals:
+        relative = PurePosixPath(path)
+        _require(
+            not relative.is_absolute()
+            and ".." not in relative.parts
+            and relative.as_posix() == path
+            and path.endswith(GZIP_SUFFIX)
+            and _in_scope(path, declaration["scope"]),
+            f"invalid original_gzip path: {path}",
+        )
     return declaration
 
 
@@ -378,11 +431,17 @@ def acquire(packet: Path, checkout: Path, root: Path) -> Source:
             any(used is rule for used in chosen.values()),
             f"pinned_only rule decides no file: {rule['match']}",
         )
+    originals = declaration.get("original_gzip", [])
+    for path in originals:
+        _require(
+            path in contents and chosen[path] is None,
+            f"original_gzip must name a retained source file: {path}",
+        )
     pinned: list[PinnedOnly] = []
     for path, rule in chosen.items():
         if rule is None:
             _require(
-                not path.endswith(GZIP_SUFFIX),
+                not path.endswith(GZIP_SUFFIX) or path in originals,
                 f"an upstream {GZIP_SUFFIX} file can be pinned but not retained: {path}",
             )
             continue
@@ -395,7 +454,7 @@ def acquire(packet: Path, checkout: Path, root: Path) -> Source:
         twin = _twin(rule, path, root)
         if twin is not None:
             _require(
-                read_retained_bytes(root / twin) == contents[path],
+                _twin_bytes(twin, root) == contents[path],
                 f"{path} is not the bytes of {twin}",
             )
             item["identical_to"] = twin
@@ -436,6 +495,8 @@ def acquire(packet: Path, checkout: Path, root: Path) -> Source:
         "license": declaration["license"],
         "claims": declaration["claims"],
     }
+    if originals:
+        entry["original_gzip"] = [f"{declaration['archived_dir']}/{path}" for path in originals]
     record: Record = {
         "format": FORMAT,
         "retrieved_at_utc": declaration["retrieved_at_utc"],
@@ -449,18 +510,21 @@ def acquire(packet: Path, checkout: Path, root: Path) -> Source:
 # --------------------------------------------------------------------------- check
 
 
-def _retained(source: Path, manifest: Mapping[str, str]) -> tuple[dict[str, int], list[str]]:
+def _retained(
+    source: Path, manifest: Mapping[str, str], original_gzip: Sequence[str] = ()
+) -> tuple[dict[str, int], list[str]]:
     """Each stored file's upstream path and decompressed size, and what is wrong with any."""
     sizes: dict[str, int] = {}
     problems: list[str] = []
     for path in sorted(path for path in source.rglob("*") if path.is_file()):
         stored = path.relative_to(source).as_posix()
-        upstream = stored.removesuffix(GZIP_SUFFIX)
+        original = f"{source.name}/{stored}" in original_gzip
+        upstream = stored if original else stored.removesuffix(GZIP_SUFFIX)
         if upstream in sizes:
             problems.append(f"{upstream} is retained twice, plain and compressed")
             continue
         try:
-            data = read_retained_bytes(path)
+            data = read_original_gzip_bytes(path) if original else read_retained_bytes(path)
         except (OSError, ValueError, EOFError, zlib.error) as error:
             problems.append(f"{stored} cannot be read: {error}")
             continue
@@ -494,7 +558,7 @@ def _pinned_problems(
         if twin is None:
             continue
         try:
-            same = _sha256(read_retained_bytes(root / twin)) == item["sha256"]
+            same = _sha256(_twin_bytes(twin, root)) == item["sha256"]
         except OSError, ValueError, EOFError, zlib.error:
             same = False
         if not same:
@@ -521,7 +585,9 @@ def _derived_problems(
             "compressed",
             sorted(entry["compressed"]),
             sorted(
-                path.relative_to(packet).as_posix() for path in source.rglob(f"*{GZIP_SUFFIX}")
+                path.relative_to(packet).as_posix()
+                for path in source.rglob(f"*{GZIP_SUFFIX}")
+                if path.relative_to(packet).as_posix() not in entry.get("original_gzip", [])
             ),
         ),
     ]
@@ -530,6 +596,15 @@ def _derived_problems(
         for name, recorded, found in derived
         if recorded != found
     ]
+    originals = entry.get("original_gzip", [])
+    if len(originals) != len(set(originals)):
+        problems.append("original_gzip lists a path twice")
+    retained_names = {f"{source.name}/{name}" for name in sizes}
+    problems.extend(
+        f"original_gzip is not a retained upstream gzip: {path}"
+        for path in originals
+        if path not in retained_names or not path.endswith(GZIP_SUFFIX)
+    )
     scope = entry["subtree_scope"]
     problems.extend(
         f"{path} is in the manifest but outside subtree_scope"
@@ -587,6 +662,11 @@ def _declaration_problems(
         for name, ours, theirs in copied
         if ours != theirs
     ]
+    expected_originals = [
+        f"{declaration['archived_dir']}/{path}" for path in declaration.get("original_gzip", [])
+    ]
+    if expected_originals != entry.get("original_gzip", []):
+        problems.append("the declaration's original_gzip is not the record's")
     pinned = {item["path"]: item for item in entry["pinned_only"]}
     for path in manifest:
         rule = _rule_for(path, declaration["pinned_only"])
@@ -608,7 +688,7 @@ def _source_problems(packet: Path, record: Record, entry: Source, root: Path) ->
         manifest = read_manifest(packet / MANIFEST)
     except (OSError, ValueError) as error:
         return [f"{MANIFEST}: {error}"]
-    sizes, problems = _retained(source, manifest)
+    sizes, problems = _retained(source, manifest, entry.get("original_gzip", []))
     problems.extend(_pinned_problems(entry, manifest, sizes, root))
     problems.extend(_derived_problems(packet, entry, manifest, sizes))
     problems.extend(_declaration_problems(packet, record, entry, manifest, root))
@@ -641,6 +721,12 @@ def check(packet: Path, root: Path) -> list[str]:
                 for stored in entry["compressed"]
                 if origins.get(stored) != "upstream"
             )
+            original_rows = read_table(packet / "README.md", heading=ORIGINAL_GZIP_HEADING)
+            expected_originals = {
+                path for entry in record["sources"] for path in entry.get("original_gzip", [])
+            }
+            if {row.stored for row in original_rows} != expected_originals:
+                problems.append("Original Gzip Files table differs from declared original_gzip")
         else:
             problems.append("the packet has no README.md")
     return [
@@ -690,6 +776,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     for stored in entry["compressed"]:
         print(describe(packet, packet / stored, "upstream").markdown())
+    for stored in entry.get("original_gzip", []):
+        print(describe_original_gzip(packet, packet / stored).markdown())
     return 0
 
 

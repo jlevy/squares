@@ -1,0 +1,29 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-batch-292-2026-10-07",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "f58a01774a733b232a88576470332185d8d11641",
+  "source_commit": "f58a01774a733b232a88576470332185d8d11641",
+  "retrieved_at_utc": "2026-10-08T21:49:06Z",
+  "git_scope": "Selected complete immutable named files acquired through the GitHub contents API; every original is bound to its Git blob and SHA-256. No checkout, author execution, geometric decision, native replay or standing-bound adoption.",
+  "archived_dir": "source",
+  "license": "MIT for source code, copyright Evan Daniel; batch register data is CC BY 4.0, Joshua Levy and the squares project. Construction credit Francisco Couzo; refinement credit Evan Daniel; source discloses Claude assistance. No blanket MIT claim for packing data or excluded website material.",
+  "claims": [
+    "Evan Daniel reports an exact rational certificate side for a Francisco Couzo construction at n=292."
+  ],
+  "scope": [
+    "s12/search/exact/batch/README.md",
+    "s12/search/exact/batch/certs/n-292.cert",
+    "s12/search/exact/batch/inputs/n-292.txt",
+    "s12/search/exact/batch/results.json",
+    "s12/search/packer/s292.md"
+  ],
+  "retain": [
+    "s12/search/exact/batch/README.md",
+    "s12/search/exact/batch/certs/n-292.cert",
+    "s12/search/exact/batch/inputs/n-292.txt",
+    "s12/search/exact/batch/results.json",
+    "s12/search/packer/s292.md"
+  ],
+  "pinned_only": []
+}

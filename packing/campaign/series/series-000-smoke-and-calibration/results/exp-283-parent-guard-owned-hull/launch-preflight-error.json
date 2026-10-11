@@ -1,0 +1,7 @@
+{
+  "phase": "source-provenance preflight",
+  "error": "root named nonexistent devtools/verify_sub_patterns.py",
+  "actual_trial_started": false,
+  "target_evaluated": false,
+  "correction": "Resolve standing module __file__ from actual source import; scientific arrays and parameters unchanged"
+}

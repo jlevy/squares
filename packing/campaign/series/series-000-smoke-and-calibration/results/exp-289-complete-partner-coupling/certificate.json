@@ -1,0 +1,17 @@
+{
+  "capture_proved": false,
+  "census_admission_proved": false,
+  "conditional_I_exclusion_proved": false,
+  "criterion_met": false,
+  "error": "coupling per-row residual piece ceiling",
+  "global_optimality_proved": false,
+  "invocation": {"argv":["--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/descriptor.json","--max-seconds","120","--output","campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/certificate.json"],"executable":"/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python"},
+  "mask_exclusion_proved": false,
+  "parent_exclusion_proved": false,
+  "parent_geometry_replayed": false,
+  "provenance": {"dirty":false,"files":{"packing/devtools/check_n17_partner_pose_coupling.py":"902ac52ba590a1b509b5edbf6f82651658c8cfa3","packing/devtools/probe_n17_conditional_center_cases.py":"1ddb1a0fbb9e9b23d5f136f75d6ddaf46c5563c6","packing/devtools/probe_n17_conditional_owned_hull.py":"5d0402637370f5aa7b8cd65ea3092a4f308b42e4","packing/devtools/probe_n17_pooled_feasible_center.py":"a1ecd726556e94c3cda69de97fb212cd4ca419ce","packing/devtools/probe_n17_pooled_forbidden_cover.py":"e9bc1fbf6af3c89459fbaed536724687784338ce","packing/devtools/probe_n17_pooled_relaxation_witness.py":"4bfe68e8235982273bd71d84e9365f3fecff9d43","packing/devtools/verify_n17_conditional_owned_hull.py":"70dac66c25e0e0c060b1bbc9182fec301a1738d6","packing/devtools/verify_n17_kernel_certificate.py":"526548939861b811d1be45f4f28352995434c151"},"revision":"cd82d75f4c30cd792e4e8e43dd0e6f63ff3be25f"},
+  "root_checked_now": false,
+  "schema": "n17-partner-pose-coupling/v1",
+  "seventeen_square_packing_proved": false,
+  "status": "incomplete"
+}

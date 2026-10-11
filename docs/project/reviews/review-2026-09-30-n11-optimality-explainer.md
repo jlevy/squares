@@ -113,9 +113,9 @@ dependencies.
 
 ## Attribution and Evidence Scope
 
-The article credits the global argument to Queuingtheorydotcom’s Astra-assisted work,
-building on the Squares Project and Kleddamag, and credits the attaining construction to
-Walter Trump. It separately acknowledges David Ellsworth’s reconstruction diagram.
+The article credits the global argument to Ahmed’s Astra-assisted work, building on the
+Squares Project and Kleddamag, and credits the attaining construction to Walter Trump.
+It separately acknowledges David Ellsworth’s reconstruction diagram.
 The historical T-018, T-025 and T-026 methods are antecedents; T-037’s strict lower
 bound, T-059’s reported row-minimum equality and rectangle-density tools are not used as
 substitutes for T-060’s additional premises.

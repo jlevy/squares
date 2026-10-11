@@ -20,8 +20,9 @@ The rules:
   `OPTIMALITY_REVIEW_REVISED`),
   and held to git here, so it is changed in the commit that changes the article and
   cannot stand still under one.
-- **A poster's dateline is the date of the data commit it was drawn from**, which the
-  poster records (`build_known_best_atlas.CompositeIdentity`).
+- **A composite's visible date is the date of the data commit it was drawn from**,
+  which it records (`build_known_best_atlas.CompositeIdentity`). The grid figure
+  prints a dateline; the triangle poster puts the date beside its closing edition.
 - **A PDF's `CreationDate` and `ModDate` are the date its face gives, at noon UTC**, and
   never the build clock: the poster's data date, the paper's revised date.
 - **A date a person asserts stays typed**, and is listed here with what holds it: an
@@ -62,6 +63,7 @@ TEMPLATES = PACKING / "devtools/templates"
 EXPLAINER_ARTICLE = TEMPLATES / "n11-lower-bounds-explainer-article.md"
 THRESHOLD_ARTICLE = TEMPLATES / "n11-threshold-bound-review-article.md"
 OPTIMALITY_ARTICLE = TEMPLATES / "n11-optimality-review-article.md"
+PACKING_METHODS_ARTICLE = TEMPLATES / "packing-methods-article.md"
 RESULTS = PACKING / "frontier/results.yaml"
 SYNOPSIS = REPO / "SYNOPSIS.md"
 #: The result each review reviews, whose publication is its "Original proof".
@@ -159,15 +161,29 @@ def _poster_rows() -> list[Row]:
             day: str | None = release.commit_date(REPO, identity.data_revision)
         except RuntimeError:
             day = None
+        expected_identity = (
+            None if day is None else atlas.CompositeIdentity(identity.data_revision, day)
+        )
+        date_label = "edition date" if canvas.information_in_corner else "dateline"
+        shown_date = (
+            identity.formatted_date if canvas.information_in_corner else identity.dateline
+        )
+        expected_date = (
+            None
+            if expected_identity is None
+            else (
+                expected_identity.formatted_date
+                if canvas.information_in_corner
+                else expected_identity.dateline
+            )
+        )
         rows.append(
             Row(
-                f"{stem} dateline (SVG, PNG, PDF)",
-                identity.dateline,
+                f"{stem} {date_label} (SVG, PNG, PDF)",
+                shown_date,
                 f"its record: data of {identity.data_revision[:12]}",
                 "the date of the data commit it was drawn from",
-                None
-                if day is None
-                else atlas.CompositeIdentity(identity.data_revision, day).dateline,
+                expected_date,
                 "git cannot date the commit here",
             )
         )
@@ -177,7 +193,7 @@ def _poster_rows() -> list[Row]:
         expected = render_composite_pdf.pdf_date_text(date.fromisoformat(identity.data_date))
         rows.append(
             Row(
-                f"{stem}.pdf CreationDate, ModDate",
+                f"{render_composite_pdf.composite_pdf(stem).name} CreationDate, ModDate",
                 ", ".join(sorted(set(stated.values()))) or "none",
                 "set by render_composite_pdf from the SVG's record",
                 "the poster's data date, at noon UTC",
@@ -197,6 +213,7 @@ def _paper_rows() -> list[Row]:
     optimality_changed = last_change(OPTIMALITY_ARTICLE)
     threshold_proof, threshold_review = threshold_dates()
     threshold_changed = last_change(THRESHOLD_ARTICLE)
+    methods_changed = last_change(PACKING_METHODS_ARTICLE)
     unknown = "git cannot date the article here"
     return [
         Row(
@@ -268,6 +285,28 @@ def _paper_rows() -> list[Row]:
             "Last revised, at noon UTC",
             held_by="built at deploy; artifact_dates --pdf holds a built file",
         ),
+        Row(
+            "packing methods, First published",
+            release.PACKING_METHODS_FIRST_PUBLISHED,
+            "release.PACKING_METHODS_HISTORY, oldest edition",
+            "the standalone tutorial's first edition",
+            held_by="typed in the paper's own publication history",
+        ),
+        Row(
+            "packing methods, Last revised",
+            release.PACKING_METHODS_REVISED,
+            "release.PACKING_METHODS_REVISED",
+            f"the last commit that changed {PACKING_METHODS_ARTICLE.name}",
+            None if methods_changed is None else long_date(methods_changed),
+            unknown,
+        ),
+        Row(
+            "packing methods PDF CreationDate, ModDate",
+            publication_date_text(written_date(release.PACKING_METHODS_REVISED)),
+            "set by render_packing_methods --pdf",
+            "Last revised, at noon UTC",
+            held_by="built at deploy; artifact_dates --pdf holds a built file",
+        ),
     ]
 
 
@@ -332,6 +371,7 @@ def check_pdf(pdf: Path, paper: str) -> int:
         "explainer": lambda: written_date(release.EXPLAINER_REVISED),
         "threshold": threshold_revised,
         "optimality": optimality_revised,
+        "packing-methods": lambda: written_date(release.PACKING_METHODS_REVISED),
     }[paper]()
     problem = date_problem(pdf.read_bytes(), day)
     if problem is not None:
@@ -349,7 +389,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--pdf", type=Path, help="a built PDF whose dates to hold")
     parser.add_argument(
         "--revised",
-        choices=("explainer", "threshold", "optimality"),
+        choices=("explainer", "threshold", "optimality", "packing-methods"),
         help="with --pdf: the paper whose revised date the PDF's dates must be",
     )
     arguments = parser.parse_args(argv)

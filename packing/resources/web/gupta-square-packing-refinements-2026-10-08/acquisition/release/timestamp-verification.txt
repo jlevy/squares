@@ -1,0 +1,25 @@
+-queryfile: Verification: OK
+-data: Verification: OK
+altered archive: rejected (message imprint mismatch)
+
+Status info:
+Status: Granted.
+Status description: unspecified
+Failure info: unspecified
+
+TST info:
+Version: 1
+Policy OID: tsa_policy1
+Hash Algorithm: sha512
+Message data:
+    0000 - fc e8 00 51 b0 4c 03 2b-c3 07 3b 5f 05 14 10 b8   ...Q.L.+..;_....
+    0010 - 6d 9f 2b 0d 82 32 d3 5f-ba 43 45 db 85 44 3c 63   m.+..2._.CE..D<c
+    0020 - bb 2c 71 bc c9 f6 7c 99-e0 81 b2 4b 45 88 71 c0   .,q...|....KE.q.
+    0030 - ad c3 6a c7 0c ea 4a f4-ab 51 74 7d bf 2b fc 11   ..j...J..Qt}.+..
+Serial number: 0x090610D0
+Time stamp: Oct  8 02:55:16 2026 GMT
+Accuracy: unspecified
+Ordering: yes
+Nonce: 0xA5D84EBA775E06E5
+TSA: DirName:/O=Free TSA/OU=TSA/description=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services/CN=www.freetsa.org/emailAddress=busilezas@mailbox.org/L=Wuerzburg/C=DE/ST=Bayern
+Extensions:

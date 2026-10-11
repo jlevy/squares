@@ -1,0 +1,58 @@
+{
+  "argv": [
+    "/bin/ps",
+    "-axo",
+    "pid=,pgid=,rss=,stat="
+  ],
+  "unchanged_timeout_seconds": 1,
+  "samples": [
+    {
+      "index": 0,
+      "seconds": 0.02540787501493469,
+      "status": "PASS",
+      "rows": 801,
+      "own_pid_present": true
+    },
+    {
+      "index": 1,
+      "seconds": 0.02641699998639524,
+      "status": "PASS",
+      "rows": 801,
+      "own_pid_present": true
+    },
+    {
+      "index": 2,
+      "seconds": 0.025993291987106204,
+      "status": "PASS",
+      "rows": 801,
+      "own_pid_present": true
+    },
+    {
+      "index": 3,
+      "seconds": 0.02448737499071285,
+      "status": "PASS",
+      "rows": 801,
+      "own_pid_present": true
+    }
+  ],
+  "exact_guard_preflight_samples": [
+    {
+      "index": 0,
+      "seconds": 0.026285665982868522,
+      "own_pid_observed": true,
+      "owned_group_members": 2
+    },
+    {
+      "index": 1,
+      "seconds": 0.025706375017762184,
+      "own_pid_observed": true,
+      "owned_group_members": 2
+    },
+    {
+      "index": 2,
+      "seconds": 0.026386416982859373,
+      "own_pid_observed": true,
+      "owned_group_members": 2
+    }
+  ]
+}

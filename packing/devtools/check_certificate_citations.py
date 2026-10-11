@@ -23,6 +23,16 @@ The declaration is read with `ast` rather than by importing: `verify_exact` modu
 `getcontext().prec` when they run, and a checker that mutates process-global decimal
 precision as a side effect of counting files would be its own defect.
 
+A verified certificate a register entry cites may wait for its case records only by a
+recorded decision. `certificate-citation-deferrals.yaml` beside this module lists each
+such orphan with the register entries that cite it, the open bead that owns the case
+adoption, what the adoption waits on, the day it was recorded and why: on 2026-10-10 the
+replays of T-128, T-130 and T-131 were reviewed while house adoption waited for a pull
+request that rewrites every case record. A deferral is not a silent skip. It fails as soon
+as a case record cites its evidence, a named entry stops citing it, or it is more than
+`DEFERRAL_DAYS` older than the evidence register's `last_reviewed`, so the list cannot
+outlive what it defers, and an orphan it does not name fails as before.
+
 Usage:
     uv run --frozen --all-extras --group dev python -m devtools.check_certificate_citations
 """
@@ -30,7 +40,9 @@ Usage:
 from __future__ import annotations
 
 import ast
-from collections.abc import Mapping
+import re
+from collections.abc import Mapping, Sequence
+from datetime import date
 from pathlib import Path
 
 from sqpack.yamlio import safe_load
@@ -38,6 +50,13 @@ from sqpack.yamlio import safe_load
 ROOT = Path(__file__).resolve().parent.parent
 CASES = ROOT / "cases"
 FRONTIER = ROOT / "frontier"
+#: Orphans whose case adoption was deferred by a recorded decision.
+DEFERRALS = Path(__file__).with_name("certificate-citation-deferrals.yaml")
+#: How long a deferral stands before it must be re-dated with what happened since, as a
+#: register entry's `activity` must (`devtools.check_results`).
+DEFERRAL_DAYS = 30
+_BEAD = re.compile(r"think-[a-z0-9]{4}")
+_RESULT = re.compile(r"T-\d{3}")
 
 
 class UndeclaredError(Exception):
@@ -153,6 +172,83 @@ def orphaned_evidence(evidence_by_id: dict[str, dict]) -> list[str]:
     )
 
 
+def _strings(value: object) -> list[str]:
+    """A YAML list of strings as one, and anything else as none."""
+    return [str(item) for item in value] if isinstance(value, list) else []
+
+
+def load_deferrals(path: Path = DEFERRALS) -> list[Mapping[str, object]]:
+    """The declared deferrals, in file order."""
+    document = safe_load(path.read_text(encoding="utf-8")) or {}
+    return list(document.get("deferrals") or [])
+
+
+def deferred(
+    evidence_by_id: dict[str, dict],
+    deferrals: Sequence[Mapping[str, object]],
+    results: Sequence[Mapping[str, object]],
+    reviewed: str,
+) -> tuple[set[str], list[str]]:
+    """The orphans the deferrals excuse, and what is wrong with the deferrals themselves.
+
+    A deferral excuses an orphan only while it is one: verified, replayed, naming a
+    certificate and cited by no case record. It names the register entries that cite the
+    evidence, an owning bead, what it waits on and why, and it expires `DEFERRAL_DAYS`
+    after `recorded`, read against `reviewed`, the evidence register's `last_reviewed`.
+    """
+    orphans = set(orphaned_evidence(evidence_by_id))
+    citing = {
+        str(result.get("id")): set(_strings(result.get("evidence"))) for result in results
+    }
+    excused: set[str] = set()
+    problems: list[str] = []
+    for deferral in deferrals:
+        identifier = str(deferral.get("evidence", ""))
+        where = f"deferral of {identifier or '<no evidence>'}"
+        if identifier in excused:
+            problems.append(f"{where}: listed twice")
+            continue
+        named = _strings(deferral.get("results"))
+        recorded = str(deferral.get("recorded", ""))
+        missing = [
+            field
+            for field in ("evidence", "results", "bead", "blocked_on", "recorded", "reason")
+            if not deferral.get(field)
+        ]
+        if missing:
+            problems.append(f"{where}: names no {', '.join(missing)}")
+            continue
+        if not _BEAD.fullmatch(str(deferral["bead"])):
+            problems.append(f"{where}: its bead is not a think- alias")
+        if identifier not in evidence_by_id:
+            problems.append(f"{where}: no such evidence entry")
+            continue
+        if identifier not in orphans:
+            problems.append(
+                f"{where}: stale, since a case record cites it now or it is no longer a "
+                "verified, replayed certificate; remove the deferral"
+            )
+            continue
+        problems.extend(
+            f"{where}: {result} does not cite it"
+            for result in named
+            if not _RESULT.fullmatch(result) or identifier not in citing.get(result, set())
+        )
+        try:
+            age = (date.fromisoformat(reviewed) - date.fromisoformat(recorded)).days
+        except ValueError:
+            problems.append(f"{where}: recorded {recorded!r} is not a date")
+            continue
+        if age > DEFERRAL_DAYS:
+            problems.append(
+                f"{where}: recorded {recorded}, {age} days before the register's last review; "
+                "adopt it in the case records or re-date it with what happened since"
+            )
+            continue
+        excused.add(identifier)
+    return excused, problems
+
+
 def cited_certificates(n: int, evidence_by_id: dict[str, dict]) -> set[str]:
     """Return the certificate paths the record for `n` reaches through *verified* evidence.
 
@@ -187,12 +283,18 @@ def main() -> int:
     problems: list[str] = []
     checked: list[str] = []
 
+    register = safe_load((FRONTIER / "results.yaml").read_text(encoding="utf-8"))
+    excused, deferral_problems = deferred(
+        evidence_by_id, load_deferrals(), register["results"], str(document["last_reviewed"])
+    )
     problems.extend(
         f"{identifier} is verified, replays, and names a certificate, but no frontier "
         "record cites it -- either a record is behind its own evidence, or the evidence "
         "does not belong in the register"
         for identifier in orphaned_evidence(evidence_by_id)
+        if identifier not in excused
     )
+    problems.extend(deferral_problems)
 
     for module in sorted(CASES.glob("*/verify_exact.py")):
         package = module.parent.name
@@ -239,6 +341,11 @@ def main() -> int:
     print(f"{len(checked)} case packages certify {total} sizes, every one cited by its record")
     for entry in checked:
         print(f"  {entry}")
+    if excused:
+        print(
+            f"{len(excused)} verified certificates wait for their case records by a recorded "
+            f"deferral ({DEFERRALS.name}): {', '.join(sorted(excused))}"
+        )
     return 0
 
 

@@ -1,0 +1,84 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "squarepacker-k2-minus-c-upper",
+  "source_url": "https://github.com/squarepacker/k2-minus-c-upper",
+  "source_ref": "v1.1",
+  "source_commit": "5742311db220b4bd8e825167aeae689a1bd65ce9",
+  "retrieved_at_utc": "2026-10-10T10:54:04Z",
+  "git_scope": "Complete v1.1 tree, 102 files: the 74 new or changed files retained byte for byte; the 28 files unchanged since v1.0 (licences, six programs, fifteen recorded outputs, five certificates) bound to the 2026-10-09 packet's copies or to the hosted certificates.",
+  "archived_dir": "source",
+  "license": "CC BY 4.0 for the paper (paper/LICENSE); MIT for the programs in code/ and the data in data/ (LICENSE); both original notices retained through the unchanged 2026-10-09 copies.",
+  "claims": [
+    "Issue #486, Theorem 1.1 of version 1.1: for each of twelve tiers, c*(k) < C_i k^{3/8} + a_i for every integer k >= k_i, among them 42.09 k^{3/8} + 0.05 for k >= 2.48*10^12 (tier C3) and 40.62 k^{3/8} + 1.4*10^-5 for k >= 3.4*10^26 (tier A5, which supersedes version 1.0's 43.06 k^{3/8} + 2*10^-5), with the end constants certified by the interval coverings code/cert_v3/cert_v3.py and code/cert_v4/cert_v4.py.",
+    "Theorems 1.2, 1.4 and 1.6 are stated as in version 1.0, and the five certificates in data/ are byte-identical to version 1.0's."
+  ],
+  "scope": [
+    ".zenodo.json",
+    "LICENSE",
+    "README.md",
+    "SHA256SUMS",
+    "code",
+    "data",
+    "paper"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE",
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/LICENSE"
+    },
+    {
+      "match": "paper/LICENSE",
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/paper/LICENSE"
+    },
+    {
+      "match": "code/cert3e.py",
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code"
+    },
+    {
+      "match": "code/chk.py",
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code"
+    },
+    {
+      "match": "code/const_stair.py",
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code"
+    },
+    {
+      "match": "code/r38.py",
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code"
+    },
+    {
+      "match": "code/run_z.py",
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code"
+    },
+    {
+      "match": "code/stair_check.py",
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code"
+    },
+    {
+      "match": "code/checker_outputs/*",
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/code/checker_outputs"
+    },
+    {
+      "match": "data/stair_k38250000.json.gz",
+      "reason": "unchanged since v1.0 (same Git blob and digest); a certificate of several megabytes kept out of Git under OR-18 and hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml"
+    },
+    {
+      "match": "data/stair_k100000000.json.gz",
+      "reason": "unchanged since v1.0 (same Git blob and digest); a certificate of several megabytes kept out of Git under OR-18 and hosted by packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml"
+    },
+    {
+      "match": "data/*",
+      "reason": "unchanged since v1.0 (same Git blob); the 2026-10-09 packet retains the same bytes as original gzip",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-upper-2026-10-09/source/data"
+    }
+  ]
+}

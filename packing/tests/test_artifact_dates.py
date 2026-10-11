@@ -19,6 +19,8 @@ import pytest
 
 from devtools import (
     artifact_dates,
+    build_known_best_atlas,
+    render_composite_pdf,
     render_n11_lower_bounds_explainer,
     render_n11_optimality_review,
 )
@@ -49,12 +51,49 @@ def test_no_derived_date_in_the_tree_is_other_than_its_rule_gives() -> None:
     assert [row.artifact for row in found if row.wrong] == []
     derived = {row.artifact for row in found if row.expected is not None}
     assert {
-        "known-best-1-100.pdf CreationDate, ModDate",
-        "known-best-1-324.pdf CreationDate, ModDate",
+        "square-packings-100-20261008.pdf CreationDate, ModDate",
+        "square-packings-324-20261008.pdf CreationDate, ModDate",
         "optimality paper, Original proof",
         "threshold-bound review, Original proof",
     } <= derived
     assert artifact_dates.main(["--check"]) == 0
+
+
+def test_poster_date_report_uses_download_names_and_keeps_the_data_date(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    identity = build_known_best_atlas.CompositeIdentity("1" * 40, "2026-10-07")
+    monkeypatch.setattr(build_known_best_atlas, "ATLAS_ROOT", tmp_path)
+    monkeypatch.setattr(render_composite_pdf, "ATLAS_ROOT", tmp_path)
+    monkeypatch.setattr(build_known_best_atlas, "retained_identity", lambda _svg: identity)
+    monkeypatch.setattr(release, "commit_date", lambda _repo, _revision: "2026-10-07")
+    for canvas in build_known_best_atlas.COMPOSITES:
+        (tmp_path / canvas.spec.svg_name).write_text("<svg/>")
+        render_composite_pdf.composite_pdf(canvas.spec.stem).write_bytes(
+            b"%PDF-1.5\n/CreationDate (20261007120000Z) /ModDate (20261007120000Z)\n"
+        )
+    found = artifact_dates._poster_rows()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    pdf_rows = [row for row in found if row.artifact.endswith("CreationDate, ModDate")]
+    assert [row.artifact for row in pdf_rows] == [
+        "square-packings-100-20261008.pdf CreationDate, ModDate",
+        "square-packings-324-20261008.pdf CreationDate, ModDate",
+    ]
+    assert all(row.shows == row.expected == "20261007120000Z" for row in pdf_rows)
+    date_rows = [row for row in found if row.artifact.endswith("(SVG, PNG, PDF)")]
+    assert [(row.artifact, row.shows, row.expected) for row in date_rows] == [
+        (
+            "known-best-1-100 dateline (SVG, PNG, PDF)",
+            "Including new results (October 7, 2026)",
+            "Including new results (October 7, 2026)",
+        ),
+        (
+            "known-best-1-324 edition date (SVG, PNG, PDF)",
+            "October 7, 2026",
+            "October 7, 2026",
+        ),
+    ]
+    assert not any(row.wrong for row in found)
 
 
 def test_a_papers_revised_date_is_the_day_its_article_last_changed() -> None:
@@ -83,6 +122,11 @@ def test_a_papers_revised_date_is_the_day_its_article_last_changed() -> None:
             artifact_dates.THRESHOLD_ARTICLE,
             release.THRESHOLD_REVIEW_REVISED,
             "THRESHOLD_REVIEW_REVISED",
+        ),
+        (
+            artifact_dates.PACKING_METHODS_ARTICLE,
+            release.PACKING_METHODS_REVISED,
+            "PACKING_METHODS_REVISED",
         ),
     ):
         changed = artifact_dates.last_change(article)
@@ -120,6 +164,8 @@ def test_the_articles_named_here_are_the_ones_the_renderers_read() -> None:
     assert artifact_dates.OPTIMALITY_ARTICLE == render_n11_optimality_review.ARTICLE
     threshold = importlib.import_module("devtools.render_n11_threshold_bound_review")
     assert artifact_dates.THRESHOLD_ARTICLE == threshold.ARTICLE
+    methods = importlib.import_module("devtools.render_packing_methods")
+    assert artifact_dates.PACKING_METHODS_ARTICLE == methods.ARTICLE
 
 
 def test_a_stale_revised_date_is_reported_and_fails_the_check(
@@ -138,13 +184,16 @@ def test_a_stale_revised_date_is_reported_and_fails_the_check(
     assert artifact_dates.main([]) == 0
 
 
-def test_the_optimality_papers_front_prints_the_two_dates_the_rules_hold() -> None:
-    """The dates the tool holds are the ones the paper's front prints, in one line, the
-    proof's day first and the review's last; the paper reads both from the release
-    module, so neither can be typed into the article and stand still under it."""
+def test_the_optimality_papers_front_prints_publication_proof_and_revision_dates() -> None:
+    """The review's first publication leads its front's dates line, followed by the
+    source proof's day and the review's last revision. Each reads from its release
+    record, preserving the distinction between the review and the proof it explains."""
     front = render_n11_optimality_review.FRONT
+    published = release.OPTIMALITY_REVIEW_HISTORY[-1].first_published
+    assert published == "September 30, 2026"
     proof, review = artifact_dates.optimality_dates()
     assert [(dated.label, dated.day) for dated in front.dates] == [
+        ("First published", published),
         ("Original proof", proof),
         ("Last revised", review),
     ]
@@ -223,6 +272,12 @@ def test_a_built_pdf_is_held_to_its_papers_revised_date(
     )
     built.write_bytes(dated(CHROMIUM, artifact_dates.threshold_revised()))
     assert artifact_dates.main(["--pdf", str(built), "--revised", "threshold"]) == 0
+    built.write_bytes(
+        dated(CHROMIUM, artifact_dates.written_date(release.PACKING_METHODS_REVISED))
+    )
+    assert artifact_dates.main(["--pdf", str(built), "--revised", "packing-methods"]) == 0
+    built.write_bytes(CHROMIUM)
+    assert artifact_dates.main(["--pdf", str(built), "--revised", "packing-methods"]) == 1
     with pytest.raises(SystemExit):
         artifact_dates.main(["--pdf", str(built)])
 

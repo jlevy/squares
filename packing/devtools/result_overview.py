@@ -2,7 +2,7 @@
 """The overview of one registered result: the body of the popover its row opens.
 
 A result's row, in Recent Results on the homepage and in the table on
-`all-results.html`, opens a popover with everything the site knows about the result.
+`results.html`, opens a popover with everything the site knows about the result.
 This module writes that popover's body, `result_popover_html(result, overview)`; the
 popover around it, with the result's id as its caps label and its summary as its
 headline, and the row that opens it, belong to the pages that list results
@@ -50,12 +50,13 @@ import html
 import math
 import re
 import sys
-from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Collection, Iterable, Mapping, Sequence
 from dataclasses import replace
 from decimal import Decimal
 from functools import cache
 from pathlib import Path
 from typing import Any, NamedTuple, cast
+from urllib.parse import urlsplit
 
 from devtools import repo_links
 from devtools.overview_data import (
@@ -72,6 +73,7 @@ from devtools.overview_data import (
     tex_bounds,
 )
 from devtools.repo_links import path_kind, repo_url
+from sqpack.known_best import display_bound_value
 
 #: The film's gap bar, as every case's visual summary draws it (`gap_bar`; the atlas
 #: popover's script drew its own until 2026-10-03): the inset at each end, in percent of
@@ -273,6 +275,14 @@ def film_facts() -> dict[int, dict[str, Any]]:
     return {cast("int", fact["n"]): cast("dict[str, Any]", fact) for fact in atlas_film_facts()}
 
 
+def contribution_class(n: int, kind: str) -> str:
+    """A bound's role and its independent contribution recency, without assurance changes."""
+    from devtools.result_status import recent_contributions_by_case  # noqa: PLC0415
+
+    recent = getattr(recent_contributions_by_case()[n], kind)
+    return f"is-{kind}{' is-new-result' if recent else ''}"
+
+
 def grid_floor(n: int) -> int:
     """One below the grid bound, `ceil(sqrt(n)) - 1`: where the film's bar starts."""
     root = math.isqrt(n)
@@ -327,9 +337,20 @@ def gap_bar(fact: dict[str, Any]) -> str:
     crowded = fact["lower"] is not None and end - start < GAP_CROWDED
     if fact["lower"] is not None:
         rail.append(_placed("site-atlas-gap-rule", "", start))
-        values.append(_placed("is-lower", bar_number(lower), start, "end" if crowded else ""))
+        values.append(
+            _placed(
+                contribution_class(n, "lower"),
+                display_bound_value(str(fact["lower"]), decimal_places=2),
+                start,
+                "end" if crowded else "",
+            )
+        )
     rail.append(_placed("site-atlas-gap-rule", "", end))
-    values.append(_placed("is-upper", bar_number(upper), end, "start" if crowded else ""))
+    values.append(
+        _placed(
+            contribution_class(n, "upper"), bar_number(upper), end, "start" if crowded else ""
+        )
+    )
     formulas = "".join(
         _placed("site-atlas-gap-formula", math_html(tex), bar_at(value, low))
         for tex, value in ((r"\sqrt{n}", root), (r"\sqrt{n} + 1", root + 1))
@@ -346,48 +367,66 @@ def gap_bar(fact: dict[str, Any]) -> str:
 
 def film_bound(fact: dict[str, Any]) -> str:
     """The bound as one statement, as the film writes it (`drawBound`): the proved lower
-    bound and the best known side in their colours, or the exact value, after the star a
-    recent lower bound earns."""
+    bound and the best known side in their colours, or the exact value. Recent
+    contributions use the shared recency ink."""
+    from devtools.overview_sections import SERIF_MATH  # noqa: PLC0415
+
     n = int(fact["n"])
-    star = "\u2605" if fact["star"] else ""
-    parts = [f'<span class="site-atlas-pop-star" aria-hidden="true">{star}</span>']
+    parts: list[str] = []
     if fact["exact"]:
-        parts.append(math_html(f"s({n}) = {fact['upper']}"))
+        parts.append(math_html(f"s({n}) ={{}}"))
+        parts.append(
+            f'<span class="{contribution_class(n, "upper")} is-exact-value">'
+            f"{math_html(str(fact['upper']))}</span>"
+        )
     else:
         if fact["lower"] is not None:
-            parts.append(f'<span class="is-lower">{math_html(str(fact["lower"]))}</span>')
+            parts.append(
+                f'<span class="{contribution_class(n, "lower")}">'
+                f"{math_html(display_bound_value(str(fact['lower']), decimal_places=5))}</span>"
+            )
         middle = rf"s({n}) \le{{}}" if fact["lower"] is None else rf"{{}}\le s({n}) \le{{}}"
         parts.append(math_html(middle))
-        parts.append(f'<span class="is-upper">{math_html(str(fact["upper"]))}</span>')
-    return f'<p class="site-atlas-pop-bound">{"".join(parts)}</p>'
+        parts.append(
+            f'<span class="{contribution_class(n, "upper")}">'
+            f"{math_html(str(fact['upper']))}</span>"
+        )
+    return f'<p class="site-atlas-pop-bound" {SERIF_MATH}>{"".join(parts)}</p>'
 
 
-def badge_glyph(glyph: str, style: str, text: str, *, named: bool = False) -> str:
+def badge_glyph(
+    glyph: str, style: str, text: str, *, named: bool = False, recent: bool = False
+) -> str:
     """One of the film's badges, the site's one mark for a property of a case (optimal,
     exact, numerical, rigid, a new result, something open): its glyph in a small square,
     solid or outlined (`.site-atlas-badge`). `named`, where no word follows it, gives it
     its word as its name and its tooltip."""
-    name = (
-        f'role="img" aria-label="{_esc(text)}" title="{_esc(text)}"'
-        if named
-        else 'aria-hidden="true"'
-    )
+    name = f'role="img" aria-label="{_esc(text)}"' if named else 'aria-hidden="true"'
+    accent = ' data-recent="true"' if recent else ""
     return (
-        f'<span class="site-atlas-badge" data-style="{_esc(style)}" {name}>{_esc(glyph)}</span>'
+        f'<span class="site-atlas-badge" data-style="{_esc(style)}" {name} '
+        f'title="{_esc(text)}"{accent}>{_esc(glyph)}</span>'
     )
 
 
-def _badge(glyph: str, style: str, text: str, classes: str = "") -> str:
+def _badge(
+    glyph: str, style: str, text: str, classes: str = "", *, recent: bool = False
+) -> str:
     item = f"site-atlas-pop-item {classes}".strip()
-    return f'<li class="{item}">{badge_glyph(glyph, style, text)}{_esc(text)}</li>'
+    return (
+        f'<li class="{item}">{badge_glyph(glyph, style, text, recent=recent)}{_esc(text)}</li>'
+    )
 
 
 def case_badges(n: int) -> str:
     """Case `n`'s property badges as the film draws them, each named, in a row of their
     own and without their words: the same marks the visual summary lists with words,
     where a case is one line, as in a table's row or a record's head (think-7cbx)."""
+    from devtools.result_status import recent_contributions_by_case  # noqa: PLC0415
+
+    flags = recent_contributions_by_case()[n]
     marks = "".join(
-        badge_glyph(glyph, style, text, named=True)
+        badge_glyph(glyph, style, text, named=True, recent=text == "optimal" and flags.optimal)
         for glyph, style, text in film_facts()[n]["badges"]
     )
     return f'<span class="site-case-badges">{marks}</span>' if marks else ""
@@ -395,8 +434,20 @@ def case_badges(n: int) -> str:
 
 def film_facts_html(fact: dict[str, Any]) -> str:
     """The badges, the citation and what is open, as the film lists them (`drawFacts`)."""
-    badges = [_badge("\u2605", "star", "new result", "is-new-result")] if fact["star"] else []
-    badges.extend(_badge(glyph, style, text) for glyph, style, text in fact["badges"])
+    badges: list[str] = []
+    from devtools.result_status import recent_contributions_by_case  # noqa: PLC0415
+
+    flags = recent_contributions_by_case()[int(fact["n"])]
+    badges.extend(
+        _badge(
+            glyph,
+            style,
+            text,
+            "is-new-result" if text == "optimal" and flags.optimal else "",
+            recent=text == "optimal" and flags.optimal,
+        )
+        for glyph, style, text in fact["badges"]
+    )
     cites = []
     for which in ("lower", "upper"):
         line = fact["cite"][which]
@@ -415,7 +466,8 @@ def film_facts_html(fact: dict[str, Any]) -> str:
             else ""
         )
         cites.append(
-            f'<p class="site-atlas-pop-cite"><span class="site-atlas-pop-which is-{which}">'
+            f'<p class="site-atlas-pop-cite"><span '
+            f'class="site-atlas-pop-which {contribution_class(int(fact["n"]), which)}">'
             f"{which}</span>{_esc(line['text'])}{corrects}{note}</p>"
         )
     citation = (
@@ -497,12 +549,12 @@ def bounds_table(case: dict[str, Any]) -> str:
     )
 
 
-def case_panel(n: int, overview: Overview, *, label: bool) -> str:
+def case_panel(n: int, overview: Overview) -> str:
     """One case as its record opens, the visual summary (`render_case_pages.
     visual_summary`, the drawing at the atlas's size), with the record's bounds under it
     and its own link to the record among the overview's links."""
     from devtools.overview_sections import ATLAS_UNITS  # noqa: PLC0415
-    from devtools.render_case_pages import visual_summary  # noqa: PLC0415
+    from devtools.render_case_pages import packing_figure, visual_summary  # noqa: PLC0415
 
     case = overview.cases[n]
     # The case's n heads its panel as a case record's title does: a caps label would
@@ -510,13 +562,68 @@ def case_panel(n: int, overview: Overview, *, label: bool) -> str:
     head = (
         '<p class="site-popover-value site-result-case-n" data-math-face="serif">'
         f"{math_html(f'n = {n}')}</p>"
-        if label
-        else ""
     )
     return (
-        f'<div class="site-atlas-pop site-result-film" data-overview-case="{n}">{head}'
-        f"{visual_summary(n, units=ATLAS_UNITS)}"
+        f'<div class="site-atlas-pop site-result-film" data-overview-case="{n}">'
+        '<span class="site-card-label site-case-eyebrow">Case record</span>'
+        f"{packing_figure(n, units=ATLAS_UNITS)}{head}"
+        f"{visual_summary(n, drawing=False)}"
         f'<p class="site-atlas-pop-head">The case record</p>{bounds_table(case)}</div>'
+    )
+
+
+def _case_table(rows: Sequence[tuple[int, Sequence[str]]]) -> str:
+    """Native cells share only consecutive, exactly equal bounds or status markup.
+
+    Case identifiers and record links always have their own cell. Row spans retain all
+    six logical cells of each case without repeating identical badges and bounds.
+    Bounds share a cell only when their independent contribution accents also match."""
+    from devtools.result_status import recent_contributions_by_case  # noqa: PLC0415
+
+    recent = recent_contributions_by_case()
+    cell_classes = []
+    for n, _ in rows:
+        flags = recent[n]
+        cell_classes.append(
+            [
+                "",
+                "lower" + (" is-new-result" if flags.lower else ""),
+                "upper" + (" is-new-result" if flags.upper else ""),
+                "",
+                "",
+                "records",
+            ]
+        )
+    spans = [[1] * 6 for _ in rows]
+    for column in range(1, 5):
+        start = 0
+        while start < len(rows):
+            end = start + 1
+            while (
+                end < len(rows)
+                and rows[end][1][column] == rows[start][1][column]
+                and cell_classes[end][column] == cell_classes[start][column]
+            ):
+                end += 1
+            spans[start][column] = end - start
+            for index in range(start + 1, end):
+                spans[index][column] = 0
+            start = end
+    body = []
+    for (n, cells), counts, styles in zip(rows, spans, cell_classes, strict=True):
+        rendered = []
+        for column, (content, count) in enumerate(zip(cells, counts, strict=True)):
+            if not count:
+                continue
+            rowspan = f' rowspan="{count}"' if count > 1 else ""
+            classes = f' class="{styles[column]}"' if styles[column] else ""
+            rendered.append(f"<td{classes}{rowspan}>{content}</td>")
+        body.append(f'<tr data-overview-case="{n}">{"".join(rendered)}</tr>')
+    headings = ("n", "Proved lower", "Best known", "Gap", "Status", "Records")
+    head = "".join(f'<th scope="col">{heading}</th>' for heading in headings)
+    return (
+        '<table class="site-result-cases" aria-label="The cases of this result">'
+        f"<thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody></table>"
     )
 
 
@@ -537,48 +644,29 @@ def case_list(cases: Sequence[int], overview: Overview) -> str:
         _, gap_value = frontier.gap(case)
         gap = frontier.decimal_text(Decimal(gap_value).normalize()) if gap_value != "0" else "0"
         status = case["status"]
-        star = (
-            '<span class="site-star" title="Recent lower bound">\u2605</span>'
-            if fact["star"]
-            else ""
-        )
         rows.append(
-            _grid_row(
+            (
+                n,
                 [
-                    _cell(f'<a href="{case_url(n)}">{n}</a>', classes="num"),
-                    _cell(f'<span class="is-lower">{_esc(lower)}</span>{star}', classes="num"),
-                    _cell(
-                        f'<span class="is-upper">{_esc(fact["upper"])}</span>', classes="num"
-                    ),
-                    _cell(_esc(gap), classes="num"),
-                    _cell(case_status_chip(status) + case_badges(n)),
-                    _cell(
-                        f'<a href="frontier.html#n-{n}">frontier</a> '
+                    f'<a href="{case_url(n)}">{n}</a>',
+                    _esc(lower),
+                    _esc(fact["upper"]),
+                    _esc(gap),
+                    case_status_chip(status) + case_badges(n),
+                    (
+                        f'<a href="atlas.html#n-{n}">frontier</a> '
                         f'<a href="{_esc(repo_url(case_file(n)))}">'
-                        f"{_esc(case_file(n).name)}</a>",
-                        classes="site-result-case-records",
+                        f"{_esc(case_file(n).name)}</a>"
                     ),
                 ],
-                f' data-overview-case="{n}"',
             )
         )
-    heads = _grid_row(
-        [
-            _cell("n", "columnheader", "num"),
-            _cell("Proved lower", "columnheader", "num"),
-            _cell("Best known", "columnheader", "num"),
-            _cell("Gap", "columnheader", "num"),
-            _cell("Status", "columnheader"),
-            _cell("Records", "columnheader"),
-        ]
-    )
     return (
         f'<p class="site-result-note">This result concerns {len(cases)} cases, too many '
         "to draw one by one. Each is listed with the film\u2019s bounds, the proved lower "
         "bound and the best known side, and links to its case record, where its packing "
         "and number line are drawn.</p>"
-        '<div class="site-result-case-list"><div class="site-result-cases" role="table" '
-        f'aria-label="The cases of this result">{heads}{"".join(rows)}</div></div>'
+        f'<div class="site-result-case-list">{_case_table(rows)}</div>'
     )
 
 
@@ -598,13 +686,18 @@ def head(result: Result, cases: Sequence[int]) -> str:
     """The chips, the date and credit, the claim, and what a later result its entry
     declares implies of it (`superseded_by`). The date leads and what it dates follows,
     as a table's date cell sets it (`overview_sections.date_cell`). The id and the
-    headline are the popover's own, above the body (`overview_sections.result_row`)."""
+    headline are the popover's own, above the body (`overview_sections.result_row`).
+    In the details under the claim, the next rung is followed by the confirmations the
+    entry lists as not yet run, each with its rung and cost
+    (`result_status.unfinished_sentence`), and by the packings its certificate
+    regularizes, one sentence a count (`Result.regularizations`)."""
     from devtools.overview_sections import (  # noqa: PLC0415
         date_cell,
         novelty_labels,
         result_url,
         status_chips,
     )
+    from devtools.result_status import unfinished_sentence  # noqa: PLC0415
 
     record = result.record
     claim = prose_html(record["claim"], between='</p><p class="site-result-claim">')
@@ -622,6 +715,14 @@ def head(result: Result, cases: Sequence[int]) -> str:
         ("Significance", record["significance"]["rationale"]),
         ("Composition", record.get("composition")),
         ("Next rung", record.get("next_rung")),
+        (
+            "Unfinished confirmations",
+            "\n".join(
+                unfinished_sentence(item)
+                for item in record.get("unfinished_confirmations") or []
+            ),
+        ),
+        ("Regularizations", "\n".join(result.regularizations)),
     ]
     rows = "".join(
         f"<dt>{label}</dt><dd>{prose_html(text)}</dd>" for label, text in more if text
@@ -653,7 +754,7 @@ def case_section(result: Result, overview: Overview, cases: Sequence[int]) -> st
         body = case_list(cases, overview)
         title = "The cases"
     else:
-        body = "".join(case_panel(n, overview, label=len(cases) > 1) for n in cases)
+        body = "".join(case_panel(n, overview) for n in cases)
         title = "The case" if len(cases) == 1 else "The cases"
     return (
         f'<section class="site-result-section"><h3 class="site-result-heading">{title}</h3>'
@@ -662,7 +763,7 @@ def case_section(result: Result, overview: Overview, cases: Sequence[int]) -> st
 
 
 def _link(url: str, label: str, title: str = "") -> str:
-    titled = f' title="{_esc(title)}"' if title else ""
+    titled = f' title="{_esc(title)}"' if title and title not in url else ""
     return f'<a href="{_esc(url)}"{titled}>{label}</a>'
 
 
@@ -778,11 +879,13 @@ def step(other: Result, current: Result, cases: Sequence[int]) -> str:
     shared = [n for n in scope(other) if n in wanted]
     on = ""
     if len(cases) > 1:
-        on = DOT + (
-            math_html("n = " + ", ".join(map(str, shared)))
-            if len(shared) <= CASES_NAMED
-            else f"{len(shared)} of these cases"
-        )
+        if len(shared) > CASES_NAMED:
+            on = DOT + f"{len(shared)} of these cases"
+        elif is_broad(cases):
+            label = "case " if len(shared) == 1 else "cases "
+            on = DOT + label + ", ".join(map(str, shared))
+        else:
+            on = DOT + math_html("n = " + ", ".join(map(str, shared)))
     current_mark, this = "", ""
     if other.id == current.id:
         current_mark = ' data-current=""'
@@ -805,8 +908,9 @@ def step(other: Result, current: Result, cases: Sequence[int]) -> str:
     chip_line = f'<p class="site-result-step-chips">{chips}</p>'
     cites = [_esc(other.credit), *citations(other)]
     # A step is set back where its result is superseded here as its row would be
-    # (`render_recent_results.superseded`): a bound no case bound here rests on, or a
-    # result its entry declares superseded as a whole, whatever its standing. A result
+    # (`render_recent_results.superseded`): a bound no case bound here rests on and the
+    # cases here match or beat, or a result its entry declares superseded as a whole,
+    # whatever its standing. A better bound pending adoption is not set back. A result
     # of another kind that derives `superseded` from the bound it cites (T-003, a
     # method's limit) is current, and its step is not set back.
     if any(mark.mark == SUPERSEDED for mark in marks):
@@ -882,17 +986,16 @@ def links_section(result: Result, overview: Overview, cases: Sequence[int]) -> s
         OPTIMALITY_PAPER,
         result_url,
     )
-    from devtools.render_case_pages import CASES_HOME, case_url  # noqa: PLC0415
+    from devtools.render_case_pages import case_url  # noqa: PLC0415
 
     record = result.record
     site: list[str] = []
     if is_broad(cases):
-        site.append(_link("frontier.html", "The frontier survey"))
-        site.append(_link(CASES_HOME, "Every case record"))
+        site.append(_link("atlas.html#the-frontier-survey", "The frontier survey"))
     else:
         for n in cases:
             site.append(_link(case_url(n), f"Case record, {math_html(f'n = {n}')}"))
-            site.append(_link(f"frontier.html#n-{n}", f"Frontier row, {math_html(f'n = {n}')}"))
+            site.append(_link(f"atlas.html#n-{n}", f"Frontier row, {math_html(f'n = {n}')}"))
     site.append(_link(result_url(result.id), f"{_esc(result.id)} in the results table"))
     if 11 in cases:
         site.append(_link(OPTIMALITY_PAPER, f"The {math_html('n = 11')} optimality paper"))
@@ -939,7 +1042,23 @@ def links_section(result: Result, overview: Overview, cases: Sequence[int]) -> s
         if (resolved := _resolve(path)) is not None
     ]
     shown_artifacts = artifacts
-    if len(artifacts) > ARTIFACTS_OPEN:
+    if len(artifacts) > 20:
+        paths = [
+            resolved
+            for path in [*record["artifacts"], *(record.get("controls") or [])]
+            if (resolved := _resolve(path)) is not None
+        ]
+        directories = sorted({path.parent for path in paths})
+        shown_artifacts = [
+            f"<p>{len(artifacts)} artifacts and controls in {len(directories)} directories. "
+            f"{register_link(result, 'Complete artifact list in the result entry')}. "
+            + " ".join(
+                _link(repo_url(directory, kind="tree"), _esc(repo_links.relative(directory)))
+                for directory in directories
+            )
+            + "</p>"
+        ]
+    elif len(artifacts) > ARTIFACTS_OPEN:
         summary = f"{len(artifacts)} artifacts and controls"
         shown_artifacts = [
             f'<details class="site-result-artifacts"><summary>{summary}</summary>'
@@ -995,7 +1114,8 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
     """Refuse a body with a link to nothing: a repository path the working tree lacks, a
     commit-pinned repository link, a page the site does not serve, or a fragment no row
     or record carries."""
-    from devtools.render_case_pages import CASES_HOME, case_url  # noqa: PLC0415
+    from devtools.overview_sections import result_fragment  # noqa: PLC0415
+    from devtools.render_case_pages import case_url  # noqa: PLC0415
     from devtools.render_overview import SITE_PAGES  # noqa: PLC0415
 
     pinned = repo_links.hash_pinned_links(body)
@@ -1007,10 +1127,14 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
             missing.append(f"{kind}/{path}")
     ids = {other.id.lower() for other in overview.results}
     fragments = {
-        "frontier.html": {f"n-{n}" for n in overview.cases},
-        "all-results.html": ids,
+        "atlas.html": {"the-frontier-survey", *(f"n-{n}" for n in overview.cases)},
+        "results.html": ids,
     }
-    served = {*SITE_PAGES, CASES_HOME, *(case_url(n) for n in overview.cases)}
+    served = {
+        *SITE_PAGES,
+        *(case_url(n) for n in overview.cases),
+        *(result_fragment(result.id) for result in overview.results),
+    }
     for page, fragment in SITE_LINK.findall(body):
         if page not in served:
             missing.append(page)
@@ -1022,12 +1146,62 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
         )
 
 
-def result_popover_html(result: Result, overview: Overview) -> str:
+def compatibility_notices(
+    result: Result,
+    amendments: Sequence[Mapping[str, Any]],
+    *,
+    registered_paths: Collection[str],
+) -> str:
+    """Explain an amended address inside the article that readers may fetch."""
+    notices = []
+    for amendment in amendments:
+        target = amendment.get("historical_target")
+        if not target:
+            continue
+        if not isinstance(target, str):
+            raise TypeError(f"{result.id}: historical target is not a local path")
+        url = urlsplit(target)
+        if (
+            target not in registered_paths
+            or url.scheme
+            or url.netloc
+            or url.query
+            or url.fragment
+            or target.startswith("/")
+            or any(part in {"", ".", ".."} for part in target.split("/"))
+            or "\\" in target
+        ):
+            raise ValueError(f"{result.id}: unregistered local historical target {target!r}")
+        title = amendment.get("historical_title")
+        if not isinstance(title, str) or not title.strip():
+            raise ValueError(f"{result.id}: historical target has no reader title")
+        kind = str(result.record["kind"]).replace("-", " ")
+        updated = _esc(amendment["date"])
+        notices.append(
+            '<aside class="site-result-section site-result-compatibility" '
+            'aria-label="Earlier result at this address"><p><strong>Earlier result at '
+            "this address.</strong> Earlier links referred to "
+            f'<a href="{_esc(target)}">{_esc(title)}</a>. This page now holds '
+            f"a separate {_esc(kind)} result by {_esc(result.credit)}. "
+            f'<span class="site-cell-quiet">Address updated '
+            f'<time datetime="{updated}">{updated}</time>.</span></p></aside>'
+        )
+    return "".join(notices)
+
+
+def result_popover_html(
+    result: Result,
+    overview: Overview,
+    *,
+    amendments: Sequence[Mapping[str, Any]] = (),
+    registered_paths: Collection[str] = (),
+) -> str:
     """The overview of one registered result, as its popover's body: the head, the case
     or cases, the chain of results on them, and the links, every one checked."""
     cases = scope(result)
     body = (
-        head(result, cases)
+        compatibility_notices(result, amendments, registered_paths=registered_paths)
+        + head(result, cases)
         + case_section(result, overview, cases)
         + chain_section(result, overview, cases)
         + links_section(result, overview, cases)
@@ -1045,13 +1219,13 @@ class LinkAudit(NamedTuple):
 
     results: int
     github: int
-    """Links into this repository, every one of which must name `main`."""
+    """Links into the repository's file tree, every one of which must name `main`."""
     github_paths: int
     """The distinct repository paths those links open."""
     site: int
     """Links to pages of this site, each checked as the body was rendered."""
     external: int
-    """Links off the site and the repository: a source's own home."""
+    """Source citations off the site, including first-party issue/discussion reports."""
     off_main: list[str]
     missing: list[str]
     """Repository paths the tree at `HEAD` does not hold, as `kind/path`."""
@@ -1085,7 +1259,7 @@ def link_audit(overview: Overview, bodies: Mapping[str, str] | None = None) -> L
         body = (bodies or {}).get(result.id) or result_popover_html(result, overview)
         sizes[result.id] = len(body.encode("utf-8"))
         for href in _HREF.findall(body):
-            if href.startswith(on_main):
+            if href.startswith(on_main) and not repo_links.is_report_link(href):
                 github += 1
                 if not branch.match(href):
                     off_main.append(f"{result.id}: {href}")

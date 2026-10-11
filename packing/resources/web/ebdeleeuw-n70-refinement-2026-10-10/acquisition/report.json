@@ -1,0 +1,39 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/483",
+  "author": "Eric Deleeuw",
+  "source_key": "[Deleeuw n70 refinement 2026-10-10]",
+  "report_evidence": "E-deleeuw-483-certificate-report",
+  "receipt_format": "deleeuw-483-exact-replay-v1",
+  "witness_prefix": "W-deleeuw-483-n",
+  "claim_limitations": "Complete 24221d5 rational centre/half-angle certificate, translated exactly from the centred box to [0, S]^2, converted from a checkout at the pin whose bytes have the digests the packet records; no upstream byte is retained. Finite construction feasibility only; no local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-10",
+  "read_at_main": "657cc486130e9020608ff244d8a86d1d04153634",
+  "certificates": [
+    {"n": 70, "path": "certificate.json", "format": "centred-json", "offered": "8.88096037156625096037155737", "first_committed": "2026-10-10T02:04:48Z", "fact": "facts/n-070.yaml"}
+  ],
+  "requested": [70],
+  "replayed": [70],
+  "houses": [
+    {"n": 70, "reader": "[ry-xu square packing 2026]", "source_key": "[ry-xu square packing 2026]", "holders": "ry-xu", "result": "T-125", "reported_value": "8.8809603717088810", "verified_value": "8.8809603717088810", "evidence": ["E-ryxu-432-rational-feasibility"]}
+  ],
+  "pending": [],
+  "register": {
+    "title": "Eric Deleeuw's n70 refinement at 24221d5, issue483",
+    "headline": "An exact rational refinement of Ryan Xu's packing of 70 squares",
+    "significance": 2,
+    "source_checks": "The author reports that its own exact Fraction checker accepts all 280 corners and all 2,415 pairs with zero tolerance, and that David Ellsworth's check_packing.py accepts a 60-digit export at epsilon 1e-40; the generator and the exact checker were written together. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Eric Deleeuw (https://github.com/ebdeleeuw/square-packing-n70) for the refinement and the rational certificate, after Ryan Xu's arrangement and published warm-start coordinates (issue 432). The source discloses OpenAI Codex assistance with the refinement, the certificate, the verification tools and the submission.",
+    "next_rung": "Independently review the retained replay, then record source-specific adoption of the n70 side, which refines the ceiling T-125 holds by 1.43e-10, with confirming evidence. Final exact-head CI remains required.",
+    "bead": "think-8m3u",
+    "bibliography": {
+      "authors": [
+        "Deleeuw"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Deleeuw after Xu, Levy",
+      "short_credit": "Deleeuw after Xu et al.",
+      "note": "One complete exact certificate at 24221d5e51244ca5290d5b1c43f1fbe36f9749e0 refining Ryan Xu's #432 packing of 70 squares, a centred rational centre/half-angle certificate compared against this project's register. Derived exact facts only; no upstream byte is retained. OpenAI Codex assistance disclosed. No local or global optimality claim."
+    }
+  }
+}

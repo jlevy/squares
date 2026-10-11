@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -63,7 +64,8 @@ class Responses:
 
 
 def wait(api: tool.Api, **overrides: Any) -> tool.Ready:
-    clock_values = iter(overrides.pop("clock_values", [0.0, 0.0]))
+    observations = overrides.pop("clock_values", [0.0, 0.0])
+    clock_values = iter(observations)
     arguments = {
         "run_attempt": RUN_ATTEMPT,
         "timeout": 10,
@@ -76,9 +78,11 @@ def wait(api: tool.Api, **overrides: Any) -> tool.Ready:
         name="prepared-page",
         producer="prepare",
         api=api,
-        clock=lambda: next(clock_values),
-        sleep=lambda _seconds: None,
-        **arguments,
+        **{
+            "clock": lambda: next(clock_values, observations[-1]),
+            "sleep": lambda _seconds: None,
+            **arguments,
+        },
     )
 
 
@@ -199,3 +203,231 @@ def test_main_writes_the_exact_artifact_id_for_the_download_step(tmp_path: Path)
         == 0
     )
     assert output.read_text(encoding="utf-8") == "artifact_id=93\n"
+
+
+class FakeClock:
+    def __init__(self) -> None:
+        self.now = 0.0
+        self.sleeps: list[float] = []
+
+    def __call__(self) -> float:
+        return self.now
+
+    def sleep(self, seconds: float) -> None:
+        self.sleeps.append(seconds)
+        self.now += seconds
+
+
+def test_queued_producer_uses_at_most_fourteen_requests_in_ten_minutes() -> None:
+    clock = FakeClock()
+    paths: list[str] = []
+
+    def queued(path: str) -> dict[str, Any]:
+        paths.append(path)
+        assert "/jobs?" in path
+        return {"jobs": [_job(status="queued")]}
+
+    with pytest.raises(TimeoutError, match="after 600 seconds"):
+        wait(queued, timeout=600, interval=5, clock=clock, sleep=clock.sleep)
+    assert len(paths) <= 14
+    assert clock.now == 600
+    assert max(clock.sleeps) <= 60
+
+
+def test_rate_limit_recovery_respects_retry_after_before_accepting_artifact() -> None:
+    clock = FakeClock()
+    responses = Responses([[_artifact()]])
+    calls = 0
+
+    def limited(path: str) -> dict[str, Any]:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise tool.RateLimitError("HTTP 403 rate limit", retry_after=90)
+        assert clock.now >= 90
+        return responses(path)
+
+    assert wait(limited, timeout=100, clock=clock, sleep=clock.sleep) == tool.Ready(2, 91)
+    assert clock.sleeps == [90]
+
+
+def test_rate_limit_longer_than_deadline_makes_no_retry() -> None:
+    clock = FakeClock()
+    calls = 0
+
+    def limited(_path: str) -> Any:
+        nonlocal calls
+        calls += 1
+        raise tool.RateLimitError("HTTP 403 rate limit", retry_after=3600)
+
+    with pytest.raises(TimeoutError, match="after 10 seconds"):
+        wait(limited, clock=clock, sleep=clock.sleep)
+    assert calls == 1
+    assert clock.now == 10
+
+
+def test_repeated_rate_limits_back_off_within_original_deadline() -> None:
+    clock = FakeClock()
+    calls = 0
+
+    def limited(_path: str) -> Any:
+        nonlocal calls
+        calls += 1
+        raise tool.RateLimitError("HTTP 429 rate limit", retry_after=0)
+
+    with pytest.raises(TimeoutError, match="after 200 seconds"):
+        wait(limited, timeout=200, clock=clock, sleep=clock.sleep)
+    assert clock.sleeps == [60, 120, 20]
+    assert calls == 3
+
+
+def test_active_missing_artifact_uses_at_most_forty_six_requests_in_ten_minutes() -> None:
+    clock = FakeClock()
+    paths: list[str] = []
+
+    def missing(path: str) -> dict[str, Any]:
+        paths.append(path)
+        if "/jobs?" in path:
+            return {"jobs": [_job()]}
+        return {"artifacts": []}
+
+    with pytest.raises(TimeoutError, match="after 600 seconds"):
+        wait(missing, timeout=600, interval=5, clock=clock, sleep=clock.sleep)
+    assert len(paths) <= 46
+    assert clock.now == 600
+    assert max(clock.sleeps) <= 30
+
+
+def test_quota_recovery_still_refuses_a_previous_attempt_artifact() -> None:
+    clock = FakeClock()
+    calls = 0
+
+    def stale(path: str) -> dict[str, Any]:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise tool.RateLimitError("HTTP 403 rate limit", retry_after=60)
+        if "/jobs?" in path:
+            return {"jobs": [_job()]}
+        return {"artifacts": [_artifact(created_at=OLD_CREATED)]}
+
+    with pytest.raises(TimeoutError, match="after 65 seconds"):
+        wait(stale, timeout=65, clock=clock, sleep=clock.sleep)
+    assert clock.now == 65
+
+
+def test_gh_api_honors_quota_headers_and_default_secondary_backoff(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(tool.time, "time", lambda: 1000.0)
+    for status, headers, expected in [
+        (
+            "403 Forbidden",
+            "Retry-After: 90\r\nX-RateLimit-Remaining: 0\r\nX-RateLimit-Reset: 1100",
+            101,
+        ),
+        ("403 Forbidden", "Retry-After: 90", 90),
+        ("429 Too Many Requests", "", 60),
+    ]:
+
+        def limited(
+            _args: tuple[str, ...],
+            _status: str = status,
+            _headers: str = headers,
+            **_kwargs: Any,
+        ) -> subprocess.CompletedProcess[str]:
+            return subprocess.CompletedProcess(
+                [],
+                1,
+                stdout=f"HTTP/2.0 {_status}\r\n{_headers}\r\n\r\n{{}}",
+                stderr=f"gh: API rate limit exceeded (HTTP {_status})",
+            )
+
+        monkeypatch.setattr(tool.subprocess, "run", limited)
+        with pytest.raises(tool.RateLimitError) as error:
+            tool.gh_api("repos/jlevy/squares/actions/runs/77/artifacts")
+        assert error.value.retry_after == expected
+
+
+def test_gh_api_permission_denial_is_not_retried(monkeypatch: pytest.MonkeyPatch) -> None:
+    def denied(_args: tuple[str, ...], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        return subprocess.CompletedProcess(
+            [],
+            1,
+            stdout="HTTP/2.0 403 Forbidden\nX-RateLimit-Remaining: 4500\n\n{}",
+            stderr="gh: Resource not accessible by integration (HTTP 403)",
+        )
+
+    monkeypatch.setattr(tool.subprocess, "run", denied)
+    with pytest.raises(OSError, match="Resource not accessible") as error:
+        tool.gh_api("repos/jlevy/squares/actions/runs/77/artifacts")
+    assert type(error.value) is OSError
+
+
+def test_gh_api_decodes_included_response_and_rejects_invalid_retry_window(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def success(_args: tuple[str, ...], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        return subprocess.CompletedProcess(
+            [],
+            0,
+            stdout='HTTP/2.0 200 OK\r\nContent-Type: application/json\r\n\r\n{"jobs": []}',
+            stderr="",
+        )
+
+    monkeypatch.setattr(tool.subprocess, "run", success)
+    assert tool.gh_api("repos/jlevy/squares/actions/runs/77/jobs") == {"jobs": []}
+
+    def invalid(_args: tuple[str, ...], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        return subprocess.CompletedProcess(
+            [],
+            1,
+            stdout="HTTP/2.0 429 Too Many Requests\nRetry-After: nan\n\n{}",
+            stderr="gh: API rate limit exceeded (HTTP 429)",
+        )
+
+    monkeypatch.setattr(tool.subprocess, "run", invalid)
+    with pytest.raises(ValueError, match="non-finite retry window"):
+        tool.gh_api("repos/jlevy/squares/actions/runs/77/jobs")
+
+
+@pytest.mark.parametrize("finished_at", [10.0, 11.0])
+def test_jobs_response_consuming_deadline_starts_no_artifact_request(
+    finished_at: float,
+) -> None:
+    clock = FakeClock()
+    paths: list[str] = []
+
+    def slow_jobs(path: str) -> dict[str, Any]:
+        paths.append(path)
+        clock.now = finished_at
+        if "/jobs?" in path:
+            return {"jobs": [_job()]}
+        return {"artifacts": [_artifact()]}
+
+    with pytest.raises(TimeoutError, match="after 10 seconds"):
+        wait(slow_jobs, clock=clock, sleep=clock.sleep)
+    assert len(paths) == 1
+    assert "/jobs?" in paths[0]
+    assert clock.sleeps == []
+
+
+@pytest.mark.parametrize("finished_at", [10.0, 11.0])
+def test_successful_artifact_response_arriving_after_deadline_is_refused(
+    finished_at: float,
+) -> None:
+    clock = FakeClock()
+    paths: list[str] = []
+
+    def slow_artifact(path: str) -> dict[str, Any]:
+        paths.append(path)
+        if "/jobs?" in path:
+            clock.now = 9
+            return {"jobs": [_job()]}
+        clock.now = finished_at
+        return {"artifacts": [_artifact()]}
+
+    with pytest.raises(TimeoutError, match="after 10 seconds"):
+        wait(slow_artifact, clock=clock, sleep=clock.sleep)
+    assert len(paths) == 2
+    assert clock.sleeps == []

@@ -22,7 +22,10 @@ its entry for a result of another kind that a later result implies, wholly or in
 (`superseded_by`, `render_recent_results.supersessions`). Its `activity` is who has the
 next move: this project, with work under way (`in analysis`), or another party, with a
 request on file (`waiting on …`). An activity is the one hand-recorded fact here, so it
-is dated, names the record that shows it, and expires (`activity_problems`).
+is dated, names the record that shows it, and expires (`activity_problems`). The
+confirmations an entry names and has not run, its `unfinished_confirmations`, are what is
+queued rather than under way; the views say each one's rung and its price in CPU-hours
+where the record knows it (`unfinished_label`, `unfinished_sentence`, `priced_hours`).
 
 Provisional: the vocabulary, the rung at which a result is `confirmed`, and whether the
 two activities are marks beside the status or statuses of their own are the owner's to
@@ -34,9 +37,15 @@ from __future__ import annotations
 import argparse
 import re
 from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
 from datetime import date
+from functools import cache
 from pathlib import Path, PurePosixPath
-from typing import Any
+from types import MappingProxyType
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from devtools.build_bound_citations import Register
 
 REPO = Path(__file__).resolve().parents[2]
 
@@ -82,6 +91,87 @@ def _rank(rung: object) -> int:
 
 Record = Mapping[str, Any]
 Evidence = Mapping[str, Mapping[str, Any]]
+
+
+@dataclass(frozen=True, slots=True)
+class RecentContributions:
+    """Which displayed contributions originate within the shared recent-result window.
+
+    These flags date contributions, not their subsequent verification. An upper flag
+    leaves the construction's reported/verified status alone; lower and optimal refer
+    to the verified proof lane. Renderers can therefore accent each bound and the
+    optimality mark independently.
+    """
+
+    upper: bool
+    lower: bool
+    optimal: bool
+
+    @property
+    def any(self) -> bool:
+        return self.upper or self.lower or self.optimal
+
+
+def recent_contributions(n: int, case: Record, register: Register) -> RecentContributions:
+    """Date the current construction and proof from their original typed provenance.
+
+    The citation module owns the date cutoff and the proof-origin rule. In particular,
+    a new replay of a historical proof retains the original source's date. Upper
+    recency likewise follows the reported construction, never a new certificate of it.
+    A recent lower proof also contributes optimality only when the frontier explicitly
+    declares the case proved; rounded equality is not an optimality certificate.
+    """
+    from devtools import build_bound_citations as citations  # noqa: PLC0415
+    from sqpack.assurance import bounds_agree_at_declared_precision  # noqa: PLC0415
+
+    reported = case["reported_upper_bound"]
+    verified = case["verified_upper_bound"]
+    certificate = citations.own_evidence(verified["evidence"], register)
+    is_grid = not certificate and bounds_agree_at_declared_precision(reported, verified)
+    construction = citations.own_evidence(reported["evidence"], register)
+    if is_grid or not construction:
+        upper = False
+    elif any(
+        citations.is_novel_first_party(register.evidence[item], "upper-bound")
+        for item in construction
+    ):
+        upper = True
+    else:
+        source_key = reported.get("source_key")
+        if source_key not in register.sources:
+            raise ValueError(
+                f"n={n}: upper construction has no bibliography source: {source_key}"
+            )
+        upper = citations.is_recent(register.sources[source_key])
+
+    origin = citations.lower_origin(n, case["verified_lower_bound"], register)
+    lower = bool(
+        origin
+        and origin.recent
+        and all(
+            register.evidence[item].get("assurance") == "verified"
+            and register.evidence[item].get("claim") in {"lower-bound", "exact-value"}
+            and register.evidence[item].get("replay_status") != FAILED_REPLAY
+            for item in origin.own
+        )
+    )
+    return RecentContributions(
+        upper=upper, lower=lower, optimal=lower and case["status"] == "proved"
+    )
+
+
+@cache
+def recent_contributions_by_case() -> Mapping[int, RecentContributions]:
+    """The atlas corpus's contribution flags, loaded once for a renderer invocation."""
+    from devtools import build_bound_citations as citations  # noqa: PLC0415
+
+    register = citations.load_register()
+    return MappingProxyType(
+        {
+            n: recent_contributions(n, citations.load_case(n), register)
+            for n in citations.CORPUS.numbers
+        }
+    )
 
 
 def open_issues(record: Record, evidence: Evidence) -> list[str]:
@@ -161,6 +251,57 @@ def activity_label(activity: Mapping[str, Any] | None) -> str:
     return f"waiting on {str(activity.get('party', '')).replace('-', ' ')}"
 
 
+def hours(value: object, digits: int = 2) -> str:
+    """CPU-hours as a reader is told them, to `digits` places and no trailing zeros:
+    `4.3`, `11.24`, `118`."""
+    return f"{round(float(str(value)), digits):g}"
+
+
+def cost_phrase(cost: Mapping[str, Any] | None) -> str:
+    """An unfinished confirmation's estimated cost as a reader is told it: `about 4.3
+    CPU-hours (priced 2026-10-10)`, with the upper end where the record gives one, or
+    `not priced`."""
+    if not cost:
+        return "not priced"
+    high = cost.get("cpu_hours_high")
+    upper = f", up to about {hours(high)}" if high is not None else ""
+    return (
+        f"about {hours(cost.get('cpu_hours'))} CPU-hours{upper} (priced {cost.get('priced')})"
+    )
+
+
+def unfinished_label(item: Mapping[str, Any]) -> str:
+    """One unfinished confirmation in a table cell: its rung and its cost, `C3: about
+    4.3 CPU-hours (priced 2026-10-10)`."""
+    return f"{item.get('rung')}: {cost_phrase(item.get('estimated_cost'))}"
+
+
+def unfinished_sentence(item: Mapping[str, Any]) -> str:
+    """One unfinished confirmation as a reader is told it in prose: the rung it would
+    reach, the bead or record that owns it, what it is, and its cost, `C3 (think-r333): a
+    complete sqverify-fast census .... About 4.3 CPU-hours (priced 2026-10-10).`"""
+    link = f" ({item['link']})" if item.get("link") else ""
+    what = " ".join(str(item.get("what", "")).split())
+    cost = cost_phrase(item.get("estimated_cost"))
+    return f"{item.get('rung')}{link}: {what}. {cost[:1].upper()}{cost[1:]}."
+
+
+def priced_hours(items: Sequence[Mapping[str, Any]]) -> tuple[float, float, int]:
+    """The known CPU-hours of `items`: the central estimates summed, the upper ends
+    summed with each central estimate standing in where no upper end is given, and how
+    many items carry no price."""
+    central = high = 0.0
+    unpriced = 0
+    for item in items:
+        cost = item.get("estimated_cost")
+        if not cost:
+            unpriced += 1
+            continue
+        central += float(cost["cpu_hours"])
+        high += float(cost.get("cpu_hours_high", cost["cpu_hours"]))
+    return central, high, unpriced
+
+
 def status_line(
     record: Record, evidence: Evidence, position: Sequence[str] = (), how: str = ""
 ) -> str:
@@ -176,7 +317,10 @@ def status_line(
     return ", ".join(mark for mark in marks if mark)
 
 
-def _link_problem(link: str) -> str | None:
+def link_problem(link: str) -> str | None:
+    """Why a workflow fact's `link` names nothing the record can follow, or nothing: it
+    is a bead, a GitHub issue, pull request or branch, or a repository-relative path that
+    exists."""
     if _BEAD.fullmatch(link) or _GITHUB.fullmatch(link):
         return None
     pure = PurePosixPath(link)
@@ -212,7 +356,7 @@ def activity_problems(record: Mapping[str, Any], last_reviewed: str) -> list[str
         for key in ("what", "link")
         if not str(activity.get(key) or "").strip()
     )
-    if activity.get("link") and (problem := _link_problem(str(activity["link"]))):
+    if activity.get("link") and (problem := link_problem(str(activity["link"]))):
         problems.append(f"{rid}: activity.link {problem}: {activity['link']}")
     try:
         since = date.fromisoformat(str(activity.get("since")))

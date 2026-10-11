@@ -1,0 +1,93 @@
+{
+  "123": {
+    "value": "11.601384658375975564388544443024",
+    "exact_form": "725086541148498472774284027689/62500000000000000000000000000",
+    "evidence": [
+      "E-evand-exact-optima-2026-10-05-exact-replay",
+      "E-evand-exact-optima-2026-10-05-source-replay"
+    ]
+  },
+  "126": {
+    "value": "11.7735852916961071",
+    "exact_form": "4828972106460286237253237344483/410153066106902321950462312448",
+    "evidence": [
+      "E-squish-ten-packings-2026-10-07-exact-replay"
+    ]
+  },
+  "129": {
+    "value": "11.8808935876459918",
+    "exact_form": "834853717316974191611773864459/70268596478725557239871963136",
+    "evidence": [
+      "E-squish-ten-packings-2026-10-07-exact-replay"
+    ]
+  },
+  "154": {
+    "value": "12.9282936576777577",
+    "exact_form": "7277982312406737/562949953421312",
+    "evidence": [
+      "E-squish-ten-packings-2026-10-07-exact-replay"
+    ]
+  },
+  "155": {
+    "value": "12.9536770693532733",
+    "exact_form": "1672234187663680786096364585719/129093397859976830657337753600",
+    "evidence": [
+      "E-squish-ten-packings-2026-10-07-exact-replay"
+    ]
+  },
+  "179": {
+    "value": "13.89534106997650",
+    "exact_form": "27790682139953/2000000000000",
+    "evidence": [
+      "E-evand-exact-ceilings-2026-10-05-exact-replay",
+      "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+  },
+  "208": {
+    "value": "14.926534459699423246906428356506",
+    "exact_form": "7463267229849711623453214178253/500000000000000000000000000000",
+    "evidence": [
+      "E-evand-exact-optima-2026-10-05-exact-replay",
+      "E-evand-exact-optima-2026-10-05-source-replay"
+    ]
+  },
+  "237": {
+    "value": "15.911191683001783031028912780176",
+    "exact_form": "994449480187611439439307048761/62500000000000000000000000000",
+    "evidence": [
+      "E-evand-exact-optima-2026-10-05-exact-replay",
+      "E-evand-exact-optima-2026-10-05-source-replay"
+    ]
+  },
+  "238": {
+    "value": "15.9294090272583145",
+    "exact_form": "8967460069924095/562949953421312",
+    "evidence": [
+      "E-squish-ten-packings-2026-10-07-exact-replay"
+    ]
+  },
+  "239": {
+    "value": "15.953819333480779915463620238818",
+    "exact_form": "7976909666740389957731810119409/500000000000000000000000000000",
+    "evidence": [
+      "E-evand-exact-optima-2026-10-05-exact-replay",
+      "E-evand-exact-optima-2026-10-05-source-replay"
+    ]
+  },
+  "258": {
+    "value": "16.57106781186548",
+    "exact_form": "414276695296637/25000000000000",
+    "evidence": [
+      "E-evand-exact-ceilings-2026-10-05-exact-replay",
+      "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+  },
+  "263": {
+    "value": "16.742270262025057683757892778345",
+    "exact_form": "3348454052405011536751578555669/200000000000000000000000000000",
+    "evidence": [
+      "E-evand-exact-optima-2026-10-05-exact-replay",
+      "E-evand-exact-optima-2026-10-05-source-replay"
+    ]
+  }
+}

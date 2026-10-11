@@ -159,6 +159,18 @@ BRANCH_LINK = re.compile(
     + r"(?:/([^\s\"'<>)?#]*))?"
 )
 
+#: First-party result reports are citations, not files in the repository's tree.
+REPORT_LINK = re.compile(
+    re.escape(REPO_URL)
+    + r"/(?:issues/[1-9][0-9]*(?:#issuecomment-[1-9][0-9]*)?"
+    + r"|discussions/[1-9][0-9]*(?:#discussioncomment-[1-9][0-9]*)?)"
+)
+
+
+def is_report_link(url: str) -> bool:
+    """Whether `url` cites a numbered issue/discussion or its numbered comment."""
+    return REPORT_LINK.fullmatch(url) is not None
+
 
 def hash_pinned_links(text: str) -> list[str]:
     """Every repository link in `text` that names a commit rather than `main`."""

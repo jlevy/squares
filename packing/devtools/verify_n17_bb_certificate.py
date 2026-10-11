@@ -1121,11 +1121,20 @@ def prepared(node: Node) -> Node:
 def check_nodes(
     verifier: Verifier, tree: Tree, chosen: set[int], *, progress: bool, clock: float
 ) -> tuple[int, int]:
-    """Pass 2: every chosen node in full, chunk by chunk, parents before children."""
+    """Pass 2: chosen nodes by chunk and ID; keep parents until their last use."""
     needed: dict[int, list[int]] = {}
     for i in chosen:
         needed.setdefault(tree.chunk_of[i], []).append(i)
     full: dict[int, Node] = {}
+    pending = set(chosen)
+    remaining = {i: sum(child in chosen for child in tree.children.get(i, [])) for i in chosen}
+
+    def retire(ident: int) -> None:
+        # A chunk can put every child before its parent's own scheduled check.
+        if ident not in pending and remaining.get(ident) == 0:
+            full.pop(ident, None)
+            remaining.pop(ident, None)
+
     checked = failed = 0
     for c in sorted(needed):
         wanted = set(needed[c])
@@ -1135,25 +1144,42 @@ def check_nodes(
         for ident in sorted(needed[c]):
             node = full[ident]
             parent = full.get(node["parent"]) if node["parent"] is not None else None
-            if node["parent"] is not None and parent is None:
-                verifier.fail(f"node {ident}: parent {node['parent']} not loaded")
-                continue
+            parent_id = node["parent"]
             try:
-                verifier.check_node(node, parent)
-            except CertificateError as exc:
-                failed += 1
-                verifier.fail(str(exc))
-            checked += 1
-            if progress and checked % 2000 == 0:
-                print(
-                    json.dumps(
-                        {"checked": checked, "seconds": round(time.perf_counter() - clock, 1)}
-                    ),
-                    flush=True,
-                )
-        for ident in list(full):
-            if full[ident]["closed"] is not None:
+                if parent_id is not None and parent is None:
+                    verifier.fail(f"node {ident}: parent {parent_id} not loaded")
+                    continue
+                try:
+                    verifier.check_node(node, parent)
+                except CertificateError as exc:
+                    failed += 1
+                    verifier.fail(str(exc))
+                checked += 1
+                if progress and checked % 2000 == 0:
+                    print(
+                        json.dumps(
+                            {
+                                "checked": checked,
+                                "seconds": round(time.perf_counter() - clock, 1),
+                            }
+                        ),
+                        flush=True,
+                    )
+            finally:
+                pending.remove(ident)
+                retire(ident)
+                if parent_id in remaining:
+                    remaining[parent_id] -= 1
+                    retire(parent_id)
+                # Eviction must also release the loop's references before the next chunk.
+                del node, parent
+        # T3 forbids children of closed nodes. Keep the existing missing-parent
+        # refusals for malformed children in later chunks, rather than admitting
+        # their inheritance merely because a selected-child count is nonzero.
+        for ident in wanted:
+            if ident in full and full[ident]["closed"] is not None:
                 del full[ident]
+                remaining.pop(ident, None)
     return checked, failed
 
 

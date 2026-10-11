@@ -21,3 +21,7 @@ interface Window {
 declare const behaviors: { override(name: string, bind: () => undefined): void };
 declare function initKpressTooltips(root: Document, options: { only: string }): void;
 declare function initKpressCodeCopy(root: Document): void;
+declare function positionTooltip(anchor: HTMLAnchorElement, tooltip: HTMLElement): void;
+declare var siteKpressTooltipPosition:
+  | ((anchor: HTMLAnchorElement, tooltip: HTMLElement) => void)
+  | undefined;

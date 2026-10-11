@@ -64,7 +64,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
-from devtools import check_published_site, render_overview, social_card
+from devtools import check_published_site, render_overview, site_urls, social_card
 
 if TYPE_CHECKING:
     from playwright.sync_api import Browser, Page, Playwright
@@ -155,6 +155,7 @@ def build_lower_bounds_explainer(output: Path) -> None:
     """The lower-bounds explainer as its `prepare` job leaves it: the page and its
     Markdown under `papers/`, and the atlas's files it shows at the site's root."""
     _run("devtools.render_n11_lower_bounds_explainer", "--prepare-math", "--site", str(output))
+    _run("devtools.render_n11_lower_bounds_explainer_pdf", "--site", str(output), "--update")
 
 
 def build_workbench(output: Path) -> None:
@@ -206,6 +207,8 @@ def build(output: Path, skip: set[str]) -> None:
     for slug in OTHER_PAPERS:
         if slug not in skip:
             build_paper(slug, output)
+    if "pages" not in skip:
+        site_urls.write_crawl_files(output)
     for old in copy_moved_files(output):
         print(f"copied {output / old}, the address a file had before it moved")
 
@@ -731,8 +734,9 @@ def screenshots(
 
 def _site_page(name: str) -> str:
     """A `--page` value: a page the site serves, with any fragment."""
-    if name.partition("#")[0] not in render_overview.SITE_PAGES:
-        served = ", ".join(render_overview.SITE_PAGES)
+    published = {row.path for row in site_urls.load_registry() if row.path.endswith(".html")}
+    if name.partition("#")[0] not in published:
+        served = ", ".join(sorted(published))
         raise argparse.ArgumentTypeError(f"{name} is not a page the site serves: {served}")
     return name
 
@@ -785,7 +789,18 @@ def main(argv: list[str] | None = None) -> int:
     for problem in moved_links(output):
         print(f"problem: a link to a page that moved: {problem}", file=sys.stderr)
         status = 1
-    for passed, line in check_published_site.local_head_checks(output):
+    producers = tuple(
+        "overview"
+        if name == "pages"
+        else "workbench"
+        if name == "workbench"
+        else f"paper:{name}"
+        for name in BUILDS
+        if name not in args.skip
+    )
+    for passed, line in check_published_site.local_site_checks(
+        output, partial=bool(args.skip), producers=producers if args.skip else ()
+    ):
         if not passed:
             print(f"problem: {line}", file=sys.stderr)
             status = 1

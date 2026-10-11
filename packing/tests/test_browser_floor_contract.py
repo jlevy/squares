@@ -358,6 +358,20 @@ DECLARED_SUPPRESSIONS = Counter(
                 "are the subject of the test."
             ),
         ): 1,
+        (
+            "packing/devtools/probes/check_site_rendering/report.js",
+            (
+                "// biome-ignore lint/nursery/useDomNodeTextContent: the gate measures "
+                "rendered readable text, excluding hidden content."
+            ),
+        ): 1,
+        (
+            "packing/devtools/probes/check_site_rendering/report.js",
+            (
+                "// biome-ignore lint/nursery/useDomNodeTextContent: a hidden heading "
+                "must not pass the reading contract."
+            ),
+        ): 1,
     }
 )
 SUPPRESSION_MARKERS = (

@@ -1,0 +1,342 @@
+{
+ "binaries": {
+  "axis": "cccecb9ab1ca0ecd88b0994c04ebf7965cf0982b7e400966702da6f7e893265c",
+  "pose": "69bc9e6485102d3636db5377884ba6304f749be94d6ca913d82d80108f1ed4ab",
+  "rounding": "81f15ab01acc6b83da063f0bc824cdf75452611467437e12b0a04f0bdb08be37"
+ },
+ "checks": [
+  {
+   "detail": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+   "held": true,
+   "name": "builds: the release's flags, exit 0"
+  },
+  {
+   "detail": "pose 69bc9e6485102d3636db5377884ba6304f749be94d6ca913d82d80108f1ed4ab, axis cccecb9ab1ca0ecd88b0994c04ebf7965cf0982b7e400966702da6f7e893265c",
+   "held": true,
+   "name": "builds: the CI run's binaries, on its compiler"
+  },
+  {
+   "detail": "AXIS_COVERAGE_PROVED, 0.298 s",
+   "held": true,
+   "name": "axis run: exit 0"
+  },
+  {
+   "detail": "minimum 999803584931237207459144828",
+   "held": true,
+   "name": "axis run: every field equals the local receipt's"
+  },
+  {
+   "detail": "minimum 999803584931237207459144828",
+   "held": true,
+   "name": "axis run: every field equals the ci receipt's"
+  },
+  {
+   "detail": "43 runs",
+   "held": true,
+   "name": "slabs: 43 runs with the contract's arguments"
+  },
+  {
+   "detail": "43 of 43",
+   "held": true,
+   "name": "slabs: every one verified, exit 0"
+  },
+  {
+   "detail": "each slab",
+   "held": true,
+   "name": "slabs: every cover closes, nodes = 2 leaves - 1"
+  },
+  {
+   "detail": "61860927 nodes, 30930485 leaves, 14096668 angle splits",
+   "held": true,
+   "name": "slabs: the totals"
+  },
+  {
+   "detail": "2251349454150741/2251799813685248 = 0.9998000001901723 at slab 1",
+   "held": true,
+   "name": "slabs: the least leaf bound"
+  },
+  {
+   "detail": "43 of 43",
+   "held": true,
+   "name": "slabs: every non-timing field equals the local receipt's"
+  },
+  {
+   "detail": "43 of 43",
+   "held": true,
+   "name": "slabs: every non-timing field equals the ci receipt's"
+  },
+  {
+   "detail": "exit 3, unresolved, 83 nodes",
+   "held": true,
+   "name": "control A-synthetic-negative"
+  },
+  {
+   "detail": "exit 0, verified, 117 nodes",
+   "held": true,
+   "name": "control A-synthetic-positive"
+  },
+  {
+   "detail": "exit 3, unresolved, 1 nodes",
+   "held": true,
+   "name": "control A-limited-budget"
+  },
+  {
+   "detail": "exit 3, unresolved, 92 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control B-uniform-1-500"
+  },
+  {
+   "detail": "exit 3, unresolved, 87 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control B-uniform-100000-110000"
+  },
+  {
+   "detail": "exit 3, unresolved, 89 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control B-uniform-410000-415000"
+  },
+  {
+   "detail": "exit 3, unresolved, 129966 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-1-500-h2000"
+  },
+  {
+   "detail": "exit 3, unresolved, 9946 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-1-500-h2000"
+  },
+  {
+   "detail": "exit 3, unresolved, 408261 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-1-500-h10000"
+  },
+  {
+   "detail": "exit 3, unresolved, 26486 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-1-500-h10000"
+  },
+  {
+   "detail": "exit 3, unresolved, 2437 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-500-10000-h100"
+  },
+  {
+   "detail": "exit 3, unresolved, 868 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-500-10000-h100"
+  },
+  {
+   "detail": "exit 3, unresolved, 18674 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-500-10000-h1000"
+  },
+  {
+   "detail": "exit 3, unresolved, 6987 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-500-10000-h1000"
+  },
+  {
+   "detail": "exit 3, unresolved, 827 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-10000-20000-h50"
+  },
+  {
+   "detail": "exit 3, unresolved, 691 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-10000-20000-h50"
+  },
+  {
+   "detail": "exit 3, unresolved, 141984 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-200000-210000-h20"
+  },
+  {
+   "detail": "exit 3, unresolved, 141874 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-200000-210000-h20"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500000 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-410000-415000-h20"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500000 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-410000-415000-h20"
+  },
+  {
+   "detail": "exit 0, verified, 141067 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-1-500-h2000"
+  },
+  {
+   "detail": "exit 0, verified, 40959 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-1-500-h2000"
+  },
+  {
+   "detail": "exit 0, verified, 251829 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-1-500-h10000"
+  },
+  {
+   "detail": "exit 0, verified, 116067 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-1-500-h10000"
+  },
+  {
+   "detail": "exit 0, verified, 4781 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-500-10000-h100"
+  },
+  {
+   "detail": "exit 0, verified, 2565 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-500-10000-h100"
+  },
+  {
+   "detail": "exit 0, verified, 45351 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-500-10000-h1000"
+  },
+  {
+   "detail": "exit 0, verified, 33441 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-500-10000-h1000"
+  },
+  {
+   "detail": "exit 0, verified, 1609 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-10000-20000-h50"
+  },
+  {
+   "detail": "exit 0, verified, 1723 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-10000-20000-h50"
+  },
+  {
+   "detail": "exit 0, verified, 26113 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-200000-210000-h20"
+  },
+  {
+   "detail": "exit 0, verified, 27113 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-200000-210000-h20"
+  },
+  {
+   "detail": "exit 0, verified, 18887 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-410000-415000-h20"
+  },
+  {
+   "detail": "exit 0, verified, 18703 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-410000-415000-h20"
+  },
+  {
+   "detail": "exit 3, unresolved, 29504 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control D-gap-1-500"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500001 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control D-gap-500-10000"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500000 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control D-gap-100000-110000"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500000 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control D-gap-300000-310000"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500000 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control D-gap-400000-410000"
+  },
+  {
+   "detail": "exit 0, verified, 140859 nodes, least capture 1.00013562466",
+   "held": true,
+   "name": "control E-gap-400000-410000"
+  },
+  {
+   "detail": "exit 0",
+   "held": true,
+   "name": "control F-ieee-neighbors"
+  },
+  {
+   "detail": "exit -6",
+   "held": true,
+   "name": "control F-wrong-rounding"
+  },
+  {
+   "detail": "exit -6",
+   "held": true,
+   "name": "control F-ftz"
+  },
+  {
+   "detail": "exit 1",
+   "held": true,
+   "name": "control F-reject-ndebug"
+  },
+  {
+   "detail": "exit 1",
+   "held": true,
+   "name": "control F-reject-fastmath"
+  },
+  {
+   "detail": "tau 1/2: exit 0, AXIS_COVERAGE_PROVED",
+   "held": true,
+   "name": "control H-tau-1-2"
+  },
+  {
+   "detail": "tau 249951/250000: exit 2, AXIS_TEST_REFUSED",
+   "held": true,
+   "name": "control H-tau-999804"
+  },
+  {
+   "detail": "tau 999803/1000000: exit 0, AXIS_COVERAGE_PROVED",
+   "held": true,
+   "name": "control H-tau-999803"
+  },
+  {
+   "detail": "exit 0",
+   "held": true,
+   "name": "control G-release-unchanged: exact.py's scalar block is the receipts'"
+  },
+  {
+   "detail": "exit 4, NEAR_AXIS_CONTAINMENT",
+   "held": true,
+   "name": "control G-release-axis-side: exact.py refuses NEAR_AXIS_CONTAINMENT"
+  },
+  {
+   "detail": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88 (910b6b12c)",
+   "held": true,
+   "name": "crate: reviewed source for a declared net, the binary embeds it"
+  },
+  {
+   "detail": "verified, 4897369 vertices, least 1.0000037044548487 at ['2103865688632621/500000000000000', '12402357/2000000']",
+   "held": true,
+   "name": "crate: the axis at side A by the exact vertex sweep"
+  },
+  {
+   "detail": "VERIFIED, 401 directions, 32763798 boxes, least 1.000000000357051 at r = 289",
+   "held": true,
+   "name": "crate: the 401-direction necessary condition at side B"
+  }
+ ],
+ "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "crate_binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+ "kind": "continuous-pose-replay-check/v1",
+ "slab_cpu_seconds": 1854.9,
+ "slab_first_start_utc": "2026-10-10T17:40:16+00:00",
+ "slab_stage_wall_seconds": 1363,
+ "slab_wall_seconds_sum": 2726.7,
+ "status": "REPLAY_HOLDS"
+}

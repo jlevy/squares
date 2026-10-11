@@ -1142,9 +1142,13 @@ def check(  # noqa: C901 - a flat list of record invariants, each a few lines; s
                             "finalization reserve"
                         )
                     if clock_role == "finalization":
-                        if index != len(phases) - 1:
+                        if any(
+                            later.get("clock_role") != "finalization"
+                            for later in phases[index + 1 :]
+                        ):
                             problems.append(
-                                f"{name}: finalization workflow phase {number} must be final"
+                                f"{name}: finalization workflow phase {number} must be in "
+                                "a contiguous finalization tail"
                             )
                         if (
                             reserve_start is not None

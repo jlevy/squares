@@ -1,0 +1,44 @@
+"""Orchestrate only the frozen registered exp283 command arrays."""
+import datetime
+import json
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+from sqpack import retained_json
+
+root = Path('campaign/series/series-000-smoke-and-calibration/results/exp-283-parent-guard-owned-hull')
+plan = json.loads((root / 'execution-manifest.json').read_text())
+started = time.monotonic()
+manifest = {'schema': 'n17-registered-two-phase-execution/v1', 'started_at': datetime.datetime.now(datetime.UTC).isoformat(), 'phase_runs': []}
+
+def save():
+    manifest['wall_seconds'] = time.monotonic() - started
+    (root / 'phase-execution.json').write_text(retained_json.dumps(manifest) + '\n')
+
+def phase(name, argv):
+    before = time.monotonic()
+    run = subprocess.run(argv, check=False)
+    manifest['phase_runs'].append({'phase': name, 'argv': argv, 'returncode': run.returncode, 'wall_seconds': time.monotonic() - before})
+    save()
+    return run.returncode
+
+save()
+code = phase('production', plan['production'])
+if code:
+    sys.exit(code)
+receipt = retained_json.loads((root / 'production.json').read_text())
+if receipt.get('status') not in ('production_stall_candidate', 'production_closed_candidate'):
+    raise ValueError('production not a complete candidate')
+child = dict(receipt['child_object'])
+expected = str(root / 'conditional-node.json.gz')
+if child['path'] != expected:
+    raise ValueError('child path differs from frozen argv')
+child['path'] = 'packing/' + child['path']
+base = json.loads((root / 'descriptor.json').read_text())
+if 'child_object' in base:
+    raise ValueError('base descriptor already contains child')
+base['child_object'] = child
+(root / 'fresh-descriptor.json').write_text(json.dumps(base, indent=2) + '\n')
+sys.exit(phase('fresh_verification', plan['fresh_verification']))

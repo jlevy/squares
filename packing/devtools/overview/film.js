@@ -12,6 +12,37 @@
 // control. A film that cannot be fetched keeps its poster and controls too, as the
 // browser leaves any film it cannot load.
 (() => {
+  // The picture is a keyboard-accessible play target; native controls remain below it.
+  for (const video of document.querySelectorAll(".site-film-frame video")) {
+    if (!(video instanceof HTMLVideoElement) || !video.parentElement) {
+      continue;
+    }
+    const picture = document.createElement("div");
+    picture.className = "site-film-picture";
+    video.before(picture);
+    picture.append(video);
+    const play = document.createElement("button");
+    play.type = "button";
+    play.className = "site-film-play";
+    play.setAttribute("aria-label", "Play video");
+    const icon = document.createElement("span");
+    icon.className = "site-film-play-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = "▶";
+    play.append(icon);
+    picture.append(play);
+    const sync = () => {
+      play.hidden = !video.paused && !video.ended;
+    };
+    play.addEventListener("click", () => {
+      play.hidden = true;
+      video.play().then(sync).catch(sync);
+    });
+    for (const event of ["play", "pause", "ended", "error"]) {
+      video.addEventListener(event, sync);
+    }
+    sync();
+  }
   const film = document.querySelector("video[data-autoplay]");
   if (!(film instanceof HTMLVideoElement)) {
     return;

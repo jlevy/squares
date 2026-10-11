@@ -13,8 +13,8 @@ has three since 2026-10-05, and they are not samples of one population:
   not rectangles, and that is the point: a grid *subset* is a rectangle only when `n`
   happens to factor conveniently, so most of them are the very `other-polyomino` shape the
   grammar cannot express. The largest part of the residue is trivial geometry, not exotic.
-- `kingbird-derived-facts` (35 records) is the real packings, and it is where every tilted
-  component lives.
+- `kingbird-derived-facts` (30 records) contains catalogue packings. The packet stratum
+  now also contains tilted components from the exact radical n51 strip.
 - `unitsquare-rendering` (no record since 2026-10-05) was `n = 69`, whose witness geometry
   the escape screen also excluded. Every one of its 69 squares was a singleton, and a large
   share of those singletons tilted -- not "unstructured because it is a grid" but
@@ -22,10 +22,10 @@ has three since 2026-10-05, and they are not samples of one population:
   rendering's own imprecision explains. `n = 68` left it on 2026-09-29, and `n = 69` on
   2026-10-05 for the catalogue's packing (T-088), whose two corner blocks join the
   catalogue's others.
-- `packet-derived-facts` (1 record) is `n = 68`, Francisco Couzo's packing from his
-  source packet since 2026-09-29. It has chains and bars like the catalogue's packings,
-  and one axis-aligned five-square block against a single wall, the only residue
-  component outside the grid-subset and corner-block populations.
+- `packet-derived-facts` (6 records) includes Couzo's n68, the second SQUISH update
+  at n88, and the new ry-xu packings at51,70,84,86. Couzo's five-square block seats
+  against one wall. The undilated radical n51 has two tilted interior polyomino
+  components, so the earlier grid-subset and corner-block description is historical.
 
 **No verdict is emitted and none is available.** This is descriptive: it reports what the
 retained census contains, stratified, with the residue characterized. `H-044` is untouched,

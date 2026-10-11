@@ -1,0 +1,104 @@
+{
+  "schema": "n17-numeric-checkpoint-custody-summary/v1",
+  "source": {
+    "revision": "491782972beb9edb548e0bd262d0f06a1b46bef6",
+    "dirty": false,
+    "files": {
+      "packing/devtools/check_n17_capture_checkpoint.py": "3a2b3ab60de60114323e5f12f69708370d51d1a7",
+      "packing/devtools/audit_n17_endpoint_receipt.py": "e011510a6efc986d13e939fdd44f57fe4bf0572b",
+      "packing/src/sqpack/hull_kernel/__init__.py": "21b43f54fbdd95e2c48a10435edb38891f56074b",
+      "packing/src/sqpack/hull_kernel/collision.py": "e01a610c1862b411f092abdcbd942ea1aad415c1",
+      "packing/src/sqpack/hull_kernel/counting.py": "3cd1b1ae5d75a007e235db34823fcd2004ded855",
+      "packing/src/sqpack/hull_kernel/covers.py": "8f8ef29fda05750f31d7cefa7e2125bb8f32a581",
+      "packing/src/sqpack/hull_kernel/frame.py": "1117fec009404ff9d4ffc1cd4f1752e1467e006b",
+      "packing/src/sqpack/hull_kernel/geometry.py": "8c60af724c1940f2dceef8b2ca7fd7f96ca46384",
+      "packing/src/sqpack/hull_kernel/induction.py": "a847b9ab1d11dd85f1fbe606afb1dc247af4a2a6",
+      "packing/src/sqpack/hull_kernel/n11.py": "df3aba0a17ddc31fac1f771a0d9d9eb950a5c754",
+      "packing/src/sqpack/hull_kernel/n17.py": "683e9361b54bb003283103fe6b716828fa13d71a",
+      "packing/src/sqpack/hull_kernel/node.py": "a8df7478b3e38a7bc8d93aa482d65a7c4c04eaff",
+      "packing/src/sqpack/hull_kernel/ownership.py": "3a4c135e81014aa64750cd5ac05984bf89c0cab5",
+      "packing/src/sqpack/hull_kernel/producer.py": "b1936977c0775ab25023e8595b6de7a649d0de5c",
+      "packing/src/sqpack/hull_kernel/rational.py": "c1143fb28e65efdb0f513d2b8d2cb50c33d97c6b",
+      "packing/src/sqpack/hull_kernel/sequential.py": "ac5e74cae444f6486e5f2f40f9c7579e4b1c9a6f",
+      "packing/src/sqpack/hull_kernel/sweep.py": "0f976d2b774d4a6e2252128571bce6435d0e5b77",
+      "packing/devtools/check_n17_capture_cap.py": "04eef27093b63d8d52f853291a018fd0ffa7849f",
+      "packing/devtools/check_n17_capture_leaf.py": "3f802b56c875ebcc5f3794c9bda2af3d9af2918c",
+      "packing/devtools/check_n17_endpoint_prefix.py": "c004b1c908ede918ce833fcad5a3e5555c7740dd",
+      "packing/devtools/pilot_n17_capture.py": "505c01541ac72138615b660983fe3b2d03f3cf9b"
+    }
+  },
+  "receipt_file": "receipt.json",
+  "receipt_bytes": 451199,
+  "readiness_passed": true,
+  "verification_passed": true,
+  "status": "unresolved",
+  "predicates": {
+    "local_terminal": false,
+    "wide_domain": false,
+    "apex_terminal": false,
+    "patch_exclusion": false
+  },
+  "interval_count": 49,
+  "all17_endpoint_retained": true,
+  "root_cap_scope": "fresh accepted root/cap and original Frame join",
+  "parent_saved_replay": {
+    "status": "PASS_SAVED_STALL",
+    "mask": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      18,
+      20,
+      21
+    ],
+    "steps_checked": 16,
+    "actual_seed_rows_checked": 544,
+    "seed_sha256": "375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d",
+    "node_sha256": "687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82",
+    "compressed_object_sha256": {
+      "packing/campaign/retained/session-184-n17-numeric-cap-readiness/seed-375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d.json.gz": "d10a38b312375a21e7aec2ef77726eaa9ae3ea9d8381de9d3e979921877005f4",
+      "packing/campaign/retained/session-184-n17-numeric-cap-readiness/node-687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82.json.gz": "f2a11e787dc62ae2652734d01c4fbe90fcfc3e85d66aa52b74fd8ff52a02e2f2"
+    },
+    "closure": null,
+    "producer_imported": true
+  },
+  "fresh_saved_replay": {
+    "status": "PASS_SAVED_STALL",
+    "steps_checked": 16,
+    "actual_seed_rows_checked": 544,
+    "producer_imported": false,
+    "closure": null
+  },
+  "supervision": {
+    "status": "COMPLETED",
+    "returncode": 0,
+    "wall_seconds": 164.50578229199164,
+    "cleanup_complete": true,
+    "maximum_sampled_current_rss_bytes_by_pid": {
+      "59209": 659456000,
+      "59981": 465043456
+    },
+    "rss_source": "/bin/ps RSS KiB; current resident bytes, not lifetime peak"
+  },
+  "parent_elapsed_seconds": 163.2930927919806,
+  "fresh_elapsed_seconds": 63.15737649996299,
+  "review": "Astra mathematical read and independent Sol metadata acceptance clear; no new solve",
+  "proof_scope": {
+    "producer_run": false,
+    "exclusion_proved": false,
+    "census_admission_proved": false,
+    "capture_tree_proved": false,
+    "global_admission_proved": false
+  }
+}

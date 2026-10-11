@@ -18,6 +18,11 @@ Each is introduced where it is first needed, and [§12](#12-further-reading) say
 to learn it properly.
 [§11](#11-a-notation-card) collects every symbol on one page.
 
+For the methods that produced record packings, see
+[How Record Square Packings Are Found](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html),
+which connects geometric construction, annealing, surgery, and local refinement to the
+published packing histories.
+
 ## Contents
 
 1. [The Problem](#1-the-problem)
@@ -92,7 +97,7 @@ its search strategy.
 |  | value | status |
 | --- | --- | --- |
 | best-known packing (upper bound) | $3.8770835\ldots$ | Trump 1979, a construction |
-| verified lower bound | $3.8770835\ldots$, Trump’s side exactly | Queuingtheorydotcom 2026, Astra-assisted and building on this project and Kleddamag; machine-checked here and reviewed, review record pending ([T-060](packing/frontier/RESULTS.md), `V3/C3`) |
+| verified lower bound | $3.8770835\ldots$, Trump’s side exactly | Ahmed 2026, Astra-assisted and building on this project and Kleddamag; machine-checked here and reviewed, review record pending ([T-060](packing/frontier/RESULTS.md), `V3/C3`) |
 | earlier verified lower bound | $31/8 = 3.875$, strict | Kleddamag 2026, [developed from T-026’s certificate](packing/frontier/RESULTS.md) and confirmed here by two complete coverage methods (T-037); superseded by T-060 |
 | strongest first-party lower bound | $3.8269975\ldots$ | T-033, T-026’s atoms on a finer net; the point-only T-018 proof is explained [below](#how-a-weighted-atomic-lower-bound-proof-works) |
 | gap between the verified bounds | $0$ | settled: $s(11)$ is Trump’s side |
@@ -136,7 +141,7 @@ labels describe the retained evidence and confirmation; the mathematical claim i
 proved lower bound above.
 
 The detailed lesson below starts with the simpler point-only T-018 certificate;
-[the standalone v0.4.4 explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html#proof-of-the-new-lower-bound)
+[the standalone v0.4.5 explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html#proof-of-the-new-lower-bound)
 uses it as a visual worked example, then gives the threshold-counting and dilation proof
 of T-025 and T-026. The numerical $3.81$ result is not a premise of T-026. Keeping the
 T-018 proof in full also gives readers an assurance bridge: its short standard-library
@@ -1322,7 +1327,7 @@ the same distinctions.
 | Trump’s 1979 packing is valid, over $\mathbb{Q}(u)$ of degree 8, with 14 pairs at exactly zero separation | verified (`exact-algebraic`); a published construction, confirmed here | Nothing about optimality; it is an upper bound |
 | [`s(11) ≥ 2 + 4/√5`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | verified (`exact-algebraic`) | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
 | [T-025](packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md) proves $s(11) \ge 191/50 = 3.82$; [T-026](packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md) proves $s(11) \ge 3.8264474\ldots$ | Both are `V3/C3`: machine-checked exact and interval-certified evidence with passing replay, distinct exact event-cell and interval coverage decisions, and mapped non-superseded reviews; the human oversight record rung 4 needs is pending | Neither result determines $s(11)$ or closes the gap to the best-known packing; `V5` or external review would be a separate assurance step |
-| [T-060](packing/frontier/RESULTS.md): Trump’s packing is optimal, so $s(11) = 3.8770835\ldots$, his side exactly | `V3/C3`: machine-checked here and reviewed, review record pending. Queuingtheorydotcom’s proof, Astra-assisted and building on this project and Kleddamag; a published result confirmed here | It does not assert that the optimal packing is unique, and it is not formal. The checks here share arithmetic and construction primitives with the source, so they are not a fully independent implementation |
+| [T-060](packing/frontier/RESULTS.md): Trump’s packing is optimal, so $s(11) = 3.8770835\ldots$, his side exactly | `V3/C3`: machine-checked here and reviewed, review record pending. Ahmed’s proof, Astra-assisted and building on this project and Kleddamag; a published result confirmed here | It does not assert that the optimal packing is unique, and it is not formal. The checks here share arithmetic and construction primitives with the source, so they are not a fully independent implementation |
 | [Stromquist’s *printed* 2003 argument fails](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side $10001/10000$ fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies. Both this falsification and the adjacent repair are this project’s findings |
 | [Trump’s pose is locally isolated at fixed side](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Consequently, it is a strict local minimum of side in the anchored pose–side chart, modulo finite symmetries. This is not global optimality or an explicit isolation radius. Apparently novel here, not externally peer-reviewed |
 | The one-dimensional class-angle optimum is a corner, with signed one-sided derivatives of about $-0.1747$ and $+0.384$ per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails. This project’s measurement |
@@ -1903,8 +1908,8 @@ occupancy states up to the container’s symmetries, and the lemma is why the co
 the state count divided by the group’s order.
 
 **Branch and bound with certified pruning** ([§9](#9-how-an-optimality-proof-is-built)).
-Neumaier’s survey *Complete search in continuous global optimization and constraint
-satisfaction* for the general method, and Farkas’s lemma in any linear programming text
+Neumaier’s survey *Complete Search in Continuous Global Optimization and Constraint
+Satisfaction* for the general method, and Farkas’s lemma in any linear programming text
 for why a nonnegative combination of valid rows that stays positive proves a box empty.
 The interval sources above supply the outward rounding.
 
@@ -1917,7 +1922,7 @@ Trump’s 1979 packing is documented there and by this directory’s exact certi
 records, while the original 1979 communication is not, and Bidwell’s 1998 record
 likewise has no retained first-party document:
 
-- Stromquist (2003), *Packing 10 or 11 unit squares in a square*—the $s(10)$ proof, the
+- Stromquist (2003), *Packing 10 or 11 Unit Squares in a Square*—the $s(10)$ proof, the
   $s(11)$ lower-bound value, and the $0^{\circ}$/`45°` class bound
 - Trump (1979), the $n = 11$ construction that is still the standing upper bound
 - Friedman, *Packing Unit Squares in Squares: A Survey and New Results* (DS7)—the survey
@@ -1965,7 +1970,8 @@ An optional system is used only to rederive one constant.
 | what has gone wrong and what now stops it recurring | [`defects.md`](defects.md) |
 | the mathematics of $s(11)$ in depth | [Packing 11 Unit Squares](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) |
 | the whole $n = 11$ story before T-060, from what a proof must do to what was left | [`n = 11`, End to End](SYNOPSIS.md#n--11-end-to-end) |
-| how packings are found, refined and verified | [Algorithms and Tooling](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) |
+| how record packings are constructed, searched, refined and certified | [How Record Square Packings Are Found](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) |
+| implementation methods and solver tooling | [Algorithms and Tooling](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) |
 | why pointing should beat scaling | [A Search Philosophy](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) |
 | what is known for every $n \le 324$ | [`frontier/`](packing/frontier/README.md) |
 

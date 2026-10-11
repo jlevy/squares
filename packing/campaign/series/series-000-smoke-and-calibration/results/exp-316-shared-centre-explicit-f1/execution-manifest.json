@@ -1,0 +1,110 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "hypothesis": "H-324",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Users/levy/wrk/github/squares/packing/.venv/bin/python",
+        "-m",
+        "devtools.n17_shared_centre_lp",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/descriptor.json",
+        "--witness",
+        "../packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/portable-witness.yaml",
+        "--witness-sha256",
+        "05b8041e44d0c5dc5977cf06caed292de45e57a9ddce507ff25152b66b3125a6",
+        "--frame-action",
+        "f1",
+        "--max-seconds",
+        "120",
+        "--max-operations",
+        "2000000",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Users/levy/wrk/github/squares/packing/.venv/bin/python",
+        "-m",
+        "devtools.n17_shared_centre_lp",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/descriptor.json",
+        "--witness",
+        "../packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/portable-witness.yaml",
+        "--witness-sha256",
+        "05b8041e44d0c5dc5977cf06caed292de45e57a9ddce507ff25152b66b3125a6",
+        "--frame-action",
+        "f1",
+        "--max-seconds",
+        "120",
+        "--max-operations",
+        "2000000",
+        "--check",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Users/levy/wrk/github/squares/packing/.venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Users/levy/wrk/github/squares/packing/.venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "240",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/stderr.log",
+    "--",
+    "/Users/levy/wrk/github/squares/packing/.venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/phase-execution.json"
+  ],
+  "resources": {
+    "construction_cooperative_seconds": 120,
+    "fresh_cooperative_seconds": 120,
+    "combined_term_signal_seconds": 240,
+    "combined_kill_signal_seconds": 250,
+    "sampled_memory_mib_per_live_process": 4096,
+    "inter_sample_sleep_seconds": 0.25,
+    "ps_sample_ceiling_seconds": 1,
+    "workers": 1,
+    "packet_bytes": 8388608,
+    "new_operations_per_phase": 2000000,
+    "reduced_fraction_bits": 4096
+  },
+  "witness": {
+    "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/portable-witness.yaml",
+    "bytes": 32248,
+    "sha256": "05b8041e44d0c5dc5977cf06caed292de45e57a9ddce507ff25152b66b3125a6"
+  },
+  "prepared_at": "2026-10-08T20:39:10.650129+00:00",
+  "source_freeze": "actual Git provenance recorded at launch; no verdict bound to commit/digest",
+  "registered_at": "2026-10-08T20:39:10.650129+00:00"
+}

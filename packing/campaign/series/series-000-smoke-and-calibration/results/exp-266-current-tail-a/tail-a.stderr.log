@@ -1,0 +1,30 @@
+{"round": 0, "step": 0, "owner": "corner-SW", "live_rows": 64, "owned_hull_vertices": 12, "rows": 64, "seconds": 2.6}
+{"round": 0, "step": 1, "owner": "corner-SE", "live_rows": 64, "owned_hull_vertices": 12, "rows": 64, "seconds": 4.5}
+{"round": 0, "step": 2, "owner": "corner-NW", "live_rows": 64, "owned_hull_vertices": 12, "rows": 64, "seconds": 6.0}
+{"round": 0, "step": 3, "owner": "side-S0", "live_rows": 64, "owned_hull_vertices": 0, "rows": 64, "seconds": 8.6}
+{"round": 0, "step": 4, "owner": "side-N0", "live_rows": 64, "owned_hull_vertices": 0, "rows": 64, "seconds": 11.2}
+{"round": 0, "step": 5, "owner": "side-W0", "live_rows": 64, "owned_hull_vertices": 0, "rows": 64, "seconds": 14.7}
+{"round": 0, "step": 6, "owner": "side-E0", "live_rows": 64, "owned_hull_vertices": 0, "rows": 64, "seconds": 18.0}
+{"round": 0, "step": 7, "owner": "side-N1", "live_rows": 64, "owned_hull_vertices": 0, "rows": 64, "seconds": 21.0}
+{"round": 0, "step": 8, "owner": "side-W1", "live_rows": 64, "owned_hull_vertices": 7, "rows": 64, "seconds": 25.1}
+{"round": 0, "step": 9, "owner": "side-E1", "live_rows": 64, "owned_hull_vertices": 0, "rows": 64, "seconds": 29.2}
+{"round": 0, "step": 10, "owner": "side-S2", "live_rows": 64, "owned_hull_vertices": 0, "rows": 64, "seconds": 31.8}
+{"round": 0, "step": 11, "owner": "side-N2", "live_rows": 64, "owned_hull_vertices": 0, "rows": 64, "seconds": 33.9}
+{"round": 0, "step": 12, "owner": "interior-SW", "live_rows": 49, "owned_hull_vertices": 11, "rows": 64, "seconds": 38.2}
+{"round": 0, "step": 13, "owner": "interior-NW", "live_rows": 64, "owned_hull_vertices": 16, "rows": 64, "seconds": 42.2}
+{"round": 0, "step": 14, "owner": "interior-W", "live_rows": 41, "owned_hull_vertices": 16, "rows": 64, "seconds": 47.0}
+{"round": 0, "step": 15, "owner": "interior-S", "live_rows": 64, "owned_hull_vertices": 16, "rows": 64, "seconds": 50.8}
+{"round": 0, "step": 16, "owner": "interior-E", "live_rows": 24, "owned_hull_vertices": 16, "rows": 64, "seconds": 54.7}
+{"round": 1, "step": 17, "owner": "corner-SW", "live_rows": 64, "owned_hull_vertices": 16, "rows": 64, "seconds": 58.1}
+{"round": 1, "step": 18, "owner": "corner-SE", "live_rows": 64, "owned_hull_vertices": 16, "rows": 64, "seconds": 62.9}
+{"round": 1, "step": 19, "owner": "corner-NW", "live_rows": 64, "owned_hull_vertices": 10, "rows": 64, "seconds": 66.1}
+{"round": 1, "step": 20, "owner": "side-S0", "live_rows": 64, "owned_hull_vertices": 16, "rows": 64, "seconds": 70.0}
+{"round": 1, "step": 21, "owner": "side-N0", "live_rows": 64, "owned_hull_vertices": 16, "rows": 64, "seconds": 76.5}
+{"round": 1, "step": 22, "owner": "side-W0", "live_rows": 64, "owned_hull_vertices": 16, "rows": 64, "seconds": 80.4}
+{"round": 1, "step": 23, "owner": "side-E0", "live_rows": 64, "owned_hull_vertices": 16, "rows": 64, "seconds": 87.1}
+{"round": 1, "step": 24, "owner": "side-N1", "live_rows": 64, "owned_hull_vertices": 12, "rows": 64, "seconds": 93.9}
+{"round": 1, "step": 25, "owner": "side-W1", "live_rows": 64, "owned_hull_vertices": 16, "rows": 64, "seconds": 101.1}
+{"round": 1, "step": 26, "owner": "side-E1", "live_rows": 0, "owned_hull_vertices": 0, "rows": 64, "seconds": 111.5}
+real 223.20
+user 220.13
+sys 1.32

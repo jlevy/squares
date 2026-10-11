@@ -46,7 +46,8 @@ MODULE = "devtools.measure_release_assets"
 
 #: The composite family: what a re-stamp rewrites. Repository-relative, as git names it.
 COMPOSITE_FAMILY = re.compile(
-    r"packing/atlas/known-best/known-best-1-\d+[^/]*\.(svg|png|pdf)\Z"
+    r"packing/atlas/known-best/(?:known-best-1-\d+[^/]*\.(?:svg|png|pdf)"
+    r"|square-packings-\d+-\d{8}\.pdf)\Z"
 )
 #: The one text node a re-stamp is meant to change, whatever it says.
 STAMP_NODE = re.compile(r'(<text\b[^>]*data-feature="release-stamp"[^>]*>)[^<]*(</text>)')
@@ -119,7 +120,7 @@ def _atlas_rasters() -> None:
     """Every PNG of both composites, drawn from the retained SVG and dropped."""
     from devtools import build_known_best_atlas as atlas  # noqa: PLC0415
 
-    for canvas in atlas.COMPOSITES:
+    for canvas in atlas.resolved_composites():
         svg_text = canvas.svg_path.read_text(encoding="utf-8")
         for export in canvas.rasters:
             start = time.perf_counter()
@@ -138,7 +139,7 @@ def _atlas_pdfs() -> None:
         start = time.perf_counter()
         drawn = render_composite_pdf.render_pdf_bytes(canvas.spec.stem)
         print(
-            f"{canvas.spec.stem}.pdf: {len(drawn):,} bytes, {time.perf_counter() - start:.2f}s"
+            f"{canvas.spec.pdf_name}: {len(drawn):,} bytes, {time.perf_counter() - start:.2f}s"
         )
 
 

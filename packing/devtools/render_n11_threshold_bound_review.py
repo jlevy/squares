@@ -51,6 +51,8 @@ from devtools.render_n11_optimality_review import (
 )
 from devtools.render_overview import (
     EMBED_SCRIPT,
+    HEADROOM_SCRIPT,
+    KPRESS_CLIENT_FRAME,
     MATH_SCRIPT,
     N11_THRESHOLD_BOUND_REVIEW,
     PAPER_TYPE_CSS,
@@ -59,10 +61,12 @@ from devtools.render_overview import (
     SITE_NAV_CSS,
     SITE_URL,
     THEME_SCRIPT,
+    TOOLTIP_SCRIPT,
     PageMeta,
     colophon_lines,
     favicon_html,
     head_tags,
+    kpress_client_script,
     nav_html,
     paper_path,
 )
@@ -114,12 +118,15 @@ FRONT = paper_front.check(
         slug=SLUG,
         title=HERO_TITLE,
         source=paper_front.Source(
-            "Kleddamag", "https://github.com/Kleddamag/11-squares-certified-bound"
+            "Kleddamag",
+            "https://github.com/Kleddamag/11-squares-certified-bound",
+            author_url="https://x.com/kleddamag",
         ),
         oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
         agents=("Fable 5.1", "Opus 5.5"),
         version=THRESHOLD_REVIEW_EDITION,
         dates=(
+            paper_front.Dated("First published", THRESHOLD_REVIEW_HISTORY[-1].first_published),
             paper_front.Dated("Original proof", THRESHOLD_PROOF_PUBLISHED),
             paper_front.Dated(paper_front.REVISED, THRESHOLD_REVIEW_REVISED),
         ),
@@ -271,6 +278,11 @@ RENDER_INPUTS = tuple(
     dict.fromkeys(
         (
             Path(__file__),
+            PACKING / "devtools/site_assets.py",
+            PACKING / "devtools/probes/site_assets/preload_fonts.js",
+            PACKING / "devtools/site_math.py",
+            PACKING / "devtools/node/render-site-math.mjs",
+            PACKING / "devtools/templates/site-math.css",
             ARTICLE,
             SHELL,
             STYLE,
@@ -293,6 +305,9 @@ RENDER_INPUTS = tuple(
             SITE_NAV,
             SITE_NAV_CSS,
             THEME_SCRIPT,
+            HEADROOM_SCRIPT,
+            KPRESS_CLIENT_FRAME,
+            TOOLTIP_SCRIPT,
             EMBED_SCRIPT,
             MATH_SCRIPT,
             render_n11_lower_bounds_explainer.INLINE_SCRIPT_ASSETS["NATIVE_MATH_METRICS"],
@@ -325,10 +340,7 @@ RENDER_INPUTS = tuple(
 def version_history_markdown() -> str:
     """The paper's own editions, newest first, each with the day it was first published
     and what changed in the paper: `sqpack.release.THRESHOLD_REVIEW_HISTORY`."""
-    return "\n".join(
-        f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}"
-        for entry in THRESHOLD_REVIEW_HISTORY
-    )
+    return paper_front.version_history_markdown(THRESHOLD_REVIEW_HISTORY)
 
 
 def render_all_figures() -> dict[str, str]:
@@ -480,15 +492,20 @@ def expanded_markdown(
 
 
 def page_meta() -> PageMeta:
-    """What the page says of itself in its head (`render_overview.head_tags`): its title,
-    its sentence, the address it is served at, and the day its front says it was last
-    revised. It states no first publication, as Part III does not."""
+    """Use the paper's credits and edition history for publication metadata."""
     return PageMeta(
         name=TITLE,
         description=DESCRIPTION,
         path=SITE_PATH,
         kind="article",
+        published=paper_front.iso_date(THRESHOLD_REVIEW_HISTORY[-1].first_published),
         modified=paper_front.iso_date(paper_front.revised(FRONT)),
+        **render_n11_lower_bounds_explainer.scholarly_metadata(
+            FRONT,
+            TITLE,
+            paper_front.iso_date(THRESHOLD_REVIEW_HISTORY[-1].first_published),
+            paper_front.iso_date(paper_front.revised(FRONT)),
+        ),
     )
 
 
@@ -537,7 +554,7 @@ def render(
         "PAPER_TYPE_CSS": PAPER_TYPE_CSS.read_text(encoding="utf-8"),
         **render_n11_lower_bounds_explainer.publication_layer(),
         "PAPER_CSS": STYLE.read_text(encoding="utf-8"),
-        "SITE_FAVICON": favicon_html(),
+        "SITE_FAVICON": favicon_html(inline=True),
         "SITE_NAV_CSS": SITE_NAV_CSS.read_text(encoding="utf-8"),
         "SITE_NAV": nav_html("papers", root=SITE_ROOT),
         # A paper's closing credit carries no version: its own is in its credits, and
@@ -545,6 +562,9 @@ def render(
         "COLOPHON": colophon_lines(edition=""),
         "SITE_EMBED": EMBED_SCRIPT.read_text(encoding="utf-8"),
         "SITE_THEME": THEME_SCRIPT.read_text(encoding="utf-8"),
+        "SITE_HEADROOM": HEADROOM_SCRIPT.read_text(encoding="utf-8"),
+        "SITE_KPRESS_CLIENT": kpress_client_script(),
+        "SITE_TOOLTIPS": TOOLTIP_SCRIPT.read_text(encoding="utf-8"),
         "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
         "BODY_HTML": document.html,
         **(math_scripts(static) if document.has_math else {"KATEX_JS": "", "SITE_MATH": ""}),
@@ -625,12 +645,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         facts=render_all_facts(),
         revision=args.revision or link_revision(),
     )
+    from devtools import site_assets, site_math  # noqa: PLC0415
+
     site = args.site.resolve()
+    html = site_math.prepare(html, page_path=SITE_PATH)
+    html = html.replace(favicon_html(inline=True), favicon_html(root="../"))
+    html, assets = site_assets.link_inline_assets(html, SITE_PATH)
     outputs = output_files(site, html, markdown)
     if args.check:
         if args.pdf:
             parser.error("--check compares HTML and Markdown; use --pdf for a fresh PDF")
-        stale = [
+        stale = [site / path for path in site_assets.stale_assets(site, assets)] + [
             path
             for path, content in outputs.items()
             if not path.is_file() or path.read_text(encoding="utf-8") != content
@@ -642,6 +667,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         path.parent.mkdir(parents=True, exist_ok=True)
         with atomic_output_file(path) as temporary:
             temporary.write_text(content, encoding="utf-8")
+    site_assets.write_assets(site, assets)
     if args.pdf:
         _print_pdf(site / SITE_PATH, site / paper_path(SLUG, ".pdf"))
     return 0

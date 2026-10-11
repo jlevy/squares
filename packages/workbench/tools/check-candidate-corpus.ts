@@ -1,5 +1,6 @@
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { type Corpus, decodeCorpus } from "../src/data/corpus.ts";
 
 const DATA_BLOCK = /<script\s+id="atlas-data"\s+type="application\/json">([\s\S]*?)<\/script>/g;
@@ -11,6 +12,30 @@ export function candidateCorpus(page: string): unknown {
     throw new RangeError("candidate page must contain exactly one atlas-data JSON block");
   }
   return JSON.parse(blocks[0][1]);
+}
+
+/** Read offline HTML, published HTML with hashed local data, or a corpus JSON file. */
+export async function readCorpus(path: string): Promise<unknown> {
+  const source = await readFile(path, "utf8");
+  if (source.trimStart().startsWith("{")) {
+    return JSON.parse(source);
+  }
+  const linked = source.match(
+    /<script\s+id="atlas-data"\s+type="application\/json"[^>]*data-src="([^"]+)"/,
+  );
+  if (linked === null) {
+    return candidateCorpus(source);
+  }
+  const name = linked[1] ?? "";
+  const digest = /^data\/corpus\.([0-9a-f]{16})\.json$/.exec(name)?.[1];
+  if (digest === undefined) {
+    throw new RangeError("published corpus must use a local content-addressed data URL");
+  }
+  const data = await readFile(resolve(dirname(path), name));
+  if (createHash("sha256").update(data).digest("hex").slice(0, 16) !== digest) {
+    throw new RangeError("published corpus does not match its content-addressed name");
+  }
+  return JSON.parse(data.toString("utf8"));
 }
 
 /** Require a complete, ordered catalogue after the ordinary schema decoder succeeds. */
@@ -42,5 +67,5 @@ if (invokedPath !== undefined && import.meta.filename === resolve(invokedPath)) 
   if (candidate === undefined) {
     throw new Error("usage: check-candidate-corpus.ts CANDIDATE_HTML");
   }
-  checkCompleteCorpus(candidateCorpus(await readFile(candidate, "utf8")));
+  checkCompleteCorpus(await readCorpus(candidate));
 }

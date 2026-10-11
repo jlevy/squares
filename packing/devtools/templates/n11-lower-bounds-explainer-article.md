@@ -165,7 +165,7 @@ computer-assisted certificates.
 The proof presented here is of this kind.
 
 <figure>
-  <div class="stage"><a href="{{SITE_ROOT}}known-best-1-100.pdf"><img src="{{SITE_ROOT}}known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2400" height="2896"></a></div>
+  <div class="stage"><a href="{{SITE_ROOT}}square-packings-100-20261008.pdf"><img src="{{SITE_ROOT}}known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2150" height="3823"></a></div>
 
   <div class="stage screen-only">
 
@@ -179,10 +179,10 @@ the film</a>. </video>
   </div>
 
   <figcaption><strong>Figure 2.</strong> The best known packings of 1 through 100 unit squares, with upper bounds
-  and, for unsettled cases, the current lower bounds verified here. A crimson star marks a recent result, a verified lower bound
-  proved since {{RECENT_SINCE_DATE}}: {{N_STARRED}} of the hundred, {{N_PROVED_HERE}} of them here. The <a href="{{ATLAS_URL}}">repository</a> records every witness and its
-  provenance. PDFs are available for <a href="{{SITE_ROOT}}known-best-1-100.pdf">this figure</a> and the
-  <a href="{{SITE_ROOT}}known-best-1-324.pdf">full 324-case poster</a>. The film below the atlas draws the same hundred
+  and, for unsettled cases, the current lower bounds verified here. Crimson bound numerals and optimality badges mark recent results. Verified lower bounds
+  proved since {{RECENT_SINCE_DATE}} account for {{N_STARRED}} of the hundred, {{N_PROVED_HERE}} of them here. The <a href="{{ATLAS_URL}}">repository</a> records every witness and its
+  provenance. PDFs are available for <a href="{{SITE_ROOT}}square-packings-100-20261008.pdf">this figure</a> and the
+  <a href="{{SITE_ROOT}}square-packings-324-20261008.pdf">full 324-case poster</a>. The film below the atlas draws the same hundred
   packings one square at a time, each step naming the bound it reaches and where that bound comes from; the
   <a href="https://github.com/jlevy/squares/releases/download/v0.4.2/ascent-n1-324-1080p60-citations.mp4">full
   <span class="tex">n = 1 \ldots 324</span> ascent</a> runs 8m 14s.</figcaption>
@@ -843,7 +843,7 @@ in Memo III (private communication, September 2026). His suggestion prompted a
     adaptation of his preceding proof for $0^\circ$ and $45^\circ$ orientations.
     This suggests he already had the general argument, whose details he omits.
     The journal proof appeared in
-    [Packing 10 or 11 unit squares in a square]({{PRIOR_URL}}), Electronic Journal of
+    [Packing 10 or 11 Unit Squares in a Square]({{PRIOR_URL}}), Electronic Journal of
     Combinatorics 10 ({{PRIOR_YEAR}}), R8.
 
 [^stromquist-memos]: Walter Stromquist, *Packing Unit Squares Inside Squares*,
@@ -865,7 +865,7 @@ in Memo III (private communication, September 2026). His suggestion prompted a
     The proof here does not depend on it.
 
 [^survey]: Erich Friedman,
-    [Packing unit squares in squares: a survey and new results]({{PROBLEM_URL}}),
+    [Packing Unit Squares in Squares: A Survey and New Results]({{PROBLEM_URL}}),
     Electronic Journal of Combinatorics, Dynamic Survey DS7.
 
 [^trump]: Walter Trump’s packing of 1979, as recorded in
@@ -898,9 +898,9 @@ in Memo III (private communication, September 2026). His suggestion prompted a
     describes the linear program and search used to find its weights.
 
 [^lineage]: Earlier counting methods include Göbel’s unavoidable points and Nagamochi’s
-    weighted resources: F. Göbel, Geometrical packing and covering problems, in *Packing
+    weighted resources: F. Göbel, Geometrical Packing and Covering Problems, in *Packing
     and Covering in Combinatorics*, Mathematical Centre Tracts 106 (1979), 179–199;
-    Hiroshi Nagamochi, [Packing unit squares in a rectangle]({{NAGAMOCHI_URL}}),
+    Hiroshi Nagamochi, [Packing Unit Squares in a Rectangle]({{NAGAMOCHI_URL}}),
     Electronic Journal of Combinatorics 12 (2005), R37.
 
 <!--BEGIN:CLAIM-->

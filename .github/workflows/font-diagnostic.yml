@@ -1,0 +1,144 @@
+name: Font delivery diagnostic
+
+# A manual observation of the n11 threshold paper's first screen while its web fonts are
+# held, recorded with the physical faces Chromium shaped in each phase. It qualifies
+# nothing: it is no gate, reports no required check, deploys nothing, and runs only when
+# someone dispatches it.
+#
+# What it can observe. It renders the paper from the immutable #449 inputs at
+# `4963448e3`, which predate #442's fix for this shift, `29a79cd10` ("hold first-screen
+# text in place while web faces arrive"). Whatever branch it is dispatched from, it
+# observes the page as it was before that fix and cannot observe the fix: its evidence
+# is about the original failure on Linux, never about the current page.
+#
+# It is its own workflow rather than a mode of `pages.yml` so that a dispatch is never a
+# Certificate page run. Inside that workflow a dispatch joined the
+# `certificate-page-<ref>` concurrency group, where it could replace a pending push run
+# on `main` and with it that push's deploy, and `devtools/rerun_starved.py` counted it
+# as a newer run that superseded a starved pull-request run at the same commit. Here it
+# has its own group, and the re-run listener neither subscribes to it nor compares runs
+# across workflow files. `tests/test_font_diagnostic_workflow.py` holds the separation.
+#
+# The tool is the dispatched branch's `devtools/check_site_rendering.py` and its probes,
+# copied aside before the pinned checkout replaces the tree. It imports `sqpack.probes`
+# and `devtools.preview_site`, and at run time those are the pinned revision's copies,
+# not the dispatched branch's, which are the ones its tests ran against. The job
+# compares the two copies of each and records the answer in `diagnostics/helpers.txt`
+# beside the evidence; a tool change that needs a newer helper shows there as a
+# difference, or fails the observation step.
+
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # Its own group: a diagnostic never queues behind, or displaces, a Certificate page run.
+  group: font-diagnostic-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # Renders the pre-fix page at 4963448e3; it cannot observe #442's fix (29a79cd10).
+  font-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      # Only the tool, its probes, and the two repository modules it imports: the paper's
+      # inputs come from the pinned checkout below, which replaces this tree.
+      - name: Check out the diagnostic tool and the helpers it imports
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /packing/devtools/check_site_rendering.py
+            /packing/devtools/probes/check_site_rendering/
+            /packing/devtools/preview_site.py
+            /packing/src/sqpack/probes.py
+      - name: Preserve the reviewed maintained diagnostic tool
+        run: |
+          mkdir -p "$RUNNER_TEMP/font-diagnostic/probes" "$RUNNER_TEMP/font-diagnostic-helpers"
+          cp devtools/check_site_rendering.py "$RUNNER_TEMP/font-diagnostic/"
+          cp -R devtools/probes/check_site_rendering "$RUNNER_TEMP/font-diagnostic/probes/"
+          cp --parents devtools/preview_site.py src/sqpack/probes.py "$RUNNER_TEMP/font-diagnostic-helpers/"
+          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/font-diagnostic/tool-source.txt"
+          git ls-files -s devtools/check_site_rendering.py devtools/probes/check_site_rendering devtools/preview_site.py src/sqpack/probes.py >> "$RUNNER_TEMP/font-diagnostic/tool-source.txt"
+      - name: Check out the original immutable paper inputs
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: 4963448e33c39002a48593ef79999940b153f2c0
+          submodules: true
+          persist-credentials: false
+          fetch-depth: 2
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
+            /packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/
+            /packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz
+            /packing/campaign/agent-sessions/session-153-native-full.rows.jsonl
+            /packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/full-replay/RESULT.json
+            /packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/independent-audit.json
+            /packing/resources/web/wand125-tools-2026-09-29/README.md
+            /packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full-summary.json
+            /packing/campaign/agent-sessions/session-153-native-full.json
+            /packing/campaign/agent-sessions/session-153-native-reconciliation.json
+      - name: Retain immutable paper inputs and protocol
+        run: |
+          mkdir -p diagnostics/tool
+          cp -R "$RUNNER_TEMP/font-diagnostic/." diagnostics/tool/
+          git rev-parse HEAD HEAD^{tree} > diagnostics/paper-source.txt
+          git ls-tree --full-tree HEAD vendor/kpress >> diagnostics/paper-source.txt
+          git ls-files -s devtools/preview_site.py src/sqpack/probes.py >> diagnostics/paper-source.txt
+          for helper in devtools/preview_site.py src/sqpack/probes.py; do
+            if cmp -s "$RUNNER_TEMP/font-diagnostic-helpers/$helper" "$helper"; then
+              echo "same as the dispatched branch: $helper"
+            else
+              echo "differs from the dispatched branch: $helper"
+            fi
+          done > diagnostics/helpers.txt
+          printf '%s\n' 'Controlled font hold; two CDP snapshots; no normal gate credit.' 'Each declared node records every rendered text node below it, with its own fonts, typography and quads, and sums their fonts.' 'Physical fonts are not joined to fetched URLs.' > diagnostics/protocol.txt
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Install Node 24 for KPress math
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+      - name: Synchronize locked development dependencies
+        run: uv sync --frozen --group dev
+      - name: Cache the pinned Chromium browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+      - name: Install the same pinned Chromium headless shell
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+      - name: Render only the exact threshold paper
+        run: timeout --kill-after=5s 60s uv run --frozen --group dev python -m devtools.render_n11_threshold_bound_review --site diagnostics/site --revision 4963448e33c39002a48593ef79999940b153f2c0 > diagnostics/render.stdout.log 2> diagnostics/render.stderr.log
+      - name: Observe controlled font delivery at 390px light
+        env:
+          PYTHONPATH: ${{ github.workspace }}/packing/src:${{ github.workspace }}/packing
+        run: timeout --kill-after=5s 60s uv run --frozen --group dev python diagnostics/tool/check_site_rendering.py diagnostics/site --page papers/n11-threshold-bound-review.html --font-diagnostic diagnostics/font-delivery.json --font-scenario 390-light > diagnostics/font.stdout.log 2> diagnostics/font.stderr.log
+      - name: Preserve raw diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: threshold-font-diagnostic
+          path: packing/diagnostics
+          if-no-files-found: error
+          retention-days: 7

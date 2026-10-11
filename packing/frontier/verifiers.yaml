@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-10'
 verifiers:
   # --- External programs -------------------------------------------------------------
   - id: V-tokoharu-verify-cpp
@@ -521,6 +521,100 @@ verifiers:
         revision: 8c11f6962506940c5de67a9fa73b3d1e2e151196
         note: R071's public launcher, which checks the package, builds verify.cpp and runs replay.js at two partitions
 
+  - id: V-guzhou-n40-finite-py
+    program: >-
+      verifier/run.py, the release's entry point, which runs its vendored copy of this
+      repository's sqverify-fast at all 401 directions and verifier/finite.py
+    author: Guzhou0806
+    provenance: external
+    language: [Python, Rust]
+    methods: [exact-algebraic, interval-certified]
+    role: decides
+    summary: >-
+      The release's own verification of s(40) > 335427/50000: run.py derives the
+      401-direction input and runs the vendored sqverify-fast on it, which decides the
+      nodal statement, and finite.py's exact-rational checks of the clipped-corner
+      transfer's finite steps (the density's D4 expansion and mass, its essential
+      supremum by two sweeps, the reference-square containment, the clipped-corner bound,
+      the counting margin and the full-core closed form), writing results/verification.json.
+    source:
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/finite.py
+      - packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/run.py
+    versions:
+      - sha256: 6046849f25beeb3491789f2dd0a2c59e5ce51696e1078c201c410c8f1affc861
+        revision: e5abeb4d078a5c5b35df6204dd9b93378e5a7880
+        note: finite.py
+      - sha256: 4efa0d97dfb0cc0dcce172dfd31c9bb2f4547cfb472d4bde1e84b78695181485
+        revision: e5abeb4d078a5c5b35df6204dd9b93378e5a7880
+        path: packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/source/verifier/run.py
+        note: run.py
+    note: >-
+      Read in full by the 10 October 2026 review of the release
+      (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) and not
+      run here. Its nodal step is this repository's own sqverify-fast, vendored byte for
+      byte from ef79288a4 (crate source digest d97758bb...), so a replay here with
+      V-sqverify-fast reproduces the release's nodal verification with the producer's
+      code; the finite steps were decided again here by V-audit-clipped-corner-transfer,
+      written without opening finite.py.
+
+  - id: V-guzhou-n40-continuous-pose
+    program: verifier/continuous_pose.cpp, the release's continuous-pose interval kernel
+    author: Guzhou0806
+    provenance: external
+    language: [C++]
+    methods: [interval-certified]
+    role: decides
+    summary: >-
+      Decides, for one closed slab [PL/DEN, PH/DEN] of the half-angle tangent t = tan(theta/2),
+      that every square of side B in [0, L]^2 at every angle of the slab and every legal centre
+      captures at least TN/TD of a rectangle density, by depth-first interval branch and bound over
+      the normalised centre and the angle together: outward-rounded binary64 intervals,
+      whole-box containment and exclusion by projection on the square's normals, a concave-section
+      trapezoid bound on each rectangle's clipped area at the box's centre, and
+      translation-derivative bounds that extend it over the box. It exits 0 with "verified" only
+      when the stack empties, and 3 with "unresolved" at the node budget or a half-width below
+      2^-40.
+    source:
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/continuous_pose.cpp
+    versions:
+      - sha256: da06206b8e83a57b8a710ba62e743c6d3a1959e9160ff32ae89ede583841c73c
+        revision: 71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3
+        note: >-
+          Built here with g++ 13.3.0 -O3 -std=c++17 -fno-fast-math -ffp-contract=off from the
+          tree's directory into 69bc9e64..., the CI run's binary.
+    note: >-
+      Read line by line by the 10 October 2026 review of the release
+      (docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md), which
+      re-derived its lemmas; replayed here in full on all 43 slabs. Its source says its
+      translation derivatives follow Tokoharu and its concave sections the Squares Project, and
+      that its lineage is not wholly independent; it shares no code with sqverify-fast.
+
+  - id: V-guzhou-n40-axis-integer-grid
+    program: verifier/axis_integer_grid.cpp, the release's exact axis certificate
+    author: Guzhou0806
+    provenance: external
+    language: [C++]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides that every horizontal square of side A in the northeast quadrant of [0, l]^2
+      captures at least TN/TD of an integer rectangle density, by writing each rectangle as
+      sixteen signed hinge products, accumulating coefficient prefix sums on the grid of
+      breakpoints and evaluating every vertex in signed 128-bit integers within a guarded bound;
+      it reconciles the minimiser by a direct sum and exits 0 with AXIS_COVERAGE_PROVED or 2 with
+      AXIS_TEST_REFUSED.
+    source:
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/axis_integer_grid.cpp
+    versions:
+      - sha256: f5bc3f60065aaea3d14ffb8465865750fca22cf8bbc6bd8739b5120200b6277d
+        revision: 71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3
+        note: Built here with g++ 13.3.0 -O2 -std=c++17 into cccecb9a..., the CI run's binary.
+    note: >-
+      Read by the 10 October 2026 review, which re-derived the bilinear-cell lemma, the hinge
+      expansion and the int128 bounds; replayed here. Its minimum was evaluated again at the
+      minimiser by devtools.audit_continuous_pose, and the axis statement decided again on the
+      original density by sqverify-fast's axis-vertex sweep.
+
   - id: V-burns-n17-verify-py
     program: verify-n17-lower-bound-4_4811.py
     author: Burns
@@ -575,7 +669,7 @@ verifiers:
 
   - id: V-queuingtheory-n11-verify
     program: VERIFY.py, the publisher's n = 11 optimality driver and its component checkers
-    author: Queuingtheorydotcom
+    author: Ahmed
     provenance: external
     language: [Python]
     methods: [exact-algebraic]
@@ -594,7 +688,7 @@ verifiers:
       The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake
       at its pinned toolchain, with scripts/run_verification.sh and the finalizer
       scripts/finalize_verification.py driving the build and the axiom audit
-    author: Queuingtheorydotcom, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis
+    author: Ahmed, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis
     provenance: external
     language: [Lean 4, Python, Bash]
     methods: [proof-assistant-checked]
@@ -1141,6 +1235,104 @@ verifiers:
       implementations of every primitive: they share this repository's exact clipping,
       closed-cover and collision kernels, which the source bundles too.
 
+  - id: V-audit-clipped-corner-transfer
+    program: devtools.audit_clipped_corner_transfer
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides in exact rationals the finite steps of Guzhou0806's clipped-corner transfer
+      for s(40) > 335427/50000 on the retained rect_n40_L67 density: its D4 expansion,
+      mass and exact essential supremum, the net's premises, the transfer's scalar chain
+      and the full-core closed form, each held to both release receipts, with controls E
+      to H. It also derives the 401-direction input, drives a reviewed sqverify-fast build
+      on it with controls A to D, and judges those receipts, re-evaluating each control's
+      exact capture by sqpack.rectangle_density; there it checks premises and receipts and
+      decides no coverage.
+    source:
+      - packing/devtools/audit_clipped_corner_transfer.py
+      - packing/tests/test_audit_clipped_corner_transfer.py
+    independence_record: packing/devtools/audit_clipped_corner_transfer.py
+    note: >-
+      Its module docstring is its read log: written on 2026-10-10 from the review of the
+      release and its scratch measurements, reading the release's parameters and receipts
+      as data and never opening verifier/finite.py, verifier/run.py, verifier/prepare.py,
+      verifier/release.py, tests/test_finite.py or PROOF.md. It shares with finite.py the
+      definition of the density, its D4 expansion and the transfer's formulas, and no
+      code.
+
+  - id: V-audit-continuous-pose
+    program: devtools.audit_continuous_pose
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides in exact rationals the finite steps of Guzhou0806's continuous-pose bound
+      s(40) > 1340000/199529 on the retained rect_n40_L67 density: it regenerates both kernel
+      inputs and both sqverify-fast inputs, binding the kernel inputs to the digests the receipts name, checks every enclosure and
+      the dominated measure, decides the counting margin, the slab partition, the kernel's
+      threshold, the near-axis containment A W(eps) <= B and the axis minimum against tau, which
+      it evaluates again at the reported minimiser, holds every value to both release receipts,
+      and refuses four altered parameters. It also builds both kernels from the retained source,
+      drives the complete replay, controls A to H and the crate's two runs, and judges those
+      receipts; there it checks receipts and decides no coverage.
+    source:
+      - packing/devtools/audit_continuous_pose.py
+      - packing/tests/test_audit_continuous_pose.py
+    independence_record: packing/devtools/audit_continuous_pose.py
+    note: >-
+      Its module docstring is its read log: written on 2026-10-10 from the review of the release
+      and its scratch measurements, reading the release's parameters and receipts as data, both
+      kernels and harnesses and run.py in full, and never opening exact.py, audit.py,
+      tests/oracle.py, tests/test_kernel.py, tests/test_admission.py or PROOF.md while it was
+      written; exact.py was read afterwards, to run control G on it, and nothing in the finite
+      part changed. It shares with exact.py the definition of the density, its D4 expansion, the
+      kernels' input order, the enclosure rule and the inward rounding, and no code.
+
+  - id: V-check-half-angle-area
+    program: devtools.check_half_angle_area
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides a rational centre and half-angle certificate, or a rational centre-basis
+      witness, in Fraction arithmetic: every rotation on the unit circle, containment in
+      the closed box by each square's half-extent with no corner formed, and disjoint
+      interiors by the circumscribed-disc rule, else by the exact area of one square
+      clipped by the other's four closed half-planes. It reads Evan Daniel's text format,
+      SQUISH's JSON, the centred JSON of issue 483 and derived facts with readers of its
+      own, runs six controls per certificate (two gross, and side and pair each at exact
+      contact and 10^-40 or 10^-30 past it), and holds every side, pose, margin and
+      claimed side to the maintained routes' retained inputs and the record. For issue
+      470 it also derives each witness again from its pinned decimal pose file, with its
+      own parser, dilation and half-angle floor in decimal arithmetic, and measures each
+      arrangement against the packing it would be credited to, which decides nothing. Its
+      replay-t128 command drives the kernel's own two-route replay of T-128's receipt.
+    source:
+      - packing/devtools/check_half_angle_area.py
+      - packing/tests/test_check_half_angle_area.py
+    independence_record: packing/devtools/check_half_angle_area.py
+    note: >-
+      Written on 2026-10-10 by the review lane of T-128, T-130 and T-131 from the
+      certificate formats and plane geometry, and extended the same day by the review
+      lanes of issues 476, 481, 483 and 484 and of issue 470 and Evan Daniel's n = 126
+      certificate; the review lane of issues 488 and 489 ran it as retained, on the ten
+      certificates their entries cite and, by a driver of its functions, the four the two
+      commits hold that no entry cites. The review lane of Evan Daniel's regularized
+      record lists ran it as retained, with its regularized roster and --upstream at the
+      pin, on the fifteen certificates T-146 cites; it measures each against the packing
+      T-146's regularizations name, read from the register. Its author had read both
+      maintained routes, their parser and the importer's adapters before writing it, so it
+      is not clean-room; it imports none of their parsing or deciding code and shares
+      Fraction with every exact checker here. It is a second pair-deciding procedure
+      within one method, exact-algebraic, not a second method.
+
   # --- First-party programs: premise checks and replay drivers ------------------------
   - id: V-evand-exact-certificates
     program: devtools.evand_exact_certificates
@@ -1269,8 +1461,9 @@ verifiers:
 
   - id: V-sqverify-fast
     program: >-
-      sqverify-fast, run at every direction of a certificate's net (the standard 201, or
-      the net a format M file declares) by devtools.sqverify_fast_census
+      sqverify-fast, run at every direction of a certificate's net (the standard 201, the
+      net a format M file declares, or the net a format T file's certificate metadata
+      sets) by devtools.sqverify_fast_census or another first-party driver
     author: Squares Project (Levy)
     provenance: first-party
     language: [Rust, Python]
@@ -1278,8 +1471,10 @@ verifiers:
     role: decides
     summary: >-
       Decides a measure-capture lower-bound certificate of format T, M or L on the
-      201-direction net, or of format M on the uniform net its file declares (proof_net,
-      lemma N0): exact admission of its premises, then an exact-event vertex sweep
+      201-direction net, of format M on the uniform net its file declares (proof_net,
+      lemma N0), or of format T on the uniform net its certificate metadata sets (D and
+      angle_count, admitted under lemma N0's premises): exact admission of its premises,
+      then an exact-event vertex sweep
       at the axis and outward-rounded interval branch and bound at every other direction,
       every shrunk square at every centre of its domain capturing at least the threshold.
     source:
@@ -1297,7 +1492,16 @@ verifiers:
       accepted by the soundness review of 6 October 2026
       (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md),
       for a declared net once the control's exact evaluator read that net (its DR-1),
-      which the same day's re-check confirmed. Its census drives the binary, keeps every
+      which the same day's re-check confirmed. Its format T metadata-net path, by which a
+      format T file's certificate block sets D and angle_count, has no review of its own:
+      lemma N0 is stated for every net admission accepts, and the review of 10 October
+      2026 of Guzhou0806's s(40) bound
+      (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md, its
+      GN-6) read the admission path and every use of the admitted step and found the
+      admitted net used wherever the net enters; admission refuses a metadata net that
+      stops short of pi/4 (control D there). Since 0b5a62ca5 the census driver and the
+      control evaluator read such a net as admission does (that review's GN-5), and no
+      census case holds one yet. Its census drives the binary, keeps every
       direction's receipt and puts negative controls on a certificate: for format M the
       original and a near-threshold mutant at its least-bound direction, and since the
       review of 6 October of FC-1's fix
@@ -1467,3 +1671,221 @@ verifiers:
       each finding is present at the first commit and gone at the fix. Decides nothing
       about Valid7.
     source: [packing/devtools/probe_valid7_fixes.py]
+
+  - id: V-squish-upper-bound-packets
+    program: devtools.squish_upper_bound_packets
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the bounded complete SQUISH source roster, converts rational half-angle facts to exact
+      rational-corner witnesses without changing the side, drives both exact deciders, and checks source/fact/witness/receipt
+      bindings, full pair counts, upward display ceilings and the two geometric controls.
+    independence_record: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    note: Written from the published rational certificate format and the geometry. No SQUISH producer
+      executable is retained or run. The native exact_verify and independent rational-corner checker decide
+      feasibility; the wrapper checks their inputs, recorded results and provenance. The two first-party
+      routes share the converted witness, YAML and Python rational arithmetic, not geometry code.
+
+  - id: V-squish-followup-packets
+    program: devtools.squish_followup_packets
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_followup_packets.py
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the pinned update source and complete reviewed replay, binds revision-specific
+      fact/witness/receipt inputs, full pair and control coverage, typed replay provenance and upward
+      display ceilings; explicitly reruns both deciding routes only with --replay.
+    independence_record: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+    note: The wrapper shares strict admission and rational half-angle conversion with the original
+      packet while keeping a distinct revision namespace. No SQUISH producer executable is run. The
+      native exact_verify and independently written rational-corner checker decide geometry; both
+      share input corners and Python rational arithmetic. Bounded XZ decoding and witness metadata
+      checks are premises, not additional geometric deciders.
+
+  - id: V-squish-second-update-confirmation
+    program: devtools.squish_second_update_confirmation
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_second_update_confirmation.py
+    - packing/devtools/squish_second_update_house_links.py
+    - packing/devtools/squish_second_update_packets.py
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the complete immutable second-update roster, all historical full replay inputs and
+      outcomes, accepted complete review records and the explicit canonical metadata transformation. Checks
+      bounded decoding, full coverage, safe ceilings and exact house witness custody; fresh dual decisions
+      require explicit --replay.
+    independence_record: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+    note: This wrapper checks premises and receipt applicability; sqpack exact_verify and the independent
+      rational-corner checker decide geometry. Their shared SAT theorem, Fraction, YAML and source-to-corner
+      conversion are disclosed. Earlier packet constants, evidence and review scopes remain unchanged.
+  - id: V-evand-arrangement-receipts
+    program: devtools.evand_arrangement_reports
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    summary: Binds all three complete source certificates and all nine full deciding inputs/native results;
+      explicit replay repeats both project geometric deciders.
+    source:
+    - packing/devtools/evand_arrangement_reports.py
+
+  - id: V-upper-bound-reports
+    program: devtools.upper_bound_reports
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Imports a report of rational upper-bound certificates by another author from its
+      packet's declaration: admits custody through acquire_source, reads each retained
+      file or derived fact by its declared adapter (Evan Daniel's text format, SQUISH's
+      JSON, centred JSON, decimal poses by a declared dilation), admits each side only
+      where it equals or rounds up to its print, rebuilds the frozen claim comparison and
+      the register plan, and drives the arrangement kernel's two exact routes and two
+      controls per count. It decides no geometry itself.
+    source:
+      - packing/devtools/upper_bound_reports.py
+      - packing/devtools/evand_arrangement_reports.py
+      - packing/tests/test_upper_bound_reports.py
+    note: >-
+      Written for the 2026-10-10 intake pass's upper-bound imports from the formats the
+      sources state. sqpack.verify and the independent rational corner checker decide; the
+      10 October reviews of issues 476, 481, 483 and 484, of issue 470 and of issues 488
+      and 489, and the 11 October review of Evan Daniel's regularized record lists
+      (docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md), read it
+      in full; for issues 488 and 489, its HOUSES readers of the issue-481, issue-484,
+      issue-488 and issue-489 packets are the exact readers that review proposed (RL-2).
+      For issue 470 its decimal_dilation adapter generates the exact witnesses from the
+      source's decimal poses, so there this repository is the witness's generator.
+
+  - id: V-rehwaldt-n68-verify
+    program: verify.py
+    author: Seth Rehwaldt
+    provenance: external
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/verify.py.txt
+    versions:
+    - sha256: 911b9822334636ffc49472e4df32e38cb162efbfad9a4684879f006b1c90e7f9
+      note: fded686668e29258dad2eb29d0482fa3fd51bd6b
+    summary: Decides all 68 rational unit squares, containment and 2278 unordered pairs.
+    note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two
+      programs use the same SAT theorem and arithmetic; their distinct code does not establish independence
+      from the source producer. Analytic root and dual programs are outside this replay.
+
+  - id: V-rehwaldt-n68-independent-support-check
+    program: independent_support_check.py
+    author: Seth Rehwaldt
+    provenance: external
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/independent_support_check.py.txt
+    versions:
+    - sha256: 48e1ae336855ba5cc05c3fd161bf51ef71cab24ebc33ae590be040f78a932423
+      note: fded686668e29258dad2eb29d0482fa3fd51bd6b
+    summary: Decides all 68 rational unit squares, containment and 2278 unordered pairs.
+    note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two
+      programs use the same SAT theorem and arithmetic; their distinct code does not establish independence
+      from the source producer. Analytic root and dual programs are outside this replay.
+
+  - id: V-refinement-custody
+    program: devtools.refinement_custody
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/refinement_custody.py
+    - packing/devtools/refinement_packets.py
+    - packing/devtools/refinement_house_links.py
+    summary: Admits all 13 complete actual input/result jobs, immutable source conversion, process outcomes,
+      full control coverage and three complete house witnesses.
+    note: Offline admission reconciles retained executions and runs no geometric predicate.
+  - id: V-ryxu-undilated-n51-independent
+    program: devtools.ryxu_radical_n51.independent
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/devtools/ryxu_radical_n51.py
+    summary: Decides all 51 undilated coefficient poses in Q(sqrt2), unit-square identities, containment
+      and all 1275 unordered pairs.
+    note: Rational-pair scalar order and direct axis/diamond corners are distinct from native number-field
+      materialization and geometry. The reviewed source input is shared. Complete positive, duplicate
+      and outside outcomes are retained; 119 touching and 1156 strict pairs are observed, while the
+      source's 191-touching-pair assertion remains unconfirmed.
+  - id: V-ryxu-complete-custody
+    program: devtools.ryxu_house_links
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/ryxu_arrangement_reports.py
+    - packing/devtools/ryxu_radical_n51.py
+    - packing/devtools/ryxu_house_links.py
+    - packing/devtools/evand_arrangement_reports.py
+    summary: Admits complete pinned source facts, all 75 rational and three radical actual input/result
+      jobs, required controls and all 18 complete houses.
+    note: Admission reconciles retained executions and private-worker scientific inputs. It executes
+      no geometric predicate and does not itself confer a confirmation rung.
+  - id: V-gupta-complete-custody
+    program: devtools.gupta_house_links
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/gupta_refinement_reports.py
+    - packing/devtools/gupta_house_links.py
+    - packing/devtools/evand_arrangement_reports.py
+    summary: Admits all seventeen pinned originals and comparators, all 51 complete actual input/result
+      jobs, required controls and fourteen complete selected houses.
+    note: Reconciles retained executions and ordinary private scientific inputs. No geometric predicate
+      runs and admission alone confers no confirmation rung.

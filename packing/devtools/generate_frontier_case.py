@@ -2650,7 +2650,12 @@ def redraft(
             retrieved_date=retrieved_date,
             lower_bound_promotion=promotion,
         )
-    return adopt_upper_bound_packet(n, generated)
+    from devtools.source_supersession import adopt_selected_report  # noqa: PLC0415
+
+    try:
+        return adopt_selected_report(n, existing, adopt_upper_bound_packet(n, generated))
+    except ValueError as error:
+        raise GenerationError(str(error)) from error
 
 
 def _rigidity_block(text: str) -> str | None:

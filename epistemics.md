@@ -261,11 +261,18 @@ certificate is replayed from the repository before it enters the register.
 Two marks sit beside a status and are no part of it.
 
 - **Superseded** is the result’s place on the frontier: it is a bound, a result whose
-  [kind](#result-kinds) is lower bound, upper bound or optimality, and no case bound
-  rests on it now. It is derived from the case records by
-  `render_recent_results.standing`, and
-  [`devtools/check_standing.py`](packing/devtools/check_standing.py) holds it to the
-  bounds each entry states.
+  [kind](#result-kinds) is lower bound, upper bound or optimality, no case bound rests
+  on it now, and its cases hold a bound at least as good as each one it states.
+  Superseded means replaced.
+  A bound strictly better than its case’s, in a lane it can hold, that the case records
+  have not taken in yet is *pending adoption* and carries no mark: nothing has replaced
+  it, and its status says how far it has been checked.
+  `T-128`’s eight rational sides, each below the ceiling its case holds, are pending
+  adoption. Superseded is derived from the case records and the bounds each entry states
+  by `render_recent_results.standing`, and
+  [`devtools/check_standing.py`](packing/devtools/check_standing.py) holds it to those
+  bounds. An entry whose words state no bound the check reads is held to the case records
+  alone, so a report the case records do not cite states its sides.
   The mark names the results that supersede it, the ones its cases’ bounds rest on now
   (`render_recent_results.superseding`), so `T-037` reads *superseded by T-060*. A
   confirmed result may be superseded, and a recorded one may hold a case’s reported
@@ -293,7 +300,29 @@ Two marks sit beside a status and are no part of it.
   It is the one hand-recorded fact in this section, so it expires: the checker refuses
   one dated more than 30 days before the register’s `last_reviewed`, and it is then
   re-dated with what happened since, or removed.
-  Work that is queued and not begun stays in `next_rung`.
+  Work that is queued and not begun stays in `next_rung`, and the confirmations among it
+  are also listed in `unfinished_confirmations`.
+
+**Unfinished confirmations** are the confirmations a result’s record names and has not
+run, or has not finished, listed in its optional `unfinished_confirmations` where the
+record knows the work concretely: `what` the confirmation is, the confirmation `rung` it
+would reach, and the bead, issue or file that owns it in `link`. Wherever a price is
+known, `estimated_cost` gives it in CPU-hours: `cpu_hours`, the central estimate,
+`cpu_hours_high` where the source gives an upper end, the `basis` it was priced on (the
+sample, the ratio, the host or the source’s own run), and the day it was `priced`. A
+price recorded only in wall-hours is converted where the number of workers is stated,
+and the basis says so.
+`next_rung` stays the prose of the next evidence-improving action; this list is the
+structured, priced part of it.
+It is no mark beside the status: `activity` says what is under way, and an item under
+way is in both. A run that would only add an attribute beside the rung, a second machine
+method or a reproduction with the producer’s code, reaches no rung and is not listed.
+[`devtools/check_results.py`](packing/devtools/check_results.py) refuses an item at or
+below the result’s `confirmation`, so an item is removed when its confirmation lands,
+and refuses an upper end below the estimate, a price dated after `last_reviewed`, and an
+item listed twice. The validation backlog (`devtools.check_requests --backlog`) and
+[`RESULTS.md`](packing/frontier/RESULTS.md#next-actions) show each item’s rung and cost,
+and the backlog sums the known CPU-hours.
 
 Until 2026-10-01 the site and `RESULTS.md` showed a *standing* in this place, which
 mixed three things: the frontier position (`current best`, `superseded`), whether the
@@ -480,6 +509,20 @@ to credit it as carefully as this project’s own.
   method, solver or checker credits them in the same line
   (`wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi`). This
   project is credited as `after Levy` only where the source itself says so.
+- **A regularization leaves the packing with its finder.** A certificate that rearranges
+  a packing the record already credits, for display or after solving it to an exact
+  side, does not take the packing’s credit.
+  The finder keeps the packing through the register result that holds it, which the
+  regularized result names as `of` in its `regularizations`, one item a count.
+  The regularizer is credited with the regularization, and with the certificate where it
+  is theirs, and is typed there as `by`, with the method, the side and what the
+  regularization changed: `T-146` regularizes Ryan Xu’s, Mishapolk’s and SQUISH’s
+  packings and is credited `Daniel after Xu, Chaoweeraprasit, Mishapolk, Levy`. The
+  record never says in its own voice that a regularization is the same packing as the
+  one it was made from unless the item’s `identity.basis` is `measured`, a decision made
+  here. Otherwise it says whose claim the identity is, as `T-146` says that each view’s
+  identity rests on Evan Daniel’s sampled path test; measurements made here are recorded
+  beside the claim and decide nothing.
 - **This project’s results are credited the same way.** A result of this project is
   `Levy` in the register and on the site, by name as every other author is, and
   `Levy after …` where it rests directly on another’s proof, method or tool
@@ -553,10 +596,10 @@ gate checks it.
 
 | Record | Holds | Reader view |
 | --- | --- | --- |
-| [`n-NNN.md`](packing/frontier/README.md) case records | Both lanes’ bounds for each case, with their evidence | [`STATUS.md`](packing/frontier/STATUS.md); the site’s [recent results](https://jlevy.github.io/squares/#recent-results) and [frontier survey](https://jlevy.github.io/squares/frontier.html); the superseded mark in `RESULTS.md` and in the site’s [results table](https://jlevy.github.io/squares/all-results.html) |
+| [`n-NNN.md`](packing/frontier/README.md) case records | Both lanes’ bounds for each case, with their evidence | [`STATUS.md`](packing/frontier/STATUS.md); the site’s [recent results](https://jlevy.github.io/squares/#recent-results) and [frontier survey](https://jlevy.github.io/squares/atlas.html#the-frontier-survey); the superseded mark in `RESULTS.md` and in the site’s [results table](https://jlevy.github.io/squares/results.html) |
 | [`evidence.yaml`](packing/frontier/evidence.yaml) | Who performed each check, by which method, within which limits, with which programs | [`INVENTORY.md`](packing/frontier/INVENTORY.md); each case record’s Verification Code section |
 | [`verifiers.yaml`](packing/frontier/verifiers.yaml) | Each verification program, external or first-party, with the versions that ran and where its source is retained | [`VERIFIERS.md`](packing/frontier/VERIFIERS.md); the Verification Code section of `RESULTS.md` |
-| [`results.yaml`](packing/frontier/results.yaml) | Each result’s kind, headline, claim, date, `V`/`C`/`S`, novelty, attribution and `activity` | [`RESULTS.md`](packing/frontier/RESULTS.md), grouped by lineage; the site’s [results table](https://jlevy.github.io/squares/all-results.html), each with the derived status |
+| [`results.yaml`](packing/frontier/results.yaml) | Each result’s kind, headline, claim, date, `V`/`C`/`S`, novelty, attribution, `activity` and `regularizations` | [`RESULTS.md`](packing/frontier/RESULTS.md), grouped by lineage; the site’s [results table](https://jlevy.github.io/squares/results.html), each with the derived status |
 | [`bibliography.yaml`](packing/resources/bibliography.yaml) | Each source’s date, credit and lineage | The atlas citation line; the holders, credit and relation in `RESULTS.md` and on the site’s [overview](https://jlevy.github.io/squares/#recent-results) |
 | [`source-coverage.yaml`](packing/frontier/source-coverage.yaml) | Which sources were read, and when | None |
 

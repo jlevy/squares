@@ -1,0 +1,79 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-08T16:06:14Z",
+  "git_scope": "The pinned GitHub recursive tree lists 126 blobs. The declared 18-file scope binds eight complete certificates, eight complete decimal poses and two hash-only READMEs to their Git blobs. No checkout or author program executes.",
+  "sources": [
+    {
+      "id": "couzo-exact-refinements",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "master",
+      "source_commit": "ffd900dfff6d2674ad995359208c2f0714915c82",
+      "committed_utc": "2026-10-08T15:17:05Z",
+      "git_tree": "4f168283859262d0d813cc07e5f8fefef8b682a9",
+      "archived_path": "packing/resources/web/couzo-exact-refinements-2026-10-08/source",
+      "subtree_manifest": "packing/resources/web/couzo-exact-refinements-2026-10-08/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "certificates/README.md",
+        "certificates/n105.cert",
+        "certificates/n108.cert",
+        "certificates/n127.cert",
+        "certificates/n131.cert",
+        "certificates/n155.cert",
+        "certificates/n180.cert",
+        "certificates/n228.cert",
+        "certificates/n306.cert",
+        "n105.txt",
+        "n108.txt",
+        "n127.txt",
+        "n131.txt",
+        "n155.txt",
+        "n180.txt",
+        "n228.txt",
+        "n306.txt"
+      ],
+      "subtree_file_count": 18,
+      "subtree_total_bytes": 320642,
+      "retained_file_count": 16,
+      "retained_total_bytes": 310209,
+      "compressed": [
+        "source/certificates/n105.cert.gz",
+        "source/certificates/n108.cert.gz",
+        "source/certificates/n127.cert.gz",
+        "source/certificates/n131.cert.gz",
+        "source/certificates/n155.cert.gz",
+        "source/certificates/n180.cert.gz",
+        "source/certificates/n228.cert.gz",
+        "source/certificates/n306.cert.gz",
+        "source/n105.txt.gz",
+        "source/n108.txt.gz",
+        "source/n127.txt.gz",
+        "source/n131.txt.gz",
+        "source/n155.txt.gz",
+        "source/n180.txt.gz",
+        "source/n228.txt.gz",
+        "source/n306.txt.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 8338,
+          "sha256": "62cec048f5fff78ee26153395bc236580ca65f56454bd034bdc8c2c8c49e1d63",
+          "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "certificates/README.md",
+          "bytes": 2095,
+          "sha256": "d7fd375f7a084b5937bafe8d0aeaadba4e225bd25c2e394c7198daae47ed4f92",
+          "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+        }
+      ],
+      "license": "No repository-wide licence stated. The author attributes an MIT-licensed Evan Daniel optimizer; that notice does not license this complete source bundle. Only factual certificate and decimal-pose data are retained; prose is hash-pinned.",
+      "claims": [
+        "Eight exact rational finite-construction upper bounds reported at n=105,108,127,131,155,180,228,306.",
+        "The author reports both exact checkers pass, including a copy of this repository verifier. These author reports are separate from any maintained native replay.",
+        "Optimizer, KKT and no-first-order-descent claims remain author reports; this packet admits no local or global optimality, rigidity or novelty claim."
+      ]
+    }
+  ]
+}

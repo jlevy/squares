@@ -12,12 +12,17 @@
 # unpinned-zero-install-runner pattern that guidelines/supply-chain-hardening.md
 # rule 6 warns against. Bumping this pin is a deliberate, reviewable act.
 FLOWMARK := uvx --from flowmark-rs==0.4.0 flowmark
+PACKING_PYTHON ?= uv run --frozen --group dev python
 
-.PHONY: format format-check hooks-install lint-fix
+.PHONY: format format-check paper-style-check hooks-install lint-fix
 
 ## Format all Markdown in the repository.
 format:
 	$(FLOWMARK) --auto .
+
+## Verify canonical paper titles without rendering or writing generated files.
+paper-style-check:
+	cd packing && $(PACKING_PYTHON) -m devtools.render_overview --check-paper-titles
 
 ## Report whether any Markdown would change, without writing. Not wired into CI
 ## on purpose: formatting drift should never break a build (see lefthook.yml).

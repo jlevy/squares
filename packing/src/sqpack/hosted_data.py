@@ -449,10 +449,27 @@ def require(
     Paths are relative to ``repo``, the repository root unless a tool that takes its own
     root, such as a census over a fixture tree, passes it.
     """
+    return require_from_manifest(
+        path, load_manifest(manifest_path), manifest_path, verify=verify, repo=repo
+    )
+
+
+def require_from_manifest(
+    path: str | Path,
+    manifest: Manifest,
+    manifest_path: Path,
+    *,
+    verify: bool = True,
+    repo: Path | None = None,
+) -> Path:
+    """Check one object against a manifest already admitted for this reader invocation.
+
+    The caller retains a freshly loaded manifest only for its current transaction;
+    object presence, size and digest are independently checked on every call.
+    """
     repo = repository_root() if repo is None else repo.resolve()
     candidate = Path(path)
     relative = candidate.resolve().relative_to(repo) if candidate.is_absolute() else candidate
-    manifest = load_manifest(manifest_path)
     item = manifest.find(relative.as_posix())
     if item is None:
         raise HostedDataError(f"{relative.as_posix()} is not named by {manifest_path}")

@@ -21,8 +21,9 @@ code span:
 
 Three generated views of the record were pages here until 2026-10-01 and are not now:
 `RESULTS.md`, `STATUS.md` and `defects.md` (think-bk2e, and the review of that date
-under `docs/project/reviews/`). Their old addresses are forwarders
-(`render_overview.MOVED_PAGES`).
+under `docs/project/reviews/`). The old status and defect addresses remain forwarders;
+`results.html` now serves the complete Results table, with `all-results.html` as its
+legacy forwarder (`render_overview.MOVED_PAGES`).
 
 A relative link is resolved against the document's own directory, as GitHub resolves
 it. Every rewritten repository target is checked against the tree being rendered, which
@@ -144,31 +145,36 @@ DOCUMENTS: tuple[SiteDocument, ...] = (
         "readme.html",
         # The file's name: the page's own would repeat the project's, which follows it.
         "README",
-        "What the project is, how it works, and where to start.",
+        "The Squares Project: current results, operating principles, "
+        "reproducible evidence, and guides to its papers and research record.",
     ),
     _document(
         repo_links.EPISTEMICS,
         "epistemics.html",
         "Epistemics",
-        "How each result is verified, confirmed and scored.",
+        "How square packing claims are verified and independently confirmed, "
+        "with the evidence and significance levels used in the result register.",
     ),
     _document(
         repo_links.SYNOPSIS,
         "synopsis.html",
         "Synopsis",
-        "The full research record: methods, claims and status.",
+        "The square packing research record, organized in chapters: methods, "
+        "theoretical results, experiments, defects, and current research priorities.",
     ),
     _document(
         repo_links.CONVENTIONS,
         "conventions.html",
         "Conventions",
-        "Record formats, identifiers and naming.",
+        "Formats and naming for square packing records, witnesses, "
+        "certificates, hypotheses, sessions, results, and their evidence contracts.",
     ),
     _document(
         repo_links.DEVELOPMENT,
         "development.html",
         "Development",
-        "Building, testing and validating the code.",
+        "Build and validate the square packing tools and published site: "
+        "pinned runtimes, test tiers, browser checks, and research admission gates.",
     ),
 )
 
@@ -181,7 +187,7 @@ _BY_SOURCE = {doc.source.relative_to(REPO).as_posix(): doc for doc in DOCUMENTS}
 #: page that shows what it holds.
 RECORD_PAGES: dict[str, str] = {
     repo_links.RESULTS: render_overview.RESULTS_PAGE,
-    repo_links.STATUS: "frontier.html",
+    repo_links.STATUS: "atlas.html",
 }
 #: Where every case's record is served, one address per case (`render_case_pages`).
 CASES_DIR = "cases"
@@ -403,9 +409,14 @@ def render_document(
         title=document.title,
         description=document.description,
         kind=document.kind,
+        structured_data=(
+            render_overview.breadcrumb_data(
+                ("Home", "index.html"), (document.title, document.name)
+            ),
+        ),
         # A long report gets the contents rail and a short one does not, by kpress's
         # own length rule, so every report keeps one layout either way.
-        toc="auto",
+        toc=False if document.name == "synopsis.html" else "auto",
         trust_mode="sanitized",
         strict_anchors=True,
         rewrite_body=lambda page: rewrite_article(page, context=context, report=report),
@@ -534,6 +545,9 @@ def site_documents() -> dict[str, Page]:
     tree = repository_tree()
     report = LinkReport()
     pages = {doc.name: render_document(doc, tree=tree, report=report) for doc in DOCUMENTS}
+    synopsis, chapters = synopsis_parts(pages["synopsis.html"])
+    pages["synopsis.html"] = synopsis
+    pages.update({page.name: page for page in chapters})
     problems = unresolved(pages, report)
     if problems:
         listing = "\n  ".join(problems)
@@ -541,6 +555,133 @@ def site_documents() -> dict[str, Page]:
             f"{len(problems)} unresolved links in the reader documents:\n  {listing}"
         )
     return pages
+
+
+def chapter_names() -> tuple[str, ...]:
+    """Stable chapter declarations, derived from the synopsis's section names."""
+    text = (REPO / repo_links.SYNOPSIS).read_text(encoding="utf-8")
+    headings = re.findall(r"^## (.+)$", text, re.MULTILINE)
+    return tuple(
+        "synopsis/" + re.sub(r"[^a-z0-9]+", "-", heading.lower()).strip("-") + ".html"
+        for heading in headings
+    )
+
+
+def synopsis_parts(full: Page) -> tuple[Page, list[Page]]:
+    """Static thematic chapters and exact visible landings for all published fragments.
+
+    Splitting rendered HTML preserves kpress's heading and footnote identifiers. Each
+    historic anchor on synopsis.html names its chapter link, so it works without script.
+    """
+    article = _ARTICLE.search(full.html)
+    if article is None:
+        raise SystemExit("synopsis.html has no article")
+    opened = re.search(r'<div class="kpress-prose[^"]*">', article[0])
+    if opened is None:
+        raise SystemExit("synopsis.html has no prose column")
+    prose = article[0][opened.end() :].removesuffix("</div></div></article>")
+    headings = list(re.finditer(r"<h2\b[^>]*>.*?</h2>", prose, re.DOTALL))
+    names = chapter_names()
+    if len(names) != len(headings):
+        raise SystemExit("synopsis chapter declarations differ from rendered sections")
+    chapters = []
+    links = []
+    introduction = prose[: headings[0].start()]
+    used: set[str] = set()
+    for index, (name, heading) in enumerate(zip(names, headings, strict=True)):
+        end = headings[index + 1].start() if index + 1 < len(headings) else len(prose)
+        content = prose[heading.start() : end]
+        title = html.unescape(re.sub(r"<[^>]+>", "", heading[0])).strip()
+        ids = element_ids("<article>" + content + "</article>")
+        links.append(f'<li><a href="{name}">{html.escape(title)}</a></li>')
+        labels = {
+            match[1]: html.unescape(re.sub(r"<[^>]+>", "", match[2]))
+            for match in re.finditer(
+                r'<h[1-6]\b[^>]*id="([^"]+)"[^>]*>(.*?)</h[1-6]>', content, re.DOTALL
+            )
+        }
+        for anchor in sorted(ids - used):
+            escaped = html.escape(anchor, quote=True)
+            label = html.escape(labels.get(anchor, anchor))
+            links.append(
+                f'<li id="{escaped}"><a href="{name}#{escaped}">'
+                f"{html.escape(title)}: {label}</a></li>"
+            )
+        used.update(ids)
+        previous = (
+            f'<a rel="prev" href="{names[index - 1]}">Previous chapter</a>' if index else ""
+        )
+        following = (
+            f'<a rel="next" href="{names[index + 1]}">Next chapter</a>'
+            if index + 1 < len(names)
+            else ""
+        )
+        nav = (
+            f'<nav aria-label="Synopsis chapters">{previous} '
+            f'<a href="synopsis.html">All chapters</a> {following}</nav>'
+        )
+        # Footnotes keep their body in the last source section. A cross-chapter target
+        # is resolved after every chapter's anchor map has been collected below.
+        body = f"<article><h1>{html.escape(title)}</h1>{nav}{content}{nav}</article>"
+        meta = render_overview.PageMeta(
+            f"Synopsis: {title}",
+            (
+                f"Square packing research synopsis: {title.lower()}. "
+                "Methods, evidence and the recorded state of the research program."
+            )[:160],
+            name,
+            structured_data=(
+                render_overview.breadcrumb_data(
+                    ("Home", "index.html"), ("Synopsis", "synopsis.html"), (title, name)
+                ),
+            ),
+        )
+        chapters.append(render_overview.static_content_page(body, meta=meta, current="github"))
+    targets = {anchor: page.name for page in chapters for anchor in element_ids(page.html)}
+    moved = []
+    for page in chapters:
+
+        def target(match: re.Match[str], name: str = page.name) -> str:
+            anchor = html.unescape(match[1])
+            destination = targets.get(anchor)
+            if destination is None or destination == name:
+                return match[0]
+            path = posixpath.relpath(destination, posixpath.dirname(name))
+            return f'href="{path}#{html.escape(anchor, quote=True)}"'
+
+        moved.append(Page(page.name, re.sub(r'href="#([^"]+)"', target, page.html)))
+    landing = (
+        introduction + "<p>The research synopsis is organized in chapters. "
+        "A link to an earlier section lands on its chapter below; open the "
+        "chapter to read the section.</p><ol>" + "".join(links) + "</ol>"
+    )
+    meta = next(doc for doc in DOCUMENTS if doc.name == "synopsis.html")
+    index = render_overview.static_content_page(
+        "<article>" + landing + "</article>",
+        meta=render_overview.PageMeta(
+            meta.title,
+            meta.description,
+            meta.name,
+            structured_data=(
+                render_overview.breadcrumb_data(
+                    ("Home", "index.html"), ("Synopsis", "synopsis.html")
+                ),
+            ),
+        ),
+        current="github",
+    )
+    return index, moved
+
+
+def document_files() -> dict[str, bytes]:
+    """Reader documents require no model files; chapter HTML holds complete content."""
+    return {}
+
+
+def chapter_pages() -> list[Page]:
+    """The declared synopsis chapters as complete pages."""
+    pages = site_documents()
+    return [pages[name] for name in chapter_names()]
 
 
 def tutorial_page() -> Page:

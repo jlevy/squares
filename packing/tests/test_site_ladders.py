@@ -80,7 +80,7 @@ def results_page(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Any]:
     sync_api = pytest.importorskip("playwright.sync_api")
     # The diagram is the results page's since 2026-10-02, under its table.
     root = Path(tmp_path_factory.mktemp("site"))
-    path = site_renders.write(root, "all-results.html")["all-results.html"]
+    path = site_renders.write(root, "results.html")["results.html"]
     with sync_api.sync_playwright() as driver:
         try:
             browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))

@@ -1,0 +1,24 @@
+{
+  "results": [
+    {
+      "exact_side": "540303893275985231628745267522385760199372637/50000000000000000000000000000000000000000000",
+      "facts": "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-105.json.gz",
+      "n": 105,
+      "offered_side": "10.80607786551970463257490535044771520398745274",
+      "source_bytes": 55208,
+      "source_path": "reviewed/witnesses/n105.json",
+      "source_sha256": "ff52d891b7ce26df78a514753b0fdee88d9b9d450fcad00e17814e2ac2552ec5",
+      "source_url": "https://github.com/lollipoll/couzo-five-exact-certificates/blob/bc389ddf7d65277cd19a9b08fb285d86346d6806/reviewed/witnesses/n105.json"
+    },
+    {
+      "exact_side": "17597249391156465040471442005510391858592626557/1000000000000000000000000000000000000000000000",
+      "facts": "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-292.json.gz",
+      "n": 292,
+      "offered_side": "17.597249391156465040471442005510391858592626557",
+      "source_bytes": 141066,
+      "source_path": "reviewed/witnesses/n292.json",
+      "source_sha256": "b8d55be6e49b524bb1035b6bcc660316e35c0faa580ad57f715798815e43679e",
+      "source_url": "https://github.com/lollipoll/couzo-five-exact-certificates/blob/bc389ddf7d65277cd19a9b08fb285d86346d6806/reviewed/witnesses/n292.json"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "n17-one-round-mechanical-summary/v1",
+  "status": "completed_method_miss",
+  "verification_passed": true,
+  "construction_seconds": 35.84634687501239,
+  "fresh_seconds": 37.18069445801666,
+  "supervision_seconds": 73.19337891699979,
+  "cleanup_complete": true,
+  "source_commit": "4c5b6356671491413b1de2e1f61db94025643f09",
+  "original_rows_inherited": 1056,
+  "foreign_rows_each_pass": 992,
+  "foreign_groups_recovered": 16,
+  "new_live_row_deletions": 0,
+  "additional_lost_lengths": {
+    "1": "0",
+    "2": "0",
+    "3": "0",
+    "4": "0",
+    "5": "0",
+    "6": "0",
+    "7": "0",
+    "8": "0",
+    "9": "0",
+    "11": "0",
+    "12": "0",
+    "13": "0",
+    "14": "0",
+    "18": "0",
+    "20": "0",
+    "21": "0"
+  },
+  "old_parameter_loss_not_recounted": "11/32",
+  "closure": null,
+  "sole_astra_actual_result_review": "CLEAR as scoped complete method miss; no global theorem",
+  "files": {
+    "certificate.json": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/certificate.json",
+      "bytes": 7050191,
+      "sha256": "c92d3c98028323cfea39eab341d5e51325a2e6eb5367b2fd2fad036cea740d3d"
+    },
+    "replay.json": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/replay.json",
+      "bytes": 7050355,
+      "sha256": "fb9681de19211e3aad3a7888bf358d4506443473a11ba5b4cf1dfe8c8cd9da81"
+    },
+    "launch.json": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/launch.json",
+      "bytes": 4123,
+      "sha256": "5cb824b6e52fcac32f0a80187ff2eb86bfab3cd64dea0bd69e22d65c9c166178"
+    },
+    "phase-execution.json": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/phase-execution.json",
+      "bytes": 1966,
+      "sha256": "511a6d508ff56b7942a1df876ed50ec553d25db196bac62c084e9107f8f4a1d5"
+    },
+    "supervision.json": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/supervision.json",
+      "bytes": 1554,
+      "sha256": "c08cbe75fe3a1fd31aaf6dc6a3ccef144bda4707906d2b5f2e93bddc5e8fd740"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "n17-registered-two-phase-execution/v1",
+  "started_at": "2026-10-07T14:18:42.699075+00:00",
+  "phase_runs": [
+    {"phase":"production","argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.produce_n17_conditional_owned_hull","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/descriptor.json","--max-seconds","600","--output","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/production.json","--child-output","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/conditional-node.json.gz"],"returncode":0,"wall_seconds":310.0911927080015},
+    {"phase":"fresh_verification","argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.verify_n17_conditional_owned_hull","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/fresh-descriptor.json","--max-seconds","300","--output","campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/verification.json"],"returncode":1,"wall_seconds":308.84116966702277}
+  ],
+  "wall_seconds": 618.9345706250169
+}
+

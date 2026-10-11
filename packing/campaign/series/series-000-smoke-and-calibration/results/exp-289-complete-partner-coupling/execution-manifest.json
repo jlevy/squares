@@ -1,0 +1,74 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "registered_at": "2026-10-07T18:48:27.361776Z",
+  "source_freeze": "registration commit resolved and recorded at launch",
+  "target_unrun": true,
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_partner_pose_coupling",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/descriptor.json",
+        "--max-seconds",
+        "120",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_partner_pose_coupling",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/descriptor.json",
+        "--max-seconds",
+        "120",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/replay.json"
+      ]
+    }
+  ],
+  "primary_criterion": "Construction and a fresh process both reconstruct closed_region_exclusion with criterion_met=true: every one of 1056 parent rows and 992 foreign rows is accounted, all17 endpoint calibration and family-disjointness pass, exact mathematical payloads agree, and at least one frozen h in [1/128,1/512,1/2048,1/8192] covers every closed owner0 piece intersecting the declared position-angle box. Fixedpoint-only removal is secondary and misses this primary criterion. A complete fixedpoint miss skips the region ladder by the declared monotonic obstruction; it is not four executed misses. Refused/incomplete results are not mathematical negatives. Conditional accepted-parent scope only; no whole guard/census/capture/global optimality claim.",
+  "budget": "One worker, construction120s + fresh120s under combined240s owned-group TERM240/KILL250; sampled4096MiB PER live process, not aggregate or allocation-time hardcap. All input, rational, polygon, support and sweep ceilings frozen in research-2026-10-07-n17-complete-partner-coupling.md; five10MiB JSON roles,512MiB compressed/2GiB decoded native node,64MiB output. Preserve resource stops and cleanup; canonical original node is streamed twice during intake.",
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "240",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/phase-execution.json"
+  ]
+}

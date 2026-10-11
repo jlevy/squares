@@ -1,0 +1,60 @@
+{
+  "all16_steps_exact": true,
+  "owners": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    13,
+    14,
+    18,
+    20,
+    21
+  ],
+  "rows_each_full64": true,
+  "step_counter_totals": {
+    "partner_rows": 2208,
+    "rows_full": 1024,
+    "collision_facet_checks": 25134984,
+    "collision_regions": 3008,
+    "cover_checks": 1024
+  },
+  "verification_count_match": true,
+  "memo_evictions16": true,
+  "step_checks_wall_sum_seconds": 97.11252291599521,
+  "unattributed_replay_wall_seconds": 14.432830625970382,
+  "longest4_checks": [
+    {
+      "step": 14,
+      "owner": 20,
+      "check_step_wall_seconds": 17.02572183299344
+    },
+    {
+      "step": 15,
+      "owner": 21,
+      "check_step_wall_seconds": 13.544426832988393
+    },
+    {
+      "step": 10,
+      "owner": 11,
+      "check_step_wall_seconds": 11.229687709012069
+    },
+    {
+      "step": 8,
+      "owner": 8,
+      "check_step_wall_seconds": 7.946751458977815
+    }
+  ],
+  "facet_pairs_max": 6144,
+  "facet_pairs_evicted": 0,
+  "forbidden_pairs_evicted": 192,
+  "minimum_entries_max": 245760,
+  "all_current_rss_samples_available": true
+}

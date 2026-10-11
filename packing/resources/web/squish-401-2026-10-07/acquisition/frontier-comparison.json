@@ -1,0 +1,115 @@
+{
+  "date": "2026-10-07",
+  "comparisons": [
+    {
+      "n": 108,
+      "previous_reported": "10.92591939016138",
+      "previous_exact": null,
+      "previous_source_key": "[Kingbird]",
+      "previous_verified": "10.92591939016139",
+      "previous_verified_exact": "1092591939016139/100000000000000",
+      "source_reported": "10.9206589394033085",
+      "source_exact": "6147784441267127/562949953421312"
+    },
+    {
+      "n": 126,
+      "previous_reported": "11.774735132387832842560264587322",
+      "previous_exact": null,
+      "previous_source_key": "[evand exact optima 2026-10-05]",
+      "previous_verified": "11.774735132387832842560264587322",
+      "previous_verified_exact": "5887367566193916421280132293661/500000000000000000000000000000",
+      "source_reported": "11.7735852916961079",
+      "source_exact": "4828972106460286237253237344483/410153066106902321950462312448"
+    },
+    {
+      "n": 129,
+      "previous_reported": "11.88130621809000",
+      "previous_exact": null,
+      "previous_source_key": "[Kingbird]",
+      "previous_verified": "11.88130621809001",
+      "previous_verified_exact": "1188130621809001/100000000000000",
+      "source_reported": "11.8808935876459927",
+      "source_exact": "834853717316974191611773864459/70268596478725557239871963136"
+    },
+    {
+      "n": 130,
+      "previous_reported": "11.911187706548755",
+      "previous_exact": null,
+      "previous_source_key": "[franciscouzo square-packing 2026-09-27]",
+      "previous_verified": "11.911187706548756",
+      "previous_verified_exact": "2977796926637189/250000000000000",
+      "source_reported": "11.9044830325168771",
+      "source_exact": "6701628168660175/562949953421312"
+    },
+    {
+      "n": 153,
+      "previous_reported": "12.88166675700900",
+      "previous_exact": null,
+      "previous_source_key": "[Kingbird]",
+      "previous_verified": "12.88166675700901",
+      "previous_verified_exact": "1288166675700901/100000000000000",
+      "source_reported": "12.8796793733329640",
+      "source_exact": "7250614903299225/562949953421312"
+    },
+    {
+      "n": 154,
+      "previous_reported": "12.931663721166847019324363825319",
+      "previous_exact": null,
+      "previous_source_key": "[evand exact optima 2026-10-05]",
+      "previous_verified": "12.931663721166847019324363825319",
+      "previous_verified_exact": "12931663721166847019324363825319/1000000000000000000000000000000",
+      "source_reported": "12.9282936576777576",
+      "source_exact": "7277982312406737/562949953421312"
+    },
+    {
+      "n": 155,
+      "previous_reported": "12.95561959213445243801096476729",
+      "previous_exact": null,
+      "previous_source_key": "[evand exact optima 2026-10-05]",
+      "previous_verified": "12.95561959213445243801096476729",
+      "previous_verified_exact": "1295561959213445243801096476729/100000000000000000000000000000",
+      "source_reported": "12.9536770693532741",
+      "source_exact": "1672234187663680786096364585719/129093397859976830657337753600"
+    },
+    {
+      "n": 180,
+      "previous_reported": "13.927888140498096339178993024781",
+      "previous_exact": null,
+      "previous_source_key": "[evand exact optima 2026-10-05]",
+      "previous_verified": "13.927888140498096339178993024781",
+      "previous_verified_exact": "13927888140498096339178993024781/1000000000000000000000000000000",
+      "source_reported": "13.9236350042524233",
+      "source_exact": "3068446722737763377509947691807/220376842814439473250054438912"
+    },
+    {
+      "n": 209,
+      "previous_reported": "14.953939011857122362887224108935",
+      "previous_exact": null,
+      "previous_source_key": "[evand exact optima 2026-10-05]",
+      "previous_verified": "14.953939011857122362887224108935",
+      "previous_verified_exact": "2990787802371424472577444821787/200000000000000000000000000000",
+      "source_reported": "14.9496179522017929",
+      "source_exact": "4785398243001234645794991233471/320101708170839058852217880576"
+    },
+    {
+      "n": 238,
+      "previous_reported": "15.931725503591328233767187231141",
+      "previous_exact": null,
+      "previous_source_key": "[evand exact optima 2026-10-05]",
+      "previous_verified": "15.931725503591328233767187231141",
+      "previous_verified_exact": "15931725503591328233767187231141/1000000000000000000000000000000",
+      "source_reported": "15.9294090272583144",
+      "source_exact": "8967460069924095/562949953421312"
+    },
+    {
+      "n": 303,
+      "previous_reported": "17.924341009851128373110514612828",
+      "previous_exact": null,
+      "previous_source_key": "[evand exact optima 2026-10-05]",
+      "previous_verified": "17.924341009851128373110514612828",
+      "previous_verified_exact": "4481085252462782093277628653207/250000000000000000000000000000",
+      "source_reported": "17.9203123729203497",
+      "source_exact": "1261029876953859/70368744177664"
+    }
+  ]
+}

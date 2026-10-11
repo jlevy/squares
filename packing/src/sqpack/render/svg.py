@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import base64
+import binascii
 import copy
 import re
 from pathlib import Path
@@ -15,6 +17,9 @@ SQPACK_NS = "https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1"
 RENDERER_VERSION = "8"
 XML_DECLARATION = '<?xml version="1.0" encoding="UTF-8"?>\n'
 MOTION_MARKER = "sqpack-motion-v1"
+PRINT_FONT_MARKER = "sqpack-print-fonts-v1"
+PRINT_FONT_FAMILY = "Squares Atlas Print"
+PRINT_ITALIC_FAMILY = "SquaresAtlasPrint-BoldItalic"
 MOTION_MEDIA_PREFIX = "@media (prefers-reduced-motion: no-preference){"
 ALLOWED_ELEMENTS = {
     "svg",
@@ -152,7 +157,43 @@ def _validate_motion_css(css: str) -> None:
         raise ValueError("motion CSS lies outside the renderer grammar")
 
 
-def validate_safe_tree(root: ET.Element) -> None:
+def _validate_print_font_css(css: str) -> None:
+    """Check the CSS grammar and encoding of caller-trusted print-font declarations.
+
+    The caller must supply CSS generated from trusted retained assets. This checks
+    the declaration shape, canonical base64, and TrueType signature; it does not
+    validate complete font structure or establish font identity or provenance.
+    """
+    # The leading license comment is inert; anything after its first terminator must
+    # match both complete declarations, with no selectors, imports, or other URLs.
+    if not css.startswith("/*\n") or "*/" not in css:
+        raise ValueError("embedded print fonts require their license comment")
+    _license, body = css.split("*/", 1)
+    declarations = []
+    for family, style in ((PRINT_FONT_FAMILY, "normal"), (PRINT_ITALIC_FAMILY, "italic")):
+        declarations.append(
+            r'@font-face \{ font-family: "'
+            + re.escape(family)
+            + r'"; font-style: '
+            + style
+            + r'; font-weight: 700; src: url\("data:font/ttf;base64,'
+            + r'([A-Za-z0-9+/]+={0,2})"\) format\("truetype"\); \}'
+        )
+    match = re.fullmatch("\n".join(declarations), body.strip())
+    if match is None:
+        raise ValueError("print font CSS lies outside the retained-face grammar")
+    for encoded in match.groups():
+        try:
+            content = base64.b64decode(encoded, validate=True)
+        except binascii.Error as error:
+            raise ValueError("embedded print font payload is not base64") from error
+        if not content.startswith(b"\x00\x01\x00\x00"):
+            raise ValueError("embedded print font payload is not TrueType")
+        if base64.b64encode(content).decode("ascii") != encoded:
+            raise ValueError("embedded print font payload is not canonical base64")
+
+
+def validate_safe_tree(root: ET.Element, *, embedded_print_fonts: str | None = None) -> None:
     if root.tag != svg_tag("svg"):
         raise ValueError("SVG document root must be svg")
     ids: set[str] = set()
@@ -186,6 +227,13 @@ def validate_safe_tree(root: ET.Element) -> None:
         if name == "style":
             styles += 1
             css = node.text or ""
+            if (
+                embedded_print_fonts is not None
+                and node.attrib.get("data-sqpack-style") == PRINT_FONT_MARKER
+                and css == embedded_print_fonts
+            ):
+                _validate_print_font_css(css)
+                continue
             if node.attrib.get("data-sqpack-style") != MOTION_MARKER:
                 raise ValueError("arbitrary CSS is forbidden")
             if any(token in css.lower() for token in ("url(", "@import")):
@@ -210,11 +258,52 @@ def _strip_indent_inside_text(document: ET.Element) -> None:
                 child.tail = None
 
 
-def serialize_svg(root: ET.Element) -> str:
-    validate_safe_tree(root)
+def _strip_formatting_indent(document: ET.Element) -> None:
+    """Remove cached formatting only from SVG and metadata container elements.
+
+    Text, tspan, descriptions, style payloads and metadata values retain their whole
+    subtrees: even whitespace-only runs there can be meaningful. A mixed-content
+    container is also left intact. Plain spaces are never assumed to be indentation.
+    """
+    containers = {
+        svg_tag(name) for name in ("svg", "g", "defs", "clipPath", "marker", "metadata")
+    } | {sqpack_tag("profile")}
+
+    def visit(node: ET.Element) -> None:
+        if node.tag not in containers:
+            return
+        if (node.text and node.text.strip()) or any(
+            child.tail and child.tail.strip() for child in node
+        ):
+            return
+        if node.text and "\n" in node.text:
+            node.text = None
+        for child in node:
+            visit(child)
+            if child.tail and "\n" in child.tail:
+                child.tail = None
+
+    visit(document)
+
+
+def serialize_svg(
+    root: ET.Element,
+    *,
+    embedded_print_fonts: str | None = None,
+    compact: bool = False,
+) -> str:
+    """Serialize safely, optionally omitting structural formatting indentation.
+
+    Compact output preserves semantic whitespace in text and payload subtrees. The
+    default keeps the established pretty-printing behavior and output bytes.
+    """
+    validate_safe_tree(root, embedded_print_fonts=embedded_print_fonts)
     document = copy.deepcopy(root)
-    ET.indent(document, space="  ")
-    _strip_indent_inside_text(document)
+    if compact:
+        _strip_formatting_indent(document)
+    else:
+        ET.indent(document, space="  ")
+        _strip_indent_inside_text(document)
     text = (
         XML_DECLARATION
         + ET.tostring(document, encoding="unicode", short_empty_elements=True)

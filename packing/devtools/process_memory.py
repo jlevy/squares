@@ -7,6 +7,7 @@ import importlib
 import os
 import sys
 from ctypes import wintypes
+from functools import cache
 from pathlib import Path
 
 
@@ -41,15 +42,79 @@ def _windows_memory() -> tuple[int, int]:
     return int(value.peak), int(value.working)
 
 
+class _DarwinTaskInfo(ctypes.Structure):
+    """Native proc_taskinfo ABI from Apple's <sys/proc_info.h>."""
+
+    _fields_ = [
+        (name, ctypes.c_uint64)
+        for name in (
+            "virtual_size",
+            "resident_size",
+            "total_user",
+            "total_system",
+            "threads_user",
+            "threads_system",
+        )
+    ] + [
+        (name, ctypes.c_int32)
+        for name in (
+            "policy",
+            "faults",
+            "pageins",
+            "cow_faults",
+            "messages_sent",
+            "messages_received",
+            "syscalls_mach",
+            "syscalls_unix",
+            "csw",
+            "threadnum",
+            "numrunning",
+            "priority",
+        )
+    ]
+
+
+@cache
+def _darwin_libproc() -> ctypes.CDLL:
+    library = ctypes.CDLL("/usr/lib/libproc.dylib", use_errno=True)
+    library.proc_pidinfo.argtypes = [
+        ctypes.c_int,
+        ctypes.c_int,
+        ctypes.c_uint64,
+        ctypes.c_void_p,
+        ctypes.c_int,
+    ]
+    library.proc_pidinfo.restype = ctypes.c_int
+    return library
+
+
+def _darwin_current_memory() -> int:
+    value = _DarwinTaskInfo()
+    size = ctypes.sizeof(value)
+    ctypes.set_errno(0)
+    # PROC_PIDTASKINFO = 4 in Apple's <sys/proc_info.h>.
+    received = _darwin_libproc().proc_pidinfo(os.getpid(), 4, 0, ctypes.byref(value), size)
+    if received != size:
+        error = ctypes.get_errno()
+        detail = os.strerror(error) if error else "no native error reported"
+        raise OSError(error, f"proc_pidinfo returned {received}/{size} bytes: {detail}")
+    resident = int(value.resident_size)
+    if resident <= 0:
+        raise OSError("proc_pidinfo returned no current resident memory")
+    return resident
+
+
 def current_memory_bytes() -> int:
-    """Current resident bytes on Windows/Linux; unsupported hosts fail explicitly.
+    """Current resident bytes on Windows/Linux/macOS; other hosts fail explicitly.
 
     Lifetime peaks are separate reporting evidence, never this guard's input. macOS
-    current RSS is deliberately ungated until a native implementation is validated.
+    uses libproc's resident-size field in bytes, not physical footprint or peak RSS.
     """
     if sys.platform == "win32":
         return _windows_memory()[1]
     if sys.platform.startswith("linux"):
         resident_pages = int(Path("/proc/self/statm").read_text(encoding="ascii").split()[1])
         return resident_pages * os.sysconf("SC_PAGE_SIZE")
+    if sys.platform == "darwin":
+        return _darwin_current_memory()
     raise OSError(f"Current resident memory is unavailable on {sys.platform}")

@@ -1,0 +1,22 @@
+{
+  "schema": "n17-registered-experiment-launch/v1",
+  "experiment": "exp-299",
+  "launch_utc": "2026-10-08T00:58:14.793125+00:00",
+  "git_commit": "06168fc33778c270b08f289ef9fb65cf1460bdf8",
+  "scientific_sources_clean_at_launch": true,
+  "target_unrun_at_launch": true,
+  "manifest_sha256": "7a87e29c9b0cd851a082fc362a976bfa1aed51c8fe62d42efbdd0909cea2a4a2",
+  "python": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "executable": "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+  "source_byte_sha256": {
+    "devtools/check_n17_collective_row_coverage.py": "8fd962550b6d809f593a8142576506dd7aa7ce61ead2cdfc22879b2a8b8ee469",
+    "devtools/check_n17_full_square_partner_coupling.py": "e711a74160b414f3b62c3a429d2f91b370994821cc10ba630d5329bea60b303b",
+    "devtools/check_n17_guard_conditioned_ownership.py": "40380494faccb67d57827a0f20630e02c20c1648a17489a58e0ce79eb44f680e",
+    "devtools/check_n17_partner_pose_coupling.py": "12d827b50b1d21a2a138bf7b0022aaad60a23c3edc96306d78b7b5711eb8ea61",
+    "devtools/check_n17_strict_core_regional_transfer.py": "fe73f42375c4b39f6ed6b83d7b9ec9e772ea0f65977f86291431aad5172b8e7a",
+    "devtools/check_n17_two_center_children.py": "15e0d71247a825471421efaa1293e1f308cf4a3e24b43815ffadf62cc09245d2",
+    "devtools/probe_n17_conditional_center_cases.py": "3a72f430923cb067692ab47a6ed39e17dc03e6439d15501f4bcbc5e01e319b0c",
+    "devtools/probe_n17_conditional_owned_hull.py": "df3028f369d87301e17781650772a1286380fd970f082944b5812714d4886b29",
+    "devtools/verify_n17_kernel_certificate.py": "a6e91c812ad17ce6845f8d359d492eb9877540ac95db430a34e80919a19a00b3"
+  }
+}

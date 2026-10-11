@@ -142,7 +142,7 @@ The recent merges the page has to reflect:
   lineage.
 - PR #241: Evan Daniel’s $s(21) = 5$ and $s(45) = 7$, Guzhou0806’s R068 at
   $s(17) > 116511/25000$, and wand125’s rectangle bounds to $n = 95$.
-- PRs #239 and #240: the v0.4.2 edition, the starred recent results on the atlas, and
+- PRs #239 and #240: the v0.4.2 edition, recent-result highlighting on the atlas, and
   the ascent films.
 
 ## Design
@@ -184,28 +184,10 @@ The data layer reuses the register’s own code rather than re-deriving it:
 
 ### URL Layout
 
-As built (amended 2026-09-30, 2026-10-01 and 2026-10-03):
-
-| Path | Page | Nav tab |
-| --- | --- | --- |
-| `/` | the overview (new) | Overview |
-| `/frontier.html` | the frontier atlas, $n = 1\ldots324$ (new) | Frontier |
-| `/all-results.html` | every register entry, the results table (new) | Results |
-| `/cases/` | the record page: the index of every case, and the reader that shows one case’s record in the site’s design, with that record’s own address in the bar (new, 2026-10-03) | none |
-| `/cases/N.html` | one case’s record file per tracked $n$, a plain page with its own title and link preview, which sends a reader with scripts on to `/cases/`; the record page and the case popover on the overview and the frontier atlas fetch it (new, 2026-10-03) | none; opened from the atlas grid and the frontier atlas |
-| `/papers.html` | the papers page: one large card each for the optimality paper, the explainer and the tutorial, each a link that goes to its paper in the same tab (new) | Papers |
-| `/papers/n11-optimality-review.html` | the n = 11 optimality paper, from its own renderer and Pages job, with its Markdown and PDF beside it under the same slug | Papers |
-| `/papers/n11-lower-bounds-explainer.html` | the n = 11 explainer, with its Markdown and PDF beside it under the same slug (moved from `/explainer.html`, and before that from `/`) | Papers |
-| `/tutorial.html` | `TUTORIAL.md`, rendered (new) | Papers |
-| `/visualize.html` | the $n = 1\ldots324$ film at full width, with Film and Workbench tabs (new) | Visualize |
-| `/workbench/` | the workbench, now carrying the site nav and the Workbench tab | Visualize |
-| `/readme.html`, `/epistemics.html`, `/synopsis.html`, `/conventions.html`, `/development.html` | the repository documents, rendered for the documentation cards’ popovers, in the cards’ order | none |
-| `/results.html`, `/status.html`, `/defects.html` | forwarders since 2026-10-01 (`think-bk2e`): `RESULTS.md`, `STATUS.md` and `defects.md` are no longer pages, and their old addresses send a visit to `/all-results.html`, to `/frontier.html` and to `defects.md` on GitHub | none |
-| `/cases.html` | a forwarder since 2026-10-03 (`think-bnw2`): every case record was on this one page at `#n-N`, and a visit lands on `/cases/` with its fragment kept, which shows that case | none |
-| `/result/t-nnn.html` | one result’s overview, a fragment its row’s popover fetches; not a page | none |
-| the composite assets | unchanged, at the root | none |
-| `/explainer.html`, `/n11-optimality/`, `/n11-optimality/t-060-explainer.html` | forwarders at the papers’ old addresses: each sends a reader on to the paper with the query string and fragment they came with | none |
-| `/t-018-explainer.{md,pdf}`, `/n11-optimality/t-060-explainer.{md,pdf}` | copies of the papers’ Markdown and PDF at their old addresses | none |
+The current paths, canonical addresses, producers and retained legacy registrations are
+generated in [Published Site URLs](../../site-urls.md).
+See [The Published Site](../../../../development.md#the-published-site) for adding
+pages, forwarders, file copies and tombstones, and for the required validation commands.
 
 The nav also links the repository on GitHub.
 The planned `/synopsis.html` nav page was dropped for a card (see
@@ -296,7 +278,7 @@ runs:
 3. **Recent Results.** One table of every result, newest first, in the results page’s
    six columns (id, n, result, credit, rungs with the kind and the status under them,
    date), filtered by default to significance S4 and up, a maximum age of 180 days and
-   superseded results hidden, with a link to the full table on `all-results.html`. It
+   superseded results hidden, with a link to the full table on `results.html`. It
    replaces the headline cards, the exact-value cards and the recent-changes list.
    Until 2026-10-01 a separate disclosure followed it, the cases awaiting a replay; a
    reported result is now a row of the table with the status *recorded* (`think-d04u`).
@@ -330,7 +312,7 @@ the template as a literal.
 
 One row per register entry, grouped and ordered exactly as `RESULTS.md` is, through the
 shared `grouped_results()`. Amended 2026-09-30: the table is its own page,
-`all-results.html`, with a Results nav tab; the overview keeps Recent Results, and
+`results.html`, with a Results nav tab; the overview keeps Recent Results, and
 `forward.js` sends old `index.html#every-result` and `#t-nnn` links there.
 Amended 2026-10-01: the table is one flat list, newest first, with no lineage headings;
 `RESULTS.md` keeps the grouping.
@@ -384,7 +366,7 @@ No value on the page is typed by hand or read from `STATUS.md`.
 | Reported lower | `reported_lower_bound`: `exact_form`, `kind`, `proved_by`, `proved_year`, `source_key` |
 | Verified lower | `verified_lower_bound`: `exact_form`, else `value` |
 | Gap | verified upper minus verified lower, computed exactly where both are exact |
-| Recent | a star when the verified lower bound is recent, from `bound-citations.json`, as on the atlas figure |
+| Recent | a recent verified lower bound from `bound-citations.json`, highlighted in red |
 | Records | the case file, and each `evidence` id on the bounds, linked |
 
 **Rendering values cleanly.** Exact forms are shown as mathematics, not as ASCII: `31/8`
@@ -801,7 +783,7 @@ decisions that changed the plan above:
   (`think-7oho`). The homepage has no `h1` or tagline, the version is in the footer
   only, and the problem section makes no bound or open-case claim (`think-sz43`,
   `think-r07m`, `think-7stg`).
-- **More pages.** Every result moves to `all-results.html`, each case gets a record at
+- **More pages.** Every result appears on `results.html`, each case gets a record at
   `cases.html#n-N`, and Visualize (`visualize.html`) shows the film with the workbench
   under a second tab (`think-x8ev`, `think-7vjh`, `think-88zu`).
 - **Recent Results replaces the headline cards and the recent-changes list**: one table

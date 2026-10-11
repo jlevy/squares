@@ -1,0 +1,9 @@
+{
+  "schema": "n17-conditional-owned-hull-gate/v1",
+  "status": "incomplete",
+  "error": "conditional gate rational string ceiling",
+  "producer_run": false,
+  "conditional_owned_exclusion": false,
+  "global_optimality_proved": false,
+  "census_admission_proved": false
+}

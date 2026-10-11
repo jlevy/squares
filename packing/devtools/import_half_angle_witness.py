@@ -77,6 +77,23 @@ def _corners(x: Fraction, y: Fraction, t: Fraction) -> list[tuple[Fraction, Frac
     ]
 
 
+def rational_literal(raw: Any, label: str) -> Fraction:
+    """Parse the adapter's bounded exact rational-string input contract."""
+    return _fraction(raw, label)
+
+
+def unique_json_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """Build an untrusted JSON object while refusing duplicate keys."""
+    return _object(pairs)
+
+
+def half_angle_corners(
+    x: Fraction, y: Fraction, t: Fraction
+) -> list[tuple[Fraction, Fraction]]:
+    """Expose the exact conversion for bounded packet adapters."""
+    return _corners(x, y, t)
+
+
 def import_source(source: Path, *, expected_n: int, expected_side: str) -> dict[str, Any]:
     """Convert only a complete, independently feasible rational source roster."""
     if not 1 <= expected_n <= MAX_SQUARES:

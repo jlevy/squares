@@ -158,15 +158,18 @@ def test_a_record_reporting_another_source_owes_the_catalogue_nothing() -> None:
 
 
 def test_the_catalogue_records_quote_their_statements_and_the_check_sees_a_drop() -> None:
-    """n = 69 and 179 carry the catalogue's statements; without them the check fails.
-    n = 126 still quotes the catalogue's statement, but since 6 October its reported bound
-    cites Evan Daniel's exact optimum (T-098) rather than the catalogue, and the check
-    holds only records whose reported bound is the catalogue's."""
+    """n = 69 owes the catalogue's statement, and dropping it must fail the check.
+    n = 179 retains its historical quote but now reports the 7 October SQUISH update;
+    the catalogue check holds only records whose reported bound is the catalogue's."""
     entries = assistance.record_catalogue_entries()
     for n in (69, 179):
         text = (assistance.FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8")
         assert assistance.catalogue_owed(text, entries) == ()
         start = text.index("In the catalogue’s words:")
         end = text.index("”", start) + 1
-        (owed,) = assistance.catalogue_owed(text[:start] + text[end:], entries)
-        assert owed.startswith("In the catalogue’s words: “")
+        missing = assistance.catalogue_owed(text[:start] + text[end:], entries)
+        if n == 69:
+            (owed,) = missing
+            assert owed.startswith("In the catalogue’s words: “")
+        else:
+            assert missing == ()

@@ -147,7 +147,7 @@ def test_the_columns_table_has_one_line_a_column() -> None:
     shown has no width."""
     report: list[dict[str, object]] = [
         {
-            "page": "all-results.html",
+            "page": "results.html",
             "width": 1280,
             "table": "site-table.site-results",
             "section": "Every Result",
@@ -174,7 +174,7 @@ def test_the_columns_table_has_one_line_a_column() -> None:
                     "column": "Credit",
                     "width": 102.6,
                     "lines": 9,
-                    "broken": ["Queuingtheorydotcom", "Guzhou0806"],
+                    "broken": ["Ahmed", "Guzhou0806"],
                     "tallest": {"row": "t-048", "height": 238.8, "lines": 9},
                 },
                 {
@@ -213,7 +213,7 @@ def test_the_chips_table_has_one_line_a_kind_of_chip_on_a_surface() -> None:
 
     def chip(kind: str, text: str, block: float, lines: int) -> dict[str, object]:
         return {
-            "page": "all-results.html",
+            "page": "results.html",
             "width": 1280,
             "state": "page",
             "chip": kind,
@@ -532,29 +532,29 @@ def test_a_link_to_a_page_that_moved_is_reported(tmp_path: Path) -> None:
     `render_overview.MOVED_PAGES` is named with the link, from the root or from a
     directory under it. The forwarders themselves and an address off the site are not."""
     moved = [old for old, _ in render_overview.MOVED_PAGES]
-    assert moved[:3] == ["results.html", "status.html", "defects.html"]
+    assert moved[:4] == ["all-results.html", "status.html", "frontier.html", "defects.html"]
     (tmp_path / "result").mkdir()
     for old in moved:
         (tmp_path / old).parent.mkdir(exist_ok=True)
-        (tmp_path / old).write_text('<a href="all-results.html">moved</a>', encoding="utf-8")
-    (tmp_path / "all-results.html").write_text(
-        '<a href="frontier.html#n-11">a row</a>'
-        '<a href="https://example.org/results.html">elsewhere</a>',
+        (tmp_path / old).write_text('<a href="results.html">moved</a>', encoding="utf-8")
+    (tmp_path / "results.html").write_text(
+        '<a href="atlas.html#n-11">a row</a>'
+        '<a href="https://example.org/all-results.html">elsewhere</a>',
         encoding="utf-8",
     )
     assert moved_links(tmp_path) == []
     (tmp_path / "index.html").write_text(
-        '<a href="results.html#next-actions">old</a>'
+        '<a href="all-results.html#next-actions">old</a>'
         '<iframe src="defects.html?view=embed"></iframe>'
-        '<a href="all-results.html#t-060">new</a>',
+        '<a href="results.html#t-060">new</a>',
         encoding="utf-8",
     )
     (tmp_path / "result" / "t-001.html").write_text(
         '<a href="../status.html">old</a>', encoding="utf-8"
     )
     assert moved_links(tmp_path) == [
+        "index.html: all-results.html#next-actions",
         "index.html: defects.html?view=embed",
-        "index.html: results.html#next-actions",
         "result/t-001.html: ../status.html",
     ]
 
@@ -593,25 +593,25 @@ def test_the_builds_are_named_for_what_they_build(
 ) -> None:
     """`--skip` takes a paper by its slug, as everything else names it, and every paper
     of the site is a build (`render_overview.PAPERS`): the first, then the site's pages
-    and the workbench, then each review, built by the renderer the registry names for it
+    and the workbench, then each independent paper, built by its registered renderer
     with its PDF, as its Pages job builds it."""
     from devtools import preview_site  # noqa: PLC0415
 
-    assert preview_site.BUILDS == (
-        "n11-lower-bounds-explainer",
+    independent = tuple(
+        paper
+        for paper in render_overview.PAPERS
+        if paper.slug != render_overview.N11_LOWER_BOUNDS_EXPLAINER
+    )
+    assert independent
+    assert (
+        render_overview.N11_LOWER_BOUNDS_EXPLAINER,
         "pages",
         "workbench",
-        "n11-threshold-bound-review",
-        "n11-optimality-review",
-    )
-    assert (
-        tuple(paper.slug for paper in render_overview.PAPERS[1:]) == preview_site.OTHER_PAPERS
-    )
+        *(paper.slug for paper in independent),
+    ) == preview_site.BUILDS
+    assert tuple(paper.slug for paper in independent) == preview_site.OTHER_PAPERS
     ran: list[tuple[str, ...]] = []
     monkeypatch.setattr(preview_site, "_run", lambda *args: ran.append(args))
-    for slug in preview_site.OTHER_PAPERS:
-        preview_site.build_paper(slug, Path("/site"))
-    assert ran == [
-        ("devtools.render_n11_threshold_bound_review", "--site", "/site", "--pdf"),
-        ("devtools.render_n11_optimality_review", "--site", "/site", "--pdf"),
-    ]
+    for paper in independent:
+        preview_site.build_paper(paper.slug, Path("/site"))
+    assert ran == [(paper.module, "--site", "/site", "--pdf") for paper in independent]

@@ -1,0 +1,26 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "squarepacker-k2-minus-c-quarter",
+  "source_url": "https://github.com/squarepacker/k2-minus-c-quarter",
+  "source_ref": "v1.0",
+  "source_commit": "abbedcf4bba2e4053f0278e669d84966a89c8b73",
+  "retrieved_at_utc": "2026-10-08T00:22:01Z",
+  "git_scope": "Published v1.0 theorem text, original PDF, attribution, licences, source review summary and constant-checking programs only; numerical analogue campaigns are outside this packet.",
+  "archived_dir": "source",
+  "license": "CC BY 4.0 for paper; MIT for code, with original notices retained.",
+  "claims": [
+    "Issue #414: the quarter asymptotic deficiency theorem and its analytic-Lemma-4.9 variant, read as reported claims from the pinned primary text."
+  ],
+  "scope": [
+    ".zenodo.json",
+    "LICENSE",
+    "README.md",
+    "SHA256SUMS",
+    "paper/paper.tex",
+    "paper/paper.pdf",
+    "paper/LICENSE",
+    "reviews/REVIEWS.md",
+    "code/k14_constants_check.py"
+  ],
+  "pinned_only": []
+}

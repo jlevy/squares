@@ -1,0 +1,20 @@
+{
+  "schema": "n17-bb-header-verification/v1",
+  "mode": "HEADER_ONLY",
+  "status": "HEADER_ONLY_PASS",
+  "header_checks_passed": true,
+  "full_verification_passed": false,
+  "tree_verification_performed": false,
+  "trig_verification_performed": false,
+  "ordinary_exclusion_admitted": false,
+  "census_admission": false,
+  "global_bound_changed": false,
+  "manifest": "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/inputs/C1-compact-manifest.json.gz",
+  "compressed_sha256": "68125ef700518c52eb3e0a2c7e5e4b7e3ffed22cf920c64a8dbb3c46f407e560",
+  "manifest_id": "131e014393e8cc50ea643e38ae8a11d19bb3a1d133f3df23b54225d781a8db64",
+  "pattern": ["side-S0","side-N0","interior-SW","interior-NW","interior-W","interior-S","interior-SE"],
+  "cells_source": {"kind":"cover","design":"ring-3-voronoi-8-tabbed-unique"},
+  "counts": {"header":1},
+  "complete_original_cell_halfplane_enclosure_checked": true,
+  "limits": {"compressed_bytes":1048576,"decoded_bytes":10485760,"output_bytes":1048576,"used_rational_bits":4096}
+}

@@ -20,6 +20,34 @@ body {
   overflow: visible;
 }
 
+/* The shared prose face can arrive after first layout even with its preload.
+   Approximate PT Serif's Latin advances while it loads, so a narrow paragraph does
+   not rewrap from the platform's smaller fallback. These local aliases transfer no
+   bytes; the more specific KPress sans/system reader choices still select their
+   own stacks. The delayed-face regression covers both fallback families. */
+@font-face {
+  font-family: "Site Prose Georgia";
+  src: local("Georgia");
+  font-style: normal;
+  font-weight: 400;
+  size-adjust: 101%;
+}
+@font-face {
+  font-family: "Site Prose Times";
+  src: local("Times New Roman"), local("Liberation Serif");
+  font-style: normal;
+  font-weight: 400;
+  size-adjust: 110.5%;
+}
+:root,
+.kpress,
+.kpress-page-main,
+.kpress-tooltip {
+  --kpress-font-prose:
+    var(--kpress-font-punctuation), "PT Serif", "Site Prose Georgia", "Site Prose Times", Georgia,
+    "Times New Roman", serif;
+}
+
 /* One accent, everywhere: the explainer's rule, redeclared where kpress sets the link. */
 :root,
 .kpress,
@@ -37,6 +65,8 @@ body {
    dark mode turns the lightness over (below). `devtools.rung_scale` measures every fill
    these make and its text contrast (paper-design.md, Color). */
 :root {
+  --site-atlas-angle-label-ink: #000;
+  --site-atlas-swatch: transparent;
   --site-rung-base: 95%;
   --site-rung-step: -5.5%;
   --site-rung-chroma-base: 0.015;
@@ -49,7 +79,7 @@ body {
    reads as a link, and light in dark mode (below): the colour of significance wherever
    the site shows one (`overview_sections.significance_mark`; the owner, 2026-10-03,
    `think-m3m4`), which `devtools.rung_scale` measures against the page in both themes.
-   The new-result star is the one warm mark. A popover's backdrop dims the page with a
+   Recent contributions use the warm result ink. A popover's backdrop dims the page with a
    scrim. A mix of the page's own colours keeps its mix in the rule that paints with it,
    since a token resolves where it is declared and the dark theme's page colours are set
    below the root; its ratio is the token: a plain chip's tint of the muted gray, and how
@@ -214,8 +244,10 @@ body {
 }
 /* The page title: the sans face in upright caps (never KPress's italic h2) at 1.5 times
    the sans base, centred. A page's `h1` in its hero takes it, and so does any heading
-   given `site-title` (the homepage, which has no `h1`, sets its first section this way). */
+   given `site-title`, including the homepage and About sections. Ordinary page H1s
+   use this style without requiring a class. */
 .site-hero h1,
+.kpress :where(.site-page) h1,
 .kpress .site-title {
   font-family: var(--kpress-font-sans);
   font-size: calc(var(--site-font-size-sans-base) * var(--paper-title-scale));
@@ -224,6 +256,17 @@ body {
   letter-spacing: var(--kpress-caps-spacing);
   text-align: center;
   text-transform: var(--kpress-caps-transform);
+}
+/* Main section titles share the homepage's breathing room on every web page. */
+@media screen {
+  .kpress {
+    --site-title-space-above: 3.5rem;
+    --site-title-space-below: 2rem;
+  }
+  .kpress :where(.site-page) h1,
+  .kpress :is(h1, h2).site-title {
+    margin-block: var(--site-title-space-above) var(--site-title-space-below);
+  }
 }
 /* A page's subtitle, such as "A survey of all reviewed results": the sans face a small
    step above the base (`--site-subtitle-scale`), in the page's own text colour, with
@@ -236,13 +279,6 @@ body {
   font-weight: var(--site-font-weight-sans-light);
   line-height: var(--paper-heading-leading);
   margin-block: var(--site-subtitle-space);
-}
-/* A title with no subtitle, a document's own `h1` among them, stands the same space
-   above its first paragraph, on screen. */
-@media screen {
-  .site-page h1 {
-    margin-block-end: var(--site-subtitle-space);
-  }
 }
 .kpress .site-hero:has(.subtitle) h1 {
   margin-block-end: 0;
@@ -356,7 +392,7 @@ body {
   }
   /* A section set in lines of its own (`SECTION_CARD_LINES`) sets no more cards to a
      line than its longest line holds, so its lines share one column width: the page
-     cards stand one, three and two, at the width of three to a line, the three papers
+     cards stand one, three and three, at the width of three to a line, the three papers
      of the n = 11 series on the line of three. */
   .site-cards[data-cards-most="3"] > .site-card {
     --site-cards-line: min(var(--site-cards-medium), 3);
@@ -453,8 +489,9 @@ body {
    font (paper-design.md, Arrows). A shaft and an open head in a 16-unit box, stroke 1.6
    with round caps and joins, painted as a mask over the text colour. Each direction is
    the drawing turned: right as drawn, left mirrored, down and up a quarter turn,
-   external an eighth turn back. The two other shapes are the sort pair and the double
-   chevron: the arrow's open head twice, one over the other, in the same box and stroke,
+   external an eighth turn back. The other shapes are the sort pair, the download arrow
+   onto a horizontal line, and the double chevron: the arrow's open head twice, one over
+   the other, in the same box and stroke,
    pointing down as drawn (double-down) and up turned half round (double-up), which the
    atlas's expander carries. Inline markup is `overview_sections.arrow_icon`; the rest
    are the pseudo-elements named here. */
@@ -462,6 +499,7 @@ body {
   --site-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 8h11M9 3.5 13.5 8 9 12.5'/%3E%3C/svg%3E");
   --site-arrow-sort: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13.5v-11M2 5.5l3-3 3 3M11 2.5v11M8 10.5l3 3 3-3'/%3E%3C/svg%3E");
   --site-arrow-double: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 3 8 7.5 12.5 3M3.5 8 8 12.5 12.5 8'/%3E%3C/svg%3E");
+  --site-arrow-download: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10'/%3E%3C/svg%3E");
 }
 /* Kept at low specificity, so each place an arrow sits can place and time it. */
 .site-icon-arrow,
@@ -523,6 +561,10 @@ body {
 .site-icon-arrow[data-arrow="double-up"] {
   --site-arrow-turn: 180deg;
   --site-arrow-nudge: 0 -2px;
+}
+.site-icon-arrow[data-arrow="download"] {
+  --site-arrow-nudge: 0 2px;
+  mask-image: var(--site-arrow-download);
 }
 /* The one hover: an arrow in a link or button moves a little the way it points and keeps
    the element's colour. A disabled button's arrow stays still; a card's corner icon fades
@@ -678,6 +720,34 @@ body {
   font-size: 1.15em;
   margin-block: 0.5rem 1rem;
 }
+/* Fetched articles and a document framed in a popover share the compact hierarchy.
+   Result section labels keep their separate small caps treatment. */
+.kpress .site-popover :is(h1, h2, h3, h4, h5, h6),
+:root[data-site-view="embed"]
+  .site-page
+  :is(h1, h2, h3, h4, h5, h6):where(:not(.site-result-heading)) {
+  font-family: var(--kpress-font-sans);
+  font-style: normal;
+  font-weight: var(--site-font-weight-sans-medium);
+  letter-spacing: normal;
+  line-height: var(--paper-heading-leading);
+  text-transform: none;
+}
+.kpress .site-popover h1,
+:root[data-site-view="embed"] .site-page h1:where(:not(.site-result-heading)) {
+  font-size: calc(1em * var(--paper-popover-title-scale));
+  max-inline-size: 100%;
+  overflow: auto hidden;
+  position: relative;
+}
+.kpress .site-popover h2,
+:root[data-site-view="embed"] .site-page h2:where(:not(.site-result-heading)) {
+  font-size: calc(1em * var(--paper-popover-section-scale));
+}
+.kpress .site-popover :is(h3, h4, h5, h6),
+:root[data-site-view="embed"] .site-page :is(h3, h4, h5, h6):where(:not(.site-result-heading)) {
+  font-size: 1em;
+}
 .site-popover .site-popover-links {
   font-size: var(--site-font-size-note);
   margin-block: 0.6rem 0;
@@ -718,7 +788,7 @@ body {
   align-items: baseline;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 1rem;
+  gap: var(--site-action-row-gap);
   justify-content: center;
   margin-block: 0.8rem 0;
 }
@@ -753,8 +823,10 @@ body {
   background: var(--kpress-doc-accent);
   color: var(--kpress-doc-bg);
   display: inline-flex;
+  font-size: calc(var(--site-font-size-note) * var(--paper-button-label-scale));
   font-weight: var(--site-font-weight-sans-medium);
   gap: 0.5rem;
+  line-height: calc(var(--site-font-size-note) * 1.5);
   padding: 0.45rem 0.9rem;
   text-decoration: none;
   transition: var(--site-hover-transition);
@@ -769,9 +841,7 @@ body {
   border-radius: 0;
   cursor: pointer;
   font-family: var(--kpress-font-sans);
-  font-size: inherit;
   font-weight: var(--site-font-weight-sans-medium);
-  line-height: inherit;
 }
 .kpress :is(.site-popover a, button).site-popover-action:is(:hover, :focus-visible),
 .kpress :is(a, button).site-action:is(:hover, :focus-visible) {
@@ -791,6 +861,11 @@ body {
    `.kpress-prose p`, whose 0.75rem stood in for both margins until then. */
 .kpress .site-action-row {
   --site-action-space: 1.2rem;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--site-action-row-gap);
+  justify-content: center;
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
   font-weight: var(--site-font-weight-sans-medium);
@@ -846,7 +921,7 @@ body {
 
 /* A link card's address, under its note: the host's mark in the support gray, level with
    the address's first line, then the address, which wraps after a slash (and only
-   inside a name too long for a line) rather than widen the card. */
+   inside any unbroken name too long for a line) rather than widen the card. */
 .kpress .site-card .site-card-url {
   align-items: first baseline;
   color: var(--site-support-color);
@@ -856,7 +931,17 @@ body {
   font-weight: var(--site-font-weight-sans-light);
   gap: 0.4rem;
   margin-block-start: 0.35rem;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.kpress .site-card .site-card-url > :where(span) {
+  min-inline-size: 0;
+}
+/* The address's text is the flex item. Without a zero minimum it keeps its longest
+   unbroken run, a commit hash, at full width, and in a narrow column that run widened
+   the card past the page (37px at 1280px, 10 October 2026); at zero the address's own
+   `break-word` cuts the run where the line ends. */
+.kpress .site-card .site-card-url-text {
+  min-inline-size: 0;
 }
 .kpress .site-card .site-link-icon {
   block-size: 1em;
@@ -1054,7 +1139,7 @@ body {
 .site-table tr[hidden] {
   display: none;
 }
-/* The row a page's address names (`all-results.html#t-018`) shows whatever the filters
+/* The row a page's address names (`results.html#t-018`) shows whatever the filters
    hide, so a link to a row never lands on nothing: with scripts `table.js` keeps it,
    and without them this rule does. */
 .site-table tr[hidden]:target {
@@ -1075,17 +1160,23 @@ body {
     display: grid;
   }
 }
-:is(.site-table, .site-popover) .site-detail {
+/* Detail labels recede; their values retain the primary reading color. */
+.site-detail {
+  color: var(--kpress-doc-text);
+}
+.site-detail dt {
   color: var(--site-support-color);
+  font-weight: var(--site-font-weight-sans-medium);
+}
+.site-detail dd {
+  color: var(--kpress-doc-text);
+}
+:is(.site-table, .site-popover) .site-detail {
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
   font-weight: var(--site-font-weight-sans-light);
   line-height: 1.45;
   margin-block: 0.4rem 0.2rem;
-}
-:is(.site-table, .site-popover) .site-detail dt {
-  font-weight: var(--site-font-weight-sans-medium);
-  color: var(--kpress-doc-text);
 }
 :is(.site-table, .site-popover) .site-detail dd {
   margin: 0 0 0.4rem 0;
@@ -1131,8 +1222,8 @@ body {
    drawn (the owner, 2026-10-02, `think-c19o`): a case's `proved` is green and its `open`
    yellow, on the frontier table, a case record and a result's list of cases; a result's
    `confirmed` is the green of the confirmation rungs, at C3's strength, and its
-   `reviewed` the verification rungs' blue. The other statuses, the kinds and the
-   standings keep the plain chip. `devtools.rung_scale` measures these fills too. */
+   `reviewed` the verification rungs' blue. Bound kinds use the bound colours, recorded is yellow, and
+   superseded standings keep the plain gray chip. `devtools.rung_scale` measures these fills too. */
 .site-chip:is([data-case-status], [data-status="confirmed"], [data-status="reviewed"]) {
   --rung-chroma-boost: 0;
   background: oklch(
@@ -1164,6 +1255,30 @@ body {
   --rung-chroma-boost: 0.02;
 }
 
+/* Bound chips share the plotted bound hues, diluted into the current page background. */
+.site-chip:is([data-kind="lower-bound"], [data-status="incomplete"]) {
+  background: color-mix(
+    in oklab,
+    var(--site-bound-lower) var(--site-chip-tint),
+    var(--kpress-doc-bg)
+  );
+}
+.site-chip:is([data-kind="upper-bound"], [data-kind="optimality"]) {
+  background: color-mix(
+    in oklab,
+    var(--site-bound-upper) var(--site-chip-tint),
+    var(--kpress-doc-bg)
+  );
+}
+.site-chip[data-status="recorded"] {
+  --rung-level: 2;
+  --rung-hue: 95;
+  background: oklch(
+    calc(var(--site-rung-base) + var(--rung-level) * var(--site-rung-step))
+      calc(var(--site-rung-chroma-base) + var(--rung-level) * var(--site-rung-chroma-step))
+      var(--rung-hue)
+  );
+}
 /* A rung's fill moves with its level on its own scale, always behind the page's text
    colour: level 0 is nearly the page background, and each level above it is stronger
    (darker in light mode, lighter in dark) and more saturated. Verification is the blue
@@ -1548,14 +1663,14 @@ body {
   .site-results .site-col-result {
     grid-column: 1 / -1;
   }
-  /* The claim comes before the credit and the date, which the wide row sets on either
-     side of it. */
+  /* Credit and date each use the card's full width. A wide status track otherwise
+     steals enough space from the credit to split a contributor's name. */
   .site-results .site-col-credit {
-    grid-column: 1 / 3;
+    grid-column: 1 / -1;
     order: 1;
   }
   .site-results .site-col-date {
-    grid-column: 3;
+    grid-column: 1 / -1;
     order: 2;
     text-align: end;
   }
@@ -1596,7 +1711,7 @@ body {
 .kpress .site-table tbody tr:hover {
   background: var(--site-wash);
 }
-/* A row reached by its address (`frontier.html#n-11`, `all-results.html#t-018`) is
+/* A row reached by its address (`frontier.html#n-11`, `results.html#t-018`) is
    marked with the same wash. */
 .kpress .site-table tbody tr:target {
   background: var(--site-wash);
@@ -1699,10 +1814,12 @@ body {
 .kpress .site-frontier .site-col-n {
   padding-inline-start: 0.5rem;
 }
-.site-thumb svg {
+.site-thumb :is(svg, img) {
   block-size: var(--site-frontier-thumb);
   display: block;
   inline-size: var(--site-frontier-thumb);
+  margin: 0;
+  max-inline-size: none;
 }
 /* Strokes in screen pixels, so a square's outline reads at 50 pixels across. */
 .site-frontier .site-thumb :is(path, rect) {
@@ -1716,11 +1833,8 @@ body {
 .site-frontier .site-col-recent {
   width: 0;
 }
-/* A recent lower bound that corrects a published result says which beside its star,
-   `corrects Nagamochi 2005`, in the support grey (the owner, 2026-10-02). In the
-   frontier table it stands under the star, a step below the cell's type and breaking
-   between its words and never inside a name, so the star's column keeps the width it
-   had: at the cell's own size "Nagamochi" alone widened it past the table's track. */
+/* Credits for corrected published bounds use the shared support gray and wrap
+   between words, preserving the table track. */
 .site-corrects {
   color: var(--site-support-color);
   font-family: var(--kpress-font-sans);
@@ -1972,21 +2086,22 @@ body {
    like a card and opens the case popover (Case records, below). The wash is the cell's
    background,
    behind the drawing, and it is all that changes: every line keeps the page's ink. */
+/* Expansion moves following sections. Keep the viewport fixed through that input
+   response instead of scroll-anchoring a result row below the changing atlas. */
+body:has([data-atlas-grid]),
+body:has([data-atlas-preview]) {
+  overflow-anchor: none;
+}
 .site-page .site-atlas-grid {
   --site-wide: var(--site-bleed-max);
   --site-atlas-toggle-space: 1.2rem;
-  /* The triangle's tiles: the least width one may have, which sets how many a line
-     holds (overview/atlas-view.js reads it, in rem or px), and the most. The least is
-     the smallest at which a drawing still reads as a packing and its three-figure
-     number fits under it, a little over the 24 pixels a pointer target needs; it lets
-     all 35 tiles of the eighteenth row stand on one line from a 1024-pixel window up. */
-  --site-atlas-tile-min: 1.625rem;
-  --site-atlas-tile-max: 4.5rem;
-  /* The grid's least cell at Medium, and the size's scale (overview/atlas-view.js reads
-     it): Small draws a tile two thirds as wide and Large half as wide again, in either
-     view. The block's `data-atlas-size` sets it, below. */
+  /* Both views share the grid's readable cell minimum and gap. The script reads
+     these tokens in rem or px; complete Triangle rows pan at that cell width. The size's
+     scale makes Small two thirds as wide and Large half as wide again. */
   --site-atlas-cell-min: 6.4rem;
-  --site-atlas-scale: 1;
+  --site-atlas-reference-gap: 0.5rem;
+  --site-atlas-cell-padding: 0.3rem;
+  --site-atlas-scale: 0.667;
   /* The move between the views: one duration and one easing for every tile, read by
      the script. Reduced motion makes the switch instant, as it does every hover. */
   --site-atlas-move-duration: 360ms;
@@ -1996,30 +2111,40 @@ body {
   container-type: inline-size;
   position: relative;
 }
-/* Under a finger a tile is at least 2.5rem, 40 pixels, so a phone's line holds eight. */
-@media (max-width: 40rem), (pointer: coarse) {
-  .site-page .site-atlas-grid {
-    --site-atlas-tile-min: 2.5rem;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .site-page .site-atlas-grid {
     --site-atlas-move-duration: 0ms;
   }
 }
-/* The three sizes of tile (think-ht8t): Medium is the scale of 1 above, the size the
-   atlas had before it offered a choice. */
-.site-page .site-atlas-grid[data-atlas-size="small"] {
+/* Small is the default; Medium restores the original scale of 1. Root attributes
+   select explicit URL sizes before the atlas programs run. */
+.site-page .site-atlas-grid[data-atlas-size="small"],
+html[data-site-atlas-size="small"]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
   --site-atlas-scale: 0.667;
 }
-.site-page .site-atlas-grid[data-atlas-size="large"] {
+.site-page .site-atlas-grid[data-atlas-size="medium"],
+html[data-site-atlas-size="medium"]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
+  --site-atlas-scale: 1;
+}
+.site-page .site-atlas-grid[data-atlas-size="large"],
+html[data-site-atlas-size="large"]
+  .site-page
+  .site-atlas-grid:where([data-atlas-grid]):not([data-atlas-size-explicit]) {
   --site-atlas-scale: 1.5;
 }
-/* The view tabs and the size tabs: two of the section tabs' strip (site-nav.css), on
-   the bar's line, so each is as tall here as under the bar. One row centred over the
-   tiles, the key to a tile's marks on a line of its own under it; on a narrow block the
-   size tabs wrap under the view tabs. Each is hidden until the script has tiles to
-   arrange. */
+/* Untouched wide-screen defaults match the first CSS paint, before JS placement. */
+@media (min-width: 75rem) {
+  html:not([data-site-atlas-size]) .site-page .site-atlas-grid:not([data-atlas-size-explicit]) {
+    --site-atlas-scale: 1;
+  }
+}
+/* Layout, Size and Scale use the shared small chooser strip. Each line is
+   centered over the tiles, with the compact two-column key centered beneath it;
+   on a narrow block the controls wrap beneath one another. */
 .site-atlas-grid .site-atlas-controls {
   display: flex;
   flex-wrap: wrap;
@@ -2028,78 +2153,173 @@ body {
   margin-block-end: var(--site-atlas-toggle-space);
 }
 .site-atlas-grid .site-atlas-views,
-.site-atlas-grid .site-atlas-sizes {
-  line-height: var(--site-nav-line);
+.site-atlas-grid .site-atlas-sizes,
+.site-atlas-grid .site-atlas-scales {
   margin: 0;
 }
 .site-atlas-grid .site-atlas-views[hidden],
 .site-atlas-grid .site-atlas-sizes[hidden],
+.site-atlas-grid .site-atlas-scales[hidden],
 .site-atlas-grid .site-atlas-legend[hidden] {
   display: none;
 }
-/* The key: each mark beside its words, in the support colour at the note size, as the
-   tables of results key their star (`.site-rung-legend`), centred on a line of its own
-   under the tabs. */
+/* The web atlas key shows angle colors and contact shades, centered as a group
+   with each explanatory line aligned left. */
 .kpress .site-atlas-grid .site-atlas-legend {
+  --site-atlas-legend-leading: 1.4;
+  --site-atlas-swatch-size: var(--site-font-size-note);
   color: var(--site-support-color);
   column-gap: 1.2rem;
-  display: flex;
+  display: grid;
   flex-basis: 100%;
-  flex-wrap: wrap;
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
   font-weight: var(--site-font-weight-sans-light);
+  grid-template-columns: repeat(2, minmax(0, max-content));
   justify-content: center;
+  line-height: var(--site-atlas-legend-leading);
   margin: 0;
-  row-gap: 0.3rem;
+  text-align: start;
 }
-.site-atlas-legend-item {
-  align-items: center;
-  display: inline-flex;
+@container (max-width: 52rem) {
+  .kpress .site-atlas-grid .site-atlas-legend {
+    grid-template-columns: minmax(0, max-content);
+    row-gap: 0.4rem;
+  }
+}
+.site-atlas-legend-column {
+  align-items: start;
+  display: flex;
+  flex-direction: column;
   gap: 0.3rem;
 }
-/* The two custom properties are the triangle's (below); they are declared here, in the
-   rule both views share, because every line of every drawing inherits them, and a
-   declaration for the triangle alone would have the browser restyle all of those, some
-   three thousand elements, at each change of view. A tile is its line's share of the
-   block, no wider than the most a tile may be, both scaled by the size: Small draws it
-   two thirds as wide, never under the least tile, and Large lets it grow to half as wide
-   again, the script having set fewer to a line. At Medium it is the share alone, no
-   wider than `--site-atlas-tile-max`. The grid's least cell is scaled the same way. */
+.site-atlas-legend-item {
+  align-items: baseline;
+  display: flex;
+  gap: 0.3rem;
+}
+.site-atlas-legend-item > :first-child:not(:last-child) {
+  flex: none;
+}
+.site-atlas-legend-item > :last-child {
+  min-inline-size: 0;
+}
+.site-atlas-swatches {
+  display: inline-flex;
+  gap: 1px;
+  transform: translateY(-0.1em);
+}
+.site-atlas-swatch {
+  background: var(--site-atlas-swatch);
+  block-size: var(--site-atlas-swatch-size);
+  color: var(--kpress-doc-text);
+  font-size: 0.65em;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--site-font-weight-sans-medium);
+  inline-size: var(--site-atlas-swatch-size);
+  line-height: var(--site-atlas-swatch-size);
+  text-align: center;
+}
+/* Keep each square close to the explanation's ink baseline; center its label. */
+.site-atlas-swatch[data-angle-label] {
+  color: var(--site-atlas-angle-label-ink);
+}
+/* The triangle's column count and tile width live in the shared rule so changing
+   view does not restyle every drawing's inherited properties. The count uses the same
+   scaled cell minimum and gaps as Grid, and the tile fills one column after the gaps
+   are reserved. Container arithmetic also places the static Triangle before scripts. */
 .site-atlas-cells {
-  --site-atlas-fit: calc(100cqi / var(--site-atlas-per-line, 1));
-  --site-atlas-share: calc(var(--site-atlas-fit) * min(1, var(--site-atlas-scale)));
-  --site-atlas-most: calc(var(--site-atlas-tile-max) * var(--site-atlas-scale));
-  --site-atlas-tile: clamp(
-    var(--site-atlas-tile-min),
-    var(--site-atlas-share),
-    var(--site-atlas-most)
-  );
+  --site-atlas-global-side: var(--site-atlas-first-side);
   --site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));
-  --site-atlas-row-space: 0.12;
+  --site-atlas-per-line: max(
+    1,
+    round(
+      down,
+      (100cqi + var(--site-atlas-reference-gap)) /
+      (var(--site-atlas-cell) + var(--site-atlas-reference-gap)),
+      1
+    )
+  );
+  --site-atlas-tile: calc(
+    (100cqi - (var(--site-atlas-per-line) - 1) * var(--site-atlas-reference-gap)) /
+    var(--site-atlas-per-line)
+  );
+  /* Outline air includes tile padding and the normalized SVG's stroke-aware inset.
+     Reduce that actual visible gap, preserving the reserved drawing dimensions. */
+  --site-atlas-outline-air: calc(
+    2 *
+    var(--site-atlas-cell-padding) +
+    2 *
+    (var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) *
+    var(--site-atlas-ink-inset)
+  );
+  --site-atlas-cell-gap: calc(
+    var(--site-atlas-reference-gap) *
+    0.8 -
+    var(--site-atlas-outline-air) *
+    0.2
+  );
+  --site-atlas-number-ink-size: 1rem;
+  --site-atlas-number-leading: var(--kpress-line-height-normal);
+  /* Source Sans 3: ascent 1.024em, descent 0.4em; digits descend 0.012em.
+     Half the leading minus 0.324em is the air below the deepest digit ink. */
+  --site-atlas-number-ink-tail: calc(
+    var(--site-atlas-number-ink-size) *
+    (var(--site-atlas-number-leading) / 2 - 0.324)
+  );
+  --site-atlas-caption-air: calc(
+    var(--site-atlas-outline-air) /
+    2 +
+    var(--site-atlas-cell-padding) +
+    var(--site-atlas-number-ink-tail)
+  );
+  --site-atlas-row-gap: calc(
+    var(--site-atlas-reference-gap) *
+    0.75 -
+    var(--site-atlas-caption-air) *
+    0.25
+  );
+  --site-atlas-grid-space: calc((var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding)) / 2);
+  --site-atlas-number-size: clamp(0.65rem, calc(var(--site-atlas-tile) * 0.28), 1rem);
+  /* Every Triangle line reserves its drawing and padding, the count margin and
+     count leading. Atlas drawings have no document image margins. */
+  --site-atlas-line-height: calc(
+    var(--site-atlas-tile) *
+    1.04 +
+    var(--site-atlas-number-size) *
+    1.15
+  );
   display: grid;
-  gap: 0.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(var(--site-atlas-cell), 1fr));
+  gap: var(--site-atlas-row-gap) var(--site-atlas-cell-gap);
+  grid-template-columns: repeat(var(--site-atlas-per-line), var(--site-atlas-tile));
+  justify-content: center;
 }
 @media (max-width: 40rem) {
   .site-page .site-atlas-grid {
     --site-atlas-cell-min: 4.6rem;
-  }
-  .site-atlas-cells {
-    gap: 0.35rem;
+    --site-atlas-reference-gap: 0.35rem;
   }
 }
 /* A tile in a move between the views is scaled about its own corner, which is where the
    script measures from (overview/atlas-view.js). It has no transform at rest, so the
    origin changes nothing then. */
 .kpress .site-atlas-cell {
+  --site-atlas-drawing-ratio: 1;
+  isolation: isolate;
+  position: relative;
   color: var(--kpress-doc-text);
   display: block;
-  padding: 0.3rem;
+  padding: var(--site-atlas-cell-padding);
   text-align: center;
   text-decoration: none;
   transform-origin: 0 0;
   transition: var(--site-hover-transition);
+}
+.kpress .site-atlas-cell:target {
+  background: var(--site-wash);
+  outline: 2px solid var(--kpress-doc-accent);
+  outline-offset: -2px;
+  scroll-margin-block-start: 6rem;
 }
 .kpress .site-atlas-cell:is(:hover, :focus-visible) {
   background: var(--site-wash);
@@ -2109,11 +2329,73 @@ body {
    the link, it went to the lighter accent KPress gives a hovered link's text (`.kpress
    a:hover`, which outranks the cell's own colour), and the outlines all but vanished
    against the squares. */
-.site-atlas-cell svg {
+/* Scale changes only the drawn enclosing square. Its layout box and the count stay
+   fixed, so every row keeps its pitch and all captions retain their alignment. The
+   head bootstrap selects the same ratio before the atlas programs mount. */
+.site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
+  --site-atlas-global-side: var(--site-atlas-last-side);
+}
+html:not([data-site-atlas-scale])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-scale="row"])
+  .site-atlas-cell,
+html[data-site-atlas-scale="row"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-cell {
+  --site-atlas-drawing-ratio: calc(var(--site-atlas-side) / var(--r));
+}
+html:not([data-site-atlas-scale])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-scale="global"])
+  .site-atlas-cell,
+html[data-site-atlas-scale="global"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-cell {
+  --site-atlas-drawing-ratio: calc(var(--site-atlas-side) / var(--site-atlas-global-side));
+}
+/* Row references reuse the renderer's SVG bounds and centered stroke, so their
+   bottom-left edges coincide with the packing container at every drawing scale. */
+.site-atlas-cell .site-atlas-reference {
+  aspect-ratio: 1;
+  height: auto;
+  color: var(--kpress-doc-muted);
+  display: none;
+  inset-block-start: var(--site-atlas-cell-padding);
+  inset-inline-start: var(--site-atlas-cell-padding);
+  pointer-events: none;
+  position: absolute;
+  transform: none;
+  z-index: 0;
+  width: calc(var(--site-atlas-tile) - 2 * var(--site-atlas-cell-padding));
+}
+.site-atlas-reference rect {
+  stroke-width: calc(var(--site-atlas-reference-stroke) * var(--site-atlas-drawing-ratio));
+}
+html:not([data-site-atlas-scale])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-scale="row"])
+  .site-atlas-cell[data-atlas-row-smaller]
+  .site-atlas-reference,
+html[data-site-atlas-scale="row"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-cell[data-atlas-row-smaller]
+  .site-atlas-reference {
+  display: block;
+}
+/* Anchor Row scaling at the actual enclosing frame's bottom-left corner. */
+html:not([data-site-atlas-scale])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-scale="row"])
+  .site-atlas-cell
+  :is(svg, img),
+html[data-site-atlas-scale="row"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-cell
+  :is(svg, img) {
+  transform-origin: calc(var(--site-atlas-frame-inset) * 100%)
+    calc((1 - var(--site-atlas-frame-inset)) * 100%);
+}
+.site-atlas-cell :is(svg, img):not(.site-atlas-reference) {
+  position: relative;
+  z-index: 1;
+  transform: scale(var(--site-atlas-drawing-ratio));
   aspect-ratio: 1;
   color: var(--kpress-doc-text);
   display: block;
   height: auto;
+  margin-block: 0;
   width: 100%;
 }
 /* The number's box is shrunk to the number and centred, so the marks it carries can
@@ -2122,9 +2404,9 @@ body {
   color: var(--kpress-doc-muted);
   display: block;
   font-family: var(--kpress-font-sans);
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-variant-numeric: tabular-nums;
-  font-weight: var(--site-font-weight-sans-light);
+  font-weight: var(--site-font-weight-sans-medium);
   inline-size: fit-content;
   margin-block-start: 0.2rem;
   margin-inline: auto;
@@ -2138,53 +2420,132 @@ body {
    frame with the grid's gaps, 1344 pixels wide at 1280, before it settled. A tile keeps
    its own transition, which is the wash alone. */
 .site-atlas-cells,
-.site-atlas-cell svg,
+.site-atlas-row,
+.site-atlas-segment,
+.site-atlas-cell :is(svg, img),
 .site-atlas-n {
   transition: none;
 }
-/* The triangle: the same tiles, set by the grid bound. Row k holds the 2k - 1 cases a
-   square of side k is known to hold and ends at k squared on the right edge, so the
-   perfect squares, whose packing is the grid itself, run down it. A row too long for
-   the block wraps in reading order: every line but its last is full, from the left,
-   and the last holds what is left over, set from the right so it still ends at the
-   square. overview/atlas-view.js says how many tiles a line holds
-   (`--site-atlas-per-line`) and writes each tile's line and column; every size here
-   follows from that one number and the block's width. A tile is its line's share of
-   the block, no wider than `--site-atlas-tile-max`, and its inset, its number and the
-   space over a new row are fractions of it, so the triangle keeps its proportions from
-   a phone to a wide screen. A triangle narrower than the block is centred. The tile's
-   width, `--site-atlas-tile`, is declared with the grid's rule above, for the reason
-   given there. */
-.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cells {
-  gap: 0;
-  grid-template-columns: repeat(var(--site-atlas-per-line, 1), var(--site-atlas-tile));
-  justify-content: center;
+/* Grid flattens the explicit row and segment structure into ordinary reading order. */
+.site-atlas-row,
+.site-atlas-segment {
+  display: contents;
 }
-/* The space over a new row, `--site-atlas-row-space`, is a share of a tile: 0.12 where
-   every row is one line, and where a row wraps 0.4, larger than anything between two
-   lines of one row, so the lines of a row read as one group. */
-.site-atlas-cells[data-atlas-wrapped] {
-  --site-atlas-row-space: 0.4;
+/* Triangle keeps complete rows at Grid's readable drawing scale. The visible rows
+   share their actual widest canvas, centered when it fits. Wide rows retain the
+   right-origin scroll frame and left-to-right reading order within it. */
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-cells,
+html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-cells {
+  --site-atlas-widest: 19;
+  --site-atlas-extra: var(--site-atlas-first-extra);
+  --site-atlas-number-ink-size: var(--site-atlas-number-size);
+  --site-atlas-number-leading: 1.15;
+  direction: rtl;
+  display: block;
+  overflow-x: auto;
 }
-.kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell {
-  grid-area: var(--site-atlas-line, auto) / var(--site-atlas-column, auto);
-  margin-block-start: calc(
-    var(--site-atlas-opens, 0) *
-    var(--site-atlas-tile) *
-    var(--site-atlas-row-space)
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-cells:has(.site-atlas-rest:not([hidden])),
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
+  --site-atlas-widest: 35;
+  --site-atlas-extra: var(--site-atlas-last-extra);
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-row,
+html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-row {
+  direction: ltr;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: end;
+  column-gap: calc(
+    (var(--site-atlas-grid-space) + var(--site-atlas-cell-gap)) *
+    clamp(0, var(--site-atlas-prefix-count), 1)
   );
-  padding: calc(var(--site-atlas-tile) * 0.07);
+  inline-size: calc(
+    var(--site-atlas-widest) *
+    var(--site-atlas-tile) +
+    (var(--site-atlas-widest) - 1) *
+    var(--site-atlas-cell-gap) +
+    var(--site-atlas-extra) *
+    var(--site-atlas-grid-space)
+  );
+  margin-inline: auto;
 }
-.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-n {
-  font-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.25), 0.8rem);
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-row:where(:not([data-atlas-row="1"])),
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-row:where(:not([data-atlas-row="1"])) {
+  margin-block-start: var(--site-atlas-row-gap);
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-segment,
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-segment {
+  --site-atlas-segment-columns: max(1, var(--site-atlas-segment-count));
+  --site-atlas-segment-width: calc(
+    var(--site-atlas-segment-columns) *
+    var(--site-atlas-tile) +
+    (var(--site-atlas-segment-columns) - 1) *
+    var(--site-atlas-cell-gap)
+  );
+  display: grid;
+  flex: none;
+  column-gap: var(--site-atlas-cell-gap);
+  grid-auto-rows: var(--site-atlas-line-height);
+  grid-template-columns: repeat(var(--site-atlas-segment-columns), var(--site-atlas-tile));
+  inline-size: var(--site-atlas-segment-width);
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-segment:where([data-empty]),
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-segment:where([data-empty]) {
+  display: none;
+}
+html:not([data-site-atlas-view="grid"])
+  .kpress
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-cell,
+html[data-site-atlas-view="triangle"]
+  .kpress
+  .site-atlas-grid:where([data-atlas-grid])
+  .site-atlas-cell {
+  --site-atlas-initial-line: 1;
+  --site-atlas-initial-column: var(--i, 1);
+  grid-area:
+    var(--site-atlas-line, var(--site-atlas-initial-line)) /
+    var(--site-atlas-column, var(--site-atlas-initial-column));
+}
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  .site-atlas-n,
+html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) .site-atlas-n {
+  font-size: var(--site-atlas-number-size);
   line-height: 1.15;
   margin-block-start: calc(var(--site-atlas-tile) * 0.04);
 }
-/* The perfect squares, down the right edge, are numbered in the text's own colour and
-   the medium weight: the row ends there. */
-.site-atlas-grid[data-atlas-view="triangle"] [data-atlas-square] .site-atlas-n {
+/* Perfect-square endpoints use the text color and bold weight. */
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
+  [data-atlas-square]
+  .site-atlas-n,
+html[data-site-atlas-view="triangle"]
+  .site-atlas-grid:where([data-atlas-grid])
+  [data-atlas-square]
+  .site-atlas-n {
   color: var(--kpress-doc-text);
-  font-weight: var(--site-font-weight-sans-medium);
+  font-weight: var(--site-font-weight-sans-bold);
 }
 /* The grid shows n = 1 to 100 until its button, centred under it, places the rest. The
    rest sit in one box the grid lays out as its own cells, so hiding them again is the
@@ -2195,6 +2556,12 @@ body {
 .site-atlas-rest[hidden] {
   display: none;
 }
+
+.site-page [data-atlas-grid] .site-atlas-cell[hidden],
+.site-page [data-atlas-grid] .site-atlas-row[hidden] {
+  display: none;
+}
+
 /* The expander's row is the action row, set the grid's own space under the tiles. */
 .site-atlas-grid .site-atlas-toggle-row {
   --site-action-space: var(--site-atlas-toggle-space);
@@ -2202,37 +2569,6 @@ body {
 .site-atlas-grid .site-atlas-toggle-row[hidden] {
   display: none;
 }
-/* The regularized drawing's badge (overview_sections.atlas_layer_mark): a dot in the
-   accent, sized in its text. The atlas's key carries it before its words; a regularized
-   tile hangs it before its number, out of the flow, so the number stays centred as on
-   every other tile. It hung past the number until the new-result star took that side
-   on 2026-10-04 (think-wwtt), and the Regularized tab was its key until then. */
-.site-atlas-layer-mark {
-  background: var(--kpress-doc-accent);
-  block-size: 0.5em;
-  border-radius: 50%;
-  display: inline-block;
-  inline-size: 0.5em;
-  vertical-align: 0.08em;
-}
-.site-atlas-n > .site-atlas-layer-mark {
-  inset-block-start: 50%;
-  inset-inline-end: calc(100% + 0.3em);
-  position: absolute;
-  translate: 0 -50%;
-}
-/* A new result's star (overview_sections.atlas_star), the site's one star in its warm
-   ink (`.site-star`), hung past the number's end, out of the flow, a little smaller
-   than the number so it stays inside the smallest tile. */
-.site-atlas-n > .site-star {
-  font-size: 0.8em;
-  inset-block-start: 50%;
-  inset-inline-start: calc(100% + 0.12em);
-  line-height: 1;
-  position: absolute;
-  translate: 0 -50%;
-}
-
 /* The film's panel for a case, which opens every case record as its visual summary
    (`.site-case-summary`, below) and a result's overview as its case (site-result.css):
    the gap bar, the bound as one statement, the badges, where each bound comes from and
@@ -2451,12 +2787,38 @@ body {
   inline-size: 3px;
   inset-block-start: -0.4rem;
 }
+/* An equality displays the packing value. A recent proof accents O independently;
+   historical exact values retain the ordinary text ink. */
+.site-atlas-pop .is-exact-value:not(.is-new-result),
+.site-atlas-pop .is-exact-value:not(.is-new-result) .katex {
+  color: var(--kpress-doc-text);
+}
+/* Recent construction, proof and optimality contributions share the new-result ink.
+   Historical upper packings retain their role colour when only optimality is new. */
+.kpress .site-page .is-new-result,
+.kpress .site-page .is-new-result .katex {
+  color: var(--site-new-result);
+}
+.kpress .site-atlas-badge[data-recent="true"] {
+  border-color: var(--site-new-result);
+  color: var(--site-new-result);
+}
+.kpress .site-atlas-badge[data-recent="true"][data-style="solid"] {
+  background: var(--site-new-result);
+  color: var(--kpress-doc-bg);
+}
 /* ---------- Case records ----------
    One record per case, in its own file at `cases/11.html`, shown by the record page
    (`cases/`, overview/case-page.js) and by the one case popover every page that links
    cases carries (overview/case-popover.js). A record opens with its visual summary,
-   the drawing first and large, then the number line of its bounds and the film's facts
-   under it, and the rest of the record follows. */
+   the drawing and bound facts together, followed by the detailed record. */
+.site-case {
+  container-type: inline-size;
+  inline-size: 100%;
+  margin-inline: auto;
+  max-inline-size: 48rem;
+  min-inline-size: 0;
+}
 .site-case-reader {
   margin-block-start: 1rem;
 }
@@ -2472,7 +2834,7 @@ body {
    in it as its own page shows it. Its action, to the record's own address, stays in
    reach at the foot of a record taller than the window. */
 .site-popover.site-case-pop {
-  inline-size: min(62rem, 100vw - 2rem);
+  inline-size: min(52rem, 100vw - 2rem);
   max-inline-size: none;
 }
 .site-popover.site-case-pop:popover-open {
@@ -2486,12 +2848,20 @@ body {
    screens, and a phone leaves almost no room outside the panel to press. */
 .site-popover.site-case-pop .site-popover-close {
   background: var(--kpress-doc-bg);
-  float: inline-end;
+  display: block;
+  float: none;
   inset-block-start: var(--site-popover-close-inset);
   /* Held at the top alone: the card's `inset-inline-end`, read by a sticky box as a
      second limit, set it a padding's width in from the corner, over the steps. */
   inset-inline-end: auto;
   margin-block-start: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
+  /* A float narrows the record's inline-size container and moves its centre. Keep
+     the sticky cross in a block that occupies no height beside the first steps. */
+  margin-block-end: calc(
+    -1 *
+    (var(--site-popover-close) + var(--site-popover-close-inset) - var(--site-popover-pad))
+  );
+  margin-inline-start: auto;
   margin-inline-end: calc(var(--site-popover-close-inset) - var(--site-popover-pad));
   position: sticky;
   z-index: 2;
@@ -2499,13 +2869,17 @@ body {
 .site-popover.site-case-pop .site-popover-close:is(:hover, :focus-visible) {
   background: var(--site-wash);
 }
+.site-popover.site-case-pop > .site-case-pop-body {
+  /* Only the steps beside the cross reserve its width; the article stays centred. */
+  padding-inline-end: 0;
+}
 
 .site-case-pop .site-popover-actions {
   background: var(--kpress-doc-bg);
   border-block-start: 1px solid var(--kpress-doc-border);
   inset-block-end: calc(-1 * var(--site-popover-pad));
   margin-block-end: calc(-1 * var(--site-popover-pad));
-  padding-block: 0.6rem var(--site-popover-pad);
+  padding-block: var(--site-popover-pad);
   position: sticky;
 }
 @media (max-width: 40rem) {
@@ -2533,6 +2907,9 @@ body {
   justify-content: space-between;
   margin-block-end: 1rem;
 }
+.site-case-steps [rel~="next"] {
+  margin-inline-start: auto;
+}
 /* The record's steps are the first line the cross stands beside once it is held at the
    corner, so they keep clear of it as the label above them does: the next case's link
    ended under the cross (`think-0dxa`). */
@@ -2548,42 +2925,84 @@ body {
     padding-inline-end: calc(var(--site-popover-close) + var(--site-popover-close-inset) - 0.75rem);
   }
 }
-.kpress .site-case-title {
-  font-size: calc(var(--site-font-size-sans-base) * 1.6);
+.site-case-eyebrow {
+  display: block;
+  text-align: center;
+}
+.kpress .site-case-title,
+.kpress .site-popover .site-case-title {
+  font-family: var(--kpress-font-sans);
+  font-size: calc(var(--site-font-size-sans-base) * var(--paper-title-scale));
+  font-weight: var(--site-font-weight-sans-medium);
   line-height: var(--paper-heading-leading);
   margin-block: 0.5rem 0.6rem;
 }
-.site-case-title b {
-  font-weight: var(--site-font-weight-sans-medium);
-  margin-inline-end: 0.4rem;
+.site-case-status {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--site-font-size-note);
+  gap: 0.45rem;
+  justify-content: center;
+  margin-block: 0 0.6rem;
 }
-.site-case-title :is(.site-chip, .site-corrects) {
-  vertical-align: middle;
+.site-case-status .site-case-badges {
+  margin: 0;
 }
 .kpress .site-case-interval {
+  font-family: var(--kpress-font-prose);
   font-size: calc(var(--site-font-size-sans-base) * 1.25);
-  margin-block: 0 1.5rem;
+  margin-block: 0 1rem;
+  overflow-x: auto;
+  padding-block: 0.4em;
+  position: relative;
+  white-space: nowrap;
 }
-/* The visual summary: the drawing centred and large, as wide as the reading measure
-   allows up to 28rem, then the number line and the facts under it on the measure. */
+/* A full exact interval can be wider than a phone. Its contents start at the scroll
+   origin rather than being centred past the left edge, and its fractions keep room
+   above and below the line. */
+.site-case-interval > .kpress-math {
+  display: block;
+  inline-size: max-content;
+  min-inline-size: 100%;
+}
+/* Both the canonical article and the fetched article use their own available width.
+   A compact drawing leaves the verified bounds and their credits in the opening view. */
 .site-case-summary {
   display: grid;
   gap: 1.2rem;
+  grid-template-columns: minmax(0, 1fr);
   justify-items: center;
   margin-block: 0 1.5rem;
+  min-inline-size: 0;
 }
 .site-case-figure {
-  inline-size: min(28rem, 100%);
-  margin: 0;
+  inline-size: min(20rem, 100%);
+  margin: 0 auto;
+  min-inline-size: 0;
 }
-/* In the popover the drawing fills the panel's width and grows and shrinks with it,
-   square at every width (the owner, 2026-10-04, `think-u214`), and is never taller than
-   the panel shows at once: the panel's height less 8rem, room for the caption (2rem) and
-   the actions held at its foot (5rem), so the whole square can be seen without the
-   actions covering its foot. At 1280 by 800 that is 608px of the panel's 934; a tablet
-   or a phone, taller than it is wide, keeps the full width. */
-.site-case-pop .site-case-figure {
-  inline-size: min(100%, var(--site-popover-max-block) - 8rem);
+@container (max-width: 41.999rem) {
+  .site-case .site-case-figure {
+    inline-size: min(18rem, 100%);
+  }
+}
+@container (max-width: 20rem) {
+  .site-case .site-case-figure {
+    inline-size: min(14rem, 100%);
+  }
+  .site-case .site-atlas-gap-values {
+    line-height: 1.4;
+  }
+  /* Close bounds keep their labels on separate lines at the same number-line marks. */
+  .site-case .site-atlas-gap-values:has(.is-lower + .is-upper) {
+    block-size: 2.9em;
+  }
+  .site-case .site-atlas-gap-values .is-lower + .is-upper {
+    inset-block-start: 1.45em;
+  }
+}
+.kpress .site-case-summary .site-atlas-pop-bound {
+  font-family: var(--kpress-font-prose);
 }
 .site-case-summary-facts {
   font-family: var(--kpress-font-sans);
@@ -2591,6 +3010,10 @@ body {
   font-weight: var(--site-font-weight-sans-light);
   inline-size: min(40rem, 100%);
   min-inline-size: 0;
+}
+/* Labels near either end of the number line keep their full width inside the case. */
+.site-case-summary .site-atlas-gap {
+  margin-inline: 1.5rem;
 }
 .site-case-summary .site-atlas-gap-values span[data-anchor="end"] {
   transform: translateX(calc(-100% - 0.3rem));
@@ -2601,7 +3024,7 @@ body {
 /* The drawing is the figure's own `svg`. A caption's typeset math draws a radical as an
    `svg` of its own, which KaTeX sizes; sized as the drawing, it collapsed to nothing,
    and a side such as 3 + ½√2 read as 3 + ½ 2. */
-.site-case-figure > svg {
+.kpress .site-case-figure > svg {
   block-size: auto;
   color: var(--kpress-doc-text);
   display: block;
@@ -2646,6 +3069,15 @@ body {
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
 }
+/* The case's 48rem measure fits at most two columns. A final unpaired panel keeps
+   the same width as its neighbours and centres on the row when both columns fit. */
+@container (min-width: 35rem) {
+  .site-case-bounds > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    inline-size: calc((100% - 1rem) / 2);
+    justify-self: center;
+  }
+}
 .site-case-bound,
 .site-case-note {
   border: 1px solid var(--kpress-doc-border);
@@ -2677,22 +3109,28 @@ body {
   margin-block: 0.2rem 0;
 }
 .site-case .site-detail {
-  color: var(--site-support-color);
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
   font-weight: var(--site-font-weight-sans-light);
   line-height: 1.45;
   margin-block: 0.5rem 0;
 }
-.site-case .site-detail dt {
-  color: var(--kpress-doc-text);
-  font-weight: var(--site-font-weight-sans-medium);
-}
 .site-case .site-detail dd {
   margin: 0 0 0.35rem;
 }
 .site-case-polynomial {
   font-size: var(--site-font-size-note);
+}
+/* Exact formulas scroll in their own block; the article, surrounding explanation and
+   popover controls keep their width even when a polynomial needs a much longer line. */
+.site-case :is(.site-case-value, .site-case-polynomial p, .site-case-result-summary),
+.site-case .site-detail dd:has(.kpress-math),
+.site-case-summary .site-atlas-pop-bound,
+.site-case-prose :is(p, .kpress-math[data-kpress-math="display"]) {
+  max-inline-size: 100%;
+  overflow-x: auto;
+  padding-block: 0.25em;
+  position: relative;
 }
 .site-case-data {
   border-block-start: 1px solid var(--kpress-doc-border);
@@ -2861,6 +3299,41 @@ body {
   height: auto;
   width: 100%;
 }
+/* The paused poster is a large play target, with room for native controls below. */
+.site-film-picture {
+  position: relative;
+}
+.kpress .site-film-play {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  inset: 0 0 3rem;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+}
+.kpress .site-film-play[hidden] {
+  display: none;
+}
+.site-film-play-icon {
+  align-items: center;
+  background: var(--kpress-doc-bg);
+  border: 1px solid var(--kpress-doc-border);
+  border-radius: 50%;
+  color: var(--kpress-doc-text);
+  display: flex;
+  font-size: 2rem;
+  inline-size: 4rem;
+  block-size: 4rem;
+  justify-content: center;
+  padding-inline-start: 0.15rem;
+  transition: transform var(--site-hover-duration) var(--site-hover-easing);
+}
+.site-film-play:is(:hover, :focus-visible) .site-film-play-icon {
+  transform: scale(1.08);
+}
 .site-page .site-film-frame figcaption,
 .site-page .site-film-note {
   color: var(--site-support-color);
@@ -2873,4 +3346,22 @@ body {
 }
 .site-page .site-film-frame figcaption {
   margin-block-start: 0.6rem;
+}
+
+/* Drawing dimensions are reserved before their files load. */
+.kpress .site-page .site-atlas-cell img,
+.kpress .site-page .site-thumb img {
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.kpress .site-case-figure > svg {
+  aspect-ratio: 1;
+}
+
+.site-result-neighbors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-start: 2rem;
 }

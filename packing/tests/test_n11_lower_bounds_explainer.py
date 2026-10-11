@@ -12,6 +12,7 @@ from __future__ import annotations
 import posixpath
 import re
 from dataclasses import replace
+from datetime import date
 from fnmatch import fnmatchcase
 from fractions import Fraction
 from pathlib import Path
@@ -19,8 +20,10 @@ from urllib.parse import urljoin
 
 import pytest
 import tinycss2
+from PIL import Image
 
 from devtools import (
+    build_known_best_atlas,
     check_published_site,
     paper_links,
     render_n11_lower_bounds_explainer,
@@ -68,6 +71,7 @@ from sqpack.release import (
     PUBLICATION_HISTORY,
     PUBLICATION_STAMP,
     PUBLICATION_VERSION,
+    commit_date,
     edition_at,
 )
 from sqpack.yamlio import safe_load
@@ -238,7 +242,7 @@ def test_the_page_is_self_contained(page: str) -> None:
     assert_self_contained(page)
     assert re.findall(r"<link[^>]*>", page) == [
         f'<link rel="canonical" href="{PAGE_URL}">',
-        render_overview.favicon_html(),
+        render_overview.favicon_html(inline=True),
     ]
     assert re.search(r"<script[^>]*\ssrc=", page) is None
 
@@ -263,6 +267,16 @@ def test_the_page_is_self_contained(page: str) -> None:
 def test_an_external_reference_is_refused(fragment: str) -> None:
     with pytest.raises(SystemExit, match="not self-contained"):
         assert_self_contained(f"<html><body>{fragment}</body></html>")
+
+
+def test_inline_runtime_url_constructors_are_not_css_fetches() -> None:
+    program = render_overview.kpress_client_script()
+    assert_self_contained(f"<html><body><script>{program}</script></body></html>")
+    with pytest.raises(SystemExit, match="not self-contained"):
+        assert_self_contained(
+            '<html><body><script src="https://cdn.example/x.js">'
+            f"{program}</script></body></html>"
+        )
 
 
 @pytest.mark.parametrize(
@@ -338,8 +352,10 @@ def test_the_published_document_states_each_figure_once(document: str) -> None:
         assert document.count(f"**Figure {number}.") == 1, number
 
 
-def test_figure_two_counts_stars_in_its_own_composite(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Stars beyond the first hundred must not enter Figure 2's caption."""
+def test_figure_two_counts_recent_lower_bounds_in_its_own_composite(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Recent bounds beyond the first hundred must not enter Figure 2's caption."""
     whole_corpus = {"lower_bound_recent_result": 23, "lower_bound_first_proved_here": 5}
     record = {
         "totals": whole_corpus,
@@ -374,7 +390,7 @@ def test_figure_three_marks_the_verified_lower_bound_beside_the_packing(
     assert recorded["exact_form"] == packing["verified_upper_bound"]["exact_form"]
     assert render_n11_lower_bounds_explainer.n11_solved(verified)
     assert verified.display == "3.8770835…"
-    assert verified.credit == "Queuingtheorydotcom after Levy et al. 2026"
+    assert verified.credit == "Ahmed after Levy, Kleddamag 2026"
 
     best_x = round(
         render_n11_lower_bounds_explainer.line_x(
@@ -390,10 +406,7 @@ def test_figure_three_marks_the_verified_lower_bound_beside_the_packing(
     assert '<line x1="356" y1="76.0"' in figure
 
     caption = " ".join(document.split())
-    assert (
-        "T-060, by Queuingtheorydotcom after Levy et al. 2026, closes the remaining gap"
-        in caption
-    )
+    assert "T-060, by Ahmed after Levy, Kleddamag 2026, closes the remaining gap" in caption
     assert "the exact algebraic side $T$" in caption
     assert "a truncated decimal display of $T$" in caption
     assert "leaves a gap of $0.0000000" not in caption
@@ -488,7 +501,7 @@ def test_the_link_preview_is_the_sites_and_its_urls_are_absolute(page: str) -> N
     same check the deployed site gets: one of each tag, each address in full, and the
     canonical link and `og:url` both the page's own address.
     """
-    assert check_published_site.head_problems(page, PAGE_URL) == []
+    assert check_published_site.head_problems(page, PAGE_URL, allow_inline_favicon=True) == []
     head = check_published_site.read_head(page)
     assert head.link("canonical") == head.meta("og:url") == [PAGE_URL]
     assert render_overview.canonical_url(PAGE_URL.removeprefix(SITE_URL)) == PAGE_URL
@@ -517,28 +530,23 @@ def test_the_card_image_is_the_sites_one_card_at_the_size_it_is_drawn(page: str)
 
 
 def test_the_composite_card_is_the_landscape_crop_and_not_the_portrait_canvas() -> None:
-    """The composite's card, which the overview's atlas card shows and which was this
-    page's link preview until the site took one card for every page, stays a card.
+    """The atlas preview keeps the top of the portrait composite at full width.
 
-    A portrait card is cropped by the platform, and it crops away the title.
-
-    X and Facebook show a landscape card and take a band from the middle of whatever
-    they are handed, so the full 150:181 canvas arrives as four rows out of the middle
-    of the grid with the title, the date and the repository line gone. The atlas builder
-    writes the top of the same drawing at 1.91:1 instead, which is the ratio those
-    platforms want, so they crop nothing.
-
-    What is pinned is the property rather than the number: landscape, and within a
-    pixel of the ratio the croppers use. A future canvas can change the crop height as
-    long as the card stays a card.
+    Its crop follows the atlas specification; the site's shared social card has its
+    own ratio. Matching pixels catches a centre crop or a second drawing that keeps
+    the right dimensions while losing the title.
     """
     width, height = png_size(COMPOSITE_CARD)
-    assert width > height, "a card cropped by the platform is a card without its title"
-    assert abs(width / height - 1.91) < 0.01, (width, height, width / height)
-    # The crop is of the composite, not a second drawing: same width, less height.
+    assert width > height, "the atlas preview must stay landscape"
+    canvas = build_known_best_atlas.PRIMARY_COMPOSITE
+    assert (width, height) == (canvas.width, canvas.spec.card_units)
     full_width, full_height = png_size(COMPOSITE_PNG)
     assert width == full_width
     assert height < full_height
+    with Image.open(COMPOSITE_CARD) as card, Image.open(COMPOSITE_PNG) as full:
+        assert card.convert("RGBA").tobytes() == (
+            full.crop((0, 0, width, height)).convert("RGBA").tobytes()
+        )
 
 
 def test_the_card_and_the_page_say_the_same_thing(page: str) -> None:
@@ -564,9 +572,7 @@ def test_the_card_and_the_page_say_the_same_thing(page: str) -> None:
         render_n11_lower_bounds_explainer.TITLE
         == "New Lower Bounds for Square Packing for n = 11"
     )
-    assert (
-        title == f"{render_n11_lower_bounds_explainer.TITLE} · {render_overview.PROJECT_NAME}"
-    )
+    assert title == render_n11_lower_bounds_explainer.TITLE
     (description,) = head.meta("description")
     assert head.meta("og:description") == head.meta("twitter:description") == [description]
     assert current.bounded_side_decimal in description
@@ -599,7 +605,16 @@ def test_the_forwarder_at_the_old_address_previews_the_page_as_the_page_does(
         if moved.name == "explainer.html"
     )
     assert dict(render_overview.MOVED_PAGES)["explainer.html"] == SITE_PATH
-    assert check_published_site.forwarder_problems(forwarder, PAGE_URL, page) == []
+    assert (
+        check_published_site.forwarder_problems(
+            forwarder,
+            PAGE_URL,
+            page,
+            allow_inline_favicon=True,
+            page_url=SITE_URL + "explainer.html",
+        )
+        == []
+    )
     head = check_published_site.read_head(forwarder)
     own = check_published_site.read_head(page)
     assert head.titles == own.titles
@@ -901,6 +916,15 @@ def test_the_published_document_says_what_it_is_and_where_the_figures_are(
     assert SITE_URL in document
 
 
+def test_atlas_template_links_use_the_canonical_dated_pdf_assets() -> None:
+    from sqpack.known_best import composite_pdf_name  # noqa: PLC0415
+
+    article = render_n11_lower_bounds_explainer.MARKDOWN.read_text()
+    links = set(re.findall(r'href="\{\{SITE_ROOT\}\}([^"\s]+\.pdf)"', article))
+    assert links == {composite_pdf_name(f"known-best-1-{last}") for last in (100, 324)}
+    assert all(name in {asset.name for asset in COMPOSITE_ASSETS} for name in links)
+
+
 def test_the_published_document_names_the_sites_files_where_the_site_serves_them(
     document: str,
 ) -> None:
@@ -910,8 +934,8 @@ def test_the_published_document_names_the_sites_files_where_the_site_serves_them
     each of those files by its address on the site, and links nothing relatively."""
     assert f"]({SITE_ROOT}" not in document
     assert f"]({SITE_URL}known-best-1-100.svg)" in document
-    assert f"]({SITE_URL}known-best-1-100.pdf)" in document
-    assert f"]({SITE_URL}known-best-1-324.pdf)" in document
+    assert f"]({SITE_URL}square-packings-100-20261008.pdf)" in document
+    assert f"]({SITE_URL}square-packings-324-20261008.pdf)" in document
     relative = re.findall(r"\]\((?!https?://|#|mailto:)([^)\s]+)\)", document)
     assert relative == []
 
@@ -1160,8 +1184,8 @@ def test_every_repository_link_names_main_and_exists_there(page: str, document: 
 
 
 def test_the_atlas_figure_carries_the_shared_version_at_its_own_data_commit() -> None:
-    """A poster names the data it was drawn from, in the site's one spelling at its own
-    data commit, and is not re-stamped when the pin moves (`sqpack.release`, rule 4):
+    """A poster names and dates the data it was drawn from, in the site's one spelling
+    at its own data commit, and is not re-stamped when the pin moves (release rule 4):
     the posters agree with the site's edition in the version and may differ in the six
     characters after it. The posters are the site's assets, so they keep the site's
     version; the paper that shows them does not."""
@@ -1171,8 +1195,14 @@ def test_the_atlas_figure_carries_the_shared_version_at_its_own_data_commit() ->
         assert footer is not None, composite.name
         drawn_from = re.search(r'name="data-revision">([0-9a-f]{40})</sqpack:value>', text)
         assert drawn_from is not None, composite.name
-        assert footer.group(1) == edition_at(drawn_from.group(1)), composite.name
-        assert footer.group(1).rsplit("-", 1)[0] == PUBLICATION_EDITION.rsplit("-", 1)[0]
+        identity = build_known_best_atlas.retained_identity(text)
+        assert identity.data_revision == drawn_from.group(1)
+        assert identity.stamp == edition_at(drawn_from.group(1)), composite.name
+        day = date.fromisoformat(commit_date(REPO, drawn_from.group(1)))
+        assert identity.data_date == day.isoformat(), composite.name
+        expected_footer = f"{day:%B} {day.day}, {day.year} · {edition_at(drawn_from.group(1))}"
+        assert footer.group(1) == expected_footer, composite.name
+        assert identity.stamp.rsplit("-", 1)[0] == PUBLICATION_EDITION.rsplit("-", 1)[0]
 
 
 def test_the_credits_print_the_papers_own_version_and_not_the_sites(
@@ -1268,9 +1298,11 @@ def test_version_history_lists_the_papers_own_editions_and_no_others(
     listed = re.findall(r"^- \*\*(v\d+\.\d+\.\d+) — ", history, re.MULTILINE)
     assert listed == [entry.version for entry in EXPLAINER_HISTORY]
     compact_history = " ".join(history.split())
+    expected_history = render_n11_lower_bounds_explainer.version_history_markdown()
+    assert " ".join(expected_history.split()) in compact_history
     for entry in EXPLAINER_HISTORY:
-        expected = f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}"
-        assert " ".join(expected.split()) in compact_history
+        expected = f"- **{entry.version} — {entry.first_published}.**"
+        assert expected in compact_history
         assert entry.version in page
         assert entry.first_published in page
     site_only = {e.version for e in PUBLICATION_HISTORY} - set(listed)

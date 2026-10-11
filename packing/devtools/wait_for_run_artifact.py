@@ -1,15 +1,15 @@
-"""Wait for one artifact from a producer running beside the current job.
+"""Wait for one exact-attempt producer artifact to become visible.
 
-GitHub Actions normally expresses an artifact dependency with ``needs:``, but that
-serializes all of the consumer's setup after the producer. Browser provisioning for the
-certificate page takes longer than page preparation and does not read the page. Those
-jobs can start together after the scope decision, then wait at the first step that
-actually needs the artifact.
+The Pages workflow schedules prepared-page consumers after their producer with
+``needs:``. This tool then joins the current run attempt to its artifact, whose API
+listing may become visible after the producer completes.
 
 This tool makes that join explicit and bounded. It polls only the named workflow run,
 accepts only a non-expired artifact with the exact name, and fails immediately when the
-named producer completes without success. API failures and timeouts are errors. A
-consumer therefore cannot continue on a missing, stale, or failed producer artifact.
+named producer completes without success. Polling backs off while the producer is
+pending, and explicit API quota responses wait for the advertised retry window within
+the same deadline. Other API failures and timeouts are errors. A consumer therefore
+cannot continue on a missing, stale, or failed producer artifact.
 
 Usage, from ``packing/``::
 
@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import subprocess
 import sys
 import time
@@ -37,6 +38,14 @@ if TYPE_CHECKING:
 type Api = Callable[[str], Any]
 type Clock = Callable[[], float]
 type Sleep = Callable[[float], None]
+
+
+class RateLimitError(OSError):
+    """An explicit API quota response and its minimum retry delay."""
+
+    def __init__(self, message: str, *, retry_after: float) -> None:
+        super().__init__(message)
+        self.retry_after = retry_after
 
 
 @dataclass(frozen=True)
@@ -123,44 +132,93 @@ def wait_for_artifact(
     if run_attempt < 1:
         raise ValueError("run_attempt must be positive")
     deadline = clock() + timeout
+    timeout_message = (
+        f"artifact {name!r} was not available from {producer!r} after {timeout:g} seconds"
+    )
     attempts = 0
+    poll_interval = interval
+    quota_interval = 60.0
     while True:
         attempts += 1
-        jobs = api(_jobs_path(repository, run_id, run_attempt))
-        job = _producer_job(jobs, producer=producer)
-        failure = _producer_failure(job, producer=producer)
-        if failure is not None:
-            raise RuntimeError(failure)
-        started_at = None if job is None else job.get("started_at")
-        if started_at is not None:
-            artifacts = api(_artifacts_path(repository, run_id))
-            artifact_id = _artifact_from_attempt(
-                artifacts, name=name, producer_started_at=str(started_at)
-            )
-            if artifact_id is not None:
-                return Ready(attempts, artifact_id)
+        delay = poll_interval
+        try:
+            jobs = api(_jobs_path(repository, run_id, run_attempt))
+            if clock() >= deadline:
+                raise TimeoutError(timeout_message)
+            job = _producer_job(jobs, producer=producer)
+            failure = _producer_failure(job, producer=producer)
+            if failure is not None:
+                raise RuntimeError(failure)
+            active = job is not None and job.get("status") in {"in_progress", "completed"}
+            started_at = None if job is None else job.get("started_at")
+            if active and started_at is not None:
+                artifacts = api(_artifacts_path(repository, run_id))
+                if clock() >= deadline:
+                    raise TimeoutError(timeout_message)
+                artifact_id = _artifact_from_attempt(
+                    artifacts, name=name, producer_started_at=str(started_at)
+                )
+                if artifact_id is not None:
+                    return Ready(attempts, artifact_id)
+
+            # Queued jobs can have started_at set before a runner picks them up.
+            # Listing artifacts then adds requests without any possible new artifact.
+            delay = min(poll_interval, 30.0 if active else 60.0)
+            poll_interval = min(delay * 2, 30.0 if active else 60.0)
+        except RateLimitError as error:
+            delay = max(quota_interval, error.retry_after)
+            quota_interval *= 2
 
         now = clock()
         if now >= deadline:
-            raise TimeoutError(
-                f"artifact {name!r} was not available from {producer!r} "
-                f"after {timeout:g} seconds"
-            )
-        sleep(min(interval, deadline - now))
+            raise TimeoutError(timeout_message)
+        sleep(min(delay, deadline - now))
+        # Do not spend another API request once a retry window reaches the deadline.
+        if clock() >= deadline:
+            raise TimeoutError(timeout_message)
 
 
-def _gh_api(path: str) -> Any:
+def gh_api(path: str) -> Any:
+    """Decode one API response, carrying explicit quota retry windows to the waiter."""
     completed = subprocess.run(
-        ("gh", "api", path), capture_output=True, text=True, check=False, timeout=60
+        ("gh", "api", "--include", path),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=60,
     )
+    header_block, separator, body = completed.stdout.replace("\r\n", "\n").partition("\n\n")
     if completed.returncode != 0:
-        raise OSError(
-            completed.stderr.strip() or f"gh api {path} exited {completed.returncode}"
+        message = completed.stderr.strip() or f"gh api {path} exited {completed.returncode}"
+        lines = header_block.splitlines()
+        status = lines[0].split()[1] if lines and len(lines[0].split()) > 1 else ""
+        headers = {
+            key.strip().lower(): value.strip()
+            for line in lines[1:]
+            for key, colon, value in [line.partition(":")]
+            if colon
+        }
+        limited = status in {"403", "429"} and (
+            status == "429"
+            or "rate limit" in message.lower()
+            or headers.get("x-ratelimit-remaining") == "0"
         )
-    return json.loads(completed.stdout)
+        if limited:
+            delays = [60.0]
+            if "retry-after" in headers:
+                delays.append(float(headers["retry-after"]))
+            if headers.get("x-ratelimit-remaining") == "0" and "x-ratelimit-reset" in headers:
+                delays.append(float(headers["x-ratelimit-reset"]) - time.time() + 1)
+            if not all(math.isfinite(delay) for delay in delays):
+                raise ValueError("API quota response has a non-finite retry window")
+            raise RateLimitError(message, retry_after=max(delays))
+        raise OSError(message)
+    if not separator:
+        raise RuntimeError("gh api response has no header/body separator")
+    return json.loads(body)
 
 
-def main(argv: Sequence[str] | None = None, *, api: Api = _gh_api) -> int:
+def main(argv: Sequence[str] | None = None, *, api: Api = gh_api) -> int:
     parser = argparse.ArgumentParser(
         prog="python -m devtools.wait_for_run_artifact",
         description=__doc__,

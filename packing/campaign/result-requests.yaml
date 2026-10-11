@@ -17,147 +17,974 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-10'
 issues:
+  - number: 420
+    title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
+    author: evand
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Pinned source metadata and Lean code imported as attributed reports, with source configurations
+      and proof obligations kept explicit.
+    read_through: '2026-10-09T02:57:01Z'
+    results:
+    - key: local-minima-178
+      claim: 178 source configurations are reported non-strict local minima under matched-index perturbations.
+      source: body
+      register:
+      - T-124
+    beads:
+    - think-juuq
+    answer_bead: think-juuq
+    replies:
+    - url: https://github.com/jlevy/squares/issues/420#issuecomment-6073319527
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: local-minima-178
+        id: T-124
+        verification: V0
+        confirmation: C0
+    close_when: The reported import and its disposition are on main and the owner has posted the resulting
+      state; unresolved proof replays remain explicitly owned.
+  - number: 419
+    title: 'Mechanized exact forms for 269 best-known packings, n ≤ 324 (minimal polynomial, isolating
+      interval, exact configuration), checked independently and in Lean: registration request'
+    author: evand
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Pinned source metadata and Lean code imported as attributed reports, with source configurations
+      and proof obligations kept explicit.
+    read_through: '2026-10-09T02:57:00Z'
+    results:
+    - key: new-exact-forms
+      claim: Four newly derived exact feasible-side forms at102,106,152,177; polynomial minimality remains
+        source-asserted.
+      source: body
+      register:
+      - T-120
+      - T-121
+      - T-122
+      - T-123
+    - key: remaining-catalogue
+      claim: 269 exact forms and258 source Lean feasibility flags over the complete1..324 catalogue.
+      source: body
+      not_registered: The remaining forms are evidence about existing source configurations, not new
+        bounds. The complete reported catalogue is retained; PR403 owns canonical exact-form integration
+        and the source flags are not local verifier outcomes.
+      queued: false
+    beads:
+    - think-8sm2
+    answer_bead: think-8sm2
+    replies:
+    - url: https://github.com/jlevy/squares/issues/419#issuecomment-6065918715
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: new-exact-forms
+      - result: remaining-catalogue
+    - url: https://github.com/jlevy/squares/issues/419#issuecomment-6073319280
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: new-exact-forms
+        id: T-120
+        verification: V0
+        confirmation: C0
+      - result: new-exact-forms
+        id: T-121
+        verification: V0
+        confirmation: C0
+      - result: new-exact-forms
+        id: T-122
+        verification: V0
+        confirmation: C0
+      - result: new-exact-forms
+        id: T-123
+        verification: V0
+        confirmation: C0
+      - result: remaining-catalogue
+    - url: https://github.com/jlevy/squares/issues/419#issuecomment-6076907176
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: remaining-catalogue
+    - url: https://github.com/jlevy/squares/issues/419#issuecomment-6089680444
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: remaining-catalogue
+    close_when: The reported import and its disposition are on main and the owner has posted the resulting
+      state; unresolved proof replays remain explicitly owned.
+    notes: >-
+      The two owner checkpoints of 9 October report the catalogue sources in open PR403 and PR435.
+      At 910a7a4 and 4789e36 Packing and complete validation pass and PR403's Pages fails its frontier
+      layout-shift budget; at c1d3aab and 10ce357 Packing, Pages and mergeability pass. They change
+      no certificate verdict and register no claim of this issue; whole-configuration feasibility,
+      Lean statement binding and optimality stay with think-8sm2. On 10 October the author asked on
+      #375 (https://github.com/jlevy/squares/issues/375#issuecomment-6101883016) that this issue's
+      exact form at n = 17, at evand/square-packing 8c47162 rather than the f58a017 retained here, be
+      the n = 17 object, and that its bookkeeping sit here and on #405; it is held on #375 with the
+      n = 17 intake under think-x4v4, and nothing at 8c47162 is retained.
+  - number: 399
+    title: 'New packings: s(266) ≤ 16.82302875075648, s(270) ≤ 16.93780722844603, s(272) ≤ 16.96811014576960'
+    author: evand
+    opened: '2026-10-07'
+    state: closed
+    closed: '2026-10-09'
+    kind: result-report
+    triage: done
+    summary: Three complete changed rational packings independently certified at V3/C3; source novelty,
+      local minimality and optimality remain unestablished. Historical #375 sources retain their own poses.
+    read_through: '2026-10-09T02:56:57Z'
+    results:
+    - key: three-new-feasible-packings
+      claim: Exact feasible upper bounds at n266,270,272, with complete new poses and rational sides.
+      source: body
+      register:
+      - T-119
+    beads:
+    - think-hh48
+    answer_bead: think-hh48
+    replies:
+    - url: https://github.com/jlevy/squares/issues/399#issuecomment-6073318623
+      date: '2026-10-09'
+      by: jlevy
+      kind: final
+      reported:
+      - result: three-new-feasible-packings
+        id: T-119
+        verification: V3
+        confirmation: C3
+    close_when: The confirmed import is on main and the owner has posted its state; novelty and
+      local/global optimality are outside this feasibility import.
+  - number: 432
+    title: '18 (originally 25) new packings below record for n = 51–295: registration request'
+    author: ry-xu
+    opened: '2026-10-08'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      All 25 complete rational source certificates and the separate undilated n51 construction
+      at (16+5sqrt(2))/3 have independently reviewed full native feasibility replay at V3/C3.
+      Seventeen rational houses and radical n51 are selected; eight rational certificates remain
+      confirmed without selection. No global/local optimality, rigidity or novelty is established.
+      Native and independent exact geometry count 119 touching pairs at radical n51; the source's
+      191-contact assertion remains unconfirmed.
+    read_through: '2026-10-08T00:16:31Z'
+    results:
+    - key: rational-certificates
+      claim: Exact finite feasibility and construction upper bounds for all 25 complete rational
+        certificates, including eight not selected by the current atlas.
+      source: body
+      register:
+      - T-125
+    - key: undilated-n51
+      claim: Exact finite feasibility and the undilated construction upper bound s(51) <= (16+5sqrt(2))/3.
+      source: body
+      register:
+      - T-126
+    - key: source-contact-count
+      claim: The author reports 191 touching pairs for the undilated n51 construction.
+      source: body
+      not_registered: Native and independent exact checks count 119 touching pairs and 1156 strictly
+        separated pairs. The source count remains unconfirmed and supplies no additional admission.
+      queued: false
+    beads:
+      - think-klm7
+      - think-1cvf
+    answer_bead: think-klm7
+    replies: []
+    close_when: >-
+      The existing intake owner acquires immutable source custody, compares each claim with the
+      current records, records native import and supported verdicts, and posts the resulting disposition
+      from main.
+
+  - number: 400
+    title: 'n17 branch-and-bound certificates: two faster ways to run the standing verifier''s checks,
+      with a same-host benchmark'
+    author: wand125
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Two faster implementations of standing n17 certificate checks are offered with same-host
+      source benchmarks. The later comment points to Rust kernel-verifier PR410. Neither a new packing
+      bound nor global optimality follows from checker speed.
+    read_through: '2026-10-08T23:48:03Z'
+    results:
+    - key: faster-verifiers
+      claim: A parallel driver and independent Rust verifier reportedly reproduce standing receipts
+        on the tested certificate classes.
+      source: body
+      not_registered: This is a checker implementation and benchmark report, not a new packing theorem.
+        PR410 owns the offered kernel checker; adopting or benchmarking the other tools remains separate
+        from admitting any n17 exclusion.
+      queued: false
+    asks:
+    - what: Evaluate offered checker implementations and independent receipt parity before adoption.
+      state: queued
+      bead: think-x4v4
+      note: PR410 and the existing n17 intake owner retain this scope; unavailable A/B2d benchmark certificates
+        cannot be inferred from the two public B2 classes.
+    beads:
+    - think-x4v4
+    answer_bead: think-x4v4
+    replies:
+    - url: https://github.com/jlevy/squares/issues/400#issuecomment-6065580564
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: faster-verifiers
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/400#issuecomment-6071299059
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: faster-verifiers
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/400#issuecomment-6076664631
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: faster-verifiers
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/400#issuecomment-6077613717
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: faster-verifiers
+        status: incomplete
+    close_when: The named owner completes or explicitly dispositions the queued work and posts the recorded
+      state; source status alone grants no theorem admission.
+    notes: The owner's 8 October review checkpoint reports completed reviews and passing full hosted
+      checkpoints for draft PR452 (BB decoded-node lifetime) and PR453 (atomic native receipts). On 9
+      October PR452 merged as c3ad5593c, changing the standing BB verifier's SHA-256 from 9dcc05bc…,
+      the file the contributor benchmarked, to 10db91c2…, and PR453 merged as e0b02b3ab. Neither adopts
+      the parallel driver or the independent Rust BB checker, which still need same-object review, receipt
+      parity and refusal checks; merged PR410 verifies a different kernel format. No admission, rating
+      or bound changes. The contributor timings remain single-host reports, not re-measured against
+      the new verifier.
+  - number: 405
+    title: 'Prove n = 17 optimality: Bidwell family, explainer paper, and verifiable proof'
+    author: jlevy
+    opened: '2026-10-07'
+    state: open
+    kind: other
+    triage: done
+    summary: The owner’s global n17 research tracker requests a composed proof and explainer. Exact
+      endpoint feasibility and local ingredients are established separately; complete global exclusion
+      and capture remain unresolved.
+    read_through: '2026-10-09T04:50:29Z'
+    results:
+    - key: global-program
+      claim: Establish global optimality of the Bidwell/Hämäläinen endpoint family for17 independently
+        rotating squares.
+      source: body
+      not_registered: This is an ongoing research objective, not a reported completed result. Existing
+        endpoint and local results retain their own registered scopes; no global theorem is imported
+        from this tracker.
+      queued: false
+    asks:
+    - what: Complete the global cover, exclusion, capture and composition proof with portable certificate
+        custody and an explainer.
+      state: queued
+      bead: think-tmz6
+      note: The overall program remains open; this source-import slice supplies no new global lower
+        bound.
+    beads:
+    - think-tmz6
+    answer_bead: think-tmz6
+    replies:
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6032768866
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6040490965
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6042800183
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6045201692
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6047179993
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6047889308
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6051519067
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6052583470
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6053195495
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6056000685
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6064118182
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6066463737
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6069228392
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6070358282
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6071221013
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6073310240
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6073747397
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6074493493
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6075182410
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6075579576
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6076879250
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6080297479
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6086932335
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6089679742
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/405#issuecomment-6090986325
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: global-program
+        status: incomplete
+    close_when: The named owner completes or explicitly dispositions the queued work and posts the recorded
+      state; source status alone grants no theorem admission.
+    notes: 'The six owner updates through 7 October report continued work, not global optimality. The
+      latest accepts exp-296 only within its fixed-owner-0 conditional domain: 25 owner-18 rows are
+      excluded, without a parent, guard, regional or census exclusion. The global bounds and census
+      remain unchanged, and the current full checkpoint is incomplete. The six owner updates of 8 and
+      9 October consolidate stack455 (#404, #454, #461) and the supporting PR452, PR453 and PR457 checkpoints,
+      and record PR464''s literature and SOS review with a conditional order-2 weighted-vertex reduction.
+      Each keeps 4.66044275 < s(17) <= 4.6755300936045509516342148538535054 and adds no T item, admission
+      or exclusion. The latest reports the research PRs failing only the unchanged source-copy cap and
+      proposes a landing order; none is merged, and the first-eight shared-centre LP under think-dvcs
+      is unimplemented and unrun. The seven owner updates of 9 October after it record the PR cleanup
+      and handoff, then the landing of stack 455 (533dd42c6), PR452, PR453, PR464, PR408, PR409 and
+      PR473, whose stack carried Session 184''s Tail A and Tail B admissions and moved the ledger from
+      58 to 60 entries (36,768 states / 4,683 orbits); the X-051 review finding that centre-only relaxations
+      and the triple weighted-vertex and SOS screens exclude nothing; the X-052 status survey; and PR475''s
+      merge as 0f16c033a, by which exp-317 admitted the twelve #472 kernel certificates (60 to 72 entries,
+      3,636 orbits / 28,528 states, 94 distance-two orbits). Each keeps the bracket above, adds no T
+      item and claims no global optimality. On 10 October Evan Daniel asked on #375
+      (https://github.com/jlevy/squares/issues/375#issuecomment-6101883016) that the n = 17 object be
+      the exact form of #419 at evand/square-packing 8c47162, an upper bound only, and that its bookkeeping
+      sit on #419 and here; it is held on #375 with the n = 17 intake under think-x4v4.'
+  - number: 413
+    title: 'n17: work status of 38 sub-pattern exclusions, to avoid duplicate work'
+    author: wand125
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: The author reports 33 patterns, 22 certificate-verified and 11 computed. The 8 October
+      corrections identify row 14 as author-fast verified and limit unmodified standing FULL reports
+      to rows 1–2; rows 3–4 used parallel standing-node checks plus the author fast verifier. A later
+      attributed D4/census reconciliation is retained without project exclusion or coverage credit.
+      The 9 October update reports 38 rows; eleven of them, with a twelfth class outside the roster,
+      were admitted to the n17 census ledger as kernel certificates through issue 472. Prior dated reports
+      remain unchanged.
+    read_through: '2026-10-09T09:51:00Z'
+    results:
+    - key: subpatterns-27
+      claim: 29 source subpatterns, with 19 reported certificate verified and 10 computed; only rows
+        1–4 report upstream full standing verification.
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6053187784
+      not_registered: Complete immutable certificates, hosted manifests, named cell/frame/cap/domain
+        bindings and full receipts have not been acquired. Producer status is retained without new unconditional
+        exclusion credit; no D4 join or coverage of unresolved global states was computed.
+      queued: true
+      bead: think-x4v4
+    - key: subpatterns-31-status-2026-10-08
+      claim: The author reports 31 patterns, 20 certificate-verified and 11 computed; row 19 newly checked
+        by the author fast verifier and rows 30/31 computed with certificates to follow.
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6055253328
+      not_registered: Dated progress report only. No complete new certificate packages, exact domain/frame/cap
+        bindings or full standing receipts have been acquired; no new unconditional exclusion or unresolved-state
+        coverage credit.
+      queued: true
+      bead: think-bmwd
+    - key: subpatterns-32-status-2026-10-08
+      claim: The author reports 32 patterns, 21 certificate-verified and 11 computed; row 20 newly checked
+        by the author fast verifier and row 32 computed as the first nine-cell pattern, with its certificate
+        to follow.
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6059040980
+      not_registered: Dated progress report only. No complete new certificate packages, exact domain/frame/cap
+        bindings or full standing receipts have been acquired; no new unconditional exclusion or unresolved-state
+        coverage credit.
+      queued: true
+      bead: think-bmwd
+    - key: subpatterns-33-status-2026-10-08
+      claim: The author reports 33 patterns, 22 certificate-verified and 11 computed. Row 33 is computed
+        and is said to remove 76 residue orbits; its roughly 116-million-node tree would produce an
+        estimated 480 GB certificate, which has not been generated.
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6062766060
+      not_registered: Dated author progress report only. No certificate package, exact domain/frame/cap
+        bindings or full standing receipt has been acquired for row 33; the reported orbit count supplies
+        no project exclusion or unresolved-state coverage credit.
+      queued: true
+      bead: think-bmwd
+    - key: subpatterns-33-row14-correction-2026-10-08
+      claim: 'The author corrects the 15:02 UTC progress report: row 14, corner-SW/side-S0/side-W0/side-W2/interior-SW/interior-NW/interior-W,
+        also passed the author fast verifier, explaining the reported rise from 21 to 22 verified rows
+        across 33 patterns; 11 remain computed.'
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6064272233
+      not_registered: Dated attribution correction only. No complete new row 14 certificate or full standing
+        receipt is acquired or admitted here; prior report sources and outcomes remain unchanged.
+      queued: true
+      bead: think-bmwd
+    - key: subpatterns-33-standing-scope-correction-2026-10-08
+      claim: 'The author retracts the earlier unmodified standing FULL attribution for rows 3–4. Only
+        rows 1–2, and the two classes reported separately in #358, have author-reported unmodified standing
+        FULL receipts. Rows 3–4 used standing node checks over all nodes through an author parallel
+        driver plus the author fast verifier; unmodified standing FULL receipts remain pending the #445
+        memory issue.'
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6064443079
+      not_registered: Dated correction supersedes current verifier attribution without rewriting historical
+        report entries. Parallel full-node checks and author fast verification are not recorded as unmodified
+        standing FULL outcomes. No project admission or assurance changes.
+      queued: true
+      bead: think-bmwd
+    - key: subpatterns-33-reconciliation-2026-10-08
+      claim: 'The author reports an upstream-tool D4/premise reconciliation of all 33 patterns: no overlap
+        with main''s 58 admitted entries and no containment between rows; rows 15/19/26 lie inside both
+        PR404 additions. The hypothetical union leaves 19164 states/2449 orbits on either baseline, and
+        covers only the single distance-two orbit of state 1965787 (8 states), leaving 94 of 95 distance-two
+        orbits untouched.'
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6064503349
+      not_registered: Complete published reconciliation source and output are retained at 89676bc9618e5724bed6a945d9711cba9ce90c6e
+        without executing the author script or reproducing its census. Claims remain attributed; complete
+        scientific certificate/domain/frame/cap custody and an independent maintained D4/premise join
+        are still required before any exclusion, orbit removal or coverage credit.
+      queued: true
+      bead: think-bmwd
+    - key: subpatterns-38-status-2026-10-09
+      claim: 'The author reports 38 rows, adding rows 34–38, all closed. Rows 28 and 32 now have branch-and-bound
+        certificates verified by the author fast verifier; rows 33 (about 480 GB as a branch-and-bound
+        certificate) and 38 are computed only, and the author is trying the kernel producer on row 33.'
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6078540292
+      not_registered: Dated author progress report only. No certificate package, full standing receipt
+        or exact domain/frame/cap binding has been acquired for rows 28, 32 or 33, and none is admitted.
+        Row 38 later received a kernel certificate, recorded under kernel-rows-2026-10-09.
+      queued: true
+      bead: think-bmwd
+    - key: kernel-rows-2026-10-09
+      claim: Ten rows, 23, 24, 25, 29, 30, 31, 34, 35, 36 and 37, have kernel certificates made with this
+        repository's own producer (mode A, ownership induction) and passed in full by the standing kernel
+        verifier, filed with receipts and an admission request as issue 472; row 38's followed there the same
+        day.
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6078540292
+      not_registered: Admitted to the n17 sub-pattern census ledger (packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml)
+        by exp-317 through PR475, merged as 0f16c033a, with rows 23, 24, 25, 29, 30, 31, 34, 35, 36, 37
+        and 38 marked admitted; issue 472's entry records the admission. The census ledger is not the result
+        register, and the n17 bound is unchanged.
+      queued: false
+    asks:
+    - what: Acquire complete packages for rows 1–4 first and join exact named-cell, frame, cap, closed-domain
+        and receipt custody before admission.
+      state: queued
+      bead: think-x4v4
+      note: The owner’s request at issuecomment-6047161738 identifies these missing inputs. The six-cell
+        example in issue 367 omits interior-S and does not refute row 3, which includes it.
+    - what: Acquire complete immutable new source/certificate packages and exact domain/receipt bindings
+        before any assurance change from the dated 31/20/11 status.
+      state: queued
+      bead: think-bmwd
+      note: Preserve the prior 29-source/19-certificate/10-computed record and existing rows 1–4 full-standing
+        scope. The later author fast status is attributed only.
+    beads:
+    - think-x4v4
+    - think-bmwd
+    answer_bead: think-x4v4
+    replies:
+    - url: https://github.com/jlevy/squares/issues/413#issuecomment-6047161738
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: subpatterns-27
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/413#issuecomment-6065911258
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: subpatterns-31-status-2026-10-08
+        status: incomplete
+      - result: subpatterns-32-status-2026-10-08
+        status: incomplete
+      - result: subpatterns-33-status-2026-10-08
+        status: incomplete
+      - result: subpatterns-33-row14-correction-2026-10-08
+        status: incomplete
+      - result: subpatterns-33-standing-scope-correction-2026-10-08
+        status: incomplete
+      - result: subpatterns-33-reconciliation-2026-10-08
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/413#issuecomment-6077614039
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: subpatterns-27
+        status: incomplete
+      - result: subpatterns-33-standing-scope-correction-2026-10-08
+        status: incomplete
+    - url: https://github.com/jlevy/squares/issues/413#issuecomment-6090986832
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: kernel-rows-2026-10-09
+      - result: subpatterns-38-status-2026-10-09
+        status: incomplete
+    close_when: The named owner completes or explicitly dispositions the queued work and posts the recorded
+      state; source status alone grants no theorem admission.
+    notes: 'The owner reply of 7 October acknowledged the then-current 17 verified / 10 computed split
+      and requested complete custody and domain bindings. Later author updates add row 26 to the verified
+      set and two computed patterns, producing the 19 / 10 split across 29 patterns summarized above.
+      Complete intake packages for rows 1–4 and the two classes in #358 are being prepared; no new project
+      admission is supplied. Separately dated author followup at 2026-10-08T07:47:25Z reports 31/20/11;
+      new complete packages remain unpublished and this status changes no earlier actual full outcome.
+      The later 2026-10-08T11:38:42Z author report gives 32/21/11, with row 20 fast-verified and row
+      32 computed; its certificate remains unpublished and no project admission changes. The separately
+      dated 2026-10-08T15:02:58Z author report gives 33/22/11 and computed row 33. Its estimated 480
+      GB certificate has not been generated; no new project admission changes. The separately dated
+      corrections at 2026-10-08T16:21:26Z and 16:31:11Z explain row 14 and retract rows 3–4''s prior unmodified
+      standing FULL attribution. Preserve all earlier result entries and source URLs as historical reports;
+      current unmodified standing FULL attribution is only rows 1–2, with rows 3–4 parallel standing-node
+      checks plus author fast verification. The 16:34:40Z reconciliation is retained as an author report
+      at 89676bc9618e5724bed6a945d9711cba9ce90c6e; it supplies no admitted exclusion or independently
+      reproduced census. The frozen reconciliation README reflects the rows 3–4 correction, while rows413.json
+      and reconcile_413.json retain the older FULL labels; retain both bytes and use the explicit primary
+      correction for current attribution. The owner''s note of 9 October 08:48 UTC reports PR452''s merge
+      (c3ad5593c): rows 3 and 4 still need unmodified standing FULL receipts at current main, now under
+      the verifier at SHA-256 10db91c2…, and every FULL receipt reported so far was made with the earlier
+      9dcc05bc…. The author''s update of 09:51 UTC is recorded as subpatterns-38-status-2026-10-09 and
+      kernel-rows-2026-10-09. The owner''s note of 23:26 UTC reports exp-317''s admission through PR475:
+      rows 23, 24, 25, 29, 30, 31, 34, 35, 36, 37 and 38 are admitted, the other 27 rows remain open,
+      and the twelfth #472 class, m6177056, is outside this roster.'
+  - number: 414
+    title: 'Two preprints: k^2 - M(k) >= 0.1 k^{1/4} (k >= 4.62e12) and > 0.06 k^{1/3} (k >= 3.5e17)'
+    author: squarepacker
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Sungjoon Ryu reports quarter-power and cube-root deficiency preprints for
+      closed-set disjoint packings at astronomical integer sides. Both v1.0 texts,
+      licences, attribution and checking sources are retained at immutable release
+      revisions. The constants using computer-assisted Lemma 4.10 depend on
+      k2-minus-c v1.2; each also states an analytic-Lemma-4.9 variant. A scoped independent proof-chain review and maintained conditional interval
+      arithmetic now cover both releases; no source program execution or new project
+      confirmation is claimed. Independent per-box labelling remains open.
+    read_through: '2026-10-07T12:35:34Z'
+    results:
+      - key: quarter-power-deficiency
+        claim: >-
+          k^2-M(k) >= 0.1 k^{1/4} for integer k >= 4.62*10^12 and liminf
+          (k^2-M(k))/k^{1/4} >= 0.1696; the analytic variant begins at
+          2.17*10^13 with liminf coefficient 0.1411.
+        source: body
+        not_registered: >-
+          Recorded as reported in frontier/asymptotic-waste-bounds.yaml. It settles
+          no count n <= 324, so the current result register has no applicable scope.
+        queued: false
+      - key: cube-root-deficiency
+        claim: >-
+          k^2-M(k) > 10^-4 sqrt(k) on [10^8,2.5*10^15], > 7*10^-5 sqrt(k)
+          on [2.5*10^15,3.5*10^17], and > 0.06 k^{1/3} from 3.5*10^17;
+          liminf coefficient 0.06285. The analytic variant and stronger from-10^21
+          coefficients are separately retained in the asymptotic record.
+        source: body
+        not_registered: >-
+          Recorded as reported in frontier/asymptotic-waste-bounds.yaml. It settles
+          no count n <= 324, so the current result register has no applicable scope.
+        queued: false
+    asks:
+      - what: Review the full preprint chain, statement conventions and numerical constants.
+        state: queued
+        bead: think-6ptr
+        note: >-
+          The full geometric chains and v1.2 dependency have a retained scoped review.
+          The maintained checker independently decides 108 numerical predicates across
+          both quarter-power routes, eight cube-root ranges, geometric ceilings and
+          four asymptotic floors. The consequences remain conditional on the reviewed
+          geometric premises and the independently tracked per-box obligation.
+          The intake itself merged in PRs #439 and #441 on 9 October; the review's
+          own verdict stays queued under think-6ptr.
+    beads: [think-6ptr]
+    answer_bead: think-u1kq
+    replies: []
+    close_when: >-
+      The reported intake and pending proof review are answered from main, and the
+      review request receives a supported verdict or explicit disposition.
+
+  - number: 411
+    title: "wand125's repositories moved to wand125/square-packing (old links keep working)"
+    author: wand125
+    opened: '2026-10-07'
+    state: open
+    kind: other
+    triage: done
+    summary: >-
+      The author consolidated ten repositories into wand125/square-packing,
+      retaining old commit-pinned links and releases. MOVED.json and INDEX.json
+      describe the migration. The canonical repository joins source discovery;
+      historical citation and acquisition pins remain unchanged.
+    read_through: '2026-10-07T11:17:46Z'
+    results:
+      - key: repository-consolidation
+        claim: Historical commit and release addresses remain available after consolidation.
+        source: body
+        not_registered: >-
+          Source-location maintenance, not a mathematical result; the author requests
+          no ledger or result-register change. New discovery does not claim that the
+          canonical repository's full certificate catalogue has been imported.
+        queued: false
+    beads: [think-4y7u]
+    answer_bead: think-4y7u
+    replies: []
+    close_when: The canonical source-discovery addition is merged and acknowledged from main.
+
   - number: 375
-    title: 'Analytic optima of 48 recent records (s(n) bounds 3e-13 … 5e-11 below the register) and exact certificates for every record n ≤ 104: registration request'
+    title: 'Analytic optima of 48 recent records (s(n) bounds 3e-13 … 5e-11 below the register) and
+      exact certificates for every record n ≤ 104: registration request'
     author: evand
     opened: '2026-10-05'
     state: open
     kind: result-report
     triage: done
-    summary: >-
-      Evan Daniel's exact-contact solver, run on this register's known-best witness at
-      every count, gives exact rational certificates of s(n) <= S' at 321 of the 324
-      counts (evand/square-packing 13ee36e, s12/search/exact/batch/). At 48 counts S' lies
-      3e-13 to 5e-11 below the register's side, the exact optimum of the same packing
-      (Couzo's at 46, de Winter's at n = 126 and 211), and he asks for those to be
-      registered; the other 273 are offered as an independent exact replay of the upper
-      bounds, with nothing asked. Two exact checkers of his accept every certificate; that
-      the points are KKT local minima is his numerical evidence. The source states AI
-      assistance (Claude).
-    read_through: '2026-10-06T02:41:09Z'
+    summary: Evan Daniel's exact-contact solver, run on this register's known-best witness at every
+      count, gives exact rational certificates of s(n) <= S' at 321 of the 324 counts (evand/square-packing
+      13ee36e, s12/search/exact/batch/). At 48 counts S' lies 3e-13 to 5e-11 below the register's side,
+      the exact optimum of the same packing (Couzo's at 46, de Winter's at n = 126 and 211), and he
+      asks for those to be registered; the other 273 are offered as an independent exact replay of the
+      upper bounds, with nothing asked. Two exact checkers of his accept every certificate; that the
+      points are KKT local minima is his numerical evidence. The source states AI assistance (Claude).
+      Issue 399 separately supplies changed arrangements at 266, 270 and 272, now certified in T-119;
+      this request retains its original source 13ee36e poses and scope.
+    read_through: '2026-10-10T20:31:42Z'
     results:
-      - key: exact-optima-48
-        claim: >-
-          s(n) <= S' at n = 68, 102, 103, 106, 110, 123, 126, 131, 132, 152, 154, 155, 156,
-          172, 177, 180, 181, 182, 199, 206 to 211, 228, 236 to 241, 259, 263, 268 to 273,
-          297 and 301 to 307, each S' rational and 3e-13 to 5e-11 below the register's
-          reported side
-        source: body
-        register: [T-098]
-      - key: certificates-273
-        claim: >-
-          Exact certificates at the 273 other certified counts, each 1e-20 to 1e-14 above
-          the printed side, offered as an independent exact replay of the existing upper
-          bounds; n = 105, 130 and 292 not certified
-        source: body
-        not_registered: >-
-          The author asks for nothing to be registered from them. The 272 other than n =
-          17 were replayed here with the 48 and are pinned by digest in the packet. At the
-          78 counts whose verified ceiling trailed its report they could carry it, a use
-          the author did not ask for; the owner decided on 6 October 2026 to import them
-          (think-70bh), and 77 now carry the verified ceiling as T-101 (ceilings-77). The
-          other 195 replayed move no case, n = 29 among them, whose interval-certified
-          bound already lies 5e-21 below the certificate's side.
-        queued: false
-      - key: ceilings-77
-        claim: >-
-          Of the 273, the exact certificates at 77 counts from n = 28 to 300, each 1.2e-16
-          to 9.8e-15 above the printed side, offered with the rest as an independent exact
-          replay of the existing upper bounds; rounded up at the printed precision, each
-          lies below the verified ceiling the record held at its count
-        source: body
-        register: [T-101]
-        evidence: [E-evand-exact-ceilings-2026-10-05-report, E-evand-exact-ceilings-2026-10-05-exact-replay, E-evand-exact-ceilings-2026-10-05-source-replay]
-        bead: think-70bh
-      - key: kkt-local-minima
-        claim: >-
-          315 of the 321 exact points are KKT local minima, 44 of the 48 improvements
-          among them, by numerical checks at 80 digits (multipliers, reduced Hessian,
-          corner-to-corner MILP); six are certified bounds only
-        source: body
-        not_registered: >-
-          Numerical evidence of local optimality of the packings, not a bound on s(n):
-          recorded as reported in T-098 and its report entry and not verified here.
-        queued: false
-      - key: n105-descent
-        claim: >-
-          At n = 105 the witness has equilibrium residual 1e-3 and a first-order descent
-          once corner-to-corner touches may slip, so it may not be a local minimum
-        source: body
-        not_registered: >-
-          A numerical observation on Couzo's n = 105 packing that moves no bound; the
-          packet README records it.
-        queued: false
-      - key: n17-certificate
-        claim: The exact certificate at n = 17, one of the 273
-        source: body
-        not_registered: >-
-          Held by the owner for the n = 17 work on other branches: not retained, pinned,
-          replayed or recorded here.
-        queued: true
-        bead: think-x4v4
-    beads: [think-t6ok, think-70bh, think-x4v4, think-5n3o]
+    - key: exact-optima-48
+      claim: s(n) <= S' at n = 68, 102, 103, 106, 110, 123, 126, 131, 132, 152, 154, 155, 156, 172,
+        177, 180, 181, 182, 199, 206 to 211, 228, 236 to 241, 259, 263, 268 to 273, 297 and 301 to 307,
+        each S' rational and 3e-13 to 5e-11 below the register's reported side
+      source: body
+      register:
+      - T-098
+    - key: certificates-273
+      claim: Exact certificates at the 273 other certified counts, each 1e-20 to 1e-14 above the printed
+        side, offered as an independent exact replay of the existing upper bounds; n = 105, 130 and
+        292 not certified
+      source: body
+      not_registered: The author asks for nothing to be registered from them. The 272 other than n =
+        17 were replayed here with the 48 and are pinned by digest in the packet. At the 78 counts whose
+        verified ceiling trailed its report they could carry it, a use the author did not ask for; the
+        owner decided on 6 October 2026 to import them (think-70bh), and 77 now carry the verified ceiling
+        as T-101 (ceilings-77). The other 195 replayed move no case, n = 29 among them, whose interval-certified
+        bound already lies 5e-21 below the certificate's side.
+      queued: false
+    - key: ceilings-77
+      claim: Of the 273, the exact certificates at 77 counts from n = 28 to 300, each 1.2e-16 to 9.8e-15
+        above the printed side, offered with the rest as an independent exact replay of the existing
+        upper bounds; rounded up at the printed precision, each lies below the verified ceiling the
+        record held at its count
+      source: body
+      register:
+      - T-101
+      evidence:
+      - E-evand-exact-ceilings-2026-10-05-report
+      - E-evand-exact-ceilings-2026-10-05-exact-replay
+      - E-evand-exact-ceilings-2026-10-05-source-replay
+      bead: think-70bh
+    - key: kkt-local-minima
+      claim: 315 of the 321 exact points are KKT local minima, 44 of the 48 improvements among them,
+        by numerical checks at 80 digits (multipliers, reduced Hessian, corner-to-corner MILP); six
+        are certified bounds only
+      source: body
+      not_registered: 'Numerical evidence of local optimality of the packings, not a bound on s(n):
+        recorded as reported in T-098 and its report entry and not verified here.'
+      queued: false
+    - key: n105-descent
+      claim: At n = 105 the witness has equilibrium residual 1e-3 and a first-order descent once corner-to-corner
+        touches may slip, so it may not be a local minimum
+      source: body
+      not_registered: A numerical observation on Couzo's n = 105 packing that moves no bound; the packet
+        README records it.
+      queued: false
+    - key: n17-certificate
+      claim: The exact certificate at n = 17, one of the 273
+      source: body
+      not_registered: 'Held by the owner for the n = 17 work on other branches: not retained, pinned,
+        replayed or recorded here. Withdrawn by the author on 10 October 2026 as a separate submission,
+        in favour of the exact form of #419 (n17-exact-form-2026-10-10).'
+      queued: false
+    - key: certificates-105-130-status-2026-10-07
+      claim: The author reports complete exact certificates at 105 and 130 at 7eef24f, bringing the batch
+        to 323/324, with both source checkers accepting.
+      source: https://github.com/jlevy/squares/issues/375#issuecomment-6029511519
+      bead: think-tiou
+      register:
+      - T-129
+      evidence:
+      - E-daniel-375-dated-105-130-report
+    - key: certificate-292-status-2026-10-07
+      claim: The author reports exact certification of 292 at f58a017 and 324/324 batch completion; numerical
+        local-minimum observations remain source claims.
+      source: https://github.com/jlevy/squares/issues/375#issuecomment-6045966142
+      bead: think-tiou
+      register:
+      - T-129
+      evidence:
+      - E-daniel-375-dated-292-report
+    - key: source-valid-invalid-wrapper-correction-2026-10-07
+      claim: The author corrected verify_all.sh at cca7bf1 from grep -q VALID to an exact VALID-line match
+        so INVALID no longer passes that wrapper, and reports rerunning the full batch.
+      source: https://github.com/jlevy/squares/issues/375#issuecomment-6046733132
+      not_registered: The exact cca7bf1 wrapper correction is retained separately in packing/resources/web/evand-batch-wrapper-2026-10-07/
+        and linked as a T-129 artifact. It is a source-wrapper correction, not a new bound. The author
+        rerun remains attributed; no author program or geometric replay was executed here. Older scripts
+        and complete source-specific receipts remain unchanged.
+      queued: false
+    - key: n17-exact-form-2026-10-10
+      claim: >-
+        For n = 17 the author asks that the exact form from #419 be taken as the object in place of
+        this issue's rational certificate, which it implies, and withdraws S' at n = 17 as a separate
+        submission. At evand/square-packing 8c47162cec22f02791abfbf7dedb8094de91189a he names
+        search/exact/minpoly/data/n-17.minpoly.json.gz, John Bidwell's 1997 packing, the register's
+        record, at a side S* that is the unique root of an irreducible integer polynomial of degree 18
+        in a rational interval of width 2e-37; the standard-library verify_exact.py, which he reports
+        prints VALID; and the theorem packs of lean/Sqpack/Exact/Batch/N17.lean. S' lies about 5e-20
+        above the interval's upper end and follows by monotonicity. Neither side improves the
+        register's 4.67553009360455. He claims the upper bound only, no optimality, and puts the
+        n = 17 bookkeeping on #419 and #405.
+      source: https://github.com/jlevy/squares/issues/375#issuecomment-6101883016
+      not_registered: >-
+        No new bound: it is the register's packing at n = 17. Held with the n = 17 intake for
+        integration with the n17 branches; the #419 and #405 entries note where the author points it.
+        The pin 8c47162 and the files it names are new to the record and are not retained, replayed
+        or recorded here.
+      queued: true
+      bead: think-x4v4
+    beads:
+    - think-t6ok
+    - think-70bh
+    - think-x4v4
+    - think-5n3o
+    - think-00e3
+    - think-05m9
+    - think-tiou
     answer_bead: think-ybmt
     replies:
-      - url: https://github.com/jlevy/squares/issues/375#issuecomment-6004562871
-        date: '2026-10-05'
-        by: jlevy
-        kind: acknowledgement
-        reported:
-          - result: exact-optima-48
-          - result: certificates-273
-      - url: https://github.com/jlevy/squares/issues/375#issuecomment-6007913483
-        date: '2026-10-06'
-        by: jlevy
-        kind: confirmation
-        reported:
-          - result: exact-optima-48
-            id: T-098
-            verification: V3
-            confirmation: C3
-            status: confirmed
-          - result: certificates-273
-          - result: kkt-local-minima
-          - result: n17-certificate
-        outdated:
-          - >-
-            everything it describes is recorded on an intake branch and not merged to main,
-            with T-098 provisional; #369 merged it, and T-098 holds on main
-      - url: https://github.com/jlevy/squares/issues/375#issuecomment-6008229686
-        date: '2026-10-06'
-        by: jlevy
-        kind: follow-up
-        reported:
-          - result: exact-optima-48
-            id: T-098
-            verification: V3
-            confirmation: C3
-            status: confirmed
-          - result: n105-descent
-        corrects:
-          - https://github.com/jlevy/squares/issues/375#issuecomment-6007913483
-      - url: https://github.com/jlevy/squares/issues/375#issuecomment-6023190825
-        date: '2026-10-06'
-        by: jlevy
-        kind: confirmation
-        reported:
-          - result: ceilings-77
-            id: T-101
-            verification: V3
-            confirmation: C3
-            status: confirmed
-          - result: ceilings-77
-            id: E-evand-exact-ceilings-2026-10-05-report
-          - result: ceilings-77
-            id: E-evand-exact-ceilings-2026-10-05-exact-replay
-          - result: ceilings-77
-            id: E-evand-exact-ceilings-2026-10-05-source-replay
+    - url: https://github.com/jlevy/squares/issues/375#issuecomment-6004562871
+      date: '2026-10-05'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: exact-optima-48
+      - result: certificates-273
+    - url: https://github.com/jlevy/squares/issues/375#issuecomment-6007913483
+      date: '2026-10-06'
+      by: jlevy
+      kind: confirmation
+      reported:
+      - result: exact-optima-48
+        id: T-098
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: certificates-273
+      - result: kkt-local-minima
+      - result: n17-certificate
+      outdated:
+      - 'everything it describes is recorded on an intake branch and not merged to main, with T-098
+        provisional; #369 merged it, and T-098 holds on main'
+    - url: https://github.com/jlevy/squares/issues/375#issuecomment-6008229686
+      date: '2026-10-06'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: exact-optima-48
+        id: T-098
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n105-descent
+      corrects:
+      - https://github.com/jlevy/squares/issues/375#issuecomment-6007913483
+    - url: https://github.com/jlevy/squares/issues/375#issuecomment-6023190825
+      date: '2026-10-06'
+      by: jlevy
+      kind: confirmation
+      reported:
+      - result: ceilings-77
+        id: T-101
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: ceilings-77
+        id: E-evand-exact-ceilings-2026-10-05-report
+      - result: ceilings-77
+        id: E-evand-exact-ceilings-2026-10-05-exact-replay
+      - result: ceilings-77
+        id: E-evand-exact-ceilings-2026-10-05-source-replay
+    - url: https://github.com/jlevy/squares/issues/375#issuecomment-6065914616
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n17-certificate
+        status: incomplete
     close_when: >-
-      T-098 is merged and the reply from main says what was registered, replayed and
-      reviewed; the n = 17 certificate is taken up or declined with the n = 17 work.
-
+      T-098 is merged and the reply from main says what was registered, replayed and reviewed; the
+      n = 17 object, since 10 October the exact form of #419, is taken up or declined with the n = 17
+      work.
+    notes: 'Dated 7–8 October follow-up: n105/n130/n292 certification and the VALID/INVALID wrapper
+      correction are attributed source updates, separately owned until complete named input custody
+      is established. Original 13ee36e T-098/T-101 claims, poses and receipts remain historical and unchanged.
+      The held n17 object is still unimported/unreplayed under active think-00e3; the later 324/324 source
+      report does not discharge that hold. On 10 October the author withdrew that certificate as a separate
+      submission in favour of the exact form of #419 at evand/square-packing 8c47162 (n17-exact-form-2026-10-10),
+      which stays held with the n = 17 intake under think-x4v4.'
   - number: 368
     title: 'Preprint: for every fixed c, s(k^2-c)=k for all large k (explicit constant 0.033)'
     author: squarepacker
@@ -167,14 +994,15 @@ issues:
     kind: result-report
     triage: done
     summary: >-
-      A preprint by Ryu Sungjoon: for every integer k >= 2, every packing of N unit squares
-      in [0,k]^2, pairwise disjoint as closed sets, has k^2 - N >= 0.033 log k, so for every
-      fixed c, s(k^2 - c) = k for all sufficiently large k. The constant uses a
-      computer-assisted Lemma 4.10 in rigorous ball arithmetic, programs and data included;
-      the analytic part alone gives 0.027 log k. It settles no concrete value: s(k^2 - 4) =
-      k only for log k > 120.24. Files at squarepacker/k2-minus-c, archived on Zenodo; the
-      source states extensive AI assistance and no peer review.
-    read_through: '2026-10-06T02:41:08Z'
+      A preprint by Ryu Sungjoon: for every integer k >= 2, every packing of N unit squares in [0,k]^2,
+      pairwise disjoint as closed sets, has k^2 - N >= 0.033 log k, so for every fixed c, s(k^2 -
+      c) = k for all sufficiently large k. The constant uses a computer-assisted Lemma 4.10 in rigorous
+      ball arithmetic, programs and data included; the analytic part alone gives 0.027 log k. It settles
+      no concrete value: s(k^2 - 4) = k only for log k > 120.24. Files at squarepacker/k2-minus-c,
+      archived on Zenodo; the source states extensive AI assistance and no peer review. A later v1.2
+      release improves the reported constants; that separate source claim remains queued and inherits
+      no assurance from the v1.1 replay.
+    read_through: '2026-10-06T17:42:40Z'
     results:
       - key: k2-minus-c
         claim: >-
@@ -192,7 +1020,25 @@ issues:
           the argument with nine non-blocking findings. An independent labelling is
           think-k3tk.
         queued: false
-    beads: [think-8nv9]
+      - key: k2-minus-c-v1.2
+        claim: >-
+          For closed-set disjoint packings, k^2-N >= 0.0353 log k for every integer k >= 2, with asymptotic
+          coefficient 0.0657; using Daniel’s s(k^2-3)=k for k >= 6, the all-k coefficient becomes
+          0.0541.
+        source: https://github.com/jlevy/squares/issues/368#issuecomment-6022000514
+        not_registered: >-
+          Version 1.2 is retained at immutable tag e16a5cfa7eed489ea8d84b500e590bf6855a5f2f:
+          all 78 source files are bound, with ten changed files retained and 68 byte-identical
+          version 1.1 copies referenced explicitly. Independent interval arithmetic checks
+          34 nine-overlap and 30 thirteen-overlap consequences, with falsifiable source-bound
+          and invalid-domain controls. The scoped geometric review and maintained 25,929-comparison floating-gap
+          checker complete the review slice under think-gcft, subject to final integration gates;
+          RF1 independent per-box labelling remains think-k3tk. The earlier v1.1 whole-source
+          manifest does not certify this revision; only thirteen unchanged deciding leaf lists
+          and their unchanged checking programs can reuse the earlier Lemma 4.10 replay.
+        queued: true
+        bead: think-gcft
+    beads: [think-8nv9, think-gcft]
     answer_bead: think-neei
     replies:
       - url: https://github.com/jlevy/squares/issues/368#issuecomment-5999143698
@@ -226,41 +1072,41 @@ issues:
       is posted from main.
 
   - number: 367
-    title: 'n17 sub-pattern branch and bound: a branching rule that cuts the full trees by 10–20× on the flagged classes, and what we are working on'
+    title: 'n17 sub-pattern branch and bound: a branching rule that cuts the full trees by 10–20× on
+      the flagged classes, and what we are working on'
     author: wand125
     opened: '2026-10-05'
     state: open
     kind: other
     triage: done
-    summary: >-
-      A method report and not a result: the B2 branching rule for
-      devtools/pilot_n17_subpattern_bb.py, which learns each square's weight from the
-      closing Farkas multipliers and bisects the heaviest angle interval, and cuts the full
-      trees of two flagged classes from about 2.17 M and 1.10 M nodes to 194,328 and 79,396
-      (B2d, with decay, to 131,327 and 47,193). The certificates it produced are #358's.
-    read_through: '2026-10-05T17:22:31Z'
+    summary: 'A method report and not a result: the B2 branching rule for devtools/pilot_n17_subpattern_bb.py,
+      which learns each square''s weight from the closing Farkas multipliers and bisects the heaviest
+      angle interval, and cuts the full trees of two flagged classes from about 2.17 M and 1.10 M nodes
+      to 194,328 and 79,396 (B2d, with decay, to 131,327 and 47,193). The certificates it produced are
+      #358''s.'
+    read_through: '2026-10-08T17:34:14Z'
     results: []
     asks:
-      - what: >-
-          Take the B2 rule (an optional module wrapping devtools.n17_bb_native) into the
-          repository with the native recording path, so the class certificates regenerate
-          here
-        state: queued
-        bead: think-x4v4
-        note: >-
-          Held by the owner on 5 October for integration with the n = 17 work on other
-          branches.
-    beads: [think-x4v4]
+    - what: Take the B2 rule (an optional module wrapping devtools.n17_bb_native) into the repository
+        with the native recording path, so the class certificates regenerate here
+      state: queued
+      bead: think-x4v4
+      note: Held by the owner on 5 October for integration with the n = 17 work on other branches.
+    beads:
+    - think-x4v4
     answer_bead: think-x4v4
     replies:
-      - url: https://github.com/jlevy/squares/issues/367#issuecomment-5999535826
-        date: '2026-10-05'
-        by: jlevy
-        kind: acknowledgement
-        reported: []
-    close_when: >-
-      The rule is taken in or declined with the n = 17 branches' integration.
-
+    - url: https://github.com/jlevy/squares/issues/367#issuecomment-5999535826
+      date: '2026-10-05'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/367#issuecomment-6065524151
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    close_when: The rule is taken in or declined with the n = 17 branches' integration.
   - number: 366
     title: 'Mixed rectangle-and-point density certificates on a finer angle net (core 0.999, 416 angles): s(18) ≥ 4.7'
     author: wand125
@@ -280,7 +1126,7 @@ issues:
       side 1999/2000, 832 half-angles of step 1/2006) and s(19) >= 48229/10000 = 4.8229 by
       mixed_n19_L48229 on the 416-angle net, each checked by the bundled checker's records
       and the author's adapted sqverify_fast.
-    read_through: '2026-10-06T02:41:06Z'
+    read_through: '2026-10-07T01:47:44Z'
     results:
       - key: n18-470
         claim: >-
@@ -306,6 +1152,76 @@ issues:
         register: [T-100]
         evidence: [E-n019-wand125-mixed-48229-report, E-n019-wand125-mixed-48229-sqverify-fast-replay]
         bead: think-qzh5
+      - key: check2-t-102
+        claim: >-
+          A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it
+          declares and published on 6 October 2026, proves s(18) >= 941/200 = 4.705.
+        source: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        register:
+          - T-102
+      - key: check2-t-103
+        claim: >-
+          A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it
+          declares and published on 6 October 2026, proves s(19) >= 193/40 = 4.825.
+        source: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        register:
+          - T-103
+      - key: check2-t-104
+        claim: >-
+          A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it
+          declares and published on 6 October 2026, proves s(20) >= 981/200 = 4.905.
+        source: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        register:
+          - T-104
+      - key: check2-t-105
+        claim: >-
+          A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it
+          declares and published on 6 October 2026, proves s(26) >= 1109/200 = 5.545.
+        source: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        register:
+          - T-105
+      - key: check2-t-106
+        claim: >-
+          A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it
+          declares and published on 6 October 2026, proves s(27) >= 11287/2000 = 5.6435.
+        source: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        register:
+          - T-106
+      - key: check2-t-107
+        claim: >-
+          A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it
+          declares and published on 6 October 2026, proves s(28) >= 1147/200 = 5.735.
+        source: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        register:
+          - T-107
+      - key: check2-t-108
+        claim: >-
+          A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it
+          declares and published on 6 October 2026, proves s(29) >= 581/100 = 5.81.
+        source: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        register:
+          - T-108
+      - key: check2-t-109
+        claim: >-
+          A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it
+          declares and published on 6 October 2026, proves s(30) >= 11767/2000 = 5.8835.
+        source: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        register:
+          - T-109
+      - key: check2-t-110
+        claim: >-
+          A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it
+          declares and published on 6 October 2026, proves s(39) >= 133/20 = 6.65.
+        source: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        register:
+          - T-110
+      - key: check2-t-111
+        claim: >-
+          A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it
+          declares and published on 6 October 2026, proves s(41) >= 271/40 = 6.775.
+        source: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        register:
+          - T-111
     asks:
       - what: >-
           The offered pull request: sqverify_fast changed in one place to read a
@@ -316,7 +1232,17 @@ issues:
           SOUNDNESS.md), written here clean-room from the certificate format and the
           mathematics without reading the author's adapted copy, so the offered change
           was not needed. The reply of 6 October told the author.
-    beads: [think-8qo9, think-qzh5]
+      - what: Bind the eight original compressed check2 inputs and FN1 manifest to the existing
+          receipts.
+        state: queued
+        bead: think-zcnr
+        note: >-
+          At b73473fcf60421222b739294d3f7d9c4a8b8da07, the author supplies original check2/recorded-input.json.gz
+          files for n19,20,26,27,28,30,39,41 and verification/fn1/input-bindings.json. The author
+          reports compressed hashes matching the original logs and decompressed bytes matching each
+          candidate. This provenance claim has not been independently joined here; it changes no geometric
+          candidate or registered bound.
+    beads: [think-8qo9, think-qzh5, think-zcnr]
     answer_bead: think-p3mu
     replies:
       - url: https://github.com/jlevy/squares/issues/366#issuecomment-5999536322
@@ -364,12 +1290,67 @@ issues:
         date: '2026-10-06'
         by: jlevy
         kind: follow-up
-        reported: []
+        reported:
+          - result: check2-t-102
+            id: T-102
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: check2-t-103
+            id: T-103
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: check2-t-104
+            id: T-104
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: check2-t-105
+            id: T-105
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: check2-t-106
+            id: T-106
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: check2-t-107
+            id: T-107
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: check2-t-108
+            id: T-108
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: check2-t-109
+            id: T-109
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: check2-t-110
+            id: T-110
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: check2-t-111
+            id: T-111
+            verification: V3
+            confirmation: C3
+            status: confirmed
     close_when: >-
       The s(18) certificate is confirmed or refuted and the reply saying so is posted from
       main, and the offered sqverify_fast change is taken in or declined; and the two
       certificates of 6 October, mixed_n18_L4704 and mixed_n19_L48229, are imported and
       confirmed or refuted, with the reply saying so posted from main.
+    notes: >-
+      The 6 October owner reply confirms T-102 through T-111 at their stated V3/C3 standing; nine
+      source check2 routes share producer components, while n29 is independent. Its four newer certificates
+      are handled by the separate reported-import follow-up. The 7 October FN1 source update remains
+      a custody obligation, not a fresh mathematical result.
 
   - number: 363
     title: "New lower bound for s(12): 7943/2000 = 3.9715 (Daniel's points re-weighted, building on Route B)"
@@ -435,44 +1416,74 @@ issues:
     state: open
     kind: other
     triage: done
-    summary: >-
-      A work plan and not a result: wand125 is certifying two of the arity-7 flagged classes
-      of the n = 17 bulk exclusion that think-j6qy tracks (side-S0, side-N0, interior-SW,
-      interior-NW, interior-W, interior-S, interior-SE; and side-S0, side-W0, interior-SW,
-      interior-NW, interior-W, interior-S, interior-SE) with
-      devtools/pilot_n17_subpattern_bb.py and the optional native kernel of #350, extended
-      so that --certificate writes the Python path's certificate format, and checked first
-      on pattern A against the Python path and the standing branch-and-bound verifier.
-      Admission is to follow think-j6qy's path, the certificate objects hosted as release
-      assets behind a hosted-data manifest (OR-18).
-    read_through: '2026-10-05T17:22:29Z'
+    summary: Two arity-7 classes have upstream reported full standing-verifier and independent Rust
+      passes. The owner's retained C2 replay is INCOMPLETE after 480.468 seconds on the one-second RSS-query
+      guard at source 9fec9ad869966da06ffdd04cce6e1fa8832cceeb. All 161 C2 assets / 112191343 bytes
+      were acquired in 78.944 seconds; both prior compact headers passed HEADER_ONLY. No FULL PASS,
+      ordinary geometric exclusion or census admission is claimed, and no unchanged retry is selected.
+    read_through: '2026-10-08T17:56:53Z'
     results: []
     asks:
-      - what: >-
-          Admit the two classes' certificates when they are posted, by think-j6qy's
-          admission path: the certificate, the standing verifier in full mode, and a ledger
-          entry with its verification receipt
-        state: queued
-        bead: think-j6qy
-        note: >-
-          Posted in https://github.com/jlevy/squares/issues/358#issuecomment-5997259692:
-          both classes certified with the B2 branching rule (194,328 and 79,396 nodes), each
-          passing the standing verifier in full mode and an independent Rust check, the
-          objects hosted as release assets of wand125/n17-certificates at tag
-          b2-classes-20261005. Held by the owner on 5 October for integration with the n =
-          17 work on other branches (think-x4v4); not admitted here.
-    beads: [think-j6qy, think-x4v4]
+    - what: 'Admit the two classes'' certificates when they are posted, by think-j6qy''s admission path:
+        the certificate, the standing verifier in full mode, and a ledger entry with its verification
+        receipt'
+      state: queued
+      bead: think-j6qy
+      note: 'Posted in https://github.com/jlevy/squares/issues/358#issuecomment-5997259692: both classes
+        certified with the B2 branching rule (194,328 and 79,396 nodes), each passing the standing verifier
+        in full mode and an independent Rust check, the objects hosted as release assets of wand125/n17-certificates
+        at tag b2-classes-20261005. Held by the owner on 5 October for integration with the n = 17 work
+        on other branches (think-x4v4); not admitted here. The 7 October owner follow-up acquired both
+        compressed manifests, checked their published hashes and canonical identities, and counted 552
+        objects / 399775835 compressed bytes. The 8 October checkpoint acquired all 161 C2 assets /
+        112191343 bytes in 78.944 seconds. The unsampled C2 FULL attempt stopped INCOMPLETE after 480.468
+        seconds on its RSS-query guard with owned cleanup complete; 18000-node progress is not a verdict.
+        Both compact headers have only HEADER_ONLY assurance. The named/D4 metadata projection remains
+        C1 14 orbits / 104 states, C2 13 / 84, overlap 6 / 40 and union 21 / 148, with zero coverage
+        of the current 95-orbit distance-two tail. No exclusion or census admission follows, and no
+        unchanged retry is selected. Complete proof receipts and standing admission review remain required.'
+    beads:
+    - think-j6qy
+    - think-x4v4
     answer_bead: think-3twl
     replies:
-      - url: https://github.com/jlevy/squares/issues/358#issuecomment-5999535418
-        date: '2026-10-05'
-        by: jlevy
-        kind: acknowledgement
-        reported: []
-    close_when: >-
-      Both classes' certificates are admitted or refused through think-j6qy's path, or the
+    - url: https://github.com/jlevy/squares/issues/358#issuecomment-5999535418
+      date: '2026-10-05'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/358#issuecomment-6047235741
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/358#issuecomment-6052595204
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/358#issuecomment-6053195806
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/358#issuecomment-6065907415
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/358#issuecomment-6077614258
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    close_when: Both classes' certificates are admitted or refused through think-j6qy's path, or the
       author withdraws the plan.
-
+    notes: The owner's status note of 9 October reports PR452's merge (c3ad5593c). The next maintained
+      replay runs the standing verifier at SHA-256 10db91c2…, and its receipts are kept apart from the
+      author's 5 October receipts made with 9dcc05bc…. PR452 does not repair the RSS-query guard that
+      stopped the C2 replay, which did not run out of memory; that repair is separate work. Neither class
+      is admitted.
   - number: 317
     title: Streamline, explain, and formalize n=11 optimality proof
     author: jlevy
@@ -1511,7 +2522,7 @@ issues:
     summary: >-
       s(60) = 8 by a closed mixed cover checked by zm_mixed.py and zmx2, and s(61) = 8 as a
       corollary.
-    read_through: '2026-10-02T01:03:24Z'
+    read_through: '2026-10-07T22:35:04Z'
     results:
       - key: s60
         claim: s(60) = 8, by a mixed cover of points and grid-line segments
@@ -1541,15 +2552,18 @@ issues:
             status: confirmed
     close_when: T-062 and T-063 are confirmed, and the reply saying so is posted from main.
     notes: >-
-      The author's comment of 2 October corrects the issue's citation of Nagamochi's
-      general bounds (see #295); nothing in the claim uses them.
+      The author's comment of 2 October corrects the issue's citation of Nagamochi's general bounds
+      (see #295); nothing in the claim uses them.
 
-      The follow-up of 3 October (issuecomment-5972549384) first said each direction's
-      least bound matched the shipped record, which the linear records cannot show: they
-      carry no per-direction least bound (review finding LC-4). It was edited in place at
-      19:12Z that day, with a visible note, to say the replay matched each direction's
-      status, input digest and node count, so the reply as it stands states nothing
-      outdated.
+      The follow-up of 3 October (issuecomment-5972549384) first said each direction's least bound
+      matched the shipped record, which the linear records cannot show: they carry no per-direction
+      least bound (review finding LC-4). It was edited in place at 19:12Z that day, with a visible
+      note, to say the replay matched each direction's status, input digest and node count, so the
+      reply as it stands states nothing outdated. The author’s later packaging clarification at cca7bf1f53c038907a819815c5e441df9783e93d
+      states that the shipped zm_mixed_d4/manifest census is the fresh eight-worker 30 September run
+      (9024.2 seconds), corrects the stale README import description, and prints the built zmx2.rs
+      source hash beside the historical pin. This records the source explanation; no new census replay,
+      source-equivalence decision or assurance promotion was performed.
 
   - number: 247
     title: 'New exact lower bound for s(11): 3.875000003875... with reproducible certificate'
@@ -1632,7 +2646,7 @@ issues:
       pose-space checkers. Later comments add a run certifying the s(32) cover without the
       D4 fold, an account of what zmx2's author read, and a replay of wand125's point-only
       s(61) cover.
-    read_through: '2026-10-05T17:22:15Z'
+    read_through: '2026-10-07T20:58:54Z'
     results:
       - key: s32
         claim: s(32) = 6
@@ -1746,16 +2760,21 @@ issues:
       September, #245 merged, the re-sweeps restarted, the Lean builds) and states the
       no-fold run's import. Nothing Daniel asked for is then queued.
     notes: >-
-      The comment of 2 October also answers the 1 October review of the anchored-clique
-      repair (think-2z60), which belongs to no result this issue reports.
+      The comment of 2 October also answers the 1 October review of the anchored-clique repair (think-2z60),
+      which belongs to no result this issue reports.
 
-      The final reply of 3 October describes the no-fold run's replay, all 28,800 roots
-      with every census equal to the source's, without naming
-      E-n032-evand-zmx2-full-sym-report or E-n032-evand-zmx2-full-sym-replay, and the
-      owner chose not to post a comment only to name the two ids. The follow-up of 5
-      October names both, with the evidence update that gave it a reason of its own: the
-      brief that set what zmx2's author could read, which that final reply said was not
-      public, is retained in the 4 October evand packet and cited on T-051 (think-83zc).
+      The final reply of 3 October describes the no-fold run's replay, all 28,800 roots with every
+      census equal to the source's, without naming E-n032-evand-zmx2-full-sym-report or E-n032-evand-zmx2-full-sym-replay,
+      and the owner chose not to post a comment only to name the two ids. The follow-up of 5 October
+      names both, with the evidence update that gave it a reason of its own: the brief that set what
+      zmx2's author could read, which that final reply said was not public, is retained in the 4 October
+      evand packet and cited on T-051 (think-83zc). The author’s later wrapper fix at cca7bf1f53c038907a819815c5e441df9783e93d
+      requires both exit0 and the exact VERIFIED line, stops on a failed unpiped cargo build and corrects
+      the closed-square header to interior disjointness. The verify/zmcheck exit table separates refused,
+      error and partial outcomes; zmx2 still returns0 for every verdict and requires reading its verdict
+      line. These are recorded source packaging fixes, not new mathematical claims or an independently
+      executed wrapper check.
+
   - number: 227
     title: 102 and 103
     author: franciscouzo
@@ -1869,3 +2888,1275 @@ issues:
     close_when: >-
       Closed by its author on 25 September. A late reply stating T-044 at V3/C3 is owed and
       keeps it closed.
+
+  - number: 401
+    title: '18 new packings below record for n = 108–303 (s(n) bounds 4.8e-4 to 7.6e-3 below the reported
+      side; updated 2026-10-07): registration request'
+    author: itsnaka
+    opened: '2026-10-07'
+    state: closed
+    kind: result-report
+    triage: done
+    summary: The original ten packings, n153 supplement and twelve changed first-update geometries are
+      registered and confirmed at V3/C3 in T-113, T-114 and T-115. Formal stacks 417 and 424 have merged;
+      the matching main deployment passed independent and hosted live verification, and the final author
+      reply closes the eighteen-count request. The n153 update is identical to its retained original
+      certificate and adds provenance only. Earlier geometries, evidence and finder/seed credit remain
+      historical; no optimality is established.
+    read_through: '2026-10-07T22:54:51Z'
+    results:
+    - key: ten-new-packings
+      claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(n) <= S_n for n = 108, 126, 129,
+        130, 154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on jlevy/squares#401
+        on 7 October 2026. Each S_n is the exact rational side in the retained packing facts, from about
+        0.0004126 to 0.0067047 below the earlier reported upper bound here. Each certificate supplies
+        rational centres and rational half-angle parameters for closed unit squares in the rational
+        container. The claim establishes only upper bounds, with no optimality or rigidity conclusion.
+        The author credits David Ellsworth’s records and tools and states human-directed Claude Opus
+        5.5 assistance.
+      source: body
+      register:
+      - T-113
+      evidence:
+      - E-squish-ten-packings-2026-10-07-report
+      - E-squish-ten-packings-2026-10-07-exact-replay
+      bead: think-mc4u
+    - key: n153-supplement
+      claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(153) <= 7250614903299225/562949953421312,
+        about 12.8796793733329640, in the supplement to jlevy/squares#401 on 7 October 2026, about 0.0019874
+        below the earlier reported upper bound here. Each certificate supplies rational centres and
+        rational half-angle parameters for closed unit squares in the rational container. The claim
+        establishes only upper bounds, with no optimality or rigidity conclusion. The author credits
+        David Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance.
+      source: https://github.com/jlevy/squares/issues/401#issuecomment-6031977107
+      register:
+      - T-114
+      evidence:
+      - E-squish-n153-2026-10-07-report
+      - E-squish-n153-2026-10-07-exact-replay
+      bead: think-mc4u
+    - key: update-twelve-new-bounds
+      claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports rational packing upper bounds for
+        n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. Seven counts are new to the
+        submission and five have smaller certificates than the original release. Exact rational sides
+        and complete rational half-angle rosters are retained in the revision-specific acquisition packet.
+        The n153 certificate is identical to the earlier retained attachment and is an evidence/provenance
+        update only. These are source-reported feasible upper bounds, with no optimality or rigidity
+        claim.
+      source: https://github.com/jlevy/squares/issues/401#issuecomment-6043191866
+      register:
+      - T-115
+      evidence:
+      - E-squish-update-2026-10-07-report
+      - E-squish-update-2026-10-07-exact-replay
+      bead: think-gsno
+    beads:
+    - think-mc4u
+    - think-jai1
+    - think-8gzc
+    - think-oxvk
+    - think-gsno
+    answer_bead: think-crhh
+    replies:
+    - url: https://github.com/jlevy/squares/issues/401#issuecomment-6044898026
+      date: '2026-10-07'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: ten-new-packings
+      - result: n153-supplement
+      - result: update-twelve-new-bounds
+      outdated:
+      - The original PRs415/416 had not merged, and the first update was not registered on main. Both
+        formal import/confirmation stacks have now merged.
+    - url: https://github.com/jlevy/squares/issues/401#issuecomment-6046723077
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: ten-new-packings
+        id: T-113
+        verification: V3
+        confirmation: C3
+      - result: n153-supplement
+        id: T-114
+        verification: V3
+        confirmation: C3
+      - result: update-twelve-new-bounds
+        verification: V0
+        confirmation: C0
+      outdated:
+      - The first-update PRs421/423 were drafts at V0/C0 on main while final integration checks remained
+        pending. Both are now merged, with T-115 confirmed at V3/C3; the final reply must report the
+        matching deployment check.
+    - url: https://github.com/jlevy/squares/issues/401#issuecomment-6048513671
+      date: '2026-10-07'
+      by: jlevy
+      kind: final
+      reported:
+      - result: ten-new-packings
+        id: T-113
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: ten-new-packings
+        id: E-squish-ten-packings-2026-10-07-report
+        status: reviewed
+      - result: ten-new-packings
+        id: E-squish-ten-packings-2026-10-07-exact-replay
+        status: confirmed
+      - result: n153-supplement
+        id: T-114
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n153-supplement
+        id: E-squish-n153-2026-10-07-report
+        status: reviewed
+      - result: n153-supplement
+        id: E-squish-n153-2026-10-07-exact-replay
+        status: confirmed
+      - result: update-twelve-new-bounds
+        id: T-115
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: update-twelve-new-bounds
+        id: E-squish-update-2026-10-07-report
+        status: recorded
+      - result: update-twelve-new-bounds
+        id: E-squish-update-2026-10-07-exact-replay
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/401#issuecomment-6044898026
+      - https://github.com/jlevy/squares/issues/401#issuecomment-6046723077
+    close_when: All eighteen current counts have complete replay and appropriate scoped review recorded,
+      and the confirmation layer has actually merged and deployed. An accurate final author reply must
+      then identify the entries and assurance published on main. The progress reply is historical; a
+      draft confirmation record does not close this request.
+    notes: The author moved the next nine certificates to issue 422 in https://github.com/jlevy/squares/issues/401#issuecomment-6047131959,
+      created2026-10-07T21:23:34Z. They remain a separate request and source revision. Both reviewed
+      first-update PRs421/423 merged atomically through formal stack424 into main2af487e7cfe85d84b2a67fa984e2d36a77548d97
+      at22:44UTC. Each final hosted head passed30 checks with26 documented inapplicable skips. The upper
+      actual209-file required push passed62steps879.49s, exit0, including all34 previously failing hosted
+      tests. The lower scoped61-step gate passed; its unavailable outer-wrapper exit remains unknown.
+      Historical failed runs and earlier progress replies remain preserved. The separate422 acknowledgement
+      is https://github.com/jlevy/squares/issues/422#issuecomment-6047406306. Matching Pages deployment6922702889/run37698041439
+      succeeded on main2af487e7. Both independent and hosted full published-site checks passed1234/1234
+      with strict TLS. Separate live bindings passed149/149 for all18cases/all36drawings/final T113/T114/T115
+      and sourcecredit/history; desktop/mobile layouts38/38 and representative visual inspection passed.
+      Final reply https://github.com/jlevy/squares/issues/401#issuecomment-6048513671 was posted before
+      manual issue closure; issue 422 remains separate and open.
+    closed: '2026-10-07'
+  - number: 422
+    title: '9 new packings below record for n = 88–302 (s(n) bounds 1.4e-3 to 1.2e-2 below the reported
+      side) + updated summary on all 26-10-07 upper bound changes: registration request'
+    author: itsnaka
+    opened: '2026-10-07'
+    state: closed
+    closed: '2026-10-08'
+    kind: result-report
+    triage: done
+    summary: Nate Chaoweeraprasit reports nine smaller SQUISH packings at the pinned e63e4e52b1728b6671b2f263c5e02a4aa79a39d3
+      second-update revision. Five counts are additional to the earlier eighteen-count publication and
+      four replace earlier selected reports. The earlier original and first-update geometries, certificates
+      and credit remain historical provenance. Separate local exact replay and review of all nine
+      preserve their rational sides. The body also links ten previously imported first-update packings. The author
+      identifies AI assistance under his direction and review, and seed packing credit to Ellsworth/Kingbird
+      and Couzo.
+    read_through: '2026-10-08T02:52:36Z'
+    results:
+    - key: nine-updated-packings
+      claim: Reported improvements at n = 88, 108, 179, 180, 199, 207, 236, 263 and 302 from second update
+        e63e4e52b1728b6671b2f263c5e02a4aa79a39d3; exact rational triples and safe upward decimal displays,
+        independently re-verified here by both exact local routes, with unchanged rational sides.
+      source: body
+      register:
+      - T-116
+      evidence:
+      - E-squish-second-update-2026-10-07-report
+      - E-squish-second-update-2026-10-07-exact-replay
+      bead: think-sfpz
+    - key: ten-first-update-packings
+      claim: The body repeats first-update improvements at n = 123, 126, 129, 154, 155, 208, 237, 238,
+        239 and 258 from pinned 5e32bbd7028b6e3b869979278079cd37ed6770aa.
+      source: body
+      register:
+      - T-115
+      evidence:
+      - E-squish-update-2026-10-07-report
+      - E-squish-update-2026-10-07-exact-replay
+    asks:
+    - what: Import, independently replay and publish all nine second-update packings with accurate assurance
+        and preserved prior source history.
+      state: done
+      bead: think-sfpz
+      note: All nine unchanged rational packings were independently replayed, reviewed and published
+        as T-116 at V3/C3 on main f747407a0fa83d80a7894331c770aeb314b23163. Matching Pages
+        deployment6925744906/run37717788426 succeeded; live406/406 and supplemental793/793 checks
+        passed. Standard-site 1238/1238 rawexit0 and layouts 48/48 rawexit0;
+        final reply https://github.com/jlevy/squares/issues/422#issuecomment-6051191850 reports the actual completed publication scope.
+    beads:
+    - think-sfpz
+    - think-yquo
+    - think-kqd3
+    - think-qc6y
+    answer_bead: think-qc6y
+    replies:
+    - url: https://github.com/jlevy/squares/issues/422#issuecomment-6047406306
+      date: '2026-10-07'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: nine-updated-packings
+      outdated:
+      - The acknowledgement described first-update PRs 421/423 as draft work; formal stack 424 has since
+        merged both.
+    - url: https://github.com/jlevy/squares/issues/422#issuecomment-6048876876
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: nine-updated-packings
+        verification: V0
+        confirmation: C0
+      corrects:
+      - https://github.com/jlevy/squares/issues/422#issuecomment-6047406306
+    - url: https://github.com/jlevy/squares/issues/422#issuecomment-6050615059
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: nine-updated-packings
+      outdated:
+      - The checkpoint described draft confirmation, a required CI failure and pending merge/deployment;
+        the reviewed repair and both import layers subsequently merged, and final publication evidence
+        and the author reply are recorded below.
+    - url: https://github.com/jlevy/squares/issues/422#issuecomment-6051113157
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: nine-updated-packings
+        id: T-116
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      outdated:
+      - The post-merge reply left browser publication verification and the final reply pending;
+        the complete deployed-site audit passed before the final reply and issue closure.
+    - url: https://github.com/jlevy/squares/issues/422#issuecomment-6051191850
+      date: '2026-10-08'
+      by: jlevy
+      kind: final
+      reported:
+      - result: nine-updated-packings
+        id: T-116
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: nine-updated-packings
+        id: E-squish-second-update-2026-10-07-report
+        status: recorded
+      - result: nine-updated-packings
+        id: E-squish-second-update-2026-10-07-exact-replay
+        status: confirmed
+      - result: ten-first-update-packings
+        id: T-115
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: ten-first-update-packings
+        id: E-squish-update-2026-10-07-report
+        status: recorded
+      - result: ten-first-update-packings
+        id: E-squish-update-2026-10-07-exact-replay
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/422#issuecomment-6047406306
+      - https://github.com/jlevy/squares/issues/422#issuecomment-6048876876
+      - https://github.com/jlevy/squares/issues/422#issuecomment-6050615059
+      - https://github.com/jlevy/squares/issues/422#issuecomment-6051113157
+    close_when: All nine second-update packings have complete independent replay and appropriately mapped
+      fresh scoped reviews, have merged and deployed, and an accurate final author reply identifies the
+      published assurance. The reported import alone does not close this request.
+    notes: The acknowledgement was created at 21:41:08 UTC and edited at 22:28:26 UTC on 7 October 2026.
+      The immutable second-update revision defines this nine-case import. The nineteen-row source body
+      combines these nine with ten first-update claims already mapped to T-115; no late issue 425 or future
+      upstream master revision is admitted here. Final main publication and author reply were verified
+      before issue closure. Native performance follow-up think-c63v and later issues425/428 intake remain
+      separate; no native timing policy was waived by this publication closeout.
+  - number: 428
+    title: 'n=68 exact certificate refinement below the retrieved rational ceiling: registration request'
+    author: lollipoll
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: The original rational refinement is T-118 at V3/C3. The separate v1.2 exact-root feasibility
+      and restricted-family attainment statements are recorded as attributed reports with complete external
+      custody; independent mathematical review/replay remains pending.
+    read_through: '2026-10-08T02:01:59Z'
+    results:
+    - key: finite-rational-refinement
+      claim: The complete finite rational n68 witness at original source revision fded686668e29258dad2eb29d0482fa3fd51bd6b.
+      source: body
+      register:
+      - T-118
+    - key: v12-root-feasibility
+      claim: All 68 root frames, 2,278 unordered pairs and 1,088 corner-wall predicates are source-reported
+        feasible at L*=z*[136].
+      source: https://github.com/jlevy/squares/issues/428#issuecomment-6050646954
+      evidence:
+      - E-rehwaldt-n68-root-feasibility-v12-report
+    - key: v12-restricted-attainment
+      claim: Same-root attainment is reported inside the specified restricted contact family only.
+      source: https://github.com/jlevy/squares/issues/428#issuecomment-6050646954
+      evidence:
+      - E-rehwaldt-n68-restricted-attainment-v12-report
+    asks:
+    - what: Independently review and replay the v1.2 root-feasibility and same-root restricted-family
+        obligations before any assurance promotion.
+      state: queued
+      bead: think-nv5o
+      note: Source-only publication and complete byte custody decide no theorem; proof review, complete
+        inputs, rejection/restoration and actual private-worker gates remain pending.
+    beads:
+    - think-v42c
+    - think-nv5o
+    answer_bead: think-nv5o
+    replies: []
+    close_when: Accurate imported and reviewed states have reached main and remaining proof/replay obligations
+      and any owner response have explicit dispositions. Source-only publication does not close this
+      request.
+  - number: 446
+    title: 'Seven fine-net measure certificates: lower bounds for n = 19, 20, 26, 27, 28, 29, 31 (after
+      T-102 to T-111)'
+    author: wand125
+    opened: '2026-10-08'
+    state: open
+    kind: result-report
+    triage: done
+    summary: All seven fine-net lower-bound statements are recorded as attributed reports with complete
+      original-source custody and accepted conditional maintained input-premise review. Fresh complete
+      native capture and whole-net controls remain pending; standing bounds and ratings do not change.
+      On 10 October the author reports a stronger n29 certificate, which awaits its own import.
+    read_through: '2026-10-10T02:47:54Z'
+    results:
+    - key: fine-net-n19
+      claim: Author reports lower bound 1931/400 for n=19 using all 2073 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n19_L48275/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n20
+      claim: Author reports lower bound 393/80 for n=20 using all 2073 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n20_L49125/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n26
+      claim: Author reports lower bound 1111/200 for n=26 using all 2073 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n26_L5555/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n27
+      claim: Author reports lower bound 2261/400 for n=27 using all 2073 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n27_L56525/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n28
+      claim: Author reports lower bound 287/50 for n=28 using all 832 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n28_L574/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n29
+      claim: Author reports lower bound 1163/200 for n=29 using all 832 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n29_L5815/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n31
+      claim: Author reports lower bound 597/100 for n=31 using all 832 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n31_L597/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n27-5655-followup
+      claim: At 16:53 UTC on 8 October, the author reports lower bound 1131/200 for n27, improving the
+        original reported 2261/400 by 1/400. Complete source custody and conditional maintained input
+        premises are accepted; project native capture remains pending.
+      source: https://github.com/jlevy/squares/issues/446#issuecomment-6064831911
+      evidence:
+      - E-wand125-fine-net-n27-5655-followup-report
+    - key: fine-net-n29-582-followup
+      claim: At 02:47 UTC on 10 October, the author reports s(29) >= 291/50 = 5.82 by the fine-net certificate
+        mixed_n29_L582 over all 2,073 declared net directions, published in wand125/square-packing at
+        22a23c8 with its data in release square-lower-bounds-v1, superseding the issue's 1163/200. Before
+        publication the author ran sqverify_fast from the bundle's source on a fresh machine, with 2,073
+        of 2,073 directions verified and the mass x 0.985 control refused in all 32 sampled directions.
+      source: https://github.com/jlevy/squares/issues/446#issuecomment-6092965941
+      register:
+      - T-132
+      evidence:
+      - E-wand125-fine-net-n29-582-followup-report
+    asks:
+    - what: Replay and review the n29 candidate at 291/50 over all 2073 directions with whole-net
+        controls and restored positives, from a candidate retained where the census reads it.
+      state: queued
+      bead: think-r333
+      note: Priced at about 4.3 CPU-hours from an eight-direction diagnostic sample (receipts in
+        wand125-fine-net-n29-2026-10-10). The owner set its budget on 11 October 2026, and the replay is
+        queued in think-r333 after the regularization work (jlevy/squares#497). The 1163/200 report and its evidence
+        entry stand, and the unreported 2327/400 certificate of dd6a7cc stays with think-ndvg's
+        2026-10-09 watch read.
+    - what: Run a reviewed maintained-only complete seven-case native capture and whole-net v2 control
+        protocol, with full input/result custody, before any lower-bound or rating promotion.
+      state: queued
+      bead: think-ndvg
+      note: Author 32-direction 197/200 controls are sampled reports; no replay or bound admission supplied
+        by source-only publication.
+    - what: Replay and review the separate later n27 candidate at 1131/200 over all 2073 directions,
+        with whole-net controls, restored positives and actual private-worker input/result custody.
+      state: queued
+      bead: think-ndvg
+      note: Source-author full positives and 32 sampled negative directions are attributed reports; accepted
+        input premises alone change no standing lower bound or assurance rating.
+    beads:
+    - think-ndvg
+    - think-r333
+    answer_bead: think-ndvg
+    replies: []
+    close_when: Accurate source-only disposition reaches main and the remaining independent native/review
+      obligations have explicit dispositions. Source-byte custody alone does not close this request.
+  - number: 451
+    title: '105, 108, 127, 131, 155, 180, 228, 306: registration request'
+    author: franciscouzo
+    opened: '2026-10-08'
+    state: open
+    kind: result-report
+    triage: done
+    summary: All eight complete source certificates and decimal context poses are retained. The complete
+      24-job native finite-feasibility replay passed; actual private-worker custody passed without geometric
+      deciders. The review of 10 October reproduced every job and a third exact route agreed; house adoption
+      waits for jlevy/squares#403.
+    read_through: '2026-10-08T15:53:07Z'
+    results:
+    - key: eight-rational-refinements
+      claim: Eight complete rational source certificates report finite upper-bound improvements at 105, 108, 127, 131, 155, 180, 228, 306.
+        Complete native feasibility outcomes are retained separately; selected standing cases are unchanged
+        pending historical source-house integration and record review.
+      source: body
+      register:
+      - T-128
+    - key: five-follow-up-refinements-2d32a6e
+      claim: >-
+        Five complete rational source certificates report finite upper-bound improvements at the
+        exact sides they state: s(84) <= 9.697934799014921307163820128651, s(86) <=
+        9.820535407496742209971278280039, s(105) <= 10.789303783748158831034729697921, s(175) <=
+        13.767155163542549110085664417048 and s(270) <= 16.9367230228761834072968722597. Complete
+        native feasibility outcomes are retained separately; selected standing cases are unchanged
+        pending independent review, historical source-house integration and record review.
+      source: https://github.com/jlevy/squares/pull/460#issuecomment-6070798890
+      register:
+      - T-130
+    asks:
+    - what: Credit the constructions and refinement tools identified by the source.
+      state: done
+      note: Complete source lineage is retained in the packet, T-128 notes and bibliography; current
+        selected construction credits remain unchanged.
+    beads:
+    - think-edo8
+    - think-88r0
+    - think-fvz4
+    answer_bead: think-edo8
+    replies: []
+    close_when: The supported import and disposition are on main and the owner posts the resulting state;
+      optimizer and local/global optimality remain separate claims.
+  - number: 425
+    title: 'Exact certificate refinements of five Couzo square packings: registration request'
+    author: lollipoll
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Seth Rehwaldt’s five-case source offer is retained historically; T-117 confirms complete
+      finite rational witnesses at 105 and 292. The author’s dated correction leaves 292 as the only active
+      ceiling request, while 105 is superseded by Ryan Xu and 130/263/272 remain historical. No restricted
+      dual or algebraic n68 proof is admitted by this result.
+    results:
+    - key: finite-refinements-105-292
+      claim: Complete exact rational constructions at 105 and 292; 105 is now historical and 292 remains
+        the only active ceiling request.
+      source: body
+      register:
+      - T-117
+    - key: historical-refinements-130-263-272
+      claim: The original offer includes 130, 263, 272, withdrawn from the active ceiling request because
+        smaller public ceilings exist.
+      source: body
+      not_registered: Historical source evidence and complete archive custody remain retained; no current
+        selected-ceiling credit is requested.
+      queued: false
+    - key: n105-supersession-2026-10-08
+      claim: Ryan Xu’s n105 certificate from issue 432 is smaller than the earlier witness by the exact
+        rational difference recorded in the author’s dated comparison.
+      source: https://github.com/jlevy/squares/issues/425#issuecomment-6051248800
+      not_registered: This is a source-status correction; the smaller Ryan Xu construction is already
+        covered by T-125. Preserve the earlier certificate and its finite-feasibility evidence.
+      queued: false
+    - key: restricted-n105-dual
+      claim: The source includes a dual bound within a restricted n105 family.
+      source: body
+      not_registered: Excluded from this finite-ceiling request; no unrestricted lower bound or global
+        optimum follows.
+      queued: false
+    beads:
+    - think-f3dl
+    answer_bead: think-f3dl
+    replies: []
+    close_when: The retained finite-feasibility result and supersession disposition are published from
+      main, and the owner replies with the active 292 and historical 105/130/263/272 scopes.
+    read_through: '2026-10-08T02:58:00Z'
+  - number: 438
+    title: 'Exact rational ceiling refinements for 14 square-packing counts: registration request'
+    author: SidG2k1
+    opened: '2026-10-08'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Siddharth Gupta reports fourteen exact rational precision refinements of SQUISH constructions.
+      All seventeen certificates and comparators, including three withdrawals, are retained. T-127 supplies
+      the source/finite-feasibility claim; source intake PR448 and separate confirmation PR459 retain
+      their own current-head review and CI obligations.
+    results:
+    - key: precision-refinements-14
+      claim: Finite feasible upper bounds at 88, 130, 153, 154, 179, 180, 199, 207, 208, 209, 236,
+        237, 238, 239, with exact rational source witnesses.
+      source: body
+      register:
+      - T-127
+    - key: withdrawn-108-123-129
+      claim: The author withdraws 108, 123, 129 after smaller issue 432 constructions appeared; all three
+        original certificates remain complete.
+      source: body
+      not_registered: These complete inputs and their native outcomes remain historical/supporting evidence
+        without selected-bound credit.
+      queued: false
+    asks:
+    - what: Finish the separately reviewed confirming records, final exact-head CI and main publication
+        before the final registration reply.
+      state: done
+      bead: think-q3pd
+      note: >-
+        Complete 51-job native and actual private-worker receipts already exist; CI and source-specific
+        confirming-record integration remain separate from author reports. Done on 2026-10-10 by the
+        record on main, where #448 imported and #459 confirmed T-127 at V3/C3, CI passed on main at
+        657cc486, and the Pages deployment 6974749559 of that commit passed its published-site check
+        (3892 of 3892) with the T-127 row matching the register.
+    beads:
+    - think-l360
+    - think-q3pd
+    answer_bead: think-l360
+    replies: []
+    close_when: The fourteen finite bounds and three withdrawals are published from main with their
+      actual evidence scope, and the owner posts the final registration disposition.
+    read_through: '2026-10-08T03:08:01Z'
+  - number: 445
+    title: 'verify_n17_bb_certificate.py: full mode keeps every internal node in memory'
+    author: wand125
+    opened: '2026-10-08'
+    state: closed
+    closed: '2026-10-09'
+    kind: defect-report
+    triage: done
+    summary: The author reports retained internal-node memory growth in the full BB checker. The bounded
+      lifetime repair landed with PR452, merged as c3ad5593c, with same-object full/sample receipt parity
+      and selected-child lifetime controls, and the owner closed the issue as completed on 9 October.
+      No constant-total-memory or large-certificate affordability claim is established.
+    results:
+    - key: retained-internal-node-memory
+      claim: Full-mode checked internal records remain resident until run end, increasing decoded-record
+        memory with internal-node count.
+      source: body
+      not_registered: An engineering defect in the standing checker, repaired in PR452; it is not a
+        new mathematical result or proof admission.
+      queued: false
+    asks:
+    - what: Release a loaded record after its own scheduled attempt and all selected direct-child attempts,
+        preserving full/sample counters and malformed-certificate refusal.
+      state: done
+      bead: think-hpiy
+      note: The existing owner’s dated reply names the captured repair and its bounded review/parity
+        evidence. Pass1 still has an O(N) index; whole-run peak RSS and large-certificate scaling remain
+        unestablished.
+    beads:
+    - think-hpiy
+    - think-n01y
+    answer_bead: think-n01y
+    replies:
+    - url: https://github.com/jlevy/squares/issues/445#issuecomment-6065522259
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: retained-internal-node-memory
+    - url: https://github.com/jlevy/squares/issues/445#issuecomment-6071298503
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: retained-internal-node-memory
+    - url: https://github.com/jlevy/squares/issues/445#issuecomment-6076662312
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: retained-internal-node-memory
+    - url: https://github.com/jlevy/squares/issues/445#issuecomment-6077613455
+      date: '2026-10-09'
+      by: jlevy
+      kind: final
+      reported:
+      - result: retained-internal-node-memory
+    close_when: The existing owner decides closure after the maintained lifetime repair is published
+      and the dated bounded resource scope remains explicit.
+    notes: The owner's 8 October review checkpoint reports completed reviews and a passing full hosted
+      checkpoint for draft PR452 at 540577d3d, joined with main f0ec5b663. The 9 October qualification
+      reran it at b70bc6663 on main 3213d651b, and PR452 merged as c3ad5593c that day; the owner's final
+      comment closed the issue as completed. check_nodes now releases a node after its own and its
+      selected children's checks, and the verifier's SHA-256 moved from 9dcc05bc… to 10db91c2…. Pass-one
+      indexing stays O(N); no constant-memory or large-certificate claim is made, and the unmodified
+      standing FULL receipts for rows 3 and 4 of issue 413 remain with issues 413 and 405.
+    read_through: '2026-10-08T23:48:00Z'
+  - number: 465
+    title: 'New packings: s(132) ≤ 11.98709933224506, s(155) ≤ 12.95249894401401'
+    author: evand
+    opened: '2026-10-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Evan Daniel reports rational certificates at n=132 and n=155 below the case ceilings, in
+      evand/square-packing at e008180, retained with their KKT points, inputs and solver reports. Both
+      pass both maintained exact routes. The n132 side is new and recorded as T-131, whose replay the
+      review of 10 October reproduced; issue 476's n132 side is smaller. The n155 side equals Couzo's earlier issue 451 certificate (T-128),
+      with which it shares 152 of 155 exact poses, differing only in its free and flat-motion squares,
+      so it maps to T-128 as an evidence update. Author checkers and KKT evidence
+      were not run here; no optimality is claimed.
+    read_through: '2026-10-09T03:38:22Z'
+    results:
+    - key: s132-record-hunt
+      claim: s(132) <= 11.987099332245063227179742877435 by an exact rational certificate from the hunt1
+        record hunt, 4.23e-3 below the register's 11.991327887691501.
+      source: body
+      register:
+      - T-131
+      evidence:
+      - E-evand-465-record-hunt-report
+      - E-evand-465-record-hunt-exact-feasibility
+    - key: s155-record-hunt
+      claim: s(155) <= 12.952498944014007381965850566940 by an exact rational certificate from the hunt1
+        record hunt, 4.26e-6 below the register's 12.9525032026045129. Its exact side is the n155 side
+        of Couzo's issue 451 certificate, registered as T-128 the day before.
+      source: body
+      register:
+      - T-128
+      evidence:
+      - E-evand-465-record-hunt-report
+      - E-evand-465-record-hunt-exact-feasibility
+    - key: kkt-local-minima
+      claim: Each exact point is an 80-digit KKT point with positive multipliers on its load-bearing
+        contacts, a reduced Hessian positive semidefinite modulo exact flat motions (132 33, 155 2) and
+        no first-order descent in any corner-to-corner branch; numerical evidence, not interval proofs.
+      source: body
+      not_registered: Numerical evidence of local optimality of the two packings, not a bound on s(n);
+        recorded as reported in E-evand-465-record-hunt-report and not checked here.
+      queued: false
+    beads:
+    - think-iyij
+    - think-fvz4
+    answer_bead: think-iyij
+    replies: []
+    close_when: T-131 and T-128 are confirmed on main after independent review and adoption, and the
+      owner has posted that state; local and global optimality are outside this feasibility import.
+  - number: 470
+    title: 'New packings below register for 28 counts (n = 84–306): registration request'
+    author: Mishapolk
+    opened: '2026-10-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Mishapolk reports upper bounds at 28 counts from n = 84 to 306, as 16-digit centre-angle pose
+      files with SVGs in Mishapolk/square-packing-records, each side rounded up to 12 decimals and
+      compared with the register or with pending submissions (#432, #438, #451); at n = 88 the rounded
+      side ties SQUISH's. squarepacker's 60-digit check of the first upload, 4e1a601, found overlapping
+      squares in square-199.txt and square-263.txt, table values below the file's side at 16 counts,
+      and an n = 105 fraction smaller than its file's side. The author's errata of 9 October re-quench
+      the two files, restate every ceiling, withdraw the fraction, and pin the corrected files at a
+      commit given as dd3da5c7b39f3796d19e0970bc2350ef9ea14ad. That id has 39 hex digits; the
+      repository's head on 10 October is dd3da5c753c5ded6cb3b89476193b7b801005415, which shares its
+      first seven. Imported on 10 October 2026 in the mishapolk-decimal-poses-2026-10-09 packet, pinned
+      at dd3da5c by the issue's file digests: the poses are decimal, and 19 of the 30 in the case
+      corpus are not packings at their printed sides, so this repository derived exact rational
+      witnesses by dilating each pose about the box centre to its 12-decimal ceiling. All 30 were
+      replayed on both maintained exact routes, and the review of the same day derived each again
+      from its pinned file by a third exact route, with no blocking defect in the bounds. The
+      fourteen named counts below the case, with 132 and 267 from the release's README, are
+      registered as T-138; the other fourteen lie above their cases and have no entry. The case
+      records wait for jlevy/squares#403.
+    read_through: '2026-10-09T09:05:13Z'
+    results:
+    - key: fourteen-below-case
+      claim: s(n) <= S_n at n = 84, 86, 103, 105, 108, 127, 131, 175, 180, 258, 270, 302, 303 and 306,
+        the fourteen of the issue's twenty-eight counts where S_n, the side of a decimal pose file rounded
+        up to 12 decimals, is below the case's verified ceiling; checked by the author with Ellsworth's
+        check_packing.py at 40 digits and a 60-digit separating-axis test.
+      source: body
+      register:
+      - T-138
+      evidence:
+      - E-mishapolk-470-pose-report
+      - E-mishapolk-470-exact-feasibility
+    - key: fourteen-not-below-case
+      claim: s(n) <= S_n at n = 88, 130, 153, 154, 179, 199, 207, 208, 209, 236, 237, 238, 239 and 263,
+        the other fourteen named counts, where S_n lies above the case's verified ceiling by 2.17e-14 to
+        3.51e-09.
+      source: body
+      evidence:
+      - E-mishapolk-470-pose-report
+      - E-mishapolk-470-exact-feasibility
+    - key: readme-132-267
+      claim: s(132) <= 11.986956226066 and s(267) <= 16.838828608296, the 12-decimal ceilings the
+        release's README prints for two poses the issue does not name.
+      source: https://github.com/Mishapolk/square-packing-records/blob/dd3da5c753c5ded6cb3b89476193b7b801005415/README.md
+      register:
+      - T-138
+      evidence:
+      - E-mishapolk-470-pose-report
+      - E-mishapolk-470-exact-feasibility
+    - key: n105-closed-form-withdrawn
+      claim: A closed-form rational side for n = 105, which squarepacker found smaller than the side of
+        square-105.txt.
+      source: body
+      not_registered: Withdrawn by the author in the errata of 9 October; the n = 105 pose file stands
+        under twenty-eight-packings.
+      queued: false
+    beads:
+    - think-jpre
+    - think-fvz4
+    answer_bead: think-jpre
+    replies: []
+    close_when: The import of the corrected certificates and its disposition are on main and the owner
+      has posted the resulting state; optimality is outside this request.
+  - number: 471
+    title: 'Preprint: c*(k) = O(k^{3/8}) (explicit: c*(k) < 43.06 k^{3/8} for k >= 4e26; < 20.668 k^{2/5}
+      + 0.623 for k >= 1.6e7)'
+    author: squarepacker
+    opened: '2026-10-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      squarepacker reports a preprint, v1.0 at Zenodo 10.5281/zenodo.23256655 with programs and data
+      in squarepacker/k2-minus-c-upper, bounding c*(k), the largest c with s(k^2 - c) = k, from above:
+      by order k^{3/8} for k >= 4*10^26, by order k^{2/5} for k >= 1.6*10^7, by 8 ceil(sqrt(k - 4)) - 1
+      for k >= 6, and at five values of k from 10^5 to 10^8. The constructions are L-shaped packings
+      with tilted bands after H. D. Bui (arXiv:2508.04603v2). The author states the preprint is not
+      refereed, was checked by AI reviews and by programs including independent re-implementations,
+      and was developed with Claude. #486 announces version 1.1. Imported on 10 October 2026: v1.0
+      retained in the squarepacker-k2-minus-c-upper-2026-10-09 packet, its two largest Theorem 1.6
+      certificates pinned by digest and to be hosted in the release
+      data/squarepacker-k2-minus-c-upper-certificates-v1 once the owner publishes it, the source's
+      replays and independent checks run here, and the proofs
+      reviewed the same day; every theorem is recorded as reported in the asymptotic waste register,
+      since none settles a count of the case corpus.
+    read_through: '2026-10-09T07:19:46Z'
+    results:
+    - key: theorem-1.1
+      claim: c*(k) < 43.06 k^{3/8} + 2*10^-5 for every integer k >= 4*10^26, with computer-assisted constants
+        certified in interval arithmetic by what the source reports as three independent coverings of the
+        range; the release contains one covering, cert3e.py, which was replayed here.
+      source: body
+      not_registered: >-
+        Recorded as reported in frontier/asymptotic-waste-bounds.yaml (deficiency_upper_bounds); it
+        settles no count n <= 324, so the result register has no applicable scope.
+      queued: false
+    - key: theorem-1.2
+      claim: c*(k) < 20.668 k^{2/5} + 0.623 for every integer k >= 1.6*10^7.
+      source: body
+      not_registered: >-
+        Recorded as reported in frontier/asymptotic-waste-bounds.yaml (deficiency_upper_bounds); it
+        settles no count n <= 324, so the result register has no applicable scope.
+      queued: false
+    - key: theorem-1.4
+      claim: c*(k) <= 8 ceil(sqrt(k - 4)) - 1 for every integer k >= 6.
+      source: body
+      not_registered: >-
+        Recorded as reported in frontier/asymptotic-waste-bounds.yaml (deficiency_upper_bounds); it
+        settles no count n <= 324, so the result register has no applicable scope.
+      queued: false
+    - key: theorem-1.6
+      claim: c*(10^5) <= 1583, c*(10^6) <= 3972, c*(10^7) <= 10039, c*(3.825*10^7) <= 16988 and c*(10^8)
+        <= 24790, by packings included as data and checked in exact rational arithmetic, among others
+        by a checker written independently of the generator.
+      source: body
+      not_registered: >-
+        Recorded as reported in frontier/asymptotic-waste-bounds.yaml (deficiency_upper_bounds); it
+        settles no count n <= 324, so the result register has no applicable scope.
+      queued: false
+    asks:
+    - what: Review the proofs; replay the coverings and certificates.
+      state: done
+      bead: think-rd8u
+      note: Review of 2026-10-10 accepted; 70 replay jobs match; Theorem 1.6 decided by an independent
+        checker.
+    beads:
+    - think-rd8u
+    answer_bead: think-rd8u
+    replies: []
+    close_when: The reported import and its review disposition are on main and the owner has posted
+      the resulting state.
+  - number: 472
+    title: 'n17: 12 sub-pattern kernel certificates admitted (exp-317, #475)'
+    author: wand125
+    opened: '2026-10-09'
+    state: closed
+    closed: '2026-10-09'
+    kind: result-report
+    triage: done
+    summary: >-
+      wand125 reports eleven n17 sub-pattern certificates made with this repository's kernel producer
+      (check_n17_subpattern mode A) and passed in full by the standing kernel verifier, hosted with
+      their receipts as release assets of wand125/square-packing, and asks for their admission to
+      certified-sub-patterns.yaml; a twelfth, m4657489, followed in a comment. Eleven of the twelve
+      classes are #413 rows. The receipts name the contributor's wrapper revision with dirty: true and
+      one disclosed edited field each. exp-317 admitted all twelve through PR475, merged as 0f16c033a,
+      after a fresh FULL replay under a listed verifier and Rust parity, and the owner closed the issue.
+      The n17 bound is unchanged.
+    read_through: '2026-10-09T23:26:41Z'
+    results:
+    - key: kernel-certificates-11
+      claim: Eleven sub-pattern kernel certificates, masks 214101, 14353473, 983396, 3869440, 5707072,
+        6177056, 7815200, 1000708, 935012, 7799616 and 5116178, each passing the standing kernel verifier
+        in full at blob 1ad706c2.
+      source: body
+      not_registered: Admitted to the n17 sub-pattern census ledger, packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml,
+        by exp-317 through PR475. The census ledger is not the result register, and no register entry
+        or bound changes.
+      queued: false
+    - key: kernel-certificate-m4657489
+      claim: A twelfth kernel certificate, m4657489 (#413 row 38), made and checked as the eleven were.
+      source: https://github.com/jlevy/squares/issues/472#issuecomment-6080676210
+      not_registered: Admitted with the eleven to the n17 sub-pattern census ledger by exp-317 through
+        PR475; no register entry or bound changes.
+      queued: false
+    beads:
+    - think-6p3d
+    - think-5m36
+    answer_bead: think-5m36
+    replies:
+    - url: https://github.com/jlevy/squares/issues/472#issuecomment-6086936234
+      date: '2026-10-09'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: kernel-certificates-11
+      - result: kernel-certificate-m4657489
+    - url: https://github.com/jlevy/squares/issues/472#issuecomment-6090986599
+      date: '2026-10-09'
+      by: jlevy
+      kind: final
+      reported:
+      - result: kernel-certificates-11
+      - result: kernel-certificate-m4657489
+    close_when: Closed on 9 October once exp-317 had admitted all twelve certificates through PR475; nothing
+      the author asked for is queued.
+  - number: 476
+    title: '132, 237, 263, 267, 270, 303: registration request'
+    author: franciscouzo
+    opened: '2026-10-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Francisco Couzo reports six exact rational certificates, at n = 132, 237, 263, 267, 270 and 303,
+      following #451 and its update in #460, in franciscouzo/square-packing certificates/ at
+      02f969075f79d5e13fa21e09e381a44e8647b452 in Evan Daniel's half-angle format. Five are exact optima
+      from Evan Daniel's exact contact solver; the n = 263 one is a rational witness. Each side is compared
+      with the best value known to the author, at 132 and 267 a pending #470 packing. All six are valid
+      under Evan Daniel's verify_cert.py and this repository's verify.py. The starting packings are
+      Mishapolk's (132), SQUISH's (237, 263, 303), Ryan Xu's (267) and Evan Daniel's (270). No optimality
+      is claimed. Imported on 10 October 2026: all 65 certificates of the commit retained in the
+      couzo-exact-certificates-2026-10-09 packet, the six the issue names and eleven others replayed on
+      both maintained exact routes, and the six decided again by a third exact route in the review of
+      the same day, with no blocking defect. The six are registered together as T-134; the case records
+      wait for jlevy/squares#403, and at 237, 263, 270 and 303 issue 481's sides are smaller.
+    read_through: '2026-10-09T20:38:53Z'
+    results:
+    - key: six-exact-certificates
+      claim: s(n) <= S_n at n = 132 (11.986954193641), 237 (15.903670905581), 263 (16.740412653820), 267
+        (16.838815269949), 270 (16.936720031122) and 303 (17.917443925495), each S_n an exact rational
+        side rounded up to 12 decimals.
+      source: body
+      register:
+      - T-134
+      evidence:
+      - E-couzo-476-certificate-report
+      - E-couzo-476-exact-feasibility
+    beads:
+    - think-m8ck
+    - think-fvz4
+    answer_bead: think-m8ck
+    replies: []
+    close_when: The import and its disposition are on main and the owner has posted the resulting state;
+      optimality and the credit for the starting packings' constructions stay with their sources.
+  - number: 481
+    title: '15 new packings below record for n = 131–307 (improvement of 1.678e-04 to 1.119e-02), + 2
+      smaller packings of SQUISH''s prev registered 154, 237: registration request'
+    author: itsnaka
+    opened: '2026-10-09'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Nate Chaoweeraprasit (SQUISH) reports exact rational certificates for 15 new packings, at n = 131,
+      153, 207, 209, 232, 236, 259, 263, 269, 270, 292, 302, 303, 305 and 307, composed from sub-packings
+      of earlier records, and for smaller packings at 154 and 237 that replace SQUISH's #401 packings.
+      They are in itsnaka/squish-certs at d45669b48cc97ad3aa17a6c847a8d06630f66eac,
+      squish-submission-2026-10-09, with 50-digit text exports; a sources/ folder holds three unfiled
+      packings at 155, 240 and 306 used as pieces. The author gives each side's difference from the
+      register's and checks all 17 with SQUISH's exact checker and Ellsworth's check_packing.py. No
+      KKT or local-optimality evidence is given. Imported on 10 October 2026: the seventeen certificates
+      kept as derived exact facts in the squish-481-third-request-2026-10-09 packet, each admitted by
+      the exact fraction summary.csv prints rather than the issue's 15-digit displays, which are not
+      roundings of it; replayed in full on both maintained exact routes and decided again by a third
+      exact route in the review of the same day, which held each fact to its pinned upstream file, with
+      no blocking defect. All seventeen are registered together as T-136; squares touch the closed
+      box at every count. The case records wait for jlevy/squares#403. The author edited the
+      body twice on 10 October, leaving the certificate commit and the title unchanged: a
+      per-count table of the pieces each packing was composed from, with a list by finder,
+      and a credit line after Francisco Couzo, Ryan Xu, Frits Göbel, Thomas Schadt, David
+      Ellsworth and Károly Hajba, whose packings supplied pieces, verified with David
+      Ellsworth's check_packing.py; T-136's credit and the source's bibliography credit
+      follow it.
+    read_through: '2026-10-10T18:33:00Z'
+    results:
+    - key: fifteen-new-packings
+      claim: s(n) <= S_n at n = 131, 153, 207, 209, 232, 236, 259, 263, 269, 270, 292, 302, 303, 305 and
+        307, each S_n an exact rational side, 1.678e-4 to 1.119e-2 below the register's side as the issue
+        lists it.
+      source: body
+      register:
+      - T-136
+      evidence:
+      - E-squish-481-certificate-report
+      - E-squish-481-exact-feasibility
+    - key: smaller-154-237
+      claim: s(154) <= 12.923070202301140 and s(237) <= 15.902989220874966, to 15 digits, by nearby searches
+        from SQUISH's own packings of issue 401.
+      source: body
+      register:
+      - T-136
+      evidence:
+      - E-squish-481-certificate-report
+      - E-squish-481-exact-feasibility
+    beads:
+    - think-ac4h
+    - think-fvz4
+    answer_bead: think-ac4h
+    replies: []
+    close_when: The import and its disposition are on main and the owner has posted the resulting state;
+      local and global optimality are outside this request.
+  - number: 483
+    title: 'n=70 exact rational precision refinement of Ryan Xu''s packing: registration request'
+    author: ebdeleeuw
+    opened: '2026-10-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Eric Deleeuw reports an exact rational precision refinement of Ryan Xu's n = 70 packing, 1.4263e-10
+      below Ryan Xu's exact certificate side, in ebdeleeuw/square-packing-n70 at
+      24221d5e51244ca5290d5b1c43f1fbe36f9749e0, with an exact Fraction checker, its verification record,
+      a 60-digit pose export and a log of Ellsworth's checker. The arrangement is Ryan Xu's, credited
+      to him; no optimality or lower-bound change is claimed. OpenAI's Codex assisted. Imported on 10
+      October 2026: the certificate kept as a derived exact fact in the
+      ebdeleeuw-n70-refinement-2026-10-10 packet, replayed on both maintained exact routes and decided
+      again by a third exact route in the review of the same day, which held the fact to its pinned
+      upstream file, with no blocking defect. Registered as T-137; the case record waits for
+      jlevy/squares#403.
+    read_through: '2026-10-10T02:22:35Z'
+    results:
+    - key: n70-exact-refinement
+      claim: s(70) <= 888096037156625096037155737/10^26 = 8.88096037156625096037155737, by certificate.json
+        (SHA-256 eeebf55cf3c1614a96f51339695f28443e35f33b0195bfc24ef0549b50550cb1), valid under the author's
+        exact checker and Ellsworth's check_packing.py at 40 digits.
+      source: body
+      register:
+      - T-137
+      evidence:
+      - E-deleeuw-483-certificate-report
+      - E-deleeuw-483-exact-feasibility
+    beads:
+    - think-8m3u
+    - think-fvz4
+    answer_bead: think-8m3u
+    replies: []
+    close_when: The import and its disposition are on main and the owner has posted the resulting state;
+      optimality is outside this request.
+  - number: 484
+    title: 's(308) ≤ 17.999309855162748, s(343) ≤ 18.994903529220497, s(344) ≤ 18.995489275430816: registration
+      request'
+    author: TheSnakeFang
+    opened: '2026-10-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Kevin Fang reports three packings by the two-wedge construction of Arslanov, Mustafin and
+      Shangitbayev taken one k up, and one square past it at k = 18 and 19, with exact rational sides,
+      in TheSnakeFang/squarepack-certs at c75bebd87933416d3e1c7aba35ec733ea8ac7da0 in Evan Daniel's
+      .cert format. n = 308 is below the 18 x 18 grid; n = 343 and 344 lie beyond the 1..324 case corpus.
+      Evan Daniel's verify_cert.py, Ellsworth's check_packing.py and the author's verify.py accept all
+      three. No exact form, local minimality or optimality is claimed. Imported on 10 October 2026:
+      the three certificates retained in the fang-two-wedge-certificates-2026-10-10 packet, replayed
+      on both maintained exact routes and decided again by a third exact route in the review of the
+      same day, with no blocking defect. n = 308 is registered as T-135; n = 343 and 344 are verified
+      beyond-horizon rows in the source register. The case record waits for jlevy/squares#403.
+    read_through: '2026-10-10T04:48:40Z'
+    results:
+    - key: s308-two-wedge
+      claim: s(308) <= 17.999309855162748, rounded up to 15 decimals from the exact rational side of n0308.cert.
+      source: body
+      register:
+      - T-135
+      evidence:
+      - E-fang-484-certificate-report
+      - E-fang-484-exact-feasibility
+    - key: s343-s344-two-wedge
+      claim: s(343) <= 18.994903529220497 and s(344) <= 18.995489275430816, rounded up to 15 decimals from
+        the exact rational sides of n0343.cert and n0344.cert.
+      source: body
+      evidence:
+      - E-fang-484-certificate-report
+      - E-fang-484-exact-feasibility
+    beads:
+    - think-ar8g
+    - think-fvz4
+    answer_bead: think-ar8g
+    replies: []
+    close_when: The import and its disposition, including the beyond-horizon counts, are on main and the
+      owner has posted the resulting state; optimality is outside this request.
+  - number: 485
+    title: 's(40) > 1340000/199529 (approximately 6.715815746082023): updated registration request'
+    author: Guzhou0806
+    opened: '2026-10-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Guzhou0806 reports a lower bound for n = 40 with unrestricted rotations, extending wand125's
+      rect_n40_L67 density (#281) by a 401-direction net and a clipped-corner transfer, and a weaker
+      full-core bound that needs no clipped-corner estimate, in Guzhou0806/n40-square-packing at
+      e5abeb4d078a5c5b35df6204dd9b93378e5a7880 with release n40-670854-20261010. Its Rust nodal verifier,
+      vendored from this repository's sqverify-fast, passed all 401 domains locally and in GitHub Actions
+      run 38032128403; the transfer and finite checks are Python. wand125 commented a review on 10
+      October reporting a fresh replay of the published entry point and an independent exact-rational
+      check of the transfer step, with no gaps found. Imported on 10 October 2026: the release retained
+      in the guzhou-n40-clipped-corner-2026-10-10 packet with both its local and its CI receipts; the
+      401-direction nodal statement replayed here in full by sqverify-fast, the producer's own nodal
+      code, with controls A to D; the transfer's finite steps decided again by a first-party exact audit
+      sharing no code with the release's, with controls E to H; the mathematics reviewed the same day
+      with no blocking defect. Both bounds are registered together as T-133, and n = 40's reported and
+      verified lower bounds moved to 335427/50000. A comment of 14:50 UTC the same day reports
+      s(40) > 1340000/199529 = 6.7158157460... by a new continuous-pose kernel on the same density, at
+      71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3 with release n40-continuous-1340000-199529-20261010;
+      wand125's review does not cover it. Imported the same day: the release retained in the
+      guzhou-n40-continuous-pose-2026-10-10 packet, both kernels rebuilt into the CI run's binaries and
+      replayed in full here, the producer's code, with their controls; the finite steps decided again
+      by a first-party exact audit and the near-axis statement by sqverify-fast; the mathematics
+      reviewed with no blocking defect. It is registered as T-145, and n = 40's reported and verified
+      lower bounds move to 1340000/199529.
+    read_through: '2026-10-10T14:50:00Z'
+    results:
+    - key: s40-clipped-corner
+      claim: s(40) > 335427/50000 = 6.70854, by excluding a container of side exactly 335427/50000 and
+        compactness.
+      source: body
+      register:
+      - T-133
+      evidence:
+      - E-n040-guzhou-clipped-corner-report
+      - E-n040-guzhou-clipped-corner-sqverify-fast-replay
+      - E-n040-guzhou-clipped-corner-finite-audit
+    - key: s40-full-core
+      claim: s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908, without the clipped-corner density estimate.
+      source: body
+      register:
+      - T-133
+      evidence:
+      - E-n040-guzhou-clipped-corner-report
+      - E-n040-guzhou-clipped-corner-sqverify-fast-replay
+    - key: s40-continuous-pose
+      claim: >-
+        s(40) > 1340000/199529 = 6.715815746082023..., by excluding a container of side exactly
+        1340000/199529 and compactness: wand125's rect_n40_L67 density, unchanged, captures at least
+        4999/5000 in every square of side 199529/200000 over the continuous pose domain (43 closed
+        slabs in t = tan(theta/2) over [10^-6, 83/200], and an axis certificate at side
+        997643/1000000 for t in [0, 10^-6]), and 40 * 4999/5000 - 3999/100 = 1/500 > 0. It is
+        72586117/9976450000 above T-133.
+      source: https://github.com/jlevy/squares/issues/485#issuecomment-6098734391
+      register:
+      - T-145
+      evidence:
+      - E-n040-guzhou-continuous-pose-report
+      - E-n040-guzhou-continuous-pose-kernel-replay
+      - E-n040-guzhou-continuous-pose-finite-audit
+      - E-n040-guzhou-continuous-pose-crate-axis
+    beads:
+    - think-3oi5
+    - think-xms6
+    answer_bead: think-3oi5
+    replies: []
+    close_when: The import and its review disposition are on main and the owner has posted the resulting
+      state; optimality and first-publication priority are outside this request.
+  - number: 486
+    title: 'Preprint v1.1: c*(k) = O(k^{3/8}) with tiered constants, now below the k^{2/5} bound for every
+      k ≥ 2.48×10^12'
+    author: squarepacker
+    opened: '2026-10-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      squarepacker announces version 1.1 of the #471 preprint (Zenodo 10.5281/zenodo.23278927, release
+      v1.1 of squarepacker/k2-minus-c-upper). Theorem 1.1 becomes twelve tiers c*(k) < C_i k^{3/8} + a_i
+      for k >= k_i with interval-certified constants, below the k^{2/5} bound for every k >= 2.48*10^12;
+      Theorems 1.2, 1.4 and 1.6 are reported unchanged. Not refereed; the source says its reviews and
+      checks are by AI systems. Imported on 10 October 2026: v1.1 retained in the
+      squarepacker-k2-minus-c-upper-v11-2026-10-10 packet with its 28 unchanged files bound to v1.0,
+      and reviewed with #471's.
+    read_through: '2026-10-10T09:46:30Z'
+    results:
+    - key: theorem-1.1-v1.1-tiers
+      claim: Twelve tiers c*(k) < C_i k^{3/8} + a_i (k >= k_i), among them c*(k) < 42.09 k^{3/8} + 0.05 for
+        k >= 2.48*10^12, < 41.19 k^{3/8} + 0.04 for k >= 5.22*10^12 and < 40.62 k^{3/8} + 1.4*10^-5 for
+        k >= 3.4*10^26, superseding v1.0's 43.06 k^{3/8} + 2*10^-5.
+      source: body
+      not_registered: >-
+        Recorded as reported in a row of its own in frontier/asymptotic-waste-bounds.yaml
+        (deficiency_upper_bounds), and the v1.0 row keeps its claim; it settles no count n <= 324, so
+        the result register has no applicable scope.
+      queued: false
+    beads:
+    - think-7lpw
+    answer_bead: think-7lpw
+    replies: []
+    close_when: The reported import and its review disposition are on main and the owner has posted the
+      resulting state.
+  - number: 488
+    title: '132-305: registration request'
+    author: franciscouzo
+    opened: '2026-10-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Francisco Couzo reports six exact rational certificates, at n = 132, 175, 209, 237, 270 and
+      305, in franciscouzo/square-packing certificates/ at 3ef76349025bf4bfa99c9c3600bcc273f4c33e02
+      in Evan Daniel's half-angle format, all exact optima from Evan Daniel's exact contact solver.
+      The commit adds n209 and changes eight certificates (132, 175, 237, 270, 303, 305, 338, 340);
+      the other 54 are byte-identical to the issue-476 packet's copies. Imported on 10 October 2026:
+      all nine added or changed certificates retained in the couzo-certificates-2026-10-10 packet
+      and passing both maintained exact routes, and the six requested decided again by the third
+      exact route. Each requested side is below its case ceiling; at 209, 237, 270 and 305 it is
+      below SQUISH's #481, and at 132 issue #489's exact side is smaller still. The review of the
+      same day reproduced the replay and found no blocking defect, and the six are registered
+      together as T-140 at V3/C3; the case records wait for jlevy/squares#403. Author checkers
+      and KKT statements were not run here; no optimality is claimed.
+    read_through: '2026-10-10T14:08:32Z'
+    results:
+    - key: six-exact-certificates
+      claim: s(n) <= S_n at n = 132 (11.986953587255), 175 (13.767120724693), 209 (14.946223226447),
+        237 (15.902949607678), 270 (16.929775353542) and 305 (17.951139772207), each S_n an exact
+        rational side rounded up to 12 decimals.
+      source: body
+      register:
+      - T-140
+      evidence:
+      - E-couzo-488-certificate-report
+      - E-couzo-488-exact-feasibility
+    - key: kkt-no-descent
+      claim: Each of the six lies within about 1e-19 of its KKT point, and the corner-corner MILP finds
+        no first-order descent in any branch.
+      source: body
+      not_registered: Numerical evidence of local optimality, not a bound on s(n); recorded as reported
+        in E-couzo-488-certificate-report and not checked here.
+      queued: false
+    - key: unnamed-303-338-340
+      claim: The same commit changes three certificates the issue does not name, s(303) <= 17.917365675353,
+        s(338) <= 18.907150436394 and s(340) <= 18.939701150684, as certificates/README.md prints them.
+      source: source
+      not_registered: Not requested. Compared in the packet's claim record; 303 is above issue 481's exact
+        side, and 338 and 340 lie beyond the case corpus below Couzo's own tracked rows. Each is an
+        import of its own.
+      queued: false
+    beads:
+    - think-6uv7
+    answer_bead: think-6uv7
+    replies: []
+    close_when: The import and its disposition are on main and the owner has posted the resulting state;
+      optimality and the credit for the starting packings' constructions stay with their sources.
+  - number: 489
+    title: 'New packings: s(132), s(308), s(343), s(344): registration request'
+    author: evand
+    opened: '2026-10-10'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports four exact rational certificates from the record hunt Hunt 3, at n = 132,
+      308, 343 and 344, in evand/square-packing search/packer/candidates at c013f43, built with his
+      quality-diversity basin explorer; 308, 343 and 344 build on Kevin Fang's #484 packings. No
+      optimality is claimed; the KKT and jamming statements are the author's numerical evidence.
+      Imported on 10 October 2026: retained at the branch head
+      76a529bc6f36ed05827cae3d1412d6acb5be00fc (byte-identical files) in the
+      evand-record-hunt3-2026-10-10 packet with their KKT points, inputs and solver reports; all four,
+      and the unnamed hunt3_n305 certificate, pass both maintained exact routes, and the third exact
+      route decides the four. 132 is below every case and pending side, issue #488's included, by
+      1.27e-3; 308 is below the grid and Kevin Fang's #484. The review of the same day reproduced the
+      replay and found no blocking defect, and both are registered together as T-141 at V3/C3; the
+      case records wait for jlevy/squares#403. 343 and 344 lie beyond the case corpus, below #484's
+      sides there, and are verified beyond-horizon rows that supersede #484's. The n305 side equals
+      #488's exactly; the author's log gives it to Couzo, and no entry cites it. Author checkers and
+      KKT evidence were not run here.
+    read_through: '2026-10-10T14:47:57Z'
+    results:
+    - key: hunt3-132-308
+      claim: s(132) <= 11.985680198845808811522231964102 and s(308) <= 17.998269879526255875387992744507,
+        each the exact rational side of a Hunt 3 certificate.
+      source: body
+      register:
+      - T-141
+      evidence:
+      - E-evand-489-hunt3-report
+      - E-evand-489-exact-feasibility
+    - key: hunt3-343-344
+      claim: s(343) <= 18.978232523635611279730512106023 and s(344) <= 18.994450514277401521114135796864,
+        beyond the 1..324 case corpus.
+      source: body
+      evidence:
+      - E-evand-489-hunt3-report
+      - E-evand-489-exact-feasibility
+    - key: kkt-local-minima
+      claim: Each exact point is an 80-digit KKT point with positive multipliers (least 1.8e-7), a reduced
+        Hessian positive semidefinite modulo exact flat motions (132 31, 308 52, 343 19, 344 71) and
+        jammed in every corner-corner branch by a first-order MILP; numerical evidence, not interval proofs.
+      source: body
+      not_registered: Numerical evidence of local optimality, not a bound on s(n); recorded as reported
+        in E-evand-489-hunt3-report and not checked here.
+      queued: false
+    beads:
+    - think-xm4h
+    answer_bead: think-xm4h
+    replies: []
+    close_when: The import and its disposition, including the beyond-horizon counts, are on main and the
+      owner has posted the resulting state; Kevin Fang's credit for the two-wedge constructions and
+      optimality stay with their sources.

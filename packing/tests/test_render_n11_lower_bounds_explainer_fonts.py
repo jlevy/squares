@@ -449,6 +449,12 @@ def _run_node(script: str, argument: str) -> str:
     return cast(str, completed.stdout)
 
 
+def test_diagram_labels_read_geometry_before_writing_the_same_scaled_sizes() -> None:
+    """Every label keeps its publication scale through resize, fonts, and print."""
+    source = render_n11_lower_bounds_explainer.INLINE_SCRIPT_ASSETS["DIAGRAM_LABEL_SCRIPT"]
+    assert _run_node("diagram-label-batching.mjs", str(source)) == "complete"
+
+
 def test_host_context_and_kerning_reach_the_shared_math_renderer() -> None:
     """The host contributes its custom wrappers and TeX spacing to the shared API.
 

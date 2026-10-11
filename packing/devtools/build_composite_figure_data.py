@@ -18,10 +18,11 @@ import argparse
 import json
 import math
 import sys
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from decimal import ROUND_DOWN, ROUND_UP, Decimal
 from functools import cache
 from pathlib import Path
+from typing import Any
 
 import sympy as sp
 from strif import atomic_output_file
@@ -32,6 +33,12 @@ from sympy.parsing.sympy_parser import (
 )
 
 from devtools.build_bound_citations import corrected_lower_bounds, recent_lower_bounds
+from devtools.rigidity_status import (
+    RigidityContext,
+    context_for_entries,
+    load_context,
+    rigidity_metadata,
+)
 from sqpack import retained_json
 from sqpack.known_best import (
     KNOWN_BEST_COMPOSITES,
@@ -187,30 +194,15 @@ def _lower_text(value: str) -> str:
     return _six(format(number, "f")) or "0"
 
 
-def _rigidity(n: int, packing: dict) -> dict:
-    """What the figure may say about rigidity here, and on whose authority.
+def _legacy_rigidity(n: int, packing: dict) -> dict:
+    """Preserve the existing first-party/source distinction as compatibility metadata.
 
-    Read from the record. The previous version decided this from `n` alone -- a
-    module-level set of the four packings the catalogue annotates "Rigid." -- and never
-    opened the `rigidity` block at all, so one solid glyph covered ten packings derived
-    from an exact tiling and four taken from a source's word. That is `D-385`, and it is
-    `D-354`'s split failing to reach the figure lane: the whole point of separating
-    `reported_upper_bound.catalogue_rigid` from the first-party `rigidity` block is that
-    the two must never merge again, and in the most widely seen artifact here they had.
-
-    So `established` now means the record's own finding is `locally-rigid` and nothing
-    else does. That moves the count from 14 to 11 and, in the other direction, stops
-    crediting the catalogue for `n = 11`, whose rigidity is this repository's own
-    `verified` argument.
-
-    A catalogue annotation without that finding is still shown, because the corpus holds
-    the fact and dropping it would lose it -- but as an annotation, muted, and not
-    counted. `n = 5` is the case that makes the distinction earn its keep: `X-007`
-    establishes more about it than the catalogue ever said, and still not local rigidity.
+    The display now uses one known-rigid flag. These fields still distinguish a verified
+    argument from a source annotation, so changing the icon never upgrades its assurance.
     """
     block = packing.get("rigidity") or {}
     reported = packing.get("reported_upper_bound") or {}
-    if block.get("property") == "locally-rigid":
+    if block.get("property") == "locally-rigid" and block.get("assurance") == "verified":
         if TILING_EVIDENCE in (block.get("evidence") or []):
             root = math.isqrt(n)
             return {
@@ -249,7 +241,11 @@ def _rigidity(n: int, packing: dict) -> dict:
     }
 
 
-def _entry(n: int) -> dict:
+def _rigidity(n: int, packing: dict, *, context: RigidityContext | None = None) -> dict:
+    return {**_legacy_rigidity(n, packing), **rigidity_metadata(n, packing, context=context)}
+
+
+def _entry(n: int, *, rigidity_context: RigidityContext | None = None) -> dict:
     packing = _packing(n)
     reported = packing.get("reported_upper_bound") or {}
     status = str(packing["status"])
@@ -274,7 +270,7 @@ def _entry(n: int) -> dict:
     else:
         state, degree, degree_provenance = "numeric-only", None, "absent"
 
-    rigidity = _rigidity(n, packing)
+    rigidity = _rigidity(n, packing, context=rigidity_context)
 
     badges: list[dict] = []
     if status == "proved":
@@ -283,14 +279,8 @@ def _entry(n: int) -> dict:
         badges.append({"glyph": "≈", "meaning": "only known numerically", "style": "muted"})
     else:
         badges.append({"glyph": "=", "meaning": "exact value known", "style": "solid"})
-    if rigidity["state"] == "established":
-        badges.append({"glyph": "R", "meaning": "rigid (established here)", "style": "solid"})
-    elif rigidity["basis"] == "catalogue-annotation":
-        # Shown, because the corpus holds the fact and dropping it would lose it -- but
-        # muted, and not counted, because a source's word is not our finding.
-        badges.append(
-            {"glyph": "R", "meaning": "annotated rigid by the catalogue", "style": "muted"}
-        )
+    if rigidity["known_rigid"]:
+        badges.append({"glyph": "R", "meaning": "known rigid", "style": "solid"})
 
     relation = "equality" if status == "proved" else "upper-bound"
     verified = packing["verified_lower_bound"]
@@ -376,6 +366,7 @@ def _totals(entries: list[dict]) -> dict:
         "rigidity_established": sum(
             1 for e in entries if e["rigidity"]["state"] == "established"
         ),
+        "rigidity_known": sum(1 for e in entries if e["rigidity"]["known_rigid"]),
         "lower_bound_first_proved_here": sum(
             1 for e in entries if e["lower"]["first_proved_here"]
         ),
@@ -383,8 +374,8 @@ def _totals(entries: list[dict]) -> dict:
         # Of those, the ones that correct a published result: a second fact about a
         # recent bound, not a second star.
         "lower_bound_correction": sum(1 for e in entries if e["lower"]["correction"]),
-        # Counted separately rather than folded in, which is the whole of D-385:
-        # a source's word and our own argument are two facts, not one.
+        # Retained assurance counts remain separate metadata; the visible R count is
+        # rigidity_known, which includes explicit source assertions without upgrading them.
         "rigidity_catalogue_annotated": sum(
             1 for e in entries if e["rigidity"]["basis"] == "catalogue-annotation"
         ),
@@ -398,8 +389,9 @@ def _totals(entries: list[dict]) -> dict:
     }
 
 
-def build_record() -> dict:
-    entries = [_entry(n) for n in CORPUS.numbers]
+def build_record(*, atlas_entries: Mapping[int, Mapping[str, Any]] | None = None) -> dict:
+    context = load_context() if atlas_entries is None else context_for_entries(atlas_entries)
+    entries = [_entry(n, rigidity_context=context) for n in CORPUS.numbers]
     return {
         "softschema": {
             "contract": CONTRACT,

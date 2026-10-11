@@ -5,7 +5,7 @@ chips offering the Markdown it is rendered from, its typeset PDF and the project
 GitHub; then the title; then the credits, in the owner's form (2026-10-01), and under
 them the series strip (the series plan, 2026-10-05):
 
-    From the original proof by **Queuingtheorydotcom**
+    From the original proof by **Mannaseh Ahmed**
     github.com/Queuingtheorydotcom/11SquaresOptimal
 
     Human oversight: **Joshua Levy**
@@ -45,16 +45,18 @@ rendered by KPress on one and written raw on the other (think-2cqu).
 from __future__ import annotations
 
 import re
+from collections.abc import Sequence
 from datetime import datetime
 from html import escape
 from typing import NamedTuple
 
 from devtools import render_overview
 from devtools.repo_links import REPO_URL
+from sqpack.release import PublicationHistoryEntry
 
 #: The placeholder an article carries where its front goes, exactly once.
 FRONT_MATTER = "FRONT_MATTER"
-#: The label of the date every paper ends its dates line with: when its own text last
+#: The revision date's label in the source record: when its own text last
 #: changed, which `devtools.artifact_dates` holds to the article's last commit.
 REVISED = "Last revised"
 #: The GitHub mark on the third chip, drawn in the chip's own colour.
@@ -87,6 +89,7 @@ class Source(NamedTuple):
     author: str
     address: str
     lead: str = "From the original proof by"
+    author_url: str = ""
 
 
 class Dated(NamedTuple):
@@ -131,11 +134,18 @@ def numeral(number: int) -> str:
 
 def series(slug: str) -> Series:
     """The series strip of the site's paper `slug`, from the site's one list of papers
-    (`render_overview.PAPERS`): every paper of the site, in reading order, by its part."""
+    (`render_overview.PAPERS`): the entries with a part number, in reading order."""
+    part = render_overview.paper_record(slug).part
+    if part is None:
+        raise ValueError(f"{slug}: this standalone paper belongs to no series")
     return Series(
         SERIES_NAME,
-        tuple(Part(paper.part, paper.slug, paper.title) for paper in render_overview.PAPERS),
-        render_overview.paper_record(slug).part,
+        tuple(
+            Part(paper.part, paper.slug, paper.title)
+            for paper in render_overview.PAPERS
+            if paper.part is not None
+        ),
+        part,
     )
 
 
@@ -197,6 +207,12 @@ def check(front: PaperFront) -> PaperFront:
         )
     if front.source is not None and not front.source.author.strip():
         raise ValueError(f"{front.slug}: the source is credited by its author's name")
+    if (
+        front.source is not None
+        and front.source.author_url
+        and not front.source.author_url.startswith("https://")
+    ):
+        raise ValueError(f"{front.slug}: the source author's profile must use https")
     if front.history and not _ANCHOR_ID.fullmatch(front.history):
         raise ValueError(f"{front.slug}: the version history is linked by its id")
     if front.series is not None:
@@ -209,6 +225,24 @@ def check(front: PaperFront) -> PaperFront:
         if not all(part.title.strip() for part in front.series.parts):
             raise ValueError(f"{front.slug}: each part of a series is named by its title")
     return front
+
+
+def version_history_markdown(history: Sequence[PublicationHistoryEntry]) -> str:
+    """Format author-owned edition notes before inserting them into a manuscript.
+
+    The Markdown commit hook cannot reach prose stored in Python. Apply the same
+    Flowmark auto-formatting at this generated boundary, without retyping manuscript
+    quotations or archival sources.
+    """
+    from flowmark import reformat_text  # noqa: PLC0415
+
+    markdown = "\n".join(
+        f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}"
+        for entry in history
+    )
+    return reformat_text(
+        markdown, semantic=True, cleanups=True, smartquotes=True, ellipses=True
+    ).rstrip("\n")
 
 
 def revised(front: PaperFront) -> str:
@@ -265,17 +299,41 @@ def formats_row(front: PaperFront) -> str:
     return "\n".join(lines)
 
 
+def _display_dates(front: PaperFront) -> tuple[Dated, ...]:
+    """Collapse publication and revision on the same calendar day for display only.
+
+    Source dates describe other events and keep their labels. The combined date
+    stays at the end, where metadata and PDF audits read the paper's revision.
+    """
+    revision = front.dates[-1]
+    publication = next(
+        (dated for dated in front.dates if dated.label == "First published"), None
+    )
+    if publication is None or iso_date(publication.day) != iso_date(revision.day):
+        return front.dates
+    return (
+        *(dated for dated in front.dates[:-1] if dated.label != "First published"),
+        Dated("Published", publication.day),
+    )
+
+
 def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
     """Each line of the credits: its class, its HTML and its Markdown, in order."""
     lines: list[tuple[str, str, str]] = []
     if front.source is not None:
         author = escape(front.source.author)
         address = front.source.address
+        author_html = f"<strong>{author}</strong>"
+        author_markdown = f"**{author}**"
+        if front.source.author_url:
+            profile = front.source.author_url
+            author_html = f'<a href="{escape(profile, quote=True)}">{author_html}</a>'
+            author_markdown = f"[{author_markdown}]({profile})"
         lines.append(
             (
                 "credits-source",
-                f"{escape(front.source.lead)} <strong>{author}</strong>",
-                f"{front.source.lead} **{author}**",
+                f"{escape(front.source.lead)} {author_html}",
+                f"{front.source.lead} {author_markdown}",
             )
         )
         lines.append(
@@ -311,7 +369,7 @@ def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
         )
     else:
         lines.append(("edition", version, front.version))
-    dates = " · ".join(f"{dated.label} {dated.day}" for dated in front.dates)
+    dates = " · ".join(f"{dated.label} {dated.day}" for dated in _display_dates(front))
     lines.append(("publication-date", escape(dates), dates))
     if front.series is not None:
         lines.extend(_series_lines(front.series))

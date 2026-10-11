@@ -14,11 +14,9 @@ HTML blocks inside the Markdown, because a canvas, an SVG and a control panel ar
 Markdown expresses. `{{PLACEHOLDERS}}` are substituted before the Markdown is parsed, which is
 what keeps a link destination a link destination.
 
-The page is one self-contained file. Typography follows the kpress design
-system, and the kpress distribution also supplies the reading faces, KaTeX and
-the client behaviors, all inlined. Nothing is fetched at view time, which
-is what lets the same artifact serve from GitHub Pages, from a file:// URL, and
-from an artifact host with a strict content-security policy.
+The renderer returns a self-contained page for offline tools. Publication prepares its
+math while those resources are inline, then links content-addressed stylesheets, fonts
+and scripts under the site root. Typography follows the KPress design system.
 
 The paper's slug is `n11-lower-bounds-explainer`, and that is its name everywhere: this
 module, its templates, scripts and tests, and what it writes. Given the site's root
@@ -137,6 +135,8 @@ INLINE_SCRIPT_ASSETS = {
     "FINISH_MATH": EXPLAINER_SCRIPTS / "finish-math.js",
     "SITE_EMBED": PACKING / "devtools" / "overview" / "embed.js",
     "SITE_THEME": PACKING / "devtools" / "overview" / "theme.js",
+    "SITE_HEADROOM": PACKING / "devtools" / "overview" / "headroom.js",
+    "SITE_TOOLTIPS": PACKING / "devtools" / "overview" / "rating-tooltips.js",
 }
 #: The browser code this module hands the page, one file each under `probes/`.
 PROBES = Path(__file__).resolve().parent / "probes"
@@ -373,9 +373,11 @@ FILM_POSTER = REPO / "packages" / "workbench" / "assets" / "ascent-n1-100-poster
 #: than publishing its own, so its poster travels here with the rest.
 OVERVIEW_FILM_POSTER = FILM_POSTER.with_name("ascent-n1-324-poster.png")
 COMPOSITE_ASSETS = (
-    *(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
+    *(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png")),
+    COMPOSITE_STEM.with_name("square-packings-100-20261008.pdf"),
     COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png"),
-    *(POSTER_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
+    *(POSTER_STEM.with_suffix(f".{ext}") for ext in ("svg", "png")),
+    POSTER_STEM.with_name("square-packings-324-20261008.pdf"),
     FILM_POSTER,
     OVERVIEW_FILM_POSTER,
 )
@@ -385,8 +387,8 @@ COMPOSITE_ASSETS = (
 #: deploy for resolution nothing displays.
 COMPOSITE_PNG = COMPOSITE_STEM.with_suffix(".png")
 #: The landscape crop of the composite the atlas builder writes: the top of the same
-#: drawing at 2400x1256, 1.91:1 to the nearest whole pixel. It was this page's link
-#: preview until 2026-10-01, when every page of the site took the one card
+#: drawing with its current canvas width and a retained 1256-unit height. It was this
+#: page's link preview until 2026-10-01, when every page of the site took the one card
 #: (`render_overview.SOCIAL_CARD`); the overview's atlas card still shows it, so it is
 #: still published beside the page.
 COMPOSITE_CARD = COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png")
@@ -406,10 +408,7 @@ def version_history_markdown() -> str:
     """The paper's own editions, newest first, each with the date it was first published
     and what changed in the paper: `sqpack.release.EXPLAINER_HISTORY`, not the site's
     record, which lists editions in which this paper did not change."""
-    return "\n".join(
-        f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}"
-        for entry in EXPLAINER_HISTORY
-    )
+    return paper_front.version_history_markdown(EXPLAINER_HISTORY)
 
 
 def edition_file(path: Path) -> str:
@@ -1984,7 +1983,7 @@ def _figure_totals() -> dict[str, Any]:
 
 
 def starred_lower_bounds() -> int:
-    """How many cells in Figure 2 carry the star: a recent lower bound, whoever proved it.
+    """How many cells in Figure 2 have a recent lower bound, whoever proved it.
 
     The composite counts them in its own legend from the figure record; the caption
     beside the image reads the same total, so the two cannot disagree.
@@ -1995,8 +1994,8 @@ def starred_lower_bounds() -> int:
 def lower_bounds_proved_here() -> int:
     """How many of Figure 2's lower bounds are this project's own new results.
 
-    Not the star's count: the star marks recent results, most of them by others, and a
-    sentence about what this research agenda produced must not borrow it.
+    The recent-bound count includes results by others; a sentence about what this
+    research agenda produced needs its own total.
     """
     return int(_figure_totals()["lower_bound_first_proved_here"])
 
@@ -2112,7 +2111,9 @@ EXTERNAL_REFERENCE = re.compile(
     r"<script[^>]*\ssrc="
     r'|<link(?![^>]*\srel="canonical")(?![^>]*\shref="data:)[^>]*\shref='
     r"|@import\b"
-    r"|url\((?!\s*[\"']?(?:data:|#))",
+    # JavaScript's `new URL(...)` constructs an address; it is not CSS url(...).
+    # Keep every script body under the other reference checks.
+    r"|(?<!\bnew\s)\burl\((?!\s*[\"']?(?:data:|#))",
     re.IGNORECASE,
 )
 
@@ -2250,6 +2251,60 @@ def iso_date(written: str) -> str:
     return paper_front.iso_date(written)
 
 
+class ScholarlyMetadata(TypedDict):
+    structured_data: tuple[Mapping[str, Any], ...]
+    extra_meta: tuple[tuple[str, str], ...]
+
+
+def scholarly_metadata(
+    front: paper_front.PaperFront, title: str, published: str, modified: str
+) -> ScholarlyMetadata:
+    """Search metadata from the paper's own credits and recorded edition dates."""
+    from devtools.render_overview import breadcrumb_data  # noqa: PLC0415
+
+    url = SITE_URL + paper_path(front.slug)
+    authors = tuple(person.name for person in front.oversight)
+    article = {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": title,
+        "url": url,
+        "author": [
+            {"@type": "Person", "name": person.name, "url": person.url}
+            for person in front.oversight
+        ],
+        "datePublished": published,
+        "dateModified": modified,
+        "isPartOf": {
+            "@type": "CreativeWorkSeries",
+            "name": "Packing eleven unit squares",
+            "url": SITE_URL + "papers.html",
+        },
+        "encoding": {
+            "@type": "MediaObject",
+            "contentUrl": url.removesuffix(".html") + ".pdf",
+            "encodingFormat": "application/pdf",
+        },
+    }
+    return {
+        "structured_data": (
+            article,
+            breadcrumb_data(
+                ("Home", "index.html"),
+                ("Papers", "papers.html"),
+                (title, paper_path(front.slug)),
+            ),
+        ),
+        "extra_meta": (
+            ("citation_title", title),
+            *(("citation_author", author) for author in authors),
+            ("citation_publication_date", published),
+            ("citation_pdf_url", url.removesuffix(".html") + ".pdf"),
+            ("citation_abstract_html_url", url),
+        ),
+    }
+
+
 def page_meta(n: int, current: CurrentBoundFacts) -> PageMeta:
     """What the page says of itself in its head: its title, its sentence, its address and
     the two dates its hero prints. `n` is the case its certificates are for.
@@ -2271,6 +2326,9 @@ def page_meta(n: int, current: CurrentBoundFacts) -> PageMeta:
         kind="article",
         published=iso_date(FRONT.dates[0].day),
         modified=iso_date(paper_front.revised(FRONT)),
+        **scholarly_metadata(
+            FRONT, TITLE, iso_date(FRONT.dates[0].day), iso_date(paper_front.revised(FRONT))
+        ),
     )
 
 
@@ -2300,7 +2358,7 @@ def card_substitutions(headline: Facts, current: CurrentBoundFacts) -> dict[str,
     """
     return {
         "PAGE_HEAD": head_tags(page_meta(headline.n, current)),
-        "SITE_FAVICON": favicon_html(),
+        "SITE_FAVICON": favicon_html(inline=True),
         "COMPOSITE_ALT": COMPOSITE_ALT,
     }
 
@@ -2808,6 +2866,7 @@ RENDER_INPUTS = (
     CASE,
     THRESHOLD_CASE,
     Path(__file__),
+    PACKING / "devtools/site_assets.py",
     EXPLAINER_SCRIPTS,
     # The front of the paper is written by the component both papers share.
     PACKING / "devtools" / "paper_front.py",
@@ -2830,6 +2889,8 @@ RENDER_INPUTS = (
     MARKDOWN,
     SITE_NAV,
     SITE_NAV_CSS,
+    INLINE_SCRIPT_ASSETS["SITE_HEADROOM"],
+    INLINE_SCRIPT_ASSETS["SITE_TOOLTIPS"],
     PAPER_TYPE_CSS,
     PACKING / "devtools" / "render_overview.py",
     PACKING / "devtools" / "templates" / "fonts",
@@ -3257,7 +3318,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--prepare-math",
         action="store_true",
-        help="prepare publication math with measured dimensions using pinned Chromium",
+        help="compatibility flag; published math is always prepared using pinned Chromium",
     )
     parser.add_argument(
         "--check",
@@ -3294,16 +3355,21 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     rendered = render(certificates, full_sweep=args.verify_condition_5)
     page = rendered.page
-    if args.prepare_math:
-        from devtools.prepare_n11_lower_bounds_explainer_math import (  # noqa: PLC0415
-            prepare_math_html,
-        )
+    from devtools.prepare_n11_lower_bounds_explainer_math import (  # noqa: PLC0415
+        prepare_math_html,
+    )
 
-        page = prepare_math_html(page)
-        assert_self_contained(page)
+    page = prepare_math_html(page)
+    assert_self_contained(page)
+    from devtools import site_assets  # noqa: PLC0415
+
+    page = page.replace(favicon_html(inline=True), favicon_html(root="../"))
+    page, assets = site_assets.link_inline_assets(page, SITE_PATH)
     document = output.with_name(MARKDOWN_OUTPUT.name)
     written = ((output, page), (document, rendered.markdown))
     if args.check:
+        if site_assets.stale_assets(site, assets):
+            raise SystemExit("stale paper assets")
         for path, content in written:
             name = path.relative_to(REPO).as_posix() if path.is_relative_to(REPO) else str(path)
             if not path.is_file():
@@ -3319,6 +3385,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     for path, content in written:
         with atomic_output_file(path) as temporary:
             temporary.write_text(content, encoding="utf-8")
+    site_assets.write_assets(site, assets)
     # At the site's root, not beside the page: the overview links these files by name,
     # as it did before the papers moved under `papers/`.
     for asset in COMPOSITE_ASSETS:

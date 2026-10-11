@@ -6,13 +6,20 @@
 interface SiteAtlasParts {
   block: HTMLElement;
   cells: HTMLElement;
-  tabs: HTMLElement;
+  tabs: HTMLElement | null;
   sizes: HTMLElement | null;
+  /** Keep view/size state local; geometry and FLIP remain shared with the dedicated Atlas. */
+  scoped?: boolean;
+  /** Complete the visible preview with freshly measured capacity, before layout writes. */
+  beforeArrange?: (capacity: number) => void;
+  scales?: HTMLElement | null;
 }
 
 /** A mounted block's two acts: arrange the triangle for the width, and change the
  * layout with every tile moved from where it was to where it then is. */
 interface SiteAtlasViews {
+  /** Font readiness captured during the initial layout read phase. */
+  fontsReady: Promise<FontFaceSet>;
   arrange(): void;
   change(mutate: () => void): void;
 }

@@ -434,7 +434,7 @@ def n11_report_without_parser_identity(case: Mapping[str, Any], lane: str) -> bo
         case.get("reported_status") == "proved"
         and bound.get("value") == "3.87708359002281"
         and bound.get("exact_form") is None
-        and bound.get("source_key") == "[Queuingtheorydotcom n11 optimality 2026]"
+        and bound.get("source_key") == "[Ahmed n11 optimality 2026]"
         and "E-n011-global-optimality-report" in bound.get("evidence", [])
     )
 

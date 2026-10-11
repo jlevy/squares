@@ -7,6 +7,15 @@ interface SquaresMathLoadControl {
   released: boolean;
   release(): void;
   nativeLoad: FontFaceSet["load"];
+  timing: {
+    started: number;
+    firstFontCall: number | null;
+    firstHeldLoad: number | null;
+    domContentLoaded: number | null;
+    earlyEventsStarted: number | null;
+    earlyEventsCompleted: number | null;
+    released: number | null;
+  };
 }
 
 /** `first_paint`: what the frame sampler has seen. */

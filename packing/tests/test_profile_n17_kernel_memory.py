@@ -7,6 +7,8 @@ import json
 import time
 from pathlib import Path
 
+import pytest
+
 from benchmarks import profile_n17_kernel_memory as profiler
 from devtools import check_n17_subpattern as tool
 from devtools import verify_n17_kernel_certificate as kernel_verifier
@@ -41,7 +43,10 @@ def test_the_profiler_marks_each_step_of_either_checker(tmp_path: Path) -> None:
     assert saved["status"] == "PASS_SAVED_CLOSED"
     assert saved["node_sha256"] == tool.content_sha256(production.node)
     assert [step["step"] for step in recorder.steps] == list(range(count))
-    assert all(step["rss_mb"] > 0 for step in recorder.steps)
+    if profiler.sys.platform == "darwin" or Path("/proc/self/status").is_file():
+        assert all(step["rss_mb"] > 0 for step in recorder.steps)
+    else:
+        assert all(step["rss_mb"] == -1 for step in recorder.steps)
     cells = tmp_path / "cells.json"
     document = {
         "U": "3",
@@ -77,4 +82,76 @@ def test_the_profiler_marks_production_the_save_and_the_check(tmp_path: Path) ->
     count = verdict["steps_checked"]
     assert phases == ["produce"] * count + ["check"] * count
     report = recorder.report()
-    assert report["peak_rss_mb"] >= report["peak_in_check_mb"] > 0
+    # Current RSS and resettable high-water marks are separate capabilities.
+    if profiler.sys.platform == "darwin":
+        assert report["peak_rss_mb"] > 0
+        assert report["max_check_step_rss_mb"] > 0
+    elif Path("/proc/self/status").is_file():
+        assert report["peak_rss_mb"] >= report["max_check_step_rss_mb"] > 0
+    else:
+        assert report["peak_rss_mb"] == report["max_check_step_rss_mb"] == -1
+    if recorder.peak_was_reset:
+        assert report["peak_rss_mb"] >= report["peak_in_check_mb"] > 0
+    else:
+        assert report["peak_in_check_mb"] is None
+
+
+@pytest.mark.parametrize("reset", [False, True])
+def test_phase_peak_requires_a_successful_kernel_reset(
+    monkeypatch: pytest.MonkeyPatch, *, reset: bool
+) -> None:
+    peaks = iter([300, 120 if reset else 310])
+    monkeypatch.setattr(
+        profiler, "status_mb", lambda field: next(peaks) if field == "VmHWM" else 90
+    )
+    monkeypatch.setattr(profiler, "reset_peak", lambda: reset)
+    recorder = profiler.Recorder(None)
+    recorder.step("check", 0, 16)
+    report = recorder.report()
+    assert report["peak_before_check_mb"] == 300
+    assert report["peak_rss_mb"] == (300 if reset else 310)
+    assert report["max_check_step_rss_mb"] == 90
+    assert report["peak_in_check_mb"] == (120 if reset else None)
+
+
+def test_marks_use_current_memory_and_do_not_substitute_a_lifetime_peak(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(profiler, "current_memory_bytes", lambda: 12 * 1024 * 1024)
+    monkeypatch.setattr(profiler, "peak_memory_bytes", lambda: 90 * 1024 * 1024)
+    monkeypatch.setattr(profiler.sys, "platform", "darwin")
+    assert profiler.status_mb("VmRSS") == 12
+    assert profiler.status_mb("VmHWM") == 90
+
+    def unavailable() -> int:
+        raise OSError("native current memory unavailable")
+
+    monkeypatch.setattr(profiler, "current_memory_bytes", unavailable)
+    with pytest.raises(OSError, match="native current memory unavailable"):
+        _ = profiler.Recorder(None).sample()
+
+
+@pytest.mark.parametrize(
+    ("rss_mb", "high_water_mb", "can_reset"),
+    [(16, 32, True), (16, 32, False), (-1, -1, False)],
+    ids=["resettable", "read-only", "unavailable"],
+)
+def test_memory_report_distinguishes_kernel_capabilities(
+    monkeypatch: pytest.MonkeyPatch,
+    rss_mb: int,
+    high_water_mb: int,
+    *,
+    can_reset: bool,
+) -> None:
+    """An unavailable or unresettable measurement cannot become a measured zero."""
+    readings = {"VmRSS": rss_mb, "VmHWM": high_water_mb}
+    monkeypatch.setattr(profiler, "status_mb", readings.__getitem__)
+    monkeypatch.setattr(profiler, "reset_peak", lambda: can_reset)
+    recorder = profiler.Recorder(None)
+    recorder.step("check", 0, 1)
+    report = recorder.report()
+    assert recorder.steps[0]["rss_mb"] == rss_mb
+    assert report["peak_rss_mb"] == high_water_mb
+    assert report["peak_before_check_mb"] == high_water_mb
+    assert report["peak_in_check_mb"] == (high_water_mb if can_reset else None)
+    assert report["max_check_step_rss_mb"] == rss_mb

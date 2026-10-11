@@ -1,0 +1,23 @@
+usage: python3 -m devtools.pilot_n17_capture [-h] [--system {n17,n11}]
+                                             [--cap {capture,exclusion}]
+                                             [--bins BINS]
+                                             [--max-rounds MAX_ROUNDS]
+                                             [--max-live MAX_LIVE]
+                                             [--max-live-for CELL=N]
+                                             [--min-width-log2 MIN_WIDTH_LOG2]
+                                             [--hull-limit HULL_LIMIT]
+                                             [--core {octagon,envelope}]
+                                             [--rounds-after-start ROUNDS_AFTER_START]
+                                             [--max-seconds MAX_SECONDS]
+                                             [--max-memory-mib MAX_MEMORY_MIB]
+                                             [--replay-share REPLAY_SHARE]
+                                             [--seed-grid SEED_GRID]
+                                             [--box BOX]
+                                             [--checkpoints CHECKPOINTS]
+                                             [--resume RESUME]
+                                             [--save-objects SAVE_OBJECTS]
+                                             [--output OUTPUT]
+python3 -m devtools.pilot_n17_capture: error: unrecognized arguments: --partial campaign/series/series-000-smoke-and-calibration/results/exp-265-n11-first-round-control/partial.json
+real 0.73
+user 0.59
+sys 0.12

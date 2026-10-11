@@ -347,6 +347,23 @@ def test_the_data_commit_is_the_last_one_that_changed_the_data(
     assert data_version(repo) == f"{PUBLICATION_VERSION}-{data[:DATA_REVISION_LENGTH]}"
 
 
+def test_dated_pdf_exports_do_not_move_the_data_revision(history: tuple[Path, str]) -> None:
+    repo, data = history
+    for name in (
+        "known-best-1-100.pdf",
+        "known-best-1-324.pdf",
+        "square-packings-100-20261008.pdf",
+        "square-packings-324-20261008.pdf",
+        "square-packings-324-20261009.pdf",
+    ):
+        path = f"packing/atlas/known-best/{name}"
+        _commit(repo, path, "generated PDF receipt\n")
+        assert path not in _git(repo, "ls-files", "--", *data_pathspec()).splitlines()
+        assert data_revision(repo) == data
+    changed = _commit(repo, "packing/atlas/known-best/manifest.json", "new evidence\n")
+    assert data_revision(repo) == changed
+
+
 def test_a_merge_keeps_the_data_commit_its_branch_pinned(history: tuple[Path, str]) -> None:
     """Rule 3's claim about merge commits, held here rather than asserted in prose.
 

@@ -1,0 +1,74 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "registered_at": "2026-10-08T01:41:10.559923+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch",
+  "target_unrun": true,
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_one_round_owned_domain_propagation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_one_round_owned_domain_propagation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/replay.json"
+      ]
+    }
+  ],
+  "primary_criterion": "Reuse accepted296 full collective proof and accepted299 uniform strictQ0 transfer at h=2^-23 with exact six-role byte custody. Freshly reconstruct all992 prior collective decisions once through transfer.check; preserve original1056/inherited17 endpoint premise and old25/64 baseline without recounting it. Simultaneously recover all16 foreign groups from surviving domains with fixedowner0Q0; at most one self-excluded full992 simultaneous closed-union pass. Primary STRICT additional exacthalf-angle parameter union loss for any owner or complete checked shared strictpoint/ownercover-empty contradiction. Full separate fresh process matches complete payload and custody. No feedback, childsplit, oldpoint footprint transfer, parent/root replay, globalcapture or census claim. Resource/refusal incomplete is not a negative verdict.",
+  "budget": "180s construction+180s fresh; outerTERM360/KILL370; sampled4GiB perliveprocess; unchanged prior/newcollective and2Mprechargedintersection caps. Full uniformtransfer64quadratics plusall992 prior once perphase; no second fullprior check.",
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "360",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/phase-execution.json"
+  ]
+}

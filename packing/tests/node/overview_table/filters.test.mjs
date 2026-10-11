@@ -188,11 +188,16 @@ function page({ search = "", hash = "", age = "", hide = false, today = "2026-10
       decodeURIComponent,
       Date: clock(today),
       location,
-      document: { readyState: "complete", querySelectorAll: () => [table] },
+      document: {
+        readyState: "complete",
+        querySelector: () => null,
+        querySelectorAll: () => [table],
+      },
       window: {
         /** @param {string} type @param {() => void} listener */
         addEventListener: (type, listener) => listeners[type]?.push(listener),
       },
+      HTMLAnchorElement: Label,
       HTMLSelectElement: Select,
       HTMLInputElement: Input,
       HTMLTableElement: Table,
