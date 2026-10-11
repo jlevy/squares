@@ -5,13 +5,15 @@ title: Publish the site and prose cleanup PR
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 delegate: codex@spud10
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m4pgqrb8qcryda6nxbbhskfy
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:46:46.143Z
-updated_at: 2026-10-11T21:47:09.796Z
+updated_at: 2026-10-11T22:18:35.751Z
 started_at: 2026-10-11T21:47:09.795Z
 ---
