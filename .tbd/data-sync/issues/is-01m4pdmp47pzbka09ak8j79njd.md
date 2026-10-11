@@ -5,13 +5,13 @@ title: Repair macOS font-shift and native radical browser controls
 kind: bug
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - browser
   - testing
 dependencies: []
 created_at: 2026-10-11T21:24:29.446Z
-updated_at: 2026-10-11T21:24:29.446Z
+updated_at: 2026-10-11T21:29:19.187Z
 ---
 Three browser rendering checks fail on the unchanged baseline under the same macOS environment as the 2026-10-11 full checkpoint. They predate the site/prose cleanup. Related checkpoint-environment investigation: think-bbug.
 
@@ -37,3 +37,7 @@ Retained local evidence, all under /Volumes/spud-ext1/agent-scratch/squares-site
 - browser-baseline-evidence/pytest-setup-error.log: earlier setup-only attempt lacked the KPress instance generator; it is not part of the regression comparison. The baseline was populated from the exact pinned local KPress Git archive before both completed runs.
 
 Investigate the native radical paint differences between Chrome 151 and 152 and the unadjusted-fallback negative control's platform assumptions. Preserve the native hook/overbar paint checks and the production CLS budget. Make the negative controls demonstrate the failures they claim to catch; do not weaken thresholds or discard paint checks merely to make these runs pass. Validate any repair against both browser versions and the positive and deliberately damaged controls.
+
+## Notes
+
+Final combined browser suite after the cleanup: 414 passed, 6 skipped, and exactly the three baseline font-control failures, in 187.29 seconds. Supported native allocation: --jobs 4 --inner-jobs 2. Full output: external task scratch layout-parallel-artifacts/command-2afcfe14e0e941c182af0d3278d4d68f.log. No remaining layout failures.
