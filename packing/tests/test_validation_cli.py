@@ -5452,6 +5452,7 @@ def test_push_prerequisites_keep_scientific_policy_and_browser_coverage() -> Non
     mixed = validate.select_for_paths(list(inputs), prerequisites)
     assert set(inputs.values()) <= {step.name for step in mixed.steps}
 
+
 def test_compressed_generated_inputs_select_the_same_required_checks() -> None:
     names = {step.name: step for step in validate.STEPS}
     for name in (
