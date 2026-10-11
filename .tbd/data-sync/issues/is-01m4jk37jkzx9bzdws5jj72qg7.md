@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-10: eight new issues, unread replies and comments, f
 kind: epic
 status: in_progress
 priority: 1
-version: 37
+version: 38
 delegate: claude-code@vm
 labels:
   - result-import
@@ -47,7 +47,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:42:51.218Z
-updated_at: 2026-10-11T04:31:25.293Z
+updated_at: 2026-10-11T04:47:05.590Z
 started_at: 2026-10-10T09:49:24.452Z
 ---
 W1 intake pass run 2026-10-10 on branch claude/determined-rubin-yjfy2a by packing/campaign/result-import.md, section Running an Intake Pass. Owns every item make intake listed as needing an owner on 2026-10-10 (sweep report: 32 unowned items after tbd sync). Children own each import, the ledger bookkeeping and the watched-repository reads. Never merge, never post on an issue without the owner's word, never start a CPU-hour replay without an owner budget.
@@ -77,3 +77,5 @@ Branch claude/determined-rubin-yjfy2a, PR https://github.com/jlevy/squares/pull/
 - Owner decisions: the wand125 confirmations (think-r333, think-i85v, think-nd7g) have a budget but wait for the regularization stacked on this PR (draft PR #497, stack #498, epic think-cdud); stage 7 replies stay drafts for the owner.
 - #494 and #495 arrived after the pass and are owned by think-lkbe and think-nmfl. The network sweep was refused in this session; the offline sweep and check_requests --github found nothing else unowned.
 Next: merge PR #487 once the deep gate is green (gh stack merge 487 --yes --merge), refresh the stage 7 drafts from main in the answer beads, verify the deployed site, then the regularization PR.
+
+2026-10-11 04:46Z: PR #487 merged into main as c6bf2d46f (gh stack merge 487 --merge), after hosted Packing validation, Certificate page and the deep-gate checkpoint all passed at a43de5332. The ids T-128 to T-146 are final. Draft PR #497 (regularization) now targets main.
