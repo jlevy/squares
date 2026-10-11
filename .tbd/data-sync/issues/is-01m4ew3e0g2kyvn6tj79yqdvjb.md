@@ -5,7 +5,7 @@ title: Resolve catalogue review findings with lossless storage and bounded publi
 kind: bug
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -13,17 +13,17 @@ parent_id: is-01m4ekeq41zfgtf5dp8r462n05
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:03:17.263Z
-updated_at: 2026-10-10T23:16:18.966Z
+updated_at: 2026-10-11T00:04:08.956Z
 started_at: 2026-10-08T23:04:31.194Z
 ---
 Resolve PR403 A1/B1/C1/D1/D2 source-pin writing, linear isolation, full-precision interval serialization, foundation documentation and native storage findings; complete PR435 original C1 limits using maintained linked assets. Final reviewed parent0f60/child5abc preserve current coefficients, source custody, selected inputs and all8protected replay leaves. All HTML keep2MB and all inline scripts4096B; no publication waiver remains. UpstreamPR474 raises the producer to200MiB; dated192MiB receipts are preserved. Root owns Git/PR publication; final required/full hosted qualification and marked dispositions remain pending. Audit is selected-roster evidence, not all transitive completeness.
 
 ## Notes
 
-# Polynomial refresh checkpoint at 2026-10-10T23:12:37Z
+# Polynomial refresh qualified checkpoint at 2026-10-10T23:46:43Z
 
-This slice remains ongoing from `2026-10-10T17:15:28Z`: 357.1 minutes elapsed wall as of
-2026-10-10T23:12:37Z. The prior qualified slice used 141.3 minutes separately.
+This slice remains ongoing from `2026-10-10T17:15:28Z`: 391.2 minutes elapsed wall as of
+2026-10-10T23:46:43Z. The prior qualified slice used 141.3 minutes separately.
 Wall is not CPU time.
 No scientific campaign ran.
 
@@ -33,16 +33,27 @@ Main `3be3285cff654c6667dcdea88e9d034b550eee02`. Qualified published P
 `e5892db72ecc9a79ea09ddfb2d553a2ab806db3e` / source
 `0aa5724da69d2d11a02b7464e20623da363d5054`. Clean PUBLISHED C
 `7fd2074cba0dcfa281c01e7d4de2e7fce26ea12f` / source
-`98cd928087144aaff825ce5a4f8955cd55e46096`. Official submit 22:56:11Z; new full
-[38093278580](https://github.com/jlevy/squares/actions/runs/38093278580) dispatched
-22:56:45Z, **PENDING**. Integrated 3be; remote 8fc98341411ecf22bd045cef96ca6fe0946a615e
-observed 22:55Z is unmerged here (PR492 typography only, no record changes).
-cf639 is the prior negative checkpoint.
+`98cd928087144aaff825ce5a4f8955cd55e46096`. Official submit 22:56:11Z; both exact heads
+qualified 23:43:15Z: `final7fd-final-qualification-summary.json`. Parent
+[FULL 38088753256](https://github.com/jlevy/squares/actions/runs/38088753256) reused at
+unchanged e589; child
+[FULL 38093278580](https://github.com/jlevy/squares/actions/runs/38093278580)
+SUCCEEDED/watch 0, each 11/11 prerequisites plus aggregate/macOS. Fresh ALL403
+23:41:58.176–59.946Z exit 0/snapshot 0, 31 PASS/26 SKIP; ALL435 23:40:40.858–42.546Z
+exit 0/snapshot 0, 32 PASS/26 SKIP. Heads stable before/after.
+Target passed, JUnit combined 6.212s includes setup/call/teardown; no exact call
+retained or subtraction.
+`child-7fd-final-target-timing-functional-evidence.json`. New command 2478.83/3600s band
+reported/non-enforced (4cpu/jobs1/inner2 nonreference); job 2587/2400s reporting-only
+advisory, critical 2589/3430. Owner 0atx IN_PROGRESS/ no delegate; no
+all-budgets-met/performance-cause claim.
+Local edit/broad push NOT RUN, no waiver.
+Earlier cf639 failure remains dated.
 
-Parent [FULL 38088753256](https://github.com/jlevy/squares/actions/runs/38088753256)
-SUCCEEDED/watch 0: all 11 prerequisites, aggregate and macOS. Literal ALL403 exit 0/
-snapshot 0, stable e589. Both repaired tests passed; retained JUnit includes setup, not
-exact calls.
+Final fetch 23:43:23Z observes unchanged 8fc98341411ecf22bd045cef96ca6fe0946a615e:
+`final7fd-origin-main-refresh-observation.json`. Integrated cutoff 3be remains; four
+PR492 typography-only commits/24 paths contain no scientific/frontier changes.
+Normal merge integration pending; no source/head change.
 
 Child full [38088757818](https://github.com/jlevy/squares/actions/runs/38088757818)
 **FAILED**, watch 1, at published cf639. Literal ALL435 22:30:41.330–42.999Z exited
@@ -50,15 +61,10 @@ Child full [38088757818](https://github.com/jlevy/squares/actions/runs/380887578
 `hosted-38088757818-final.json` / `child-cf639cfe-pr435-final-all-checks-command.json`.
 Sole failure: overview forwarder call 12.44s wall/12.34s CPU exceeded enforced 12s. All
 functional shards passed; exact counts remain in the receipt.
-Ten other prerequisites/Mac passed; aggregate failed.
 `child-cf639-full-negative-timing-functional-evidence.json` retains exact outcomes.
-New 7fd automatic
-[Packing 38093246298](https://github.com/jlevy/squares/actions/runs/38093246298)/
-[Pages 38093246274](https://github.com/jlevy/squares/actions/runs/38093246274)
-SUCCEEDED/watch 0: `child-7fd-automatic-final-receipt.json`. Full 38093278580 remains
-pending. Full 2484.56/3600s was reported/non-enforced on nonreference 4cpu/jobs1/inner2;
-job 2603/2400s reporting-only advisory, critical path 2725/3430s. Owner 0atx
-IN_PROGRESS/no delegate; no host/test-cause attribution:
+The earlier cf639 full 2484.56/3600s was reported/non-enforced on nonreference
+4cpu/jobs1/inner2; job 2603/2400s reporting-only advisory, critical path 2725/3430s.
+Owner 0atx IN_PROGRESS/no delegate; no host/test-cause attribution:
 `child-cf639-full-negative-timing-functional-evidence.json`.
 
 The new fixture validates 324 cases once in setup; all 15 assertion ASTs/nine real
@@ -68,7 +74,8 @@ controls 205.74s, target 9.28s/setup 2.22s; other calls 18.72/17.56s, not all-ca
 evidence. Final Ruff/format/types 0, tested/formatted AST bridge:
 `child-cf639-overview-reuse-local-results.json` /
 `child-cf639-overview-reuse-formatted-lint-types.json`. No production/cap/skip change.
-New 7fd full/ALL and 14 reply URLs/end-wall remain **PENDING**; edit NOT RUN.
+Current full/ALL passed; all 14 replies posted/readback.
+Edit NOT RUN; final closing wall will be recorded separately after metadata publication.
 
 New 7fd edit and broad local --push have **NOT RUN**, paused for disk/clone risk;
 external ~300 MiB at 22:56Z is a dated shared observation.
@@ -129,8 +136,8 @@ Earlier 15 audited copies/~4.26 GiB remain dated.
 Confirmed two more removed 23:08:59Z:
 `parent60cf-two-source-copy-permanent-cleanup-confirmed.json`; each 7,058 physical/index
 matches, 41 link targets preserved, 0 unique diagnostics.
-Corrected unborn-snapshot guard followed refusal before deletion.
-Total 17: 5,184,131,072 allocated/~4.83 GiB, 4,642,243,816 apparent bytes.
+No verified deletion candidates remain; heavy local gates remain NOT RUN. Total 17:
+5,184,131,072 allocated/~4.83 GiB, 4,642,243,816 apparent bytes.
 Same four byte-identical diagnostics 14,668B each/58,672B total preserved, not distinct
 scientific inputs; primary untracked/original sources/ cache
 fixtures/parents/logs/symlink targets/other keep decisions unchanged.
@@ -140,13 +147,37 @@ Prior 15 receipts/readback remain; cleanup owner jekl:
 `older20261009-source-copy-permanent-cleanup.json`/
 `olderbase-source-copy-permanent-cleanup.json`.
 
+Review resweep 23:41:39–46Z: no changed findings/zero inline comments or threads;
+`review-final7fd-pre-disposition-20261010T234139Z-summary.json`. All 14 actual
+dispositions posted/exact-readback 23:52:10.761Z; final heads OPEN/unmerged, no landing:
+`disposition-posting-final7fd-receipt.json`.
+
+PR403: [A](https://github.com/jlevy/squares/pull/403#issuecomment-6103481669),
+[B](https://github.com/jlevy/squares/pull/403#issuecomment-6103481979),
+[C](https://github.com/jlevy/squares/pull/403#issuecomment-6103482302),
+[D](https://github.com/jlevy/squares/pull/403#issuecomment-6103482642),
+[E](https://github.com/jlevy/squares/pull/403#issuecomment-6103483277),
+[F](https://github.com/jlevy/squares/pull/403#issuecomment-6103483599),
+[G](https://github.com/jlevy/squares/pull/403#issuecomment-6103483917),
+[H](https://github.com/jlevy/squares/pull/403#issuecomment-6103484202),
+[I](https://github.com/jlevy/squares/pull/403#issuecomment-6103484565). PR435:
+[A](https://github.com/jlevy/squares/pull/435#issuecomment-6103485354),
+[B](https://github.com/jlevy/squares/pull/435#issuecomment-6103485651),
+[C](https://github.com/jlevy/squares/pull/435#issuecomment-6103484915),
+[D](https://github.com/jlevy/squares/pull/435#issuecomment-6103486444),
+[E](https://github.com/jlevy/squares/pull/435#issuecomment-6103486777).
+
+Fresh six-bead claim 23:50:59Z preserves protected statuses/delegates/history:
+`beads7fd-qualified-after-claim.json`. Actual final metadata publication/end-wall will
+be recorded separately.
+
 Keep jygq/wuol/ja78/z3qh/okxn/wiu3 IN_PROGRESS until root records scoped dispositions.
 Preserve exact tails after `polynomial-refresh-prior-notes` and delegates:
 jygq/wuol/wiu3 `codex-polynomial-resume-01a11d93`; ja78/z3qh `codex@spud10.local`; okxn
 `claude-code@spud10.local`. Engineering closes no scientific work.
-Owner audit: `remaining-science-owner-status-final3be.json`. OPEN: numeric
-je8y/phh8/1blg; Daniel adoption kkj2; Couzo adoption lhtz; n=83 ordinal chsu; ideal
-68/105/292 prerequisites 056g/gl59/w622; W7 (s6np)/next bounded n=102 (ohhz).
+22 owner reads: `remaining-owner-status-final7fd.json`. OPEN: numeric je8y/phh8/1blg;
+Daniel adoption kkj2; Couzo adoption lhtz; n=83 ordinal chsu; ideal 68/105/292
+prerequisites 056g/gl59/w622; W7 (s6np)/next bounded n=102 (ohhz).
 IN_PROGRESS: import/reply iyij; custody 0mlq; reported 106/152/177 geometry/Lean #419
 (8sm2); Rehwaldt n=68 (nv5o); snapshot t1lk; startup jygq/5jr5/rxyl; broader W6 (eu89).
 Acquisition 88r0 CLOSED only for acquisition.
