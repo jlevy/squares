@@ -5,13 +5,13 @@ title: "Import Evan Daniel: exact-optimum certificates at 15 counts below the re
 kind: task
 status: open
 priority: 2
-version: 3
+version: 4
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 created_at: 2026-10-10T20:39:16.846Z
-updated_at: 2026-10-11T03:04:36.011Z
+updated_at: 2026-10-11T03:06:04.270Z
 ---
 Evan Daniel's display-regularized record lists (evand/square-packing `search/regularize/`, added 346c6ed on 2026-10-10 18:05Z, lists refreshed at 122d0ba666884b176b2e442056c4fd1afe5a634a; head baf9143 at 20:31Z) hold one exact rational certificate per count for n = 1..324 (`lists/certs/n-NNN.cert.gz` plus 50-digit JSON). Lane L26 of the 2026-10-10 pass parsed all 329 certificates with `devtools.evand_exact_certificates.parse` and compared each exactly with every value the register holds (case records, source-coverage overrides, superseded and beyond-horizon rows, packet claim records, results.yaml claims). At 15 counts the certificate is strictly below the register's least value:
 
@@ -63,8 +63,8 @@ at 125b0340f.
   at 70, Couzo, Ellsworth, Cantrell); intake-watch needs a read at ea1a2f2.
 
 2026-10-11, records lane (stage 4 exit, done on claude/determined-rubin-yjfy2a, not
-pushed): commits 3ad82d5b6 "register: typed regularizations, and T-146's stage 4 exit at
-V3/C3" and 5356edce9 "release: re-pin DATA_REVISION to 3ad82d5b".
+pushed): commits 8e5922560 "register: typed regularizations, and T-146's stage 4 exit at
+V3/C3" and aeb8a7219 "release: re-pin DATA_REVISION to 8e592256".
 
 - The stage 4 review is committed:
   docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md (accepted for
