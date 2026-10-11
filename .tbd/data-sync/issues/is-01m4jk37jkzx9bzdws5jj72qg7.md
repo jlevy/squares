@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-10: eight new issues, unread replies and comments, f
 kind: epic
 status: in_progress
 priority: 1
-version: 36
+version: 37
 delegate: claude-code@vm
 labels:
   - result-import
@@ -47,7 +47,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:42:51.218Z
-updated_at: 2026-10-10T22:08:58.681Z
+updated_at: 2026-10-11T04:31:25.293Z
 started_at: 2026-10-10T09:49:24.452Z
 ---
 W1 intake pass run 2026-10-10 on branch claude/determined-rubin-yjfy2a by packing/campaign/result-import.md, section Running an Intake Pass. Owns every item make intake listed as needing an owner on 2026-10-10 (sweep report: 32 unowned items after tbd sync). Children own each import, the ledger bookkeeping and the watched-repository reads. Never merge, never post on an issue without the owner's word, never start a CPU-hour replay without an owner budget.
@@ -65,3 +65,15 @@ Next, in order:
 4. Follow-up beads: think-ri84, think-ffh8, think-h1ra.
 
 Owner decisions pending: CPU-hour replays (n28+n30 about 7.8 CPU-h, n122 11-23 CPU-h, #446 s(29)); think-sk6b hosted release; ry-xu credit name (think-ijv2); Couzo's uncited 338/340 (RL-9); closing issues before adoption; credit at 70 for T-146; page-budget exceptions vs PR #462; certificate-citation deferrals (ad5fff90d).
+
+## Continuation, 2026-10-11 (session_012VZZQseec5xK8Zu4ah5BjG)
+
+Branch claude/determined-rubin-yjfy2a, PR https://github.com/jlevy/squares/pull/487 (ready for review, label deep-gate), head a43de5332. Done on this branch today:
+- main merged in (3ec95b418), resolving PR #462's renamed pages; the results page's budget is 950,000 bytes at 146 results; think-9dhb reparented so the bead tree holds.
+- The senior engineering review (no critical or high; one medium, four low) fixed with tests (0c0d82e9d).
+- Owner requests: optional unfinished_confirmations with estimated CPU-hours on register entries (75da38c2f; about 141 CPU-hours priced across five entries); typed per-count regularizations on register entries (8e5922560, think-cgdv, epic think-cdud).
+- T-146's stage 4 (think-8k76): review accepted for finite feasibility, E-evand-regularized-exact-feasibility, V3/C3; credit at 70 to Ryan Xu alone (owner).
+- The final mathematical review in three separately prompted lanes (lower bounds, upper bounds, asymptotic bounds and grading): every result accepted, 18 non-blocking findings applied (3938683bd, a43de5332); F1 and F2 are the second accepted adversarial review of T-133, T-145 and the twelve upper-bound entries.
+- Owner decisions: the wand125 confirmations (think-r333, think-i85v, think-nd7g) have a budget but wait for the regularization stacked on this PR (draft PR #497, stack #498, epic think-cdud); stage 7 replies stay drafts for the owner.
+- #494 and #495 arrived after the pass and are owned by think-lkbe and think-nmfl. The network sweep was refused in this session; the offline sweep and check_requests --github found nothing else unowned.
+Next: merge PR #487 once the deep gate is green (gh stack merge 487 --yes --merge), refresh the stage 7 drafts from main in the answer beads, verify the deployed site, then the regularization PR.
