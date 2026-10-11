@@ -9,7 +9,7 @@ Nothing expensive has started.
 The owner set a budget of about 23 to 35 CPU-hours for these four confirmations and
 asked that no long job start before #487 is validated, recorded and merged.
 This lane prepared the code, the packets and this plan, and proved each route end to end
-on one or two directions with about 4.5 CPU-minutes in all.
+on one or two directions, with about 4.5 CPU-minutes of smoke runs in all.
 
 **Workflow:** W2, stage 4 of the
 [result import process](../../../../packing/campaign/result-import.md#stage-4-validate),
@@ -24,7 +24,7 @@ for four entries registered at V0/C0 by #487
 | T-132 | $s(29) \ge 291/50$ | `mixed_n29_L582`, check2, 2,073 directions | sqverify-fast census and whole-net control | 4.3 to 5.5 |
 | T-142 | $s(28) \ge 2297/400$ | `mixed_n28_L57425`, check2, 2,073 directions | the same | 3.3 to 4.5 |
 | T-143 | $s(30) \ge 2357/400$ | `mixed_n30_L58925`, check2, 2,073 directions | the same | 4.5 to 6.1 |
-| T-144 | $s(122..126) \ge 563/50$ | `mixed_n122_L1126`, linear, 201 angles | T-080’s: `linear-replay` and `linear-control` | 11.2 to 14.6 |
+| T-144 | $s(n) \ge 563/50$, $n = 122$ to $126$ | `mixed_n122_L1126`, linear, 201 angles | T-080’s: `linear-replay` and `linear-control` | 11.2 to 14.6 |
 
 The lower figure of each range is the intake’s price from its eight-direction or
 two-angle sample; the upper is the same price at the CPU ratio of this lane’s smoke
@@ -91,21 +91,17 @@ this reading.
    This lane’s `control-sample` ran the 99/100 mutant at the axis of each certificate.
    The mutant was refused at all three, at a centre inside the domain, where its exact
    capture is below one.
-   The gaps were:
-
-| Certificate | Exact capture minus certified bound | Counted |
-| --- | --- | --- |
-| `mixed_n29_L582` | $5.2 \times 10^{-10}$ | yes |
-| `mixed_n28_L57425` | $2.15 \times 10^{-9}$ | no |
-| `mixed_n30_L58925` | $1.9 \times 10^{-10}$ | yes |
-
+   The exact capture sat above the certified bound by $5.2 \times 10^{-10}$ for n = 29
+   and $1.9 \times 10^{-10}$ for n = 30, both counted, and by $2.15 \times 10^{-9}$ for
+   n = 28, not counted.
    The n = 28 sweep’s certified bound is wider than the tolerance, so the whole-net
    control on `mixed_n28_L57425` will write `CONTROL_FAILED` after about 1.6 to 2.2
    CPU-hours, though the refusal itself is sound.
-   The interval sum of the vertex sweep grows with the number of events and with the
-   densities, and n = 28’s densest row is the heaviest of the three (eight times its
-   density is $4.9 \times 10^6$). Widening the tolerance, or deriving it from the
-   sweep’s own enclosure, changes control logic and needs a review first.
+   A likely cause, not yet checked against the crate, is that the vertex sweep’s
+   interval sum widens with the number of events and with the densities; n = 28’s
+   densest row is the heaviest of the three (eight times its density is
+   $4.9 \times 10^6$). Widening the tolerance, or deriving it from the sweep’s own
+   enclosure, changes control logic and needs a review first.
    The owner decides. Until then, run T-142’s census row, which this does not touch, and
    hold its control (the schedule places it last).
 
@@ -334,9 +330,9 @@ The smoke runs wrote to scratch space only, never to a census folder or a packet
 | `linear-replay n122 --range 37-37 --via release` | `RANGE_REPLAYED`: the asset and the bundle matched their pins, 810 files bound, the record returned | 74.3 | 73.6 |
 | `linear-control n122 --via release` | `CONTROLS_REFUSED` at angle 37 | about 124 |  |
 
-Two smoke runs used the samples’ own commands, which read the retained `.gz` candidate
-the census will read; the census itself was run only as `--check`, which found the three
-new cases unverified as expected.
+The `sample` and `control-sample` runs read the retained `.gz` candidates the census
+will read. The census itself ran only as `--check`, which found the three new cases and
+reported them unverified, as expected.
 The host’s load average was 3 to 7 on four cores while three other lanes ran.
 
 ## Open Questions for the Owner
