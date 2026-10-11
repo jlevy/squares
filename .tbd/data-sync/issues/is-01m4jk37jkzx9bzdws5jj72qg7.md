@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-10: eight new issues, unread replies and comments, f
 kind: epic
 status: in_progress
 priority: 1
-version: 38
+version: 39
 delegate: claude-code@vm
 labels:
   - result-import
@@ -47,7 +47,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:42:51.218Z
-updated_at: 2026-10-11T04:47:05.590Z
+updated_at: 2026-10-11T05:06:56.050Z
 started_at: 2026-10-10T09:49:24.452Z
 ---
 W1 intake pass run 2026-10-10 on branch claude/determined-rubin-yjfy2a by packing/campaign/result-import.md, section Running an Intake Pass. Owns every item make intake listed as needing an owner on 2026-10-10 (sweep report: 32 unowned items after tbd sync). Children own each import, the ledger bookkeeping and the watched-repository reads. Never merge, never post on an issue without the owner's word, never start a CPU-hour replay without an owner budget.
@@ -79,3 +79,52 @@ Branch claude/determined-rubin-yjfy2a, PR https://github.com/jlevy/squares/pull/
 Next: merge PR #487 once the deep gate is green (gh stack merge 487 --yes --merge), refresh the stage 7 drafts from main in the answer beads, verify the deployed site, then the regularization PR.
 
 2026-10-11 04:46Z: PR #487 merged into main as c6bf2d46f (gh stack merge 487 --merge), after hosted Packing validation, Certificate page and the deep-gate checkpoint all passed at a43de5332. The ids T-128 to T-146 are final. Draft PR #497 (regularization) now targets main.
+
+
+## Stage 5 after merge, and stage 7 drafts: post-merge lane, 2026-10-11
+
+Worktree of origin/main at c6bf2d46f50d05931f1b925ba94b36b81798e264 (detached, `.claude/worktrees/postmerge`), submodules initialised, `uv sync --frozen --all-extras --group dev` under Python 3.14.7. Nothing posted, edited or closed on GitHub; nothing pushed or committed; no tracked file edited.
+
+### Deployment
+
+- github-pages deployment 6991089138: ref main, sha c6bf2d46f50d05931f1b925ba94b36b81798e264, created 2026-10-11T04:51:18Z, state success at 04:51:30Z, environment_url https://jlevy.github.io/squares/. It is the latest main Pages deployment; the one before is 6989419254 at 6038af33c.
+- Built by workflow "Certificate page" run 38112665876 (push, attempt 1, success, 04:46:52Z to 04:55:44Z): publish job 114391772847, deploy job 114391955504 (04:51:21Z to 04:51:29Z), verify-deployment job 114391987920 (04:51:31Z to 04:55:44Z, success). Waited with a bounded loop (2-minute polls, 40-minute cap); completed at poll 4.
+- verify-deployment ran `uv run --frozen --group dev python -m devtools.check_published_site --site "https://jlevy.github.io/squares/" --commit "c6bf2d46f50d05931f1b925ba94b36b81798e264"`. Receipt: "4042 of 4042 checks passed": 4042 ok lines, 0 FAIL, 0 skip lines (the checker prints no skips).
+- Local run of the same checker from the worktree's packing/ (`uv run --frozen --all-extras --group dev python -m devtools.check_published_site --commit c6bf2d46f50d05931f1b925ba94b36b81798e264`): "4032 of 4034 checks passed", exit 1. The 2 FAIL lines are "the forwarders could not be visited" and "workbench startup failed", both "BrowserType.launch: Executable doesn't exist at /opt/pw-browsers/chromium_headless_shell-1234/...": the environment, not the site (the locked playwright wants headless shell 1234; this container has 1194), as on 10 October. No check was disabled and TLS was untouched. The 4032 ok lines are identical to CI's (sorted comm: no local-only line); CI's other 10 are the nine forwarder visits and "workbench API started with 323 pairs".
+- Packing validation run 38112665878 at the same commit: at 05:06Z `validate`, the exhaustive-1/2, deferred, regularized-views, screen and macos-portability jobs had passed; `slow-lane` and `exhaustive-3` were still running.
+
+### Per-entry site check, T-128 to T-146
+
+Fetched https://jlevy.github.io/squares/results.html (842,922 bytes, last-modified 2026-10-11T04:51:25Z, the deployment's build). For each row, `data-v/c/s/kind/status/n/date` and the credit cell were compared with `devtools.overview_data.load()` at c6bf2d46f, and each result/t-NNN.html's V, C and S chips with the register. All 19 rows and all 19 result pages match. No row carries a branch-only or provisional status, and `activity` is empty on all 19.
+
+| id | n | V/C/S | status | credit |
+| --- | --- | --- | --- | --- |
+| T-128 | 105, 108, 127, 131, 155, 180, 228, 306 | V3/C3/S3 | confirmed | Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel, Levy |
+| T-129 | 105, 130, 292 | V0/C0/S1 | recorded, superseded (cell: "by T-127 and others"; register: T-117, T-125, T-127) | Daniel after Couzo, Levy |
+| T-130 | 84, 86, 105, 175, 270 | V3/C3/S3 | confirmed | Couzo after Xu, Daniel, Ellsworth, Levy |
+| T-131 | 132 | V3/C3/S3 | confirmed | Daniel after Couzo, Chaoweeraprasit, Levy |
+| T-132 | 29 | V0/C0/S3 | recorded | wand125 after Tokoharu and Levy |
+| T-133 | 40 | V3/C3/S3 | confirmed, superseded by T-145 | Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi |
+| T-134 | 132, 237, 263, 267, 270, 303 | V3/C3/S3 | confirmed | Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth, Levy |
+| T-135 | 308 | V3/C3/S3 | confirmed | Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead |
+| T-136 | 131, 153, 154, 207, 209, 232, 236, 237, 259, 263, 269, 270, 292, 302, 303, 305, 307 | V3/C3/S3 | confirmed | Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba, Levy |
+| T-137 | 70 | V3/C3/S2 | confirmed | Deleeuw after Xu, Levy |
+| T-138 | 84, 86, 103, 105, 108, 127, 131, 132, 175, 180, 258, 267, 270, 302, 303, 306 | V3/C3/S3 | confirmed | Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo, Xu, Levy |
+| T-139 | 126 | V3/C3/S2 | confirmed | Daniel after Xu, Chaoweeraprasit |
+| T-140 | 132, 175, 209, 237, 270, 305 | V3/C3/S3 | confirmed | Couzo after Chaoweeraprasit, Mishapolk, Xu, Daniel, Ellsworth, Levy |
+| T-141 | 132, 308 | V3/C3/S3 | confirmed | Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Couzo, Levy |
+| T-142 | 28 | V0/C0/S3 | recorded | wand125 after Tokoharu and Levy |
+| T-143 | 30 | V0/C0/S3 | recorded | wand125 after Tokoharu and Levy |
+| T-144 | 122–126 | V0/C0/S3 | recorded | wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi |
+| T-145 | 40 | V3/C3/S3 | confirmed | Guzhou0806 after wand125, Tokoharu, Levy, Stromquist, Burns, Massaccesi |
+| T-146 | 70, 102, 103, 123, 129, 146, 153, 236, 258, 263, 269, 292, 295, 302, 303 | V3/C3/S2 | confirmed | Daniel after Xu, Chaoweeraprasit, Mishapolk, Levy |
+
+T-146: row V3/C3/S2 confirmed, current; result/t-146.html shows V3 and C3 chips and S2, and its Regularizations section lists all fifteen counts, each item's text (from 60 characters in) equal to the register view's `regularization_sentence`, `of` T-125 at 70, 102, 123, 129, 146, 295, T-138 at 103, 258 and T-136 at 153, 236, 263, 269, 292, 302, 303. The overview still lists wand125/square-packing as the canonical certificate and checker repository (#411), and the n = 40 bound 1340000/199529 is on the results page.
+
+Not checked in this lane: stage 5 step 4, the drawings (each changed case's main drawing and overview/regularized rendering against the selected source, desktop and mobile views). No case ceiling moved; n = 40's lower bound is the one case lane the pass moved.
+
+### Stage 7 drafts (from main at c6bf2d46f; not posted, owner: leave as drafts)
+
+`check_requests --report` lists 22 issues with a reply due. Each draft is in its answer bead under "Stage 7 draft from main at c6bf2d46f, 2026-10-11": #425 think-f3dl, #428 think-nv5o, #432 think-klm7, #438 think-l360, #446 think-ndvg, #451 think-edo8, #375 think-ybmt, #414 think-u1kq, #411 think-4y7u, #413 think-x4v4, #368 think-neei (closed bead; the issue is closed), #465 think-iyij, #470 think-jpre, #471 think-rd8u, #476 think-m8ck, #481 think-ac4h, #483 think-8m3u, #484 think-ar8g, #485 think-3oi5, #486 think-7lpw, #488 think-6uv7, #489 think-xm4h. Closeable per `--report`: #411, #425, #432, #438, #451, #465, #470, #471, #476, #481, #483, #484, #485, #486, #488, #489; not closeable: #375, #413, #414, #428, #446; #368 already closed.
+
+`check_requests --github` at c6bf2d46f: #494 and #495 not in the record (owned by think-lkbe and think-nmfl); unread comments on #419 (evand, 2026-10-11T02:25:18Z, Lean bindings for 258 counts and exact `a + b√d` upper bounds asked at 41 counts) and #413 (wand125, 2026-10-11T02:22:21Z, kernel certificates for rows 1, 2, 3, 15, 27 and 33, admission request #495).
