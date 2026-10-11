@@ -5,13 +5,13 @@ title: Re-enable shared-CI browser timing enforcement with controlled baseline e
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 assignee: jlevy
 labels: []
 dependencies: []
-parent_id: is-01m4ky07tt9a0s334a3cvzyfb3
+parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 created_at: 2026-10-10T22:20:54.298Z
-updated_at: 2026-10-10T22:20:54.298Z
+updated_at: 2026-10-11T01:49:52.214Z
 ---
 Scoped debt for PR #462 B1: longest native load task remained 300ms; LCP 4000ms and total blocking 600ms remain unchanged. Shared-runner timing is advisory only, while structural rendering guards remain blocking. Re-enable enforcement in ordinary CI after a dedicated controlled runner or repeated same-run fixed-baseline comparison defines a regression/noise envelope greater than measured variance; record runner/browser/protocol and baseline/noise evidence. Owner jlevy; no threshold increase or blind reruns.
