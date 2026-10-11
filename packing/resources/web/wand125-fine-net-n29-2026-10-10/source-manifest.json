@@ -76,7 +76,13 @@
   "license": {"project":"MIT; Copyright (c) 2026 wand125","project_notice":{"path":"problems/square-lower-bounds/LICENSE","bytes":1064,"git_blob":"bbfbff131ef8ccbba5ed8b8b395f2c457eb8922c","url":"https://github.com/wand125/square-packing/blob/22a23c8a99aa4e9616d596bc2f28555bacbee3dd/problems/square-lower-bounds/LICENSE","identical_to_446_packet_notice":true},"nested_verifier":"The same archive as the #446 packet's, with no licence notice of its own; its upstream and third-party redistribution rights remain unresolved."},
   "attribution": {"credit":"wand125 (commit author Hiroaki Hosono)","ai_assistance":"The source README says parts of the work were produced with AI assistance under human direction; the commit carries a Co-Authored-By trailer naming Claude Opus 5.5."},
   "custody": "The release asset was fetched at its pinned size and SHA-256, which equal the API digest, the release's SHA256SUMS line and the source's ASSET.json. Every pinned document's Git blob equals the commit's. The sealed inner bundle matches all 15 entries of its own files-sha256.json. This is source-byte custody, not a native proof outcome.",
-  "raw_bytes_in_git": false,
+  "raw_bytes_in_git": true,
+  "raw_bytes_retained": {
+    "since": "2026-10-11",
+    "by": "devtools.retain_wand125_release",
+    "files": ["square-packing-bounds/certificates/mixed_n29_L582/candidate.json.gz"],
+    "note": "The asset's candidate.json alone, under the MIT project notice, stored as deterministic gzip where the census reads it; the asset, its logs, its sealed bundle and the nested verifier archive stay outside Git."
+  },
   "raw_bytes_location": "The author's release asset, pinned here by size and SHA-256. This intake held a local copy in session scratch space only; no copy is hosted by this repository.",
   "author_code_executed": false
 }

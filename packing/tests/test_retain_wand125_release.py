@@ -227,6 +227,8 @@ def test_only_members_and_documents_the_manifest_pins_are_taken(tmp_path: Path) 
 
 #: Each packet retained on 11 October, with the certificates it retains.
 RETAINED = {
+    "wand125-fine-net-n29-2026-10-10": ("mixed_n29_L582",),
+    "wand125-fine-net-n28-n30-2026-10-10": ("mixed_n28_L57425", "mixed_n30_L58925"),
     "wand125-linear-n122-2026-10-10": ("mixed_n122_L1126",),
 }
 

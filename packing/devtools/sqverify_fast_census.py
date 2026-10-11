@@ -164,7 +164,14 @@ MIXED_PACKETS = (
     "wand125-mixed-bounds-finer-net-2026-10-05",
     "wand125-mixed-bounds-finer-net-2026-10-06",
     "wand125-mixed-bounds-check2-2026-10-06",
+    # The 10 October check2 certificates on the 1/5002 net, whose packets were written as
+    # authored facts and retain the candidate alone (`devtools.retain_wand125_release`).
+    "wand125-fine-net-n29-2026-10-10",
+    "wand125-fine-net-n28-n30-2026-10-10",
 )
+#: The source's checker for a check2 certificate: its copy of this repository's crate,
+#: changed to read a declared net. A replay of such a certificate here shares components.
+PROOF_NET_VERIFIER = "V-wand125-sqverify-proof-net"
 #: The standard net's direction count; a format M file may declare another.
 STANDARD_DIRECTIONS = 201
 CENSUS_ROOT = PROJECT / "benchmarks/measure-verifier"
@@ -674,6 +681,13 @@ def refusal_record(
     }
 
 
+#: How long the scaled mutant's sweep may run, in seconds of wall, unless `--sweep-timeout`
+#: says otherwise: about four times a 201-direction sweep at one thread on a loaded host.
+#: A 2,073-direction net costs ten times as much, and its sweep at one thread on a shared
+#: host can pass this; the timeout kills the run and loses it, so such a run sets more.
+SWEEP_TIMEOUT = 14400
+
+
 def scaled_sweep(
     binary: Path,
     raw: dict[str, Any],
@@ -683,6 +697,7 @@ def scaled_sweep(
     factor: Fraction,
     threads: int,
     premises: dict[str, Any],
+    timeout: float = SWEEP_TIMEOUT,
 ) -> dict[str, Any]:
     """The scaled mutant at every direction of its net, with `--confirm` (FC-1).
 
@@ -698,7 +713,7 @@ def scaled_sweep(
     argv = [str(binary.resolve()), "--candidate", str(mutant), "--n", str(n)]
     argv += ["--directions", "all", "--threads", str(threads), "--confirm"]
     start = time.monotonic()
-    result = subprocess.run(argv, capture_output=True, text=True, check=False, timeout=14400)
+    result = subprocess.run(argv, capture_output=True, text=True, check=False, timeout=timeout)
     lines = [json.loads(line) for line in result.stdout.splitlines() if line.startswith("{")]
     rows = sorted((line for line in lines if "r" in line), key=lambda row: int(row["r"]))
     summary = next(
@@ -784,6 +799,8 @@ def control(
     entry: dict[str, Any],
     out: Path | None = None,
     threads: int = 1,
+    *,
+    sweep_timeout: float = SWEEP_TIMEOUT,
 ) -> dict[str, Any]:
     """Negative controls on a verified certificate, at the threshold its census row was
     decided at. Format M (receipt kind v2): the original again and a near-threshold
@@ -841,6 +858,7 @@ def control(
             factor=CONTROL_SCALE,
             threads=threads,
             premises=premises,
+            timeout=sweep_timeout,
         )
         runs.append(
             {
@@ -1154,6 +1172,51 @@ ASSUMPTIONS = (
         " acquisition record pins, which mixed-fetch found identical to the proof bundle's."
     ),
 )
+#: The candidate assumption for a packet written as authored facts, whose
+#: `source-manifest.json` pins the release asset and its members (10 October onward).
+AUTHORED_CANDIDATE = (
+    "The candidate is the retained file whose decompressed SHA-256 the packet's source"
+    " manifest pins as a member of the release asset, the bytes the sealed check2 bundle's"
+    " candidate.json has (devtools.fine_net_followup premises)."
+)
+#: How a replay entry states the components it shares with a check2 certificate's checker.
+SHARED_COMPONENTS = (
+    "the sqverify_fast crate, all of it but the declared-net reader: the source's checker"
+    " sqverify-proof-net is this repository's crate with its own declared-net reader"
+)
+
+
+def authored_packet(case: Case) -> bool:
+    """Whether a case's packet was written as authored facts and hash references, with a
+    `source-manifest.json` in place of an acquisition record."""
+    return (WEB / case.packet / "source-manifest.json").is_file()
+
+
+def reported_entry(case: Case, register: dict[str, Any]) -> dict[str, Any]:
+    """The reported evidence entry a mixed certificate's replay entry stands beside.
+
+    It is the reported entry naming the retained candidate, as the packets of 6 October
+    and earlier register them. A packet written as authored facts registers its report
+    under a facts file of the packet instead, so there it is the one reported entry naming
+    a file of the case's packet whose scope holds the case's count.
+    """
+    certificate = str(case.candidate.relative_to(PROJECT))
+    reported = [item for item in register["evidence"] if item.get("assurance") == "reported"]
+    named = [item for item in reported if item.get("certificate") == certificate]
+    if not named:
+        folders = tuple(f"{root}resources/web/{case.packet}/" for root in ("", "packing/"))
+        named = [
+            item
+            for item in reported
+            if str(item.get("certificate", "")).startswith(folders)
+            and case.n in ((item.get("scope") or {}).get("n_values") or [])
+        ]
+    if len(named) != 1:
+        raise SystemExit(
+            f"{case.certificate}: {len(named)} reported entries name it or its packet at "
+            f"n = {case.n}; an evidence entry needs exactly one"
+        )
+    return named[0]
 
 
 def folded(key: str, text: str, indent: int = 4) -> list[str]:
@@ -1223,11 +1286,10 @@ def evidence_entry(
         return rectangle_evidence_entry(case, out, entry, audit_record=audit_record, date=date)
     register = safe_load(EVIDENCE.read_text(encoding="utf-8"))
     certificate = str(case.candidate.relative_to(PROJECT))
-    (report,) = (
-        item
-        for item in register["evidence"]
-        if item.get("assurance") == "reported" and item.get("certificate") == certificate
-    )
+    report = reported_entry(case, register)
+    # A check2 certificate was decided by the source's copy of this crate.
+    shared = PROOF_NET_VERIFIER in (report.get("verifiers") or [])
+    authored = authored_packet(case)
     premises = entry["premises"]
     built = str((entry.get("build") or {}).get("source_sha256", ""))
     reviewed = reviewed_source(entry)
@@ -1295,11 +1357,31 @@ def evidence_entry(
         if declared
         else f"the net of {directions} half-angles of step {premises['D']}"
     )
+    record = "source manifest" if authored else "acquisition record"
+    independence = (
+        "It re-implements the producer's check sharing its components: the source decided "
+        "this certificate with sqverify-proof-net, its copy of this crate changed to read a "
+        "declared net, so the two share the sqverify_fast crate, all of it but the "
+        "declared-net reader, and their agreement is not a second implementation. The "
+        "producer adapted this repository's code, not the reverse, so this replay is much "
+        "closer to a reproduction than the label alone says. This crate's declared-net "
+        "change was written without opening the source's (packing/sqverify_fast/"
+        "INDEPENDENCE.md, Declared Nets). It shares the theorem, the net, the core side, the "
+        "per-bin domain lemma and the threshold with it. Its node counts and bounds are its "
+        "own, not the certificate's records. "
+        if shared
+        else "It decides coverage independently of the source's checker: the crate was "
+        "written without opening it (packing/sqverify_fast/INDEPENDENCE.md) and shares no "
+        "code with it. It shares the theorem, the net, the core side, the per-bin domain "
+        "lemma and the threshold, so a defect in that mathematics would affect both: a "
+        "second implementation, not a second method. Its node counts and bounds are its "
+        "own, not the certificate's records. "
+    )
     limitations = (
         "sqverify-fast, this repository's clean-room measure verifier, decided the retained "
         f"candidate {case.certificate} at all {directions} net directions on {date}. The "
         f"receipts name the stored gzip file's SHA-256 {stored[:8]}..., which decompresses "
-        f"to the SHA-256 {pinned[:8]}... the packet's acquisition record pins "
+        f"to the SHA-256 {pinned[:8]}... the packet's {record} pins "
         "(devtools.retained_data check ties the two). Admission recomputed in exact "
         f"rationals n = {case.n}, L = {side}, the total mass {mass} < {case.n}, the core "
         f"side {premises['B']} with B(1 + D/(1 - D^2/4)) < 1 and {net}, from "
@@ -1318,12 +1400,7 @@ def evidence_entry(
         "on a shared "
         "4-core x86-64 Linux container under load. The build is rustc 1.98.0, release, "
         f"x86-64 Linux, source_sha256 {built[:8]}...: {reviewed.statement}. "
-        "It decides coverage independently of the source's checker: the crate was written "
-        "without opening it (packing/sqverify_fast/INDEPENDENCE.md) and shares no code with "
-        "it. It shares the theorem, the net, the core side, the per-bin domain lemma and the "
-        "threshold, so a defect in that mathematics would affect both: a second "
-        "implementation, not a second method. Its node counts and bounds are its own, not "
-        "the certificate's records. "
+        + independence
         + scaled_control_text(receipt["index"], runs["scaled-99-100"])
         + f"and every mass scaled by {near_factor(runs['near-threshold'])} so that the exact "
         "capture at the least-bound leaf's centre is "
@@ -1348,7 +1425,14 @@ def evidence_entry(
         "    assurance: verified",
         "    method: interval-certified",
         "    performed_by: repository",
-        "    relationship_to_generator: independent-implementation",
+        *(
+            [
+                "    relationship_to_generator: shared-components",
+                f'    shared_components: ["{SHARED_COMPONENTS}"]',
+            ]
+            if shared
+            else ["    relationship_to_generator: independent-implementation"]
+        ),
         "    origin: replayed-here",
         "    novelty: previously-published",
         f"    source_key: '{report['source_key']}'",
@@ -1393,7 +1477,8 @@ def evidence_entry(
             " which admission recomputes from the retained candidate."
         ),
         f"        - {net_assumption(premises)}",
-        *(f"        - {assumption}" for assumption in ASSUMPTIONS),
+        f"        - {ASSUMPTIONS[0]}",
+        f"        - {AUTHORED_CANDIDATE if authored else ASSUMPTIONS[1]}",
         f"      audit_record: {audit_record}",
         *folded("limitations", limitations),
         f"    source_reviewed: '{date}'",
@@ -1999,6 +2084,7 @@ def records_mode(args: argparse.Namespace, census: dict[str, Any], selected: lis
             census["cases"].get(case.certificate, {}),
             args.out,
             args.threads,
+            sweep_timeout=args.sweep_timeout,
         )
         target = args.out / case.packet / f"{case.certificate}.control.json"
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -2069,6 +2155,12 @@ def main(argv: list[str] | None = None) -> int:
         "--control",
         action="store_true",
         help="negative controls on each selected verified certificate",
+    )
+    parser.add_argument(
+        "--sweep-timeout",
+        type=float,
+        default=SWEEP_TIMEOUT,
+        help="with --control: the wall seconds the 99/100 sweep may run before it is killed",
     )
     parser.add_argument(
         "--evidence",

@@ -24,6 +24,7 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import subprocess
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
@@ -1155,3 +1156,114 @@ def test_a_control_serves_format_m_and_format_t_rows_only() -> None:
     bare = {key: value for key, value in rectangle.items() if key != "threshold"}
     with pytest.raises(SystemExit, match="records no threshold"):
         census.control(Path("/nonexistent"), rectangle_cases()[RECOMPUTED_T], bare)
+
+
+#: The 10 October check2 certificates whose packets were written as authored facts and
+#: retain the candidate alone, and a census row of the same net that stands in for theirs.
+AUTHORED = ("mixed_n28_L57425", "mixed_n29_L582", "mixed_n30_L58925")
+FINE_NET_ROW = "mixed_n18_L4705"
+
+
+def test_the_census_reads_the_candidates_retained_from_release_assets() -> None:
+    """Each is a case on the 2,073-direction net its file declares, read from its packet."""
+    for name in AUTHORED:
+        case = cases()[name]
+        assert census.net_directions(case) == 2073, name
+        assert census.authored_packet(case), name
+        assert case.candidate.name == "candidate.json.gz", name
+        assert case.candidate.is_relative_to(census.WEB / case.packet), name
+
+
+def test_an_evidence_entry_for_a_check2_certificate_of_an_authored_packet(
+    tmp_path: Path,
+) -> None:
+    """A check2 certificate was decided by the source's copy of this crate, so its replay
+    entry shares components, as the 6 October check2 entries say by hand; its report is the
+    packet's facts file, and its candidate is pinned by the packet's source manifest. The
+    row, receipts and control are a stand-in: mixed_n18_L4705's, on the same net."""
+    name = "mixed_n29_L582"
+    case = cases()[name]
+    folder = tmp_path / case.packet
+    folder.mkdir()
+    receipt = FOLDER / entries()[FINE_NET_ROW]["packet"] / f"{FINE_NET_ROW}.jsonl.gz"
+    (folder / f"{name}.jsonl.gz").write_bytes(receipt.read_bytes())
+    refused = {
+        "verdict": "counterexample-candidate",
+        "mutation": {"capture_at_centre": "0", "factor": "99/100"},
+    }
+    control = {
+        "status": "CONTROLS_REFUSED",
+        "index": 1947,
+        "runs": [
+            {"name": "original", "verdict": "verified"},
+            {"name": "scaled-99-100", **refused},
+            {"name": "near-threshold", **refused},
+        ],
+    }
+    (folder / f"{name}.control.json").write_text(json.dumps(control), encoding="utf-8")
+    row = entries()[FINE_NET_ROW]
+    stand_in = {
+        **row,
+        "n": 29,
+        "L": "291/50",
+        "candidate_sha256": sha256(case.candidate),
+        "premises": {**row["premises"], "n": 29, "L": "291/50", "mass_exact": "2899999/100000"},
+    }
+    text = census.evidence_entry(case, tmp_path, stand_in, audit_record="x", date="2026-10-12")
+    (record,) = safe_load(text)
+    limitations = " ".join(record["limitations"].split())
+    assert record["id"] == "E-wand125-fine-net-n29-582-followup-sqverify-fast-replay"
+    assert record["source_key"] == "[wand125 fine-net n29 2026-10-10]"
+    assert record["scope"] == {"n_values": [29]}
+    assert record["certificate"] == str(case.candidate.relative_to(census.PROJECT))
+    assert record["relationship_to_generator"] == "shared-components"
+    assert record["shared_components"] == [census.SHARED_COMPONENTS]
+    assert "re-implements the producer's check sharing its components" in limitations
+    assert "independently of the source's checker" not in limitations
+    assert "the packet's source manifest pins" in limitations
+    assert record["proof"]["assumptions"][-1] == census.AUTHORED_CANDIDATE
+    assert "at all 2073 directions of the net it declares" in " ".join(record["replay"].split())
+
+
+def test_a_report_is_found_by_its_packet_only_when_one_entry_holds_the_count() -> None:
+    """An authored packet's report is the one reported entry naming a file of the packet
+    with the case's count in scope; none, or two, refuse."""
+    case = cases()["mixed_n28_L57425"]
+    folder = f"packing/resources/web/{case.packet}"
+    report = {
+        "id": "E-a-report",
+        "assurance": "reported",
+        "certificate": f"{folder}/reported-n28-followup.json",
+        "scope": {"n_values": [28]},
+    }
+    other = {**report, "id": "E-b-report", "scope": {"n_values": [30]}}
+    assert census.reported_entry(case, {"evidence": [report, other]}) == report
+    with pytest.raises(SystemExit, match="0 reported entries"):
+        census.reported_entry(case, {"evidence": [other]})
+    twice = {**report, "id": "E-c-report"}
+    with pytest.raises(SystemExit, match="2 reported entries"):
+        census.reported_entry(case, {"evidence": [report, twice]})
+
+
+def test_a_sweep_is_stopped_at_its_timeout(tmp_path: Path) -> None:
+    """`--sweep-timeout` bounds the 99/100 sweep's wall: a 2,073-direction sweep at one
+    thread on a shared host can outrun the default, so a run over a declared net sets it."""
+    binary = tmp_path / "slow.sh"
+    binary.write_text("#!/bin/sh\nsleep 5\n", encoding="utf-8")
+    binary.chmod(0o755)
+    raw = read_raw(cases()[RECOMPUTED].candidate)
+    with pytest.raises(subprocess.TimeoutExpired):
+        census.scaled_sweep(
+            binary,
+            raw,
+            tmp_path / "m.json",
+            1,
+            factor=Fraction(99, 100),
+            threads=1,
+            premises={},
+            timeout=0.2,
+        )
+    assert census.SWEEP_TIMEOUT == 14400
+    out = tmp_path / "out"
+    argv = ["--family", "mixed", "--binary", str(binary), "--out", str(out), "--control"]
+    assert census.main([*argv, "--sweep-timeout", "43200", "--only", "none"]) == 0

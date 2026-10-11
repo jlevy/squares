@@ -40,6 +40,8 @@ PACKETS = (
     "n11-optimality-gpt6-pro-review-2026-10-03",
     # The candidates and linear files retained on 11 October for stage 4
     # (`devtools.retain_wand125_release`).
+    "wand125-fine-net-n29-2026-10-10",
+    "wand125-fine-net-n28-n30-2026-10-10",
     "wand125-linear-n122-2026-10-10",
 )
 

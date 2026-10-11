@@ -93,21 +93,63 @@ controls the records lane requires.
 A maintained replay must retain the complete direction outcomes of a census run, from a
 candidate retained where the census reads it, with the whole-net controls and restored
 positives, and must be followed by an independent review that reads this certificate.
-That work, with a budget for it, belongs to the import’s bead, think-r333.
+That work, with a budget for it, belongs to the import’s bead, think-r333; the
+[run plan of 11 October](../../../../docs/project/specs/active/plan-2026-10-11-wand125-confirmations.md)
+gives its commands.
+
+## Retained for the Replay
+
+On 11 October the candidate alone was retained, so that the census can read it:
+[`square-packing-bounds/certificates/mixed_n29_L582/candidate.json.gz`](square-packing-bounds/certificates/mixed_n29_L582/candidate.json.gz),
+the asset’s `candidate.json` (182,193 bytes, SHA-256 `c9171c92…722b`, the digest the
+source manifest pins for that member) stored as deterministic gzip.
+`devtools.retain_wand125_release` wrote it from the pinned asset, refusing the asset
+unless its size and SHA-256 were the manifest’s and the member unless its digest was.
+`square-packing-bounds/` is the directory the census reads under every wand125 mixed
+packet; here it stands for `problems/square-lower-bounds/` of wand125/square-packing.
+
+The census runs `sqverify-fast` on a candidate retained in its packet
+(`MIXED_PACKETS` in `devtools/sqverify_fast_census.py`), and item (b)4 of the
+[declared-net soundness review](../../../../docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md#for-the-records-lane)
+holds a census row to the retained `.gz` file’s digest, with
+`devtools.retained_data check` passing on its packet.
+The [6 October check2 packet](../wand125-mixed-bounds-check2-2026-10-06/README.md)
+retained its ten candidates the same way, and this one follows it.
+The candidate sits under the MIT notice below.
+The redistribution question this packet records is the nested verifier archive’s, and
+that archive stays unretained, with the run and control logs, the sealed bundle and the
+pre-publication receipt.
 
 ## Sources and Notices
 
 The nearest enclosing source notice, `problems/square-lower-bounds/LICENSE`, is MIT,
-Copyright 2026 wand125, byte-identical to the notice the seven-case packet records.
+Copyright 2026 wand125, byte-identical to the notice the seven-case packet records and
+to the copy the
+[27 September rectangle packet](../wand125-rectangle-certificates-2026-09-27/wand125-rectangles/LICENSE)
+retains (Git blob `bbfbff13…`).
 The nested verifier archive carries no notice of its own, so its redistribution is
-unresolved. This packet publishes authored facts, hash references and this repository’s
-own receipts. No upstream byte is retained in Git: the asset stays with its author,
-pinned here by size and digest, and no copy is hosted here.
-No program of the source was run.
+unresolved. This packet publishes authored facts, hash references, this repository’s own
+receipts and, since 11 October, the candidate alone, under that MIT notice.
+The asset stays with its author, pinned here by size and digest, and no copy of it is
+hosted here. No program of the source was run.
 
 The source credits wand125; the commit is authored by Hiroaki Hosono.
 Its README says parts of the work were produced with AI assistance under human
 direction, and the commit names Claude Opus 5.5 as co-author.
+
+## Compressed Files
+
+The retained candidate has more than 1,000 lines, so it is stored as deterministic gzip
+made by `gzip -9n`, with no file name or timestamp in its header.
+The table gives the Git blob and SHA-256 of the decompressed bytes, which are the asset
+member’s as the [source manifest](source-manifest.json) pins them.
+The repository’s readers decompress through
+`devtools.retained_data.read_retained_bytes`, and
+`python -m devtools.retained_data check PACKET` re-derives the row.
+
+| Stored file | Origin | Git blob | SHA-256, decompressed |
+| --- | --- | --- | --- |
+| `square-packing-bounds/certificates/mixed_n29_L582/candidate.json.gz` | upstream | `ac6f7f2d2219ca1fbddd7bc5f1de7c803cccca72` | `c9171c9278271b6b4ca5fb9f925ea42a15a88e9aca7701d6542e29e38979722b` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

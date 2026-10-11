@@ -167,7 +167,16 @@
   "license": {"project":"MIT; Copyright (c) 2026 wand125","project_notice":{"path":"problems/square-lower-bounds/LICENSE","bytes":1064,"git_blob":"bbfbff131ef8ccbba5ed8b8b395f2c457eb8922c","url":"https://github.com/wand125/square-packing/blob/ff9f2692afe7d1e65a51bb079b61b3710b97fc82/problems/square-lower-bounds/LICENSE","identical_to_446_packet_notice":true,"same_blob_at_both_pins_and_head":true},"nested_verifier":"The same archive as the #446 and n29 packets', with no licence notice of its own; its upstream and third-party redistribution rights remain unresolved."},
   "attribution": {"credit":"wand125 (commit author Hiroaki Hosono)","ai_assistance":"problems/square-lower-bounds/README.md says, at each pin, that parts of the work were produced with AI assistance under human direction; each certificate's commit carries a Co-Authored-By trailer naming Claude Opus 5.5, and the ff9f269 commit also names a Claude session."},
   "custody": "Each release asset was fetched at its pinned size and SHA-256, which equal the API digest, the release's SHA256SUMS line and the source's ASSET.json. Every pinned document's Git blob equals its commit's. Each sealed inner bundle matches all 15 entries of its own files-sha256.json. This is source-byte custody, not a native proof outcome.",
-  "raw_bytes_in_git": false,
+  "raw_bytes_in_git": true,
+  "raw_bytes_retained": {
+    "since": "2026-10-11",
+    "by": "devtools.retain_wand125_release",
+    "files": [
+      "square-packing-bounds/certificates/mixed_n28_L57425/candidate.json.gz",
+      "square-packing-bounds/certificates/mixed_n30_L58925/candidate.json.gz"
+    ],
+    "note": "Each asset's candidate.json alone, under the MIT project notice, stored as deterministic gzip where the census reads it; the assets, their logs, their sealed bundles and the nested verifier archive stay outside Git."
+  },
   "raw_bytes_location": "The author's release assets, pinned here by size and SHA-256. This intake held local copies in session scratch space only; no copy is hosted by this repository.",
   "author_code_executed": false
 }
