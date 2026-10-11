@@ -5,17 +5,17 @@ title: Narrow site prose measure to 35em
 kind: task
 status: closed
 priority: 2
-version: 4
+version: 7
 delegate: codex@spud10
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:06:20.447Z
-updated_at: 2026-10-11T20:56:52.447Z
+updated_at: 2026-10-11T21:25:04.626Z
 started_at: 2026-10-11T20:06:42.705Z
-closed_at: 2026-10-11T20:53:12.182Z
-close_reason: Applied35emsharedreadingmeasureandtext-onlyresponsivebranding; preservedwide-tabletracks. Focusedtypography/preview checks26passed and result-column checks76passed; independentfinalcodereview found no actionablefindings. Broad checkpoint limitation is tracked separately.
+closed_at: 2026-10-11T21:25:04.625Z
+close_reason: Reduced reading measure to 35em; retained wide table tracks and matched direct case and popover widths. Final 13 wide-content checks, 76 results-column checks, and 8 case parity and breakpoint checks pass.
 resolution: null
 duplicate_of: null
 ---
