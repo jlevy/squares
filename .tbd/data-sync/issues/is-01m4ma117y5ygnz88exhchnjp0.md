@@ -5,14 +5,14 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex@spud10
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-11T02:48:54.892Z
+updated_at: 2026-10-11T02:50:29.779Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -46,8 +46,8 @@ Landing requires the owner’s session confirmation.
 240299aad79562574cfb31d37298003374423fc6;
 [PR435](https://github.com/jlevy/squares/pull/435) is published at
 d4834263eaf7db362809ff9d687ffc131db4126c. Native sync, explicit-lease stack push and
-submit preserved formal stack447: main6038af33cc6c4b5b7121eeca4d7c1ad528cfecc0 → PR403 →
-PR435. Both source worktrees are clean and match their remote heads.
+submit preserved formal stack 447: main at 6038af33cc6c4b5b7121eeca4d7c1ad528cfecc0 →
+PR403 → PR435. Both source worktrees are clean and match their remote heads.
 The unrelated primary checkout and its unique untracked work were preserved.
 
 Both PR descriptions were updated and read back exactly, with all 14 posted review
@@ -57,11 +57,11 @@ final size audit, full-CI URLs and remaining owners.
 The committed
 [handoff](https://github.com/jlevy/squares/blob/d4834263eaf7db362809ff9d687ffc131db4126c/docs/project/handoff-2026-10-10-polynomial-pr-stack.md)
 contains workspace paths, external environment, evidence roots and the resume sequence.
-It is a 190-line/10,666-byte documentation-only commit above reviewed/tested code2bbf;
+It is a 190-line/10,666-byte documentation-only commit above reviewed/tested code 2bbf;
 every other file equals that qualified code.
 
 Completed: upstream textual/semantic conflicts, generated URLs and release pin are
-resolved; the full n83 degree-672 polynomial brings the child to 321 exact identities
+resolved; the full n=83 degree-672 polynomial brings the child to 321 exact identities
 among 324 cases, with all 77 proved statuses retained.
 Canonical science/custody/frontier and witnesses are conserved.
 Public content keeps 352 records and 2,128 coefficient strings, dropping excessive
@@ -70,29 +70,29 @@ The polynomial report is STRICTLY WEB-ONLY: no PDF, including samples or compari
 No solver/adoption/geometry/Lean/optimality campaign ran in this synchronization slice.
 
 The rejected b5f startup receipt remains archived.
-Amended navigation code dacfdb43d and separate pin2bbf retain route-appropriate shared
+Amended navigation code dacfdb43d and separate pin 2bbf retain route-appropriate shared
 clients and pass unchanged startup: 303,558/3,212,387 = 0.09449608655495119 against
-0.10. 127 focused tests passed in 137.04s; final CLEAN code2bbf web render, 12 scripts,
+0.10. 127 focused tests passed in 137.04s; final CLEAN code 2bbf web render, 12 scripts,
 5,661 consumer checks and eight responsive views passed, with all projected values
 compared exactly. Complete HTML remains 1,959,996 bytes below 2,000,000; executable
 inline limit remains 4,096. Scoped strong semantic and storage reviews passed.
 These are bounded results, not full qualification.
 
-Final storage audit: 18 parent + 33 child commits, union51; 3,688,650-byte thin pack /
-5,611,427-byte non-thin pack, largest new historical blob2,629,925 bytes.
-Child-only packs are2,921,810/4,327,757 bytes.
+Final storage audit: 18 parent + 33 child commits, union 51; 3,688,650-byte thin pack /
+5,611,427-byte non-thin pack, largest new historical blob 2,629,925 bytes.
+Child-only packs are 2,921,810/4,327,757 bytes.
 All 67 historical scientific blobs are identical; zero new PDF blobs.
-Final child diff173 files,+26,921/−703. No further history cleanup is warranted; bulk
+Final child diff: 173 files, +26,921/−703. No further history cleanup is warranted; bulk
 publications/logs remain outside Git.
 
 ## Validation still required
 
-Parent pre-push passed66 prerequisites then FAILED its reachable command at the actual
-900-second timeout,55% progress; no test verdict/pass/waiver.
+Parent pre-push passed 66 prerequisites then FAILED its reachable command at the actual
+900-second timeout at 55% progress; no test verdict/pass/waiver.
 The supported retry `packing-validate --push --only 'lint floor' --timeout-seconds 1800`
 selects Ruff plus the same reachable selection and is still active at this checkpoint.
-Its run receipt started2026-10-11T02:29:18.892768Z at cleanP240299, Python3.14.7;
-selected run id `d77428dc5a3d4e938f8832aa8aacec54`. Inspect
+Its run receipt started 2026-10-11T02:29:18.892768Z at clean parent 240299, Python
+3.14.7; selected run id `d77428dc5a3d4e938f8832aa8aacec54`. Inspect
 `/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261011-0142/parent-reachable-retry-final.log`
 and
 `/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261011-0142/parent-reachable-artifacts/`
@@ -102,15 +102,15 @@ A first invalid --only selection was a usage error and ran no checks.
 Child broad local --push is NOT RUN and remains next.
 Use existing external runtime/caches and the explicit 1,800-second broad-suite cap.
 
-Current PR Packing/Pages checks are pending; the saved ALL snapshot had17 pending for
-PR403 and18 pending plus14 cancelled older contexts for PR435. It is not a terminal ALL
-pass. Resolve superseded/cancelled contexts and inspect every required and non-required
-check at the exact head.
+Current PR Packing/Pages checks are pending; the saved ALL snapshot had 17 pending for
+PR403 and 18 pending plus 14 cancelled older contexts for PR435. It is not a terminal
+ALL pass. Resolve superseded/cancelled contexts and inspect every required and
+non-required check at the exact head.
 Fresh full hosted checkpoints were dispatched once each with blank PR input, qualifying
 the branch event SHA:
-[PR403 full38105966939](https://github.com/jlevy/squares/actions/runs/38105966939) and
-[PR435 full38105968738](https://github.com/jlevy/squares/actions/runs/38105968738). Both
-were queued at the saved snapshot; old e589/7fd passes do not qualify these heads.
+[PR403 full 38105966939](https://github.com/jlevy/squares/actions/runs/38105966939) and
+[PR435 full 38105968738](https://github.com/jlevy/squares/actions/runs/38105968738).
+Both were queued at the saved snapshot; old e589/7fd passes do not qualify these heads.
 
 Next agent: verify mounted/writable external volume and source the existing
 `/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/upstream-refresh-20261011-0142/env.sh`,
@@ -153,20 +153,21 @@ Evidence root:
 Unique failure/command/worker records, reviews, web metrics, size commands, PR
 before/after bodies and tracking snapshots are preserved there.
 The observed publication checkpoint at 2026-10-11T02:44:00.089475+00:00 measured 61.2
-minutes since2026-10-11T01:42:49.367467Z; preparation is unmeasured and the gate
+minutes since 2026-10-11T01:42:49.367467Z; preparation is unmeasured and the gate
 continues. This is wall, not CPU/exclusive/solver cost.
-Previous411.2-minute closing wall, its391.2-minute interim and earlier141.3-minute slice
-stay distinct.
+The previous 411.2-minute closing wall, its 391.2-minute interim and earlier
+141.3-minute slice stay distinct.
 
 Three verified inactive older pytest roots were permanently removed after process,
 open-handle, containment and worktree checks.
-Global free space555,328→15,793,332 KiB rose during cleanup; concurrent writers prevent
-exclusive attribution.
+Global free space from 555,328→15,793,332 KiB rose during cleanup; concurrent writers
+prevent exclusive attribution.
 Live fixtures, environments, source, unique evidence, preview and other chats were
-preserved. Current free space was12,682,172 KiB external /9,672,844 KiB internal at the
+preserved.
+Current free space was 12,682,172 KiB external / 9,672,844 KiB internal at the
 later snapshot; recheck before disk-heavy work.
-The owned60649 preview remains older code and is not a current-head publication; rebuild
-from the fresh checked scratch before showing it as current.
+The owned 60649 preview remains older code and is not a current-head publication;
+rebuild from the fresh checked scratch before showing it as current.
 
 ## Earlier checkpoint (superseded snapshot; retained failure history)
 
