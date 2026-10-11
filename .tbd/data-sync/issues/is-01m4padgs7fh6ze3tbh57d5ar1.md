@@ -1,0 +1,30 @@
+---
+type: is
+id: is-01m4padgs7fh6ze3tbh57d5ar1
+title: "Intake pass 2026-10-11: six new upper-bound reports, two n17 issues, four unread comments, six watched repositories"
+kind: epic
+status: in_progress
+priority: 1
+version: 12
+delegate: claude-code@vm
+labels:
+  - result-import
+dependencies: []
+child_order_hints:
+  - is-01m4padhpzys6zpwepcve5pwxm
+  - is-01m4padjx7fep1w6y30v4pqz9n
+  - is-01m4padkz7c8b0chp1f85vmfy8
+  - is-01m4padmx9cdj5hsv7snr426rb
+  - is-01m4padnyzybc7ms1bryby9ax2
+  - is-01m4padq3szbdty8bmp3r2bxqh
+  - is-01m4padr3md3xwace5s7695t9v
+  - is-01m4pads1y316jmhb4rp0fpvpg
+  - is-01m4padszrtqcj8b3qyff911cd
+  - is-01m4padtzpm1sj8gg4ygyrjjck
+hold: null
+hold_until: null
+created_at: 2026-10-11T20:28:08.870Z
+updated_at: 2026-10-11T20:28:23.012Z
+started_at: 2026-10-11T20:28:23.012Z
+---
+Intake pass of 2026-10-11 (owner's request in session 01UXZs37jGv5vqVGADH7Gkn8), on branch claude/wizardly-meitner-wqn4x3. Sweep: 18 items needing an owner: issues #494, #495, #500, #501, #503, #504, #505, #506 not in result-requests.yaml; unread comments #419 (evand 6104596297), #413 (wand125 6104576642), #485 (Guzhou0806 6106761997, wand125 6111583905); watched repositories evand 675a5ea, franciscouzo 337078c, Guzhou0806 6a65957, itsnaka 56fa71f, ry-xu 9535d65, wand125 04fbef0. Kingbird: 0 counts moved. Owner priority: quick-to-validate new best results first, merged; longer validation runs recorded with their price and status.
