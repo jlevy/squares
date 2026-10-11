@@ -3,19 +3,19 @@ type: is
 id: is-01m4m2g6xzxbvqczxs3sjcr9fe
 title: Compare a short PDF using the web prose typography
 kind: task
-status: closed
+status: in_progress
 priority: 2
-version: 6
+version: 8
 delegate: codex@spud10
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-10T23:31:19.614Z
-updated_at: 2026-10-11T01:05:02.645Z
+updated_at: 2026-10-11T01:36:32.904Z
 started_at: 2026-10-10T23:31:20.493Z
-closed_at: 2026-10-11T01:05:02.644Z
-close_reason: "Created and visually verified the three-page comparison with web font sizes, complete selected content, reproducible source and reserved-footer QA. Final artifact: 91,042 bytes; full catalogue remains on the web."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -79,3 +79,5 @@ production PDF pipeline changes.
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
+
+Reopened: Record the owner’s clarification that the polynomial paper must be web-only and withdraw the separate PDF comparison.
