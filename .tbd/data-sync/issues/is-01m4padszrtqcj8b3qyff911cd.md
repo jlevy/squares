@@ -5,7 +5,7 @@ title: "Stage 4 review of the 2026-10-11 upper-bound imports: third exact route 
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:18.295Z
-updated_at: 2026-10-11T22:50:35.561Z
+updated_at: 2026-10-11T23:06:34.655Z
 started_at: 2026-10-11T21:32:13.301Z
 ---
 For each certificate the 2026-10-11 import lanes retain and replay on both maintained exact routes: devtools.check_half_angle_area decide-imports extended to the new packets (own readers, --upstream digests), controls, and a mapped review under docs/project/reviews/ in the form of review-2026-10-10-upper-bound-imports-476-481-483-484.md; verdict and per-count house table.
@@ -55,3 +55,21 @@ Significance: #505 drafted S2 by lane D, confirmed S2 (optimizations of credited
 Validation: tests/test_check_half_angle_area.py 126 passed (419 s under load 11-20) (22 new; 261, 211 decisions and the credit test marked slow); ruff and basedpyright 0 findings on both files; make format-check clean; packing-validate --records (226 s at load 13-18) 48 of 49 steps pass; the one failure is "synopsis agrees with the artifacts" (SYNOPSIS.md document map is stale: the new review is mapped and SYNOPSIS is left for the coordinator to re-render), as the V1 lane reported.
 
 Not checked: the sources' own checkers (Barnett's two unpublished checkers, Evan Daniel's verify_cert.py/verify_cert2.py, Ostashev's sqverify and crosscheck_mpmath.py), Ostashev's KKT/local-optimality statement, the n2043 certificate, the five superseded facts' upstream binding, derive --check from a checkout, the #505 zip attachment.
+
+2026-10-11, W2 review lane V3 for #500 (sub-agent, Claude Fable 5.1 at xhigh, a different model from the Opus import lane think-ga3m), worktree /home/user/squares/.claude/worktrees/agent-a08edd169546ca236, branch worktree-agent-a08edd169546ca236, cut from claude/wizardly-meitner-wqn4x3-imports 0ec1173c5 with Lane A's 56bdfb51b merged (62c7d71ca; one trivial conflict in tests/test_upper_bound_reports.py's published-date map, both rosters kept). Not pushed.
+
+Review: docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md, mapped in docs/project/document-map.yaml (SYNOPSIS.md not re-rendered). Verdict accepted, finite feasibility only, at all nine counts (176, 181, 238, 239, 270, 271, 272, 304, 305). Eight non-blocking findings: RX-1 the issue's 15-digit sides are cuts (below s_exact by 3.87e-17 to 9.73e-16 at all nine) and s_decimal is not a rounding (-1.57e-15 to +6.95e-16): the claim states the exact fractions, displays rounded up; RX-2 lineage holds to the eye and not by pose; RX-3 no retained upstream binding (RI-2), closed once here for all nine certificates and printed sides; RX-4 kernel controls gross; RX-5 no private-worker custody; RX-6 304 and 305 compared with #506 by its 12-place prints rounded up (smaller by at least 9.109e-5 and 7.837e-5), exact comparison and house belong to #506's import; RX-7 reviewer and producer's assistant share a model family; RX-8 this review replayed four of nine counts on the kernel (load rule), the import lane's certify and full check --replay stand for the rest.
+
+Replays here (from packing/, one worker, load 8 to 16 on 4 cores): check-claims rebuilt equal, exit 0, 29 s; check --n 176 270 271 272 --replay: 12 jobs equal, exit 0, 1070 s (22:22:56Z to 22:40:46Z); not re-run: the 15 jobs at 181, 238, 239, 304, 305 (load 11.3 at start, above the brief's 10). Receipt totals as the packet prints: 27 jobs, 1,743,036 pair decisions, 1,253.51 route CPU s, 2,322.21 job wall s, longest 202.56 s. Kernel controls refuse at gap -1 at all nine and the moved square 3.0 (181, 239, 272) to 12.82 units outside.
+
+Third route: devtools.check_half_angle_area gained the #500 roster (IMPORTS_500, read through the existing SQUISH JSON reader and read_fact), a T-128 reader of Couzo's #451 certificates (couzo_451_packing, parse_certificate on the admitted source text), parent_packing (lineage parents by register id or import key), LINEAGE entries for 176 from T-128's 127 and 270/304 from #481's 209, and a `near` setting on patch_lineage. Run: decide-imports --workers 1 --imports '#500' --upstream squish-500-fourth-request-2026-10-11 DIR: all nine passed, 290,506 pairs (5,032 clipped), wall clearance exactly 0 and far-wall clearance 0 at all nine (266 wall contacts, 10 to 43 per count), least distance 1.000000e-32 at all nine, 54/54 controls, no disagreement with the maintained inputs, margins, frozen claim record, register-plan claims or prints; 18 upstream checks (nine certificates and nine summary.csv rows, 12 files fetched from raw.githubusercontent.com at aeacc6c with the packet's digests, 22:24:43Z); 285.1 s (22:31:20Z to 22:36:08Z).
+
+Credit measurement (patch_lineage): 176 vs Couzo's 127 (T-128): by pose (1e-9) 20 of 127 under the reflection of the 127's box, 1 exact; within a tenth 115 of 127 (59 turned beyond sine 1e-6). 270 vs #481's 209 "whole": by pose 99 (upright lattice coincidences, offset 0.982 along a row), within a tenth 180 (36 turned); 304: 98 by pose, 188 within a tenth (43 turned); at 1e-6 none of the 209's 61 tilted squares reappears in either. Not measured: the Kingbird s(5) in the 176 (scratch: at most 1 of 5 within 1e-2, 4 within a tenth, 3 turned; not retained), the narrowed pieces (Gupta's 209 in the 239: 89 by pose in a scratch run, lattice), the catalogue's former 11, 19, 182, and the unfiled sources/ packings no packet retains.
+
+Significance: S3 confirmed (compared with T-136 S3, T-140 S3, the #503/#504 review's S3); not S4 (the entry records bounds; the method is the author's own and already in T-136; whether Mondrian merits a note as a reusable technique is a question for the significance reviewers). `by` to name the review. The brief's review-2026-10-11-significance-scores.md does not exist in this tree; T-136's score was compared from results.yaml and the 11 October final upper-bounds review instead.
+
+Verdict per count for the records lane: V3/C3 at 176, 181, 238, 239, 270, 271, 272, 304, 305 on E-squish-500-exact-feasibility (relationship_to_generator independent-implementation; no maintained route is the producer's; verifiers V-sqpack-verify, V-check-rational-witness-independent, V-evand-arrangement-receipts, V-upper-bound-reports, V-check-half-angle-area, V-evand-exact-certificates; this review as independence_record and external_review). Houses: 176, 181, 238, 239, 270, 271, 272 -> #500 (at 270 then T-140, T-136); 304, 305 -> #506 once reviewed, crediting #500 as its starting packings, #500 until then (at 305 then T-140, T-136).
+
+Validation: tests/test_check_half_angle_area.py, the 13 #500 cases (5 new test functions; the nine-count decide and the lineage marked slow): 13 passed in 380 s under load 9 to 14; ruff and basedpyright 0 findings on the two files; packing-validate --records 185.5 s, 48 of 49 steps pass, failing only "synopsis agrees with the artifacts" (SYNOPSIS.md document map stale, left for the coordinator to re-render), as the V1 and V2 lanes reported.
+
+Not checked: the source's two checkers and solver, derive --check from a checkout, the five sources/ certificates, the 15 kernel jobs not replayed here, the s272 source as the 272 before its squeeze.
