@@ -11,7 +11,7 @@ from contextlib import nullcontext
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
 from unittest.mock import Mock
-from urllib.parse import urlsplit
+from urllib.parse import urljoin, urlsplit
 from uuid import uuid4
 
 import pytest
@@ -320,14 +320,32 @@ def test_native_closed_optional_math_is_outside_the_initial_readability_sample(
         server.server_close()
 
 
+#: The results page with its weekly overview taken out, served beside the page as
+#: shipped, so that its first screen is the prose the fallback faces were tuned on. With
+#: the overview first (think-2z22), a 390 by 900 screen ends inside its open week: the
+#: unadjusted face rewraps the overview's introduction by one line and moves the week
+#: below it, CLS 0.014, and the Verification Ladders prose the negative control was
+#: written against is off the screen. A taller screen does not bring it back, since CLS
+#: divides each move by the screen's height (0.077 at 1800). Taken out, the control reads
+#: 0.105 again, its value before the overview.
+PROSE_FIRST = "results-prose-first.html"
+#: The overview's heading, introduction and weeks: to the next section's heading, which
+#: is the next `h2` at the top of the page or `All Results` if it moves above the table.
+_WEEKLY_OVERVIEW = re.compile(r'<h2 id="recent-results-by-week">.*?(?=<h[12][ >])', re.DOTALL)
+
+
 @pytest.fixture(scope="module")
 def results_font_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
-    """One actual results page and its asset closure, without other producer trees."""
+    """One actual results page and its asset closure, without other producer trees,
+    and beside it the same page with its weekly overview taken out (`PROSE_FIRST`)."""
     from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
 
     root = tmp_path_factory.mktemp("results-font-layout")
     rendered = render_overview.results_page()
     (root / rendered.name).write_text(rendered.html, encoding="utf-8")
+    prose_first, taken = _WEEKLY_OVERVIEW.subn("", rendered.html)
+    assert taken == 1, "the results page no longer has one weekly overview to take out"
+    (root / PROSE_FIRST).write_text(prose_first, encoding="utf-8")
     assets = render_overview.asset_files([rendered])
     assert sum(map(len, assets.values())) + len(rendered.html.encode()) < 3 * 1024 * 1024
     site_assets.write_assets(root, assets)
@@ -373,16 +391,28 @@ def _prose_font_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[s
         session.detach()
 
 
-@pytest.mark.parametrize("fallback", ["platform", "times", "unadjusted"])
+@pytest.mark.parametrize(
+    ("fallback", "opening"),
+    [
+        ("platform", "shipped"),
+        ("times", "shipped"),
+        ("platform", "prose-first"),
+        ("times", "prose-first"),
+        ("unadjusted", "prose-first"),
+    ],
+)
 def test_results_prose_font_arrival_retains_layout(
-    browser: Browser, results_font_site: str, fallback: str
+    browser: Browser, results_font_site: str, fallback: str, opening: str
 ) -> None:
+    # The adjusted fallbacks hold the page as shipped and the page whose first screen is
+    # its prose; the negative control runs on the second, the one it can trip on.
+    url = results_font_site if opening == "shipped" else urljoin(results_font_site, PROSE_FIRST)
     # The reference is the same real page with its final font, so a fallback fix
     # cannot quietly change the published paragraph geometry or typeface.
     reference = browser.new_context(viewport={"width": 390, "height": 900})
     try:
         view = reference.new_page()
-        view.goto(results_font_site, wait_until="load")
+        view.goto(url, wait_until="load")
         check_site_rendering.wait_for_fonts(view)
         view.wait_for_timeout(check_site_rendering.SETTLE_MS)
         expected, _ = _prose_font_reading(view)
@@ -409,7 +439,7 @@ def test_results_prose_font_arrival_retains_layout(
 
             context.route("**/assets/css/site.*.css", select_fallback)
         page = context.new_page()
-        page.goto(results_font_site, wait_until="domcontentloaded")
+        page.goto(url, wait_until="domcontentloaded")
         page.wait_for_timeout(check_site_rendering.SETTLE_MS)
         assert len(held) == 1
         _, temporary = _prose_font_reading(page)
@@ -454,7 +484,8 @@ def test_results_prose_font_arrival_retains_layout(
         assert not check_site_rendering.problems(report, javascript=False), report
         if fallback == "unadjusted":
             # The original fallback is a real negative control: exposing a
-            # first paint before PT Serif arrives must still trip the .1 guard.
+            # first paint before PT Serif arrives must still trip the .1 guard
+            # on the opening prose it was written against (`PROSE_FIRST`).
             assert report["cls"] > check_site_rendering.CLS_LIMIT, report
         else:
             assert report["cls"] <= check_site_rendering.CLS_LIMIT, report
