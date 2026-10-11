@@ -3,9 +3,9 @@ type: is
 id: is-01m4m588mffw9ac4ssy5qa9hhd
 title: Reconcile final website contracts and URL registry after recency cleanup
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10
 labels: []
@@ -20,8 +20,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T00:19:24.942Z
-updated_at: 2026-10-11T00:57:53.607Z
+updated_at: 2026-10-11T01:15:08.092Z
 started_at: 2026-10-11T00:19:34.475Z
+closed_at: 2026-10-11T01:15:08.090Z
+close_reason: Final integrated source and browser contracts pass at 53c8d37a2 in Packing38100510883 and Pages38100510886. Ruff floor covers3361 files; full Overview, URL registry and final publication assembly pass. Deferred merge checkpoint and deployment remain separately tracked by think-mvh7 and think-xio5.
+resolution: null
+duplicate_of: null
 ---
 Current-head CI found two obsolete result-panel star assertions and generated URL registry drift. Preserve all math, geometry, citations and historic aliases while updating the assertions for red recency and regenerating the register with its maintained producer. Verify affected tests and current/historic URL contract before the final fix push.
 
