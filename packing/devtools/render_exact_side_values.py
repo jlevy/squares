@@ -30,16 +30,20 @@ from devtools import (
 from devtools.render_overview import (
     EMBED_SCRIPT,
     EXACT_SIDE_VALUES,
+    HEADROOM_SCRIPT,
+    KPRESS_CLIENT_FRAME,
     MATH_SCRIPT,
     PAPER_TYPE_CSS,
     PAPERS_ROOT,
     SITE_NAV,
     SITE_NAV_CSS,
     THEME_SCRIPT,
+    TOOLTIP_SCRIPT,
     PageMeta,
     colophon_lines,
     favicon_html,
     head_tags,
+    kpress_client_script,
     nav_html,
     paper_path,
     paper_record,
@@ -154,6 +158,9 @@ RENDER_INPUTS = (
     SITE_NAV,
     SITE_NAV_CSS,
     THEME_SCRIPT,
+    HEADROOM_SCRIPT,
+    KPRESS_CLIENT_FRAME,
+    TOOLTIP_SCRIPT,
     EMBED_SCRIPT,
     MATH_SCRIPT,
     render_n11_lower_bounds_explainer.PUBLICATION_STYLE,
@@ -1171,6 +1178,9 @@ def render(
         "COLOPHON": colophon_lines(edition=""),
         "SITE_EMBED": EMBED_SCRIPT.read_text(encoding="utf-8"),
         "SITE_THEME": THEME_SCRIPT.read_text(encoding="utf-8"),
+        "SITE_HEADROOM": HEADROOM_SCRIPT.read_text(encoding="utf-8"),
+        "SITE_KPRESS_CLIENT": kpress_client_script(),
+        "SITE_TOOLTIPS": TOOLTIP_SCRIPT.read_text(encoding="utf-8"),
         "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
         "BODY_HTML": document.html.replace(
             '<div class="kpress-table-wrap"',
@@ -1193,7 +1203,12 @@ def render(
 def render_browser(
     *, revision: str | None = None, register: Mapping[str, Any] | None = None
 ) -> str:
-    """The report overview loads record details and coefficients on demand."""
+    """The report overview loads record details and coefficients on demand.
+
+    Its own client handles history and native MathML; this route has no contents
+    rail or rating badges. Share navigation and theme behavior without the article
+    client and tooltip programs the complete report uses.
+    """
     register = exact_catalogue.publication_register(register or load_register())
     rows = entries(register)
     polynomial_count = sum(row.get("polynomial") is not None for row in rows)
@@ -1205,6 +1220,7 @@ def render_browser(
         "SITE_NAV_CSS": SITE_NAV_CSS.read_text(encoding="utf-8"),
         "SITE_NAV": nav_html("papers", root=SITE_ROOT),
         "SITE_THEME": THEME_SCRIPT.read_text(encoding="utf-8"),
+        "SITE_HEADROOM": HEADROOM_SCRIPT.read_text(encoding="utf-8"),
         "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
         "COLOPHON": colophon_lines(edition=""),
         "BROWSER_CREDITS": paper_front.credits_html(FRONT),
