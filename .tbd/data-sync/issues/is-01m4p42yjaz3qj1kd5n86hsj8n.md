@@ -5,13 +5,17 @@ title: Regularization spikes across n, with a before/after gallery, and the end-
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 6
+delegate: claude-code@vm
 labels:
   - regularization
 dependencies: []
 parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
+hold: null
+hold_until: null
 created_at: 2026-10-11T18:37:31.081Z
-updated_at: 2026-10-11T21:46:10.947Z
+updated_at: 2026-10-11T21:46:14.343Z
+started_at: 2026-10-11T20:03:58.751Z
 ---
 Owner 2026-10-11: run spikes to test it on various values of n and show the result; scope the effort to run it end to end, automated plus manual review.
 
