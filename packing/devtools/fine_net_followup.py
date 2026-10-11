@@ -34,7 +34,12 @@ writes the receipts a packet keeps. Its check2 commands run no program of the so
   FC-1 re-check (the 99/100 mutant at every direction, the original and the
   near-threshold mutant at the least-bound direction) at one more full sweep and two
   directions. A sample is a diagnostic: it decides only the directions it ran, and its
-  status says so.
+  status says so. The candidate may be a packet's retained ``candidate.json.gz``.
+- ``control-sample`` runs the whole-net control's mutant, every mass scaled by 99/100, at
+  chosen directions (and at the ``--least`` directions of least certified bound in the
+  source's run log), and judges each refusal with the census's own ``refusal_record`` and
+  ``refusal_held``, so that a control due to run over a whole net is tried first where it
+  is likeliest to refuse. It is a diagnostic, never a control receipt.
 
 A linear certificate of points, segments and rectangles on the 201-angle net (T-080's
 kind) whose release asset is likewise kept outside Git is read by the T-080 route's own
@@ -88,6 +93,7 @@ from typing import Any
 
 from devtools import audit_wand125_linear as linear
 from devtools import audit_wand125_point_and_mixed as mixed
+from devtools import sqverify_fast_census as census
 from devtools.audit_wand125_declared_net import (
     PREPUBLICATION,
     AuditError,
@@ -106,6 +112,7 @@ from devtools.audit_wand125_linear import (
 from devtools.audit_wand125_point_and_mixed import (
     _passes,  # pyright: ignore[reportPrivateUsage]
 )
+from devtools.check_sqverify_fast import mixed_mutant, read_raw
 from devtools.retained_data import git_blob
 from sqpack import retained_json
 
@@ -392,6 +399,30 @@ def source_rows(run_log: Path) -> dict[int, dict[str, Any]]:
 
 def direction(binary: Path, candidate: Path, n: int, side: str, index: int) -> dict[str, Any]:
     """One direction at one thread with ``--confirm``, timed by ``wait4``."""
+    found = run_direction(binary, candidate, n, side, index)
+    row, summary = found["row"], found["summary"]
+    return {
+        "r": index,
+        "returncode": found["returncode"],
+        "verdict": row.get("verdict"),
+        "method": row.get("method"),
+        "nodes": row.get("nodes"),
+        "min_certified_lower_bound": row.get("min_certified_lower_bound"),
+        "thread_cpu_seconds": row.get("cpu_seconds"),
+        "process_cpu_seconds": found["process_cpu_seconds"],
+        "wall_seconds": found["wall_seconds"],
+        "summary_status": summary.get("status"),
+        "premises": summary.get("premises"),
+        "build": summary.get("build"),
+        "stderr_tail": found["stderr_tail"],
+    }
+
+
+def run_direction(
+    binary: Path, candidate: Path, n: int, side: str, index: int
+) -> dict[str, Any]:
+    """The binary's own row and summary at one direction, one thread, with ``--confirm``,
+    and the process's exit status, CPU (``wait4``) and wall."""
     argv = [str(binary.resolve()), "--candidate", str(candidate), "--n", str(n)]
     argv += ["--side", side, "--directions", str(index), "--threads", "1", "--confirm"]
     with tempfile.TemporaryFile() as stdout, tempfile.TemporaryFile() as stderr:
@@ -411,23 +442,14 @@ def direction(binary: Path, candidate: Path, n: int, side: str, index: int) -> d
         stderr.seek(0)
         lines = [json.loads(line) for line in stdout.read().decode().splitlines() if line]
         error_text = stderr.read().decode(errors="replace")
-    row = next((line for line in lines if line.get("r") == index), {})
-    summary = next(
-        (line for line in lines if line.get("kind") == "sqverify-fast-summary/v1"), {}
-    )
     return {
-        "r": index,
+        "row": next((line for line in lines if line.get("r") == index), {}),
+        "summary": next(
+            (line for line in lines if line.get("kind") == "sqverify-fast-summary/v1"), {}
+        ),
         "returncode": os.waitstatus_to_exitcode(status),
-        "verdict": row.get("verdict"),
-        "method": row.get("method"),
-        "nodes": row.get("nodes"),
-        "min_certified_lower_bound": row.get("min_certified_lower_bound"),
-        "thread_cpu_seconds": row.get("cpu_seconds"),
         "process_cpu_seconds": usage.ru_utime + usage.ru_stime,
         "wall_seconds": wall,
-        "summary_status": summary.get("status"),
-        "premises": summary.get("premises"),
-        "build": summary.get("build"),
         "stderr_tail": error_text[-500:],
     }
 
@@ -483,7 +505,7 @@ def sample(
     run_log: Path | None,
 ) -> dict[str, Any]:
     """The sampled directions, their walls and the price of the rest."""
-    data = load_json(candidate.read_bytes())
+    data = load_json(read_retained(candidate))
     _step, count, _facts, _checks = declared_net(data)
     require(all(0 <= index < count for index in indices), "a direction is off the net")
     require(1 <= workers <= 2, "at most two workers on a shared host")
@@ -537,6 +559,123 @@ def sample(
             " and is not a replay. No control was run."
         ),
     }
+
+
+def least_bound_directions(run_log: Path, count: int) -> list[int]:
+    """The ``count`` oblique directions of least certified bound in the source's run log,
+    where the certificate has the least slack and a scaled mutant is likeliest refused."""
+    rows = [
+        row
+        for row in source_rows(run_log).values()
+        if int(row["r"]) > 0 and row.get("min_certified_lower_bound") is not None
+    ]
+    rows.sort(key=lambda row: (float(row["min_certified_lower_bound"]), int(row["r"])))
+    return sorted(int(row["r"]) for row in rows[:count])
+
+
+def control_sample(
+    binary: Path,
+    candidate: Path,
+    *,
+    n: int,
+    side: str,
+    indices: list[int],
+    workers: int,
+) -> dict[str, Any]:
+    """The whole-net control's 99/100 mutant at chosen directions, judged as that control
+    judges each direction it refuses.
+
+    `devtools.sqverify_fast_census` ``--control`` runs every mass scaled by 99/100
+    (`check_sqverify_fast.mixed_mutant`) at every direction of the net (FC-1) and holds
+    only if some direction refuses it and every refusal is a coverage refusal at a pose in
+    the per-bin domain where the mutant's capture, evaluated again apart from the crate, is
+    below 1 (`census.refusal_record`, `census.refusal_held`). This runs the same mutant at
+    the chosen directions, one thread each, and keeps the census's own judgement of every
+    refusal. A diagnostic of the directions it ran: it says nothing of the others, and is
+    no control receipt.
+    """
+    data = load_json(read_retained(candidate))
+    _step, count, _facts, _checks = declared_net(data)
+    require(bool(indices), "no direction to run")
+    require(all(0 <= index < count for index in indices), "a direction is off the net")
+    require(1 <= workers <= 2, "at most two workers on a shared host")
+    raw = read_raw(candidate)
+    before = os.getloadavg()[0]
+    start = time.monotonic()
+    with tempfile.TemporaryDirectory(prefix="control-sample-") as scratch:
+        mutant = Path(scratch) / "scaled-99-100.json"
+        scaled_raw = mixed_mutant(raw, factor=census.CONTROL_SCALE)
+        mutant.write_text(json.dumps(scaled_raw), encoding="utf-8")
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            found = list(pool.map(lambda r: run_direction(binary, mutant, n, side, r), indices))
+    wall = time.monotonic() - start
+    rows: list[dict[str, Any]] = []
+    for index, result in zip(indices, found, strict=True):
+        row = result["row"]
+        judged = (
+            None
+            if row.get("verdict") == "verified"
+            else census.refusal_record(raw, row, census.CONTROL_SCALE, format_m=True)
+        )
+        rows.append(
+            {
+                "r": index,
+                "returncode": result["returncode"],
+                "verdict": row.get("verdict"),
+                "method": row.get("method"),
+                "nodes": row.get("nodes"),
+                "min_certified_lower_bound": row.get("min_certified_lower_bound"),
+                "process_cpu_seconds": result["process_cpu_seconds"],
+                "wall_seconds": result["wall_seconds"],
+                "refusal": judged,
+                "refusal_counts": judged is not None and census.refusal_held(judged),
+                "stderr_tail": result["stderr_tail"],
+            }
+        )
+    refused = [row for row in rows if row["refusal"] is not None]
+    if not refused:
+        status = "MUTANT_NOT_REFUSED_HERE"
+    elif all(row["refusal_counts"] for row in refused):
+        status = "DIAGNOSTIC_CONTROL_SAMPLE"
+    else:
+        status = "CONTROL_SAMPLE_REFUSAL_NOT_COUNTED"
+    builds = {json.dumps(item["summary"].get("build"), sort_keys=True) for item in found}
+    return {
+        "kind": "fine-net-followup-control-sample/v1",
+        "candidate_sha256": file_digest(candidate),
+        "candidate_digest": semantic_digest(data),
+        "n": n,
+        "L": side,
+        "mutation": {"factor": str(census.CONTROL_SCALE)},
+        "mutant_total_mass": scaled_raw["total_mass"],
+        "directions": indices,
+        "rows": rows,
+        "build": found[0]["summary"].get("build") if len(builds) == 1 else None,
+        "binary_sha256": file_digest(binary),
+        "threads_per_direction": 1,
+        "workers": workers,
+        "wall_seconds": wall,
+        "process_cpu_seconds": sum(row["process_cpu_seconds"] for row in rows),
+        "host": {
+            "cpu_count": os.cpu_count(),
+            "machine": platform.machine(),
+            "load_before": before,
+            "load_after": os.getloadavg()[0],
+        },
+        "ran_at": utc_now(),
+        "status": status,
+        "scope": (
+            "A diagnostic of the whole-net control's 99/100 mutant at the directions it ran,"
+            " each refusal judged by the census's own refusal_record and refusal_held; it is"
+            " no control receipt and says nothing of the other directions."
+        ),
+    }
+
+
+def read_retained(path: Path) -> bytes:
+    """A candidate's bytes, decompressed where it is stored as gzip."""
+    data = path.read_bytes()
+    return gzip.decompress(data) if data[:2] == b"\x1f\x8b" else data
 
 
 # --------------------------------------------------------------------------- linear
@@ -815,6 +954,20 @@ def main(argv: list[str] | None = None) -> int:
     second = commands.add_parser("sample", help="sqverify-fast at chosen directions")
     third = commands.add_parser("linear-premises", help="a linear certificate's premises")
     fourth = commands.add_parser("linear-sample", help="a linear certificate's angles")
+    fifth = commands.add_parser(
+        "control-sample", help="the whole-net control's 99/100 mutant at chosen directions"
+    )
+    fifth.add_argument("--binary", type=Path, required=True)
+    fifth.add_argument("--candidate", type=Path, required=True)
+    fifth.add_argument("--directions", type=parse_directions, default=[])
+    fifth.add_argument("--source-run", type=Path, help="the source's run log, for --least")
+    fifth.add_argument(
+        "--least", type=int, default=0, help="add this many least-bound directions of the run"
+    )
+    fifth.add_argument("--workers", type=int, default=1)
+    fifth.add_argument("--n", type=int, required=True)
+    fifth.add_argument("--side", required=True)
+    fifth.add_argument("--out", type=Path, required=True)
     for command in (first, third, fourth):
         command.add_argument("--asset", type=Path, required=True)
         command.add_argument("--sha256", required=True)
@@ -838,7 +991,22 @@ def main(argv: list[str] | None = None) -> int:
         command.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
-        if args.command == "premises":
+        if args.command == "control-sample":
+            least = (
+                least_bound_directions(args.source_run, args.least)
+                if args.source_run is not None and args.least
+                else []
+            )
+            receipt = control_sample(
+                args.binary,
+                args.candidate,
+                n=args.n,
+                side=args.side,
+                indices=sorted({*args.directions, *least}),
+                workers=args.workers,
+            )
+            passing = "DIAGNOSTIC_CONTROL_SAMPLE"
+        elif args.command == "premises":
             stated = Certificate(
                 args.name, args.work, args.name, args.n, Fraction(args.side), "", kind="check2"
             )

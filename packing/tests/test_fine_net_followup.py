@@ -341,6 +341,100 @@ def test_a_sample_off_the_net_or_with_three_workers_is_refused(tmp_path: Path) -
         assert followup.main(argv) == 1
 
 
+def test_a_sample_reads_a_packets_retained_gzip_candidate(tmp_path: Path) -> None:
+    asset, documents, data = release(tmp_path)
+    assert followup.main(premises_argv(tmp_path, asset, documents, data)) == 0
+    plain = tmp_path / "work/certificates" / NAME / "candidate.json"
+    stored = tmp_path / "candidate.json.gz"
+    stored.write_bytes(gzip.compress(plain.read_bytes(), mtime=0))
+    out = tmp_path / "sample.json"
+    argv = ["sample", "--binary", str(fake_binary(tmp_path, "verified"))]
+    argv += ["--candidate", str(stored), "--n", "2", "--side", "3"]
+    argv += ["--directions", "5", "--out", str(out)]
+    assert followup.main(argv) == 0
+    receipt = json.loads(out.read_text())
+    assert receipt["candidate_digest"] == semantic_digest(json.loads(plain.read_bytes()))
+
+
+#: A stand-in binary for the control sample: the row of each direction it is asked for,
+#: from a table keyed by direction.
+CONTROL_FAKE = """\
+import json, sys
+r = int(sys.argv[sys.argv.index("--directions") + 1])
+row = ROWS.get(str(r), {"verdict": "verified"})
+print(json.dumps({"r": r, "cpu_seconds": 0.1, "nodes": 7, **row}))
+print(json.dumps({"kind": "sqverify-fast-summary/v1", "build": {"source_sha256": "0"}}))
+sys.exit(0 if row["verdict"] == "verified" else 1)
+"""
+
+
+def control_binary(tmp_path: Path, rows: dict[str, Any]) -> Path:
+    path = tmp_path / "fake-control"
+    path.write_text(f"#!{sys.executable}\nROWS = {rows!r}\n{CONTROL_FAKE}")
+    path.chmod(path.stat().st_mode | stat.S_IXUSR)
+    return path
+
+
+@pytest.mark.parametrize(
+    ("crate", "status", "code"),
+    [
+        ("agrees", "DIAGNOSTIC_CONTROL_SAMPLE", 0),
+        ("differs", "CONTROL_SAMPLE_REFUSAL_NOT_COUNTED", 1),
+        ("verifies", "MUTANT_NOT_REFUSED_HERE", 1),
+    ],
+)
+def test_a_control_sample_judges_each_refusal_as_the_census_does(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, crate: str, status: str, code: int
+) -> None:
+    """The 99/100 mutant at chosen directions: a refusal counts only where the census's
+    own `refusal_held` would count it, here the crate's exact capture at its witness
+    equal to the independent evaluator's; no refusal at all says nothing."""
+    asset, documents, data = release(tmp_path)
+    assert followup.main(premises_argv(tmp_path, asset, documents, data)) == 0
+    plain = tmp_path / "work/certificates" / NAME / "candidate.json"
+    stored = tmp_path / "candidate.json.gz"
+    stored.write_bytes(gzip.compress(plain.read_bytes(), mtime=0))
+    # The independent evaluator stands in at one: the mutant's capture is 99/100.
+    monkeypatch.setattr(followup.census, "mixed_exact", lambda *_: Fraction(1))
+    agree = crate == "agrees"
+    witness = {
+        "exact_pose": ["3/2", "3/2"],
+        "exact_below_threshold": True,
+        "exact_coverage": "99/100" if agree else "49/50",
+    }
+    refused = {"verdict": "counterexample-candidate", "witness": witness}
+    rows = {} if crate == "verifies" else {"9": refused}
+    out = tmp_path / "control-sample.json"
+    argv = ["control-sample", "--binary", str(control_binary(tmp_path, rows))]
+    argv += ["--candidate", str(stored), "--n", "2", "--side", "3"]
+    argv += ["--directions", "9,4", "--workers", "2", "--out", str(out)]
+    assert followup.main(argv) == code
+    receipt = json.loads(out.read_text())
+    assert receipt["status"] == status
+    assert receipt["directions"] == [4, 9]
+    assert receipt["mutation"] == {"factor": "99/100"}
+    by_r = {row["r"]: row for row in receipt["rows"]}
+    assert by_r[4]["refusal"] is None
+    if crate != "verifies":
+        assert by_r[9]["refusal"]["in_domain"] is True
+        assert by_r[9]["refusal"]["capture"] == "99/100"
+        assert by_r[9]["refusal_counts"] is agree
+    assert "no control receipt" in receipt["scope"]
+
+
+def test_the_least_bound_directions_are_read_from_the_source_run(tmp_path: Path) -> None:
+    run = tmp_path / "run.jsonl.gz"
+    rows = [
+        {"r": 0, "min_certified_lower_bound": 0.9},
+        {"r": 1, "min_certified_lower_bound": 1.2},
+        {"r": 2, "min_certified_lower_bound": 1.000001},
+        {"r": 3, "min_certified_lower_bound": 1.01},
+    ]
+    run.write_bytes(gzip.compress(b"".join(json.dumps(r).encode() + b"\n" for r in rows)))
+    # The axis is left out: its bound is the vertex sweep's, not the branch and bound's.
+    assert followup.least_bound_directions(run, 2) == [2, 3]
+
+
 # --------------------------------------------------------------------------- linear
 
 LINEAR = "mixed_n3_L4"
