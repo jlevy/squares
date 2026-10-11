@@ -3,9 +3,9 @@ type: is
 id: is-01m4pgxrs8s333vbdgpxw6c1w7
 title: "Address PR #512 review A: intake 2026-10-11 layer 1 (audit_n40_new_supports, #485 record)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 13
+version: 14
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -24,7 +24,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T22:21:52.808Z
-updated_at: 2026-10-11T22:23:12.644Z
+updated_at: 2026-10-11T23:24:40.245Z
 started_at: 2026-10-11T22:23:12.643Z
+closed_at: 2026-10-11T23:24:40.245Z
+close_reason: "Review A addressed: A1-A10 fixed (286326fd9, 604699ee1, PR body), A11 deferred as think-erpg; reply https://github.com/jlevy/squares/pull/512#issuecomment-6115070910"
+resolution: null
+duplicate_of: null
 ---
 Review A (senior, round 1) on https://github.com/jlevy/squares/pull/512 at head 89b85f6a694d3e08343b3ea868c76c73158f6a8a: https://github.com/jlevy/squares/pull/512#pullrequestreview-5485248489. Findings A1-A3 Medium, A4-A9 Low, A10-A11 suggestions.
