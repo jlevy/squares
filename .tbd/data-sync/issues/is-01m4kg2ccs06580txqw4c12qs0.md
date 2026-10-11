@@ -3,9 +3,9 @@ type: is
 id: is-01m4kg2ccs06580txqw4c12qs0
 title: Scope pre-push prerequisites to changed inputs
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
 delegate: codex@spud10
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m4ke1dkg5m43rszjm49ar77r
 hold: null
 hold_until: null
 created_at: 2026-10-10T18:09:12.086Z
-updated_at: 2026-10-10T18:13:08.263Z
+updated_at: 2026-10-11T03:03:37.436Z
 started_at: 2026-10-10T18:12:46.496Z
+closed_at: 2026-10-11T03:03:37.435Z
+close_reason: "Bounded implementation complete in PR #496 at aca9a0784. All ordinary PR checks and full Deferred checkpoint 38105875719 passed; all ten artifact receipts match the immutable head/tree. Independent senior and dedicated performance/security reviews have no findings. Focused contracts passed; local push prerequisite pass and 900s behavioral timeout remain explicitly incomplete, without a speedup claim. Broad shared-core attribution retained; parent think-ht59 owns remaining dependency/timing debt."
+resolution: null
+duplicate_of: null
 ---
 Reuse the existing select_for_paths contract to scope local --push prerequisite checks, then separate policy/tooling inputs from the overly broad _CORE attribution after auditing actual dependencies. No implementation is authorized in the current slice.
 
