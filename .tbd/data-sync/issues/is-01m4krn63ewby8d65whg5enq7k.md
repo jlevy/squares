@@ -3,15 +3,19 @@ type: is
 id: is-01m4krn63ewby8d65whg5enq7k
 title: "Import Evan Daniel: exact-optimum certificates at 15 counts below the register (regularized lists, 122d0ba) (no issue)"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 5
+version: 6
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 created_at: 2026-10-10T20:39:16.846Z
-updated_at: 2026-10-11T05:06:57.322Z
+updated_at: 2026-10-11T05:09:16.713Z
+closed_at: 2026-10-11T05:09:16.712Z
+close_reason: "T-146 integrated: stage 4 done (V3/C3), merged in PR #487 (c6bf2d46f), deployed site verified 2026-10-11 (Pages deployment 6991089138, verify-deployment 4042/4042; row and result page match the register). No issue asked, so no reply is owed."
+resolution: null
+duplicate_of: null
 ---
 Evan Daniel's display-regularized record lists (evand/square-packing `search/regularize/`, added 346c6ed on 2026-10-10 18:05Z, lists refreshed at 122d0ba666884b176b2e442056c4fd1afe5a634a; head baf9143 at 20:31Z) hold one exact rational certificate per count for n = 1..324 (`lists/certs/n-NNN.cert.gz` plus 50-digit JSON). Lane L26 of the 2026-10-10 pass parsed all 329 certificates with `devtools.evand_exact_certificates.parse` and compared each exactly with every value the register holds (case records, source-coverage overrides, superseded and beyond-horizon rows, packet claim records, results.yaml claims). At 15 counts the certificate is strictly below the register's least value:
 
