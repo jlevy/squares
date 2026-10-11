@@ -454,6 +454,23 @@ def violations(
     return failures
 
 
+def judge(
+    repo: Path, base: str, blobs: Sequence[Blob], ceilings: Ceilings
+) -> tuple[dict[str, int], list[str]]:
+    """The failures, with the paths grandfathered at `base` exempted.
+
+    Grandfathering only ever removes a failure, so the base tree is listed only when
+    there is one for it to remove, and a branch that passes without it pays nothing.
+    """
+    failures = violations(blobs, per_blob=ceilings.per_blob, total=ceilings.total)
+    if not failures:
+        return {}, failures
+    exempt = grandfathered(repo, base, per_blob=ceilings.per_blob)
+    return exempt, violations(
+        blobs, per_blob=ceilings.per_blob, total=ceilings.total, exempt=exempt
+    )
+
+
 def census(repo: Path, ref: str, count: int, *, ceilings: Ceilings) -> list[CensusRow]:
     """Replay the gate over the last `count` first-parent merges into `ref`."""
     deadline = time.monotonic() + MAX_SECONDS
@@ -487,10 +504,7 @@ def census(repo: Path, ref: str, count: int, *, ceilings: Ceilings) -> list[Cens
         first, second = parents.split()
         try:
             blobs = inventory(repo, first, head=second)
-            exempt = grandfathered(repo, first, per_blob=ceilings.per_blob)
-            failures = violations(
-                blobs, per_blob=ceilings.per_blob, total=ceilings.total, exempt=exempt
-            )
+            exempt, failures = judge(repo, first, blobs, ceilings)
         except MetadataError as error:
             rows.append(replace(row, refusal=str(error), seconds=time.monotonic() - started))
             continue
@@ -592,10 +606,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             print_census(rows, args.census_ref, ceilings)
             return 0
         blobs = inventory(Path.cwd(), args.base, head=args.head, staged=args.staged)
-        exempt = grandfathered(Path.cwd(), args.base, per_blob=ceilings.per_blob)
-        failures = violations(
-            blobs, per_blob=ceilings.per_blob, total=ceilings.total, exempt=exempt
-        )
+        exempt, failures = judge(Path.cwd(), args.base, blobs, ceilings)
     except MetadataError as error:
         print(f"GUARD_REFUSED: {error}", file=sys.stderr)
         return 2

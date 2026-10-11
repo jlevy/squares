@@ -5350,12 +5350,37 @@ def test_push_scopes_prerequisites_and_tests_from_one_snapshot(
         if original == ["site/style.css"]
         else ["unattributed", "site", "science"]
     )
-    assert selected_names == [*expected, "reachable behavioral tests"]
+    assert selected_names == [*expected, "added Git blob storage", "reachable behavioral tests"]
     assert snapshots == [original, original]
     assert reads == ["base-ref"]
     assert files[0] == files[1]
     assert not files[0].exists()
     assert "prerequisites" in stdout
+
+
+def test_push_runs_the_added_blob_guard_against_its_own_base(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The local half of the PR storage gate checks the branch against the `--since` base."""
+    commands: list[tuple[str, ...]] = []
+
+    def run(_context: validate.Context, command: Sequence[str], **_options: object) -> str:
+        commands.append(tuple(command))
+        return "PASS"
+
+    monkeypatch.setattr(validate, "_run", run)
+    step = validate._push_storage_step("origin/lower")
+    assert step.fast
+    assert not step.broad
+    assert step.touches == ()
+    assert step.reachable_from("any/path/at/all.bin")
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=dict(os.environ)
+    )
+    assert step.action(context) == "PASS"
+    assert commands == [
+        (sys.executable, "-m", "devtools.check_added_blobs", "--base", "origin/lower")
+    ]
 
 
 def test_push_prerequisites_keep_scientific_policy_and_browser_coverage() -> None:
