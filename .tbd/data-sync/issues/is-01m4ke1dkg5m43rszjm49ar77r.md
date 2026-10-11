@@ -5,7 +5,7 @@ title: Review and repair the website development and CI critical path
 kind: feature
 status: in_progress
 priority: 1
-version: 11
+version: 12
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
 delegate: codex@spud10
 labels:
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T17:33:43.407Z
-updated_at: 2026-10-10T23:12:12.303Z
+updated_at: 2026-10-11T01:42:58.861Z
 started_at: 2026-10-10T17:35:10.785Z
 ---
 User requests a systematic review of why routine website iteration consumed hours, followed by development-process or CI fixes. Delegate independent analysis of workflow/CI architecture and reachable-test over-selection; coordinator rolls up evidence and implements the smallest justified changes. Capture command wall, repeated work, scope/coverage and failure classification; preserve scientific contracts and assert equivalence before performance claims. Current website PR462 remains separately tracked under think-o2jd; do not close on a report alone.
@@ -51,3 +51,7 @@ Independent focused evidence remains 118 policy/CLI tests passed, 193 deselected
 Final exact-head receipt, 2026-10-10: draft PR462 head 5b04d007db69cb688db7bad04a30c1617c935268 completed with 23 successful checks, seven failures, 27 skips and zero pending. Five stale source contracts and a stale runtime tab-font expectation were found after canonical Results/shared-controller/90%-label changes; the focused corrections passed 10 tests in 211.73s, with scoped lint and strict production-probe types clean. The frontend recorded 409 passes, two failures and six skips in 285.07s, plus 56 floor-liveness passes in 29.11s; tier wall was 285.72s. Its 165s completed-run cost finding remained advisory. Serial native HTTP scenarios were not reached after the functional failure; no aggregate frontend pass is claimed.
 
 The overview separately failed Atlas 1280/light startup at 302ms against the unchanged 300ms guard. The task started at97.2ms and was an initial native frame with scripts=[]; it finished before Atlas JavaScript began at412.8ms (35.8ms execution,30.1ms forced layout). This excludes image preparation/preload as the source of that observed task and does not establish a performance optimization. Separately, the retained startup trace found a real post-placement style flush (3064 then848 elements) from reading FontFaceSet.ready after mount writes; the coordinator captured that promise before mount without changing preparation behavior. The unchanged restyle and desktop-light native HTTP/no-JS controls passed two focused tests in101.69s. The failed302ms receipt remains authoritative; the corrected candidate still requires new exact-head CI, with every300ms/45s/deadline contract unchanged. Durable final logs, exact-head JSON and extracted report are under /Users/levy/.codex/visualizations/2026/10/08/01a11dc7-6f9d-7060-be5c-4cff21839702/results-rename/ci-5b04d007/. Keep this process owner, think-9k61 and full checkpoint think-xio5 open; preserve the earlier incomplete local receipt.
+
+Merged-deployment observation (PR462,6038af33): independent Astra read-only audit identifies515 sequential non-asset registry GETs plus a serial GitHub HEAD phase in packing/devtools/check_published_site.py. Source already records a14m47s audit dominated by the latter. HTTP cache keys preserve fragments, so separate #L anchors request the same network resource repeatedly. Results print only after the audit completes; current elapsed time does not attribute a phase or prove a hang.
+
+Selected next hypothesis: defragment transport/cache keys while preserving queries, original diagnostics, retries, all registry rows and all semantic/browser checks. Prove different anchors share one transport request and distinct queries remain separate. Add maintained phase and slow-request timing; measure before claiming a speedup. Forwarder load-vs-commit waiting is a secondary hypothesis. No source change or duplicate live audit was made during this diagnosis.
