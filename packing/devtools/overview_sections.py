@@ -17,6 +17,7 @@ import json
 import math
 import re
 import textwrap
+from collections import Counter
 from collections.abc import Collection, Iterable, Mapping, Sequence
 from datetime import date, timedelta
 from functools import cache
@@ -1202,6 +1203,225 @@ def results_table(overview: Overview, defaults: FilterDefaults = RESULTS_DEFAULT
     """The results page's table: every registered result (`table_of_results`), each row
     the result's own address, under a bar that starts by hiding nothing."""
     return table_of_results(overview, defaults, here=True)
+
+
+# ---------- Recent results by week: the results page's overview above its table ----------
+
+#: The lowest significance the weekly overview lists: `S3`, "a substantive case result
+#: or machine audit" (epistemics.md, Significance and Novelty), and above. The owner
+#: asked for S3 and above on 2026-10-11 (`think-2z22`).
+ROLLUP_FLOOR = 3
+#: How many calendar weeks the overview covers, the newest included: about a month.
+ROLLUP_WEEKS = 4
+#: The weekly overview's count of weeks as its introduction writes it.
+ROLLUP_WEEKS_WORD = {1: "week", 2: "two weeks", 3: "three weeks", 4: "four weeks"}
+#: The bound kinds a line names as nouns of their own; every other kind is "a ... result".
+_KIND_NOUNS = {"lower-bound": "lower bound", "upper-bound": "upper bound"}
+
+
+class RollupCredit(NamedTuple):
+    """One line of a week in the weekly overview: whose results they are, as the credit
+    line names its finder (`credit_finder`); those results, oldest first; and the listed
+    projects the record attributes any of them to (`result_projects`), by address, the
+    one holding most of them first and the list's order breaking a tie."""
+
+    finder: str
+    results: tuple[Result, ...]
+    projects: tuple[str, ...]
+
+
+class RollupWeek(NamedTuple):
+    """One calendar week, Monday to Sunday, and its lines, the most significant first
+    (`rollup_order`)."""
+
+    monday: date
+    credits: tuple[RollupCredit, ...]
+
+    @property
+    def total(self) -> int:
+        """How many results the week lists."""
+        return sum(len(credit.results) for credit in self.credits)
+
+
+def credit_finder(credit: str) -> str:
+    """Whose a result is, as a credit line names it: the finder, before any "after …",
+    which names the work it rests on (`credit_cell` sets the two apart the same way)."""
+    return credit.partition(" after ")[0]
+
+
+def week_start(day: date) -> date:
+    """The Monday of `day`'s calendar week, the ISO week (ISO 8601) the overview groups
+    by."""
+    return day - timedelta(days=day.weekday())
+
+
+def result_day(result: Result) -> date:
+    """The day a result's row shows (`Result.dated`): its publication for a result by
+    others, its establishment for this project's, a year or a month read as its first
+    day (`first_day`)."""
+    return date.fromisoformat(first_day(result.dated[1]))
+
+
+def rollup_reference(overview: Overview) -> date:
+    """The day the weekly overview's newest week holds: the newest of `reference_date`,
+    the register's newest `registered`, and any date a row shows. It is the record's,
+    never the clock's, so a render of one tree is the same bytes on any day."""
+    return max(reference_date(overview), *(result_day(result) for result in overview.results))
+
+
+def rollup_order(credit: RollupCredit) -> tuple[int, int, int, str]:
+    """A week's lines in the order the projects' cards take (`project_order`, the owner,
+    2026-10-01): the highest significance first, then more results, then the newest, then
+    by name."""
+    return (
+        -max(significance(result) for result in credit.results),
+        -len(credit.results),
+        -max(result_day(result) for result in credit.results).toordinal(),
+        credit.finder.lower(),
+    )
+
+
+def rollup_weeks(
+    results: Iterable[Result],
+    reference: date,
+    *,
+    weeks: int = ROLLUP_WEEKS,
+    floor: int = ROLLUP_FLOOR,
+) -> list[RollupWeek]:
+    """The weekly overview's weeks, newest first: the `weeks` calendar weeks up to and
+    including `reference`'s, each holding every result at `floor` or above whose row's
+    date falls in it (`result_day`), one line for each finder (`credit_finder`).
+
+    Every result at the floor counts, whatever else is true of it: a superseded one was
+    new in its week, and the line marks it (`rollup_ids`); one pending adoption, one
+    only recorded, and a score that is still the registering lane's draft count as the
+    table shows them. The rows are the register's entries, so a claim outside the case
+    corpus, which the source-coverage register tracks and no entry holds, is in none.
+    """
+    newest = week_start(reference)
+    mondays = [newest - timedelta(weeks=back) for back in range(weeks)]
+    found: dict[date, dict[str, list[Result]]] = {monday: {} for monday in mondays}
+    for result in results:
+        finders = found.get(week_start(result_day(result)))
+        if finders is not None and significance(result) >= floor:
+            finders.setdefault(credit_finder(result.credit), []).append(result)
+    addresses = {project_slug(url): url for url in project_urls()}
+    weekly = []
+    for monday in mondays:
+        lines = []
+        for finder, own in found[monday].items():
+            own.sort(key=lambda result: (result_day(result), result.id))
+            held = Counter(slug for result in own for slug in result_projects(result))
+            # `sorted` is stable, so projects holding as many stay in the list's order.
+            ranked = sorted(
+                (slug for slug in addresses if slug in held), key=lambda slug: -held[slug]
+            )
+            projects = tuple(addresses[slug] for slug in ranked)
+            lines.append(RollupCredit(finder, tuple(own), projects))
+        weekly.append(RollupWeek(monday, tuple(sorted(lines, key=rollup_order))))
+    return weekly
+
+
+def week_label(monday: date) -> str:
+    """A week as its summary names it, Monday to Sunday joined by an en dash, closed up
+    within a month and spaced across two: `5-11 October 2026`, `28 September - 4 October
+    2026` (each `-` an en dash on the page), and across a new year both years."""
+    sunday = monday + timedelta(days=6)
+    if monday.year != sunday.year:
+        return f"{monday.day} {monday:%B %Y} {EN_DASH} {sunday.day} {sunday:%B %Y}"
+    if monday.month != sunday.month:
+        return f"{monday.day} {monday:%B} {EN_DASH} {sunday.day} {sunday:%B %Y}"
+    return f"{monday.day}{EN_DASH}{sunday.day} {sunday:%B %Y}"
+
+
+def kind_phrase(results: Sequence[Result]) -> str:
+    """What a line's results are, counted by kind in the rubric's order: `15 lower
+    bounds`, `2 upper bounds and 1 optimality result`."""
+    held = [str(result.record["kind"]) for result in results]
+    parts = []
+    for kind in KINDS:
+        count = held.count(kind)
+        if count:
+            noun = _KIND_NOUNS.get(kind, f"{kind_label(kind)} result")
+            parts.append(f"{count} {noun}{'' if count == 1 else 's'}")
+    return listed(parts)
+
+
+def external_link(url: str, text: str) -> str:
+    """A link to a place off the site, opened in a new tab as a project's card opens
+    it (`link_card`). `text` is markup already escaped."""
+    return f'<a href="{_esc(url)}" target="_blank" rel="noopener noreferrer">{text}</a>'
+
+
+def rollup_who(credit: RollupCredit) -> str:
+    """A line's credit: the finder's name as the register's credit line gives it,
+    linked to the listed project that holds most of the line's results
+    (`RollupCredit.projects`), the address its card on the overview opens. A finder whose
+    results no listed project holds, this project's own among them, is named plainly.
+    Where a contributor's own page exists, this is the one place to link it instead."""
+    name = _esc(credit.finder)
+    if credit.projects:
+        name = external_link(credit.projects[0], name)
+    return f'<span class="site-rollup-who">{name}</span>'
+
+
+def rollup_ids(results: Sequence[Result]) -> str:
+    """A line's results, each its id as a link to its row of the table below (`#t-018`,
+    the row's own address on this page), oldest first. A result above the floor, S4 or
+    S5, carries its rung after its id in the significance ink; one since superseded
+    (`is_superseded`) is muted and says so in its title."""
+    links = []
+    for result in results:
+        superseded = is_superseded(result)
+        attributes = ' class="site-rollup-superseded" title="Superseded"' if superseded else ""
+        link = f'<a href="#{_esc(result.id.lower())}"{attributes}>{_esc(result.id)}</a>'
+        level = significance(result)
+        if level > ROLLUP_FLOOR:
+            link += f'<span class="site-rollup-s">S{level}</span>'
+        links.append(link)
+    return f'<span class="site-rollup-ids">{", ".join(links)}</span>'
+
+
+def rollup_line(credit: RollupCredit) -> str:
+    """One finder's line in a week: who, what kinds and how many, and the results' ids."""
+    return (
+        f"<li>{rollup_who(credit)} "
+        f'<span class="site-cell-quiet">{kind_phrase(credit.results)}:</span> '
+        f"{rollup_ids(credit.results)}</li>"
+    )
+
+
+def recent_rollup(overview: Overview, *, weeks: int = ROLLUP_WEEKS) -> str:
+    """The results page's weekly overview (`rollup_weeks`), above its table: one
+    disclosure a week, newest first, its summary the week and its count, its body one
+    line a finder. The newest week with a result starts open and the others closed, so
+    the page opens on a few lines and every earlier week is one press away; without
+    scripts every disclosure still works. It is generated from the register at render
+    time and holds no list of its own."""
+    reference = rollup_reference(overview)
+    weekly = rollup_weeks(overview.results, reference, weeks=weeks)
+    opened = next((week.monday for week in weekly if week.total), None)
+    blocks = []
+    for week in weekly:
+        count = week.total
+        counted = f"{count} result{'' if count == 1 else 's'}" if count else "no results"
+        # One run of text beside the disclosure's chevron, so a summary that wraps
+        # wraps as a line does, before its count.
+        summary = (
+            f"<span>{_esc(week_label(week.monday))} "
+            f'<span class="site-rollup-count">· {counted}</span></span>'
+        )
+        body = (
+            f"<ul>{''.join(rollup_line(credit) for credit in week.credits)}</ul>"
+            if count
+            else f"<p>No result at S{ROLLUP_FLOOR} or above.</p>"
+        )
+        state = " open" if week.monday == opened else ""
+        blocks.append(
+            f'<details data-week="{week.monday.isoformat()}"{state}>'
+            f"<summary>{summary}</summary>{body}</details>"
+        )
+    return f'<div class="site-rollup">{"".join(blocks)}</div>'
 
 
 #: The rubric's three scored dimensions, in the site's order, significance first: the

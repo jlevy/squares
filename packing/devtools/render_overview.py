@@ -107,6 +107,8 @@ THEME_SCRIPT = BROWSER / "theme.js"
 HEADROOM_SCRIPT = BROWSER / "headroom.js"
 TOOLTIP_SCRIPT = BROWSER / "rating-tooltips.js"
 HOMEPAGE_CSS = BROWSER / "homepage.css"
+#: The results page's own styles: its weekly overview above the table (think-2z22).
+RESULTS_CSS = BROWSER / "results.css"
 #: The frame the site's flattened kpress client modules are placed in.
 KPRESS_CLIENT_FRAME = BROWSER / "kpress-client.js"
 #: kpress's client modules a site page carries, in dependency order: the contents rail's
@@ -1365,6 +1367,10 @@ def results_page() -> Page:
     overview = overview_data.load()
     values = {
         "EPISTEMICS_URL": "epistemics.html",
+        # The weekly overview above the table, from the same register (think-2z22).
+        "RECENT_ROLLUP": overview_sections.recent_rollup(overview),
+        "ROLLUP_FLOOR": f"S{overview_sections.ROLLUP_FLOOR}",
+        "ROLLUP_WEEKS": overview_sections.ROLLUP_WEEKS_WORD[overview_sections.ROLLUP_WEEKS],
         "RESULTS_TABLE": overview_sections.results_table(overview),
         "STATUS_COUNTS": overview_sections.status_counts(overview),
         # The rating ladders, the homepage's Verification Ladders until 2026-10-02.
@@ -1380,6 +1386,7 @@ def results_page() -> Page:
         title=RESULTS_META.name,
         description=RESULTS_META.description,
         toc=False,
+        page_styles=(RESULTS_CSS,),
         page_scripts=(TABLE_SCRIPT, POPOVER_SCRIPT, ROW_POPOVER_SCRIPT),
     )
 

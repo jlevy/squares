@@ -1,0 +1,61 @@
+/* The results page's weekly overview above its table (overview_sections.recent_rollup):
+   KPress's own disclosure, one a week, stacked so two weeks share one rule. */
+.kpress .site-rollup {
+  margin-block: 1rem var(--site-table-space);
+}
+
+.kpress .site-rollup details {
+  margin: 0;
+}
+
+.kpress .site-rollup details + details {
+  border-block-start: 0;
+}
+
+.kpress .site-rollup ul {
+  font-size: var(--site-font-size-note);
+  list-style: none;
+  margin: 0;
+}
+
+/* A line that wraps keeps its later lines under the first one's ids, indented past
+   the name, so each finder still starts a line of their own. */
+.kpress .site-rollup li {
+  margin-block: 0.35rem;
+  padding-inline-start: 1.5em;
+  text-indent: -1.5em;
+}
+
+/* Each line opens with a finder's name in medium weight, which is mark enough: the
+   prose list's drawn square would sit in the hanging indent's margin. */
+.kpress .site-rollup li::before {
+  content: none;
+}
+
+/* A summary that wraps breaks before its count, never inside it. */
+.kpress .site-rollup-count {
+  white-space: nowrap;
+}
+
+.kpress .site-rollup .site-rollup-who {
+  color: var(--kpress-doc-text);
+  font-weight: var(--site-font-weight-sans-medium);
+}
+
+/* An id never breaks at its hyphen, and a rung after it stays with it. */
+.kpress .site-rollup-ids a {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.kpress .site-rollup-ids a.site-rollup-superseded {
+  color: var(--site-support-color);
+}
+
+.kpress .site-rollup-s {
+  color: var(--site-significance);
+  font-size: 0.8em;
+  font-weight: var(--site-font-weight-sans-medium);
+  margin-inline-start: 0.15em;
+  white-space: nowrap;
+}

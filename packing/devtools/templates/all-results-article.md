@@ -4,6 +4,14 @@
 
 </div>
 
+## Recent Results by Week
+
+Results at {{ROLLUP_FLOOR}} and above from the last {{ROLLUP_WEEKS}}, by the week each
+was published (or established, for this project’s own), with who found them.
+Each id leads to its row in the table below; a muted id has since been superseded.
+
+{{RECENT_ROLLUP}}
+
 ## Verification Ladders<a id="verification-at-a-glance"></a>
 
 Each result has an identifier, a claim, and three ratings, defined in
