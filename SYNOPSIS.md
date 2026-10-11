@@ -681,6 +681,16 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: Evan Daniel’s Regularized Certificates at Fifteen Counts (T-146)](docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md) | dated review record | record | retained | — |
+| [Final Review: Ryu’s $k^{3/8}$ Deficiency Bounds and the Grading of T-128 to T-146](docs/project/reviews/review-2026-10-11-final-asymptotic-and-grading.md) | dated review record | record | retained | — |
+| [Final Review of PR 487’s Lower Bounds: `T-133` and `T-145` at `n = 40`, and the Reported `T-132`, `T-142`, `T-143` and `T-144`](docs/project/reviews/review-2026-10-11-final-lower-bounds.md) | dated review record | record | retained | — |
+| [Review: Final Mathematical Review of the Upper-Bound Results of PR 487](docs/project/reviews/review-2026-10-11-final-upper-bounds.md) | dated review record | record | retained | — |
+| [Review: Two Rational Upper-Bound Imports of 10 October (#488, #489)](docs/project/reviews/review-2026-10-10-upper-bound-imports-488-489.md) | dated review record | record | retained | — |
+| [Review: Mishapolk’s Decimal Poses (#470) and Evan Daniel’s n = 126 Certificate](docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md) | dated review record | record | retained | — |
+| [Review: Four Rational Upper-Bound Imports of 9 and 10 October (#476, #481, #483, #484)](docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md) | dated review record | record | retained | — |
+| [Review: Couzo’s and Daniel’s Rational Refinement Replays (T-128, T-130, T-131)](docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) | dated review record | record | retained | — |
+| [Guzhou0806’s `s(40) > 1340000/199529`: Review of the Continuous-Pose Kernel on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md) | dated review record | record | retained | — |
+| [Guzhou0806’s `s(40) > 335427/50000`: Review of the Clipped-Corner Transfer on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) | dated review record | record | retained | — |
 | [Polynomial PR stack: publication checkpoint and remaining work](docs/project/handoff-2026-10-10-polynomial-pr-stack.md) | dated handoff record | record | retained | — |
 | [Review: Gupta exact rational refinements, issue #438](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md) | dated review record | record | retained | — |
 | [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |
