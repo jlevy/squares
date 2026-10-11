@@ -1,6 +1,6 @@
 // One change of the atlas's layout, timed. `press` is the selector of the control that
 // makes it, a view tab or the expander. The control is pressed once two frames have
-// passed, and the report is made once every tile's move has finished and two frames
+// passed, and the report is made once every tile and container move has finished and two frames
 // more have passed. It gives: how long the press's own handler ran, which is the whole
 // of the script's work (both reads of every box, the change and starting the moves);
 // how many tiles moved; how long the move lasted from the press; the animation frames
@@ -55,7 +55,7 @@ async (/** @type {{press: string, frames: boolean}} */ { press, frames: watch })
       (animation) =>
         !(animation instanceof CSSTransition) &&
         animation.effect instanceof KeyframeEffect &&
-        animation.effect.target?.matches(".site-atlas-cell") === true,
+        animation.effect.target?.matches(".site-atlas-cell, .site-atlas-cells") === true,
     );
   await Promise.allSettled(moves.map((animation) => animation.finished));
   const end = performance.now();
@@ -71,7 +71,11 @@ async (/** @type {{press: string, frames: boolean}} */ { press, frames: watch })
   const usual = ordered[Math.floor(ordered.length / 2)] ?? 0;
   return {
     handler_ms: round(handled),
-    moved: moves.length,
+    moved: moves.filter(
+      (animation) =>
+        animation.effect instanceof KeyframeEffect &&
+        animation.effect.target?.matches(".site-atlas-cell") === true,
+    ).length,
     lasted_ms: round(end - start),
     frames: during.length,
     frame_ms: round(usual),

@@ -89,6 +89,7 @@ class Source(NamedTuple):
     author: str
     address: str
     lead: str = "From the original proof by"
+    author_url: str = ""
 
 
 class Dated(NamedTuple):
@@ -206,6 +207,12 @@ def check(front: PaperFront) -> PaperFront:
         )
     if front.source is not None and not front.source.author.strip():
         raise ValueError(f"{front.slug}: the source is credited by its author's name")
+    if (
+        front.source is not None
+        and front.source.author_url
+        and not front.source.author_url.startswith("https://")
+    ):
+        raise ValueError(f"{front.slug}: the source author's profile must use https")
     if front.history and not _ANCHOR_ID.fullmatch(front.history):
         raise ValueError(f"{front.slug}: the version history is linked by its id")
     if front.series is not None:
@@ -316,11 +323,17 @@ def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
     if front.source is not None:
         author = escape(front.source.author)
         address = front.source.address
+        author_html = f"<strong>{author}</strong>"
+        author_markdown = f"**{author}**"
+        if front.source.author_url:
+            profile = front.source.author_url
+            author_html = f'<a href="{escape(profile, quote=True)}">{author_html}</a>'
+            author_markdown = f"[{author_markdown}]({profile})"
         lines.append(
             (
                 "credits-source",
-                f"{escape(front.source.lead)} <strong>{author}</strong>",
-                f"{front.source.lead} **{author}**",
+                f"{escape(front.source.lead)} {author_html}",
+                f"{front.source.lead} {author_markdown}",
             )
         )
         lines.append(

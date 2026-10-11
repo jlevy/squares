@@ -21,8 +21,8 @@ browser made of that:
   row away from the canvas's right edge. Each layout is read at each size (`SIZES`), and
   count centering is checked by `mark_problems`. The probe also records actual
   enclosing-outline and count-ink bounds; `ink_clearances` measures ordinary horizontal
-  gaps and the deepest count's clearance above the next drawing. Obsolete stars and
-  layer badges are still reported so tests can refuse them.
+  gaps and the deepest count's clearance above the next drawing. Stars and obsolete
+  layer badges are also reported for geometry and presence checks.
   `--markdown` prints one line a layout.
 - `move` times each change of layout (`CHANGES`: to the triangle and back, with a hundred
   cases and with all, the expander's change in the triangle, and changes of size in each
@@ -46,7 +46,7 @@ browser made of that:
   at each width in both themes; and the window at five points of the move from the grid
   to the triangle (0, 25, 50, 75 and 100 percent).
 
-`PAGE` is a built `index.html`, or a directory `preview_site` built. `--render` renders
+`PAGE` is a built `atlas.html`, or a directory `preview_site` built. `--render` renders
 the overview alone into `PAGE` first, which takes seconds where a whole site takes a
 minute. Usage, from `packing/`:
 
@@ -78,6 +78,7 @@ from sqpack.probes import probe
 
 PROBES = Path(__file__).resolve().parent / "probes"
 LAYOUT = probe(PROBES, "measure_atlas_views/layout")
+EXPANSION = probe(PROBES, "measure_atlas_views/expansion")
 MOVE = probe(PROBES, "measure_atlas_views/move")
 HOLD = probe(PROBES, "measure_atlas_views/hold")
 SETTLED = probe(PROBES, "measure_atlas_views/settled")
@@ -90,10 +91,10 @@ VIEWS = ("grid", "triangle")
 #: tabs, House and Regularized, that stood here as `LAYERS` went on 2026-10-04
 #: (think-k8x9).
 SIZES = ("small", "medium", "large")
-#: The size a plain address opens at, which `?size=` does not name.
+#: The explicit baseline size used by measurements; wide-screen defaults vary.
 DEFAULT_SIZE = "small"
 SCALES = ("fixed", "row", "global")
-DEFAULT_SCALE = "fixed"
+DEFAULT_SCALE = "row"
 WIDTHS = (1280, 1024, 768, 390)
 SCHEMES = ("light", "dark")
 #: The points of a move a picture is taken at, as shares of its duration.
@@ -134,7 +135,9 @@ def size_tab(size: str) -> str:
 
 
 #: The presses `move` makes on one page, in order: what the change is called, how many
-#: cases show once it is made, and the control pressed. A change with no name is made
+#: nominal cases for the state, and the control pressed. Preview Grid counts finish
+#: complete rows near 100; the report reads the actual count after its timed window.
+#: A change with no name is made
 #: and not timed: it only sets the page up for the next. The first two are such a pair,
 #: to the triangle and back. A first change of view brings the sections under the atlas
 #: nearer the window, and the page then typesets their math and loads the pages its
@@ -369,14 +372,18 @@ def launch(driver: Any) -> Any:
     return driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
 
 
+def expansion(page: Any, *, interrupt: bool = False) -> dict[str, Any]:
+    """Read real viewport heights through one expansion and optional interruption."""
+    return page.evaluate(EXPANSION, {"interrupt": interrupt})
+
+
 def settle(page: Any) -> None:
     """Wait until the tiles are placed and none is in a move."""
     page.wait_for_function(SETTLED)
 
 
 def query_for(view: str, size: str = DEFAULT_SIZE, scale: str = DEFAULT_SCALE) -> str:
-    """The query string that asks for `view` and `size`: nothing for Triangle at Small,
-    the defaults."""
+    """Ask for the measured size explicitly, including Small on wide screens."""
     if view not in VIEWS:
         raise ValueError(f"the atlas has no view {view!r}")
     if size not in SIZES:
@@ -385,7 +392,7 @@ def query_for(view: str, size: str = DEFAULT_SIZE, scale: str = DEFAULT_SCALE) -
         raise ValueError(f"the atlas has no scale {scale!r}")
     params = [
         *(["atlas=grid"] if view == "grid" else []),
-        *([f"size={size}"] if size != DEFAULT_SIZE else []),
+        f"size={size}",
         *([f"scale={scale}"] if scale != DEFAULT_SCALE else []),
     ]
     return f"?{'&'.join(params)}" if params else ""
@@ -448,7 +455,7 @@ def layout(page: Any) -> dict[str, Any]:
 def measure_layout(
     address: str, widths: Sequence[int], sizes: Sequence[str] = SIZES
 ) -> list[dict[str, Any]]:
-    """Each view at each width at each size, with a hundred cases and with all."""
+    """Each view at each width at each size, with its preview and with all cases."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     rows: list[dict[str, Any]] = []
@@ -506,7 +513,7 @@ def measure_move(
                 top(page)
                 client = page.context.new_cdp_session(page)
                 client.send("Performance.enable", {"timeDomain": "threadTicks"})
-                for change, shown, press in CHANGES:
+                for change, _, press in CHANGES:
                     if change is None:
                         page.locator(press).click()
                         settle(page)
@@ -521,6 +528,7 @@ def measure_move(
                     else:
                         top(page)
                     report = timed(page, client, press, frames=frames)
+                    shown = len(layout(page)["tiles"])
                     rows.append(
                         {"width": width, "change": change, "shown": shown, "run": run, **report}
                     )
@@ -558,7 +566,7 @@ ACTIONS = (("see-all", ".site-more"), ("expander", ".site-atlas-toggle-row"))
 
 
 def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
-    """The atlas block in each view at each width, light and dark, with a hundred cases
+    """The atlas block in each view at each width, light and dark, with its preview
     and with all, at each size; the two actions (`ACTIONS`) at each width in both
     themes, the expander collapsed and expanded; then the window at each of `FRACTIONS`
     of the move to the triangle."""
@@ -575,17 +583,19 @@ def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
                         page = open_atlas(
                             browser, address, width=width, view=view, size=size, scheme=scheme
                         )
-                        for shown in (100, 324):
-                            if shown == 324:
+                        for all_cases in (False, True):
+                            if all_cases:
                                 expand(page)
+                            shown = len(layout(page)["tiles"])
                             target = out / f"atlas-{view}-{shown}-{width}-{scheme}-{size}.png"
                             page.locator(BLOCK).screenshot(path=str(target))
                             written.append(target)
                         page.close()
                     page = open_atlas(browser, address, width=width, view=view, scheme=scheme)
-                    for shown in (100, 324):
-                        if shown == 324:
+                    for all_cases in (False, True):
+                        if all_cases:
                             expand(page)
+                        shown = len(layout(page)["tiles"])
                         target = out / f"atlas-{view}-{shown}-{width}-{scheme}.png"
                         page.locator(BLOCK).screenshot(path=str(target))
                         written.append(target)
@@ -638,16 +648,15 @@ def markdown_table(rows: Sequence[dict[str, Any]]) -> str:
 
 
 def page_address(target: Path, *, render: bool) -> str:
-    """The address of the overview at `target`, a built `index.html` or the directory
-    that holds one; with `render`, the overview is rendered there first."""
-    path = target / "index.html" if target.is_dir() or target.suffix != ".html" else target
+    """The complete atlas at `target`, rendered there first when requested."""
+    path = target / "atlas.html" if target.is_dir() or target.suffix != ".html" else target
     if render:
         from devtools import render_overview  # noqa: PLC0415
 
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(render_overview.PAGES["index.html"]().html, encoding="utf-8")
+        path.write_text(render_overview.PAGES["atlas.html"]().html, encoding="utf-8")
     if not path.is_file():
-        raise SystemExit(f"no built overview at {path}; pass --render to write one")
+        raise SystemExit(f"no built atlas at {path}; pass --render to write one")
     return path.resolve().as_uri()
 
 
@@ -656,8 +665,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("mode", choices=MODES)
-    parser.add_argument("page", type=Path, help="a built index.html, or its directory")
-    parser.add_argument("--render", action="store_true", help="render the overview there first")
+    parser.add_argument("page", type=Path, help="a built atlas.html, or its directory")
+    parser.add_argument("--render", action="store_true", help="render the atlas there first")
     parser.add_argument("--width", type=int, action="append", help="window width; repeatable")
     parser.add_argument("--runs", type=int, default=5, help="move: how many times each change")
     parser.add_argument(

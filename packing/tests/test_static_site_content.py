@@ -54,13 +54,16 @@ def test_recent_overview_contains_only_the_advertised_subset() -> None:
     reference = overview_sections.reference_date(overview)
     included = [
         result
-        for result in overview.results
+        for result in overview_sections.recent_results(overview)
         if overview_sections.shown_by_default(
             result, overview_sections.RECENT_DEFAULTS, reference
         )
-    ]
+    ][: overview_sections.RECENT_LIMIT]
     assert table.count("<tr data-result=") == len(included) < len(overview.results)
     assert "data-filter=" not in table
-    assert 'href="all-results.html" data-all-results' in table
+    assert "data-all-results" not in table
+    attributes = overview_sections.all_results_link_attributes(overview)
+    assert attributes.startswith("data-all-results ")
+    assert "data-result-ids=" in attributes
     for result in included:
         assert f'href="result/{result.id.lower()}.html"' in table

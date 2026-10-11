@@ -57,7 +57,12 @@ PRELOADED_FACES = (
     "pt-serif-latin-700-normal.woff2",
 )
 
-_MEDIA_TYPES = {".woff2": "font/woff2", ".css": "text/css", ".js": "text/javascript"}
+_MEDIA_TYPES = {
+    ".woff2": "font/woff2",
+    ".css": "text/css",
+    ".js": "text/javascript",
+    ".png": "image/png",
+}
 
 
 @dataclass(frozen=True)
@@ -117,6 +122,10 @@ class SiteAssets:
         if "</script" in js.lower():
             raise SystemExit(f"{name} contains a closing script tag")
         return self._add("js", name, js.encode("utf-8"), "classic")
+
+    def image_file(self, path: Path) -> AssetRef:
+        """An image published unchanged under a content-identified name."""
+        return self._add("images", path.name, path.read_bytes(), "resource")
 
     def stylesheet_file(self, path: Path) -> AssetRef:
         """A stylesheet of the repository's, by its own name."""

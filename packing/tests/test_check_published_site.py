@@ -16,6 +16,7 @@ from devtools import (
     overview_sections,
     render_case_pages,
     render_overview,
+    site_urls,
 )
 from devtools import render_n11_lower_bounds_explainer_pdf as pdf
 from devtools.check_published_site import (
@@ -78,7 +79,7 @@ COMMIT = "0123456789abcdef0123456789abcdef01234567"
 
 #: The tree `main` holds at the deploy: every path a fixture page links on `main`.
 TREE = RepositoryTree(
-    files=frozenset({"README.md", *(f"packing/{name}.md" for name in SITE_PAGES)}),
+    files=frozenset({"README.md", "LICENSE", *(f"packing/{name}.md" for name in SITE_PAGES)}),
     directories=frozenset({"", "packing"}),
 )
 
@@ -130,7 +131,7 @@ def source_receipt(page: bytes) -> bytes:
     return f"\n%sqpack-source-html-sha256: {hashlib.sha256(page).hexdigest()}\n".encode()
 
 
-#: How many cases the fake deploy's record page indexes.
+#: How many canonical case records the fake deploy's Atlas indexes.
 CASE_COUNT = 324
 
 
@@ -144,11 +145,15 @@ def page(
 ) -> bytes:
     """A served page as the check reads one: the head of the page served at `canonical`,
     with its canonical link, then for a paper its bar's current entry (`bar`), the stamp
-    and a repository link; the record page also indexes every case's record file."""
+    and a repository link; Atlas also indexes every canonical case record."""
     path = canonical.removeprefix(render_overview.SITE_URL) or "index.html"
     index = (
-        "".join(f'<a href="{n}.html" data-case="{n}">{n}</a>' for n in range(1, CASE_COUNT + 1))
-        if path == render_case_pages.CASES_HOME
+        "".join(
+            f'<tr id="n-{n}" data-case-href="cases/{n}.html">'
+            f'<td><a href="cases/{n}.html" data-case="{n}">{n}</a></td></tr>'
+            for n in range(1, CASE_COUNT + 1)
+        )
+        if path == "atlas.html"
         else ""
     )
     return (
@@ -211,37 +216,42 @@ def result_row(row: str, *, here: bool, records: bool = True) -> str:
     )
 
 
-def lazy_result_row(row: str, *, here: bool) -> str:
+def lazy_result_row(row: str, *, here: bool, body_fallback: bool = True) -> str:
     """The deployed row: its bound popover fetches the complete result page, with
     static links to that same page in the row and the popover's fallback."""
     address = result_fragment(row)
     target = f"pop-result-{row}"
+    body = (
+        f'<p><a href="{address}">Read the complete result record</a></p>'
+        if body_fallback
+        else ""
+    )
     return (
         f'<tr {"id" if here else "data-result"}="{row}" data-s="3" '
         f'data-row-popover="{target}"><td><a class="site-row-open" href="{address}">'
         f"{row}</a></td><td>A result</td></tr>"
         f'<div class="site-popover site-row-pop" id="{target}" popover role="dialog" '
         f'aria-labelledby="{target}-title"><div class="site-row-pop-body" '
-        f'data-row-pop-src="{address}"><p><a href="{address}">'
-        "Read the complete result record</a></p></div>"
+        f'data-row-pop-src="{address}">{body}</div>'
         f'<p class="site-popover-actions"><a class="site-popover-action" '
         f'href="{address}">Open Result Record</a></p></div>'
     )
 
 
-def lazy_site_pages() -> dict[str, bytes]:
+def lazy_site_pages(*, body_fallback: bool = True) -> dict[str, bytes]:
     """The deployed lazy shape on both tables, with each complete result page served."""
     pages = site_pages()
     for name in RECORD_LINK_PAGES:
         here = name == render_overview.RESULTS_PAGE
-        for row in EXPECTED_RECORDS.rows:
-            pages[name] = pages[name].replace(
-                result_row(row, here=here).encode(), lazy_result_row(row, here=here).encode()
-            )
         for address in OVERVIEWS:
             pages[name] = pages[name].replace(
                 f'<div class="site-row-pop-body" data-row-pop-src="{address}"></div>'.encode(),
                 b"",
+            )
+        for row in EXPECTED_RECORDS.rows:
+            pages[name] = pages[name].replace(
+                result_row(row, here=here).encode(),
+                lazy_result_row(row, here=here, body_fallback=body_fallback).encode(),
             )
     for address in OVERVIEWS:
         pages[address] = head(address).encode() + pages[address]
@@ -460,7 +470,7 @@ def test_the_checked_pages_are_every_page_the_site_serves_but_the_workbench() ->
     assert PAGE_URL.endswith(f"/squares/{EXPLAINER}")
     assert EXPLAINER == "papers/n11-lower-bounds-explainer.html"
     assert {*SITE_PAGES, EXPLAINER, "workbench/index.html"} <= set(render_overview.SITE_PAGES)
-    assert {"index.html", "frontier.html", "all-results.html"} == LINK_CHECKED_PAGES
+    assert {"index.html", "atlas.html", "results.html"} == LINK_CHECKED_PAGES
     assert render_overview.canonical_url("index.html") == check_published_site.SITE_URL
     assert render_overview.canonical_url("tutorial.html").endswith("/squares/tutorial.html")
     # The papers page was added to the renderer alone, and is checked here for it.
@@ -535,12 +545,26 @@ def test_check_requires_each_page_to_name_its_own_canonical_url(
         wrong = site_pages(**{name: page(PAGE_URL)})
         found = failures(monkeypatch, fake_site(wrong))
         assert any(f"{name} names canonical URL" in line for line in found), name
-        # The record page served as another page has lost its index of record files too.
-        assert len(found) == (2 if name == render_case_pages.CASES_PAGE else 1), found
+        # Serving another page as Atlas also loses its canonical-record index.
+        assert len(found) == (2 if name == "atlas.html" else 1), found
 
     missing = site_pages(**{"index.html": b"<p>(" + PUBLICATION_EDITION.encode() + b")</p>"})
     found = failures(monkeypatch, fake_site(missing))
     assert any("index.html names canonical URL None" in line for line in found), found
+
+
+def test_check_requires_the_atlas_to_link_every_registered_case_record(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    complete = page(render_overview.canonical_url("atlas.html"))
+    for n in (17, CASE_COUNT):
+        lost = re.sub(
+            rf'<tr id="n-{n}"[^>]*>.*?</tr>', "", complete.decode(), flags=re.DOTALL
+        ).encode()
+        found = failures(monkeypatch, fake_site(site_pages(**{"atlas.html": lost})))
+        assert any(
+            "atlas.html indexes 323 registered case records in order" in line for line in found
+        )
 
 
 def test_check_refuses_a_repository_link_pinned_to_a_commit(
@@ -605,7 +629,7 @@ def test_check_requires_every_result_overview_the_results_table_names(
     assert failure.endswith("but it is 'result/t-001.html'")
 
     assert failures(monkeypatch, fake_site(site_naming(()))) == [
-        "all-results.html names 0 result overviews",
+        "results.html names 0 result overviews",
         f"result overview {OVERVIEWS[0]}: sampled for its record links and not served",
     ]
 
@@ -666,16 +690,30 @@ def test_absent_links_names_what_a_deploy_dropped_and_rows_are_read_one_by_one()
     assert row_records(nested) == {"t-002": f'<a href="{RECORD}">register</a>'}
 
 
+@pytest.mark.parametrize("body_fallback", [False, True], ids=["single-action", "body-link"])
 def test_check_accepts_the_deployed_lazy_record_links_without_refetching(
-    monkeypatch: pytest.MonkeyPatch,
+    monkeypatch: pytest.MonkeyPatch, *, body_fallback: bool
 ) -> None:
     requested: list[str] = []
-    assert failures(monkeypatch, fake_site(lazy_site_pages(), requested=requested)) == []
+    assert (
+        failures(
+            monkeypatch,
+            fake_site(lazy_site_pages(body_fallback=body_fallback), requested=requested),
+        )
+        == []
+    )
     for address in OVERVIEWS:
         assert requested.count(f"https://example.org/{address}") == 1
     requested.clear()
 
-    def registry_prefetch(site: str, read: Fetch, *, timeout: float) -> list[tuple[bool, str]]:
+    def registry_prefetch(
+        site: str,
+        read: Fetch,
+        *,
+        timeout: float,
+        rows: Sequence[site_urls.SiteURL],
+    ) -> list[tuple[bool, str]]:
+        assert rows
         for address in OVERVIEWS:
             read(f"{site.rstrip('/')}/{address}", timeout=timeout)
         return []
@@ -834,7 +872,6 @@ def test_check_rejects_global_popover_id_shadows(
         "wrong row link",
         "missing row link",
         "wrong fallback",
-        "missing fallback",
         "wrong action",
         "missing action",
         "duplicate row",
@@ -877,7 +914,6 @@ def test_check_rejects_lazy_row_binding_mutants(
         "wrong row link": full.replace(row_link, row_link.replace("t-002.html", "t-001.html")),
         "missing row link": full.replace(row_link, "t-002"),
         "wrong fallback": full.replace(fallback, fallback.replace("t-002.html", "t-001.html")),
-        "missing fallback": full.replace(fallback, ""),
         "wrong action": full.replace(action, action.replace("t-002.html", "t-001.html")),
         "missing action": full.replace(action, ""),
         "duplicate row": full + full,
@@ -894,6 +930,37 @@ def test_check_rejects_lazy_row_binding_mutants(
     assert "invalid bindings" in row_failures[0]
     assert all(url.startswith(("https://example.org/", REPO_URL)) for url in requested)
     assert not any("../" in url for url in requested)
+
+
+@pytest.mark.parametrize("name", RECORD_LINK_PAGES)
+@pytest.mark.parametrize("mutation", ["missing", "wrong target", "inside replaced body"])
+def test_single_fallback_rows_require_their_own_persistent_canonical_action(
+    monkeypatch: pytest.MonkeyPatch, name: str, mutation: str
+) -> None:
+    pages = lazy_site_pages(body_fallback=False)
+    full = lazy_result_row(
+        "t-002", here=name == render_overview.RESULTS_PAGE, body_fallback=False
+    )
+    action = (
+        '<p class="site-popover-actions"><a class="site-popover-action" '
+        'href="result/t-002.html">Open Result Record</a></p>'
+    )
+    if mutation == "missing":
+        changed = full.replace(action, "")
+    elif mutation == "wrong target":
+        changed = full.replace(action, action.replace("t-002.html", "t-001.html"))
+    else:
+        changed = full.replace(action, "").replace(
+            'data-row-pop-src="result/t-002.html"></div>',
+            f'data-row-pop-src="result/t-002.html">{action}</div>',
+        )
+    assert changed != full
+    pages[name] = pages[name].replace(full.encode(), changed.encode())
+    failed = failures(monkeypatch, fake_site(pages))
+    assert len(failed) == 1, failed
+    assert failed[0].startswith(f"{name}: 1 of 2 result rows lack record links")
+    assert "t-002" in failed[0]
+    assert "invalid bindings" in failed[0]
 
 
 @pytest.mark.parametrize("mutation", ["missing", "non-200", "wrong result", "dropped record"])
@@ -1370,13 +1437,15 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     that is."""
     moved = dict(render_overview.MOVED_PAGES)
     assert set(moved) == {
-        "results.html",
+        "all-results.html",
         "status.html",
+        "frontier.html",
         "defects.html",
         "explainer.html",
         "n11-optimality/t-060-explainer.html",
         "n11-optimality/index.html",
         "cases.html",
+        "cases/index.html",
     }
     assert not set(moved) & set(render_overview.SITE_PAGES)
     requested: list[str] = []
@@ -1385,7 +1454,7 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         assert f"https://example.org/{old}" in requested, old
 
     for old, new in moved.items():
-        # The slash keeps `results.html` from also losing `all-results.html`.
+        # Match the whole old path without hiding another page with a shared suffix.
         (failure,) = failures(monkeypatch, fake_site(site_pages(), lost=(f"/{old}",)))
         assert failure.startswith(f"forwarder {old}: HTTP 404, says "), failure
 
@@ -1649,11 +1718,14 @@ def test_check_fails_a_forwarder_that_previews_its_page_by_another_name_or_kind(
         site = fake_site(site_pages(**{name: text.encode()}))
         return failures(monkeypatch, site, heads=True)
 
-    renamed = forwarders["status.html"].replace("The Frontier Survey", "The Frontier Atlas")
+    renamed = forwarders["status.html"].replace(
+        render_overview.ATLAS_META.name, "The Frontier Atlas"
+    )
+    assert renamed != forwarders["status.html"]
     (failure,) = found("status.html", renamed)
     assert failure == (
         "forwarder status.html: head: its og:title is ['The Frontier Atlas'], and the page's "
-        "own is ['The Frontier Survey']"
+        f"own is {[render_overview.ATLAS_META.name]!r}"
     )
     dated = re.compile(r'<meta property="article:\w+" content="[^"]*">\n')
     website = dated.sub("", forwarders["explainer.html"]).replace(

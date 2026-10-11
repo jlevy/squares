@@ -90,26 +90,27 @@ policy:
       work, 2.3x on identical code, and the drift and stale rules failed four runs with
       every test green. On a pull request both rules report and do not fail until
       think-be1s arms them against run-to-run spread -- a median over hosted samples or a
-      runner-normalised wall -- rather than one reading; the ceiling is enforced throughout.
-  # Rule 1 and the per-test call-wall rule on a hosted pull-request run. `enforcing` when
-  # absent. `advisory` reports a ceiling breach, and a test call of 12 s or more, word for
-  # word with a `Cost` warning, and does not fail the run for them, up to a hang detector:
-  # a tier wall above `hang_ratio` times its ceiling, or one test call of
-  # `per_test_hang_seconds` or more, still fails it. Main, scheduled and deep runs keep the
-  # ceiling enforced, so the record and the ceiling still move only with evidence.
+      runner-normalised wall -- rather than one reading. The independent ceiling policy
+      below states which completed-run cost findings remain advisory.
+  # Completed-run cost findings on hosted pull requests remain measured and annotated,
+  # regardless of their ratio to the cost ceiling. A finished wall does not diagnose a
+  # hang; the actual subprocess deadlines and the per-test guard do. Main, scheduled and
+  # full checkpoints (even in a PR job) and explicit --enforce-budget runs retain cost
+  # enforcement. This exception must have a
+  # live tracking bead and reason, checked by devtools.check_gate_budgets.
   pull_request_ceiling:
     enforcement: advisory
-    tracking_bead: think-6erz
-    hang_ratio: 2.0
+    tracking_bead: think-ht59
     per_test_hang_seconds: 45.0
     advisory_reason: >-
-      Owner decision 2026-10-05 in session 182. Of 36 red pushes to stack pull requests that
-      day, 28 failed on a wall verdict alone with every test green (CI stabilization
-      evaluation, 2026-10-05); the +9% raise of 3d89c6fa5 was breached again within hours,
-      shard C at 171.2 s against 168 s on #356 (run 37380844925); hosted runner speed varies
-      1.6 to 1.8x (think-g4n9) and 2.3x on identical code (think-53a2). A single hosted wall
-      cannot tell a slow runner from a slow change, so on a pull request it reports until
-      think-6erz judges the ceiling against a median or a runner-normalised wall.
+      Owner decision 2026-10-10 under think-ht59: of 36 red pushes reviewed on 2026-10-05,
+      28 failed only on a wall verdict with every test green. Hosted runner draws vary
+      1.6 to 2.3x on unchanged work (think-g4n9, think-53a2). The completed 399s frontend
+      run on PR462 passed all 408 tests and four HTTP budgets, yet hang_ratio 2 against
+      the unchanged 165s cost ceiling misclassified it as a hang. Completed-run PR cost
+      is advisory until think-ht59 establishes attributable, controlled measurements;
+      functional failures, actual command deadlines, explicit timeout caps and the 45s
+      per-test guard remain enforced. No cost ceiling or startup assertion is raised.
 
 # One entry per tier `packing-validate` can select as a whole. A tier with no entry here
 # fails `devtools.check_gate_budgets`, so a new tier cannot arrive without a ceiling.
@@ -768,7 +769,8 @@ tiers:
   # The lighter pair's slowest reading is suite-d's 300.27 s (run 37853886593, job
   # 113573308641): 300.27 x 1.10 = 330.3, so 335 s. That is 1.34x this shard's own
   # slowest, 250.54 s, and 1.85x the record below, inside rule 2's 2.0x (361.7 s).
-  # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
+  # At this historical re-take, unchanged: the 12 s per-test wall and 45 s per-test
+  # hang, `hang_ratio` 2 (superseded by think-ht59 on 2026-10-10), the
   # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
   # assignment; changing them would move files between shards without a measurement),
   # and every other tier's ceiling. The suite jobs run on pull requests only, where
@@ -1027,7 +1029,8 @@ tiers:
   # The heavier pair's slowest reading is suite-b's 327.07 s (run 37921107074, job
   # 113788973088): 327.07 x 1.10 = 359.8, so 360 s. That reading is this shard's own,
   # and 360 s is 1.67x the record below, inside rule 2's 2.0x (431.6 s).
-  # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
+  # At this historical re-take, unchanged: the 12 s per-test wall and 45 s per-test
+  # hang, `hang_ratio` 2 (superseded by think-ht59 on 2026-10-10), the
   # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
   # assignment; changing them would move files between shards without a measurement),
   # and every other tier's ceiling. The suite jobs run on pull requests only, where
@@ -1263,7 +1266,8 @@ tiers:
   # The heavier pair's slowest reading is suite-b's 327.07 s (run 37921107074, job
   # 113788973088): 327.07 x 1.10 = 359.8, so 360 s. That is 1.22x this shard's own
   # slowest, 294.60 s, and 1.89x the record below, inside rule 2's 2.0x (380.5 s).
-  # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
+  # At this historical re-take, unchanged: the 12 s per-test wall and 45 s per-test
+  # hang, `hang_ratio` 2 (superseded by think-ht59 on 2026-10-10), the
   # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
   # assignment; changing them would move files between shards without a measurement),
   # and every other tier's ceiling. The suite jobs run on pull requests only, where
@@ -1457,7 +1461,8 @@ tiers:
   # The lighter pair's slowest reading is suite-d's 300.27 s (run 37853886593, job
   # 113573308641): 300.27 x 1.10 = 330.3, so 335 s. That reading is this shard's own,
   # and 335 s is 1.83x the record below, inside rule 2's 2.0x (366.2 s).
-  # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
+  # At this historical re-take, unchanged: the 12 s per-test wall and 45 s per-test
+  # hang, `hang_ratio` 2 (superseded by think-ht59 on 2026-10-10), the
   # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
   # assignment; changing them would move files between shards without a measurement),
   # and every other tier's ceiling. The suite jobs run on pull requests only, where
@@ -1718,17 +1723,26 @@ tiers:
 
 - id: measure_verifier
   command: packing-validate --measure-verifier
-  # A new tier, so pending under think-th8p as `suite_d` is under think-t7k5: the ceiling
-  # applies from the first run, and the first complete pull-request cohort replaces the
-  # pending fields with its observed wall. 90 s is about 2x the slowest hosted reading of
-  # the one step it holds, 45.30 s inside a contended `checks` tier on run 37131940076,
-  # and the step runs alone here.
+  # The first hosted cohort of the expanded three-step tier fulfills think-th8p's
+  # pending measurement. Its 72.83 s geometric mean leaves 1.24x headroom under the
+  # existing 90 s ceiling; the ceiling is retained, not raised to the cohort's maximum.
   ceiling_seconds: 90.0
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
-  pending_measurement: think-th8p
-  pending_until: '2026-10-10'
+  measured_seconds: 72.83
+  measured_on: '2026-10-11'
+  measured_where: >-
+    The geometric mean of ten completed hosted pull-request readings at the reference
+    shape (4 cpus, --jobs 1 --inner-jobs 1), all 3 of 107 steps, read on 2026-10-11 by
+    `python -m devtools.read_tier_walls --tier measure_verifier --job-id` over jobs
+    114323037673, 114324457250, 114325279634, 114327125512, 114329916203, 114330721746,
+    114331062332, 114334931017, 114336334006 and 114347133670: run 38088792292 attempt 2
+    59.12 s, 38090048925 73.08 s, 38090308796 59.92 s, 38090961202 87.66 s,
+    38091918802 71.80 s, 38092189271 74.36 s, 38092306701 72.40 s, 38093633427 73.55 s,
+    38094107625 90.06 s and 38097761292 72.30 s. The spread is 1.52x; every reading
+    falls inside the policy's point-record drift and stale bands. The separately read
+    run 38093246298 (job 114333808752) selected 3 of 110 steps and is excluded by the
+    tool's step-count grouping. These are tier walls, excluding job setup and cold
+    builds. The first observation replaces the expired pending fields; it does not
+    change the ceiling or the hosted enforcement policy (think-rpuj).
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     The clean-room measure verifier's gate (think-gpe0): cargo fmt, clippy, the crate's

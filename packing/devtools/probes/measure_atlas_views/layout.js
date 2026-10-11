@@ -99,9 +99,11 @@
   });
   const legend = block.querySelector("[data-atlas-legend]");
   const viewStrip = block.querySelector("[data-atlas-views]");
+  const navLink = document.querySelector(".site-nav a:not(.site-name)");
   return {
     view: block.dataset.atlasView ?? null,
     view_strip: viewStrip ? box(viewStrip) : null,
+    nav_link_font_px: navLink ? round(Number.parseFloat(getComputedStyle(navLink).fontSize)) : null,
     size: block.dataset.atlasSize ?? null,
     scale: block.dataset.atlasScale ?? "fixed",
     largest_side: Number.parseFloat(

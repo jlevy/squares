@@ -4,7 +4,9 @@ Chromium, fresh context, 1280/390px, light/dark, default local gzip server, no n
 throttling. The observer is installed before navigation. Load and fonts settle, then
 three viewport samples cover scrolling. No user input is generated; input-induced
 shifts are excluded by the native observer. CLI output includes the protocol and every
-measurement. The separate no-JS context requires primary prose, headings and visual math.
+measurement and budget exceedance. Timing enforces by default; shared CI may explicitly
+select report-only timing while readability and CLS still enforce. The separate no-JS
+context requires primary prose, headings and visual math.
 """
 
 from __future__ import annotations
@@ -37,10 +39,16 @@ SETTLE_MS = 250
 NATIVE_TRACE_CATEGORIES = (
     "devtools.timeline,disabled-by-default-devtools.timeline,blink.user_timing,loading"
 )
+TimingMode = Literal["enforce", "report-only"]
+TIMING_BUDGETS = {
+    "lcpMs": LCP_LIMIT_MS,
+    "longestTaskMs": LONGEST_TASK_LIMIT_MS,
+    "blockingMs": BLOCKING_LIMIT_MS,
+}
 DEFAULT_PAGES = (
     "index.html",
-    "all-results.html",
-    "frontier.html",
+    "results.html",
+    "atlas.html",
     "cases/11.html",
     "result/t-037.html",
 )
@@ -505,7 +513,20 @@ def diagnose_font_delivery(
     return result
 
 
-def problems(report: dict[str, Any], *, javascript: bool = True) -> list[str]:
+def timing_problems(report: dict[str, Any]) -> list[str]:
+    """Unchanged timing exceedances, including those reported without gate authority."""
+    return [
+        f"{key} {report.get(key, float('inf')):.3f} exceeds {limit}"
+        for key, limit in TIMING_BUDGETS.items()
+        if report.get(key, float("inf")) > limit
+    ]
+
+
+def problems(
+    report: dict[str, Any], *, javascript: bool = True, timing_mode: TimingMode = "enforce"
+) -> list[str]:
+    if timing_mode not in ("enforce", "report-only"):
+        raise ValueError(f"unknown timing mode: {timing_mode}")
     found: list[str] = []
     if not report.get("heading") or report.get("contentChars", 0) < 40:
         found.append("primary heading/prose missing")
@@ -518,14 +539,10 @@ def problems(report: dict[str, Any], *, javascript: bool = True) -> list[str]:
     if javascript:
         if not report.get("supported") or report.get("lcpMs", 0) <= 0:
             found.append("required native load timing is unavailable")
-        for key, limit in (
-            ("cls", CLS_LIMIT),
-            ("lcpMs", LCP_LIMIT_MS),
-            ("longestTaskMs", LONGEST_TASK_LIMIT_MS),
-            ("blockingMs", BLOCKING_LIMIT_MS),
-        ):
-            if report.get(key, float("inf")) > limit:
-                found.append(f"{key} {report[key]:.3f} exceeds {limit}")
+        if report.get("cls", float("inf")) > CLS_LIMIT:
+            found.append(f"cls {report.get('cls', float('inf')):.3f} exceeds {CLS_LIMIT}")
+        if timing_mode == "enforce":
+            found.extend(timing_problems(report))
     return found
 
 
@@ -547,6 +564,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("directory", type=Path)
     parser.add_argument("--page", action="append")
     parser.add_argument("--runs", type=int, default=1)
+    # think-9dhb: shared-runner timing stays advisory until a controlled runner or
+    # repeated same-run fixed baseline establishes a measured regression/noise margin.
+    parser.add_argument(
+        "--timing-mode",
+        choices=("enforce", "report-only"),
+        default="enforce",
+        help="report-only retains timing limits/exceedances; structural gates enforce",
+    )
     parser.add_argument(
         "--trace",
         type=Path,
@@ -608,6 +633,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps(result, indent=2))
         return 0
     failures: list[str] = []
+    timing_exceedances: list[str] = []
     results: list[dict[str, Any]] = []
     server = serve(args.directory, 0, as_pages=True)
     base = f"http://127.0.0.1:{server.server_port}"
@@ -638,17 +664,23 @@ def main(argv: Sequence[str] | None = None) -> int:
                             for sample in samples:
                                 failures.extend(
                                     f"{name} {width}px {scheme}: {problem}"
-                                    for problem in problems(sample)
+                                    for problem in problems(
+                                        sample, timing_mode=args.timing_mode
+                                    )
                                     if not problem.startswith(
                                         ("cls ", "lcpMs ", "longestTaskMs ", "blockingMs ")
                                     )
                                 )
                             failures.extend(
                                 f"{name} {width}px {scheme}: {problem}"
-                                for problem in problems(report)
+                                for problem in problems(report, timing_mode=args.timing_mode)
                                 if problem.startswith(
                                     ("cls ", "lcpMs ", "longestTaskMs ", "blockingMs ")
                                 )
+                            )
+                            timing_exceedances.extend(
+                                f"{name} {width}px {scheme}: {problem}"
+                                for problem in timing_problems(report)
                             )
                             static = measure(
                                 browser,
@@ -667,6 +699,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                                     "width": width,
                                     "scheme": scheme,
                                     **report,
+                                    "samples": samples,
                                     "static": static,
                                 }
                             )
@@ -683,6 +716,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "network": "local gzip, unthrottled",
                     "observer": "pre-navigation",
                     "runs": args.runs,
+                    "timing_mode": args.timing_mode,
                     "settle_ms": SETTLE_MS,
                     "scroll": [0, 0.5, 1],
                     "budgets": {
@@ -694,6 +728,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 },
                 "pages": results,
                 "failures": failures,
+                "timing_exceedances": timing_exceedances,
             },
             indent=2,
         )

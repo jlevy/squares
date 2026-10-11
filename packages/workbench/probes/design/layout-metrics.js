@@ -59,11 +59,9 @@
     const packed = Number.parseInt(v.slice(1), 16);
     return `rgb(${(packed >> 16) & 255}, ${(packed >> 8) & 255}, ${packed & 255})`;
   };
-  // The two colours a badge label is set in: the star's scarlet for `new result`, the label grey
-  // for every other (the owner, 2026-09-17). Carried with each layer's labels so that the rule
-  // over them is a rule over one layer.
-  const badgeColours = {
-    starred: rgb(root.getPropertyValue("--scene-proved").trim()),
+  const factsColours = {
+    recent: rgb(root.getPropertyValue("--scene-proved").trim()),
+    ink: rgb(root.getPropertyValue("--scene-ink").trim()),
     label: rgb(root.getPropertyValue("--scene-label").trim()),
   };
   // The two colours the bound line sets its bounds in, which a citation line's label takes.
@@ -148,7 +146,20 @@
       }),
       citations: citationsOf(root),
       openItems: root.querySelectorAll(".open-items .open-item").length,
-      colours: badgeColours,
+      colours: factsColours,
+      numeral: (() => {
+        const numeral = document.querySelector(
+          id === "facts-a" ? "#numeral-a .numeral" : "#numeral-b .numeral",
+        );
+        return numeral === null
+          ? null
+          : {
+              recent: numeral.classList.contains("is-new-result"),
+              color: getComputedStyle(numeral).color,
+              title: numeral.getAttribute("title"),
+            };
+      })(),
+      recencyMarks: root.querySelectorAll(".badge-star, .bound-star").length,
       badges: [...root.querySelectorAll(".badges .badge-item")].map((e) => {
         const label = e.querySelector(".label");
         const type = label == null ? null : getComputedStyle(label);

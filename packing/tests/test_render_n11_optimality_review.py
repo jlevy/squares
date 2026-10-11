@@ -532,7 +532,8 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     assert [line.strip() for line in block.strip().splitlines()] == [
         (
             '<span class="credits-source">From the original proof by '
-            "<strong>Mannaseh Ahmed</strong></span>"
+            '<a href="https://x.com/ManassehA06" target="_blank" rel="noopener noreferrer">'
+            "<strong>Mannaseh Ahmed</strong></a></span>"
         ),
         (
             f'<span class="credits-source"><a href="https://{address}" target="_blank" '
@@ -575,7 +576,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
         ".credits .publication-date + .series {\n  margin-block-start: 1lh;\n}"
     ) in shared
     assert markdown.startswith(
-        f"# {paper.TITLE}\n\n- From the original proof by **Mannaseh Ahmed**\n"
+        f"# {paper.TITLE}\n\n- From the original proof by [**Mannaseh Ahmed**](https://x.com/ManassehA06)\n"
         f"- [{address}](https://{address})\n"
         "- Human oversight: [**Joshua Levy**](https://x.com/ojoshe)\n"
         "- Agents: **GPT-6 Astra** and **GPT-6 Sol**\n"

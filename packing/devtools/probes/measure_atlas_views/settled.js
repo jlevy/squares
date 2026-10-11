@@ -1,4 +1,4 @@
-// Whether the atlas has tiles placed and none of them is in a move.
+// Whether the atlas has tiles placed and neither the tiles nor their container is in a move.
 () =>
   document.querySelector(".site-atlas-cells .site-atlas-cell") !== null &&
   document
@@ -7,6 +7,6 @@
       (animation) =>
         animation instanceof CSSTransition ||
         !(animation.effect instanceof KeyframeEffect) ||
-        animation.effect.target?.matches(".site-atlas-cell") !== true ||
+        animation.effect.target?.matches(".site-atlas-cell, .site-atlas-cells") !== true ||
         animation.playState === "finished",
     );

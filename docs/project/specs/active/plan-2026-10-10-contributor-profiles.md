@@ -505,6 +505,17 @@ Final hosted receipts and publication status are recorded on
 [PR #490](https://github.com/jlevy/squares/pull/490), with the tested head and base,
 rather than copied into this plan as moving CI status.
 
+The upstream layout integration (`think-ztic`) adopts Atlas as the case directory and
+`results.html` as the Results index while retaining complete contributor, case and
+result pages, reviewed credit links and the shared article loader.
+A fetched result uses its canonical H1 as the sole visible headline and accessible
+dialog name.
+The page-heading follow-up (`think-4w5c`) requires contributor directory and
+profile H1s to inherit the same sans-serif, all-caps title rule as other site pages;
+popovers retain the shared compact heading hierarchy.
+Generated computed-style checks compare the contributor pages with the standard page
+role at desktop/mobile widths in both themes.
+
 ## Open Decisions and Limits
 
 - Additional organization-wide code review requires named repositories beyond this

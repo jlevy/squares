@@ -112,7 +112,7 @@ def pages(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
             meta=render_overview.PageMeta(
                 "Reader fonts", "Saved reading fonts retain matching math.", "index.html"
             ),
-            current="frontier",
+            current="atlas",
         ).html
     prepared = site_math.prepare(raw)
     (root / "index.html").write_text(prepared)
@@ -250,7 +250,7 @@ def amended_result_pages(tmp_path_factory: pytest.TempPathFactory) -> Iterator[s
 def test_a_generated_result_overlay_keeps_one_visible_headline(
     browser: Browser, amended_result_pages: str
 ) -> None:
-    """Fetched article titles preserve their IDs without repeating the shell's name."""
+    """The canonical title replaces the short shell title and names the dialog."""
     context = browser.new_context()
     try:
         page = context.new_page()
@@ -261,12 +261,14 @@ def test_a_generated_result_overlay_keeps_one_visible_headline(
         popover = page.locator("#pop-result-t-116")
         article = popover.locator("article.site-result")
         article.wait_for()
-        headline = popover.locator(":scope > .site-popover-value")
         canonical_title = article.locator(":scope > h1")
-        site_browser.api().expect(headline).to_be_visible()
-        site_browser.api().expect(canonical_title).to_be_hidden()
+        site_browser.api().expect(canonical_title).to_be_visible()
+        assert (
+            popover.locator(":scope > .site-card-label, :scope > .site-popover-value").count()
+            == 0
+        )
         assert (canonical_title.get_attribute("id") or "").endswith("-t-116")
-        assert popover.get_attribute("aria-labelledby") == headline.get_attribute("id")
+        assert popover.get_attribute("aria-labelledby") == canonical_title.get_attribute("id")
         site_browser.api().expect(popover).to_have_accessible_name(re.compile(r"\S"))
         page.keyboard.press("Escape")
         site_browser.api().expect(row).to_be_focused()

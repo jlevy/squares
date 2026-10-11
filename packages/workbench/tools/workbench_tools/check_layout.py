@@ -18,9 +18,7 @@ that is a recent result, Animate with nothing open, the animation studio, Pack a
   segments tall inside its border;
 - **no overlapping panels**;
 - on the stage, **OPEN only when something is open**, **one head type** for PROVEN, CITATION
-  and OPEN, and **one badge type**: every badge label, `new result` included, in the same
-  family, size and weight, each in the colour its badge calls for -- the star's scarlet for
-  `new result`, the label grey for every other (the owner, 2026-09-17);
+  and OPEN, **one badge type** in label grey, and red case numbers for recent results;
 - on the stage, **the CITATION section** only while its setting is on, headed only where it has
   a line and naming the n's frontier record on the head's line, its lower bound's source on the
   first line and its upper bound's on the second, each labeled in its bound's colour on the
@@ -87,13 +85,12 @@ AT_CONTROL_HEIGHT = frozenset({"button", "select", "input-number", "input-text",
 
 #: A recent result (n = 18) and an n with nothing open (n = 16).
 #: It was n = 17 until T-032 adopted an external certificate there, which is exactly the
-#: fact the star reports; the six that still qualify are n = 11, 12, 18, 19, 20 and 21.
-STAR_N = 18
+#: recency fact; the six that still qualify are n = 11, 12, 18, 19, 20 and 21.
+RECENT_N = 18
 OPEN_NONE_N = 16
 #: The step the one moving view is paused in. At rest the box is locked at the best known side
 #: and drawn green, so a step on its way is the only place the frames' grey is drawn.
 MOVING_N = 11
-NEW_RESULT = "new result"
 
 #: How far the attribution may sit from what it is set against, in stage pixels. The stage is a
 #: 1920 x 1080 poster drawn at `--stage-scale`, so this is one pixel of the poster at every
@@ -292,8 +289,8 @@ def _overlaps(m: Metrics) -> list[str]:
     return found
 
 
-def facts_findings(layer: Metrics, *, star: bool | None = None) -> list[str]:
-    """The stage panel's rules for one facts layer; `star` says whether `new result` is due."""
+def facts_findings(layer: Metrics, *, recent: bool | None = None) -> list[str]:
+    """Panel rules for one layer; `recent` says whether the case number should be red."""
     found = []
     heads = [head.strip().lower() for head in layer["heads"]]
     if ("open" in heads) != (layer["openItems"] > 0):
@@ -313,22 +310,25 @@ def facts_findings(layer: Metrics, *, star: bool | None = None) -> list[str]:
         found.append(
             f"the badge labels are set in {len(types)} different types: {sorted(types)}"
         )
-    # One type, two colours: `new result` is the star's scarlet and every other badge the label
-    # grey, which is the one thing that tells the row's one new claim from its standing ones.
     colours = layer["colours"]
-    for badge in badges:
-        starred = badge["text"] == NEW_RESULT
-        wanted = colours["starred"] if starred else colours["label"]
-        if badge["color"] != wanted:
-            role = "the star's scarlet" if starred else "the label grey"
-            found.append(
-                f"the `{badge['text']}` label is {badge['color']}, not {role} {wanted}"
-            )
-    new = [b for b in badges if b["text"] == NEW_RESULT]
-    if star is True and not (len(new) == 1 and "badge-star" in (new[0]["icon"] or "").split()):
-        found.append(f"a recent result has no `{NEW_RESULT}` star badge: {badges}")
-    if star is False and new:
-        found.append(f"`{NEW_RESULT}` is drawn where no bound is a recent result: {badges}")
+    found.extend(
+        f"the `{badge['text']}` label is {badge['color']}, not the label grey "
+        f"{colours['label']}"
+        for badge in badges
+        if badge["color"] != colours["label"]
+    )
+    if layer["recencyMarks"]:
+        found.append("the facts panel still draws a recency symbol")
+    numeral = layer["numeral"]
+    if recent is not None:
+        if numeral is None or numeral["recent"] != recent:
+            found.append(f"the case number's recency does not match {recent}")
+        else:
+            wanted = colours["recent"] if recent else colours["ink"]
+            if numeral["color"] != wanted:
+                found.append(f"the case number is {numeral['color']}, not {wanted}")
+            if recent and numeral["title"] != "Recent result":
+                found.append("the recent case number has no Recent result title")
     return found
 
 
@@ -737,7 +737,7 @@ def _moving(n: int) -> Callable[[Page], None]:
 
 
 def _studio(page: Page) -> None:
-    _stage_n(STAR_N)(page)
+    _stage_n(RECENT_N)(page)
     page.locator("#animation-example").click()
 
 
@@ -766,15 +766,15 @@ class View(NamedTuple):
     label: str
     enter: Callable[[Page], None]
     leave: Callable[[Page], None] | None
-    star: bool | None
+    recent: bool | None
     aligned: bool
     cited: bool = False
 
 
 VIEWS: tuple[View, ...] = (
-    View(f"animate at n = {STAR_N}", _stage_n(STAR_N), None, star=True, aligned=True),
+    View(f"animate at n = {RECENT_N}", _stage_n(RECENT_N), None, recent=True, aligned=True),
     View(
-        f"animate at n = {OPEN_NONE_N}", _stage_n(OPEN_NONE_N), None, star=False, aligned=True
+        f"animate at n = {OPEN_NONE_N}", _stage_n(OPEN_NONE_N), None, recent=False, aligned=True
     ),
     View(f"animate mid-step into n = {MOVING_N}", _moving(MOVING_N), None, None, aligned=True),
     View("the animation studio", _studio, _leave_studio, None, aligned=False),
@@ -844,7 +844,7 @@ def check_open(page: Page, viewports: Sequence[tuple[int, int]] = VIEWPORTS) -> 
     #: nothing says so rather than passing.
     cited_lines = 0
     extra, citations_said = citation_views(page)
-    for label, enter, leave, star, aligned, cited in (*VIEWS, *extra):
+    for label, enter, leave, recent, aligned, cited in (*VIEWS, *extra):
         enter(page)
         for width, height in viewports:
             page.set_viewport_size({"width": width, "height": height})
@@ -852,11 +852,11 @@ def check_open(page: Page, viewports: Sequence[tuple[int, int]] = VIEWPORTS) -> 
             metrics = page.evaluate(probe("design/layout-metrics"))
             measured += 1
             found = findings(metrics)
-            if star is not None or cited:
+            if recent is not None or cited:
                 if metrics["facts"] is None:
                     found.append("the stage's facts panel is not drawn")
                 else:
-                    found.extend(facts_findings(metrics["facts"]["facts-a"], star=star))
+                    found.extend(facts_findings(metrics["facts"]["facts-a"], recent=recent))
             if metrics["facts"] is not None:
                 for layer in ("facts-a", "facts-b"):
                     section = metrics["facts"][layer]["citations"]
@@ -919,7 +919,7 @@ def check_open(page: Page, viewports: Sequence[tuple[int, int]] = VIEWPORTS) -> 
         f"one gutter, edge, stack gap and control height across {len(VIEWS) + len(extra)} "
         f"views at {len(viewports)} viewports ({measured} measurements, "
         f"{time.perf_counter() - started:.1f}s), OPEN only when open, one head type, one badge "
-        f"type with `{NEW_RESULT}` alone in the star's scarlet, "
+        f"type and recent case numbers in red, "
         + (
             f"{citations_said} inside its column and above OPEN ({cited_lines} lines), "
             if extra

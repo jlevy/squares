@@ -24,8 +24,8 @@
 // again, and each tile is then animated from where it was to where it is with a
 // transform alone, which the compositor runs without laying anything out. One read, one
 // write, one read; a tile that neither starts nor ends in the window is not animated.
-// What follows the tiles on the page, which a change of their height carries up or down,
-// moves the same way, so nothing jumps under the tiles while they travel.
+// The viewport height reveals added rows with the same timing. Page flow moves what
+// follows it; changes without a height reveal move following elements with FLIP.
 // The tokens `--site-atlas-move-duration` and `--site-atlas-move-easing` time it, and the
 // duration is 0ms for a reader who asks for reduced motion, which switches at once.
 //
@@ -39,13 +39,13 @@
 // (`--site-atlas-scale`): both views use the same least cell and the same gaps. Small
 // fits more tiles to a Grid line and Large fewer (`perLineAt`); Triangle keeps its
 // complete rows at the same drawing size. A change of size is a change of layout like a
-// change of view, moved the same way, and it is in the address as `?size=medium` or
-// `?size=large`; Small, the default, has no parameter.
+// change of view, moved the same way. Every explicit choice is preserved in the
+// address, including `?size=small`; otherwise size follows the viewport.
 //
-// Scale, Fixed by default, changes only a drawing within its reserved tile. Row uses
+// Scale, Row by default, changes only a drawing within its reserved tile. Row uses
 // its actual enclosing side relative to the logical row's grid side k. Global uses
 // the largest actual side among currently shown cases, updated by the expander. The
-// address names either choice as `?scale=row` or `?scale=global`.
+// address names the other choices as `?scale=fixed` or `?scale=global`.
 //
 // The pure functions are published on `globalThis.SiteAtlasView` for the Node tests and
 // for `atlas-grid.js`, which places the tiles and calls `mount`.
@@ -180,23 +180,23 @@
   }
 
   /**
-   * `search` with the size written into it: the parameter for medium and large, none for
-   * small, and every other parameter kept in its place.
+   * `search` with an explicit size, including small so a wide-screen reload keeps
+   * the reader's choice, and every other parameter kept in its place.
    * @param {string} search
    * @param {AtlasSize} size
    * @returns {string}
    */
   function searchForSize(search, size) {
-    return searchWith(search, SIZE_PARAM, size === "small" ? null : size);
+    return searchWith(search, SIZE_PARAM, size);
   }
 
   /**
-   * A drawing scale name: Row or Global when named, otherwise Fixed.
+   * A drawing scale name: Fixed or Global when named, otherwise the default Row.
    * @param {string | null | undefined} word
    * @returns {AtlasScale}
    */
   function asScale(word) {
-    return word === "row" || word === "global" ? word : "fixed";
+    return word === "fixed" || word === "global" ? word : "row";
   }
 
   /** @param {string} search @returns {AtlasScale} */
@@ -206,7 +206,7 @@
 
   /** @param {string} search @param {AtlasScale} scale @returns {string} */
   function searchForScale(search, scale) {
-    return searchWith(search, SCALE_PARAM, scale === "fixed" ? null : scale);
+    return searchWith(search, SCALE_PARAM, scale === "row" ? null : scale);
   }
 
   /**
@@ -370,8 +370,8 @@
    * @param {SiteAtlasParts} parts
    * @returns {SiteAtlasViews}
    */
-  function mount({ block, cells, tabs, sizes, scales }) {
-    const buttons = tabsOf(tabs);
+  function mount({ block, cells, tabs, sizes, scales = null, scoped = false, beforeArrange }) {
+    const buttons = tabs === null ? [] : tabsOf(tabs);
     const sizeButtons = sizes === null ? [] : tabsOf(sizes);
     const scaleButtons = scales === null ? [] : tabsOf(scales);
     /** @type {Record<number, number>} */
@@ -382,8 +382,17 @@
     }
     /** The tiles a line holds and the last case shown, as last arranged. */
     let arranged = "";
+    /** The border-box width consumed by the latest arrangement. */
+    let priorWidth = 0;
     /** @type {Animation[]} */
     let running = [];
+    const sizeQuery = new URLSearchParams(location.search).get(SIZE_PARAM);
+    const namedSize = sizeQuery === "small" || sizeQuery === "medium" || sizeQuery === "large";
+    let explicitSize = namedSize || block.hasAttribute("data-atlas-size-explicit");
+    // Keep this media query in step with site.css's first-paint default (think-mp47).
+    const wideScreen = window.matchMedia("(min-width: 75rem)");
+    /** @returns {AtlasSize} */
+    const automaticSize = () => (wideScreen.matches ? "medium" : "small");
 
     /** @returns {AtlasView} */
     const view = () => (block.dataset.atlasView === "triangle" ? "triangle" : "grid");
@@ -392,13 +401,12 @@
     /** @returns {AtlasScale} */
     const drawingScale = () => asScale(block.dataset.atlasScale);
 
-    /** The tiles that show: the first hundred, and the rest once the grid is expanded. */
+    // Dedicated and homepage row containers share the same placement and FLIP.
+    // Visibility is controlled by persistent wrappers or boundary cells, never clones.
     const shown = () =>
-      [
-        ...cells.querySelectorAll(
-          ":scope > .site-atlas-row .site-atlas-cell, :scope > .site-atlas-rest:not([hidden]) .site-atlas-cell",
-        ),
-      ].filter((tile) => tile instanceof HTMLElement);
+      [...cells.querySelectorAll(".site-atlas-cell")]
+        .filter((tile) => tile instanceof HTMLElement)
+        .filter((tile) => tile.closest("[hidden]") === null);
 
     // Write each tile's line and column for the tiles a line now holds. Only the
     // triangle reads them, but they are kept current in the grid too, so a change of
@@ -407,18 +415,22 @@
     // neither the tiles a line holds nor the last case shown has changed. The size's
     // scale is the stylesheet's (`--site-atlas-scale`), read as the tiles are arranged.
     const arrange = () => {
-      const tiles = shown();
-      const last = Number(tiles.at(-1)?.dataset.atlasN);
-      if (!(last >= 1)) {
-        return;
-      }
+      // Visibility changes only the rows' height and scroll canvas, not this track's
+      // available width. Snapshot its geometry before completing the shown prefix.
       const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
       const style = getComputedStyle(cells);
       const least = lengthPx(style.getPropertyValue("--site-atlas-cell-min"), root);
       const gap = lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root);
       const scale = Number.parseFloat(style.getPropertyValue("--site-atlas-scale"));
       const width = cells.getBoundingClientRect().width;
+      priorWidth = width;
       const capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
+      beforeArrange?.(capacity);
+      const tiles = shown();
+      const last = Number(tiles.at(-1)?.dataset.atlasN);
+      if (!(last >= 1)) {
+        return;
+      }
       const per = Number.isFinite(capacity) ? capacity : widest(last) + 1;
       const largest = largestSide(tiles.map((tile) => Number(tile.dataset.atlasSide)));
       const key = `${per}:${tiles.map((tile) => tile.dataset.atlasN).join(":")}:${largest}`;
@@ -482,13 +494,16 @@
                 ? side / largest
                 : 1;
           const width = drawn.width / ratio;
+          const origin = getComputedStyle(drawing)
+            .transformOrigin.split(" ")
+            .map(Number.parseFloat);
           // FLIP moves the reserved slot, not the scaled square inside it. A scale
           // choice therefore never scales the tile's number or changes its position.
           tiles.set(tile, {
             tile: tile.getBoundingClientRect(),
             drawing: {
-              left: drawn.left - (width - drawn.width) / 2,
-              top: drawn.top - (width - drawn.width) / 2,
+              left: drawn.left - (origin[0] ?? width / 2) * (1 - ratio),
+              top: drawn.top - (origin[1] ?? width / 2) * (1 - ratio),
               width,
             },
           });
@@ -499,7 +514,7 @@
       for (const follower of followers()) {
         rest.set(follower, follower.getBoundingClientRect());
       }
-      return { tiles, rest, scroll: window.scrollY };
+      return { tiles, rest, height: cells.getBoundingClientRect().height, scroll: window.scrollY };
     };
 
     const stop = () => {
@@ -569,7 +584,20 @@
           ]);
         }
       }
-      for (const [follower, last] of now.rest) {
+      // The viewport reveals complete, already prepared rows as its height grows.
+      // Flow carries following content with this animation, so it needs no second FLIP.
+      const changesHeight = Math.abs(now.height - before.height) >= 0.5;
+      if (changesHeight) {
+        moves.push([
+          cells,
+          [
+            { height: `${before.height}px`, overflowY: "hidden", alignContent: "start" },
+            { height: `${now.height}px`, overflowY: "hidden", alignContent: "start" },
+          ],
+          timing,
+        ]);
+      }
+      for (const [follower, last] of changesHeight ? [] : now.rest) {
         const first = before.rest.get(follower);
         if (last.height === 0 || first === undefined) {
           continue;
@@ -606,7 +634,9 @@
     /** @param {AtlasView} current */
     const mark = (current) => {
       block.dataset.atlasView = current;
-      document.documentElement.dataset.siteAtlasView = current;
+      if (!scoped) {
+        document.documentElement.dataset.siteAtlasView = current;
+      }
       for (const tab of buttons) {
         const on = tab.dataset.atlasTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -620,7 +650,14 @@
     /** @param {AtlasSize} current */
     const markSize = (current) => {
       block.dataset.atlasSize = current;
-      document.documentElement.dataset.siteAtlasSize = current;
+      block.toggleAttribute("data-atlas-size-explicit", explicitSize);
+      if (!scoped) {
+        if (explicitSize) {
+          document.documentElement.dataset.siteAtlasSize = current;
+        } else {
+          delete document.documentElement.dataset.siteAtlasSize;
+        }
+      }
       for (const tab of sizeButtons) {
         const on = tab.dataset.atlasSizeTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -631,7 +668,9 @@
     /** @param {AtlasScale} current */
     const markScale = (current) => {
       block.dataset.atlasScale = current;
-      document.documentElement.dataset.siteAtlasScale = current;
+      if (!scoped) {
+        document.documentElement.dataset.siteAtlasScale = current;
+      }
       for (const tab of scaleButtons) {
         const on = tab.dataset.atlasScaleTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -650,15 +689,19 @@
         return;
       }
       change(() => mark(next));
-      readdress(searchFor(location.search, next));
+      if (!scoped) {
+        readdress(searchFor(location.search, next));
+      }
     };
 
     /** @param {AtlasSize} next */
     const selectSize = (next) => {
+      explicitSize = true;
       if (next === size()) {
-        return;
+        markSize(next);
+      } else {
+        change(() => markSize(next));
       }
-      change(() => markSize(next));
       readdress(searchForSize(location.search, next));
     };
 
@@ -668,19 +711,35 @@
         return;
       }
       change(() => markScale(next));
-      readdress(searchForScale(location.search, next));
+      if (!scoped) {
+        readdress(searchForScale(location.search, next));
+      }
     };
 
-    cells.id = tabs.dataset.atlasPanel ?? "";
-    cells.setAttribute("role", "tabpanel");
-    mark(viewOf(location.search));
-    markSize(sizeOf(location.search));
-    markScale(scaleOf(location.search));
-
-    wire(tabs, (tab) => select(tab.dataset.atlasTab === "triangle" ? "triangle" : "grid"));
+    if (tabs !== null) {
+      cells.id = tabs.dataset.atlasPanel ?? "";
+      cells.setAttribute("role", "tabpanel");
+      wire(tabs, (tab) => select(tab.dataset.atlasTab === "triangle" ? "triangle" : "grid"));
+    }
+    mark(scoped ? view() : viewOf(location.search));
+    markSize(namedSize ? asSize(sizeQuery) : explicitSize ? size() : automaticSize());
+    markScale(scoped ? drawingScale() : scaleOf(location.search));
     if (sizes !== null) {
       wire(sizes, (tab) => selectSize(asSize(tab.dataset.atlasSizeTab)));
     }
+    // The font-ready getter can flush style. Read it after startup attributes are
+    // settled, alongside arrangement reads and before any tile placement writes.
+    const fontsReady = document.fonts.ready;
+    arrange();
+    // An untouched default follows the viewport without a transition. Explicit
+    // query choices and even a click on the current automatic size stay fixed.
+    wideScreen.addEventListener("change", () => {
+      if (!explicitSize) {
+        stop();
+        markSize(automaticSize());
+        arrange();
+      }
+    });
 
     if (scales !== null) {
       wire(scales, (tab) => selectScale(asScale(tab.dataset.atlasScaleTab)));
@@ -691,9 +750,9 @@
     // moving everything.
     if ("ResizeObserver" in window) {
       let waiting = false;
-      let priorWidth = cells.getBoundingClientRect().width;
-      new ResizeObserver(() => {
-        const width = cells.getBoundingClientRect().width;
+      new ResizeObserver((entries) => {
+        const width =
+          entries[0]?.borderBoxSize[0]?.inlineSize ?? cells.getBoundingClientRect().width;
         if (width === priorWidth) {
           return;
         }
@@ -708,7 +767,7 @@
       }).observe(cells);
     }
 
-    return { arrange, change };
+    return { arrange, change, fontsReady };
   }
 
   globalThis.SiteAtlasView = {

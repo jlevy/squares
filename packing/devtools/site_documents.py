@@ -21,8 +21,9 @@ code span:
 
 Three generated views of the record were pages here until 2026-10-01 and are not now:
 `RESULTS.md`, `STATUS.md` and `defects.md` (think-bk2e, and the review of that date
-under `docs/project/reviews/`). Their old addresses are forwarders
-(`render_overview.MOVED_PAGES`).
+under `docs/project/reviews/`). The old status and defect addresses remain forwarders;
+`results.html` now serves the complete Results table, with `all-results.html` as its
+legacy forwarder (`render_overview.MOVED_PAGES`).
 
 A relative link is resolved against the document's own directory, as GitHub resolves
 it. Every rewritten repository target is checked against the tree being rendered, which
@@ -186,7 +187,7 @@ _BY_SOURCE = {doc.source.relative_to(REPO).as_posix(): doc for doc in DOCUMENTS}
 #: page that shows what it holds.
 RECORD_PAGES: dict[str, str] = {
     repo_links.RESULTS: render_overview.RESULTS_PAGE,
-    repo_links.STATUS: "frontier.html",
+    repo_links.STATUS: "atlas.html",
 }
 #: Where every case's record is served, one address per case (`render_case_pages`).
 CASES_DIR = "cases"

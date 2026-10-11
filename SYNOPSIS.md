@@ -152,9 +152,9 @@ certificates, and its $s(50) \ge 37/5$, verified here by a complete replay, foll
 28 September. Guzhou0806’s continuation of R052, $s(17) > 4.62003$, superseded by
 `v1.1.0`, is retained as a publication record.
 The [results register](packing/frontier/RESULTS.md) and the site’s
-[results table](https://jlevy.github.io/squares/all-results.html) give the credit for
-each. The rungs above are the register’s, under the ladder in force since 2026-09-30.
-Dated sections further down keep the rungs they were written with;
+[results table](https://jlevy.github.io/squares/results.html) give the credit for each.
+The rungs above are the register’s, under the ladder in force since 2026-09-30. Dated
+sections further down keep the rungs they were written with;
 [`epistemics.md`](epistemics.md#what-changed-on-2026-09-30) says how the two ladders
 correspond.
 
@@ -681,6 +681,8 @@ case or experiment separately.
 | [The n = 17 Optimality Proof, Explained](docs/project/n17-optimality-explainer.md) | first-principles tutorial | supporting | maintained | — |
 | [N11: A Three-Paper Explainer Series](docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md) | implementation plan | current | transient | — |
 | [Feature: A Static, Crawlable Site with a Registered URL Scheme](docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md) | implementation plan | current | transient | — |
+| [Feature: Compact Homepage, Consistent Case Layouts, and Scroll-Aware Navigation](docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md) | implementation plan | current | transient | — |
+| [Feature: A Shorter Website Development Loop](docs/project/specs/active/plan-2026-10-10-website-development-loop.md) | implementation plan | current | transient | — |
 | [Proof Review: squarepacker’s k^2 - M(k) >= 0.033 log k](docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md) | dated review record | record | retained | — |
 | [Delta Proof Review: Ryu’s k² − M(k) Bound, Version 1.2](docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md) | dated review record | record | retained | — |
 | [Review of Ryu’s Quarter-Power and Cube-Root Proof Chains](docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md) | dated review record | record | retained | — |

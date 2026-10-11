@@ -9,6 +9,7 @@ Usage:
     uv run --frozen python -m devtools.build_known_best_atlas --check --jobs 4
     uv run --frozen python -m devtools.build_known_best_atlas --check --sample
     uv run --frozen python -m devtools.build_known_best_atlas --check-composites
+    uv run --frozen python -m devtools.build_known_best_atlas --row-comparison-svg PATH
 
 Two layers, updated apart. `--update` rewrites the data: the witnesses, the house
 renderings, the manifest and the frontier links, all text. `--update-composites` redraws
@@ -44,6 +45,7 @@ from fractions import Fraction
 from functools import cache
 from io import BytesIO
 from itertools import combinations, pairwise
+from math import isqrt
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any, Literal
@@ -71,7 +73,7 @@ from devtools import squish_second_update_house_links as squish_house
 from devtools import squish_second_update_packets as squish_second
 from devtools import squish_upper_bound_packets as squish_packets
 from devtools import upper_bound_packets as packets
-from devtools.atlas_legend import AtlasLegendCounts, LegendItem, atlas_legend, recent_label
+from devtools.atlas_legend import AtlasLegendCounts, LegendItem, atlas_legend
 from devtools.atlas_orientation import orient_atlas_witness
 from devtools.build_composite_figure_data import load_record as load_figure_record
 from devtools.result_status import RecentContributions, recent_contributions_by_case
@@ -239,28 +241,9 @@ SUMMARY_BOUND_BASELINE = Decimal(220)
 # above carries the extra 17px, so the whitespace between a caption and the packing
 # below it is what it always was.
 SUMMARY_LOWER_BASELINE = Decimal(237)
-# A five-pointed star, apex up, drawn as a polygon about its own centre. Not a glyph:
-# Helvetica and its metric substitutes have no star, and the PNG and PDF rasterisers
-# both render U+2605 as a replacement box, which would ship tofu in two of the three
-# formats.
-SUMMARY_STAR_POINTS = (
-    (Decimal(0), Decimal(-6)),
-    (Decimal("1.411"), Decimal("-1.942")),
-    (Decimal("5.706"), Decimal("-1.854")),
-    (Decimal("2.283"), Decimal("0.742")),
-    (Decimal("3.527"), Decimal("4.854")),
-    (Decimal(0), Decimal("2.4")),
-    (Decimal("-3.527"), Decimal("4.854")),
-    (Decimal("-2.283"), Decimal("0.742")),
-    (Decimal("-5.706"), Decimal("-1.854")),
-    (Decimal("-1.411"), Decimal("-1.942")),
-)
-SUMMARY_STAR_INSET = Decimal(6)
-#: The star's reference size: the size of the caption it was drawn for, so a star beside
-#: larger type scales by the ratio and stays the same weight against its text.
-SUMMARY_STAR_REFERENCE_SIZE = Decimal(14)
-SUMMARY_STAR_TEXT_INSET = Decimal(17)
 SUMMARY_BADGE_SIZE = Decimal(19)
+#: Color keys match the adjacent font size, as the square web legend swatches do.
+SUMMARY_LEGEND_SWATCH_LEADING = Decimal(1)
 #: Air between the bottom of the grid and the first legend row's baseline.
 SUMMARY_LEGEND_GAP = Decimal(30)
 #: Air between the last legend row and the explainer, which opens the footer block.
@@ -330,10 +313,6 @@ SUMMARY_BADGE_FONT_SIZE = Decimal(15)
 #: Where a math symbol sits in a badge. `=` and `≈` centre on the math axis rather than
 #: on the cap line, so they are placed by measurement rather than by the rule below.
 SUMMARY_MATH_GLYPH_BASELINE = Decimal(14)
-#: How much of the badge box the star fills. A five-pointed star reads smaller than a
-#: filled square of the same span, so it is drawn larger to carry the same weight in the
-#: row beside the lettered badges.
-SUMMARY_BADGE_STAR_SPAN = Decimal("0.92")
 SUMMARY_CREDIT = "Diagram by Joshua Levy with assistance from Claude and Codex"
 SUMMARY_REPOSITORY = "github.com/jlevy/squares"
 #: Where the bounds on the cards are cited, under the explainer and above the credit.
@@ -870,7 +849,8 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "corpus-wide construction, lower-bound and optimality credits sit below it, "
             "followed by the diagram credit and "
             "dated edition. Every counted legend item includes the depicted total. "
-            "Case counts are gray and ordinary bounds and annotations are black. "
+            "Case counts are crimson for recent results and gray otherwise; ordinary bounds "
+            "and annotations are black. "
             f"{POSTER_CITATIONS}: {SUMMARY_REPOSITORY}."
         ),
     ),
@@ -897,7 +877,8 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "2026. Badges mark which side lengths are proved "
             "optimal, and whether a side length is pinned exactly by a radical or a "
             f"minimal polynomial rather than only by a decimal. "
-            "Case counts are gray; the title, two-line definition, other explanatory "
+            "Case counts are crimson for recent results and gray otherwise; the title, "
+            "two-line definition, other explanatory "
             "text and ordinary bound captions are black. Every counted legend item "
             "includes the depicted total. The same corpus-wide construction, lower-bound "
             "and optimality credit paragraphs name contributors oldest first, "
@@ -1885,6 +1866,7 @@ def _append_summary_card(
     canvas: CompositeCanvas,
     grid_transition: GridTransition | None = None,
     recent: RecentContributions | None = None,
+    row_sizing: bool = False,
 ) -> None:
     n = built.frontier.n
     position = canvas.card_position(n, grid_transition)
@@ -1894,7 +1876,13 @@ def _append_summary_card(
     packing_y = card_y + SUMMARY_PACKING_INSET_Y
     frame = frame_from_witness(built.witness)
     side = frame.container_side.projected
-    scale = SUMMARY_PACKING_SIZE / side
+    reference_side = Decimal(isqrt(n - 1) + 1) if row_sizing else side
+    scale = SUMMARY_PACKING_SIZE / reference_side
+    drawing_size = side * scale if row_sizing else SUMMARY_PACKING_SIZE
+    ratio = side / reference_side
+    square_stroke = format_svg_number(Decimal("0.42") * ratio) if row_sizing else "0.42"
+    reference_y = packing_y
+    packing_y += SUMMARY_PACKING_SIZE - drawing_size
     colors = assign_square_colors(frame, spec)
 
     card = sub(
@@ -1920,6 +1908,21 @@ def _append_summary_card(
             ),
         },
     )
+    if row_sizing and drawing_size < SUMMARY_PACKING_SIZE:
+        sub(
+            card,
+            "rect",
+            {
+                "data-feature": "row-reference-frame",
+                "x": format_svg_number(packing_x),
+                "y": format_svg_number(reference_y),
+                "width": format_svg_number(SUMMARY_PACKING_SIZE),
+                "height": format_svg_number(SUMMARY_PACKING_SIZE),
+                "fill": "none",
+                "stroke": PAPER_THEME.muted,
+                "stroke-width": format_svg_number(SUMMARY_CONTAINER_STROKE * ratio),
+            },
+        )
     sub(
         card,
         "rect",
@@ -1927,8 +1930,8 @@ def _append_summary_card(
             "data-feature": "container-outline",
             "x": format_svg_number(packing_x),
             "y": format_svg_number(packing_y),
-            "width": format_svg_number(SUMMARY_PACKING_SIZE),
-            "height": format_svg_number(SUMMARY_PACKING_SIZE),
+            "width": format_svg_number(drawing_size),
+            "height": format_svg_number(drawing_size),
             "fill": PAPER_THEME.background,
             # Stroke widths here are in user units and scale with the drawing, deliberately.
             # `vector-effect="non-scaling-stroke"` used to be set on both this outline and the
@@ -1943,7 +1946,7 @@ def _append_summary_card(
             # the same file rendered standalone. One artifact, two line weights, depending on
             # who drew it.
             "stroke": PAPER_THEME.container,
-            "stroke-width": format_svg_number(SUMMARY_CONTAINER_STROKE),
+            "stroke-width": format_svg_number(SUMMARY_CONTAINER_STROKE * ratio),
         },
     )
     encoding = canvas.spec
@@ -1959,7 +1962,7 @@ def _append_summary_card(
             {
                 "data-feature": "square-fills",
                 "stroke": PAPER_THEME.container,
-                "stroke-width": "0.42",
+                "stroke-width": square_stroke,
                 "stroke-linejoin": "round",
             },
         )
@@ -1987,7 +1990,7 @@ def _append_summary_card(
         if not encoding.square_stroke_shared:
             attributes |= {
                 "stroke": PAPER_THEME.container,
-                "stroke-width": "0.42",
+                "stroke-width": square_stroke,
                 "stroke-linejoin": "round",
             }
         polygon = sub(squares, "polygon", attributes)
@@ -2005,7 +2008,9 @@ def _append_summary_card(
             "font-size": "29",
             "font-weight": "700",
             "letter-spacing": "-0.5",
-            "fill": LABEL_MUTED_COLOR,
+            "fill": FIRST_PARTY_ACCENT_COLOR
+            if recent is not None and recent.any
+            else LABEL_MUTED_COLOR,
         },
     ).text = str(n)
 
@@ -2098,10 +2103,8 @@ def _append_lower_bound(
     """The certified floor, under the best known side.
 
     A proved case says `s(n) = ...` on the line above and gets nothing here. Where the
-    floor is a recent result, the accent falls on the numeral alone, the same
-    colour as the star in the badge row above it: what is new about the case is the
-    bound, not the function it bounds, so the `s(n) >=` that introduces it stays in the
-    caption colour it carries on every other card. The legend counts how many there are.
+    floor is a recent result, the accent falls on the value alone, matching the
+    case numeral. The `s(n) >=` prefix keeps the ordinary caption colour.
     """
     entry = _figure_entries()[n]["lower"]
     if not entry["shown"]:
@@ -2129,14 +2132,6 @@ def _append_lower_bound(
         if (entry["recent_result"] if recent is None else recent)
         else None,
     )
-
-
-#: What the star means, in the legend and on each card's badge: a recent result, whoever
-#: proved it (the owner, 2026-09-27). It used to read "lower bound first proved here", and
-#: so went out at n = 11 when Kleddamag's 3.875, developed from T-026, became the bound.
-#: The month is read from `RECENT_SINCE`, so the label cannot name another; it is the
-#: old label's width.
-RECENT_LABEL = recent_label()
 
 
 @cache
@@ -2206,46 +2201,6 @@ def _append_function_text(
     sub(parent, "tspan", {"fill": accent}).text = value
 
 
-def _star_center_y(baseline: Decimal, size: str) -> Decimal:
-    """Half a cap height above the baseline: where a mark sits level with its text.
-
-    Aligning by eye drifts as soon as a line changes size, so both the height and the
-    scale come from the type. Helvetica's cap height is `SUMMARY_LABEL_CAP_RATIO` of the
-    em, and a glyph reads as level with a line of capitals when its own centre is at
-    half of that above the baseline.
-    """
-    return baseline - Decimal(size) * SUMMARY_LABEL_CAP_RATIO / 2
-
-
-def _star_scale(size: str) -> Decimal:
-    """How much to grow the star for type larger than the caption it was drawn for."""
-    return Decimal(size) / SUMMARY_STAR_REFERENCE_SIZE
-
-
-def _append_star(
-    parent: ET.Element,
-    *,
-    center_x: Decimal,
-    center_y: Decimal,
-    feature: str,
-    label: str = "",
-    scale: Decimal = Decimal(1),
-) -> None:
-    """Draw the new-result star about a centre, in the figure's one accent colour."""
-    attributes = {
-        "data-feature": feature,
-        "points": " ".join(
-            f"{format_svg_number(center_x + dx * scale)},"
-            f"{format_svg_number(center_y + dy * scale)}"
-            for dx, dy in SUMMARY_STAR_POINTS
-        ),
-        "fill": FIRST_PARTY_ACCENT_COLOR,
-    }
-    if label:
-        attributes["data-evidence"] = label
-    sub(parent, "polygon", attributes)
-
-
 def _badge_baseline(glyph: str) -> Decimal:
     top, bottom = _print_ink_bounds(glyph, str(SUMMARY_BADGE_FONT_SIZE))
     return SUMMARY_BADGE_SIZE / 2 - (top + bottom) / 2
@@ -2270,19 +2225,6 @@ def _append_badge(
     sit its badges flush with the top of the big number.
     """
     size = SUMMARY_BADGE_SIZE * type_scale
-    if style == "star":
-        # The legend's star is the same polygon the cards carry, centred in a badge box
-        # so the row lays out as if it were one. `glyph` is unused: there is no star to
-        # typeset, which is the point.
-        _append_star(
-            parent,
-            center_x=x + size / 2,
-            center_y=top + size / 2,
-            feature="legend-star",
-            label=label,
-            scale=size * SUMMARY_BADGE_STAR_SPAN / (SUMMARY_STAR_INSET * 2),
-        )
-        return
     glyph_left, _glyph_top, glyph_right, _glyph_bottom = atlas_print_font.ink_bounds(
         glyph, SUMMARY_BADGE_FONT_SIZE * type_scale
     )
@@ -2351,6 +2293,7 @@ def _legend_row(
     badge_size = SUMMARY_BADGE_SIZE * type_scale
     footer_size = label_size or format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
     mark_gap = Decimal(8) * type_scale
+    swatch_size = Decimal(footer_size) * SUMMARY_LEGEND_SWATCH_LEADING
     top = baseline - badge_size + Decimal(4) * type_scale
 
     def mark_width(mark: object) -> Decimal:
@@ -2358,7 +2301,7 @@ def _legend_row(
             return Decimal(0)
         if isinstance(mark, tuple):
             return badge_size
-        return badge_size * Decimal(len(mark))  # pyright: ignore[reportArgumentType]
+        return swatch_size * Decimal(len(mark))  # pyright: ignore[reportArgumentType]
 
     gap = Decimal(34) * type_scale
     widths = [
@@ -2399,6 +2342,8 @@ def _legend_row(
             )
             run_end = cursor + badge_size
         else:
+            label_top, label_bottom = _print_ink_bounds(label, footer_size)
+            swatch_top = baseline + (label_top + label_bottom - swatch_size) / 2
             run_end = cursor
             for fill, numeral in mark:  # pyright: ignore[reportGeneralTypeIssues]
                 sub(
@@ -2407,25 +2352,28 @@ def _legend_row(
                     {
                         "data-feature": "legend-swatch",
                         "x": format_svg_number(run_end),
-                        "y": format_svg_number(top),
-                        "width": format_svg_number(badge_size),
-                        "height": format_svg_number(badge_size),
+                        "y": format_svg_number(swatch_top),
+                        "width": format_svg_number(swatch_size),
+                        "height": format_svg_number(swatch_size),
                         "fill": fill,
                         "stroke": PAPER_THEME.container,
                         "stroke-width": format_svg_number(Decimal("0.8") * type_scale),
                     },
                 )
                 if numeral:
-                    numeral_size = format_svg_number(Decimal("11.5") * type_scale)
-                    if _text_width(numeral, numeral_size) > badge_size - type_scale:
+                    numeral_size = format_svg_number(Decimal(footer_size) * Decimal("0.6"))
+                    if _text_width(numeral, numeral_size) > swatch_size - type_scale:
                         raise ValueError("a legend swatch label exceeds its square")
+                    numeral_top, numeral_bottom = _print_ink_bounds(numeral, numeral_size)
                     sub(
                         legend,
                         "text",
                         {
                             "data-swatch-label": numeral,
-                            "x": format_svg_number(run_end + badge_size / 2),
-                            "y": format_svg_number(top + Decimal("13.4") * type_scale),
+                            "x": format_svg_number(run_end + swatch_size / 2),
+                            "y": format_svg_number(
+                                swatch_top + (swatch_size - numeral_top - numeral_bottom) / 2
+                            ),
                             "text-anchor": "middle",
                             "font-family": font_family,
                             "font-size": numeral_size,
@@ -2437,7 +2385,7 @@ def _legend_row(
                             else PAPER_THEME.ink,
                         },
                     ).text = numeral
-                run_end += badge_size
+                run_end += swatch_size
         sub(
             legend,
             "text",
@@ -2500,6 +2448,15 @@ def _append_summary_legend(
     )
     middle = spec.shades_per_hue // 2
 
+    # Print puts recency after the degree definition and omits its count; the
+    # shared semantic descriptor retains the web order, wording and counts.
+    columns = (descriptor.left, (*descriptor.right[1:], descriptor.right[0]))
+
+    def label(item: LegendItem) -> str:
+        if item.key == "recent":
+            return f"recent result ({item.label.removeprefix('recent result, ')})"
+        return item.formatted_text(count_style="words")
+
     def entry(item: LegendItem) -> tuple[object, str]:
         mark: object
         if item.marker is None or item.key == "recent":
@@ -2517,11 +2474,11 @@ def _append_summary_legend(
             ]
         else:
             mark = (
-                "" if item.marker == "star" else item.marker,
-                "star" if item.marker == "star" else "muted" if item.marker == "≈" else "solid",
+                item.marker,
+                "muted" if item.marker == "≈" else "solid",
                 item.label,
             )
-        return mark, item.formatted_text(count_style="words")
+        return mark, label(item)
 
     layout = _information_layout(canvas)
     body_size = POSTER_BODY_SIZE if canvas.information_in_corner else SUMMARY_FOOTER_SIZE
@@ -2531,25 +2488,24 @@ def _append_summary_legend(
 
     def row_width(item: LegendItem) -> Decimal:
         if item.marker is None or item.key == "recent":
-            return _text_width(item.formatted_text(count_style="words"), body_size)
+            return _text_width(label(item), body_size)
         return (
-            badge_size * (len(item.marker_values) if item.marker_values else 1)
+            (
+                Decimal(body_size) * SUMMARY_LEGEND_SWATCH_LEADING * len(item.marker_values)
+                if item.marker_values
+                else badge_size
+            )
             + mark_gap
-            + _text_width(item.formatted_text(count_style="words"), body_size)
+            + _text_width(label(item), body_size)
         )
 
-    widths = [
-        max(row_width(item) for item in column)
-        for column in (descriptor.left, descriptor.right)
-    ]
+    widths = [max(row_width(item) for item in column) for column in columns]
     gap = POSTER_LEGEND_COLUMN_GAP * layout.scale
     if sum(widths, Decimal(0)) + gap > layout.right - layout.left:
         raise ValueError("the poster legend columns exceed their information block")
     legend = sub(root, "g", {"data-feature": "evidence-legend"})
     cursor = layout.left
-    for name, items, width in zip(
-        ("left", "right"), (descriptor.left, descriptor.right), widths, strict=True
-    ):
+    for name, items, width in zip(("left", "right"), columns, widths, strict=True):
         column = sub(
             legend,
             "g",
@@ -2576,6 +2532,12 @@ def _append_summary_legend(
                 if item.key == "recent"
                 else SUMMARY_SMALL_FILL,
             )
+            if item.key == "recent":
+                recent = column[-1]
+                recent.text = "recent result"
+                sub(recent, "tspan", {"fill": SUMMARY_SMALL_FILL}).text = label(item)[
+                    len(recent.text) :
+                ]
         cursor += width + gap
 
 
@@ -3173,7 +3135,11 @@ def _append_composite_information(
 
 @emission_precision()
 def render_known_best_summary_svg(
-    built: Sequence[BuiltCase], canvas: CompositeCanvas, identity: CompositeIdentity
+    built: Sequence[BuiltCase],
+    canvas: CompositeCanvas,
+    identity: CompositeIdentity,
+    *,
+    row_sizing: bool = False,
 ) -> str:
     """Render a complete, zoomable overview of one composite's range of cases.
 
@@ -3195,6 +3161,16 @@ def render_known_best_summary_svg(
     if canvas.information_in_corner:
         canvas = canvas.with_transitions(transitions)
     accessible_title, accessible_description = SUMMARY_PROSE[composite.stem]
+    if row_sizing:
+        accessible_title += ": Row-sized bottom-left comparison"
+        accessible_description = (
+            f"An Atlas comparison of cases {composite.first_n} through {composite.last_n}. "
+            "In mathematical row k, packing geometry is scaled to the k-by-k reference "
+            "square. Each packing shares that frame's bottom-left corner; smaller "
+            "packings leave the gray reference outline above and to the right. "
+            "Original angle colors, contact shades, case counts, bounds, evidence "
+            "marks and source credits are retained."
+        )
     width, height = canvas.width, canvas.height
     spec = RenderSpec(overlays=frozenset())
     root = element(
@@ -3252,6 +3228,11 @@ def render_known_best_summary_svg(
                 if composite.placement == CompositePlacement.square_bound_triangle
                 else {}
             ),
+            **(
+                {"packing-sizing": "row", "packing-alignment": "bottom-left"}
+                if row_sizing
+                else {}
+            ),
             **_encoding_metadata(composite),
         },
     )
@@ -3278,6 +3259,7 @@ def render_known_best_summary_svg(
             canvas=canvas,
             grid_transition=by_row.get(row + 1),
             recent=contributions.get(item.frontier.n),
+            row_sizing=row_sizing,
         )
     for transition in transitions:
         if transition.grid.first_n in composite.numbers:
@@ -3285,6 +3267,23 @@ def render_known_best_summary_svg(
     return serialize_svg(
         root, embedded_print_fonts=atlas_print_font.embedded_css(), compact=True
     )
+
+
+def write_row_comparison_svg(destination: Path) -> None:
+    """Draw a separate full Atlas with Row sizing, leaving publication files alone."""
+    if destination.suffix.lower() != ".svg":
+        raise ValueError("a Row comparison requires an .svg destination")
+    canvases = resolved_composites()
+    canvas = next(item for item in canvases if item.spec.last_n == CORPUS.last_n)
+    if destination.resolve() in {item.svg_path.resolve() for item in canvases}:
+        raise ValueError("a Row comparison must not overwrite a published composite")
+    identity = drawable_identity()
+    drawing = render_known_best_summary_svg(
+        retained_cases(tuple(canvas.spec.numbers)), canvas, identity, row_sizing=True
+    )
+    with atomic_output_file(destination, make_parents=True) as temporary:
+        temporary.write_text(drawing, encoding="utf-8")
+    print(f"Row-sized bottom-left comparison: {canvas.spec.cases.label} → {destination}")
 
 
 def _png_chunks(content: bytes) -> list[tuple[bytes, bytes]]:
@@ -4626,9 +4625,7 @@ def summary_square_polygons(root: ET.Element) -> list[ET.Element]:
     A composite that carries per-square `data-*` names each polygon `square-fill`; one
     that has dropped them names the group instead, and the polygons inside it are the
     squares. Reading both is what lets one measurement, and one test, cover both
-    families rather than one per encoding. The star a card may carry is a polygon too
-    and is not a square, which is why this asks what a polygon is rather than counting
-    the tag.
+    families rather than one per encoding, without counting unrelated polygons.
     """
     squares = [
         node
@@ -4754,6 +4751,13 @@ def parser() -> argparse.ArgumentParser:
         action="store_true",
         help="measure each retained composite: bytes, squares, bytes per square",
     )
+    mode.add_argument(
+        "--row-comparison-svg",
+        type=Path,
+        metavar="PATH",
+        help="write a separate 324-case SVG with bottom-left Row sizing; "
+        "leave published SVG, PNG and PDF outputs unchanged",
+    )
     command.add_argument(
         "--refresh",
         action="store_true",
@@ -4815,6 +4819,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         check_sample(workers=workers) if args.sample else check(workers)
     elif args.report:
         report()
+    elif args.row_comparison_svg:
+        write_row_comparison_svg(args.row_comparison_svg)
     else:
         smoke_in_temporary_directory()
     return 0

@@ -55,7 +55,7 @@ from pathlib import Path
 
 from yaml import YAMLError
 
-from sqpack.cli.validate import BEHAVIORAL_TEST_ROOTS, changed_paths
+from sqpack.cli.validate import BEHAVIORAL_TEST_ROOTS, QUICK_TESTS, changed_paths
 from sqpack.release import DATA_PATHS as RELEASE_DATA_PATHS
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -93,6 +93,13 @@ SUITE_WIDE = (
 )
 
 PAGES_WORKFLOW = ".github/workflows/pages.yml"
+
+#: think-xyub: only configuration-only pushes move the complete slow lane to the
+#: matching PR fast + Deferred checkpoint. Mixed changes keep local slow coverage;
+#: unknown workflows and other fallbacks retain the original execution policy.
+CONFIGURATION_ONLY_PUSH_PATHS = frozenset(
+    (*SUITE_WIDE, ".github/workflows/packing-validation.yml", ".github/workflows/deep-gate.yml")
+)
 
 WALKER_MARKERS = ("rglob(", "iterdir(", ".glob(", "listdir(", "importlib", "__import__")
 
@@ -492,7 +499,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--run",
         action="store_true",
-        help="run pytest on the selection (the whole non-exhaustive suite when everything)",
+        help="run pytest on the selection; configuration-only pushes defer slow tests to CI",
     )
     parser.add_argument(
         "-n",
@@ -523,7 +530,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     if namespace.pool_workers is not None and not namespace.run:
         parser.error("--pool-workers requires --run")
 
-    selection = select_tests(changed_paths(namespace.since))
+    changed = changed_paths(namespace.since)
+    selection = select_tests(changed)
     if namespace.summary:
         print("everything" if selection.everything else f"narrow {len(selection.tests)}")
         return 0
@@ -541,11 +549,22 @@ def main(argv: Sequence[str] | None = None) -> int:
         if selection.everything
         else [os.path.relpath(REPO / test, start=ROOT) for test in selection.tests]
     )
-    # `not exhaustive_exact`, which keeps the `slow` lane in. That is deliberate and it
-    # is the difference between this tier and the pull-request surface: `--fast` defers
-    # every test above the per-test ceiling because it pays for them on every pull
-    # request, while `--push` pays only for the tests your own change reaches, and a slow
-    # test your change reaches is exactly the one worth waiting for.
+    # Reachability remains conservative. Only a nonempty configuration-only change
+    # moves slow execution to the existing matching-tree CI checkpoint (think-xyub).
+    # Any mixed source/record change, narrow selection or unknown fallback keeps slow
+    # tests locally; exhaustive tests already belong to the final checkpoint.
+    marker = (
+        QUICK_TESTS
+        if selection.everything
+        and changed
+        and all(path in CONFIGURATION_ONLY_PUSH_PATHS for path in changed)
+        else "not exhaustive_exact"
+    )
+    if marker == QUICK_TESTS:
+        print(
+            "configuration-only push: slow and exhaustive coverage requires passing "
+            "PR fast + Deferred checkpoint on the same source/base before merge (think-xyub)"
+        )
     parent_stem_value = os.environ.get("PACKING_REACHABLE_TEST_ARTIFACT_STEM")
     parent_stem: Path | None = None
     child_environment: dict[str, str] | None = None
@@ -593,7 +612,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return subprocess.run(command, cwd=ROOT, check=False, env=environment).returncode
 
     if namespace.pool_workers is None:
-        return run_phase("pytest-all", "not exhaustive_exact", namespace.numprocesses, None)
+        return run_phase("pytest-all", marker, namespace.numprocesses, None)
 
     def empty_lane(marker: str) -> bool:
         # xdist's exit 5 could hide a collection mismatch. Only a separate serial
@@ -610,8 +629,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         return subprocess.run(probe, cwd=ROOT, check=False).returncode == 5
 
-    normal_marker = "not exhaustive_exact and not pool_heavy"
-    pool_marker = "not exhaustive_exact and pool_heavy"
+    normal_marker = f"{marker} and not pool_heavy"
+    pool_marker = f"{marker} and pool_heavy"
     normal_status = run_phase("pytest-normal", normal_marker, namespace.numprocesses, 1)
     if normal_status != 0 and (normal_status != 5 or not empty_lane(normal_marker)):
         return normal_status

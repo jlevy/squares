@@ -161,21 +161,21 @@ def _record_context(base: str = "") -> LinkContext:
     ("link", "base", "expected"),
     [
         # A result's id, plain or as code, is its row in the results table.
-        ('<a href="packing/frontier/RESULTS.md">T-060</a>', "", "all-results.html#t-060"),
+        ('<a href="packing/frontier/RESULTS.md">T-060</a>', "", "results.html#t-060"),
         (
             '<a href="packing/frontier/RESULTS.md"><code>T-017</code></a>',
             "",
-            "all-results.html#t-017",
+            "results.html#t-017",
         ),
         (
             '<a href="RESULTS.md"><code>T-018</code></a>',
             "packing/frontier",
-            "all-results.html#t-018",
+            "results.html#t-018",
         ),
         # Any other text is the page that shows what the register or the table holds.
-        ('<a href="packing/frontier/RESULTS.md">results register</a>', "", "all-results.html"),
-        ('<a href="packing/frontier/STATUS.md">status table</a>', "", "frontier.html"),
-        ('<a href="STATUS.md">the status table</a>', "packing/frontier", "frontier.html"),
+        ('<a href="packing/frontier/RESULTS.md">results register</a>', "", "results.html"),
+        ('<a href="packing/frontier/STATUS.md">status table</a>', "", "atlas.html"),
+        ('<a href="STATUS.md">the status table</a>', "packing/frontier", "atlas.html"),
         # A code span naming the file is about the file, which is on `main`.
         (
             '<a href="packing/frontier/RESULTS.md"><code>frontier/RESULTS.md</code></a>',
@@ -203,7 +203,7 @@ def test_a_link_to_a_record_reaches_the_page_that_shows_it(
 ) -> None:
     """`RESULTS.md`, `STATUS.md` and `defects.md` are not pages of the site. A link to
     the first two leads to the page built from the same record, and one to the defect
-    log to the file; none leads to `results.html`, `status.html` or `defects.html`."""
+    log to the file; none leads to `all-results.html`, `status.html` or `defects.html`."""
     report = LinkReport()
     out = site_documents.rewrite_links(link, context=_record_context(base), report=report)
     assert re.findall(r'href="([^"]*)"', out) == [expected]
@@ -218,7 +218,7 @@ def test_a_result_id_the_register_lacks_is_reported() -> None:
     report = LinkReport()
     link = '<a href="packing/frontier/RESULTS.md">T-999</a>'
     out = site_documents.rewrite_links(link, context=_record_context(), report=report)
-    assert "all-results.html#t-999" not in out
+    assert "results.html#t-999" not in out
     assert report.missing == ["packing/frontier/RESULTS.md (no result T-999 in the register)"]
 
 
@@ -245,7 +245,7 @@ def test_the_documents_are_the_cards_in_their_order_and_three_views_are_not_page
     # A card and its page are paired by position, so the two lists must agree.
     assert cards == [by_page[page] for page in render_overview.DOCUMENT_PAGES]
     moved = dict(render_overview.MOVED_PAGES)
-    assert {"results.html", "status.html", "defects.html"} <= set(moved)
+    assert {"all-results.html", "status.html", "defects.html"} <= set(moved)
     assert not set(moved) & set(render_overview.SITE_PAGES)
     assert not set(moved) & set(render_overview.PAGES)
     for old in moved:
@@ -264,7 +264,7 @@ def test_a_forwarder_stands_at_each_address_a_page_used_to_have() -> None:
         physical = (
             destination if external else posixpath.relpath(destination, posixpath.dirname(old))
         )
-        target = "cases/" if old == "cases.html" else physical
+        target = physical
         canonical = destination if external else render_overview.canonical_url(destination)
         page = forwarders[old]
         opening = re.search(r"<html\b[^>]*>", page)
@@ -310,9 +310,9 @@ def test_no_page_of_the_site_links_a_page_that_moved(
 ) -> None:
     """A forwarder is for links written before the change. The site's own pages, the
     reader documents and every result's overview name the page a reader is going to."""
-    assert MOVED_LINK.search(' href="results.html#next-actions"')
+    assert MOVED_LINK.search(' href="all-results.html#next-actions"')
     assert MOVED_LINK.search(' src="../defects.html?view=embed"')
-    assert not MOVED_LINK.search(' href="all-results.html#t-060"')
+    assert not MOVED_LINK.search(' href="results.html#t-060"')
     for name, text in every_page.items():
         assert not MOVED_LINK.findall(text), name
     for result, body in every_result_body.items():
@@ -548,9 +548,9 @@ def test_the_introductions_links_reach_the_sites_own_pages(
     )
     intro = out.split(OVERVIEW_INTRO_OPEN, 1)[1].split(OVERVIEW_INTRO_CLOSE, 1)[0]
     assert re.findall(r'<a href="([^"]+)">([^<]+)</a>', intro) == [
-        ("all-results.html#t-060", "T-060"),
-        ("all-results.html", "results register"),
-        ("frontier.html", "frontier"),
+        ("results.html#t-060", "T-060"),
+        ("results.html", "results register"),
+        ("atlas.html", "frontier"),
         ("cases/11.html", "case record"),
         ("epistemics.html", "the rungs"),
         (f"{REPO_URL}/blob/{BRANCH}/docs/review.md", "review"),
@@ -570,7 +570,7 @@ def test_only_the_shared_block_has_its_links_rewritten(
         _overview('<p><a href="packing/frontier/STATUS.md">frontier</a></p>')
     )
     intro = out.split(OVERVIEW_INTRO_OPEN, 1)[1].split(OVERVIEW_INTRO_CLOSE, 1)[0]
-    assert intro == '<p><a href="frontier.html">frontier</a></p>'
+    assert intro == '<p><a href="atlas.html">frontier</a></p>'
     assert out.count('<a href="packing/frontier/RESULTS.md">outside the block</a>') == 3
     assert "recent-progress" not in out
 

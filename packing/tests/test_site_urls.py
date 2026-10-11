@@ -3,6 +3,7 @@
 import json
 import subprocess
 from dataclasses import replace
+from datetime import date, timedelta
 from pathlib import Path
 
 import pytest
@@ -33,6 +34,70 @@ def row(path: str) -> site_urls.SiteURL:
 
 def failures(checks: list[tuple[bool, str]]) -> str:
     return "\n".join(message for passed, message in checks if not passed)
+
+
+def test_atlas_and_about_are_registered_canonical_crawl_destinations() -> None:
+    retained = site_urls.load_registry()
+    rows = site_urls.derive_registry(retained)
+    by_path = {entry.path: entry for entry in rows}
+    for path in ("atlas.html", "about.html"):
+        entry = by_path[path]
+        assert entry.canonical == path
+        assert entry.kind == "page"
+        assert entry.producer == "overview"
+        assert entry.first_published == "2026-10-08"
+        assert entry.lastmod >= entry.first_published
+        assert render_overview.canonical_url(path) in site_urls.render_sitemap(rows)
+    assert not failures(site_urls.check_history(rows, retained))
+
+
+def test_results_index_is_canonical_and_its_old_address_only_forwards() -> None:
+    retained = site_urls.load_registry()
+    rows = site_urls.derive_registry(retained)
+    by_path = {entry.path: entry for entry in rows}
+    index, legacy = by_path["results.html"], by_path["all-results.html"]
+    assert (index.kind, index.status, index.canonical, index.target) == (
+        "page",
+        "live",
+        "results.html",
+        "",
+    )
+    assert (legacy.kind, legacy.status, legacy.canonical, legacy.target) == (
+        "forwarder",
+        "forwarded",
+        "results.html",
+        "results.html",
+    )
+    assert render_overview.RESULTS_PAGE == "results.html"
+    assert "results.html" in render_overview.PAGES
+    assert "all-results.html" not in render_overview.SITE_PAGES
+    sitemap = site_urls.render_sitemap(rows)
+    assert render_overview.canonical_url("results.html") in sitemap
+    assert render_overview.canonical_url("all-results.html") not in sitemap
+    assert not failures(site_urls.check_history(rows, retained))
+
+
+def test_case_directories_are_retained_atlas_forwarders_and_records_stay_canonical() -> None:
+    retained = site_urls.load_registry()
+    rows = site_urls.derive_registry(retained)
+    by_path = {entry.path: entry for entry in rows}
+    for path in ("cases.html", "cases/index.html"):
+        entry = by_path[path]
+        assert entry.kind == "forwarder"
+        assert entry.status == "forwarded"
+        assert entry.target == entry.canonical == "atlas.html"
+        assert path not in render_overview.PAGES
+        assert path not in render_overview.SITE_PAGES
+    records = [entry for entry in rows if entry.kind == "record"]
+    assert [entry.path for entry in records] == [
+        entry.path for entry in retained if entry.kind == "record"
+    ]
+    assert len(records) == 324
+    assert all(entry.path == entry.canonical and entry.status == "live" for entry in records)
+    assert not failures(site_urls.check_history(rows, retained))
+    sitemap = site_urls.render_sitemap(rows)
+    assert f"<loc>{render_overview.canonical_url('cases/')}</loc>" not in sitemap
+    assert render_overview.canonical_url("atlas.html") in sitemap
 
 
 def test_partial_producer_omission_fails_without_building_other_producers(
@@ -89,6 +154,9 @@ def test_closed_world_and_constrained_asset_names(tmp_path: Path) -> None:
     folder = tmp_path / "assets/css"
     folder.mkdir(parents=True)
     (folder / "site.0123456789abcdef.css").write_text("", encoding="utf-8")
+    image = tmp_path / "assets/images/known-best-1-324.0123456789abcdef.png"
+    image.parent.mkdir(parents=True)
+    image.write_bytes(b"poster fixture")
     assert not failures(site_urls.check_site(tmp_path, rows))
     (folder / "unregistered.html").write_text("", encoding="utf-8")
     assert "unregistered.html" in failures(site_urls.check_site(tmp_path, rows))
@@ -191,7 +259,7 @@ def test_crawl_writer_emits_safe_404_and_tombstones(tmp_path: Path) -> None:
         row("index.html"),
         replace(row("cases/11.html"), kind="record"),
         replace(row("result/t-001.html"), kind="result"),
-        row("all-results.html"),
+        row("results.html"),
         replace(
             row("result/t-002.html"),
             kind="result",
@@ -264,6 +332,7 @@ def test_not_found_alias_script_keeps_unknown_addresses_and_fragments() -> None:
 @pytest.mark.parametrize(
     ("path", "measured"),
     [
+        ("index.html", 1_172_462),
         ("papers/n11-lower-bounds-explainer.html", 1_417_498),
         ("papers/n11-threshold-bound-review.html", 823_322),
     ],
@@ -271,8 +340,8 @@ def test_not_found_alias_script_keeps_unknown_addresses_and_fragments() -> None:
 def test_measured_budget_exception_preserves_the_hard_limit(
     tmp_path: Path, path: str, measured: int
 ) -> None:
-    paper = replace(row(path), kind="paper-file", producer="paper:" + Path(path).stem)
-    (tmp_path / "papers").mkdir()
+    paper = row(path)
+    (tmp_path / path).parent.mkdir(parents=True, exist_ok=True)
     (tmp_path / path).write_bytes(b"x" * measured)
     assert not failures(site_urls.check_site(tmp_path, [paper]))
     budget = site_urls.page_budget(paper)
@@ -292,18 +361,22 @@ def test_case_lastmod_follows_amended_results_within_declared_scope(
     scope: dict[str, int | list[int]],
     covered: set[int],
 ) -> None:
+    reviewed = (date.fromisoformat(site_urls.REGISTRATION_DATE) + timedelta(days=1)).isoformat()
+    amended = (date.fromisoformat(reviewed) + timedelta(days=1)).isoformat()
     result = {
         "id": "T-007",
         "kind": "lower-bound",
-        "registered": "2026-10-07",
+        "registered": reviewed,
         "scope": scope,
-        "amendments": [{"date": "2026-10-08"}],
+        "amendments": [{"date": amended}],
     }
     records = tmp_path / "results.yaml"
     records.write_text(json.dumps({"results": [result]}), encoding="utf-8")
     monkeypatch.setattr(overview_data, "RESULTS", records)
     monkeypatch.setattr(
-        render_research_tables, "load_cases", lambda: [{"n": n} for n in range(3, 8)]
+        render_research_tables,
+        "load_cases",
+        lambda: [{"n": n, "source_reviewed": reviewed} for n in range(3, 8)],
     )
     monkeypatch.setattr(render_overview, "PAGES", {"index.html": None})
     monkeypatch.setattr(render_overview, "PAPERS", ())
@@ -312,9 +385,9 @@ def test_case_lastmod_follows_amended_results_within_declared_scope(
     monkeypatch.setattr(render_overview, "support_file_paths", lambda: ())
     monkeypatch.setattr(site_documents, "chapter_names", lambda: ())
     rows = {row.path: row for row in site_urls.derive_registry()}
-    assert rows["result/t-007.html"].lastmod == "2026-10-08"
+    assert rows["result/t-007.html"].lastmod == amended
     for n in range(3, 8):
-        expected = "2026-10-08" if n in covered else "2026-10-07"
+        expected = amended if n in covered else reviewed
         assert rows[f"cases/{n}.html"].lastmod == expected
 
 

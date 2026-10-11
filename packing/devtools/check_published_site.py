@@ -90,7 +90,7 @@ RESULT_OVERVIEW = re.compile(
 )
 #: The record page's index, each case's link to its record file beside it, and the
 #: record a record file holds (`render_case_pages`).
-CASE_INDEX_LINK = re.compile(r'href="(\d+)\.html" data-case="(\d+)"')
+CASE_INDEX_LINK = re.compile(r'<tr id="n-(\d+)"[^>]*data-case-href="cases/(\d+)\.html"')
 CASE_RECORD = re.compile(r'<article class="site-case" data-case="(\d+)"')
 #: The record files a deploy check fetches: the first and last cases indexed and the
 #: settled n = 11. The record page and every case popover fetch these files, so a deploy
@@ -111,7 +111,7 @@ SITE_PAGES = tuple(render_overview.PAGES)
 #: links already are when they are rendered; asking GitHub would cost a request per link
 #: on every deploy. The results page is one, since its records are the register's links
 #: and were asked of GitHub when the table was on the overview.
-LINK_CHECKED_PAGES = frozenset({"index.html", "frontier.html", render_overview.RESULTS_PAGE})
+LINK_CHECKED_PAGES = frozenset({"index.html", "atlas.html", render_overview.RESULTS_PAGE})
 
 #: Each paper's own version, as its front prints it (`sqpack.release`), by slug: the
 #: explainer's number, and each review's status and number (`Draft v0.1.4`). A test holds
@@ -1086,10 +1086,19 @@ def _lazy_row_records(
         return "", f"record source must be {address}"
     row_links = markup.find(tag="a", class_name="site-row-open", within=table_row)
     fallback = markup.find(tag="a", within=body)
-    actions = markup.find(tag="a", class_name="site-popover-action", within=popover)
-    for links in (row_links, fallback, actions):
-        if not links or any(link.attrs.get("href") != address for link in links):
-            return "", f"static record link must be {address}"
+    # The loader replaces the body, so its optional links cannot supply the
+    # persistent action. The native row link and that action must both remain.
+    actions = [
+        link
+        for link in markup.find(tag="a", class_name="site-popover-action", within=popover)
+        if link not in fallback
+    ]
+    if (
+        not row_links
+        or not actions
+        or any(link.attrs.get("href") != address for link in (*row_links, *fallback, *actions))
+    ):
+        return "", f"static record link must be {address}"
     if address not in articles:
         return "", f"record page {address} not served"
     found = articles[address]
@@ -1526,7 +1535,13 @@ def check(
             cache[key] = fetch(url, head=head, timeout=timeout)
         return cache[key]
 
-    results = deployed_registry_checks(site, read, timeout=timeout)
+    registered = site_urls.load_registry()
+    expected_cases = sorted(
+        int(match[1])
+        for row in registered
+        if row.kind == "record" and (match := re.fullmatch(r"cases/(\d+)\.html", row.path))
+    )
+    results = deployed_registry_checks(site, read, timeout=timeout, rows=registered)
     site = site.rstrip("/") + "/"
 
     def served_page(
@@ -1615,7 +1630,7 @@ def check(
             checked_links |= repository_links(text)
         if name in RECORD_LINK_PAGES:
             tables[name] = text
-        if name == render_case_pages.CASES_PAGE:
+        if name == "atlas.html":
             indexed = [int(n) for n, case in CASE_INDEX_LINK.findall(text) if n == case]
 
     overviews = sorted(
@@ -1658,12 +1673,12 @@ def check(
     if bodies:
         links_main("the result overviews", "\n".join(bodies))
 
-    # The case records are files beside the record page, which it and every case popover
-    # fetch: the index names each in order, and a sample of them is fetched.
+    # The Atlas survey names every canonical record in register order. The registry
+    # walk checks all records; this content sample also verifies their identities.
     results.append(
         (
-            bool(indexed) and indexed == list(range(1, len(indexed) + 1)),
-            f"{render_case_pages.CASES_PAGE} indexes {len(indexed)} case records in order",
+            bool(indexed) and indexed == expected_cases,
+            f"atlas.html indexes {len(indexed)} registered case records in order",
         )
     )
     sample = (

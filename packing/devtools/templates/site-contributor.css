@@ -31,9 +31,6 @@
   a {
   color: inherit;
 }
-.site-contributor h1 {
-  margin-block-start: 0.5rem;
-}
 .site-contributor-identity dt {
   font-weight: var(--site-font-weight-sans-medium);
 }
@@ -75,18 +72,8 @@
   font-size: var(--kpress-font-size-base);
 }
 .site-contributor-popover .site-contributor h1 {
-  font-family: var(--kpress-font-sans);
-  font-size: calc(var(--kpress-font-size-base) * 1.15);
-  font-style: normal;
-  font-weight: var(--site-font-weight-sans-medium);
-  line-height: var(--paper-heading-leading);
   margin-block: 0.5rem 1rem;
 }
 .site-contributor-popover .site-contributor h2 {
-  font-family: var(--kpress-font-sans);
-  font-size: var(--kpress-font-size-h2);
-  font-style: normal;
-  font-weight: var(--site-font-weight-sans-medium);
-  line-height: var(--paper-heading-leading);
   margin-block: var(--paper-section-space) var(--paper-section-space-below);
 }

@@ -176,13 +176,14 @@ def test_a_single_case_shows_the_films_panel_and_the_packing(
     assert '<span class="is-upper" style="left: ' in bar
     assert ">3.877</span>" in bar
     assert bar.count('class="site-atlas-gap-rule"') == 1  # exact: one rule, no lower
-    # The chained bound, as the film states it, with its star and badges.
+    # The chained bound and mathematical badges remain without a recency symbol.
     assert overview_data.math_html("s(11) ={}") in body
     assert (
         '<span class="is-upper is-exact-value">'
         f"{overview_data.math_html(fact['upper'])}</span>" in body
     )
-    assert '<span class="site-atlas-pop-star" aria-hidden="true">\u2605</span>' in body
+    assert "site-atlas-pop-star" not in body
+    assert "\u2605" not in body
     for _, _, label in fact["badges"]:
         assert f"</span>{label}</li>" in body
     for which in ("lower", "upper"):
@@ -282,12 +283,7 @@ def _assert_case_values(cases: list[int], overview: overview_data.Overview, body
             n, "lower"
         ).removeprefix("is-")
         assert cells[1].text == lower
-        stars = cells[1].findall("span[@class='site-star']")
-        assert bool(stars) is fact["star"]
-        if stars:
-            assert len(stars) == 1
-            assert stars[0].attrib == {"class": "site-star", "title": "Recent result"}
-            assert stars[0].text == "★"
+        assert cells[1].findall("span[@class='site-star']") == []
         assert cells[2].attrib["class"] == result_overview.contribution_class(
             n, "upper"
         ).removeprefix("is-")
@@ -303,7 +299,7 @@ def _assert_case_values(cases: list[int], overview: overview_data.Overview, body
         assert _inner(cells[4]) == _inner(expected_status)
         assert cells[5].attrib["class"] == "records"
         assert [(link.attrib["href"], link.text) for link in cells[5].findall("a")] == [
-            (f"frontier.html#n-{n}", "frontier"),
+            (f"atlas.html#n-{n}", "frontier"),
             (repo_links.repo_url(result_overview.case_file(n)), f"n-{n:03d}.md"),
         ]
 
@@ -391,7 +387,7 @@ def test_every_result_page_keeps_its_registered_byte_budget(
     overview: overview_data.Overview, record_property: Callable[[str, object], None]
 ) -> None:
     """The complete result table keeps every registered row and linked literal credit."""
-    page = site_renders.page("all-results.html")
+    page = site_renders.page("results.html")
     row = next(row for row in site_urls.load_registry() if row.path == page.name)
     assert site_urls.page_budget(row) == 800_000
     record_property("html_bytes", len(page.html.encode("utf-8")))
@@ -491,10 +487,10 @@ def test_the_chain_is_every_result_on_the_case_oldest_first(
     lines = result_overview.result_lines()
     for other in expected:
         step = body.split(f'data-step="{other.id.lower()}"', 1)[1].split("</li>", 1)[0]
-        assert f'<a href="all-results.html#{other.id.lower()}">{other.id}</a>' in step
+        assert f'<a href="results.html#{other.id.lower()}">{other.id}</a>' in step
         # A step's date leads and what it dates follows, then the id, as in the tables.
         dated = overview_sections.date_cell(other)
-        assert f"<p>{dated} <a href=" in step
+        assert f'<p class="site-result-step-head">{dated} <a href=' in step
         assert not re.search(r'class="site-date-kind">\w+</span> [\d-]+', step)
         assert overview_data.tex_bounds(other.summary) in step
         # Where the result stands here as it does as a whole, its marks name only the
@@ -588,8 +584,8 @@ def test_a_chain_names_only_the_successors_on_its_own_cases(bodies: dict[str, st
     names only the result on that case that supersedes it now, T-093, which replaced
     T-043 on 2026-10-05 (think-6zg1), not those that supersede it at n = 18 or 19."""
     step = bodies["T-043"].split('data-step="t-019"', 1)[1].split("</li>", 1)[0]
-    chips = step.split("<p>", 3)[3].split("</p>", 1)[0]
-    assert re.findall(r'href="all-results\.html#(t-\d+)"', chips) == ["t-093"]
+    chips = step.split('<p class="site-result-step-chips">', 1)[1].split("</p>", 1)[0]
+    assert re.findall(r'href="results\.html#(t-\d+)"', chips) == ["t-093"]
 
 
 @pytest.mark.parametrize("result_id", [SETTLED, EARLIER, BROAD])
@@ -599,13 +595,13 @@ def test_the_links_reach_the_site_and_the_record(
     result = _result(overview, result_id)
     record = result.record
     links = bodies[result_id].split('class="site-result-section site-result-links"', 1)[1]
-    assert f'<a href="all-results.html#{result_id.lower()}">' in links
+    assert f'<a href="results.html#{result_id.lower()}">' in links
     if result_id == BROAD:
-        assert '<a href="frontier.html">' in links
-        assert '<a href="cases/">' in links
+        assert '<a href="atlas.html#the-frontier-survey">' in links
+        assert 'href="cases/"' not in links
     else:
         assert '<a href="cases/11.html">' in links
-        assert '<a href="frontier.html#n-11">' in links
+        assert '<a href="atlas.html#n-11">' in links
         # Both papers on the case, the one on the result that stands first, each where
         # it is served under `papers/`.
         paper = f'<a href="{overview_sections.OPTIMALITY_PAPER}">'
@@ -730,8 +726,8 @@ def test_every_site_link_is_a_served_page_and_a_real_fragment(
             assert page in render_overview.SITE_PAGES, (result_id, href)
             if page == render_overview.RESULTS_PAGE:
                 assert fragment in rows, href
-            elif page == "frontier.html":
-                assert not fragment or fragment in cases, href
+            elif page == "atlas.html":
+                assert fragment == "the-frontier-survey" or fragment in cases, href
             else:
                 assert page in {
                     overview_sections.LOWER_BOUNDS_PAPER,
@@ -772,7 +768,7 @@ def test_a_link_to_nothing_fails_the_render(overview: overview_data.Overview) ->
         '<a href="nowhere.html">x</a>',
         '<a href="cases/999.html">x</a>',
         '<a href="cases.html#n-11">x</a>',
-        '<a href="all-results.html#t-999">x</a>',
+        '<a href="results.html#t-999">x</a>',
     )
     for body in refused:
         with pytest.raises(SystemExit):
@@ -994,7 +990,18 @@ def test_recent_upper_lower_and_optimal_marks_follow_independent_contributions()
     assert result_overview.contribution_class(11, "lower") == "is-lower is-new-result"
     assert result_overview.contribution_class(11, "optimal") == "is-optimal is-new-result"
     badges = result_overview.case_badges(11)
-    assert 'data-style="solid" data-recent="true" role="img" aria-label="optimal"' in badges
+    optimal = next(
+        mark for mark in ET.fromstring(badges) if mark.get("aria-label") == "optimal"
+    )
+    assert optimal.text == "O"
+    assert optimal.attrib == {
+        "class": "site-atlas-badge",
+        "data-style": "solid",
+        "data-recent": "true",
+        "role": "img",
+        "aria-label": "optimal",
+        "title": "optimal",
+    }
     assert badges.count('data-recent="true"') == 1
     assert 'class="is-upper is-exact-value"' in result_overview.film_bound(facts[11])
     assert "is-new-result" not in result_overview.film_bound(facts[11])

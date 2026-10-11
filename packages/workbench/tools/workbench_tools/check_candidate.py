@@ -11,9 +11,9 @@ temporary directory. The copies of `transition-stats.json` and `stats-summary.md
 under `packing/atlas/known-best/video/spikes/v2-transitions/` are frozen historical output,
 and nothing here compares them with a build.
 
-Revision 2 adds: the facts carry the poster's badges (only its vocabulary), the star
-and the open list exactly as the composite record states them; each pair knows the
-square that arrived in the pair before; the star polygon matches the atlas source;
+The facts carry the poster's mathematical status badges and open list exactly as the
+composite record states them. Recent case numbers are red; each pair knows the square
+that arrived in the pair before;
 scarlet is defined once in the page; and, in the headless shell, the progress bar is
 a pure function of the clock, each facts layer reads its own n before the arrival, and
 the scarlet mark sits where the requests put it.
@@ -78,7 +78,6 @@ SHARED_PICTURE_PAIRS = {147, 232, 264, 290}
 REPO = PACKAGE_ROOT.parents[1]
 MANIFEST = REPO / "packing/atlas/known-best/manifest.json"
 COMPOSITE = REPO / "packing/atlas/known-best/composite-figure.json"
-ATLAS_SOURCE = REPO / "packing/devtools/build_known_best_atlas.py"
 KATEX_MAIN = (
     REPO / "vendor/kpress/src/kpress/format/static/katex/fonts/KaTeX_Main-Regular.woff2"
 )
@@ -144,16 +143,6 @@ def payload_of(html: str) -> dict:
     )
     assert match is not None, "index.html carries no atlas-data block"
     return json.loads(match.group(1).replace("<\\/", "</"))
-
-
-def atlas_star_points() -> list[tuple[float, float]]:
-    """SUMMARY_STAR_POINTS as the atlas source states it, parsed rather than imported."""
-    text = ATLAS_SOURCE.read_text()
-    found = re.search(r"SUMMARY_STAR_POINTS = \((.*?)\n\)", text, re.DOTALL)
-    assert found is not None, "the atlas source carries no SUMMARY_STAR_POINTS block"
-    block = found.group(1)
-    pairs = re.findall(r"\(Decimal\(\"?(-?[\d.]+)\"?\), Decimal\(\"?(-?[\d.]+)\"?\)\)", block)
-    return [(float(x), float(y)) for x, y in pairs]
 
 
 def open_items(entry: dict) -> list[str]:
@@ -873,19 +862,20 @@ def browser_checks(page_path: Path, check) -> None:
             )
             page.evaluate(probe("candidate/set_phase"), {"phase": "add-then-move"})
 
-            # The badges are the poster's marks, and the star is drawn, not typeset.
+            # Status badges keep the poster's mathematical vocabulary.
             page.evaluate(probe("candidate/select"), {"index": index_of[17]})
             page.evaluate(probe("candidate/seek"), {"t": 0.0})
             labels = page.evaluate(
                 probe("candidate/texts_of"), {"selector": "#facts-a .badge-item .label"}
             )
-            check(labels == ["new result", "exact"], f"badge labels for n=17 are {labels}")
+            check(labels == ["exact"], f"badge labels for n=17 are {labels}")
             check(
                 page.evaluate(
-                    probe("candidate/count_of"), {"selector": "#facts-a .badge-star polygon"}
+                    probe("candidate/count_of"),
+                    {"selector": "#facts-a .badge-star, #facts-a .bound-star"},
                 )
-                == 1,
-                "n=17 has no star polygon",
+                == 0,
+                "n=17 still draws a recency symbol",
             )
             check(
                 page.evaluate(probe("candidate/text_of"), {"selector": "#facts-a .exact .note"})
@@ -1464,7 +1454,7 @@ def main() -> int:
         )
         check(
             fact["star"] == entry["lower"]["recent_result"],
-            f"n={key}: star disagrees with recent_result",
+            f"n={key}: recency disagrees with recent_result",
         )
         check(
             fact["open"] == open_items(entry),
@@ -1477,11 +1467,7 @@ def main() -> int:
     )
     check(
         payload["facts"]["17"]["star"] is True and payload["facts"]["100"]["star"] is False,
-        "star flags for 17 and 100",
-    )
-    check(
-        [tuple(p) for p in payload["star_points"]] == atlas_star_points(),
-        "star polygon differs from the atlas source",
+        "recency flags for 17 and 100",
     )
     metrics = payload["metrics"]
     check(
@@ -1653,7 +1639,7 @@ def main() -> int:
         "identity chain composed and present; blocks rigid up to their residuals, "
         "statistics and the new-square rule on every pair, "
         "overlap census present; index.html offline; "
-        "badges, star, open list and lower bounds match the record; scarlet defined once; "
+        "badges, recency, open list and lower bounds match the record; scarlet defined once; "
         "KaTeX_Main embedded and setting the relations; "
         "browser: one element per identity created once, five motion modes with "
         "add-then-move the default, styles B and C ending on n+1's poses, "

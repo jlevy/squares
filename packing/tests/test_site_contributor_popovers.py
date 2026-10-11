@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import contextlib
+import json
 import os
 from collections.abc import Iterator
 from dataclasses import replace
@@ -28,6 +29,7 @@ LAYOUT = probe(PROBES, "contributor_popovers/layout")
 NATIVE_CLICK = probe(PROBES, "contributor_popovers/native_click")
 SETTLED = probe(PROBES, "contributor_popovers/settled")
 DESIGN = probe(PROBES, "contributor_popovers/design")
+HEADING = probe(PROBES, "contributor_popovers/heading")
 PROFILE = (
     '<article class="site-contributor" aria-labelledby="title">'
     '<h1 id="title">Walter Stromquist</h1><p>A mathematical contributor.</p>'
@@ -175,7 +177,14 @@ def design_generated(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         current="",
     )
     directory = render_contributors.contributor_pages()[0]
-    for record in (profile, directory):
+    reference = render_overview.static_content_page(
+        '<article class="title-reference"><h1>Shared page title</h1></article>',
+        meta=render_overview.PageMeta(
+            "Shared page title", "Standard page heading reference.", "title-reference.html"
+        ),
+        current="",
+    )
+    for record in (profile, directory, reference):
         target = root / record.name
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(record.html)
@@ -288,6 +297,8 @@ def test_generated_profile_uses_shared_roles_without_overflow(
             assert styles["title"]["size"] == pytest.approx(styles["headline"]["size"])
             assert styles["title"]["weight"] == styles["medium"]
             assert styles["title"]["leading"] == pytest.approx(styles["headline"]["leading"])
+            assert styles["title"]["family"] == styles["note"]["family"]
+            assert styles["title"]["transform"] == "none"
             assert styles["body"]["family"] == styles["note"]["family"]
             assert styles["body"]["weight"] == styles["note"]["weight"]
             assert styles["left"] == pytest.approx(styles["right"], abs=1)
@@ -303,6 +314,40 @@ def test_generated_profile_uses_shared_roles_without_overflow(
         mode = "popover" if overlay else "standalone"
         article.locator(".site-contributor-breadcrumb").scroll_into_view_if_needed()
         page.screenshot(path=str(shots / f"profile-{mode}-{width}-{theme}.png"))
+
+
+@pytest.mark.parametrize("width", [1280, 390])
+@pytest.mark.parametrize("theme", ["light", "dark"])
+@pytest.mark.parametrize("record", ["contributors/index.html", "contributors/evan-daniel.html"])
+def test_generated_contributor_page_titles_match_the_shared_page_role(
+    browser: Any,
+    design_generated: str,
+    tmp_path: Path,
+    width: int,
+    *,
+    theme: str,
+    record: str,
+) -> None:
+    with _page(browser, viewport={"width": width, "height": 900}, color_scheme=theme) as page:
+        page.goto(f"{design_generated}title-reference.html", wait_until="load")
+        reference = page.evaluate(HEADING, "main .title-reference > h1")
+        assert reference["family"] == reference["sans"]
+        assert reference["transform"] == "uppercase"
+        assert reference["fontStyle"] == "normal"
+        page.goto(f"{design_generated}{record}", wait_until="load")
+        heading = page.locator("main article > h1")
+        site_browser.api().expect(heading).to_be_visible()
+        styles = page.evaluate(HEADING, "main article > h1")
+        assert styles == reference
+        tmp_path.joinpath("heading.json").write_text(json.dumps(styles, indent=2))
+        if (
+            width == 1280
+            and theme == "light"
+            and (directory := os.environ.get("SQPACK_CONTRIBUTOR_DESIGN_SHOTS"))
+        ):
+            Path(directory).mkdir(parents=True, exist_ok=True)
+            name = "directory" if record.endswith("index.html") else "profile"
+            page.screenshot(path=str(Path(directory) / f"page-title-{name}.png"))
 
 
 @pytest.mark.parametrize("opener", ["case", "result"])
@@ -532,5 +577,6 @@ def test_generated_directory_keeps_native_profile_navigation(
         page.locator('main a[data-contributor][href$="walter-stromquist.html"]').click()
         page.wait_for_url(f"{generated}contributors/walter-stromquist.html")
         assert (
-            page.locator("main article.site-contributor h1").inner_text() == "Walter Stromquist"
+            page.locator("main article.site-contributor h1").text_content()
+            == "Walter Stromquist"
         )

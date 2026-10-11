@@ -561,6 +561,11 @@ body.drawing #packing-svg #squares {
   line-height: var(--stage-line-height-headline);
   white-space: nowrap;
 }
+/* Recency colors only the changing case number; `n =` stays in the shared ink. */
+#numeral-a .numeral.is-new-result,
+#numeral-b .numeral.is-new-result {
+  color: var(--scene-proved);
+}
 .numeral .n-val {
   font-weight: var(--stage-weight-bold);
   font-size: var(--stage-text-headline);
@@ -687,8 +692,7 @@ body.drawing #packing-svg #squares {
    badges hold their places at every n, and OPEN, which is left out when nothing is open, starts
    at the same place whenever it is drawn.
    The rhythm, in stage pixels: a head is 6 above what it heads; a row of content is 28 above
-   the next head. The badges took the slot the separate "new lower bound" line used to hold,
-   since a recent result is now a badge of its own. */
+   the next head. */
 .section-head {
   position: absolute;
   left: 6px;
@@ -723,19 +727,6 @@ body.drawing #packing-svg #squares {
   color: var(--scene-ink);
   white-space: nowrap;
 }
-/* The star hangs in the margin, to the LEFT of the column the facts are set in, so the inequality
-   starts at the margin like every other row. There is room because the packing ends at 1060 and
-   this column starts at 1160. */
-.bound-star {
-  position: absolute;
-  left: -46px;
-  top: 0.12em;
-  width: 38px;
-}
-.bound-star svg {
-  width: 38px;
-  height: 38px;
-}
 /* KaTeX owns the setting inside the line; the stylesheet owns only where it sits and how big it
    is. KaTeX's own stylesheet sets `white-space: normal` and breaks an expression into one `.base`
    span per relation; this line is a fixed-height slot in a poster and must not wrap. */
@@ -746,9 +737,7 @@ body.drawing #packing-svg #squares {
 .side .katex-html {
   white-space: nowrap;
 }
-/* The poster's badges, in a row with short labels: what this record establishes, and, first,
-   `new result` when the lower bound is a recent result. Fixed height, so the row never
-   reflows. */
+/* Mathematical status badges, in a fixed-height row with short labels. */
 .badges {
   position: absolute;
   left: 6px;
@@ -768,10 +757,6 @@ body.drawing #packing-svg #squares {
   font-weight: var(--stage-weight-label);
   color: var(--scene-label);
   letter-spacing: var(--stage-tracking-label);
-}
-/* `new result` is set in the badges' type, in the star's scarlet (the owner, 2026-09-17). */
-.badge-item.is-new-result {
-  color: var(--scene-proved);
 }
 .badge-item svg {
   width: 36px;
@@ -809,9 +794,6 @@ body.drawing #packing-svg #squares {
   fill: var(--scene-badge);
   stroke: var(--scene-badge);
   stroke-linejoin: round;
-}
-.badge .star {
-  fill: var(--scene-proved);
 }
 /* OPEN: what the record leaves unsettled for this n, in the same badge row shape, a step quieter. */
 .open-items {
@@ -911,8 +893,7 @@ body.drawing #packing-svg #squares {
 }
 /* The published work a lower bound corrects, `corrects Nagamochi 2005`, between the reference
    and the note, in the note's quieter grey: like the note it is said about the bound rather than
-   part of its source, and the star's scarlet stays the `new result` badge's alone (the owner,
-   2026-10-02). */
+   part of its source (the owner, 2026-10-02). */
 .cite-corrects {
   color: var(--scene-heading);
   font-weight: var(--stage-weight-label);
@@ -1112,6 +1093,7 @@ input[type="text"] {
   padding: 0 var(--control-padding-inline);
 }
 button:not(:where(.site-app-shell *)) {
+  font-size: calc(var(--font-size-body) * var(--paper-button-label-scale, 0.9));
   cursor: pointer;
 }
 button:not(:where(.site-app-shell *)):hover {
@@ -1184,7 +1166,7 @@ button.primary:hover {
 }
 .chips button {
   min-width: 38px;
-  font-size: var(--font-size-sm);
+  font-size: calc(var(--font-size-sm) * var(--paper-button-label-scale, 0.9));
   text-align: center;
 }
 /* Readout: a live figure in a fixed slot. **A readout that changes at runtime never changes

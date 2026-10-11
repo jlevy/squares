@@ -1,4 +1,4 @@
-// The two actions the homepage sets under a table and under the atlas, as drawn: "See
+// The two actions the homepage sets under a table and under the atlas, as drawn: "View
 // all results", the link under the recent table, and the atlas's expander. For each,
 // its box, how far its centre is from its row's, its computed colours, type, padding
 // and corners, its icon's direction, width and side, and what it says: its visible
@@ -34,6 +34,7 @@
         width: round(box.width),
         height: round(box.height),
       },
+      row_gap: element.parentElement ? getComputedStyle(element.parentElement).columnGap : null,
       centred: row === null ? null : round((box.left + box.right) / 2 - (row.left + row.right) / 2),
       color: style.color,
       background: style.backgroundColor,
@@ -59,7 +60,7 @@
     };
   };
   return {
-    see_all: read(document.querySelector(".site-more a")),
+    see_all: read(document.querySelector("[data-all-results]")),
     expander: read(document.querySelector("[data-atlas-toggle]")),
   };
 };

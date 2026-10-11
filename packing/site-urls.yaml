@@ -9,14 +9,23 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-07'
   status: live
-- path: all-results.html
-  canonical: all-results.html
+- path: about.html
+  canonical: about.html
   kind: page
   generator: devtools.render_overview:render_all
   producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+- path: all-results.html
+  canonical: results.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
+  producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
-  status: live
+  status: forwarded
+  target: results.html
 - path: apple-touch-icon.png
   canonical: apple-touch-icon.png
   kind: asset-file
@@ -41,6 +50,15 @@ urls:
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
   status: live
+- path: assets/images/*.{hash}.png
+  canonical: ''
+  kind: asset-file
+  generator: devtools.site_assets:shared
+  producer: overview
+  first_published: '2026-10-02'
+  lastmod: '2026-10-02'
+  status: live
+  pattern: assets/images/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.png
 - path: assets/{css,js,fonts}/*.{hash}.{ext}
   canonical: ''
   kind: asset-file
@@ -50,6 +68,14 @@ urls:
   lastmod: '2026-10-02'
   status: live
   pattern: assets/(?:css/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.css|js/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.js|fonts/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.woff2)
+- path: atlas.html
+  canonical: atlas.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
 - path: atlas/house/n-1.svg
   canonical: atlas/house/n-1.svg
   kind: asset-file
@@ -3195,14 +3221,21 @@ urls:
   lastmod: '2026-10-07'
   status: live
 - path: cases.html
-  canonical: cases/
+  canonical: atlas.html
   kind: forwarder
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-02'
+  lastmod: '2026-10-09'
   status: forwarded
-  target: cases/index.html
+  target: atlas.html
+  amendments:
+  - date: '2026-10-09'
+    reason: Atlas owns case browsing; individual case records retain their canonical URLs.
+    previous:
+      kind: forwarder
+      canonical: cases/
+      target: cases/index.html
 - path: cases/1.html
   canonical: cases/1.html
   kind: record
@@ -5796,13 +5829,21 @@ urls:
   lastmod: '2026-10-07'
   status: live
 - path: cases/index.html
-  canonical: cases/
-  kind: page
-  generator: devtools.render_overview:render_all
+  canonical: atlas.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-10-02'
-  status: live
+  lastmod: '2026-10-09'
+  status: forwarded
+  target: atlas.html
+  amendments:
+  - date: '2026-10-09'
+    reason: Atlas owns case browsing; individual case records retain their canonical URLs.
+    previous:
+      kind: page
+      canonical: cases/
+      target: ''
 - path: contributors/erich-friedman.html
   canonical: contributors/erich-friedman.html
   kind: page
@@ -6030,13 +6071,14 @@ urls:
   lastmod: '2026-10-07'
   status: live
 - path: frontier.html
-  canonical: frontier.html
-  kind: page
-  generator: devtools.render_overview:render_all
+  canonical: atlas.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
-  status: live
+  status: forwarded
+  target: atlas.html
 - path: index.html
   canonical: ''
   kind: page
@@ -6177,7 +6219,7 @@ urls:
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
   first_published: '2026-09-30'
-  lastmod: '2026-10-09'
+  lastmod: '2026-10-10'
   status: live
 - path: papers/n11-optimality-review.md
   canonical: papers/n11-optimality-review.md
@@ -6185,7 +6227,7 @@ urls:
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
   first_published: '2026-09-30'
-  lastmod: '2026-10-09'
+  lastmod: '2026-10-10'
   status: live
 - path: papers/n11-optimality-review.pdf
   canonical: papers/n11-optimality-review.pdf
@@ -6193,7 +6235,7 @@ urls:
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
   first_published: '2026-09-30'
-  lastmod: '2026-10-09'
+  lastmod: '2026-10-10'
   status: live
 - path: papers/n11-threshold-bound-review.html
   canonical: papers/n11-threshold-bound-review.html
@@ -12056,14 +12098,13 @@ urls:
     - packing/resources/web/evand-record-hunt-2026-10-09/receipts/exact-certification.json.xz
     - packing/devtools/evand_hunt_reports.py
 - path: results.html
-  canonical: all-results.html
-  kind: forwarder
-  generator: devtools.render_overview:forwarder_pages
+  canonical: results.html
+  kind: page
+  generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
-  status: forwarded
-  target: all-results.html
+  status: live
 - path: sitemap.xml
   canonical: sitemap.xml
   kind: site-file
@@ -12097,14 +12138,14 @@ urls:
   lastmod: '2026-10-08'
   status: live
 - path: status.html
-  canonical: frontier.html
+  canonical: atlas.html
   kind: forwarder
   generator: devtools.render_overview:forwarder_pages
   producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
   status: forwarded
-  target: frontier.html
+  target: atlas.html
 - path: synopsis.html
   canonical: synopsis.html
   kind: page

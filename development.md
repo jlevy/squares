@@ -243,7 +243,7 @@ The shard jobs retain full Git history for history-reading tests, but none insta
 or a browser.
 Browser-floor liveness runs under `--frontend`, on the runner that owns the
 pinned Node toolchain.
-`site table layout in Chromium` runs nine test files on the runner that installs the
+`site table layout in Chromium` runs thirteen test files on the runner that installs the
 pinned Chromium. Functional pixel/layout checks, including the atlas’s readable drawing
 sizes and interactions, run in parallel with file-based distribution.
 After those workers exit, the four native-frontier HTTP load-budget cases run serially,
@@ -830,9 +830,23 @@ contracts seed the same import, text and walker closure.
 A scheduling edit does not mark every module in an unchanged library directory as
 changed. Unreadable or unknown first-party entrypoints select the whole suite.
 
+Configuration-only pushes still select every test file.
+If every changed path belongs to `SUITE_WIDE` in `devtools.reachable_tests` or is
+`packing-validation.yml` or `deep-gate.yml`, local execution runs the complete quick
+lane and reports the slow lane as deferred (`think-xyub`). Before merge, passing PR fast
+and Deferred checkpoint runs must cover the same source/base; their existing complement
+contract supplies all slow and exhaustive tests.
+This avoids repeating the complete slow lane locally for a configuration-only edit.
+Any mixed change, including source, renderer, test or record edits, keeps the original
+local slow coverage.
+Unknown workflows and empty, unmapped or otherwise unresolved selections also retain the
+original execution policy.
+Narrow reachable selections still include directly reached slow tests.
+
 **Large implicit push selections receive a separate pytest phase.** Other changed
-workflow files or suite configuration expand the selector to everything: the quick and
-slow lanes together, against `FAST_SUITE_BUDGET_SECONDS`. A large proper subset can also
+workflow files or suite configuration expand the selector to everything.
+Except for the configuration-only execution policy above, this runs the quick and slow
+lanes together, against `FAST_SUITE_BUDGET_SECONDS`. A large proper subset can also
 dominate the run. When resource settings are implicit, the edit checks run with their
 normal concurrency, then the reachable tests use the available pytest workers after the
 edit pool has drained.
@@ -995,43 +1009,27 @@ The records check independently rejects a ceiling above `max_headroom` times the
 baseline. A `null` baseline leaves those ratio checks unarmed; a measurement printed by
 CI does not update the file automatically.
 
-**On a hosted pull-request run the drift and stale rules are advisory under
-`think-be1s`, since 2026-10-01; since 2026-10-05 the ceiling is too, up to a hang
-detector, under `think-6erz`.** The register’s `policy.pull_request_relative_rules`
-declares it, the way `pull_request_walls` declares an advisory wall: `enforcing` when
-absent, and `advisory` only with a `tracking_bead` and an `advisory_reason`, which
-`devtools.check_gate_budgets` refuses when the bead is closed or unknown.
-The gate detects the run from the runner’s own `GITHUB_ACTIONS` and `GITHUB_EVENT_NAME`,
-computes both rules as before, prints each finding as `FAIL (advisory, not enforced)`
-with the bead, raises a warning annotation on the run, and passes; a run over its
-ceiling still fails, and `--enforce-budget` overrides the relaxation for an operator
-asking on purpose. Off a pull request nothing changes.
-The measurement behind it, 2026-09-30, is retained with every reading’s verdict in
-`packing/tests/fixtures/tier-walls/hosted-readings-2026-09-30.yaml` and replayed by
-`test_the_day_of_2026_09_30_is_judged_on_code_not_on_the_runner`: on unchanged steps the
-`checks` tier read 59.4 to 137.1 s and shard C 62.96 to 143.87 s across one day’s hosted
-runs, 2.3x apart with every test green, and the two rules failed four runs for the
-runner they drew while a re-run of the identical commit passed.
-The policy’s window around a point record is 2.5x, so no record can hold that pool, and
-a single hosted reading cannot tell a slow draw from a slow change.
-What can is a median over several hosted readings, which the wall register already
-judges and `think-be1s` owns for the tiers, or a wall normalised by the runner’s
-measured speed; until one of those judges a pull request, the ceiling is the rule a pull
-request is held to.
+**Hosted pull-request cost findings are advisory.** The drift and stale rules are
+tracked by `think-be1s`; completed tier walls and ordinary per-test cost findings are
+tracked by `think-ht59`. The register computes and reports each finding, adds a `Cost`
+warning annotation, and requires an open tracking bead and an advisory reason.
+`devtools.check_gate_budgets` rejects a closed or unknown tracker.
 
-**The ceiling and the per-test call-wall rule followed on 2026-10-05.**
-`policy.pull_request_ceiling` declares it under the same contract, plus a hang detector:
-on a hosted pull-request run a tier wall over its ceiling, or a test call of 12 s or
-more, is printed with its bead and a `Cost` warning annotation and does not fail the
-run, but a wall above `hang_ratio` (2) times the ceiling, or one call of
-`per_test_hang_seconds` (45) or more, still does.
-Main, scheduled and deep runs keep the ceiling enforced, and `--enforce-budget` again
-overrides it on purpose.
-The evidence is that day’s CI stabilization evaluation: 28 of 36 red pushes to stack
-pull requests failed on a wall verdict alone with every test green, and the +9% raise of
-`3d89c6fa5` was breached again within hours, shard C at 171.2 s against 168 s on #356.
-`think-6erz` returns the ceiling to enforcement when it is judged against a median or a
-runner-normalised wall.
+A completed wall above a multiple of its ceiling does not distinguish a slow runner from
+a slow change. On website PR head `34e5581a`, all 408 functional tests and four HTTP
+checks passed, but the frontend wall of 399.44 seconds exceeded the effective 330-second
+ceiling. Earlier stabilization evidence found 28 of 36 red pushes failed only on wall
+findings. Raising ceilings repeatedly did not resolve that ambiguity.
+`think-ht59` keeps this policy open until controlled repeated measurements or a
+runner-normalised wall can judge regressions attributable to a change.
+
+**Failures and deadlines still fail the run.** Functional failures, command timeouts,
+and test calls of 45 seconds or more remain enforcing.
+Numeric tier budgets are unchanged.
+Main and scheduled runs, full and strict checkpoints (including those invoked within a
+pull request), and explicit `--enforce-budget` retain cost enforcement.
+The gate identifies hosted pull requests from `GITHUB_ACTIONS` and `GITHUB_EVENT_NAME`;
+an advisory policy does not apply to every invocation on that runner.
 
 A different CPU/worker shape reports the budget result without failing, unless
 explicitly enforced.
@@ -1285,7 +1283,17 @@ Limits are CLS 0.1, LCP 4,000 ms, longest task 300 ms and cumulative blocking be
 ms of 600 ms.
 Missing native timing, page errors, failed requests, hidden primary content
 and missing visual math fail the check.
-Every structural sample must pass; `--runs 3` reports the median of each timing metric.
+Every structural sample must pass; `--runs 3` retains all samples and reports the median
+of each timing metric.
+The default `--timing-mode enforce` makes timing exceedances fail controlled runs.
+Ordinary shared CI explicitly selects `--timing-mode report-only` for producer checks
+and `--site-timing-mode=report-only` for the native HTTP browser contract.
+It retains the same limits, measurements and exceedances in JSON artifacts; CLS,
+readability, reserved dimensions, missing native timing, errors and failed requests
+still fail, as does the separate attributable startup-restyle trace guard.
+Shared-CI timing enforcement is tracked as **think-9dhb**, owned by jlevy: re-enable it
+when a controlled runner or repeated same-run comparison against a fixed baseline
+defines a regression margin above the measured noise envelope.
 The early-shift and hidden-content negative fixtures prove that the gate observes
 failures.
 

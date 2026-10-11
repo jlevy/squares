@@ -164,7 +164,12 @@ function page(protocol = "https:") {
             ...(isCase ? { "data-case": "11" } : { "data-result-overview": "t-004" }),
             "data-text": text,
           },
-          heading ? [new StandInElement("h1", { id: heading[1] || "" })] : [],
+          heading
+            ? [
+                new StandInElement("h1", { id: heading[1] || "" }),
+                new StandInElement("a", { href: `#${heading[1] || ""}` }),
+              ]
+            : [],
         ),
       ]);
     }
@@ -397,10 +402,11 @@ function page(protocol = "https:") {
       { class: "site-row-pop-body", ...(source ? { "data-row-pop-src": source } : {}) },
       [deferred ? held : detail],
     );
+    const label = new StandInElement("span", { class: "site-card-label" });
     const popover = new StandInElement(
       "div",
-      { id: target, class: "site-popover", popover: "auto" },
-      [close, title, body],
+      { id: target, class: "site-popover", popover: "auto", "aria-labelledby": title.id },
+      [close, label, title, body],
     );
     return { element, trigger, link, text, popover, close, title, body, held, detail };
   }
@@ -711,12 +717,35 @@ void test("a body that cannot be fetched keeps its short form, and the next open
     assert.deepEqual(fetched.body.children, [fetched.detail], reach);
     assert.equal(fetched.body.getAttribute("data-row-pop-src"), "result/t-004.html");
     assert.ok(!fetched.body.hasAttribute("data-row-pop-loading"));
+    const fallback = fetched.popover.querySelector(".site-popover-value");
+    assert.ok(fallback);
+    assert.equal(fetched.popover.getAttribute("aria-labelledby"), fallback.id);
+    assert.ok(fetched.popover.querySelector(".site-card-label"));
     assert.deepEqual(typeset, []);
     fetched.popover.hidePopover();
     fire(fetched.text, "click");
     await settled();
     assert.equal(requests.length, 2, reach);
   }
+});
+
+void test("the complete article title replaces outer titles and has a dialog-specific id", async () => {
+  const { document, fire, fetched, served, settled } = page();
+  served.set(
+    "result/t-004.html",
+    '<article class="site-result"><h1 id="t-004">T-004: Result</h1><a href="#t-004">Title</a></article>',
+  );
+  fire(fetched.text, "click");
+  await settled();
+  const heading = fetched.body.querySelector("h1");
+  assert.ok(heading);
+  assert.equal(fetched.popover.querySelector(".site-card-label"), null);
+  assert.equal(fetched.popover.querySelector(".site-popover-value"), null);
+  assert.match(heading.id, /^site-article-\d+-t-004$/);
+  assert.equal(fetched.popover.getAttribute("aria-labelledby"), heading.id);
+  assert.equal(document.getElementById(heading.id), heading);
+  assert.equal(document.getElementById("t-004"), fetched.element);
+  assert.equal(fetched.body.querySelector("a")?.getAttribute("href"), `#${heading.id}`);
 });
 
 void test("a page read from a file fetches nothing and keeps the short body", async () => {
@@ -887,7 +916,7 @@ void test("consumer mutations do not alter the cached pristine article", async (
   assert.equal(requests.length, 1);
 });
 
-void test("a row's retained headline hides only its article clone's canonical heading", async () => {
+void test("cached canonical headings stay pristine and each clone names its dialog", async () => {
   const { fire, fetched, served, requests, settled } = page();
   served.set(
     "result/t-004.html",
@@ -897,17 +926,20 @@ void test("a row's retained headline hides only its article clone's canonical he
   await settled();
   const title = fetched.body.querySelector("h1");
   assert.ok(title);
-  assert.ok(title.hasAttribute("hidden"));
+  assert.ok(!title.hasAttribute("hidden"));
   assert.match(title.id, /^site-article-\d+-t-004$/);
-  // A consumer without a retained headline still receives the cached article's title.
+  assert.equal(fetched.popover.getAttribute("aria-labelledby"), title.id);
+  // A consumer mutation of one clone cannot hide the next cached article's title.
+  title.setAttribute("hidden", "");
   fetched.popover.hidePopover();
-  fetched.title.remove();
   fetched.body.setAttribute("data-row-pop-src", "result/t-004.html");
   fire(fetched.text, "click");
   await settled();
   const freshTitle = fetched.body.querySelector("h1");
   assert.ok(freshTitle);
   assert.notEqual(freshTitle, title);
+  assert.notEqual(freshTitle.id, title.id);
   assert.ok(!freshTitle.hasAttribute("hidden"));
+  assert.equal(fetched.popover.getAttribute("aria-labelledby"), freshTitle.id);
   assert.equal(requests.length, 1);
 });

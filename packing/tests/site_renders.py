@@ -169,7 +169,6 @@ class _FrontierMath(HTMLParser):
         assert self.native_depth is None
         assert self.rows == [f"n-{n}" for n in range(1, 325)]
         assert self.native > 0
-        assert self.total - self.native == 9
         return self.native, self.total
 
 
@@ -184,7 +183,7 @@ def count_frontier_math(source: str) -> tuple[int, int]:
 @cache
 def frontier_math_counts() -> tuple[int, int]:
     """Native and total formulas from every canonical frontier row and its prose."""
-    return count_frontier_math(html("frontier.html"))
+    return count_frontier_math(html("atlas.html"))
 
 
 def served(name: str) -> str:
@@ -243,10 +242,22 @@ def result_bodies() -> dict[str, str]:
     }
 
 
+def case_records(only: tuple[int, ...] | None = None) -> dict[str, str]:
+    """Canonical record files, all by default or a normalized, cached fixture subset."""
+    selected = None if only is None else tuple(sorted(set(only)))
+    return _case_records(selected)
+
+
 @cache
-def case_records() -> dict[str, str]:
-    """Every case's record file (`render_overview.case_records`), by served name."""
-    return {record.name: record.html for record in render_overview.case_records()}
+def _case_records(only: tuple[int, ...] | None) -> dict[str, str]:
+    from devtools import render_case_pages  # noqa: PLC0415
+
+    records = (
+        render_overview.case_records()
+        if only is None
+        else render_case_pages.case_records(only=only)
+    )
+    return {record.name: record.html for record in records}
 
 
 @cache

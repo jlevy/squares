@@ -48,16 +48,22 @@
           if (generation !== (generations.get(popover) || 0)) {
             return;
           }
-          // The row shell already names the dialog with its headline. Keep the
-          // canonical title's scoped ID for references without repeating its text.
-          if (Array.from(popover.children).some((child) => child.matches(".site-popover-value"))) {
-            for (const child of article.children) {
-              if (child.matches("h1")) {
-                child.setAttribute("hidden", "");
+          const heading = Array.from(article.children).find((child) => child.matches("h1"));
+          body.replaceChildren(article);
+          if (heading instanceof HTMLElement) {
+            // The shared loader scopes this clone's heading and every local reference.
+            if (!heading.id) {
+              heading.id = `${popover.id}-record-title`;
+            }
+            popover.setAttribute("aria-labelledby", heading.id);
+            // The short title stays usable while loading or offline. Once the full
+            // title is present it owns the dialog's name, without repeating above it.
+            for (const outer of [...popover.children]) {
+              if (outer.matches(".site-card-label, .site-popover-value")) {
+                outer.remove();
               }
             }
           }
-          body.replaceChildren(article);
           body.removeAttribute("data-row-pop-src");
         })
         // The short body is already there; a later opening tries again.

@@ -18,6 +18,7 @@ async (selector) => {
       leading: Number.parseFloat(style.lineHeight),
       color: style.color,
       wrap: style.overflowWrap,
+      transform: style.textTransform,
     };
   };
   const reference = document.createElement("span");
@@ -30,13 +31,16 @@ async (selector) => {
   const note = read(reference);
   reference.style.fontWeight = "var(--site-font-weight-sans-medium)";
   const medium = read(reference).weight;
-  reference.style.fontSize = "var(--kpress-font-size-h2)";
+  const panel = article.closest("[data-contributor-popover]");
+  reference.style.fontSize = panel
+    ? "calc(var(--kpress-font-size-base) * var(--paper-popover-section-scale))"
+    : "var(--kpress-font-size-h2)";
   reference.style.lineHeight = "var(--paper-heading-leading)";
   const section = read(reference);
-  reference.style.fontSize = "calc(var(--kpress-font-size-base) * 1.15)";
+  reference.style.fontSize =
+    "calc(var(--kpress-font-size-base) * var(--paper-popover-title-scale))";
   const headline = read(reference);
   reference.remove();
-  const panel = article.closest("[data-contributor-popover]");
   const parent = article.parentElement;
   const title = article.querySelector("h1");
   if (title === null) {

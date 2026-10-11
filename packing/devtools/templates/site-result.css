@@ -112,16 +112,11 @@
   padding: 0.3rem 0 0;
 }
 .kpress .site-result .site-detail {
-  color: var(--site-support-color);
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
   font-weight: var(--site-font-weight-sans-light);
   line-height: 1.45;
   margin-block: 0.3rem 0.2rem;
-}
-.kpress .site-result .site-detail dt {
-  color: var(--kpress-doc-text);
-  font-weight: var(--site-font-weight-sans-medium);
 }
 .kpress .site-result .site-detail dd {
   margin: 0 0 0.4rem;
