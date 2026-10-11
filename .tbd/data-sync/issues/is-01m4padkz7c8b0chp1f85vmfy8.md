@@ -5,7 +5,7 @@ title: "Import BuddenPing: s(207) <= 14.880960373044 (#503)"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:12.135Z
-updated_at: 2026-10-11T21:13:32.635Z
+updated_at: 2026-10-11T23:04:16.995Z
 started_at: 2026-10-11T20:28:24.948Z
 ---
 https://github.com/jlevy/squares/issues/503 (2026-10-11T10:27Z). BuddenPing/square-packing-certificates 9dc93b6ac2f8fefe038062a74c9a75bf05afdba6, n207.cert.json (SHA-256 1c334f31...) and pingyou-n207-rational.yaml Witness/v2; zip 01-squares-project.zip. Below SQUISH #481's n207 (T-136) by 4.55e-3. Stages 1-4 replay through devtools.upper_bound_reports.
@@ -47,3 +47,36 @@ https://github.com/jlevy/squares/issues/503 (2026-10-11T10:27Z). BuddenPing/squa
 ## Draft acknowledgement (2026-10-11, not posted; the owner posts it)
 
 @BuddenPing, thank you. We received the n = 207 certificate and pinned BuddenPing/square-packing-certificates at 9dc93b6ac2f8fefe038062a74c9a75bf05afdba6; `n207.cert.json`, `pingyou-n207-rational.yaml` and `01-squares-project.zip` have the SHA-256 digests you give. The certificate's exact side is the one you state, and your Witness/v2 states exactly the same 207 poses and side. It is below the ceiling the n = 207 case holds today, and below SQUISH's pending #481 certificate by the margin you give; no other report names n = 207. The repository states no licence, so we keep digests and an exact fact derived from the certificate rather than your files. Next we will replay the certificate exactly by this repository's two maintained routes, with duplicate-square and outside-container controls, and review the replay; your scripts are not needed for that and will not be run. Credit will read PingYou Ltd for the n207 assembly, after Ryan Xu's n70 construction and Evan Daniel's exact n70 certificate, as you ask. One question: the first version of this issue and commit 0d8b9c1 said OpenAI Codex assisted the verification, the comparison review and the package, and commit 9dc93b6 removed that sentence. The issue template asks for the author's own account of AI assistance; which account should the record carry?
+
+
+## Records lane (2026-10-11, think-ekv3)
+
+Registered as T-147 at V3/C3 in 3c9dd2608 on worktree branch worktree-agent-a790e638083667522 (from claude/wizardly-meitner-wqn4x3-imports at 0ec1173c5; DATA_REVISION re-pinned in 640b3cf91; not pushed). Evidence E-pingyou-503-certificate-report (review as external_review) and E-pingyou-503-exact-feasibility (verified, independent-implementation); coverage, bibliography key [PingYou n207 certificate 2026-10-11], resources README row, result-requests #503 (T-147), certificate-citation deferral to think-fvz4. The id is provisional until it is on main.
+
+## Stage 7 draft (2026-10-11, records lane; to post after the layer-2 PR merges; not posted)
+
+Supports posting after merge: yes, once the merge's Pages deployment shows the T-147 row. Before posting: recheck the id on main (T-147 is provisional until merged); if the adoption layer (think-fvz4) has moved n = 207's case record by then, replace the "case record is unchanged" sentence. This draft carries the acknowledgement's AI-assistance question and replaces the acknowledgement above if that was never posted. Ledger: check_requests --report on this branch says reply due and closeable (the result settled, no ask queued); the owner decides whether to close with this comment or keep the issue open for the author's answer on AI assistance.
+
+@BuddenPing, thank you. Your n = 207 certificate is registered on `main` as **[T-147](https://jlevy.github.io/squares/results.html#t-147), V3/C3**, confirmed, independently re-implemented, at the exact side it states:
+
+- s(207) ≤ 148809603730436756319360591381170501178639/10^40 = 14.8809603730436756319360591381170501178639
+
+**Where it stands.** It is below the n = 207 case's verified ceiling (Nate Chaoweeraprasit's SQUISH packing as refined by Siddharth Gupta, T-127) by exactly 70318852589817493681897946459498821361/10^40, about 7.03e-03, and below SQUISH's #481 certificate (T-136) by 4.5459357980020505e-03, the margin you give. No other report names 207, so it is the smallest side known. The [case record](https://github.com/jlevy/squares/blob/main/packing/frontier/n-207.md) is unchanged for now: each reviewed house is adopted after a custody record of the replay workers, and the review recommends yours at 207, with the earlier houses kept as history.
+
+**How it was checked.**
+- Your repository states no licence, so we keep an exact fact derived from `n207.cert.json` at 9dc93b6 rather than your files, and held it to your Witness/v2: the same 207 poses and side, exactly.
+- All three jobs, the certificate with a duplicate-square and an outside-container control, were decided by both maintained exact routes, `sqpack.verify` and `devtools.check_rational_witness_independent`: 127,926 pair decisions; every wall clears by exactly 1/(2·10^10) and every pair by about 1e-10.
+- A third exact route, `devtools.check_half_angle_area` (half-extent containment and exact intersection area), decided it with six controls, four of them sharp, and held the fact to your certificate and witness fetched at the pin.
+- You ran both maintained routes yourself at 5b0eb012, so for those two the independence rests on their authorship, which predates your release and shares nothing with your reconstruction or your three checkers; the third route is one you did not run. Your own checkers, `reproduce.py` and `convert_witness.py` did not run here.
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md) reproduced the replay and found no blocking defect. No human review is claimed.
+
+This confirms finite feasibility only, not optimality.
+
+**Credit.** As you ask, T-147 credits PingYou Ltd with the n207 assembly, after Ryan Xu's n70 construction (#432) and Evan Daniel's exact n70 certificate. The review measured your two patches against that certificate: 60 squares in place, and 69 under the reflection about the n70's box, transposed and moved by (6, 6), as you describe.
+
+**Two questions.**
+- The first version of this issue and commit 0d8b9c1 said OpenAI Codex assisted the verification, the comparison review and the package; commit 9dc93b6 removed that sentence. The issue template asks for the author's own account of AI assistance, and the record keeps both for now. Which should it carry?
+- The certificate's `provenance.numerical_screen_side` reads 14.885506208841678, which is not SQUISH's 14.88550630884167768…; your `public-comparison.json` and the issue print SQUISH's side correctly. Nothing here reads that field, but you may want to correct it.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_

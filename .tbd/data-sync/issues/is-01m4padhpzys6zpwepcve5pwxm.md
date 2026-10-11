@@ -5,7 +5,7 @@ title: "Import itsnaka (SQUISH): nine Mondrian packings at n = 176-305, smaller 
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:09.823Z
-updated_at: 2026-10-11T20:41:58.462Z
+updated_at: 2026-10-11T22:18:23.542Z
 started_at: 2026-10-11T20:28:23.635Z
 ---
 https://github.com/jlevy/squares/issues/500 (2026-10-11T05:30Z). itsnaka/squish-certs aeacc6c124df339074f7370e1e010bb6e8c1b5ca squish-submission-2026-10-11, nNNN.cert.json exact rational (SQUISH format). Counts 176, 181, 238, 239, 270, 271, 272, 304, 305. 304 and 305 superseded by #506 (Couzo, built on these). Stages 1-4 replay through devtools.upper_bound_reports.
@@ -49,3 +49,11 @@ PRICE (measured, not estimated): see the replay receipts below. Pair decisions: 
 ## Draft acknowledgement (2026-10-11, not posted; the owner posts it)
 
 Thank you, Nate. We received the nine exact certificates in `squish-submission-2026-10-11` and pinned itsnaka/squish-certs at aeacc6c124df339074f7370e1e010bb6e8c1b5ca, the commit that adds them; the later README commit 56fa71f changes no certificate. The five certificates in `sources/` (two of 154, and 240, 272 and 305) are recorded with them as provenance, and each is above its case's bound or above the filed certificate at its count. Each of the nine sides is below the bound the record holds at its count today, and below every other report pending there, including your own #481 packings and Francisco Couzo's #488 refinements of them at 270 and 305, except at 304 and 305, where Francisco Couzo's #506 reports smaller sides built from these packings; yours are recorded as his starting packings. The tree has no licence, so as before we keep digests and exact facts derived from the pinned certificates rather than the files. Next we replay every certificate exactly from `s_exact`, the rational centres and the half-angle tangents, by two maintained exact routes with duplicate-square and outside-container controls, and review the replay. One note: the 15-digit values in the issue are truncations of `s_exact`, and each certificate's `s_decimal` is not a rounding of it, so the record displays each side rounded up from the exact fraction.
+
+## Stage 2 and stage 4 replay (2026-10-11, commit 56bdfb51b on worktree-agent-aa7e2838e10dafaa4, not pushed)
+
+Packet packing/resources/web/squish-500-fourth-request-2026-10-11: declaration, acquisition record, manifest (67 files, 5,866,372 bytes, all pinned only), report.json, claims.json (frozen at main 3a5a91a90), nine facts, one whole receipt (2,412,308 bytes uncompressed, receipts/exact-certification.json.xz). HOUSES gains [SQUISH fourth request 2026-10-11]; tests/test_upper_bound_reports_500.py (5 tests) and EVERY in tests/test_upper_bound_reports.py cover it.
+certify --workers 1: 27 jobs (9 positives, 18 controls), 2026-10-11T20:39:56Z to 21:20:06Z (40 min 10 s wall, load 2 to 14 on 4 cores); 1,743,036 pair decisions, 1,253.51 route CPU s, 2,322.21 job wall s summed, longest job 202.56 s (304 duplicate-square control). All 9 positives pass both routes (sqpack exact verify, independent rational corner checker); both routes refuse all 18 controls (overlap of squares 0 and 1; square 0 outside the wall). Least wall clearance exactly 0 at all nine (closed-box contact); least pair gap 1e-32 (+5.6e-49) at all nine.
+check --replay: all 27 jobs decided again, equal to their rows; 21:20:20Z to 22:14:01Z (53 min 41 s, serial, load 12 to 19). "9 certificates and 27 jobs admitted".
+Checks: acquire_source --check PACKET_MATCHES_ITS_CONTRACT; derive --check matches the checkout; check-claims rebuilds; pytest test_upper_bound_reports.py + _488_489 + _regularized: 168 passed; test_upper_bound_reports_500.py: 5 passed; packing-validate --records: 49 steps passed, exit 0.
+Not run: the source's own checkers (SQUISH's Fraction checker, Ellsworth's check_packing.py); the third exact route (check_half_angle_area, a separate review lane); no review. No shared record edited; register-plan output handed to the records lane.

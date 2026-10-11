@@ -5,7 +5,7 @@ title: "Import Robert Barnett: s(146) and s(261), refinements of Ryan Xu's packi
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,14 +14,14 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:14.174Z
-updated_at: 2026-10-11T21:32:11.581Z
+updated_at: 2026-10-11T22:08:38.713Z
 started_at: 2026-10-11T20:28:26.363Z
 ---
 https://github.com/jlevy/squares/issues/505 (2026-10-11T14:24Z). RobertBarnettProjects/square-packing-research 2573ff51c4b160c952bbb2d1c399e7430d9f9ae2 certificates/n146.cert, n261.cert (Evan Daniel's format), and the issue's attachment square-packing-results.zip. 146 below T-146's regularized n146 by 7.35e-8; 261 below ry-xu #432 by 5.68e-11. Stages 1-4 replay through devtools.upper_bound_reports.
 
 ## Notes
 
-2026-10-11 lane D (intake W1 stages 1, 2 and the stage 4 replay; worktree branch worktree-agent-aea6e45c2fb8e7a4d, base main 3a5a91a90).
+2026-10-11 lane D (intake W1 stages 1, 2 and the stage 4 replay; worktree branch worktree-agent-aea6e45c2fb8e7a4d, base main 3a5a91a90, commit 835dd7004 with both packets, the sqcert adapter and tests; not pushed). Register plans: scratchpad laneD/register-plan-barnett.yaml and register-plan-dostashev.yaml, printed by upper_bound_reports register-plan; no shared record edited.
 
 PIN: RobertBarnettProjects/square-packing-research 2573ff51c4b160c952bbb2d1c399e7430d9f9ae2 (tree 07451888, committed 2026-10-11T13:52:00Z), the issue's pin, read 20:35Z. main is now 52cf1cc (14:44:32Z): fa1322a, 9947091 and 52cf1cc add diagrams, move the historical certificates into superseded/ and add earlier 10 October refinements there (70, 103, 123, 129, 146, 295); certificates/n146.cert and n261.cert are byte-identical at the head (blobs 720b63b7, 71fe0491). No licence file at the pin or the head: derived-only custody, as Deleeuw's packet. Issue attachment square-packing-results.zip fetched (37,787 bytes, SHA-256 49aaa81c... as stated): n146.cert and n261.cert byte-identical to the pin, plus results/submission.json (947d314b...), the pin's results/review-2026-10-11.json filtered to the two counts; read, not retained.
 PACKET: packing/resources/web/barnett-refinements-2026-10-11 (11 files pinned only, 502,546 bytes; 7 derived facts facts/n-NNN.yaml.gz written by upper_bound_reports derive --checkout at the pin; acquire_source --check passes). Format: Evan Daniel's (evand-cert adapter); no new adapter needed.
@@ -35,6 +35,12 @@ CLAIM MAP (acquisition/claims.json, exact, read at main 3a5a91a90; houses and pe
 Other 2026-10-11 issues (#500, #501, #503, #504, #506) share no count. T-138 (#470) has no 146/261.
 ARRANGEMENT DIAGNOSTIC (not retained, decides nothing; devtools.check_half_angle_area.arrangement_gap called unchanged from a scratch driver on the derived facts): 261 against Ryan Xu's certificate matches square for square at the identity symmetry, largest centre move 9.15e-06, largest orientation sine 2.44e-06, none moved beyond 1e-3: Ryan Xu's packing, slightly moved. 146 against Ryan Xu's certificate matches at the identity, largest move 5.02e-02 (51 squares beyond 1e-3, 31 beyond 1e-2, none beyond 0.1; 24 turned by a sine above 1e-6, at most 2.09e-02); against T-146's regularized view largest move 0.122 (3 beyond 0.1). So 146 lies nearer Ryan Xu's certificate than Evan Daniel's view, and moves more than a precision refinement. The third-route review lane owns the recorded measurement (CREDITED_READERS has no entry for #505).
 Register action (stage 1 table): a bound the record does not hold, one new upper-bound entry at 146 and 261 (not a simplification: both sides are strictly below every held value). Credit as a refinement of a credited packing: Ryan Xu keeps the packing (T-125), Robert Barnett credited for the refinement and certificates, Evan Daniel's regularization (T-146) named at 146 as the source does; as T-137 did for #483. Proposed bibliography: lineage credits-project, credit "Barnett after Xu, Daniel" (Daniel for the regularization compared and the checkers used; the source does not say it builds on this project's method). OpenAI Codex assistance disclosed (solver, certificate/checker code, source review, preparation).
+
+PRICE: no checker beyond the importer (Evan Daniel's format, evand-cert adapter; the source prices its four checks at 0.86 s and 1.66 s). Measured: certify 21 jobs in about 23 min wall on one worker at load 9-25.
+REPLAY (stage 4, receipts/exact-certification.json.xz): certify --workers 1, 21:04:58-21:28:15Z (23 min 17 s): all 7 positives pass both routes, all 14 controls refused, routes agree on every margin. 146: least wall 3.93e-14, least pair gap 1.21e-16; 261: 4.69e-14 and 1.21e-16 (both match the author's receipts); historical five 9.39e-12 to 1.20e-11. 21 jobs, 786,102 pair decisions, 530.82 route CPU s, 1,329.06 job wall s, longest 224.09 s (295 duplicate control, under load). check --replay (serial) 21:39:13-22:06:28Z, 27 min 15 s, exit 0: "7 certificates and 21 jobs admitted", every fresh row equal to the retained one apart from timing. 2043 not run: extrapolated from the n = 70 per-pair rate, about 33 CPU min per job and about 1.7 CPU-hours for its three jobs (over the 30-minute single-job limit; not measured), and it needs a derived fact first; owner's call whether a count beyond the tracked rows is wanted at all. Neither the author's checkers nor Evan Daniel's verify_cert.py/verify_cert2.py ran here; third route not run (separate review lane).
+VALIDATION: tests/test_upper_bound_reports.py 183 passed; ruff and basedpyright clean on the touched files; packing-validate --records 49 of 49 named steps passed with the files staged (293.9 s at load ~25); acquire_source --check passes.
+REGISTER-PLAN: printed, nothing shared edited. Its notes call the five historical certificates "each an import of its own"; the author excludes them from the request and each is beaten by a pending entry, so the records lane should say they stay in the packet and are no import of their own.
+ATTACHMENT AND CUSTODY OPEN POINT: the zip is not retained (no licence; non-Git source); its digest and contents are recorded in the packet README.
 
 ## Draft acknowledgement (not posted; the owner posts it)
 

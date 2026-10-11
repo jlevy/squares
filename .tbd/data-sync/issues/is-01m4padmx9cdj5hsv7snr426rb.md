@@ -5,7 +5,7 @@ title: "Import BuddenPing: s(153) <= 12.870013850408 (#504)"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:13.097Z
-updated_at: 2026-10-11T21:13:34.893Z
+updated_at: 2026-10-11T23:04:18.320Z
 started_at: 2026-10-11T20:28:25.701Z
 ---
 https://github.com/jlevy/squares/issues/504 (2026-10-11T10:39Z). BuddenPing/square-packing-certificates bc328a7d727aedd0eabebd6ea80285f572b65d2d, n153.cert.json (SHA-256 31b3fb3c...) and pingyou-n153-rational.yaml. Below T-146 (Evan Daniel's regularization of SQUISH's n153) by 2.02e-3. Stages 1-4 replay through devtools.upper_bound_reports.
@@ -47,3 +47,34 @@ https://github.com/jlevy/squares/issues/504 (2026-10-11T10:39Z). BuddenPing/squa
 ## Draft acknowledgement (2026-10-11, not posted; the owner posts it)
 
 @BuddenPing, thank you. We received the n = 153 certificate and pinned BuddenPing/square-packing-certificates at bc328a7d727aedd0eabebd6ea80285f572b65d2d; `n153.cert.json`, `pingyou-n153-rational.yaml` and `n153-squares-project.zip` have the SHA-256 digests you give. The certificate's exact side is the one you state, and your Witness/v2 states exactly the same 153 poses and side. It is below the ceiling the n = 153 case holds today, and below Evan Daniel's T-146 certificate by exactly the 0.002015998674135970992348937968 you give, and below SQUISH's #481 certificate; no other report names n = 153. The repository states no licence, so we keep digests and an exact fact derived from the certificate rather than your files. Next we will replay the certificate exactly by this repository's two maintained routes, with duplicate-square and outside-container controls, and review the replay; your scripts and the SymPy derivation are not needed for the bound and will not be run. Credit will read PingYou Ltd for the n153 construction, after Ryan Xu's n70 construction and Evan Daniel's exact n70 certificate, with SQUISH's packing and Evan Daniel's regularization named as the prior certificates, as you ask. The issue does not include the template's AI-assistance section; if any assistance should be recorded, please say so.
+
+
+## Records lane (2026-10-11, think-ekv3)
+
+Registered as T-148 at V3/C3 in 3c9dd2608 on worktree branch worktree-agent-a790e638083667522 (from claude/wizardly-meitner-wqn4x3-imports at 0ec1173c5; DATA_REVISION re-pinned in 640b3cf91; not pushed). Evidence E-pingyou-504-certificate-report (review as external_review) and E-pingyou-504-exact-feasibility (verified, independent-implementation); coverage, bibliography key [PingYou n153 certificate 2026-10-11], resources README row, result-requests #504 (T-148; the owner's comment 6113387339 of 20:26Z recorded as an acknowledgement), certificate-citation deferral to think-fvz4. The id is provisional until it is on main.
+
+## Stage 7 draft (2026-10-11, records lane; to post after the layer-2 PR merges; not posted)
+
+Supports posting after merge: yes, once the merge's Pages deployment shows the T-148 row. Before posting: recheck the id on main (T-148 is provisional until merged); if the adoption layer (think-fvz4) has moved n = 153's case record by then, replace the "case record is unchanged" sentence. This draft covers what the import lane's acknowledgement above said and replaces it if that was never posted (the owner's own acknowledgement of 20:26Z is on the issue). Ledger: check_requests --report on this branch says reply due and closeable (the result settled, no ask queued).
+
+@BuddenPing, thank you. Your n = 153 certificate is registered on `main` as **[T-148](https://jlevy.github.io/squares/results.html#t-148), V3/C3**, confirmed, independently re-implemented, at the exact side it states:
+
+- s(153) ≤ 6435006925203522001385040447/500000000000000000000000000 = 12.870013850407044002770080894
+
+**Where it stands.** It is below the n = 153 case's verified ceiling (Nate Chaoweeraprasit's SQUISH packing as refined by Siddharth Gupta, T-127) by exactly 1933104584454118261245856857/(2·10^29), about 9.67e-03; below Evan Daniel's regularized certificate (T-146) by exactly 0.002015998674135970992348937968, the figure you give; and below SQUISH's #481 certificate (T-136) by 2.0159986741368190e-03. No other report names 153, so it is the smallest side known. The [case record](https://github.com/jlevy/squares/blob/main/packing/frontier/n-153.md) is unchanged for now: each reviewed house is adopted after a custody record of the replay workers, and the review recommends yours at 153, then T-146, then T-136, with the earlier houses kept as history.
+
+**How it was checked.**
+- Your repository states no licence, so we keep an exact fact derived from `n153.cert.json` at bc328a7 rather than your files, and held it to your Witness/v2: the same 153 poses and side, exactly.
+- All three jobs, the certificate with a duplicate-square and an outside-container control, were decided by both maintained exact routes, `sqpack.verify` and `devtools.check_rational_witness_independent`: 69,768 pair decisions; every wall clears by exactly 1/10^13 and every pair by about 1.89e-13.
+- A third exact route, `devtools.check_half_angle_area` (half-extent containment and exact intersection area), decided it with six controls, four of them sharp, and held the fact to your certificate and witness fetched at the pin.
+- You ran both maintained routes yourself at 5b0eb012, so for those two the independence rests on their authorship, which predates your release and shares nothing with your construction or your three checkers; the third route is one you did not run. Your own checkers, `VERIFY.py`, `reproduce.py`, `convert_witness.py` and the SymPy `derive_half_return.py` did not run here; the degree-seven equation and the rebuild from your construction table are not decided here, and the bound does not rest on them.
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md) reproduced the replay and found no blocking defect. No human review is claimed.
+
+This confirms finite feasibility only, not optimality. The package's intermediate control `cycle-hit-153.cert.json` and its n178 files were not imported, since you do not offer them.
+
+**Credit.** As you ask, T-148 credits PingYou Ltd with the n153 construction, after Ryan Xu's n70 construction (#432) and Evan Daniel's exact n70 certificate, and names SQUISH's packing and Evan Daniel's regularization as the prior certificates. The review measured the n70 against your certificate and found no placement of it by pose, at most one square exactly in place, which fits your account of a construction from that geometry reclosed at a new angle; the entry states the lineage as your account of the construction.
+
+**One question.** The issue omits the template's AI-assistance section. Your #503 release first disclosed OpenAI Codex assistance and then removed it, and the record notes that history on both entries; if any assistance should be recorded for this release, please say so.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_
