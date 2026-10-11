@@ -998,6 +998,87 @@ def test_when_no_route_delivers_the_fetch_is_refused(
     assert not (tmp_path / "work" / certificate.tarball).exists()
 
 
+#: Where the stand-in release asset is served.
+ASSET_URL = "https://example.invalid/certificates__mixed_n84_L940.tar.gz"
+
+
+def _released(tmp_path: Path, archive: bytes) -> tuple[audit.MixedCertificate, bytes]:
+    """n = 84 pinned as a source that published its tarball in a release asset: the
+    packet's record names the asset and the member that is the tarball, as
+    `devtools.retain_wand125_release` writes it."""
+    real = audit.MIXED["n84"]
+    certificate = _pinned_to(tmp_path, archive)
+    member = real.upstream_tarball.as_posix()
+    asset = _tarball(real.upstream_tarball.parent.as_posix(), {real.tarball: archive})
+    record = json.loads(certificate.record.read_text())
+    record["sources"][0]["release_assets"] = [
+        {
+            "asset": "certificates__mixed_n84_L940.tar.gz",
+            "url": ASSET_URL,
+            "bytes": len(asset),
+            "sha256": _sha256(asset),
+            "members": [
+                {
+                    "member": member,
+                    "path": member,
+                    "bytes": len(archive),
+                    "sha256": _sha256(archive),
+                }
+            ],
+        }
+    ]
+    certificate.record.write_text(json.dumps(record))
+    return certificate, asset
+
+
+@pytest.mark.parametrize("via", ["auto", "release"])
+def test_a_tarball_in_a_pinned_release_asset_is_read_from_the_asset_alone(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, via: str
+) -> None:
+    real = audit.MIXED["n84"]
+    archive = _tarball(real.bundle, {"README.md": b"bundle\n"})
+    certificate, asset = _released(tmp_path, archive)
+    tried = _downloads(monkeypatch, {ASSET_URL: asset})
+    fetched = audit.fetch_tarball(certificate, tmp_path / "work", via=via)
+    assert tried == [ASSET_URL]
+    assert fetched["status"] == "TARBALL_MATCHES_PIN"
+    assert fetched["origin"] == f"release {ASSET_URL} member {real.upstream_tarball}"
+    assert (tmp_path / "work" / real.tarball).read_bytes() == archive
+    # A second fetch reads the asset already in the work directory, checked again.
+    (tmp_path / "work" / real.tarball).unlink()
+    assert audit.fetch_tarball(certificate, tmp_path / "work", via=via)["sha256"] == (
+        _sha256(archive)
+    )
+    assert tried == [ASSET_URL]
+
+
+def test_a_release_asset_that_is_not_the_pinned_one_is_refused_before_it_is_read(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    real = audit.MIXED["n84"]
+    archive = _tarball(real.bundle, {"README.md": b"bundle\n"})
+    certificate, asset = _released(tmp_path, archive)
+    other = _tarball(
+        real.upstream_tarball.parent.as_posix(),
+        {real.tarball: _tarball(real.bundle, {"README.md": b"another bundle\n"})},
+    )
+    assert other != asset
+    _downloads(monkeypatch, {ASSET_URL: other})
+    with pytest.raises(ValueError, match="the pin is"):
+        audit.fetch_tarball(certificate, tmp_path / "work", via="release")
+    assert not (tmp_path / "work" / real.tarball).exists()
+    # The refused asset is set aside, so that the next run downloads it afresh.
+    rejected = tmp_path / "work" / "certificates__mixed_n84_L940.tar.gz.rejected"
+    assert rejected.read_bytes() == other
+
+
+def test_without_a_release_asset_the_release_route_is_refused(tmp_path: Path) -> None:
+    certificate = _pinned_to(tmp_path, b"pinned")
+    assert audit.release_pin(certificate) is None
+    with pytest.raises(ValueError, match="no release asset holds"):
+        audit.fetch_tarball(certificate, tmp_path / "work", via="release")
+
+
 # --------------------------------------------------------------------------- audit supplements
 
 

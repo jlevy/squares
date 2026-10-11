@@ -2865,13 +2865,79 @@ def tarball_pin(certificate: MixedCertificate) -> tuple[str, int]:
 
 
 #: How ``mixed-fetch`` and ``mixed-replay`` may obtain a tarball: ``auto`` tries each raw-file
-#: address and then Git, and the digest decides whichever delivers.
-TRANSPORTS = ("auto", "url", "git")
+#: address and then Git, or, where the packet's record pins a release asset that holds the
+#: tarball, that asset alone (``release``); the digest decides whichever delivers.
+TRANSPORTS = ("auto", "url", "git", "release")
 
 
 def _fetch_url(url: str, partial: Path) -> None:
     with urllib.request.urlopen(url, timeout=600) as response, partial.open("wb") as out:
         shutil.copyfileobj(response, out, 1 << 20)
+
+
+def release_pin(certificate: MixedCertificate) -> dict[str, Any] | None:
+    """The release asset holding the certificate's tarball, as the packet's record pins it.
+
+    A source that published its proof bundle in a release asset and not at the pinned
+    commit (``mixed_n122_L1126``) leaves no raw-file or Git route; the record
+    (`devtools.retain_wand125_release`) names the asset's address, size and SHA-256 and the
+    member that is the tarball. ``None`` where no asset holds it.
+    """
+    record = json.loads(certificate.record.read_text())
+    path = certificate.upstream_tarball.as_posix()
+    found = [
+        {key: asset[key] for key in ("url", "bytes", "sha256", "asset")} | {"member": member}
+        for source in record["sources"]
+        for asset in source.get("release_assets", [])
+        for member in asset["members"]
+        if member["path"] == path
+    ]
+    _require(len(found) <= 1, f"{len(found)} release assets hold {path}")
+    return found[0] if found else None
+
+
+#: The bound on a release asset read for one member.
+MAX_RELEASE_ASSET_BYTES = 256 * 1024 * 1024
+
+
+def _fetch_release(certificate: MixedCertificate, partial: Path) -> str:
+    """Download the pinned release asset, refuse it unless its size and SHA-256 are the
+    record's, and write the one member that is the tarball to ``partial``.
+
+    The asset crosses a trust boundary, so it is checked before it is opened; the member
+    is then checked against the tarball's own pin by `fetch_tarball`.
+    """
+    pin = release_pin(certificate)
+    _require(pin is not None, f"no release asset holds {certificate.tarball}")
+    assert pin is not None
+    _require(pin["bytes"] <= MAX_RELEASE_ASSET_BYTES, f"{pin['asset']} is over the bound")
+    asset = partial.parent / pin["asset"]
+    if not asset.is_file() or asset.stat().st_size != pin["bytes"]:
+        _fetch_url(pin["url"], asset.with_name(asset.name + ".part"))
+        asset.with_name(asset.name + ".part").replace(asset)
+    found = _file_sha256(asset)
+    if found != pin["sha256"] or asset.stat().st_size != pin["bytes"]:
+        # Set aside, so that the next run downloads the asset afresh.
+        asset.replace(asset.with_name(asset.name + ".rejected"))
+        raise ValueError(
+            f"{asset.name} has SHA-256 {found}; the pin is {pin['sha256']} and "
+            f"{pin['bytes']} bytes"
+        )
+    member = str(pin["member"]["member"])
+    with tarfile.open(asset, "r:gz") as archive:
+        named = [info for info in archive.getmembers() if info.name == member]
+        _require(len(named) == 1, f"{asset.name} holds {len(named)} members named {member}")
+        info = named[0]
+        _require(
+            info.isfile() and info.size == pin["member"]["bytes"],
+            f"{member} is not a file of the pinned size in {asset.name}",
+        )
+        stream = archive.extractfile(info)
+        _require(stream is not None, f"{member} cannot be read from {asset.name}")
+        assert stream is not None
+        with partial.open("wb") as out:
+            shutil.copyfileobj(stream, out, 1 << 20)
+    return f"release {pin['url']} member {member}"
 
 
 def _fetch_git(certificate: MixedCertificate, partial: Path) -> str:
@@ -2903,17 +2969,28 @@ def _download(certificate: MixedCertificate, target: Path, via: str) -> tuple[st
 
     Returns the route that delivered and every route that was refused before it. ``url``
     tries the raw-file address and then the address it redirects to; ``git`` fetches the
-    pinned commit; ``auto`` tries both URLs and then Git. Nothing here trusts the route:
-    `fetch_tarball` checks the bytes against the pin.
+    pinned commit; ``release`` reads the tarball from the release asset the packet's record
+    pins (`release_pin`); ``auto`` tries the release asset alone where one is pinned, since
+    the commit then holds no tarball, and otherwise both URLs and then Git. Nothing here
+    trusts the route: `fetch_tarball` checks the bytes against the pin.
     """
     _require(via in TRANSPORTS, f"unknown transport: {via}")
-    routes = [*(certificate.urls if via != "git" else ()), *(("git",) if via != "url" else ())]
+    released = release_pin(certificate) is not None
+    if via == "release" or (via == "auto" and released):
+        routes: list[str] = ["release"]
+    else:
+        routes = [
+            *(certificate.urls if via != "git" else ()),
+            *(("git",) if via != "url" else ()),
+        ]
     partial = target.with_name(target.name + ".part")
     refused: list[str] = []
     for route in routes:
         try:
             if route == "git":
                 origin = _fetch_git(certificate, partial)
+            elif route == "release":
+                origin = _fetch_release(certificate, partial)
             else:
                 _fetch_url(route, partial)
                 origin = route
