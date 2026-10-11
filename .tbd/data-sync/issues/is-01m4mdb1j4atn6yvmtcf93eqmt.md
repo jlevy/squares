@@ -5,7 +5,7 @@ title: "Regularization: a typed credit in the register, and every packing n = 1.
 kind: epic
 status: in_progress
 priority: 1
-version: 6
+version: 13
 labels:
   - regularization
 dependencies: []
@@ -14,8 +14,15 @@ child_order_hints:
   - is-01m4mdbe5pjzjb684fqbedg5p0
   - is-01m4mdbq6bhkv71fxeeckawsbt
   - is-01m4mdbqsgkdz008e42ffjx4ej
+  - is-01m4p42ssedcwc2x97vnphnq2p
+  - is-01m4p42tpvh49yd1p9cj3t320s
+  - is-01m4p42vm11zqf83e657ycs66q
+  - is-01m4p42wedbt2e9e3r7fhmphxa
+  - is-01m4p42xe0xsyrkr48g6dxhkcj
+  - is-01m4p42yjaz3qj1kd5n86hsj8n
+  - is-01m4p92a2pdcph8m8v99zt2tzd
 created_at: 2026-10-11T02:40:44.612Z
-updated_at: 2026-10-11T02:42:10.516Z
+updated_at: 2026-10-11T20:04:32.982Z
 ---
 Owner decisions of 2026-10-11, in the session continuing PR https://github.com/jlevy/squares/pull/487 (session_012VZZQseec5xK8Zu4ah5BjG):
 
