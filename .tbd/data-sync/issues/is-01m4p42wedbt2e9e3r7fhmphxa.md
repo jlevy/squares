@@ -3,9 +3,9 @@ type: is
 id: is-01m4p42wedbt2e9e3r7fhmphxa
 title: Exact same-side re-solve over Q of a regularized view at the witness side (slice 3)
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 11
+version: 12
 delegate: claude-code@vm
 labels:
   - regularization
@@ -14,10 +14,10 @@ parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
 hold: null
 hold_until: null
 created_at: 2026-10-11T18:37:28.909Z
-updated_at: 2026-10-11T21:12:46.018Z
+updated_at: 2026-10-11T23:35:51.729Z
 started_at: 2026-10-11T20:03:59.728Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-11T23:35:51.728Z
+close_reason: Committed in jlevy/squares#515 (claude/regularize-tools)
 resolution: null
 duplicate_of: null
 ---

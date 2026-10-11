@@ -5,7 +5,7 @@ title: "Regularize every packing n = 1..324 with the adapted process, in pull re
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 labels:
   - regularization
 dependencies:
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m4kbxna1xdmjd8nkka3wax60
 parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
 created_at: 2026-10-11T02:41:06.762Z
-updated_at: 2026-10-11T21:12:48.781Z
+updated_at: 2026-10-11T23:35:52.276Z
 ---
 Owner request 2026-10-11 (epic think-cdud, item 4): adapt evand's search/regularize process as think-kl2v's assessment recommends and run it over every packing the record holds, n = 1..324, so the atlas and case drawings are clean and regular. A separate process, so a separate pull request stacked on PR #487 (gh stack; github-stacked-prs is granted), begun once the 2026-10-10 imports are in good shape; the owner checks it. Obligations: every regularized view exactly feasible at its stated side and verified over Q; no side, frontier value or evidence tier changed by a drawing; each regularization recorded with its typed credit and identity basis (the register's regularizations field for results, and the atlas layer's contract per the atlas bead); drawings labelled regularized; the existing gates (regularized atlas views match their index, re-derive exactly, drawings match their index) kept green and extended to the new process. Record the run cost in the bead. The wand125 confirmation runs (think-r333, think-i85v, think-nd7g) wait for this.
 
@@ -36,6 +36,4 @@ Then: owner answers (Q3 first) with the spike gallery as evidence; slice 4 (reco
 
 2026-10-11, owner: land in pieces and review quality across a few n before drawings change. Stack: (1) #497 assessment + policy; (2) #509 vendor at 675a5ea (claude/gifted-bell-57e62o); (3) tools: driver + same-side re-solve + gallery, no record/drawing change, reviewed with the spike gallery; (4) pilot: n = 10, 26, 70, 101, 129, 146, 200, 324 admitted after owner review, review records, gates; (5+) batches 1-108, 109-216, 217-324 each with gallery and review records. Outside the stack: #510 documentation-organization plan (think-xfuz); register-result import after owner question 3.
 
-2026-10-11 (session_017JNnKDwL74rnktr9s8BdjP), stack state and repair. #497 had gone CONFLICTING against main after #502 (README reference table); merged main into claude/regularization-2026-10-11 (f5ca7f26c, both rows kept), then #497 into claude/gifted-bell-57e62o (34e74f68d; check_vendored_evand passes, 55 vendor-layer tests pass). The tools layer (stack item 3) was never pushed by the earlier session: the same-side module and its 12 tests were lost with that container. It is rebuilt on claude/busy-pascal-vgiccb, stacked on #509, as four lanes: same-side (Fable), driver (Opus), gallery (Opus), and a sourced history for the research doc (think-pwmi). Workflow entry: W7 pipeline-improvement.
-
-2026-10-11: PR https://github.com/jlevy/squares/pull/511 (draft, base claude/gifted-bell-57e62o), added to GitHub stack #498 (#487 merged, #497, #509, #511) via POST /stacks/498/add (gh stack could not be installed: the session proxy refuses github/gh-stack).
+2026-10-11: layer 3 open as jlevy/squares#515 (claude/regularize-tools, base claude/gifted-bell-57e62o / #509): driver, exact same-side re-solve (Fable max review: no blocker/high; findings fixed), gallery tool, spikes at 15 counts. Snapshot headroom restored by pruning the new tools from control workers (strace-proven over 174 controls), 205,238 bytes under the 200 MiB cap: thin. Waiting on the owner's gallery review (https://claude.ai/artifact/5PriKHaABeT1ZG5bZ6u87g) and question 3; then layer 4 (pilot).
