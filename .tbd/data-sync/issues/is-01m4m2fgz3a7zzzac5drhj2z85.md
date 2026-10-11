@@ -3,9 +3,9 @@ type: is
 id: is-01m4m2fgz3a7zzzac5drhj2z85
 title: Reconcile upstream paper metadata with the current website organization
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-10T23:30:57.122Z
-updated_at: 2026-10-10T23:36:38.736Z
+updated_at: 2026-10-11T01:13:23.053Z
 started_at: 2026-10-10T23:31:09.102Z
+closed_at: 2026-10-11T01:13:23.053Z
+close_reason: Implemented and source-reviewed in PR462 at 53c8d37a2. Final ordinary Packing38100510883 and Pages38100510886 pass, including frontend and publication assembly. Shared Row outlines match width/alignment and paint gray behind black; web case/Atlas/table data retain ordinary ink. Later neutral-number and shared-spacing requests supersede earlier red-number/spacing intents. Final deferred/merge/deploy remain tracked separately by think-mvh7, think-21wu and think-xio5; controlled CI-performance follow-up remains think-ht59.
+resolution: null
+duplicate_of: null
 ---
 Resolve only overview_sections.py, papers-article.md, and test_overview.py conflicts while consolidating origin/main8fc983414 into the website branch. Preserve Home/Visuals/Row default, immutable full-poster card assets and author credits; adopt upstream shared canonical Title Case paper records/descriptions and methods-survey figures/link prose. Keep PDFs on Papers, current navigation and Results routes. Stage these three resolutions only; final merge/CI belongs to root.
 

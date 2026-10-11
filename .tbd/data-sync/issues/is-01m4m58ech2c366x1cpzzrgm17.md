@@ -3,9 +3,9 @@ type: is
 id: is-01m4m58ech2c366x1cpzzrgm17
 title: "CI: replace expired measure-verifier measurement waiver for website integration"
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex-verifier-budget-fix
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-11T00:19:30.832Z
-updated_at: 2026-10-11T00:22:10.503Z
+updated_at: 2026-10-11T01:13:23.089Z
 started_at: 2026-10-11T00:19:38.347Z
+closed_at: 2026-10-11T01:13:23.089Z
+close_reason: Implemented and source-reviewed in PR462 at 53c8d37a2. Final ordinary Packing38100510883 and Pages38100510886 pass, including frontend and publication assembly. Shared Row outlines match width/alignment and paint gray behind black; web case/Atlas/table data retain ordinary ink. Later neutral-number and shared-spacing requests supersede earlier red-number/spacing intents. Final deferred/merge/deploy remain tracked separately by think-mvh7, think-21wu and think-xio5; controlled CI-performance follow-up remains think-ht59.
+resolution: null
+duplicate_of: null
 ---
 Website integration at 13b4f557e fails tests/test_gate_budgets.py::test_every_tier_the_workflow_runs_on_a_pull_request_is_recorded in suite-d job 114347133704, run 38097761292. The measure_verifier tier remains pending under think-th8p through 2026-10-10, and the hosted runner has moved past that date. Fulfill the original measurement using devtools.read_tier_walls on completed hosted jobs at the current three-step reference shape, remove the pending fields, preserve the absolute ceiling and test the live register. Existing owner think-th8p is in_progress on claude-code@vm; this child tracks applying its missing receipt to the website integration branch.
 

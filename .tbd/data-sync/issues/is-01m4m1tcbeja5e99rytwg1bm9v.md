@@ -3,9 +3,9 @@ type: is
 id: is-01m4m1tcbeja5e99rytwg1bm9v
 title: Publish the full triangular poster preview with immutable image identity
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-10T23:19:24.269Z
-updated_at: 2026-10-10T23:29:16.484Z
+updated_at: 2026-10-11T01:13:23.044Z
 started_at: 2026-10-10T23:19:42.021Z
+closed_at: 2026-10-11T01:13:23.044Z
+close_reason: Implemented and source-reviewed in PR462 at 53c8d37a2. Final ordinary Packing38100510883 and Pages38100510886 pass, including frontend and publication assembly. Shared Row outlines match width/alignment and paint gray behind black; web case/Atlas/table data retain ordinary ink. Later neutral-number and shared-spacing requests supersede earlier red-number/spacing intents. Final deferred/merge/deploy remain tracked separately by think-mvh7, think-21wu and think-xio5; controlled CI-performance follow-up remains think-ht59.
+resolution: null
+duplicate_of: null
 ---
 Trace the homepage 324-PDF thumbnail against canonical and served PNG/SVG/PDF bytes. The user requests the full high-resolution triangular poster, not a crop or the separate Row comparison. Preserve the canonical dated PDF destination and avoid regeneration when current artifacts are already correct. Publish a content-identified image so an old same-name browser cache cannot retain the former rectangular poster.
 
