@@ -5,7 +5,7 @@ title: Survey wand125 and evand repositories for unimported results and proofs (
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:32:25.463Z
-updated_at: 2026-10-11T21:57:49.173Z
+updated_at: 2026-10-11T22:02:23.693Z
 started_at: 2026-10-11T21:32:33.200Z
 ---
 
@@ -35,6 +35,7 @@ Method: scratch scripts compared every INDEX.json claim (with monotone closure n
 ### New or partly owned (ranked by value / cost)
 
 1. think-eth9 (new, P2). #446's best values at n = 19, 20, 26, 27: 1931/400, 393/80, 1111/200, 1131/200 (mixed_n19_L48275, mixed_n20_L49125, mixed_n26_L5555 at 61e37d5; mixed_n27_L5655 at bf85d6b). Above each case's lower bound by 1/400, 3/400, 1/100, 23/2000 and above T-103..T-106. Held only as evidence and #446 entries; no register entry, unlike n = 28, 29, 30 (T-142, T-132, T-143). Registration: minutes (records lane). Replay: about 13-18 CPU-hours (3.3-4.5 per certificate, from the T-142/T-143 measurements), think-ndvg's budget.
+   Overlap: think-dc0p (in_progress since 2026-10-06, no label, no notes) titles the n = 19 value with three others from square-packing-bounds f8e0178; #446 (PR #450, think-ndvg) superseded it, and its T-109/T-113/T-114 references use a branch's numbering. It looks stale: close it as superseded by think-ndvg and think-eth9, if its owner agrees.
 2. think-oyd4 (new, P3). Evan Daniel's Lean `s12_ge_15680_3951` (S12HLower.lean, 513bb66, 2026-09-28), hypothesis-free, three standard axioms by the source. A proof-assistant route for T-049, whose next_rung says none exists. Retained in the evand-exact-and-local-reports-2026-10-07 packet, cited nowhere. Price: generator 39 min on one core, then a build of 7.3 CPU-hours (6 h 31 min wall on 2 cores, up to 30.6 GB RSS), plus Mathlib. No Lean here.
 3. think-0ayk (existing): new evidence. wand125's open PR #7 on evand (4eb59c4, 2026-10-11T05:59Z) proves ValidTilt7 from the pose tree without the Face module (generated, 47 GB to build), adds LebMassBridge, and prices the kernel rebuild of the 9,800 roots at about 6,650 CPU-hours (10,700 with generation). This is the price think-0ayk asks for. evand's static review (tasks/pr6-valid7-kernel/review-2026-10-10.md) flags forged root names as the risk and proposes an allowlist audit. A sample of 50-100 roots is about 70 process-hours by evand's estimate.
 
