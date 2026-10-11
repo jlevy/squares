@@ -5,13 +5,13 @@ title: "Import Evan Daniel: exact-optimum certificates at 15 counts below the re
 kind: task
 status: open
 priority: 2
-version: 2
+version: 4
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 created_at: 2026-10-10T20:39:16.846Z
-updated_at: 2026-10-10T21:33:42.673Z
+updated_at: 2026-10-11T03:06:04.270Z
 ---
 Evan Daniel's display-regularized record lists (evand/square-packing `search/regularize/`, added 346c6ed on 2026-10-10 18:05Z, lists refreshed at 122d0ba666884b176b2e442056c4fd1afe5a634a; head baf9143 at 20:31Z) hold one exact rational certificate per count for n = 1..324 (`lists/certs/n-NNN.cert.gz` plus 50-digit JSON). Lane L26 of the 2026-10-10 pass parsed all 329 certificates with `devtools.evand_exact_certificates.parse` and compared each exactly with every value the register holds (case records, source-coverage overrides, superseded and beyond-horizon rows, packet claim records, results.yaml claims). At 15 counts the certificate is strictly below the register's least value:
 
@@ -61,3 +61,33 @@ at 125b0340f.
 - Open for the owner: credit at 70 (the view is nearer Xu's poses than Deleeuw's; the
   source's site credits #432 only); the source's lists credit other finders (DeVincentis
   at 70, Couzo, Ellsworth, Cantrell); intake-watch needs a read at ea1a2f2.
+
+2026-10-11, records lane (stage 4 exit, done on claude/determined-rubin-yjfy2a, not
+pushed): commits 8e5922560 "register: typed regularizations, and T-146's stage 4 exit at
+V3/C3" and aeb8a7219 "release: re-pin DATA_REVISION to 8e592256".
+
+- The stage 4 review is committed:
+  docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md (accepted for
+  finite feasibility only, RG-1 to RG-11 non-blocking), mapped in document-map.yaml.
+- T-146 at V3/C3 through E-evand-regularized-exact-feasibility (new) and the review's
+  reviews entry; claim, notes, next_rung and significance are the review's texts, split
+  into paragraphs under check_prose_ceremony's 800-character wall; activity removed; the
+  review added to artifacts. E-evand-regularized-certificate-report carries the review as
+  external_review and no longer says the review is pending.
+- Credit at 70: Ryan Xu alone (owner), T-137 named only as the previous smallest side.
+  [Daniel regularized lists 2026-10-10] credit is now "Daniel after Xu, Chaoweeraprasit,
+  Mishapolk, Levy" (RG-2).
+- T-146 carries 15 `regularizations` items (think-cgdv): of T-125 at 70, 102, 123, 129,
+  146, 295; T-138 at 103, 258; T-136 at 153, 236, 263, 269, 292, 302, 303; by the
+  bibliography key; side solved; identity source-claim with the review's measurements.
+- RG-8: the pending-review sentences of T-125, T-136, T-137 and T-138 (notes and
+  next_rung), the coverage entry, the resources README line and the intake-watch note
+  are rewritten. verifiers.yaml notes of V-check-half-angle-area and V-upper-bound-reports
+  name this review.
+- Case adoption deferred in packing/devtools/certificate-citation-deferrals.yaml
+  (E-evand-regularized-exact-feasibility, bead think-fvz4, blocked on
+  jlevy/squares#403). T-146's site URL row records an amendment for its new evidence and
+  artifacts.
+- Validation: packing-validate --records and --edit pass (--jobs 2); the six targeted
+  test modules pass (323 tests). Remaining for this bead: stages 5 to 7 (house adoption
+  after #403 and private-worker custody, RG-7).
