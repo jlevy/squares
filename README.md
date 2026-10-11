@@ -1,5 +1,37 @@
 # The Squares Project
 
+**[The Squares Project website](https://jlevy.github.io/squares/) is a full archive of
+every known result on the square packing problem**, including the many new results since
+August 2026, several of them first found here and since built on by many others.
+It holds an atlas of the frontier, with the best known packing and the current upper and
+lower bounds for every case $n = 1\ldots324$, each with its source and credit, along
+with comprehensive documentation, papers, a large set of tools, and agent-based
+third-party validation that rates how far each new result has been verified.
+Its homepage links every other major resource on square packing.
+All of it is generated from the record in this repository.
+
+**On the website:** [Atlas](https://jlevy.github.io/squares/atlas.html) ·
+[Results](https://jlevy.github.io/squares/results.html) ·
+[Frontier Survey](https://jlevy.github.io/squares/atlas.html#the-frontier-survey) ·
+[Papers](https://jlevy.github.io/squares/papers.html) ·
+[Visualize](https://jlevy.github.io/squares/visualize.html) ·
+[About](https://jlevy.github.io/squares/about.html)
+
+[![The best known packings of n = 1 to 324 unit squares, one row for each perfect square, from the atlas on The Squares Project website](docs/images/atlas-triangle-1-324.png)](https://jlevy.github.io/squares/)
+
+> [!IMPORTANT]
+> **Report your results!** If you have new results of any kind for square packing (a
+> better packing, a lower bound, an exact value, a proof, a verification, or a
+> correction), or know of newer results, please
+> [file an issue](https://github.com/jlevy/squares/issues/new?template=result-registration.md)
+> to report them, including what name you wish to be used for credits.
+> We encourage real names, for better record keeping.
+> Agents will validate, tabulate, and cite your work once it is a confirmed record.
+>
+> **[Report a Result →](https://github.com/jlevy/squares/issues/new?template=result-registration.md)**
+
+## The Problem
+
 <!-- BEGIN SHARED: project-intro (devtools.site_documents) -->
 
 The square packing problem is a simple and long-standing problem in geometry: what is
@@ -15,109 +47,64 @@ can exist, such as the reported $s(29) \ge 5.81$).
 
 <!-- END SHARED: project-intro -->
 
-The project covers the problem at every $n$. Its [frontier](packing/frontier/STATUS.md)
-keeps one record for each case $n = 1\ldots324$, with reported and verified bounds kept
-separate, and its [results register](packing/frontier/RESULTS.md) grades each registered
-result, this project’s or another’s, by how far it has been checked.
-It goes into most depth where there is recent progress, which in September 2026 means
-$n = 11$, $n = 17$, and the exact values newly proved at $n = 21$, $32$ and $45$. At
-seventeen squares both ends of the bracket are now machine-checked: Guzhou0806’s lower
-bound $s(17) > 4.66044275$ ([T-093](packing/frontier/RESULTS.md)), and the upper bound
-$s(17) \le 4.67553009\ldots$ of John Bidwell’s 1998 packing, certified exactly from
-Kleddamag’s rational witness ([T-065](packing/frontier/RESULTS.md)).
+## Recent Results
 
-A recent major result settles eleven squares, until then the smallest case still open:
-$s(11) = T = 3.877083590022814\ldots$, the exact side of Walter Trump’s 1979 packing.
-[T-060](packing/frontier/RESULTS.md) records the global lower bound from the
-Astra-assisted
-[11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal) proof by
-Mannaseh Ahmed, building on this project and Kleddamag.
-This repository independently replayed the proof’s exact inputs and audited their
-mathematical composition (`V3/C3/S5`: machine-checked, review record pending);
-[T-011](packing/frontier/RESULTS.md) verifies Trump’s matching witness.
-The same argument, read at side exactly $T$, shows that Trump’s packing is the only
-optimal one up to the eight symmetries of the container and relabelling of the squares:
-[T-112](packing/frontier/RESULTS.md) registers that direct corollary of T-060, which
-adds no computation (`V3/C2/S3`: its step at side $T$ is prose).
-The [case record](packing/frontier/n-011.md),
-[review](docs/project/reviews/review-2026-09-29-n11-optimality.md), and
-[retained packet](packing/resources/web/n11-optimality-2026-09-29/README.md) state what
-the confirmation depends on and the reproducibility defects found in the source.
-On 6 October 2026 the proof was announced as formalized in Lean 4 “thanks to Astra and
-Claude”, in
-[11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) by
-Mannaseh Ahmed and contributors.
-This project’s statement audit reads its theorem as exactly $s(11) = T$, and its source
-reports that its full verification run, resumed from earlier validated receipts, passed,
-trusting Lean’s compiler for its numerical certificates.
-It is recorded on T-060 as the source’s report; a complete build this record can rest
-on, and a human expert’s review of the formalization, are still to come.
+The website lists the [recent results](https://jlevy.github.io/squares/#recent-results)
+and [every result](https://jlevy.github.io/squares/results.html), this project’s and
+others’, each with its credit and
+[verification rating](https://jlevy.github.io/squares/results.html#verification-ladders).
+The most significant since August 2026:
 
-**The results live on the project site,
-[Square Packing](https://jlevy.github.io/squares/).** It carries the
-[recent results](https://jlevy.github.io/squares/#recent-results) by this project and by
-others with their credit, the
-[verification ratings](https://jlevy.github.io/squares/results.html#verification-ladders),
-[the atlas](https://jlevy.github.io/squares/#the-atlas-of-square-packings) of known-best
-packings and its films, the table of
-[every result](https://jlevy.github.io/squares/results.html), and
-[the frontier survey](https://jlevy.github.io/squares/atlas.html#the-frontier-survey) of
-every case $n = 1\ldots324$, all generated from the record in this repository.
-The in-repository record is the [results register](packing/frontier/RESULTS.md), the
-per-case [status table](packing/frontier/STATUS.md), and
-[`epistemics.md`](epistemics.md), which defines how each claim is graded.
-The site and the atlas posters are at edition `v0.5.0`; each paper carries a version of
-its own; the atlas films are the ones cut for the
-[`v0.4.2` release](https://github.com/jlevy/squares/releases/tag/v0.4.2).
+- **Eleven squares settled:** $s(11) = 3.877083590022814\ldots$, the side of Walter
+  Trump’s 1979 packing ([T-011](packing/frontier/RESULTS.md)), by Mannaseh Ahmed’s
+  Astra-assisted proof
+  [11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal), building
+  on this project and Kleddamag ([T-060](packing/frontier/RESULTS.md)). This repository
+  replayed the proof’s exact inputs and audited their composition.
+  Trump’s packing is the only optimal one up to symmetry
+  ([T-112](packing/frontier/RESULTS.md)). A Lean 4 formalization,
+  [11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized), was
+  announced on 6 October 2026 and is recorded as its source’s report.
+  The [case record](packing/frontier/n-011.md) and
+  [review](docs/project/reviews/review-2026-09-29-n11-optimality.md) state what the
+  confirmation depends on.
+- **An infinite family of exact values:** Evan Daniel proved $s(k^2 - 3) = k$ for every
+  $k \ge 6$ ([T-064](packing/frontier/RESULTS.md)), and the exact values $s(21) = 5$,
+  $s(32) = 6$ and $s(45) = 7$ ([T-052, T-051 and T-053](packing/frontier/RESULTS.md)).
+- **Seventeen squares bracketed:** both ends are machine-checked, Guzhou0806’s lower
+  bound $s(17) > 4.66044275$ ([T-093](packing/frontier/RESULTS.md)) and the upper bound
+  $s(17) \le 4.67553009\ldots$ of John Bidwell’s 1998 packing, certified exactly from
+  Kleddamag’s rational witness ([T-065](packing/frontier/RESULTS.md)).
 
-The site’s [papers](https://jlevy.github.io/squares/papers.html) explain constructions,
-search methods, and proofs.
-Three of them form one series on $n = 11$, read in order:
+## Papers
+
+The website’s [papers page](https://jlevy.github.io/squares/papers.html) has each paper
+with its PDF. Three form one series on $n = 11$, read in order:
 
 1. [**New Lower Bounds for Square Packing for n = 11**](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html):
-   how weighted points and 2-of-3 threshold atoms prove T-018, T-025 and T-026,
-   $s(11) \ge 3.8264\ldots$, with interactive figures
-   ([PDF](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.pdf),
-   [source](packing/devtools/templates/n11-lower-bounds-explainer-article.md)).
+   weighted points and 2-of-3 threshold atoms prove $s(11) \ge 3.8264\ldots$.
 2. [**A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares**](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html):
-   explains Kleddamag’s proof that $s(11) > 31/8$ (T-037): five-site k-of-m charges,
-   k-of-m charges on shrunken parents with strict cores, and a reoptimized certificate
-   over 12,028 angle rows
-   ([PDF](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.pdf),
-   [source](packing/devtools/templates/n11-threshold-bound-review-article.md)).
+   Kleddamag’s proof by k-of-m charges and a certificate over 12,028 angle rows.
 3. [**A Review of the Optimality Proof of the Trump Packing of 11 Squares**](https://jlevy.github.io/squares/papers/n11-optimality-review.html):
-   explains Ahmed’s proof that Trump’s packing is optimal, $s(11) = 3.8770835\ldots$
-   (T-060): construction, case exclusions, capture and local isolation, with figures
-   drawn from or checked against the retained proof data
-   ([PDF](https://jlevy.github.io/squares/papers/n11-optimality-review.pdf),
-   [source](packing/devtools/templates/n11-optimality-review-article.md)).
+   Ahmed’s proof that Trump’s packing is optimal.
 
-For how record packings are found, read
-[**How Record Square Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html),
-a tutorial on geometric construction, physics-inspired search, annealing, surgery, local
-refinement, and upper-bound certification
-([PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf),
-[source](packing/devtools/templates/packing-methods-article.md)).
+[**How Record Square Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html)
+is a tutorial on geometric construction, physics-inspired search, annealing, surgery,
+local refinement, and upper-bound certification.
 
-This repository also contains
-**[a set of tools and AI workflows for automated mathematical research](#autonomous-research-process)**:
-the results and the frontier survey are produced and checked by AI agents running a
-recorded process, with hypotheses registered before measurement, every claim graded, and
-every defect logged.
-The rest of this README is about that work.
-
-[Results (site)](https://jlevy.github.io/squares/) ·
-[Research Status](SYNOPSIS.md#research-program-status-and-roadmap) ·
-[Repository Guide](#repository-guide) · [Getting Started](#getting-started) ·
-[Reports](#reports) · [Autonomous Research Process](#autonomous-research-process) ·
-[Conventions](#conventions) · [Layout](#layout)
+The website and the atlas posters are at edition `v0.5.0`; each paper carries its own
+version.
 
 ## Repository Guide
+
+The repository holds the record the website is generated from, and the tools and AI
+workflows that produce and check it: agents run a recorded process in which hypotheses
+are registered before measurement, every claim is graded, and every defect is logged
+([Autonomous Research Process](#autonomous-research-process)).
 
 | Where | What |
 | --- | --- |
 | [**Tutorial**](TUTORIAL.md) | First-principles introduction to the objects, bounds, cells, stationary branches, search, and proof obligations |
-| [**How Record Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) | Geometric construction, physics-inspired search, annealing, surgery, local refinement, and upper-bound certification, with sourced record histories |
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for $n = 1\ldots324$, with reported and verified bounds kept separate |
@@ -128,32 +115,14 @@ The rest of this README is about that work.
 | [**Campaign record**](packing/campaign/README.md) | Hypotheses, preregistered experiments, session records, agendas, and generated ledger |
 | [**Defect log**](defects.md) | Generated record of defects, detection methods, fixes, and regressions |
 
-Long-lived tests and runs retain detailed timing evidence under
-[OR-14](operating-rules.md#or-14-a-development-cycle-is-never-artificially-slow).
-The
-[validation efficiency and checkpoints plan](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
-tracks improvements to everyday feedback and full final checkpoints, with measurements
-and preserved coverage required before accepting a speedup.
-
-[`SYNOPSIS.md`](SYNOPSIS.md) is the technical root and current-state document.
+[`SYNOPSIS.md`](SYNOPSIS.md) is the technical root.
 Its [research-status roll-up](SYNOPSIS.md#research-program-status-and-roadmap)
-synthesizes the generated frontier [status table](packing/frontier/STATUS.md),
-[results register](packing/frontier/RESULTS.md),
+synthesizes the generated status table, results register,
 [campaign ledger](packing/campaign/ledger.md),
 [agenda map](packing/campaign/agenda-map.md), and
 [session close report](packing/campaign/session-close-report.yaml).
-The
-[W8 documentation pass](packing/campaign/documentation-pass.md#synopsis-research-status-roll-up)
-defines how those sources are reconciled.
-The separate
-[small-n mathematical audit](docs/project/reviews/review-2026-09-14-small-n-significant-progress-mathematical-audit.md)
-challenges the current research approaches and supplies the enlarged candidate set.
-The subsequent
-[W10 route-selection review](docs/project/reviews/review-2026-09-14-n11-w10-route-selection.md)
-derives the due efficiency checkpoint, records every candidate’s disposition, and
-separates the next W5 block from the later scientific choice.
-To resume work, use the synopsis’s [current handoff](SYNOPSIS.md#current-handoff), which
-names the owning work item and next bounded slice.
+To resume work, use its [current handoff](SYNOPSIS.md#current-handoff), which names the
+owning work item and next bounded slice.
 
 ## Getting Started
 
@@ -178,13 +147,12 @@ The [synopsis terminology](SYNOPSIS.md#terminology) gives the full definitions.
 | **exploration** | Work intended to reach a different basin; the term implies no assurance level |
 | **standing best** | The best published side for that $n$, hence an upper bound rather than known optimality in open cases |
 | **gap** | `best_side − standing_best`, always signed |
-| **assurance** | `reported`, `numerically-checked`, or `verified`; method, arithmetic, origin, limitations, and novelty are recorded separately |
 
 ### Essential Conventions
 
 One ID names one durable thing, and IDs are not reused.
 The prefix identifies the record’s layer; [`conventions.md`](conventions.md#1-identity)
-is the definitive registry.
+is the full registry.
 
 | ID | Names |
 | --- | --- |
@@ -251,17 +219,14 @@ uv run --frozen python -m cases.trump11.verify_exact
 uv run --frozen --all-extras --group dev packing-validate --edit
 ```
 
-`--records`, `--edit`, `--push`, `--fast`, and the full checkpoint are the five
-lifecycle tiers. `--edit` is the ordinary inner loop; pull-request CI executes `--fast`
-as seven disjoint required parts.
-Which steps each tier runs, what it costs, and which of the three behavioral lanes a
-test lands in are tabulated in
-[**development.md → Validation Loops**](development.md#validation-tiers); the ceilings
-themselves are data the gate reads, in
-[`packing/devtools/gate-budgets.yaml`](packing/devtools/gate-budgets.yaml).
-In short: a contributor runs `--edit` while editing and `--push` before pushing, every
-pull request runs all seven parts of `--fast`, and the complete gate runs on `main` and
-at the end of a research block.
+`packing-validate` has five tiers: run `--edit` while editing and `--push` before
+pushing; every pull request runs `--fast` as seven required parts; `--records` guards
+registry changes; and the complete gate runs on `main` and at the end of a research
+block.
+[**development.md → Validation Loops**](development.md#validation-tiers) tabulates
+what each tier runs and costs, and
+[`gate-budgets.yaml`](packing/devtools/gate-budgets.yaml) holds the ceilings the gate
+reads.
 
 [`Witness/v2`](packing/witnesses/witness.schema.yaml) is the interchange format for
 supported rational, algebraic, and decimal witnesses.
@@ -325,18 +290,13 @@ These 40 research reports are the durable topical syntheses:
 | [The Best-Known n = 26 Packing](docs/project/research/research-2026-09-07-n26-best-known-audit.md) | Dated literature and source search, exact score normalization, and the limits of the best-known claim |
 
 The reports distinguish formal proof, finite numerical checks, and source reports.
-The draft
-[X-031 floor-normalized T2 exploration](packing/campaign/explorations/X-031-bc303-floor-normalized-t2-helper-draft.md)
-records reviewed local cutoffs and bounded H-161 stability; it establishes no target
-result or global bound.
 The [document map](SYNOPSIS.md#document-map) identifies every maintained guide, dated
 record, generated view, and superseded document.
 
 ## Autonomous Research Process
 
 The repository supports autonomous research without making process a substitute for
-evidence. This section gives the operating model at a glance.
-The [operating rules](operating-rules.md),
+evidence. The [operating rules](operating-rules.md),
 [workflow contracts](SYNOPSIS.md#workflow-entry-contracts), and
 [campaign runbook](packing/campaign/README.md) own the full rules.
 
@@ -506,10 +466,6 @@ The `tbd` queue owns durable work and dependencies.
 Campaign agendas order bounded commitments; hypothesis and experiment records own
 scientific claims and measurements; commits own code; escalated agent-session records
 own phase and recovery state.
-The key record IDs are `X-NNN` for explorations, `H-NNN` for hypotheses, `exp-NNN` for
-experiments, `BC-NNN` for bounded commitments, `T-NNN` for registered results, and
-`D-NNN` for defects.
-[`conventions.md`](conventions.md#1-identity) owns the complete ID registry.
 
 The campaign’s
 [bounded research cycle](packing/campaign/README.md#the-bounded-research-cycle) defines
@@ -518,12 +474,12 @@ Changing agents changes the driver, not the record or the evidence required for 
 
 ### Where the Contracts Live
 
-| Document | Definitive responsibility |
+| Document | Owns |
 | --- | --- |
 | This README | High-level orientation and the relationship among the layers |
 | [`SYNOPSIS.md`](SYNOPSIS.md) | Current research status and roadmap, technical state, workflow contracts, work-unit vocabulary, and handoff |
-| [`epistemics.md`](epistemics.md) | Whole-result V/C/S/N classifications and their executable boundary |
-| [`conventions.md`](conventions.md) | IDs, filenames, artifact shape, evidence fields, provenance, and corrections |
+| [`epistemics.md`](epistemics.md) | Whole-result V/C/S/N classifications, their executable boundary, and the policy for results by others: scope, credit, import, and reply |
+| [`conventions.md`](conventions.md) | IDs, filenames, artifact shape, evidence fields, provenance, corrections, and the boundary between machine checks and review |
 | [`operating-rules.md`](operating-rules.md) | How sessions choose, divide, validate, and hand off work |
 | [Campaign runbook](packing/campaign/README.md) | Hypothesis and experiment mechanics, clocks, budgets, verdicts, and routing |
 | [Result import process](packing/campaign/result-import.md) | Importing, recording, validating, rating and publishing a result by others, and answering its author |
@@ -533,16 +489,6 @@ Changing agents changes the driver, not the record or the evidence required for 
 | [Agent-session guide](packing/campaign/agent-sessions/README.md) | Escalation threshold, workflow phases, recovery state, and session closeout |
 | [Agendas](packing/campaign/agendas/) | Mutable ordering and readiness of bounded commitments |
 | [`development.md`](development.md) | Engineering boundaries, commands, tests, and validation tiers |
-
-## Conventions
-
-[`conventions.md`](conventions.md) owns identifiers, filenames, artifact discipline,
-evidence fields, provenance, corrections, and the boundary between machine checks and
-review.
-[`epistemics.md`](epistemics.md) owns whole-result classifications and the policy
-for results by others: their scope, credit, import and reply.
-[`operating-rules.md`](operating-rules.md) owns how sessions are conducted, and
-[`development.md`](development.md) owns the engineering and validation workflow.
 
 ## Layout
 
@@ -555,6 +501,7 @@ for results by others: their scope, credit, import and reply.
 ├── operating-rules.md      Session conduct and workflow rules
 ├── development.md          Python setup, engineering boundaries, and validation
 ├── defects.md              Generated view of packing/defects.yaml
+├── docs/images/            Pictures README shows, made by the devtools
 ├── docs/project/           Reports, reviews, specs, postmortems, and dated handoffs
 ├── docs/project/research/  The research reports listed above
 ├── packing/                Code, data, and the research record

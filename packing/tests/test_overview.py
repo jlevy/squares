@@ -192,7 +192,7 @@ def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
     assert '<h1 id="every-result">' in results
     assert not ROW.findall(page)
     assert 'id="every-result"' not in page
-    recent = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    recent = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[0]
     # The actions lead to the ratings account and complete table.
     attributes = overview_sections.all_results_link_attributes(site_renders.overview())
     assert (
@@ -271,7 +271,7 @@ def test_the_bar_leads_with_case_11_beside_the_name(page: str) -> None:
     link = page.split('<a class="site-name"', 1)[1].split("</a>", 1)[0]
     assert '<svg class="site-logo" ' in link
     assert 'aria-hidden="true"' in link.split("<svg", 1)[1].split(">", 1)[0]
-    assert '<span class="site-name-text">Square Packing</span>' in link
+    assert '<span class="site-name-text">The Squares Project</span>' in link
     assert render_overview.site_logo() in link
 
 
@@ -360,12 +360,14 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     assert re.findall(r'<h2 id="([^"]+)"', page) == [
         "the-atlas-of-square-packings",
         "recent-results",
+        "report-your-results",
         "papers",
     ]
     assert re.findall(r'<h[12] id="([^"]+)" class="site-title"', page) == [
         "the-problem",
         "the-atlas-of-square-packings",
         "recent-results",
+        "report-your-results",
         "papers",
         "visuals",
         "squares-project-documentation",
@@ -3625,7 +3627,9 @@ def test_recent_results_is_one_table_not_cards_or_a_list(
     result pages; status links name superseding results. Rows contain no lists or
     cards. Its only popovers are its rows' own. What a row's popover
     holds is the popover's own business, so the section is read without them."""
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
+        0
+    ]
     recent = _recent_table(page)
     assert recent in section
     assert set(re.findall(r'<div class="(site-popover(?: [^"]*)?)"', section)) == {
@@ -3684,7 +3688,9 @@ def test_the_recent_table_contains_the_advertised_static_subset(
     expected = _recent_entries(overview)
     assert listed == [result.id.lower() for result in expected]
     assert 0 < len(listed) < len(overview.results)
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
+        0
+    ]
     assert "data-filter=" not in section
     assert 'href="results.html#all-results" data-all-results' in section
     assert "site-recent-scope" not in section
@@ -3950,7 +3956,9 @@ def test_the_overview_opens_with_the_owners_two_paragraphs(page: str) -> None:
 def test_recent_major_results_opens_with_preview_then_verification_and_results_actions(
     page: str,
 ) -> None:
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
+        0
+    ]
     assert '<h2 id="recent-results" class="site-title">Recent Major Results</h2>' in page
     assert _recent_prose(page) == ""
     assert "Recent progress, with each result linked to its complete record." not in page
@@ -4014,10 +4022,33 @@ SITE_STATEMENT = (
     ),
     (
         "If you have new results or know of newer results, please file an issue to "
-        "report them, and we will gladly incorporate them and cite your work."
+        "report them, including what name you wish to be used for credits. Agents will "
+        "validate, tabulate, and cite your work once it is a confirmed record."
     ),
     "We also have a group chat. Contact ojoshe if you wish to join.",
 )
+
+
+def test_the_invitation_to_report_results_is_one_text_on_about_and_the_homepage(
+    page: str, about: str
+) -> None:
+    """About and the overview carry the same invitation, after the overview's recent
+    results, ending in a Report a Result button that opens the repository's result
+    form directly."""
+    about_section = about.split('id="report-your-results"', 1)[1].split("<h1", 1)[0]
+    home_section = page.split('id="report-your-results"', 1)[1].split("<h2", 1)[0]
+    about_body = about_section.split("</h1>", 1)[1].split("<!--", 1)[0].strip()
+    home_body = home_section.split("</h2>", 1)[1].strip()
+    assert about_body == home_body
+    button = re.search(
+        rf'<a class="site-action" href="{re.escape(render_overview.NEW_ISSUE_URL)}"'
+        r"[^>]*>Report a Result",
+        home_body,
+    )
+    assert button is not None
+    assert "what name you wish to be used for credits" in _rendered_text(home_body)
+    assert page.index('id="recent-results"') < page.index('id="report-your-results"')
+    assert page.index('id="report-your-results"') < page.index('id="papers"')
 
 
 def test_the_sites_own_statement_follows_readmes_introduction(about: str, results: str) -> None:
@@ -4026,7 +4057,8 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     contribution invitation retains the owner's two paragraphs."""
     own = about.split("</h1>", 1)[1].split('<h1 id="squares-project-documentation"', 1)[0]
     narrative, contribution = own.split(
-        '<h1 id="contribute-your-results" class="site-title">Contribute Your Results!</h1>',
+        '<h1 id="report-your-results" class="site-title">Report Your Results!'
+        '<a id="contribute-your-results"></a></h1>',
         1,
     )
     assert len(re.findall(r"<p>", narrative)) == 3
@@ -4100,7 +4132,9 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         assert score not in " ".join(SITE_STATEMENT), score
     assert "all proofs" not in " ".join(SITE_STATEMENT)
     assert 'id="verification-ladders"' not in about
-    assert render_overview.NEW_ISSUE_URL == "https://github.com/jlevy/squares/issues/new"
+    assert render_overview.NEW_ISSUE_URL == (
+        "https://github.com/jlevy/squares/issues/new?template=result-registration.md"
+    )
     assert re.search(
         rf'<a href="{re.escape(render_overview.NEW_ISSUE_URL)}"[^>]*>file an issue</a>',
         paragraphs[0],
@@ -4125,7 +4159,7 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert about.count(heading) == 1
     assert re.findall(r'<h1\b[^>]*\bid="([^"]+)"', about) == [
         "the-squares-project",
-        "contribute-your-results",
+        "report-your-results",
         "squares-project-documentation",
     ]
     assert all('class="site-title"' in tag for tag in re.findall(r"<h1\b[^>]*>", about))

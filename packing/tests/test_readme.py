@@ -139,13 +139,13 @@ def test_readmes_introduction_block_is_held_by_the_readme_check() -> None:
     """The site's overview renders README's `project-intro` block as its first section,
     so the README check refuses a README that has lost the block or put more than prose
     in it, with the reason, where the render would otherwise be the first to say so.
-    README's `recent-progress` block was shared too until 2026-10-02; its two paragraphs
-    stay in README unmarked, so a heading or a central case in them is README's own
-    business and not the check's."""
+    README's `recent-progress` block was shared too until 2026-10-02; README's own Recent
+    Results section follows the block unmarked, so a heading or a central case there is
+    README's own business and not the check's."""
     text = README.read_text(encoding="utf-8")
     assert check_intro(text) == []
     assert "recent-progress" not in text
-    assert "The project covers the problem at every $n$." in text
+    assert "\n## Recent Results\n" in text.split("<!-- END SHARED: project-intro -->", 1)[1]
     unmarked = text.replace("<!-- END SHARED: project-intro -->", "")
     assert check_intro(unmarked) == [
         "README.md: the project-intro markers must each appear exactly once"
@@ -164,5 +164,5 @@ def test_readmes_introduction_block_is_held_by_the_readme_check() -> None:
     assert check_intro(central) == [
         "README.md: the project-intro block calls a case the central one"
     ]
-    unshared = text.replace("A recent major result", "On the central case, a recent result")
+    unshared = text.replace("- **Eleven squares settled:**", "- **The central case, settled:**")
     assert check_intro(unshared) == []

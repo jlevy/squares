@@ -12,6 +12,8 @@ file copies, tombstones, sitemap and 404. Page budgets and share-preview metadat
 checked alongside repository links, paper versions, PDF source receipts, record-link
 coverage and workbench startup. Forwarder destinations agree in canonical metadata,
 refresh, script and visible link; pinned-browser arrival preserves query and fragment.
+Set `SQPACK_CHROMIUM` to use a browser the environment supplies, as the other browser
+tools do; the workbench startup and the forwarder visits both launch it.
 
 --local DIR checks the closed-world registry, required physical outputs, HTML budgets,
 heads and links between papers without fetching the network. --partial requires one
@@ -1302,10 +1304,15 @@ def expected_commit() -> str:
 
 
 def workbench_startup(url: str, project_root: str, *, timeout: float) -> tuple[bool, str]:
-    """Start the deployed page and require its public API and project-root navigation."""
+    """Start the deployed page and require its public API and project-root navigation.
+
+    `SQPACK_CHROMIUM` names a browser the environment supplies, as it does for the
+    forwarders."""
     try:
         with sync_playwright() as playwright:
-            browser = playwright.chromium.launch()
+            browser = playwright.chromium.launch(
+                executable_path=os.environ.get(BROWSER_OVERRIDE)
+            )
             try:
                 page = browser.new_page()
                 page.goto(url, wait_until="load", timeout=timeout * 1000)

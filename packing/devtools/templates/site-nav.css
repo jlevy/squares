@@ -182,7 +182,7 @@
   text-decoration: none;
 }
 /* The name is set as written, in the bar's sans, a step heavier than the links. */
-/* The site name is set in capitals by style, so its text stays "Square Packing". */
+/* The site name is set in capitals by style, so its text stays "The Squares Project". */
 .site-nav .site-name {
   color: var(--kpress-doc-text);
   font-size: var(--site-nav-name-size);
@@ -358,7 +358,7 @@
 }
 /* Narrower than the whole bar fits in one row with the name (72rem), the name gives
    way and the mark alone leads home, so the links keep one row down to a phone. The
-   link keeps its label, "Square Packing home", for a screen reader. */
+   link keeps its label, "The Squares Project home", for a screen reader. */
 @media (width < 72rem) {
   .site-nav .site-name-text {
     display: none;

@@ -25,16 +25,13 @@ This project now independently tabulates all known new results and does
 certificates behind them, to encourage open collaboration on open questions and
 formalizations of current proofs.
 
-<h1 id="contribute-your-results" class="site-title">Contribute Your Results!</h1>
+<h1 id="report-your-results" class="site-title">Report Your Results!<a id="contribute-your-results"></a></h1>
 
-If you have new results or know of newer results, please
-[file an issue]({{NEW_ISSUE_URL}}) to report them, and we will gladly incorporate them
-and cite your work.
+{{REPORT_RESULTS}}
 
-We also have a group chat.
-Contact [ojoshe](https://x.com/ojoshe) if you wish to join.
-
-<!-- The introductory and contribution text above is the owner's words of 2026-10-03 (think-a7oa), each
+<!-- The introductory text above is the owner's words of 2026-10-03 (think-a7oa), and the
+     invitation to report results theirs of 2026-10-11, shared with the overview
+     (`report-results.md`); each
      fact checked against the record: the project's first packing work is of
      2026-08-22; its own lower bounds are at
      n = 11, 12 and 17 to 21 (T-001 to T-034); the explainer the link names is n = 11's,

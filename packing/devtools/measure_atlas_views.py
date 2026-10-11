@@ -45,8 +45,14 @@ browser made of that:
   table and under the grid, "See all results" and the expander collapsed and expanded,
   at each width in both themes; and the window at five points of the move from the grid
   to the triangle (0, 25, 50, 75 and 100 percent).
+- `readme` writes the one picture README opens with to `--out`: the tiles alone, every
+  case in the triangle at the page's own size, in the light theme, at twice the pixels
+  of a window wide enough that no row pans (`README_WINDOW`) once the block's cap on its
+  width is lifted (the `widen` probe), cut to the tiles. Run it on the published site, so
+  the picture shows what a reader who clicks it finds.
 
-`PAGE` is a built `atlas.html`, or a directory `preview_site` built. `--render` renders
+`PAGE` is a built `atlas.html`, a directory `preview_site` built, or the address of a
+published one, such as `https://jlevy.github.io/squares/atlas.html`. `--render` renders
 the overview alone into `PAGE` first, which takes seconds where a whole site takes a
 minute. Usage, from `packing/`:
 
@@ -56,6 +62,9 @@ minute. Usage, from `packing/`:
         move PAGE --width 1280 --runs 5 --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_atlas_views \
         shots PAGE --out DIR
+    uv run --frozen --all-extras --group dev python -m devtools.measure_atlas_views \
+        readme https://jlevy.github.io/squares/atlas.html \
+        --out ../docs/images/atlas-triangle-1-324.png
 
 Set `SQPACK_CHROMIUM` to use a browser the environment supplies, as the other tools do.
 """
@@ -63,6 +72,7 @@ Set `SQPACK_CHROMIUM` to use a browser the environment supplies, as the other to
 from __future__ import annotations
 
 import argparse
+import io
 import itertools
 import json
 import math
@@ -84,8 +94,11 @@ HOLD = probe(PROBES, "measure_atlas_views/hold")
 SETTLED = probe(PROBES, "measure_atlas_views/settled")
 TOP = probe(PROBES, "measure_atlas_views/top")
 QUIET = probe(PROBES, "measure_atlas_views/quiet")
+DRAWN = probe(PROBES, "measure_atlas_views/drawn")
+WIDEN = probe(PROBES, "measure_atlas_views/widen")
+WHOLE = probe(PROBES, "measure_atlas_views/whole")
 
-MODES = ("layout", "move", "shots")
+MODES = ("layout", "move", "shots", "readme")
 VIEWS = ("grid", "triangle")
 #: The atlas's three sizes of tile, in tab order: the key `?size=` takes. The drawing
 #: tabs, House and Regularized, that stood here as `LAYERS` went on 2026-10-04
@@ -102,6 +115,17 @@ FRACTIONS = (0.0, 0.25, 0.5, 0.75, 1.0)
 #: The windows the move is pictured in, each with the hundred and with every case: a
 #: desktop tall enough to hold the whole triangle under its heading, and a phone.
 FRAME_WINDOWS = ((1280, 1200), (390, 844))
+#: The window README's picture is taken in, wide enough that the triangle's last row of
+#: 35 tiles stands whole at Small once the block may fill it and tall enough to hold
+#: every row, and the device pixels a CSS pixel becomes.
+README_WINDOW, README_PIXELS = (3200, 2000), 2
+#: The margin README's picture keeps around the tiles, in CSS pixels.
+README_MARGIN = 8
+#: The colours README's picture is reduced to. The tiles are flat fills, so a palette
+#: loses nothing visible and takes the file from 1.9 MB to about 0.6 MB, which matters:
+#: `docs/` is copied whole into every negative-control worker, against its 200 MiB cap
+#: (`run_negative_controls.SNAPSHOT_MAX_BYTES`).
+README_COLORS = 256
 #: How far two edges may differ and still be one edge, in CSS pixels.
 EDGE = 0.75
 EXPANDER = "[data-atlas-toggle]"
@@ -411,15 +435,18 @@ def open_atlas(
     height: int = 900,
     reduced_motion: str | None = None,
     init_script: str | None = None,
+    pixels: float | None = None,
 ) -> Any:
     """A page showing the atlas in `view` at `size`, asked for in the address, with its
     tiles placed and the block in the window. `query` is the whole of what follows the page's
-    name instead, a query string and any fragment, for an address that says more, and
-    `init_script` a script the page runs before any of its own."""
+    name instead, a query string and any fragment, for an address that says more,
+    `init_script` a script the page runs before any of its own, and `pixels` the device
+    pixels a CSS pixel becomes."""
     page = browser.new_page(
         viewport={"width": width, "height": height},
         color_scheme=scheme,
         reduced_motion=reduced_motion,
+        device_scale_factor=pixels,
     )
     if init_script is not None:
         page.add_init_script(init_script)
@@ -630,6 +657,51 @@ def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
     return written
 
 
+def readme(address: str, target: Path) -> Path:
+    """README's picture: every case in the triangle, the tiles alone, light, at
+    `README_PIXELS` in `README_WINDOW`, once no row pans and each drawing has loaded,
+    cut to the tiles' own extent and `README_MARGIN`, without the controls and key above
+    them or the frame's empty width, and reduced to `README_COLORS`. The pointer is
+    moved off the tiles first, so none is shown under a hover."""
+    from PIL import Image  # noqa: PLC0415
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    target.parent.mkdir(parents=True, exist_ok=True)
+    width, height = README_WINDOW
+    with sync_playwright() as driver:
+        browser = launch(driver)
+        page = open_atlas(browser, address, width=width, height=height, pixels=README_PIXELS)
+        expand(page)
+        page.evaluate(WIDEN)
+        page.wait_for_function(WHOLE)
+        settle(page)
+        page.mouse.move(0, 0)
+        page.locator(".site-atlas-cells").scroll_into_view_if_needed()
+        report = layout(page)
+        problems = layout_problems(report)
+        if len(report["tiles"]) != 324 or problems:
+            browser.close()
+            raise SystemExit(f"the triangle is not whole: {problems or len(report['tiles'])}")
+        page.wait_for_function(DRAWN)
+        tiles = report["tiles"]
+        left = min(tile["left"] for tile in tiles) - README_MARGIN
+        top_edge = min(tile["top"] for tile in tiles) - README_MARGIN
+        clip = {
+            "x": left,
+            "y": top_edge,
+            "width": max(tile["right"] for tile in tiles) + README_MARGIN - left,
+            "height": max(tile["bottom"] for tile in tiles) + README_MARGIN - top_edge,
+        }
+        shot = page.screenshot(clip=clip, animations="disabled")
+        browser.close()
+    with Image.open(io.BytesIO(shot)) as image:
+        palette = image.convert("RGB").quantize(
+            colors=README_COLORS, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE
+        )
+        palette.save(target, optimize=True)
+    return target
+
+
 def markdown_table(rows: Sequence[dict[str, Any]]) -> str:
     """The rows as a Markdown table, one column a key."""
     if not rows:
@@ -647,8 +719,14 @@ def markdown_table(rows: Sequence[dict[str, Any]]) -> str:
     return "\n".join(lines)
 
 
-def page_address(target: Path, *, render: bool) -> str:
-    """The complete atlas at `target`, rendered there first when requested."""
+def page_address(target: Path | str, *, render: bool) -> str:
+    """The complete atlas at `target`, rendered there first when requested; a published
+    page's address is taken as it is, and one that ends in `/` names its `atlas.html`."""
+    if str(target).startswith(("https://", "http://")):
+        if render:
+            raise SystemExit("--render writes a file and cannot write to a published site")
+        return f"{target}atlas.html" if str(target).endswith("/") else str(target)
+    target = Path(target)
     path = target / "atlas.html" if target.is_dir() or target.suffix != ".html" else target
     if render:
         from devtools import render_overview  # noqa: PLC0415
@@ -665,7 +743,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("mode", choices=MODES)
-    parser.add_argument("page", type=Path, help="a built atlas.html, or its directory")
+    parser.add_argument(
+        "page", help="a built atlas.html, its directory, or a published page's address"
+    )
     parser.add_argument("--render", action="store_true", help="render the atlas there first")
     parser.add_argument("--width", type=int, action="append", help="window width; repeatable")
     parser.add_argument("--runs", type=int, default=5, help="move: how many times each change")
@@ -681,11 +761,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         default="median",
         help="move, with --markdown: the median of the runs, or the least",
     )
-    parser.add_argument("--out", type=Path, help="shots: where the pictures go")
+    parser.add_argument(
+        "--out", type=Path, help="shots: where the pictures go; readme: the picture's file"
+    )
     parser.add_argument("--markdown", action="store_true", help="print a table, not JSON")
     args = parser.parse_args(argv)
     address = page_address(args.page, render=args.render)
     widths = tuple(args.width or WIDTHS)
+    if args.mode == "readme":
+        if args.out is None:
+            parser.error("readme needs --out")
+        print(f"shot {readme(address, args.out.resolve())}")
+        return 0
     if args.mode == "shots":
         if args.out is None:
             parser.error("shots needs --out")

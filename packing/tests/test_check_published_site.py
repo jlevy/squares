@@ -5,10 +5,14 @@ from __future__ import annotations
 import hashlib
 import re
 import struct
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Iterator, Sequence
+from contextlib import contextmanager
 from pathlib import Path
+from types import SimpleNamespace
+from typing import NoReturn
 
 import pytest
+from playwright.sync_api import Error as PlaywrightError
 
 from devtools import (
     check_published_site,
@@ -56,7 +60,7 @@ from devtools.render_n11_lower_bounds_explainer import (
     MARKDOWN_OUTPUT,
     PAGE_URL,
 )
-from devtools.render_n11_lower_bounds_explainer_pdf import EXPECTED_PAGE_COUNT
+from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE, EXPECTED_PAGE_COUNT
 from devtools.render_n11_lower_bounds_explainer_pdf import OUTPUT as PDF_OUTPUT
 from devtools.repo_links import DEFAULT_BRANCH, REPO_URL, RepositoryTree, branch_paths
 from sqpack.release import EXPLAINER_VERSION, OPTIMALITY_REVIEW_EDITION, PUBLICATION_EDITION
@@ -1445,6 +1449,41 @@ def test_check_requires_the_workbench_browser_api_to_start(
     assert failures(monkeypatch, fake_site(site_pages()), browser=True) == [
         "API missing after 1s"
     ]
+
+
+def test_both_browser_checks_launch_the_chromium_the_environment_names(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The workbench startup and the forwarder visits launch the Chromium
+    `SQPACK_CHROMIUM` names, and Playwright's own build where it names none. CI leaves the
+    variable unset, so this is the only place the two launches are seen to agree."""
+    launched: list[dict[str, object]] = []
+
+    class Chromium:
+        def launch(self, **options: object) -> NoReturn:
+            launched.append(options)
+            raise PlaywrightError("launched; stop here")
+
+    @contextmanager
+    def driver() -> Iterator[SimpleNamespace]:
+        yield SimpleNamespace(chromium=Chromium())
+
+    def both() -> list[tuple[bool, str]]:
+        site = "https://example.org/"
+        started = check_published_site.workbench_startup(site + "workbench/", site, timeout=1)
+        return [started, *check_published_site.forwarders_followed(site, timeout=1)]
+
+    monkeypatch.setattr(check_published_site, "sync_playwright", driver)
+    monkeypatch.setenv(BROWSER_OVERRIDE, "/opt/chromium")
+    assert both() == [
+        (False, "workbench startup failed: launched; stop here"),
+        (False, "the forwarders could not be visited: launched; stop here"),
+    ]
+    monkeypatch.delenv(BROWSER_OVERRIDE)
+    both()
+    assert (
+        launched == [{"executable_path": "/opt/chromium"}] * 2 + [{"executable_path": None}] * 2
+    )
 
 
 @pytest.mark.parametrize(

@@ -408,6 +408,19 @@ def test_a_hand_written_contents_list_is_dropped_from_the_page(
     assert 'href="#contents"' not in page
 
 
+def test_a_github_alert_is_a_plain_quote_on_the_page() -> None:
+    """README's callout is drawn by GitHub from its `[!IMPORTANT]` marker; the site has
+    no such syntax, so the marker line goes and the quote stays."""
+    markdown = "Intro.\n\n> [!IMPORTANT]\n> **Have a result?** File it.\n\n> Plain [!NOTE].\n"
+    assert site_documents.without_alert_markers(markdown) == (
+        "Intro.\n\n> **Have a result?** File it.\n\n> Plain [!NOTE].\n"
+    )
+    readme = site_documents.without_alert_markers(
+        site_documents.README.read_text(encoding="utf-8")
+    )
+    assert "> [!" not in readme.split("<!-- BEGIN SHARED", 1)[0]
+
+
 def _readme(body: str) -> str:
     """A README with the one shared block, then two unmarked paragraphs after it, as
     README's own account of recent progress stands since 2026-10-02."""

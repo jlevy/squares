@@ -115,6 +115,7 @@ name: Certificate page
       - packing/devtools/templates/overview-article.md
       - packing/devtools/templates/atlas-article.md
       - packing/devtools/templates/about-article.md
+      - packing/devtools/templates/report-results.md
       - packing/devtools/templates/all-results-article.md
       - packing/devtools/templates/visualize-article.md
       - packing/devtools/templates/papers-article.md

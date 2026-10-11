@@ -31,6 +31,10 @@ can exist, such as the reported $s(29) \ge 5.81$).
 
 <p class="site-action-row site-more"><a class="site-action" href="results.html#verification-ladders">About Result Verification{{ARROW_RIGHT}}</a><a class="site-action" href="results.html#all-results" {{RESULTS_LINK_ATTRIBUTES}}>All Results{{ARROW_RIGHT}}</a></p>
 
+<h2 id="report-your-results" class="site-title">Report Your Results!</h2>
+
+{{REPORT_RESULTS}}
+
 <h2 id="papers" class="site-title">Papers<a id="learn-more"></a></h2>
 
 The tutorial introduces the problem; the three papers explain the lower bounds and
