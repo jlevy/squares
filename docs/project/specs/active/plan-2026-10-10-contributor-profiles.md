@@ -516,6 +516,84 @@ popovers retain the shared compact heading hierarchy.
 Generated computed-style checks compare the contributor pages with the standard page
 role at desktop/mobile widths in both themes.
 
+## WIP Handoff: 2026-10-10
+
+The owner requested a work-in-progress PR and handoff before further implementation.
+Continue on `codex/contributor-profiles-plan-spike` in
+[PR #490](https://github.com/jlevy/squares/pull/490). Implementation commit `85e0ac66f`
+merges upstream `6038af33c`; the handoff commit adds documentation only.
+Do not treat the earlier green CI on `ed89bfdda` as validation of this merge.
+The PR is being retained as draft, with integration acceptance open.
+
+### Selected Next Slice: Generic Profile URLs
+
+`think-0v2c` is open and unstarted: make `/profiles/index.html` and `/profiles/ID.html`
+the canonical directory and person-page URLs.
+Use “Profiles” wording so cited paper authors are included without implying that every
+person directly contributed to the project.
+All 20 current records already have navigable pages under `/contributors/`; the
+requested URL migration has **not** been implemented.
+Update generated links, route registration, sitemap, publication inventory, popover
+loading, tests and design documentation together.
+Keep registered forwarders for existing `/contributors/` links.
+Preserve reviewed identity joins, displayed credit wording, source roles and shared
+article-loader accessibility and fallback behavior.
+
+### Acceptance and Remaining Work
+
+- `think-4w5c` is complete: standalone headings inherit the shared sans-serif, uppercase
+  H1 style; popovers use the shared compact hierarchy.
+- `think-ztic` remains in progress for merged-site acceptance.
+  On `85e0ac66f`, 446 renderer tests, 61 browser integration tests, 16 heading/design
+  checks, 29 Node tests, 106 published-site tests and 263 validation/URL tests passed in
+  their respective selections.
+  The rebuilt full preview and publication checks passed; the route registry reports 946
+  rows and no failures.
+  Astra accepted the implementation and final publication-checker changes.
+- The local `packing-validate --push --inner-jobs 4` gate **failed**: reachable
+  behavioral tests exceeded their 900-second ceiling, after partial pytest output had
+  already shown an `F` without a final failure traceback.
+  Total gate wall was 1018.93 seconds, with 65 of 66 steps completed.
+  Diagnose the failing selection and rerun; this is not established as a timing-only
+  failure. Do not raise the ceiling to hide it.
+- Earlier required Packing, Pages and deferred CI passed on `ed89bfdda` only.
+  Inspect the PR checks for the pushed handoff head before claiming acceptance.
+- `think-39mp` remains the epic; `think-m7il` owns population and census, `think-9yli`
+  publication. The census still has 230 unresolved occurrences and 144 PDFs awaiting
+  complete credit inspection.
+  Continue PDF and web batches through `think-bw3z` and `think-nlob` after the selected
+  URL/acceptance slice; remaining renderers are `think-jn87`.
+- Attribution policy is [attribution.md](../../../../attribution.md).
+  Ahmed and Levy aliases are sourced.
+  Lewis is affiliated with EvolvingPrograms; do not infer that the organization is a
+  proven personal alias.
+  Bound citations, verifier credits and compact PDF links remain tracked by
+  `think-2v8h`, `think-zupq` and `think-ir3i`.
+
+### Resume Setup
+
+Run `tbd prime` and `tbd sync`, reread the selected beads, then claim the next slice
+before editing.
+Bead state lives on `tbd-sync`; this plan records its handoff snapshot in
+the PR itself. Use Sol agents for mechanical implementation and Astra for technical
+review, with separate file ownership.
+
+On this Mac, source
+`/Volumes/spud-ext1/agent-scratch/contributor-profiles-01a126ff/env.sh` before
+build/test commands.
+It sets the external scratch directories, pinned environment and browser location.
+Verify the volume is mounted and writable; do not fall back to internal disk for bulk
+output. Run Python through `uv run --frozen --all-extras --group dev` from `packing/`
+with Python 3.14.7, never the system interpreter.
+The failed gate log is in that scratch directory at `tmp/upstream-push-gate.log`;
+scratch logs are local diagnostic aids, not portable PR evidence.
+The outcome above is the durable receipt.
+Do not format or mutate the tree while broad pytest collection runs.
+
+The existing local preview at `http://127.0.0.1:8790/` serves the merged site, including
+`/contributors/index.html`; the bead board is at `http://127.0.0.1:7790/` while its
+server runs. Neither local server is a production deployment.
+
 ## Open Decisions and Limits
 
 - Additional organization-wide code review requires named repositories beyond this
