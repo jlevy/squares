@@ -5,14 +5,16 @@ title: "PR #496 (merge): fix: bound publication audits and scope local push chec
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m4mneswbxt0m4w1caxy0x320
 hold: null
 hold_until: null
 created_at: 2026-10-11T02:46:33.702Z
-updated_at: 2026-10-11T04:53:10.491Z
+updated_at: 2026-10-11T05:02:36.426Z
 started_at: 2026-10-11T02:46:34.643Z
 ---
 
