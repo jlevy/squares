@@ -1,0 +1,70 @@
+{
+  "kind": "wand125-linear-certificate-audit/v1",
+  "packet": "wand125-linear-n122-2026-10-10",
+  "source_revision": "a9f76c382d023b4095899c4eb7ea7483b8b87ecf",
+  "certificates": {
+    "n122": {
+      "directory": "certificates/mixed_n122_L1126",
+      "side": "563/50",
+      "side_float": 11.26,
+      "core": "9977/10000",
+      "orbits": {
+        "rectangle": 3,
+        "point": 502,
+        "segment": 1268
+      },
+      "images": {
+        "rectangle": 24,
+        "point": 4016,
+        "segment": 10144
+      },
+      "d4_invariant": true,
+      "total_mass": "12199999/100000",
+      "budget_gap": "1/100000",
+      "candidate_digest": "c91a750977764335d3668599bf7e599539b30f7c81969372fc27ad90561e9ed4",
+      "checker_sha256": "0249726ab1e67dc481e0c53f43b524902a48f95d051b1b08865a3cf3ef89a06d",
+      "code_files": 13,
+      "code_retained_in": [
+        "packing/resources/web/wand125-linear-certificates-2026-10-02/square-packing-bounds/certificates/mixed_n101_L1028/code",
+        "packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds/certificates/mixed_n50_L740/code"
+      ],
+      "net": {
+        "step": "83/40000",
+        "count": "201",
+        "endpoint_check": "89/40000",
+        "rotated_side_upper": "399908091/400000000",
+        "side_margin": "91909/400000000"
+      },
+      "centre_half_width_least": "4618116553/937780000",
+      "centre_half_width_least_at": 200,
+      "certificate_status": "ALL_LINEAR_ANGLES_VERIFIED_AND_REPLAYED",
+      "nodes": 73694735,
+      "most_nodes": 2218683,
+      "most_nodes_at": 0,
+      "axis_nodes": 2218683,
+      "tarball": "certificates/mixed_n122_L1126/n122-L11.26-proof-bundle.tar.gz",
+      "tarball_sha256": "3986d902d11ba2c91a8e56c9b18bb07bf8876c24451587480b2a86c4ba9a55d0",
+      "source_audit": {
+        "status": "AUDITED_AND_PACKAGED",
+        "certificate_sha256_matches": true,
+        "archive_sha256_matches": true,
+        "compared_with": "136997226681726948745326834984261099397688222112609270139116687497990897107228651469431571451/12200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "compared_note": "Green G_11 = 2*sqrt2-1+(1100+10*sqrt22)/122 (Friedman DS7, Theorem 9 with k = 11), rational upper bound from 90-digit integer square roots; Green's published proof has gaps for k>=4",
+        "improvement_lower": "374773318273051254673165015738900602311777887390729860883312502009102892771348530568428549/12200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "comparison": {
+        "green": "Theorem 9, k=11, from n = 122",
+        "green_interval_float": [
+          11.229280875551389,
+          11.229280875551389
+        ],
+        "side_exceeds_green": true,
+        "source_value_exceeds_green": true,
+        "nagamochi": "1 + sqrt(101)",
+        "side_exceeds_nagamochi": true
+      },
+      "coverage_decided_here": false
+    }
+  },
+  "scope": "Exact premises only, from the retained files: pinned digests, the measure's count, side, core, orbit counts, containment, nonnegativity and total n - 1/100000, its D4 invariance, the candidate digest by the source's rule, the net containment and centre domains, the checker and code identity, a replay record for each of the 201 angles, and the source audit's certificate and tarball digests. Coverage is decided by the source's checker, whose replay is recorded separately."
+}

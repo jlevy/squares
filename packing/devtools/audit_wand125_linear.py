@@ -94,6 +94,11 @@ LINEAR_REVISION = "0c35d909764997ead04dfd90081c9fe9af8d07f2"
 LINEAR_PACKET = mixed.WEB / "wand125-linear-certificates-2026-10-02"
 N82_REVISION = "b00fc70f1904e9b1b567afee056d347f911209e8"
 N82_PACKET = mixed.WEB / "wand125-linear-n82-2026-10-02"
+#: ``mixed_n122_L1126`` of wand125/square-packing, whose candidate, certificate and proof
+#: bundle the source published in a release asset rather than at the commit
+#: (`devtools.retain_wand125_release` wrote the packet's retained files and pins).
+N122_REVISION = "a9f76c382d023b4095899c4eb7ea7483b8b87ecf"
+N122_PACKET = mixed.WEB / "wand125-linear-n122-2026-10-10"
 LINEAR_SCHEMA = "point_line_rectangle_v1"
 #: ``unified_linear_verify.cpp``, the checker every linear certificate names.
 LINEAR_CHECKER_SHA256 = "0249726ab1e67dc481e0c53f43b524902a48f95d051b1b08865a3cf3ef89a06d"
@@ -183,6 +188,17 @@ _LINEAR_ROWS: tuple[tuple[Path, str, int, str, Fraction, int, int, int, str], ..
         222,
         774,
         "5ddb7ed328ca3250e8d0ffaab577a68acd8a2debfa600a43500e05e5ee019606",
+    ),
+    (
+        N122_PACKET,
+        N122_REVISION,
+        122,
+        "11.26",
+        Fraction(563, 50),
+        502,
+        1268,
+        3,
+        "c91a750977764335d3668599bf7e599539b30f7c81969372fc27ad90561e9ed4",
     ),
 )
 LINEAR: dict[str, LinearCertificate] = {
@@ -1024,16 +1040,21 @@ def linear_replay(
 #: the replays, as (certificate, net index, CPU seconds here, the source's seconds for the
 #: same angle in its bundle's ``summary.json``): 2026-10-02 on a 4-core KVM guest (Intel
 #: Xeon at 2.10 GHz) with its other cores busy, checker built by the shipped
-#: ``compile_verifier``. The receipts are in the 2026-10-02 linear packet.
+#: ``compile_verifier``. The receipts are in the 2026-10-02 linear packet. n = 122's two
+#: are the 2026-10-10 diagnostic sample on the same kind of host, two workers at once
+#: (`devtools.fine_net_followup linear-sample`, ``receipts/linear-sample-diagnostic.json``
+#: in its packet).
 PRICE_SAMPLES: tuple[tuple[str, int, float, float], ...] = (
     ("n101", 150, 123.841, 133.350),
     ("n83", 50, 273.307, 249.558),
+    ("n122", 37, 57.358, 73.635),
+    ("n122", 108, 117.857, 152.037),
 )
 
 #: The source's own seconds for each complete run, summed over its bundle's 201 records.
 #: n = 82's run was resumed and finished on other machines (its ``completion-audit.json``),
 #: and has no sampled angle here.
-UPSTREAM_SECONDS = {"n101": 31303.5, "n83": 75685.9, "n82": 118941.6}
+UPSTREAM_SECONDS = {"n101": 31303.5, "n83": 75685.9, "n82": 118941.6, "n122": 51876.8}
 
 
 def linear_costs(certificate: LinearCertificate) -> list[float]:
@@ -1091,12 +1112,14 @@ def linear_plan(certificate: LinearCertificate, parts: int) -> dict[str, Any]:
     """Split the 201 angles into ``parts`` contiguous ranges of about equal node count."""
     costs = linear_costs(certificate)
     total = sum(costs)
+    # A proof bundle the source published in a release asset is fetched from it alone.
+    transport = "release" if mixed.release_pin(certificate) is not None else "git"
     rows = []
     for first, stop in mixed.balanced_ranges(costs, parts):
         command = (
             "uv run --frozen --all-extras --group dev python -m devtools.audit_wand125_linear "
             f"linear-replay {certificate.name} --range {first}-{stop - 1} "
-            f"--work /tmp/wand125-{certificate.name} --workers 4 --via git"
+            f"--work /tmp/wand125-{certificate.name} --workers 4 --via {transport}"
         )
         rows.append(
             {

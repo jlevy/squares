@@ -222,6 +222,57 @@ def test_the_n82_pre_replay_receipt_is_bound_to_the_pin() -> None:
     assert record["inputs"]["inputs"] == linear.LAST + 1
 
 
+# --------------------------------------------------------------------------- n = 122
+
+N122 = linear.LINEAR["n122"]
+
+
+def test_n122_is_registered_from_its_own_packet_with_its_exact_premises() -> None:
+    """mixed_n122_L1126 of wand125/square-packing, whose packet retains the five small
+    files and the pins the route reads (`devtools.retain_wand125_release`)."""
+    assert N122.packet == linear.N122_PACKET
+    assert N122.revision == linear.N122_REVISION
+    assert N122.directory == Path("certificates/mixed_n122_L1126")
+    assert N122.tarball == "n122-L11.26-proof-bundle.tar.gz"
+    audit = linear.linear_audit(linear.N122_PACKET)
+    facts = audit["certificates"]["n122"]
+    assert set(audit["certificates"]) == {"n122"}
+    assert facts["orbits"] == {"rectangle": 3, "point": 502, "segment": 1268}
+    assert facts["images"] == {"rectangle": 24, "point": 4016, "segment": 10144}
+    assert facts["total_mass"] == "12199999/100000"
+    assert facts["candidate_digest"] == N122.candidate_digest
+    assert facts["nodes"] == 73694735
+    assert (facts["most_nodes"], facts["most_nodes_at"]) == (2218683, 0)
+    assert facts["code_files"] == 13
+    assert facts["comparison"]["side_exceeds_green"]
+    assert facts["comparison"]["side_exceeds_nagamochi"]
+    receipt = linear.N122_PACKET / "receipts/linear-audit.json"
+    expected = json.dumps(audit, indent=2, default=str) + "\n"
+    assert receipt.read_text(encoding="utf-8") == expected
+
+
+def test_n122s_proof_bundle_is_fetched_from_its_release_asset() -> None:
+    """The source published the bundle in a release asset, not at the commit, so the
+    route takes it from the asset the packet's record pins, and a plan says so."""
+    manifest = json.loads((linear.N122_PACKET / "source-manifest.json").read_text())
+    pin = mixed.release_pin(N122)
+    assert pin is not None
+    release = manifest["release"]
+    assert (pin["url"], pin["bytes"], pin["sha256"]) == (
+        release["url"],
+        release["bytes"],
+        release["sha256"],
+    )
+    bundle = manifest["proof_bundle"]
+    assert mixed.tarball_pin(N122) == (bundle["sha256"], bundle["bytes"])
+    assert pin["member"]["member"] == f"certificates/mixed_n122_L1126/{bundle['name']}"
+    plan = linear.linear_plan(N122, 2)
+    assert all("--via release" in row["command"] for row in plan["parts"])
+    price = linear.linear_price()["certificates"]["n122"]
+    assert [sample["index"] for sample in price["samples"]] == [37, 108]
+    assert price["upstream_cpu_hours"] == 14.41
+
+
 def test_a_tarball_is_checked_only_against_its_own_packet(tmp_path: Path) -> None:
     stray = tmp_path / N82.tarball
     stray.write_bytes(b"not the bundle")

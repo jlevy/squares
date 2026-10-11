@@ -110,22 +110,73 @@ which needs the five small files of the directory (`candidate.json`, `certificat
 shape, as the MIT notice permits, so that `linear-replay` writes resumable receipts over
 all 201 angles; then `linear-control` and a review that reads this certificate, as the 2
 October review read T-080’s. That work, with a budget for it, belongs to the import’s
-bead, think-nd7g.
+bead, think-nd7g; the
+[run plan of 11 October](../../../../docs/project/specs/active/plan-2026-10-11-wand125-confirmations.md)
+gives its commands.
+
+## Retained for the Replay
+
+On 11 October the packet took the shape the T-080 route reads, and `mixed_n122_L1126` is
+registered as `n122` in `devtools.audit_wand125_linear` (`LINEAR`).
+`devtools.retain_wand125_release` wrote, from the pinned asset and the pinned commit,
+refusing any byte whose digest is not the source manifest’s:
+
+- the five small files of the directory under
+  [`square-packing-bounds/certificates/mixed_n122_L1126/`](square-packing-bounds/certificates/mixed_n122_L1126/README.md):
+  `candidate.json` and `certificate.json` from the asset, stored as deterministic gzip
+  (see Compressed Files), and the README, `manifest.json` and `completion-audit.json`
+  from the commit, byte-identical;
+- [`acquisition/upstream-subtree.sha256`](acquisition/upstream-subtree.sha256), the
+  SHA-256 of the project notice and of every file of the certificate directory, the
+  commit’s 18 documents and the asset’s three members alike, with paths relative to
+  `problems/square-lower-bounds/`; and
+- [`acquisition/sources.json`](acquisition/sources.json), of format
+  `release-asset-retention-v1`: the commit, the retained files, every file pinned only
+  with its reason, and the release asset with its members.
+
+The proof bundle stays in the author’s release asset. `linear-replay`, `linear-fetch` and
+`linear-control` take it with `--via release`: the asset is downloaded and refused unless
+its size and SHA-256 are the record’s, and the bundle read from it is refused unless it
+has the pinned size and SHA-256 `3986d902…55d0`.
+[`receipts/linear-audit.json`](receipts/linear-audit.json) is the route’s exact audit of
+the retained files; it decides no coverage.
+`square-packing-bounds/` is the directory the linear tools read under every wand125
+linear packet; here it stands for `problems/square-lower-bounds/` of
+wand125/square-packing.
 
 ## Sources and Notices
 
 The nearest enclosing source notice, `problems/square-lower-bounds/LICENSE`, is MIT,
-Copyright 2026 wand125, byte-identical to the notice the #446 packet records; it covers
-the certificate directory, its `code/` included.
-This packet nonetheless retains no upstream byte: it publishes authored facts, hash
-references and this repository’s own receipts, and the asset stays with its author,
-pinned by size and digest.
+Copyright 2026 wand125, byte-identical to the notice the #446 packet records and to the
+copy the
+[27 September rectangle packet](../wand125-rectangle-certificates-2026-09-27/wand125-rectangles/LICENSE)
+retains (Git blob `bbfbff13…`); it covers the certificate directory, its `code/`
+included. Under it this packet retains, since 11 October, the five small files above.
+The asset and its proof bundle stay with their author, pinned by size and digest, and
+every file of `code/` is read from the retained copies the source manifest names.
 The sample ran the source’s replay function and checker from this repository’s retained
 copies; nothing from the asset or the source tree was executed.
 
 The source credits wand125; the commit is authored by Hiroaki Hosono.
 Its README says parts of the work were produced with AI assistance under human
 direction, and the commit names Claude Opus 5.5 as co-author.
+
+## Compressed Files
+
+Two retained data files have more than 1,000 lines, the candidate and the certificate,
+so they are stored as deterministic gzip made by `gzip -9n`, with no file name or
+timestamp in the header. The table gives the Git blob and SHA-256 of the decompressed
+bytes, which are the asset members’ as the [source manifest](source-manifest.json) pins
+them; each SHA-256 is also the one
+[`acquisition/upstream-subtree.sha256`](acquisition/upstream-subtree.sha256) pins.
+The repository’s readers decompress through
+`devtools.retained_data.read_retained_bytes`, and
+`python -m devtools.retained_data check PACKET` re-derives every row.
+
+| Stored file | Origin | Git blob | SHA-256, decompressed |
+| --- | --- | --- | --- |
+| `square-packing-bounds/certificates/mixed_n122_L1126/candidate.json.gz` | upstream | `50b46ace41f84cbdb49ff0126a795fe0140d2c5e` | `cd427ddb238b69b7d9ba32ac01616a8669f154af2e70abdff827c313a1ea500c` |
+| `square-packing-bounds/certificates/mixed_n122_L1126/certificate.json.gz` | upstream | `542414fee42cedbd5d62396f154b10deba5f4d17` | `6b57cddadcb75c6f29fbfc3384b521f86dca5deb5d9620df0ee78fbb39dfe709` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
