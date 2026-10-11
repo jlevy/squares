@@ -237,6 +237,29 @@ UNREAD_WORKER_OUTPUTS = frozenset(
         ROOT / "atlas/rendering/free-quench-n1-trace.json",
     }
 )
+# 2026-10-11, the Evan Daniel regularization tools (claude/regularize-tools, on #509):
+# source rather than output, the first on this list, so its test holds it to a stricter
+# rule than the one above. No control mutates or names any of it; no Python file a
+# worker keeps imports it, loads it by name, or names the template and fixture only
+# these files read; and no checked document links it, so nothing returns. Its readers
+# are its own three test modules, which the ordinary suite runs in the primary tree.
+# Traced, every control that touched these files did so in a sweep over a whole class
+# of files, which a pruned file leaves. The trace and measurement are at
+# `SNAPSHOT_MAX_BYTES`.
+UNREAD_WORKER_SOURCES = frozenset(
+    ROOT / relative
+    for relative in (
+        "devtools/regularize_evand.py",
+        "devtools/regularize_evand_gallery.py",
+        "devtools/regularize_evand_shim.py",
+        "devtools/regularize_same_side.py",
+        "devtools/templates/regularize-evand-gallery.html",
+        "tests/fixtures/regularize-evand",
+        "tests/test_regularize_evand.py",
+        "tests/test_regularize_evand_gallery.py",
+        "tests/test_regularize_same_side.py",
+    )
+)
 PRUNE = frozenset(
     {
         second.WITNESSES,
@@ -901,7 +924,12 @@ REGULARIZED_WITNESS_PATTERN = "n-*-regularized.yaml*"
 REGULARIZED_WITNESSES = frozenset(
     (ROOT / "atlas/known-best/regularized").glob(REGULARIZED_WITNESS_PATTERN)
 )
-PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS | UNREAD_WORKER_OUTPUTS
+PRUNE |= (
+    REGULARIZED_WITNESSES
+    | HISTORICAL_SNAPSHOT_OUTPUTS
+    | UNREAD_WORKER_OUTPUTS
+    | UNREAD_WORKER_SOURCES
+)
 # Build caches: excluded from the counted surface and from every worker tree, by
 # NAME at any depth. Not a prune, and the distinction is the point. Every entry in
 # `PRUNE` is a committed path that a worker does not need; these are generated
@@ -1283,6 +1311,37 @@ def root_files() -> tuple[Path, ...]:
 #
 # The upstream measurements used its 192 MiB cap; retain the independently
 # calibrated 200 MiB atlas-metadata capacity on this branch.
+#
+# 2026-10-11, the Evan Daniel regularization tools (claude/regularize-tools, on #509 at
+# b189122a7): 209,792,355 bytes, 77,155 over 200 MiB, where #509 measures 209,502,593.
+# The branch's driver, same-side search, shim, gallery and template, three test modules
+# and fixture are 289,374 new bytes, and its contract-test edit 388 more. Answered by
+# option (b) under an unchanged cap, applied for the first time to source:
+# `UNREAD_WORKER_SOURCES` above holds all of that new source and nothing else.
+#
+# Traced as on 2026-10-09, at the branch: all 174 controls ran mutated under `strace -f
+# -e trace=%file` in worker trees that still held the eleven files, and all 174 fired.
+# 86 touched them, each in a sweep and none as an input: 68 pytest controls, whose
+# directory collection stats every entry of `tests/` and collects only the named
+# module; `check_readme`'s retired-identifier sweep over the worker's index;
+# `check_no_embedded_js` and `check_probes`, which read every Python file;
+# `validate_schemas`' defect-citation walk, which reads the fixture's YAML; and
+# `check_generated_markdown`, which lists the fixture directory. Three of the pytest
+# runs also unlinked copies of them: pytest's basetemp rotation deleting an earlier
+# session's snapshot fixtures under /tmp, outside the worker. Nothing imported or ran
+# them. With them pruned, all 174 fire, and each of the 50 distinct commands, run
+# unmutated in a worker with them and in one without them, prints the same output, wall
+# times aside, except that `check_no_embedded_js` counts 1,791 Python files read rather
+# than 1,798: the seven pruned modules leave its sweep, as any pruned file leaves
+# `check_readme`'s. Five are red unmutated and red identically: the full suite and
+# `validate_schemas`, which miss the kpress submodule and the archive; the
+# operating-rules append script, which needs its control's marker;
+# `test_change_scoped_selection`; and `exact verification`, which outlasts 120 seconds.
+#
+# With this change's comments and test counted, the snapshot measures 209,509,962
+# bytes, 205,238 under the unchanged cap, against #509's 212,607. That buys back the
+# branch's own bytes, not headroom, so the next branch that adds code to the worker
+# meets the cap again.
 SNAPSHOT_MAX_BYTES = 200 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0

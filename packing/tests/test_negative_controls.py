@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import ast
 import cProfile
 import hashlib
 import inspect
 import json
 import os
+import re
 import shlex
 import shutil
 import subprocess
@@ -71,6 +73,8 @@ RETAINED_RECEIPT_ROOTS = frozenset(
         "witnesses/franciscouzo-2026-10-03",
     )
 )
+#: A string a loader could import, `import_module("devtools.name")` or `(".name", pkg)`.
+DOTTED_NAME = re.compile(r"\.*[A-Za-z_][\w.]*")
 
 
 def index_fixture_source(repository: Path) -> None:
@@ -1355,6 +1359,68 @@ def test_unread_worker_outputs_leave_workers_while_declared_files_return(
     # The annealing record itself stays; only its bulk summary leaves.
     record = ROOT / "campaign/results/annealing/README.md"
     assert (tree / record.relative_to(controls.REPO)).read_bytes() == record.read_bytes()
+    assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
+def test_unread_worker_sources_leave_workers_and_nothing_kept_reaches_them(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The 2026-10-11 selection: source no control reaches, so none of it returns.
+
+    No control mutates an entry or names one, by path or by module, in its command. No
+    checked document links one and the results register lists none, so every file
+    leaves the worker. No Python file the worker keeps, but the harness that lists
+    them, imports a pruned module, names one as a dotted module path, or names the
+    template or fixture only the pruned files read, so no command run in a worker can
+    reach the absence.
+    """
+    tree, copied_targets = control_snapshot
+    sources = controls.UNREAD_WORKER_SOURCES
+    assert sources <= PRUNE
+    spec = safe_load((ROOT / "devtools/controls.yaml").read_text(encoding="utf-8"))
+    for entry in sorted(sources):
+        assert entry.exists(), "the tools and their tests stay in the source checkout"
+        names = (entry.relative_to(ROOT).as_posix(), entry.stem)
+        for control in spec["controls"]:
+            target = (ROOT / control["file"]).resolve()
+            assert not controls.in_pruned_roots(target, frozenset({entry}))
+            assert not any(name in control["run"] for name in names), control["name"]
+        files = [entry] if entry.is_file() else sorted(entry.rglob("*"))
+        files = [path for path in files if path.is_file()]
+        assert files
+        for source in files:
+            relative = source.relative_to(controls.REPO)
+            assert relative not in copied_targets
+            assert not (tree / relative).exists(), relative
+
+    modules = {entry.stem for entry in sources if entry.suffix == ".py"}
+    resources = {entry.stem for entry in sources if entry.suffix != ".py"}
+    mentions = re.compile("|".join(sorted(map(re.escape, modules | resources))))
+    harness = tree / HERE / Path(controls.__file__).resolve().relative_to(ROOT)
+    for directory, children, files in os.walk(tree / HERE):
+        children[:] = [name for name in children if name not in BUILD_CACHES]
+        for name in files:
+            path = Path(directory) / name
+            if path.suffix != ".py" or path.is_symlink() or path == harness:
+                continue
+            text = path.read_text(encoding="utf-8")
+            if not mentions.search(text):
+                continue
+            relative = path.relative_to(tree)
+            assert not any(resource in text for resource in resources), relative
+            for node in ast.walk(ast.parse(text)):
+                if isinstance(node, ast.Import):
+                    imported = [alias.name for alias in node.names]
+                elif isinstance(node, ast.ImportFrom):
+                    base = node.module or ""
+                    imported = [base, *(f"{base}.{alias.name}" for alias in node.names)]
+                elif isinstance(node, ast.Constant) and isinstance(node.value, str):
+                    imported = [node.value] if DOTTED_NAME.fullmatch(node.value) else []
+                else:
+                    continue
+                assert not any(
+                    part in modules for dotted in imported for part in dotted.split(".")
+                ), relative
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
