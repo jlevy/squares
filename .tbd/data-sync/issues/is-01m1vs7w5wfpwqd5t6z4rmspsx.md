@@ -5,13 +5,13 @@ title: "W5: propose reusable testing and CI performance guidance upstream to tbd
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels: []
 dependencies: []
-parent_id: is-01m1vrrktbrd2scnaqfe40eby4
+parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 created_at: 2026-09-06T16:36:19.259Z
-updated_at: 2026-09-06T18:18:04.561Z
+updated_at: 2026-10-06T08:37:08.578Z
 ---
 
 ## Notes

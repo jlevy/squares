@@ -3,13 +3,17 @@ type: is
 id: is-01m0yf2p6czxdw051rv3189mrz
 title: "W3: chunk taxonomy census over the imported n <= 100 record corpus"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 6
+version: 7
 labels: []
 dependencies: []
 created_at: 2026-08-26T07:20:45.004Z
-updated_at: 2026-08-30T10:37:10.163Z
+updated_at: 2026-10-06T08:42:53.102Z
+closed_at: 2026-10-06T08:42:53.101Z
+close_reason: "Done per its own note: BC-024 closed in session-045 with X-008, devtools/census_chunk_taxonomy.py, results/bc-024-chunk-taxonomy.json and tests/test_chunk_taxonomy.py, all on origin/main."
+resolution: null
+duplicate_of: null
 ---
 Descriptive census, not a pass/fail round: for every imported record pose, report the minimal chunk decomposition (angle classes, per-class lattice skeleton, chunk sizes, wall/corner seating, tilted-chunk count j) and tabulate which chunk shapes and arrangements actually recur across n. Output is a taxonomy table plus the non-expressible residue, feeding H-044's criterion and pricing which grammar moves the enumerator needs. Freeform exploratory work belongs in W3 and may not emit a W6 verdict.
 

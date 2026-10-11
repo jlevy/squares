@@ -3,13 +3,17 @@ type: is
 id: is-01m1t3t28mj04vs7dp9fr97x2t
 title: "Explainer PDF: 17 Type3 fonts, 179 KB, from the variable Source Sans 3"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-06T01:02:32.212Z
-updated_at: 2026-09-06T01:02:32.212Z
+updated_at: 2026-10-06T08:41:28.322Z
+closed_at: 2026-10-06T08:41:28.321Z
+close_reason: "Done by think-988s: PR #118 (merged 2026-09-08) embeds page-weight static Source Sans 3 instances (KPress Print Sans) in the PDF. render_n11_lower_bounds_explainer_pdf.py on origin/main treats a SourceSans3 Type3 font as the defect returning (lines ~810-830)."
+resolution: null
+duplicate_of: null
 ---
 Measured 2026-09-06 on the generated explainer PDF. The file carries 17 separate Type3 font objects, all SourceSans3-Roman, totalling 179,531 bytes of CharProcs -- 18% of the whole file, and more than all the real embedded TrueType programs combined (136,182). One copy per page, per weight.
 

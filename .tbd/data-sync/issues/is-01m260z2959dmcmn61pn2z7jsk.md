@@ -3,9 +3,9 @@ type: is
 id: is-01m260z2959dmcmn61pn2z7jsk
 title: "N11 daytime: test one changed core and direction-net threshold packet"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 12
+version: 14
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -20,10 +20,14 @@ dependencies:
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 child_order_hints:
   - is-01m26c1jahzgfckegz7fp9wcq7
-hold: paused
+hold: null
 hold_until: null
 created_at: 2026-09-10T16:03:43.524Z
-updated_at: 2026-09-14T02:28:52.359Z
+updated_at: 2026-10-06T08:40:20.978Z
+closed_at: 2026-10-06T08:40:20.978Z
+close_reason: "Superseded: the frozen BC329 packet was never registered or run (owner hold think-zwlf). BC329's prospective endpoint 3.8267215 is below T-033's proved 3.8269975, so the packet could not move any bound even before T-060; its runner and calibration machinery is retained unexecuted on main via PR #156. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical. Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
+resolution: canceled
+duplicate_of: null
 ---
 Run one 90–120 minute comparison that changes the strict-core/direction-net tradeoff relative to T026. Freeze one next net and one bounded rule for choosing the larger core, then decide one complete proposed threshold packet through both admitted covering routes and its physical dilation transfer. Acceptance is a fully verified certificate and an ordinary exact lower bound strictly above T026. One exact escaped core or exact budget obstruction rejects only the frozen packet. A timeout, reader disagreement, or incomplete final gate remains unresolved. Do not describe two successful prior nets as exhaustion of all refinement. The admitted point obstruction fixes the old B and retained net but does not decide a larger B or a changed threshold packet.
 

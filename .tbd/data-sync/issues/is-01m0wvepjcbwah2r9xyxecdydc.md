@@ -5,13 +5,13 @@ title: Pin sqsearch Rust validation and preserve bounded geometry arithmetic
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0wqx97nb22qwx8v47hrpfqk
 created_at: 2026-08-25T16:18:32.651Z
-updated_at: 2026-08-25T16:29:29.241Z
+updated_at: 2026-10-10T22:59:59.655Z
 closed_at: 2026-08-25T16:29:29.239Z
 close_reason: "Landed in PR #38 as merge commit 6356acc; Rust 1.98.0 is pinned, narrow rounding-preserving lint exception documented, full local gate and both CI platforms passed."
 resolution: null

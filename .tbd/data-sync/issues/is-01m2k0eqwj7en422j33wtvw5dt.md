@@ -3,9 +3,9 @@ type: is
 id: is-01m2k0eqwj7en422j33wtvw5dt
 title: "[epic] PR CI back under OR-14: aggressive speed review, 2026-09-15"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 9
+version: 10
 labels: []
 dependencies: []
 child_order_hints:
@@ -16,7 +16,11 @@ child_order_hints:
   - is-01m2m47462x0k56sjh3t4qzjsp
   - is-01m2m5zjmj7dsycs1x6yxwcwwt
 created_at: 2026-09-15T17:04:56.205Z
-updated_at: 2026-09-16T10:03:21.394Z
+updated_at: 2026-10-06T08:45:48.301Z
+closed_at: 2026-10-06T08:45:48.301Z
+close_reason: "Done: the 2026-09-15 CI speed review's three lanes landed (PR #183 merged 2026-09-16, PRs #185 and #188 merged 2026-09-17); PR #186 closed unmerged with its work in #188. Remaining child think-sqi7 moved to think-m0zb."
+resolution: null
+duplicate_of: null
 ---
 Owner, 2026-09-15: "this looks like it's taking a long time to do PR CI checks can you do an aggressive review to see what can be sped up to make sure that they're as fast as reasonable? We already have done work on this, and we should revisit it. I am concerned if it spiraled again."
 

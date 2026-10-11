@@ -5,8 +5,8 @@ title: Add standardized research-loop logbook synopsis and publish PR
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 7
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - documentation
   - research-loop
@@ -15,7 +15,7 @@ parent_id: is-01m0r3zv2hh2jj64rb8mhqbtre
 child_order_hints:
   - is-01m0y2ysmar7tr0efzanbsmhtg
 created_at: 2026-08-26T03:18:06.655Z
-updated_at: 2026-08-26T04:14:16.297Z
+updated_at: 2026-10-10T22:52:13.638Z
 closed_at: 2026-08-26T04:14:16.295Z
 close_reason: "Published standardized ResearchLoopLogEntry/v1 and run-001 synopsis, separated new round results from prior retained results and novelty/provenance, merged PR #40 and canonical main, recorded/fixed D-337 with regression controls, committed e8d7b08, pushed the branch, opened PR #42 from the logbook synopsis, and confirmed both hosted validation jobs passed. H-023/think-1s0h remains open for exp-045."
 resolution: null

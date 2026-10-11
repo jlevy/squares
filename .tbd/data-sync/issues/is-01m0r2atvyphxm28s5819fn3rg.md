@@ -3,16 +3,21 @@ type: is
 id: is-01m0r2atvyphxm28s5819fn3rg
 title: "Rehearse the recovery path: claim -> ledger -> release -> ledger, against a scratch record"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-process
 dependencies: []
 parent_id: is-01m0rkz14t04yjme92gnfncfv7
 created_at: 2026-08-23T19:42:33.854Z
-updated_at: 2026-08-24T01:00:53.637Z
+updated_at: 2026-10-10T22:49:30.718Z
+closed_at: 2026-10-06T08:33:06.685Z
+close_reason: |
+  Done (bead review 2026-10-06, origin/main eb43ffe9a): D-032 and D-033 fixed; packing/tests/test_campaign_runner_trust_boundary.py on origin/main runs the real claim/execute/release functions against a scratch record tree, including test_run_releases_the_round_and_still_reports_when_a_step_refuses (asserts effort.stopped_by == error) and test_a_released_round_is_committed
+resolution: null
+duplicate_of: null
 ---
 D-032 and D-033 are one lesson: PR #13 merged with `release` and `run` never once executed, and both were broken. `release` is the step that runs when a round dies at 3am, so it is the step least likely to be exercised by hand and worst to have broken.
 

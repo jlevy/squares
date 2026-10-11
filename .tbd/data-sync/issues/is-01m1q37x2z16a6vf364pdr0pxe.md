@@ -3,13 +3,18 @@ type: is
 id: is-01m1q37x2z16a6vf364pdr0pxe
 title: Certify and retain s(19), s(20), s(21) >= 24/5 as T-020
 kind: task
-status: open
+status: closed
 priority: 0
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-04T20:54:53.791Z
-updated_at: 2026-09-04T20:54:53.791Z
+updated_at: 2026-10-06T08:35:17.793Z
+closed_at: 2026-10-06T08:35:17.792Z
+close_reason: |
+  Done (bead review 2026-10-06, origin/main eb43ffe9a): T-020 registered in packing/frontier/results.yaml (n = 19, 20, 21; established 2026-09-04) by 928969f82
+resolution: null
+duplicate_of: null
 ---
 Agenda 017 continuation. Column generation resumed from the n=20 checkpoint reached a restricted optimum of 18.916941 at side 24/5; rationalised at scale 200000 to 2260 atoms of total mass 946131/50000 = 18.922620, frozen, and decided from those bytes by both routes -- exact event-cell sweep accepted in 5378 s at least covered mass 50007/50000, interval branch and bound certified all 361 doubled-net directions in 5,638,343 boxes with none stalled and enclosed the same value with width zero.
 

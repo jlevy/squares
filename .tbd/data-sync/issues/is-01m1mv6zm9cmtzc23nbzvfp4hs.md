@@ -3,9 +3,9 @@ type: is
 id: is-01m1mv6zm9cmtzc23nbzvfp4hs
 title: "Agenda 018: ten-hour continuation -- certificate ladders, the Trump radius, and W9 wave two"
 kind: epic
-status: open
+status: closed
 priority: 0
-version: 17
+version: 18
 spec_path: packing/campaign/agendas/agenda-018-ten-hour-continuation-ladders-theorems-and-wave-two.md
 labels:
   - packing
@@ -28,6 +28,10 @@ child_order_hints:
   - is-01m1mw5z51sj2fv3q53mtk8f62
   - is-01m1n03ns3gpy04660xmpzgzfw
 created_at: 2026-09-03T23:56:06.153Z
-updated_at: 2026-09-04T01:21:41.914Z
+updated_at: 2026-10-06T08:27:44.827Z
+closed_at: 2026-10-06T08:27:44.827Z
+close_reason: "Finished wrapper: Agenda 018 (2026-09-04) was paused and never launched (agenda-018 status paused, every item blocked). Agendas 021/022 and later work superseded it. The N17-SKIP children 4f4d and flk4 were moved to the top level."
+resolution: canceled
+duplicate_of: null
 ---
 Umbrella for Agenda 018, the ten-hour autonomous block that follows the operator's review of Agenda 017. Lane A climbs the n = 12 certificate ladder at a higher prospectively fixed threshold, takes the n = 11 shot (a fractional certificate with total mass below 11 above 2 + 4/sqrt(5)) after its diagnostic, and calibrates the generator against s(13) = 4 before n = 20; Lane B reviews Agenda 017's Theorem 3 audit, generalises the local-rigidity instrument to arbitrary poses and proves an explicit isolation radius at Trump's n = 11 packing, with the n = 40 cone characterisation tentative; Lane C runs H-049 at the s(30) < 6 bar its corrected framing sets and then, tentatively, the generic interval certifier; Lane D runs W9 wave two over the deferred D-044/D-046 units and D-426, D-427 and D-428, spikes Nagamochi's lambda = 1 step, and measures the gate's slowest step. A 120-minute W10 closeout ends the block.

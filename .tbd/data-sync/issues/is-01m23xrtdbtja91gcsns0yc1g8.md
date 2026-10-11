@@ -3,13 +3,17 @@ type: is
 id: is-01m23xrtdbtja91gcsns0yc1g8
 title: Decide whether lane A5's nu_S program becomes a devtool
 kind: task
-status: open
+status: closed
 priority: 3
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-09T20:29:24.265Z
-updated_at: 2026-09-09T20:29:24.265Z
+updated_at: 2026-10-06T08:29:12.201Z
+closed_at: 2026-10-06T08:29:12.200Z
+close_reason: "Superseded: lane A5's nu_S program served n = 11 threshold research (agenda-033), which T-060 retires. The retained receipt stays as the record, as the bead allowed."
+resolution: canceled
+duplicate_of: null
 ---
 The fixed-support maximisation under the atom classes — lane A5's `nu_S` program — is
 retained as a scratch receipt at

@@ -3,9 +3,9 @@ type: is
 id: is-01m1ycfpc3pv67mt54g7857vk6
 title: "Math text face: letters and digits from the reading face in KaTeX"
 kind: epic
-status: open
+status: closed
 priority: 2
-version: 13
+version: 14
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels:
   - kpress
@@ -22,6 +22,10 @@ child_order_hints:
   - is-01m1yex3xxxgrft8mdxgbf2pxw
   - is-01m1yex4abjf79dwc50e4f2nrs
 created_at: 2026-09-07T16:51:07.255Z
-updated_at: 2026-09-07T22:38:56.379Z
+updated_at: 2026-10-06T08:43:32.205Z
+closed_at: 2026-10-06T08:43:32.187Z
+close_reason: "Done: all nine children are closed (kpress math_text_font, metrics, composite faces, explainer integration, compare_math_fonts, cross-browser and CI PDF verification), shipped in squares PR #114 (merged 2026-09-07) and later font PRs #118/#119/#128."
+resolution: null
+duplicate_of: null
 ---
 Consumer-side epic. The feature itself is tracked in kpress's own tbd as epic kpr-sc4f (tasks kpr-g93o, kpr-c4oz, kpr-ai4c, kpr-mot3, all shipped on squares/page-fixes, PR jlevy/kpress#53; Greek sizing kpr-c2tr shipped inside the feature; sans math kpr-7f9z started 2026-09-07 on squares/sans-math under the fonts epic kpr-b4mq), planned in vendor/kpress/docs/math-text-face.plan.md with evidence in vendor/kpress/docs/project/research/research-2026-09-07-math-text-face.md. This epic carries the squares integration: renderer inlining and metrics, the compare_math_fonts devtool, and cross-browser and CI PDF verification (think-0vju open), per docs/project/specs/active/plan-2026-09-07-math-text-face.md. Font consistency across web and PDF is the sibling epic think-phgo.

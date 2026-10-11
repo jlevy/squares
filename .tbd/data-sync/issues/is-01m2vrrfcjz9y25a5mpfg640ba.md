@@ -3,14 +3,18 @@ type: is
 id: is-01m2vrrfcjz9y25a5mpfg640ba
 title: Triage remaining open n<=100 with Nagamochi-only floors
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 labels: []
 dependencies: []
 parent_id: is-01m2vrr7a5nyff2c2d8cp61gjn
 created_at: 2026-09-19T02:43:36.466Z
-updated_at: 2026-09-19T05:19:29.422Z
+updated_at: 2026-10-06T08:39:58.866Z
+closed_at: 2026-10-06T08:39:58.866Z
+close_reason: "Superseded: the Nagamochi-only floors this triaged are gone. T-007 was withdrawn to V0 after Lemma 1 fell (T-085, #305 merged 2026-10-04); the open floors now rest on Karakus's T-083 or on the bulk-imported wand125, Couzo and squarepacker certificates (T-069..T-097)."
+resolution: canceled
+duplicate_of: null
 ---
 n=26-32, 37-45, 50-61, 65-78, 82-100 have verified floors from the Nagamochi formula and no first-party covering. Rank a second-wave queue; do not start expensive probes until the n=12/17/19/20 lane is idle.
 

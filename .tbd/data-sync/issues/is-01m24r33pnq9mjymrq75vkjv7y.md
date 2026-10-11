@@ -3,13 +3,17 @@ type: is
 id: is-01m24r33pnq9mjymrq75vkjv7y
 title: Parametrise the bin count in devtools/owner_footprints.py
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-10T04:09:24.436Z
-updated_at: 2026-09-10T04:09:24.436Z
+updated_at: 2026-10-06T08:28:43.465Z
+closed_at: 2026-10-06T08:28:43.465Z
+close_reason: "Superseded: owner_footprints.py's bin count served n = 11 owner-geometry lanes (agenda-034). That research is retired since T-060 settles s(11), and the scratch receipt stays as the record."
+resolution: canceled
+duplicate_of: null
 ---
 OR-1: build the tool; never leave a measurement in one-off code.
 

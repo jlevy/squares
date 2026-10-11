@@ -3,15 +3,19 @@ type: is
 id: is-01m22hhpf2hr6sk9g4epkc1pxn
 title: Expand owner-case exclusions with economical certificates
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 spec_path: packing/campaign/agendas/agenda-033-overnight-owner-geometry.md
 labels: []
 dependencies: []
 parent_id: is-01m22hh49r1gb5kkwqb1whwmmp
 created_at: 2026-09-09T07:36:33.505Z
-updated_at: 2026-09-09T19:29:29.311Z
+updated_at: 2026-10-06T08:45:04.712Z
+closed_at: 2026-10-06T08:45:04.712Z
+close_reason: "Superseded: owner-case exclusions at 96/25 toward an n11 global exclusion. The lane is posed at q = 96/25 = 3.84, below Kleddamag's verified s(11) > 31/8 (T-037); T-060 excludes every packing there, and SYNOPSIS on main lists the 96/25 hypotheses as useful only as controls or method evidence. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled."
+resolution: canceled
+duplicate_of: null
 ---
 Use shared masks or selected new five/six-dot covers only after wall-aware containment results. Each additional class needs exact full-net validation and scope-preserving transfer. Stop unchanged patterns when exact witnesses refute remaining classes; partial census stays partial.
 

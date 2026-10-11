@@ -1,0 +1,38 @@
+---
+type: is
+id: is-01m3teafvz43m4k0gyjcbrq7yp
+title: "Review the verification and confirmation ladders: the top rung is reproducible formal verification plus expert human review and confirmation"
+kind: task
+status: closed
+priority: 1
+version: 12
+labels: []
+dependencies: []
+created_at: 2026-10-01T00:37:39.747Z
+updated_at: 2026-10-01T08:00:06.645Z
+closed_at: 2026-10-01T08:00:06.643Z
+close_reason: "Landed on main in f9a3409f0 (jlevy/squares#262, merged 2026-10-01 07:58 UTC with jlevy/squares#255): epistemics.md redefines the V and C ladders, check_results derives rungs 3 to 5 from review records, and all 61 results are re-rated (53 differ from the old ratings, all to V3/C3; V5, V4, C5 and C4 empty; T-060 V3/C3/S5). The owner's oversight records, the human review of the Lean formalization and the provisional decisions continue on think-5pgq."
+resolution: null
+duplicate_of: null
+---
+Owner, 2026-09-30: 'We need to review the confirmation and verification ladder rungs. The absolute highest confirmation level should be reproducible formal verification plus expert human review and confirmation of the proof and the formal verification. This should be C5 or perhaps C6. V5 would be formal verification plus human review that hasn't been externally confirmed from this project or other additional sources.' Deliver a proposal, not a change: the current V0-V5 and C0-C5 predicates from epistemics.md and what check_results derives; the owner's proposed top rungs made precise (what counts as formal verification, reproducible, expert human review, external confirmation; where AI review sits); two or three candidate ladders (redefine within six rungs, or add C6); the re-derived rungs of all registered results under each, with every change listed (T-060 is C5 today on a same-project AI-assisted review; T-006 is V5/C3 on jlevy/squares#249 by a Lean kernel check; T-037; T-051); the migration (epistemics.md, check_results, results.yaml, RESULTS/STATUS, the site's rung cards, README/SYNOPSIS copies of the rubric); and the decisions the owner must make. Related: think-7khl (does a recorded execution satisfy V4's replay predicate), think-yf6t (does a same-project review of another author's certificate earn C5). Workflow W4 process review. No edit to epistemics.md, check_results or any rating until the owner approves.
+
+## Notes
+
+Owner, 2026-09-30, added: delegate a sub-agent on this; it can be a stacked PR proposing the epistemics changes and enforcing the levels on the data, including n = 11 optimality. The n = 11 result should not be at the highest V or C, since neither is formal, though both are mechanized and confirmed: second-highest rung for V and C. Decide levels consistent with what has been done and with what is wanted in future; clarify what C4, C5 and a possible C6 mean. Today: V5 proof-assistant checked is the top V and T-060 is V4, already second-highest; C5 review-ready is the top C and T-060 is C5, so C must change. Plan: proposal document on claude/epistemics-ladder-review, then a draft implementation on claude/epistemics-ladder stacked on jlevy/squares#255.
+
+Owner's preferred design, 2026-09-30: 'Ideally V5 and C5 would be reserved for formal verification, but not as a blind checklist; it must also have gone through human expert review on the formalization. V4 and C4 would be mechanized verification or highly formal verification of some form, possibly not fully human reviewed, but should have extensive AI review at a minimum, from multiple adversarial attempts with AI and best models confirming it.' So no C6: the tops stay at 5 and are redefined; T-060 lands at V4/C4. Register on main at the time: V5 0, V4 50, C5 8 (T-014, T-018, T-022, T-025, T-026, T-034, T-035, T-060), C4 14; jlevy/squares#249 would add T-006 at V5/C3 by a Lean kernel check.
+
+Owner principle, 2026-09-30: 'In no case do we blindly trust any formal reasoning system or any agent. For V4 and C4, some human oversight of the mechanization and AI checking is needed with credible documentation and human review.' So rung 4 needs mechanized or highly formal verification, extensive adversarial AI review, and a retained, auditable human-oversight record; rung 5 needs formal verification and human expert review of the formalization. Results without a recorded human oversight drop below 4 until one exists; the proposal lists each.
+
+Owner on V versus C, 2026-09-30: 'The difference between V and C is that one is basically self certification or historic certification where we haven't readily replayed the verification, while C is confirmed, verifiable by us and other third parties.' So V is the verification a result carries from its own source (self or historic certification, no replay here required); C is how far that verification has been independently confirmed and is verifiable, by this project and by third parties. The ladders are parallel: same rung meanings, different earner.
+
+Owner expectation, 2026-09-30: 'Probably nothing here then should be at C5. Maybe nothing at V5 too depending on level of the records.' A prediction to check against the records, not a figure to force; any result that would keep a 5 is flagged with its evidence.
+
+Owner, 2026-09-30: as part of this, update epistemics.md and the website's documentation of the ladder rungs: the site's epistemics page, the Verification at a Glance rung cards, the rung chips and legends on every table, and the design document.
+
+Owner decision on C5, 2026-09-30: 'Let's go with replay on our project plus open source review and at least two human experts.' and 'The point is that it needs to be replayed here and reviewable and replayable by any other experts to reach that level and get expert human review at least a couple times.' So C5 = the formal verification replayed here from the repository; everything needed is open so any other expert can review and replay it; at least two human expert reviews with retained records. Proposal committed as 12cd9d396 on claude/epistemics-ladder-review (docs/project/specs/active/plan-2026-09-30-epistemics-ladder-review.md): under the owner's design, derived strictly, 51 of 60 results move down one rung (all 50 V4 to V3; all 14 C4 and 8 C5 to C3), V5 and C5 empty, because no result has a retained human-oversight record (154 review documents inventoried, none human-signed). T-060 derives V3/C3 until the owner's oversight record and one more adversarial review exist, then V4/C4. Phase 2 (stacked implementation on claude/epistemics-ladder) is blocked: the auto-mode permission check refused the helper's edits to epistemics.md and the schemas as modifying shared resources; waiting on the owner's approval.
+
+Owner decisions, 2026-09-30: (1) 'Let's show it at V3/C3 then for now as I've not fully reviewed the proofs or the explainer' — T-060 is shown at V3/C3 until the owner's oversight record exists. (2) 'You are authorized to make all necessary edits, keep stacking and keep the PRs clean' — the stacked implementation on claude/epistemics-ladder proceeds. (3) Stabilize as quickly as possible; everything mergeable; the full PR stack.
+
+2026-09-30/10-01: implemented on claude/epistemics-ladder (pushed at 1fecf0d19), draft PR jlevy/squares#262 stacked on jlevy/squares#255. epistemics.md, check_results, schemas, results.yaml re-derived: 51 of 60 lowered one rung (all 50 V4 to V3; 14 C4 and 8 C5 to C3); V5 and C5 empty; T-060 V3/C3/S5 with the owner's note. Remaining: merge the website branch once it carries main 306ae9fab and re-derive T-061, T-006 (V5 to V3, AI-written formalization review), T-056, T-057; rung wording in README, TUTORIAL and the homepage template; the .site-level-count style rule; one full push-tier run.

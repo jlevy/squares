@@ -5,13 +5,13 @@ title: "Make the color transition settings sensible: desaturate over 0.15 s, res
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
-parent_id: is-01m32t2yc3xenfb97kxn844rc7
+parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-22T17:09:23.613Z
-updated_at: 2026-09-22T17:36:39.623Z
+updated_at: 2026-10-06T08:31:52.255Z
 ---
 The owner (2026-09-22): the four color settings (drain out, drain in, hue out, hue in; COLOR_FADE in packages/workbench/src/application.js, the colors group in assets/template.html) do not make sense to use. Whatever hue in is set to, the color coming back looks fast. Wanted: desaturation over about 0.15 s and resaturation over about 0.4 s, and settings a person can reason about. Likely cause, to be measured: at the default drain level 0 the hue turns while a square is grey, so the two hue settings change nothing visible, and what reads as the hue coming in is the drain in over the last 0.3 s of the step. Review the model with check_transitions --trace at level 0 and above, redesign the controls, and hold the result with the transition contract.
 

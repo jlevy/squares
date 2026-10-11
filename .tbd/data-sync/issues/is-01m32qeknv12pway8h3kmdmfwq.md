@@ -3,14 +3,18 @@ type: is
 id: is-01m32qeknv12pway8h3kmdmfwq
 title: "Main's merge cadence outran its validation wall: six merges, no completed run (D-466 live)"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m32fgxn7yh0skf12a0zxnres
 created_at: 2026-09-21T19:35:25.627Z
-updated_at: 2026-09-21T19:35:25.627Z
+updated_at: 2026-10-06T08:45:13.431Z
+closed_at: 2026-10-06T08:45:13.431Z
+close_reason: "Done: .github/workflows/packing-validation.yml on origin/main sets cancel-in-progress only for pull_request events, with a comment that a cancelled main or scheduled deep run is the only deep coverage that tree gets, so merges to main no longer cancel each other's validation."
+resolution: null
+duplicate_of: null
 ---
 Observed 2026-09-21 19:35Z. This is D-466's documented pattern happening on main, not a hypothetical.
 

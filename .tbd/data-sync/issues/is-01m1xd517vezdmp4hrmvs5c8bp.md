@@ -3,9 +3,9 @@ type: is
 id: is-01m1xd517vezdmp4hrmvs5c8bp
 title: "[epic] Extend the known-best atlas to n = 324 and draw the poster composite"
 kind: epic
-status: in_progress
+status: closed
 priority: 1
-version: 18
+version: 19
 spec_path: docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
 labels: []
 dependencies: []
@@ -26,7 +26,12 @@ child_order_hints:
   - is-01m1xdd33x4y6r42j2scgakvp8
   - is-01m20w03pgz6s4wwe9r6yajjn8
 created_at: 2026-09-07T07:43:32.090Z
-updated_at: 2026-09-08T16:00:57.755Z
+updated_at: 2026-10-06T08:35:56.080Z
+closed_at: 2026-10-06T08:35:56.080Z
+close_reason: |
+  Done (bead review 2026-10-06, origin/main eb43ffe9a): Atlas and register extended to n = 1..324 and the poster drawn: PR #111 MERGED 2026-09-08, packing/atlas/known-best/known-best-1-324.svg/.png/.pdf on origin/main. Open child think-vb7g (owner's option) moved to think-wfz1 before closing
+resolution: null
+duplicate_of: null
 ---
 Widen the frontier register and known-best atlas from n = 1..100 to n = 1..324 in two chunks (101..200, 201..324), under the n <= 100 retention precedent for Kingbird-derived numerical facts, then draw an 18x18 poster composite known-best-1-324 beside the untouched 1-100 figure. Survey sources beyond 324 first; build 325..400 only if an authority with a completeness claim exists. Calibration-only annotation layers stay pinned to n = 1..100 so the new range remains an unseen corpus (H-044 successor, H-035 regime). Owner-directed 2026-09-07; supersedes the 2026-08-24 note on think-ezcx. Session record: session-099 (renumbered from session-093 on main).
 

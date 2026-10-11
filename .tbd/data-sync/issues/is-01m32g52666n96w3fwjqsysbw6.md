@@ -3,14 +3,18 @@ type: is
 id: is-01m32g52666n96w3fwjqsysbw6
 title: "Encode a wall-clock ceiling on routine gates: no unselected delay beyond a few minutes"
 kind: task
-status: open
+status: closed
 priority: 0
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m32fgxn7yh0skf12a0zxnres
 created_at: 2026-09-21T17:27:52.770Z
-updated_at: 2026-09-21T17:27:52.770Z
+updated_at: 2026-10-06T08:45:10.348Z
+closed_at: 2026-10-06T08:45:10.348Z
+close_reason: "Done: OR-17 'Every routine gate has a wall ceiling, and anything above it is selected on purpose' is in operating-rules.md (and AGENTS.md) on origin/main via PR #212 (merged 2026-09-21), with ci_gates walls in packing/devtools/gate-budgets.yaml and devtools.check_pr_wall."
+resolution: null
+duplicate_of: null
 ---
 Owner directive, 2026-09-21: 'We should never have routine delays of more than a few minutes that are not consciously selected as needed checks via a systematic process. Having routine 45-minute or even 10-minute runs is not acceptable. It delays all serious progress. That should be encoded in our systems.'
 

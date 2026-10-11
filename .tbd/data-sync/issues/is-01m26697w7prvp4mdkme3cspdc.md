@@ -3,9 +3,9 @@ type: is
 id: is-01m26697w7prvp4mdkme3cspdc
 title: Admit weighted five-site threshold atoms exactly
 kind: task
-status: open
+status: closed
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -22,7 +22,11 @@ child_order_hints:
   - is-01m2bmgbj85wn7meq5afgrwmej
   - is-01m2bmgc6v2dx391qsg393hw2m
 created_at: 2026-09-10T17:36:39.814Z
-updated_at: 2026-09-12T20:44:03.944Z
+updated_at: 2026-10-06T08:38:28.964Z
+closed_at: 2026-10-06T08:38:28.947Z
+close_reason: "Superseded by T-060: s(11) equals Trump's side, registered 2026-09-29 at V3/C3 and on main since PR #246 (merged 2026-09-30). This n = 11 lower-bound certificate work has no target left; the owner's 2026-09-14 strategy reset had already paused it, and the post-optimality plan (plan-2026-10-01) uses n = 11 only as a control. Stages 1-2 landed in PR #157 (merged 2026-09-14); stages 3-4 (think-8c9e, think-kj5u) are closed with it."
+resolution: canceled
+duplicate_of: null
 ---
 Run the bounded W7 admission before any BC327 solve. Add explicit positive-integer multiplicities, weighted D4 keys, exact token budgets, strict versioned loading, independent source-charge replay, and agreeing direct/event/interval coverage controls. Materialize a fresh common row and point manifest and a maintained paired runner. Reject malformed integers, repeated-coordinate aliases, understated budgets, lossy old-verifier reads, incomplete coverage, and partial/deadline promotion. No scientific target runs until all admission stages pass.
 

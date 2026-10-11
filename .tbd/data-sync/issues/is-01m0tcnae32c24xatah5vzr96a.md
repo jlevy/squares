@@ -5,8 +5,8 @@ title: Reconcile PR20 campaign status and evidence boundaries
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - review
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tbtgpb92e81ndvw4xm9be6
 created_at: 2026-08-24T17:21:32.098Z
-updated_at: 2026-08-24T17:36:30.252Z
+updated_at: 2026-10-10T22:49:40.395Z
 closed_at: 2026-08-24T17:36:30.251Z
 close_reason: "D-175 fixed: PR20 integration preserves exp-024, agenda-001, 24 rounds, D-171 closure, and the narrow BasinEvent/v3 admissibility boundary; normal gate passed."
 resolution: null

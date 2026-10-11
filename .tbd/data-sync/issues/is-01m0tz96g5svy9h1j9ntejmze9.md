@@ -5,15 +5,15 @@ title: Audit all frontier cases under a strict source-and-assurance contract
 kind: task
 status: closed
 priority: 1
-version: 9
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 11
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m0tyqhc5tesckqkhvs406tjj
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-24T22:46:57.796Z
-updated_at: 2026-08-25T07:24:21.460Z
+updated_at: 2026-10-10T22:59:50.542Z
 closed_at: 2026-08-25T07:24:21.460Z
 close_reason: The generated frontier status, 100-case formal/reported lanes, named-source coverage through the declared horizon, beyond-horizon inventory, UnitSquare adjudication, and strict cross-record validation are implemented and pass the full gate.
 resolution: null

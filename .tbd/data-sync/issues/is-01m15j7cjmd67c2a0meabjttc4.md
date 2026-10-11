@@ -5,11 +5,11 @@ title: Wall-clock assertions make the run-timeout test flake under load
 kind: bug
 status: open
 priority: 3
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-08-29T01:30:25.739Z
-updated_at: 2026-08-29T01:30:25.739Z
+updated_at: 2026-10-06T08:28:24.056Z
 ---
 `tests/test_validation_cli.py::test_run_timeout_terminates_child_and_reports_captured_output` asserts `1 <= elapsed < 3` around a 0.25s timeout, and reads a pid file the child writes.
 
@@ -18,3 +18,7 @@ On 2026-08-28, with the machine at load average 26-42, it failed with FileNotFou
 This is pre-existing and unrelated to the repository reorg -- the test file is byte-identical across that move, and the code it exercises (subprocess timeout handling) was not touched. Recording it because a bounded wall-clock assertion will flake the same way on a busy CI runner, where it reads as a real failure and teaches people to re-run rather than look.
 
 Worth either widening the bound, retrying on the pid-file read, or asserting on ordering rather than elapsed time.
+
+## Notes
+
+2026-10-06 (bead review): think-hrdf, the same test's pid-file race under load, was closed as a duplicate of this bead. Still unfixed on origin/main: packing/tests/test_validation_cli.py asserts 1 <= elapsed < 3 and reads child.pid without waiting for it.

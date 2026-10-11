@@ -3,9 +3,9 @@ type: is
 id: is-01m2h2zv3xg1w4gdy1svjsv1tx
 title: "Consolidate the workbench stack: #155 into #160 into #171"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 13
+version: 14
 labels: []
 dependencies: []
 child_order_hints:
@@ -17,7 +17,11 @@ child_order_hints:
   - is-01m2hf4b7raa0yecm3dcepmgb7
   - is-01m2k77cev2mj85dkb88nxedp8
 created_at: 2026-09-14T23:10:44.859Z
-updated_at: 2026-09-15T19:03:15.162Z
+updated_at: 2026-10-06T08:28:07.770Z
+closed_at: 2026-10-06T08:28:07.770Z
+close_reason: "Done: the workbench stack landed. PRs 125, 155, 160 and 171 merged on 2026-09-15 (0ac0e063c, 031de58dd, 11783761a, 21a681023). The open child a11q was moved to the top level."
+resolution: null
+duplicate_of: null
 ---
 Owner, 2026-09-14: "Can you review and consolidate if we have duplicate work on other branches? Check https://github.com/jlevy/squares/pull/171" and "Let's review carefully and see what the best strategy here is to merge everything together."
 

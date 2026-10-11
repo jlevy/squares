@@ -3,9 +3,9 @@ type: is
 id: is-01m2appdgg1p32xwgxptcqqb2x
 title: Measure the full-shape fixed-core calibration profile
 kind: task
-status: open
+status: closed
 priority: 1
-version: 7
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -17,10 +17,14 @@ parent_id: is-01m2aj2ewckram8ww4458w74hr
 child_order_hints:
   - is-01m2b883ztxn7qazs98bndea6b
   - is-01m2b884n0ms50xp93q6aaps1g
-hold: paused
+hold: null
 hold_until: null
 created_at: 2026-09-12T11:40:26.511Z
-updated_at: 2026-09-14T02:28:52.447Z
+updated_at: 2026-10-06T08:39:59.818Z
+closed_at: 2026-10-06T08:39:59.818Z
+close_reason: "Superseded: no profile run is needed for a packet that cannot move a bound. BC329's prospective endpoint 3.8267215 is below T-033's proved 3.8269975, so the packet could not move any bound even before T-060; its runner and calibration machinery is retained unexecuted on main via PR #156. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical. Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
+resolution: canceled
+duplicate_of: null
 ---
 Run at least three fresh full-profile positive controls on the intended host after the calibration command is admitted. Each run must execute 2,881 raw, 2,881 normalized-exact, 5,761 reflected-interval, and 2,881 dilation direction records and pass independent readback. Retain per-phase wall clocks; requested and effective workers by route; scoped CPU observations; sampled process-group sum-of-RSS peak with sample count, max gap, observer errors and limitations; artifact inventory counts, bytes and digests; deadline relationships and headroom; process-group exit/reaping evidence; source/runtime manifests. Report median and range. Do not infer BC329 compute time from this deliberately easy fixture or run the scientific target.
 

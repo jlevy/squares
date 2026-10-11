@@ -1,0 +1,11 @@
+entity_id: is-01m4kyf8n8b0c0ky560hga76tk
+timestamp: 2026-10-11T02:08:32.028Z
+field: parent_id
+lost_value: '"is-01m4ewpe4eqqjvrq6henxdzkh9"'
+winner_source: remote
+loser_source: local
+context:
+  local_version: 2
+  remote_version: 3
+  local_updated_at: 2026-10-11T01:49:52.214Z
+  remote_updated_at: 2026-10-11T01:59:46.135Z

@@ -3,9 +3,9 @@ type: is
 id: is-01m1r4229zbmgsfhw541ya0wjd
 title: "One result, four documents: settle the set (card, claim, proof note, page)"
 kind: epic
-status: open
+status: closed
 priority: 2
-version: 7
+version: 8
 labels: []
 dependencies: []
 parent_id: is-01m1qgrj2q8kmrbqrgvkaksn87
@@ -16,7 +16,11 @@ child_order_hints:
   - is-01m1r4a7ey2d5g3c6z8qws07kp
   - is-01m1r4qj9k28kw8mpdx50q520y
 created_at: 2026-09-05T06:28:25.535Z
-updated_at: 2026-09-05T07:05:36.539Z
+updated_at: 2026-10-06T08:34:59.000Z
+closed_at: 2026-10-06T08:34:59.000Z
+close_reason: "Done on PR 79 (merged 2026-09-05; 2fa1c39a, dad5a019, 80c74f18) per its own note: card generated, claim documents carry the finite form, t-018-proof.md superseded, kinds named in conventions.md. The one open child, think-dfoc (an owner decision), moved to the top level."
+resolution: null
+duplicate_of: null
 ---
 T-018 is described by t-018-proof-card.md (hand-written, one page), t-018-proof.md (hand-written one-minute proof for 381/100 with the finite-form lemma and the project's decision routes), the two generated verifiable-claim documents (theorem, proof, verifier and certificate embedded, one per bound), and the explainer page. Owner's direction: the minimal proof card stays; the 280-character form goes; decide whether the proof note is subsumed by the claim document or the reverse. Recommendation recorded in the child beads.
 

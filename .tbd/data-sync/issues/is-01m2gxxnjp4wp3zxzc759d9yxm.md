@@ -3,15 +3,19 @@ type: is
 id: is-01m2gxxnjp4wp3zxzc759d9yxm
 title: Display and export paths still show a side for unchecked arrangements
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-14T21:42:10.769Z
-updated_at: 2026-09-15T03:33:22.115Z
+updated_at: 2026-10-06T08:46:58.930Z
+closed_at: 2026-10-06T08:46:58.930Z
+close_reason: "Done: every listed path was fixed on PR #160 (merged 2026-09-15) and the fix commits e90187c8 (tools, D61), 6e0e7ffc (benchmark exports, D42) and c0d9db2b (page and Pack panel, D11) are all ancestors of origin/main eb43ffe9a."
+resolution: null
+duplicate_of: null
 ---
 The owner asked that no code still reports a run's arrangement without checking that it is a packing. The benchmark's ranking paths are fixed on PR #160, with tests (`test_sweep_cannot_rank_an_invalid_high_score`, `test_nonfinite_ranked_values_are_refused`). The 2026-09-14 audit found display and export paths that still show a side or excess for an unchecked state, on both BASE and #160:
 

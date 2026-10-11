@@ -3,15 +3,19 @@ type: is
 id: is-01m2gxxsm5wf85jh9zmrwdqbmj
 title: Restore checks PR 160 weakened or dropped, and its stale harness references
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-14T21:42:14.902Z
-updated_at: 2026-09-15T02:59:20.688Z
+updated_at: 2026-10-06T08:47:02.130Z
+closed_at: 2026-10-06T08:47:02.130Z
+close_reason: "Done: the items were restored on PR #160 (merged 2026-09-15); fix commits c0aba3b9, a093ec7a, 269fefcc, 9baad048, a3d6813f, 43e6a46e, 03c16a32 and fbc74c0e are ancestors of origin/main, and the annealing plan no longer names packing_strategy.py. The one remaining item, browser checkers not run automatically, is owned by think-kpvc (open)."
+resolution: null
+duplicate_of: null
 ---
 Checks weakened or dropped by PR #160's consolidation (2026-09-14 audit; the probe items were read by a helper and not re-verified):
 

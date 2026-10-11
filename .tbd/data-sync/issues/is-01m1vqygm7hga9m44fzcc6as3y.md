@@ -3,14 +3,18 @@ type: is
 id: is-01m1vqygm7hga9m44fzcc6as3y
 title: Test a refined-containment core shrink beyond T-022
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 labels: []
 dependencies: []
 parent_id: is-01m1v5zkaps4sed6mjbmf2fxbm
 created_at: 2026-09-06T16:13:43.942Z
-updated_at: 2026-09-06T16:46:10.607Z
+updated_at: 2026-10-06T08:23:29.517Z
+closed_at: 2026-10-06T08:23:29.517Z
+close_reason: "Superseded: the H-092 core-shrink test past T-022 came back negative, never integrated, and was then overtaken by T-024 to T-033 and T-060."
+resolution: canceled
+duplicate_of: null
 ---
 Prospectively register fresh H-092/exp-112 after the reviewed ordinary-window obstruction. Fixed candidate b=997699/1000000, q=400003/400000; target qL=152401143/40000000=3.810028575. Exact acceptance: minimum core mass m(b)>M/11=434547/440000, verified normalization, and the existing refined-containment theorem applied with strict squared slack. Preserve a reusable normalized-core instrument, original source hash and known e97 witness; no ordinary-containment bypass or mislabeled standard certificate at enlarged side. At most one source/core replay pair after committed preregistration and controls. Positive result requires source-distinct mathematical and retention review; negative retains exact witness and bounds the remaining refined interval. No broader sweep.
 

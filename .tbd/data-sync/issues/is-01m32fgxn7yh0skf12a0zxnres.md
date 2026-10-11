@@ -3,9 +3,9 @@ type: is
 id: is-01m32fgxn7yh0skf12a0zxnres
 title: "Efficiency block (W5): the deep gate costs 45 minutes of wall and is 1.38x its own declared price"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 6
+version: 7
 labels: []
 dependencies: []
 child_order_hints:
@@ -15,7 +15,11 @@ child_order_hints:
   - is-01m32nbaxqjae9kzmhzaxrxgm5
   - is-01m32qeknv12pway8h3kmdmfwq
 created_at: 2026-09-21T17:16:52.770Z
-updated_at: 2026-09-21T19:35:25.627Z
+updated_at: 2026-10-06T08:45:28.798Z
+closed_at: 2026-10-06T08:45:28.798Z
+close_reason: "Finished block wrapper: the overdue W5 efficiency block ran (PR #219 'Low-n review, the overdue efficiency block...', merged 2026-09-22; OR-17 via PR #212). Children: haam, 5dpo, otws, vq1s done; think-xd7c (records tier still has measured_seconds: null) moved to think-r1yl."
+resolution: null
+duplicate_of: null
 ---
 OR-12 opens an efficiency block by measuring the gate. Measured 2026-09-21 on two complete deep-gate runs of PR 208, both at the same tree.
 

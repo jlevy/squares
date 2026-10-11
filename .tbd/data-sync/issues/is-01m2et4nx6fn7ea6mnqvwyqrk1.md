@@ -3,16 +3,20 @@ type: is
 id: is-01m2et4nx6fn7ea6mnqvwyqrk1
 title: "Speed up simple transitions: axis-aligned grid fills play at double speed"
 kind: feature
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
 dependencies: []
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-14T01:57:37.310Z
-updated_at: 2026-09-15T04:27:51.761Z
+updated_at: 2026-10-06T08:30:46.830Z
+closed_at: 2026-10-06T08:30:46.830Z
+close_reason: "Done: 853e74c6c 'Play simple grid-fill transitions at double speed' landed via PR #171 (merged 2026-09-15); since revised by the owner to 3x (12df900b1) and a dial (a6995399f) on main."
+resolution: null
+duplicate_of: null
 ---
 Owner request 2026-09-13. A checkbox, checked by default, labelled 'speed up simple transitions'. A step is simple when every square in both its source and target records is axis-aligned and the container side is unchanged: only the last row of an n x n grid is being filled, so the phases carry nothing to watch. Those steps play every phase at double speed; the step that adds square k^2+1 and starts a new size plays at normal speed.
 Census of the built corpus (n 1..324): the geometric rule selects 159 steps, all of kind prefix, all inside the owner's k^2-k -> k^2 range. The range also contains 110, 132, 156, 182, 210, 240, 241, 272, 273, 306, 307, whose k^2-k (or k^2-k+1) best packing is tilted; those involve real motion and stay at normal speed.

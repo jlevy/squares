@@ -5,14 +5,14 @@ title: Narrow the experiment roll-up's obsolete no-record blanket claim
 kind: bug
 status: closed
 priority: 2
-version: 2
-spec_path: explorations/packing/SYNOPSIS.md
+version: 3
+spec_path: SYNOPSIS.md
 labels:
   - packing
   - focus-process
 dependencies: []
 created_at: 2026-08-24T08:01:53.308Z
-updated_at: 2026-08-24T08:02:51.959Z
+updated_at: 2026-10-10T23:02:30.017Z
 closed_at: 2026-08-24T08:02:51.958Z
 close_reason: "Narrowed the obsolete blanket rule to the actual evidence boundary: exploratory rounds cannot claim a new record, while exp-012 may reconstruct a published record witness without certifying exactness or optimality. D-135 records the contradiction; synopsis/schema/generated-log checks pass."
 resolution: null

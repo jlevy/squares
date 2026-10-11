@@ -3,14 +3,18 @@ type: is
 id: is-01m28p7j0m5q03s1ae6jc0d8wb
 title: "Phase 6B: the workbench's code comes under the floors"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T16:53:50.739Z
-updated_at: 2026-09-11T21:09:08.038Z
+updated_at: 2026-10-06T08:43:42.530Z
+closed_at: 2026-10-06T08:43:42.530Z
+close_reason: "Done: packing/pyproject.toml on origin/main includes atlas/known-best/video/spikes and ../packages/workbench in BasedPyright and excludes neither from Ruff (print waived only). The page's JavaScript is under Biome, ESLint and tsc in the browser floor (PRs #175-#181, merged 2026-09-16)."
+resolution: null
+duplicate_of: null
 ---
 build_candidate.py, check_workbench.py, check_revision6.py, check_revision7.py, test_candidate.py and the measurement tools are outside ruff and BasedPyright; the page's five thousand lines of JavaScript have no checker at all.
 

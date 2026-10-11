@@ -3,15 +3,19 @@ type: is
 id: is-01m29fmp137m9trd5gbc1x1ryg
 title: The stage collapses as the window narrows, because the controls take the height first
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-12T00:17:55.222Z
-updated_at: 2026-09-12T00:17:55.222Z
+updated_at: 2026-10-06T08:30:58.890Z
+closed_at: 2026-10-06T08:30:58.890Z
+close_reason: "Done: c294d68df 'the controls can no longer starve the stage' (2026-09-11) on origin/main: controls capped at 0.58 of the viewport and a ResizeObserver on the panel."
+resolution: null
+duplicate_of: null
 ---
 Reported as 'the size of the upper diagram and the bottom diagram is not stable when I reload, or at different zoom levels'. Measured, and it is worse than unstable.
 

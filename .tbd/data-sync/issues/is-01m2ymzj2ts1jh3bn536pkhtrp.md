@@ -3,9 +3,9 @@ type: is
 id: is-01m2ymzj2ts1jh3bn536pkhtrp
 title: "PR 199: port computational boundary repairs and pass the full checkpoint"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 labels:
   - correctness
 dependencies:
@@ -13,6 +13,10 @@ dependencies:
     target: is-01m2ymzy4tz2n47g8ttd8qspv0
 parent_id: is-01m2ymyd4zef0ckcx8gvq3p5dx
 created_at: 2026-09-20T05:35:17.593Z
-updated_at: 2026-09-20T06:38:38.618Z
+updated_at: 2026-10-06T08:40:25.184Z
+closed_at: 2026-10-06T08:40:25.184Z
+close_reason: "Done: PR #199 merged 2026-09-20T07:53Z; the 199-202 stack landed on main as 061e9ffbc, an ancestor of origin/main eb43ffe9a."
+resolution: null
+duplicate_of: null
 ---
 Start from current PR199 and the preserved reviewed head c877006b. Port the earliest-layer corrections from PR202: 181 steps imply 182 half-tangents and 363 doubled directions; preserve solver-status diagnostics and allow only explicit infeasible status to mean solver infeasibility; validate raw marginal shape/finiteness before clipping; reject unsupported integral-piercing angle limits and column multiplicities. Include the initial point-LP boundary and regression controls for failures, malformed vectors and both infinity signs. Reconcile T027-era counts at this layer without importing future T028–T030 results. Preserve certificate payloads and accepted claims. Done when the complete incremental diff is independently reviewed, the retained T027 decision remains valid, current head/main identity is recorded, and matching fast plus substantive deferred checkpoint receipts cover the full validation set at that revision. Push fixes in the owning branch, preserve unrelated commits, and hand its new head to the PR200 bead. Do not merge. Owner publication requirement: the README and survey must explicitly cover T-027 at 4.67 at this layer, including current surrounding prose and the matching SVG/PDF/PNG family. Follow the New Result Publication runbook added by think-kq00; do not import later rungs.

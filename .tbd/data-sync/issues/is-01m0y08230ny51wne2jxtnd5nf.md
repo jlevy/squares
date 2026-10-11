@@ -3,10 +3,10 @@ type: is
 id: is-01m0y08230ny51wne2jxtnd5nf
 title: Profile and remove repeated exact row-jet construction
 kind: task
-status: open
+status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 labels:
   - packing
   - focus-efficiency
@@ -14,7 +14,12 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 created_at: 2026-08-26T03:01:32.382Z
-updated_at: 2026-08-30T10:36:50.314Z
+updated_at: 2026-10-10T22:56:13.948Z
+closed_at: 2026-10-06T08:33:54.833Z
+close_reason: |
+  Done (bead review 2026-10-06, origin/main eb43ffe9a): BC-038 complete in agenda-004: rejected on measured arithmetic (17 unavoidable builds, 1.54x ceiling vs the 5x exit); devtools/price_row_jet_sharing.py and results/bc-038-row-jet-sharing.json on origin/main; D-384 fixed
+resolution: null
+duplicate_of: null
 ---
 Profile the 103–181-second exact row-jet test group and remove repeated deterministic symbolic construction at the narrowest sound boundary. Acceptance: cold and repeated profiles identify the hot constructors; exact rows, gradients, Hessians, stresses, scale records, field and symmetry failures, positive controls, and relevant mutation failures are identical; every semantic input participates in cache or fixture invalidation; a no-reuse or cold path remains testable; repeated-edit median improves by at least 5x on comparable inputs.
 

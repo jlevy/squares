@@ -5,8 +5,8 @@ title: "Efficiency (Infrastructure): trustworthy experimental throughput"
 kind: epic
 status: in_progress
 priority: 1
-version: 32
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 48
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -39,8 +39,22 @@ child_order_hints:
   - is-01m0y6wad9gxebve4cs7sz3jqy
   - is-01m108eembwpb78c4h26kb7b43
   - is-01m2ksd6tqpr55mtg89rvzd1jf
+  - is-01m2evbgakwhyytm7h5m8y0mst
+  - is-01m2etzktsakvvpah673qa5nes
+  - is-01m32nbaxqjae9kzmhzaxrxgm5
+  - is-01m2phtqcr35drpbd01xrh0g8q
+  - is-01m2phtqshxcx71hnw8j0djm2a
+  - is-01m35v88eptcjr87f1e43a84jj
+  - is-01m35v87x2tvhbr65qxkz2n81g
+  - is-01m2psbsfbsn9s7tm0nm3eggab
+  - is-01m1vs7w5wfpwqd5t6z4rmspsx
+  - is-01m35v87c8b5sdt54sst3hdqt3
+  - is-01m1w2ae90hg0fbnanrtehvt8r
+  - is-01m1w0r4wr8dbry9hazjg0y4nk
+  - is-01m1w1x2hxn7was5jgcheqeyh9
+  - is-01m1x85bf7x32ewcd07348j8dq
 created_at: 2026-08-23T21:16:40.335Z
-updated_at: 2026-09-16T00:21:00.373Z
+updated_at: 2026-10-10T22:54:34.714Z
 ---
 Owns stable executors, profiling, batching, parallelism, caching, reproducible environments, observability, and measured agent-loop latency. This lane accelerates already specified work without weakening correctness or process controls. It hands versioned artifacts and benchmark evidence to Soundness and Process.
 

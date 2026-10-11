@@ -5,12 +5,13 @@ title: "Probe trees and node scripts: the Pages filters and the selection map do
 kind: bug
 status: open
 priority: 2
-version: 1
+version: 2
+spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
-parent_id: is-01m2k0eqwj7en422j33wtvw5dt
+parent_id: is-01m2h76347zn3abcahzd3642ac
 created_at: 2026-09-16T03:29:55.392Z
-updated_at: 2026-09-16T03:29:55.392Z
+updated_at: 2026-10-06T08:34:11.940Z
 ---
 Found by a review lane on 2026-09-16, while reviewing the no-JavaScript-in-Python series (`think-m0zb`). Three gaps in what selects the browser code's checks, all measured:
 

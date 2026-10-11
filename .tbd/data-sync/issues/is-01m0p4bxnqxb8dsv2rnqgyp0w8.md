@@ -3,10 +3,10 @@ type: is
 id: is-01m0p4bxnqxb8dsv2rnqgyp0w8
 title: "H-010: reproduce the Stromquist falsifier triple"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 15
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 17
+spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bxca8pjaj4v9jwww1kvg
@@ -20,9 +20,9 @@ child_order_hints:
   - is-01m0srsphtekzmgp8vrs05v8n5
   - is-01m0srspsyjecv6bdatrx8r5bx
 created_at: 2026-08-23T01:39:37.782Z
-updated_at: 2026-08-27T07:05:07.437Z
-closed_at: 2026-08-27T05:57:55.750Z
-close_reason: "Completed by terminal refutation: exp-016 found and replayed an explicit escape from the printed Figure 14 P12, so H-010's source-faithful conjunction is false on the printed set. The distinct possible G=.79 repair remains H-041/think-ciwv and is not merged into this result."
+updated_at: 2026-10-10T22:47:36.085Z
+closed_at: 2026-10-06T08:26:25.561Z
+close_reason: "Done: exp-016 terminally rejected H-010's printed Figure 14 set (bead's own close reason, 2026-08-27). The repair is registered as T-010, and its remaining children are now closed."
 resolution: null
 duplicate_of: null
 ---

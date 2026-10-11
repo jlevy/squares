@@ -5,8 +5,8 @@ title: Standardize packing CLIs and replace ambiguous entry-point names
 kind: task
 status: closed
 priority: 1
-version: 6
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 8
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
   - cli
@@ -19,7 +19,7 @@ dependencies:
     target: is-01m0tth2dgvwnagwh2975ac6k3
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:23:14.721Z
-updated_at: 2026-08-24T22:55:28.545Z
+updated_at: 2026-10-10T22:56:54.008Z
 closed_at: 2026-08-24T22:55:28.544Z
 close_reason: Installed descriptive packing-validate, packing-campaign, and packing-ledger commands; replaced test.sh and all application-like shell entry points with typed Python; help and failure contracts pass and the complete gate is green.
 resolution: null

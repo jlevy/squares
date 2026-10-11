@@ -3,9 +3,9 @@ type: is
 id: is-01m2evve1agpqv4m2s6jrcdseb
 title: "Account native usage for the #162–#164 BC303 layers or record that it cannot be attributed"
 kind: task
-status: open
+status: closed
 priority: 3
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -14,7 +14,11 @@ labels:
 dependencies: []
 parent_id: is-01m2etr75jfh3t3ry7kj1ccqrb
 created_at: 2026-09-14T02:27:31.493Z
-updated_at: 2026-09-14T02:27:31.493Z
+updated_at: 2026-10-06T08:41:29.602Z
+closed_at: 2026-10-06T08:41:29.601Z
+close_reason: "Done: the bead's own exit was met. The #162, #163 and #164 bodies (all merged 2026-09-14) state plainly that no branch model or token total is claimed ('claims no branch model or token total', 'remain unclaimed', 'no agent-time or token total is claimed'), which the bead accepted as sufficient."
+resolution: null
+duplicate_of: null
 ---
 PR #164 (target-free BC303 C/S charge reader admission, head be477f20) says its accounting gap "is open under think-b0eh", but think-b0eh closed 2026-09-14 00:26 UTC without mentioning accounting, and think-s2o4 covers X-030/X-031 usage only. #162 and #163 also leave native usage unclaimed with no owner bead.
 

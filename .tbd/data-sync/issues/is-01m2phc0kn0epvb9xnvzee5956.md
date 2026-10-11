@@ -3,9 +3,9 @@ type: is
 id: is-01m2phc0kn0epvb9xnvzee5956
 title: "Senior-review and merge PR #190, the graded guidance plan"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels:
   - workbench-roadmap
@@ -13,7 +13,11 @@ labels:
 dependencies: []
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-17T01:58:15.924Z
-updated_at: 2026-09-17T03:22:22.498Z
+updated_at: 2026-10-06T08:46:50.224Z
+closed_at: 2026-10-06T08:46:50.224Z
+close_reason: "Done: PR #190 'Plan graded guidance for annealing and the workbench' merged on 2026-09-18 (gh: MERGED 2026-09-18T01:17:05Z) after the approving independent review recorded in the notes."
+resolution: null
+duplicate_of: null
 ---
 PR #190 (codex/guided-annealing-plan) adds O8/Phase 5A to the workbench plan, the graded-guidance section of the annealing plan and exploration X-036. Its senior review of 08264a4a was interrupted at 15:17 on 2026-09-16 with no verdict. The recovery added a9b19b7a (timing sits beside the receipt; the full-poses rung stays outside GuidanceTarget/v1). Done when an independent senior review approves the exact pushed head, the PR body's review line names that head and verdict, hosted checks are green, and the PR is merged.
 

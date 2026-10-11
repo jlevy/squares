@@ -3,10 +3,10 @@ type: is
 id: is-01m0rkz1en6pzg4g0qggw1cnc2
 title: Define the unattended research agenda and hypothesis portfolio
 kind: task
-status: in_progress
+status: closed
 priority: 0
-version: 6
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 9
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 refs:
   - kind: pr
     url: https://github.com/jlevy/thinking-scratchpad/pull/17
@@ -18,7 +18,12 @@ labels:
 dependencies: []
 parent_id: is-01m0rkz14t04yjme92gnfncfv7
 created_at: 2026-08-24T00:50:41.748Z
-updated_at: 2026-08-24T01:27:20.524Z
+updated_at: 2026-10-10T22:48:54.778Z
+closed_at: 2026-10-06T08:33:20.720Z
+close_reason: |
+  Done (bead review 2026-10-06, origin/main eb43ffe9a): PR #17 (codex/packing-unattended-research-readiness) MERGED 2026-08-24 delivered the agenda and H-001..H-024 portfolio; later launch work runs through packing/campaign/agendas (42 agendas) and the remaining named items keep their own beads (think-kmn2 D-081, think-y37w D-071, think-l4z5)
+resolution: null
+duplicate_of: null
 ---
 Inventory the merged campaign and open research work, codify the hypothesis and open-question portfolio, reconcile it with ideas, strategies, beads and instruments, declare the eight-hour and twenty-four-hour launch matrix, and implement the smallest safe readiness corrections that fit one reviewable checkpoint. Acceptance: the spec is a single orientation point; no hypothesis lives only in prose without an explicit reserved or blocked disposition; launch blockers name existing or new beads; queue depth and wall cost are computed from machine-readable recipes; focused checks and the normal gate pass; branch and draft PR are pushed.
 

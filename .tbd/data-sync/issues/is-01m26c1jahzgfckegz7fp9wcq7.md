@@ -3,9 +3,9 @@ type: is
 id: is-01m26c1jahzgfckegz7fp9wcq7
 title: "N11 BC329: build and admit a bounded fixed-core packet runner"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 26
+version: 28
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root integration with Sol admission review
 labels:
@@ -33,10 +33,14 @@ child_order_hints:
   - is-01m2as8hsq3d7dxy1z185zxeah
   - is-01m2asa131hqk3kagma2t2t3ab
   - is-01m2ay2nyw6emx0zphn4pj685e
-hold: paused
+hold: null
 hold_until: null
 created_at: 2026-09-10T19:17:19.821Z
-updated_at: 2026-09-14T02:28:52.379Z
+updated_at: 2026-10-06T08:40:18.696Z
+closed_at: 2026-10-06T08:40:18.696Z
+close_reason: "Done as far as it can go: the bounded fixed-core packet runner is on origin/main (packing/devtools/fixed_core_packet.py, tests) via PR #156; admission for a BC329 target is moot. BC329's prospective endpoint 3.8267215 is below T-033's proved 3.8269975, so the packet could not move any bound even before T-060; its runner and calibration machinery is retained unexecuted on main via PR #156. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical. Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
+resolution: null
+duplicate_of: null
 ---
 Implement a maintained entry point for exactly one frozen core side and direction net. It must preserve the original T025 relative-weight scale, report the exact raw minimum m, compare m strictly with M/11, derive normalized bytes by the fixed rule alpha=1/m only after acceptance, enforce a hard process deadline, retain atomic process-level partial output without claiming host-crash or power-loss durability, and support the complete exact route, reflected interval route, and dilation replay. Add focused adversarial tests and obtain independent target-free admission before prospectively registering or running BC329. Do not run the scientific target in this bead.
 

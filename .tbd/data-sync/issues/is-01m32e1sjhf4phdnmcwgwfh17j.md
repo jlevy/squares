@@ -3,14 +3,22 @@ type: is
 id: is-01m32e1sjhf4phdnmcwgwfh17j
 title: Renumber PR 211's T-031 to T-032 (positional contiguity, 32 of 33 occurrences)
 kind: task
-status: open
+status: closed
 priority: 1
-version: 1
+version: 3
+delegate: claude-code@vm
 labels: []
 dependencies: []
 parent_id: is-01m2yydf84rfedhb6zj3x2dzjn
+hold: null
+hold_until: null
 created_at: 2026-09-21T16:51:08.496Z
-updated_at: 2026-09-21T16:51:08.496Z
+updated_at: 2026-10-05T05:35:24.504Z
+started_at: 2026-10-05T05:34:32.977Z
+closed_at: 2026-10-05T05:35:24.504Z
+close_reason: "Done with #211 (merged 2026-09-21): the record is T-032 on main. Child of think-pcd0."
+resolution: null
+duplicate_of: null
 ---
 Verified against check_results.py:186-189: contiguity is POSITIONAL. expected_ids = [f'T-{i:03d}' for i in range(1, len(results)+1)] must equal the ids in array ORDER. So renumbering the row also means MOVING it after the stack's T-031 in results.yaml. Next free id is T-032 once the stack lands (main tops out at T-030; the stack adds T-031). Re-verify on the tip that actually lands with: git show <tip>:packing/frontier/results.yaml | grep -c '^  - id: T-'
 

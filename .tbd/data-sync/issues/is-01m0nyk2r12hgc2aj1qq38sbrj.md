@@ -5,12 +5,12 @@ title: TEMP spec probe 2
 kind: task
 status: closed
 priority: 2
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 created_at: 2026-08-22T23:58:40.897Z
-updated_at: 2026-08-22T23:59:10.227Z
+updated_at: 2026-10-10T22:47:48.159Z
 closed_at: 2026-08-22T23:59:10.227Z
 close_reason: probe
 ---

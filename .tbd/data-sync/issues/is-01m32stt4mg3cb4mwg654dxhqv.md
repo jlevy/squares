@@ -3,15 +3,19 @@ type: is
 id: is-01m32stt4mg3cb4mwg654dxhqv
 title: Put the composite's explanatory text and an attribution in the stage's bottom right
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
 labels: []
 dependencies: []
 parent_id: is-01m32t2yc3xenfb97kxn844rc7
 created_at: 2026-09-21T20:17:02.611Z
-updated_at: 2026-09-21T20:21:40.019Z
+updated_at: 2026-10-06T08:32:13.336Z
+closed_at: 2026-10-06T08:32:13.336Z
+close_reason: "Done: e269012e1 'Restage the poster' (2026-09-21, merged via PR #218 on 2026-09-22) puts the composite's legend at the column foot, and 965a224e6 sets the github.com/jlevy/squares attribution under it; origin/main template.html #stage-note and #stage-attribution."
+resolution: null
+duplicate_of: null
 ---
 Owner's request: carry the explanatory text from the main composite SVG onto the video stage, bottom right, in a smaller font, and add `github.com/jlevy/squares` as an attribution at the bottom lower right.
 

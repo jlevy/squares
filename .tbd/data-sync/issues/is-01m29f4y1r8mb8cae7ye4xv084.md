@@ -3,9 +3,9 @@ type: is
 id: is-01m29f4y1r8mb8cae7ye4xv084
 title: "P1: the Pages build depends on a Node nobody declared"
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
@@ -17,7 +17,11 @@ dependencies:
     target: is-01m28p88qyq83eek30pja3np54
 parent_id: is-01m29f3zcv8kfcf70ra7fpkd1j
 created_at: 2026-09-12T00:09:19.153Z
-updated_at: 2026-09-13T06:17:29.538Z
+updated_at: 2026-10-06T08:31:19.430Z
+closed_at: 2026-10-06T08:31:19.429Z
+close_reason: "Done: .github/workflows/pages.yml on origin/main eb43ffe9a declares Node for the workbench build: the 'workbench' job's 'Install Node 24' step uses actions/setup-node@48b55a01 (v6.4.0) with node-version 24.18.0, as do the other page jobs."
+resolution: null
+duplicate_of: null
 ---
 `pages.yml`'s build job pins Python to 3.14.7 and uv to 0.12.8, and says nothing about Node. But the workbench's build shells out to it: `build_candidate.py:1152` runs `["node", entry]` to render about a thousand KaTeX expressions in one call, and `build_workbench_site.py` is what invokes that.
 

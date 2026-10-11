@@ -3,14 +3,18 @@ type: is
 id: is-01m28p7hk413y0vtx12w7jba2v
 title: "Phase 6A: the workbench's palette comes from sqpack, not a copy"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T16:53:50.307Z
-updated_at: 2026-09-11T20:33:20.968Z
+updated_at: 2026-10-06T08:50:35.336Z
+closed_at: 2026-10-06T08:50:35.335Z
+close_reason: "Done: build_candidate.colour_contract() in packages/workbench/tools/workbench_tools/build_candidate.py on origin/main emits the palette and shades from sqpack.render.style.SQUARE_HUE_PALETTE and square_fill_palette, and application.js reads COLOUR.palette and COLOUR.shades."
+resolution: null
+duplicate_of: null
 ---
 The page has its own PALETTE and SHADES tables, copied from sqpack/render/style.py and sqpack/render/color.py and kept in step by hand. compare_palette.py measures that they still agree, which is a check standing in for a guarantee -- and it only agrees today because someone noticed it did not.
 

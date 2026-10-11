@@ -5,15 +5,15 @@ title: Reject numeric drift even when frontier lanes share evidence
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - soundness
 dependencies: []
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-25T07:30:01.679Z
-updated_at: 2026-08-25T07:30:06.884Z
+updated_at: 2026-10-10T22:59:55.424Z
 closed_at: 2026-08-25T07:30:06.883Z
 close_reason: "Fixed in the implementation checkpoint: evidence identity no longer bypasses numeric comparison; exact literal identities are cross-checked; rounded/truncated display tolerance is bounded; the shared-evidence drift regression and the full 100-case schema audit pass."
 resolution: null

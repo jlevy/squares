@@ -3,15 +3,19 @@ type: is
 id: is-01m29gs5z48h1ztmc5h659hd6b
 title: The bar spans whole integers, so it stops sliding under the reader
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-12T00:37:51.188Z
-updated_at: 2026-09-12T00:37:51.188Z
+updated_at: 2026-10-06T08:31:00.213Z
+closed_at: 2026-10-06T08:31:00.213Z
+close_reason: "Done: 4cfe87f4a 'the bar spans whole integers and stops sliding under the reader' (2026-09-11) on origin/main."
+resolution: null
+duplicate_of: null
 ---
 Owner, 2026-09-11: "expand the entire bar to be the nearest integers below sqrt(n) and above sqrt(n) + 1, and include sqrt(n) and sqrt(n) + 1 as well, so then it's a little clearer how they fit together. This will also mean that the bar doesn't change quite as often, so it's easier to stay oriented."
 

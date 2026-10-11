@@ -3,9 +3,9 @@ type: is
 id: is-01m1za68a3nqhyn170tf4kpq8q
 title: "Agenda 029: n11 structure and conditional dots"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 10
+version: 11
 spec_path: packing/campaign/agendas/agenda-029-structural-restrictions-and-conditional-dots.md
 assignee: codex
 labels: []
@@ -20,6 +20,10 @@ child_order_hints:
   - is-01m1za8k8cndppjvqphexw09r3
   - is-01m220dace13sd66nh8mg1tr9s
 created_at: 2026-09-08T01:30:15.223Z
-updated_at: 2026-09-09T02:37:04.270Z
+updated_at: 2026-10-06T08:28:04.705Z
+closed_at: 2026-10-06T08:28:04.704Z
+close_reason: "Superseded: agenda-029 is marked superseded on main, and T-060 settles s(11)."
+resolution: canceled
+duplicate_of: null
 ---
 Planning only, stacked on PR116. Reserve X-019, agenda-029, H-126 and BC-284 through BC-290 after checking main, PR110, PR116, published native record filenames and live source/tbd allocations. Own the new corner-blocker structural question and the three-block handoff. Reuse H102/H111/H117/H119/H121 at unchanged scope; no experiment or session IDs allocated. Research remains paused until the user starts it. Preserve independently owned X016-X018, H125 and PR110 integration.

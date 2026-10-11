@@ -5,7 +5,7 @@ title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
 status: open
 priority: 1
-version: 53
+version: 56
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -44,7 +44,7 @@ child_order_hints:
   - is-01m2mm43z5rhrhwg1ac775r1sc
   - is-01m2mmq0d31xcfva6p0nspxv9n
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-23T04:48:12.320Z
+updated_at: 2026-10-06T10:12:08.115Z
 closed_at: null
 close_reason: null
 resolution: null
@@ -86,10 +86,4 @@ think-i1fr and the native-usage publication restriction.
 
 ## Notes
 
-Current controller, September 12: PR #148 is the completed T-026/explainer milestone at `989fd544`, open and green; PR #149 is the page/PDF layer at `4d00ab68`, open, mergeable, hosted-green, and now also passes the unrestricted 3,990.24-second full checkpoint; draft PR #156 is the BC329/evidence layer at `f1e397cd`, with its new hosted checks running after the reviewed documentation correction milestone. All three fetched bases are exact ancestors, so no upstream merge is presently required.
-
-The BC329 target remains unregistered and unrun. The active gate is the second calibration correction: CAL-1 and CAL-7 closed; CAL-2 through CAL-6 remain open; `think-1arg` owns source-distinct rereview; `think-zypf`, profiles `think-vy5i`, admission `think-1mma`, runner integration `think-qw9w`, documentation `think-zd1b`, and target `think-17qa` remain in dependency order. The preflight behaviors are accepted off-branch, with integration and Ruff cleanup under `think-cur4` and `think-yiay`.
-
-The structural lane is separately tracked: first-principles analysis `think-979p`, source-distinct review and durable retention `think-gldo`, complete one-corner BC303 surplus test `think-ms9l`, and adjacent/opposite forced-type pair test `think-cexv`. These tests target two explicit missing routing lemmas and retain local scope. The active 30-minute heartbeat was updated to this state and continues from beads and durable records rather than chat history. No broader method ranking follows from these pending tests.
-
-Reopened: Administrative hierarchy correction after PR 224 validation found 14 retained open or in-progress children. BC-373 and Session 154 remain completed; this broader n11 umbrella stays open until its surviving children are dispositioned or reparented.
+2026-10-06: reopened after the relevance review closed it. Session records name this bead in certification_pending (think-ta8s: sessions 123 and 124; think-gvlg: session 151), and the terminal-session gate requires that bead to be open. It stays open until those sessions are certified or their records name another owner.

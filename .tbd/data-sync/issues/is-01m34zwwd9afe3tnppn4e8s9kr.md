@@ -5,13 +5,13 @@ title: Playback pauses for one frame at the end of each moving step and at the m
 kind: bug
 status: open
 priority: 1
-version: 3
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
 labels: []
 dependencies: []
 parent_id: is-01m1z68hzazv9yjs9k7cddmf82
 created_at: 2026-09-22T16:41:30.792Z
-updated_at: 2026-09-22T20:14:47.042Z
+updated_at: 2026-10-06T08:29:24.785Z
 ---
 Measured on the 2026-09-21 cuts (commit 17dcb3f92) with squares-workbench-check-cadence --verify, which re-draws each flagged frame from the page. In playback, the path the video records, the page holds still for one frame where a fresh draw of the same instants keeps moving:
 
@@ -102,3 +102,5 @@ Files (transient, on the external disk):
   /Volumes/spud-ext1/squares-video/tmp/cadence-lane/before-n2-24.mp4
   /Volumes/spud-ext1/squares-video/tmp/cadence-lane/after-box-ink-n2-24.mp4
   /Volumes/spud-ext1/squares-video/tmp/cadence-lane/after-box-ink-n2-100.mp4
+
+2026-10-06 (bead review): the box-ink guard landed as 8f300ec01 (drawBounds in packages/workbench/src/application.js), and ed801f2a4 records 15 repeated frames inside motion still on the 2026-09-22 n = 1..100 cut. The check_animate_view section requiring no held frame inside motion is not yet added.

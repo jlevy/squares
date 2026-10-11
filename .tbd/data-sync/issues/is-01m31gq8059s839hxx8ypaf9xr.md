@@ -5,11 +5,15 @@ title: Track the F5 and F7 deferrals from the PR 205 review
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m31gn7263sfhfbq8xfabkh3p
 created_at: 2026-09-21T08:18:34.112Z
-updated_at: 2026-09-21T08:18:34.112Z
+updated_at: 2026-10-06T08:48:56.928Z
 ---
 PR 205 re-review. The fix commit aed8638d declares 'F5 and F7 are left as the review filed them', but no bead, defect or campaign note exists - the deferral lives only in a commit message body. F5: the needs-geometry return in m6_model.py:766 is still at 8-space indent inside the for-partial loop at :745, so _five_plus_partial abandons the line after the first qualifying partial. Direction is conservative and at n=32 the branch is never entered, so it is unexercised today. F7: parallel implementations across the two models.
+
+## Notes
+
+2026-10-06 bead review: think-zbnw (think-nalh, filed later the same day from the same PR 204-209 review) was closed as a duplicate of this bead. Re-checked on origin/main eb43ffe9a: still unfixed.

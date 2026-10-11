@@ -3,9 +3,9 @@ type: is
 id: is-01m1wz2csvegxym6bvt099z2wz
 title: "Agenda 027: independent compatibility and restricted-family program"
 kind: epic
-status: in_progress
+status: closed
 priority: 1
-version: 17
+version: 18
 labels:
   - agenda027
 dependencies: []
@@ -23,6 +23,10 @@ child_order_hints:
   - is-01m1wy2gw4gzxmnxs6dak2c8rc
   - is-01m1ythhcq8vqfdk9zhaz8h2k8
 created_at: 2026-09-07T03:37:25.561Z
-updated_at: 2026-09-07T20:56:47.766Z
+updated_at: 2026-10-06T08:27:46.651Z
+closed_at: 2026-10-06T08:27:46.650Z
+close_reason: "Superseded: Agenda 027 is an n = 11 compatibility and restricted-family program. T-060 settles s(11), and SYNOPSIS.md says s(11) lower-bound research is method development only."
+resolution: canceled
+duplicate_of: null
 ---
 PR107 plans preserve X017, Agenda027, H111-117 and BC258-268, disjoint from the source program. Session092 now begins the shared BC260 case/Farkas/resource review for Agenda028 consumers; BC261 remains the sole geometry interface owner. Broad BC262/263 pilots and other contract subsets are not launched by that limited review. Use reviewed source artifacts as evidence, not completion dependencies. Preserve published identities and recheck parallel allocations before new records.

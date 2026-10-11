@@ -3,9 +3,9 @@ type: is
 id: is-01m32t2yc3xenfb97kxn844rc7
 title: Stage layout revision for the ascent video
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 28
+version: 29
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
@@ -38,7 +38,11 @@ child_order_hints:
   - is-01m35c489az736z9t99x6n7vvf
   - is-01m35fyaba20n7rs0h60s1hs94
 created_at: 2026-09-21T20:21:29.084Z
-updated_at: 2026-09-22T21:21:55.049Z
+updated_at: 2026-10-06T08:32:20.842Z
+closed_at: 2026-10-06T08:32:20.842Z
+close_reason: "Wrapper done: the 2026-09-21 stage pass landed on main via PR #218 (merged 2026-09-22): every layout child is closed with its commit. The two open owner questions, think-ff5o and think-orbz, moved to think-ooi2."
+resolution: null
+duplicate_of: null
 ---
 One pass over the 1920x1080 poster the video is captured from, gathering the owner's requests from the 2026-09-21 review of the first cuts. They are one piece of work because they all move the same space: the middle gap between the packing box and the facts column.
 

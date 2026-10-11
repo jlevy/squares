@@ -3,15 +3,19 @@ type: is
 id: is-01m29g3z5bzj3snyzrw9pkffqp
 title: "L2: the sources layer, in the explainer's own styling"
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m29g1hhddhwsqfr0fz4r175e
 created_at: 2026-09-12T00:26:16.101Z
-updated_at: 2026-09-12T00:26:44.912Z
+updated_at: 2026-10-06T08:31:26.320Z
+closed_at: 2026-10-06T08:31:26.320Z
+close_reason: "Done in the owner's later form: 1243b4244 (2026-09-22) draws each bound's citation under PROVEN behind 'show citations' / setCitations, read from bound-citations.json, and b7690c158 says what we know about a bound once. packages/workbench/README.md documents the CITATION section."
+resolution: null
+duplicate_of: null
 ---
 A "Sources:" block on the panel carrying the citations behind this n's bounds, in abbreviated but complete form, styled the way the explainer paper styles its references -- the same serif, the same conventions, not a second citation style invented here.
 

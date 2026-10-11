@@ -3,9 +3,9 @@ type: is
 id: is-01m1qgrj2q8kmrbqrgvkaksn87
 title: "Certificate page: review follow-ups on PR #79"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 36
+version: 37
 labels:
   - explainer
   - pr-79
@@ -48,6 +48,10 @@ child_order_hints:
   - is-01m1r4229zbmgsfhw541ya0wjd
   - is-01m1r4a7xke7n75dz675ezt32t
 created_at: 2026-09-05T00:51:11.062Z
-updated_at: 2026-09-05T06:32:53.427Z
+updated_at: 2026-10-06T08:35:01.286Z
+closed_at: 2026-10-06T08:35:01.286Z
+close_reason: "Wrapper done: PR #79 merged 2026-09-05 (f060b1d78) and 33 of its 36 follow-up children are closed. Of the rest, think-owxt and think-uvav are closed as done and think-ml41 moved to the top level."
+resolution: null
+duplicate_of: null
 ---
 The review directions on PR #79 for the certificate explainer, tracked one bead each; opened because the page's feature bead (think-y3mv) was closed while review work continued.

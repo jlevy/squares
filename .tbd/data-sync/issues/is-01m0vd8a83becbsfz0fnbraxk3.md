@@ -5,14 +5,14 @@ title: "PR26 R10: track source coverage without per-n bead spam"
 kind: bug
 status: closed
 priority: 3
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - review-finding
 dependencies: []
 parent_id: is-01m0vd6xfaz5p8ccnq6xrnr5x5
 created_at: 2026-08-25T02:51:08.930Z
-updated_at: 2026-08-25T03:10:52.155Z
+updated_at: 2026-10-10T23:00:42.828Z
 closed_at: 2026-08-25T03:10:52.155Z
 close_reason: "Resolved in PR #26 rebased head a9a2992. The framework spec and affected bead contracts now incorporate the finding and its attached suggestions; the per-finding disposition is posted at issuecomment-5404553556."
 resolution: null

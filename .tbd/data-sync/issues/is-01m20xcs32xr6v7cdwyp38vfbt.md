@@ -3,13 +3,17 @@ type: is
 id: is-01m20xcs32xr6v7cdwyp38vfbt
 title: The exhaustive tier is one serial pytest and most of its tests do not use the inner pool
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-08T16:25:06.401Z
-updated_at: 2026-09-08T16:25:06.401Z
+updated_at: 2026-10-06T08:50:25.162Z
+closed_at: 2026-10-06T08:50:25.162Z
+close_reason: "Superseded: the exhaustive tier no longer runs as one serial job; .github/workflows/packing-validation.yml and deep-gate.yml on origin/main split it into three --exhaustive-shard jobs (1/3, 2/3, 3/3)."
+resolution: canceled
+duplicate_of: null
 ---
 `_exhaustive_exact_tests` in `sqpack/cli/validate.py` runs `pytest -m "slow or exhaustive_exact"`-style selection in one process with no `-n`, unlike both behavioural lanes and (after D-485) the pre-push tier. In CI the job passes `--jobs 1 --inner-jobs 4`, so the parallelism is meant to come from inside the tests.
 

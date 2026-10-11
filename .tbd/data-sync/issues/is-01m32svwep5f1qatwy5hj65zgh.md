@@ -3,15 +3,19 @@ type: is
 id: is-01m32svwep5f1qatwy5hj65zgh
 title: Widen the facts column by about 10 per cent, taking it from the gap
 kind: task
-status: open
+status: closed
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m32t2yc3xenfb97kxn844rc7
 created_at: 2026-09-21T20:17:37.749Z
-updated_at: 2026-09-21T20:21:37.944Z
+updated_at: 2026-10-06T08:32:08.115Z
+closed_at: 2026-10-06T08:32:08.115Z
+close_reason: "Done: e269012e1 'Restage the poster' (2026-09-21, merged via PR #218 on 2026-09-22) starts the column at 1110 instead of 1160, 780 wide instead of 700."
+resolution: null
+duplicate_of: null
 ---
 Owner's request: the right-hand portion of the stage -- the gap bar and everything under it -- should have less padding on its left, making the whole column about 10 per cent wider, while still clearing the packing box. The middle of the frame currently wastes space.
 

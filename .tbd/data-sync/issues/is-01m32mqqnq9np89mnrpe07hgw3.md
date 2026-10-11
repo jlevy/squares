@@ -3,14 +3,18 @@ type: is
 id: is-01m32mqqnq9np89mnrpe07hgw3
 title: gh run rerun --failed can never fix a pull-request wall failure; it guarantees a new one
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m32fgxn7yh0skf12a0zxnres
 created_at: 2026-09-21T18:47:58.903Z
-updated_at: 2026-09-21T18:47:58.903Z
+updated_at: 2026-10-06T08:45:26.158Z
+closed_at: 2026-10-06T08:45:26.158Z
+close_reason: "Done: packing/devtools/check_pr_wall.py on origin/main has a 'partial-rerun' verdict for a later attempt that repeated only failed jobs, instead of reporting the unmeasurable wall as the branch's fault."
+resolution: null
+duplicate_of: null
 ---
 Measured 2026-09-21 on PR 212, run 35639861454.
 

@@ -3,9 +3,9 @@ type: is
 id: is-01m1ytzagmmx58w96ksbf5j3dj
 title: Publish and validate Session097 integrated research checkpoint
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 30
+version: 31
 spec_path: packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
 labels: []
 dependencies: []
@@ -21,7 +21,11 @@ child_order_hints:
   - is-01m1z1d949sby1tkrav2k92sfh
   - is-01m1z2grw8sr01t7ynft3hrnz9
 created_at: 2026-09-07T21:04:19.475Z
-updated_at: 2026-09-08T01:43:21.825Z
+updated_at: 2026-10-06T08:23:32.054Z
+closed_at: 2026-10-06T08:23:32.054Z
+close_reason: "Finished wrapper: the Session 097 publication checkpoint. PR 116 merged 2026-09-08 (a3b4f03e5). The open child think-krxi was moved to the top level."
+resolution: null
+duplicate_of: null
 ---
 At each useful block boundary stop writers; review spec/agenda status and all diffs under tbd shortcuts and Practical Prose; regenerate the document, ledger and session views; retain a privacy-reduced interval receipt with fixed start20:56:47.766UTC and observed end; run change-reachable push validation and the complete immutable checkpoint as required; commit explicit owned paths, push, create/update one cost-first PR with results, limits, ownership and ID allocations; follow actual hosted CI results asynchronously. Keep pending and passed distinct, and sync beads.
 

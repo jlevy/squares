@@ -5,12 +5,12 @@ title: squares-workbench-ascent cannot import devtools without PYTHONPATH
 kind: bug
 status: open
 priority: 2
-version: 3
+version: 4
 labels: []
 dependencies: []
-parent_id: is-01m2h2zv3xg1w4gdy1svjsv1tx
+parent_id: null
 created_at: 2026-09-15T02:42:55.351Z
-updated_at: 2026-09-15T04:55:11.928Z
+updated_at: 2026-10-06T08:21:34.900Z
 ---
 Found 2026-09-14 by PR #160 review lane D-tools (D15, D53, D61), not fixed.
 

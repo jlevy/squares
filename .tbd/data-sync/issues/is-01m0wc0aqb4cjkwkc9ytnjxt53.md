@@ -5,14 +5,14 @@ title: Repair the stale canonical defect count
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: codex-root
 labels: []
 dependencies: []
 parent_id: is-01m0w9a47h5zrn7jf16pp2kpxs
 created_at: 2026-08-25T11:48:33.130Z
-updated_at: 2026-08-25T11:57:20.648Z
+updated_at: 2026-10-10T22:52:02.625Z
 closed_at: 2026-08-25T11:57:20.648Z
 close_reason: "Completed: corrected defects.yaml from 282 to the full 299-row total after this review tranche. The fail-fast cross-field schema check and rendered-view check now pass."
 resolution: null

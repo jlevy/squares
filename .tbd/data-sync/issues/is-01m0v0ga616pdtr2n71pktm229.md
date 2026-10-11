@@ -5,8 +5,8 @@ title: "PR 24 transition T2: validate the corrected integrated tree"
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - pr24-transition
@@ -15,7 +15,7 @@ parent_id: is-01m0tz8s4yps8zgqwk8cng9qnx
 child_order_hints:
   - is-01m0v0s3c8y81w7sfrbvhehz8c
 created_at: 2026-08-24T23:08:19.519Z
-updated_at: 2026-08-24T23:24:53.765Z
+updated_at: 2026-10-10T22:50:01.901Z
 closed_at: 2026-08-24T23:24:53.764Z
 close_reason: Exact integrated tree passed focused schema/docs/generated-view checks, Ruff, BasedPyright, format-check, 55/55 controls, and the 30-step normal gate in 36.277 seconds. Deep golden intentionally not run before think-nr5w.
 resolution: null

@@ -5,13 +5,13 @@ title: Decide whether a join between moving runs should blend instead of switchi
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
-parent_id: is-01m32t2yc3xenfb97kxn844rc7
+parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-22T00:35:31.564Z
-updated_at: 2026-09-22T00:35:31.564Z
+updated_at: 2026-10-06T08:32:02.116Z
 ---
 While a packing moves, each run of parallel squares that share a whole side carries one moving-palette color, and when two runs touch the smaller takes the larger's color at the next group checkpoint, in a single frame (assignGroups / foldGroups in packages/workbench/src/application.js). At the default drain level of 0 the moving palette is fully grey, so a join shows as a grey level snapping: measured with check_transitions --trace 51 --square 8, L 0.633 -> 0.760 in one frame at t 2.283.
 

@@ -3,15 +3,19 @@ type: is
 id: is-01m29fnn377jv7kmkek75ekkt3
 title: The bar marks its values with vertical rules, not just arrows
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-12T00:18:27.044Z
-updated_at: 2026-09-12T00:18:27.044Z
+updated_at: 2026-10-06T08:31:01.672Z
+closed_at: 2026-10-06T08:31:01.671Z
+close_reason: "Done: 2e808d113 'the bar is a scale with two weights of rule' (2026-09-11) on origin/main."
+resolution: null
+duplicate_of: null
 ---
 Owner's design, 2026-09-11: 'On the bar visual, we should have vertical bars that are bold and black on the lower and higher bounds. There should be vertical bars that are a little darker gray on the relevant numbers, including the integers that are near there, as well as the square root of n and the square root of n + 1.'
 

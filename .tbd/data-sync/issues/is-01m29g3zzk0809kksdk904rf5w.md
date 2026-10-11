@@ -3,15 +3,19 @@ type: is
 id: is-01m29g3zzk0809kksdk904rf5w
 title: "L3: a red star where the lower bound is ours"
 kind: feature
-status: open
+status: closed
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m29g1hhddhwsqfr0fz4r175e
 created_at: 2026-09-12T00:26:16.944Z
-updated_at: 2026-09-12T00:26:45.221Z
+updated_at: 2026-10-06T08:31:24.329Z
+closed_at: 2026-10-06T08:31:24.329Z
+close_reason: "Superseded by the owner's later star rule: d48006f9c (2026-09-27) stars every recent lower bound whoever proved it and credits each line case by case, and e2ba1accd tags corrections; the workbench 'new result' badge (think-1n0c, PR #192) follows recent_result. 'Ours only' no longer applies."
+resolution: canceled
+duplicate_of: null
 ---
 Owner: "for ones where the lower bound is ours it should have a red star and indicate it's a new result".
 

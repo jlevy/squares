@@ -5,8 +5,8 @@ title: Define lane-specific agent handoffs and evidence contracts
 kind: task
 status: in_progress
 priority: 1
-version: 15
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 16
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 delegate: unknown@spud10.local
 labels:
   - packing
@@ -30,7 +30,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-08-23T21:18:33.401Z
-updated_at: 2026-08-25T02:35:37.529Z
+updated_at: 2026-10-10T22:54:38.857Z
 started_at: 2026-08-23T23:30:08.501Z
 ---
 Document how work moves from Insight to Process to Efficiency to Correctness and back, including minimum inputs, immutable outputs, rejection states, escalation, and who may change hypotheses, acceptance rules, code, claims, or runtime budgets.

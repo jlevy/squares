@@ -5,13 +5,13 @@ title: "PR #98 review R11: receipts embed absolute macOS home/worktree paths"
 kind: bug
 status: open
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels: []
 dependencies: []
-parent_id: is-01m1vrrktbrd2scnaqfe40eby4
+parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 created_at: 2026-09-06T19:07:42.525Z
-updated_at: 2026-09-06T19:49:54.589Z
+updated_at: 2026-10-06T08:37:42.217Z
 ---
 runs/receipts.jsonl and checkpoint tarballs carry /Users/levy/... paths as provenance. Evidence must not be rewritten. Consider repository-relative source_hashes keys in validation_timing.py going forward.
 

@@ -3,15 +3,20 @@ type: is
 id: is-01m0pnjppsajkthg7jgchw6awx
 title: R1 applies to analysis code, not only pipeline components (from D-029)
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 labels: []
 dependencies: []
 parent_id: is-01m0n6nyzx5pnark7xve1dy52x
 created_at: 2026-08-23T06:40:25.817Z
-updated_at: 2026-08-23T06:40:25.817Z
+updated_at: 2026-10-06T08:32:37.742Z
+closed_at: 2026-10-06T08:32:37.742Z
+close_reason: |
+  Superseded (bead review 2026-10-06, origin/main eb43ffe9a): OR-1 in operating-rules.md on origin/main ('Build the tool; never leave a measurement in one-off code') now states where analysis/probe code lives (devtools/ with a refusable guard) and cites D-023, the case this bead raised with D-029
+resolution: canceled
+duplicate_of: null
 ---
 D-029: an agent built a one-LP-solve probe, called it "the quench", and retracted a correct finding. sqpack.quench existed and would have disagreed on the first call.
 

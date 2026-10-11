@@ -3,9 +3,9 @@ type: is
 id: is-01m1mv95j3zcxpvpckwjxwf8gn
 title: "BC-161: certify the first n = 12-specific lower bound (H-061)"
 kind: task
-status: open
+status: closed
 priority: 0
-version: 5
+version: 6
 spec_path: packing/campaign/agendas/agenda-017-six-hour-generator-rigidity-ceilings-and-w9-block.md
 labels:
   - packing
@@ -15,6 +15,10 @@ dependencies:
     target: is-01m1mv96kjz5ap9yv61k9w1r5d
 parent_id: is-01m1mv6ykrged0hs7msmak2e5v
 created_at: 2026-09-03T23:57:17.763Z
-updated_at: 2026-09-04T00:28:07.463Z
+updated_at: 2026-10-06T08:26:00.554Z
+closed_at: 2026-10-06T08:26:00.553Z
+close_reason: "Done: agenda-017 records BC-161 complete. T-017 (s(12) >= 99/25, this project's weighted fractional certificate) is registered on main (2026-09-04)."
+resolution: null
+duplicate_of: null
 ---
 Lane A W6, 105 minutes after BC-160's freeze. Run the frozen generator at n = 12 and side 19/5 on the registered site ladder (grid 29 plus at most two column-generation refinements) with 181 directions and B = 9973/10000 (effective unit-square side 38000/9973); the survey sized a separation sweep at ten to thirty seconds on four cores and generation at ten to ninety minutes, kill line at a restricted optimum of 12 - 1/500. Rationalise and verify exactly on two accumulation paths, one repair iteration then a typed stop. Freeze exp-060 with certificate bytes, hashes, direction list, per-direction minima, the V(G, K) ladder and dual, receipts under normal and -O Python, and the claim boundary. The side never moves after results; a converged dual reaching twelve at B = 1 is recorded as an exact ceiling that rejects H-061 as registered and is a theorem about the method. needs_review true until BC-162.

@@ -5,8 +5,8 @@ title: Join Codex task-tree rollups and Claude session costs into one agent-time
 kind: feature
 status: open
 priority: 3
-version: 1
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 2
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - focus-efficiency
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 created_at: 2026-09-16T00:21:00.373Z
-updated_at: 2026-09-16T00:21:00.373Z
+updated_at: 2026-10-10T22:56:06.416Z
 ---
 The residue of think-xuk8, split out when that bead closed on 2026-09-15. Its detector half is built and running: `packing/devtools/check_pr_wall.py` measures hosted CI wall on every pull request, splits each job into queue, setup and work, and fails over a 180 s budget or 1.2x of a recorded median (think-z121). The hosted-CI, local-validation and declared-budget inputs of the original report contract are therefore covered.
 

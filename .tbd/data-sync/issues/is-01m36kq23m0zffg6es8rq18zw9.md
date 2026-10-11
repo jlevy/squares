@@ -5,12 +5,12 @@ title: "BC-380 W7: ParentClip and freeze-to-parent-core converter for low-n prod
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
-parent_id: is-01m36gdw1w08nvdqd9crm95yys
+parent_id: null
 created_at: 2026-09-23T07:47:05.971Z
-updated_at: 2026-09-23T18:28:48.895Z
+updated_at: 2026-10-06T08:21:36.731Z
 ---
 
 ## Notes

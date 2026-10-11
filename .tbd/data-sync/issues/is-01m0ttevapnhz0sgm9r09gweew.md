@@ -5,8 +5,8 @@ title: Inventory and classify packing code by maturity and dependency
 kind: task
 status: closed
 priority: 0
-version: 7
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 8
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
 dependencies:
@@ -20,7 +20,7 @@ dependencies:
     target: is-01m0tth2dgvwnagwh2975ac6k3
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:22:40.084Z
-updated_at: 2026-08-24T22:55:26.900Z
+updated_at: 2026-10-10T22:56:36.304Z
 closed_at: 2026-08-24T22:55:26.899Z
 close_reason: Implemented inventory and maturity map in the plan, development guide, README, and enforced directory layout; the complete 31-step validation gate passed on 2026-08-24.
 resolution: null

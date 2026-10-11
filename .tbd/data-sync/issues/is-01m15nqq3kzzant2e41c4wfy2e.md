@@ -3,9 +3,9 @@ type: is
 id: is-01m15nqq3kzzant2e41c4wfy2e
 title: "Top-down review: definitive resource, accessible entry point"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 7
+version: 8
 labels: []
 dependencies: []
 child_order_hints:
@@ -16,7 +16,12 @@ child_order_hints:
   - is-01m15ny58gft8fmc6q0vpa16jt
   - is-01m15nystaqqw78wd617am46vd
 created_at: 2026-08-29T02:31:46.545Z
-updated_at: 2026-08-29T02:35:38.697Z
+updated_at: 2026-10-06T08:35:47.454Z
+closed_at: 2026-10-06T08:35:47.454Z
+close_reason: |
+  Finished wrapper (bead review 2026-10-06, origin/main eb43ffe9a): One-pass top-down review; its PR #60 MERGED 2026-08-29. Child think-u1y3 (owner's repo-topics call) moved to the top level before closing
+resolution: null
+duplicate_of: null
 ---
 One top-down review of the merged reorg (post PR #59) against the repository's two
 stated goals:

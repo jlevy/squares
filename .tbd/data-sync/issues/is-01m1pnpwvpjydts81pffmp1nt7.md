@@ -3,9 +3,9 @@ type: is
 id: is-01m1pnpwvpjydts81pffmp1nt7
 title: "Review PR #78 and publish an explainer for the s(11) >= 19/5 certificate"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 26
+version: 27
 labels: []
 dependencies: []
 child_order_hints:
@@ -35,5 +35,9 @@ child_order_hints:
   - is-01m1r3c88cs7jq6acmpbqaavhc
   - is-01m1tk46srsqaq8vbmwasstw3r
 created_at: 2026-09-04T16:58:25.014Z
-updated_at: 2026-09-06T05:30:13.175Z
+updated_at: 2026-10-06T08:35:02.735Z
+closed_at: 2026-10-06T08:35:02.734Z
+close_reason: "Wrapper done: PR #78 merged 2026-09-05 (b93efe5ce), the explainer was published from PR #79 (f060b1d78) and is now the n11 lower-bounds explainer on Pages. Children are closed or moved: think-nfws (kpress upstream umbrella) and think-gu0i to the top level."
+resolution: null
+duplicate_of: null
 ---

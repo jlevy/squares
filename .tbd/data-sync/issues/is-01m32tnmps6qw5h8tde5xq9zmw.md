@@ -3,15 +3,19 @@ type: is
 id: is-01m32tnmps6qw5h8tde5xq9zmw
 title: Set the stage legend as sentences with math and colour swatches
 kind: task
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m32t2yc3xenfb97kxn844rc7
 created_at: 2026-09-21T20:31:41.784Z
-updated_at: 2026-09-21T20:31:41.784Z
+updated_at: 2026-10-06T08:32:09.787Z
+closed_at: 2026-10-06T08:32:09.787Z
+close_reason: "Done: e269012e1 'Restage the poster' (2026-09-21, merged via PR #218 on 2026-09-22) adds the legend with s(n) as build-time KaTeX and swatches from the corpus palette; refined in 80f597f9e and 80f45b760. origin/main application.js buildStageNote draws the swatches from the page's own palette."
+resolution: null
+duplicate_of: null
 ---
 Refinements to the legend added at the foot of the facts column (think-kgx1), from the owner's review:
 

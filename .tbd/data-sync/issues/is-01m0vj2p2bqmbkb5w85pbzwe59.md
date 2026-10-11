@@ -5,8 +5,8 @@ title: "PR #23 review R15: Respect CPU affinity and cgroup quotas in default job
 kind: bug
 status: closed
 priority: 3
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex@spud10
 labels:
   - engineering-maturity
@@ -17,7 +17,7 @@ parent_id: is-01m0vj13yefxcxhhew81ewfpvq
 hold: null
 hold_until: null
 created_at: 2026-08-25T04:15:27.306Z
-updated_at: 2026-08-25T04:44:40.086Z
+updated_at: 2026-10-10T22:58:22.530Z
 started_at: 2026-08-25T04:16:15.537Z
 closed_at: 2026-08-25T04:44:40.085Z
 close_reason: "Completed in 69e65eb: validation and shared worker defaults use Python 3.14's process_cpu_count so container and affinity limits are respected."

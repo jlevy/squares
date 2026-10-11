@@ -5,8 +5,8 @@ title: Use the gate-managed Python environment for focused negative controls
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: codex@spud10
 labels:
   - packing
@@ -16,7 +16,7 @@ parent_id: is-01m0vbg75b3j30f9eq2j678b9j
 hold: null
 hold_until: null
 created_at: 2026-08-25T02:43:16.742Z
-updated_at: 2026-08-25T02:44:51.758Z
+updated_at: 2026-10-10T22:50:23.144Z
 started_at: 2026-08-25T02:43:21.508Z
 closed_at: 2026-08-25T02:44:51.757Z
 close_reason: Discarded the invalid dependency-incomplete focused transcript, logged D-224, and reran through the pinned uv environment; all 55 negative controls fired as expected in 10 wall-seconds.

@@ -5,13 +5,13 @@ title: "Phase 6 (conditional): extend to n = 325..400 if Phase 0 found an author
 kind: task
 status: open
 priority: 3
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md
 labels: []
 dependencies: []
-parent_id: is-01m1xd517vezdmp4hrmvs5c8bp
+parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-09-07T07:44:21.075Z
-updated_at: 2026-09-07T11:53:20.684Z
+updated_at: 2026-10-06T08:26:46.493Z
 ---
 Opens only on Phase 0's finding. Same promotion path; the poster is not re-laid for it. If no authority exists, close as a scoped bounded negative with the survey as evidence.
 

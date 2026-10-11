@@ -3,9 +3,9 @@ type: is
 id: is-01m2kb4xhaqh3bv0cnnqnqvvsp
 title: "Lane 3: CI guardrail -- PR-wall budget, no empty PR-tier records, no record ratchet (G1-G3, G5 hook, bead hygiene)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 labels:
   - validation
   - ci
@@ -16,7 +16,11 @@ child_order_hints:
   - is-01m2m5a2v1gwa2he9nvev4csqb
   - is-01m2m5ad594cv9k37w6nm9e533
 created_at: 2026-09-15T20:11:48.648Z
-updated_at: 2026-09-16T03:49:32.238Z
+updated_at: 2026-10-06T08:45:43.934Z
+closed_at: 2026-10-06T08:45:43.934Z
+close_reason: "Done: lane 3's guardrail landed through PR #188 (merged 2026-09-17) after #186 closed: packing/devtools/check_pr_wall.py, pull_request_walls in packing/devtools/gate-budgets.yaml, and the max_unattributed_rise attribution rule in check_gate_budgets.py are on origin/main."
+resolution: null
+duplicate_of: null
 ---
 Lane 3 of think-xfqk (2026-09-15). The register that was built to stop the first CI spiral (gate-budgets.yaml, check_gate_budgets.py, gate_budgets.judge) let the second through: seven of nine tiers had no record, suite's record was re-based three times (102.83 -> 162.62 -> 118.72 -> 183.44 s) while its ceiling followed (205 -> 260 -> 237 -> 275 s), and nothing budgets the PR wall OR-14 targets (154 s median on 09-06, 284-298 s on 09-15).
 

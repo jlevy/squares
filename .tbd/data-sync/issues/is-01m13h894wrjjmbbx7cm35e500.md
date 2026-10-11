@@ -3,14 +3,18 @@ type: is
 id: is-01m13h894wrjjmbbx7cm35e500
 title: sqpack.field mutates the global decimal context, leaking precision across a process
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 3
+version: 4
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
 created_at: 2026-08-28T06:34:57.558Z
-updated_at: 2026-08-28T06:35:21.730Z
+updated_at: 2026-10-06T08:35:29.255Z
+closed_at: 2026-10-06T08:35:29.254Z
+close_reason: "Done: origin/main src/sqpack/field.py raises precision inside decimal.localcontext() (line 522, D-359), and tests/test_emission_precision.py and test_gobel_family_construction.py assert getcontext().prec is unchanged."
+resolution: null
+duplicate_of: null
 ---
 src/sqpack/field.py:500 in FieldContext.decimal() sets decimal.getcontext().prec = digits + 20. That is the PROCESS-GLOBAL decimal context, not a local one, and it is never restored, so every Decimal computation afterwards in the same process runs at the raised precision. With the default digits=100 the context goes to 120 and stays there.
 

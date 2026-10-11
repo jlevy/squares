@@ -5,8 +5,8 @@ title: Correct source-backed corpus and landscape-identity defects
 kind: task
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 5
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 delegate: unknown@spud10.local
 labels:
   - packing
@@ -17,7 +17,7 @@ parent_id: is-01m0r7q3f92dgx66d30wwrasbn
 hold: null
 hold_until: null
 created_at: 2026-08-24T01:49:04.198Z
-updated_at: 2026-08-24T02:17:26.350Z
+updated_at: 2026-10-10T22:54:02.101Z
 started_at: 2026-08-24T01:49:13.732Z
 closed_at: 2026-08-24T02:17:26.348Z
 close_reason: Source-backed corpus, hypothesis-validity, canonical identity, and living-claim corrections are implemented and logged; generated views reconcile and the 135-second normal gate passes.

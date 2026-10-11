@@ -3,13 +3,18 @@ type: is
 id: is-01m1z6h6tzja2ej4phez6gpftw
 title: Align validation documentation with the 324-case tiers
 kind: bug
-status: open
+status: closed
 priority: 3
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-08T00:26:19.844Z
-updated_at: 2026-09-08T00:26:19.844Z
+updated_at: 2026-10-06T08:35:32.262Z
+closed_at: 2026-10-06T08:35:32.262Z
+close_reason: |
+  Superseded (bead review 2026-10-06, origin/main eb43ffe9a): Both stale items are gone on origin/main: development.md no longer states the 205 s ceiling or 102.8 s mean, and deep-gate.yml has no 'seventh deferral' comment; the tier docs and workflow were rewritten since
+resolution: canceled
+duplicate_of: null
 ---
 Documentation follow-up found while integrating upstream main 2869652618a09d183b8fba3b4237577b402d2f6b (PR #111) into PR #117. Leave this separate from the publication changes.
 

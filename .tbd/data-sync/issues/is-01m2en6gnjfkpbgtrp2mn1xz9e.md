@@ -3,9 +3,9 @@ type: is
 id: is-01m2en6gnjfkpbgtrp2mn1xz9e
 title: Preregister H-162 floor-normalized BC303 T2 analysis before exp-158
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 11
+version: 13
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 refs:
   - kind: pr
@@ -21,9 +21,14 @@ dependencies:
   - type: blocks
     target: is-01m2eddtqbpv11d9g5yk0s8cv0
 parent_id: is-01m2b4ywxym84rgf3b254v4jw6
-hold: paused
+hold: null
+hold_until: null
 created_at: 2026-09-14T00:31:14.609Z
-updated_at: 2026-09-14T20:36:38.859Z
+updated_at: 2026-10-06T08:40:35.861Z
+closed_at: 2026-10-06T08:40:35.861Z
+close_reason: "Done: H-162 and exp-160 were registered by PR #167, merged into main at 80bcdbb0 on 2026-09-14 (packing/campaign/hypotheses/H-162-bc303-floor-normalized-t2-filter.md and exp-160 are on origin/main). Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
+resolution: null
+duplicate_of: null
 ---
 Before inspecting or running the exp-158 target, register H-162 as the separate floor-normalized sufficient filter: on the frozen BC293 377-atom measure across all 182 eligible C and S first-owner charts including both axis aliases, the exact C minimum and exact S first-owner strip minimum are both at least 4524132 integer mass. Bind the full source blobs, executing revision, closed membership, physical-parent/label replay, complete coverage, and the unchanged H-160/exp-158 criteria. Freeze ordered outcomes: admitted low C with rational replay rejects H-162 and the normalized helper; both minima passing accepts H-162 and proves the helper; C passing with admitted low S strip rejects only H-162 and leaves actual S/helper unresolved; incomplete or refused instruments yield no verdict. X-031 retains the complete actual-S cutoff 8524147 and its second-owner quantifier over every compatible admitted chart, including charts outside the 182 first-owner manifest. Any later joint-S method needs a separate registration and cannot reverse H-162 filter verdict. Retain the source-distinct Astra Max audit, pass pre/post registry gates, and do not alter H-160 or rerun exp-158 for this analysis.
 

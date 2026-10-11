@@ -3,9 +3,9 @@ type: is
 id: is-01m2et4kd1608z9ne89hvyezm6
 title: Adopt the owner's 2026-09-13 workbench defaults
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - workbench-roadmap
@@ -14,7 +14,11 @@ dependencies:
     target: is-01m2et4qhaset54bd7ce0239nx
 parent_id: is-01m28p7h39vcykq99dgjmvwv98
 created_at: 2026-09-14T01:57:34.750Z
-updated_at: 2026-09-15T04:27:53.884Z
+updated_at: 2026-10-06T08:30:48.652Z
+closed_at: 2026-10-06T08:30:48.652Z
+close_reason: "Done: 78d531c55 'Adopt the owner's defaults for the law, dial, beat and drain' landed via PR #171 (merged 2026-09-15); the move beat was later shortened to 0.4 s by owner request (d486a3105)."
+resolution: null
+duplicate_of: null
 ---
 Owner-chosen defaults for the retained workbench controls, on PR #160's head 4a1bf3b8:
 - pair law: rigidity 0.35, repulsion 950, attraction 80, range 0.15 (was 0.15 / 2500 / 0 / 0; wall law unchanged)

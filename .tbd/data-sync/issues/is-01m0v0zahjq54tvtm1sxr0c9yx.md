@@ -5,8 +5,8 @@ title: Gate static SVG safety, determinism, and retained replay
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+version: 6
+spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
   - visualization
@@ -18,7 +18,7 @@ dependencies:
     target: is-01m0v10ekmcac6c3v3wm9qtsda
 parent_id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 created_at: 2026-08-24T23:16:31.409Z
-updated_at: 2026-08-25T03:00:04.895Z
+updated_at: 2026-10-10T23:03:10.985Z
 closed_at: 2026-08-25T03:00:04.895Z
 close_reason: Implemented and validated the deterministic SVG toolkit, exact and numerical adapters, safe serializer, static and animated views, typed overlays, CLI, retained gallery, n=3 migration, documentation, and full gate.
 resolution: null

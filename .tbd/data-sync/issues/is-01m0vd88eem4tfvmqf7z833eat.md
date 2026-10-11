@@ -5,14 +5,14 @@ title: "PR26 R4: repair exp-012 orphaned provenance and validation claim"
 kind: bug
 status: closed
 priority: 2
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - review-finding
 dependencies: []
 parent_id: is-01m0vd6xfaz5p8ccnq6xrnr5x5
 created_at: 2026-08-25T02:51:07.085Z
-updated_at: 2026-08-25T03:10:52.644Z
+updated_at: 2026-10-10T23:00:15.675Z
 closed_at: 2026-08-25T03:10:52.643Z
 close_reason: "Review premise rebutted with fresh-clone ancestry evidence; the real shallow-history diagnostic defect was fixed and tested on PR #26 head a9a2992."
 resolution: null

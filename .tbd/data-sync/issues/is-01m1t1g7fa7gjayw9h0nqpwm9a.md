@@ -3,13 +3,17 @@ type: is
 id: is-01m1t1g7fa7gjayw9h0nqpwm9a
 title: "main is red: the n=20 doubled-net test names the pointer T-021 moved, so it reads the wrong certificate"
 kind: bug
-status: open
+status: closed
 priority: 0
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-06T00:22:12.704Z
-updated_at: 2026-09-06T00:22:28.937Z
+updated_at: 2026-10-06T08:42:45.839Z
+closed_at: 2026-10-06T08:42:45.839Z
+close_reason: "Done: main is no longer red on this test. origin/main tests/test_fractional_interval.py::test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net asserts T-021's enclosure 200001/200000 and bounded_side 97/20 against the pointer, ties it to declared least_cell_mass, and documents the D-458 pointer convention."
+resolution: null
+duplicate_of: null
 ---
 Main has been red on the exhaustive tier since PR 83 merged at 663ca37e. Confirmed by run history: run 604 (5ebeb62a, PR 86) succeeded, run 625 (663ca37e, PR 83) failed, run 638 (3f8e1043, PR 88) still fails. PR 88's merge fixed the OTHER half of run 625 -- the stale composite figure record -- so this is now the only thing red.
 

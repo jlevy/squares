@@ -3,9 +3,9 @@ type: is
 id: is-01m1ythhcq8vqfdk9zhaz8h2k8
 title: "Session097: resume BC264 kernel pricing and publish an integrated checkpoint"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 10
+version: 11
 spec_path: packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
 labels: []
 dependencies: []
@@ -17,7 +17,11 @@ child_order_hints:
   - is-01m1ywg4pgeabnvecct57c4e5h
   - is-01m1z65fjbxhx1jy0bqwmvf95h
 created_at: 2026-09-07T20:56:47.766Z
-updated_at: 2026-09-08T00:19:55.593Z
+updated_at: 2026-10-06T08:25:48.741Z
+closed_at: 2026-10-06T08:25:48.740Z
+close_reason: "Finished wrapper: Session 097 (2026-09-07/08). Its integrated checkpoint PR 116 merged 2026-09-08 (a3b4f03e5)."
+resolution: null
+duplicate_of: null
 ---
 User explicitly asked to continue after the completed eight-active-hour block. Resume the selected BC264/H114 handoff on landed main4620e483; one integrated research PR. First slice is source-free kernel semantics and fixed-feature pricing, no target or numerical solve before a narrower prospective claim and controls. Coordinate max author, independent max reviewer, high mechanical handoff audit. Preserve external PR110/111 allocations and merged Session096. First scientific design slice ends no later than 21:27 UTC on September7; subagent first-pass reports by 21:18, cross-review and disposition before cap. Plan remaining work prospectively from those results, with a first publishable checkpoint within two active hours; do not count prior credit interruption or maintenance as new science.
 

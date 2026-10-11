@@ -3,9 +3,9 @@ type: is
 id: is-01m2etr75jfh3t3ry7kj1ccqrb
 title: "Land the n11 PR stack (#156, #161–#166) and sibling #157 on main"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 16
+version: 17
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -29,7 +29,11 @@ child_order_hints:
   - is-01m2evx883khfqrmxg6fm6rqkg
   - is-01m2ey0emj7eakmbc3eyg1vj3f
 created_at: 2026-09-14T02:08:17.585Z
-updated_at: 2026-09-14T19:52:57.773Z
+updated_at: 2026-10-06T08:41:36.192Z
+closed_at: 2026-10-06T08:41:36.192Z
+close_reason: "Done: #156 and #161-#166 landed in 2f8865b6, #157 in 620e4731 and #167 in 80bcdbb0, all ancestors of origin/main eb43ffe9a. Children disposed: think-0tht done, think-1eul superseded, think-tdfl moved to think-9a7v (its remaining killpg sites in validate.py, run_negative_controls.py and validation_timing.py are still unfixed)."
+resolution: null
+duplicate_of: null
 ---
 Land the unmerged n11 PR stack on main: #156 (BC329 runner, codex/n11-bc329-runner-publication-stack), the linear chain #161 → #162 → #163 → #164 → #165 → #166, and the sibling #157 (claude/n11-w7-weighted-atom-admission). #167 (H-162 preregistration, draft) stays above #166 as the next layer and retargets to main when the stack merges.
 

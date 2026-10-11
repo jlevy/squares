@@ -5,8 +5,8 @@ title: Repair H-028 continuity-impossible uniqueness criterion
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 4
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - focus-soundness
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0rpqqcarvbbtswbgnxd7cvp
 created_at: 2026-08-24T03:17:20.136Z
-updated_at: 2026-08-24T03:27:15.298Z
+updated_at: 2026-10-10T22:55:05.136Z
 closed_at: 2026-08-24T03:27:15.297Z
 close_reason: H-028 now asks for one refined local minimizer recovered near the reference plus a boundary gap, not uniqueness of a grid point inside a positive value tolerance. D-119 records the validity error; schemas, ledger, synopsis, format checks and the 118-second full gate pass.
 resolution: null

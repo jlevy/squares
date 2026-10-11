@@ -1,0 +1,42 @@
+---
+type: is
+id: is-01m4crx46j6btjrana5yp2g4dp
+title: "PR #395: resolve broad push-gate regressions before completion"
+kind: bug
+status: closed
+priority: 1
+version: 8
+delegate: codex-pr395-site-review
+labels: []
+dependencies: []
+parent_id: is-01m4cecqqmt13gys8265mpra32
+hold: null
+hold_until: null
+created_at: 2026-10-08T03:28:56.016Z
+updated_at: 2026-10-08T13:09:30.729Z
+started_at: 2026-10-08T03:29:10.723Z
+closed_at: 2026-10-08T13:09:30.729Z
+close_reason: |
+  Completed the covered PR395 source implementation and review scope at 9700cef526a3bcb22d35504c498e23006b910635 against e74a82190302a576e312a9daf2780626971454a2. All174 changed paths accounted; all30 A–E findings addressed by four pinned formal technical reviews and five public disposition replies. Packing37776513680, Pages37776513669 and full37776676917 terminal SUCCESS:105/105 unique selections, all11 mandatory jobs/all10 scientific jobs/all3 exhaustive shards; unchanged strict12-second and browser budgets pass;5305 publication checks, all5 producers/all3 PDFs and20 rendered+20 static contexts pass. No live-deployment or owner Search Console claim: merge confirmation remains required and actual served-site verification follows merge.
+  reviews B: https://github.com/jlevy/squares/pull/395#pullrequestreview-5457000213
+  reviews C: https://github.com/jlevy/squares/pull/395#pullrequestreview-5457000502
+  reviews D: https://github.com/jlevy/squares/pull/395#pullrequestreview-5457000871
+  reviews E: https://github.com/jlevy/squares/pull/395#pullrequestreview-5457001109
+  dispositions A: https://github.com/jlevy/squares/pull/395#issuecomment-6060495212
+  dispositions B: https://github.com/jlevy/squares/pull/395#issuecomment-6060495552
+  dispositions C: https://github.com/jlevy/squares/pull/395#issuecomment-6060495995
+  dispositions D: https://github.com/jlevy/squares/pull/395#issuecomment-6060496417
+  dispositions E: https://github.com/jlevy/squares/pull/395#issuecomment-6060496706
+  CI: https://github.com/jlevy/squares/actions/runs/37776676917
+resolution: null
+duplicate_of: null
+---
+The interrupted push gate on 1cf7ca0 passed 62 of 64 steps. Browser floor failed two design-token contracts for newly added workbench-startup CSS literals, and the broad normal Python test run showed F/E markers before interruption for the independently confirmed C3 guard correction. Diagnose with fail-fast reporting, retain meaningful contracts, fix all regressions, and rerun required push/full/exact-head hosted CI.
+
+## Notes
+
+Exact458 ordinary Packing passed all behavioral suites but the script-floor checker rejected a test reference to measure.GLYPHS. The correction shares the production owned read_glyphs helper with its real CSSOM regression; 467-probe ownership and 1973-file no-embedded-JavaScript checks now pass with no allowlist. Pages failed a genuine but currently unattributed frontier1280/light task of354ms against300ms; preserve that failure and all scalar limits, and add bounded native task/sample/optional script-frame diagnostics for the next hosted run. No source-derived frontier cause is claimed and no task is exempted. An advisory12.35s native consumer node is separated by actual house/registry/producer contracts with each assertion and fresh subprocess intact; the unrelated single flagged census is unchanged pending strict evidence. Final-head CI remains required.
+
+Final strict triage, 2026-10-08: da1371f68 ordinary Packing attempt2 and Pages are terminal SUCCESS, with original attempt1 tracking failure preserved; open timing follow-up think-kyzi was moved to its open overarching epic think-wgo1, keeping its open/unclaimed state and existing notes. Old full45831c464 run37764836996 is terminal FAILURE: all105 logical steps accounted,102passed/3failed; all10 scientific prerequisites/all3 exhaustive shards pass. Embedded-JS ownership and native consumer actualCALL12.13s are already repaired in da137. New unchanged n108 translation-escape whole-record replay control has actualCALL14.64s against12, CPUlowerbound12.89s; no assertion failed. Census PASSED below12s(total11.416s), so no census edit. Astra source triage confirms n108 is one complete screen with all4 tolerances, every square and fresh full moved-packing replays; splitting partial computations would weaken it. Investigate only invocation-local redundant computation while preserving the entire unchanged record assertion, all scientific inputs, guards and original ceilings. Final exact-head full checkpoint and pinned reviews remain required.
+
+a0025a13f exact-head ordinary Packing37772368312 failed six n11 composition/completion controls because the retained local-isolation receipt binds the unchanged research verifier source bytes. Pages37772368294 is terminal SUCCESS with20 rendering samples, zero failures, maxlongTask158ms and maxCLS0.01593. Full10537772431103 continues read-only to terminal. Both Astra agents are addressing the precise compatibility regression: restore legacy verify.py byte-identically, isolate invocation-local SAT reuse in an explicit prepared replay module, retain every complete fresh check/all68 n108 replay calls and unchanged controls/budgets. Descriptive replay metadata must be honest and regenerated through the existing targeted producer with every scientific record/aggregate/parameter preserved. No scientific source hash/golden guard waiver or corpus rerun campaign; final new-head hosted proof and held publication remain required.

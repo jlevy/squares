@@ -5,8 +5,8 @@ title: Review and integrate PR 24 workflow entry points into PR 22
 kind: task
 status: closed
 priority: 1
-version: 20
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 21
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - integration
@@ -31,7 +31,7 @@ child_order_hints:
   - is-01m0v0gaw206rr24hmq1jkvf4m
   - is-01m0v0gbk6cwa0hctead9tbz78
 created_at: 2026-08-24T22:46:44.125Z
-updated_at: 2026-08-24T23:28:48.688Z
+updated_at: 2026-10-10T22:49:51.779Z
 closed_at: 2026-08-24T23:28:48.688Z
 close_reason: PR 24 was reviewed across twelve tracked findings, corrected without changing scientific criteria, merged into PR 22 as 0775c20, fully validated, remotely verified, dispositioned, and retired. D205-D218 and all transition evidence are durable; PR 22 is clean/mergeable and the research resume queue is frozen.
 resolution: null

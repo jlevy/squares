@@ -3,9 +3,9 @@ type: is
 id: is-01m1jv0jqd4w7fz4tq3tj25y53
 title: "Agenda 016: results-first continuation, rigidity, and remediation"
 kind: epic
-status: open
+status: closed
 priority: 0
-version: 14
+version: 15
 spec_path: packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md
 labels:
   - packing
@@ -24,6 +24,10 @@ child_order_hints:
   - is-01m1jvy1wjzqm08pz5whprf45b
   - is-01m1jwp8148ey4cjc0nxt93csy
 created_at: 2026-09-03T05:14:07.468Z
-updated_at: 2026-09-03T05:43:25.986Z
+updated_at: 2026-10-06T08:27:51.041Z
+closed_at: 2026-10-06T08:27:51.041Z
+close_reason: "Finished wrapper: Agenda 016 (agenda status completed, 2026-09-03; run merged in PR 77, 9d5eae0f5). The N17-SKIP children 5j8d, 6q88 and bagn were moved to the top level."
+resolution: null
+duplicate_of: null
 ---
 Codify the selected ten-hour agenda after Agenda 015 closeout: complete the fresh H-052 continuation and conditional 4.5058 adoption, pursue an independently reviewed n = 5 local-rigidity theorem, run one bounded W9 trust-surface wave in parallel, and reserve the final two hours for mandatory W10 disposition and reprioritization. This planning bead owns the agenda contract; research execution begins only from its published handoff.

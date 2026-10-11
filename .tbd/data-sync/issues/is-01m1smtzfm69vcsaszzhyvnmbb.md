@@ -3,13 +3,17 @@ type: is
 id: is-01m1smtzfm69vcsaszzhyvnmbb
 title: Migrate Markdown to LaTeX math, on a branch of its own, after the current work lands
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-05T20:40:53.491Z
-updated_at: 2026-09-05T20:40:53.491Z
+updated_at: 2026-10-06T08:41:25.374Z
+closed_at: 2026-10-06T08:41:25.374Z
+close_reason: "Done: 00346a270 (2026-09-29) 'Merge the LaTeX math migration for the reader documents' (5bff221b2), with devtools migrate_math and the check_math_markup ratchet (3eebc2bdf). README.md and TUTORIAL.md on origin/main write their math as $...$."
+resolution: null
+duplicate_of: null
 ---
 DEFERRED: do not start until the explainer branch is merged and live. Then check out a new branch.
 

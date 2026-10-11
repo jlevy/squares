@@ -3,13 +3,17 @@ type: is
 id: is-01m20w2mg6aykhxw8khp0frpw9
 title: "gate-budgets: the full tier's reference shape is not a CI shape, so its drift rule can never arm"
 kind: task
-status: open
+status: closed
 priority: 3
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-08T16:02:05.446Z
-updated_at: 2026-09-08T16:02:05.446Z
+updated_at: 2026-10-06T08:50:37.359Z
+closed_at: 2026-10-06T08:50:37.358Z
+close_reason: "Done, option (b): the full tier's entry in packing/devtools/gate-budgets.yaml on origin/main says it is never clocked end to end because CI splits it, so only the ceiling applies."
+resolution: null
+duplicate_of: null
 ---
 devtools/gate-budgets.yaml declares the `full` tier's reference shape as 2 cpus at `--jobs 2 --inner-jobs 1`. No hosted runner offers that shape (ubuntu-latest reports 4 cpus), and the only CI invocation of the tier is the three-skip `validate` job at `--jobs 1 --inner-jobs 2` (1795.48s on run 34214731500), which the gate reports as "within the declared band ... not the full tier's reference, so the band was reported and not enforced". So `measured_seconds` stays null and the drift and stale rules for `full` can never arm as declared; the register's own comment warns that leaving an old reference in place "is how a band stays permanently unenforced".
 

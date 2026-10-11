@@ -5,15 +5,15 @@ title: Document the size-by-size basin confidence ladder
 kind: task
 status: closed
 priority: 0
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - process
 dependencies: []
 parent_id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
 created_at: 2026-08-24T17:04:33.467Z
-updated_at: 2026-08-24T17:15:43.765Z
+updated_at: 2026-10-10T22:49:04.849Z
 closed_at: 2026-08-24T17:15:43.764Z
 close_reason: Completed in 7ec721d before n=5. Added campaign/agendas/agenda-001-basin-confidence-ladder.md under packing.squares:ExperimentAgenda/v1, ledger validation/rendering, and concise links from packing README, campaign runbook, launch plan, SYNOPSIS, and session-009. It separates tool_validation, measurement_validation, and research; records size, state, budget, entry/exit evidence, bead, dependencies, and parallel groups through n=11. BC-003 is the only next ready size cell. Full 30-step gate passed in 30s.
 resolution: null

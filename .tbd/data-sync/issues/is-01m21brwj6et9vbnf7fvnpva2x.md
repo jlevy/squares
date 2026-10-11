@@ -5,14 +5,14 @@ title: Keep queued math hidden through bootstrap recovery
 kind: bug
 status: in_progress
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 delegate: kpress_font_pipeline
 labels: []
 dependencies: []
-parent_id: is-01m20v1mq20k9d9p1wg9s5qdsq
+parent_id: null
 created_at: 2026-09-08T20:36:23.236Z
-updated_at: 2026-09-12T08:56:20.840Z
+updated_at: 2026-10-06T08:21:43.929Z
 ---
 Pages34274946315 exposed a real slow-startup gap: the3s root recovery timer can reveal prepared formulas whose queued hydration has not begun. Give collected static targets independent pending visibility until completion or readable fallback, preserve the runtime deadline and no-JS behavior, and retain a delayed-queue/held-font regression. Delegate kpress_font_pipeline; independent review caption_rendering.
 

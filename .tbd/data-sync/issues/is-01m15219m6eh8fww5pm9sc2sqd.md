@@ -3,9 +3,9 @@ type: is
 id: is-01m15219m6eh8fww5pm9sc2sqd
 title: Reorganize the repository around the packing project
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 19
+version: 20
 labels: []
 dependencies: []
 child_order_hints:
@@ -28,7 +28,11 @@ child_order_hints:
   - is-01m15b68zcgvpqmyb1gad46xav
   - is-01m15b69acbnaetfj9f895en85
 created_at: 2026-08-28T20:47:28.901Z
-updated_at: 2026-08-28T23:27:29.611Z
+updated_at: 2026-10-06T08:43:39.316Z
+closed_at: 2026-10-06T08:43:39.316Z
+close_reason: "Done: all 18 children are closed and the reorganisation landed. origin/main has packing/ as the single container and the reader documents at the root, with no explorations/ tree (AGENTS.md Architecture Overview)."
+resolution: null
+duplicate_of: null
 ---
 Hoist the reader-facing documents of `explorations/packing/` to the repository root and
 collapse the remaining two levels to a single `packing/` container. `explorations/`

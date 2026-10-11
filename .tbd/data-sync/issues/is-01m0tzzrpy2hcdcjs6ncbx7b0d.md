@@ -3,10 +3,10 @@ type: is
 id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 title: "Spec: deterministic SVG rendering toolkit"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 22
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+version: 24
+spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
   - visualization
@@ -30,9 +30,9 @@ child_order_hints:
   - is-01m0vwd8ej4f7j45jk54mqmtxx
   - is-01m0vwd9a6sb0a92f46srt46q7
 created_at: 2026-08-24T22:59:17.342Z
-updated_at: 2026-08-25T07:20:16.382Z
-closed_at: null
-close_reason: null
+updated_at: 2026-10-10T23:02:48.757Z
+closed_at: 2026-10-06T08:28:16.240Z
+close_reason: "Done: the SVG toolkit spec landed in PR 25 (merged 2026-08-25, 05888b60f), sqpack.render is on main, and all 14 children, including the three reopened PR 25 follow-ups, are closed."
 resolution: null
 duplicate_of: null
 ---

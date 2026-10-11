@@ -5,15 +5,15 @@ title: Update negative-control diagnostics with the final defect total
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - bookkeeping
 dependencies: []
 parent_id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
 created_at: 2026-08-24T22:25:22.262Z
-updated_at: 2026-08-24T22:34:42.380Z
+updated_at: 2026-10-10T22:49:44.804Z
 closed_at: 2026-08-24T22:31:45.746Z
 close_reason: D-200 removed the duplicate synopsis enumeration; D-201 synchronized both mutation anchors and expected diagnostics. Derived counts and the complete negative-control suite are the checkpoint criteria.
 resolution: null

@@ -5,8 +5,8 @@ title: Run a factual and ownership audit of packing orientation docs
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/SYNOPSIS.md
+version: 4
+spec_path: SYNOPSIS.md
 labels:
   - packing
   - documentation
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m0tt28c28cfmj5j651zg4mzp
 parent_id: is-01m0r7tkdt35ged6b10gaf9wa0
 created_at: 2026-08-24T21:15:47.022Z
-updated_at: 2026-08-24T22:08:34.248Z
+updated_at: 2026-10-10T23:02:15.277Z
 closed_at: 2026-08-24T22:08:34.247Z
 close_reason: Audited current orientation and operational claims, removed stale round and ready-cell restatements, corrected frontier and reserved-id facts, and routed volatile state to generated owners.
 resolution: null

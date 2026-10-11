@@ -3,15 +3,19 @@ type: is
 id: is-01m29n9q19bfnmxmyknc927dt1
 title: The blind run has no seed, so there is one trial per n
 kind: bug
-status: open
+status: closed
 priority: 0
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-12T01:56:47.260Z
-updated_at: 2026-09-12T01:56:47.260Z
+updated_at: 2026-10-06T08:46:53.142Z
+closed_at: 2026-10-06T08:46:53.131Z
+close_reason: "Done: the seed is an input. setSeed is on origin/main in packages/workbench/src/application.js and the API type packages/workbench/src/api/workbench-api.ts, and the package benchmark (packages/workbench/tools/workbench_tools/benchmark.py) keys every trial by (n, seed, parameter set)."
+resolution: null
+duplicate_of: null
 ---
 **Found before any sweeping, and it reshapes the programme.** The blind run has no seed. Every source of randomness in the page is seeded from `n` alone:
 

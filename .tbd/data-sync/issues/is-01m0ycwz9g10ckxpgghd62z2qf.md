@@ -5,8 +5,8 @@ title: "Spike: fast PR lane and dedicated control workers"
 kind: task
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 labels:
   - packing
   - focus-efficiency
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0y081bfavkgmmjsq9qx6aeq
 created_at: 2026-08-26T06:42:40.558Z
-updated_at: 2026-08-26T07:26:38.093Z
+updated_at: 2026-10-10T22:56:21.309Z
 closed_at: 2026-08-26T07:26:38.092Z
 close_reason: Implemented, tested, pushed, and hosted-verified. PR path is 46s end-to-end; full 33-step integration gate passes separately; remaining multi-sample and matrix work stays on parent beads.
 resolution: null

@@ -5,8 +5,8 @@ title: "PR #23 review R8: Turn the macOS deep diagnostic into an asserted known 
 kind: bug
 status: closed
 priority: 2
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex@spud10
 labels:
   - engineering-maturity
@@ -17,7 +17,7 @@ parent_id: is-01m0vj13yefxcxhhew81ewfpvq
 hold: null
 hold_until: null
 created_at: 2026-08-25T04:15:24.687Z
-updated_at: 2026-08-25T04:44:37.664Z
+updated_at: 2026-10-10T22:57:50.834Z
 started_at: 2026-08-25T04:16:15.495Z
 closed_at: 2026-08-25T04:44:37.663Z
 close_reason: "Completed in 69e65eb: macOS CI now asserts D-203's exact known n=4 drift and fails on an unexpected pass or any different failure; local Python 3.14.7 probe passed."

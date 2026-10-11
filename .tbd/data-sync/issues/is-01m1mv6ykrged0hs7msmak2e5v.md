@@ -3,9 +3,9 @@ type: is
 id: is-01m1mv6ykrged0hs7msmak2e5v
 title: "Agenda 017: six-hour block -- certificate generator, rigidity readiness, ten exact ceilings, and the W9 handoff"
 kind: epic
-status: open
+status: closed
 priority: 0
-version: 14
+version: 15
 spec_path: packing/campaign/agendas/agenda-017-six-hour-generator-rigidity-ceilings-and-w9-block.md
 labels:
   - packing
@@ -24,6 +24,10 @@ child_order_hints:
   - is-01m1mv9d09s3zshk31bg901cqc
   - is-01m1mvevm9bs3ja68gxct998n2
 created_at: 2026-09-03T23:56:05.112Z
-updated_at: 2026-09-04T00:13:58.362Z
+updated_at: 2026-10-06T08:27:48.915Z
+closed_at: 2026-10-06T08:27:48.915Z
+close_reason: "Finished wrapper: Agenda 017 (agenda status completed, 2026-09-04; merged in PR 78). Still-open follow-ups were moved: 87gh, stb5 and ahyr to the top level, vyff under stb5, and the N17-SKIP uqgp and yw5g to the top level."
+resolution: null
+duplicate_of: null
 ---
 Umbrella for Agenda 017, the six-hour autonomous block planned after Agenda 016 merged (PR 77). Four disjoint lanes after a twenty-minute preflight: Lane A builds a first-party weighted fractional unavoidable-set certificate generator on the architecture behind the adopted 4.5058 bound and certifies the first n = 12-specific lower bound at a prospectively fixed threshold (H-061); Lane B states the general fixed-side local-rigidity theorem behind T-014 and decides whether the n = 40 second-order evidence supports it; Lane C runs one bounded upper-bound construction round; Lane D repairs think-ldq2's four unrepaired D-044/D-046 clauses under an independent reviewer and then makes the negative-control snapshot cap a property of the commit rather than the checkout (D-422). A seventy-five-minute W10 closeout ends the block so the operator can review before the ten-hour Agenda 018.

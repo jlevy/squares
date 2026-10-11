@@ -3,9 +3,9 @@ type: is
 id: is-01m2agbyn3sd63v0j87jer8vz0
 title: Reduce the seven-mark selection theorem to one explicit routing obligation
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 17
+version: 18
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max first-principles selection-theorem analysis; root integration
 labels:
@@ -25,9 +25,9 @@ child_order_hints:
   - is-01m2eraymw72npp61s5sbdb32d
   - is-01m2erbhvg9kcfptzwrnsbmkd9
 created_at: 2026-09-12T09:49:52.162Z
-updated_at: 2026-09-14T01:26:25.391Z
-closed_at: 2026-09-12T16:41:51.374Z
-close_reason: "Exact owner-selection obligation and finite remainder are now durably defined and independently reviewed at 39714308: 16 maximal avoiding products, 3 physical versus 10 fixed-chart orbits, two missing lemmas, scoped path deductions, and exact narrow controls. No global selection theorem or new n11 bound is claimed."
+updated_at: 2026-10-06T08:38:32.285Z
+closed_at: 2026-10-06T08:38:32.285Z
+close_reason: "Done: the reduction, report, review and checker milestone is on main (docs/project/research/research-2026-09-12-n11-selection-routing-first-principles.md; commit 39714308 is an ancestor of origin/main eb43ffe9a). Its experiment children are closed: ms9l decided, the rest superseded because s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical."
 resolution: null
 duplicate_of: null
 ---

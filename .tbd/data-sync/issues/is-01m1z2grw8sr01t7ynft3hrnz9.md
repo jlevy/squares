@@ -3,9 +3,9 @@ type: is
 id: is-01m1z2grw8sr01t7ynft3hrnz9
 title: Diagnose full-checkpoint historical regressions and test timeouts
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: packing/campaign/agendas/agenda-027-compatibility-and-restricted-families.md
 labels: []
 dependencies: []
@@ -13,7 +13,11 @@ parent_id: is-01m1ytzagmmx58w96ksbf5j3dj
 child_order_hints:
   - is-01m1z340za7pwx6k0wtwdx185q
 created_at: 2026-09-07T23:16:11.271Z
-updated_at: 2026-09-08T02:01:30.507Z
+updated_at: 2026-10-06T08:22:05.594Z
+closed_at: 2026-10-06T08:22:05.594Z
+close_reason: "Obsolete: this diagnosed one engine-gate run (d6f0c403, 2026-09-07) on a validation layout since replaced. Later sessions certify with passing full gates (e.g. session-168 at dd636b4cc), and CI was re-tiered (PRs 93, 98, 188, 370-378)."
+resolution: canceled
+duplicate_of: null
 ---
 Immutable d6f0c403 fullnative71633 completedexit1 at23:14:11:3616.36gate3616.57external,3760.14user199.62sys,10cpus10jobs3inner (notreference). Failures historicalregressions D019 anglefold/linesearch andD168 adjacentcellclosure; fastbehavioral testtimeceilings; slow1800sec andexhaustive3600sec timeouts. Other62stepspassed. Source/logretained /private/tmp/squares-session097-engine-full.log. Do notpresumeallarehostload, removechecks, relabelpartialfull, or raisebudgetswithoutmatcheddata. Diagnoseowned controls in a fresh bounded maintenance/efficiency allocation, preserveactualpreviousfailure. No H125sciencewasrun. PR114main373bebfont/layout changes arenotcertifiedbythisoldenginegate.
 

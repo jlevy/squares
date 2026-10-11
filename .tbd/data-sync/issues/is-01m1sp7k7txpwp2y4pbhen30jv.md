@@ -3,9 +3,9 @@ type: is
 id: is-01m1sp7k7txpwp2y4pbhen30jv
 title: Deepen the exact fractional frontier above 3.81
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 16
+version: 17
 labels:
   - research
   - fractional
@@ -28,6 +28,10 @@ child_order_hints:
   - is-01m1vvtw71vymhb8d6hqz66f9a
   - is-01m1vvtwxnf6kejcx3q4yxgwav
 created_at: 2026-09-05T21:05:15.504Z
-updated_at: 2026-09-06T17:21:39.764Z
+updated_at: 2026-10-06T08:24:09.402Z
+closed_at: 2026-10-06T08:24:09.402Z
+close_reason: "Superseded: the fractional frontier above 3.81 (agenda-025) is retired. T-060 settles s(11), and SYNOPSIS.md says s(11) lower-bound research is method development only. The open questions stay recorded in the H-registry."
+resolution: canceled
+duplicate_of: null
 ---
 Execute agenda-025 under a dedicated manager using BC-230..239, H-070..079, and exp-070..089: formalize and verify adaptive direction-dependent witness cores, resume the retained 3.82 primal/dual state, use margin sweeps only as seeds for unrestricted column generation, and route to rational angle-cell kernels only under predeclared gates. The manager receives a frozen local resource packet and cannot write shared campaign/frontier state or promote claims.

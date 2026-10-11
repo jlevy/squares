@@ -5,8 +5,8 @@ title: Establish the fast Python refactor-safety test harness
 kind: task
 status: closed
 priority: 0
-version: 9
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 10
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
   - testing
@@ -25,7 +25,7 @@ dependencies:
     target: is-01m0ttgtaj1j5rp28wxw84v4wr
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:22:58.150Z
-updated_at: 2026-08-24T22:55:27.728Z
+updated_at: 2026-10-10T22:56:40.003Z
 closed_at: 2026-08-24T22:55:27.727Z
 close_reason: Implemented explicit pytest collection and 15 fast behavioral, architecture, CLI, and failure-path contracts while retaining exact, replay, differential, golden, and 38 mutation-control layers; complete validation passed.
 resolution: null

@@ -3,13 +3,17 @@ type: is
 id: is-01m20vzx7zyeaqj8ss54mzdeck
 title: "Records gate: an honest terminal state for a session whose cost was not measured"
 kind: feature
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-08T16:00:36.094Z
-updated_at: 2026-09-08T16:00:36.094Z
+updated_at: 2026-10-06T08:28:29.659Z
+closed_at: 2026-10-06T08:28:29.659Z
+close_reason: "Done on main: agent-session.schema.yaml has resource_usage_unmeasured (reason, detail, disposition_bead, handoff_role), an explicit terminal state for a session whose native usage cannot be measured (cc98c7740)."
+resolution: null
+duplicate_of: null
 ---
 A session record that is finished but cannot be terminalised is a time bomb: session-099 (PR 130) had to be extended twice because the records gate refuses a terminal session without a rollup, while the ledger's deadline rule fails every commit on main once an in-progress deadline passes. There is no honest way to say "this session is over and its cost was not measured".
 

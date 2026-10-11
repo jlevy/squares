@@ -5,11 +5,13 @@ title: Arm the gate-budget drift rule against run-to-run spread, not a single sa
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m3v4ewvx1nfff15khk2s9taz
 created_at: 2026-09-06T10:46:09.964Z
-updated_at: 2026-09-08T23:14:38.901Z
+updated_at: 2026-10-01T07:04:32.877Z
 ---
 gate-budgets.yaml compares against one recorded measured_seconds with a 1.5x drift rule and a 0.6x stale rule. Measured run-to-run spread on the hosted runners is about 34% (chunk census 81.18s vs 108.91s on identical code; validate 112s vs 133s), so a 1.5x rule sits close to the noise floor: it will fire on quiet regressions and stay silent on real ones. Record a band over repeated samples rather than a point, or move the comparison to cpu-seconds the way devtools/cpu_durations.py does per test. See D-472.
 

@@ -3,14 +3,18 @@ type: is
 id: is-01m12vws2trz68we4d26g56pr4
 title: n=11 rigid flag regressed from true to null
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
 created_at: 2026-08-28T00:21:40.569Z
-updated_at: 2026-08-28T01:26:20.485Z
+updated_at: 2026-10-06T08:35:25.300Z
+closed_at: 2026-10-06T08:35:25.295Z
+close_reason: "Done: origin/main packing/frontier/n-011.md carries reported_upper_bound.catalogue_rigid: rigid and a rigidity block (property locally-rigid, E-n011-trump-local-rigidity); the catalogue flag is now a typed transcription the D-354 test (test_frontier_rigidity_assessment.py) keeps apart from the computed property."
+resolution: null
+duplicate_of: null
 ---
 frontier/n-011.md records reported_upper_bound.rigid: null. Three retained sources say the packing is rigid: resources/web/kingbird-squares-in-squares.md:80, resources/papers/friedman-ds7-packing-unit-squares-in-squares.md:71 ('This packing is also rigid'), and resources/papers/kingbird-square-11-provenance.svg:21. The repo's own research doc records both at docs/project/research/research-2026-08-22-packing-11-unit-squares.md:184.
 

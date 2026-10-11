@@ -5,8 +5,8 @@ title: Deep creativity and mathematical-frontier portfolio review
 kind: task
 status: closed
 priority: 0
-version: 12
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 13
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 refs:
   - kind: pr
     url: https://github.com/jlevy/thinking-scratchpad/pull/17
@@ -26,7 +26,7 @@ child_order_hints:
   - is-01m0rs9vdnfkw9yjsadek2vt22
   - is-01m0rwbhm9deh7vc4mzjk7p98e
 created_at: 2026-08-24T01:39:07.778Z
-updated_at: 2026-08-24T03:27:15.766Z
+updated_at: 2026-10-10T22:54:00.516Z
 closed_at: 2026-08-24T03:27:15.765Z
 close_reason: Deep creativity and mathematical-frontier review complete. The durable review, X-002, 40-artifact registry, readiness agenda, standing review, source archive, defect log, session record and beads agree. The normal gate passed in 118 seconds with all 30 mutation controls; execution work remains open on its dedicated beads.
 resolution: null

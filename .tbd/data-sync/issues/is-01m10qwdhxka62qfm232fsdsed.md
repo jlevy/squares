@@ -3,16 +3,20 @@ type: is
 id: is-01m10qwdhxka62qfm232fsdsed
 title: Run the balanced ten-hour square-packing research agenda
 kind: feature
-status: in_progress
+status: closed
 priority: 0
-version: 9
+version: 10
 spec_path: explorations/packing/campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
 labels:
   - packing
   - focus-process
 dependencies: []
 created_at: 2026-08-27T04:33:05.594Z
-updated_at: 2026-08-27T09:51:26.414Z
+updated_at: 2026-10-06T08:43:45.776Z
+closed_at: 2026-10-06T08:43:45.775Z
+close_reason: "Wrapper done: the ten-hour agenda-003 run ended. Its note records Session 026 as terminal and hands remaining cells to their own beads (think-3yv8, think-trkj, think-u97a). No owner clock remains."
+resolution: null
+duplicate_of: null
 ---
 Coordinate one mutable ten-hour research agenda across two five-hour source sessions. Begin by repairing observed pipeline failures, measure loop efficiency about every two hours, rotate across at least three independent scientific lanes, run W3 insight synthesis after material results, protect both finalization reserves, and leave one terminal logbook synthesis. This bead owns the user-level clock, agenda checkpoints, integration, and final handoff; scientific criteria and results remain with their existing H/experiment owners.
 

@@ -5,15 +5,15 @@ title: Treat macOS EPERM from killpg as a live process group in every reaper
 kind: bug
 status: open
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - validation
   - macos
 dependencies: []
-parent_id: is-01m2etr75jfh3t3ry7kj1ccqrb
+parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-09-14T02:26:13.683Z
-updated_at: 2026-09-14T03:43:15.197Z
+updated_at: 2026-10-06T08:33:28.509Z
 ---
 On macOS, `os.killpg(pgid, 0)` and group signal sends raise PermissionError (EPERM) rather than ProcessLookupError (ESRCH) while a group's last member is exiting and not yet reaped. Measured on this Mac with sysctl(KERN_PROC_PGRP): the remaining member was a grandchild reparented to launchd with P_WEXIT (0x2000) set; EPERM lasted 0.1–22 ms, then ESRCH. The UNIX03 kill() reports "group found, no signalable member" as EPERM. A post-reap SIGKILL send also returned EPERM in 6/60 probe trials. Linux is unaffected, which is why hosted CI never saw it.
 

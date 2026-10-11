@@ -3,14 +3,19 @@ type: is
 id: is-01m291gk38jbfty0zp83qq58s8
 title: Split the move into a rearrange phase and a correction phase
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 created_at: 2026-09-11T20:11:01.083Z
-updated_at: 2026-09-12T01:01:31.565Z
+updated_at: 2026-10-06T08:31:22.220Z
+closed_at: 2026-10-06T08:31:22.220Z
+close_reason: |
+  Done (bead review 2026-10-06, origin/main eb43ffe9a): Implemented: packages/workbench/src/motion-settings.ts on origin/main has the four spans dwell/move/correct/settle and physicalPresentationProgress maps move vs correct separately; 6a3160428 prices all four spans. grade_motion pricing by span was a follow-on, not this bead's ask
+resolution: null
+duplicate_of: null
 ---
 The owner: the move time is really two times added together -- the physical organisation time, and then the correction time -- and they should be split out properly.
 

@@ -3,9 +3,9 @@ type: is
 id: is-01m1sp9zws6twqngzdsphwnbm7
 title: Resume the retained 3.82 primal-dual state
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@spud10.local
 labels:
   - research
@@ -14,8 +14,12 @@ parent_id: is-01m1sp7k7txpwp2y4pbhen30jv
 hold: null
 hold_until: null
 created_at: 2026-09-05T21:06:34.008Z
-updated_at: 2026-09-06T07:45:57.746Z
+updated_at: 2026-10-06T08:22:53.934Z
 started_at: 2026-09-06T03:21:56.559Z
+closed_at: 2026-10-06T08:22:53.934Z
+close_reason: "Superseded: the BC-232 3.82 primal-dual resume stopped after leg 1 (2026-09-06). T-025/T-026 later reached 3.82 and above, and T-060 settles s(11)."
+resolution: canceled
+duplicate_of: null
 ---
 BC-232: resume the retained 3.82 cutting state from its warm JSON with run_fractional_cutting --warm, not the incompatible NPZ column-generation checkpoint. Apply the fixed four-CPU-hour shrinkage rule. If the row-converged primal drops below 11, require a tested rationalize/freeze bridge before treating it as an exact certificate.
 

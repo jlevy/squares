@@ -3,9 +3,9 @@ type: is
 id: is-01m1jv39gx9jc5whj8bn6t6m4p
 title: Publish the Agenda 016 contract and handoff
 kind: task
-status: in_progress
+status: closed
 priority: 0
-version: 7
+version: 8
 spec_path: packing/campaign/agendas/agenda-016-results-first-continuation-rigidity-and-remediation.md
 labels:
   - packing
@@ -15,7 +15,11 @@ dependencies:
     target: is-01m1jvy1wjzqm08pz5whprf45b
 parent_id: is-01m1jv0jqd4w7fz4tq3tj25y53
 created_at: 2026-09-03T05:15:36.348Z
-updated_at: 2026-09-03T06:38:24.834Z
+updated_at: 2026-10-06T08:26:10.765Z
+closed_at: 2026-10-06T08:26:10.764Z
+close_reason: "Done: the Agenda 016 contract was published in PR 76, merged 2026-09-03 (bc6d4a87b)."
+resolution: null
+duplicate_of: null
 ---
 Create the active Agenda 016 soft-schema artifact from the Agenda 015 W10 ranking and operator reprioritization, reconcile SYNOPSIS, regenerate owned views, obtain independent mathematical and process review, and publish a green planning PR. Do not execute Agenda 016 research inside this bead. Keep this bead in progress and blocking BC-147 until the planning PR is merged and its exact revision is hosted-green; then close it to expose the launch preflight.
 

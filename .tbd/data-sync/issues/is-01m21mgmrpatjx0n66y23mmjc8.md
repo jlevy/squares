@@ -3,18 +3,18 @@ type: is
 id: is-01m21mgmrpatjx0n66y23mmjc8
 title: Refresh the CI suite timing baseline from current hosted runs
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels: []
 dependencies: []
 parent_id: is-01m2kb4xhaqh3bv0cnnqnqvvsp
 created_at: 2026-09-08T23:09:10.292Z
-updated_at: 2026-09-16T03:00:08.866Z
-closed_at: null
-close_reason: null
-resolution: null
+updated_at: 2026-10-06T08:45:41.994Z
+closed_at: 2026-10-06T08:45:41.993Z
+close_reason: "Superseded: the single 'suite' timing record it would refresh no longer exists; PRs #185 and #188 sharded the lane, and gate-budgets.yaml on origin/main carries measured records for suite_a to suite_d."
+resolution: canceled
 duplicate_of: null
 ---
 Final rendering CI run34288782986 at a10569d1 passed all4,283 behavioral tests in88.84s but failed the existing lower timing bound against the old162.62s one-sample baseline. Preserve the current tests and regression policy, inspect comparable prior hosted readings and refresh the timing record honestly. Track broader noisy single-point policy under existing think-be1s. Product rendering checks and Pages all passed.

@@ -3,14 +3,18 @@ type: is
 id: is-01m32pk4bbz93kbd3xajck8a1z
 title: packing-ledger check measures deadlines against the HEAD commit's timestamp, not the wall clock
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m32dvmtc77znp14556p7c5w2
 created_at: 2026-09-21T19:20:25.194Z
-updated_at: 2026-09-21T19:20:25.194Z
+updated_at: 2026-10-06T08:48:08.382Z
+closed_at: 2026-10-06T08:48:08.382Z
+close_reason: "Done: the reference point is now stated. conventions.md line 474 on origin/main says the instant is HEAD's committer date, sqpack/campaign/ledger.py's Deadlines docstring explains why (D-468, fixed), and development.md records the change from the wall clock."
+resolution: null
+duplicate_of: null
 ---
 Found 2026-09-21 while closing session-150.
 

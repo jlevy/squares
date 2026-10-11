@@ -5,8 +5,8 @@ title: Define workflow entry and transition contracts in the packing synopsis
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/SYNOPSIS.md
+version: 4
+spec_path: SYNOPSIS.md
 labels:
   - packing
   - documentation
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m0tt27gkgew93b6xzza03emd
 parent_id: is-01m0r7tkdt35ged6b10gaf9wa0
 created_at: 2026-08-24T21:15:45.712Z
-updated_at: 2026-08-24T22:08:32.266Z
+updated_at: 2026-10-10T23:02:10.774Z
 closed_at: 2026-08-24T22:08:32.266Z
 close_reason: Added the README selector, full synopsis entry and transition contracts, AgentSession/v2 phase history, migrated sessions 001-009, and generated workflow summaries.
 resolution: null

@@ -3,15 +3,19 @@ type: is
 id: is-01m32szhzvqgp7awv3kd69m95p
 title: Shrink the n headline slightly and enlarge the packing box
 kind: task
-status: open
+status: closed
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m32t2yc3xenfb97kxn844rc7
 created_at: 2026-09-21T20:19:38.106Z
-updated_at: 2026-09-21T20:21:38.976Z
+updated_at: 2026-10-06T08:32:05.814Z
+closed_at: 2026-10-06T08:32:05.814Z
+close_reason: "Done: e269012e1 'Restage the poster' (2026-09-21, merged via PR #218 on 2026-09-22) grows the box to 1056 x 1056 at x = 30 and drops the headline 64 -> 58 px."
+resolution: null
+duplicate_of: null
 ---
 Owner's request, two adjustments to the stage:
 

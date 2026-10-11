@@ -5,8 +5,8 @@ title: Make trajectory rendering honor or reject rotation and container changes
 kind: bug
 status: closed
 priority: 2
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+version: 5
+spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
   - validity
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 created_at: 2026-08-25T07:15:59.570Z
-updated_at: 2026-08-25T07:24:42.553Z
+updated_at: 2026-10-10T23:03:41.123Z
 closed_at: 2026-08-25T07:24:42.552Z
 close_reason: Trajectory rendering now validates translation-only, fixed-container frames and rejects rotation, shape-offset, and container changes with controls.
 resolution: null

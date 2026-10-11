@@ -3,13 +3,24 @@ type: is
 id: is-01m1sx5m1p5868jhwcdzfkvada
 title: The mutation-snapshot cap has 0.9% headroom and the record keeps growing
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 6
+version: 17
+spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
+delegate: claude-code@vm
 labels: []
 dependencies: []
+parent_id: is-01m3p5wj25knm7rbx0g4a4tpvg
+child_order_hints:
+  - is-01m3qzn1k3708fhtrsw1mqdgvk
+  - is-01m45xb9xadcds46ctgqra9aw2
+  - is-01m4fzyh9p9bz01rgq7wpx4vwr
+  - is-01m4g0x7a6c93hvg68nnvxp41h
+hold: null
+hold_until: null
 created_at: 2026-09-05T23:06:30.837Z
-updated_at: 2026-09-22T19:46:18.161Z
+updated_at: 2026-10-09T09:46:31.110Z
+started_at: 2026-10-05T11:32:06.787Z
 ---
 Measured 2026-09-05 after pruning packing/site/ and the link-preview card: the snapshot is 66,490,716 bytes against a 67,108,864 cap, 99.1% of it, 618,148 bytes of headroom. SNAPSHOT_MAX_BYTES' own comment says a guard with 2% headroom fires for the wrong reason; 0.9% is worse than the case it warns about, and the next committed artifact of any size trips it.
 
@@ -95,3 +106,49 @@ read them from outside the record.
 
 Do not close this bead on the strength of the above. Half its trace is done and the other
 half is not.
+
+2026-09-29 PR 246: think-r5x7 prunes only agenda-040/one-spare-inventory-n32.json (3,344,052 bytes), after consumer and independent Sol review. Other agenda-040 files remain. Two focused tests pass; snapshot measured 167,182,901 bytes against unchanged 167,772,160-byte cap, leaving 589,259 bytes. This bounded repair does not discharge structural headroom work. Inventory is retained in Git; regression forces reconsideration if it becomes a linked or registered dependency.
+
+2026-09-29 PR246 main merge: snapshot rose above the unchanged 160 MiB cap after new records. A proposed integrated-fast.log prune was rejected because Session088 links it inline and the dependency copier correctly restores it. Reviewed replacement omits only session-152-validation/validation-timings-validate-1.zip (499,501 bytes) from temporary workers; its sole prior reference is a plain session output path. Archive and source session stay in Git; dependency copyback remains active. Three focused tests, Ruff and BasedPyright pass; snapshot 167,292,104 bytes, 480,056 bytes headroom. This narrow repair does not close the broader structural headroom issue.
+
+Read-only Sol design audit (Session164): separate existence-only links from content inputs. A frozen worker manifest may record existing tracked regular non-Markdown files deliberately omitted under PRUNE; link checks may consult it only for those missing targets in a negative-control worker. Preserve full bytes for Markdown fragment checks, registered evidence and traced content readers. Two composite SVGs plus four linked exports could save about13MB, subject to measurement. Do not use placeholders or allow arbitrary missing paths. Required tests: real and mutated dead links still fail; pruned binary links pass; Markdown anchors read real content; registered evidence stays byte-identical; baseline README/SYNOPSIS/documentation checks pass in workers. Broader generated-output pruning needs per-command input closure/read traces, not controls.yaml mutation targets or validation touches (neither is a read set). chunk-partitions.json and translation-escape-screen.json are direct schema-check inputs; exp-042 is a replay input. Fixed cap cannot absorb unbounded genuinely required evidence forever; separately measure that growth and revise the storage budget deliberately. Design only, not implemented or benchmarked.
+
+2026-09-30: T-060 intake reached 167,821,919 required snapshot bytes after four measured non-input prunes, exceeding 160 MiB by 49,759 bytes. Restore the established roughly 32 MiB operating headroom at 192 MiB without deleting linked proof evidence or changing copied bytes, runtime ceilings or oversized refusal. Durable dependency-aware selection remains open. Consolidated duplicate think-n2kg here; child think-9b01 fixes a separate profiled ancestry-comparison cost (focused local call 6.23s to 0.74s). Proof geometry lanes continue independently.
+
+2026-10-05, the n=17 stack breach (PR 360, `claude/n17-fixed-witness-certificates` at e62bed3a6, hosted suite-b run 37298541719): `snapshot_source_bytes()` read 201,854,760 against the 201,326,592 cap (192 MiB), 528,168 over. Decision: option (b), pruning a generated view after tracing the controls that read it. Committed as 40aa3be3a on PR 347 (`claude/n17-sessions-167-168`), so every layer and PR 365 inherit it. The cap is unchanged. Separately, the cascade lane answered the same breach on PR 360 in 93a6839ca by pruning the Sessions 169-179 X048 exploration folders whole (net 2,122,114 bytes, an evidence-folder prune by PR 347's 167/168 precedent). The two prunes are independent; together they leave PR 360 about 9.7 MiB under the cap (201,854,760 - 2,122,114 - 8,559,777 = 191,172,869).
+
+Per-layer measurements, taken on clean checkouts in one worktree with the harness's own walk:
+
+- main dee22b882: 193,929,477
+- PR 347 c89b841d4: 198,617,904 (+4,688,427: exp-242..248 n=17 receipts and certificates, the new n=17 devtools and tests, review docs)
+- PR 354 e6cc6c715: 199,050,890 (+432,986: X048-session-169-pilots)
+- PR 355 405e12a88: 199,933,289 (+882,399: X048-session-170/171/172 support packets)
+- PR 356 01f003980: 200,453,499 (+520,210: X048-session-174/175/176 packets)
+- PR 360 e62bed3a6: 201,854,760 (+1,401,261: X048-session-177/178/179 packets)
+- PR 365 27b787a1c: 201,562,154. Its branch does not yet contain the current heads of the layers below it. Its own delta over the merge-base 451154f60 is about +261 KB, so after merging PR 360 it would sit near 202.1 MB.
+
+Every layer's growth is X-048 receipts plus their probes and tests: evidence (c), not prunable under (b).
+
+What made (b) possible: e4ad5cedd (2026-09-30) trimmed the root README and removed its inline links to both composite vectors and to the four exports already listed in PRUNE. The 2026-09-22 blocker recorded above (README links them, so `linked_pruned_targets` copies them back and pruning saves zero) therefore no longer holds. The remaining links are in packing/atlas/README.md, packing/atlas/known-best/README.md and FIGURE-PLAYBOOK.md. `linked_pruned_targets` does not scan those files and no control link-checks them: `check_links` runs only on the root README and SYNOPSIS, and the ledger's `dead_links` only on campaign/. Since that commit the four exports have also been effective prunes rather than inert ones.
+
+How the trace was done (logs in the session scratchpad, snaptrace360 and snaptrace360b; runner snaptrace.py, scanner snaptracescan.py, per-file walk snapmeasure.py): all 170 registered controls were run in their own worker trees at e62bed3a6 under `strace -f -e trace=%file`, and all 170 fired. One pitfall worth knowing: on the first pass, 80 bare-`python3` controls resolved to the system interpreter and died on PEP 758 syntax, which is the AGENTS.md trap. They were re-run with the venv on PATH. Results:
+
+- `known-best-1-100.svg` (2,350,537) and `known-best-1-324.svg` (6,209,240): opened by four controls, all of them `check_readme`. The only path is `scan_retired_workflow_identifiers`, which reads every text file in the worker's own git index looking for a retired token. A pruned file is absent from that index, so it leaves the sweep rather than turning up as missing. `check_generated_markdown` lists `atlas/known-best` but keeps only `*.md`. No other control stats, opens or lists either vector. No control drives `build_known_best_atlas --check`, `render_composite_pdf --check` or any atlas step. The full-suite control still refuses at collection without touching any tests/ file. Verdict: PRUNE.
+- Checks on the prune at 40aa3be3a: all 170 controls fire (`run_negative_controls -j 3`, exit 0, snapshot source 181.3 MiB); `test_negative_controls.py` passes 32; `packing-validate --records` exits 0; Ruff and BasedPyright are clean. Unmutated `check_readme`, `sqpack.campaign.ledger check`, `validate_schemas` and `check_generated_markdown` produce byte-identical output in a worker with the vectors and in one without them.
+- Saving 8,559,777 bytes: PR 360 goes to 193,294,983 (8,031,609 under the cap) and PR 347 to 190,058,127, both before the commit's own 4.5 KB.
+
+Candidates traced and not taken:
+
+- `composite-figure.json` (308,756), generated: opened by the 10 `validate_schemas` controls (content input), by the 4 `check_readme` controls (sweep only), and stat-ed by 2 gate-selection controls. Because `validate_schemas` reads it, it is not prunable.
+- `chunk-components.json` (3,623,792), `chunk-partitions.json` (1,770,395), `translation-escape-screen.json` (1,330,667), `exp-042` (1,707,922): all inline-linked from checked documents, so a prune copies them back and saves zero. The two schema-check inputs are also read by `validate_schemas`.
+- X049 `contact-shade-census.json` (1,015,137) and `family-census.json` (690,619), generator-owned with byte-for-byte `--check`: inline-linked from the X-049 exploration, so a prune copies them back and saves zero. The 30 ledger-check controls also stat them through `dead_links`.
+- `measure-verifier/census/census.json` (981,349), `census-mixed/census.json` (186,847), `census-summary.json` (152,603): generated and unlinked. Only the 4 `check_readme` controls open them, through the same index sweep. They are the next (b) candidates, worth about 1.32 MB. Not taken because the vectors alone suffice, and the README-linked generated views beside them would need their own trace.
+- `session-153-native-full.json` and `.rows.jsonl` (6,930,103): linked, and `test_negative_controls.py` asserts they stay.
+- `t007-consumer-audit.json` (887,080): a control target.
+- exp-238/exp-239 certificates (4,717,067 and 6,198,237): registered or linked evidence.
+
+Option (c), evidence, for scale only and not taken: the X-048 session folders this stack adds total about 3.2 MB. #347 already prunes the 167/168 pilot folders whole.
+
+Pre-existing finding, not caused by this change, and identical with or without it: in a worker, unmutated `check_readme` (layout tree names root files the snapshot does not copy), `validate_schemas` (FAIL bibliography.yaml, plus verifier paths under the pruned resources/) and `ledger check` (missing .github/PULL_REQUEST_TEMPLATE.md, and a dead directory link from exp-249 into the pruned X048-session-168-pilots/certificates/; `linked_pruned_targets` copies files, not directories) all exit 1. The controls that drive those commands are therefore scored over a red baseline, the blinding class the PRUNE comments warn about.
+
+The worker red-baseline defect is filed as think-nns5 (P1, child of this bead). This bead stays open: durable dependency-aware selection is still the work.

@@ -3,9 +3,9 @@ type: is
 id: is-01m2ctdap5jwdr8h4qb8dxwt8z
 title: Integrate accepted BC329 calibration tooling onto PR156
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 11
+version: 12
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -20,7 +20,11 @@ child_order_hints:
   - is-01m2e0e4ct972w6eapcr8c3xjz
   - is-01m2e7adq6sc2j6mzgsx89sg8h
 created_at: 2026-09-13T07:23:51.876Z
-updated_at: 2026-09-13T23:52:26.658Z
+updated_at: 2026-10-06T08:35:50.482Z
+closed_at: 2026-10-06T08:35:50.482Z
+close_reason: "Done: the accepted calibration tooling, observed-worker topology and three-profile coordinator landed with PR #156 (merged 2026-09-14): packing/devtools/calibrate_fixed_core_packet.py and read_fixed_core_calibration_profile.py are on origin/main, and fc3e314d is an ancestor of main. No profile or BC329 target was to run here."
+resolution: null
+duplicate_of: null
 ---
 Merge the independently accepted calibration branch, observed-worker-topology implementation, and maintained three-profile coordinator onto the current PR156 leaf. Resolve overlap by preserving the accepted CAL-5 ownership/lifecycle controls and the newer topology/coordinator contracts; run focused and edit-tier validation on the combined head; obtain source-distinct exact-head reviews for topology and coordinator/reader boundaries; update the run-sheet/docs and PR body; push and wait for hosted CI. Do not execute any positive full-shape profile or BC329 scientific target.
 

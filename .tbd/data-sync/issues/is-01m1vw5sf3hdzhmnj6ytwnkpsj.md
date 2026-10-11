@@ -3,16 +3,20 @@ type: is
 id: is-01m1vw5sf3hdzhmnj6ytwnkpsj
 title: Integrate PR97 after the active owner checkpoint
 kind: task
-status: open
+status: closed
 priority: 2
-version: 3
+version: 5
 labels: []
 dependencies: []
 parent_id: null
-hold: blocked
+hold: null
 hold_until: null
 created_at: 2026-09-06T17:27:36.675Z
-updated_at: 2026-09-06T18:02:07.722Z
+updated_at: 2026-10-06T08:50:20.070Z
+closed_at: 2026-10-06T08:50:20.070Z
+close_reason: "Done: PR #97 merged on 2026-09-06 (gh: MERGED 2026-09-06T18:54:15Z), after the owner's checkpoint this bead waited for; its 'blocked' hold was cleared to close it."
+resolution: null
+duplicate_of: null
 ---
 Integrate PR97 after its active owner produces a checkpoint. Do not land the currently reviewed snapshot as the owner's final disposition.
 

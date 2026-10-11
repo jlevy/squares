@@ -5,10 +5,10 @@ title: Record the independent decision of T-018 (verify_minimal.py accepts 19/5 
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
-parent_id: is-01m1qgrj2q8kmrbqrgvkaksn87
+parent_id: null
 created_at: 2026-09-05T02:41:47.665Z
-updated_at: 2026-09-05T02:41:47.665Z
+updated_at: 2026-10-06T08:34:21.188Z
 ---

@@ -3,15 +3,19 @@ type: is
 id: is-01m32t26s6dbh3ab5g7n2epn9m
 title: Move the n headline above the gap bar and head the bar KNOWN BOUNDS
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m32t2yc3xenfb97kxn844rc7
 created_at: 2026-09-21T20:21:04.933Z
-updated_at: 2026-09-21T20:21:36.876Z
+updated_at: 2026-10-06T08:32:03.980Z
+closed_at: 2026-10-06T08:32:03.980Z
+close_reason: "Done: e269012e1 'Restage the poster' (2026-09-21, merged via PR #218 on 2026-09-22) moves n = to the head of the facts column and heads the bar KNOWN BOUNDS; origin/main workbench.css/application.js name the KNOWN BOUNDS head."
+resolution: null
+duplicate_of: null
 ---
 Owner's request, restructuring the stage's right column:
 

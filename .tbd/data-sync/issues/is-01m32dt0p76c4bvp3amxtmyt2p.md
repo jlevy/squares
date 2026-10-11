@@ -5,7 +5,8 @@ title: "Research block (W1): the Kleddamag n=17 certified bound 461300/99853"
 kind: epic
 status: open
 priority: 1
-version: 8
+version: 11
+delegate: claude-code@vm
 labels: []
 dependencies: []
 child_order_hints:
@@ -16,8 +17,15 @@ child_order_hints:
   - is-01m32dz753apsmvrx2mybxqzhb
   - is-01m32e146z8pd8bjx4d7kxw2sr
   - is-01m32e153zhsye4s1xafvyvkq1
+hold: null
+hold_until: null
 created_at: 2026-09-21T16:46:53.639Z
-updated_at: 2026-09-21T16:50:47.551Z
+updated_at: 2026-10-05T05:40:47.002Z
+started_at: 2026-10-05T05:34:33.023Z
+closed_at: null
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 External artifact published 2026-09-21 claiming s(17) > 461300/99853 = 4.6197910929..., above both the 461300/99999 = 4.613046 that PR 211 registers and the intermediate 461300/99951 = 4.614154.
 
@@ -37,3 +45,7 @@ Entry point W1 research-survey, opened at the owner's request during the session
 landed the agenda-040 overnight stack. Correctness blocks follow this one.
 
 Not yet adjudicated. No bound moves until the proof review and the replay both report.
+
+## Notes
+
+Reopened: Reopened 2026-10-05: closing it left open children under a closed parent, which devtools.check_bead_tree refuses. The parent's own work is adopted (see the close reason), but its open children need their own disposition before it closes.

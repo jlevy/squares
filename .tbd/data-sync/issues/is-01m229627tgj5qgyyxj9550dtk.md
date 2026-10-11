@@ -3,13 +3,17 @@ type: is
 id: is-01m229627tgj5qgyyxj9550dtk
 title: Generalize the exact five-dot four-owner exclusion
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 labels: []
 dependencies: []
 created_at: 2026-09-09T05:10:23.737Z
-updated_at: 2026-09-09T07:06:35.592Z
+updated_at: 2026-10-06T08:49:58.622Z
+closed_at: 2026-10-06T08:49:58.621Z
+close_reason: "Superseded: generalising the five-dot four-owner exclusion at q = 96/25 toward a global n11 exclusion; 96/25 is below Kleddamag's verified 31/8 (T-037) and T-060 excludes every packing there. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., and packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound, T-010 included, 'superseded by T-060'."
+resolution: canceled
+duplicate_of: null
 ---
 Continue from T-023, the conditional four-patch five-dot exclusion at q=96/25 (Agenda032, session113, exp143–144). First integrate and test the independent residual-union checker; freeze source and controls and preregister the target replay, then resolve discrepancies. Next transform dots and patches together under valid container symmetries and prove exact occupied-union containment for additional owner combinations; retain a covered/uncovered class ledger. Search for new five- or six-dot patterns only for uncovered cases and retain exact escape witnesses; refine owner pose classes where necessary. Exit each slice with experiment verdicts, any warranted T/E claims, and explicit uncovered scope. A global exclusion requires exhaustive admissible-case coverage. Keep the completed sprint closed, preserve its 05:16:31Z metered cutoff, and tally new session usage separately. H-135 pricing remains an unrun reserve.
 

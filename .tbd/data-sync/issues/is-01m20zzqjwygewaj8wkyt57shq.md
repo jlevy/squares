@@ -3,14 +3,18 @@ type: is
 id: is-01m20zzqjwygewaj8wkyt57shq
 title: sqsearch arms behind flags, and the two sweep instruments
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 4
+version: 5
 labels: []
 dependencies: []
 parent_id: is-01m20zyy839t6mbvpqy8ay2hsn
 created_at: 2026-09-08T17:10:24.588Z
-updated_at: 2026-09-15T02:08:47.873Z
+updated_at: 2026-10-06T08:47:05.764Z
+closed_at: 2026-10-06T08:47:05.764Z
+close_reason: "Done, as its description says: sqsearch's --p-perturb/--perturb-scale, --mu0/--mu1 and --budget-pair-tests flags are in packing/sqsearch/src/main.rs on origin/main, with packing/devtools/run_arm_sweep.py and run_basin_hopping.py; it has no open children and its review defects are tracked under think-6c2j (closed)."
+resolution: null
+duplicate_of: null
 ---
 Done in this session, recorded so the follow-ups have a parent.
 

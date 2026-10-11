@@ -3,9 +3,9 @@ type: is
 id: is-01m2kam88w7r9959zvwcswccx3
 title: "Lane 2: Packing validation PR wall under OR-14 (shard suite, split checks, cargo cache, fixtures, sweeps, sparse checkout, per-file cost, post-merge skip)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 labels: []
 dependencies:
   - type: blocks
@@ -14,7 +14,11 @@ dependencies:
     target: is-01m2m5zjmj7dsycs1x6yxwcwwt
 parent_id: is-01m2k0eqwj7en422j33wtvw5dt
 created_at: 2026-09-15T20:02:42.587Z
-updated_at: 2026-09-17T02:06:23.459Z
+updated_at: 2026-10-06T08:45:46.339Z
+closed_at: 2026-10-06T08:45:46.339Z
+close_reason: "Done: lane 2 landed through PR #185 and PR #188 (both merged 2026-09-17): per-file cost sharding, the engine cache, fixtures and post-merge reuse. Its two leftovers are tracked separately (think-5hfr closed with #185, think-btif open)."
+resolution: null
+duplicate_of: null
 ---
 Lane 2 of think-xfqk, branch claude/ci-validation-shard in the consolidate-stack worktree. Scope V1-V4, V6, V7, G5, G6 from attic/ci-review/synthesis.md; V5 is stack-only. Before: PR wall 284 s (main PRs) and 298 s (stack), set by suite in 34 of 35 runs. Target about 160 s with nothing leaving the PR surface. Folds in think-jblb (suite at its 275 s ceiling).
 

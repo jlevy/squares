@@ -3,10 +3,10 @@ type: is
 id: is-01m0vr7g27g67p699aepcdksxd
 title: "Run session-010: eight-hour mixed pipeline and mathematical portfolio"
 kind: epic
-status: in_progress
+status: closed
 priority: 0
-version: 24
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 27
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - unattended
@@ -35,7 +35,12 @@ child_order_hints:
   - is-01m0w943qydjjq7xdn58tg55qz
   - is-01m0w9a47h5zrn7jf16pp2kpxs
 created_at: 2026-08-25T06:02:56.442Z
-updated_at: 2026-08-25T11:05:34.433Z
+updated_at: 2026-10-10T22:49:20.456Z
+closed_at: 2026-10-06T08:36:05.358Z
+close_reason: |
+  Finished wrapper (bead review 2026-10-06, origin/main eb43ffe9a): Session-010 wrapper: record session-010-eight-hour-mixed-research.md is status stopped on origin/main and PR #29 MERGED 2026-08-25. Open children think-3s9s and think-bfwm (D-280) moved to think-ydus before closing
+resolution: null
+duplicate_of: null
 ---
 Execute the frozen eight-hour portfolio in the launch agenda from one clean green commit. One coordinator owns the session clock, criteria, shared records, long commands, integration, commits, and re-screening. Interleave W6 mathematical research, W7 pipeline improvements, W2 correctness audits, W3 insight capture, and W4 process checkpoints; every slice is 30 minutes or less with evidence at 20 minutes, no third consecutive slice on one line, and a 45-minute finalization reserve. Do not run packing-campaign, delegated strict/deep gates, or raw tbd-ready draining. Acceptance: session-010 records its absolute eight-hour clock, every phase/delegation contract and terminal receipt, bounded positive/negative/blocked artifacts, defects, synchronized beads, a pushed final checkpoint, and exact next action.
 

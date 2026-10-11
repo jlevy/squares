@@ -5,8 +5,8 @@ title: Replace fragmentary packing script tests with Tryscript golden sessions
 kind: task
 status: open
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
   - testing
@@ -15,7 +15,7 @@ labels:
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-25T03:55:30.489Z
-updated_at: 2026-08-25T04:15:42.506Z
+updated_at: 2026-10-10T22:56:56.428Z
 ---
 The maintained packing command surfaces are not currently tested as complete command sessions.
 

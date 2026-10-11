@@ -3,10 +3,10 @@ type: is
 id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
 title: Execute and document the 4-hour autonomous basin-map campaign
 kind: task
-status: open
+status: closed
 priority: 0
-version: 48
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 51
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - unattended
@@ -35,9 +35,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-08-24T14:44:12.384Z
-updated_at: 2026-08-25T07:20:39.108Z
-closed_at: null
-close_reason: null
+updated_at: 2026-10-10T22:48:55.494Z
+closed_at: 2026-10-06T08:35:59.858Z
+close_reason: |
+  Finished wrapper (bead review 2026-10-06, origin/main eb43ffe9a): The 2026-08-24 four-hour campaign (session-009) is long over; open child think-b3bm (D-202/D-217 contained) moved to think-ydus before closing
 resolution: null
 duplicate_of: null
 ---

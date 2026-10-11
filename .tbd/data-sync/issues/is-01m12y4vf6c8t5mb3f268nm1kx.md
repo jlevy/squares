@@ -3,14 +3,23 @@ type: is
 id: is-01m12y4vf6c8t5mb3f268nm1kx
 title: Algebraic degree is absent for all 84 cases that record an exact form, though it is derivable
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 4
+version: 8
+spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 labels: []
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m135mtdeshe5ptxevhkwgczs
+  - type: blocks
+    target: is-01m49m12kznje1m608fc5g1akz
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
 created_at: 2026-08-28T01:01:02.299Z
-updated_at: 2026-08-28T04:40:01.662Z
+updated_at: 2026-10-06T22:19:00.850Z
+closed_at: 2026-10-06T22:19:00.850Z
+close_reason: "All 248 closed-form records now carry algebraic_degree and minimal_polynomial with algebraic_source: derived-from-exact-form; the 22 catalogue transcriptions are marked catalogue (devtools.backfill_algebraic_facts). Re-derivation check lands in build_exact_values (think-pxnx). Commit 80eff5c5c."
+resolution: null
+duplicate_of: null
 ---
 exact_form and algebraic_degree have ZERO overlap across the 100 frontier records: 84 carry a radical, 11 carry a degree, none carry both. That mirrors the upstream catalogue's own convention -- Kingbird prints EITHER a radical (s = 4 + 2 sqrt 2) OR a locked degree (s = {}^{8}lock plus the polynomial) -- so the degree is missing from our records not because it is unknown but because the source did not print it and we never derived it.
 

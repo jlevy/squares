@@ -5,15 +5,15 @@ title: Diagnose the retained n4 seed3 post-check rejection
 kind: bug
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - focus-correctness
 dependencies: []
 parent_id: is-01m0t4phe1905yy2jk7czp1391
 created_at: 2026-08-24T16:54:36.223Z
-updated_at: 2026-08-24T17:15:43.513Z
+updated_at: 2026-10-10T22:49:02.912Z
 closed_at: 2026-08-24T17:15:43.503Z
 close_reason: Closed by f15d036 + exp-024 in 7ec721d. Exact retained n=4 seed-3 cell proved rows 16 and 21 were simultaneously outside the unchanged 1e-10 screen; the argmax-only retry shifted the maximum. One bounded retry now tightens the complete initial offending set and replays every original row. Regression requires repair_rows [16,21]. Exp-024 independently replays 4/4 admissible side-2 events, 14,301/14,301 settled, 0 unsettled, 16.966654s. Full 30-step gate passed in 30s.
 resolution: null

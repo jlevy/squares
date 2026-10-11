@@ -5,8 +5,8 @@ title: "Run session-011: continue the eight-hour portfolio after the cycle cap"
 kind: epic
 status: closed
 priority: 0
-version: 18
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 19
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: codex-root
 labels: []
 dependencies: []
@@ -23,7 +23,7 @@ child_order_hints:
   - is-01m0wjyxhrzxbq2a9fz33795kt
   - is-01m0wmxr6ffn9vgxfm1b3v0rr6
 created_at: 2026-08-25T11:01:28.432Z
-updated_at: 2026-08-25T14:31:47.711Z
+updated_at: 2026-10-10T22:49:25.818Z
 closed_at: 2026-08-25T14:30:32.716Z
 close_reason: The eight-hour continuation ran through the user's stop request and ended with a durable terminal session, synchronized defects and beads, and a green fast-gate checkpoint. The planned final research rotation was not opened; think-1s0h owns the exact resume slice.
 resolution: null

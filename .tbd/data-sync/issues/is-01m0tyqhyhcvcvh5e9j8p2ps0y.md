@@ -5,8 +5,8 @@ title: Provide a general witness interchange and validation entry point
 kind: feature
 status: closed
 priority: 1
-version: 8
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 10
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - tooling
@@ -15,7 +15,7 @@ dependencies:
     target: is-01m0tyy5k7e4ags20c1fxqth7f
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-24T22:37:19.696Z
-updated_at: 2026-08-25T07:24:21.726Z
+updated_at: 2026-10-10T22:59:47.290Z
 closed_at: 2026-08-25T07:24:21.725Z
 close_reason: Witness/v1 inspect/check/verify/promote, exact and independent rational replay, the n=29 source/replay correction, and fail-closed algebraic field preconditions are implemented with positive and negative controls.
 resolution: null

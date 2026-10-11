@@ -3,15 +3,19 @@ type: is
 id: is-01m3319g2ggyq2yrrtth7xzxkv
 title: Make the colour transition duration a setting in seconds
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
 parent_id: is-01m32t2yc3xenfb97kxn844rc7
 created_at: 2026-09-21T22:27:23.846Z
-updated_at: 2026-09-21T22:27:23.846Z
+updated_at: 2026-10-06T08:32:15.344Z
+closed_at: 2026-10-06T08:32:15.344Z
+close_reason: "Done: aff3452fb 'Give the colour change its own clock, in seconds' on origin/main; application.js COLOR_FADE is in seconds."
+resolution: null
+duplicate_of: null
 ---
 Owner's request: the speed at which a square's colour changes should be its own setting, in seconds, rather than following the step's clock.
 

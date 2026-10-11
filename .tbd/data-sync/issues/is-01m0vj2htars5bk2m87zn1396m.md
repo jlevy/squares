@@ -5,8 +5,8 @@ title: "PR #23 review R4: Make stale validation marker failures recoverable"
 kind: bug
 status: closed
 priority: 2
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex@spud10
 labels:
   - engineering-maturity
@@ -17,7 +17,7 @@ parent_id: is-01m0vj13yefxcxhhew81ewfpvq
 hold: null
 hold_until: null
 created_at: 2026-08-25T04:15:22.953Z
-updated_at: 2026-08-25T04:44:36.065Z
+updated_at: 2026-10-10T22:57:20.474Z
 started_at: 2026-08-25T04:16:15.461Z
 closed_at: 2026-08-25T04:44:36.064Z
 close_reason: "Completed in 69e65eb: a stale validation marker now explains both waiting and safe crash recovery, with a focused failure-path test."

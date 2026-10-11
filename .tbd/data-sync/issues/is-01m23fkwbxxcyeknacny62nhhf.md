@@ -3,9 +3,9 @@ type: is
 id: is-01m23fkwbxxcyeknacny62nhhf
 title: "Certificate format cannot express two atom classes: K5 clique and K6 floor"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 15
+version: 16
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -14,7 +14,11 @@ child_order_hints:
   - is-01m25255yg6wqveyja558g7sys
   - is-01m254319zrn2ezbzsqnejdn72
 created_at: 2026-09-09T16:22:02.365Z
-updated_at: 2026-09-18T02:47:07.092Z
+updated_at: 2026-10-06T08:38:44.088Z
+closed_at: 2026-10-06T08:38:44.088Z
+close_reason: "Superseded by T-060: s(11) equals Trump's side, registered 2026-09-29 at V3/C3 and on main since PR #246 (merged 2026-09-30). This n = 11 lower-bound certificate work has no target left; the owner's 2026-09-14 strategy reset had already paused it, and the post-optimality plan (plan-2026-10-01) uses n = 11 only as a control. The K5/K6 floor-atom format served H-217 (Route F1 at 153/40 < s(11)), which has no target now; its three children are closed."
+resolution: canceled
+duplicate_of: null
 ---
 Extend the certificate format and both covering routes to retain the weighted and floor charges already returned by the separator. Source: agenda034 lane A4 finding P10 and lane A5 F6. This is a representation and verification prerequisite, not evidence that the unconditional language or conditional route is exhausted.
 

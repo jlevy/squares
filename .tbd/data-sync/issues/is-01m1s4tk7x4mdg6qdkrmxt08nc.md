@@ -5,10 +5,14 @@ title: Case-level evidence lists omit the first-party certificates on the seven 
 kind: bug
 status: open
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-05T16:01:03.740Z
-updated_at: 2026-09-05T16:01:03.740Z
+updated_at: 2026-10-06T08:28:51.821Z
 ---
 Survey 2026-09-05: on n=11,12,17,18,19,20,21 the case-level evidence array omits E-nNNN-fractional-certificate and E-fractional-interval-decision, which verified_lower_bound.evidence does cite (n-011.md:82, n-012.md:73, n-017.md:76, n-018.md:78, n-019.md:74, n-020.md:73, n-021.md:73). Same gap on three upper bounds: n-040.md:78, n-065.md:73, n-089.md:73. Nothing checks that the case-level list is a superset of the field-level lists, so a reader looking for what supports the record misses the strongest result on the case.
+
+## Notes
+
+2026-10-06 (bead review): rechecked on origin/main. The lower-bound gaps at n = 11..21 are closed, but case-level lists still omit field-level evidence at n = 40, 65 and 89 (upper bounds) and the rigidity evidence on several cases, and nothing checks that the case list is a superset.

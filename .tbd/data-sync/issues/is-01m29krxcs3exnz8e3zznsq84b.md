@@ -3,15 +3,19 @@ type: is
 id: is-01m29krxcs3exnz8e3zznsq84b
 title: Seven hypotheses about why the annealing does or does not find a packing
 kind: task
-status: open
+status: closed
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies: []
 parent_id: is-01m29kqwefbzzpt7bngm68pq6p
 created_at: 2026-09-12T01:30:08.151Z
-updated_at: 2026-09-13T04:52:33.124Z
+updated_at: 2026-10-06T08:46:56.167Z
+closed_at: 2026-10-06T08:46:56.166Z
+close_reason: "Done: the hypotheses were written before the sweeps and are registered on origin/main as H-207 to H-211 (restarts vs schedule, the drop decides, no parameters reach a record, no valid packing, the shake's sweet spot); the notes resolve H1, H5, H6 and H7 against the 2026-09-12 data."
+resolution: null
+duplicate_of: null
 ---
 **Written before the sweeps, so the sweep tests them rather than generating them.** A hypothesis found in the data after the fact is a description of the data.
 

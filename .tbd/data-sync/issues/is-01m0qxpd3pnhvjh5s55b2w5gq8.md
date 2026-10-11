@@ -5,8 +5,8 @@ title: Add event-level measurement and a statistical census contract
 kind: feature
 status: open
 priority: 1
-version: 9
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 10
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -28,7 +28,7 @@ parent_id: is-01m0r7q3zk8x6cg4e30d149698
 child_order_hints:
   - is-01m0r51fbqgm0y4tb2d09fcb82
 created_at: 2026-08-23T18:21:30.101Z
-updated_at: 2026-08-25T11:16:45.852Z
+updated_at: 2026-10-10T22:54:11.708Z
 ---
 Category: key omissions. Current artifacts retain only winners or aggregate basin counts. They cannot distinguish a grid fallback from a trajectory trapped in the grid basin, measure pair tests exactly, reconstruct discovery order, estimate unseen basins, or support uncertainty claims.
 

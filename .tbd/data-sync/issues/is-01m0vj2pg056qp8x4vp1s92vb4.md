@@ -5,8 +5,8 @@ title: "PR #23 review R16: Make basin-event replay coverage discover new archive
 kind: bug
 status: closed
 priority: 3
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex@spud10
 labels:
   - engineering-maturity
@@ -17,7 +17,7 @@ parent_id: is-01m0vj13yefxcxhhew81ewfpvq
 hold: null
 hold_until: null
 created_at: 2026-08-25T04:15:27.744Z
-updated_at: 2026-08-25T04:44:40.490Z
+updated_at: 2026-10-10T22:58:25.282Z
 started_at: 2026-08-25T04:16:15.544Z
 closed_at: 2026-08-25T04:44:40.490Z
 close_reason: "Completed in 69e65eb: basin-event replay archives are discovered by their versioned contract; all 14 v2/v3 journals now replay, including exp-019 and exp-020."

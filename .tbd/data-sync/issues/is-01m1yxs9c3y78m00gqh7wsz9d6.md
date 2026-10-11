@@ -5,7 +5,7 @@ title: "[epic] Explainer fonts: every glyph from a shipped face on web and PDF"
 kind: epic
 status: open
 priority: 1
-version: 15
+version: 18
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels:
   - explainer
@@ -25,8 +25,11 @@ child_order_hints:
   - is-01m21fpg092b0z9ggdwk57hdpa
   - is-01m21hj6cz7pw7bbatr29aznez
   - is-01m21pvfmt41mpzpwgqc569tst
+  - is-01m20vpz8e6ty6gpate34sfrms
+  - is-01m21c9b3envq2cwh5q5s7wvgs
+  - is-01m2152r3nckcg3we82828v7yh
 created_at: 2026-09-07T21:53:27.418Z
-updated_at: 2026-09-09T03:07:29.468Z
+updated_at: 2026-10-06T08:41:23.167Z
 ---
 Rule (owner, 2026-09-07): the explainer resolves every text run to a face the page ships (PT Serif, Source Sans 3, the KaTeX faces and the KPress Math Text composite, and kpress's mono face once it ships), on screen and in the PDF; the one exception is the 100-best atlas figure, whose Helvetica is baked in by its own pipeline (build_known_best_atlas.py) and stays. Measured 2026-09-07 on the 946 KB PDF: sans as 345 KB of Type3 paths (think-988s), Menlo 5.6 KB for 134 characters of inline code on pages 6, 14, 15 (the 56 KB first recorded here was a slipped decimal; PR #134 measured the replacement subset at 3,600 B, and the export's 2,029 B saving puts Menlo's at 5,629 B), Georgia 16 KB for 48 list bullets on the same pages, Helvetica 54 KB on page 3 (the atlas, accepted). Web page 1,418 KB with 636 KB of fonts, of which 216 KB is the composite's duplicate copies. Children: think-988s, the provenance guard, the KaTeX subsetting, and adopting kpress's mono, marker, and quote fixes.
 

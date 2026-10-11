@@ -3,9 +3,9 @@ type: is
 id: is-01m2b883mnsa3g9ap94gy5aj0q
 title: Retain observed worker topology in BC329 calibration profiles
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 11
+version: 13
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh implementation; source-distinct review
 labels:
@@ -20,10 +20,14 @@ dependencies:
   - type: blocks
     target: is-01m2cv85q2ajjgsnx7076ta8cp
 parent_id: is-01m2app5e71qnp9z5vfp9vppbp
-hold: paused
+hold: null
 hold_until: null
 created_at: 2026-09-12T16:47:12.009Z
-updated_at: 2026-09-14T02:28:52.550Z
+updated_at: 2026-10-06T08:39:51.682Z
+closed_at: 2026-10-06T08:39:51.682Z
+close_reason: "Superseded: the topology producer and its lifetime guard landed with PR #156 (fc3e314d is an ancestor of origin/main eb43ffe9a; merged 2026-09-14); the positive profiles it was gating are moot. BC329's prospective endpoint 3.8267215 is below T-033's proved 3.8269975, so the packet could not move any bound even before T-060; its runner and calibration machinery is retained unexecuted on main via PR #156. Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
+resolution: canceled
+duplicate_of: null
 ---
 Run-sheet review F-1. Before any positive full-shape profile, extend the maintained fixed-core-packet-calibration/v1 measurement contract to distinguish configured route workers from observed execution. Retain the supervised coordinator PID and per-sample PID/PPID/PGID/phase data, or an equivalent route-scoped worker lifecycle record; derive and validate observed child count and maximum simultaneous children for raw and normalized-exact phases. Refuse metrics admission if the parallel phase has no observation capable of checking worker execution. Keep RSS explicitly a sampled process-group sum with missed-peak/shared-page limits. Add focused mutation and lifecycle tests, source-distinct review, and do not run a profile or BC329.
 

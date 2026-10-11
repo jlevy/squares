@@ -3,9 +3,9 @@ type: is
 id: is-01m1vvtw71vymhb8d6hqz66f9a
 title: Screen changed weights and sites with exact finite LP certificates
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 spec_path: packing/campaign/hypotheses/H-094-n11-weight-and-site-redesign.md
 labels: []
 dependencies: []
@@ -17,6 +17,10 @@ child_order_hints:
   - is-01m1wx1r34r8h5xzydhx909xrx
   - is-01m1x3x4nkj3y50yg74c2srh2t
 created_at: 2026-09-06T17:21:39.040Z
-updated_at: 2026-09-07T05:01:56.265Z
+updated_at: 2026-10-06T08:22:36.001Z
+closed_at: 2026-10-06T08:22:36.001Z
+close_reason: "Superseded: the BC-252 changed weights/sites screen for a stronger n = 11 certificate is moot after T-060. H-094 stays on main as the record of the question."
+resolution: canceled
+duplicate_of: null
 ---
 BC-252, H-094 open question. One selected assessment slice freezes a narrower fixed-site LP or event-guided support test from retained bad poses. No target measurement before a concrete hypothesis, exact geometry, rows and cost decision. Basis recovery on an actual candidate instead supports that candidate H093/H095 and BC238.

@@ -3,14 +3,18 @@ type: is
 id: is-01m24va730rjpdgpwrbv6a8edd
 title: "The atlas ascent: animate n = 1 to 100, one square at a time"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md
 labels: []
 dependencies: []
 created_at: 2026-09-10T05:05:43.007Z
-updated_at: 2026-09-15T02:41:45.010Z
+updated_at: 2026-10-06T08:42:34.619Z
+closed_at: 2026-10-06T08:42:34.619Z
+close_reason: "Done: the ascent was cut as validated video in PR #218 (merged 2026-09-22) and published as the v0.4.2 ascent videos in PR #240 (merged 2026-09-28). origin/main has packages/workbench/assets/ascent-n1-100-poster.png and ascent-n1-324-poster.png, and workbench_tools/ascent.py builds the guided ascent as typed strategies."
+resolution: null
+duplicate_of: null
 ---
 Phase 3 of the packing-strategies spec. A single directed animation from n=1 to n=100, adding one square per step and landing each time on the retained record. Directed on purpose: not a search, uses the known endpoints, clean and always arrives. Every frame comes from a guide phase and every frame is labelled guided -- the same instruments report what searches reach, and the two must never be confusable.
 
