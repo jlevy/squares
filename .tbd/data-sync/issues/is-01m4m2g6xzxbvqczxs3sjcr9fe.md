@@ -3,33 +3,28 @@ type: is
 id: is-01m4m2g6xzxbvqczxs3sjcr9fe
 title: Compare a short PDF using the web prose typography
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 10
 delegate: codex@spud10
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-10T23:31:19.614Z
-updated_at: 2026-10-11T01:36:32.904Z
+updated_at: 2026-10-11T01:37:44.627Z
 started_at: 2026-10-10T23:31:20.493Z
-closed_at: null
-close_reason: null
-resolution: null
+closed_at: 2026-10-11T01:37:44.625Z
+close_reason: "Owner withdrew the polynomial PDF comparison: the polynomial paper must be web-only. The local comparison PDF and both scratch PDFs were deleted; no polynomial PDF should be generated or published."
+resolution: canceled
 duplicate_of: null
 ---
-Create and visually validate one short PDF comparison of the polynomial web report,
-applying the measured web font sizes and leading while retaining the existing print font
-and math choices. The owner requested delegation and then asked to continue; root
-selected the polynomial report from the session context.
-The sample includes the introduction and coverage, complete source-identity table,
-catalogue explanation and complete n=11 polynomial.
-The full catalogue remains a web publication.
-Use existing tools and mounted external scratch; retain the final PDF, reproducible
-excerpt source and QA evidence outside disposable scratch.
-/root/pdf_web_typography_comparison owns the isolated comparison files; root owns this
-bead.
+The owner withdrew the polynomial PDF comparison and clarified that the polynomial paper
+must be web-only because the catalogue is too large.
+Remove the separate local comparison and scratch PDFs, preserve the clarification in the
+tracking record, and keep the complete content rendered on the website.
+Earlier PDF source and QA evidence are historical; they do not authorize another PDF
+build. No production polynomial PDF is permitted.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
@@ -37,47 +32,29 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 
 ## Notes
 
-# Completed polynomial report PDF comparison
+# Polynomial PDF comparison withdrawn
 
-The owner asked for a delegated comparison and then asked to continue.
-Root selected the polynomial report as the contextual default and stated that assumption
-in the chat. The comparison uses the served complete catalogue at
-http://127.0.0.1:60649/papers/exact-side-values-complete.html.
+The owner clarified that the polynomial paper must have no PDF because the complete
+catalogue is too large.
+Keep the full polynomial content properly rendered on the web.
+Do not generate, publish, package or link a polynomial-paper PDF, including another
+comparison excerpt.
 
-The sample is three Letter landscape pages (792 × 612 pt), containing the full opening
-and coverage text, complete eight-row source-identity table, catalogue explanation and
-complete degree-eight n=11 equation.
-It is an excerpt of the online catalogue.
+The previous three-page PDF comparison has been removed, along with its two scratch
+PDFs. It was a separate local experiment and was never added to the repository, PR, site
+or production build.
+Its earlier source and QA receipts remain historical evidence; they do not describe a
+currently available PDF or authorize regeneration.
 
-Prose and math use 13.5 pt, with prose leading of 20.25 pt, matching the measured web
-18px/27px. Table containers use 12.825 pt/16.6725 pt; the source-path code retains its
-existing smaller print size.
-Existing print font choices and math proportions are preserved.
-The catalogue’s former print prose baseline was 12 pt/16.8 pt.
+The existing polynomial publication is already web-only: the export produces HTML,
+Markdown and browser data, and the maintained test rejects the --pdf option.
+No source or PR change is needed for this correction.
+The original comparison was completed and then withdrawn at the owner’s request; this
+bead is closed as canceled.
 
-Root found first-page coverage text intruding into the footer and requested a spacing
-correction. The complete text now fits above the reserved footer without shrinking it.
-Root visually approved the revised first page and the unchanged second and third pages.
-QA checks the reserved content boundary as well as page bounds; fonts are embedded, all
-three n=11 equation lines are present, and the standalone source reloads offline.
-The PDF authoring marker succeeded exactly once for this operation.
-
-Final artifact:
-/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/pdf-web-typography/polynomial-web-size-sample.pdf.
-
-QA and reproducible source bundle:
-/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/pdf-web-typography/qa-receipt.json.
-The same directory retains excerpt.html, measured CSS, renderer/probe code, actual PDF
-font measurements and all three page previews.
-The earlier preparation and continued scope are archived in the separate bead receipts.
-
-This comparison used existing Chromium, Playwright, project Python 3.14.7 and Poppler,
-with external scratch and no new environments.
-The complete report stays on the web; this task makes no source, PR, live-preview or
-production PDF pipeline changes.
+Removal receipt:
+/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-2026-10-10-1715/polynomial-pdf-withdrawal-receipt.json.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
-
-Reopened: Record the owner’s clarification that the polynomial paper must be web-only and withdraw the separate PDF comparison.
