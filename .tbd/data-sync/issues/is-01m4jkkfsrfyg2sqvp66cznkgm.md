@@ -5,7 +5,7 @@ title: "Stage 4-5: independently review and adopt the pending upper-bound report
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: claude-code@vm
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:51:43.927Z
-updated_at: 2026-10-12T15:11:28.106Z
+updated_at: 2026-10-12T16:32:49.218Z
 started_at: 2026-10-10T09:52:52.837Z
 ---
 The register holds rational upper-bound reports by others at V0/C0 whose next_rung is an independent review of the retained replay and a selected-house decision: T-128 (Couzo, eight), T-130 (Couzo, five), T-131 (Daniel, n = 132), and this pass's #470, #476, #481, #483 and #484 once registered. Several counts now carry more than one candidate (132: T-098 house, T-131, #476, #470; 237, 263, 270, 303: #476 and #481; 267: #470, #476). For each count: the smallest certificate whose complete two-route replay passed, a mapped W2 review of that replay (think-mt6e's rule: verified lane only on a replay here and a mapped review), the earlier house kept as history, and the case record's reported and verified ceilings moved together. Mirror the Gupta adoption (PR #448, #459: confirm_gupta_records.py). Coordinate with PR #403 / #435, which own canonical exact-value integration on the case records.
@@ -99,3 +99,5 @@ Local: the failing tests and their whole files 207 passed; test_negative_control
 Owed after #518 merges (from #551 review A, A1): the four replies of 12 October on #501, #503, #504 and #505 promise a further reply when the case records move. check_requests cannot see that promise (#540). The post-#518 pass posts that reply with the final close on each, and marks the earlier replies outdated as the record did for #245.
 
 2026-10-12, #518 review B, B1 (Medium), deferred to layer 4 (-imports-2), as the reviewer allows: adopt_houses supports one pass on one day (DAY, PRIOR_STATE and read_history bound to 2026-10-11; rewrite assumes an unadopted record; _review writes "{day} October 2026"; reported_bound sets found_year 2026; the docstring recipe omits restoring a re-moved count from the prior state and the hunt3 claims_record precondition). Layer 4 re-adopts 270 and 305 and reworks the same code (LATER_PASSES, adopted_on(n), historical marking of an earlier pass). Its review should check what that rework does not yet cover: found_year and the review month from the record, the docstring recipe and claims-record precondition, the reasons of re-pointed rows (A1 is now fixed in the tool, 9d93037d6), and a re-adoption test on a synthetic second day in tmp_path. Tracked as think-j1a4 under think-hzsu.
+
+Owed after #553 merges (from #555 review A, A3): the final replies of 12 October on #438, #481, #488 and #489 say #553 is in review (#438: it registers #500 at 238 and 239 and moves both cases; #481: it registers and adopts #500 at 270 and 305; #488: it moves 270 and 305, keeping T-140 as history; #489: it records #506's 344 as a verified beyond-horizon row). check_requests cannot see that statement go stale (#540). When #553 merges, each of the four gets a one-line follow-up reply saying it merged; in result-requests.yaml the final reply's statement is marked outdated and the follow-up names that reply in corrects. Each entry's notes (#555, 705ba16f5) say the same.
