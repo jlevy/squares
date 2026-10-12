@@ -3,9 +3,9 @@ type: is
 id: is-01m4padkz7c8b0chp1f85vmfy8
 title: "Import BuddenPing: s(207) <= 14.880960373044 (#503)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:12.135Z
-updated_at: 2026-10-11T23:04:16.995Z
+updated_at: 2026-10-12T23:38:30.124Z
 started_at: 2026-10-11T20:28:24.948Z
+closed_at: 2026-10-12T23:38:30.124Z
+close_reason: "Completed: #503 imported, registered as T-147, answered and closed (issue closed 2026-10-12); request entry closed on main."
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/503 (2026-10-11T10:27Z). BuddenPing/square-packing-certificates 9dc93b6ac2f8fefe038062a74c9a75bf05afdba6, n207.cert.json (SHA-256 1c334f31...) and pingyou-n207-rational.yaml Witness/v2; zip 01-squares-project.zip. Below SQUISH #481's n207 (T-136) by 4.55e-3. Stages 1-4 replay through devtools.upper_bound_reports.
 

@@ -5,7 +5,7 @@ title: "Address PR #496 reviews E, F, G: audit deadline, fetch timeouts, push at
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: claude-code@spud10
 labels: []
 dependencies: []
@@ -28,7 +28,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T05:02:36.426Z
-updated_at: 2026-10-11T05:06:42.212Z
+updated_at: 2026-10-12T23:41:09.699Z
 started_at: 2026-10-11T05:03:43.544Z
 ---
 Addressing pass for PR #496 (https://github.com/jlevy/squares/pull/496), branch codex/website-cleanups, reviewed head aca9a0784386de4289f8a5293cd28541ab72d785.
@@ -36,3 +36,7 @@ Review E (senior, Fable): https://github.com/jlevy/squares/pull/496#pullrequestr
 Review F (performance, Opus): https://github.com/jlevy/squares/pull/496#pullrequestreview-5481911429 (F1-F2 Medium, F3-F4 Low, F5-F7 suggestions).
 Review G (correctness, Fable) pending; added to this parent when it publishes.
 Deferrals F3, F5, F6, F7 are tracked as children of think-ht59, per the coordinator brief.
+
+## Notes
+
+2026-10-12 reconciliation: every E/F/G finding is dispositioned in PR #507 (merged 2026-10-12T23:07Z, e96e9ea95); F3/F5/F6/F7 deferred to think-ri5z/think-tqwo/think-h7c0/think-7qbv under think-ht59. Close after the 14 children close.

@@ -5,12 +5,12 @@ title: Equal-budget proposer comparison harness
 kind: task
 status: open
 priority: 2
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4asaeypn1nn54frxj3cx9
 created_at: 2026-08-23T01:39:01.470Z
-updated_at: 2026-10-10T22:47:57.917Z
+updated_at: 2026-10-12T23:52:16.637Z
 ---
 Two proposers, one pipeline, comparable basin sets at equal pair-tests. Reports basins per 1e9 pair-tests, canonical-dedup ratio, and the discovery curve. This is what turns 'strategy A beats B' from an opinion into a measurement.

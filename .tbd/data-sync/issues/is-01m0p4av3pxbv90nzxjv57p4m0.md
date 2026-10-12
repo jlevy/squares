@@ -5,12 +5,12 @@ title: Angle-class two-level proposer (H-001)
 kind: task
 status: open
 priority: 2
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4ath0k0w56dkyy7ryerwp
 created_at: 2026-08-23T01:39:02.389Z
-updated_at: 2026-10-10T22:48:00.091Z
+updated_at: 2026-10-12T23:52:18.789Z
 ---
 Outer search over (class count, class assignment, angles); inner is the cell LP. The honest continuous dimension is n, not 3n+1, and records use very few distinct angles - Trump's n=11 uses one non-trivial tilt, s(17) uses two. Kill: fails to reach known optima the baseline reaches, or corpus mining shows angle counts growing fast with n.

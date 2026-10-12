@@ -5,13 +5,13 @@ title: Put the composite's explanatory text and an attribution in the stage's bo
 kind: feature
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
+version: 4
+spec_path: docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md
 labels: []
 dependencies: []
 parent_id: is-01m32t2yc3xenfb97kxn844rc7
 created_at: 2026-09-21T20:17:02.611Z
-updated_at: 2026-10-06T08:32:13.336Z
+updated_at: 2026-10-12T23:51:20.579Z
 closed_at: 2026-10-06T08:32:13.336Z
 close_reason: "Done: e269012e1 'Restage the poster' (2026-09-21, merged via PR #218 on 2026-09-22) puts the composite's legend at the column foot, and 965a224e6 sets the github.com/jlevy/squares attribution under it; origin/main template.html #stage-note and #stage-attribution."
 resolution: null

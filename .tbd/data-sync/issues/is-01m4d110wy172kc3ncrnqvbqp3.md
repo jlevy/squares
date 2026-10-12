@@ -5,7 +5,7 @@ title: "n17: gate PR410 native verifier and establish ordinary-U full parity bef
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/reviews/review-2026-10-07-n17-pr410-integration.md
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
   - is-01m4d2mbv5at5v053xsp9s68tg
   - is-01m4d4bwbwwad71djypagwfrra
 created_at: 2026-10-08T05:50:52.317Z
-updated_at: 2026-10-08T08:56:25.556Z
+updated_at: 2026-10-12T23:40:45.172Z
 ---
 ---
 title: PR410 Integration Review for the n17 Continuation
@@ -197,3 +197,5 @@ records the merge and the unchanged mathematical state.
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
+
+2026-10-12 reconciliation: PR #410 merged 2026-10-08; the remaining whole-ledger ordinary-U Rust/Python parity is registered as H-335 (packing/campaign/hypotheses/H-335-n17-two-verifier-parity.md, prereq H-336); exp-317 used H-335's receipt-equality rule for #472's twelve certificates.

@@ -3,9 +3,9 @@ type: is
 id: is-01m4padmx9cdj5hsv7snr426rb
 title: "Import BuddenPing: s(153) <= 12.870013850408 (#504)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:13.097Z
-updated_at: 2026-10-11T23:04:18.320Z
+updated_at: 2026-10-12T23:38:59.254Z
 started_at: 2026-10-11T20:28:25.701Z
+closed_at: 2026-10-12T23:38:59.254Z
+close_reason: "Import of #504 complete: T-148 registered at V3/C3 by #516 and adopted by #518 (both merged 2026-10-12); final replies posted; #504 closed 2026-10-12. The refined certificate posted 2026-10-12T22:24Z is a new request."
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/504 (2026-10-11T10:39Z). BuddenPing/square-packing-certificates bc328a7d727aedd0eabebd6ea80285f572b65d2d, n153.cert.json (SHA-256 31b3fb3c...) and pingyou-n153-rational.yaml. Below T-146 (Evan Daniel's regularization of SQUISH's n153) by 2.02e-3. Stages 1-4 replay through devtools.upper_bound_reports.
 

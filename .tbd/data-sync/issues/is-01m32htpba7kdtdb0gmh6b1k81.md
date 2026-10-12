@@ -5,12 +5,12 @@ title: Cut ascent videos at 60 fps by default
 kind: task
 status: closed
 priority: 2
-version: 2
-spec_path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
+version: 3
+spec_path: docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md
 labels: []
 dependencies: []
 created_at: 2026-09-21T17:57:10.119Z
-updated_at: 2026-09-21T18:13:16.230Z
+updated_at: 2026-10-12T23:52:30.325Z
 closed_at: 2026-09-21T18:13:16.229Z
 close_reason: --fps default is 60; deliverables re-cut at 60.
 resolution: null

@@ -5,13 +5,13 @@ title: Complete H-010's five-node contract and terminally reject the printed Fig
 kind: bug
 status: closed
 priority: 1
-version: 6
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 8
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bxnqxb8dsv2rnqgyp0w8
 created_at: 2026-08-24T11:13:45.560Z
-updated_at: 2026-10-10T22:47:43.645Z
+updated_at: 2026-10-12T23:51:02.508Z
 closed_at: 2026-10-06T08:23:34.303Z
 close_reason: "Done: H-010 on main encodes all five nodes, and exp-016's verdict is 'rejected: the printed Figure 14 set is avoidable', with ten mutation controls (exp-016-h-010-stromquist-printed-figure14.md)."
 resolution: null

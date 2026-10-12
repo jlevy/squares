@@ -5,8 +5,8 @@ title: "N11 three-paper explainer series: Paper II (T-037 review), linked series
 kind: epic
 status: closed
 priority: 1
-version: 12
-spec_path: docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md
+version: 13
+spec_path: docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -23,7 +23,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-05T05:56:06.509Z
-updated_at: 2026-10-05T16:58:05.096Z
+updated_at: 2026-10-12T23:51:41.324Z
 started_at: 2026-10-05T06:00:40.150Z
 closed_at: 2026-10-05T16:58:05.096Z
 close_reason: null

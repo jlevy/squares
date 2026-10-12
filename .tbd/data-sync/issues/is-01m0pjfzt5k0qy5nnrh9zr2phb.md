@@ -5,13 +5,13 @@ title: "SYNOPSIS.md: the technical root document, reconciled against its sources
 kind: task
 status: closed
 priority: 2
-version: 3
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 4
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0nrh9z5aa3gc9fp6j0vgh05
 created_at: 2026-08-23T05:46:31.109Z
-updated_at: 2026-10-10T22:48:05.215Z
+updated_at: 2026-10-12T23:52:23.819Z
 closed_at: 2026-08-31T02:52:45.470Z
 close_reason: "Landed in PR #8: SYNOPSIS.md, tools/check_synopsis.py wired into test.sh as a gate step, and lp_cell.py brought to the lint floor and cross-checked against H-019's registered slopes."
 ---
