@@ -1451,6 +1451,8 @@ def test_math_startup_reports_are_pruned_but_record_sources_survive(
         assert (tree / source.relative_to(controls.REPO)).is_file()
 
 
+# This snapshot-copy control retains its fixed 180-second subprocess deadline.
+@pytest.mark.pool_heavy
 @pytest.mark.slow
 def test_build_caches_leave_the_counted_surface_and_the_worker_trees(
     tmp_path: Path,

@@ -1927,6 +1927,13 @@ body {
    stands the tables' own space clear of the text. Every rung is the same height: its
    chip is one line and its description a box of exactly two. One rule stands under the
    column heads and none between the rows, which the space between them keeps apart. */
+/* The ladder's valid page-container bleed must clear the prose article on narrow
+   screens too. Its wide track retains the page clip and the same eight-pixel gutter. */
+@media screen {
+  .kpress.kpress-doc.kpress-print-surface:has(.site-ladders-frame) {
+    overflow: visible;
+  }
+}
 .site-ladders-frame {
   container: site-ladders / inline-size;
 }

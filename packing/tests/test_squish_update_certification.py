@@ -16,15 +16,18 @@ from sqpack.witness import witness_document
 
 @pytest.fixture
 def private_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
-    retained = tmp_path / packet.PACKET.relative_to(packet.REPO)
-    proofs = tmp_path / packet.WITNESSES.relative_to(packet.REPO)
+    # Proofs remain outside the private repository but inside pytest's owned
+    # directory, so failed-only retention cannot leave siblings for another test.
+    repository = tmp_path / "repository"
+    retained = repository / packet.PACKET.relative_to(packet.REPO)
+    proofs = repository / packet.WITNESSES.relative_to(packet.REPO)
     shutil.copytree(packet.PACKET, retained)
     shutil.copytree(packet.WITNESSES, proofs)
-    prior = tmp_path / packet.original.PACKET.relative_to(packet.REPO)
+    prior = repository / packet.original.PACKET.relative_to(packet.REPO)
     shutil.copytree(packet.original.PACKET / "facts", prior / "facts")
-    monkeypatch.setattr(packet.original, "REPO", tmp_path)
+    monkeypatch.setattr(packet.original, "REPO", repository)
     monkeypatch.setattr(packet.original, "PACKET", prior)
-    monkeypatch.setattr(packet, "REPO", tmp_path)
+    monkeypatch.setattr(packet, "REPO", repository)
     monkeypatch.setattr(packet, "PACKET", retained)
     monkeypatch.setattr(packet, "WITNESSES", proofs)
     return retained
@@ -336,7 +339,7 @@ def test_offline_recovery_is_identical_and_linked_preflight_is_atomic(
     packet.restore_witnesses()
     assert {n: packet.certificate_path(n).read_bytes() for n in expected} == expected
     packet.check_certification()
-    outside = tmp_path.parent / f"{tmp_path.name}-outside-proof.yaml.gz"
+    outside = tmp_path / "outside-proof.yaml.gz"
     outside.write_bytes(b"external source proof")
     first = packet.certificate_path(123)
     first.write_bytes(b"private sentinel before preflight")

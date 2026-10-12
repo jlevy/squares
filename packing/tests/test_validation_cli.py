@@ -4515,6 +4515,8 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
     assert validate.REQUIRE_CHROMIUM == site_browser.REQUIRED
 
 
+# Independent collection uses real 30-second subprocesses; keep the serial lane.
+@pytest.mark.pool_heavy
 def test_site_layout_commands_partition_the_original_collection(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

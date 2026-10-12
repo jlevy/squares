@@ -28,7 +28,16 @@
     const icon = document.createElement("span");
     icon.className = "site-film-play-icon";
     icon.setAttribute("aria-hidden", "true");
-    icon.textContent = "▶";
+    // Draw the play mark directly so it does not depend on a platform symbol font.
+    const symbol = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    symbol.setAttribute("viewBox", "0 0 24 24");
+    symbol.setAttribute("width", "1em");
+    symbol.setAttribute("height", "1em");
+    const triangle = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    triangle.setAttribute("d", "M7 4L20 12L7 20Z");
+    triangle.setAttribute("fill", "currentColor");
+    symbol.append(triangle);
+    icon.append(symbol);
     play.append(icon);
     picture.append(play);
     const sync = () => {

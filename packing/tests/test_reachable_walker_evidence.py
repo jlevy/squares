@@ -42,7 +42,13 @@ def test_walker_evidence_discards_comments_but_keeps_executable_inputs(
 ) -> None:
     test = tmp_path / "test_walker.py"
     test.write_text(source, encoding="utf-8")
-    assert reachable_tests._walker_evidence(test) is expected  # noqa: SLF001
+    # Failed-only tmp retention can reuse a successful parameter's path. Isolate
+    # the path-keyed production cache from files written by another parameter.
+    reachable_tests._walker_evidence.cache_clear()  # noqa: SLF001
+    try:
+        assert reachable_tests._walker_evidence(test) is expected  # noqa: SLF001
+    finally:
+        reachable_tests._walker_evidence.cache_clear()  # noqa: SLF001
 
 
 @pytest.fixture(scope="module")

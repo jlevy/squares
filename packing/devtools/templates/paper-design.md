@@ -1384,6 +1384,10 @@ it.
     Either side it keeps the wide track’s gutter and is never under the page’s clip:
     40px from the window at 1024 and 768 pixels and 16px at 390, which is 8px
     (`--site-wide-gutter`) inside the page’s content area wherever the page clips.
+    The Results article allows this page-sized bleed at narrow widths as it does on
+    desktop; its prose measure does not clip the ladder.
+    The page container remains the clipping boundary, and the same eight-pixel gutter
+    applies.
 
 - **Atlas grid.** The complete grid at `atlas.html` holds every tracked case, n = 1 to
   324, as a cached square SVG image with its n beneath.

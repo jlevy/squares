@@ -446,6 +446,8 @@ def _held_prose_font_arrival(
             viewport={"width": width, "height": 900}, color_scheme=scheme
         )
         held: list[Route] = []
+        css_mutations: list[dict[str, object]] = []
+        diagnostic["css_mutations"] = css_mutations
         try:
             check_site_rendering.install_observer(context)
 
@@ -457,9 +459,32 @@ def _held_prose_font_arrival(
 
                 def select_fallback(route: Route) -> None:
                     response = route.fetch()
-                    css = re.sub(r'"Site Prose Georgia"\s*,\s*', "", response.text())
-                    if fallback == "unadjusted":
-                        css = re.sub(r'"Site Prose Times"\s*,\s*', "", css)
+                    original = response.text()
+                    replacement = (
+                        '"Metric Mismatch Control", ' if fallback == "metric-mismatch" else ""
+                    )
+                    css, georgia = re.subn(
+                        r'"Site Prose Georgia"\s*,\s*', replacement, original
+                    )
+                    times = 0
+                    if fallback in {"unadjusted", "metric-mismatch"}:
+                        css, times = re.subn(r'"Site Prose Times"\s*,\s*', "", css)
+                    if fallback == "metric-mismatch":
+                        # An explicit adverse metric control, not a claimed production
+                        # fallback. The final PT Serif stack and geometry stay exact.
+                        css += (
+                            '\n@font-face {font-family:"Metric Mismatch Control";'
+                            'src:local("Georgia"),local("Times New Roman"),'
+                            'local("Liberation Serif");'
+                            "font-style:normal;font-weight:400;size-adjust:175%;}\n"
+                        )
+                    css_mutations.append(
+                        {
+                            "url": route.request.url,
+                            "georgia_aliases": georgia,
+                            "times_aliases": times,
+                        }
+                    )
                     route.fulfill(response=response, body=css)
 
                 context.route("**/assets/css/site.*.css", select_fallback)
@@ -467,6 +492,12 @@ def _held_prose_font_arrival(
             page.goto(url, wait_until="domcontentloaded")
             page.wait_for_timeout(check_site_rendering.SETTLE_MS)
             assert len(held) == 1
+            if fallback != "platform":
+                assert len(css_mutations) == 1, css_mutations
+                assert css_mutations[0]["georgia_aliases"] == 1, css_mutations
+                assert css_mutations[0]["times_aliases"] == int(
+                    fallback in {"unadjusted", "metric-mismatch"}
+                ), css_mutations
             held_boxes, temporary = _prose_font_reading(page, paragraph_count=paragraph_count)
             held_report = check_site_rendering.read_report(page)
             diagnostic["held"] = {
@@ -524,7 +555,7 @@ def _held_prose_font_arrival(
             context.close()
 
 
-@pytest.mark.parametrize("fallback", ["platform", "times", "unadjusted"])
+@pytest.mark.parametrize("fallback", ["platform", "times", "unadjusted", "metric-mismatch"])
 def test_results_prose_font_arrival_retains_layout(
     browser: Browser,
     results_font_site: str,
@@ -534,9 +565,16 @@ def test_results_prose_font_arrival_retains_layout(
     report = _held_prose_font_arrival(
         browser, results_font_site, fallback, record_property=record_property
     )["released"]["report"]
-    if fallback == "unadjusted":
-        # The original fallback remains a negative control for the unchanged guard.
+    if fallback == "metric-mismatch":
+        # Prove sensitivity with a declared adverse font metric, preserving the guard.
         assert report["cls"] > check_site_rendering.CLS_LIMIT, report
+    elif fallback == "unadjusted":
+        # Keep the real unadjusted observation. Its CLS depends on the current prose
+        # and platform; check that the unchanged guard classifies the observed value.
+        findings = check_site_rendering.problems(report)
+        assert any(item.startswith("cls ") for item in findings) == (
+            report["cls"] > check_site_rendering.CLS_LIMIT
+        )
     else:
         assert report["cls"] <= check_site_rendering.CLS_LIMIT, report
 

@@ -74,6 +74,8 @@ def synthetic_seventeen_owner_endpoint() -> tuple[Frame, pilot.Endpoint]:
     )
 
 
+# The fresh CLI has a real 40-second deadline; run outside ordinary workers.
+@pytest.mark.pool_heavy
 def test_synthetic_n17_sixteen_step_fresh_cli_resume(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

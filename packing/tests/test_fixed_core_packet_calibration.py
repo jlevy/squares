@@ -2169,6 +2169,8 @@ finally:
     return cast(dict[str, object], json.loads(observation_path.read_text(encoding="utf-8")))
 
 
+# Keep the real five-second signal subprocess control in the serial pool lane.
+@pytest.mark.pool_heavy
 @pytest.mark.skipif(sys.platform == "win32", reason="POSIX signals are required")
 @pytest.mark.parametrize("stage_number", [1, 2])
 @pytest.mark.parametrize("signal_number", [signal.SIGINT, signal.SIGTERM, signal.SIGHUP])
