@@ -5,7 +5,7 @@ title: "Regularize every packing n = 1..324 with the adapted process, in pull re
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 labels:
   - regularization
 dependencies:
@@ -19,7 +19,7 @@ dependencies:
     target: is-01m4pfc1r22b6vh9n4dyv23sg2
 parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
 created_at: 2026-10-11T02:41:06.762Z
-updated_at: 2026-10-12T01:03:14.485Z
+updated_at: 2026-10-12T02:45:20.264Z
 ---
 Owner request 2026-10-11 (epic think-cdud, item 4): adapt evand's search/regularize process as think-kl2v's assessment recommends and run it over every packing the record holds, n = 1..324, so the atlas and case drawings are clean and regular. A separate process, so a separate pull request stacked on PR #487 (gh stack; github-stacked-prs is granted), begun once the 2026-10-10 imports are in good shape; the owner checks it. Obligations: every regularized view exactly feasible at its stated side and verified over Q; no side, frontier value or evidence tier changed by a drawing; each regularization recorded with its typed credit and identity basis (the register's regularizations field for results, and the atlas layer's contract per the atlas bead); drawings labelled regularized; the existing gates (regularized atlas views match their index, re-derive exactly, drawings match their index) kept green and extended to the new process. Record the run cost in the bead. The wand125 confirmation runs (think-r333, think-i85v, think-nd7g) wait for this.
 
@@ -41,3 +41,5 @@ Then: owner answers (Q3 first) with the spike gallery as evidence; slice 4 (reco
 2026-10-11: layer 3 open as jlevy/squares#515 (claude/regularize-tools, base claude/gifted-bell-57e62o / #509): driver, exact same-side re-solve (Fable max review: no blocker/high; findings fixed), gallery tool, spikes at 15 counts. Snapshot headroom restored by pruning the new tools from control workers (strace-proven over 174 controls), 205,238 bytes under the 200 MiB cap: thin. Waiting on the owner's gallery review (https://claude.ai/artifact/5PriKHaABeT1ZG5bZ6u87g) and question 3; then layer 4 (pilot).
 
 2026-10-12: owner decisions answered (think-pn0e) and applied on #497/#511. Full run of n = 1..324 (conservative, 4 workers, largest first) started 2026-10-11 ~22:50 UTC in the session scratchpad; 67/324 at 00:56 UTC. After it finishes: reclassify under the amended table, write a preview layer into a scratch tree for the owner (homepage and atlas), then batch admission PRs once think-k35c (index contract) and think-cb34 sequencing allow.
+
+2026-10-12: two overlaps found. (1) PR #515 (claude/regularize-tools, session_014Y3kYUK2wqLWoA4rqK1Wng, no longer reachable) duplicates #511's layer 3 on the same base; unreconciled, waiting on the owner's call; a read-only comparison is under way. (2) PR #518 changes 42 witnesses (see think-cb34); every one of the 42 has been run in the full run against the old witness, so those counts are re-run after #518 merges, before any admission there (policy section 5: a changed witness lapses review).
