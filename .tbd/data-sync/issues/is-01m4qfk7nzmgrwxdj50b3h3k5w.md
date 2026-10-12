@@ -5,7 +5,7 @@ title: Label every issue; intake label in the runbook and sweep
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T07:17:53.470Z
-updated_at: 2026-10-12T08:33:46.294Z
+updated_at: 2026-10-12T09:42:21.856Z
 started_at: 2026-10-12T07:18:01.788Z
 ---
 
@@ -156,3 +156,22 @@ Validation:
   report without the `intake` label. It exits 1 on 22 other items: 15 issues not in the
   record (#500 to #529), 5 owner replies of 12 October not yet recorded, and 2 watched
   repositories (evand, wand125).
+
+## Merge and PR, 2026-10-12
+
+Merged origin/main (#531, 7847cf3d5) into the branch as 8a5e72e65 (merge commit, no
+rebase), pushed with a normal push. PR: https://github.com/jlevy/squares/pull/546 (not
+merged). Conflicts, each resolved by keeping both rules: `compare_github`'s docstring
+(one-line summary, a label paragraph, #531's edited-comment paragraph); the Intake
+Sources row; the sweep's module docstring; `test_check_requests.py` (both tests kept;
+#531's test gives its issue the `intake` label; the label test adds an edited comment on
+the unlabelled #7). The `--github` row now also says "created or edited". The sweep's
+label test adds an edited-comment step.
+
+Validation at 8a5e72e65: touched tests 85 passed; Ruff clean; BasedPyright on the four
+touched files 0/0/0; `check_requests` exit 0; `--records` exit 0 (49 of 107, 158.7 s);
+`--fast` exit 1 at load 13 to 18 on 4 CPUs (8 ceiling timeouts, browser floor without
+node_modules, workbench Animate view timing, D-168 time budget); a rerun after `npm ci`
+passed the browser floor and the regressions, and the Animate view failed again on
+timing (#538). Hosted: all 15 checks that ran passed (run 38229096917). Live `--github`:
+29 differences, no report without `intake`.

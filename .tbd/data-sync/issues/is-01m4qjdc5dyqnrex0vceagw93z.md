@@ -5,7 +5,7 @@ title: "Import dostashev: s(175) <= 13.764174317487, s(232) <= 15.764174317487, 
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:07:07.181Z
-updated_at: 2026-10-12T08:30:10.582Z
+updated_at: 2026-10-12T09:42:20.748Z
 started_at: 2026-10-12T08:07:43.405Z
 ---
 https://github.com/jlevy/squares/issues/528 (2026-10-12T04:14:57Z). dostashev/square-packing at a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f, records/n0175.*, n0232.*, n0264.*: three compositions with a new 38-square (h + 2) x h rectangle. Also restates #501's c3d17ab sides at the same commit. Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports.
@@ -41,6 +41,16 @@ Who else holds each value (compared exactly in acquisition/claims.json, against 
 - 264: Goebel's 9 + 11*sqrt(2)/2 = 16.77817459305202 (Kingbird), verified by T-101's ceiling 16.77817459305203 on main and layer 4. #528 below by 3.439e-3. No pending entry. No other open issue names 175, 232 or 264.
 
 Validation plan (priced): the retained sqcert files are read by the existing sqcert adapter; both maintained exact routes (upper_bound_reports certify, then check --replay), --workers 1: 9 jobs, priced from #501's 211 positive (118 s) at 15-25 min each pass. Third exact route: IMPORTS roster entry for check_half_angle_area proposed to the records layer (no new reader: sqcert is in RETAINED_READERS). Source programs (C++ GMP sqverify, mpmath cross-check) not run; they are retained by digest against the #501 packet. W2 review as for #501.
+
+## Stage 2 and the stage 4 replay, 2026-10-12 lane U (commit fda34049d on intake-528-529, not pushed)
+
+Packet packing/resources/web/dostashev-records-2026-10-12 (source key [Ostashev records 2026-10-12]): the 7 changed files and LICENSE retained (456,760 bytes), the other 36 pinned identical to the #501 packet; acquire_source --check passes. Certificates admitted at the issue's 38-place prints. claims.json frozen against layer 4 dead83f0e: 175 below T-140 by 2.946e-3, Couzo 337078c by 2.945e-3, T-125 by 4.725e-3; 232 below T-136 by 3.254e-3; 264 below T-101 by 3.439e-3; smallest at all three.
+
+certify --workers 1: 9 jobs, all 3 positives pass and all 6 controls refused on both routes, 460,422 pair decisions, 647.47 route CPU s, 26 min 15 s wall (load 15-20); least wall and pair clearance 5.0e-21 on both routes. check --replay: 9 jobs equal, 28 min 38 s.
+
+Lineage (check_half_angle_area arrangement_gap/patch_lineage from a scratch driver; the route is unedited): no symmetry matches any of the three with the packing the record holds at its count (T-140, Couzo 337078c, T-125; T-136; T-101): new arrangements, as the issue says. 66 of Ellsworth's s(171) squares (T-101 certificate) reappear by pose in the 175 under a half turn; 88 of T-098's s(126) in the 264 under a half turn; 122 of the 175's squares in the 232. Friedman's s(85) has no exact certificate in the record, so it was not measured.
+
+Register plan: scratchpad lane-u/register-plan-528.yaml. Third route: proposed IMPORTS_528_529 roster entry in the lane report.
 
 ## Draft acknowledgement (not posted)
 

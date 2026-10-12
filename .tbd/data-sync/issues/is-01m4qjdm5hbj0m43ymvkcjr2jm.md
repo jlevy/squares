@@ -5,7 +5,7 @@ title: "Import Rio Calle: s(102) <= 10.605828696455852 (#529)"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:07:15.376Z
-updated_at: 2026-10-12T08:30:13.576Z
+updated_at: 2026-10-12T09:42:23.761Z
 started_at: 2026-10-12T08:07:43.538Z
 ---
 https://github.com/jlevy/squares/issues/529 (2026-10-12T04:32:54Z). riocalle/my-repo at 831368623f2d4dcef2e9434fd85c3e154083c97d: n102_s10.605828696455852.txt (decimal centres and radian angles), JSON and SVG copies, verify_exact.py (60-digit decimal, not exact). The author's exact certificate comes from a private engine; the record's exact certificate must be built here from the layout. Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports.
@@ -39,6 +39,18 @@ Claims the release makes, and their register map:
 Credit name: "Rio Calle", as asked. GitHub profile riocalle: name Rio Calle, bio names the University of New Hampshire; twitter_username is null and the listed social accounts are LinkedIn and Instagram only, so no Twitter/X handle found.
 
 Validation plan (priced): the author's checker verify_exact.py was read (json, sys, decimal only; reads its argument, writes nothing) and run once from scratch on the .txt and once on the JSON: both print min wall clearance 2.002e-12, min pair gap 1.932e-12 over 931 close pairs, LEGAL. It rounds at 60 digits, so it is a diagnostic. The record's certificate is derived here by a new calle-txt adapter (every decimal exact as printed, side as printed, tan(theta/2) rounded down at 40 places by a decided interval enclosure) and decided on both maintained exact routes with controls, --workers 1: 3 jobs, priced by a scratch prototype at 35 s for the positive. Third route: needs an upstream reader for calle-txt (proposed to the records layer). W2 review.
+
+## Stage 2 and the stage 4 replay, 2026-10-12 lane U (commit fda34049d on intake-528-529, not pushed)
+
+Packet packing/resources/web/riocalle-n102-2026-10-12 (source key [Calle n102 2026-10-12]): derived-only, 11 files pinned, facts/n-102.yaml.gz written by upper_bound_reports derive from the checkout (calle-txt adapter, half_angle_places 40); acquire_source --check passes. The printed side 10.605828696455852 certifies, so no smaller side was searched for.
+
+certify --workers 1: 3 jobs, the positive passes and both controls are refused on both routes, 30,906 pair decisions, 1 min 48 s; least wall clearance 2.002066e-12 and pair gap 1.932818e-12 on both routes. check --replay: equal, 2 min 20 s.
+
+claims.json frozen against layer 4 dead83f0e: above T-146 (the house on layer 4) by 2.427e-11; below T-125 by 5.475e-11; below T-120 by 1.346e-3; the smallest is T-146.
+
+Lineage (the third route's arrangement_gap/patch_lineage from a scratch driver): one to one with T-125 under a half turn, 40 squares within 1e-9 and none turned (the issue's 40), 62 moved, 19 beyond a tenth, the largest 0.494, 11 turned. Another arrangement of ry-xu's design, not a refinement.
+
+Open: whether to register a certificate that moves no case; attribution.published 2026-10-12 (first commit) against the README's 11 October and the Davidebyzero#6 comment of 2026-10-11T23:06:09Z. Register plan: scratchpad lane-u/register-plan-529.yaml (its template wording "improvement" and the evidence's performed_by source-author need the records lane's rewording).
 
 ## Draft acknowledgement (not posted)
 
