@@ -5,7 +5,7 @@ title: "Import Evan Daniel: s(154) <= 12922566401934059503377267965457/10^30, 5.
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T14:33:02.652Z
-updated_at: 2026-10-12T15:10:34.828Z
+updated_at: 2026-10-12T15:18:16.998Z
 started_at: 2026-10-12T14:33:16.971Z
 ---
 Evan Daniel reports s(154) <= S' = 12922566401934059503377267965457/10^30 = 12.922566401934059503377267965457 in evand/square-packing 597e660c9a078a552991ab893cda3ab693cb5ac8, search/packer/candidates/tt_n154.cert (format of #375/#399/#465/#489), 5.04e-4 below T-136 (SQUISH, #481), the house at 154 on layer 6. Stages 1, 2 and the stage 4 replay of the 2026-10-12 intake continuation (think-mq0k, #544).
@@ -39,7 +39,7 @@ GitHub issue: https://github.com/jlevy/squares/issues/552 (lineage comment https
 
 **Stage 4 replay (done).** certify --workers 1: 3 jobs, positive passes both maintained routes, both controls refused on both; 70,686 pair decisions, 40.97 route CPU s, 91 s wall (load 13-17). check --replay: 3 jobs equal, 75 s. Wall clearance exactly 5e-21, pair gap just under 1e-20 on both routes. Third route run from scratch with the #552 roster line added in-process (code not edited): passed, 6/6 controls, least distance 1.00e-20, upstream bytes held to the pin, no disagreement, 41 s. Regularized drawing decided the same way (diagnostic, no receipt): passes all three routes, controls refused.
 
-**Lineage (measured, third route's tools from scratch).** arrangement_gap: no one-to-one nearest match against T-136 or Couzo's 154 (T-098). patch_lineage: at most 32 of T-136's squares within 1e-9 under one placement (1 to the digit): another arrangement than T-136. Upright blocks reappear to the digit from both Couzo starts (43 of the 155, 45 of the 154), so the tool cannot tell the starts apart. A scratch float optimal matching (not a repo tool, OR-1) gave corner RMS 0.318 vs T-136 and 0.393 vs Couzo's 154 (the author's 0.319, 0.396) and 0.181 vs Couzo's 155 less one square: consistent with the comment. chain_lineage.py, which the comment names, is not in the tree at 597e660 or 31523f8.
+**Lineage (measured, third route's tools from scratch).** arrangement_gap: no one-to-one nearest match against T-136 or Couzo's 154 (T-098). patch_lineage: 32 of T-136's squares within 1e-9 under the best placement it finds (1 to the digit): another arrangement than T-136. Upright blocks reappear to the digit from both Couzo starts (43 of the 155, 45 of the 154), so the tool cannot tell the starts apart. A scratch float optimal matching (not a repo tool, OR-1) gave corner RMS 0.318 vs T-136 and 0.393 vs Couzo's 154 (the author's 0.319, 0.396) and 0.181 vs Couzo's 155 less one square: consistent with the comment. chain_lineage.py, which the comment names, is not in the tree at 597e660 or 31523f8.
 
 **Credit.** Evan Daniel (size-chaining QD explorer of #465/#489, time-travel test from the 5 Oct register); start credited to Francisco Couzo's 5 Oct n = 155 packing less one square (comment 14:13Z). AI: search code, run and request done with Claude (Claude Code), directed and reviewed by Evan Daniel; MIT, CREDITS.md.
 
