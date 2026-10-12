@@ -5,14 +5,14 @@ title: "W7: canonical differential for degenerate chunk cells"
 kind: task
 status: open
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md
 labels: []
 dependencies: []
 hold: blocked
 hold_until: null
 created_at: 2026-08-26T09:28:15.229Z
-updated_at: 2026-08-27T09:28:03.575Z
+updated_at: 2026-10-10T23:00:54.275Z
 ---
 BC-016. Replay aligned and glued chunk strata across declared toolchains and pool widths. Retain endpoint values, canonical active-cell labels, tie behavior, and typed instability. This is deterministic measurement validation, not search; instability blocks the enumerator.
 

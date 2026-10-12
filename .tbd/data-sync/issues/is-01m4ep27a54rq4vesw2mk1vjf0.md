@@ -5,16 +5,18 @@ title: Triage Couzo extended-range construction updates beyond the eight-case in
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 13
 delegate: claude-code@spud10.local
 labels:
   - result-import
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m4h9p55gh7pe3zfsjyp83qbx
 parent_id: is-01m44qz0rxvkakmyqaj7qdgagv
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:17:46.179Z
-updated_at: 2026-10-09T03:50:59.464Z
+updated_at: 2026-10-09T21:56:40.121Z
 started_at: 2026-10-09T00:19:50.892Z
 ---
 Read complete franciscouzo/square-packing changes74f7e8b andb10ad36 beyond already retained451 eight exact certificates: n378 update and20 added n>324 decimal pose/diagram pairs327332335-342364369372-379, plus remaining n<=324 context. Preserve explicit324-case standing horizon, source-only versus verified claims and all superseded histories. Acquire complete immutable ordinary inputs and licensing/lineage before any registry/adoption/replay; no credit transfer from accepted eight-case native jobs. Record a dated watched-source read with this open owner until a complete scoped packet disposes the new claims.
@@ -36,3 +38,15 @@ Three actual published issue replies399/419/420 are appended;399closed02:56:58Z,
 2026-10-09 final handoff: clean branch codex/import-couzo20-custody-1545 HEAD6acce39a0badda1714e796444207f86a0569cd40/treebb76cc21e89fde9daf709a673b6579775eb84c00 normally merges corrected463 c20e70f8 into accepted source6068/pinbd11. Astra independently accepted the six inherited blobs and exact final tree/parents/pin; all32 source paths and actual DATA6068 remain unchanged. Active hooks PASS10.39s; maintained pin update/check PASS unchanged. Current records49/107selected steps PASS456.15s, but exceeds unchanged300s ceiling at10CPU/jobs2/inner1 UNARMED/nonreference; this is functional named-tier evidence, no timing/full/hosted/native grade. Selected cap live=Git200080424/201326592 still excludes22ordinarypacketfiles under unchanged prune. Final receipt+validated draftbody: review-notes/couzo20-custody-1545/final-handoff.json and source20-draft-pr-body.md. ROOT owns pending draft formal430child publication; source20 is historicalffd900 custody, no all20-current claim.
 
 Follow-up pin2d32a6e96f55c5dc1a2dd0e3581098e7c0105252/tree1e98bf6ddb40deac1874eabc0c109b30edb6e2ad has two changed outside-horizon TXT inputs now retained only outsideGit: n37519.907024692022954 strictly below historical19.907052698737502, n37819.946861170999796 strictly below historical19.947426312032292. Full753poses/54556B, exact Git blob/size/SHA256 and original READMEcontext in intake-preparations/couzo-followup-five-2d32a6e/outside-horizon-two-custody-receipt.json. NoSVG/newsource archiveGit, geometry or authorcode executed; old20factbytes/historicalpin unchanged. Source follow-up pending; user requested HANDOFF rather than further implementation.
+
+2026-10-09 cloud: n375 19.907024692022954 (was 19.907052698737502) and n378 19.946861170999796 (was 19.947426312032292) at Couzo 2d32a6e (753 poses, 54,556 B) identities recorded in #469's packet; a dated update is blocked because source-coverage beyond_horizon_claims allows one entry per n and has no superseded_by: needs schema + check_source_coverage keyed on (n, source_id) with successor naming, then a derived packet in #466's format.
+
+Review B on #466 (B2): #466 packet README, source-coverage notes and the two beyond-horizon rows do not yet note Couzo 2d32a6e's smaller n=375 (19.907024692022954) and n=378 (19.946861170999796); check_source_coverage allows one beyond-horizon row per n, so importing them needs a supersession design.
+
+#466 review B: B2 dated note on n375/n378 landed (8d1ab3d9f); packet renamed to couzo-extended-reports-2026-10-08 / couzo-extended-range-reports-2026-10-08 (ca85b22ae, B6).
+
+2026-10-09 cloud (post-430): schema change + n375/n378 import in progress on branch claude/couzo-beyond-horizon-updates (from main d3860c97a).
+
+2026-10-09 review of PR #479 (C6, design note): with (n, source_id) succession requiring a strictly better, no-earlier-dated successor and at most one current row per n, a later-dated worse report, an equal re-report, or an earlier-dated better report found afterwards cannot be registered at a count that already has a current row (deferred-conflict counts as current). In-horizon superseded_reports has no date rule. Revisit if such a report arrives.
+
+2026-10-09: PR #479 (head 0698b2dd0, CI green, review A published with dispositions) adds dated beyond-horizon supersession keyed (n, source_id) and imports Couzo 2d32a6e n375/n378 into couzo-extended-updates-2026-10-08 (derived-only; blobs 96f21d6c/4179d7d4 as #469 recorded; SHA-256 cdcb176c/dbd3cc98). The ffd900d rows remain as dated superseded rows. Outside-corpus readers (render_recent_results, build_bound_citations) still open; use check_source_coverage.current_beyond_horizon().

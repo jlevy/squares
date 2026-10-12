@@ -5,13 +5,13 @@ title: "PR #39 review R3: derive the current handoff cell from authoritative rec
 kind: bug
 status: closed
 priority: 3
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0x29vkahkr6ht4zx2cahh2x
 created_at: 2026-08-25T18:18:32.971Z
-updated_at: 2026-08-25T18:38:29.436Z
+updated_at: 2026-10-10T23:00:45.267Z
 closed_at: 2026-08-25T18:38:29.436Z
 close_reason: Fixed in be35a70; focused regressions, full 32-surface validation, deep-golden replay, and both required CI jobs pass.
 resolution: null

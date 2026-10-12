@@ -5,8 +5,8 @@ title: "Address review: PR #31 — assurance vocabulary consistency"
 kind: task
 status: closed
 priority: 1
-version: 6
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 8
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0typjn7s866m042zsemybj6
@@ -16,7 +16,7 @@ child_order_hints:
   - is-01m0w0cmp6zct0dze7qkpb8r7r
   - is-01m0w0cmzhemqb0s0jexd6kye8
 created_at: 2026-08-25T08:25:20.589Z
-updated_at: 2026-08-25T08:27:51.930Z
+updated_at: 2026-10-10T22:59:58.273Z
 closed_at: 2026-08-25T08:27:51.929Z
 close_reason: "All four PR #31 review findings were fixed and their child beads closed; validation and disposition reply remain part of the enclosing implementation turn."
 resolution: null

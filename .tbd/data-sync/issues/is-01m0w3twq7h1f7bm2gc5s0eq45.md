@@ -5,8 +5,8 @@ title: Anchor defect status edits to defect ids
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - bookkeeping
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tyazcycsqvm34fyxb4hdtx
 created_at: 2026-08-25T09:25:46.342Z
-updated_at: 2026-08-25T09:26:47.124Z
+updated_at: 2026-10-10T22:51:16.929Z
 closed_at: 2026-08-25T09:26:47.124Z
 close_reason: "D-263 fixed and logged as recurrence of D-258: restored D-034 outstanding, closed D-260 with id/title context, and explicitly audited D-034/D-042/D-203/D-260..263 statuses."
 resolution: null

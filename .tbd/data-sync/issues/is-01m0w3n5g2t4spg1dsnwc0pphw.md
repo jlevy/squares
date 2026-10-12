@@ -5,8 +5,8 @@ title: Freeze the n4 fixture receipt outside fixture data
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - validity
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tyazcycsqvm34fyxb4hdtx
 created_at: 2026-08-25T09:22:38.721Z
-updated_at: 2026-08-25T09:26:46.632Z
+updated_at: 2026-10-10T22:51:10.397Z
 closed_at: 2026-08-25T09:26:46.631Z
 close_reason: "D-261 fixed: test code independently freezes success=false, status=4, and the exact HiGHS message; only a finite successful nine-variable solve with every original-row residual <=1e-10 is the portable alternative."
 resolution: null

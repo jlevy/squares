@@ -5,15 +5,15 @@ title: Retain independently invalid basin events instead of crashing the batch
 kind: bug
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - focus-correctness
 dependencies: []
 parent_id: is-01m0t4phe1905yy2jk7czp1391
 created_at: 2026-08-24T17:53:09.473Z
-updated_at: 2026-08-24T18:09:19.280Z
+updated_at: 2026-10-10T22:49:08.390Z
 closed_at: 2026-08-24T18:09:19.279Z
 close_reason: Fixed and pushed in a3be8e4 plus ce84ef6. BasinEvent/v3 derives independent_validity_failure, forces admissibility false, and validates then atomically appends through one run-path helper. The selftest retains a known overlapping endpoint through that helper and rejects forged admissibility or an omitted blocker. Exp-026 remains the immutable three-row failure; exp-027 retains/replays all four n=6 outcomes, and the full 30-step gate passes in 55s. D-126 remains open because seed 3's wall-clock-limited endpoint did not reproduce.
 resolution: null

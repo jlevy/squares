@@ -1,0 +1,34 @@
+---
+type: is
+id: is-01m4kg2ccs06580txqw4c12qs0
+title: Scope pre-push prerequisites to changed inputs
+kind: task
+status: closed
+priority: 2
+version: 4
+spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
+delegate: codex@spud10
+labels: []
+dependencies: []
+parent_id: is-01m4ke1dkg5m43rszjm49ar77r
+hold: null
+hold_until: null
+created_at: 2026-10-10T18:09:12.086Z
+updated_at: 2026-10-11T03:03:37.436Z
+started_at: 2026-10-10T18:12:46.496Z
+closed_at: 2026-10-11T03:03:37.435Z
+close_reason: "Bounded implementation complete in PR #496 at aca9a0784. All ordinary PR checks and full Deferred checkpoint 38105875719 passed; all ten artifact receipts match the immutable head/tree. Independent senior and dedicated performance/security reviews have no findings. Focused contracts passed; local push prerequisite pass and 900s behavioral timeout remain explicitly incomplete, without a speedup claim. Broad shared-core attribution retained; parent think-ht59 owns remaining dependency/timing debt."
+resolution: null
+duplicate_of: null
+---
+Reuse the existing select_for_paths contract to scope local --push prerequisite checks, then separate policy/tooling inputs from the overly broad _CORE attribution after auditing actual dependencies. No implementation is authorized in the current slice.
+
+Read-only evidence: --push currently selects all 65 fast/non-broad prerequisites before adding reachable behavioral tests, and bypasses prerequisite path scoping even when --since is supplied. The existing pure scoper selects 9/65 prerequisites for test_site_math_preferences.py alone, 59/65 for the eight process/test/doc paths, and 58/65 for gate_budgets.py alone. These are selection counts, not wall-time savings. The policy module reaches scientific checks through packing/src/sqpack/*; do not replace that conservative rule with a blanket omission.
+
+Acceptance contract: compute both prerequisite and behavioral selection from the same complete changed-path set, including working-tree changes and old/new rename/delete paths. Preserve empty/unclaimed-path whole-tier fallback and all unattributed checks. Retain named negative controls for unknown files, missing attribution, scientific verifier/source/certificate edits, shared core changes, all declared Workbench render inputs, JavaScript/CSS/probe/toolchain edits, and a mixed website-plus-scientific change. Ensure no empty or silently reduced verdict. Policy/tooling changes must still run budget declaration/enforcement and validation-CLI contracts. Keep complete required PR CI and full/strict release checkpoints intact.
+
+Implement in a bounded follow-up with focused selection tests and one ordinary push receipt. Distinguish selector overhead, subprocess/check runtime, and host contention; do not claim overall acceleration from fewer selected steps or add a generic benchmark framework. Parent process tracker remains open.
+
+## Notes
+
+Host-capacity caveat and recommendation: the existing process gate records 10 available CPUs, outer jobs=10 and inner jobs=3; a single contemporaneous snapshot had load averages 102.13/87.44/64.48. This is evidence of substantial host contention, not proof that every validator or test caused the cost. memory_pressure reported 48% free on 32 GiB, and cumulative swap/compression counters do not establish current memory exhaustion. In the scoped-prerequisite follow-up, account for available host capacity and avoid launching simultaneous host-wide validators; preserve explicitly selected deadlines, limits and complete scientific coverage. Do not kill unrelated threads, add thresholds or claim elapsed savings from selection counts. No further investigation or implementation was performed.

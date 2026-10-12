@@ -5,14 +5,14 @@ title: Do not let a later check mask an earlier gate failure
 kind: bug
 status: closed
 priority: 2
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: codex-root
 labels: []
 dependencies: []
 parent_id: is-01m0w9a47h5zrn7jf16pp2kpxs
 created_at: 2026-08-25T11:56:17.207Z
-updated_at: 2026-08-25T11:57:21.859Z
+updated_at: 2026-10-10T22:53:06.253Z
 closed_at: 2026-08-25T11:57:21.858Z
 close_reason: "Completed: treated the visible ledger failure as binding, regenerated the view, and reran the full focused checkpoint under set -euo pipefail; every command passed and terminal exit is zero."
 resolution: null

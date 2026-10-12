@@ -5,8 +5,8 @@ title: "Spec: a static, crawlable site with a registered URL scheme"
 kind: epic
 status: closed
 priority: 1
-version: 30
-spec_path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
+version: 31
+spec_path: docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md
 delegate: codex-pr395-site-review
 labels:
   - pages
@@ -42,7 +42,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-06T22:49:38.379Z
-updated_at: 2026-10-08T13:09:46.665Z
+updated_at: 2026-10-10T23:05:39.825Z
 started_at: 2026-10-08T00:32:24.610Z
 closed_at: 2026-10-08T13:09:46.664Z
 close_reason: |

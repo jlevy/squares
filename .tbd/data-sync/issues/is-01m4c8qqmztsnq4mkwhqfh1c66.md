@@ -5,14 +5,14 @@ title: "Issue425: triage five exact Couzo certificate refinements, two possible 
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-07T22:46:22.110Z
-updated_at: 2026-10-08T01:11:18.974Z
+updated_at: 2026-10-11T05:05:30.768Z
 started_at: 2026-10-07T22:52:14.379Z
 ---
 New itsnaka request captured with all comments and immutable sourcebc389ddf7d65277cd19a9b08fb285d86346d6806 in /workspace/squares-new-report-intake/late-425-256. Request105,263,292;130/272 historical-only. n263 claimed side is weaker than alreadymergedSQUISH bound and author excludes no-longer-improving ceilings. Compare exact105/292 against current record; delegate Astra mathematical/input binding before any replay/registry changes; retain full source/credit/history and honor explicit unrequested lower-bound exclusions. Metadata discovery only; no new feasibility assurance yet.
@@ -38,3 +38,24 @@ Current custody/protocol continuation (2026-10-08):
 New operationalarchive squares-operational-evidence-20261008.tar.gz1968members120072986expandedB18844811compressedB SHA25607d7116be95698e1c4a3ec4f7d51c55d3f52da6072afd71ddfa729d11ed5d7fc uploadedrelease406258689; ACTUALdownloadarchive/manifesthashMATCH andall1968downloadedmembersverifiedPASS. Nativefullsnapshot export/full-current-state/outboxproof alsoGitHubdownloadhashverified; both outboxesEMPTY andsourcecheckoutsCLEAN. Latestpending sourcecommits lower3345c393/upper2aeb518d saved in separateGitbundles uploaded/downloadedBUNDLEverifyPASS; predecessorsf1/9d alreadyGitHub. Sourcebranchpushespendingnativeprepushchecks, formalstack430notmerged; alloriginalfailure/cancellation preserved.
 Issue428 math finalfrozen-v2 protocolACCEPT zero findings full340square/1360corner five-envelope independentlyreconstructed baseline SHA256d9b98489ee59ccbbfb140b11d7ec3d96514a084d7c822c989a7863369992045b; binding finalfrozen-v2 protocolACCEPT zero findings250checks completebaseline d72645a527aed455345d9101560b80d8aa1220443be6a21e51d77b41054285cf. Reviewfiles final-protocol-review-v2.md/.json in independentmath/bindingdirs; runner e4f22b90/manifest5b4cc7ee sourcefded686668. Priorv1wrong26830 preserved; v2derived11390perroute and3meaningfulmocktestsPASS actualEXIT0. Fullinputsunchanged. Bothfinalreviews nowacceptedbut scientificgeometrydeciders0, no actualreplaychildren/upstreamproducer, noassurancepromotion. Newfinalreviewcustodyarchiveinpreparation (notyetuploadproven). Parentthink-v42c remainsopen; wrongcountthink-wgdcpendingdurablefinalreviewsclosure.
 Additional engineeringlane plan_next_storage_slice GPT6.1Sol read-only concreteexistingOR18release/privatecopierindexedstorageplan for425/428 beforeactualreplay; no budget/caprise/consumedproofdeletion. Selectednextentry remains lowerpin/upperparentfinalCI→stackmerge→actualmatching422live/results/drawingsverification thenreply/ledger;425/428 actualdeciders afterCPUleaseandcanonicalstorage/admissionprereqs. Latestreusableenvironmentstartupsave remainsstale_base/unsaved; currentinstancetested distinctfromfresh-taskrestoration.
+
+
+## Stage 7 draft from main at c6bf2d46f, 2026-10-11 — not posted (owner: leave as drafts)
+
+Ledger: closeable (`check_requests --report` at c6bf2d46f: all four results settled, no ask queued). Updates think-mtwe's 10 October draft: links point at `results.html`, and it now reports that SQUISH's #481 (T-136) and Evan Daniel's regularized certificate (T-146), both confirmed since, are smaller at 292, and Couzo's T-128/T-130 and Mishapolk's T-138 at 105, all pending adoption. No case ceiling moved.
+
+@lollipoll, thank you. Your certificates are registered on `main` as **[T-117](https://jlevy.github.io/squares/results.html#t-117), V3/C3**, confirmed, independently re-implemented, through [PR #434](https://github.com/jlevy/squares/pull/434). Here is how each count of your 8 October scope stands.
+
+- **n = 292, your active request:** s(292) ≤ 17597249391156465040471442005510391858592626557/10^45 = 17.59724939115646504047144…, your exact side, is the verified upper bound in the [n = 292 case record](https://github.com/jlevy/squares/blob/main/packing/frontier/n-292.md). Evan Daniel's larger dated certificate there is kept as history (T-129).
+- **n = 105:** the same replay confirms your certificate. As your correction says, Ryan Xu's smaller #432 certificate (53953382877053953382877/5000000000000000000000 = 10.79067657541079…) holds the case, as T-125. Yours stays retained with its replay.
+- **n = 130, 263 and 272** are retained with your complete archive as historical source evidence, with no ceiling credit, as you asked.
+- **The restricted n = 105 dual** is not registered. It holds only inside its fixed-orientation family, and no unrestricted lower bound or optimum follows from it.
+
+**Since then.** At 292, SQUISH's #481 packing (T-136) and Evan Daniel's regularization of it (T-146), both confirmed here since, are smaller than your side, by 5.87e-03. At 105, Francisco Couzo's #451 certificates (T-128, T-130) and Mishapolk's #470 witness (T-138) are smaller than Ryan Xu's. No case ceiling has moved: the case records keep these certificates until house adoption, which waits for [jlevy/squares#403](https://github.com/jlevy/squares/pull/403), which rewrites every case record; yours would then be kept as history at 292.
+
+**How it was checked.** The result was independently re-implemented here; neither of your checkers ran. This repository's two exact routes decided ten complete jobs, one positive and four controls per count, for 479,460 pair decisions: `sqpack.verify` and `devtools.check_rational_witness_independent`. `devtools.refinement_custody` checked the inputs and receipts. The two routes are written separately but share Fraction arithmetic, the separating-axis method, schema loading and the serialized corner inputs; a reviewed independent matrix derivation covers the shared conversion. A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-07-refinement-custody-closure.md) accepted the finite-feasibility replay and the custody. No human review is claimed.
+
+This confirms finite feasibility only, not optimality. Nothing you asked for is queued, so this issue is closed with this comment. If the adoption round changes what this comment says, a follow-up will note it.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_

@@ -5,8 +5,8 @@ title: Keep an active session final phase in progress
 kind: bug
 status: closed
 priority: 2
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - bookkeeping
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0vr7g27g67p699aepcdksxd
 created_at: 2026-08-25T09:29:07.362Z
-updated_at: 2026-08-25T09:30:42.273Z
+updated_at: 2026-10-10T22:52:45.185Z
 closed_at: 2026-08-25T09:30:42.272Z
 close_reason: "D-264 fixed: phase 8 remains completed and portfolio order 5 is now an explicit in-progress W2 phase with a 30-minute contract; ledger status alignment is restored."
 resolution: null

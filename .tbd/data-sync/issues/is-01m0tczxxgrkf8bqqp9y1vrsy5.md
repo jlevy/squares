@@ -5,8 +5,8 @@ title: Scope PR20 hardness and tractability claims
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - review
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tbtgpb92e81ndvw4xm9be6
 created_at: 2026-08-24T17:27:19.721Z
-updated_at: 2026-08-24T17:36:31.234Z
+updated_at: 2026-10-10T22:49:41.156Z
 closed_at: 2026-08-24T17:36:31.233Z
 close_reason: "D-179 fixed: slack hardness now requires a named proposer/target/event and s(11) remains central open mathematics; normal gate passed."
 resolution: null

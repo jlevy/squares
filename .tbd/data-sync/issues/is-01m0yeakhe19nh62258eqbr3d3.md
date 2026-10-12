@@ -5,8 +5,8 @@ title: Extract the shared Motion Lab shell and migrate the exact n=5 scenario
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-25-generalized-motion-lab.md
 labels:
   - packing
   - visualization
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m0yebd9ks8n9kjn3adq8npdv
 parent_id: is-01m0yd38q3mxynbc38k3gyxt7f
 created_at: 2026-08-26T07:07:35.853Z
-updated_at: 2026-08-26T07:47:16.878Z
+updated_at: 2026-10-10T23:04:33.387Z
 closed_at: 2026-08-26T07:47:16.853Z
 close_reason: Extracted package-owned Motion Lab CSS and JavaScript assets, adapted the retained exact n=5 manifest to the shared scenario contract, embedded a scenario registry, applied the compact tbd-derived visual vocabulary and complete publication palette, regenerated the standalone artifact, and preserved all exact-model parity contracts. Fast validation passed (151 tests).
 resolution: null

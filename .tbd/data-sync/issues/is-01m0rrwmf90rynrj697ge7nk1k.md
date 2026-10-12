@@ -5,14 +5,14 @@ title: quench_bracket's budget is wall-clock, so results depend on machine load
 kind: bug
 status: open
 priority: 2
-version: 7
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 9
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:16:45.800Z
-updated_at: 2026-08-30T10:37:37.222Z
+updated_at: 2026-10-10T22:57:15.730Z
 ---
 quench_bracket and _free_sweep take time_budget in seconds and stop on a wall-clock deadline. Host speed, load, pool width, and contention therefore change how many LP solves and angle probes a nominally identical quench performs, making convergence a property of the machine as well as the mathematics.
 

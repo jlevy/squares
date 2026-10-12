@@ -5,12 +5,12 @@ title: Guard the current hypothesis count in the synopsis
 kind: bug
 status: closed
 priority: 2
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies: []
 created_at: 2026-08-24T14:28:37.755Z
-updated_at: 2026-08-24T14:34:23.537Z
+updated_at: 2026-10-10T22:52:24.834Z
 closed_at: 2026-08-24T14:34:23.537Z
 close_reason: Corrected the live synopsis to 41 hypotheses, logged D-161, added a registry-derived consistency check plus a focused mutation control, and passed the full strict/deep gate.
 resolution: null

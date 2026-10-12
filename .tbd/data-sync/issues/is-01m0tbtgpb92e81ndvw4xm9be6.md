@@ -5,8 +5,8 @@ title: Review and absorb stacked PR 20 into the basin campaign branch
 kind: task
 status: closed
 priority: 0
-version: 14
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 15
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - review
@@ -25,7 +25,7 @@ child_order_hints:
   - is-01m0td7rar54g83je7jmphch98
   - is-01m0td7rk4je1wp5zmjt0vq837
 created_at: 2026-08-24T17:06:53.762Z
-updated_at: 2026-08-24T17:38:25.729Z
+updated_at: 2026-10-10T22:49:06.381Z
 closed_at: 2026-08-24T17:38:25.709Z
 close_reason: "PR #20 head 5d096ae was independently and delegatedly reviewed, merged as second parent of 5ab8dab, and auto-marked MERGED by GitHub. Eleven substantive findings D-172..D-182 were corrected, logged, and closed under dedicated beads; exp-024 and agenda-001 were preserved. The normal 30-step gate passed in 27s, the merge was pushed, PR #19 was refreshed, and no PR20 feedback/check surfaces were outstanding."
 resolution: null

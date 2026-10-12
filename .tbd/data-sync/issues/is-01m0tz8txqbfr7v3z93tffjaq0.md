@@ -5,13 +5,13 @@ title: Audit every packing verification claim against the formal standard
 kind: task
 status: closed
 priority: 1
-version: 6
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 8
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-24T22:46:45.942Z
-updated_at: 2026-08-25T07:24:22.041Z
+updated_at: 2026-10-10T22:59:50.067Z
 closed_at: 2026-08-25T07:24:22.041Z
 close_reason: Workflow entry contracts, proportional process rules, assurance-language audit, and the 226-document common-doc map are implemented and validated without adding hashes or mandatory routine-session ceremony.
 resolution: null

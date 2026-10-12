@@ -5,13 +5,13 @@ title: "PR #31 review 4: enumerate the formal method tokens in the tutorial"
 kind: bug
 status: closed
 priority: 2
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0w0c7yd4nabyntb3137stwm
 created_at: 2026-08-25T08:25:33.936Z
-updated_at: 2026-08-25T08:27:51.681Z
+updated_at: 2026-10-10T23:00:33.050Z
 closed_at: 2026-08-25T08:27:51.680Z
 close_reason: "Fixed PR #31 finding 4: the tutorial now enumerates all four Witness/v1/machine-check method tokens and separately names the three frontier proof methods."
 resolution: null

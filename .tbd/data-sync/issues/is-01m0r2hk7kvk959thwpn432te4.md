@@ -5,14 +5,14 @@ title: "Gate wall time: 480s -> 152s done, the remaining 101s unexamined"
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-efficiency
 dependencies: []
 parent_id: is-01m0rkz14t04yjme92gnfncfv7
 created_at: 2026-08-23T19:46:15.411Z
-updated_at: 2026-08-24T07:13:47.420Z
+updated_at: 2026-10-10T22:49:31.097Z
 closed_at: 2026-08-24T07:13:47.419Z
 close_reason: "The gate now supports targeted checks and parallel deterministic execution: integrated normal 25-step gate measured 26s and strict/deep 48s, versus the bead's 152s checkpoint; D-128."
 resolution: null

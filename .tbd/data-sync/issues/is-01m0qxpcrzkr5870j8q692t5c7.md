@@ -5,8 +5,8 @@ title: Implement float-candidate to exact-certificate promotion
 kind: feature
 status: closed
 priority: 1
-version: 8
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 9
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -26,7 +26,7 @@ parent_id: is-01m0r7q3f92dgx66d30wwrasbn
 child_order_hints:
   - is-01m0vjynw583941h5xyg5d3n1s
 created_at: 2026-08-23T18:21:29.758Z
-updated_at: 2026-08-27T05:57:56.250Z
+updated_at: 2026-10-10T22:54:10.167Z
 closed_at: 2026-08-27T05:57:56.249Z
 close_reason: Superseded promotion owner. think-75ll retains the unfinished generic outward-rounded interval-existence bridge for suitable well-posed systems and typed blockers; it does not promise exact recovery for arbitrary candidates, including n=17.
 resolution: duplicate

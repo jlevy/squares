@@ -5,13 +5,13 @@ title: "PR #31 review 3: replace floating LP with the declared numerical method"
 kind: bug
 status: closed
 priority: 2
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0w0c7yd4nabyntb3137stwm
 created_at: 2026-08-25T08:25:33.637Z
-updated_at: 2026-08-25T08:27:32.522Z
+updated_at: 2026-10-10T23:00:30.910Z
 closed_at: 2026-08-25T08:27:32.509Z
 close_reason: "Fixed PR #31 finding 3: the assurance slot now uses `numerical-f64`; floating-point LP remains a plain-language description of the refiner."
 resolution: null

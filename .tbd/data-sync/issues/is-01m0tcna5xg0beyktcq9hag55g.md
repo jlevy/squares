@@ -5,8 +5,8 @@ title: Correct PR20 numeric-to-exact reconstruction scope
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - review
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tbtgpb92e81ndvw4xm9be6
 created_at: 2026-08-24T17:21:31.836Z
-updated_at: 2026-08-24T17:36:30.009Z
+updated_at: 2026-10-10T22:49:39.989Z
 closed_at: 2026-08-24T17:36:30.008Z
 close_reason: "D-174 fixed: recovery docs retain centres until graph-specific elimination, use numerical roots only as non-decisive hints, and require rational-or-algebraic exact LP coefficients; normal gate passed."
 resolution: null

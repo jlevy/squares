@@ -5,8 +5,8 @@ title: Build a resumable sharded executor for packing campaigns
 kind: feature
 status: open
 priority: 1
-version: 1
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 2
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -15,7 +15,7 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 created_at: 2026-08-23T21:17:18.561Z
-updated_at: 2026-08-23T21:17:18.561Z
+updated_at: 2026-10-10T22:54:35.654Z
 ---
 Provide a common batch executor for proposer, quench, pair-test, and certification jobs with deterministic seed assignment, explicit resource budgets, bounded concurrency, atomic artifacts, retry classification, resumable manifests, and shard reconciliation.
 

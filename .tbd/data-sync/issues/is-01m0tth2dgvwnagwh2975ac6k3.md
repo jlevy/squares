@@ -5,15 +5,15 @@ title: Write packing development.md and link the engineering orientation
 kind: task
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
   - documentation
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:23:52.879Z
-updated_at: 2026-08-24T22:55:29.319Z
+updated_at: 2026-10-10T22:56:55.826Z
 closed_at: 2026-08-24T22:55:29.318Z
 close_reason: Created and linked development.md with Python 3.14 setup, E0-E3 placement, commands, testing, CLI, shell, persistence, golden, compatibility, and performance policies plus governing-guideline links and footer.
 resolution: null

@@ -5,8 +5,8 @@ title: Reconcile n=29 machine metadata with its numerical claim scope
 kind: bug
 status: closed
 priority: 1
-version: 6
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 8
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - frontier
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-24T22:37:19.992Z
-updated_at: 2026-08-25T07:24:21.735Z
+updated_at: 2026-10-10T22:59:47.753Z
 closed_at: 2026-08-25T07:24:21.735Z
 close_reason: Witness/v1 inspect/check/verify/promote, exact and independent rational replay, the n=29 source/replay correction, and fail-closed algebraic field preconditions are implemented with positive and negative controls.
 resolution: null

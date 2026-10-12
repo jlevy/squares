@@ -5,15 +5,15 @@ title: Repair merge-reintroduced synopsis result drift
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - documentation
   - defect
 dependencies: []
 parent_id: is-01m0y16d21crjnn9tqa0120way
 created_at: 2026-08-26T03:48:54.537Z
-updated_at: 2026-08-26T04:03:59.275Z
+updated_at: 2026-10-10T22:52:16.606Z
 closed_at: 2026-08-26T04:03:59.259Z
 close_reason: Recorded D-337, reconciled H-023 and campaign totals with the ledger, restored H-024's unresolved boundary, added two regression helpers and controls, and passed the full 32-area packing validation checkpoint (126 tests, 67 negative controls, 292.22s).
 resolution: null

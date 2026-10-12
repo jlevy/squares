@@ -5,8 +5,8 @@ title: Bound and terminate individual negative-control checks
 kind: bug
 status: closed
 priority: 2
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - packing
   - focus-infrastructure
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T06:55:25.164Z
-updated_at: 2026-08-24T22:55:29.695Z
+updated_at: 2026-10-10T22:57:16.205Z
 closed_at: 2026-08-24T22:55:29.694Z
 close_reason: Every mutation-control command now has a finite deadline, isolated process group, TERM then KILL cleanup and reaping, plus a TERM-ignoring-child test. Fresh per-control bytecode roots also prevent same-size rapid mutations from executing stale code. All 38 controls pass with one and ten workers.
 resolution: null

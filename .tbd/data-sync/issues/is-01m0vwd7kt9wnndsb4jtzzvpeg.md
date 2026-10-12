@@ -5,8 +5,8 @@ title: Fix downward-rounded certified Trump bound in SVG captions
 kind: bug
 status: closed
 priority: 2
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+version: 5
+spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
   - soundness
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 created_at: 2026-08-25T07:15:58.713Z
-updated_at: 2026-08-25T07:24:42.295Z
+updated_at: 2026-10-10T23:03:36.159Z
 closed_at: 2026-08-25T07:24:42.294Z
 close_reason: Certified-bound captions now use approximation semantics for abbreviated decimals; regression control passes.
 resolution: null

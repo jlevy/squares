@@ -5,15 +5,15 @@ title: Use the declared phase-transition enum for the phase-11 hard stop
 kind: bug
 status: closed
 priority: 2
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - bookkeeping
 dependencies: []
 parent_id: is-01m0vr7g27g67p699aepcdksxd
 created_at: 2026-08-25T10:09:03.337Z
-updated_at: 2026-08-25T10:17:42.674Z
+updated_at: 2026-10-10T22:52:56.916Z
 closed_at: 2026-08-25T10:17:42.673Z
 close_reason: "D-271, D-273, and D-274 are recorded and fixed before integration: the phase transition uses the enforced enum, the workflow test proves a single exact blocking command with no advisory escape, and corrected focused checks plus the complete gate pass."
 resolution: null

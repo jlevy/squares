@@ -5,8 +5,8 @@ title: "PR #23 review R17: Validate all baseline sweep arguments before writing"
 kind: bug
 status: closed
 priority: 3
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex@spud10
 labels:
   - engineering-maturity
@@ -17,7 +17,7 @@ parent_id: is-01m0vj13yefxcxhhew81ewfpvq
 hold: null
 hold_until: null
 created_at: 2026-08-25T04:15:28.212Z
-updated_at: 2026-08-25T04:44:40.885Z
+updated_at: 2026-10-10T22:58:28.266Z
 started_at: 2026-08-25T04:16:15.552Z
 closed_at: 2026-08-25T04:44:40.884Z
 close_reason: "Completed in 69e65eb: baseline sweep validates every instance and seed before engine work or output creation, with side-effect regression tests."

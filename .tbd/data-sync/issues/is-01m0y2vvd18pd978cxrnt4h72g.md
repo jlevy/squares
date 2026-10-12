@@ -5,8 +5,8 @@ title: "Spike: rank Square Packing CI and research-loop bottlenecks"
 kind: task
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 labels:
   - packing
   - focus-efficiency
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 created_at: 2026-08-26T03:47:18.048Z
-updated_at: 2026-08-26T04:34:59.178Z
+updated_at: 2026-10-10T22:56:15.595Z
 closed_at: 2026-08-26T04:34:59.177Z
 close_reason: "Completed the data-driven W5 spike: profiled 24 CI runs, current exact tests and controls, both Codex loop trees, model/thinking allocation, repeated validation, and delegated tails; rewrote the active plan with one-minute CI topology, concrete implementation spikes, and numeric acceptance thresholds in pushed PR 41."
 resolution: null

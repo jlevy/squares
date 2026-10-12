@@ -5,13 +5,13 @@ title: "PR #16 R16-3: D-035 handoff is stale and recommends rejected scope"
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 4
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels: []
 dependencies: []
 parent_id: is-01m0rj3jzb99380az12g72g6n8
 created_at: 2026-08-24T00:26:28.651Z
-updated_at: 2026-08-24T00:38:52.479Z
+updated_at: 2026-10-10T22:54:57.996Z
 closed_at: 2026-08-24T00:38:52.478Z
 close_reason: "Fixed in the integrated handoff: think-97pp is open under narrow cooperative recovery scope; the quarantined snapshot/worktree/lease prototype is not recommended. D-077 records the stale state."
 resolution: null

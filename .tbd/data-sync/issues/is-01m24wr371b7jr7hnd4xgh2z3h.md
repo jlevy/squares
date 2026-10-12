@@ -5,15 +5,15 @@ title: Independently review A6 all-site obstruction and fixed-support cut receip
 kind: task
 status: closed
 priority: 1
-version: 9
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md
+version: 10
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m24tw635b6tfjj1wb2awvkff
 parent_id: is-01m24tw635b6tfjj1wb2awvkff
 created_at: 2026-09-10T05:30:46.358Z
-updated_at: 2026-09-10T07:19:33.683Z
+updated_at: 2026-10-10T23:05:07.487Z
 closed_at: 2026-09-10T07:19:33.682Z
 close_reason: Independent source admission, scoped corrections, maintained exact readers, retained receipts and controls are published in PR139 commit 0c4c41b40a6200918b5954a07ccf9647dc8bca5c. All 45 pre-push steps pass, including 4923 behavioral tests; 25 focused reader controls passed. The matching full branch checkpoint remains separately open under think-yl6y before finalization/merge.
 resolution: null

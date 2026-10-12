@@ -5,8 +5,8 @@ title: "Correctness (Soundness): mathematical truth and certification"
 kind: epic
 status: open
 priority: 0
-version: 10
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 12
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -22,7 +22,7 @@ child_order_hints:
   - is-01m0rq9xtme32q67cyrx0jq0qj
   - is-01m0rs9vpzzwvdg08ftpd2xdqw
 created_at: 2026-08-23T21:16:38.759Z
-updated_at: 2026-08-24T02:23:59.198Z
+updated_at: 2026-10-10T22:53:51.579Z
 ---
 Owns mathematical claims, primary-source coverage, proof and certificate validity, numerical-to-exact promotion, and independent checking. This lane may veto any claim or promotion that exceeds its evidence. It consumes candidates from Insight and execution artifacts from Efficiency, then hands accepted or rejected claims to Process for durable recording.
 

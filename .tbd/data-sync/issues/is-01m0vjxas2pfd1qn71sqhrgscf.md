@@ -5,8 +5,8 @@ title: Reconcile packing bead state with landed main after stacked PRs
 kind: bug
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 6
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - bookkeeping
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m0vr7g27g67p699aepcdksxd
 parent_id: is-01m0r7tk07nw6nb8wyzv4v776z
 created_at: 2026-08-25T04:30:00.482Z
-updated_at: 2026-08-25T07:35:14.306Z
+updated_at: 2026-10-10T22:54:06.769Z
 closed_at: 2026-08-25T07:35:14.292Z
 close_reason: "Reconciled the live queue against main base 8136f21: landed PR22/PR23 fixes proved by ancestry, stopped session-009 owner think-05hr closed without closing child work, orphaned think-b3bm claim reopened, D-249 and its ancestry receipt recorded, and the frozen session-010 portfolio retained. Checkpoint 9762f93 is pushed on PR 29; local normal gate passed 31/31 with 51 tests and 62 controls, and hosted validate plus macOS portability both pass."
 resolution: null

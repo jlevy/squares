@@ -5,15 +5,15 @@ title: Organize retained one-off checks into explicit case modules
 kind: task
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
   - architecture
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:23:44.593Z
-updated_at: 2026-08-24T22:55:28.148Z
+updated_at: 2026-10-10T22:56:55.032Z
 closed_at: 2026-08-24T22:55:28.148Z
 close_reason: Implemented and documented one-way maintained, research, campaign, CLI, case, developer-tool, and benchmark boundaries; architecture tests reject old locations and reverse imports; complete validation passed.
 resolution: null

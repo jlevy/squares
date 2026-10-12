@@ -5,13 +5,13 @@ title: "PR #16 R16-1: portable-oracle conclusion and repair are unsupported"
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 4
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels: []
 dependencies: []
 parent_id: is-01m0rj3jzb99380az12g72g6n8
 created_at: 2026-08-24T00:26:27.951Z
-updated_at: 2026-08-24T00:38:51.999Z
+updated_at: 2026-10-10T22:54:53.079Z
 closed_at: 2026-08-24T00:38:51.998Z
 close_reason: "Fixed in the PR 16 absorption: the response no longer infers a portable post-quench oracle from aggregate byte drift or prescribes dropping only annealer_gap. D-075 records the error; D-059 and think-osyp retain the predicate-level portability experiment."
 resolution: null

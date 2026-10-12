@@ -5,8 +5,8 @@ title: Remove redundant source hashes and document the trust-boundary test
 kind: task
 status: closed
 priority: 1
-version: 10
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 12
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 delegate: codex@spud10
 labels:
   - packing
@@ -16,7 +16,7 @@ parent_id: is-01m0typjn7s866m042zsemybj6
 hold: null
 hold_until: null
 created_at: 2026-08-24T22:37:18.821Z
-updated_at: 2026-08-25T03:18:22.840Z
+updated_at: 2026-10-10T22:59:45.620Z
 started_at: 2026-08-25T02:21:37.342Z
 closed_at: 2026-08-25T03:02:48.727Z
 close_reason: Repository-local integrity hashes are removed and the trust-boundary rule is documented in development.md. A cryptographic checksum is now reserved for an independently supplied value across a real trust boundary; internal goldens use Git diffs, complete comparisons, or semantic regeneration. Full 31-step validation passed in 99.43 seconds.

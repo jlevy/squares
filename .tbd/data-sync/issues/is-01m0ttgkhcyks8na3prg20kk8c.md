@@ -5,15 +5,15 @@ title: Raise reusable Python modules to the tbd engineering quality floor
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
   - python
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:23:37.643Z
-updated_at: 2026-08-24T22:55:28.943Z
+updated_at: 2026-10-10T22:56:54.511Z
 closed_at: 2026-08-24T22:55:28.943Z
 close_reason: Ruff, Ruff format, and BasedPyright cover 287 Python files at zero findings; maintained writes are atomic at complete-replacement boundaries and the complete gate passed.
 resolution: null

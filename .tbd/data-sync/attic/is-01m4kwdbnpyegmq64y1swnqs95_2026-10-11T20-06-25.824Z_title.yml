@@ -1,0 +1,12 @@
+entity_id: is-01m4kwdbnpyegmq64y1swnqs95
+timestamp: 2026-10-11T20:06:25.824Z
+field: title
+lost_value: '"Browser tools that ignore the executable override: check_motion_lab_pages
+  and the rest, under one override name"'
+winner_source: local
+loser_source: remote
+context:
+  local_version: 3
+  remote_version: 2
+  local_updated_at: 2026-10-11T07:19:51.529Z
+  remote_updated_at: 2026-10-11T07:17:49.081Z

@@ -5,13 +5,13 @@ title: "Correct two overstated claims in shipped docstrings: closed-form recogni
 kind: task
 status: open
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p49s01h862tq6wp0dd085c
 created_at: 2026-08-23T21:27:19.507Z
-updated_at: 2026-08-23T22:51:23.096Z
+updated_at: 2026-10-10T22:47:42.974Z
 ---
 Both raised by the PR #15 review (F-16, F-20) and both conceded after re-checking. These are documentation defects in code that is otherwise fine, so the fix is prose plus a narrowed contract -- not new machinery.
 

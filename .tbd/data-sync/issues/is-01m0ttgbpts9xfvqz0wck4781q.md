@@ -5,15 +5,15 @@ title: Audit Bash and migrate application logic to Python
 kind: task
 status: closed
 priority: 2
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
   - python
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:23:29.625Z
-updated_at: 2026-08-24T22:55:28.560Z
+updated_at: 2026-10-10T22:57:16.621Z
 closed_at: 2026-08-24T22:55:28.560Z
 close_reason: Installed descriptive packing-validate, packing-campaign, and packing-ledger commands; replaced test.sh and all application-like shell entry points with typed Python; help and failure contracts pass and the complete gate is green.
 resolution: null

@@ -3,15 +3,19 @@ type: is
 id: is-01m4055fqdnsc95js0egq5sc1t
 title: Repo-wide integrity-ceremony audit and removal plan (lane R7)
 kind: task
-status: open
+status: closed
 priority: 0
-version: 4
+version: 5
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-03T05:53:05.260Z
-updated_at: 2026-10-07T06:23:10.673Z
+updated_at: 2026-10-10T22:43:18.397Z
+closed_at: 2026-10-10T22:43:18.396Z
+close_reason: "Close the completed audit and policy amendment; the remaining slice is separately tracked by think-gzju. Reconciled under think-p2z4; evidence: tbd show think-ele8: audit commit 28e48fb0a and remaining slice think-gzju; PR #347 merged 2026-10-06: https://github.com/jlevy/squares/pull/347"
+resolution: null
+duplicate_of: null
 ---
 Owner direction 2026-10-03: 'needless ceremony around things like this is a constant tax on all development and progress'; 'we are not validating across a trust boundary... worrying about correctness'; 'determinism should not cost rerunning code'. R7 inventories every hash/digest comparison of repository-owned files, frozen-blob/frozen-copy comparison, digest-gated refusal (checkpoints, receipts, caches), forced re-run and internal signing; verdict KEEP (named trust boundary) / REPLACE (Git revision, small determinism test, semantic comparison) / REMOVE; ranked implementable slices; proposed OR-16 amendment. Known n17 instances: MODULE_SHA256, digest-named certificates with name checks, ledger verifier digests and receipt_sha256, tool/kernel_sha256, capture load_checkpoint refusing after a byte-identical kernel speedup (forced a 256-row restart). Deliverable: docs/project/reviews/review-2026-10-03-integrity-ceremony-audit.md.
 

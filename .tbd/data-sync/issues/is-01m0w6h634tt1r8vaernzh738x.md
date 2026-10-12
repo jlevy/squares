@@ -5,15 +5,15 @@ title: Correct stale deleted paths and formatting in the delegated promotion che
 kind: bug
 status: closed
 priority: 2
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - bookkeeping
 dependencies: []
 parent_id: is-01m0w6ccwc89mjnmtvnk1xa2qh
 created_at: 2026-08-25T10:12:53.988Z
-updated_at: 2026-08-25T10:17:42.690Z
+updated_at: 2026-10-10T22:53:02.813Z
 closed_at: 2026-08-25T10:17:42.690Z
 close_reason: "D-271, D-273, and D-274 are recorded and fixed before integration: the phase transition uses the enforced enum, the workflow test proves a single exact blocking command with no advisory escape, and corrected focused checks plus the complete gate pass."
 resolution: null

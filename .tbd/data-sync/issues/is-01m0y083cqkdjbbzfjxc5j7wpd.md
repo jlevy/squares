@@ -5,8 +5,8 @@ title: Build recurring joined research-loop efficiency report
 kind: feature
 status: closed
 priority: 1
-version: 5
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 labels:
   - packing
   - focus-efficiency
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 created_at: 2026-08-26T03:01:33.715Z
-updated_at: 2026-09-16T00:21:14.935Z
+updated_at: 2026-10-10T22:56:26.968Z
 closed_at: 2026-09-16T00:21:14.925Z
 close_reason: |
   Superseded for the detector half by think-z121: packing/devtools/check_pr_wall.py now measures hosted CI wall on every pull request with a per-job queue/setup/work split, a 180 s budget, a 1.2x regression rule against a recorded median, and an explicit unmeasurable verdict, against declared budgets in packing/devtools/gate-budgets.yaml. The agent-time join this bead specified -- Codex task-tree rollups and Claude session costs in one W5 report -- is not delivered by that and is now tracked separately as think-c3rb under the same parent.

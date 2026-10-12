@@ -5,15 +5,15 @@ title: Map and migrate every packing document under the definitive-doc contract
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - documentation
 dependencies: []
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-24T23:03:05.443Z
-updated_at: 2026-08-25T07:24:22.046Z
+updated_at: 2026-10-10T22:59:51.026Z
 closed_at: 2026-08-25T07:24:22.046Z
 close_reason: Workflow entry contracts, proportional process rules, assurance-language audit, and the 226-document common-doc map are implemented and validated without adding hashes or mandatory routine-session ceremony.
 resolution: null

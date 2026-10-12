@@ -5,14 +5,14 @@ title: "PR26 R7: state the schema and semantic-checker enforcement split"
 kind: bug
 status: closed
 priority: 3
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - review-finding
 dependencies: []
 parent_id: is-01m0vd6xfaz5p8ccnq6xrnr5x5
 created_at: 2026-08-25T02:51:07.979Z
-updated_at: 2026-08-25T03:10:52.134Z
+updated_at: 2026-10-10T23:00:37.612Z
 closed_at: 2026-08-25T03:10:52.134Z
 close_reason: "Resolved in PR #26 rebased head a9a2992. The framework spec and affected bead contracts now incorporate the finding and its attached suggestions; the per-finding disposition is posted at issuecomment-5404553556."
 resolution: null

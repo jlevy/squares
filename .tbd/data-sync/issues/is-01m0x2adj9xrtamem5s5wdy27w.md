@@ -5,13 +5,13 @@ title: "PR #39 review R1: preserve exact forms in formal frontier display"
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0x29vkahkr6ht4zx2cahh2x
 created_at: 2026-08-25T18:18:32.392Z
-updated_at: 2026-08-25T18:38:29.419Z
+updated_at: 2026-10-10T23:00:03.449Z
 closed_at: 2026-08-25T18:38:29.406Z
 close_reason: Fixed in be35a70; focused regressions, full 32-surface validation, deep-golden replay, and both required CI jobs pass.
 resolution: null

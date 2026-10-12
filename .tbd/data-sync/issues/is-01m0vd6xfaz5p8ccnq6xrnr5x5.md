@@ -5,8 +5,8 @@ title: "Address PR #26 review as one coherent frontier-framework redesign"
 kind: task
 status: closed
 priority: 1
-version: 14
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 16
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - review
@@ -25,7 +25,7 @@ child_order_hints:
   - is-01m0vd89yyx9fsfm43e6eyvrt2
   - is-01m0vd8a83becbsfz0fnbraxk3
 created_at: 2026-08-25T02:50:23.081Z
-updated_at: 2026-08-25T03:11:11.499Z
+updated_at: 2026-10-10T22:59:51.974Z
 closed_at: 2026-08-25T03:10:52.890Z
 close_reason: "All R1-R10 findings and S1-S10 suggestions have explicit dispositions, the coherent framework redesign is committed and pushed on a9a2992, PR #26 is clean and mergeable on the current stack base, all 30 local steps pass, and the disposition map is posted."
 resolution: null

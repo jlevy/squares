@@ -5,13 +5,13 @@ title: Align the cold-start handoff after session-014
 kind: bug
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies: []
 parent_id: is-01m0r7q3zk8x6cg4e30d149698
 created_at: 2026-08-25T14:59:08.405Z
-updated_at: 2026-08-25T15:21:44.375Z
+updated_at: 2026-10-10T22:49:27.710Z
 closed_at: 2026-08-25T15:21:44.374Z
 close_reason: Fixed in 0a20277. D-319 records the stale closed-bead handoff; README, SYNOPSIS, the active launch paragraph, BC-010 agenda, development guidance, and think-1s0h now agree on the R4/R5 slice. The new reconciliation check and mutation control pass; local fast validation and fresh Linux/macOS full CI are green.
 resolution: null

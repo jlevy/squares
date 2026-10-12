@@ -5,15 +5,15 @@ title: "PR 24 transition T1a: reconcile session-009 output inventory"
 kind: bug
 status: closed
 priority: 2
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 3
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - bookkeeping
 dependencies: []
 parent_id: is-01m0v0g9jqgshxnhceznwr11dt
 created_at: 2026-08-24T23:16:21.031Z
-updated_at: 2026-08-24T23:18:25.172Z
+updated_at: 2026-10-10T22:52:35.423Z
 closed_at: 2026-08-24T23:18:25.171Z
 close_reason: Session-009 output inventory now includes exp-035/036 artifacts, deterministic results, and exact checkers; D-218 records the stale list.
 resolution: null

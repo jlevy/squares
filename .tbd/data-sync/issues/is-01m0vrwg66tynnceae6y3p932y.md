@@ -5,8 +5,8 @@ title: Review and land the final upstream packing PR before session-010
 kind: task
 status: closed
 priority: 0
-version: 8
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 9
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - upstream
@@ -15,7 +15,7 @@ parent_id: is-01m0vr7g27g67p699aepcdksxd
 child_order_hints:
   - is-01m0vwd6hwb3h06d6pznbbjd7p
 created_at: 2026-08-25T06:14:24.709Z
-updated_at: 2026-10-06T08:33:30.751Z
+updated_at: 2026-10-10T22:49:20.807Z
 closed_at: 2026-10-06T08:33:30.750Z
 close_reason: |
   Done (bead review 2026-10-06, origin/main eb43ffe9a): PR #26 (codex/packing-frontier-transparency) MERGED 2026-08-25T16:35Z, the acceptance's first branch

@@ -5,8 +5,8 @@ title: Build the safe deterministic ElementTree SVG spine
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+version: 5
+spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
   - visualization
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m0v0ypqc2shhf313140pqsmk
 parent_id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 created_at: 2026-08-24T23:16:03.310Z
-updated_at: 2026-08-25T03:00:04.855Z
+updated_at: 2026-10-10T23:02:57.989Z
 closed_at: 2026-08-25T03:00:04.855Z
 close_reason: Implemented and validated the deterministic SVG toolkit, exact and numerical adapters, safe serializer, static and animated views, typed overlays, CLI, retained gallery, n=3 migration, documentation, and full gate.
 resolution: null

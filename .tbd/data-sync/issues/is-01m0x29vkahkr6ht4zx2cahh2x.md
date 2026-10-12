@@ -5,8 +5,8 @@ title: "Address review: PR #39 — frontier assurance reconciliation"
 kind: task
 status: closed
 priority: 1
-version: 7
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 9
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0wqx97nb22qwx8v47hrpfqk
@@ -16,7 +16,7 @@ child_order_hints:
   - is-01m0x2ae4bkbpsz1fcn15pzyhz
   - is-01m0x2aed0jatdpht3twcfrget
 created_at: 2026-08-25T18:18:13.994Z
-updated_at: 2026-08-25T18:38:29.699Z
+updated_at: 2026-10-10T23:00:02.623Z
 closed_at: 2026-08-25T18:38:29.698Z
 close_reason: "All published PR #39 review findings and the adjacent wording suggestion were addressed in be35a70 with no deferred items."
 resolution: null

@@ -5,15 +5,15 @@ title: Parse and validate native Codex turn timings
 kind: task
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+version: 6
+spec_path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 labels:
   - packing
   - focus-efficiency
 dependencies: []
 parent_id: is-01m0y6wad9gxebve4cs7sz3jqy
 created_at: 2026-08-26T04:57:40.923Z
-updated_at: 2026-08-26T05:13:15.172Z
+updated_at: 2026-10-10T22:56:20.251Z
 closed_at: 2026-08-26T05:13:15.170Z
 close_reason: Native timing parsing, compatibility, replay filtering, compaction accounting, and cutoff tests are implemented and green.
 resolution: null

@@ -5,8 +5,8 @@ title: "PR #23 review R5: Replace gate-running message matching with a typed err
 kind: bug
 status: closed
 priority: 2
-version: 3
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex@spud10
 labels:
   - engineering-maturity
@@ -17,7 +17,7 @@ parent_id: is-01m0vj13yefxcxhhew81ewfpvq
 hold: null
 hold_until: null
 created_at: 2026-08-25T04:15:23.396Z
-updated_at: 2026-08-25T04:44:36.478Z
+updated_at: 2026-10-10T22:57:27.128Z
 started_at: 2026-08-25T04:16:15.469Z
 closed_at: 2026-08-25T04:44:36.477Z
 close_reason: "Completed in 69e65eb: GateRunningError provides a typed campaign/gate refusal and preflight no longer classifies errors by message substring."

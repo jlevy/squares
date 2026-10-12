@@ -5,8 +5,8 @@ title: "C3: BreadcrumbList for papers and documents; Dataset on frontier.html; m
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
+version: 7
+spec_path: docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md
 delegate: codex-pr395-site-review
 labels:
   - pages
@@ -15,7 +15,7 @@ parent_id: is-01m49ph0abvy6j16zcq4jse39y
 hold: null
 hold_until: null
 created_at: 2026-10-06T22:49:48.898Z
-updated_at: 2026-10-08T13:09:30.597Z
+updated_at: 2026-10-10T23:05:49.740Z
 started_at: 2026-10-06T22:55:20.762Z
 closed_at: 2026-10-08T13:09:30.597Z
 close_reason: |

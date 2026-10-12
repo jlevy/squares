@@ -5,12 +5,12 @@ title: Use fixed visual tokens and certified contact marks in packing SVGs
 kind: feature
 status: closed
 priority: 1
-version: 8
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+version: 9
+spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels: []
 dependencies: []
 created_at: 2026-08-25T04:01:16.590Z
-updated_at: 2026-08-25T06:40:26.519Z
+updated_at: 2026-10-10T23:03:15.048Z
 closed_at: 2026-08-25T06:40:13.589Z
 close_reason: Implemented and committed the fixed cool palette, pure-black boundary system, clipped certified contact marks, updated docs/spec, regenerated gallery, and 73-control/full-gate validation in daca22e.
 resolution: null

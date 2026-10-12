@@ -5,8 +5,8 @@ title: "E3: script inventory: every content-page script declares its class; dele
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
+version: 7
+spec_path: docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md
 delegate: codex-pr395-site-review
 labels:
   - pages
@@ -15,7 +15,7 @@ parent_id: is-01m49ph0abvy6j16zcq4jse39y
 hold: null
 hold_until: null
 created_at: 2026-10-06T22:49:55.392Z
-updated_at: 2026-10-08T13:09:30.651Z
+updated_at: 2026-10-10T23:05:54.871Z
 started_at: 2026-10-08T00:33:26.421Z
 closed_at: 2026-10-08T13:09:30.651Z
 close_reason: |

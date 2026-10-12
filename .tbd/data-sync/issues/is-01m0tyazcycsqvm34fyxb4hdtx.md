@@ -5,8 +5,8 @@ title: Diagnose the n4 seed-0 HiGHS solve error
 kind: bug
 status: closed
 priority: 0
-version: 14
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+version: 16
+spec_path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - correctness
@@ -20,7 +20,7 @@ child_order_hints:
   - is-01m0w3twq7h1f7bm2gc5s0eq45
   - is-01m0w4xmf6zpvw01t897n8f49y
 created_at: 2026-08-24T22:30:27.485Z
-updated_at: 2026-08-25T10:25:25.544Z
+updated_at: 2026-10-10T22:49:11.671Z
 closed_at: 2026-08-25T10:25:25.543Z
 close_reason: "D-203 and D-272 are fixed at PR 29 head b582fe1: the bounded seed-0 replay converges at proved side 2 with 3692/3692 fixed points settled and independent validity; the direct blocking macOS deep golden rebuilds n=4 at 4/4 and all seven proved rungs; Linux and macOS CI pass. No pool-width-1 or general producer-health claim is made."
 resolution: null

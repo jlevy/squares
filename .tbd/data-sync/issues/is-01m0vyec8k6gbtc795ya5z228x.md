@@ -5,13 +5,13 @@ title: Reject durable-document links into local tbd injections
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 4
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-25T07:51:33.394Z
-updated_at: 2026-08-25T07:51:42.597Z
+updated_at: 2026-10-10T22:59:56.736Z
 closed_at: 2026-08-25T07:51:42.596Z
 close_reason: Replaced ephemeral .tbd/docs links with on-demand tbd guideline names and taught the existing documentation checker to reject that generated local-state target. Focused documentation, Ruff, and fast-gate checks pass.
 resolution: null

@@ -5,8 +5,8 @@ title: "D071: generated session reports overwrite history and are not durable"
 kind: bug
 status: open
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 3
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
@@ -15,7 +15,7 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q3zk8x6cg4e30d149698
 created_at: 2026-08-23T23:30:07.750Z
-updated_at: 2026-08-23T23:47:53.242Z
+updated_at: 2026-10-10T22:54:48.304Z
 ---
 runner.py writes every unattended-session handoff to campaign/session-report.md, overwriting the prior one, and the path is not a durable tracked history. Define a versioned session record for agent/delegation work and separately repair runner-report archival before unattended scale-up.
 

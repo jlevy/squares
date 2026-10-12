@@ -1,0 +1,146 @@
+---
+type: is
+id: is-01m4jk49cwm1b2prnhb3yrnztn
+title: "Import Guzhou0806: s(40) > 335427/50000 from wand125's rect_n40_L67 density with a clipped-corner estimate (#485)"
+kind: task
+status: in_progress
+priority: 1
+version: 8
+delegate: claude-code@vm
+labels:
+  - result-import
+dependencies: []
+parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
+hold: null
+hold_until: null
+created_at: 2026-10-10T09:43:25.852Z
+updated_at: 2026-10-11T05:05:40.252Z
+started_at: 2026-10-10T09:49:28.112Z
+---
+Issue https://github.com/jlevy/squares/issues/485 (opened 2026-10-10). Claim: s(40) > 335427/50000 = 6.70854, unrestricted rotations, above the case's reported and verified 67/10 from wand125's rect_n40_L67 (#281). Also a weaker full-core bound s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908. Source Guzhou0806/n40-square-packing at e5abeb4d078a5c5b35df6204dd9b93378e5a7880, release n40-670854-20261010, n40-670854.zip SHA-256 dbefee8658dc8f7d2e4a6ed21b0c3cd29f36ae393405a218f6bbfdce54465bc5. Rust nodal verifier, 401 directions, 32,970,910 nodes; wand125 commented a review on 2026-10-10 reporting a clean replay. Stages 1-3 on this pass; mathematical review of the clipped-corner estimate and strictness argument by Fable at max.
+
+## Notes
+
+## Stage 1 triage (mathematical lane, 2026-10-10)
+
+Pin: Guzhou0806/n40-square-packing at e5abeb4d078a5c5b35df6204dd9b93378e5a7880 (commit 2026-10-10T06:47:01Z; tag n40-670854-20261010 -> that commit; release published 06:50:59Z). ZIP n40-670854.zip 203,095 bytes SHA-256 dbefee8658dc8f7d2e4a6ed21b0c3cd29f36ae393405a218f6bbfdce54465bc5 (checked). ZIP == tree except results/verification.json and results/nodes.jsonl (ZIP holds the CI receipt, source_commit e5abeb4d; tree holds the local one, source_commit null; the 401 rows identical apart from timing). CI run 38032128403: success on e5abeb4d.
+
+Claims the release makes: (1) s(40) > 335427/50000 = 6.70854, unrestricted rotations, strict; (2) s(40) > 67000 sqrt(6400006889)/798988091 > 6.70848908 (full-core, no density peak); (3) the nodal statement: every side-9977/10000 square at each of 401 directions theta_j = 2 atan(j 83/80000) in K captures >= 10001/10000 of wand125's rect_n40_L67 density (its SHA 71011d03... is the retained 2026-10-01 packet's byte for byte); (4) g <= H = 2818711359413/10^9 a.e.; (5) chi >= 99979/100000, 40 chi - M = 1/625. No packing, optimality or priority claim; producer label CODE_DISTINCT_FULL is not a rung.
+
+Register mapping (result-import.md table): a bound the record does not hold at n = 40 -> one new lower-bound entry (T-NNN to be assigned) on wand125's rect_n40_L67 density, claim naming both bounds, the full-core one as the weaker corollary with fewer hypotheses. Nobody else holds either value: the register's best at n = 40 is 67/10 (T-068); no later wand125 packet retained here has an n = 40 certificate; Kingbird lists packings only. wand125's issue comment (a third run of the entry point and an independent exact check of the transfer) is third-party evidence on the issue, not retained.
+
+Priced validation plan: (a) nodal: sqverify-fast (first-party; the release vendors the crate at ef79288a4 byte for byte = HEAD, source d97758bb..., reviewed 6 Oct) on the regenerated 401-node input (SHA 49f696a4..., reproduced here from the retained candidate): 401 directions, 32,970,910 boxes, source reports 60 s wall at 4 threads / 235 CPU-s; expect 2-3 min at 2 threads -> minutes, same-branch stage 4. (b) finite: first-party exact script, 5 s (the review's exact_checks.py is the measurement; a devtools tool is the deliverable, OR-1). (c) controls priced at seconds (eight listed in the review). (d) a second method for the nodal step: Tokoharu's verify.cpp at 401 angles, ~2x its 201-angle cost (6,521 s wall upstream) plus an input generator for a finer net (W7) -> owner budget. Decides without the source's code: yes, (a)+(b) use no code of the release (finite.py is the source's; sqverify-fast is ours). Census-route caveat: net_directions/net_step/rectangle_control do not read a format T metadata net (GN-5) -> direct binary run plus a first-party control evaluation until a small driver change lands.
+
+Draft acknowledgement (no T-NNN, no rung): "Received, thank you. We have pinned Guzhou0806/n40-square-packing at e5abeb4d (release n40-670854-20261010; n40-670854.zip, SHA-256 dbefee86...) and read the issue and wand125's review. The claim s(40) > 335427/50000, with the weaker full-core bound s(40) > 67000 sqrt(6400006889)/798988091, is mapped as a new lower-bound result at n = 40 on wand125's rect_n40_L67 density, whose retained copy here has the SHA-256 you give. What will be checked: the 401-direction nodal statement with this repository's sqverify-fast (the crate you vendored, byte for byte), the density's expansion, mass and essential supremum, and the transfer's scalar chain in exact rationals, each with mutation controls; the transfer argument, the reference-square legality, the clipping bound and the strict endpoint have been read in a mathematical review, which found no blocking defect. The replay is priced at minutes. The register entry and its ratings follow the replay."
+
+## Stage 4 mathematical review (summary)
+
+Record: docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md (mapped). Verdict: no blocking defect in the mathematics. Re-derived: the D4 fold per parent; the case split (upper node within delta0 = 2 atan h -> reference inside the parent; else lower node with error < beta = 2 atan((D-h)/(1+Dh)), legal because B <= q and cos+sin increases on [0, pi/4]); the clipped-corner bound e^2/(2cs) by the vertex cone and subadditivity (PROOF.md's "four disjoint triangles" holds here but is not needed, GN-1); monotonicity 2(z-a)(az-1)/(z^2-1)^2 >= 0; g <= H a.e.; counting 40 chi > M; strictness by compactness and attainment; the full-core bound's closed form.
+
+Checked by computation here (exact rationals, own code): 480 rows, M = 3999/100, 3840 terms / 3792 distinct, D4 invariance; ess sup g = 2818.71135941178... <= H, H - ess sup = 1.215e-9, rounded-up method returns H exactly; q >= B; B(cos d0 + sin d0) <= q with slack 1.63e-15 (h is 8.2e-16 below its limit, GN-2); b, A = 1.09967e-7, HA = 3.0996e-4, chi = 0.99979003557 >= 99979/100000; 40 chi - M = 1.6014e-3; (L/gamma)^2 = 28729630924721000000/638381969559824281 = (67000/798988091)^2 6400006889; derived input SHA 49f696a4... reproduced; receipts consistent (401 rows verified, least bound 1.000100000471634 at r = 73); even-index rows identical to the retained 3 October census rows at all 201 indices; adversarial scan of 600,401 orientations and 200,001 corner placements found no failure of the case split or legality; built the reviewed binary 567a0fd5... and reproduced directions 0, 1, 73, 220, 383, 400 field for field; controls: weights x 99/100 refused at 73 and 220, near-threshold mutant refused at 220, metadata removed -> standard net (another claim), angle_count 201 with D 83/80000 -> admission refuses; sqpack.rectangle_density agrees with the crate's probe at the control centre (least exact capture 1.0013165658 at r = 220). Same transfer on the 201 net: chi < 0 (refused); at X' = 335428/50000: 40 chi - M = -0.00998 at the best h (refused).
+
+Not checked here: the complete 401-direction run (source, CI and wand125 report it); the crate's lemmas beyond the admission path (3 and 6 Oct reviews); the toolchain.
+
+Findings: GN-1 proof text (triangles unconditional), GN-2 h at the limit (exact arithmetic only), GN-3 ZIP != tree in results/ (retain both receipts), GN-4 classification (nodal replay = reproduced with the producer's code, which is ours; finite = independently re-implemented), GN-5 census tooling ignores format T metadata nets (blocks the census route only; W7), GN-6 the format T metadata-net path has no retained review of its own (admission read here; lemma N0 covers it), GN-7 n-040.md body still says 6.695. Significance suggested S3 by T-099's precedent (technique new to the record). Replay contract with commands, expected outputs and eight controls is in the review.
+
+## Draft acknowledgement (2026-10-10, not posted; the owner posts it)
+
+Received, thank you. We have pinned Guzhou0806/n40-square-packing at e5abeb4d (release n40-670854-20261010; n40-670854.zip, SHA-256 dbefee86...) and read the issue and wand125's review. The claim s(40) > 335427/50000, with the weaker full-core bound s(40) > 67000·√6400006889/798988091, is mapped as a new lower-bound result at n = 40 on wand125's rect_n40_L67 density, whose retained copy here has the SHA-256 you give. What will be checked: the 401-direction nodal statement with this repository's sqverify-fast (the crate you vendored, byte for byte), the density's expansion, mass and essential supremum, and the transfer's scalar chain in exact rationals, each with mutation controls; the transfer argument, the reference-square legality, the clipping bound and the strict endpoint have been read in a mathematical review, which found no blocking defect. The replay is priced at minutes. The register entry and its ratings follow the replay.
+
+
+## Records lane: stage 2 and the stage 4 replay (2026-10-10, worktree-agent-a9d8fa9c23fcafee7)
+
+Packet packing/resources/web/guzhou-n40-clipped-corner-2026-10-10/ (commit b2c16f84c): acquire_source from a full clone at e5abeb4d (tree 8c01f4dd, committed 2026-10-10T06:47:01Z, tag n40-670854-20261010), 36-file manifest; 20 retained; density pinned identical_to the 2026-10-01 rect_n40_L67 copy (71011d03); vendored crate (15 files) pinned by digest, compared byte for byte with packing/sqverify_fast (unchanged since ef79288a4; build.rs digest of the vendored copy d97758bb). release-ci/ keeps the ZIP's CI receipt (run 38032128403), its SHA256SUMS, the release's .sha256, the API records of the release and the run, and digests of all 36 ZIP entries (33 equal the tree; GN-3). acquire_source --check: PACKET_MATCHES_ITS_CONTRACT. The repository's earlier commit 485dd8f (2026-10-07T18:50:46Z) claimed s(40) > 33509/5000 on the 201 net; pinned by history, not retained.
+
+Tool devtools/audit_clipped_corner_transfer.py (5f7bbc2df, 0ab05b7aa) with tests/test_audit_clipped_corner_transfer.py (14 tests, 1.4-2.7 s): derive, check (finite audit + controls E-H), run (nodal replay + controls A-D on the binary), check-replay. Shares no code with finite.py (not opened); its docstring is the read log.
+
+Replay (receipts f41ec10bc, packet receipts/): reviewed source d97758bb (--source-digest exit 0), rustc 1.98.0 (88d9e12ae 2026-08-18), cargo build --release --locked -j 2, binary 567a0fd5. Derived input 49f696a4. Nodal: VERIFIED, 401/401, refused [], exit 0, 32,970,910 boxes, least 1.000100000471634 at r = 73, r = 0 axis sweep 4,879,681 vertices / 2,209 events / 1.0012141064171602, depth 30, premises as the contract; all 401 rows equal both release receipts apart from timing, all 201 even rows equal the retained census row. 299.5 s wall, 241.0 CPU-s at 2 threads (load 6.8-8.0; an earlier identical run 396.0 s / 242.6 CPU-s at load 12.8-15.6). Controls: A REFUSED [73, 220] exit 1 (exact 0.999322755117, 0.999227715635); B (factor 499392017517921/500000000000000 at r = 220, centre (3.353931795732347, 5.09801085267264), capture 1.0013165658 = crate probe) REFUSED [220] exit 1 (exact 1.0000999998); C exit 0, standard net 201 at 83/40000; D exit 2 "the net does not reach past pi/4". Finite: FINITE_STEPS_HOLD, every finite-block field of both receipts equal; E, F (bound -0.00998261 at every admissible h), G, H (chi -0.956) refused. check-replay --rank: REPLAY_HOLDS.
+
+GN-5 (0b5a62ca5): metadata_net in check_sqverify_fast; net_step, net_directions, scaled (keeps a non-standard metadata net), exact_candidate (loads without metadata) read it as admission does; new census test fails on the old code at each assertion. check_sqverify_fast on the binary: 57 ok, 0 FAIL. Remaining for the census route: no census case holds the derived input.
+
+Validation at 0ab05b7aa: packing-validate --edit 64 of 65 steps pass, --records 48 of 49; the one failure in each is "every session's cost is attributed" (close_session --check: session-close-report.yaml and SYNOPSIS.md drifted), whose inputs (campaign/agent-sessions, campaign/resource-usage) this lane did not touch, so it is in the base (usage rollups of 631fbbbbe); the coordinator renders it. An integrity-ceremony finding on the new tool was fixed in 0ab05b7aa (three internal digest checks removed, a download allowlist entry for the four that cross the boundary).
+
+Proposed rungs V3/C3: nodal reproduced with the producer's code (same-implementation), finite independently re-implemented; the result takes the nodal relation. Shared-record drafts are in the lane's report to the coordinator.
+
+## Records lane: registration and publication (2026-10-10, worktree-agent-a17d853b8856c5169)
+
+Registered as T-133 (row after T-132) in data commit 3eaf61fbf; the push tier's behavioural tests then drove a second data commit, 14f423f17. Integration merges e308bcfe3, c1f84606d, f4debde25, fda119b4d and 0fa726e21 (last merged branch head 6fdf4ea43), release.py taken whole from the branch on each conflict; URL registry re-rendered in 89951a989; DATA_REVISION re-pinned alone in ac6fcc922 (to 14f423f17), and release.py differs from the branch only by that line.
+
+Rungs V3/C3, derived by check_results: V3 and C3 from E-n040-guzhou-clipped-corner-sqverify-fast-replay (interval-certified, replayed-here, certificate, replay, passed, controls named); one adversarial AI review (the 10 October review, relation project, verdict accepted), so no rung 4. Mark: confirmed, reproduced with the producer's code (GN-4), as RESULTS.md prints it. The finite audit E-n040-guzhou-clipped-corner-finite-audit is independent-implementation and recorded as claim derived-structure: check_results.confirmation_code takes the strongest relation among a lower bound's lower-bound entries, so a lower-bound audit entry would have printed "independently re-implemented" for a result whose nodal part was only reproduced with the producer's code. Costs: the case's verified lane cites the nodal replay alone (a verified bound cites lower-bound entries only), with the audit in the case's evidence list and named in the replay's proof assumptions; and no proof.conditional_on on the audit (tests/test_frontier_assurance_contract.py enumerates the register's conditional theorems), so its hypothesis is stated in prose.
+
+Evidence: E-n040-guzhou-clipped-corner-report (reported, external_review informally-verified; verifiers V-guzhou-n40-finite-py only, since tests/test_sqverify_fast_census.py reads every entry naming V-sqverify-fast as a census row), -sqverify-fast-replay, -finite-audit. Verifiers: V-guzhou-n40-finite-py (external, the release's run.py with the vendored crate and finite.py, read by the review, not run here) and V-audit-clipped-corner-transfer (first-party, decides the finite steps, independence record its docstring); V-sqverify-fast names the format T metadata-net path (GN-6). n-040.md: both lower lanes 335427/50000, T-068's 67/10 kept as history, GN-7 fixed, the 2026-09-27 paragraph's stale "has not yet run" corrected, Verification Code re-rendered. Bibliography key '[Guzhou0806 n40 clipped corner 2026-10-10]' (credit names Levy, lineage builds-on-project); resources README key and repository rows; coverage entry guzhou-n40-clipped-corner-2026-10-10; result-requests #485 triage done, both keys register T-133 (check_requests --report: 2/2 settled, confirmed, reply due, closeable).
+
+Published: RESULTS, INVENTORY, VERIFIERS, STATUS, research tables, CERTIFICATE-REACH, the synopsis headline and Frontier results row (133 registered, 103 by others), t007 consumer audit, site URLs, bound-citations.json, composite-figure.json, the curated atlas credit-attributions.json (n = 40 group, source, T-133 row, method credits), the retained piercing survey, and an Other Projects card in devtools/overview_sections.py. README has no n = 40 prose. Not done: the review still says "T-NNN, to be assigned"; the owner's reply on #485.
+
+Validation at 0fa726e21, from packing/, --jobs 2 --inner-jobs 1: packing-validate --records exit 0 (49 of 49 record steps), --edit exit 0 (65 of 65), --push (--timeout-seconds 3600) exit 1 on one step, reachable behavioural tests (whole suite, the branch differs from origin/main by the whole integration branch): 16,324 passed, 495 skipped, 4 failed, all in files this lane's diff does not touch and all environmental here: test_fixed_core_packet::test_nonzero_leader_exit_reaps_a_sigterm_ignoring_grandchild and test_fixed_core_packet_calibration::test_timeout_kills_and_reaps_a_termination_resistant_process_group ("worker process group remained alive after SIGKILL"), and test_site_column_measurement's two Playwright tests (browsers not installed). Of the earlier push run's eleven failures, six were this registration's and are fixed in 14f423f17 (test_sqverify_fast_census, test_known_best_atlas curated credits, test_frontier_assurance_contract, test_piercing_lower_bounds, two in test_overview), and test_check_n17_one_round_owned_domain_propagation[missing_typed_row] passed when re-run.
+
+## Stage 7 draft (2026-10-10, to post after PR #487 merges; not posted)
+
+Supports posting after merge: yes (facts checked against PR #487's head 6fb495b3a, the issue body as retitled at 14:50Z and both comments; post once the merge's Pages deployment shows the T-133 and T-145 rows and n-040's moved bound, and recheck the ids if anything else merges first). Ledger: closeable (check_requests --report: all three results settled, no ask queued; a method-distinct decision of the continuous cover waits on an owner budget and is not an ask of the author).
+
+@Guzhou0806, thank you, and thanks to @wand125 for the review. Both of your bounds are registered on `main` through [PR #487](https://github.com/jlevy/squares/pull/487), and the [n = 40 case record](https://github.com/jlevy/squares/blob/main/packing/frontier/n-040.md) has moved.
+
+- **[T-145](https://jlevy.github.io/squares/all-results.html#t-145), V3/C3, confirmed:** s(40) > 1340000/199529 = 6.715815746082023…, from your continuous-pose kernel on wand125's rect_n40_L67 density, unchanged. It is now the case's reported and verified lower bound, 72586117/9976450000 above T-133. The gap to the case's upper bound, 4 + 2√2, is about 0.1126.
+- **[T-133](https://jlevy.github.io/squares/all-results.html#t-133), V3/C3, confirmed:** s(40) > 335427/50000 = 6.70854, from the clipped-corner transfer on a 401-direction net, together with the weaker s(40) > 67000√6400006889/798988091 = 6.7084890815…, which needs no density peak. The case record keeps 335427/50000 as history, as it keeps T-068's 67/10; the full-core bound is a corollary the case does not hold.
+
+**How T-145 was checked.**
+- Your two C++ kernels, built from the retained source into the binaries of your CI run, ran the axis certificate and all 43 slabs here. Every output equals both release receipts apart from timing, and the kernels refused every synthetic density whose least capture is below the threshold. So the continuous cover is confirmed, reproduced with your own code.
+- This repository's exact audit, `devtools.audit_continuous_pose`, shares no code with your release. It regenerated both kernel inputs and decided every finite step. `sqverify-fast` decided the near-axis statement a second way, on the original density.
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md) re-derived the kernel's lemmas, read the kernel line by line and found no blocking defect.
+- No second method has decided the continuous cover. The 401-direction run of `sqverify-fast` at the new parameters is a necessary condition, and it passed.
+
+**How T-133 was checked.**
+- `sqverify-fast`, built from reviewed source, verified all 401 directions on an input regenerated from the retained density. Every row equals both release receipts apart from timing, and it refused two mass mutants. Your release vendors this same crate, so the nodal statement is confirmed, reproduced with the producer's code.
+- This repository's exact audit of the transfer, `devtools.audit_clipped_corner_transfer`, shares no code with your `finite.py`. It recomputed the density's mass, symmetry and essential supremum and every step of the chain, and refused four altered parameters (E to H).
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) re-derived the transfer, the clipped-corner bound and the strict endpoint, and found no blocking defect. No second method decided the nodal statement.
+
+wand125's comment, with its fresh replay and its independent exact check of the transfer, is recorded as a third party's report; it is not retained here as a replay. Neither review is a human review, and no human review is claimed. These are lower bounds, so they say nothing about an optimum.
+
+**Notes from the reviews**, for a later release:
+- GN-1: `PROOF.md` says the reference outside its parent "consists of four interior-disjoint right triangles". That holds only under conditions the text does not state; the bound e^2/(2cs) holds without them.
+- GN-2 and GC-1: the margins are thin. h is within 8.2e-16 of its containment limit, and the near-axis patch holds by 3.58e-06. Both chains are sound only in exact rationals and outward intervals, so a replay must not round.
+- GC-2: `continuous_pose.cpp` ends `main` without a `return`. That is conforming as `main`, but the test harnesses rename it, and the renamed function returns nothing on the verified path, which is undefined behaviour. A `return 0;` costs nothing.
+- GC-7: NaN is not propagated through `min_element` and `std::min`. It cannot arise on this input.
+
+**Credit.** Both entries read Guzhou0806 after wand125, Tokoharu and Levy, as you ask: wand125 for the density, Tokoharu for the rectangle-density method and the translation-derivative structure, and this repository for `sqverify-fast`, which the transfer's nodal step ran and which informs the concave-section bound.
+
+**What remains.** Rung 4 needs a second review by a distinct reviewer and a human oversight record. A method-distinct decision of the continuous cover would need a first-party interval kernel with the angle as an interval dimension, and whether to fund that work is the owner's decision; it is pending. Nothing you asked for is queued, so this issue is closed with this comment.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_
+
+
+## Stage 7 draft from main at c6bf2d46f, 2026-10-11 — not posted (owner: leave as drafts)
+
+Ledger: closeable (`check_requests --report` at c6bf2d46f: all three results settled, no ask queued; a method-distinct decision of the continuous cover waits on an owner budget and is not an ask of the author). Supersedes the 10 October draft above: the 11 October final review (lower bounds) is the second adversarial review by a distinct reviewer for both entries, so rung 4 now waits only on a human oversight record; the results table marks T-133 superseded by T-145; links point at `results.html`. The n = 40 case record's lower bound is the one case lane this pass moved.
+
+@Guzhou0806, thank you, and thanks to @wand125 for the review. Both of your bounds are registered on `main` through [PR #487](https://github.com/jlevy/squares/pull/487), and the [n = 40 case record](https://github.com/jlevy/squares/blob/main/packing/frontier/n-040.md) has moved.
+
+- **[T-145](https://jlevy.github.io/squares/results.html#t-145), V3/C3, confirmed, reproduced with the producer's code:** s(40) > 1340000/199529 = 6.715815746082023…, from your continuous-pose kernel on wand125's rect_n40_L67 density, unchanged. It is now the case's reported and verified lower bound, 72586117/9976450000 above T-133. The gap to the case's upper bound, 4 + 2√2, is about 0.1126.
+- **[T-133](https://jlevy.github.io/squares/results.html#t-133), V3/C3, confirmed, reproduced with the producer's code:** s(40) > 335427/50000 = 6.70854, from the clipped-corner transfer on a 401-direction net, together with the weaker s(40) > 67000√6400006889/798988091 = 6.7084890815…, which needs no density peak. The results table marks it superseded by T-145. The case record keeps 335427/50000 as history, as it keeps T-068's 67/10; the full-core bound is a corollary the case does not hold.
+
+**How T-145 was checked.**
+- Your two C++ kernels, built from the retained source into the binaries of your CI run, ran the axis certificate and all 43 slabs here. Every output equals both release receipts apart from timing, and the kernels refused every synthetic density whose least capture is below the threshold. So the continuous cover is confirmed, reproduced with your own code.
+- This repository's exact audit, `devtools.audit_continuous_pose`, shares no code with your release. It regenerated both kernel inputs and decided every finite step, so those steps were independently re-implemented. `sqverify-fast` decided the near-axis statement a second way, on the original density.
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md) re-derived the kernel's lemmas, read the kernel line by line and found no blocking defect. The [11 October final review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-11-final-lower-bounds.md), by a distinct AI reviewer, accepted it again.
+- No second method has decided the continuous cover. The 401-direction run of `sqverify-fast` at the new parameters is a necessary condition, and it passed.
+
+**How T-133 was checked.**
+- `sqverify-fast`, built from reviewed source, verified all 401 directions on an input regenerated from the retained density. Every row equals both release receipts apart from timing, and it refused two mass mutants. Your release vendors this same crate, so the nodal statement is confirmed, reproduced with the producer's code.
+- This repository's exact audit of the transfer, `devtools.audit_clipped_corner_transfer`, shares no code with your `finite.py`. It recomputed the density's mass, symmetry and essential supremum and every step of the chain, and refused four altered parameters (E to H): the finite steps were independently re-implemented.
+- A separately prompted AI [review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) re-derived the transfer, the clipped-corner bound and the strict endpoint, and found no blocking defect; the 11 October final review accepted it again. No second method decided the nodal statement.
+
+wand125's comment, with its fresh replay and its independent exact check of the transfer, is recorded as a third party's report; it is not retained here as a replay. None of the reviews is a human review, and no human review is claimed. These are lower bounds, so they say nothing about an optimum.
+
+**Notes from the reviews**, for a later release:
+- GN-1: `PROOF.md` says the reference outside its parent "consists of four interior-disjoint right triangles". That holds only under conditions the text does not state; the bound e^2/(2cs) holds without them.
+- GN-2 and GC-1: the margins are thin. h is within 8.2e-16 of its containment limit, and the near-axis patch holds by 3.58e-06. Both chains are sound only in exact rationals and outward intervals, so a replay must not round.
+- GC-2: `continuous_pose.cpp` ends `main` without a `return`. That is conforming as `main`, but the test harnesses rename it, and the renamed function returns nothing on the verified path, which is undefined behaviour. A `return 0;` costs nothing.
+- GC-7: NaN is not propagated through `min_element` and `std::min`. It cannot arise on this input.
+
+**Credit.** Both entries read Guzhou0806 after wand125, Tokoharu and Levy, as you ask: wand125 for the density, Tokoharu for the rectangle-density method and the translation-derivative structure, and this repository for `sqverify-fast`, which the transfer's nodal step ran and which informs the concave-section bound.
+
+**What remains.** Two accepted adversarial reviews by distinct reviewers are now retained for each entry, so rung 4 needs only a human oversight record. A method-distinct decision of the continuous cover would need a first-party interval kernel with the angle as an interval dimension, and whether to fund that work is the owner's decision; it is pending. Nothing you asked for is queued, so this issue is closed with this comment.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_

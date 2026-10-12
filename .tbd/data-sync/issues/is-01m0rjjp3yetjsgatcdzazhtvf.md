@@ -5,13 +5,13 @@ title: "PR #16 R16-2: n=5 six-of-six endpoints do not identify the cause"
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+version: 4
+spec_path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels: []
 dependencies: []
 parent_id: is-01m0rj3jzb99380az12g72g6n8
 created_at: 2026-08-24T00:26:28.349Z
-updated_at: 2026-08-24T00:38:52.239Z
+updated_at: 2026-10-10T22:54:55.456Z
 closed_at: 2026-08-24T00:38:52.238Z
 close_reason: "Fixed in the current handoff and response addendum: the n=5 six-of-six result is only a no-observed-saturation measurement with competing explanations. D-076 records the overclaim; think-1s0h remains open for discrimination."
 resolution: null

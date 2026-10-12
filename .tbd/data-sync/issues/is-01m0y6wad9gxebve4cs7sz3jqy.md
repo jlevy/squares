@@ -5,8 +5,8 @@ title: "Spike: attribute native Codex response timing fields"
 kind: task
 status: closed
 priority: 0
-version: 6
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
+version: 7
+spec_path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 labels:
   - packing
   - focus-efficiency
@@ -18,7 +18,7 @@ child_order_hints:
   - is-01m0y6wqq8eb3xjypgs1a8d2wz
   - is-01m0y6wr4ew7bebt57vamne60j
 created_at: 2026-08-26T04:57:27.709Z
-updated_at: 2026-08-26T05:37:23.179Z
+updated_at: 2026-10-10T22:56:18.718Z
 closed_at: 2026-08-26T05:37:23.179Z
 close_reason: CodexEfficiencyRollup/v2 now uses native duration and first-token telemetry, freezes live trees, excludes compressed legacy replay, reports recursive model/thinking timing, and the two named loops plus full local gate are measured and documented.
 resolution: null

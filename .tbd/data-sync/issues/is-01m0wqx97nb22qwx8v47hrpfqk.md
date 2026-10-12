@@ -5,8 +5,8 @@ title: Reconcile the parallel research stack with the frontier assurance framewo
 kind: epic
 status: closed
 priority: 0
-version: 15
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 16
+spec_path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - integration
@@ -25,7 +25,7 @@ child_order_hints:
   - is-01m0wywkf33gyxjz4b2q039e7n
   - is-01m0x29vkahkr6ht4zx2cahh2x
 created_at: 2026-08-25T15:16:36.212Z
-updated_at: 2026-08-25T18:48:28.282Z
+updated_at: 2026-10-10T22:59:36.021Z
 closed_at: 2026-08-25T18:48:28.281Z
 close_reason: All framework, documentation, frontier, verification, review, reconciliation, validation, and landing work is complete on main.
 resolution: null

@@ -3,9 +3,9 @@ type: is
 id: is-01m4f2239ewxyae710qvy3tw45
 title: Expand the homepage Atlas in place with an Explore destination
 kind: feature
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 12
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -17,11 +17,20 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-09T00:47:24.965Z
-updated_at: 2026-10-09T04:10:43.063Z
+updated_at: 2026-10-10T18:55:57.080Z
 started_at: 2026-10-09T00:48:47.737Z
+closed_at: 2026-10-10T18:55:57.080Z
+close_reason: |-
+  Completed the reviewed implementation and CI repair published in PR462 (https://github.com/jlevy/squares/pull/462) at exact head d3c99face8fa81fd6ad265111265e4f6a6067106. The coordinator's sole final CI watch exited 0: 31 PASS, 26 intentional SKIP, 0 failures, 0 pending; frontend PASS and all final-head checks green.
+
+  Final behavior supersedes stale descriptions: single centered n=53 hero; homepage Triangle preview 36→100→324→36; About H1; inline homepage video; complete Atlas and Frontier Survey, shared navigation/design and case/result previews retained. The canceled scientific PDF change is excluded. No assertion, 300ms startup bound or scientific content is changed by this closeout.
+
+  Earlier local 901-second incomplete validation and the 195c80948 startup failure remain preserved in prior notes and durable receipts; final hosted success does not relabel those runs. This closes implementation and CI-repair beads only. Full checkpoint think-xio5, epic think-2u4x, process owner think-ht59 and scoping follow-up think-9k61 remain open.
+resolution: null
+duplicate_of: null
 ---
-Keep native SVG Atlas drawings, colors, bound labels and case popovers in a compact two-row homepage preview. Reuse the dedicated Atlas SiteAtlasView layout and animation engine. Prepare all remaining drawings during page initialization so Expand immediately animates all 324 cases into triangle view without a click-time request or delay. Collapse reverses the shared animation to the compact preview. Keep Explore, shared double chevrons, themes, keyboard state and no-JavaScript destinations. Preserve the existing two-megabyte homepage ceiling.
+Homepage native SVG Atlas starts in Triangle with first5mathematicalrows through25. FirstExpand immediately reveals100, secondExpand reveals324; thenCollapse restores25. Reuse sharedSiteAtlasView layout/FLIP throughout, persistentnativeSVGlinks/colors/boundlabels andcasepopovers. Prepareallartworkatstartupfrominertcompressedpayload; no click-timefetch/delay. KeepExplore,doubledownchevronsuntilfull,doubleupatCollapse, stage-awareaccessiblelabels, live themes,reducedmotion,keyboard andnoJSinitial25Triangle fallback. DedicatedAtlasdefault/responsivecollapsedrows unchanged. Preserve2MBhomepageceiling; previous36caseGridpreview superseded.
 
 ## Notes
 
-Local implementation now reuses SiteAtlasView via a scoped, control-free adapter. Persistent cropped native SVG links retain bound labels and colors; 36 initial cases in two rows, all324 prepared at initialization from byte-exact inert gzip source. Expand immediately invokes shared triangle/FLIP without click-time fetch; Collapse reverses with viewport settlement inside the shared mutation. Shared double chevrons and reduced motion retained. Three focused source/browser checks passed63.32s at1280/390, including node identity, zero fetch, scroll delta0, shared360ms/easing, reduced-motion0, no URL/global state writes and unclipped216x252 crops.21 shared-engine Node tests passed; refreshed dedicated controls/URL smoke passed. Ruff/Biome/TypeScript clean; homepage1,220,393bytes below2MB. Astra bounded source review has no remaining actionable findings; refreshed screenshots/theme confirmation pending. Localdraft only; publication gates tracked by think-xio5.
+Homepage starts in Triangle with25nativeSVGcases (5square-numberrows); Expand100then324, fullCollapse25. SharedSiteAtlasView.change/arrange andper-stagewidest9/19/35, persistentboundaryanchor moves;startup299preparedfrombyte-exactinertcompressedpayload,no clickfetch/delay. Accurateactual/nextcountlabels,double-down/down/up chevrons,scopedstate;dedicatedAtlas unchanged. Markup1passed;2focusedlivechecks passed28.29s1280/390 coveringexact25->100->324->25,cached/rapidcycles,all324anchor/SVGidentity,synchronousshared360mszero-delayarrivalanimation,reducedmotion,collapseviewport,themes/contrast,case291popover/focus,noJS25Triangle/Explore,andzero clickSVGrequests. Ruff/Biome/overview+probeTS/diffclean. Sourcefrozen;servedindex1,169,593bytes<2MB. Rootviewedinitial25desktop/mobile screenshots,clean;allstageimages retained. Astra boundedsourceapprove,noremainingfindings. Earlier36caseGridpreview superseded. Localdraftonly,publicationgatesremainthink-xio5.

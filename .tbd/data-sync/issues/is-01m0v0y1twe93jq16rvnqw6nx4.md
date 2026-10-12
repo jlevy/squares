@@ -5,8 +5,8 @@ title: Define rendering model and exact numeric projection
 kind: task
 status: closed
 priority: 1
-version: 6
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+version: 8
+spec_path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
   - visualization
@@ -20,7 +20,7 @@ dependencies:
     target: is-01m0v0ypqc2shhf313140pqsmk
 parent_id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 created_at: 2026-08-24T23:15:49.724Z
-updated_at: 2026-08-25T03:00:04.842Z
+updated_at: 2026-10-10T23:02:56.561Z
 closed_at: 2026-08-25T03:00:04.828Z
 close_reason: Implemented and validated the deterministic SVG toolkit, exact and numerical adapters, safe serializer, static and animated views, typed overlays, CLI, retained gallery, n=3 migration, documentation, and full gate.
 resolution: null
