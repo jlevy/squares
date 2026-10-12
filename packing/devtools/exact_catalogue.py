@@ -12,6 +12,7 @@ from typing import Any
 DATA_DIRECTORY = "exact-side-values-data"
 INDEX_PATH = Path(DATA_DIRECTORY) / "index.json"
 SCHEMA_VERSION = 1
+INDEX_SCHEMA_VERSION = 2
 INTEGER = re.compile(r"[+-]?[0-9]+")
 REPORTED_SOURCE_CLAIM = (
     "The source polynomial and isolated root were independently checked. "
@@ -154,14 +155,19 @@ def output_files(register: Mapping[str, Any], *, papers: Path) -> dict[Path, str
     fields survive except redundant polynomial text and LaTeX, whose complete
     representations remain in the archive. Retained nested note polynomials also get
     their own coefficient payload, so metadata never silently expands a large vector.
+    Index v2 derives payload URLs from the unchanged identities rather than repeating
+    them in every row. Metadata and coefficient payloads retain their v1 schema.
     """
     register = publication_register(register)
     files: dict[Path, str] = {}
     rows: list[dict[str, Any]] = []
     historical_counts: dict[int, int] = {}
+    side_occurrences: dict[str, int] = {}
+    current_polynomial_count = 0
     identities: set[str] = set()
 
     def add_record(record: Mapping[str, Any], *, section: str) -> None:
+        nonlocal current_polynomial_count
         n = record.get("n")
         if not isinstance(n, int) or isinstance(n, bool) or n < 1:
             raise ExactCatalogueError(f"{section}: n must be a positive integer")
@@ -171,9 +177,13 @@ def output_files(register: Mapping[str, Any], *, papers: Path) -> dict[Path, str
             ordinal = historical_counts[n]
             side_identity = str(record.get("side")).encode("utf-8").hex()
             identity = f"historical-n{n}-s{side_identity}"
-            repeated_side = identity in identities
+            # A distinct inserted side can change H ordinals, but not another
+            # side's established custody payload URLs.
+            side_occurrences[identity] = side_occurrences.get(identity, 0) + 1
+            occurrence = side_occurrences[identity]
+            repeated_side = occurrence > 1
             if repeated_side:
-                identity += f"-occurrence{ordinal}"
+                identity += f"-occurrence{occurrence}"
             component = f"H_{n},{ordinal}"
             title = f"Historical side for n = {n}: {record.get('side')}"
             certificate = record.get("source_certificate")
@@ -230,7 +240,13 @@ def output_files(register: Mapping[str, Any], *, papers: Path) -> dict[Path, str
         stripped = extract(dict(record), ())
         polynomial = stripped.get("polynomial")
         kind = "polynomial" if polynomial is not None else "numeric"
-        coefficients_url = polynomial.get("coefficients_url") if polynomial else None
+        legacy_anchor = None
+        if section == "current" and kind == "polynomial":
+            # KPress omitted inline math when slugging the original equal headings.
+            # Duplicate suffixes follow polynomial order, not the case number.
+            suffix = f"-{current_polynomial_count}" if current_polynomial_count else ""
+            legacy_anchor = f"current-polynomial-for-{suffix}"
+            current_polynomial_count += 1
         metadata_url = (Path(DATA_DIRECTORY) / "metadata" / f"{identity}.json").as_posix()
         files[papers / metadata_url] = _json(
             {
@@ -253,9 +269,7 @@ def output_files(register: Mapping[str, Any], *, papers: Path) -> dict[Path, str
                 "status": record.get("kind") if historical else record.get("status"),
                 "degree": record.get("degree"),
                 "coefficient_digits": polynomial.get("height_digits") if polynomial else None,
-                "metadata_url": metadata_url,
-                "coefficients_url": coefficients_url,
-                "legacy_anchor": None if historical else f"current-polynomial-for--{n}",
+                "legacy_anchor": legacy_anchor,
                 "search_text": _search(record, historical=historical),
             }
         )
@@ -275,7 +289,7 @@ def output_files(register: Mapping[str, Any], *, papers: Path) -> dict[Path, str
                 for key, value in register.items()
                 if key not in {"entries", "historical_entries"}
             },
-            "schema_version": SCHEMA_VERSION,
+            "schema_version": INDEX_SCHEMA_VERSION,
             "entries": rows,
         }
     )

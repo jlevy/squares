@@ -37,7 +37,10 @@ async (options = {}) => {
   // Only visual source values are checked: KaTeX's hidden accessibility duplicate
   // is excluded, and scrollable regions retain access to their offscreen content.
   const activeMath = [
-    ...document.querySelectorAll(".kpress-math-render .katex-html, #entry-equation math"),
+    // A provisional KaTeX tree stays hidden while the native fallback is active.
+    ...document.querySelectorAll(
+      '.kpress-math[data-kpress-math-rendered="true"] > .kpress-math-render .katex-html, #entry-equation math',
+    ),
     ...[...document.querySelectorAll(".kpress-math-semantic math")].filter(
       (math) => !math.closest('[data-kpress-math-rendered="true"]'),
     ),

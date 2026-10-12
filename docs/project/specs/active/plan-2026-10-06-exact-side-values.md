@@ -1,6 +1,6 @@
 # Exact Side Values: Collection, Publication and Remaining Identification
 
-**Date:** 2026-10-06 (last updated 2026-10-10)
+**Date:** 2026-10-06 (last updated 2026-10-12)
 
 **Author:** Joshua Levy, with Claude, GPT-5.6 Sol, GPT-6.1 Sol and GPT-6 Astra
 
@@ -36,9 +36,10 @@ of that corpus, not a claim that every polynomial ever published has been found.
 ## Current Register and Continuation
 
 The parent refresh integrates `origin/main` at
-`af17208c02b08f343199ac102401d40278cf0dfc` (merged atlas PR 474). The refresh preserves
-the upstream Ahmed attribution, displayed n = 211 orientation, rigidity metadata and
-dated atlas download names.
+`25de5a42e8e35ca01668ed07747ed2a3601f4280` (the 2026-10-12 fetch), including T-147
+through T-150 from PR #516 and their posted confirmation replies from PR #551. The
+refresh preserves the upstream Ahmed attribution, displayed n = 211 orientation,
+rigidity metadata and dated atlas download names.
 No adopted side or polynomial source changed.
 Its regenerated register covers 324 cases: 176 integer, 72 rational, 60 closed-form, 12
 minimal-polynomial, one degree-only and three numeric-only values.
@@ -72,22 +73,27 @@ They have no admitted geometry or Lean replay and remain V0/C0, under `think-8sm
 $n = 102$ is now superseded by the current RyXu finite bound; its original coefficients,
 root cell, source flags and V0/C0 envelope remain historical evidence.
 
-The parent retains 30 additional source occurrences: that superseded Daniel root and 29
-nonselected finite certificates representing 28 distinct rational sides.
-Eight RyXu, three Gupta and three Daniel T-129 certificates are superseded.
-Eight Couzo T-128 and five Couzo T-130 offers improve current finite sides and remain
-pending adoption, with native replay retained and V0/C0 geometry-adoption status.
-Both distinct offers at $n = 105$ are preserved.
+The refresh retains the earlier source occurrences and adds 72 in-horizon finite
+certificate occurrences: 65 from T-134 through T-141 and T-146, and seven from T-147
+through T-150. Eight RyXu, three Gupta and three Daniel T-129 certificates remain
+superseded. The public history now contains 87 finite source certificates awaiting
+adoption and three independently checked reported roots awaiting geometry/Lean
+verification. T-128, T-130 and T-131 use the current registered V3/C3 native replay
+grades. Their adoption remains pending; the three reported roots remain V0/C0. Distinct
+equal-side certificates retain their own acquisition and replay custody.
 `think-lhtz` owns independent replay review and the V3/C3 adoption/atlas slice for T-128
 and T-130; `think-0mlq` owns T-128 historical source-house custody.
 T-130 import `think-88r0` is closed after PR 469 merged; adoption remains open.
-The 60 finite rational certificate occurrences partition into 31 selected current, 14
-superseded and 15 pending certificates representing 14 distinct pending bounds.
+The retained finite-certificate occurrences partition into 31 selected current, 14
+superseded and 87 pending occurrences.
+The source scope follows the current reviewed result registry, constrained by declared
+certificates and positive replay receipts; it does not reinstate a superseded request
+roster. In particular, T-138 retains its reviewed scope.
 PR 478 adds Daniel’s source-only $n = 132$ certificate as T-131 and a separate $n = 155$
 certificate as evidence for T-128. The latter has the same exact side as Couzo’s
 retained offer, with distinct source and replay custody; equal sides establish no
 local-minimum or motion equivalence.
-Both remain V0/C0 pending adoption.
+Both retain V3/C3 native replay with adoption pending.
 The existing `think-kkj2` owns independent review and adoption of T-131 at $n = 132$,
 preserving T-098 as historical evidence; `think-iyij` retains the import/reply work.
 The original Couzo adoption and historical-house owners remain `think-lhtz` and
@@ -95,6 +101,13 @@ The original Couzo adoption and historical-house owners remain `think-lhtz` and
 to 32. The certificate envelope keeps its source pin, facts, original certificate,
 receipt, assurance, replay and adoption status.
 Source retention is not frontier promotion.
+The seven latest offers are T-147 n207, T-148 n153, T-149 n155/156/211 and T-150
+n146/261, each with a rational degree-one identity and V3/C3 finite replay.
+T-148’s degree-seven construction-angle equation is separate from its guarded rational
+side. T-149 retains native `c3d17ab` rather than substituting the larger `41019fb` issue
+prints. Barnett’s other five retained facts remain outside T-150’s reviewed scope.
+All selected current sides and proof labels remain unchanged; adoption and the queued 41
+exact quadratic database updates remain separate work.
 
 The merged Rehwaldt $n = 68$ v1.2 packet contains a multivariate rational polynomial
 system and root box, not a univariate side minimal polynomial; its binding review
@@ -113,26 +126,42 @@ change none of the 324 selected cases.
 
 The child [PR 435](https://github.com/jlevy/squares/pull/435) contains the complete
 degree-672 polynomial at $n = 83$, the web report and retained source history.
-The independently audited child census is 324 current rows and 214 historical rows: 186
-superseded, 18 unreconciled source, seven outside the frontier and three source-invalid.
+The independently audited child census is 324 current rows and 286 historical rows: 186
+superseded, 90 unreconciled source, seven outside the frontier and three source-invalid.
 Its current partition is 176 integer, 72 rational, 60 closed-form, 13
 minimal-polynomial, zero degree-only and three numeric-only values.
-All 175 earlier historical identities survive; 29 nonselected certificate occurrences
-and ten newly displaced catalogue identities add 39 historical rows.
-The full register retains 538 records, 560 coefficient vectors and 6,378 integer
-coefficient strings in 2,821,903 decoded bytes / 843,684 gzip bytes.
-At $n = 83$, all 673 coefficients remain intact, including the 724-digit integer.
-Source ordinal 27 remains explicitly uncounted independently (`think-chsu`).
+The earlier 214 historical rows survive; 72 newly represented certificate occurrences
+extend that corpus to 286 historical rows.
+The full register retains 610 records, 632 coefficient vectors and 6,522 integer
+coefficient strings in 3,182,773 decoded bytes / 900,003 gzip bytes.
+Complete coefficients, acquisition custody, source flags and per-record assurance remain
+canonical. At $n = 83$, all 673 coefficients remain intact, including the 724-digit
+integer. Source ordinal 27 remains explicitly uncounted independently (`think-chsu`).
 
 Publication is a web report on Papers with full mathematics and lazy source details; no
 report PDF is generated.
-The public subset has 352 records: all 324 current rows and 28 relevant source rows,
-with 352 coefficient vectors and 2,128 integer strings.
+The public subset has 424 records: all 324 current rows and 100 relevant source rows,
+with 424 coefficient vectors and 2,272 integer strings.
 It omits the 186 superseded rows and 22 redundant current superseded notes while the
 canonical register retains them in full.
-Pending adoption remains visibly V0/C0; retained replay is not global optimality.
-Final web reconstruction and responsive qualification must use the clean published child
-head.
+Native source rows retain V3/C3 replay with adoption pending; the three reported roots
+retain V0/C0 geometry/Lean status.
+Retained replay is not global optimality.
+T-146 also preserves original finder credits and the limits of sampled-motion evidence.
+`think-cb34` tracks adopting the register’s lower exact certificates as atlas witnesses;
+`think-omqv` tracks the batch of exact printed-side record updates.
+`think-18b8` retains the independent rung review, and the broader regularization work
+remains under `think-ux1v`/`think-k35c`. These owners are not closed by the catalogue
+refresh. Final web reconstruction and responsive qualification must use the clean
+published child head.
+The main4a producer repair preserves all 417 earlier record IDs and all 834 earlier
+metadata/coefficient payload bytes while adding the seven new offers.
+Distinct equal sides keep separate source custody.
+Compact coefficient tables reduce the first 2,042,232-byte complete HTML to 1,998,344
+bytes under the unchanged 2,000,000-byte cap, with all 1,026 coefficient rows retained
+and identical complete Markdown.
+The 1,656-byte margin remains a tracked growth constraint; final clean-head
+qualification is separate.
 
 The selected next entry is W7 driver delivery in `think-s6np`, then an independent
 contact-derived $n = 11$ octic control, then one preregistered bounded current RyXu
@@ -145,8 +174,10 @@ bounded identification search.
 
 The shared maintenance repairs remain under `think-okcb`; snapshot selection remains
 under `think-t1lk`. The source snapshot retains all eight historical replay inputs.
-Merged PR 474 raises the producer cap to 200 MiB; earlier 192 MiB inventories below
-remain dated evidence.
+Merged PR 474 raised the producer cap to 200 MiB, and upstream PR 516 raises it to 216
+MiB. Earlier 192/200 MiB inventories below remain dated evidence.
+This committed storage-contract change alters no call deadline, report size cap or
+startup criterion and supplies no diagnosis for local timed-out controls.
 The child hosts 13 original source PDFs outside Git and enforces a 5 MiB limit on
 tracked PDFs.
 

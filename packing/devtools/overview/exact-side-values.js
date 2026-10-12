@@ -66,7 +66,11 @@
   const errorText = (error) => (error instanceof Error ? error.message : String(error));
   /** @param {unknown} value @returns {ExactSideEntry[]} */
   const readIndex = (value) => {
-    if (!object(value) || value.schema_version !== 1 || !Array.isArray(value.entries)) {
+    if (
+      !object(value) ||
+      (value.schema_version !== 1 && value.schema_version !== 2) ||
+      !Array.isArray(value.entries)
+    ) {
       throw new Error("Unsupported catalogue index format.");
     }
     const identities = new Set();
@@ -81,12 +85,25 @@
         typeof row.title !== "string" ||
         typeof row.component !== "string" ||
         typeof row.status !== "string" ||
-        typeof row.metadata_url !== "string" ||
-        (row.coefficients_url !== null && typeof row.coefficients_url !== "string")
+        (value.schema_version === 1 &&
+          (typeof row.metadata_url !== "string" ||
+            (row.coefficients_url !== null && typeof row.coefficients_url !== "string"))) ||
+        (value.schema_version === 2 &&
+          (!/^[a-zA-Z0-9_-]+$/.test(row.id) || "metadata_url" in row || "coefficients_url" in row))
       ) {
         throw new Error("Malformed or duplicate catalogue entry.");
       }
       identities.add(row.id);
+    }
+    if (value.schema_version === 2) {
+      return /** @type {ExactSideEntry[]} */ (
+        value.entries.map((row) => ({
+          ...row,
+          metadata_url: `exact-side-values-data/metadata/${row.id}.json`,
+          coefficients_url:
+            row.kind === "polynomial" ? `exact-side-values-data/coefficients/${row.id}.json` : null,
+        }))
+      );
     }
     return /** @type {ExactSideEntry[]} */ (value.entries);
   };

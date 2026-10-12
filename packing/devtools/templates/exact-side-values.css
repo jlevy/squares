@@ -31,7 +31,8 @@
   padding-block: 0.45rem;
 }
 
-.exact-side-values-paper .kpress-table-wrap:focus-visible {
+.exact-side-values-paper .kpress-table-wrap:focus-visible,
+.exact-side-values-paper .kpress-math-display:focus-visible {
   outline: 2px solid var(--kpress-doc-accent);
   outline-offset: 3px;
 }
@@ -67,4 +68,26 @@
 }
 .exact-side-values-paper .exact-numerator {
   border-bottom: 1px solid currentColor;
+}
+
+/* Native equations remain outside the KaTeX enhancement lifecycle. */
+.exact-side-values-paper .native-polynomial-math math {
+  max-width: none;
+  font-size: 1.02em;
+}
+
+.exact-side-values-paper .source-custody {
+  display: grid;
+  grid-template-columns: minmax(7rem, 1fr) minmax(0, 3fr);
+  gap: 0.2rem 0.75rem;
+}
+.exact-side-values-paper .source-custody dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--kpress-font-mono);
+}
+
+/* Static coefficient columns retain their header association and numeric alignment. */
+.exact-side-values-paper .coefficient-table :is(th, td):first-child {
+  text-align: right;
 }

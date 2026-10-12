@@ -9,9 +9,8 @@ change nobody can attribute must select everything.
 
 from __future__ import annotations
 
-import json
-
 import gzip
+import json
 import os
 import re
 import subprocess

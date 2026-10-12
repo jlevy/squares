@@ -82,7 +82,7 @@ The most significant since August 2026:
 ## Papers
 
 The website’s [papers page](https://jlevy.github.io/squares/papers.html) links each
-paper and its PDF. Three form a series on $n = 11$:
+paper and its available PDF. Three form a series on $n = 11$:
 
 1. [**New Lower Bounds for Square Packing for n = 11**](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html):
    weighted points and 2-of-3 threshold atoms prove $s(11) \ge 3.8264\ldots$.
@@ -98,13 +98,14 @@ local refinement, and upper-bound certification.
 The independent
 [Exact Side Values for Packing Unit Squares](packing/devtools/templates/exact-side-values-article.md)
 is generated from the [exact-values register](packing/frontier/exact-values.json.gz).
-It assembles 321 exact current sides across $n = 1\ldots324$ and 26 additional source
+It assembles 321 exact current sides across $n = 1\ldots324$ and 93 additional source
 records, with every published coefficient, source locator and algebraic certificate.
 The source register retains superseded entries separately.
 Historical examples reach $n = 2135$; source-invalid proposals retain their flags.
-Three improving reported roots retain V0/C0 assurance while geometry and Lean replay
-await verification. Thirteen Couzo finite-certificate offers remain pending adoption,
-with their original source pins, certificates and replay custody.
+Reported algebraic roots retain their stated assurance while geometry and Lean replay
+remain separate. Replayed certificate offers carry the current source-verification
+grades, source pins, original finder credits and replay custody; their adoption into the
+atlas remains separate.
 The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html)
 supports search, filters and per-entry coefficient downloads.
 The full HTML report and Markdown export retain every equation and coefficient in the

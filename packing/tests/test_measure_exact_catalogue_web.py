@@ -265,7 +265,7 @@ def test_projection_derives_the_subset_independently_and_refuses_retained_note_l
         "omitted_superseded_notes": 1,
     }
     rows = json.loads(index.read_text(encoding="utf-8"))["entries"]
-    metadata = papers / rows[0]["metadata_url"]
+    metadata = papers / f"exact-side-values-data/metadata/{rows[0]['id']}.json"
     payload = json.loads(metadata.read_text(encoding="utf-8"))
     payload["record"]["notes"] = []
     metadata.write_text(json.dumps(payload), encoding="utf-8")
@@ -425,3 +425,47 @@ def test_report_refuses_uncounted_complete_control_resources(tmp_path: Path) -> 
     receipt.write_text(json.dumps(measured), encoding="utf-8")
     with pytest.raises(ValueError, match="complete-control byte-count"):
         report(copied)
+
+
+@pytest.mark.parametrize("nested", [False, True], ids=["browser-primary", "metadata-note"])
+def test_v2_projection_binds_primary_payload_to_the_browser_route(
+    tmp_path: Path, *, nested: bool
+) -> None:
+    record = {
+        "n": 83,
+        "degree": 2,
+        "polynomial": {"coefficients": ["1", "0", "-0083"]},
+        "notes": [
+            {
+                "kind": "retained-source",
+                "degree": 1,
+                "polynomial": {"coefficients": ["0001", "-0090"]},
+            }
+        ],
+    }
+    register = {"entries": [record], "historical_entries": []}
+    papers = tmp_path / "papers"
+    for path, contents in exact_catalogue.output_files(register, papers=papers).items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(contents, encoding="utf-8")
+    index = papers / exact_catalogue.INDEX_PATH
+    assert check_projection(register, index, tmp_path)["coefficient_vectors"] == 2
+    metadata = papers / "exact-side-values-data/metadata/current-n83.json"
+    payload = json.loads(metadata.read_text())
+    polynomial = (
+        payload["record"]["notes"][0]["polynomial"]
+        if nested
+        else payload["record"]["polynomial"]
+    )
+    original = papers / polynomial["coefficients_url"]
+    moved = original.with_name("relocated.json")
+    moved.write_bytes(original.read_bytes())
+    original.unlink()
+    polynomial["coefficients_url"] = moved.relative_to(papers).as_posix()
+    metadata.write_text(json.dumps(payload), encoding="utf-8")
+    if nested:
+        # Nested notes retain their explicit URLs; only the primary route is derived.
+        assert check_projection(register, index, tmp_path)["coefficient_vectors"] == 2
+    else:
+        with pytest.raises(ValueError, match="differs from browser path"):
+            check_projection(register, index, tmp_path)

@@ -8,8 +8,18 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 from devtools import exact_catalogue
 from devtools import render_exact_side_values as paper
+
+
+def _metadata_url(row: Mapping[str, Any]) -> str:
+    return f"{exact_catalogue.DATA_DIRECTORY}/metadata/{row['id']}.json"
+
+
+def _coefficients_url(row: Mapping[str, Any]) -> str:
+    return f"{exact_catalogue.DATA_DIRECTORY}/coefficients/{row['id']}.json"
 
 
 def _restore(value: Any, files: Mapping[Path, str], papers: Path) -> Any:
@@ -48,12 +58,14 @@ def test_lazy_payloads_round_trip_published_records_and_original_coefficients(
     files = exact_catalogue.output_files(register, papers=tmp_path)
     index = json.loads(files[tmp_path / exact_catalogue.INDEX_PATH])
     rows = index["entries"]
+    assert index["schema_version"] == 2
+    assert all("metadata_url" not in row and "coefficients_url" not in row for row in rows)
     published = exact_catalogue.publication_register(register)
     originals = [*published["entries"], *published["historical_entries"]]
     assert len(rows) == len(originals)
     assert len({row["id"] for row in rows}) == len(rows)
     for row, original in zip(rows, originals, strict=True):
-        metadata = json.loads(files[tmp_path / row["metadata_url"]])
+        metadata = json.loads(files[tmp_path / _metadata_url(row)])
         if row["section"] == "historical" and original.get("reported_source"):
             assurance = original["assurance"]
             level = f"{assurance['verification']}/{assurance['confirmation']}"
@@ -65,17 +77,17 @@ def test_lazy_payloads_round_trip_published_records_and_original_coefficients(
         assert _restore(metadata["record"], files, tmp_path) == (
             _without_polynomial_representations(original)
         )
-        assert '"coefficients":' not in files[tmp_path / row["metadata_url"]]
-        assert '"latex":' not in files[tmp_path / row["metadata_url"]]
-        if row["coefficients_url"] is not None:
-            coefficients = json.loads(files[tmp_path / row["coefficients_url"]])
+        assert '"coefficients":' not in files[tmp_path / _metadata_url(row)]
+        assert '"latex":' not in files[tmp_path / _metadata_url(row)]
+        if row["kind"] == "polynomial":
+            coefficients = json.loads(files[tmp_path / _coefficients_url(row)])
             assert coefficients["coefficients"] == original["polynomial"]["coefficients"]
     assert all(row["section"] == "current" for row in rows[:324])
     assert all(row["section"] == "historical" for row in rows[324:])
     n83 = next(row for row in rows if row["id"] == "current-n83")
     assert n83["degree"] == 672
-    assert n83["legacy_anchor"] == "current-polynomial-for--83"
-    assert len(json.loads(files[tmp_path / n83["coefficients_url"]])["coefficients"]) == 673
+    assert n83["legacy_anchor"] == "current-polynomial-for--79"
+    assert len(json.loads(files[tmp_path / _coefficients_url(n83)])["coefficients"]) == 673
     assert {record["kind"] for record in published["historical_entries"]} == {
         "outside-frontier",
         "source-invalid",
@@ -90,13 +102,25 @@ def test_lazy_payloads_round_trip_published_records_and_original_coefficients(
     pending = [
         record for record in published["historical_entries"] if record.get("source_certificate")
     ]
-    assert len(pending) == 15
-    assert sum(record["n"] == 105 for record in pending) == 2
+    assert len(pending) == 87
+    assert sum(record["n"] == 105 for record in pending) == 3
     n155 = [row for row in rows if row["section"] == "historical" and row["n"] == 155]
-    assert len(n155) == 2
+    assert len(n155) == 3
+    n155 = [
+        row
+        for row in n155
+        if json.loads(files[tmp_path / _metadata_url(row)])["record"]["source_certificate"][
+            "result"
+        ]
+        == "T-128"
+    ]
     assert n155[0]["id"] + "-occurrence2" == n155[1]["id"]
     assert "[Daniel record hunt 2026-10-09]" in n155[1]["title"]
-    n155_records = [record for record in pending if record["n"] == 155]
+    n155_records = [
+        record
+        for record in pending
+        if record["n"] == 155 and record["source_certificate"]["result"] == "T-128"
+    ]
     assert n155_records[0]["side"] == n155_records[1]["side"]
     assert {record["source_certificate"]["source_key"] for record in n155_records} == {
         "[Couzo exact refinements 2026-10-08]",
@@ -106,8 +130,8 @@ def test_lazy_payloads_round_trip_published_records_and_original_coefficients(
         certificate = record["source_certificate"]
         assert certificate["adoption"] == "pending"
         assert certificate["geometry_replay"] == "native-replay-retained"
-        assert certificate["verification"] == "V0"
-        assert certificate["confirmation"] == "C0"
+        assert certificate["verification"] == "V3"
+        assert certificate["confirmation"] == "C3"
     (superseded_daniel,) = [
         record
         for record in register["historical_entries"]
@@ -190,11 +214,11 @@ def test_publication_omits_only_superseded_rows_and_notes_without_mutating_sourc
         tmp_path
         / exact_catalogue.DATA_DIRECTORY
         / "coefficients/current-n83-notes-0-polynomial.json",
-        *(tmp_path / row["metadata_url"] for row in rows),
-        *(tmp_path / row["coefficients_url"] for row in rows),
+        *(tmp_path / _metadata_url(row) for row in rows),
+        *(tmp_path / _coefficients_url(row) for row in rows),
     }
     for row, record in zip(rows, [current, *historical[1:], *source_roots], strict=True):
-        metadata = json.loads(files[tmp_path / row["metadata_url"]])
+        metadata = json.loads(files[tmp_path / _metadata_url(row)])
         expected_record = expected["entries"][0] if row["section"] == "current" else record
         assert _restore(metadata["record"], files, tmp_path) == expected_record
         if record.get("reported_source"):
@@ -228,7 +252,7 @@ def test_empty_collections_and_repeated_historical_sides_are_deterministic(
     index = json.loads(files[tmp_path / exact_catalogue.INDEX_PATH])
     assert len({row["id"] for row in index["entries"]}) == 2
     for row in index["entries"]:
-        metadata = json.loads(files[tmp_path / row["metadata_url"]])
+        metadata = json.loads(files[tmp_path / _metadata_url(row)])
         assert metadata["record"]["current_side"] is None
         assert _restore(metadata["record"], files, tmp_path) == record
 
@@ -261,7 +285,7 @@ def test_pending_native_certificate_preserves_custody_without_claiming_adoption(
     register = {"entries": [], "historical_entries": [original]}
     files = exact_catalogue.output_files(register, papers=tmp_path)
     row = json.loads(files[tmp_path / exact_catalogue.INDEX_PATH])["entries"][0]
-    metadata = json.loads(files[tmp_path / row["metadata_url"]])
+    metadata = json.loads(files[tmp_path / _metadata_url(row)])
     assert _restore(metadata["record"], files, tmp_path) == original
     assert "pending (V0/C0)" in metadata["claim"]
     assert "Native geometry replay is retained" in metadata["claim"]
@@ -269,3 +293,89 @@ def test_pending_native_certificate_preserves_custody_without_claiming_adoption(
     rendered = paper.source_certificate_markdown(original)
     for value in certificate.values():
         assert f"<code>{value}</code>" in rendered
+
+
+def test_legacy_heading_anchors_follow_polynomial_order_across_numeric_gaps(
+    tmp_path: Path,
+) -> None:
+    register = {
+        "entries": [
+            {"n": 1, "degree": 1, "polynomial": {"coefficients": ["1", "-1"]}},
+            {"n": 2, "degree": 1, "polynomial": {"coefficients": ["1", "-2"]}},
+            {"n": 3},
+            {"n": 4, "degree": 1, "polynomial": {"coefficients": ["1", "-4"]}},
+        ]
+    }
+    index = json.loads(
+        exact_catalogue.output_files(register, papers=tmp_path)[
+            tmp_path / exact_catalogue.INDEX_PATH
+        ]
+    )
+    assert [row["legacy_anchor"] for row in index["entries"]] == [
+        "current-polynomial-for-",
+        "current-polynomial-for--1",
+        None,
+        "current-polynomial-for--2",
+    ]
+
+
+@pytest.mark.parametrize("position", [0, 1, 2])
+def test_distinct_inserted_side_preserves_existing_source_payload_ids(tmp_path, position):
+    first = {
+        "n": 155,
+        "side": "12.5",
+        "degree": 1,
+        "kind": "unreconciled-source",
+        "polynomial": {"coefficients": ["2", "-25"]},
+        "source_certificate": {
+            "source_key": "original finder",
+            "verification": "V3",
+            "confirmation": "C3",
+            "adoption": "pending",
+            "geometry_replay": "native-replay-retained",
+            "facts": "packing/first.json",
+            "receipt": "packing/first-replay.json",
+        },
+    }
+    second = deepcopy(first)
+    second["source_certificate"].update(
+        source_key="independent retainer",
+        facts="packing/second.json",
+        receipt="packing/second-replay.json",
+    )
+    old = {"entries": [], "historical_entries": [first, second]}
+    before = exact_catalogue.output_files(old, papers=tmp_path)
+    old_rows = json.loads(before[tmp_path / exact_catalogue.INDEX_PATH])["entries"]
+    assert old_rows[1]["id"] == old_rows[0]["id"] + "-occurrence2"
+    inserted = deepcopy(first)
+    inserted.update(side="12.4", polynomial={"coefficients": ["5", "-62"]})
+    inserted["source_certificate"]["source_key"] = "new distinct construction"
+    new = deepcopy(old)
+    new["historical_entries"].insert(position, inserted)
+    after = exact_catalogue.output_files(new, papers=tmp_path)
+    for path, payload in before.items():
+        if path != tmp_path / exact_catalogue.INDEX_PATH:
+            assert after[path] == payload
+    rows = json.loads(after[tmp_path / exact_catalogue.INDEX_PATH])["entries"]
+    assert {row["id"] for row in old_rows} < {row["id"] for row in rows}
+    for old_row, original in zip(old_rows, (first, second), strict=True):
+        metadata = json.loads(after[tmp_path / _metadata_url(old_row)])
+        assert _restore(metadata["record"], after, tmp_path) == original
+    assert [row["component"] for row in rows] == ["H_155,1", "H_155,2", "H_155,3"]
+
+
+def test_inserted_invalid_source_is_refused_instead_of_skipped_for_stable_ids(tmp_path):
+    first = {
+        "n": 155,
+        "side": "12.5",
+        "degree": 1,
+        "kind": "unreconciled-source",
+        "polynomial": {"coefficients": ["2", "-25"]},
+    }
+    inserted = deepcopy(first)
+    inserted.update(side="12.4", polynomial={"coefficients": ["0", "-62"]})
+    with pytest.raises(exact_catalogue.ExactCatalogueError, match="nonzero lead"):
+        exact_catalogue.output_files(
+            {"entries": [], "historical_entries": [first, inserted, first]}, papers=tmp_path
+        )
+    assert list(tmp_path.iterdir()) == []

@@ -613,18 +613,24 @@ The full scientific archives and current verified lower bounds remain preserved.
 
 The original retained-source extraction on October 7 decoded 182 polynomial/side pairs
 from 201 occurrences, reaching $n = 2135$, with no undecoded rows.
-The refreshed register retains 214 noncurrent source entries: 186 superseded, 18
-unreconciled, seven outside the frontier and three source-invalid.
+The refreshed register retains 286 noncurrent source entries: 186 superseded, 90
+unreconciled, seven outside the frontier and three source-invalid, for 610 records
+including the 324 current cases.
 Only Daniel’s three improving reported roots at $n = 106,152,177$ remain unreconciled
 polynomial notes, with independently checked polynomials and isolating intervals but
 geometry and Lean replay not attempted (V0/C0). Daniel’s retained root at $n = 102$ is
 superseded and remains historical.
-The merged finite packets supply 60 rational certificate occurrences covering 59
-distinct bounds: 31 selected current, 14 superseded and 15 pending occurrences.
-The pending roster covers 14 distinct bounds, including two Couzo offers at $n = 105$,
-Daniel’s $n = 132$ T-131 offer, and separate Couzo and Daniel certificates for the same
-exact $n = 155$ side.
-Each keeps its own custody and remains V0/C0 pending adoption.
+The historical finite-certificate roster retains 101 source occurrences: 14 superseded
+and 87 pending standing adoption, covering 86 distinct pending rational bounds.
+All 87 pending offers carry V3/C3 checked finite source geometry from retained positive
+replays. The superseded roster preserves eleven checked V3/C3 certificates and three
+unreplayed V0/C0 occurrences, with their own custody and grades.
+The latest four batches are PingYou Ltd’s T-147 at $n = 207$ and T-148 at $n = 153$,
+Daniil Ostashev’s T-149 at $n = 155,156,211$, and Robert Barnett’s T-150 at
+$n = 146,261$. Source verification does not itself adopt these sides as current
+atlas/frontier records.
+Separate Couzo and Daniel certificates for the same exact $n = 155$ side retain
+independent custody and attribution.
 `think-kkj2` owns T-131 adoption; `think-lhtz` and `think-0mlq` retain the original
 Couzo adoption and historical-house work.
 Equal sides confer no motion or local-minimum equivalence.
@@ -638,18 +644,18 @@ source attribution, algebraic checks, geometric realization and optimality separ
 
 The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html) has a
 searchable index and loads individual records and coefficient vectors when opened.
-The complete HTML and Markdown report publishes all 324 current records and 28
-additional source records: seven outside the frontier, three source-invalid and 18
-unreconciled source occurrences, for 352 records overall.
+The complete HTML and Markdown report publishes all 324 current records and 100
+additional source records: seven outside the frontier, three source-invalid and 90
+unreconciled source occurrences, for 424 records overall.
 The report omits 186 superseded rows and 22 redundant current notes; these remain in the
-source register. The trimmed web projection independently reconstructs 352 coefficient
-vectors and 2,128 integer strings, preserving the metadata of the published records.
+source register. The web projection reconstructs 424 coefficient vectors and 2,272
+integer strings, preserving the metadata of the published records.
 The unchanged checkpoint limits the initial automatic payload to 10% of the complete
 HTML report. Payload measurements are dated local receipts and make no latency claim.
 The retained
 [full-catalogue measurement](packing/benchmarks/exact-catalogue-web/report.md) records
 the preceding publication scope.
-The complete source register retains 560 coefficient vectors and 6,378 integer strings.
+The complete source register retains 632 coefficient vectors and 6,522 integer strings.
 
 The three numeric-only current cases are $n = 29,55,71$, each with a bead in the
 [continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md#remaining-work-and-beads).
@@ -708,7 +714,7 @@ case or experiment separately.
 | [Review: Couzo’s and Daniel’s Rational Refinement Replays (T-128, T-130, T-131)](docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 1340000/199529`: Review of the Continuous-Pose Kernel on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 335427/50000`: Review of the Clipped-Corner Transfer on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) | dated review record | record | retained | — |
-| [Polynomial PR stack: publication checkpoint and remaining work](docs/project/handoff-2026-10-10-polynomial-pr-stack.md) | dated handoff record | record | retained | — |
+| [Polynomial PR stack: refreshed tables and remaining work](docs/project/handoff-2026-10-10-polynomial-pr-stack.md) | dated handoff record | record | retained | — |
 | [Review: Gupta exact rational refinements, issue #438](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md) | dated review record | record | retained | — |
 | [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |
 | [n17 Paper Review: Global Optimization and Sum-of-Squares Certificates](docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md) | dated review record | record | retained | — |

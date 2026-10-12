@@ -130,6 +130,28 @@ def check_projection(register: dict[str, Any], index_path: Path, site: Path) -> 
     """
     index = json.loads(index_path.read_text(encoding="utf-8"))
     entries = index["entries"]
+    if index.get("schema_version") == 2:
+        # Decode the wire convention independently of the exporter and JS client.
+        # The recursive comparison below still checks the unchanged payload files.
+        for entry in entries:
+            if not isinstance(entry.get("id"), str) or not re.fullmatch(
+                r"[a-zA-Z0-9_-]+", entry["id"]
+            ):
+                raise ValueError("unsafe browser record identity")
+            if "metadata_url" in entry or "coefficients_url" in entry:
+                raise ValueError("v2 index must derive payload URLs")
+        entries = [
+            {
+                **entry,
+                "metadata_url": f"exact-side-values-data/metadata/{entry['id']}.json",
+                "coefficients_url": (
+                    f"exact-side-values-data/coefficients/{entry['id']}.json"
+                    if entry["kind"] == "polynomial"
+                    else None
+                ),
+            }
+            for entry in entries
+        ]
     if len({entry["id"] for entry in entries}) != len(entries):
         raise ValueError("duplicate browser record identity")
     base = index_path.parent.parent
@@ -209,6 +231,16 @@ def check_projection(register: dict[str, Any], index_path: Path, site: Path) -> 
             payload = json.loads(path.read_text(encoding="utf-8"))
             if payload["id"] != entry["id"] or payload["section"] != section:
                 raise ValueError("metadata belongs to another record")
+            if index.get("schema_version") == 2:
+                polynomial = payload["record"].get("polynomial")
+                coefficient_url = (
+                    polynomial.get("coefficients_url") if isinstance(polynomial, dict) else None
+                )
+                if (
+                    payload["kind"] != entry["kind"]
+                    or coefficient_url != entry["coefficients_url"]
+                ):
+                    raise ValueError("coefficient payload link differs from browser path")
             compare(original, payload["record"])
     if len(entries) != counts["current"] + counts["historical"]:
         raise ValueError("unclassified browser entries")

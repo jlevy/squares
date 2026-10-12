@@ -11,6 +11,8 @@ from urllib.parse import urlparse
 import pytest
 from playwright.sync_api import Page, Route, expect, sync_playwright
 
+from devtools import exact_catalogue
+from devtools import render_exact_side_values as paper
 from sqpack.probes import probe
 from tests import site_browser
 
@@ -285,3 +287,124 @@ def test_mobile_keyboard_and_disabled_javascript_fallback(catalogue: Catalogue) 
         assert fallback.requests == ["/"]
     finally:
         context.close()
+
+
+def test_emitted_v2_index_preserves_search_numeric_lazy_and_occurrence_selection(
+    catalogue: Catalogue, tmp_path: Path
+) -> None:
+    papers = tmp_path / "papers"
+    files = exact_catalogue.output_files(paper.load_register(), papers=papers)
+    index = json.loads(files[papers / exact_catalogue.INDEX_PATH])
+    assert index["schema_version"] == 2
+    catalogue.data["/index.json"] = index
+    for path, contents in files.items():
+        catalogue.data["/" + path.relative_to(papers).as_posix()] = json.loads(contents)
+    catalogue.open()
+    assert catalogue.requests == ["/", "/browser.js", "/index.json"]
+    page = catalogue.page
+    page.get_by_label("Search entries").fill("n:29")
+    page.locator("a.entry-link").click()
+    expect(page.locator("#detail-title")).to_contain_text("n = 29")
+    expect(page.locator("#coefficient-section")).to_be_hidden()
+    assert "/exact-side-values-data/metadata/current-n29.json" in catalogue.requests
+    assert not any("/coefficients/" in path for path in catalogue.requests)
+
+    page.get_by_label("Search entries").fill("n:83")
+    page.locator("a.entry-link").click()
+    expect(page.locator("#detail-title")).to_contain_text("n = 83")
+    page.get_by_role("button", name="Open coefficients").click()
+    expect(page.locator("#coefficient-body tr")).to_have_count(12)
+    expected = json.loads(
+        files[papers / "exact-side-values-data/coefficients/current-n83.json"]
+    )
+    assert (
+        page.locator("#coefficient-body code").all_text_contents()
+        == expected["coefficients"][:12]
+    )
+    expect(
+        page.get_by_role("link", name="Download complete coefficient JSON")
+    ).to_have_attribute("href", "exact-side-values-data/coefficients/current-n83.json")
+
+    page.get_by_label("Catalogue section").select_option("historical")
+    page.get_by_label("Search entries").fill("n:155")
+    expect(page.locator("a.entry-link")).to_have_count(2)
+    (repeated,) = [
+        row
+        for row in index["entries"]
+        if row["id"].endswith("-occurrence2") and row["n"] == 155
+    ]
+    page.locator(f"a.entry-link[href='#{repeated['id']}']").click()
+    expect(page.locator("#entry-claim")).to_contain_text("pending (V3/C3)")
+    expect(page.locator("#metadata")).to_contain_text("[Daniel record hunt 2026-10-09]")
+
+    # Search strings stay eager and unchanged; even a source-path token works before
+    # fetching any of the matching records' metadata.
+    chosen = next(
+        row
+        for row in index["entries"]
+        if row["section"] == "historical" and "/" in row["search_text"]
+    )
+    token = next(word for word in chosen["search_text"].split() if "/" in word)
+    before = list(catalogue.requests)
+    page.get_by_label("Search entries").fill(token)
+    expected_ids = {
+        row["id"]
+        for row in index["entries"]
+        if row["section"] == "historical"
+        and token.lower()
+        in (
+            " ".join(
+                map(
+                    str,
+                    (
+                        row["title"],
+                        row["n"],
+                        row["component"],
+                        row["status"],
+                        row["degree"],
+                        row["search_text"],
+                    ),
+                )
+            )
+        ).lower()
+    }
+    expect(page.locator("#index-message")).to_contain_text(
+        f"{len(expected_ids)} matching entries"
+    )
+    assert catalogue.requests == before
+
+
+@pytest.mark.parametrize(
+    "defect", ["identity", "metadata-url", "coefficient-url", "version", "duplicate", "kind"]
+)
+def test_v2_index_refuses_unsafe_or_ambiguous_entries(
+    catalogue: Catalogue, defect: str
+) -> None:
+    rows = [
+        {
+            key: value
+            for key, value in row.items()
+            if key not in {"metadata_url", "coefficients_url"}
+        }
+        for row in catalogue.entries
+    ]
+    index = {"schema_version": 2, "entries": rows}
+    if defect == "identity":
+        rows[0]["id"] = "../current-n1"
+    elif defect == "metadata-url":
+        rows[0]["metadata_url"] = "data/override.json"
+    elif defect == "coefficient-url":
+        rows[0]["coefficients_url"] = "data/override.json"
+    elif defect == "version":
+        index["schema_version"] = 99
+    elif defect == "duplicate":
+        rows.append(dict(rows[0]))
+    else:
+        rows[0]["kind"] = "unknown"
+    catalogue.data["/index.json"] = index
+    catalogue.page.goto("https://catalogue.test/")
+    expect(catalogue.page.locator("#index-message")).to_contain_text(
+        "Unsupported catalogue" if defect == "version" else "Malformed or duplicate"
+    )
+    assert catalogue.page.locator("a.entry-link").count() == 0
+    assert catalogue.requests == ["/", "/browser.js", "/index.json"]

@@ -91,11 +91,15 @@ no additional exact polynomial identities.
 
 The
 [Daniel record-hunt certificates](../../resources/web/evand-record-hunt-2026-10-09/README.md)
-add a pending exact rational side at n=132 (T-131) and a separate certificate for the
-same exact n=155 side as Couzo’s T-128 offer.
-Both source occurrences retain their own certificate and replay custody at V0/C0. Equal
-n=155 sides establish neither local-minimum equivalence nor motion between packings;
-these records update no current side or optimality status.
+retain an exact rational side at n=132 (T-131) and a separate certificate for the same
+exact n=155 side as Couzo’s T-128 offer.
+Their finite geometry has been independently replayed at V3/C3; adoption into the
+current atlas remains separate.
+The source history also includes the retained declarations and replay custody for T-134
+through T-141 and T-146. Daniel’s T-146 regularizations retain the original finders’
+credits and the limits of their sampled-motion evidence.
+Equal n=155 sides establish neither local-minimum equivalence nor motion between
+packings. These source records update no current side or optimality status.
 
 ## Full Current Polynomial Catalogue
 
@@ -130,11 +134,11 @@ verified geometric realization and field-to-side linkage.
 
 Finite source-certificate rows also retain exact rational sides awaiting packing
 adoption.
-Their native geometry replay receipts are recorded separately from that pending
-adoption, which remains V0/C0. Each row shows its source revision, original certificate,
-retained facts and replay status.
-Its linear polynomial identifies the source side; adoption and global optimality require
-their own evidence.
+Their finite geometry has been independently replayed at V3/C3; current packing
+adoption remains pending.
+Each row shows its source revision, original certificate, retained facts and replay
+status. Its linear polynomial identifies the source side; adoption and global optimality
+require their own evidence.
 
 Each entry carries its own attribution and source labels.
 Its checks compare the polynomial with the source’s side and, where retained, verify

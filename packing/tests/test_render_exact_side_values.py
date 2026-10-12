@@ -14,8 +14,10 @@ from copy import deepcopy
 from html import escape, unescape
 from pathlib import Path
 from typing import Any
+from xml.etree import ElementTree as ET
 
 import pytest
+from kpress.format.markdown import parse_markdown
 
 from devtools import build_exact_values as exact
 from devtools import (
@@ -26,6 +28,7 @@ from devtools import (
     site_urls,
 )
 from devtools import render_exact_side_values as paper
+from devtools.render_exact_side_values import WEB_LAYOUT
 from devtools.render_overview import SITE_URL
 
 REVISION = "a" * 40
@@ -428,7 +431,10 @@ def test_historical_source_statuses_attribution_and_invalid_geometry_are_visible
     summary = paper.historical_summary_markdown(register)
     catalogue = paper.historical_polynomials_markdown(register)
     assert "KKT" not in summary
-    assert "KKT" not in catalogue
+    source_roots = {
+        "historical_entries": [row for row in historical if row.get("reported_source")]
+    }
+    assert "KKT" not in paper.historical_polynomials_markdown(source_roots)
     invalid_259 = [
         entry for entry in historical if entry["n"] == 259 and entry["kind"] == "source-invalid"
     ]
@@ -451,7 +457,8 @@ def test_historical_source_statuses_attribution_and_invalid_geometry_are_visible
     retained_summary = paper.historical_summary_markdown(retained)
     retained_catalogue = paper.historical_polynomials_markdown(retained)
     assert "KKT" not in retained_summary
-    assert "KKT" not in retained_catalogue
+    retained_roots = {"historical_entries": reported}
+    assert "KKT" not in paper.historical_polynomials_markdown(retained_roots)
     for entry in paper.historical_entries(retained):
         assert entry["kind"] in retained_summary
         if entry.get("reported_source") and entry["kind"] == "unreconciled-source":
@@ -646,7 +653,13 @@ def test_the_lazy_export_checks_every_payload_and_removes_stale_extras(
     assert "kpress-math" in archive.read_text(encoding="utf-8")
     data = site / "papers/exact-side-values-data"
     index = json.loads((data / "index.json").read_text(encoding="utf-8"))
-    coefficient = site / "papers" / index["entries"][0]["coefficients_url"]
+    coefficient = (
+        site
+        / "papers"
+        / exact_catalogue.DATA_DIRECTORY
+        / "coefficients"
+        / f"{index['entries'][0]['id']}.json"
+    )
     original = coefficient.read_text(encoding="utf-8")
     coefficient.write_text("", encoding="utf-8")
     with pytest.raises(SystemExit, match="stale exact-side-values output"):
@@ -865,3 +878,357 @@ def test_linked_publication_script_inventory_keeps_unknown_program_refusal(
     (site / "assets/js/unknown.js").write_text("/* undeclared program */", encoding="utf-8")
     _, failures = check_site_scripts.inventory(site)
     assert failures == ["unclassified executable script: assets/js/unknown.js"]
+
+
+@pytest.mark.parametrize("n", [1, 70, 263])
+def test_web_linear_mathml_keeps_real_coefficients_names_and_markdown(n):
+    register = exact_catalogue.publication_register(paper.load_register())
+    if n == 263:
+        candidates = [row for row in register["historical_entries"] if row["n"] == n]
+        entry = next(
+            row for row in candidates if row["source_certificate"]["result"] == "T-134"
+        )
+        name = f"H_{{{n},{candidates.index(entry) + 1}}}"
+    else:
+        entry = next(row for row in register["entries"] if row["n"] == n)
+        name = f"P_{{{n}}}"
+    polynomial = entry["polynomial"]
+    markdown = paper.polynomial_markdown(name, polynomial, degree=1, context=name)
+    native = paper.polynomial_markdown(name, polynomial, degree=1, context=name, web=True)
+    assert name in markdown
+    assert "<math " not in markdown
+    assert "native-polynomial-math" in native
+    assert 'tabindex="0"' in native
+    assert 'aria-label="Polynomial equation"' in native
+    assert "kpress-math-semantic" in native
+    assert "kpress-math-render" not in native
+    for coefficient in polynomial["coefficients"]:
+        magnitude = abs(int(coefficient))
+        if magnitude != 1:
+            assert f"<mn>{magnitude}</mn>" in native
+        assert str(magnitude) in markdown or magnitude == 1
+    assert f"<mn>{n}</mn>" in native
+    assert paper.polynomial_markdown(name, polynomial, degree=1, context=name) == markdown
+
+
+def _web_coefficient_rows(native):
+    fragment = native.split('<table class="kpress-table coefficient-table">', 1)[1]
+    table = ET.fromstring("<table>" + fragment.split("</table>", 1)[0] + "</table>")
+    headers = table.findall("./thead/tr/th")
+    assert [header.get("scope") for header in headers] == ["col", "col"]
+    assert ["".join(header.itertext()) for header in headers] == ["Power k", "Coefficient ak"]
+    values = []
+    for row in table.findall("./tbody/tr"):
+        cells = row.findall("td")
+        assert len(cells) == 2
+        code = cells[1].find("code")
+        assert code is not None
+        values.append((cells[0].text, code.text))
+    return values
+
+
+@pytest.mark.parametrize("n", [5, 83])
+def test_web_nonlinear_equations_keep_complete_coefficients_and_markdown(n):
+    entry = next(row for row in paper.load_register()["entries"] if row["n"] == n)
+    arguments = {"degree": entry["degree"], "context": f"n={n}"}
+    markdown = paper.polynomial_markdown(f"P_{{{n}}}", entry["polynomial"], **arguments)
+    native = paper.polynomial_markdown(f"P_{{{n}}}", entry["polynomial"], **arguments, web=True)
+    assert "native-polynomial-math" in native
+    assert "<math " not in markdown
+    if n == 83:
+        expected = [
+            (str(entry["degree"] - index), value)
+            for index, value in enumerate(entry["polynomial"]["coefficients"])
+        ]
+        assert _web_coefficient_rows(native) == expected
+        for power, coefficient in expected:
+            assert f"| {power} | <code>{coefficient}</code> |" in markdown
+        assert "<mn>672</mn></msubsup>" in native
+    else:
+        assert markdown == "$$\nP_{5}(s) ={} 2s^{2} - 8s + 7 = 0\n$$"
+        assert "<msup><mi>s</mi><mn>2</mn></msup>" in native
+
+
+def test_shared_source_quotes_preserve_every_literal_and_record_association():
+    register = exact_catalogue.publication_register(paper.load_register())
+    history = register["historical_entries"]
+    web = paper.historical_polynomials_markdown(register, web=True)
+    markdown = paper.historical_polynomials_markdown(register)
+    texts = [str(text) for row in history for text in row["attribution"]["source_text"]]
+    unique = list(dict.fromkeys(texts))
+    appendix = web.split("## Source attribution notes", 1)[1]
+    for number, text in enumerate(unique, 1):
+        literal = escape(text, quote=False)
+        quote = f'<blockquote class="source-quote"><p><code>{literal}</code></p></blockquote>'
+        assert appendix.count(quote) == 1
+        assert f'id="source-attribution-note-{number}"' in appendix
+        assert escape(text, quote=False).replace("\n", " ") in markdown
+    seen = {}
+    for row in history:
+        n = row["n"]
+        seen[n] = seen.get(n, 0) + 1
+        anchor = f'<span id="historical-n{n}-occurrence{seen[n]}"></span>'
+        section = (
+            web.split(anchor, 1)[1]
+            .split('<span id="historical-', 1)[0]
+            .split("## Source attribution notes", 1)[0]
+        )
+        for text in row["attribution"]["source_text"]:
+            number = unique.index(str(text)) + 1
+            assert f"](#source-attribution-note-{number})" in section
+        assert "Attribution date mentions:" in section
+        certificate = row.get("source_certificate")
+        if certificate:
+            assert escape(certificate["facts"], quote=False) in section
+            assert escape(certificate["original_certificate"], quote=False) in section
+    assert web.count("](#source-attribution-note-") == len(texts)
+    assert "## Source attribution notes" not in markdown
+
+
+def test_native_linear_mathml_survives_trusted_kpress_without_a_js_renderer():
+    native = paper.polynomial_markdown(
+        "H_{132,4}", _polynomial(["2", "-5"]), degree=1, context="native control", web=True
+    )
+    document = parse_markdown(native, title="native control", trust_mode="trusted", math="auto")
+    assert not document.diagnostics
+    assert "<mi>H</mi>" in document.html
+    assert "<mn>132</mn><mo>,</mo><mn>4</mn>" in document.html
+    assert "<mn>2</mn><mi>s</mi><mo>&#x2212;</mo><mn>5</mn>" in document.html
+    assert 'tabindex="0"' in document.html
+    assert 'kpress-math-render"' not in document.html
+
+
+def test_html_byte_measurement_reports_sections_without_publishing(tmp_path, capsys):
+    assert paper.main(["--site", str(tmp_path), "--revision", REVISION, "--measure"]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["published_html_bytes"][paper.COMPLETE_PATH] > 0
+    assert report["generated_section_html_bytes"]["CURRENT_POLYNOMIALS"] > 0
+    assert report["generated_section_html_bytes"]["HISTORICAL_POLYNOMIALS"] > 0
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_native_equations_reconstruct_every_published_coefficient_and_exponent():
+    register = exact_catalogue.publication_register(paper.load_register())
+    rows = [(row, f"P_{{{row['n']}}}") for row in register["entries"] if row.get("polynomial")]
+    seen = {}
+    for row in register["historical_entries"]:
+        n = row["n"]
+        seen[n] = seen.get(n, 0) + 1
+        rows.append((row, f"H_{{{n},{seen[n]}}}"))
+    namespace = "{http://www.w3.org/1998/Math/MathML}"
+    for entry, name in rows:
+        expected = [int(value) for value in entry["polynomial"]["coefficients"]]
+        degree = entry["degree"]
+        native = paper.polynomial_markdown(
+            name, entry["polynomial"], degree=degree, context=f"n={entry['n']}", web=True
+        )
+        label = native.split("<msub>", 1)[1].split("</msub>", 1)[0]
+        assert f"<mi>{name[0]}</mi>" in label
+        for index in name.split("{", 1)[1].rstrip("}").split(","):
+            assert f"<mn>{index}</mn>" in label
+        if 'class="kpress-table coefficient-table"' in native:
+            assert _web_coefficient_rows(native) == [
+                (str(degree - index), str(value)) for index, value in enumerate(expected)
+            ]
+            assert f"<mn>{degree}</mn></msubsup>" in native
+            continue
+        found = [0] * (degree + 1)
+        # Renderer-authored names and integers cannot introduce XML declarations.
+        for fragment in native.split('<math display="block">')[1:]:
+            tree = ET.fromstring(
+                '<math xmlns="http://www.w3.org/1998/Math/MathML">'
+                + fragment.split("</math>", 1)[0]
+                + "</math>"
+            )
+            body = tree.find(namespace + "mrow")
+            assert body is not None
+            children = list(body)
+            if children[0].tag == namespace + "mphantom":
+                terms = children[1:]
+            else:
+                equals = next(
+                    index
+                    for index, node in enumerate(children)
+                    if node.tag == namespace + "mo" and node.text == "="
+                )
+                terms = children[equals + 1 :]
+            if terms[-2].tag == namespace + "mo" and terms[-2].text == "=":
+                terms = terms[:-2]
+            cursor = 0
+            while cursor < len(terms):
+                sign = 1
+                node = terms[cursor]
+                if node.tag == namespace + "mo":
+                    sign = -1 if node.text == "\u2212" else 1
+                    cursor += 1
+                    node = terms[cursor]
+                magnitude = 1
+                if node.tag == namespace + "mn":
+                    assert node.text is not None
+                    magnitude = int(node.text)
+                    cursor += 1
+                power = 0
+                if cursor < len(terms) and terms[cursor].tag == namespace + "mi":
+                    assert terms[cursor].text == "s"
+                    power = 1
+                    cursor += 1
+                elif cursor < len(terms) and terms[cursor].tag == namespace + "msup":
+                    base, exponent = list(terms[cursor])
+                    assert base.text == "s"
+                    assert exponent.text is not None
+                    power = int(exponent.text)
+                    cursor += 1
+                found[degree - power] += sign * magnitude
+        assert found == expected, entry["n"]
+
+
+def test_web_integer_cells_keep_exact_values_and_markdown_tex():
+    register = paper.load_register()
+    web = paper.exact_forms_markdown(register, web=True)
+    markdown = paper.exact_forms_markdown(register)
+    for entry in register["entries"]:
+        value = entry.get("exact_form_latex")
+        if entry["state"] == "integer":
+            assert f"<math><mn>{value}</mn></math>" in web
+            assert f"${value}$" in markdown
+
+
+def test_web_legacy_headings_keep_the_actual_old_record_associations():
+    register = exact_catalogue.publication_register(paper.load_register())
+    current = [entry for entry in register["entries"] if entry.get("polynomial")]
+    minimal = "\n\n".join(f"### Current polynomial for $n={entry['n']}$" for entry in current)
+    legacy = parse_markdown(
+        minimal, title="legacy headings", trust_mode="trusted", math="auto"
+    ).headings
+    web = paper.current_polynomials_markdown(register, web=True)
+    for entry, old in zip(current, legacy, strict=True):
+        section = web.split(f'<span id="current-n{entry["n"]}"></span>', 1)[1].split(
+            '<span id="current-n', 1
+        )[0]
+        assert f'<h3 id="{old.id}">' in section
+        assert f"<var>n</var>={entry['n']}" in section
+    assert legacy[0].id == "current-polynomial-for-"
+    assert (
+        next(old.id for entry, old in zip(current, legacy, strict=True) if entry["n"] == 83)
+        == "current-polynomial-for--79"
+    )
+    historical = register["historical_entries"]
+    headings = "\n\n".join(
+        f"### Historical polynomial for $n={entry['n']}$ at side `{entry['side']}`"
+        for entry in historical
+    )
+    old = parse_markdown(
+        headings, title="legacy historical headings", trust_mode="trusted", math="auto"
+    ).headings
+    web = paper.historical_polynomials_markdown(register, web=True)
+    seen = {}
+    for entry, heading in zip(historical, old, strict=True):
+        n = entry["n"]
+        seen[n] = seen.get(n, 0) + 1
+        section = web.split(f'<span id="historical-n{n}-occurrence{seen[n]}"></span>', 1)[
+            1
+        ].split('<span id="historical-n', 1)[0]
+        assert f'<h3 id="{heading.id}">' in section
+
+
+def test_web_source_associations_remain_attached_to_every_published_record():
+    register = exact_catalogue.publication_register(paper.load_register())
+    checks = paper.checks_markdown(register)
+    missing = paper.missing_values_markdown(register)
+    for row in register["entries"]:
+        if not row.get("polynomial"):
+            assert f'id="current-n{row["n"]}"' in missing
+            assert not row.get("source_occurrences")
+            continue
+        line = next(line for line in checks.splitlines() if line.startswith(f"| {row['n']} |"))
+        for source in row.get("source_occurrences", []):
+            assert source["path"] in line
+            if source.get("url"):
+                assert source["url"] in line
+    history = paper.historical_polynomials_markdown(register, web=True)
+    seen = {}
+    for row in register["historical_entries"]:
+        n = row["n"]
+        seen[n] = seen.get(n, 0) + 1
+        section = history.split(f'<span id="historical-n{n}-occurrence{seen[n]}"></span>', 1)[
+            1
+        ].split('<span id="historical-n', 1)[0]
+        for source in row["sources"]:
+            assert source["path"] in section
+            if source.get("url"):
+                assert source["url"] in section
+        certificate = row.get("source_certificate")
+        if certificate:
+            for value in certificate.values():
+                assert escape("none" if value is None else str(value), quote=False) in section
+        for date in row["attribution"]["date_mentions"]:
+            assert date in section
+
+
+def test_native_web_mathml_and_custody_are_readable_without_javascript():
+    from tests import site_browser  # noqa: PLC0415
+
+    register = exact_catalogue.publication_register(paper.load_register())
+    selected = [row for row in register["entries"] if row["n"] in {1, 5, 83}]
+    historical = next(
+        row
+        for row in register["historical_entries"]
+        if row.get("source_certificate", {}).get("result") == "T-146"
+    )
+    fixture = deepcopy(register)
+    fixture["entries"] = selected
+    fixture["historical_entries"] = [historical]
+    html, _markdown = paper.render(
+        paper.ARTICLE.read_text(encoding="utf-8"), register=fixture, revision=REVISION
+    )
+    with site_browser.api().sync_playwright() as driver:
+        browser = site_browser.launch(driver)
+        try:
+            context = browser.new_context(
+                java_script_enabled=False, viewport={"width": 320, "height": 844}
+            )
+            page = context.new_page()
+            page.set_content(html)
+            math = page.locator(".native-polynomial-math math, .native-polynomial-math math *")
+            assert math.count() > 0
+            for element in math.element_handles():
+                assert (
+                    element.get_property("namespaceURI").json_value()
+                    == "http://www.w3.org/1998/Math/MathML"
+                )
+            assert page.get_by_role("region", name="Polynomial equation").count() > 0
+            layout = page.evaluate(WEB_LAYOUT, {"settle": False})
+            assert layout["currentPolynomials"] == 3
+            assert layout["historicalPolynomials"] == 1
+            assert layout["coefficients"] >= 673
+            assert not paper.web_findings(layout), layout["lostInk"]
+            custody = page.locator(".source-custody")
+            assert custody.locator("dt").count() == 12
+            keys = (
+                "result",
+                "source_key",
+                "revision",
+                "facts",
+                "original_certificate",
+                "receipt",
+                "verification",
+                "confirmation",
+                "algebraic_identity",
+                "geometry_replay",
+                "adoption",
+                "global_optimality",
+            )
+            assert custody.locator("dd").all_text_contents() == [
+                "none"
+                if historical["source_certificate"][key] is None
+                else str(historical["source_certificate"][key])
+                for key in keys
+            ]
+            for element in custody.locator("dt, dd").all():
+                assert element.is_visible()
+                box = element.bounding_box()
+                assert box is not None
+                assert 0 < box["width"] <= 288
+                assert box["x"] + box["width"] <= 320
+        finally:
+            browser.close()

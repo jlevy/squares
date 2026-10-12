@@ -92,7 +92,7 @@ FRONT = paper_front.check(
         has_pdf=paper_record(SLUG).has_pdf,
         title=TITLE,
         oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
-        agents=("GPT-5.6 Sol", "GPT-6 Astra"),
+        agents=("GPT-5.6 Sol", "GPT-6.1 Sol", "GPT-6 Astra"),
         version=EDITION,
         dates=(
             paper_front.Dated("First published", FIRST_PUBLISHED),
@@ -292,6 +292,8 @@ def sources_markdown(register: Mapping[str, Any]) -> str:
 
 def _exact_expression(value: object) -> str:
     source = str(value)
+    if re.fullmatch(r"[0-9]+", source):
+        return _native_math(f"<mn>{source}</mn>")
     rational = re.fullmatch(r"\\(?:t?frac)\{([+-]?\d+)\}\{(\d+)\}", source)
     if rational is None or max(map(len, rational.groups())) <= 24:
         return _math(value)
@@ -699,9 +701,13 @@ def _term_chunks(coefficients: Sequence[int]) -> tuple[str, ...]:
     chunks: list[str] = []
     current: list[str] = []
     for term in terms:
-        if current and (
-            len(current) >= TERMS_PER_DISPLAY
-            or len(" ".join((*current, term))) > DISPLAY_CHARACTER_BUDGET
+        if (
+            degree > 1
+            and current
+            and (
+                len(current) >= TERMS_PER_DISPLAY
+                or len(" ".join((*current, term))) > DISPLAY_CHARACTER_BUDGET
+            )
         ):
             chunks.append(" ".join(current))
             current = []
@@ -711,7 +717,98 @@ def _term_chunks(coefficients: Sequence[int]) -> tuple[str, ...]:
     return tuple(chunks)
 
 
-def _expanded_polynomial(name: str, coefficients: Sequence[int]) -> str:
+def _native_math(equation: str, *, display: bool = False) -> str:
+    if not display:
+        # In HTML, the math element enters the MathML namespace without an xmlns attribute.
+        return (
+            '<span class="kpress-math-semantic native-polynomial-math">'
+            f"<math>{equation}</math></span>"
+        )
+    classes = "kpress-math kpress-math-display kpress-math-semantic native-polynomial-math"
+    return (
+        f'<div class="{classes}" tabindex="0" role="region" aria-label="Polynomial equation">'
+        '<math display="block">'
+        f"{equation}</math></div>"
+    )
+
+
+def _polynomial_label_mathml(name: str) -> str:
+    matched = re.fullmatch(r"([A-Z])_\{([0-9]+(?:,[0-9]+)?)\}", name)
+    if matched is None:
+        raise ExactSideValuesPaperError(f"{name}: no generated polynomial subscript")
+    letter, indices = matched.groups()
+    subscript = "<mo>,</mo>".join(f"<mn>{value}</mn>" for value in indices.split(","))
+    if "," in indices:
+        subscript = f"<mrow>{subscript}</mrow>"
+    return f"<msub><mi>{letter}</mi>{subscript}</msub>"
+
+
+def _native_n_label(n: int, *, web: bool) -> str:
+    if not web:
+        return f"$n={n}$"
+    return f"<var>n</var>={n}"
+
+
+def _native_polynomial(name: str, coefficients: Sequence[int]) -> str:
+    """Author exact integer terms, exponents and continuation labels without a TeX copy."""
+    degree = len(coefficients) - 1
+    terms = [(value, degree - index) for index, value in enumerate(coefficients) if value]
+    groups: list[list[tuple[int, int]]] = []
+    current: list[tuple[int, int]] = []
+    text: list[str] = []
+    for index, (value, power) in enumerate(terms):
+        written = _term(value, power, first=index == 0)
+        if current and (
+            len(current) >= TERMS_PER_DISPLAY
+            or len(" ".join((*text, written))) > DISPLAY_CHARACTER_BUDGET
+        ):
+            groups.append(current)
+            current, text = [], []
+        current.append((value, power))
+        text.append(written)
+    if current:
+        groups.append(current)
+    label = _polynomial_label_mathml(name) + "<mo>(</mo><mi>s</mi><mo>)</mo><mo>=</mo>"
+    displays = []
+    first = True
+    for index, group in enumerate(groups):
+        prefix = label if index == 0 else f"<mphantom><mrow>{label}</mrow></mphantom>"
+        body = []
+        for value, power in group:
+            sign = "&#x2212;" if value < 0 else ("" if first else "+")
+            term = f"<mo>{sign}</mo>" if sign else ""
+            if abs(value) != 1 or power == 0:
+                term += f"<mn>{abs(value)}</mn>"
+            if power == 1:
+                term += "<mi>s</mi>"
+            elif power > 1:
+                term += f"<msup><mi>s</mi><mn>{power}</mn></msup>"
+            body.append(term)
+            first = False
+        suffix = "<mo>=</mo><mn>0</mn>" if index == len(groups) - 1 else ""
+        displays.append(
+            _native_math(
+                f"<mrow>{prefix}{''.join(body)}{suffix}</mrow>",
+                display=True,
+            )
+        )
+    return "\n\n".join(displays)
+
+
+def _native_polynomial_sum(name: str, degree: int) -> str:
+    label = _polynomial_label_mathml(name)
+    equation = (
+        f"{label}<mo>(</mo><mi>s</mi><mo>)</mo><mo>=</mo>"
+        "<msubsup><mo>&#x2211;</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow>"
+        f"<mn>{degree}</mn></msubsup><msub><mi>a</mi><mi>k</mi></msub>"
+        "<msup><mi>s</mi><mi>k</mi></msup><mo>=</mo><mn>0</mn><mo>.</mo>"
+    )
+    return _native_math(f"<mrow>{equation}</mrow>", display=True)
+
+
+def _expanded_polynomial(name: str, coefficients: Sequence[int], *, web: bool = False) -> str:
+    if web:
+        return _native_polynomial(name, coefficients)
     chunks = _term_chunks(coefficients)
     displays = []
     for index, chunk in enumerate(chunks):
@@ -721,40 +818,87 @@ def _expanded_polynomial(name: str, coefficients: Sequence[int]) -> str:
     return "\n\n".join(displays)
 
 
-def _coefficient_table(name: str, coefficients: Sequence[int]) -> str:
+def _coefficient_table(name: str, coefficients: Sequence[int], *, web: bool = False) -> str:
     degree = len(coefficients) - 1
     lines = [
         "The polynomial is",
         "",
-        f"$$\n{name}(s)=\\sum_{{k=0}}^{{{degree}}} a_k s^k=0.\n$$",
+        _native_polynomial_sum(name, degree)
+        if web
+        else f"$$\n{name}(s)=\\sum_{{k=0}}^{{{degree}}} a_k s^k=0.\n$$",
         "",
         (
             "The complete coefficient vector follows from the leading coefficient to the "
             "constant term."
         ),
         "",
-        "| Power $k$ | Coefficient $a_k$ |",
-        "| ---: | --- |",
     ]
-    lines.extend(
-        f"| {degree - index} | <code>{coefficient}</code> |"
-        for index, coefficient in enumerate(coefficients)
-    )
+    if web:
+        # Author this report's static table directly. Native column headers avoid
+        # redundant TeX in KPress's column labels; CSS owns power alignment.
+        power = _native_math("<mi>k</mi>")
+        coefficient = _native_math("<msub><mi>a</mi><mi>k</mi></msub>")
+        lines.extend(
+            (
+                '<div class="kpress-table-wrap">',
+                '<table class="kpress-table coefficient-table">',
+                (
+                    "<thead><tr>"
+                    f'<th scope="col">Power {power}</th>'
+                    f'<th scope="col">Coefficient {coefficient}</th>'
+                    "</tr></thead><tbody>"
+                ),
+            )
+        )
+        lines.extend(
+            f"<tr><td>{degree - index}</td><td><code>{value}</code></td></tr>"
+            for index, value in enumerate(coefficients)
+        )
+        lines.append("</tbody></table></div>")
+    else:
+        lines.extend(("| Power $k$ | Coefficient $a_k$ |", "| ---: | --- |"))
+        lines.extend(
+            f"| {degree - index} | <code>{coefficient}</code> |"
+            for index, coefficient in enumerate(coefficients)
+        )
     return "\n".join(lines)
 
 
 def polynomial_markdown(
-    name: str, polynomial: Mapping[str, Any], *, degree: int, context: str
+    name: str, polynomial: Mapping[str, Any], *, degree: int, context: str, web: bool = False
 ) -> str:
     coefficients = _coefficients(polynomial, degree=degree, context=context)
+    if web and degree == 1:
+        return _expanded_polynomial(name, coefficients, web=True)
     widest = max(len(str(abs(value))) for value in coefficients)
     if degree >= COEFFICIENT_TABLE_DEGREE or widest >= COEFFICIENT_TABLE_DIGITS:
-        return _coefficient_table(name, coefficients)
-    return _expanded_polynomial(name, coefficients)
+        return _coefficient_table(name, coefficients, web=web)
+    return _expanded_polynomial(name, coefficients, web=web)
 
 
-def current_polynomials_markdown(register: Mapping[str, Any]) -> str:
+def _legacy_heading_ids(headings: Sequence[str]) -> tuple[str, ...]:
+    """Replay only the old heading tokens, never the second full article or its mathematics."""
+    from kpress.format.markdown import parse_markdown  # noqa: PLC0415
+
+    document = parse_markdown(
+        "\n\n".join(headings), title=TITLE, trust_mode="trusted", math="auto"
+    )
+    return tuple(heading.id for heading in document.headings)
+
+
+def current_polynomials_markdown(register: Mapping[str, Any], *, web: bool = False) -> str:
     sections = []
+    legacy = (
+        _legacy_heading_ids(
+            [
+                f"### Current polynomial for $n={entry['n']}$"
+                for entry in entries(register)
+                if entry.get("polynomial") is not None
+            ]
+        )
+        if web
+        else ()
+    )
     for entry in entries(register):
         polynomial = entry.get("polynomial")
         if polynomial is None:
@@ -774,12 +918,18 @@ def current_polynomials_markdown(register: Mapping[str, Any]) -> str:
             if occurrence_labels
             else ""
         )
+        anchor = f'<span id="current-n{n}"></span>'
+        heading = (
+            f'<h3 id="{legacy[len(sections)]}">Current polynomial for <var>n</var>={n}</h3>'
+            if web
+            else f"### Current polynomial for $n={n}$"
+        )
         sections.append(
             "\n".join(
                 (
-                    f'<span id="current-n{n}"></span>',
+                    anchor,
                     "",
-                    f"### Current polynomial for $n={n}$",
+                    heading,
                     "",
                     (
                         f"Degree {degree}; source "
@@ -788,21 +938,23 @@ def current_polynomials_markdown(register: Mapping[str, Any]) -> str:
                         f"{source_line}"
                     ),
                     "",
-                    polynomial_markdown(f"P_{{{n}}}", poly, degree=degree, context=f"n={n}"),
+                    polynomial_markdown(
+                        f"P_{{{n}}}", poly, degree=degree, context=f"n={n}", web=web
+                    ),
                 )
             )
         )
     return "\n\n".join(sections) + "\n"
 
 
-def superseded_polynomials_markdown(register: Mapping[str, Any]) -> str:
+def superseded_polynomials_markdown(register: Mapping[str, Any], *, web: bool = False) -> str:
     sections = []
     for entry, note in superseded_notes(register):
         n = int(entry["n"])
         degree = int(note["degree"])
         if note.get("polynomial") is None:
             sections.append(
-                f"### Superseded polynomial for $n={n}$\n\n"
+                f"### Superseded polynomial for {_native_n_label(n, web=web)}\n\n"
                 "The register identifies this historical polynomial but does not retain its "
                 "coefficients in this revision."
             )
@@ -811,7 +963,7 @@ def superseded_polynomials_markdown(register: Mapping[str, Any]) -> str:
         sections.append(
             "\n".join(
                 (
-                    f"### Superseded polynomial for $n={n}$",
+                    f"### Superseded polynomial for {_native_n_label(n, web=web)}",
                     "",
                     _table_text(note.get("text")),
                     "",
@@ -820,6 +972,7 @@ def superseded_polynomials_markdown(register: Mapping[str, Any]) -> str:
                         polynomial,
                         degree=degree,
                         context=f"n={n} superseded",
+                        web=web,
                     ),
                 )
             )
@@ -850,12 +1003,14 @@ def _historical_kind_claim(entry: Mapping[str, Any]) -> str:
     raise ExactSideValuesPaperError(f"unknown historical kind: {kind!r}")
 
 
-def source_certificate_markdown(entry: Mapping[str, Any]) -> str:
+def source_certificate_markdown(entry: Mapping[str, Any], *, web: bool = False) -> str:
     raw = entry.get("source_certificate")
     if raw is None:
         return ""
     certificate = _as_mapping(raw, "source certificate")
     lines = ["Source-certificate custody and assurance:", ""]
+    if web:
+        lines.append('<dl class="source-custody">')
     for key, label in (
         ("result", "Result"),
         ("source_key", "Source"),
@@ -872,11 +1027,18 @@ def source_certificate_markdown(entry: Mapping[str, Any]) -> str:
     ):
         value = certificate.get(key)
         literal = "none" if value is None else escape(str(value), quote=False)
-        lines.append(f"- {label}: <code>{literal}</code>.")
+        if web:
+            lines.append(f"<dt>{label}</dt><dd>{literal}</dd>")
+        else:
+            lines.append(f"- {label}: <code>{literal}</code>.")
+    if web:
+        lines.append("</dl>")
     return "\n".join(lines)
 
 
-def historical_attribution_markdown(entry: Mapping[str, Any], *, n: int) -> str:
+def historical_attribution_markdown(
+    entry: Mapping[str, Any], *, n: int, quote_ids: Mapping[str, int] | None = None
+) -> str:
     attribution = _as_mapping(entry.get("attribution"), f"historical n={n} attribution")
     dates = _as_sequence(
         attribution.get("date_mentions"), f"historical n={n} attribution dates"
@@ -898,6 +1060,10 @@ def historical_attribution_markdown(entry: Mapping[str, Any], *, n: int) -> str:
             "</code></p></blockquote>"
         )
     for text in source_text:
+        if quote_ids is not None:
+            number = quote_ids[str(text)]
+            lines.append(f"- [Source note {number}](#source-attribution-note-{number}).")
+            continue
         cleaned = escape(str(text), quote=False).replace("\n", " ")
         lines.append(
             f'<blockquote class="source-quote"><p><code>{cleaned}</code></p></blockquote>'
@@ -905,14 +1071,54 @@ def historical_attribution_markdown(entry: Mapping[str, Any], *, n: int) -> str:
     return "\n".join(lines)
 
 
-def historical_polynomials_markdown(register: Mapping[str, Any]) -> str:
+def _source_quote_ids(historical: Sequence[Mapping[str, Any]]) -> dict[str, int]:
+    """Index identical source strings once, preserving the association at every occurrence."""
+    quotes: dict[str, int] = {}
+    for entry in historical:
+        attribution = _as_mapping(entry.get("attribution"), "historical attribution")
+        for text in _as_sequence(attribution.get("source_text"), "source attribution text"):
+            literal = str(text)
+            if literal not in quotes:
+                quotes[literal] = len(quotes) + 1
+    return quotes
+
+
+def _source_quote_appendix(quotes: Mapping[str, int]) -> str:
+    if not quotes:
+        return ""
+    sections = ["## Source attribution notes"]
+    for text, number in quotes.items():
+        literal = escape(text, quote=False)
+        sections.append(
+            f'<span id="source-attribution-note-{number}"></span>\n\n'
+            f"### Source note {number}\n\n"
+            f'<blockquote class="source-quote"><p><code>{literal}</code></p></blockquote>'
+        )
+    return "\n\n".join(sections)
+
+
+def historical_polynomials_markdown(register: Mapping[str, Any], *, web: bool = False) -> str:
     """Print every historical coefficient with attribution and source identity."""
     historical = historical_entries(register)
     if "historical_entries" not in register:
-        return superseded_polynomials_markdown(register)
+        return superseded_polynomials_markdown(register, web=web)
     if not historical:
         return "No historical polynomial-side pairs are recorded.\n"
     sections: list[str] = []
+    quote_ids = _source_quote_ids(historical) if web else None
+    legacy = (
+        _legacy_heading_ids(
+            [
+                (
+                    f"### Historical polynomial for $n={entry['n']}$ "
+                    f"at side `{_table_text(entry.get('side'))}`"
+                )
+                for entry in historical
+            ]
+        )
+        if web
+        else ()
+    )
     seen: dict[int, int] = {}
     for entry in historical:
         n = int(entry["n"])
@@ -952,12 +1158,19 @@ def historical_polynomials_markdown(register: Mapping[str, Any]) -> str:
         bead = entry.get("bead")
         bead_text = "none" if bead is None else f"`{_table_text(bead)}`"
         name = f"H_{{{n},{seen[n]}}}"
+        anchor = f'<span id="historical-n{n}-occurrence{seen[n]}"></span>'
+        heading = (
+            f'<h3 id="{legacy[len(sections)]}">Historical polynomial for '
+            f"<var>n</var>={n} at side <code>{escape(side, quote=False)}</code></h3>"
+            if web
+            else f"### Historical polynomial for $n={n}$ at side `{side}`"
+        )
         sections.append(
             "\n".join(
                 (
-                    f'<span id="historical-n{n}-occurrence{seen[n]}"></span>',
+                    anchor,
                     "",
-                    f"### Historical polynomial for $n={n}$ at side `{side}`",
+                    heading,
                     "",
                     (
                         f"Kind: `{_table_text(entry.get('kind'))}`. "
@@ -972,7 +1185,7 @@ def historical_polynomials_markdown(register: Mapping[str, Any]) -> str:
                     "",
                     *identity_lines,
                     "",
-                    source_certificate_markdown(entry),
+                    source_certificate_markdown(entry, web=web),
                     "",
                     f"Exact checks: {_historical_checks(entry)}.",
                     "",
@@ -980,17 +1193,20 @@ def historical_polynomials_markdown(register: Mapping[str, Any]) -> str:
                     "",
                     *(source_lines or ["- No retained source occurrence."]),
                     "",
-                    historical_attribution_markdown(entry, n=n),
+                    historical_attribution_markdown(entry, n=n, quote_ids=quote_ids),
                     "",
                     polynomial_markdown(
                         name,
                         polynomial,
                         degree=degree,
                         context=f"historical n={n} side={side}",
+                        web=web,
                     ),
                 )
             )
         )
+    if quote_ids is not None:
+        sections.append(_source_quote_appendix(quote_ids))
     return "\n\n".join(sections) + "\n"
 
 
@@ -1004,8 +1220,8 @@ def generated_sections(register: Mapping[str, Any], *, web: bool = False) -> dic
         "CHECK_SUMMARIES": checks_markdown(register),
         "MISSING_VALUES": missing_values_markdown(register),
         "HISTORICAL_SUMMARY": historical_summary_markdown(register),
-        "HISTORICAL_POLYNOMIALS": historical_polynomials_markdown(register),
-        "CURRENT_POLYNOMIALS": current_polynomials_markdown(register),
+        "HISTORICAL_POLYNOMIALS": historical_polynomials_markdown(register, web=web),
+        "CURRENT_POLYNOMIALS": current_polynomials_markdown(register, web=web),
     }
 
 
@@ -1449,6 +1665,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--revision", default=None, help="full Git commit for source links")
     parser.add_argument(
+        "--measure",
+        action="store_true",
+        help="report published HTML and generated-section byte usage without writing",
+    )
+    parser.add_argument(
         "--check",
         action="store_true",
         help="compare browser, complete archive, and every lazy payload",
@@ -1465,6 +1686,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--web-shots", type=Path, help="save phone and desktop report screenshots"
     )
     args = parser.parse_args(argv)
+    if args.measure and (args.check or args.check_web or args.web_report or args.web_shots):
+        parser.error("--measure only renders and measures; no check or web diagnostics")
     if args.web_shots and not args.check_web:
         parser.error("--web-shots requires --check-web")
     if args.web_report and not args.check_web:
@@ -1493,6 +1716,52 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     site = args.site.resolve()
     outputs = output_files(site, html, markdown, register=register, revision=revision)
+    if args.measure:
+        from kpress.format.markdown import parse_markdown  # noqa: PLC0415
+
+        vectors: list[list[str]] = []
+
+        def collect(value: Any) -> None:
+            if isinstance(value, dict):
+                if "coefficients" in value:
+                    vectors.append(value["coefficients"])
+                for child in value.values():
+                    collect(child)
+            elif isinstance(value, list):
+                for child in value:
+                    collect(child)
+
+        collect(register)
+        compressed = compressed_path(REGISTER)
+        report = {
+            "canonical": {
+                "records": len(entries(register)) + len(historical_entries(register)),
+                "coefficient_vectors": len(vectors),
+                "coefficient_integer_strings": sum(len(vector) for vector in vectors),
+                "coefficient_integer_string_bytes": sum(
+                    len(value.encode("utf-8")) for vector in vectors for value in vector
+                ),
+                "decoded_register_bytes": len(read_retained_text(REGISTER).encode("utf-8")),
+                "gzip_register_bytes": compressed.stat().st_size
+                if compressed.is_file()
+                else None,
+            },
+            "published_html_bytes": {
+                path.relative_to(site).as_posix(): len(content.encode("utf-8"))
+                for path, content in outputs.items()
+                if path.suffix == ".html" and isinstance(content, str)
+            },
+            "generated_section_html_bytes": {
+                name: len(
+                    parse_markdown(
+                        fragment, title=name, trust_mode="trusted", math="auto"
+                    ).html.encode("utf-8")
+                )
+                for name, fragment in generated_sections(register, web=True).items()
+            },
+        }
+        print(json.dumps(report, indent=2))
+        return 0
     extra = [path for path in _payload_files(site) if path not in outputs]
     if args.check:
         stale = [

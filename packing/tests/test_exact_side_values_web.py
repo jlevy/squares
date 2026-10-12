@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Literal
 
 import pytest
+from kpress.format.markdown import parse_markdown
 from playwright.sync_api import Page, sync_playwright
 
 from devtools import render_exact_side_values as paper
@@ -167,6 +168,61 @@ def test_web_check_refuses_lost_exact_digits_and_clipped_math(page: Page, defect
     else:
         assert any(run["hidden"] for run in layout["lostInk"])
     assert paper.web_findings(layout)
+
+
+@pytest.mark.parametrize(
+    ("state", "expected_hidden"),
+    [
+        ("pending-visible", False),
+        ("revealed-visible", False),
+        ("pending-fallback-hidden", True),
+        ("revealed-visual-hidden", True),
+        ("authored-native-visible", False),
+        ("authored-native-hidden", True),
+        ("browser-native-hidden", True),
+    ],
+)
+def test_web_probe_selects_the_active_math_tree_and_refuses_hidden_source(
+    page: Page, state: str, *, expected_hidden: bool
+) -> None:
+    # KPress constructs KaTeX before its rendered marker reveals the visual tree.
+    # Its semantic MathML is visible before that marker, then retained for accessibility.
+    body = parse_markdown("$x$", title="active math control", trust_mode="trusted").html
+    body = body.replace(
+        r"\(x\)", '<span class="katex-html"><span class="mathnormal">x</span></span>', 1
+    )
+    style = ""
+    if state.startswith("revealed"):
+        body = body.replace(
+            'data-kpress-math="inline"',
+            'data-kpress-math="inline" data-kpress-math-rendered="true"',
+            1,
+        )
+    if state == "revealed-visual-hidden":
+        style = ".kpress-math-render {visibility:hidden;}"
+    elif state == "pending-fallback-hidden":
+        style = ".kpress-math-semantic {visibility:hidden;}"
+    elif state.startswith("authored-native"):
+        body = (
+            '<span class="kpress-math-semantic native-polynomial-math">'
+            "<math><mi>x</mi></math></span>"
+        )
+        if state.endswith("hidden"):
+            style = ".native-polynomial-math {visibility:hidden;}"
+    elif state == "browser-native-hidden":
+        body = '<div id="entry-equation"><math><mi>x</mi></math></div>'
+        style = "#entry-equation {visibility:hidden;}"
+    components = (
+        paper.REPO / "vendor/kpress/src/kpress/format/static/css/components.css"
+    ).read_text(encoding="utf-8")
+    page.set_content(f'<style>{components}{style}</style><main class="kpress">{body}</main>')
+    layout = page.evaluate(WEB_LAYOUT, {"settle": False})
+    # Both representations contain x. Exactly one tree must be checked in each state.
+    assert layout["checkedInk"] == 2
+    assert layout["lostInkCount"] == (2 if expected_hidden else 0)
+    assert bool(paper.web_findings(layout)) is expected_hidden
+    if expected_hidden:
+        assert all(run["hidden"] for run in layout["lostInk"])
 
 
 def test_historical_native_equation_keeps_its_source_identity(page: Page) -> None:

@@ -2340,19 +2340,29 @@ def test_the_eight_displaced_current_exact_sides_remain_in_history() -> None:
 
 def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier() -> None:
     rows = _register()["register"]["historical_entries"]
-    assert len(rows) == 214
+    assert len(rows) == 279
     assert sum(row["kind"] == "superseded" for row in rows) == 186
     unreconciled = [row for row in rows if row["kind"] == "unreconciled-source"]
-    assert len(unreconciled) == 18
+    assert len(unreconciled) == 83
     reported = [row for row in unreconciled if "reported_source" in row]
     assert {row["n"] for row in reported} == {106, 152, 177}
     native = [row for row in unreconciled if "source_certificate" in row]
-    assert len(native) == 15
+    assert len(native) == 80
     assert len(reported) + len(native) == len(unreconciled)
     assert {(row["source_certificate"]["result"], row["n"]) for row in native} == {
         *(("T-128", n) for n in (105, 108, 127, 131, 155, 180, 228, 306)),
         *(("T-130", n) for n in (84, 86, 105, 175, 270)),
         ("T-131", 132),
+        *(
+            (result["id"], n)
+            for result in load_yaml(
+                (exact.FRONTIER / "results.yaml").read_text(encoding="utf-8")
+            )["results"]
+            if result["id"]
+            in {"T-134", "T-135", "T-136", "T-137", "T-138", "T-139", "T-140", "T-141", "T-146"}
+            for n in result["scope"]["n_values"]
+            if n <= 324
+        ),
     }
     for row in unreconciled:
         current = _entries()[row["n"]]
@@ -2364,14 +2374,20 @@ def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier()
             assert row["assurance"]["lean_replay"] == "not-attempted"
         else:
             assert row["algebraic_source"] == "derived-from-source-closed-form"
-            assert row["source_certificate"]["verification"] == "V0"
-            assert row["source_certificate"]["confirmation"] == "C0"
+            assert row["source_certificate"]["verification"] == "V3"
+            assert row["source_certificate"]["confirmation"] == "C3"
             assert row["source_certificate"]["geometry_replay"] == "native-replay-retained"
             assert row["source_certificate"]["adoption"] == "pending"
         assert Fraction(row["checks"]["root"]["interval"][1]) < Fraction(
             current["checks"]["root"]["interval"][0]
         )
-        assert current["state"] == "rational"
+        assert current["state"] in {"integer", "rational", "closed-form", "minimal-polynomial"}
+        if "reported_source" in row or row["source_certificate"]["result"] in {
+            "T-128",
+            "T-130",
+            "T-131",
+        }:
+            assert current["state"] == "rational"
         assert current["side"]["relation"] == "upper-bound"
         assert row["polynomial"]["coefficients"] != current["polynomial"]["coefficients"]
     source266 = exact.catalogue_entries()[266]
