@@ -192,6 +192,16 @@ GRID = 10**9
 #: >= 1 of the density scaled by 1/tau (GC-4).
 CRATE_SCALE = Fraction(5000, 4999)
 
+#: The release's compiler flags for the pose kernel, and for the axis kernel in this
+#: release; a later release builds the axis kernel with the pose kernel's flags
+#: (`Release.axis_flags`).
+FLAGS = ("-O3", "-std=c++17", "-fno-fast-math", "-ffp-contract=off")
+AXIS_FLAGS = ("-O2", "-std=c++17")
+KERNEL_SOURCES = {
+    "pose": "verifier/continuous_pose.cpp",
+    "axis": "verifier/axis_integer_grid.cpp",
+}
+
 
 @dataclass(frozen=True)
 class Release:
@@ -221,6 +231,8 @@ class Release:
     results: tuple[str, ...]
     #: Whether the pose input writes ``B`` as a hexadecimal pair rather than a decimal one.
     hex_b: bool = False
+    #: The flags the release's runner builds the axis kernel with.
+    axis_flags: tuple[str, ...] = AXIS_FLAGS
 
     @property
     def source(self) -> Path:
@@ -883,12 +895,6 @@ def manifest(path: Path = MANIFEST) -> dict[str, str]:
     return out
 
 
-FLAGS = ("-O3", "-std=c++17", "-fno-fast-math", "-ffp-contract=off")
-AXIS_FLAGS = ("-O2", "-std=c++17")
-KERNEL_SOURCES = {
-    "pose": "verifier/continuous_pose.cpp",
-    "axis": "verifier/axis_integer_grid.cpp",
-}
 TIMING = frozenset({"seconds"})
 
 
@@ -1283,10 +1289,12 @@ class Layout:
 #: The builds, each from the tree's directory with relative source paths, as the
 #: release's runner does: ``__FILE__`` in an assertion is the path given, so a build
 #: from another directory gives another pose binary (item 6 of the review).
-def build_commands(layout: Layout) -> dict[str, list[str]]:
+def build_commands(layout: Layout, release: Release = RELEASE) -> dict[str, list[str]]:
+    axis = ["g++", *release.axis_flags, KERNEL_SOURCES["axis"], "-o"]
+    axis.append(str(layout.binary("axis")))
     return {
         "pose": ["g++", *FLAGS, KERNEL_SOURCES["pose"], "-o", str(layout.binary("pose"))],
-        "axis": ["g++", *AXIS_FLAGS, KERNEL_SOURCES["axis"], "-o", str(layout.binary("axis"))],
+        "axis": axis,
         "rounding": [
             "g++",
             *FLAGS,
@@ -1327,13 +1335,13 @@ def reject_commands(layout: Layout) -> dict[str, list[str]]:
 BUILD_FILES = (*KERNEL_SOURCES.values(), "tests/rounding_harness.cpp")
 
 
-def build_all(layout: Layout) -> dict[str, Any]:
-    """Copy the retained kernel sources into a scratch tree and build there."""
-    digests = manifest()
+def build_all(layout: Layout, release: Release = RELEASE) -> dict[str, Any]:
+    """Copy the release's retained kernel sources into a scratch tree and build there."""
+    digests = manifest(release.manifest_path)
     for path in BUILD_FILES:
         target = layout.tree / path
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(SOURCE / path, target)
+        shutil.copyfile(release.source / path, target)
     layout.build.mkdir(parents=True, exist_ok=True)
     layout.logs.mkdir(parents=True, exist_ok=True)
     version = subprocess.run(
@@ -1343,7 +1351,7 @@ def build_all(layout: Layout) -> dict[str, Any]:
         ["g++", "-dumpfullversion"], capture_output=True, text=True, check=True
     ).stdout.strip()
     builds: dict[str, Any] = {}
-    for name, argv in build_commands(layout).items():
+    for name, argv in build_commands(layout, release).items():
         record = spawn(argv, layout.tree, layout.logs / f"build-{name}")
         binary = layout.binary(name)
         record["binary_sha256"] = sha256(binary.read_bytes()) if binary.exists() else None
@@ -1358,10 +1366,12 @@ def build_all(layout: Layout) -> dict[str, Any]:
     }
 
 
-def write_inputs(layout: Layout, density: Density) -> dict[str, str]:
+def write_inputs(
+    layout: Layout, density: Density, release: Release = RELEASE
+) -> dict[str, str]:
     layout.pose.mkdir(parents=True, exist_ok=True)
-    pose = pose_input(density)
-    axis = axis_input(axis_rows(density))
+    pose = pose_input(density, release.claim, release)
+    axis = axis_input(axis_rows(density), release.claim)
     (layout.pose / "certificate_input.txt").write_bytes(pose)
     (layout.out / "axis-input.txt").write_bytes(axis)
     return {"pose": sha256(pose), "axis": sha256(axis)}
@@ -1392,29 +1402,50 @@ def run_axis(layout: Layout, inputs: dict[str, str]) -> dict[str, Any]:
     }
 
 
-def run_slabs(layout: Layout, inputs: dict[str, str], workers: int) -> list[dict[str, Any]]:
+def run_slabs(
+    layout: Layout, inputs: dict[str, str], workers: int, claim: Claim = CLAIM
+) -> list[dict[str, Any]]:
     """The 43 slabs, each ``continuous PL PH 1000000 4999 5000 30000000`` in the
-    directory holding the pose input, on at most ``workers`` processes."""
+    directory holding the pose input, on at most ``workers`` processes.
+
+    Each slab's row is written to ``out/slab-rows/`` as it finishes, and a row already
+    there from an earlier run in the same directory is kept, with its own timing, when it
+    names this binary, this input and these arguments, so that a run stopped from
+    outside loses only the slabs in flight."""
     binary = layout.binary("pose")
     binary_sha = sha256(binary.read_bytes())
+    rows_dir = layout.out / "slab-rows"
+    rows_dir.mkdir(parents=True, exist_ok=True)
 
     def one(item: tuple[int, tuple[int, int]]) -> dict[str, Any]:
         index, (lo, hi) = item
-        args = slab_args(lo, hi)
+        args = slab_args(lo, hi, claim)
+        path = rows_dir / f"slab-{index:03d}.json"
+        if path.is_file():
+            kept: dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
+            if (kept.get("binary_sha256"), kept.get("input_sha256"), kept.get("argv")) == (
+                binary_sha,
+                inputs["pose"],
+                ["continuous", *args],
+            ):
+                print(f"slab {index}: kept from an earlier run, exit {kept['exit_code']}")
+                return kept
         record = spawn([str(binary), *args], layout.pose, layout.logs / f"slab-{index:03d}")
         print(
             f"slab {index}: exit {record['exit_code']}, {record['wall_seconds']} s", flush=True
         )
-        return {
+        row = {
             "index": index,
             "argv": ["continuous", *args],
             "binary_sha256": binary_sha,
             "input_sha256": inputs["pose"],
             **record,
         }
+        write_json(path, row)
+        return row
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        return list(pool.map(one, enumerate(CLAIM.slabs())))
+        return list(pool.map(one, enumerate(claim.slabs())))
 
 
 # --------------------------------------------------------------------------- kernel controls
@@ -1423,9 +1454,12 @@ def run_slabs(layout: Layout, inputs: dict[str, str], workers: int) -> list[dict
 type Rect = tuple[Fraction, Fraction, Fraction, Fraction, Fraction]
 
 
-def synthetic_input(rects: Sequence[Rect], claim: Claim = CLAIM) -> bytes:
+def synthetic_input(
+    rects: Sequence[Rect], claim: Claim = CLAIM, release: Release = RELEASE
+) -> bytes:
     """A pose-kernel input for a synthetic density, in the release's format."""
-    lines = [hex_pair(claim.L), decimal_pair(claim.B), str(len(rects))]
+    side = hex_pair(claim.B) if release.hex_b else decimal_pair(claim.B)
+    lines = [hex_pair(claim.L), side, str(len(rects))]
     lines += [" ".join(hex_pair(v) for v in rect) for rect in rects]
     return ("\n".join(lines) + "\n").encode()
 
@@ -1592,10 +1626,17 @@ AXIS_CONTROLS = (
 )
 
 
-def run_controls(layout: Layout, density: Density, workers: int) -> list[dict[str, Any]]:
+def run_controls(
+    layout: Layout,
+    density: Density,
+    workers: int,
+    release: Release = RELEASE,
+    axis_controls: Sequence[tuple[str, Fraction]] = AXIS_CONTROLS,
+) -> list[dict[str, Any]]:
     """Controls A to F and H: the pose kernel on synthetic densities and a short budget,
     the rounding harness, the two compilations the kernel refuses, and the axis kernel
     at other thresholds."""
+    claim = release.claim
     controls_dir = layout.out / "controls"
     controls_dir.mkdir(parents=True, exist_ok=True)
     pose = layout.binary("pose")
@@ -1607,13 +1648,14 @@ def run_controls(layout: Layout, density: Density, workers: int) -> list[dict[st
         else:
             cwd = controls_dir / control.name
             cwd.mkdir(parents=True, exist_ok=True)
-            (cwd / "certificate_input.txt").write_bytes(synthetic_input(control.rects))
+            data = synthetic_input(control.rects, claim, release)
+            (cwd / "certificate_input.txt").write_bytes(data)
         args = [
             str(control.slab[0]),
             str(control.slab[1]),
-            str(CLAIM.den),
-            "4999",
-            "5000",
+            str(claim.den),
+            str(claim.tau.numerator),
+            str(claim.tau.denominator),
             str(control.budget),
         ]
         record = spawn([str(pose), *args], cwd, layout.logs / f"control-{control.name}")
@@ -1630,7 +1672,7 @@ def run_controls(layout: Layout, density: Density, workers: int) -> list[dict[st
         }
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        records += list(pool.map(one, kernel_controls()))
+        records += list(pool.map(one, kernel_controls(claim)))
     rounding = layout.binary("rounding")
     for name, argv, expect in (
         ("F-ieee-neighbors", [str(rounding)], 0),
@@ -1659,9 +1701,9 @@ def run_controls(layout: Layout, density: Density, workers: int) -> list[dict[st
             }
         )
     rows = axis_rows(density)
-    for name, tau in AXIS_CONTROLS:
+    for name, tau in axis_controls:
         path = layout.out / f"axis-input-{name}.txt"
-        data = axis_input(rows, tau=tau)
+        data = axis_input(rows, claim, tau=tau)
         path.write_bytes(data)
         record = spawn(
             [str(layout.binary("axis")), path.name], layout.out, layout.logs / f"control-{name}"
@@ -1688,7 +1730,9 @@ CRATE_RUNS = (
 )
 
 
-def run_crate(layout: Layout, density: Density, binary: Path) -> dict[str, Any]:
+def run_crate(
+    layout: Layout, density: Density, binary: Path, claim: Claim = CLAIM
+) -> dict[str, Any]:
     """The contract's first-party runs: the axis at side ``A`` (item 3) and the
     401-direction necessary condition at side ``B`` (item 6), threshold one on the
     scaled density. Refuses unless the tree's crate source is one a soundness review
@@ -1699,7 +1743,7 @@ def run_crate(layout: Layout, density: Density, binary: Path) -> dict[str, Any]:
         raise SystemExit(f"{source} is not reviewed source for a declared net")
     crate = layout.out / "crate"
     crate.mkdir(parents=True, exist_ok=True)
-    inputs = crate_inputs(density)
+    inputs = crate_inputs(density, claim)
     runs: dict[str, Any] = {}
     for stem, name, directions, threads in CRATE_RUNS:
         (crate / f"{name}.json").write_bytes(inputs[name])
@@ -1739,11 +1783,17 @@ def run_crate(layout: Layout, density: Density, binary: Path) -> dict[str, Any]:
 
 
 #: Control G as the contract states it, on the release's own finite code: ``exact.py``'s
-#: ``scalar()`` on a copy whose axis side is the mutant, beside the unchanged copy.
-RELEASE_G: tuple[tuple[str, tuple[str, str] | None], ...] = (
-    ("G-release-unchanged", None),
-    ("G-release-axis-side", ("'axis_side':'997643/1000000'", "'axis_side':'997644/1000000'")),
-)
+#: ``scalar()`` on a copy whose axis side is the mutant, beside the unchanged copy. The
+#: change is the one line of ``exact.py`` that sets the axis side, and its mutant.
+RELEASE_G_CHANGE = ("'axis_side':'997643/1000000'", "'axis_side':'997644/1000000'")
+
+
+def release_g_runs(
+    change: tuple[str, str] = RELEASE_G_CHANGE,
+) -> tuple[tuple[str, tuple[str, str] | None], ...]:
+    return (("G-release-unchanged", None), ("G-release-axis-side", change))
+
+
 #: Runs one copy's ``scalar()`` and prints its block, or the tag it refused with.
 SCALAR_DRIVER = """\
 import json, runpy, sys
@@ -1756,15 +1806,17 @@ except ValueError as error:
 """
 
 
-def run_release_g(layout: Layout) -> dict[str, Any]:
+def run_release_g(
+    layout: Layout, release: Release = RELEASE, mutant: tuple[str, str] = RELEASE_G_CHANGE
+) -> dict[str, Any]:
     """The release's ``scalar()`` on the unchanged and the mutated copy of its
     ``exact.py``, each copied into scratch and run there under ``python -I``, so that
     neither the source directory nor the working directory is on the import path."""
     folder = layout.out / "release"
     folder.mkdir(parents=True, exist_ok=True)
-    original = (SOURCE / "verifier/exact.py").read_text(encoding="utf-8")
+    original = (release.source / "verifier/exact.py").read_text(encoding="utf-8")
     runs: dict[str, Any] = {}
-    for name, change in RELEASE_G:
+    for name, change in release_g_runs(mutant):
         if change is not None and original.count(change[0]) != 1:
             raise SystemExit(f"{name}: the release's exact.py does not set the axis side once")
         body = original if change is None else original.replace(*change)
@@ -1780,7 +1832,7 @@ def run_release_g(layout: Layout) -> dict[str, Any]:
         }
     return {
         "kind": "continuous-pose-replay-release-g/v1",
-        "exact_py_sha256": manifest()["verifier/exact.py"],
+        "exact_py_sha256": manifest(release.manifest_path)["verifier/exact.py"],
         "driver_sha256": sha256(SCALAR_DRIVER.encode()),
         "python": sys.version.split()[0],
         "runs": runs,
@@ -1799,17 +1851,77 @@ def write_json(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, indent=1, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def run_replay(out: Path, workers: int, stages: Sequence[str], crate: Path | None) -> None:
+#: What the contract states for the complete run, from the release's receipts: the slab
+#: totals and the least leaf bound, the axis minimum (which decides which thresholds of
+#: control H refuse), and the crate's two decisions as the review reproduced them.
+EXPECT: dict[str, Any] = {
+    "nodes": 61_860_927,
+    "leaves": 30_930_485,
+    "angle_splits": 14_096_668,
+    "least_bound": Fraction(2251349454150741, 2**51),
+    "least_bound_slab": 1,
+    "axis_minimum": Fraction(999803584931237207459144828, GRID**3),
+    "crate_axis_vertices": 4_897_369,
+    "crate_axis_bound": 1.0000037044548487,
+    "crate_net_nodes": 32_763_798,
+    "crate_net_bound": 1.000000000357051,
+    "crate_net_bound_r": 289,
+}
+
+
+@dataclass(frozen=True)
+class Replay:
+    """What one release's replay runs and what its judgement expects, beyond `Release`:
+    the density it decides, the axis kernel's thresholds for control H, the one line of
+    its ``exact.py`` that control G mutates, the contract's totals (`EXPECT`'s keys), and
+    the counts the crate's premises must state.
+
+    `REPLAY` is this release's; `devtools.audit_n40_new_supports` replays a later release
+    of the same kernels through the same runner and judge with its own."""
+
+    release: Release
+    density: Callable[[], Density]
+    axis_controls: tuple[tuple[str, Fraction], ...]
+    release_g: tuple[str, str]
+    expect: dict[str, Any]
+    crate_rows: int
+    crate_expanded: int
+
+    @property
+    def claim(self) -> Claim:
+        return self.release.claim
+
+
+REPLAY = Replay(
+    release=RELEASE,
+    density=load_density,
+    axis_controls=AXIS_CONTROLS,
+    release_g=RELEASE_G_CHANGE,
+    expect=EXPECT,
+    crate_rows=480,
+    crate_expanded=3792,
+)
+
+
+def run_replay(
+    out: Path,
+    workers: int,
+    stages: Sequence[str],
+    crate: Path | None,
+    replay: Replay | None = None,
+) -> None:
     """The contract's runs, receipts into ``out/receipts``. Each stage writes its own
     receipt, so a stage can be run again alone after ``builds``."""
+    replay = REPLAY if replay is None else replay
+    release = replay.release
     layout = Layout(out)
     layout.receipts.mkdir(parents=True, exist_ok=True)
     layout.logs.mkdir(parents=True, exist_ok=True)
-    density = load_density()
-    inputs = write_inputs(layout, density)
+    density = replay.density()
+    inputs = write_inputs(layout, density, release)
     print(f"inputs: pose {inputs['pose']}, axis {inputs['axis']}", flush=True)
     if "builds" in stages:
-        builds = build_all(layout)
+        builds = build_all(layout, release)
         write_json(layout.receipts / "builds.json", builds)
         for name, item in builds["builds"].items():
             print(
@@ -1819,36 +1931,23 @@ def run_replay(out: Path, workers: int, stages: Sequence[str], crate: Path | Non
         write_json(layout.receipts / "axis-run.json", run_axis(layout, inputs))
     if "slabs" in stages:
         start = time.monotonic()
-        rows = run_slabs(layout, inputs, workers)
+        rows = run_slabs(layout, inputs, workers, release.claim)
         (layout.receipts / "slabs.jsonl.gz").write_bytes(pack_jsonl(rows))
         print(f"slabs: {round(time.monotonic() - start, 1)} s wall", flush=True)
     if "controls" in stages:
-        records = run_controls(layout, density, workers)
+        records = run_controls(layout, density, workers, release, replay.axis_controls)
         (layout.receipts / "controls.jsonl.gz").write_bytes(pack_jsonl(records))
     if "crate" in stages:
         if crate is None:
             raise SystemExit("--crate-binary is required for the crate stage")
-        write_json(layout.receipts / "crate-runs.json", run_crate(layout, density, crate))
+        record = run_crate(layout, density, crate, release.claim)
+        write_json(layout.receipts / "crate-runs.json", record)
     if "release-g" in stages:
-        write_json(layout.receipts / "control-G-release.json", run_release_g(layout))
+        record = run_release_g(layout, release, replay.release_g)
+        write_json(layout.receipts / "control-G-release.json", record)
 
 
 # --------------------------------------------------------------------------- judging it
-
-
-#: What the contract states for the complete run, from the release's receipts.
-EXPECT = {
-    "nodes": 61_860_927,
-    "leaves": 30_930_485,
-    "angle_splits": 14_096_668,
-    "least_bound": Fraction(2251349454150741, 2**51),
-    "least_bound_slab": 1,
-    "crate_axis_vertices": 4_897_369,
-    "crate_axis_bound": 1.0000037044548487,
-    "crate_net_nodes": 32_763_798,
-    "crate_net_bound": 1.000000000357051,
-    "crate_net_bound_r": 289,
-}
 
 
 def jsonl_rows(path: Path) -> list[dict[str, Any]]:
@@ -1864,30 +1963,32 @@ def retained_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def build_checks(builds: dict[str, Any]) -> list[Check]:
+def build_checks(builds: dict[str, Any], release: Release = RELEASE) -> list[Check]:
     items = builds["builds"]
     on_ci_compiler = builds["compiler"] == CI_COMPILER
+    flags = len(release.axis_flags)
     return [
         Check(
             "builds: the release's flags, exit 0",
             all(items[name]["exit_code"] == 0 for name in ("pose", "axis", "rounding"))
             and items["pose"]["argv"][1:5] == list(FLAGS)
-            and items["axis"]["argv"][1:3] == list(AXIS_FLAGS),
+            and items["axis"]["argv"][1 : 1 + flags] == list(release.axis_flags)
+            and items["axis"]["argv"][1 + flags] == KERNEL_SOURCES["axis"],
             builds["compiler"],
         ),
         Check(
             "builds: the CI run's binaries, on its compiler",
             not on_ci_compiler
             or (
-                items["pose"]["binary_sha256"] == CI_BINARIES["pose"]
-                and items["axis"]["binary_sha256"] == CI_BINARIES["axis"]
+                items["pose"]["binary_sha256"] == release.ci_binaries["pose"]
+                and items["axis"]["binary_sha256"] == release.ci_binaries["axis"]
             ),
             f"pose {items['pose']['binary_sha256']}, axis {items['axis']['binary_sha256']}",
         ),
     ]
 
 
-def axis_run_checks(record: dict[str, Any]) -> list[Check]:
+def axis_run_checks(record: dict[str, Any], release: Release = RELEASE) -> list[Check]:
     ours = json.loads(record["stdout"])
     checks = [
         Check(
@@ -1896,7 +1997,7 @@ def axis_run_checks(record: dict[str, Any]) -> list[Check]:
             f"{ours.get('status')}, {record['wall_seconds']} s",
         )
     ]
-    for name, folder in RECEIPTS.items():
+    for name, folder in release.receipts.items():
         theirs = parse_axis_stdout(read_receipt(folder, "axis.json"))
         checks.append(
             Check(
@@ -1908,18 +2009,23 @@ def axis_run_checks(record: dict[str, Any]) -> list[Check]:
     return checks
 
 
-def slab_replay_checks(rows: list[dict[str, Any]]) -> list[Check]:
+def slab_replay_checks(
+    rows: list[dict[str, Any]],
+    release: Release = RELEASE,
+    expect: dict[str, Any] = EXPECT,
+) -> list[Check]:
+    claim = release.claim
     outputs = [json.loads(row["stdout"]) for row in rows]
-    order = [row["index"] for row in rows] == list(range(len(CLAIM.slabs())))
+    order = [row["index"] for row in rows] == list(range(len(claim.slabs())))
     argv = all(
-        row["argv"] == ["continuous", *slab_args(lo, hi)]
-        for row, (lo, hi) in zip(rows, CLAIM.slabs(), strict=False)
+        row["argv"] == ["continuous", *slab_args(lo, hi, claim)]
+        for row, (lo, hi) in zip(rows, claim.slabs(), strict=False)
     )
     least = min((Fraction(z["lower_bound"]), i) for i, z in enumerate(outputs))
     checks = [
         Check(
             "slabs: 43 runs with the contract's arguments",
-            order and argv,
+            order and argv and len(rows) == len(claim.slabs()),
             f"{len(rows)} runs",
         ),
         Check(
@@ -1935,20 +2041,20 @@ def slab_replay_checks(rows: list[dict[str, Any]]) -> list[Check]:
         ),
         Check(
             "slabs: the totals",
-            sum(int(z["nodes"]) for z in outputs) == EXPECT["nodes"]
-            and sum(int(z["leaves"]) for z in outputs) == EXPECT["leaves"]
-            and sum(int(z["angle_splits"]) for z in outputs) == EXPECT["angle_splits"],
+            sum(int(z["nodes"]) for z in outputs) == expect["nodes"]
+            and sum(int(z["leaves"]) for z in outputs) == expect["leaves"]
+            and sum(int(z["angle_splits"]) for z in outputs) == expect["angle_splits"],
             f"{sum(int(z['nodes']) for z in outputs)} nodes, "
             f"{sum(int(z['leaves']) for z in outputs)} leaves, "
             f"{sum(int(z['angle_splits']) for z in outputs)} angle splits",
         ),
         Check(
             "slabs: the least leaf bound",
-            least == (EXPECT["least_bound"], EXPECT["least_bound_slab"]),
+            least == (expect["least_bound"], expect["least_bound_slab"]),
             f"{text(least[0])} = {float(least[0])!r} at slab {least[1]}",
         ),
     ]
-    for name, folder in RECEIPTS.items():
+    for name, folder in release.receipts.items():
         theirs = [slab_output(row) for row in read_slabs(folder)]
         same = sum(
             without(a, TIMING) == without(b, TIMING)
@@ -1964,11 +2070,16 @@ def slab_replay_checks(rows: list[dict[str, Any]]) -> list[Check]:
     return checks
 
 
-def control_checks(records: list[dict[str, Any]]) -> list[Check]:
+def control_checks(
+    records: list[dict[str, Any]],
+    release: Release = RELEASE,
+    axis_controls: Sequence[tuple[str, Fraction]] = AXIS_CONTROLS,
+    expect: dict[str, Any] = EXPECT,
+) -> list[Check]:
     """Each control's exit, and what the contract says it must show."""
     by_name = {record["control"]: record for record in records}
     checks: list[Check] = []
-    for control in kernel_controls():
+    for control in kernel_controls(release.claim):
         record = by_name.get(control.name)
         if record is None:
             checks.append(Check(f"control {control.name}", held=False, detail="not run"))
@@ -1989,7 +2100,7 @@ def control_checks(records: list[dict[str, Any]]) -> list[Check]:
                 f"exit {record['exit_code']}, {out.get('status')}, {nodes} nodes{least}",
             )
         )
-    for name, expect, needle in (
+    for name, code, needle in (
         ("F-ieee-neighbors", 0, '"status":"PASSED","values":1000008'),
         ("F-wrong-rounding", -6, "fegetround()==FE_TONEAREST"),
         ("F-ftz", -6, "_mm_getcsr()"),
@@ -2000,12 +2111,12 @@ def control_checks(records: list[dict[str, Any]]) -> list[Check]:
         checks.append(
             Check(
                 f"control {name}",
-                record["exit_code"] == expect and needle in record["stdout"] + record["stderr"],
+                record["exit_code"] == code and needle in record["stdout"] + record["stderr"],
                 f"exit {record['exit_code']}",
             )
         )
-    minimum = Fraction(999803584931237207459144828, GRID**3)
-    for name, tau in AXIS_CONTROLS:
+    minimum: Fraction = expect["axis_minimum"]
+    for name, tau in axis_controls:
         record = by_name.get(name, {"exit_code": None, "stdout": ""})
         out = json.loads(record["stdout"]) if record["stdout"].strip() else {}
         refused = tau > minimum
@@ -2049,7 +2160,10 @@ def crate_premises(
     )
 
 
-def crate_checks(record: dict[str, Any]) -> list[Check]:
+def crate_checks(record: dict[str, Any], replay: Replay | None = None) -> list[Check]:
+    replay = REPLAY if replay is None else replay
+    claim, expect = replay.claim, replay.expect
+    counts = {"rows": replay.crate_rows, "expanded": replay.crate_expanded, "mass": claim.mass}
     runs = record["runs"]
     axis_rows_ = [
         json.loads(line) for line in runs["crate-axis-A"]["stdout"].splitlines() if line
@@ -2080,31 +2194,31 @@ def crate_checks(record: dict[str, Any]) -> list[Check]:
         Check(
             "crate: the axis at side A by the exact vertex sweep",
             runs["crate-axis-A"]["exit_code"] == 0
-            and crate_premises(axis_summary, CLAIM.A, Fraction(83, 40000), 201)
+            and crate_premises(axis_summary, claim.A, Fraction(83, 40000), 201, **counts)
             and axis_row.get("verdict") == "verified"
             and axis_row.get("method") == "axis-vertex-sweep"
-            and axis_row.get("vertices") == EXPECT["crate_axis_vertices"]
-            and axis_row.get("min_certified_lower_bound") == EXPECT["crate_axis_bound"],
+            and axis_row.get("vertices") == expect["crate_axis_vertices"]
+            and axis_row.get("min_certified_lower_bound") == expect["crate_axis_bound"],
             f"{axis_row.get('verdict')}, {axis_row.get('vertices')} vertices, least "
             f"{axis_row.get('min_certified_lower_bound')!r} at {axis_row.get('argmin')}",
         ),
         Check(
             "crate: the 401-direction necessary condition at side B",
             runs["crate-net401-B"]["exit_code"] == 0
-            and crate_premises(summary, CLAIM.B, Fraction(83, 80000), 401)
+            and crate_premises(summary, claim.B, Fraction(83, 80000), 401, **counts)
             and [int(row["r"]) for row in rows] == list(range(401))
             and all(row["verdict"] == "verified" for row in rows)
             and summary.get("status") == "VERIFIED"
             and summary.get("refused_directions") == []
-            and summary.get("nodes") == EXPECT["crate_net_nodes"]
-            and (least, least_r) == (EXPECT["crate_net_bound"], EXPECT["crate_net_bound_r"]),
+            and summary.get("nodes") == expect["crate_net_nodes"]
+            and (least, least_r) == (expect["crate_net_bound"], expect["crate_net_bound_r"]),
             f"{summary.get('status')}, {len(rows)} directions, {summary.get('nodes')} boxes, "
             f"least {least!r} at r = {least_r}",
         ),
     ]
 
 
-def release_g_checks(record: dict[str, Any]) -> list[Check]:
+def release_g_checks(record: dict[str, Any], claim: Claim = CLAIM) -> list[Check]:
     """Control G on the release's own ``scalar()``: the unchanged copy returns the
     receipts' scalar block, and the mutant is refused at the near-axis containment."""
     runs = record["runs"]
@@ -2114,7 +2228,7 @@ def release_g_checks(record: dict[str, Any]) -> list[Check]:
     return [
         Check(
             "control G-release-unchanged: exact.py's scalar block is the receipts'",
-            unchanged["exit_code"] == 0 and told.get("scalar") == scalar_block(CLAIM),
+            unchanged["exit_code"] == 0 and told.get("scalar") == scalar_block(claim),
             f"exit {unchanged['exit_code']}",
         ),
         Check(
@@ -2125,19 +2239,23 @@ def release_g_checks(record: dict[str, Any]) -> list[Check]:
     ]
 
 
-def replay_report(folder: Path) -> dict[str, Any]:
+def replay_report(folder: Path, replay: Replay | None = None) -> dict[str, Any]:
+    """The replay's receipts in ``folder`` judged against the contract and both release
+    receipts, for `REPLAY` unless another release's `Replay` is given."""
+    replay = REPLAY if replay is None else replay
+    release = replay.release
     builds = retained_json(folder / "builds.json")
     axis = retained_json(folder / "axis-run.json")
     slabs = jsonl_rows(folder / "slabs.jsonl")
     controls = jsonl_rows(folder / "controls.jsonl")
     crate = retained_json(folder / "crate-runs.json")
     checks = (
-        build_checks(builds)
-        + axis_run_checks(axis)
-        + slab_replay_checks(slabs)
-        + control_checks(controls)
-        + release_g_checks(retained_json(folder / "control-G-release.json"))
-        + crate_checks(crate)
+        build_checks(builds, release)
+        + axis_run_checks(axis, release)
+        + slab_replay_checks(slabs, release, replay.expect)
+        + control_checks(controls, release, replay.axis_controls, replay.expect)
+        + release_g_checks(retained_json(folder / "control-G-release.json"), release.claim)
+        + crate_checks(crate, replay)
     )
     starts = [datetime.fromisoformat(row["started_utc"]) for row in slabs]
     ends = [

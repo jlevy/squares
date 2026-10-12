@@ -97,11 +97,13 @@ from devtools.audit_continuous_pose import (
     FLAGS,
     GRID,
     KERNEL_SOURCES,
+    STAGES,
     Check,
     Claim,
     Facts,
     FiniteControl,
     Release,
+    Replay,
     admission_block,
     axis_input,
     axis_rows,
@@ -120,7 +122,9 @@ from devtools.audit_continuous_pose import (
     read_receipt,
     read_slabs,
     receipt_checks,
+    replay_report,
     retained_json,
+    run_replay,
     spawn,
     write_json,
 )
@@ -199,6 +203,7 @@ RELEASE = Release(
     source_files=30,
     results=("axis.json", "obstruction.json", "slabs.jsonl", "verification.json"),
     hex_b=True,
+    axis_flags=FLAGS,
 )
 #: The release's two receipts: the producer's local run in the tree at the pin, and the
 #: GitHub Actions run 38120568498 that the release ZIP carries instead.
@@ -884,7 +889,175 @@ def axis_stage_checks(
 #: never claims the full stage.
 KERNEL_ONLY = "AXIS_KERNEL_HOLDS_WITHOUT_CRATE"
 #: The statuses a judgement exits zero on.
-HOLDS = frozenset({"FINITE_STEPS_HOLD", "AXIS_STAGE_HOLDS", KERNEL_ONLY})
+HOLDS = frozenset({"FINITE_STEPS_HOLD", "AXIS_STAGE_HOLDS", KERNEL_ONLY, "REPLAY_HOLDS"})
+
+
+# --------------------------------------------------------------------------- the replay
+
+
+#: Control H in the complete replay: the contract's threshold as T-145's contract wrote
+#: it, 1/2, which the kernel proves since it is below the minimum, and the pair either
+#: side of this release's minimum that `AXIS_CONTROLS` names.
+REPLAY_AXIS_CONTROLS = (
+    ("H-tau-1-2", Fraction(1, 2)),
+    *((name, tau) for name, tau, _, _ in AXIS_CONTROLS),
+)
+#: Control G on the release's own ``exact.py``: the one line that sets the axis side
+#: (found by searching the retained file for ``axis_side``, which is all of it that was
+#: read), and the mutant one step of 1/250000000 larger, the finite audit's control G.
+RELEASE_G_CHANGE = (
+    "'axis_side':'249329659/250000000'",
+    "'axis_side':'249329660/250000000'",
+)
+#: What the contract states for the complete run, from both release receipts (the slab
+#: totals, the least leaf bound and the axis minimum) and from the axis stage's crate
+#: decision (`receipts/axis-stage.json`); the 401-direction values are this replay's own
+#: first run, pinned so that a later run must reproduce them.
+EXPECT: dict[str, Any] = {
+    "nodes": 60_500_889,
+    "leaves": 30_250_466,
+    "angle_splits": 13_812_428,
+    "least_bound": Fraction(9005397816695287, 2**53),
+    "least_bound_slab": 40,
+    "axis_minimum": Fraction(1001486431423867090847280653, GRID**3),
+    "crate_axis_vertices": 10_929_636,
+    "crate_axis_bound": 1.0016868361671276,
+    "crate_net_nodes": 35_375_590,
+    "crate_net_bound": 1.000000000310131,
+    "crate_net_bound_r": 398,
+}
+#: This release's replay through T-145's runner and judge.
+REPLAY = Replay(
+    release=RELEASE,
+    density=lambda: site_density(load_candidate()),
+    axis_controls=REPLAY_AXIS_CONTROLS,
+    release_g=RELEASE_G_CHANGE,
+    expect=EXPECT,
+    crate_rows=COUNTS["sites"],
+    crate_expanded=5424,
+)
+
+
+#: The replay's stages: T-145's, then the release's two dual programs.
+REPLAY_STAGES = (*STAGES, "duals")
+#: The file the release pins by digest and does not carry, which its dual programs read:
+#: wand125's pool, written into the scratch tree from the 2026-10-01 packet's copy.
+POOL_UPSTREAM = "certificate/original_density.json"
+#: The keys of the release's ``obstruction.json`` that time its runs or name a binary,
+#: which differ between runs; every other field must equal both receipts'.
+DUAL_TIMING = frozenset({"seconds", "binary_sha256", "stages"})
+DUAL_STATUS = "EXACT_DUAL_CODE_DISTINCT_CHECKED"
+
+
+def assemble_tree(root: Path) -> dict[str, str]:
+    """A scratch copy of the retained tree at its upstream paths for the release's own
+    programs: every retained file (the two compressed ones restored) and the pinned pool,
+    each held to the manifest's digest. Returns the digests written."""
+    digests = manifest(RELEASE.manifest_path)
+    written: dict[str, str] = {}
+    for path, digest in digests.items():
+        data = load_pool() if path == POOL_UPSTREAM else read_retained_bytes(SOURCE / path)
+        if sha256(data) != digest:
+            raise SystemExit(f"{path}: the retained bytes are not the manifest's")
+        target = root / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+        written[path] = digest
+    return written
+
+
+def run_duals(out: Path) -> dict[str, Any]:
+    """The release's ``obstruction/run.py``, its own entry point for OBSTRUCTION.md's
+    finite dual, on a scratch copy of the retained tree: the Python ``Fraction`` program,
+    the C++ Boost program built as the release builds it, and its one-pose false dual.
+    The result bears on no register value."""
+    root = out / "tree-duals"
+    tree = assemble_tree(root)
+    target = out / "duals"
+    if target.exists():
+        shutil.rmtree(target)
+    compiler = subprocess.run(
+        ["g++", "--version"], capture_output=True, text=True, check=True
+    ).stdout.splitlines()[0]
+    argv = [sys.executable, "-B", "obstruction/run.py", "--output", str(target)]
+    logs = out / "logs"
+    logs.mkdir(parents=True, exist_ok=True)
+    result = spawn(argv, root, logs / "duals")
+    print(f"duals: exit {result['exit_code']}, {result['wall_seconds']} s", flush=True)
+    written = target / "obstruction.json"
+    obstruction = json.loads(written.read_text(encoding="utf-8")) if written.exists() else None
+    return {
+        "kind": "n40-new-supports-replay-duals/v1",
+        "argv": ["python", "-B", "obstruction/run.py", "--output", "duals"],
+        "python": sys.version.split()[0],
+        "compiler": compiler,
+        "tree": tree,
+        "obstruction": obstruction,
+        **result,
+    }
+
+
+def dual_checks(record: dict[str, Any]) -> list[Check]:
+    """The duals' receipt against both release receipts' ``obstruction.json``: the
+    release's own status, and every field that neither times a run nor names a binary,
+    equal; with the CI run's compiler, the CI run's dual binary."""
+    ours = record.get("obstruction") or {}
+    theirs = {
+        name: read_receipt(folder, "obstruction.json") for name, folder in RECEIPTS.items()
+    }
+
+    def fixed(value: dict[str, Any]) -> dict[str, Any]:
+        out = {k: v for k, v in value.items() if k not in DUAL_TIMING}
+        for program in ("python", "cpp"):
+            out[program] = {k: v for k, v in (out.get(program) or {}).items() if k != "seconds"}
+        return out
+
+    manifest_digests = manifest(RELEASE.manifest_path)
+    checks = [
+        Check(
+            "duals: the retained tree at its upstream paths, every file the manifest's",
+            record.get("tree") == manifest_digests,
+            f"{len(record.get('tree') or {})} files",
+        ),
+        Check(
+            "duals: the release's obstruction entry point, exit 0",
+            record.get("exit_code") == 0 and ours.get("status") == DUAL_STATUS,
+            f"{ours.get('status')}, {record.get('wall_seconds')} s",
+        ),
+    ]
+    for name, receipt in theirs.items():
+        checks.append(
+            Check(
+                f"duals: every non-timing field equals the {name} receipt's",
+                fixed(ours) == fixed(receipt),
+                f"column {ours.get('python', {}).get('max_column')}, "
+                f"slack {ours.get('python', {}).get('strict_scaled_slack')}",
+            )
+        )
+    ci_compiler = record.get("compiler") == CI_COMPILER
+    checks.append(
+        Check(
+            "duals: with the CI run's compiler, the CI run's dual binary",
+            not ci_compiler or ours.get("binary_sha256") == theirs["ci"].get("binary_sha256"),
+            str(ours.get("binary_sha256")) if ci_compiler else "another compiler; not compared",
+        )
+    )
+    return checks
+
+
+def replay_check(folder: Path) -> dict[str, Any]:
+    """The replay's receipts judged as `devtools.audit_continuous_pose.replay_report`
+    judges T-145's, with this release's contract, and the duals' receipt after them."""
+    shared = replay_report(folder, REPLAY)
+    duals = dual_checks(retained_json(folder / "duals.json"))
+    checks = [*shared["checks"], *(c.as_json() for c in duals)]
+    held = all(c["held"] for c in checks)
+    return {
+        **shared,
+        "kind": "n40-new-supports-replay-check/v1",
+        "checks": checks,
+        "status": "REPLAY_HOLDS" if held else "REPLAY_CHECK_FAILED",
+    }
 
 
 def axis_report(folder: Path, *, require_crate: bool = True) -> dict[str, Any]:
@@ -940,7 +1113,27 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="judge a stage run without --crate-binary: the crate's decision is not required",
     )
+    replay = commands.add_parser("run-replay", help="build the kernels and run the replay")
+    replay.add_argument("--out", type=Path, required=True)
+    replay.add_argument("--workers", type=int, default=2)
+    replay.add_argument("--stages", default=",".join(REPLAY_STAGES))
+    replay.add_argument("--crate-binary", type=Path)
+    judge_replay = commands.add_parser("check-replay", help="judge the replay's receipts")
+    judge_replay.add_argument("--receipts", type=Path, default=RECEIPT_DIR)
+    judge_replay.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
+    if args.command == "run-replay":
+        stages = [s for s in args.stages.split(",") if s]
+        if not set(stages) <= set(REPLAY_STAGES) or not 1 <= args.workers <= 8:
+            parser.error(f"--stages from {','.join(REPLAY_STAGES)}; --workers from 1 to 8")
+        out = args.out.resolve()
+        crate = args.crate_binary.resolve() if args.crate_binary else None
+        run_replay(out, args.workers, [s for s in stages if s in STAGES], crate, REPLAY)
+        if "duals" in stages:
+            write_json(out / "receipts/duals.json", run_duals(out))
+        return 0
+    if args.command == "check-replay":
+        return emit(replay_check(args.receipts), args.output)
     if args.command == "derive":
         density = site_density(load_candidate())
         args.out.mkdir(parents=True, exist_ok=True)

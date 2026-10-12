@@ -4407,11 +4407,16 @@ issues:
         217911/99764500 above T-145.
       source: https://github.com/jlevy/squares/issues/485#issuecomment-6106761997
       not_registered: >-
-        Retained and its finite steps audited, not registered: the packet
-        guzhou-n40-new-supports-2026-10-11 retains the release, and devtools.audit_n40_new_supports
-        decided the finite steps and the near-axis statement. A later layer of the 2026-10-11 intake
-        registers it and takes its T-NNN. The complete replay of the 43 slabs is priced at about
-        0.74 CPU-hours here and has no owner budget yet.
+        Retained, audited, replayed and reviewed, not registered: the packet
+        guzhou-n40-new-supports-2026-10-11 retains the release, devtools.audit_n40_new_supports
+        decided the finite steps and the near-axis statement on 11 October, and on 12 October its
+        run-replay rebuilt both kernels into the CI run's binaries and ran the axis certificate, all
+        43 slabs, the contract's controls, sqverify-fast's two runs and the release's dual programs,
+        every output equal to both release receipts apart from timing (receipts/replay-check.json,
+        REPLAY_HOLDS); the 12 October review
+        (docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md) found no blocking
+        defect and supports V3/C3, S3. The records lane of the 2026-10-11 intake registers it and
+        takes its T-NNN.
       queued: true
       bead: think-tln9
     - key: s40-support-family-obstruction
@@ -4425,8 +4430,9 @@ issues:
       not_registered: >-
         A statement about a family of certificates, not a bound on s(40): the release says it is not
         an upper bound and not a lower-bound proof at 6.72, and new supports fall outside it. Retained
-        with the release in the guzhou-n40-new-supports-2026-10-11 packet; its two checkers were not
-        run here.
+        with the release in the guzhou-n40-new-supports-2026-10-11 packet; its two checkers were run
+        here on 12 October by the release's own obstruction/run.py (receipts/duals.json) and agree
+        with both release receipts, which registers nothing.
       queued: false
     beads:
     - think-3oi5
