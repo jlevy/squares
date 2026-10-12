@@ -3,9 +3,9 @@ type: is
 id: is-01m4r6f9vstpx182qr6fmvagw8
 title: "Address PR #518 reviews A and B: house adoption layer (3/6)"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 18
+version: 19
 labels: []
 dependencies: []
 child_order_hints:
@@ -27,6 +27,10 @@ child_order_hints:
   - is-01m4r6gyczqpp94ekta9bgg1p4
   - is-01m4r6h0bmpwv4mw2f0yv4txyj
 created_at: 2026-10-12T13:57:41.880Z
-updated_at: 2026-10-12T13:58:37.684Z
+updated_at: 2026-10-12T15:11:30.518Z
+closed_at: 2026-10-12T15:11:30.518Z
+close_reason: "Every finding of reviews A and B on #518 has a disposition; replies posted (issuecomment-6127052921, -6127053342). B1 deferred to layer 4 (#553) as think-j1a4 under think-fvz4."
+resolution: null
+duplicate_of: null
 ---
 Address review A (correctness, https://github.com/jlevy/squares/pull/518#pullrequestreview-5490892444) and review B (senior, https://github.com/jlevy/squares/pull/518#pullrequestreview-5491697559) on PR #518 at head 79e02e54c, after merging main (#516 merged as 4a4910524). Coordinator dispositions: B1 deferred to layer 4; B2-B7 fixed; B8-B11 if mechanical; A1-A4 fixed; A5, A6 if mechanical.
