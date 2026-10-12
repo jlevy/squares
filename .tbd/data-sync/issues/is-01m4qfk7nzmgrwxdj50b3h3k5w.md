@@ -5,7 +5,7 @@ title: Label every issue; intake label in the runbook and sweep
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T07:17:53.470Z
-updated_at: 2026-10-12T07:30:32.390Z
+updated_at: 2026-10-12T08:33:46.294Z
 started_at: 2026-10-12T07:18:01.788Z
 ---
 
@@ -121,3 +121,38 @@ Change table (scratch copy:
 | #527 | unregistered | none | intake | not in the register; body offers results |
 | #528 | unregistered | none | intake | not in the register; body offers results |
 | #529 | unregistered | none | intake | not in the register; body offers results |
+
+## Runbook and sweep, 2026-10-12
+
+Commit 2660934297f32a1b7f5b0de82e862462173afc3d, pushed as
+`claude/wizardly-meitner-wqn4x3-labels` (no PR):
+
+- `devtools.check_requests.compare_github`, shared by `--github` and the intake sweep,
+  lists each issue the record holds as `kind: result-report`, open or closed, whose
+  live labels lack `intake`. The difference reads "#N is a result report without the
+  `intake` label". The sweep lists it as needing action, and its next step is the
+  command `gh issue edit N --add-label intake`. For a new issue, the step now also
+  says that a result report gets the label.
+- `campaign/result-import.md`: a stage 0 bullet ("A report gets the `intake` label"),
+  a sentence in the Prompt's step 3, and the Intake Sources and `--github` rows. Stage
+  7 and After the Merge are untouched for the parallel comment lane. None of the pushed
+  sibling branches (adoption, imports, results-overview) touches these files.
+- Tests: `test_the_github_comparison_lists_every_result_report_without_the_intake_label`
+  (recorded fetch) and
+  `test_a_report_without_the_intake_label_needs_action_and_names_the_command`.
+
+Validation:
+
+- Touched tests: 84 passed. Ruff check and format are clean. BasedPyright on the
+  touched files: 0 errors, 0 warnings, 0 notes.
+- `packing-validate --edit`: 63 of 65 steps passed. Browser floor failed because this
+  worktree had no `node_modules`; after `npm ci`, `--only "browser floor"` passed (2
+  steps). The type floor timed out at its 900 s ceiling twice, at a load average of
+  about 15 on 4 cpus, with sibling worktrees running their own gates; CI reads 64 to
+  112 s. Run directly with no ceiling, the same command over the whole project gives
+  0 errors, 0 warnings, 0 notes in 1430 s.
+- `packing-validate --records`: 49 steps passed, 232.7 s.
+- Live `make intake`: the Kingbird capture succeeded, and the sweep lists no result
+  report without the `intake` label. It exits 1 on 22 other items: 15 issues not in the
+  record (#500 to #529), 5 owner replies of 12 October not yet recorded, and 2 watched
+  repositories (evand, wand125).
