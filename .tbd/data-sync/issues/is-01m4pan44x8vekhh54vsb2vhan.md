@@ -5,7 +5,7 @@ title: Review the verification and confirmation rungs of the recent register ent
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:32:18.076Z
-updated_at: 2026-10-11T21:27:23.780Z
+updated_at: 2026-10-12T07:55:36.493Z
 started_at: 2026-10-11T20:32:21.487Z
 ---
 Owner request 2026-10-11: review the verification levels on recent items. For each of T-120..T-146: does the derived V/C rung match the evidence actually retained (certificate, replay command, passing replay, control path, confirming origin, relationship_to_generator, reviews), is anything over- or under-rated, which next_rung is quick (minutes) and which needs a long run or a human record, and is the adoption state (case record vs register) stated consistently. Findings go to a mapped review; corrections to the records lane.
@@ -34,3 +34,5 @@ Findings, none blocking a current rung: RR-1 (blocks any V4/C4) next_rung of T-1
 Adoption: 39 counts pending (houses T-146 x15, T-128 x6, T-136 x6, T-140 x5, T-130 x3, T-141 x2, T-134 x1, T-139 x1); all next_rung house recommendations agree with exact smallest sides; 7 of 8 houses still need private-worker custody (T-128 has it).
 
 Checks: packing-validate --records exit 1 only on "synopsis agrees with the artifacts" (stale SYNOPSIS document map, expected); check_results and check_certificate_citations pass.
+
+2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): the RR-1 owner decision is on https://github.com/jlevy/squares/issues/543; the review's proposed record and tool changes (RR-1..RR-7, RR-9) are https://github.com/jlevy/squares/issues/542 (bead think-npvi). Tracker https://github.com/jlevy/squares/issues/544.

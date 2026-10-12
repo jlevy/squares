@@ -5,7 +5,7 @@ title: "Stage 4-5: independently review and adopt the pending upper-bound report
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:51:43.927Z
-updated_at: 2026-10-12T03:47:07.293Z
+updated_at: 2026-10-12T07:56:04.354Z
 started_at: 2026-10-10T09:52:52.837Z
 ---
 The register holds rational upper-bound reports by others at V0/C0 whose next_rung is an independent review of the retained replay and a selected-house decision: T-128 (Couzo, eight), T-130 (Couzo, five), T-131 (Daniel, n = 132), and this pass's #470, #476, #481, #483 and #484 once registered. Several counts now carry more than one candidate (132: T-098 house, T-131, #476, #470; 237, 263, 270, 303: #476 and #481; 267: #470, #476). For each count: the smallest certificate whose complete two-route replay passed, a mapped W2 review of that replay (think-mt6e's rule: verified lane only on a replay here and a mapped review), the earlier house kept as history, and the case record's reported and verified ceilings moved together. Mirror the Gupta adoption (PR #448, #459: confirm_gupta_records.py). Coordinate with PR #403 / #435, which own canonical exact-value integration on the case records.
@@ -91,3 +91,5 @@ Validation at a5d684799's tree: packing-validate --records exit 0 (83 s); --edit
 Worker snapshot (b1c057f23): the 42 adopted leaves are linked back by upper_bound_houses; the tracked-set test now exempts them like the other house modules' links; n-263 (T-146's house) is asserted as a link to the checkout's file; SQUISH's house-reads programs rebuild the 263/302 houses from the packet's private inputs (the adoption's prior state keeps case text, not houses), as this layer's ryxu/evand fixtures do. Record consumers (bcad04538): T-130's frozen comparisons at 175/270 read the adoption's prior state (upper_bound_reports refuses refreezing); select_houses, adopt_houses, test_house_adoption declared verified_upper_bound consumers; citation 123 -> T-146; filter example T-128 -> T-122 (T-128 now current best); popover fixture renders T-115 via iter_result_fragments(result_ids) in the full register. Workbench (ebb020a41): n = 308 is tilted now, so 149 frames need catalogue precision (only 308 changed among the 42) and the grid-fill census is 157. Release (28414fafc): PACKING_METHODS_REVISED October 12 (cae45f088); URL registry rewritten for it (4b11b28ce). Derived (04fdaea99): chunk evidence profile rebuilt by its tool (it was stale against the regenerated census); goldens re-derived: structured 1731/1860, taxonomy residue, unstable list (screen --update --n over the 42 rebuilt it byte for byte), 85 angle classes at n = 267, grid row 18 from 309; the slow instability test moved from 108 (T-128, stable) to 84 (T-130), 3.13 s, registry updated. Sweeps (09a645c1f): the twelve adopted packets join the sparse slice (an audit-hook trace found 82 reads outside it, all there), held by test_module_boundaries to upper_bound_houses.sources(). DATA_REVISION re-pinned to 04fdaea9 (344aabbf7).
 
 Local: the failing tests and their whole files 207 passed; test_negative_controls (PR surface) 161 passed; the slow SQUISH replay passed; site filter/popover 29 passed, 6 skipped; workbench browser behavior OK; packing-validate --sweeps 5/5 (190.6 s), --records exit 0, --edit exit 0 (454.5 s). Hosted: #518's pull_request run had not started at hand-off (PR mergeable state unknown; #516 is dirty against layer 1).
+
+2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): PR #518's two calls (the SQUISH 263/302 houses rebuilt from the packet's private inputs; n-263 asserted as a link to the checkout's file, both b1c057f23) are on https://github.com/jlevy/squares/issues/543 for the owner. Tracker https://github.com/jlevy/squares/issues/544.

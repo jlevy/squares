@@ -5,13 +5,13 @@ title: Evaluate wand125's sqverify_continuous (f30cc2c) as an independent route 
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-12T01:27:07.066Z
-updated_at: 2026-10-12T01:27:07.066Z
+updated_at: 2026-10-12T07:54:27.031Z
 ---
 Found in the 2026-10-12 read of wand125/square-packing for the 2026-10-11 intake pass (think-58lu); nothing on GitHub asked. Commit f30cc2cf345a3a3f6af778925f354d9ec979868b (2026-10-12T01:00:19Z; its author name is Hiroaki Hosono), "tools: sqverify_continuous, sqverify_fast with a continuous-angle mode (v3)", the head and the only commit past the 04fbef0 read, adds tools/sqverify_continuous/ (31 files changed, all under it apart from INDEX.json and two lines each of tools/README.md and tools/THIRD_PARTY_NOTICES.md).
 
@@ -33,3 +33,7 @@ Found in the 2026-10-12 read of wand125/square-packing for the 2026-10-11 intake
 5. Controls this repository adds: the 99/100 or 985/1000 mass control at every root range, and a mutated certificate refused by every checker that accepted the original (stage 4).
 
 blocked_on: owner budget for the continuous-angle replay (about 4.4 CPU-hours for both n = 40 claims and their controls), after the soundness review
+
+## Notes
+
+2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): https://github.com/jlevy/squares/issues/533 (review and replay of sqverify_continuous; the replay budget line is on https://github.com/jlevy/squares/issues/543). Tracker https://github.com/jlevy/squares/issues/544.

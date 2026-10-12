@@ -5,7 +5,7 @@ title: "Intake announcement: generate a one-line-per-result summary with X handl
 kind: feature
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:16:41.708Z
-updated_at: 2026-10-11T22:27:49.685Z
+updated_at: 2026-10-12T07:56:19.450Z
 started_at: 2026-10-11T21:16:45.790Z
 ---
 Owner request 2026-10-11: as part of the intake process, a very brief, clean, tweet-style summary of the new results, one per line, using Twitter/X handles when we have them, otherwise people's names, for the owner to announce from; included in the intake PRs and on the top PR of the stack. Handles only from evidence: a GitHub profile's self-declared twitter_username (today: ry-xu -> small_LM, jlevy -> ojoshe), a handle the record already cites (n-011.md: Ahmed -> ManassehA06), and the contributor profiles of draft PR #490 (packing/contributors/*.md links kind twitter) once they land. Build it as a devtool (OR-1) and add the step to result-import.md, Running an Intake Pass.
@@ -32,3 +32,5 @@ Handles found 2026-10-11: @ojoshe for Levy (GitHub jlevy twitter_username, tied 
 Open: (1) "Xu" in credit lines is not tied to ry-xu by any record evidence; adding `Ryan Xu: Xu` to bibliography credited_names (records lane) or a #490 profile with alias Xu would tie it. (2) T-128..T-146 were registered 2026-10-08..10, none on 10-11. (3) Contributor profiles (#490) are read when packing/contributors exists; format checked against PR head 068de55.
 
 2026-10-11, revision at the coordinator's request: commit 07cc09f2e makes lines brief (at most 140 characters before the link): finders only, by full name or evidenced X handle; the owner (Levy/@ojoshe) is never credited or tagged; "(verified)"/"(reported)" tags; --lineage and --margins opt in. Sample over T-128..T-146: 12 lines, longest 92 characters before its link. 29 tests pass; records tier passes.
+
+2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): the alias decision (tie "Xu" in credit lines to ry-xu / X handle small_LM via bibliography credited_names or a #490 profile) is on https://github.com/jlevy/squares/issues/543. Tracker https://github.com/jlevy/squares/issues/544.
