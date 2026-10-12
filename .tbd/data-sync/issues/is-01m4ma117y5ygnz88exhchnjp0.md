@@ -5,16 +5,16 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: codex@spud10
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m4ravdm88msshy8r905rvbjb
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T16:41:38.000Z
+updated_at: 2026-10-12T18:03:40.487Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -36,30 +36,171 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 
 ## Notes
 
+## Upstream Refresh Checkpoint — External Volume Unavailable
+
+This recovery slice began `2026-10-12T06:35:37Z`; the `17:57:13Z` observation spans
+681.6 minutes of wall time, including waits and shared host activity, not CPU time.
+It updates upstream record representation; no new solver, geometry/Lean or optimality
+campaign ran.
+
+**Publication is incomplete and neither polynomial PR is ready to merge.** At
+`2026-10-12T17:53:43Z`, `/Volumes/spud-ext1` was absent; `diskutil list external` was
+empty, and the former `disk5s1` device was not found.
+The worker received `OSError [Errno 6] Device not configured`; its next test command
+could not create a process because the external checkout directory had vanished.
+Disk-heavy work and file writes there are paused, with no internal build/cache fallback.
+Reconnect the physical drive and verify its exact mount, writable state and contents
+before resuming.
+
+### Completed Locally
+
+- Native stack rebase integrated `origin/main` at
+  `e10fd85d444c8a3859ed4abb0edcf7be385f4171`, including PR518’s 42 adopted selected
+  houses. Local parent base is `f2b757b4d9af27909972401b73e1b8a041cb1dcc`; local child
+  base is `19670d8ec64a4cd3513454dd01a45f7ae9c74451`. The newest source and generated
+  table changes are not committed or pushed.
+- Strict native source/count/certificate/receipt/accepted-review admission and current
+  custody were implemented.
+  Missing, unknown, wrong and unscoped source keys are refused.
+  Current n=102 binds Daniel T146, revision `ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7`,
+  `search/regularize/lists/certs/n-102.cert.gz`; old inputs remain historical fixtures.
+- The bounded archive contains 42 complete displaced current records and 42 selected
+  source occurrences: 407,965 decoded / 29,532 compressed bytes.
+  Independent comparison preserves all 84 polynomial objects, 169 coefficient strings,
+  144 quotes and complete source custody.
+  It uses a retained file input, with no runtime Git-ref dependency.
+- Maintained generation completed with exit0: exactly 42 cases’ algebraic metadata
+  changed, all other front matter and case prose stayed equal, a second backfill would
+  change zero records, and the composite data, six research tables and parent register
+  regenerated. The resulting corpus has not received final conservation/record gates.
+- The complete child web/doc patch is safe in primary Git stash
+  `2da9b1b02e8a64b6f5ab4c263dc2caab1ba01b16`, named
+  `polynomial-e10-owned-child-presentation-and-docs`: four durable docs plus seven
+  presentation/test files, including the new untracked test fixture.
+  Its controlled checks passed 77 tests; final three no-JS/refusal controls passed;
+  Ruff/types were clean.
+  One n258 integration failure and two actual-corpus checks await parent propagation.
+  The report remains strictly web-only; no polynomial PDF is generated.
+
+### Exact Outstanding Validation and Publication
+
+The parent source integration ended **159 passed / 1 failed in 360.09s**: all 81
+original upstream controls and all 78 new adopted/archive/refusal controls passed.
+The sole failure is a new census control expecting 59 generated native histories; the
+producer returned 83. The code-supported explanation is newly historical legacy current
+certificates, but the independent exact roster read was interrupted by the outage.
+Reconcile that roster; do not simply replace the expected number or infer producer
+correctness from the difference.
+
+The separate dated builder-fixture patch passed Ruff/types, but its behavioral module
+never launched because the cwd vanished.
+A later non-vacuous unrelated-contact control also needs its final focused/static rerun.
+No owned source-worker process remains active.
+
+After the drive returns:
+
+1. Verify P/C/E/S contents and any stopped gate markers; preserve all uncommitted parent
+   code/data and the child stash.
+   Never prune these temporarily absent worktrees.
+2. Reconcile the source-history census with maintained native readers, run the dated
+   builder controls and final source/static checks, and inspect actual parent
+   conservation and record gates.
+   Commit source/data, then regenerate its release pin.
+3. Propagate through native upstack; restore the exact child stash, preserving its
+   untracked fixture. Rebuild the child corpus and measure current/historical/public
+   counts, every coefficient and source occurrence.
+   Expected 610/632/6,522 and public 337 remain forecasts, not observed post-adoption
+   results.
+4. Qualify the final small web export, unchanged size/startup/clip/refusal guards and
+   eight responsive views; run required maintained gates, audit actual Git sizes, push
+   both existing stacked PRs with leases, update their descriptions and wait for all
+   new-head automatic/full checks.
+   No owner approval to land the stack is recorded.
+
+All 87 previously pending native occurrences resolve as 42 adopted current and 45
+superseded, with all 42 displaced identities retained.
+Numeric n=29/55/71, reported geometry gaps n=106/152/177, independently uncounted n83
+ordinal and the separate 41 quadratic/Lean updates remain explicit research work.
+The new raw/current/public partition must still be checked after regeneration.
+Unknown local subprocess timeout causes remain OPEN in `think-w0if`; old hosted passes
+qualify their dated heads only.
+
+### Recovery Locations and Disk Evidence
+
+P: `/Volumes/spud-ext1/agent-source/polynomial-parent-01a118e4`
+
+C: `/Volumes/spud-ext1/agent-source/polynomial-catalogue-01a118e4`
+
+E:
+`/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635`
+
+S/env:
+`/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635/env.sh`
+
+Key receipts are E/validation/parent-e10-adapter-source-final.{log,xml},
+parent-e10-fixture-{ruff,type}.log; E/data/main-e10-backfill-preflight.json,
+main-e10-backfill-{update,check}.log, main-e10-parent-register-update.log and
+main-e10-prior-identity-capture-retry.log;
+E/review/parent-e10-source-conservation-review.json and
+adopted-current-presentation-ready.json.
+
+Exactly three audited inactive generated copies were removed, 863,850,496 allocated
+candidate bytes. Observed free-space gain was 522,874,880 bytes with concurrent writers;
+this is not exclusive APFS reclamation.
+All remaining pytest13 fixtures were renamed on the same volume into
+E/validation/retained-interrupted-fixtures/remaining-old-pytest-13. Unique roots
+12/14/15, source, live runtime, unknown 10/11 and current fixtures were preserved.
+No source worktree, Git history or unique evidence was deleted.
+
+The primary checkout remains `codex/n17-state-review` at
+`c3dc6027a66fe396f22953a1d29945420198bdda`, with its existing unique untracked work
+untouched. Published PR heads at this checkpoint remain parent
+`240299aad79562574cfb31d37298003374423fc6` and child
+`25dd0c6c18788aac2aaed590b19cadb4944e2a97`; comments record local progress, not
+publication of the uncommitted external changes.
+Formal stack 447 remains main → 403 → 435.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
+
+Posted recovery checkpoints:
+https://github.com/jlevy/squares/pull/403#issuecomment-6129775007
+https://github.com/jlevy/squares/pull/435#issuecomment-6129775344
+
+The 60649 preview remains dated pre-adoption output and does not qualify the refreshed
+tables.
+
+--- Dated earlier checkpoints; preserved evidence, superseded current-state claims ---
+
 Current synchronization checkpoint: `2026-10-12T16:41:37.377960+00:00`
 
 Formal stack 447 is locally rebased through origin/main
-`e10fd85d444c8a3859ed4abb0edcf7be385f4171`, including merged PR 518.
-Parent base is `f2b757b4d9af27909972401b73e1b8a041cb1dcc`; child base is
-`19670d8ec64a4cd3513454dd01a45f7ae9c74451`. Active source and presentation
-patches are not yet committed or published; final qualification and hosted CI remain
-pending. No polynomial PR landing is authorized by this checkpoint.
+`e10fd85d444c8a3859ed4abb0edcf7be385f4171`, including merged PR 518. Parent base is
+`f2b757b4d9af27909972401b73e1b8a041cb1dcc`; child base is
+`19670d8ec64a4cd3513454dd01a45f7ae9c74451`. Active source and presentation patches are
+not yet committed or published; final qualification and hosted CI remain pending.
+No polynomial PR landing is authorized by this checkpoint.
 
 Upstream changed 42 selected finite side identities, all rational degree one and at
 scoped V3/C3. Exactly 42 of the prior 87 native pending offers now supply current
-custody; the other 45 are superseded. No native offer remains pending. Every one of
-42 displaced current identities must remain in canonical history, including the old
-n=232 quadratic and n=308 integer. The independent immutable binding audit matched
-all 42 native sides and poses, 82 custody inputs and complete prior-state case texts;
-it was a literal audit, not a fresh geometry or global-optimality proof.
+custody; the other 45 are superseded.
+No native offer remains pending.
+Every one of 42 displaced current identities must remain in canonical history, including
+the old n=232 quadratic and n=308 integer.
+The independent immutable binding audit matched all 42 native sides and poses, 82
+custody inputs and complete prior-state case texts; it was a literal audit, not a fresh
+geometry or global-optimality proof.
 
 The strict builder adapter, scoped legacy source validation, complete adopted current
-custody and presentation are in progress. Some adopted cases still hold pre-adoption
-polynomial metadata after the rebase, so neither current corpus nor tables are
-qualified yet. Expected canonical totals are 610 records / 632 vectors / 6,522
-integer strings, history 273 superseded + 3 unreconciled + 7 outside + 3 invalid;
-public forecast is 337 = 324 current + 13 additional. These are conservation targets
-pending maintained regeneration and independent comparison, not measured results.
+custody and presentation are in progress.
+Some adopted cases still hold pre-adoption polynomial metadata after the rebase, so
+neither current corpus nor tables are qualified yet.
+Expected canonical totals are 610 records / 632 vectors / 6,522 integer strings, history
+273 superseded + 3 unreconciled + 7 outside + 3 invalid; public forecast is 337 = 324
+current + 13 additional.
+These are conservation targets pending maintained regeneration and independent
+comparison, not measured results.
 Current child coverage remains 321 exact identities, numeric n=29/55/71 and 77 proved
 labels. n=83 retains all 673 coefficients; source ordinal 27 remains independently
 uncounted. Report stays strictly web-only; no polynomial PDF is generated or published.
@@ -67,24 +208,28 @@ uncounted. Report stays strictly web-only; no polynomial PDF is generated or pub
 Current n=102 is Evan Daniel T-146 regularizing Ryan Xu, retained from
 `ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7` at
 `search/regularize/lists/certs/n-102.cert.gz`. Prior RyXu and Daniel certificates are
-historical fixtures. The 41 exact-quadratic/Lean updates remain a separate follow-up,
-as do reported geometry gaps n=106/152/177, numeric cases and ideal-contact research.
-Other owners' bead statuses may lag the newly landed adoption; this task does not
-close their research scopes.
+historical fixtures.
+The 41 exact-quadratic/Lean updates remain a separate follow-up, as do reported geometry
+gaps n=106/152/177, numeric cases and ideal-contact research.
+Other owners’ bead statuses may lag the newly landed adoption; this task does not close
+their research scopes.
 
 Reviewed pre-adoption test repairs include census assertions, n155 custody rendering,
 and a concrete signal-fixture PID race where the RSS sampler was mistaken for the
 worker. Focused controls passed 208 builder tests, 12 browser tests and 4 signal/CLI
-controls. The last local wide child run passed 68 prerequisites, then failed four
-call phases and was explicitly stopped with exit 143. Its unique fixtures were moved
-on the same external volume into durable evidence. There was no terminal JUnit lane
-success. The unchanged 20-second CLI timeout passed serially; that does not diagnose
-its earlier parallel failure. Unknown subprocess timeout causes remain open in
-`think-w0if`; prior local and hosted passes qualify their dated heads only.
+controls. The last local wide child run passed 68 prerequisites, then failed four call
+phases and was explicitly stopped with exit 143. Its unique fixtures were moved on the
+same external volume into durable evidence.
+There was no terminal JUnit lane success.
+The unchanged 20-second CLI timeout passed serially; that does not diagnose its earlier
+parallel failure. Unknown subprocess timeout causes remain open in `think-w0if`; prior
+local and hosted passes qualify their dated heads only.
 
 The latest external free-space observation is about 2 GiB. All task runtime, Cargo,
-pytest and export scratch remain external. No space reclamation is claimed. Source
-and unique evidence are preserved; large builds are withheld pending bounded audit.
+pytest and export scratch remain external.
+No space reclamation is claimed.
+Source and unique evidence are preserved; large builds are withheld pending bounded
+audit.
 
 Next: finish strict source/presentation patches, maintained case backfill and lossless
 corpus rebuild; integrate parent through native upstack; qualify small web exports and
@@ -94,7 +239,8 @@ update both PRs with actual counts and terminal CI. Keep owner review/landing se
 Evidence root:
 `/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635`.
 
---- Dated pre-adoption checkpoint; preserved evidence, superseded current-state claims ---
+--- Dated pre-adoption checkpoint; preserved evidence, superseded current-state claims
+---
 
 Current synchronization checkpoint: `2026-10-12T15:17:57.143734+00:00`
 
