@@ -5,7 +5,7 @@ title: "Follow-ups after #512 merged (2026-10-12)"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T06:47:31.077Z
-updated_at: 2026-10-12T06:56:11.372Z
+updated_at: 2026-10-12T08:10:21.217Z
 started_at: 2026-10-12T06:47:36.968Z
 ---
 Replies owed on #485, #419, #413, #494 and #495 after PR #512 merged into main (ad00d7f84), under the owner's 2026-10-11 rule: post after merge, link only to main, check main and the deployed site first; record each reply in packing/campaign/result-requests.yaml on claude/wizardly-meitner-wqn4x3-replies-2.
@@ -60,3 +60,16 @@ The held draft follows. It leaves out the running lane and the "unpublished" wor
 > This issue stays open while that work is queued, and a reply follows each change in the record.
 
 **Record.** Branch claude/wizardly-meitner-wqn4x3-replies-2 was cut from origin/main ad00d7f84. Commit ce18785a39503b2aad9f4b80ba0226a4e2779a3b was pushed; it adds four `replies` items to packing/campaign/result-requests.yaml. After it, check_requests passes and --report shows no reply due on #419, #413, #494 or #495, while #485 is still due. packing-validate --records exited 0 (49 of 107 steps, the records tier) in 180.6 s wall. No PR was opened.
+
+## 2026-10-12 07:23Z-08:12Z: review A on PR #531 addressed (fix lane, Claude Opus 5.5)
+
+PR https://github.com/jlevy/squares/pull/531, review A https://github.com/jlevy/squares/pull/531#pullrequestreview-5487569040 at 4141d3bc5. New head a4a8a7d05b59b18d53c5e4d0a258d8d432f4bf20 on claude/wizardly-meitner-wqn4x3-replies-2 (normal push, 4141d3bc5..a4a8a7d05). Dispositions: https://github.com/jlevy/squares/pull/531#issuecomment-6120301349.
+
+- A1 fixed in 4028d5657, option (a): #485 result s40-continuous-angle-mode (source 6111583905, queued, bead think-xzob, not_registered naming think-xzob), listed in the 6119333366 reply's reported; think-xzob added to the entry's beads; summary notes the 02:19Z edit. --report: no reply due at the head; on a scratch copy with an evidence id mapped, #485's reply is due "since the reply of 2026-10-12"; without the reported item, an acknowledgement is due. read_through unchanged (2026-10-11T17:14:50Z).
+- A2 fixed in the PR description (stack #517 wording, wall, Validation at a4a8a7d05, the A6 change); check_pr_description --file ok.
+- A3 fixed on GitHub: comment 6119333366 PATCHed via --input JSON (gh api -f body=@file would send the literal text "@file"; -F or --input reads the file). Fresh GET equals the intended body byte for byte; one line differs from the original. updated_at 2026-10-12T07:28:58Z.
+- A4 deferred to think-tln9 (no record change). As of 08:09Z think-tln9 (updated 07:57:19Z) still reads "blocked_on: owner budget" and records no running replay lane or budget.
+- A5 fixed in a4a8a7d05 (lean-packs-binding wording); note written on think-63vx for the next #419 reply.
+- A6 fixed in 4e5ebb661: compare_github lists a non-reply comment created on or before read_through and edited after it as "unread comment <url> (<login>, <created>, edited <updated>)"; the wording keeps intake_sweep's step. Live --github: 16 differences, the 15 issues the record lacks plus wand125's #485 comment. It clears only when read_through moves past 2026-10-12T02:19:26Z; no comment on #485 was created between 17:14:50Z and that time.
+
+Validation at a4a8a7d05: test_check_requests.py 50 passed; check_requests gate and --report exit 0 (no reply due on any of 53 issues); packing-validate --records exit 0, 49 of 107 steps, 138.6 s; packing-validate --edit 63 of 65 (browser floor passed on a rerun after npm ci; basedpyright timed out at 900 s twice at load 14-18 on 4 CPUs; basedpyright on the changed files 0 errors). CI: 16 pass, 39 skipped (Packing validation 38220272317, Certificate page 38220272269, Branch mergeability 38220268671).
