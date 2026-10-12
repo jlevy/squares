@@ -5,16 +5,16 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: codex@spud10
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m4ravdm88msshy8r905rvbjb
-hold: blocked
+hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T18:03:40.487Z
+updated_at: 2026-10-12T18:12:27.033Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -35,6 +35,40 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
 
 ## Notes
+
+## Resumed Volume Checkpoint, 2026-10-12T18:10Z
+
+The external volume returned at18:05UTC and was verified mounted, writable and intact
+at18:06. P/C/E/env and the full11-file child
+stash2da9b1b02e8a64b6f5ab4c263dc2caab1ba01b16 are preserved; the physical-drive blocker
+is cleared. No internal build/cache fallback occurred.
+Outage checkpoints on PR403/435 remain dated evidence.
+
+Parent regeneration completed0 and independently passes schema/conservation:426 raw
+records =324 current+102superseded history;425 coefficient vectors/1381 integer
+strings;94557gzip/924495decoded bytes.
+All42 native current bindings and all42 displaced old-current polynomial objects are
+preserved, 282 other current entries full-equal, all lower/status lanes equal
+(77proved/247open). There are83 historical native certificate occurrences: exact
+maintained roster reconciliation independently confirmed24 legacy-current displacements
+(17RyXu/7Gupta); the original101 source occurrences plus24 displaced legacy entries
+resolve as42current+83history. The two outstanding accounting/contact controls
+pass13.28s; final scoped lint/format/types pass.
+The ordinary dated builder module is running, no terminal result yet.
+
+Maintained parent --records:50/108 named steps PASS in33.61s, six reported CPUs/six step
+jobs/two inner jobs; not a full gate.
+Core source review findings closed; no assertion/timeout/skip cap waived.
+Sourcecode/data remain uncommitted until final builder controls; native upstack,
+restoredCpatch, actualchild conservation/web caps/views, pre-push/hostedCI and
+finalGit-size audit remain pending.
+No PRlanding authorized.
+
+Continue the existing slice from this checkpoint.
+Strict web-only report; no polynomial PDF. Local generic timeouts remain OPEN
+inthink-w0if; all prior negative/positive receipts keep dated scope.
+
+--- Dated outage checkpoint and earlier unique evidence ---
 
 ## Upstream Refresh Checkpoint — External Volume Unavailable
 
@@ -239,8 +273,7 @@ update both PRs with actual counts and terminal CI. Keep owner review/landing se
 Evidence root:
 `/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635`.
 
---- Dated pre-adoption checkpoint; preserved evidence, superseded current-state claims
----
+## --- Dated pre-adoption checkpoint; preserved evidence, superseded current-state claims
 
 Current synchronization checkpoint: `2026-10-12T15:17:57.143734+00:00`
 
