@@ -67,6 +67,7 @@ from sympy.polys.numberfields.galoisgroups import galois_group
 
 from devtools import (
     acquire_source,
+    exact_house_sources,
     refinement_custody,
     refinement_house_links,
     refinement_packets,
@@ -155,11 +156,13 @@ ROUTES: dict[int, tuple[str, str]] = {
     102: (
         "think-eu89",
         (
-            "Bind and convert the already retained current ry-xu certificate at "
-            "8dc415296f697f5140caea27c7a0193d52deb4e6 before deriving current-pose "
-            "contacts, a stable seed or any KKT/W6 result. The earlier evand "
-            "13ee36e5 input remains a historical fixture; its contact system and "
-            "local-minimum claims do not transfer to this new geometry."
+            "The current finite side comes from Daniel's T146 regularization at "
+            "ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7, "
+            "search/regularize/lists/certs/n-102.cert.gz. Deriving current-pose "
+            "contacts, a stable seed or a KKT/W6 result remains open. The ry-xu "
+            "8dc415296f697f5140caea27c7a0193d52deb4e6 certificate and Daniel's "
+            "13ee36e5 input remain historical fixtures; their contact systems "
+            "and local-minimum claims do not transfer to this geometry."
         ),
     ),
     29: (
@@ -1002,6 +1005,7 @@ class VerifiedRationalInputs:
         self.refinements_validated = False
         self.arrangements: arrangement_houses.VerifiedInputs | None = None
         self.imported: dict[str, dict[int, dict]] = {}
+        self.houses = exact_house_sources.Inputs()
         self.source_facts: dict[str, dict[int, evand.Certificate]] = {}
 
     def evidence_row(self, n: int, identifier: str, source_key: str) -> dict:
@@ -1134,19 +1138,22 @@ class VerifiedRationalInputs:
             degree=1,
         )
 
-    def imported_source(self, source_key: str) -> dict[int, dict]:
-        """Bind complete current houses to retained native jobs once per build."""
-        if source_key not in self.imported:
+    def imported_source(self, source_key: str, n: int) -> dict[int, dict]:
+        """Check a still-current requested house, retaining all source facts."""
+        checked = self.imported.setdefault(source_key, {})
+        if n not in checked:
             if source_key == ryxu_houses.SOURCE_KEY:
-                self.source_facts[source_key] = ryxu_houses.reports.read_facts()
-                self.imported[source_key] = ryxu_houses.check_houses()
+                if source_key not in self.source_facts:
+                    self.source_facts[source_key] = ryxu_houses.reports.read_facts()
+                checked.update(ryxu_houses.check_houses([n]))
             elif source_key == gupta_houses.reports.SOURCE_KEY:
-                self.source_facts[source_key] = gupta_houses.reports.read_facts()
-                gupta_houses.check_houses()
-                self.imported[source_key] = {n: {} for n in gupta_houses.NUMBERS}
+                if source_key not in self.source_facts:
+                    self.source_facts[source_key] = gupta_houses.reports.read_facts()
+                gupta_houses.check_houses([n])
+                checked[n] = {}
             else:
                 raise ValueError("unsupported imported finite source")
-        return self.imported[source_key]
+        return checked
 
     def provenance(self, n: int, rational: Fraction, replay: str, source_key: str) -> dict:
         evidence = self.evidence_row(n, replay, source_key)
@@ -1376,7 +1383,7 @@ def _explicit_imported_exact(
             != derive_from_exact_form(native).coefficients
         ):
             raise ValueError("supplied polynomial differs from the complete native side")
-        inputs.imported_source(source_key)
+        inputs.imported_source(source_key, n)
         note = _note(
             "verified-witness-side",
             f"This is the complete finite {'Q(sqrt2)' if radical else 'rational'} "
@@ -1445,6 +1452,10 @@ def build_entry(
     """One register entry from one record, its catalogue block and its KKT row."""
     reported = packing["reported_upper_bound"]
     inputs = verified_inputs or VerifiedRationalInputs()
+    try:
+        adopted = inputs.houses.admit(n, packing)
+    except (OSError, ValueError, KeyError, TypeError, ZeroDivisionError) as error:
+        raise ExactValuesError(f"n = {n}: adopted exact bound refused: {error}") from error
     imported = _explicit_imported_exact(n, packing, inputs)
     fallback = _verified_rational_fallback(n, packing, inputs)
     refinement = _explicit_refinement_rational(n, packing, inputs)
@@ -1466,6 +1477,8 @@ def build_entry(
         }
     if imported is not None:
         reported = imported[0]
+    if adopted is not None:
+        reported = adopted[0]
     status = str(packing["status"])
     value = str(reported["value"])
     exact_form = reported.get("exact_form")
@@ -1517,7 +1530,9 @@ def build_entry(
             kkt,
             budget,
             upward_ceiling=(
-                imported is not None or _certified_rational_ceiling(packing, coefficients)
+                adopted is not None
+                or imported is not None
+                or _certified_rational_ceiling(packing, coefficients)
             ),
         )
         checks.update(numeric)
@@ -1560,14 +1575,21 @@ def build_entry(
     superseded = _superseded_note(reported, entry)
     if superseded is not None:
         notes.append(superseded)
-    if state == "numeric-only" or admitted is not None or imported is not None:
+    if (
+        state == "numeric-only"
+        or admitted is not None
+        or imported is not None
+        or adopted is not None
+    ):
         routes = (
             _arrangement_notes(n)
             if arrangement is not None
             else _numeric_only_notes(n, kkt_row)
         )
         for note in routes:
-            if (admitted is not None or imported is not None) and arrangement is None:
+            if (
+                admitted is not None or imported is not None or adopted is not None
+            ) and arrangement is None:
                 note["text"] = (
                     "The finite native bound leaves ideal contact research open. "
                     + note["text"]
@@ -1585,7 +1607,20 @@ def build_entry(
             else:
                 same_route["text"] += " " + note["text"]
 
+    if adopted is not None:
+        notes.append(
+            _note(
+                "verified-witness-side",
+                "The adopted complete native certificate and its retained positive, "
+                "duplicate-square and outside-container jobs establish this finite side. "
+                "Its verified display is the least upward sixteen-place ceiling; the "
+                "source's exact printed reported side may be longer. No old-pose "
+                "stationarity, rigidity, local-minimum or optimality claim transfers.",
+                degree=1,
+            )
+        )
     return {
+        **({} if adopted is None else adopted[1]),
         "n": n,
         "status": status,
         "side": {
@@ -2143,6 +2178,87 @@ def source_certificate_history(
     )
 
 
+def append_displaced_current_history(entries: list[dict], historical: list[dict]) -> None:
+    """Retain every complete prior current identity at its own checked side."""
+    prior = exact_house_sources.read_prior()
+    indexed = {row["n"]: row for row in entries}
+    path = exact_house_sources.PRIOR.relative_to(ROOT.parent).as_posix()
+    for saved in prior["current_entries"]:
+        n = saved["n"]
+        coefficients = tuple(int(value) for value in saved["polynomial"]["coefficients"])
+        checks, root = polynomial_checks(
+            n,
+            coefficients,
+            saved["side"]["value"],
+            None,
+            upward_ceiling=saved["degree"] == 1,
+        )
+        check_closed_form_is_the_root(n, saved["exact_form"], root)
+        if _source_disposition(root.lo, root.hi, indexed[n]) != "superseded":
+            raise ExactValuesError(
+                f"n = {n}: prior current identity is not strictly superseded"
+            )
+        checks.update(catalogue="not-in-catalogue", galois=None)
+        citation = {
+            "path": path,
+            "url": f"https://github.com/jlevy/squares/blob/main/{path}",
+            "kind": "derived-from-source-closed-form",
+            "locator": {"line": 1, "section": str(n)},
+            "source_flags": [
+                "prior current exact identity",
+                f"adopted {exact_house_sources.houses.ADOPTED_ON}",
+            ],
+        }
+        occurrences = [*saved.get("source_occurrences", []), citation]
+        matches = [
+            row
+            for row in historical
+            if row["n"] == n
+            and row["polynomial"]["coefficients"] == saved["polynomial"]["coefficients"]
+            and Fraction(row["checks"]["root"]["interval"][0]) <= root.hi
+            and Fraction(row["checks"]["root"]["interval"][1]) >= root.lo
+        ]
+        if len(matches) > 1:
+            raise ExactValuesError(f"n = {n}: ambiguous prior-current historical identity")
+        if matches:
+            for occurrence in occurrences:
+                if occurrence not in matches[0]["sources"]:
+                    matches[0]["sources"].append(occurrence)
+            continue
+        historical.append(
+            {
+                "n": n,
+                "kind": "superseded",
+                "algebraic_source": "derived-from-source-closed-form",
+                "current_side": indexed[n]["side"]["value"],
+                "side": root_decimal(root),
+                "exact_form": saved["exact_form"],
+                "degree": saved["degree"],
+                "polynomial": saved["polynomial"],
+                "checks": checks,
+                "sources": occurrences,
+                "source_statuses": ["previous-current-bound"],
+                "attribution": {
+                    "date_mentions": [],
+                    "source_text": [
+                        (
+                            "The complete earlier current entry, including every "
+                            "coefficient, check and note, "
+                            f"is retained in {path} at n = {n}."
+                        )
+                    ],
+                },
+                "bead": None,
+                "displaced_current": path,
+                "text": (
+                    "This checked identity describes the earlier recorded finite bound. "
+                    "It is superseded by the adopted house; "
+                    "no old-pose ideal-contact claim transfers."
+                ),
+            }
+        )
+
+
 def build_record() -> dict:
     catalogue = catalogue_entries()
     kkt = kkt_rows()
@@ -2155,6 +2271,7 @@ def build_record() -> dict:
     ]
     historical = append_reported_source_notes(entries)
     historical.extend(source_certificate_history(entries, verified_inputs=verified_inputs))
+    append_displaced_current_history(entries, historical)
     return {
         "softschema": {
             "contract": CONTRACT,

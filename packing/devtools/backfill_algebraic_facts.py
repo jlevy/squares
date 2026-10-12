@@ -30,6 +30,7 @@ from pathlib import Path
 import yaml
 from strif import atomic_output_file
 
+from devtools import upper_bound_houses
 from sqpack.exact_values import CATALOGUE, CONTACT_SYSTEM, algebraic_fields
 from sqpack.yamlio import safe_load
 
@@ -56,12 +57,16 @@ def backfilled(text: str, n: int) -> str:
     """The record's text with its three algebraic lines rewritten."""
     _, front, body = text.split("---", 2)
     reported = safe_load(front)["packing"]["reported_upper_bound"]
-    if reported.get("algebraic_source") == CONTACT_SYSTEM:
+    adopted = (
+        n in upper_bound_houses.ADOPTED
+        and reported.get("source_key") == upper_bound_houses.source_for(n).key
+    )
+    if reported.get("algebraic_source") == CONTACT_SYSTEM and not adopted:
         return text
     # A degree is the catalogue's to keep only where the record says the catalogue printed
     # it, or where no source is recorded yet (a record from before the field existed). A
     # derived pair is recomputed from the closed form, so a second run changes nothing.
-    printed = reported.get("algebraic_source") in {CATALOGUE, None}
+    printed = reported.get("algebraic_source") in {CATALOGUE, None} and not adopted
     # These owner writers derive identities from complete finite source certificates.
     # Their legacy n51 polynomial omitted provenance; it was never a Kingbird claim.
     if reported.get("source_key") in {

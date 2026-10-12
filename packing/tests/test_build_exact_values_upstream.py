@@ -12,6 +12,7 @@ from typing import Any
 import pytest
 from jsonschema_rs import Draft202012Validator
 
+from devtools import adopt_houses
 from devtools import backfill_algebraic_facts as backfill
 from devtools import build_exact_values as exact
 from devtools import register_gupta_reports as gupta
@@ -32,7 +33,12 @@ def test_imported_writers_derive_current_identity_and_backfill_is_idempotent(wri
     assert reported["minimal_polynomial"] == facts.text
     assert reported["algebraic_degree"] == facts.degree
     assert reported["algebraic_source"] == DERIVED_FROM_EXACT_FORM
-    text = (exact.FRONTIER / f"n-{n:03d}.md").read_text()
+    # n70's Ry-Xu writer is a dated fixture after the T146 house adoption.
+    text = (
+        adopt_houses.read_history()[n]
+        if n == 70
+        else (exact.FRONTIER / f"n-{n:03d}.md").read_text()
+    )
     rendered = backfill.backfilled(text, n)
     assert backfill.backfilled(rendered, n) == rendered
     bound = safe_load(rendered.split("---", 2)[1])["packing"]["reported_upper_bound"]
@@ -103,11 +109,18 @@ def test_current_import_requires_evidence_certificate_path():
         exact.build_entry(88, _current_case(88), None, None, verified_inputs=inputs)
 
 
-def _standing_entries() -> list[dict[str, Any]]:
-    # These lightweight standing entries use exact forms, not rounded display equality.
+def _pre_adoption_standing_entries() -> list[dict[str, Any]]:
+    # Frozen source claims compare to the complete frontier retained before PR518.
+    # Keep this dated context separate from post-adoption standing classification.
+    prior = adopt_houses.read_history()
     entries = []
     for n in range(1, 325):
-        bound = exact.load_packing(n)["reported_upper_bound"]
+        packing = (
+            safe_load(prior[n].split("---", 2)[1])["packing"]
+            if n in prior
+            else exact.load_packing(n)
+        )
+        bound = packing["reported_upper_bound"]
         entries.append(
             {
                 "n": n,
@@ -122,7 +135,7 @@ def _standing_entries() -> list[dict[str, Any]]:
 
 @pytest.fixture(scope="module")
 def source_history():
-    return exact.source_certificate_history(_standing_entries())
+    return exact.source_certificate_history(_pre_adoption_standing_entries())
 
 
 def test_all_noncurrent_certificates_keep_disposition_native_identity_and_assurance(
@@ -226,7 +239,7 @@ def equal_hunt_inputs(source_history):
         for row in exact.hunt_reports.check_claims()["results"]
         if row["n"] == 155
     )
-    return _standing_entries()[154], previous, certificate, comparison
+    return _pre_adoption_standing_entries()[154], previous, certificate, comparison
 
 
 @pytest.mark.parametrize(
@@ -269,7 +282,7 @@ def test_other_duplicate_finite_identity_still_refuses_distinct_custody(monkeypa
     with pytest.raises(
         exact.ExactValuesError, match="duplicate finite identity has distinct custody/assurance"
     ):
-        exact.source_certificate_history(_standing_entries())
+        exact.source_certificate_history(_pre_adoption_standing_entries())
 
 
 @pytest.mark.parametrize(
@@ -352,7 +365,7 @@ def test_certificate_schema_refuses_adoption_disposition_contradiction(
 
 
 def test_new_build_reopens_complete_imported_house_custody(monkeypatch):
-    def changed():
+    def changed(_numbers):
         raise ValueError("changed complete native jobs or selected house")
 
     monkeypatch.setattr(gupta.houses, "check_houses", changed)
@@ -528,7 +541,7 @@ LATEST_CERTIFICATES = [
 
 
 def test_declared_certificate_history_keeps_registered_native_sides_and_credit():
-    entries = _standing_entries()
+    entries = _pre_adoption_standing_entries()
     before = copy.deepcopy(entries)
     rows = exact.declared_source_certificate_history(entries)
     assert entries == before
@@ -640,7 +653,7 @@ def test_declared_history_refuses_inconsistent_registration_or_retained_evidence
         "missing-replay": "lacks native replay",
     }
     with pytest.raises(exact.ExactValuesError, match=messages[control]):
-        exact.declared_source_certificate_history(_standing_entries())
+        exact.declared_source_certificate_history(_pre_adoption_standing_entries())
 
 
 def test_declared_tied_occurrences_keep_distinct_custody(monkeypatch):
@@ -660,7 +673,7 @@ def test_declared_tied_occurrences_keep_distinct_custody(monkeypatch):
         lambda _packet, *, certificates: {n: {} for n in certificates},
     )
     rows = exact.declared_source_certificate_history(
-        [row for row in _standing_entries() if row["n"] == 132]
+        [row for row in _pre_adoption_standing_entries() if row["n"] == 132]
     )
     assert len(rows) == 4
     assert {row["exact_form"] for row in rows} == {"3"}
@@ -775,4 +788,54 @@ def test_latest_source_projection_refuses_stale_identity_claims_or_replay(
         "lacks native replay" if control == "missing-replay" else "frozen claim record differs"
     )
     with pytest.raises(exact.ExactValuesError, match=message):
-        exact.declared_source_certificate_history(_standing_entries())
+        exact.declared_source_certificate_history(_pre_adoption_standing_entries())
+
+
+@pytest.mark.parametrize(
+    ("houses", "key"),
+    [
+        (exact.ryxu_houses, exact.ryxu_houses.SOURCE_KEY),
+        (exact.gupta_houses, exact.gupta_houses.reports.SOURCE_KEY),
+    ],
+)
+@pytest.mark.parametrize("seeded", [False, True], ids=["uncached", "preloaded"])
+def test_imported_direct_facts_are_cached_but_each_new_house_is_checked(
+    monkeypatch, houses, key, seeded
+):
+    facts = houses.reports.read_facts()
+    reads, checked = [], []
+    first, second, refused = houses.NUMBERS[:3]
+
+    def direct_facts():
+        reads.append(True)
+        return facts
+
+    def check_each(numbers):
+        assert len(numbers) == 1
+        (n,) = numbers
+        checked.append(n)
+        if n == refused:
+            raise ValueError("new requested house differs from complete native custody")
+        return {n: {}}
+
+    # This isolates the builder's direct cache; the maintained house checker itself
+    # may read full facts and receipts. Its scientific guards have separate controls.
+    monkeypatch.setattr(houses.reports, "read_facts", direct_facts)
+    monkeypatch.setattr(houses, "check_houses", check_each)
+    inputs = exact.VerifiedRationalInputs()
+    if seeded:
+        inputs.source_facts[key] = facts
+    inputs.imported_source(key, first)
+    inputs.imported_source(key, first)
+    inputs.imported_source(key, second)
+    assert inputs.source_facts[key] is facts
+    assert len(reads) == (0 if seeded else 1)
+    assert checked == [first, second]
+    for _attempt in range(2):
+        with pytest.raises(ValueError, match="new requested house differs"):
+            inputs.imported_source(key, refused)
+    assert refused not in inputs.imported[key]
+    assert checked == [first, second, refused, refused]
+    assert len(reads) == (0 if seeded else 1)
+    exact.VerifiedRationalInputs().imported_source(key, first)
+    assert len(reads) == (1 if seeded else 2)

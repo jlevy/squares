@@ -158,6 +158,7 @@ $defs:
         enum:
         - pending
         - not-selected
+        - adopted
       global_optimality:
         const: not-established
     allOf:
@@ -261,8 +262,8 @@ $defs:
         $ref: '#/$defs/decimal'
       side:
         $ref: '#/$defs/decimal'
-      exact_form:
-        $ref: '#/$defs/rational'
+      exact_form: {type: string, minLength: 1}
+      displaced_current: {type: string, pattern: '^packing/devtools/house-exact-prior-'}
       degree:
         type: integer
         minimum: 1
@@ -296,6 +297,10 @@ $defs:
       source_certificate:
         $ref: '#/$defs/source_certificate'
     allOf:
+    - if: {required: [source_certificate]}
+      then:
+        properties:
+          exact_form: {$ref: '#/$defs/rational'}
     - if:
         required:
         - source_certificate
@@ -349,6 +354,15 @@ $defs:
           - reported_source
         - required:
           - assurance
+    - required: [displaced_current, exact_form]
+      properties:
+        algebraic_source: {const: derived-from-source-closed-form}
+        kind: {const: superseded}
+      not:
+        anyOf:
+          - required: [source_certificate]
+          - required: [reported_source]
+          - required: [assurance]
   source_occurrence:
     type: object
     additionalProperties: false
@@ -601,6 +615,41 @@ $defs:
   entry:
     type: object
     additionalProperties: false
+    dependentRequired:
+      source_certificate: [source_occurrences, attribution, source_statuses]
+      attribution: [source_certificate, source_occurrences, source_statuses]
+      source_statuses: [source_certificate, source_occurrences, attribution]
+    allOf:
+      - if: {required: [source_certificate]}
+        then:
+          properties:
+            status: {const: open}
+            degree: {const: 1}
+            state: {const: rational}
+            algebraic_source: {const: derived-from-exact-form}
+            exact_form: {$ref: '#/$defs/rational'}
+            polynomial:
+              allOf:
+                - {$ref: '#/$defs/polynomial'}
+                - {properties: {coefficients: {minItems: 2, maxItems: 2}}}
+            side: {properties: {relation: {const: upper-bound}}}
+            source_certificate:
+              allOf:
+                - {$ref: '#/$defs/source_certificate'}
+                - properties:
+                    adoption: {const: adopted}
+                    verification: {const: V3}
+                    confirmation: {const: C3}
+                    geometry_replay: {const: native-replay-retained}
+                    receipt: {type: string, minLength: 1}
+            source_occurrences: {minItems: 1}
+            source_statuses:
+              minItems: 3
+              maxItems: 3
+              prefixItems:
+                - {const: adopted-current}
+                - {const: scoped-finite-feasibility-confirmed}
+                - {const: native-replay-retained}
     required:
       - n
       - status
@@ -616,6 +665,12 @@ $defs:
       - kkt
       - notes
     properties:
+      source_certificate: {$ref: '#/$defs/source_certificate'}
+      source_occurrences:
+        type: array
+        items: {$ref: '#/$defs/source_occurrence'}
+      attribution: {$ref: '#/$defs/source_attribution'}
+      source_statuses: {type: array, items: {type: string}}
       n: {type: integer, minimum: 1}
       status: {enum: [proved, open]}
       side:

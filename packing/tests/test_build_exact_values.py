@@ -26,10 +26,10 @@ import pytest
 import sympy as sp
 from jsonschema_rs import Draft202012Validator
 
+from devtools import adopt_houses, refinement_custody, refinement_packets, validate_schemas
 from devtools import backfill_algebraic_facts as algebraic_backfill
 from devtools import build_exact_values as exact
 from devtools import evand_arrangement_reports as arrangement_reports
-from devtools import refinement_custody, refinement_packets, validate_schemas
 from devtools import register_gupta_reports as gupta_imports
 from devtools import register_ryxu_reports as ryxu_imports
 from devtools.retained_data import compressed_path, read_retained_text, write_retained_text
@@ -52,6 +52,19 @@ def _entries() -> dict[int, dict[str, Any]]:
     return {entry["n"]: entry for entry in _register()["register"]["entries"]}
 
 
+class _RetainedPacking(dict[str, Any]):
+    """An explicit old source input, read from maintained complete prior-state records."""
+
+
+class _RetainedHouseInputs(exact.exact_house_sources.Inputs):
+    def admit(self, n: int, packing: dict[str, Any]):
+        # These dated proof controls exercise the original native/refinement validators,
+        # including their refusal paths. They do not claim to be current adopted houses.
+        if isinstance(packing, _RetainedPacking):
+            return None
+        return super().admit(n, packing)
+
+
 def _build(n: int, packing: dict[str, Any] | None = None, budget: int = 200) -> dict:
     if packing is None:
         text = (exact.FRONTIER / f"n-{n:03d}.md").read_text()
@@ -59,12 +72,16 @@ def _build(n: int, packing: dict[str, Any] | None = None, budget: int = 200) -> 
             "dict[str, Any]",
             load_yaml(algebraic_backfill.backfilled(text, n).split("---", 2)[1])["packing"],
         )
+    inputs = exact.VerifiedRationalInputs()
+    if isinstance(packing, _RetainedPacking):
+        inputs.houses = _RetainedHouseInputs()
     return exact.build_entry(
         n,
         packing,
         exact.catalogue_entries().get(n),
         exact.kkt_rows().get(n),
         budget,
+        verified_inputs=inputs,
     )
 
 
@@ -73,15 +90,22 @@ def _prior_import_cases() -> dict[int, dict[str, Any]]:
     """Complete frozen frontier records retained before Ry-Xu/Gupta adoption."""
     rows = [*ryxu_imports.read_history(), *gupta_imports.read_history()]
     assert len({row["n"] for row in rows}) == len(rows)
-    return {
-        row["n"]: load_yaml(row["frontier"].split("---\n", 2)[1])["packing"] for row in rows
+    prior = {
+        n: load_yaml(text.split("---", 2)[1])["packing"]
+        for n, text in adopt_houses.read_history().items()
     }
+    # The earlier import snapshots take precedence over the later house-adoption
+    # snapshot; n292 otherwise has no import snapshot and needs the retained house case.
+    prior.update(
+        {row["n"]: load_yaml(row["frontier"].split("---\n", 2)[1])["packing"] for row in rows}
+    )
+    return prior
 
 
 def _pre_import_packing(n: int) -> dict[str, Any]:
     """Keep historical bound/source/evidence pins together, never borrow current lanes."""
     prior = _prior_import_cases().get(n)
-    return copy.deepcopy(exact.load_packing(n) if prior is None else prior)
+    return _RetainedPacking(copy.deepcopy(exact.load_packing(n) if prior is None else prior))
 
 
 def _refinement_packing(n: int) -> dict[str, Any]:
@@ -90,12 +114,13 @@ def _refinement_packing(n: int) -> dict[str, Any]:
         source for source in refinement_packets.SOURCES.values() if n in source.numbers
     )
     assert packing["reported_upper_bound"]["source_key"] == source.key
-    return packing
+    return _RetainedPacking(packing)
 
 
 @pytest.fixture
 def historical_refinement_houses(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """Keep the complete earlier house custody active after a new source adopts n105."""
+    monkeypatch.setattr(exact.exact_house_sources, "Inputs", _RetainedHouseInputs)
     houses = exact.refinement_house_links
     private = tmp_path / "historical-refinement-houses"
     metadata = private / "receipts/house-metadata.json.xz"
@@ -135,7 +160,7 @@ def _historical_refinement_packing(n: int) -> dict[str, Any]:
     packing = copy.deepcopy(exact.load_packing(n))
     packing["reported_upper_bound"] = previous["reported"]
     packing["verified_upper_bound"] = previous["verified"]
-    return packing
+    return _RetainedPacking(packing)
 
 
 def _historical_arrangement_packing(n: int) -> dict[str, Any]:
@@ -148,7 +173,7 @@ def _historical_arrangement_packing(n: int) -> dict[str, Any]:
     packing = copy.deepcopy(exact.load_packing(n))
     packing["reported_upper_bound"] = previous["reported_upper_bound"]
     packing["verified_upper_bound"] = previous["verified_upper_bound"]
-    return packing
+    return _RetainedPacking(packing)
 
 
 def _refused(call: Callable[[], object], fragment: str) -> None:
@@ -492,6 +517,7 @@ def test_all_verified_rationals_keep_ideal_routes_and_share_one_packet_scan(
 
     monkeypatch.setattr(exact.evand, "receipt_problems", counted_scan)
     inputs = exact.VerifiedRationalInputs()
+    inputs.houses = _RetainedHouseInputs()
     for n in (*VERIFIED_FALLBACK_COUNTS, 270, 272):
         packing = (
             _historical_arrangement_packing(n) if n in (270, 272) else exact.load_packing(n)
@@ -725,8 +751,9 @@ def test_finite_rational_records_have_maintained_algebraic_fields(n: int) -> Non
 
 
 @pytest.mark.parametrize("n", [266, 270, 272])
+@pytest.mark.usefixtures("historical_arrangement_houses")
 def test_a_new_daniel_arrangement_identifies_its_native_side_not_the_display(n: int) -> None:
-    packing = copy.deepcopy(exact.load_packing(n))
+    packing = _dated_arrangement_packing(n)
     before = copy.deepcopy(packing)
     side = arrangement_reports.read_fact(n).side
     assert Fraction(packing["reported_upper_bound"]["exact_form"]) == side
@@ -763,8 +790,56 @@ def test_a_new_daniel_arrangement_identifies_its_native_side_not_the_display(n: 
     assert packing == before
 
 
+def _dated_arrangement_packing(n: int) -> dict[str, Any]:
+    prior = adopt_houses.read_history().get(n)
+    packing = (
+        load_yaml(algebraic_backfill.backfilled(prior, n).split("---", 2)[1])["packing"]
+        if prior is not None
+        else copy.deepcopy(exact.load_packing(n))
+    )
+    assert packing["reported_upper_bound"]["source_key"] == arrangement_reports.SOURCE_KEY
+    assert (
+        packing["reported_upper_bound"]["exact_form"]
+        == (packing["verified_upper_bound"]["exact_form"])
+    )
+    return _RetainedPacking(packing)
+
+
+@pytest.fixture
+def historical_arrangement_houses(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Exercise #399 with its complete retained pose after n270 adopts another source."""
+    houses = exact.arrangement_houses
+    source_repository = houses.REPO
+    native_expected = houses.expected_house
+    private = tmp_path / "historical-arrangement-houses"
+    private.mkdir()
+    rows = arrangement_reports.check_certification()
+    original = houses.house_path
+    for n in houses.NUMBERS:
+        witness = houses.expected_house(arrangement_reports.read_fact(n), rows[n])
+        (private / f"n-{n:03d}.yaml").write_text(
+            witness_document(witness, schema="../witness.schema.yaml")
+        )
+
+    def retained_path(n: int) -> Path:
+        original(n)  # Preserve the maintained unique integer/count admission.
+        return private / f"n-{n:03d}.yaml"
+
+    def expected_with_original_source_origin(certificate, positive):
+        # Leaf custody belongs to the staged private checkout. The retained source
+        # remains in its original private checkout, with the exact same source paths.
+        # Delegate the complete constructor and all its native-job guards unchanged.
+        with monkeypatch.context() as origin:
+            origin.setattr(houses, "REPO", source_repository)
+            return native_expected(certificate, positive)
+
+    monkeypatch.setattr(houses, "house_path", retained_path)
+    monkeypatch.setattr(houses, "REPO", private)
+    monkeypatch.setattr(houses, "expected_house", expected_with_original_source_origin)
+
+
 def _arrangement_packing(n: int = 270, *, supplied: bool = False) -> dict[str, Any]:
-    packing = _unprojected_rational_packing(n)
+    packing = _unprojected_rational_packing(n, _dated_arrangement_packing(n))
     if supplied:
         side = Fraction(packing["reported_upper_bound"]["exact_form"])
         packing["reported_upper_bound"].update(
@@ -775,6 +850,7 @@ def _arrangement_packing(n: int = 270, *, supplied: bool = False) -> dict[str, A
 
 
 @pytest.mark.parametrize("n", [266, 270, 272])
+@pytest.mark.usefixtures("historical_arrangement_houses")
 def test_a_supplied_daniel_linear_identity_keeps_new_pose_custody(n: int) -> None:
     packing = _arrangement_packing(n, supplied=True)
     before = copy.deepcopy(packing)
@@ -805,6 +881,7 @@ def test_a_supplied_daniel_linear_identity_keeps_new_pose_custody(n: int) -> Non
         "missing-form",
     ],
 )
+@pytest.mark.usefixtures("historical_arrangement_houses")
 def test_a_daniel_identity_requires_exact_current_native_metadata(
     control: str, *, supplied: bool
 ) -> None:
@@ -843,6 +920,7 @@ def test_a_daniel_identity_requires_exact_current_native_metadata(
 
 
 @pytest.mark.parametrize("n", [266, 270, 272])
+@pytest.mark.usefixtures("historical_arrangement_houses")
 def test_a_nearby_daniel_polynomial_cannot_replace_the_native_side(n: int) -> None:
     packing = _arrangement_packing(n, supplied=True)
     side = Fraction(packing["reported_upper_bound"]["exact_form"])
@@ -853,6 +931,7 @@ def test_a_nearby_daniel_polynomial_cannot_replace_the_native_side(n: int) -> No
     _refused(lambda: _build(n, packing), "is not the minimal polynomial of")
 
 
+@pytest.mark.usefixtures("historical_arrangement_houses")
 def test_a_daniel_display_cannot_replace_its_full_native_fraction() -> None:
     packing = _arrangement_packing()
     ceiling = packing["verified_upper_bound"]["value"]
@@ -875,10 +954,12 @@ def test_a_daniel_display_cannot_replace_its_full_native_fraction() -> None:
         ("replay", None),
     ],
 )
+@pytest.mark.usefixtures("historical_arrangement_houses")
 def test_a_daniel_identity_requires_exact_evidence_and_its_receipt_file(
     field: str, value: object
 ) -> None:
     inputs = exact.VerifiedRationalInputs()
+    inputs.houses = _RetainedHouseInputs()
     row = copy.deepcopy(
         inputs.evidence_row(
             270, arrangement_reports.EXACT_EVIDENCE, arrangement_reports.SOURCE_KEY
@@ -889,7 +970,7 @@ def test_a_daniel_identity_requires_exact_evidence_and_its_receipt_file(
     _refused(
         lambda: exact.build_entry(
             270,
-            exact.load_packing(270),
+            _dated_arrangement_packing(270),
             exact.catalogue_entries().get(270),
             exact.kkt_rows().get(270),
             verified_inputs=inputs,
@@ -899,6 +980,7 @@ def test_a_daniel_identity_requires_exact_evidence_and_its_receipt_file(
 
 
 @pytest.mark.parametrize("mutation", ["missing-job", "positive-verdict", "control-verdict"])
+@pytest.mark.usefixtures("historical_arrangement_houses")
 def test_a_daniel_identity_requires_all_nine_complete_native_jobs(
     monkeypatch: pytest.MonkeyPatch, mutation: str
 ) -> None:
@@ -914,18 +996,26 @@ def test_a_daniel_identity_requires_all_nine_complete_native_jobs(
     monkeypatch.setattr(
         arrangement_reports, "read_xz", lambda path: record if path == receipt else read(path)
     )
-    _refused(lambda: _build(270), "arrangement rational bound refused")
+    _refused(
+        lambda: _build(270, _dated_arrangement_packing(270)),
+        "arrangement rational bound refused",
+    )
 
 
 @pytest.mark.parametrize("missing", ["receipt", "facts"])
+@pytest.mark.usefixtures("historical_arrangement_houses")
 def test_a_daniel_identity_refuses_missing_private_inputs(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path, missing: str
 ) -> None:
     name = "receipt_path" if missing == "receipt" else "fact_path"
     monkeypatch.setattr(arrangement_reports, name, lambda: tmp_path / "missing.json.xz")
-    _refused(lambda: _build(270), "arrangement rational bound refused")
+    _refused(
+        lambda: _build(270, _dated_arrangement_packing(270)),
+        "arrangement rational bound refused",
+    )
 
 
+@pytest.mark.usefixtures("historical_arrangement_houses")
 def test_a_daniel_identity_refuses_changed_complete_source_bytes(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -938,9 +1028,13 @@ def test_a_daniel_identity_refuses_changed_complete_source_bytes(
         "read_xz",
         lambda selected: facts if selected == path else read(selected),
     )
-    _refused(lambda: _build(270), "arrangement rational bound refused")
+    _refused(
+        lambda: _build(270, _dated_arrangement_packing(270)),
+        "arrangement rational bound refused",
+    )
 
 
+@pytest.mark.usefixtures("historical_arrangement_houses")
 def test_daniel_custody_is_reused_only_inside_one_build(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -953,11 +1047,12 @@ def test_daniel_custody_is_reused_only_inside_one_build(
 
     monkeypatch.setattr(arrangement_reports, "check_certification", counted)
     inputs = exact.VerifiedRationalInputs()
+    inputs.houses = _RetainedHouseInputs()
     for n in arrangement_reports.NUMBERS:
         assert (
             exact.build_entry(
                 n,
-                exact.load_packing(n),
+                _dated_arrangement_packing(n),
                 exact.catalogue_entries().get(n),
                 exact.kkt_rows().get(n),
                 verified_inputs=inputs,
@@ -970,7 +1065,7 @@ def test_daniel_custody_is_reused_only_inside_one_build(
         raise arrangement_reports.ReportError("changed nine-job receipt")
 
     monkeypatch.setattr(arrangement_reports, "check_certification", changed)
-    _refused(lambda: _build(270), "changed nine-job receipt")
+    _refused(lambda: _build(270, _dated_arrangement_packing(270)), "changed nine-job receipt")
 
 
 @pytest.mark.parametrize("n", [68, 105, 292])
@@ -1533,6 +1628,9 @@ def test_source_notes_are_collected_after_all_current_entries_once(
     monkeypatch.setattr(exact, "build_entry", entry)
     monkeypatch.setattr(exact.reported_roots, "collect", collect)
     monkeypatch.setattr(exact, "source_certificate_history", lambda *_args, **_kwargs: [])
+    # This assembly control deliberately builds no polynomial, so displacement admission
+    # is covered independently by the complete prior-identity conservation controls.
+    monkeypatch.setattr(exact, "append_displaced_current_history", lambda *_args: None)
     record = exact.build_record()["register"]
     assert len(calls) == 1
     assert {row["n"] for row in record["entries"] if row["notes"]} == {102, 106, 152, 177}
@@ -1617,8 +1715,11 @@ def test_record_hunt_is_noncurrent_and_preserves_current_case_identity() -> None
         if row.get("source_certificate", {}).get("result")
         in {"T-125", "T-127", "T-128", "T-129", "T-130", "T-131"}
     ]
-    assert len(finite) == 29
-    assert sum(row["kind"] == "unreconciled-source" for row in finite) == 15
+    # Eight old T128/T130 offers are adopted; 24 former native-current identities
+    # enter history, so the cumulative six-result history is 29 - 8 + 24 = 45.
+    assert len(finite) == 45
+    assert sum(row["kind"] == "superseded" for row in finite) == 45
+    assert sum(row["kind"] == "unreconciled-source" for row in finite) == 0
     (source102,) = [
         row
         for row in history
@@ -1641,10 +1742,10 @@ def test_record_hunt_is_noncurrent_and_preserves_current_case_identity() -> None
         assert current == _build(row["n"])
         assert current["side"]["relation"] == "upper-bound"
         assert current["polynomial"]["coefficients"] != row["polynomial"]["coefficients"]
-        assert Fraction(row["exact_form"]) < Fraction(current["checks"]["root"]["interval"][0])
+        assert Fraction(row["exact_form"]) > Fraction(current["checks"]["root"]["interval"][1])
         assert row["source_certificate"]["verification"] == "V3"
         assert row["source_certificate"]["confirmation"] == "C3"
-        assert row["source_certificate"]["adoption"] == "pending"
+        assert row["source_certificate"]["adoption"] == "not-selected"
 
 
 def test_every_numeric_only_count_names_its_route_and_bead() -> None:
