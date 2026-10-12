@@ -5,7 +5,7 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T15:17:57.559Z
+updated_at: 2026-10-12T16:41:38.000Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -36,84 +36,186 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 
 ## Notes
 
-Current synchronization checkpoint: 2026-10-12T15:17:57.143734+00:00
+Current synchronization checkpoint: `2026-10-12T16:41:37.377960+00:00`
 
-Formal stack447 is locally refreshed through origin/main
-25de5a42e8e35ca01668ed07747ed2a3601f4280. Parent local head is
-fcd64351655526d2198eaad2b9f517a8ab2233d0 and child is
-0841b84eb7435c747d23da9d7893370af5888977. Both are clean and pins checked;
-publication and final hosted CI remain pending. PR551 adds confirmation replies only.
-Latest scientific intake came from merged PR516, T147–T150.
+Formal stack 447 is locally rebased through origin/main
+`e10fd85d444c8a3859ed4abb0edcf7be385f4171`, including merged PR 518.
+Parent base is `f2b757b4d9af27909972401b73e1b8a041cb1dcc`; child base is
+`19670d8ec64a4cd3513454dd01a45f7ae9c74451`. Active source and presentation
+patches are not yet committed or published; final qualification and hosted CI remain
+pending. No polynomial PR landing is authorized by this checkpoint.
 
-The parent has426 raw records,425 coefficient vectors and1381 strings. The child
-has610 canonical records,632 vectors and6522 strings (3182773 decoded /900003 gzip
-bytes); public424 records =324 current+100 relevant sources,424 vectors/2272strings.
-All324 standing cases and279 earlier child histories are conserved in full. Current
-child321 exact identities, numeric29/55/71 and77 proved labels remain unchanged.
-The complete n83 polynomial retains673 coefficients, maximum724 digits, source ordinal27
-explicitly uncounted independently. Raw186 superseded records and22 redundant notes
-remain canonical; their excessive public rows stay omitted. The report is strictly
-web-only, with no polynomial PDF or full generated HTML committed.
+Upstream changed 42 selected finite side identities, all rational degree one and at
+scoped V3/C3. Exactly 42 of the prior 87 native pending offers now supply current
+custody; the other 45 are superseded. No native offer remains pending. Every one of
+42 displaced current identities must remain in canonical history, including the old
+n=232 quadratic and n=308 integer. The independent immutable binding audit matched
+all 42 native sides and poses, 82 custody inputs and complete prior-state case texts;
+it was a literal audit, not a fresh geometry or global-optimality proof.
 
-The maintained adapter adds72 offers:65 earlier T134–141/T146 plus7 from T147–150
-(n207,153,155,156,211,146,261). All7 are exact rational degree-one side identities
-with V3/C3 native finite geometry, strictly improving source offers pending adoption.
-T148 degree7 is a construction-angle equation; T149 native c3d17ab differs from larger
-41019fb issue prints; T150 extra facts70/103/123/237/295 acquire no reviewed T150 grade.
-Public87 native offers await standing adoption;3 reported106/152/177 roots remain V0/C0.
-The queued41 quadratic database updates remain separate; reconcile overlaps before
-counting uniqueN. Acquisition, exact identity, finite bound, atlas adoption and optimality
-remain distinct. No solver/contact, geometry/Lean or new optimality campaign ran.
+The strict builder adapter, scoped legacy source validation, complete adopted current
+custody and presentation are in progress. Some adopted cases still hold pre-adoption
+polynomial metadata after the rebase, so neither current corpus nor tables are
+qualified yet. Expected canonical totals are 610 records / 632 vectors / 6,522
+integer strings, history 273 superseded + 3 unreconciled + 7 outside + 3 invalid;
+public forecast is 337 = 324 current + 13 additional. These are conservation targets
+pending maintained regeneration and independent comparison, not measured results.
+Current child coverage remains 321 exact identities, numeric n=29/55/71 and 77 proved
+labels. n=83 retains all 673 coefficients; source ordinal 27 remains independently
+uncounted. Report stays strictly web-only; no polynomial PDF is generated or published.
 
-Final clean child web qualification passed: all8 browser views/0 findings; complete
-HTML1998344 bytes (1656 margin under unchanged2000000); compactHTML15420; startup
-295629/3212387 =9.20278285% under unchanged10%;12 script declarations;6443/6443 local
-partial consumer checks; all417 earlier IDs/all834 old payload paths+bytes preserved.
-Original2042232-byte render is retained negative. Stable n155 occurrence2 and n83
---79 routes survive; only2 unpublished occurrence3 registrations retired via guard.
-Complete Markdown1154710 bytes is unchanged, all1026 coefficient rows retained.
+Current n=102 is Evan Daniel T-146 regularizing Ryan Xu, retained from
+`ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7` at
+`search/regularize/lists/certs/n-102.cert.gz`. Prior RyXu and Daniel certificates are
+historical fixtures. The 41 exact-quadratic/Lean updates remain a separate follow-up,
+as do reported geometry gaps n=106/152/177, numeric cases and ideal-contact research.
+Other owners' bead statuses may lag the newly landed adoption; this task does not
+close their research scopes.
 
-Final Git audit: P19 commits/423files,+12684/-50999; C30 commits/173files,+29523/-711;
-union49commits/564files,+41691/-51194.915 strict-new blobs total62968043 rawbytes;
-thin4765103/nonthin6873365 bytes; largest historical2629925. Packs are non-additive
-and rawbytes are not disk allocation. No new PDFs or full generated HTML;8 small
-HTML templates33413 total/max6174. Reviewed P/C corpus snapshots match exactly.
-No further history rewrite needed; own unpublished source/pin amendments avoided
-redundant generated versions. Unrelated primary checkout/research is preserved.
+Reviewed pre-adoption test repairs include census assertions, n155 custody rendering,
+and a concrete signal-fixture PID race where the RSS sampler was mistaken for the
+worker. Focused controls passed 208 builder tests, 12 browser tests and 4 signal/CLI
+controls. The last local wide child run passed 68 prerequisites, then failed four
+call phases and was explicitly stopped with exit 143. Its unique fixtures were moved
+on the same external volume into durable evidence. There was no terminal JUnit lane
+success. The unchanged 20-second CLI timeout passed serially; that does not diagnose
+its earlier parallel failure. Unknown subprocess timeout causes remain open in
+`think-w0if`; prior local and hosted passes qualify their dated heads only.
 
-Latest P source controls81PASS37.83s; after-data records50PASS74.10s; clean5cd edit
-66/108 selectedPASS284.73s (240s advisory reference at different job shape, no cap
-changed). Final Pfcd records50 selectedPASS94.79s. Child producer82PASS156.86s.
-Final child maintained pre-push against its formal parent base is RUNNING,69 selected,
-six reported CPUs, normal PACK_JOBS1/pool PACK_JOBS6,1800s subprocess cap. This scope
-does not qualify parent broad tests or all108 full steps; hosted final CI still pending.
+The latest external free-space observation is about 2 GiB. All task runtime, Cargo,
+pytest and export scratch remain external. No space reclamation is claimed. Source
+and unique evidence are preserved; large builds are withheld pending bounded audit.
 
-Local negative parent1c six-CPU run passed64 prerequisites then timed out reachable
-at1800s (1801.03s wall), with one full failed call-phase unmutated check_readme120s
-trace and empty child output; no completed normal/pool JUnit. Ten-worker retry’s
-60/25/45/20s timeouts and d0c143 atlas outcomes without exception text remain negative.
-Failure companion repair15PASS8.33s captures future failed-phase details; it supplies
-no cause diagnosis. Linked open think-w0if now owns the observed local timeout
-follow-up; think-nns5 broader baseline inputs and think-w19q two other pool markers
-remain separate. Upstream200→216MiB snapshot cap is a committed contract change,
-not a waiver for call/report/startup caps. Retained interrupted fixture roots12/14
-are durable external evidence; no deletion or reclaimed-space claim.
+Next: finish strict source/presentation patches, maintained case backfill and lossless
+corpus rebuild; integrate parent through native upstack; qualify small web exports and
+required gates; audit actual Git-history sizes; push the formal stack with leases;
+update both PRs with actual counts and terminal CI. Keep owner review/landing separate.
 
-Remaining adoption/research owners: think-fvz4,think-63vx,think-npvi,think-kkj2/
-think-iyij,think-lhtz/think-0mlq,think-8sm2,think-je8y/phh8/1blg,think-chsu,
-think-nv5o,think-056g/gl59/w622,think-cb34/omqv/18b8/ux1v/k35c/6vrv.
-Publication growth/startup remains think-t1lk/jygq/5jr5/rxyl. Selected continuation
-is W7 think-s6np driver plus independent n11 contact-derived control before one
-bounded current-RyXu102 W6 think-ohhz slice. Do not start another campaign here.
-Owner requested final review before landing; no PR merge authorized.
+Evidence root:
+`/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635`.
 
-Handoff: docs/project/handoff-2026-10-10-polynomial-pr-stack.md at child0841b84e.
-Plan: docs/project/specs/active/plan-2026-10-06-exact-side-values.md. Final PR bodies
-will carry exact published heads, CI URLs/outcomes and final slice wall. Evidence:
-/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635
-Receipts: data/child-main25-final-web-receipt.json,
-review/final-main25de-stack-size-audit.md, validation/parent-main25-records.log,
-validation/child-main25-layer-push-launch.json, and local-worker-timeout-bead.json.
+--- Dated pre-adoption checkpoint; preserved evidence, superseded current-state claims ---
+
+Current synchronization checkpoint: `2026-10-12T15:17:57.143734+00:00`
+
+Formal stack 447 is locally refreshed through `origin/main`
+`25de5a42e8e35ca01668ed07747ed2a3601f4280`. The clean parent head is
+`fcd64351655526d2198eaad2b9f517a8ab2233d0`; the clean child head is
+`0841b84eb7435c747d23da9d7893370af5888977`. Both pins are checked.
+Publication and final hosted CI remain pending.
+PR551 adds confirmation replies only; the latest scientific intake came from merged
+PR516, T147–T150.
+
+| Corpus scope | Records | Coefficient vectors | Integer strings |
+| --- | --- | --- | --- |
+| Parent raw corpus | 426 | 425 | 1,381 |
+| Child canonical corpus | 610 | 632 | 6,522 |
+| Child public projection | 424: 324 current + 100 relevant sources | 424 | 2,272 |
+
+The child canonical register is 3,182,773 decoded / 900,003 gzip bytes.
+All 324 standing cases and 279 earlier child histories are conserved in full.
+The child’s 321 exact identities, numeric n=29/55/71 and 77 proved labels remain
+unchanged. The complete n=83 polynomial retains 673 coefficients, maximum 724 digits;
+source ordinal 27 is explicitly not independently counted.
+All 186 superseded records and 22 redundant notes remain canonical while their excessive
+public rows stay omitted.
+The report is strictly web-only: no polynomial PDF or generated complete HTML is
+committed.
+
+The maintained adapter adds 72 offers: 65 earlier T134–T141/T146 offers plus seven from
+T147–T150 (n=207, 153, 155, 156, 211, 146, 261). All seven are exact rational degree-one
+side identities with V3/C3 checked native finite geometry.
+They strictly improve source offers; standing adoption remains pending.
+T148’s degree-seven equation describes a construction angle.
+T149’s native `c3d17ab` differs from the larger `41019fb` issue prints.
+T150’s extra facts at n=70/103/123/237/295 acquire no reviewed T150 grade.
+The public projection has 87 native offers awaiting standing adoption; the three
+reported n=106/152/177 roots remain V0/C0. The queued 41 quadratic database updates are
+separate; reconcile overlaps before counting unique n. Acquisition, exact identity,
+finite bound, atlas adoption and optimality remain distinct.
+No solver/contact, new geometry/Lean or optimality campaign ran here.
+
+| Final clean child web check | Result |
+| --- | --- |
+| Browser views | All eight pass; zero findings |
+| Complete HTML | 1,998,344 bytes; 1,656-byte margin under unchanged 2,000,000-byte cap |
+| Compact HTML | 15,420 bytes |
+| Startup | 295,629 / 3,212,387 bytes = 9.20278285%; below unchanged 10% |
+| Script declarations | 12 |
+| Local partial consumers | 6,443 / 6,443 pass |
+| Prior publication custody | All 417 earlier IDs and 834 old payload paths and bytes preserved |
+| Complete Markdown | Unchanged at 1,154,710 bytes; all 1,026 coefficient rows retained |
+
+The original 2,042,232-byte render remains a negative receipt.
+Stable n=155 occurrence2 and n=83 `--79` routes survive.
+Only two unpublished occurrence3 registrations were retired through the guarded
+workflow.
+
+| Final Git audit | Commits | Files | Added / removed lines |
+| --- | --- | --- | --- |
+| Parent | 19 | 423 | +12,684 / -50,999 |
+| Child | 30 | 173 | +29,523 / -711 |
+| Union | 49 | 564 | +41,691 / -51,194 |
+
+The 915 strictly new blobs total 62,968,043 raw bytes.
+Union packs are 4,765,103 bytes thin / 6,873,365 non-thin; the largest historical blob
+is 2,629,925 bytes. Packs are non-additive and raw bytes are not disk allocation.
+There are no new PDFs or generated complete HTML files.
+Eight small HTML templates total 33,413 bytes, maximum 6,174. Reviewed parent/child
+corpus snapshots match exactly.
+No further history rewrite is needed: amendments to our unpublished source/pins avoided
+redundant generated versions.
+The unrelated primary checkout/research is preserved.
+
+| Local validation scope | Result |
+| --- | --- |
+| Parent source controls | 81 pass in 37.83 s |
+| Parent after-data records | 50 pass in 74.10 s |
+| Dated clean `5cd9` edit selection | 66/108 selected pass in 284.73 s; 240 s advisory reference at a different job shape, not an enforced cap |
+| Final parent `fcd643516` records | 50 selected pass in 94.79 s |
+| Child producer controls | 82 pass in 156.86 s |
+| Final child maintained pre-push against formal parent base | Active: 69 selected, 68 prerequisites complete; reachable tests underway |
+
+The active child pre-push uses six reported CPUs, normal `PACK_JOBS=1`, pool
+`PACK_JOBS=6`, and an 1,800 s subprocess cap.
+This scope does not qualify parent broad tests or all 108 full steps.
+There is no terminal child pass yet; final hosted CI remains pending.
+
+The negative parent `1c` six-CPU run passed 64 prerequisites, then reachable tests timed
+out at 1,800 s (1,801.03 s wall).
+One unmodified `check_readme` baseline call failed at 120 s with a full call-phase trace
+and empty child output.
+There is no completed normal or pool JUnit.
+The ten-worker retry’s 60/25/45/20 s timeouts and `d0c`’s 143 atlas outcomes without
+exception text remain negative evidence.
+The failure-companion repair passed 15 controls in 8.33 s and captures future
+failed-phase details; it supplies no cause diagnosis.
+Open `think-w0if` owns the observed local-timeout follow-up.
+`think-nns5` broader baseline inputs and `think-w19q` two other pool markers remain
+separate. The upstream 200 → 216 MiB snapshot cap is a committed contract change, not a
+waiver for call/report/startup caps.
+Interrupted fixture roots 12/14 are retained as durable external evidence; no deletion
+or reclaimed-space claim is made.
+
+Remaining adoption/research owners are `think-fvz4`, `think-63vx`, `think-npvi`,
+`think-kkj2` / `think-iyij`, `think-lhtz` / `think-0mlq`, `think-8sm2`, `think-je8y` /
+`think-phh8` / `think-1blg`, `think-chsu`, `think-nv5o`, `think-056g` / `think-gl59` /
+`think-w622`, and `think-cb34` / `think-omqv` / `think-18b8` / `think-ux1v` /
+`think-k35c` / `think-6vrv`. Publication growth/startup remains with `think-t1lk`,
+`think-jygq`, `think-5jr5` and `think-rxyl`. Selected continuation is W7 `think-s6np`:
+driver delivery and an independent n=11 contact-derived control before one bounded
+current-RyXu n=102 W6 `think-ohhz` slice.
+Do not start another campaign here.
+The owner requested final review before landing; no PR merge is authorized.
+
+Handoff: `docs/project/handoff-2026-10-10-polynomial-pr-stack.md` at child `0841b84e`.
+Plan: `docs/project/specs/active/plan-2026-10-06-exact-side-values.md`. Final PR bodies
+will carry exact published heads, CI URLs/outcomes and the final slice wall.
+Evidence root:
+`/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635`.
+Receipts: `data/child-main25-final-web-receipt.json`,
+`review/final-main25de-stack-size-audit.md`, `validation/parent-main25-records.log`,
+`validation/child-main25-layer-push-launch.json`, and `local-worker-timeout-bead.json`.
 
 --- Dated prior checkpoints; preserved evidence, superseded current-state claims ---
 
