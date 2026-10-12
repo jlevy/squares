@@ -5,7 +5,7 @@ title: "Import Guzhou0806: s(40) > 3359/500 = 6.718 with 163 new rectangle suppo
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:16.371Z
-updated_at: 2026-10-12T07:57:19.996Z
+updated_at: 2026-10-12T08:14:30.417Z
 started_at: 2026-10-11T20:28:27.781Z
 ---
 https://github.com/jlevy/squares/issues/485#issuecomment-6106761997 (2026-10-11T07:39Z), reviewed by wand125 in 6111583905 (verified, no gaps, plus an unpublished independent continuous-angle replay). Guzhou0806/n40-square-packing 6a65957e6c5c51cdf267917d882dab7f5b4928dd, release n40-new-supports-6718-20261011 (n40-6718.zip, SHA-256 e6e49590...3b3f). Raises T-145's 1340000/199529. The entry point's full replay took 1,552 s on 6 workers (author and wand125), about 2.6 CPU-hours: stage 4 needs an owner budget.
@@ -37,7 +37,7 @@ https://github.com/jlevy/squares/issues/485#issuecomment-6106761997 (2026-10-11T
 
 **Priced validation plan (stage 4).** Finite steps and the near-axis statement: done here, seconds (below). The 43 slabs with the release's kernel, rebuilt from the retained source (g++ 13.3.0 rebuilds the CI binaries): the receipts' per-slab seconds sum to 2,655.3 s (local, GCC 15.2, longest 158.7 s) and 5,229.5 s (CI, GCC 13.3, longest 327.4 s); T-145's replay on this host took 1,854.9 CPU-s against 1,891.8 (local) and 3,693.3 (CI), so this replay prices at 2,604 (local basis) to 2,626 (CI basis) CPU-s, about 0.74 CPU-hours, longest slab about 164 s: wall about 2,670 s at --workers 1, 1,342 s at 2, 670 s at 4 (longest-first schedule; devtools.audit_n40_new_supports check, price block). No single job is above 30 minutes. The contract's kernel controls (A to F, H) cost minutes on T-145; the sqverify-fast 401-direction necessary condition at the new B is not priced from a measurement (T-145's took 295 CPU-s on 3,792 rectangles; this density has 5,424). The release's duals take 131.8 s (local) and 200.9 s (CI) and are not part of the bound. The ~2.6 CPU-hours figure is the full entry point as wall x workers on wand125's run (1,552 s x 6 = 9,312 worker-s); the source's own entry points are 858.95 s x 4 (local) and 1,587.30 s x 4 (CI). Decides without the source's code: the finite steps and the near-axis statement, yes (first-party audit and sqverify-fast); the continuous cover, no (only the producer's kernel; GC-4; a first-party interval kernel with the angle as an interval dimension is a W7 slice).
 
-blocked_on: owner budget for the n40 6.718 continuous-pose kernel replay (~2.6 CPU-hours)
+blocked_on: none
 
 (The ~2.6 CPU-hours is the full entry point at six workers; the kernel replay alone prices at about 0.74 CPU-hours here, 45 minutes at one worker.)
 
@@ -54,3 +54,5 @@ devtools/audit_n40_new_supports.py with tests/test_audit_n40_new_supports.py (10
 Proposed register/evidence YAML: in the lane's final report to the coordinator (records lane think-ekv3 applies it); not applied here.
 
 2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): existing issue https://github.com/jlevy/squares/issues/485 states the remaining work (reply https://github.com/jlevy/squares/issues/485#issuecomment-6119333366: registration in a later layer, the 43-slab replay at about 0.74 CPU-hours, a review); listed as in flight on the tracker https://github.com/jlevy/squares/issues/544. wand125's sqverify_continuous route is https://github.com/jlevy/squares/issues/533 (think-xzob).
+
+budget: approved by the coordinator under the owner's 2026-10-11 priority for quick validations (kernel replay about 0.74 CPU-hours); replay running in the stage 4 lane since 2026-10-12T06:49Z
