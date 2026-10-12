@@ -5,13 +5,13 @@ title: Differential test against the Python oracle, plus certificate round-trip
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 4
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0nykzwb0b8kwndbvf27aefk
 created_at: 2026-08-22T23:59:13.407Z
-updated_at: 2026-10-10T22:47:14.232Z
+updated_at: 2026-10-12T23:50:29.910Z
 closed_at: 2026-08-23T05:26:18.301Z
 close_reason: "Done and in the gate: differential_test.py checks sqsearch pair energy against sqpack validity on 20,000 near-contact pairs, mutation-checked. Certificate round-trip remains with think-0md2."
 ---

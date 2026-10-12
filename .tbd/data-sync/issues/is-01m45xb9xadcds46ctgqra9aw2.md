@@ -5,13 +5,13 @@ title: Negative controls on check_readme, validate_schemas and ledger check run 
 kind: bug
 status: open
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 labels: []
 dependencies: []
 parent_id: is-01m1sx5m1p5868jhwcdzfkvada
 created_at: 2026-10-05T11:31:53.898Z
-updated_at: 2026-10-05T11:31:53.898Z
+updated_at: 2026-10-12T23:40:50.214Z
 ---
 Three checks that negative controls are built on already exit 1, unmutated, inside a mutation worker snapshot. A control is scored as "exited non-zero and printed its expected message", with no green baseline demanded. So the 4 + 10 + 35 controls on these commands are currently scored over a checker that is red before any mutation is applied. That is the blinding class the `PRUNE` comments in `packing/devtools/run_negative_controls.py` warn about (bibliography.yaml, 2026-09-22). A looser `expect:` string, or a mutation whose message happens to coincide, would let a control pass over a checker that never reached the code it rehearses.
 
@@ -35,3 +35,7 @@ Suggested acceptance:
 - A harness mode or test that runs each distinct control command unmutated in a fresh worker and demands the clean result each control's rehearsal assumes. Where a command cannot be green in a worker, record that explicitly with its reason.
 - Then fix the three causes. Options: copy, or rescue in COPY_SEPARATELY, the root files the README layout names and `resources/bibliography.schema.yaml`. Decide whether verifier cross-checks treat a pruned `resources/` path as present (the existence-only manifest idea in think-t1lk's Sol audit note). Copy `.github/PULL_REQUEST_TEMPLATE.md`. Make `linked_pruned_targets` restore a linked pruned directory, or make the ledger check consult the worker manifest.
 - None of this may weaken the real gate's checks on the full checkout.
+
+## Notes
+
+2026-10-12 reconciliation: 74e4a0819 (on main since 2026-10-05) made check_readme and the ledger check green unmutated in a worker; validate_schemas (verifier-registry paths under pruned resources/web/) and test_change_scoped_selection.py (vendor/kpress) remain red and are this bead's remaining scope.

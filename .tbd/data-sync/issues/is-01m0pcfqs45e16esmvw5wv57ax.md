@@ -5,13 +5,13 @@ title: "Diagnose the quench_bracket slow path (n=5 seed 4: 8020 LP solves withou
 kind: bug
 status: closed
 priority: 2
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 5
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pdh5bj67ca8vk7ct53g5qt
 created_at: 2026-08-23T04:01:31.427Z
-updated_at: 2026-10-10T22:48:03.035Z
+updated_at: 2026-10-12T23:52:21.345Z
 closed_at: 2026-08-23T04:42:02.579Z
 close_reason: "Root cause found: absolute bracket tolerance 1e-15 against angles at 14.14 rad where ULP is 1.78e-15, so the interval could never satisfy it. Fixed by folding angles to [0,pi/2), scaling the tolerance, and capping iterations. Pathological cell: 145s -> 1.6s, lands at 4.4e-16."
 ---

@@ -5,8 +5,8 @@ title: Certify a two-parameter exact n=5 optimal sheet
 kind: task
 status: closed
 priority: 0
-version: 4
-spec_path: explorations/packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
+version: 5
+spec_path: packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
 delegate: unknown@spud10.local
 labels:
   - packing
@@ -17,7 +17,7 @@ parent_id: is-01m0tn3kqe19evm1r40wgnpb61
 hold: null
 hold_until: null
 created_at: 2026-08-24T19:56:01.402Z
-updated_at: 2026-08-24T20:13:11.109Z
+updated_at: 2026-10-12T23:40:00.247Z
 started_at: 2026-08-24T19:56:09.554Z
 closed_at: 2026-08-24T20:13:11.108Z
 close_reason: Completed by exp-034 on instrument 329b848 under preregistration 7c6fe96. Exact Q(sqrt(2)) inequalities certify the full declared two-parameter angle-and-slide strip at side 1+5sqrt(2)/4; four boundary fixtures pass, the exp-033 dual remains uniform because it avoids square 0, five mutations fail, retained generation/replay takes 0.27s, and the post-integration normal gate passes 30/30 in 35s. D-186 and D-187 record the pre-run proof-bound correction and integration-anchor miss. Parent think-1q3g stays open for complete nonsmooth cones and continuation.

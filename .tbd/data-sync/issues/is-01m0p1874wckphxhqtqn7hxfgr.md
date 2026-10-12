@@ -5,15 +5,15 @@ title: LP-in-cell refinement stage (R-2/H-2)
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 5
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m0nym4keyvqar7my3z1vxh9m
 parent_id: is-01m0nym0701fv1qq9fbqq9qz0w
 created_at: 2026-08-23T00:45:10.668Z
-updated_at: 2026-10-10T22:47:18.730Z
+updated_at: 2026-10-12T23:50:35.612Z
 closed_at: 2026-08-23T02:23:17.796Z
 close_reason: Duplicate of think-imot, which restates the same LP-in-cell work under the revised plan's Phase 1 (the quench spine). Superseded, not dropped.
 ---

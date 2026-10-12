@@ -3,13 +3,17 @@ type: is
 id: is-01m1q5nyqn2pz25fe9jc15kypf
 title: "Efficiency block: the exact event-cell sweep, 68x-139x, same verdicts"
 kind: task
-status: open
+status: closed
 priority: 0
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-04T21:37:31.380Z
-updated_at: 2026-09-04T21:37:31.380Z
+updated_at: 2026-10-12T23:39:38.062Z
+closed_at: 2026-10-12T23:39:38.062Z
+close_reason: "Delivered: the exact event-cell sweep decides in integers in parallel, 68x at n = 17 and 139x at n = 20 with identical verdicts (d8733ad03); agenda-020 records BC-196 terminal with the outcome achieved (b55e93a4a)."
+resolution: null
+duplicate_of: null
 ---
 W5 efficiency-loop block, entered on the operator's direction on 2026-09-04 evening with a measured baseline: the exact event-cell sweep that decides C4 at the retention gate took 1473 s at 1184 atoms (n = 17), 4866 s at 2097 (n = 12) and 5378 s at 2260 (n = 20), fitting atoms^2.00; one direction of the n = 20 certificate profiled at 39.35 s in the Fraction grid and 2.29 s in the reduction, of which a 16.6M-tuple cell list was most. Target: at least 10x, the operator's figure being under 100 s for the n = 20 decision. Guard: the identical least covered mass on every retained certificate, and the Fraction sweep kept unchanged as the reference and matched cell for cell.
 

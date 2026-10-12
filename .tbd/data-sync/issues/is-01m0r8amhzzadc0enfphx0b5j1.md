@@ -5,13 +5,13 @@ title: "Golden: --update writes before checking oracles, and the verified pose m
 kind: bug
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T21:27:18.847Z
-updated_at: 2026-10-10T22:47:42.635Z
+updated_at: 2026-10-12T23:51:01.570Z
 closed_at: 2026-08-23T22:51:22.790Z
 close_reason: "Fixed on codex/pr14-square-packing-review (PR #15) before this bead was filed; verified against that branch after stacking PR #16 on top of it. atlas_check.py now offers one genuinely non-converged observation and asserts offered_non_converged == 1, so the D-030 guard has a failure mode again. test.sh sets DEEP=1 under --strict with a guard that fails if it did not take. golden_basins.py assigns configs[identity] directly rather than via setdefault, so the verified pose matches the retained side, and it evaluates oracles before writing, atomically through a temporary. Independent convergence on the same fixes from two directions is the useful part of the result."
 resolution: null

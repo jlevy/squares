@@ -5,8 +5,8 @@ title: Assess research hypotheses and reconcile the next parallel agenda
 kind: epic
 status: closed
 priority: 0
-version: 17
-spec_path: docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md
+version: 18
+spec_path: docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md
 labels: []
 dependencies:
   - type: blocks
@@ -31,7 +31,7 @@ child_order_hints:
   - is-01m1vwqbjxad35188h59ejh2az
   - is-01m1vwqbzcaw52pynamg9s1s19
 created_at: 2026-09-06T17:11:08.346Z
-updated_at: 2026-09-06T18:56:47.926Z
+updated_at: 2026-10-12T23:50:10.225Z
 closed_at: 2026-09-06T18:56:47.926Z
 close_reason: BC250 planning is distilled into H093–103 and reused H036, Agenda024 allocations, child agendas/BC items, beads, and W10. Independent source, math, and framework reviews are complete. Planning and integration are published in PR97, merged as c14451f5 after required hosted checks passed. The operator deferred long tooling; two late local infrastructure-check failures are recorded and owned separately by think-exlq under continuation epic think-jgnv. No full-gate pass or new research execution is claimed. Next actual research starts on a new branch/PR using the committed Current Allocation.
 resolution: null

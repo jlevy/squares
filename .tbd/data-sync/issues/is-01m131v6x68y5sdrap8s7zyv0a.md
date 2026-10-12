@@ -5,14 +5,14 @@ title: Solve the closed contact system exactly, by elimination or integer relati
 kind: feature
 status: closed
 priority: 1
-version: 6
-spec_path: docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md
+version: 8
+spec_path: docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md
 labels:
   - packing
 dependencies: []
 parent_id: is-01m0tyy5k7e4ags20c1fxqth7f
 created_at: 2026-08-28T02:05:40.645Z
-updated_at: 2026-10-10T23:01:58.012Z
+updated_at: 2026-10-12T23:51:13.297Z
 closed_at: 2026-10-06T08:32:18.036Z
 close_reason: |
   Done (bead review 2026-10-06, origin/main eb43ffe9a): BC-044 'exact solve and round trip' is state complete in agenda-005 on origin/main; integer-relation route built as packing/src/sqpack/promote/solve.py (81b92fc33) with the frozen margin rule, plus devtools/probe_elimination.py

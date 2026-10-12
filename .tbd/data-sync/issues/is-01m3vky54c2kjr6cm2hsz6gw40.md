@@ -5,13 +5,13 @@ title: Refresh campaign rollups and their mutation anchors in one measured check
 kind: task
 status: closed
 priority: 2
-version: 6
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 7
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
 parent_id: is-01m3v9vq36ykk2jdzce75req44
 created_at: 2026-10-01T11:35:01.514Z
-updated_at: 2026-10-01T14:57:47.416Z
+updated_at: 2026-10-12T23:40:14.524Z
 closed_at: 2026-10-01T14:57:47.416Z
 close_reason: Overnight research and final integration complete. Seven accepted n17 rounds; H258 stopped without target execution; global optimality remains open. Final head 58d237c8c468899f751bb404207cfbe6428d1173 passes every scheduled hosted check including packing-required, pages-required and merges-into-main. All evidence and morning report retained. Heartbeat PAUSED; next mathematical bead think-11ma. No merge or deployment.
 resolution: null

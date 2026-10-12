@@ -5,13 +5,13 @@ title: quench_bracket output depends on class_tol, so basin identity would too
 kind: bug
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 5
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pdh5bj67ca8vk7ct53g5qt
 created_at: 2026-08-23T04:14:31.370Z
-updated_at: 2026-10-10T22:47:40.090Z
+updated_at: 2026-10-12T23:50:58.551Z
 closed_at: 2026-08-23T04:42:02.940Z
 close_reason: "Free-angle pass after class convergence certifies the endpoint is a coordinate-wise local optimum, so the terminal condition no longer depends on class_tol. Measured over 9 cells: never improved."
 ---

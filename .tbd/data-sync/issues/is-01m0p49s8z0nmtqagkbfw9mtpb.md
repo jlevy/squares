@@ -5,8 +5,8 @@ title: "quench: LP-in-cell refinement loop"
 kind: task
 status: closed
 priority: 0
-version: 7
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 9
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies:
   - type: blocks
@@ -15,7 +15,7 @@ dependencies:
     target: is-01m0p4asaeypn1nn54frxj3cx9
 parent_id: is-01m0p49s01h862tq6wp0dd085c
 created_at: 2026-08-23T01:38:27.742Z
-updated_at: 2026-10-10T22:46:36.572Z
+updated_at: 2026-10-12T23:49:48.725Z
 closed_at: 2026-08-23T04:01:41.516Z
 close_reason: "Built as sqpack/quench.py: LP-in-cell + cell fixed point + class-bracketing angle search. Reaches the analytic optimum to 1e-15 at n=5 and n=10 (exp-007, exp-008)."
 ---
