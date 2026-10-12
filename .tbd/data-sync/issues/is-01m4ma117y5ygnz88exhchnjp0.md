@@ -5,7 +5,7 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T15:14:13.255Z
+updated_at: 2026-10-12T15:17:57.559Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -35,6 +35,87 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
 
 ## Notes
+
+Current synchronization checkpoint: 2026-10-12T15:17:57.143734+00:00
+
+Formal stack447 is locally refreshed through origin/main
+25de5a42e8e35ca01668ed07747ed2a3601f4280. Parent local head is
+fcd64351655526d2198eaad2b9f517a8ab2233d0 and child is
+0841b84eb7435c747d23da9d7893370af5888977. Both are clean and pins checked;
+publication and final hosted CI remain pending. PR551 adds confirmation replies only.
+Latest scientific intake came from merged PR516, T147–T150.
+
+The parent has426 raw records,425 coefficient vectors and1381 strings. The child
+has610 canonical records,632 vectors and6522 strings (3182773 decoded /900003 gzip
+bytes); public424 records =324 current+100 relevant sources,424 vectors/2272strings.
+All324 standing cases and279 earlier child histories are conserved in full. Current
+child321 exact identities, numeric29/55/71 and77 proved labels remain unchanged.
+The complete n83 polynomial retains673 coefficients, maximum724 digits, source ordinal27
+explicitly uncounted independently. Raw186 superseded records and22 redundant notes
+remain canonical; their excessive public rows stay omitted. The report is strictly
+web-only, with no polynomial PDF or full generated HTML committed.
+
+The maintained adapter adds72 offers:65 earlier T134–141/T146 plus7 from T147–150
+(n207,153,155,156,211,146,261). All7 are exact rational degree-one side identities
+with V3/C3 native finite geometry, strictly improving source offers pending adoption.
+T148 degree7 is a construction-angle equation; T149 native c3d17ab differs from larger
+41019fb issue prints; T150 extra facts70/103/123/237/295 acquire no reviewed T150 grade.
+Public87 native offers await standing adoption;3 reported106/152/177 roots remain V0/C0.
+The queued41 quadratic database updates remain separate; reconcile overlaps before
+counting uniqueN. Acquisition, exact identity, finite bound, atlas adoption and optimality
+remain distinct. No solver/contact, geometry/Lean or new optimality campaign ran.
+
+Final clean child web qualification passed: all8 browser views/0 findings; complete
+HTML1998344 bytes (1656 margin under unchanged2000000); compactHTML15420; startup
+295629/3212387 =9.20278285% under unchanged10%;12 script declarations;6443/6443 local
+partial consumer checks; all417 earlier IDs/all834 old payload paths+bytes preserved.
+Original2042232-byte render is retained negative. Stable n155 occurrence2 and n83
+--79 routes survive; only2 unpublished occurrence3 registrations retired via guard.
+Complete Markdown1154710 bytes is unchanged, all1026 coefficient rows retained.
+
+Final Git audit: P19 commits/423files,+12684/-50999; C30 commits/173files,+29523/-711;
+union49commits/564files,+41691/-51194.915 strict-new blobs total62968043 rawbytes;
+thin4765103/nonthin6873365 bytes; largest historical2629925. Packs are non-additive
+and rawbytes are not disk allocation. No new PDFs or full generated HTML;8 small
+HTML templates33413 total/max6174. Reviewed P/C corpus snapshots match exactly.
+No further history rewrite needed; own unpublished source/pin amendments avoided
+redundant generated versions. Unrelated primary checkout/research is preserved.
+
+Latest P source controls81PASS37.83s; after-data records50PASS74.10s; clean5cd edit
+66/108 selectedPASS284.73s (240s advisory reference at different job shape, no cap
+changed). Final Pfcd records50 selectedPASS94.79s. Child producer82PASS156.86s.
+Final child maintained pre-push against its formal parent base is RUNNING,69 selected,
+six reported CPUs, normal PACK_JOBS1/pool PACK_JOBS6,1800s subprocess cap. This scope
+does not qualify parent broad tests or all108 full steps; hosted final CI still pending.
+
+Local negative parent1c six-CPU run passed64 prerequisites then timed out reachable
+at1800s (1801.03s wall), with one full failed call-phase unmutated check_readme120s
+trace and empty child output; no completed normal/pool JUnit. Ten-worker retry’s
+60/25/45/20s timeouts and d0c143 atlas outcomes without exception text remain negative.
+Failure companion repair15PASS8.33s captures future failed-phase details; it supplies
+no cause diagnosis. Linked open think-w0if now owns the observed local timeout
+follow-up; think-nns5 broader baseline inputs and think-w19q two other pool markers
+remain separate. Upstream200→216MiB snapshot cap is a committed contract change,
+not a waiver for call/report/startup caps. Retained interrupted fixture roots12/14
+are durable external evidence; no deletion or reclaimed-space claim.
+
+Remaining adoption/research owners: think-fvz4,think-63vx,think-npvi,think-kkj2/
+think-iyij,think-lhtz/think-0mlq,think-8sm2,think-je8y/phh8/1blg,think-chsu,
+think-nv5o,think-056g/gl59/w622,think-cb34/omqv/18b8/ux1v/k35c/6vrv.
+Publication growth/startup remains think-t1lk/jygq/5jr5/rxyl. Selected continuation
+is W7 think-s6np driver plus independent n11 contact-derived control before one
+bounded current-RyXu102 W6 think-ohhz slice. Do not start another campaign here.
+Owner requested final review before landing; no PR merge authorized.
+
+Handoff: docs/project/handoff-2026-10-10-polynomial-pr-stack.md at child0841b84e.
+Plan: docs/project/specs/active/plan-2026-10-06-exact-side-values.md. Final PR bodies
+will carry exact published heads, CI URLs/outcomes and final slice wall. Evidence:
+/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635
+Receipts: data/child-main25-final-web-receipt.json,
+review/final-main25de-stack-size-audit.md, validation/parent-main25-records.log,
+validation/child-main25-layer-push-launch.json, and local-worker-timeout-bead.json.
+
+--- Dated prior checkpoints; preserved evidence, superseded current-state claims ---
 
 Current synchronization checkpoint: 2026-10-12T11:56:52.631765+00:00
 
