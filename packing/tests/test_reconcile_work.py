@@ -1,6 +1,7 @@
 """Reconciliation queues preserve unfinished scope and disjoint review coverage."""
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -8,6 +9,7 @@ import pytest
 
 from devtools.reconcile_work import (
     annotate_prior,
+    cited_commits,
     inventory,
     main,
     review_coverage,
@@ -445,6 +447,42 @@ def test_verify_applied_finds_unapplied_closes_moves_and_stale_paths(tmp_path: P
         "not closed: think-b111 is open",
         "bead still names a moved spec's old path: think-e111",
     ]
+
+
+def test_cited_commits_must_be_on_the_base(tmp_path: Path) -> None:
+    def git(*arguments: str) -> str:
+        return subprocess.run(
+            ["git", "-C", str(tmp_path), *arguments],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+
+    git("init", "-q", "-b", "main")
+    git("config", "user.email", "t@example.org")
+    git("config", "user.name", "t")
+    git("commit", "-q", "--allow-empty", "-m", "on main")
+    on_main = git("rev-parse", "--short=9", "HEAD")
+    git("checkout", "-q", "-b", "side")
+    git("commit", "-q", "--allow-empty", "-m", "off main")
+    off_main = git("rev-parse", "--short=9", "HEAD")
+    review = {
+        "beads": [
+            {"id": "think-a111", "action": "close", "evidence": [f"landed in {on_main}"]},
+            {"id": "think-b111", "action": "close", "evidence": [f"landed in {off_main}"]},
+            {
+                "id": "think-c111",
+                "action": "close",
+                "evidence": ["comment 6106560733, deadbeefcafe"],
+            },
+            {"id": "think-d111", "action": "retain", "evidence": [off_main]},
+        ]
+    }
+    result = cited_commits([review], tmp_path, base="main")
+    assert result["closes"] == 3
+    assert result["citing_commits"] == 3
+    assert result["off_base"] == [f"think-b111: {off_main} is not on main"]
+    assert result["unresolved"] == ["think-c111: deadbeefcafe"]
 
 
 @pytest.mark.parametrize(

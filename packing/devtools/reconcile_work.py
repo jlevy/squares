@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -43,6 +44,8 @@ CLOSE_RESOLUTIONS = frozenset({"canceled", "completed", "duplicate"})
 # costs a reviewer several beads' worth of time when lanes are balanced.
 SPEC_REVIEW_WEIGHT = 5
 STATUS_SCAN_LINES = 40
+# A commit-shaped token with at least one hex letter; all-digit runs are comment and run ids.
+COMMIT_TOKEN = re.compile(r"\b(?=[0-9a-f]*[a-f])[0-9a-f]{7,40}\b")
 STATUS_LINE = re.compile(r"\bstatus\b\W{0,4}:\W{0,4}\s*(.+)", re.IGNORECASE)
 
 
@@ -336,6 +339,51 @@ def verify_applied(
     return {"checked": checked, "not_in_snapshot": unverifiable, "problems": problems}
 
 
+def cited_commits(
+    reviews: list[dict[str, Any]], repo: Path, base: str = "origin/main"
+) -> dict[str, Any]:
+    """Every commit a close cites must be on ``base``; a close resting on a commit that
+    is not is a question to answer before applying it.
+
+    Tokens that do not name a commit at all (digests, abbreviated ids of other things)
+    are listed as unresolved, which is information rather than a fault.
+    """
+
+    def git(*arguments: str) -> int:
+        return subprocess.run(
+            ["git", "-C", str(repo), *arguments], capture_output=True, check=False
+        ).returncode
+
+    off_base: list[str] = []
+    unresolved: list[str] = []
+    closes = citing = 0
+    for review in reviews:
+        for item in review.get("beads", []):
+            if item.get("action") != "close":
+                continue
+            closes += 1
+            text = " ".join(
+                [
+                    str(item.get("reason", "")),
+                    *map(str, item.get("evidence", [])),
+                    str(item.get("updates", {}).get("close_reason", "")),
+                ]
+            )
+            tokens = sorted(set(COMMIT_TOKEN.findall(text)))
+            citing += bool(tokens)
+            for token in tokens:
+                if git("rev-parse", "--verify", "--quiet", f"{token}^{{commit}}"):
+                    unresolved.append(f"{item['id']}: {token}")
+                elif git("merge-base", "--is-ancestor", token, base):
+                    off_base.append(f"{item['id']}: {token} is not on {base}")
+    return {
+        "closes": closes,
+        "citing_commits": citing,
+        "off_base": off_base,
+        "unresolved": unresolved,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -350,6 +398,13 @@ def main() -> None:
     )
     output.add_argument(
         "--baseline", action="store_true", help="emit only the frozen review scope"
+    )
+    output.add_argument(
+        "--check-commits",
+        type=Path,
+        nargs="+",
+        metavar="REVIEW",
+        help="check that every commit a close cites is on origin/main",
     )
     output.add_argument(
         "--verify",
@@ -389,6 +444,13 @@ def main() -> None:
         raise SystemExit(bool(verified["problems"]))
     if args.split is not None and args.split < 1:
         parser.error("--split needs a positive lane count")
+    if args.check_commits:
+        cited = cited_commits(
+            [json.loads(path.read_text(encoding="utf-8")) for path in args.check_commits],
+            args.repo,
+        )
+        print(json.dumps(cited, indent=2))
+        raise SystemExit(bool(cited["off_base"]))
     result = inventory(snapshot, args.repo) if is_inventory else snapshot
     if args.split:
         result = split_lanes(result, args.split, args.repo)
