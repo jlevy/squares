@@ -13,6 +13,7 @@ from devtools.reconcile_work import (
     review_coverage,
     split_lanes,
     status_line,
+    verify_applied,
 )
 
 
@@ -407,9 +408,54 @@ def test_cli_prints_one_split_lane_and_refuses_an_unknown_one(
     assert "no lane 'a'" in capsys.readouterr().err
 
 
+def test_verify_applied_finds_unapplied_closes_moves_and_stale_paths(tmp_path: Path) -> None:
+    done = tmp_path / "docs/project/specs/done"
+    done.mkdir(parents=True)
+    (done / "moved.md").write_text("A plan.\n", encoding="utf-8")
+    (tmp_path / "docs/project/specs/active").mkdir(parents=True)
+    (tmp_path / "docs/project/specs/active/stuck.md").write_text("A plan.\n", encoding="utf-8")
+    old = "docs/project/specs/active/moved.md"
+    review = {
+        "beads": [
+            {"id": "think-a111", "action": "close", "updates": {"status": "closed"}},
+            {"id": "think-b111", "action": "close", "updates": {"status": "closed"}},
+            {"id": "think-c111", "action": "update", "updates": {"spec_path": old}},
+            {"id": "think-d111", "action": "update", "updates": {"hold": "paused"}},
+            {"id": "think-e111", "action": "retain"},
+        ],
+        "specs": [
+            {"path": old, "action": "move_done"},
+            {"path": "docs/project/specs/active/stuck.md", "action": "move_paused"},
+            {"path": "docs/project/specs/active/kept.md", "action": "retain"},
+        ],
+    }
+    snapshot = [
+        {"id": "think-a111", "status": "closed"},
+        {"id": "think-b111", "status": "open"},
+        {"id": "think-c111", "status": "open", "spec_path": "docs/project/specs/done/moved.md"},
+        {"id": "think-d111", "status": "open"},
+        {"id": "think-e111", "status": "open", "spec_path": old},
+    ]
+    result = verify_applied(snapshot, [review], tmp_path)
+    assert result["checked"] == 5
+    assert result["not_in_snapshot"] == 1
+    assert result["problems"] == [
+        "moved spec missing from docs/project/specs/paused/stuck.md",
+        "moved spec still at docs/project/specs/active/stuck.md",
+        "not closed: think-b111 is open",
+        "bead still names a moved spec's old path: think-e111",
+    ]
+
+
 @pytest.mark.parametrize(
     "option",
-    [("--lane", "a"), ("--path-repairs",), ("--baseline",), ("--split", "2")],
+    [
+        ("--lane", "a"),
+        ("--path-repairs",),
+        ("--baseline",),
+        ("--split", "2"),
+        ("--verify", "review.json"),
+    ],
 )
 def test_cli_rejects_inventory_only_modes_for_retained_baseline(
     option: tuple[str, ...],

@@ -283,6 +283,59 @@ def review_coverage(report: dict[str, Any], reviews: list[dict[str, Any]]) -> di
     return {"reviewed": totals, "problems": problems}
 
 
+def verify_applied(
+    beads: list[dict[str, Any]], reviews: list[dict[str, Any]], repo: Path
+) -> dict[str, Any]:
+    """Check a fresh snapshot and tree against the dispositions that were applied.
+
+    Every close is closed, every ``spec_path`` update holds, every moved spec stands in
+    its new folder and not its old one, and no bead still names a moved spec's old
+    path. Holds and notes are not in a list snapshot, so they are counted, not checked.
+    """
+    by_id = {str(bead["id"]): bead for bead in beads}
+    moved: dict[str, str] = {}
+    problems: list[str] = []
+    checked = unverifiable = 0
+    for review in reviews:
+        for spec in review.get("specs", []):
+            action = str(spec.get("action", ""))
+            if not action.startswith("move_"):
+                continue
+            old = str(spec["path"])
+            new = f"docs/project/specs/{action.removeprefix('move_')}/{Path(old).name}"
+            moved[old] = new
+            checked += 1
+            if not (repo / new).is_file():
+                problems.append(f"moved spec missing from {new}")
+            if (repo / old).exists():
+                problems.append(f"moved spec still at {old}")
+    for review in reviews:
+        for item in review.get("beads", []):
+            action = item.get("action")
+            if action not in {"close", "update"}:
+                continue
+            bead = by_id.get(str(item["id"]))
+            updates = item.get("updates", {})
+            if bead is None:
+                problems.append(f"bead not in snapshot: {item['id']}")
+                continue
+            if action == "close":
+                checked += 1
+                if bead.get("status") != "closed":
+                    problems.append(f"not closed: {item['id']} is {bead.get('status')}")
+            if "spec_path" in updates:
+                checked += 1
+                want = moved.get(updates["spec_path"], updates["spec_path"])
+                if bead.get("spec_path") != want:
+                    problems.append(
+                        f"spec_path not applied: {item['id']} has {bead.get('spec_path')}"
+                    )
+            unverifiable += sum(field in updates for field in ("hold", "notes_append"))
+    stale = sorted(str(b["id"]) for b in beads if str(b.get("spec_path") or "") in moved)
+    problems.extend(f"bead still names a moved spec's old path: {bead}" for bead in stale)
+    return {"checked": checked, "not_in_snapshot": unverifiable, "problems": problems}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -298,6 +351,13 @@ def main() -> None:
     output.add_argument(
         "--baseline", action="store_true", help="emit only the frozen review scope"
     )
+    output.add_argument(
+        "--verify",
+        type=Path,
+        nargs="+",
+        metavar="REVIEW",
+        help="check a fresh snapshot and tree against applied dispositions",
+    )
     parser.add_argument(
         "--split", type=int, metavar="N", help="regroup into N lanes by governing spec"
     )
@@ -308,12 +368,25 @@ def main() -> None:
     snapshot = json.loads(args.snapshot.read_text(encoding="utf-8"))
     is_inventory = isinstance(snapshot, list)
     if not is_inventory and (
-        args.lane or args.path_repairs or args.baseline or args.split or args.prior
+        args.lane
+        or args.path_repairs
+        or args.baseline
+        or args.split
+        or args.prior
+        or args.verify
     ):
         parser.error(
-            "--lane, --path-repairs, --baseline, --split, and --prior "
+            "--lane, --path-repairs, --baseline, --split, --prior, and --verify "
             "require a full tbd list snapshot"
         )
+    if args.verify:
+        verified = verify_applied(
+            snapshot,
+            [json.loads(path.read_text(encoding="utf-8")) for path in args.verify],
+            args.repo,
+        )
+        print(json.dumps(verified, indent=2))
+        raise SystemExit(bool(verified["problems"]))
     if args.split is not None and args.split < 1:
         parser.error("--split needs a positive lane count")
     result = inventory(snapshot, args.repo) if is_inventory else snapshot
