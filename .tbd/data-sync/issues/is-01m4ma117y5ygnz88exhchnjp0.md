@@ -5,7 +5,7 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T18:39:54.681Z
+updated_at: 2026-10-12T19:55:32.798Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -36,44 +36,51 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 
 ## Notes
 
-## Latest Upstream Integration Checkpoint
+## Current Upstream and Table Checkpoint
 
-Fetched origin/main at 562fdbdff1d98948f68b36b81b53f9c8165ffd08 and used the native
-formal-stack rebase, preserving main → PR403 → PR435. Parent integration is complete at
-c1f1540f049a8aed741542b15d11dee55e8aee01; child replay is continuing after reviewed
-builder/schema/test conflict resolutions.
-Neither new layer has been pushed.
+The final native upstream fetch/rebase confirms origin/main
+562fdbdff1d98948f68b36b81b53f9c8165ffd08. The existing formal stack remains main → PR403
+→ PR435. Parent candidate is f725d901d3ae5c07aac921535b3152819c3bfa97; child candidate
+before final URL-registry reconciliation and publication re-pin is
+fd70d7e349c5c62e1b6ccc6561e94a5e9970ebb4. Neither candidate has been pushed.
 
-The preceding 42-record refresh is committed.
-Its frozen input contains 324 current and 102 historical records; all 42 native
-identities, 83 historical native source occurrences and all displaced old polynomials
-passed independent conservation.
-The ordinary builder controls passed (184), the upstream controls passed (81), and
-focused refusal/cache controls plus static checks passed.
-The maintained records gate passed 50 of 108 selected steps in 33.61 seconds; this is
-not full qualification.
+The October 12 refresh adopts seven current T-151 native houses and two scoped T-152
+houses, bringing the current native roster to 49, all registered V3/C3. Parent: 437
+canonical records / 436 recursive coefficient vectors / 1,403 integer strings.
+Child: 621 canonical records / 643 vectors / 6,544 strings, with all 324 current rows.
+Public projection: 337 records / 337 vectors / 2,096 strings; superseded identities
+remain canonical. Child register is 913,496 gzip / 3,283,520 decoded bytes.
+Historical native custody is 89 occurrences: 86 V3/C3 replayed and three V0/C0
+source-reported. All lower/status lanes remain equal: 77 proved and 247 open.
+The n=83 row retains every coefficient; its ordinal 27 remains independently uncounted.
+Current n=102 route metadata now binds validated adopted Daniel T-146 custody.
+The report remains strictly web-only; no polynomial PDF.
 
-The new upstream pass adopts T-151 at 176/181/238/239/270/271/272 and T-152 at 304/305,
-bringing current native houses to 49. Both results are registered V3/C3. Eleven newly
-scoped source occurrences have independently checked retained native bindings.
-The new per-pass adapter must preserve the Oct11 archive unchanged and retain nine full
-prior current identities plus nine complete Oct12 source occurrences.
-In particular, intermediate T-140 adoption at 270/305 must survive the replacement.
-Source adaptation and final regeneration/validation are in progress.
+The parent broad push gate at a0beeda failed one of 65 selected steps: normal behavior
+had 24 failures, 15,539 passes, 51 skips and one xfail; pool behavior never ran.
+All 24 concrete failures have focused passing controls after a bounded six-file fix: 190
+writer/frontier controls, 13 dated-source refusal controls and seven consumer contract
+controls. Static checks have zero findings.
+A fresh broad parent gate is running at f725d901 with the unchanged 1,800-second cap,
+six outer jobs and two inner jobs; no terminal pass is claimed.
 
-Remaining: finish native child replay, restore exact child stash
-2da9b1b02e8a64b6f5ab4c263dc2caab1ba01b16 including its untracked fixture, regenerate
-both layers, measure the actual latest corpus/public projection, check web caps and
-responsive/no-JS views, run required local and final-head hosted checks, audit Git
-sizes, push both existing stacked PRs and update their descriptions.
-The polynomial report remains strictly web-only.
+Web checks at the pre-final child revision pass all eight compact/complete views,
+scripts and the 10% startup threshold: 248,861 / 3,212,387 bytes = 7.7469184%. Complete
+HTML is 1,682,134 bytes under the unchanged 2,000,000-byte cap.
+The partial consumer check correctly refused obsolete public payload paths still in the
+generated URL registry.
+A maintained unpublished-retirement reconciliation is under review; no validator is
+weakened. Final re-pin, clean web qualification, child pre-push, size audit, leased push
+and final-head hosted checks remain pending.
+
+Continue from this slice.
 No PR landing is authorized.
-Existing scientific owners and unknown local timeout bead think-w0if remain open.
-
-The external volume returned and was verified writable; builds use external scratch.
-The outage comments remain dated evidence, not a current blocked state.
-Evidence: upstream-refresh-20261012-0635/review/main-562f-integration-plan.md,
-main-562f-intake-bindings.json and main-562f-archive-dimensions.json.
+Remaining research owners, three numeric identities, reported geometry gaps, n=83
+ordinal work and unknown local timeout bead think-w0if retain their actual open scopes.
+Selected research entry is W7 exporter/independent n=11 control, followed by the
+adopted-current n=102 protocol.
+Source records and all unique evidence stay outside disposable external scratch.
+Evidence: upstream-refresh-20261012-0635/validation and /review.
 
 --- Earlier dated checkpoints and unique evidence ---
 
