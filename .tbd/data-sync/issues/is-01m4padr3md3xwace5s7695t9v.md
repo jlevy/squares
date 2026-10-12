@@ -5,7 +5,7 @@ title: "Import Guzhou0806: s(40) > 3359/500 = 6.718 with 163 new rectangle suppo
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:16.371Z
-updated_at: 2026-10-12T08:14:30.417Z
+updated_at: 2026-10-12T13:50:54.678Z
 started_at: 2026-10-11T20:28:27.781Z
 ---
 https://github.com/jlevy/squares/issues/485#issuecomment-6106761997 (2026-10-11T07:39Z), reviewed by wand125 in 6111583905 (verified, no gaps, plus an unpublished independent continuous-angle replay). Guzhou0806/n40-square-packing 6a65957e6c5c51cdf267917d882dab7f5b4928dd, release n40-new-supports-6718-20261011 (n40-6718.zip, SHA-256 e6e49590...3b3f). Raises T-145's 1340000/199529. The entry point's full replay took 1,552 s on 6 workers (author and wand125), about 2.6 CPU-hours: stage 4 needs an owner budget.
@@ -56,3 +56,20 @@ Proposed register/evidence YAML: in the lane's final report to the coordinator (
 2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): existing issue https://github.com/jlevy/squares/issues/485 states the remaining work (reply https://github.com/jlevy/squares/issues/485#issuecomment-6119333366: registration in a later layer, the 43-slab replay at about 0.74 CPU-hours, a review); listed as in flight on the tracker https://github.com/jlevy/squares/issues/544. wand125's sqverify_continuous route is https://github.com/jlevy/squares/issues/533 (think-xzob).
 
 budget: approved by the coordinator under the owner's 2026-10-11 priority for quick validations (kernel replay about 0.74 CPU-hours); replay running in the stage 4 lane since 2026-10-12T06:49Z
+
+
+## Stage 4 (2026-10-12, Claude Fable 5.1 at xhigh, branch claude/wizardly-meitner-wqn4x3-n40-stage4 from main ad00d7f84)
+
+**The replay** (packet `receipts/`, judged by `audit_n40_new_supports check-replay` → `receipts/replay-check.json`, `REPLAY_HOLDS`, 70 checks). Builds with g++ 13.3.0 from the retained source at relative paths: pose `69bc9e64…` and axis `19288b2f…`, byte for byte the CI run's binaries (the pose binary T-145's). Axis: `AXIS_COVERAGE_PROVED`, every field both receipts'. Slabs: 43 of 43 `verified`, exit 0, every non-timing field equal to both the local and the CI receipt; 60,500,889 nodes, 30,250,466 leaves, 13,812,428 angle splits, least leaf bound 9005397816695287/2^53 at slab 40; 5,242.6 CPU-s and 12,629 s wall at two workers, one-minute load 7.6 to 27.0 on four shared cores (slab 0 took 68.6, slab 1 322.1 and slab 42 134.0 CPU-seconds, against the local receipt’s 32.8, 158.6 and 66.0 and the CI receipt’s 67.6, 327.3 and 104.6). Controls A to F and H as the 10 October contract states them at the new parameters, each as expected (A: synthetic-negative exit 3 at 83 nodes, limited-budget exit 3 at 1, synthetic-positive verified at 117; B: exit 3 at 92, 87 and 89 nodes; C: all 14 exit 3, the two on [410000,415000] by the 1,500,000-node budget, the rest at the width floor; D: all five exit 3, four by the budget; E: all 14 cuts verified, the largest at 251,857 nodes, the gap verified at 140,819; F: exits 0, -6, -6, 1, 1; H: 1/2 proved, 62593/62500 refused (exit 2), 500743/500000 proved; 72.5 CPU-seconds in all); G on the release's own exact.py (A one step larger) refused NEAR_AXIS_CONTAINMENT and the unchanged copy returned both receipts' scalar block. Crate (cargo build --release --locked -j 1, rustc 1.98.0 (88d9e12ae 2026-08-18), the toolchain the crate pins, source d97758bb… reviewed, binary 567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4): axis-A verified, 10,929,636 vertices, least 1.0016868361671276 (the axis stage's decision again); net401-B VERIFIED, 401 of 401 directions, no direction refused, 35,375,590 boxes, least certified 1.000000000310131 at r = 398; 1,782.6 s of wall time and 720.9 CPU-seconds at two threads. Duals (obstruction/run.py on a scratch copy of the retained tree with the pinned pool restored, Boost 1.83 headers installed for it): EXACT_DUAL_CODE_DISTINCT_CHECKED, every non-timing field both receipts', 703.0 s, binary `d5ecc193a842c21e86281c7facdc4f92a70cec92a28f5f7e002ed5d3a77cf51c`, byte for byte the CI run’s. Price: stage 1 said 2,604–2,626 CPU-s; measured 5,242.6 (half the measured cost. The slabs took 5,242.6 CPU-seconds, 1.97 times the local receipt’s 2,655.3 and within 0.3% of the CI receipt’s 5,229.5, with the same ratio slab for slab, where `T-145`’s replay on this host had taken 0.98 of its local receipt at a load average of 3 to 14. The difference is the host: for this whole stage the one-minute load average was 7.6 to 27.0 on four cores, and a CPU-second on a core shared that heavily does about half the work. The work is the receipts’, not more; the calibration assumed the earlier host conditions (GN-3)).
+
+**The tool.** audit_continuous_pose's runner and judge are now parametrised by a `Replay` record (release, density, control H thresholds, control G's literal, the contract's totals, the crate's counts) and `Release.axis_flags`; T-145's `replay-check.json` and `finite-audit.json` regenerate byte for byte. audit_n40_new_supports gained `run-replay` (T-145's stages plus `duals`) and `check-replay`, with 18 new tests (134 passed: the n40 file’s 117, of which 18 are new for the replay, and `T-145`’s 17, of which one is new for the resumable slab stage in the two files).
+
+**The review:** docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md (mapped). Verdict: no blocking defect; findings GN-1 to GN-8, none blocking; S3 kept; rungs V3 and C3 (the C3 predicate met exactly by the kernel replay: replayed-here, interval-certified, certificate, replay command, passed, named controls); not V4/C4 (one review, no human oversight record). Confirmation: reproduced with the producer's code (the cover), independently decided for the near-axis statement (sqverify-fast) and the finite steps (the audit). wand125's sqverify_continuous (published f30cc2cf, think-xzob): a replay here after its soundness review would move the mark to independently re-implemented and leave the rung; same method, independent code; its author read continuous_pose.cpp.
+
+**Register plan:** /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/stage4/proposed-register.yaml (results.yaml T-NNN at V3/C3/S3 with the review; four evidence entries: report with external_review, kernel-replay, finite-audit, crate-axis; verifier V-audit-n40-new-supports and version rows for the two kernels; coverage; n-040 lanes both to 3359/500; result-requests and T-145 notes). Not applied here; the records lane registers.
+
+**Not run:** the release's tests/test_kernel.py and test_admission.py; wand125's sqverify_continuous (think-xzob, needs its own review and budget).
+
+blocked_on: none
+
+**Branch:** claude/wizardly-meitner-wqn4x3-n40-stage4 at 8b089855e (merge of origin/main 4a4910524 into d31793edc, the stage 4 commit); no PR. packing-validate --records: 49 of 49 steps at 8b089855e.
