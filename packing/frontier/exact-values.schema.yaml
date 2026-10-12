@@ -110,6 +110,15 @@ $defs:
         - T-129
         - T-130
         - T-131
+        - T-134
+        - T-135
+        - T-136
+        - T-137
+        - T-138
+        - T-139
+        - T-140
+        - T-141
+        - T-146
       source_key:
         type: string
         minLength: 1
@@ -174,12 +183,21 @@ $defs:
             - T-128
             - T-130
             - T-131
+            - T-134
+            - T-135
+            - T-136
+            - T-137
+            - T-138
+            - T-139
+            - T-140
+            - T-141
+            - T-146
       then:
         properties:
           verification:
-            const: V0
+            const: V3
           confirmation:
-            const: C0
+            const: C3
           geometry_replay:
             const: native-replay-retained
           receipt:

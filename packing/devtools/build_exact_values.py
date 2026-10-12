@@ -71,6 +71,7 @@ from devtools import (
     refinement_house_links,
     refinement_packets,
     upper_bound_packets,
+    upper_bound_reports,
 )
 from devtools import collect_reported_exact_roots as reported_roots
 from devtools import couzo_followup_reports as couzo_followup
@@ -1726,7 +1727,9 @@ def _finite_source_history_row(
     coefficients = (side.denominator, -side.numerator)
     decimal = evand.terminating_decimal(side)
     if decimal is None:
-        raise ExactValuesError("retained finite source side does not terminate")
+        decimal = root_decimal(Root(coefficients, side, side, side))
+    if confirmed and receipt is None:
+        raise ExactValuesError("confirmed finite source lacks a native replay receipt")
     checks, _root = polynomial_checks(n, coefficients, decimal, None)
     checks.update(catalogue="not-in-catalogue", galois=None)
     pending = disposition == "unreconciled-source"
@@ -1808,6 +1811,8 @@ def hunt_equal_bound_occurrence(
     previous: dict | None,
     certificate: evand.Certificate,
     comparison: dict,
+    *,
+    registered_results: dict[str, dict] | None = None,
 ) -> dict | None:
     """Retain Daniel's scoped T-128 evidence without replacing Couzo's custody."""
     try:
@@ -1823,6 +1828,9 @@ def hunt_equal_bound_occurrence(
         or not same_side
     ):
         raise ExactValuesError("record-hunt equal-bound comparison does not name Couzo's T-128")
+    confirmed = _registered_finite_confirmation(
+        "T-128", 155, registered_results or _finite_source_results()
+    )
     original = couzo_refinements.source_pins()[155]["certificate"]["path"]
     expected = _finite_source_history_row(
         155,
@@ -1835,7 +1843,7 @@ def hunt_equal_bound_occurrence(
         original=original,
         url=f"{couzo_refinements.SOURCE}/blob/{couzo_refinements.REVISION}/{original}",
         receipt=couzo_refinements.receipt_path(),
-        confirmed=False,
+        confirmed=confirmed,
     )
     if previous != expected:
         raise ExactValuesError(
@@ -1855,7 +1863,7 @@ def hunt_equal_bound_occurrence(
         original=original,
         url=f"{hunt_reports.SOURCE}/blob/{hunt_reports.REVISION}/{original}",
         receipt=hunt_reports.receipt_path(),
-        confirmed=False,
+        confirmed=confirmed,
         source_date=hunt_reports.READ_ON,
     )
     assert occurrence is not None
@@ -1869,15 +1877,117 @@ def hunt_equal_bound_occurrence(
     return occurrence
 
 
+def _finite_source_results() -> dict[str, dict]:
+    record = safe_load((FRONTIER / "results.yaml").read_text(encoding="utf-8"))
+    return {row["id"]: row for row in record["results"]}
+
+
+def _registered_finite_confirmation(result: str, n: int, results: dict[str, dict]) -> bool:
+    """Keep the current registered finite grade, scoped to this count, apart from adoption."""
+    row = results.get(result)
+    if row is None or row.get("kind") != "upper-bound" or n not in row["scope"]["n_values"]:
+        raise ExactValuesError(f"{result}: no registered finite certificate at n = {n}")
+    grade = row["verification"], row["confirmation"]
+    if grade not in {("V0", "C0"), ("V3", "C3")}:
+        raise ExactValuesError(f"{result}: unsupported finite source grade {grade}")
+    return grade == ("V3", "C3")
+
+
+def declared_source_certificate_history(entries: list[dict]) -> list[dict]:
+    """Project registered import scopes from maintained declarations, retaining each custody."""
+    indexed = {entry["n"]: entry for entry in entries}
+    results = _finite_source_results()
+    history = []
+    pattern = "*/" + upper_bound_reports.DECLARATION.as_posix()
+    for path in sorted((ROOT / "resources/web").glob(pattern)):
+        packet = path.parent.parent
+        declaration = upper_bound_reports.load_declaration(packet)
+        matches = [
+            row
+            for row in results.values()
+            if row.get("kind") == "upper-bound"
+            and declaration["report_evidence"] in row.get("evidence", [])
+        ]
+        if not matches:
+            continue
+        if len(matches) != 1:
+            raise ExactValuesError(f"{packet.name}: ambiguous registered source report")
+        result = matches[0]
+        source_key = declaration["source_key"]
+        if source_key not in result.get("attribution", {}).get("source_keys", []):
+            raise ExactValuesError(f"{packet.name}: registered source key differs")
+        scope = {
+            n for n in result["scope"]["n_values"] if 1 <= n <= upper_bound_reports.HORIZON
+        }
+        declared = {row["n"] for row in declaration["certificates"]}
+        if not scope or not scope <= declared:
+            raise ExactValuesError(f"{packet.name}: registered scope differs from the import")
+        try:
+            certificates = upper_bound_reports.read_facts(packet)
+            upper_bound_reports.check_claims(packet, certificates)
+            positives = upper_bound_reports.check_certification(
+                packet, certificates=certificates
+            )
+            source = upper_bound_reports.acquisition(packet)
+        except (OSError, ValueError) as error:
+            raise ExactValuesError(f"{packet.name}: {error}") from error
+        for imported in declaration["certificates"]:
+            n = imported["n"]
+            if n not in scope or n not in indexed:
+                continue
+            if n not in positives:
+                raise ExactValuesError(f"{packet.name}: registered n = {n} lacks native replay")
+            facts = (
+                packet / imported["fact"]
+                if "fact" in imported
+                else ROOT.parent / source["archived_path"] / imported["path"]
+            )
+            if not facts.is_file():
+                facts = compressed_path(facts)
+            receipt = packet / upper_bound_reports.RECEIPT
+            if not receipt.is_file():
+                receipt = packet / upper_bound_reports.shard(n)
+            row = _finite_source_history_row(
+                n,
+                certificates[n].side,
+                indexed[n],
+                result=result["id"],
+                source_key=source_key,
+                revision=source["source_commit"],
+                facts=facts,
+                original=imported["path"],
+                url=f"{source['source_url']}/blob/{source['source_commit']}/{imported['path']}",
+                receipt=receipt,
+                confirmed=_registered_finite_confirmation(result["id"], n, results),
+                source_date=imported["first_committed"][:10],
+            )
+            if row is not None:
+                # The importer distinguishes the certificate writer from the original finders.
+                row["attribution"]["source_text"].extend(
+                    [
+                        declaration["register"]["credit"],
+                        declaration["register"]["bibliography"]["note"],
+                        declaration["register"]["source_checks"],
+                    ]
+                )
+                row["text"] += " " + declaration["claim_limitations"]
+                history.append(row)
+    return history
+
+
 def source_certificate_history(
     entries: list[dict], *, verified_inputs: VerifiedRationalInputs | None = None
 ) -> list[dict]:
     """Project noncurrent exact source certificates without adopting their bounds."""
     indexed = {entry["n"]: entry for entry in entries}
     inputs = verified_inputs or VerifiedRationalInputs()
+    registered_results = _finite_source_results()
     rows: dict[tuple[int, Fraction], dict] = {}
 
     def add(n: int, side: Fraction, **metadata: Any) -> None:
+        metadata["confirmed"] = _registered_finite_confirmation(
+            metadata["result"], n, registered_results
+        )
         row = _finite_source_history_row(n, side, indexed[n], **metadata)
         if row is None:
             return
@@ -1929,7 +2039,6 @@ def source_certificate_history(
                 original=original,
                 url=f"{reports.SOURCE}/blob/{reports.REVISION}/{original}",
                 receipt=reports.receipt_path(),
-                confirmed=True,
             )
 
     pending_sources = (
@@ -1964,7 +2073,6 @@ def source_certificate_history(
                 original=original,
                 url=f"{reports.SOURCE}/blob/{reports.REVISION}/{original}",
                 receipt=reports.receipt_path(),
-                confirmed=False,
             )
 
     hunt_facts = hunt_reports.read_facts()
@@ -1981,12 +2089,15 @@ def source_certificate_history(
         original=original,
         url=f"{hunt_reports.SOURCE}/blob/{hunt_reports.REVISION}/{original}",
         receipt=hunt_reports.receipt_path(),
-        confirmed=False,
         source_date=hunt_reports.READ_ON,
     )
     equal_side = next(row["equal_side"] for row in hunt_claims["results"] if row["n"] == 155)
     occurrence = hunt_equal_bound_occurrence(
-        indexed[155], rows.get((155, hunt_facts[155].side)), hunt_facts[155], equal_side
+        indexed[155],
+        rows.get((155, hunt_facts[155].side)),
+        hunt_facts[155],
+        equal_side,
+        registered_results=registered_results,
     )
     evidence_occurrences = [] if occurrence is None else [occurrence]
 
@@ -2024,11 +2135,10 @@ def source_certificate_history(
                 original=original,
                 url=f"{evand.SOURCE}/blob/{revision}/{original}",
                 receipt=None,
-                confirmed=False,
                 source_date="2026-10-07",
             )
     return sorted(
-        [*rows.values(), *evidence_occurrences],
+        [*rows.values(), *evidence_occurrences, *declared_source_certificate_history(entries)],
         key=lambda row: (row["n"], Fraction(row["exact_form"])),
     )
 

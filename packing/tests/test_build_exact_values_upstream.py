@@ -127,18 +127,22 @@ def source_history():
 def test_all_noncurrent_certificates_keep_disposition_native_identity_and_assurance(
     source_history,
 ):
-    assert len(source_history) == 29
-    assert Counter(row["kind"] for row in source_history) == {
+    legacy = [
+        row
+        for row in source_history
+        if row["source_certificate"]["result"]
+        in {"T-125", "T-127", "T-128", "T-129", "T-130", "T-131"}
+    ]
+    assert len(legacy) == 29
+    assert Counter(row["kind"] for row in legacy) == {
         "superseded": 14,
         "unreconciled-source": 15,
     }
-    identities = Counter((row["n"], Fraction(row["exact_form"])) for row in source_history)
+    identities = Counter((row["n"], Fraction(row["exact_form"])) for row in legacy)
     assert len(identities) == 28
     assert [(n, count) for (n, _side), count in identities.items() if count > 1] == [(155, 2)]
     pending105 = [
-        row
-        for row in source_history
-        if row["n"] == 105 and row["kind"] == "unreconciled-source"
+        row for row in legacy if row["n"] == 105 and row["kind"] == "unreconciled-source"
     ]
     assert len(pending105) == 2
     for row in source_history:
@@ -151,7 +155,7 @@ def test_all_noncurrent_certificates_keep_disposition_native_identity_and_assura
         custody = row["source_certificate"]
         assert custody["global_optimality"] == "not-established"
         if custody["result"] in ("T-128", "T-130", "T-131"):
-            assert (custody["verification"], custody["confirmation"]) == ("V0", "C0")
+            assert (custody["verification"], custody["confirmation"]) == ("V3", "C3")
             assert custody["geometry_replay"] == "native-replay-retained"
             assert custody["adoption"] == "pending"
         elif custody["result"] == "T-129":
@@ -266,18 +270,21 @@ def test_other_duplicate_finite_identity_still_refuses_distinct_custody(monkeypa
 @pytest.mark.parametrize(
     "control", ["verification", "confirmation", "geometry_replay", "receipt"]
 )
-def test_record_hunt_schema_refuses_promoted_or_missing_replay(source_history, control):
+@pytest.mark.parametrize("result", ["T-131", "T-146"])
+def test_confirmed_source_schema_refuses_downgrade_or_missing_replay(
+    source_history, control, result
+):
     schema = safe_load((exact.FRONTIER / exact.SCHEMA).read_text())
     validator = Draft202012Validator(
         {"$ref": "#/$defs/historical_entry", "$defs": schema["$defs"]}
     )
     row = copy.deepcopy(
-        next(row for row in source_history if row["source_certificate"]["result"] == "T-131")
+        next(row for row in source_history if row["source_certificate"]["result"] == result)
     )
     assert validator.is_valid(row)
     row["source_certificate"][control] = {
-        "verification": "V3",
-        "confirmation": "C3",
+        "verification": "V0",
+        "confirmation": "C0",
         "geometry_replay": "not-replayed",
         "receipt": None,
     }[control]
@@ -368,3 +375,140 @@ def test_owner_adopters_keep_derived_identity_after_backfill(writer, n):
     bound = safe_load(regenerated.split("---", 2)[1])["packing"]["reported_upper_bound"]
     assert bound["algebraic_source"] == DERIVED_FROM_EXACT_FORM
     assert bound["minimal_polynomial"] == writer.reported_bound(n)["minimal_polynomial"]
+
+
+def test_declared_certificate_history_keeps_registered_native_sides_and_credit():
+    entries = _standing_entries()
+    before = copy.deepcopy(entries)
+    rows = exact.declared_source_certificate_history(entries)
+    assert entries == before
+    assert Counter(row["source_certificate"]["result"] for row in rows) == {
+        "T-134": 6,
+        "T-135": 1,
+        "T-136": 17,
+        "T-137": 1,
+        "T-138": 16,
+        "T-139": 1,
+        "T-140": 6,
+        "T-141": 2,
+        "T-146": 15,
+    }
+    for row in rows:
+        side = Fraction(row["exact_form"])
+        assert row["polynomial"]["coefficients"] == [
+            str(side.denominator),
+            str(-side.numerator),
+        ]
+        assert [Fraction(value) for value in row["checks"]["root"]["interval"]] == [side, side]
+        custody = row["source_certificate"]
+        assert (custody["verification"], custody["confirmation"]) == ("V3", "C3")
+        assert custody["geometry_replay"] == "native-replay-retained"
+        assert custody["adoption"] == "pending"
+        assert custody["global_optimality"] == "not-established"
+        assert (exact.ROOT.parent / custody["facts"]).is_file()
+        assert (exact.ROOT.parent / custody["receipt"]).is_file()
+    nondecimal = next(
+        row
+        for row in rows
+        if row["n"] == 263 and row["source_certificate"]["result"] == "T-134"
+    )
+    assert Fraction(nondecimal["exact_form"]) == Fraction(
+        7488939206954142477014939239, 447356905819500000000000000
+    )
+    regularized = next(
+        row for row in rows if row["n"] == 70 and row["source_certificate"]["result"] == "T-146"
+    )
+    credit = " ".join(regularized["attribution"]["source_text"])
+    assert "Ryan Xu" in credit
+    assert "Eric Deleeuw" in credit
+    assert "regularized" in credit
+    assert "not a continuous proof" in credit
+    assert regularized["attribution"]["date_mentions"] == ["2026-10-10"]
+
+
+@pytest.mark.parametrize(
+    "control",
+    [
+        "ambiguous",
+        "source-key",
+        "scope",
+        "grade",
+        "custody",
+        "claims",
+        "receipt",
+        "missing-replay",
+    ],
+)
+def test_declared_history_refuses_inconsistent_registration_or_retained_evidence(
+    monkeypatch, control
+):
+    reports = exact.upper_bound_reports
+    record = safe_load((exact.FRONTIER / "results.yaml").read_text())
+    results = {row["id"]: row for row in record["results"]}
+    if control == "ambiguous":
+        results["duplicate"] = copy.deepcopy(results["T-140"])
+    elif control == "source-key":
+        results["T-140"]["attribution"]["source_keys"] = ["wrong source"]
+    elif control == "scope":
+        results["T-140"]["scope"]["n_values"] = [324]
+    elif control == "grade":
+        results["T-140"]["confirmation"] = "C0"
+    monkeypatch.setattr(exact, "_finite_source_results", lambda: results)
+    if control in {"custody", "claims", "receipt"}:
+
+        def refuse(*_args, **_kwargs):
+            raise reports.ReportError("changed " + control)
+
+        operation = {
+            "custody": "read_facts",
+            "claims": "check_claims",
+            "receipt": "check_certification",
+        }[control]
+        monkeypatch.setattr(reports, operation, refuse)
+    elif control == "missing-replay":
+        original = reports.check_certification
+
+        def missing(*args, **kwargs):
+            found = original(*args, **kwargs)
+            del found[132]
+            return found
+
+        monkeypatch.setattr(reports, "check_certification", missing)
+    messages = {
+        "ambiguous": "ambiguous",
+        "source-key": "source key differs",
+        "scope": "scope differs",
+        "grade": "unsupported finite source grade",
+        "custody": "changed custody",
+        "claims": "changed claims",
+        "receipt": "changed receipt",
+        "missing-replay": "lacks native replay",
+    }
+    with pytest.raises(exact.ExactValuesError, match=messages[control]):
+        exact.declared_source_certificate_history(_standing_entries())
+
+
+def test_declared_tied_occurrences_keep_distinct_custody(monkeypatch):
+    reports = exact.upper_bound_reports
+
+    def facts(packet):
+        return {
+            row["n"]: SimpleNamespace(side=Fraction(3))
+            for row in reports.load_declaration(packet)["certificates"]
+        }
+
+    monkeypatch.setattr(reports, "read_facts", facts)
+    monkeypatch.setattr(reports, "check_claims", lambda *_args: {})
+    monkeypatch.setattr(
+        reports,
+        "check_certification",
+        lambda _packet, *, certificates: {n: {} for n in certificates},
+    )
+    rows = exact.declared_source_certificate_history(
+        [row for row in _standing_entries() if row["n"] == 132]
+    )
+    assert len(rows) == 4
+    assert {row["exact_form"] for row in rows} == {"3"}
+    assert len({row["source_certificate"]["source_key"] for row in rows}) == 4
+    assert len({row["source_certificate"]["facts"] for row in rows}) == 4
+    assert len({row["source_certificate"]["receipt"] for row in rows}) == 4

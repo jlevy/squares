@@ -1611,7 +1611,12 @@ def test_the_totals_partition_the_range() -> None:
 def test_record_hunt_is_noncurrent_and_preserves_current_case_identity() -> None:
     register = _register()["register"]
     history = register["historical_entries"]
-    finite = [row for row in history if "source_certificate" in row]
+    finite = [
+        row
+        for row in history
+        if row.get("source_certificate", {}).get("result")
+        in {"T-125", "T-127", "T-128", "T-129", "T-130", "T-131"}
+    ]
     assert len(finite) == 29
     assert sum(row["kind"] == "unreconciled-source" for row in finite) == 15
     (source102,) = [
@@ -1637,8 +1642,8 @@ def test_record_hunt_is_noncurrent_and_preserves_current_case_identity() -> None
         assert current["side"]["relation"] == "upper-bound"
         assert current["polynomial"]["coefficients"] != row["polynomial"]["coefficients"]
         assert Fraction(row["exact_form"]) < Fraction(current["checks"]["root"]["interval"][0])
-        assert row["source_certificate"]["verification"] == "V0"
-        assert row["source_certificate"]["confirmation"] == "C0"
+        assert row["source_certificate"]["verification"] == "V3"
+        assert row["source_certificate"]["confirmation"] == "C3"
         assert row["source_certificate"]["adoption"] == "pending"
 
 
