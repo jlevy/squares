@@ -5,7 +5,7 @@ title: "Import Rio Calle: s(102) <= 10.605828696455852 (#529)"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:07:15.376Z
-updated_at: 2026-10-12T09:42:23.761Z
+updated_at: 2026-10-12T11:00:00.486Z
 started_at: 2026-10-12T08:07:43.538Z
 ---
 https://github.com/jlevy/squares/issues/529 (2026-10-12T04:32:54Z). riocalle/my-repo at 831368623f2d4dcef2e9434fd85c3e154083c97d: n102_s10.605828696455852.txt (decimal centres and radian angles), JSON and SVG copies, verify_exact.py (60-digit decimal, not exact). The author's exact certificate comes from a private engine; the record's exact certificate must be built here from the layout. Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports.
@@ -55,3 +55,13 @@ Open: whether to register a certificate that moves no case; attribution.publishe
 ## Draft acknowledgement (not posted)
 
 Thank you, Rio, and welcome. We received the layout at riocalle/my-repo 8313686 (n102_s10.605828696455852.txt, with its JSON and SVG copies). Since your engine's exact certificate is not public, we will build an exact certificate from the layout itself, every number exactly as printed and each square's half-angle tangent rounded to 40 places, and decide it on our exact routes with controls; we ran your verify_exact.py too, which reproduces your two gaps. We will also measure the packing against ry-xu's for the credit, which we will give as Rio Calle with ry-xu credited for the design and width, as you ask. One thing you should know first: since 10 October the record also holds Evan Daniel's exact regularization of ry-xu's packing at 10.6058286964315784, about 2.4e-11 below your side, so the comparison will name it.
+
+## Stage 4 review (W2), 2026-10-12 review lane (branch review-528-529 from intake-528-529 fda34049d; commit 18843516c, not pushed)
+
+Review: docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md (shared with #528), mapped in the document map. Verdict: accepted, finite feasibility only, for the certificate derived here from the 8313686 layout; eleven findings, none blocking; V3/C3 once registered (as T-138 holds V3 on derived witnesses); S2 confirmed (the claim's side is above T-146's; T-120, T-137, T-150 are the comparators); the house at 102 stays T-146, this certificate retained and not selected, T-125 after it.
+
+Replayed here: check --replay all 3 jobs equal (2 min 0 s, 10:11:34Z to 10:13:34Z); check-claims rebuilt equal as JSON. Third route: new reader read_calle_txt and decimal_literal (plain or scientific decimals, exact), half_angle_floor_radians (Taylor series in decimal arithmetic, no pi; refuses |theta| >= 3), derive_calle_txt (printed side undilated, options exactly half_angle_places), dispatched through DERIVED_READERS beside #470's derive_decimal_pose; CREDITED at 102 against T-125 and T-146. The certificate passes, 5,151 pairs (240 clipped), 6/6 sharp controls, wall clearance 2.002066e-12 at near and far walls, least Euclidean distance 1.932818e-12 = the maintained routes' pair gap, side 2651457174113963/(25*10^13) = the printed 10.605828696455852 exactly; --upstream derived the certificate again from the layout fetched at the pin (all 11 files at the manifest digests) and found it the fact basis for basis; the third route's floor equals the importer's interval floor at the layout's angles at 32 and 40 places. Credit measured: one to one with T-125 under a half turn, 40 within 1e-9 and none turned, 62 moved (61 beyond 1e-3, 42 beyond 1e-2, 19 beyond 1e-1, largest 0.494), 11 turned by up to a sine of 0.683; against T-146 under a quarter turn, 61 moved, 25 beyond a tenth. Another arrangement of ry-xu's design, not a refinement or regularization; no regularizations item.
+
+Answers for the records lane (review, "Whether #529 Is Registered" and "The Dates and the Plan's Wording"): register it as T-155 (the scope clause of epistemics "Results by Others" is met: replayed and reviewed here; the stage 1 "no work" exclusion does not fit a filed request below main's house; the standing is derived: pending adoption on main, superseded by T-146 on layer 4; precedents Casson, #505's five, think-9fjl each turned on the author's request), with the lighter alternative stated for the owner (RX-1). attribution.published 2026-10-11, the date the source gives (README history and issue), not the first commit's 2026-10-12; bibliography dated stays 2026-10-12 (RX-2). Plan wording: "improvement" and the negative "below" reworded; E-calle-529-certificate-report typed as the source's numerical report (numerical-multiprecision, 60 digits, certificate = acquisition/sources.json) and the derived fact cited by E-calle-529-exact-feasibility only (performed_by repository, origin replayed-here), as E-mishapolk-470-pose-report does (RX-3). README says 17 significant digits, the file prints 18 (RX-9); the stated ~2e-12 margin is approximate for the pair gap (RX-10). The Davidebyzero#6 comment date (2026-10-11T23:06Z) could not be read from this session (API access not attached; the HTML page is 403); the published date rests on the source's own date, not on it. Corrected register plan (T-155 placeholder): scratchpad lane-u/register-plan-528-529-reviewed.yaml.
+
+Validation: shared with #528's note (56 new test cases; packing-validate --records passes every step but the stale SYNOPSIS.md document map).
