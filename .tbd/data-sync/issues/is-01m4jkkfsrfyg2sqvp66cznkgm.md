@@ -5,7 +5,7 @@ title: "Stage 4-5: independently review and adopt the pending upper-bound report
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:51:43.927Z
-updated_at: 2026-10-12T02:23:43.503Z
+updated_at: 2026-10-12T03:47:07.293Z
 started_at: 2026-10-10T09:52:52.837Z
 ---
 The register holds rational upper-bound reports by others at V0/C0 whose next_rung is an independent review of the retained replay and a selected-house decision: T-128 (Couzo, eight), T-130 (Couzo, five), T-131 (Daniel, n = 132), and this pass's #470, #476, #481, #483 and #484 once registered. Several counts now carry more than one candidate (132: T-098 house, T-131, #476, #470; 237, 263, 270, 303: #476 and #481; 267: #470, #476). For each count: the smallest certificate whose complete two-route replay passed, a mapped W2 review of that replay (think-mt6e's rule: verified lane only on a replay here and a mapped review), the earlier house kept as history, and the case record's reported and verified ceilings moved together. Mirror the Gupta adoption (PR #448, #459: confirm_gupta_records.py). Coordinate with PR #403 / #435, which own canonical exact-value integration on the case records.
@@ -85,3 +85,9 @@ Tools: devtools.upper_bound_houses draws each house from the count's retained ce
 Decisions to review: (1) n = 305 tie: Daniel's hunt3 n305 has T-140's exact side and was committed 5.5 minutes earlier, but T-141 does not register 305 and hunt3's log credits Couzo, so T-140 holds it. (2) hunt3's claims record became its complete claim record. (3) credited_names gain Kevin Fang, Mishapolk and PingYou Ltd; ry-xu stays 'ry-xu' (think-ijv2). (4) The registered n = 211 orientation is not applied to an adopted house: Ostashev's 211 is drawn as its certificate states; the orientation tests read de Winter's last atlas witness from tests/fixtures/n211-de-winter-atlas-witness.yaml. (5) The worker custody test is slow-marked at 24.95 s call. (6) Open, layer 2's: test_module_boundaries::test_the_slow_marker_is_declared_only_by_measured_nodes fails on three unregistered slow tests in test_check_half_angle_area.py.
 
 Validation at a5d684799's tree: packing-validate --records exit 0 (83 s); --edit exit 0 (523 s); focused tests 1,366 passed then the poster pins and n236 credit test fixed (atlas, overview, case pages, standings, citations, adoption, legacy adoption suites, generator, upper_bound_reports incl. 503/504); site budgets index.html 357,940/1,300,000, results.html 856,275/950,000, atlas.html 891,630/1,000,000.
+
+2026-10-12, CI repair lane for layer 3 (#518; sub-agent, Claude Opus 5.5 at xhigh), from a5d684799 (run 38196351783 red in suites a-d, sweeps, frontend), merged with layer 2 at 47de4bb4e (snapshot cap 216 MiB, slow-node registrations); pushed head 4b11b28ce. Every fix root-caused; no assertion loosened, skipped or xfailed.
+
+Worker snapshot (b1c057f23): the 42 adopted leaves are linked back by upper_bound_houses; the tracked-set test now exempts them like the other house modules' links; n-263 (T-146's house) is asserted as a link to the checkout's file; SQUISH's house-reads programs rebuild the 263/302 houses from the packet's private inputs (the adoption's prior state keeps case text, not houses), as this layer's ryxu/evand fixtures do. Record consumers (bcad04538): T-130's frozen comparisons at 175/270 read the adoption's prior state (upper_bound_reports refuses refreezing); select_houses, adopt_houses, test_house_adoption declared verified_upper_bound consumers; citation 123 -> T-146; filter example T-128 -> T-122 (T-128 now current best); popover fixture renders T-115 via iter_result_fragments(result_ids) in the full register. Workbench (ebb020a41): n = 308 is tilted now, so 149 frames need catalogue precision (only 308 changed among the 42) and the grid-fill census is 157. Release (28414fafc): PACKING_METHODS_REVISED October 12 (cae45f088); URL registry rewritten for it (4b11b28ce). Derived (04fdaea99): chunk evidence profile rebuilt by its tool (it was stale against the regenerated census); goldens re-derived: structured 1731/1860, taxonomy residue, unstable list (screen --update --n over the 42 rebuilt it byte for byte), 85 angle classes at n = 267, grid row 18 from 309; the slow instability test moved from 108 (T-128, stable) to 84 (T-130), 3.13 s, registry updated. Sweeps (09a645c1f): the twelve adopted packets join the sparse slice (an audit-hook trace found 82 reads outside it, all there), held by test_module_boundaries to upper_bound_houses.sources(). DATA_REVISION re-pinned to 04fdaea9 (344aabbf7).
+
+Local: the failing tests and their whole files 207 passed; test_negative_controls (PR surface) 161 passed; the slow SQUISH replay passed; site filter/popover 29 passed, 6 skipped; workbench browser behavior OK; packing-validate --sweeps 5/5 (190.6 s), --records exit 0, --edit exit 0 (454.5 s). Hosted: #518's pull_request run had not started at hand-off (PR mergeable state unknown; #516 is dirty against layer 1).
