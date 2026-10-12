@@ -5,7 +5,7 @@ title: "Records lane 2026-10-11: register the new imports (T-NNN), evidence, cov
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:19.318Z
-updated_at: 2026-10-12T05:36:17.526Z
+updated_at: 2026-10-12T15:09:07.866Z
 started_at: 2026-10-11T22:05:03.285Z
 ---
 Register each 2026-10-11 import as reported, then at V3/C3 once its review lands, by the import lanes' register plans; result-requests.yaml entries for #500, #501, #503, #504, #505, #506 with triage done; views rendered by New Result Publication; DATA_REVISION re-pinned.
@@ -73,3 +73,13 @@ Houses: 176, 181, 238, 239, 270, 271, 272 -> T-151; 304, 305 -> T-152 (margins 1
 Also: register prose for T-130, T-134, T-136, T-140 at 270/305; views (atlas data, regularized views, translation screen with SCREEN_FINDINGS, rigidity, censuses, bound citations, case verifiers, certificate reach, RESULTS/INVENTORY/VERIFIERS/STATUS, URL registry, synopsis rows); two goldens stale since the first pass refreshed (screen unstable list; site filter pending example T-128 -> T-122).
 
 Validation (from packing/, one heavy process at a time): packing-validate --records exit 0 (49 steps) after the adoption; --edit exit 0 (65 steps, 397.6 s, basedpyright included); test_overview + test_known_best_atlas (not slow) 432 passed before the composite redraw, atlas poster tests 24 passed after; adoption/standing/citation/generator batch 601 passed, 6 failed (4 snapshot-cap only, 2 fixed: bound citations re-rendered, site filter golden); case/view/importer batch 422 passed, 2 screen failures fixed; register tests 448 passed; test_check_half_angle_area -k "500 or 506" 24 passed; select_houses moves nothing; adopt_houses --check 49 OK; upper_bound_houses check 49 OK; check_case_prose 324 OK. Not run: test_negative_controls (slow lane; its worker tests meet the same cap), the full gate.
+
+
+## Stack sync of 12 October (sub-agent, Claude Opus 5.5 at xhigh, worktree agent-abe4242091e30fcb5)
+
+Merge commits only; no rebase or force-push.
+
+- Round 1: L2 merged layer 1 at bde21d708 (b3d9bf94e, clean, pushed). L3 merged L2 (c1feef041) and fixed the slow-lane Gupta worker test, failing before the merge because the adoption gave 153, 154, 180, 207, 209, 236 and 237 to later sources (7a6a94cc3: custody over the leaves Gupta holds, each replaced house rebuilt from the private inputs; pushed). L4 merged L3 (6ef82fcba): sweeps slice gains both new packets (7cac90449; audit-hook trace 708 files, none outside); translation screen re-run over all 49 adopted counts rebuilt byte for byte; chunk profile, taxonomy and census checks pass (calibration corpus, untouched); re-pin dead83f0e.
+- Round 2 (#512 on main at ad00d7f84): L2 merged main (f5488efca; document map union rendered by render_document_map), re-pinned (3307bdd84), cherry-picked 5762e7aee (d7d7d37c8); pushed. L3 merged L2 (305aed7e9, 99c1cc8ea), fixed the slow ry-xu confirmation test (86ad1847a: reported stage rebuilt from adopt_houses.read_history and the superseded ry-xu selections; assertions unchanged) and the methods-survey test's hard-coded October 10 (79e02e54c); re-pinned 1bc770d34; pushed at 79e02e54c. L4 merged it (e740f30dd), registered the four #500/#506 slow functions with alone/together measurements (5232b7202), re-pinned (dcb3bcc9b), pushed as claude/wizardly-meitner-wqn4x3-imports-2; PR #553 opened and linked into stack #517 (stacks API: 517, PRs 512, 516, 518, 553).
+- Round 3: L4 carried the adoption lane's 82776edfa (main with #516, #546, #547) as d393419ed (slow registry kept 16340a894's case scan with the four functions under it; check_half_angle_area kept layer 4's text, the other side only reflowed a docstring), re-pinned de59ac6c9, pushed; #553 marked ready. L3 then moved to 43133a47d (#518 review fixes), which conflicts with L4 in adopt_houses.py, upper_bound_houses.py, source-coverage.yaml and release.py; not carried, per the coordinator.
+- Validation on a box shared with other lanes (load 15 to 25 on four cores): --records passed on every push. --fast on L2, L3 and L4 failed only on step timeouts, the workbench Chromium check (Target crashed; play timing; the n = 324 trajectory budget) and once D-034's n=5 quench (wall budget). Open: one L4 fast run under load had the angle-stable colour contract find n = 29's 64.939 deg and n = 272's 65.289 deg in slots 14 and 15; 272 is a T-151 house; hosted frontend has not run yet because #553 conflicts with its base. Worker-program tests failing on their 45 s subprocess limit at load passed rerun alone at load 2.
