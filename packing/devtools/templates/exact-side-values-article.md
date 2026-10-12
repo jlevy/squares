@@ -143,6 +143,18 @@ The latter uses Nate Chaoweeraprasit’s T-151 certificates at seven counts and 
 Couzo’s T-152 refinements of SQUISH at n=304/305. Both retain their registered V3/C3
 assurance. Superseded offers and displaced earlier houses remain in the canonical
 register, with complete prior identities retained for each adoption pass.
+
+On 12 October 2026, PingYou clarified that its $n=153$ (T-148) and $n=207$ (T-147)
+constructions were assisted by PY, its unreleased AI agent.
+The
+[author’s clarification](https://github.com/jlevy/squares/issues/503#issuecomment-6129716138)
+and the updated
+[n153 source report](../../resources/web/pingyou-n153-certificate-2026-10-11/README.md)
+and
+[n207 source report](../../resources/web/pingyou-n207-certificate-2026-10-11/README.md)
+supplement the dated attribution quotes retained below.
+Those quotes preserve what was stated at acquisition; the later disclosure changes no
+finite certificate or evidence grade.
 Adoption establishes no global optimum.
 
 Each entry carries its own attribution and source labels.

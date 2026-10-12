@@ -633,7 +633,10 @@ replayed and three V0/C0 source-reported occurrences; historical grades are not 
 by adoption. Final serializer round-trip/schema checks have zero findings; the
 current-custody guard passes three controls in 13.50 s and catalogue tests pass 17 in
 2.12 s, with zero static findings.
-Web/full/push/CI remain pending.
+Published-head web, pre-push and hosted qualification is recorded in
+[PR403](https://github.com/jlevy/squares/pull/403) and
+[PR435](https://github.com/jlevy/squares/pull/435); the scoped checks above remain
+separate from those broad verdicts.
 The separate `think-63vx` scope reports 62 quadratic source sides and a priced 41-count
 batch, not a reconciled count of remaining updates.
 #419’s T120–T123 and #420’s T124 have distinct binding/build prerequisites.
@@ -657,14 +660,17 @@ pending rational bounds.
 All 87 pending offers carry V3/C3 checked finite source geometry from retained positive
 replays. The superseded roster preserves eleven checked V3/C3 certificates and three
 unreplayed V0/C0 occurrences, with their own custody and grades.
-The latest four batches are PingYou Ltd’s T-147 at $n = 207$ and T-148 at $n = 153$,
-Daniil Ostashev’s T-149 at $n = 155,156,211$, and Robert Barnett’s T-150 at
-$n = 146,261$. Source verification does not itself adopt these sides as current
-atlas/frontier records.
+The latest four batches at that pre-PR518 checkpoint were PingYou Ltd’s T-147 at
+$n = 207$ and T-148 at $n = 153$, Daniil Ostashev’s T-149 at $n = 155,156,211$, and
+Robert Barnett’s T-150 at $n = 146,261$. Source verification does not itself adopt these
+sides as current atlas/frontier records.
 Separate Couzo and Daniel certificates for the same exact $n = 155$ side retain
 independent custody and attribution.
-`think-kkj2` owns T-131 adoption; `think-lhtz` and `think-0mlq` retain the original
-Couzo adoption and historical-house work.
+T-131 n132 is now superseded; `think-kkj2` and `think-iyij` retain residual
+review/import/atlas tracking.
+T-128/T-130 offers are adopted or superseded; `think-lhtz` and `think-0mlq` retain
+residual Couzo/atlas/historical-custody tracking.
+Re-read their beads before opening another adoption slice.
 Equal sides confer no motion or local-minimum equivalence.
 The current RyXu $n = 51$ radical is a separate quadratic identity.
 Complete source rows, native coefficient strings, flags and acquisition identities
@@ -691,9 +697,9 @@ The complete source register retains 632 coefficient vectors and 6,522 integer s
 
 The three numeric-only current cases are $n = 29,55,71$, each with a bead in the
 [continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md#remaining-work-and-beads).
-There are 63 current native witness-side projections: 26 original native certificate
-sides, two Rehwaldt refinements at $n = 68,292$, three Daniel arrangements at
-$n = 266,270,272$, 18 RyXu sides and 14 Gupta sides.
+At the pre-PR518 checkpoint, there were 63 native witness-side projections: 26 original
+native certificate sides, two Rehwaldt refinements at $n = 68,292$, three Daniel
+arrangements at $n = 266,270,272$, 18 RyXu sides and 14 Gupta sides.
 Rehwaldt admission requires exact equality among the reported and verified decimals,
 fraction and witness side.
 Daniel admission retains the native fraction and full reported decimal while checking
@@ -746,7 +752,7 @@ case or experiment separately.
 | [Review: Couzo’s and Daniel’s Rational Refinement Replays (T-128, T-130, T-131)](docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 1340000/199529`: Review of the Continuous-Pose Kernel on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 335427/50000`: Review of the Clipped-Corner Transfer on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) | dated review record | record | retained | — |
-| [Polynomial PR stack: refreshed tables and remaining work](docs/project/handoff-2026-10-10-polynomial-pr-stack.md) | dated handoff record | record | retained | — |
+| [Polynomial PR stack: refreshed tables and remaining work](docs/project/handoffs/handoff-2026-10-10-polynomial-pr-stack.md) | dated handoff record | record | retained | — |
 | [Review: Gupta exact rational refinements, issue #438](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md) | dated review record | record | retained | — |
 | [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |
 | [n17 Paper Review: Global Optimization and Sum-of-Squares Certificates](docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md) | dated review record | record | retained | — |

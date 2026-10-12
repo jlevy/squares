@@ -1912,7 +1912,14 @@ def test_superseded_polynomial_is_complete_and_checked_against_its_own_side() ->
     assert 0 < display - side < Fraction(1, 10**16)
     (native,) = [note for note in entry["notes"] if note["kind"] == "verified-witness-side"]
     assert "least upward sixteen-place ceiling" in native["text"]
-    assert "[ry-xu square packing 2026]" in native["text"]
+    certificate = entry["source_certificate"]
+    assert certificate["source_key"] == "[Daniel regularized lists 2026-10-10]"
+    assert certificate["result"] == "T-146"
+    assert certificate["revision"] == "ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7"
+    assert certificate["original_certificate"] == "search/regularize/lists/certs/n-102.cert.gz"
+    assert certificate["adoption"] == "adopted"
+    assert certificate["global_optimality"] == "not-established"
+    assert entry["source_occurrences"][0]["path"] == certificate["facts"]
 
 
 def test_the_register_validates_against_its_schema() -> None:
@@ -1940,7 +1947,7 @@ def test_the_totals_partition_the_range() -> None:
     entries = list(_entries().values())
     totals = register["totals"]
     assert sum(totals[state] for state in exact.STATES) == len(entries) == 324
-    assert [totals[state] for state in exact.STATES] == [176, 72, 60, 13, 0, 3]
+    assert [totals[state] for state in exact.STATES] == [175, 75, 58, 13, 0, 3]
     assert totals["proved"] == 77
     with_polynomial = sum(1 for entry in entries if entry["polynomial"] is not None)
     assert totals["irreducible-certified"] == totals["root-isolated"] == with_polynomial == 321
@@ -2046,13 +2053,24 @@ def test_every_numeric_only_count_names_its_route_and_bead() -> None:
     ],
 )
 def test_the_committed_entries_equal_a_fresh_build(n: int) -> None:
-    # Source notes and occurrence citations follow the per-frontier arithmetic pass.
-    # Separate assembly and whole-register controls compare the complete metadata.
-    expected = {
-        key: copy.deepcopy(value)
-        for key, value in _entries()[n].items()
-        if key != "source_occurrences"
-    }
+    # Adopted entries carry their complete custody at admission. Only catalogue
+    # occurrence citations are added by the later historical assembly pass.
+    expected = copy.deepcopy(_entries()[n])
+    if "source_certificate" not in expected:
+        expected.pop("source_occurrences", None)
+    if n in (102, 292):
+        certificate = expected["source_certificate"]
+        assert certificate["result"] == "T-146"
+        assert certificate["source_key"] == "[Daniel regularized lists 2026-10-10]"
+        assert certificate["revision"] == "ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7"
+        assert certificate["original_certificate"] == (
+            f"search/regularize/lists/certs/n-{n}.cert.gz"
+        )
+        assert certificate["adoption"] == "adopted"
+        assert expected["source_occurrences"][0]["path"] == certificate["facts"]
+        side = Fraction(expected["exact_form"])
+        assert expected["side"]["value"] == exact.evand.ceiling_decimal(side, 16)
+        assert expected["checks"]["root"]["interval"] == [str(side), str(side)]
     if n in (106, 152, 177):
         assert expected["notes"].pop()["kind"] == "unreconciled-source-polynomial"
     assert _build(n) == expected
@@ -2148,6 +2166,31 @@ def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
     # The new n266 pose uses the sweep bead with its explicit new-contact obligation.
     assert numeric | finite == set(exact.ROUTES) | {266}
     assert 266 not in exact.ROUTES
+    # These research lanes predate adoption; their original group is not the
+    # current pose's source. Pin the new source choices independently of the rows.
+    adopted = {
+        102: "T-146",
+        103: "T-146",
+        105: "T-130",
+        131: "T-136",
+        132: "T-141",
+        156: "T-149",
+        181: "T-151",
+        211: "T-149",
+        228: "T-128",
+        259: "T-136",
+        269: "T-146",
+        270: "T-151",
+        271: "T-151",
+        272: "T-151",
+        292: "T-146",
+        304: "T-152",
+        305: "T-152",
+        306: "T-128",
+        307: "T-136",
+    }
+    assert {n for n in finite if "source_certificate" in entries[n]} == set(adopted)
+    assert len(finite - adopted.keys()) == 16
     for n in numeric | finite:
         entry = entries[n]
         routes = [note for note in entry["notes"] if note["kind"] == "route"]
@@ -2182,15 +2225,45 @@ def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
             ]
             assert provenance["kind"] == "verified-witness-side", n
             side = Fraction(entry["exact_form"])
-            if n in imported:
+            if n in adopted:
+                certificate = entry["source_certificate"]
+                assert certificate["result"] == adopted[n]
+                assert (
+                    certificate["verification"],
+                    certificate["confirmation"],
+                    certificate["adoption"],
+                    certificate["geometry_replay"],
+                    certificate["global_optimality"],
+                ) == ("V3", "C3", "adopted", "native-replay-retained", "not-established")
+                assert certificate["receipt"], n
+                assert entry["source_occurrences"][0]["path"] == certificate["facts"], n
+                packing = exact.load_packing(n)
+                assert (
+                    certificate["source_key"] == packing["reported_upper_bound"]["source_key"]
+                )
+                assert entry["side"]["value"] == packing["reported_upper_bound"]["value"]
+                assert packing["verified_upper_bound"]["value"] == exact.evand.ceiling_decimal(
+                    side, 16
+                )
                 display = Fraction(entry["side"]["value"])
-                assert 0 < display - side < Fraction(1, 10**16), n
+                assert display in {side, Fraction(exact.evand.ceiling_decimal(side, 16))}, n
+                if n != 132:
+                    assert 0 < display - side < Fraction(1, 10**16), n
+                else:
+                    assert display == side
                 assert "least upward sixteen-place ceiling" in provenance["text"], n
-                assert "[ry-xu square packing 2026]" in provenance["text"], n
+                assert (
+                    "No old-pose stationarity, rigidity, local-minimum or optimality "
+                    "claim transfers" in provenance["text"]
+                ), n
             else:
                 assert side == Fraction(entry["side"]["value"]), n
+            assert entry["polynomial"]["coefficients"] == [
+                str(side.denominator),
+                str(-side.numerator),
+            ], n
             assert entry["checks"]["root"]["interval"] == [str(side), str(side)], n
-        if n in arrangements:
+        if n in arrangements - adopted.keys():
             assert "new #399 witness" in route["text"], n
             assert "active contact system and a stable seed" in route["text"], n
             assert "No KKT or local-minimum result" in route["text"], n
@@ -2340,15 +2413,63 @@ def test_the_eight_displaced_current_exact_sides_remain_in_history() -> None:
 
 def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier() -> None:
     rows = _register()["register"]["historical_entries"]
-    assert len(rows) == 286
-    assert sum(row["kind"] == "superseded" for row in rows) == 186
+    assert len(rows) == 297
+    assert sum(row["kind"] == "superseded" for row in rows) == 284
     unreconciled = [row for row in rows if row["kind"] == "unreconciled-source"]
-    assert len(unreconciled) == 90
+    assert len(unreconciled) == 3
     reported = [row for row in unreconciled if "reported_source" in row]
     assert {row["n"] for row in reported} == {106, 152, 177}
-    native = [row for row in unreconciled if "source_certificate" in row]
-    assert len(native) == 87
-    assert len(reported) + len(native) == len(unreconciled)
+    assert reported == unreconciled
+    native_history = [row for row in rows if "source_certificate" in row]
+    native_current = [row for row in _entries().values() if "source_certificate" in row]
+    assert len(native_history) == 89
+    assert len(native_current) == 49
+    assert len(native_history) + len(native_current) == 101 + 11 + 26 == 138
+    assert all(row["kind"] == "superseded" for row in native_history)
+    assert all(
+        row["source_certificate"]["adoption"] == "not-selected" for row in native_history
+    )
+    assert all(row["source_certificate"]["adoption"] == "adopted" for row in native_current)
+    assert (
+        sum(row["source_certificate"]["verification"] == "V3" for row in native_history) == 86
+    )
+    assert sum(row["source_certificate"]["verification"] == "V0" for row in native_history) == 3
+    # The original scoped offers remain represented after adoption. Exclude the
+    # separately retained Ry-Xu/Gupta/current and unconfirmed Daniel legacy rows.
+    native = [
+        row
+        for row in [*native_history, *native_current]
+        if row["source_certificate"]["result"] not in {"T-125", "T-127", "T-129"}
+    ]
+    assert len(native) == 87 + 11 == 98
+    for row in native:
+        certificate = row["source_certificate"]
+        assert row["algebraic_source"] == (
+            exact.DERIVED_FROM_EXACT_FORM
+            if certificate["adoption"] == "adopted"
+            else "derived-from-source-closed-form"
+        )
+        assert (certificate["verification"], certificate["confirmation"]) == ("V3", "C3")
+        assert certificate["geometry_replay"] == "native-replay-retained"
+        assert certificate["global_optimality"] == "not-established"
+        assert certificate["receipt"]
+        side = Fraction(row["exact_form"])
+        assert row["degree"] == 1
+        assert row["polynomial"]["coefficients"] == [
+            str(side.denominator),
+            str(-side.numerator),
+        ]
+        assert row["checks"]["root"]["interval"] == [str(side), str(side)]
+        assert row["checks"]["root"]["unique"]
+        assert row["checks"]["root"]["contains_recorded_side"]
+    equal155 = [
+        row
+        for row in native
+        if row["n"] == 155 and row["source_certificate"]["result"] == "T-128"
+    ]
+    assert len(equal155) == 2
+    assert len({row["source_certificate"]["facts"] for row in equal155}) == 2
+    assert len({row["source_certificate"]["receipt"] for row in equal155}) == 2
     # Reviewed finite sides, independent of the generated register and result scopes.
     latest = {
         ("T-147", 207): "14.8809603730436757",
@@ -2364,6 +2485,8 @@ def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier()
         *(("T-128", n) for n in (105, 108, 127, 131, 155, 180, 228, 306)),
         *(("T-130", n) for n in (84, 86, 105, 175, 270)),
         ("T-131", 132),
+        *(("T-151", n) for n in (176, 181, 238, 239, 270, 271, 272, 304, 305)),
+        *(("T-152", n) for n in (304, 305)),
         *(
             (result["id"], n)
             for result in load_yaml(
@@ -2377,7 +2500,7 @@ def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier()
     }
     new = [
         row
-        for row in native
+        for row in native_current
         if row["source_certificate"]["result"] in {result for result, _ in latest}
     ]
     assert len(new) == 7
@@ -2399,33 +2522,21 @@ def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier()
         ) == (
             "V3",
             "C3",
-            "pending",
+            "adopted",
         )
         assert certificate["global_optimality"] == "not-established"
     for row in unreconciled:
         current = _entries()[row["n"]]
-        if "reported_source" in row:
-            assert row["algebraic_source"] == "reported-source-polynomial"
-            assert row["assurance"]["verification"] == "V0"
-            assert row["assurance"]["confirmation"] == "C0"
-            assert row["assurance"]["geometry_replay"] == "not-attempted"
-            assert row["assurance"]["lean_replay"] == "not-attempted"
-        else:
-            assert row["algebraic_source"] == "derived-from-source-closed-form"
-            assert row["source_certificate"]["verification"] == "V3"
-            assert row["source_certificate"]["confirmation"] == "C3"
-            assert row["source_certificate"]["geometry_replay"] == "native-replay-retained"
-            assert row["source_certificate"]["adoption"] == "pending"
+        assert row["algebraic_source"] == "reported-source-polynomial"
+        assert row["assurance"]["verification"] == "V0"
+        assert row["assurance"]["confirmation"] == "C0"
+        assert row["assurance"]["geometry_replay"] == "not-attempted"
+        assert row["assurance"]["lean_replay"] == "not-attempted"
         assert Fraction(row["checks"]["root"]["interval"][1]) < Fraction(
             current["checks"]["root"]["interval"][0]
         )
         assert current["state"] in {"integer", "rational", "closed-form", "minimal-polynomial"}
-        if "reported_source" in row or row["source_certificate"]["result"] in {
-            "T-128",
-            "T-130",
-            "T-131",
-        }:
-            assert current["state"] == "rational"
+        assert current["state"] == "rational"
         assert current["side"]["relation"] == "upper-bound"
         assert row["polynomial"]["coefficients"] != current["polynomial"]["coefficients"]
     source266 = exact.catalogue_entries()[266]
@@ -2463,7 +2574,10 @@ def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier()
     assert current["polynomial"]["coefficients"] != n259["polynomial"]["coefficients"]
     assert current["checks"]["catalogue"] == "derived-here"
     assert current["checks"]["root"]["interval"] == [str(side), str(side)]
-    assert side == Fraction(current["side"]["value"])
+    assert current["source_certificate"]["result"] == "T-136"
+    assert current["source_certificate"]["adoption"] == "adopted"
+    assert current["side"]["value"] == exact.evand.ceiling_decimal(side, 16)
+    assert 0 < Fraction(current["side"]["value"]) - side < Fraction(1, 10**16)
     assert side != Fraction(n259["side"])
     # An invalid source polynomial cannot replace the current finite bound's identity.
     wrong = copy.deepcopy(exact.load_packing(259))
@@ -2473,7 +2587,22 @@ def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier()
         minimal_polynomial=n259["polynomial"]["text"],
         algebraic_source=exact.DERIVED_FROM_EXACT_FORM,
     )
-    _refused(lambda: _build(259, wrong), "not the minimal polynomial of")
+    _refused(
+        lambda: exact.source_check(
+            259,
+            wrong["reported_upper_bound"],
+            tuple(int(c) for c in n259["polynomial"]["coefficients"]),
+            exact.catalogue_entries()[259],
+        ),
+        "not the minimal polynomial of",
+    )
+    # Keep current degree/custody valid to reach the supplied-polynomial guard,
+    # rather than passing this control because the earlier degree check refused it.
+    wrong = copy.deepcopy(exact.load_packing(259))
+    assert wrong["reported_upper_bound"]["algebraic_degree"] == 1
+    assert _build(259, copy.deepcopy(wrong)) == current
+    wrong["reported_upper_bound"]["minimal_polynomial"] = n259["polynomial"]["text"]
+    _refused(lambda: _build(259, wrong), "supplied polynomial is not the native side")
     outside = [row for row in rows if row["kind"] == "outside-frontier"]
     assert len(outside) == 7
     assert {row["n"] for row in outside} == {1453, 1765, 1850, 2043, 2135}

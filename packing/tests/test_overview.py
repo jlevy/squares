@@ -6469,7 +6469,7 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
     assert record.label == "Exact values"
     assert exact.FRONT.source is None
     assert exact.FRONT.series is None
-    assert exact.FRONT.agents == ("GPT-5.6 Sol", "GPT-6 Astra")
+    assert exact.FRONT.agents == ("GPT-5.6 Sol", "GPT-6.1 Sol", "GPT-6 Astra")
     assert exact.FRONT.version == release.EXACT_SIDE_VALUES_EDITION
     assert [(dated.label, dated.day) for dated in exact.FRONT.dates] == [
         ("First published", release.EXACT_SIDE_VALUES_FIRST_PUBLISHED),

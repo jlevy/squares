@@ -110,15 +110,19 @@ Displaced source identities remain raw custody.
 The final register is 913,496 gzip / 3,283,520 decoded bytes.
 Its public projection has 337 records, 337 recursive coefficient vectors and 2,096
 integer strings, with no superseded or pending native offers displayed.
-Web/gate qualification remains pending.
-The report remains strictly HTML/Markdown, without a report PDF. Historical examples
-reach $n = 2135$; source-invalid proposals retain their flags.
+Exact published-head web and gate receipts are recorded in
+[PR403](https://github.com/jlevy/squares/pull/403) and
+[PR435](https://github.com/jlevy/squares/pull/435). The report remains strictly
+HTML/Markdown, without a report PDF. Historical examples reach $n = 2135$;
+source-invalid proposals retain their flags.
 Reported algebraic roots retain their stated assurance while geometry and Lean replay
-remain separate. Replayed certificate offers carry the current source-verification
-grades, source pins, original finder credits and replay custody; their adoption into the
-atlas remains separate.
-The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html)
-supports search, filters and per-entry coefficient downloads.
+remain separate. Native certificates retain their grades, pins, original finder credits
+and replay custody. The 49 selected sources are adopted current bindings; superseded
+occurrences remain historical.
+Finite replay and standing selection leave contact, local-minimum and optimality
+research separate. The
+[web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html) supports
+search, filters and per-entry coefficient downloads.
 The full HTML report and Markdown export retain every equation and coefficient in the
 published collection.
 The

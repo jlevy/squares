@@ -11,6 +11,7 @@ from __future__ import annotations
 import gzip
 import json
 from copy import deepcopy
+from fractions import Fraction
 from html import escape, unescape
 from pathlib import Path
 from typing import Any
@@ -24,10 +25,12 @@ from devtools import (
     check_published_site,
     check_site_scripts,
     exact_catalogue,
+    exact_house_sources,
     site_assets,
     site_urls,
 )
 from devtools import render_exact_side_values as paper
+from devtools import upper_bound_houses as houses
 from devtools.render_exact_side_values import WEB_LAYOUT
 from devtools.render_overview import SITE_URL
 from tests.exact_side_values_fixture import adopted_current
@@ -423,8 +426,36 @@ def test_historical_source_statuses_attribution_and_invalid_geometry_are_visible
     }
     current_102 = next(row for row in register["entries"] if row["n"] == 102)
     assert current_102["state"] == "rational"
-    assert current_102["exact_form"] == "21211657393021211657393/2000000000000000000000"
+    source_102 = houses.source_for(102)
+    native_102 = exact_house_sources.scoped_certificate(source_102, 102)
+    assert current_102["source_certificate"] == exact_house_sources.custody_for(
+        source_102, 102, "adopted"
+    )
+    assert source_102.result == "T-146"
+    assert current_102["exact_form"] == (
+        "10605828696431578360490734944053/1000000000000000000000000000000"
+    )
+    assert Fraction(current_102["exact_form"]) == native_102.side
     assert current_102["side"]["value"] == superseded_102["current_side"]
+    (prior_102,) = [
+        row
+        for row in retained["historical_entries"]
+        if row["n"] == 102 and row.get("source_certificate", {}).get("result") == "T-125"
+    ]
+    assert prior_102["kind"] == "superseded"
+    assert prior_102["source_certificate"]["adoption"] == "not-selected"
+    assert prior_102["source_certificate"]["source_key"] == "[ry-xu square packing 2026]"
+    assert prior_102["polynomial"]["coefficients"] == [
+        "2000000000000000000000",
+        "-21211657393021211657393",
+    ]
+    assert Fraction(prior_102["side"]) == Fraction(
+        "21211657393021211657393/2000000000000000000000"
+    )
+    assert not any(
+        row["n"] == 102 and row.get("source_certificate", {}).get("result") == "T-125"
+        for row in register["historical_entries"]
+    )
     assert [
         row["n"] for row in register["historical_entries"] if row.get("reported_source")
     ] == [106, 152, 177]
@@ -883,16 +914,33 @@ def test_linked_publication_script_inventory_keeps_unknown_program_refusal(
 
 @pytest.mark.parametrize("n", [1, 70, 263])
 def test_web_linear_mathml_keeps_real_coefficients_names_and_markdown(n):
-    register = exact_catalogue.publication_register(paper.load_register())
-    if n == 263:
-        candidates = [row for row in register["historical_entries"] if row["n"] == n]
-        entry = next(
-            row for row in candidates if row["source_certificate"]["result"] == "T-134"
+    retained = paper.load_register()
+    register = exact_catalogue.publication_register(retained)
+    entry = next(row for row in register["entries"] if row["n"] == n)
+    name = f"P_{{{n}}}"
+    if entry.get("source_certificate"):
+        source = houses.source_for(n)
+        native = exact_house_sources.scoped_certificate(source, n)
+        assert entry["source_certificate"] == exact_house_sources.custody_for(
+            source, n, "adopted"
         )
-        name = f"H_{{{n},{candidates.index(entry) + 1}}}"
-    else:
-        entry = next(row for row in register["entries"] if row["n"] == n)
-        name = f"P_{{{n}}}"
+        assert Fraction(entry["exact_form"]) == native.side
+        assert entry["polynomial"]["coefficients"] == [
+            str(native.side.denominator),
+            str(-native.side.numerator),
+        ]
+    if n == 263:
+        (prior,) = [
+            row
+            for row in retained["historical_entries"]
+            if row["n"] == n and row.get("source_certificate", {}).get("result") == "T-134"
+        ]
+        assert prior["kind"] == "superseded"
+        assert prior["source_certificate"]["adoption"] == "not-selected"
+        assert not any(
+            row["n"] == n and row.get("source_certificate", {}).get("result") == "T-134"
+            for row in register["historical_entries"]
+        )
     polynomial = entry["polynomial"]
     markdown = paper.polynomial_markdown(name, polynomial, degree=1, context=name)
     native = paper.polynomial_markdown(name, polynomial, degree=1, context=name, web=True)

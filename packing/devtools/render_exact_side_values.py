@@ -1116,7 +1116,7 @@ def _source_quote_ids(records: Sequence[Mapping[str, Any]]) -> dict[str, int]:
 def _source_quote_appendix(quotes: Mapping[str, int]) -> str:
     if not quotes:
         return ""
-    sections = ["## Source attribution notes"]
+    sections = ["## Source Attribution Notes"]
     for text, number in quotes.items():
         literal = escape(text, quote=False)
         sections.append(

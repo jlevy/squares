@@ -51,12 +51,29 @@ Serializer round-trip/schema checks have zero findings.
 Three guard controls pass in 13.50 s and 17 catalogue tests pass in 2.12 s, with zero
 static findings. These scoped passes do not qualify the pending web/full/push/CI gates.
 
-Latest parent builder controls pass 184 tests in 100.31 s; post-fix source controls pass
-99 in 102.94 s. Records passes 50/108 selected steps in 37.10 s, on an actual ten-CPU
-host with six jobs and two inner jobs; it is not the full tier.
-Parent pre-push has 64/65 prerequisites complete and remains active.
-Child full/web/push and exact-head hosted CI remain pending.
-No old-head pass qualifies these new data.
+Parent `a0beeda6e` pre-push exited 1 after 1,105.24 s: 64/65 steps passed.
+Normal tests finished with 24 failures, 15,539 passes, 51 skips and one xfail in 983.36
+s; the pool lane did not run.
+All 24 failed nodes pass after the bounded fix: 190 frontier/adoption tests in 84.04 s,
+13 historical-source controls in 83.73 s and seven consumer-contract controls in 10.40
+s. These 210 scoped passes preserve the original negative receipt.
+The fresh parent `f725d901d` gate retains the 1,800 s cap, six jobs and two inner jobs.
+The prior ordinary builder retry passed 184 in 100.31 s, deselecting only its existing
+slow test; 99 source controls passed in 102.94 s. Records passed 50/108 selected steps
+in 37.10 s on the ten-CPU host; this is not the full tier.
+
+The `fd70d7e34` web render measured 1,682,134 complete HTML bytes under the unchanged
+2,000,000-byte cap. Startup was 248,861/3,212,387 = 7.7469184%, within the 10% limit;
+eight compact/complete views and 12 scripts had zero findings.
+Four strict registry controls passed in 3.61 s after retiring 174 obsolete unpublished
+payload URLs; all remaining metadata stayed equal and the partial consumer passed
+5,585/5,585 checks. The full browser module passed 14 tests in 23.03 s, including
+disabled-JavaScript access.
+The prior producer run had 91 passes and two obsolete renderer-binding failures.
+After current-custody test repairs, all 93 producer tests passed in 111.51 s with zero
+static findings; canonical historical identities and the MathML/Markdown guards remain
+intact. Final pin-head rerender and broad/hosted qualification are recorded in the PR
+Validation sections; scoped and old-head passes do not qualify a new head.
 
 The earlier child `0841b84e` run was owner-stopped after 68 prerequisites and four
 failed call phases, with 17 processes verified absent and no completed JUnit/lane pass.
@@ -65,7 +82,8 @@ diagnose the parallel 20 s timeout (`think-w0if`). Detailed negative evidence is
 retained in `validation/child-main25-layer-push-failure-classification.json` under the
 external evidence root listed below.
 All dated failure and CI links below remain historical.
-Pushing and landing are pending; no merge is authorized.
+Publication readback belongs in the PRs.
+Landing requires the owner’s confirmation; no merge is authorized.
 
 ## Scope and Current Result
 
@@ -753,11 +771,15 @@ Additional work:
   At the dated pre-PR518 checkpoint, the finite bound was RyXu’s arrangement at
   `8dc415296f697f5140caea27c7a0193d52deb4e6`, already retained in the
   [RyXu packet](../../../../packing/resources/web/ry-xu-new-packings-2026-10-08/README.md).
-  Before a current-pose $n = 102$ slice, convert that complete certificate into the
-  driver’s input, establish its active, weak and forced contacts, frozen variables and
-  confirmed seed, and then preregister the bounded run.
-  The historical Daniel input cannot satisfy that current-pose prerequisite; geometry or
-  Lean work on its T-120 root is optional source-history work.
+  Before a current-pose $n = 102$ slice, bind the validated certificate in the current
+  row’s adopted custody: presently Daniel T146 at
+  `ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7`,
+  `search/regularize/lists/certs/n-102.cert.gz`. Convert it into the driver’s input,
+  establish its active, weak and forced contacts, frozen variables and confirmed seed,
+  and then preregister the bounded run.
+  RyXu `8dc415` remains a historical fixture; its contact/local-minimum claims do not
+  transfer. The historical Daniel input cannot satisfy that current-pose prerequisite;
+  geometry or Lean work on its T-120 root is optional source-history work.
 
 - **Independent contact derivations (`think-o0az`).** After delivery recovery,
   independently rederive the small-degree catalogue cases (28, 39, 37, 70, 153, 11)
@@ -1022,16 +1044,19 @@ Capture each new result against its actual head in the PRs and beads before cont
    No reusable driver, solver, contact-derived control or target search has been
    delivered in this recovery.
 3. **W6 identification:** after the driver and $n = 11$ control pass, bind and convert
-   the retained current RyXu $n = 102$ certificate, establish its contact system and
-   confirmed seed, then preregister one bounded slice in `think-ohhz`. Keep
-   $n = 29,55,71$ and ideal contact obligations open.
+   the certificate in the current $n = 102$ row’s validated adopted custody, presently
+   Daniel T146 at `ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7`,
+   `search/regularize/lists/certs/n-102.cert.gz`. Establish its contact system and
+   confirmed seed, then preregister one bounded slice in `think-ohhz`. Historical RyXu
+   and Daniel fixture claims do not transfer.
+   Keep $n = 29,55,71$ and ideal contact obligations open.
    Retain `think-yuqy`’s quarantine of unsupported degree, height and numerical-linkage
    inferences.
 
-Pending finite-bound adoption remains in `think-lhtz`; T-128 source-house custody
-remains in `think-0mlq`. The Rehwaldt $n = 68$ multivariate binding review remains in
-`think-nv5o`; PR 479 completed the later extended-range source import, while
-`think-1545` retains the outside-corpus reader work.
+T-128/T-130 offers are adopted or superseded; residual Couzo/atlas tracking remains in
+`think-lhtz`, and historical source-house custody remains in `think-0mlq`. The Rehwaldt
+$n = 68$ multivariate binding review remains in `think-nv5o`; PR 479 completed the later
+extended-range source import, while `think-1545` retains the outside-corpus reader work.
 The optional $n = 83$ source-index count remains in `think-chsu`.
 
 The adjacent import stabilization is recorded separately in

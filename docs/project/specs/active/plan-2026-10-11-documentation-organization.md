@@ -83,8 +83,8 @@ Re-measured against `main` at `074ac28d4`, 161 commits after the survey below.
   Case-only renames and three reports remain (think-qgq1).
 
 Open pull request [jlevy/squares#435](https://github.com/jlevy/squares/pull/435) adds
-`docs/project/handoff-2026-10-10-polynomial-pr-stack.md`; once it merges `main`, the
-check asks for it in `handoffs/`.
+`docs/project/handoffs/handoff-2026-10-10-polynomial-pr-stack.md`; its upstream
+integration moves the handoff into the required directory.
 
 ## Overview
 

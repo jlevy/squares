@@ -2,12 +2,99 @@
 
 The formal stack is 447: main → [PR403](https://github.com/jlevy/squares/pull/403) →
 [PR435](https://github.com/jlevy/squares/pull/435). Both PRs remain open.
-This checkpoint describes the refreshed code and data; the PR Validation sections carry
-the final published heads, exact gate receipts and current hosted check status.
+This checkpoint describes the refreshed code and data.
+Consult the PR Validation sections for the published heads, exact terminal gate receipts
+and hosted check status; dated receipts qualify only the heads they name.
 Landing requires the owner’s session confirmation and requested final review.
 The polynomial report is strictly web-only: preserve HTML/Markdown, every equation and
 coefficient, source custody and no-JavaScript access.
 Do not generate or publish a PDF.
+
+## Upstream and Storage Checkpoint, October 13
+
+The native stack rebase now integrates main `ea227e62df86d3eadf650211e39c5586adc7aa3e`
+through both review layers.
+This adds PR507’s audit and reachable-test selector fixes, PR558’s current AI-assistance
+disclosure for the T147/T148 sources, and PR576’s documentation layout.
+The disclosure preserves dated acquisition text and flags; no numeric bound or evidence
+rung changed. The handoff now lives in `docs/project/handoffs/`, and all 2,026
+durable-document checks pass.
+The canonical selection API reports 110 full steps, 52 records, 68 edit and 97 fast;
+older step counts below are dated measurements.
+
+Both latest-source exact registers rebuild identically: parent retains 320 exact
+identities, child 321, with all coefficients and source custody preserved.
+The auxiliary Kingbird comparison facts refresh 67 relationships across 30 counts.
+All 182 source pairs, 201 occurrences, quoted equations, attribution, source flags and
+exact validation results are unchanged.
+The full saved-corpus controls pass.
+
+Parent `f725d901d` completed its bounded push: 65 selected steps pass in 1,674.55 s;
+normal tests have 15,564 passes, 51 skips and one xfail, and the separate pool lane has
+18 passes. This qualifies that dated source, not a new-head full checkpoint.
+Child `3d439bbd8` finished with 68/69 selected steps passing in 1,190.59 s; normal
+behavior had 12 failures, 15,821 passes, 51 skips and one xfail.
+Its pool lane did not run.
+Original negative receipts remain intact.
+
+All twelve failed child nodes are repaired without weaker assertions: the full builder
+module’s 210 cases pass across bounded runs, including both existing slow controls; the
+paper-structure, credits and snapshot guards pass 35 cases in 26.22 s; 50 forwarder
+cases pass in the first run and the repaired stalled-image case passes in its focused
+retry alongside all 13 retained-corpus controls (14 passes in 15.88 s). The fixture
+serves its actual hashed script and retains the two-second arrival deadline.
+The snapshot guard follows main’s existing 216 MiB limit; no limit was increased here.
+Scoped lint, formatting and types have zero findings.
+Records completed 51/52 in 80.40 s, with one formatting failure; the bounded formatter
+repair and maintained lint retry pass.
+These are scoped receipts; latest-head pre-push and hosted qualification remain separate
+gates recorded in the PR Validation sections.
+
+The latest disk audit identifies 4.10 GB of expanded old fixture trees.
+Complete PAX archives, member manifests and byte/metadata verification receipts live
+under the protected evidence root’s `archive/`; remove an expanded tree only after its
+VERIFIED receipt and fresh activity/worktree checks.
+The root’s reclamation receipts record actual free-space changes with APFS sharing and
+concurrent writers disclosed.
+The inactive 2.66 GiB Lean build also needs a complete archive first: 3,520 compiled
+module source paths have uncertain recovery, so do not claim it is regenerable.
+Four 5.38 GiB atlas test copies and 12.45 GiB of review checkouts contain changed
+source, local commits, untracked probes or research data and remain protected.
+No blanket worktree removal or Git history pruning is authorized by the cleanup
+implementation.
+
+Keep one current expanded failure tree, retain unique evidence compressed, and use the
+maintained incremental selector against an explicitly qualified source.
+Use the hosted full checkpoint for final review; avoid repeated local whole-suite copies
+during routine source edits.
+Keep per-task external temp/cache/target settings and failed-only pytest retention at
+one. The polynomial publication stays HTML/Markdown only.
+The sections below retain their dated source and failure evidence.
+
+The later parent upstream check at `9cae1bbca` passed all 66 prerequisites but its
+reachable behavior command hit the unchanged 1,800-second deadline (1,801.05 s total).
+No completed normal or pool pass is inferred.
+Its captured progress includes one concrete dependency-attribution refusal: the
+exact-value step omitted 96 imported Python modules.
+Two conservative Python globs repair that refusal; all 27 unchanged selection controls
+pass in 4.99 s with zero static findings.
+This selects the exact-value check for 786 additional Python paths.
+The timeout remains a separate qualification item under `think-w0if`; no wall cap was
+raised and no full retry is claimed.
+The native parent-to-child update and maintained data pin preserve all register bytes.
+
+Storage cleanup has removed six old expanded fixture trees and the compiled Lean build,
+retaining seven complete byte-verified archives and compressed manifests.
+The 6.245 GB of measured expanded allocation is represented by 2.255 GB of archive
+allocation plus 17.9 MB of manifests; APFS sharing and concurrent writers limit physical
+reclamation attribution.
+The absent older scratch pytest-14 was not archived or credited here.
+Two separately verified inactive n17 Cargo targets, five obsolete web builds and 13
+obsolete extension signatures were also removed.
+Current/rollback runtimes, the pending app update, active caches and all unique
+source/research remain intact.
+Exact deletion, activity, archive and free-space receipts are in the evidence root’s
+`admin/` directory.
 
 ## Native Adoption Checkpoint, October 11–12
 
@@ -53,12 +140,29 @@ Serializer round-trip/schema checks have zero findings.
 Three guard controls pass in 13.50 s and 17 catalogue tests pass in 2.12 s, with zero
 static findings. These scoped passes do not qualify the pending web/full/push/CI gates.
 
-Latest parent builder controls pass 184 tests in 100.31 s; post-fix source controls pass
-99 in 102.94 s. Records passes 50/108 selected steps in 37.10 s, on an actual ten-CPU
-host with six jobs and two inner jobs; it is not the full tier.
-Parent pre-push has 64/65 prerequisites complete and remains active.
-Child full/web/push and exact-head hosted CI remain pending.
-No old-head pass qualifies these new data.
+Parent `a0beeda6e` pre-push exited 1 after 1,105.24 s: 64/65 steps passed.
+Normal tests finished with 24 failures, 15,539 passes, 51 skips and one xfail in 983.36
+s; the pool lane did not run.
+All 24 failed nodes pass after the bounded fix: 190 frontier/adoption tests in 84.04 s,
+13 historical-source controls in 83.73 s and seven consumer-contract controls in 10.40
+s. These 210 scoped passes preserve the original negative receipt.
+The fresh parent `f725d901d` gate retains the 1,800 s cap, six jobs and two inner jobs.
+The prior ordinary builder retry passed 184 in 100.31 s, deselecting only its existing
+slow test; 99 source controls passed in 102.94 s. Records passed 50/108 selected steps
+in 37.10 s on the ten-CPU host; this is not the full tier.
+
+The `fd70d7e34` web render measured 1,682,134 complete HTML bytes under the unchanged
+2,000,000-byte cap. Startup was 248,861/3,212,387 = 7.7469184%, within the 10% limit;
+eight compact/complete views and 12 scripts had zero findings.
+Four strict registry controls passed in 3.61 s after retiring 174 obsolete unpublished
+payload URLs; all remaining metadata stayed equal and the partial consumer passed
+5,585/5,585 checks. The full browser module passed 14 tests in 23.03 s, including
+disabled-JavaScript access.
+The prior producer run had 91 passes and two obsolete renderer-binding failures.
+After current-custody test repairs, all 93 producer tests passed in 111.51 s with zero
+static findings; canonical historical identities and the MathML/Markdown guards remain
+intact. Final pin-head rerender and broad/hosted qualification are recorded in the PR
+Validation sections; scoped and old-head passes do not qualify a new head.
 
 The earlier child `0841b84e` run was owner-stopped after 68 prerequisites and four
 failed call phases, with 17 processes verified absent and no completed JUnit/lane pass.
@@ -67,7 +171,8 @@ diagnose the parallel 20 s timeout (`think-w0if`). Detailed negative evidence is
 retained in `validation/child-main25-layer-push-failure-classification.json` under the
 external evidence root listed below.
 All dated failure and CI links below remain historical.
-Pushing and landing are pending; no merge is authorized.
+Publication readback belongs in the PRs.
+Landing requires the owner’s confirmation; no merge is authorized.
 
 ## Branches, workspace and workflow
 
@@ -341,8 +446,8 @@ link. Final per-commit/blob/pack audits are recorded there.
 | Work | Tracking |
 | --- | --- |
 | Numeric n=29/55/71 | think-je8y / think-phh8 / think-1blg OPEN |
-| Daniel T-131 n=132 adoption/atlas; import/reply | think-kkj2 OPEN; think-iyij IN_PROGRESS |
-| Couzo T-128/T-130 adoption/atlas and source-house custody | think-lhtz OPEN; think-0mlq IN_PROGRESS |
+| T-131 n132 is superseded; reconcile residual review/import/atlas tracking | think-kkj2 OPEN; think-iyij IN_PROGRESS |
+| T-128/T-130 adopted or superseded; residual Couzo/atlas/historical-custody tracking | think-lhtz OPEN; think-0mlq IN_PROGRESS |
 | Reported n=106/152/177 geometry/Lean | #419 / think-8sm2 IN_PROGRESS |
 | n=83 ordinal count; Rehwaldt n=68 multivariate binding | think-chsu OPEN; think-nv5o IN_PROGRESS |
 | Ideal n=68/105/292 prerequisites | think-056g / think-gl59 / think-w622 OPEN |
@@ -351,8 +456,8 @@ link. Final per-commit/blob/pack audits are recorded there.
 | Broader W6 high-precision lane | think-eu89 IN_PROGRESS |
 | pool_heavy annotation debt; full-CI wall reporting | think-w19q OPEN; think-0atx IN_PROGRESS |
 | Controlled shared-CI timing baseline | think-9dhb OPEN under active think-ht59 |
-| Standing adoption of acquired V3/C3 source families | think-fvz4 IN_PROGRESS |
-| Lower exact certificate adoption, including T-146 | think-cb34 OPEN |
+| Reconcile house-adoption tracking after 49 current selections; no native offer pending | think-fvz4 IN_PROGRESS |
+| Selected T-146 houses adopted; reconcile residual lower-certificate/atlas scope | think-cb34 OPEN |
 | Lean/closed-form evidence for 62 reported quadratic sides; priced 41-count batch, remaining updates unreconciled | think-63vx OPEN |
 | Record/tool rung-review dispositions from #542 | think-npvi OPEN |
 | Fresh-worker input/dependency baseline for snapshot controls | think-nns5 OPEN |
