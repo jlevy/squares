@@ -497,7 +497,7 @@ to credit it as carefully as this project’s own.
   authors, then `after` and the work the source says it builds on
   (`Daniel after Burns, Massaccesi`). The atlas citation line and the register renderers
   print it, and hand-written prose may add to it but never drops a link.
-  A chain through an intermediate author names every link the source names: Kleddamag’s
+  A chain through an intermediate author names every link the source names: Overbeck’s
   $4.66001$ builds on Squares Project (Joshua Levy), Mira and Guzhou0806. The atlas
   stage sets each line in 66 characters, so where the whole line does not fit it prints
   the source’s `short_credit`: the same authors and the first of the same links, ending

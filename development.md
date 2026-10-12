@@ -1398,8 +1398,8 @@ uv run --frozen --all-extras --group dev python -m devtools.render_n11_threshold
 
 The outputs are `site/papers/n11-threshold-bound-review.html`, `.md`, and `.pdf`;
 `--site`, `--check` and `--revision` work as Part III’s do.
-Its Pages job, `n11-threshold-bound-review`, checks out the archived Kleddamag proof,
-the T-059 replay journal and the native verifier’s row journal beside the code, runs the
+Its Pages job, `n11-threshold-bound-review`, checks out the archived Overbeck proof, the
+T-059 replay journal and the native verifier’s row journal beside the code, runs the
 figure and renderer tests, and renders and checks the page, the Markdown and the PDF;
 `scope`’s notice says why when no input of it changed.
 It explains accepted evidence and reruns no sweep.

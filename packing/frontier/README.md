@@ -378,8 +378,8 @@ certificate’s replay command.
    Controls may remain result-only: `T-026` cites five entries, while the case bound at
    that rung cited the three that established it.
    At the historical `T-033` rung, `n-011.md` cited its three establishing entries
-   rather than its control leg; the current case bound cites Kleddamag’s replay evidence
-   and retains the earlier entries as history.
+   rather than its control leg; the current case bound cites Marc Leonard Overbeck’s
+   replay evidence and retains the earlier entries as history.
    A numerical finding or a result about a restricted family does not by itself change
    an unconditional verified bound.
    Preserve earlier evidence and decisions.
@@ -563,15 +563,15 @@ $95$ tied, are:
 
 | $n$ | gap | record | note |
 | --- | --- | --- | --- |
-| 17 | 0.0151 | Bidwell | carried to $\frac{18641771}{4000000}$ by Guzhou0806 after Kleddamag |
+| 17 | 0.0151 | Bidwell | carried to $\frac{18641771}{4000000}$ by Guzhou0806 after Overbeck |
 | 44 | 0.0275 | grid | $7^2 - 5$, carried to $\frac{2789}{400}$ by wand125 after Tokoharu |
 | 12 | 0.0285 | grid | $4^2 - 4$, carried to $\frac{7943}{2000}$ by squarepacker after Daniel |
 | 96 | 0.0300 | grid | $10^2 - 4$, carried to $\frac{997}{100}$ by wand125 after Tokoharu; reported proved by Evan Daniel (T-081) |
 | 76 | 0.0350 | grid | $9^2 - 5$, carried to $\frac{1793}{200}$ by wand125 after Tokoharu |
 | 95 | 0.0350 | grid | $10^2 - 5$, carried to $\frac{1993}{200}$ by wand125 after Tokoharu |
 
-The $n = 17$ bound is Guzhou0806 / N17 project’s R071, continuing Kleddamag’s charge
-(Kleddamag building on Squares Project (Joshua Levy), Mira and Guzhou0806): an exact
+The $n = 17$ bound is Guzhou0806 / N17 project’s R071, continuing Overbeck’s charge
+(Overbeck building on Squares Project (Joshua Levy), Mira and Guzhou0806): an exact
 weighted-certificate proof over 5,114 orientation intervals.
 A candidate proof that closes the gap at Bidwell’s side, `T-153` of 12 October 2026, has
 been read here and partly replayed; until its complete replay passes, the verified gap
@@ -581,7 +581,7 @@ the $k^2 - 4$ family now has three solved members above $k = 3$: $s(21) = 5$,
 $s(32) = 6$ and $s(45) = 7$, proved by Evan Daniel on the same method’s zero-margin
 form, the first and third with mass on the grid lines as well as on points.
 $n = 21$, in this table at $0.0050$ from 2026-09-27, left it with that proof.
-$n = 11$, which headed it at $0.0021$ once Kleddamag carried it to $31/8$, left it on
+$n = 11$, which headed it at $0.0021$ once Overbeck carried it to $31/8$, left it on
 2026-09-30, when T-060 proved $s(11)$ equal to Trump’s side, and $n = 61$ on 2026-10-02,
 when a replayed mixed cover proved $s(60) = 8$ and with it $s(61) = 8$; $n = 78$ left it
 later that day, when another proved $s(77) = 9$ and with it $s(78) = 9$. $n = 97$, at
