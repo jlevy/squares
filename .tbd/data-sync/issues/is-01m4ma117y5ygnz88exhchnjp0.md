@@ -5,7 +5,7 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T18:12:27.033Z
+updated_at: 2026-10-12T18:39:54.681Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -35,6 +35,47 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
 
 ## Notes
+
+## Latest Upstream Integration Checkpoint
+
+Fetched origin/main at 562fdbdff1d98948f68b36b81b53f9c8165ffd08 and used the native
+formal-stack rebase, preserving main → PR403 → PR435. Parent integration is complete at
+c1f1540f049a8aed741542b15d11dee55e8aee01; child replay is continuing after reviewed
+builder/schema/test conflict resolutions.
+Neither new layer has been pushed.
+
+The preceding 42-record refresh is committed.
+Its frozen input contains 324 current and 102 historical records; all 42 native
+identities, 83 historical native source occurrences and all displaced old polynomials
+passed independent conservation.
+The ordinary builder controls passed (184), the upstream controls passed (81), and
+focused refusal/cache controls plus static checks passed.
+The maintained records gate passed 50 of 108 selected steps in 33.61 seconds; this is
+not full qualification.
+
+The new upstream pass adopts T-151 at 176/181/238/239/270/271/272 and T-152 at 304/305,
+bringing current native houses to 49. Both results are registered V3/C3. Eleven newly
+scoped source occurrences have independently checked retained native bindings.
+The new per-pass adapter must preserve the Oct11 archive unchanged and retain nine full
+prior current identities plus nine complete Oct12 source occurrences.
+In particular, intermediate T-140 adoption at 270/305 must survive the replacement.
+Source adaptation and final regeneration/validation are in progress.
+
+Remaining: finish native child replay, restore exact child stash
+2da9b1b02e8a64b6f5ab4c263dc2caab1ba01b16 including its untracked fixture, regenerate
+both layers, measure the actual latest corpus/public projection, check web caps and
+responsive/no-JS views, run required local and final-head hosted checks, audit Git
+sizes, push both existing stacked PRs and update their descriptions.
+The polynomial report remains strictly web-only.
+No PR landing is authorized.
+Existing scientific owners and unknown local timeout bead think-w0if remain open.
+
+The external volume returned and was verified writable; builds use external scratch.
+The outage comments remain dated evidence, not a current blocked state.
+Evidence: upstream-refresh-20261012-0635/review/main-562f-integration-plan.md,
+main-562f-intake-bindings.json and main-562f-archive-dimensions.json.
+
+--- Earlier dated checkpoints and unique evidence ---
 
 ## Resumed Volume Checkpoint, 2026-10-12T18:10Z
 
