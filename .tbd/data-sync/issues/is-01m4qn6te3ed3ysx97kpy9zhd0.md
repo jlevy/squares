@@ -3,15 +3,19 @@ type: is
 id: is-01m4qn6te3ed3ysx97kpy9zhd0
 title: "Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record side, polynomial unpublished (#545)"
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 2
+version: 4
+delegate: claude-code@vm
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+hold: null
+hold_until: null
 created_at: 2026-10-12T08:55:58.146Z
-updated_at: 2026-10-12T09:08:25.578Z
+updated_at: 2026-10-12T15:10:37.781Z
+started_at: 2026-10-12T14:33:40.570Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
 
@@ -32,3 +36,15 @@ Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-
 ## Notes
 
 GitHub issue: https://github.com/jlevy/squares/issues/545 (opened 2026-10-12 by the coordinator to track this watched-repository read).
+
+**2026-10-12 update: the data is published** (issue comment https://github.com/jlevy/squares/issues/545#issuecomment-6126076974, 14:15:44Z). Release exact-data-2026-10-12 of evand/square-packing, tagged at 31523f87316bdfda00f5459dd9077928e264f133 (lightweight tag; published 14:14:15Z; not marked immutable). Asset s29-minpoly.tar.zst: 87,237,962 bytes, SHA-256 708e1b8b45894667f90a0d18b55bb35ed6079b84d33f9656976fd5cfa6f3729c, verified against the download, the release SHA256SUMS, GitHub's digest and the comment. 21 members, 201,735,244 bytes unpacked; every member streamed and matched the archive's SHA256SUMS (nothing unpacked to disk but three small files). Nothing under search/exact/ or tasks/ changed between ad86d42 and 31523f8.
+
+**Retained** (branch intake-552, packet packing/resources/web/evand-exact-data-2026-10-12/, sibling of evand-exact-and-local-reports-2026-10-12): the archive pinned by digest only (OR-18) with every member's size and digest in acquisition/release.json; unpacked and retained: the archive README (five replay commands), its SHA256SUMS and n29_krawczyk.json (tstar to radius 1e-50; S_mid 5.933833462676929189689460616352019138433834181077886974638..., S_rad 1.07e-48).
+
+**Measured here from n29_poly_q4.json** (SHA-256 0cba5ea250da54d67741803e86f1e46a2010f60fbf6b85be34fe69640e28ee5e, 27,866,169 bytes): 7,214 coefficients, degree 7,213, leading coefficient positive with 325 digits, height 5,074 digits, constant term 4,566 digits; file metadata: 165 real roots, irreducible_by_patterns true, no possible factor degree. Irreducibility, enclosure, link and identities NOT checked here.
+
+**Not run (price).** The source's five-step replay (irred.py 12 primes; krawczyk.py; link.py with PREC=220000; verify_mod.py 50 primes ~2 min/prime; contacts_mod.py 21 primes ~18 s/prime): about 2.5 CPU-hours by the author's measure, almost all verify_mod.py; same-implementation; python-flint 0.9.0 + mpmath 1.3.0 under env.sh; two steps Monte Carlo; non-overlap at the exact point checked by none. Needs an owner budget. An independent route (PARI/FLINT irreducibility, arb isolation, exact non-overlap at sigma over the Krawczyk box) remains a W7 slice of a few agent-hours plus similar compute. The 7,209 refined roots (1.8 GB) are not published and not needed for the identities.
+
+**Record shape.** Unchanged recommendation (evidence entry + algebraic_degree: 7213, minimal_polynomial pointing at the pinned asset, paragraph in n-029.md); the polynomial now has a retained pin.
+
+**Draft reply (not posted).** "Thank you for publishing exact-data-2026-10-12. Both archives match their digests; we keep the s(29) archive pinned by digest (it is too large for the repository) with its README and Krawczyk box, and read from the polynomial its degree 7,213 and the coefficient sizes you state. The replay you price at about 2.5 CPU-hours waits for a budget; we will report it, and the non-overlap check at the exact point, when it runs."

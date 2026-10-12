@@ -3,15 +3,19 @@ type: is
 id: is-01m4qn72v9ewp3fvtg9ac4djkb
 title: "Import Evan Daniel: grade-C local minima at 233 configurations of field degree <= 4, 53 current-record counts beyond T-124 (#545)"
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 2
+version: 4
+delegate: claude-code@vm
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+hold: null
+hold_until: null
 created_at: 2026-10-12T08:56:06.761Z
-updated_at: 2026-10-12T09:08:30.443Z
+updated_at: 2026-10-12T15:10:40.954Z
+started_at: 2026-10-12T14:33:44.161Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
 
@@ -32,3 +36,13 @@ Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-
 ## Notes
 
 GitHub issue: https://github.com/jlevy/squares/issues/545 (opened 2026-10-12 by the coordinator to track this watched-repository read).
+
+**2026-10-12 update: the certificates are published** (issue comment https://github.com/jlevy/squares/issues/545#issuecomment-6126076974). Release exact-data-2026-10-12 of evand/square-packing at 31523f87316bdfda00f5459dd9077928e264f133. Asset gradec-233.tar.zst: 238,231 bytes, SHA-256 c71633f3850eb8b06c40ba04f824e9b6262b27b7996f62f69c6ad014a4ea9fa3, verified against the download, the release SHA256SUMS, GitHub's digest and the comment. 723 files, 15,787,809 bytes unpacked: 233 n-N.contacts.json, 233 n-N.gradec.json, 250 run logs, 3 GRADEC_DROPZERO logs (10, 230, 261), _status.txt, _dropzero_status.txt, README, SHA256SUMS; all 722 listed files match after unpacking in scratch.
+
+**Retained** (branch intake-552, packet packing/resources/web/evand-exact-data-2026-10-12/): the archive itself as published (every member is one-line JSON or a short log, so 238 KB compressed against 15.8 MB raw; Python 3.14 tarfile r:zst reads it), plus its README and the two status files unpacked; the n = 10 exact form search/exact/minpoly/data/n-10.minpoly.json.gz as upstream gzip; gradec.py and its imports pinned identical to the ad86d42 packet.
+
+**Recomputed n = 10.** The source's gradec.py (blob 93374b5a, read first; run from a scratch copy, CPython 3.13.16 with env.sh's pinned numpy 2.4.2, scipy 1.17.0, mpmath 1.3.0, sympy 1.14.0, python-flint 0.9.0, no nix) on the committed n-10.minpoly.json and the archive's n-10.contacts.json: VALID, output byte-identical to the archive's n-10.gradec.json (SHA-256 ffc0c1ee...208f); 9.2 s wall, 2.5 s CPU. Receipt receipts/gradec-n10-recompute.json. Same-implementation: it shows the published certificate is what gradec.py computes from the published inputs, not that Theorem C or gradec.py is sound.
+
+**Price of the rest.** The logs' build times for the VALID runs sum to 38,026 s = 10.6 CPU-h (author's machine, 8 jobs in parallel; may be slower here): 154 runs under 1 min (1,249 s total), 212 under 10 min (3.9 h), longest 1,741 s (n = 313). So the 232 other VALID counts by gradec.py cost about 10.6 CPU-h (owner budget); the sub-minute tranche, about 21 CPU-min, could run in a lane. The 17 timeouts will not finish under gradec.py as written: 10 (174, 201, 204, 231, 234, 257, 262, 295, 296, 299) stop in the reduced-Hessian step with dim W 12-16, while every finished run has dim W <= 11, and gradec.py sums each leading minor over all k! permutations; 7 (274, 275, 308-312) stop before the null vectors with dim F 210-274. A fraction-free determinant in K would remove the first wall (W7 slice, the source's or ours). Review of Theorem C: one W2 lane, a few agent-hours, unchanged. An independent checker of the certificate JSON: W7 slice.
+
+**Draft reply (not posted).** "Thank you for publishing the grade-C data. The archive matches its digest and every file its SHA256SUMS lists; we keep the archive in the repository as published. Recomputing n = 10 from the committed exact form with gradec.py gave a byte-identical certificate here too. A full re-run is about 10.6 CPU-hours by your logs' times and waits for a budget; the review of Theorem C is queued. One observation: the ten runs that time out after the multipliers all have dim W of 12 or more, and every finished run has 11 or less, which matches the permutation sum for the Hessian minors."
