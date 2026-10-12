@@ -3,9 +3,9 @@ type: is
 id: is-01m4ptzjgr1nmf0264k67x4ypn
 title: Post the replies owed on merged results (2026-10-12)
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T01:17:37.687Z
-updated_at: 2026-10-12T01:45:37.286Z
+updated_at: 2026-10-12T05:54:58.302Z
 started_at: 2026-10-12T01:17:41.578Z
+closed_at: 2026-10-12T05:54:58.302Z
+close_reason: Replies recorded and merged in https://github.com/jlevy/squares/pull/519
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
