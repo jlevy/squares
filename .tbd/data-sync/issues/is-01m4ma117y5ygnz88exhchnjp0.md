@@ -5,14 +5,14 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: codex@spud10
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-11T02:50:29.779Z
+updated_at: 2026-10-12T06:40:39.402Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -33,6 +33,53 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
 
 ## Notes
+
+# Upstream table refresh in progress, 2026-10-12T06:40:38.697155+00:00
+
+The owner requested a fresh fetch of origin/main and revision of the polynomial tables.
+Fetch succeeded; new main is 8647fcae7867691f27c09cde4017518487c767e5, with 219 commits
+since the preceding 6038 baseline.
+Formal stack 447 remains main → PR403 → PR435. The existing parent is
+240299aad79562574cfb31d37298003374423fc6. The remote child is
+25dd0c6c18788aac2aaed590b19cadb4944e2a97, one canonical-atlas test fix above the
+previously published 438cacaa checkpoint; preserve that other session’s fix.
+Root owns Git, source, PR and this bead.
+Three read-only lanes cover semantic/storage review, corpus reconciliation and PR/CI
+administration. The source stack has not yet been synchronized to this new main.
+Qualification remains incomplete; no landing is authorized by this request.
+
+Correction to the older dated notes below: the final prior source checkpoint was
+438cacaa975176e0ddfca823c3b2b3e21cfd20d3, including the registered handoff and two
+independent fifth-paper title assertions.
+Both exact title tests passed (2/2,48.88s), softschema and 2,007-document checks passed.
+Its four-file top change was +205/−1, with the 201-line/11,464-byte handoff.
+Final union pack: 3,689,370 thin / 5,612,101 non-thin bytes; largest new historical blob
+2,629,925 bytes; zero new PDFs.
+The last metadata update was interrupted by an automatic approval-review account-limit
+error, so PR/bead descriptions still carry the earlier d483 dated snapshot.
+
+The prior parent retry terminated with 3 failed,14,609 passed,51 skipped,1 xfailed, 12
+setup errors within its 1,800-second cap (1,534.16s wall), not a timeout.
+Failures were the font-arrival negative control, index glyph/header sizing and
+visualization header sizing; all drawing-hover errors share a missing
+frame/square-outlines fixture exception.
+Exact selectors/excerpts are in the previous evidence admin directory’s
+parent-handoff-failure-summary.json and parent-handoff-failure-excerpts.txt.
+Fresh main may change these contracts; requalify the new synchronized heads.
+Child broad local push was not run.
+Previous full runs38105966939/38107202197 must be read as historical-head evidence,
+never as qualification for the new heads.
+
+The polynomial report remains strictly web-only.
+Preserve complete coefficients, canonical historical custody and the current public
+projection. Reconcile new source results without treating acquisition or replay as atlas
+adoption or optimality.
+Keep other owners/delegates and scientific gaps intact.
+Scratch remains external with each worktree’s Cargo target and failed-only pytest
+retention. New durable receipts:
+/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635.
+
+## Previous dated checkpoint notes
 
 # Published handoff checkpoint, 2026-10-11T02:48:49.731858+00:00
 
