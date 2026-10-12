@@ -5,14 +5,16 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: codex@spud10
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m4ravdm88msshy8r905rvbjb
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T11:56:58.698Z
+updated_at: 2026-10-12T15:14:13.255Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
