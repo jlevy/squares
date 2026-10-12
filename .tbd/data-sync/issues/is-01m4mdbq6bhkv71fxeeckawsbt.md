@@ -5,7 +5,7 @@ title: "Regularize every packing n = 1..324 with the adapted process, in pull re
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 labels:
   - regularization
 dependencies:
@@ -19,7 +19,7 @@ dependencies:
     target: is-01m4pfc1r22b6vh9n4dyv23sg2
 parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
 created_at: 2026-10-11T02:41:06.762Z
-updated_at: 2026-10-12T02:45:20.264Z
+updated_at: 2026-10-12T04:35:49.244Z
 ---
 Owner request 2026-10-11 (epic think-cdud, item 4): adapt evand's search/regularize process as think-kl2v's assessment recommends and run it over every packing the record holds, n = 1..324, so the atlas and case drawings are clean and regular. A separate process, so a separate pull request stacked on PR #487 (gh stack; github-stacked-prs is granted), begun once the 2026-10-10 imports are in good shape; the owner checks it. Obligations: every regularized view exactly feasible at its stated side and verified over Q; no side, frontier value or evidence tier changed by a drawing; each regularization recorded with its typed credit and identity basis (the register's regularizations field for results, and the atlas layer's contract per the atlas bead); drawings labelled regularized; the existing gates (regularized atlas views match their index, re-derive exactly, drawings match their index) kept green and extended to the new process. Record the run cost in the bead. The wand125 confirmation runs (think-r333, think-i85v, think-nd7g) wait for this.
 
@@ -43,3 +43,5 @@ Then: owner answers (Q3 first) with the spike gallery as evidence; slice 4 (reco
 2026-10-12: owner decisions answered (think-pn0e) and applied on #497/#511. Full run of n = 1..324 (conservative, 4 workers, largest first) started 2026-10-11 ~22:50 UTC in the session scratchpad; 67/324 at 00:56 UTC. After it finishes: reclassify under the amended table, write a preview layer into a scratch tree for the owner (homepage and atlas), then batch admission PRs once think-k35c (index contract) and think-cb34 sequencing allow.
 
 2026-10-12: two overlaps found. (1) PR #515 (claude/regularize-tools, session_014Y3kYUK2wqLWoA4rqK1Wng, no longer reachable) duplicates #511's layer 3 on the same base; unreconciled, waiting on the owner's call; a read-only comparison is under way. (2) PR #518 changes 42 witnesses (see think-cb34); every one of the 42 has been run in the full run against the old witness, so those counts are re-run after #518 merges, before any admission there (policy section 5: a changed witness lapses review).
+
+2026-10-12 later: (1) #515 comparison: ported its rotation tolerance (sine 1e-9) into #511 (f0371b68d); re-run of 34 counts: 102, 103, 146 now admitted at s_W, six admitted views moved bound -> same, 123 to review; run now 35 admitted (29 same, 6 bound), 14 review, 3 refused, 26 held, 18 no view, 228 no change. #515 can close as superseded on the owner's word. (2) No-view study ($SP/noview-report.md in session_017JNnKDwL74rnktr9s8BdjP's scratchpad): 7 of 18 recover. Automated in #511 (cbb659401): solve failed -> --dps 100 (18 admitted); noise-level not jammed -> --force-kkt with a 1e-10 polish guard (152, 269 to review, row 6). Owner decisions open: relaxed gate for a converged solve whose certificate upstream refused (258, 302: held row 3; 302 groups 36->5, light 240->81); sub-packing solve for wedged force-free squares (150, held row 3); a recorded local patch stopping upstream's probe_flat at its floor (290, 222 s instead of >2,700 s); naming the solve's own turns so row 6 judges only the regularizer's (152, 269); 303 is an upstream conservative merge_determined -> refine precision defect to report upstream. Eight rational slack witnesses (84, 86, 105, 108, 127, 131, 175, 261) need new witnesses (#518).
