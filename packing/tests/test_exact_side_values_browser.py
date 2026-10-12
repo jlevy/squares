@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Iterator
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -15,6 +16,7 @@ from devtools import exact_catalogue
 from devtools import render_exact_side_values as paper
 from sqpack.probes import probe
 from tests import site_browser
+from tests.exact_side_values_fixture import adopted_current
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / "devtools/templates"
@@ -325,58 +327,27 @@ def test_emitted_v2_index_preserves_search_numeric_lazy_and_occurrence_selection
         page.get_by_role("link", name="Download complete coefficient JSON")
     ).to_have_attribute("href", "exact-side-values-data/coefficients/current-n83.json")
 
-    page.get_by_label("Catalogue section").select_option("historical")
     page.get_by_label("Search entries").fill("n:155")
-    expect(page.locator("a.entry-link")).to_have_count(3)
-    historical155 = [
-        row for row in index["entries"] if row["section"] == "historical" and row["n"] == 155
-    ]
-    records155 = {
-        row["id"]: json.loads(
-            files[papers / exact_catalogue.DATA_DIRECTORY / "metadata" / f"{row['id']}.json"]
-        )["record"]
-        for row in historical155
-    }
-    assert {
-        (record["source_certificate"]["result"], record["source_certificate"]["source_key"])
-        for record in records155.values()
-    } == {
-        ("T-128", "[Couzo exact refinements 2026-10-08]"),
-        ("T-128", "[Daniel record hunt 2026-10-09]"),
-        ("T-149", "[Ostashev records 2026-10-11]"),
-    }
-    (repeated,) = [
-        row
-        for row in index["entries"]
-        if row["id"].endswith("-occurrence2") and row["n"] == 155
-    ]
-    (original,) = [row for row in historical155 if row["id"] + "-occurrence2" == repeated["id"]]
-    assert records155[original["id"]]["side"] == records155[repeated["id"]]["side"]
-    page.locator(f"a.entry-link[href='#{original['id']}']").click()
-    expect(page.locator("#entry-claim")).to_contain_text("pending (V3/C3)")
-    expect(page.locator("#metadata")).to_contain_text("[Couzo exact refinements 2026-10-08]")
-    page.locator(f"a.entry-link[href='#{repeated['id']}']").click()
-    expect(page.locator("#entry-claim")).to_contain_text("pending (V3/C3)")
-    expect(page.locator("#metadata")).to_contain_text("[Daniel record hunt 2026-10-09]")
-    (offered,) = [
-        row
-        for row in historical155
-        if records155[row["id"]]["source_certificate"]["result"] == "T-149"
-    ]
-    assert records155[offered["id"]]["side"] != records155[original["id"]]["side"]
-    assert offered["degree"] == 1
-    page.locator(f"a.entry-link[href='#{offered['id']}']").click()
-    expect(page.locator("#entry-claim")).to_contain_text("pending (V3/C3)")
+    expect(page.locator("a.entry-link")).to_have_count(1)
+    (adopted,) = [row for row in index["entries"] if row["n"] == 155]
+    assert adopted["id"] == "current-n155"
+    assert adopted["section"] == "current"
+    assert adopted["degree"] == 1
+    page.locator("a.entry-link").click()
+    expect(page.locator("#entry-claim")).to_contain_text("adopted (V3/C3)")
+    expect(page.locator("#entry-claim")).to_contain_text("Global optimality remains open")
     expect(page.locator("#metadata")).to_contain_text("[Ostashev records 2026-10-11]")
-    coefficients_url = f"{exact_catalogue.DATA_DIRECTORY}/coefficients/{offered['id']}.json"
+    expect(page.locator("#metadata")).to_contain_text("T-149")
+    coefficients_url = f"{exact_catalogue.DATA_DIRECTORY}/coefficients/current-n155.json"
     assert "/" + coefficients_url not in catalogue.requests
     page.get_by_role("button", name="Open coefficients").click()
     expect(page.locator("#coefficient-body tr")).to_have_count(2)
-    offered_coefficients = json.loads(files[papers / coefficients_url])["coefficients"]
-    assert page.locator("#coefficient-body code").all_text_contents() == offered_coefficients
+    expected_coefficients = json.loads(files[papers / coefficients_url])["coefficients"]
+    assert page.locator("#coefficient-body code").all_text_contents() == expected_coefficients
     expect(
         page.get_by_role("link", name="Download complete coefficient JSON")
     ).to_have_attribute("href", coefficients_url)
+    page.get_by_label("Catalogue section").select_option("historical")
 
     # Search strings stay eager and unchanged; even a source-path token works before
     # fetching any of the matching records' metadata.
@@ -449,3 +420,96 @@ def test_v2_index_refuses_unsafe_or_ambiguous_entries(
     )
     assert catalogue.page.locator("a.entry-link").count() == 0
     assert catalogue.requests == ["/", "/browser.js", "/index.json"]
+
+
+def test_adopted_current_native_custody_is_literal_and_coefficients_stay_lazy(
+    catalogue, tmp_path
+):
+    current = adopted_current()
+    files = exact_catalogue.output_files({"entries": [current]}, papers=tmp_path)
+    catalogue.data["/index.json"] = json.loads(files[tmp_path / exact_catalogue.INDEX_PATH])
+    for path, contents in files.items():
+        catalogue.data["/" + path.relative_to(tmp_path).as_posix()] = json.loads(contents)
+    catalogue.open()
+    page = catalogue.page
+    page.get_by_label("Search entries").fill("T-149")
+    expect(page.locator("a.entry-link")).to_have_count(1)
+    page.locator("a.entry-link").click()
+    expect(page.locator("#entry-claim")).to_contain_text("adopted (V3/C3)")
+    expect(page.locator("#entry-claim")).to_contain_text("Global optimality remains open")
+    for value in current["source_certificate"].values():
+        expect(page.locator("#metadata")).to_contain_text(value)
+    for quote in current["attribution"]["source_text"]:
+        expect(page.locator("#metadata")).to_contain_text(quote)
+    expect(page.locator("#metadata b")).to_have_count(0)
+    coefficients_url = "exact-side-values-data/coefficients/current-n155.json"
+    assert "/" + coefficients_url not in catalogue.requests
+    page.get_by_role("button", name="Open coefficients").click()
+    expect(page.locator("#coefficient-body tr")).to_have_count(2)
+    assert (
+        page.locator("#coefficient-body code").all_text_contents()
+        == current["polynomial"]["coefficients"]
+    )
+    expect(
+        page.get_by_role("link", name="Download complete coefficient JSON")
+    ).to_have_attribute("href", coefficients_url)
+
+
+def test_retained_equal_side_source_occurrences_keep_distinct_browser_selections(
+    catalogue: Catalogue, tmp_path: Path
+) -> None:
+    # These raw T-128 occurrences remain distinct after both offers become superseded.
+    # Reopen them only in this controlled display fixture to retain the old selection guard.
+    retained = deepcopy(
+        [
+            row
+            for row in paper.load_register()["historical_entries"]
+            if row["n"] == 155 and row.get("source_certificate", {}).get("result") == "T-128"
+        ]
+    )
+    assert len(retained) == 2
+    for row in retained:
+        row["kind"] = "unreconciled-source"
+        row["source_certificate"]["adoption"] = "pending"
+    papers = tmp_path / "papers"
+    files = exact_catalogue.output_files(
+        {"entries": [], "historical_entries": retained}, papers=papers
+    )
+    index = json.loads(files[papers / exact_catalogue.INDEX_PATH])
+    catalogue.data["/index.json"] = index
+    for path, contents in files.items():
+        catalogue.data["/" + path.relative_to(papers).as_posix()] = json.loads(contents)
+    catalogue.open()
+    page = catalogue.page
+    page.get_by_label("Catalogue section").select_option("historical")
+    page.get_by_label("Search entries").fill("n:155")
+    expect(page.locator("a.entry-link")).to_have_count(2)
+    historical155 = [
+        row for row in index["entries"] if row["section"] == "historical" and row["n"] == 155
+    ]
+    records155 = {
+        row["id"]: json.loads(
+            files[papers / exact_catalogue.DATA_DIRECTORY / "metadata" / f"{row['id']}.json"]
+        )["record"]
+        for row in historical155
+    }
+    assert {
+        (record["source_certificate"]["result"], record["source_certificate"]["source_key"])
+        for record in records155.values()
+    } == {
+        ("T-128", "[Couzo exact refinements 2026-10-08]"),
+        ("T-128", "[Daniel record hunt 2026-10-09]"),
+    }
+    (repeated,) = [
+        row
+        for row in index["entries"]
+        if row["id"].endswith("-occurrence2") and row["n"] == 155
+    ]
+    (original,) = [row for row in historical155 if row["id"] + "-occurrence2" == repeated["id"]]
+    assert records155[original["id"]]["side"] == records155[repeated["id"]]["side"]
+    page.locator(f"a.entry-link[href='#{original['id']}']").click()
+    expect(page.locator("#entry-claim")).to_contain_text("pending (V3/C3)")
+    expect(page.locator("#metadata")).to_contain_text("[Couzo exact refinements 2026-10-08]")
+    page.locator(f"a.entry-link[href='#{repeated['id']}']").click()
+    expect(page.locator("#entry-claim")).to_contain_text("pending (V3/C3)")
+    expect(page.locator("#metadata")).to_contain_text("[Daniel record hunt 2026-10-09]")

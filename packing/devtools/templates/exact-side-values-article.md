@@ -93,13 +93,15 @@ The
 [Daniel record-hunt certificates](../../resources/web/evand-record-hunt-2026-10-09/README.md)
 retain an exact rational side at n=132 (T-131) and a separate certificate for the same
 exact n=155 side as Couzo’s T-128 offer.
-Their finite geometry has been independently replayed at V3/C3; adoption into the
-current atlas remains separate.
+Their finite geometry has been independently replayed at V3/C3. These sides are
+superseded by the adopted T-141 house at n=132 and T-149 house at n=155; their complete
+identities and distinct source custody remain in the canonical register.
 The source history also includes the retained declarations and replay custody for T-134
 through T-141 and T-146. Daniel’s T-146 regularizations retain the original finders’
 credits and the limits of their sampled-motion evidence.
 Equal n=155 sides establish neither local-minimum equivalence nor motion between
-packings. These source records update no current side or optimality status.
+packings. Adopted current rows retain their native certificate custody and the original
+finders’ credits; finite feasibility establishes no global optimum.
 
 ## Full Current Polynomial Catalogue
 
@@ -132,13 +134,16 @@ The register preserves the complete source row, original checker flags and acqui
 identity. A root below a current finite bound does not update that bound without a
 verified geometric realization and field-to-side linkage.
 
-Finite source-certificate rows also retain exact rational sides awaiting packing
-adoption.
-Their finite geometry has been independently replayed at V3/C3; current packing
-adoption remains pending.
-Each row shows its source revision, original certificate, retained facts and replay
-status. Its linear polynomial identifies the source side; adoption and global optimality
-require their own evidence.
+Adopted finite source certificates appear with their current rows above.
+Each shows its source revision, original certificate, retained facts, replay status and
+adoption status. Its linear polynomial identifies the native rational side, while V3/C3
+records finite feasibility.
+The current houses include both the 11 and 12 October 2026 adoption passes.
+The latter uses Nate Chaoweeraprasit’s T-151 certificates at seven counts and Francisco
+Couzo’s T-152 refinements of SQUISH at n=304/305. Both retain their registered V3/C3
+assurance. Superseded offers and displaced earlier houses remain in the canonical
+register, with complete prior identities retained for each adoption pass.
+Adoption establishes no global optimum.
 
 Each entry carries its own attribution and source labels.
 Its checks compare the polynomial with the source’s side and, where retained, verify

@@ -12,6 +12,7 @@ import pytest
 
 from devtools import exact_catalogue
 from devtools import render_exact_side_values as paper
+from tests.exact_side_values_fixture import adopted_current
 
 
 def _metadata_url(row: Mapping[str, Any]) -> str:
@@ -99,39 +100,58 @@ def test_lazy_payloads_round_trip_published_records_and_original_coefficients(
     assert [record["n"] for record in source_roots] == [106, 152, 177]
     assert all(record["assurance"]["verification"] == "V0" for record in source_roots)
     assert all(record["assurance"]["confirmation"] == "C0" for record in source_roots)
-    pending = [
-        record for record in published["historical_entries"] if record.get("source_certificate")
-    ]
-    assert len(pending) == 87
-    assert sum(record["n"] == 105 for record in pending) == 3
-    n155 = [row for row in rows if row["section"] == "historical" and row["n"] == 155]
-    assert len(n155) == 3
-    n155 = [
-        row
-        for row in n155
-        if json.loads(files[tmp_path / _metadata_url(row)])["record"]["source_certificate"][
-            "result"
-        ]
-        == "T-128"
-    ]
-    assert n155[0]["id"] + "-occurrence2" == n155[1]["id"]
-    assert "[Daniel record hunt 2026-10-09]" in n155[1]["title"]
+    assert not any(
+        record.get("source_certificate") for record in published["historical_entries"]
+    )
+    adopted = [record for record in published["entries"] if record.get("source_certificate")]
+    assert len(adopted) == 49
+    latest_sources = {
+        result: sorted(
+            record["n"]
+            for record in adopted
+            if record["source_certificate"]["result"] == result
+        )
+        for result in ("T-151", "T-152")
+    }
+    assert latest_sources == {
+        "T-151": [176, 181, 238, 239, 270, 271, 272],
+        "T-152": [304, 305],
+    }
+    assert (
+        sum(
+            record["n"] == 105 and bool(record.get("source_certificate"))
+            for record in [*register["entries"], *register["historical_entries"]]
+        )
+        == 3
+    )
+    for record in adopted:
+        certificate = record["source_certificate"]
+        assert certificate["adoption"] == "adopted"
+        assert certificate["geometry_replay"] == "native-replay-retained"
+        assert certificate["verification"] == "V3"
+        assert certificate["confirmation"] == "C3"
+        assert "adopted-current" in record["source_statuses"]
+    (n155,) = [row for row in rows if row["n"] == 155]
+    assert n155["id"] == "current-n155"
+    metadata155 = json.loads(files[tmp_path / _metadata_url(n155)])
+    assert metadata155["record"]["source_certificate"]["result"] == "T-149"
+    assert (
+        metadata155["record"]["source_certificate"]["source_key"]
+        == "[Ostashev records 2026-10-11]"
+    )
+    # The two old equal-side native occurrences remain independently recoverable in raw history.
     n155_records = [
         record
-        for record in pending
-        if record["n"] == 155 and record["source_certificate"]["result"] == "T-128"
+        for record in register["historical_entries"]
+        if record["n"] == 155 and record.get("source_certificate", {}).get("result") == "T-128"
     ]
+    assert len(n155_records) == 2
+    assert all(record["kind"] == "superseded" for record in n155_records)
     assert n155_records[0]["side"] == n155_records[1]["side"]
     assert {record["source_certificate"]["source_key"] for record in n155_records} == {
         "[Couzo exact refinements 2026-10-08]",
         "[Daniel record hunt 2026-10-09]",
     }
-    for record in pending:
-        certificate = record["source_certificate"]
-        assert certificate["adoption"] == "pending"
-        assert certificate["geometry_replay"] == "native-replay-retained"
-        assert certificate["verification"] == "V3"
-        assert certificate["confirmation"] == "C3"
     (superseded_daniel,) = [
         record
         for record in register["historical_entries"]
@@ -379,3 +399,38 @@ def test_inserted_invalid_source_is_refused_instead_of_skipped_for_stable_ids(tm
             {"entries": [], "historical_entries": [first, inserted, first]}, papers=tmp_path
         )
     assert list(tmp_path.iterdir()) == []
+
+
+def test_adopted_current_custody_round_trips_and_claims_only_the_finite_bound(tmp_path):
+    original = adopted_current()
+    files = exact_catalogue.output_files({"entries": [original]}, papers=tmp_path)
+    index = json.loads(files[tmp_path / exact_catalogue.INDEX_PATH])
+    assert index["schema_version"] == 2
+    (row,) = index["entries"]
+    assert row["id"] == "current-n155"
+    metadata = json.loads(files[tmp_path / _metadata_url(row)])
+    assert metadata["schema_version"] == 1
+    assert _restore(metadata["record"], files, tmp_path) == _without_polynomial_representations(
+        original
+    )
+    assert "adopted (V3/C3)" in metadata["claim"]
+    assert "Global optimality remains open" in metadata["claim"]
+    assert "T-149" in row["search_text"]
+    assert "scoped-finite-feasibility-confirmed" in row["search_text"]
+
+
+@pytest.mark.parametrize("adoption", ["pending", "not-selected", "unknown", None, [], {}])
+def test_current_certificate_refuses_a_nonadopted_or_unknown_disposition(tmp_path, adoption):
+    original = adopted_current()
+    original["source_certificate"]["adoption"] = adoption
+    with pytest.raises(exact_catalogue.ExactCatalogueError, match="adoption"):
+        exact_catalogue.output_files({"entries": [original]}, papers=tmp_path)
+
+
+def test_historical_certificate_refuses_adopted_current_disposition(tmp_path):
+    record = adopted_current()
+    record.update(kind="unreconciled-source", side=record["side"]["value"])
+    with pytest.raises(exact_catalogue.ExactCatalogueError, match=r"historical.*adoption"):
+        exact_catalogue.output_files(
+            {"entries": [], "historical_entries": [record]}, papers=tmp_path
+        )

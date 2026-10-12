@@ -57,9 +57,19 @@ def _json(value: object) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
 
 
-def source_certificate_claim(certificate: Mapping[str, Any]) -> str:
+def source_certificate_claim(certificate: Mapping[str, Any], *, section: str) -> str:
     level = f"{certificate['verification']}/{certificate['confirmation']}"
-    adoption = "pending" if certificate["adoption"] == "pending" else "not selected"
+    disposition = certificate["adoption"]
+    labels = {"pending": "pending", "not-selected": "not selected", "adopted": "adopted"}
+    if (
+        not isinstance(disposition, str)
+        or disposition not in labels
+        or (disposition == "adopted") != (section == "current")
+    ):
+        raise ExactCatalogueError(
+            f"{section}: invalid source-certificate adoption {disposition!r}"
+        )
+    adoption = labels[disposition]
     replay = (
         "Native geometry replay is retained."
         if certificate["geometry_replay"] == "native-replay-retained"
@@ -73,11 +83,11 @@ def source_certificate_claim(certificate: Mapping[str, Any]) -> str:
 
 
 def _claim(record: Mapping[str, Any], section: str) -> str:
+    certificate = record.get("source_certificate")
+    if isinstance(certificate, dict):
+        return source_certificate_claim(certificate, section=section)
     if section == "historical":
-        certificate = record.get("source_certificate")
-        if isinstance(certificate, dict):
-            claim = source_certificate_claim(certificate)
-        elif record.get("kind") == "unreconciled-source" and record.get("reported_source"):
+        if record.get("kind") == "unreconciled-source" and record.get("reported_source"):
             claim = REPORTED_SOURCE_CLAIM
         else:
             claim = {

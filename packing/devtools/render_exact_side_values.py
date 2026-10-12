@@ -235,6 +235,9 @@ def _math(value: object) -> str:
 
 
 def _claim(entry: Mapping[str, Any]) -> str:
+    certificate = entry.get("source_certificate")
+    if isinstance(certificate, Mapping):
+        return exact_catalogue.source_certificate_claim(certificate, section="current")
     side = _as_mapping(entry.get("side"), f"n={entry.get('n')} side")
     relation = side.get("relation")
     status = entry.get("status")
@@ -886,8 +889,18 @@ def _legacy_heading_ids(headings: Sequence[str]) -> tuple[str, ...]:
     return tuple(heading.id for heading in document.headings)
 
 
-def current_polynomials_markdown(register: Mapping[str, Any], *, web: bool = False) -> str:
+def current_polynomials_markdown(
+    register: Mapping[str, Any],
+    *,
+    web: bool = False,
+    quote_ids: Mapping[str, int] | None = None,
+) -> str:
     sections = []
+    own_quotes = web and quote_ids is None
+    if own_quotes:
+        quote_ids = _source_quote_ids(
+            [entry for entry in entries(register) if entry.get("source_certificate")]
+        )
     legacy = (
         _legacy_heading_ids(
             [
@@ -941,9 +954,30 @@ def current_polynomials_markdown(register: Mapping[str, Any], *, web: bool = Fal
                     polynomial_markdown(
                         f"P_{{{n}}}", poly, degree=degree, context=f"n={n}", web=web
                     ),
+                    *(
+                        (
+                            "",
+                            "Source statuses: "
+                            + ", ".join(
+                                f"`{_table_text(status)}`"
+                                for status in _as_sequence(
+                                    entry.get("source_statuses"), f"n={n} source statuses"
+                                )
+                            )
+                            + ".",
+                            "",
+                            source_certificate_markdown(entry, web=web),
+                            "",
+                            historical_attribution_markdown(entry, n=n, quote_ids=quote_ids),
+                        )
+                        if entry.get("source_certificate")
+                        else ()
+                    ),
                 )
             )
         )
+    if own_quotes and quote_ids:
+        sections.append(_source_quote_appendix(quote_ids))
     return "\n\n".join(sections) + "\n"
 
 
@@ -994,7 +1028,7 @@ def _historical_kind_claim(entry: Mapping[str, Any]) -> str:
     if kind == "unreconciled-source":
         certificate = entry.get("source_certificate")
         if isinstance(certificate, dict):
-            return exact_catalogue.source_certificate_claim(certificate)
+            return exact_catalogue.source_certificate_claim(certificate, section="historical")
         if entry.get("reported_source"):
             return exact_catalogue.REPORTED_SOURCE_CLAIM
         return (
@@ -1039,13 +1073,9 @@ def source_certificate_markdown(entry: Mapping[str, Any], *, web: bool = False) 
 def historical_attribution_markdown(
     entry: Mapping[str, Any], *, n: int, quote_ids: Mapping[str, int] | None = None
 ) -> str:
-    attribution = _as_mapping(entry.get("attribution"), f"historical n={n} attribution")
-    dates = _as_sequence(
-        attribution.get("date_mentions"), f"historical n={n} attribution dates"
-    )
-    source_text = _as_sequence(
-        attribution.get("source_text"), f"historical n={n} attribution text"
-    )
+    attribution = _as_mapping(entry.get("attribution"), f"n={n} attribution")
+    dates = _as_sequence(attribution.get("date_mentions"), f"n={n} attribution dates")
+    source_text = _as_sequence(attribution.get("source_text"), f"n={n} attribution text")
     lines = [
         "Attribution date mentions: "
         + (", ".join(f"`{_table_text(value)}`" for value in dates) or "none."),
@@ -1071,11 +1101,11 @@ def historical_attribution_markdown(
     return "\n".join(lines)
 
 
-def _source_quote_ids(historical: Sequence[Mapping[str, Any]]) -> dict[str, int]:
+def _source_quote_ids(records: Sequence[Mapping[str, Any]]) -> dict[str, int]:
     """Index identical source strings once, preserving the association at every occurrence."""
     quotes: dict[str, int] = {}
-    for entry in historical:
-        attribution = _as_mapping(entry.get("attribution"), "historical attribution")
+    for entry in records:
+        attribution = _as_mapping(entry.get("attribution"), "source attribution")
         for text in _as_sequence(attribution.get("source_text"), "source attribution text"):
             literal = str(text)
             if literal not in quotes:
@@ -1097,7 +1127,12 @@ def _source_quote_appendix(quotes: Mapping[str, int]) -> str:
     return "\n\n".join(sections)
 
 
-def historical_polynomials_markdown(register: Mapping[str, Any], *, web: bool = False) -> str:
+def historical_polynomials_markdown(
+    register: Mapping[str, Any],
+    *,
+    web: bool = False,
+    quote_ids: Mapping[str, int] | None = None,
+) -> str:
     """Print every historical coefficient with attribution and source identity."""
     historical = historical_entries(register)
     if "historical_entries" not in register:
@@ -1105,7 +1140,9 @@ def historical_polynomials_markdown(register: Mapping[str, Any], *, web: bool = 
     if not historical:
         return "No historical polynomial-side pairs are recorded.\n"
     sections: list[str] = []
-    quote_ids = _source_quote_ids(historical) if web else None
+    own_quotes = web and quote_ids is None
+    if own_quotes:
+        quote_ids = _source_quote_ids(historical)
     legacy = (
         _legacy_heading_ids(
             [
@@ -1205,13 +1242,26 @@ def historical_polynomials_markdown(register: Mapping[str, Any], *, web: bool = 
                 )
             )
         )
-    if quote_ids is not None:
+    if own_quotes and quote_ids:
         sections.append(_source_quote_appendix(quote_ids))
     return "\n\n".join(sections) + "\n"
 
 
 def generated_sections(register: Mapping[str, Any], *, web: bool = False) -> dict[str, str]:
     register = exact_catalogue.publication_register(register)
+    quotes = (
+        _source_quote_ids(
+            [
+                *[entry for entry in entries(register) if entry.get("source_certificate")],
+                *historical_entries(register),
+            ]
+        )
+        if web
+        else None
+    )
+    historical = historical_polynomials_markdown(register, web=web, quote_ids=quotes)
+    if quotes:
+        historical += "\n" + _source_quote_appendix(quotes) + "\n"
     return {
         "REGISTER_SUMMARY": summary_markdown(register),
         "REGISTER_SOURCES": sources_markdown(register),
@@ -1220,8 +1270,10 @@ def generated_sections(register: Mapping[str, Any], *, web: bool = False) -> dic
         "CHECK_SUMMARIES": checks_markdown(register),
         "MISSING_VALUES": missing_values_markdown(register),
         "HISTORICAL_SUMMARY": historical_summary_markdown(register),
-        "HISTORICAL_POLYNOMIALS": historical_polynomials_markdown(register, web=web),
-        "CURRENT_POLYNOMIALS": current_polynomials_markdown(register, web=web),
+        "HISTORICAL_POLYNOMIALS": historical,
+        "CURRENT_POLYNOMIALS": current_polynomials_markdown(
+            register, web=web, quote_ids=quotes
+        ),
     }
 
 

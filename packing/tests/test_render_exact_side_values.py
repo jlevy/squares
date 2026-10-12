@@ -30,6 +30,7 @@ from devtools import (
 from devtools import render_exact_side_values as paper
 from devtools.render_exact_side_values import WEB_LAYOUT
 from devtools.render_overview import SITE_URL
+from tests.exact_side_values_fixture import adopted_current
 
 REVISION = "a" * 40
 
@@ -1165,19 +1166,26 @@ def test_web_source_associations_remain_attached_to_every_published_record():
             assert date in section
 
 
-def test_native_web_mathml_and_custody_are_readable_without_javascript():
+@pytest.mark.parametrize("adopted", [False, True], ids=["historical", "adopted-current"])
+def test_native_web_mathml_and_custody_are_readable_without_javascript(adopted):
     from tests import site_browser  # noqa: PLC0415
 
-    register = exact_catalogue.publication_register(paper.load_register())
+    register = paper.load_register()
     selected = [row for row in register["entries"] if row["n"] in {1, 5, 83}]
-    historical = next(
-        row
-        for row in register["historical_entries"]
-        if row.get("source_certificate", {}).get("result") == "T-146"
+    historical = deepcopy(
+        next(
+            row
+            for row in register["historical_entries"]
+            if row.get("source_certificate", {}).get("result") == "T-146"
+        )
     )
-    fixture = deepcopy(register)
-    fixture["entries"] = selected
-    fixture["historical_entries"] = [historical]
+    # Keep the pending-state display control even after the native offers are adopted.
+    historical["kind"] = "unreconciled-source"
+    historical["source_certificate"]["adoption"] = "pending"
+    fixture = deepcopy(dict(register))
+    certificate_record = adopted_current() if adopted else historical
+    fixture["entries"] = [*selected, certificate_record] if adopted else selected
+    fixture["historical_entries"] = [] if adopted else [historical]
     html, _markdown = paper.render(
         paper.ARTICLE.read_text(encoding="utf-8"), register=fixture, revision=REVISION
     )
@@ -1198,8 +1206,8 @@ def test_native_web_mathml_and_custody_are_readable_without_javascript():
                 )
             assert page.get_by_role("region", name="Polynomial equation").count() > 0
             layout = page.evaluate(WEB_LAYOUT, {"settle": False})
-            assert layout["currentPolynomials"] == 3
-            assert layout["historicalPolynomials"] == 1
+            assert layout["currentPolynomials"] == (4 if adopted else 3)
+            assert layout["historicalPolynomials"] == (0 if adopted else 1)
             assert layout["coefficients"] >= 673
             assert not paper.web_findings(layout), layout["lostInk"]
             custody = page.locator(".source-custody")
@@ -1220,8 +1228,8 @@ def test_native_web_mathml_and_custody_are_readable_without_javascript():
             )
             assert custody.locator("dd").all_text_contents() == [
                 "none"
-                if historical["source_certificate"][key] is None
-                else str(historical["source_certificate"][key])
+                if certificate_record["source_certificate"][key] is None
+                else str(certificate_record["source_certificate"][key])
                 for key in keys
             ]
             for element in custody.locator("dt, dd").all():
@@ -1232,3 +1240,43 @@ def test_native_web_mathml_and_custody_are_readable_without_javascript():
                 assert box["x"] + box["width"] <= 320
         finally:
             browser.close()
+
+
+def test_adopted_current_quotes_and_custody_keep_every_record_association():
+    register = small_document()["register"]
+    current = adopted_current()
+    register["entries"].append(current)
+    historical = register["historical_entries"][0]
+    historical["attribution"]["source_text"] = list(current["attribution"]["source_text"])
+    original = deepcopy(register)
+    sections = paper.generated_sections(register, web=True)
+    current_text = sections["CURRENT_POLYNOMIALS"].split('<span id="current-n155"></span>', 1)[
+        1
+    ]
+    historical_text = sections["HISTORICAL_POLYNOMIALS"]
+    assert "adopted (V3/C3)" in current_text
+    assert "Global optimality remains open" in current_text
+    assert current_text.count("<dt>") == 12
+    for value in current["source_certificate"].values():
+        assert f"<dd>{escape(value, quote=False)}</dd>" in current_text
+    for status in current["source_statuses"]:
+        assert status in current_text
+    for number, text in enumerate(current["attribution"]["source_text"], 1):
+        assert f"](#source-attribution-note-{number})" in current_text
+        assert f"](#source-attribution-note-{number})" in historical_text
+        quote = (
+            '<blockquote class="source-quote"><p><code>'
+            f"{escape(text, quote=False)}</code></p></blockquote>"
+        )
+        assert (current_text + historical_text).count(quote) == 1
+    markdown = paper.current_polynomials_markdown(register)
+    for text in current["attribution"]["source_text"]:
+        assert escape(text, quote=False) in markdown
+    assert register == original
+
+
+def test_adopted_current_only_quotes_have_targets_without_history():
+    register = {"entries": [adopted_current()], "historical_entries": []}
+    text = paper.current_polynomials_markdown(register, web=True)
+    assert '<span id="source-attribution-note-1"></span>' in text
+    assert "](#source-attribution-note-1)" in text
