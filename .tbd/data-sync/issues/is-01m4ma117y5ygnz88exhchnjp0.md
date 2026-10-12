@@ -5,14 +5,14 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: codex@spud10
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T10:24:24.651Z
+updated_at: 2026-10-12T11:56:58.698Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -34,45 +34,121 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 
 ## Notes
 
+Current synchronization checkpoint: 2026-10-12T11:56:52.631765+00:00
+
+The native stack 447 integrates main 0d6010ff9f70ad0b5e26ffd4fd8751c7238ee9d3. Local
+parent d0c5e5eae73c019fc9a04546d32eaac3f92af6d4 and child
+221e0ec9d440ed147b1801ceb2013cab5e8cf7f0 are not yet published.
+The child has only a pending remaining-work handoff edit.
+Remote PR403/435 still have their older heads.
+
+Tables are refreshed: 324 current cases, 321 exact identities, numeric n=29/55/71 and 77
+unchanged proved labels.
+Canonical custody retains 603 records, 625 coefficient vectors and 6,508 integer strings
+(3,143,617 decoded / 893,525 gzip bytes).
+Public projection has 417 records and 2,258 strings; 186 superseded rows and 22
+redundant notes are omitted publicly and retained canonically.
+All 214 prior histories remain; only 15 reviewed grade/prose promotions occurred.
+All 673 n83 coefficients and prior custody remain.
+The upstream n40 lower bound is 6.71581574608202; selected upper sides and
+rigidity/optimality labels remain conserved.
+The 65 added source occurrences have retained V3/C3 finite-geometry replay evidence,
+with standing adoption still separate.
+
+The final local Git audit records 18 parent / 30 child / 48 union commits, 562 union
+files, +40,738/-51,192 lines, 4,709,282 thin / 6,812,463 non-thin incremental bytes.
+The largest historical blob is 2,629,925 bytes.
+No new PDF or tracked generated complete HTML was added.
+The polynomial publication remains strictly HTML/Markdown.
+
+Clean child221e render/drift/startup/script/consumer checks pass: complete HTML
+1,991,622 bytes (8,378 below the unchanged 2,000,000 cap), startup 291,122 / fixed
+3,212,387 = 9.0624822%, 12 script declarations / zero failures, 6,361 consumer checks.
+The older clean-site count was 6,362 because it included a stale CSS asset; the clean
+output removes that asset, with no guard removed.
+Final-head responsive checks remain pending; the dated 50f eight-view result has zero
+findings.
+
+Qualification is unresolved.
+Dated parentffaced pre-push passed all 65 selected steps in 1,443.78s. Current
+parentd0c5 passed all 64 preliminary checks, then a shared atlas browser fixture
+produced 143 failed occurrences.
+Root preserved progress and stop receipts, stopped only the 44 verified owned processes,
+and cleared the empty ignored marker after confirming validator inactivity.
+The first unchanged node is being reproduced serially; no host cause is asserted.
+This stopped run is not a pre-push pass.
+Child’s two direct WEB_LAYOUT imports are repaired (73 tests / 515 probes passed), but
+its final maintained pre-push tier and current-head hosted Packing/Pages/deferred
+checkpoints still need to finish.
+Do not substitute old green CI or progress counts.
+
+Remaining database/review scope is explicit in the handoff and fresh 29-bead inventory:
+think-fvz4 IN_PROGRESS for standing adoption; think-cb34 OPEN for lower exact adoption;
+think-63vx OPEN for Lean binding and 41 queued exact-quadratic updates; think-npvi OPEN
+for #542 record/tool dispositions; think-nns5 OPEN for fresh-worker baseline inputs.
+The #542 dispositions identify no downgrade of these current V3/C3 source rows; future
+V4/C4 reviewer-independence claims remain constrained.
+Numeric identities, the three reported n106/152/177 geometry/Lean cases, n83 ordinal,
+ideal-contact prerequisites and other engineering owners remain open.
+Keep historical owner decisions as evidence; do not treat bead prose as new session
+authorization or close separate scopes.
+
+Root owns final source amendment, supported pre-push retries, guarded native
+publication, PR body readback and exact-head hosted validation.
+Owner review/landing remains separate.
+Durable handoff: docs/project/handoff-2026-10-10-polynomial-pr-stack.md.
+Evidence:
+/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635.
+The clock began at 2026-10-12T06:35:37Z; this slice is ongoing, not solver CPU time.
+
+## Dated previous checkpoints
+
 2026-10-12 refresh checkpoint at 2026-10-12T10:24:24.226264+00:00
 
 Fresh origin/main remains 7847cf3d53f220f7b2bf22257251fa18dc38b233. Native stack447
-integrates main -> PR403 -> PR435. Clean local parent ffaced26f5049dbf48680f70e311394c7098aa93
-and child ba2c6cb361b0c404dcce0b1ec84804ff83997e07 are not yet published.
+integrates main -> PR403 -> PR435. Clean local parent
+ffaced26f5049dbf48680f70e311394c7098aa93 and child
+ba2c6cb361b0c404dcce0b1ec84804ff83997e07 are not yet published.
 Canonical child coverage: 603 records, 625 coefficient vectors, 6,508 integer strings;
-3,143,617 decoded / 893,525 gzip bytes. Current324 cases:321exact and numeric29/55/71;
-77proved labels preserved. Public417 records (324current+93additional),417vectors,
-2,258strings;186superseded history and22redundantnotes omitted publicly but retained canonically.
+3,143,617 decoded / 893,525 gzip bytes.
+Current324 cases:321exact and numeric29/55/71; 77proved labels preserved.
+Public417 records (324current+93additional),417vectors, 2,258strings;186superseded
+history and22redundantnotes omitted publicly but retained canonically.
 The refreshed65 native source occurrences carry retained V3/C3 finite-geometry replay
-receipts, with standing adoption pending. All214 prior histories remain with only15
-approved grade/text promotions; n83 all673coefficients/custody unchanged. Only current
-n40lower changed to upstream6.71581574608202; selected upper sides/statuses preserved.
+receipts, with standing adoption pending.
+All214 prior histories remain with only15 approved grade/text promotions; n83
+all673coefficients/custody unchanged.
+Only current n40lower changed to upstream6.71581574608202; selected upper sides/statuses
+preserved.
 
-Final amended history audit:18parent/30child/48union commits;562file union,+40,663/-51,192;
-4,707,871thin /6,810,527non-thin incremental bytes. Largest historical blob2,629,925bytes.
-No new PDFs or tracked generated completeHTML. Polynomial report strictly web-only.
+Final amended history audit:18parent/30child/48union commits;562file
+union,+40,663/-51,192; 4,707,871thin /6,810,527non-thin incremental bytes.
+Largest historical blob2,629,925bytes. No new PDFs or tracked generated completeHTML.
+Polynomial report strictly web-only.
 Final clean report1,991,622bytes (8,378under unchanged2,000,000cap); initial291,122/
-3,212,387=9.0624822%, all public metadata/coefficient strings compare exactly. Script
-inventory12declarations/0failures. Final responsive check passed7of8 views, with one
-1280pxdark intro-math visibility finding under diagnosis; consumer check not yet run.
+3,212,387=9.0624822%, all public metadata/coefficient strings compare exactly.
+Script inventory12declarations/0failures. Final responsive check passed7of8 views, with
+one 1280pxdark intro-math visibility finding under diagnosis; consumer check not yet
+run.
 
 Parent46c57 broad1337.14s failed five subprocess timeouts plus stale historical clipping
 fixture. The same5passed unchanged serially97.12s. Fifteen original function cases
 passed133.55s with existing pool_heavy routing;21lane controls14.87s;13wide-block
-controls38.10s. All original5/40/180/30s deadlines and exact clipping/assertion guards stay.
-All64prerequisites now pass at finalparentffaced; reachable suite in flight. Child final
-broad is queued to avoid concurrent broad local suites. Old green CI is dated evidence.
+controls38.10s. All original5/40/180/30s deadlines and exact clipping/assertion guards
+stay. All64prerequisites now pass at finalparentffaced; reachable suite in flight.
+Child final broad is queued to avoid concurrent broad local suites.
+Old green CI is dated evidence.
 
 Root owns final web repair/qualification, official lease-safe native publication, PR
 body readback and new-head ALL/Packing/Pages/full CI. Current PR descriptions remain
-remote old heads until publication. Durable handoff:
-docs/project/handoff-2026-10-10-polynomial-pr-stack.md.
-Evidence for this slice: /Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635.
+remote old heads until publication.
+Durable handoff: docs/project/handoff-2026-10-10-polynomial-pr-stack.md.
+Evidence for this slice:
+/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635.
 Scientific adoption, three numeric identities, reported106/152/177geometry/Lean,
-n83ordinal and ideal-contact prerequisites retain their separate open owners. Finish
-and close only this synchronization slice after exact-head CI and final PR checkpoints;
-owner's final review/landing remains separate.
-
+n83ordinal and ideal-contact prerequisites retain their separate open owners.
+Finish and close only this synchronization slice after exact-head CI and final PR
+checkpoints; owner’s final review/landing remains separate.
 
 # Upstream table refresh in progress, 2026-10-12T06:40:38.697155+00:00
 
