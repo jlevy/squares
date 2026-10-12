@@ -5,7 +5,7 @@ title: "Records lane 2026-10-11: register the new imports (T-NNN), evidence, cov
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:19.318Z
-updated_at: 2026-10-11T23:34:05.108Z
+updated_at: 2026-10-12T05:36:17.526Z
 started_at: 2026-10-11T22:05:03.285Z
 ---
 Register each 2026-10-11 import as reported, then at V3/C3 once its review lands, by the import lanes' register plans; result-requests.yaml entries for #500, #501, #503, #504, #505, #506 with triage done; views rendered by New Result Publication; DATA_REVISION re-pinned.
@@ -54,3 +54,22 @@ Register each 2026-10-11 import as reported, then at V3/C3 once its review lands
 ## Continuation (coordinator's request): four imports in layer 2
 
 Merged origin/claude/wizardly-meitner-wqn4x3 at 604699ee1 (1bedc011c) and worktree-agent-a011cc222d6df9f13 at 90164e0a6 (5ed56c5e2), both without conflicts. a67250575 registers #501 as T-149 (Ostashev, s(155), s(156), s(211) at the c3d17ab sides, S3) and #505 as T-150 (Barnett, s(146), s(261), S2), each V3/C3 with E-ostashev-501/E-barnett-505 certificate-report and exact-feasibility, coverage, bibliography (Barnett lineage credits-project with Levy in the credit, which test_results_register requires), README, verifiers, deferrals to think-fvz4, result-requests #501 (owner reply 6113368338 recorded; read through 22:02:58Z) and #505, site cards; and fixes T-136 (not smallest at 207/153) and T-146 (not smallest at 153/146). 9cfc3a197 re-pins DATA_REVISION to a6725057. packing-validate --records exit 0; test_overview 304 passed (index 357,642, results 855,526 bytes); register tests 387 passed; test_upper_bound_reports + test_check_half_angle_area 315 passed. Still stale, not edited (outside the coordinator's scope): T-128's notes and next_rung recommend it as the house at 155 (T-149 is smaller), T-125's notes give T-146 the house at 146 (T-150 is smaller) and 261 (T-150), and T-098/T-115 may name houses at 155/156/211.
+
+## R-L4 (2026-10-12): #500 and #506 registered as T-151 and T-152 and adopted (layer 4 of stack #517)
+
+Sub-agent, Claude Opus 5.5 at xhigh. Worktree /home/user/squares/.claude/worktrees/agent-a940d047cfb981896, branch layer4 = worktree-agent-a6a01bf75f2ba5ea9 (layer 3, a5d684799) + merge of v4-506 (66f38a169; conflicts kept both sides; both branches had added a T-128 reader to check_half_angle_area, layer 2's couzo_refinement_packing kept). Not pushed.
+
+Commits: 66f38a169 merge; 69c60b8ae register T-151/T-152; 3e24adeb2 adopt (houses); 72b284620 re-pin DATA_REVISION to 3e24adeb; 04f9ae94a composites redrawn; dce7fad23 poster legend test.
+
+Registered (T-150 was the last id): T-151 #500 (Nate Chaoweeraprasit, SQUISH Mondrian; exact summary.csv fractions at 176, 181, 238, 239, 270, 271, 272, 304, 305; the issue's 15-digit sides are cuts, RX-1; lineage to the eye not by pose, RX-2; S3) and T-152 #506 (Francisco Couzo from #500's packings, fq at 304, Ellsworth's refine_packing at 305; s(304), s(305) exact; RY-12 refinement measurement; S3), both V3/C3 with E-squish-500-/E-couzo-506-certificate-report (review as external_review) and -exact-feasibility (verified, independent-implementation, six verifiers). Nine verified beyond-horizon rows (338, 339, 344, 375, 376, 378, 379, 380, 381) byte for byte from beyond-horizon-claims.json; the rows at 338, 339, 344 (Hunt 3, verified), 375, 376, 378, 379 superseded (RY-11). 175, 308, 340, 343 not registered. Result-requests #500/#506 (no comments on either issue; read_through = filing times). Bibliography, resources README, verifiers notes, coverage.
+
+Decisions to review:
+1. Coverage for #506 is two entries of one source key: couzo-certificates-2026-10-11 (the nine beyond-horizon rows, claims_record beyond-horizon-claims.json) and couzo-certificates-2026-10-11-in-corpus (304, 305, selected overrides). check_source_coverage holds a selected override of a source with a claims record to that record's print, and the packet's beyond-horizon record (held to its rebuild by check-claims) prints only the beyond-horizon claims. adopt_houses now resolves a house's coverage entry by (source key, count).
+2. The adoption pass is dated 12 October 2026 (upper_bound_houses.LATER_PASSES / adopted_on): T-152's review is dated 12 October, so an 11 October adoption would precede its review. 270 and 305 were not restored to their pre-adoption text: the records say T-140 was the house from 11 to 12 October (adopt_houses.historical rewrites the earlier adoption paragraph and section). The single prior-state archive (2026-10-11) gains the seven new counts.
+3. n-176's T-101 ceiling prose marked as history by hand, as layer 3 did at 232.
+
+Houses: 176, 181, 238, 239, 270, 271, 272 -> T-151; 304, 305 -> T-152 (margins 1.00e-02, 2.93e-03, 2.04e-03, 8.70e-04, 1.58e-03 vs T-140, 1.70e-03, 2.52e-03, 5.08e-03, 6.73e-04 vs T-140). Custody: 49 houses, 96 inputs, 28 mutations refused and restored, 19.1 s. Snapshot 210,575,976 bytes, 860,776 over the 200 MiB cap: four worker tests (test_evand_arrangement_adoption production clone, three in test_ryxu_house_links) fail on the cap only; layer 2's raise to 216 MiB clears it.
+
+Also: register prose for T-130, T-134, T-136, T-140 at 270/305; views (atlas data, regularized views, translation screen with SCREEN_FINDINGS, rigidity, censuses, bound citations, case verifiers, certificate reach, RESULTS/INVENTORY/VERIFIERS/STATUS, URL registry, synopsis rows); two goldens stale since the first pass refreshed (screen unstable list; site filter pending example T-128 -> T-122).
+
+Validation (from packing/, one heavy process at a time): packing-validate --records exit 0 (49 steps) after the adoption; --edit exit 0 (65 steps, 397.6 s, basedpyright included); test_overview + test_known_best_atlas (not slow) 432 passed before the composite redraw, atlas poster tests 24 passed after; adoption/standing/citation/generator batch 601 passed, 6 failed (4 snapshot-cap only, 2 fixed: bound citations re-rendered, site filter golden); case/view/importer batch 422 passed, 2 screen failures fixed; register tests 448 passed; test_check_half_angle_area -k "500 or 506" 24 passed; select_houses moves nothing; adopt_houses --check 49 OK; upper_bound_houses check 49 OK; check_case_prose 324 OK. Not run: test_negative_controls (slow lane; its worker tests meet the same cap), the full gate.
