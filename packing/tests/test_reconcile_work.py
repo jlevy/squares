@@ -6,7 +6,14 @@ from pathlib import Path
 
 import pytest
 
-from devtools.reconcile_work import inventory, main, review_coverage
+from devtools.reconcile_work import (
+    annotate_prior,
+    inventory,
+    main,
+    review_coverage,
+    split_lanes,
+    status_line,
+)
 
 
 def test_closed_children_are_not_confused_with_undecomposed_work(tmp_path: Path) -> None:
@@ -257,6 +264,37 @@ def test_close_requires_a_closed_status_target() -> None:
     )
 
 
+def test_close_resolution_is_known_and_a_duplicate_names_its_target() -> None:
+    baseline = {"beads": ["think-a111", "think-b111", "think-c111"], "specs": []}
+
+    def close(bead_id: str, **targets: str) -> dict[str, object]:
+        return {
+            "id": bead_id,
+            "action": "close",
+            "reason": "Superseded",
+            "evidence": ["Owner decision"],
+            "updates": {
+                "expected_version": 2,
+                "expected_status": "open",
+                "status": "closed",
+                **targets,
+            },
+        }
+
+    review = {
+        "beads": [
+            close("think-a111", resolution="duplicate", duplicate_of="think-z111"),
+            close("think-b111", resolution="duplicate"),
+            close("think-c111", resolution="abandoned"),
+        ]
+    }
+    problems = review_coverage(baseline, [review])["problems"]
+    assert problems == [
+        "duplicate close needs exactly one target: think-b111",
+        "unknown close resolution: think-c111",
+    ]
+
+
 def test_review_coverage_rejects_unknown_spec_actions() -> None:
     baseline = {"beads": [], "specs": ["plan.md"]}
     review = {
@@ -288,7 +326,91 @@ def test_relocated_closed_beads_still_establish_spec_decomposition(tmp_path: Pat
     assert report["exact_path_repairs"][0]["to"] == path
 
 
-@pytest.mark.parametrize("option", [("--lane", "a"), ("--path-repairs",), ("--baseline",)])
+def test_status_line_keeps_the_whole_claim() -> None:
+    assert status_line("# Plan\n\n**Status:** Active (4 of 10 items landed)\n") == (
+        "Active (4 of 10 items landed)"
+    )
+    assert status_line("---\ntitle: x\nstatus: implemented\n---\n") == "implemented"
+    assert status_line("# Plan\n\nNo lifecycle claim here.\n") == ""
+
+
+def test_split_keeps_each_spec_with_the_beads_it_governs(tmp_path: Path) -> None:
+    specs = tmp_path / "docs/project/specs/active"
+    specs.mkdir(parents=True)
+    for name in ("big", "small"):
+        (specs / f"{name}.md").write_text("A plan.\n", encoding="utf-8")
+    big = "docs/project/specs/active/big.md"
+    small = "docs/project/specs/active/small.md"
+    beads = [{"id": f"think-b{i}", "status": "open", "spec_path": big} for i in range(4)]
+    beads += [
+        {"id": "think-s1", "status": "open", "spec_path": f"explorations/packing/{small}"},
+        {"id": "think-free", "status": "in_progress"},
+    ]
+    report = split_lanes(inventory(beads, tmp_path), 3, tmp_path)
+    assert list(report["lanes"]) == ["1", "2", "3"]
+    for lane in report["lanes"].values():
+        governed = {current for b in lane["beads"] if (current := b.get("spec_path"))}
+        held = {s["path"] for s in lane["specs"]}
+        assert all(path.removeprefix("explorations/packing/") in held for path in governed)
+    ids = sorted(b["id"] for lane in report["lanes"].values() for b in lane["beads"])
+    assert ids == sorted(b["id"] for b in beads)
+    assert report["counts"]["lane_1_beads"] == 4
+    assert "lane_a_beads" not in report["counts"]
+    again = split_lanes(inventory(beads, tmp_path), 3, tmp_path)
+    assert again["lanes"] == report["lanes"]
+
+
+def test_prior_dispositions_follow_a_moved_spec(tmp_path: Path) -> None:
+    done = tmp_path / "docs/project/specs/done"
+    done.mkdir(parents=True)
+    (done / "plan.md").write_text("A plan.\n", encoding="utf-8")
+    report = annotate_prior(
+        inventory([{"id": "think-a111", "status": "open"}], tmp_path),
+        [
+            {
+                "beads": [{"id": "think-a111", "action": "retain", "reason": "Live"}],
+                "specs": [
+                    {
+                        "path": "docs/project/specs/active/plan.md",
+                        "action": "move_done",
+                        "reason": "Finished",
+                    }
+                ],
+            }
+        ],
+    )
+    lane = report["lanes"]["a"]
+    assert lane["beads"][0]["prior"] == {"action": "retain", "reason": "Live"}
+    assert lane["specs"][0]["prior"]["action"] == "move_done"
+
+
+def test_cli_prints_one_split_lane_and_refuses_an_unknown_one(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    snapshot = tmp_path / "snapshot.json"
+    snapshot.write_text(
+        json.dumps(
+            [{"id": "think-a111", "status": "open"}, {"id": "think-b111", "status": "open"}]
+        ),
+        encoding="utf-8",
+    )
+    argv = ["reconcile_work", str(snapshot), "--repo", str(tmp_path), "--split", "2"]
+    monkeypatch.setattr(sys, "argv", [*argv, "--lane", "2"])
+    main()
+    assert [b["id"] for b in json.loads(capsys.readouterr().out)["beads"]] == ["think-b111"]
+    monkeypatch.setattr(sys, "argv", [*argv, "--lane", "a"])
+    with pytest.raises(SystemExit) as error:
+        main()
+    assert error.value.code == 2
+    assert "no lane 'a'" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize(
+    "option",
+    [("--lane", "a"), ("--path-repairs",), ("--baseline",), ("--split", "2")],
+)
 def test_cli_rejects_inventory_only_modes_for_retained_baseline(
     option: tuple[str, ...],
     tmp_path: Path,

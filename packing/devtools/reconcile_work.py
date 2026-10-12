@@ -1,8 +1,10 @@
 """Inventory bead/spec drift for a human-reviewed reconciliation; never mutate beads.
 
 Read a ``tbd list --all --json`` snapshot, including closed children so an
-undecomposed epic cannot be mistaken for a completed one. Emit two disjoint review
-queues with explicit coverage; a flag is a question to investigate, not a verdict.
+undecomposed epic cannot be mistaken for a completed one. Emit disjoint review queues
+with explicit coverage; a flag is a question to investigate, not a verdict.
+``--split N`` regroups the queues so each spec travels with the beads it governs, and
+``--prior`` carries an earlier round's dispositions onto the items it reviewed.
 """
 
 from __future__ import annotations
@@ -20,9 +22,11 @@ OLD_ROOT = "explorations/packing/"
 BEAD_ACTIONS = frozenset({"close", "update", "retain", "needs_evidence"})
 SPEC_ACTIONS = frozenset(
     {
+        "move_active",
         "move_archive",
         "move_done",
         "move_draft",
+        "move_future",
         "move_paused",
         "needs_evidence",
         "retain",
@@ -31,15 +35,29 @@ SPEC_ACTIONS = frozenset(
 )
 EXPECTED_UPDATE_FIELDS = frozenset({"expected_delegate", "expected_status", "expected_version"})
 TARGET_UPDATE_FIELDS = {
-    "close": frozenset({"close_reason", "status"}),
-    "update": frozenset({"hold", "spec_path"}),
+    "close": frozenset({"close_reason", "duplicate_of", "resolution", "status"}),
+    "update": frozenset({"hold", "notes_append", "spec_path"}),
 }
+CLOSE_RESOLUTIONS = frozenset({"canceled", "completed", "duplicate"})
+# A spec is read in full and decides the folder for every bead it governs, so it
+# costs a reviewer several beads' worth of time when lanes are balanced.
+SPEC_REVIEW_WEIGHT = 5
+STATUS_SCAN_LINES = 40
+STATUS_LINE = re.compile(r"\bstatus\b\W{0,4}:\W{0,4}\s*(.+)", re.IGNORECASE)
 
 
 def current_path(path: str, repo: Path) -> str:
     """Recognize the exact former root only when its replacement exists."""
     candidate = path.removeprefix(OLD_ROOT)
     return candidate if path.startswith(OLD_ROOT) and (repo / candidate).is_file() else path
+
+
+def status_line(text: str) -> str:
+    """Return the spec's own status claim, whole, from its head or frontmatter."""
+    for line in text.splitlines()[:STATUS_SCAN_LINES]:
+        if match := STATUS_LINE.search(line):
+            return match.group(1).strip().rstrip("\\").strip()
+    return ""
 
 
 def inventory(beads: list[dict[str, Any]], repo: Path) -> dict[str, Any]:
@@ -89,6 +107,8 @@ def inventory(beads: list[dict[str, Any]], repo: Path) -> dict[str, Any]:
         plans["a" if index % 2 == 0 else "b"].append(
             {
                 "path": relative,
+                "folder": path.parent.name,
+                "status_line": status_line(text),
                 "unchecked": len(re.findall(r"^\s*-\s*\[ \]", text, re.MULTILINE)),
                 "linked_total": len(linked_beads),
                 "linked_nonclosed": [
@@ -121,6 +141,77 @@ def inventory(beads: list[dict[str, Any]], repo: Path) -> dict[str, Any]:
             != str(b.get("spec_path") or "")
         ],
     }
+
+
+def split_lanes(report: dict[str, Any], count: int, repo: Path) -> dict[str, Any]:
+    """Regroup an inventory into ``count`` lanes, keeping each spec with its beads.
+
+    A bead goes with the document its ``spec_path`` names, so one reviewer decides a
+    spec's folder together with the work it governs. Groups are placed largest first on
+    the least-loaded lane, which is deterministic for a given snapshot.
+    """
+    if count < 1:
+        raise ValueError("lane count must be positive")
+    groups: dict[str, dict[str, list[dict[str, Any]]]] = {}
+    for lane in report["lanes"].values():
+        for spec in lane["specs"]:
+            groups.setdefault(spec["path"], {"beads": [], "specs": []})["specs"].append(spec)
+        for bead in lane["beads"]:
+            governing = current_path(str(bead.get("spec_path") or ""), repo)
+            key = governing or f"bead:{bead['id']}"
+            groups.setdefault(key, {"beads": [], "specs": []})["beads"].append(bead)
+
+    def weight(group: dict[str, list[dict[str, Any]]]) -> int:
+        return len(group["beads"]) + SPEC_REVIEW_WEIGHT * len(group["specs"])
+
+    names = [str(index) for index in range(1, count + 1)]
+    lanes: dict[str, dict[str, list[dict[str, Any]]]] = {
+        name: {"beads": [], "specs": []} for name in names
+    }
+    load = dict.fromkeys(names, 0)
+    for key in sorted(groups, key=lambda key: (-weight(groups[key]), key)):
+        target = min(names, key=lambda name: (load[name], int(name)))
+        lanes[target]["beads"].extend(groups[key]["beads"])
+        lanes[target]["specs"].extend(groups[key]["specs"])
+        load[target] += weight(groups[key])
+    for lane in lanes.values():
+        lane["beads"].sort(key=lambda bead: str(bead["id"]))
+        lane["specs"].sort(key=lambda spec: str(spec["path"]))
+    counts = dict(report["counts"])
+    counts.pop("lane_a_beads", None)
+    counts.pop("lane_b_beads", None)
+    counts.update({f"lane_{name}_beads": len(lanes[name]["beads"]) for name in names})
+    return {**report, "counts": counts, "lanes": lanes}
+
+
+def annotate_prior(report: dict[str, Any], reviews: list[dict[str, Any]]) -> dict[str, Any]:
+    """Attach an earlier round's disposition to each item it covered.
+
+    Specs match by filename, since an earlier round may have moved them between
+    lifecycle folders. The prior disposition is context for the reviewer, not a verdict
+    carried forward.
+    """
+    beads = {
+        str(item["id"]): {"action": item.get("action"), "reason": item.get("reason")}
+        for review in reviews
+        for item in review.get("beads", [])
+    }
+    specs = {
+        Path(str(item["path"])).name: {
+            "action": item.get("action"),
+            "reason": item.get("reason"),
+        }
+        for review in reviews
+        for item in review.get("specs", [])
+    }
+    for lane in report["lanes"].values():
+        for bead in lane["beads"]:
+            if (prior := beads.get(str(bead["id"]))) is not None:
+                bead["prior"] = prior
+        for spec in lane["specs"]:
+            if (prior := specs.get(Path(str(spec["path"])).name)) is not None:
+                spec["prior"] = prior
+    return report
 
 
 def review_coverage(report: dict[str, Any], reviews: list[dict[str, Any]]) -> dict[str, Any]:
@@ -179,6 +270,15 @@ def review_coverage(report: dict[str, Any], reviews: list[dict[str, Any]]) -> di
                     problems.append(f"mutation without target: {item.get(key)}")
                 if action == "close" and updates.get("status") != "closed":
                     problems.append(f"close without closed target: {item.get(key)}")
+                resolution = updates.get("resolution", "completed")
+                if action == "close" and resolution not in CLOSE_RESOLUTIONS:
+                    problems.append(f"unknown close resolution: {item.get(key)}")
+                if action == "close" and (resolution == "duplicate") != bool(
+                    updates.get("duplicate_of")
+                ):
+                    problems.append(
+                        f"duplicate close needs exactly one target: {item.get(key)}"
+                    )
         totals[kind] = len(entries)
     return {"reviewed": totals, "problems": problems}
 
@@ -190,7 +290,7 @@ def main() -> None:
     )
     parser.add_argument("--repo", type=Path, default=REPO)
     output = parser.add_mutually_exclusive_group()
-    output.add_argument("--lane", choices=("a", "b"))
+    output.add_argument("--lane", help="print one lane: a or b, or 1..N with --split")
     output.add_argument("--reviews", type=Path, nargs="+")
     output.add_argument(
         "--path-repairs", action="store_true", help="show exact former-root moves"
@@ -198,12 +298,33 @@ def main() -> None:
     output.add_argument(
         "--baseline", action="store_true", help="emit only the frozen review scope"
     )
+    parser.add_argument(
+        "--split", type=int, metavar="N", help="regroup into N lanes by governing spec"
+    )
+    parser.add_argument(
+        "--prior", type=Path, nargs="+", help="annotate items with earlier dispositions"
+    )
     args = parser.parse_args()
     snapshot = json.loads(args.snapshot.read_text(encoding="utf-8"))
     is_inventory = isinstance(snapshot, list)
-    if not is_inventory and (args.lane or args.path_repairs or args.baseline):
-        parser.error("--lane, --path-repairs, and --baseline require a full tbd list snapshot")
+    if not is_inventory and (
+        args.lane or args.path_repairs or args.baseline or args.split or args.prior
+    ):
+        parser.error(
+            "--lane, --path-repairs, --baseline, --split, and --prior "
+            "require a full tbd list snapshot"
+        )
+    if args.split is not None and args.split < 1:
+        parser.error("--split needs a positive lane count")
     result = inventory(snapshot, args.repo) if is_inventory else snapshot
+    if args.split:
+        result = split_lanes(result, args.split, args.repo)
+    if args.prior:
+        result = annotate_prior(
+            result, [json.loads(path.read_text(encoding="utf-8")) for path in args.prior]
+        )
+    if args.lane and args.lane not in result["lanes"]:
+        parser.error(f"no lane {args.lane!r}; lanes are {', '.join(result['lanes'])}")
     if args.path_repairs:
         repairs = result["exact_path_repairs"]
         print(json.dumps({"count": len(repairs), "repairs": repairs}, indent=2))
