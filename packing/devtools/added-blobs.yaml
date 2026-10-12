@@ -1,0 +1,21 @@
+# Byte ceilings for the added-blob guard, `devtools.check_added_blobs` (OR-18, think-lt52).
+#
+# Data rather than Python constants, so a change to a ceiling is a policy diff a reviewer
+# sees as one. The guard reads this file from the tree it checks; a missing or malformed
+# file refuses the check rather than falling back to a default.
+#
+# per_blob_bytes applies to every blob version a branch adds, deleted ones included; a
+# path already over it at the pull request's base is grandfathered. 5 MiB is OR-18's
+# "a retained binary or dump of more than a few megabytes".
+#
+# total_bytes applies to the largest version of each path, each blob object counted once.
+# 48 MiB is OR-18's "a set of them totalling tens of megabytes", sized on 2026-10-11 from
+# `--census 38` over the merges into main from #416 to #398: the largest routine merge,
+# #469 (403 commits), charged 37.07 MiB, and 48 MiB is that reading times 1.25 rounded up
+# to a multiple of 8 MiB. The only merge it refuses is #461, for exp-29x results of 6-34
+# MiB each, which is the case OR-18 names.
+#
+# Re-measure before changing either, from `packing/`:
+#   uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs --census 40
+per_blob_bytes: 5242880 # 5 MiB
+total_bytes: 50331648 # 48 MiB

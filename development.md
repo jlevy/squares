@@ -189,7 +189,7 @@ alone is not full pre-merge evidence.
 | --- | --- | ---: | ---: | --- |
 | `--records` | contributor, before touching a registry; also every pull request | 49 of 107 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | 65 of 107 | 240 s | 59.4 s |
-| `--push` | contributor, once before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
+| `--push` | contributor, once before a push — the edit tier plus tests reachable from the diff (`--since`), and the added-blob guard against that base | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
 | `--fast` | contributor, at a block boundary; the union of the ten tiers below | 94 of 107 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
 | `--checks` | **CI, on every pull request**, in the `validate` job | 68 of 107 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
 | `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 107 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
@@ -201,6 +201,7 @@ alone is not full pre-merge evidence.
 | `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 107 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 107 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
 | `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 107 | 90 s | pending its first hosted cohort under `think-th8p`; the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks`; the verifier’s step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
+| *(workflow step)* | **CI, on every pull request**, in the `validate` job before `--checks`: the added-blob guard with the pull request’s own base and head SHA (`OR-18`); `--push` runs the same guard locally | 1, outside the registry | 30 s, the guard’s own protocol deadline | under 1 s hosted at `7f4114a` (run 37585354100); its `--census` replays one merge in 0.3–1.4 s locally |
 | *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 107 of 107 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
 
 Step counts describe the current 107-step registry, read from the validator’s canonical
@@ -2086,6 +2087,26 @@ is the rule; this is how to follow it.
   `git cat-file --batch-check` for the whole branch.
   A binary or dump over a few megabytes, or data totalling tens of megabytes, is hosted
   outside the repository, for example as a release asset on `jlevy/squares`.
+- **The guard.** `devtools.check_added_blobs` enforces that rule.
+  Every pull request runs it with its own base and head SHA, a stacked layer’s lower
+  branch included, and `packing-validate --push` runs it against the `--since` base.
+  To check staged data before committing, run `git fetch origin`, then from `packing/`
+  `uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs --base origin/main --staged`.
+  For a stacked pull request, pass `origin/<lower branch>`; a stale local base charges
+  the branch for everything the base gained since.
+  The two ceilings, 5 MiB per blob and 48 MiB in total, are data in
+  [`added-blobs.yaml`](packing/devtools/added-blobs.yaml), sized by the tool’s own
+  `--census` replay of recent merges into `main`; re-measure with it before changing
+  one. Every blob version the branch adds is checked, so committing then deleting a dump
+  still fails, and the total counts each path once, at its largest version.
+  A path already over 5 MiB at the base is grandfathered until `think-xeav` moves it to
+  hosted data; a new path, a copy or an edited rename is not.
+  A Git LFS pointer is refused, since the repository does not use LFS. `--help` has the
+  rest. `GUARD_REFUSED` is never a pass, and its message names the remedy: fetch a
+  missing base or a shallow clone’s history; after the base is force-pushed, recheck
+  once the pull request re-synchronizes; check a shorter range when one is too long for
+  the gate. Git IDs identify repository storage being sized here, not scientific input
+  identity or research verdicts.
 - **Manifest.** The repository keeps a small committed manifest with the name, size,
   location, and SHA-256 of each hosted object.
   A tool that needs the bytes downloads them on request and checks them against the

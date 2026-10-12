@@ -5894,6 +5894,24 @@ def _push_test_step(base: str, *, paths_file: Path | None = None) -> Step:
     )
 
 
+def _push_storage_step(base: str) -> Step:
+    """The added-blob guard against the `--push` base, the local half of the PR gate.
+
+    The pull request runs `devtools.check_added_blobs` with its own base and head SHA;
+    this runs it against `--since` (default `origin/main`), which is that base once
+    fetched, so a bulk blob is refused before it is pushed rather than after (`OR-18`,
+    review A3 on #406). It has no `touches`: any path can carry a blob, so every change
+    selects it. It reads Git metadata only and costs well under a second on a branch.
+    """
+
+    def action(context: Context) -> str:
+        return _run(
+            context, (sys.executable, "-m", "devtools.check_added_blobs", "--base", base)
+        )
+
+    return Step(name="added Git blob storage", action=action, fast=True)
+
+
 #: Fast steps whose verdict is a pure function of the tracked tree and may therefore be
 #: reused after an exact-tree pull-request proof.  This is a positive allow-list: a new
 #: fast step is repeated after merge until somebody explicitly classifies it here, so a
@@ -7465,9 +7483,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 and (step.broad or (step.reachable_test_files or 0) >= jobs)
             ):
                 exclusive_step_name = step.name
-            selected = [*selected, step]
+            selected = [*selected, _push_storage_step(base), step]
             scope = "the whole suite" if step.broad else "a reachable subset"
-            print(f"== pre-push floor against {base}: tests select {scope} ==\n")
+            print(
+                f"== pre-push floor against {base}: added-blob guard, "
+                f"and tests select {scope} ==\n"
+            )
         elif namespace.since:
             paths = changed_paths(namespace.since)
             selection = select_for_paths(paths, selected)
