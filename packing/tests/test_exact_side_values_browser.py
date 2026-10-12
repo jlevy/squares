@@ -327,15 +327,56 @@ def test_emitted_v2_index_preserves_search_numeric_lazy_and_occurrence_selection
 
     page.get_by_label("Catalogue section").select_option("historical")
     page.get_by_label("Search entries").fill("n:155")
-    expect(page.locator("a.entry-link")).to_have_count(2)
+    expect(page.locator("a.entry-link")).to_have_count(3)
+    historical155 = [
+        row for row in index["entries"] if row["section"] == "historical" and row["n"] == 155
+    ]
+    records155 = {
+        row["id"]: json.loads(
+            files[papers / exact_catalogue.DATA_DIRECTORY / "metadata" / f"{row['id']}.json"]
+        )["record"]
+        for row in historical155
+    }
+    assert {
+        (record["source_certificate"]["result"], record["source_certificate"]["source_key"])
+        for record in records155.values()
+    } == {
+        ("T-128", "[Couzo exact refinements 2026-10-08]"),
+        ("T-128", "[Daniel record hunt 2026-10-09]"),
+        ("T-149", "[Ostashev records 2026-10-11]"),
+    }
     (repeated,) = [
         row
         for row in index["entries"]
         if row["id"].endswith("-occurrence2") and row["n"] == 155
     ]
+    (original,) = [row for row in historical155 if row["id"] + "-occurrence2" == repeated["id"]]
+    assert records155[original["id"]]["side"] == records155[repeated["id"]]["side"]
+    page.locator(f"a.entry-link[href='#{original['id']}']").click()
+    expect(page.locator("#entry-claim")).to_contain_text("pending (V3/C3)")
+    expect(page.locator("#metadata")).to_contain_text("[Couzo exact refinements 2026-10-08]")
     page.locator(f"a.entry-link[href='#{repeated['id']}']").click()
     expect(page.locator("#entry-claim")).to_contain_text("pending (V3/C3)")
     expect(page.locator("#metadata")).to_contain_text("[Daniel record hunt 2026-10-09]")
+    (offered,) = [
+        row
+        for row in historical155
+        if records155[row["id"]]["source_certificate"]["result"] == "T-149"
+    ]
+    assert records155[offered["id"]]["side"] != records155[original["id"]]["side"]
+    assert offered["degree"] == 1
+    page.locator(f"a.entry-link[href='#{offered['id']}']").click()
+    expect(page.locator("#entry-claim")).to_contain_text("pending (V3/C3)")
+    expect(page.locator("#metadata")).to_contain_text("[Ostashev records 2026-10-11]")
+    coefficients_url = f"{exact_catalogue.DATA_DIRECTORY}/coefficients/{offered['id']}.json"
+    assert "/" + coefficients_url not in catalogue.requests
+    page.get_by_role("button", name="Open coefficients").click()
+    expect(page.locator("#coefficient-body tr")).to_have_count(2)
+    offered_coefficients = json.loads(files[papers / coefficients_url])["coefficients"]
+    assert page.locator("#coefficient-body code").all_text_contents() == offered_coefficients
+    expect(
+        page.get_by_role("link", name="Download complete coefficient JSON")
+    ).to_have_attribute("href", coefficients_url)
 
     # Search strings stay eager and unchanged; even a source-path token works before
     # fetching any of the matching records' metadata.

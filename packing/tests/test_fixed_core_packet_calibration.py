@@ -2296,6 +2296,8 @@ from pathlib import Path
 from devtools import calibrate_fixed_core_packet as calibration
 
 real_popen = subprocess.Popen
+worker_command = (sys.executable, "-c", "import time; time.sleep(60)")
+observer_launches = 0
 pid_path = Path({str(worker_pid_path)!r})
 prior_handler_path = Path({str(prior_handler_path)!r})
 during_launch = {during_launch!r}
@@ -2307,6 +2309,16 @@ if {custom_handler!r}:
     signal.signal(signal_number, prior_handler)
 
 def launch(*args, **kwargs):
+    global observer_launches
+    # Popen is shared with the real ps sampler; only the owned worker may publish
+    # the marker or receive the launch-window signal injection.
+    if not (
+        args
+        and tuple(args[0]) == worker_command
+        and kwargs.get("start_new_session") is True
+    ):
+        observer_launches += 1
+        return real_popen(*args, **kwargs)
     process = real_popen(*args, **kwargs)
     # Publish by rename: the test polls for the file and must never see it empty.
     staged_pid_path = pid_path.with_name(pid_path.name + ".tmp")
@@ -2317,9 +2329,19 @@ def launch(*args, **kwargs):
     return process
 
 calibration.subprocess.Popen = launch
+# Exercise the actual observer route before timing or exposing the worker marker.
+# This leaves the signal-delivery window between marker and ownership unchanged.
+calibration._sample_process_group(
+    os.getpgrp(),
+    elapsed=0.0,
+    phase="fixture-preflight",
+    timeout_seconds=calibration.RSS_SAMPLE_SECONDS,
+)
+assert observer_launches == 1
+assert not pid_path.exists()
 started = time.perf_counter()
 status = calibration.supervise_worker(
-    (sys.executable, "-c", "import time; time.sleep(60)"),
+    worker_command,
     Path({str(output)!r}),
     repository=Path({str(REPOSITORY)!r}),
     expected_revision={REVISION!r},
@@ -2350,6 +2372,9 @@ raise SystemExit(status)
     assert cast(dict[str, object], receipt["supervision"])["supervisor_signal"] == (
         signal_number
     )
+    supervision = cast(dict[str, object], receipt["supervision"])
+    assert supervision["coordinator_pid"] == worker_pid
+    assert supervision["coordinator_process_group_id"] == worker_pid
     assert prior_handler_path.exists() is custom_handler
     if custom_handler:
         assert prior_handler_path.read_text(encoding="utf-8") == str(signal_number)

@@ -2340,16 +2340,27 @@ def test_the_eight_displaced_current_exact_sides_remain_in_history() -> None:
 
 def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier() -> None:
     rows = _register()["register"]["historical_entries"]
-    assert len(rows) == 279
+    assert len(rows) == 286
     assert sum(row["kind"] == "superseded" for row in rows) == 186
     unreconciled = [row for row in rows if row["kind"] == "unreconciled-source"]
-    assert len(unreconciled) == 83
+    assert len(unreconciled) == 90
     reported = [row for row in unreconciled if "reported_source" in row]
     assert {row["n"] for row in reported} == {106, 152, 177}
     native = [row for row in unreconciled if "source_certificate" in row]
-    assert len(native) == 80
+    assert len(native) == 87
     assert len(reported) + len(native) == len(unreconciled)
+    # Reviewed finite sides, independent of the generated register and result scopes.
+    latest = {
+        ("T-147", 207): "14.8809603730436757",
+        ("T-148", 153): "12.8700138504070441",
+        ("T-149", 155): "12.9524254069584562",
+        ("T-149", 156): "12.9791726136444261",
+        ("T-149", 211): "14.9963367213363157",
+        ("T-150", 146): "12.5837822039510463",
+        ("T-150", 261): "16.6787798753432078",
+    }
     assert {(row["source_certificate"]["result"], row["n"]) for row in native} == {
+        *latest,
         *(("T-128", n) for n in (105, 108, 127, 131, 155, 180, 228, 306)),
         *(("T-130", n) for n in (84, 86, 105, 175, 270)),
         ("T-131", 132),
@@ -2364,6 +2375,33 @@ def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier()
             if n <= 324
         ),
     }
+    new = [
+        row
+        for row in native
+        if row["source_certificate"]["result"] in {result for result, _ in latest}
+    ]
+    assert len(new) == 7
+    assert {(row["source_certificate"]["result"], row["n"]) for row in new} == set(latest)
+    for row in new:
+        side = Fraction(row["exact_form"])
+        assert row["degree"] == 1
+        assert row["polynomial"]["coefficients"] == [
+            str(side.denominator),
+            str(-side.numerator),
+        ]
+        assert row["checks"]["root"]["interval"] == [str(side), str(side)]
+        certificate = row["source_certificate"]
+        assert exact.evand.ceiling_decimal(side, 16) == latest[certificate["result"], row["n"]]
+        assert (
+            certificate["verification"],
+            certificate["confirmation"],
+            certificate["adoption"],
+        ) == (
+            "V3",
+            "C3",
+            "pending",
+        )
+        assert certificate["global_optimality"] == "not-established"
     for row in unreconciled:
         current = _entries()[row["n"]]
         if "reported_source" in row:
