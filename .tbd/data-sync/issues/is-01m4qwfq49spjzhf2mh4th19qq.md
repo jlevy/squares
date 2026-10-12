@@ -5,7 +5,7 @@ title: "Layer 6: records for the 2026-10-12 intake"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T11:03:09.705Z
-updated_at: 2026-10-12T14:34:02.376Z
+updated_at: 2026-10-12T15:30:18.603Z
 started_at: 2026-10-12T11:03:18.294Z
 ---
 Records lane for layer 6 of stack #517 (tracker #544): merge intake-esummins, intake-watch-1012 and review-528-529 onto layer5; register T-154 (#528) and T-155 (#529), T-153 reserved for s(40) > 3359/500; adopt #528's houses on n-175, n-232, n-264; result-requests entries #521-#529 and tracking issues; intake-watch reads; render; announcement; rollups; validate.
@@ -43,3 +43,7 @@ c4af885a2 fix: T-153's margin decimal rounds (0.00218425..., check_rung_figures)
 packing-validate --records: one failure (rung figure), fixed in c4af885a2. Touched tests (10 files, 638 nodes): 637 passed, 1 failed (the margins example), fixed in 92649a2eb.
 check_frontend (workbench) fails on its animate-view contract: n = 29's 64.9387 and n = 272's 65.28896 share an angle in two slots (14, 15). n = 272's house moved in layer 4's 3e24adeb2 (T-151 at seven counts), which this layer did not touch; not this layer's own.
 Announcement re-rendered with T-153 (7 lines; T-150 and T-155 below S3); gh profile reads succeeded with NO_PROXY for GitHub hosts; no finder declares an X handle, so all printed by name.
+
+15bbc8792 rollups: 17 logs (coordinator, 8 grown, 8 new) via devtools.log_rollup, tier names in model fields, close_session --render; git grep finds no model identifier beyond what main already carries. packing-validate --records passes after them (49 steps, 236.6 s).
+packing-validate --fast at 92649a2eb: 11 steps failed in 2711 s at load 14-20. Nine are wall timeouts (basedpyright 900 s, site table layout 900 s, behavioral shards A-D 900 s each, sqverify-fast cargo test 240 s, n17 bb native 240 s, n17 kernel clippy 120 s). Two exited 1: check_frontend's animate-view contract (n = 272, layer 4's 3e24adeb2, not this layer) and build_n5_identity_pair --check, which passed standalone right after ("2 endpoints, keys unchanged"), so it is load-dependent.
+Layer head 15bbc8792. T-156 is reserved for #552 (coordinator's follow-up).
