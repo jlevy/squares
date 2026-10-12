@@ -5,7 +5,7 @@ title: "Layer 5: rungs, significance, announcement, reply rule"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T06:42:21.021Z
-updated_at: 2026-10-12T07:56:27.102Z
+updated_at: 2026-10-12T10:12:10.082Z
 started_at: 2026-10-12T06:42:25.474Z
 ---
 Top layer (layer 5) of stack #517 for the 2026-10-11 intake pass. Assemble the finished lane branches onto layer 4 (l4 / claude/wizardly-meitner-wqn4x3-imports-2): R1 ce6e7a8e8 recent-register rungs, R2 6652442df Lean-backed rungs, S ca1439fca significance confirmation (plus T-147..T-152 check), T aaf3e1796 + 07cc09f2e render_announcement, P 3558ec428 reply rule, P b4c030f11 intake-watch reads. Then OR-9 rollups, the pass announcement, and validation (--push, --records, touched tests, --fast). No push, no PR.
@@ -35,4 +35,9 @@ Announcement: render_announcement --ids T-147..T-152 --github --min-significance
 
 Rollups: the coordinator log was re-rolled (783 turns through 06:46) and 28 missing subagent logs were rolled. Seven layer-2 rollups were left as they are, because their logs were rewritten in place (same records, fewer bytes) and a re-roll drops by_branch to HEAD. Every log rolled now records HEAD for its pre-restore turns. close_session --render was run, and no model id appears in any added line or message.
 
-2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): the T-152 (S3) vs T-150/T-088 (S2) significance question is on https://github.com/jlevy/squares/issues/543; the rung reviews' unapplied record and tool changes are https://github.com/jlevy/squares/issues/542 (bead think-npvi). Layer 4 and 5 PRs are listed as not open on the tracker https://github.com/jlevy/squares/issues/544.
+Validation, under load average 8 to 19 on 4 CPUs from the other lanes:
+- --push run 1 failed only "synopsis agrees with the artifacts" (SYNOPSIS document map stale), fixed by 2a05ae767; tests were skipped.
+- --push run 2: basedpyright timed out at 900 s (it reached "0 errors"); the run is environmental.
+- --push run 3 (--timeout-seconds 1800): all 65 edit checks passed; the reachable whole suite was cut at 1800 s about 7% in. The two failures named by an interrupted rerun (n17 audit subprocess 20 s timeout, n17 propagation wall ceiling) pass alone.
+- --records: exit 0, 49 steps.
+- Touched tests (46 files): 9 failed, 1912 passed. One real failure from this layer: test_unread_worker_outputs_leave_workers_while_declared_files_return, because R2's review links chelokot-lean-replay/build.log. Fixed in 73ae0cc89, which drops the entry from UNREAD_WORKER_OUTPUTS. Seven are subprocess timeouts that pass serially. One, test_site_result_filters legacy-home [1280]/[390], is a test race: the select is read with results.html at readyState=loading, because expect_navigation resolves on a late same-document #t-031 navigation. It passes on l4 and intermittently on layer5, so it is not caused by the data.
