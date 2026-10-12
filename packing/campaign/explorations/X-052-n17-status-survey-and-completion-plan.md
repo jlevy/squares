@@ -124,7 +124,7 @@ rules.
 [Section 7.6](#76-mathematical-distance-as-the-eight-hour-block-objective) defines
 the mathematical exits, bounded support and autonomous reallocation, implemented by
 [agenda-046](../agendas/agenda-046-n17-eight-hour-proof-block.md) and its
-[eight-hour plan](../../../docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md).
+[eight-hour plan](../../../docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md).
 This is a prospective priority change, with no new result or experiment launched.
 
 **Dated survey baseline.** Sections 1–6 and the following original summary describe the

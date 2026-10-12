@@ -1,9 +1,13 @@
 ---
 title: n17 Ten-Hour Overnight Session
 date: 2026-10-06
-status: active
+status: done
 ---
 # n17 Ten-Hour Overnight Session
+
+**Status:** Done. Ran as Session 184 on 2026-10-07; outcomes are recorded in the Session
+184 record and agenda-043. Owed current-source certification continues under think-7hy3
+(agenda-045); coordination beads think-ipel and think-ypk2 are governed from agenda-043.
 
 ## Mandate and Baseline
 

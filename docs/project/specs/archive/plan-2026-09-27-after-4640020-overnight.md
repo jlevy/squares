@@ -5,6 +5,12 @@
 BC-392 · **Supersedes in part:**
 [the 2026-09-25 plan](plan-2026-09-25-after-r052-planning.md)
 
+**Status:** Archived.
+The 2026-09-27 overnight queue never ran: BC-390, BC-393, BC-394 and BC-395 remain
+`ready` in agenda-042 with no outcomes, and this plan’s own planning cell BC-392
+completed (retire-success).
+Open beads think-0rbj, think-pr2b and think-ujwy are governed by their agenda-042 cells.
+
 Two days after R052, Kleddamag published v1.1.0 of the n = 17 certificate
 (`github.com/Kleddamag/17-squares-certified-bound` at `13821ddfa241`), proving
 $s(17) > 232001/50000 = 4.640020$, and wand125 published rectangle-density certificates
@@ -277,7 +283,7 @@ Other lanes review and register them; this section only says what they change he
 - **Upper-bound reports** (franciscouzo and griffcass for many n in 68 to 307,
   JoostdeWinter at n = 211, $14.9979607$): an exact replay of a reported packing costs
   seconds per case through the
-  [upper-bound certification pipeline](plan-2026-09-22-upper-bound-certification-blocks.md),
+  [upper-bound certification pipeline](../active/plan-2026-09-22-upper-bound-certification-blocks.md),
   so the intake is an idle-slot item for whichever lane owns it; it moves reported, not
   verified, rows until certified.
 - **Guzhou’s C++ kernel** runs an R052-scale sweep (15,727 rows) in about 39 minutes on

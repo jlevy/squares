@@ -187,7 +187,7 @@ readiness review required no build or test environment.
 
 ## Kickoff Plan Review
 
-The [six-hour plan](../specs/active/plan-2026-10-07-n17-six-hour-continuation.md)
+The [six-hour plan](../specs/done/plan-2026-10-07-n17-six-hour-continuation.md)
 preserves the fixed session deadline and final thirty-minute reserve, separates
 mathematical, performance, review and coordination ownership, and freezes criteria
 before targets. Its 120-second focused editing ceiling and 90-second record boundary are

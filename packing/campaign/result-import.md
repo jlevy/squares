@@ -466,7 +466,7 @@ lower-bounds explainer and the optimality review.
 It is one entry in `render_overview.PAPERS`, defines every term before it uses it, and
 follows the series rules in
 [paper-design.md](../devtools/templates/paper-design.md#the-papers-front)
-([the series plan](../../docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md)).
+([the series plan](../../docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md)).
 
 ## Stage 7: Answer
 

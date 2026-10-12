@@ -88,7 +88,7 @@ session:
       to H-247 are registered, BC-384 is blocked on BC-388 and BC-389, and BC-386 leads
       the next session's order of work.
     evidence:
-    - docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
+    - docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md
     - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
     stop_reason: The planning records are landed and the next entry is selected.
     next_action: Close the session with certification pending on one hosted gate.
@@ -124,7 +124,7 @@ session:
   - packing/devtools/verify_guzhou_r052_native.py
   - packing/frontier/n-017.md
   - packing/frontier/evidence.yaml
-  - docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
+  - docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md
   - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
   checks:
   - 'full gate: full at b778a6e8ac96c9a2cdaea2a57a364b549bd75bdb: passed (hosted run 36121001128; validate, exhaustive, slow-lane, screen and macOS portability all passed)'

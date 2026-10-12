@@ -5,7 +5,7 @@
 **Subject:** Part II,
 [the review of Kleddamag’s certified lower bound](../../../packing/devtools/templates/n11-threshold-bound-review-article.md),
 at Draft v0.1.0, and the series edits to Parts I and III, under
-[the series plan](../specs/active/plan-2026-10-05-n11-explainer-series.md)\
+[the series plan](../specs/done/plan-2026-10-05-n11-explainer-series.md)\
 **Tracking:** `think-n5dh` (slice S8 of the plan)\
 **Status:** the exposition review that
 [stage 6 of the result import process](../../../packing/campaign/result-import.md#stage-6-explain)

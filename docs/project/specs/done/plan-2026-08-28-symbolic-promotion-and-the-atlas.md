@@ -2,6 +2,11 @@
 
 **Date:** 2026-08-28
 
+**Status:** Done. The capability reading was delivered on 2026-08-28 and acted on:
+contact assembly, minimal-polynomial recovery and Krawczyk enclosure landed on
+2026-08-29 (90b74afd5, 81b92fc33, 413558792); the bounded commitments remain with
+agenda-005.
+
 **Owns:** The top-down capability reading that decides which symbolic work is reachable
 now, why $n = 11$ is exact and $n = 29$ is not, and the ranked gaps between the current
 tooling and a complete atlas.
@@ -64,8 +69,8 @@ constructive value for it exists in the literature or here**.
 
 The contrast with $n = 5$ and $n = 10$ is the useful one, because those come from the
 same catalogue yet reach `verified` and `exact-algebraic` in
-[`cases.gobel5`](../../../../packing/cases/gobel5/) and
-[`cases.gobel10`](../../../../packing/cases/gobel10/). The difference is that Göbel’s
+[`cases.gobel5`](../../../../packing/cases/gobel5) and
+[`cases.gobel10`](../../../../packing/cases/gobel10). The difference is that Göbel’s
 underlying constructions are known in closed form.
 At $n = 29$ the construction *is* the numerical solve.
 

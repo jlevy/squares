@@ -2,9 +2,11 @@
 
 **Date:** 2026-10-01
 
-**Status:** Executing Session 165; four n17 verification rounds accepted,
-contact-feature inventory selected next.
-Fixed finalization and deadline below remain unchanged.
+**Status:** Done. Session 165 ran 2026-10-01 to 02 and its outcome is recorded in its
+session record; the open follow-ups under epic think-7x1u are governed from the n17 W3
+consolidation review (think-7x1u, think-11ma, think-am9e, think-n7xf) and from
+packing/campaign/result-import.md (think-e7xa, think-e8qx, think-q5tt, think-2z60,
+think-kqi1).
 
 **Workflow:** W3 insight iteration → W10 selection and codification → bounded W6
 execution, with W7 only for a missing instrument and W2 for high-risk or promoted

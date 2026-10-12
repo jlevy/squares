@@ -4,7 +4,9 @@
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
-**Status:** Active (revised 2026-08-23 — see [Revision history](#revision-history))
+**Status:** Paused. Phases 1-3 began (46 of 89 beads closed, 2026-08-22 to 08-24); no
+work since 2026-08-23. The 43 open beads and 33 unchecked items remain the plan’s scope,
+kept here until it resumes.
 
 ## Overview
 
@@ -62,7 +64,8 @@ failed.
 
 This specification owns the search spine, quench, basin identity, atlas runtime, and
 low-level verifier implementation.
-The [frontier assurance plan](plan-2026-08-24-frontier-assurance-and-verification.md)
+The
+[frontier assurance plan](../active/plan-2026-08-24-frontier-assurance-and-verification.md)
 owns the public witness interchange, evidence schemas, user-facing
 `inspect`/`check`/`verify`/`promote` semantics, and the general exact-or-interval
 witness promotion path.
@@ -234,7 +237,7 @@ The rule this yields, and the reason the phases below are ordered as they are:
 > Accelerate what a profile says is slow, not what looks slow.**
 
 Concretely: the spine is `scipy` and standard library, with no build step and no FFI.
-[`sqsearch`](../../../../packing/sqsearch/) stays a native binary behind a JSONL seam,
+[`sqsearch`](../../../../packing/sqsearch) stays a native binary behind a JSONL seam,
 because it already exists and process isolation is worth having overnight.
 If a strategy later needs the quench *inside* its loop, add a `cdylib` crate-type to the
 same crate and call it with `ctypes` — 0.52 µs makes that viable, and it costs neither
@@ -317,7 +320,7 @@ The Python `sqpack.verify_packing(..., sign=...)` signature stays as-is so
 Every item below is a bead against this spec:
 
 ```bash
-tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+tbd list --spec docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 tbd ready    # what is unblocked now
 ```
 
@@ -367,9 +370,9 @@ Thin by design. The work here is the boundary, not the strategies.
 - [ ] The proposer contract:
   `(n, pair_test_budget, keyed_rng, seeds?) -> configurations`. No quenching, no
   canonicalization, no validity decisions, no atlas writes.
-- [ ] Port the existing [`sqsearch`](../../../../packing/sqsearch/) annealer behind it
-  as proposer #1, and record **every** quenched local optimum rather than only the best
-  — the current engine discards exactly the data the atlas is made of.
+- [ ] Port the existing [`sqsearch`](../../../../packing/sqsearch) annealer behind it as
+  proposer #1, and record **every** quenched local optimum rather than only the best —
+  the current engine discards exactly the data the atlas is made of.
 - [ ] A uniform multistart proposer, as the null every other proposer is measured
   against.
 - [ ] Equal-budget harness: two proposers, one pipeline, comparable basin sets.
@@ -610,7 +613,7 @@ Two consequences worth stating here rather than rediscovering:
 
 Scheduling of the first long unattended session — which pieces it takes, in what order,
 and where the watched half ends — is
-[the overnight cartography run](plan-2026-08-23-overnight-cartography-run.md).
+[the overnight cartography run](../active/plan-2026-08-23-overnight-cartography-run.md).
 This spec stays the enumeration of the pieces; that one is the plan for one night of
 them.
 
@@ -696,7 +699,7 @@ What changed here:
 What the parallel branch contributed, now folded in: the experiment-loop harness
 ([`campaign/`](../../../../packing/campaign/README.md)) implementing the review’s run
 protocol as validated artifacts rather than prose; a working f64 annealer
-([`sqsearch`](../../../../packing/sqsearch/)), which becomes a proposer behind the Phase
+([`sqsearch`](../../../../packing/sqsearch)), which becomes a proposer behind the Phase
 2 contract; a measured backend decision (Rust and Numba are equivalent, the GPU loses by
 8× at this size); and a baseline round whose controls caught two instrument defects
 before any strategy was tested.

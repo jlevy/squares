@@ -1,7 +1,10 @@
 # Proof Verification Consolidation and Independent n11 Completion
 
 **Date:** 2026-09-29\
-**Status:** Reviewed; implementation pending\
+**Status:** Active. T-060 and its verification were integrated in PR #246 on 2026-09-30,
+with lossless evidence compression and shared kernels; packaging, efficiency and
+evidence-storage work remains under think-7nkq (nine checklist items, fourteen open
+beads).\
 **Workflow:** W7 pipeline improvement supporting W2 proof confirmation, with measured W5
 work\
 **Owners:** coordinator; Sol implementation; Astra at max reasoning for mathematical

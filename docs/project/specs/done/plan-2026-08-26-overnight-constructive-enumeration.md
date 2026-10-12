@@ -2,6 +2,11 @@
 
 **Date:** 2026-08-26
 
+**Status:** Done. The overnight session ran; checkpoints A through G and the later
+infrastructure slices are complete.
+The remaining cells BC-016, BC-022, BC-025 and BC-026 (think-3yv8, think-cx85,
+think-r45s, think-coyu) are blocked and governed from agenda-002.
+
 **Owns:** The handoff contract for one bounded overnight session on the constructive
 proposer lane: what to do, in what order, under which workflow, and what may not be
 claimed.

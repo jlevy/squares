@@ -4,7 +4,10 @@
 
 **Author:** Joshua Levy, with Claude Opus 5
 
-**Status:** In Review
+**Status:** Done.
+Implemented and merged in PR #218 on 2026-09-22; all seven beads closed
+and the v0.4.2 films were cut to its profiles.
+The one-frame playback hold is tracked separately by think-dh9j.
 
 ## Overview
 
@@ -392,9 +395,9 @@ every page deploy to a large binary.
 
 ## References
 
-- [Known-best atlas video plan](plan-2026-09-07-known-best-atlas-video.md), whose D9
-  defines the receipt this extends
-- [Workbench from spike to product](plan-2026-09-11-workbench-from-spike-to-product.md)
+- [Known-best atlas video plan](../active/plan-2026-09-07-known-best-atlas-video.md),
+  whose D9 defines the receipt this extends
+- [Workbench from spike to product](../active/plan-2026-09-11-workbench-from-spike-to-product.md)
 - [`D-492`](../../../../defects.md), the timing defect the first end-to-end cut found
 
 <!-- This document follows common-doc-guidelines.md.

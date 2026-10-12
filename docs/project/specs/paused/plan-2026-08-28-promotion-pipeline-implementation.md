@@ -4,7 +4,11 @@
 
 **Author:** Claude (agent), from a design discussion with the repository owner
 
-**Status:** Active
+**Status:** Paused. Begun under think-75ll (BC-032’s robust-rational control and BC-045
+complete; four of six linked beads closed), then held on 2026-08-27 until an explicit n
+= 29 contact system, isolation boxes, an outward-rounded certificate contract and an
+independent checker exist; think-75ll (held paused) and think-va53 (steps 3-4, unbuilt)
+remain open here with 27 checklist items.
 
 ## Overview
 
@@ -402,7 +406,7 @@ human. That rule is unchanged and applied to exp-045 already.
 
 - [X-004 — an exact algebraic characterization of the `n = 29` record](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md)
 - [plan-2026-08-28 — the numeric–symbolic round trip](../draft/plan-2026-08-28-numeric-symbolic-round-trip.md)
-- [plan-2026-08-28 — the symbolic promotion gap](plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
+- [plan-2026-08-28 — the symbolic promotion gap](../done/plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
 - [agenda-005](../../../../packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md)
 - [TUTORIAL §5 — from a numeric solution to an exact one](../../../../TUTORIAL.md#from-a-numeric-solution-to-an-exact-one)
 - [SYNOPSIS — What Is Built](../../../../SYNOPSIS.md#what-is-built)

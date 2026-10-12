@@ -53,7 +53,7 @@ hypothesis:
   registered: '2026-09-27'
   notes: >-
     From the 2026-09-27 planning block
-    (docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md), on the
+    (docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md), on the
     coordinator's discovery of evand/square-packing (s(32) = 6, s(12) >= 15680/3951,
     s(21) >= 5000/1001). The method reached the endpoint at k = 6 and fell short at
     k = 5 (4.995) and k = 4 (3.968616, with the pure cover LP pinned at 12.000), so the

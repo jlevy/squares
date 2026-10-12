@@ -49,7 +49,7 @@ agenda:
       disagree on the corpus or on generated mutations of it; the measured before and
       after recorded in D-370; and `--records` re-measured on the same container.
     artifacts:
-    - docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
+    - docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md
     - packing/benchmarks/bench_schema_validation.py
     bead: think-64bw
     depends_on: []
@@ -195,7 +195,7 @@ agenda:
       recorded last time; and this session's own agent logs rolled up so the coordinator
       half of the argument rests on measured minutes.
     artifacts:
-    - docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
+    - docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md
     - conventions.md
     bead: think-av72
     depends_on: [BC-077, BC-078]
@@ -415,7 +415,7 @@ rather than finished:
 Any scientific exit.
 `BC-046` in [agenda-005](agenda-005-symbolic-promotion-and-identity.md) owns block 4’s
 criterion, and
-[the gate-validation-speed spec](../../../docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md)
+[the gate-validation-speed spec](../../../docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md)
 owns the phase contracts for blocks 1 and 3. This agenda owns when work starts, when it
 must stop, and what it must leave behind.
 

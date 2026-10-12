@@ -2770,7 +2770,7 @@ weight, the gap above and the width of every line and chip, and
 The three papers on $n = 11$ are one series, read in order, and every listing of them
 keeps that order: the Papers page, the home cards (one line of three), README and each
 paper’s strip.
-[The series plan](../../../docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md)
+[The series plan](../../../docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md)
 holds the decisions and their evidence; these are the rules a change to any of the three
 keeps.
 

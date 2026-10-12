@@ -4,6 +4,11 @@
 `codex/fibonacci-torus-research`. **Entry:** W1 research-survey, W2 factual-review, then
 W3 insight-iteration.
 
+**Status:** Done. Ran 2026-10-07 and merged in PR #433 (f0ec5b663, 2026-10-08); the
+outcome is X-050, with no new bound.
+Follow-ups think-zbkk and think-aj43 continue from
+packing/campaign/explorations/X-050-fibonacci-torus-and-boundary-information.md.
+
 The owner requests unattended evaluation of the supplied abstract, including potential
 proof simplifications for eleven squares, transfer to seventeen squares, and related
 mathematical approaches.

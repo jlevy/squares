@@ -17,9 +17,10 @@ scientific claim, and does not itself authorize execution.
 owns commitments and beads;
 [X-052](../../../../packing/campaign/explorations/X-052-n17-status-survey-and-completion-plan.md)
 owns the exploration and remaining proof map.
-The [eight-hour block plan](plan-2026-10-10-n17-eight-hour-proof-block.md) supplies
-Block 1’s complete 16-slice schedule, scientific controls, resource guards and portable
-commands. The [session README](../../../../packing/campaign/agent-sessions/README.md),
+The [eight-hour block plan](../future/plan-2026-10-10-n17-eight-hour-proof-block.md)
+supplies Block 1’s complete 16-slice schedule, scientific controls, resource guards and
+portable commands. The
+[session README](../../../../packing/campaign/agent-sessions/README.md),
 [AgentSession/v2 schema](../../../../packing/campaign/schemas/agent-session.schema.yaml)
 and
 [Session 186](../../../../packing/campaign/agent-sessions/session-186-n17-mathematics-and-efficiency.md)

@@ -67,7 +67,7 @@ and mechanism-matched calibration, each with its precedent and its register poin
 
 Excluded: implementation (the
 [infrastructure synthesis](research-2026-08-22-infrastructure-for-packing-exploration.md)
-and the [plan spec](../specs/active/plan-2026-08-22-minimal-packing-toolkit.md)), the
+and the [plan spec](../specs/paused/plan-2026-08-22-minimal-packing-toolkit.md)), the
 proof-lane machinery as such (the
 [Lean study](research-2026-08-22-lean-for-packing-proofs-and-validation.md)), and
 concrete run design (the review’s register and series — the boil-down of this document

@@ -1,9 +1,13 @@
 ---
 title: n17 Four-Hour Coupling and Replay Continuation
 date: 2026-10-07
-status: active
+status: done
 ---
 # n17 Four-Hour Coupling and Replay Continuation
+
+**Status:** Done. Ran as Session 185 on 2026-10-07 (18:17Z to 22:07Z) under agenda-044,
+now completed; merged with PR #404 on 2026-10-09. The certification handoff think-7hy3
+continues under agenda-045.
 
 Advance the optimality proof through complete partner-pose coupling and measured exact
 replay optimization.

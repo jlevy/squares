@@ -866,14 +866,14 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | BC-382 | research | 11 | complete | 1 | think-mlz3 | docs/project/reviews/review-2026-09-24-bc241-closure.md |
 | BC-383 | research | 11 | complete | 1 | think-6b12 | The pilot receipts under results/agenda-042/ and an experiment record. |
 | BC-384 | research | 11 | blocked | 1 | think-ggk5 | A design note and a benchmark receipt. |
-| BC-385 | research | 11, 12, 17, 21 | complete | 0 | think-f0if | docs/project/specs/active/plan-2026-09-25-after-r052-planning.md |
+| BC-385 | research | 11, 12, 17, 21 | complete | 0 | think-f0if | docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md |
 | BC-386 | tool_validation | 17 | stopped | 1 | think-amx8 | A native-decision receipt for R052 under results/agenda-042/ and the reviewed cap-lift commit. |
 | BC-387 | research | 17, 12 | ready | 1 | think-68la | A dated lemma review under docs/project/reviews/, then the checker receipts under results/agenda-042/. |
 | BC-388 | research | 11 | ready | 1 | think-91yk | The census receipt under results/agenda-042/ and an experiment record. |
 | BC-389 | research | 11 | ready | 2 | think-nho8 | The frozen certificate, the native sweep receipt and a dated lemma review. |
 | BC-390 | research | 11 | ready | 2 | think-7c17 | The frozen digests, run output and reader verdict under results/agenda-042/. |
 | BC-391 | research | 21 | stopped | 3 | think-t50i | The run logs and decision receipts under results/agenda-042/. |
-| BC-392 | research | 11, 12, 17, 50, 82 | complete | 0 | think-0v60 | docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md |
+| BC-392 | research | 11, 12, 17, 50, 82 | complete | 0 | think-0v60 | docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md |
 | BC-393 | tool_validation | 17 | ready | 1 | think-0rbj | A native-decision receipt in the 4.66001 source packet and the reviewed commit. |
 | BC-394 | research | 82, 50 | ready | 1 | think-pr2b | The ladder logs and certificate directories, then the replay receipts. |
 | BC-395 | research | 12 | ready | 2 | think-ujwy | The ladder log and the highest certificate directory. |
@@ -935,9 +935,9 @@ Status: **completed**. Execute the separately authorized four-hour extension thr
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-440 | research | 17 | complete | 1 | think-tvxs | docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md |
+| BC-440 | research | 17 | complete | 1 | think-tvxs | docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md |
 | BC-441 | research | 17 | complete | 1 | think-hkqz | docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md |
-| BC-442 | measurement_validation | 17 | complete | 1 | think-svkl | docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md |
+| BC-442 | measurement_validation | 17 | complete | 1 | think-svkl | docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md |
 
 ### [agenda-045](agendas/agenda-045-n17-mathematics-and-efficiency.md) — n17 Six-Hour Mathematical and Efficiency Continuation
 
@@ -945,7 +945,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-450 | research | 17 | complete | 1 | think-2mzl | docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md |
+| BC-450 | research | 17 | complete | 1 | think-2mzl | docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md |
 | BC-451 | research | 17 | complete | 1 | think-98mg | docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md |
 | BC-452 | measurement_validation | 17 | complete | 1 | think-ui2y | docs/project/reviews/review-2026-10-07-n17-session-186-performance.md |
 | BC-453 | research | 17 | complete | 1 | think-nvkf | docs/project/research/research-2026-10-07-n17-global-contact-budget.md |
@@ -957,13 +957,13 @@ Status: **paused**. Prepare and, on launch, execute an eight-hour n17 session th
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-455 | research | 17 | ready | 0 | think-wnbr | docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md |
+| BC-455 | research | 17 | ready | 0 | think-wnbr | docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md |
 | BC-456 | research | 17 | ready | 1 | think-9tmv | packing/campaign/hypotheses/H-347-n17-exact-conversion-allowances.md |
 | BC-457 | research | 11, 17 | ready | 1 | think-ydg5 | packing/campaign/hypotheses/H-345-n17-cell-seeded-twenty-round-capture.md |
 | BC-458 | measurement_validation | 17 | tentative | 3 | think-hye3 | packing/campaign/hypotheses/H-348-n17-second-local-theorem-checker.md |
 | BC-459 | tool_validation | 17 | ready | 3 | think-n53s | packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md |
 | BC-460 | research | 17 | ready | 1 | think-lhty | packing/campaign/hypotheses/H-342-n17-kernel-conversion-of-bb-rows.md |
-| BC-461 | measurement_validation | 17 | ready | 0 | think-mfsn | docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md |
+| BC-461 | measurement_validation | 17 | ready | 0 | think-mfsn | docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md |
 
 ## Series
 

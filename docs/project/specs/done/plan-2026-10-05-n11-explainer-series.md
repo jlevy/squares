@@ -3,7 +3,9 @@
 **Date:** 2026-10-05 (merged the same day from two reviewed revisions of the first
 draft; see the [Review Record](#appendix-review-record))
 
-**Status:** Plan. The defaults below apply unless the owner changes them.
+**Status:** Done. Implemented and merged in PR #364 on 2026-10-05 (epic think-92ar
+closed); related follow-ups think-ny2u, think-yf6t and think-4lye are tracked
+separately.
 
 **Beads:** epic `think-92ar`; slices `think-4fe0` (S2), `think-3snx` (S3), `think-mjih`
 (S4a), `think-22wm` (S4b), `think-eqw0` (S4c), `think-0uti` (S5), `think-jnt2` (S6),

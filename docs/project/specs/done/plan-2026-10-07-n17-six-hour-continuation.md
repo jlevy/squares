@@ -1,9 +1,13 @@
 ---
 title: n17 Six-Hour Mathematical and Efficiency Continuation
 date: 2026-10-07
-status: active
+status: done
 ---
 # n17 Six-Hour Mathematical and Efficiency Continuation
+
+**Status:** Done. Ran as Session 186 (2026-10-08T00:10Z-06:10Z); results are recorded in
+the Session 186 record and agenda-045. The owed certification continues under
+think-7hy3.
 
 Produce mathematically significant results toward the optimality proof for seventeen
 unit squares. The user authorized six elapsed hours, **5:10:09–11:10:09 p.m. Pacific on

@@ -6,6 +6,12 @@
 [agenda-042](../../../../packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md),
 BC-385
 
+**Status:** Archived as superseded on 2026-09-27 by
+[the after-4640020 plan](plan-2026-09-27-after-4640020-overnight.md), itself archived;
+BC-386 carried over to BC-393 (think-0rbj), BC-391 was retired as moot, and BC-387 to
+BC-390 (think-68la, think-91yk, think-nho8, think-7c17) are governed from their
+agenda-042 cells.
+
 The owner asked for an extra planning block after R052 was integrated, to decide what
 else the new n = 11 and n = 17 results make possible.
 Two Fable max assessments ran in parallel, one per case, each reading the record and

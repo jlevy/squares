@@ -331,7 +331,7 @@ was (`second certificate`, `not a bound`). The first is now the superseded mark,
 second is the status, and the third is the result’s kind: a second certificate is a
 *simplification*. The vocabulary is provisional until the owner confirms it; the
 proposal and the status of every result are in
-[the result-status plan](docs/project/specs/active/plan-2026-10-01-result-status.md).
+[the result-status plan](docs/project/specs/done/plan-2026-10-01-result-status.md).
 
 ## What Changed on 2026-09-30
 
@@ -354,7 +354,7 @@ A significance rationale is dated by its `scored`, but it scores the claim and n
 rungs, so since 2026-10-06 the checker holds it to the same rule: it may say what a rung
 would need, and not which rung the result stands at.
 The proposal behind the change is
-[the ladder review of 2026-09-30](docs/project/specs/active/plan-2026-09-30-epistemics-ladder-review.md).
+[the ladder review of 2026-09-30](docs/project/specs/done/plan-2026-09-30-epistemics-ladder-review.md).
 
 ## Significance and Novelty
 

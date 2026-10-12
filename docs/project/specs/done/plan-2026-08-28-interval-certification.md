@@ -4,7 +4,10 @@
 
 **Author:** Claude (agent), from a planning session with the repository owner
 
-**Status:** Draft
+**Status:** Done. All four phases were implemented on 2026-08-29 under agenda-006
+(413558792, 565c7f3b8, a575d03df): interval arithmetic, Krawczyk operator, layout map
+and interval verification with controls, calibration at n = 5, 10, 11, and s(29)
+certified by enclosure (witnesses/kingbird-n029-2026-interval.yaml).
 
 ## Overview
 
@@ -17,7 +20,7 @@ one that is tractable with near-certainty.
 
 The distinction matters for planning.
 The exact route
-([plan-2026-08-28-promotion-pipeline-implementation](../active/plan-2026-08-28-promotion-pipeline-implementation.md))
+([plan-2026-08-28-promotion-pipeline-implementation](../paused/plan-2026-08-28-promotion-pipeline-implementation.md))
 recovers a minimal polynomial and discharges it by exact substitution.
 That is strictly stronger, and it may not terminate: a sweep recorded in
 [X-004](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md) found no
@@ -212,44 +215,44 @@ No change to `verify_packing`’s signature — it already accepts an injected `
 
 ### Phase 1: Interval arithmetic and the operator
 
-- [ ] `promote/interval.py` over `mpmath.iv`, with a `sign` that returns $0$ only when
+- [x] `promote/interval.py` over `mpmath.iv`, with a `sign` that returns $0$ only when
   it can prove the enclosure contains zero and otherwise **refuses** rather than
   guessing.
-- [ ] `promote/krawczyk.py` implementing $K(X)$, returning `CertifiedRoot` with `exists`
+- [x] `promote/krawczyk.py` implementing $K(X)$, returning `CertifiedRoot` with `exists`
   and `unique` reported separately.
-- [ ] Calibrate on a univariate case with a known answer, cross-checked against
+- [x] Calibrate on a univariate case with a known answer, cross-checked against
   `sqpack.field`’s existing isolating-interval machinery, which is independent of this
   code path.
-- [ ] Negative control: a box containing **two** roots must return
+- [x] Negative control: a box containing **two** roots must return
   `exists=True, unique=False`, never `unique=True`.
-- [ ] Negative control: a box containing **no** root must return `exists=False`.
+- [x] Negative control: a box containing **no** root must return `exists=False`.
 
 ### Phase 2: The layout map and interval verification
 
-- [ ] `promote/enclose.py`: propagate a certified `PoseBox` through the layout map to
+- [x] `promote/enclose.py`: propagate a certified `PoseBox` through the layout map to
   outward-rounded square corner boxes.
-- [ ] `promote/interval_verify.py`: `verify_packing` under the interval `sign`, so a
+- [x] `promote/interval_verify.py`: `verify_packing` under the interval `sign`, so a
   pair whose separation enclosure straddles zero is a refusal and not a pass.
-- [ ] Negative control: shrink the container side below the packing and require refusal.
-- [ ] Negative control: widen the pose box until separation is undecidable and require a
+- [x] Negative control: shrink the container side below the packing and require refusal.
+- [x] Negative control: widen the pose box until separation is undecidable and require a
   typed refusal naming the pair — **not** a silent pass.
 
 ### Phase 3: Calibration where the answer is known
 
-- [ ] Certify $n = 5$ and $n = 10$, whose Göbel constructions are exact and already
+- [x] Certify $n = 5$ and $n = 10$, whose Göbel constructions are exact and already
   reach `verified` by the exact route.
   The interval verdict must agree with the exact one.
-- [ ] Certify $n = 11$ against Trump’s published polynomial: the certified box must
+- [x] Certify $n = 11$ against Trump’s published polynomial: the certified box must
   contain the known algebraic root.
-- [ ] Demonstrate the checker **refuses** on a pose that is numerically plausible but
+- [x] Demonstrate the checker **refuses** on a pose that is numerically plausible but
   not actually feasible, since agreeing with the exact route on valid inputs proves
   nothing about discrimination.
 
 ### Phase 4: `n = 29`
 
-- [ ] Drive the `cases.kingbird29` system and layout map from a BC-047 refinement.
-- [ ] Certify, and record whatever comes back, including a typed refusal.
-- [ ] On success, emit an `interval-certified` witness and move `verified_upper_bound`
+- [x] Drive the `cases.kingbird29` system and layout map from a BC-047 refinement.
+- [x] Certify, and record whatever comes back, including a typed refusal.
+- [x] On success, emit an `interval-certified` witness and move `verified_upper_bound`
   through the normal evidence contract — as a reviewed change, never as a search result
   written into the record.
 
@@ -300,8 +303,8 @@ the reported value as certified.
 ## References
 
 - [BC-045 in agenda-005](../../../../packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md)
-- [plan-2026-08-28 — the promotion pipeline implementation](../active/plan-2026-08-28-promotion-pipeline-implementation.md)
-- [plan-2026-08-28 — the symbolic promotion gap](../active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
+- [plan-2026-08-28 — the promotion pipeline implementation](../paused/plan-2026-08-28-promotion-pipeline-implementation.md)
+- [plan-2026-08-28 — the symbolic promotion gap](plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
 - [X-004 — an exact algebraic characterization of the `n = 29` record](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md)
 - [TUTORIAL §5 — from a numeric solution to an exact one](../../../../TUTORIAL.md#from-a-numeric-solution-to-an-exact-one)
 - [SYNOPSIS — What Is Built](../../../../SYNOPSIS.md#what-is-built)

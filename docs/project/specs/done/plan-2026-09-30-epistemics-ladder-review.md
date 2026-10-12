@@ -4,10 +4,9 @@
 
 **Author:** Claude (agent), for the repository owner
 
-**Status:** Proposal for the owner’s decision.
-This document changes no rubric, checker or rating.
-A stacked implementation of the recommended design, for the owner to review as concrete
-diffs, is tracked under the same bead.
+**Status:** Done. The owner adopted the revised verification and confirmation ladders on
+2026-09-30 (epistemics.md, What Changed on 2026-09-30) and the checker enforces them;
+the open question whether a same-project review earns C5 is tracked by think-yf6t.
 
 **Workflow:** W4 process review
 
@@ -897,7 +896,7 @@ Decisions only the owner can make:
 - [`results.yaml`](../../../../packing/frontier/results.yaml)
 - [The `n = 11` census and capture contract review](../../reviews/review-2026-09-29-n11-optimality-census-contract.md)
 - [The `n = 11` source intake review](../../reviews/review-2026-09-29-n11-optimality.md)
-- [Plan: others’ results in the register](plan-2026-09-29-third-party-results-register.md)
+- [Plan: others’ results in the register](../active/plan-2026-09-29-third-party-results-register.md)
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

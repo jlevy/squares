@@ -613,6 +613,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Bead and Plan Reconciliation, Round 2, 12 October 2026](docs/project/reviews/review-2026-10-12-bead-reconciliation-round-2.md) | dated review record | record | retained | — |
 | [Bead and Plan Reconciliation, 10 October 2026](docs/project/reviews/review-2026-10-10-tbd-coordination.md) | dated review record | record | retained | — |
 | [Bead Reconciliation, Lane A — 2026-10-10](docs/project/reviews/review-2026-10-10-bead-reconciliation-a.md) | dated review record | record | retained | — |
 | [Bead Reconciliation Review: Lane B](docs/project/reviews/review-2026-10-10-bead-reconciliation-b.md) | dated review record | record | retained | — |
@@ -652,7 +653,7 @@ case or experiment separately.
 | [n17 Two-Child Collective Propagation](docs/project/research/research-2026-10-07-n17-two-child-collective-propagation.md) | research synthesis | record | retained | — |
 | [n17 One-Round Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-one-round-owned-domain-propagation.md) | research synthesis | record | retained | — |
 | [n17 Strict-Core Regional Transfer](docs/project/research/research-2026-10-07-n17-strict-core-regional-transfer.md) | research synthesis | record | retained | — |
-| [n17 Six-Hour Mathematical and Efficiency Continuation](docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md) | implementation plan | current | transient | — |
+| [n17 Six-Hour Mathematical and Efficiency Continuation](docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md) | implementation plan | record | retained | — |
 | [n17 Session 186 W3 Strategy](docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md) | research synthesis | record | retained | — |
 | [n17 Session186 Performance and Validation Review](docs/project/reviews/review-2026-10-07-n17-session-186-performance.md) | dated review record | record | retained | — |
 | [n17 Session186 Implementation Readiness](docs/project/reviews/review-2026-10-07-n17-session-186-readiness.md) | dated review record | record | retained | — |
@@ -685,7 +686,7 @@ case or experiment separately.
 | [Matched Exact Replay Diagnostic](packing/campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/README.md) | typed session record | record | retained | — |
 | [Full-Square Partner Coupling for the n17 Witness](docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md) | research synthesis | record | retained | — |
 | [Complete Partner-Pose Coupling for the n17 Parent](docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md) | research synthesis | record | retained | — |
-| [n17 Four-Hour Coupling and Replay Continuation](docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md) | implementation plan | current | transient | — |
+| [n17 Four-Hour Coupling and Replay Continuation](docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md) | implementation plan | record | retained | — |
 | [n17 W3 Capacity and Route Selection](docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md) | research synthesis | record | retained | — |
 | [Fixed-Angle Feasible-Center Relaxation](packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/README.md) | research synthesis | record | retained | — |
 | [One-Square Pooled Relaxation Witness](packing/campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/README.md) | research synthesis | record | retained | — |
@@ -698,14 +699,14 @@ case or experiment separately.
 | [Session 184: TailA Dependency Reports](packing/campaign/retained/session-184-tail-a-dependencies/README.md) | typed session record | record | retained | — |
 | [Session 184: n11 First-Round Readiness Objects](packing/campaign/retained/session-184-n11-readiness/README.md) | typed session record | record | retained | — |
 | [n17 Proof Interfaces and Finite-Angle LP Contract](docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md) | research synthesis | record | retained | — |
-| [n17 Ten-Hour Overnight Session](docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md) | implementation plan | current | transient | — |
+| [n17 Ten-Hour Overnight Session](docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md) | implementation plan | record | retained | — |
 | [Refinement Replay Custody and Worker Admission Review](docs/project/reviews/review-2026-10-07-refinement-custody-closure.md) | dated review record | record | retained | — |
 | [Refinement Host Relocation and Rational Feasibility Review](docs/project/reviews/review-2026-10-07-refinement-host-rebind.md) | dated review record | record | retained | — |
 | [Published Site URLs](docs/project/site-urls.md) | generated status view | generated | generated | — |
 | [Fibonacci Torus: Independent Algebra Audit](docs/project/reviews/review-2026-10-07-fibonacci-torus-algebra.md) | dated review record | record | retained | — |
 | [Review: The Fibonacci-Torus Contact Geometry](docs/project/reviews/review-2026-10-07-fibonacci-torus-geometry.md) | dated review record | record | retained | — |
 | [Fibonacci Torus Source Review](docs/project/reviews/review-2026-10-07-fibonacci-torus-sources.md) | dated review record | record | retained | — |
-| [Fibonacci Torus Research and Audit](docs/project/specs/active/plan-2026-10-07-fibonacci-torus.md) | implementation plan | record | retained | — |
+| [Fibonacci Torus Research and Audit](docs/project/specs/done/plan-2026-10-07-fibonacci-torus.md) | implementation plan | record | retained | — |
 | [Fibonacci Torus Confirmation Checks](packing/cases/fibonacci_torus/README.md) | component scope and use | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
@@ -717,7 +718,7 @@ case or experiment separately.
 | [Windows owned-Job supervision](packing/devtools/windows-supervision.md) | engineering and validation rules | current | maintained | — |
 | [Retained n17 diagnostics](packing/devtools/n17-diagnostics.md) | engineering and validation rules | current | maintained | — |
 | [The n = 17 Optimality Proof, Explained](docs/project/n17-optimality-explainer.md) | first-principles tutorial | supporting | maintained | — |
-| [N11: A Three-Paper Explainer Series](docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md) | implementation plan | current | transient | — |
+| [N11: A Three-Paper Explainer Series](docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md) | implementation plan | record | retained | — |
 | [Feature: A Static, Crawlable Site with a Registered URL Scheme](docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md) | implementation plan | record | retained | — |
 | [Feature: Compact Homepage, Consistent Case Layouts, and Scroll-Aware Navigation](docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md) | implementation plan | current | transient | — |
 | [Feature: A Shorter Website Development Loop](docs/project/specs/active/plan-2026-10-10-website-development-loop.md) | implementation plan | current | transient | — |
@@ -819,7 +820,7 @@ case or experiment separately.
 | [Independent Review of the n17 Exact Root Certificate](packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/output-review.md) | dated review record | record | retained | — |
 | [Independent Review of the n17 Endpoint Feasibility Certificate](packing/campaign/series/series-000-smoke-and-calibration/results/exp-238-n17-endpoint-feasibility/output-review.md) | dated review record | record | retained | — |
 | [Independent Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/output-review.md) | dated review record | record | retained | — |
-| [Plan: Transfer Recent Optimality Methods to n = 17 and Other Low Cases](docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md) | implementation plan | current | transient | — |
+| [Plan: Transfer Recent Optimality Methods to n = 17 and Other Low Cases](docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md) | implementation plan | record | retained | — |
 | [Plan: Release Assets on Demand, and One Rule per Date](docs/project/specs/done/plan-2026-10-01-release-assets-on-demand.md) | implementation plan | record | retained | — |
 | [N11 Optimality Review — Intuition and Visual Structure](docs/project/reviews/review-2026-09-30-n11-explainer-intuition.md) | dated review record | record | retained | — |
 | [Research: Publishing GitHub Work from Codex Cloud](docs/project/research/research-2026-10-07-codex-cloud-github-publication.md) | research synthesis | record | retained | — |
@@ -866,18 +867,18 @@ case or experiment separately.
 | [BC329 Target-Free Three-Profile Run Sheet](docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md) | implementation plan | record | retained | — |
 | [PR157 Integrated Calibration Launch Supplement](docs/project/specs/done/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md) | implementation plan | record | retained | — |
 | [BC329 Run-Set Verifier Contract](docs/project/specs/done/plan-2026-09-13-n11-bc329-runset-verifier.md) | implementation plan | record | retained | — |
-| [Feature: Video delivery profiles](docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md) | implementation plan | current | transient | — |
+| [Feature: Video delivery profiles](docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md) | implementation plan | record | retained | — |
 | [Plan: Certify the Reported Upper Bounds, One Validation Block at a Time](docs/project/specs/active/plan-2026-09-22-upper-bound-certification-blocks.md) | implementation plan | current | transient | — |
-| [Plan: What R052 and Rung 0 Change at n = 11 and n = 17](docs/project/specs/active/plan-2026-09-25-after-r052-planning.md) | implementation plan | current | transient | — |
-| [Plan: An Overnight Queue After s(17) > 4.640020](docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md) | implementation plan | current | transient | — |
+| [Plan: What R052 and Rung 0 Change at n = 11 and n = 17](docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md) | implementation plan | record | superseded | [Agenda 042: The n11 Settlement Ladder and Low-n Angles](packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md) |
+| [Plan: An Overnight Queue After s(17) > 4.640020](docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md) | implementation plan | record | superseded | [Agenda 042: The n11 Settlement Ladder and Low-n Angles](packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md) |
 | [Plan: Others’ Results in the Results Register](docs/project/specs/active/plan-2026-09-29-third-party-results-register.md) | implementation plan | current | transient | — |
-| [Plan: Revising the Verification and Confirmation Ladders](docs/project/specs/active/plan-2026-09-30-epistemics-ladder-review.md) | implementation plan | current | transient | — |
+| [Plan: Revising the Verification and Confirmation Ladders](docs/project/specs/done/plan-2026-09-30-epistemics-ladder-review.md) | implementation plan | record | retained | — |
 | [Plan: A Kind for Every Registered Result](docs/project/specs/done/plan-2026-10-01-result-kinds.md) | implementation plan | record | retained | — |
-| [Plan: A Workflow Status for Every Result, and No Separate Block for Reported Ones](docs/project/specs/active/plan-2026-10-01-result-status.md) | implementation plan | current | transient | — |
+| [Plan: A Workflow Status for Every Result, and No Separate Block for Reported Ones](docs/project/specs/done/plan-2026-10-01-result-status.md) | implementation plan | record | retained | — |
 | [Plan: An Independent, Fast Verifier for Measure-Capture Certificates](docs/project/specs/active/plan-2026-10-02-independent-measure-verifier.md) | implementation plan | current | transient | — |
 | [Plan: The First Application of the Result Import Process](docs/project/specs/active/plan-2026-10-01-result-import-first-application.md) | implementation plan | current | transient | — |
 | [Measure Verifier Milestone C: The Continuous-Angle Family](docs/project/specs/active/plan-2026-10-03-measure-verifier-milestone-c.md) | implementation plan | current | transient | — |
-| [Plan: n = 17 Overnight, 5 October 2026](docs/project/specs/active/plan-2026-10-05-n17-overnight.md) | implementation plan | current | transient | — |
+| [Plan: n = 17 Overnight, 5 October 2026](docs/project/specs/done/plan-2026-10-05-n17-overnight.md) | implementation plan | record | retained | — |
 | [Feature: A Top-Level Overview Page for the Published Site](docs/project/specs/active/plan-2026-09-29-github-pages-overview.md) | implementation plan | current | transient | — |
 | [BC329 Calibration Reader: Source-Distinct Review](docs/project/reviews/review-2026-09-13-n11-bc329-source-distinct-reader.md) | dated review record | record | retained | — |
 | [BC329 Reader Repair: Exact-Commit Rereview](docs/project/reviews/review-2026-09-13-n11-bc329-reader-rereview.md) | dated review record | record | retained | — |
@@ -1423,20 +1424,20 @@ case or experiment separately.
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
 | [Postmortem: Three Catalogue Intakes Nobody Owned](docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md) | failure analysis and lessons | record | retained | — |
 | [Proof Verification Consolidation and Independent n11 Completion](docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md) | implementation plan | current | transient | — |
-| [n17 Eight-Hour Proof Block](docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md) | implementation plan | current | transient | — |
+| [n17 Eight-Hour Proof Block](docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md) | implementation plan | current | transient | — |
 | [n17 Three-Block Session Plan](docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md) | implementation plan | current | transient | — |
-| [Feature: Minimal Packing Toolkit](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | implementation plan | current | transient | — |
+| [Feature: Minimal Packing Toolkit](docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md) | implementation plan | current | transient | — |
 | [Feature: Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | implementation plan | current | transient | — |
 | [Feature: Frontier Assurance and Verification](docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md) | implementation plan | current | transient | — |
 | [Feature: Research-Loop Efficiency Infrastructure](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md) | implementation plan | current | transient | — |
-| [Overnight Run: Constructive Enumeration Groundwork](docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md) | implementation plan | current | transient | — |
-| [Plan: The Symbolic Promotion Gap, and What a Complete Atlas Would Need](docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md) | implementation plan | current | transient | — |
+| [Overnight Run: Constructive Enumeration Groundwork](docs/project/specs/done/plan-2026-08-26-overnight-constructive-enumeration.md) | implementation plan | record | retained | — |
+| [Plan: The Symbolic Promotion Gap, and What a Complete Atlas Would Need](docs/project/specs/done/plan-2026-08-28-symbolic-promotion-and-the-atlas.md) | implementation plan | record | retained | — |
 | [Feature: The Numeric–Symbolic Round Trip](docs/project/specs/draft/plan-2026-08-28-numeric-symbolic-round-trip.md) | implementation plan | current | transient | — |
-| [Feature: Promotion Pipeline Implementation](docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
-| [Feature: The Interval Certification Bridge](docs/project/specs/draft/plan-2026-08-28-interval-certification.md) | implementation plan | current | transient | — |
-| [Feature: Gate Validation Speed](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md) | implementation plan | current | transient | — |
+| [Feature: Promotion Pipeline Implementation](docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
+| [Feature: The Interval Certification Bridge](docs/project/specs/done/plan-2026-08-28-interval-certification.md) | implementation plan | record | retained | — |
+| [Feature: Gate Validation Speed](docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md) | implementation plan | record | retained | — |
 | [Feature: Validation Efficiency and Checkpoints](docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md) | implementation plan | current | transient | — |
-| [Plan: Research Lanes Beyond 3.81](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md) | implementation plan | supporting | transient | — |
+| [Plan: Research Lanes Beyond 3.81](docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md) | implementation plan | record | retained | — |
 | [Plan: Extend the Known-Best Atlas to `n = 324`, and Draw the Poster](docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md) | implementation plan | current | transient | — |
 | [Feature: Math Text Face Integration](docs/project/specs/active/plan-2026-09-07-math-text-face.md) | implementation plan | current | transient | — |
 | [Plan: A Video of Every Known-Best Packing, `n = 1..324`](docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md) | implementation plan | current | transient | — |
@@ -1703,7 +1704,7 @@ controller, not permission to blur contracts.
 ### Current Handoff
 
 The prepared
-[eight-hour X-052 continuation](docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md)
+[eight-hour X-052 continuation](docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md)
 is owned by BC-455 / `think-wnbr` under BC-418. Its
 [agenda-046](packing/campaign/agendas/agenda-046-n17-eight-hour-proof-block.md) is
 paused pending launch.
@@ -1727,7 +1728,7 @@ follows the reviewed W3 memo.
 It preserves every frozen experimental criterion and the held-control decision; no new
 target run or mathematical verdict belongs to that consolidation.
 The
-[ten-hour launch plan](docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md)
+[ten-hour launch plan](docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md)
 selects BC-430 / `think-ipel` under BC-418, with Astra for mathematical strategy and
 GPT-6.1 Sol for engineering, review and tracking.
 [Session 184](packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md)
@@ -2028,7 +2029,7 @@ separate scopes. PR 246 merged with the verified result; the next handoff is a b
 fresh-ensemble replay entry point.
 
 The n = 11 papers form one series, read in order
-([plan](docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md)):
+([plan](docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md)):
 [Part I](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html), the
 project’s lower bounds T-018, T-025 and T-026;
 [Part II](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html), a
@@ -2229,7 +2230,7 @@ verified n = 17 lower bound at `V4/C3`, until Kleddamag’s `v1.1.0` $232001/500
 superseded it on 27 September; the native interval route refuses it at its engine
 ceilings, so there is no method-distinct decision yet.
 A planning block then asked what R052 and the closed rung 0 make possible
-([plan](docs/project/specs/active/plan-2026-09-25-after-r052-planning.md)). At n = 17,
+([plan](docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md)). At n = 17,
 R052’s certificate is nearly saturated, so a first-party increment of $10^{-4}$ is not
 worth building; an unreviewed lemma says a triangle-free overlap family of 34 squares at
 side $S$ caps every capacity-one certificate at $S$, which a cheap search can price.
@@ -2240,7 +2241,7 @@ Agenda-042 gains BC-386 to BC-391 and H-243 to H-247. Hosted full run 3612100112
 certified the closed session.
 
 **The 27 September planning block** (BC-392,
-[plan](docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md)) followed
+[plan](docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md)) followed
 Kleddamag v1.1.0’s $s(17) > 232001/50000 = 4.640020$ and wand125’s rectangle
 certificates for n = 18 to 78. Every atom of v1.1.0 has capacity one, so the certificate
 itself refutes H-243’s $4.63$ family and the ceiling search moves to $4.65$ in
@@ -3030,7 +3031,7 @@ The
 [Agenda 024 allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 owns prospective priorities.
 Its planning block BC-250 links the
-[tbd assessment](docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md)
+[tbd assessment](docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md)
 of both prior reviews, and distills their directions into H-093–103 and the existing
 agendas. Coordinator `think-jgnv` next dispatches scalar BC-251, adaptive controls
 BC-231, density support BC-254, and restricted assessment BC-255 as capacity and their
@@ -5462,7 +5463,7 @@ through two unrelated constraint sets.
 
 The formulation is exact; the *build* is not, and conflating the two caused a critical
 defect. Three corrections, recorded in the
-[plan spec’s revision note](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md):
+[plan spec’s revision note](docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md):
 
 - **A float LP solver does not deliver the cell optimum.** At its default primal
   feasibility tolerance of $10^{-7}$ HiGHS returned a packing violating its own

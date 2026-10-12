@@ -209,7 +209,7 @@ experiment:
 [H-267](../../../hypotheses/H-267-n17-isolated-sub-pattern-residue.md) asks whether
 certified sub-patterns of arity at most seven leave at most $10^4$ orbits on the
 unique-state cover. This round is lane K of the
-[n17 overnight plan](../../../../../docs/project/specs/active/plan-2026-10-05-n17-overnight.md)
+[n17 overnight plan](../../../../../docs/project/specs/done/plan-2026-10-05-n17-overnight.md)
 (BC-420): the nine arity-7 standing flags with the most census weight, run through the
 kernel with the adaptive-row recipe that closed SW9, which they had never had.
 

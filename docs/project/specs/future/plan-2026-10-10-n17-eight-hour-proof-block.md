@@ -1,7 +1,7 @@
 ---
 title: n17 Eight-Hour Proof Block
 date: 2026-10-10
-status: prepared
+status: future
 ---
 # n17 Eight-Hour Proof Block
 
@@ -14,15 +14,18 @@ Existing results may be named, scoped premises while independent confirmation re
 pending; new artifacts still need their first soundness decision, replay and admission
 checks before their conclusions enter the proof or official census.
 
+**Status:** Future. Prepared, not launched; agenda-046 is paused (PR #491, 2026-10-10)
+and execution waits on the owner’s launch instruction through think-wnbr.
+
 W10 planning under `think-j30b` prepares an eight-hour continuation of `think-tmz6`.
 [Agenda 046](../../../../packing/campaign/agendas/agenda-046-n17-eight-hour-proof-block.md)
 owns commitments and beads; preserve frozen claims and failed controls in
 [X-052](../../../../packing/campaign/explorations/X-052-n17-status-survey-and-completion-plan.md).
 At launch create a complete session with observed clocks; this plan reserves no session,
 experiment, goal or automation.
-The [three-block session plan](plan-2026-10-10-n17-three-block-session.md) maps two
-conditional further eight-hour blocks, each replanned from this block’s evidence.
-It also supplies the AgentSession-format launch and closeout fields.
+The [three-block session plan](../active/plan-2026-10-10-n17-three-block-session.md)
+maps two conditional further eight-hour blocks, each replanned from this block’s
+evidence. It also supplies the AgentSession-format launch and closeout fields.
 Read the [handoff](../../../../SYNOPSIS.md#current-handoff),
 [operating rules](../../../../operating-rules.md),
 [session contract](../../../../packing/campaign/agent-sessions/README.md) and

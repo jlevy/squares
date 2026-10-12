@@ -544,7 +544,7 @@ is decided.
 
 **Python first; accelerate what a profile says is slow, not what looks slow.**
 [convention] The measurements behind this are in the
-[plan spec](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md#stack-and-boundaries--decided-by-measurement).
+[plan spec](docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md#stack-and-boundaries--decided-by-measurement).
 
 **Python 3.14 is the sole supported runtime, and dependencies are locked.** [checked]
 `pyproject.toml`, `.python-version`, Ruff, BasedPyright, CI, and `uv.lock` express one

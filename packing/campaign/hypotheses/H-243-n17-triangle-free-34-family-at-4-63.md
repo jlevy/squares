@@ -48,7 +48,7 @@ hypothesis:
   registered: '2026-09-25'
   notes: >-
     From the Session 159 n17 assessment
-    (docs/project/specs/active/plan-2026-09-25-after-r052-planning.md). Every atom R052
+    (docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md). Every atom R052
     and Kleddamag use has capacity one, and two cores that trigger a capacity-one atom
     overlap; so a triangle-free family of N squares makes the dual weight 1/2 per square
     feasible for every point or capacity-one certificate, and N = 34 refutes all of them
@@ -58,7 +58,7 @@ hypothesis:
     Kleddamag v1.1.0's certificate at 4.640020, every atom of capacity one, is itself
     the refutation of the 463/100 target under this claim's own criterion; the 465/100
     target continues as H-248 in clique-weighted form
-    (docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md).
+    (docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md).
 ---
 # H-243: Where the n17 Certificate Architecture Stops
 

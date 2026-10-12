@@ -42,7 +42,7 @@ session:
       source contract and scoped mechanical reviews CLEAR; main merged as17cc1ae4 with15focused controls
       PASS47.20s. No target evaluated.
     evidence:
-    - docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md
+    - docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
     - docs/project/reviews/review-2026-10-07-n17-session-186-performance.md
     - docs/project/reviews/review-2026-10-07-n17-session-186-readiness.md
@@ -2078,7 +2078,7 @@ session:
     - unregistered scientific target
     - native release upload
   outputs:
-  - docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md
+  - docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md
   - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
   - docs/project/reviews/review-2026-10-07-n17-session-186-performance.md
   - docs/project/reviews/review-2026-10-07-n17-session-186-readiness.md
@@ -2217,7 +2217,7 @@ session:
 # n17 Mathematical and Efficiency Continuation
 
 Continue [Session185](session-185-n17-coupling-and-replay.md) under the
-[six-hour plan](../../../docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md).
+[six-hour plan](../../../docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md).
 Actual phases and evidence belong here; hypotheses own scientific criteria and
 experiments own measurements.
 

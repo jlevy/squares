@@ -4,11 +4,9 @@
 
 **Author:** Claude (agent), for the repository owner
 
-**Status:** Proposal for the owner’s confirmation.
-It is applied on the branch `claude/awaiting-replay` so it can be read as a diff and
-looked at on the built site.
-The status vocabulary, the rung at which a result is confirmed and the shape of the
-activity mark are provisional; each is one small edit.
+**Status:** Done. Applied and merged in PR #277 on 2026-10-01; beads think-d04u and
+think-ai94 are closed.
+The status tables below are dated examples, not current status.
 
 **Workflow:** W7 pipeline improvement
 
@@ -55,8 +53,9 @@ say so.
 | The $n = 11$ fix | 2026-09-30, `febdbe249`, `think-pd2g` | The block listed $n = 11$ as awaiting a replay that had happened, because a rounded reported value was compared as a number with the verified one. The comparison was fixed; the block went from 49 cases to 48. |
 | README’s trim | 2026-09-30, `e4ad5cedd`, `think-f7ig` | README’s tables were removed in favour of the site. The block was then the only place the per-case listing survived. |
 
-The spec for the site, [the overview plan](plan-2026-09-29-github-pages-overview.md),
-recorded the block as built and gave no reason for it beyond the port.
+The spec for the site,
+[the overview plan](../active/plan-2026-09-29-github-pages-overview.md), recorded the
+block as built and gave no reason for it beyond the port.
 The owner’s earlier question about it left no bead: a search of the tracker finds only
 `think-yy2c` and `think-pd2g`.
 
@@ -137,8 +136,8 @@ It mixed three things.
   other.
 - **What kind of result it is.** *Second certificate* and *not a bound* say what the
   entry is, which no bound can change.
-  [The result-kinds plan](../done/plan-2026-10-01-result-kinds.md) took *not a bound*
-  out on the same day and gave every result a kind.
+  [The result-kinds plan](plan-2026-10-01-result-kinds.md) took *not a bound* out on the
+  same day and gave every result a kind.
   It left five results of a kind that is no bound still carrying a standing, because
   each cites a bound’s evidence: T-003, a method limit, *superseded*; T-004, an audit,
   and T-005, a correction, *current best*; T-054 and T-055, simplifications, *second
@@ -562,8 +561,8 @@ significance, 34, with T-055, T-058, T-059 and T-063.
 - [`packing/devtools/result_status.py`](../../../../packing/devtools/result_status.py)
 - [`packing/devtools/render_recent_results.py`](../../../../packing/devtools/render_recent_results.py),
   where standing is derived
-- [The overview plan](plan-2026-09-29-github-pages-overview.md)
-- [The plan for results by others](plan-2026-09-29-third-party-results-register.md)
+- [The overview plan](../active/plan-2026-09-29-github-pages-overview.md)
+- [The plan for results by others](../active/plan-2026-09-29-third-party-results-register.md)
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

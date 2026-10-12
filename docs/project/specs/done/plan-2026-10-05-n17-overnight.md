@@ -2,9 +2,10 @@
 
 **Date:** 2026-10-05
 
-**Status:** Ready to execute.
-Written after the October 5 W3 status review of X-048 and an adversarial Opus review of
-it; nothing has run yet.
+**Status:** Done. Ran as Session 182 (2026-10-05T08:14Z to 2026-10-06T07:21Z); the
+outcome is recorded in
+packing/campaign/agent-sessions/session-182-n17-overnight-lanes.md.
+Residual W5 block think-9ntw (BC-422) is governed from agenda-042.
 
 **Workflow:** W10 codification and selection (opening phase) → W6 research loop as the
 coordinating phase, dispatching two W6 rounds, two W3 lanes and one W9 lane; W2 at the

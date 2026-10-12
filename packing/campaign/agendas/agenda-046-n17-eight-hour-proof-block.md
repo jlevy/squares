@@ -32,7 +32,7 @@ agenda:
       exit: Real session clocks, runnable assignments, checkpoint dispositions and a resumable end-of-block handoff.
       bead: think-wnbr
       depends_on: []
-      next_evidence: docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md
+      next_evidence: docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md
       workflows: [review-planning-oversight]
       program: n17-optimality
       parallel_group: n17-integration
@@ -183,7 +183,7 @@ agenda:
         disposition, follow-up ownership and one next coordinating entry.
       bead: think-mfsn
       depends_on: []
-      next_evidence: docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md
+      next_evidence: docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md
       workflows: [factual-review, review-planning-oversight]
       program: n17-optimality
       parallel_group: n17-confirmation
@@ -193,7 +193,7 @@ agenda:
 **Prepared, not launched.** The owning execution bead is `think-wnbr`, under the
 existing BC-418 / `think-tmz6` program.
 W10 planning is tracked by `think-j30b`. The
-[launch plan](../../../docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md)
+[launch plan](../../../docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md)
 defines worker briefs, the eight-hour schedule, acceptance gates and recovery.
 The agenda owns commitment state; the plan supplies its execution contract.
 

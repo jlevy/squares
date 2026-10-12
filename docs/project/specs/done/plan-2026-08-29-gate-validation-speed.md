@@ -4,10 +4,14 @@
 
 **Author:** Claude (agent), from a working session with the repository owner
 
-**Status:** Both phases landed 2026-08-30, under `BC-077` and `BC-079` in agenda-007
+**Status:** Done. Both phases landed 2026-08-30 under BC-077 and BC-079 in agenda-007.
+The agent-log rollup was not done; the measured-cost question it served now belongs to
+the
+[validation-efficiency plan](../active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)’s
+feedback-latency measurement.
 
 **Current follow-up:**
-[Validation Efficiency and Checkpoints](plan-2026-09-06-validation-efficiency-and-checkpoints.md)
+[Validation Efficiency and Checkpoints](../active/plan-2026-09-06-validation-efficiency-and-checkpoints.md)
 owns the 2026-09-06 W5 work on current feedback, final checkpoints, naming, and timing
 records. This completed plan retains the dated measurements and decisions below;
 [development.md](../../../../development.md#validation-loops) owns current usage.
@@ -224,9 +228,12 @@ every artifact in the repository is well-formed.
 - [x] Restate the cadence table in `conventions.md` from measurement after the changes
   land, as it was restated once already when it claimed sixty seconds for an
   eight-minute tier.
-- [ ] Roll up this session’s agent logs into the existing `CodexEfficiencyRollup/v2`
-  shape, so the tier argument rests on measured coordinator and command time rather than
-  impressions of it.
+- Not done: roll up this session’s agent logs into the existing
+  `CodexEfficiencyRollup/v2` shape, so the tier argument rests on measured coordinator
+  and command time rather than impressions of it.
+  The 2026-10-12 reconciliation (`think-va12`) closed this plan without it; the
+  measured-cost question passes to the
+  [validation-efficiency plan](../active/plan-2026-09-06-validation-efficiency-and-checkpoints.md).
 
 ## Testing Strategy
 

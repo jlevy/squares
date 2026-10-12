@@ -1,8 +1,11 @@
 # Plan: Research Lanes Beyond 3.81
 
-Date: 2026-09-06. Status: BC-250 assessment, distilled into the registry and agendas; no
-new experiments in this planning pass.
-Planning epic: `think-j1f5`, under continuation epic `think-jgnv`.
+Date: 2026-09-06. Status: Done.
+The BC-250 assessment was distilled into the registry and agendas and merged in PR #97
+on 2026-09-06; planning epic think-j1f5 is closed.
+Open follow-up think-zinm (optional Lean spike replay) is governed from
+docs/project/research/research-2026-08-22-packing-11-unit-squares.md under epic
+think-bevj. Planning epic: `think-j1f5`, under continuation epic `think-jgnv`.
 
 The objective is a substantially stronger lower bound, or a theorem that removes a major
 obstacle to one. Map each strategic direction separately, and assign active workers to
