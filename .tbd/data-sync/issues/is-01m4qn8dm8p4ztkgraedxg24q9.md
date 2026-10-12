@@ -1,17 +1,17 @@
 ---
 type: is
 id: is-01m4qn8dm8p4ztkgraedxg24q9
-title: "Read evand/square-packing 2b89650..ad86d42 (26 commits, 11-12 Oct): no new bound; s(29) minimal polynomial and grade-C local minima retained (no issue)"
+title: "Read evand/square-packing 2b89650..ad86d42 (26 commits, 11-12 Oct): no new bound; s(29) minimal polynomial and grade-C local minima retained (#545)"
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-12T08:56:50.568Z
-updated_at: 2026-10-12T08:56:50.568Z
+updated_at: 2026-10-12T09:08:36.788Z
 ---
 Watched-repository read for lane W of the 2026-10-12 intake (think-mq0k); nothing on GitHub asked. Not an issue: neither result below was reported on jlevy/squares.
 
@@ -35,3 +35,7 @@ Watched-repository read for lane W of the 2026-10-12 intake (think-mq0k); nothin
 **Proposed intake-watch.yaml read** (for the records lane): read_through ad86d42d0f743076d735036702ba04a41ce24a8c, read_on 2026-10-12, no bead (the packet pins the head and retains the claim paths; the read covers the commits' other paths). Text in the lane W scratch file intake-watch-reads.yaml.
 
 Close when the records lane lands the read.
+
+## Notes
+
+GitHub issue: https://github.com/jlevy/squares/issues/545 (opened 2026-10-12 by the coordinator to track this watched-repository read).

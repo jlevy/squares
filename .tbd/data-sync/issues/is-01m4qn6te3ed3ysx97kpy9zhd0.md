@@ -1,17 +1,17 @@
 ---
 type: is
 id: is-01m4qn6te3ed3ysx97kpy9zhd0
-title: "Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record side, polynomial unpublished (no issue)"
+title: "Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record side, polynomial unpublished (#545)"
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-12T08:55:58.146Z
-updated_at: 2026-10-12T08:55:58.146Z
+updated_at: 2026-10-12T09:08:25.578Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
 
@@ -28,3 +28,7 @@ Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-
 **Credit.** Evan Daniel, MIT; CREDITS.md: produced by Claude (Anthropic) under human direction; 169a827 is co-authored by Claude Opus 5.5. The configuration is Thomas Schadt's improved by David Ellsworth.
 
 **Draft acknowledgement** (no issue to post on; for the owner if an issue is opened): "Thank you for the s(29) minimal polynomial (evand/square-packing 169a827). We retained N29.md and its scripts at ad86d42. The polynomial itself is not in the repository; could you publish work/n29_poly_q4.json, the parametrization and the Krawczyk box, so that the irreducibility, the enclosure and the link can be re-run here? We will also check the packing at the exact side, which N29.md leaves open."
+
+## Notes
+
+GitHub issue: https://github.com/jlevy/squares/issues/545 (opened 2026-10-12 by the coordinator to track this watched-repository read).

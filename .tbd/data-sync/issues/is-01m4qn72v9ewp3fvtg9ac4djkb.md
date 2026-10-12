@@ -1,17 +1,17 @@
 ---
 type: is
 id: is-01m4qn72v9ewp3fvtg9ac4djkb
-title: "Import Evan Daniel: grade-C local minima at 233 configurations of field degree <= 4, 53 current-record counts beyond T-124 (no issue)"
+title: "Import Evan Daniel: grade-C local minima at 233 configurations of field degree <= 4, 53 current-record counts beyond T-124 (#545)"
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-12T08:56:06.761Z
-updated_at: 2026-10-12T08:56:06.761Z
+updated_at: 2026-10-12T09:08:30.443Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
 
@@ -28,3 +28,7 @@ Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-
 **Credit.** Evan Daniel, MIT; CREDITS.md: produced by Claude (Anthropic) under human direction; both commits co-authored by Claude Opus 5.5. Each configuration keeps its case's finder credit.
 
 **Draft acknowledgement** (no issue; for the owner if one is opened): "Thank you for the grade-C local-minimality checks (evand/square-packing 0d0146e and e493eea). We retained gradec.py, grade-C.md and the batch status at ad86d42. The certificates and contact inputs are gitignored; could you publish minpoly/solve/n-N.contacts.json and n-N.gradec.json for the 233 VALID runs, with their run times? We will review Theorem C and re-run the checks."
+
+## Notes
+
+GitHub issue: https://github.com/jlevy/squares/issues/545 (opened 2026-10-12 by the coordinator to track this watched-repository read).
