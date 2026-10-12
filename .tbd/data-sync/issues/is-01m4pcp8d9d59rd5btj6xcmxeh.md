@@ -3,17 +3,21 @@ type: is
 id: is-01m4pcp8d9d59rd5btj6xcmxeh
 title: Adopt the register's lower exact certificates as atlas witnesses before the full regularization run (T-146 at 15 counts; imports in flight)
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 8
+version: 10
+delegate: claude-code@vm
 labels:
   - regularization
 dependencies:
   - type: blocks
     target: is-01m4mdbq6bhkv71fxeeckawsbt
 parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
+hold: null
+hold_until: null
 created_at: 2026-10-11T21:07:52.361Z
-updated_at: 2026-10-12T12:33:05.748Z
+updated_at: 2026-10-12T18:36:24.959Z
+started_at: 2026-10-12T18:36:24.204Z
 ---
 The pilots of 2026-10-11 show the exact solve rediscovering T-146's registered certificates at 70, 102, 129, 146 (1e-10 below the case records' verified bounds), so the same-side re-solve refuses unmatched-rotation there and the views become row-3 candidates. Adopting those certificates as the atlas witnesses (blocked on the case-record rewrite #403 and RG-7 custody, per T-146) lets the run regularize the credited packing at its own side. Also sequence the full run after the in-flight imports at the same counts (#470 think-jpre, #476 think-m8ck incl. 267, #481 think-ac4h, #483 think-8m3u, #488 think-6uv7, #489 think-xm4h), since a changed witness lapses any review (policy section 5).
 
@@ -30,3 +34,5 @@ The pilots of 2026-10-11 show the exact solve rediscovering T-146's registered c
 2026-10-12 (morning): the follow-up recipe above stands; #549 now carries reclassify --refresh-bounds and the /1 grid contract, so the 17 grid choices among #518's counts join that admission.
 
 2026-10-12 12:25 UTC: precomputed on #518's witnesses (#518 at 1bc770d34; re-run any count whose witness or case record changes before it merges). Evan Daniel runs reclassified with --refresh-bounds: no bound or decision moved (18 admitted). Grid pass on 35 counts (7 skipped by the all-count rule), 35 exact views, 39.6 min wall. Choice (same rule as the all-count lane): grid at 105 131 146 156 175 211 232 267 292 305 307 308; Evan Daniel at 84 86 108 126 127 129 132 153 180 207 209 228 236 237 259 270 302 306; keep #518's drawing at 70 102 103 123 154 155 258 261 263 269 295 303. Census over the 42: light 230 -> 133, uneven 588 -> 361, near-axis 182 -> 6, house sides 21,701 -> 23,038 (as admitted, without 232). 302 under the new witness already draws 0/0/0 (Evan Daniel's view 980 house sides is chosen); 303 keeps 4 light squares no generator closes. 232's grid view is row 7 (review). Admission once main (with #518) is merged up the stack, from packing/: regularize_axis_components --update-atlas --n <the 42> --workers 2; then PYTHONINTMAXSTRDIGITS=0 python -m devtools.regularize_evand layer --run-dir $SP/runs/refreshed-adopt518-v2 $SP/runs/refreshed-adopt518-v2b --repo-root .. --grid-run $SP/grid/runs/on518 --grid-counts 105 131 146 156 175 211 267 292 305 307 308 (dry run on a layer copy: 29 views written, check_atlas 0 problems). Report: grid-518-report.md in the session scratchpad.
+
+2026-10-12 18:00 UTC: #518 merged (e10fd85d4) and main was merged up the stack. The follow-up is jlevy/squares#559 (layer 7, stacked on #549): 29 of the 42 counts drawn (18 Evan Daniel, 11 grid /1), 12 keep #518's drawing, 232 left for review. No witness changed between 1bc770d34 and the merge, so nothing was re-run. Census over the 42: light 230 -> 133, near-axis 182 -> 6. The layer draws 89 views; atlas house-light 5,382. adopt518-v2's reconstructed cost is labelled in the index (run_block now carries a receipt's measured_by). Closes when #559 merges.
