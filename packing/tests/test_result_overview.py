@@ -902,9 +902,17 @@ def test_complete_result_batch_loads_the_address_registry_once(
     """Multiple real documents share one validated address registry per render pass."""
     rows = site_urls.load_registry()
     results = [_result(overview, result_id) for result_id in ("T-110", "T-116")]
+    # The two pages' links are still checked against the whole site: since the house
+    # adoption of 11 October 2026 T-116 links the results that hold its former houses.
+    check = result_overview.check_links
+
+    def check_whole(result_id: str, body: str, _batch: overview_data.Overview) -> None:
+        check(result_id, body, overview)
+
     with (
         patch.object(overview_data, "load", return_value=replace(overview, results=results)),
         patch.object(site_urls, "load_registry", return_value=rows) as loaded,
+        patch.object(result_overview, "check_links", check_whole),
     ):
         pages = render_overview.result_fragments()
     assert loaded.call_count == 1

@@ -74,3 +74,7 @@ Click a column heading to sort; the filters narrow the rows.
 <h1 id="best-known-results" class="site-title">Best Known Results for <i>n</i> ≤ 324</h1>
 
 {{TABLE}}
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

@@ -41,7 +41,7 @@ from sqpack.witness import load_witness
 GOLDEN_MAX_ANGLE_CLASSES: dict[str, tuple[int, int]] = {
     "n=1..100": (14, 69),
     "n=1..200": (67, 182),
-    "n=1..324": (52, 301),
+    "n=1..324": (85, 267),
 }
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS = ROOT / "atlas"
@@ -441,12 +441,14 @@ def _angle_classes_by_case() -> dict[int, dict[int, list[tuple[int, float]]]]:
 
 
 def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries() -> None:
-    """The current corpus asks for 52 angle classes in one frame; the palette has 20.
+    """The current corpus asks for 85 angle classes in one frame; the palette has 20.
 
     The renderer colors per frame, so the relevant count is the largest class count
-    in any single frame: 52 at Couzo's n = 301, against 14 when the corpus stopped at
-    100. It was 106 at the catalogue's n = 273 before the #227 intake, and later 81
-    at the first SQUISH update's n = 263 before the second update replaced that pose.
+    in any single frame: 85 at Couzo's n = 267 (T-134) since the house adoption of 11
+    October 2026, against 14 when the corpus stopped at 100. It was 106 at the
+    catalogue's n = 273 before the #227 intake, later 81 at the first SQUISH update's
+    n = 263 before the second update replaced that pose, and 52 at Couzo's n = 301
+    until the adoption replaced Ryan Xu's n = 267.
     The colorizer keeps the 20 checked bases and wraps class registrations onto the
     18 unpinned slots. Repeated hues in a dense frame honestly indicate that a frame
     carries more angles than the palette can distinguish.

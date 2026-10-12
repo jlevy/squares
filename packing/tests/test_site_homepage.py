@@ -150,7 +150,7 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
         assert state["right"] <= width
         assert state["overflow"] <= 0
         assert state["width"] / state["height"] == pytest.approx(16 / 9, abs=0.01)
-        assert len(state["headings"]) == 7
+        assert len(state["headings"]) == 8
         for heading in state["headings"]:
             assert heading["above"] == pytest.approx(state["title_above"], abs=0.01)
             assert heading["below"] == pytest.approx(state["title_below"], abs=0.01)
@@ -678,6 +678,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     assert home["headings"] == [
         "the-atlas-of-square-packings",
         "recent-results",
+        "report-your-results",
         "papers",
     ]
     assert home["main_titles"] == [
@@ -686,7 +687,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
         "squares-project-documentation",
         "more-resources",
     ]
-    assert len(home["section_title_styles"]) == 6
+    assert len(home["section_title_styles"]) == 7
     assert home["lower_headings"] == 0
     assert all(style == home["main_title_style"] for style in home["section_title_styles"])
     assert home["recent_title"] == "Recent Major Results"

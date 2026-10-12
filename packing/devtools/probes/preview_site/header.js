@@ -93,15 +93,22 @@
   probe.remove();
   const links = [...document.querySelectorAll(".site-nav a[data-page]")];
   const lines = new Set(links.map((link) => Math.round(link.getBoundingClientRect().top)));
-  const nameText = document.querySelector(".site-nav .site-name-text");
+  const nameText = [...document.querySelectorAll(".site-nav .site-name-text")].find(
+    (label) => label.getClientRects().length > 0,
+  );
   return {
     nav: nav && box(nav),
     type: {
       body: size(document.querySelector(".kpress-long-text > p:not([class])")),
       name: size(document.querySelector(".site-nav .site-name")),
-      name_shown: nameText !== null && nameText.getClientRects().length > 0,
+      name_shown: nameText !== undefined,
+      name_label: nameText?.textContent ?? null,
       link: size(links[0] ?? null),
       tab: size(document.querySelector("nav.site-tabs a")),
+      tab_scale:
+        Number.parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue("--paper-button-label-scale"),
+        ) || 1,
       links_rows: lines.size,
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
       scale,

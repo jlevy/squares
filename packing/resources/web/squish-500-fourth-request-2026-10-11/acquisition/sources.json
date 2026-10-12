@@ -1,0 +1,445 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-11T20:34Z",
+  "git_scope": "Full clone checked out at the pin for issue #500. The scope is the paths the pinned commit changed: the root README.md and the whole squish-submission-2026-10-11 directory, 67 files bound to their Git blobs. Under derived-only custody none is copied. The earlier submission directories are unchanged at this pin and belong to the packets that pinned them. The head when read, 56fa71f949234b63534772b3f3b4f1320fbf2afd, changes only the root README.md, to link issue #500, so no claim depends on it. No source program was executed.",
+  "sources": [
+    {
+      "id": "itsnaka-squish-certs",
+      "source_url": "https://github.com/itsnaka/squish-certs",
+      "source_ref": "main",
+      "source_commit": "aeacc6c124df339074f7370e1e010bb6e8c1b5ca",
+      "committed_utc": "2026-10-11T05:30:10Z",
+      "git_tree": "e67d0004e65363d58e8090560f92544093507104",
+      "archived_path": "packing/resources/web/squish-500-fourth-request-2026-10-11/source",
+      "subtree_manifest": "packing/resources/web/squish-500-fourth-request-2026-10-11/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "squish-submission-2026-10-11"
+      ],
+      "subtree_file_count": 67,
+      "subtree_total_bytes": 5866372,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 11860,
+          "sha256": "690ea2b53efffa4848b1f7e09af4a142cf930e28cd5973c856aa875a240e69e7",
+          "reason": "The repository README: the roster of current SQUISH packings and what each request changed. Author prose; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/README.md",
+          "bytes": 4533,
+          "sha256": "cf6b8034614e2a6f0f243e083779709e0dc9c8618cbf30eb6ce4a78a85ebde32",
+          "reason": "The request's README: claims, contents, method, pieces and what is not done, quoted in this packet's README. Author prose; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n176/check_packing_output.txt",
+          "bytes": 130,
+          "sha256": "9e18c9756d6f3e7ac6a780f869e321ae59ddffb454005036c8bdb1fe5786e212",
+          "reason": "The author's run of check_packing.py on the 50-digit text, an author report. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n176/n176.cert.json",
+          "bytes": 65305,
+          "sha256": "42fc373b225ce75f3654ecd986b28d97fd75b3b804d04870b88df8eca52f52b0",
+          "reason": "The exact rational certificate: s_exact and one [x, y, t] triple per square, rational centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n176/n176.cert.txt",
+          "bytes": 27277,
+          "sha256": "9e0491a03fd6ce18b7308c26ea5d79a7905c985be47501242cf048bd02f36a47",
+          "reason": "The same packing at 50 digits in David Ellsworth's text format, box centred at the origin, rounded outward from the certificate: the input of the author's check_packing.py run. Context, not the certificate; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n176/n176.cert50.txt",
+          "bytes": 27277,
+          "sha256": "9e0491a03fd6ce18b7308c26ea5d79a7905c985be47501242cf048bd02f36a47",
+          "reason": "The 50-digit text the drawing is made from; context, not the certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n176/n176.svg",
+          "bytes": 38608,
+          "sha256": "6860d1bb6596a86549c35975d209c9352b778b61c861fc302c17d6fc38a42962",
+          "reason": "A drawing of the packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n176/n176_vs_record.png",
+          "bytes": 274686,
+          "sha256": "cf66718c1fe9d1b2145b7b93577bbac138435e2a06c9910e37317e0999e422b1",
+          "reason": "A raster comparison with the record packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n181/check_packing_output.txt",
+          "bytes": 130,
+          "sha256": "6f9a1470a6a816c95000f16a8fef92f77c7d141fb4b137c91955be0ea0f72003",
+          "reason": "The author's run of check_packing.py on the 50-digit text, an author report. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n181/n181.cert.json",
+          "bytes": 65304,
+          "sha256": "cc0afa669ae8bb88762284bb19bbd61706a9cddd5b4a10091e6ebd38c1e4f7a0",
+          "reason": "The exact rational certificate: s_exact and one [x, y, t] triple per square, rational centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n181/n181.cert.txt",
+          "bytes": 27018,
+          "sha256": "46907dce93ffdf6622fe5d6afddebdfbe2c9216e74826cb0bab8e3adf7ea619f",
+          "reason": "The same packing at 50 digits in David Ellsworth's text format, box centred at the origin, rounded outward from the certificate: the input of the author's check_packing.py run. Context, not the certificate; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n181/n181.cert50.txt",
+          "bytes": 27018,
+          "sha256": "46907dce93ffdf6622fe5d6afddebdfbe2c9216e74826cb0bab8e3adf7ea619f",
+          "reason": "The 50-digit text the drawing is made from; context, not the certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n181/n181.svg",
+          "bytes": 38634,
+          "sha256": "255b2acab6021e4a8c0857839c51b56fc3497da365fca7c280e2ef354668344f",
+          "reason": "A drawing of the packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n181/n181_vs_record.png",
+          "bytes": 363046,
+          "sha256": "72a82422b7f935dac160bf4e0e5f61ee15b4b8267e0a9549d8fb663a2d20eb79",
+          "reason": "A raster comparison with the record packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n238/check_packing_output.txt",
+          "bytes": 130,
+          "sha256": "6f5eb9b8499c42ac04718673f26308c8cffe51c2729807f01d68639881d67571",
+          "reason": "The author's run of check_packing.py on the 50-digit text, an author report. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n238/n238.cert.json",
+          "bytes": 88160,
+          "sha256": "42c72bc2fdb736572a0712db48b495a5ab4dfbe6b5df0df9d912614149313f0a",
+          "reason": "The exact rational certificate: s_exact and one [x, y, t] triple per square, rational centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n238/n238.cert.txt",
+          "bytes": 34541,
+          "sha256": "c72b3df58932ca5cf8eebea3a18b40477a7f528daf56efb08478cb6d288e48be",
+          "reason": "The same packing at 50 digits in David Ellsworth's text format, box centred at the origin, rounded outward from the certificate: the input of the author's check_packing.py run. Context, not the certificate; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n238/n238.cert50.txt",
+          "bytes": 34541,
+          "sha256": "c72b3df58932ca5cf8eebea3a18b40477a7f528daf56efb08478cb6d288e48be",
+          "reason": "The 50-digit text the drawing is made from; context, not the certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n238/n238.svg",
+          "bytes": 49406,
+          "sha256": "5cc22e226cad4cfdcbf2b111338c0580b264461f73a130068a7a1635a681be14",
+          "reason": "A drawing of the packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n238/n238_vs_record.png",
+          "bytes": 334123,
+          "sha256": "7a8fb7219226b2a20b5a8c77100260991f18e2d31b533e9e95d32511f600d616",
+          "reason": "A raster comparison with the record packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n239/check_packing_output.txt",
+          "bytes": 130,
+          "sha256": "15b50919bbb7ed973e41c898d5caddda084daaba70fa51a7583c448b568c160b",
+          "reason": "The author's run of check_packing.py on the 50-digit text, an author report. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n239/n239.cert.json",
+          "bytes": 86144,
+          "sha256": "b7be0948c96ffe58e56de744330915b417c97a0561b28e32359f35f99b17f805",
+          "reason": "The exact rational certificate: s_exact and one [x, y, t] triple per square, rational centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n239/n239.cert.txt",
+          "bytes": 35398,
+          "sha256": "8fca5dd880a7f44c196d1fb3460d0bb27f97011356e8730dd0b7d99a0a937f81",
+          "reason": "The same packing at 50 digits in David Ellsworth's text format, box centred at the origin, rounded outward from the certificate: the input of the author's check_packing.py run. Context, not the certificate; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n239/n239.cert50.txt",
+          "bytes": 35398,
+          "sha256": "8fca5dd880a7f44c196d1fb3460d0bb27f97011356e8730dd0b7d99a0a937f81",
+          "reason": "The 50-digit text the drawing is made from; context, not the certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n239/n239.svg",
+          "bytes": 50320,
+          "sha256": "3c0037de903ec9a5e471ff66fb3c75b092f538f48ddd58b6a2604bf013841fd1",
+          "reason": "A drawing of the packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n239/n239_vs_record.png",
+          "bytes": 357775,
+          "sha256": "9a10bf1de19ca68d48cc2dc8c7fc3a385ad0c261030004b12d7fc22b3540a523",
+          "reason": "A raster comparison with the record packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n270/check_packing_output.txt",
+          "bytes": 130,
+          "sha256": "8c3241d977690bb048971ee26966680ef17061da6e17ab3bdc00a48bde4b662a",
+          "reason": "The author's run of check_packing.py on the 50-digit text, an author report. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n270/n270.cert.json",
+          "bytes": 97905,
+          "sha256": "e52e241481e812e54eb368fff3b447f44d7156fc253d151545dcb9a0c526d5de",
+          "reason": "The exact rational certificate: s_exact and one [x, y, t] triple per square, rational centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n270/n270.cert.txt",
+          "bytes": 39483,
+          "sha256": "cd0bae2ef5217741b884f7cdfef569ad1a5389ba5d3a37ff85caaa506bebe26d",
+          "reason": "The same packing at 50 digits in David Ellsworth's text format, box centred at the origin, rounded outward from the certificate: the input of the author's check_packing.py run. Context, not the certificate; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n270/n270.cert50.txt",
+          "bytes": 39483,
+          "sha256": "cd0bae2ef5217741b884f7cdfef569ad1a5389ba5d3a37ff85caaa506bebe26d",
+          "reason": "The 50-digit text the drawing is made from; context, not the certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n270/n270.svg",
+          "bytes": 56172,
+          "sha256": "78992155d3fb7480de77110c632c954a0e72a5ec19627887e227bebba7ebae2a",
+          "reason": "A drawing of the packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n270/n270_vs_record.png",
+          "bytes": 355437,
+          "sha256": "81c09389044237bf27dd139e1ce41bcf77f62aad095c32fc77aa433c2854d6da",
+          "reason": "A raster comparison with the record packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n271/check_packing_output.txt",
+          "bytes": 130,
+          "sha256": "fab470b95856c701948592d337ff215d4480142f60d33ea6dc0bf1b3ebe6c85e",
+          "reason": "The author's run of check_packing.py on the 50-digit text, an author report. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n271/n271.cert.json",
+          "bytes": 97523,
+          "sha256": "3868ef22494b88fdfabdfb051df8f378c9c828339ebc07cc2db584e9f130924d",
+          "reason": "The exact rational certificate: s_exact and one [x, y, t] triple per square, rational centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n271/n271.cert.txt",
+          "bytes": 39599,
+          "sha256": "6cef9cbf119eb13785f48c9fbeefe7579afefd6591055d5d2c0cb4f09bcfd623",
+          "reason": "The same packing at 50 digits in David Ellsworth's text format, box centred at the origin, rounded outward from the certificate: the input of the author's check_packing.py run. Context, not the certificate; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n271/n271.cert50.txt",
+          "bytes": 39599,
+          "sha256": "6cef9cbf119eb13785f48c9fbeefe7579afefd6591055d5d2c0cb4f09bcfd623",
+          "reason": "The 50-digit text the drawing is made from; context, not the certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n271/n271.svg",
+          "bytes": 56345,
+          "sha256": "ac1a696dbfdf26fc39ab61b2e0e9b2e62b71f144ae394baea8b273c55b371210",
+          "reason": "A drawing of the packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n271/n271_vs_record.png",
+          "bytes": 388344,
+          "sha256": "d954711ff8a56b4cf5a6ab4dcd1cc26708e5d89bbec35ada887bfc462a6660d0",
+          "reason": "A raster comparison with the record packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n272/check_packing_output.txt",
+          "bytes": 130,
+          "sha256": "1c13e137f986f85d97c327a456032329846b0c299680bd956d6a584e7eefa2b4",
+          "reason": "The author's run of check_packing.py on the 50-digit text, an author report. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n272/n272.cert.json",
+          "bytes": 98859,
+          "sha256": "495fa4d68825fd72453c730c3cc01a342bfd46b1419e1a638f98aa945cbda52f",
+          "reason": "The exact rational certificate: s_exact and one [x, y, t] triple per square, rational centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n272/n272.cert.txt",
+          "bytes": 40097,
+          "sha256": "b37a08dcac53da1e4c9382e03a5c125c7a40f2912c75020c62e194be809bc2a5",
+          "reason": "The same packing at 50 digits in David Ellsworth's text format, box centred at the origin, rounded outward from the certificate: the input of the author's check_packing.py run. Context, not the certificate; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n272/n272.cert50.txt",
+          "bytes": 40097,
+          "sha256": "b37a08dcac53da1e4c9382e03a5c125c7a40f2912c75020c62e194be809bc2a5",
+          "reason": "The 50-digit text the drawing is made from; context, not the certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n272/n272.svg",
+          "bytes": 56900,
+          "sha256": "8781e9fe9872f99acfd077247bd769f6c50161c0fe391268ab761a737b150dad",
+          "reason": "A drawing of the packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n272/n272_vs_record.png",
+          "bytes": 374444,
+          "sha256": "bebc9a28ee327d972181f4d76630b5f046d194cd5e7a6e62542c3d6a029cced3",
+          "reason": "A raster comparison with the record packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n304/check_packing_output.txt",
+          "bytes": 130,
+          "sha256": "a79fd285f784587b98aaf9414f2673008f2b4547bb5a75130dc44557bc2ccfd0",
+          "reason": "The author's run of check_packing.py on the 50-digit text, an author report. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n304/n304.cert.json",
+          "bytes": 112681,
+          "sha256": "ce52b2ed338874604fcfe744e5d66d31086051a619e4f10ea6b908808311c47c",
+          "reason": "The exact rational certificate: s_exact and one [x, y, t] triple per square, rational centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n304/n304.cert.txt",
+          "bytes": 43902,
+          "sha256": "de02b914e0a70189c190794d43270efaf189f8acdb944a2dc0737df0c76e9fd9",
+          "reason": "The same packing at 50 digits in David Ellsworth's text format, box centred at the origin, rounded outward from the certificate: the input of the author's check_packing.py run. Context, not the certificate; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n304/n304.cert50.txt",
+          "bytes": 43902,
+          "sha256": "de02b914e0a70189c190794d43270efaf189f8acdb944a2dc0737df0c76e9fd9",
+          "reason": "The 50-digit text the drawing is made from; context, not the certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n304/n304.svg",
+          "bytes": 62529,
+          "sha256": "dd8ef5fd1335e6ef0637f4f5686e46b95710ce9464087188a3ff57f40c11bd6f",
+          "reason": "A drawing of the packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n304/n304_vs_record.png",
+          "bytes": 371979,
+          "sha256": "afc0f420e66efe5ff9948c5513f6234779eaaf75ffb20988467eef6f572691ec",
+          "reason": "A raster comparison with the record packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n305/check_packing_output.txt",
+          "bytes": 130,
+          "sha256": "f4258b99790fad675bcab90caa867f8a13998063f6778f75c767943fa22b4626",
+          "reason": "The author's run of check_packing.py on the 50-digit text, an author report. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n305/n305.cert.json",
+          "bytes": 114719,
+          "sha256": "95a291460f3c128a9c80c1ba571c4d8118293f36860f38d5d55775636da80d33",
+          "reason": "The exact rational certificate: s_exact and one [x, y, t] triple per square, rational centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n305/n305.cert.txt",
+          "bytes": 45272,
+          "sha256": "2c5f91f2b2749eb2a0a56fa206633744b072bb7898d46d7fe055f6cacb36b589",
+          "reason": "The same packing at 50 digits in David Ellsworth's text format, box centred at the origin, rounded outward from the certificate: the input of the author's check_packing.py run. Context, not the certificate; no licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n305/n305.cert50.txt",
+          "bytes": 45272,
+          "sha256": "2c5f91f2b2749eb2a0a56fa206633744b072bb7898d46d7fe055f6cacb36b589",
+          "reason": "The 50-digit text the drawing is made from; context, not the certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n305/n305.svg",
+          "bytes": 63956,
+          "sha256": "1ba7550c30d938bd5bd6e6768e1ab0d11794fd97aac11c27d3b5a027cad7202e",
+          "reason": "A drawing of the packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/n305/n305_vs_record.png",
+          "bytes": 375212,
+          "sha256": "48effbfa178533979f1f29e168acb17f114e5e91cf7889d3b71e07e5ceda7ddd",
+          "reason": "A raster comparison with the record packing. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/sources/squish-s154-a-source.cert.json",
+          "bytes": 21186,
+          "sha256": "40b8f1b14e88d830e45fa8d71809735e5994a23819eed635f6de0ccd3e65b517",
+          "reason": "An earlier unfiled SQUISH certificate that pieces were taken from, in the same format; not offered as a record. No licence in the tree; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/sources/squish-s154-a-source.cert.txt",
+          "bytes": 19400,
+          "sha256": "cbd805b4590ac33f16668076cc494c0685ab04c6bc4f0df752ae7d74b8271224",
+          "reason": "The 50-digit text export of an earlier unfiled certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/sources/squish-s154-b-source.cert.json",
+          "bytes": 20856,
+          "sha256": "94ce4566f7cc41923caebb5d038e2d11a5d766936c37f7905996b720b4f5876e",
+          "reason": "An earlier unfiled SQUISH certificate that pieces were taken from, in the same format; not offered as a record. No licence in the tree; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/sources/squish-s154-b-source.cert.txt",
+          "bytes": 19238,
+          "sha256": "6f489081e37c7ab0b0e2ae58d926d1c2276e730a55ab88e09e26a568f99f2a09",
+          "reason": "The 50-digit text export of an earlier unfiled certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/sources/squish-s240-b-source.cert.json",
+          "bytes": 39298,
+          "sha256": "4088d345613d61b92e8baf777ede6a419601c74e1260659ec150386ca765c255",
+          "reason": "An earlier unfiled SQUISH certificate that pieces were taken from, in the same format; not offered as a record. No licence in the tree; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/sources/squish-s240-b-source.cert.txt",
+          "bytes": 30754,
+          "sha256": "b177ba5d7a342016f1ac0775378fed5c26b35c07d2e33eabc6e2b2f24e4f9c85",
+          "reason": "The 50-digit text export of an earlier unfiled certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/sources/squish-s272-source.cert.json",
+          "bytes": 201217,
+          "sha256": "4b34e44c02a25f1a7149024a7ca0f0da2dbcf677ebdbae00b9fc2767b718c04f",
+          "reason": "An earlier unfiled SQUISH certificate that pieces were taken from, in the same format; not offered as a record. No licence in the tree; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/sources/squish-s272-source.cert.txt",
+          "bytes": 50891,
+          "sha256": "38d607ec95c47e2a59ff6b9dd6234bf49a09e6cf8a3044545d93bf70727b1aa6",
+          "reason": "The 50-digit text export of an earlier unfiled certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/sources/squish-s305-source.cert.json",
+          "bytes": 223631,
+          "sha256": "cb28ee4bc8b7f55af89898bb8d168ef395ac13144590abc0fc44cad783a1c405",
+          "reason": "An earlier unfiled SQUISH certificate that pieces were taken from, in the same format; not offered as a record. No licence in the tree; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/sources/squish-s305-source.cert.txt",
+          "bytes": 57103,
+          "sha256": "3c626ff5f5e0da783159e91a32611ff2214a1f3d6a2b9ce4411ef9bb12fe4863",
+          "reason": "The 50-digit text export of an earlier unfiled certificate. No licence; pinned by digest only."
+        },
+        {
+          "path": "squish-submission-2026-10-11/summary.csv",
+          "bytes": 5545,
+          "sha256": "cc28c820409b5f5e77ca57b39534e9db7a5b9659bd617e905d929aab74d1a7c5",
+          "reason": "The request's table: each side to 40 digits and as an exact fraction, the comparison bound and its source, and the pieces each packing was composed from. No licence; pinned by digest only."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and neither README states reuse terms. Derived-only custody under the known-best retention policy, as for the earlier SQUISH packets: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source credits Nate Chaoweeraprasit, using SQUISH, and the packings its pieces came from, and discloses Claude Opus 5.5 assistance under his direction.",
+      "claims": [
+        "Issue #500 reports exact rational certificates, one per count, for nine packings at n = 176, 181, 238, 239, 270, 271, 272, 304 and 305, found by SQUISH's Mondrian composition; at 238 and 239 they are smaller packings than SQUISH's #401 packings as refined by Siddharth Gupta, and at 270 and 305 than SQUISH's #481 packings. Each is squish-submission-2026-10-11/nNNN/nNNN.cert.json with box [0, S]^2 and exact side s_exact; summary.csv repeats each exact fraction.",
+        "s(176) <= 305005022674381157367132529416905207296020948646520876053762749858683599318120744/22081242074898135703849455266036121393870562834861102970956326327326447327968587, which rounds up to 13.8128562532770564.",
+        "s(181) <= 249935253501271447722872166122379040683260708184410574609224560771762048914945913/17915453134884420632048333509167003378124582375369499899268894615896769573805255, which rounds up to 13.9508195310229241.",
+        "s(238) <= 516829548917904437965878091074886828293320996185960477809932175908043454736320288/32455795222015655007007970530566514770773816146192500722754413705465356352461141, which rounds up to 15.9241067853214947.",
+        "s(239) <= 957883664741088666359826291012097714608415772761965190010564315177693226164065987/60061263979374471914223634546066156202761470614164034734590750736057272204798672, which rounds up to 15.9484433273005000.",
+        "s(270) <= 761203984658924994781689956746506132479479002945859948235062760911587068049389066/44966630820689093059794938239713705461989197412012889888820554168494459778549053, which rounds up to 16.9281969933290166.",
+        "s(271) <= 226641509159806817533826968807522186618590497703207479506050881660303454046913630/13371877327550822127276902291903146156943895843133007855104572641371568124309293, which rounds up to 16.9491166878150100.",
+        "s(272) <= 1114257766245565718930315998681473968716597475579279287292886911189991499936935381/65677527145799837468063782221943718992249135546143429464936478230690701220023471, which rounds up to 16.9655864748376712.",
+        "s(304) <= 510485576549308947359639122176771480874060688471611521000826585202734096682803420/28471575075230807279259985772792709540176911602103069986239820873572704667056489, which rounds up to 17.9296570421708801.",
+        "s(305) <= 176574386584524522718242075735181894343653439251445905894414633471908824717084407/9836714596766635588546138051753839920746733217534271639970138607199828771763358, which rounds up to 17.9505448539256365.",
+        "The five certificates in sources/ (two of n = 154, and n = 240, 272 and 305, rounding up to 12.9292934240939391, 12.9305839972855079, 15.9739500348208213, 16.9655871623998319 and 17.9508590931679247) are earlier unfiled SQUISH packings that pieces were taken from; the source does not offer them as records. The 272 is the filed 272 before its squeeze, and the 305 the one the filed 305 supersedes.",
+        "The source reports that SQUISH's exact Fraction checker and David Ellsworth's check_packing.py at epsilon 1e-50 accept all nine and the sources/ certificates, that each certificate was drawn from a 60-digit contact solution with clearance 1e-32, that an hour of nearby search and a deep squeeze moved none by more than 7e-07, and that no KKT, interval, local-optimality, closed-form or optimality evidence is given. These are author reports."
+      ]
+    }
+  ]
+}

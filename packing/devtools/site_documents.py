@@ -209,6 +209,19 @@ _MANUAL_CONTENTS = re.compile(
 )
 
 
+# A GitHub alert's marker, `> [!IMPORTANT]`, alone on the first line of a quote.
+_ALERT_MARKER = re.compile(
+    r"^>[ \t]*\[!(?:NOTE|TIP|IMPORTANT|WARNING|CAUTION)\][ \t]*\n", re.MULTILINE
+)
+
+
+def without_alert_markers(markdown: str) -> str:
+    """The document with each GitHub alert's marker line dropped. GitHub draws the quote
+    under it as a callout box; kpress has no such syntax and would print the marker, so
+    on the site the alert is the plain quote that follows it."""
+    return _ALERT_MARKER.sub("", markdown)
+
+
 def without_manual_contents(markdown: str) -> str:
     """The document without its hand-written contents list. On the site the contents
     rail lists the headings, and the list would repeat as the rail's first entry."""
@@ -403,7 +416,9 @@ def render_document(
         aliases=record_aliases(tree),
     )
     return render_overview.kpress_page(
-        without_manual_contents(document.source.read_text(encoding="utf-8")),
+        without_alert_markers(
+            without_manual_contents(document.source.read_text(encoding="utf-8"))
+        ),
         name=document.name,
         current=document.current,
         title=document.title,

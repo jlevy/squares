@@ -521,13 +521,13 @@ The boundary is enforced, never curated.
 A hand-maintained list of slow tests rots exactly the way the 499-second docstring
 rotted; the split has to be something the gate computes and can refuse.
 
-## General principles
+## General Principles
 
 `OR-1` through `OR-13` say how a particular thing is done here.
-The three below are different in kind: they are the standing principles those procedures
-answer to, and when a procedure and a principle disagree it is the procedure that is
-wrong. They are stated separately so that a future agent inheriting a rule it finds
-pointless has somewhere to check what the rule was for.
+The principles below govern those procedures; when a procedure and a principle disagree,
+it is the procedure that is wrong.
+They are stated separately so that a future agent inheriting a rule it finds pointless
+has somewhere to check what the rule was for.
 
 ### OR-14: A development cycle is never artificially slow
 

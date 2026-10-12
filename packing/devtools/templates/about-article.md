@@ -2,8 +2,8 @@
 
 Work on the square packing problem has exploded in the summer of 2026 thanks to
 AI-powered research efforts.
-This Squares Project was begun by [Joshua Levy](https://x.com/ojoshe) in August 2026
-with some initial explorations that obtained
+[Joshua Levy](https://x.com/ojoshe) began the Squares Project in August 2026 with
+initial explorations that produced
 [new lower bounds](papers/n11-lower-bounds-explainer.html) for $n = 11, 17, 18, 19, 20$
 and other low values.
 
@@ -17,24 +17,23 @@ Now several others have obtained results building on this work, including:
   [eleven squares](cases/11.html).
 - Independently, [Evan Daniel](https://x.com/evanbd) has proved the optimality of
   [an infinite family](results.html#t-064), $s(k^2 - 3) = k$ for every $k \ge 6$, along
-  with exact values at [21](cases/21.html), [32](cases/32.html) and [45](cases/45.html)
-  squares.
+  with exact values at [21](cases/21.html), [32](cases/32.html), [45](cases/45.html) and
+  [60](cases/60.html) squares.
+- As of 11 October 2026, over 140 other new results are tabulated on the
+  [Results page](results.html).
 
 This project now independently tabulates all known new results and does
 [AI-assisted verification](results.html#verification-ladders) of the proofs and
 certificates behind them, to encourage open collaboration on open questions and
 formalizations of current proofs.
 
-<h1 id="contribute-your-results" class="site-title">Contribute Your Results!</h1>
+<h1 id="report-your-results" class="site-title">Report Your Results!<a id="contribute-your-results"></a></h1>
 
-If you have new results or know of newer results, please
-[file an issue]({{NEW_ISSUE_URL}}) to report them, and we will gladly incorporate them
-and cite your work.
+{{REPORT_RESULTS}}
 
-We also have a group chat.
-Contact [ojoshe](https://x.com/ojoshe) if you wish to join.
-
-<!-- The introductory and contribution text above is the owner's words of 2026-10-03 (think-a7oa), each
+<!-- The introductory text above is the owner's words of 2026-10-03 (think-a7oa), and the
+     invitation to report results theirs of 2026-10-11, shared with the overview
+     (`report-results.md`); each
      fact checked against the record: the project's first packing work is of
      2026-08-22; its own lower bounds are at
      n = 11, 12 and 17 to 21 (T-001 to T-034); the explainer the link names is n = 11's,
@@ -47,7 +46,8 @@ Contact [ojoshe](https://x.com/ojoshe) if you wish to join.
      same way: s(k^2 - 3) = k for every k >= 6 is T-064, and s(21) = 5, s(32) = 6 and
      s(45) = 7 are T-052, T-051 and T-053, all four credited to Daniel after Burns,
      Massaccesi and all at V3/C3, T-064 by the full replay of the source's Valid7
-     checker and the Lean reduction built here. The bibliography files their sources as
+     checker and the Lean reduction built here. On 2026-10-11 (think-knxg) s(60) = 8
+     joined the list: T-062, credited and rated the same. The bibliography files their sources as
      independent of this project, so the contributor list explicitly labels Daniel's
      results independent; it gives no significance score, since only n = 11's results
      are S5 and these are S4. "AI-assisted

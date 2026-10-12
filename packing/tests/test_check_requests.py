@@ -29,6 +29,8 @@ from devtools.check_requests import (
 
 Record = dict[str, Any]
 URL = "https://github.com/owner/repo/issues/7#issuecomment-{}"
+#: A label as GitHub's REST API returns it on an issue.
+INTAKE = {"id": 1, "name": "intake", "color": "0e8a16"}
 
 
 def result_entry(
@@ -200,6 +202,14 @@ def test_the_live_record_has_one_entry_an_issue_and_names_its_answer_bead() -> N
         ),
         (lambda r: r["issues"][0].update(state="closed"), "closed"),
         (lambda r: r["issues"][0].update(answer_bead="other-1234"), "answer_bead"),
+        (
+            lambda r: r["issues"][0].update(intake=True),
+            'issues/0: {"required":["intake"]} is not allowed',
+        ),
+        (
+            lambda r: r["issues"][0].update(kind="other", intake=False),
+            "issues/0/intake: true was expected",
+        ),
     ],
 )
 def test_the_check_refuses_an_unknown_id_a_misplaced_reply_and_a_broken_schema(
@@ -306,7 +316,104 @@ def test_a_moved_rung_a_renumbered_id_and_an_unnamed_entry_are_each_due() -> Non
     assert any("named T-001 as T-058" in reason for reason in reasons)
     assert any("stated T-001 at V4/C4; it is now V3/C3" in reason for reason in reasons)
     acknowledged = due(issue(replies=[reply(1, reported=[{"result": "bound"}])]))
-    assert acknowledged == ["bound: T-001 at V3/C3: confirmed since the reply of 2026-10-02"]
+    assert acknowledged == ["bound: T-001 at V3/C3: confirmed, and no reply has named it"]
+
+
+def test_each_entry_is_held_to_the_last_reply_that_named_it() -> None:
+    """The rule `campaign/result-import.md` states: an entry is due when it has moved
+    since the last reply that spoke of it, not since the last reply that spoke of its
+    result. On 12 October the final comments on eleven issues named each register entry
+    and its rungs but not the two evidence ids that day's confirmations had named at the
+    status they still hold, and read result by result each id made a reply due on a
+    closed issue. An entry no reply has named, as #238's evidence was after its final
+    reply of 3 October, is still due, and so is one that moved after it was named."""
+    mapped = {
+        "key": "bound",
+        "claim": "s(9) >= 3",
+        "register": ["T-001"],
+        "evidence": ["E-report", "E-replay"],
+    }
+    register_entry = {
+        "result": "bound",
+        "id": "T-001",
+        "verification": "V3",
+        "confirmation": "C3",
+        "status": "confirmed",
+    }
+
+    def confirmation(replay_status: str) -> Record:
+        return reply(
+            1,
+            "2026-10-02",
+            kind="confirmation",
+            reported=[
+                register_entry,
+                {"result": "bound", "id": "E-report", "status": "recorded"},
+                {"result": "bound", "id": "E-replay", "status": replay_status},
+            ],
+        )
+
+    final = reply(2, "2026-10-03", kind="final", reported=[register_entry])
+    acknowledged = reply(3, "2026-10-04", kind="other", reported=[{"result": "bound"}])
+    held = issue(results=[mapped], replies=[confirmation("confirmed"), final])
+    assert due(held) == []
+    assert due(issue(results=[mapped], replies=[*held["replies"], acknowledged])) == []
+    assert (
+        check_requests.corrections(held, check_requests.issue_state(held, REGISTER).results)
+        == []
+    )
+
+    moved = issue(results=[mapped], replies=[confirmation("reviewed"), final])
+    assert due(moved) == [
+        "bound: the reply of 2026-10-02 stated E-replay at reviewed; it is now confirmed"
+    ]
+    text = check_requests.draft(moved, REGISTER, "owner/repo")
+    assert (
+        "- The reply of 2026-10-02 gave E-replay as reviewed; it now reads confirmed." in text
+    )
+
+    never = issue(results=[mapped], replies=[final])
+    assert due(never) == [
+        "bound: E-report (reported, external): open, and no reply has named it",
+        "bound: E-replay (verified, replayed-here): confirmed, and no reply has named it",
+    ]
+
+    # The last naming holds, not the first: an entry named at an older state and later
+    # at its current one is not due.
+    early = {**register_entry, "verification": "V2", "confirmation": "C2", "status": "recorded"}
+    renamed = issue(
+        replies=[
+            reply(1, "2026-10-02", reported=[early]),
+            reply(2, "2026-10-03", reported=[register_entry]),
+            reply(3, "2026-10-04", reported=[{"result": "bound"}]),
+        ]
+    )
+    assert due(renamed) == [], "the last naming holds, not the first"
+
+    # An entry is held under its result: naming it under another result that maps the
+    # same id does not settle it here.
+    both = [
+        {"key": "bound", "claim": "s(9) >= 3", "register": ["T-001"]},
+        {"key": "other", "claim": "s(9) <= 3", "register": ["T-001"]},
+    ]
+    elsewhere = issue(
+        results=both,
+        replies=[
+            reply(1, reported=[{**register_entry, "result": "other"}]),
+            reply(2, "2026-10-03", reported=[{"result": "bound"}]),
+        ],
+    )
+    assert due(elsewhere) == ["bound: T-001 at V3/C3: confirmed, and no reply has named it"]
+
+    # A bare naming states nothing to compare, so nothing later overtakes it, and a later
+    # mention of the result does not re-raise it (#541 tracks requiring the fields).
+    bare = issue(
+        replies=[
+            reply(1, "2026-10-02", reported=[{"result": "bound", "id": "T-001"}]),
+            reply(2, "2026-10-03", reported=[{"result": "bound"}]),
+        ]
+    )
+    assert due(bare) == []
 
 
 def test_an_outdated_statement_is_due_until_a_later_reply_corrects_it() -> None:
@@ -597,11 +704,14 @@ def test_the_draft_refuses_off_main(
     assert check_requests.main(["--draft", "1"]) == 2
 
 
-def comment(number: int, login: str, created: str, body: str = "thanks") -> Record:
+def comment(
+    number: int, login: str, created: str, body: str = "thanks", updated: str | None = None
+) -> Record:
     return {
         "html_url": URL.format(number),
         "user": {"login": login},
         "created_at": created,
+        "updated_at": updated or created,
         "body": body,
     }
 
@@ -614,7 +724,7 @@ def test_the_github_comparison_lists_missing_replies_unread_comments_and_unknown
     )
     live = {
         "repos/owner/repo/issues?state=all&per_page=100": [
-            {"number": 7, "state": "open", "title": "A request"},
+            {"number": 7, "state": "open", "title": "A request", "labels": [INTAKE]},
             {"number": 8, "state": "open", "title": "Another"},
             {"number": 9, "state": "open", "title": "A pull request", "pull_request": {}},
         ],
@@ -631,6 +741,80 @@ def test_the_github_comparison_lists_missing_replies_unread_comments_and_unknown
         "#8 is not in the record: Another",
         f"#7: reply missing from the record: {URL.format(2)} (owner, 2026-10-02)",
         f"#7: reply missing from the record: {URL.format(3)} (agent, 2026-10-02)",
+        f"#7: unread comment {URL.format(4)} (someone, 2026-10-02T12:00:00Z)",
+    ]
+
+
+@pytest.mark.parametrize("kind", ["defect-report", "correction", "other"])
+def test_the_github_comparison_lists_every_issue_reported_for_intake_without_the_label(
+    kind: str,
+) -> None:
+    """An issue that reports a new item for intake carries `intake` on GitHub, open or
+    closed, whatever else it carries: every result report, and an entry of any other
+    kind marked `intake: true`, as #295, #308, #358 and #367 are. An entry of another
+    kind without the mark needs no label, so neither the kind alone nor the mark alone
+    decides it. The label and an edited comment on the same issue are listed apart, each
+    with its own step in the sweep."""
+    recorded = record(
+        issue(number=7),
+        issue(number=8, state="closed", closed="2026-10-03"),
+        issue(number=9, state="closed", closed="2026-10-03"),
+        issue(number=10, kind=kind),
+        issue(number=11, kind=kind, intake=True),
+        issue(number=12, kind=kind, intake=True),
+    )
+    n17 = {"id": 2, "name": "n-17", "color": "5319e7"}
+    live: dict[str, Any] = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {"number": 7, "state": "open", "title": "A request", "labels": [n17]},
+            {"number": 8, "state": "closed", "title": "Closed", "labels": []},
+            {"number": 9, "state": "closed", "title": "Labelled", "labels": [n17, INTAKE]},
+            {"number": 10, "state": "open", "title": "Unmarked", "labels": []},
+            {"number": 11, "state": "open", "title": "Marked", "labels": [n17]},
+            {"number": 12, "state": "open", "title": "Marked, labelled", "labels": [INTAKE]},
+        ],
+        **{
+            f"repos/owner/repo/issues/{n}/comments?per_page=100": [] for n in (8, 9, 10, 11, 12)
+        },
+        "repos/owner/repo/issues/7/comments?per_page=100": [
+            comment(1, "someone", "2026-09-30T12:00:00Z", updated="2026-10-02T09:00:00Z"),
+        ],
+    }
+    assert check_requests.problems(recorded, REGISTER) == []
+    edited = "(someone, 2026-09-30T12:00:00Z, edited 2026-10-02T09:00:00Z)"
+    assert check_requests.compare_github(recorded, live.__getitem__) == [
+        "#7 reports an item for intake without the `intake` label",
+        f"#7: unread comment {URL.format(1)} {edited}",
+        "#8 reports an item for intake without the `intake` label",
+        "#11 reports an item for intake without the `intake` label",
+    ]
+
+
+def test_a_comment_read_and_then_edited_after_read_through_is_listed_as_unread() -> None:
+    """wand125's #485 review was read at its creation, then edited to link a new mode.
+
+    `read_through` holds a creation time, so an edit to a comment it already covers
+    arrived unseen: the f30cc2c link reached the record on 12 October only because the
+    comment was read again by hand. An edit at or before `read_through`, an edit to a
+    reply, and an edit to a comment already listed as unread add nothing.
+    """
+    recorded = record(
+        issue(replies=[reply(1, "2026-10-01")], read_through="2026-10-01T12:00:00Z")
+    )
+    live = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {"number": 7, "state": "open", "title": "A request", "labels": [INTAKE]},
+        ],
+        "repos/owner/repo/issues/7/comments?per_page=100": [
+            comment(1, "owner", "2026-10-01T10:00:00Z", updated="2026-10-03T08:00:00Z"),
+            comment(2, "someone", "2026-09-30T12:00:00Z", updated="2026-10-01T11:00:00Z"),
+            comment(3, "reviewer", "2026-10-01T12:00:00Z", updated="2026-10-02T09:00:00Z"),
+            comment(4, "someone", "2026-10-02T12:00:00Z", updated="2026-10-02T13:00:00Z"),
+        ],
+    }
+    edited = "(reviewer, 2026-10-01T12:00:00Z, edited 2026-10-02T09:00:00Z)"
+    assert check_requests.compare_github(recorded, live.__getitem__) == [
+        f"#7: unread comment {URL.format(3)} {edited}",
         f"#7: unread comment {URL.format(4)} (someone, 2026-10-02T12:00:00Z)",
     ]
 

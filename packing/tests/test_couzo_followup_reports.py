@@ -12,10 +12,12 @@ from typing import Any
 
 import pytest
 
+from devtools import adopt_houses
 from devtools import couzo_followup_reports as reports
 from devtools import couzo_refinement_reports as earlier
 from devtools import evand_arrangement_reports as kernel
-from sqpack.yamlio import load_yaml
+from devtools import upper_bound_houses as adopted
+from sqpack.yamlio import load_yaml, safe_load
 
 
 @pytest.fixture
@@ -81,21 +83,32 @@ def test_every_new_side_is_strictly_below_its_frozen_comparisons() -> None:
 
 
 def test_frozen_comparisons_are_the_retained_houses() -> None:
-    """Each prior is its house's retained certificate, and the live record while unadopted."""
+    """Each prior is its house's retained certificate, and the record it was frozen against.
+
+    That record is the live one while no adoption has moved the count. The house adoption
+    of 11 October 2026 (think-fvz4) gave 175 and 270 to T-140 and kept each moved record
+    as it stood before in its prior state, which is what these comparisons were frozen
+    against; `upper_bound_reports` refuses to refreeze a comparison once its ceiling moves.
+    """
     houses = reports.prior_houses()
     cases = {row["n"]: row for row in reports.read_record(reports.sources_path())["cases"]}
     xu = reports.ryxu.read_facts()
+    before = adopt_houses.read_history()
     for n in reports.NUMBERS:
         prior = cases[n]["prior"]
         assert prior == houses[n]
         retained = kernel.read_facts()[n] if n == 270 else xu[n]
         assert Fraction(prior["selected_exact"]) == retained.side
         packing = reports.legacy.case_record(n)
-        if packing["reported_upper_bound"]["source_key"] != reports.SOURCE_KEY:
-            assert prior["selected_source_key"] == packing["reported_upper_bound"]["source_key"]
-            assert prior["selected_exact"] == packing["reported_upper_bound"]["exact_form"]
-            assert prior["verified_exact"] == packing["verified_upper_bound"]["exact_form"]
-            assert prior["verified_evidence"] == packing["verified_upper_bound"]["evidence"]
+        if packing["reported_upper_bound"]["source_key"] == reports.SOURCE_KEY:
+            continue
+        if n in adopted.ADOPTED:
+            assert packing["reported_upper_bound"]["source_key"] == adopted.source_for(n).key
+            packing = safe_load(before[n].split("---\n", 2)[1])["packing"]
+        assert prior["selected_source_key"] == packing["reported_upper_bound"]["source_key"]
+        assert prior["selected_exact"] == packing["reported_upper_bound"]["exact_form"]
+        assert prior["verified_exact"] == packing["verified_upper_bound"]["exact_form"]
+        assert prior["verified_evidence"] == packing["verified_upper_bound"]["evidence"]
 
 
 def test_seven_unchanged_certificates_match_the_issue451_originals() -> None:

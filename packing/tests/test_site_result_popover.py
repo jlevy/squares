@@ -3,15 +3,12 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
-from dataclasses import replace
 from pathlib import Path
 from typing import Any
-from unittest.mock import patch
 
 import pytest
 
 from devtools import (
-    overview_data,
     overview_sections,
     preview_site,
     render_overview,
@@ -74,8 +71,11 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         "index.html",
     )
     start = start._replace(html=start.html.replace("</body>", script + "</body>"))
-    with patch.object(overview_data, "load", return_value=replace(overview, results=[result])):
-        canonical = render_overview.result_fragments()[0]
+    # Only this result's page is rendered, but in the complete register's context, as
+    # publication renders it: since the house adoption of 11 October 2026 (think-fvz4)
+    # T-115's page links the results that took its counts, and a one-result register
+    # would hold those links to rows it does not carry.
+    [canonical] = render_overview.iter_result_fragments(result_ids=frozenset({RESULT}))
     reader = site_documents.render_document(
         document, tree=repo_links.repository_tree(), report=site_documents.LinkReport()
     )

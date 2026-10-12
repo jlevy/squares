@@ -1673,8 +1673,8 @@ PAPERS: tuple[Paper, ...] = (
         description=(
             "An introduction for anyone new to the problem: what the objects are, why the "
             "approach is shaped the way it is, and what the research has and has not "
-            "established. Each outside idea it uses, from linear programming to algebraic "
-            "number fields, is introduced where it is first needed."
+            "established. It introduces linear programming and algebraic number fields "
+            "and links further reading."
         ),
     ),
 )
@@ -1898,6 +1898,30 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         (
             "Decimal packings at 48 counts; exact witnesses derived here prove the printed"
             " sides at the 30 within the corpus (T-138)."
+        ),
+    ),
+    (
+        "https://github.com/BuddenPing/square-packing-certificates",
+        "PingYou Ltd",
+        (
+            "Exact rational packings of 207 and 153 squares built from Ryan Xu's packing of"
+            " 70, both replayed here (T-147, T-148)."
+        ),
+    ),
+    (
+        "https://github.com/dostashev/square-packing",
+        "Daniil Ostashev",
+        (
+            "New packings of 155, 156 and 211 squares with exact certificates and a GMP"
+            " checker; the three are replayed here (T-149)."
+        ),
+    ),
+    (
+        "https://github.com/RobertBarnettProjects/square-packing-research",
+        "Robert Barnett",
+        (
+            "Exact rational refinements of Ryan Xu's packings of 146 and 261 squares,"
+            " replayed here (T-150)."
         ),
     ),
     (

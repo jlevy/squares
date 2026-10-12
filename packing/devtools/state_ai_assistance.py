@@ -168,6 +168,19 @@ STATEMENTS: tuple[Statement, ...] = (
         ),
         marker="AI assistance was used for most of",
     ),
+    Statement(
+        # Neither pinned release states it; asked on the n207 issue which of its two
+        # accounts stands, the author answered there for both releases.
+        keys=frozenset(
+            {"[PingYou n207 certificate 2026-10-11]", "[PingYou n153 certificate 2026-10-11]"}
+        ),
+        anchor=re.compile(r"PingYou"),
+        sentence=(
+            "On jlevy/squares#503 the author wrote: “Both solutions were AI assisted by ‘PY’, "
+            "an unreleased agentic AI offering by PingYou Ltd.”"
+        ),
+        marker="AI assisted by",
+    ),
 )
 
 

@@ -19,6 +19,10 @@ from sqpack.yamlio import load_yaml
 #: The later sides the 2d32a6e text files print, and the ffd900d sides they beat.
 LATER = {375: "19.907024692022954", 378: "19.946861170999796"}
 FFD900D = {375: "19.907052698737502", 378: "19.947426312032292"}
+#: Issue 506's exact certificates (T-152's release), whose beyond-horizon rows superseded
+#: the 2d32a6e reports at both counts on 12 October 2026, at the prints the issue gives.
+ISSUE_506 = "couzo-certificates-2026-10-11"
+CERTIFIED = {375: "19.906335145009", 378: "19.942541777355"}
 
 
 def record() -> dict[str, Any]:
@@ -63,7 +67,11 @@ def test_the_retained_packet_rebuilds_both_later_reports_byte_for_byte() -> None
 
 
 def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
-    """The earlier packet still prints its sides; the register supersedes, never rewrites."""
+    """The earlier packet still prints its sides; the register supersedes, never rewrites.
+
+    Each report keeps its own row at its own print when a later one beats it: ffd900d's by
+    2d32a6e's on 8 October, and 2d32a6e's by issue 506's certificates on 12 October.
+    """
     claims = earlier.read_json(earlier.PACKET / "acquisition/sources.json")
     printed = {row["n"]: row["side"] for row in claims["sources"][0]["cases"]}
     assert {n: printed[n] for n in updates.COUNTS} == FFD900D
@@ -74,18 +82,25 @@ def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
         if row["n"] in updates.COUNTS
     }
     assert set(rows) == {
-        (n, source) for n in updates.COUNTS for source in (earlier.SOURCE_ID, updates.SOURCE_ID)
+        (n, source)
+        for n in updates.COUNTS
+        for source in (earlier.SOURCE_ID, updates.SOURCE_ID, ISSUE_506)
     }
     for n in updates.COUNTS:
-        historical, current = rows[n, earlier.SOURCE_ID], rows[n, updates.SOURCE_ID]
-        assert historical["value"] == FFD900D[n]
-        assert historical["disposition"] == "superseded"
-        assert historical["superseded_by"] == updates.SOURCE_ID
-        assert current["value"] == LATER[n]
+        first, later = rows[n, earlier.SOURCE_ID], rows[n, updates.SOURCE_ID]
+        assert first["value"] == FFD900D[n]
+        assert first["disposition"] == "superseded"
+        assert first["superseded_by"] == updates.SOURCE_ID
+        assert later["value"] == LATER[n]
+        assert later["disposition"] == "superseded"
+        assert later["superseded_by"] == ISSUE_506
+        current = rows[n, ISSUE_506]
+        assert current["value"] == CERTIFIED[n]
         assert current["disposition"] == "tracked-outside-case-corpus"
+        assert Fraction(CERTIFIED[n]) < Fraction(LATER[n]) < Fraction(FFD900D[n])
     standing = check_source_coverage.current_beyond_horizon(coverage)
     assert {n: standing[n]["source_id"] for n in updates.COUNTS} == dict.fromkeys(
-        updates.COUNTS, updates.SOURCE_ID
+        updates.COUNTS, ISSUE_506
     )
     source = check_source_coverage.source_by_id(coverage, updates.SOURCE_ID)
     assert check_source_coverage.load_claims(updates.ROOT / source["claims_record"]) == LATER

@@ -192,7 +192,7 @@ def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
     assert '<h1 id="every-result">' in results
     assert not ROW.findall(page)
     assert 'id="every-result"' not in page
-    recent = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    recent = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[0]
     # The actions lead to the ratings account and complete table.
     attributes = overview_sections.all_results_link_attributes(site_renders.overview())
     assert (
@@ -266,13 +266,13 @@ def test_the_page_fetches_only_the_shared_assets(page: str) -> None:
             render_overview.assert_fetches_only_assets("index.html", moved)
 
 
-def test_the_bar_leads_with_case_11_beside_the_name(page: str) -> None:
-    """The bar's home link carries case 11, the tab's icon, in the bar's own ink."""
+def test_the_bar_leads_with_the_full_and_compact_names(page: str) -> None:
+    """One home link carries both responsive labels with a stable accessible name."""
     link = page.split('<a class="site-name"', 1)[1].split("</a>", 1)[0]
-    assert '<svg class="site-logo" ' in link
-    assert 'aria-hidden="true"' in link.split("<svg", 1)[1].split(">", 1)[0]
-    assert '<span class="site-name-text">Square Packing</span>' in link
-    assert render_overview.site_logo() in link
+    assert '<span class="site-name-text site-name-full">The Squares Project</span>' in link
+    assert '<span class="site-name-text site-name-short">Squares</span>' in link
+    assert 'aria-label="The Squares Project home"' in link
+    assert "<svg" not in link
 
 
 def test_the_site_icons_have_stable_same_origin_addresses(page: str) -> None:
@@ -360,12 +360,14 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     assert re.findall(r'<h2 id="([^"]+)"', page) == [
         "the-atlas-of-square-packings",
         "recent-results",
+        "report-your-results",
         "papers",
     ]
     assert re.findall(r'<h[12] id="([^"]+)" class="site-title"', page) == [
         "the-problem",
         "the-atlas-of-square-packings",
         "recent-results",
+        "report-your-results",
         "papers",
         "visuals",
         "squares-project-documentation",
@@ -894,7 +896,8 @@ def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(
         212,
         242,
         274,
-        308,
+        # 308 left the grid for a packet house on 11 October 2026 (think-fvz4).
+        309,
     ]
     first = re.search(
         r'<a\b[^>]* data-atlas-n="1"[^>]* style="([^"]+)"', _atlas_template(atlas_page, "first")
@@ -1058,25 +1061,21 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
             n, units=overview_sections.ATLAS_UNITS, root=frontier.REGULARIZED_RENDERINGS
         ) == frontier.packing_svg(n, units=overview_sections.ATLAS_UNITS):
             identical_thumbnails.add(n)
-    # The exact #432 houses and n155's 337 sub-picometre snaps have unchanged
-    # tile-scale shades; 400-unit rounding hides moves visible in the full SVG.
+    # Since the house adoption of 11 October 2026 (think-fvz4), the houses that are
+    # already display-regularized packings (T-146) and Robert Barnett's precision
+    # refinement of Ryan Xu's packing at 261 (T-150) have unchanged tile-scale shades;
+    # 400-unit rounding hides moves visible in the full SVG.
     assert identical_thumbnails == {
-        129,
-        131,
-        261,
         70,
         103,
+        236,
+        258,
+        261,
+        263,
+        269,
         295,
-        105,
-        267,
-        108,
-        155,
-        146,
-        84,
-        86,
-        123,
-        126,
-        127,
+        302,
+        303,
     }
     assert "data-atlas-layer" not in tiles
 
@@ -2823,11 +2822,7 @@ def test_every_site_page_carries_the_same_bar(
     else:
         # A page in a directory of its own, the case records', reaches the root from it.
         page, root = rendered(name), "../" * name.count("/")
-    partial = (
-        render_overview.SITE_NAV.read_text(encoding="utf-8")
-        .replace("{{ROOT}}", "")
-        .replace("{{LOGO}}", render_overview.site_logo())
-    )
+    partial = render_overview.SITE_NAV.read_text(encoding="utf-8").replace("{{ROOT}}", "")
     assert _the_bar(page, root=root) == SITE_NAV_BLOCK.findall(partial)[0]
 
 
@@ -2886,21 +2881,18 @@ def test_the_bars_type_is_set_from_the_papers_scale() -> None:
 
 
 def test_the_bars_name_is_aligned_by_its_text() -> None:
-    """The bar aligns its items by their baselines, and the name's row, a mark and the
-    text, takes its baseline from the text, not from the mark that leads it, so the name
-    stands on the links' baseline at any size of either. Every item is set on one line,
+    """The bar aligns its labels by their text baselines. Every item is set on one line,
     a length, so the larger name is no taller than a link. `test_site_wide_blocks`
     measures the baselines in a browser."""
     css = render_overview.SITE_NAV_CSS.read_text(encoding="utf-8")
     inner = css[css.index("\n.site-nav-inner {") :]
     assert "  align-items: baseline;\n" in inner[: inner.index("}")]
-    assert ".site-nav .site-name-text {\n  align-self: baseline;\n}" in css
     assert "  --site-nav-line: calc(var(--site-nav-font-size) * 1.43);\n" in css
     links = css[css.index("\n.site-nav a {") :]
     assert "  line-height: var(--site-nav-line);\n" in links[: links.index("}")]
-    name = css[css.index("\n.site-nav .site-name {\n  align-items: center;") :]
+    name = css[css.index("\n.site-nav .site-name {") :]
     name = name[: name.index("}")]
-    assert "display: inline-flex;" in name
+    assert "white-space: nowrap;" in name
     for nudge in ("translate", "position: relative", "margin-block", "vertical-align"):
         assert nudge not in name, nudge
 
@@ -3625,7 +3617,9 @@ def test_recent_results_is_one_table_not_cards_or_a_list(
     result pages; status links name superseding results. Rows contain no lists or
     cards. Its only popovers are its rows' own. What a row's popover
     holds is the popover's own business, so the section is read without them."""
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
+        0
+    ]
     recent = _recent_table(page)
     assert recent in section
     assert set(re.findall(r'<div class="(site-popover(?: [^"]*)?)"', section)) == {
@@ -3684,7 +3678,9 @@ def test_the_recent_table_contains_the_advertised_static_subset(
     expected = _recent_entries(overview)
     assert listed == [result.id.lower() for result in expected]
     assert 0 < len(listed) < len(overview.results)
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
+        0
+    ]
     assert "data-filter=" not in section
     assert 'href="results.html#all-results" data-all-results' in section
     assert "site-recent-scope" not in section
@@ -3881,7 +3877,8 @@ def _template_paragraphs(section: str) -> list[str]:
     return [" ".join(part.split()) for part in prose.split("\n\n") if part.strip()]
 
 
-#: README's `project-intro` block, the owner's words of 2026-10-03 (`think-8lyq`): the
+#: README's `project-intro` block, from the owner's 2026-10-03 text (`think-8lyq`),
+#: with wording reviewed on 2026-10-11. It retains the
 #: question after a colon, the lower bound glossed as a size below which no packing can
 #: exist, and an example of each bound at $n = 29$, the case's current bounds as the
 #: record reports them (the owner, 2026-10-03: "make the examples current"), each
@@ -3899,8 +3896,8 @@ PROBLEM_STATEMENT = (
         "smallest square is written $s(n)$."
     ),
     (
-        "The question of the value of $s(n)$ is simple, but the answer is an open problem "
-        "for most $n$. In many cases, $s(n)$ is known only to lie between an upper bound "
+        "The value of $s(n)$ remains unknown for most $n$. In many cases, $s(n)$ is known "
+        "only to lie between an upper bound "
         "(the size of the enclosing square for the tightest packing ever discovered, such "
         "as $s(29) \\le 5.934$) and a lower bound (a size below which it is proved that no "
         "packing can exist, such as the reported $s(29) \\ge 5.81$)."
@@ -3950,7 +3947,9 @@ def test_the_overview_opens_with_the_owners_two_paragraphs(page: str) -> None:
 def test_recent_major_results_opens_with_preview_then_verification_and_results_actions(
     page: str,
 ) -> None:
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
+        0
+    ]
     assert '<h2 id="recent-results" class="site-title">Recent Major Results</h2>' in page
     assert _recent_prose(page) == ""
     assert "Recent progress, with each result linked to its complete record." not in page
@@ -3976,7 +3975,8 @@ def test_recent_preview_headlines_link_to_their_canonical_result_pages(page: str
         assert f'<a href="result/{result_id}.html">' in headline
 
 
-#: The site's own statement, the owner's words of 2026-10-03 (`think-a7oa`), with the
+#: The site's own statement, from the owner's 2026-10-03 text (`think-a7oa`), with
+#: wording reviewed on 2026-10-11 and the
 #: name the owner left blank filled with the source's handle, Queuingtheorydotcom
 #: (T-060 is credited to Ahmed in the register),
 #: the project's start put as the record has it (its explorations obtained the lower
@@ -3991,8 +3991,8 @@ def test_recent_preview_headlines_link_to_their_canonical_result_pages(page: str
 SITE_STATEMENT = (
     (
         "Work on the square packing problem has exploded in the summer of 2026 thanks to "
-        "AI-powered research efforts. This Squares Project was begun by Joshua Levy in "
-        "August 2026 with some initial explorations that obtained new lower bounds for "
+        "AI-powered research efforts. Joshua Levy began the Squares Project in "
+        "August 2026 with initial explorations that produced new lower bounds for "
         "$n = 11, 17, 18, 19, 20$ and other low values."
     ),
     (
@@ -4014,25 +4014,49 @@ SITE_STATEMENT = (
     ),
     (
         "If you have new results or know of newer results, please file an issue to "
-        "report them, and we will gladly incorporate them and cite your work."
+        "report them, including what name you wish to be used for credits. Agents will "
+        "validate, tabulate, and cite your work once it is a confirmed record."
     ),
     "We also have a group chat. Contact ojoshe if you wish to join.",
 )
 
 
+def test_the_invitation_to_report_results_is_one_text_on_about_and_the_homepage(
+    page: str, about: str
+) -> None:
+    """About and the overview carry the same invitation, after the overview's recent
+    results, ending in a Report a Result button that opens the repository's result
+    form directly."""
+    about_section = about.split('id="report-your-results"', 1)[1].split("<h1", 1)[0]
+    home_section = page.split('id="report-your-results"', 1)[1].split("<h2", 1)[0]
+    about_body = about_section.split("</h1>", 1)[1].split("<!--", 1)[0].strip()
+    home_body = home_section.split("</h2>", 1)[1].strip()
+    assert about_body == home_body
+    button = re.search(
+        rf'<a class="site-action" href="{re.escape(render_overview.NEW_ISSUE_URL)}"'
+        r"[^>]*>Report a Result",
+        home_body,
+    )
+    assert button is not None
+    assert "what name you wish to be used for credits" in _rendered_text(home_body)
+    assert page.index('id="recent-results"') < page.index('id="report-your-results"')
+    assert page.index('id="report-your-results"') < page.index('id="papers"')
+
+
 def test_the_sites_own_statement_follows_readmes_introduction(about: str, results: str) -> None:
-    """About keeps three contributor bullets with linked names and independent credit.
+    """About keeps three credited highlights and a linked summary of other results.
     Every named result keeps its source, attribution, and verification claims; the
     contribution invitation retains the owner's two paragraphs."""
     own = about.split("</h1>", 1)[1].split('<h1 id="squares-project-documentation"', 1)[0]
     narrative, contribution = own.split(
-        '<h1 id="contribute-your-results" class="site-title">Contribute Your Results!</h1>',
+        '<h1 id="report-your-results" class="site-title">Report Your Results!'
+        '<a id="contribute-your-results"></a></h1>',
         1,
     )
     assert len(re.findall(r"<p>", narrative)) == 3
     assert len(re.findall(r"<p>", contribution)) == 2
     items = re.findall(r"<li>(.*?)</li>", narrative, re.DOTALL)
-    assert len(items) == 3
+    assert len(items) == 4
     narrative_paragraphs = re.findall(r"<p>(.*?)</p>", narrative, re.DOTALL)
     assert _rendered_text(narrative_paragraphs[0]) == _markdown_text(SITE_STATEMENT[0])
     assert _rendered_text(narrative_paragraphs[-1]) == _markdown_text(SITE_STATEMENT[3])
@@ -4042,8 +4066,9 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         _markdown_text(
             "Independently, Evan Daniel has proved the optimality of an infinite family, "
             r"$s(k^2 - 3) = k$ for every $k \ge 6$, along with exact values at "
-            "21, 32 and 45 squares."
+            "21, 32, 45 and 60 squares."
         ),
+        "As of 11 October 2026, over 140 other new results are tabulated on the Results page.",
     ]
     text = _rendered_text(narrative)
     for claim in (
@@ -4068,7 +4093,8 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         ("cases/11.html", "eleven squares"),
         ("results.html#t-064", "an infinite family"),
         ("results.html#verification-ladders", "AI-assisted verification"),
-        *((f"cases/{n}.html", str(n)) for n in (21, 32, 45)),
+        ("results.html", "Results page"),
+        *((f"cases/{n}.html", str(n)) for n in (21, 32, 45, 60)),
     ):
         assert re.search(
             rf'<a href="{re.escape(address)}"[^>]*>{re.escape(label)}</a>', narrative
@@ -4085,7 +4111,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     assert by_id["T-060"].group == groups["builds-on-project"]
     assert by_id["T-037"].credit.startswith("Kleddamag")
     assert by_id["T-037"].group == groups["builds-on-project"]
-    exact = {"T-064": None, "T-052": [21], "T-051": [32], "T-053": [45]}
+    exact = {"T-064": None, "T-052": [21], "T-051": [32], "T-053": [45], "T-062": [60]}
     for result, n_values in exact.items():
         record = by_id[result].record
         assert by_id[result].credit.startswith("Daniel"), result
@@ -4100,7 +4126,9 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         assert score not in " ".join(SITE_STATEMENT), score
     assert "all proofs" not in " ".join(SITE_STATEMENT)
     assert 'id="verification-ladders"' not in about
-    assert render_overview.NEW_ISSUE_URL == "https://github.com/jlevy/squares/issues/new"
+    assert render_overview.NEW_ISSUE_URL == (
+        "https://github.com/jlevy/squares/issues/new?template=result-registration.md"
+    )
     assert re.search(
         rf'<a href="{re.escape(render_overview.NEW_ISSUE_URL)}"[^>]*>file an issue</a>',
         paragraphs[0],
@@ -4125,7 +4153,7 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert about.count(heading) == 1
     assert re.findall(r'<h1\b[^>]*\bid="([^"]+)"', about) == [
         "the-squares-project",
-        "contribute-your-results",
+        "report-your-results",
         "squares-project-documentation",
     ]
     assert all('class="site-title"' in tag for tag in re.findall(r"<h1\b[^>]*>", about))
@@ -4366,7 +4394,7 @@ def test_the_papers_page_says_what_each_paper_is(papers: str) -> None:
         "why the approach is shaped the way it is",
         "what the research has and has not established",
         "linear programming",
-        "is first needed",
+        "algebraic number fields",
     ):
         assert phrase in card_text(note), phrase
         assert phrase in opening, phrase
@@ -5012,26 +5040,23 @@ def test_every_table_stands_one_shared_space_from_the_text_around_it() -> None:
 
 
 def test_the_icon_frame_is_one_pixel_at_icon_size() -> None:
-    """The logo and the favicon draw case 11's container as one whole pixel at the size
-    each is shown, with its outer edge on the drawing's edge: (200 + w) / px = w."""
+    """The favicon draws case 11's container as one whole pixel at its display size,
+    with its outer edge on the drawing's edge: (200 + w) / px = w."""
     from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
 
-    for px in (render_overview.SITE_LOGO_PX, render_overview.FAVICON_PX):
-        svg = packing_svg(11, units=200, frame_px=px)
-        view = re.search(r'viewBox="([^"]+)"', svg)
-        stroke = re.search(r'<rect [^>]*stroke-width="([\d.]+)"', svg)
-        assert view is not None
-        assert stroke is not None
-        box = [float(v) for v in view.group(1).split()]
-        width = float(stroke.group(1))
-        assert box[2] / px == pytest.approx(width, abs=1e-3)
-        assert box[0] == pytest.approx(-width / 2, abs=1e-3)
-        assert 'shape-rendering="crispEdges"' in svg
-        lines = re.search(r'<g stroke="[^"]+" stroke-width="([\d.]+)"', svg)
-        assert lines is not None
-        assert float(lines.group(1)) == pytest.approx(width / 2, abs=1e-3)
-    assert "block-size: 18px;" in render_overview.SITE_NAV_CSS.read_text(encoding="utf-8")
-    assert render_overview.SITE_LOGO_PX == 18
+    svg = packing_svg(11, units=200, frame_px=render_overview.FAVICON_PX)
+    view = re.search(r'viewBox="([^"]+)"', svg)
+    stroke = re.search(r'<rect [^>]*stroke-width="([\d.]+)"', svg)
+    assert view is not None
+    assert stroke is not None
+    box = [float(v) for v in view.group(1).split()]
+    width = float(stroke.group(1))
+    assert box[2] / render_overview.FAVICON_PX == pytest.approx(width, abs=1e-3)
+    assert box[0] == pytest.approx(-width / 2, abs=1e-3)
+    assert 'shape-rendering="crispEdges"' in svg
+    lines = re.search(r'<g stroke="[^"]+" stroke-width="([\d.]+)"', svg)
+    assert lines is not None
+    assert float(lines.group(1)) == pytest.approx(width / 2, abs=1e-3)
 
 
 def test_page_subtitles_share_one_size() -> None:

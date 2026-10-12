@@ -1126,8 +1126,8 @@ def test_a_second_press_mid_move_starts_from_where_the_tiles_are(seen: Readings)
     moving after it, and they settle in the grid exactly, with the focus still on the
     tab pressed and the address the grid's."""
     second = seen["second press"]
-    assert second["moving_before"] > 0
-    assert second["moving_after"] > 0
+    assert second["moving_before"] > 0, second
+    assert second["moving_after"] > 0, second
     # The shared legend changes how many drawings fit in the viewport. The probe
     # checks every visible drawing, and its jump bound must not be vacuous.
     assert second["watched"] > 0

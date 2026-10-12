@@ -14,8 +14,8 @@ shared space under them (`preview_site.tabs_problems`, `templates/paper-design.m
 Section tabs).
 
 It also holds the header's type to the body's, by relation and not by pixel value: a
-link in the bar and a section tab are one step under the prose on the paper's scale and
-no more, and the site's name is no smaller than the prose (`preview_site.type_problems`,
+link in the bar is one step under the prose, section tabs apply the shared button-label
+scale, and the site's name is no smaller than the prose (`preview_site.type_problems`,
 `templates/paper-design.md`, Navigation bar).
 
 And it holds the header's labels to their baselines, measured and not read from a
@@ -73,8 +73,8 @@ OLD_BAR_TYPE = (
     ".site-nav, .site-nav .site-name { font-size: 1rem !important; }"
     " .site-tabs { font-size: 0.9rem !important; }"
 )
-#: The bar's baseline as it was: the name's row aligned by its first item, the mark.
-NAME_ALIGNED_BY_ITS_MARK = ".site-nav .site-name-text { align-self: auto !important; }"
+#: A name displaced above the other links, as a control for the baseline check.
+NAME_ABOVE_LINKS = ".site-nav .site-name { transform: translateY(-4px) !important; }"
 #: The widths the bar is measured at, and how many lines its links may take at each: one
 #: on a desktop and a tablet, two on a phone.
 BAR_WIDTHS = {1280: 1, 768: 1, 390: 2}
@@ -121,10 +121,18 @@ def test_a_block_sized_from_the_window_is_caught(browser: Any, pages: dict[str, 
         page.goto(pages["results.html"].as_uri(), wait_until="load")
         page.add_style_tag(content=FROM_THE_WINDOW)
         plain = page.evaluate(CLIPPED, {"scrollbar": 0})
+        frame = page.locator("article.kpress").bounding_box()
+        assert frame is not None
+        plain_past = (768 - 2 * REM - frame["width"]) / 2
+        page.add_style_tag(content=f"html {{ inline-size: calc(100vw - {SCROLLBAR_PX}px); }}")
         narrowed = page.evaluate(CLIPPED, {"scrollbar": SCROLLBAR_PX})
+        frame = page.locator("article.kpress").bounding_box()
+        assert frame is not None
+        narrowed_past = (768 - 2 * REM - frame["width"]) / 2
     finally:
         page.close()
-    for found, past in ((plain, 16), (narrowed, 16 + SCROLLBAR_PX / 2)):
+    for found, past in ((plain, plain_past), (narrowed, narrowed_past)):
+        assert past > 0
         by_block = {row["block"]: row for row in found}
         for block in ("div.site-table-tools.site-result-filters", "div.site-table-wrap"):
             assert (by_block[block]["left"], by_block[block]["right"]) == (past, past), block
@@ -223,9 +231,10 @@ def test_the_bars_type_is_one_step_under_the_bodys(
     section_pages: dict[str, tuple[Path, str, float]],
 ) -> None:
     """At a desktop, a tablet and a phone width, on a page of prose, on the film's page
-    and on the workbench: a link in the bar and a section tab are smaller than the body's
-    prose and no smaller than the first step of the paper's scale under it, the two are
-    one size, and the site's name is at least the body's size. Nothing here is a pixel
+    and on the workbench: a link in the bar is smaller than the body's
+    prose and no smaller than the first step of the paper's scale under it; section tabs
+    apply the shared button-label scale. The site's name is at least the body's size.
+    Nothing here is a pixel
     value: the body is the prose base the page resolves, which a prose paragraph is set
     at, and the step is read from the same scale. The larger type leaves the bar's links
     on one line on a desktop and a tablet and two on a phone, and no page wider than its
@@ -243,13 +252,16 @@ def test_the_bars_type_is_one_step_under_the_bodys(
             body, scale = sizes["scale"]["prose"], sizes["scale"]
             below = max(step for step in scale.values() if step < body)
             assert below <= sizes["link"] < body <= sizes["name"], where
-            assert sizes["name_shown"] is (width == 1280), where
+            assert sizes["name_shown"] is True, where
+            assert sizes["name_label"] == (
+                "The Squares Project" if width == 1280 else "Squares"
+            )
             assert (sizes["links_rows"], sizes["overflow"]) == (rows, 0), where
             if name == "atlas.html":
                 assert sizes["body"] == body, where
                 assert sizes["tab"] is None, where
             else:
-                assert sizes["tab"] == sizes["link"], where
+                assert sizes["tab"] == round(sizes["link"] * sizes["tab_scale"], 2), where
             seen[name].add((sizes["link"], sizes["tab"], sizes["name"]))
     # One size at every width, and the same bar on every page.
     assert all(len(found) == 1 for found in seen.values()), seen
@@ -266,7 +278,6 @@ def test_a_bar_set_smaller_than_one_step_under_the_body_is_caught(
     assert [problem.split(":")[0] for problem in problems] == [
         "a link in the header is 16px",
         "a tab in the header is 14.4px",
-        "a section tab is 14.4px and a link in the bar 16px",
         "the site's name is 16px, under the body's 18px",
     ]
 
@@ -293,11 +304,9 @@ def test_the_name_stands_on_the_links_baseline(
 ) -> None:
     """At a desktop, a tablet and a phone width, on a page of prose, on the film's page
     and on the workbench: every link on a line of the bar stands on one baseline, the
-    section tabs on one of theirs, and the site's name, where its text is shown, on the
-    links', each within half a pixel. The name's text is shown only on the desktop; on
-    the tablet and the phone the mark alone leads home and there is no name to align.
-    The mark is centred on the name's line. Aligning the name moves nothing else: the
-    current link's baseline is as far over the rule with the name beside it as without,
+    section tabs on one of theirs, and the full or compact site name on the
+    links', each within half a pixel. The current link's baseline is as far over the rule
+    with the full name as with the compact one,
     and the current tab's as far over the foot of its strip at every width."""
     opened = {
         "atlas.html": pages["atlas.html"],
@@ -314,24 +323,20 @@ def test_the_name_stands_on_the_links_baseline(
             assert len(lines) == rows, where
             assert len(found["links"]) == 7, where
             first = min(found["links"], key=lambda link: link["top"])
-            if width == 1280:
-                assert abs(found["name"] - first["baseline"]) <= BASELINE_TOLERANCE, where
-            else:
-                assert found["name"] is None, where
+            assert abs(found["name"] - first["baseline"]) <= BASELINE_TOLERANCE, where
             assert len(found["tabs"]) == (0 if name == "atlas.html" else 2), where
             if rows == 1:
                 over_rule.setdefault(width, set()).add(found["current_above_rule"])
             if found["tabs"]:
                 over_foot.add(round(found["current_tab_above_foot"], 1))
-    # With the name (1280) and without it (768), on every page: one distance.
+    # With the full name (1280) and the compact one (768), on every page: one distance.
     assert len(set().union(*over_rule.values())) == 1, over_rule
     assert len(over_foot) == 1, over_foot
 
 
-def test_a_name_aligned_by_its_mark_is_caught(browser: Any, pages: dict[str, Path]) -> None:
-    """The control: let the name's row take its baseline from its first item again, the
-    mark, and the check names the name, some pixels above the links."""
-    found = _baselines(browser, pages["atlas.html"], 1280, style=NAME_ALIGNED_BY_ITS_MARK)
+def test_a_name_above_the_links_is_caught(browser: Any, pages: dict[str, Path]) -> None:
+    """The control: lift the name above the links and require the check to report it."""
+    found = _baselines(browser, pages["atlas.html"], 1280, style=NAME_ABOVE_LINKS)
     problems = baseline_problems(found)
     assert len(problems) == 1, problems
     assert problems[0].startswith("the site's name stands -"), problems

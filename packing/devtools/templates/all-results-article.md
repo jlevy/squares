@@ -58,8 +58,9 @@ Status follows the confirmation rung and is never set by hand; the
 *In analysis* marks a review or replay under way here; *waiting on* marks a request with
 the source or another party.
 
-A bound is *superseded* when no current case bound rests on it and its cases match or
-beat it. A better bound not yet adopted by its case records remains unmarked.
+A bound is *superseded* when no current case bound rests on it and the bounds recorded
+for its cases match or beat it.
+A better bound not yet adopted by its case records remains unmarked.
 For other kinds, *superseded* means the register records a later result implying the
 whole claim; *superseded in part* means it implies only part, so the original remains
 current. The table names the most recent replacement, with “and others” when needed; the

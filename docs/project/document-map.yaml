@@ -12,6 +12,12 @@ documents:
   - {path: docs/project/reviews/review-2026-10-10-tbd-coordination.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-10-bead-reconciliation-a.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-10-bead-reconciliation-b.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-front-door-prose.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-top-level-prose.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-11-final-asymptotic-and-grading.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-11-final-lower-bounds.md, role: review, authority: record, lifecycle: retained}

@@ -244,7 +244,7 @@ def test_an_independent_route_through_a_nagamochi_lemma_says_so() -> None:
     sources = rows()[47]["support"]["registered_verified"]["sources"]
     assert [(source["n"], source["results"]) for source in sources] == [
         (45, ["T-053"]),
-        (46, ["T-004", "T-008"]),
+        (46, ["T-004", "T-008", "T-064"]),
         (47, ["T-086"]),
     ]
     assert "shares_a_nagamochi_lemma" not in sources[0]

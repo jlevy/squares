@@ -123,7 +123,10 @@ body {
      text, so the bar reads as the table's tools and not as its content. */
   --site-font-size-control: calc(var(--site-font-size-sans-base) * 0.8);
   --site-support-color: var(--kpress-doc-muted);
-  --site-wide: calc(var(--kpress-measure) + 24rem);
+  /* The wide track is forty times the shared type base plus 24rem, 1104px at 18px.
+     It is independent of the prose measure so tables and card grids retain their room
+     when reading lines change (paper-design.md, Wide bleed). */
+  --site-wide: calc(var(--kpress-font-size-base) * 40 + 24rem);
   /* How far a block may bleed past the wide track (the atlas grid, and a data table
      above `--site-table-bleed-from`): paper-design.md, Wide bleed. */
   --site-bleed-max: 140rem;
@@ -172,7 +175,7 @@ body {
 /* Capped at 100% as kpress caps its column: beside a TOC the column is a grid item with
    auto margins, sized to its min-content, so a wide code block or table would otherwise
    push it past a phone's viewport instead of scrolling inside it. The text fills the
-   column, as the explainer's does: its lines run the measure plus both insets, 800px at
+   column, as the explainer's does: its lines run the measure plus both insets, 710px at
    a desktop, and on a phone the page margin alone keeps them off the screen's edge. */
 .site-page {
   margin-inline: auto;
@@ -2812,11 +2815,17 @@ html[data-site-atlas-view="triangle"]
    (`cases/`, overview/case-page.js) and by the one case popover every page that links
    cases carries (overview/case-popover.js). A record opens with its visual summary,
    the drawing and bound facts together, followed by the detailed record. */
+:root {
+  /* Resolve the canonical shell's measure and foundation insets here, before a
+     fetched record inherits another page's band-specific inset. Both readers use
+     this cap, with enough room for two 17rem bound cards and their gap. */
+  --site-case-max: min(48rem, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
+}
 .site-case {
   container-type: inline-size;
   inline-size: 100%;
   margin-inline: auto;
-  max-inline-size: 48rem;
+  max-inline-size: var(--site-case-max);
   min-inline-size: 0;
 }
 .site-case-reader {
@@ -3069,7 +3078,7 @@ html[data-site-atlas-view="triangle"]
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
 }
-/* The case's 48rem measure fits at most two columns. A final unpaired panel keeps
+/* The case's measure, at most 48rem, fits at most two columns. A final unpaired panel keeps
    the same width as its neighbours and centres on the row when both columns fit. */
 @container (min-width: 35rem) {
   .site-case-bounds > :last-child:nth-child(odd) {

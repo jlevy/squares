@@ -15,15 +15,16 @@ from pathlib import Path
 import mpmath as mp
 import pytest
 
+from devtools import adopt_houses, refinement_packets
 from devtools import build_known_best_atlas as atlas
 from devtools import census_atlas_contact_shades as shades
 from devtools import confirm_ryxu_records as confirmation
 from devtools import generate_frontier_case as generator
-from devtools import refinement_packets
 from devtools import register_ryxu_reports as register
 from devtools import regularize_axis_components as regularizer
 from devtools import run_negative_controls as controls
 from devtools import ryxu_house_links as houses
+from devtools import upper_bound_houses as adopted
 from sqpack.render import render_packing_svg
 from sqpack.render.model import EvidenceTier, RenderSpec, ScalarKind
 from sqpack.witness import materialize_exact_witness, witness_document
@@ -48,11 +49,29 @@ def private(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     monkeypatch.setattr(
         register, "HISTORY", packet / "acquisition/frontier-prior-state.json.xz"
     )
+    retained = tmp_path / "historical-houses"
+    retained.mkdir()
+    facts = houses.reports.read_facts()
+    positives = houses.reports.check_certification()
     for n in houses.NUMBERS:
         path = houses.house_path(n)
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.symlink_to(SOURCE / path.relative_to(repo))
+        if n not in adopted.ADOPTED:
+            path.symlink_to(SOURCE / path.relative_to(repo))
+            continue
+        # Since the house adoption of 11 October 2026 a later source owns this atlas leaf
+        # (think-fvz4). Admission stays scoped to this packet: rebuild the earlier house
+        # from its private inputs, without reading the newer pose.
+        earlier = retained / path.name
+        witness = houses.expected_witness(n, facts=facts, positives=positives)
+        earlier.write_text(witness_document(witness, schema="../witness.schema.yaml"))
+        path.symlink_to(earlier)
     return repo
+
+
+def drawn() -> list[int]:
+    """The counts whose live atlas leaf is still the ry-xu house."""
+    return [n for n in houses.NUMBERS if n not in adopted.ADOPTED]
 
 
 def test_exact_radical_projection_keeps_all_coefficient_geometry() -> None:
@@ -202,11 +221,12 @@ def test_actual_worker_keeps_full_scientific_inputs_and_refuses_producers(
         assert private.is_file()
         assert not private.is_symlink()
         assert private.read_bytes() == path.read_bytes()
-    script = """
+    script = f"""
+ns = {drawn()!r}
 from devtools import ryxu_house_links as h, build_known_best_atlas as a
 from devtools import refinement_custody as old425
 from devtools import squish_second_update_confirmation as old422
-old425.check_index(old425.read_index()); old422.admit_certification(); h.check_houses()
+old425.check_index(old425.read_index()); old422.admit_certification(); h.check_houses(ns)
 paths=(a.MANIFEST,a.SOURCE_MANIFEST,a.MANIFEST.parent/'composite-figure.json')
 def contents(): return tuple(path.read_bytes() if path.exists() else None for path in paths)
 before=contents()
@@ -223,12 +243,12 @@ for path, route in [(h.reports.receipt_path(),'rational'),
     else: value['exact_verify']['minimum_best_pair_gap']='1'
     try:
         h.reports.save(path,value)
-        try: h.check_houses()
+        try: h.check_houses(ns)
         except ValueError: pass
         else: raise AssertionError('copied deciding receipt corruption was accepted')
     finally: path.write_bytes(original)
     assert path.read_bytes()==original
-    h.check_houses()
+    h.check_houses(ns)
 """
     result = subprocess.run(
         [sys.executable, "-c", script],
@@ -255,8 +275,16 @@ def test_frontier_witness_field_parser_is_independent_of_key_order() -> None:
 def test_source_adoption_refuses_mutable_upper_geometry_claims(
     private: Path, n: int, mutation: str
 ) -> None:
+    """51 takes the radical route and 105 and 108 the rational route, through the drafted
+    lower lanes of a generated record."""
     assert private == houses.REPO
-    original = (SOURCE / f"packing/frontier/n-{n:03d}.md").read_text()
+    if n in adopted.ADOPTED:
+        # Since the house adoption of 11 October 2026 (think-fvz4) T-130 and T-128 hold
+        # 105 and 108. The refusal is this packet's, so each case is staged as the
+        # adoption found it (`adopt_houses.read_history`), at the ry-xu house.
+        original = adopt_houses.read_history()[n]
+    else:
+        original = (SOURCE / f"packing/frontier/n-{n:03d}.md").read_text()
     prefix, front, body = original.split("---\n", 2)
     document = safe_load(front)
     if mutation == "side":
@@ -293,8 +321,8 @@ def test_source_adoption_refuses_mutable_upper_geometry_claims(
             review_date="2026-10-08",
             retrieved_date="2026-10-08",
         )
-    adopted = register.adopt_case(n, changed, drafted)
-    result = safe_load(adopted.split("---\n", 2)[1])["packing"]
+    redrafted = register.adopt_case(n, changed, drafted)
+    result = safe_load(redrafted.split("---\n", 2)[1])["packing"]
     assert result["reported_upper_bound"] == register.reported_bound(n)
     before = safe_load(old.split("---\n", 2)[1])["packing"]
     original_case = safe_load(original.split("---\n", 2)[1])["packing"]
@@ -306,7 +334,7 @@ def test_source_adoption_refuses_mutable_upper_geometry_claims(
     lower_draft = safe_load(drafted.split("---\n", 2)[1])["packing"]
     for field in ("reported_lower_bound", "verified_lower_bound", "status"):
         assert result[field] == lower_draft[field]
-    assert "global optimum exactly equals" not in adopted
+    assert "global optimum exactly equals" not in redrafted
 
 
 def test_unmapped_confirming_evidence_is_refused(private: Path) -> None:
@@ -401,6 +429,36 @@ def test_existing_incomplete_history_is_refused_before_case_writes(
     }
 
 
+def restore_ryxu_selections(path: Path, numbers: list[int]) -> None:
+    """Select the ry-xu report again at each count a later house took from it.
+
+    The adoption kept each displaced selection's source and side among the superseded
+    reports; the evidence is this packet's report, and the reason is the confirmation's
+    to write.
+    """
+    text = path.read_text()
+    value = safe_load(text)
+    displaced = {
+        row["n"]: row
+        for row in value["superseded_reports"]
+        if row["source_id"] == houses.SOURCE_ID and row["n"] in numbers
+    }
+    assert sorted(displaced) == sorted(numbers)
+    for row in value["selected_overrides"]:
+        if row["n"] in displaced:
+            row.update(
+                source_id=houses.SOURCE_ID,
+                value=displaced[row["n"]]["value"],
+                evidence=register.REPORT,
+                reason="Selected as reported before the confirmation.",
+            )
+    start = text.index("selected_overrides:")
+    end = text.index("superseded_reports:", start)
+    lines = register.dump(value["selected_overrides"]).splitlines(keepends=True)
+    rendered = "".join("  " + line for line in lines)
+    path.write_text(text[:start] + "selected_overrides:\n" + rendered + text[end:])
+
+
 def confirmation_frontier(
     private: Path, monkeypatch: pytest.MonkeyPatch, *, reported: bool = False
 ) -> Path:
@@ -414,6 +472,16 @@ def confirmation_frontier(
         name = f"n-{n:03d}.md"
         shutil.copyfile(SOURCE / "packing/frontier" / name, frontier / name)
     if reported:
+        # The confirmation ran before the house adoption of 11 October 2026 (think-fvz4),
+        # which gave most of these cases to later sources. The reported stage it confirms
+        # is rebuilt from what the adoption retained: each moved case as it stood before
+        # (`adopt_houses.read_history`), and its ry-xu selection, which the coverage
+        # register keeps among the superseded reports.
+        moved = [n for n in houses.NUMBERS if n in adopted.ADOPTED]
+        prior = adopt_houses.read_history()
+        for n in moved:
+            (frontier / f"n-{n:03d}.md").write_text(prior[n])
+        restore_ryxu_selections(frontier / "source-coverage.yaml", moved)
         for name, field, identifiers in (
             ("results.yaml", "results", {"T-125", "T-126"}),
             ("evidence.yaml", "evidence", {confirmation.RATIONAL, confirmation.RADICAL}),

@@ -416,6 +416,7 @@
     ["--paper-subtitle-scale", false],
     ["--paper-support-scale", false],
     ["--paper-note-scale", false],
+    ["--paper-button-label-scale", false],
     ["--paper-colophon-scale", false],
     ["--paper-heading-leading", false],
   ];

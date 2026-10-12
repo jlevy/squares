@@ -1,0 +1,7 @@
+# sqpk v1
+# test: two squares at 30 deg touching face to face (sep 0)
+# digits 40
+n 2
+s 5
+2 2 30
+2.86602540378443864676372317075293618347140262690519 2.5 30

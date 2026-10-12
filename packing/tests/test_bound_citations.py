@@ -19,9 +19,9 @@ from typing import Any
 
 import pytest
 
+from devtools import adopt_houses, validate_schemas
 from devtools import build_bound_citations as citations
 from devtools import squish_second_update_packets as second_update
-from devtools import validate_schemas
 from sqpack.assurance import bounds_agree_at_declared_precision
 from sqpack.yamlio import safe_load
 
@@ -586,7 +586,10 @@ def _first_update_case(n: int) -> dict[str, Any]:
     from devtools import register_gupta_reports as gupta  # noqa: PLC0415
     from devtools.register_ryxu_reports import read_history  # noqa: PLC0415
 
-    history = {row["n"]: row["frontier"] for row in gupta.read_history()}
+    # The house adoption of 11 October 2026 (think-fvz4) retained the latest of the three
+    # boundaries; where an earlier adoption retained one too, the earlier one wins.
+    history = adopt_houses.read_history()
+    history.update({row["n"]: row["frontier"] for row in gupta.read_history()})
     # RY selection follows the first update; its complete older boundary wins.
     history.update({row["n"]: row["frontier"] for row in read_history()})
     case = (
@@ -887,11 +890,12 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     22: (None, ("Bentz 2016, arXiv:1606.03746", "external", "verified")),
     33: (None, ("Bentz 2016, arXiv:1606.03746 (confirmed T-064)", "external", "verified")),
     # A published proof and this project's audit of it are one source's bound, and the
-    # audit's two results are named on the line; the article number gives way so they fit.
+    # audit's two results are named on the line, with T-064's replays beside them since
+    # 2026-10-11 (k = 7); the journal gives way so the three fit.
     46: (
         None,
         (
-            "Bentz 2010, Electron. J. Combin. 17 (confirmed T-004, T-008)",
+            "Bentz 2010 (confirmed T-004, T-008, T-064)",
             "external",
             "verified",
         ),
@@ -928,9 +932,10 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     ),
     # Three finders and two improvers gave "Arslanov et al." with no year here until
     # Couzo's certified packing took the case; the synthetic test above keeps that shape.
-    # Since 2026-10-05 its exact optimum, Couzo's packing improved by Daniel (T-098).
+    # From 2026-10-05 its exact optimum, Couzo's packing improved by Daniel (T-098), and
+    # since the house adoption of 11 October 2026 Daniel's record-hunt packing (T-141).
     132: (
-        ("Couzo & Daniel, GitHub (confirmed T-098)", "external", "verified"),
+        ("Daniel 2026, GitHub (confirmed T-141)", "external", "verified"),
         (
             "Karakuş 2026, arXiv corrects Nagamochi 2005 (confirmed T-083)",
             "external",
@@ -948,8 +953,10 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
             "verified",
         ),
     ),
+    # De Winter's packing at Daniel's exact optimum (T-098) until the house adoption of 11
+    # October 2026 took Daniil Ostashev's issue 501 packing (T-149).
     211: (
-        ("de Winter & Daniel, GitHub (confirmed T-098)", "external", "verified"),
+        ("Ostashev 2026, GitHub (confirmed T-149)", "external", "verified"),
         (
             "Karakuş 2026, arXiv corrects Nagamochi 2005 (confirmed T-083)",
             "external",
@@ -1034,8 +1041,9 @@ def test_n29_credits_finder_and_optimizer_and_takes_the_registers_verdict() -> N
 RECORDED_LINKS: dict[tuple[int, str], tuple[list[str], list[str]]] = {
     # Trump's packing, exactly replayed here.
     (11, "upper"): (["T-011"], ["T-011"]),
-    # The audit of Bentz's Theorem 8, and the equality it settles.
-    (46, "lower"): (["T-004", "T-008"], ["T-004", "T-008"]),
+    # The audit of Bentz's Theorem 8, and the equality it settles; since 2026-10-11 also
+    # T-064's replays of Daniel's s(k^2 - 3) = k family at k = 7.
+    (46, "lower"): (["T-004", "T-008", "T-064"], ["T-004", "T-008", "T-064"]),
     # Two results cite Bentz 2010 at n = 13 -- one of them says a lemma is false as
     # printed. Since 2026-10-06 the lane also cites T-006's replays of Daniel's case-free
     # cover, so T-006 confirms the bound and T-005, which replays nothing, does not.

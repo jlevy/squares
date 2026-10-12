@@ -151,9 +151,12 @@ def test_standing_agrees_with_the_recent_rows(
         # A second, point-only route to s(21) = 5, reported until its complete replay here
         # was recorded on 2026-10-02.
         ("T-055", view.SECOND_CERTIFICATE),
-        # Couzo's eight rational certificates of 8 October report sides below every
-        # ceiling their cases hold, and the case records have not taken them in yet.
-        ("T-128", view.PENDING_ADOPTION),
+        # Couzo's eight rational certificates of 8 October, pending adoption until the
+        # house adoption of 11 October 2026 took five of them into the case records.
+        ("T-128", view.HOLDS),
+        # The exact side of n = 152 cut below the rational ceiling T-098 holds there,
+        # which the case records have not taken in.
+        ("T-122", view.PENDING_ADOPTION),
     ],
 )
 def test_standing_is_read_from_the_case_records(

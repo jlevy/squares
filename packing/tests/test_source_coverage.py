@@ -272,6 +272,102 @@ def test_the_recorded_coverage_reconciles() -> None:
     assert coverage_check.main() == 0
 
 
+def _named_houses() -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """n = 7 moved twice: T-800 adopted on 11 October, then T-900 on 12 October."""
+    coverage: dict[str, Any] = {
+        "sources": [
+            {"id": "older", "source_key": "[older]"},
+            {"id": "earlier", "source_key": "[earlier]"},
+            {"id": "later", "source_key": "[later]"},
+            {"id": "later-in-corpus", "source_key": "[later]"},
+            {"id": "sibling", "source_key": "[sibling]"},
+        ],
+        "selected_overrides": [
+            {
+                "n": 7,
+                "source_id": "later-in-corpus",
+                "reason": "The smallest exact side ..., adopted on 2026-10-12 (T-900).",
+            }
+        ],
+        "superseded_reports": [
+            {
+                "n": 7,
+                "source_id": "older",
+                "reason": (
+                    "The house until 2026-10-11; its certificate stays retained and "
+                    "verified, and T-900's exact side is smaller."
+                ),
+                "superseded_by": "later-in-corpus",
+            },
+            {
+                "n": 7,
+                "source_id": "earlier",
+                "reason": (
+                    "The house from 2026-10-11 until 2026-10-12; its certificate stays "
+                    "retained and verified, and T-900's exact side is smaller."
+                ),
+                "superseded_by": "later-in-corpus",
+            },
+            {
+                "n": 7,
+                "source_id": "sibling",
+                "reason": (
+                    "A certificate of the same release that no register entry cites; its "
+                    "exact side equals the house adopted here on 2026-10-12, which "
+                    "T-900's registered certificate holds."
+                ),
+                "superseded_by": "later-in-corpus",
+            },
+        ],
+    }
+    results = [
+        {"id": "T-800", "attribution": {"source_keys": ["[earlier]"]}},
+        {"id": "T-900", "attribution": {"source_keys": ["[later]"]}},
+    ]
+    return coverage, results
+
+
+def test_a_reason_that_names_the_house_names_the_one_that_supersedes_it() -> None:
+    """Both ways a reason names its house hold to `superseded_by`, the source key matched
+    through any of the source's coverage entries."""
+    coverage, results = _named_houses()
+    assert coverage_check.house_reason_errors(coverage, results) == []
+    unnamed = copy.deepcopy(coverage)
+    unnamed["superseded_reports"][0]["reason"] = "Grid."
+    assert coverage_check.house_reason_errors(unnamed, results) == []
+
+
+def test_a_reason_left_naming_the_earlier_house_is_refused() -> None:
+    """The stale rows of #518 (A1) and #553 (B3): the count moved again, the row was
+    re-pointed at the new house, and its reason still names the old one."""
+    coverage, results = _named_houses()
+    stale = copy.deepcopy(coverage)
+    stale["superseded_reports"][0]["reason"] = (
+        "The house until 2026-10-11; its certificate stays retained and verified, and "
+        "T-800's exact side is smaller."
+    )
+    (error,) = coverage_check.house_reason_errors(stale, results)
+    assert "n=7 from older names T-800" in error
+    assert "later-in-corpus, which is not T-800's source" in error
+    dated = copy.deepcopy(coverage)
+    dated["superseded_reports"][2]["reason"] = (
+        "A certificate of the same release that no register entry cites; the side it prints "
+        "is above the house adopted here on 2026-10-11."
+    )
+    (error,) = coverage_check.house_reason_errors(dated, results)
+    assert "names the house adopted on 2026-10-11" in error
+    assert "was adopted on 2026-10-12" in error
+    unadopted = copy.deepcopy(coverage)
+    unadopted["selected_overrides"][0]["reason"] = "Selected by hand."
+    errors = coverage_check.house_reason_errors(unadopted, results)
+    assert errors == [
+        (
+            "superseded report n=7 from sibling names the house adopted on 2026-10-12, but "
+            "later-in-corpus, which supersedes it, was adopted on no day"
+        )
+    ]
+
+
 def _dated_source(identifier: str, day: str | None, values: list[int]) -> dict[str, Any]:
     return {
         "id": identifier,
