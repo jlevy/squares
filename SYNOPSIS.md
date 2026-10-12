@@ -603,25 +603,57 @@ Those definitions apply in the campaign artifacts and the beads too, not only he
 
 ### Exact-Side Collection, October 10
 
-The [exact-values register](packing/frontier/exact-values.json.gz) assembles 321 exact
-current sides for $n = 1\ldots324$: 176 integer, 72 rational, 60 radical closed forms
-and 13 minimal-polynomial sides.
-The degree-672 polynomial at $n = 83$ is retained in full and independently checked; its
-source root index 27 remains stated and uncounted.
-All 77 proved cases retain their status.
-The full scientific archives and current verified lower bounds remain preserved.
+The October 11–12 native adoption passes integrate main
+`562fdbdff1d98948f68b36b81b53f9c8165ffd08`: 49 adopted current bindings and 89
+historical native occurrences, with all 51 displaced polynomials and earlier raw custody
+retained. The verified parent corpus has 437 records, 436 recursive vectors and 1,403
+integer strings (101,733 gzip / 987,590 decoded bytes).
+The child corpus has 621 records, 643 recursive vectors and 6,544 integer strings = 324
+current + 297 historical: 284 superseded, three unreconciled, seven outside-frontier and
+three source-invalid.
+Final storage is 913,496 gzip / 3,283,520 decoded bytes.
+Public projection is 337 records / 337 recursive vectors / 2,096 integer strings,
+without superseded or pending native-offer rows.
+Current partition is 175 integer, 75 rational, 58 closed-form, 13 minimal-polynomial and
+three numeric, with no degree-only case.
+
+The [exact-values register](packing/frontier/exact-values.json.gz) retains 321 exact
+current identities, three numeric gaps at $n = 29,55,71$ and 77 proved labels.
+The full degree-672 n=83 polynomial retains 673 coefficients, maximum 724 digits; source
+ordinal 27 remains independently uncounted.
+The three reported roots at $n = 106,152,177$ remain V0/C0 source geometry/Lean gaps.
+Superseded source rows are omitted only from public display and remain canonical.
+Publication is strictly HTML/Markdown; no report PDF is generated.
+
+Current n=102 is Daniel T146 regularizing Ryan Xu, revision
+`ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7`, native path
+`search/regularize/lists/certs/n-102.cert.gz`; older inputs are dated driver fixtures.
+All 49 current native bindings are V3/C3. The 89 historical certificates retain 86 V3/C3
+replayed and three V0/C0 source-reported occurrences; historical grades are not promoted
+by adoption. Final serializer round-trip/schema checks have zero findings; the
+current-custody guard passes three controls in 13.50 s and catalogue tests pass 17 in
+2.12 s, with zero static findings.
+Web/full/push/CI remain pending.
+The separate `think-63vx` scope reports 62 quadratic source sides and a priced 41-count
+batch, not a reconciled count of remaining updates.
+#419’s T120–T123 and #420’s T124 have distinct binding/build prerequisites.
+Owner tracking states are not closed here.
+
+The following corpus and web measurements are dated pre-PR518 evidence; they do not
+qualify the latest regenerated data or pending full CI.
 
 The original retained-source extraction on October 7 decoded 182 polynomial/side pairs
 from 201 occurrences, reaching $n = 2135$, with no undecoded rows.
-The refreshed register retains 286 noncurrent source entries: 186 superseded, 90
+The dated pre-PR518 register retained 286 noncurrent source entries: 186 superseded, 90
 unreconciled, seven outside the frontier and three source-invalid, for 610 records
 including the 324 current cases.
 Only Daniel’s three improving reported roots at $n = 106,152,177$ remain unreconciled
 polynomial notes, with independently checked polynomials and isolating intervals but
 geometry and Lean replay not attempted (V0/C0). Daniel’s retained root at $n = 102$ is
 superseded and remains historical.
-The historical finite-certificate roster retains 101 source occurrences: 14 superseded
-and 87 pending standing adoption, covering 86 distinct pending rational bounds.
+The dated pre-PR518 historical finite-certificate roster retained 101 source
+occurrences: 14 superseded and 87 pending standing adoption, covering 86 distinct
+pending rational bounds.
 All 87 pending offers carry V3/C3 checked finite source geometry from retained positive
 replays. The superseded roster preserves eleven checked V3/C3 certificates and three
 unreplayed V0/C0 occurrences, with their own custody and grades.
@@ -644,7 +676,7 @@ source attribution, algebraic checks, geometric realization and optimality separ
 
 The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html) has a
 searchable index and loads individual records and coefficient vectors when opened.
-The complete HTML and Markdown report publishes all 324 current records and 100
+The dated complete HTML and Markdown report published all 324 current records and 100
 additional source records: seven outside the frontier, three source-invalid and 90
 unreconciled source occurrences, for 424 records overall.
 The report omits 186 superseded rows and 22 redundant current notes; these remain in the
@@ -675,8 +707,8 @@ evidence. The finite $n = 105$ representation gap is resolved; its ideal contact
 and KKT seed work stays open.
 The retained systems at $n = 29,55,71$ support elimination and real-branch selection.
 Each new Daniel pose needs its own active contacts and KKT seed.
-The current RyXu $n = 102$ contacts and seed must bind its retained certificate; the
-earlier evand input remains historical.
+Current $n = 102$ contacts and seed must bind Daniel T146’s retained regularized
+certificate; the earlier RyXu and evand inputs remain historical.
 Ideal contact-system research continues under `think-s6np` and the batch lanes even when
 the finite certificate side is rational.
 Exact geometric witnesses and independent contact rederivations remain open.

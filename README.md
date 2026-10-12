@@ -98,10 +98,21 @@ local refinement, and upper-bound certification.
 The independent
 [Exact Side Values for Packing Unit Squares](packing/devtools/templates/exact-side-values-article.md)
 is generated from the [exact-values register](packing/frontier/exact-values.json.gz).
-It assembles 321 exact current sides across $n = 1\ldots324$ and 93 additional source
-records, with every published coefficient, source locator and algebraic certificate.
-The source register retains superseded entries separately.
-Historical examples reach $n = 2135$; source-invalid proposals retain their flags.
+It assembles 321 exact current sides across $n = 1\ldots324$ and retained additional
+source records, with every published coefficient, source locator and algebraic
+certificate. The source register retains superseded entries separately.
+The October 11–12 adoption passes now select 49 native current bindings.
+The current 321 exact identities, three numeric gaps and 77 proved labels remain
+unchanged. Canonical custody has 621 records, 643 recursive vectors and 6,544 integer
+strings: 324 current and 297 historical (284 superseded, three unreconciled, seven
+outside-frontier and three source-invalid).
+Displaced source identities remain raw custody.
+The final register is 913,496 gzip / 3,283,520 decoded bytes.
+Its public projection has 337 records, 337 recursive coefficient vectors and 2,096
+integer strings, with no superseded or pending native offers displayed.
+Web/gate qualification remains pending.
+The report remains strictly HTML/Markdown, without a report PDF. Historical examples
+reach $n = 2135$; source-invalid proposals retain their flags.
 Reported algebraic roots retain their stated assurance while geometry and Lean replay
 remain separate. Replayed certificate offers carry the current source-verification
 grades, source pins, original finder credits and replay custody; their adoption into the

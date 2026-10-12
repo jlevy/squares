@@ -7,6 +7,66 @@
 **Status:** Collection and publication implemented; CI stabilization and identification
 lanes remain open.
 
+## Native Adoption Checkpoint, October 11–12
+
+The stack integrates main `562fdbdff1d98948f68b36b81b53f9c8165ffd08`, including PR518’s
+42 house adoptions and T151/T152’s nine replacements.
+Current custody has 49 adopted V3/C3 native bindings and 89 historical native
+occurrences; all 51 displaced polynomials and 102 earlier parent histories survive.
+Native accounting is 101 old + 11 new + 26 legacy occurrences, including 17 RyXu and
+nine Gupta legacy displacements.
+
+| Verified scope | Actual result |
+| --- | --- |
+| Parent corpus | 437 records; 436 recursive vectors; 1,403 integer strings; 101,733 gzip / 987,590 decoded bytes |
+| Parent current status | All 324 lower/status fields preserved; 77 proved / 247 open; 315 unaffected current records equal in full |
+| Child corpus | 621 records = 324 current + 297 historical; 643 recursive vectors; 6,544 integer strings |
+| Child storage / public projection | 913,496 gzip / 3,283,520 decoded bytes; 337 records / 337 recursive vectors / 2,096 integer strings |
+| Native certificate grades | All 49 current V3/C3; historical 89 = 86 V3/C3 replayed + three V0/C0 source-reported |
+| Child current partition | 175 integer / 75 rational / 58 closed-form / 13 minimal / three numeric; no degree-only |
+| Child history | 284 superseded / three unreconciled / seven outside-frontier / three source-invalid |
+| n=83 | Degree 672; all 673 coefficients retained, maximum 724 digits; source ordinal 27 independently uncounted |
+
+Child current coverage remains 321 exact identities, three numeric gaps at
+$n = 29,55,71$ and 77 proved cases; the parent retains 320 exact identities and
+degree-only $n = 83$. The public projection contains no superseded or pending
+native-offer rows. Current numeric fields match the parent except the retained n=83
+polynomial. Superseded rows are omitted only from publication; full raw displaced-source
+custody remains. The report is strictly HTML/Markdown, with no polynomial PDF.
+
+Current $n = 102$ is Evan Daniel’s T146 regularization of Ryan Xu at
+`ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7`, native path
+`search/regularize/lists/certs/n-102.cert.gz`. Earlier RyXu `8dc415` and Daniel
+`13ee36e5` inputs are dated fixtures.
+W7 `think-s6np` driver delivery and an independent contact-derived $n = 11$ control
+precede the bounded n=102 `think-ohhz` slice.
+`think-63vx` concerns 62 reported quadratic source sides and a priced 41-count batch;
+remaining database updates are not reconciled.
+#419’s T120–T123 binding prerequisites and #420’s T124 theorem/perturbation binding are
+separate. No Lean build or owner closure is inferred from rational-house adoption.
+
+Final data generation changes only the n=102 current-custody route text; the remaining
+wrapper is equal in full.
+Serializer round-trip/schema checks have zero findings.
+Three guard controls pass in 13.50 s and 17 catalogue tests pass in 2.12 s, with zero
+static findings. These scoped passes do not qualify the pending web/full/push/CI gates.
+
+Latest parent builder controls pass 184 tests in 100.31 s; post-fix source controls pass
+99 in 102.94 s. Records passes 50/108 selected steps in 37.10 s, on an actual ten-CPU
+host with six jobs and two inner jobs; it is not the full tier.
+Parent pre-push has 64/65 prerequisites complete and remains active.
+Child full/web/push and exact-head hosted CI remain pending.
+No old-head pass qualifies these new data.
+
+The earlier child `0841b84e` run was owner-stopped after 68 prerequisites and four
+failed call phases, with 17 processes verified absent and no completed JUnit/lane pass.
+Its census/browser/signal fixtures are repaired; unchanged CLI serial success does not
+diagnose the parallel 20 s timeout (`think-w0if`). Detailed negative evidence is
+retained in `validation/child-main25-layer-push-failure-classification.json` under the
+external evidence root listed below.
+All dated failure and CI links below remain historical.
+Pushing and landing are pending; no merge is authorized.
+
 ## Scope and Current Result
 
 The formal stack is `main` → PR 403 (`claude/friendly-sagan-jk7qzy`) → PR 435
@@ -33,7 +93,7 @@ certified bound. The source corpus is bounded by the retained comparison catalog
 explicit thematic locators, and the pinned SVG readings; this is a complete extraction
 of that corpus, not a claim that every polynomial ever published has been found.
 
-## Current Register and Continuation
+## Dated Pre-PR518 Register and Continuation
 
 The parent refresh integrates `origin/main` at
 `25de5a42e8e35ca01668ed07747ed2a3601f4280` (the 2026-10-12 fetch), including T-147
@@ -70,8 +130,8 @@ and 32. Their primitive coefficients, irreducibility and unique roots in the sou
 intervals are independently checked against acquired source bytes.
 They have no admitted geometry or Lean replay and remain V0/C0, under `think-8sm2` and
 [issue 419](https://github.com/jlevy/squares/issues/419). Daniel’s T-120 polynomial at
-$n = 102$ is now superseded by the current RyXu finite bound; its original coefficients,
-root cell, source flags and V0/C0 envelope remain historical evidence.
+$n = 102$ is now superseded by the adopted finite bound (now Daniel T146); its original
+coefficients, root cell, source flags and V0/C0 envelope remain historical evidence.
 
 The refresh retains the earlier source occurrences and adds 72 in-horizon finite
 certificate occurrences: 65 from T-134 through T-141 and T-146, and seven from T-147
@@ -164,10 +224,12 @@ The 1,656-byte margin remains a tracked growth constraint; final clean-head
 qualification is separate.
 
 The selected next entry is W7 driver delivery in `think-s6np`, then an independent
-contact-derived $n = 11$ octic control, then one preregistered bounded current RyXu
-$n = 102$ W6 slice in `think-ohhz`. The current source is
-`8dc415296f697f5140caea27c7a0193d52deb4e6`; its complete native certificate is already
-retained. The older Daniel input at `13ee36e5807727d12a5da36b9b90a96bdba272bf` remains a
+contact-derived $n = 11$ octic control, then one preregistered bounded current Daniel
+T146 $n = 102$ W6 slice in `think-ohhz`. The current source is Daniel T146 regularizing
+Ryan Xu, `ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7`,
+`search/regularize/lists/certs/n-102.cert.gz`; the earlier RyXu certificate at
+`8dc415296f697f5140caea27c7a0193d52deb4e6` is a dated fixture.
+The older Daniel input at `13ee36e5807727d12a5da36b9b90a96bdba272bf` remains a
 historical driver fixture and cannot satisfy current contact or KKT prerequisites.
 This refresh executes no solver, contact-derived control, geometry/Lean replay or
 bounded identification search.
@@ -419,12 +481,12 @@ reusable full-active-system driver and exact half-angle export, then prove the k
 $n = 11$ octic from contacts as its control, then preregister one bounded $n = 102$ run.
 The recovered Daniel inputs at `13ee36e5807727d12a5da36b9b90a96bdba272bf` remain
 historical driver fixtures.
-Current $n = 102$ prerequisites must bind the retained RyXu certificate at
-`8dc415296f697f5140caea27c7a0193d52deb4e6`; input retention supplies no solver or
-control verdict.
-Broader batches wait for that control and retain each original count and
-branch distinction.
-Legacy numerical probe labels are quarantined as candidate/diagnostic
+Current $n = 102$ prerequisites must bind Daniel T146 at
+`ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7`,
+`search/regularize/lists/certs/n-102.cert.gz`; input retention supplies no solver or
+control verdict. The earlier RyXu certificate remains a dated fixture.
+Broader batches wait for that control and retain each original count and branch
+distinction. Legacy numerical probe labels are quarantined as candidate/diagnostic
 outputs under `think-yuqy`; Bézout upper bounds and bounded PSLQ non-return cannot prove
 a degree or coefficient lower bound, and a numerical eliminant residual cannot prove
 exact linkage.
@@ -624,7 +686,7 @@ relation alone is insufficient.
 | Bead | Counts | Next work and dependency |
 | --- | --- | --- |
 | `think-1atr` | 126 | Recover the current witness/KKT contact system; the retained SVG has a different side and the three historical polynomials do not identify the current record |
-| `think-ohhz` | 102, 106, 152, 172, 177, 199, 206, 207, 268, 297, 301 | Recover or reproduce all eleven claimed ideal-side identifications through `think-s6np`; the old 102 root is superseded and its current-pose route requires RyXu inputs; establish a confirmed KKT seed at 177; treat 199 and 207 as displaced branches |
+| `think-ohhz` | 102, 106, 152, 172, 177, 199, 206, 207, 268, 297, 301 | Recover or reproduce all eleven claimed ideal-side identifications through `think-s6np`; the old 102 root is superseded and its current-pose route requires Daniel T146 regularized inputs; establish a confirmed KKT seed at 177; treat 199 and 207 as displaced branches |
 | `think-056g` | 68, 103, 110, 123, 131, 132, 154, 155, 156 | Low-count ideal-side precision/degree sweep after the reusable driver is delivered by `think-s6np` |
 | `think-d2kj` | 180, 181, 182, 208, 209, 210, 228, 236, 237, 238, 239, 240, 241 | Middle-count ideal-side sweep, same dependency; preserve current and displaced-side distinctions |
 | `think-gg4k` | 259, 269, 270, 271, 273, 302, 303, 304, 305, 306, 307 | High-count ideal-side sweep, same dependency; preserve historical and source-invalid distinctions |
@@ -688,7 +750,7 @@ Additional work:
   These two acquired inputs remain fixtures for the driver recovery.
   The retained $n = 102$ input describes Daniel’s older packing, whose claimed ideal
   root is now superseded.
-  The current finite bound is RyXu’s arrangement at
+  At the dated pre-PR518 checkpoint, the finite bound was RyXu’s arrangement at
   `8dc415296f697f5140caea27c7a0193d52deb4e6`, already retained in the
   [RyXu packet](../../../../packing/resources/web/ry-xu-new-packings-2026-10-08/README.md).
   Before a current-pose $n = 102$ slice, convert that complete certificate into the

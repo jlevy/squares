@@ -241,12 +241,13 @@ for _counts, _bead, _route in ROUTE_GROUPS:
 ROUTES[102] = (
     ROUTES[102][0],
     ROUTES[102][1]
-    + " Before resuming this ideal-contact lane, bind and convert the already retained "
-    "current ry-xu certificate at 8dc415296f697f5140caea27c7a0193d52deb4e6. Derive its "
-    "active, weak and forced contacts and frozen variables, confirm the current-pose "
-    "seed, and pass the W7 driver and n11 control before a preregistered bounded W6 "
-    "run. The earlier evand 13ee36e5 input remains a historical fixture; its contact "
-    "system and local-minimum claims do not transfer to this new geometry.",
+    + " Before resuming this ideal-contact lane, bind and convert the native certificate "
+    "identified by this row's adopted current source custody. Derive its active, weak "
+    "and forced contacts and frozen variables, confirm the current-pose seed, and pass "
+    "the W7 exporter and driver and independent n11 control before a preregistered "
+    "bounded W6 run (think-ohhz). The ry-xu 8dc415296f697f5140caea27c7a0193d52deb4e6 "
+    "certificate and earlier Daniel 13ee36e5 input remain historical fixtures; their "
+    "contact systems and local-minimum claims do not transfer to this geometry.",
 )
 for _n, _bead in (
     (105, "think-gl59"),
@@ -1760,7 +1761,13 @@ def build_entry(
         routes = (
             _arrangement_notes(n)
             if arrangement is not None
-            else _numeric_only_notes(n, kkt_row)
+            else _numeric_only_notes(
+                n,
+                kkt_row,
+                source_certificate=None
+                if adopted is None
+                else adopted[1]["source_certificate"],
+            )
         )
         for note in routes:
             if (
@@ -1816,10 +1823,18 @@ def build_entry(
     }
 
 
-def _numeric_only_notes(n: int, kkt_row: dict | None) -> list[dict]:
+def _numeric_only_notes(
+    n: int, kkt_row: dict | None, *, source_certificate: dict | None = None
+) -> list[dict]:
     notes: list[dict] = []
     if n in ROUTES:
         bead, text = ROUTES[n]
+        if n == 102 and source_certificate is not None:
+            text += (
+                f" Current native certificate: {source_certificate['source_key']}, "
+                f"{source_certificate['result']}, revision {source_certificate['revision']}; "
+                f"{source_certificate['original_certificate']}."
+            )
         status = None if kkt_row is None else str(kkt_row["status"])
         if status != KKT_LOCAL_MIN:
             text += f" No confirmed KKT local minimum is retained (batch status {status!r})."

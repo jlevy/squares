@@ -117,12 +117,35 @@ def test_lazy_payloads_round_trip_published_records_and_original_coefficients(
         "T-151": [176, 181, 238, 239, 270, 271, 272],
         "T-152": [304, 305],
     }
-    assert (
-        sum(
-            record["n"] == 105 and bool(record.get("source_certificate"))
-            for record in [*register["entries"], *register["historical_entries"]]
+    n105_sources = [
+        (section, record)
+        for section in ("entries", "historical_entries")
+        for record in register[section]
+        if record["n"] == 105 and record.get("source_certificate")
+    ]
+    assert len(n105_sources) == 5
+    assert {
+        (
+            section,
+            record["source_certificate"]["result"],
+            record["source_certificate"]["source_key"],
         )
-        == 3
+        for section, record in n105_sources
+    } == {
+        ("entries", "T-130", "[Couzo follow-up refinements 2026-10-08]"),
+        ("historical_entries", "T-138", "[Mishapolk decimal poses 2026-10-09]"),
+        ("historical_entries", "T-128", "[Couzo exact refinements 2026-10-08]"),
+        ("historical_entries", "T-125", "[ry-xu square packing 2026]"),
+        ("historical_entries", "T-129", "[Daniel dated certificates 105 and 130 2026-10-07]"),
+    }
+    assert all(
+        record["source_certificate"]["adoption"]
+        == ("adopted" if section == "entries" else "not-selected")
+        for section, record in n105_sources
+    )
+    assert all(
+        record["status"] == "open" if section == "entries" else record["kind"] == "superseded"
+        for section, record in n105_sources
     )
     for record in adopted:
         certificate = record["source_certificate"]

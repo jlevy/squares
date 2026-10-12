@@ -9,21 +9,72 @@ The polynomial report is strictly web-only: preserve HTML/Markdown, every equati
 coefficient, source custody and no-JavaScript access.
 Do not generate or publish a PDF.
 
+## Native Adoption Checkpoint, October 11–12
+
+The stack integrates main `562fdbdff1d98948f68b36b81b53f9c8165ffd08`, including PR518’s
+42 house adoptions and T151/T152’s nine replacements.
+Current custody has 49 adopted V3/C3 native bindings and 89 historical native
+occurrences; all 51 displaced polynomials and 102 earlier parent histories survive.
+Native accounting is 101 old + 11 new + 26 legacy occurrences, including 17 RyXu and
+nine Gupta legacy displacements.
+
+| Verified scope | Actual result |
+| --- | --- |
+| Parent corpus | 437 records; 436 recursive vectors; 1,403 integer strings; 101,733 gzip / 987,590 decoded bytes |
+| Parent current status | All 324 lower/status fields preserved; 77 proved / 247 open; 315 unaffected current records equal in full |
+| Child corpus | 621 records = 324 current + 297 historical; 643 recursive vectors; 6,544 integer strings |
+| Child storage / public projection | 913,496 gzip / 3,283,520 decoded bytes; 337 records / 337 recursive vectors / 2,096 integer strings |
+| Native certificate grades | All 49 current V3/C3; historical 89 = 86 V3/C3 replayed + three V0/C0 source-reported |
+| Child current partition | 175 integer / 75 rational / 58 closed-form / 13 minimal / three numeric; no degree-only |
+| Child history | 284 superseded / three unreconciled / seven outside-frontier / three source-invalid |
+| n=83 | Degree 672; all 673 coefficients retained, maximum 724 digits; source ordinal 27 independently uncounted |
+
+Child current coverage remains 321 exact identities, three numeric gaps at
+$n = 29,55,71$ and 77 proved cases; the parent retains 320 exact identities and
+degree-only $n = 83$. The public projection contains no superseded or pending
+native-offer rows. Current numeric fields match the parent except the retained n=83
+polynomial. Superseded rows are omitted only from publication; full raw displaced-source
+custody remains. The report is strictly HTML/Markdown, with no polynomial PDF.
+
+Current $n = 102$ is Evan Daniel’s T146 regularization of Ryan Xu at
+`ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7`, native path
+`search/regularize/lists/certs/n-102.cert.gz`. Earlier RyXu `8dc415` and Daniel
+`13ee36e5` inputs are dated fixtures.
+W7 `think-s6np` driver delivery and an independent contact-derived $n = 11$ control
+precede the bounded n=102 `think-ohhz` slice.
+`think-63vx` concerns 62 reported quadratic source sides and a priced 41-count batch;
+remaining database updates are not reconciled.
+#419’s T120–T123 binding prerequisites and #420’s T124 theorem/perturbation binding are
+separate. No Lean build or owner closure is inferred from rational-house adoption.
+
+Final data generation changes only the n=102 current-custody route text; the remaining
+wrapper is equal in full.
+Serializer round-trip/schema checks have zero findings.
+Three guard controls pass in 13.50 s and 17 catalogue tests pass in 2.12 s, with zero
+static findings. These scoped passes do not qualify the pending web/full/push/CI gates.
+
+Latest parent builder controls pass 184 tests in 100.31 s; post-fix source controls pass
+99 in 102.94 s. Records passes 50/108 selected steps in 37.10 s, on an actual ten-CPU
+host with six jobs and two inner jobs; it is not the full tier.
+Parent pre-push has 64/65 prerequisites complete and remains active.
+Child full/web/push and exact-head hosted CI remain pending.
+No old-head pass qualifies these new data.
+
+The earlier child `0841b84e` run was owner-stopped after 68 prerequisites and four
+failed call phases, with 17 processes verified absent and no completed JUnit/lane pass.
+Its census/browser/signal fixtures are repaired; unchanged CLI serial success does not
+diagnose the parallel 20 s timeout (`think-w0if`). Detailed negative evidence is
+retained in `validation/child-main25-layer-push-failure-classification.json` under the
+external evidence root listed below.
+All dated failure and CI links below remain historical.
+Pushing and landing are pending; no merge is authorized.
+
 ## Branches, workspace and workflow
 
-The 2026-10-12 native stack rebase integrated `origin/main` at
-`25de5a42e8e35ca01668ed07747ed2a3601f4280`, including PR #547’s deterministic atlas
-fixture and PR #516’s four reviewed certificate batches, T-147 through T-150. The
-earlier 6038, ad00, 7847 and 0d601 checkpoints are dated evidence.
-PR #551 adds posted confirmation replies for T-147 through T-150; it changes no
-certificate, selected bound, atlas or proof status.
-The final native integration resolved the generated child data pin with the maintained
-pin tool. All selected current sides, rigidity and optimality labels remain unchanged by
-this latest merge.
-The seven new offers improve on the standing sides and await adoption.
-Release-pin conflicts were regenerated from actual rewritten data history.
-The marker conflict retains upstream per-case detection and the complete branch/main
-registry union; custody and refusal controls remain intact.
+The latest native rebase integrates main `562fdbdff1d98948f68b36b81b53f9c8165ffd08`. The
+main25de/e10 checkpoints below precede the latest regeneration.
+Final rewritten heads and pins follow root’s commit/publication readback; custody and
+refusal controls remain strict.
 
 - Parent branch: `claude/friendly-sagan-jk7qzy`, worktree
   `/Volumes/spud-ext1/agent-source/polynomial-parent-01a118e4`.
@@ -40,7 +91,7 @@ clean parent worktree before native rebase; reattach it afterward.
 A one-line acquisition pin follows data changes and is propagated with native upstack
 rebase. Resolve current remote heads from GitHub before publishing with explicit leases.
 
-## Refreshed corpus
+## Dated Pre-PR518 Corpus
 
 | Projection | Records and exact content |
 | --- | --- |
@@ -83,8 +134,10 @@ certificate side. T-149 uses native revision `c3d17ab`, separately from the larg
 T-150’s five other retained facts at n70/103/123/237/295 remain outside its reviewed
 result scope and acquire no T-150 grade.
 All seven are pending source offers, not atlas adoption or optimality claims.
-The 41 queued exact quadratic database updates remain a separate batch; reconcile count
-overlaps when selecting the smallest accepted source for adoption.
+The earlier checkpoint called this a 41-update queue.
+Current qualified scope is 62 reported quadratic source sides and a priced 41-count
+batch, with remaining updates unreconciled; these are separate from native house
+adoption.
 
 Scope is the reviewed result roster, constrained by declared certificate coverage and
 positive replay receipts.
@@ -101,7 +154,7 @@ search ran in this refresh.
 Lower-bound and request/reply context merged from main was retained.
 The n40 composite display was corrected to the actual 6.71581574608202 side.
 
-## Web publication and lossless controls
+## Dated Web Publication and Lossless Controls
 
 The new complete HTML uses author-generated native MathML and compact source custody
 markup; full Markdown retains its original TeX, complete quotes and custody.
@@ -300,18 +353,20 @@ link. Final per-commit/blob/pack audits are recorded there.
 | Controlled shared-CI timing baseline | think-9dhb OPEN under active think-ht59 |
 | Standing adoption of acquired V3/C3 source families | think-fvz4 IN_PROGRESS |
 | Lower exact certificate adoption, including T-146 | think-cb34 OPEN |
-| Queued Lean binding and 41 exact-quadratic upper-bound updates | think-63vx OPEN |
+| Lean/closed-form evidence for 62 reported quadratic sides; priced 41-count batch, remaining updates unreconciled | think-63vx OPEN |
 | Record/tool rung-review dispositions from #542 | think-npvi OPEN |
 | Fresh-worker input/dependency baseline for snapshot controls | think-nns5 OPEN |
-| Batch exact printed-side updates | think-omqv OPEN |
+| Batch exact printed-side review/updates; reconcile residual scope after house adoption | think-omqv IN_PROGRESS |
 | Independent T-120 through T-146 rung review | think-18b8 IN_PROGRESS |
-| Broader regularization and typed atlas layer | think-ux1v IN_PROGRESS; think-k35c OPEN |
+| Broader regularization and typed atlas layer | think-ux1v IN_PROGRESS; think-k35c IN_PROGRESS |
 | Owner’s final stack review/landing | think-6vrv IN_PROGRESS |
 
-The 41 queued exact-quadratic updates are a separate database slice from the three
-reported n=106/152/177 roots.
-They retain their Lean binding, axiom review and measured build prerequisites; the
-recorded 7,559s is process time, not an aggregate wall estimate.
+The Lean/closed-form scope reports 62 quadratic source sides and a priced 41-count
+batch; neither is a reconciled count of remaining database updates.
+It remains separate from the three reported n=106/152/177 roots and from rational-house
+adoption. Lean binding, axiom review and independent build prerequisites remain; the
+recorded 7,559 s is process time, not aggregate wall.
+T120–T123 are #419’s forms, while T124 is #420’s separate reported local-minimum scope.
 The #542 dispositions concern record/tool retention, replay and future reviewer
 independence. They identify no downgrade of these current V3/C3 source rows; RR1 still
 blocks unsupported future V4/C4 independence claims.
