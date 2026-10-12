@@ -5,7 +5,7 @@ title: Adopt the register's lower exact certificates as atlas witnesses before t
 kind: task
 status: open
 priority: 2
-version: 7
+version: 8
 labels:
   - regularization
 dependencies:
@@ -13,7 +13,7 @@ dependencies:
     target: is-01m4mdbq6bhkv71fxeeckawsbt
 parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
 created_at: 2026-10-11T21:07:52.361Z
-updated_at: 2026-10-12T11:32:22.648Z
+updated_at: 2026-10-12T12:33:05.748Z
 ---
 The pilots of 2026-10-11 show the exact solve rediscovering T-146's registered certificates at 70, 102, 129, 146 (1e-10 below the case records' verified bounds), so the same-side re-solve refuses unmatched-rotation there and the views become row-3 candidates. Adopting those certificates as the atlas witnesses (blocked on the case-record rewrite #403 and RG-7 custody, per T-146) lets the run regularize the credited packing at its own side. Also sequence the full run after the in-flight imports at the same counts (#470 think-jpre, #476 think-m8ck incl. 267, #481 think-ac4h, #483 think-8m3u, #488 think-6uv7, #489 think-xm4h), since a changed witness lapses any review (policy section 5).
 
@@ -28,3 +28,5 @@ The pilots of 2026-10-11 show the exact solve rediscovering T-146's registered c
 2026-10-12 ~10:40 UTC: the 42 counts re-run on #518's houses with the current driver (wider rotation tolerance, solve retry ladder, digit-limit fix; 1800 s limits): $SP/runs/adopt518-v2 (37) + $SP/runs/adopt518-v2b (5), from the scratch tree $SP/wt-518-code (#518 merged with #511). Decisions: 18 admit (all at the witness's own side: 84 86 108 126 127 129 132 153 180 207 209 228 236 237 259 270 302 306), 7 no change (70 102 103 258 269 295 303), 7 refuse (105 123 154 175 292 305 308), 7 held (146 155 156 211 232 261 307), 2 no view (263 267), 1 review (131). Follow-up once #518 is on main and the regularization stack (#548's v2 contract) is too: merge main into the stack, `reclassify --refresh-bounds` on copies of these runs in the merged tree, `regularize_evand layer --select admitted` for the 42, regenerate `regularized_drawings`, render, re-pin DATA_REVISION, and register the held 7 the way T-151 did (devtools/register_regularized_bounds.py). The refusals include 308, whose new house (T-141) draws 127 light squares where today's grid draws none; the grid-slack generator is the next thing to try there.
 
 2026-10-12 (morning): the follow-up recipe above stands; #549 now carries reclassify --refresh-bounds and the /1 grid contract, so the 17 grid choices among #518's counts join that admission.
+
+2026-10-12 12:25 UTC: precomputed on #518's witnesses (#518 at 1bc770d34; re-run any count whose witness or case record changes before it merges). Evan Daniel runs reclassified with --refresh-bounds: no bound or decision moved (18 admitted). Grid pass on 35 counts (7 skipped by the all-count rule), 35 exact views, 39.6 min wall. Choice (same rule as the all-count lane): grid at 105 131 146 156 175 211 232 267 292 305 307 308; Evan Daniel at 84 86 108 126 127 129 132 153 180 207 209 228 236 237 259 270 302 306; keep #518's drawing at 70 102 103 123 154 155 258 261 263 269 295 303. Census over the 42: light 230 -> 133, uneven 588 -> 361, near-axis 182 -> 6, house sides 21,701 -> 23,038 (as admitted, without 232). 302 under the new witness already draws 0/0/0 (Evan Daniel's view 980 house sides is chosen); 303 keeps 4 light squares no generator closes. 232's grid view is row 7 (review). Admission once main (with #518) is merged up the stack, from packing/: regularize_axis_components --update-atlas --n <the 42> --workers 2; then PYTHONINTMAXSTRDIGITS=0 python -m devtools.regularize_evand layer --run-dir $SP/runs/refreshed-adopt518-v2 $SP/runs/refreshed-adopt518-v2b --repo-root .. --grid-run $SP/grid/runs/on518 --grid-counts 105 131 146 156 175 211 267 292 305 307 308 (dry run on a layer copy: 29 views written, check_atlas 0 problems). Report: grid-518-report.md in the session scratchpad.
