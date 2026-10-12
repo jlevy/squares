@@ -16,6 +16,7 @@ import mpmath as mp
 import pytest
 
 from devtools import adopt_houses, refinement_packets
+from devtools import backfill_algebraic_facts as algebraic_backfill
 from devtools import build_known_best_atlas as atlas
 from devtools import census_atlas_contact_shades as shades
 from devtools import confirm_ryxu_records as confirmation
@@ -480,7 +481,9 @@ def confirmation_frontier(
         moved = [n for n in houses.NUMBERS if n in adopted.ADOPTED]
         prior = adopt_houses.read_history()
         for n in moved:
-            (frontier / f"n-{n:03d}.md").write_text(prior[n])
+            # Derive the three algebraic fields from the retained source itself;
+            # complete-source equality must still reject any other metadata drift.
+            (frontier / f"n-{n:03d}.md").write_text(algebraic_backfill.backfilled(prior[n], n))
         restore_ryxu_selections(frontier / "source-coverage.yaml", moved)
         for name, field, identifiers in (
             ("results.yaml", "results", {"T-125", "T-126"}),

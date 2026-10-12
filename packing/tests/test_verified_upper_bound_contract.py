@@ -146,6 +146,15 @@ DECLARED_CONSUMERS = {
         "publishes accepted complete replay as a finite feasible upper ceiling; "
         "retains historical verification and establishes no optimality or value of s(n)"
     ),
+    "packing/devtools/exact_house_sources.py": (
+        "binds an adopted finite native side to its independently confirmed upper "
+        "ceiling and retained pre-adoption source records; exact rational identity "
+        "does not establish s(n), ideal contacts or global optimality"
+    ),
+    "packing/tests/test_exact_house_sources.py": (
+        "checks current and historical finite ceiling/native-certificate agreement, "
+        "scope refusals and complete custody; no ceiling is treated as s(n)"
+    ),
     "packing/devtools/build_exact_values.py": (
         "permits an upward decimal display window only when a non-proved rational report "
         "matches the independently certified replay ceiling, source and exact fraction; "

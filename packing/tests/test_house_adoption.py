@@ -19,6 +19,7 @@ import yaml
 from devtools import adopt_houses as adopt
 from devtools import select_houses as select
 from devtools import upper_bound_houses as houses
+from sqpack.exact_values import DERIVED_FROM_EXACT_FORM
 from sqpack.yamlio import safe_load
 
 
@@ -764,3 +765,21 @@ def test_a_redraft_keeps_the_house_and_takes_the_drafted_lower_lanes() -> None:
     earlier = adopt.read_history()[70]
     assert not adopt.holds(70, earlier)
     assert adopt.adopt_case(70, earlier, record) == record
+
+
+def test_a_redraft_derives_only_the_adopted_finite_side_algebraic_fields() -> None:
+    record = select.case_path(70).read_text(encoding="utf-8")
+    original = _front(record)
+    stale_bound = {
+        **original["reported_upper_bound"],
+        "algebraic_degree": 7,
+        "minimal_polynomial": "s^7 - 1 = 0",
+        "algebraic_source": "contact-system",
+    }
+    stale = adopt.with_lane(record, "reported_upper_bound", stale_bound)
+    rebuilt = adopt.adopt_case(70, stale, record)
+    packing = _front(rebuilt)
+    assert packing == original
+    assert rebuilt.split("---\n", 2)[2] == record.split("---\n", 2)[2]
+    assert packing["reported_upper_bound"]["algebraic_source"] == DERIVED_FROM_EXACT_FORM
+    assert adopt.adopt_case(70, rebuilt, record) == rebuilt

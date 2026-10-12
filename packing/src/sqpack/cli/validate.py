@@ -5130,6 +5130,10 @@ STEPS: tuple[Step, ...] = (
         records=True,
         touches=(
             *_CORE,
+            # Native source admission reaches case verifiers and the renderer hub.
+            # Claim their Python inputs conservatively as source adapters evolve.
+            "packing/cases/**/*.py",
+            "packing/devtools/*.py",
             "packing/devtools/build_exact_values.py",
             "packing/devtools/backfill_algebraic_facts.py",
             "packing/devtools/extract_kingbird_svg_exact.py",
