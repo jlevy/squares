@@ -1176,7 +1176,7 @@ Use the structured form to query or plot; use these tables to read.
 | 14 | `4` | unavoidable points | Erich Friedman (2009) | proved |
 | 15 | `4` | counting | Said El Moumni (1999) | proved |
 | 16 | `4` | perfect square | classical | proved |
-| 17 | `4.67553009` | counting | Marc Leonard Overbeck (Kleddamag) (2026) | proof audit pending |
+| 17 | `4.67553009` | counting | Overbeck (2026) | proof audit pending |
 | 21 | `5` | counting | Evan Daniel (2026) | proved |
 | 22 | `5` | unavoidable points | Wolfram Bentz (2016) | proved |
 | 23 | `5` | Nagamochi | Hiroshi Nagamochi (2005) | proved |

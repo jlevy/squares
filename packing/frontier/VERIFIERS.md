@@ -51,8 +51,8 @@ second implementation agrees.
 | [`V-evand-verify-cert2-py`](#v-evand-verify-cert2-py) | verify_cert2.py (s12/search/exact/) | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-lean`](#v-evand-lean) | The source's Lean development (lean/) | Evan Daniel | external | decides | 8 | 5 |
 | [`V-chelokot-lean`](#v-chelokot-lean) | The source's Lean development (formal/) | chelokot | external | decides | 1 | 1 |
-| [`V-kleddamag-n11-verify`](#v-kleddamag-n11-verify) | verify.py | Kleddamag | external | decides | 4 | 2 |
-| [`V-kleddamag-n17-verify`](#v-kleddamag-n17-verify) | verify.py | Kleddamag | external | decides | 11 | 6 |
+| [`V-kleddamag-n11-verify`](#v-kleddamag-n11-verify) | verify.py | Overbeck | external | decides | 4 | 2 |
+| [`V-kleddamag-n17-verify`](#v-kleddamag-n17-verify) | verify.py | Overbeck | external | decides | 11 | 6 |
 | [`V-wang-li-n11-verify`](#v-wang-li-n11-verify) | verify.py of the Zenodo release | Wang and Li | external | decides | 2 | 1 |
 | [`V-guzhou-r012-verify-py`](#v-guzhou-r012-verify-py) | certificates/R012/verify.py | Guzhou0806 | external | decides | 1 | 1 |
 | [`V-guzhou-r052-verify-py`](#v-guzhou-r052-verify-py) | certificates/R052/verify.py | Guzhou0806 | external | decides | 2 | 1 |
@@ -654,7 +654,7 @@ Kernel-checks Records.NearSquare.squareMinusTwo_isMinimumSide, s(n^2 - 2) = n fo
 
 ### `V-kleddamag-n11-verify`
 
-**verify.py, its Python checker and its JavaScript BigInt secondary checker** · Kleddamag · external · decides · Python, JavaScript · exact-algebraic
+**verify.py, its Python checker and its JavaScript BigInt secondary checker** · Overbeck · external · decides · Python, JavaScript · exact-algebraic
 
 Decides a weighted threshold certificate for n = 11 by two event-cell sweeps over every parent interval, each covering every interval and agreeing on every minimum.
 
@@ -670,13 +670,13 @@ Decides a weighted threshold certificate for n = 11 by two event-cell sweeps ove
 
 ### `V-kleddamag-n17-verify`
 
-**verify.py, its Python checker and its Node BigInt checker** · Kleddamag · external · decides · Python, JavaScript · exact-algebraic
+**verify.py, its Python checker and its Node BigInt checker** · Overbeck · external · decides · Python, JavaScript · exact-algebraic
 
 Decides an n = 17 certified-bound charge certificate by a Python sweep and a JavaScript BigInt sweep run together, each covering every interval and agreeing on every minimum and cell count.
 
 - Source: [`packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/kleddamag-17-squares-certified-bound/verify.py`](../../packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/kleddamag-17-squares-certified-bound/verify.py), [`packing/resources/web/n17-kleddamag-4640020-2026-09-26/kleddamag-17-squares-certified-bound/bounds/4.640020/verify.py`](../../packing/resources/web/n17-kleddamag-4640020-2026-09-26/kleddamag-17-squares-certified-bound/bounds/4.640020/verify.py), [`packing/resources/web/n17-kleddamag-466001-2026-09-27/kleddamag-17-squares-certified-bound/bounds/4.66001/verify.py`](../../packing/resources/web/n17-kleddamag-466001-2026-09-27/kleddamag-17-squares-certified-bound/bounds/4.66001/verify.py)
 - Versions run: SHA-256 `d620178d047a…` (v1.0.0, 461300/99853); SHA-256 `6a027666c393…` (4.640020; of `verify.py`); SHA-256 `2885bb142a31…` (4.66001; of `verify.py`); SHA-256 `c22091862df6…` (the Node BigInt checker of 4.66001, which Guzhou0806's R067 to R071 bundle byte for byte; of `verify_global_variable.js`)
-- Note: Guzhou0806's paired n = 17 launchers run Kleddamag's Node BigInt checker beside their own C++.
+- Note: Guzhou0806's paired n = 17 launchers run Overbeck's Node BigInt checker beside their own C++.
 
 | evidence | run | code | results |
 | --- | --- | --- | --- |
@@ -737,7 +737,7 @@ The source's checkers of its R052 charge certificate, a Python sweep and a BigIn
 
 **verify.cpp, run by the paired launcher replay.js** · Guzhou0806 · external · decides · C++, JavaScript · exact-algebraic
 
-The source's C++ exclusion checker, run interval by interval beside Kleddamag's Node BigInt checker by the paired launcher, which requires both to pass.
+The source's C++ exclusion checker, run interval by interval beside Overbeck's Node BigInt checker by the paired launcher, which requires both to pass.
 
 - Source: [`packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/certificates/R068-C010/upstream/cpp/verify.cpp`](../../packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/certificates/R068-C010/upstream/cpp/verify.cpp), [`packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/certificates/R067-4.66018/src/verify.cpp`](../../packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/certificates/R067-4.66018/src/verify.cpp), [`packing/resources/web/n17-guzhou-r071-2026-09-30/n17-square-packing/certificates/R071-C029/run_public.js`](../../packing/resources/web/n17-guzhou-r071-2026-09-30/n17-square-packing/certificates/R071-C029/run_public.js)
 - Versions run: SHA-256 `3ba09554cef0…`, revision `815b1626` (identical bytes for R067 and R068); SHA-256 `3ba09554cef0…`, revision `8c11f6962506` (R071's project/base/upstream/cpp/verify.cpp, pinned in the R071 packet as byte-identical to R068's); SHA-256 `1125e5969fe0…` (the paired launcher replay.js, the same bytes in R067 to R071; of `replay.js`); SHA-256 `45f6ef8e5b5e…`, revision `8c11f6962506` (R071's public launcher, which checks the package, builds verify.cpp and runs replay.js at two partitions; of `run_public.js`)
@@ -878,7 +878,7 @@ Proves ElevenSquare.optimality, s(11) = T, in Lean 4.34.1 with Mathlib d13f23b7:
 
 **The wand125 tools repository's transfer/l_cap.py and general_pose_tree** · wand125 · external · decides · Python, Rust · exact-algebraic
 
-The source's ceiling transfer for the fixed B = 9977/10000 and its general pose tree, which reports exact per-row minima for Kleddamag's n = 11 certificate.
+The source's ceiling transfer for the fixed B = 9977/10000 and its general pose tree, which reports exact per-row minima for Overbeck's n = 11 certificate.
 
 - Source: [`packing/resources/web/wand125-tools-2026-09-29/upstream.tar.gz`](../../packing/resources/web/wand125-tools-2026-09-29/upstream.tar.gz)
 - Versions run: SHA-256 `6223f8c0ba26…` (the retained upstream tarball)
@@ -1273,7 +1273,7 @@ Decides each rectangle-density ceiling certificate's containment and pairwise di
 
 **devtools.check_general_pose_tree_census** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Runs the pinned general pose tree on every row of Kleddamag's n = 11 certificate, binds the inputs, requires row-minimum equality and re-evaluates each witness exactly.
+Runs the pinned general pose tree on every row of Overbeck's n = 11 certificate, binds the inputs, requires row-minimum equality and re-evaluates each witness exactly.
 
 - Source: [`packing/devtools/check_general_pose_tree_census.py`](../../packing/devtools/check_general_pose_tree_census.py)
 - Versions run: this repository's commits, which Git holds
