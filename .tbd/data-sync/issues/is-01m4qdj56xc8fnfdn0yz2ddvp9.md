@@ -5,7 +5,7 @@ title: "Layer 5: rungs, significance, announcement, reply rule"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T06:42:21.021Z
-updated_at: 2026-10-12T10:12:10.082Z
+updated_at: 2026-10-12T12:50:04.713Z
 started_at: 2026-10-12T06:42:25.474Z
 ---
 Top layer (layer 5) of stack #517 for the 2026-10-11 intake pass. Assemble the finished lane branches onto layer 4 (l4 / claude/wizardly-meitner-wqn4x3-imports-2): R1 ce6e7a8e8 recent-register rungs, R2 6652442df Lean-backed rungs, S ca1439fca significance confirmation (plus T-147..T-152 check), T aaf3e1796 + 07cc09f2e render_announcement, P 3558ec428 reply rule, P b4c030f11 intake-watch reads. Then OR-9 rollups, the pass announcement, and validation (--push, --records, touched tests, --fast). No push, no PR.
@@ -41,3 +41,6 @@ Validation, under load average 8 to 19 on 4 CPUs from the other lanes:
 - --push run 3 (--timeout-seconds 1800): all 65 edit checks passed; the reachable whole suite was cut at 1800 s about 7% in. The two failures named by an interrupted rerun (n17 audit subprocess 20 s timeout, n17 propagation wall ceiling) pass alone.
 - --records: exit 0, 49 steps.
 - Touched tests (46 files): 9 failed, 1912 passed. One real failure from this layer: test_unread_worker_outputs_leave_workers_while_declared_files_return, because R2's review links chelokot-lean-replay/build.log. Fixed in 73ae0cc89, which drops the entry from UNREAD_WORKER_OUTPUTS. Seven are subprocess timeouts that pass serially. One, test_site_result_filters legacy-home [1280]/[390], is a test race: the select is read with results.html at readyState=loading, because expect_navigation resolves on a late same-document #t-031 navigation. It passes on l4 and intermittently on layer5, so it is not caused by the data.
+- --fast (--timeout-seconds 3600, load average 14 to 30): 11 steps failed, with 20 test failures. Three (site math faces, two atlas views) pass serially. Seventeen fail identically on l4 dead83f0e and are inherited: couzo_extended_reports outside-horizon packets, module_boundaries slow marker, render_packing_methods tutorial date 2026-10-12 against 2026-10-10, fixed_core_packet process reaping (2), and site_drawing_hover fixture "artwork lacks its frame or square outlines" (12). Four Rust steps and shards A and D timed out on fixed limits. D-034 fails under the pool, but a serial census reaches 2.767766953 at seeds 2 and 5 (29 to 51 s against a 90 s quench budget), so it is load-dependent. The workbench Animate view step includes an 845 ms trajectory against a 400 ms limit; this layer changes nothing under packages/, atlas or witnesses.
+- 991853c80 refreshes the rollups after 73ae0cc89 (coordinator, 4 grown logs, 20 new lanes). --records on the final head: exit 0. ruff and basedpyright are clean on the two changed Python files.
+Final head: layer5 991853c80. Not pushed. Layer 4 merge not yet done (no message received).

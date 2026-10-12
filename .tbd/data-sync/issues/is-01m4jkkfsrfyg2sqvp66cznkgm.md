@@ -5,7 +5,7 @@ title: "Stage 4-5: independently review and adopt the pending upper-bound report
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:51:43.927Z
-updated_at: 2026-10-12T07:56:04.354Z
+updated_at: 2026-10-12T14:01:12.636Z
 started_at: 2026-10-10T09:52:52.837Z
 ---
 The register holds rational upper-bound reports by others at V0/C0 whose next_rung is an independent review of the retained replay and a selected-house decision: T-128 (Couzo, eight), T-130 (Couzo, five), T-131 (Daniel, n = 132), and this pass's #470, #476, #481, #483 and #484 once registered. Several counts now carry more than one candidate (132: T-098 house, T-131, #476, #470; 237, 263, 270, 303: #476 and #481; 267: #470, #476). For each count: the smallest certificate whose complete two-route replay passed, a mapped W2 review of that replay (think-mt6e's rule: verified lane only on a replay here and a mapped review), the earlier house kept as history, and the case record's reported and verified ceilings moved together. Mirror the Gupta adoption (PR #448, #459: confirm_gupta_records.py). Coordinate with PR #403 / #435, which own canonical exact-value integration on the case records.
@@ -93,3 +93,5 @@ Worker snapshot (b1c057f23): the 42 adopted leaves are linked back by upper_boun
 Local: the failing tests and their whole files 207 passed; test_negative_controls (PR surface) 161 passed; the slow SQUISH replay passed; site filter/popover 29 passed, 6 skipped; workbench browser behavior OK; packing-validate --sweeps 5/5 (190.6 s), --records exit 0, --edit exit 0 (454.5 s). Hosted: #518's pull_request run had not started at hand-off (PR mergeable state unknown; #516 is dirty against layer 1).
 
 2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): PR #518's two calls (the SQUISH 263/302 houses rebuilt from the packet's private inputs; n-263 asserted as a link to the checkout's file, both b1c057f23) are on https://github.com/jlevy/squares/issues/543 for the owner. Tracker https://github.com/jlevy/squares/issues/544.
+
+Owed after #518 merges (from #551 review A, A1): the four replies of 12 October on #501, #503, #504 and #505 promise a further reply when the case records move. check_requests cannot see that promise (#540). The post-#518 pass posts that reply with the final close on each, and marks the earlier replies outdated as the record did for #245.
