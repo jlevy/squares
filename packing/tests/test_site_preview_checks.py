@@ -334,34 +334,43 @@ SCALE = {"prose": 18, "sans": 19, "support": 18.05, "note": 17.48, "colophon": 1
 
 def _type(link: float | None, tab: float | None, name: float | None = 19) -> dict:
     """A `preview_site/header` report's type: a link's size, a tab's and the name's."""
-    return {"type": {"body": 18, "name": name, "link": link, "tab": tab, "scale": SCALE}}
+    return {
+        "type": {
+            "body": 18,
+            "name": name,
+            "link": link,
+            "tab": tab,
+            "tab_scale": 0.9,
+            "scale": SCALE,
+        }
+    }
 
 
 def test_the_bars_type_is_one_step_under_the_bodys_and_no_more() -> None:
-    """A link in the bar and a section tab are under the prose base and no smaller than
-    the first step of the scale under it, whatever those are in pixels; the two are one
-    size; and the site's name is at least the body's. The sizes the bar had, 16px links
+    """A link in the bar is under the prose base and no smaller than
+    the first step below it; section tabs apply the shared label scale.
+    The site's name is at least the body's. The sizes the bar had, 16px links
     and 14.4px tabs under a 16px name, are each named."""
-    assert type_problems(_type(17.48, 17.48)) == []
+    assert type_problems(_type(17.48, 15.73)) == []
     assert type_problems(_type(17.48, None)) == []
     assert type_problems(_type(None, None, None)) == []
     unscaled = _type(17.48, None)
     unscaled["type"]["scale"] = None
     assert type_problems(unscaled) == []
-    wide = "it should be under the body's 18px and no smaller than the step below it, 17.48px"
+    wide = "it should be under 18px and no smaller than 17.48px"
+    tab = "it should be under 16.2px and no smaller than 15.73px"
     assert type_problems(_type(16, 14.4, 16)) == [
         f"a link in the header is 16px: {wide}",
-        f"a tab in the header is 14.4px: {wide}",
-        "a section tab is 14.4px and a link in the bar 16px",
+        f"a tab in the header is 14.4px: {tab}",
         "the site's name is 16px, under the body's 18px",
     ]
     # The support size is a step of the scale, but not one under the body.
-    assert type_problems(_type(18.05, 18.05)) == [
+    assert type_problems(_type(18.05, 16.25)) == [
         f"a link in the header is 18.05px: {wide}",
-        f"a tab in the header is 18.05px: {wide}",
+        f"a tab in the header is 16.25px: {tab}",
     ]
     # A body of another size moves the step with it.
-    larger = _type(18.05, 18.05, 20)
+    larger = _type(18.05, 16.25, 20)
     larger["type"]["scale"] = {**SCALE, "prose": 19}
     assert type_problems(larger) == []
 
@@ -469,13 +478,10 @@ def _labels(
     *lines: tuple[int, float], name: float | None = 46.8, tabs: float | None = None
 ) -> dict:
     """A `preview_site/baselines` report: two links on each line of the bar, a line given
-    as its top and its baseline, the name's baseline, and two tabs on one of theirs. The
-    name's line is 25px tall, with the mark centred on it."""
+    as its top and its baseline, the name's baseline, and two tabs on one of theirs."""
     words = iter(("Overview", "Results", "Papers", "Frontier"))
     return {
         "name": name,
-        "name_text": name and {"top": name - 18, "bottom": name + 7},
-        "logo": {"top": 32.3, "bottom": 50.3},
         "links": [
             {"label": next(words), "baseline": baseline, "top": top, "current": False}
             for top, baseline in lines
@@ -491,15 +497,13 @@ def _labels(
 def test_the_name_and_the_links_stand_on_one_baseline() -> None:
     """The site's name stands on the baseline of the bar's first line of links, within
     half a pixel, and so does each link beside another; a bar that wraps has a baseline
-    a line. A name set above the links, as it was while the bar's baseline was the foot
-    of its mark, is named with how far; where the name's text is not shown there is
-    nothing to hold it to."""
+    a line. A name set above the links is named with how far; where its text is not shown
+    there is nothing to hold it to."""
     assert baseline_problems(_labels((25, 46.8))) == []
     assert baseline_problems(_labels((25, 46.8), name=47.2, tabs=102.58)) == []
     assert baseline_problems(_labels((22, 40.78), (50, 68.28), name=None, tabs=119.77)) == []
     assert baseline_problems(_labels((29, 51.3), name=47.8)) == [
         "the site's name stands -3.5px off the baseline of the bar's links",
-        "the site's mark is centred -1px off the middle of its name's line",
     ]
     uneven = _labels((25, 46.8), tabs=102.58)
     uneven["links"][1]["baseline"] = 48.0

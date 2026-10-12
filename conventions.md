@@ -1,7 +1,7 @@
 # Conventions for `packing/`
 
-**The definitive registry of every convention and naming this project uses.** Where
-another document restates an id or naming convention, this one wins.
+This document defines the project’s record formats and naming conventions.
+Where another document restates an id or naming convention, this one takes precedence.
 This page governs the *shape of what is produced*; how a session is conducted is
 [`operating-rules.md`](operating-rules.md), and a rule about agent conduct belongs there
 rather than here.
@@ -241,10 +241,10 @@ successor.
 
 **A documentation pass reconciles; it does not author.** [convention] W8 may correct,
 cut, reorder and clarify the root documents against the artifacts, and may not introduce
-a claim the record does not already carry — a document that wants to say something new
-is asking for W1 or W6. Where a document and an artifact disagree and the artifact is
-not obviously right, the output is a defect rather than a rewrite: a pass that quietly
-picks the more readable side is how a wrong claim becomes the tidy one.
+a claim the record does not already carry; new claims belong in W1 or W6. Where a
+document and an artifact disagree and the artifact is not obviously right, the output is
+a defect rather than a rewrite: a pass that quietly picks the more readable side is how
+a wrong claim becomes the tidy one.
 Its checklist is the
 [documentation-pass runbook](packing/campaign/documentation-pass.md).
 Every W10 closeout performs the smaller document-impact review even when it finds
@@ -377,14 +377,13 @@ Wall clock is reported alongside as a courtesy, never as the budget.
 ## 5. Notation and Terminology
 
 **One document owns each vocabulary, and the rest are short forms.** [convention]
-[Assurance and method](#4-evidence) above are definitive here, and the schemas enforce
-them; the result-level epistemic vocabulary is owned by
-[`epistemics.md`](epistemics.md).
+[Assurance and method](#4-evidence) are defined here, and the schemas enforce them; the
+result-level epistemic vocabulary is owned by [`epistemics.md`](epistemics.md).
 Mathematical terminology is defined in [`SYNOPSIS.md`](SYNOPSIS.md#terminology);
-[`TUTORIAL.md`](TUTORIAL.md) §9 and [`README.md`](README.md)’s Essential Terms are short
-forms that may abbreviate but must not contradict it, and a term either appears in the
-synopsis or is marked local where it is used.
-Both restatements have drifted from it before.
+[the tutorial’s vocabulary card](TUTORIAL.md#10-a-vocabulary-card) and
+[`README.md`](README.md)’s Essential Terms are short forms that may abbreviate but must
+not contradict it, and a term either appears in the synopsis or is marked local where it
+is used. Both restatements have drifted from it before.
 
 **Mathematical notation follows four rules.** [convention]
 
@@ -403,7 +402,8 @@ Both restatements have drifted from it before.
   Bare *gap* means the search gap, which is the sense the synopsis and the campaign
   artifacts use; write the qualifier wherever both senses are in play.
 
-**The symbol table lives in [`TUTORIAL.md`](TUTORIAL.md) §10**, in the order a reader
+**The symbol table lives in
+[the tutorial’s notation card](TUTORIAL.md#11-a-notation-card)**, in the order a reader
 meets each symbol, and is the place to look up a letter.
 [convention] The rules above are what other documents must not violate; the table is how
 a newcomer learns them.
@@ -569,10 +569,9 @@ its measured reason in [`.flowmarkignore`](.flowmarkignore).
 site, and flowmark keeps whole.
 A code span is for what is literally typed or named: ids, paths, commands, field names,
 and the register’s ASCII literals (`s(11) >= 381/100`), which stay ASCII. Where GitHub
-draws no math — after a hyphen, slash, dash or quote, or inside italics or a link’s text
-— a formula stays code.
-A file moves in one commit through `devtools.migrate_math --apply`, which proves each
-rewrite against kpress, KaTeX and flowmark and lists the file in
+draws no math—after a hyphen, slash, dash or quote, or inside italics or a link’s text—a
+formula stays code. A file moves in one commit through `devtools.migrate_math --apply`,
+which proves each rewrite against kpress, KaTeX and flowmark and lists the file in
 [`math-markup.yaml`](packing/devtools/math-markup.yaml), where `check_math_markup` keeps
 it migrated; `devtools.check_github_math` then asks GitHub how it rendered the pushed
 file. Generated Markdown moves at its renderer.
@@ -581,8 +580,8 @@ file. Generated Markdown moves at its renderer.
 is a `<div class="…">` with a blank line after the opening tag and before the closing
 one, so the Markdown inside it still renders; an inline run is a `<span class="…">`; a
 figure is `<figure>` with a `<figcaption>`, which kpress decorates itself.
-Class names are kpress’s where it styles the block — `hero`, `subtitle`, `boxed-text`,
-`shaded-text`, `claim`, `summary`, `key-claims`, `centered-headers` — and the document’s
+Class names are kpress’s where it styles the block—`hero`, `subtitle`, `boxed-text`,
+`shaded-text`, `claim`, `summary`, `key-claims`, `centered-headers`—and the document’s
 own only where kpress has none.
 No attribute sugar (`{.class}`, `[text]{.class}`) and no `:::` containers: the div and
 span pass-through is the one kpress guarantees without configuration, it survives its
@@ -591,7 +590,7 @@ sanitized mode, and GitHub renders the same blocks as plain HTML. The explainer 
 is the worked example.
 
 **Relative links must resolve.** [checked] The campaign’s checker walks every relative
-Markdown link. This project has needed that twice.
+Markdown link.
 
 **Docs follow the common documentation guidelines** and carry the footer.
 [checked: document map] The map covers every durable project document, distinguishes
@@ -667,8 +666,8 @@ cost affects a decision.
 Three properties make the split safe rather than merely cheaper, and each is a test:
 
 - **The tiers nest.** `--records` is contained in `--edit`, contained in `--fast`,
-  contained in the full run — checked as sets, so swapping two steps between tiers
-  cannot pass by keeping the totals equal.
+  contained in the full run, checked as sets, so swapping two steps between tiers cannot
+  pass by keeping the totals equal.
 - **Every step is reachable from the full run**, so a step can be deferred to a wider
   tier and never dropped out of all of them.
 - **Exclusion is opt-out.** A new step joins `--edit` unless explicitly marked `broad`,

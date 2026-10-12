@@ -9,7 +9,7 @@ The clock is fixed at the register's reference date for deterministic age checks
 
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from datetime import datetime, time
 from pathlib import Path
 from typing import Any
@@ -86,6 +86,19 @@ def opened(
     return page
 
 
+def arrival(path: Path) -> Callable[[str], bool]:
+    """A navigation matcher for the document at `path`, under any query and fragment.
+
+    A bare `expect_navigation` takes the first navigation of any kind, and Chromium
+    reports a same-document `history.replaceState` as one. KPress's history behaviour
+    stamps the scroll offset that way 200 ms after a scroll, and a click first scrolls
+    its link into view, so on a busy runner the homepage's stamp can come before the
+    next page commits: the wait then returns at once, and the new page is read while it
+    is still parsing, before `overview/table.js` has preset its controls."""
+    uri = path.as_uri()
+    return lambda url: urlsplit(url)._replace(query="", fragment="").geturl() == uri
+
+
 def state(page: Any) -> dict[str, Any]:
     found = page.evaluate(STATE)
     assert found is not None, "the page has no results table under a filter bar"
@@ -115,7 +128,7 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     """On load the complete page's checkbox is clear as its HTML has it; every row
     shows and the count is theirs. The rows that carry the flag are every result
     that is not superseded: the current bests, the second certificates, the better
-    bounds the case records have not taken in yet (T-128, pending adoption) and the
+    bounds the case records have not taken in yet (T-122, pending adoption) and the
     results that claim no bound, which have no standing, but for one the register
     declares a later result implies whole (T-031, superseded by T-060)."""
     defaults = PAGES[name]
@@ -155,7 +168,9 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     }
     assert [result.id for result in kept if result.standing == "superseded"] == ["T-003"]
     pending = render_recent_results.PENDING_ADOPTION
-    assert "T-128" in [result.id for result in kept if result.standing == pending]
+    # T-128 holds its cases since the house adoption of 11 October 2026 (think-fvz4);
+    # T-122 is still a bound pending adoption.
+    assert "T-122" in [result.id for result in kept if result.standing == pending]
     assert "t-031" not in current
     assert "t-036" in current
     assert set(found["current"]) < set(found["shown"])
@@ -403,7 +418,7 @@ def test_legacy_home_query_and_registered_fragment_reach_the_complete_filtered_t
             "s-min": ["3"],
             "age": ["180"],
         }
-        with page.expect_navigation(wait_until="load"):
+        with page.expect_navigation(url=arrival(pages["results.html"]), wait_until="load"):
             page.get_by_role("link", name="All Results", exact=True).click()
         landed = urlsplit(page.url)
         assert landed.path.endswith("/results.html")
@@ -551,7 +566,7 @@ def test_retired_reader_fragment_updates_the_ordinary_home_link_and_reaches_its_
         assert destination.path.endswith("/" + row.path)
         assert destination.fragment == fragment
         assert parse_qs(destination.query) == parse_qs(supported)
-        with page.expect_navigation(wait_until="load"):
+        with page.expect_navigation(url=arrival(pages[row.path]), wait_until="load"):
             page.get_by_role("link", name="All Results", exact=True).click()
         assert_tombstone(page, row, fragment, supported)
     finally:

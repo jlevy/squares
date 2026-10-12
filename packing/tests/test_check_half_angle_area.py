@@ -27,7 +27,9 @@ from devtools.check_half_angle_area import (
     placed,
     read_centred_json,
     read_fact,
+    read_pingyou_json,
     read_squish_json,
+    read_witness_corners,
     rotation,
     unit_basis,
 )
@@ -852,3 +854,813 @@ def test_the_470_witness_at_103_is_ryan_xus_packing_square_for_square() -> None:
     assert gap["symmetry"] == 0
     assert gap["moved_beyond"]["1e-9"] == 0
     assert gap["turned_beyond_1e-6"] == 0
+
+
+# --------------------------------------------------------------------------- #503 and #504
+
+#: PingYou Ltd's JSON: SQUISH's rows with the four fields its reader leaves unread.
+PINGYOU_JSON: dict[str, Any] = {
+    **PAIR_JSON,
+    "note": "rational centers and t=tan(theta/2)",
+    "dilation_exact": "5000000000001/5000000000000",
+    "raw_side": 2.4,
+    "provenance": {"construction": "two squares", "angle": 53.13},
+}
+PAIR_SIDE = Fraction(12, 5)
+PAIR = tuple(
+    placed(
+        (
+            (Fraction(1, 2), Fraction(3, 5), Fraction(0)),
+            (Fraction(17, 10), Fraction(7, 10), HALF_TURN),
+        )
+    )
+)
+
+
+def test_the_503_and_504_rosters_are_one_derived_fact_each() -> None:
+    found = route.import_cases(("#503", "#504"))
+    assert [(case.issue, case.n, case.read) for case in found] == [
+        ("#503", 207, "facts/n-207.yaml"),
+        ("#504", 153, "facts/n-153.yaml"),
+    ]
+    assert found[0].side == Fraction(148809603730436756319360591381170501178639, 10**40)
+    assert found[1].side == Fraction(6435006925203522001385040447, 5 * 10**26)
+
+
+def test_the_pingyou_reader_reads_squish_rows_and_leaves_its_metadata_unread() -> None:
+    assert read_pingyou_json(json.dumps(PINGYOU_JSON).encode(), 2) == read_squish_json(
+        json.dumps(PAIR_JSON).encode(), 2
+    )
+    # A field the reader does not know is refused, whatever it holds; so is another count.
+    with pytest.raises(AreaRouteError):
+        read_pingyou_json(json.dumps({**PINGYOU_JSON, "s_decimal": "2.4"}).encode(), 2)
+    with pytest.raises(AreaRouteError):
+        read_pingyou_json(json.dumps(PINGYOU_JSON).encode(), 3)
+
+
+def _corner_witness(
+    side: Fraction,
+    placements: tuple[route.Placed, ...],
+    *,
+    start: int = 0,
+    frame: dict[str, str] | None = None,
+    representation: str = "corners",
+) -> str:
+    """A corners Witness/v2 in JSON syntax, each square's corners from its ``start``-th."""
+    squares = []
+    for index, (x, y, c, s) in enumerate(placements, start=1):
+        points = [
+            [str(x + (a * c - b * s) / 2), str(y + (a * s + b * c) / 2)]
+            for a, b in ((-1, -1), (1, -1), (1, 1), (-1, 1))
+        ]
+        squares.append({"id": index, "corners": points[start:] + points[:start]})
+    witness = {
+        "n": len(placements),
+        "side": str(side),
+        "square_size": "1",
+        "representation": representation,
+        "scalar": {"kind": "rational"},
+        "coordinates": dict(route.CORNER_FRAME) if frame is None else frame,
+        "squares": squares,
+    }
+    return json.dumps({"softschema": {"schema": "witness.schema.yaml"}, "witness": witness})
+
+
+def test_the_corner_witness_reader_recovers_each_pose_from_its_corners() -> None:
+    assert read_witness_corners(_corner_witness(PAIR_SIDE, PAIR).encode(), 2) == (
+        PAIR_SIDE,
+        PAIR,
+    )
+    # Corners from the next vertex are the same squares a quarter turn around, read so.
+    turned = read_witness_corners(_corner_witness(PAIR_SIDE, PAIR, start=1).encode(), 2)
+    assert turned == (PAIR_SIDE, tuple((x, y, -s, c) for x, y, c, s in PAIR))
+
+
+def _clockwise() -> str:
+    """The first pair square alone, its corners listed clockwise."""
+    document = json.loads(_corner_witness(PAIR_SIDE, PAIR[:1]))
+    document["witness"]["squares"][0]["corners"].reverse()
+    return json.dumps(document)
+
+
+@pytest.mark.parametrize(
+    ("text", "n"),
+    [
+        # Square 1's corners (0, 1/10) and (1, 1/10) moved up: no longer a unit square.
+        (_corner_witness(PAIR_SIDE, PAIR).replace('"1/10"', '"1/9"'), 2),
+        (_corner_witness(PAIR_SIDE, PAIR).replace('"id": 2', '"id": 3'), 2),
+        (
+            _corner_witness(
+                PAIR_SIDE, PAIR, frame={"origin": "lower-left", "axes": "x-right-y-up"}
+            ),
+            2,
+        ),
+        (_corner_witness(PAIR_SIDE, PAIR, representation="center-basis"), 2),
+        (_corner_witness(PAIR_SIDE, PAIR).replace('"side": "12/5"', '"side": "0"'), 2),
+        (_corner_witness(PAIR_SIDE, PAIR), 3),
+        (_clockwise(), 1),
+    ],
+)
+def test_the_corner_witness_reader_refuses_what_is_not_one_unit_square_in_order(
+    text: str, n: int
+) -> None:
+    """A moved corner, an id out of order, another frame, another representation, a
+    side that is not positive, another count and corners listed clockwise are refused."""
+    assert text != _corner_witness(PAIR_SIDE, PAIR) or n != 2
+    with pytest.raises(AreaRouteError):
+        read_witness_corners(text.encode(), n)
+
+
+@pytest.fixture
+def pingyou_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path, Path]:
+    """A derived-fact packet of PingYou's shape: the JSON certificate and the source's
+    own corner witness, both pinned and neither retained, and the fact derived from it."""
+    monkeypatch.setattr(route, "REPO", tmp_path)
+    upstream = tmp_path / "upstream"
+    upstream.mkdir()
+    (upstream / "n2.cert.json").write_text(json.dumps(PINGYOU_JSON), encoding="utf-8")
+    (upstream / "n2-rational.yaml").write_text(
+        _corner_witness(PAIR_SIDE, PAIR), encoding="utf-8"
+    )
+    packet = tmp_path / "packet"
+    (packet / "acquisition").mkdir(parents=True)
+    (packet / "facts").mkdir()
+    _pin(packet, upstream)
+    row = {
+        "n": 2,
+        "path": "n2.cert.json",
+        "format": "pingyou-json",
+        "offered": "12/5",
+        "printed_in": "https://github.com/jlevy/squares/issues/0",
+        "same_packing": [{"path": "n2-rational.yaml", "format": "witness-corners"}],
+        "fact": "facts/n-002.yaml",
+    }
+    declaration = {"certificates": [row], "requested": [2]}
+    (packet / "acquisition/report.json").write_text(json.dumps(declaration), encoding="utf-8")
+    (packet / "facts/n-002.yaml").write_text(_fact_text(PAIR_SIDE, PAIR), encoding="utf-8")
+    return packet, upstream
+
+
+def _pin(packet: Path, upstream: Path) -> None:
+    """Write the packet's acquisition record pinning both upstream files as they are."""
+    pinned = [
+        {"path": path, "sha256": hashlib.sha256((upstream / path).read_bytes()).hexdigest()}
+        for path in ("n2.cert.json", "n2-rational.yaml")
+    ]
+    record = {"sources": [{"source_commit": "5" * 40, "pinned_only": pinned}]}
+    (packet / "acquisition/sources.json").write_text(json.dumps(record), encoding="utf-8")
+
+
+def test_a_facts_same_packing_witness_is_held_to_its_pin_and_its_packing(
+    pingyou_packet: tuple[Path, Path],
+) -> None:
+    packet, upstream = pingyou_packet
+    assert route.upstream_problems(packet, upstream) == (2, [])
+    witness = upstream / "n2-rational.yaml"
+    witness.write_bytes(witness.read_bytes() + b"\n")
+    assert route.upstream_problems(packet, upstream) == (
+        1,
+        ["packet: n2-rational.yaml is not the file the packet pins"],
+    )
+    # Re-pinned at a witness of another packing, one square moved far below binary64.
+    x, y, c, s = PAIR[1]
+    moved = (PAIR[0], (x + TINY, y, c, s))
+    witness.write_text(_corner_witness(PAIR_SIDE, moved), encoding="utf-8")
+    _pin(packet, upstream)
+    assert route.upstream_problems(packet, upstream) == (
+        2,
+        ["packet n=2: n2-rational.yaml is not the packing the fact states"],
+    )
+    # A same-packing format this route has no reader for is reported, not skipped.
+    report = packet / "acquisition/report.json"
+    report.write_text(report.read_text().replace("witness-corners", "corners-csv"))
+    assert route.upstream_problems(packet, upstream) == (
+        1,
+        ["packet n=2: no reader for corners-csv"],
+    )
+
+
+@pytest.mark.parametrize(
+    ("issue", "n", "clearance", "least_distance"),
+    [
+        ("#504", 153, "1/10000000000000", "1.885826e-13"),
+        pytest.param("#503", 207, "1/20000000000", "1.000000e-10", marks=pytest.mark.slow),
+    ],
+)
+def test_the_pingyou_imports_agree_with_their_receipts_plans_and_prints_to_every_digit(
+    issue: str, n: int, clearance: str, least_distance: str
+) -> None:
+    case = route.import_cases((issue,))[0]
+    row = route.decide_import(case)
+    packet = route.WEB / case.packet
+    maintained = upper.check_certification(packet)[n]
+    claim = route.PLAN_CLAIM.findall(upper.register_plan(packet)["results.yaml"]["claim"])
+    frozen = upper.check_claims(packet)["results"][0]
+    assert row["passed"]
+    assert row["wall_contacts"] == 0
+    assert row["wall_clearance"] == clearance
+    assert row["least_distance"] == least_distance
+    assert all(row["controls"].values())
+    assert (
+        route.compare_import(
+            row, maintained, literal(claim[0][1]), frozen, frozen["offered_side"]
+        )
+        == []
+    )
+
+
+def test_lineage_finds_a_placed_dilated_copy_of_a_packing_and_counts_a_turned_square() -> None:
+    side = Fraction(2)
+    parent = tuple(placed(GRID))
+    dilation = Fraction(10000000001, 10000000000)
+    child = tuple((dilation * (x + 1), dilation * y, c, s) for x, y, c, s in parent)
+    found = route.patch_lineage((2 * side, child), (side, parent), dilation)
+    assert found[0] == {
+        "symmetry": 0,
+        "translation": ["1", "0"],
+        "squares": 4,
+        "turned_beyond_1e-6": 0,
+        "exact": 4,
+    }
+    x, y, _c, _s = child[3]
+    turned = (*child[:3], (x, y, *rotation(Fraction(1, 1000))))
+    found = route.patch_lineage((2 * side, turned), (side, parent), dilation)
+    assert (found[0]["squares"], found[0]["turned_beyond_1e-6"], found[0]["exact"]) == (4, 1, 3)
+    # A square whose basis is written a quarter turn around is the same square, exactly.
+    quarter = (*child[:3], (x, y, Fraction(0), Fraction(1)))
+    assert route.patch_lineage((2 * side, quarter), (side, parent), dilation)[0]["exact"] == 4
+    # Nothing of the parent in a child placed far away: no placement reaches the floor.
+    apart = tuple((x + 10, y + 10, c, s) for x, y, c, s in parent[:2])
+    assert route.patch_lineage((Fraction(20), apart), (side, parent), Fraction(1)) == []
+
+
+@pytest.mark.slow
+def test_the_n207_certificate_is_two_placed_patches_of_the_n70_and_the_n153_is_not() -> None:
+    """#503's 207 holds Evan Daniel's n70 twice, 60 squares at the identity and all 69
+    of the second patch under the box's anti-diagonal reflection moved by (6, 6), as its
+    provenance states; #504's 153 is reclosed at a new angle and no placement of the n70
+    lands more than 31 of its squares within 10^-9, one of them exactly."""
+    lineage = route.lineage_gaps(route.import_cases(("#503", "#504")))
+    n207 = lineage["#503 n=207 from regularized n=70"]
+    assert n207[0] == {
+        "symmetry": 0,
+        "translation": ["0", "0"],
+        "squares": 69,
+        "turned_beyond_1e-6": 0,
+        "exact": 60,
+    }
+    assert n207[1] == {
+        "symmetry": 5,
+        "translation": ["6", "6"],
+        "squares": 69,
+        "turned_beyond_1e-6": 0,
+        "exact": 69,
+    }
+    n153 = lineage["#504 n=153 from regularized n=70"]
+    assert max(patch["squares"] for patch in n153) == 31
+    assert max(patch["exact"] for patch in n153) == 1
+
+
+# --------------------------------------------------------------------------- #505 and #501
+
+#: The pair packing in Daniil Ostashev's sqcert format: his header labels as comments.
+SQCERT_TEXT = (
+    "# sqcert v1\n# generated-by: sqverify --certify\n# claimed_s: 2.4\n"
+    "# delta: 1e-60 (centres and side multiplied by 1 + delta)\n"
+    "n 2\ns 12/5\n# x y t\n1/2 3/5 0\n17/10 7/10 1/2\n"
+)
+BARNETT_146 = (
+    "116279649124311595126849961042493265136092670741573762928668277775998122712863"
+    "472766532671969348798419026610394581005669/9240437194455113887096299456817024243"
+    "377978045957194209468060456305894240222303442118770000000000000000000000000000000"
+)
+BARNETT_261 = (
+    "281511998443714605777671262552678001053511713995864784318453182156213791529093"
+    "472577894719178723409384395264262601/168784527733880048005353512381558168574000"
+    "40173477095354881922318666694517637251382500000000000000000000000000000"
+)
+OSTASHEV = {
+    155: Fraction(
+        64762127034792280678268012662770039849775757530809316735783064762127034792280678268012662770039849775757530809316735783,
+        5 * 10**117,
+    ),
+    156: Fraction(
+        8111982883527766297069290937797918339306619994848173142743008111982883527766297069290937797918339306619994848173142743,
+        625 * 10**114,
+    ),
+    211: Fraction(
+        74981683606681578473292015533873289965462274509366086287257074981683606681578473292015533873289965462274509366086287257,
+        5 * 10**117,
+    ),
+}
+
+
+def test_the_505_and_501_rosters_are_the_counts_their_issues_request() -> None:
+    """#505's five superseded certificates are replayed by the importer and not read here."""
+    found = route.import_cases(("#505", "#501"))
+    assert [(case.issue, case.n, case.read) for case in found] == [
+        ("#505", 146, "facts/n-146.yaml"),
+        ("#505", 261, "facts/n-261.yaml"),
+        ("#501", 155, "source/records/n0155.sqcert"),
+        ("#501", 156, "source/records/n0156.sqcert"),
+        ("#501", 211, "source/records/n0211.sqcert"),
+    ]
+    sides = {(case.issue, case.n): case.side for case in found}
+    assert sides["#505", 146] == literal(BARNETT_146)
+    assert sides["#505", 261] == literal(BARNETT_261)
+    for n, side in OSTASHEV.items():
+        assert sides["#501", n] == side
+    report = route.WEB / route.ALL_IMPORTS["#505"] / "acquisition/report.json"
+    declaration = json.loads(report.read_text(encoding="utf-8"))
+    assert declaration["replayed"] == [70, 103, 123, 146, 237, 261, 295]
+    assert route.roster("#505", declaration) == [146, 261]
+
+
+def test_the_sqcert_reader_reads_the_split_header_and_skips_the_labels() -> None:
+    assert route.parse_sqcert(SQCERT_TEXT, 2) == parse_certificate(
+        "2 12/5\n1/2 3/5 0\n17/10 7/10 1/2\n", 2
+    )
+    readers = route.RETAINED_READERS
+    assert readers == {"evand-cert": parse_certificate, "sqcert": route.parse_sqcert}
+
+
+@pytest.mark.parametrize(
+    ("text", "n"),
+    [
+        (SQCERT_TEXT, 3),
+        (SQCERT_TEXT.replace("n 2\ns 12/5", "s 12/5\nn 2"), 2),
+        (SQCERT_TEXT.replace("n 2\ns 12/5", "2 12/5"), 2),
+        (SQCERT_TEXT.replace("n 2\ns 12/5", "n 2"), 2),
+        (SQCERT_TEXT.replace("n 2\n", "N 2\n"), 2),
+        (SQCERT_TEXT.replace("n 2\n", "n 02\n"), 2),
+        (SQCERT_TEXT.replace("s 12/5", "s 0"), 2),
+        (SQCERT_TEXT.replace("s 12/5", "s 12/5 1"), 2),
+        (SQCERT_TEXT.replace("17/10 7/10 1/2", "17/10 7/10 1/2 0"), 2),
+        (SQCERT_TEXT + "1/2 3/2 0\n", 2),
+        (SQCERT_TEXT.replace("1/2 3/5 0\n", ""), 2),
+    ],
+)
+def test_the_sqcert_reader_refuses_what_its_format_does_not_state(text: str, n: int) -> None:
+    """Another count, the labels swapped or joined, a missing or extra field or row, a
+    label in another case or a padded count, and a side that is not positive."""
+    with pytest.raises(AreaRouteError):
+        route.parse_sqcert(text, n)
+
+
+def test_the_evand_cert_upstream_reader_is_the_text_reader() -> None:
+    raw = b"# a comment\n2 2\n1/2 1/2 0\n3/2 1/2 0\n"
+    assert route.read_evand_cert(raw, 2) == parse_certificate(raw.decode(), 2)
+    assert route.UPSTREAM_READERS["evand-cert"] is route.read_evand_cert
+    with pytest.raises(AreaRouteError):
+        route.read_evand_cert(raw, 3)
+
+
+def test_a_retained_certificates_table_print_is_held_to_its_pinned_file(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The README a retained certificate's side is printed in must be fetched at the pin,
+    be the packet's own copy and print the side in the count's row."""
+    monkeypatch.setattr(route, "REPO", tmp_path)
+    packet = tmp_path / "packet"
+    (packet / "acquisition").mkdir(parents=True)
+    (packet / "source/records").mkdir(parents=True)
+    certificate = SQCERT_TEXT.encode()
+    readme = b"# Records\n\n| n | side |\n|---:|---|\n| 2 | 2.4 |\n"
+    (packet / "source/records/n0002.sqcert").write_bytes(certificate)
+    (packet / "source/README.md").write_bytes(readme)
+    pin = "7" * 40
+    source = {"source_commit": pin, "pinned_only": [], "archived_path": "packet/source"}
+    (packet / "acquisition/sources.json").write_text(
+        json.dumps({"sources": [source]}), encoding="utf-8"
+    )
+    row = {
+        "n": 2,
+        "path": "records/n0002.sqcert",
+        "format": "sqcert",
+        "offered": "2.4",
+        "printed_in": f"https://github.com/a/b/blob/{pin}/README.md",
+    }
+    declaration = {"certificates": [row], "requested": [2]}
+    report = packet / "acquisition/report.json"
+    report.write_text(json.dumps(declaration), encoding="utf-8")
+    upstream = tmp_path / "upstream"
+    (upstream / "records").mkdir(parents=True)
+    (upstream / "records/n0002.sqcert").write_bytes(certificate)
+    (upstream / "README.md").write_bytes(readme)
+    assert route.upstream_problems(packet, upstream) == (2, [])
+    where = "packet n=2"
+    (upstream / "README.md").write_bytes(readme + b"\n")
+    assert route.upstream_problems(packet, upstream) == (
+        1,
+        [f"{where}: the retained README.md differs"],
+    )
+    (upstream / "README.md").unlink()
+    assert route.upstream_problems(packet, upstream) == (
+        1,
+        [f"{where}: no upstream README.md in {upstream}"],
+    )
+    elsewhere = readme.replace(b"| 2 | 2.4 |", b"| 3 | 2.4 |")
+    (upstream / "README.md").write_bytes(elsewhere)
+    (packet / "source/README.md").write_bytes(elsewhere)
+    assert route.upstream_problems(packet, upstream) == (
+        1,
+        [f"{where}: README.md does not print the side"],
+    )
+    report.write_text(json.dumps(declaration).replace(pin, "8" * 40), encoding="utf-8")
+    assert route.upstream_problems(packet, upstream) == (
+        1,
+        [f"{where}: the side is printed at another commit"],
+    )
+    # A README the packet pins without retaining is held to its digest instead.
+    report.write_text(json.dumps(declaration), encoding="utf-8")
+    (packet / "source/README.md").unlink()
+    (upstream / "README.md").write_bytes(readme)
+    digest = hashlib.sha256(readme).hexdigest()
+    source["pinned_only"] = [{"path": "README.md", "sha256": digest}]
+    (packet / "acquisition/sources.json").write_text(
+        json.dumps({"sources": [source]}), encoding="utf-8"
+    )
+    assert route.upstream_problems(packet, upstream) == (2, [])
+    (upstream / "README.md").write_bytes(readme + b"\n")
+    assert route.upstream_problems(packet, upstream) == (
+        1,
+        [f"{where}: README.md is neither retained nor the file the packet pins"],
+    )
+
+
+def test_the_houses_505_and_501_are_measured_against_are_read_as_their_entries_state() -> None:
+    """T-146's regularized view at 146, Couzo's refinement at 155 (T-128) and Evan Daniel's
+    exact optima at 156 and 211 (T-098), each read by this route after its packet's custody."""
+    side, placements = route.CREDITED_READERS["T-146"](146)
+    assert side == Fraction(6291891138707538440974154877957, 5 * 10**29)
+    assert len(placements) == 146
+    side, placements = route.couzo_refinement_packing(155)
+    assert side == Fraction(647624947200700369098292528347, 5 * 10**28)
+    assert len(placements) == 155
+    side, placements = route.evand_optimum_packing(156)
+    assert side == Fraction(3245520674629223275519207125509, 25 * 10**28)
+    assert len(placements) == 156
+    side, placements = route.evand_optimum_packing(211)
+    assert side == Fraction(7498980352483680782590502239189, 5 * 10**29)
+    assert len(placements) == 211
+    measured = {
+        (key, n): route.credited(key, n) for key, n in route.CREDITED if key in {"#505", "#501"}
+    }
+    assert measured == {
+        ("#505", 146): ("T-125", "T-146"),
+        ("#505", 261): ("T-125",),
+        ("#501", 155): ("T-115", "T-128"),
+        ("#501", 156): ("T-098",),
+        ("#501", 211): ("T-098",),
+    }
+    with pytest.raises(AreaRouteError):
+        route.evand_optimum_packing(17)
+
+
+#: #501's least wall clearance at 155 and 156, a corner square's: half of the 1 + 1e-20
+#: scaling of the load-bearing squares the source describes, carried through the
+#: 1 + 1e-60 dilation; at 211 a tilted square is nearest and its clearance is a longer
+#: rational of the same size.
+OSTASHEV_WALL = (
+    "1000000000000000000000000000000000000000100000000000000000001/" + "2" + "0" * 80
+)
+
+
+@pytest.mark.parametrize(
+    ("issue", "n", "clearance", "least_distance"),
+    [
+        ("#505", 146, "3.925867e-14", "1.206274e-16"),
+        pytest.param("#505", 261, "4.688122e-14", "1.206060e-16", marks=pytest.mark.slow),
+        ("#501", 155, "5.000000e-21", "5.000000e-21"),
+        ("#501", 156, "5.000000e-21", "5.000000e-21"),
+        pytest.param("#501", 211, "5.000000e-21", "5.000000e-21", marks=pytest.mark.slow),
+    ],
+)
+def test_the_505_and_501_imports_agree_with_their_receipts_plans_and_prints_to_every_digit(
+    issue: str, n: int, clearance: str, least_distance: str
+) -> None:
+    case = next(case for case in route.import_cases((issue,)) if case.n == n)
+    row = route.decide_import(case)
+    packet = route.WEB / case.packet
+    maintained = upper.check_certification(packet)[n]
+    claims = dict(
+        route.PLAN_CLAIM.findall(upper.register_plan(packet)["results.yaml"]["claim"])
+    )
+    frozen = next(r for r in upper.check_claims(packet)["results"] if r["n"] == n)
+    assert row["passed"]
+    assert row["wall_contacts"] == 0
+    assert f"{float(literal(row['wall_clearance'])):.6e}" == clearance
+    assert row["least_distance"] == least_distance
+    assert all(row["controls"].values())
+    if issue == "#501" and n != 211:
+        assert row["wall_clearance"] == row["far_wall_clearance"] == OSTASHEV_WALL
+    assert (
+        route.compare_import(
+            row, maintained, literal(claims[str(n)]), frozen, frozen["offered_side"]
+        )
+        == []
+    )
+
+
+@pytest.mark.slow
+def test_barnetts_refinements_are_ryan_xus_packings_moved_and_ostashevs_are_not() -> None:
+    """#505's 146 and 261 match Ryan Xu's certificates square for square at the identity,
+    261 moved by at most 9.1e-6 and 146 by at most 5.0e-2 (nearer than Evan Daniel's
+    regularized view, 0.12); #501's 155 pairs with SQUISH's and Couzo's packings only
+    through the aligned corner blocks every packing of this family shares, 50 squares
+    turned by up to 27 degrees, and 156 and 211 match the exact optima under no symmetry."""
+    gaps = route.credited_gaps(route.import_cases(("#505", "#501")))
+    xu146 = gaps["#505 n=146 against T-125"]
+    assert (xu146["symmetry"], xu146["largest_displacement"]) == (0, "5.023183e-2")
+    assert xu146["moved_beyond"] == {"1e-9": 145, "1e-6": 79, "1e-3": 51, "1e-2": 31, "1e-1": 0}
+    assert xu146["turned_beyond_1e-6"] == 24
+    daniel146 = gaps["#505 n=146 against T-146"]
+    assert (daniel146["symmetry"], daniel146["largest_displacement"]) == (0, "1.224465e-1")
+    assert daniel146["moved_beyond"]["1e-1"] == 3
+    xu261 = gaps["#505 n=261 against T-125"]
+    assert (xu261["symmetry"], xu261["largest_displacement"]) == (0, "9.146345e-6")
+    assert xu261["largest_orientation_sine"] == "2.441757e-06"
+    assert xu261["moved_beyond"] == {"1e-9": 82, "1e-6": 52, "1e-3": 0, "1e-2": 0, "1e-1": 0}
+    for house, beyond_tenth in (("T-115", 13), ("T-128", 14)):
+        gap = gaps[f"#501 n=155 against {house}"]
+        assert gap["symmetry"] == 0
+        assert gap["largest_displacement"].startswith("2.25")
+        assert gap["largest_orientation_sine"].startswith("4.57")
+        assert gap["moved_beyond"]["1e-1"] == beyond_tenth
+        assert gap["turned_beyond_1e-6"] == 50
+    for n in (156, 211):
+        assert gaps[f"#501 n={n} against T-098"]["unmatched"] == (
+            "no symmetry matches the two packings square for square"
+        )
+
+
+# --------------------------------------------------------------------------- #500
+
+SQUISH_500 = (176, 181, 238, 239, 270, 271, 272, 304, 305)
+#: The 15-digit sides issue #500 prints: each is its exact side cut, below it by less
+#: than one unit in the last place, so none is a bound the route would admit.
+SQUISH_500_ISSUE_DISPLAYS = {
+    176: "13.812856253277056",
+    181: "13.950819531022924",
+    238: "15.924106785321494",
+    239: "15.948443327300499",
+    270: "16.928196993329016",
+    271: "16.949116687815009",
+    272: "16.965586474837671",
+    304: "17.929657042170880",
+    305: "17.950544853925636",
+}
+#: How many square-to-wall clearances the third route finds exactly zero at each count.
+SQUISH_500_WALL_CONTACTS = {
+    176: 30,
+    181: 30,
+    238: 18,
+    239: 38,
+    270: 37,
+    271: 43,
+    272: 41,
+    304: 10,
+    305: 19,
+}
+
+
+def test_the_500_roster_is_nine_derived_facts() -> None:
+    found = route.import_cases(("#500",))
+    assert [(case.issue, case.n, case.read) for case in found] == [
+        ("#500", n, f"facts/n-{n:03d}.yaml") for n in SQUISH_500
+    ]
+    assert found[0].side == Fraction(
+        305005022674381157367132529416905207296020948646520876053762749858683599318120744,
+        22081242074898135703849455266036121393870562834861102970956326327326447327968587,
+    )
+    assert found[-1].side == Fraction(
+        176574386584524522718242075735181894343653439251445905894414633471908824717084407,
+        9836714596766635588546138051753839920746733217534271639970138607199828771763358,
+    )
+    # Every side is the one the packet's own HOUSES reader rebuilds for the register.
+    for case in found:
+        assert case.side == upper.house_side("[SQUISH fourth request 2026-10-11]", case.n)
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize("n", SQUISH_500)
+def test_the_500_imports_agree_with_their_receipt_plan_and_print_to_every_digit(
+    n: int,
+) -> None:
+    """Each certificate touches the box (a least wall clearance of exactly 0, the far
+    wall among the walls touched) and clears every pair by the 10^-32 the source states;
+    its side, poses and margins are the maintained routes' and the plan's."""
+    case = next(case for case in route.import_cases(("#500",)) if case.n == n)
+    row = route.decide_import(case)
+    packet = route.WEB / case.packet
+    maintained = upper.check_certification(packet)[n]
+    claims = dict(
+        route.PLAN_CLAIM.findall(upper.register_plan(packet)["results.yaml"]["claim"])
+    )
+    frozen = next(r for r in upper.check_claims(packet)["results"] if r["n"] == n)
+    assert row["passed"]
+    assert (row["wall_clearance"], row["far_wall_clearance"]) == ("0", "0")
+    assert row["wall_contacts"] == SQUISH_500_WALL_CONTACTS[n]
+    assert row["least_distance"] == "1.000000e-32"
+    assert all(row["controls"].values())
+    assert (
+        route.compare_import(
+            row, maintained, literal(claims[str(n)]), frozen, frozen["offered_side"]
+        )
+        == []
+    )
+    # The issue's 15-digit display is the exact side cut, so it is no ceiling and the
+    # route's admission by rounding up refuses it; the exact fraction is admitted.
+    assert not admitted(case.side, SQUISH_500_ISSUE_DISPLAYS[n])
+    assert admitted(case.side, frozen["offered_side"])
+
+
+def test_couzos_451_certificate_is_read_as_t128_states_it() -> None:
+    side, placements = route.couzo_refinement_packing(127)
+    assert side == upper.house_side("[Couzo exact refinements 2026-10-08]", 127)
+    assert len(placements) == 127
+    assert decide_placed(side, placements).passed
+    assert route.parent_packing("T-128", 127) == (side, placements)
+    assert route.parent_packing("#481", 209)[0] == upper.house_side(
+        "[SQUISH third request 2026-10-09]", 209
+    )
+
+
+def test_a_lineage_at_a_coarser_nearness_counts_a_moved_square() -> None:
+    """One grid square moved by a thousandth leaves three by pose, below the floor of
+    four, so nothing is reported at `NEAR`; at a hundredth the moved square counts."""
+    side = Fraction(2)
+    parent = tuple(placed(GRID))
+    x, y, c, s = parent[3]
+    moved = (*parent[:3], (x + Fraction(1, 1000), y, c, s))
+    assert route.patch_lineage((side, moved), (side, parent), Fraction(1)) == []
+    coarse = route.patch_lineage(
+        (side, moved), (side, parent), Fraction(1), near=Fraction(1, 100)
+    )
+    assert (coarse[0]["squares"], coarse[0]["exact"]) == (4, 3)
+    with pytest.raises(AreaRouteError):
+        route.patch_lineage((side, moved), (side, parent), Fraction(1), near=Fraction(0))
+
+
+@pytest.mark.slow
+def test_the_500_pieces_reappear_to_the_eye_and_not_by_pose() -> None:
+    """The source names Couzo's 127 (T-128) less six squares as a piece of the 176 and
+    SQUISH's #481 209 whole as a piece of the 270 and the 304. Within a tenth of a unit
+    most of each piece reappears, under a reflection of the 127's box and the identity
+    for the 209; within 10^-9 only upright squares at lattice positions do, and no
+    tilted square of either piece keeps its pose."""
+    found = route.import_cases(("#500",))
+    lineage = route.lineage_gaps(found)
+    by_pose = {name: patches[0] for name, patches in lineage.items()}
+    assert {
+        name: (p["symmetry"], p["squares"], p["turned_beyond_1e-6"], p["exact"])
+        for name, p in by_pose.items()
+    } == {
+        "#500 n=176 from T-128 n=127": (4, 20, 0, 1),
+        "#500 n=270 from #481 n=209": (0, 99, 0, 1),
+        "#500 n=304 from #481 n=209": (0, 98, 0, 1),
+    }
+    coarse = {}
+    for case in found:
+        named = route.LINEAGE.get((case.issue, case.n))
+        if named is None:
+            continue
+        key, m, dilation = named
+        parent = route.parent_packing(key, m)
+        best = route.patch_lineage(
+            (case.side, case.placements), parent, dilation, near=Fraction(1, 10)
+        )[0]
+        coarse[case.n] = (best["symmetry"], best["squares"], best["turned_beyond_1e-6"])
+    assert coarse == {176: (4, 115, 59), 270: (0, 180, 36), 304: (0, 188, 43)}
+
+
+# --------------------------------------------------------------------------- #506
+
+COUZO_506 = (304, 305, 338, 339, 344, 375, 376, 378, 379, 380, 381)
+#: The 12-place sides issue #506 prints, each its exact side rounded up.
+COUZO_506_PRINTS = {
+    304: "17.929565946849",
+    305: "17.950466482138",
+    338: "18.906436500552",
+    339: "18.929433883808",
+    344: "18.994353244944",
+    375: "19.906335145009",
+    376: "19.910276586885",
+    378: "19.942541777355",
+    379: "19.953572709539",
+    380: "19.987440766556",
+    381: "19.992663288464",
+}
+#: What every square clears: the 1 + 10^-20 guard of Evan Daniel's exact optima leaves a
+#: least wall clearance of exactly 1/(2 * 10^20) and a least distance of 10^-20; the
+#: rational witness at 375, the decimal packing dilated by 1 + 10^-11, clears its walls by
+#: exactly 10^-15 and its closest pair by 7.05e-12.
+EXACT_OPTIMUM = ("1/200000000000000000000", "1.000000e-20")
+COUZO_506_MARGINS = dict.fromkeys(COUZO_506, EXACT_OPTIMUM) | {
+    375: ("1/1000000000000000", "7.047473e-12")
+}
+
+
+def test_the_506_roster_is_the_eleven_retained_certificates_the_issue_names() -> None:
+    found = route.import_cases(("#506",))
+    assert [(case.issue, case.n, case.read) for case in found] == [
+        ("#506", n, f"source/certificates/n{n}.cert") for n in COUZO_506
+    ]
+    assert found[0].side == Fraction(8964782973424250487190982671787, 5 * 10**29)
+    assert found[5].side == Fraction(
+        38166979981362750351336743477, 1917328312988500000000000000
+    )
+    for case in found:
+        assert len(case.placements) == case.n
+        # Every side is the one the packet's own HOUSES reader rebuilds for the register,
+        # and rounds up at 12 places to the side the issue prints.
+        assert case.side == upper.house_side("[Couzo certificates 2026-10-11]", case.n)
+        assert admitted(case.side, COUZO_506_PRINTS[case.n])
+    # The four certificates the issue does not name are declared but not on the roster.
+    declared = upper.load_declaration(route.WEB / found[0].packet)["certificates"]
+    assert {row["n"] for row in declared} - set(COUZO_506) == {175, 308, 340, 343}
+    # Credit: the issue's starting packings where the record retains them as certificates.
+    assert route.credited("#506", 304) == ("#500",)
+    assert route.credited("#506", 305) == ("#500",)
+    assert route.credited("#506", 344) == ("#484", "#489")
+    assert route.credited("#506", 338) == ()
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize("n", COUZO_506)
+def test_the_506_imports_agree_with_their_receipt_plan_and_print_to_every_digit(
+    n: int,
+) -> None:
+    """No square touches a wall; the side, poses and margins are the maintained routes'
+    and the plan's, and the issue's 12-place print is the side rounded up."""
+    case = next(case for case in route.import_cases(("#506",)) if case.n == n)
+    row = route.decide_import(case)
+    packet = route.WEB / case.packet
+    maintained = upper.check_certification(packet)[n]
+    claims = dict(
+        route.PLAN_CLAIM.findall(upper.register_plan(packet)["results.yaml"]["claim"])
+    )
+    frozen = next(r for r in upper.check_claims(packet)["results"] if r["n"] == n)
+    assert row["passed"]
+    assert row["wall_contacts"] == 0
+    assert (row["wall_clearance"], row["least_distance"]) == COUZO_506_MARGINS[n]
+    assert all(row["controls"].values())
+    assert (
+        route.compare_import(
+            row, maintained, literal(claims[str(n)]), frozen, frozen["offered_side"]
+        )
+        == []
+    )
+    assert frozen["offered_side"] == COUZO_506_PRINTS[n]
+
+
+@pytest.mark.slow
+def test_the_506_packings_are_their_named_parents_moved() -> None:
+    """The issue says its 304 and 305 start from #500's Mondrian packings and its 344
+    from Kevin Fang's #484, which Evan Daniel's Hunt 3 (#489) also moved. Measured: at
+    304 and 305 every square matches one of #500's one to one under a reflection of the
+    box, none moved beyond a tenth, and by pose only the upright lattice squares coincide
+    under the translation by the side difference; at 344 every square of Fang's moved
+    beyond 10^-9 under a half turn, and Hunt 3's 344 matches the same way."""
+    found = [case for case in route.import_cases(("#506",)) if case.n in (304, 305, 344)]
+    gaps = route.credited_gaps(found)
+    assert {
+        name: (
+            gap["symmetry"],
+            gap["moved_beyond"]["1e-9"],
+            gap["moved_beyond"]["1e-3"],
+            gap["moved_beyond"]["1e-1"],
+            gap["turned_beyond_1e-6"],
+        )
+        for name, gap in gaps.items()
+    } == {
+        "#506 n=304 against #500": (4, 243, 65, 0, 72),
+        "#506 n=305 against #500": (4, 257, 58, 0, 92),
+        "#506 n=344 against #484": (2, 344, 206, 0, 254),
+        "#506 n=344 against #489": (2, 214, 136, 3, 125),
+    }
+    assert gaps["#506 n=304 against #500"]["largest_displacement"] == "5.025268e-2"
+    assert gaps["#506 n=305 against #500"]["largest_displacement"] == "7.175586e-2"
+    # Each side difference is the exact margin the refrozen claim record states.
+    for n, key in ((304, "#500"), (305, "#500")):
+        (case,) = [case for case in found if case.n == n]
+        assert Fraction(gaps[f"#506 n={n} against {key}"]["side_difference"]) == (
+            case.side - upper.house_side("[SQUISH fourth request 2026-10-11]", n)
+        )
+    lineage = route.lineage_gaps(found)
+    by_pose = {name: patches[0] if patches else None for name, patches in lineage.items()}
+    assert {
+        name: p and (p["symmetry"], p["squares"], p["turned_beyond_1e-6"], p["exact"])
+        for name, p in by_pose.items()
+    } == {
+        "#506 n=304 from #500 n=304": (4, 146, 0, 1),
+        "#506 n=305 from #500 n=305": (4, 138, 0, 1),
+        "#506 n=344 from #484 n=344": None,
+    }
+    # By pose the translation is the side difference along each axis, to the 10^-15 at
+    # which the exact shifts of two squares differ: the lattice squares against the far
+    # walls moved with the walls.
+    placement = lineage["#506 n=304 from #500 n=304"][0]
+    shift = [Fraction(value) for value in placement["translation"]]
+    assert all(Fraction(-9110, 10**8) < value < Fraction(-9109, 10**8) for value in shift)
+    assert abs(shift[0] - shift[1]) < Fraction(1, 10**14)

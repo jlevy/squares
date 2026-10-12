@@ -204,7 +204,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "7c62913f6d0d6679c3befb1020c8240a85be4ac0"
+DATA_REVISION = "e81fa106196f1f9b92cc8d645954d68fdb485e9f"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -546,7 +546,7 @@ PACKING_METHODS_HISTORY = (
 PACKING_METHODS_VERSION = PACKING_METHODS_HISTORY[0].version
 PACKING_METHODS_EDITION = PACKING_METHODS_VERSION
 PACKING_METHODS_FIRST_PUBLISHED = PACKING_METHODS_HISTORY[-1].first_published
-PACKING_METHODS_REVISED = "October 10, 2026"
+PACKING_METHODS_REVISED = "October 12, 2026"
 
 #: The commit the committed claim documents link to
 #: (`render_n11_lower_bounds_explainer.edition_file`), at this repository's short length. It is

@@ -9,13 +9,11 @@ way it is, and what the research has and has not established.
 Every result, status, count and verdict lives in [`SYNOPSIS.md`](SYNOPSIS.md), which is
 authoritative wherever the two appear to differ.
 
-Several outside ideas do real work here—linear programming in
-[§2](#2-the-configuration-space), then algebraic number fields, constrained optimality,
-rigidity, certified numerics, and symbolic elimination in
-[§5](#5-algebra-versus-numerics), and group actions and branch and bound in
-[§9](#9-how-an-optimality-proof-is-built).
-Each is introduced where it is first needed, and [§12](#12-further-reading) says where
-to learn it properly.
+The tutorial introduces linear programming in [§2](#2-the-configuration-space);
+algebraic number fields, constrained optimality, rigidity, certified numerics, and
+symbolic elimination in [§5](#5-algebra-versus-numerics); and group actions and branch
+and bound in [§9](#9-how-an-optimality-proof-is-built).
+[§12](#12-further-reading) gives references for each.
 [§11](#11-a-notation-card) collects every symbol on one page.
 
 For the methods that produced record packings, see
@@ -51,10 +49,8 @@ Two bounds are immediate:
 - **Area:** $s(n) \ge \sqrt{n}$, because $n$ unit squares have area $n$.
 - **Grid:** $s(n) \le \lceil \sqrt{n} \rceil$, by the axis-aligned grid packing.
 
-At $n = 11$ those give $3.3166\ldots \le s(11) \le 4$, and the whole subject lives in
-that interval.
-For a perfect square $s(m^2) = m$, since the two bounds meet, and there is
-nothing to say about the side value.
+At $n = 11$ those give $3.3166\ldots \le s(11) \le 4$. For a perfect square
+$s(m^2) = m$, since the two bounds meet.
 Some of the most interesting cases lie just above a perfect square, where improving on
 the next grid side can require tilted structure.
 
@@ -1295,14 +1291,14 @@ a theorem.
 
 ### Near-misses are the data
 
-A serious campaign produces thousands of non-record endpoints.
-They are not waste—they are the map, the training set for descriptors, the sample for
+A campaign produces thousands of non-record endpoints.
+These supply the map, the training set for descriptors, the sample for
 structure-versus-rarity laws, and the denominator for any coverage claim.
 
 ## 8. What Is Known, and What Is Not
 
-What has been established, with the exact limit of each claim, and then what is
-genuinely open, ranked by how much of the program rests on it.
+The established claims below state their limits; the open questions are ranked by how
+much of the program rests on them.
 Assurance and method follow [§5](#5-algebra-versus-numerics).
 Provenance is a separate fact from assurance, so each row states it.
 A published result checked here is a **confirmation**; the evidence register separates

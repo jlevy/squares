@@ -28,16 +28,20 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
     assert retained == expected
     assert RENDERING.read_text(encoding="utf-8") == rendering
     profile = retained["profile"]
+    # Re-derived by `--update` after the house adoption of 11 October 2026 (think-fvz4),
+    # which moved n = 70 to T-146 and n = 84 and 86 to T-130: 24 fewer structured squares
+    # (n = 86 structures 50 where Xu's packing structured 84), and the sensitivity sweep
+    # now moves 86 rather than 70 and 84, with no within-budget flip left.
     assert profile["aggregate"] == {
         "case_count": 36,
-        "contact_component_count": 165,
+        "contact_component_count": 164,
         "coverage_threshold_cases": {
             "at_least_50_percent": 35,
-            "at_least_75_percent": 33,
-            "at_least_90_percent": 26,
+            "at_least_75_percent": 32,
+            "at_least_90_percent": 25,
         },
         "fully_structured_cases": 9,
-        "internal_slide_dof": 860,
+        "internal_slide_dof": 861,
         "narrow_partition_status_counts": {
             "established": 3,
             "not-established": 24,
@@ -45,11 +49,11 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
             "outside-registered-budget": 2,
         },
         "sensitivity_comparison": {
-            "changed_case_count": 5,
-            "changed_ns": [68, 70, 71, 84, 88],
-            "primary_structured_square_count": 1755,
-            "sensitivity_structured_square_count": 1775,
-            "within_budget_flip_ns": [70],
+            "changed_case_count": 4,
+            "changed_ns": [68, 71, 86, 88],
+            "primary_structured_square_count": 1731,
+            "sensitivity_structured_square_count": 1764,
+            "within_budget_flip_ns": [],
         },
         "source_strata": [
             {
@@ -65,17 +69,17 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
             {
                 "case_count": 6,
                 "fully_structured_cases": 1,
-                "sensitivity_changed_ns": [68, 70, 84, 88],
+                "sensitivity_changed_ns": [68, 86, 88],
                 "source_kind": "packet-derived-facts",
                 "square_count": 447,
-                "structured_fraction": "0.885906040268",
-                "structured_square_count": 396,
+                "structured_fraction": "0.832214765101",
+                "structured_square_count": 372,
                 "within_six_components_and_three_free_cases": 2,
             },
         ],
         "square_count": 1860,
-        "structured_fraction": "0.943548387097",
-        "structured_square_count": 1755,
+        "structured_fraction": "0.93064516129",
+        "structured_square_count": 1731,
         "within_six_components_and_three_free_cases": 25,
     }
     assert "DESCRIPTIVE · NO VERDICT" in rendering

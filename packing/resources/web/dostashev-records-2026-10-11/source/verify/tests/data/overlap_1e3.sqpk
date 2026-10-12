@@ -1,0 +1,6 @@
+# sqpk v1
+# test: overlap 1e-3 that no dilation <= 1e-9 can fix
+n 2
+s 3
+0.5 0.5 0
+1.499 0.5 0

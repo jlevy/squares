@@ -13,11 +13,10 @@ the size of the smallest square that can hold $n$ unit squares, where the square
 free to rotate but cannot overlap?
 The side length of that smallest square is written $s(n)$.
 
-The question of the value of $s(n)$ is simple, but the answer is an open problem for
-most $n$. In many cases, $s(n)$ is known only to lie between an upper bound (the size of
-the enclosing square for the tightest packing ever discovered, such as
-$s(29) \le 5.934$) and a lower bound (a size below which it is proved that no packing
-can exist, such as the reported $s(29) \ge 5.81$).
+The value of $s(n)$ remains unknown for most $n$. In many cases, $s(n)$ is known only to
+lie between an upper bound (the size of the enclosing square for the tightest packing
+ever discovered, such as $s(29) \le 5.934$) and a lower bound (a size below which it is
+proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 <h2 id="the-atlas-of-square-packings" class="site-title">The Atlas of Square Packings<a id="the-atlas"></a></h2>
 
@@ -37,8 +36,9 @@ can exist, such as the reported $s(29) \ge 5.81$).
 
 <h2 id="papers" class="site-title">Papers<a id="learn-more"></a></h2>
 
-The tutorial introduces the problem; the three papers explain the lower bounds and
-optimality proof for eleven squares.
+The first-principles tutorial introduces the problem.
+Three papers explain the lower bounds and optimality proof for eleven squares; the
+methods tutorial describes how record packings are found.
 
 {{PAPER_CARDS}}
 

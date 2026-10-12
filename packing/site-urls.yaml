@@ -2836,6 +2836,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-07'
   status: live
+- path: atlas/regularized/n-176.svg
+  canonical: atlas/regularized/n-176.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
 - path: atlas/regularized/n-177.svg
   canonical: atlas/regularized/n-177.svg
   kind: asset-file
@@ -2939,6 +2947,14 @@ urls:
   producer: overview
   first_published: '2026-10-07'
   lastmod: '2026-10-07'
+  status: live
+- path: atlas/regularized/n-232.svg
+  canonical: atlas/regularized/n-232.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
   status: live
 - path: atlas/regularized/n-236.svg
   canonical: atlas/regularized/n-236.svg
@@ -3172,6 +3188,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-07'
   status: live
+- path: atlas/regularized/n-308.svg
+  canonical: atlas/regularized/n-308.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
 - path: atlas/regularized/n-68.svg
   canonical: atlas/regularized/n-68.svg
   kind: asset-file
@@ -3274,7 +3298,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/103.html
   canonical: cases/103.html
@@ -3282,7 +3306,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/104.html
   canonical: cases/104.html
@@ -3298,7 +3322,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/106.html
   canonical: cases/106.html
@@ -3322,7 +3346,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/109.html
   canonical: cases/109.html
@@ -3458,7 +3482,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/124.html
   canonical: cases/124.html
@@ -3482,7 +3506,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/127.html
   canonical: cases/127.html
@@ -3490,7 +3514,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/128.html
   canonical: cases/128.html
@@ -3506,7 +3530,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/13.html
   canonical: cases/13.html
@@ -3530,7 +3554,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/132.html
   canonical: cases/132.html
@@ -3538,7 +3562,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/133.html
   canonical: cases/133.html
@@ -3658,7 +3682,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/147.html
   canonical: cases/147.html
@@ -3722,7 +3746,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/154.html
   canonical: cases/154.html
@@ -3730,7 +3754,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/155.html
   canonical: cases/155.html
@@ -3738,7 +3762,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/156.html
   canonical: cases/156.html
@@ -3746,7 +3770,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/157.html
   canonical: cases/157.html
@@ -3914,7 +3938,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/176.html
   canonical: cases/176.html
@@ -3922,7 +3946,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/177.html
   canonical: cases/177.html
@@ -3962,7 +3986,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/181.html
   canonical: cases/181.html
@@ -3970,7 +3994,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/182.html
   canonical: cases/182.html
@@ -4202,7 +4226,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/208.html
   canonical: cases/208.html
@@ -4218,7 +4242,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/21.html
   canonical: cases/21.html
@@ -4242,7 +4266,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/212.html
   canonical: cases/212.html
@@ -4386,7 +4410,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/229.html
   canonical: cases/229.html
@@ -4426,7 +4450,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/233.html
   canonical: cases/233.html
@@ -4458,7 +4482,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/237.html
   canonical: cases/237.html
@@ -4466,7 +4490,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/238.html
   canonical: cases/238.html
@@ -4474,7 +4498,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/239.html
   canonical: cases/239.html
@@ -4482,7 +4506,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/24.html
   canonical: cases/24.html
@@ -4650,7 +4674,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/259.html
   canonical: cases/259.html
@@ -4658,7 +4682,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/26.html
   canonical: cases/26.html
@@ -4682,7 +4706,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/262.html
   canonical: cases/262.html
@@ -4698,7 +4722,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/264.html
   canonical: cases/264.html
@@ -4730,7 +4754,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/268.html
   canonical: cases/268.html
@@ -4746,7 +4770,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/27.html
   canonical: cases/27.html
@@ -4762,7 +4786,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/271.html
   canonical: cases/271.html
@@ -4770,7 +4794,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/272.html
   canonical: cases/272.html
@@ -4778,7 +4802,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/273.html
   canonical: cases/273.html
@@ -4954,7 +4978,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/293.html
   canonical: cases/293.html
@@ -4978,7 +5002,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/296.html
   canonical: cases/296.html
@@ -5050,7 +5074,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/303.html
   canonical: cases/303.html
@@ -5058,7 +5082,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/304.html
   canonical: cases/304.html
@@ -5066,7 +5090,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/305.html
   canonical: cases/305.html
@@ -5074,7 +5098,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: cases/306.html
   canonical: cases/306.html
@@ -5082,7 +5106,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/307.html
   canonical: cases/307.html
@@ -5090,7 +5114,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/308.html
   canonical: cases/308.html
@@ -5098,7 +5122,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/309.html
   canonical: cases/309.html
@@ -5578,7 +5602,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/71.html
   canonical: cases/71.html
@@ -5698,7 +5722,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/85.html
   canonical: cases/85.html
@@ -5714,7 +5738,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/87.html
   canonical: cases/87.html
@@ -6099,7 +6123,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/square-packing-methods-survey.md
   canonical: papers/square-packing-methods-survey.md
@@ -6107,7 +6131,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: papers/square-packing-methods-survey.pdf
   canonical: papers/square-packing-methods-survey.pdf
@@ -6115,7 +6139,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-12'
   status: live
 - path: readme.html
   canonical: readme.html
@@ -12682,6 +12706,211 @@ urls:
       - packing/resources/web/evand-regularized-2026-10-10/receipts/exact-certification.json.xz
       - packing/devtools/upper_bound_reports.py
       - packing/devtools/check_half_angle_area.py
+- path: result/t-147.html
+  canonical: result/t-147.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-11'
+  lastmod: '2026-10-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 207
+    established: null
+    attribution:
+      source_keys:
+      - '[PingYou n207 certificate 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-pingyou-503-certificate-report
+    - E-pingyou-503-exact-feasibility
+    artifacts:
+    - packing/resources/web/pingyou-n207-certificate-2026-10-11/README.md
+    - packing/resources/web/pingyou-n207-certificate-2026-10-11/acquisition/claims.json
+    - packing/resources/web/pingyou-n207-certificate-2026-10-11/facts/n-207.yaml.gz
+    - packing/resources/web/pingyou-n207-certificate-2026-10-11/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md
+- path: result/t-148.html
+  canonical: result/t-148.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-11'
+  lastmod: '2026-10-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 153
+    established: null
+    attribution:
+      source_keys:
+      - '[PingYou n153 certificate 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-pingyou-504-certificate-report
+    - E-pingyou-504-exact-feasibility
+    artifacts:
+    - packing/resources/web/pingyou-n153-certificate-2026-10-11/README.md
+    - packing/resources/web/pingyou-n153-certificate-2026-10-11/acquisition/claims.json
+    - packing/resources/web/pingyou-n153-certificate-2026-10-11/facts/n-153.yaml.gz
+    - packing/resources/web/pingyou-n153-certificate-2026-10-11/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md
+- path: result/t-149.html
+  canonical: result/t-149.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-11'
+  lastmod: '2026-10-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 155
+      - 156
+      - 211
+    established: null
+    attribution:
+      source_keys:
+      - '[Ostashev records 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-ostashev-501-certificate-report
+    - E-ostashev-501-exact-feasibility
+    artifacts:
+    - packing/resources/web/dostashev-records-2026-10-11/README.md
+    - packing/resources/web/dostashev-records-2026-10-11/acquisition/claims.json
+    - packing/resources/web/dostashev-records-2026-10-11/source/records/n0155.sqcert
+    - packing/resources/web/dostashev-records-2026-10-11/source/records/n0156.sqcert
+    - packing/resources/web/dostashev-records-2026-10-11/source/records/n0211.sqcert
+    - packing/resources/web/dostashev-records-2026-10-11/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md
+- path: result/t-150.html
+  canonical: result/t-150.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-11'
+  lastmod: '2026-10-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 146
+      - 261
+    established: null
+    attribution:
+      source_keys:
+      - '[Barnett refinements 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-barnett-505-certificate-report
+    - E-barnett-505-exact-feasibility
+    artifacts:
+    - packing/resources/web/barnett-refinements-2026-10-11/README.md
+    - packing/resources/web/barnett-refinements-2026-10-11/acquisition/claims.json
+    - packing/resources/web/barnett-refinements-2026-10-11/facts/n-146.yaml.gz
+    - packing/resources/web/barnett-refinements-2026-10-11/facts/n-261.yaml.gz
+    - packing/resources/web/barnett-refinements-2026-10-11/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md
+- path: result/t-151.html
+  canonical: result/t-151.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-12'
+  lastmod: '2026-10-12'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 176
+      - 181
+      - 238
+      - 239
+      - 270
+      - 271
+      - 272
+      - 304
+      - 305
+    established: null
+    attribution:
+      source_keys:
+      - '[SQUISH fourth request 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-squish-500-certificate-report
+    - E-squish-500-exact-feasibility
+    artifacts:
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/README.md
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/acquisition/claims.json
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/facts/n-176.yaml.gz
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/facts/n-181.yaml.gz
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/facts/n-238.yaml.gz
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/facts/n-239.yaml.gz
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/facts/n-270.yaml.gz
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/facts/n-271.yaml.gz
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/facts/n-272.yaml.gz
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/facts/n-304.yaml.gz
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/facts/n-305.yaml.gz
+    - packing/resources/web/squish-500-fourth-request-2026-10-11/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md
+- path: result/t-152.html
+  canonical: result/t-152.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-12'
+  lastmod: '2026-10-12'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 304
+      - 305
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo certificates 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-couzo-506-certificate-report
+    - E-couzo-506-exact-feasibility
+    artifacts:
+    - packing/resources/web/couzo-certificates-2026-10-11/README.md
+    - packing/resources/web/couzo-certificates-2026-10-11/acquisition/claims.json
+    - packing/resources/web/couzo-certificates-2026-10-11/acquisition/beyond-horizon-claims.json
+    - packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n304.cert
+    - packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n305.cert
+    - packing/resources/web/couzo-certificates-2026-10-11/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md
 - path: results.html
   canonical: results.html
   kind: page

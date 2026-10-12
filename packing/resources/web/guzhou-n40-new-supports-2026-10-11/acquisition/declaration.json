@@ -1,0 +1,43 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "guzhou-n40-new-supports-2026-10-11",
+  "source_url": "https://github.com/Guzhou0806/n40-square-packing",
+  "source_ref": "n40-new-supports-6718-20261011",
+  "source_commit": "6a65957e6c5c51cdf267917d882dab7f5b4928dd",
+  "retrieved_at_utc": "2026-10-11T20:35Z",
+  "git_scope": "Full clone checked out at the pinned commit, which the release tag n40-new-supports-6718-20261011 names, for the 2026-10-11 follow-up comment on issue #485. The manifest covers all 35 files of the tree. The proof and the obstruction note, the new density, the finite parameters, both frozen C++ kernels, the source's input and admission code, runner, audit and tests, the support-family dual's certificate and its two checkers, the workflow, the local run's receipts and the licences are retained; wand125's original density is pinned against the copy the 2026-10-01 rect_n40_L67 packet retains. The release ZIP's differing CI receipts are kept beside the tree under release-ci/, outside this record.",
+  "archived_dir": "source",
+  "license": "MIT, copyright 2026 Guzhou0806 (LICENSE), for the new material; the density's MIT licence from wand125 is retained in licenses/wand125.txt, Tokoharu's in licenses/tokoharu.txt and this repository's in licenses/jlevy-squares.txt. SOURCES.md states the credit and that the new supports, the weight optimization, the continuous-cover certificate and the exact obstruction for the full original support family are Guzhou0806's AI-assisted contributions.",
+  "claims": [
+    "The 2026-10-11 comment on issue #485 reports s(40) > 3359/500 = 6.718, unrestricted rotations, from a new rational density of 685 positive D4 rectangle orbits (522 from wand125's rect_n40_L67 pool, 163 new), raising the earlier release's 1340000/199529 by 217911/99764500.",
+    "Every square of side B = 3350/3359 in [0, 67/10]^2 captures at least 4999/5000 of the density, of mass 3999/100, and 40 * 4999/5000 - 3999/100 = 1/500: by verifier/continuous_pose.cpp, unchanged, over 43 closed slabs in t = tan(theta/2) covering [10^-6, 83/200], and by verifier/axis_integer_grid.cpp, unchanged, at side A = 249329659/250000000 for t in [0, 10^-6] by containment.",
+    "The receipts report 43 of 43 slabs verified, 60,500,889 nodes, 30,250,466 leaves, 13,812,428 angle bisections, least leaf bound 9005397816695287/2^53, and the axis minimum 1001486431423867090847280653/10^27 over 10,843,849 vertices.",
+    "OBSTRUCTION.md: no nonnegative weighting of the 2,526 original uniform D4 rectangle orbits gives a uniform per-square charging contradiction at X >= 168/25 = 6.72, by a finite exact dual over 388 poses that two exact programs check; not an upper bound on s(40)."
+  ],
+  "scope": [
+    ".gitattributes",
+    ".github/workflows/verify.yml",
+    ".gitignore",
+    "LICENSE",
+    "OBSTRUCTION.md",
+    "PROOF.md",
+    "README.md",
+    "REPRODUCIBILITY.md",
+    "SHA256SUMS",
+    "SOURCES.md",
+    "VERIFICATION.md",
+    "certificate",
+    "licenses",
+    "obstruction",
+    "results",
+    "tests",
+    "verifier"
+  ],
+  "pinned_only": [
+    {
+      "match": "certificate/original_density.json",
+      "reason": "wand125's rect_n40_L67 density, byte for byte the copy the 2026-10-01 rectangle packet retains (SHA-256 71011d03..., as SOURCES.md pins it), from which the new density's 522 inherited orbits are drawn; not duplicated.",
+      "identical_to": "packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json"
+    }
+  ]
+}

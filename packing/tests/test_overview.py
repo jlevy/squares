@@ -266,13 +266,13 @@ def test_the_page_fetches_only_the_shared_assets(page: str) -> None:
             render_overview.assert_fetches_only_assets("index.html", moved)
 
 
-def test_the_bar_leads_with_case_11_beside_the_name(page: str) -> None:
-    """The bar's home link carries case 11, the tab's icon, in the bar's own ink."""
+def test_the_bar_leads_with_the_full_and_compact_names(page: str) -> None:
+    """One home link carries both responsive labels with a stable accessible name."""
     link = page.split('<a class="site-name"', 1)[1].split("</a>", 1)[0]
-    assert '<svg class="site-logo" ' in link
-    assert 'aria-hidden="true"' in link.split("<svg", 1)[1].split(">", 1)[0]
-    assert '<span class="site-name-text">The Squares Project</span>' in link
-    assert render_overview.site_logo() in link
+    assert '<span class="site-name-text site-name-full">The Squares Project</span>' in link
+    assert '<span class="site-name-text site-name-short">Squares</span>' in link
+    assert 'aria-label="The Squares Project home"' in link
+    assert "<svg" not in link
 
 
 def test_the_site_icons_have_stable_same_origin_addresses(page: str) -> None:
@@ -896,7 +896,8 @@ def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(
         212,
         242,
         274,
-        308,
+        # 308 left the grid for a packet house on 11 October 2026 (think-fvz4).
+        309,
     ]
     first = re.search(
         r'<a\b[^>]* data-atlas-n="1"[^>]* style="([^"]+)"', _atlas_template(atlas_page, "first")
@@ -1060,25 +1061,21 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
             n, units=overview_sections.ATLAS_UNITS, root=frontier.REGULARIZED_RENDERINGS
         ) == frontier.packing_svg(n, units=overview_sections.ATLAS_UNITS):
             identical_thumbnails.add(n)
-    # The exact #432 houses and n155's 337 sub-picometre snaps have unchanged
-    # tile-scale shades; 400-unit rounding hides moves visible in the full SVG.
+    # Since the house adoption of 11 October 2026 (think-fvz4), the houses that are
+    # already display-regularized packings (T-146) and Robert Barnett's precision
+    # refinement of Ryan Xu's packing at 261 (T-150) have unchanged tile-scale shades;
+    # 400-unit rounding hides moves visible in the full SVG.
     assert identical_thumbnails == {
-        129,
-        131,
-        261,
         70,
         103,
+        236,
+        258,
+        261,
+        263,
+        269,
         295,
-        105,
-        267,
-        108,
-        155,
-        146,
-        84,
-        86,
-        123,
-        126,
-        127,
+        302,
+        303,
     }
     assert "data-atlas-layer" not in tiles
 
@@ -2825,11 +2822,7 @@ def test_every_site_page_carries_the_same_bar(
     else:
         # A page in a directory of its own, the case records', reaches the root from it.
         page, root = rendered(name), "../" * name.count("/")
-    partial = (
-        render_overview.SITE_NAV.read_text(encoding="utf-8")
-        .replace("{{ROOT}}", "")
-        .replace("{{LOGO}}", render_overview.site_logo())
-    )
+    partial = render_overview.SITE_NAV.read_text(encoding="utf-8").replace("{{ROOT}}", "")
     assert _the_bar(page, root=root) == SITE_NAV_BLOCK.findall(partial)[0]
 
 
@@ -2888,21 +2881,18 @@ def test_the_bars_type_is_set_from_the_papers_scale() -> None:
 
 
 def test_the_bars_name_is_aligned_by_its_text() -> None:
-    """The bar aligns its items by their baselines, and the name's row, a mark and the
-    text, takes its baseline from the text, not from the mark that leads it, so the name
-    stands on the links' baseline at any size of either. Every item is set on one line,
+    """The bar aligns its labels by their text baselines. Every item is set on one line,
     a length, so the larger name is no taller than a link. `test_site_wide_blocks`
     measures the baselines in a browser."""
     css = render_overview.SITE_NAV_CSS.read_text(encoding="utf-8")
     inner = css[css.index("\n.site-nav-inner {") :]
     assert "  align-items: baseline;\n" in inner[: inner.index("}")]
-    assert ".site-nav .site-name-text {\n  align-self: baseline;\n}" in css
     assert "  --site-nav-line: calc(var(--site-nav-font-size) * 1.43);\n" in css
     links = css[css.index("\n.site-nav a {") :]
     assert "  line-height: var(--site-nav-line);\n" in links[: links.index("}")]
-    name = css[css.index("\n.site-nav .site-name {\n  align-items: center;") :]
+    name = css[css.index("\n.site-nav .site-name {") :]
     name = name[: name.index("}")]
-    assert "display: inline-flex;" in name
+    assert "white-space: nowrap;" in name
     for nudge in ("translate", "position: relative", "margin-block", "vertical-align"):
         assert nudge not in name, nudge
 
@@ -3887,7 +3877,8 @@ def _template_paragraphs(section: str) -> list[str]:
     return [" ".join(part.split()) for part in prose.split("\n\n") if part.strip()]
 
 
-#: README's `project-intro` block, the owner's words of 2026-10-03 (`think-8lyq`): the
+#: README's `project-intro` block, from the owner's 2026-10-03 text (`think-8lyq`),
+#: with wording reviewed on 2026-10-11. It retains the
 #: question after a colon, the lower bound glossed as a size below which no packing can
 #: exist, and an example of each bound at $n = 29$, the case's current bounds as the
 #: record reports them (the owner, 2026-10-03: "make the examples current"), each
@@ -3905,8 +3896,8 @@ PROBLEM_STATEMENT = (
         "smallest square is written $s(n)$."
     ),
     (
-        "The question of the value of $s(n)$ is simple, but the answer is an open problem "
-        "for most $n$. In many cases, $s(n)$ is known only to lie between an upper bound "
+        "The value of $s(n)$ remains unknown for most $n$. In many cases, $s(n)$ is known "
+        "only to lie between an upper bound "
         "(the size of the enclosing square for the tightest packing ever discovered, such "
         "as $s(29) \\le 5.934$) and a lower bound (a size below which it is proved that no "
         "packing can exist, such as the reported $s(29) \\ge 5.81$)."
@@ -3984,7 +3975,8 @@ def test_recent_preview_headlines_link_to_their_canonical_result_pages(page: str
         assert f'<a href="result/{result_id}.html">' in headline
 
 
-#: The site's own statement, the owner's words of 2026-10-03 (`think-a7oa`), with the
+#: The site's own statement, from the owner's 2026-10-03 text (`think-a7oa`), with
+#: wording reviewed on 2026-10-11 and the
 #: name the owner left blank filled with the source's handle, Queuingtheorydotcom
 #: (T-060 is credited to Ahmed in the register),
 #: the project's start put as the record has it (its explorations obtained the lower
@@ -3999,8 +3991,8 @@ def test_recent_preview_headlines_link_to_their_canonical_result_pages(page: str
 SITE_STATEMENT = (
     (
         "Work on the square packing problem has exploded in the summer of 2026 thanks to "
-        "AI-powered research efforts. This Squares Project was begun by Joshua Levy in "
-        "August 2026 with some initial explorations that obtained new lower bounds for "
+        "AI-powered research efforts. Joshua Levy began the Squares Project in "
+        "August 2026 with initial explorations that produced new lower bounds for "
         "$n = 11, 17, 18, 19, 20$ and other low values."
     ),
     (
@@ -4052,7 +4044,7 @@ def test_the_invitation_to_report_results_is_one_text_on_about_and_the_homepage(
 
 
 def test_the_sites_own_statement_follows_readmes_introduction(about: str, results: str) -> None:
-    """About keeps three contributor bullets with linked names and independent credit.
+    """About keeps three credited highlights and a linked summary of other results.
     Every named result keeps its source, attribution, and verification claims; the
     contribution invitation retains the owner's two paragraphs."""
     own = about.split("</h1>", 1)[1].split('<h1 id="squares-project-documentation"', 1)[0]
@@ -4064,7 +4056,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     assert len(re.findall(r"<p>", narrative)) == 3
     assert len(re.findall(r"<p>", contribution)) == 2
     items = re.findall(r"<li>(.*?)</li>", narrative, re.DOTALL)
-    assert len(items) == 3
+    assert len(items) == 4
     narrative_paragraphs = re.findall(r"<p>(.*?)</p>", narrative, re.DOTALL)
     assert _rendered_text(narrative_paragraphs[0]) == _markdown_text(SITE_STATEMENT[0])
     assert _rendered_text(narrative_paragraphs[-1]) == _markdown_text(SITE_STATEMENT[3])
@@ -4074,8 +4066,9 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         _markdown_text(
             "Independently, Evan Daniel has proved the optimality of an infinite family, "
             r"$s(k^2 - 3) = k$ for every $k \ge 6$, along with exact values at "
-            "21, 32 and 45 squares."
+            "21, 32, 45 and 60 squares."
         ),
+        "As of 11 October 2026, over 140 other new results are tabulated on the Results page.",
     ]
     text = _rendered_text(narrative)
     for claim in (
@@ -4100,7 +4093,8 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         ("cases/11.html", "eleven squares"),
         ("results.html#t-064", "an infinite family"),
         ("results.html#verification-ladders", "AI-assisted verification"),
-        *((f"cases/{n}.html", str(n)) for n in (21, 32, 45)),
+        ("results.html", "Results page"),
+        *((f"cases/{n}.html", str(n)) for n in (21, 32, 45, 60)),
     ):
         assert re.search(
             rf'<a href="{re.escape(address)}"[^>]*>{re.escape(label)}</a>', narrative
@@ -4117,7 +4111,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     assert by_id["T-060"].group == groups["builds-on-project"]
     assert by_id["T-037"].credit.startswith("Kleddamag")
     assert by_id["T-037"].group == groups["builds-on-project"]
-    exact = {"T-064": None, "T-052": [21], "T-051": [32], "T-053": [45]}
+    exact = {"T-064": None, "T-052": [21], "T-051": [32], "T-053": [45], "T-062": [60]}
     for result, n_values in exact.items():
         record = by_id[result].record
         assert by_id[result].credit.startswith("Daniel"), result
@@ -4400,7 +4394,7 @@ def test_the_papers_page_says_what_each_paper_is(papers: str) -> None:
         "why the approach is shaped the way it is",
         "what the research has and has not established",
         "linear programming",
-        "is first needed",
+        "algebraic number fields",
     ):
         assert phrase in card_text(note), phrase
         assert phrase in opening, phrase
@@ -5046,26 +5040,23 @@ def test_every_table_stands_one_shared_space_from_the_text_around_it() -> None:
 
 
 def test_the_icon_frame_is_one_pixel_at_icon_size() -> None:
-    """The logo and the favicon draw case 11's container as one whole pixel at the size
-    each is shown, with its outer edge on the drawing's edge: (200 + w) / px = w."""
+    """The favicon draws case 11's container as one whole pixel at its display size,
+    with its outer edge on the drawing's edge: (200 + w) / px = w."""
     from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
 
-    for px in (render_overview.SITE_LOGO_PX, render_overview.FAVICON_PX):
-        svg = packing_svg(11, units=200, frame_px=px)
-        view = re.search(r'viewBox="([^"]+)"', svg)
-        stroke = re.search(r'<rect [^>]*stroke-width="([\d.]+)"', svg)
-        assert view is not None
-        assert stroke is not None
-        box = [float(v) for v in view.group(1).split()]
-        width = float(stroke.group(1))
-        assert box[2] / px == pytest.approx(width, abs=1e-3)
-        assert box[0] == pytest.approx(-width / 2, abs=1e-3)
-        assert 'shape-rendering="crispEdges"' in svg
-        lines = re.search(r'<g stroke="[^"]+" stroke-width="([\d.]+)"', svg)
-        assert lines is not None
-        assert float(lines.group(1)) == pytest.approx(width / 2, abs=1e-3)
-    assert "block-size: 18px;" in render_overview.SITE_NAV_CSS.read_text(encoding="utf-8")
-    assert render_overview.SITE_LOGO_PX == 18
+    svg = packing_svg(11, units=200, frame_px=render_overview.FAVICON_PX)
+    view = re.search(r'viewBox="([^"]+)"', svg)
+    stroke = re.search(r'<rect [^>]*stroke-width="([\d.]+)"', svg)
+    assert view is not None
+    assert stroke is not None
+    box = [float(v) for v in view.group(1).split()]
+    width = float(stroke.group(1))
+    assert box[2] / render_overview.FAVICON_PX == pytest.approx(width, abs=1e-3)
+    assert box[0] == pytest.approx(-width / 2, abs=1e-3)
+    assert 'shape-rendering="crispEdges"' in svg
+    lines = re.search(r'<g stroke="[^"]+" stroke-width="([\d.]+)"', svg)
+    assert lines is not None
+    assert float(lines.group(1)) == pytest.approx(width / 2, abs=1e-3)
 
 
 def test_page_subtitles_share_one_size() -> None:

@@ -256,7 +256,17 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     resources, evidence and blockers belong to the intake and remain editorial additions;
     ordinary lower lanes and their prose come from the generator. Rigidity is promoted
     afterwards by its existing owner. This is publication adaptation, not certification.
+    A case at a house adopted on 11 October 2026 is `adopt_houses.adopt_case`'s.
     """
+    from devtools import adopt_houses  # noqa: PLC0415
+
+    if adopt_houses.holds(n, existing):
+        return adopt_houses.adopt_case(n, existing, generated)
+    return _adopt_source_report(n, existing, generated)
+
+
+def _adopt_source_report(n: int, existing: str, generated: str) -> str:
+    """The selected report of a source imported before the adoption of 11 October 2026."""
     from devtools import confirm_refinement_records as refinement  # noqa: PLC0415
     from devtools import evand_arrangement_reports as evand  # noqa: PLC0415
     from devtools import register_evand_arrangements as evand_adoption  # noqa: PLC0415

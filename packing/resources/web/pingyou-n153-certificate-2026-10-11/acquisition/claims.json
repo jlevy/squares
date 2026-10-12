@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/504",
+  "source": "https://github.com/BuddenPing/square-packing-certificates",
+  "revision": "bc328a7d727aedd0eabebd6ea80285f572b65d2d",
+  "read_on": "2026-10-11",
+  "read_at_main": "3a5a91a90f997a65da52c42000769c1e6b6c3eae",
+  "horizon": 324,
+  "results": [
+    {"n": 153, "certificate": "n153.cert.json", "format": "pingyou-json", "requested": true, "replayed": true, "offered_side": "6435006925203522001385040447/500000000000000000000000000", "printed_in": "https://github.com/jlevy/squares/issues/504", "exact_side": "6435006925203522001385040447/500000000000000000000000000", "ceiling": "12.8700138504070441", "first_committed": "2026-10-11T10:39:06Z", "grid_side": "13", "case": {"source_key": "[Gupta rational refinements 2026-10-08]", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta", "result": "T-127", "reported_value": "12.8796793733293146", "verified_value": "12.8796793733293146", "evidence": ["E-gupta-438-exact-feasibility"], "exact_side": "2575935874665862918815262035657/200000000000000000000000000000", "relation": "below", "difference": "1933104584454118261245856857/200000000000000000000000000000"}, "pending": [{"report": "T-136 (#481)", "url": "https://github.com/jlevy/squares/issues/481", "holders": "Nate Chaoweeraprasit", "result": "T-136", "exact_side": "123797999524180008078530976954463155877532124256188212074430292658566758958161323/9617597300166052747813209874613658336103061290746859396882208758750786210512186", "relation": "below", "difference": "4847265851379153063523838292940937100488879659272431059983495524863935668937228204292393149382901806429/2404399325041513186953302468653414584025765322686714849220552189687696552628046500000000000000000000000000"}, {"report": "T-146 (regularized lists)", "url": "https://github.com/evand/square-packing/tree/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize", "holders": "Evan Daniel, regularizing Nate Chaoweeraprasit's packing", "result": "T-146", "exact_side": "402250932783786874180075932249/31250000000000000000000000000", "relation": "below", "difference": "125999917133498187021808623/62500000000000000000000000000"}], "smallest": "this certificate"}
+  ]
+}

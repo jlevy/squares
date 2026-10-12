@@ -1,0 +1,5 @@
+# sqpk v1
+# test: one square strictly inside, no contacts
+n 1
+s 2.5
+1.25 1.25 10

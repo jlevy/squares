@@ -3,6 +3,15 @@
 Upstream facts and certificates retain their published coordinates. Atlas witnesses
 record an isometry of those facts; exact views and motion certificates carry the
 same map without changing a bound, evidence tier or scientific determination date.
+
+The one registration, n = 211's mirror, is de Winter's parent's, and it is history since
+the house adoption of 11 October 2026 drew Daniil Ostashev's certificate (`T-149`) there
+as it states it. The builder orients no adopted house
+(`build_known_best_atlas._build_case`), so the registration applies only were de Winter's
+parent the house again, and `refresh_atlas_orientation` has nothing to refresh meanwhile.
+It stays registered, with its source-switch refusal, as the record of how that witness was
+drawn; the tests read the witness from a fixture the builder draws again from the parent's
+facts.
 """
 
 from __future__ import annotations

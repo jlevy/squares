@@ -72,6 +72,7 @@ from devtools import squish_followup_packets as squish_followup
 from devtools import squish_second_update_house_links as squish_house
 from devtools import squish_second_update_packets as squish_second
 from devtools import squish_upper_bound_packets as squish_packets
+from devtools import upper_bound_houses as adopted_houses
 from devtools import upper_bound_packets as packets
 from devtools.atlas_legend import AtlasLegendCounts, LegendItem, atlas_legend
 from devtools.atlas_orientation import orient_atlas_witness
@@ -1013,7 +1014,7 @@ def _source_plan(
             upstream_digest,
         )
     pictured = pictured_source_key(case)
-    modern = _modern_packet_plan(case, pictured)
+    modern = _adopted_plan(case, pictured) or _modern_packet_plan(case, pictured)
     if modern is not None:
         return modern
     if pictured in SQUISH_SOURCE_KEYS:
@@ -1042,6 +1043,21 @@ def _source_plan(
             (case.n,),
         )
     return _catalogue_source_plan(case, catalogue)
+
+
+def _adopted(case: FrontierCase, pictured: str) -> bool:
+    """Whether the case's house is one `upper_bound_houses` adopted and draws."""
+    return (
+        case.n in adopted_houses.ADOPTED and pictured == adopted_houses.source_for(case.n).key
+    )
+
+
+def _adopted_plan(case: FrontierCase, pictured: str) -> SourcePlan | None:
+    """The plan of a house `upper_bound_houses` adopted: its certificate's retained file."""
+    if not _adopted(case, pictured):
+        return None
+    origin = adopted_houses.source_for(case.n).origin(case.n)
+    return SourcePlan(PACKET_KIND, origin.path, origin.url, case.n, (case.n,))
 
 
 def _modern_packet_plan(case: FrontierCase, pictured: str) -> SourcePlan | None:
@@ -1196,6 +1212,28 @@ def _relative(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
 
 
+def _adopted_source_row(n: int, plan: SourcePlan) -> dict | None:
+    """The source-index row of a house `upper_bound_houses` adopted, as its origin states it."""
+    if n not in adopted_houses.ADOPTED:
+        return None
+    origin = adopted_houses.source_for(n).origin(n)
+    if (origin.path, origin.url) != (plan.path, plan.url):
+        return None
+    return {
+        "attribution": f"{origin.author}, {plan.url} at {origin.revision}",
+        "kind": plan.kind,
+        "license_status": origin.licence_status,
+        "listed_n": list(plan.listed_n),
+        "n": n,
+        "path": _relative(plan.path),
+        "raw_asset_retained": origin.raw_asset_retained,
+        "retention_policy": origin.retention_policy,
+        "retrieved": origin.retrieved,
+        "source_n": plan.source_n,
+        "url": plan.url,
+    }
+
+
 def _source_index(plans: dict[int, SourcePlan]) -> dict:
     sources = []
     for n, plan in sorted(plans.items()):
@@ -1221,6 +1259,10 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
             )
             continue
         if plan.kind == PACKET_KIND:
+            adopted = _adopted_source_row(n, plan)
+            if adopted is not None:
+                sources.append(adopted)
+                continue
             refinement = _refinement_source(n, plan.path)
             layer = _squish_layer(n, plan.path)
             if plan.path == gupta_houses.reports.fact_path():
@@ -1395,7 +1437,10 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
             )
         if plan.kind == PACKET_KIND:
             refinement = _refinement_source(case.n, plan.path)
-            if pictured_source_key(case) == gupta_houses.reports.SOURCE_KEY:
+            if _adopted(case, pictured_source_key(case)):
+                witness = adopted_houses.build_witness(case.n)
+                _assert_side_matches(case, str(witness["side"]))
+            elif pictured_source_key(case) == gupta_houses.reports.SOURCE_KEY:
                 witness = _gupta_derived_witness(case)
             elif pictured_source_key(case) == ryxu_houses.SOURCE_KEY:
                 witness = _ryxu_derived_witness(case)
@@ -3490,7 +3535,11 @@ def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]
 def _build_case(n: int, plan: SourcePlan) -> BuiltCase:
     case = _frontier_case(n)
     witness = _build_witness(case, plan)
-    witness = orient_atlas_witness(witness)
+    if not _adopted(case, pictured_source_key(case)):
+        # An adopted house is drawn as its certificate states it (`upper_bound_houses`);
+        # the registered n = 211 orientation belongs to de Winter's parent, which the
+        # adoption of 11 October 2026 replaced there.
+        witness = orient_atlas_witness(witness)
     problems = check_witness_semantics(witness)
     if problems:
         raise ValueError(f"{witness['id']}: {problems[0]}")
@@ -3840,6 +3889,13 @@ def retained_cases(numbers: Sequence[int]) -> list[BuiltCase]:
     ]
     if evand_scoped:
         evand_houses.check_houses(evand_scoped)
+    adopted = [
+        n
+        for n in numbers
+        if _adopted(_frontier_case(n), pictured_source_key(_frontier_case(n)))
+    ]
+    if adopted:
+        adopted_houses.check_houses(adopted)
     plans = source_plans()
     cases = []
     for n in numbers:
@@ -3868,6 +3924,7 @@ def update(workers: int = 1) -> None:
     ryxu_houses.guard_house_outputs(list(CORPUS.numbers))
     gupta_houses.guard_house_outputs(list(CORPUS.numbers))
     evand_houses.guard_house_outputs(list(CORPUS.numbers))
+    adopted_houses.guard_house_outputs(list(CORPUS.numbers))
     clear_build_caches()
     outputs, manifest = expected_outputs(workers)
     # Derive the figure from the geometry being published, not the old manifest.
@@ -3912,6 +3969,7 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
     ryxu_houses.guard_house_outputs(list(numbers))
     gupta_houses.guard_house_outputs(list(numbers))
     evand_houses.guard_house_outputs(list(numbers))
+    adopted_houses.guard_house_outputs(list(numbers))
     selected = set(numbers)
     if not selected or len(selected) != len(numbers) or not selected <= set(CORPUS.numbers):
         raise ValueError("selected atlas refresh requires unique corpus counts")
@@ -4240,6 +4298,13 @@ def _retained_problems(
     ]
     if gupta_scoped:
         gupta_houses.check_houses(gupta_scoped)
+    adopted = [
+        n
+        for n in adopted_houses.NUMBERS
+        if _adopted(_frontier_case(n), pictured_source_key(_frontier_case(n)))
+    ]
+    if adopted:
+        adopted_houses.check_houses(adopted)
     if not MANIFEST.is_file():
         return [f"missing {_relative(MANIFEST)}"], None
     retained = MANIFEST.read_text(encoding="utf-8")

@@ -150,17 +150,13 @@ def test_readmes_introduction_block_is_held_by_the_readme_check() -> None:
     assert check_intro(unmarked) == [
         "README.md: the project-intro markers must each appear exactly once"
     ]
-    headed = text.replace(
-        "The question of the value of $s(n)$ is simple",
-        "## The question\n\nThe question of the value of $s(n)$ is simple",
-    )
+    begin = "<!-- BEGIN SHARED: project-intro (devtools.site_documents) -->"
+    assert text.count(begin) == 1
+    headed = text.replace(begin, f"{begin}\n\n## The question", 1)
     assert check_intro(headed) == [
         "README.md: the project-intro block holds a heading or a comment"
     ]
-    central = text.replace(
-        "is simple, but",
-        "is simple, eleven its central case, but",
-    )
+    central = text.replace(begin, f"{begin}\n\nEleven is the central case.", 1)
     assert check_intro(central) == [
         "README.md: the project-intro block calls a case the central one"
     ]

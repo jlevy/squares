@@ -209,6 +209,7 @@ def entry(page: str = "paper.html", **changes: Any) -> dict[str, Any]:
             "--paper-font-weight-sans-bold": 680,
             "--paper-title-scale": 1.5,
             "--paper-note-scale": 0.92,
+            "--paper-button-label-scale": 0.9,
             "--paper-colophon-scale": 0.85,
         },
         "text": [
@@ -368,6 +369,7 @@ def test_text_off_the_shared_tokens_is_named() -> None:
             text_row("prose", size=16),
             text_row("caption", family=sans, weight="400", size=17.48, example="Figure 1."),
             text_row("nav link", family=sans, weight="550", size=16, example="Papers"),
+            text_row("section tab", family=sans, weight="550", size=15.73, example="Film"),
             text_row("h3", family=sans, weight="550", size=21.6, host_faces=".SF NS (host)"),
             # A role in the other face is another rule's: the homepage's sans paragraphs.
             text_row("prose", family=sans, weight="410", size=17.48),

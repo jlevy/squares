@@ -83,7 +83,7 @@ export function withinCoordinateLimit(snapshot: GeometrySnapshot): boolean {
  * (`build_candidate.compact_frame`). Rounding a centre moves a pair's projected distance by at most
  * 1.42e-6; rounding both angles moves it by at most 1.23e-6 through the axis and 1.23e-6 through the
  * other square's projected radius. So a record re-measured at stored precision can read up to 3.9e-6
- * of pair penetration, and 1.2e-6 at a wall, without overlapping; 148 of the 324 stored frames fail
+ * of pair penetration, and 1.2e-6 at a wall, without overlapping; 149 of the 324 stored frames fail
  * the 1e-9 contract for that reason alone (`tests/test_catalogue_precision.py` re-measures both).
  * Only `assessCataloguePrecisionFrame` applies this value, and its assessment records it; nothing
  * that ranks or admits a result may use it.

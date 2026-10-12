@@ -58,7 +58,8 @@ physical sizes.
 | Figure labels and controls | 18.05px | About 12.0333pt | Sans, 0.95 of the sans base |
 | Captions and end footnotes | 17.48px | About 11.6533pt | Shared sans size: 0.92 of the sans base; 1.4rem side inset |
 | Colophon | 16.15px | About 10.7667pt | Sans, 0.85 of the sans base |
-| Navigation links and section tabs | 17.48px | Not printed | Sans medium at the caption size, 0.92 of the sans base: one step under the prose |
+| Navigation links | 17.48px | Not printed | Sans medium at the caption size, 0.92 of the sans base: one step under the prose |
+| Section tabs | 15.73px | Not printed | The navigation size times the shared 0.9 button-label scale |
 | Button labels | The control’s sans size | The control’s sans size | Uppercase through `--paper-button-label-case`, shared by native buttons, action links and section tabs |
 | Popover article title | 1.25 of the popover body | Not printed | Sans medium, normal capitalization; `--paper-popover-title-scale` |
 | Popover section heading | 1.1 of the popover body | Not printed | Sans medium; `--paper-popover-section-scale`; deeper headings use the body size |
@@ -241,7 +242,7 @@ and `tests/test_site_text_tokens.py` pins what they resolve to in Chromium.
 | Token | Value | Resolves to |
 | --- | --- | --- |
 | `--kpress-host-font-size-base` | `18px` | Every KPress size, from `--kpress-font-size-base` |
-| `--kpress-measure` | 40 of the base | 720px, the width KPress’s default 45 gives at 16px |
+| `--kpress-measure` | 35 of the base | 630px at the 18px base, before column insets |
 | `--kpress-font-size-h2` | 1.2 of the base | 21.6px at every width; KPress steps it to 1.4 from a 64rem pane |
 | `--paper-font-scale-sans` | 19/18 | The 19px sans base of captions, cards and notes |
 | `--paper-font-weight-sans-medium`, `-bold` | 550, 680 | The sans medium and bold |
@@ -260,7 +261,7 @@ the tutorial, the readme and the homepage, identical on all four where the role 
 | Table cell | Source Sans 3, 410 | 17.1px | 16.2px |
 | Inline code | Planetaire Mono Text | 14.76 / 22.14px | Same |
 | Inline math | KPress Math Text (serif) | 18px, the text’s own em | Same |
-| Text line | — | 800px: the measure and both 2.5rem insets | The column less the page margin |
+| Reading column | — | 710px: the 630px measure and both 2.5rem insets | The column less the page margin |
 
 h3 and h4 keep KPress’s own step up at a 64rem pane.
 The explainer’s title is its own role (sans caps, 28.5px); a report’s h1 is the Markdown
@@ -685,14 +686,15 @@ it.
 
 - **Navigation bar.** One fixed-width row of sans links in the page’s header slot, the
   same on every page, the explainer and the workbench included, led by the site name,
-  “Square Packing”, set in capitals by CSS (`text-transform`, lightly tracked) so its
-  text is unchanged, and a step heavier.
+  “The Squares Project”, set in capitals by CSS (`text-transform`, lightly tracked) so
+  its text is unchanged, and a step heavier.
   The bar’s type is tied to the body’s on the scale above (Typography Roles), never set
-  in pixels or rem. A link, and a section tab, is one step under the 18px prose and no
-  more: the caption size, 0.92 of the sans base, 17.48px, which is the first size of the
-  scale under 18px (`--site-nav-font-size`; the step between, 0.95, is 18.05px, not
-  under the prose). The site’s name is the sans base, 19px (`--site-nav-name-size`), the
-  size sans text takes beside the prose, so with its weight and capitals it reads as the
+  in pixels or rem. A link is one step under the 18px prose and no more: the caption
+  size, 0.92 of the sans base, 17.48px, which is the first size of the scale under 18px
+  (`--site-nav-font-size`; the step between, 0.95, is 18.05px, not under the prose).
+  Section tabs apply `--paper-button-label-scale`, 0.9, to that navigation size, giving
+  15.73px. The site’s name is the sans base, 19px (`--site-nav-name-size`), the size
+  sans text takes beside the prose, so with its weight and capitals it reads as the
   name. Both tokens are in `site-nav.css` and are computed from the host base
   (`--kpress-host-font-size-base`), which is the same on every page, so the bar is one
   size on every page and at every width.
@@ -700,15 +702,9 @@ it.
   page whose bar is not one step under its body (`type_problems`), and
   `tests/test_site_wide_blocks.py` holds the relation in a browser at 1280, 768 and 390
   pixels, where the links keep one line, one line and two lines.
-  Case 11, the site’s icon, sits before the name as its mark, 18px square, inside the
-  same link, so it takes the same hover.
   The name’s text stands on the links’ baseline.
-  The bar aligns its items by their baselines (`align-items: baseline`), and the name is
-  a row of its own, the mark and the text, whose baseline would be its first item’s, the
-  foot of the mark; so the text is the one item of that row aligned by its baseline
-  (`align-self: baseline`), which makes the row’s baseline the text’s, at any size of
-  either, with no offset in pixels.
-  The mark stays centred on the name’s line.
+  The bar aligns its items by their baselines (`align-items: baseline`), and each label
+  stays on one line, with no offset in pixels.
   Every item of the bar is set on one line, `--site-nav-line`, a length (1.43 of the
   link size, the face’s own leading there), so the larger name is no taller than a link:
   the links stand where they do without the name, and the current link’s underline is
@@ -717,8 +713,8 @@ it.
   zero-size inline box on the text’s line and not read from a box’s edge; `preview_site`
   fails a page whose name or links are off by more than half a pixel
   (`baseline_problems`); and `tests/test_site_wide_blocks.py` holds it in a browser.
-  Narrower than 56rem, where the bar with the name would wrap, the name gives way and
-  the mark alone leads home, labelled “The Squares Project home” for a screen reader.
+  Below 72rem the home link reads “Squares”, also set in capitals, to leave room for the
+  destinations. At every width its accessible label is “The Squares Project home”.
   Every item takes the cards’ gentle wash on hover and nothing underlines on hover; the
   current page alone is underlined in the accent.
   The edition appears only in the closing credit (below).
@@ -1666,6 +1662,9 @@ it.
 
 - **Wide bleed.** A wide block (`.site-wide`) takes the wide track, `--site-wide`, less
   the page gutters (`--site-wide-gutter` on either side; **Spacing**, above).
+  The track is forty times the shared type base plus 24rem, 1104px at the 18px base.
+  It is independent of the prose measure, thirty-five times the base, so changes to
+  reading lines preserve the room tables and card grids need.
   Two kinds bleed past it.
   The atlas grid bleeds at every width, up to `--site-bleed-max` (140rem). A data table
   bleeds only above `--site-table-bleed-from` (80rem, 1280 pixels): from there it grows
@@ -1831,6 +1830,9 @@ it.
     Fetch failures use the link’s canonical case page as the fallback.
   - **The record.** Its header shows previous and next steps, the mathematical case
     count, ordered status marks, and the verified interval as display-size math.
+    The standalone and fetched articles share `--site-case-max`: the reading measure
+    plus the foundation column insets, capped at 48rem. It resolves at the root so a
+    fetched article keeps the same width regardless of the opening page’s layout band.
     Then the visual summary (above).
     Then, under a rule, the bounds as bordered sans panels, one per bound (best known,
     verified upper, reported lower, verified lower) and the gap, as many abreast as fit

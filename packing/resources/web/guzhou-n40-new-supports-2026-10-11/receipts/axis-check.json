@@ -1,0 +1,41 @@
+{
+ "checks": [
+  {
+   "detail": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, binary 19288b2f9bcb...",
+   "held": true,
+   "name": "axis build: the retained source, the release's flags"
+  },
+  {
+   "detail": "compared",
+   "held": true,
+   "name": "axis build: with the CI run's compiler, the CI run's binary"
+  },
+  {
+   "detail": "AXIS_COVERAGE_PROVED, minimum 1001486431423867090847280653, 1.912 s",
+   "held": true,
+   "name": "axis run: the derived input, every output field both receipts'"
+  },
+  {
+   "detail": "exit 2, AXIS_TEST_REFUSED",
+   "held": true,
+   "name": "axis control H-above: tau = 62593/62500 gives AXIS_TEST_REFUSED"
+  },
+  {
+   "detail": "exit 0, AXIS_COVERAGE_PROVED",
+   "held": true,
+   "name": "axis control H-below: tau = 500743/500000 gives AXIS_COVERAGE_PROVED"
+  },
+  {
+   "detail": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+   "held": true,
+   "name": "crate: reviewed source for a declared net, the binary embeds it"
+  },
+  {
+   "detail": "verified on the input derived here, 192f5df66e91..., 10929636 vertices, least 1.0016868361671276 at ['3490012394923077/1000000000000000', '3100670341/500000000'], 2.792 s",
+   "held": true,
+   "name": "crate: the near-axis statement at side A by the exact vertex sweep"
+  }
+ ],
+ "kind": "n40-new-supports-axis-check/v1",
+ "status": "AXIS_STAGE_HOLDS"
+}

@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+import test_check_requests as requests_tests
 
 from devtools import capture_kingbird_catalogue as capture_tool
 from devtools import check_requests
@@ -345,6 +346,90 @@ def test_github_differences_each_need_an_owner_and_a_failure_is_not_checked() ->
     assert failed.unchecked == ["GitHub issues: `gh api` failed: gh: not found"]
     skipped = sweep.github_section(record, offline=True, compare_github=refused)
     assert skipped.unchecked == ["GitHub issues: skipped by --offline"]
+
+
+def test_a_report_without_the_intake_label_needs_action_and_names_the_command() -> None:
+    """The pass adds the label under the `github-workflows` grant, so the step is the
+    command, and without the grant the issue is listed for the owner. A new issue's step
+    gives the label by stage 0's criterion. A comment edited after `read_through` on the
+    same issue keeps its own step: read it."""
+    record = {"repository": "jlevy/squares"}
+    differences = [
+        "#529 reports an item for intake without the `intake` label",
+        "#529: unread comment URL (x, 2026-10-01T00:00:00Z, edited 2026-10-02T00:00:00Z)",
+        "#530 is not in the record: New result",
+    ]
+    section = sweep.github_section(record, offline=False, compare_github=lambda _: differences)
+    assert [i.state for i in section.items] == [sweep.NEEDS_OWNER] * 3
+    assert section.items[0].step == (
+        "add the label under the github-workflows grant "
+        "(gh issue edit 529 --add-label intake); "
+        "without the grant, list the issue for the owner"
+    )
+    assert section.items[1].step.startswith("read it:")
+    assert section.items[2].step.endswith(
+        "if it reports a new item for intake (a result, a counterexample or a method), "
+        "give it the `intake` label, and mark an entry of another kind intake: true"
+    )
+    assert sweep.needing_action([section]) == section.items
+
+
+def test_each_kind_of_difference_the_comparison_reports_gets_its_own_step() -> None:
+    """The sweep chooses a step by matching `check_requests`'s wording, and a difference
+    that matches nothing falls through to "reconcile". These are the comparison's own
+    differences on a small fixture, one of each kind, so a message reworded in
+    `check_requests` and in its tests fails here instead of reaching a pass with the
+    wrong step."""
+    issue, reply, comment = requests_tests.issue, requests_tests.reply, requests_tests.comment
+    recorded = requests_tests.record(
+        issue(
+            replies=[reply(1, "2026-10-01"), reply(9, "2026-10-01")],
+            read_through="2026-10-01T12:00:00Z",
+        ),
+        issue(number=8, kind="other", intake=True, state="closed", closed="2026-10-03"),
+        issue(number=6),
+    )
+    live: dict[str, Any] = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {"number": 7, "state": "open", "title": "A request", "labels": []},
+            {"number": 8, "state": "open", "title": "A method", "labels": []},
+            {"number": 20, "state": "open", "title": "New", "labels": [requests_tests.INTAKE]},
+        ],
+        "repos/owner/repo/issues/7/comments?per_page=100": [
+            comment(1, "owner", "2026-10-01T10:00:00Z"),
+            comment(2, "owner", "2026-10-02T10:00:00Z"),
+            comment(4, "someone", "2026-10-02T12:00:00Z"),
+            comment(5, "someone", "2026-09-30T12:00:00Z", updated="2026-10-02T09:00:00Z"),
+        ],
+        "repos/owner/repo/issues/8/comments?per_page=100": [],
+    }
+    section = sweep.github_section(
+        recorded,
+        offline=False,
+        compare_github=lambda r: check_requests.compare_github(r, live.__getitem__),
+    )
+    reconcile = "reconcile result-requests.yaml with the issue"
+    label = "add the label under the github-workflows grant (gh issue edit {} --add-label"
+    expected = [
+        ("#20", "enter it in result-requests.yaml with triage: pending"),
+        ("#7", label.format(7)),
+        ("#7:", "record the reply under the issue's replies"),
+        ("#7:", "read it: map any result it reports"),
+        ("#7:", "read it: map any result it reports"),
+        ("#7:", reconcile),
+        ("#8", reconcile),
+        ("#8", label.format(8)),
+        ("#6", reconcile),
+    ]
+    assert [item.what.split(" ", 1)[0] for item in section.items] == [n for n, _ in expected]
+    for item, (_, step) in zip(section.items, expected, strict=True):
+        assert item.step.startswith(step), (item.what, item.step)
+        assert item.state == sweep.NEEDS_OWNER
+    assert [item.what for item in section.items if item.step == reconcile] == [
+        f"#7: recorded reply not on the issue: {requests_tests.URL.format(9)}",
+        "#8 is open there and closed here",
+        "#6 is in the record and not on owner/repo",
+    ]
 
 
 def test_a_blocker_is_read_only_from_a_sentence_that_says_something_waits() -> None:

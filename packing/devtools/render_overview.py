@@ -814,7 +814,7 @@ def assert_fetches_only_assets(name: str, page: str) -> None:
 def nav_html(current: str, *, root: str = "") -> str:
     """The navigation bar, with the current page marked."""
     nav = SITE_NAV.read_text(encoding="utf-8")
-    nav = nav.replace("{{ROOT}}", root).replace("{{LOGO}}", site_logo())
+    nav = nav.replace("{{ROOT}}", root)
     marker = f'data-page="{current}"'
     if marker not in nav:
         raise SystemExit(f"site-nav.html has no entry for {current!r}")
@@ -905,21 +905,9 @@ def visualize_tabs(current: str, *, root: str = "") -> str:
     return f'<nav class="site-tabs" aria-label="Visualize">{links}</nav>'
 
 
-#: The logo's size in the bar and the icon's in a tab, in CSS pixels: whole pixels, so
-#: each drawing's one-pixel frame (`packing_svg(frame_px=)`) lands on the pixel grid.
-#: `site-nav.css` sets the logo to the same size.
-SITE_LOGO_PX = 18
+#: The icon's size in a tab, in CSS pixels: whole pixels, so its one-pixel frame
+#: (`packing_svg(frame_px=)`) lands on the pixel grid.
 FAVICON_PX = 16
-
-
-@cache
-def site_logo() -> str:
-    """The site's mark beside its name in the bar: case 11, the drawing the tab's icon
-    is, in the bar's own ink so it turns over with the theme."""
-    from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
-
-    svg = packing_svg(11, units=200, frame_px=SITE_LOGO_PX)
-    return svg.replace("<svg ", '<svg class="site-logo" ', 1)
 
 
 @cache

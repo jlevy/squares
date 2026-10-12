@@ -10,6 +10,7 @@ import re
 import shlex
 import subprocess
 import sys
+import textwrap
 from contextlib import redirect_stdout
 from pathlib import Path
 from typing import cast
@@ -621,6 +622,17 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert f"/packing/resources/web/{squish_upper_bound_packets.PACKET.name}/" in sparse
     assert f"/packing/resources/web/{squish_followup_packets.PACKET.name}/" in sparse
     assert f"/packing/resources/web/{squish_second_update_packets.PACKET.name}/" in sparse
+    # `known-best atlas records and sample` rebuilds every house adopted on 11 October
+    # 2026 from its packet's private inputs (`upper_bound_houses.check_houses`), so each
+    # adopted source's packet rides in the slice, read from that module's own table; the
+    # slice without them failed on a missing acquisition report on jlevy/squares#518's
+    # first run (38196351783).
+    from devtools import upper_bound_houses  # noqa: PLC0415
+
+    assert {
+        f"/packing/resources/web/{source.packet.name}/"
+        for source in upper_bound_houses.sources().values()
+    } <= sparse
     full_step = next(
         _mapping(step)
         for step in validate_steps
@@ -1020,8 +1032,11 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
 
     Four limits of the rule, recorded rather than smoothed over:
 
-    * A marker is per function, so a parametrized test moves with all of its cases even
-      when only one case was over. The 66 functions are 96 collected tests.
+    * A marker on a function moves all of its cases, even when only one case was over.
+      A case can carry its own instead, as `pytest.param(..., marks=pytest.mark.slow)`.
+      The registry names the function either way, and its comment names the marked
+      cases and what each measured. On 2026-09-05 the 66 functions were 96 collected
+      tests.
     * `call` time only. A module-scoped fixture bills its whole cost to whichever test
       triggers it first -- `test_every_control_rejects` reports 13.1s of setup that
       belongs to `determination`, which three other tests in that file also use -- so
@@ -1165,6 +1180,13 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_certificate_refuses_a_displaced_point",  # 2.2s
             "test_certificate_builds_and_charges_every_point",  # 2.1s
         },
+        # 23.91s of call time across 1, measured on 2026-10-12 on a four-cpu box at a load
+        # of 8 to 11: the atlas builder draws n = 211's de Winter witness from its parent
+        # facts and orients it, two 211-square multiprecision checks, to hold the fixture
+        # the orientation tests read to that drawing (#518 B10).
+        "test_atlas_orientation.py": {
+            "test_the_de_winter_fixture_is_what_its_parent_facts_draw",  # 23.91s
+        },
         # 41s of call time across 1, measured locally on 2026-09-23; the jet refusals run
         # inside it on the same exact branch-0 system rather than as a second slow test.
         "test_capture_radius.py": {
@@ -1178,11 +1200,41 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_check_declared_bounds.py": {
             "test_n68_depth_bound_is_named_by_its_refusal_test",  # 3.4s
         },
-        # 4s of call time across 1, measured on 2026-10-10 at load 4.7 on four cores:
-        # `test_the_489_certificate_at_305_has_488s_side_in_a_quarter_turned_arrangement`
-        # took 4.1s.
+        # 95s of call time across six nodes in five functions before the four #500 and #506
+        # functions at the end. The 489 node measured 4.1s on 2026-10-10 at load 4.7 on
+        # four cores. The two lineage nodes of the #503/#504 and #505/#501 imports were
+        # measured on 2026-10-12 on four cores at load 5.5 to 7.1, each alone and again
+        # with the file's other slow nodes (`-m slow --durations=0`): 4.75s and 4.74s for
+        # the n207 patches, 49.61s and 57.11s for the Barnett and Ostashev gaps, so
+        # neither shares a build. The two decide functions mark one or two cases each with
+        # `pytest.param(..., marks=pytest.mark.slow)`, and their other cases stay on the
+        # pull-request surface.
+        #
+        # The four #500 and #506 functions carry the marker themselves, so every case is
+        # deferred. They were measured on 2026-10-12 on four cores at load 15 to 24 (a
+        # shared box), each alone and again with the file's other slow nodes: the nine
+        # #500 receipt-plan cases 296.4s alone (22.7s to 39.4s each) and 297.4s together;
+        # the #500 pieces seen by eye and not by pose 292.9s and 224.2s; the eleven #506
+        # receipt-plan cases 549.6s (33.4s to 63.2s each) and 237.1s; the #506 parents
+        # moved 628.9s and 427.0s. The load moved between runs, so these do not say
+        # whether two of them share a build; each is far above the marking threshold.
+        # The deferred slow lane measured them on CI at 89cc71684 (deep gate run
+        # 38276665178, `--jobs 1 --inner-jobs 2`): 56.7s, 56.1s, 58.3s and 96.6s, 267.8s
+        # in all, and the whole lane 225 tests in 844.5s of its 1800s budget, so it
+        # stays under its ceiling with every case where it is.
         "test_check_half_angle_area.py": {
             "test_the_489_certificate_at_305_has_488s_side_in_a_quarter_turned_arrangement",
+            "test_the_n207_certificate_is_two_placed_patches_of_the_n70_and_the_n153_is_not",
+            "test_barnetts_refinements_are_ryan_xus_packings_moved_and_ostashevs_are_not",
+            # The #503 n207 case, 7.05s.
+            "test_the_pingyou_imports_agree_with_their_receipts_plans_and_prints_to_every_digit",
+            # The #505 n261 case, 18.26s, and the #501 n211 case, 11.40s.
+            "test_the_505_and_501_imports_agree_with_their_receipts_plans_and_prints_to_every_digit",
+            # The four #500 and #506 functions, every case.
+            "test_the_500_imports_agree_with_their_receipt_plan_and_print_to_every_digit",
+            "test_the_500_pieces_reappear_to_the_eye_and_not_by_pose",
+            "test_the_506_imports_agree_with_their_receipt_plan_and_print_to_every_digit",
+            "test_the_506_packings_are_their_named_parents_moved",
         },
         # 24s of call time across 1.
         "test_contact_assembly_labels.py": {
@@ -1402,11 +1454,18 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             # 14.99s CPU lower bound for complete Gupta admission, four mutations and
             # restorations. The shared clone remains setup and child45s is unchanged.
             "test_gupta_complete_sources_survive_native_worker_boundaries",  # 15.224s
+            # Measured 2026-10-12 on a loaded four-cpu box: 24.95s call, 17.77s setup for
+            # the 42 houses adopted on 11 October 2026 (think-fvz4), their 82 private
+            # inputs admitted in a worker and 24 late mutations refused and restored. The
+            # quick lane keeps the custody receipt's own checks (test_house_adoption).
+            "test_adopted_houses_survive_native_worker_boundaries",  # 24.95s
         },
         # Hosted run37739373988/job113186283659: 14.52s; 68 full geometry replays
         # cover 85,204 pair decisions across the n108 translation/tolerance surface.
+        # Since the house adoption of 11 October 2026 (think-fvz4) the case is n84's
+        # unstable T-130 house: its screen measured 3.18s on a loaded four-cpu box.
         "test_translation_escape_screen.py": {
-            "test_squish_n108_retains_its_replayed_tolerance_instability",
+            "test_an_adopted_house_retains_its_replayed_tolerance_instability",  # 3.18s
         },
         # Hosted run37743601485/job113199788788, 2026-10-08: 25.04s for the
         # actual complete clone, all three #399 houses/native custody and two private
@@ -1510,23 +1569,56 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         },
     }
     declared: dict[str, set[str]] = {}
-    marker = "pytest.mark.slow"
     for path in (PROJECT_ROOT / "tests").glob("test_*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-        marked: set[str] = set()
-        for node in tree.body:
-            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and any(
-                ast.unparse(decorator) == marker for decorator in node.decorator_list
-            ):
-                marked.add(node.name)
-            if isinstance(node, (ast.Assign, ast.AnnAssign)) and "mark.slow" in ast.unparse(
-                node
-            ):
-                marked.add("<module-level assignment>")
-        if marked:
+        if marked := _slow_marked(tree):
             declared[path.name] = marked
 
     assert declared == expected
+
+
+def _slow_marked(tree: ast.Module) -> set[str]:
+    """The functions in a test module that carry the slow marker, on themselves or on a
+    case, and `<module-level assignment>` if the module marks all of its tests."""
+    marked: set[str] = set()
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and any(
+            "mark.slow" in ast.unparse(decorator) for decorator in node.decorator_list
+        ):
+            marked.add(node.name)
+        if isinstance(node, (ast.Assign, ast.AnnAssign)) and "mark.slow" in ast.unparse(node):
+            marked.add("<module-level assignment>")
+    return marked
+
+
+def test_the_slow_registry_sees_a_marker_on_a_function_a_case_or_a_module() -> None:
+    """A case marked with `pytest.param(..., marks=...)` names its function, as a marked
+    function does; a parametrized function with no marked case names nothing."""
+    source = textwrap.dedent(
+        """
+        import pytest
+
+        pytestmark = [pytest.mark.slow]
+
+        @pytest.mark.slow
+        def test_whole() -> None: ...
+
+        @pytest.mark.parametrize("n", [1, pytest.param(2, marks=pytest.mark.slow)])
+        def test_one_case(n: int) -> None: ...
+
+        @pytest.mark.parametrize("n", [pytest.param(3, marks=[pytest.mark.slow])])
+        def test_a_listed_case(n: int) -> None: ...
+
+        @pytest.mark.parametrize("n", [1, pytest.param(2, id="two")])
+        def test_quick(n: int) -> None: ...
+        """
+    )
+    assert _slow_marked(ast.parse(source)) == {
+        "<module-level assignment>",
+        "test_whole",
+        "test_one_case",
+        "test_a_listed_case",
+    }
 
 
 def test_devtools_use_public_package_interfaces() -> None:

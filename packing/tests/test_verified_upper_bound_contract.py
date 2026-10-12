@@ -129,8 +129,9 @@ DECLARED_CONSUMERS = {
         "the reported geometry and a historical ceiling never establish s(n)"
     ),
     "packing/tests/test_couzo_followup_reports.py": (
-        "holds each frozen comparison to the live verified finite ceiling while the report "
-        "is unadopted; a smaller side establishes neither s(n) nor adoption"
+        "holds each frozen comparison to the verified finite ceiling it was frozen against, "
+        "live or as a later adoption retained it; a smaller side establishes neither s(n) "
+        "nor adoption"
     ),
     "packing/devtools/upper_bound_reports.py": (
         "compares each reported certificate with the case's selected verified ceiling when "
@@ -281,6 +282,18 @@ DECLARED_CONSUMERS = {
     "packing/tests/test_evand_arrangement_adoption.py": (
         "checks exact ceiling/complete-pose adoption and generator preservation; "
         "never identifies feasibility with optimality or s(n)"
+    ),
+    "packing/devtools/select_houses.py": (
+        "reads each case's verified ceiling to select the smallest reviewed, replayed "
+        "certificate below it as the house; a smaller feasible side is a ceiling, not s(n)"
+    ),
+    "packing/devtools/adopt_houses.py": (
+        "moves the reported and verified ceilings together to an adopted exact feasible "
+        "side and keeps the earlier ceiling as history; it never reads either as s(n)"
+    ),
+    "packing/tests/test_house_adoption.py": (
+        "checks each retained prior record's ceiling stood above its adopted house and "
+        "that a redraft keeps the adopted ceiling; feasibility, never s(n) or optimality"
     ),
     "packing/tests/test_evand_exact_certificates.py": (
         "holds a synthetic case's ceiling against conjectures inside and past half a unit "

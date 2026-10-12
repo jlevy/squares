@@ -98,15 +98,18 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
     UnitSquare rendering, where every square is a singleton, to Francisco Couzo's packing:
     its five-square block seats against one wall. n = 69 made the same move on 2026-10-05,
     to the catalogue's packing (T-088), and its two blocks, of 21 and 28 squares, are corner
-    blocks like the catalogue's others.
+    blocks like the catalogue's others. The house adoption of 11 October 2026 (think-fvz4)
+    moved n = 70 to T-146's regularization of Ryan Xu's packing, whose larger corner block
+    has 31 squares rather than 30, and n = 84 and 86 to Couzo's T-130 packings, which leave
+    one corner block of 12 at 84 and none at 86 where Xu's had three and two.
     """
     residue = _record()["residue"]
 
-    assert residue["walls_touched"] == {"0": 2, "1": 1, "2": 68, "4": 44}
+    assert residue["walls_touched"] == {"0": 2, "1": 1, "2": 64, "4": 44}
     assert residue["by_source"] == {
         "exact-grid": 44,
         "kingbird-derived-facts": 57,
-        "packet-derived-facts": 14,
+        "packet-derived-facts": 10,
     }
     assert residue["tilted"] == 2
     assert residue["whole_record"] == 44
@@ -122,12 +125,8 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
                 (51, 18, 2),
                 (68, 5, 1),
                 (70, 18, 2),
-                (70, 30, 2),
-                (84, 6, 2),
-                (84, 15, 2),
-                (84, 25, 2),
-                (86, 22, 2),
-                (86, 36, 2),
+                (70, 31, 2),
+                (84, 12, 2),
                 (88, 16, 2),
                 (88, 25, 2),
             }, item

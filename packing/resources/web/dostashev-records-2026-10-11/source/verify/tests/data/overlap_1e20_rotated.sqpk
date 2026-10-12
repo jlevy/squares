@@ -1,0 +1,7 @@
+# sqpk v1
+# test: two squares at 30 deg overlapping by 1e-20 along the shared normal
+# digits 40
+n 2
+s 5
+2 2 30
+2.86602540378443864675506291671509179700376539519766 2.499999999999999999995 30

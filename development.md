@@ -7,7 +7,7 @@ This guide owns runtime support, code placement, validation, and refactoring pra
 
 The governing rule is assurance proportional to reuse and consequence.
 Shared code and research-state boundaries are designed, typed, tested, and kept easy to
-orient around. A retained checker for one value of $n$ may stay direct and specialized.
+navigate. A retained checker for one value of $n$ may stay direct and specialized.
 Do not turn a one-off investigation into a framework without a second real consumer.
 
 ## Supported Environment
@@ -26,6 +26,7 @@ uses the stable Cargo toolchain.
 From the repository root, then from `packing/`:
 
 ```shell
+git submodule update --init --recursive
 npm ci --ignore-scripts
 cd packing
 uv sync --frozen --all-extras --group dev
@@ -33,6 +34,8 @@ uv run --frozen --all-extras --group dev python --version
 uv run --frozen --all-extras --group dev packing-validate --fast
 ```
 
+The submodule command initializes `vendor/kpress`, the local dependency uv needs before
+it can sync the environment.
 `npm ci` installs the pinned Node tools the browser-floor step runs; without them that
 step fails. `make hooks-install` runs the same install and then the Git hooks.
 The version command must report Python 3.14.7. Do not run a bare `pip install`, commit a
@@ -735,7 +738,7 @@ uv run --frozen --all-extras --group dev packing-validate --edit
 uv run --frozen --all-extras --group dev packing-validate --push
 
 # The pull-request surface: the edit tier plus every behavioral test under the
-# per-test ceiling. CI runs it as the nine parts below, one per runner; run it whole
+# per-test ceiling. CI runs it as the ten parts below, one per runner; run it whole
 # here, where there is only one machine and nothing to overlap with.
 uv run --frozen --all-extras --group dev packing-validate --fast
 

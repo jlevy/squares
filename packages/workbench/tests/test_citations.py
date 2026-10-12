@@ -291,10 +291,12 @@ def test_the_current_handover_does_not_label_an_earlier_ceiling_as_confirmation(
     entry = next(row for row in document["citations"]["entries"] if row["n"] == n)
     assert earlier_result not in entry["upper"]["confirmed_by"]
     if n == 123:
-        assert entry["upper"]["results"] == ["T-125"]
+        # The selected house: T-146 since the house adoption of 11 October 2026
+        # (think-fvz4), after T-115 and T-125. Only the displayed house confirms.
+        assert entry["upper"]["results"] == ["T-146"]
         assert entry["upper"]["assurance"] == "verified"
-        assert entry["upper"]["confirmed_by"] == ["T-125"]
-        assert cited_lines(entry)["upper"][2] == "(confirmed T-125)"
+        assert entry["upper"]["confirmed_by"] == ["T-146"]
+        assert cited_lines(entry)["upper"][2] == "(confirmed T-146)"
     else:
         assert earlier_result in entry["upper"]["results"]
         assert entry["upper"]["assurance"] == "reported"

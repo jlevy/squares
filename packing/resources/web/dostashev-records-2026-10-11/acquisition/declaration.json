@@ -1,0 +1,27 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "dostashev-square-packing",
+  "source_url": "https://github.com/dostashev/square-packing",
+  "source_ref": "main",
+  "source_commit": "c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49",
+  "retrieved_at_utc": "2026-10-11T20:35Z",
+  "git_scope": "Full clone of main, checked out at its head for issue #501, which names no revision. The issue's three sides are those of 41019fb5808e6b62b50dfc7b5bcb0c0f880d5314, the head when it was opened; c3d17ab replaced all three certificates with smaller ones. Every file of the tree but .gitignore is in the scope and retained under the MIT licence. No source program was executed.",
+  "archived_dir": "source",
+  "license": "MIT (LICENSE, Copyright (c) 2026 Daniil Ostashev, added in c6893aa24ec2b2822ef42ab695c828de1ccb9015); the README says it covers the verification code and the record packings and certificates. The files are retained byte-identical with the licence beside them. The README credits Daniil Ostashev with the packings, names the soft-to-rigid method of Yohei Nakajima, this project's cell linear program and Ryan Xu's certificate construction as the methods used, and states no AI assistance.",
+  "claims": [
+    "Issue #501 reports s(155) <= 12.952425406986414, s(156) <= 12.979172613722533 and s(211) <= 14.996336737028043, the README's sides at 41019fb5808e6b62b50dfc7b5bcb0c0f880d5314.",
+    "At c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49 the README states smaller sides from exact rational certificates at the exact optimum of each packing's contact topology: s(155) <= 12.952425406958457, s(156) <= 12.979172613644427 and s(211) <= 14.996336721336316, rounded up; each records/n0NNN.sqcert gives the exact side, dilated by 1 + 1e-60 from the 60-digit optimum.",
+    "The README says the packings were constructed from scratch (an explicit V-shaped tilted band with aligned corner blocks chosen by an integer program, no existing record geometry used), re-hardened on a GPU and polished by linear programming, and that its own C++ GMP checker and an 80-digit mpmath cross-check accept them. These are author reports; the KKT statement is not a bound."
+  ],
+  "scope": [
+    "CMakeLists.txt",
+    "LICENSE",
+    "README.md",
+    "pyproject.toml",
+    "records",
+    "tools",
+    "verify",
+    "verify_all.sh"
+  ],
+  "pinned_only": []
+}

@@ -464,6 +464,7 @@ def linked_repository_file_problem(path: str) -> str | None:
     from devtools import ryxu_house_links as ryxu  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
     from devtools import squish_second_update_house_links as house  # noqa: PLC0415
+    from devtools import upper_bound_houses as adopted  # noqa: PLC0415
     from devtools.squish_followup_packets import linked_certificate_problem  # noqa: PLC0415
 
     # Proof paths name their fixed source; atlas paths additionally require the
@@ -481,6 +482,8 @@ def linked_repository_file_problem(path: str) -> str | None:
         (refinements, refinements.packets.COUZO.numbers, refinements.packets.COUZO.key),
         (refinements, refinements.packets.N68.numbers, refinements.packets.N68.key),
         (evand, evand.NUMBERS, evand.reports.SOURCE_KEY),
+        # The houses adopted on 2026-10-11, each count under its own source's key.
+        *((adopted, (m,), adopted.source_for(m).key) for m in adopted.NUMBERS),
     )
     declared = {
         f"packing/witnesses/known-best/n-{n:03d}.yaml": n
