@@ -119,6 +119,10 @@ $defs:
         - T-140
         - T-141
         - T-146
+        - T-147
+        - T-148
+        - T-149
+        - T-150
       source_key:
         type: string
         minLength: 1
@@ -192,6 +196,10 @@ $defs:
             - T-140
             - T-141
             - T-146
+            - T-147
+            - T-148
+            - T-149
+            - T-150
       then:
         properties:
           verification:

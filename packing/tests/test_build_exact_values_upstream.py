@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 from collections import Counter
+from dataclasses import replace
 from fractions import Fraction
 from types import SimpleNamespace
 from typing import Any
@@ -174,7 +175,11 @@ def test_record_hunt_retains_two_source_occurrences_without_replacing_couzo(sour
     assert new132["n"] == 132
     assert Fraction(new132["exact_form"]) == facts[132].side
     assert new132["source_certificate"]["source_key"] == hunt.SOURCE_KEY
-    equal155 = [row for row in source_history if row["n"] == 155]
+    equal155 = [
+        row
+        for row in source_history
+        if row["n"] == 155 and row["source_certificate"]["result"] == "T-128"
+    ]
     assert [row["source_certificate"]["source_key"] for row in equal155] == [
         exact.couzo_refinements.SOURCE_KEY,
         hunt.SOURCE_KEY,
@@ -270,7 +275,7 @@ def test_other_duplicate_finite_identity_still_refuses_distinct_custody(monkeypa
 @pytest.mark.parametrize(
     "control", ["verification", "confirmation", "geometry_replay", "receipt"]
 )
-@pytest.mark.parametrize("result", ["T-131", "T-146"])
+@pytest.mark.parametrize("result", ["T-131", "T-146", "T-147", "T-148", "T-149", "T-150"])
 def test_confirmed_source_schema_refuses_downgrade_or_missing_replay(
     source_history, control, result
 ):
@@ -377,6 +382,151 @@ def test_owner_adopters_keep_derived_identity_after_backfill(writer, n):
     assert bound["minimal_polynomial"] == writer.reported_bound(n)["minimal_polynomial"]
 
 
+# Independent native identities reviewed in the 11 October intake, distinct from prints.
+LATEST_CERTIFICATES = [
+    {
+        "result": "T-147",
+        "n": 207,
+        "exact_side": (
+            "148809603730436756319360591381170501178639/100000000000000000000"
+            "00000000000000000000"
+        ),
+        "ceiling": "14.8809603730436757",
+        "source_key": "[PingYou n207 certificate 2026-10-11]",
+        "source_commit": "9dc93b6ac2f8fefe038062a74c9a75bf05afdba6",
+        "source_or_fact": (
+            "packing/resources/web/pingyou-n207-certificate-2026-10-11/facts/n-207.yaml.gz"
+        ),
+        "native_receipt": (
+            "packing/resources/web/pingyou-n207-certificate-2026-10-11/receip"
+            "ts/exact-certification.json.xz"
+        ),
+        "original": "n207.cert.json",
+    },
+    {
+        "result": "T-148",
+        "n": 153,
+        "exact_side": "6435006925203522001385040447/500000000000000000000000000",
+        "ceiling": "12.8700138504070441",
+        "source_key": "[PingYou n153 certificate 2026-10-11]",
+        "source_commit": "bc328a7d727aedd0eabebd6ea80285f572b65d2d",
+        "source_or_fact": (
+            "packing/resources/web/pingyou-n153-certificate-2026-10-11/facts/n-153.yaml.gz"
+        ),
+        "native_receipt": (
+            "packing/resources/web/pingyou-n153-certificate-2026-10-11/receip"
+            "ts/exact-certification.json.xz"
+        ),
+        "original": "n153.cert.json",
+    },
+    {
+        "result": "T-149",
+        "n": 155,
+        "exact_side": (
+            "6476212703479228067826801266277003984977575753080931673578306476"
+            "2127034792280678268012662770039849775757530809316735783/50000000"
+            "0000000000000000000000000000000000000000000000000000000000000000"
+            "0000000000000000000000000000000000000000000000"
+        ),
+        "ceiling": "12.9524254069584562",
+        "source_key": "[Ostashev records 2026-10-11]",
+        "source_commit": "c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49",
+        "source_or_fact": (
+            "packing/resources/web/dostashev-records-2026-10-11/source/records/n0155.sqcert"
+        ),
+        "native_receipt": (
+            "packing/resources/web/dostashev-records-2026-10-11/receipts/exac"
+            "t-certification.json.xz"
+        ),
+        "original": "records/n0155.sqcert",
+    },
+    {
+        "result": "T-149",
+        "n": 156,
+        "exact_side": (
+            "8111982883527766297069290937797918339306619994848173142743008111"
+            "982883527766297069290937797918339306619994848173142743/625000000"
+            "0000000000000000000000000000000000000000000000000000000000000000"
+            "00000000000000000000000000000000000000000000"
+        ),
+        "ceiling": "12.9791726136444261",
+        "source_key": "[Ostashev records 2026-10-11]",
+        "source_commit": "c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49",
+        "source_or_fact": (
+            "packing/resources/web/dostashev-records-2026-10-11/source/records/n0156.sqcert"
+        ),
+        "native_receipt": (
+            "packing/resources/web/dostashev-records-2026-10-11/receipts/exac"
+            "t-certification.json.xz"
+        ),
+        "original": "records/n0156.sqcert",
+    },
+    {
+        "result": "T-149",
+        "n": 211,
+        "exact_side": (
+            "7498168360668157847329201553387328996546227450936608628725707498"
+            "1683606681578473292015533873289965462274509366086287257/50000000"
+            "0000000000000000000000000000000000000000000000000000000000000000"
+            "0000000000000000000000000000000000000000000000"
+        ),
+        "ceiling": "14.9963367213363157",
+        "source_key": "[Ostashev records 2026-10-11]",
+        "source_commit": "c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49",
+        "source_or_fact": (
+            "packing/resources/web/dostashev-records-2026-10-11/source/records/n0211.sqcert"
+        ),
+        "native_receipt": (
+            "packing/resources/web/dostashev-records-2026-10-11/receipts/exac"
+            "t-certification.json.xz"
+        ),
+        "original": "records/n0211.sqcert",
+    },
+    {
+        "result": "T-150",
+        "n": 146,
+        "exact_side": (
+            "1162796491243115951268499610424932651360926707415737629286682777"
+            "75998122712863472766532671969348798419026610394581005669/9240437"
+            "1944551138870962994568170242433779780459571942094680604563058942"
+            "40222303442118770000000000000000000000000000000"
+        ),
+        "ceiling": "12.5837822039510463",
+        "source_key": "[Barnett refinements 2026-10-11]",
+        "source_commit": "2573ff51c4b160c952bbb2d1c399e7430d9f9ae2",
+        "source_or_fact": (
+            "packing/resources/web/barnett-refinements-2026-10-11/facts/n-146.yaml.gz"
+        ),
+        "native_receipt": (
+            "packing/resources/web/barnett-refinements-2026-10-11/receipts/ex"
+            "act-certification.json.xz"
+        ),
+        "original": "certificates/n146.cert",
+    },
+    {
+        "result": "T-150",
+        "n": 261,
+        "exact_side": (
+            "2815119984437146057776712625526780010535117139958647843184531821"
+            "56213791529093472577894719178723409384395264262601/1687845277338"
+            "8004800535351238155816857400040173477095354881922318666694517637"
+            "251382500000000000000000000000000000"
+        ),
+        "ceiling": "16.6787798753432078",
+        "source_key": "[Barnett refinements 2026-10-11]",
+        "source_commit": "2573ff51c4b160c952bbb2d1c399e7430d9f9ae2",
+        "source_or_fact": (
+            "packing/resources/web/barnett-refinements-2026-10-11/facts/n-261.yaml.gz"
+        ),
+        "native_receipt": (
+            "packing/resources/web/barnett-refinements-2026-10-11/receipts/ex"
+            "act-certification.json.xz"
+        ),
+        "original": "certificates/n261.cert",
+    },
+]
+
+
 def test_declared_certificate_history_keeps_registered_native_sides_and_credit():
     entries = _standing_entries()
     before = copy.deepcopy(entries)
@@ -392,6 +542,10 @@ def test_declared_certificate_history_keeps_registered_native_sides_and_credit()
         "T-140": 6,
         "T-141": 2,
         "T-146": 15,
+        "T-147": 1,
+        "T-148": 1,
+        "T-149": 3,
+        "T-150": 2,
     }
     for row in rows:
         side = Fraction(row["exact_form"])
@@ -470,7 +624,8 @@ def test_declared_history_refuses_inconsistent_registration_or_retained_evidence
 
         def missing(*args, **kwargs):
             found = original(*args, **kwargs)
-            del found[132]
+            if 132 in found:
+                del found[132]
             return found
 
         monkeypatch.setattr(reports, "check_certification", missing)
@@ -512,3 +667,112 @@ def test_declared_tied_occurrences_keep_distinct_custody(monkeypatch):
     assert len({row["source_certificate"]["source_key"] for row in rows}) == 4
     assert len({row["source_certificate"]["facts"] for row in rows}) == 4
     assert len({row["source_certificate"]["receipt"] for row in rows}) == 4
+
+
+@pytest.mark.parametrize(
+    "expected", LATEST_CERTIFICATES, ids=lambda row: f"{row['result']}-{row['n']}"
+)
+def test_latest_source_native_identity_custody_and_credit(source_history, expected):
+    (row,) = [
+        row
+        for row in source_history
+        if row["n"] == expected["n"]
+        and row["source_certificate"]["result"] == expected["result"]
+    ]
+    side = Fraction(expected["exact_side"])
+    assert row["degree"] == 1
+    assert Fraction(row["exact_form"]) == side
+    assert row["polynomial"]["coefficients"] == [str(side.denominator), str(-side.numerator)]
+    assert exact.evand.ceiling_decimal(side, 16) == expected["ceiling"]
+    custody = row["source_certificate"]
+    assert custody["source_key"] == expected["source_key"]
+    assert custody["revision"] == expected["source_commit"]
+    assert custody["facts"] == expected["source_or_fact"]
+    assert custody["original_certificate"] == expected["original"]
+    assert custody["receipt"] == expected["native_receipt"]
+    assert custody["adoption"] == "pending"
+    assert row["kind"] == "unreconciled-source"
+    assert custody["global_optimality"] == "not-established"
+    assert row["attribution"]["date_mentions"] == ["2026-10-11"]
+    credit = " ".join(row["attribution"]["source_text"])
+    names = {
+        "T-147": ("PingYou Ltd", "Ryan Xu", "Evan Daniel"),
+        "T-148": ("PingYou Ltd", "Ryan Xu", "Evan Daniel"),
+        "T-149": ("Daniil Ostashev", "Yohei Nakajima", "Ryan Xu"),
+        "T-150": ("Robert Barnett", "Ryan Xu", "Evan Daniel"),
+    }
+    assert all(name in credit for name in names[expected["result"]])
+    if expected["result"] == "T-148":
+        assert "degree-seven" in credit
+        assert "no feasibility of the undilated contact solution" in row["text"]
+    if expected["result"] == "T-149":
+        issue_sides = {
+            155: "12.952425406986414",
+            156: "12.979172613722533",
+            211: "14.996336737028043",
+        }
+        assert side < Fraction(issue_sides[row["n"]])
+
+
+def test_barnett_unrequested_facts_stay_outside_the_registered_source_scope(source_history):
+    reports = exact.upper_bound_reports
+    packet = exact.ROOT / "resources/web/barnett-refinements-2026-10-11"
+    facts = reports.read_facts(packet)
+    claims = reports.check_claims(packet, facts)
+    positives = reports.check_certification(packet, certificates=facts)
+    assert set(facts) == set(positives) == {70, 103, 123, 146, 237, 261, 295}
+    assert {row["n"] for row in claims["results"] if row["requested"]} == {146, 261}
+    assert {
+        row["n"] for row in source_history if row["source_certificate"]["result"] == "T-150"
+    } == {146, 261}
+
+
+@pytest.mark.parametrize("result", ["T-147", "T-148", "T-149", "T-150"])
+@pytest.mark.parametrize("control", ["native-side", "frozen-claims", "missing-replay"])
+def test_latest_source_projection_refuses_stale_identity_claims_or_replay(
+    monkeypatch, result, control
+):
+    reports = exact.upper_bound_reports
+    expected = next(row for row in LATEST_CERTIFICATES if row["result"] == result)
+    n = expected["n"]
+    packet = exact.ROOT.parent / expected["native_receipt"]
+    packet = packet.parent.parent
+    if control == "native-side":
+        read_facts_original = reports.read_facts
+
+        def changed_facts(path):
+            certificates = read_facts_original(path)
+            if path == packet:
+                certificates[n] = replace(
+                    certificates[n], side=certificates[n].side + Fraction(1, 10**1000)
+                )
+            return certificates
+
+        monkeypatch.setattr(reports, "read_facts", changed_facts)
+    elif control == "frozen-claims":
+        # Change the stored comparison while leaving real claim recomputation active.
+        stored_original = reports._stored  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+        def changed_claims(path):
+            record = stored_original(path)
+            if path == packet / reports.CLAIMS:
+                record = copy.deepcopy(record)
+                record["results"][0]["exact_side"] = "3"
+            return record
+
+        monkeypatch.setattr(reports, "_stored", changed_claims)
+    else:
+        certification_original = reports.check_certification
+
+        def missing_replay(path, **kwargs):
+            positives = certification_original(path, **kwargs)
+            if path == packet:
+                del positives[n]
+            return positives
+
+        monkeypatch.setattr(reports, "check_certification", missing_replay)
+    message = (
+        "lacks native replay" if control == "missing-replay" else "frozen claim record differs"
+    )
+    with pytest.raises(exact.ExactValuesError, match=message):
+        exact.declared_source_certificate_history(_standing_entries())
