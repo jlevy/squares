@@ -698,13 +698,17 @@ def _mutants(n: int) -> list[tuple[str, Path, Callable[[bytes], bytes]]]:
     ]
 
 
-def receipt_of(n: int) -> Path:
-    source = source_for(n)
+def receipt_for_source(source: Source, n: int) -> Path:
+    """The source's native receipt, retaining legacy paths and per-count shard precedence."""
     if source.result == "T-128":
         return couzo_451.receipt_path()
     if source.result == "T-130":
         return couzo_460.receipt_path()
     return _receipt(source.packet, n)
+
+
+def receipt_of(n: int) -> Path:
+    return receipt_for_source(source_for(n), n)
 
 
 def worker_custody() -> dict[str, Any]:

@@ -1,8 +1,8 @@
 {
   "figure": {
     "composites": [
-      {"columns":10,"layout":"10 by 10, row-major n=1..100","range":{"count":100,"first_n":1,"last_n":100},"rows":10,"square_count":5050,"stem":"known-best-1-100","totals":{"degree_derived_here":82,"degree_known":97,"degree_recorded_upstream":15,"exact_value_known":97,"lower_bound_correction":16,"lower_bound_first_proved_here":0,"lower_bound_recent_result":81,"only_known_numerically":3,"proved_optimal":45,"rigidity_catalogue_annotated":2,"rigidity_established":12,"rigidity_known":14}},
-      {"columns":35,"layout":"35 by 18, right-aligned square-bound triangle n=1..324","range":{"count":324,"first_n":1,"last_n":324},"rows":18,"square_count":52650,"stem":"known-best-1-324","totals":{"degree_derived_here":237,"degree_known":307,"degree_recorded_upstream":70,"exact_value_known":307,"lower_bound_correction":219,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":17,"proved_optimal":77,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}}
+      {"columns":10,"layout":"10 by 10, row-major n=1..100","range":{"count":100,"first_n":1,"last_n":100},"rows":10,"square_count":5050,"stem":"known-best-1-100","totals":{"degree_derived_here":88,"degree_known":97,"degree_recorded_upstream":9,"exact_value_known":97,"lower_bound_correction":16,"lower_bound_first_proved_here":0,"lower_bound_recent_result":81,"only_known_numerically":3,"proved_optimal":45,"rigidity_catalogue_annotated":2,"rigidity_established":12,"rigidity_known":14}},
+      {"columns":35,"layout":"35 by 18, right-aligned square-bound triangle n=1..324","range":{"count":324,"first_n":1,"last_n":324},"rows":18,"square_count":52650,"stem":"known-best-1-324","totals":{"degree_derived_here":294,"degree_known":307,"degree_recorded_upstream":13,"exact_value_known":307,"lower_bound_correction":219,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":17,"proved_optimal":77,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}}
     ],
     "entries": [
       {
@@ -111,7 +111,7 @@
       },
       {
         "badges": [{"glyph":"O","meaning":"proved optimal","style":"solid"},{"glyph":"=","meaning":"exact value known","style":"solid"},{"glyph":"R","meaning":"known rigid","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"2 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 8*s + 7 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"2 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 8s + 7 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(5) ≥ 2.707106","evidence":["E-n005-gobel-proof"],"first_proved_here":false,"provenance":"frontier","recent_result":false,"shown":false,"value":"2.70710678118654752440084436210485"},
         "n": 5,
         "optimality": {"provenance":"frontier","status":"proved"},
@@ -245,7 +245,7 @@
       },
       {
         "badges": [{"glyph":"O","meaning":"proved optimal","style":"solid"},{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"3 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 12*s + 17 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"3 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 12s + 17 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(10) ≥ 3.707106","evidence":["E-n010-stromquist-proof"],"first_proved_here":false,"provenance":"frontier","recent_result":false,"shown":false,"value":"3.70710678118654752440084436210485"},
         "n": 10,
         "optimality": {"provenance":"frontier","status":"proved"},
@@ -455,7 +455,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(7/2) + (1/2)sqrt(7)","minimal_polynomial":"2*s**2 - 14*s + 21 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(7/2) + (1/2)sqrt(7)","minimal_polynomial":"2s^2 - 14s + 21 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(18) ≥ 4.705000","evidence":["E-n018-wand125-mixed-4705-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"4.705"},
         "n": 18,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -481,7 +481,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"3 + (4/3)sqrt(2)","minimal_polynomial":"9*s**2 - 54*s + 49 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"3 + (4/3)sqrt(2)","minimal_polynomial":"9s^2 - 54s + 49 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(19) ≥ 4.825000","evidence":["E-n019-wand125-mixed-4825-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"4.825"},
         "n": 19,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -663,7 +663,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(7/2) + (3/2)sqrt(2)","minimal_polynomial":"4*s**2 - 28*s + 31 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(7/2) + (3/2)sqrt(2)","minimal_polynomial":"4s^2 - 28s + 31 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(26) ≥ 5.545000","evidence":["E-n026-wand125-mixed-5545-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"5.545"},
         "n": 26,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -689,7 +689,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 20*s + 49 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 20s + 49 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(27) ≥ 5.643500","evidence":["E-n027-wand125-mixed-56435-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"5.6435"},
         "n": 27,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -976,7 +976,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"6 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 24*s + 71 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"6 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 24s + 71 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(38) ≥ 6.545000","evidence":["E-wand125-rectangle-2026-10-01-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"6.545"},
         "n": 38,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1028,7 +1028,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"},{"glyph":"R","meaning":"known rigid","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"4 + 2 sqrt(2)","minimal_polynomial":"s**2 - 8*s + 8 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"4 + 2 sqrt(2)","minimal_polynomial":"s^2 - 8s + 8 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(40) ≥ 6.715815","evidence":["E-n040-guzhou-continuous-pose-kernel-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"6.71581574608202"},
         "n": 40,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1296,7 +1296,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + (4/7)","minimal_polynomial":"7*s - 53 = 0","state":"closed-form"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + (4/7)","minimal_polynomial":"7s - 53 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(50) ≥ 7.400000","evidence":["E-n050-wand125-mixed-740-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"7.4"},
         "n": 50,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1322,7 +1322,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"(16+5*sqrt(2))/3","minimal_polynomial":"9s^2-96s+206=0","state":"minimal-polynomial"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(16+5*sqrt(2))/3","minimal_polynomial":"9s^2 - 96s + 206 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(51) ≥ 7.470000","evidence":["E-n051-wand125-mixed-747-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"7.47"},
         "n": 51,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1348,7 +1348,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 28*s + 97 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 28s + 97 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(52) ≥ 7.550000","evidence":["E-n052-wand125-mixed-755-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"7.55"},
         "n": 52,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1374,7 +1374,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(13/2) + (1/2)sqrt(7)","minimal_polynomial":"2*s**2 - 26*s + 81 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(13/2) + (1/2)sqrt(7)","minimal_polynomial":"2s^2 - 26s + 81 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(53) ≥ 7.627500","evidence":["E-n053-wand125-mixed-76275-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"7.6275"},
         "n": 53,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1400,7 +1400,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":4,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))","minimal_polynomial":"4*s**4 - 112*s**3 + 1164*s**2 - 5304*s + 8897 = 0","state":"closed-form"},
+        "exactness": {"degree":4,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))","minimal_polynomial":"4s^4 - 112s^3 + 1164s^2 - 5304s + 8897 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(54) ≥ 7.685000","evidence":["E-n054-wand125-mixed-7685-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"7.685"},
         "n": 54,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1686,7 +1686,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 20*s + 25 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 20s + 25 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(65) ≥ 8.350000","evidence":["E-n065-wand125-mixed-835-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"8.35"},
         "n": 65,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1712,7 +1712,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"3 + 4 sqrt(2)","minimal_polynomial":"s**2 - 6*s - 23 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"3 + 4 sqrt(2)","minimal_polynomial":"s^2 - 6s - 23 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(66) ≥ 8.430000","evidence":["E-n066-wand125-mixed-843-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"8.43"},
         "n": 66,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1738,7 +1738,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 32*s + 127 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 32s + 127 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(67) ≥ 8.480000","evidence":["E-n067-wand125-mixed-848-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"8.48"},
         "n": 67,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1764,7 +1764,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"879879523721828390257668096702139408352101903022787926324037/100000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"879879523721828390257668096702139408352101903022787926324037/100000000000000000000000000000000000000000000000000000000000","minimal_polynomial":"100000000000000000000000000000000000000000000000000000000000s - 879879523721828390257668096702139408352101903022787926324037 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(68) ≥ 8.510000","evidence":["E-wand125-rectangle-2026-10-01-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"8.51"},
         "n": 68,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -1823,7 +1823,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"8880960371555579594785501178639/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8880960371555579594785501178639/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 8880960371555579594785501178639 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(70) ≥ 8.657500","evidence":["E-n070-wand125-mixed-86575-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"8.6575"},
         "n": 70,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2135,7 +2135,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"6 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 24*s + 47 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"6 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 24s + 47 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(82) ≥ 9.320000","evidence":["E-n082-wand125-linear-932-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.32"},
         "n": 82,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2187,7 +2187,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"9697934799014921307163820128651/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9697934799014921307163820128651/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 9697934799014921307163820128651 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(84) ≥ 9.411000","evidence":["E-n084-wand125-mixed-9411-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.411"},
         "n": 84,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2213,7 +2213,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(11/2) + 3 sqrt(2)","minimal_polynomial":"4*s**2 - 44*s + 49 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(11/2) + 3 sqrt(2)","minimal_polynomial":"4s^2 - 44s + 49 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(85) ≥ 9.460000","evidence":["E-n085-wand125-mixed-946-source-replay","E-n085-wand125-mixed-946-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.46"},
         "n": 85,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2239,7 +2239,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"9820535407496742209971278280039/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9820535407496742209971278280039/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 9820535407496742209971278280039 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(86) ≥ 9.503000","evidence":["E-n086-wand125-mixed-9503-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.503"},
         "n": 86,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2298,7 +2298,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"9882451030481246819427281665997/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9882451030481246819427281665997/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 9882451030481246819427281665997 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(88) ≥ 9.620000","evidence":["E-n088-wand125-mixed-962-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.62"},
         "n": 88,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2324,7 +2324,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5 + (7/2)sqrt(2)","minimal_polynomial":"2*s**2 - 20*s + 1 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5 + (7/2)sqrt(2)","minimal_polynomial":"2s^2 - 20s + 1 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(89) ≥ 9.650000","evidence":["E-n089-wand125-mixed-965-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.65"},
         "n": 89,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2636,7 +2636,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 28*s + 73 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 28s + 73 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(101) ≥ 10.280000","evidence":["E-n101-wand125-linear-1028-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.28"},
         "n": 101,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2662,7 +2662,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"10605828696431578360490734944053/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10605828696431578360490734944053/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 10605828696431578360490734944053 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(102) ≥ 10.280000","evidence":["E-n101-wand125-linear-1028-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.28"},
         "n": 102,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2688,7 +2688,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"10679232047361306442680936279997/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10679232047361306442680936279997/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 10679232047361306442680936279997 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(103) ≥ 10.280000","evidence":["E-n101-wand125-linear-1028-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.28"},
         "n": 103,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2714,7 +2714,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 40*s + 199 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 40s + 199 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(104) ≥ 10.280000","evidence":["E-n101-wand125-linear-1028-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.28"},
         "n": 104,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2740,7 +2740,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"10789303783748158831034729697921/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10789303783748158831034729697921/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 10789303783748158831034729697921 = 0","state":"closed-form"},
         "lower": {"correction":false,"display":"s(105) ≥ 10.280000","evidence":["E-n101-wand125-linear-1028-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.28"},
         "n": 105,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2792,7 +2792,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":4,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))","minimal_polynomial":"4*s**4 - 160*s**3 + 2388*s**2 - 15744*s + 38633 = 0","state":"closed-form"},
+        "exactness": {"degree":4,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))","minimal_polynomial":"4s^4 - 160s^3 + 2388s^2 - 15744s + 38633 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(107) ≥ 10.361541","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.3615414616"},
         "n": 107,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2818,7 +2818,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"5452410506160178214527814352111/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5452410506160178214527814352111/500000000000000000000000000000","minimal_polynomial":"500000000000000000000000000000s - 5452410506160178214527814352111 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(108) ≥ 10.412113","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.4121138007"},
         "n": 108,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -2844,7 +2844,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"6 + (7/2)sqrt(2)","minimal_polynomial":"2*s**2 - 24*s + 23 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"6 + (7/2)sqrt(2)","minimal_polynomial":"2s^2 - 24s + 23 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(109) ≥ 10.462429","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.4624294225"},
         "n": 109,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3182,7 +3182,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 32*s + 103 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 32s + 103 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(122) ≥ 11.047511","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.0475115548"},
         "n": 122,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3208,7 +3208,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"2897844536374424539887715795867/250000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"2897844536374424539887715795867/250000000000000000000000000000","minimal_polynomial":"250000000000000000000000000000s - 2897844536374424539887715795867 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(123) ≥ 11.094810","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.0948100502"},
         "n": 123,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3234,7 +3234,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"6 + 4 sqrt(2)","minimal_polynomial":"s**2 - 12*s + 4 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"6 + 4 sqrt(2)","minimal_polynomial":"s^2 - 12s + 4 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(124) ≥ 11.141898","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.1418983268"},
         "n": 124,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3260,7 +3260,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"11 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 44*s + 241 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"11 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 44s + 241 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(125) ≥ 11.188779","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.1887791632"},
         "n": 125,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3286,7 +3286,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"11742640687119285146522492579501/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"11742640687119285146522492579501/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 11742640687119285146522492579501 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(126) ≥ 11.235455","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.2354552767"},
         "n": 126,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3312,7 +3312,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"5905439393794589919821183554001/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5905439393794589919821183554001/500000000000000000000000000000","minimal_polynomial":"500000000000000000000000000000s - 5905439393794589919821183554001 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(127) ≥ 11.281929","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.2819293264"},
         "n": 127,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3371,7 +3371,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"371000932783786874179763432249/31250000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"371000932783786874179763432249/31250000000000000000000000000","minimal_polynomial":"31250000000000000000000000000s - 371000932783786874179763432249 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(129) ≥ 11.374281","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.3742815854"},
         "n": 129,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3397,7 +3397,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"11904483032515786440073379383431/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"11904483032515786440073379383431/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 11904483032515786440073379383431 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(130) ≥ 11.420164","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.4201648339"},
         "n": 130,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3423,7 +3423,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"546262522801617822590053861036247525257980632054448711125685429647597444905863823/45713647219586261662645849733884420493261937951141483500332220381589307940237228","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"546262522801617822590053861036247525257980632054448711125685429647597444905863823/45713647219586261662645849733884420493261937951141483500332220381589307940237228","minimal_polynomial":"45713647219586261662645849733884420493261937951141483500332220381589307940237228s - 546262522801617822590053861036247525257980632054448711125685429647597444905863823 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(131) ≥ 11.465856","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.4658560997"},
         "n": 131,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3449,7 +3449,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"5992840099422904405761115982051/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5992840099422904405761115982051/500000000000000000000000000000","minimal_polynomial":"500000000000000000000000000000s - 5992840099422904405761115982051 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(132) ≥ 11.511357","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.5113577727"},
         "n": 132,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3787,7 +3787,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 36*s + 137 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 36s + 137 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(145) ≥ 12.043396","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.0433963806"},
         "n": 145,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3813,7 +3813,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"116279649124311595126849961042493265136092670741573762928668277775998122712863472766532671969348798419026610394581005669/9240437194455113887096299456817024243377978045957194209468060456305894240222303442118770000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"116279649124311595126849961042493265136092670741573762928668277775998122712863472766532671969348798419026610394581005669/9240437194455113887096299456817024243377978045957194209468060456305894240222303442118770000000000000000000000000000000","minimal_polynomial":"9240437194455113887096299456817024243377978045957194209468060456305894240222303442118770000000000000000000000000000000s - 116279649124311595126849961042493265136092670741573762928668277775998122712863472766532671969348798419026610394581005669 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(146) ≥ 12.086630","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.0866302262"},
         "n": 146,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3839,7 +3839,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + 4 sqrt(2)","minimal_polynomial":"s**2 - 14*s + 17 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + 4 sqrt(2)","minimal_polynomial":"s^2 - 14s + 17 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(147) ≥ 12.129703","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.1297033496"},
         "n": 147,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3865,7 +3865,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + 4 sqrt(2)","minimal_polynomial":"s**2 - 14*s + 17 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + 4 sqrt(2)","minimal_polynomial":"s^2 - 14s + 17 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(148) ≥ 12.172617","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.1726175299"},
         "n": 148,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3891,7 +3891,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"12 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 48*s + 287 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"12 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 48s + 287 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(149) ≥ 12.215374","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.2153745138"},
         "n": 149,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3917,7 +3917,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5 + (11/2)sqrt(2)","minimal_polynomial":"2*s**2 - 20*s - 71 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"5 + (11/2)sqrt(2)","minimal_polynomial":"2s^2 - 20s - 71 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(150) ≥ 12.257976","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.2579760163"},
         "n": 150,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3943,7 +3943,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(23/2) + (1/2)sqrt(7)","minimal_polynomial":"2*s**2 - 46*s + 261 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(23/2) + (1/2)sqrt(7)","minimal_polynomial":"2s^2 - 46s + 261 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(151) ≥ 12.300423","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.3004237212"},
         "n": 151,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -3995,7 +3995,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"6435006925203522001385040447/500000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"6435006925203522001385040447/500000000000000000000000000","minimal_polynomial":"500000000000000000000000000s - 6435006925203522001385040447 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(153) ≥ 12.384864","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.384864324"},
         "n": 153,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4021,7 +4021,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"784162558492446266593660385683137819091796768322490163735346888314210507575675725/60679277154496515024381071712664165344389803410694160363187109568787250164584599","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"784162558492446266593660385683137819091796768322490163735346888314210507575675725/60679277154496515024381071712664165344389803410694160363187109568787250164584599","minimal_polynomial":"60679277154496515024381071712664165344389803410694160363187109568787250164584599s - 784162558492446266593660385683137819091796768322490163735346888314210507575675725 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(154) ≥ 12.426860","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.4268604418"},
         "n": 154,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4047,7 +4047,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"64762127034792280678268012662770039849775757530809316735783064762127034792280678268012662770039849775757530809316735783/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"64762127034792280678268012662770039849775757530809316735783064762127034792280678268012662770039849775757530809316735783/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":"5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000s - 64762127034792280678268012662770039849775757530809316735783064762127034792280678268012662770039849775757530809316735783 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(155) ≥ 12.468709","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.4687092035"},
         "n": 155,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4073,7 +4073,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"8111982883527766297069290937797918339306619994848173142743008111982883527766297069290937797918339306619994848173142743/625000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8111982883527766297069290937797918339306619994848173142743008111982883527766297069290937797918339306619994848173142743/625000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":"625000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000s - 8111982883527766297069290937797918339306619994848173142743008111982883527766297069290937797918339306619994848173142743 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(156) ≥ 12.510412","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"12.5104121494"},
         "n": 156,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4437,7 +4437,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 40*s + 175 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 40s + 175 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(170) ≥ 13.039936","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.0399362039"},
         "n": 170,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4463,7 +4463,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13 + (4/7)","minimal_polynomial":"7*s - 95 = 0","state":"closed-form"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13 + (4/7)","minimal_polynomial":"7s - 95 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(171) ≥ 13.079745","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.0797456254"},
         "n": 171,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4515,7 +4515,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8 + 4 sqrt(2)","minimal_polynomial":"s**2 - 16*s + 32 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8 + 4 sqrt(2)","minimal_polynomial":"s^2 - 16s + 32 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(173) ≥ 13.158988","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.1589889011"},
         "n": 173,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4541,7 +4541,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 52*s + 337 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 52s + 337 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(174) ≥ 13.198425","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.1984250992"},
         "n": 174,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4567,7 +4567,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"860445045293269576081339809497/62500000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"860445045293269576081339809497/62500000000000000000000000000","minimal_polynomial":"62500000000000000000000000000s - 860445045293269576081339809497 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(175) ≥ 13.237739","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.2377392028"},
         "n": 175,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4593,7 +4593,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"305005022674381157367132529416905207296020948646520876053762749858683599318120744/22081242074898135703849455266036121393870562834861102970956326327326447327968587","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"305005022674381157367132529416905207296020948646520876053762749858683599318120744/22081242074898135703849455266036121393870562834861102970956326327326447327968587","minimal_polynomial":"22081242074898135703849455266036121393870562834861102970956326327326447327968587s - 305005022674381157367132529416905207296020948646520876053762749858683599318120744 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(176) ≥ 13.276932","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.2769323391"},
         "n": 176,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4645,7 +4645,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":4,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))","minimal_polynomial":"4*s**4 - 208*s**3 + 4044*s**2 - 34824*s + 112001 = 0","state":"closed-form"},
+        "exactness": {"degree":4,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13 - (1/2)sqrt(2) + sqrt(1 + sqrt(2))","minimal_polynomial":"4s^4 - 208s^3 + 4044s^2 - 34824s + 112001 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(178) ≥ 13.354960","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.3549601321"},
         "n": 178,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4671,7 +4671,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"13883795490510898440309946897577/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13883795490510898440309946897577/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 13883795490510898440309946897577 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(179) ≥ 13.393796","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.3937969582"},
         "n": 179,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4697,7 +4697,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"13916993522477832483558124720393/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13916993522477832483558124720393/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 13916993522477832483558124720393 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(180) ≥ 13.432517","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.4325171563"},
         "n": 180,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -4723,7 +4723,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"249935253501271447722872166122379040683260708184410574609224560771762048914945913/17915453134884420632048333509167003378124582375369499899268894615896769573805255","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"249935253501271447722872166122379040683260708184410574609224560771762048914945913/17915453134884420632048333509167003378124582375369499899268894615896769573805255","minimal_polynomial":"17915453134884420632048333509167003378124582375369499899268894615896769573805255s - 249935253501271447722872166122379040683260708184410574609224560771762048914945913 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(181) ≥ 13.471121","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.471121771"},
         "n": 181,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5139,7 +5139,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"11 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 44*s + 217 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"11 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 44s + 217 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(197) ≥ 14.036986","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.0369863706"},
         "n": 197,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5165,7 +5165,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"14 + (4/7)","minimal_polynomial":"7*s - 102 = 0","state":"closed-form"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"14 + (4/7)","minimal_polynomial":"7s - 102 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(198) ≥ 14.073871","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.0738719604"},
         "n": 198,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5191,7 +5191,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"7308786086796403421851018497093/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7308786086796403421851018497093/500000000000000000000000000000","minimal_polynomial":"500000000000000000000000000000s - 7308786086796403421851018497093 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(199) ≥ 14.110657","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.1106575888"},
         "n": 199,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5217,7 +5217,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9 + 4 sqrt(2)","minimal_polynomial":"s**2 - 18*s + 49 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9 + 4 sqrt(2)","minimal_polynomial":"s^2 - 18s + 49 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(200) ≥ 14.147344","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.1473440639"},
         "n": 200,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5243,7 +5243,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"14 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 56*s + 391 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"14 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 56s + 391 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(201) ≥ 14.183932","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.1839321834"},
         "n": 201,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5269,7 +5269,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"2 + 9 sqrt(2)","minimal_polynomial":"s**2 - 4*s - 158 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"2 + 9 sqrt(2)","minimal_polynomial":"s^2 - 4s - 158 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(202) ≥ 14.220422","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.220422734"},
         "n": 202,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5295,7 +5295,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + (11/2)sqrt(2)","minimal_polynomial":"2*s**2 - 28*s - 23 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"7 + (11/2)sqrt(2)","minimal_polynomial":"2s^2 - 28s - 23 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(203) ≥ 14.256816","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.2568164921"},
         "n": 203,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5321,7 +5321,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(27/2) + (1/2)sqrt(7)","minimal_polynomial":"2*s**2 - 54*s + 361 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(27/2) + (1/2)sqrt(7)","minimal_polynomial":"2s^2 - 54s + 361 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(204) ≥ 14.293114","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.2931142241"},
         "n": 204,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5406,7 +5406,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"148809603730436756319360591381170501178639/10000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"148809603730436756319360591381170501178639/10000000000000000000000000000000000000000","minimal_polynomial":"10000000000000000000000000000000000000000s - 148809603730436756319360591381170501178639 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(207) ≥ 14.401438","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.4014387744"},
         "n": 207,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5432,7 +5432,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"14924518772029355886067891154233/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"14924518772029355886067891154233/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 14924518772029355886067891154233 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(208) ≥ 14.437359","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.4373598647"},
         "n": 208,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5458,7 +5458,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"14946223226446451055256712327571/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"14946223226446451055256712327571/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 14946223226446451055256712327571 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(209) ≥ 14.473188","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.4731886124"},
         "n": 209,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5510,7 +5510,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"74981683606681578473292015533873289965462274509366086287257074981683606681578473292015533873289965462274509366086287257/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"74981683606681578473292015533873289965462274509366086287257074981683606681578473292015533873289965462274509366086287257/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":"5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000s - 74981683606681578473292015533873289965462274509366086287257074981683606681578473292015533873289965462274509366086287257 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(211) ≥ 14.544571","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"14.5445719051"},
         "n": 211,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5900,7 +5900,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"12 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 48*s + 263 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"12 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 48s + 263 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(226) ≥ 15.034441","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.0344418537"},
         "n": 226,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5926,7 +5926,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(17/2) + 5 sqrt(2)","minimal_polynomial":"4*s**2 - 68*s + 89 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(17/2) + 5 sqrt(2)","minimal_polynomial":"4s^2 - 68s + 89 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(227) ≥ 15.068802","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.0688022843"},
         "n": 227,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5952,7 +5952,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"3901150368932418571180158525547/250000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"3901150368932418571180158525547/250000000000000000000000000000","minimal_polynomial":"250000000000000000000000000000s - 3901150368932418571180158525547 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(228) ≥ 15.103081","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.1030818665"},
         "n": 228,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -5978,7 +5978,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10 + 4 sqrt(2)","minimal_polynomial":"s**2 - 20*s + 68 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10 + 4 sqrt(2)","minimal_polynomial":"s^2 - 20s + 68 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(229) ≥ 15.137281","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.1372811683"},
         "n": 229,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6004,7 +6004,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"15 + (28/41)","minimal_polynomial":"41*s - 643 = 0","state":"closed-form"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"15 + (28/41)","minimal_polynomial":"41s - 643 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(230) ≥ 15.171400","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.1714007511"},
         "n": 230,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6030,7 +6030,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"15 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 60*s + 449 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"15 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 60s + 449 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(231) ≥ 15.205441","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.2054411698"},
         "n": 231,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6056,7 +6056,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"1114406289130974410117782886660181901248480109604626847722783024235385594726280057/70677745564963034331738560467960182867819656746924792855394670571264398270484380","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"1114406289130974410117782886660181901248480109604626847722783024235385594726280057/70677745564963034331738560467960182867819656746924792855394670571264398270484380","minimal_polynomial":"70677745564963034331738560467960182867819656746924792855394670571264398270484380s - 1114406289130974410117782886660181901248480109604626847722783024235385594726280057 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(232) ≥ 15.239402","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.2394029729"},
         "n": 232,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6082,7 +6082,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8 + (11/2)sqrt(2)","minimal_polynomial":"2*s**2 - 32*s + 7 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8 + (11/2)sqrt(2)","minimal_polynomial":"2s^2 - 32s + 7 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(233) ≥ 15.273286","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.2732867026"},
         "n": 233,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6108,7 +6108,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(29/2) + (1/2)sqrt(7)","minimal_polynomial":"2*s**2 - 58*s + 417 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(29/2) + (1/2)sqrt(7)","minimal_polynomial":"2s^2 - 58s + 417 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(234) ≥ 15.307092","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.3070928949"},
         "n": 234,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6167,7 +6167,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"3172791149431853484523540541259/200000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"3172791149431853484523540541259/200000000000000000000000000000","minimal_polynomial":"200000000000000000000000000000s - 3172791149431853484523540541259 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(236) ≥ 15.374474","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.3744747806"},
         "n": 236,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6193,7 +6193,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"99393435047986448060704927533/6250000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"99393435047986448060704927533/6250000000000000000000000000","minimal_polynomial":"6250000000000000000000000000s - 99393435047986448060704927533 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(237) ≥ 15.408051","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.4080515158"},
         "n": 237,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6219,7 +6219,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"516829548917904437965878091074886828293320996185960477809932175908043454736320288/32455795222015655007007970530566514770773816146192500722754413705465356352461141","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"516829548917904437965878091074886828293320996185960477809932175908043454736320288/32455795222015655007007970530566514770773816146192500722754413705465356352461141","minimal_polynomial":"32455795222015655007007970530566514770773816146192500722754413705465356352461141s - 516829548917904437965878091074886828293320996185960477809932175908043454736320288 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(238) ≥ 15.441552","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.4415527974"},
         "n": 238,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6245,7 +6245,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"957883664741088666359826291012097714608415772761965190010564315177693226164065987/60061263979374471914223634546066156202761470614164034734590750736057272204798672","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"957883664741088666359826291012097714608415772761965190010564315177693226164065987/60061263979374471914223634546066156202761470614164034734590750736057272204798672","minimal_polynomial":"60061263979374471914223634546066156202761470614164034734590750736057272204798672s - 957883664741088666359826291012097714608415772761965190010564315177693226164065987 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(239) ≥ 15.474979","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.4749791318"},
         "n": 239,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6713,7 +6713,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 52*s + 313 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"13 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 52s + 313 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(257) ≥ 16.032224","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.032224567"},
         "n": 257,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6739,7 +6739,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"16563448002133789379765816191273/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"16563448002133789379765816191273/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 16563448002133789379765816191273 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(258) ≥ 16.064382","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.0643824162"},
         "n": 258,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6765,7 +6765,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"341518036803803444006790647841670042984586128471540050420967157601697370040453146/20584066845374091244555983652288807088661645599927706951717180608041569765032899","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"341518036803803444006790647841670042984586128471540050420967157601697370040453146/20584066845374091244555983652288807088661645599927706951717180608041569765032899","minimal_polynomial":"20584066845374091244555983652288807088661645599927706951717180608041569765032899s - 341518036803803444006790647841670042984586128471540050420967157601697370040453146 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(259) ≥ 16.096473","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.0964739604"},
         "n": 259,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6791,7 +6791,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"11 + 4 sqrt(2)","minimal_polynomial":"s**2 - 22*s + 89 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"11 + 4 sqrt(2)","minimal_polynomial":"s^2 - 22s + 89 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(260) ≥ 16.128499","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.128499608"},
         "n": 260,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6817,7 +6817,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"281511998443714605777671262552678001053511713995864784318453182156213791529093472577894719178723409384395264262601/16878452773388004800535351238155816857400040173477095354881922318666694517637251382500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"281511998443714605777671262552678001053511713995864784318453182156213791529093472577894719178723409384395264262601/16878452773388004800535351238155816857400040173477095354881922318666694517637251382500000000000000000000000000000","minimal_polynomial":"16878452773388004800535351238155816857400040173477095354881922318666694517637251382500000000000000000000000000000s - 281511998443714605777671262552678001053511713995864784318453182156213791529093472577894719178723409384395264262601 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(261) ≥ 16.160459","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.1604597633"},
         "n": 261,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6843,7 +6843,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"16 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 64*s + 511 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"16 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 64s + 511 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(262) ≥ 16.192354","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.1923548264"},
         "n": 262,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6869,7 +6869,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"16733166007899378970679613144039/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"16733166007899378970679613144039/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 16733166007899378970679613144039 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(263) ≥ 16.224185","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.2241851935"},
         "n": 263,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6895,7 +6895,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9 + (11/2)sqrt(2)","minimal_polynomial":"2*s**2 - 36*s + 41 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9 + (11/2)sqrt(2)","minimal_polynomial":"2s^2 - 36s + 41 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(264) ≥ 16.255951","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.2559512565"},
         "n": 264,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6921,7 +6921,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9 + (11/2)sqrt(2)","minimal_polynomial":"2*s**2 - 36*s + 41 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"9 + (11/2)sqrt(2)","minimal_polynomial":"2s^2 - 36s + 41 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(265) ≥ 16.287653","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.2876534038"},
         "n": 265,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6947,7 +6947,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"8411514375378237985354391855627/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8411514375378237985354391855627/500000000000000000000000000000","minimal_polynomial":"500000000000000000000000000000s - 8411514375378237985354391855627 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(266) ≥ 16.319292","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.3192920195"},
         "n": 266,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -6973,7 +6973,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"4209703817487065565108620335551/250000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"4209703817487065565108620335551/250000000000000000000000000000","minimal_polynomial":"250000000000000000000000000000s - 4209703817487065565108620335551 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(267) ≥ 16.350867","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.3508674841"},
         "n": 267,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7025,7 +7025,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"16901513582189132198548012552701/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"16901513582189132198548012552701/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 16901513582189132198548012552701 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(269) ≥ 16.413830","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.4138304628"},
         "n": 269,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7051,7 +7051,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"761203984658924994781689956746506132479479002945859948235062760911587068049389066/44966630820689093059794938239713705461989197412012889888820554168494459778549053","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"761203984658924994781689956746506132479479002945859948235062760911587068049389066/44966630820689093059794938239713705461989197412012889888820554168494459778549053","minimal_polynomial":"44966630820689093059794938239713705461989197412012889888820554168494459778549053s - 761203984658924994781689956746506132479479002945859948235062760911587068049389066 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(270) ≥ 16.445218","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.4452187191"},
         "n": 270,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7077,7 +7077,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"226641509159806817533826968807522186618590497703207479506050881660303454046913630/13371877327550822127276902291903146156943895843133007855104572641371568124309293","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"226641509159806817533826968807522186618590497703207479506050881660303454046913630/13371877327550822127276902291903146156943895843133007855104572641371568124309293","minimal_polynomial":"13371877327550822127276902291903146156943895843133007855104572641371568124309293s - 226641509159806817533826968807522186618590497703207479506050881660303454046913630 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(271) ≥ 16.476545","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.4765453086"},
         "n": 271,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7103,7 +7103,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"1114257766245565718930315998681473968716597475579279287292886911189991499936935381/65677527145799837468063782221943718992249135546143429464936478230690701220023471","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"1114257766245565718930315998681473968716597475579279287292886911189991499936935381/65677527145799837468063782221943718992249135546143429464936478230690701220023471","minimal_polynomial":"65677527145799837468063782221943718992249135546143429464936478230690701220023471s - 1114257766245565718930315998681473968716597475579279287292886911189991499936935381 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(272) ≥ 16.507810","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.5078105935"},
         "n": 272,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7571,7 +7571,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"14 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 56*s + 367 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"14 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 56s + 367 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(290) ≥ 17.030275","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.0302752548"},
         "n": 290,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7597,7 +7597,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"14 + (5/2)sqrt(2)","minimal_polynomial":"2*s**2 - 56*s + 367 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"14 + (5/2)sqrt(2)","minimal_polynomial":"2s^2 - 56s + 367 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(291) ≥ 17.060495","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.0604951616"},
         "n": 291,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7623,7 +7623,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"4397844536374424539902715795867/250000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"4397844536374424539902715795867/250000000000000000000000000000","minimal_polynomial":"250000000000000000000000000000s - 4397844536374424539902715795867 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(292) ≥ 17.090660","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.090660023"},
         "n": 292,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7649,7 +7649,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"17 + (26/41)","minimal_polynomial":"41*s - 723 = 0","state":"closed-form"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"17 + (26/41)","minimal_polynomial":"41s - 723 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(293) ≥ 17.120770","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.1207701385"},
         "n": 293,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7675,7 +7675,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"12 + 4 sqrt(2)","minimal_polynomial":"s**2 - 24*s + 112 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"12 + 4 sqrt(2)","minimal_polynomial":"s^2 - 24s + 112 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(294) ≥ 17.150825","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.1508258053"},
         "n": 294,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7701,7 +7701,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"1106514549421001897378505810757/62500000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"1106514549421001897378505810757/62500000000000000000000000000","minimal_polynomial":"62500000000000000000000000000s - 1106514549421001897378505810757 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(295) ≥ 17.180827","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.1808273176"},
         "n": 295,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7727,7 +7727,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"17 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 68*s + 577 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"17 + (1/2)sqrt(2)","minimal_polynomial":"2s^2 - 68s + 577 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(296) ≥ 17.210774","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.210774967"},
         "n": 296,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7779,7 +7779,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10 + (11/2)sqrt(2)","minimal_polynomial":"2*s**2 - 40*s + 79 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"10 + (11/2)sqrt(2)","minimal_polynomial":"2s^2 - 40s + 79 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(298) ≥ 17.270509","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.2705098312"},
         "n": 298,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7805,7 +7805,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(33/2) + (1/2)sqrt(7)","minimal_polynomial":"2*s**2 - 66*s + 541 = 0","state":"closed-form"},
+        "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(33/2) + (1/2)sqrt(7)","minimal_polynomial":"2s^2 - 66s + 541 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(299) ≥ 17.300297","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.3002976164"},
         "n": 299,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7890,7 +7890,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"558500932783786874181638432249/31250000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"558500932783786874181638432249/31250000000000000000000000000","minimal_polynomial":"31250000000000000000000000000s - 558500932783786874181638432249 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(302) ≥ 17.389345","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.389345754"},
         "n": 302,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7916,7 +7916,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"8956532731369266152919876895603/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8956532731369266152919876895603/500000000000000000000000000000","minimal_polynomial":"500000000000000000000000000000s - 8956532731369266152919876895603 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(303) ≥ 17.418924","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.4189243156"},
         "n": 303,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7942,7 +7942,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"8964782973424250487190982671787/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8964782973424250487190982671787/500000000000000000000000000000","minimal_polynomial":"500000000000000000000000000000s - 8964782973424250487190982671787 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(304) ≥ 17.448451","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.4484512566"},
         "n": 304,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7968,7 +7968,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"3590093296427542454697714045223/200000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"3590093296427542454697714045223/200000000000000000000000000000","minimal_polynomial":"200000000000000000000000000000s - 3590093296427542454697714045223 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(305) ≥ 17.477926","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.4779268463"},
         "n": 305,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -7994,7 +7994,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"8981716858745712869796920037761/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"8981716858745712869796920037761/500000000000000000000000000000","minimal_polynomial":"500000000000000000000000000000s - 8981716858745712869796920037761 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(306) ≥ 17.507351","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.5073513516"},
         "n": 306,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -8020,7 +8020,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"60196283485579249701801076299725636673865869456384222766836544824201358530035066/3347797278057252711799171413359076616946062908168377655562490378685987266056665","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"60196283485579249701801076299725636673865869456384222766836544824201358530035066/3347797278057252711799171413359076616946062908168377655562490378685987266056665","minimal_polynomial":"3347797278057252711799171413359076616946062908168377655562490378685987266056665s - 60196283485579249701801076299725636673865869456384222766836544824201358530035066 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(307) ≥ 17.536725","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.5367250374"},
         "n": 307,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -8046,7 +8046,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"17998269879526255875387992744507/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"17998269879526255875387992744507/1000000000000000000000000000000","minimal_polynomial":"1000000000000000000000000000000s - 17998269879526255875387992744507 = 0","state":"closed-form"},
         "lower": {"correction":true,"display":"s(308) ≥ 17.566048","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.5660481658"},
         "n": 308,
         "optimality": {"provenance":"frontier","status":"open"},
@@ -8490,7 +8490,7 @@
     "generated_by": "python -m devtools.build_composite_figure_data",
     "provenance_vocabulary": {"absent":"No source on hand supplies it. Not a claim that the fact is unknown to mathematics.","catalogue":"Transcribed here from the retained catalogue, not carried by the frontier record.","derived":"Computed by this repository from a fact it already holds.","frontier":"Read from the case's frontier record, which transcribes a retained source."},
     "range": {"count":324,"first_n":1,"last_n":324},
-    "totals": {"degree_derived_here":237,"degree_known":307,"degree_recorded_upstream":70,"exact_value_known":307,"lower_bound_correction":219,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":17,"proved_optimal":77,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}
+    "totals": {"degree_derived_here":294,"degree_known":307,"degree_recorded_upstream":13,"exact_value_known":307,"lower_bound_correction":219,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":17,"proved_optimal":77,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}
   },
   "softschema": {"contract":"packing.squares:CompositeFigure/v1","envelope":"figure","schema":"composite-figure.schema.yaml","status":"enforced"}
 }

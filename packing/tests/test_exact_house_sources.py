@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 from collections import Counter
+from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
 
@@ -35,21 +36,23 @@ def current():
     }
 
 
-def test_all_forty_two_current_native_identities_have_complete_adopted_custody(current):
-    assert len(current) == 42
+def test_all_forty_nine_current_native_identities_have_complete_adopted_custody(current):
+    assert len(current) == 49
     assert Counter(row["source_certificate"]["result"] for row in current.values()) == {
         "T-128": 5,
         "T-130": 3,
         "T-134": 1,
         "T-136": 5,
         "T-139": 1,
-        "T-140": 5,
+        "T-140": 3,
         "T-141": 2,
         "T-146": 13,
         "T-147": 1,
         "T-148": 1,
         "T-149": 3,
         "T-150": 2,
+        "T-151": 7,
+        "T-152": 2,
     }
     schema = safe_load((exact.FRONTIER / exact.SCHEMA).read_text())
     validator = Draft202012Validator({"$defs": schema["$defs"], "$ref": "#/$defs/entry"})
@@ -240,18 +243,20 @@ def test_current_adopted_schema_refuses_lost_custody_or_weakened_scope(current, 
 
 
 def test_adopted_metadata_transfers_every_original_occurrence_and_quote(current):
-    prior = sources.read_prior()
-    for saved in prior["selected_occurrences"]:
-        row = current[saved["n"]]
-        expected = copy.deepcopy(saved["source_certificate"])
-        expected["adoption"] = "adopted"
-        assert row["source_certificate"] == expected
-        assert row["source_occurrences"] == saved["sources"]
-        assert row["attribution"] == saved["attribution"]
-        assert row["source_statuses"] == [
-            "adopted-current" if value == "pending-adoption" else value
-            for value in saved["source_statuses"]
-        ]
+    for _path, prior in sources.prior_archives():
+        for saved in prior["selected_occurrences"]:
+            if houses.adopted_on(saved["n"]) != prior["adopted_on"]:
+                continue
+            row = current[saved["n"]]
+            expected = copy.deepcopy(saved["source_certificate"])
+            expected["adoption"] = "adopted"
+            assert row["source_certificate"] == expected
+            assert row["source_occurrences"] == saved["sources"]
+            assert row["attribution"] == saved["attribution"]
+            assert row["source_statuses"] == [
+                "adopted-current" if value == "pending-adoption" else value
+                for value in saved["source_statuses"]
+            ]
 
 
 def test_prior_capture_is_complete_lossless_and_refuses_different_overwrite(tmp_path: Path):
@@ -308,9 +313,10 @@ def test_prior_identity_and_scope_mutations_are_refused(control):
 
 
 def test_every_displaced_coefficient_vector_and_occurrence_survives(current):
-    prior = sources.read_prior()
+    archives = sources.prior_archives()
+    saved_rows = [saved for _path, prior in archives for saved in prior["current_entries"]]
     rows = []
-    for saved in prior["current_entries"]:
+    for saved in saved_rows:
         n = saved["n"]
         side = Fraction(saved["exact_form"]) if saved["degree"] == 1 else None
         if side is not None:
@@ -328,13 +334,15 @@ def test_every_displaced_coefficient_vector_and_occurrence_survives(current):
                     "polynomial": copy.deepcopy(saved["polynomial"]),
                     "checks": checks,
                     "sources": [],
+                    "source_statuses": [],
+                    "text": "Synthetic exact earlier identity.",
                 }
             )
-    before = copy.deepcopy(prior)
+    before = copy.deepcopy(archives)
     exact.append_displaced_current_history(list(current.values()), rows)
-    assert sources.read_prior() == before
-    assert len(rows) == 42
-    for saved in prior["current_entries"]:
+    assert sources.prior_archives() == before
+    assert len(rows) == 51
+    for saved in saved_rows:
         (row,) = [
             row
             for row in rows
@@ -344,7 +352,8 @@ def test_every_displaced_coefficient_vector_and_occurrence_survives(current):
             occurrence in row["sources"] for occurrence in saved.get("source_occurrences", [])
         )
         assert any(
-            source["path"] == sources.PRIOR.relative_to(houses.REPO).as_posix()
+            source["path"]
+            in {path.relative_to(houses.REPO).as_posix() for path, _prior in archives}
             for source in row["sources"]
         )
         assert Fraction(row["checks"]["root"]["interval"][0]) > Fraction(
@@ -359,7 +368,7 @@ def test_displaced_current_schema_refuses_an_unreconciled_identity(current):
     validator = Draft202012Validator(
         {"$defs": schema["$defs"], "$ref": "#/$defs/historical_entry"}
     )
-    assert len(rows) == 42
+    assert len(rows) == 51
     for row in rows:
         assert not list(validator.iter_errors(row)), row["n"]
         row["kind"] = "unreconciled-source"
@@ -419,19 +428,21 @@ def test_post_adoption_source_history_conserves_selected_and_displaced_native_oc
         209,
         236,
         237,
+        238,
+        239,
         261,
         267,
         295,
     }
     assert Counter(
         packing["reported_upper_bound"]["source_key"] for packing in displaced.values()
-    ) == {exact.ryxu_houses.SOURCE_KEY: 17, exact.gupta_houses.reports.SOURCE_KEY: 7}
-    # The dated history had 101 offers. PR518 moves 42 into current custody and
-    # displaces 24 additional native legacy identities that previously were current.
-    assert len(history) == 83
-    assert Counter(row["kind"] for row in history) == {"superseded": 83}
+    ) == {exact.ryxu_houses.SOURCE_KEY: 17, exact.gupta_houses.reports.SOURCE_KEY: 9}
+    # The original 101 offers gain eleven scoped native offers in the later pass.
+    # Forty-nine are current; 26 former legacy-current occurrences are now historical.
+    assert len(history) == 89
+    assert Counter(row["kind"] for row in history) == {"superseded": 89}
     assert all(row["source_certificate"]["adoption"] == "not-selected" for row in history)
-    assert len(history) + len(current) == 101 + len(displaced) == 125
+    assert len(history) + len(current) == 101 + 11 + len(displaced) == 138
     for n, packing in displaced.items():
         bound = packing["reported_upper_bound"]
         native = legacy[bound["source_key"]][n].side
@@ -471,3 +482,190 @@ def test_post_adoption_source_history_conserves_selected_and_displaced_native_oc
     assert len({row["source_certificate"]["facts"] for row in equal155}) == 2
     assert len({row["source_certificate"]["receipt"] for row in equal155}) == 2
     assert current[155]["source_certificate"]["result"] == "T-149"
+
+
+OCT12_SCOPE = {
+    176: "T-151",
+    181: "T-151",
+    238: "T-151",
+    239: "T-151",
+    270: "T-151",
+    271: "T-151",
+    272: "T-151",
+    304: "T-152",
+    305: "T-152",
+}
+
+
+def test_later_pass_collector_preserves_eleven_scoped_offers_and_current_credit(current):
+    prior = sources.read_prior(day="2026-10-12")
+    pending = exact.declared_source_certificate_history(prior["current_entries"])
+    selected = [
+        row for row in pending if row["source_certificate"]["result"] in {"T-151", "T-152"}
+    ]
+    assert Counter(row["source_certificate"]["result"] for row in selected) == {
+        "T-151": 9,
+        "T-152": 2,
+    }
+    assert {row["n"] for row in selected} == set(OCT12_SCOPE)
+    assert all(row["kind"] == "unreconciled-source" for row in selected)
+    assert all(row["source_certificate"]["adoption"] == "pending" for row in selected)
+    now = exact.declared_source_certificate_history(list(current.values()))
+    later = [row for row in now if row["source_certificate"]["result"] in {"T-151", "T-152"}]
+    assert [(row["n"], row["source_certificate"]["result"]) for row in later] == [
+        (304, "T-151"),
+        (305, "T-151"),
+    ]
+    for row in later:
+        assert row["kind"] == "superseded"
+        assert row["source_certificate"]["adoption"] == "not-selected"
+        assert Fraction(row["exact_form"]) > Fraction(current[row["n"]]["exact_form"])
+    for n, result in OCT12_SCOPE.items():
+        assert current[n]["source_certificate"]["result"] == result
+        custody = current[n]["source_certificate"]
+        assert (custody["verification"], custody["confirmation"]) == ("V3", "C3")
+        credit = " ".join(current[n]["attribution"]["source_text"])
+        assert "Nate Chaoweeraprasit" in credit
+        if result == "T-152":
+            assert "Francisco Couzo" in credit
+
+
+@pytest.mark.parametrize("n", [175, 308, 338, 340])
+def test_unrequested_and_beyond_horizon_packet_facts_are_not_reviewed_admissions(n):
+    source = houses.sources()["[Couzo certificates 2026-10-11]"]
+    with pytest.raises(sources.HouseIdentityError, match="accepted scoped review"):
+        sources.scoped_certificate(source, n)
+
+
+@pytest.mark.parametrize("control", ["wrong-pass", "latest-source", "old-current-custody"])
+def test_pass_archive_refuses_wrong_epoch_transition_or_lost_previous_adoption(control):
+    day = "2026-10-11" if control != "old-current-custody" else "2026-10-12"
+    prior = copy.deepcopy(sources.read_prior(day=day))
+    if control == "wrong-pass":
+        prior["adopted_on"] = "2026-10-12"
+    elif control == "latest-source":
+        row = next(row for row in prior["selected_occurrences"] if row["n"] == 270)
+        row["source_certificate"] = sources.custody_for(houses.source_for(270), 270, "pending")
+    else:
+        row = next(row for row in prior["current_entries"] if row["n"] == 270)
+        row["source_certificate"]["receipt"] = "packing/wrong-receipt.json.xz"
+    with pytest.raises(sources.HouseIdentityError):
+        sources.validate_prior(prior)
+
+
+@pytest.mark.parametrize("n", [270, 305])
+def test_both_moves_keep_distinct_complete_identities_and_adopted_custody(n, current):
+    first = sources.read_prior(day="2026-10-11")
+    later = sources.read_prior(day="2026-10-12")
+    old = next(row for row in first["current_entries"] if row["n"] == n)
+    intermediate = next(row for row in later["current_entries"] if row["n"] == n)
+    assert old["polynomial"]["coefficients"] != intermediate["polynomial"]["coefficients"]
+    assert intermediate["source_certificate"]["result"] == "T-140"
+    assert intermediate["source_certificate"]["adoption"] == "adopted"
+    assert sources.pass_source("2026-10-11", n).result == "T-140"
+    assert sources.pass_source("2026-10-12", n).result == OCT12_SCOPE[n]
+    history = exact.declared_source_certificate_history(list(current.values()))
+    exact.append_displaced_current_history(list(current.values()), history)
+    for prior in (old, intermediate):
+        (row,) = [
+            row for row in history if row["n"] == n and row["polynomial"] == prior["polynomial"]
+        ]
+        assert row["kind"] == "superseded"
+        assert all(
+            occurrence in row["sources"] for occurrence in prior.get("source_occurrences", [])
+        )
+    (row,) = [
+        row
+        for row in history
+        if row["n"] == n and row["polynomial"] == intermediate["polynomial"]
+    ]
+    assert "previously adopted 2026-10-11; superseded 2026-10-12" in row["source_statuses"]
+    assert "Previously adopted" in row["text"]
+
+
+def test_one_build_checks_fifty_one_native_identities_and_reads_two_archives_once(monkeypatch):
+    archive_reads, scoped_checks = [], []
+    archives = {sources.prior_path(day).resolve() for day in adopt_houses.passes()}
+    read = houses.kernel.read_xz
+    candidates = sources.selection.candidates
+
+    def tracked_read(path):
+        if path.resolve() in archives:
+            archive_reads.append(path.resolve())
+        return read(path)
+
+    def tracked_candidates(*args, **kwargs):
+        scoped_checks.append(True)
+        return candidates(*args, **kwargs)
+
+    monkeypatch.setattr(houses.kernel, "read_xz", tracked_read)
+    monkeypatch.setattr(sources.selection, "candidates", tracked_candidates)
+    inputs = exact.VerifiedRationalInputs()
+    current = [
+        exact.build_entry(n, case(n), None, None, verified_inputs=inputs)
+        for n in houses.NUMBERS
+    ]
+    history = []
+    exact.append_displaced_current_history(current, history, verified_inputs=inputs)
+    assert len(scoped_checks) == 51
+    assert Counter(archive_reads) == dict.fromkeys(archives, 1)
+    assert len(inputs.houses.read_inputs.certificates) == 51
+    assert len(inputs.houses.read_inputs.archives) == 2
+
+
+def test_fresh_public_archive_calls_observe_tampering_and_do_not_cache_refusals(
+    monkeypatch,
+):
+    original = houses.kernel.read_xz
+    selected = sources.prior_path("2026-10-12")
+    reads = []
+    damaged = False
+
+    def read(path):
+        document = original(path)
+        if path == selected:
+            reads.append(True)
+            if damaged:
+                document["current_entries"].pop()
+        return document
+
+    monkeypatch.setattr(houses.kernel, "read_xz", read)
+    assert len(sources.read_prior(day="2026-10-12")["current_entries"]) == 9
+    damaged = True
+    inputs = sources.ReadInputs()
+    for _attempt in range(2):
+        with pytest.raises(sources.HouseIdentityError, match="current roster"):
+            sources.read_prior(day="2026-10-12", inputs=inputs)
+        assert selected.resolve() not in inputs.archives
+    damaged = False
+    assert len(sources.read_prior(day="2026-10-12")["current_entries"]) == 9
+    assert len(reads) == 4
+
+
+def test_source_custody_uses_native_shard_precedence_when_both_receipts_exist(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+):
+    original = houses.source_for(176)
+    packet = tmp_path / "packing/resources/web/packet"
+    global_receipt = packet / sources.reports.RECEIPT
+    shard = packet / sources.reports.shard(176)
+    global_receipt.parent.mkdir(parents=True)
+    shard.parent.mkdir(parents=True, exist_ok=True)
+    global_receipt.write_bytes(b"global receipt")
+    shard.write_bytes(b"per-count receipt")
+    origin = replace(original.origin(176), path=packet / "facts/n-176.yaml.gz")
+    source = replace(original, packet=packet, origin=lambda _n: origin)
+    monkeypatch.setattr(houses, "REPO", tmp_path)
+    monkeypatch.setattr(sources.reports, "REPO", tmp_path)
+    assert global_receipt.is_file()
+    assert shard.is_file()
+    assert houses.receipt_for_source(source, 176) == shard
+    assert sources.custody_for(source, 176, "pending")["receipt"] == (
+        shard.relative_to(tmp_path).as_posix()
+    )
+    shard.unlink()
+    assert houses.receipt_for_source(source, 176) == global_receipt
+    assert sources.custody_for(source, 176, "pending")["receipt"] == (
+        global_receipt.relative_to(tmp_path).as_posix()
+    )

@@ -559,6 +559,8 @@ def test_declared_certificate_history_keeps_registered_native_sides_and_credit()
         "T-148": 1,
         "T-149": 3,
         "T-150": 2,
+        "T-151": 9,
+        "T-152": 2,
     }
     for row in rows:
         side = Fraction(row["exact_form"])

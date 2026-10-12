@@ -1630,7 +1630,9 @@ def test_source_notes_are_collected_after_all_current_entries_once(
     monkeypatch.setattr(exact, "source_certificate_history", lambda *_args, **_kwargs: [])
     # This assembly control deliberately builds no polynomial, so displacement admission
     # is covered independently by the complete prior-identity conservation controls.
-    monkeypatch.setattr(exact, "append_displaced_current_history", lambda *_args: None)
+    monkeypatch.setattr(
+        exact, "append_displaced_current_history", lambda *_args, **_kwargs: None
+    )
     record = exact.build_record()["register"]
     assert len(calls) == 1
     assert {row["n"] for row in record["entries"] if row["notes"]} == {102, 106, 152, 177}
@@ -1715,10 +1717,10 @@ def test_record_hunt_is_noncurrent_and_preserves_current_case_identity() -> None
         if row.get("source_certificate", {}).get("result")
         in {"T-125", "T-127", "T-128", "T-129", "T-130", "T-131"}
     ]
-    # Eight old T128/T130 offers are adopted; 24 former native-current identities
-    # enter history, so the cumulative six-result history is 29 - 8 + 24 = 45.
-    assert len(finite) == 45
-    assert sum(row["kind"] == "superseded" for row in finite) == 45
+    # Eight old T128/T130 offers are adopted; 26 former native-current identities
+    # enter history, so the cumulative six-result history is 29 - 8 + 26 = 47.
+    assert len(finite) == 47
+    assert sum(row["kind"] == "superseded" for row in finite) == 47
     assert sum(row["kind"] == "unreconciled-source" for row in finite) == 0
     (source102,) = [
         row

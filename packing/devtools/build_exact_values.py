@@ -2178,85 +2178,104 @@ def source_certificate_history(
     )
 
 
-def append_displaced_current_history(entries: list[dict], historical: list[dict]) -> None:
-    """Retain every complete prior current identity at its own checked side."""
-    prior = exact_house_sources.read_prior()
+def append_displaced_current_history(
+    entries: list[dict],
+    historical: list[dict],
+    *,
+    verified_inputs: VerifiedRationalInputs | None = None,
+) -> None:
+    """Retain every pass's complete prior current identity at its own checked side."""
     indexed = {row["n"]: row for row in entries}
-    path = exact_house_sources.PRIOR.relative_to(ROOT.parent).as_posix()
-    for saved in prior["current_entries"]:
-        n = saved["n"]
-        coefficients = tuple(int(value) for value in saved["polynomial"]["coefficients"])
-        checks, root = polynomial_checks(
-            n,
-            coefficients,
-            saved["side"]["value"],
-            None,
-            upward_ceiling=saved["degree"] == 1,
-        )
-        check_closed_form_is_the_root(n, saved["exact_form"], root)
-        if _source_disposition(root.lo, root.hi, indexed[n]) != "superseded":
-            raise ExactValuesError(
-                f"n = {n}: prior current identity is not strictly superseded"
+    inputs = verified_inputs or VerifiedRationalInputs()
+    for archive, prior in exact_house_sources.prior_archives(inputs=inputs.houses.read_inputs):
+        path = archive.relative_to(ROOT.parent).as_posix()
+        day = prior["adopted_on"]
+        for saved in prior["current_entries"]:
+            n = saved["n"]
+            coefficients = tuple(int(value) for value in saved["polynomial"]["coefficients"])
+            checks, root = polynomial_checks(
+                n,
+                coefficients,
+                saved["side"]["value"],
+                None,
+                upward_ceiling=saved["degree"] == 1,
             )
-        checks.update(catalogue="not-in-catalogue", galois=None)
-        citation = {
-            "path": path,
-            "url": f"https://github.com/jlevy/squares/blob/main/{path}",
-            "kind": "derived-from-source-closed-form",
-            "locator": {"line": 1, "section": str(n)},
-            "source_flags": [
-                "prior current exact identity",
-                f"adopted {exact_house_sources.houses.ADOPTED_ON}",
-            ],
-        }
-        occurrences = [*saved.get("source_occurrences", []), citation]
-        matches = [
-            row
-            for row in historical
-            if row["n"] == n
-            and row["polynomial"]["coefficients"] == saved["polynomial"]["coefficients"]
-            and Fraction(row["checks"]["root"]["interval"][0]) <= root.hi
-            and Fraction(row["checks"]["root"]["interval"][1]) >= root.lo
-        ]
-        if len(matches) > 1:
-            raise ExactValuesError(f"n = {n}: ambiguous prior-current historical identity")
-        if matches:
-            for occurrence in occurrences:
-                if occurrence not in matches[0]["sources"]:
-                    matches[0]["sources"].append(occurrence)
-            continue
-        historical.append(
-            {
-                "n": n,
-                "kind": "superseded",
-                "algebraic_source": "derived-from-source-closed-form",
-                "current_side": indexed[n]["side"]["value"],
-                "side": root_decimal(root),
-                "exact_form": saved["exact_form"],
-                "degree": saved["degree"],
-                "polynomial": saved["polynomial"],
-                "checks": checks,
-                "sources": occurrences,
-                "source_statuses": ["previous-current-bound"],
-                "attribution": {
-                    "date_mentions": [],
-                    "source_text": [
-                        (
-                            "The complete earlier current entry, including every "
-                            "coefficient, check and note, "
-                            f"is retained in {path} at n = {n}."
-                        )
-                    ],
-                },
-                "bead": None,
-                "displaced_current": path,
-                "text": (
-                    "This checked identity describes the earlier recorded finite bound. "
-                    "It is superseded by the adopted house; "
-                    "no old-pose ideal-contact claim transfers."
-                ),
+            check_closed_form_is_the_root(n, saved["exact_form"], root)
+            if _source_disposition(root.lo, root.hi, indexed[n]) != "superseded":
+                raise ExactValuesError(
+                    f"n = {n}: prior current identity is not strictly superseded"
+                )
+            checks.update(catalogue="not-in-catalogue", galois=None)
+            citation = {
+                "path": path,
+                "url": f"https://github.com/jlevy/squares/blob/main/{path}",
+                "kind": "derived-from-source-closed-form",
+                "locator": {"line": 1, "section": str(n)},
+                "source_flags": [
+                    "prior current exact identity",
+                    f"superseded in adoption pass {day}",
+                ],
             }
-        )
+            occurrences = [*saved.get("source_occurrences", []), citation]
+            matches = [
+                row
+                for row in historical
+                if row["n"] == n
+                and row["polynomial"]["coefficients"] == saved["polynomial"]["coefficients"]
+                and Fraction(row["checks"]["root"]["interval"][0]) <= root.hi
+                and Fraction(row["checks"]["root"]["interval"][1]) >= root.lo
+            ]
+            if len(matches) > 1:
+                raise ExactValuesError(f"n = {n}: ambiguous prior-current historical identity")
+            if matches:
+                matched = matches[0]
+                if saved.get("source_certificate", {}).get("adoption") == "adopted":
+                    previous = max(
+                        earlier
+                        for earlier in exact_house_sources.adopt_houses.passes()
+                        if earlier < day
+                        and n in exact_house_sources.adopt_houses.read_pass(earlier)
+                    )
+                    flag = f"previously adopted {previous}; superseded {day}"
+                    if flag not in matched["source_statuses"]:
+                        matched["source_statuses"].append(flag)
+                        matched["text"] = flag.capitalize() + ". " + matched["text"]
+                for occurrence in occurrences:
+                    if occurrence not in matches[0]["sources"]:
+                        matches[0]["sources"].append(occurrence)
+                continue
+            historical.append(
+                {
+                    "n": n,
+                    "kind": "superseded",
+                    "algebraic_source": "derived-from-source-closed-form",
+                    "current_side": indexed[n]["side"]["value"],
+                    "side": root_decimal(root),
+                    "exact_form": saved["exact_form"],
+                    "degree": saved["degree"],
+                    "polynomial": saved["polynomial"],
+                    "checks": checks,
+                    "sources": occurrences,
+                    "source_statuses": ["previous-current-bound"],
+                    "attribution": {
+                        "date_mentions": [],
+                        "source_text": [
+                            (
+                                "The complete earlier current entry, including every "
+                                "coefficient, check and note, "
+                                f"is retained in {path} at n = {n}."
+                            )
+                        ],
+                    },
+                    "bead": None,
+                    "displaced_current": path,
+                    "text": (
+                        "This checked identity describes the earlier recorded finite bound. "
+                        "It is superseded by the adopted house; "
+                        "no old-pose ideal-contact claim transfers."
+                    ),
+                }
+            )
 
 
 def build_record() -> dict:
@@ -2271,7 +2290,7 @@ def build_record() -> dict:
     ]
     historical = append_reported_source_notes(entries)
     historical.extend(source_certificate_history(entries, verified_inputs=verified_inputs))
-    append_displaced_current_history(entries, historical)
+    append_displaced_current_history(entries, historical, verified_inputs=verified_inputs)
     return {
         "softschema": {
             "contract": CONTRACT,
