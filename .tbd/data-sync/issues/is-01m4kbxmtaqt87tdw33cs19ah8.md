@@ -5,13 +5,13 @@ title: "Import wand125: s(28) >= 2297/400 and s(30) >= 2357/400 by fine-net chec
 kind: task
 status: open
 priority: 2
-version: 9
+version: 10
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 created_at: 2026-10-10T16:56:42.570Z
-updated_at: 2026-10-11T02:59:54.001Z
+updated_at: 2026-10-12T07:54:18.187Z
 ---
 Found by the 2026-10-10 evening reads (think-0nkn): wand125/square-packing 36b85b9 and ff9f269 add problems/square-lower-bounds/certificates/mixed_n28_L57425/ and mixed_n30_L58925/, check2 bundles on the 2,073-direction net (core 4999/5000, step 1/5002), reporting s(28) >= 2297/400 = 5.7425 (mass 2799999/100000; +3/400 over T-107's 1147/200; +1/400 over #446's unadopted 287/50) and s(30) >= 2357/400 = 5.8925 (mass 2999999/100000; +9/1000 over T-109's 11767/2000). Data: square-lower-bounds-v1 assets certificates__mixed_n28_L57425.tar.gz (627,191 B, SHA-256 7d0f910768d47fcdba6233334798487471db7ef2fe556400269c34c3116d3bf3) and certificates__mixed_n30_L58925.tar.gz (638,622 B, 0d11fe0554909e1457d70efa425c82344e622006590ac6ee58a481b69d1b61ba). Author: 772 s and 1790.3 s, 0.985 control at 32 directions. No issue reports them. Stages 1-3 as T-132 (#446 s(29)) did with devtools.fine_net_followup; full capture likely CPU-hours (owner budget).
 
@@ -40,3 +40,5 @@ Register: two entries at V0/C0 (T-NN placeholders), pending adoption at n = 28 a
 2026-10-11, later still: the owner put the regularization of every packing (epic think-cdud, think-ux1v, a pull request stacked on PR #487) ahead of this run: clean graphics come first, and this bead now depends on think-ux1v. Order: PR #487 merges, then the regularization PR, then this replay.
 
 2026-10-11 prep lane (nothing expensive ran): T-143 (n30) ready, smoke 5.8 CPU-s against 7.7, control samples at 0 and 1585 counted, revised 4.5 to 6.1 CPU-hours. T-142 (n28) census ready (smoke 4.5 CPU-s against 5.1, revised 3.3 to 4.5 CPU-hours) but its whole-net control is HELD: at the axis direction the 99/100 mutant's exact capture sits 2.15e-9 above the vertex sweep's certified bound, beyond the census's AXIS_ROUNDING of 1e-9 (CR-5 of the FC-1 re-check; n29's gap is 5.2e-10 and n30's 1.9e-10), so the control would write CONTROL_FAILED after 1.6 to 2.2 CPU-hours though the refusal is sound (exact capture below 1 at a centre inside the domain). Options for the owner and a review: widen AXIS_ROUNDING, derive it from the sweep's enclosure, or confirm with another control. Branch claude/wand125-confirmations-2026-10-11 (from claude/determined-rubin-yjfy2a 3ec95b418; commits 8ffbdbd1f..44eb6a017): runbook docs/project/specs/active/plan-2026-10-11-wand125-confirmations.md (mapped), --via release for proof bundles held only in release assets, devtools/retain_wand125_release.py, the census's MIXED_PACKETS, --evidence and --sweep-timeout, fine_net_followup control-sample. Total revised 23 to 31 CPU-hours, about 7 h wall in two lanes of two cores. Smoke receipts in the coordinator's scratch only. Owner questions pending: the n28 control's axis tolerance, and retaining the three check2 candidates in Git (as the 6 October check2 packet does, MIT; the nested verifier archive stays out).
+
+2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): the replay lane is https://github.com/jlevy/squares/issues/532 (T-142, T-143, T-144, with T-132). The owner questions on retaining the check2 candidates and on T-142's whole-net control tolerance are on https://github.com/jlevy/squares/issues/543. Tracker https://github.com/jlevy/squares/issues/544.

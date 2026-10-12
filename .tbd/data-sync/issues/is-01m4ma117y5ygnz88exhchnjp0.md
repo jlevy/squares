@@ -5,14 +5,14 @@ title: Synchronize polynomial PR stack and audit Git history size
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: codex@spud10
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-11T01:42:50.877Z
-updated_at: 2026-10-12T06:40:39.402Z
+updated_at: 2026-10-12T10:24:24.651Z
 started_at: 2026-10-11T01:42:51.829Z
 ---
 Use the upstream merge shortcut to synchronize the existing formal stack main → PR403 →
@@ -33,6 +33,46 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
 
 ## Notes
+
+2026-10-12 refresh checkpoint at 2026-10-12T10:24:24.226264+00:00
+
+Fresh origin/main remains 7847cf3d53f220f7b2bf22257251fa18dc38b233. Native stack447
+integrates main -> PR403 -> PR435. Clean local parent ffaced26f5049dbf48680f70e311394c7098aa93
+and child ba2c6cb361b0c404dcce0b1ec84804ff83997e07 are not yet published.
+Canonical child coverage: 603 records, 625 coefficient vectors, 6,508 integer strings;
+3,143,617 decoded / 893,525 gzip bytes. Current324 cases:321exact and numeric29/55/71;
+77proved labels preserved. Public417 records (324current+93additional),417vectors,
+2,258strings;186superseded history and22redundantnotes omitted publicly but retained canonically.
+The refreshed65 native source occurrences carry retained V3/C3 finite-geometry replay
+receipts, with standing adoption pending. All214 prior histories remain with only15
+approved grade/text promotions; n83 all673coefficients/custody unchanged. Only current
+n40lower changed to upstream6.71581574608202; selected upper sides/statuses preserved.
+
+Final amended history audit:18parent/30child/48union commits;562file union,+40,663/-51,192;
+4,707,871thin /6,810,527non-thin incremental bytes. Largest historical blob2,629,925bytes.
+No new PDFs or tracked generated completeHTML. Polynomial report strictly web-only.
+Final clean report1,991,622bytes (8,378under unchanged2,000,000cap); initial291,122/
+3,212,387=9.0624822%, all public metadata/coefficient strings compare exactly. Script
+inventory12declarations/0failures. Final responsive check passed7of8 views, with one
+1280pxdark intro-math visibility finding under diagnosis; consumer check not yet run.
+
+Parent46c57 broad1337.14s failed five subprocess timeouts plus stale historical clipping
+fixture. The same5passed unchanged serially97.12s. Fifteen original function cases
+passed133.55s with existing pool_heavy routing;21lane controls14.87s;13wide-block
+controls38.10s. All original5/40/180/30s deadlines and exact clipping/assertion guards stay.
+All64prerequisites now pass at finalparentffaced; reachable suite in flight. Child final
+broad is queued to avoid concurrent broad local suites. Old green CI is dated evidence.
+
+Root owns final web repair/qualification, official lease-safe native publication, PR
+body readback and new-head ALL/Packing/Pages/full CI. Current PR descriptions remain
+remote old heads until publication. Durable handoff:
+docs/project/handoff-2026-10-10-polynomial-pr-stack.md.
+Evidence for this slice: /Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/upstream-refresh-20261012-0635.
+Scientific adoption, three numeric identities, reported106/152/177geometry/Lean,
+n83ordinal and ideal-contact prerequisites retain their separate open owners. Finish
+and close only this synchronization slice after exact-head CI and final PR checkpoints;
+owner's final review/landing remains separate.
+
 
 # Upstream table refresh in progress, 2026-10-12T06:40:38.697155+00:00
 

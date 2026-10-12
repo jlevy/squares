@@ -5,7 +5,7 @@ title: "Lean-backed claims: what V4/V5 and C4/C5 would need for T-060 (n = 11, A
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:32:22.189Z
-updated_at: 2026-10-11T21:17:34.008Z
+updated_at: 2026-10-12T07:55:43.770Z
 started_at: 2026-10-11T20:32:26.032Z
 ---
 Owner request 2026-10-11: check whether the n = 11 repositories by Ahmed are linked and whether the Lean formalization is linked; a proof-assistant formalization might merit V4 or V5, but not C4/C5 until replayed here. Establish for each Lean-backed entry what is retained (pins, statement audit, axiom receipt, native_decide count, builds here), what each rung's predicate in epistemics.md requires that is missing (adversarial AI reviews, human oversight record, human expert formalization review, a replay here at a pinned toolchain), and the price of a Lean replay here.
@@ -30,3 +30,5 @@ Rungs: every entry stays where it is. T-060 V4/C4 lacks only (a) the second adve
 Owner decisions: D1 count the source's own run toward V once read; D2 oversight record; D3 the human expert (and one or two at V5); D4 compiler-trusting proofs at V5/C5; D5 retention from the private repo and a licence request to Ahmed; D6 whether and where to pay for the full build.
 
 Build 2026-10-11: the statement closure built again here (devtools.audit_n11_lean stage + build, Lean v4.34.1, Mathlib d13f23b7 cache for the 22 imports only): 18 modules exit 0, probe elaborates, six theorems on [propext, Classical.choice, Quot.sound]; 20:56:37 to 21:15:44Z, 19 min 7 s wall, 9 min 22 s CPU, host load 8 to 13 (7.6 min on 6 Oct). Receipt: packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/build-statement-closure-2026-10-11.log. Checks: packing-validate --records passes except the expected stale SYNOPSIS document-map step; check_documentation the same.
+
+2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): owner decisions D1-D6 are on https://github.com/jlevy/squares/issues/543; the section 8 record changes and LR-7 are in https://github.com/jlevy/squares/issues/542 (bead think-npvi). Tracker https://github.com/jlevy/squares/issues/544.
