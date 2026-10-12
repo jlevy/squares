@@ -1,8 +1,8 @@
 {{FRONT_MATTER}}
 
 This paper explains the computer-assisted proof of a lower bound of 31/8 for eleven unit
-squares, published by
-[Kleddamag in 11-squares-certified-bound](https://github.com/Kleddamag/11-squares-certified-bound):
+squares, published by Marc Leonard Overbeck (Kleddamag) in
+[11-squares-certified-bound](https://github.com/Kleddamag/11-squares-certified-bound):
 the
 [proof](https://github.com/Kleddamag/11-squares-certified-bound/blob/6a733f339395c3514f2ab63d8c4aa64cf63c0b5a/PROOF.md),
 [certificate](https://github.com/Kleddamag/11-squares-certified-bound/blob/6a733f339395c3514f2ab63d8c4aa64cf63c0b5a/global-certificate.json)
@@ -11,7 +11,7 @@ and
 at the reviewed release, v1.0.2, retained in this project’s
 [archive](../../resources/web/external-square-certificates-2026-09-22/kleddamag-11/README.md).
 The source’s `AUTHORS.md` says OpenAI Codex developed the mathematics and computation
-under Kleddamag’s direction; the certificate develops this project’s T-026 certificate,
+under Overbeck’s direction; the certificate develops this project’s T-026 certificate,
 the subject of [Part I]({{PAPER:n11-lower-bounds-explainer}}), and the result is
 registered here as T-037.[^authors]
 
@@ -184,7 +184,7 @@ The inventory:
   [integer difference sweep](#every-legal-center-collects-enough-charge) that evaluates
   it, are T-025’s; the source’s coefficients are the same.[^credit]
 - 2-of-3 charges beside point charges over contiguous intervals of
-  [parent](#parents-and-the-one-inequality) angles are inherited from Kleddamag’s own
+  [parent](#parents-and-the-one-inequality) angles are inherited from Overbeck’s own
   proof for seventeen squares (T-038); point charges over such intervals are older (next
   item), and T-037 is the first certificate of that form at eleven squares.[^register]
 - The shrunken parent of side $A<1$, the bound $L_0/A$, one closed core per angle
@@ -660,7 +660,7 @@ core of every row collects at least $0.99996$, and the value is known because tw
 complete sweeps computed it and a third method bounded it from below.[^statement]
 
 The register counts the two source checkers as one method, an exact event-cell sweep
-with signed rectangle terms, in two code lineages, the Python generalizing Kleddamag’s
+with signed rectangle terms, in two code lineages, the Python generalizing Overbeck’s
 seventeen-square checker and the JavaScript adapting R038’s: the Python geometry uses
 polygon edges and the JavaScript geometry clamped extrema, and the two partition the
 frame differently, 86,299,918 slabs against 86,275,862, exactly two fewer per row, yet
@@ -830,7 +830,7 @@ supply.
 {{VERSION_HISTORY}}
 
 [^authors]: [`AUTHORS.md`](../../resources/web/external-square-certificates-2026-09-22/kleddamag-11/AUTHORS.md#L3-L8),
-    which says Kleddamag commissioned and directed the research and OpenAI Codex
+    which says Overbeck commissioned and directed the research and OpenAI Codex
     developed the mathematical and computational continuation; the
     [attribution’s lead](../../resources/web/external-square-certificates-2026-09-22/kleddamag-11/ATTRIBUTION.md#L3-L7),
     which names this project’s T-026 certificate at its revision.

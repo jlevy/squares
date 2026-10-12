@@ -34,7 +34,7 @@ OTHERS = (
 
 #: The name this project's own results are credited under, the same surname form every
 #: other author gets (the owner, 2026-10-01). It is also how other sources' credit lines
-#: name this project: `Kleddamag after Levy, Guzhou0806, Mira`.
+#: name this project: `Overbeck after Levy, Guzhou0806, Mira`.
 PROJECT_AUTHOR = "Levy"
 
 
