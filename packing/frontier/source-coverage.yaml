@@ -3581,6 +3581,120 @@ sources:
     The other 314 certificates of the lists are pinned by the commit and not retained. No selected
     override or superseded claim is created while house adoption waits for jlevy/squares#403;
     current cases and earlier source ownership remain unchanged.
+- id: pingyou-n207-certificate-2026-10-11
+  title: PingYou Ltd's n207 certificate at 9dc93b6, issue503
+  role: source-repository
+  url: https://github.com/BuddenPing/square-packing-certificates/tree/9dc93b6ac2f8fefe038062a74c9a75bf05afdba6
+  local: resources/web/pingyou-n207-certificate-2026-10-11/
+  source_key: '[PingYou n207 certificate 2026-10-11]'
+  scope:
+    n_values: [207]
+  reviewed: '2026-10-11'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-n207-certificate-2026-10-11/acquisition/claims.json
+  evidence:
+  - E-pingyou-503-certificate-report
+  - E-pingyou-503-exact-feasibility
+  notes: >-
+    The complete certificate is kept as a derived exact fact, no upstream byte retained, admitted
+    because its exact side equals the fraction the issue prints; every file of the pinned tree, the
+    release package among them, is pinned by digest. T-147 records it at V3/C3 on the review of 11
+    October (docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md), which
+    reproduced all 3 native jobs, decided it by a third exact route and held the fact to its upstream
+    certificate and witness fetched at the pin. No selected override or superseded claim is created
+    until the next layer of the 2026-10-11 intake adopts the house (think-fvz4); the current case and
+    earlier source ownership remain unchanged.
+- id: pingyou-n153-certificate-2026-10-11
+  title: PingYou Ltd's n153 certificate at bc328a7, issue504
+  role: source-repository
+  url: https://github.com/BuddenPing/square-packing-certificates/tree/bc328a7d727aedd0eabebd6ea80285f572b65d2d
+  local: resources/web/pingyou-n153-certificate-2026-10-11/
+  source_key: '[PingYou n153 certificate 2026-10-11]'
+  scope:
+    n_values: [153]
+  reviewed: '2026-10-11'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-n153-certificate-2026-10-11/acquisition/claims.json
+  evidence:
+  - E-pingyou-504-certificate-report
+  - E-pingyou-504-exact-feasibility
+  notes: >-
+    The complete certificate is kept as a derived exact fact, no upstream byte retained, admitted
+    because its exact side equals the fraction the issue prints; the paths bc328a7 changed, the
+    release package among them, are pinned by digest, and the n207 files it leaves unchanged belong
+    to the n207 packet. T-148 records it at V3/C3 on the review of 11 October
+    (docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md), which reproduced all 3
+    native jobs, decided it by a third exact route and held the fact to its upstream certificate and
+    witness fetched at the pin. The package's intermediate control at 153, above the case, and its
+    n178 analysis files are not offered and not imported. No selected override or superseded claim
+    is created until the next layer of the 2026-10-11 intake adopts the house (think-fvz4); the
+    current case and earlier source ownership remain unchanged.
+- id: dostashev-records-2026-10-11
+  title: Daniil Ostashev's three record packings at c3d17ab, issue501
+  role: source-repository
+  url: https://github.com/dostashev/square-packing/tree/c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49
+  local: resources/web/dostashev-records-2026-10-11/
+  source_key: '[Ostashev records 2026-10-11]'
+  scope:
+    n_values: [155, 156, 211]
+  reviewed: '2026-10-11'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/dostashev-records-2026-10-11/acquisition/claims.json
+  evidence:
+  - E-ostashev-501-certificate-report
+  - E-ostashev-501-exact-feasibility
+  notes: >-
+    All 3 complete certificates of the head the record read, c3d17ab, are retained as the source
+    wrote them under its MIT licence, with every other file of the tree, each admitted where its
+    exact side rounds up to the side the README prints at the pin; the issue prints the larger sides
+    of 41019fb, which the head replaced. T-149 records them at V3/C3 on the review of 11 October
+    (docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md), which reproduced all 9
+    native jobs, decided the three by a third exact route and held every file to its bytes fetched
+    at the pin. No selected override or superseded claim is created until the next layer of the
+    2026-10-11 intake adopts the houses (think-fvz4); current cases and earlier source ownership
+    remain unchanged.
+- id: barnett-refinements-2026-10-11
+  title: Robert Barnett's refinements at 2573ff5, issue505
+  role: source-repository
+  url: https://github.com/RobertBarnettProjects/square-packing-research/tree/2573ff51c4b160c952bbb2d1c399e7430d9f9ae2
+  local: resources/web/barnett-refinements-2026-10-11/
+  source_key: '[Barnett refinements 2026-10-11]'
+  scope:
+    n_values: [146, 261]
+  reviewed: '2026-10-11'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/barnett-refinements-2026-10-11/acquisition/claims.json
+  evidence:
+  - E-barnett-505-certificate-report
+  - E-barnett-505-exact-feasibility
+  notes: >-
+    The 2 requested certificates and the 5 the README marks superseded are kept as derived exact
+    facts, no upstream byte retained, each admitted where its exact side rounds up to the side its
+    source prints; the eleven files of the tree are pinned by digest. T-150 records the two at
+    V3/C3 on the review of 11 October
+    (docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md), which reproduced all 21
+    native jobs, decided the two by a third exact route and held each fact to its upstream
+    certificate fetched at the pin. The superseded five, at 70, 103, 123, 237 and 295, are excluded
+    by the author and registered nowhere; the n = 2043 certificate, beyond the corpus, is pinned and
+    not replayed. No selected override or superseded claim is created until the next layer of the
+    2026-10-11 intake adopts the houses (think-fvz4); current cases and earlier source ownership
+    remain unchanged.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

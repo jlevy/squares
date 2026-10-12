@@ -10,6 +10,7 @@ import re
 import shlex
 import subprocess
 import sys
+import textwrap
 from contextlib import redirect_stdout
 from pathlib import Path
 from typing import cast
@@ -1020,8 +1021,11 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
 
     Four limits of the rule, recorded rather than smoothed over:
 
-    * A marker is per function, so a parametrized test moves with all of its cases even
-      when only one case was over. The 66 functions are 96 collected tests.
+    * A marker on a function moves all of its cases, even when only one case was over.
+      A case can carry its own instead, as `pytest.param(..., marks=pytest.mark.slow)`.
+      The registry names the function either way, and its comment names the marked
+      cases and what each measured. On 2026-09-05 the 66 functions were 96 collected
+      tests.
     * `call` time only. A module-scoped fixture bills its whole cost to whichever test
       triggers it first -- `test_every_control_rejects` reports 13.1s of setup that
       belongs to `determination`, which three other tests in that file also use -- so
@@ -1178,11 +1182,22 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_check_declared_bounds.py": {
             "test_n68_depth_bound_is_named_by_its_refusal_test",  # 3.4s
         },
-        # 4s of call time across 1, measured on 2026-10-10 at load 4.7 on four cores:
-        # `test_the_489_certificate_at_305_has_488s_side_in_a_quarter_turned_arrangement`
-        # took 4.1s.
+        # 95s of call time across six nodes in five functions. The 489 node measured 4.1s
+        # on 2026-10-10 at load 4.7 on four cores. The two lineage nodes of the #503/#504
+        # and #505/#501 imports were measured on 2026-10-12 on four cores at load 5.5 to
+        # 7.1, each alone and again with the file's other slow nodes (`-m slow
+        # --durations=0`): 4.75s and 4.74s for the n207 patches, 49.61s and 57.11s for the
+        # Barnett and Ostashev gaps, so neither shares a build. The two decide functions
+        # mark one or two cases each with `pytest.param(..., marks=pytest.mark.slow)`, and
+        # their other cases stay on the pull-request surface.
         "test_check_half_angle_area.py": {
             "test_the_489_certificate_at_305_has_488s_side_in_a_quarter_turned_arrangement",
+            "test_the_n207_certificate_is_two_placed_patches_of_the_n70_and_the_n153_is_not",
+            "test_barnetts_refinements_are_ryan_xus_packings_moved_and_ostashevs_are_not",
+            # The #503 n207 case, 7.05s.
+            "test_the_pingyou_imports_agree_with_their_receipts_plans_and_prints_to_every_digit",
+            # The #505 n261 case, 18.26s, and the #501 n211 case, 11.40s.
+            "test_the_505_and_501_imports_agree_with_their_receipts_plans_and_prints_to_every_digit",
         },
         # 24s of call time across 1.
         "test_contact_assembly_labels.py": {
@@ -1510,23 +1525,56 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         },
     }
     declared: dict[str, set[str]] = {}
-    marker = "pytest.mark.slow"
     for path in (PROJECT_ROOT / "tests").glob("test_*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-        marked: set[str] = set()
-        for node in tree.body:
-            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and any(
-                ast.unparse(decorator) == marker for decorator in node.decorator_list
-            ):
-                marked.add(node.name)
-            if isinstance(node, (ast.Assign, ast.AnnAssign)) and "mark.slow" in ast.unparse(
-                node
-            ):
-                marked.add("<module-level assignment>")
-        if marked:
+        if marked := _slow_marked(tree):
             declared[path.name] = marked
 
     assert declared == expected
+
+
+def _slow_marked(tree: ast.Module) -> set[str]:
+    """The functions in a test module that carry the slow marker, on themselves or on a
+    case, and `<module-level assignment>` if the module marks all of its tests."""
+    marked: set[str] = set()
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and any(
+            "mark.slow" in ast.unparse(decorator) for decorator in node.decorator_list
+        ):
+            marked.add(node.name)
+        if isinstance(node, (ast.Assign, ast.AnnAssign)) and "mark.slow" in ast.unparse(node):
+            marked.add("<module-level assignment>")
+    return marked
+
+
+def test_the_slow_registry_sees_a_marker_on_a_function_a_case_or_a_module() -> None:
+    """A case marked with `pytest.param(..., marks=...)` names its function, as a marked
+    function does; a parametrized function with no marked case names nothing."""
+    source = textwrap.dedent(
+        """
+        import pytest
+
+        pytestmark = [pytest.mark.slow]
+
+        @pytest.mark.slow
+        def test_whole() -> None: ...
+
+        @pytest.mark.parametrize("n", [1, pytest.param(2, marks=pytest.mark.slow)])
+        def test_one_case(n: int) -> None: ...
+
+        @pytest.mark.parametrize("n", [pytest.param(3, marks=[pytest.mark.slow])])
+        def test_a_listed_case(n: int) -> None: ...
+
+        @pytest.mark.parametrize("n", [1, pytest.param(2, id="two")])
+        def test_quick(n: int) -> None: ...
+        """
+    )
+    assert _slow_marked(ast.parse(source)) == {
+        "<module-level assignment>",
+        "test_whole",
+        "test_one_case",
+        "test_a_listed_case",
+    }
 
 
 def test_devtools_use_public_package_interfaces() -> None:

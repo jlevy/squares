@@ -11,7 +11,9 @@ declaration ``devtools.acquire_source`` writes the packet from:
   ``fact`` instead: the certificate as an exact rational Witness/v2, which ``derive``
   writes from a checkout once ``acquire_source.acquire`` shows the checkout yields this
   packet's own acquisition record, so its bytes have the digests the packet pins. The
-  fact names those digests, and ``read_facts`` holds it to its own rebuild;
+  fact names those digests, and ``read_facts`` holds it to its own rebuild. A pinned file
+  the row names as stating the same packing, such as the source's own Witness/v2, is
+  compared with the certificate by ``derive``, from the same checkout;
 - **format.** Each certificate is read by the adapter its row names (`ADAPTERS`) into the
   kernel's exact centre/half-angle certificate, with centres in ``[0, S]^2``;
 - **admission.** A certificate is admitted only where its exact side equals, or rounds up
@@ -163,7 +165,13 @@ class Option(TypedDict):
 
 
 class SamePacking(TypedDict):
-    """Another retained file of the same count, which must state the identical packing."""
+    """Another file of the same count, which must state the identical packing.
+
+    Beside a retained certificate it is a retained file, compared whenever the
+    certificate is read. Beside a derived fact it is a file the packet pins and does not
+    retain, so ``derive`` compares it, from the same checkout, when it writes or checks
+    the fact.
+    """
 
     path: str
     format: str
@@ -348,10 +356,8 @@ def load_declaration(packet: Path) -> Declaration:
         if "fact" in row:
             fact = PurePosixPath(row["fact"])
             _require(
-                fact.parent.as_posix() == FACTS
-                and fact.name == f"n-{row['n']:03d}.yaml"
-                and "same_packing" not in row,
-                f"n={row['n']}: a derived fact is facts/n-NNN.yaml, with no second format",
+                fact.parent.as_posix() == FACTS and fact.name == f"n-{row['n']:03d}.yaml",
+                f"n={row['n']}: a derived fact is facts/n-NNN.yaml",
             )
         _require(_UTC.fullmatch(row["first_committed"]), f"n={row['n']}: first_committed")
         for other in row.get("same_packing", []):
@@ -460,6 +466,16 @@ def evand_cert(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certifi
         raise ReportError(f"n={n}: {error}") from error
 
 
+def _triples(squares: list[Any], n: int) -> list[tuple[Fraction, Fraction, Fraction]]:
+    """Each square's ``[x, y, t]`` row of rational strings."""
+    rows = []
+    for index, square in enumerate(squares, start=1):
+        _require(type(square) is list and len(square) == 3, f"n={n} square {index}: x y t")
+        x, y, t = (_literal(item, f"n={n} square {index}") for item in square)
+        rows.append((x, y, t))
+    return rows
+
+
 def squish_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
     """SQUISH's JSON: ``s_exact`` and ``squares`` as ``[x, y, t]`` strings in [0, S]^2.
 
@@ -476,12 +492,107 @@ def squish_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certif
         and type(value["note"]) is str,
         f"n={n}: SQUISH certificate has missing, unknown or mistyped fields",
     )
+    return _certificate(n, _literal(value["s_exact"], f"n={n} side"), _triples(squares, n))
+
+
+#: The fields PingYou's JSON may add to its side and squares, with the JSON types allowed.
+PINGYOU_METADATA: dict[str, tuple[type, ...]] = {
+    "note": (str,),
+    "dilation_exact": (str,),
+    "raw_side": (int, float),
+    "provenance": (dict,),
+}
+
+
+def pingyou_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """PingYou Ltd's JSON (#503, #504): ``s_exact`` and ``[x, y, t]`` squares in [0, S]^2.
+
+    The rows are SQUISH's. ``note``, ``dilation_exact``, ``raw_side`` and ``provenance``
+    are the source's prose, its guard dilation, its undilated floating-point side and its
+    construction record, read and not believed: the side is ``s_exact``, and only the
+    exact routes decide whether the poses pack.
+    """
+    _no_options(options, "pingyou-json")
+    value = _json(raw)
+    squares = _squares(value, n)
+    required = {"n", "s_exact", "squares"}
+    _require(
+        required <= set(value) <= required | set(PINGYOU_METADATA)
+        and all(
+            type(value[key]) in kinds for key, kinds in PINGYOU_METADATA.items() if key in value
+        ),
+        f"n={n}: PingYou certificate has missing, unknown or mistyped fields",
+    )
+    return _certificate(n, _literal(value["s_exact"], f"n={n} side"), _triples(squares, n))
+
+
+#: The only frame and the only schema name a corner witness may state for `witness_corners`.
+CORNER_FRAME = {"origin": "lower-left", "axes": "x-right-y-up", "angle_unit": "not-applicable"}
+CORNER_SCHEMA = "witness.schema.yaml"
+#: Corners as ``sqpack.witness`` materializes a centre and basis, in half-diagonal units.
+CORNER_ORDER = ((-1, -1), (1, -1), (1, 1), (-1, 1))
+
+
+def pose_corners(pose: legacy.Pose) -> list[tuple[Fraction, Fraction]]:
+    """A pose's four corners, counter-clockwise from the corner at its frame's (-1/2, -1/2)."""
+    c, s = pose.basis
+    return [
+        (pose.x + (a * c - b * s) / 2, pose.y + (a * s + b * c) / 2) for a, b in CORNER_ORDER
+    ]
+
+
+def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """A rational ``corners`` Witness/v2, read back exactly to centres and half-angles.
+
+    The document must name the witness schema by its file name, which is read from this
+    repository, pass it and its semantic checks, state ``n`` unit squares numbered 1 to
+    ``n`` in order in the lower-left frame, and list each square's corners in the order
+    `pose_corners` writes them. A pose is recovered as the corners' mean and
+    ``t = s / (1 + c)`` from the first edge ``(c, s)``, and the four corners must be
+    exactly that pose's, which holds only for a unit square in that order. Corners listed
+    from another vertex draw the same square at another ``t``, and a comparison of poses
+    reads them as another packing.
+    """
+    _no_options(options, "witness-corners")
+    try:
+        document = load_yaml(_text(raw))
+    except yaml.YAMLError as error:
+        raise ReportError(f"n={n}: invalid witness YAML: {error}") from error
+    metadata = document.get("softschema") if type(document) is dict else None
+    _require(
+        type(metadata) is dict and metadata.get("schema") == CORNER_SCHEMA,
+        f"n={n}: a corner witness names {CORNER_SCHEMA} as its schema",
+    )
+    try:
+        witness = validate_witness_document(
+            document, path=WITNESS_SCHEMA, fallback_schema=WITNESS_SCHEMA
+        )
+    except WitnessError as error:
+        raise ReportError(f"n={n}: not a valid witness: {error}") from error
+    _require(
+        witness["n"] == n
+        and witness["representation"] == "corners"
+        and witness["scalar"] == {"kind": "rational"}
+        and witness["square_size"] == "1"
+        and witness["coordinates"] == CORNER_FRAME,
+        f"n={n}: not a rational corner witness of {n} unit squares in the lower-left frame",
+    )
     rows = []
-    for index, square in enumerate(squares, start=1):
-        _require(type(square) is list and len(square) == 3, f"n={n} square {index}: x y t")
-        x, y, t = (_literal(item, f"n={n} square {index}") for item in square)
-        rows.append((x, y, t))
-    return _certificate(n, _literal(value["s_exact"], f"n={n} side"), rows)
+    for index, square in enumerate(witness["squares"], start=1):
+        where = f"n={n} square {index}"
+        _require(square["id"] == index, f"{where}: squares are not numbered 1..n in order")
+        corners = [(_literal(x, where), _literal(y, where)) for x, y in square["corners"]]
+        c, s = corners[1][0] - corners[0][0], corners[1][1] - corners[0][1]
+        _require(c != -1, f"{where}: no finite half-angle")
+        x = sum((x for x, _ in corners), Fraction(0)) / 4
+        y = sum((y for _, y in corners), Fraction(0)) / 4
+        pose = legacy.Pose(x, y, s / (1 + c))
+        _require(
+            pose_corners(pose) == corners,
+            f"{where}: the corners are not a unit square's in the order pose_corners writes",
+        )
+        rows.append((pose.x, pose.y, pose.t))
+    return _certificate(n, _literal(witness["side"], f"n={n} side"), rows)
 
 
 def centred_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
@@ -513,6 +624,41 @@ def centred_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certi
         x, y, t = (_literal(square[key], f"n={n} square {index}") for key in ("x", "y", "t"))
         rows.append((x + side / 2, y + side / 2, t))
     return _certificate(n, side, rows)
+
+
+def sqcert(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """Daniil Ostashev's ``.sqcert`` (#501): ``n N``, ``s S``, then ``x y t`` per square.
+
+    As in Evan Daniel's format, centres lie in [0, S]^2 and ``t = tan(theta/2)``, and blank
+    lines and lines that begin with ``#`` are comments, so the ``# claimed_s`` and
+    ``# delta`` headers are the source's labels, read and not believed. The source's own
+    reader also takes ``n`` and ``s`` in either order and decimals beside ``p/q``; this one
+    takes the order and the integer and ``p/q`` literals every retained file uses, and
+    refuses the rest.
+    """
+    _no_options(options, "sqcert")
+    rows = [
+        line.split()
+        for line in _text(raw).splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    _require(
+        len(rows) >= 2
+        and len(rows[0]) == 2
+        and rows[0][0] == "n"
+        and re.fullmatch(r"[1-9][0-9]*", rows[0][1]) is not None
+        and int(rows[0][1]) == n,
+        f"n={n}: the first data line must be `n {n}`",
+    )
+    _require(
+        len(rows[1]) == 2 and rows[1][0] == "s", f"n={n}: the second data line must be `s S`"
+    )
+    poses = []
+    for index, row in enumerate(rows[2:], start=1):
+        _require(len(row) == 3, f"n={n} square {index}: {len(row)} fields, not `x y t`")
+        x, y, t = (_literal(value, f"n={n} square {index}") for value in row)
+        poses.append((x, y, t))
+    return _certificate(n, _literal(rows[1][1], f"n={n} side"), poses)
 
 
 #: The two options `decimal_dilation` reads, and the bounds on the places it rounds at.
@@ -631,8 +777,11 @@ def decimal_dilation(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.C
 ADAPTERS: dict[str, Adapter] = {
     "evand-cert": evand_cert,
     "squish-json": squish_json,
+    "pingyou-json": pingyou_json,
+    "witness-corners": witness_corners,
     "centred-json": centred_json,
     "decimal-dilation": decimal_dilation,
+    "sqcert": sqcert,
 }
 
 
@@ -781,7 +930,8 @@ def read_facts(packet: Path) -> dict[int, legacy.Certificate]:
             raw = _read(source, row["path"])
             certificate = parse_certificate(raw, n, row["format"], _options(row))
         admit(certificate, row["offered"])
-        for other in row.get("same_packing", []):
+        # Beside a derived fact the other files are not retained; ``derive`` compares them.
+        for other in [] if "fact" in row else row.get("same_packing", []):
             copy = parse_certificate(_read(source, other["path"]), n, other["format"])
             _require(copy == certificate, f"n={n}: {other['path']} states another packing")
         certificates[n] = certificate
@@ -1181,11 +1331,26 @@ def checkout_problems(packet: Path, checkout: Path) -> list[str]:
         return problems
 
 
+def _checkout_bytes(packet: Path, checkout: Path, path: str) -> bytes:
+    """A file the packet pins, read from a checkout that `checkout_problems` admitted."""
+    pinned = {item["path"] for item in _record(packet)["sources"][0]["pinned_only"]}
+    _require(path in pinned, f"{path}: not a file this packet pins")
+    upstream = checkout / path
+    _require(
+        not upstream.is_symlink() and upstream.resolve().is_relative_to(checkout.resolve()),
+        f"{path}: not a plain file of the checkout",
+    )
+    with upstream.open("rb") as stream:
+        return stream.read(MAX_SOURCE_BYTES + 1)
+
+
 def derive(packet: Path, checkout: Path, *, check: bool = False) -> list[retained_data.Row]:
     """Write, or with ``check`` compare, each derived fact from a checkout at the pin.
 
     A fact is stored as ``facts/n-NNN.yaml.gz``, deterministic gzip by the archive's rule,
     and its row belongs in the packet README's Compressed Files table, origin ``receipt``.
+    Each ``same_packing`` file of a fact's row is read from the same checkout and must
+    state the certificate's packing exactly, or the fact is refused.
     """
     ensure_private(packet)
     declaration = load_declaration(packet)
@@ -1196,15 +1361,14 @@ def derive(packet: Path, checkout: Path, *, check: bool = False) -> list[retaine
     for row in declaration["certificates"]:
         if "fact" not in row:
             continue
-        upstream = checkout / row["path"]
-        _require(
-            not upstream.is_symlink() and upstream.resolve().is_relative_to(checkout.resolve()),
-            f"{row['path']}: not a plain file of the checkout",
-        )
-        with upstream.open("rb") as stream:
-            raw = stream.read(MAX_SOURCE_BYTES + 1)
-        certificate = parse_certificate(raw, row["n"], row["format"], _options(row))
+        n = row["n"]
+        raw = _checkout_bytes(packet, checkout, row["path"])
+        certificate = parse_certificate(raw, n, row["format"], _options(row))
         admit(certificate, row["offered"])
+        for other in row.get("same_packing", []):
+            raw = _checkout_bytes(packet, checkout, other["path"])
+            copy = parse_certificate(raw, n, other["format"])
+            _require(copy == certificate, f"n={n}: {other['path']} states another packing")
         witness = fact_witness(packet, declaration, row, certificate)
         text = witness_document(witness, schema=FACT_SCHEMA)
         target = packet / row["fact"]

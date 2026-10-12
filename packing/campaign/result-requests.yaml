@@ -9,7 +9,11 @@
 #
 # A reply is a comment by the owner, or one that ends in the Claude Code footer and is
 # not by the issue's author. `read_through` is the latest comment read into the entry;
-# `check_requests --github` lists anything later.
+# `check_requests --github` lists anything later, and any earlier comment edited later.
+#
+# An issue that reports a new item for intake carries the `intake` label on GitHub: each
+# `result-report`, and each entry of another kind marked `intake: true`. `--github` lists
+# any of them without the label (campaign/result-import.md, stage 0).
 softschema:
   contract: packing.squares:ResultRequests/v1
   schema: schemas/result-requests.schema.yaml
@@ -94,13 +98,13 @@ issues:
         author's rebuild costs about 10 process-hours, 14 s to about 5 minutes a count.
       source: https://github.com/jlevy/squares/issues/419#issuecomment-6104596297
       not_registered: >-
-        Evidence about the source configurations this entry already maps, T-120 to T-124 and the
-        retained catalogue, not a new bound. Not retained or built here: think-63vx owns taking the
-        Lean binding and the quadratic closed forms in as evidence, from a packet at 6bbae37 and a
-        build here. The author's per-count table at 6bbae37 (search/exact/lean_batch/results.md)
-        prices all 258 modules at 37,107 s and the 41 the ask names at 7,559 s (2.1 process-hours,
-        the longest n = 148 at 294 s); n = 129 and 146 need chunks of 10 because chunks of 25
-        exceed 14 GB.
+        Evidence about the source configurations of the forms this entry maps, T-120 to T-123 and
+        the retained catalogue, and of #420's T-124, not a new bound. Not retained or built here:
+        think-63vx owns taking the Lean binding and the quadratic closed forms in as evidence, from
+        a packet at 6bbae37 and a build here. The author's per-count table at 6bbae37
+        (search/exact/lean_batch/results.md) prices all 258 modules at 37,107 s and the 41 the ask
+        names at 7,559 s (2.1 process-hours, the longest n = 148 at 294 s); n = 129 and 146 need
+        chunks of 10 because chunks of 25 exceed 14 GB.
       queued: true
       bead: think-63vx
     asks:
@@ -169,6 +173,28 @@ issues:
       kind: follow-up
       reported:
       - result: remaining-catalogue
+    - url: https://github.com/jlevy/squares/issues/419#issuecomment-6119246619
+      date: '2026-10-12'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: lean-packs-binding-2026-10-11
+      - result: new-exact-forms
+        id: T-120
+        verification: V0
+        confirmation: C0
+      - result: new-exact-forms
+        id: T-121
+        verification: V0
+        confirmation: C0
+      - result: new-exact-forms
+        id: T-122
+        verification: V0
+        confirmation: C0
+      - result: new-exact-forms
+        id: T-123
+        verification: V0
+        confirmation: C0
     close_when: The reported import and its disposition are on main and the owner has posted the resulting
       state; unresolved proof replays remain explicitly owned.
     notes: >-
@@ -758,6 +784,12 @@ issues:
       - result: kernel-rows-2026-10-09
       - result: subpatterns-38-status-2026-10-09
         status: incomplete
+    - url: https://github.com/jlevy/squares/issues/413#issuecomment-6119249016
+      date: '2026-10-12'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: kernel-rows-2026-10-11
     close_when: The named owner completes or explicitly dispositions the queued work and posts the recorded
       state; source status alone grants no theorem admission.
     notes: 'The owner reply of 7 October acknowledged the then-current 17 verified / 10 computed split
@@ -1208,6 +1240,7 @@ issues:
     opened: '2026-10-05'
     state: open
     kind: other
+    intake: true
     triage: done
     summary: 'A method report and not a result: the B2 branching rule for devtools/pilot_n17_subpattern_bb.py,
       which learns each square''s weight from the closing Farkas multipliers and bisects the heaviest
@@ -1545,6 +1578,7 @@ issues:
     opened: '2026-10-05'
     state: open
     kind: other
+    intake: true
     triage: done
     summary: Two arity-7 classes have upstream reported full standing-verifier and independent Rust
       passes. The owner's retained C2 replay is INCOMPLETE after 480.468 seconds on the one-second RSS-query
@@ -1822,6 +1856,7 @@ issues:
     state: closed
     closed: '2026-10-03'
     kind: defect-report
+    intake: true
     triage: done
     summary: >-
       The sixteen points of Friedman's Figure 34, the unavoidable set behind Green's
@@ -1972,6 +2007,7 @@ issues:
     state: closed
     closed: '2026-10-06'
     kind: defect-report
+    intake: true
     triage: done
     summary: >-
       Nagamochi's Lemma 1 is false (chelokot's Lean counterexample, Karakuş's family), so
@@ -4359,7 +4395,9 @@ issues:
       the guzhou-n40-new-supports-2026-10-11 packet with both receipts; the density's orbit facts,
       both kernel inputs and every finite step decided here by a first-party exact audit, and the
       near-axis certificate reproduced with the CI run's axis binary and decided again by
-      sqverify-fast. The 43 slabs wait for an owner budget (think-tln9).
+      sqverify-fast. The 43 slabs wait for an owner budget (think-tln9). wand125 edited the 17:14
+      UTC comment at 02:19 UTC on 12 October to link the continuous-angle mode at
+      wand125/square-packing f30cc2c (think-xzob).
     read_through: '2026-10-11T17:14:50Z'
     results:
     - key: s40-clipped-corner
@@ -4434,10 +4472,28 @@ issues:
         here on 12 October by the release's own obstruction/run.py (receipts/duals.json) and agree
         with both release receipts, which registers nothing.
       queued: false
+    - key: s40-continuous-angle-mode
+      claim: >-
+        wand125's continuous-angle mode of sqverify-fast, linked by the comment's edit of
+        2026-10-12T02:19:26Z at wand125/square-packing f30cc2cf345a3a3f6af778925f354d9ec979868b
+        (tools/sqverify_continuous, v3, source_sha256 1266a8b9...), verified the 6.718 density at
+        B = 3350/3359 and tau = 4999/5000 over all 86 root ranges and an exact axis sweep for t in
+        [0, 10^-7], and refused both controls (every weight x 985/1000, and B = 3348/3359).
+      source: https://github.com/jlevy/squares/issues/485#issuecomment-6111583905
+      not_registered: >-
+        A third party's second decision of s40-new-supports's continuous cover, not a bound of its
+        own: code distinct from the release's kernel but the same method in outline, as its author
+        says, built on this repository's sqverify-fast crate. Not retained, reviewed, built or
+        replayed here: think-xzob owns all four, and its replay waits on an owner budget. wand125's
+        runs stay a third party's report until a run directory with receipts is published or the
+        mode is replayed here.
+      queued: true
+      bead: think-xzob
     beads:
     - think-3oi5
     - think-xms6
     - think-tln9
+    - think-xzob
     answer_bead: think-3oi5
     replies:
     - url: https://github.com/jlevy/squares/issues/485#issuecomment-6116244240
@@ -4487,6 +4543,14 @@ issues:
       - result: s40-continuous-pose
         id: E-n040-guzhou-continuous-pose-crate-axis
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/485#issuecomment-6119333366
+      date: '2026-10-12'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s40-new-supports
+      - result: s40-support-family-obstruction
+      - result: s40-continuous-angle-mode
     close_when: The import and its review disposition are on main and the owner has posted the resulting
       state; optimality and first-publication priority are outside this request.
   - number: 486
@@ -4717,7 +4781,13 @@ issues:
     beads:
     - think-lkbe
     answer_bead: think-lkbe
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/494#issuecomment-6119249272
+      date: '2026-10-12'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: wallchain-width1-negative
     close_when: The negative is recorded beside X-052 section 2.5 and the owner has acknowledged it on the
       issue; it asks for nothing else.
   - number: 495
@@ -4773,6 +4843,202 @@ issues:
     beads:
     - think-nmfl
     answer_bead: think-nmfl
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/495#issuecomment-6119249473
+      date: '2026-10-12'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: kernel-certificates-15
+      - result: kernel-certificate-m4003392
     close_when: The certificates are admitted to certified-sub-patterns.yaml or declined with a reason, and the
       owner has posted the resulting state.
+  - number: 503
+    title: 's(207) ≤ 14.880960373044: registration request'
+    author: BuddenPing
+    opened: '2026-10-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      PingYou Ltd reports an exact rational upper bound at n = 207 in
+      BuddenPing/square-packing-certificates at 9dc93b6ac2f8fefe038062a74c9a75bf05afdba6: rational
+      centre and half-angle rows with a corners Witness/v2, two differently placed patches of Ryan
+      Xu's n70 construction, taken from Evan Daniel's exact n70 certificate, with upright grids of
+      42 and 36 squares, 4.55e-3 below SQUISH's #481. Its own three exact checkers and this
+      repository's two exact checkers at 5b0eb012 are reported to accept it; no optimality is
+      claimed. Imported on 11 October 2026: the certificate kept as a derived exact fact in the
+      pingyou-n207-certificate-2026-10-11 packet, replayed on both maintained exact routes and
+      decided again by a third exact route in the review of the same day, which held the fact to
+      its pinned certificate and witness, measured the two patches where the source places them and
+      found no blocking defect. Registered as T-147 at V3/C3; the case record's house adoption is
+      the next layer. The first commit, 0d8b9c1, and the issue as first posted disclosed OpenAI
+      Codex assistance; the pinned commit and the edited issue removed it without a reason, and
+      which account stands is the author's to say.
+    read_through: '2026-10-11T10:31:52Z'
+    results:
+    - key: n207-exact-certificate
+      claim: s(207) <= 148809603730436756319360591381170501178639/10^40 =
+        14.8809603730436756319360591381170501178639, by n207.cert.json (SHA-256
+        1c334f3170ece68cf2c2f16341660f7a80ef44bf7a9cdb083940d1b99756c071) and its corners Witness/v2
+        pingyou-n207-rational.yaml (SHA-256 09e6d0dff17ae71ae84bde1466b805a67f3b1592496f9ca438b02bde603f6182).
+      source: body
+      register:
+      - T-147
+      evidence:
+      - E-pingyou-503-certificate-report
+      - E-pingyou-503-exact-feasibility
+    beads:
+    - think-0zd4
+    - think-720n
+    answer_bead: think-0zd4
+    replies: []
+    close_when: The import and its disposition are on main, the house adoption at 207 has landed or
+      is owned, the author has been asked which AI-assistance account stands, and the owner has
+      posted the resulting state; optimality is outside this request.
+  - number: 504
+    title: 's(153) ≤ 12.870013850408: registration request'
+    author: BuddenPing
+    opened: '2026-10-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      PingYou Ltd reports an exact rational upper bound at n = 153 in
+      BuddenPing/square-packing-certificates at bc328a7d727aedd0eabebd6ea80285f572b65d2d: rational
+      centre and half-angle rows with a corners Witness/v2, by its account Ryan Xu's n70
+      construction, taken from Evan Daniel's exact n70 certificate, composed with its reflection by
+      the boundary-patch approach of #503 and reclosed at a new angle, exactly
+      0.002015998674135970992348937968 below Evan Daniel's T-146. Its own three exact checkers and
+      this repository's two exact checkers at 5b0eb012 are reported to accept it; no optimality is
+      claimed. Imported on 11 October 2026: the certificate kept as a derived exact fact in the
+      pingyou-n153-certificate-2026-10-11 packet, replayed on both maintained exact routes and
+      decided again by a third exact route in the review of the same day, which held the fact to
+      its pinned certificate and witness and found no blocking defect; the lineage from the n70 is
+      by construction, not by pose. Registered as T-148 at V3/C3; the case record's house adoption
+      is the next layer. The issue omits the template's AI-assistance section; the same author's
+      #503 disclosed OpenAI Codex assistance and then removed it.
+    read_through: '2026-10-11T20:26:51Z'
+    results:
+    - key: n153-exact-certificate
+      claim: s(153) <= 6435006925203522001385040447/500000000000000000000000000 =
+        12.870013850407044002770080894, by n153.cert.json (SHA-256
+        31b3fb3cba73528fab21d085a34f3209684a868e7116059ea5c21e664bca1ff2) and its corners Witness/v2
+        pingyou-n153-rational.yaml (SHA-256 963d6ca7cce053e7ff22baf6438bdf5776b7b06d01e1509e654c73966b9e4d41).
+      source: body
+      register:
+      - T-148
+      evidence:
+      - E-pingyou-504-certificate-report
+      - E-pingyou-504-exact-feasibility
+    beads:
+    - think-4znu
+    - think-720n
+    answer_bead: think-4znu
+    replies:
+    - url: https://github.com/jlevy/squares/issues/504#issuecomment-6113387339
+      date: '2026-10-11'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n153-exact-certificate
+    close_when: The import and its disposition are on main, the house adoption at 153 has landed or
+      is owned, and the owner has posted the resulting state; optimality and the undilated contact
+      solution are outside this request.
+  - number: 501
+    title: New results for n=155, n=156 and n=211 to the best of my knowledge
+    author: dostashev
+    opened: '2026-10-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Daniil Ostashev reports new packings at n = 155, 156 and 211 in dostashev/square-packing,
+      records/n0NNN.*, below Francisco Couzo's refinement at 155 and Evan Daniel's exact optima at
+      156 and 211, naming no revision; the issue's sides are the README's at 41019fb. Imported on
+      11 October 2026 at the head c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49, which later the same day
+      lowered 211 (662a13d, a31a747) and replaced all three certificates with smaller ones: the
+      repository is MIT-licensed and retained whole in the dostashev-records-2026-10-11 packet, the
+      three sqcert certificates replayed on both maintained exact routes and decided again by a
+      third exact route in the review of the same day, which found no blocking defect and measured
+      none of the three as a placement of a credited packing. Registered as T-149 at V3/C3 at the
+      head's sides, from which the issue's follow; the case records' house adoption is the next
+      layer. The owner asked to credit the name Daniil Ostashev and the author agreed. No AI
+      assistance is stated, and the issue omits the template's section.
+    read_through: '2026-10-11T22:02:58Z'
+    results:
+    - key: three-records
+      claim: s(155) <= 12.952425406986414, s(156) <= 12.979172613722533 and s(211) <=
+        14.996336737028043 as the issue prints them; the certificates retained at c3d17ab state the
+        smaller exact sides 12.952425406958456…, 12.979172613644426… and 14.996336721336315…, below
+        each by 2.80e-11, 7.81e-11 and 1.57e-08.
+      source: body
+      register:
+      - T-149
+      evidence:
+      - E-ostashev-501-certificate-report
+      - E-ostashev-501-exact-feasibility
+    - key: kkt-exact-optima
+      claim: Each side is the exact optimum of its packing's contact topology, with nonnegative KKT
+        multipliers (README at c3d17ab).
+      source: source
+      not_registered: A local-optimality report, not a bound on s(n); recorded as reported in
+        E-ostashev-501-certificate-report and not checked here.
+      queued: false
+    beads:
+    - think-e59i
+    - think-720n
+    answer_bead: think-e59i
+    replies:
+    - url: https://github.com/jlevy/squares/issues/501#issuecomment-6113368338
+      date: '2026-10-11'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: three-records
+    close_when: The import and its disposition are on main, the house adoption at 155, 156 and 211
+      has landed or is owned, and the owner has posted the resulting state; the KKT statement and
+      optimality are outside this request.
+  - number: 505
+    title: 'Improved certified upper bounds for 146 and 261 squares: registration request'
+    author: RobertBarnettProjects
+    opened: '2026-10-11'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Robert Barnett reports exact rational certificates at n = 146 and 261 in
+      RobertBarnettProjects/square-packing-research at 2573ff51c4b160c952bbb2d1c399e7430d9f9ae2,
+      local refinements of Ryan Xu's #432 packings by sequential linear programming and exact
+      rational contraction, 7.35e-8 below Evan Daniel's regularized n146 (T-146) and 5.68e-11 below
+      Ryan Xu's printed n261, with OpenAI Codex assistance disclosed. Imported on 11 October 2026:
+      the repository states no licence, so the barnett-refinements-2026-10-11 packet keeps derived
+      exact facts of the two and of five certificates the README marks superseded (70, 103, 123,
+      237, 295), all replayed on both maintained exact routes; the review of the same day decided
+      the two again by a third exact route, found no blocking defect and measured both as Ryan Xu's
+      arrangements, the 146 locally re-optimized and the 261 refined in precision. Registered as
+      T-150 at V3/C3; the case records' house adoption is the next layer. The superseded five are
+      excluded by the author and registered nowhere; the n = 2043 certificate is beyond the corpus
+      and not replayed.
+    read_through: '2026-10-11T14:33:31Z'
+    results:
+    - key: n146-n261-refinements
+      claim: s(146) <= 12.583782203951046204 and s(261) <= 16.678779875343207747, each the exact
+        rational side of certificates/n146.cert (SHA-256
+        77b5524f387472a8e5996e319d05735e2a6a0046c24e7043995549bf3945fa3d) and certificates/n261.cert
+        (SHA-256 9141f7eb86ae23388d349efd810992727f16ca09bc9d0d1a5b94cd5e2a3f0019) rounded up at 18
+        places.
+      source: body
+      register:
+      - T-150
+      evidence:
+      - E-barnett-505-certificate-report
+      - E-barnett-505-exact-feasibility
+    beads:
+    - think-dzre
+    - think-720n
+    answer_bead: think-dzre
+    replies: []
+    close_when: The import and its disposition are on main, the house adoption at 146 and 261 has
+      landed or is owned, and the owner has posted the resulting state; the superseded and n = 2043
+      certificates are not requested, and optimality is outside this request.

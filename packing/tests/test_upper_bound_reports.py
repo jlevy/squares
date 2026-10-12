@@ -30,14 +30,21 @@ TRIO126 = "evand-trio126-2026-10-09"
 PACKETS = (COUZO, FANG, TRIO126)
 SQUISH_481 = "squish-481-third-request-2026-10-09"
 DELEEUW = "ebdeleeuw-n70-refinement-2026-10-10"
-DERIVED = (SQUISH_481, DELEEUW)
+#: Issues #503 and #504, PingYou Ltd's certificates at 207 and 153.
+PINGYOU_503 = "pingyou-n207-certificate-2026-10-11"
+PINGYOU_504 = "pingyou-n153-certificate-2026-10-11"
+DERIVED = (SQUISH_481, DELEEUW, PINGYOU_503, PINGYOU_504)
 MISHAPOLK = "mishapolk-decimal-poses-2026-10-09"
 #: Issues #488 and #489, two retained Evan Daniel format releases of the same afternoon.
 COUZO_488 = "couzo-certificates-2026-10-10"
 HUNT3 = "evand-record-hunt3-2026-10-10"
 #: Evan Daniel's regularized record lists: fifteen upstream gzip certificates, no issue.
 REGULARIZED = "evand-regularized-2026-10-10"
-EVERY = (*PACKETS, *DERIVED, MISHAPOLK, COUZO_488, HUNT3, REGULARIZED)
+#: Issue #505, Robert Barnett's refinements kept as derived facts, and issue #501, Daniil
+#: Ostashev's sqcert records retained under their MIT licence.
+BARNETT = "barnett-refinements-2026-10-11"
+OSTASHEV = "dostashev-records-2026-10-11"
+EVERY = (*PACKETS, *DERIVED, MISHAPOLK, COUZO_488, HUNT3, REGULARIZED, BARNETT, OSTASHEV)
 
 
 def _packet(name: str) -> Path:
@@ -286,6 +293,53 @@ def test_a_new_adapter_needs_only_its_entry_and_receives_its_declared_options(
     certificate = reports.parse_certificate(EVAND, 2, "dilated-cert", {"dilation": "2"})
     assert seen == [{"dilation": "2"}]
     assert certificate.side == 6
+
+
+#: Daniil Ostashev's sqcert (#501): its labelled header lines, then Evan Daniel's rows.
+SQCERT = b"# sqcert v1\n# claimed_s: 2.9\n# delta: 1e-60\nn 2\ns 3\n# x y t\n1 1 0\n2 2 1/3\n"
+
+
+def test_the_sqcert_adapter_reads_the_packing_evand_cert_reads() -> None:
+    expected = legacy.parse(EVAND.decode(), expected_n=2)
+    assert reports.parse_certificate(SQCERT, 2, "sqcert") == expected
+    # Its comments are labels: a changed claimed side changes nothing that is read.
+    relabelled = SQCERT.replace(b"claimed_s: 2.9", b"claimed_s: 1")
+    assert reports.parse_certificate(relabelled, 2, "sqcert") == expected
+    assert reports.parse_certificate(SQCERT.replace(b"\n", b"\r\n"), 2, "sqcert") == expected
+
+
+@pytest.mark.parametrize(
+    ("raw", "message"),
+    [
+        (SQCERT.replace(b"n 2\ns 3\n", b"s 3\nn 2\n"), "first data line"),
+        (SQCERT.replace(b"n 2\n", b"n 3\n"), "first data line"),
+        (SQCERT.replace(b"n 2\n", b"n 02\n"), "first data line"),
+        (SQCERT.replace(b"n 2\n", b"2 3\n"), "first data line"),
+        (SQCERT.replace(b"s 3\n", b"s 3 4\n"), "second data line"),
+        (SQCERT.replace(b"s 3\n", b"side 3\n"), "second data line"),
+        (SQCERT.replace(b"s 3\n", b"s 3.0\n"), "rational"),
+        (SQCERT.replace(b"s 3\n", b"s 0\n"), "positive"),
+        (SQCERT.replace(b"2 2 1/3", b"2 2 1e-1"), "rational"),
+        (SQCERT.replace(b"2 2 1/3", b"2.0 2 1/3"), "rational"),
+        (SQCERT.replace(b"2 2 1/3", b"2 2 1/0"), "rational"),
+        (SQCERT.replace(b"2 2 1/3", b"2 2 +1/3"), "rational"),
+        (SQCERT.replace(b"2 2 1/3", b"2 2"), "not `x y t`"),
+        (SQCERT + b"0 0 0\n", "3 squares for n = 2"),
+        (SQCERT.replace(b"2 2 1/3\n", b""), "1 squares for n = 2"),
+        (b"# only comments\n", "first data line"),
+        (b"\xff\xfe", "UTF-8"),
+    ],
+)
+def test_the_sqcert_adapter_refuses_what_its_format_does_not_state(
+    raw: bytes, message: str
+) -> None:
+    with pytest.raises(reports.ReportError, match=message):
+        reports.parse_certificate(raw, 2, "sqcert")
+
+
+def test_the_sqcert_adapter_reads_no_options() -> None:
+    with pytest.raises(reports.ReportError, match="reads no options"):
+        reports.parse_certificate(SQCERT, 2, "sqcert", {"dilation": "1"})
 
 
 # --------------------------------------------------------------------------- decimal poses
@@ -870,6 +924,10 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         SQUISH_481: "2026-10-09",
         MISHAPOLK: "2026-10-09",
         TRIO126: "2026-10-09",
+        PINGYOU_503: "2026-10-11",
+        PINGYOU_504: "2026-10-11",
+        BARNETT: "2026-10-11",
+        OSTASHEV: "2026-10-11",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
@@ -1043,7 +1101,7 @@ def test_a_derived_fact_that_names_other_bytes_is_refused(derived: tuple[Path, P
         reports.read_facts(packet)
 
 
-def test_a_derived_fact_names_its_file_and_admits_no_second_format(
+def test_a_derived_fact_is_named_by_its_count(
     private: Callable[[str], Path],
 ) -> None:
     packet = private(DELEEUW)
@@ -1141,3 +1199,80 @@ def test_the_decimal_claims_find_the_ceiling_smallest_only_at_103_and_258() -> N
         302: "#481",
         303: "#481",
     }
+
+
+# --------------------------------------------------------------------------- 11 October packets
+
+#: Ryan Xu's printed side at 261 (#432); his certificate dilates its centres by 1 + 10^-12.
+RYXU_261 = Fraction(83393899377, 5 * 10**9)
+#: Issue #501's sides, the README's at 41019fb, before c3d17ab replaced all three files.
+ISSUE_501 = {155: "12.952425406986414", 156: "12.979172613722533", 211: "14.996336737028043"}
+
+
+def test_the_barnett_pins_are_the_certificates_the_issue_and_its_attachment_name() -> None:
+    record = _json(_packet(BARNETT) / reports.acquire_source.RECORD)
+    pinned = {item["path"]: item["sha256"] for item in record["sources"][0]["pinned_only"]}
+    assert pinned["certificates/n146.cert"] == (
+        "77b5524f387472a8e5996e319d05735e2a6a0046c24e7043995549bf3945fa3d"
+    )
+    assert pinned["certificates/n261.cert"] == (
+        "9141f7eb86ae23388d349efd810992727f16ca09bc9d0d1a5b94cd5e2a3f0019"
+    )
+
+
+def test_the_barnett_certificates_are_smallest_only_at_the_two_requested_counts() -> None:
+    rows = _rows(BARNETT)
+    assert [n for n, row in rows.items() if row["requested"]] == [146, 261]
+    assert [n for n, row in rows.items() if row["smallest"] == reports.THIS] == [146, 261]
+    # Every certificate of the release is below its case's ceiling, and each of the five
+    # the README marks superseded is above a pending entry at its count.
+    assert all(row["case"]["relation"] == "below" for row in rows.values())
+    assert {n: row["smallest"] for n, row in rows.items() if not row["requested"]} == {
+        70: "T-146 (no issue)",
+        103: "T-146 (no issue)",
+        123: "T-146 (no issue)",
+        237: "T-140 (#488)",
+        295: "T-146 (no issue)",
+    }
+
+
+def test_the_barnett_146_side_is_below_the_regularized_certificate_by_7e8() -> None:
+    row = _rows(BARNETT)[146]
+    (regularized,) = row["pending"]
+    assert (regularized["result"], regularized["relation"]) == ("T-146", "below")
+    margin = Fraction(regularized["exact_side"]) - Fraction(row["exact_side"])
+    assert Fraction(7, 10**8) < margin < Fraction(8, 10**8)
+    assert Fraction(row["case"]["difference"]) > margin
+
+
+def test_the_barnett_261_side_is_below_ryan_xus_side_and_not_only_his_dilation() -> None:
+    row = _rows(BARNETT)[261]
+    ceiling = Fraction(row["case"]["exact_side"])
+    assert ceiling == RYXU_261 * (1 + Fraction(1, 10**12))
+    side = Fraction(row["exact_side"])
+    # The ceiling's dilation is 1.67e-11; the certificate is below the undilated side too.
+    assert side < RYXU_261 < ceiling
+    assert Fraction(5, 10**11) < RYXU_261 - side < Fraction(6, 10**11)
+    assert row["pending"] == []
+
+
+def test_the_ostashev_certificates_are_below_the_issue_sides_and_smallest_everywhere() -> None:
+    rows = _rows(OSTASHEV)
+    assert list(rows) == list(ISSUE_501)
+    for n, row in rows.items():
+        assert (row["smallest"], row["case"]["relation"]) == (reports.THIS, "below")
+        # The issue's s(n) <= v follows from the smaller side retained at c3d17ab.
+        assert Fraction(row["exact_side"]) < Fraction(ISSUE_501[n])
+    (couzo,) = rows[155]["pending"]
+    assert (couzo["result"], couzo["relation"]) == ("T-128", "below")
+
+
+def test_each_ostashev_side_is_its_labelled_optimum_dilated_by_1e60() -> None:
+    packet = _packet(OSTASHEV)
+    source = reports.REPO / reports.acquisition(packet)["archived_path"]
+    for n, certificate in reports.read_facts(packet).items():
+        text = (source / f"records/n{n:04d}.sqcert").read_text(encoding="utf-8")
+        (claimed,) = [
+            line.split()[-1] for line in text.splitlines() if line.startswith("# claimed_s:")
+        ]
+        assert certificate.side == Fraction(claimed) * (1 + Fraction(1, 10**60))

@@ -39,6 +39,37 @@ pose against the packing the register credits it to, which T-146's `regularizati
 name count by count (`regularized_credit`): Ryan Xu's, Mishapolk's refinements at 103
 and 258, and SQUISH's third request.
 
+It reads PingYou Ltd's two certificates of 11 October too, #503 at 207 and #504 at 153
+(``decide-imports --imports '#503' '#504'``), in the review
+``review-2026-10-11-upper-bound-imports-503-504.md``: derived facts, since the source
+states no licence, read as their bases state. ``--upstream`` holds each fact to the
+source's ``nNNN.cert.json`` at the pin, read by this route's own reader of that JSON
+(`read_pingyou_json`: SQUISH's rows, with the source's note, guard, undilated side and
+construction record named and not read), and to the source's own corners Witness/v2
+beside it, which the row names as stating the same packing, read by
+`read_witness_corners`: each square's centre as the mean of its corners and its rotation
+as its first edge, held to the unit circle, the other three edges held to be that edge's
+quarter turns. Where the source says a certificate was assembled from placed patches of
+another packing (`LINEAGE`), `patch_lineage` measures how many of the parent's squares
+reappear in it, centre and orientation, under a symmetry of the parent's box and a
+translation, after the child's declared guard dilation is undone; that is a measurement
+for credit and decides nothing.
+
+It reads the two other certificate releases of 11 October too, Robert Barnett's #505 at
+146 and 261 and Daniil Ostashev's #501 at 155, 156 and 211 (``decide-imports --imports
+'#505' '#501'``), in the review ``review-2026-10-11-upper-bound-imports-505-501.md``.
+#505's are derived facts, the source stating no licence; ``--upstream`` holds each to the
+source's ``nNNN.cert`` at the pin, Evan Daniel's format read by this route's own text
+reader (`read_evand_cert`). #501's are retained byte for byte under the source's MIT
+licence in its own ``.sqcert`` format, Evan Daniel's with the header split over ``n N``
+and ``s S`` lines, read by `parse_sqcert`; ``--upstream`` holds each retained file to its
+fetched bytes and its offered side to the README table at the pin (`printed_table_side`).
+Where the source says a certificate refines a credited packing, or says it was built from
+scratch, `CREDITED` measures it pose by pose against the case's house and the pending entry
+nearest it: #505 against Ryan Xu's certificates (T-125) and, at 146, Evan Daniel's
+regularized view (T-146); #501 against SQUISH's update and Francisco Couzo's refinement at
+155 (T-115, T-128) and Evan Daniel's exact optima at 156 and 211 (T-098).
+
 The register's two maintained routes (``devtools.evand_arrangement_reports``) share one
 parse and one half-angle conversion (``devtools.evand_exact_certificates``) and both decide
 pairs by the separating-axis theorem; at T-128 and T-130 one of them, ``sqpack.verify``, is
@@ -89,8 +120,8 @@ positive inputs and margins, to the side its packet's frozen claim record and re
 plan state, and to its printed side: equal to it, or rounding up to it at its places. A
 decided count the entry does not cite (#470's 132 and 267) must be absent from the plan's
 claim. ``--imports`` selects by key (``#476``, ``#481``, ``#483``, ``#484``, ``#470``,
-``trio126``, ``#488``, ``#489``, ``regularized``); it defaults to the first four, the
-roster of the first imports review.
+``trio126``, ``#488``, ``#489``, ``regularized``, ``#503``, ``#504``, ``#505``, ``#501``);
+it defaults to the first four, the roster of the first imports review.
 
 ``replay-t128`` is the maintained two-route replay of T-128's retained receipt, which
 ``devtools.couzo_refinement_reports`` has no command for: every job decided again by the
@@ -120,6 +151,7 @@ from typing import Any
 from devtools import couzo_followup_reports as t130
 from devtools import couzo_refinement_reports as t128
 from devtools import evand_arrangement_reports as kernel
+from devtools import evand_exact_certificates as legacy
 from devtools import evand_hunt_reports as t131
 from devtools import ryxu_arrangement_reports as ryxu
 from devtools import squish_followup_packets as squish_update
@@ -191,27 +223,58 @@ def literal(text: str) -> Fraction:
     return -value if sign else value
 
 
-def parse_certificate(text: str, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
-    """The header ``n S`` and exactly ``n`` rows ``x y t``, skipping blank and ``#`` lines."""
-    rows = [
+def _data_rows(text: str) -> list[list[str]]:
+    """The whitespace-split data lines of a text certificate: blank and ``#`` lines skipped."""
+    return [
         line.split()
         for line in text.splitlines()
         if line.strip() and not line.strip().startswith("#")
     ]
+
+
+def _square_rows(rows: Sequence[Sequence[str]], n: int) -> tuple[Pose, ...]:
+    """Exactly ``n`` rows ``x y t`` after a certificate's header, each read as a pose."""
+    if len(rows) != n:
+        raise AreaRouteError(f"{len(rows)} square rows for n = {n}")
+    poses: list[Pose] = []
+    for index, row in enumerate(rows, start=1):
+        if len(row) != 3:
+            raise AreaRouteError(f"square {index}: {len(row)} fields, not `x y t`")
+        x, y, t = (literal(value) for value in row)
+        poses.append((x, y, t))
+    return tuple(poses)
+
+
+def parse_certificate(text: str, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
+    """The header ``n S`` and exactly ``n`` rows ``x y t``, skipping blank and ``#`` lines."""
+    rows = _data_rows(text)
     if not rows or len(rows[0]) != 2 or rows[0][0] != str(n):
         raise AreaRouteError(f"the header is not `{n} S`")
     side = literal(rows[0][1])
     if side <= 0:
         raise AreaRouteError("the side must be positive")
-    if len(rows) - 1 != n:
-        raise AreaRouteError(f"{len(rows) - 1} square rows for n = {n}")
-    poses: list[Pose] = []
-    for index, row in enumerate(rows[1:], start=1):
-        if len(row) != 3:
-            raise AreaRouteError(f"square {index}: {len(row)} fields, not `x y t`")
-        x, y, t = (literal(value) for value in row)
-        poses.append((x, y, t))
-    return side, tuple(poses)
+    return side, _square_rows(rows[1:], n)
+
+
+def parse_sqcert(text: str, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
+    """Daniil Ostashev's ``.sqcert`` (#501): ``n N``, ``s S``, then ``n`` rows ``x y t``.
+
+    Evan Daniel's format with its header split over two labelled lines, the labels in that
+    order; blank and ``#`` lines are skipped, so the source's ``claimed_s`` and ``delta``
+    header comments are not read, and nothing else is allowed.
+    """
+    rows = _data_rows(text)
+    if len(rows) < 2 or rows[0] != ["n", str(n)] or len(rows[1]) != 2 or rows[1][0] != "s":
+        raise AreaRouteError(f"the header is not `n {n}` then `s S`")
+    side = literal(rows[1][1])
+    if side <= 0:
+        raise AreaRouteError("the side must be positive")
+    return side, _square_rows(rows[2:], n)
+
+
+def read_evand_cert(raw: bytes, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
+    """A pinned upstream ``.cert`` in Evan Daniel's format, as `parse_certificate` reads it."""
+    return parse_certificate(raw.decode("utf-8"), n)
 
 
 def rotation(t: Fraction) -> tuple[Fraction, Fraction]:
@@ -666,7 +729,29 @@ IMPORTS_488_489 = {
 #: Evan Daniel's display-regularized record lists, which no issue reports: fifteen
 #: certificates in his text format, each retained as its original gzip.
 IMPORTS_REGULARIZED = {"regularized": "evand-regularized-2026-10-10"}
-ALL_IMPORTS = {**IMPORTS, **LATER_IMPORTS, **IMPORTS_488_489, **IMPORTS_REGULARIZED}
+#: PingYou Ltd's two certificates of 11 October, #503 at 207 and #504 at 153, each kept
+#: as a derived fact beside the source's own corners witness, which the packet pins.
+IMPORTS_503_504 = {
+    "#503": "pingyou-n207-certificate-2026-10-11",
+    "#504": "pingyou-n153-certificate-2026-10-11",
+}
+#: The two other releases of 11 October: Robert Barnett's refinements of Ryan Xu's
+#: packings at 146 and 261 (#505), kept as derived facts since the source states no
+#: licence, with five superseded certificates the issue excludes beside them; and Daniil
+#: Ostashev's three record packings at 155, 156 and 211 (#501), retained byte for byte
+#: under the source's MIT licence in its own sqcert format.
+IMPORTS_505_501 = {
+    "#505": "barnett-refinements-2026-10-11",
+    "#501": "dostashev-records-2026-10-11",
+}
+ALL_IMPORTS = {
+    **IMPORTS,
+    **LATER_IMPORTS,
+    **IMPORTS_488_489,
+    **IMPORTS_REGULARIZED,
+    **IMPORTS_503_504,
+    **IMPORTS_505_501,
+}
 #: Imports decided over their whole replayed roster rather than the counts the entry
 #: cites: #470's README-printed 132 and 267 are certified beside the issue's 28.
 WHOLE_ROSTER = frozenset({"#470"})
@@ -675,10 +760,19 @@ WHOLE_ROSTER = frozenset({"#470"})
 #: where it is the smallest side, 103 against Ryan Xu's and 258 against SQUISH's (T-115).
 #: A certificate the register types as a regularization is measured against the packing
 #: its entry's `regularizations` name instead (`regularized_credit`).
+#: #505's two, which the source calls refinements of Ryan Xu's packings, against his
+#: certificates, and at 146 against Evan Daniel's regularized view of the same packing,
+#: which the source compares with; #501's three, which the source says were built from
+#: scratch, against each case's house and the pending entry nearest it.
 CREDITED: dict[tuple[str, int], tuple[str, ...]] = {
     ("trio126", 126): ("T-125",),
     ("#470", 103): ("T-125",),
     ("#470", 258): ("T-115",),
+    ("#505", 146): ("T-125", "T-146"),
+    ("#505", 261): ("T-125",),
+    ("#501", 155): ("T-115", "T-128"),
+    ("#501", 156): ("T-098",),
+    ("#501", 211): ("T-098",),
 }
 WEB = ROOT / "resources/web"
 REPO = ROOT.parent
@@ -755,12 +849,8 @@ def _scalar(value: object, where: str) -> Fraction:
     return literal(value)
 
 
-def read_squish_json(raw: bytes, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
-    """SQUISH's JSON: ``s_exact`` and ``[x, y, t]`` strings, centres in ``[0, S]^2``.
-
-    Its display fields, ``s_decimal`` and ``note``, are not read.
-    """
-    value = _json_object(raw, n)
+def _side_and_rows(value: dict[str, Any], n: int) -> tuple[Fraction, tuple[Pose, ...]]:
+    """``s_exact`` and the ``[x, y, t]`` rows of a SQUISH-shaped JSON certificate."""
     side = _scalar(value.get("s_exact"), f"n={n} side")
     poses: list[Pose] = []
     for index, square in enumerate(value["squares"], start=1):
@@ -771,6 +861,93 @@ def read_squish_json(raw: bytes, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
     if side <= 0:
         raise AreaRouteError("the side must be positive")
     return side, tuple(poses)
+
+
+def read_squish_json(raw: bytes, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
+    """SQUISH's JSON: ``s_exact`` and ``[x, y, t]`` strings, centres in ``[0, S]^2``.
+
+    Its display fields, ``s_decimal`` and ``note``, are not read.
+    """
+    return _side_and_rows(_json_object(raw, n), n)
+
+
+#: What PingYou Ltd's JSON adds to SQUISH's rows: the source's prose, its guard
+#: dilation, its undilated floating-point side and its construction record. None is
+#: read; the side is ``s_exact`` and the poses are the rows.
+PINGYOU_UNREAD = frozenset({"note", "dilation_exact", "raw_side", "provenance"})
+
+
+def read_pingyou_json(raw: bytes, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
+    """PingYou Ltd's JSON (#503, #504): SQUISH's ``s_exact`` and ``[x, y, t]`` rows.
+
+    The fields of `PINGYOU_UNREAD` are left unread; any field beyond those, ``n``,
+    ``s_exact`` and ``squares`` is refused, since this reader does not know what it
+    would mean.
+    """
+    value = _json_object(raw, n)
+    unknown = set(value) - {"n", "s_exact", "squares"} - PINGYOU_UNREAD
+    if unknown:
+        raise AreaRouteError(f"n={n}: fields this reader does not know: {sorted(unknown)}")
+    return _side_and_rows(value, n)
+
+
+#: The frame a corners witness must state; an angle unit does not apply to corners.
+CORNER_FRAME = {"origin": "lower-left", "axes": "x-right-y-up", "angle_unit": "not-applicable"}
+
+
+def read_witness_corners(raw: bytes, n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """A rational ``corners`` Witness/v2, each square read from its four corners.
+
+    The centre is the corners' mean and the rotation the first edge, corner 1 less
+    corner 0, held to the unit circle; the other three edges must be that edge's
+    successive quarter turns, so the four corners are one unit square's, counter-
+    clockwise from the corner the maintained adapter writes first. The envelope's
+    ``softschema`` block and any ``claim``, ``source`` or ``certificate`` block are not
+    read. A square whose corners start from another vertex is the same square at a
+    rotation a quarter turn away, and is read as that rotation: a comparison with a
+    certificate's poses holds the witness to the convention the certificate's bases use.
+    """
+    document = load_yaml(raw.decode("utf-8"))
+    witness = document.get("witness") if type(document) is dict else None
+    if type(witness) is not dict:
+        raise AreaRouteError(f"n={n}: no witness")
+    if (
+        witness.get("n") != n
+        or witness.get("representation") != "corners"
+        or witness.get("scalar") != {"kind": "rational"}
+        or _scalar(witness.get("square_size"), "square size") != 1
+        or witness.get("coordinates") != CORNER_FRAME
+    ):
+        raise AreaRouteError(f"n={n}: not a rational unit corners witness in [0, S]^2")
+    side = _scalar(witness.get("side"), f"n={n} side")
+    squares = witness.get("squares")
+    if side <= 0 or type(squares) is not list or len(squares) != n:
+        raise AreaRouteError(f"n={n}: a positive side and {n} squares")
+    placements: list[Placed] = []
+    for index, square in enumerate(squares, start=1):
+        where = f"n={n} square {index}"
+        corners_stated = square.get("corners") if type(square) is dict else None
+        if (
+            type(square) is not dict
+            or set(square) != {"id", "corners"}
+            or square["id"] != index
+            or type(corners_stated) is not list
+            or len(corners_stated) != 4
+            or any(type(point) is not list or len(point) != 2 for point in corners_stated)
+        ):
+            raise AreaRouteError(f"{where}: not four corners")
+        points = [(_scalar(u, where), _scalar(v, where)) for u, v in corners_stated]
+        c, s = unit_basis(points[1][0] - points[0][0], points[1][1] - points[0][1])
+        edges = [
+            (points[(k + 1) % 4][0] - points[k][0], points[(k + 1) % 4][1] - points[k][1])
+            for k in range(4)
+        ]
+        if edges != [(c, s), (-s, c), (-c, -s), (s, -c)]:
+            raise AreaRouteError(f"{where}: the corners are not one unit square's, in order")
+        x = sum((u for u, _v in points), Fraction(0)) / 4
+        y = sum((v for _u, v in points), Fraction(0)) / 4
+        placements.append((x, y, c, s))
+    return side, tuple(placements)
 
 
 def read_centred_json(raw: bytes, n: int) -> tuple[Fraction, tuple[Pose, ...]]:
@@ -1031,12 +1208,13 @@ def read_import(issue: str, row: dict[str, Any]) -> Imported:
         read = row["fact"]
         side, placements = read_fact(packet_bytes(packet / read).decode("utf-8"), n)
         return Imported(issue, name, n, read, side, placements)
-    if row["format"] != "evand-cert":
+    reader = RETAINED_READERS.get(row["format"])
+    if reader is None:
         raise AreaRouteError(f"{issue} n={n}: no reader for {row['format']}")
     record = json.loads((packet / "acquisition/sources.json").read_text(encoding="utf-8"))
     source = REPO / record["sources"][0]["archived_path"]
     read = (source / row["path"]).relative_to(packet).as_posix()
-    side, poses = parse_certificate(packet_bytes(source / row["path"]).decode("utf-8"), n)
+    side, poses = reader(packet_bytes(source / row["path"]).decode("utf-8"), n)
     for other in row.get("same_packing", []):
         if other["format"] != "squish-json":
             raise AreaRouteError(f"{issue} n={n}: no reader for {other['format']}")
@@ -1044,6 +1222,14 @@ def read_import(issue: str, row: dict[str, Any]) -> Imported:
         if copy != (side, poses):
             raise AreaRouteError(f"{issue} n={n}: {other['path']} differs")
     return Imported(issue, name, n, read, side, tuple(placed(poses)))
+
+
+#: Readers of a certificate a packet retains, by the declared format: Evan Daniel's text
+#: and Daniil Ostashev's sqcert, each the header then ``x y t`` rows.
+RETAINED_READERS: dict[str, Callable[[str, int], tuple[Fraction, tuple[Pose, ...]]]] = {
+    "evand-cert": parse_certificate,
+    "sqcert": parse_sqcert,
+}
 
 
 def import_packing(issue: str) -> Callable[[int], tuple[Fraction, tuple[Placed, ...]]]:
@@ -1161,7 +1347,17 @@ def compare_import(
     return problems
 
 
-UPSTREAM_READERS = {"squish-json": read_squish_json, "centred-json": read_centred_json}
+UPSTREAM_READERS = {
+    "squish-json": read_squish_json,
+    "centred-json": read_centred_json,
+    "pingyou-json": read_pingyou_json,
+    "evand-cert": read_evand_cert,
+}
+#: Readers of a pinned file a derived fact's row names as stating the same packing,
+#: each returning the packing in placed form.
+SAME_PACKING_READERS: dict[str, Callable[[bytes, int], tuple[Fraction, tuple[Placed, ...]]]] = {
+    "witness-corners": read_witness_corners,
+}
 
 
 def printed_rows(table: bytes, path: str) -> list[list[str]]:
@@ -1225,6 +1421,62 @@ def _printed_json_problem(
     return None
 
 
+def printed_table_side(
+    packet: Path, row: dict[str, Any], directory: Path, pinned: dict[str, str]
+) -> tuple[int, list[str]]:
+    """Hold a retained certificate's offered side to the table its row says prints it.
+
+    Where ``printed_in`` names a Markdown or CSV file at the pin, such as Daniil
+    Ostashev's README (#501), the copy fetched into ``directory`` must be the packet's
+    own: its retained copy, byte for byte, or else the digest the packet pins; and the
+    offered side must be a cell of a row of that table for the row's count, as
+    `upstream_problems` holds a derived fact's print. A JSON print is `printed_json_side`'s
+    and is left alone here. Returns the number of printed sides checked, 0 or 1, and every
+    disagreement.
+    """
+    blob = _BLOB.fullmatch(row.get("printed_in", ""))
+    if blob is None or blob.group(2).endswith((".json", ".json.gz")):
+        return 0, []
+    record = json.loads((packet / "acquisition/sources.json").read_text(encoding="utf-8"))
+    source = record["sources"][0]
+    path = blob.group(2)
+    problem = _printed_table_problem(
+        row,
+        path,
+        directory / path,
+        REPO / source["archived_path"] / path,
+        pinned.get(path),
+        at_pin=blob.group(1) == source["source_commit"],
+    )
+    return (0, [f"{packet.name} n={row['n']}: {problem}"]) if problem else (1, [])
+
+
+def _printed_table_problem(
+    row: dict[str, Any],
+    path: str,
+    fetched: Path,
+    retained: Path,
+    digest: str | None,
+    *,
+    at_pin: bool,
+) -> str | None:
+    """What is wrong with the table print of one row's side, or None."""
+    if not at_pin:
+        return "the side is printed at another commit"
+    if not fetched.is_file():
+        return f"no upstream {path} in {fetched.parent}"
+    raw = fetched.read_bytes()
+    if retained.is_file():
+        if raw != stored_bytes(retained):
+            return f"the retained {path} differs"
+    elif digest != hashlib.sha256(raw).hexdigest():
+        return f"{path} is neither retained nor the file the packet pins"
+    count, offered = str(row["n"]), row["offered"]
+    if not any(line[0] == count and offered in line for line in printed_rows(raw, path)):
+        return f"{path} does not print the side"
+    return None
+
+
 def upstream_problems(
     packet: Path, directory: Path, counts: Sequence[int] | None = None
 ) -> tuple[int, list[str]]:
@@ -1239,7 +1491,9 @@ def upstream_problems(
     certificate's JSON print must be. Where the packet retains the certificate, the
     retained bytes must be the upstream file's, as stored for an upstream gzip, and a
     side printed in a JSON at the pin must be the one the row offers
-    (`printed_json_side`). ``counts`` defaults to the requested ones.
+    (`printed_json_side`), or printed in a Markdown or CSV table at the pin must be a cell
+    of its row for the count (`printed_table_side`). ``counts`` defaults to the requested
+    ones.
     Returns the number of checks made, certificates and printed sides, and every
     disagreement.
     """
@@ -1282,9 +1536,12 @@ def upstream_problems(
             if raw != kept:
                 problems.append(f"{packet.name} n={n}: the retained {row['path']} differs")
             held += 1
-            printed, printed_problems = printed_json_side(packet, row, directory)
-            held += printed
-            problems += printed_problems
+            for printed, printed_problems in (
+                printed_json_side(packet, row, directory),
+                printed_table_side(packet, row, directory, pinned),
+            ):
+                held += printed
+                problems += printed_problems
             continue
         raw = pinned_bytes(row["path"])
         if raw is None:
@@ -1304,6 +1561,26 @@ def upstream_problems(
                 f"{packet.name} n={n}: the fact is not the packing {row['path']} states"
             )
         held += 1
+        # A pinned file the row names as the same packing, such as the source's own
+        # witness, must be at its pin too and state the packing the fact states.
+        for other in row.get("same_packing", []):
+            reader = SAME_PACKING_READERS.get(other["format"])
+            if reader is None:
+                problems.append(f"{packet.name} n={n}: no reader for {other['format']}")
+                continue
+            raw = pinned_bytes(other["path"])
+            if raw is None:
+                continue
+            try:
+                same = reader(raw, n)
+            except AreaRouteError as error:
+                problems.append(f"{packet.name} n={n}: {other['path']}: {error}")
+                continue
+            if same != fact:
+                problems.append(
+                    f"{packet.name} n={n}: {other['path']} is not the packing the fact states"
+                )
+            held += 1
         blob = _BLOB.fullmatch(row.get("printed_in", ""))
         if blob is None:
             continue
@@ -1358,12 +1635,41 @@ def squish_update_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
     return side, tuple(placements)
 
 
+def couzo_refinement_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """Francisco Couzo's refinement at ``n`` (T-128), after its packet's custody, read here.
+
+    `devtools.couzo_refinement_reports.read_facts` admits the retained source text, Evan
+    Daniel's format with centres in ``[0, S]^2``; this route parses that text itself.
+    """
+    t128.read_facts()
+    record = kernel.read_xz(t128.fact_path())
+    text = next(row["source_certificate"] for row in record["cases"] if row["n"] == n)
+    side, poses = parse_certificate(text, n)
+    return side, tuple(placed(poses))
+
+
+def evand_optimum_packing(n: int) -> tuple[Fraction, tuple[Placed, ...]]:
+    """Evan Daniel's exact optimum at ``n`` (T-098), the retained ``n-N.cert``, read here.
+
+    `devtools.evand_exact_certificates.is_decided` admits the file as, byte for byte, the
+    one that packet's first-party receipt decided at ``n``; this route parses it itself.
+    """
+    path = legacy.certificate_path(legacy.CERTS, n)
+    if not legacy.is_decided(path, n):
+        raise AreaRouteError(f"n={n}: not the certificate the T-098 packet decided")
+    side, poses = parse_certificate(path.read_text(encoding="utf-8"), n)
+    return side, tuple(placed(poses))
+
+
 #: How each credited certificate is read, by its register entry.
 CREDITED_READERS: dict[str, Callable[[int], tuple[Fraction, tuple[Placed, ...]]]] = {
     "T-125": ryxu_packing,
     "T-115": squish_update_packing,
     "T-136": import_packing("#481"),
     "T-138": import_packing("#470"),
+    "T-146": import_packing("regularized"),
+    "T-128": couzo_refinement_packing,
+    "T-098": evand_optimum_packing,
 }
 
 
@@ -1455,6 +1761,110 @@ def credited_gaps(found: Sequence[Imported]) -> dict[str, dict[str, Any]]:
     return credit
 
 
+#: A certificate its source says it assembled from placed patches of another packing:
+#: the parent's import key and count, and the guard dilation the source says it applied
+#: to every centre afterwards, which the measurement undoes. PingYou Ltd's n207 (#503)
+#: and n153 (#504) are both cut from Evan Daniel's exact n70 certificate of Ryan Xu's
+#: packing, the regularized ``n-070`` that T-146 retains, with guards 1 + 1e-10 and
+#: 1 + 2e-13 as their certificates' metadata states them.
+LINEAGE: dict[tuple[str, int], tuple[str, int, Fraction]] = {
+    ("#503", 207): ("regularized", 70, Fraction(10000000001, 10000000000)),
+    ("#504", 153): ("regularized", 70, Fraction(5000000000001, 5000000000000)),
+}
+#: How near a parent square must land on a child square to be counted as reappearing:
+#: its centre within 10^-9, and its edge direction within a sine of 10^-6 modulo a
+#: quarter turn to count as unturned.
+NEAR = Fraction(1, 10**9)
+NEAR_SINE = Fraction(1, 10**6)
+#: The fewest reappearing squares for a placement to be reported.
+PATCH_FLOOR = 4
+
+
+def _turn_sine(c: Fraction, s: Fraction, a: Fraction, b: Fraction) -> Fraction:
+    """The sine of the least angle between two squares' edges, modulo a quarter turn."""
+    return min(abs(c * b - s * a), abs(c * a + s * b))
+
+
+def patch_lineage(
+    child: tuple[Fraction, Sequence[Placed]],
+    parent: tuple[Fraction, Sequence[Placed]],
+    dilation: Fraction,
+    *,
+    limit: int = 3,
+) -> list[dict[str, Any]]:
+    """The placements of ``parent`` under which most of its squares reappear in ``child``.
+
+    Each child centre is divided by ``dilation`` first. For each of the eight symmetries
+    of the parent's box, every parent square paired with every child square names the
+    translation carrying the one onto the other; the translations named most often, read
+    to ``10^-9``, are the candidate placements. For each, the parent's squares are
+    counted that land within `NEAR` of a child centre (``squares``), those of them that
+    land at another orientation (``turned_beyond_1e-6``), and those that land on a child
+    square to the digit, the centre equal and the edge direction exactly a multiple of a
+    quarter turn away, however the child writes its basis (``exact``). Returns at most
+    ``limit`` placements with at least `PATCH_FLOOR` squares, the fullest first. A
+    measurement for credit: it decides nothing.
+    """
+    parent_side, parent_squares = parent
+    _child_side, child_squares = child
+    undone = [(x / dilation, y / dilation, c, s) for x, y, c, s in child_squares]
+    scale = 10**9
+    votes: dict[tuple[int, int, int], dict[tuple[Fraction, Fraction], int]] = {}
+    mapped_by_symmetry: dict[int, list[Placed]] = {}
+    for k in range(8):
+        mapped = [symmetric(parent_side, square, k) for square in parent_squares]
+        mapped_by_symmetry[k] = mapped
+        for px, py, _pc, _ps in mapped:
+            for cx, cy, _cc, _cs in undone:
+                shift = (cx - px, cy - py)
+                cell = (k, round(shift[0] * scale), round(shift[1] * scale))
+                exact = votes.setdefault(cell, {})
+                exact[shift] = exact.get(shift, 0) + 1
+    ranked = sorted(votes.items(), key=lambda item: (-sum(item[1].values()), item[0]))
+    placements: list[dict[str, Any]] = []
+    for (k, _tx, _ty), exact_shifts in ranked[:limit]:
+        shift = max(exact_shifts.items(), key=lambda item: (item[1], item[0]))[0]
+        squares = turned = exact = 0
+        for px, py, pc, ps in mapped_by_symmetry[k]:
+            x, y = px + shift[0], py + shift[1]
+            for cx, cy, cc, cs in undone:
+                if (cx - x) ** 2 + (cy - y) ** 2 > NEAR * NEAR:
+                    continue
+                squares += 1
+                turn = _turn_sine(pc, ps, cc, cs)
+                if turn > NEAR_SINE:
+                    turned += 1
+                elif turn == 0 and (cx, cy) == (x, y):
+                    exact += 1
+                break
+        if squares >= PATCH_FLOOR:
+            placements.append(
+                {
+                    "symmetry": k,
+                    "translation": [_text(shift[0]), _text(shift[1])],
+                    "squares": squares,
+                    "turned_beyond_1e-6": turned,
+                    "exact": exact,
+                }
+            )
+    return placements
+
+
+def lineage_gaps(found: Sequence[Imported]) -> dict[str, list[dict[str, Any]]]:
+    """`patch_lineage` of each certificate `LINEAGE` names against its stated parent."""
+    lineage: dict[str, list[dict[str, Any]]] = {}
+    for case in found:
+        named = LINEAGE.get((case.issue, case.n))
+        if named is None:
+            continue
+        key, m, dilation = named
+        parent = import_packing(key)(m)
+        lineage[f"{case.issue} n={case.n} from {key} n={m}"] = patch_lineage(
+            (case.side, case.placements), parent, dilation
+        )
+    return lineage
+
+
 def run_decide_imports(
     workers: int,
     output: Path | None,
@@ -1482,6 +1892,7 @@ def run_decide_imports(
             cited=row["n"] in declaration["requested"],
         )
     credit = credited_gaps(found)
+    lineage = lineage_gaps(found)
     for row in rows:
         print(
             f"{row['issue']} n={row['n']:3d} passed={row['passed']} pairs={row['pairs']} "
@@ -1495,6 +1906,8 @@ def run_decide_imports(
         print(f"retained receipt {packet_name}: {json.dumps(total)}")
     for name, gap in credit.items():
         print(f"arrangement {name}: {json.dumps(gap)}")
+    for name, patches in lineage.items():
+        print(f"lineage {name}: {json.dumps(patches)}")
     selected = {ALL_IMPORTS[key]: key for key in keys}
     held: dict[str, int] = {}
     for name, directory in upstream:
@@ -1514,6 +1927,7 @@ def run_decide_imports(
             "rows": rows,
             "receipts": totals,
             "arrangements": credit,
+            "lineage": lineage,
             "upstream": held,
             "problems": problems,
             "wall_seconds": wall,

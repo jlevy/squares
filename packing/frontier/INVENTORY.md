@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **503** evidence records. **308** are formal; **301** of those were established here.
-- **187** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **511** evidence records. **312** are formal; **305** of those were established here.
+- **191** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **41** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -526,13 +526,21 @@ results, it is a statement about what this repository has itself examined.
 | `E-n040-guzhou-continuous-pose-crate-axis` | 0 | derived-structure | verified | strict inequalities only | here | - | previously-published | independent | `V-sqverify-fast`, `V-audit-continuous-pose` |
 | `E-evand-regularized-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
 | `E-evand-regularized-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-exact-certificates`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area` |
+| `E-pingyou-503-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
+| `E-pingyou-503-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
+| `E-pingyou-504-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
+| `E-pingyou-504-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
+| `E-ostashev-501-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
+| `E-ostashev-501-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
+| `E-barnett-505-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
+| `E-barnett-505-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 191, verified 308
-- **method**: exact-algebraic 127, interval-certified 165, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 191
-- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 444
-- **relationship to the producer's code**: generator 5, independent-implementation 179, not-applicable 22, same-implementation 274, shared-components 17, unknown-historical 6
+- **assurance**: numerically-checked 4, reported 195, verified 312
+- **method**: exact-algebraic 131, interval-certified 165, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 195
+- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 452
+- **relationship to the producer's code**: generator 5, independent-implementation 183, not-applicable 22, same-implementation 278, shared-components 17, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

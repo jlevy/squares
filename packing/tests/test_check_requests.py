@@ -29,6 +29,8 @@ from devtools.check_requests import (
 
 Record = dict[str, Any]
 URL = "https://github.com/owner/repo/issues/7#issuecomment-{}"
+#: A label as GitHub's REST API returns it on an issue.
+INTAKE = {"id": 1, "name": "intake", "color": "0e8a16"}
 
 
 def result_entry(
@@ -200,6 +202,14 @@ def test_the_live_record_has_one_entry_an_issue_and_names_its_answer_bead() -> N
         ),
         (lambda r: r["issues"][0].update(state="closed"), "closed"),
         (lambda r: r["issues"][0].update(answer_bead="other-1234"), "answer_bead"),
+        (
+            lambda r: r["issues"][0].update(intake=True),
+            'issues/0: {"required":["intake"]} is not allowed',
+        ),
+        (
+            lambda r: r["issues"][0].update(kind="other", intake=False),
+            "issues/0/intake: true was expected",
+        ),
     ],
 )
 def test_the_check_refuses_an_unknown_id_a_misplaced_reply_and_a_broken_schema(
@@ -597,11 +607,14 @@ def test_the_draft_refuses_off_main(
     assert check_requests.main(["--draft", "1"]) == 2
 
 
-def comment(number: int, login: str, created: str, body: str = "thanks") -> Record:
+def comment(
+    number: int, login: str, created: str, body: str = "thanks", updated: str | None = None
+) -> Record:
     return {
         "html_url": URL.format(number),
         "user": {"login": login},
         "created_at": created,
+        "updated_at": updated or created,
         "body": body,
     }
 
@@ -614,7 +627,7 @@ def test_the_github_comparison_lists_missing_replies_unread_comments_and_unknown
     )
     live = {
         "repos/owner/repo/issues?state=all&per_page=100": [
-            {"number": 7, "state": "open", "title": "A request"},
+            {"number": 7, "state": "open", "title": "A request", "labels": [INTAKE]},
             {"number": 8, "state": "open", "title": "Another"},
             {"number": 9, "state": "open", "title": "A pull request", "pull_request": {}},
         ],
@@ -631,6 +644,80 @@ def test_the_github_comparison_lists_missing_replies_unread_comments_and_unknown
         "#8 is not in the record: Another",
         f"#7: reply missing from the record: {URL.format(2)} (owner, 2026-10-02)",
         f"#7: reply missing from the record: {URL.format(3)} (agent, 2026-10-02)",
+        f"#7: unread comment {URL.format(4)} (someone, 2026-10-02T12:00:00Z)",
+    ]
+
+
+@pytest.mark.parametrize("kind", ["defect-report", "correction", "other"])
+def test_the_github_comparison_lists_every_issue_reported_for_intake_without_the_label(
+    kind: str,
+) -> None:
+    """An issue that reports a new item for intake carries `intake` on GitHub, open or
+    closed, whatever else it carries: every result report, and an entry of any other
+    kind marked `intake: true`, as #295, #308, #358 and #367 are. An entry of another
+    kind without the mark needs no label, so neither the kind alone nor the mark alone
+    decides it. The label and an edited comment on the same issue are listed apart, each
+    with its own step in the sweep."""
+    recorded = record(
+        issue(number=7),
+        issue(number=8, state="closed", closed="2026-10-03"),
+        issue(number=9, state="closed", closed="2026-10-03"),
+        issue(number=10, kind=kind),
+        issue(number=11, kind=kind, intake=True),
+        issue(number=12, kind=kind, intake=True),
+    )
+    n17 = {"id": 2, "name": "n-17", "color": "5319e7"}
+    live: dict[str, Any] = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {"number": 7, "state": "open", "title": "A request", "labels": [n17]},
+            {"number": 8, "state": "closed", "title": "Closed", "labels": []},
+            {"number": 9, "state": "closed", "title": "Labelled", "labels": [n17, INTAKE]},
+            {"number": 10, "state": "open", "title": "Unmarked", "labels": []},
+            {"number": 11, "state": "open", "title": "Marked", "labels": [n17]},
+            {"number": 12, "state": "open", "title": "Marked, labelled", "labels": [INTAKE]},
+        ],
+        **{
+            f"repos/owner/repo/issues/{n}/comments?per_page=100": [] for n in (8, 9, 10, 11, 12)
+        },
+        "repos/owner/repo/issues/7/comments?per_page=100": [
+            comment(1, "someone", "2026-09-30T12:00:00Z", updated="2026-10-02T09:00:00Z"),
+        ],
+    }
+    assert check_requests.problems(recorded, REGISTER) == []
+    edited = "(someone, 2026-09-30T12:00:00Z, edited 2026-10-02T09:00:00Z)"
+    assert check_requests.compare_github(recorded, live.__getitem__) == [
+        "#7 reports an item for intake without the `intake` label",
+        f"#7: unread comment {URL.format(1)} {edited}",
+        "#8 reports an item for intake without the `intake` label",
+        "#11 reports an item for intake without the `intake` label",
+    ]
+
+
+def test_a_comment_read_and_then_edited_after_read_through_is_listed_as_unread() -> None:
+    """wand125's #485 review was read at its creation, then edited to link a new mode.
+
+    `read_through` holds a creation time, so an edit to a comment it already covers
+    arrived unseen: the f30cc2c link reached the record on 12 October only because the
+    comment was read again by hand. An edit at or before `read_through`, an edit to a
+    reply, and an edit to a comment already listed as unread add nothing.
+    """
+    recorded = record(
+        issue(replies=[reply(1, "2026-10-01")], read_through="2026-10-01T12:00:00Z")
+    )
+    live = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {"number": 7, "state": "open", "title": "A request", "labels": [INTAKE]},
+        ],
+        "repos/owner/repo/issues/7/comments?per_page=100": [
+            comment(1, "owner", "2026-10-01T10:00:00Z", updated="2026-10-03T08:00:00Z"),
+            comment(2, "someone", "2026-09-30T12:00:00Z", updated="2026-10-01T11:00:00Z"),
+            comment(3, "reviewer", "2026-10-01T12:00:00Z", updated="2026-10-02T09:00:00Z"),
+            comment(4, "someone", "2026-10-02T12:00:00Z", updated="2026-10-02T13:00:00Z"),
+        ],
+    }
+    edited = "(reviewer, 2026-10-01T12:00:00Z, edited 2026-10-02T09:00:00Z)"
+    assert check_requests.compare_github(recorded, live.__getitem__) == [
+        f"#7: unread comment {URL.format(3)} {edited}",
         f"#7: unread comment {URL.format(4)} (someone, 2026-10-02T12:00:00Z)",
     ]
 

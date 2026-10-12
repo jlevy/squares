@@ -119,3 +119,47 @@ deferrals:
       waits for jlevy/squares#403, which rewrites every case record, and for private-worker
       custody (RG-7); the records lane recorded the deferral at T-146's stage 4 exit
       (think-8k76).
+  - evidence: E-pingyou-503-exact-feasibility
+    results: [T-147]
+    bead: think-fvz4
+    blocked_on: think-fvz4
+    recorded: '2026-10-11'
+    reason: >-
+      The 11 October review of issues 503 and 504 accepted the replay for finite
+      feasibility and recommends T-147 as the house at 207; the case record's adoption,
+      with private-worker custody first (RV-6), is the next layer of the 2026-10-11 intake
+      stack, the adoption lane of think-fvz4, and the records lane recorded the deferral
+      when it registered T-147 (think-ekv3).
+  - evidence: E-pingyou-504-exact-feasibility
+    results: [T-148]
+    bead: think-fvz4
+    blocked_on: think-fvz4
+    recorded: '2026-10-11'
+    reason: >-
+      The 11 October review of issues 503 and 504 accepted the replay for finite
+      feasibility and recommends T-148 as the house at 153; the case record's adoption,
+      with private-worker custody first (RV-6), is the next layer of the 2026-10-11 intake
+      stack, the adoption lane of think-fvz4, and the records lane recorded the deferral
+      when it registered T-148 (think-ekv3).
+  - evidence: E-ostashev-501-exact-feasibility
+    results: [T-149]
+    bead: think-fvz4
+    blocked_on: think-fvz4
+    recorded: '2026-10-11'
+    reason: >-
+      The 11 October review of issues 505 and 501 accepted the replay for finite
+      feasibility and recommends T-149 as the house at 155, 156 and 211; the case records'
+      adoption, with private-worker custody first, is the next layer of the 2026-10-11
+      intake stack, the adoption lane of think-fvz4, and the records lane recorded the
+      deferral when it registered T-149 (think-ekv3).
+  - evidence: E-barnett-505-exact-feasibility
+    results: [T-150]
+    bead: think-fvz4
+    blocked_on: think-fvz4
+    recorded: '2026-10-11'
+    reason: >-
+      The 11 October review of issues 505 and 501 accepted the replay for finite
+      feasibility and recommends T-150 as the house at 146 and 261; the case records'
+      adoption, with private-worker custody first, is the next layer of the 2026-10-11
+      intake stack, the adoption lane of think-fvz4, and the records lane recorded the
+      deferral when it registered T-150 (think-ekv3).

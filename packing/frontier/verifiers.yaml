@@ -1306,8 +1306,9 @@ verifiers:
       the closed box by each square's half-extent with no corner formed, and disjoint
       interiors by the circumscribed-disc rule, else by the exact area of one square
       clipped by the other's four closed half-planes. It reads Evan Daniel's text format,
-      SQUISH's JSON, the centred JSON of issue 483 and derived facts with readers of its
-      own, runs six controls per certificate (two gross, and side and pair each at exact
+      SQUISH's JSON, the centred JSON of issue 483, PingYou Ltd's JSON, Daniil Ostashev's
+      sqcert files, rational corners witnesses and derived facts with readers of its own,
+      runs six controls per certificate (two gross, and side and pair each at exact
       contact and 10^-40 or 10^-30 past it), and holds every side, pose, margin and
       claimed side to the maintained routes' retained inputs and the record. For issue
       470 it also derives each witness again from its pinned decimal pose file, with its
@@ -1327,7 +1328,18 @@ verifiers:
       commits hold that no entry cites. The review lane of Evan Daniel's regularized
       record lists ran it as retained, with its regularized roster and --upstream at the
       pin, on the fifteen certificates T-146 cites; it measures each against the packing
-      T-146's regularizations name, read from the register. Its author had read both
+      T-146's regularizations name, read from the register. The review lane of issues 503
+      and 504 (docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md)
+      extended it on 2026-10-11 with readers of PingYou Ltd's JSON and of corners
+      witnesses, --upstream checks that hold a fact to its pinned same-packing witness, and
+      patch_lineage, which counts a parent packing's squares that reappear in a
+      certificate under a box symmetry and translation and decides nothing; it ran it on
+      the two certificates T-147 and T-148 cite. The review lane of issues 505 and 501
+      (docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md) added a
+      reader of the sqcert format, an --upstream reader of Evan Daniel's format for derived
+      facts, a check of each retained certificate's side against its README's print at the
+      pin, and credit readers for T-146, T-128 and T-098, and ran it on the five
+      certificates T-149 and T-150 cite. Its author had read both
       maintained routes, their parser and the importer's adapters before writing it, so it
       is not clean-room; it imports none of their parsing or deciding code and shares
       Fraction with every exact checker here. It is a second pair-deciding procedure
@@ -1764,10 +1776,12 @@ verifiers:
       Imports a report of rational upper-bound certificates by another author from its
       packet's declaration: admits custody through acquire_source, reads each retained
       file or derived fact by its declared adapter (Evan Daniel's text format, SQUISH's
-      JSON, centred JSON, decimal poses by a declared dilation), admits each side only
-      where it equals or rounds up to its print, rebuilds the frozen claim comparison and
-      the register plan, and drives the arrangement kernel's two exact routes and two
-      controls per count. It decides no geometry itself.
+      JSON, centred JSON, PingYou Ltd's JSON, Daniil Ostashev's sqcert files, rational
+      corners witnesses, decimal poses by a declared dilation), holds a derived fact to
+      any file its row names as the same packing, admits each side only where it equals
+      or rounds up to its print, rebuilds the frozen claim comparison and the register
+      plan, and drives the arrangement kernel's two exact routes and two controls per
+      count. It decides no geometry itself.
     source:
       - packing/devtools/upper_bound_reports.py
       - packing/devtools/evand_arrangement_reports.py
@@ -1781,7 +1795,13 @@ verifiers:
       in full; for issues 488 and 489, its HOUSES readers of the issue-481, issue-484,
       issue-488 and issue-489 packets are the exact readers that review proposed (RL-2).
       For issue 470 its decimal_dilation adapter generates the exact witnesses from the
-      source's decimal poses, so there this repository is the witness's generator.
+      source's decimal poses, so there this repository is the witness's generator. The
+      import lane of issues 503 and 504 added the pingyou-json and witness-corners adapters
+      and the same-packing comparison in derive, and the 11 October review of those issues
+      (docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md) read them in
+      full. The import lane of issues 505 and 501 added the sqcert adapter, which the 11
+      October review of those issues
+      (docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md) read in full.
 
   - id: V-rehwaldt-n68-verify
     program: verify.py

@@ -1,0 +1,60 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/505",
+  "author": "Robert Barnett",
+  "source_key": "[Barnett refinements 2026-10-11]",
+  "report_evidence": "E-barnett-505-certificate-report",
+  "receipt_format": "barnett-505-exact-replay-v1",
+  "witness_prefix": "W-barnett-505-n",
+  "claim_limitations": "Complete 2573ff5 rational centre/half-angle certificate in Evan Daniel's format, centres in [0, S]^2, converted from a checkout at the pin whose bytes have the digests the packet records; no upstream byte is retained. Finite construction feasibility only; no local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-11",
+  "read_at_main": "3a5a91a90f997a65da52c42000769c1e6b6c3eae",
+  "certificates": [
+    {"n": 70, "path": "certificates/n070.cert", "format": "evand-cert", "offered": "8.880960371668802", "printed_in": "https://github.com/RobertBarnettProjects/square-packing-research/blob/2573ff51c4b160c952bbb2d1c399e7430d9f9ae2/README.md", "first_committed": "2026-10-10T01:47:37Z", "fact": "facts/n-070.yaml"},
+    {"n": 103, "path": "certificates/n103.cert", "format": "evand-cert", "offered": "10.679232047495411", "printed_in": "https://github.com/RobertBarnettProjects/square-packing-research/blob/2573ff51c4b160c952bbb2d1c399e7430d9f9ae2/README.md", "first_committed": "2026-10-10T01:47:37Z", "fact": "facts/n-103.yaml"},
+    {"n": 123, "path": "certificates/n123.cert", "format": "evand-cert", "offered": "11.591378145643661", "printed_in": "https://github.com/RobertBarnettProjects/square-packing-research/blob/2573ff51c4b160c952bbb2d1c399e7430d9f9ae2/README.md", "first_committed": "2026-10-10T01:47:37Z", "fact": "facts/n-123.yaml"},
+    {"n": 146, "path": "certificates/n146.cert", "format": "evand-cert", "offered": "12.583782203951046204", "first_committed": "2026-10-11T13:52:00Z", "fact": "facts/n-146.yaml"},
+    {"n": 237, "path": "certificates/n237.cert", "format": "evand-cert", "offered": "15.903670905778137", "printed_in": "https://github.com/RobertBarnettProjects/square-packing-research/blob/2573ff51c4b160c952bbb2d1c399e7430d9f9ae2/README.md", "first_committed": "2026-10-09T12:49:04Z", "fact": "facts/n-237.yaml"},
+    {"n": 261, "path": "certificates/n261.cert", "format": "evand-cert", "offered": "16.678779875343207747", "first_committed": "2026-10-11T13:52:00Z", "fact": "facts/n-261.yaml"},
+    {"n": 295, "path": "certificates/n295.cert", "format": "evand-cert", "offered": "17.704232790955142", "printed_in": "https://github.com/RobertBarnettProjects/square-packing-research/blob/2573ff51c4b160c952bbb2d1c399e7430d9f9ae2/README.md", "first_committed": "2026-10-10T01:47:37Z", "fact": "facts/n-295.yaml"}
+  ],
+  "requested": [146, 261],
+  "replayed": [70, 103, 123, 146, 237, 261, 295],
+  "houses": [
+    {"n": 70, "reader": "[ry-xu square packing 2026]", "source_key": "[ry-xu square packing 2026]", "holders": "ry-xu", "result": "T-125", "reported_value": "8.8809603717088810", "verified_value": "8.8809603717088810", "evidence": ["E-ryxu-432-rational-feasibility"]},
+    {"n": 103, "reader": "[ry-xu square packing 2026]", "source_key": "[ry-xu square packing 2026]", "holders": "ry-xu", "result": "T-125", "reported_value": "10.6792320475106793", "verified_value": "10.6792320475106793", "evidence": ["E-ryxu-432-rational-feasibility"]},
+    {"n": 123, "reader": "[ry-xu square packing 2026]", "source_key": "[ry-xu square packing 2026]", "holders": "ry-xu", "result": "T-125", "reported_value": "11.5913781457115914", "verified_value": "11.5913781457115914", "evidence": ["E-ryxu-432-rational-feasibility"]},
+    {"n": 146, "reader": "[ry-xu square packing 2026]", "source_key": "[ry-xu square packing 2026]", "holders": "ry-xu", "result": "T-125", "reported_value": "12.5837822775125838", "verified_value": "12.5837822775125838", "evidence": ["E-ryxu-432-rational-feasibility"]},
+    {"n": 237, "reader": "[Gupta rational refinements 2026-10-08]", "source_key": "[Gupta rational refinements 2026-10-08]", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta", "result": "T-127", "reported_value": "15.9036762351891381", "verified_value": "15.9036762351891381", "evidence": ["E-gupta-438-exact-feasibility"]},
+    {"n": 261, "reader": "[ry-xu square packing 2026]", "source_key": "[ry-xu square packing 2026]", "holders": "ry-xu", "result": "T-125", "reported_value": "16.6787798754166788", "verified_value": "16.6787798754166788", "evidence": ["E-ryxu-432-rational-feasibility"]},
+    {"n": 295, "reader": "[ry-xu square packing 2026]", "source_key": "[ry-xu square packing 2026]", "holders": "ry-xu", "result": "T-125", "reported_value": "17.7042327915177043", "verified_value": "17.7042327915177043", "evidence": ["E-ryxu-432-rational-feasibility"]}
+  ],
+  "pending": [
+    {"n": 70, "report": "T-137 (#483)", "url": "https://github.com/jlevy/squares/issues/483", "holders": "Eric Deleeuw", "result": "T-137", "reader": "[Deleeuw n70 refinement 2026-10-10]"},
+    {"n": 70, "report": "T-146 (no issue)", "url": "https://github.com/evand/square-packing/tree/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists", "holders": "Evan Daniel", "result": "T-146", "reader": "[Daniel regularized lists 2026-10-10]"},
+    {"n": 103, "report": "T-138 (#470)", "url": "https://github.com/jlevy/squares/issues/470", "holders": "Mishapolk", "result": "T-138", "reader": "[Mishapolk decimal poses 2026-10-09]"},
+    {"n": 103, "report": "T-146 (no issue)", "url": "https://github.com/evand/square-packing/tree/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists", "holders": "Evan Daniel", "result": "T-146", "reader": "[Daniel regularized lists 2026-10-10]"},
+    {"n": 123, "report": "T-146 (no issue)", "url": "https://github.com/evand/square-packing/tree/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists", "holders": "Evan Daniel", "result": "T-146", "reader": "[Daniel regularized lists 2026-10-10]"},
+    {"n": 146, "report": "T-146 (no issue)", "url": "https://github.com/evand/square-packing/tree/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists", "holders": "Evan Daniel", "result": "T-146", "reader": "[Daniel regularized lists 2026-10-10]"},
+    {"n": 237, "report": "T-134 (#476)", "url": "https://github.com/jlevy/squares/issues/476", "holders": "Francisco Couzo", "result": "T-134", "reader": "[Couzo exact certificates 2026-10-09]"},
+    {"n": 237, "report": "T-136 (#481)", "url": "https://github.com/jlevy/squares/issues/481", "holders": "Nate Chaoweeraprasit (SQUISH)", "result": "T-136", "reader": "[SQUISH third request 2026-10-09]"},
+    {"n": 237, "report": "T-140 (#488)", "url": "https://github.com/jlevy/squares/issues/488", "holders": "Francisco Couzo", "result": "T-140", "reader": "[Couzo certificates 2026-10-10]"},
+    {"n": 295, "report": "T-146 (no issue)", "url": "https://github.com/evand/square-packing/tree/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists", "holders": "Evan Daniel", "result": "T-146", "reader": "[Daniel regularized lists 2026-10-10]"}
+  ],
+  "register": {
+    "title": "Robert Barnett's refinements at 2573ff5, issue505",
+    "headline": "Exact rational refinements of Ryan Xu's packings of 146 and 261 squares",
+    "significance": 2,
+    "source_checks": "The author reports that both certificates pass four exact rational checks with zero acceptance tolerance, a separating-axis and a polygon checker written in the same assisted project and Evan Daniel's unchanged verify_cert.py and verify_cert2.py at 268af529546176a25224ea3b2c7d29cef8d9e911, in 0.86 and 1.66 seconds for the four, and that David Ellsworth's check_packing.py accepts 140-digit exports at tolerance 1e-90 as supplementary numerical evidence. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Ryan Xu (ry-xu, https://github.com/ry-xu/square_packing, issue 432) with both packings, as the source does, and Robert Barnett (https://github.com/RobertBarnettProjects/square-packing-research) with the refinements, by minimum-movement sequential linear programming followed by an exact rational contraction, and with the certificates. At 146 the source compares with Evan Daniel's regularization of Ryan Xu's packing (T-146) and credits it there; it does not say which of the two the refinement started from. The source discloses OpenAI Codex assistance with the solver, the certificate and checker code, the source review and the preparation.",
+    "next_rung": "Independently review the retained replay, then weigh adoption at 146, where the side is below T-146's regularized certificate by 7.35e-08 and the case ceiling T-125 holds by 7.36e-08, and at 261, where it is below the case ceiling T-125 holds by 7.35e-11, beyond the 1.67e-11 dilation that ceiling carries. The credit rests on the source's statement that both refine Ryan Xu's layouts; no retained measurement here compares the poses. Then record source-specific adoption and confirming evidence. Final exact-head CI remains required.",
+    "bead": "think-dzre",
+    "bibliography": {
+      "authors": ["Barnett"],
+      "lineage": "credits-project",
+      "credit": "Barnett after Xu, Daniel",
+      "short_credit": "Barnett after Xu et al.",
+      "note": "Seven complete exact certificates at 2573ff51c4b160c952bbb2d1c399e7430d9f9ae2 in Evan Daniel's format: the two of issue 505, at 146 and 261, local refinements of Ryan Xu's packings by sequential linear programming and exact rational contraction, and five the README marks superseded, at 70, 103, 123, 237 and 295. Checked by the author with Evan Daniel's verify_cert.py and verify_cert2.py and two checkers of the same assisted project. Derived exact facts only; no upstream byte is retained. OpenAI Codex assistance disclosed. No local or global optimality claim."
+    }
+  }
+}

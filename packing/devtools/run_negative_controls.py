@@ -1277,7 +1277,25 @@ def root_files() -> tuple[Path, ...]:
 #
 # The upstream measurements used its 192 MiB cap; retain the independently
 # calibrated 200 MiB atlas-metadata capacity on this branch.
-SNAPSHOT_MAX_BYTES = 200 * 1024 * 1024
+#
+# 2026-10-12, intake 2026-10-11 layer 2 (#516 at 1e41643e8, the #503, #504, #501 and
+# #505 imports): 210,099,865 bytes, 384,665 over 200 MiB, failing hosted suite-a and
+# suite-c. The tree below it, layer 1 (#512) at 604699ee1 on main's 3a5a91a90, measures
+# 209,353,914 and had 361,286 bytes of headroom left; this layer adds 745,951: 466,439 in
+# the four packets, the rest their two reviews, the register rows and the route's code
+# and tests. A lane found no safe prune: the new packets are results-register artifacts
+# that workers read, and the larger files of the walk are linked, registered or read by
+# controls. The only real saving is narrowing the copy-back for archive files linked only
+# from documents no control link-checks, about 14.4 MB, which needs the two hidden
+# readers above fixed first; think-b6ir owns it.
+#
+# The owner chose on 2026-10-12, in the intake session, to raise the cap to 216 MiB
+# rather than hunt another prune: 16,392,551 bytes (15.6 MiB) of headroom over this
+# layer, roughly ten intakes of this one's size (layers 1 to 3 add 1,525,785 bytes over
+# 3a5a91a90). Nothing copied changes; three portable workers are bounded at 648 MiB.
+# With this change's comments and tests counted, the snapshot measures 210,101,768
+# bytes, 16,390,648 under the raised cap.
+SNAPSHOT_MAX_BYTES = 216 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

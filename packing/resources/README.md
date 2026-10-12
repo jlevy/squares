@@ -1108,6 +1108,56 @@ bound; T-146 records the sides at V3/C3 on the review of 11 October, which accep
 fifteen for finite feasibility only, and as regularizations of the packings the record
 credits to their finders; each is pending adoption.
 
+## PingYou Ltd’s exact certificates, 11 October 2026
+
+**[PingYou n207 certificate 2026-10-11]**: PingYou Ltd’s exact rational certificate for
+n = 207, two placed patches of Ryan Xu’s n70 construction from Evan Daniel’s exact n70
+certificate with two upright grids, pinned at
+`9dc93b6ac2f8fefe038062a74c9a75bf05afdba6`, kept as a derived exact fact, no upstream
+byte retained; [packet](web/pingyou-n207-certificate-2026-10-11/README.md).
+Both project exact routes accept the replayed certificate and refuse both controls, and
+a third exact route agrees and held the fact to the pinned certificate and witness.
+T-147 records the side at V3/C3 on the
+[review of 11 October](../../docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md),
+pending adoption. The first commit disclosed OpenAI Codex assistance, and the pinned
+commit removed the disclosure.
+
+**[PingYou n153 certificate 2026-10-11]**: PingYou Ltd’s exact rational certificate for
+n = 153, by its account Ryan Xu’s n70 construction composed with its reflection and an
+upright completion, its contacts reclosed at a new angle, pinned at
+`bc328a7d727aedd0eabebd6ea80285f572b65d2d`, kept as a derived exact fact, no upstream
+byte retained; [packet](web/pingyou-n153-certificate-2026-10-11/README.md).
+Both project exact routes accept the replayed certificate and refuse both controls, and
+a third exact route agrees and held the fact to the pinned certificate and witness.
+T-148 records the side at V3/C3 on the same review, pending adoption; the lineage from
+the n70 is by construction, not by pose.
+The release makes no statement about AI assistance.
+
+## Daniil Ostashev’s and Robert Barnett’s certificates, 11 October 2026
+
+**[Ostashev records 2026-10-11]**: Daniil Ostashev’s exact rational certificates for n =
+155, 156 and 211, new packings his README says were built from scratch, pinned at the
+head the record read, `c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49`, and retained as the
+source wrote them under its MIT licence;
+[packet](web/dostashev-records-2026-10-11/README.md).
+Both project exact routes accept all three and refuse all six controls, and a third
+exact route agrees and held every file to its pinned bytes.
+T-149 records the sides at V3/C3 on the
+[review of 11 October](../../docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md),
+pending adoption; the issue prints the larger sides the head replaced.
+The source states nothing about AI assistance.
+
+**[Barnett refinements 2026-10-11]**: Robert Barnett’s exact rational certificates for n
+= 146 and 261, refinements of Ryan Xu’s packings, pinned at
+`2573ff51c4b160c952bbb2d1c399e7430d9f9ae2`, kept as derived exact facts, no upstream
+byte retained; [packet](web/barnett-refinements-2026-10-11/README.md).
+Both project exact routes accept all seven replayed certificates, the five the README
+marks superseded among them, and refuse all 14 controls, and a third exact route agrees
+on the two requested and held each fact to its pinned certificate.
+T-150 records the two sides at V3/C3 on the same review, pending adoption; the five
+superseded certificates are registered nowhere.
+OpenAI Codex assistance disclosed.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

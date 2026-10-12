@@ -102,13 +102,14 @@ allowlist:
   - path: packing/devtools/check_half_angle_area.py
     kind: download
     boundary: >-
-      `decide-imports --upstream` reads certificates and a summary table that #481
-      and #483 publish without a licence and that their packets therefore keep
-      outside Git, fetched from the source repository at the pinned commit into a
-      directory the reviewer names. Each file's SHA-256 is held against the value
-      the packet's acquisition record pinned at import, before the third route's own
-      reader holds it to the retained derived fact. The digest decides no geometry
-      and names no file this repository wrote.
+      `decide-imports --upstream` reads the files a packet pins without retaining:
+      the certificates, tables, witnesses and decimal poses that a source publishes
+      without a licence, which its packet therefore keeps outside Git, fetched from
+      the source repository at the pinned commit into a directory the reviewer
+      names. Each file's SHA-256
+      is held against the value the packet's acquisition record pinned at import,
+      before the third route's own reader holds it to the retained derived fact.
+      The digest decides no geometry and names no file this repository wrote.
   - path: packing/devtools/n17_shared_centre_lp.py
     kind: generated-artifact
     boundary: >-

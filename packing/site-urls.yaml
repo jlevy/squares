@@ -3658,7 +3658,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/147.html
   canonical: cases/147.html
@@ -3722,7 +3722,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/154.html
   canonical: cases/154.html
@@ -3738,7 +3738,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/156.html
   canonical: cases/156.html
@@ -3746,7 +3746,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/157.html
   canonical: cases/157.html
@@ -4202,7 +4202,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/208.html
   canonical: cases/208.html
@@ -4242,7 +4242,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/212.html
   canonical: cases/212.html
@@ -4682,7 +4682,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-08'
+  lastmod: '2026-10-11'
   status: live
 - path: cases/262.html
   canonical: cases/262.html
@@ -12682,6 +12682,132 @@ urls:
       - packing/resources/web/evand-regularized-2026-10-10/receipts/exact-certification.json.xz
       - packing/devtools/upper_bound_reports.py
       - packing/devtools/check_half_angle_area.py
+- path: result/t-147.html
+  canonical: result/t-147.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-11'
+  lastmod: '2026-10-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 207
+    established: null
+    attribution:
+      source_keys:
+      - '[PingYou n207 certificate 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-pingyou-503-certificate-report
+    - E-pingyou-503-exact-feasibility
+    artifacts:
+    - packing/resources/web/pingyou-n207-certificate-2026-10-11/README.md
+    - packing/resources/web/pingyou-n207-certificate-2026-10-11/acquisition/claims.json
+    - packing/resources/web/pingyou-n207-certificate-2026-10-11/facts/n-207.yaml.gz
+    - packing/resources/web/pingyou-n207-certificate-2026-10-11/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md
+- path: result/t-148.html
+  canonical: result/t-148.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-11'
+  lastmod: '2026-10-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 153
+    established: null
+    attribution:
+      source_keys:
+      - '[PingYou n153 certificate 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-pingyou-504-certificate-report
+    - E-pingyou-504-exact-feasibility
+    artifacts:
+    - packing/resources/web/pingyou-n153-certificate-2026-10-11/README.md
+    - packing/resources/web/pingyou-n153-certificate-2026-10-11/acquisition/claims.json
+    - packing/resources/web/pingyou-n153-certificate-2026-10-11/facts/n-153.yaml.gz
+    - packing/resources/web/pingyou-n153-certificate-2026-10-11/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md
+- path: result/t-149.html
+  canonical: result/t-149.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-11'
+  lastmod: '2026-10-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 155
+      - 156
+      - 211
+    established: null
+    attribution:
+      source_keys:
+      - '[Ostashev records 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-ostashev-501-certificate-report
+    - E-ostashev-501-exact-feasibility
+    artifacts:
+    - packing/resources/web/dostashev-records-2026-10-11/README.md
+    - packing/resources/web/dostashev-records-2026-10-11/acquisition/claims.json
+    - packing/resources/web/dostashev-records-2026-10-11/source/records/n0155.sqcert
+    - packing/resources/web/dostashev-records-2026-10-11/source/records/n0156.sqcert
+    - packing/resources/web/dostashev-records-2026-10-11/source/records/n0211.sqcert
+    - packing/resources/web/dostashev-records-2026-10-11/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md
+- path: result/t-150.html
+  canonical: result/t-150.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-11'
+  lastmod: '2026-10-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 146
+      - 261
+    established: null
+    attribution:
+      source_keys:
+      - '[Barnett refinements 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-barnett-505-certificate-report
+    - E-barnett-505-exact-feasibility
+    artifacts:
+    - packing/resources/web/barnett-refinements-2026-10-11/README.md
+    - packing/resources/web/barnett-refinements-2026-10-11/acquisition/claims.json
+    - packing/resources/web/barnett-refinements-2026-10-11/facts/n-146.yaml.gz
+    - packing/resources/web/barnett-refinements-2026-10-11/facts/n-261.yaml.gz
+    - packing/resources/web/barnett-refinements-2026-10-11/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md
 - path: results.html
   canonical: results.html
   kind: page

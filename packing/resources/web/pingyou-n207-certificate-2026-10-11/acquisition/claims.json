@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/503",
+  "source": "https://github.com/BuddenPing/square-packing-certificates",
+  "revision": "9dc93b6ac2f8fefe038062a74c9a75bf05afdba6",
+  "read_on": "2026-10-11",
+  "read_at_main": "3a5a91a90f997a65da52c42000769c1e6b6c3eae",
+  "horizon": 324,
+  "results": [
+    {"n": 207, "certificate": "n207.cert.json", "format": "pingyou-json", "requested": true, "replayed": true, "offered_side": "148809603730436756319360591381170501178639/10000000000000000000000000000000000000000", "printed_in": "https://github.com/jlevy/squares/issues/503", "exact_side": "148809603730436756319360591381170501178639/10000000000000000000000000000000000000000", "ceiling": "14.8809603730436757", "first_committed": "2026-10-11T10:26:22Z", "grid_side": "15", "case": {"source_key": "[Gupta rational refinements 2026-10-08]", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta", "result": "T-127", "reported_value": "14.8879922583026574", "verified_value": "14.8879922583026574", "evidence": ["E-gupta-438-exact-feasibility"], "exact_side": "14887992258302657381304248932763/1000000000000000000000000000000", "relation": "below", "difference": "70318852589817493681897946459498821361/10000000000000000000000000000000000000000"}, "pending": [{"report": "T-136 (#481)", "url": "https://github.com/jlevy/squares/issues/481", "holders": "Nate Chaoweeraprasit", "result": "T-136", "exact_side": "735531374822863515605402999283143325118010869312518967079087271050773613271161277/49412586952851805135714733794522095254473298746909591292001747563872946931057236", "relation": "below", "difference": "561566119752145196382213151511157612292412366301123554719544009107918336617638430772103602656997773331381846907604549/123531467382129512839286834486305238136183246867273978230004368909682367327643090000000000000000000000000000000000000000"}], "smallest": "this certificate"}
+  ]
+}

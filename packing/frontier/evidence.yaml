@@ -30995,3 +30995,430 @@ evidence:
       a model family (RG-6). Finite feasibility only: no lower bound, optimum, local
       minimum, same-packing connectivity, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-11'
+
+  - id: E-pingyou-503-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [207]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou n207 certificate 2026-10-11]'
+    certificate: packing/resources/web/pingyou-n207-certificate-2026-10-11/facts/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-11 intake pass under
+        think-720n, prompted separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md accepted the
+        certificate for finite feasibility only, with seven non-blocking findings (RV-1 to
+        RV-7); the replay it reproduced is E-pingyou-503-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of one exact rational certificate at
+      9dc93b6, rational centre and half-angle rows in SQUISH's JSON kept as a derived exact
+      fact with no upstream byte retained; its stated side and centres already carry its
+      stated guard dilation, 10000000001/10000000000. The author reports that three exact
+      Fraction checkers of its own accept all 21,321 pairs and every wall, that its
+      reconstruction script rebuilds every pose and the side from the n70 parent, and that
+      this repository's exact_verify and check_rational_witness_independent at 5b0eb012
+      accept its corners Witness/v2; the checkers, the reconstruction and the conversion
+      were prepared in one workflow, and none of the source's programs was run here. The
+      first commit and the issue as first posted disclosed OpenAI Codex assistance, and the
+      pinned commit removed the disclosure (RV-1). The repository replay and its review are
+      E-pingyou-503-exact-feasibility. No local or global optimality claim.
+    source_reviewed: '2026-10-11'
+
+  - id: E-pingyou-503-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [207]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou n207 certificate 2026-10-11]'
+    certificate: packing/resources/web/pingyou-n207-certificate-2026-10-11/facts/n-207.yaml.gz
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      pingyou-n207-certificate-2026-10-11 check --replay decides all three retained jobs
+      again through both maintained routes, serially in one process, and holds each to its
+      retained row (all equal, 134.8 s wall on 2026-10-11 on a loaded host); check-claims
+      rebuilds the frozen comparison (equal, 7.4 s); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 --imports '#503' '#504'
+      --upstream pingyou-n207-certificate-2026-10-11 DIR503 --upstream
+      pingyou-n153-certificate-2026-10-11 DIR504 decides the certificate by the third route
+      with six controls, holds its side, poses, margins and frozen claim to the record, and,
+      with DIR503 the files of 9dc93b6 fetched at the pin, holds the fact to n207.cert.json
+      and pingyou-n207-rational.yaml read by the route's own readers (no disagreement,
+      59.4 s for both imports).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-11 intake pass under
+        think-720n, prompted separately from the import lane
+      note: >-
+        Accepted for finite feasibility only. All three retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at the side, every pose, the wall clearance and the frozen claim; its six
+        controls reached their required outcomes, and the fact is the packing its pinned
+        certificate and its pinned witness state. Findings RV-1 to RV-7, none blocking.
+    limitations: >-
+      The certificate passes both maintained routes and the third route; both kernel
+      controls are refused by both maintained routes and the six third-route controls
+      reach their required outcomes. The receipt's three jobs hold 127926 pair decisions,
+      54.66 route CPU seconds and 103.49 job wall seconds; the longest job took 40.08 s.
+      The positive clears every wall by exactly 1/(2*10^10), no square touches a wall, and
+      every pair clears by a least Euclidean distance of 1.000000e-10. The certificate
+      already carries its guard dilation and states its centres in [0, S]^2; no adapter
+      moves anything. The source ran both maintained routes itself on its witness at
+      5b0eb012 (RV-2): their relation to the generator rests on their authorship, which
+      predates the source and shares nothing with its generator or its three checkers, and
+      on the third route, which the source did not run. Nothing retained binds the derived
+      fact to the bytes it was derived from (RV-3): the review held it to its upstream
+      certificate and witness, fetched at the pin with the SHA-256 the packet pins, once on
+      2026-10-11. The kernel's controls are gross (RV-4). The maintained routes share one
+      parse, half-angle conversion and the separating-axis method, and all three share
+      Fraction arithmetic. No private-worker custody is on file (RV-6). Finite feasibility
+      only: no lower bound, optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-11'
+
+  - id: E-pingyou-504-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [153]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[PingYou n153 certificate 2026-10-11]'
+    certificate: packing/resources/web/pingyou-n153-certificate-2026-10-11/facts/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-11 intake pass under
+        think-720n, prompted separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md accepted the
+        certificate for finite feasibility only, with seven non-blocking findings (RV-1 to
+        RV-7); the replay it reproduced is E-pingyou-504-exact-feasibility. The lineage
+        from Ryan Xu's n70 is the source's account of its construction and is not a
+        placement of the n70 by pose (RV-5).
+    limitations: >-
+      This atom records the source author's report of one exact rational certificate at
+      bc328a7, rational centre and half-angle rows in SQUISH's JSON kept as a derived exact
+      fact with no upstream byte retained; its stated side and centres already carry its
+      stated guard dilation, 5000000000001/5000000000000. The author reports that three
+      exact Fraction checkers of its own accept all 11,628 pairs and every wall, that its
+      reconstruction script rebuilds the certificate exactly from an explicit rational
+      construction table, that a SymPy script checks the identity behind the chosen angle,
+      and that this repository's exact_verify and check_rational_witness_independent at
+      5b0eb012 accept its corners Witness/v2; none of the source's programs was run here.
+      The construction table comes from an exploratory selection and a floating-point solve
+      the release does not repeat. The source makes no statement about AI assistance; the
+      same author's n207 release disclosed OpenAI Codex assistance and removed the
+      disclosure at its pin (RV-1). The repository replay and its review are
+      E-pingyou-504-exact-feasibility. No local or global optimality claim, and no claim
+      that the undilated contact solution is feasible.
+    source_reviewed: '2026-10-11'
+
+  - id: E-pingyou-504-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [153]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[PingYou n153 certificate 2026-10-11]'
+    certificate: packing/resources/web/pingyou-n153-certificate-2026-10-11/facts/n-153.yaml.gz
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      pingyou-n153-certificate-2026-10-11 check --replay decides all three retained jobs
+      again through both maintained routes, serially in one process, and holds each to its
+      retained row (all equal, 52.3 s wall on 2026-10-11 on a loaded host); check-claims
+      rebuilds the frozen comparison (equal, 4.2 s); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 --imports '#503' '#504'
+      --upstream pingyou-n207-certificate-2026-10-11 DIR503 --upstream
+      pingyou-n153-certificate-2026-10-11 DIR504 decides the certificate by the third route
+      with six controls, holds its side, poses, margins and frozen claim to the record, and,
+      with DIR504 the files of bc328a7 fetched at the pin, holds the fact to n153.cert.json
+      and pingyou-n153-rational.yaml read by the route's own readers (no disagreement,
+      59.4 s for both imports).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-11 intake pass under
+        think-720n, prompted separately from the import lane
+      note: >-
+        Accepted for finite feasibility only. All three retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at the side, every pose, the wall clearance and the frozen claim; its six
+        controls reached their required outcomes, and the fact is the packing its pinned
+        certificate and its pinned witness state. Findings RV-1 to RV-7, none blocking.
+    limitations: >-
+      The certificate passes both maintained routes and the third route; both kernel
+      controls are refused by both maintained routes and the six third-route controls
+      reach their required outcomes. The receipt's three jobs hold 69768 pair decisions,
+      24.09 route CPU seconds and 70.27 job wall seconds; the longest job took 24.79 s.
+      The positive clears every wall by exactly 1/10^13, no square touches a wall, and
+      every pair clears by a least Euclidean distance of 1.885826e-13. The certificate
+      already carries its guard dilation and states its centres in [0, S]^2; no adapter
+      moves anything. The source ran both maintained routes itself on its witness at
+      5b0eb012 (RV-2): their relation to the generator rests on their authorship, which
+      predates the source and shares nothing with its generator or its three checkers, and
+      on the third route, which the source did not run. Nothing retained binds the derived
+      fact to the bytes it was derived from (RV-3): the review held it to its upstream
+      certificate and witness, fetched at the pin with the SHA-256 the packet pins, once on
+      2026-10-11. The kernel's controls are gross (RV-4). The maintained routes share one
+      parse, half-angle conversion and the separating-axis method, and all three share
+      Fraction arithmetic. The degree-seven equation, its root and the source's
+      reconstruction from its table are not decided here, and the bound does not rest on
+      them. No private-worker custody is on file (RV-6). Finite feasibility only: no lower
+      bound, optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-11'
+
+  - id: E-ostashev-501-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [155, 156, 211]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Ostashev records 2026-10-11]'
+    certificate: packing/resources/web/dostashev-records-2026-10-11/source/records/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-11 intake pass under
+        think-720n, prompted separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md accepted the
+        three certificates for finite feasibility only, with eight non-blocking findings
+        (RW-1 to RW-8); the replay it reproduced is E-ostashev-501-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report of three exact rational certificates at
+      c3d17ab, the repository's head when read, retained byte for byte under the source's
+      MIT licence with its C++ GMP checker and mpmath cross-check. The issue, filed at
+      41019fb, prints that revision's sides, 12.952425406986414, 12.979172613722533 and
+      14.996336737028043; 662a13d and a31a747 lowered 211 and c3d17ab replaced all three
+      certificates with the smaller ones retained here (RW-1). The author reports that each
+      passes its own checker in GMP rationals with no dilation and no tolerance and an
+      80-digit mpmath cross-check, and that each side is the exact optimum of its contact
+      topology with nonnegative KKT multipliers; neither program was built or run here, and
+      the KKT statement is not decided. The source states nothing about AI assistance
+      (RW-2). The repository replay and its review are E-ostashev-501-exact-feasibility. No
+      local or global optimality is registered.
+    source_reviewed: '2026-10-11'
+
+  - id: E-ostashev-501-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [155, 156, 211]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Ostashev records 2026-10-11]'
+    certificate: packing/resources/web/dostashev-records-2026-10-11/source/records/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      dostashev-records-2026-10-11 check --replay decides all nine retained jobs again
+      through both maintained routes, serially in one process, and holds each to its
+      retained row (all equal, 9 min 0 s wall on 2026-10-11 on a loaded host); check-claims
+      rebuilds the frozen comparison (equal, under 2 s); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 --imports '#505' '#501'
+      --upstream barnett-refinements-2026-10-11 DIR505 --upstream
+      dostashev-records-2026-10-11 DIR501 decides the three certificates by the third route
+      with six controls each, holds every side, pose, margin and frozen claim to the
+      record, and, with DIR501 the tree of c3d17ab fetched at the pin, holds each retained
+      sqcert file to its upstream bytes and each side to the README's print there (no
+      disagreement, 235.5 s for both imports).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-11 intake pass under
+        think-720n, prompted separately from the import lane
+      note: >-
+        Accepted for finite feasibility only. All nine retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at every side, pose, wall clearance and frozen claim; its 18 controls
+        reached their required outcomes, every file of the pinned tree matched its digest,
+        and each side is the README's print at the pin. Findings RW-1 to RW-8, none
+        blocking.
+    limitations: >-
+      All three certificates pass both maintained routes and the third route; their six
+      kernel controls are refused by both maintained routes and the 18 third-route controls
+      reach their required outcomes. The receipt's nine jobs hold 277080 pair decisions,
+      280.98 route CPU seconds and 595.29 job wall seconds; the longest job took 118.47 s.
+      Every positive clears every wall by about 5.00e-21, exactly (10^60 + 10^20 + 1)/(2 *
+      10^80) at 155 and 156, and every pair by a least Euclidean distance of 5.000000e-21.
+      The source ran none of these routes: its checkers are its own C++ GMP program and
+      mpmath script, retained and not run. The maintained routes share one parse, half-angle
+      conversion and the separating-axis method, and all three share Fraction arithmetic.
+      The kernel's controls are gross (RW-6). The README's 1e-30 dilation does not match the
+      1e-60 every certificate uses, and nothing here believes either label (RW-8). No
+      private-worker custody is on file. Finite feasibility only: no lower bound, optimum,
+      local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-11'
+
+  - id: E-barnett-505-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [146, 261]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Barnett refinements 2026-10-11]'
+    certificate: packing/resources/web/barnett-refinements-2026-10-11/facts/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-11 intake pass under
+        think-720n, prompted separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md accepted the
+        two certificates for finite feasibility only, with eight non-blocking findings (RW-1
+        to RW-8); the replay it reproduced is E-barnett-505-exact-feasibility. Measured
+        pose by pose, both are Ryan Xu's arrangements, the 146 locally re-optimized and the
+        261 refined in precision (RW-3).
+    limitations: >-
+      This atom records the source author's report of two exact rational certificates at
+      2573ff5, in Evan Daniel's format, kept as derived exact facts with no upstream byte
+      retained, since the repository states no licence. The author reports four exact
+      rational checks with zero acceptance tolerance: a separating-axis and a polygon
+      checker of the same assisted project, which the repository does not hold, and Evan
+      Daniel's unchanged verify_cert.py and verify_cert2.py at 268af52; and David
+      Ellsworth's check_packing.py on 140-digit exports at tolerance 1e-90 as numerical
+      evidence. None was run here, nor the minimum-movement sequential linear program the
+      certificates came from. The same commit holds five superseded certificates, at 70,
+      103, 123, 237 and 295, which the author excludes and the packet replays, and one at
+      n = 2043, beyond the corpus, pinned and not replayed (RW-4, RW-5). OpenAI Codex
+      assistance disclosed. The repository replay and its review are
+      E-barnett-505-exact-feasibility. No local or global optimality claim.
+    source_reviewed: '2026-10-11'
+
+  - id: E-barnett-505-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [146, 261]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Barnett refinements 2026-10-11]'
+    certificate: packing/resources/web/barnett-refinements-2026-10-11/facts/
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.upper_bound_reports
+      barnett-refinements-2026-10-11 check --replay decides all 21 retained jobs, the two
+      requested certificates and the five superseded ones each with their two controls,
+      again through both maintained routes, serially in one process, and holds each to its
+      retained row (all equal, 17 min 56 s wall on 2026-10-11 on a loaded host);
+      check-claims rebuilds the frozen comparison (equal, 13 s); python -m
+      devtools.check_half_angle_area decide-imports --workers 1 --imports '#505' '#501'
+      --upstream barnett-refinements-2026-10-11 DIR505 --upstream
+      dostashev-records-2026-10-11 DIR501 decides the two requested certificates by the
+      third route with six controls each, holds every side, pose, margin and frozen claim
+      to the record, measures each against Ryan Xu's certificate and Evan Daniel's view,
+      and, with DIR505 the tree of 2573ff5 fetched at the pin, holds each fact to n146.cert
+      and n261.cert read by the route's own reader (no disagreement, 235.5 s for both
+      imports).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-check-half-angle-area
+      - V-evand-exact-certificates
+    independence_record: docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-11'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane of the 2026-10-11 intake pass under
+        think-720n, prompted separately from the import lane
+      note: >-
+        Accepted for finite feasibility only. All 21 retained jobs reproduced on both
+        maintained routes, the frozen comparison rebuilt equal, and the third route agreed
+        with them at both requested sides, every pose, the wall clearances and the frozen
+        claim; its 12 controls reached their required outcomes, and each fact is the
+        packing its pinned certificate states. Findings RW-1 to RW-8, none blocking.
+    limitations: >-
+      Both requested certificates pass both maintained routes and the third route; their
+      four kernel controls are refused by both maintained routes and the 12 third-route
+      controls reach their required outcomes. The receipt's 21 jobs, which include the five
+      superseded certificates, hold 786102 pair decisions, 530.82 route CPU seconds and
+      1329.06 job wall seconds; the longest job took 224.09 s. At 146 and 261 every wall
+      clears by at least 3.925867e-14 and 4.688122e-14 and every pair by a least Euclidean
+      distance of 1.206274e-16 and 1.206060e-16. No route here is the source's code, and
+      the source ran none of them. Nothing retained binds the derived facts to the bytes
+      they were derived from (RW-7): the review held the two requested ones to their
+      upstream certificates, fetched at the pin with the SHA-256 the packet pins, once on
+      2026-10-11, and the five superseded facts were not bound. The kernel's controls are
+      gross (RW-6). The maintained routes share one parse, half-angle conversion and the
+      separating-axis method, and all three share Fraction arithmetic. No private-worker
+      custody is on file. Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-11'
