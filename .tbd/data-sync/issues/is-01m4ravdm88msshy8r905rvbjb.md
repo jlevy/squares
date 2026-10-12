@@ -3,15 +3,19 @@ type: is
 id: is-01m4ravdm88msshy8r905rvbjb
 title: Diagnose local polynomial-stack worker subprocess timeouts
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/handoff-2026-10-10-polynomial-pr-stack.md
+delegate: codex@spud10
 labels: []
 dependencies: []
 parent_id: is-01m4ma117y5ygnz88exhchnjp0
+hold: null
+hold_until: null
 created_at: 2026-10-12T15:14:13.255Z
-updated_at: 2026-10-12T15:14:13.255Z
+updated_at: 2026-10-12T16:55:32.536Z
+started_at: 2026-10-12T16:55:32.535Z
 ---
 # Diagnose local polynomial-stack worker timeouts
 
