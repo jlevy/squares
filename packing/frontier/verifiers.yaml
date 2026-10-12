@@ -408,7 +408,7 @@ verifiers:
 
   - id: V-kleddamag-n11-verify
     program: verify.py, its Python checker and its JavaScript BigInt secondary checker
-    author: Kleddamag
+    author: Overbeck
     provenance: external
     language: [Python, JavaScript]
     methods: [exact-algebraic]
@@ -427,7 +427,7 @@ verifiers:
 
   - id: V-kleddamag-n17-verify
     program: verify.py, its Python checker and its Node BigInt checker
-    author: Kleddamag
+    author: Overbeck
     provenance: external
     language: [Python, JavaScript]
     methods: [exact-algebraic]
@@ -451,7 +451,7 @@ verifiers:
       - sha256: c22091862df631f8cfd1f1bb8e5013f0b9c216f20be268fcd7104768919c49b7
         path: packing/resources/web/n17-kleddamag-466001-2026-09-27/kleddamag-17-squares-certified-bound/bounds/4.66001/verify_global_variable.js
         note: the Node BigInt checker of 4.66001, which Guzhou0806's R067 to R071 bundle byte for byte
-    note: Guzhou0806's paired n = 17 launchers run Kleddamag's Node BigInt checker beside their own C++.
+    note: Guzhou0806's paired n = 17 launchers run Overbeck's Node BigInt checker beside their own C++.
 
   - id: V-wang-li-n11-verify
     program: verify.py of the Zenodo release
@@ -502,7 +502,7 @@ verifiers:
     methods: [exact-algebraic]
     role: decides
     summary: >-
-      The source's C++ exclusion checker, run interval by interval beside Kleddamag's
+      The source's C++ exclusion checker, run interval by interval beside Overbeck's
       Node BigInt checker by the paired launcher, which requires both to pass.
     source:
       - packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/certificates/R068-C010/upstream/cpp/verify.cpp
@@ -720,7 +720,7 @@ verifiers:
     role: decides
     summary: >-
       The source's ceiling transfer for the fixed B = 9977/10000 and its general pose
-      tree, which reports exact per-row minima for Kleddamag's n = 11 certificate.
+      tree, which reports exact per-row minima for Overbeck's n = 11 certificate.
     source:
       - packing/resources/web/wand125-tools-2026-09-29/upstream.tar.gz
     versions:
@@ -1069,7 +1069,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Runs the pinned general pose tree on every row of Kleddamag's n = 11 certificate,
+      Runs the pinned general pose tree on every row of Overbeck's n = 11 certificate,
       binds the inputs, requires row-minimum equality and re-evaluates each witness exactly.
     source: [packing/devtools/check_general_pose_tree_census.py]
 

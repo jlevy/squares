@@ -242,7 +242,7 @@ sources:
     audit under think-3i74. Source and LFS pointer inventory retained; large certificate payloads
     are not yet locally acquired. The source explicitly says its sanitized public derivative has no
     fresh full geometric replay. No verified frontier value changes on intake. This is distinct from
-    Kleddamag's T-037 lower bound and wand125's T-059 row-minimum equality.
+    Marc Leonard Overbeck's T-037 lower bound and wand125's T-059 row-minimum equality.
 - id: queuingtheorydotcom-11squaresformalized-2026-10-06
   title: Lean 4 formalization of the eleven-square optimality proof
   role: source-repository
@@ -705,7 +705,7 @@ sources:
   evidence:
   - E-n017-kleddamag-466001-report
   - E-n017-kleddamag-466001-source-replay
-  notes: 'Kleddamag, building on Squares Project (Joshua Levy), Mira and Guzhou0806: an exact weighted-certificate
+  notes: 'Marc Leonard Overbeck, building on Squares Project (Joshua Levy), Mira and Guzhou0806: an exact weighted-certificate
     proof over 2,168 orientation intervals. Commit 57519bb74085157cb7047ae94c599bce4a006430 of 2026-09-27,
     untagged (the release''s CHANGELOG lists it as unreleased), retained on 2026-09-27 as the 33 files
     that changed or were added since v1.1.0; of the other 103, 29 are byte-identical to the retained
@@ -734,10 +734,10 @@ sources:
   - E-n017-guzhou-r068-report
   - E-n017-guzhou-r068-source-replay
   notes: Guzhou0806 / N17 project's R068 release at 815b16261f852e389968513eec94b4b9e5b3206d, continuing
-    Kleddamag's public 4.66001 charge (Kleddamag building on Squares Project (Joshua Levy), Mira and
+    Marc Leonard Overbeck's public 4.66001 charge (Overbeck building on Squares Project (Joshua Levy), Mira and
     Guzhou0806), retained on 2026-09-28 as the 93 files that changed or were added since 6f64e4b2,
     with R067 in the same packet. Its publisher ran no local validation and did not observe CI; the
-    complete paired replay here (Guzhou0806's C++ checker and Kleddamag's Node BigInt checker, byte
+    complete paired replay here (Guzhou0806's C++ checker and Overbeck's Node BigInt checker, byte
     for byte) matched the published ledgers on every one of 4,991 rows. One event-cell method, so
     V4/C3 and no method-distinct C4; the native parent-core route cannot represent the weighted-threshold
     and winning-subset features. It held the verified field from 2026-09-29 to 2026-10-05, when the
@@ -769,9 +769,9 @@ sources:
     no bound and that neither bound, the replay nor the audit reads (the C028 and C029 geometry trees
     were retained at first and pinned the same day). It carries the case''s verified lower bound,
     18641771/4000000, since 2026-10-05, and carried the reported one until 2026-10-12, when
-    Overbeck''s candidate equality (overbeck-n17-candidate-2026) took that lane. Its partition records are missing and
+    Marc Leonard Overbeck''s candidate equality (overbeck-n17-candidate-2026) took that lane. Its partition records are missing and
     a completion summary is retained; the source''s CI replay passed and was not observed by its publisher.
-    The complete paired replay here (Guzhou0806''s C++ checker and Kleddamag''s Node BigInt checker
+    The complete paired replay here (Guzhou0806''s C++ checker and Overbeck''s Node BigInt checker
     through the source''s run_public.js, 3,238 CPU-seconds) found the two fresh ledgers identical
     on every one of 5,114 rows, every row at 1000026844, and both checkers refuse two mutated certificates;
     one event-cell method, so V3/C3. R070 at 8988d933e10fe89709a01d98b602396c29dd7bd1, 46604427/10000000
@@ -795,7 +795,7 @@ sources:
   - frontier/n-017.md
   evidence:
   - E-n017-guzhou-r067-source-replay
-  notes: Guzhou0806 / N17 project's R067 release at d4e2c287408b416683f7d1b7f19e69fb7c592d73, Kleddamag's
+  notes: Guzhou0806 / N17 project's R067 release at d4e2c287408b416683f7d1b7f19e69fb7c592d73, Marc Leonard Overbeck's
     4.66001 charge unchanged at a larger parent side over 2,808 intervals, retained in the R068 packet.
     Its complete paired replay here matched the published ledgers on every row (V4/C3). Superseded
     the same day by R068 (guzhou-n17-r068-2026), so it never carried the case's bound.
@@ -817,7 +817,7 @@ sources:
   evidence:
   - E-n017-kleddamag-4640020-report
   - E-n017-kleddamag-4640020-source-replay
-  notes: Kleddamag, building on Squares Project (Joshua Levy), Mira and Guzhou0806. The v1.1.0 release
+  notes: Marc Leonard Overbeck, building on Squares Project (Joshua Levy), Mira and Guzhou0806. The v1.1.0 release
     at 13821ddfa24133a8d796648383464574404d5fa0, retained on 2026-09-27 as the 37 files that changed
     or were added since v1.0.0; the other 74 are byte-identical to the retained v1.0.0 tree (kleddamag-n17-2026),
     and the two packets together pass the release's own 110-file manifest check. Both complete source
@@ -847,7 +847,7 @@ sources:
     with the R042, R043 and R050 publication records; the Node checker is rebuilt offline from the
     retained R038 scanner. All four source replay modes passed here, both full sweeps reproducing
     the source's ledgers. Registered at V4/C3; the native route refuses the certificate at its engine
-    ceilings, so no method-distinct C4 is claimed. Superseded on 2026-09-27 by Kleddamag's v1.1.0
+    ceilings, so no method-distinct C4 is claimed. Superseded on 2026-09-27 by Marc Leonard Overbeck's v1.1.0
     (kleddamag-n17-4640020-2026) and kept as the previous verified bound.
 - id: kleddamag-n17-2026
   title: Seventeen unit squares — a certified lower bound
@@ -936,7 +936,7 @@ sources:
     2026-09-25T16:50:31Z) claims s(17) > 462003/100000 = 4.62003 by an exact D4 site deformation of
     R052 and two four-way angle splits: 15,727 rows, surplus 2 units of 10^-12. Retained as a publication
     record, with the source''s own validation record and local receipts for its records, containment
-    and new C++ full modes. Kleddamag''s public 4.640020 of 2026-09-26 supersedes it, so it carries
+    and new C++ full modes. Marc Leonard Overbeck''s public 4.640020 of 2026-09-26 supersedes it, so it carries
     no bound here and was not reviewed; the C++ kernel runs the same exact event-cell sweep as the
     source''s Python and Node/BigInt checkers, so it adds no method-distinct decision.'
 - id: tokoharu-density-2026
