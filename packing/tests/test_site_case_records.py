@@ -732,6 +732,12 @@ def test_case_summaries_keep_math_and_layout_when_fetched(
             if n == 291 and width == 1280 and theme == "light":
                 _case_bounds_at_the_two_column_boundary(direct_page)
                 direct_page.set_viewport_size({"width": width, "height": 900})
+                # The reduced-motion transition can keep the narrow figure for one
+                # frame after restoring the wide article. Require its 20rem size
+                # before comparing this snapshot with the fetched record.
+                site_browser.api().expect(direct_page.locator(".site-case-figure")).to_have_css(
+                    "inline-size", f"{20 * direct_page.evaluate(LAYOUT)['rem']:g}px"
+                )
             direct = direct_page.evaluate(LAYOUT)
             if n == 291:
                 direct_page.screenshot(path=tmp_path / f"n291-direct-{width}-{theme}.png")
