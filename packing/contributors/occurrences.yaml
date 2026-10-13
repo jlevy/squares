@@ -491,9 +491,11 @@ occurrences:
   end: 9
   label: Ellsworth
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Nagamochi 2005]'
@@ -1529,9 +1531,11 @@ occurrences:
   end: 40
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[evand exact optima 2026-10-05]'
@@ -4573,9 +4577,11 @@ occurrences:
   end: 22
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[griffcass square-packing 2026-09-23]'
@@ -4598,9 +4604,11 @@ occurrences:
   end: 9
   label: Ellsworth
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ellsworth n69 2026-09-24]'
@@ -4610,9 +4618,11 @@ occurrences:
   end: 9
   label: Ellsworth
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ellsworth n69 2026-09-24]'
@@ -4682,9 +4692,11 @@ occurrences:
   end: 9
   label: Ellsworth
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n83 2026-09-24]'
@@ -4706,9 +4718,11 @@ occurrences:
   end: 16
   label: Ellsworth
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n83 2026-09-24]'
@@ -4754,9 +4768,11 @@ occurrences:
   end: 57
   label: Bidwell
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-credit
+  contributor_id: john-bidwell
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n87 2026-09-24]'
@@ -4790,9 +4806,11 @@ occurrences:
   end: 21
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Chang n87 2026-09-24]'
@@ -4898,9 +4916,11 @@ occurrences:
   end: 31
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH n153 2026-10-07]'
@@ -4934,9 +4954,11 @@ occurrences:
   end: 31
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH update 2026-10-07]'
@@ -4983,9 +5005,11 @@ occurrences:
   end: 41
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH second update 2026-10-07]'
@@ -5019,9 +5043,11 @@ occurrences:
   end: 31
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH second update 2026-10-07]'
@@ -5208,9 +5234,13 @@ occurrences:
   end: 28
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/CREDITS.md
+    names David Ellsworth as the catalogue’s maintainer.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel new arrangements 2026-10-07]'
@@ -5445,9 +5475,13 @@ occurrences:
   end: 49
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: packing/resources/web/couzo-exact-refinements-2026-10-08/README.md names David
+    Ellsworth’s refine_packing.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact refinements 2026-10-08]'
@@ -5716,9 +5750,13 @@ occurrences:
   end: 33
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: packing/resources/web/couzo-followup-refinements-2026-10-08/README.md names
+    David Ellsworth’s refine_packing.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo follow-up refinements 2026-10-08]'
@@ -6141,9 +6179,13 @@ occurrences:
   end: 68
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: packing/resources/web/couzo-exact-certificates-2026-10-09/README.md names
+    David Ellsworth’s refine_packing.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact certificates 2026-10-09]'
@@ -6227,9 +6269,13 @@ occurrences:
   end: 54
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: packing/resources/web/fang-two-wedge-certificates-2026-10-10/source/README.md
+    names David Ellsworth’s seed packings.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang two-wedge certificates 2026-10-10]'
@@ -6330,9 +6376,11 @@ occurrences:
   end: 58
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -6472,9 +6520,13 @@ occurrences:
   end: 45
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: packing/resources/web/mishapolk-decimal-poses-2026-10-09/README.md names David
+    Ellsworth’s check_packing.py and text format.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk decimal poses 2026-10-09]'
@@ -6663,9 +6715,13 @@ occurrences:
   end: 61
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: packing/resources/web/couzo-certificates-2026-10-10/README.md names David
+    Ellsworth’s refine_packing.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-10]'
@@ -7524,9 +7580,13 @@ occurrences:
   end: 45
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: packing/resources/web/squish-500-fourth-request-2026-10-11/README.md names
+    David Ellsworth’s check_packing.py and text format.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH fourth request 2026-10-11]'
@@ -7625,9 +7685,13 @@ occurrences:
   end: 52
   label: Ellsworth
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: packing/resources/web/couzo-certificates-2026-10-11/README.md names David
+    Ellsworth’s refine_packing.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-11]'
@@ -8270,9 +8334,11 @@ occurrences:
   end: 12
   label: John Bidwell
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - survey-credit
+  contributor_id: john-bidwell
 - origin:
     path: packing/frontier/n-017.md
     record_key: '17'
@@ -8500,9 +8566,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-028.md
     record_key: '28'
@@ -8537,9 +8605,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-029.md
     record_key: '29'
@@ -9007,9 +9077,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-053.md
     record_key: '53'
@@ -9081,9 +9153,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-055.md
     record_key: '55'
@@ -9359,9 +9433,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-069.md
     record_key: '69'
@@ -9626,9 +9702,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-083.md
     record_key: '83'
@@ -9754,9 +9832,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-087.md
     record_key: '87'
@@ -9778,9 +9858,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-087.md
     record_key: '87'
@@ -10592,9 +10674,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-128.md
     record_key: '128'
@@ -10604,9 +10688,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-128.md
     record_key: '128'
@@ -10995,9 +11081,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-150.md
     record_key: '150'
@@ -11020,9 +11108,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-151.md
     record_key: '151'
@@ -11376,9 +11466,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-171.md
     record_key: '171'
@@ -11996,9 +12088,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-203.md
     record_key: '203'
@@ -12034,9 +12128,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-205.md
     record_key: '205'
@@ -12046,9 +12142,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-205.md
     record_key: '205'
@@ -12455,9 +12553,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-227.md
     record_key: '227'
@@ -12516,9 +12616,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-230.md
     record_key: '230'
@@ -12592,9 +12694,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-234.md
     record_key: '234'
@@ -12604,9 +12708,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-234.md
     record_key: '234'
@@ -12629,9 +12735,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-235.md
     record_key: '235'
@@ -13052,9 +13160,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-257.md
     record_key: '257'
@@ -13149,9 +13259,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-260.md
     record_key: '260'
@@ -13797,9 +13909,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-293.md
     record_key: '293'
@@ -13961,9 +14075,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-300.md
     record_key: '300'
@@ -13973,9 +14089,11 @@ occurrences:
   end: 15
   label: David Ellsworth
   role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - catalogue-credits
+  - catalogue-byline
+  contributor_id: david-ellsworth
 - origin:
     path: packing/frontier/n-300.md
     record_key: '300'
