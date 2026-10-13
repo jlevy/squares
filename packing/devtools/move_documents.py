@@ -13,8 +13,11 @@ now stands somewhere else. This rewrites all of them from one move list:
   covers ``document-map.yaml``, declared ``recorded_in`` paths and code constants.
 
 Frozen records keep the paths they recorded: the literature archive, bead
-reconciliation receipts and patches are excluded, and ``--exclude`` adds more. Bead
-``spec_path`` values live in the tracker, not the tree; repoint them with ``tbd``.
+reconciliation receipts and patches are excluded, and ``--exclude`` adds more. A file
+whose Git blob a tracked tool pins (a replay binding its sources byte for byte, such as
+``devtools.replay_bc303_t1_witness``) is kept as it stands and reported, since any edit
+breaks that binding. Bead ``spec_path`` values live in the tracker, not the tree;
+repoint them with ``tbd``.
 """
 
 from __future__ import annotations
@@ -42,6 +45,9 @@ TEXT_SUFFIXES = frozenset(
 INLINE_LINK = re.compile(r"(!?\[[^\]]*\]\()(<?)([^)\s>]+)(>?)((?:\s+\"[^\"]*\")?\))")
 REFERENCE_LINK = re.compile(r"^(\s{0,3}\[[^\]]+\]:\s*)(<?)(\S+?)(>?)(\s|$)", re.MULTILINE)
 PATH_CHARACTER = r"[A-Za-z0-9_.\-/]"
+#: Where tools that pin a file's Git blob live; a pinned blob freezes that file's bytes.
+PINNING_TOOLS = "packing/devtools/*.py"
+BLOB = re.compile(r"\b[0-9a-f]{40}\b")
 
 
 @dataclass
@@ -52,6 +58,7 @@ class Plan:
     rewrites: dict[str, str] = field(default_factory=dict)
     counts: dict[str, int] = field(default_factory=dict)
     problems: list[str] = field(default_factory=list)
+    kept: list[str] = field(default_factory=list)
 
 
 def tracked(repo: Path) -> list[str]:
@@ -59,6 +66,28 @@ def tracked(repo: Path) -> list[str]:
         ["git", "-C", str(repo), "ls-files", "-z"], check=True, capture_output=True
     ).stdout
     return sorted(path for path in listed.decode().split("\0") if path)
+
+
+def blobs(repo: Path) -> dict[str, str]:
+    """Each tracked path's staged blob hash."""
+    listed = subprocess.run(
+        ["git", "-C", str(repo), "ls-files", "-s", "-z"], check=True, capture_output=True
+    ).stdout
+    found: dict[str, str] = {}
+    for entry in listed.decode().split("\0"):
+        if entry:
+            meta, _, path = entry.partition("\t")
+            found[path] = meta.split()[1]
+    return found
+
+
+def pinned_blobs(repo: Path, files: list[str]) -> frozenset[str]:
+    """Blob hashes that a tracked tool names, which freeze the files that carry them."""
+    pinned: set[str] = set()
+    for path in files:
+        if fnmatch.fnmatch(path, PINNING_TOOLS):
+            pinned.update(BLOB.findall((repo / path).read_text(encoding="utf-8")))
+    return frozenset(pinned)
 
 
 def excluded(path: str, patterns: tuple[str, ...]) -> bool:
@@ -115,6 +144,8 @@ def plan(moves: dict[str, str], repo: Path, excludes: tuple[str, ...]) -> Plan:
             result.problems.append(f"target already exists: {new}")
     if result.problems:
         return result
+    frozen = pinned_blobs(repo, files)
+    staged = blobs(repo)
     for path in files:
         if Path(path).suffix not in TEXT_SUFFIXES or excluded(path, excludes):
             continue
@@ -123,7 +154,9 @@ def plan(moves: dict[str, str], repo: Path, excludes: tuple[str, ...]) -> Plan:
         except OSError, UnicodeDecodeError:
             continue
         updated, count = rewrite(text, path, moves)
-        if updated != text:
+        if updated != text and staged.get(path) in frozen:
+            result.kept.append(path)
+        elif updated != text:
             result.rewrites[path] = updated
             result.counts[path] = count
     return result
@@ -169,6 +202,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"move {old} -> {new}")
     for path, count in sorted(result.counts.items()):
         print(f"  {count:3d} reference(s) in {path}")
+    for path in result.kept:
+        print(f"  kept, its blob is pinned by a tool: {path}")
     if args.apply:
         apply(result, args.repo)
         print(f"applied {len(moves)} move(s), rewrote {len(result.rewrites)} file(s)")

@@ -84,3 +84,24 @@ def test_two_moved_siblings_keep_linking_each_other() -> None:
     moves = {f"{ACTIVE}/a.md": f"{DONE}/a.md", f"{ACTIVE}/b.md": f"{DONE}/b.md"}
     text, count = rewrite("[b](b.md) and [b](./b.md)\n", f"{ACTIVE}/a.md", moves)
     assert (text, count) == ("[b](b.md) and [b](./b.md)\n", 0)
+
+
+def test_a_file_whose_blob_a_tool_pins_keeps_its_bytes(tree: Path) -> None:
+    record = tree / "docs/project/reviews/bound.md"
+    record.parent.mkdir(parents=True, exist_ok=True)
+    record.write_text(f"The review began while `{ACTIVE}/a.md` changed.\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(tree), "add", "docs/project/reviews/bound.md"], check=True)
+    blob = subprocess.run(
+        ["git", "-C", str(tree), "hash-object", str(record)],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    tool = tree / "packing/devtools/replay.py"
+    tool.parent.mkdir(parents=True, exist_ok=True)
+    tool.write_text(f'SOURCE = ("docs/project/reviews/bound.md", "{blob}")\n', encoding="utf-8")
+    subprocess.run(["git", "-C", str(tree), "add", "packing/devtools/replay.py"], check=True)
+    result = plan({f"{ACTIVE}/a.md": f"{DONE}/a.md"}, tree, DEFAULT_EXCLUDES)
+    assert result.kept == ["docs/project/reviews/bound.md"]
+    assert "docs/project/reviews/bound.md" not in result.rewrites
+    assert "README.md" in result.rewrites
