@@ -57,7 +57,7 @@ authorized. No unchanged retry is selected.
 The [scalar probe in Agenda 025](../agendas/agenda-025-adaptive-fractional-frontier.md)
 tests the first selected side between the retained 3.81 certificate and the unfinished
 3.82 bracket. The
-[continuation addendum](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
+[continuation addendum](../../../docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md)
 owns its literal command, seed mapping and cooperative process deadline.
 
 A row-converged objective below eleven starts the existing rationalization and

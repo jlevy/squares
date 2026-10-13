@@ -13,7 +13,7 @@ The geometry records, drawings and exports in this directory are generated.
 [`credit-attributions.json`](credit-attributions.json) is the curated input for
 lower-bound and optimality-proof acknowledgments; it retains names, roles, source
 references and evidenced dates without changing any scientific result.
-[FIGURE-PLAYBOOK.md](FIGURE-PLAYBOOK.md) is the playbook for both: how to rebuild them,
+[figure-playbook.md](figure-playbook.md) is the playbook for both: how to rebuild them,
 where each fact on them comes from, what a third would take, and how the poster’s byte
 budget was measured.
 
@@ -151,7 +151,7 @@ chosen:
 uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --report
 ```
 
-[The playbook](FIGURE-PLAYBOOK.md#the-two-composites) has the measurements and what each
+[The playbook](figure-playbook.md#the-two-composites) has the measurements and what each
 one bought.
 
 ## The regularized views
@@ -394,7 +394,7 @@ Commit those data records and re-pin the release before redrawing the composites
 The two composites and their exports are drawn apart, by `--update-composites`, at a
 version bump or on demand; each states the data commit it was drawn from, and
 `--check-composites` holds it to that statement without rebuilding anything
-([the figure playbook](FIGURE-PLAYBOOK.md#rebuild-it)). `--report` measures what those
+([the figure playbook](figure-playbook.md#rebuild-it)). `--report` measures what those
 exports cost — bytes, square polygons, bytes per square, and how each composite encodes
 a square — without rebuilding anything.
 Rasters are drawn by cairosvg, the same renderer that draws the PDFs, so every export of

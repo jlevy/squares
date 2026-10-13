@@ -92,7 +92,7 @@ values:
       - packing/frontier/results.yaml
       - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
       - packing/campaign/explorations/X-014-closing-from-both-ends.md
-      - docs/project/handoff-2026-09-04-block-close.md
+      - docs/project/handoffs/handoff-2026-09-04-block-close.md
     notes: >-
       Result narrative only: no run log or checkpoint was retained, and nothing was
       frozen at this side, since an objective of exactly eleven admits no certificate.
@@ -117,7 +117,7 @@ values:
       - packing/frontier/results.yaml
       - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
       - packing/campaign/explorations/X-014-closing-from-both-ends.md
-      - docs/project/handoff-2026-09-04-block-close.md
+      - docs/project/handoffs/handoff-2026-09-04-block-close.md
     notes: >-
       Seeded from the retained 381/100 certificate's own 1121 atoms. Result narrative
       only: no run log or checkpoint was retained and nothing was frozen at this side.
@@ -839,7 +839,7 @@ values:
     recorded_in:
       - packing/frontier/results.yaml
       - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
-      - docs/project/handoff-2026-09-04-block-close.md
+      - docs/project/handoffs/handoff-2026-09-04-block-close.md
     notes: >-
       538 orbits under D4; the site count is not recorded, nor rows or rounds. No raw
       run was retained and nothing was frozen: an objective of exactly eighteen admits
@@ -861,7 +861,7 @@ values:
     recorded_in:
       - packing/frontier/results.yaml
       - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
-      - docs/project/handoff-2026-09-04-block-close.md
+      - docs/project/handoffs/handoff-2026-09-04-block-close.md
     notes: >-
       578 orbits under D4; the site count is not recorded, nor rows or rounds. No raw
       run was retained and nothing was frozen: an objective of exactly eighteen admits
@@ -884,7 +884,7 @@ values:
     recorded_in:
       - packing/frontier/results.yaml
       - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
-      - docs/project/handoff-2026-09-04-block-close.md
+      - docs/project/handoffs/handoff-2026-09-04-block-close.md
     notes: >-
       618 orbits under D4; the site count is not recorded. The row set grew from 15888
       to 27516 over the run. Both readings stay open, a covering value at or above

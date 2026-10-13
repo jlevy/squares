@@ -78,7 +78,7 @@ The $s(11) > 31/8 = 3.875$ of Marc Leonard Overbeck (Kleddamag) remains the earl
 verified T-037 bound, and Wang and Li’s scaling of its certificate,
 $s(11) > 3875000000/999999999$ (T-061), a later historical one.
 Future research follows the
-[payoff policy](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#research-payoff-and-exposition):
+[payoff policy](docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md#research-payoff-and-exposition):
 prioritize substantial bound improvements and methods or theorems that make them
 possible.
 
@@ -721,11 +721,12 @@ case or experiment separately.
 | [Session 173: Windows owned-Job supervision](packing/campaign/results/session-173-windows-supervision/README.md) | typed session record | record | retained | — |
 | [Windows owned-Job supervision](packing/devtools/windows-supervision.md) | engineering and validation rules | current | maintained | — |
 | [Retained n17 diagnostics](packing/devtools/n17-diagnostics.md) | engineering and validation rules | current | maintained | — |
-| [The n = 17 Optimality Proof, Explained](docs/project/n17-optimality-explainer.md) | first-principles tutorial | supporting | maintained | — |
+| [The n = 17 Optimality Proof, Explained](docs/project/guides/n17-optimality-explainer.md) | first-principles tutorial | supporting | maintained | — |
 | [N11: A Three-Paper Explainer Series](docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md) | implementation plan | record | retained | — |
 | [Feature: A Static, Crawlable Site with a Registered URL Scheme](docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md) | implementation plan | record | retained | — |
 | [Feature: Compact Homepage, Consistent Case Layouts, and Scroll-Aware Navigation](docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md) | implementation plan | current | transient | — |
 | [Feature: A Shorter Website Development Loop](docs/project/specs/active/plan-2026-10-10-website-development-loop.md) | implementation plan | current | transient | — |
+| [Feature: One Documentation Layout Under `docs/project/`](docs/project/specs/active/plan-2026-10-11-documentation-organization.md) | implementation plan | current | transient | — |
 | [Proof Review: squarepacker’s k^2 - M(k) >= 0.033 log k](docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md) | dated review record | record | retained | — |
 | [Delta Proof Review: Ryu’s k² − M(k) Bound, Version 1.2](docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md) | dated review record | record | retained | — |
 | [Review of Ryu’s Quarter-Power and Cube-Root Proof Chains](docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md) | dated review record | record | retained | — |
@@ -797,8 +798,8 @@ case or experiment separately.
 | [Session 180: Bounded Producer Memory Investigation](packing/campaign/explorations/X048-session-169-pilots/README.md) | research synthesis | record | retained | — |
 | [A bounded residual-compatibility diagnostic](packing/campaign/explorations/X048-session-170-compatibility/README.md) | research synthesis | record | retained | — |
 | [Session 171: lazy raw-row support](packing/campaign/explorations/X048-session-171-raw-row-support/README.md) | research synthesis | record | retained | — |
-| [D1: lazy raw-piece row support on the frozen B state](packing/campaign/explorations/X048-session-171-raw-row-support/D1_REPORT.md) | research synthesis | record | retained | — |
-| [D2: forward checking and MRV on the same raw graph](packing/campaign/explorations/X048-session-171-raw-row-support/D2_REPORT.md) | research synthesis | record | retained | — |
+| [D1: lazy raw-piece row support on the frozen B state](packing/campaign/explorations/X048-session-171-raw-row-support/d1-report.md) | research synthesis | record | retained | — |
+| [D2: forward checking and MRV on the same raw graph](packing/campaign/explorations/X048-session-171-raw-row-support/d2-report.md) | research synthesis | record | retained | — |
 | [Session 172: the frozen raw binary graph supports every row](packing/campaign/explorations/X048-session-172-capacity-support/README.md) | research synthesis | record | retained | — |
 | [Fixed-witness half-interval/octagon sensitivity](packing/campaign/explorations/X048-session-174-core-refinement/README.md) | research synthesis | record | retained | — |
 | [Enhanced-model replacement supports](packing/campaign/explorations/X048-session-175-enhanced-support/README.md) | research synthesis | record | retained | — |
@@ -861,8 +862,8 @@ case or experiment separately.
 | [Research: Annealing for Square Packing, and How Far It Actually Reaches](docs/project/research/research-2026-09-08-annealing-for-square-packing.md) | research synthesis | supporting | maintained | — |
 | [Video Spikes: The Sources, Not the Pages](packing/atlas/known-best/video/spikes/README.md) | component scope and use | supporting | maintained | — |
 | [A Pages Preview, Served Locally](packing/strategies/preview/README.md) | component scope and use | supporting | maintained | — |
-| [Slideshow candidate v1 — notes](packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md) | research synthesis | record | retained | — |
-| [Spike v2: animated transitions between consecutive known-best packings](packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md) | research synthesis | record | retained | — |
+| [Slideshow candidate v1 — notes](packing/atlas/known-best/video/spikes/v1-slideshow/notes.md) | research synthesis | record | retained | — |
+| [Spike v2: animated transitions between consecutive known-best packings](packing/atlas/known-best/video/spikes/v2-transitions/notes.md) | research synthesis | record | retained | — |
 | [stats-summary.md](packing/atlas/known-best/video/spikes/v2-transitions/stats-summary.md) | generated status view | record | retained | — |
 | [A6 Fixed-Support Dual Admission](packing/cases/n11_fractional_certificate/a6_dual_upper/README.md) | research synthesis | record | retained | — |
 | [A6 Scope and Overnight Plan Review](docs/project/reviews/review-2026-09-10-n11-a6-scope-and-plan.md) | dated review record | record | retained | — |
@@ -1007,7 +1008,7 @@ case or experiment separately.
 | [Exp-224 n=19 at Four Times the Budget](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-224-n19-10x/exp-224-n19-10x-receipt.md) | research synthesis | record | retained | — |
 | [Exp-225 n=27, n=28 and n=29 at 548/100 by Re-Bumping the n=29 Atoms](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-225-n27-n28-548-100-rebump-receipt.md) | research synthesis | record | retained | — |
 | [Exp-226 The `n = 11` Threshold Atoms at the 2880-Step Net](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-226-n11-net2880-receipt.md) | research synthesis | record | retained | — |
-| [Handoff: the Low-`n` Review, the Efficiency Block, and the 2880 Rung, 22 September 2026](docs/project/handoff-2026-09-22-low-n-review-and-the-2880-rung.md) | dated handoff record | record | retained | — |
+| [Handoff: the Low-`n` Review, the Efficiency Block, and the 2880 Rung, 22 September 2026](docs/project/handoffs/handoff-2026-09-22-low-n-review-and-the-2880-rung.md) | dated handoff record | record | retained | — |
 | [n=20 973/200 T-021-Seeded Four-Grid Window-7 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n20-973-200-t021-grid4-windows7-receipt.md) | research synthesis | record | retained | — |
 | [n=20 973/200 T-021-Seeded Four-Grid Window-7 2400 s Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n20-973-200-t021-grid4-windows7-2400-receipt.md) | research synthesis | record | retained | — |
 | [n=21 97/20 T-021-Seeded Auto Window-6 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n21-97-20-t021-auto-windows6-receipt.md) | research synthesis | record | retained | — |
@@ -1064,8 +1065,8 @@ case or experiment separately.
 | [sqverify-fast](packing/sqverify_fast/README.md) | component scope and use | supporting | maintained | — |
 | [n17bb-native](packing/n17bb_native/README.md) | component scope and use | supporting | maintained | — |
 | [n17_kernel_verifier: an independent Rust verifier of n = 17 kernel certificates](packing/n17_kernel_verify/README.md) | component scope and use | supporting | maintained | — |
-| [Provenance of `n17_kernel_verifier/`](packing/n17_kernel_verify/PROVENANCE.md) | component scope and use | supporting | maintained | — |
-| [Tests](packing/n17_kernel_verify/TESTING.md) | component scope and use | supporting | maintained | — |
+| [Provenance of `n17_kernel_verifier/`](packing/n17_kernel_verify/provenance.md) | component scope and use | supporting | maintained | — |
+| [Tests](packing/n17_kernel_verify/testing.md) | component scope and use | supporting | maintained | — |
 | [Native n17 Branch-and-Bound Benchmark](packing/benchmarks/n17-bb-native/README.md) | component scope and use | supporting | maintained | — |
 | [Milestone A Census](packing/benchmarks/measure-verifier/census/README.md) | generated status view | generated | generated | — |
 | [Milestone B Census](packing/benchmarks/measure-verifier/census-mixed/README.md) | generated status view | generated | generated | — |
@@ -1165,7 +1166,7 @@ case or experiment separately.
 | [BC-260 Direct Hybrid Contracts](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md) | dated review record | record | retained | — |
 | [Stromquist’s 1984 Memos and Systematic Dots Proofs](docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md) | research synthesis | supporting | maintained | — |
 | [Review: Incorporating Stromquist’s Memos and Helper Arguments](docs/project/reviews/review-2026-09-07-stromquist-incorporation.md) | dated review record | record | retained | — |
-| [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/stromquist-helper-arguments-math-review.md) | dated review record | supporting | maintained | — |
+| [Stromquist’s Helper Arguments and Conditional Dots Certificates](docs/project/reviews/review-2026-09-07-stromquist-helper-arguments.md) | dated review record | supporting | maintained | — |
 | [Five-Dot Obstruction for the Six-Square Problem](docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md) | dated review record | record | retained | — |
 | [An Explicit Five-Point Piercing Obstruction Near Side Three](docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md) | dated review record | record | retained | — |
 | [Stromquist’s Segment Helper: An Independent Derivation](docs/project/reviews/review-2026-09-07-stromquist-segment-helper.md) | dated review record | record | retained | — |
@@ -1190,7 +1191,8 @@ case or experiment separately.
 | [Packing Atlas](packing/atlas/README.md) | component scope and use | supporting | maintained | — |
 | [Enumerated Contact-Scaffold Atlas](packing/atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |
 | [Known-Best Packing Atlas, `n = 1..324`](packing/atlas/known-best/README.md) | component scope and use | supporting | maintained | — |
-| [Composite figure playbook](packing/atlas/known-best/FIGURE-PLAYBOOK.md) | component scope and use | supporting | maintained | — |
+| [Composite figure playbook](packing/atlas/known-best/figure-playbook.md) | component scope and use | supporting | maintained | — |
+| [Design System](packing/devtools/templates/paper-design.md) | component scope and use | supporting | maintained | — |
 | [Prospective Packing Atlas, `n = 101..324`](packing/atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](packing/atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
@@ -1335,7 +1337,7 @@ case or experiment separately.
 | [Review 2026-09-04 — PR #80, the Stacked Hardening of the s(11) ≥ 381/100 Claim](docs/project/reviews/review-2026-09-04-pr80-stacked-hardening.md) | dated review record | record | retained | — |
 | [Adversarial review of the \(s(11)\ge 3.81\) claim](docs/project/reviews/review-2026-09-05-gpt6-pro-adversarial-review.md) | dated review record | record | retained | — |
 | [Review: external strategies for pushing the \(s(11)\) lower bound past 3.81](docs/project/reviews/review-2026-09-05-strategy-gpt-56-pro-gemini-grok.md) | dated review record | record | superseded | [X-016 — After 3.81: Two Managers, Six Gates, One Proof Boundary](packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md) |
-| [Adversarial Senior Review of the Agenda 024 Portfolio](docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md) | dated review record | record | superseded | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) |
+| [Adversarial Senior Review of the Agenda 024 Portfolio](docs/project/reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md) | dated review record | record | superseded | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoffs/handoff-2026-09-06-post-381-t2-commissioning.md) |
 | [Independent Review of the T-022 Exact-Containment Limit](docs/project/reviews/review-2026-09-06-t022-dilation-limit.md) | dated review record | record | retained | — |
 | [Independent Review of the Fixed-Weight Core-Shrink Obstruction](docs/project/reviews/review-2026-09-06-core-shrink-obstruction.md) | dated review record | record | retained | — |
 | [Research: Adversarial Review of the s(11) ≥ 381/100 Explainer](docs/project/reviews/review-2026-09-06-claude-code-adversarial-review.md) | dated review record | record | retained | — |
@@ -1366,7 +1368,7 @@ case or experiment separately.
 | [Rectangle Corner Bound and Pending-Box Review](docs/project/reviews/review-2026-09-29-rectangle-corner-bound.md) | dated review record | record | retained | — |
 | [Exact Rectangle Derivative Bound](docs/project/reviews/review-2026-09-30-rectangle-derivative-bound.md) | dated review record | record | retained | — |
 | [Validation Parallelism Efficiency Block](docs/project/reviews/review-2026-09-29-validation-parallelism.md) | dated review record | record | retained | — |
-| [Verification Tooling and Its Boundaries](docs/project/verification-tooling.md) | component scope and use | record | retained | — |
+| [Verification Tooling and Its Boundaries](docs/project/guides/verification-tooling.md) | component scope and use | record | retained | — |
 | [Native Rectangle Verification and wand125 Tools Intake](docs/project/specs/active/plan-2026-09-29-native-rectangle-verification.md) | implementation plan | record | maintained | — |
 | [Proof Review: Evan Daniel’s `s(21) = 5` and `s(45) = 7` by Mixed Covers](docs/project/reviews/review-2026-09-28-evand-s21-s45-mixed-covers.md) | dated review record | record | retained | — |
 | [Post-optimality W3: First Discriminators](docs/project/reviews/review-2026-10-01-post-optimality-w3-opening.md) | dated review record | record | retained | — |
@@ -1399,11 +1401,11 @@ case or experiment separately.
 | [Review: The Interval Route for T-056 and T-057 (`devtools.upper_bound_intervals`)](docs/project/reviews/review-2026-09-30-interval-route-t056-t057.md) | dated review record | record | retained | — |
 | [Mathematical Review: Wang–Li `s(11) > 3875000000/999999999` (issue #247)](docs/project/reviews/review-2026-09-30-issue-247-wang-li-n11.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Kernel-Checked `s(13) = 4`, Built Here](docs/project/reviews/review-2026-09-30-lean-s13.md) | dated review record | record | retained | — |
-| [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
-| [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
-| [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
-| [Handoff: the `n = 17` External Intake, 21 September 2026](docs/project/handoff-2026-09-21-n17-external-intake.md) | dated handoff record | record | retained | — |
-| [Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [The Three-Lane Research Method](docs/project/guides/three-lane-research-method.md) | component scope and use | record | retained | — |
+| [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoffs/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
+| [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoffs/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
+| [Handoff: the `n = 17` External Intake, 21 September 2026](docs/project/handoffs/handoff-2026-09-21-n17-external-intake.md) | dated handoff record | record | retained | — |
+| [Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10](docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Self-Contained Package for Third-Party Checking of s(11) ≥ 19/5](packing/cases/n11_fractional_certificate/thirdparty/README.md) | component scope and use | record | retained | — |
 | [W3 Lower-Bound Direction Diagnostics](packing/cases/w3_lower_bound_directions/README.md) | component scope and use | record | retained | — |
 | [Lean Feasibility Spike for the `s(11) ≥ 381/100` Certificate](packing/cases/n11_fractional_certificate/lean-spike/README.md) | component scope and use | supporting | maintained | — |
@@ -1423,8 +1425,8 @@ case or experiment separately.
 | [Prospective Exact Census of Coarse Owner Classes](packing/cases/n11_five_dot_cover/owner-case-census-design.md) | research synthesis | record | retained | — |
 | [Verifiable Claim: $s(11) \ge 19/5$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md) | generated status view | generated | generated | — |
 | [Verifiable Claim: $s(11) \ge 381/100$](packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md) | generated status view | generated | generated | — |
-| [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
-| [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [Handoff: Where the Square-Packing Loop Stands](docs/project/handoffs/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
 | [Postmortem: Three Catalogue Intakes Nobody Owned](docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md) | failure analysis and lessons | record | retained | — |
 | [Proof Verification Consolidation and Independent n11 Completion](docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md) | implementation plan | current | transient | — |
@@ -3029,7 +3031,7 @@ upstream tbd proposal.
 Automatic exhaustive selection and evidence reuse remain planned.
 
 **Research continuation.** The
-[T+2-to-T+10 continuation addendum](docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md)
+[T+2-to-T+10 continuation addendum](docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md)
 is the cold-review entry point for the partially completed post-T+2 continuation.
 The
 [Agenda 024 allocation](packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
@@ -4104,9 +4106,9 @@ geometry witness.
 
 ### Verification Capability Ladder
 
-The [verification tooling overview](docs/project/verification-tooling.md) maps feasible
-witnesses, point and threshold certificates, adaptive parent cores, rectangle densities,
-and mixed covers to their actual checkers and remaining gaps.
+The [verification tooling overview](docs/project/guides/verification-tooling.md) maps
+feasible witnesses, point and threshold certificates, adaptive parent cores, rectangle
+densities, and mixed covers to their actual checkers and remaining gaps.
 Native point and threshold gates have complete distinct coverage methods.
 The native rectangle prototype passes a complete analytic control; existing retained
 rectangle-bound replays still use Tokoharu’s checker, with independent exact premises

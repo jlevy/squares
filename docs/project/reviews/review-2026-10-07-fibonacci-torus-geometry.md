@@ -158,10 +158,10 @@ The
 [current witness](../../../packing/frontier/n-017.md#three-orientation-classes-and-a-correction)
 uses ten aligned squares, six at $+39.8049589798^\circ$ and one at
 $-36.6237863834^\circ$. The
-[endpoint analysis](../n17-optimality-explainer.md#the-local-half) has three individual
-slides and a free square, yielding six free directions; its target is a family.
-One point on a fixed two-dimensional torus cannot continuously parameterize an open
-six-dimensional family reversibly.
+[endpoint analysis](../guides/n17-optimality-explainer.md#the-local-half) has three
+individual slides and a free square, yielding six free directions; its target is a
+family. One point on a fixed two-dimensional torus cannot continuously parameterize an
+open six-dimensional family reversibly.
 An extension needs additional marks or varying torus data.
 This does not obstruct an encoding with enough parameters, and it does not decide the
 still-open global optimum at 17.

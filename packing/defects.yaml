@@ -2150,7 +2150,7 @@ defects:
   regression: none
   recurrence_of: D-034
   bead: think-dqhd
-  recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+  recorded_in: docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md
 - id: D-077
   title: The PR 16 handoff presented stale state and priorities as a current dependency queue
   date: '2026-08-23'
@@ -2173,7 +2173,7 @@ defects:
   regression: none
   recurrence_of: D-028
   bead: think-sk4a
-  recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+  recorded_in: docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md
 - id: D-078
   title: The n=5 rank correction still named equality independence as the sufficient condition
   date: '2026-08-23'
@@ -2221,7 +2221,7 @@ defects:
   regression: none
   recurrence_of: D-063
   bead: think-djru
-  recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+  recorded_in: docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md
 - id: D-080
   title: The original neighbor-transfer criterion was satisfied by the cold-start grid
   date: '2026-08-24'

@@ -1377,8 +1377,8 @@ being separated into different surfaces.
 $4.66044 < s(17) \le 4.675530\ldots$, and a proof by the shape that settled $n = 11$ is
 in progress, with its cover and its local half proved and its global half and capture
 not. [§9](#9-how-an-optimality-proof-is-built) explains the machinery in general, and
-[the `n = 17` explainer](docs/project/n17-optimality-explainer.md) gives the case’s
-numbers, records and status, with no forecast of success.
+[the `n = 17` explainer](docs/project/guides/n17-optimality-explainer.md) gives the
+case’s numbers, records and status, with no forecast of success.
 
 Items 1 and 2 decide whether the cartography strategy is sound.
 Items 3, 5, and 6 have concrete experimental or engineering paths.
@@ -1397,8 +1397,9 @@ graph.
 This section explains those pieces in general, as they apply to any $n$ whose best
 known packing is to be proved optimal.
 $n = 11$, where the proof is complete, and $n = 17$, where one is in progress, supply
-the illustrations; the [`n = 17` explainer](docs/project/n17-optimality-explainer.md)
-gives that case’s numbers, records and status, and nothing below is a result about it.
+the illustrations; the
+[`n = 17` explainer](docs/project/guides/n17-optimality-explainer.md) gives that case’s
+numbers, records and status, and nothing below is a result about it.
 
 ### Three parts
 
@@ -1959,7 +1960,7 @@ An optional system is used only to rederive one constant.
 | If you want | Read |
 | --- | --- |
 | the state of the program, and every result with its status | [`SYNOPSIS.md`](SYNOPSIS.md)—**start here after this page** |
-| the $n = 17$ optimality proof in progress, with its numbers, records and status | [The `n = 17` explainer](docs/project/n17-optimality-explainer.md) |
+| the $n = 17$ optimality proof in progress, with its numbers, records and status | [The `n = 17` explainer](docs/project/guides/n17-optimality-explainer.md) |
 | what is in the directory and how to run it | [`README.md`](README.md) |
 | every rule the directory runs on, and which are machine-checked | [`conventions.md`](conventions.md) |
 | the mutable size-by-size experiment priority queue | [Basin confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |

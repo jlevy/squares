@@ -9,7 +9,7 @@ The separately preregistered continuation uses D1 revision
 `f0b94b047ada6c22ae69fd3a4b49ca13cd206fee`, parent PR 307
 `1525d4e03b891d6cbc9a7c0bb3fd1880765cfb65`, and the same cold-checked B saved state.
 No producer or model change occurred.
-[D1](D1_REPORT.md) remains frozen.
+[D1](d1-report.md) remains frozen.
 
 ## Search and preservation
 

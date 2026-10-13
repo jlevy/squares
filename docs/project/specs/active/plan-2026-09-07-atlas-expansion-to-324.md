@@ -423,7 +423,7 @@ The site publishes the poster family beside the first figure once Phase 4 closes
 
 ## References
 
-- [`packing/atlas/known-best/FIGURE-PLAYBOOK.md`](../../../../packing/atlas/known-best/FIGURE-PLAYBOOK.md),
+- [`packing/atlas/known-best/figure-playbook.md`](../../../../packing/atlas/known-best/figure-playbook.md),
   section “Extending to n = 1..200”
 - [`packing/atlas/prospective/README.md`](../../../../packing/atlas/prospective/README.md),
   “Remaining Work”

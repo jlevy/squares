@@ -1,6 +1,7 @@
 # Handoff: Basin Identity and the Integrated PR Reviews
 
-> **Lifecycle:** Superseded for current guidance by the [synopsis](../../SYNOPSIS.md).
+> **Lifecycle:** Superseded for current guidance by the
+> [synopsis](../../../SYNOPSIS.md).
 > Retained as a dated handoff.
 
 **Date:** 2026-08-23
@@ -13,7 +14,7 @@ This handoff covers the atlas, basin identity, and the independent response to t
 standing program review.
 For the quench engine, start with
 [`handoff-2026-08-23-quench-spine.md`](handoff-2026-08-23-quench-spine.md).
-For claims and current evidence, [`SYNOPSIS.md`](../../SYNOPSIS.md) is authoritative.
+For claims and current evidence, [`SYNOPSIS.md`](../../../SYNOPSIS.md) is authoritative.
 
 ## Current state
 

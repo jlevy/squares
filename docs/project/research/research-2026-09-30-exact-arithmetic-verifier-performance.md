@@ -397,10 +397,10 @@ end-to-end verifier benchmark answer different questions.
 
 ### Upstream C++ and Stronger Bounds Are Separate Comparisons
 
-The retained [tooling overview](../verification-tooling.md) records that the upstream
-C++ verifier uses outward-rounded binary64 interval arithmetic and different box bounds.
-It is not the same arbitrary-precision rational computation written in another language.
-Its smaller traversal and cheaper operations can both matter.
+The retained [tooling overview](../guides/verification-tooling.md) records that the
+upstream C++ verifier uses outward-rounded binary64 interval arithmetic and different
+box bounds. It is not the same arbitrary-precision rational computation written in
+another language. Its smaller traversal and cheaper operations can both matter.
 A complete upstream run versus a capped, inconclusive independent run is not a matched
 throughput comparison.
 
@@ -755,8 +755,8 @@ any one of them.
   threshold closures.
 - [Reusable transport benchmark](../../../packing/benchmarks/bench_rectangle_rust_transport.py)
   and [exact kernel checker](../../../packing/devtools/check_exact_rust_kernel.py).
-- [Verification tooling overview](../verification-tooling.md): current proof and native
-  verifier status.
+- [Verification tooling overview](../guides/verification-tooling.md): current proof and
+  native verifier status.
 - [August infrastructure study][older-report]: earlier search-predicate and number-field
   benchmarks, with a different performance scope.
 

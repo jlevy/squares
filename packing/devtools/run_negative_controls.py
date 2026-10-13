@@ -431,7 +431,7 @@ PRUNE = frozenset(
         # gone. `e4ad5cedd` (2026-09-30) trimmed the root `README.md` to point at the
         # published site, and it now links neither vector nor any of the four exports.
         # The links that remain are in `atlas/README.md`, `atlas/known-best/README.md` and
-        # `FIGURE-PLAYBOOK.md`, which `linked_pruned_targets` does not scan and no control
+        # `figure-playbook.md`, which `linked_pruned_targets` does not scan and no control
         # link-checks: `check_links` runs on the root README and SYNOPSIS only, and the
         # ledger's `dead_links` on `campaign/` only. A pruned vector now leaves the worker,
         # and the four exports above stopped being inert on the same commit.
@@ -478,7 +478,7 @@ PRUNE = frozenset(
         # beside them are small and stay.
         ROOT / "atlas/known-best/regularized/rendering",
         # The pre-migration transition statistics are frozen historical output;
-        # v2-transitions/NOTES.md records that the live builder now generates its
+        # v2-transitions/notes.md records that the live builder now generates its
         # own statistics elsewhere. No registered control reads this old JSON,
         # and no checked document links it inline. Its 1,371,919 bytes are omitted
         # when Session153's complete proof artifacts take the snapshot to

@@ -63,7 +63,7 @@ exploration:
   - packing/devtools/check_bead_tree.py
   - packing/cases/bentz46/verify_cover.py
   - packing/cases/bentz13/verify_cover.py
-  - docs/project/handoff-2026-09-04-block-close.md
+  - docs/project/handoffs/handoff-2026-09-04-block-close.md
   - SYNOPSIS.md
   - operating-rules.md
   proposes: []
@@ -723,7 +723,7 @@ outcome.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 87 | General unavoidable-set certifier and escaping-pose falsifier (`sqpack/cover.py`, `sqpack/falsify.py`) | BC-093, BC-094 (agenda-010, complete, session-054); X-010 rung A0 and weak points 1, 2, 5; bead `think-yrvm` | produced result (instrument) | T-001, T-002, T-004, T-005 through it | E | consume the shared `sqpack.field` layer (X-010 weak point 5) | none |
 | 88 | Pose-space interval audit (exhaustive branch-and-bound over `(x, y, θ)`) | `cases/green17/interval_audit.py` (BC-106, commit 5af3a486); T-001 C4, T-003 | produced result | T-001 (C4), T-003 | E | generalise to $Q(\sqrt{2}, \sqrt{3})$ for T-004 and run at $2 + 4/\sqrt{5}$ for T-010 | none |
-| 89 | The fractional-certificate decision path: exact sweep, interval route, retention gate `devtools.decide_certificate`, detectors `check_rung_figures`, `check_case_prose`, `check_nagamochi_bounds` | agenda-017 Lane A; `docs/project/handoff-2026-09-04-block-close.md` §"The instrument"; D-434, D-439–D-443 | produced result | C4 on T-017–T-020 | E | rows 38–39 | none |
+| 89 | The fractional-certificate decision path: exact sweep, interval route, retention gate `devtools.decide_certificate`, detectors `check_rung_figures`, `check_case_prose`, `check_nagamochi_bounds` | agenda-017 Lane A; `docs/project/handoffs/handoff-2026-09-04-block-close.md` §"The instrument"; D-434, D-439–D-443 | produced result | C4 on T-017–T-020 | E | rows 38–39 | none |
 | 90 | Third-party validation package, proof card, and proof document for T-018 | `cases/n11_fractional_certificate/thirdparty/` (c68c1616), `t-018-proof-card.md` (then `PROOF-CARD.md`), `t-018-proof.md`, since superseded by `t-018-verifiable-claim-381-100.md`; commits 2026-09-05 | produced result (record) | T-018 at C5 | E | none | retired |
 | 91 | Interval certification bridge (Krawczyk operator, witness contract) and the $n = 29$ interval certificate | BC-052, BC-053, BC-057 (agenda-006, complete); `cases/kingbird29/certify_interval.py` (24a7dd04); D-431 outstanding | produced result | T-009 | E | C4 by exact-algebraic confirmation of the same witness (T-009 `next_rung`) | none |
 | 92 | Exact algebraic characterisation of the $n = 29$ record | X-004 (four unregistered candidates); BC-042–048, BC-054, BC-059–061, BC-065–067, BC-070–073 (agendas 005–006: Bézout 1,039,500; BKK 15,744; integer-relation refusal at the supported degree); H-038 | ran, no result (exact solve not reached) | none | E | X-004 candidates 1–2: elimination or integer relation at a declared degree bound | the refusal at the supported degree stands (BC-073) |

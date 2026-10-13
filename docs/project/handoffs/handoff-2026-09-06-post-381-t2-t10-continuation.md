@@ -1,7 +1,7 @@
 # Continuation Addendum: Post-3.81 Portfolio, T+2 Through T+10
 
 **Historical handoff, superseded:** the
-[current handoff](../../SYNOPSIS.md#current-handoff) governs new work.
+[current handoff](../../../SYNOPSIS.md#current-handoff) governs new work.
 The instructions and clock below are retained as the record of the September 6 recovery.
 
 The current operator handoff requires PR 97 to land before the selected research starts
@@ -11,11 +11,11 @@ Status: **recovery checkpoint published in PR 97; the next research sequence is 
 selected from the completed evidence.**
 
 The
-[Agenda 024 allocation](../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
+[Agenda 024 allocation](../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md#current-allocation)
 owns prospective priorities.
 BC-250 (`think-j1f5`) links the
-[tbd assessment](specs/done/plan-2026-09-06-post-381-research-sequence.md), which covers
-both prior reviews, the core-shrink obstruction, and the retained Lean spike.
+[tbd assessment](../specs/done/plan-2026-09-06-post-381-research-sequence.md), which
+covers both prior reviews, the core-shrink obstruction, and the retained Lean spike.
 After the planning block closes, coordinator `think-jgnv` dispatches BC-251, BC-231,
 BC-254, and BC-255 under their H-items and readiness conditions.
 Independent review can take the third worker slot.
@@ -58,10 +58,10 @@ accounting entry. Neither boundary promises completion at active minute 600.
 - BC-241’s source-distinct review is complete and accepted at the
   retained-record-dependent local scope.
   Its checker, controls, and
-  [closure packet](../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md)
+  [closure packet](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/gate-hour-04.md)
   were published in `ad600896`; no global capture or optimality conclusion follows.
 - H-090 and H-091’s transport ending at `96ff4751` passed
-  [independent review](reviews/review-2026-09-06-core-shrink-obstruction.md) and was
+  [independent review](../reviews/review-2026-09-06-core-shrink-obstruction.md) and was
   merged with its experiment ancestry preserved in `f9ba790a`. The accepted obstruction
   closes the ordinary-containment improvement window for the frozen sites, net, and
   relative weights. `think-xsma` owns the separately authorized H-092/exp-112
@@ -72,7 +72,7 @@ accounting entry. Neither boundary promises completion at active minute 600.
 
 The nominal T+4 integration decision is being closed on completed evidence at actual
 active minute **124:14**, under the
-[BC-220 decision](../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/gate-hour-04-decision.md).
+[BC-220 decision](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/gate-hour-04-decision.md).
 This current-execution amendment supersedes every historical instruction below to wait
 until minute 240, reserve or launch BC-232’s final 30-minute leg, or restart successors
 at a nominal clock label.
@@ -117,7 +117,7 @@ bounded editorial and mechanical work.
 `think-3y51` tracks this user-directed revision.
 
 Current handoffs also follow
-[OR-16](../../operating-rules.md#or-16-use-git-for-repository-integrity-reserve-checksums-for-real-trust-boundaries).
+[OR-16](../../../operating-rules.md#or-16-use-git-for-repository-integrity-reserve-checksums-for-real-trust-boundaries).
 Use Git revision and path for repository-owned inputs and outputs.
 This supersedes historical requirements below for a new per-file SHA-256 manifest at
 every handoff or gate.
@@ -127,12 +127,12 @@ Mathematical checks and meaningful content comparisons still apply.
 
 ## Authority and Frozen Boundary
 
-[`agenda-024`](../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md)
+[`agenda-024`](../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md)
 remains the portfolio control plane.
 Its
-[`agenda-025`](../../packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md)
+[`agenda-025`](../../../packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md)
 and
-[`agenda-026`](../../packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md)
+[`agenda-026`](../../../packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md)
 manager programs remain authoritative except where this addendum narrows or sequences
 work after T+2. The [`T+2 handoff`](handoff-2026-09-06-post-381-t2-commissioning.md) and
 its linked manager and coordinator packets remain the evidence boundary for the
@@ -258,7 +258,7 @@ It grants no execution authority and changes no bead, edge, criterion, or claim.
 A reviewer reconstructs the program in this order:
 
 1. This addendum for current execution, clocks, and authority.
-2. [`X-016`](../../packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md)
+2. [`X-016`](../../../packing/campaign/explorations/X-016-after-381-two-managers-one-proof-boundary.md)
    for strategic rationale; its original launch schedule is historical.
 3. Agenda 024 and the two manager agendas for portfolio and cell contracts.
 4. The frontier and generated results for established claims.

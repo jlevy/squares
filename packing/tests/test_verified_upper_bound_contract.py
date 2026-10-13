@@ -308,7 +308,7 @@ DECLARED_CONSUMERS = {
         "reads the verified ceiling to measure a bounded transfer-diagnostic gap; it "
         "does not identify that ceiling with s(n) or claim optimality"
     ),
-    "packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md": (
+    "packing/atlas/known-best/video/spikes/v1-slideshow/notes.md": (
         "a retained prototype's notes, listing the record fields the slideshow panel "
         "deliberately does not draw; it names this field to say the figure omits it "
         "because it is a ceiling rather than s(n), which is the contract's own reading"

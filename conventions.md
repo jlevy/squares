@@ -135,8 +135,16 @@ campaign/series/series-000-smoke-and-calibration/results/exp-003-baseline-n11-ta
 The id in the filename must equal the id in the frontmatter.
 [checked] Raw run data takes the id of the round that produced it.
 
-Research documents and reviews keep the repository’s dated form:
-`research-YYYY-MM-DD-topic.md`, `review-YYYY-MM-DD-topic.md`.
+**A project document sits in the `docs/project/` directory named for its kind.**
+[checked] A dated record is named `<kind>-YYYY-MM-DD-topic.md` in `handoffs/`,
+`postmortems/`, `research/`, `reviews/` or `specs/` (where the kind is `plan` or
+`spike`); a maintained document is an undated `topic.md` in `guides/`, or in `policies/`
+for a rule set. Nothing sits loose in `docs/project/`. Every document name is lowercase
+kebab-case, except `README.md`, `AGENTS.md`, `CLAUDE.md` and an `H-`, `X-` or `VE-`
+record id at the start of a record’s name; a new kind of document or of id is added to
+the check first. `check_documentation` holds these rules for every mapped document; its
+`LAYOUT_PENDING` names the documents still waiting to move
+([the plan](docs/project/specs/active/plan-2026-10-11-documentation-organization.md)).
 
 **A case-local document for a registered result is named for the result and for what it
 is: the lowercase result id, then a descriptive kebab-case suffix.** [convention]
@@ -170,6 +178,9 @@ keeps working, as a forwarder for a page and a copy for a file
 
 Use [`repren`](https://github.com/jlevy/repren) for renames—it moves files and rewrites
 references in one pass, which is what keeps the two in step.
+A move into another directory also changes the moved file’s own relative links and the
+links that reach it from its neighbours, which a text rename does not see;
+`check_documentation` names each one left dead.
 
 ## 3. Artifacts
 

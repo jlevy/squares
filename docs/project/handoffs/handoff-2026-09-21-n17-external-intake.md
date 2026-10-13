@@ -29,7 +29,7 @@ Four receipts are retained under
 controls in `packing/tests/test_n17_external_weighted_certificates.py` pin the archived
 bytes and refuse a forged measure.
 
-The [proof review](reviews/review-2026-09-20-n17-r012-and-mira-4613-proof-review.md)
+The [proof review](../reviews/review-2026-09-20-n17-r012-and-mira-4613-proof-review.md)
 found no error in either argument.
 Eleven findings, none blocking.
 It supplies the two steps R012’s written note omits: that the endpoint-only containment

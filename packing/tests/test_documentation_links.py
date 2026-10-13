@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from devtools import check_documentation
-from devtools.check_documentation import _link_problems
+from devtools.check_documentation import _link_problems, _main_link_problems
 
 
 def test_only_declared_cargo_outputs_are_outside_document_map(
@@ -28,6 +28,7 @@ def test_only_declared_cargo_outputs_are_outside_document_map(
     monkeypatch.setattr(check_documentation, "MAP", tmp_path / "docs/project/document-map.yaml")
     monkeypatch.setattr(check_documentation, "SYNOPSIS", synopsis)
     monkeypatch.setattr(check_documentation, "is_vendored", lambda _: False)
+    monkeypatch.setattr(check_documentation, "LAYOUT_PENDING", frozenset())
     monkeypatch.setattr(
         check_documentation,
         "load_map",
@@ -77,3 +78,21 @@ def test_a_link_quoted_in_a_fenced_code_block_is_not_checked(
     assert _link_problems(report) == []
     report.write_text(f"```\n{quoted}\n```\n{quoted}\n")
     assert _link_problems(report) == ["report.md: dead link -> docs/elsewhere.md"]
+
+
+def test_a_link_to_main_is_held_to_the_tree(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """GitHub does not redirect a moved file, so a `main` address must name one that is here."""
+    monkeypatch.setattr(check_documentation, "REPO", tmp_path)
+    (tmp_path / "docs").mkdir()
+    (tmp_path / "docs/kept.md").write_text("# Kept\n")
+    base = "https://github.com/jlevy/squares"
+    report = tmp_path / "report.md"
+    report.write_text(
+        f"[Kept]({base}/blob/main/docs/kept.md#kept) and <{base}/tree/main/docs>.\n"
+        f"Moved: {base}/blob/main/docs/moved.md.\n"
+        f"[Pinned]({base}/blob/0123abc/docs/moved.md)\n"
+        f"```\n{base}/blob/main/docs/quoted.md\n```\n"
+    )
+    assert _main_link_problems(report) == ["report.md: dead link to main -> docs/moved.md"]

@@ -1,6 +1,7 @@
 # Handoff: Where the Square-Packing Loop Stands
 
-> **Lifecycle:** Superseded for current guidance by the [synopsis](../../SYNOPSIS.md).
+> **Lifecycle:** Superseded for current guidance by the
+> [synopsis](../../../SYNOPSIS.md).
 > Retained as a dated handoff.
 
 **Date:** 2026-08-23
@@ -13,18 +14,18 @@ This is a historical checkpoint.
 Canonicalization and the atlas landed after it was written, while terminal-component
 identity, independent runner validity, and the unattended lifecycle remain open.
 Use the
-[current readiness agenda](specs/active/plan-2026-08-23-overnight-cartography-run.md)
+[current readiness agenda](../specs/active/plan-2026-08-23-overnight-cartography-run.md)
 for priorities and go/no-go status; the dated details below are retained as provenance.
 
 This is the short, dated view: where the work stands and what to pick up.
 It is written to be thrown away when it stops being true, so it states positions rather
-than results — [`SYNOPSIS.md`](../../SYNOPSIS.md) is the durable technical account, and
-where the two ever disagree the synopsis is right, because it is reconciled against the
-artifacts in the gate and this is not.
+than results — [`SYNOPSIS.md`](../../../SYNOPSIS.md) is the durable technical account,
+and where the two ever disagree the synopsis is right, because it is reconciled against
+the artifacts in the gate and this is not.
 
-Read this, then [`SYNOPSIS.md`](../../SYNOPSIS.md) for what the numbers actually are,
-then [`conventions.md`](../../conventions.md), then the one or two things you are about
-to work on.
+Read this, then [`SYNOPSIS.md`](../../../SYNOPSIS.md) for what the numbers actually are,
+then [`conventions.md`](../../../conventions.md), then the one or two things you are
+about to work on.
 
 ## The one-paragraph state
 
@@ -69,12 +70,12 @@ Two are done, four are not:
 **Resolving the bead ids.** The `think-*` ids above are *local* `tbd` ids.
 They are not stored in the repository and not in the synced bead data either, which keys
 every issue by a ULID (`is-01...`) — so `think-eq6l` cannot be looked up from a fresh
-clone. Restore the database from the [`tbd-sync`](../../.tbd/config.yml) branch first
+clone. Restore the database from the [`tbd-sync`](../../../.tbd/config.yml) branch first
 (`tbd sync`), after which `tbd show think-eq6l` and `tbd list --spec <the plan>`
 resolve. Until then, the durable handle for each row is the **block name in the first
 column**: every one is a checklist item under *Phase 1: The quench spine* in
-[the plan spec](specs/paused/plan-2026-08-22-minimal-packing-toolkit.md), which needs no
-tooling to read.
+[the plan spec](../specs/paused/plan-2026-08-22-minimal-packing-toolkit.md), which needs
+no tooling to read.
 
 Three hypotheses are `blocked` in the registry — `H-001` (angle-class reduction),
 `H-011` (small-`n` census), `H-012` (the rarity premise) — and all three wait on
@@ -87,7 +88,7 @@ whole cartography programme rests on, deliberately made cheap to kill.
 ## Everything is tracked, and where
 
 - **The plan**:
-  [`plan-2026-08-22-minimal-packing-toolkit.md`](specs/paused/plan-2026-08-22-minimal-packing-toolkit.md),
+  [`plan-2026-08-22-minimal-packing-toolkit.md`](../specs/paused/plan-2026-08-22-minimal-packing-toolkit.md),
   Phases 1–7, each with a bead epic.
   `tbd list --spec <that path>` is the work list; `tbd ready` is the unblocked subset.
   The tree is now checked by the gate — `tools/check_beads.py` refuses an open bead
@@ -96,18 +97,19 @@ whole cartography programme rests on, deliberately made cheap to kill.
   `tbd` binary.
 - **The science**: `campaign/` — the runbook, the idea board, the hypothesis registry,
   one artifact per round, and a generated `ledger.md`. Never hand-edit the ledger.
-- **What has gone wrong**: [`defects.md`](../../defects.md), generated from
+- **What has gone wrong**: [`defects.md`](../../../defects.md), generated from
   `defects.yaml` — every defect with what caught it and what stops it recurring.
-  The counts live there and in [the synopsis](../../SYNOPSIS.md#the-defect-record),
+  The counts live there and in [the synopsis](../../../SYNOPSIS.md#the-defect-record),
   which is reconciled against the same source; do not retype them here.
 - **Known tooling debt**:
-  [the tooling-layout review](reviews/review-2026-08-23-tooling-layout.md) maps what is
-  scattered or misnamed under `explorations/packing/` — including a `pytest` config that
-  collects nothing and exits 0. Nothing there blocks research; it is a map, not a plan.
+  [the tooling-layout review](../reviews/review-2026-08-23-tooling-layout.md) maps what
+  is scattered or misnamed under `explorations/packing/` — including a `pytest` config
+  that collects nothing and exits 0. Nothing there blocks research; it is a map, not a
+  plan.
 - **The strategy**:
-  [the search-philosophy report](research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
+  [the search-philosophy report](../research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
   says where search effort should point and why; the
-  [standing review](reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md)
+  [standing review](../reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md)
   boils it into hypotheses with kill criteria.
 
 ## Six things that will save you a day
@@ -115,7 +117,8 @@ whole cartography programme rests on, deliberately made cheap to kill.
 1. **Nothing below formal assurance may claim a record.** The then-current `polished`
    label meant a finite-precision LP endpoint with a measured floor of about `1e-11`;
    several recorded rounds sit on it with small *negative* gaps to the analytic value.
-   That is solver noise, not a discovery ([D-021](../../defects.md), open on purpose).
+   That is solver noise, not a discovery ([D-021](../../../defects.md), open on
+   purpose).
 2. **A screen-tier run below the standing best is a promotion trigger, not a record.**
    Treat it as a defect candidate until an independent verifier agrees, but do not
    assume it must be a bug when the standing best is unproved.
@@ -124,18 +127,18 @@ whole cartography programme rests on, deliberately made cheap to kill.
    one-sided slopes $0.175$ and $0.384$. That invalidates smooth derivative models on
    the slice. Bracketing worked here; tested Powell and Nelder–Mead runs did worse, which
    is empirical evidence rather than a general impossibility theorem.
-   ([`exp-010`](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md).)
+   ([`exp-010`](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md).)
 4. **Tolerances must be compared to the scale of what they govern.** Two
    unrelated-looking defects — a false record claim and a non-terminating loop — were
    the same mistake, once too loose and once unreachably tight.
    See rule R2 in
-   [the postmortem](postmortems/postmortem-2026-08-23-soundness-class.md).
+   [the postmortem](../postmortems/postmortem-2026-08-23-soundness-class.md).
 5. **A new component joins the perimeter in the same change that introduces it**
    (`tools/perimeter_test.py`). The quench did not, which is how D-014 happened.
 6. **Do not verify things in throwaway snippets.** `tools/negctl.py` runs negative
    controls from a file; `tools/regression_test.py` holds checks labelled by the defect
    each one guards. Adding to those is cheaper than rewriting a probe for the fourth time
-   ([D-023](../../defects.md)).
+   ([D-023](../../../defects.md)).
 
 ## Open questions a fresh pair of eyes should weigh
 

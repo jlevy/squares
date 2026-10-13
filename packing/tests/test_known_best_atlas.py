@@ -3452,7 +3452,7 @@ def test_the_version_leaves_out_the_stamped_composites_the_video_code_and_docs()
     docs = {
         "packing/frontier/README.md",
         "packing/atlas/known-best/README.md",
-        "packing/atlas/known-best/FIGURE-PLAYBOOK.md",
+        "packing/atlas/known-best/figure-playbook.md",
     }
     assert {path for path in left_out if not path.startswith(video) and path not in docs} == (
         stamped

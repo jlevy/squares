@@ -3,7 +3,7 @@
 
     packing/.venv/bin/python3 experiment_angle_weight.py [weights...]
 
-The table quoted in `NOTES.md` is revision 4's, taken before revision 5 made the matching
+The table quoted in `notes.md` is revision 4's, taken before revision 5 made the matching
 rendering-aware; a fresh run measures the current matcher and need not reproduce it.
 
 For each weight the 160 matched pairs are re-matched and the table reports the mean

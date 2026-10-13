@@ -187,7 +187,7 @@ DATA_EXCLUDED: tuple[str, ...] = (
     "packing/atlas/known-best/video",
     "packing/frontier/README.md",
     "packing/atlas/known-best/README.md",
-    "packing/atlas/known-best/FIGURE-PLAYBOOK.md",
+    "packing/atlas/known-best/figure-playbook.md",
 )
 
 #: How many characters of that commit the version carries (the owner, 2026-09-22).
@@ -204,7 +204,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "2cfdf1e61b398c59c507ec7f7b53a9b332ad04c6"
+DATA_REVISION = "df00408b1b153c3f4c41e23f9b7f48bcc8ae99a8"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.

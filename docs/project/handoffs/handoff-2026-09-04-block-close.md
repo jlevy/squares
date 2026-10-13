@@ -2,7 +2,7 @@
 
 Everything a session resuming from [PR #78](https://github.com/jlevy/squares/pull/78)
 needs. Branch `claude/agenda-017-plan-and-run`. The next block is already planned as
-[Agenda 019](../../packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md);
+[Agenda 019](../../../packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md);
 begin there, at its `State at handoff` section, and not here.
 
 ## What moved
@@ -53,14 +53,14 @@ strictly easier at the same side.
 $n = 18$ and exactly right for 19, 20 and 21.
 
 Together they produce
-[`CERTIFICATE-REACH.md`](../../packing/frontier/CERTIFICATE-REACH.md), which ranks all
-100 cases by what a certificate could add, and now also by what three certificates
+[`CERTIFICATE-REACH.md`](../../../packing/frontier/CERTIFICATE-REACH.md), which ranks
+all 100 cases by what a certificate could add, and now also by what three certificates
 actually attained: every retained certificate whose binding constraint is the best known
 packing landed at $0.98171$–`0.98270` of it, mean $0.98229$. That ratio applied across
 the register puts about $+0.40$ at $n = 51$, $26$, $39$, $38$ and $37$, against the
 $+0.21$ that is the largest movement on record.
 It is three points and is labelled an extrapolation;
-[`X-013`](../../packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md)
+[`X-013`](../../../packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md)
 prices it and argues for $n = 26$ first — a near-tie on predicted gain at a quarter of
 $n = 51$’s cost, and the first covering-value measurement outside the $3.82$–`4.80` band
 every existing point sits in.
@@ -142,8 +142,8 @@ count).
 
 ## How to run the block
 
-[`three-lane-research-method.md`](three-lane-research-method.md) is the method, written
-so it can be followed rather than reconstructed.
+[`three-lane-research-method.md`](../guides/three-lane-research-method.md) is the
+method, written so it can be followed rather than reconstructed.
 Its rule seven now carries four instances.
 
 <!-- This document follows common-doc-guidelines.md.

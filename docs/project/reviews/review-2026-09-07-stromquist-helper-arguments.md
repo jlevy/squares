@@ -16,21 +16,21 @@ claimed impossibility of a pure dots proof for six squares, or improve a packing
 
 | Source | Preliminary argument | Final dots argument |
 | --- | --- | --- |
-| [Memo I](../../packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-i-six-unit-squares.pdf), pp. 11–19 | Adjacent isolated marks cannot occur in separate blocks; incidence counting leaves one allocation; its center block contains four specified marks | Eight unavoidable marks, four in one block, allow at most five blocks |
-| [Memo II](../../packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-ii-ten-unit-squares.pdf), pp. 10–15 | Replace marks in unavoidable sets to force additional incidences; convexity then excludes whole segments from other blocks | Marks already occupied by eight blocks leave only one available mark for two remaining blocks |
-| [Memo III](../../packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.pdf), pp. 6–10 | A box avoiding ten marks is localized and forced to contain three new marks, with orientations restricted to 0° or 45° | Twelve unavoidable marks with three in one box allow at most ten boxes |
-| [2003 paper](../../packing/resources/papers/stromquist-2003-packing-10-or-11-unit-squares.pdf), Theorems 1–3 | Develops the ten-square forcing chain and the eleven-square localization/triple argument | The unrestricted eleven-square printed cover requires the separately verified one-coordinate repair |
+| [Memo I](../../../packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-i-six-unit-squares.pdf), pp. 11–19 | Adjacent isolated marks cannot occur in separate blocks; incidence counting leaves one allocation; its center block contains four specified marks | Eight unavoidable marks, four in one block, allow at most five blocks |
+| [Memo II](../../../packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-ii-ten-unit-squares.pdf), pp. 10–15 | Replace marks in unavoidable sets to force additional incidences; convexity then excludes whole segments from other blocks | Marks already occupied by eight blocks leave only one available mark for two remaining blocks |
+| [Memo III](../../../packing/resources/papers/stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.pdf), pp. 6–10 | A box avoiding ten marks is localized and forced to contain three new marks, with orientations restricted to 0° or 45° | Twelve unavoidable marks with three in one box allow at most ten boxes |
+| [2003 paper](../../../packing/resources/papers/stromquist-2003-packing-10-or-11-unit-squares.pdf), Theorems 1–3 | Develops the ten-square forcing chain and the eleven-square localization/triple argument | The unrestricted eleven-square printed cover requires the separately verified one-coordinate repair |
 
-The [reading aids](../../packing/resources/README.md) distinguish the scanned memoranda
-from mathematical transcriptions.
+The [reading aids](../../../packing/resources/README.md) distinguish the scanned
+memoranda from mathematical transcriptions.
 In Memo I, the comparison in Lemma 8 is with **one half**, not the value 2 produced by
 OCR. The point grid and the final allocation were checked against the rendered pages 13,
 18, and 19.
 
 The unrestricted eleven-square repair is already retained as
-[H-041](../../packing/campaign/hypotheses/H-041-repaired-stromquist-point-set.md), with
-the complete checker in
-[repaired_cover.py](../../packing/cases/stromquist/repaired_cover.py).
+[H-041](../../../packing/campaign/hypotheses/H-041-repaired-stromquist-point-set.md),
+with the complete checker in
+[repaired_cover.py](../../../packing/cases/stromquist/repaired_cover.py).
 It verifies the first cover’s exceptional regions, the forced triple, the repaired
 second cover, and the capacity contradiction.
 Moving the printed mark $G=(.8,1.85)$ to $(.79,1.85)$ is a source-distinct repair, not a
@@ -59,9 +59,9 @@ of which require geometric proofs.
 
 For unit-weight dots and one distinguished block containing $k$ of $m$ marks, this is
 `n <= 1 + m - k`. Memo I uses $(m,k)=(8,4)$; the unrestricted eleven-square proof uses
-$(12,3)$. The [occupancy_bound function](../../packing/src/sqpack/incidence.py) checks
-this arithmetic with exact rational weights and rejects overlapping forced groups.
-Its return value does not certify the geometric premises.
+$(12,3)$. The [occupancy_bound function](../../../packing/src/sqpack/incidence.py)
+checks this arithmetic with exact rational weights and rejects overlapping forced
+groups. Its return value does not certify the geometric premises.
 
 The gain comes from a relation between squares.
 A universal weighted cover assigns a minimum mass to every possible placement
@@ -105,9 +105,9 @@ One is
 ```
 
 The enumeration shows that every surviving allocation uses all nine marks.
-The [retained JSON](../../packing/cases/stromquist/memo1-incidence.json) includes the
+The [retained JSON](../../../packing/cases/stromquist/memo1-incidence.json) includes the
 complete allowed-mask inventory, all four allocations, the source premises, and the
-controls. The [independent test oracle](../../packing/tests/test_stromquist_memo1.py)
+controls. The [independent test oracle](../../../packing/tests/test_stromquist_memo1.py)
 reconstructs convex membership through segments and triangles and enumerates assignments
 to numbered blocks with a separate unused bucket.
 The production code instead builds convex hulls and branches on the least undecided
@@ -162,7 +162,7 @@ uv run --frozen --all-extras --group dev pytest -q \
 ## Eleven Squares: Keep the Full Distinguished Square
 
 The existing conditional-dots target is
-[H-036](../../packing/campaign/hypotheses/H-036-robust-restricted-orientation.md):
+[H-036](../../../packing/campaign/hypotheses/H-036-robust-restricted-orientation.md):
 eleven squares whose orientations are all within $0.25^\circ$ of either $0^\circ$ or
 $45^\circ$ require containing side at least $3.878$. This is an orientation-restricted
 statement. Its threshold is above Trump’s unrestricted packing side and cannot be
@@ -170,35 +170,35 @@ promoted to an unrestricted lower bound.
 
 Three preliminary clauses are accepted:
 
-- [H-106](../../packing/campaign/hypotheses/H-106-continuous-near-axis-ten-point-cover.md)
+- [H-106](../../../packing/campaign/hypotheses/H-106-continuous-near-axis-ten-point-cover.md)
   proves the ten-mark cover throughout the near-axis band.
-- [H-123](../../packing/campaign/hypotheses/H-123-near45-coordinate-localization.md)
+- [H-123](../../../packing/campaign/hypotheses/H-123-near45-coordinate-localization.md)
   localizes a near-45° square avoiding those ten marks to the stated boundary region.
-- [H-109](../../packing/campaign/hypotheses/H-109-near45-canonical-a1-a2-forcing.md)
+- [H-109](../../../packing/campaign/hypotheses/H-109-near45-canonical-a1-a2-forcing.md)
   forces two specified marks into that localized square.
 
 With eleven disjoint squares and only ten preliminary marks, at least one square avoids
 all ten marks. The accepted clauses constrain that distinguished square.
 The remaining cover must account for all of those constraints.
 
-[H-122](../../packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md)
+[H-122](../../../packing/campaign/hypotheses/H-122-diamond-conditional-nine-point-cover.md)
 tested whether nine unchanged marks cover every unit square disjoint from a fixed
 diamond known to lie in the distinguished square.
 A checked counterexample refutes that sufficient cover.
 It does not establish whether the escaping square can coexist with any full
 distinguished square satisfying the preliminary clauses.
 
-[H-124](../../packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md)
+[H-124](../../../packing/campaign/hypotheses/H-124-full-distinguished-square-compatibility.md)
 already formulates the full-square compatibility implication.
 Its outcomes determine what remains:
 
-- [Exp-124](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md)
+- [Exp-124](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-124-full-square-compatibility-screen.md)
   screened that retained escape against distinguished squares at the exact 45° frame.
   It returned no witness, which cannot establish the continuous implication.
-- [Exp-125](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md)
+- [Exp-125](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-125-h124-complete-residual-cover.md)
   independently certified the complete near-45° remaining-square branch.
   Its sufficient near-axis cover returned `no_chain`.
-- [Exp-127](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md)
+- [Exp-127](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-127-h124-collision-augmented-axis-cover.md)
   added a fixed collision region to the near-axis representation and also returned
   `no_chain`, without an independent reader.
 
@@ -217,9 +217,9 @@ Finite angle samples can refute the universal claim with an independently checke
 witness; absence of a sampled witness cannot accept it.
 
 The selected next slice in
-[Session 095](../../packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md)
+[Session 095](../../../packing/campaign/agent-sessions/session-095-collision-cover-and-support-ceiling.md)
 is BC-264’s feature and verification-cost assessment for
-[H-114](../../packing/campaign/hypotheses/H-114-two-pose-kernel-exclusion.md).
+[H-114](../../../packing/campaign/hypotheses/H-114-two-pose-kernel-exclusion.md).
 That target concerns the unrestricted pose domain at side $96/25 = 3.84$ and represents
 pair compatibility directly.
 It seeks a kernel $K$ such that $K-1$ is positive semidefinite, $K(Q,Q)\le b<11$, and
@@ -258,7 +258,7 @@ The implementation separates three obligations: justify the geometric premises,
 enumerate their finite incidence consequences, and apply the resource count.
 The Memo I replay completes the latter two as a conditional control.
 The subsequent
-[segment-helper derivation](reviews/review-2026-09-07-stromquist-segment-helper.md)
+[segment-helper derivation](review-2026-09-07-stromquist-segment-helper.md)
 independently proves Lemma 8, including localization and all orientations.
 An executable helper still needs exact clipping and universal inequality certificates;
 the remaining full-proof premises include Lemmas 6–7, the two-mark adjacency assertion,

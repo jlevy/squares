@@ -6,13 +6,13 @@ checkpoint below. Resume at T+2. Do not restart the commissioning block, reclaim
 spent or unused cell budget, or recreate its experiment identities.
 
 The authoritative control plane is
-[`agenda-024`](../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md).
+[`agenda-024`](../../../packing/campaign/agendas/agenda-024-post-381-24h-portfolio.md).
 Its two manager programs are
-[`agenda-025`](../../packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md)
+[`agenda-025`](../../../packing/campaign/agendas/agenda-025-adaptive-fractional-frontier.md)
 and
-[`agenda-026`](../../packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md).
+[`agenda-026`](../../../packing/campaign/agendas/agenda-026-density-stationarity-and-trump-capture.md).
 Read the
-[`T+2 coordinator decision`](../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/checkpoint-hour-02-decision.md)
+[`T+2 coordinator decision`](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/checkpoint-hour-02-decision.md)
 before dispatching any work.
 
 ## Durable State
@@ -53,17 +53,17 @@ Process wall and CPU time remain separate measurements.
 | BC-245 / `think-do04` | Complete at language-theorem scope | Finite typed stationary language includes normal and abnormal Fritz–John branches, ties, zero multipliers and rattlers. It proves no tractable or global n=11 atlas. |
 
 The complete output manifests and costs are in the
-[`fractional checkpoint`](../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/checkpoint-hour-02.md)
+[`fractional checkpoint`](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/checkpoint-hour-02.md)
 and
-[`closure checkpoint`](../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/checkpoint-hour-02.md).
+[`closure checkpoint`](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-026/checkpoint-hour-02.md).
 The literature archive and its September 5 currentness receipt are already local under
-[`packing/resources`](../../packing/resources/README.md).
+[`packing/resources`](../../../packing/resources/README.md).
 The next block requires no external retrieval.
 
 ## Senior-Review Dispositions
 
 The post-freeze
-[`adversarial review`](reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md),
+[`adversarial review`](../reviews/review-2026-09-06-agenda024-adversarial-senior-strategy.md),
 run at `max` reasoning, accepted the mathematical packets at their stated boundaries and
 required these control-plane changes:
 
@@ -98,7 +98,7 @@ floating worker. A background scientific process does not consume another agent 
 
 | Owner | Work before T+4 | Required output |
 | --- | --- | --- |
-| Fractional manager | Launch exactly the unused 105-minute BC-232 leg-02 command in [`bc-232-disposition.md`](../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-disposition.md), from `packing/`. Do not change its warm input, criterion, or stems. Prepare BC-231 seams without claiming verifier acceptance. | Four leg-02 outputs plus `think-jeyp`’s provisional checkpoint; BC-232 remains open with 30 one-core minutes. |
+| Fractional manager | Launch exactly the unused 105-minute BC-232 leg-02 command in [`bc-232-disposition.md`](../../../packing/campaign/series/series-000-smoke-and-calibration/results/agenda-025/bc-232-disposition.md), from `packing/`. Do not change its warm input, criterion, or stems. Prepare BC-231 seams without claiming verifier acceptance. | Four leg-02 outputs plus `think-jeyp`’s provisional checkpoint; BC-232 remains open with 30 one-core minutes. |
 | Closure manager | Supervise BC-241’s source-distinct review of the retained-record-dependent local theorem and make the final `max`-reasoning disposition. Preserve the completed BC-242 and BC-245 packets; run no BC-243 numerical pilot before BC-220. | BC-241 review and disposition with explicit scope, mutations, hashes, costs, and open premises. |
 | Floating worker | Execute the bounded BC-241 source-distinct checklist, then return the slot. If it finishes early, take only a coordinator-assigned manifest or BC-232 checkpoint check. | One bounded receipt; no shared-state edit or claim promotion. |
 | Coordinator | Monitor only landed `origin/main`, protect criteria and namespaces, inspect process receipts, and integrate manager packets sequentially. At T+4, run BC-220 from the five terminal cells plus `think-jeyp`. | One gate decision, regenerated views, completed validation, a committed and pushed checkpoint, and hosted CI green. |

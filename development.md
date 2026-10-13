@@ -1836,8 +1836,8 @@ It leaves the binary at `$CARGO_TARGET_DIR/release/sqverify-exact` when the targ
 directory is absolute.
 Pass that path to `devtools.verify_rectangle_density` with
 `--backend rust --rust-binary PATH`; Python remains the default.
-The [tooling overview](docs/project/verification-tooling.md) records the supported
-inputs, refusal behavior, golden controls and measured performance limits.
+The [tooling overview](docs/project/guides/verification-tooling.md) records the
+supported inputs, refusal behavior, golden controls and measured performance limits.
 This crate verifies rectangle geometry, a separate contract from the global n11 proof.
 
 The optional [n17 native kernel](packing/n17bb_native/README.md) accelerates the

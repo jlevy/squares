@@ -28,7 +28,7 @@ exploration:
     - packing/campaign/explorations/X-048-n17-optimality-after-n11.md
     - packing/frontier/n-017.md
     - packing/frontier/results.yaml
-    - docs/project/n17-optimality-explainer.md
+    - docs/project/guides/n17-optimality-explainer.md
     - packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/current-partition.json
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-259-current-admitted-residue/partition.json
@@ -574,9 +574,9 @@ orders of magnitude longer than n11’s.
 
 Briefly, since the inventory holds the detail.
 
-- **Explainer drift.** `docs/project/n17-optimality-explainer.md` (last edited 6 Oct)
-  says 58 / 36,784 / 4,685 at lines 59, 251, 382 and 441; X-048’s current selection and
-  `SYNOPSIS.md`’s Session-184 narrative say the same.
+- **Explainer drift.** `docs/project/guides/n17-optimality-explainer.md` (last edited 6
+  Oct) says 58 / 36,784 / 4,685 at lines 59, 251, 382 and 441; X-048’s current selection
+  and `SYNOPSIS.md`’s Session-184 narrative say the same.
   `main` has carried 60 / 36,768 / 4,683 since `533dd42c6` (9 Oct, 09:22 UTC).
 - **Register wording.** T-065’s claim in `results.yaml` and `RESULTS.md` still says “No
   identity with the catalogue’s degree-18 polynomial is proved”; exp-245 proved it on 2

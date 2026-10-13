@@ -318,7 +318,7 @@ session:
   - packing/campaign/explorations/X-013-where-the-certificate-should-go-next.md
   - packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md
   - packing/campaign/agendas/agenda-020-efficiency-block-the-exact-sweep.md
-  - docs/project/handoff-2026-09-04-block-close.md
+  - docs/project/handoffs/handoff-2026-09-04-block-close.md
   - packing/tests/test_fractional_sweep_integer.py
   - packing/tests/test_fractional_certificate.py
   - packing/tests/test_fractional_generate.py
@@ -456,8 +456,8 @@ Seven distinct cases now carry a result from this instrument; Nagamochi’s 2005
 form holds 58 of 65 open cases at `n <= 100`, down from 60. Full detail, including the
 two searches that stopped on cost rather than an answer ($n = 18$ at $4.68$, $n = 11$ at
 $3.82$), is in
-[the block-close handoff](../../../docs/project/handoff-2026-09-04-block-close.md) and
-in each result’s own `next_rung` in [`results.yaml`](../../frontier/results.yaml).
+[the block-close handoff](../../../docs/project/handoffs/handoff-2026-09-04-block-close.md)
+and in each result’s own `next_rung` in [`results.yaml`](../../frontier/results.yaml).
 
 ## The Efficiency Block
 

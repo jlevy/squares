@@ -79,7 +79,7 @@ exploration:
     - docs/project/reviews/review-2026-10-03-n17-verifier-rewrites.md
     - docs/project/reviews/review-2026-10-04-n17-flag2-diagnosis.md
     - docs/project/reviews/review-2026-10-05-n17-capture-r9.md
-    - docs/project/n17-optimality-explainer.md
+    - docs/project/guides/n17-optimality-explainer.md
     - packing/campaign/explorations/X048-session-168-pilots/README.md
     - packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml
     - packing/hosted/n17-x048-session-168-certificates.yaml
