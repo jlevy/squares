@@ -5,14 +5,16 @@ title: "Documentation layout, deferred part: root documents, runbooks, generated
 kind: task
 status: open
 priority: 3
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-11-documentation-organization.md
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m4t1y0xye322ehz1p8pts800
 hold: blocked
 hold_until: null
 created_at: 2026-10-12T23:12:15.654Z
-updated_at: 2026-10-13T06:21:54.890Z
+updated_at: 2026-10-13T07:16:50.238Z
 ---
 The deferred part of the documentation-layout plan. The spec is docs/project/specs/active/plan-2026-10-11-documentation-organization.md on main; its "Status on 2026-10-12" section has the measured reasons. The conflict-free part landed in #576 (think-mv16, merged 2026-10-13 at ea227e62d).
 
