@@ -5,8 +5,8 @@ title: "Session 182 lane R: lane R9 capture-route verdict from committed receipt
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+version: 4
+spec_path: docs/project/specs/done/plan-2026-10-05-n17-overnight.md
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-05T08:19:37.951Z
-updated_at: 2026-10-05T14:58:21.935Z
+updated_at: 2026-10-12T23:51:50.357Z
 started_at: 2026-10-05T08:20:03.303Z
 closed_at: 2026-10-05T14:58:21.935Z
 close_reason: "Lane R filed: the R9 capture review in 0b681bbf3 and its scorer outputs under receipts/R9 in c0c3368b3, on the session-182 branch (PR #365). Verdict: undecidable from receipts, the owned-hull pull a new quantified loss (think-juy9), staged measurement specified (think-g2qn)."

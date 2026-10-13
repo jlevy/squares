@@ -5,8 +5,8 @@ title: Experiments E2-E4 and proof-lane hooks (spec Phases 3 and 6)
 kind: epic
 status: open
 priority: 2
-version: 14
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 16
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0nykzjp79rawg3g2x0hx2rf
@@ -22,6 +22,6 @@ child_order_hints:
   - is-01m0p1884qkefdqm2sdk46mjtk
   - is-01m0p188jzhnz00j60evcr04dq
 created_at: 2026-08-22T23:59:11.072Z
-updated_at: 2026-10-10T22:47:49.598Z
+updated_at: 2026-10-12T23:52:06.149Z
 ---
 Done when the same seed produces the same basin digest on 1 worker and on 32, E2 reaches Trump's basin, and E3/E4 produce numbers worth publishing.

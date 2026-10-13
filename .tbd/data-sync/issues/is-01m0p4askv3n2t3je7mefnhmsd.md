@@ -5,12 +5,12 @@ title: Port sqsearch behind the proposer interface
 kind: task
 status: open
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4asaeypn1nn54frxj3cx9
 created_at: 2026-08-23T01:39:00.858Z
-updated_at: 2026-10-10T22:47:29.451Z
+updated_at: 2026-10-12T23:50:46.069Z
 ---
 The existing Rust annealer becomes proposer #1. Critical change: record EVERY quenched local optimum, not only the best per chain - the current engine discards exactly the data the atlas is made of. Keep the counter-based RNG keyed by (seed, chain) and the selftest gate.

@@ -5,8 +5,8 @@ title: Named raw-coordinate multistart baseline proposer
 kind: task
 status: open
 priority: 0
-version: 7
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 8
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels:
   - focus-process
 dependencies:
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m0pw85tzfrdrtxjnw05hkrdp
 parent_id: is-01m0p4asaeypn1nn54frxj3cx9
 created_at: 2026-08-23T01:39:01.164Z
-updated_at: 2026-10-10T22:46:37.181Z
+updated_at: 2026-10-12T23:49:49.041Z
 ---
 Define one explicit baseline proposal measure for H-011/H-012: coordinate parameterization, centre and angle density, initial-side rule, feasibility conditioning or repair, RNG and seed allocation. It is a baseline arm, not the unique null or an intrinsic uniform measure on configurations. Frequencies are meaningful only for the complete P/Q/E regime.
 

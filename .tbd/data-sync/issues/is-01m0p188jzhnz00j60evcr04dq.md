@@ -5,8 +5,8 @@ title: Unavoidable-set falsifier + the Stromquist triple (R-5/H-10)
 kind: task
 status: closed
 priority: 1
-version: 8
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 9
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies:
   - type: blocks
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m1b297ydh4ahazqwk4mx6hqq
 parent_id: is-01m0nym0701fv1qq9fbqq9qz0w
 created_at: 2026-08-23T00:45:12.158Z
-updated_at: 2026-10-10T22:47:25.225Z
+updated_at: 2026-10-12T23:50:41.085Z
 closed_at: 2026-08-31T06:04:08.252Z
 close_reason: "BC-094 discharged by session-050 phase 2: sqpack/falsify.py with the known-answer triple green as tests (Figure 13 escape found at margin 1.3e-2, 45-degree family; repaired twelve-point set saturates at -(L-1) with the fixed not-a-proof caveat; typed refusals name the defeating pose). Exact bridge certifies the retained Figure 13 escape over Q(sqrt2+sqrt5) through sqpack.cover predicates."
 resolution: null

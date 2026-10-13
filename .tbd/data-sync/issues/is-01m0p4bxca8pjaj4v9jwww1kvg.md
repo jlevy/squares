@@ -5,14 +5,14 @@ title: "Phase 6: the proof lane"
 kind: epic
 status: open
 priority: 3
-version: 8
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 9
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m0p4bxnqxb8dsv2rnqgyp0w8
   - is-01m0p4bxza55406q29wjgsqc1s
 created_at: 2026-08-23T01:39:37.481Z
-updated_at: 2026-10-10T22:48:23.490Z
+updated_at: 2026-10-12T23:52:41.997Z
 ---
 Epic. PoseBox scalar, the Stromquist falsifier triple, and LP duals as unavoidable-set generators. Waits for stable baselines rather than competing with them.

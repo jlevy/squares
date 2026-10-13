@@ -3,9 +3,9 @@ type: is
 id: is-01m4rat09hqfrg6pkjqf69bpbb
 title: "Final replies and closes after #518 merged"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 6
+version: 7
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T15:13:26.833Z
-updated_at: 2026-10-12T16:32:48.571Z
+updated_at: 2026-10-12T23:39:27.129Z
 started_at: 2026-10-12T15:13:36.977Z
+closed_at: 2026-10-12T23:39:27.129Z
+close_reason: "Completed: PR #555 merged 2026-10-12 with the final replies and closes after #518; remaining follow-up is think-fvz4."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

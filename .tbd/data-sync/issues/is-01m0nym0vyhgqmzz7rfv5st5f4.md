@@ -5,12 +5,12 @@ title: f64 and Filtered scalars, with per-stage filter-rate counters
 kind: task
 status: open
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 4
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p5tswc9s27gb5c1d3da27b
 created_at: 2026-08-22T23:59:11.742Z
-updated_at: 2026-10-10T22:47:08.383Z
+updated_at: 2026-10-12T23:50:22.429Z
 ---
 Filtered = f64 plus an error bound, escalating only when the sign is in doubt. Instrument the filter rate per stage from the start: for n=11 only 14 of 55 pairs need the exact path, and that ratio at larger n is an open question the spec flags.

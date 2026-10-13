@@ -5,13 +5,13 @@ title: "H-6: LP-dual fractional-transversal probe at side 4 (n=12)"
 kind: task
 status: closed
 priority: 3
-version: 3
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 4
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0nrjz7jn0q1ktm5n7bhxbwm
 created_at: 2026-08-23T00:45:13.405Z
-updated_at: 2026-10-10T22:48:16.929Z
+updated_at: 2026-10-12T23:52:39.344Z
 closed_at: 2026-08-27T05:57:56.495Z
 close_reason: Duplicate proof-lane probe. think-28sq is the canonical H-006 fractional-transversal LP generator at side 4 for n=12; its output is candidate certificate structure, not a proof.
 resolution: duplicate

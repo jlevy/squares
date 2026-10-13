@@ -3,9 +3,9 @@ type: is
 id: is-01m3xkb16rqvby3jstb2cse70j
 title: Update the n17 frontier record now that H-265 identifies S* with the catalogue polynomial
 kind: task
-status: open
+status: closed
 priority: 2
-version: 4
+version: 5
 spec_path: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-245-h265-n17-catalogue-polynomial.md
 delegate: null
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m3v9vq36ykk2jdzce75req44
 hold: null
 hold_until: null
 created_at: 2026-10-02T06:03:03.768Z
-updated_at: 2026-10-05T07:20:57.627Z
+updated_at: 2026-10-12T23:39:37.656Z
 started_at: 2026-10-05T07:20:54.058Z
+closed_at: 2026-10-12T23:39:37.656Z
+close_reason: "Completed: n-017, T-065 and the evidence register record H-265's identity (4c060f233); PR #347 merged 2026-10-06."
+resolution: null
+duplicate_of: null
 ---
 exp-245 accepted H-265. packing/frontier/n-017.md still says the identity with the degree-18 polynomial is not established (blocker detail near line 136; prose near lines 253, 612 and 642). Add an evidence entry for exp-245, narrow the blocker to global optimality, update the prose, and regenerate the frontier views; no bound or status change.
 

@@ -5,13 +5,13 @@ title: "PoseBox scalar and hits_all_poses(): the proof-lane hook"
 kind: task
 status: open
 priority: 2
-version: 3
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 4
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0nym0701fv1qq9fbqq9qz0w
 created_at: 2026-08-22T23:59:14.167Z
-updated_at: 2026-10-10T22:47:51.383Z
+updated_at: 2026-10-12T23:52:08.659Z
 ---
 Interval over a box of (x,y,theta). Instantiating the same predicate at this scalar turns 'do these two squares overlap' into 'can any square with pose in this box avoid all these points' -- the unavoidable-set decision, in the same code. One worked example, no proof attempt.
 

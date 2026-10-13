@@ -5,13 +5,13 @@ title: Gate and runner must not run concurrently; negctl corrupts tracked files 
 kind: bug
 status: closed
 priority: 2
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T08:10:05.887Z
-updated_at: 2026-10-10T22:48:07.697Z
+updated_at: 2026-10-12T23:52:25.949Z
 closed_at: 2026-08-23T08:10:22.459Z
 close_reason: "Fixed in the same change: test.sh touches .gate-running with an EXIT trap, and every runner step that reads the record refuses while it is present."
 resolution: null

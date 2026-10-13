@@ -5,13 +5,13 @@ title: H-010 used unit squares where Stromquist requires open boxes of side grea
 kind: bug
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 7
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bxnqxb8dsv2rnqgyp0w8
 created_at: 2026-08-24T11:13:45.241Z
-updated_at: 2026-10-10T22:47:43.315Z
+updated_at: 2026-10-12T23:51:02.194Z
 closed_at: 2026-10-06T08:23:37.075Z
 close_reason: "Done: H-010's claim and regime on main use open boxes of side strictly greater than one, and exp-016's control states 'strict open-box semantics'."
 resolution: null
