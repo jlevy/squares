@@ -48,6 +48,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-07-n17-session-186-storage.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md, role: research-report, authority: supporting, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-11-evand-regularization-assessment.md, role: research-report, authority: supporting, lifecycle: retained}
+  - {path: vendor/evand-regularize/README.md, role: component-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md, role: research-report, authority: record, lifecycle: retained}
@@ -1368,3 +1369,12 @@ exclusions:
     reason: >-
       The claim renderer's two templates; the generated verifiable claims are the
       published documents.
+  - pattern: vendor/evand-regularize/CREDITS.md
+    reason: >-
+      Evan Daniel's credits for evand/square-packing, vendored byte for byte at a pin
+      with his MIT code; held to its digest by devtools.check_vendored_evand, so never
+      edited here. The README.md beside it is this project's mapped document.
+  - pattern: vendor/evand-regularize/search/**/*.md
+    reason: >-
+      Evan Daniel's method logs and generated lists under the vendored search/ tree,
+      upstream prose at the pin rather than this project's documents.

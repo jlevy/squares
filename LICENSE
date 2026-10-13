@@ -1,7 +1,7 @@
 Licensing for this repository (github.com/jlevy/squares)
 ========================================================
 
-Three grants cover this repository:
+Four terms cover this repository:
 
 - Code: MIT License (full text below). All source code here, including
   packing/src/, packing/sqsearch/, packing/devtools/, packing/cases/,
@@ -18,6 +18,21 @@ Three grants cover this repository:
   in this file. Each work remains under its own owner's rights; they are
   retained for research and verification. Consult the original publisher
   or author before any reuse.
+
+- Third party: vendor/evand-regularize/, except its README.md and
+  vendored.yaml, which are this project's own files under the terms
+  above. The other files there are Evan Daniel's, copied from
+  github.com/evand/square-packing at a pinned commit, and are under his
+  own MIT License, "Copyright (c) 2026 Evan Daniel", whose notice
+  travels with them in vendor/evand-regularize/LICENSE; they are NOT
+  covered by the grants above. Among them, the rows of
+  search/regularize/lists/alternates.json, .csv and .md that name David
+  Ellsworth's catalogue as their source derive from his drawings and
+  quote his attribution text. That material remains his, as upstream's
+  README states for the same material in its site/www/data/; neither
+  Evan Daniel's MIT License nor any grant in this file covers it.
+  vendor/evand-regularize/README.md records the pin, the credit and any
+  local change.
 
 Copyright (c) 2026 Joshua Levy.
 

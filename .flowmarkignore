@@ -203,9 +203,12 @@ docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md
 # names.
 packing/tests/fixtures/github-math/cases.md
 
-# Vendored upstream repositories, checked out as submodules; their Markdown is the
-# upstream project's. flowmark skips a directory named `vendor` by default, but a
-# `--exclude` flag replaces that default list, so the exclusion is stated here too.
+# Vendored upstream code: the kpress submodule, and Evan Daniel's regularizer copied
+# byte for byte at a pin, whose files a manifest holds to their upstream digests. Their
+# Markdown is the upstream project's. The one project file there,
+# vendor/evand-regularize/README.md, is formatted by hand with `flowmark --auto`.
+# flowmark skips a directory named `vendor` by default, but a `--exclude` flag replaces
+# that default list, so the exclusion is stated here too.
 vendor/
 
 # The separately prompted review of T-098 (Evan Daniel's exact optima, #375), stored

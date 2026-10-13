@@ -1,0 +1,387 @@
+# The manifest of vendor/evand-regularize: Evan Daniel's evand/square-packing, a subset
+# copied byte for byte at one commit. README.md beside it is the prose: what each file
+# is for, the credit, the licence, how a fork is recorded and how to re-pin.
+#
+# Checked by `python -m devtools.check_vendored_evand` from packing/ (edit tier), which
+# also writes this file on a re-pin (`--write --checkout DIR --commit ID`); edit
+# `local_changes` by hand, never the pinned digests or modes.
+#
+# Why SHA-256 here (OR-16): these bytes cross a real trust boundary -- they were
+# downloaded from another party's repository. The expected value of each digest is the
+# upstream blob at `source_commit`. The offline check holds the copy to this file, so it
+# catches accidental edits only: an edit made here together with this file passes it.
+# `--upstream` holds this file to upstream, at a commit one of upstream's branches or tags
+# holds, comparing Git blob ids and modes at the pin. It needs the network, so it is run
+# by hand at a re-pin and by whoever reviews a change to this directory; no gate runs it
+# yet (think-vwlm). Nothing but these checks reads the digests: no tool refuses to run
+# the generator, and no result is invalidated, on a mismatch.
+
+format: vendored-source-v1
+source_url: https://github.com/evand/square-packing
+source_commit: 675a5eaa8712542daac8b4515b0f69ad7044df44
+git_tree: fc24671215a46a239fcb8f30d2c16773b095cceb
+committed: '2026-10-11T10:34:02-06:00'
+subject: 'Site: a record drawing identical to a catalogue drawing is listed once'
+retrieved: '2026-10-11'
+license: MIT
+license_file: LICENSE
+copyright: 'Copyright (c) 2026 Evan Daniel'
+
+# Reviewed patches to the vendored copy, each {path, kind: modified | added |
+# removed, date, bead, reason}. A modified file keeps its pinned entry below, so the
+# pristine bytes stay reconstructible from the upstream pin.
+local_changes: []
+
+# 351 files, 2089912 bytes.
+files:
+  - {path: CREDITS.md, bytes: 7501, sha256: 778884d09f88ce159ea2cea2134d30fb14bf01bf58fc9e69c6f3d77433da8168}
+  - {path: LICENSE, bytes: 1068, sha256: c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578}
+  - {path: search/exact/README.md, bytes: 15312, sha256: cb4e973564ad1d186e879b03818365a0a44f6f257bce08fd9cdfaecd790cc583}
+  - {path: search/exact/batch/README.md, bytes: 3739, sha256: 8f84653c0c74612433c264cb028801d27dd5fbb2ab80ad914d53723d687b553c}
+  - {path: search/exact/batch/inputs/n-1.txt, bytes: 16, sha256: e5c39cd522354e61b41dd25f411c300252f07260e3ba8ffe5ee5e62f798a5d2a}
+  - {path: search/exact/batch/inputs/n-10.txt, bytes: 306, sha256: a2069b6be16cd6dd6f1f8883a9c7c055465cdeac6bdb4dc819b3557727695143}
+  - {path: search/exact/batch/inputs/n-100.txt, bytes: 1207, sha256: 1ec8de16065cafde7581708283fe34857b5b2170099004ed17ee41451ed1b8c8}
+  - {path: search/exact/batch/inputs/n-101.txt, bytes: 3063, sha256: 0e27c25d5459a76c7cffd0bba7a0f8c654c4f694d05d4b09d8d5a219eb2a0273}
+  - {path: search/exact/batch/inputs/n-102.txt, bytes: 5305, sha256: 12daa2b468db985b1b62d2abf66c5ef8b4b4c2bceb9c0a4f2344c46938aeff4d}
+  - {path: search/exact/batch/inputs/n-103.txt, bytes: 5510, sha256: 38c1e1845ee6b85d43117dcc4e0d42158f1c7e08216d5f033d6eeaf62f8cae35}
+  - {path: search/exact/batch/inputs/n-104.txt, bytes: 2922, sha256: 44d0d34dd334888167c9ffad9ead0c72f0b924be577a1347941084900504eb97}
+  - {path: search/exact/batch/inputs/n-105.txt, bytes: 5471, sha256: 8f7f74abf767526e9b870ca3d1c7056dfc11579538627e72d6d9f63f37af8f9f}
+  - {path: search/exact/batch/inputs/n-106.txt, bytes: 5609, sha256: 10ff9cade1bc1140e06c7843064be6272d061f5d3837141080d9e47b65548bf7}
+  - {path: search/exact/batch/inputs/n-107.txt, bytes: 3423, sha256: 73062dfc1db5899f266b9633eb3f0435d493f877dc60001c31f7a1d663464f57}
+  - {path: search/exact/batch/inputs/n-108.txt, bytes: 3584, sha256: 7f27b6a7f27fc99e852b15af77b79c97275a352702d578c44113967c4f95333f}
+  - {path: search/exact/batch/inputs/n-109.txt, bytes: 3631, sha256: 902248c4e74f73eced262d2718f7e2492567e75f5f60ea2dc2b6aae45bf0e8bc}
+  - {path: search/exact/batch/inputs/n-11.txt, bytes: 476, sha256: 502f41fd2919128a1b15988a9cdc923f6ed8166081829a24e4f316b6b8e7c59b}
+  - {path: search/exact/batch/inputs/n-110.txt, bytes: 6029, sha256: 31aaa609ec307513de28eec395ad8c2fa7708601f7bcc4f87a71ad9d9a7701bd}
+  - {path: search/exact/batch/inputs/n-111.txt, bytes: 1350, sha256: 9c5ba7b52e16a50b1fddab552bebb16ece936b8f659857d580a87a292944b050}
+  - {path: search/exact/batch/inputs/n-112.txt, bytes: 1363, sha256: 825a61bf7b3690bc1fe5ad45f0d5cfa12986cfb7d9b8554db6431bcabf39b16d}
+  - {path: search/exact/batch/inputs/n-113.txt, bytes: 1376, sha256: 7519b3488185a0244ef07e4a73104f9b6b7b768c6db10ce61c51ad95b3f23f6f}
+  - {path: search/exact/batch/inputs/n-114.txt, bytes: 1389, sha256: eeae1b75ef3965dc90268dfcc5bf533110535e085c432fbf50dcaa94a79b37ec}
+  - {path: search/exact/batch/inputs/n-115.txt, bytes: 1402, sha256: d2de7f532e464928310eb6bf2979e574ba07860da39a8168433dc206eb437812}
+  - {path: search/exact/batch/inputs/n-116.txt, bytes: 1415, sha256: a03b5592782cde8830bb1b840f810fd9e8d30a08394599a8c3c2587c292cba65}
+  - {path: search/exact/batch/inputs/n-117.txt, bytes: 1428, sha256: 0163b5ea12a70873fefec9fbf87856f84624380a574c3f63cc0f21931dedc27c}
+  - {path: search/exact/batch/inputs/n-118.txt, bytes: 1441, sha256: a40df9d58ed2d397bdd3667c43e449bca386bffa0044a38ef6cd0de06c08db47}
+  - {path: search/exact/batch/inputs/n-119.txt, bytes: 1454, sha256: 1a93df0e6126f6a148af601c9e5908550ba8e8af9cd1564e519ab84d2d9d826f}
+  - {path: search/exact/batch/inputs/n-12.txt, bytes: 149, sha256: 4d1d1d224c8d0ce4e7cdcc69fa5491d056ad2fe33b5efb666f1e676ca8e66f4b}
+  - {path: search/exact/batch/inputs/n-120.txt, bytes: 1467, sha256: b98228354bc505e797223fb2550db171b874e9e2e5bc57f35a94529235c83b1b}
+  - {path: search/exact/batch/inputs/n-121.txt, bytes: 1481, sha256: 9d82ee356905e24a6b5695917ffb5db82f3faefdf45356f416ac434d9d3229f6}
+  - {path: search/exact/batch/inputs/n-122.txt, bytes: 3787, sha256: 38319faa5a409d896acc84fd1a6e63fb0f53ae2250733cd5ae0735864fe00082}
+  - {path: search/exact/batch/inputs/n-123.txt, bytes: 6002, sha256: e4e1d15a7e77cf51459e89f7aca1818d58a6ba6dc74d0f5a2acea46c92192e31}
+  - {path: search/exact/batch/inputs/n-124.txt, bytes: 4093, sha256: 25cdc049aee44c47e9a333348ec54506f0f0effcd58094ee226e8e084d061c23}
+  - {path: search/exact/batch/inputs/n-125.txt, bytes: 3531, sha256: c8935600c63f8acda9104a7d9805c6320db493e2a94fb8824575bc9fa45c801a}
+  - {path: search/exact/batch/inputs/n-126.txt, bytes: 4690, sha256: 75ee9f5c4697df26b3703e9e034f720332a84013ce9addaac8aef2bb9c94864f}
+  - {path: search/exact/batch/inputs/n-127.txt, bytes: 7212, sha256: bc333b3cdfb8a1a2227264d13efe4d56460ad15a33d64edd2fb354f3a3aad55c}
+  - {path: search/exact/batch/inputs/n-128.txt, bytes: 4197, sha256: 014acde1a525cb589b20e8b06cc4e759d889907ac7d31aa768919b50069b1653}
+  - {path: search/exact/batch/inputs/n-129.txt, bytes: 6005, sha256: 2864045d65822acfd57e17b3a791c283c5c6ea0b58b5fd41e694eb14fdd89009}
+  - {path: search/exact/batch/inputs/n-13.txt, bytes: 161, sha256: 0386104ac7da902bd8406d853eecc954758508cf7d294f42af892e28afa04595}
+  - {path: search/exact/batch/inputs/n-130.txt, bytes: 5504, sha256: 0c2cfda9a853ed0799f56fb8951c5a9077d250d9dbd95b498e4fcc8bfa3ae0df}
+  - {path: search/exact/batch/inputs/n-131.txt, bytes: 7040, sha256: 79698d04a48e3ef98b1b73f3b9e23370de2f45151fa8a582b4bef98e3ebbed38}
+  - {path: search/exact/batch/inputs/n-132.txt, bytes: 7013, sha256: 1647836876c8d41104f4bac08c1db50aa850079024d894b45a501adf2828e9a5}
+  - {path: search/exact/batch/inputs/n-133.txt, bytes: 1638, sha256: 5695d6e898b3d1554d4953e447bfef15f7c168b0fbdd88aba1f785ce469bc799}
+  - {path: search/exact/batch/inputs/n-134.txt, bytes: 1651, sha256: e147539fc31a9bea9cf6cdfb68bcd4cb940e7fb2725f88f1cdb40049f093e921}
+  - {path: search/exact/batch/inputs/n-135.txt, bytes: 1664, sha256: 0c6bc951c9a8d45cc1ae0fe5419249bea3b91ee9fc490dc55675e64855458324}
+  - {path: search/exact/batch/inputs/n-136.txt, bytes: 1677, sha256: b88878f83b1a2eb51f67ab3697107ef3697ac3e352da32c1538878b6dd9d21ff}
+  - {path: search/exact/batch/inputs/n-137.txt, bytes: 1690, sha256: f4ebc3ffcaec6b5f45bf9b9d9d0fbefc3839f3222b49a989ed5150baf293ec69}
+  - {path: search/exact/batch/inputs/n-138.txt, bytes: 1703, sha256: c1a304114c7d59cb68891553f8069b6b2a14d63729c6a50652981baac97125fb}
+  - {path: search/exact/batch/inputs/n-139.txt, bytes: 1716, sha256: a70800aed0353e78aed99b85474f871205a5bebdd01be8a44f9b5716460931e8}
+  - {path: search/exact/batch/inputs/n-14.txt, bytes: 173, sha256: 85dda7c4005e6941793c25dc4d8fecbc6f99d81ce16442309c35e6818836e782}
+  - {path: search/exact/batch/inputs/n-140.txt, bytes: 1729, sha256: 921cdd3cc36ece8b0f38ea13c46755a35633f7bab9e098a7853ed180298ee4c4}
+  - {path: search/exact/batch/inputs/n-141.txt, bytes: 1742, sha256: ab2c63bf39f81188ea1b7112c80abf1e7c5f7ba5c759abf204ebcc094a79ae08}
+  - {path: search/exact/batch/inputs/n-142.txt, bytes: 1755, sha256: 097a536adde28b7e88e19ed70c710ba9edba05b820d23d6c11193221dcfdbf14}
+  - {path: search/exact/batch/inputs/n-143.txt, bytes: 1769, sha256: a6dbcb303782799ac58a4ca0d5bef7b2a3a3ee477cc5340684e14dcf8772afe6}
+  - {path: search/exact/batch/inputs/n-144.txt, bytes: 1783, sha256: 93af8bb63a6dd46c5ddda4ee82d674f00dd233ac24d72e9750991d697c40e34a}
+  - {path: search/exact/batch/inputs/n-145.txt, bytes: 4255, sha256: bdb4d65289413497cd0ab80526d16548eb504c6ac1beccc9efe33876beb7e9b9}
+  - {path: search/exact/batch/inputs/n-146.txt, bytes: 4954, sha256: c81cba5047d29236196ef32e947ce9e3a7aec575b71cb0ba2fbcc2ba27c60e00}
+  - {path: search/exact/batch/inputs/n-147.txt, bytes: 4663, sha256: 61bf15a7df64588b2ee03889c367c19e7444d8c92229d1b4f34c87fd837d6b53}
+  - {path: search/exact/batch/inputs/n-148.txt, bytes: 4703, sha256: 99cddfdb33bc3ff4843dfd4b5662453ccfb6c97e095ad5a726869e2de6e6a5af}
+  - {path: search/exact/batch/inputs/n-149.txt, bytes: 4211, sha256: e25d96fc043baa0e718190a77585f90bc6f4efa9b40ec520c45a39c294416041}
+  - {path: search/exact/batch/inputs/n-15.txt, bytes: 185, sha256: 9613793422ed5006f96dd634163f57884ed6bf1aedf845e116286c1a304cc55d}
+  - {path: search/exact/batch/inputs/n-150.txt, bytes: 4925, sha256: bb49ede1a27c942100947a839922b113f43d06e16d40db7a774e20425fa2198a}
+  - {path: search/exact/batch/inputs/n-151.txt, bytes: 4806, sha256: e358cb90cb662d3e760ee23b20ac57acb86ff5f65c4ee17ed1a5838bff3bbef7}
+  - {path: search/exact/batch/inputs/n-152.txt, bytes: 7929, sha256: 8cd5249029867e011ece5ea21e25923d64528374e377b32efc2228d2f6d7c51a}
+  - {path: search/exact/batch/inputs/n-153.txt, bytes: 5195, sha256: d2e0bfec184d33dddab4c7c5d9c4b2ae53c03c9820fdffcf03b5266454b13f24}
+  - {path: search/exact/batch/inputs/n-154.txt, bytes: 8003, sha256: ff1b42d63fefa3da1876de51cb3e88806ec4207b9e71cb35f3d2881dc48c3268}
+  - {path: search/exact/batch/inputs/n-155.txt, bytes: 8514, sha256: b03cc4e7c5d9803b1e7fae17334cc99ec351594d8ad4c5d68236c691e76e807e}
+  - {path: search/exact/batch/inputs/n-156.txt, bytes: 6931, sha256: ff3f88484ea76101d98ae7a35bc832861078c43fcd0ec280c61fc99a28b21a6d}
+  - {path: search/exact/batch/inputs/n-157.txt, bytes: 1954, sha256: f8bc204b3fae3bd1104a592115704e2f448ced186ae545255538ece2eeb19cec}
+  - {path: search/exact/batch/inputs/n-158.txt, bytes: 1967, sha256: 20c191bc4068751f4a1a960ca1f10377a9f965b67d82a00671132f2307ff6462}
+  - {path: search/exact/batch/inputs/n-159.txt, bytes: 1980, sha256: de85e9a7d5d4285a96cb3acedcaa621f4d0b076ee806fafc330e7973bbe8b694}
+  - {path: search/exact/batch/inputs/n-16.txt, bytes: 197, sha256: 636c34263ace72fda9a2438b8fc3198de60fdece47968509d1ba3298ebbbe29a}
+  - {path: search/exact/batch/inputs/n-160.txt, bytes: 1993, sha256: 7b7480e2112365632e9c657b443ec4f0f7763a9be9d771e4ff992a81e22a6823}
+  - {path: search/exact/batch/inputs/n-161.txt, bytes: 2006, sha256: 050f713edd7cb549c24eb288e7a12aa04993e54ea41bffc04bdfbf48fd789c14}
+  - {path: search/exact/batch/inputs/n-162.txt, bytes: 2019, sha256: deba449f4c224a31c61b29daf61dbdc93486ff9b40f03136af09e51368e12252}
+  - {path: search/exact/batch/inputs/n-163.txt, bytes: 2032, sha256: 50ab66c4196435cb39bb07c81ad244b421bf9cd9e1e036ed4cc587d4c364e5ea}
+  - {path: search/exact/batch/inputs/n-164.txt, bytes: 2045, sha256: a2b2279b314162c4f983501adee77b1876f010e66277d37f874473f0b995fa76}
+  - {path: search/exact/batch/inputs/n-165.txt, bytes: 2058, sha256: cabc27aadba825502b770944b92aaab1d8bc427ea53454b7f71fe999c519ecbe}
+  - {path: search/exact/batch/inputs/n-166.txt, bytes: 2071, sha256: c51ae80e47388c5819f1680c5e3c458bb70bc769517a700eb7dcfcbec31c1cf9}
+  - {path: search/exact/batch/inputs/n-167.txt, bytes: 2085, sha256: 540f606d2501c3e229a0c8ce426ca76ca8709a00b27992bb33a552165a9a306d}
+  - {path: search/exact/batch/inputs/n-168.txt, bytes: 2099, sha256: fc57a17aabc5760153a26671a3eb3d5f17a10ef86ea9ccccb2fb0a16ff2e1a3e}
+  - {path: search/exact/batch/inputs/n-169.txt, bytes: 2113, sha256: 4b8e521c8c456e55719965f0d710f0f1e87958da844d9e86f9b82788591c310f}
+  - {path: search/exact/batch/inputs/n-17.txt, bytes: 679, sha256: 97b02bed5147a3717bad15c70117e7592be73f11f9c6ee1166f4d1bdb8658bb8}
+  - {path: search/exact/batch/inputs/n-170.txt, bytes: 5306, sha256: 28b07095cfee39b7c4c1c9ad15d7efde8ce0995e09bd0586d7f38aa178ccbfa0}
+  - {path: search/exact/batch/inputs/n-171.txt, bytes: 5121, sha256: 93fd39b0661253199063e16f03fd0f27f372cfc0a2af517078d0082d2fb7fe28}
+  - {path: search/exact/batch/inputs/n-172.txt, bytes: 9173, sha256: 3f859e41d630216b440aec035763cb4040d3645f3a0556c328e10587347afa62}
+  - {path: search/exact/batch/inputs/n-173.txt, bytes: 5531, sha256: 3260deb6b325f3c3e3519587ddcd185f4a4b25f5c37e660e9fbce1991da85795}
+  - {path: search/exact/batch/inputs/n-174.txt, bytes: 4880, sha256: d471f9b46317be74af0b86bbe7cd328bc102237f3349157115f2581cf22eba89}
+  - {path: search/exact/batch/inputs/n-175.txt, bytes: 6312, sha256: 98b3428fe950b9020470bfaabe41aaab1749dfb0aae12f5eda05018e0b67ad09}
+  - {path: search/exact/batch/inputs/n-176.txt, bytes: 5531, sha256: ac574674a6d0c0d4a83d268a95d168553fa464f76a31ccdb7e1fbbb22e42035c}
+  - {path: search/exact/batch/inputs/n-177.txt, bytes: 9612, sha256: d9fec070f614e226139ab5e303ea7f6d21f99d1245d55b311849982b5e5a71f2}
+  - {path: search/exact/batch/inputs/n-178.txt, bytes: 5489, sha256: 69368cf2fc29402987b2692cb97ff1451a67d7282c610dde7029f111ec793902}
+  - {path: search/exact/batch/inputs/n-179.txt, bytes: 5710, sha256: 1a0829b6278c9a4fb486af0bdd8088720e1f8fdf6b429116e4c5daa892393e32}
+  - {path: search/exact/batch/inputs/n-18.txt, bytes: 745, sha256: 1fc208c165db3e4a82dc65437db9acd80d5dcec23cf6715676646b02ebd74d95}
+  - {path: search/exact/batch/inputs/n-180.txt, bytes: 9249, sha256: aabc794cc506a4744dd33372f089a7a5136be5c081e7afc24f2a020242fd1445}
+  - {path: search/exact/batch/inputs/n-181.txt, bytes: 9669, sha256: a5e5bf80212baa935ed249bef6050879a5997c24eac0de807c3c885445005a21}
+  - {path: search/exact/batch/inputs/n-182.txt, bytes: 8371, sha256: 73387cc4a2987234dc2b3121edb8e2f5f2995467c9b33edaf3b7b6c35f8d58ce}
+  - {path: search/exact/batch/inputs/n-183.txt, bytes: 2298, sha256: 7d7a07d90cac284eabd9e487921a1c5b466f8f5698d3f9cad83711ebf038c5f7}
+  - {path: search/exact/batch/inputs/n-184.txt, bytes: 2311, sha256: be7af08aec78af5805c9f29490720580c053eae1b59c59646b1a8a48b02e0dfc}
+  - {path: search/exact/batch/inputs/n-185.txt, bytes: 2324, sha256: d6f6a5d5c91805f5e4f9b7478ac7d26a181cc32c7c11672b1770d23d19fa98f8}
+  - {path: search/exact/batch/inputs/n-186.txt, bytes: 2337, sha256: 04fb2022c5c51b5a54a11c32a0f9fc77b8414af6c9dbf71c2e8ba3f993b267ed}
+  - {path: search/exact/batch/inputs/n-187.txt, bytes: 2350, sha256: 6c00b31a1c0e66df6c2077158d2cbe79ef1454b2105cecb9a55cd0128cc18ef4}
+  - {path: search/exact/batch/inputs/n-188.txt, bytes: 2363, sha256: 82aa7888ef3b49657616fd51824d8eb06e3e0856611556f93f35731b6cbe4f8e}
+  - {path: search/exact/batch/inputs/n-189.txt, bytes: 2376, sha256: 4eb6ea6c069dd953e228c32e94eee8221de0639529f4820fba184a389b3b9052}
+  - {path: search/exact/batch/inputs/n-19.txt, bytes: 664, sha256: beb76147de8beeafb0ac8173ec13fb25ed7f487203671fb1d2daad489c62fb13}
+  - {path: search/exact/batch/inputs/n-190.txt, bytes: 2389, sha256: a1151dba7c572be7b645782427527b0782b133b848150eb62c49556277be103d}
+  - {path: search/exact/batch/inputs/n-191.txt, bytes: 2402, sha256: 8ca26069a8d104c62bd8ac595c791f8b67ecc7ea06c5e74540cd6c0adeebfdc9}
+  - {path: search/exact/batch/inputs/n-192.txt, bytes: 2415, sha256: 20371c7876b6e0c8e2284226de60f9fea469ed77c921fd738b18258478d2229c}
+  - {path: search/exact/batch/inputs/n-193.txt, bytes: 2429, sha256: f60f856fa9faad2a9c6079638cf74acdc9729ea30d01da1eb0a6dd4539dd0060}
+  - {path: search/exact/batch/inputs/n-194.txt, bytes: 2443, sha256: d867e761ddf9545c511b5a15b4e7e6ae308bafe82a3d17e0e52e3888ffe842bf}
+  - {path: search/exact/batch/inputs/n-195.txt, bytes: 2457, sha256: ef5265569a96f5ac8fa27837c653aa834cfd7b8d8b9ee04a69392e9fed9be2bd}
+  - {path: search/exact/batch/inputs/n-196.txt, bytes: 2471, sha256: 7017c852c9b5cee6dcfbf150ed81cf813375db9bd1cfedc54ae8ab354f36a819}
+  - {path: search/exact/batch/inputs/n-197.txt, bytes: 5671, sha256: 778ec18ab4c9739f051dacabb52d5306011be50061e74a8a7a049fa657c9df62}
+  - {path: search/exact/batch/inputs/n-198.txt, bytes: 6153, sha256: 9f5776a253386ba582e4bd5acbb2001c3ba07a3f97753a4ff00828d4165467c8}
+  - {path: search/exact/batch/inputs/n-199.txt, bytes: 8666, sha256: 0f28a0e721150931dbe1c4f167e6ea17af60feb79a023bc5434c04c050486f06}
+  - {path: search/exact/batch/inputs/n-2.txt, bytes: 28, sha256: 15b322d5ee217cfd139e4c30a85f69304c274c19db57e68fc2895eddd5a4d48e}
+  - {path: search/exact/batch/inputs/n-20.txt, bytes: 245, sha256: 4823614c7f252d525133004d7df85d80f16bf177ba08d505904a30eaec0c5346}
+  - {path: search/exact/batch/inputs/n-200.txt, bytes: 6069, sha256: ea2dd187539eb77eb6a2492615dea35bbe922659db8fa69f7f3ad1fc992c3206}
+  - {path: search/exact/batch/inputs/n-201.txt, bytes: 5661, sha256: 486e3e6f7078ec938ef7376e06b7c8277d0d74399e16513bf5fcea48898642c1}
+  - {path: search/exact/batch/inputs/n-202.txt, bytes: 5708, sha256: 7eeb4d13b0cc943d9da9338239c9d63c227b7ddcddec853e52d9910391fc8516}
+  - {path: search/exact/batch/inputs/n-203.txt, bytes: 7072, sha256: 4acbb08088fc11f5497693f88a29654df1b8ca684b9493b7415ab93b5614345b}
+  - {path: search/exact/batch/inputs/n-204.txt, bytes: 6381, sha256: e5049a70b8322abfa1acaf845c0bce2513c9c9a697d58b7d33be5cdfd1c37cf7}
+  - {path: search/exact/batch/inputs/n-205.txt, bytes: 6496, sha256: 8878059a28fa47cc708be857b6dd6ba81515e7e435c0b03c3c063b2212a989b1}
+  - {path: search/exact/batch/inputs/n-206.txt, bytes: 10953, sha256: 39d0087a02874a3702082e0e09108ddf8ce2b601f1ee4585b5ff6b04243a9fd9}
+  - {path: search/exact/batch/inputs/n-207.txt, bytes: 11425, sha256: f5259f79618fd96bce9638e2bc56c4e560f077e7b04b799b42ed96931be6f762}
+  - {path: search/exact/batch/inputs/n-208.txt, bytes: 11053, sha256: 3476c29412f09f8083e6e225dafe7484b207011a7f2ff282fcd0c9577e66db54}
+  - {path: search/exact/batch/inputs/n-209.txt, bytes: 11047, sha256: 096c8d9c9a73227c376ec50f07f223f3adeb13e3f08ef9c0a4d0d49ad86daae3}
+  - {path: search/exact/batch/inputs/n-21.txt, bytes: 257, sha256: 4d604f309676eccec7b33a88b0dfa1548d8d03c137ece7e1955562b96c41ace6}
+  - {path: search/exact/batch/inputs/n-210.txt, bytes: 11361, sha256: 8d9d8d1db87762fadc5940c91098d0249231aa1243b597f969156bf6ad5a102b}
+  - {path: search/exact/batch/inputs/n-211.txt, bytes: 9740, sha256: 78828f9e8bde95b5da7b4dd3ab8291eb51fa139ae3ee80ef1bc65742defc9dd9}
+  - {path: search/exact/batch/inputs/n-212.txt, bytes: 2683, sha256: d3f0b6c24df60e1066bdf765e799deac105de23da3d6e4e7c2a805f075f1b2ba}
+  - {path: search/exact/batch/inputs/n-213.txt, bytes: 2696, sha256: 5c3f2e8c868d7c9e1c037142c44fd3fb079f53a6660c0f5629525ee86eb5752c}
+  - {path: search/exact/batch/inputs/n-214.txt, bytes: 2709, sha256: b59427f2d4ad2ac5526682101bb4b4f90e78368e26a4db31a3ae3b125cfe8f96}
+  - {path: search/exact/batch/inputs/n-215.txt, bytes: 2722, sha256: f8760de605ab11e1f383db9fd8643a8ee643447ee27dc25e24d4f3540fce0fd9}
+  - {path: search/exact/batch/inputs/n-216.txt, bytes: 2735, sha256: 7c2455ec543d7f6e75d7c9414ef0be29f5b4c63d2be818121d5604fe91eacba8}
+  - {path: search/exact/batch/inputs/n-217.txt, bytes: 2748, sha256: 4d26f70b90aec0d385d5ac0e4c605bfd05ac21008640ed2061594fd31ce9f92c}
+  - {path: search/exact/batch/inputs/n-218.txt, bytes: 2761, sha256: 3695576bd2fc5136f148a0ff9ec30d1664f79a32e0823012042845b92c5047cd}
+  - {path: search/exact/batch/inputs/n-219.txt, bytes: 2774, sha256: 332b01208b862cb6ac29f36a5c73d97381092fbd21d085917973d2df50bdd2cc}
+  - {path: search/exact/batch/inputs/n-22.txt, bytes: 269, sha256: 4a57e8b96defcba89b596b8c4668a6c32e65f38b651c77d00a406c8a1211bd4c}
+  - {path: search/exact/batch/inputs/n-220.txt, bytes: 2787, sha256: 2b51a1abdeafa177e2871c38724da9510fdef1c050ca3367260703e4d00c29e3}
+  - {path: search/exact/batch/inputs/n-221.txt, bytes: 2801, sha256: b7d456964aada27d9861114cdac10188afe61de076b99ed85891c6fa1f43f026}
+  - {path: search/exact/batch/inputs/n-222.txt, bytes: 2815, sha256: 0bcca9933877bf69c309fb3376f3f8967cd27d4a37909b7e5a145738d25b8b18}
+  - {path: search/exact/batch/inputs/n-223.txt, bytes: 2829, sha256: f20d2200aab5dc426792b25458fdb22b956714372aede64623b45154db7d22e3}
+  - {path: search/exact/batch/inputs/n-224.txt, bytes: 2843, sha256: 229370f19f7efda285c507730377ce7a85ec7a2a45b42c48d92b668f183d858f}
+  - {path: search/exact/batch/inputs/n-225.txt, bytes: 2857, sha256: 1900d21342958c37ed27c03b28a07577dd4ec3850ff6919eea688ed80d18c694}
+  - {path: search/exact/batch/inputs/n-226.txt, bytes: 6675, sha256: b0baa3b3dc21e1a4e7d1026a293ee52ce379bc82f04a1956848f29ee0f8843b2}
+  - {path: search/exact/batch/inputs/n-227.txt, bytes: 7569, sha256: 47877400730f85f09fc179460efa745e048b35f716d3a440ae47ee66e32b39b2}
+  - {path: search/exact/batch/inputs/n-228.txt, bytes: 12374, sha256: 65aa750a70021773ca73e524b4c7d0285ec03e8c1cb92cdd6a4b11132e04b015}
+  - {path: search/exact/batch/inputs/n-229.txt, bytes: 7029, sha256: 80a8e4de950ed642127b282e32eb34db3417e47102204dc833474b90141a882d}
+  - {path: search/exact/batch/inputs/n-23.txt, bytes: 281, sha256: 8511d8375799f0f41705b65f1d8f746c1ed273c6d499d588fec63a9db7a9fbe3}
+  - {path: search/exact/batch/inputs/n-230.txt, bytes: 9105, sha256: 692ebb600baa9970b560d9ed4ef0e62772feb46336923b9b37b192767ac2306a}
+  - {path: search/exact/batch/inputs/n-231.txt, bytes: 6507, sha256: d9ce723bd4545e4df2da7363392d1e939068523c8f0423ee76344c033f3f10c0}
+  - {path: search/exact/batch/inputs/n-232.txt, bytes: 8034, sha256: 57389838b73dafc695070ca20e5dcd696966d3022cba21444600676da326bb28}
+  - {path: search/exact/batch/inputs/n-233.txt, bytes: 8076, sha256: ee2276d2c622a4883e82e8929ecd341760a202d94bdf8080dbce76fe20ac008d}
+  - {path: search/exact/batch/inputs/n-234.txt, bytes: 7339, sha256: bc6bc3c0110b74d57c5f759b4fc3a16dd4884ae2f1bbb273abd08e7b923e0638}
+  - {path: search/exact/batch/inputs/n-235.txt, bytes: 7344, sha256: 1f0365d4e76d2d5dc2826abe175d99be7a8eabf47e03c07b8d2b518f1e29f19f}
+  - {path: search/exact/batch/inputs/n-236.txt, bytes: 12347, sha256: 339bb9835c4daee6fc3bb9044867347ec999640d56b17a4c9242dda6003b11e6}
+  - {path: search/exact/batch/inputs/n-237.txt, bytes: 12800, sha256: f216cc6d933d1fa174adc21e4eba4e26d7c494350a832c1257b94aa218df1799}
+  - {path: search/exact/batch/inputs/n-238.txt, bytes: 12399, sha256: f2325e05830786d32af90c8d10cf057778c057e9c51e6ea4fcb0726503fda0c5}
+  - {path: search/exact/batch/inputs/n-239.txt, bytes: 12992, sha256: 89f97a34ff28cfa97013d2d98a29c46156c9f6af42a609b166d011f75f41ac6b}
+  - {path: search/exact/batch/inputs/n-24.txt, bytes: 293, sha256: b02895be3cf5ffb7f45a66a99975c97eb8a83110f40c7ae35ff2945cd8a2d347}
+  - {path: search/exact/batch/inputs/n-240.txt, bytes: 13023, sha256: d6633029f911f95578aab1f1f0064fc9343a3b5450eb0d48de3bdf83075f0211}
+  - {path: search/exact/batch/inputs/n-241.txt, bytes: 12774, sha256: 8d6d0c2a0c7eeda80f0ff6b93db3fd77d839ea72b42b63b856261d319274abff}
+  - {path: search/exact/batch/inputs/n-242.txt, bytes: 3083, sha256: df1a677de14ea42aee8a39bb465724293ad9b77e10b474ebe286fac02c8dc550}
+  - {path: search/exact/batch/inputs/n-243.txt, bytes: 3096, sha256: 55ab0d8566245cfd9206f2ab4c4392be54680ace4380c73987749e05f4db023c}
+  - {path: search/exact/batch/inputs/n-244.txt, bytes: 3109, sha256: deda15b87eebb773bc97330b4fc256afa58b83617288cae803c69e4aed38d7d1}
+  - {path: search/exact/batch/inputs/n-245.txt, bytes: 3122, sha256: c645068138e92c2fe227556936bdd3dc3ca6f806a1f135ebdf24cd1f8215346f}
+  - {path: search/exact/batch/inputs/n-246.txt, bytes: 3135, sha256: 1b24bcfa0dbf14cefcf0a8b06c7516e444750ae357fe7ca8f5f9b8d8c6834b60}
+  - {path: search/exact/batch/inputs/n-247.txt, bytes: 3148, sha256: 80b60c90840f58daaa2ac2ec48f8067c329ed70ead6a448ed842d1a48fd976ec}
+  - {path: search/exact/batch/inputs/n-248.txt, bytes: 3161, sha256: 6619d702f807dec1619466dcd8061c18a67f2cdc97c1dda4a6a320b6622853d3}
+  - {path: search/exact/batch/inputs/n-249.txt, bytes: 3174, sha256: 25aa2cf35ba4e3e3fc78295b19ccf913412c69cc9fc59553ab7b3517b2bb3aff}
+  - {path: search/exact/batch/inputs/n-25.txt, bytes: 305, sha256: 52991d1bc7e0e6e3a98667d48659ae925a0ad4f0e3e8d0611aa15e787c5dd0d3}
+  - {path: search/exact/batch/inputs/n-250.txt, bytes: 3187, sha256: f03d08a1cccdeeab2213740443e8f31cbb65ecda534d99aa5ef00322e1541fdc}
+  - {path: search/exact/batch/inputs/n-251.txt, bytes: 3201, sha256: bf3072cd9319e4ec1cb61005843ccf84dd3f3a8bfcbc6ca6c7690ddda99f0ef6}
+  - {path: search/exact/batch/inputs/n-252.txt, bytes: 3215, sha256: dda30e92298f6e45c0ca0e3c9ddff23ba5fc640f5ed12b91ed0bbf8b7d26d567}
+  - {path: search/exact/batch/inputs/n-253.txt, bytes: 3229, sha256: 4bf2dbb07bc66187601b6f9eae0f764857af78eec12f689c9b9a3938eebe8e7f}
+  - {path: search/exact/batch/inputs/n-254.txt, bytes: 3243, sha256: 93fb52da2c7bd8f85a4c52e44877c91f5a9323ddf81dd2c8c95219fd8a13ea08}
+  - {path: search/exact/batch/inputs/n-255.txt, bytes: 3257, sha256: 6d0367accf81b7bed7001a807cf347ce90f0e1f714fb35c73646832ae7357796}
+  - {path: search/exact/batch/inputs/n-256.txt, bytes: 3271, sha256: 6d96ef94f18018314e703c926159b058cdfe2b1cad7c45a340fdb8c5d9ac1746}
+  - {path: search/exact/batch/inputs/n-257.txt, bytes: 8192, sha256: ccc9cc16a5186f4e4a18b9d4d1dc2a17b9f6dff16427d62abcdfb9805b6be836}
+  - {path: search/exact/batch/inputs/n-258.txt, bytes: 8395, sha256: 1c39b1dead7b6107c19760f08b7905b24a519bfcaff53e5dd023b559e72e6176}
+  - {path: search/exact/batch/inputs/n-259.txt, bytes: 14084, sha256: 3284eb093e1fc9354aeb8135f23767c64a52eb699b6042552100b4fac1ed261f}
+  - {path: search/exact/batch/inputs/n-26.txt, bytes: 902, sha256: 959f68813ccaf1808f96d7c23fc9b73ac635d1f65850122cfffffd03e14ab027}
+  - {path: search/exact/batch/inputs/n-260.txt, bytes: 10696, sha256: 2c9acc57116f9b851e887284cf41d198c3b7afc32cbd759221e1f8a5fb6d860b}
+  - {path: search/exact/batch/inputs/n-261.txt, bytes: 9949, sha256: 3b8bb9c5cb0ba681f98cd097feab03686f150fc920a4025a6d63b3f4f5481db1}
+  - {path: search/exact/batch/inputs/n-262.txt, bytes: 7338, sha256: 374efdb485401ac7c137fdcb4eccd319a87ea405c09ded0966d666549c39a618}
+  - {path: search/exact/batch/inputs/n-263.txt, bytes: 13612, sha256: 10156c04e15610aba64ca9643959892a02865466c9f79fbd320f3103a4359785}
+  - {path: search/exact/batch/inputs/n-264.txt, bytes: 8846, sha256: 7774e39f94a3915869299defdb4e4f746a6bf71d454f9753bbfd7c0e31b67529}
+  - {path: search/exact/batch/inputs/n-265.txt, bytes: 8886, sha256: b4492c55e3228f6116a2bcccedc7d91ab057ed8cd30c7ccc2a86092de2f9afac}
+  - {path: search/exact/batch/inputs/n-266.txt, bytes: 8260, sha256: 954609e124259a6319ec665c7ede41dae381698814f7e33120656a2a9e94ca49}
+  - {path: search/exact/batch/inputs/n-267.txt, bytes: 8066, sha256: 79cf58a5ed9d61c2f5b0bcd097e473b91a6a1486af2f63526562e12fa1f2ff4e}
+  - {path: search/exact/batch/inputs/n-268.txt, bytes: 14721, sha256: 6316a840889096ffb25e5e5890b93a667be76eb5e9c1b5943b0fcb75e960ef5f}
+  - {path: search/exact/batch/inputs/n-269.txt, bytes: 14445, sha256: 68a5e4d274a84e96c6009dd60858350963f042137e7dc59fa7fb73fb187e6140}
+  - {path: search/exact/batch/inputs/n-27.txt, bytes: 821, sha256: ff3a8719099fc6ef74d7e2cb61e9965de4af3a39d49efaa9df277858de9c2950}
+  - {path: search/exact/batch/inputs/n-270.txt, bytes: 14407, sha256: 99c3a2f79ef25f2d0d52d7556e5d55e6f92a492e9d23c2665518ed638dc36066}
+  - {path: search/exact/batch/inputs/n-271.txt, bytes: 14320, sha256: c48ee109ce28176d249aac05cab96bd4c08f70d64197cbc5f658bc6544bbb608}
+  - {path: search/exact/batch/inputs/n-272.txt, bytes: 14896, sha256: f8f0adf0da1f9ccff7aa2e19c74b9cbc51fe355454a88d76f18f2fe1c8fcf033}
+  - {path: search/exact/batch/inputs/n-273.txt, bytes: 15106, sha256: 20355c0c882639496d7f3f53721b02ca95a31b3d08c8d13a1ad5f42ae74f72ed}
+  - {path: search/exact/batch/inputs/n-274.txt, bytes: 3511, sha256: 1a245d3d140ffaf1f2f7e32d49e39984802f870e19bd5ebba6f88b0b3c06354c}
+  - {path: search/exact/batch/inputs/n-275.txt, bytes: 3524, sha256: 98a1fb3bf3bf3e48f8dd808c0275e444eb0539e50606199478e534375f68d643}
+  - {path: search/exact/batch/inputs/n-276.txt, bytes: 3537, sha256: 449f92b2f6ef7a39d28d47b262a1b12a565142e33d62677d57c3b8608124f85f}
+  - {path: search/exact/batch/inputs/n-277.txt, bytes: 3550, sha256: d0468943690e5d084ca466bcb6f3875be0f4987886c406d10d419d89d1d72124}
+  - {path: search/exact/batch/inputs/n-278.txt, bytes: 3563, sha256: 42b7d70142f1cde779aa192811299f565e40c66c9c3bb7939d49654a29dbb2e0}
+  - {path: search/exact/batch/inputs/n-279.txt, bytes: 3576, sha256: 1d1e53c60ae0ccaac2ad10c39c4034278d95d67f554a976b02450ea52e3dff7a}
+  - {path: search/exact/batch/inputs/n-28.txt, bytes: 1137, sha256: 3a6ab0a0be4f49afb2d9105b0274a24c7683ac5c34bf1eef622fb498193de062}
+  - {path: search/exact/batch/inputs/n-280.txt, bytes: 3589, sha256: 6a79b44eadce176a4560de8df271bc00daff22002b0eee683c57ed1d09fd4a0f}
+  - {path: search/exact/batch/inputs/n-281.txt, bytes: 3602, sha256: 0a6f38951b5bf23eaa2074fea97f28ebfeb66a64f9ec5707a1a32070219fadda}
+  - {path: search/exact/batch/inputs/n-282.txt, bytes: 3615, sha256: acf8bd380b34c45137a392764e4e64d940253ff845deaffc78b9c67a3582d5aa}
+  - {path: search/exact/batch/inputs/n-283.txt, bytes: 3629, sha256: 6f92c0e7c7b348d5cd436bb6d7060f614577c500700909361e5eb4e42b301980}
+  - {path: search/exact/batch/inputs/n-284.txt, bytes: 3643, sha256: 6502da55e6158cd7daca0ec199417ec266362142eae873f5d9a144747da1e5c9}
+  - {path: search/exact/batch/inputs/n-285.txt, bytes: 3657, sha256: 8210b61ddde413e9b6de8fbf4e46269ae22d379ec0fae4c68cafbd1ca47d80a7}
+  - {path: search/exact/batch/inputs/n-286.txt, bytes: 3671, sha256: 274cb6ed79b12ac517de3c8a2f7679590cbce0933f4d118c33adb413a2286026}
+  - {path: search/exact/batch/inputs/n-287.txt, bytes: 3685, sha256: 359c9b6c8453f0960277d9244f78950228690ce665a338bf56b4c254a53646b2}
+  - {path: search/exact/batch/inputs/n-288.txt, bytes: 3699, sha256: 5198eafb842d5f35120bad850ae9dbbb41d6543d469560597167d7270c502d64}
+  - {path: search/exact/batch/inputs/n-289.txt, bytes: 3713, sha256: a86e0aae740228dfec618b13bdfbf7c47a774262111657033c75eb070676f17b}
+  - {path: search/exact/batch/inputs/n-29.txt, bytes: 1287, sha256: 2bf87c7a7af2e13b7a3928f21253c8236c55efe9b3148871bd63ab330781cd4d}
+  - {path: search/exact/batch/inputs/n-290.txt, bytes: 8590, sha256: 88b4b620c7e5940776ed9e61fad46a9dc2ef385868c327c8aba71885f5be53b5}
+  - {path: search/exact/batch/inputs/n-291.txt, bytes: 8632, sha256: 45a2ff626a6f2284b9f189fa6bd8be52228fd8eab4569f26b0d021472d8dbd77}
+  - {path: search/exact/batch/inputs/n-292.txt, bytes: 15445, sha256: ffe96d110503067adb02a41e9b1f66405c54318610b879588d33b609662934d4}
+  - {path: search/exact/batch/inputs/n-293.txt, bytes: 9639, sha256: e7a401e93916e7e73c916e608c11078d13933a739dce8b22fe6c16cb1deba79b}
+  - {path: search/exact/batch/inputs/n-294.txt, bytes: 9531, sha256: b70befbae89753aa950af04b83aba3727d770397ce45ac0570836ee6bb43c71a}
+  - {path: search/exact/batch/inputs/n-295.txt, bytes: 8256, sha256: cd2de34b85110f506fcb5a450791298492478031f93be21c589853bcd2b32a21}
+  - {path: search/exact/batch/inputs/n-296.txt, bytes: 8298, sha256: 8c2560493948b5e78215877dba3ac9f803e36de2bf021bfee005ccef3cc4d121}
+  - {path: search/exact/batch/inputs/n-297.txt, bytes: 15855, sha256: 883b70738c8c376a2fe1a52b198403ea1db6754458bc69489c770125f855466e}
+  - {path: search/exact/batch/inputs/n-298.txt, bytes: 9994, sha256: 9e64c49be387fdabed1b5c5a1934e80e2ac22ebf2f25a091153a40397f56c49d}
+  - {path: search/exact/batch/inputs/n-299.txt, bytes: 13587, sha256: 6dd8894bcac46893bd2449f1a3088cc036d342c7055cca2ebee3319a703ca458}
+  - {path: search/exact/batch/inputs/n-3.txt, bytes: 40, sha256: 1679de4a24b61f6f709ced46ad14d71044929959268cd91e47728a52a556d57b}
+  - {path: search/exact/batch/inputs/n-30.txt, bytes: 365, sha256: 43b4df871ef25c39cda61e132151b93a9d88af2d5d540e910603c6fbf0f9f38b}
+  - {path: search/exact/batch/inputs/n-300.txt, bytes: 9319, sha256: bba35e6c724dec2ec775999e0689af3b97df97a01d859e4d76fa090b900a06f1}
+  - {path: search/exact/batch/inputs/n-301.txt, bytes: 15690, sha256: c6c9f3f86805d0504d8128ffbde48ca4128c685a62459e608ef1089c53db2dce}
+  - {path: search/exact/batch/inputs/n-302.txt, bytes: 15826, sha256: ff3be7402ea99b9f784ce8b14ef6110f759e2890818698b9b35834c5ef2acd6b}
+  - {path: search/exact/batch/inputs/n-303.txt, bytes: 16826, sha256: 75c89c811253c92a344b3a2769e9c033374a1320f49d6e8ad2eaf395c2636981}
+  - {path: search/exact/batch/inputs/n-304.txt, bytes: 16509, sha256: 78c125b6e09c83bb8619067ad9f1f29f4457a96a6b7e4b53e6ae78673fde4324}
+  - {path: search/exact/batch/inputs/n-305.txt, bytes: 16515, sha256: 9ed1fb19b307e2460c89f835957cbe16bf3affe0ffdbf70b5fe4c47e42d39ea1}
+  - {path: search/exact/batch/inputs/n-306.txt, bytes: 15781, sha256: 6685231b14b66d1ed37bdd0f39f6b904cddbb7b14956eaca95f43901780084d6}
+  - {path: search/exact/batch/inputs/n-307.txt, bytes: 17073, sha256: 4dbf73cea5cf2da5986fbe0d1d385f8ef72fa74970a415203bda0f1df8cc1f5d}
+  - {path: search/exact/batch/inputs/n-308.txt, bytes: 3967, sha256: 2148e3bc94dc79580d0f0f345f5a649f42918e38d75f500621411d9273b3d2ce}
+  - {path: search/exact/batch/inputs/n-309.txt, bytes: 3980, sha256: e5b4569a26ace16bc9985e2206568ded7849e4a0e7f8993a837bf36a71ebe0c0}
+  - {path: search/exact/batch/inputs/n-31.txt, bytes: 377, sha256: 1e60c872750ce3ae448abe998bb636d8528b1abd0d5466ffa7eb751323857cb7}
+  - {path: search/exact/batch/inputs/n-310.txt, bytes: 3993, sha256: e8c92c57eb1ffed3cf6fcf7098adc39378e06ffb75206ccc4cc95ebbf3222a2a}
+  - {path: search/exact/batch/inputs/n-311.txt, bytes: 4006, sha256: 22235eac5e35faa4b615a8380e16a1ac238429993725ed70ce8c113955e6fb69}
+  - {path: search/exact/batch/inputs/n-312.txt, bytes: 4019, sha256: 28320f5e8f51e6ef30dde8015e4197ae2c90a7009f9359ff4378b689323fb996}
+  - {path: search/exact/batch/inputs/n-313.txt, bytes: 4032, sha256: eec5af736a6e65dcf962ec714d7dba819661e6b1a10414448e9acbe285546ad2}
+  - {path: search/exact/batch/inputs/n-314.txt, bytes: 4045, sha256: 4cb32786a89fcdd1950e73bdd255e97366b3372561c894f39557f2a6b3f75743}
+  - {path: search/exact/batch/inputs/n-315.txt, bytes: 4058, sha256: 4d07c1a9a205fb35ff1cb2a3f5e00615f580151dbaf2dac4b0bd717607530a80}
+  - {path: search/exact/batch/inputs/n-316.txt, bytes: 4071, sha256: dcb4f63136972d9603cfc3c64a70e0d3033d8a0b095a919295474faa011b1855}
+  - {path: search/exact/batch/inputs/n-317.txt, bytes: 4085, sha256: fcae7838cd7b882e8d841e609914a177f523221f66862d703f09552811f5ea6a}
+  - {path: search/exact/batch/inputs/n-318.txt, bytes: 4099, sha256: 65502d8fae76de5b0aa801bcc61fcb79561d9e06c28c887b8c5ec82d9294ca82}
+  - {path: search/exact/batch/inputs/n-319.txt, bytes: 4113, sha256: 1fe25b4750008b1a6e0f40bcdb33ca5531090f09073334c5994db7f67bf34992}
+  - {path: search/exact/batch/inputs/n-32.txt, bytes: 389, sha256: 139c06a2a6eec030a1e83f981d700ca1afba719b44b577bcc34aa642aff8c834}
+  - {path: search/exact/batch/inputs/n-320.txt, bytes: 4127, sha256: ef661788086a329cce61f6322f39d06a34433ef723cd61bcb357d1fabdb6aec3}
+  - {path: search/exact/batch/inputs/n-321.txt, bytes: 4141, sha256: 742473f6d7266ca7076dd58fe170933c46e4dd848496fd178e0e5a38eb220658}
+  - {path: search/exact/batch/inputs/n-322.txt, bytes: 4155, sha256: 7b50687737faed4240b98d63bed8a8cd6400983612c67f8dfd48d891cce42bc0}
+  - {path: search/exact/batch/inputs/n-323.txt, bytes: 4169, sha256: 6c0f22a0960be04d24d463c1d949a1bd81106893636a386222b2572543fe16b5}
+  - {path: search/exact/batch/inputs/n-324.txt, bytes: 4183, sha256: e03c204bf33c531d796d912358926f9bcb54be3f88181f7a62aec0cc0d322ea5}
+  - {path: search/exact/batch/inputs/n-33.txt, bytes: 401, sha256: 1f80bc37e30837bd7c040d16c759ce3961a98d99f1cdcd7bb1391386a854643b}
+  - {path: search/exact/batch/inputs/n-34.txt, bytes: 413, sha256: ffbb8312714837b6b2222beca22fdcee4f4c577341d23ae308b3e23238487ea1}
+  - {path: search/exact/batch/inputs/n-35.txt, bytes: 425, sha256: 00e2e2b3debf709ec05c34016990bc2738e3006e6ce51ef742a7d6ed17f944cd}
+  - {path: search/exact/batch/inputs/n-36.txt, bytes: 437, sha256: ee4760d5c3f9c6220741bfaa34eded1a5c7d50c04c2ea97da966fffdce92af4e}
+  - {path: search/exact/batch/inputs/n-37.txt, bytes: 1370, sha256: affe41fc870c938c30ef0d834d5c5580c7d16fa01baa01e3d81bb10f9ef5d838}
+  - {path: search/exact/batch/inputs/n-38.txt, bytes: 1096, sha256: 5278d5a832d618617788765acdba849a4eb25294e3fe18342d310b9065197e11}
+  - {path: search/exact/batch/inputs/n-39.txt, bytes: 1563, sha256: 659c5898b5c9821a707122fa851accead008eb7a5f8801286b434656650c0335}
+  - {path: search/exact/batch/inputs/n-4.txt, bytes: 52, sha256: fa6a1a77302cf5aa5491fb116b1ce156216fecf11ec37bb587e5f9464d00dae4}
+  - {path: search/exact/batch/inputs/n-40.txt, bytes: 1239, sha256: 935a71beb823875729408519897a38e55afad8a25acb10bb4ee2aa991b665693}
+  - {path: search/exact/batch/inputs/n-41.txt, bytes: 1560, sha256: ee82e28541f60781e4ab0d5ece04923fdc69cac5021ab5db33f1437c5cf66936}
+  - {path: search/exact/batch/inputs/n-42.txt, bytes: 509, sha256: 2de39de20408ede7d02a6786d1daf7624eed7c39c44b01f6501bfc060ff8f3a4}
+  - {path: search/exact/batch/inputs/n-43.txt, bytes: 521, sha256: ba6a592264ba83fb2fba005488b493663646bc9d7b80d53ace95c4d398bef908}
+  - {path: search/exact/batch/inputs/n-44.txt, bytes: 533, sha256: bc79bab4daae937ce7c50f3033fd296a21ce3ccb53e0de3b516591af3f979003}
+  - {path: search/exact/batch/inputs/n-45.txt, bytes: 545, sha256: b0e00b2e36e967970d467ee0f6bc42fb54e4136506f3768479d4573b50a14595}
+  - {path: search/exact/batch/inputs/n-46.txt, bytes: 557, sha256: d929b9a1bdd1c8814e9dada9376f4778c8c7ab28e8d6f32a44c4ba41017ffd03}
+  - {path: search/exact/batch/inputs/n-47.txt, bytes: 569, sha256: bc7ec7430e9f4f075b3569178c28adb3719c3f91f0ce4bfdcbe7d62ecb568617}
+  - {path: search/exact/batch/inputs/n-48.txt, bytes: 581, sha256: 394c19fcfd57c4ce8f2463ab54c616a1cd23fb838c5a60a6798f66eed9e8b528}
+  - {path: search/exact/batch/inputs/n-49.txt, bytes: 593, sha256: 5c31d0e07f53e1c15b2c5879dc528063355e9b57158693e4a4e0839b970f8339}
+  - {path: search/exact/batch/inputs/n-5.txt, bytes: 184, sha256: 15b2d5f4f6a0e52926b314f7b932872941d7d1e4e9a20f9e449ebd7012891f93}
+  - {path: search/exact/batch/inputs/n-50.txt, bytes: 1806, sha256: 375becdbe39eb38700b68f021cb2e3296eae917ad6bedd1b4e05713ba9058be7}
+  - {path: search/exact/batch/inputs/n-51.txt, bytes: 1995, sha256: d851034359771a843690b0e1f156c33514c5c3a2d430d56efea3dfb0843c5c4d}
+  - {path: search/exact/batch/inputs/n-52.txt, bytes: 1486, sha256: 8c9f0744bb7dddadd9f9a1c829baf80c17c665b32ad7c489b84c98fd182a35a9}
+  - {path: search/exact/batch/inputs/n-53.txt, bytes: 1832, sha256: 1199e7e20e98340f2021b0975723a5deac780e4bddf67e2d5a3456f3f2b0e7a7}
+  - {path: search/exact/batch/inputs/n-54.txt, bytes: 1851, sha256: d9c401e24ced5c386d044cfad74e281ba4492ad8a3313c270e85b112610de228}
+  - {path: search/exact/batch/inputs/n-55.txt, bytes: 2018, sha256: 123257af104abd3a1a4a953ebf150530eb088b8732a2d128728fd8fafb3e4900}
+  - {path: search/exact/batch/inputs/n-56.txt, bytes: 677, sha256: f7e12d791b7110d2beff198ef48f68a1d18f485945242b5b6c70b4e84ea0fefb}
+  - {path: search/exact/batch/inputs/n-57.txt, bytes: 689, sha256: c1082d7384f94d23624d66d936218e52448808eb747f6b08d9346e4bf56b3e17}
+  - {path: search/exact/batch/inputs/n-58.txt, bytes: 701, sha256: 76fa4dc17896a6c693ce12118c98dc04c030133a43b502a87bfcc04300f2cb55}
+  - {path: search/exact/batch/inputs/n-59.txt, bytes: 713, sha256: 4b99e24009fed90d10d776e190e376cf76a9a92ad4acd103d7f99f147f2fbe10}
+  - {path: search/exact/batch/inputs/n-6.txt, bytes: 76, sha256: a0fbbbcdca9be02cfd79be5e1bf10876afa1efc65533b4d0bc94ccb38d2129d9}
+  - {path: search/exact/batch/inputs/n-60.txt, bytes: 725, sha256: 96e1687e7bc5dd2b1c8f0dc01b1c220b360a09ea6a078e286c57a80ba970f303}
+  - {path: search/exact/batch/inputs/n-61.txt, bytes: 737, sha256: ac8620f6af45e2ab7f2719fac5ff889ead90943cd7899455b3db43db2629891a}
+  - {path: search/exact/batch/inputs/n-62.txt, bytes: 749, sha256: 068bba0eb411b0d9c21e2b69f22682fe3eefbe4ed59dbb7aa643c1c7242b95d8}
+  - {path: search/exact/batch/inputs/n-63.txt, bytes: 761, sha256: afde12b038887e96bc88239315d3b8cc2edb9eeb1db91fcc875d10081e2076b3}
+  - {path: search/exact/batch/inputs/n-64.txt, bytes: 773, sha256: 156c2108146a315a856712c2c0d8cbf3e91de85f9d9745bd4590fd7cefca82f6}
+  - {path: search/exact/batch/inputs/n-65.txt, bytes: 2113, sha256: 4c367c44594449c2626802dae973e12e9f8122769abc1de5dffd0cd8f24cd899}
+  - {path: search/exact/batch/inputs/n-66.txt, bytes: 3191, sha256: dce5e161abc25826b716288ab08225c505d91de762beba3f143f553ff5721266}
+  - {path: search/exact/batch/inputs/n-67.txt, bytes: 1921, sha256: e4fa4d1ace076f76451f80a0afeb58d683c7e35e63f9ea8316169bb6b731bac3}
+  - {path: search/exact/batch/inputs/n-68.txt, bytes: 3144, sha256: 3af1702ad8abcd7d38e638cd7918691faa16df0cf335ff34073fba870594e14c}
+  - {path: search/exact/batch/inputs/n-69.txt, bytes: 2361, sha256: 1b2507482484e431f44f3bc0194fce15186c0f04bba6c38700a3345cc2e33885}
+  - {path: search/exact/batch/inputs/n-7.txt, bytes: 88, sha256: 3d056fa958737953dee9ccb84f231310f6c51ac7c04510e19aee9f0d709ce346}
+  - {path: search/exact/batch/inputs/n-70.txt, bytes: 2545, sha256: b16b5700e21e30b45f542a425f8ac42c6efdd10912abc3cfa3472747b92dff22}
+  - {path: search/exact/batch/inputs/n-71.txt, bytes: 2563, sha256: f7f9f2f2a41aba646036e588748bbcea6527bbcbbe3d3add621b3309deaf735d}
+  - {path: search/exact/batch/inputs/n-72.txt, bytes: 869, sha256: 27a46b8d8dfdc1a913169db7484569c21f37561098036a0f223c56e9e8fcc3f5}
+  - {path: search/exact/batch/inputs/n-73.txt, bytes: 881, sha256: 95148a07935a4667239abc6ac1c8e20bc702773484132992e1baa4088be4d6d2}
+  - {path: search/exact/batch/inputs/n-74.txt, bytes: 893, sha256: feb8b0f895e540c74580ab322a3e255b4f44a4bf1824c1e0520b389b7dccf32b}
+  - {path: search/exact/batch/inputs/n-75.txt, bytes: 905, sha256: 9d8eeb2b72f522bee83799008c7889c4d5aa5c30713e51930b6a91323a14a85d}
+  - {path: search/exact/batch/inputs/n-76.txt, bytes: 917, sha256: f29fd48d2ee659d3d88de909cd88e044bb62790afedbb1169f35880e9aeb34f6}
+  - {path: search/exact/batch/inputs/n-77.txt, bytes: 929, sha256: 5b0fee8c385a34782cfd7ed6897c4e9dc9f064d84c8cb6d59e4b37f3f8aa0ed7}
+  - {path: search/exact/batch/inputs/n-78.txt, bytes: 941, sha256: d66f00a94b1c43031c73b0877106057f2d861074a429a4b260161975b57d62d0}
+  - {path: search/exact/batch/inputs/n-79.txt, bytes: 953, sha256: e8730df6dfd6719108631d749f2319c0795e7c1f3319142d4aaf3a2e771fab61}
+  - {path: search/exact/batch/inputs/n-8.txt, bytes: 100, sha256: aeee54969bfdd2ad717ebf0a50516769123903650844b17d8c68b710fe8718f5}
+  - {path: search/exact/batch/inputs/n-80.txt, bytes: 965, sha256: f19219828102d6d62ef5fd61b84965d884d626b642f9896107cdd88be975984c}
+  - {path: search/exact/batch/inputs/n-81.txt, bytes: 977, sha256: 2a6a2ff3619689fa502bbe8849ea95e68b11d21e6f6f82a981e2d57155d25932}
+  - {path: search/exact/batch/inputs/n-82.txt, bytes: 2681, sha256: 6438b0b3d1a44275c30502065c7eaa7f0845d414796ca6f48a5e8dc34397e07c}
+  - {path: search/exact/batch/inputs/n-83.txt, bytes: 3004, sha256: e87ea5be3fc76a794032c74e090bfdf3d3f06dbb7fcf82b0b8c169c8f10d5cfa}
+  - {path: search/exact/batch/inputs/n-84.txt, bytes: 2346, sha256: 58f8cea6039e320bbcdaa3436bcca0e2328871d679930b73dd764cae332e37b0}
+  - {path: search/exact/batch/inputs/n-85.txt, bytes: 2779, sha256: 40893dca72848c23311987e50c2f6b46673b414211e2112e18649b11692e217b}
+  - {path: search/exact/batch/inputs/n-86.txt, bytes: 2846, sha256: 8aa03975e96ea5407d3fd75cc7d288a2640e45f3167ab3844ffb58491d50640f}
+  - {path: search/exact/batch/inputs/n-87.txt, bytes: 2871, sha256: 711135578e5c83e2cc78a58fea7a827b87637dc4cfe76f08d3eae1eb1d9ad9a8}
+  - {path: search/exact/batch/inputs/n-88.txt, bytes: 2934, sha256: 37833b69a0247e4ac42ebf490f84a6977e0483ea3eb453d27c70c5ae4662b86f}
+  - {path: search/exact/batch/inputs/n-89.txt, bytes: 3099, sha256: 1c74ee250b748aa29c1898218e01d6cf0f129bd1305da60f80111162e1ba0705}
+  - {path: search/exact/batch/inputs/n-9.txt, bytes: 112, sha256: efdc663934dc945bc2a31ec986d96e512fa5c77cb8cca6acbc0c3d636cb13b2e}
+  - {path: search/exact/batch/inputs/n-90.txt, bytes: 1086, sha256: 2fa054f8b080deb4b237c453f6e6c7f469c77462b0e9e9515807d9723ecf6d73}
+  - {path: search/exact/batch/inputs/n-91.txt, bytes: 1098, sha256: 3e7fedfbab5df3308eb7d5c192cc2a471f2d5008a0b6010bf190712c2f9021b6}
+  - {path: search/exact/batch/inputs/n-92.txt, bytes: 1110, sha256: 54cc1ab5986cb1efbe0af6a7cd20b755de77a0e37358fad33df2f495b3be5ff0}
+  - {path: search/exact/batch/inputs/n-93.txt, bytes: 1122, sha256: 358fb876af192050954792c3f23675b5123de8314e416b1f73b22aeaf746625b}
+  - {path: search/exact/batch/inputs/n-94.txt, bytes: 1134, sha256: d3ba8f6cd8599d899bd99a6fd4489e6d9b92721805bb9515e1ac985354d77e23}
+  - {path: search/exact/batch/inputs/n-95.txt, bytes: 1146, sha256: 55f4be5cd0873ac88eb610bffc22bedbea7f6d300a6dd81e9dca7581d9ac93b0}
+  - {path: search/exact/batch/inputs/n-96.txt, bytes: 1158, sha256: 958349d927def4553e615464f3b29a09e4d6753a2c8dfc8e86abd52b1c83d4af}
+  - {path: search/exact/batch/inputs/n-97.txt, bytes: 1170, sha256: b055ebaab5fdc34c40c32afa0f854bb7853c74c666c1beeaf74a85e4d5f73a9a}
+  - {path: search/exact/batch/inputs/n-98.txt, bytes: 1182, sha256: 3197057c9f55ec4d42597e1dd2c0e1e23b81fe557addf78f1b95641d5d6e3a93}
+  - {path: search/exact/batch/inputs/n-99.txt, bytes: 1194, sha256: 76a0a6536b6554514344ec371f2d289e1451bda2c7d3d4de6c53360ad6f98be4}
+  - {path: search/exact/batch/register.py, bytes: 5482, sha256: 281803bfa84e4b72bed5d78076cae5630b6f76eb515d79ba5027cea2373d776a}
+  - {path: search/exact/batch/reproduce.sh, bytes: 759, sha256: d3585702e89863aca15ac511b00ea6829614d5ff94b4455fec1d716c499be001, executable: true}
+  - {path: search/exact/batch/results.json, bytes: 197992, sha256: 2c023881fb2edd518ea72d1d7c59f1beb4bf38c3489ce6d49706c2da283d914e}
+  - {path: search/exact/exactsolve.py, bytes: 58726, sha256: 5814ad6f2ff4ae77ac95dd99cdd5e654f0f6ca25980b7e1a096ff7ff32536cdf}
+  - {path: search/exact/geom.py, bytes: 4027, sha256: e2cd11d9578a8008d21f3117b90fc2a648fa5a718f4a68e37dc24c9f79e8a696}
+  - {path: search/exact/verify_cert.py, bytes: 3401, sha256: 3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52}
+  - {path: search/exact/verify_cert2.py, bytes: 3101, sha256: 55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3}
+  - {path: search/regularize/REGULARIZE.md, bytes: 21163, sha256: b7c4982ffd54173ad3fb9c94e5c45ac7aed0b44494c78add3ae6558d19f2b640}
+  - {path: search/regularize/atlas.py, bytes: 10291, sha256: 7a5c810a3638ac8cda47e575a7dd3a17a6d116b09ca677a80f807e0bcc71fd3b}
+  - {path: search/regularize/census.py, bytes: 4132, sha256: df998b5ee84e757c8709ee3e042a291b3efb3485875f2297377cbd9c11569579}
+  - {path: search/regularize/gallery.py, bytes: 4835, sha256: 2c1ff6755b701031c519553890e76f1e9b15b5cc16c9b65d367e296b34dff46e}
+  - {path: search/regularize/lists.py, bytes: 10139, sha256: 2f405aaf2f797480c1daf144a9ace1d942084d4ed49f65c739d0c9926654bc67}
+  - {path: search/regularize/lists/alternates.csv, bytes: 13293, sha256: 85ef8d6a77cf64741a7d6ce9c6dc8e2d1f1eae3f1a4531a723d01d379dc0abe9}
+  - {path: search/regularize/lists/alternates.json, bytes: 20522, sha256: cb434a2ccf4dcc4d0858eb4a0009753fe28e0f182ee7d6782a36ef9ddee30ef2}
+  - {path: search/regularize/lists/alternates.md, bytes: 15034, sha256: 9bada1eedc19dd327075d0f7a4c97b88ef429b9675538c747a2bfb0ee0d232c6}
+  - {path: search/regularize/lists/best.csv, bytes: 53983, sha256: f696b02a76a06c23f915b7be92fd7aea558ec121c913869b77264533907fbf05}
+  - {path: search/regularize/lists/best.json, bytes: 120299, sha256: f98c94ab165287d71c177ad2a3961998b3acf2049a76568df2dfbfa7e1614af9}
+  - {path: search/regularize/lists/best.md, bytes: 62448, sha256: 57e62d4fb468407c33322b3669b62bb34225dce096d9283777b51e61db100c47}
+  - {path: search/regularize/posted_cert.py, bytes: 3466, sha256: 706b849599a906f6aa178aeb36e89e32af5f6c897238127feee2618857e199c0}
+  - {path: search/regularize/refresh.py, bytes: 4037, sha256: dbdc85f859e95677600c6ad383eed21b742ff91acebc406c079abcaee26ac08f}
+  - {path: search/regularize/reg.py, bytes: 55225, sha256: f2306b88659d95843a922f7d0d451e17caa4bd49ffefb7253cd8150c75551a1f}
+  - {path: search/regularize/register_cert.py, bytes: 2860, sha256: d93007cb7fab840144c2006c85de1f2560ea29b23c5d1a53f006c6b7e491103e}
+  - {path: search/regularize/samepacking.py, bytes: 5698, sha256: b50e43a8dca66317c48ba30c36cae6b20892c68834dc3879e852bc4a090036b9}

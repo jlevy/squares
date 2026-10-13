@@ -120,6 +120,23 @@ allowlist:
       and T-130's derived fact against the size and digest its acquisition row records
       for the rendered certificate. The digest decides no geometry and names no file
       this repository wrote.
+  - path: packing/devtools/check_vendored_evand.py
+    kind: download
+    boundary: >-
+      vendor/evand-regularize is Evan Daniel's code downloaded from
+      evand/square-packing and copied at a pinned commit. Offline, each file is held
+      against the SHA-256 its manifest records for the upstream blob at that commit,
+      catching an accidental unrecorded edit, drop or addition; a change that edits
+      the manifest too passes it. `--upstream` re-derives the expected value from the
+      upstream repository, without trusting this one: it requires one of upstream's
+      branches or tags to hold the pin, so a pull request's head GitHub serves by id
+      is refused, then fetches the pin's trees and compares Git blob ids, modes and
+      the tree, catching a silent fork the credit and pin would misdescribe, or a
+      manifest a re-pin left stale. It needs the network, so it is run by hand at a
+      re-pin and by whoever reviews a change to the vendored directory; no gate runs
+      it yet (think-vwlm). Nothing else reads these digests: no tool refuses to run
+      the generator on a mismatch, and the exact checkers, not the generator, decide
+      every result.
   - path: packing/devtools/n17_shared_centre_lp.py
     kind: generated-artifact
     boundary: >-

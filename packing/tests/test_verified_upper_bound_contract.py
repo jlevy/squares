@@ -90,6 +90,12 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "vendor/evand-regularize/search/exact/batch/register.py": (
+        "Evan Daniel's vendored batch builder (third-party bytes at a pin, changed only by "
+        "a recorded patch): copies the frontier's verified value beside the reported one into "
+        "his results.json as the record a count was solved against, a ceiling it compares "
+        "with and never s(n); this project's driver writes its own inputs and does not run it"
+    ),
     "packing/devtools/result_status.py": (
         "reads ceiling evidence to distinguish grid bounds from certified construction "
         "reports, without redating the reported construction; a ceiling alone never "

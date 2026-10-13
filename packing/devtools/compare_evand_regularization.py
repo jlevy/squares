@@ -7,13 +7,14 @@ what the upstream best-choice lists change and how that meets this project's
 ``regularize_axis_components/2`` layer. Those figures are this module's output, so they
 can be re-derived rather than trusted. Three subcommands, from ``packing/``:
 
-``crosstab --best PATH [--index PATH] [--json]``
+``crosstab [--best PATH] [--index PATH] [--json]``
     Tally the upstream lists (``search/regularize/lists/best.json``: levels, variants,
     orientations, input sources, rotation groups, symmetries) and cross them with the
     project index (``atlas/known-best/regularized/index.json``): which records each side
     changes, and how the project's regularized, unchanged and refused records fall by
-    upstream level. The upstream lists are not retained here, so ``--best`` names a copy
-    at the revision being cited.
+    upstream level. ``--best`` defaults to the copy vendored at its pin under
+    ``vendor/evand-regularize/`` (its README names the commit); pass another path to
+    tally the lists at a different revision.
 
 ``refused-tilts [--index PATH] [--json]``
     Classify each record the project layer refuses by the tilts its known-best witness
@@ -56,6 +57,8 @@ from sqpack.yamlio import safe_load
 
 REPO = Path(__file__).resolve().parents[2]
 INDEX = REPO / "packing/atlas/known-best/regularized/index.json"
+#: Upstream's best-choice list as vendored at its pin (vendor/evand-regularize/README.md).
+VENDORED_BEST = REPO / "vendor/evand-regularize/search/regularize/lists/best.json"
 INDEX_CONTRACT = "packing.squares:RegularizedAtlasIndex/v1"
 STATUSES = ("regularized", "unchanged", "refused")
 LEVELS = (0, 1, 2, 3)
@@ -396,7 +399,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n", 1)[0])
     commands = parser.add_subparsers(dest="command", required=True)
     tab = commands.add_parser("crosstab", help="the upstream lists against the project index")
-    tab.add_argument("--best", type=Path, required=True, help="upstream lists/best.json")
+    tab.add_argument(
+        "--best", type=Path, default=VENDORED_BEST, help="upstream lists/best.json"
+    )
     tab.add_argument("--index", type=Path, default=INDEX)
     tab.add_argument("--json", action="store_true")
     tilts = commands.add_parser("refused-tilts", help="refused records by their witness tilts")

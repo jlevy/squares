@@ -1038,6 +1038,12 @@ COPY_SEPARATELY = (
     ROOT / "resources/web/wand125-linear-n122-2026-10-10/receipts/linear-premises.json",
     ROOT
     / "resources/web/wand125-linear-n122-2026-10-10/receipts/linear-sample-diagnostic.json",
+    # SYNOPSIS.md maps the vendored regularizer's README, and the README links its licence,
+    # credits and manifest; the vendored code itself is never read by a control.
+    REPO / "vendor/evand-regularize/README.md",
+    REPO / "vendor/evand-regularize/LICENSE",
+    REPO / "vendor/evand-regularize/CREDITS.md",
+    REPO / "vendor/evand-regularize/vendored.yaml",
     REPO / ".flowmarkignore",
     REPO / ".gitignore",
     REPO / ".github/PULL_REQUEST_TEMPLATE.md",

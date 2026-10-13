@@ -655,6 +655,7 @@ case or experiment separately.
 | [Session186 storage disposition](docs/project/reviews/review-2026-10-07-n17-session-186-storage.md) | dated review record | record | retained | — |
 | [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | research synthesis | supporting | retained | — |
 | [Assessment: Evan Daniel’s regularization process, and adapting it to every packing n = 1..324](docs/project/research/research-2026-10-11-evand-regularization-assessment.md) | research synthesis | supporting | retained | — |
+| [Evan Daniel’s Regularizer, Vendored](vendor/evand-regularize/README.md) | component scope and use | definitive | maintained | — |
 | [Saved-pose incircle discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/README.md) | typed session record | record | retained | — |
 | [n17 Owned-Core Guarded Clauses](docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md) | research synthesis | record | retained | — |
 | [n17 Case-Preserving Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md) | research synthesis | record | retained | — |

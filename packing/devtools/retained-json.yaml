@@ -27,6 +27,16 @@ exempt:
     third-party file there is stored with devtools.retained_data as deterministic gzip
     instead, which keeps its bytes.
 
+# --- Vendored third-party code ---------------------------------------------------------
+- glob: vendor/evand-regularize/**
+  reason: digest-bound
+  bound_by: >-
+    Evan Daniel's evand/square-packing, copied byte for byte at a pin: vendored.yaml
+    pins each file's SHA-256 to the upstream blob, and devtools.check_vendored_evand
+    refuses an unrecorded edit (and, with --upstream, a manifest that is not
+    upstream's), so re-laying upstream's batch/results.json and lists/best.json would
+    be a silent fork (vendor/evand-regularize/README.md).
+
 # --- Certificates ----------------------------------------------------------------------
 - glob: packing/cases/*_certificate/*.json
   reason: certificate

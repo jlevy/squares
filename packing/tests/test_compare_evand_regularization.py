@@ -216,3 +216,26 @@ def test_the_command_exits_two_on_a_refused_input(
     best.write_text(json.dumps([_pick(1, 9)]), encoding="utf-8")
     assert compare.main(["crosstab", "--best", str(best)]) == 2
     assert "refused: n = 1: level 9" in capsys.readouterr().err
+
+
+def test_the_crosstab_defaults_to_the_vendored_lists(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """With no `--best`, the upstream side is the vendored copy at its pin.
+
+    Only the upstream tallies are asserted: they are a function of the vendored bytes,
+    which `devtools.check_vendored_evand` holds to the manifest's upstream digests, and
+    they are the figures the regularization assessment's appendix states. The project
+    side moves with the regularized layer and is not pinned here.
+    """
+    assert compare.VENDORED_BEST.is_file()
+    assert compare.main(["crosstab", "--json"]) == 0
+    upstream = json.loads(capsys.readouterr().out)["upstream"]
+    assert upstream["levels"] == {"0": 177, "1": 30, "2": 117, "3": 0}
+    assert upstream["variants"] == {"conservative": 310, "fewest": 14}
+    assert (upstream["orientation_kept"], upstream["orientation_changed"]) == (276, 48)
+    assert (upstream["rotation_groups_before"], upstream["rotation_groups_after"]) == (
+        2400,
+        1172,
+    )
+    assert upstream["symmetry_imposed_at"] == 101
