@@ -1,0 +1,41 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 154,
+ "url": "https://kingbird.myphotos.cc/packing/square-154.svg",
+ "retrieved_utc": "2026-10-08T03:12:19Z",
+ "read_from": "fetched into memory",
+ "bytes": 17657,
+ "sha256": "9e7570b00b034a4d6daeebad11781a6e37e848eebdb6bfff2269cacbe7949592",
+ "last_modified": "Thu, 10 Sep 2026 00:07:40 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by David Ellsworth on December 27, 2024.",
+  "Made by combining two slightly modified copies of the s(41) found by Joe DeVincentis in April 2014.",
+  "Exact polynomial root solution by David Ellsworth on June 4, 2023.",
+  "Improvement planned by David Ellsworth on December 27, 2024 to resemble the s(179):",
+  "- Found by David Ellsworth on December 22, 2024.",
+  "- Inspired by the previous s(179) which combined two copies of the s(41) found by Joe DeVincentis in April 2014.",
+  "Improved by David Ellsworth on January 3-4, 2026, using his modified version of Thomas Schadt's computer program.",
+  "As expected, resembles the aforementioned s(179).",
+  "David W. Cantrell, in the interim (on February 11, 2025), implemented a simpler version of the improvement than the aforementioned s(179), suggesting he had not looked at that s(179) or had forgotten about it. The improvement presented here was done independently of his, not looking at his until after this one was finished.",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026",
+  "Cleaned up by David Ellsworth on September 9, 2026, to approximate rotational symmetry, with no change in size."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "12.93166712962655801262946519060334026373741207735643",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "6.465833564813279006314732595301670131868706038678215",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

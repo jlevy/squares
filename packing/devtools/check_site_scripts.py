@@ -16,8 +16,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-# The only exceptions to static primary content are the interactive workbench and
-# allowlisted old-address forwarding. Every other program enhances existing HTML.
+# Exceptions to static primary content are the registered interactive workbench and
+# catalogue, plus allowlisted old-address forwarding. Other programs enhance existing HTML.
 FAMILIES = {
     "theme": (
         "input-response",
@@ -93,8 +93,8 @@ PAPER_PROGRAMS = (
     ),
     (
         "Typesets a kpress page's formulas",
-        "non-layout",
-        "Readiness wiring skips already prepared primary mathematics.",
+        "deferred-math",
+        "Typeset unprepared formulas near the viewport and during idle time.",
     ),
     ("The reader's colour theme:", "input-response", "Reader theme controls."),
     (
@@ -150,8 +150,101 @@ class Script:
     bytes: int
 
 
-def classify(source: str, text: str, *, inline: bool = False) -> Script:
+@dataclass(frozen=True)
+class SourceProgram:
+    """A retained source program, bounded in bytes and scoped to owned publication paths."""
+
+    text: str
+    category: str
+    reason: str
+    limit: int | None
+    paths: frozenset[str]
+    inline: bool
+
+
+def publication_programs() -> tuple[SourceProgram, ...]:
+    """Read current approved template inputs once per inventory, including copied aliases."""
+    from devtools import render_exact_side_values as paper  # noqa: PLC0415
+    from devtools import (  # noqa: PLC0415
+        site_assets,
+        site_urls,
+    )
+
+    static = paper.render_n11_lower_bounds_explainer.kpress_static()
+    programs = [
+        SourceProgram(
+            paper.BROWSER_SCRIPT.read_text(encoding="utf-8"),
+            "catalogue-application",
+            "A small index loads at startup; metadata and coefficients follow input.",
+            24_000,
+            frozenset({site_urls.CATALOGUE_BROWSER_PATH}),
+            inline=False,
+        )
+    ]
+    assets = site_assets.SiteAssets()
+    for text, category, reason in (
+        (
+            paper.THEME_SCRIPT.read_text(encoding="utf-8"),
+            "input-response",
+            "Shared publication footer theme controls.",
+        ),
+        (
+            paper.MATH_SCRIPT.read_text(encoding="utf-8"),
+            "deferred-math",
+            "Typeset unprepared formulas near the viewport and during idle time.",
+        ),
+        (
+            paper.render_n11_lower_bounds_explainer.katex_js(static),
+            "deferred-math",
+            "Pinned math runtime for queued complete-article formulas and reader controls.",
+        ),
+    ):
+        reference = assets.script("page.js", text)
+        programs.append(
+            SourceProgram(
+                text,
+                category,
+                reason,
+                None,
+                frozenset({f"{site_assets.ASSETS_DIR}/{reference.output_path}"}),
+                inline=False,
+            )
+        )
+    return tuple(programs)
+
+
+def classify(
+    source: str,
+    text: str,
+    *,
+    inline: bool = False,
+    programs: Sequence[SourceProgram] | None = None,
+) -> Script:
     """Classify a reviewed program; fail closed when a new family is shipped."""
+    size = len(text.encode())
+    if inline and size > 4096:
+        raise ValueError(f"inline startup script exceeds 4096 bytes: {source}")
+    path = source.partition("#script-")[0] if inline else source
+    owned = programs if programs is not None else publication_programs()
+    candidates = [
+        program for program in owned if program.inline == inline and path in program.paths
+    ]
+    for program in candidates:
+        if text == program.text:
+            if program.limit is not None and size > program.limit:
+                raise ValueError(
+                    f"retained publication program exceeds {program.limit} bytes: {source}"
+                )
+            return Script(source, program.category, program.reason, size)
+    if not inline and candidates:
+        raise ValueError(
+            f"executable script differs from its retained publication source: {source}"
+        )
+    return _family_script(source, text, inline=inline)
+
+
+def _family_script(source: str, text: str, *, inline: bool) -> Script:
+    """Existing reviewed startup, interaction and linked-paper declarations."""
     if inline:
         if text.lstrip().startswith("// Input response and registered forwarding:"):
             category, reason = FAMILIES["forward"]
@@ -182,7 +275,7 @@ def classify(source: str, text: str, *, inline: bool = False) -> Script:
             return Script(
                 source,
                 "input-response",
-                "Pinned KaTeX and kpress metrics for interactive paper controls.",
+                "Pinned KaTeX and kpress metrics for queued formulas and interactive controls.",
                 len(text.encode()),
             )
     raise ValueError(f"unclassified executable script: {source}")
@@ -223,6 +316,7 @@ def inventory(directory: Path) -> tuple[list[Script], list[str]]:
     project_root = urlsplit(SITE_URL).path
     declarations: dict[str, Script] = {}
     failures: list[str] = []
+    programs = publication_programs()
 
     def linked(page: Path, src: str) -> None:
         address = urlsplit(src)
@@ -245,7 +339,9 @@ def inventory(directory: Path) -> tuple[list[Script], list[str]]:
         name = path.relative_to(root).as_posix()
         if name not in declarations:
             try:
-                declarations[name] = classify(name, path.read_text(encoding="utf-8"))
+                declarations[name] = classify(
+                    name, path.read_text(encoding="utf-8"), programs=programs
+                )
             except ValueError as error:
                 failures.append(str(error))
 
@@ -260,7 +356,7 @@ def inventory(directory: Path) -> tuple[list[Script], list[str]]:
             elif text.strip():
                 name = f"{page.relative_to(root)}#script-{index + 1}"
                 try:
-                    declarations[name] = classify(name, text, inline=True)
+                    declarations[name] = classify(name, text, inline=True, programs=programs)
                 except ValueError as error:
                     failures.append(str(error))
         for src in parsed.application:
@@ -269,7 +365,9 @@ def inventory(directory: Path) -> tuple[list[Script], list[str]]:
         name = path.relative_to(root).as_posix()
         if name not in declarations:
             try:
-                declarations[name] = classify(name, path.read_text(encoding="utf-8"))
+                declarations[name] = classify(
+                    name, path.read_text(encoding="utf-8"), programs=programs
+                )
             except ValueError as error:
                 failures.append(str(error))
     return list(declarations.values()), sorted(set(failures))

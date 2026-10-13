@@ -58,7 +58,7 @@ uv run --frozen python -m devtools.render_research_tables --check
 ```
 
 Five reader views are generated this way: [`STATUS.md`](STATUS.md), the open frontier
-(261 rows), the solved cases (63), and the search and proof strategy catalogues (28 and
+(247 rows), the solved cases (77), and the search and proof strategy catalogues (28 and
 30). Editing a fact means editing the data here and re-rendering; editing a generated
 table by hand will be caught.
 
@@ -89,6 +89,7 @@ at `status: enforced`.
 | `source-coverage.yaml` | `pure-yaml` | `source-coverage.schema.yaml` |
 | `results.yaml` | `pure-yaml` | `results.schema.yaml` |
 | `covering-values.yaml` | `pure-yaml` | `covering-values.schema.yaml` |
+| `exact-values.json` | generated `register` envelope | `exact-values.schema.yaml` |
 
 ```shell
 uv run --frozen python -m devtools.validate_schemas
@@ -121,6 +122,7 @@ The ones that carry the most weight:
 - `reported_upper_bound` and `reported_lower_bound` preserve the strongest literal
   claims in the named source set.
   They do not endorse those claims.
+
 - `verified_upper_bound` and `verified_lower_bound` contain only formally supported
   bounds. They are a ceiling and a floor, not the value of $s(n)$. The certified ceiling
   may be a weaker rational construction or the exact grid when the tighter public pose
@@ -133,9 +135,11 @@ The ones that carry the most weight:
   side’s last place as the same displayed bound.
   An `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known
   exactly only when `status` is `proved`.
+
 - `reported_status` is the source-set view; `status` is `proved` only when the verified
   bounds match exactly.
   There are currently 77 proved and 247 open formal cases.
+
 - `reported_upper_bound.catalogue_rigid` transcribes what the catalogue says about
   rigidity, in the catalogue’s own three-valued vocabulary: `rigid`, `semi-rigid`, or
   `not-stated`. `not-stated` is source silence and never a claim that a packing can
@@ -143,6 +147,7 @@ The ones that carry the most weight:
   with an assurance level, a stated scope, and replayable evidence; `null` there means
   not assessed. The tutorial defines the related distinctions among
   [contacts, stationarity, rigidity, and rattlers](../../TUTORIAL.md#contact-graphs-stationary-branches-and-rattlers).
+
 - `reported_upper_bound.exact_form`, `algebraic_degree` and `minimal_polynomial` are
   what is known exactly about the side of the best known packing, and `algebraic_source`
   says where the degree and polynomial came from.
@@ -152,11 +157,13 @@ The ones that carry the most weight:
   The catalogue prints either a closed form or a degree with its polynomial, never both,
   so every closed form here carries a derived pair.
   All four are null where nothing exact is known.
-  [`exact-values.json.gz`](exact-values.json.gz) collects them for every case and checks
-  each polynomial for irreducibility, a unique root in a rational interval and agreement
-  with the recorded side.
+  [`exact-values.json.gz`](exact-values.json.gz) collects them for every current case,
+  keeps its $n=1\ldots324$ entries and totals separate from the historical collection,
+  and checks each polynomial for irreducibility, a unique root in a rational interval
+  and agreement with the recorded side.
   Independent KKT values remain separate numerical diagnostics.
-  Its storage is documented in [Generated Data Storage](#generated-data-storage).
+  Its lossless storage is documented in
+  [Generated Data Storage](#generated-data-storage).
   Native certificate sides and certified outward ceilings carry distinct provenance.
   Rehwaldt’s finite refinements require exact equality between the reported decimal,
   verified decimal, exact fraction and retained witness side, with complete source,
@@ -185,14 +192,56 @@ The ones that carry the most weight:
   Daniel’s superseded $n=102$ polynomial remains historical with its complete original
   root cell, source flags and V0/C0 envelope.
   The missing native geometry files remain an intake dependency under `think-8sm2`. The
-  later publication layer supplies the exact side values paper.
+  child catalogue projects the three improving notes into its separate noncurrent source
+  collection and retains the superseded $n=102$ record in the raw archive, preserving
+  the complete metadata and V0/C0 assurance.
+  Historical entries preserve printed integer polynomial-side pairs from compared
+  retained primary catalogues and exact-solution articles, including superseded packings
+  and facts beyond the frontier horizon.
+  They carry their own attribution, source identity and status; they do not become the
+  current best packing by appearing in this register.
+  The retained Kingbird SVG facts packet supplies source-labelled exact text that the
+  catalogue page does not expose in its ordinary transcription, including the full
+  degree-672 polynomial at $n=83$. Its printed Root index remains a source fact; the
+  register separately rebuilds the irreducibility and root-isolation checks.
+  Historical polynomials are checked against their own printed side and source and do
+  not borrow the current packing’s KKT comparison.
+  For a current decimal without exact source fields, the register can derive a rational
+  identity from `verified_upper_bound.exact_form` only when the reported value, verified
+  value and exact fraction are equal, and retained source custody, count, certificate
+  and replay evidence all pass.
+  Native certificate sides and certified outward decimal ceilings carry distinct
+  provenance. KKT comparisons remain separate diagnostics; an ideal stationary side can
+  differ from the finite certified side.
+  These algebraic certificates establish a side identity.
+  Geometric feasibility, local optimality and global optimality retain their separate
+  evidence and rungs. The
+  [exact side values paper](https://jlevy.github.io/squares/papers/exact-side-values.html)
+  derives its publication subset from this register and prints every published
+  coefficient. Superseded rows and their redundant current notes remain in the canonical
+  register; the report omits them.
+  Numeric-only rows and incomplete source facts retain the route and open bead assigned
+  to identify them.
+
+  From `packing/`, rebuild after admitting an exact source fact and use both drift
+  checks before publication:
+
+  ```shell
+  uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --update
+  uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --check
+  uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values
+  uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values --check
+  ```
+
 - `evidence` points into [`evidence.yaml`](evidence.yaml), where assurance, method,
   performer, independence, origin, actual precision, tolerance, certificate, replay,
   proof scope, and limitations remain separate fields.
   Common classification fields are required; method-specific fields appear only when
   they apply rather than being repeated as null placeholders.
+
 - `conflicts` preserve a failed replay or scope disagreement; `blockers` say whether the
   gap is source evidence, an importer, a checker, a field precondition, or mathematics.
+
 - `resources`—citation keys with paths into [`../resources/`](../resources/README.md)
   and a `retrieved` flag.
 

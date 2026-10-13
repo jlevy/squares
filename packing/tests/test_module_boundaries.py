@@ -1104,11 +1104,20 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_direct_regional_replays_complete_component_without_reconditioning",  # 16.19s
             "test_two_fresh_clean_processes_match_full_new_payload",  # 15.96s
         },
-        # Focused Mac CPython 3.14.7 frozen upstream-integration replay, 2026-10-08:
-        # 2.83s call at two CPUs (5.60s command wall). Its existing slow marker meets
-        # the two-second marking floor; smaller entry rebuilds stay in the quick lane.
+        # Focused file run on 2026-10-07 with `pytest --durations=0 -q`: 7.08s call
+        # to rebuild and exactly validate all 182 retained historical polynomial-side
+        # pairs. The seven fast decoder/source-identity controls cost at most 0.16s
+        # each and share no exact validation build with this replay.
+        "test_collect_kingbird_historical_polynomials.py": {
+            "test_the_saved_corpus_rebuilds_from_source_and_exact_checks",  # 7.08s
+        },
+        # 2026-10-08 UTC push-gate log at fa93843ed: Mac, CPython 3.14.7, frozen
+        # environment. Full-register replay measured 32.15s call (line 1382), and
+        # the degree-672 n83 parameter measured 25.24s (line 1391). Only that entry's
+        # parameter is deferred; its smaller fresh-entry controls remain quick.
         "test_build_exact_values.py": {
-            "test_the_committed_register_equals_a_fresh_build",
+            "test_the_committed_register_equals_a_fresh_build",  # 32.15s
+            "test_the_committed_entries_equal_a_fresh_build",  # 25.24s at n83
         },
         # Hosted run36864534354/job110376645051,2026-10-01:31.66s call time.
         # Exact symbolic reconstruction/normalizations; eight fast controls stay in PR CI.

@@ -77,6 +77,74 @@ def test_all_thirty_two_imports_identify_native_sides_without_optimality(current
         assert "optimality" in provenance["text"]
 
 
+def test_current_n102_route_keeps_its_group_and_retained_pose_prerequisites():
+    current = exact.build_entry(102, _current_case(102), None, None)
+    certificate = current["source_certificate"]
+    assert certificate["result"] == "T-146"
+    assert certificate["revision"] == "ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7"
+    assert certificate["original_certificate"] == "search/regularize/lists/certs/n-102.cert.gz"
+    assert current["state"] == "rational"
+    (route,) = [note for note in current["notes"] if note["kind"] == "route"]
+    assert route["bead"] == "think-ohhz"
+    text = route["text"]
+    for prerequisite in (
+        (
+            "bind and convert the native certificate identified by this row's "
+            "adopted current source custody"
+        ),
+        certificate["source_key"],
+        certificate["result"],
+        certificate["revision"],
+        certificate["original_certificate"],
+        "active, weak and forced contacts and frozen variables",
+        "confirm the current-pose seed",
+        (
+            "W7 exporter and driver and independent n11 control before a preregistered "
+            "bounded W6 run"
+        ),
+        "think-ohhz",
+        "ry-xu 8dc415296f697f5140caea27c7a0193d52deb4e6 certificate",
+        "earlier Daniel 13ee36e5 input remain historical fixtures",
+        "claims do not transfer to this geometry",
+    ):
+        assert prerequisite in text
+    assert "current ry-xu certificate" not in text
+    assert "ideal contact research open" in text
+
+
+@pytest.mark.parametrize(
+    ("field", "replacement"),
+    [
+        ("revision", "updated-native-revision"),
+        ("original_certificate", "updated/native/n-102.cert.gz"),
+    ],
+)
+def test_n102_route_uses_the_current_row_certificate_identity(field, replacement, monkeypatch):
+    inputs = exact.VerifiedRationalInputs()
+    packing = _current_case(102)
+    baseline = exact.build_entry(102, packing, None, None, verified_inputs=inputs)
+    original = baseline["source_certificate"][field]
+    admit = inputs.houses.admit
+
+    def returned_custody(n, case):
+        admitted = admit(n, case)
+        assert admitted is not None
+        reported, metadata = copy.deepcopy(admitted)
+        # This presentation control changes custody only after actual native admission.
+        metadata["source_certificate"][field] = replacement
+        return reported, metadata
+
+    monkeypatch.setattr(inputs.houses, "admit", returned_custody)
+    current = exact.build_entry(102, packing, None, None, verified_inputs=inputs)
+    (route,) = [note for note in current["notes"] if note["kind"] == "route"]
+    assert replacement in route["text"]
+    assert original not in route["text"]
+    assert "historical fixtures" in route["text"]
+    assert route["bead"] == "think-ohhz"
+    for key in baseline.keys() - {"notes", "source_certificate"}:
+        assert current[key] == baseline[key]
+
+
 @pytest.mark.parametrize(
     "control", ["form", "polynomial", "source", "evidence", "display", "degree"]
 )

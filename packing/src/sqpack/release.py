@@ -204,7 +204,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "ad708f27bb1346b363a91907240ebee62ec62596"
+DATA_REVISION = "912c5d011dcc16e48af2519bb8cb79a847a61f6c"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -547,6 +547,18 @@ PACKING_METHODS_VERSION = PACKING_METHODS_HISTORY[0].version
 PACKING_METHODS_EDITION = PACKING_METHODS_VERSION
 PACKING_METHODS_FIRST_PUBLISHED = PACKING_METHODS_HISTORY[-1].first_published
 PACKING_METHODS_REVISED = "October 12, 2026"
+
+#: The independent exact-side-values register paper's own edition and dates.
+EXACT_SIDE_VALUES_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.0",
+        first_published="October 7, 2026",
+        result_scope="The current and superseded algebraic side values through n = 324.",
+    ),
+)
+EXACT_SIDE_VALUES_FIRST_PUBLISHED = EXACT_SIDE_VALUES_HISTORY[0].first_published
+EXACT_SIDE_VALUES_EDITION = f"Draft {EXACT_SIDE_VALUES_HISTORY[0].version}"
+EXACT_SIDE_VALUES_REVISED = "October 12, 2026"
 
 #: The commit the committed claim documents link to
 #: (`render_n11_lower_bounds_explainer.edition_file`), at this repository's short length. It is

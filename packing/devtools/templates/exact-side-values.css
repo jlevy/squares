@@ -1,0 +1,93 @@
+/* The exact-values paper uses the shared publication type and layout. These rules only
+   contain its wide generated tables and polynomial catalogue. */
+.exact-side-values-paper .kpress-table-wrap {
+  overflow-x: auto;
+}
+.cert-page.exact-side-values-paper > .kpress-table-wrap {
+  max-width: min(100%, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
+}
+.exact-side-values-paper td {
+  overflow-wrap: anywhere;
+}
+.exact-side-values-paper td code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
+}
+.exact-side-values-paper .source-quote code {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.exact-side-values-paper h3 {
+  break-after: avoid;
+}
+.exact-side-values-paper h3 + p {
+  break-after: avoid;
+}
+.exact-side-values-paper .kpress-math-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.45rem;
+}
+
+.exact-side-values-paper .kpress-table-wrap:focus-visible,
+.exact-side-values-paper .kpress-math-display:focus-visible {
+  outline: 2px solid var(--kpress-doc-accent);
+  outline-offset: 3px;
+}
+.exact-side-values-paper .kpress-table:has(th:nth-child(5)) {
+  min-width: 48rem;
+}
+.exact-side-values-paper .kpress-table:has(th:nth-child(7)) {
+  min-width: 72rem;
+}
+.exact-side-values-paper .kpress-table:has(th:nth-child(10)) {
+  min-width: 92rem;
+}
+.exact-side-values-paper .kpress-table:not(:has(th:nth-child(3))) {
+  table-layout: fixed;
+  width: 100%;
+}
+.exact-side-values-paper .kpress-table:not(:has(th:nth-child(3))) th:first-child {
+  width: 5rem;
+}
+.exact-side-values-paper .exact-rational {
+  display: inline-grid;
+  max-width: 100%;
+  min-width: 0;
+  vertical-align: middle;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.exact-side-values-paper .exact-numerator,
+.exact-side-values-paper .exact-denominator {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  padding: 0.15em 0.25em;
+}
+.exact-side-values-paper .exact-numerator {
+  border-bottom: 1px solid currentColor;
+}
+
+/* Native equations remain outside the KaTeX enhancement lifecycle. */
+.exact-side-values-paper .native-polynomial-math math {
+  max-width: none;
+  font-size: 1.02em;
+}
+
+.exact-side-values-paper .source-custody {
+  display: grid;
+  grid-template-columns: minmax(7rem, 1fr) minmax(0, 3fr);
+  gap: 0.2rem 0.75rem;
+}
+.exact-side-values-paper .source-custody dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--kpress-font-mono);
+}
+
+/* Static coefficient columns retain their header association and numeric alignment. */
+.exact-side-values-paper .coefficient-table :is(th, td):first-child {
+  text-align: right;
+}

@@ -342,9 +342,10 @@ def test_deployed_forwarder_arrival_does_not_wait_for_destination_assets(
 ) -> None:
     """A committed destination with a stalled image must not consume the load timeout."""
     served = "https://example.test/"
-    source = next(
-        page.html for page in site_renders.forwarders() if page.name == "explainer.html"
+    forwarder = next(
+        page for page in site_renders.forwarders() if page.name == "explainer.html"
     )
+    source = forwarder.html
     context = browser.new_context()
     pending: list[Any] = []
     timed_out: list[str] = []
@@ -353,6 +354,19 @@ def test_deployed_forwarder_arrival_does_not_wait_for_destination_assets(
         f"{served}explainer.html*",
         lambda route: route.fulfill(content_type="text/html", body=source),
     )
+    # Serve the actual hashed script the producer declares, so this fixture reaches
+    # the destination before testing its deliberately stalled image.
+    script_assets = {
+        f"{served}assets/{asset}": data
+        for asset, data in render_overview.asset_files([forwarder]).items()
+        if asset.endswith(".js")
+    }
+
+    def serve_script(route: Any) -> None:
+        route.fulfill(content_type="text/javascript", body=script_assets[route.request.url])
+
+    for address in script_assets:
+        context.route(address, serve_script)
 
     def hold_image(route: Any) -> None:
         pending.append(route)

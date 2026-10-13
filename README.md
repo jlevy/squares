@@ -82,7 +82,7 @@ The most significant since August 2026:
 ## Papers
 
 The website’s [papers page](https://jlevy.github.io/squares/papers.html) links each
-paper and its PDF. Three form a series on $n = 11$:
+paper and its available PDF. Three form a series on $n = 11$:
 
 1. [**New Lower Bounds for Square Packing for n = 11**](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html):
    weighted points and 2-of-3 threshold atoms prove $s(11) \ge 3.8264\ldots$.
@@ -94,6 +94,45 @@ paper and its PDF. Three form a series on $n = 11$:
 [**How Record Square Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html)
 is a tutorial on geometric construction, physics-inspired search, annealing, surgery,
 local refinement, and upper-bound certification.
+
+The independent
+[Exact Side Values for Packing Unit Squares](packing/devtools/templates/exact-side-values-article.md)
+is generated from the [exact-values register](packing/frontier/exact-values.json.gz).
+It assembles 321 exact current sides across $n = 1\ldots324$ and retained additional
+source records, with every published coefficient, source locator and algebraic
+certificate. The source register retains superseded entries separately.
+The October 11–12 adoption passes now select 49 native current bindings.
+The current 321 exact identities, three numeric gaps and 77 proved labels remain
+unchanged. Canonical custody has 621 records, 643 recursive vectors and 6,544 integer
+strings: 324 current and 297 historical (284 superseded, three unreconciled, seven
+outside-frontier and three source-invalid).
+Displaced source identities remain raw custody.
+The final register is 913,496 gzip / 3,283,520 decoded bytes.
+Its public projection has 337 records, 337 recursive coefficient vectors and 2,096
+integer strings, with no superseded or pending native offers displayed.
+Exact published-head web and gate receipts are recorded in
+[PR403](https://github.com/jlevy/squares/pull/403) and
+[PR435](https://github.com/jlevy/squares/pull/435). The report remains strictly
+HTML/Markdown, without a report PDF. Historical examples reach $n = 2135$;
+source-invalid proposals retain their flags.
+Reported algebraic roots retain their stated assurance while geometry and Lean replay
+remain separate. Native certificates retain their grades, pins, original finder credits
+and replay custody. The 49 selected sources are adopted current bindings; superseded
+occurrences remain historical.
+Finite replay and standing selection leave contact, local-minimum and optimality
+research separate. The
+[web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html) supports
+search, filters and per-entry coefficient downloads.
+The full HTML report and Markdown export retain every equation and coefficient in the
+published collection.
+The
+[mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
+states what was independently checked, and the
+[continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md) maps
+the three remaining numeric-only cases $n = 29,55,71$ to beads and separates their
+identification from ideal contact-system and exact-witness research.
+Pages builds this report for web reading, with the complete record available as HTML and
+Markdown.
 
 The website and the atlas posters are at edition `v0.5.0`; each paper carries its own
 version.
@@ -112,6 +151,7 @@ every claim is graded, and every defect is logged
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for $n = 1\ldots324$, with reported and verified bounds kept separate |
+| [**Exact side values**](packing/frontier/exact-values.json.gz) | Certified current side expressions and polynomials, historical source polynomials, and remaining exact-value routes |
 | [**Atlas**](packing/atlas/README.md) | Known-best and prospective packings, contact-scaffold enumeration, and deterministic renderings |
 | [**Literature**](packing/resources/README.md) | Retained primary sources, cleaned transcriptions, raw extractions, and the [maintained index of upstream repositories](packing/resources/README.md#recent-external-github-repositories) we integrate from |
 | [**Reports**](#reports) | Research reports on the mathematics, algorithms, infrastructure, formal proof, and search strategy |

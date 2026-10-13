@@ -25,6 +25,7 @@ from devtools import (
     overview_data,
     overview_sections,
     render_case_pages,
+    render_frontier_page,
     render_overview,
     render_recent_results,
     result_overview,
@@ -44,6 +45,7 @@ from devtools.repo_links import (
     repo_url,
 )
 from devtools.result_credit import OTHERS, source_lineage
+from sqpack import release
 from sqpack.yamlio import safe_load
 from tests import site_renders
 
@@ -96,6 +98,17 @@ def case_pages() -> dict[str, str]:
     render, so they are rendered here, during setup, as the pages are: a check that reads
     them carries no render in its own call time, which the pull-request surface caps."""
     return site_renders.case_records()
+
+
+@pytest.fixture(scope="module")
+def forwarder_cases() -> list[dict]:
+    """Validate the real frontier once before the forwarder write/check controls.
+
+    Each CLI phase still regenerates the forwarders. Their case-number input stays
+    unchanged, so those phases reuse these records instead of validating all 324
+    frontier files nine times during one test's call.
+    """
+    return render_frontier_page.frontier_cases()
 
 
 @pytest.fixture(scope="module")
@@ -563,7 +576,7 @@ def _page_card_parts(page: str, href: str) -> tuple[str, str]:
 
 
 def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> None:
-    """Papers holds the three papers and Tutorial once each as full-page links.
+    """Papers holds the five papers and Tutorial once each as full-page links.
     Their titles and richer descriptions are preserved. About holds the project story
     and documents; survey and workbench cards do not belong to these pages."""
     cards = _page_cards(papers)
@@ -573,6 +586,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
         "papers/square-packing-methods-survey.html",
+        "papers/exact-side-values.html",
         "tutorial.html",
     ]
     assert [paper.label for paper in entries] == [
@@ -580,6 +594,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
         "Part II",
         "Part III",
         "Methods tutorial",
+        "Exact values",
         "Tutorial",
     ]
     assert overview_sections.OPTIMALITY is entries[2]
@@ -1543,17 +1558,17 @@ def test_every_card_grid_sits_in_a_frame_it_can_measure(about: str, papers: str)
 def test_the_page_cards_keep_the_series_together_at_one_column_width(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """The seven page cards stand in three lines: the Frontier page alone at the top, then
+    """The eight page cards stand in four lines: the Frontier page alone at the top, then
     the three parts of the n = 11 series in reading order, one card per paper, then the
-    methods tutorial, first-principles tutorial and workbench (the series plan,
+    methods and exact-values papers, then the tutorial and workbench (the series plan,
     2026-10-05; one, two and two while the
     site had two papers, the owner, 2026-10-02, `think-ns3d`). A section set in lines of
     its own (`SECTION_CARD_LINES`) is one frame holding a grid per line, a gap apart,
     each marked with its longest line's count, which the stylesheet caps a line of its
     size at, so the lines share one column width and each centres in it. Lines that do
     not count the section's cards are refused."""
-    assert overview_sections.SECTION_CARD_LINES == {"pages": (1, 3, 3)}
-    assert len(overview_sections.PAGES) == 7
+    assert overview_sections.SECTION_CARD_LINES == {"pages": (1, 3, 2, 2)}
+    assert len(overview_sections.PAGES) == 8
     frame = overview_sections.page_cards().split('<div class="site-cards-frame site-wide">', 1)[
         1
     ]
@@ -1567,7 +1582,8 @@ def test_the_page_cards_keep_the_series_together_at_one_column_width(
             "papers/n11-threshold-bound-review.html",
             "papers/n11-optimality-review.html",
         ],
-        ["papers/square-packing-methods-survey.html", "tutorial.html", "workbench/"],
+        ["papers/square-packing-methods-survey.html", "papers/exact-side-values.html"],
+        ["tutorial.html", "workbench/"],
     ]
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     gap = css[css.index(".site-cards + .site-cards {") :]
@@ -1581,7 +1597,7 @@ def test_the_page_cards_keep_the_series_together_at_one_column_width(
             in rule[: rule.index("}")]
         ), section
     monkeypatch.setitem(overview_sections.SECTION_CARD_LINES, "pages", (2, 2))
-    with pytest.raises(SystemExit, match="pages: 7 cards in lines of"):
+    with pytest.raises(SystemExit, match="pages: 8 cards in lines of"):
         overview_sections.page_cards()
 
 
@@ -4304,6 +4320,7 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
         "papers/square-packing-methods-survey.html",
+        "papers/exact-side-values.html",
         "tutorial.html",
     ]
     assert [paper.label for paper in paper_specs] == [
@@ -4311,6 +4328,7 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         "Part II",
         "Part III",
         "Methods tutorial",
+        "Exact values",
         "Tutorial",
     ]
     assert [paper.href for paper in paper_specs[:-1]] == [
@@ -6414,6 +6432,7 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
         "n11-threshold-bound-review",
         "n11-optimality-review",
         "square-packing-methods-survey",
+        "exact-side-values",
     )
     packing = overview_data.REPO / "packing"
     jobs = load_workflow()["jobs"]
@@ -6444,6 +6463,19 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
         assert name in {line.split(" ", 1)[0] for line in skip_notices.splitlines()}, slug
     assert render_overview.paper_path("a-b", ".pdf") == "papers/a-b.pdf"
 
+    exact = importlib.import_module("devtools.render_exact_side_values")
+    record = render_overview.paper_record(render_overview.EXACT_SIDE_VALUES)
+    assert record.part is None
+    assert record.label == "Exact values"
+    assert exact.FRONT.source is None
+    assert exact.FRONT.series is None
+    assert exact.FRONT.agents == ("GPT-5.6 Sol", "GPT-6.1 Sol", "GPT-6 Astra")
+    assert exact.FRONT.version == release.EXACT_SIDE_VALUES_EDITION
+    assert [(dated.label, dated.day) for dated in exact.FRONT.dates] == [
+        ("First published", release.EXACT_SIDE_VALUES_FIRST_PUBLISHED),
+        ("Last revised", release.EXACT_SIDE_VALUES_REVISED),
+    ]
+
 
 def test_reviewed_paper_titles_are_used_across_the_site(
     rendered: Callable[[str], str],
@@ -6463,6 +6495,7 @@ def test_reviewed_paper_titles_are_used_across_the_site(
             "A Review of the Optimality Proof of the Trump Packing of 11 Squares"
         ),
         "square-packing-methods-survey": "How Record Square Packings Are Found",
+        "exact-side-values": "Exact Side Values for Packing Unit Squares",
     }
     assert {paper.slug: paper.title for paper in render_overview.PAPERS} == reviewed
     assert render_overview.paper_title_problems() == []
@@ -6583,7 +6616,7 @@ def test_paper_title_cli_checks_without_rendering_or_writing(
     args = ["--check-paper-titles", "--output", str(output)]
     assert render_overview.main(args) == 0
     success = capsys.readouterr().out
-    assert "4 reviewed paper titles" in success
+    assert "5 reviewed paper titles" in success
     assert "10 referenced titles" in success
     assert not output.exists()
     monkeypatch.setattr(renderer, "TITLE", renderer.TITLE.lower())
@@ -6620,6 +6653,8 @@ def test_each_address_a_paper_had_serves_a_forwarder_to_where_it_is() -> None:
         "n11-optimality/index.html": "papers/n11-optimality-review.html",
     }
     script = render_overview.FORWARD_SCRIPT.read_text(encoding="utf-8")
+    asset = site_assets.shared().assets.script_file(render_overview.FORWARD_SCRIPT)
+    assert asset.output_path is not None
     titles = {explainer.SITE_PATH: explainer.TITLE, review.SITE_PATH: review.TITLE}
     for old, new in papers.items():
         page = forwarders[old]
@@ -6631,7 +6666,7 @@ def test_each_address_a_paper_had_serves_a_forwarder_to_where_it_is() -> None:
         assert says["canonical"] == render_overview.SITE_URL + new
         climbs = "../" * old.count("/")
         assert says["script"] == f"{climbs}{new}"
-        assert page.count(f"<script>{script}</script>") == 1
+        assert page.count(site_assets.script_tag(asset, old)) == 1
         assert page.count("<script") == 3  # The executable forwarder plus two JSON-LD records.
         refresh = (
             f'<noscript><meta http-equiv="refresh" content="0; url={climbs}{new}"></noscript>'
@@ -6645,9 +6680,11 @@ def test_each_address_a_paper_had_serves_a_forwarder_to_where_it_is() -> None:
         assert "<style" not in page
         # Atlas and About aliases add a bounded amount to the shared forwarder.
         assert len(page) < 11_000, "a forwarder and metadata remain small"
-        # It fetches nothing, not even the shared assets a site page links.
+        # The shared forwarder asset is served at either directory depth.
         render_overview.assert_fetches_only_assets(old, page)
-        assert f"{site_assets.ASSETS_DIR}/" not in page, old
+        assert render_overview.asset_files([render_overview.Page(old, page)]) == {
+            asset.output_path: script.encode(),
+        }
     # The script reads the root element's `data-moved-to`.
     assert "movedTo" in script
 
@@ -6723,7 +6760,7 @@ def test_no_page_links_an_address_a_paper_used_to_have(
 
 
 def test_the_site_writes_its_forwarders_and_checks_them(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, forwarder_cases: list[dict]
 ) -> None:
     """`render_overview` writes the forwarders with the pages, each in the directory its
     old address was in, and `--check` holds them to a fresh render as it holds a page."""
@@ -6731,8 +6768,13 @@ def test_the_site_writes_its_forwarders_and_checks_them(
     monkeypatch.setattr(render_overview, "render_all", lambda: [page])
     monkeypatch.setattr(render_overview, "result_fragments", list)
     monkeypatch.setattr(render_overview, "case_records", list)
+    monkeypatch.setattr(render_overview, "support_files", dict)
+    monkeypatch.setattr(render_frontier_page, "frontier_cases", lambda: list(forwarder_cases))
     moved = [old for old, _ in render_overview.MOVED_PAGES]
-    assert [file.name for file in render_overview.render_site()] == ["index.html", *moved]
+    files = render_overview.render_site()
+    assert [file.name for file in files] == ["index.html", *moved]
+    forward_assets = render_overview.asset_files(files)
+    assert len(forward_assets) == 1
     assert {"explainer.html", "n11-optimality/index.html"} < set(moved)
     assert render_overview.main(["--output", str(tmp_path)]) == 0
     crawl, crawl_assets = site_urls.crawl_files()
@@ -6749,7 +6791,10 @@ def test_the_site_writes_its_forwarders_and_checks_them(
             *moved,
             *render_overview.support_files(),
             *crawl,
-            *(f"{site_assets.ASSETS_DIR}/{name}" for name in crawl_assets),
+            *(
+                f"{site_assets.ASSETS_DIR}/{name}"
+                for name in {**forward_assets, **crawl_assets}
+            ),
         ]
     )
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
@@ -6759,6 +6804,20 @@ def test_the_site_writes_its_forwarders_and_checks_them(
     directory_alias.write_text("an old case directory", encoding="utf-8")
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
     directory_alias.write_text(current_alias, encoding="utf-8")
+    [(name, data)] = forward_assets.items()
+    asset_path = tmp_path / site_assets.ASSETS_DIR / name
+    assert asset_path.read_bytes() == data
+    asset_path.write_bytes(b"changed forwarder")
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
+    standing = (tmp_path / "explainer.html").read_text()
+    (tmp_path / "explainer.html").write_text("standing publication")
+    with pytest.raises(ValueError, match="asset collision"):
+        render_overview.write_site(tmp_path, files)
+    assert (tmp_path / "explainer.html").read_text() == "standing publication"
+    (tmp_path / "explainer.html").write_text(standing)
+    asset_path.unlink()
+    assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1
+    assert render_overview.main(["--output", str(tmp_path)]) == 0
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0
     (tmp_path / "explainer.html").write_text("an old page", encoding="utf-8")
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 1

@@ -84,7 +84,8 @@ WORKFLOW = REPO / ".github" / "workflows" / "pages.yml"
 LOCAL_PACKAGES = ("devtools", "workbench_tools", "tests")
 
 _RUN_MODULE = re.compile(r"\bpython\s+-m\s+((?:devtools|workbench_tools)(?:\.\w+)+)")
-_PYTEST_FILE = re.compile(r"\bpytest\b[^\n]*?\s(tests/[\w/.-]+\.py)")
+_PYTEST_COMMAND = re.compile(r"\bpytest\b([^\n]*)")
+_PYTEST_FILE = re.compile(r"(?:^|\s)(tests/[\w/.-]+\.py)(?=\s|$)")
 _HALF_GATE = re.compile(r"needs\.scope\.outputs\.(\w+)\s*==\s*'true'")
 #: The two ways a job in this workflow says it never runs on a pull request: the deploy
 #: path's `github.event_name != 'pull_request'` and a dispatch-only experiment's
@@ -243,7 +244,12 @@ def commands_run(jobs: Iterable[Mapping[str, Any]]) -> set[Path]:
         for step in job.get("steps", []):
             command = str(step.get("run", ""))
             files.update(_module_file(module) for module in _RUN_MODULE.findall(command))
-            for test in _PYTEST_FILE.findall(command):
+            tests = (
+                test
+                for pytest_line in _PYTEST_COMMAND.findall(command)
+                for test in _PYTEST_FILE.findall(pytest_line)
+            )
+            for test in tests:
                 path = (PACKING / test).resolve()
                 if not path.is_file():
                     raise SystemExit(f"{WORKFLOW.name} runs pytest on {test}, which is gone")

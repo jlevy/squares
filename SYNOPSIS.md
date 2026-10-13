@@ -601,6 +601,124 @@ The argument for it, and the measurement registered to kill it if it is wrong, a
 slice, experiment, round, and run—and the mathematical terms used narrowly here.
 Those definitions apply in the campaign artifacts and the beads too, not only here.
 
+### Exact-Side Collection, October 10
+
+The October 11–12 native adoption passes integrate main
+`562fdbdff1d98948f68b36b81b53f9c8165ffd08`: 49 adopted current bindings and 89
+historical native occurrences, with all 51 displaced polynomials and earlier raw custody
+retained. The verified parent corpus has 437 records, 436 recursive vectors and 1,403
+integer strings (101,733 gzip / 987,590 decoded bytes).
+The child corpus has 621 records, 643 recursive vectors and 6,544 integer strings = 324
+current + 297 historical: 284 superseded, three unreconciled, seven outside-frontier and
+three source-invalid.
+Final storage is 913,496 gzip / 3,283,520 decoded bytes.
+Public projection is 337 records / 337 recursive vectors / 2,096 integer strings,
+without superseded or pending native-offer rows.
+Current partition is 175 integer, 75 rational, 58 closed-form, 13 minimal-polynomial and
+three numeric, with no degree-only case.
+
+The [exact-values register](packing/frontier/exact-values.json.gz) retains 321 exact
+current identities, three numeric gaps at $n = 29,55,71$ and 77 proved labels.
+The full degree-672 n=83 polynomial retains 673 coefficients, maximum 724 digits; source
+ordinal 27 remains independently uncounted.
+The three reported roots at $n = 106,152,177$ remain V0/C0 source geometry/Lean gaps.
+Superseded source rows are omitted only from public display and remain canonical.
+Publication is strictly HTML/Markdown; no report PDF is generated.
+
+Current n=102 is Daniel T146 regularizing Ryan Xu, revision
+`ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7`, native path
+`search/regularize/lists/certs/n-102.cert.gz`; older inputs are dated driver fixtures.
+All 49 current native bindings are V3/C3. The 89 historical certificates retain 86 V3/C3
+replayed and three V0/C0 source-reported occurrences; historical grades are not promoted
+by adoption. Final serializer round-trip/schema checks have zero findings; the
+current-custody guard passes three controls in 13.50 s and catalogue tests pass 17 in
+2.12 s, with zero static findings.
+Published-head web, pre-push and hosted qualification is recorded in
+[PR403](https://github.com/jlevy/squares/pull/403) and
+[PR435](https://github.com/jlevy/squares/pull/435); the scoped checks above remain
+separate from those broad verdicts.
+The separate `think-63vx` scope reports 62 quadratic source sides and a priced 41-count
+batch, not a reconciled count of remaining updates.
+#419’s T120–T123 and #420’s T124 have distinct binding/build prerequisites.
+Owner tracking states are not closed here.
+
+The following corpus and web measurements are dated pre-PR518 evidence; they do not
+qualify the latest regenerated data or pending full CI.
+
+The original retained-source extraction on October 7 decoded 182 polynomial/side pairs
+from 201 occurrences, reaching $n = 2135$, with no undecoded rows.
+The dated pre-PR518 register retained 286 noncurrent source entries: 186 superseded, 90
+unreconciled, seven outside the frontier and three source-invalid, for 610 records
+including the 324 current cases.
+Only Daniel’s three improving reported roots at $n = 106,152,177$ remain unreconciled
+polynomial notes, with independently checked polynomials and isolating intervals but
+geometry and Lean replay not attempted (V0/C0). Daniel’s retained root at $n = 102$ is
+superseded and remains historical.
+The dated pre-PR518 historical finite-certificate roster retained 101 source
+occurrences: 14 superseded and 87 pending standing adoption, covering 86 distinct
+pending rational bounds.
+All 87 pending offers carry V3/C3 checked finite source geometry from retained positive
+replays. The superseded roster preserves eleven checked V3/C3 certificates and three
+unreplayed V0/C0 occurrences, with their own custody and grades.
+The latest four batches at that pre-PR518 checkpoint were PingYou Ltd’s T-147 at
+$n = 207$ and T-148 at $n = 153$, Daniil Ostashev’s T-149 at $n = 155,156,211$, and
+Robert Barnett’s T-150 at $n = 146,261$. Source verification does not itself adopt these
+sides as current atlas/frontier records.
+Separate Couzo and Daniel certificates for the same exact $n = 155$ side retain
+independent custody and attribution.
+T-131 n132 is now superseded; `think-kkj2` and `think-iyij` retain residual
+review/import/atlas tracking.
+T-128/T-130 offers are adopted or superseded; `think-lhtz` and `think-0mlq` retain
+residual Couzo/atlas/historical-custody tracking.
+Re-read their beads before opening another adoption slice.
+Equal sides confer no motion or local-minimum equivalence.
+The current RyXu $n = 51$ radical is a separate quadratic identity.
+Complete source rows, native coefficient strings, flags and acquisition identities
+remain in the register; source-only rows do not update current bounds.
+The
+[independent mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
+and [generated paper](packing/devtools/templates/exact-side-values-article.md) keep
+source attribution, algebraic checks, geometric realization and optimality separate.
+
+The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html) has a
+searchable index and loads individual records and coefficient vectors when opened.
+The dated complete HTML and Markdown report published all 324 current records and 100
+additional source records: seven outside the frontier, three source-invalid and 90
+unreconciled source occurrences, for 424 records overall.
+The report omits 186 superseded rows and 22 redundant current notes; these remain in the
+source register. The web projection reconstructs 424 coefficient vectors and 2,272
+integer strings, preserving the metadata of the published records.
+The unchanged checkpoint limits the initial automatic payload to 10% of the complete
+HTML report. Payload measurements are dated local receipts and make no latency claim.
+The retained
+[full-catalogue measurement](packing/benchmarks/exact-catalogue-web/report.md) records
+the preceding publication scope.
+The complete source register retains 632 coefficient vectors and 6,522 integer strings.
+
+The three numeric-only current cases are $n = 29,55,71$, each with a bead in the
+[continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md#remaining-work-and-beads).
+At the pre-PR518 checkpoint, there were 63 native witness-side projections: 26 original
+native certificate sides, two Rehwaldt refinements at $n = 68,292$, three Daniel
+arrangements at $n = 266,270,272$, 18 RyXu sides and 14 Gupta sides.
+Rehwaldt admission requires exact equality among the reported and verified decimals,
+fraction and witness side.
+Daniel admission retains the native fraction and full reported decimal while checking
+that the verified 16-place display is its least upward ceiling.
+RyXu and Gupta rational admissions independently bind the native `exact_form`; both
+reported and verified 16-place displays are its least upward ceilings.
+The RyXu $n = 51$ native radical and quadratic polynomial are separately bound to its
+reported and verified upward displays.
+The original 33 A1 projections, including the old $n = 292$ ceiling, remain dated
+evidence. The finite $n = 105$ representation gap is resolved; its ideal contact-system
+and KKT seed work stays open.
+The retained systems at $n = 29,55,71$ support elimination and real-branch selection.
+Each new Daniel pose needs its own active contacts and KKT seed.
+Current $n = 102$ contacts and seed must bind Daniel T146’s retained regularized
+certificate; the earlier RyXu and evand inputs remain historical.
+Ideal contact-system research continues under `think-s6np` and the batch lanes even when
+the finite certificate side is rational.
+Exact geometric witnesses and independent contact rederivations remain open.
+
 ### Document Map
 
 The validated [document map](docs/project/document-map.yaml) distinguishes current rules
@@ -634,9 +752,14 @@ case or experiment separately.
 | [Review: Couzo’s and Daniel’s Rational Refinement Replays (T-128, T-130, T-131)](docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 1340000/199529`: Review of the Continuous-Pose Kernel on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md) | dated review record | record | retained | — |
 | [Guzhou0806’s `s(40) > 335427/50000`: Review of the Clipped-Corner Transfer on wand125’s `rect_n40_L67`](docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) | dated review record | record | retained | — |
+| [Polynomial PR stack: refreshed tables and remaining work](docs/project/handoffs/handoff-2026-10-10-polynomial-pr-stack.md) | dated handoff record | record | retained | — |
 | [Review: Gupta exact rational refinements, issue #438](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md) | dated review record | record | retained | — |
 | [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |
 | [n17 Paper Review: Global Optimization and Sum-of-Squares Certificates](docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md) | dated review record | record | retained | — |
+| [Exact Paper Print Readability — Retired](packing/benchmarks/exact-paper-print/ideas.md) | implementation plan | record | retained | — |
+| [Readable Complete-Paper Tables](packing/benchmarks/exact-paper-print/hypotheses/H-001-readable-tables.md) | typed hypothesis record | record | retained | — |
+| [Dated Print Baseline](packing/benchmarks/exact-paper-print/experiments/exp-001-dated-baseline.md) | typed experiment record | record | retained | — |
+| [Refused Print Candidate and Retired PDF Scope](packing/benchmarks/exact-paper-print/experiments/exp-002-refused-layout.md) | typed experiment record | record | retained | — |
 | [N17 Merge Readiness Review — October 8, 2026](docs/project/reviews/review-2026-10-08-n17-merge-readiness.md) | dated review record | record | retained | — |
 | [Registered Endpoint Frame Refusal](packing/campaign/series/series-000-smoke-and-calibration/results/exp-315-shared-centre-endpoint/README.md) | typed session record | record | retained | — |
 | [Fresh Exact Explicit-f1 Endpoint Calibration](packing/campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/README.md) | typed session record | record | retained | — |
@@ -715,6 +838,12 @@ case or experiment separately.
 | [SQUISH update: mathematical and semantic binding review](docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematics Review: Eleven SQUISH Upper-Bound Packings](docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md) | dated review record | record | retained | — |
 | [Correctness and Security Review: SQUISH #401 Import](docs/project/reviews/review-2026-10-06-squish-import-correctness.md) | dated review record | record | retained | — |
+| [Catalogue Publication Integration](packing/benchmarks/exact-catalogue-web/experiments/exp-002-publication.md) | research synthesis | record | retained | — |
+| [Exact Catalogue Web Reading](packing/benchmarks/exact-catalogue-web/ideas.md) | implementation plan | supporting | maintained | — |
+| [Lazy Catalogue Payload](packing/benchmarks/exact-catalogue-web/hypotheses/H-001-lazy-catalogue.md) | implementation plan | supporting | maintained | — |
+| [Lazy Catalogue and Complete Archives](packing/benchmarks/exact-catalogue-web/experiments/exp-001-lazy-catalogue.md) | research synthesis | record | retained | — |
+| [Exact Catalogue Web Payload](packing/benchmarks/exact-catalogue-web/report.md) | generated status view | generated | generated | — |
+| [Exact Polynomial Collection: Mathematical Review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md) | dated review record | record | retained | — |
 | [Session 173: Windows owned-Job supervision](packing/campaign/results/session-173-windows-supervision/README.md) | typed session record | record | retained | — |
 | [Windows owned-Job supervision](packing/devtools/windows-supervision.md) | engineering and validation rules | current | maintained | — |
 | [Retained n17 diagnostics](packing/devtools/n17-diagnostics.md) | engineering and validation rules | current | maintained | — |
@@ -881,7 +1010,7 @@ case or experiment separately.
 | [Plan: The First Application of the Result Import Process](docs/project/specs/active/plan-2026-10-01-result-import-first-application.md) | implementation plan | current | transient | — |
 | [Measure Verifier Milestone C: The Continuous-Angle Family](docs/project/specs/active/plan-2026-10-03-measure-verifier-milestone-c.md) | implementation plan | current | transient | — |
 | [Plan: n = 17 Overnight, 5 October 2026](docs/project/specs/done/plan-2026-10-05-n17-overnight.md) | implementation plan | record | retained | — |
-| [Feature: Exact Side Values Register, Paper and Backfill](docs/project/specs/active/plan-2026-10-06-exact-side-values.md) | implementation plan | current | transient | — |
+| [Exact Side Values: Collection, Publication and Remaining Identification](docs/project/specs/active/plan-2026-10-06-exact-side-values.md) | implementation plan | current | transient | — |
 | [Feature: A Top-Level Overview Page for the Published Site](docs/project/specs/active/plan-2026-09-29-github-pages-overview.md) | implementation plan | current | transient | — |
 | [BC329 Calibration Reader: Source-Distinct Review](docs/project/reviews/review-2026-09-13-n11-bc329-source-distinct-reader.md) | dated review record | record | retained | — |
 | [BC329 Reader Repair: Exact-Commit Rereview](docs/project/reviews/review-2026-09-13-n11-bc329-reader-rereview.md) | dated review record | record | retained | — |
