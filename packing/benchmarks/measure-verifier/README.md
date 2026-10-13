@@ -1,8 +1,9 @@
 # Measure-Verifier Performance Campaign
 
 **Question.** How much less CPU than the authors’ `verify.cpp` does the clean-room
-verifier [`sqverify-fast`](../../sqverify_fast/) need to reach the same verdicts on the
-wand125 rectangle-density certificates, and which changes to it earn their keep?
+verifier [`sqverify-fast`](../../sqverify_fast/) need to reach the same verdicts on
+Hiroaki Hosono’s rectangle-density certificates, and which changes to it earn their
+keep?
 
 This is lane W2 of the independent fast measure verifier (`think-gpe0`, campaign bead
 `think-tgra`). Soundness comes first: [SOUNDNESS.md](../../sqverify_fast/SOUNDNESS.md)
