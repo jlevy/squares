@@ -5,7 +5,7 @@ title: Second adversarial review of T-153 (n = 17 candidate), reading the normal
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@vm
 labels:
   - result-import
@@ -16,11 +16,11 @@ parent_id: is-01m4s74nyjg5a9eqhf80q4xcv8
 hold: null
 hold_until: null
 created_at: 2026-10-13T00:49:22.149Z
-updated_at: 2026-10-13T02:06:38.564Z
+updated_at: 2026-10-13T05:45:12.327Z
 started_at: 2026-10-13T00:49:22.860Z
 ---
 Rung 4 on either axis needs a second retained adversarial AI review by a distinct, separately prompted reviewer whose verdict accepts, and K2's review did not read the normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110), the tree and capture checkers' code, or any certificate. Write it blind to K2's review, map it, add it to T-153's reviews. Layer 3 of stack 572 (branch claude/wizardly-meitner-wqn4x3-k17-review-2).
 
 ## Notes
 
-Layer 3 = https://github.com/jlevy/squares/pull/577 (stack 572, on #571), head e496abfc2. Verdict accepted, nine non-blocking findings SR-1..SR-9 for the oversight record (think-ofoc) and the author questions (think-sdsl). T-153 carries no activity on this layer (nothing under way; the owner's hold is recorded in next_rung, think-lqtu); a 'waiting on owner' chip broke the results layout on CI (think-jr8d). The review's 17 check programs and RESULTS.txt retained under the packet's review-2/. Close when #577 merges.
+Layer 3 = #577, head e17f74269, rebased onto #571 at ccf235163. Verdict accepted; SR-1..SR-9 for think-ofoc/think-sdsl. Close when #577 merges.
