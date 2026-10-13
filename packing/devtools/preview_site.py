@@ -204,7 +204,8 @@ def build(output: Path, skip: set[str]) -> None:
             print(f"wrote {output / page.name}")
         print(f"wrote {len(fragments)} result overviews beside them")
         print(f"wrote {len(records)} case record files under {output / 'cases'}")
-        print(f"wrote {len(contributors)} contributor pages under {output / 'contributors'}")
+        profiles = output / render_overview.PROFILES_DIR
+        print(f"wrote {len(contributors)} profile pages under {profiles}")
         for forwarder in forwarders:
             print(f"wrote {output / forwarder.name}, a forwarder")
         print(f"wrote {social_card.write(output)}, the link preview's card")

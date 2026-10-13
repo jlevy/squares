@@ -11,6 +11,7 @@ from sqpack.contributor_occurrences import (
     OccurrenceRegistry,
     load_occurrences,
 )
+from sqpack.contributors import PROFILES_DIR
 
 
 @cache
@@ -38,7 +39,7 @@ def render_credit(
         label = html.escape(item.label)
         if item.disposition == "resolved":
             identifier = html.escape(item.contributor_id or "", quote=True)
-            href = html.escape(f"{prefix}contributors/{identifier}.html", quote=True)
+            href = html.escape(f"{prefix}{PROFILES_DIR}/{identifier}.html", quote=True)
             label = f'<a href="{href}" data-contributor="">{label}</a>'
         pieces.append(label)
         offset = item.end

@@ -160,7 +160,7 @@ def test_a_records_links_are_written_from_its_own_directory(
     record = _record(records, 11)
     assert 'href="../atlas.html#n-11"' in record
     assert 'href="../results.html#t-018"' in record
-    assert 'href="../contributors/walter-trump.html" data-contributor' in record
+    assert 'href="../profiles/walter-trump.html" data-contributor' in record
     assert 'href="10.html" rel="prev" data-case-step="10"' in record
     assert 'href="12.html" rel="next" data-case-step="12"' in record
     assert "data-case-index" not in record

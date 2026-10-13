@@ -64,6 +64,7 @@ from urllib.parse import quote
 
 from devtools import repo_links
 from devtools.repo_links import repo_url
+from sqpack.contributors import PROFILES_DIR
 from sqpack.release import PUBLICATION_EDITION, PUBLICATION_HISTORY
 
 if TYPE_CHECKING:
@@ -408,6 +409,42 @@ def paper_path(slug: str, suffix: str = ".html") -> str:
     return f"{PAPERS_DIR}/{slug}{suffix}"
 
 
+#: Where the person profiles were served until 2026-10-13: every address under it is a
+#: forwarder to the same name under `PROFILES_DIR` (`MOVED_PAGES`).
+LEGACY_PROFILES_DIR = "contributors"
+
+#: The profiles the reviewed preview served under `LEGACY_PROFILES_DIR` before the move,
+#: by their id there, each with the id of the record it forwards to. The set is fixed: a
+#: profile added since has only its `profiles/` address, and `kleddamag` forwards to the
+#: record that credits Marc Leonard Overbeck by name.
+LEGACY_PROFILES: dict[str, str] = {
+    **{
+        identifier: identifier
+        for identifier in (
+            "erich-friedman",
+            "evan-daniel",
+            "f-gobel",
+            "francisco-couzo",
+            "gustavo-massaccesi",
+            "guzhou0806",
+            "hiroshi-nagamochi",
+            "joshua-levy",
+            "michael-j-kearney",
+            "mira",
+            "peter-shiu",
+            "queuingtheorydotcom",
+            "ryu-sungjoon",
+            "sam-burns",
+            "tokoharu",
+            "walter-stromquist",
+            "walter-trump",
+            "wand125",
+            "wolfram-bentz",
+        )
+    },
+    "kleddamag": "marc-leonard-overbeck",
+}
+
 #: Every page the published site serves, by path under the site root, whichever build
 #: writes it. The navigation bar links only to these, and tests hold it to that.
 SITE_PAGES: tuple[str, ...] = (
@@ -415,7 +452,7 @@ SITE_PAGES: tuple[str, ...] = (
     "atlas.html",
     "about.html",
     RESULTS_PAGE,
-    "contributors/index.html",
+    f"{PROFILES_DIR}/index.html",
     "papers.html",
     *(paper_path(paper.slug) for paper in PAPERS),
     "tutorial.html",
@@ -436,6 +473,10 @@ SITE_PAGES: tuple[str, ...] = (
 #: address its directory had. Each old path is still served, as a forwarder
 #: (`forwarder_pages`), so a link written before the change arrives with its query and
 #: its fragment. Nothing on the site links an old path; a test holds every page to that.
+#: The person profiles moved from `contributors/` (`LEGACY_PROFILES_DIR`) to `profiles/`
+#: on 2026-10-13 (think-0v2c), since the directory lists cited paper authors beside the
+#: project's contributors; the directory and each profile the reviewed preview served
+#: there keep a forwarder at the earlier address (`LEGACY_PROFILES`).
 MOVED_PAGES: tuple[tuple[str, str], ...] = (
     ("all-results.html", RESULTS_PAGE),
     ("status.html", "atlas.html"),
@@ -447,6 +488,11 @@ MOVED_PAGES: tuple[tuple[str, str], ...] = (
     # Atlas owns case browsing; the retired directories keep incoming selectors.
     ("cases.html", "atlas.html"),
     ("cases/index.html", "atlas.html"),
+    (f"{LEGACY_PROFILES_DIR}/index.html", f"{PROFILES_DIR}/index.html"),
+    *(
+        (f"{LEGACY_PROFILES_DIR}/{old}.html", f"{PROFILES_DIR}/{new}.html")
+        for old, new in LEGACY_PROFILES.items()
+    ),
 )
 #: What a forwarder that leads off the site calls the place it sends a reader, by that
 #: place's address. A forwarder to a page of the site calls the page by the page's own
@@ -1011,12 +1057,12 @@ def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
 
 
 def colophon_html() -> str:
-    """The shared closing credits and contributor directory in each site's footer."""
-    contributors = (
-        '<span class="site-colophon-line"><a href="contributors/index.html">'
-        "Contributors</a></span>"
+    """The shared closing credits and profile directory in each site's footer."""
+    profiles = (
+        f'<span class="site-colophon-line"><a href="{PROFILES_DIR}/index.html">'
+        "Profiles</a></span>"
     )
-    return f'<p class="site-colophon">{colophon_lines()}{contributors}</p>'
+    return f'<p class="site-colophon">{colophon_lines()}{profiles}</p>'
 
 
 def article_overlay_shells(page: str) -> str:
@@ -1030,13 +1076,13 @@ def article_overlay_shells(page: str) -> str:
         shells.append(
             '<div id="pop-contributor" class="site-popover site-contributor-popover" '
             'popover="auto" data-contributor-popover role="dialog" '
-            'aria-label="Contributor profile">'
+            'aria-label="Profile">'
             '<button type="button" class="site-popover-close" '
             'popovertarget="pop-contributor" popovertargetaction="hide" '
             'aria-label="Close">\u00d7</button>'
             "<div data-contributor-body></div>"
             '<p class="site-popover-actions"><a class="site-popover-action" '
-            'data-contributor-open href="contributors/index.html">Open profile</a></p></div>'
+            f'data-contributor-open href="{PROFILES_DIR}/index.html">Open profile</a></p></div>'
         )
     return page.replace(
         "</body>",
@@ -1671,21 +1717,23 @@ def result_fragments() -> list[Page]:
 def forwarded_metas() -> dict[str, PageMeta]:
     """Each page of the site a forwarder leads to (`MOVED_PAGES`), by its path, with the
     record that page writes its own head from: the results page's and the frontier
-    Atlas's (`RESULTS_META`, `ATLAS_META`), and each paper's `page_meta`, the explainer's as the
-    site publishes it. They are read from the pages' own records and not restated, so a
-    forwarder cannot preview a page by another name, kind or description than the
-    page's own head gives it.
+    Atlas's (`RESULTS_META`, `ATLAS_META`), each paper's `page_meta`, the explainer's as the
+    site publishes it, and the profile directory's and each profile's
+    (`render_contributors.page_metas`). They are read from the pages' own records and not
+    restated, so a forwarder cannot preview a page by another name, kind or description
+    than the page's own head gives it.
 
     The renderers are imported here rather than at the top, as in `inputs`, since each of
     them imports this module."""
+    from devtools import render_contributors, render_n11_optimality_review  # noqa: PLC0415
     from devtools import render_n11_lower_bounds_explainer as explainer  # noqa: PLC0415
-    from devtools import render_n11_optimality_review  # noqa: PLC0415
 
     metas = (
         RESULTS_META,
         ATLAS_META,
         explainer.published_page_meta(),
         render_n11_optimality_review.page_meta(),
+        *render_contributors.page_metas().values(),
     )
     return {meta.path: meta for meta in metas}
 
@@ -1721,9 +1769,12 @@ def forwarder_pages() -> list[Page]:
     A forwarder is a few lines and no page of the site: `overview/forward.js`, the script
     the overview already forwards its own old fragments with, reads where the reader is
     sent from the root element and sends them there with the query string and the
-    fragment they came with. File navigation uses the registered physical output;
-    the no-script refresh and link also name that file, so directory indexes open
-    their content in either transport. A crawler sees the canonical address. It has no
+    fragment they came with: the page's canonical address, a directory's own address
+    where the page is its `index.html`, as the profile directory is
+    (`check_published_site.forwarder_expected`). File navigation uses the registered
+    physical output; the no-script refresh and link also name that file, so directory
+    indexes open their content in either transport. A crawler sees the canonical
+    address. It has no
     bar, no stamp and no styles, and is not among `PAGES`. A target is written as the
     old path's reader must follow it: relative for a page of the site, climbing out of
     the old path's directory where it has one, and whole for an address off it.
@@ -1745,6 +1796,9 @@ def forwarder_pages() -> list[Page]:
         external = new.startswith("https://")
         file_target = new if external else posixpath.relpath(new, posixpath.dirname(old))
         target = file_target
+        if not external and new.endswith("/index.html"):
+            directory = new.removesuffix("index.html")
+            target = posixpath.relpath(directory, posixpath.dirname(old)) + "/"
         meta = None if external else metas.get(new)
         if not external and meta is None:
             raise SystemExit(f"{old} forwards to {new}, which `forwarded_metas` does not name")
@@ -1767,7 +1821,7 @@ def forwarder_pages() -> list[Page]:
 
 
 def render_site() -> list[Page]:
-    """Every page, result, case, contributor and historical address this build serves."""
+    """Every page, result, case, profile and historical address this build serves."""
     from devtools.render_contributors import contributor_pages  # noqa: PLC0415
 
     return [
@@ -1823,17 +1877,16 @@ def support_files() -> dict[str, bytes]:
 
 def write_site(output: Path, files: Sequence[Page]) -> None:
     """Write `files` under `output`, with the shared assets they name under `assets/`,
-    and drop any result fragment, case record file or asset already there that is not
-    among them, so a directory built before a result was withdrawn, a case dropped or
-    an asset changed does not keep serving it."""
+    and drop any result fragment, case record file, profile, profile forwarder or asset
+    already there that is not among them, so a directory built before a result was
+    withdrawn, a case dropped or an asset changed does not keep serving it."""
     from devtools import site_assets  # noqa: PLC0415
     from devtools.overview_sections import RESULT_FRAGMENTS  # noqa: PLC0415
     from devtools.render_case_pages import CASES_DIR  # noqa: PLC0415
-    from devtools.render_contributors import CONTRIBUTORS_DIR  # noqa: PLC0415
 
     output.mkdir(parents=True, exist_ok=True)
     kept = {output / file.name for file in files}
-    for directory in (RESULT_FRAGMENTS, CASES_DIR, CONTRIBUTORS_DIR):
+    for directory in (RESULT_FRAGMENTS, CASES_DIR, PROFILES_DIR, LEGACY_PROFILES_DIR):
         for stale in sorted((output / directory).glob("*.html")):
             if stale not in kept:
                 stale.unlink()
@@ -1875,10 +1928,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             "referenced titles agree across renderers, cards and references"
         )
         return 0
-    from devtools.render_contributors import (  # noqa: PLC0415
-        CONTRIBUTORS_DIR,
-        contributor_pages,
-    )
+    from devtools.render_contributors import contributor_pages  # noqa: PLC0415
 
     output = args.output.resolve()
     pages = render_all()
@@ -1911,7 +1961,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         } | set(crawl)
         stale += [
             path.relative_to(output).as_posix()
-            for directory in (RESULT_FRAGMENTS, CASES_DIR, CONTRIBUTORS_DIR)
+            for directory in (RESULT_FRAGMENTS, CASES_DIR, PROFILES_DIR, LEGACY_PROFILES_DIR)
             for path in sorted((output / directory).glob("*.html"))
             if path.relative_to(output).as_posix() not in written
         ]
@@ -1934,7 +1984,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
         print(
             f"{len(pages)} pages, {len(fragments)} result overviews, {len(records)} case "
-            f"records, {len(contributors)} contributor pages and {len(forwarders)} forwarders "
+            f"records, {len(contributors)} profile pages and {len(forwarders)} forwarders "
             "match a fresh render"
         )
         return 0

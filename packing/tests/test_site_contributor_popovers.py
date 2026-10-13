@@ -35,7 +35,7 @@ PROFILE = (
     '<h1 id="title">Walter Stromquist</h1><p>A mathematical contributor.</p>'
     '<a href="../cases/11.html" data-case="11">Case 11</a>'
     '<a href="#bio">Biography</a><p id="bio">Published biographical evidence.</p>'
-    '<a href="../contributors/evan-daniel.html" data-contributor="evan-daniel">Evan Daniel</a>'
+    '<a href="../profiles/evan-daniel.html" data-contributor="evan-daniel">Evan Daniel</a>'
     '<a href="https://example.org/">Public website</a></article>'
 )
 SECOND = (
@@ -44,12 +44,12 @@ SECOND = (
 )
 CASE = (
     '<article class="site-case" data-case="11"><h1 id="title">Case 11</h1>'
-    '<a href="../contributors/walter-stromquist.html" data-contributor="walter-stromquist">'
+    '<a href="../profiles/walter-stromquist.html" data-contributor="walter-stromquist">'
     'Walter Stromquist</a><a href="12.html" data-case-step="12" rel="next">Next</a></article>'
 )
 RESULT = (
     '<article class="site-result" data-result-overview="t-test"><h1 id="title">Result</h1>'
-    '<a href="../contributors/walter-stromquist.html" data-contributor="walter-stromquist">'
+    '<a href="../profiles/walter-stromquist.html" data-contributor="walter-stromquist">'
     "Walter Stromquist</a></article>"
 )
 
@@ -79,16 +79,16 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     contributor = (
         '<div id="pop-contributor" class="site-popover site-contributor-popover" '
         'popover="auto" data-contributor-popover role="dialog" '
-        'aria-label="Contributor profile">'
+        'aria-label="Profile">'
         '<button class="site-popover-close" popovertarget="pop-contributor" '
         'popovertargetaction="hide">Close</button><div data-contributor-body></div>'
-        '<a data-contributor-open href="contributors/walter-stromquist.html">'
+        '<a data-contributor-open href="profiles/walter-stromquist.html">'
         "Open profile</a></div>"
     )
     body = (
         '<h1 id="title">Host title</h1><main><a id="profile-link" '
-        'href="contributors/walter-stromquist.html" data-contributor="walter-stromquist">'
-        'Walter Stromquist</a><a id="second-link" href="contributors/evan-daniel.html" '
+        'href="profiles/walter-stromquist.html" data-contributor="walter-stromquist">'
+        'Walter Stromquist</a><a id="second-link" href="profiles/evan-daniel.html" '
         'data-contributor="evan-daniel">Evan Daniel</a><a id="case-link" '
         'href="cases/11.html" data-case="11">Case 11</a><table><tbody>'
         '<tr id="result-row" data-row-popover="pop-result"><td>Result details</td></tr>'
@@ -109,8 +109,8 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     )
     (root / "index.html").write_text(document)
     for name, article in {
-        "contributors/walter-stromquist.html": PROFILE,
-        "contributors/evan-daniel.html": SECOND,
+        "profiles/walter-stromquist.html": PROFILE,
+        "profiles/evan-daniel.html": SECOND,
         "cases/11.html": CASE,
         "cases/12.html": CASE.replace('data-case="11"', 'data-case="12"'),
         "result/test.html": RESULT,
@@ -135,7 +135,7 @@ def generated(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     for name, article in (("cases/10.html", case), ("result/test.html", RESULT)):
         pages.append(
             render_overview.static_content_page(
-                article.replace("../contributors/", "contributors/"),
+                article.replace("../profiles/", "profiles/"),
                 meta=render_overview.PageMeta("Record", "A record for browser checks.", name),
                 current="",
             )
@@ -222,7 +222,7 @@ def test_profile_content_scoped_links_and_focus(
         article = panel.locator("article.site-contributor")
         article.wait_for(state="visible")
         canonical = page.context.new_page()
-        canonical.goto(f"{served}contributors/walter-stromquist.html")
+        canonical.goto(f"{served}profiles/walter-stromquist.html")
         assert (
             article.inner_text() == canonical.locator("article.site-contributor").inner_text()
         )
@@ -236,7 +236,7 @@ def test_profile_content_scoped_links_and_focus(
         )
         assert (
             panel.locator("[data-contributor-open]").get_attribute("href")
-            == f"{served}contributors/walter-stromquist.html"
+            == f"{served}profiles/walter-stromquist.html"
         )
         article.locator('a:has-text("Biography")').click()
         assert panel.is_visible()
@@ -250,7 +250,7 @@ def test_profile_content_scoped_links_and_focus(
         link.click()
         article.wait_for(state="visible")
         assert article.locator("h1").get_attribute("id") != heading_id
-        assert requests.count(f"{served}contributors/walter-stromquist.html") == 1
+        assert requests.count(f"{served}profiles/walter-stromquist.html") == 1
 
 
 @pytest.mark.parametrize("width", [1280, 390])
@@ -267,11 +267,11 @@ def test_generated_profile_uses_shared_roles_without_overflow(
 ) -> None:
     with _page(browser, viewport={"width": width, "height": 900}, color_scheme=theme) as page:
         if overlay:
-            page.goto(f"{design_generated}contributors/index.html", wait_until="load")
+            page.goto(f"{design_generated}profiles/index.html", wait_until="load")
             page.locator('main a[data-contributor][href$="evan-daniel.html"]').click()
             selector = "#pop-contributor article.site-contributor"
         else:
-            page.goto(f"{design_generated}contributors/evan-daniel.html", wait_until="load")
+            page.goto(f"{design_generated}profiles/evan-daniel.html", wait_until="load")
             selector = "main article.site-contributor"
         article = page.locator(selector)
         article.wait_for(state="visible")
@@ -318,7 +318,7 @@ def test_generated_profile_uses_shared_roles_without_overflow(
 
 @pytest.mark.parametrize("width", [1280, 390])
 @pytest.mark.parametrize("theme", ["light", "dark"])
-@pytest.mark.parametrize("record", ["contributors/index.html", "contributors/evan-daniel.html"])
+@pytest.mark.parametrize("record", ["profiles/index.html", "profiles/evan-daniel.html"])
 def test_generated_contributor_page_titles_match_the_shared_page_role(
     browser: Any,
     design_generated: str,
@@ -374,7 +374,7 @@ def test_native_navigation_and_modified_clicks(browser: Any, served: str) -> Non
     with _page(browser, java_script_enabled=False) as page:
         page.goto(served)
         page.locator("#profile-link").click()
-        page.wait_for_url(f"{served}contributors/walter-stromquist.html")
+        page.wait_for_url(f"{served}profiles/walter-stromquist.html")
         assert (
             page.locator("article.site-contributor")
             .inner_text()
@@ -390,14 +390,14 @@ def test_native_navigation_and_modified_clicks(browser: Any, served: str) -> Non
 def test_failed_fetch_follows_the_canonical_link(browser: Any, served: str) -> None:
     with _page(browser) as page:
         page.route(
-            "**/contributors/walter-stromquist.html",
+            "**/profiles/walter-stromquist.html",
             lambda route: (
                 route.abort() if route.request.resource_type == "fetch" else route.continue_()
             ),
         )
         page.goto(served)
         page.locator("#profile-link").click()
-        page.wait_for_url(f"{served}contributors/walter-stromquist.html")
+        page.wait_for_url(f"{served}profiles/walter-stromquist.html")
         assert page.locator("article.site-contributor h1").inner_text() == "Walter Stromquist"
 
 
@@ -411,7 +411,7 @@ def test_late_response_cannot_replace_newer_profile_or_reopen_after_escape(
             # Playwright attaches metadata to callbacks; built-in list.append cannot hold it.
             held.append(route)
 
-        page.route("**/contributors/walter-stromquist.html", hold)
+        page.route("**/profiles/walter-stromquist.html", hold)
         page.goto(served)
         page.locator("#profile-link").click()
         page.locator("#second-link").click()
@@ -430,7 +430,7 @@ def test_late_response_cannot_replace_newer_profile_or_reopen_after_escape(
         page.locator("#profile-link").click()
         page.keyboard.press("Escape")
         assert len(held) == 1
-        with page.expect_response("**/contributors/walter-stromquist.html"):
+        with page.expect_response("**/profiles/walter-stromquist.html"):
             held.pop().fulfill(status=200, content_type="text/html", body=PROFILE)
         page.evaluate(SETTLED)
         assert not panel.is_visible()
@@ -443,7 +443,7 @@ def test_closing_source_cancels_pending_profile_failure(browser: Any, served: st
         def hold(route: Any) -> None:
             held.append(route)
 
-        page.route("**/contributors/walter-stromquist.html", hold)
+        page.route("**/profiles/walter-stromquist.html", hold)
         page.goto(served)
         page.locator("#case-link").click()
         page.locator("#pop-case a[data-contributor]").click()
@@ -498,7 +498,7 @@ def test_pending_case_can_be_reopened_after_escape(browser: Any, served: str) ->
 
 def test_generated_directory_enhances_profile_link(browser: Any, generated: str) -> None:
     with _page(browser) as page:
-        address = f"{generated}contributors/index.html"
+        address = f"{generated}profiles/index.html"
         page.goto(address, wait_until="load")
         link = page.locator('main a[data-contributor][href$="walter-stromquist.html"]')
         link.click()
@@ -519,7 +519,7 @@ def test_generated_directory_enhances_profile_link(browser: Any, generated: str)
 
 
 @pytest.mark.parametrize(
-    "record", ["contributors/walter-stromquist.html", "cases/10.html", "result/test.html"]
+    "record", ["profiles/walter-stromquist.html", "cases/10.html", "result/test.html"]
 )
 def test_generated_standalone_pages_enhance_article_links(
     browser: Any, generated: str, record: str
@@ -527,7 +527,7 @@ def test_generated_standalone_pages_enhance_article_links(
     with _page(browser, viewport={"width": 390, "height": 900}, color_scheme="dark") as page:
         address = f"{generated}{record}"
         page.goto(address, wait_until="load")
-        if record.startswith("contributors/"):
+        if record.startswith("profiles/"):
             if directory := os.environ.get("SQPACK_CONTRIBUTOR_DESIGN_SHOTS"):
                 page.evaluate(DESIGN, "main article.site-contributor")
                 target = Path(directory) / "real-profile-standalone-390-dark.png"
@@ -566,16 +566,16 @@ def test_generated_directory_keeps_native_profile_navigation(
     ) as page:
         if javascript:
             page.route(
-                "**/contributors/walter-stromquist.html",
+                "**/profiles/walter-stromquist.html",
                 lambda route: (
                     route.abort()
                     if route.request.resource_type == "fetch"
                     else route.continue_()
                 ),
             )
-        page.goto(f"{generated}contributors/index.html", wait_until="load")
+        page.goto(f"{generated}profiles/index.html", wait_until="load")
         page.locator('main a[data-contributor][href$="walter-stromquist.html"]').click()
-        page.wait_for_url(f"{generated}contributors/walter-stromquist.html")
+        page.wait_for_url(f"{generated}profiles/walter-stromquist.html")
         assert (
             page.locator("main article.site-contributor h1").text_content()
             == "Walter Stromquist"
