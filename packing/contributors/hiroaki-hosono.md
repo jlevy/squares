@@ -37,7 +37,7 @@ contributor:
       locator: 'Copyright (c) 2026 wand125.'
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
-      locator: 'Source author, credit and credited_names fields retain the printed attribution labels; the notes name Hiroaki Hosono as commit author.'
+      locator: 'Source authors and credits print Hosono; the bibliography keys keep the handle wand125, and the notes name Hiroaki Hosono as commit author.'
   provenance:
     - field: /display_name
       sources: [commit-author, github-profile, owner-confirmation]
