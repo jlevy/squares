@@ -5,15 +5,15 @@ title: Prevent PR156 validation from exhausting internal temp space
 kind: bug
 status: closed
 priority: 2
-version: 4
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 5
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - validation
   - n11
 dependencies: []
 parent_id: is-01m2ctdap5jwdr8h4qb8dxwt8z
 created_at: 2026-09-13T20:28:42.596Z
-updated_at: 2026-10-06T08:35:48.664Z
+updated_at: 2026-10-13T00:59:00.210Z
 closed_at: 2026-10-06T08:35:48.664Z
 close_reason: "Obsolete: PR #156, whose --push gate exhausted temp space on one host on 2026-09-13, merged on 2026-09-14 (gh: MERGED 2026-09-14T04:24:55Z); the transient disk pressure was host-specific and the BC329 lane it served is superseded. s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical."
 resolution: canceled

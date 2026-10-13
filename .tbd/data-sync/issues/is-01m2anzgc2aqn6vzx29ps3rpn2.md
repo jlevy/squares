@@ -5,8 +5,8 @@ title: Publish the BC329 baseline runner as a stacked draft PR
 kind: task
 status: closed
 priority: 1
-version: 11
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 13
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root publication lane
 labels:
   - n11
@@ -18,7 +18,7 @@ dependencies:
     target: is-01m260z2959dmcmn61pn2z7jsk
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T11:27:55.777Z
-updated_at: 2026-09-12T14:53:26.279Z
+updated_at: 2026-10-13T00:56:36.899Z
 closed_at: 2026-09-12T14:53:26.277Z
 close_reason: "Published draft stacked PR #156 at exact head 5fa83cc7 over PR #149; the unrestricted pre-push passed 46/74 steps with 5,156 tests in 1,118.89s, every hosted check passed, the branch cost and remaining gates are in the PR body, and no BC329 scientific target ran."
 resolution: null

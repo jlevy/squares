@@ -5,17 +5,17 @@ title: "n17 admission rule: five frictions found admitting SW9 and N1 (exp-250)"
 kind: task
 status: open
 priority: 2
-version: 7
+version: 9
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels:
   - n17
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
-hold: null
+hold: paused
 hold_until: null
 created_at: 2026-10-03T16:33:08.953Z
-updated_at: 2026-10-07T06:23:10.673Z
+updated_at: 2026-10-13T00:55:47.544Z
 started_at: 2026-10-03T22:34:45.908Z
 ---
 Lane A3, admitting SW9 (flag 3) and N1 in exp-250 (53fe57147), found five frictions in census_n17_certified's admission rule.
@@ -33,3 +33,5 @@ Constraint: OR-16 as amended. No new digest comparison; the integrity-ceremony r
 8. (2026-10-03 evening, 74b9b686f.) Items 1, 3 and 6 are fixed. (1) A verification matches its certificate by the content ids in the objects' file names, compared as names with nothing hashed, so an admitted certificate directory can be renamed without re-verifying. (3) `evidence` is documented as a pointer checked only to exist, and the census output says so in `evidence_note`. (6) A verifier listing may carry `admits`: 556561586 admits W7, 25c1cdef6 admits SW9 and N1, and e0b66f07b and 575795e02 admit none. A new entry must be verified at 318c28c42 or a later revision with the same file. The census on the committed ledger is unchanged (4 admitted, 126,168 states, 15,953 orbits); 22 tests. Items 2, 4, 5 and 7 are open. 9. The streamed kernel verifier (601bbf110, lane M1) is committed but not listed; its review is its own bead.
 
 2026-10-05 (PR 347 status survey). Items 2, 4, 5 and 7 are open. Item 4 (H-267 is scoped to arity <= 7 while the census counts every arity) has to be settled before the composed argument.
+
+2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. Five frictions in the n17 census admission rule: an instrument for n17 admissions.

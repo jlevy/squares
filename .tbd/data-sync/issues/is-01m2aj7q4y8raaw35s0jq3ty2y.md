@@ -5,8 +5,8 @@ title: Document the admitted BC329 runner on the final publication stack
 kind: task
 status: closed
 priority: 2
-version: 7
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - docs
@@ -19,7 +19,7 @@ parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 hold: null
 hold_until: null
 created_at: 2026-09-12T10:22:30.557Z
-updated_at: 2026-10-06T08:40:16.470Z
+updated_at: 2026-10-13T00:58:53.607Z
 closed_at: 2026-10-06T08:40:16.469Z
 close_reason: "Superseded: it waited on an admitted calibration that the owner deferred (think-zwlf) and that is now moot; the landing descriptions (think-gidf, closed) carry the runner's unexecuted status. BC329's prospective endpoint 3.8267215 is below T-033's proved 3.8269975, so the packet could not move any bound even before T-060; its runner and calibration machinery is retained unexecuted on main via PR #156. Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
 resolution: canceled

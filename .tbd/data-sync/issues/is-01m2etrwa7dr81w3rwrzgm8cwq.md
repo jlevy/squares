@@ -5,8 +5,8 @@ title: "Owner decision: land the n11 stack before any BC329 or exp-158 scientifi
 kind: task
 status: closed
 priority: 1
-version: 7
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 8
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - decision
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m2etr75jfh3t3ry7kj1ccqrb
 created_at: 2026-09-14T02:08:39.238Z
-updated_at: 2026-09-14T02:26:55.021Z
+updated_at: 2026-10-13T00:58:39.167Z
 closed_at: 2026-09-14T02:26:42.833Z
 close_reason: "Owner decision, 2026-09-14 (~02:35 UTC, Claude Code session on claude/n11-stack-ci-stabilization): land all the machinery now and be explicit about its limitations and what the scientific results are. Heavy computer-assisted proof efforts for very small improvements are on hold; the program pivots to a holistic strategy for significant n=11 improvements or a significantly simpler proof of s(11) >= 3.82. PR descriptions must state: established bound unchanged at T-026 s(11) >= 3.8264474; H-159 and H-161 are scoped negatives; BC329, exp-158 and H-162 are unexecuted instruments/registrations."
 resolution: null

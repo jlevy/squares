@@ -5,8 +5,8 @@ title: Build the separate fixed-core packet calibration command
 kind: feature
 status: closed
 priority: 1
-version: 31
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 32
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max design; Sol implementation after admission
 labels:
   - n11
@@ -34,7 +34,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-12T11:40:18.235Z
-updated_at: 2026-10-06T08:39:54.875Z
+updated_at: 2026-10-13T00:56:37.212Z
 closed_at: 2026-10-06T08:39:54.874Z
 close_reason: "Done: the separate calibration command is on origin/main as packing/devtools/calibrate_fixed_core_packet.py with its tests, from the accepted head fcb538c2 (ancestor of main) via PR #156. Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
 resolution: null

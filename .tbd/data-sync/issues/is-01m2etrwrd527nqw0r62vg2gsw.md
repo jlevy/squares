@@ -5,8 +5,8 @@ title: "Owner decision: choose the BC329 calibration execution head (PR156, PR15
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 6
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - decision
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m2etr75jfh3t3ry7kj1ccqrb
 created_at: 2026-09-14T02:08:39.692Z
-updated_at: 2026-09-14T02:26:52.562Z
+updated_at: 2026-10-13T00:58:40.977Z
 closed_at: 2026-09-14T02:26:45.818Z
 close_reason: "Owner decision, 2026-09-14: no calibration execution head is chosen because the BC329 calibration profiles and target are deferred. BC329's prospective gain is about 0.000274 over T-026, which falls under the owner's hold on heavy computer-assisted work for very small improvements. The run sheet and PR157 supplement remain retained records bound to their PR identities; any future revival needs a main-bound identity block and fresh integrated-head admission. The macOS EPERM reaper fix (think-tdfl) therefore lands with the stack."
 resolution: canceled

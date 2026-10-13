@@ -5,8 +5,8 @@ title: Publish H161 literal parent-union result as a distinct stacked PR
 kind: task
 status: closed
 priority: 1
-version: 8
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - pr
@@ -20,7 +20,7 @@ dependencies:
     target: is-01m2eeb7adc0784cx52qfa9qtk
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 created_at: 2026-09-13T22:21:04.750Z
-updated_at: 2026-09-14T00:26:37.974Z
+updated_at: 2026-10-13T00:55:37.863Z
 closed_at: 2026-09-14T00:26:37.973Z
 close_reason: "PR #163 ready at f70144fc on #162 92320abf. H161/exp159 one 0.16s literal parent-union target; independent 377-atom audit. Exact --push 46/74, 1,405 tests; hosted CI green. Named necessary budgets survive; no pose-cell/global exclusion or new bound."
 resolution: null
