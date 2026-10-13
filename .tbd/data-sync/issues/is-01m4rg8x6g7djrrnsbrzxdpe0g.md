@@ -5,7 +5,7 @@ title: "Intake #557: Kleddamag's candidate proof of s(17) = L"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T16:48:58.063Z
-updated_at: 2026-10-12T18:15:59.209Z
+updated_at: 2026-10-13T00:59:55.135Z
 started_at: 2026-10-12T16:49:03.371Z
 ---
 Lane K1 of #557 (https://github.com/jlevy/squares/issues/557): acquire Kleddamag/the-seventeenth-square-candidate at 653b9589d and release large-files-v1, run the author's check.py in an isolated venv, retain a digest-only packet (no licence for reuse), compare L with n-017's verified upper bound, and draft the register, evidence, case-record, request and acknowledgement entries for the coordinator. Issue title says n=18; the source is n = 17.
@@ -52,3 +52,59 @@ Done:
 
 Waiting on: the records lane's fast-path PR registering T-153; a budget for the complete
 replays (C3).
+
+
+The parent of this bead is:
+---
+type: is
+id: is-01m4padgs7fh6ze3tbh57d5ar1
+title: "Intake pass 2026-10-11: six new upper-bound reports, two n17 issues, four unread comments, six watched repositories"
+kind: epic
+status: in_progress
+priority: P1
+version: 62
+delegate: claude-code@vm
+labels:
+  - result-import
+dependencies: []
+child_order_hints:
+  - is-01m4padhpzys6zpwepcve5pwxm
+  - is-01m4padjx7fep1w6y30v4pqz9n
+  - is-01m4padkz7c8b0chp1f85vmfy8
+  - is-01m4padmx9cdj5hsv7snr426rb
+  - is-01m4padnyzybc7ms1bryby9ax2
+  - is-01m4padq3szbdty8bmp3r2bxqh
+  - is-01m4padr3md3xwace5s7695t9v
+  - is-01m4pads1y316jmhb4rp0fpvpg
+  - is-01m4padszrtqcj8b3qyff911cd
+  - is-01m4padtzpm1sj8gg4ygyrjjck
+  - is-01m4pan44x8vekhh54vsb2vhan
+  - is-01m4pan85d4sartjf3m3h3p1b6
+  - is-01m4pcbmdj7qjggrjemdjsct5v
+  - is-01m4pcbp72f9p5qad5yy2jgfmf
+  - is-01m4pcbr88e5we5fgkmf7qhfgv
+  - is-01m3wx2hm1ezys1w50g5pk9eet
+  - is-01m4pcccsnaq8tp3nvze2wfpcs
+  - is-01m4pd6dbc6j1wyjg6n62dv8ag
+  - is-01m4pe36zqv5wkdyp33hpb5ahh
+  - is-01m4pfeqkmdtcze4v746vtn23v
+  - is-01m4pff4kjeeg11941am6tb84v
+  - is-01m4pn087wev95haqgv9rffnj9
+  - is-01m4pgzs74gxzc2c2srp9hg2vw
+  - is-01m4ptzjgr1nmf0264k67x4ypn
+  - is-01m4pv16sta8jkhsfkk7sgc46n
+  - is-01m4pvgyhtqs5v7fvt63f9653r
+  - is-01m4qaftjqtfy02k7kdaya84an
+  - is-01m4qafvvrkvvc884100g1ch9t
+  - is-01m4qdj56xc8fnfdn0yz2ddvp9
+  - is-01m4qdvm05t297yghevg6nm7gz
+  - is-01m4qfk7nzmgrwxdj50b3h3k5w
+  - is-01m4qhcw0287k3633q1rhz4jwn
+  - is-01m4qhcybbrt2fnj26vxs9595n
+  - is-01m4qjdc5dyqnrex0vceagw93z
+  - is-01m4qjdm5hbj0m43ymvkcjr2jm
+  - is-01m4qkwr49aszyn8q68yde48q9
+  - is-01m4qkww5wn1cvm898ebvwfcyx
+… [35 lines omitted]
+
+2026-10-13 (session 012JUyoHafZq55vksGxE4vPP): the owner decided to hold the remaining replays. T-153 stays at V0/C1 (reported proved on n-017, verified status open). The ten trees (~7-21 CPU-h) and the full capture recomputation (~1,273 CPU-h Python, 2,347 with Node) are not to be run until the owner says so; options priced for them: a GitHub Actions matrix fan-out (public repo, ~1 day at 15 parallel), a rented 96-192 core machine (~7-14 h), or the trees alone here. Only the second adversarial review (think-4j3n) proceeds now.
